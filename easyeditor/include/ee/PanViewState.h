@@ -2,7 +2,8 @@
 #define _EASYEDITOR_PAN_VIEW_STATE_H_
 
 #include "EditOPState.h"
-#include "Vector.h"
+
+#include <SM_Vector.h>
 
 namespace ee
 {
@@ -25,7 +26,8 @@ public:
 private:
 	EditPanelImpl* m_stage;
 
-	Vector m_last_pos;
+	sm::vec2 m_last_pos;
+	bool m_last_pos_valid;
 
 }; // PanViewState
 

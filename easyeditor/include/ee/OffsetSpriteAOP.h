@@ -2,7 +2,8 @@
 #define _EASYEDITOR_OFFSET_SPRITE_AOP_H_
 
 #include "AtomicOP.h"
-#include "Vector.h"
+
+#include <SM_Vector.h>
 
 namespace ee
 {
@@ -12,8 +13,8 @@ class Sprite;
 class OffsetSpriteAOP : public AtomicOP
 {
 public:
-	OffsetSpriteAOP(Sprite* sprite, const Vector& new_offset, 
-		const Vector& old_offset);
+	OffsetSpriteAOP(Sprite* sprite, const sm::vec2& new_offset, 
+		const sm::vec2& old_offset);
 
 	virtual void Undo();
 	virtual void Redo();
@@ -23,7 +24,7 @@ public:
 private:
 	Sprite* m_sprite;
 
-	Vector m_new_offset, m_old_offset;
+	sm::vec2 m_new_offset, m_old_offset;
 
 }; // OffsetSpriteAOP
 

@@ -7,13 +7,14 @@ namespace ee
 {
 
 TranslateSpriteState::TranslateSpriteState(SpriteSelection* selection, 
-										   const Vector& first_pos)
+										   const sm::vec2& first_pos)
 	: m_dirty(false)
 {
 	m_selection = selection;
 	m_selection->Retain();
 
 	m_first_pos = m_last_pos = first_pos;
+	m_last_valid = true;
 }
 
 TranslateSpriteState::~TranslateSpriteState()
@@ -21,14 +22,15 @@ TranslateSpriteState::~TranslateSpriteState()
 	m_selection->Release();
 }
 
-void TranslateSpriteState::OnMousePress(const Vector& pos)
+void TranslateSpriteState::OnMousePress(const sm::vec2& pos)
 {
 	m_first_pos = m_last_pos = pos;
+	m_last_valid = true;
 }
 
-void TranslateSpriteState::OnMouseRelease(const Vector& pos)
+void TranslateSpriteState::OnMouseRelease(const sm::vec2& pos)
 {
-	m_last_pos.SetInvalid();
+	m_last_valid = false;
 	if (m_dirty) {
 		m_dirty = false;
 		AtomicOP* aop = new TranslateSpriteAOP(*m_selection, pos - m_first_pos);
@@ -36,15 +38,16 @@ void TranslateSpriteState::OnMouseRelease(const Vector& pos)
 	}
 }
 
-bool TranslateSpriteState::OnMouseDrag(const Vector& pos)
+bool TranslateSpriteState::OnMouseDrag(const sm::vec2& pos)
 {
-	if (m_selection->IsEmpty() || !m_last_pos.IsValid()) {
+	if (m_selection->IsEmpty() || !m_last_valid) {
 		return false;
 	}
 
 	m_dirty = true;
 	Translate(pos - m_last_pos);
 	m_last_pos = pos;
+	m_last_valid = true;
 
 	return true;
 }
@@ -53,7 +56,7 @@ bool TranslateSpriteState::OnDirectionKeyDown(DirectionType type)
 {
 	if (m_selection->IsEmpty()) return false;
 
-	Vector offset;
+	sm::vec2 offset;
 
 	switch (type)
 	{
@@ -79,7 +82,7 @@ bool TranslateSpriteState::OnDirectionKeyDown(DirectionType type)
 	return true;
 }
 
-void TranslateSpriteState::Translate(const Vector& offset)
+void TranslateSpriteState::Translate(const sm::vec2& offset)
 {
 	m_selection->Traverse(TranslateVisitor(offset));
 }

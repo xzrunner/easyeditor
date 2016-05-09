@@ -2,7 +2,8 @@
 #define _EASYEDITOR_SELECTION_SET_H_
 
 #include "Object.h"
-#include "Vector.h"
+
+#include <SM_Vector.h>
 
 #include <vector>
 
@@ -34,7 +35,7 @@ protected:
 
 }; // SelectionSet
 
-typedef SelectionSet<Vector> NodeSelection;
+typedef SelectionSet<sm::vec2> NodeSelection;
 
 }
 

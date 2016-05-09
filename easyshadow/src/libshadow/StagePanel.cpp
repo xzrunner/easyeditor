@@ -74,7 +74,7 @@ void StagePanel::TraverseShapes(ee::Visitor& visitor, ee::DataTraverseType type)
 void StagePanel::LoadFromShadow()
 {
 	const Shadow* shadow = m_symbol->GetShadow();
-	const std::vector<ee::Vector>& loop = shadow->GetInnerLoop();
+	const std::vector<sm::vec2>& loop = shadow->GetInnerLoop();
 	if (m_loop) {
 		m_loop->Release();
 	}

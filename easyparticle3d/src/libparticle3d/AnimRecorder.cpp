@@ -85,8 +85,8 @@ void AnimRecorder::StoreToFile(const std::string& filepath) const
 			ee::Sprite* spr = new ee::NullSprite(
 				new ee::NullSymbol(item->filepath));
 
-			spr->SetTransform(ee::Vector(item->x, item->y), item->angle);
-			spr->SetScale(ee::Vector(item->scale, item->scale));
+			spr->SetTransform(sm::vec2(item->x, item->y), item->angle);
+			spr->SetScale(sm::vec2(item->scale, item->scale));
 			spr->rp->color.multi = item->mul_col;
 
 			frame->sprites.push_back(spr);

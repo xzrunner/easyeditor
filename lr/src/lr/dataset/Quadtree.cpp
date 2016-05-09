@@ -65,7 +65,7 @@ void Quadtree::DebugDraw() const
 		Node* node = buffer.front(); buffer.pop();
 		ee::RVG::Color(ee::LIGHT_GREY);
 		ee::RVG::LineWidth(1);
-		ee::RVG::Rect(ee::Vector(node->m_rect.xmin, node->m_rect.ymin), ee::Vector(node->m_rect.xmax, node->m_rect.ymax), false);
+		ee::RVG::Rect(sm::vec2(node->m_rect.xmin, node->m_rect.ymin), sm::vec2(node->m_rect.xmax, node->m_rect.ymax), false);
 		ee::RVG::LineWidth(2);
 
 		if (!node->IsLeaf()) 
@@ -80,7 +80,7 @@ void Quadtree::DebugDraw() const
 	if (m_selected) {
 		ee::RVG::Color(ee::LIGHT_RED);
 		ee::RVG::LineWidth(1);
-		ee::RVG::Rect(ee::Vector(m_selected->m_rect.xmin, m_selected->m_rect.ymin), ee::Vector(m_selected->m_rect.xmax, m_selected->m_rect.ymax), false);
+		ee::RVG::Rect(sm::vec2(m_selected->m_rect.xmin, m_selected->m_rect.ymin), sm::vec2(m_selected->m_rect.xmax, m_selected->m_rect.ymax), false);
 		ee::RVG::LineWidth(2);
 
 		ee::RenderColor color;
@@ -91,7 +91,7 @@ void Quadtree::DebugDraw() const
 	}
 }
 
-void Quadtree::SelectNode(const ee::Vector& pos)
+void Quadtree::SelectNode(const sm::vec2& pos)
 {
 	std::queue<Node*> buffer;
 	buffer.push(m_root);
@@ -176,7 +176,7 @@ IsIntersect(const ee::Rect& rect) const
 }
 
 bool Quadtree::Node::
-IsContain(const ee::Vector& pos) const
+IsContain(const sm::vec2& pos) const
 {
 	return ee::Math2D::IsPointInRect(pos, m_rect);
 }
@@ -194,7 +194,7 @@ IsContain(const ee::Sprite* spr) const
 
 	sm::mat4 mt;
 	spr->GetTransMatrix(mt);
-	std::vector<ee::Vector> bound;
+	std::vector<sm::vec2> bound;
 	ee::Math2D::TransVertices(mt, poly->GetVertices(), bound);
 
 	return ee::Math2D::IsPolylineIntersectRect(bound, true, m_rect);
@@ -260,25 +260,25 @@ GetContainArea(const ee::Sprite* spr) const
 
 	sm::mat4 mt;
 	spr->GetTransMatrix(mt);
-	std::vector<ee::Vector> bound;
+	std::vector<sm::vec2> bound;
 	ee::Math2D::TransVertices(mt, poly->GetVertices(), bound);
 
-	std::vector<ee::Vector> loop;
-	loop.push_back(ee::Vector(m_rect.xmin, m_rect.ymin));
-	loop.push_back(ee::Vector(m_rect.xmin, m_rect.ymax));
-	loop.push_back(ee::Vector(m_rect.xmax, m_rect.ymax));
-	loop.push_back(ee::Vector(m_rect.xmax, m_rect.ymin));
-	std::vector<std::vector<ee::Vector> > loops;
+	std::vector<sm::vec2> loop;
+	loop.push_back(sm::vec2(m_rect.xmin, m_rect.ymin));
+	loop.push_back(sm::vec2(m_rect.xmin, m_rect.ymax));
+	loop.push_back(sm::vec2(m_rect.xmax, m_rect.ymax));
+	loop.push_back(sm::vec2(m_rect.xmax, m_rect.ymin));
+	std::vector<std::vector<sm::vec2> > loops;
 	loops.push_back(loop);
 
 	float area = 0.0f;
 
-	std::vector<ee::Vector> lines;
-	std::vector<ee::Vector> tris;
+	std::vector<sm::vec2> lines;
+	std::vector<sm::vec2> tris;
 	ee::Triangulation::LinesAndLoops(bound, lines, loops, tris);
 	for (int i = 0, n = tris.size() / 3; i < n; ++i)
 	{
-		ee::Vector center = (tris[i*3] + tris[i*3+1] + tris[i*3+2]) / 3;
+		sm::vec2 center = (tris[i*3] + tris[i*3+1] + tris[i*3+2]) / 3;
 		if (ee::Math2D::IsPointInRect(center, m_rect)) {
 			area += ee::Math2D::GetTriangleArea(tris[i*3], tris[i*3+1], tris[i*3+2]);
 		}

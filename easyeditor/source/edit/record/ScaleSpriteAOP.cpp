@@ -7,8 +7,8 @@ namespace ee
 {
 
 ScaleSpriteAOP::ScaleSpriteAOP(Sprite* sprite, 
-							   const Vector& new_scale, 
-							   const Vector& old_scale)
+							   const sm::vec2& new_scale, 
+							   const sm::vec2& old_scale)
 	: m_new_scale(new_scale)
 	, m_old_scale(old_scale)
 {

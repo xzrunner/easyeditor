@@ -3,8 +3,6 @@
 
 #include "Joint.h"
 
-#include <ee/Vector.h>
-
 namespace emodeling
 {
 
@@ -13,29 +11,29 @@ class WheelJoint : public Joint
 public:
 	WheelJoint(Body* b0, Body* b1);
 
-	virtual bool IsContain(const ee::Vector& pos) const;
+	virtual bool IsContain(const sm::vec2& pos) const;
 	virtual bool IsIntersect(const ee::Rect& rect) const;
 
 	virtual void Draw(DrawType type) const;
 
-	ee::Vector GetWorldAnchorA() const;
-	ee::Vector GetWorldAnchorB() const;
+	sm::vec2 GetWorldAnchorA() const;
+	sm::vec2 GetWorldAnchorB() const;
 
-	void SetLocalAnchorA(const ee::Vector& world);
-	void SetLocalAnchorB(const ee::Vector& world);
+	void SetLocalAnchorA(const sm::vec2& world);
+	void SetLocalAnchorB(const sm::vec2& world);
 
 private:
-	void DrawAxisALine(const ee::Vector& worldAnchorA) const;
-	void DrawFootBLine(const ee::Vector& worldAnchorA, const ee::Vector& worldAnchorB) const;
+	void DrawAxisALine(const sm::vec2& worldAnchorA) const;
+	void DrawFootBLine(const sm::vec2& worldAnchorA, const sm::vec2& worldAnchorB) const;
 
-	void DrawAnchorA(const ee::Vector& pos, DrawType type) const;
-	void DrawAnchorB(const ee::Vector& pos, DrawType type) const;
+	void DrawAnchorA(const sm::vec2& pos, DrawType type) const;
+	void DrawAnchorB(const sm::vec2& pos, DrawType type) const;
 
 public:
-	ee::Vector m_local_anchor_a;
-	ee::Vector m_local_anchor_b;
+	sm::vec2 m_local_anchor_a;
+	sm::vec2 m_local_anchor_b;
 
-	ee::Vector m_local_axis_a;
+	sm::vec2 m_local_axis_a;
 
 	bool m_enable_motor;
 	float m_max_motor_torque;

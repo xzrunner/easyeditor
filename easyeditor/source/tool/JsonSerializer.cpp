@@ -4,7 +4,7 @@
 namespace ee
 {
 
-void JsonSerializer::Store(const std::vector<Vector>& points, Json::Value& value)
+void JsonSerializer::Store(const std::vector<sm::vec2>& points, Json::Value& value)
 {
 	for (int i = 0, n = points.size(); i < n; ++i)
 	{
@@ -13,7 +13,7 @@ void JsonSerializer::Store(const std::vector<Vector>& points, Json::Value& value
 	}
 }
 
-void JsonSerializer::Load(const Json::Value& value, std::vector<Vector>& points)
+void JsonSerializer::Load(const Json::Value& value, std::vector<sm::vec2>& points)
 {
 	if (value.isArray())
 	{
@@ -23,7 +23,7 @@ void JsonSerializer::Load(const Json::Value& value, std::vector<Vector>& points)
 		Json::Value xval = value[i++],
 			        yval = value[i++];
 		while (!xval.isNull() && !yval.isNull()) {
-			Vector p;
+			sm::vec2 p;
 			p.x = static_cast<float>(xval.asDouble());
 			p.y = static_cast<float>(yval.asDouble());
 			points.push_back(p);
@@ -40,7 +40,7 @@ void JsonSerializer::Load(const Json::Value& value, std::vector<Vector>& points)
 			yval = value["y"][i];
 		++i;
 		while (!xval.isNull() && !yval.isNull()) {
-			Vector p;
+			sm::vec2 p;
 			p.x = static_cast<float>(xval.asDouble());
 			p.y = static_cast<float>(yval.asDouble());
 			points.push_back(p);

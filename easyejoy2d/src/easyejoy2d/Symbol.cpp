@@ -102,7 +102,7 @@ void Symbol::DrawToEJScreen() const
 
 void Symbol::DrawFromEJScreen() const
 {
-	ee::Vector vertices[4], texcoords[4];
+	sm::vec2 vertices[4], texcoords[4];
 
 	texcoords[0].x = 0, texcoords[0].y = 0;
 	texcoords[1].x = 0, texcoords[1].y = 1;

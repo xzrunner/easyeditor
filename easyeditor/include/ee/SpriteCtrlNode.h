@@ -1,7 +1,7 @@
 #ifndef _EASYEDITOR_SPRITE_CTRL_NODE_H_
 #define _EASYEDITOR_SPRITE_CTRL_NODE_H_
 
-#include "Vector.h"
+#include <SM_Vector.h>
 
 namespace ee
 {
@@ -11,9 +11,9 @@ class Sprite;
 class SpriteCtrlNode
 {
 public:
-	static void GetSpriteCtrlNodes(const Sprite* sprite, Vector nodes[8]);
+	static void GetSpriteCtrlNodes(const Sprite* sprite, sm::vec2 nodes[8]);
 
-	static void GetSpriteCtrlNodesExt(const Sprite* sprite, Vector nodes[4]);
+	static void GetSpriteCtrlNodesExt(const Sprite* sprite, sm::vec2 nodes[4]);
 
 public:
  	// 0 4 1
@@ -33,14 +33,15 @@ public:
  
  	struct Node
  	{
- 		Vector pos;
+ 		sm::vec2 pos;
  		Type type;
+		bool valid;
  
  		void setInvalid() {
- 			pos.SetInvalid();
+ 			valid = false;
  		}
  		bool isValid() {
- 			return pos.IsValid();
+ 			return valid;
  		}
  	};
 

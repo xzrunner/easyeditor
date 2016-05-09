@@ -153,7 +153,7 @@ StageDropTarget(StagePanel* stage, ee::LibraryPanel* library)
 }
 
 bool StagePanel::StageDropTarget::
-OnDropSymbol(ee::Symbol* symbol, const ee::Vector& pos)
+OnDropSymbol(ee::Symbol* symbol, const sm::vec2& pos)
 {
 	Symbol* mesh_sym = new Symbol(symbol);
 	m_stage->m_symbol->Release();

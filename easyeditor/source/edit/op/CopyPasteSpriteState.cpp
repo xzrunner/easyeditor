@@ -31,14 +31,14 @@ CopyPasteSpriteState::~CopyPasteSpriteState()
 	for_each(m_sprites.begin(), m_sprites.end(), ReleaseObjectFunctor<Sprite>());
 }
 
-void CopyPasteSpriteState::OnMousePress(const Vector& pos)
+void CopyPasteSpriteState::OnMousePress(const sm::vec2& pos)
 {
 	m_last_pos = pos;
 }
 
-bool CopyPasteSpriteState::OnMouseDrag(const Vector& pos)
+bool CopyPasteSpriteState::OnMouseDrag(const sm::vec2& pos)
 {
-	Vector offset = pos - m_last_pos;
+	sm::vec2 offset = pos - m_last_pos;
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		Sprite* spr = m_sprites[i];
 		spr->SetTransform(spr->GetPosition() + offset, spr->GetAngle());

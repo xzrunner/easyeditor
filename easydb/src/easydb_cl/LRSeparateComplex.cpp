@@ -165,7 +165,7 @@ std::string LRSeparateComplex::CreateNewComplexFile(const Json::Value& value) co
 		m_dir + "\\" + spr_val["filepath"].asString());
 	spr_val["filepath"] = relative_path;
 
-	ee::Vector pos;
+	sm::vec2 pos;
 	pos.x = spr_val["position"]["x"].asDouble();
 	pos.y = spr_val["position"]["y"].asDouble();
 	FixPosWithShape(pos, value["filepath"].asString());
@@ -214,7 +214,7 @@ void LRSeparateComplex::ResetOldSpriteVal(Json::Value& val, const std::string& e
 	val["b trans"] = "0x0000ffff";
 }
 
-void LRSeparateComplex::FixPosWithShape(ee::Vector& pos, const std::string& filepath) const
+void LRSeparateComplex::FixPosWithShape(sm::vec2& pos, const std::string& filepath) const
 {
 	std::string path = filepath.substr(0, filepath.find_last_of('.')) + "_shape.json";
 	std::string shape_path = m_dir + "\\" + m_point_dir + "\\" + path;

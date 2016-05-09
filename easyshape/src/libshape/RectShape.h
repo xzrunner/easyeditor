@@ -12,8 +12,8 @@ class RectShape : public ee::Shape
 public:
 	RectShape();
 	RectShape(const RectShape& rect);
-	RectShape(const ee::Vector& p0, const ee::Vector& p1);
-	RectShape(const ee::Vector& center, float hWidth, float hHeight);
+	RectShape(const sm::vec2& p0, const sm::vec2& p1);
+	RectShape(const sm::vec2& center, float hWidth, float hHeight);
 
 	//
 	// IObject interface
@@ -24,9 +24,9 @@ public:
 	// Shape interface
 	//
 	virtual const char* GetShapeDesc() const { return "rect"; }
-	virtual bool IsContain(const ee::Vector& pos) const;
+	virtual bool IsContain(const sm::vec2& pos) const;
 	virtual bool IsIntersect(const ee::Rect& rect) const;
-	virtual void Translate(const ee::Vector& offset);
+	virtual void Translate(const sm::vec2& offset);
 	virtual const ee::Rect& GetRect() const { return m_rect; }
 	virtual void Draw(const sm::mat4& mt, const ee::RenderColor& color = ee::RenderColor()) const;
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);

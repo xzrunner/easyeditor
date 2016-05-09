@@ -31,12 +31,12 @@ bool DrawComplexPolygonOP::OnMouseLeftDClick(int x, int y)
 	}
 
 	m_polyline.clear();
-	m_curr_pos.SetInvalid();
+	m_curr_pos_valid = false;
 
 	return false;
 }
 
-ComplexPolygonShape* DrawComplexPolygonOP::CreateComplexPoly(const std::vector<ee::Vector>& polyline)
+ComplexPolygonShape* DrawComplexPolygonOP::CreateComplexPoly(const std::vector<sm::vec2>& polyline)
 {
 	std::vector<PolygonShape*> polygon_shapes;
 	m_shapes_impl->TraverseShapes(ee::FetchAllVisitor<PolygonShape>(polygon_shapes));
@@ -44,7 +44,7 @@ ComplexPolygonShape* DrawComplexPolygonOP::CreateComplexPoly(const std::vector<e
 	for (int i = 0, n = polygon_shapes.size(); i < n; ++i)
 	{
 		PolygonShape* poly = polygon_shapes[i];
-		const std::vector<ee::Vector>& outline = poly->GetVertices();
+		const std::vector<sm::vec2>& outline = poly->GetVertices();
 		if (!ee::Math2D::IsPolygonInPolygon(polyline, outline)) {
 			continue;
 		}
@@ -52,14 +52,14 @@ ComplexPolygonShape* DrawComplexPolygonOP::CreateComplexPoly(const std::vector<e
 		ComplexPolygonShape* new_cpoly = NULL;
 		if (ComplexPolygonShape* cpoly = dynamic_cast<ComplexPolygonShape*>(poly))
 		{
-			const std::vector<std::vector<ee::Vector> >& holes = cpoly->GetHoles();
+			const std::vector<std::vector<sm::vec2> >& holes = cpoly->GetHoles();
 			for (int i = 0, n = holes.size(); i < n; ++i) {
 				if (ee::Math2D::isPolylineIntersectPolylinI(holes[i], polyline)) {
 					return NULL;
 				}
 			}
 
-			std::vector<std::vector<ee::Vector> > new_holes = holes;
+			std::vector<std::vector<sm::vec2> > new_holes = holes;
 			new_holes.push_back(polyline);
 
 			new_cpoly = new ComplexPolygonShape(poly->GetVertices(), new_holes);
@@ -67,7 +67,7 @@ ComplexPolygonShape* DrawComplexPolygonOP::CreateComplexPoly(const std::vector<e
 		}
 		else
 		{
-			std::vector<std::vector<ee::Vector> > holes;
+			std::vector<std::vector<sm::vec2> > holes;
 			holes.push_back(polyline);
 
 			new_cpoly = new ComplexPolygonShape(poly->GetVertices(), holes);
@@ -77,7 +77,7 @@ ComplexPolygonShape* DrawComplexPolygonOP::CreateComplexPoly(const std::vector<e
 		return new_cpoly;
 	}
 
-	std::vector<std::vector<ee::Vector> > holes;
+	std::vector<std::vector<sm::vec2> > holes;
 	return new ComplexPolygonShape(polyline, holes);
 }
 

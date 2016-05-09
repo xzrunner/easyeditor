@@ -256,7 +256,7 @@ void Love2dCode::ResolveLoadFixtures(Body* body)
 		else if (eshape::PolygonShape* polygon = dynamic_cast<eshape::PolygonShape*>(fData->m_shape))
 		{
 			// love.physics.newPolygonShape(size, x0, y0, x1, y1, x2, y2, ... , xn, yn)
-			const std::vector<ee::Vector>& vertices = polygon->GetVertices();
+			const std::vector<sm::vec2>& vertices = polygon->GetVertices();
 			std::string strParams;
 			for (size_t i = 0, n = vertices.size(); i < n; ++i)
 			{
@@ -273,7 +273,7 @@ void Love2dCode::ResolveLoadFixtures(Body* body)
 		{
 			// love.physics.newChainShape(loop, size, x0, y0, x1, y1, x2, y2, ... , xn, yn)
 			std::string strParams = chain->IsClosed() ? "true" : "false";
-			const std::vector<ee::Vector>& vertices = chain->GetVertices();
+			const std::vector<sm::vec2>& vertices = chain->GetVertices();
 			std::string size = ee::StringHelper::ToString(vertices.size() * 2);
 			strParams += ", "+size;
 			for (size_t i = 0, n = vertices.size(); i < n; ++i)
@@ -386,7 +386,7 @@ void Love2dCode::ResolveLoadJoint(const std::vector<Joint*>& joints, size_t inde
 		{
 			RevoluteJoint* joint = static_cast<RevoluteJoint*>(j);
 
-			ee::Vector anchorA = joint->GetWorldAnchorA();
+			sm::vec2 anchorA = joint->GetWorldAnchorA();
 			std::string x = ee::StringHelper::ToString(anchorA.x),
 				y = ee::StringHelper::ToString(-anchorA.y);
 
@@ -430,7 +430,7 @@ void Love2dCode::ResolveLoadJoint(const std::vector<Joint*>& joints, size_t inde
 		{
 			PrismaticJoint* joint = static_cast<PrismaticJoint*>(j);
 
-			ee::Vector anchorA = joint->GetWorldAnchorA(),
+			sm::vec2 anchorA = joint->GetWorldAnchorA(),
 				anchorB = joint->GetWorldAnchorB();
 			std::string xA = ee::StringHelper::ToString(anchorA.x),
 				yA = ee::StringHelper::ToString(-anchorA.y);
@@ -480,7 +480,7 @@ void Love2dCode::ResolveLoadJoint(const std::vector<Joint*>& joints, size_t inde
 		{
 			DistanceJoint* joint = static_cast<DistanceJoint*>(j);
 
-			ee::Vector anchorA = joint->GetWorldAnchorA(),
+			sm::vec2 anchorA = joint->GetWorldAnchorA(),
 				anchorB = joint->GetWorldAnchorB();
 			std::string xA = ee::StringHelper::ToString(anchorA.x),
 				yA = ee::StringHelper::ToString(-anchorA.y);
@@ -515,7 +515,7 @@ void Love2dCode::ResolveLoadJoint(const std::vector<Joint*>& joints, size_t inde
 			std::string gxB = ee::StringHelper::ToString(joint->m_ground_anchor_b.x),
 				gyB = ee::StringHelper::ToString(-joint->m_ground_anchor_b.y);
 
-			ee::Vector anchorA = joint->GetWorldAnchorA(),
+			sm::vec2 anchorA = joint->GetWorldAnchorA(),
 				anchorB = joint->GetWorldAnchorB();
 			std::string xA = ee::StringHelper::ToString(anchorA.x),
 				yA = ee::StringHelper::ToString(-anchorA.y);
@@ -602,7 +602,7 @@ void Love2dCode::ResolveLoadJoint(const std::vector<Joint*>& joints, size_t inde
 		{
 			WeldJoint* joint = static_cast<WeldJoint*>(j);
 
-			ee::Vector anchorA = joint->GetWorldAnchorA(),
+			sm::vec2 anchorA = joint->GetWorldAnchorA(),
 				anchorB = joint->GetWorldAnchorB();
 			std::string xA = ee::StringHelper::ToString(anchorA.x),
 				yA = ee::StringHelper::ToString(-anchorA.y);
@@ -632,7 +632,7 @@ void Love2dCode::ResolveLoadJoint(const std::vector<Joint*>& joints, size_t inde
 		{
 			FrictionJoint* joint = static_cast<FrictionJoint*>(j);
 
-			ee::Vector anchorA = joint->GetWorldAnchorA(),
+			sm::vec2 anchorA = joint->GetWorldAnchorA(),
 				anchorB = joint->GetWorldAnchorB();
 			std::string xA = ee::StringHelper::ToString(anchorA.x),
 				yA = ee::StringHelper::ToString(-anchorA.y);
@@ -662,7 +662,7 @@ void Love2dCode::ResolveLoadJoint(const std::vector<Joint*>& joints, size_t inde
 		{
 			RopeJoint* joint = static_cast<RopeJoint*>(j);
 
-			ee::Vector anchorA = joint->GetWorldAnchorA(),
+			sm::vec2 anchorA = joint->GetWorldAnchorA(),
 				anchorB = joint->GetWorldAnchorB();
 			std::string xA = ee::StringHelper::ToString(anchorA.x),
 				yA = ee::StringHelper::ToString(-anchorA.y);

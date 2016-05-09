@@ -5,7 +5,7 @@
 
 #include <string>
 
-namespace ee { class Vector; class Rect; class Sprite; }
+namespace ee { class Rect; class Sprite; }
 
 namespace emodeling
 {
@@ -41,7 +41,7 @@ public:
 	Joint(Body* b0, Body* b1, Type type);
 	virtual ~Joint() {}
 	
-	virtual bool IsContain(const ee::Vector& pos) const = 0;
+	virtual bool IsContain(const sm::vec2& pos) const = 0;
 	virtual bool IsIntersect(const ee::Rect& rect) const = 0;
 
 	virtual void Draw(DrawType type) const = 0;
@@ -49,13 +49,13 @@ public:
 protected:
 	void DrawBodyFlag() const;
 
-	static ee::Vector TransWorldToLocal(const ee::Vector& world, 
+	static sm::vec2 TransWorldToLocal(const sm::vec2& world, 
 		const ee::Sprite* sprite);
-	static ee::Vector TransLocalToWorld(const ee::Vector& local, 
+	static sm::vec2 TransLocalToWorld(const sm::vec2& local, 
 		const ee::Sprite* sprite);
 
 private:
-	void DrawBodyFlag(const ee::Vector& pos) const;
+	void DrawBodyFlag(const sm::vec2& pos) const;
 
 protected:
 	static const float JOINT_RADIUS_OUT;

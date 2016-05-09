@@ -1,7 +1,7 @@
 #ifndef _EASYMESH_MESH_TRANS_H_
 #define _EASYMESH_MESH_TRANS_H_
 
-#include <ee/Vector.h>
+#include <SM_Vector.h>
 
 #include <json/json.h>
 
@@ -22,7 +22,7 @@ public:
 	void SetTween(const MeshTrans& s, const MeshTrans& e, float process);
 
 private:
-	std::map<ee::Vector, ee::Vector, ee::VectorCmp> m_map;
+	std::map<sm::vec2, sm::vec2, sm::Vector2Cmp> m_map;
 
 }; // MeshTrans
 

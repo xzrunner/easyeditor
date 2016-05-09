@@ -4,7 +4,6 @@
 #include "ShapeType.h"
 
 #include <ee/Symbol.h>
-#include <ee/Vector.h>
 
 #include <vector>
 
@@ -60,7 +59,7 @@ private:
 private:
 	ee::Symbol* m_bg;
 	std::vector<ee::Shape*> m_bg_outline;
-	std::vector<std::vector<ee::Vector> > m_bg_tri_strips;
+	std::vector<std::vector<sm::vec2> > m_bg_tri_strips;
 
 	std::vector<ee::Shape*> m_shapes;
 

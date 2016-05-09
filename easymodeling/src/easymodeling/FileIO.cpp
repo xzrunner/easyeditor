@@ -307,7 +307,7 @@ Json::Value FileIO::B2J(Joint* joint, const std::map<Body*, int>& bodyIndexMap)
 			value["anchorB"]["x"] = wJoint->m_local_anchor_b.x;
 			value["anchorB"]["y"] = wJoint->m_local_anchor_b.y;
 
-			float len = ee::Math2D::GetDistance(wJoint->m_local_axis_a, ee::Vector());
+			float len = ee::Math2D::GetDistance(wJoint->m_local_axis_a, sm::vec2());
 			value["AxisA"]["x"] = wJoint->m_local_axis_a.x / len;
 			value["AxisA"]["y"] = wJoint->m_local_axis_a.y / len;
 

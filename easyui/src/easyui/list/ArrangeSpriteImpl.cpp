@@ -14,7 +14,7 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(StagePanel* stage, ee::PropertySettingPanel
 }
 
 ee::ArrangeSpriteState* ArrangeSpriteImpl::
-CreateTranslateState(ee::SpriteSelection* selection, const ee::Vector& first_pos) const
+CreateTranslateState(ee::SpriteSelection* selection, const sm::vec2& first_pos) const
 {
 	return new TranslateSpriteState(selection, first_pos, &m_stage->GetList()); 
 }

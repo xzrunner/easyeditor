@@ -1,7 +1,7 @@
 #ifndef _EASYSHAPE_MATH_H_
 #define _EASYSHAPE_MATH_H_
 
-#include <ee/Vector.h>
+#include <SM_Vector.h>
 
 #include <vector>
 
@@ -14,10 +14,10 @@ class Math
 {
 public:
 	static void mergeTwoChains(const ChainShape& src0, const ChainShape& src1,
-		std::vector<ee::Vector>& dst);
+		std::vector<sm::vec2>& dst);
 
 	static void mergeMultiChains(const std::vector<ChainShape*>& src, 
-		std::vector<ee::Vector>& dst);
+		std::vector<sm::vec2>& dst);
 
 private:
 	// for mergeMultiChains

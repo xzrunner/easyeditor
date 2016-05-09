@@ -35,7 +35,7 @@ void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 			continue;
 		}
 
-		Vector pos = m_stage->TransPosScrToProj(x, y);
+		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 		bool handled = OnDropSymbol(symbol, pos);
 		if (handled) {
 			continue;
@@ -59,7 +59,7 @@ void StageDropTarget::OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& fil
 		symbol->RefreshThumbnail(filename);
 		bool success = m_library->AddSymbol(symbol);
 		if (success) {
-			Vector pos = m_stage->TransPosScrToProj(x, y);
+			sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 			bool handled = OnDropSymbol(symbol, pos);
 			if (handled) {
 				continue;

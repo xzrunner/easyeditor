@@ -5,8 +5,8 @@ namespace ee
 {
 
 PerspectiveSpriteAOP::PerspectiveSpriteAOP(Sprite* sprite, 
-										   const Vector& new_persp, 
-										   const Vector& old_persp)
+										   const sm::vec2& new_persp, 
+										   const sm::vec2& old_persp)
 	: m_spr(sprite)
 	, m_new_persp(m_new_persp)
 	, m_old_persp(m_old_persp)

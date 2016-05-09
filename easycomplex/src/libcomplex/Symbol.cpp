@@ -91,23 +91,23 @@ void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr,
 		//	m_render_version = mgr->GetVersion();
 		//}
 
-		//ee::Vector vertices[4];
+		//sm::vec2 vertices[4];
 		//float hw = m_rect.Width() * 0.5f,
 		//	hh = m_rect.Height() * 0.5f;
-		//vertices[0] = ee::Math2D::TransVector(ee::Vector(m_rect.xmin, m_rect.ymin), mt);
-		//vertices[1] = ee::Math2D::TransVector(ee::Vector(m_rect.xmax, m_rect.ymin), mt);
-		//vertices[2] = ee::Math2D::TransVector(ee::Vector(m_rect.xmax, m_rect.ymax), mt);
-		//vertices[3] = ee::Math2D::TransVector(ee::Vector(m_rect.xmin, m_rect.ymax), mt);
+		//vertices[0] = ee::Math2D::TransVector(sm::vec2(m_rect.xmin, m_rect.ymin), mt);
+		//vertices[1] = ee::Math2D::TransVector(sm::vec2(m_rect.xmax, m_rect.ymin), mt);
+		//vertices[2] = ee::Math2D::TransVector(sm::vec2(m_rect.xmax, m_rect.ymax), mt);
+		//vertices[3] = ee::Math2D::TransVector(sm::vec2(m_rect.xmin, m_rect.ymax), mt);
 		//if (n->IsRotated())
 		//{
-		//	ee::Vector tmp = vertices[3];
+		//	sm::vec2 tmp = vertices[3];
 		//	vertices[3] = vertices[2];
 		//	vertices[2] = vertices[1];
 		//	vertices[1] = vertices[0];
 		//	vertices[0] = tmp;
 		//}
 
-		//ee::Vector texcoords[4];
+		//sm::vec2 texcoords[4];
 		//float txmin, txmax, tymin, tymax;
 		//float extend = dtex->GetExtend();
 		//int width = dtex->GetWidth();
@@ -135,7 +135,7 @@ void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr,
 			ee::SpriteRenderer::Draw(m_sprites[i], root, trans);
 		}
 		if (m_clipbox.Width() > 0 && m_clipbox.Height() > 0) {
-			ee::Vector min(m_clipbox.xmin, m_clipbox.ymin), 
+			sm::vec2 min(m_clipbox.xmin, m_clipbox.ymin), 
 				max(m_clipbox.xmax, m_clipbox.ymax);
 			ee::RVG::Color(ee::Colorf(0, 0.8f, 0));
 			ee::RVG::Rect(ee::Math2D::TransVector(min, trans.mt), ee::Math2D::TransVector(max, trans.mt), false);
@@ -161,7 +161,7 @@ void Symbol::InitBounding()
 	m_rect.MakeInfinite();
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 	{
-		std::vector<ee::Vector> vertices;
+		std::vector<sm::vec2> vertices;
 		m_sprites[i]->GetBounding()->GetBoundPos(vertices);
 		for (size_t j = 0, m = vertices.size(); j < m; ++j)
 			m_rect.Combine(vertices[j]);
@@ -172,8 +172,8 @@ void Symbol::InitBounding()
 	//float x = m_rect.CenterX(),
 	//	y = m_rect.CenterY();
 	//for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-	//	m_sprites[i]->translate(ee::Vector(-x, -y));
-	//m_rect.translate(ee::Vector(-x, -y));
+	//	m_sprites[i]->translate(sm::vec2(-x, -y));
+	//m_rect.translate(sm::vec2(-x, -y));
 }
 
 void Symbol::LoadResources()

@@ -39,23 +39,25 @@ private:
 		SpriteBatch();
 		~SpriteBatch();
 
-		void loadFromSelection(const SpriteSelection& selection);
+		void LoadFromSelection(const SpriteSelection& selection);
 
-		void insertToSpritesImpl(const Vector& pos, bool isHorMirror, bool isVerMirror);
-		void draw(const Vector& pos, bool isHorMirror, bool isVerMirror) const;
+		void InsertToSpritesImpl(const sm::vec2& pos, bool isHorMirror, bool isVerMirror);
+		void Draw(const sm::vec2& pos, bool isHorMirror, bool isVerMirror) const;
 
-		const Vector& getCenter() const { return m_center; }
+		const sm::vec2& GetCenter() const { return m_center; }
+		bool IsCenterValid() const { return m_valid; }
 
-		void clear();
+		void Clear();
 
-		bool empty() const { return m_selected.empty(); }
+		bool Empty() const { return m_selected.empty(); }
 
 	private:
-		void computeCenter();
+		void ComputeCenter();
 
 	private:
 		std::vector<Sprite*> m_selected;
-		Vector m_center;
+		sm::vec2 m_center;
+		bool m_valid;
 
 	}; // SpriteBatch
 
@@ -64,7 +66,8 @@ private:
 
 	SpriteSelection* m_selection;
 
-	Vector m_pos;
+	sm::vec2 m_pos;
+	bool m_pos_valid;
 
 	SpriteBatch m_batch;
 

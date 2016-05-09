@@ -68,13 +68,13 @@ void StageCanvas::OnDrawSprites() const
 
 	ee::RVG::Color(ee::Colorf(0, 0.8f, 0));
 	const ee::Rect& r = m_stage->getSymbol()->m_clipbox;
-	ee::RVG::Rect(ee::Vector(r.xmin, r.ymin), ee::Vector(r.xmax, r.ymax), m_clipboxStyle.filling);
+	ee::RVG::Rect(sm::vec2(r.xmin, r.ymin), sm::vec2(r.xmax, r.ymax), m_clipboxStyle.filling);
 
 	if (Settings::bVisibleBGCross)
 	{
 		const float EDGE = 100;
 		ee::RVG::Color(ee::LIGHT_GREY);
-		ee::RVG::Cross(ee::Vector(0,0), EDGE, EDGE);
+		ee::RVG::Cross(sm::vec2(0,0), EDGE, EDGE);
 	}
 
 	m_stage->DrawEditOP();
@@ -107,14 +107,14 @@ void StageCanvas::OnDrawSprites() const
 	if (clipbox.Width() != 0 && clipbox.Height() != 0) {
 		ee::RVG::Color(ee::Colorf(0, 0.8f, 0));
 		ee::RVG::LineWidth(2);
-		ee::RVG::Rect(ee::Vector(clipbox.xmin, clipbox.ymin), ee::Vector(clipbox.xmax, clipbox.ymax), false);
+		ee::RVG::Rect(sm::vec2(clipbox.xmin, clipbox.ymin), sm::vec2(clipbox.xmax, clipbox.ymax), false);
 	}
 
 	if (Settings::bVisibleBGCross)
 	{
 		const float EDGE = 100;
 		ee::RVG::Color(ee::LIGHT_GREY);
-		ee::RVG::Cross(ee::Vector(0,0), EDGE, EDGE);
+		ee::RVG::Cross(sm::vec2(0,0), EDGE, EDGE);
 	}
 
 	ee::SceneNodeMgr::Instance()->Draw();
@@ -143,7 +143,7 @@ void StageCanvas::DrawBackground() const
 	if (Settings::bVisibleBGRect) {
 		ee::RVG::Color(ee::Colorf(0.8f, 0.8f, 0.8f));
 		ee::RVG::LineWidth(2);
-		ee::RVG::Rect(ee::Vector(0, 0), ee::SCREEN_WIDTH, ee::SCREEN_HEIGHT, false);
+		ee::RVG::Rect(sm::vec2(0, 0), ee::SCREEN_WIDTH, ee::SCREEN_HEIGHT, false);
 	}
 }
 

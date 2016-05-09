@@ -13,7 +13,6 @@ DragPhysicsOP::DragPhysicsOP(wxWindow* wnd, EditPanelImpl* stage,
 	, m_ground(ground)
 	, m_mouseJoint(NULL)
 {
-	currPos.SetInvalid();
 }
 
 bool DragPhysicsOP::OnMouseLeftDown(int x, int y)
@@ -22,7 +21,7 @@ bool DragPhysicsOP::OnMouseLeftDown(int x, int y)
 
 	if (m_mouseJoint) return false;
 
-	const Vector pos = m_stage->TransPosScrToProj(x, y);
+	const sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	b2Body* body = PhysicsQuery::QueryOn(m_world, pos);
 	if (body && body != m_ground)
 	{
@@ -46,7 +45,6 @@ bool DragPhysicsOP::OnMouseLeftUp(int x, int y)
 	{
 		m_world->DestroyJoint(m_mouseJoint);
 		m_mouseJoint = NULL;
-		currPos.SetInvalid();
 	}
 
 	return false;
@@ -58,8 +56,8 @@ bool DragPhysicsOP::OnMouseDrag(int x, int y)
 
 	if (m_mouseJoint)
 	{
-		currPos = m_stage->TransPosScrToProj(x, y);
-		m_mouseJoint->SetTarget(b2Vec2(currPos.x / BOX2D_SCALE_FACTOR, currPos.y / BOX2D_SCALE_FACTOR));
+		m_curr_pos = m_stage->TransPosScrToProj(x, y);
+		m_mouseJoint->SetTarget(b2Vec2(m_curr_pos.x / BOX2D_SCALE_FACTOR, m_curr_pos.y / BOX2D_SCALE_FACTOR));
 	}
 
 	return false;

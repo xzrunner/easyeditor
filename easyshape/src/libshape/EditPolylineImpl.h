@@ -43,14 +43,14 @@ private:
 	class InterruptChainVisitor : public ee::Visitor
 	{
 	public:
-		InterruptChainVisitor(const ee::Vector& pos, int tol);
+		InterruptChainVisitor(const sm::vec2& pos, int tol);
 
 		virtual void Visit(ee::Object* object, bool& next);
 
 		ChainShape* getInterruptedChain() { return m_chain; }
 
 	private:
-		const ee::Vector& m_pos;
+		const sm::vec2& m_pos;
 		int m_tol;
 		ChainShape* m_chain;
 
@@ -59,20 +59,21 @@ private:
 	class NearestNodeVisitor : public ee::Visitor
 	{
 	public:
-		NearestNodeVisitor(const ee::Vector& pos, int tol);
+		NearestNodeVisitor(const sm::vec2& pos, int tol);
 
 		virtual void Visit(ee::Object* object, bool& next);
 
-		const ee::Vector& getNearestNode() const {
+		const sm::vec2& getNearestNode() const {
 			return m_nearest;
 		}
 
 	private:
-		ee::Vector m_pos;
+		sm::vec2 m_pos;
 		int m_tol;
 
 		float m_dis;
-		ee::Vector m_nearest;
+		sm::vec2 m_nearest;
+		bool m_nearest_valid;
 
 	}; // NearestNodeVisitor
 
@@ -99,8 +100,10 @@ protected:
 	ee::EditOP* m_selectOP;
 
 private:
-	ee::Vector m_lastLeftDownPos;
-	bool m_bSelectOpen;
+	sm::vec2 m_last_left_down_pos;
+	bool m_last_left_down_pos_valid;
+
+	bool m_is_select_open;
 
 	ee::OneFloatValue* m_node_capture;
 

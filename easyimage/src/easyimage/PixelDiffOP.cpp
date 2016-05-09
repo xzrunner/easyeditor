@@ -27,7 +27,7 @@ bool PixelDiffOP::OnMouseLeftDown(int x, int y)
 	const ee::Sprite* s_right = m_stage->GetRight();
 	ee::Image* left = static_cast<const ee::ImageSymbol&>(static_cast<const ee::ImageSprite*>(s_left)->GetSymbol()).GetImage();
 	ee::Image* right = static_cast<const ee::ImageSymbol&>(static_cast<const ee::ImageSprite*>(s_right)->GetSymbol()).GetImage();
-	ee::Vector p = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 p = m_stage->TransPosScrToProj(x, y);
 
 	m_stage->GetLeft()->GetSymbol().GetSize();
 
@@ -45,7 +45,7 @@ bool PixelDiffOP::OnDraw() const
 {
 // 	if (ee::ZoomViewOP::OnDraw()) return true;
 // 
-// 	ee::RVG::Line(ee::Vector(0, -1024), ee::Vector(0, 1024), ee::LIGHT_GREY);
+// 	ee::RVG::Line(sm::vec2(0, -1024), sm::vec2(0, 1024), ee::LIGHT_GREY);
 
 	return false;
 }

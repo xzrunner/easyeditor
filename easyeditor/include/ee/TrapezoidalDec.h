@@ -1,7 +1,7 @@
 #ifndef _EASYEDITOR_TRAPEZOIDAL_DECOMPOSITION_H_
 #define _EASYEDITOR_TRAPEZOIDAL_DECOMPOSITION_H_
 
-#include "Vector.h"
+#include <SM_Vector.h>
 
 #include <vector>
 
@@ -14,11 +14,11 @@ public:
 	TrapezoidalDec();
 	~TrapezoidalDec();
 
-	void Insert(const Vector& p0, const Vector& p1);
+	void Insert(const sm::vec2& p0, const sm::vec2& p1);
 
 private:
-	void InitRoot(const Vector& lpos, const Vector& rpos);
-	void InsertSeg(const Vector& lpos, const Vector& rpos);
+	void InitRoot(const sm::vec2& lpos, const sm::vec2& rpos);
+	void InsertSeg(const sm::vec2& lpos, const sm::vec2& rpos);
 
 private:
 	class INode
@@ -36,7 +36,7 @@ private:
 
 		virtual Type GetType() const = 0;
 
-		virtual INode* Query(const Vector& pos) = 0;
+		virtual INode* Query(const sm::vec2& pos) = 0;
 
 		void SetChild0(INode* c) { m_child0 = c; c->m_parent = this; }
 		void SetChild1(INode* c) { m_child1 = c; c->m_parent = this; }
@@ -50,14 +50,14 @@ private:
 	class Node : public INode
 	{
 	public:
-		Node(const Vector& pos) : m_pos(pos) {}
+		Node(const sm::vec2& pos) : m_pos(pos) {}
 
 		virtual Type GetType() const { return e_node; }
 
-		virtual INode* Query(const Vector& pos);
+		virtual INode* Query(const sm::vec2& pos);
 
 	public:
-		Vector m_pos;
+		sm::vec2 m_pos;
 	}; // Node
 
 	class Seg : public INode
@@ -68,7 +68,7 @@ private:
 
 		virtual Type GetType() const { return e_seg; }
 
-		virtual INode* Query(const Vector& pos);
+		virtual INode* Query(const sm::vec2& pos);
 
 	public:
 		Node *m_left, *m_right;
@@ -83,7 +83,7 @@ private:
 
 		virtual Type GetType() const { return e_area; }
 
-		virtual INode* Query(const Vector& pos);
+		virtual INode* Query(const sm::vec2& pos);
 
 	public:
 		Seg *m_top, *m_bottom;

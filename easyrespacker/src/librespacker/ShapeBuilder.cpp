@@ -81,7 +81,7 @@ void ShapeBuilder::Load(const etexture::Symbol* symbol, PackShape* shape)
 		throw ee::Exception("ShapeBuilder::Load !material, filepath: %s", symbol->GetFilepath().c_str());
 	}
 
-	const std::vector<ee::Vector>& vertices = material->GetTriangles();
+	const std::vector<sm::vec2>& vertices = material->GetTriangles();
 	if (vertices.size() % 3 != 0) {
 		throw ee::Exception("ShapeBuilder::Load err meaterial, filepath: %s", symbol->GetFilepath().c_str());
 	}

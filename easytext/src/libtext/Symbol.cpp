@@ -94,7 +94,7 @@ void Symbol::DrawBackground(const ee::Sprite* sprite, const sm::mat4& mt) const
 		float hw = w * 0.5f,
 			hh = h * 0.5f;
 
-		ee::Vector min(-hw, -hh), max(hw, hh);
+		sm::vec2 min(-hw, -hh), max(hw, hh);
 		min = ee::Math2D::TransVector(min, mt);
 		max = ee::Math2D::TransVector(max, mt);
 

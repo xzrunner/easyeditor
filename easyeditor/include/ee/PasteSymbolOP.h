@@ -2,7 +2,8 @@
 #define _EASYEDITOR_PASTE_SYMBOL_H_
 
 #include "ZoomViewOP.h"
-#include "Vector.h"
+
+#include <SM_Vector.h>
 
 namespace ee
 {
@@ -26,7 +27,8 @@ protected:
 
 	float* m_scale;
 
-	Vector m_pos;
+	sm::vec2 m_pos;
+	bool m_pos_valid;
 
 }; // PasteSymbolOP
 

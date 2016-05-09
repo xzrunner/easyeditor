@@ -18,11 +18,10 @@ SelectShapesOP::SelectShapesOP(wxWindow* wnd, EditPanelImpl* stage, MultiShapesI
 	, m_callback(callback)
 	, m_shape_impl(shapes_impl)
 	, m_bDraggable(true)
+	, m_first_pos_valid(false)
 {
 	m_selection = shapes_impl->GetShapeSelection();
 	m_selection->Retain();
-
-	m_first_pos.SetInvalid();
 }
 
 SelectShapesOP::~SelectShapesOP()
@@ -70,9 +69,9 @@ bool SelectShapesOP::OnMouseLeftDown(int x, int y)
 {
 	m_bDraggable = true;
 
-	m_move_last_pos.SetInvalid();
+//	m_move_last_pos.SetInvalid();
 
-	Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	Shape* selected = m_shape_impl->QueryShapeByPos(pos);
 	if (selected)
 	{
@@ -96,7 +95,7 @@ bool SelectShapesOP::OnMouseLeftDown(int x, int y)
 				m_move_last_pos = pos;
 			}
 		}
-		m_first_pos.SetInvalid();
+		m_first_pos_valid = false;
 
 		if (m_callback)
 			m_callback->UpdateControlValue();
@@ -105,6 +104,7 @@ bool SelectShapesOP::OnMouseLeftDown(int x, int y)
 	{
 		DrawRectangleOP::OnMouseLeftDown(x, y);
 		m_first_pos = pos;
+		m_first_pos_valid = true;
 		if (m_stage->GetKeyState(WXK_CONTROL))
 			m_bDraggable = false;
 		else
@@ -120,7 +120,7 @@ bool SelectShapesOP::OnMouseLeftUp(int x, int y)
 
 	m_bDraggable = true;
 
-	if (m_first_pos.IsValid())
+	if (m_first_pos_valid)
 	{
 		Rect rect(m_first_pos, m_stage->TransPosScrToProj(x, y));
 		std::vector<Shape*> shapes;
@@ -130,7 +130,7 @@ bool SelectShapesOP::OnMouseLeftUp(int x, int y)
 
 		SelectShapeSetSJ::Instance()->Selecte(m_selection, m_shape_impl);
 
-		m_first_pos.SetInvalid();
+		m_first_pos_valid = false;
 
 		if (m_callback) {
 			m_callback->UpdateControlValue();
@@ -148,7 +148,7 @@ bool SelectShapesOP::OnMouseDrag(int x, int y)
 
 //	// no need to move shape?
 // 	if (!m_selection->IsEmpty() && m_move_last_pos.IsValid()) {
-// 		Vector pos = m_stage->TransPosScrToProj(x, y);
+// 		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 // 		m_selection->Traverse(TranslateVisitor(pos - m_move_last_pos));
 // 		m_move_last_pos = pos;
 // 	}
@@ -171,7 +171,7 @@ bool SelectShapesOP::Clear()
 
 	clearClipboard();
 	m_selection->Clear();
-	m_first_pos.SetInvalid();
+	m_first_pos_valid = false;
 
 	return false;
 }

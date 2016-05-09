@@ -9,10 +9,10 @@ namespace eanim
 class TranslateSpriteState : public ee::TranslateSpriteState
 {
 public:
-	TranslateSpriteState(ee::SpriteSelection* selection, const ee::Vector& first_pos);
+	TranslateSpriteState(ee::SpriteSelection* selection, const sm::vec2& first_pos);
 	
 protected:
-	virtual void Translate(const ee::Vector& offset);
+	virtual void Translate(const sm::vec2& offset);
 
 }; // TranslateSpriteState 
 

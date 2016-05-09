@@ -2,7 +2,6 @@
 #define _EASYMESH_NODE_H_
 
 #include <ee/Object.h>
-#include <ee/Vector.h>
 #include <ee/SelectionSet.h>
 
 namespace emesh
@@ -12,13 +11,13 @@ class Node : public ee::Object
 {
 public:
 	Node() : ud(NULL) {}
-	Node(const ee::Vector& pos, int width, int height) 
+	Node(const sm::vec2& pos, int width, int height) 
 		: ud(NULL) {
 		xy = ori_xy = pos;
  		uv.x = pos.x / width + 0.5f;
  		uv.y = pos.y / height + 0.5f;
 	}
-	Node(const ee::Vector& _xy, const ee::Vector& _uv) 
+	Node(const sm::vec2& _xy, const sm::vec2& _uv) 
 		: ud(NULL) {
 		xy = ori_xy = _xy;
 		uv = _uv;
@@ -30,8 +29,8 @@ public:
 	}
 
 public:
-	ee::Vector uv, xy;
-	ee::Vector ori_xy;
+	sm::vec2 uv, xy;
+	sm::vec2 ori_xy;
 
 	void* ud;
 

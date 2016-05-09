@@ -1,15 +1,13 @@
 #ifndef _EASYMODELING_WORLD_H_
 #define _EASYMODELING_WORLD_H_
 
-#include <ee/Vector.h>
-
 namespace emodeling
 {
 
 class World
 {
 public:
-	ee::Vector gravity;
+	sm::vec2 gravity;
 	bool allowSleep;
 
 	bool warmStarting;

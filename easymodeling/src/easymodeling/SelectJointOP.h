@@ -47,7 +47,7 @@ private:
 	Joint* m_selected;
 	Joint* m_mouseOn;
 
-	ee::Vector m_first_pos;
+	sm::vec2 m_first_pos;
 
 public:
 	ee::SelectionSet<Joint> jointSelection;

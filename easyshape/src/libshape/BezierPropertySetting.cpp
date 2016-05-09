@@ -28,13 +28,13 @@ void BezierPropertySetting::OnPropertyGridChange(const std::string& name, const 
 	{
 		const float x = wxANY_AS(value, float);
 		const float dx = x - m_bezier->GetRect().CenterX();
-		m_bezier->Translate(ee::Vector(dx, 0.0f));
+		m_bezier->Translate(sm::vec2(dx, 0.0f));
 	}
 	else if (name == wxT("Y"))
 	{
 		const float y = wxANY_AS(value, float);
 		const float dy = y - m_bezier->GetRect().CenterY();
-		m_bezier->Translate(ee::Vector(0.0f, dy));
+		m_bezier->Translate(sm::vec2(0.0f, dy));
 	}
 	else if (name == wxT("Mirror"))
 	{

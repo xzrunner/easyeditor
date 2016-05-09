@@ -2,7 +2,8 @@
 #define _EASYEDITOR_SET_SPRITE_SCALE_AOP_H_
 
 #include "AtomicOP.h"
-#include "Vector.h"
+
+#include <SM_Vector.h>
 
 namespace ee
 {
@@ -13,7 +14,7 @@ class Sprite;
 	class SetSprite##name##AOP : public AtomicOP \
 	{ \
 	public: \
-		SetSprite##name##AOP(const std::vector<Sprite*>& sprites, const Vector& val); \
+		SetSprite##name##AOP(const std::vector<Sprite*>& sprites, const sm::vec2& val); \
 		virtual ~SetSprite##name##AOP(); \
 	\
 		virtual void Undo(); \
@@ -23,9 +24,9 @@ class Sprite;
 	\
 	private: \
 		std::vector<Sprite*> m_sprites; \
-		std::vector<Vector> m_old; \
+		std::vector<sm::vec2> m_old; \
 	\
-		Vector m_new; \
+		sm::vec2 m_new; \
 	}; \
 
 SET_SPRITE_TWO_AOP_DEC(Scale)

@@ -23,18 +23,18 @@ public:
 	// interface IPathfinding
 	//
 	virtual void DisableRegion(const ee::Sprite* spr, bool disable);
-	virtual void QueryRoute(const ee::Vector& start, const ee::Vector& end);
+	virtual void QueryRoute(const sm::vec2& start, const sm::vec2& end);
 	virtual void DebugDraw() const;
 
 	//
 	// interface INetwork
 	//
-	virtual ee::Vector TransIDToPos(int id) const;
+	virtual sm::vec2 TransIDToPos(int id) const;
 
 private:
 	struct Node
 	{
-		ee::Vector bound[3];
+		sm::vec2 bound[3];
 
 		std::vector<Node*> connected;
 
@@ -50,9 +50,9 @@ private:
 	VisitedList m_visited;
 	CandidateList m_candidate;
 
-	std::map<const ee::Sprite*, std::vector<ee::Vector> > m_bounds;
+	std::map<const ee::Sprite*, std::vector<sm::vec2> > m_bounds;
 
-	std::vector<ee::Vector> m_tris;
+	std::vector<sm::vec2> m_tris;
 
 }; // PathNavMesh
 

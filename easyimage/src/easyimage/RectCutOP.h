@@ -37,16 +37,18 @@ public:
 private:
 	void DrawCaptureLine() const;
 
-	void FixedPos(ee::Vector& pos) const;
+	void FixedPos(sm::vec2& pos) const;
 
 private:
 	RectCutCMPT* m_cmpt;
 
 	StagePanel* m_stage;
 
-	ee::Vector m_first_pos, m_curr_pos;
+	sm::vec2 m_first_pos, m_curr_pos;
+	bool m_first_pos_valid, m_curr_pos_valid;
 
-	ee::Vector m_captured;
+	sm::vec2 m_captured;
+	bool m_captured_valid;
 
 	RectMgr::Node m_node_selected;
 	ee::Rect* m_rect_selected;

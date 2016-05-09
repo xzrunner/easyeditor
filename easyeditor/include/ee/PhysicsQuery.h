@@ -1,18 +1,18 @@
 #ifndef _EASYEDITOR_PHYSICS_QUERY_H_
 #define _EASYEDITOR_PHYSICS_QUERY_H_
 
+#include <SM_Vector.h>
+
 #include <Box2D/Box2D.h>
 
 namespace ee
 {
 
-class Vector;
-
 class PhysicsQuery
 {
 public:
-	static b2Body* QueryOn(b2World* world, const Vector& pos);
-	static b2Body* QueryNear(b2World* world, const Vector& pos);
+	static b2Body* QueryOn(b2World* world, const sm::vec2& pos);
+	static b2Body* QueryNear(b2World* world, const sm::vec2& pos);
 
 private:
 	class QueryCallback : public b2QueryCallback

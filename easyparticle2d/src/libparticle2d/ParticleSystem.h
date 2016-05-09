@@ -3,7 +3,6 @@
 
 #include <ee/Object.h>
 #include <ee/UICallback.h>
-#include <ee/Vector.h>
 
 #include <SM_Matrix.h>
 
@@ -59,7 +58,7 @@ public:
 	const p2d_emitter* GetEmitter() const { return m_et; }
 
 private:
-	ee::Vector m_pos;
+	sm::vec2 m_pos;
 
 	p2d_emitter* m_et;
 

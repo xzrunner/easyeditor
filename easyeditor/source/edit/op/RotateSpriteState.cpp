@@ -8,7 +8,7 @@ namespace ee
 {
 
 RotateSpriteState::RotateSpriteState(SpriteSelection* selection, 
-									 const Vector& first_pos)
+									 const sm::vec2& first_pos)
 {
 	m_selection = selection;
 	m_selection->Retain();
@@ -21,7 +21,7 @@ RotateSpriteState::~RotateSpriteState()
 	m_selection->Release();
 }
 
-void RotateSpriteState::OnMouseRelease(const Vector& pos)
+void RotateSpriteState::OnMouseRelease(const sm::vec2& pos)
 {
 	if (pos != m_first_pos) {
 		AtomicOP* aop = new RotateSpriteAOP(*m_selection, m_first_pos, pos);
@@ -29,7 +29,7 @@ void RotateSpriteState::OnMouseRelease(const Vector& pos)
 	}
 }
 
-bool RotateSpriteState::OnMouseDrag(const Vector& pos)
+bool RotateSpriteState::OnMouseDrag(const sm::vec2& pos)
 {
 	if (m_selection->Size() != 1) return false;
 
@@ -39,7 +39,7 @@ bool RotateSpriteState::OnMouseDrag(const Vector& pos)
 	return true;
 }
 
-void RotateSpriteState::Rotate(const Vector& dst)
+void RotateSpriteState::Rotate(const sm::vec2& dst)
 {
 	m_selection->Traverse(RotateVisitor(m_last_pos, dst));
 }
@@ -53,7 +53,7 @@ Visit(Object* object, bool& next)
 {
 	Sprite* sprite = static_cast<Sprite*>(object);
 
-	Vector center = sprite->GetPosition() + sprite->GetOffset();
+	sm::vec2 center = sprite->GetPosition() + sprite->GetOffset();
 	float angle = Math2D::GetAngleInDirection(center, m_start, m_end);
 	sprite->Rotate(angle);
 

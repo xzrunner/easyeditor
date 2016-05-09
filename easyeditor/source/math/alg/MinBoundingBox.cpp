@@ -10,18 +10,18 @@ namespace ee
 // bounding:
 // 1  2
 // 0  3
-bool MinBoundingBox::Do(const std::vector<Vector>& points, 
-							   Vector bounding[4])
+bool MinBoundingBox::Do(const std::vector<sm::vec2>& points, 
+							   sm::vec2 bounding[4])
 {
 	// convex hull
-	std::vector<Vector> convex_hull;
+	std::vector<sm::vec2> convex_hull;
 	ConvexHull::Do(points, convex_hull);
 
 	// normal
 	float xmin = FLT_MAX, xmax = -FLT_MAX,
 		  ymin = FLT_MAX, ymax = -FLT_MAX;
 	for (int i = 0, n = convex_hull.size(); i < n; ++i) {
-		const Vector& p = convex_hull[i];
+		const sm::vec2& p = convex_hull[i];
 		if (p.x < xmin) { xmin = p.x; }
 		if (p.x > xmax) { xmax = p.x; }
 		if (p.y < ymin) { ymin = p.y; }
@@ -52,9 +52,9 @@ bool MinBoundingBox::Do(const std::vector<Vector>& points,
 	return b;
 }
 
-bool MinBoundingBox::TextOtherDir(const std::vector<Vector>& points, 
-								  const Vector& start, const Vector& end,
-								  float& min_area, Vector bounding[4])
+bool MinBoundingBox::TextOtherDir(const std::vector<sm::vec2>& points, 
+								  const sm::vec2& start, const sm::vec2& end,
+								  float& min_area, sm::vec2 bounding[4])
 {
 	float dx = start.x - end.x,
 		  dy = start.y - end.y;
@@ -96,7 +96,7 @@ bool MinBoundingBox::TextOtherDir(const std::vector<Vector>& points,
 	return true;
 }
 
-void MinBoundingBox::CalculateB(const std::vector<Vector>& points, float k,
+void MinBoundingBox::CalculateB(const std::vector<sm::vec2>& points, float k,
 								float& b_min, float& b_max)
 {
 	b_min = FLT_MAX;

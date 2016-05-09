@@ -3,7 +3,7 @@
 
 #include "ICommand.h"
 
-#include <ee/Vector.h>
+#include <SM_Vector.h>
 
 #include <json/json.h>
 
@@ -41,10 +41,10 @@ private:
 
 		std::string filepath;
 
-		ee::Vector pos;
+		sm::vec2 pos;
 		float angle;
-		ee::Vector scale;
-		ee::Vector shear;
+		sm::vec2 scale;
+		sm::vec2 shear;
 
 		Json::Value json_val;
 

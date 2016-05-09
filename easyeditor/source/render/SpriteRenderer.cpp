@@ -48,7 +48,7 @@ void SpriteRenderer::Draw(const Sprite* spr,
 	if (ct.mode == CM_PERSPECTIVE_AUTO_HEIGHT) {
 		if (trans.camera.base_y == FLT_MAX) {
 			ct.base_y = trans.camera.base_y;
-			std::vector<Vector> bound;
+			std::vector<sm::vec2> bound;
 			spr->GetBounding()->GetBoundPos(bound);
 			for (int i = 0, n = bound.size(); i < n; ++i) {
 				if (bound[i].y < ct.base_y) {
@@ -101,7 +101,7 @@ void SpriteRenderer::InvalidRect(const Sprite* sprite, const sm::mat4& mt)
 
 void SpriteRenderer::Draw(const Symbol* symbol, 
 						  const RenderParams& trans /*= RenderParams()*/,
-						  const Vector& pos, 
+						  const sm::vec2& pos, 
 						  float angle/* = 0.0f*/, 
 						  float xScale/* = 1.0f*/, 
 						  float yScale/* = 1.0f*/, 
@@ -151,7 +151,7 @@ void SpriteRenderer::DrawImpl(const Sprite* spr,
 
 	if (spr->IsAnchor() && Config::Instance()->GetSettings().draw_anchor) 
 	{
-		std::vector<Vector> bound;
+		std::vector<sm::vec2> bound;
 		spr->GetBounding()->GetBoundPos(bound);
 		for (int i = 0, n = bound.size(); i < n; ++i) {
 			bound[i] = Math2D::TransVector(bound[i], trans.mt);

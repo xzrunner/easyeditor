@@ -18,9 +18,9 @@ PasteSymbolOffsetCMPT(wxWindow* parent, const std::string& name,
 }
 
 template <typename TOperation>
-Vector PasteSymbolOffsetCMPT<TOperation>::GetOffset() const
+sm::vec2 PasteSymbolOffsetCMPT<TOperation>::GetOffset() const
 {
-	return Vector(m_xspin->GetValue(), m_yspin->GetValue());
+	return sm::vec2(m_xspin->GetValue(), m_yspin->GetValue());
 }
 
 template <typename TOperation>

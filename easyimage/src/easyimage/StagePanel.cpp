@@ -46,7 +46,7 @@ void StagePanel::SetImage(const std::string& filepath)
 void StagePanel::SetImage(ee::Symbol* symbol)
 {
 	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-	ee::Vector off;
+	sm::vec2 off;
 	off.x = sprite->GetSymbol().GetSize().Width() * 0.5f;
 	off.y = sprite->GetSymbol().GetSize().Height() * 0.5f;
 	sprite->Translate(off);
@@ -85,14 +85,14 @@ OnDropText(wxCoord x, wxCoord y, const wxString& text)
 
 // 	// todo for diff
 // 	// fixme
-// 	ee::Vector pos = m_stage->transPosScreenToProject(x, y);
+// 	sm::vec2 pos = m_stage->transPosScreenToProject(x, y);
 // 	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 // 	ee::Rect r = sprite->getSymbol().getSize();
 // 	if (pos.x < 0) {
-// 		sprite->setTransform(ee::Vector(-r.Width() * 0.5f - 10, 0.0f), 0);
+// 		sprite->setTransform(sm::vec2(-r.Width() * 0.5f - 10, 0.0f), 0);
 // 		m_stage->m_left = sprite;
 // 	} else {
-// 		sprite->setTransform(ee::Vector(r.Width() * 0.5f + 10, 0.0f), 0);
+// 		sprite->setTransform(sm::vec2(r.Width() * 0.5f + 10, 0.0f), 0);
 // 		m_stage->m_right = sprite;
 // 	}
 }

@@ -16,7 +16,7 @@ RenderCamera::RenderCamera()
 }
 
 void RenderCamera::CalculateZ(const Pseudo3DCamera* cam, 
-							  Vector vertices[4], float z[4]) const
+							  sm::vec2 vertices[4], float z[4]) const
 {
 	if (mode == CM_ORTHO || mode == CM_PERSPECTIVE_NO_HEIGHT) {
 		memset(z, 0, sizeof(float) * 4);

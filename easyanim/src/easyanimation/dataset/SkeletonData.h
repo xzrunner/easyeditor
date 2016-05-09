@@ -1,8 +1,6 @@
 #ifndef _EASYANIM_SKELETON_DATA_H_
 #define _EASYANIM_SKELETON_DATA_H_
 
-#include <ee/Vector.h>
-
 #include <vector>
 #include <map>
 
@@ -25,10 +23,10 @@ public:
 	void RemoveSprite(ee::Sprite* sprite);
 	bool IsContainSprite(ee::Sprite* sprite) const;
 
-	void InsertJoint(ee::Sprite* sprite, const ee::Vector& pos);
-	void RemoveJoint(ee::Vector& pos);
+	void InsertJoint(ee::Sprite* sprite, const sm::vec2& pos);
+	void RemoveJoint(sm::vec2& pos);
 
-	Joint* QueryJointByPos(const ee::Vector& pos);
+	Joint* QueryJointByPos(const sm::vec2& pos);
 
 	void Draw() const;
 
@@ -44,7 +42,7 @@ public:
 private:
 	void Clean();
 
-	void Translate(ee::Sprite* sprite, const ee::Vector& offset);
+	void Translate(ee::Sprite* sprite, const sm::vec2& offset);
 
 	static ee::Sprite* GetSpriteByName(const std::vector<ee::Sprite*>& sprites, const std::string& name);
 

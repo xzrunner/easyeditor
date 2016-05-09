@@ -47,8 +47,8 @@ bool UIList::InsertSprite(ee::Sprite* sprite, int idx)
 		return true;
 	}
 
-	ee::Vector base_pos = m_items[0]->GetPosition();
-	ee::Vector new_pos = sprite->GetPosition();
+	sm::vec2 base_pos = m_items[0]->GetPosition();
+	sm::vec2 new_pos = sprite->GetPosition();
 	if (m_vert_count == 1 && m_hori_count == 1) {
 		if (base_pos == new_pos) {
 			return false;
@@ -284,7 +284,7 @@ bool UIList::Filling()
 	for_each(m_items.begin(), m_items.end(), ee::ReleaseObjectFunctor<ee::Sprite>());
 	m_items.clear();
 
-	ee::Vector base = m_item_spr->GetPosition();
+	sm::vec2 base = m_item_spr->GetPosition();
 	ee::Rect item_r = m_item_spr->GetRect();
 	float hw = item_r.Width() * 0.5f;
 	float hh = item_r.Height() * 0.5f;
@@ -297,7 +297,7 @@ bool UIList::Filling()
 		region.ymin -= m_vert_space * 2;
 	}
 
-	ee::Vector pos = base;
+	sm::vec2 pos = base;
 	m_hori_count = m_vert_count = 0;
 	while (true) {
 		bool new_line = false;
@@ -346,7 +346,7 @@ bool UIList::Arrange(float hori_space, float vert_space)
 
 	m_hori_space = hori_space;
 	m_vert_space = vert_space;
-	ee::Vector pos = m_items[0]->GetPosition();
+	sm::vec2 pos = m_items[0]->GetPosition();
 	float x_base = pos.x;
 	int count = 0;
 	for (int i = 0, n = m_items.size(); i < n; ++i) {

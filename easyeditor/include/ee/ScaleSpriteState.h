@@ -13,18 +13,18 @@ public:
 	ScaleSpriteState(Sprite* sprite, const SpriteCtrlNode::Node& ctrl_node);
 	virtual ~ScaleSpriteState();
 
-	virtual void OnMouseRelease(const Vector& pos);
-	virtual	bool OnMouseDrag(const Vector& pos);
+	virtual void OnMouseRelease(const sm::vec2& pos);
+	virtual	bool OnMouseDrag(const sm::vec2& pos);
 
 protected:
-	virtual void Scale(const Vector& curr);
+	virtual void Scale(const sm::vec2& curr);
 
 private:
 	Sprite* m_sprite;
 
 	SpriteCtrlNode::Node m_ctrl_node;
 
-	Vector m_first_pos, m_first_scale;
+	sm::vec2 m_first_pos, m_first_scale;
 
 }; // ScaleSpriteState
 

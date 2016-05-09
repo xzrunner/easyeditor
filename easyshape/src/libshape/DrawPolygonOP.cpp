@@ -21,7 +21,7 @@ bool DrawPolygonOP::OnMouseLeftDClick(int x, int y)
 	{
 		ee::InsertShapeSJ::Instance()->Insert(new PolygonShape(m_polyline));
 		m_polyline.clear();
-		m_curr_pos.SetInvalid();
+		m_curr_pos_valid = false;
 	}
 
 	return false;

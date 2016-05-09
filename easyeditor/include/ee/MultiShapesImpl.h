@@ -5,6 +5,8 @@
 #include "Observer.h"
 #include "Visitor.h"
 
+#include <SM_Vector.h>
+
 #include <wx/wx.h>
 
 namespace ee
@@ -15,7 +17,6 @@ class ShapeSelection;
 class Rect;
 class Shape;
 class Visitor;
-class Vector;
 
 class MultiShapesImpl : public Observer
 {
@@ -26,7 +27,7 @@ public:
 	virtual void TraverseShapes(Visitor& visitor, 
 		DataTraverseType type = DT_ALL) const = 0;
 
-	Shape* QueryShapeByPos(const Vector& pos) const;
+	Shape* QueryShapeByPos(const sm::vec2& pos) const;
 	void QueryShapesByRect(const Rect& rect, std::vector<Shape*>& result) const;		
 
 	ShapeSelection* GetShapeSelection() { return m_shape_selection; }
@@ -42,11 +43,11 @@ private:
 	class PointQueryVisitor : public Visitor
 	{
 	public:
-		PointQueryVisitor(const Vector& pos, Shape** pResult);
+		PointQueryVisitor(const sm::vec2& pos, Shape** pResult);
 		virtual void Visit(Object* object, bool& next);
 
 	private:
-		const Vector& m_pos;
+		const sm::vec2& m_pos;
 		Shape** m_pResult;
 
 	}; // PointQueryVisitor

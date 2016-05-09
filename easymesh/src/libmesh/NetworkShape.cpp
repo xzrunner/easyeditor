@@ -52,7 +52,7 @@ void NetworkShape::StoreToFile(Json::Value& value, const std::string& dir) const
 	ee::JsonSerializer::Store(m_inner_vertices, shape_val["inner"]);
 }
 
-bool NetworkShape::InsertInner(const ee::Vector& pos)
+bool NetworkShape::InsertInner(const sm::vec2& pos)
 {
 	if (IsIntersect(ee::Rect(pos, NODE_RADIUS, NODE_RADIUS)) || !IsContain(pos)) {
 		return false;
@@ -61,10 +61,10 @@ bool NetworkShape::InsertInner(const ee::Vector& pos)
 	return true;
 }
 
-bool NetworkShape::RemoveInner(const ee::Vector& pos)
+bool NetworkShape::RemoveInner(const sm::vec2& pos)
 {
 	for (int i = 0, n = m_inner_vertices.size(); i < n; ++i) {
-		const ee::Vector& p = m_inner_vertices[i];
+		const sm::vec2& p = m_inner_vertices[i];
 		if (ee::Math2D::GetDistance(p, pos) < NODE_RADIUS) {
 			m_inner_vertices.erase(m_inner_vertices.begin() + i);
 			return true;
@@ -73,10 +73,10 @@ bool NetworkShape::RemoveInner(const ee::Vector& pos)
 	return false;
 }
 
-ee::Vector* NetworkShape::QueryInner(const ee::Vector& pos)
+sm::vec2* NetworkShape::QueryInner(const sm::vec2& pos)
 {
 	for (int i = 0, n = m_inner_vertices.size(); i < n; ++i) {
-		const ee::Vector& p = m_inner_vertices[i];
+		const sm::vec2& p = m_inner_vertices[i];
 		if (ee::Math2D::GetDistance(p, pos) < NODE_RADIUS) {
 			return &m_inner_vertices[i];
 		}

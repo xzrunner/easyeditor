@@ -4,7 +4,7 @@
 namespace ee
 {
 
-void DouglasPeucker::Do(const std::vector<Vector>& line, float precision, std::vector<Vector>& dst)
+void DouglasPeucker::Do(const std::vector<sm::vec2>& line, float precision, std::vector<sm::vec2>& dst)
 {
 	if (line.empty()) {
 		return;
@@ -18,7 +18,7 @@ void DouglasPeucker::Do(const std::vector<Vector>& line, float precision, std::v
 		if (flag[i]) dst.push_back(line[i]);
 }
 
-void DouglasPeucker::PointsReduction(const std::vector<Vector>& line, float precision, std::vector<bool>& flag,
+void DouglasPeucker::PointsReduction(const std::vector<sm::vec2>& line, float precision, std::vector<bool>& flag,
 									 size_t begin, size_t end)
 {
 	if ( begin > end )

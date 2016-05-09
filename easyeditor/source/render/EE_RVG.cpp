@@ -1,5 +1,4 @@
 #include "EE_RVG.h"
-#include "Vector.h"
 #include "Color.h"
 #include "trans_color.h"
 #include "CameraMgr.h"
@@ -37,7 +36,7 @@ void RVG::LineWidth(float width)
 	rvg_line_width(width);
 }
 
-void RVG::Point(const Vector& vertex)
+void RVG::Point(const sm::vec2& vertex)
 {
 	if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) {
 		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE2);
@@ -48,7 +47,7 @@ void RVG::Point(const Vector& vertex)
 	}
 }
 
-void RVG::Points(const std::vector<Vector>& vertices)
+void RVG::Points(const std::vector<sm::vec2>& vertices)
 {
 	if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) {
 		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE2);
@@ -63,7 +62,7 @@ void RVG::Points(const std::vector<Vector>& vertices)
 	}
 }
 
-void RVG::Line(const Vector& p0, const Vector& p1)
+void RVG::Line(const sm::vec2& p0, const sm::vec2& p1)
 {
 	rvg_line_style(LS_DEFAULT);
 
@@ -76,7 +75,7 @@ void RVG::Line(const Vector& p0, const Vector& p1)
 	}
 }
 
-void RVG::DotLine(const Vector& p0, const Vector& p1)
+void RVG::DotLine(const sm::vec2& p0, const sm::vec2& p1)
 {
 	rvg_line_style(LS_DOT);
 	if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) {
@@ -88,7 +87,7 @@ void RVG::DotLine(const Vector& p0, const Vector& p1)
 	}
 }
 
-void RVG::DashLine(const Vector& p0, const Vector& p1)
+void RVG::DashLine(const sm::vec2& p0, const sm::vec2& p1)
 {
 	rvg_line_style(LS_DASH);
 	if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) {
@@ -100,7 +99,7 @@ void RVG::DashLine(const Vector& p0, const Vector& p1)
 	}
 }
 
-void RVG::DotDashLine(const Vector& p0, const Vector& p1)
+void RVG::DotDashLine(const sm::vec2& p0, const sm::vec2& p1)
 {
 	rvg_line_style(LS_DOT_DASH);
 	if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) {
@@ -112,7 +111,7 @@ void RVG::DotDashLine(const Vector& p0, const Vector& p1)
 	}
 }
 
-void RVG::Lines(const std::vector<Vector>& vertices)
+void RVG::Lines(const std::vector<sm::vec2>& vertices)
 {
 	if (vertices.size() < 2) {
 		return;
@@ -132,7 +131,7 @@ void RVG::Lines(const std::vector<Vector>& vertices)
 	}
 }
 
-void RVG::Polyline(const std::vector<Vector>& vertices, bool loop)
+void RVG::Polyline(const std::vector<sm::vec2>& vertices, bool loop)
 {
 	if (vertices.size() < 2) {
 		return;
@@ -152,7 +151,7 @@ void RVG::Polyline(const std::vector<Vector>& vertices, bool loop)
 	}
 }
 
-void RVG::Triangles(const std::vector<Vector>& triangles)
+void RVG::Triangles(const std::vector<sm::vec2>& triangles)
 {
 	if (triangles.size() < 3) return;
 
@@ -169,12 +168,12 @@ void RVG::Triangles(const std::vector<Vector>& triangles)
 	}
 }
 
-void RVG::Triangles(const std::vector<Vector>& triangles, const std::vector<Colorf>& colors)
+void RVG::Triangles(const std::vector<sm::vec2>& triangles, const std::vector<Colorf>& colors)
 {
 	// todo
 }
 
-void RVG::TriangleStrip(const std::vector<Vector>& triangles)
+void RVG::TriangleStrip(const std::vector<sm::vec2>& triangles)
 {
 	if (triangles.size() < 3) return;
 
@@ -191,12 +190,12 @@ void RVG::TriangleStrip(const std::vector<Vector>& triangles)
 	}
 }
 
-void RVG::Rect(const Vector& center, float hw, float hh, bool filling)
+void RVG::Rect(const sm::vec2& center, float hw, float hh, bool filling)
 {
-	Rect(center - Vector(hw, hh), center + Vector(hw, hh), filling);
+	Rect(center - sm::vec2(hw, hh), center + sm::vec2(hw, hh), filling);
 }
 
-void RVG::Rect(const Vector& p0, const Vector& p1, bool filling)
+void RVG::Rect(const sm::vec2& p0, const sm::vec2& p1, bool filling)
 {
 	if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) {
 		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE2);
@@ -207,7 +206,7 @@ void RVG::Rect(const Vector& p0, const Vector& p1, bool filling)
 	}
 }
 
-void RVG::Circle(const Vector& center, float radius, bool filling, int segments)
+void RVG::Circle(const sm::vec2& center, float radius, bool filling, int segments)
 {
 	if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) {
 		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE2);
@@ -218,21 +217,21 @@ void RVG::Circle(const Vector& center, float radius, bool filling, int segments)
 	}
 }
 
-void RVG::Circles(const std::vector<Vector>& circles, float radius, bool filling, int segments)
+void RVG::Circles(const std::vector<sm::vec2>& circles, float radius, bool filling, int segments)
 {
 	for (int i = 0, n = circles.size(); i < n; ++i) {
 		Circle(circles[i], radius, filling, segments);
 	}
 }
 
-void RVG::Cross(const Vector& center, float edge)
+void RVG::Cross(const sm::vec2& center, float edge)
 {
 	Cross(center, edge, edge);
 }
 
-void RVG::Cross(const Vector& center, float xedge, float yedge)
+void RVG::Cross(const sm::vec2& center, float xedge, float yedge)
 {
-	Vector s = center, e = center;
+	sm::vec2 s = center, e = center;
 	s.x -= xedge;
 	e.x += xedge;
 	Line(s, e);

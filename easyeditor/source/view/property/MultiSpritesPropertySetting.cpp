@@ -150,7 +150,7 @@ void MultiSpritesPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 
 	pg->GetProperty(wxT("对齐"))->SetValue(wxT("无"));
 	pg->GetProperty(wxT("居中"))->SetValue(wxT("无"));
-	Vector pos = m_impl->GetPosition();
+	sm::vec2 pos = m_impl->GetPosition();
 	pg->GetProperty(wxT("All Pos.X"))->SetValue(pos.x);
 	pg->GetProperty(wxT("All Pos.Y"))->SetValue(pos.y);
 	pg->GetProperty(wxT("All Pos"))->SetValue(pg->GetProperty(wxT("All Pos"))->GenerateComposedValue());
@@ -164,7 +164,7 @@ void MultiSpritesPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	pg->GetProperty(wxT("dScale"))->SetValue(pg->GetProperty(wxT("dScale"))->GenerateComposedValue());
 
 	pg->GetProperty(wxT("Angle"))->SetValue(m_impl->GetAngle());
-	Vector scale = m_impl->GetScale();
+	sm::vec2 scale = m_impl->GetScale();
 	pg->GetProperty(wxT("Scale.X"))->SetValue(scale.x);
 	pg->GetProperty(wxT("Scale.Y"))->SetValue(scale.y);
 	pg->GetProperty(wxT("Scale"))->SetValue(pg->GetProperty(wxT("Scale"))->GenerateComposedValue());
@@ -224,7 +224,7 @@ void MultiSpritesPropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	pg->Append(new wxEnumProperty(wxT("居中"), wxPG_LABEL, MultiSpritesPropertyImpl::CENTER_LABELS));
 
-	Vector pos = m_impl->GetPosition();
+	sm::vec2 pos = m_impl->GetPosition();
 	wxPGProperty* all_pos_prop = pg->Append(new wxStringProperty(wxT("All Pos"), wxPG_LABEL, wxT("<composed>")));
 	all_pos_prop->SetExpanded(false);
 	pg->AppendIn(all_pos_prop, new wxFloatProperty(wxT("X"), wxPG_LABEL, pos.x));

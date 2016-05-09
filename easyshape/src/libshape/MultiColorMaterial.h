@@ -9,7 +9,7 @@
 //class MultiColorMaterial : public Material
 //{
 //public:
-//	MultiColorMaterial(const std::vector<ee::Vector>& vertices,
+//	MultiColorMaterial(const std::vector<sm::vec2>& vertices,
 //		const ee::Colorf& color);
 //
 //	virtual Json::Value Store(const std::string& dirpath) const;
@@ -19,9 +19,9 @@
 //	virtual void ReloadTexture() {}
 //
 //protected:
-//	virtual void Build(const std::vector<ee::Vector>& vertices);
-//	virtual void Build(const std::vector<ee::Vector>& vertices,
-//		const std::vector<ee::Vector>& segments);
+//	virtual void Build(const std::vector<sm::vec2>& vertices);
+//	virtual void Build(const std::vector<sm::vec2>& vertices,
+//		const std::vector<sm::vec2>& segments);
 //
 //private:
 //	std::vector<ee::Colorf> m_colors;

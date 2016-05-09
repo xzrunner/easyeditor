@@ -21,12 +21,12 @@ NodeCapture::NodeCapture(ee::MultiShapesImpl* shapes_impl, int tol)
 {
 }
 
-void NodeCapture::captureEditable(const ee::Vector& pos, NodeAddr& result)
+void NodeCapture::captureEditable(const sm::vec2& pos, NodeAddr& result)
 {
 	m_shapes_impl->TraverseShapes(RectQueryVisitor(pos, m_tol, result), ee::DT_EDITABLE);
 }
 
-void NodeCapture::captureSelectable(const ee::Vector& pos, NodeAddr& result)
+void NodeCapture::captureSelectable(const sm::vec2& pos, NodeAddr& result)
 {
 	m_shapes_impl->TraverseShapes(RectQueryVisitor(pos, m_tol, result), ee::DT_SELECTABLE);
 }
@@ -36,7 +36,7 @@ void NodeCapture::captureSelectable(const ee::Vector& pos, NodeAddr& result)
 //////////////////////////////////////////////////////////////////////////
 
 NodeCapture::RectQueryVisitor::
-RectQueryVisitor(const ee::Vector& pos, float tolerance, NodeAddr& result)
+RectQueryVisitor(const sm::vec2& pos, float tolerance, NodeAddr& result)
 	: m_pos(pos)
 	, m_tolerance(tolerance)
 	, m_rect(pos, tolerance, tolerance)
@@ -81,7 +81,7 @@ Visit(PointShape* point)
 {
 	if (ee::Math2D::GetDistance(point->GetPos(), m_pos) < m_tolerance) {
 		m_result.shape = point;
-		m_result.pos.SetInvalid();
+		m_result.pos_valid = false;
 		return true;
 	} else {
 		return false;
@@ -93,19 +93,20 @@ Visit(BezierShape* bezier)
 {
 	// capture center
 	const ee::Rect& rect = bezier->GetRect();
-	if (ee::Math2D::GetDistance(ee::Vector(rect.CenterX(), rect.CenterY()), m_pos) < m_tolerance)
+	if (ee::Math2D::GetDistance(sm::vec2(rect.CenterX(), rect.CenterY()), m_pos) < m_tolerance)
 	{
 		m_result.shape = bezier;
-		m_result.pos.SetInvalid();
+		m_result.pos_valid = false;
 		return true;
 	}
 
 	// capture control points
-	const ee::Vector* ctrl_nodes = bezier->GetCtrlNode();
+	const sm::vec2* ctrl_nodes = bezier->GetCtrlNode();
 	for (int i = 0; i < BezierShape::CTRL_NODE_COUNT; ++i) {
 		if (ee::Math2D::GetDistance(ctrl_nodes[i], m_pos) < m_tolerance) {
 			m_result.shape = bezier;
 			m_result.pos = ctrl_nodes[i];
+			m_result.pos_valid = true;
 			return true;
 		}
 	}
@@ -118,10 +119,10 @@ Visit(ChainShape* chain)
 {
 	// capture center
 	const ee::Rect& rect = chain->GetRect();
-	if (ee::Math2D::GetDistance(ee::Vector(rect.CenterX(), rect.CenterY()), m_pos) < m_tolerance)
+	if (ee::Math2D::GetDistance(sm::vec2(rect.CenterX(), rect.CenterY()), m_pos) < m_tolerance)
 	{
 		m_result.shape = chain;
-		m_result.pos.SetInvalid();
+		m_result.pos_valid = false;
 		return true;
 	}
 
@@ -132,13 +133,14 @@ Visit(ChainShape* chain)
 	if (!chain->IsIntersect(m_rect)) 
 		return false;
 
-	const std::vector<ee::Vector>& vertices = chain->GetVertices();
+	const std::vector<sm::vec2>& vertices = chain->GetVertices();
 	for (size_t i = 0, n = vertices.size(); i < n; ++i)
 	{
 		if (ee::Math2D::GetDistance(vertices[i], m_pos) < m_tolerance)
 		{
 			m_result.shape = chain;
 			m_result.pos = vertices[i];
+			m_result.pos_valid = true;
 			return true;
 		}
 	}
@@ -156,6 +158,7 @@ Visit(CircleShape* circle)
 	{
 		m_result.shape = circle;
 		m_result.pos = circle->center;
+		m_result.pos_valid = true;
 		return true;
 	}
 	// capture ring
@@ -163,7 +166,7 @@ Visit(CircleShape* circle)
 		&& dis > circle->radius - m_tolerance)
 	{
 		m_result.shape = circle;
-		m_result.pos.SetInvalid();
+		m_result.pos_valid = false;
 		return true;
 	}
 
@@ -174,35 +177,39 @@ bool NodeCapture::RectQueryVisitor::
 Visit(RectShape* rect)
 {
 	// capture center
-	if (ee::Math2D::GetDistance(m_pos, ee::Vector(rect->m_rect.CenterX(), rect->m_rect.CenterY())) < m_tolerance)
+	if (ee::Math2D::GetDistance(m_pos, sm::vec2(rect->m_rect.CenterX(), rect->m_rect.CenterY())) < m_tolerance)
 	{
 		m_result.shape = rect;
-		m_result.pos.SetInvalid();
+		m_result.pos_valid = false;
 		return true;
 	}
 	// capture edge
-	else if (ee::Math2D::GetDistance(m_pos, ee::Vector(rect->m_rect.xmin, rect->m_rect.ymin)) < m_tolerance)
+	else if (ee::Math2D::GetDistance(m_pos, sm::vec2(rect->m_rect.xmin, rect->m_rect.ymin)) < m_tolerance)
 	{
 		m_result.shape = rect;
-		m_result.pos = ee::Vector(rect->m_rect.xmin, rect->m_rect.ymin);
+		m_result.pos = sm::vec2(rect->m_rect.xmin, rect->m_rect.ymin);
+		m_result.pos_valid = true;
 		return true;
 	}
-	else if (ee::Math2D::GetDistance(m_pos, ee::Vector(rect->m_rect.xmin, rect->m_rect.ymax)) < m_tolerance)
+	else if (ee::Math2D::GetDistance(m_pos, sm::vec2(rect->m_rect.xmin, rect->m_rect.ymax)) < m_tolerance)
 	{
 		m_result.shape = rect;
-		m_result.pos = ee::Vector(rect->m_rect.xmin, rect->m_rect.ymax);
+		m_result.pos = sm::vec2(rect->m_rect.xmin, rect->m_rect.ymax);
+		m_result.pos_valid = true;
 		return true;
 	}
-	else if (ee::Math2D::GetDistance(m_pos, ee::Vector(rect->m_rect.xmax, rect->m_rect.ymax)) < m_tolerance)
+	else if (ee::Math2D::GetDistance(m_pos, sm::vec2(rect->m_rect.xmax, rect->m_rect.ymax)) < m_tolerance)
 	{
 		m_result.shape = rect;
-		m_result.pos = ee::Vector(rect->m_rect.xmax, rect->m_rect.ymax);
+		m_result.pos = sm::vec2(rect->m_rect.xmax, rect->m_rect.ymax);
+		m_result.pos_valid = true;
 		return true;
 	}
-	else if (ee::Math2D::GetDistance(m_pos, ee::Vector(rect->m_rect.xmax, rect->m_rect.ymin)) < m_tolerance)
+	else if (ee::Math2D::GetDistance(m_pos, sm::vec2(rect->m_rect.xmax, rect->m_rect.ymin)) < m_tolerance)
 	{
 		m_result.shape = rect;
-		m_result.pos = ee::Vector(rect->m_rect.xmax, rect->m_rect.ymin);
+		m_result.pos = sm::vec2(rect->m_rect.xmax, rect->m_rect.ymin);
+		m_result.pos_valid = true;
 		return true;
 	}
 	return false;

@@ -4,12 +4,12 @@
 namespace ee
 {
 
-void AABB::SetTransform(const Vector& position, const Vector& offset, float angle)
+void AABB::SetTransform(const sm::vec2& position, const sm::vec2& offset, float angle)
 {
 	m_position = position + (Math2D::RotateVector(-offset, angle) + offset);
 }
 
-bool AABB::IsContain(const Vector& pos) const
+bool AABB::IsContain(const sm::vec2& pos) const
 {
 	return Math2D::IsPointInRect(pos - m_position, m_rect);
 }

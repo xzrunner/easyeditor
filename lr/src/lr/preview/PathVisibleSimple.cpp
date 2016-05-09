@@ -32,7 +32,7 @@ void PathVisibleSimple::DisableRegion(const ee::Sprite* spr, bool disable)
 	}
 }
 
-void PathVisibleSimple::QueryRoute(const ee::Vector& start, const ee::Vector& end)
+void PathVisibleSimple::QueryRoute(const sm::vec2& start, const sm::vec2& end)
 {
 	VisitedNode* node = QueryRouteImpl(start, end);
 	if (!node) {
@@ -73,22 +73,20 @@ void PathVisibleSimple::DebugDraw() const
 	ee::RVG::Polyline(m_routes, false);
 }
 
-ee::Vector PathVisibleSimple::TransIDToPos(int id) const
+sm::vec2 PathVisibleSimple::TransIDToPos(int id) const
 {
 	std::map<int, Node*>::const_iterator itr = m_nodes.find(id);
 	if (itr != m_nodes.end()) {
 		return itr->second->pos;
 	} else {
-		ee::Vector ret;
-		ret.SetInvalid();
-		return ret;
+		return sm::vec2();
 	}
 }
 
 void PathVisibleSimple::InsertBoundary(const ee::Sprite* spr)
 {
 	// get bound
-	std::vector<ee::Vector> bound;
+	std::vector<sm::vec2> bound;
 	const eshape::Sprite* shape = dynamic_cast<const eshape::Sprite*>(spr);
 	if (shape && shape->GetSymbol().GetShapeType() == eshape::ST_POLYGON) {
 		const std::vector<ee::Shape*>& shapes = shape->GetSymbol().GetShapes();
@@ -99,7 +97,7 @@ void PathVisibleSimple::InsertBoundary(const ee::Sprite* spr)
 	}
 
 	// fix
-	std::vector<ee::Vector> fixed;
+	std::vector<sm::vec2> fixed;
 	ee::Math2D::RemoveDuplicatePoints(bound, fixed);
 	sm::mat4 mat;
 	spr->GetTransMatrix(mat);
@@ -154,7 +152,7 @@ void PathVisibleSimple::BuildConnection(const std::vector<Node*>& nodes) const
 	}
 }
 
-bool PathVisibleSimple::IsSegIntersectAllBound(const ee::Vector& p0, const ee::Vector& p1) const
+bool PathVisibleSimple::IsSegIntersectAllBound(const sm::vec2& p0, const sm::vec2& p1) const
 {
 	std::map<const ee::Sprite*, std::vector<Node*> >::const_iterator itr
 		= m_bounds.begin();
@@ -166,10 +164,10 @@ bool PathVisibleSimple::IsSegIntersectAllBound(const ee::Vector& p0, const ee::V
 	return false;
 }
 
-bool PathVisibleSimple::IsSegIntersectBound(const ee::Vector& p0, const ee::Vector& p1, 
+bool PathVisibleSimple::IsSegIntersectBound(const sm::vec2& p0, const sm::vec2& p1, 
 											const std::vector<Node*>& bound) const
 {
-	std::vector<ee::Vector> points;
+	std::vector<sm::vec2> points;
 	for (int i = 0, n = bound.size(); i < n; ++i) {
 		points.push_back(bound[i]->pos);
 	}
@@ -179,7 +177,7 @@ bool PathVisibleSimple::IsSegIntersectBound(const ee::Vector& p0, const ee::Vect
 	return ee::Math2D::IsSegmentIntersectPolyline(p0, p1, points);	
 }
 
-PathVisibleSimple::Node* PathVisibleSimple::CreateNode(const ee::Vector& pos)
+PathVisibleSimple::Node* PathVisibleSimple::CreateNode(const sm::vec2& pos)
 {
 	Node* n0 = new Node(m_node_id++, pos);
 	m_nodes.insert(std::make_pair(n0->id, n0));
@@ -228,7 +226,7 @@ void PathVisibleSimple::RemoveNode(const Node* node)
 	delete node;
 }
 
-VisitedNode* PathVisibleSimple::QueryRouteImpl(const ee::Vector& start, const ee::Vector& end)
+VisitedNode* PathVisibleSimple::QueryRouteImpl(const sm::vec2& start, const sm::vec2& end)
 {
 	if (!ee::Math2D::IsPointInRect(start, m_region) || !ee::Math2D::IsPointInRect(end, m_region)) {
 		return NULL;
@@ -265,7 +263,7 @@ VisitedNode* PathVisibleSimple::QueryRouteImpl(const ee::Vector& start, const ee
 	return NULL;
 }
 
-void PathVisibleSimple::Expand(VisitedNode* node, const ee::Vector& end)
+void PathVisibleSimple::Expand(VisitedNode* node, const sm::vec2& end)
 {
 	std::vector<Connection> connections;
 	GetConnections(node, connections);

@@ -3,10 +3,12 @@
 
 #include "ICommand.h"
 
+#include <SM_Vector.h>
+
 #include <json/json.h>
 
 namespace lr { class Grids; }
-namespace ee { class Shape; class Vector; }
+namespace ee { class Shape; }
 
 namespace edb
 {
@@ -38,7 +40,7 @@ private:
 		const char* name, Json::Value& out_val);
 	void ParserShapeFromShape(const Json::Value& src_val, const lr::Grids& grids, bool force_grids,
 		const char* name, Json::Value& out_val);	
-	void ParserShape(ee::Shape* shape, const ee::Vector& offset, float angle,
+	void ParserShape(ee::Shape* shape, const sm::vec2& offset, float angle,
 		const lr::Grids& grids, bool force_grids, Json::Value& out_val);
 	
 	void ParserPoint(const Json::Value& src_val, int layer_idx, const char* name, Json::Value& out_val);

@@ -62,7 +62,7 @@ void Paskage::PackBody(const Body& data, std::ofstream& fout)
 			int type = dynamic_cast<eshape::PolygonShape*>(chain) ? e_polygon : e_chain;
 			fout.write(reinterpret_cast<const char*>(&type), sizeof(int));
 
-			const std::vector<ee::Vector>& vertices = chain->GetVertices();
+			const std::vector<sm::vec2>& vertices = chain->GetVertices();
 			size_t vSize = vertices.size();
 			fout.write(reinterpret_cast<const char*>(&vSize), sizeof(size_t));
 			for (size_t j = 0; j < vSize; ++j)
@@ -212,7 +212,7 @@ void Paskage::PackJoint(const Joint& data, std::ofstream& fout,
 
 			fout.write(reinterpret_cast<const char*>(&joint->m_collide_connected), sizeof(int));
 
-			ee::Vector anchor = joint->GetWorldAnchorB();
+			sm::vec2 anchor = joint->GetWorldAnchorB();
 			fout.write(reinterpret_cast<const char*>(&anchor.x), sizeof(float));
 			fout.write(reinterpret_cast<const char*>(&anchor.y), sizeof(float));
 

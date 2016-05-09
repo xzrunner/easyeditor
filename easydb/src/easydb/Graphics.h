@@ -4,7 +4,7 @@
 #include <vector>
 #include <map>
 
-namespace ee { class Sprite; class Vector; }
+namespace ee { class Sprite; }
 
 namespace edb
 {
@@ -19,7 +19,7 @@ class Graphics
 public:
 	void Connect(ee::Sprite* from, ee::Sprite* to);
 
-	void Move(ee::Sprite* sprite, const ee::Vector& offset);
+	void Move(ee::Sprite* sprite, const sm::vec2& offset);
 
 	Node* Query(ee::Sprite* sprite) const;
 

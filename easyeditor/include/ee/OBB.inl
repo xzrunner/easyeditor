@@ -60,7 +60,7 @@ void OBB::SetMirror(bool xmirror, bool ymirror)
 }
 
 inline 
-void OBB::Combine(const Vector& pos)
+void OBB::Combine(const sm::vec2& pos)
 {
 	if (m_rect.IsValid()) {
 		TransToAABB();
@@ -98,7 +98,7 @@ float OBB::Height() const
 }
 
 inline
-Vector OBB::Center() const
+sm::vec2 OBB::Center() const
 {
 	return m_position;
 }

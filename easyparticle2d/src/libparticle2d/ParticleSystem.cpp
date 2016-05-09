@@ -2,10 +2,10 @@
 #include "ps_config.h"
 #include "PS.h"
 
-#include <ps_2d.h>
-
 #include <ee/Math2D.h>
 #include <ee/Symbol.h>
+
+#include <ps_2d.h>
 
 #include <assert.h>
 

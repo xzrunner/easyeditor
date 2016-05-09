@@ -126,7 +126,7 @@ bool SkeletonData::IsContainSprite(ee::Sprite* sprite) const
 	return m_map_joints.find(sprite) != m_map_joints.end();
 }
 
-void SkeletonData::InsertJoint(ee::Sprite* sprite, const ee::Vector& pos)
+void SkeletonData::InsertJoint(ee::Sprite* sprite, const sm::vec2& pos)
 {
 	std::map<ee::Sprite*, std::vector<Joint*> >::iterator itr 
 		= m_map_joints.find(sprite);
@@ -147,7 +147,7 @@ void SkeletonData::InsertJoint(ee::Sprite* sprite, const ee::Vector& pos)
 	}
 }
 
-void SkeletonData::RemoveJoint(ee::Vector& pos)
+void SkeletonData::RemoveJoint(sm::vec2& pos)
 {
 	std::map<ee::Sprite*, std::vector<Joint*> >::iterator itr 
 		= m_map_joints.begin();
@@ -167,7 +167,7 @@ void SkeletonData::RemoveJoint(ee::Vector& pos)
 	}
 }
 
-Joint* SkeletonData::QueryJointByPos(const ee::Vector& pos)
+Joint* SkeletonData::QueryJointByPos(const sm::vec2& pos)
 {
 	std::map<ee::Sprite*, std::vector<Joint*> >::iterator itr 
 		= m_map_joints.begin();
@@ -210,13 +210,13 @@ void SkeletonData::Absorb(ee::Sprite* sprite)
 		for (int i = 0, n = itr_child->second.size(); i < n; ++i)
 		{
 			Joint* c = itr_child->second[i];
-			ee::Vector cp = c->GetWorldPos();
+			sm::vec2 cp = c->GetWorldPos();
 			for (int j = 0, m = itr_parent->second.size(); j < m; ++j)
 			{					
 				Joint* p = itr_parent->second[j];
 				if (p->Intersect(cp))
 				{
-					ee::Vector pp = p->GetWorldPos();
+					sm::vec2 pp = p->GetWorldPos();
 					bool success = p->Connect(c);
 					if (success) {
 						Translate(c->m_sprite, pp - cp);
@@ -255,12 +255,12 @@ void SkeletonData::UpdateJoint(ee::Sprite* sprite, float dAngle)
 	for (int i = 0, n = itr->second.size(); i < n; ++i)
 	{
 		Joint* p = itr->second[i];
-		ee::Vector pp = p->GetWorldPos();
+		sm::vec2 pp = p->GetWorldPos();
 		std::set<Joint*>::iterator itr_joint = p->m_children.begin();
 		for ( ; itr_joint != p->m_children.end(); ++itr_joint)
 		{
 			Joint* c = *itr_joint;
-			ee::Vector cp = c->GetWorldPos();
+			sm::vec2 cp = c->GetWorldPos();
 			c->m_sprite->Translate(pp - cp);
 			if (dAngle != 0)
 				c->m_sprite->Rotate(dAngle);
@@ -324,7 +324,7 @@ void SkeletonData::Clean()
 	m_map_joints.clear();
 }
 
-void SkeletonData::Translate(ee::Sprite* sprite, const ee::Vector& offset)
+void SkeletonData::Translate(ee::Sprite* sprite, const sm::vec2& offset)
 {
 	std::set<ee::Sprite*> sprites;
 	std::queue<ee::Sprite*> buf;

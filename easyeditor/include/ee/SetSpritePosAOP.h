@@ -2,7 +2,8 @@
 #define _EASYEDITOR_SET_SPRITE_POS_AOP_H_
 
 #include "AtomicOP.h"
-#include "Vector.h"
+
+#include <SM_Vector.h>
 
 namespace ee
 {
@@ -12,8 +13,8 @@ class Sprite;
 class SetSpritePosAOP : public AtomicOP
 {
 public:
-	SetSpritePosAOP(Sprite* sprite, const Vector& pos);
-	SetSpritePosAOP(const std::vector<Sprite*>& sprites, const Vector& pos);
+	SetSpritePosAOP(Sprite* sprite, const sm::vec2& pos);
+	SetSpritePosAOP(const std::vector<Sprite*>& sprites, const sm::vec2& pos);
 	virtual ~SetSpritePosAOP();
 
 	virtual void Undo();
@@ -23,9 +24,9 @@ public:
 
 private:
 	std::vector<Sprite*> m_sprites;
-	std::vector<Vector> m_old_pos;
+	std::vector<sm::vec2> m_old_pos;
 
-	Vector m_new_pos;
+	sm::vec2 m_new_pos;
 
 }; // SetSpritePosAOP
 

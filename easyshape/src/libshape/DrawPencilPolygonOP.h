@@ -20,15 +20,15 @@ public:
 	virtual bool OnMouseLeftUp(int x, int y);
 
 private:
-	void NewPolygon(const std::vector<ee::Vector>& poly);
+	void NewPolygon(const std::vector<sm::vec2>& poly);
 
-	void UnionPolygon(const std::vector<ee::Vector>& poly);
-	void DifferencePolygon(const std::vector<ee::Vector>& poly);
-	void IntersectionPolygon(const std::vector<ee::Vector>& poly);
-	void XorPolygon(const std::vector<ee::Vector>& poly);
+	void UnionPolygon(const std::vector<sm::vec2>& poly);
+	void DifferencePolygon(const std::vector<sm::vec2>& poly);
+	void IntersectionPolygon(const std::vector<sm::vec2>& poly);
+	void XorPolygon(const std::vector<sm::vec2>& poly);
 
-	void PrepareSubjectPaths(std::vector<std::vector<ee::Vector> >& paths) const;
-	void ReplacePolygons(const std::vector<std::vector<ee::Vector> >& paths);
+	void PrepareSubjectPaths(std::vector<std::vector<sm::vec2> >& paths) const;
+	void ReplacePolygons(const std::vector<std::vector<sm::vec2> >& paths);
 
 private:
 	enum Type

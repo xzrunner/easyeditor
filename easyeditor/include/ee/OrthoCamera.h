@@ -14,22 +14,22 @@ public:
 	virtual std::string Type() const { return "ortho"; }
 	virtual void Reset();
 
-	virtual Vector TransPosScreenToProject(int x, int y, int width, int height) const;
-	virtual Vector TransPosProjectToScreen(const Vector& proj, int width, int height) const;
+	virtual sm::vec2 TransPosScreenToProject(int x, int y, int width, int height) const;
+	virtual sm::vec2 TransPosProjectToScreen(const sm::vec2& proj, int width, int height) const;
 
 	virtual void UpdateModelView() const;
 
 	virtual float GetScale() const { return m_scale; }
-	virtual const Vector& GetPosition() const { return m_center; }
+	virtual const sm::vec2& GetPosition() const { return m_center; }
 
-	void Translate(const Vector& offset);
+	void Translate(const sm::vec2& offset);
 	void Scale(float scale, int x, int y, int width, int height);
 
 	void SetScale(float s) { m_scale = s; }
-	void SetPosition(const Vector& pos) { m_center = pos; } 
+	void SetPosition(const sm::vec2& pos) { m_center = pos; } 
 
 private:
-	Vector m_center;
+	sm::vec2 m_center;
 	float m_scale;
 
 }; // OrthoCamera

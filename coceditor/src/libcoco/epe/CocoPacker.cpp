@@ -188,7 +188,7 @@ void CocoPacker::resolvePicture(const ee::ImageSprite* sprite)
 	// screen
 	const float hw = pr->Width() * 0.5f,
 		hh = pr->Height() * 0.5f;
-	ee::Vector screen[4];
+	sm::vec2 screen[4];
 	screen[0].Set(-hw, hh);
 	screen[1].Set(-hw, -hh);
 	screen[2].Set(hw, -hh);
@@ -201,11 +201,11 @@ void CocoPacker::resolvePicture(const ee::ImageSprite* sprite)
 	// 2. rotate
 	for (size_t i = 0; i < 4; ++i)
 	{
-		ee::Vector rot = ee::Math2D::RotateVector(screen[i], sprite->GetAngle());
+		sm::vec2 rot = ee::Math2D::RotateVector(screen[i], sprite->GetAngle());
 		screen[i] = rot;
 	}
 	// 3. translate
-	ee::Vector center = sprite->GetCenter();
+	sm::vec2 center = sprite->GetCenter();
  	for (size_t i = 0; i < 4; ++i)
  		screen[i] += center;
 	//for (size_t i = 0; i < 4; ++i)
@@ -284,7 +284,7 @@ void CocoPacker::resolvePicture(const ee::ImageSymbol* symbol)
 	// screen
 	const float hw = pr->Width() * 0.5f,
 		hh = pr->Height() * 0.5f;
-	ee::Vector screen[4];
+	sm::vec2 screen[4];
 	screen[0].Set(-hw, hh);
 	screen[1].Set(-hw, -hh);
 	screen[2].Set(hw, -hh);

@@ -2,7 +2,6 @@
 #define _EASYEDITOR_IMAGE_H_
 
 #include "ResourcesMgr.h"
-#include "Vector.h"
 #include "Object.h"
 #include "RenderColor.h"
 
@@ -43,7 +42,7 @@ public:
 		const Sprite* root = NULL) const;
 	void InvalidRect(const sm::mat4& mt) const;
 
-	const Vector& GetOffset() const { return m_offset; }
+	const sm::vec2& GetOffset() const { return m_offset; }
 
 	const ImageData* GetImageData() const;
 
@@ -57,7 +56,7 @@ private:
 
 	float m_ori_w, m_ori_h;
 
-	Vector m_offset;
+	sm::vec2 m_offset;
 
 }; // Image
 

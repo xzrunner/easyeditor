@@ -15,7 +15,7 @@ DistanceJoint::DistanceJoint(Body* b0, Body* b1)
 {
 }
 
-bool DistanceJoint::IsContain(const ee::Vector& pos) const
+bool DistanceJoint::IsContain(const sm::vec2& pos) const
 {
 	return ee::Math2D::GetDistance(GetWorldAnchorA(), pos) < JOINT_RADIUS_OUT
 		|| ee::Math2D::GetDistance(GetWorldAnchorB(), pos) < JOINT_RADIUS_OUT;
@@ -29,7 +29,7 @@ bool DistanceJoint::IsIntersect(const ee::Rect& rect) const
 
 void DistanceJoint::Draw(DrawType type) const
 {
-	const ee::Vector anchorA = GetWorldAnchorA(),
+	const sm::vec2 anchorA = GetWorldAnchorA(),
 		anchorB = GetWorldAnchorB();
 
 	if (type == e_selected || type == e_mouseOn)
@@ -48,27 +48,27 @@ void DistanceJoint::Draw(DrawType type) const
 }
 
 
-ee::Vector DistanceJoint::GetWorldAnchorA() const
+sm::vec2 DistanceJoint::GetWorldAnchorA() const
 {
 	return TransLocalToWorld(m_local_anchor_a, m_body_a->m_sprite);
 }
 
-ee::Vector DistanceJoint::GetWorldAnchorB() const
+sm::vec2 DistanceJoint::GetWorldAnchorB() const
 {
 	return TransLocalToWorld(m_local_anchor_b, m_body_b->m_sprite);
 }
 
-void DistanceJoint::SetLocalAnchorA(const ee::Vector& world)
+void DistanceJoint::SetLocalAnchorA(const sm::vec2& world)
 {
 	m_local_anchor_a = TransWorldToLocal(world, m_body_a->m_sprite);
 }
 
-void DistanceJoint::SetLocalAnchorB(const ee::Vector& world)
+void DistanceJoint::SetLocalAnchorB(const sm::vec2& world)
 {
 	m_local_anchor_b = TransWorldToLocal(world, m_body_b->m_sprite);
 }
 
-void DistanceJoint::DrawAnchor(const ee::Vector& pos, DrawType type) const
+void DistanceJoint::DrawAnchor(const sm::vec2& pos, DrawType type) const
 {
 	ee::Colorf color;
 	switch (type)
@@ -89,8 +89,8 @@ void DistanceJoint::DrawAnchor(const ee::Vector& pos, DrawType type) const
 	ee::RVG::Circle(pos, JOINT_RADIUS_OUT, false);
 }
 
-void DistanceJoint::DrawConnection(const ee::Vector& worldAnchorA, 
-								   const ee::Vector& worldAnchorB, DrawType type) const
+void DistanceJoint::DrawConnection(const sm::vec2& worldAnchorA, 
+								   const sm::vec2& worldAnchorB, DrawType type) const
 {
 	ee::Colorf color;
 	switch (type)

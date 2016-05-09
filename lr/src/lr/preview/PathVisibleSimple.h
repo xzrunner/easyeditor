@@ -23,13 +23,13 @@ public:
 	// interface IPathfinding
 	//
 	virtual void DisableRegion(const ee::Sprite* spr, bool disable);
-	virtual void QueryRoute(const ee::Vector& start, const ee::Vector& end);
+	virtual void QueryRoute(const sm::vec2& start, const sm::vec2& end);
 	virtual void DebugDraw() const;
 
 	//
 	// interface INetwork
 	//
-	virtual ee::Vector TransIDToPos(int id) const;
+	virtual sm::vec2 TransIDToPos(int id) const;
 
 private:
 	struct Node;
@@ -45,12 +45,12 @@ private:
 
 	struct Node
 	{
-		Node(int id, const ee::Vector& pos)
+		Node(int id, const sm::vec2& pos)
 			: id(id), pos(pos) {}
 
 		int id;
 
-		ee::Vector pos;
+		sm::vec2 pos;
 
 		std::vector<Connection> connections;
 
@@ -62,16 +62,16 @@ private:
 	void RemoveBoundary(std::map<const ee::Sprite*, std::vector<Node*> >::iterator itr);
 
 	void BuildConnection(const std::vector<Node*>& nodes) const;
-	bool IsSegIntersectAllBound(const ee::Vector& p0, const ee::Vector& p1) const;
-	bool IsSegIntersectBound(const ee::Vector& p0, const ee::Vector& p1, 
+	bool IsSegIntersectAllBound(const sm::vec2& p0, const sm::vec2& p1) const;
+	bool IsSegIntersectBound(const sm::vec2& p0, const sm::vec2& p1, 
 		const std::vector<Node*>& bound) const;
 
-	Node* CreateNode(const ee::Vector& pos);
+	Node* CreateNode(const sm::vec2& pos);
 	void RemoveNode(const Node* node);
 
 	// route
-	VisitedNode* QueryRouteImpl(const ee::Vector& start, const ee::Vector& end);
-	void Expand(VisitedNode* node, const ee::Vector& end);
+	VisitedNode* QueryRouteImpl(const sm::vec2& start, const sm::vec2& end);
+	void Expand(VisitedNode* node, const sm::vec2& end);
 	void GetConnections(VisitedNode* node, std::vector<Connection>& connections) const;
 
 private:
@@ -87,7 +87,7 @@ private:
 
 	Node *m_last_start, *m_last_end;
 
-	std::vector<ee::Vector> m_routes;
+	std::vector<sm::vec2> m_routes;
 
 }; // PathVisibleSimple
 

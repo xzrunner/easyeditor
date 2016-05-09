@@ -252,7 +252,7 @@ void RectCutCMPT::OnOutputData(wxCommandEvent& event)
 
 		std::string img_fullname = img_filename + ".png";
 		ee::Sprite* sprite = new ee::NullSprite(new ee::NullSymbol(img_fullname, width, height));
-		ee::Vector off;
+		sm::vec2 off;
 		off.x = r.CenterX() - image->GetClippedWidth() * 0.5f;
 		off.y = r.CenterY() - image->GetClippedHeight() * 0.5f;
 		sprite->Translate(off);
@@ -275,7 +275,7 @@ void RectCutCMPT::OnAddRect(wxCommandEvent& event)
 	m_heightCtrl->GetValue().ToDouble(&height);
 	
 	RectCutOP* op = static_cast<RectCutOP*>(m_editop);
-	op->GetRectMgr().Insert(ee::Rect(ee::Vector(0, 0), ee::Vector((float)width, (float)height)));
+	op->GetRectMgr().Insert(ee::Rect(sm::vec2(0, 0), sm::vec2((float)width, (float)height)));
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }

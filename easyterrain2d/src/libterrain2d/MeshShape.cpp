@@ -10,9 +10,9 @@ MeshShape::MeshShape(const ee::Symbol* base)
 {
 }
 
-void MeshShape::InsertTriangle(const ee::Vector* vertices, 
-							   const ee::Vector* texcoords,
-							   const std::vector<ee::Vector>& bound)
+void MeshShape::InsertTriangle(const sm::vec2* vertices, 
+							   const sm::vec2* texcoords,
+							   const std::vector<sm::vec2>& bound)
 {
 	emesh::Triangle* tri = new emesh::Triangle;
 	for (int i = 0; i < 3; ++i) {

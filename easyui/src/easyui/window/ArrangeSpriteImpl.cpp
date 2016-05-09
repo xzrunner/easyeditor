@@ -31,7 +31,7 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(StagePanel* stage, ee::PropertySettingPanel
 
 void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 {
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(m_selected);
 	if (complex && ee::Math2D::GetDistance(pos, m_selected->GetPosition()) < m_center_node_radius) {
 		m_move_center = true;
@@ -63,7 +63,7 @@ void ArrangeSpriteImpl::OnDraw(const ee::Camera& cam) const
 		}
 	}
 
-	ee::Vector pos = m_selected->GetPosition();
+	sm::vec2 pos = m_selected->GetPosition();
 	m_center_node_radius = std::min(CENTER_NODE_RADIUS * cam.GetScale(), MAX_CENTER_NODE_RADIUS);
 	ee::RVG::Color(ee::RED);
 	ee::RVG::Circle(pos, m_center_node_radius, false);
@@ -72,7 +72,7 @@ void ArrangeSpriteImpl::OnDraw(const ee::Camera& cam) const
 }
 
 ee::ArrangeSpriteState* ArrangeSpriteImpl::
-CreateTranslateState(ee::SpriteSelection* selection, const ee::Vector& first_pos) const
+CreateTranslateState(ee::SpriteSelection* selection, const sm::vec2& first_pos) const
 {
 	return new TranslateSpriteState(m_stage, selection, first_pos, m_stage->GetAnchorMgr()); 
 }

@@ -11,7 +11,7 @@ Rect::Rect()
 }
 
 inline
-Rect::Rect(const Vector& p0, const Vector& p1) 
+Rect::Rect(const sm::vec2& p0, const sm::vec2& p1) 
 {
 	xmin = std::min(p0.x, p1.x);
 	ymin = std::min(p0.y, p1.y);
@@ -20,7 +20,7 @@ Rect::Rect(const Vector& p0, const Vector& p1)
 }
 
 inline
-Rect::Rect(const Vector& center, float hw, float hh) 
+Rect::Rect(const sm::vec2& center, float hw, float hh) 
 {
 	xmin = center.x - hw;
 	xmax = center.x + hw;
@@ -86,13 +86,13 @@ float Rect::CenterY() const
 }
 
 inline
-Vector Rect::Center() const 
+sm::vec2 Rect::Center() const 
 { 
-	return Vector(CenterX(), CenterY()); 
+	return sm::vec2(CenterX(), CenterY()); 
 }
 
 inline
-void Rect::Translate(const Vector& offset)
+void Rect::Translate(const sm::vec2& offset)
 {
 	xmin += offset.x;
 	xmax += offset.x;
@@ -114,7 +114,7 @@ void Rect::Shear(float sx, float sy)
 {
 	// x' = x + y*kx
 	// y' = x*ky + y
-	Vector v[4];
+	sm::vec2 v[4];
 	v[0].x = xmin + ymin*sx;
 	v[0].y = xmin*sy + ymin;
 	v[1].x = xmax + ymin*sx;
@@ -137,7 +137,7 @@ void Rect::Shear(float sx, float sy)
 }
 
 inline
-void Rect::Combine(const Vector& pos)
+void Rect::Combine(const sm::vec2& pos)
 {
 	if (pos.x < xmin) xmin = pos.x;
 	if (pos.x > xmax) xmax = pos.x;

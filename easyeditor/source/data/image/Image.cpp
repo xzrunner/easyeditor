@@ -153,17 +153,17 @@ void Image::Draw(const RenderParams& trans, const Sprite* spr,
 		py = spr->GetPerspective().y;
 	}
 
-	Vector vertices[4];
-	vertices[0] = Vector(-hw - px, -hh - py);
-	vertices[1] = Vector( hw + px, -hh + py);
-	vertices[2] = Vector( hw - px,  hh - py);
-	vertices[3] = Vector(-hw + px,  hh + py);
+	sm::vec2 vertices[4];
+	vertices[0] = sm::vec2(-hw - px, -hh - py);
+	vertices[1] = sm::vec2( hw + px, -hh + py);
+	vertices[2] = sm::vec2( hw - px,  hh - py);
+	vertices[3] = sm::vec2(-hw + px,  hh + py);
 	for (int i = 0; i < 4; ++i) {
 		vertices[i] = Math2D::TransVector(vertices[i] + m_offset, trans.mt);
 	}
 
 	int texid;
-	Vector texcoords[4];
+	sm::vec2 texcoords[4];
 
 	float* c2_texcoords = NULL;
 	if (Config::Instance()->IsUseDTex() && CanUseDTex()) {
@@ -204,21 +204,21 @@ void Image::Draw(const RenderParams& trans, const Sprite* spr,
 		assert(spr);
 
 		if (root) {
-			Vector offset = root->GetPosition();
+			sm::vec2 offset = root->GetPosition();
 			for (int i = 0; i < 4; ++i) {
 				vertices[i] -= offset;
 			}
 		}
 
-		Vector vertices_scr[4];
+		sm::vec2 vertices_scr[4];
 		float img_hw = m_tex->GetWidth() * 0.5f,
 			  img_hh = m_tex->GetHeight() * 0.5f;
- 		vertices_scr[0] = Math2D::TransVector(Vector(-img_hw, -img_hh), trans.mt);
- 		vertices_scr[1] = Math2D::TransVector(Vector( img_hw, -img_hh), trans.mt);
- 		vertices_scr[2] = Math2D::TransVector(Vector( img_hw,  img_hh), trans.mt);
- 		vertices_scr[3] = Math2D::TransVector(Vector(-img_hw,  img_hh), trans.mt);
+ 		vertices_scr[0] = Math2D::TransVector(sm::vec2(-img_hw, -img_hh), trans.mt);
+ 		vertices_scr[1] = Math2D::TransVector(sm::vec2( img_hw, -img_hh), trans.mt);
+ 		vertices_scr[2] = Math2D::TransVector(sm::vec2( img_hw,  img_hh), trans.mt);
+ 		vertices_scr[3] = Math2D::TransVector(sm::vec2(-img_hw,  img_hh), trans.mt);
 
-		Vector tex_coords_base[4];
+		sm::vec2 tex_coords_base[4];
 		const Camera* cam = CameraMgr::Instance()->GetCamera();
 		assert(cam);
 		int w, h;
@@ -265,7 +265,7 @@ void Image::Draw(const RenderParams& trans, const Sprite* spr,
 			_vertices.push_back(sm::vec3(vertices[2].x, vertices[2].y, z[2]));
 			_vertices.push_back(sm::vec3(vertices[3].x, vertices[3].y, z[3]));
 
-			std::vector<Vector> _texcoords;
+			std::vector<sm::vec2> _texcoords;
 			_texcoords.push_back(texcoords[0]);
 			_texcoords.push_back(texcoords[1]);
 			_texcoords.push_back(texcoords[2]);
@@ -290,15 +290,15 @@ void Image::InvalidRect(const sm::mat4& mt) const
 #ifdef OPEN_SCREEN_CACHE
 	float hw = m_tex->GetWidth() * 0.5f,
 		  hh = m_tex->GetHeight() * 0.5f;
-	Vector vertices[4];
-	vertices[0] = Vector(-hw, -hh);
-	vertices[1] = Vector( hw, -hh);
-	vertices[2] = Vector( hw,  hh);
-	vertices[3] = Vector(-hw,  hh);
+	sm::vec2 vertices[4];
+	vertices[0] = sm::vec2(-hw, -hh);
+	vertices[1] = sm::vec2( hw, -hh);
+	vertices[2] = sm::vec2( hw,  hh);
+	vertices[3] = sm::vec2(-hw,  hh);
 
 	float xmin = FLT_MAX, ymin = FLT_MAX, xmax = -FLT_MAX, ymax = -FLT_MAX;
 	for (int i = 0; i < 4; ++i) {
-		Vector pos = Math2D::TransVector(vertices[i] + m_offset, mt);
+		sm::vec2 pos = Math2D::TransVector(vertices[i] + m_offset, mt);
 		if (pos.x < xmin) xmin = pos.x;
 		if (pos.x > xmax) xmax = pos.x;
 		if (pos.y < ymin) ymin = pos.y;

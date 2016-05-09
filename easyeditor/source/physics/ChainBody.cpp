@@ -42,7 +42,7 @@ ChainBody::ChainBody(b2World* world, const BodyData& bodyData, float scale/* = 1
 	}
 }
 
-ChainBody::ChainBody(b2World* world, const std::vector<Vector>& vertices, bool isLoop, float scale/* = 1.0f*/)
+ChainBody::ChainBody(b2World* world, const std::vector<sm::vec2>& vertices, bool isLoop, float scale/* = 1.0f*/)
 	: IBody(world, scale)
 {
 	b2BodyDef bd;
@@ -71,7 +71,7 @@ ChainBody::ChainBody(b2World* world, float scale/* = 1.0f*/)
 	m_body = world->CreateBody(&bd);
 }
  
-void ChainBody::GetRect(Rect& rect, const Vector& position, float angle) const
+void ChainBody::GetRect(Rect& rect, const sm::vec2& position, float angle) const
 {
 	rect.MakeInfinite();
 	for (b2Fixture* f = m_body->GetFixtureList(); f; f = f->GetNext())
@@ -81,7 +81,7 @@ void ChainBody::GetRect(Rect& rect, const Vector& position, float angle) const
 		for (int i = 0; i < chain->m_count; ++i)
 		{
 			const b2Vec2& p = chain->m_vertices[i];
-			Vector transform = Math2D::RotateVector(Vector(p.x, p.y), angle) + position;
+			sm::vec2 transform = Math2D::RotateVector(sm::vec2(p.x, p.y), angle) + position;
 			rect.Combine(transform);
 		}
 	}

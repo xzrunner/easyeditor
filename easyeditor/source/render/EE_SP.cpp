@@ -1,5 +1,4 @@
 #include "EE_SP.h"
-#include "Vector.h"
 #include "Rect.h"
 #include "Sprite.h"
 #include "BoundingBox.h"
@@ -27,14 +26,14 @@ void SpatialPartition::Insert(const Sprite* spr/*, const sm::mat4& mt*/)
 // 	spr->GetTransMatrix(t);
 //	t = t * mt;
 
-	std::vector<Vector> bound;
+	std::vector<sm::vec2> bound;
 	spr->GetBounding()->GetBoundPos(bound);
 
 	sp_region r;
 	REGION_INIT(r);
 	for (int i = 0, n = bound.size(); i < n; ++i) {
-//		Vector p = Math::transVector(bound[i], t);
-		const Vector& p = bound[i];
+//		sm::vec2 p = Math::transVector(bound[i], t);
+		const sm::vec2& p = bound[i];
 		if (p.x < r.xmin) r.xmin = p.x;
 		if (p.x > r.xmax) r.xmax = p.x;
 		if (p.y < r.ymin) r.ymin = p.y;
@@ -69,7 +68,7 @@ void SpatialPartition::Query(const Rect& region, std::vector<const Sprite*>& res
 static void _render(float xmin, float ymin, float xmax, float ymax) 
 {
 	RVG::Color(LIGHT_GREEN);
-	RVG::Rect(Vector(xmin, ymin), Vector(xmax, ymax), false);
+	RVG::Rect(sm::vec2(xmin, ymin), sm::vec2(xmax, ymax), false);
 }
 
 void SpatialPartition::DebugDraw() const

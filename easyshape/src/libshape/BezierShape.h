@@ -11,8 +11,8 @@ class BezierShape : public ChainShape
 public:
 	BezierShape();
 	BezierShape(const BezierShape& bezier);
-	BezierShape(const ee::Vector points[4]);
-	BezierShape(const ee::Vector& start, const ee::Vector& end);
+	BezierShape(const sm::vec2 points[4]);
+	BezierShape(const sm::vec2& start, const sm::vec2& end);
 	virtual ~BezierShape();
 
 	//
@@ -24,8 +24,8 @@ public:
 	// Shape interface
 	//
 	virtual const char* GetShapeDesc() const { return "bezier"; }
-	virtual bool IsContain(const ee::Vector& pos) const;
-	virtual void Translate(const ee::Vector& offset);
+	virtual bool IsContain(const sm::vec2& pos) const;
+	virtual void Translate(const sm::vec2& offset);
 	virtual void Draw(const sm::mat4& mt,
 		const ee::RenderColor& color = ee::RenderColor()) const;
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
@@ -36,24 +36,24 @@ public:
 
 	void Mirror(bool x, bool y);
 
-	void MoveCtrlNode(const ee::Vector& from, const ee::Vector& to);
+	void MoveCtrlNode(const sm::vec2& from, const sm::vec2& to);
 
-	const ee::Vector* GetCtrlNode() const { return m_control_nodes; }
+	const sm::vec2* GetCtrlNode() const { return m_control_nodes; }
 
 public:
 	static const int CTRL_NODE_COUNT = 4;
 
 private:
-	void CopyCtrlNodes(const ee::Vector ctrl_points[]);
+	void CopyCtrlNodes(const sm::vec2 ctrl_points[]);
 
-	ee::Vector pointOnCubicBezier(float t);
+	sm::vec2 pointOnCubicBezier(float t);
 
 private:
 	static const int RADIUS = 5;
 
 private:
 	// [0] start, [1] ctrl1, [2] ctrl2, [3] end
-	ee::Vector m_control_nodes[CTRL_NODE_COUNT];
+	sm::vec2 m_control_nodes[CTRL_NODE_COUNT];
 
 }; // BezierShape
 

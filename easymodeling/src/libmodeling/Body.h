@@ -4,9 +4,11 @@
 #include <ee/Color.h>
 #include <ee/Object.h>
 
+#include <SM_Matrix.h>
+
 #include <vector>
 
-namespace ee { class Vector; class Rect; class Sprite; }
+namespace ee { class Rect; class Sprite; }
 
 namespace emodeling
 {
@@ -27,7 +29,7 @@ public:
 	Body();
 	~Body();
 
-	bool IsContain(const ee::Vector& pos) const;
+	bool IsContain(const sm::vec2& pos) const;
 	bool IsIntersect(const ee::Rect& rect) const;
 
 	void Draw(const sm::mat4& mt, const ee::Colorf& cFace, 

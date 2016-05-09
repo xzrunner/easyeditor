@@ -2,7 +2,6 @@
 #define _EASYSHADOW_SHADOW_H_
 
 #include <ee/Object.h>
-#include <ee/Vector.h>
 #include <ee/Rect.h>
 #include <ee/Color.h>
 
@@ -26,7 +25,7 @@ public:
 
 	void BuildFace();
 	void BuildOutterLine();
-	void BuildInnerLine(const std::vector<ee::Vector>& loop);
+	void BuildInnerLine(const std::vector<sm::vec2>& loop);
 
 	const ee::Rect& GetRegion() const { return m_region; }
 
@@ -37,23 +36,23 @@ public:
 
 	void SetRadius(float r) { m_radius = r; }
 
-	const std::vector<ee::Vector>& GetInnerLoop() const { return m_inner_loop; }
+	const std::vector<sm::vec2>& GetInnerLoop() const { return m_inner_loop; }
 
 	static void InitShader();
 
 private:
-	void BuildInnerLoop(const std::vector<ee::Vector>& loop);
+	void BuildInnerLoop(const std::vector<sm::vec2>& loop);
 	void BuildOuterLoop();
 
 private:
 	float m_radius;
 
-	std::vector<ee::Vector> m_inner_loop;
-	std::vector<ee::Vector> m_outer_loop;
+	std::vector<sm::vec2> m_inner_loop;
+	std::vector<sm::vec2> m_outer_loop;
 
 	ee::Colorf m_inner_color, m_outer_color;
 
-	std::vector<ee::Vector> m_tris;	
+	std::vector<sm::vec2> m_tris;	
 	std::vector<ee::Colorf> m_colors;	
 
 	ee::Rect m_region;

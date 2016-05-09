@@ -22,7 +22,7 @@ bool DrawPencilLineOP::OnMouseLeftUp(int x, int y)
 
 	if (!m_curve.empty())
 	{
-		std::vector<ee::Vector> simplified;
+		std::vector<sm::vec2> simplified;
 		ee::DouglasPeucker::Do(m_curve, m_simplify->GetValue(), simplified);
 		ee::InsertShapeSJ::Instance()->Insert(new ChainShape(simplified, false));
 		Clear();

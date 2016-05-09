@@ -27,7 +27,7 @@ void RectIcon::StoreToFile(Json::Value& value) const
 	value["ymax"] = m_max.y;
 }
 
-void RectIcon::GetBound(float process, ee::Vector bound[4]) const
+void RectIcon::GetBound(float process, sm::vec2 bound[4]) const
 {
 	bound[0].Set(m_min.x, m_min.y);
 	bound[1].Set(m_min.x, m_max.y);

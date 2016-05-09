@@ -12,14 +12,14 @@ namespace list
 {
 
 TranslateSpriteState::TranslateSpriteState(ee::SpriteSelection* selection, 
-										   const ee::Vector& first_pos,
+										   const sm::vec2& first_pos,
 										   UIList* list)
 	: ee::TranslateSpriteState(selection, first_pos)
 	, m_list(list)
 {
 }
 
-void TranslateSpriteState::Translate(const ee::Vector& offset)
+void TranslateSpriteState::Translate(const sm::vec2& offset)
 {
 	if (GetSelection()->Size() != 1) {
 		return;

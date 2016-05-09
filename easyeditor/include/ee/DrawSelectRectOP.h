@@ -2,7 +2,8 @@
 #define _EASYEDITOR_DRAW_SELECT_RECT_OP_
 
 #include "ZoomViewOP.h"
-#include "Vector.h"
+
+#include <SM_Vector.h>
 
 namespace ee
 {
@@ -21,7 +22,8 @@ public:
 	virtual bool Clear();
 
 protected:
-	Vector m_first_pos, m_last_pos;
+	sm::vec2 m_first_pos, m_last_pos;
+	bool m_first_valid, m_last_valid;
 
 }; // DrawSelectRectOP
 

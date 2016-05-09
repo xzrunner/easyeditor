@@ -71,7 +71,7 @@ void FileStorer::StoreWithHistory(const char* filepath, const Symbol* symbol)
 
 void FileStorer::CenterSymbol(Symbol* symbol)
 {
-	ee::Vector offset;
+	sm::vec2 offset;
 	offset.x = symbol->m_rect.CenterX();
 	offset.y = symbol->m_rect.CenterY();
 	for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)

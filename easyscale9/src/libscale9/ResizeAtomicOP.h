@@ -2,7 +2,8 @@
 #define _EASYSCALE9_RESIZE_ATOMIC_OP_H_
 
 #include <ee/AtomicOP.h>
-#include <ee/Vector.h>
+
+#include <SM_Vector.h>
 
 namespace escale9
 {
@@ -12,8 +13,8 @@ class Symbol;
 class ResizeAtomicOP : public ee::AtomicOP
 {
 public:
-	ResizeAtomicOP(Symbol* symbol, const ee::Vector& src, 
-		const ee::Vector& dst);
+	ResizeAtomicOP(Symbol* symbol, const sm::vec2& src, 
+		const sm::vec2& dst);
 
 	virtual void Undo();
 	virtual void Redo();
@@ -26,7 +27,7 @@ public:
 private:
 	Symbol* m_symbol;
 
-	ee::Vector m_src, m_dst;
+	sm::vec2 m_src, m_dst;
 
 }; // ResizeAtomicOP
 

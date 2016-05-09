@@ -26,19 +26,19 @@ public:
 	virtual void LoadFromFile(const Json::Value& value, const std::string& dir);
 	virtual void StoreToFile(Json::Value& value, const std::string& dir) const;
 
-	bool InsertInner(const ee::Vector& pos);
-	bool RemoveInner(const ee::Vector& pos);
-	ee::Vector* QueryInner(const ee::Vector& pos);
+	bool InsertInner(const sm::vec2& pos);
+	bool RemoveInner(const sm::vec2& pos);
+	sm::vec2* QueryInner(const sm::vec2& pos);
 
-	const std::vector<ee::Vector>& GetInnerVertices() const { 
+	const std::vector<sm::vec2>& GetInnerVertices() const { 
 		return m_inner_vertices; 
 	}
-	void SetInnerVertices(const std::vector<ee::Vector>& inner) { 
+	void SetInnerVertices(const std::vector<sm::vec2>& inner) { 
 		m_inner_vertices = inner;
 	}
 
 private:
-	std::vector<ee::Vector> m_inner_vertices;
+	std::vector<sm::vec2> m_inner_vertices;
 
 	float m_node_radius;
 

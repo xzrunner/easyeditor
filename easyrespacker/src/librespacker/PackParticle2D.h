@@ -3,7 +3,7 @@
 
 #include "IPackNode.h"
 
-#include <ee/Vector.h>
+#include <SM_Vector.h>
 
 namespace erespacker
 {
@@ -28,7 +28,7 @@ public:
 
 	float life, life_var;
 
-	ee::Vector position, position_var;
+	sm::vec2 position, position_var;
 
 	float direction, direction_var;
 
@@ -41,7 +41,7 @@ public:
 	//////////////////////////////////////////////////////////////////////////
 	struct A
 	{
-		ee::Vector gravity;
+		sm::vec2 gravity;
 
 		float speed, speed_var;
 

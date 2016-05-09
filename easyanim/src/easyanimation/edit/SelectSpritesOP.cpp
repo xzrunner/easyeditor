@@ -24,7 +24,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	if (ee::SelectSpritesOP::OnMouseLeftDClick(x, y)) 
 		return true;
 
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	ee::Sprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
 	if (selected) {
 		m_open_symbol.Open(selected);

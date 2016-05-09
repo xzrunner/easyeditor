@@ -61,7 +61,7 @@ static int _get_target()
 	return sl::ShaderMgr::Instance()->GetContext()->GetTarget();
 }
 
-static Vector LAST_OFFSET;
+static sm::vec2 LAST_OFFSET;
 static float LAST_SCALE;
 static int LAST_WIDTH, LAST_HEIGHT;
 
@@ -72,7 +72,7 @@ static void _draw_begin()
 	ctx_stack->GetModelView(LAST_OFFSET, LAST_SCALE);
 	ctx_stack->GetProjection(LAST_WIDTH, LAST_HEIGHT);
 
-	ctx_stack->SetModelView(Vector(0, 0), 1);
+	ctx_stack->SetModelView(sm::vec2(0, 0), 1);
 	ctx_stack->SetProjection(2, 2);
 
 	sl::ShaderMgr* sl_mgr = sl::ShaderMgr::Instance();
@@ -86,7 +86,7 @@ static void _draw_begin()
 
 static void _draw(const float vb[16], int texid)
 {
-	Vector vertices[4], texcoords[4];
+	sm::vec2 vertices[4], texcoords[4];
 	for (int i = 0; i < 4; ++i) {
 		vertices[i].x  = vb[i * 4];
 		vertices[i].y  = vb[i * 4 + 1];
@@ -163,11 +163,11 @@ _clear_color(float xmin, float ymin, float xmax, float ymax) {
 // 	
 // 	shader->SetColor(Colorf(0, 0, 0, 0));
 // 
-// 	std::vector<Vector> triangles;
-// 	triangles.push_back(Vector(xmin, ymin));
-// 	triangles.push_back(Vector(xmin, ymax));
-// 	triangles.push_back(Vector(xmax, ymin));
-// 	triangles.push_back(Vector(xmax, ymax));
+// 	std::vector<sm::vec2> triangles;
+// 	triangles.push_back(sm::vec2(xmin, ymin));
+// 	triangles.push_back(sm::vec2(xmin, ymax));
+// 	triangles.push_back(sm::vec2(xmax, ymin));
+// 	triangles.push_back(sm::vec2(xmax, ymax));
 // 
 // 	RVG::TriangleStrip(triangles);
 // 

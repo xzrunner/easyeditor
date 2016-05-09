@@ -77,7 +77,7 @@ b2Body* ResolveToB2::CreateBody(const Body& data, b2World* world,
 		}
 		else if (eshape::PolygonShape* polygon = dynamic_cast<eshape::PolygonShape*>(fData->m_shape))
 		{
-// 			const std::vector<ee::Vector>& src = polygon->GetVertices();
+// 			const std::vector<sm::vec2>& src = polygon->GetVertices();
 // 			const size_t size = src.size();
 // 			std::vector<b2Vec2> dst(size);
 // 			for (size_t j = 0; j < size; ++j)
@@ -94,7 +94,7 @@ b2Body* ResolveToB2::CreateBody(const Body& data, b2World* world,
 
 			//////////////////////////////////////////////////////////////////////////
 
-			const std::vector<ee::Vector>& src = polygon->GetVertices();
+			const std::vector<sm::vec2>& src = polygon->GetVertices();
 			for (int i = 0, n = src.size(); i < n; i += 3) {
  				b2Vec2 dst[3];
 				for (int j = 0; j < 3; ++j) {
@@ -111,7 +111,7 @@ b2Body* ResolveToB2::CreateBody(const Body& data, b2World* world,
 		}
 		else if (eshape::ChainShape* chain = dynamic_cast<eshape::ChainShape*>(fData->m_shape))
 		{
-			const std::vector<ee::Vector>& src = chain->GetVertices();
+			const std::vector<sm::vec2>& src = chain->GetVertices();
 			const size_t size = src.size();
 			std::vector<b2Vec2> dst(size);
 			for (size_t j = 0; j < size; ++j)
@@ -235,7 +235,7 @@ b2Joint* ResolveToB2::CreateJoint(const Joint& data, b2World* world,
 
 			b2Vec2 groundAnchorA(joint->m_ground_anchor_a.x / ee::BOX2D_SCALE_FACTOR, joint->m_ground_anchor_a.y / ee::BOX2D_SCALE_FACTOR),
 				groundAnchorB(joint->m_ground_anchor_b.x / ee::BOX2D_SCALE_FACTOR, joint->m_ground_anchor_b.y / ee::BOX2D_SCALE_FACTOR);
-			ee::Vector anchorA_ = joint->GetWorldAnchorA(),
+			sm::vec2 anchorA_ = joint->GetWorldAnchorA(),
 				anchorB_ = joint->GetWorldAnchorB();
 			b2Vec2 anchorA(anchorA_.x / ee::BOX2D_SCALE_FACTOR, anchorA_.y / ee::BOX2D_SCALE_FACTOR),
 				anchorB(anchorB_.x / ee::BOX2D_SCALE_FACTOR, anchorB_.y / ee::BOX2D_SCALE_FACTOR);
@@ -263,7 +263,7 @@ b2Joint* ResolveToB2::CreateJoint(const Joint& data, b2World* world,
 			b2Body* body_a = itrA->second;
 			b2Body* body_b = itrB->second;
 
-			ee::Vector pos = joint->GetWorldAnchorB() / ee::BOX2D_SCALE_FACTOR;
+			sm::vec2 pos = joint->GetWorldAnchorB() / ee::BOX2D_SCALE_FACTOR;
 			b2Vec2 axis(joint->m_local_axis_a.x, joint->m_local_axis_a.y);
 			axis.Normalize();
 			jd.Initialize(body_a, body_b, b2Vec2(pos.x, pos.y), axis);

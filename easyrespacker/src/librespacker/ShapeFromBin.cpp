@@ -32,7 +32,7 @@ void ShapeFromBin::Unpack(uint8_t** ptr, PackShape* shape)
 		unpack(x, ptr);
 		unpack(y, ptr);
 
-		ee::Vector pos;
+		sm::vec2 pos;
 		pos.x = (float)x / SCALE;
 		pos.y =-(float)y / SCALE;
 

@@ -20,7 +20,7 @@ BezierShape::BezierShape(const BezierShape& bezier)
 	createCurve();
 }
 
-BezierShape::BezierShape(const ee::Vector points[4])
+BezierShape::BezierShape(const sm::vec2 points[4])
 {
 	m_draw_dir = false;
 
@@ -28,15 +28,15 @@ BezierShape::BezierShape(const ee::Vector points[4])
 	createCurve();
 }
 
-BezierShape::BezierShape(const ee::Vector& start, const ee::Vector& end)
+BezierShape::BezierShape(const sm::vec2& start, const sm::vec2& end)
 {
 	m_draw_dir = false;
 
 	m_control_nodes[0] = start;
 	m_control_nodes[3] = end;
 
-	ee::Vector mid = (start + end) * 0.5f;
-	ee::Vector offset = (end - start) * 0.5f;
+	sm::vec2 mid = (start + end) * 0.5f;
+	sm::vec2 offset = (end - start) * 0.5f;
 	m_control_nodes[1] = mid + ee::Math2D::RotateVectorRightAngle(offset, true);
 	m_control_nodes[2] = mid + ee::Math2D::RotateVectorRightAngle(offset, false);
 
@@ -53,7 +53,7 @@ BezierShape* BezierShape::Clone() const
 	return new BezierShape(*this);
 }
 
-bool BezierShape::IsContain(const ee::Vector& pos) const
+bool BezierShape::IsContain(const sm::vec2& pos) const
 {
 	bool ret = false;
 	for (size_t i = 0; i < CTRL_NODE_COUNT; ++i) {
@@ -65,7 +65,7 @@ bool BezierShape::IsContain(const ee::Vector& pos) const
 	return ret;
 }
 
-void BezierShape::Translate(const ee::Vector& offset)
+void BezierShape::Translate(const sm::vec2& offset)
 {
 	ChainShape::Translate(offset);
 	for (int i = 0; i < CTRL_NODE_COUNT; ++i) {
@@ -78,7 +78,7 @@ void BezierShape::Draw(const sm::mat4& mt, const ee::RenderColor& color) const
 	ChainShape::Draw(mt, color);
 
 	for (size_t i = 0; i < CTRL_NODE_COUNT; ++i) {
-		ee::Vector pos = ee::Math2D::TransVector(m_control_nodes[i], mt);
+		sm::vec2 pos = ee::Math2D::TransVector(m_control_nodes[i], mt);
 		ee::RVG::Rect(pos, (float)RADIUS, (float)RADIUS, false);
 	}
 }
@@ -92,7 +92,7 @@ void BezierShape::LoadFromFile(const Json::Value& value, const std::string& dir)
 {
 	ee::Shape::LoadFromFile(value, dir);
 
-	ee::Vector points[4];
+	sm::vec2 points[4];
 	for (size_t i = 0; i < 4; ++i)
 	{
 		points[i].x = value["points"]["x"][i].asDouble();
@@ -117,7 +117,7 @@ void BezierShape::createCurve()
 {
 	const size_t num = std::max(20, (int)(ee::Math2D::GetDistance(m_control_nodes[0], m_control_nodes[3]) / 10));
 	float dt = 1.0f / (num - 1);
-	std::vector<ee::Vector> vertices(num);
+	std::vector<sm::vec2> vertices(num);
 	for (size_t i = 0; i < num; ++i)
 		vertices[i] = pointOnCubicBezier(i * dt);
 	Load(vertices);
@@ -137,7 +137,7 @@ void BezierShape::Mirror(bool x, bool y)
 	}
 }
 
-void BezierShape::MoveCtrlNode(const ee::Vector& from, const ee::Vector& to)
+void BezierShape::MoveCtrlNode(const sm::vec2& from, const sm::vec2& to)
 {
 	for (int i = 0; i < CTRL_NODE_COUNT; ++i) {
 		if (m_control_nodes[i] == from) {
@@ -147,19 +147,19 @@ void BezierShape::MoveCtrlNode(const ee::Vector& from, const ee::Vector& to)
 	}
 }
 
-void BezierShape::CopyCtrlNodes(const ee::Vector ctrl_points[])
+void BezierShape::CopyCtrlNodes(const sm::vec2 ctrl_points[])
 {
 	for (int i = 0; i < CTRL_NODE_COUNT; ++i) {
 		m_control_nodes[i] = ctrl_points[i];
 	}
 }
 
-ee::Vector BezierShape::pointOnCubicBezier(float t)
+sm::vec2 BezierShape::pointOnCubicBezier(float t)
 {
 	float ax, bx, cx;
 	float ay, by, cy;
 	float tSquared, tCubed;
-	ee::Vector result;
+	sm::vec2 result;
 
 	cx = 3.0f * (m_control_nodes[1].x - m_control_nodes[0].x);
 	bx = 3.0f * (m_control_nodes[2].x - m_control_nodes[1].x) - cx;

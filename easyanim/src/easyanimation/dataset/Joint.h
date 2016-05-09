@@ -1,8 +1,6 @@
 #ifndef _EASYANIM_JOINT_H_
 #define _EASYANIM_JOINT_H_
 
-#include <ee/Vector.h>
-
 #include <set>
 
 namespace ee { class Sprite; }
@@ -14,18 +12,18 @@ class Joint
 {
 public:
 	Joint(ee::Sprite* sprite);
-	Joint(ee::Sprite* sprite, const ee::Vector& pos);
+	Joint(ee::Sprite* sprite, const sm::vec2& pos);
 	~Joint();
 
 	void Draw() const;
 
-	bool Contain(const ee::Vector& pos) const;
-	bool Intersect(const ee::Vector& pos) const;
+	bool Contain(const sm::vec2& pos) const;
+	bool Intersect(const sm::vec2& pos) const;
 
-	void SetPosition(const ee::Vector& pos);
+	void SetPosition(const sm::vec2& pos);
 
-	ee::Vector GetWorldPos() const;
-	ee::Vector GetRelativePos(const ee::Vector& pos) const;
+	sm::vec2 GetWorldPos() const;
+	sm::vec2 GetRelativePos(const sm::vec2& pos) const;
 
 	bool Connect(Joint* joint);
 	void Deconnect();
@@ -33,14 +31,14 @@ public:
 private:
 	void CreateId();
 
-	ee::Vector GetRelativePos() const;
+	sm::vec2 GetRelativePos() const;
 
 private:
 	int m_id;
 
 	ee::Sprite* m_sprite;
 
-	ee::Vector m_relative_pos;
+	sm::vec2 m_relative_pos;
 	float m_relative_angle;
 
 	Joint* m_parent;

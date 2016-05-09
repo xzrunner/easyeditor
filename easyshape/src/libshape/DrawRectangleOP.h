@@ -2,7 +2,8 @@
 #define _EASYSHAPE_DRAW_RECTANGLE_OP_H_
 
 #include <ee/ZoomViewOP.h>
-#include <ee/Vector.h>
+
+#include <SM_Vector.h>
 
 namespace eshape
 {
@@ -20,7 +21,8 @@ public:
 	virtual bool Clear();
 
 protected:
-	ee::Vector m_first_pos, m_curr_pos;
+	sm::vec2 m_first_pos, m_curr_pos;
+	bool m_first_pos_valid, m_curr_pos_valid;
 
 }; // DrawRectangleOP
 

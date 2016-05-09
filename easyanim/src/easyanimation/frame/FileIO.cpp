@@ -457,7 +457,7 @@ ee::Sprite* FileIO::LoadActor(rapidxml::xml_node<>* actorNode,
 	ee::StringHelper::FromString(sx, x);
 	ee::StringHelper::FromString(sy, y);
 
-	sprite->SetTransform(ee::Vector(float(tx+x), float(ty+y)), 0);
+	sprite->SetTransform(sm::vec2(float(tx+x), float(ty+y)), 0);
 
 	return sprite;
 }

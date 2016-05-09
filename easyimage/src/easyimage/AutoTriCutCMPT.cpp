@@ -96,8 +96,8 @@ void AutoTriCutCMPT::OutputOutline(wxCommandEvent& event)
 	Json::Value value;
 	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editop);
 
-	ee::Vector offset(-0.5f*img->GetOriginWidth(), -0.5f*img->GetOriginHeight());
-	std::vector<ee::Vector> vertices(op->m_fine_bound_line);
+	sm::vec2 offset(-0.5f*img->GetOriginWidth(), -0.5f*img->GetOriginHeight());
+	std::vector<sm::vec2> vertices(op->m_fine_bound_line);
 	for (int i = 0, n = vertices.size(); i < n; ++i) {
 		vertices[i] += offset;
 	}

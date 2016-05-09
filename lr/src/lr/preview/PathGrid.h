@@ -20,7 +20,7 @@ public:
 
 	virtual void DisableRegion(const ee::Sprite* spr, bool disable);
 
-	virtual void QueryRoute(const ee::Vector& start, const ee::Vector& end);
+	virtual void QueryRoute(const sm::vec2& start, const sm::vec2& end);
 
 	virtual void DebugDraw() const;
 
@@ -50,18 +50,18 @@ private:
 		Network(const ee::Rect& region, int row, int col);
 		~Network();
 
-		virtual ee::Vector TransIDToPos(int id) const;
+		virtual sm::vec2 TransIDToPos(int id) const;
 
 		void SetStatus(const ee::Rect& region, bool used);
 
-		VisitedNode* QueryRoute(const ee::Vector& start, const ee::Vector& end);
+		VisitedNode* QueryRoute(const sm::vec2& start, const sm::vec2& end);
 
 		void DebugDraw() const;
 
 	private:
-		Node* QueryNode(const ee::Vector& pos) const;
+		Node* QueryNode(const sm::vec2& pos) const;
 
-		void Expand(VisitedNode* node, const ee::Vector& end);
+		void Expand(VisitedNode* node, const sm::vec2& end);
 
 		void GetConnections(VisitedNode* node, std::vector<Connection>& connections) const;
 
@@ -84,7 +84,7 @@ private:
 private:
 	Network m_nw;
 
-	std::vector<ee::Vector> m_routes;
+	std::vector<sm::vec2> m_routes;
 
 }; // PathGrid
 

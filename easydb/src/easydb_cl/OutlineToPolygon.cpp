@@ -64,7 +64,7 @@ void OutlineToPolygon::Trigger(const std::string& dir) const
 		reader.parse(fin, value);
 		fin.close();
 
-		std::vector<ee::Vector> vertices;
+		std::vector<sm::vec2> vertices;
 		ee::JsonSerializer::Load(value["normal"], vertices);
 		if (vertices.empty()) {
 			continue;

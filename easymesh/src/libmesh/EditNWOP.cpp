@@ -23,7 +23,6 @@ EditNWOP::EditNWOP(StagePanel* stage)
 	, m_select_center(false)
 	, m_dragable(false)
 {
-	m_last_pos.SetInvalid();
 	m_center.Set(0, 0);
 }
 
@@ -90,7 +89,7 @@ bool EditNWOP::OnMouseDrag(int x, int y)
 
 	if (m_select_center)
 	{
-		ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 		m_center = pos;
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		return true;
@@ -104,7 +103,7 @@ bool EditNWOP::OnMouseDrag(int x, int y)
 
 	if (!m_selection.IsEmpty())
 	{
-		ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 		if (m_right_press)
 			RotateNode(pos);
 		else
@@ -136,7 +135,7 @@ bool EditNWOP::OnDraw() const
 	return false;
 }
 
-void EditNWOP::TranslasteNode(const ee::Vector& offset)
+void EditNWOP::TranslasteNode(const sm::vec2& offset)
 {
 	std::vector<Node*> nodes;
 	m_selection.Traverse(ee::FetchAllVisitor<Node>(nodes));
@@ -146,7 +145,7 @@ void EditNWOP::TranslasteNode(const ee::Vector& offset)
 	}
 }
 
-void EditNWOP::RotateNode(const ee::Vector& dst)
+void EditNWOP::RotateNode(const sm::vec2& dst)
 {
 	float angle = ee::Math2D::GetAngleInDirection(m_center, m_last_pos, dst);
 	std::vector<Node*> nodes;
@@ -154,7 +153,7 @@ void EditNWOP::RotateNode(const ee::Vector& dst)
 	for (int i = 0, n = nodes.size(); i < n; ++i)
 	{
 		Node* node = nodes[i];
-		ee::Vector v = node->xy - m_center;
+		sm::vec2 v = node->xy - m_center;
 		v = ee::Math2D::RotateVector(v, angle);
 		node->xy = m_center + v;
 	}

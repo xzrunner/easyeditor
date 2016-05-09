@@ -21,7 +21,7 @@ CheckerBoard::CheckerBoard(StagePanel* stage)
 void CheckerBoard::Traverse(ee::Visitor& visitor) const
 {
 	bool next;
-	std::map<ee::Sprite*, ee::Vector>::const_iterator itr 
+	std::map<ee::Sprite*, sm::vec2>::const_iterator itr 
 		= m_map_sprite2pos.begin();
 	for ( ; itr != m_map_sprite2pos.end(); ++itr) {
 		visitor.Visit(itr->first, next);
@@ -54,7 +54,7 @@ void CheckerBoard::RemoveSprite(ee::Sprite* sprite)
 		return;
 	}
 
-	std::map<ee::Sprite*, ee::Vector>::iterator itr 
+	std::map<ee::Sprite*, sm::vec2>::iterator itr 
 		= m_map_sprite2pos.find(sprite);
 	assert(itr != m_map_sprite2pos.end());
 
@@ -106,7 +106,7 @@ bool CheckerBoard::IsValid(ee::Sprite* sprite) const
 	return true;
 }
 
-bool CheckerBoard::IsValid(const ee::Symbol& symbol, const ee::Vector& pos) const
+bool CheckerBoard::IsValid(const ee::Symbol& symbol, const sm::vec2& pos) const
 {
 	int row, col;
 	m_stage->TransCoordsToGridPos(pos, row, col);
@@ -133,7 +133,7 @@ void CheckerBoard::DebugDraw() const
 	for (int i = 0; i < ROW; ++i) {
 		for (int j = 0; j < COL; ++j) {
 			if (m_grid[i][j]) {
-				ee::Vector pos;
+				sm::vec2 pos;
 				m_stage->TransGridPosToCoords(i, j, pos);
 				ee::RVG::Color(ee::Colorf(0, 0, 0));
 				ee::RVG::Circle(pos, 10, true);
@@ -144,7 +144,7 @@ void CheckerBoard::DebugDraw() const
 
 bool CheckerBoard::SetCachedPos(ee::Sprite* sprite) const
 {
-	std::map<ee::Sprite*, ee::Vector>::const_iterator itr 
+	std::map<ee::Sprite*, sm::vec2>::const_iterator itr 
 		= m_map_removed.find(sprite);
 	if (itr != m_map_removed.end()) {
 		sprite->SetTransform(itr->second, sprite->GetAngle());

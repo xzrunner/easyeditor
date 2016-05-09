@@ -20,16 +20,16 @@ OffsetSpriteState::~OffsetSpriteState()
 	m_sprite->Release();
 }
 
-void OffsetSpriteState::OnMouseRelease(const Vector& pos)
+void OffsetSpriteState::OnMouseRelease(const sm::vec2& pos)
 {
-	Vector new_offset = Math2D::RotateVector(pos - m_sprite->GetCenter(), -m_sprite->GetAngle());
+	sm::vec2 new_offset = Math2D::RotateVector(pos - m_sprite->GetCenter(), -m_sprite->GetAngle());
 	AtomicOP* aop = new OffsetSpriteAOP(m_sprite, new_offset, m_old_offset);
 	EditAddRecordSJ::Instance()->Add(aop);
 }
 
-bool OffsetSpriteState::OnMouseDrag(const Vector& pos)
+bool OffsetSpriteState::OnMouseDrag(const sm::vec2& pos)
 {
-	Vector offset = Math2D::RotateVector(pos - m_sprite->GetCenter(), -m_sprite->GetAngle());
+	sm::vec2 offset = Math2D::RotateVector(pos - m_sprite->GetCenter(), -m_sprite->GetAngle());
 	m_sprite->SetOffset(offset);
 	return true;
 }

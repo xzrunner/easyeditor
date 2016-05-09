@@ -2,7 +2,8 @@
 #define _EASYEDITOR_DRAG_PHYSICS_OP_H_
 
 #include "ZoomViewOP.h"
-#include "Vector.h"
+
+#include <SM_Vector.h>
 
 #include <Box2D/Box2D.h>
 
@@ -26,7 +27,7 @@ private:
 public:
 	b2MouseJoint* m_mouseJoint;
 
-	Vector currPos;
+	sm::vec2 m_curr_pos;
 
 }; // DragPhysicsOP
 

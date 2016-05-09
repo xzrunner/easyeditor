@@ -52,7 +52,7 @@ Body* FileApapter::ToBody(const Json::Value& bodyValue, const std::string& dlg)
 	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 	symbol->Release();
 
-	ee::Vector pos;
+	sm::vec2 pos;
 	pos.x = bodyValue["position"]["x"].asDouble();
 	pos.y = bodyValue["position"]["y"].asDouble();
 	float angle = bodyValue["angle"].asDouble();

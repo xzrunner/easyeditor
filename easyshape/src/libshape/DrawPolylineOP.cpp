@@ -11,18 +11,18 @@ namespace eshape
 
 DrawPolylineOP::DrawPolylineOP(wxWindow* wnd, ee::EditPanelImpl* stage, bool isClosed)
 	: ee::ZoomViewOP(wnd, stage, true, false)
+	, m_curr_pos_valid(false)
 {
 	m_cursor = wxCursor(wxCURSOR_RIGHT_ARROW);
 
-	m_isClosed = isClosed;
-	m_curr_pos.SetInvalid();
+	m_is_closed = isClosed;
 }
 
 bool DrawPolylineOP::OnMouseLeftDown(int x, int y)
 {
 	if (ee::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	if (DrawLineUtility::IsStraightOpen(m_polyline, m_stage->GetKeyState())) {
 		pos = DrawLineUtility::FixPosTo8DirStraight(m_polyline.back(), pos);
 	}
@@ -39,7 +39,7 @@ bool DrawPolylineOP::OnMouseRightDown(int x, int y)
 	if (!m_polyline.empty())
 	{
 		m_polyline.pop_back();
-		if (m_polyline.empty()) m_curr_pos.SetInvalid();
+		if (m_polyline.empty()) m_curr_pos_valid = false;
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
@@ -52,11 +52,12 @@ bool DrawPolylineOP::OnMouseMove(int x, int y)
 
 	if (m_polyline.empty()) return false;
 
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	if (DrawLineUtility::IsStraightOpen(m_polyline, m_stage->GetKeyState())) {
 		pos = DrawLineUtility::FixPosTo8DirStraight(m_polyline.back(), pos);
 	}
 	m_curr_pos = pos;
+	m_curr_pos_valid = true;
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	return false;
@@ -66,7 +67,7 @@ bool DrawPolylineOP::OnMouseLeftDClick(int x, int y)
 {
 	if (ee::ZoomViewOP::OnMouseLeftDClick(x, y)) return true;
 
-	if (m_isClosed)
+	if (m_is_closed)
 		m_polyline.push_back(m_polyline.front());
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
@@ -80,7 +81,7 @@ bool DrawPolylineOP::OnDraw() const
 	if (!m_polyline.empty())
 	{
 		ee::RVG::Color(ee::Colorf(0, 0, 0));
-		if (m_curr_pos.IsValid())
+		if (m_curr_pos_valid)
 		{
 			m_polyline.push_back(m_curr_pos);
 			ee::RVG::Polyline(m_polyline, false);
@@ -100,7 +101,7 @@ bool DrawPolylineOP::Clear()
 	if (ee::ZoomViewOP::Clear()) return true;
 
 	m_polyline.clear();
-	m_curr_pos.SetInvalid();
+	m_curr_pos_valid = false;
 
 	return false;
 }

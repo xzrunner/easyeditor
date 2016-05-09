@@ -8,7 +8,7 @@
 //namespace ee
 //{
 //
-//Joint::Joint(b2World* world, const JointDef& params, const Vector& anchor, 
+//Joint::Joint(b2World* world, const JointDef& params, const sm::vec2& anchor, 
 //			 b2Body* b0, b2Body* b1, bool isMotor, float scale)
 //	: m_world(world), m_joint(NULL)
 //{
@@ -50,7 +50,7 @@
 //	m_joint->SetLimits(lower, upper);
 //}
 //
-//void Joint::initialize(const JointDef& params, const Vector& anchor, b2Body* b0, b2Body* b1, bool isMotor)
+//void Joint::initialize(const JointDef& params, const sm::vec2& anchor, b2Body* b0, b2Body* b1, bool isMotor)
 //{
 //	m_negativeSpeed = params.negative_speed;
 //	m_positiveSpeed = params.positive_speed;

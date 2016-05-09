@@ -11,19 +11,19 @@ namespace eshape
 
 DrawCurveOP::DrawCurveOP(wxWindow* wnd, ee::EditPanelImpl* stage)
 	: ee::ZoomViewOP(wnd, stage, true)
-	, m_startDraw(false)
+	, m_start_draw(false)
 	, m_straight_mode(false)
+	, m_first_pos_valid(false)
 {
 	m_cursor = wxCursor(wxCURSOR_PENCIL);
-
-	m_firstPos.SetInvalid();
 }
 
 bool DrawCurveOP::OnMouseLeftDown(int x, int y)
 {
 	if (ee::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
-	m_firstPos.Set(x, y);
+	m_first_pos.Set(x, y);
+	m_first_pos_valid = true;
 
 	return false;
 }
@@ -32,8 +32,8 @@ bool DrawCurveOP::OnMouseLeftUp(int x, int y)
 {
 	if (ee::ZoomViewOP::OnMouseLeftUp(x, y)) return true;
 
-	m_firstPos.SetInvalid();
-	m_startDraw = false;
+	m_first_pos_valid = false;
+	m_start_draw = false;
 
 	return false;
 }
@@ -42,16 +42,16 @@ bool DrawCurveOP::OnMouseDrag(int x, int y)
 {
 	if (ee::ZoomViewOP::OnMouseDrag(x, y)) return true;
 
-	if (!m_startDraw && m_firstPos.IsValid() && 
-		(m_firstPos.x != x || m_firstPos.y != y)) {
-		m_startDraw = true;
+	if (!m_start_draw && m_first_pos_valid && 
+		(m_first_pos.x != x || m_first_pos.y != y)) {
+		m_start_draw = true;
 	}
 
-	if (!m_startDraw) {
+	if (!m_start_draw) {
 		return false;
 	}
 
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	if (DrawLineUtility::IsStraightOpen(m_curve, m_stage->GetKeyState())) {
 		pos = DrawLineUtility::FixPosTo8DirStraight(m_curve.back(), pos);
 		m_curve.pop_back();
@@ -80,8 +80,8 @@ bool DrawCurveOP::Clear()
 	if (ee::ZoomViewOP::Clear()) return true;
 
 	m_curve.clear();
-	m_firstPos.SetInvalid();
-	m_startDraw = false;
+	m_first_pos_valid = false;
+	m_start_draw = false;
 
 	return false;
 }

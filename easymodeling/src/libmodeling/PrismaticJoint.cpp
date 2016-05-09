@@ -19,12 +19,12 @@ PrismaticJoint::PrismaticJoint(Body* b0, Body* b1)
 	, m_max_motor_force(0.0f)
 	, m_motor_speed(0.0f)
 {
-	ee::Vector center = (b0->m_sprite->GetPosition() + b1->m_sprite->GetPosition()) * 0.5f;
+	sm::vec2 center = (b0->m_sprite->GetPosition() + b1->m_sprite->GetPosition()) * 0.5f;
 	SetLocalAnchorA(center);
 	SetLocalAnchorB(center);
 }
 
-bool PrismaticJoint::IsContain(const ee::Vector& pos) const
+bool PrismaticJoint::IsContain(const sm::vec2& pos) const
 {
 	return ee::Math2D::GetDistance(GetWorldAnchorA(), pos) < JOINT_RADIUS_OUT
 		|| ee::Math2D::GetDistance(GetWorldAnchorB(), pos) < JOINT_RADIUS_OUT;
@@ -38,7 +38,7 @@ bool PrismaticJoint::IsIntersect(const ee::Rect& rect) const
 
 void PrismaticJoint::Draw(DrawType type) const
 {
-	const ee::Vector anchorA = GetWorldAnchorA(),
+	const sm::vec2 anchorA = GetWorldAnchorA(),
 		anchorB = GetWorldAnchorB();
 
 	if (type == e_selected || type == e_mouseOn)
@@ -57,27 +57,27 @@ void PrismaticJoint::Draw(DrawType type) const
 	DrawAnchor(anchorB, type);
 }
 
-ee::Vector PrismaticJoint::GetWorldAnchorA() const
+sm::vec2 PrismaticJoint::GetWorldAnchorA() const
 {
 	return TransLocalToWorld(m_local_anchor_a, m_body_a->m_sprite);
 }
 
-ee::Vector PrismaticJoint::GetWorldAnchorB() const
+sm::vec2 PrismaticJoint::GetWorldAnchorB() const
 {
 	return TransLocalToWorld(m_local_anchor_b, m_body_b->m_sprite);
 }
 
-void PrismaticJoint::SetLocalAnchorA(const ee::Vector& world)
+void PrismaticJoint::SetLocalAnchorA(const sm::vec2& world)
 {
 	m_local_anchor_a = TransWorldToLocal(world, m_body_a->m_sprite);
 }
 
-void PrismaticJoint::SetLocalAnchorB(const ee::Vector& world)
+void PrismaticJoint::SetLocalAnchorB(const sm::vec2& world)
 {
 	m_local_anchor_b = TransWorldToLocal(world, m_body_b->m_sprite);
 }
 
-void PrismaticJoint::DrawAnchor(const ee::Vector& pos, DrawType type) const
+void PrismaticJoint::DrawAnchor(const sm::vec2& pos, DrawType type) const
 {
 	ee::Colorf color;
 	switch (type)

@@ -14,8 +14,8 @@ namespace emesh
 SelectNodesOP::SelectNodesOP(StagePanel* stage)
 	: ee::DrawRectangleOP(stage, stage->GetStageImpl(), false)
 	, m_draggable(true)
+	, m_first_pos_valid(false)
 {
-	m_first_pos.SetInvalid();
 }
 
 SelectNodesOP::~SelectNodesOP()
@@ -31,7 +31,7 @@ bool SelectNodesOP::OnMouseLeftDown(int x, int y)
 	Mesh* mesh = static_cast<StagePanel*>(m_wnd)->GetMesh();
 	if (!mesh) return false;
 
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	Node* selected = mesh->PointQueryNode(pos);
 	if (selected)
 	{
@@ -57,6 +57,7 @@ bool SelectNodesOP::OnMouseLeftDown(int x, int y)
 		DrawRectangleOP::OnMouseLeftDown(x, y);
 
 		m_first_pos = pos;
+		m_first_pos_valid = true;
 		if (m_stage->GetKeyState(WXK_CONTROL)) {
 			m_draggable = false;
 		} else {
@@ -75,9 +76,9 @@ bool SelectNodesOP::OnMouseLeftUp(int x, int y)
 	m_draggable = true;
 
 	Mesh* mesh = static_cast<StagePanel*>(m_wnd)->GetMesh();
-	if (m_first_pos.IsValid() && mesh)
+	if (m_first_pos_valid && mesh)
 	{
-		ee::Vector end = m_stage->TransPosScrToProj(x, y);
+		sm::vec2 end = m_stage->TransPosScrToProj(x, y);
 		ee::Rect rect(m_first_pos, end);
 		std::vector<Node*> nodes;
 		mesh->RectQueryNodes(rect, nodes);
@@ -85,7 +86,7 @@ bool SelectNodesOP::OnMouseLeftUp(int x, int y)
 			m_selection.Add(nodes[i]);
 		}
 
-		m_first_pos.SetInvalid();
+		m_first_pos_valid = false;
 
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
@@ -104,7 +105,7 @@ bool SelectNodesOP::OnMouseDrag(int x, int y)
 
 bool SelectNodesOP::OnDraw() const
 {
-	if (m_first_pos.IsValid())
+	if (m_first_pos_valid)
 	{
 		if (ee::DrawRectangleOP::OnDraw())
 			return true;
@@ -112,7 +113,7 @@ bool SelectNodesOP::OnDraw() const
 
 	std::vector<Node*> nodes;
 	m_selection.Traverse(ee::FetchAllVisitor<Node>(nodes));
-	std::vector<ee::Vector> points;
+	std::vector<sm::vec2> points;
 	points.reserve(nodes.size());
 	for (int i = 0, n = nodes.size(); i < n; ++i)
 		points.push_back(nodes[i]->xy);
@@ -130,7 +131,7 @@ bool SelectNodesOP::Clear()
 	if (ee::DrawRectangleOP::Clear()) return true;
 
 	m_selection.Clear();
-	m_first_pos.SetInvalid();
+	m_first_pos_valid = false;
 
 	return false;
 }

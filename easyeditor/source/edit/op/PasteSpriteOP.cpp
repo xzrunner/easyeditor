@@ -21,7 +21,7 @@ PasteSpriteOP::PasteSpriteOP(wxWindow* wnd, EditPanelImpl* stage,
 	m_selection = sprites_impl->GetSpriteSelection();
 	m_selection->Retain();
 
-	m_pos.SetInvalid();
+	m_pos_valid = false;
 }
 
 PasteSpriteOP::~PasteSpriteOP()
@@ -34,14 +34,14 @@ bool PasteSpriteOP::OnKeyDown(int keyCode)
 	if (SelectSpritesOP::OnKeyDown(keyCode)) return true;
 
 	if (keyCode == WXK_DELETE)
-		m_batch.clear();
+		m_batch.Clear();
 
 	return false;
 }
 
 bool PasteSpriteOP::OnMouseLeftDown(int x, int y)
 {
-	if (m_batch.empty())
+	if (m_batch.Empty())
 	{
 		if (SelectSpritesOP::OnMouseLeftDown(x, y))
 			return true;
@@ -55,17 +55,17 @@ bool PasteSpriteOP::OnMouseLeftDown(int x, int y)
 	setMousePos(x, y);
 
 	if (m_cmpt)
-		m_batch.insertToSpritesImpl(m_pos, m_cmpt->isHorMirror(), m_cmpt->isVerMirror());
+		m_batch.InsertToSpritesImpl(m_pos, m_cmpt->isHorMirror(), m_cmpt->isVerMirror());
 	else
-		m_batch.insertToSpritesImpl(m_pos, false, false);
-	m_batch.loadFromSelection(*m_selection);
+		m_batch.InsertToSpritesImpl(m_pos, false, false);
+	m_batch.LoadFromSelection(*m_selection);
 
 	return false;
 }
 
 bool PasteSpriteOP::OnMouseLeftUp(int x, int y)
 {
-	if (m_batch.empty())
+	if (m_batch.Empty())
 	{
 		if (SelectSpritesOP::OnMouseLeftUp(x, y))
 			return true;
@@ -78,7 +78,7 @@ bool PasteSpriteOP::OnMouseLeftUp(int x, int y)
 
 	setMousePos(x, y);
 
-	m_batch.loadFromSelection(*m_selection);
+	m_batch.LoadFromSelection(*m_selection);
 
 	return false;
 }
@@ -107,10 +107,12 @@ bool PasteSpriteOP::OnDraw() const
 {
 	if (SelectSpritesOP::OnDraw()) return true;
 
-	if (m_cmpt)
-		m_batch.draw(m_pos, m_cmpt->isHorMirror(), m_cmpt->isVerMirror());
-	else
-		m_batch.draw(m_pos, false, false);
+	if (m_pos_valid) {
+		if (m_cmpt)
+			m_batch.Draw(m_pos, m_cmpt->isHorMirror(), m_cmpt->isVerMirror());
+		else
+			m_batch.Draw(m_pos, false, false);
+	}
 
 	return false;
 }
@@ -119,8 +121,8 @@ bool PasteSpriteOP::Clear()
 {
 	if (SelectSpritesOP::Clear()) return true;
 
-	m_pos.SetInvalid();
-	m_batch.clear();
+	m_pos_valid = false;
+	m_batch.Clear();
 
 	return false;
 }
@@ -128,15 +130,16 @@ bool PasteSpriteOP::Clear()
 void PasteSpriteOP::setMousePos(int x, int y)
 {
 	m_pos = m_stage->TransPosScrToProj(x, y);
+	m_pos_valid = true;
 	if (m_stage->GetKeyState(WXK_SHIFT))
 		fixPosOrthogonal();
 }
 
 void PasteSpriteOP::fixPosOrthogonal()
 {
-	const Vector& center = m_batch.getCenter();
-	if (m_pos.IsValid() && center.IsValid())
+	if (m_pos_valid && m_batch.IsCenterValid())
 	{
+		const sm::vec2& center = m_batch.GetCenter();
 		if (fabs(m_pos.x - center.x) < fabs(m_pos.y - center.y))
 			m_pos.x = center.x;
 		else
@@ -150,34 +153,34 @@ void PasteSpriteOP::fixPosOrthogonal()
 
 PasteSpriteOP::SpriteBatch::
 SpriteBatch()
+	: m_valid(false)
 {
-	m_center.SetInvalid();
 }
 
 PasteSpriteOP::SpriteBatch::
 ~SpriteBatch()
 {
-	clear();
+	Clear();
 }
 
 void PasteSpriteOP::SpriteBatch::
-loadFromSelection(const SpriteSelection& selection)
+LoadFromSelection(const SpriteSelection& selection)
 {
 	if (!selection.IsEmpty())
 	{	
-		clear();
+		Clear();
 		selection.Traverse(FetchAllVisitor<Sprite>(m_selected));
-		computeCenter();
+		ComputeCenter();
 	}
 }
 
 void PasteSpriteOP::SpriteBatch::
-insertToSpritesImpl(const Vector& pos, bool isHorMirror, bool isVerMirror)
+InsertToSpritesImpl(const sm::vec2& pos, bool isHorMirror, bool isVerMirror)
 {
 	for (size_t i = 0, n = m_selected.size(); i < n; ++i)
 	{
 		Sprite* sprite = m_selected[i];
-		Vector fixed = sprite->GetPosition() - m_center;
+		sm::vec2 fixed = sprite->GetPosition() - m_center;
 		if (isHorMirror)
 			fixed.x += (m_center.x - sprite->GetPosition().x) * 2;
 		if (isVerMirror)
@@ -193,16 +196,16 @@ insertToSpritesImpl(const Vector& pos, bool isHorMirror, bool isVerMirror)
 }
 
 void PasteSpriteOP::SpriteBatch::
-draw(const Vector& pos, bool isHorMirror, bool isVerMirror) const
+Draw(const sm::vec2& pos, bool isHorMirror, bool isVerMirror) const
 {
-	if (!m_selected.empty() && pos.IsValid())
+	if (!m_selected.empty() && m_valid)
 	{
 		const float xOffset = pos.x - m_center.x,
 			yOffset = pos.y - m_center.y;
 
 		for (size_t i = 0, n = m_selected.size(); i < n; ++i)
 		{
-			const Vector& pos = m_selected[i]->GetPosition();
+			const sm::vec2& pos = m_selected[i]->GetPosition();
 
 			float x = xOffset, y = yOffset;
 			if (isHorMirror)
@@ -216,19 +219,20 @@ draw(const Vector& pos, bool isHorMirror, bool isVerMirror) const
 }
 
 void PasteSpriteOP::SpriteBatch::
-clear()
+Clear()
 {
 	m_selected.clear();
-	m_center.SetInvalid();
+	m_valid = false;
 }
 
 void PasteSpriteOP::SpriteBatch::
-computeCenter()
+ComputeCenter()
 {
 	m_center.Set(0, 0);
 	for (size_t i = 0, n = m_selected.size(); i < n; ++i)
 		m_center += m_selected[i]->GetPosition();
 	m_center /= m_selected.size();
+	m_valid = true;
 }
 
 }

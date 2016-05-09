@@ -65,7 +65,7 @@ void ScaleOverall::Scale(ee::Snapshoot& ss, const std::string& dir, float scale)
 	wxArrayString files;
 	ee::FileHelper::FetchAllFiles(dir, files);
 
-	std::map<std::string, ee::Vector> mapImg2Center;
+	std::map<std::string, sm::vec2> mapImg2Center;
 
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
@@ -87,13 +87,13 @@ void ScaleOverall::Scale(ee::Snapshoot& ss, const std::string& dir, float scale)
 }
 
 void ScaleOverall::ScaleImage(const std::string& filepath, float scale, ee::Snapshoot& ss,
-							  std::map<std::string, ee::Vector>& mapImg2Center) const
+							  std::map<std::string, sm::vec2>& mapImg2Center) const
 {
 	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	
 	ee::ImageSymbol* img = static_cast<ee::ImageSymbol*>(symbol);
 
-	ee::Vector img_offset;
+	sm::vec2 img_offset;
 	img_offset.x = img->GetSize().CenterX();
 	img_offset.y = img->GetSize().CenterY();
 	mapImg2Center.insert(std::make_pair(filepath, img_offset));
@@ -103,7 +103,7 @@ void ScaleOverall::ScaleImage(const std::string& filepath, float scale, ee::Snap
 }
 
 void ScaleOverall::ScaleComplex(const std::string& path, float scale,
-								const std::map<std::string, ee::Vector>& mapImg2Center) const
+								const std::map<std::string, sm::vec2>& mapImg2Center) const
 {
 	std::string filepath = ee::FileHelper::GetAbsolutePath(path);
 
@@ -123,13 +123,13 @@ void ScaleOverall::ScaleComplex(const std::string& path, float scale,
 		std::string relative = spriteVal["filepath"].asString();
 		std::string filepath = ee::FileHelper::GetAbsolutePath(dir, relative);
 
-		std::map<std::string, ee::Vector>::const_iterator itr 
+		std::map<std::string, sm::vec2>::const_iterator itr 
 			= mapImg2Center.find(filepath);
 		if (itr == mapImg2Center.end()) {
 //			throw ee::Exception("Image %s, not found in images!", filepath.c_str());
 			continue;
 		} else {
-			ee::Vector pos = GetScaledPos(spriteVal, scale, itr->second);
+			sm::vec2 pos = GetScaledPos(spriteVal, scale, itr->second);
 			value["sprite"][i-1]["position"]["x"] = pos.x;
 			value["sprite"][i-1]["position"]["y"] = pos.y;
 		}
@@ -146,7 +146,7 @@ void ScaleOverall::ScaleComplex(const std::string& path, float scale,
 }
 
 void ScaleOverall::ScaleAnim(const std::string& path, float scale,
-							 const std::map<std::string, ee::Vector>& mapImg2Center) const
+							 const std::map<std::string, sm::vec2>& mapImg2Center) const
 {
 	std::string filepath = ee::FileHelper::GetAbsolutePath(path);
 
@@ -172,13 +172,13 @@ void ScaleOverall::ScaleAnim(const std::string& path, float scale,
 				std::string relative = entryVal["filepath"].asString();
 				std::string filepath = ee::FileHelper::GetAbsolutePath(dir, relative);
 
-				std::map<std::string, ee::Vector>::const_iterator itr 
+				std::map<std::string, sm::vec2>::const_iterator itr 
 					= mapImg2Center.find(filepath);
 				if (itr == mapImg2Center.end()) {
 //					throw ee::Exception("Image %s, not found in images!", filepath.c_str());
 					continue;
 				} else {
-					ee::Vector pos = GetScaledPos(entryVal, scale, itr->second);
+					sm::vec2 pos = GetScaledPos(entryVal, scale, itr->second);
 					value["layer"][i-1]["frame"][j-1]["actor"][k-1]["position"]["x"] = pos.x;
 					value["layer"][i-1]["frame"][j-1]["actor"][k-1]["position"]["y"] = pos.y;
 				}
@@ -200,23 +200,23 @@ void ScaleOverall::ScaleAnim(const std::string& path, float scale,
 	fout.close();
 }
 
-ee::Vector ScaleOverall::GetScaledPos(Json::Value& sprite_val, float scale, 
-									   const ee::Vector& img_offset) const
+sm::vec2 ScaleOverall::GetScaledPos(Json::Value& sprite_val, float scale, 
+									   const sm::vec2& img_offset) const
 {
-	ee::Vector pos;
+	sm::vec2 pos;
 	pos.x = sprite_val["position"]["x"].asDouble();
 	pos.y = sprite_val["position"]["y"].asDouble();
 
 	float angle = sprite_val["angle"].asDouble();
 
-	ee::Vector offset;
+	sm::vec2 offset;
 	offset.x = sprite_val["x offset"].asDouble();
 	offset.y = sprite_val["y offset"].asDouble();
 
-// 	ee::Vector center = pos + ee::Math2D::RotateVector(-offset, angle);
+// 	sm::vec2 center = pos + ee::Math2D::RotateVector(-offset, angle);
 // 	center = center + ee::Math2D::RotateVector(img_offset, angle);
 
-	ee::Vector center = pos + ee::Math2D::RotateVector(img_offset, angle);
+	sm::vec2 center = pos + ee::Math2D::RotateVector(img_offset, angle);
 
 	center *= scale;
 

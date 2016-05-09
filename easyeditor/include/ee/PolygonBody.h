@@ -14,7 +14,7 @@ public:
 	PolygonBody(b2World* world, const BodyData& bodyData, float scale = 1.0f);
 	PolygonBody(b2World* world, float hWidth, float hHeight, bool isStatic, float scale = 1.0f);
 	
-	virtual void GetRect(Rect& rect, const Vector& position, float angle) const;
+	virtual void GetRect(Rect& rect, const sm::vec2& position, float angle) const;
 
 }; // PolygonBody
 

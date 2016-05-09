@@ -33,8 +33,8 @@ private:
 		struct Part
 		{
 			int tex;
-			ee::Vector src[4];
-			ee::Vector dst[4];
+			sm::vec2 src[4];
+			sm::vec2 dst[4];
 
 			int xmin, xmax, ymin, ymax;
 			std::string filename;
@@ -44,10 +44,10 @@ private:
 			void transform(ee::Sprite* sprite) const;
 
 		private:
-			std::string dstMode(const ee::Vector dst[4]) const;
+			std::string dstMode(const sm::vec2 dst[4]) const;
 			// 0 1
 			// 3 2
-			static int nodeMode(const ee::Vector& center, const ee::Vector& node);
+			static int nodeMode(const sm::vec2& center, const sm::vec2& node);
 			static int findInMode(int mode[4], int query);
 		};
 

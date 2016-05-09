@@ -10,7 +10,7 @@ namespace ee
 
 #define SET_SPRITE_TWO_AOP_DEF(name, var) \
 	\
-	SetSprite##name##AOP::SetSprite##name##AOP(const std::vector<Sprite*>& sprites, const Vector& val)	\
+	SetSprite##name##AOP::SetSprite##name##AOP(const std::vector<Sprite*>& sprites, const sm::vec2& val)	\
 		: m_new(val) \
 	{ \
 		for_each(sprites.begin(), sprites.end(), RetainObjectFunctor<Sprite>()); \

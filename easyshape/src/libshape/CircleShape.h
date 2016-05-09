@@ -2,7 +2,6 @@
 #define _EASYSHAPE_CIRCLE_SHAPE_H_
 
 #include <ee/Shape.h>
-#include <ee/Vector.h>
 #include <ee/Rect.h>
 
 namespace eshape
@@ -13,7 +12,7 @@ class CircleShape : public ee::Shape
 public:
 	CircleShape();
 	CircleShape(const CircleShape& circle);
-	CircleShape(const ee::Vector& center, float radius);
+	CircleShape(const sm::vec2& center, float radius);
 
 	//
 	// IObject interface
@@ -24,9 +23,9 @@ public:
 	// Shape interface
 	//
 	virtual const char* GetShapeDesc() const { return "circle"; }
-	virtual bool IsContain(const ee::Vector& pos) const;
+	virtual bool IsContain(const sm::vec2& pos) const;
 	virtual bool IsIntersect(const ee::Rect& rect) const;
-	virtual void Translate(const ee::Vector& offset);
+	virtual void Translate(const sm::vec2& offset);
 	virtual const ee::Rect& GetRect() const { return m_rect; }
 	virtual void Draw(const sm::mat4& mt,
 		const ee::RenderColor& color = ee::RenderColor()) const;
@@ -35,7 +34,7 @@ public:
 	virtual void StoreToFile(Json::Value& value, const std::string& dir) const;
 
 public:
-	ee::Vector center;
+	sm::vec2 center;
 
 	float radius;
 

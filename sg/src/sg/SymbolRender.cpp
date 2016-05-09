@@ -41,7 +41,7 @@ void SymbolRender::Init(StagePanel* stage)
 }
 
 void SymbolRender::DrawGrass(const ee::Symbol& symbol, 
-							 const ee::Vector& pos, 
+							 const sm::vec2& pos, 
 							 bool is_flat) const
 {
 	SymbolExt* info = static_cast<SymbolExt*>(symbol.GetUserData());
@@ -49,13 +49,13 @@ void SymbolRender::DrawGrass(const ee::Symbol& symbol,
 		return;
 	}
 
-	ee::Vector p = pos;
+	sm::vec2 p = pos;
 	if (info->size % 2 == 0)
 	{
 		int row, col;
 		m_stage->TransCoordsToGridPos(pos, row, col);
 
-		ee::Vector fixed;
+		sm::vec2 fixed;
 		m_stage->TransGridPosToCoords(row - 1, col - 1, fixed);
 
 		p = (pos + fixed) * 0.5f;
@@ -78,7 +78,7 @@ void SymbolRender::DrawGrass(const ee::Symbol& symbol,
 }
 
 void SymbolRender::DrawGrids(const ee::Symbol& symbol, 
-							 const ee::Vector& pos, 
+							 const sm::vec2& pos, 
 							 bool valid,
 							 bool is_flat) const
 {
@@ -95,7 +95,7 @@ void SymbolRender::DrawGrids(const ee::Symbol& symbol,
 	int center = (info->size >> 1);
 	if (is_flat)
 	{
-		ee::Vector pos;
+		sm::vec2 pos;
 		m_stage->TransGridPosToCoords(row, col, pos);
 
 		float half_edge = info->size * EDGE * 0.5f;
@@ -106,7 +106,7 @@ void SymbolRender::DrawGrids(const ee::Symbol& symbol,
 	{
 		for (int i = 0; i < info->size; ++i) {
 			for (int j = 0; j < info->size; ++j) {
-				ee::Vector pos;
+				sm::vec2 pos;
 				m_stage->TransGridPosToCoords(row + i - center, col + j - center, pos);
 				m_grid->SetTransform(pos, m_grid->GetAngle());
 				ee::RenderColor ct;
@@ -118,7 +118,7 @@ void SymbolRender::DrawGrids(const ee::Symbol& symbol,
 }
 
 void SymbolRender::DrawArrow(const ee::Symbol& symbol, 
-							 const ee::Vector& pos) const
+							 const sm::vec2& pos) const
 {
 	SymbolExt* info = static_cast<SymbolExt*>(symbol.GetUserData());
 	if (info == NULL) {
@@ -130,31 +130,31 @@ void SymbolRender::DrawArrow(const ee::Symbol& symbol,
 	m_stage->TransCoordsToGridPos(pos, row, col);
 	// left
 	{
-		ee::Vector pos;
+		sm::vec2 pos;
 		m_stage->TransGridPosToCoords(row, col - r, pos);
 		ee::SpriteRenderer::Draw(m_arrow_down, sm::mat4(), pos, 0, -1);
 	}
 	// right
 	{
-		ee::Vector pos;
+		sm::vec2 pos;
 		m_stage->TransGridPosToCoords(row, col + r, pos);
 		ee::SpriteRenderer::Draw(m_arrow_right, sm::mat4(), pos);
 	}
 	// up
 	{
-		ee::Vector pos;
+		sm::vec2 pos;
 		m_stage->TransGridPosToCoords(row + r, col, pos);
 		ee::SpriteRenderer::Draw(m_arrow_right, sm::mat4(), pos, 0, -1);
 	}
 	// down
 	{
-		ee::Vector pos;
+		sm::vec2 pos;
 		m_stage->TransGridPosToCoords(row - r, col, pos);
 		ee::SpriteRenderer::Draw(m_arrow_down, sm::mat4(), pos);
 	}
 }
 
-void SymbolRender::DrawRegion(const ee::Symbol& symbol, const ee::Vector& pos)
+void SymbolRender::DrawRegion(const ee::Symbol& symbol, const sm::vec2& pos)
 {
 	SymbolExt* info = static_cast<SymbolExt*>(symbol.GetUserData());
 	if (info == NULL) {

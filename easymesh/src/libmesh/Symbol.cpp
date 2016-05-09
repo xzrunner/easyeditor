@@ -88,7 +88,7 @@ void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr,
 	if (!m_pause && spr)
 	{
 		const Sprite* s = static_cast<const Sprite*>(spr);
-		ee::Vector spd = s->GetSpeed();
+		sm::vec2 spd = s->GetSpeed();
 		if (spd.x != 0 || spd.y != 0) {
 			m_mesh->OffsetUV(spd.x, spd.y);
 		}

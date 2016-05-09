@@ -125,7 +125,7 @@ void MeshToolbarPage::OnSaveImage(wxCommandEvent& event)
 			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 
-			ee::Vector pos;
+			sm::vec2 pos;
 			pos.x = item_val["pos"]["x"].asDouble() - width * 0.5f;
 			pos.y = item_val["pos"]["y"].asDouble() - height * 0.5f;
 			float angle = item_val["angle"].asDouble();
@@ -187,7 +187,7 @@ void MeshToolbarPage::LoadBodies(const std::string& dir)
 			b2Vec2 pos(ee::Random::GetNum(-HALF_WIDTH*4, HALF_WIDTH*4), ee::Random::GetNum(HALF_WIDTH*5, HALF_WIDTH*100));
 			body->SetTransform(pos, 0);
 
-			const std::vector<ee::Vector>& src = polygon->GetVertices();
+			const std::vector<sm::vec2>& src = polygon->GetVertices();
 			for (int i = 0, n = src.size(); i < n; i += 3) {
 				b2Vec2 dst[3];
 				for (int j = 0; j < 3; ++j) {

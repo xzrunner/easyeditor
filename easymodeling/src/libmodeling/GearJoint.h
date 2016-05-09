@@ -11,7 +11,7 @@ class GearJoint : public Joint
 public:
 	GearJoint(Body* b0, Body* b1, Joint* j1, Joint* j2);
 
-	virtual bool IsContain(const ee::Vector& pos) const;
+	virtual bool IsContain(const sm::vec2& pos) const;
 	virtual bool IsIntersect(const ee::Rect& rect) const;
 
 	virtual void Draw(DrawType type) const;

@@ -1,12 +1,14 @@
 #ifndef _EASYSCALE9_SCALE9_DATA_H_
 #define _EASYSCALE9_SCALE9_DATA_H_
 
-namespace ee { class Sprite; class Vector; class RenderParams; }
+#include <SM_Vector.h>
 
 #include <json/json.h>
 
 #include <string>
 #include <vector>
+
+namespace ee { class Sprite; class RenderParams; }
 
 namespace escale9
 {
@@ -49,7 +51,7 @@ public:
 
 	static void ResizeScale9(Scale9Type type, ee::Sprite* const sprites[3][3],
 		float width, float height);
-	static void ResizeSprite(ee::Sprite* sprite, const ee::Vector& center, 
+	static void ResizeSprite(ee::Sprite* sprite, const sm::vec2& center, 
 		float width, float height);
 
 	static Scale9Type CheckType(ee::Sprite* sprites[3][3]);

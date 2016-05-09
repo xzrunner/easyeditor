@@ -52,7 +52,7 @@ void RectMgr::Draw() const
 {
 	for (int i = 0, n = m_rects.size(); i < n; ++i)
 	{
-		ee::Vector min(m_rects[i]->xmin, m_rects[i]->ymin),
+		sm::vec2 min(m_rects[i]->xmin, m_rects[i]->ymin),
 			max(m_rects[i]->xmax, m_rects[i]->ymax);
 		ee::RVG::Color(ee::LIGHT_RED);
 		ee::RVG::Rect(min, max, true);
@@ -75,7 +75,7 @@ void RectMgr::Insert(const ee::Rect& rect, bool force)
 	m_rects.push_back(new ee::Rect(rect));
 }
 
-bool RectMgr::Remove(const ee::Vector& pos)
+bool RectMgr::Remove(const sm::vec2& pos)
 {
 	std::vector<ee::Rect*>::iterator itr = m_rects.begin();
 	for ( ; itr != m_rects.end(); ++itr)
@@ -88,11 +88,9 @@ bool RectMgr::Remove(const ee::Vector& pos)
 	return false;
 }
 
-ee::Vector RectMgr::QueryNearestAxis(const ee::Vector& pos,
-									  const ee::Rect* except) const
+sm::vec2 RectMgr::QueryNearestAxis(const sm::vec2& pos, const ee::Rect* except) const
 {
-	ee::Vector ret;
-	ret.SetInvalid();
+	sm::vec2 ret;
 
 	float minx = FLT_MAX,
 		  miny = FLT_MAX;
@@ -137,7 +135,7 @@ ee::Vector RectMgr::QueryNearestAxis(const ee::Vector& pos,
 	return ret;
 }
 
-RectMgr::Node RectMgr::QueryNode(const ee::Vector& pos) const
+RectMgr::Node RectMgr::QueryNode(const sm::vec2& pos) const
 {
 	Node ret;
 	ret.rect = NULL;
@@ -146,22 +144,26 @@ RectMgr::Node RectMgr::QueryNode(const ee::Vector& pos) const
 	{
 		const ee::Rect* r = m_rects[i];
 
-		ee::Vector selected;
-		selected.SetInvalid();
+		sm::vec2 selected;
+		bool selected_valid = false;
 
 		if (fabs(pos.x - r->xmin) < RADIUS) {
 			selected.x = r->xmin;
+			selected_valid = true;
 		} else if (fabs(pos.x - r->xmax) < RADIUS) {
 			selected.x = r->xmax;
+			selected_valid = true;
 		}
 
 		if (fabs(pos.y - r->ymin) < RADIUS) {
 			selected.y = r->ymin;
+			selected_valid = true;
 		} else if (fabs(pos.y - r->ymax) < RADIUS) {
 			selected.y = r->ymax;
+			selected_valid = true;
 		}
 
-		if (selected.IsValid()) {
+		if (selected_valid) {
 			ret.rect = r;
 			ret.pos = selected;
 			return ret;
@@ -171,7 +173,7 @@ RectMgr::Node RectMgr::QueryNode(const ee::Vector& pos) const
 	return ret;
 }
 
-ee::Rect* RectMgr::QueryRect(const ee::Vector& pos) const
+ee::Rect* RectMgr::QueryRect(const sm::vec2& pos) const
 {
 	for (int i = 0, n = m_rects.size(); i < n; ++i)
 	{
@@ -182,7 +184,7 @@ ee::Rect* RectMgr::QueryRect(const ee::Vector& pos) const
 	return NULL;
 }
 
-bool RectMgr::MoveNode(const Node& node, const ee::Vector& to)
+bool RectMgr::MoveNode(const Node& node, const sm::vec2& to)
 {
 	if (!node.rect) {
 		return false;
@@ -228,7 +230,7 @@ bool RectMgr::MoveNode(const Node& node, const ee::Vector& to)
 	}
 }
 
-void RectMgr::MoveRect(const ee::Rect* rect, const ee::Vector& from, const ee::Vector& to)
+void RectMgr::MoveRect(const ee::Rect* rect, const sm::vec2& from, const sm::vec2& to)
 {
 	if (!rect) {
 		return;

@@ -9,8 +9,8 @@
 namespace ee
 {
 
-void SGI::Do(const std::vector<Vector>& src, 
-					std::vector<std::vector<Vector> >& dst)
+void SGI::Do(const std::vector<sm::vec2>& src, 
+					std::vector<std::vector<sm::vec2> >& dst)
 {
 	if (src.size() < 3) return;
 
@@ -31,7 +31,7 @@ void SGI::Do(const std::vector<Vector>& src,
 	{
 		if (tris[i]->used) continue;
 
-		std::vector<Vector> strip;
+		std::vector<sm::vec2> strip;
 		Traversal(tris[i], strip);
 		dst.push_back(strip);
 	}
@@ -44,7 +44,7 @@ void SGI::InsertEdge(std::vector<Edge*>& edges, Triangle* tri,
 					 int index)
 {
 	bool bFind = false;
-	const Vector& s = tri->nodes[index],
+	const sm::vec2& s = tri->nodes[index],
 		e = tri->nodes[(index+1)%3];
 	for (size_t i = 0, n = edges.size(); i < n; ++i)
 	{
@@ -78,7 +78,7 @@ void SGI::InsertEdge(std::vector<Edge*>& edges, Triangle* tri,
 	}
 }
 
-void SGI::Traversal(Triangle* tri, std::vector<Vector>& strip, int level/* = 0*/)
+void SGI::Traversal(Triangle* tri, std::vector<sm::vec2>& strip, int level/* = 0*/)
 {
 	tri->used = true;
 

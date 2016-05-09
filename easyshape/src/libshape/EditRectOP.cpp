@@ -23,6 +23,8 @@ EditRectOP::EditRectOP(wxWindow* wnd, ee::EditPanelImpl* stage,
 	, m_property(property)
 	, m_shapes_impl(shapes_impl)
 	, m_node_capture(node_capture)
+	, m_first_pos_valid(false)
+	, m_curr_pos_valid(false)
 {
 	m_cursor = wxCursor(wxCURSOR_PENCIL);
 
@@ -47,7 +49,8 @@ bool EditRectOP::OnMouseLeftDown(int x, int y)
 {
 	if (ee::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
-	m_first_press = m_curr_pos = m_stage->TransPosScrToProj(x, y);
+	m_first_pos = m_curr_pos = m_stage->TransPosScrToProj(x, y);
+	m_first_pos_valid = m_curr_pos_valid = true;
 
 	m_shapes_impl->GetShapeSelection()->Clear();
 
@@ -55,7 +58,7 @@ bool EditRectOP::OnMouseLeftDown(int x, int y)
 	if (tolerance != 0)
 	{	
 		NodeCapture capture(m_shapes_impl, tolerance);
-		capture.captureEditable(m_first_press, m_captured);
+		capture.captureEditable(m_first_pos, m_captured);
 
 		if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape))
 		{
@@ -77,14 +80,15 @@ bool EditRectOP::OnMouseLeftUp(int x, int y)
 
 	if (!m_captured.shape)
 	{
-		if (m_first_press.IsValid())
+		if (m_first_pos_valid)
 		{
 			m_curr_pos = m_stage->TransPosScrToProj(x, y);
+			m_curr_pos_valid = true;
 
-			const float dis = ee::Math2D::GetDistance(m_first_press, m_curr_pos);
+			const float dis = ee::Math2D::GetDistance(m_first_pos, m_curr_pos);
 			if (dis > 1)
 			{
-				RectShape* rect = new RectShape(m_first_press, m_curr_pos);
+				RectShape* rect = new RectShape(m_first_pos, m_curr_pos);
 				ee::SelectShapeSJ::Instance()->Select(rect);
 				ee::InsertShapeSJ::Instance()->Insert(NULL);
 			}
@@ -112,6 +116,7 @@ bool EditRectOP::OnMouseRightDown(int x, int y)
 	if (tolerance != 0)
 	{
 		m_curr_pos = m_stage->TransPosScrToProj(x, y);
+		m_curr_pos_valid = true;
 
 		NodeCapture capture(m_shapes_impl, tolerance);
 		capture.captureEditable(m_curr_pos, m_captured);
@@ -135,7 +140,7 @@ bool EditRectOP::OnMouseMove(int x, int y)
 {
 	if (ee::ZoomViewOP::OnMouseMove(x, y)) return true;
 
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
 	{	
@@ -155,15 +160,16 @@ bool EditRectOP::OnMouseDrag(int x, int y)
 	if (ee::ZoomViewOP::OnMouseDrag(x, y)) return true;
 
 	m_curr_pos = m_stage->TransPosScrToProj(x, y);
+	m_curr_pos_valid = true;
 
 	if (m_captured.shape)
 	{
 		if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape))
 		{
-			ee::Vector center(rect->m_rect.CenterX(), rect->m_rect.CenterY());
+			sm::vec2 center(rect->m_rect.CenterX(), rect->m_rect.CenterY());
 
 			// move
-			if (!m_captured.pos.IsValid())
+			if (!m_captured.pos_valid)
 			{
 				rect->m_rect.Translate(m_curr_pos - center);
 			}
@@ -203,10 +209,10 @@ bool EditRectOP::OnDraw() const
 			int tolerance = m_node_capture->GetValue();
 			if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape))
 			{
-				ee::Vector pos(rect->m_rect.CenterX(), rect->m_rect.CenterY());
+				sm::vec2 pos(rect->m_rect.CenterX(), rect->m_rect.CenterY());
 				ee::RVG::Color(ee::Colorf(0.4f, 1.0f, 0.4f));
 				ee::RVG::Circle(pos, tolerance, true);
-				if (m_captured.pos.IsValid()) {
+				if (m_captured.pos_valid) {
 					ee::RVG::Color(ee::Colorf(1.0f, 0.4f, 0.4f));
 					ee::RVG::Circle(m_captured.pos, tolerance, true);
 				}
@@ -215,8 +221,8 @@ bool EditRectOP::OnDraw() const
 	}
 	else
 	{
-		if (m_first_press.IsValid() && m_curr_pos.IsValid())
-			ee::RVG::Rect(m_first_press, m_curr_pos, false);
+		if (m_first_pos_valid && m_curr_pos_valid)
+			ee::RVG::Rect(m_first_pos, m_curr_pos, false);
 	}
 
 	return false;
@@ -226,8 +232,7 @@ bool EditRectOP::Clear()
 {
 	if (ee::ZoomViewOP::Clear()) return true;
 
-	m_first_press.SetInvalid();
-	m_curr_pos.SetInvalid();
+	m_first_pos_valid = m_curr_pos_valid = false;
 
 	return false;
 }

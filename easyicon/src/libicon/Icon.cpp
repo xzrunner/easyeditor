@@ -36,11 +36,11 @@ void Icon::Draw(const sm::mat4& mt, float process) const
 	int texid = m_img->GetTexID();
 
 	// tex_coords
-	ee::Vector tex_coords[4];
+	sm::vec2 tex_coords[4];
 	GetTexCoords(process, tex_coords);
 
 	// vertices
-	ee::Vector scr_coords[4];
+	sm::vec2 scr_coords[4];
 	GetScreenCoords(process, tex_coords, scr_coords);
 	for (int i = 0; i < 4; ++i) {
 		scr_coords[i] = ee::Math2D::TransVector(scr_coords[i], mt);
@@ -60,10 +60,10 @@ ee::Rect Icon::GetRegion(float process) const
 		return ret;
 	}
 	
-	ee::Vector tex_coords[4];
+	sm::vec2 tex_coords[4];
 	GetTexCoords(process, tex_coords);
 
-	ee::Vector scr_coords[4];
+	sm::vec2 scr_coords[4];
 	GetScreenCoords(process, tex_coords, scr_coords);
 	for (int i = 0; i < 4; ++i) {
 		float x = scr_coords[i].x,
@@ -77,9 +77,9 @@ ee::Rect Icon::GetRegion(float process) const
 	return ret;
 }
 
-void Icon::GetTexCoords(float process, ee::Vector* tex_coords) const
+void Icon::GetTexCoords(float process, sm::vec2* tex_coords) const
 {
-	ee::Vector bound[4];
+	sm::vec2 bound[4];
 	GetBound(process, bound);
 	for (int i = 0; i < 4; ++i) {
 		tex_coords[i].x = bound[i].x;
@@ -87,8 +87,8 @@ void Icon::GetTexCoords(float process, ee::Vector* tex_coords) const
 	}
 }
 
-void Icon::GetScreenCoords(float process, const ee::Vector* tex_coords, 
-						   ee::Vector* screen_coords) const
+void Icon::GetScreenCoords(float process, const sm::vec2* tex_coords, 
+						   sm::vec2* screen_coords) const
 {
 	float w = static_cast<float>(m_img->GetClippedWidth()),
 		  h = static_cast<float>(m_img->GetClippedHeight());	

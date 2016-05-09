@@ -230,14 +230,6 @@
 			Name="type"
 			>
 			<File
-				RelativePath="..\..\..\source\math\type\Matrix.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\Matrix.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\include\ee\Random.h"
 				>
 			</File>

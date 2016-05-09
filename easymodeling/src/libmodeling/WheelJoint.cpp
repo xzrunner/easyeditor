@@ -19,7 +19,7 @@ WheelJoint::WheelJoint(Body* b0, Body* b1)
 {
 }
 
-bool WheelJoint::IsContain(const ee::Vector& pos) const
+bool WheelJoint::IsContain(const sm::vec2& pos) const
 {
 	return ee::Math2D::GetDistance(GetWorldAnchorA(), pos) < JOINT_RADIUS_OUT
 		|| ee::Math2D::GetDistance(GetWorldAnchorB(), pos) < JOINT_RADIUS_OUT;
@@ -33,7 +33,7 @@ bool WheelJoint::IsIntersect(const ee::Rect& rect) const
 
 void WheelJoint::Draw(DrawType type) const
 {
-	const ee::Vector anchorA = GetWorldAnchorA(),
+	const sm::vec2 anchorA = GetWorldAnchorA(),
 		anchorB = GetWorldAnchorB();
 
 	if (type == e_selected || type == e_mouseOn)
@@ -52,32 +52,32 @@ void WheelJoint::Draw(DrawType type) const
 	DrawAnchorB(anchorB, type);
 }
 
-ee::Vector WheelJoint::GetWorldAnchorA() const
+sm::vec2 WheelJoint::GetWorldAnchorA() const
 {
 	return TransLocalToWorld(m_local_anchor_a, m_body_a->m_sprite);
 }
 
-ee::Vector WheelJoint::GetWorldAnchorB() const
+sm::vec2 WheelJoint::GetWorldAnchorB() const
 {
 	return TransLocalToWorld(m_local_anchor_b, m_body_b->m_sprite);
 }
 
-void WheelJoint::SetLocalAnchorA(const ee::Vector& world)
+void WheelJoint::SetLocalAnchorA(const sm::vec2& world)
 {
 	m_local_anchor_a = TransWorldToLocal(world, m_body_a->m_sprite);
 }
 
-void WheelJoint::SetLocalAnchorB(const ee::Vector& world)
+void WheelJoint::SetLocalAnchorB(const sm::vec2& world)
 {
 	m_local_anchor_b = TransWorldToLocal(world, m_body_b->m_sprite);
 }
 
-void WheelJoint::DrawAxisALine(const ee::Vector& worldAnchorA) const
+void WheelJoint::DrawAxisALine(const sm::vec2& worldAnchorA) const
 {
-	ee::Vector unit = m_local_axis_a;
+	sm::vec2 unit = m_local_axis_a;
 	unit.Normalize();
 
-	const ee::Vector start = worldAnchorA + unit * 150,
+	const sm::vec2 start = worldAnchorA + unit * 150,
 		end = worldAnchorA - unit * 150;
 
 	ee::RVG::Color(ee::Colorf(0.4f, 0.6f, 0.4f));
@@ -86,11 +86,11 @@ void WheelJoint::DrawAxisALine(const ee::Vector& worldAnchorA) const
 	ee::RVG::LineWidth(2);	
 }
 
-void WheelJoint::DrawFootBLine(const ee::Vector& worldAnchorA, const ee::Vector& worldAnchorB) const
+void WheelJoint::DrawFootBLine(const sm::vec2& worldAnchorA, const sm::vec2& worldAnchorB) const
 {
-	ee::Vector otherA = worldAnchorA + m_local_axis_a;
+	sm::vec2 otherA = worldAnchorA + m_local_axis_a;
 
-	ee::Vector foot;
+	sm::vec2 foot;
 	ee::Math2D::GetFootOfPerpendicular(worldAnchorA, otherA, worldAnchorB, &foot);
 
 	ee::RVG::Color(ee::Colorf(1, 0, 0));
@@ -101,7 +101,7 @@ void WheelJoint::DrawFootBLine(const ee::Vector& worldAnchorA, const ee::Vector&
 	ee::RVG::Circle(foot, JOINT_RADIUS_IN, true);
 }
 
-void WheelJoint::DrawAnchorA(const ee::Vector& pos, DrawType type) const
+void WheelJoint::DrawAnchorA(const sm::vec2& pos, DrawType type) const
 {
 	ee::Colorf color;
 	switch (type)
@@ -122,7 +122,7 @@ void WheelJoint::DrawAnchorA(const ee::Vector& pos, DrawType type) const
 	ee::RVG::Rect(pos, JOINT_RADIUS_OUT, JOINT_RADIUS_OUT, true);
 }
 
-void WheelJoint::DrawAnchorB(const ee::Vector& pos, DrawType type) const
+void WheelJoint::DrawAnchorB(const sm::vec2& pos, DrawType type) const
 {
 	ee::Colorf color;
 	switch (type)

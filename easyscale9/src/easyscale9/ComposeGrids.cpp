@@ -14,17 +14,17 @@ void ComposeGrids::Draw()
 {
 	for (size_t i = 0; i < 3; ++i) {
 		for (size_t j = 0; j < 3; ++j) {
-			ee::Vector p0;
+			sm::vec2 p0;
 			p0.x = X + EDGE*i;
 			p0.y = Y + EDGE*j;
-			ee::Vector p1(p0.x + EDGE, p0.y + EDGE);
+			sm::vec2 p1(p0.x + EDGE, p0.y + EDGE);
 			ee::RVG::Color(ee::LIGHT_GREY);
 			ee::RVG::Rect(p0, p1, false);
 		}
 	}
 }
 
-void ComposeGrids::Query(const ee::Vector& pos, int* col, int* row)
+void ComposeGrids::Query(const sm::vec2& pos, int* col, int* row)
 {
 	if (pos.x < X || pos.x > X + EDGE * 3 ||
 		pos.y < Y || pos.y > Y + EDGE * 3) {
@@ -37,9 +37,9 @@ void ComposeGrids::Query(const ee::Vector& pos, int* col, int* row)
 	*row = (int)((pos.y - Y) / EDGE);
 }
 
-ee::Vector ComposeGrids::GetGridCenter(int col, int row)
+sm::vec2 ComposeGrids::GetGridCenter(int col, int row)
 {
-	return ee::Vector(X + (col + 0.5f) * EDGE, Y + (row + 0.5f) * EDGE);
+	return sm::vec2(X + (col + 0.5f) * EDGE, Y + (row + 0.5f) * EDGE);
 }
 
 }

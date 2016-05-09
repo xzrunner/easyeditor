@@ -34,7 +34,7 @@ bool PasteSymbolPhysicsOP::OnMouseLeftDown(int x, int y)
 		Sprite* sprite = SpriteFactory::Instance()->Create(symbol);
 		sprite->Translate(m_pos);
 		if (m_pScale) {
-			sprite->SetScale(Vector(*m_pScale, *m_pScale));
+			sprite->SetScale(sm::vec2(*m_pScale, *m_pScale));
 		}
 
 		IBody* body = BodyManager::Instance()->LoadBody(sprite);

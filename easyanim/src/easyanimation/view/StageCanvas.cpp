@@ -64,7 +64,7 @@ void StageCanvas::DrawBackground() const
 	float xedge = GetSize().GetWidth() * 0.5f;
 	float yedge = GetSize().GetHeight() * 0.5f;
 	ee::RVG::Color(ee::LIGHT_GREY);
-	ee::RVG::Cross(ee::Vector(0,0), xedge, yedge);
+	ee::RVG::Cross(sm::vec2(0,0), xedge, yedge);
 }
 
 } // eanim

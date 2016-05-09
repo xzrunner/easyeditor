@@ -7,8 +7,8 @@ namespace ee
 {
 
 ShearSpriteAOP::ShearSpriteAOP(Sprite* sprite, 
-							   const Vector& new_shear, 
-							   const Vector& old_shear)
+							   const sm::vec2& new_shear, 
+							   const sm::vec2& old_shear)
    : m_new_shear(new_shear)
    , m_old_shear(old_shear)
 {

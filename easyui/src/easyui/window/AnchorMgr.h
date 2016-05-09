@@ -2,7 +2,6 @@
 #define _EASYUI_WINDOW_ANCHOR_MGR_H_
 
 #include <ee/Observer.h>
-#include <ee/Vector.h>
 
 #include <json/json.h>
 
@@ -50,13 +49,13 @@ private:
 private:
 	struct Anchor
 	{
-		ee::Vector pos;
+		sm::vec2 pos;
 		std::vector<ee::Sprite*> sprites;
 		
 	}; // Anchor
 
 private:
-	static void ChangeAnchorPos(Anchor& anchor, const ee::Vector& pos);
+	static void ChangeAnchorPos(Anchor& anchor, const sm::vec2& pos);
 
 	static void LoadAnchorData(const std::vector<ee::Sprite*>& sprites,
 		const Json::Value& value, Anchor& anchor);

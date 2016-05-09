@@ -74,20 +74,20 @@ void Strip::OffsetUV(float dx, float dy)
 	m_uv_offset += dy;
 	m_uv_offset = m_uv_offset - floor(m_uv_offset);
 
-	std::vector<std::pair<ee::Vector, ee::Vector> > trans_list;
+	std::vector<std::pair<sm::vec2, sm::vec2> > trans_list;
 	GetTransList(trans_list);
 
 	// insert node
-	ee::Vector pos;
+	sm::vec2 pos;
 	pos.x = 0;
 	pos.y = -m_height*0.5f + m_height*m_uv_offset;
 	int idx_left, idx_right;
-	ee::Vector pos_left, pos_right;
+	sm::vec2 pos_left, pos_right;
 	idx_left = m_left_nodes.GetNodeInsertPos(pos, pos_left);
 	idx_right = m_right_nodes.GetNodeInsertPos(pos, pos_right);
 	if (idx_left != -1 && idx_right != -1) {
-		std::vector<ee::Vector>& left_ext = m_left_nodes.m_ext;
-		std::vector<ee::Vector>& right_ext = m_right_nodes.m_ext;
+		std::vector<sm::vec2>& left_ext = m_left_nodes.m_ext;
+		std::vector<sm::vec2>& right_ext = m_right_nodes.m_ext;
 		MapUV2XY(left_ext, idx_left, pos, trans_list);
 		MapUV2XY(right_ext, idx_right, pos, trans_list);
 		left_ext.insert(left_ext.begin() + idx_left + 1, pos_left);
@@ -97,8 +97,8 @@ void Strip::OffsetUV(float dx, float dy)
 	// create triangles separate
 	ClearTriangles();
 	assert(m_left_nodes.Size() == m_right_nodes.Size());
-	const std::vector<ee::Vector>& left = m_left_nodes.m_ext;
-	const std::vector<ee::Vector>& right = m_right_nodes.m_ext;
+	const std::vector<sm::vec2>& left = m_left_nodes.m_ext;
+	const std::vector<sm::vec2>& right = m_right_nodes.m_ext;
 	for (int i = 0, n = left.size() - 1; i < n; ++i)
 	{
 		if (left[i] == left[i+1] && right[i] == right[i+1]) {
@@ -161,7 +161,7 @@ void Strip::Clear()
 	RefreshTriangles();
 }
 
-void Strip::InsertNode(const ee::Vector& p)
+void Strip::InsertNode(const sm::vec2& p)
 {
 	assert(m_left_nodes.Size() >= 2 && m_right_nodes.Size() >= 2);
 
@@ -175,7 +175,7 @@ void Strip::InsertNode(const ee::Vector& p)
 	RefreshTriangles();
 }
 
-void Strip::RemoveNode(const ee::Vector& p)
+void Strip::RemoveNode(const sm::vec2& p)
 {
 	assert(m_left_nodes.Size() >= 2 && m_right_nodes.Size() >= 2);
 
@@ -199,18 +199,18 @@ void Strip::RemoveNode(const ee::Vector& p)
 	}
 }
 
-ee::Vector* Strip::FindNode(const ee::Vector& p)
+sm::vec2* Strip::FindNode(const sm::vec2& p)
 {
 	assert(m_left_nodes.Size() >= 2 && m_right_nodes.Size() >= 2);
 
-	ee::Vector* ptr = m_left_nodes.QueryPointer(p, m_node_radius);
+	sm::vec2* ptr = m_left_nodes.QueryPointer(p, m_node_radius);
 	if (ptr == NULL) {
 		ptr = m_right_nodes.QueryPointer(p, m_node_radius);
 	}
 	return ptr;
 }
 
-void Strip::MoveNode(ee::Vector* src, const ee::Vector& dst)
+void Strip::MoveNode(sm::vec2* src, const sm::vec2& dst)
 {
 	assert(m_left_nodes.Size() >= 2 && m_right_nodes.Size() >= 2);
 
@@ -228,8 +228,8 @@ void Strip::InitBound()
 {
 	float hw = m_width * 0.5f;
 	float hh = m_height * 0.5f;
-	m_left_nodes.Reset(ee::Vector(-hw, -hh), ee::Vector(-hw,  hh));
-	m_right_nodes.Reset(ee::Vector(hw, -hh), ee::Vector( hw,  hh));
+	m_left_nodes.Reset(sm::vec2(-hw, -hh), sm::vec2(-hw,  hh));
+	m_right_nodes.Reset(sm::vec2(hw, -hh), sm::vec2( hw,  hh));
 }
 
 void Strip::RefreshTriangles()
@@ -237,8 +237,8 @@ void Strip::RefreshTriangles()
 	ClearTriangles();
 
 	assert(m_left_nodes.Size() == m_right_nodes.Size());
-	const std::vector<ee::Vector>& left = m_left_nodes.m_ext;
-	const std::vector<ee::Vector>& right = m_right_nodes.m_ext;
+	const std::vector<sm::vec2>& left = m_left_nodes.m_ext;
+	const std::vector<sm::vec2>& right = m_right_nodes.m_ext;
 	Node* last_left = new Node(left[0], static_cast<int>(m_width), static_cast<int>(m_height));
 	Node* last_right = new Node(right[0], static_cast<int>(m_width), static_cast<int>(m_height));
 	for (int i = 0, n = left.size() - 1; i < n; ++i)
@@ -283,7 +283,7 @@ void Strip::CopyTriangles(const Strip& strip)
 	}
 }
 
-void Strip::AbsorbNodeToRegion(ee::Vector& node)
+void Strip::AbsorbNodeToRegion(sm::vec2& node)
 {
 	float hw = m_width * 0.5f;
 	float hh = m_height * 0.5f;
@@ -301,7 +301,7 @@ void Strip::AbsorbNodeToRegion(ee::Vector& node)
 	}
 }
 
-void Strip::GetTransList(std::vector<std::pair<ee::Vector, ee::Vector> >& trans_list) const
+void Strip::GetTransList(std::vector<std::pair<sm::vec2, sm::vec2> >& trans_list) const
 {
 	std::set<Node*> nodes;
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
@@ -321,7 +321,7 @@ void Strip::GetTransList(std::vector<std::pair<ee::Vector, ee::Vector> >& trans_
 	}
 }
 
-void Strip::TranslateNode(Node* node, const std::vector<std::pair<ee::Vector, ee::Vector> >& trans_list)
+void Strip::TranslateNode(Node* node, const std::vector<std::pair<sm::vec2, sm::vec2> >& trans_list)
 {
 	for (int i = 0, m = trans_list.size(); i < m; ++i)
 	{
@@ -333,7 +333,7 @@ void Strip::TranslateNode(Node* node, const std::vector<std::pair<ee::Vector, ee
 	}
 }
 
-void Strip::TranslateNode(ee::Vector& node, const std::vector<std::pair<ee::Vector, ee::Vector> >& trans_list)
+void Strip::TranslateNode(sm::vec2& node, const std::vector<std::pair<sm::vec2, sm::vec2> >& trans_list)
 {
 	for (int i = 0, m = trans_list.size(); i < m; ++i)
 	{
@@ -345,21 +345,21 @@ void Strip::TranslateNode(ee::Vector& node, const std::vector<std::pair<ee::Vect
 	}
 }
 
-void Strip::MapUV2XY(const std::vector<ee::Vector>& nodes, int index, const ee::Vector& pos, 
-					 std::vector<std::pair<ee::Vector, ee::Vector> >& trans_list)
+void Strip::MapUV2XY(const std::vector<sm::vec2>& nodes, int index, const sm::vec2& pos, 
+					 std::vector<std::pair<sm::vec2, sm::vec2> >& trans_list)
 {
-	const ee::Vector& s = nodes[index];
-	const ee::Vector& e = nodes[index+1];
+	const sm::vec2& s = nodes[index];
+	const sm::vec2& e = nodes[index+1];
 
-	ee::Vector xy_s = s, xy_e = e;
+	sm::vec2 xy_s = s, xy_e = e;
 	TranslateNode(xy_s, trans_list);
 	TranslateNode(xy_e, trans_list);
 
-	ee::Vector foot;
+	sm::vec2 foot;
 	int st = ee::Math2D::GetFootOfPerpendicular(s, e, pos, &foot);
 	
 	float p = ee::Math2D::GetDistance(s, foot) / ee::Math2D::GetDistance(s, e);
- 	ee::Vector xy_p = xy_s + (xy_e - xy_s) * p;
+ 	sm::vec2 xy_p = xy_s + (xy_e - xy_s) * p;
  	trans_list.push_back(std::make_pair(foot, xy_p));
 }
 
@@ -368,7 +368,7 @@ void Strip::MapUV2XY(const std::vector<ee::Vector>& nodes, int index, const ee::
 //////////////////////////////////////////////////////////////////////////
 
 void Strip::NodeList::
-Reset(const ee::Vector& begin, const ee::Vector& end)
+Reset(const sm::vec2& begin, const sm::vec2& end)
 {
 	m_ori.clear();
 	m_ori.push_back(begin);
@@ -377,7 +377,7 @@ Reset(const ee::Vector& begin, const ee::Vector& end)
 }
 
 void Strip::NodeList::
-Insert(const ee::Vector& p)
+Insert(const sm::vec2& p)
 {
 	Insert(m_ori, p);
 	m_ext = m_ori;
@@ -391,16 +391,16 @@ Remove(int idx)
 }
 
 int Strip::NodeList::
-GetNodeInsertPos(const ee::Vector& p, ee::Vector& nearest)
+GetNodeInsertPos(const sm::vec2& p, sm::vec2& nearest)
 {
 	m_ext = m_ori;
 
 	int idx_nearest = -1;
 	float dis_nearest = FLT_MAX;
-	ee::Vector foot_nearest;
+	sm::vec2 foot_nearest;
 	for (int i = 0, n = m_ext.size() - 1; i < n; ++i)
 	{
-		ee::Vector foot;
+		sm::vec2 foot;
 		int st = ee::Math2D::GetFootOfPerpendicular(m_ext[i], m_ext[i+1], p, &foot);
 		if (st == -1) {
 			continue;
@@ -421,7 +421,7 @@ GetNodeInsertPos(const ee::Vector& p, ee::Vector& nearest)
 }
 
 int Strip::NodeList::
-QueryIndex(const ee::Vector& p, float radius) const
+QueryIndex(const sm::vec2& p, float radius) const
 {
 	// front and back are bound
 	for (int i = 1, n = m_ori.size() - 1; i < n; ++i) {
@@ -432,8 +432,8 @@ QueryIndex(const ee::Vector& p, float radius) const
 	return -1;
 }
 
-ee::Vector* Strip::NodeList::
-QueryPointer(const ee::Vector& p, float radius)
+sm::vec2* Strip::NodeList::
+QueryPointer(const sm::vec2& p, float radius)
 {
 	int idx = QueryIndex(p, radius);
 	if (idx != -1) {
@@ -444,28 +444,28 @@ QueryPointer(const ee::Vector& p, float radius)
 }
 
 bool Strip::NodeList::
-IsRegionContain(const ee::Vector& p) const
+IsRegionContain(const sm::vec2& p) const
 {
-	ee::Vector foot;
+	sm::vec2 foot;
 	return ee::Math2D::GetFootOfPerpendicular(m_ori.front(), m_ori.back(), p, &foot) != -1;
 }
 
 void Strip::NodeList::
 Sort()
 {
-	std::sort(m_ori.begin(), m_ori.end(), ee::VectorCmpY());
-	std::sort(m_ext.begin(), m_ext.end(), ee::VectorCmpY());
+	std::sort(m_ori.begin(), m_ori.end(), sm::Vector2CmpY());
+	std::sort(m_ext.begin(), m_ext.end(), sm::Vector2CmpY());
 }
 
 void Strip::NodeList::
-Insert(std::vector<ee::Vector>& nodes, const ee::Vector& p)
+Insert(std::vector<sm::vec2>& nodes, const sm::vec2& p)
 {
 	int idx_nearest = -1;
 	float dis_nearest = FLT_MAX;
-	ee::Vector foot_nearest;
+	sm::vec2 foot_nearest;
 	for (int i = 0, n = nodes.size() - 1; i < n; ++i)
 	{
-		ee::Vector foot;
+		sm::vec2 foot;
 		int st = ee::Math2D::GetFootOfPerpendicular(nodes[i], nodes[i+1], p, &foot);
 		if (st == -1) {
 			continue;

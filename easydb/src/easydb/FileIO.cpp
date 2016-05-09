@@ -44,12 +44,12 @@ void FileIO::Store(const char* filename)
  	ee::Rect rect;
  	for (size_t i = 0, n = sprites.size(); i < n; ++i)
  	{
- 		std::vector<ee::Vector> vertices;
+ 		std::vector<sm::vec2> vertices;
  		sprites[i]->GetBounding()->GetBoundPos(vertices);
  		for (size_t j = 0, m = vertices.size(); j < m; ++j)
  			rect.Combine(vertices[j]);
  	}
- 	ee::Vector offset(-rect.CenterX(), -rect.CenterY());
+ 	sm::vec2 offset(-rect.CenterX(), -rect.CenterY());
  
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		value["sprite"][i] = Store(sprites[i], offset);
@@ -81,7 +81,7 @@ ee::Shape* FileIO::LoadShape(const Json::Value& value)
 	return shape;
 }
 
-Json::Value FileIO::Store(ee::Sprite* sprite, const ee::Vector& offset)
+Json::Value FileIO::Store(ee::Sprite* sprite, const sm::vec2& offset)
 {
 	Json::Value value;
 	value["filepath"] = sprite->GetSymbol().GetFilepath();
@@ -89,7 +89,7 @@ Json::Value FileIO::Store(ee::Sprite* sprite, const ee::Vector& offset)
 	return value;
 }
 
-Json::Value FileIO::Store(ee::Shape* shape, const ee::Vector& offset)
+Json::Value FileIO::Store(ee::Shape* shape, const sm::vec2& offset)
 {
 	Json::Value value;
 

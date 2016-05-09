@@ -3,7 +3,8 @@
 
 #include "ResourcesMgr.h"
 #include "Object.h"
-#include "Vector.h"
+
+#include <SM_Vector.h>
 
 #include <Box2D/Box2D.h>
 
@@ -29,7 +30,7 @@ public:
 
 	struct FixtureData
 	{
-		std::vector<Vector> vertices;
+		std::vector<sm::vec2> vertices;
 		float density, friction, restitution;
 
 		FixtureData() {

@@ -155,7 +155,7 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 
 	ee::Rect region;
  	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
- 		std::vector<ee::Vector> vertices;
+ 		std::vector<sm::vec2> vertices;
  		sprites[i]->GetBounding()->GetBoundPos(vertices);
 		for (size_t j = 0, m = vertices.size(); j < m; ++j) {
  			region.Combine(vertices[j]);

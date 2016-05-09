@@ -1,7 +1,7 @@
 #ifndef _SG_SYMBOL_RENDER_H_
 #define _SG_SYMBOL_RENDER_H_
 
-namespace ee { class Sprite; class Symbol; class Vector; }
+namespace ee { class Sprite; class Symbol; }
 
 namespace sg
 {
@@ -26,10 +26,10 @@ public:
 		m_region_size = size;
 	}
 
-	void DrawGrass(const ee::Symbol& symbol, const ee::Vector& pos, bool is_flat) const;
-	void DrawGrids(const ee::Symbol& symbol, const ee::Vector& pos, bool valid, bool is_flat) const;
-	void DrawArrow(const ee::Symbol& symbol, const ee::Vector& pos) const;
-	void DrawRegion(const ee::Symbol& symbol, const ee::Vector& pos);
+	void DrawGrass(const ee::Symbol& symbol, const sm::vec2& pos, bool is_flat) const;
+	void DrawGrids(const ee::Symbol& symbol, const sm::vec2& pos, bool valid, bool is_flat) const;
+	void DrawArrow(const ee::Symbol& symbol, const sm::vec2& pos) const;
+	void DrawRegion(const ee::Symbol& symbol, const sm::vec2& pos);
 
 public:
 	static SymbolRender* Instance();

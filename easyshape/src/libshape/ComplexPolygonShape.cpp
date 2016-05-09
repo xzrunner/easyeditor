@@ -17,8 +17,8 @@ ComplexPolygonShape::ComplexPolygonShape(const ComplexPolygonShape& poly)
 {
 }
 
-ComplexPolygonShape::ComplexPolygonShape(const std::vector<ee::Vector>& outline, 
-										 const std::vector<std::vector<ee::Vector> >& holes)
+ComplexPolygonShape::ComplexPolygonShape(const std::vector<sm::vec2>& outline, 
+										 const std::vector<std::vector<sm::vec2> >& holes)
 	: PolygonShape(outline)
 	, m_holes(holes)
 {
@@ -26,7 +26,7 @@ ComplexPolygonShape::ComplexPolygonShape(const std::vector<ee::Vector>& outline,
 	m_material->BuildEnd();
 }
 
-bool ComplexPolygonShape::IsContain(const ee::Vector& pos) const
+bool ComplexPolygonShape::IsContain(const sm::vec2& pos) const
 {
 	if (PolygonShape::IsContain(pos)) {
 		for (int i = 0, n = m_holes.size(); i < n; ++i) {
@@ -44,7 +44,7 @@ bool ComplexPolygonShape::IsIntersect(const ee::Rect& rect) const
 	return ee::Math2D::IsPolygonIntersectRect(m_vertices, rect);
 }
 
-void ComplexPolygonShape::Translate(const ee::Vector& offset)
+void ComplexPolygonShape::Translate(const sm::vec2& offset)
 {
 	PolygonShape::Translate(offset);
 
@@ -62,7 +62,7 @@ void ComplexPolygonShape::Draw(const sm::mat4& mt, const ee::RenderColor& color)
 	if (ee::SettingData::draw_poly_bound) {
 		float len = ee::Math2D::TransLen(ee::SettingData::ctl_pos_sz, mt);
 		for (int i = 0, n = m_holes.size(); i < n; ++i) {
-			std::vector<ee::Vector> vertices;
+			std::vector<sm::vec2> vertices;
 			ee::Math2D::TransVertices(mt, m_holes[i], vertices);
 			ee::RVG::Color(color.multi);
 			ee::RVG::Polyline(vertices, m_loop);

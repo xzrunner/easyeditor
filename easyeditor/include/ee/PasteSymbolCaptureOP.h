@@ -25,7 +25,8 @@ private:
 	PasteSymbolOffsetCMPT<PasteSymbolCaptureOP>* m_cmpt;
 
 	bool m_bCaptured;
-	Vector m_lastPos;
+	sm::vec2 m_last_pos;
+	bool m_last_pos_valid;
 
 }; // PasteSymbolCaptureOP
 

@@ -13,14 +13,14 @@ void PerspectiveCamera::Reset()
 
 }
 
-Vector PerspectiveCamera::TransPosScreenToProject(int x, int y, int width, int height) const
+sm::vec2 PerspectiveCamera::TransPosScreenToProject(int x, int y, int width, int height) const
 {
-	return Vector();
+	return sm::vec2();
 }
 
-Vector PerspectiveCamera::TransPosProjectToScreen(const Vector& proj, int width, int height) const
+sm::vec2 PerspectiveCamera::TransPosProjectToScreen(const sm::vec2& proj, int width, int height) const
 {
-	return Vector();
+	return sm::vec2();
 }
 
 void PerspectiveCamera::UpdateModelView() const
@@ -32,9 +32,9 @@ float PerspectiveCamera::GetScale() const
 	return 1;
 }
 
-const Vector& PerspectiveCamera::GetPosition() const
+const sm::vec2& PerspectiveCamera::GetPosition() const
 {
-	return Vector();
+	return sm::vec2();
 }
 
 }

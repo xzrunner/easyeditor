@@ -3,22 +3,22 @@
 
 #include "common_type.h"
 
+#include <SM_Vector.h>
+
 #include <stdio.h>
 
 namespace ee
 {
-
-class Vector;
 
 class ArrangeSpriteState
 {
 public:
 	virtual ~ArrangeSpriteState() {}
 	
-	virtual void OnMousePress(const Vector& pos) {}
-	virtual void OnMouseRelease(const Vector& pos) {}
-	virtual bool OnMouseMove(const Vector& pos) { return false; }
-	virtual bool OnMouseDrag(const Vector& pos) { return false; }
+	virtual void OnMousePress(const sm::vec2& pos) {}
+	virtual void OnMouseRelease(const sm::vec2& pos) {}
+	virtual bool OnMouseMove(const sm::vec2& pos) { return false; }
+	virtual bool OnMouseDrag(const sm::vec2& pos) { return false; }
 
 	virtual bool OnDirectionKeyDown(DirectionType type) { return false; }
 

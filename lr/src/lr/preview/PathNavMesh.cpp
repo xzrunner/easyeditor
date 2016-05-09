@@ -24,7 +24,7 @@ void PathNavMesh::DisableRegion(const ee::Sprite* spr, bool disable)
 	m_tris.clear();
 
 	// get bound
-	std::vector<ee::Vector> bound;
+	std::vector<sm::vec2> bound;
 	const eshape::Sprite* shape = dynamic_cast<const eshape::Sprite*>(spr);
 	if (shape && shape->GetSymbol().GetShapeType() == eshape::ST_POLYGON)
 	{
@@ -37,9 +37,9 @@ void PathNavMesh::DisableRegion(const ee::Sprite* spr, bool disable)
 		spr->GetBounding()->GetBoundPos(bound);
 	}
 
-	std::map<const ee::Sprite*, std::vector<ee::Vector> >::iterator itr = m_bounds.find(spr);
+	std::map<const ee::Sprite*, std::vector<sm::vec2> >::iterator itr = m_bounds.find(spr);
 	if (itr == m_bounds.end() && !disable) {
-		std::vector<ee::Vector> fixed;
+		std::vector<sm::vec2> fixed;
 		ee::Math2D::RemoveDuplicatePoints(bound, fixed);
 		sm::mat4 mat;
 		spr->GetTransMatrix(mat);
@@ -52,21 +52,21 @@ void PathNavMesh::DisableRegion(const ee::Sprite* spr, bool disable)
 	}
 
 	// create nodes
-	std::vector<ee::Vector> all_bound;
-	all_bound.push_back(ee::Vector(m_region.xmin, m_region.ymin));
-	all_bound.push_back(ee::Vector(m_region.xmin, m_region.ymax));
-	all_bound.push_back(ee::Vector(m_region.xmax, m_region.ymax));
-	all_bound.push_back(ee::Vector(m_region.xmax, m_region.ymin));
+	std::vector<sm::vec2> all_bound;
+	all_bound.push_back(sm::vec2(m_region.xmin, m_region.ymin));
+	all_bound.push_back(sm::vec2(m_region.xmin, m_region.ymax));
+	all_bound.push_back(sm::vec2(m_region.xmax, m_region.ymax));
+	all_bound.push_back(sm::vec2(m_region.xmax, m_region.ymin));
 
-	std::vector<ee::Vector> lines;
-	std::vector<std::vector<ee::Vector> > loops;
+	std::vector<sm::vec2> lines;
+	std::vector<std::vector<sm::vec2> > loops;
 	for (itr = m_bounds.begin(); itr != m_bounds.end(); ++itr) {
 		loops.push_back(itr->second);
 	}
 	ee::Triangulation::LinesAndLoops(all_bound, lines, loops, m_tris);
 }
 
-void PathNavMesh::QueryRoute(const ee::Vector& start, const ee::Vector& end)
+void PathNavMesh::QueryRoute(const sm::vec2& start, const sm::vec2& end)
 {
 	
 }
@@ -74,7 +74,7 @@ void PathNavMesh::QueryRoute(const ee::Vector& start, const ee::Vector& end)
 void PathNavMesh::DebugDraw() const
 {
 	for (int i = 0, n = m_tris.size(); i < n; ) {
-		std::vector<ee::Vector> polyline;
+		std::vector<sm::vec2> polyline;
 		polyline.push_back(m_tris[i++]);
 		polyline.push_back(m_tris[i++]);
 		polyline.push_back(m_tris[i++]);
@@ -83,10 +83,11 @@ void PathNavMesh::DebugDraw() const
 	}
 }
 
-ee::Vector PathNavMesh::TransIDToPos(int id) const
+sm::vec2 PathNavMesh::TransIDToPos(int id) const
 {
-	ee::Vector ret;
-	ret.SetInvalid();
+	sm::vec2 ret;
+
+	// todo 
 
 	return ret;
 }

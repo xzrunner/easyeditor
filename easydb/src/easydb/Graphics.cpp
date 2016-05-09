@@ -23,7 +23,7 @@ void Graphics::Connect(ee::Sprite* from, ee::Sprite* to)
 	t->in.push_back(from);
 }
 
-void Graphics::Move(ee::Sprite* sprite, const ee::Vector& offset) 
+void Graphics::Move(ee::Sprite* sprite, const sm::vec2& offset) 
 {
 	sprite->SetTransform(sprite->GetPosition() + offset, 0);
 	Node* node = Query(sprite);

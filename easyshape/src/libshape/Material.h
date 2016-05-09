@@ -4,7 +4,6 @@
 #include <json/json.h>
 
 #include <ee/Object.h>
-#include <ee/Vector.h>
 
 #include <SM_Matrix.h>
 
@@ -21,29 +20,29 @@ public:
 
 	virtual Json::Value Store(const std::string& dirpath) const = 0;
 
-	virtual void Translate(const ee::Vector& offset);
+	virtual void Translate(const sm::vec2& offset);
 	virtual void Draw(const sm::mat4& mt, const ee::RenderColor& color) const = 0;
 
 	virtual void ReloadTexture() = 0;
 
-	void BuildBegin(const std::vector<ee::Vector>& outline);
-	void BuildSetSegments(const std::vector<ee::Vector>& segs);
-	void BuildSetHoles(const std::vector<std::vector<ee::Vector> >& holes);
+	void BuildBegin(const std::vector<sm::vec2>& outline);
+	void BuildSetSegments(const std::vector<sm::vec2>& segs);
+	void BuildSetHoles(const std::vector<std::vector<sm::vec2> >& holes);
 	virtual void BuildEnd() = 0;
 
-	const std::vector<ee::Vector>& GetTriangles() const { return m_tris; }
+	const std::vector<sm::vec2>& GetTriangles() const { return m_tris; }
 
-	void Refresh(const std::vector<ee::Vector>& vertices);
+	void Refresh(const std::vector<sm::vec2>& vertices);
 
 	void DebugDrawTris(const sm::mat4& mt) const;
 
 protected:
-	std::vector<ee::Vector> m_tris;
+	std::vector<sm::vec2> m_tris;
 
 	// shape
-	std::vector<ee::Vector> m_outline;
-	std::vector<ee::Vector> m_segments;
-	std::vector<std::vector<ee::Vector> > m_holes;
+	std::vector<sm::vec2> m_outline;
+	std::vector<sm::vec2> m_segments;
+	std::vector<std::vector<sm::vec2> > m_holes;
 
 }; // Material
 

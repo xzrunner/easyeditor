@@ -89,7 +89,7 @@ int StagePanel::GetTextureAccount() const
 
 void StagePanel::FixCoords(ee::Sprite* sprite)
 {
-	const ee::Vector& pos = sprite->GetPosition();
+	const sm::vec2& pos = sprite->GetPosition();
 
 	const float s = Context::Instance()->scale;
 
@@ -105,14 +105,14 @@ void StagePanel::FixCoords(ee::Sprite* sprite)
 		height = sprite->GetSymbol().GetSize().Width() * s;
 	}
 
-	ee::Vector leftTop;
+	sm::vec2 leftTop;
 	leftTop.x = pos.x - width * 0.5f;
 	leftTop.y = pos.y - height * 0.5f;
 
 	if (leftTop.x != std::floor(leftTop.x) ||
 		leftTop.y != std::floor(leftTop.y))
 	{
-		ee::Vector fixedCenter;
+		sm::vec2 fixedCenter;
 		fixedCenter.x = leftTop.x > 0 ? leftTop.x + 0.5f : leftTop.x - 0.5f;
 		fixedCenter.y = leftTop.y > 0 ? leftTop.y + 0.5f : leftTop.y - 0.5f;
 		fixedCenter.x = int(fixedCenter.x) + width * 0.5f;

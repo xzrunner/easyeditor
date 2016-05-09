@@ -13,7 +13,7 @@
 namespace eshape
 {
 
-TextureMaterial::TextureMaterial(const std::vector<ee::Vector>& vertices, ee::ImageSymbol* image)
+TextureMaterial::TextureMaterial(const std::vector<sm::vec2>& vertices, ee::ImageSymbol* image)
 {
 	image->Retain();
 	m_image = image;
@@ -35,7 +35,7 @@ Json::Value TextureMaterial::Store(const std::string& dirpath) const
 	return val;
 }
 
-void TextureMaterial::Translate(const ee::Vector& offset)
+void TextureMaterial::Translate(const sm::vec2& offset)
 {
 	Material::Translate(offset);
 	for (int i = 0, n = m_tris_texcoord.size(); i < n; ++i) {
@@ -58,7 +58,7 @@ void TextureMaterial::Draw(const sm::mat4& mt, const ee::RenderColor& color) con
 		mgr->SetShader(sl::SPRITE2);
 		sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
 		for (int i = 0, n = m_tris.size(); i < n; i += 3) {
-			ee::Vector vertices[4], texcoords[4];
+			sm::vec2 vertices[4], texcoords[4];
 			for (int j = 0; j < 3; ++j) {
 				vertices[j] = ee::Math2D::TransVector(m_tris[i+j], mt);
 				texcoords[j] = m_tris_texcoord[i+j];
@@ -82,10 +82,10 @@ void TextureMaterial::Draw(const sm::mat4& mt, const ee::RenderColor& color) con
 		for (int i = 0, n = m_tris.size(); i < n; i += 3) {
 			std::vector<sm::vec3> vertices; 
 			vertices.resize(3);
-			std::vector<ee::Vector> texcoords;
+			std::vector<sm::vec2> texcoords;
 			texcoords.resize(3);
 			for (int j = 0; j < 3; ++j) {
-				ee::Vector v = ee::Math2D::TransVector(m_tris[i+j], mt);
+				sm::vec2 v = ee::Math2D::TransVector(m_tris[i+j], mt);
 				vertices[j] = sm::vec3(v.x, v.y, 0);
 				texcoords[j] = m_tris_texcoord[i+j];
 			}
@@ -104,12 +104,12 @@ void TextureMaterial::BuildEnd()
 	m_tris.clear();
 	m_tris_texcoord.clear();
 
-	std::vector<ee::Vector> outline;
+	std::vector<sm::vec2> outline;
 	ee::Math2D::RemoveDuplicatePoints(m_outline, outline);
 
 	ee::Rect r = GetBoundingRegion(outline);
 
-	std::vector<ee::Vector> segments;
+	std::vector<sm::vec2> segments;
 	GetTexBoundarySegments(r, segments);
 	if (!m_segments.empty()) {
 		copy(m_segments.begin(), m_segments.end(), back_inserter(segments));
@@ -120,7 +120,7 @@ void TextureMaterial::BuildEnd()
 	CalTexcoords(r);
 }
 
-ee::Rect TextureMaterial::GetBoundingRegion(const std::vector<ee::Vector>& bounding) const
+ee::Rect TextureMaterial::GetBoundingRegion(const std::vector<sm::vec2>& bounding) const
 {
 	ee::Rect r;
 	for (int i = 0, n = bounding.size(); i < n; ++i) {
@@ -129,20 +129,20 @@ ee::Rect TextureMaterial::GetBoundingRegion(const std::vector<ee::Vector>& bound
 	return r;
 }
 
-void TextureMaterial::GetTexBoundarySegments(const ee::Rect& rect, std::vector<ee::Vector>& segments)
+void TextureMaterial::GetTexBoundarySegments(const ee::Rect& rect, std::vector<sm::vec2>& segments)
 {
 	static const int EXTEND = 1;
 	int width = m_image->GetSize().Width(),
 		height = m_image->GetSize().Height();
 	for (float x = rect.xmin; x < rect.xmax; x += width)
 	{
- 		segments.push_back(ee::Vector(x, rect.ymin - EXTEND));
- 		segments.push_back(ee::Vector(x, rect.ymax + EXTEND));
+ 		segments.push_back(sm::vec2(x, rect.ymin - EXTEND));
+ 		segments.push_back(sm::vec2(x, rect.ymax + EXTEND));
 	}
 	for (float y = rect.ymin; y < rect.ymax; y += height)
 	{
- 		segments.push_back(ee::Vector(rect.xmin - EXTEND, y));
- 		segments.push_back(ee::Vector(rect.xmax + EXTEND, y));
+ 		segments.push_back(sm::vec2(rect.xmin - EXTEND, y));
+ 		segments.push_back(sm::vec2(rect.xmax + EXTEND, y));
 	}
 }
 
@@ -164,7 +164,7 @@ void TextureMaterial::CalTexcoords(const ee::Rect& rect)
 
 		int ix = (cx - rect.xmin) / width,
 			iy = (cy - rect.ymin) / height;
-		ee::Vector base;
+		sm::vec2 base;
 		base.x = rect.xmin + width * ix;
 		base.y = rect.ymin + height * iy;
 
@@ -172,7 +172,7 @@ void TextureMaterial::CalTexcoords(const ee::Rect& rect)
 		{
 			float tx = (m_tris[index + j].x - base.x) / width,
 				  ty = (m_tris[index + j].y - base.y) / height;
-			m_tris_texcoord.push_back(ee::Vector(tx, ty));
+			m_tris_texcoord.push_back(sm::vec2(tx, ty));
 		}
 
 		index +=  3;

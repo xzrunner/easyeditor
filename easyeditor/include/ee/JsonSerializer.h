@@ -1,8 +1,9 @@
 #ifndef _EASYEDITOR_JSON_SERIALIZER_H_
 #define _EASYEDITOR_JSON_SERIALIZER_H_
 
-#include "Vector.h"
 #include "Color.h"
+
+#include <SM_Vector.h>
 
 #include <json/value.h>
 
@@ -16,8 +17,8 @@ class Rect;
 class JsonSerializer
 {
 public:
-	static void Store(const std::vector<Vector>& points, Json::Value& value);
-	static void Load(const Json::Value& value, std::vector<Vector>& points);
+	static void Store(const std::vector<sm::vec2>& points, Json::Value& value);
+	static void Load(const Json::Value& value, std::vector<sm::vec2>& points);
 
 	static void Store(const std::vector<Colorf>& colors, Json::Value& value);
 	static void Load(const Json::Value& value, std::vector<Colorf>& colors);

@@ -31,7 +31,7 @@ MoveSpriteState::~MoveSpriteState()
 	}
 }
 
-bool MoveSpriteState::OnMouseMove(const Vector& pos)
+bool MoveSpriteState::OnMouseMove(const sm::vec2& pos)
 {
 	if (m_sprites.empty()) {
 		return false;

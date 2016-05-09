@@ -30,7 +30,7 @@ ee::Sprite* PictureToSpr::TransQuad(const erespacker::PackPicture::Quad* quad)
 	float w = quad->img->GetOriginWidth(),
 		h = quad->img->GetOriginHeight();
 
-	ee::Vector src[4], screen[4];
+	sm::vec2 src[4], screen[4];
 	for (int i = 0; i < 4; ++i) {
 		src[i].x = quad->texture_coord[i].x / w;
 		src[i].y = 1 - quad->texture_coord[i].y / h;

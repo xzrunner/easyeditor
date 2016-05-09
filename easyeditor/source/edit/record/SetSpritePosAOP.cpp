@@ -8,7 +8,7 @@
 namespace ee
 {
 
-SetSpritePosAOP::SetSpritePosAOP(Sprite* sprite, const Vector& pos)
+SetSpritePosAOP::SetSpritePosAOP(Sprite* sprite, const sm::vec2& pos)
 	: m_new_pos(pos)
 {
 	sprite->Retain();
@@ -16,7 +16,7 @@ SetSpritePosAOP::SetSpritePosAOP(Sprite* sprite, const Vector& pos)
 	m_old_pos.push_back(sprite->GetPosition());
 }
 
-SetSpritePosAOP::SetSpritePosAOP(const std::vector<Sprite*>& sprites, const Vector& pos)
+SetSpritePosAOP::SetSpritePosAOP(const std::vector<Sprite*>& sprites, const sm::vec2& pos)
 	: m_new_pos(pos)
 {
 	for_each(sprites.begin(), sprites.end(), RetainObjectFunctor<Sprite>());

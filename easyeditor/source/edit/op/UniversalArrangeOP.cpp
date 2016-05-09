@@ -34,7 +34,7 @@ bool UniversalArrangeOP::OnMouseLeftDown(int x, int y)
 {
 	m_editop = m_noPhysics;
 
-	Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	for (size_t i = 0, n = m_physics.size(); i < n; ++i)
 	{
 		if (PhysicsQuery::QueryOn(m_physics[i].world, pos))

@@ -111,7 +111,7 @@ void EditDialog::InitCamera(ee::Sprite* spr) const
 
 	ee::OrthoCamera* cam = static_cast<ee::OrthoCamera*>(ee::CameraMgr::Instance()->GetCamera());
 	cam->SetScale(1 / scale);
-	cam->SetPosition(ee::Vector(0, 0));
+	cam->SetPosition(sm::vec2(0, 0));
 }
 
 }

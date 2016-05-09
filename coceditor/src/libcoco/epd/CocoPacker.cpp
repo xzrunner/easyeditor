@@ -500,7 +500,7 @@ void CocoPacker::ParserPicture(const ee::ImageSprite* sprite, PicFixType tsrc, P
 	// screen
 	const float hw = picture->entry->sprite_source_size.w * 0.5f / picture->invscale * m_scale,
 		hh = picture->entry->sprite_source_size.h * 0.5f / picture->invscale * m_scale;
-	ee::Vector screen[4];
+	sm::vec2 screen[4];
 	screen[0].Set(-hw, hh);
 	screen[1].Set(-hw, -hh);
 	screen[2].Set(hw, -hh);
@@ -536,11 +536,11 @@ void CocoPacker::ParserPicture(const ee::ImageSprite* sprite, PicFixType tsrc, P
  	// 4. rotate
  	for (size_t i = 0; i < 4; ++i)
  	{
- 		ee::Vector rot = ee::Math2D::RotateVector(screen[i], sprite->GetAngle());
+ 		sm::vec2 rot = ee::Math2D::RotateVector(screen[i], sprite->GetAngle());
  		screen[i] = rot;
  	}
  	// 5. translate
- 	ee::Vector offset = picture->offset;
+ 	sm::vec2 offset = picture->offset;
  	offset.x *= sprite->GetScale().x / picture->invscale;
  	offset.y *= sprite->GetScale().y / picture->invscale;
 	if (xMirror) {
@@ -549,7 +549,7 @@ void CocoPacker::ParserPicture(const ee::ImageSprite* sprite, PicFixType tsrc, P
 	if (yMirror) {
 		offset.y = -offset.y;
 	}
- 	ee::Vector center = sprite->GetCenter();
+ 	sm::vec2 center = sprite->GetCenter();
  	center += ee::Math2D::RotateVector(offset, sprite->GetAngle());
  	for (size_t i = 0; i < 4; ++i)
  		screen[i] += center;
@@ -687,7 +687,7 @@ void CocoPacker::ParserPicture(const ee::ImageSymbol* symbol, PicFixType tsrc)
 	// screen
 	const float hw = picture->entry->sprite_source_size.w * 0.5f / picture->invscale * m_scale,
 		hh = picture->entry->sprite_source_size.h * 0.5f / picture->invscale * m_scale;
-	ee::Vector screen[4];
+	sm::vec2 screen[4];
 	screen[0].Set(-hw, hh);
 	screen[1].Set(-hw, -hh);
 	screen[2].Set(hw, -hh);
@@ -773,7 +773,7 @@ void CocoPacker::ParserIcon(const eicon::Symbol* symbol, float process, int id)
 	std::string assignTex = lua::assign("tex", ee::StringHelper::ToString(picture->tex));
 
 	// src
-	ee::Vector node[4];
+	sm::vec2 node[4];
 	symbol->GetIcon()->GetTexCoords(process, node);
 	int left = picture->scr[1].x, bottom = picture->scr[1].y;
 	int width = picture->scr[2].x - left,
@@ -792,7 +792,7 @@ void CocoPacker::ParserIcon(const eicon::Symbol* symbol, float process, int id)
 	// screen
 	const float hw = picture->entry->sprite_source_size.w * 0.5f / picture->invscale * m_scale,
 		hh = picture->entry->sprite_source_size.h * 0.5f / picture->invscale * m_scale;
-	ee::Vector screen[4];
+	sm::vec2 screen[4];
 	for (int i = 0; i < 4; ++i) {
 		screen[i].x = -hw + hw * 2 * node[i].x;
 		screen[i].y = -hh + hh * 2 * node[i].y;
@@ -1033,7 +1033,7 @@ void CocoPacker::ParserScale9(const escale9::Symbol* symbol)
  	}
 }
 
-void CocoPacker::CalSrcFromUV(ee::Vector src[4], TPParser::Picture* picture)
+void CocoPacker::CalSrcFromUV(sm::vec2 src[4], TPParser::Picture* picture)
 {
 	if (picture->entry->rotated)
 	{
@@ -1061,7 +1061,7 @@ void CocoPacker::CalSrcFromUV(ee::Vector src[4], TPParser::Picture* picture)
 	}
 }
 
-void CocoPacker::CalSrcFromUVFixed(ee::Vector src[4], TPParser::Picture* picture)
+void CocoPacker::CalSrcFromUVFixed(sm::vec2 src[4], TPParser::Picture* picture)
 {
 	if (picture->entry->rotated)
 	{
@@ -1114,7 +1114,7 @@ int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 		frame = std::fabs(std::floor(1.0f / sprite->GetSpeed().y));
 	}
 	std::vector<int> frame_size;
-	ee::Vector speed = sprite->GetSpeed();
+	sm::vec2 speed = sprite->GetSpeed();
 	emesh::Mesh* shape = const_cast<emesh::Mesh*>(sprite->GetSymbol().GetMesh());
 	// 打包emesh::Strip做的流水
 	if (dynamic_cast<emesh::Strip*>(shape))
@@ -1137,7 +1137,7 @@ int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 				m_gen->line(lua::assign("id", ee::StringHelper::ToString(curr_id++)) + ",");
 
 				// src
-				ee::Vector src[4];
+				sm::vec2 src[4];
 				src[0] = left_up->nodes[2]->uv;
 				src[1] = left_up->nodes[0]->uv;
 				src[2] = right_down->nodes[1]->uv;
@@ -1151,7 +1151,7 @@ int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 					lua::tableassign("", 8, sx0, sy0, sx1, sy1, sx2, sy2, sx3, sy3));		
 
 				// screen
-				ee::Vector screen[4];
+				sm::vec2 screen[4];
 				screen[0] = left_up->nodes[2]->xy;
 				screen[1] = left_up->nodes[0]->xy;
 				screen[2] = right_down->nodes[1]->xy;
@@ -1192,7 +1192,7 @@ int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 			m_gen->line(lua::assign("id", ee::StringHelper::ToString(curr_id++)) + ",");
 
 			// src
-			ee::Vector src[4];
+			sm::vec2 src[4];
 			src[0] = tri->nodes[0]->uv;
 			src[1] = tri->nodes[1]->uv;
 			src[2] = tri->nodes[2]->uv;
@@ -1206,7 +1206,7 @@ int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 				lua::tableassign("", 8, sx0, sy0, sx1, sy1, sx2, sy2, sx3, sy3));		
 
 			// screen
-			ee::Vector screen[4];
+			sm::vec2 screen[4];
 			screen[0] = tri->nodes[0]->xy;
 			screen[1] = tri->nodes[1]->xy;
 			screen[2] = tri->nodes[2]->xy;
@@ -1357,7 +1357,7 @@ int CocoPacker::ParserTerrain2D(const eterrain2d::Sprite* sprite)
 					emesh::Triangle* tri = tris[k];
 
 					// src
-					ee::Vector src[4];
+					sm::vec2 src[4];
 					src[0] = tri->nodes[0]->uv;
 					src[1] = tri->nodes[1]->uv;
 					src[2] = tri->nodes[2]->uv;
@@ -1371,7 +1371,7 @@ int CocoPacker::ParserTerrain2D(const eterrain2d::Sprite* sprite)
 						sx1, sy1, sx2, sy2, sx3, sy3));		
 
 					// screen
-					ee::Vector screen[4];
+					sm::vec2 screen[4];
 					screen[0] = tri->nodes[0]->xy;
 					screen[1] = tri->nodes[1]->xy;
 					screen[2] = tri->nodes[2]->xy;
@@ -1475,8 +1475,8 @@ int CocoPacker::ParserTexture(const etexture::Sprite* sprite)
 	// tex
 	std::string assign_tex = lua::assign("tex", ee::StringHelper::ToString(picture->tex));
 
-	const std::vector<ee::Vector>& vertices = material->GetTriangles();
-	const std::vector<ee::Vector>& texcoords = material->GetTexcoords();
+	const std::vector<sm::vec2>& vertices = material->GetTriangles();
+	const std::vector<sm::vec2>& texcoords = material->GetTexcoords();
 	assert(vertices.size() == texcoords.size() && vertices.size() % 3 == 0);
 	for (int i = 0, n = vertices.size(); i < n; i += 3)
 	{
@@ -1485,7 +1485,7 @@ int CocoPacker::ParserTexture(const etexture::Sprite* sprite)
 		m_gen->line(lua::assign("id", ee::StringHelper::ToString(curr_id++)) + ",");
 		
 		// src
-		ee::Vector src[4];
+		sm::vec2 src[4];
 		for (int j = 0; j < 3; ++j) {
 			src[j] = texcoords[i+j];
 		}
@@ -1499,7 +1499,7 @@ int CocoPacker::ParserTexture(const etexture::Sprite* sprite)
 			sx1, sy1, sx2, sy2, sx3, sy3));		
 
 		// screen
-		ee::Vector screen[4];
+		sm::vec2 screen[4];
 		for (int j = 0; j < 3; ++j) {
 			screen[j] = vertices[i+j];
 		}
@@ -1910,7 +1910,7 @@ void CocoPacker::TransToMat(const ee::Sprite* sprite, float mat[6], bool force /
 		bool xMirror, yMirror;
 		sprite->GetMirror(xMirror, yMirror);
 
-		ee::Vector center = sprite->GetCenter();
+		sm::vec2 center = sprite->GetCenter();
 		if (dynamic_cast<const ee::ImageSprite*>(sprite))
 		{
 			TPParser::Picture* picture = m_parser.FindPicture(&sprite->GetSymbol());
@@ -1919,7 +1919,7 @@ void CocoPacker::TransToMat(const ee::Sprite* sprite, float mat[6], bool force /
 				throw ee::Exception(str);
 			}
 
-			ee::Vector offset = picture->offset;
+			sm::vec2 offset = picture->offset;
 			if (xMirror) {
 				offset.x = -offset.x;
 			}

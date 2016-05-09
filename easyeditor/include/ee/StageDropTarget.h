@@ -9,7 +9,6 @@ namespace ee
 class EditPanelImpl;
 class LibraryPanel;
 class Symbol;
-class Vector;
 
 class StageDropTarget : public CombinedDropTarget
 {

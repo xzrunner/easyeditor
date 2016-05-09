@@ -15,7 +15,7 @@ class PolygonShape : public ChainShape
 public:
 	PolygonShape();
 	PolygonShape(const PolygonShape& polygon);
-	PolygonShape(const std::vector<ee::Vector>& vertices);
+	PolygonShape(const std::vector<sm::vec2>& vertices);
 	virtual ~PolygonShape();
 	
 	//
@@ -27,10 +27,10 @@ public:
 	// Shape interface
 	//
 	virtual const char* GetShapeDesc() const { return "polygon"; }
-	virtual bool IsContain(const ee::Vector& pos) const;
+	virtual bool IsContain(const sm::vec2& pos) const;
 	// todo
 	//virtual bool isIntersect(const ee::Rect& rect) const;
-	virtual void Translate(const ee::Vector& offset);
+	virtual void Translate(const sm::vec2& offset);
 	virtual void Draw(const sm::mat4& mt, const ee::RenderColor& color) const;
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
 	virtual void LoadFromFile(const Json::Value& value, const std::string& dir);

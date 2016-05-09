@@ -54,9 +54,8 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(wxWindow* wnd, EditPanelImpl* stage,
 
 	m_selection = sprites_impl->GetSpriteSelection();
 	m_selection->Retain();
-
-	m_left_down_pos.SetInvalid();
-	m_right_down_pos.SetInvalid();
+	
+	m_left_pos_valid = m_right_pos_valid = false;
 
 	m_ctrl_node_radius = CTRL_NODE_RADIUS;
 }
@@ -131,8 +130,9 @@ void ArrangeSpriteImpl::OnKeyUp(int keyCode)
 
 void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 {
-	Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	m_left_down_pos = pos;
+	m_left_pos_valid = true;
 
 	m_align.SetInvisible();
 
@@ -166,7 +166,7 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 	// offset
 	if (m_cfg.is_offset_open)
 	{
-		Vector offset = GetSprOffset(selected);
+		sm::vec2 offset = GetSprOffset(selected);
 		if (Math2D::GetDistance(offset, pos) < m_ctrl_node_radius) {
 			ChangeOPState(CreateOffsetState(selected));
 			return;
@@ -176,7 +176,7 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 	// scale
 	if (m_cfg.is_deform_open && !m_stage->GetKeyState(WXK_SHIFT))
 	{
-		Vector ctrlNodes[8];
+		sm::vec2 ctrlNodes[8];
 		SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrlNodes);
 		for (int i = 0; i < 8; ++i)
 		{
@@ -194,7 +194,7 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 	// perspective
 	if (m_cfg.is_deform_open && m_stage->GetKeyState(WXK_SHIFT))
 	{
-		Vector ctrl_node[4];
+		sm::vec2 ctrl_node[4];
 		SpriteCtrlNode::GetSpriteCtrlNodesExt(selected, ctrl_node);
 		for (int i = 0; i < 4; ++i) {
 			if (Math2D::GetDistance(ctrl_node[i], pos) < m_ctrl_node_radius) {
@@ -215,7 +215,7 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 
 void ArrangeSpriteImpl::OnMouseLeftUp(int x, int y)
 {
-	Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	if (m_op_state) 
 	{
 		m_op_state->OnMouseRelease(pos);
@@ -223,8 +223,7 @@ void ArrangeSpriteImpl::OnMouseLeftUp(int x, int y)
 	}
 
 	if (!m_selection->IsEmpty()) {
-		Vector p;
-		p.SetInvalid();
+		sm::vec2 p;
 		ChangeOPState(CreateTranslateState(m_selection, p));
 	}
 
@@ -249,8 +248,9 @@ void ArrangeSpriteImpl::OnMouseLeftUp(int x, int y)
 
 void ArrangeSpriteImpl::OnMouseRightDown(int x, int y)
 {
-	Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	m_right_down_pos = pos;
+	m_right_pos_valid = true;
 
 	Sprite* selected = NULL;
 	if (m_selection->Size() == 1)
@@ -264,7 +264,7 @@ void ArrangeSpriteImpl::OnMouseRightDown(int x, int y)
 	// shear
 	if (m_cfg.is_deform_open)
 	{
-		Vector ctrlNodes[8];
+		sm::vec2 ctrlNodes[8];
 		SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrlNodes);
 		for (int i = 0; i < 8; ++i)
 		{
@@ -287,11 +287,11 @@ void ArrangeSpriteImpl::OnMouseRightDown(int x, int y)
 
 void ArrangeSpriteImpl::OnMouseRightUp(int x, int y)
 {
-	if (!m_right_down_pos.IsValid()) {
+	if (!m_right_pos_valid) {
 		return;
 	}
 
-	Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	if (pos == m_right_down_pos)
 	{
 		wxMenu menu;
@@ -313,7 +313,7 @@ void ArrangeSpriteImpl::OnMouseRightUp(int x, int y)
 
 void ArrangeSpriteImpl::OnMouseMove(int x, int y)
 {
-	Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	if (m_op_state && m_op_state->OnMouseMove(pos))
 	{
 		if (m_property_panel) {
@@ -324,7 +324,7 @@ void ArrangeSpriteImpl::OnMouseMove(int x, int y)
 
 void ArrangeSpriteImpl::OnMouseDrag(int x, int y)
 {
-	Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	if (m_op_state && m_op_state->OnMouseDrag(pos))
 	{
 		SetCanvasDirtySJ::Instance()->SetDirty();
@@ -360,7 +360,7 @@ void ArrangeSpriteImpl::OnDraw(const Camera& cam) const
 		} else {
 			if (m_stage->GetKeyState(WXK_SHIFT)) 
 			{
-				Vector ctrl_nodes[4];
+				sm::vec2 ctrl_nodes[4];
 				SpriteCtrlNode::GetSpriteCtrlNodesExt(selected, ctrl_nodes);
 				for (int i = 0; i < 4; ++i) {
 					RVG::Color(Colorf(0.2f, 0.8f, 0.2f));
@@ -369,7 +369,7 @@ void ArrangeSpriteImpl::OnDraw(const Camera& cam) const
 			}
 			else
 			{
-				Vector ctrl_nodes[8];
+				sm::vec2 ctrl_nodes[8];
 				SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrl_nodes);
 				for (int i = 0; i < 4; ++i) {
 					RVG::Color(Colorf(0.2f, 0.8f, 0.2f));
@@ -383,7 +383,7 @@ void ArrangeSpriteImpl::OnDraw(const Camera& cam) const
 
 			if (m_cfg.is_offset_open)
 			{
-				Vector offset = GetSprOffset(selected);
+				sm::vec2 offset = GetSprOffset(selected);
 				RVG::Color(Colorf(0.8f, 0.2f, 0.2f));
 				RVG::Circle(offset, m_ctrl_node_radius, true);
 			}
@@ -397,7 +397,7 @@ void ArrangeSpriteImpl::Clear()
 {
 }
 
-Sprite* ArrangeSpriteImpl::QueryEditedSprite(const Vector& pos) const
+Sprite* ArrangeSpriteImpl::QueryEditedSprite(const sm::vec2& pos) const
 {
 	Sprite* selected = NULL;
 	if (m_cfg.is_deform_open && m_selection->Size() == 1)
@@ -410,7 +410,7 @@ Sprite* ArrangeSpriteImpl::QueryEditedSprite(const Vector& pos) const
 
 	if (m_cfg.is_offset_open)
 	{
-		Vector offset = GetSprOffset(selected);
+		sm::vec2 offset = GetSprOffset(selected);
 		if (Math2D::GetDistance(offset, pos) < m_ctrl_node_radius) {
 			return selected;
 		}
@@ -418,7 +418,7 @@ Sprite* ArrangeSpriteImpl::QueryEditedSprite(const Vector& pos) const
 
 	if (m_cfg.is_deform_open && !m_stage->GetKeyState(WXK_SHIFT))
 	{
-		Vector ctrl_nodes[8];
+		sm::vec2 ctrl_nodes[8];
 		SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrl_nodes);
 		for (int i = 0; i < 8; ++i) {
 			if (Math2D::GetDistance(ctrl_nodes[i], pos) < m_ctrl_node_radius) {
@@ -429,7 +429,7 @@ Sprite* ArrangeSpriteImpl::QueryEditedSprite(const Vector& pos) const
 
 	if (m_cfg.is_deform_open && m_stage->GetKeyState(WXK_SHIFT))
 	{
-		Vector ctrl_nodes[4];
+		sm::vec2 ctrl_nodes[4];
 		SpriteCtrlNode::GetSpriteCtrlNodesExt(selected, ctrl_nodes);
 		for (int i = 0; i < 4; ++i) {
 			if (Math2D::GetDistance(ctrl_nodes[i], pos) < m_ctrl_node_radius) {
@@ -474,14 +474,14 @@ void ArrangeSpriteImpl::OnSpaceKeyDown()
 		Sprite* sprite = sprites[i];
 
 		comb->Insert(new TranslateSpriteAOP(sprite, -sprite->GetPosition()));
-		comb->Insert(new ScaleSpriteAOP(sprite, Vector(1, 1), sprite->GetScale()));
-		comb->Insert(new ShearSpriteAOP(sprite, Vector(0, 0), sprite->GetShear()));
-		//comb->Insert(new OffsetSpriteAOP(sprite, Vector(0, 0), sprite->getOffset()));
+		comb->Insert(new ScaleSpriteAOP(sprite, sm::vec2(1, 1), sprite->GetScale()));
+		comb->Insert(new ShearSpriteAOP(sprite, sm::vec2(0, 0), sprite->GetShear()));
+		//comb->Insert(new OffsetSpriteAOP(sprite, sm::vec2(0, 0), sprite->getOffset()));
 
-		sprite->SetTransform(Vector(0, 0), 0);
-		sprite->SetScale(Vector(1, 1));
-		sprite->SetShear(Vector(0, 0));
-		//sprite->setOffset(Vector(0, 0));
+		sprite->SetTransform(sm::vec2(0, 0), 0);
+		sprite->SetScale(sm::vec2(1, 1));
+		sprite->SetShear(sm::vec2(0, 0));
+		//sprite->setOffset(sm::vec2(0, 0));
 	}
 	EditAddRecordSJ::Instance()->Add(comb);
 	SetCanvasDirtySJ::Instance()->SetDirty();
@@ -492,12 +492,12 @@ void ArrangeSpriteImpl::SetRightPopupMenu(wxMenu& menu, int x, int y)
 	m_popup.SetRightPopupMenu(menu, x, y);
 }
 
-ArrangeSpriteState* ArrangeSpriteImpl::CreateTranslateState(SpriteSelection* selection, const Vector& first_pos) const
+ArrangeSpriteState* ArrangeSpriteImpl::CreateTranslateState(SpriteSelection* selection, const sm::vec2& first_pos) const
 {
 	return new TranslateSpriteState(selection, first_pos);
 }
 
-ArrangeSpriteState* ArrangeSpriteImpl::CreateRotateState(SpriteSelection* selection, const Vector& first_pos) const
+ArrangeSpriteState* ArrangeSpriteImpl::CreateRotateState(SpriteSelection* selection, const sm::vec2& first_pos) const
 {
 	return new RotateSpriteState(selection, first_pos);
 }
@@ -560,9 +560,9 @@ void ArrangeSpriteImpl::DownOneLayer()
 	}
 }
 
-Vector ArrangeSpriteImpl::GetSprOffset(const Sprite* spr) const
+sm::vec2 ArrangeSpriteImpl::GetSprOffset(const Sprite* spr) const
 {
-	Vector offset = spr->GetPosition() + spr->GetOffset();
+	sm::vec2 offset = spr->GetPosition() + spr->GetOffset();
 	return offset;
 }
 
@@ -574,8 +574,8 @@ void ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 		return;
 	}
 
-	Vector proj_pos = sprites[0]->GetPosition();
-	Vector screen_pos = m_stage->TransPosProjToScr(proj_pos);
+	sm::vec2 proj_pos = sprites[0]->GetPosition();
+	sm::vec2 screen_pos = m_stage->TransPosProjToScr(proj_pos);
 	wxPoint pos(screen_pos.x, screen_pos.y);
 
 	// editable

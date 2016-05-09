@@ -2,7 +2,6 @@
 #define _EASYEDITOR_POINT_MULTI_QUERY_VISITOR_H_
 
 #include "Visitor.h"
-#include "Vector.h"
 #include "Sprite.h"
 
 namespace ee
@@ -13,19 +12,19 @@ class Sprite;
 class PointMultiQueryVisitor : public Visitor
 {
 public:
-	PointMultiQueryVisitor(const Vector& pos);
+	PointMultiQueryVisitor(const sm::vec2& pos);
 	virtual void Visit(Object* object, bool& next);
 
 	const std::vector<Sprite*>& GetResult() const { return m_sprites; }
 
 private:
-	const Vector& m_pos;
+	const sm::vec2& m_pos;
 	std::vector<Sprite*> m_sprites;
 
 }; // PointMultiQueryVisitor
 
 inline
-PointMultiQueryVisitor::PointMultiQueryVisitor(const Vector& pos)
+PointMultiQueryVisitor::PointMultiQueryVisitor(const sm::vec2& pos)
 	: m_pos(pos)
 {
 }

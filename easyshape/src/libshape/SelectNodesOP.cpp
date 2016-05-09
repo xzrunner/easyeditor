@@ -20,8 +20,8 @@ SelectNodesOP::SelectNodesOP(wxWindow* wnd, ee::EditPanelImpl* stage,
 							 ee::EditCMPT* callback /*= NULL*/)
 	: DrawRectangleOP(wnd, stage)
 	, m_shape_impl(shapes_impl)
+	, m_first_pos_valid(false)
 {
-	m_first_pos.SetInvalid();
 }
 
 SelectNodesOP::~SelectNodesOP()
@@ -57,7 +57,7 @@ bool SelectNodesOP::OnKeyDown(int keyCode)
 
 bool SelectNodesOP::OnMouseLeftDown(int x, int y)
 {
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	ChainSelectedNodes* selected = NULL;
 	m_shape_impl->TraverseShapes(PosQueryVisitor(pos, &selected), ee::DT_VISIBLE);
 	if (selected)
@@ -109,12 +109,13 @@ bool SelectNodesOP::OnMouseLeftDown(int x, int y)
 				delete selected;
 		}
 
-		m_first_pos.SetInvalid();
+		m_first_pos_valid = false;
 	}
 	else
 	{
 		DrawRectangleOP::OnMouseLeftDown(x, y);
 		m_first_pos = pos;
+		m_first_pos_valid = true;
 		if (!m_stage->GetKeyState(WXK_CONTROL))
 			ClearSelectedNodes();
 
@@ -127,13 +128,12 @@ bool SelectNodesOP::OnMouseLeftUp(int x, int y)
 {
 	if (DrawRectangleOP::OnMouseLeftUp(x, y)) return true;
 
-	if (m_first_pos.IsValid())
+	if (m_first_pos_valid)
 	{
 		ee::Rect rect(m_first_pos, m_stage->TransPosScrToProj(x, y));
 		m_shape_impl->TraverseShapes(RectQueryVisitor(rect, m_node_selection), 
 			ee::DT_SELECTABLE);
-
-		m_first_pos.SetInvalid();
+		m_first_pos_valid = false;
 	}
 
 	return false;
@@ -145,7 +145,7 @@ bool SelectNodesOP::OnDraw() const
 
 	if (m_node_selection.empty()) return false;
 
-	std::vector<ee::Vector> nodes;
+	std::vector<sm::vec2> nodes;
 	int count = 0;
 	for (size_t i = 0, n = m_node_selection.size(); i < n; ++i)
 		count += m_node_selection[i]->selectedNodes.size();
@@ -153,7 +153,7 @@ bool SelectNodesOP::OnDraw() const
 
 	for (size_t i = 0, n = m_node_selection.size(); i < n; ++i)
 	{
-		const std::vector<ee::Vector>& selectedNodes = m_node_selection[i]->selectedNodes;
+		const std::vector<sm::vec2>& selectedNodes = m_node_selection[i]->selectedNodes;
 		copy(selectedNodes.begin(), selectedNodes.end(), back_inserter(nodes));
 	}
 
@@ -168,12 +168,12 @@ bool SelectNodesOP::Clear()
 	if (DrawRectangleOP::Clear()) return true;
 
 	ClearSelectedNodes();
-	m_first_pos.SetInvalid();
+	m_first_pos_valid = false;
 
 	return false;
 }
 
-void SelectNodesOP::FetchSelectedNode(std::vector<ee::Vector>& nodes) const
+void SelectNodesOP::FetchSelectedNode(std::vector<sm::vec2>& nodes) const
 {
 	if (m_node_selection.empty()) return;
 
@@ -206,7 +206,7 @@ void SelectNodesOP::OnDirectionKeyDown(ee::DirectionType type)
 		return;
 	}
 
-	ee::Vector offset;
+	sm::vec2 offset;
 	switch (type)
 	{
 	case ee::e_left:
@@ -227,8 +227,8 @@ void SelectNodesOP::OnDirectionKeyDown(ee::DirectionType type)
 	for (int i = 0, n = m_node_selection.size(); i < n; ++i) {
 		ChainSelectedNodes* nodes = m_node_selection[i];
 		for (int j = 0, m = nodes->selectedNodes.size(); j < m; ++j) {
-			const ee::Vector& from = nodes->selectedNodes[j];
-			ee::Vector to = from + offset;
+			const sm::vec2& from = nodes->selectedNodes[j];
+			sm::vec2 to = from + offset;
 			nodes->chain->Change(from, to);
 			nodes->selectedNodes[j] = to;
 			dirty = true;
@@ -245,7 +245,7 @@ void SelectNodesOP::OnDirectionKeyDown(ee::DirectionType type)
 //////////////////////////////////////////////////////////////////////////
 
 SelectNodesOP::PosQueryVisitor::
-PosQueryVisitor(const ee::Vector& pos, ChainSelectedNodes** result)
+PosQueryVisitor(const sm::vec2& pos, ChainSelectedNodes** result)
 	: m_pos(pos)
 	, m_rect(pos, SelectNodesOP::GetThreshold(), SelectNodesOP::GetThreshold())
 	, m_result(result)
@@ -259,7 +259,7 @@ Visit(Object* object, bool& next)
 
 	if (ee::Math2D::IsRectIntersectRect(chain->GetRect(), m_rect))
 	{
-		const std::vector<ee::Vector>& vertices = chain->GetVertices();
+		const std::vector<sm::vec2>& vertices = chain->GetVertices();
 		for (size_t i = 0, n = vertices.size(); i < n; ++i)
 		{
 			if (ee::Math2D::GetDistance(m_pos, vertices[i]) < SelectNodesOP::GetThreshold())
@@ -299,7 +299,7 @@ Visit(Object* object, bool& next)
 		ChainSelectedNodes* result = new ChainSelectedNodes;
 		result->chain = chain;
 
-		const std::vector<ee::Vector>& vertices = chain->GetVertices();
+		const std::vector<sm::vec2>& vertices = chain->GetVertices();
 		for (size_t i = 0, n = vertices.size(); i < n; ++i)
 		{
 			if (ee::Math2D::IsPointInRect(vertices[i], m_rect))

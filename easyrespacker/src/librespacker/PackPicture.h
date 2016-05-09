@@ -3,7 +3,7 @@
 
 #include "IPackNode.h"
 
-#include <ee/Vector.h>
+#include <SM_Vector.h>
 
 namespace erespacker
 {
@@ -15,8 +15,8 @@ public:
 	{
 		const ee::Image* img;
 
-		ee::Vector texture_coord[4];
-		ee::Vector screen_coord[4];
+		sm::vec2 texture_coord[4];
+		sm::vec2 screen_coord[4];
 	};
 
 	std::vector<Quad> quads;
@@ -38,7 +38,7 @@ public:
 		const std::vector<ee::Image*>& images);
 
 	static void GetImgSrcPos(const ee::TexturePacker& tp, const ee::Image* img, 
-		const ee::Vector* texture_coord, int* src);
+		const sm::vec2* texture_coord, int* src);
 
 private:	
 	static int SizeOfQuadBin();

@@ -5,12 +5,11 @@ namespace ee
 {
 
 class Sprite;
-class Vector;
 
 class SpriteObserver
 {
 public:
-	virtual void Translate(Sprite* sprite, const Vector& offset) = 0;
+	virtual void Translate(Sprite* sprite, const sm::vec2& offset) = 0;
 	virtual void Rotate(Sprite* sprite, float delta) = 0;
 	virtual ~SpriteObserver() {}
 }; // SpriteObserver

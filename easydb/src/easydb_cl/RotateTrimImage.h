@@ -3,7 +3,9 @@
 
 #include "ICommand.h"
 
-namespace ee { class Snapshoot; class Image; class Vector; }
+#include <SM_Vector.h>
+
+namespace ee { class Snapshoot; class Image; }
 
 namespace edb
 {
@@ -30,7 +32,7 @@ private:
 
 	bool GetRotateTrimInfo(const ee::Image* image, 
 		int& width, int& height,
-		ee::Vector& center, float& angle) const;
+		sm::vec2& center, float& angle) const;
 
 }; // RotateTrimImage
 

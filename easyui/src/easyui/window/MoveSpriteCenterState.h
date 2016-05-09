@@ -14,17 +14,18 @@ namespace window
 class MoveSpriteCenterState : public ee::ArrangeSpriteState
 {
 public:
-	MoveSpriteCenterState(ecomplex::Sprite* spr, const ee::Vector& first_pos);
+	MoveSpriteCenterState(ecomplex::Sprite* spr, const sm::vec2& first_pos);
 	virtual ~MoveSpriteCenterState();
 
-	virtual	void OnMousePress(const ee::Vector& pos);
-	virtual void OnMouseRelease(const ee::Vector& pos);
-	virtual	bool OnMouseDrag(const ee::Vector& pos);
+	virtual	void OnMousePress(const sm::vec2& pos);
+	virtual void OnMouseRelease(const sm::vec2& pos);
+	virtual	bool OnMouseDrag(const sm::vec2& pos);
 
 private:
 	ecomplex::Sprite* m_spr;
 
-	ee::Vector m_first_pos, m_last_pos;
+	sm::vec2 m_first_pos, m_last_pos;
+	bool m_last_pos_valid;
 
 	bool m_dirty;
 

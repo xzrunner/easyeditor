@@ -9,7 +9,7 @@
 namespace ee
 {
 
-TranslateSpriteAOP::TranslateSpriteAOP(const SpriteSelection& selection, const Vector& offset)
+TranslateSpriteAOP::TranslateSpriteAOP(const SpriteSelection& selection, const sm::vec2& offset)
 	: m_offset(offset)
 {
 	selection.Traverse(FetchAllVisitor<Sprite>(m_sprites));
@@ -18,14 +18,14 @@ TranslateSpriteAOP::TranslateSpriteAOP(const SpriteSelection& selection, const V
 	}
 }
 
-TranslateSpriteAOP::TranslateSpriteAOP(Sprite* sprite, const Vector& offset)
+TranslateSpriteAOP::TranslateSpriteAOP(Sprite* sprite, const sm::vec2& offset)
 	: m_offset(offset)
 {
 	sprite->Retain();
 	m_sprites.push_back(sprite);
 }
 
-TranslateSpriteAOP::TranslateSpriteAOP(const std::vector<Sprite*>& sprites, const Vector& offset)
+TranslateSpriteAOP::TranslateSpriteAOP(const std::vector<Sprite*>& sprites, const sm::vec2& offset)
 	: m_offset(offset)
 {
 	for_each(sprites.begin(), sprites.end(), RetainObjectFunctor<Sprite>());

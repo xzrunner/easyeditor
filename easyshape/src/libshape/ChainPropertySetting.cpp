@@ -28,13 +28,13 @@ void ChainPropertySetting::OnPropertyGridChange(const std::string& name, const w
 	{
 		const float x = wxANY_AS(value, float);
 		const float dx = x - m_chain->GetRect().CenterX();
-		m_chain->Translate(ee::Vector(dx, 0.0f));
+		m_chain->Translate(sm::vec2(dx, 0.0f));
 	}
 	else if (name == wxT("Y"))
 	{
 		const float y = wxANY_AS(value, float);
 		const float dy = y - m_chain->GetRect().CenterY();
-		m_chain->Translate(ee::Vector(0.0f, dy));
+		m_chain->Translate(sm::vec2(0.0f, dy));
 	}
 	else if (name == wxT("Closed"))
 	{
@@ -46,7 +46,7 @@ void ChainPropertySetting::OnPropertyGridChange(const std::string& name, const w
 		if (type == 1)
 		{
 			float x = m_chain->GetRect().CenterX();
-			std::vector<ee::Vector> vertices = m_chain->GetVertices();
+			std::vector<sm::vec2> vertices = m_chain->GetVertices();
 			for (size_t i = 0, n = vertices.size(); i < n; ++i)
 				vertices[i].x = x * 2 - vertices[i].x;
 			m_chain->Load(vertices);
@@ -54,7 +54,7 @@ void ChainPropertySetting::OnPropertyGridChange(const std::string& name, const w
 		else if (type == 2)
 		{
 			float y = m_chain->GetRect().CenterY();
-			std::vector<ee::Vector> vertices = m_chain->GetVertices();
+			std::vector<sm::vec2> vertices = m_chain->GetVertices();
 			for (size_t i = 0, n = vertices.size(); i < n; ++i)
 				vertices[i].y = y * 2 - vertices[i].y;
 			m_chain->Load(vertices);

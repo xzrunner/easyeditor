@@ -24,7 +24,7 @@ CosineShape::CosineShape(const CosineShape& curve)
 	m_midPoints = curve.m_midPoints;
 }
 
-CosineShape::CosineShape(const std::vector<ee::Vector>& vertices)
+CosineShape::CosineShape(const std::vector<sm::vec2>& vertices)
 	: ChainShape(vertices, false)
 {
 	m_draw_dir = false;
@@ -42,7 +42,7 @@ CosineShape* CosineShape::Clone() const
 	return new CosineShape(*this);	
 }
 
-void CosineShape::Translate(const ee::Vector& offset)
+void CosineShape::Translate(const sm::vec2& offset)
 {
 	ChainShape::Translate(offset);
 	for (int i = 0, n = m_midPoints.size(); i < n; ++i) {
@@ -71,19 +71,19 @@ ee::PropertySetting* CosineShape::CreatePropertySetting(ee::EditPanelImpl* stage
 	return NULL;
 }
 
-void CosineShape::insertVertices(size_t index, const ee::Vector& pos)
+void CosineShape::insertVertices(size_t index, const sm::vec2& pos)
 {
 	ChainShape::Add(index, pos);
 	setMidPoints();
 }
 
-void CosineShape::removeVertices(const ee::Vector& pos)
+void CosineShape::removeVertices(const sm::vec2& pos)
 {
 	ChainShape::Remove(pos);
 	setMidPoints();
 }
 
-void CosineShape::changeVertices(const ee::Vector& from, const ee::Vector& to)
+void CosineShape::changeVertices(const sm::vec2& from, const sm::vec2& to)
 {
 	ChainShape::Change(from, to);
 	setMidPoints();
@@ -100,7 +100,7 @@ void CosineShape::setMidPoints()
 
 	if (m_vertices.size() <= 1) return;
 
-	std::vector<ee::Vector> smooth;
+	std::vector<sm::vec2> smooth;
 	ee::CosineSmooth::Do(m_vertices, SAMPLING_WIDTH, smooth);
 
 #ifdef SIMPLIFY

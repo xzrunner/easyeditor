@@ -1,7 +1,9 @@
 #ifndef _LR_PREVIEW_INTERFACE_PATHFINDING_H_
 #define _LR_PREVIEW_INTERFACE_PATHFINDING_H_
 
-namespace ee { class Vector; class Sprite; }
+#include <SM_Vector.h>
+
+namespace ee { class Sprite; }
 
 namespace lr
 {
@@ -13,7 +15,7 @@ class IPathfinding
 public:
 	virtual ~IPathfinding() {}
 	virtual void DisableRegion(const ee::Sprite* spr, bool disable) = 0;	
-	virtual void QueryRoute(const ee::Vector& start, const ee::Vector& end) = 0;
+	virtual void QueryRoute(const sm::vec2& start, const sm::vec2& end) = 0;
 	virtual void DebugDraw() const = 0;
 
 }; // IPathfinding

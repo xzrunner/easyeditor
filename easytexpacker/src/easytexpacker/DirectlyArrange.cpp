@@ -2,7 +2,6 @@
 #include "Context.h"
 
 #include <ee/ImageSprite.h>
-#include <ee/Vector.h>
 
 namespace etexpacker
 {
@@ -24,7 +23,7 @@ void DirectlyArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites)
 
 		if (sx + width <= Context::Instance()->width)
 		{
-			sprite->SetTransform(ee::Vector(sx + width * 0.5f, sy + height * 0.5f), sprite->GetAngle());
+			sprite->SetTransform(sm::vec2(sx + width * 0.5f, sy + height * 0.5f), sprite->GetAngle());
 
 			sx += width;
 			if (height > hMax)
@@ -35,7 +34,7 @@ void DirectlyArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites)
 			sx = 0;
 			sy += hMax;
 			hMax = height;
-			sprite->SetTransform(ee::Vector(sx + width * 0.5f, sy + height * 0.5f), sprite->GetAngle());
+			sprite->SetTransform(sm::vec2(sx + width * 0.5f, sy + height * 0.5f), sprite->GetAngle());
 			sx = width;
 		}
 	}

@@ -1,7 +1,7 @@
 #ifndef _EASYEDITOR_AUTO_ALIGN_H_
 #define _EASYEDITOR_AUTO_ALIGN_H_
 
-#include "Vector.h"
+#include <SM_Vector.h>
 
 #include <vector>
 
@@ -30,7 +30,7 @@ private:
 	MultiSpritesImpl* m_sprites_impl;
 
 	bool m_open;
-	Vector m_hor[2], m_ver[2];
+	sm::vec2 m_hor[2], m_ver[2];
 
 }; // AutoAlign
 

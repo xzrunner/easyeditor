@@ -174,11 +174,11 @@ void Frame::onCode(wxCommandEvent& event)
 // 	reader.parse(fin, value);
 // 	fin.close();
 // 
-// 	std::vector<ee::Vector> outline, segments;
+// 	std::vector<sm::vec2> outline, segments;
 // 	ee::JsonIO::Load(value["outline"], outline);
 // 	ee::JsonIO::Load(value["segments"], segments);
 // 
-// 	std::vector<ee::Vector> tris;
+// 	std::vector<sm::vec2> tris;
 // 	ee::Triangulation::lines(outline, segments, tris);
 // 	
 // 	int zz = 0;

@@ -10,7 +10,6 @@
 namespace ee
 {
 
-class Vector;
 class Rect;
 
 class Math2D
@@ -26,14 +25,14 @@ public:
 	static bool IsBetween(float bound0, float bound1, float test);
 
 	// To check if the 2 point overlapped with each other.
-	static bool IsTheSamePos(const Vector& p0, const Vector& p1, const float tolerance = FLT_EPSILON);
+	static bool IsTheSamePos(const sm::vec2& p0, const sm::vec2& p1, const float tolerance = FLT_EPSILON);
 
 	// Attention: It can't handle the point on segment.
 	//			  Before use it must make sure the point is not on the segment.
-	static bool IsPointAtSegmentLeft(const Vector& p, const Vector& s, const Vector& e);
+	static bool IsPointAtSegmentLeft(const sm::vec2& p, const sm::vec2& s, const sm::vec2& e);
 
 	// To check if angle a-center-b is acute.
-	static bool IsAcuteAngle(const Vector& a, const Vector& center, const Vector& b);
+	static bool IsAcuteAngle(const sm::vec2& a, const sm::vec2& center, const sm::vec2& b);
 
 	static bool IsRectIntersectRect(const Rect& r0, const Rect& r1);
 
@@ -43,45 +42,45 @@ public:
 	// To check if the segment intersect with the Rect.
 	static bool IsSegmentIntersectRect(float lx1, float ly1, float lx2, float ly2,
 		float ax1, float ay1, float ax2, float ay2);
-	static bool IsSegmentIntersectRect(const Vector& b, const Vector& e, const Rect& aabb);
+	static bool IsSegmentIntersectRect(const sm::vec2& b, const sm::vec2& e, const Rect& aabb);
 
-	static bool IsPolygonIntersectPolygon(const std::vector<Vector>& poly0, const std::vector<Vector>& poly1);
-	static bool IsPolygonInPolygon(const std::vector<Vector>& in, const std::vector<Vector>& out);
+	static bool IsPolygonIntersectPolygon(const std::vector<sm::vec2>& poly0, const std::vector<sm::vec2>& poly1);
+	static bool IsPolygonInPolygon(const std::vector<sm::vec2>& in, const std::vector<sm::vec2>& out);
 
-	static bool IsPolygonIntersectRect(const std::vector<Vector>& poly, const Rect& rect);
+	static bool IsPolygonIntersectRect(const std::vector<sm::vec2>& poly, const Rect& rect);
 
-	static bool IsSegmentIntersectPolyline(const Vector& s, const Vector& e, const std::vector<Vector>& poly);
+	static bool IsSegmentIntersectPolyline(const sm::vec2& s, const sm::vec2& e, const std::vector<sm::vec2>& poly);
 
-	static bool IsPolylineIntersectRect(const std::vector<Vector>& polyline, bool isLoop, const Rect& aabb);
-	static bool isPolylineIntersectPolylinI(const std::vector<Vector>& polyline0, const std::vector<Vector>& polyline1);
+	static bool IsPolylineIntersectRect(const std::vector<sm::vec2>& polyline, bool isLoop, const Rect& aabb);
+	static bool isPolylineIntersectPolylinI(const std::vector<sm::vec2>& polyline0, const std::vector<sm::vec2>& polyline1);
 
-	static bool IsCircleIntersectRect(const Vector& center, float radius, const Rect& aabb);
+	static bool IsCircleIntersectRect(const sm::vec2& center, float radius, const Rect& aabb);
 
-	static bool IsPointInTriangle(const Vector& p, const Vector& a, const Vector& b, const Vector& c);
+	static bool IsPointInTriangle(const sm::vec2& p, const sm::vec2& a, const sm::vec2& b, const sm::vec2& c);
 
-	static bool IsPointInRect(const Vector& pos, const Rect& aabb);
+	static bool IsPointInRect(const sm::vec2& pos, const Rect& aabb);
 
-	static bool IsPointInRect(const Vector& pos, const Vector& center, float hw, float hh);
+	static bool IsPointInRect(const sm::vec2& pos, const sm::vec2& center, float hw, float hh);
 
-	static bool IsPointInArea(const Vector& pos, const std::vector<Vector>& area);
-	static bool IsPointOnPolyline(const Vector& pos, const std::vector<Vector>& poly);
+	static bool IsPointInArea(const sm::vec2& pos, const std::vector<sm::vec2>& area);
+	static bool IsPointOnPolyline(const sm::vec2& pos, const std::vector<sm::vec2>& poly);
 
-	static bool IsPointInConvexHull(const Vector& pos, const std::vector<Vector>& hull);
+	static bool IsPointInConvexHull(const sm::vec2& pos, const std::vector<sm::vec2>& hull);
 
-	static bool IsPointInCircle(const Vector& pos, const Vector& center, float radius);
+	static bool IsPointInCircle(const sm::vec2& pos, const sm::vec2& center, float radius);
 
-	static bool IsTwoLineParallel(const Vector& s0, const Vector& e0, const Vector& s1, const Vector& e1);
-	static bool IsTwoSegmentIntersect(const Vector& s0, const Vector& e0, const Vector& s1, const Vector& e1);
+	static bool IsTwoLineParallel(const sm::vec2& s0, const sm::vec2& e0, const sm::vec2& s1, const sm::vec2& e1);
+	static bool IsTwoSegmentIntersect(const sm::vec2& s0, const sm::vec2& e0, const sm::vec2& s1, const sm::vec2& e1);
 
 	// To check if the point in the triangle.
 	// return: [0] p is on the edge t0-t1		[1] p is on the edge t1-t2
 	//		   [2] p is on the edge t2-t0
 	//		   [4] p is in the triangle			[-1] p is outside
-	static int CheckPosInTriangle(const Vector& p, const Vector& t0, const Vector& t1, const Vector& t2);
+	static int CheckPosInTriangle(const sm::vec2& p, const sm::vec2& t0, const sm::vec2& t1, const sm::vec2& t2);
 
 	// To check angle a-center-b turn left or right.
-	static bool IsTurnLeft(const Vector& a, const Vector& center, const Vector& b);
-	static bool IsTurnRight(const Vector& a, const Vector& center, const Vector& b);
+	static bool IsTurnLeft(const sm::vec2& a, const sm::vec2& center, const sm::vec2& b);
+	static bool IsTurnRight(const sm::vec2& a, const sm::vec2& center, const sm::vec2& b);
 
 	//////////////////////////////////////////////////////////////////////////
 	//
@@ -92,41 +91,41 @@ public:
 	// Get the coordinate of a segment.
 	static float FindXOnSeg(float x1, float y1, float x2, float y2, float y);
 	static float FindYOnSeg(float x1, float y1, float x2, float y2, float x);
-	static float FindXOnSeg(const Vector& b, const Vector& e, float y);
-	static float FindYOnSeg(const Vector& b, const Vector& e, float x);
+	static float FindXOnSeg(const sm::vec2& b, const sm::vec2& e, float y);
+	static float FindYOnSeg(const sm::vec2& b, const sm::vec2& e, float x);
 
-	static float GetDistance(const Vector& p0, const Vector& p1);
+	static float GetDistance(const sm::vec2& p0, const sm::vec2& p1);
 
-	static float GetDistanceSquare(const Vector& p0, const Vector& p1);
+	static float GetDistanceSquare(const sm::vec2& p0, const sm::vec2& p1);
 
-	static float GetDisPointToStraightLine(const Vector& p, const Vector& s, const Vector& e);
+	static float GetDisPointToStraightLine(const sm::vec2& p, const sm::vec2& s, const sm::vec2& e);
 
-	static float GetDisPointToSegment(const Vector& p, const Vector& s, const Vector& e);
+	static float GetDisPointToSegment(const sm::vec2& p, const sm::vec2& s, const sm::vec2& e);
 
-	static float GetDisPointToPolyline(const Vector& p, const std::vector<Vector>& polyline, size_t* iPos = NULL);
+	static float GetDisPointToPolyline(const sm::vec2& p, const std::vector<sm::vec2>& polyline, size_t* iPos = NULL);
 
-	static float GetDisPointToMultiLines(const Vector& p, const std::vector<std::vector<Vector> >& multiLines, size_t* iLine = NULL, size_t* iPos = NULL);
+	static float GetDisPointToMultiLines(const sm::vec2& p, const std::vector<std::vector<sm::vec2> >& multiLines, size_t* iLine = NULL, size_t* iPos = NULL);
 
-	static float GetDisPointToMultiPos(const Vector& p, const std::vector<Vector>& pos, size_t* index = NULL);
+	static float GetDisPointToMultiPos(const sm::vec2& p, const std::vector<sm::vec2>& pos, size_t* index = NULL);
 
-	static float GetDisPointToMultiPos(const Vector& p, const std::vector<std::vector<Vector> >& pos, size_t* index0 = NULL, size_t* index1 = NULL);
+	static float GetDisPointToMultiPos(const sm::vec2& p, const std::vector<std::vector<sm::vec2> >& pos, size_t* index0 = NULL, size_t* index1 = NULL);
 
-	static float GetAngle(const Vector& center, const Vector& pa, const Vector& pb);
+	static float GetAngle(const sm::vec2& center, const sm::vec2& pa, const sm::vec2& pb);
 
-	static float GetAngleInDirection(const Vector& center, const Vector& start, const Vector& end);
+	static float GetAngleInDirection(const sm::vec2& center, const sm::vec2& start, const sm::vec2& end);
 
-	static float GetLineAngle(const Vector& s, const Vector& e);
+	static float GetLineAngle(const sm::vec2& s, const sm::vec2& e);
 
-	static float GetPolygonArea(const std::vector<Vector>& polygon);
-	static float GetTriangleArea(const Vector& p0, const Vector& p1, const Vector& p2);
+	static float GetPolygonArea(const std::vector<sm::vec2>& polygon);
+	static float GetTriangleArea(const sm::vec2& p0, const sm::vec2& p1, const sm::vec2& p2);
 
-	static float GetPolygonPerimeter(const std::vector<Vector>& poly);
+	static float GetPolygonPerimeter(const std::vector<sm::vec2>& poly);
 
 	// Get the cross point of two segment.
 	// If they are not crossed, direct return false withnot compute the cross point.
-	static bool GetTwoLineCross(const Vector& s0, const Vector& e0, const Vector& s1, const Vector& e1, Vector* cross);
+	static bool GetTwoLineCross(const sm::vec2& s0, const sm::vec2& e0, const sm::vec2& s1, const sm::vec2& e1, sm::vec2* cross);
 
-	static bool GetTwoSegmentCross(const Vector& s0, const Vector& e0, const Vector& s1, const Vector& e1, Vector* cross);
+	static bool GetTwoSegmentCross(const sm::vec2& s0, const sm::vec2& e0, const sm::vec2& s1, const sm::vec2& e1, sm::vec2* cross);
 
 	//////////////////////////////////////////////////////////////////////////
 	//
@@ -138,11 +137,11 @@ public:
 	// To check if the point on the segment.
 	// return: [-1] outside		[0] on the middle		[1] overlap with startPos
 	//		    [2] overlap with endPos		[3] the 3 point are overlap each other.
-	static int TestPointOnSection(const Vector& startPos, const Vector& endPos, const Vector& thdPos, float tolerance = FLT_EPSILON);
+	static int TestPointOnSection(const sm::vec2& startPos, const sm::vec2& endPos, const sm::vec2& thdPos, float tolerance = FLT_EPSILON);
 
 	// 3 point can decide a circle, get its center.
 	// return: [0] success, [-1] not success, 3 points on a segment.
-	static int GetCircumcenter(const Vector& pos1, const Vector& pos2, const Vector& pos3, Vector* center, float tolerance = FLT_EPSILON);
+	static int GetCircumcenter(const sm::vec2& pos1, const sm::vec2& pos2, const sm::vec2& pos3, sm::vec2* center, float tolerance = FLT_EPSILON);
 
 	//////////////////////////////////////////////////////////////////////////
 	//
@@ -152,47 +151,47 @@ public:
 
 	// Get the foot of out at line(s, e).
 	// Is return -1 the foot is outside the line(s, e), return 0 the foot on the line(s, e).
-	static int GetFootOfPerpendicular(const Vector& s, const Vector& e, const Vector& out, Vector* foot);
+	static int GetFootOfPerpendicular(const sm::vec2& s, const sm::vec2& e, const sm::vec2& out, sm::vec2* foot);
 
 	// Get the nearest position of Line to Point.
-	static void GetNearestPosOnLineToPoint(const Vector& p, const std::vector<Vector>& l, Vector* nearest, size_t* index);
+	static void GetNearestPosOnLineToPoint(const sm::vec2& p, const std::vector<sm::vec2>& l, sm::vec2* nearest, size_t* index);
 
-	static Vector RotateVector(const Vector& v, float rad);
+	static sm::vec2 RotateVector(const sm::vec2& v, float rad);
 
-	static Vector RotateVectorRightAngle(const Vector& v, bool isTurnLeft);
+	static sm::vec2 RotateVectorRightAngle(const sm::vec2& v, bool isTurnLeft);
 
 	static float TransLen(float len, const sm::mat4& m);
-	static Vector TransVector(const Vector& v, const sm::mat4& m);
-	static void TransVertices(const sm::mat4& mt, const std::vector<Vector>& src,
-		std::vector<Vector>& dst);
+	static sm::vec2 TransVector(const sm::vec2& v, const sm::mat4& m);
+	static void TransVertices(const sm::mat4& mt, const std::vector<sm::vec2>& src,
+		std::vector<sm::vec2>& dst);
 
-	static Vector TransCoordsLocalToWorld(const Vector& origin, const Vector& xDir, const Vector& local);
+	static sm::vec2 TransCoordsLocalToWorld(const sm::vec2& origin, const sm::vec2& xDir, const sm::vec2& local);
 
-	static Vector TransCoordsWorldToLocal(const Vector& origin, const Vector& xDir, const Vector& world);
+	static sm::vec2 TransCoordsWorldToLocal(const sm::vec2& origin, const sm::vec2& xDir, const sm::vec2& world);
 
-	static void GetMBR(const std::vector<Vector>& pos, Rect* mbr);
+	static void GetMBR(const std::vector<sm::vec2>& pos, Rect* mbr);
 
-	static Vector GetTriGravityCenter(const Vector& p0, const Vector& p1, const Vector& p2);
+	static sm::vec2 GetTriGravityCenter(const sm::vec2& p0, const sm::vec2& p1, const sm::vec2& p2);
 
 	//////////////////////////////////////////////////////////////////////////
 
-	static void RemoveDuplicatePoints(const std::vector<Vector>& src, std::vector<Vector>& dst);
+	static void RemoveDuplicatePoints(const std::vector<sm::vec2>& src, std::vector<sm::vec2>& dst);
 
 	// 1 2
 	// 0 3
-	static void ComputeQuadNodes(const Vector& center, float angle, 
-		float xScale, float yScale, float width, float height, Vector quad[4]);
+	static void ComputeQuadNodes(const sm::vec2& center, float angle, 
+		float xScale, float yScale, float width, float height, sm::vec2 quad[4]);
 
-	static void SideOffsetSegment(const Vector& s, const Vector& e, bool toleft, float dis,
-		Vector& ds, Vector& de);
+	static void SideOffsetSegment(const sm::vec2& s, const sm::vec2& e, bool toleft, float dis,
+		sm::vec2& ds, sm::vec2& de);
 
 private:
 	// if clockwise return true
-	static bool IsPolygonColckwise(const std::vector<Vector>& poly);
+	static bool IsPolygonColckwise(const std::vector<sm::vec2>& poly);
 
 	static int GetNextIdxInRing(int sz, int curr, int step);
 
-	static bool IsTwoPointsSame(const Vector& p0, const Vector& p1);
+	static bool IsTwoPointsSame(const sm::vec2& p0, const sm::vec2& p1);
 
 }; // Math2D
 

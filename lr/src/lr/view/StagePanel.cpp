@@ -189,14 +189,14 @@ void StagePanel::DebugDraw() const
 	}
 }
 
-void StagePanel::Pathfinding(const ee::Vector& start, const ee::Vector& end)
+void StagePanel::Pathfinding(const sm::vec2& start, const sm::vec2& end)
 {
 	if (m_pathfinding) {
 		m_pathfinding->QueryRoute(start, end);
 	}
 }
 
-void StagePanel::PointQuery(const ee::Vector& pos)
+void StagePanel::PointQuery(const sm::vec2& pos)
 {
 	if (m_sindex) {
 		m_sindex->SelectNode(pos);

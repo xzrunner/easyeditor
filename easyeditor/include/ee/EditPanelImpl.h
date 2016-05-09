@@ -3,9 +3,10 @@
 
 #include "KeysState.h"
 #include "Object.h"
-#include "Vector.h"
 #include "Observer.h"
 #include "HistoryList.h"
+
+#include <SM_Vector.h>
 
 #include <wx/wx.h>
 
@@ -28,8 +29,8 @@ public:
 	
 	bool Update(int version);
 
-	Vector TransPosScrToProj(int x, int y) const;
-	Vector TransPosProjToScr(const Vector& proj) const;
+	sm::vec2 TransPosScrToProj(int x, int y) const;
+	sm::vec2 TransPosProjToScr(const sm::vec2& proj) const;
 
 	void DrawEditOP() const;
 

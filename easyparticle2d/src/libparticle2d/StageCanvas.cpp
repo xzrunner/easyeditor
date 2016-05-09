@@ -46,7 +46,7 @@ void StageCanvas::OnDrawSprites() const
 void StageCanvas::DrawBackground() const
 {
 	ee::RVG::Color(ee::LIGHT_RED);
-	ee::RVG::Rect(ee::Vector(0, 0), ee::HALF_SCREEN_WIDTH, ee::HALF_SCREEN_HEIGHT, false);
+	ee::RVG::Rect(sm::vec2(0, 0), ee::HALF_SCREEN_WIDTH, ee::HALF_SCREEN_HEIGHT, false);
 }
 
 }

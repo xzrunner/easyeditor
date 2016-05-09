@@ -1,34 +1,33 @@
 #include "SphereRotateState.h"
 
-#include <ee/Vector.h>
 #include <ee/EditPanelImpl.h>
 #include <ee/StageCanvas.h>
 
 namespace ecomplex
 {
 
-SphereRotateState::SphereRotateState(ee::EditPanelImpl* stage, const ee::Vector& first_pos,
+SphereRotateState::SphereRotateState(ee::EditPanelImpl* stage, const sm::vec2& first_pos,
 									 sm::Quaternion& dir)
 	: m_stage(stage)
 	, m_dir(dir)
 {
-	ee::Vector p = m_stage->TransPosProjToScr(first_pos);
+	sm::vec2 p = m_stage->TransPosProjToScr(first_pos);
 	m_last_pos.x = p.x;
 	m_last_pos.y = p.y;
 }
 
-void SphereRotateState::OnMouseRelease(const ee::Vector& pos)
+void SphereRotateState::OnMouseRelease(const sm::vec2& pos)
 {
 	m_last_pos.x = m_last_pos.y = static_cast<float>(INT_MAX);
 }
 
-bool SphereRotateState::OnMouseDrag(const ee::Vector& pos)
+bool SphereRotateState::OnMouseDrag(const sm::vec2& pos)
 {
 	if (m_last_pos.x == INT_MAX || m_last_pos.y == INT_MAX)	 {
 		return false;
 	}
 
-	ee::Vector p = m_stage->TransPosProjToScr(pos);
+	sm::vec2 p = m_stage->TransPosProjToScr(pos);
 
 	sm::vec3 start = MapToSphere(m_last_pos.x, m_last_pos.y),
 		end = MapToSphere(p.x, p.y);

@@ -21,12 +21,12 @@ EditPanel::~EditPanel()
 	m_impl->Release();
 }
 
-Vector EditPanel::TransPosScrToProj(int x, int y) const
+sm::vec2 EditPanel::TransPosScrToProj(int x, int y) const
 {
 	return m_impl->TransPosScrToProj(x, y);
 }
 
-Vector EditPanel::TransPosProjToScr(const Vector& proj) const
+sm::vec2 EditPanel::TransPosProjToScr(const sm::vec2& proj) const
 {
 	return m_impl->TransPosProjToScr(proj);
 }

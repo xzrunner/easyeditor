@@ -45,7 +45,7 @@ const uint8_t* TextureFactory::Load(const std::string& filepath, int& width,
 }
 
 void TextureFactory::Load(const std::string& filepath, float& ori_w, 
-						  float& ori_h, Vector& offset) const
+						  float& ori_h, sm::vec2& offset) const
 {
 	const TexturePacker::Frame* frame = NULL;
 	if (!Config::Instance()->GetSettings().load_image && m_tp) {

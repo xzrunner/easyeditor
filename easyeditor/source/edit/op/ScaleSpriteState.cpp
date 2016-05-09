@@ -25,7 +25,7 @@ ScaleSpriteState::~ScaleSpriteState()
 	m_sprite->Release();
 }
 
-void ScaleSpriteState::OnMouseRelease(const Vector& pos)
+void ScaleSpriteState::OnMouseRelease(const sm::vec2& pos)
 {
 	CombineAOP* comb = new CombineAOP();
 
@@ -35,20 +35,20 @@ void ScaleSpriteState::OnMouseRelease(const Vector& pos)
 	EditAddRecordSJ::Instance()->Add(comb);
 }
 
-bool ScaleSpriteState::OnMouseDrag(const Vector& pos)
+bool ScaleSpriteState::OnMouseDrag(const sm::vec2& pos)
 {
 	Scale(pos);
 	return true;
 }
 
-void ScaleSpriteState::Scale(const Vector& curr)
+void ScaleSpriteState::Scale(const sm::vec2& curr)
 {
-	Vector ctrls[8];
+	sm::vec2 ctrls[8];
 	SpriteCtrlNode::GetSpriteCtrlNodes(m_sprite, ctrls);
 	
-	Vector ori = ctrls[m_ctrl_node.type];
-	Vector center = m_sprite->GetPosition() + m_sprite->GetOffset();
-	Vector fix;
+	sm::vec2 ori = ctrls[m_ctrl_node.type];
+	sm::vec2 center = m_sprite->GetPosition() + m_sprite->GetOffset();
+	sm::vec2 fix;
 	Math2D::GetFootOfPerpendicular(center, ori, curr, &fix);
 
 	float scale_times = Math2D::GetDistance(center, fix) / Math2D::GetDistance(center, ori);
@@ -56,7 +56,7 @@ void ScaleSpriteState::Scale(const Vector& curr)
 		return;
 	}
 
-	Vector scale = m_sprite->GetScale();
+	sm::vec2 scale = m_sprite->GetScale();
 	if (m_ctrl_node.type == SpriteCtrlNode::UP || m_ctrl_node.type == SpriteCtrlNode::DOWN) {
 		scale.y *= scale_times;
 	} else if (m_ctrl_node.type == SpriteCtrlNode::LEFT || m_ctrl_node.type == SpriteCtrlNode::RIGHT) {

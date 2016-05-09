@@ -1,13 +1,13 @@
 #ifndef _EASYIMAGE_EXTRACT_OUTLINE_RAW_H_
 #define _EASYIMAGE_EXTRACT_OUTLINE_RAW_H_
 
-#include <ee/Vector.h>
-
-namespace ee { class Image; }
+#include <SM_Vector.h>
 
 #include <vector>
 
 #include <stdint.h>
+
+namespace ee { class Image; }
 
 namespace eimage
 {
@@ -23,16 +23,16 @@ public:
 
 	void CreateBorderConvexHull();
 
-	const std::vector<ee::Vector>& GetBorderLine() const {
+	const std::vector<sm::vec2>& GetBorderLine() const {
 		return m_border_line;
 	}
-	const std::vector<ee::Vector>& GetBorderPoints() const {
+	const std::vector<sm::vec2>& GetBorderPoints() const {
 		return m_border_points;
 	}
-	const std::vector<ee::Vector>& GetBorderLineMerged() const {
+	const std::vector<sm::vec2>& GetBorderLineMerged() const {
 		return m_border_line_merged;
 	}
-	const std::vector<ee::Vector>& GetConvexHull() const {
+	const std::vector<sm::vec2>& GetConvexHull() const {
 		return m_convex_hull;
 	}
 
@@ -45,21 +45,21 @@ private:
 	bool IsPixelTransparente(int x, int y) const;
 	bool IsPixelTransparente(bool* flag, int x, int y) const;
 
-	bool IsNearby(const ee::Vector& p0, const ee::Vector& p1) const;
+	bool IsNearby(const sm::vec2& p0, const sm::vec2& p1) const;
 
-	static void MergeLine(const std::vector<ee::Vector>& src, std::vector<ee::Vector>& dst);
+	static void MergeLine(const std::vector<sm::vec2>& src, std::vector<sm::vec2>& dst);
 
 private:
 	const uint8_t* m_pixels;
 	int m_width, m_height;
 
-	std::vector<ee::Vector> m_border_points;
-	std::vector<ee::Vector> m_border_axis_line;
+	std::vector<sm::vec2> m_border_points;
+	std::vector<sm::vec2> m_border_axis_line;
 
-	std::vector<ee::Vector> m_border_line;
-	std::vector<ee::Vector> m_border_line_merged;
+	std::vector<sm::vec2> m_border_line;
+	std::vector<sm::vec2> m_border_line_merged;
 
-	std::vector<ee::Vector> m_convex_hull;
+	std::vector<sm::vec2> m_convex_hull;
 
 }; // ExtractOutlineRaw
 

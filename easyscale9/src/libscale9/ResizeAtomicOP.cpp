@@ -5,7 +5,7 @@ namespace escale9
 {
 
 ResizeAtomicOP::ResizeAtomicOP(Symbol* symbol,
-	const ee::Vector& src, const ee::Vector& dst)
+	const sm::vec2& src, const sm::vec2& dst)
 	: m_symbol(symbol)
 	, m_src(src)
 	, m_dst(dst)

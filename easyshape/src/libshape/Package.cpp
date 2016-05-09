@@ -16,7 +16,7 @@ void Paskage::PackShape(ee::Shape* shape, std::ofstream& fout)
 		int type = e_polygon;
 		fout.write(reinterpret_cast<const char*>(&type), sizeof(int));
 
-		const std::vector<ee::Vector>& vertices = poly->GetVertices();
+		const std::vector<sm::vec2>& vertices = poly->GetVertices();
 		int size = vertices.size();
 		fout.write(reinterpret_cast<const char*>(&size), sizeof(int));
 		for (size_t i = 0, n = vertices.size(); i < n; ++i)

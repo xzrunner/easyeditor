@@ -29,17 +29,17 @@ void PreviewCanvas::OnDrawSprites() const
  	if (op->m_mouseJoint)
  	{
  		b2Vec2 target = op->m_mouseJoint->GetAnchorB();
- 		ee::Vector first(target.x * ee::BOX2D_SCALE_FACTOR, target.y * ee::BOX2D_SCALE_FACTOR);
+ 		sm::vec2 first(target.x * ee::BOX2D_SCALE_FACTOR, target.y * ee::BOX2D_SCALE_FACTOR);
  
- 		if (op->currPos.IsValid())
+ 		if (op->m_curr_pos.IsValid())
  		{
 			ee::RVG::Color(ee::Colorf(1, 1, 1));
 			ee::RVG::LineWidth(1);
- 			ee::RVG::Line(first, op->currPos);
+ 			ee::RVG::Line(first, op->m_curr_pos);
 			ee::RVG::LineWidth(2);
 
 			ee::RVG::Color(ee::Colorf(0, 1, 0));
- 			ee::RVG::Circle(op->currPos, 2, true);
+ 			ee::RVG::Circle(op->m_curr_pos, 2, true);
  		}
 		ee::RVG::Color(ee::Colorf(0, 1, 0));
  		ee::RVG::Circle(first, 2, true);

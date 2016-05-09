@@ -30,7 +30,7 @@ private:
 
 	ee::Rect* m_selected;
 
-	ee::Vector m_last_pos;
+	sm::vec2 m_last_pos;
 
 }; // AutoRectCutOP
 

@@ -9,17 +9,17 @@ namespace ee
 class PointQueryVisitor : public Visitor
 {
 public:
-	PointQueryVisitor(const Vector& pos, Sprite** result);
+	PointQueryVisitor(const sm::vec2& pos, Sprite** result);
 	virtual void Visit(Object* object, bool& next);
 
 private:
-	const Vector& m_pos;
+	const sm::vec2& m_pos;
 	Sprite** m_result;
 
 }; // PointQueryVisitor
 
 inline
-PointQueryVisitor::PointQueryVisitor(const Vector& pos, Sprite** result)
+PointQueryVisitor::PointQueryVisitor(const sm::vec2& pos, Sprite** result)
 	: m_pos(pos)
 {
 	m_result = result;

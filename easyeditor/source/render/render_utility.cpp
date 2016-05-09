@@ -40,7 +40,7 @@ Sprite* draw_all_to_one_spr(const std::vector<Sprite*>& sprites)
 
 	Rect r;
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		std::vector<Vector> bound;
+		std::vector<sm::vec2> bound;
 		sprites[i]->GetBounding()->GetBoundPos(bound);
 		for (int j = 0, m = bound.size(); j < m; ++j) {
 			r.Combine(bound[j]);
@@ -64,8 +64,8 @@ Sprite* draw_all_to_one_spr(const std::vector<Sprite*>& sprites)
 	ImageSprite* spr = new ImageSprite(symbol);
 
 	spr->SetMirror(false, true);
-	spr->SetTransform(Vector(dx, dy), 0);
-	spr->SetScale(ee::Vector(1.0f / scale, 1.0f / scale));
+	spr->SetTransform(sm::vec2(dx, dy), 0);
+	spr->SetScale(sm::vec2(1.0f / scale, 1.0f / scale));
 
 	return spr;
 }

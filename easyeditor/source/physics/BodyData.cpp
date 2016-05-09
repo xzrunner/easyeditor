@@ -59,7 +59,7 @@ void BodyData::loadFromMeshFile(const std::string& filename)
 	//MeshSymbol symbol;
 	//symbol.LoadFromFile(filename);
 
-	//const std::vector<Vector>& triangles = symbol.getVertices();
+	//const std::vector<sm::vec2>& triangles = symbol.getVertices();
 
 	//size_t size = triangles.size() / 3;
 	//m_fixtures.reserve(size);
@@ -95,16 +95,16 @@ void BodyData::loadFromShapeFile(const std::string& filename)
 // 		{
 // 			FixtureData* fd = new FixtureData;
 // 			fd->vertices.resize(4);
-// 			fd->vertices[0] = Vector(rect->m_rect.xmin, rect->m_rect.ymin);
-// 			fd->vertices[1] = Vector(rect->m_rect.xmax, rect->m_rect.ymin);
-// 			fd->vertices[2] = Vector(rect->m_rect.xmax, rect->m_rect.ymax);
-// 			fd->vertices[3] = Vector(rect->m_rect.xmin, rect->m_rect.ymax);
+// 			fd->vertices[0] = sm::vec2(rect->m_rect.xmin, rect->m_rect.ymin);
+// 			fd->vertices[1] = sm::vec2(rect->m_rect.xmax, rect->m_rect.ymin);
+// 			fd->vertices[2] = sm::vec2(rect->m_rect.xmax, rect->m_rect.ymax);
+// 			fd->vertices[3] = sm::vec2(rect->m_rect.xmin, rect->m_rect.ymax);
 // 			m_fixtures.push_back(fd);
 // 		}
 // 		else if (CircleShape* circle = dynamic_cast<CircleShape*>(shapes[i]))
 // 		{
 // 			FixtureData* fd = new FixtureData;
-// 			fd->vertices.push_back(Vector(circle->radius*2, circle->radius*2));
+// 			fd->vertices.push_back(sm::vec2(circle->radius*2, circle->radius*2));
 // 			m_fixtures.push_back(fd);
 // 		}
 // 

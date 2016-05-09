@@ -30,13 +30,13 @@ bool ResizeBaseOP::OnMouseLeftDown(int x, int y)
 
 	const float hw = m_symbol->GetSize().Width() * 0.5f,
 		hh = m_symbol->GetSize().Height() * 0.5f;
-	if (ee::Math2D::IsPointInRect(m_firstPos, ee::Vector(-hw, -hh), REGION, REGION))
+	if (ee::Math2D::IsPointInRect(m_firstPos, sm::vec2(-hw, -hh), REGION, REGION))
 		m_status = e_leftlow;
-	else if (ee::Math2D::IsPointInRect(m_firstPos, ee::Vector(hw, -hh), REGION, REGION))
+	else if (ee::Math2D::IsPointInRect(m_firstPos, sm::vec2(hw, -hh), REGION, REGION))
 		m_status = e_rightlow;
-	else if (ee::Math2D::IsPointInRect(m_firstPos, ee::Vector(hw, hh), REGION, REGION))
+	else if (ee::Math2D::IsPointInRect(m_firstPos, sm::vec2(hw, hh), REGION, REGION))
 		m_status = e_rightup;
-	else if (ee::Math2D::IsPointInRect(m_firstPos, ee::Vector(-hw, hh), REGION, REGION))
+	else if (ee::Math2D::IsPointInRect(m_firstPos, sm::vec2(-hw, hh), REGION, REGION))
 		m_status = e_leftup;
 
 	return false;
@@ -48,8 +48,8 @@ bool ResizeBaseOP::OnMouseLeftUp(int x, int y)
 
 	if (m_status != e_null)
 	{
-		ee::Vector pos = m_stage->TransPosScrToProj(x, y);
-		const ee::Vector src(fabs(m_firstPos.x)*2, fabs(m_firstPos.y)*2),
+		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
+		const sm::vec2 src(fabs(m_firstPos.x)*2, fabs(m_firstPos.y)*2),
 			dst(fabs(pos.x)*2, fabs(pos.y)*2);
 		ee::EditAddRecordSJ::Instance()->Add(new ResizeAtomicOP(m_symbol, src, dst));
 	}
@@ -66,7 +66,7 @@ bool ResizeBaseOP::OnMouseDrag(int x, int y)
 
 	if (m_status != e_null)
 	{
-		ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 		m_symbol->ResizeScale9(fabs(pos.x)*2, fabs(pos.y)*2);
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
@@ -83,10 +83,10 @@ bool ResizeBaseOP::OnDraw() const
 	const float hw = m_symbol->GetSize().Width() * 0.5f,
 		hh = m_symbol->GetSize().Height() * 0.5f;
 	const float r = REGION;
-	ee::RVG::Rect(ee::Vector(-hw, -hh), r, r, false);
-	ee::RVG::Rect(ee::Vector( hw, -hh), r, r, false);
-	ee::RVG::Rect(ee::Vector( hw,  hh), r, r, false);
-	ee::RVG::Rect(ee::Vector(-hw,  hh), r, r, false);
+	ee::RVG::Rect(sm::vec2(-hw, -hh), r, r, false);
+	ee::RVG::Rect(sm::vec2( hw, -hh), r, r, false);
+	ee::RVG::Rect(sm::vec2( hw,  hh), r, r, false);
+	ee::RVG::Rect(sm::vec2(-hw,  hh), r, r, false);
 
 	return false;
 }

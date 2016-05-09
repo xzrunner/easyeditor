@@ -2,7 +2,8 @@
 #define _EASYEDITOR_PASTE_SYMBOL_OFFSET_CMPT_H_
 
 #include "EditCMPT.h"
-#include "Vector.h"
+
+#include <SM_Vector.h>
 
 namespace ee
 {
@@ -18,7 +19,7 @@ public:
 		wxWindow* stage_wnd, EditPanelImpl* stage, 
 		MultiSpritesImpl* sprites_impl, LibraryPanel* library);
 
-	Vector GetOffset() const;
+	sm::vec2 GetOffset() const;
 
 protected:
 	virtual wxSizer* InitLayout();

@@ -22,7 +22,7 @@ ChainShape::ChainShape(const ChainShape& chain)
 	m_rect = chain.m_rect;
 }
 
-ChainShape::ChainShape(const std::vector<ee::Vector>& vertices, bool loop)
+ChainShape::ChainShape(const std::vector<sm::vec2>& vertices, bool loop)
 	: m_vertices(vertices)
 {
 	m_loop = loop;
@@ -35,7 +35,7 @@ ChainShape* ChainShape::Clone() const
 	return new ChainShape(*this);
 }
 
-bool ChainShape::IsContain(const ee::Vector& pos) const
+bool ChainShape::IsContain(const sm::vec2& pos) const
 {
 	if (m_loop) 
 	{
@@ -91,7 +91,7 @@ bool ChainShape::IsIntersect(const ee::Rect& rect) const
 	return false;
 }
 
-void ChainShape::Translate(const ee::Vector& offset)
+void ChainShape::Translate(const sm::vec2& offset)
 {
 	for (int i = 0, n = m_vertices.size(); i < n; ++i) {
 		m_vertices[i] += offset;
@@ -103,7 +103,7 @@ void ChainShape::Draw(const sm::mat4& mt, const ee::RenderColor& color) const
 {
 	if (m_vertices.empty()) return;
 
-	std::vector<ee::Vector> vertices;
+	std::vector<sm::vec2> vertices;
 	ee::Math2D::TransVertices(mt, m_vertices, vertices);
 	ee::RVG::Color(color.multi);
 	ee::RVG::Polyline(vertices, m_loop);
@@ -151,15 +151,15 @@ void ChainShape::StoreToFile(Json::Value& value, const std::string& dir) const
 	value["closed"] = IsClosed();
 }
 
-void ChainShape::Add(size_t index, const ee::Vector& pos)
+void ChainShape::Add(size_t index, const sm::vec2& pos)
 {
 	if (index <= m_vertices.size())
 		m_vertices.insert(m_vertices.begin() + index, pos);
 }
 
-void ChainShape::Remove(const ee::Vector& pos)
+void ChainShape::Remove(const sm::vec2& pos)
 {
-	std::vector<ee::Vector>::iterator itr = m_vertices.begin();
+	std::vector<sm::vec2>::iterator itr = m_vertices.begin();
 	for ( ; itr != m_vertices.end(); ++itr) {
 		if (*itr == pos) {
 			m_vertices.erase(itr);
@@ -168,7 +168,7 @@ void ChainShape::Remove(const ee::Vector& pos)
 	}
 }
 
-void ChainShape::Change(const ee::Vector& from, const ee::Vector& to)
+void ChainShape::Change(const sm::vec2& from, const sm::vec2& to)
 {
 	size_t index = 0;
 	for (size_t n = m_vertices.size(); index < n; ++index)
@@ -188,7 +188,7 @@ void ChainShape::Change(const ee::Vector& from, const ee::Vector& to)
 	}
 }
 
-void ChainShape::Load(const std::vector<ee::Vector>& vertices)
+void ChainShape::Load(const std::vector<sm::vec2>& vertices)
 {
 	m_vertices = vertices;
 	InitBounding();

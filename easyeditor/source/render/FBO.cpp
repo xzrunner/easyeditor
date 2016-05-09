@@ -169,7 +169,7 @@ void FBO::DrawFBO(const Symbol* symbol, bool whitebg, float scale)
 
 	bool has_context = true;
 
-	Vector last_offset;
+	sm::vec2 last_offset;
 	float last_scale;
 	if (!ctx_stack->GetModelView(last_offset, last_scale)) {
 		has_context = false;
@@ -183,7 +183,7 @@ void FBO::DrawFBO(const Symbol* symbol, bool whitebg, float scale)
 	Rect rect = symbol->GetSize();
 	int w = static_cast<int>(rect.Width() * scale),
 		h = static_cast<int>(rect.Height() * scale);
-	ctx_stack->SetModelView(Vector(0, 0), 1);
+	ctx_stack->SetModelView(sm::vec2(0, 0), 1);
 	ctx_stack->SetProjection(w, h);
 	GL::Viewport(0, 0, w, h);
 
@@ -191,7 +191,7 @@ void FBO::DrawFBO(const Symbol* symbol, bool whitebg, float scale)
 	float dx = -symbol->GetSize().CenterX();
 	float dy = symbol->GetSize().CenterY();
 	mt.Translate(dx * scale, dy * scale, 0);
-	SpriteRenderer::Draw(symbol, mt, Vector(0, 0), 0.0f, scale, -scale);
+	SpriteRenderer::Draw(symbol, mt, sm::vec2(0, 0), 0.0f, scale, -scale);
 
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
 	mgr->GetShader()->Commit();
@@ -224,7 +224,7 @@ void FBO::DrawFBO(const Sprite* sprite, bool clear, int width, int height,
 
 	bool has_context = true;
 
-	Vector last_offset;
+	sm::vec2 last_offset;
 	float last_scale;
 	if (!ctx_stack->GetModelView(last_offset, last_scale)) {
 		has_context = false;
@@ -235,7 +235,7 @@ void FBO::DrawFBO(const Sprite* sprite, bool clear, int width, int height,
 		has_context = false;
 	}
 
-	ctx_stack->SetModelView(Vector(0, 0), 1);
+	ctx_stack->SetModelView(sm::vec2(0, 0), 1);
 	ctx_stack->SetProjection(width, height);
 	GL::Viewport(0, 0, width, height);
 
@@ -274,7 +274,7 @@ void FBO::DrawFBO(const Shape* shape, bool clear, int width, int height)
 
 	bool has_context = true;
 
-	Vector last_offset;
+	sm::vec2 last_offset;
 	float last_scale;
 	if (!ctx_stack->GetModelView(last_offset, last_scale)) {
 		has_context = false;
@@ -285,7 +285,7 @@ void FBO::DrawFBO(const Shape* shape, bool clear, int width, int height)
 		has_context = false;
 	}
 
-	ctx_stack->SetModelView(Vector(0, 0), 1);
+	ctx_stack->SetModelView(sm::vec2(0, 0), 1);
 	ctx_stack->SetProjection(width, height);
 	GL::Viewport(0, 0, width, height);
 

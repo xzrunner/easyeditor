@@ -16,12 +16,12 @@ public:
 	virtual void LoadFromFile(const Json::Value& value);
 	virtual void StoreToFile(Json::Value& value) const;
 
-	virtual void GetBound(float process, ee::Vector bound[4]) const;
+	virtual void GetBound(float process, sm::vec2 bound[4]) const;
 
 	void SetRegion(const ee::Rect& r);
 
 private:
-	ee::Vector m_min, m_max;
+	sm::vec2 m_min, m_max;
 
 }; // RectIcon
 

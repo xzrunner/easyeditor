@@ -1,12 +1,13 @@
 #ifndef _EASYEDITOR_RVG_H_
 #define _EASYEDITOR_RVG_H_
 
+#include <SM_Vector.h>
+
 #include <vector>
 
 namespace ee
 {
 
-class Vector;
 class Colorf;
 class Rect;
 
@@ -21,32 +22,32 @@ public:
 	static void LineWidth(float width);
 
 	// point
-	static void Point(const Vector& vertex);
-	static void Points(const std::vector<Vector>& vertices);
+	static void Point(const sm::vec2& vertex);
+	static void Points(const std::vector<sm::vec2>& vertices);
 
 	// line
-	static void Line(const Vector& p0, const Vector& p1);
-	static void DotLine(const Vector& p0, const Vector& p1);
-	static void DashLine(const Vector& p0, const Vector& p1);
-	static void DotDashLine(const Vector& p0, const Vector& p1);
+	static void Line(const sm::vec2& p0, const sm::vec2& p1);
+	static void DotLine(const sm::vec2& p0, const sm::vec2& p1);
+	static void DashLine(const sm::vec2& p0, const sm::vec2& p1);
+	static void DotDashLine(const sm::vec2& p0, const sm::vec2& p1);
 
-	static void Lines(const std::vector<Vector>& vertices);
-	static void Polyline(const std::vector<Vector>& vertices, bool loop);
+	static void Lines(const std::vector<sm::vec2>& vertices);
+	static void Polyline(const std::vector<sm::vec2>& vertices, bool loop);
 
 	// face
-	static void Triangles(const std::vector<Vector>& triangles);
-	static void Triangles(const std::vector<Vector>& triangles, const std::vector<Colorf>& colors);
-	static void TriangleStrip(const std::vector<Vector>& triangles);
+	static void Triangles(const std::vector<sm::vec2>& triangles);
+	static void Triangles(const std::vector<sm::vec2>& triangles, const std::vector<Colorf>& colors);
+	static void TriangleStrip(const std::vector<sm::vec2>& triangles);
 
-	static void Rect(const Vector& center, float hw, float hh, bool filling);
-	static void Rect(const Vector& p0, const Vector& p1, bool filling);
+	static void Rect(const sm::vec2& center, float hw, float hh, bool filling);
+	static void Rect(const sm::vec2& p0, const sm::vec2& p1, bool filling);
 
-	static void Circle(const Vector& center, float radius, bool filling, int segments = 16);
-	static void Circles(const std::vector<Vector>& circles, float radius, bool filling, int segments = 16);
+	static void Circle(const sm::vec2& center, float radius, bool filling, int segments = 16);
+	static void Circles(const std::vector<sm::vec2>& circles, float radius, bool filling, int segments = 16);
 
 	// compose
-	static void Cross(const Vector& center, float edge);
-	static void Cross(const Vector& center, float xedge, float yedge);
+	static void Cross(const sm::vec2& center, float edge);
+	static void Cross(const sm::vec2& center, float xedge, float yedge);
 
 }; // RVG
 

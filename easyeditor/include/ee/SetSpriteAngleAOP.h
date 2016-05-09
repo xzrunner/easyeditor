@@ -2,7 +2,6 @@
 #define _EASYEDITOR_SET_SPRITE_POS_AOP_H_
 
 #include "AtomicOP.h"
-#include "Vector.h"
 
 namespace ee
 {

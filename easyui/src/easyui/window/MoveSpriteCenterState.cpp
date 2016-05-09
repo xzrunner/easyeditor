@@ -10,25 +10,27 @@ namespace window
 {
 
 MoveSpriteCenterState::MoveSpriteCenterState(ecomplex::Sprite* spr,
-											 const ee::Vector& first_pos)
+											 const sm::vec2& first_pos)
 	: m_spr(spr)
 	, m_dirty(false)
 {
 	m_first_pos = m_last_pos = first_pos;
+	m_last_pos_valid = true;
 }
 
 MoveSpriteCenterState::~MoveSpriteCenterState()
 {
 }
 
-void MoveSpriteCenterState::OnMousePress(const ee::Vector& pos)
+void MoveSpriteCenterState::OnMousePress(const sm::vec2& pos)
 {
 	m_first_pos = m_last_pos = pos;
+	m_last_pos_valid = true;
 }
 
-void MoveSpriteCenterState::OnMouseRelease(const ee::Vector& pos)
+void MoveSpriteCenterState::OnMouseRelease(const sm::vec2& pos)
 {
-	m_last_pos.SetInvalid();
+	m_last_pos_valid = false;
 	// todo edit history
 
 	if (m_dirty && m_spr) {
@@ -40,14 +42,15 @@ void MoveSpriteCenterState::OnMouseRelease(const ee::Vector& pos)
 	m_dirty = false;
 }
 
-bool MoveSpriteCenterState::OnMouseDrag(const ee::Vector& pos)
+bool MoveSpriteCenterState::OnMouseDrag(const sm::vec2& pos)
 {
-	if (!m_spr || !m_last_pos.IsValid()) {
+	if (!m_spr || !m_last_pos_valid) {
 		return false;
 	}
 
-	ee::Vector offset = m_last_pos - pos;
+	sm::vec2 offset = m_last_pos - pos;
 	m_last_pos = pos;
+	m_last_pos_valid = true;
 
 	m_dirty = true;
 

@@ -48,7 +48,7 @@ void StageCanvas::DrawBackground() const
 {
 	ee::RVG::Color(ee::Colorf(0.8f, 0.8f, 0.8f));
 	ee::RVG::LineWidth(2);
-	ee::RVG::Rect(ee::Vector(0, 0), ee::SCREEN_WIDTH, ee::SCREEN_HEIGHT, false);
+	ee::RVG::Rect(sm::vec2(0, 0), ee::SCREEN_WIDTH, ee::SCREEN_HEIGHT, false);
 }
 
 }

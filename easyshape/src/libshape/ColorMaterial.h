@@ -3,7 +3,6 @@
 
 #include "Material.h"
 
-#include <ee/Vector.h>
 #include <ee/Color.h>
 
 #include <SM_Matrix.h>
@@ -14,7 +13,7 @@ namespace eshape
 class ColorMaterial : public Material
 {
 public:
-	ColorMaterial(const std::vector<ee::Vector>& vertices,
+	ColorMaterial(const std::vector<sm::vec2>& vertices,
 		const ee::Colorf& color);
 
 	virtual Json::Value Store(const std::string& dirpath) const;

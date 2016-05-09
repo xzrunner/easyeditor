@@ -4,6 +4,8 @@
 #include "DataTraverseType.h"
 #include "Observer.h"
 
+#include <SM_Vector.h>
+
 #include <wx/wx.h>
 
 namespace ee
@@ -14,7 +16,6 @@ class SpriteSelection;
 class Rect;
 class Sprite;
 class Visitor;
-class Vector;
 
 class MultiSpritesImpl : public Observer
 {
@@ -25,7 +26,7 @@ public:
 	virtual void TraverseSprites(Visitor& visitor, 
 		DataTraverseType type = DT_ALL, bool order = true) const = 0;
 
-	virtual Sprite* QuerySpriteByPos(const Vector& pos) const;
+	virtual Sprite* QuerySpriteByPos(const sm::vec2& pos) const;
 	virtual void QuerySpritesByRect(const Rect& rect, bool contain, std::vector<Sprite*>& result) const;		
 
 	SpriteSelection* GetSpriteSelection() { return m_sprite_selection; }

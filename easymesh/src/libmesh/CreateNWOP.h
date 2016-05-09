@@ -29,7 +29,7 @@ private:
 private:
 	StagePanel* m_stage;
 
-	ee::Vector* m_selected_inner;
+	sm::vec2* m_selected_inner;
 
 }; // CreateNWOP
 

@@ -21,7 +21,7 @@ public:
 
 	virtual bool Update(int version);
 
-	void SetPSMat(const ee::Vector& pos);
+	void SetPSMat(const sm::vec2& pos);
 	const sm::mat4& GetPSMat() const { return m_ps_mat; }
 
 private:

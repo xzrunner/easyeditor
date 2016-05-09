@@ -2,7 +2,6 @@
 #include "check_params.h"
 
 #include <ee/FileHelper.h>
-#include <ee/Vector.h>
 #include <ee/Math2D.h>
 
 #include <fstream>
@@ -95,11 +94,11 @@ void LRExpandGroup::LoadSprites(const Json::Value& src_spr_val, const Trans& tra
 	{
 		const Json::Value& gval = src_spr_val["group"];
 
-		ee::Vector translation;
+		sm::vec2 translation;
 		translation.x = src_spr_val["position"]["x"].asDouble();
 		translation.y = src_spr_val["position"]["y"].asDouble();
 		float angle = src_spr_val["angle"].asDouble();
-		ee::Vector scale;
+		sm::vec2 scale;
 		scale.x = src_spr_val["x scale"].asDouble();
 		scale.y = src_spr_val["y scale"].asDouble();
 		bool xmirror = src_spr_val["x mirror"].asBool(),
@@ -122,7 +121,7 @@ void LRExpandGroup::LoadSprites(const Json::Value& src_spr_val, const Trans& tra
 
 		float new_x = translation.x * trans.scale.x,
 			  new_y = translation.y * trans.scale.y;
-		t.translation = ee::Math2D::RotateVector(ee::Vector(new_x, new_y), trans.angle);
+		t.translation = ee::Math2D::RotateVector(sm::vec2(new_x, new_y), trans.angle);
 		t.translation += trans.translation;
 
 		assert(!gval.isNull());
@@ -158,7 +157,7 @@ void LRExpandGroup::LoadSprites(const Json::Value& src_spr_val, const Trans& tra
 
 		float new_x = old_x * trans.scale.x,
 			  new_y = old_y * trans.scale.y;
-		ee::Vector new_pos = ee::Math2D::RotateVector(ee::Vector(new_x, new_y), trans.angle);
+		sm::vec2 new_pos = ee::Math2D::RotateVector(sm::vec2(new_x, new_y), trans.angle);
 		new_pos += trans.translation;
 
 		dst_sprs_val[sz]["position"]["x"] = new_pos.x;

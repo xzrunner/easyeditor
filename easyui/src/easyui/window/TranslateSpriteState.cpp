@@ -12,7 +12,7 @@ namespace window
 
 TranslateSpriteState::TranslateSpriteState(StagePanel* stage,
 										   ee::SpriteSelection* selection, 
-										   const ee::Vector& first_pos, 
+										   const sm::vec2& first_pos, 
 										   AnchorMgr* anchor_mgr)
 	: ee::TranslateSpriteState(selection, first_pos)
 	, m_stage(stage)
@@ -20,7 +20,7 @@ TranslateSpriteState::TranslateSpriteState(StagePanel* stage,
 {
 }
 
-void TranslateSpriteState::OnMouseRelease(const ee::Vector& pos)
+void TranslateSpriteState::OnMouseRelease(const sm::vec2& pos)
 {
 	GetSelection()->Traverse(Visitor(m_anchor_mgr));
 	ee::TranslateSpriteState::OnMouseRelease(pos);

@@ -38,7 +38,7 @@ bool ArrangeSpriteOP::OnMouseLeftDown(int x, int y)
 	if (ee::ArrangeSpriteOP<SelectSpritesOP>::OnMouseLeftDown(x, y)) 
 		return true;
 
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	for (int i = 0, n = m_crosses.size(); i < n; ++i) {
 		if (m_crosses[i]->Contain(pos)) {
 			m_selected = m_crosses[i];
@@ -128,7 +128,7 @@ void ArrangeSpriteOP::Cross::Draw() const
 	ee::RVG::Cross(pos, LENGTH);
 }
 
-bool ArrangeSpriteOP::Cross::Contain(const ee::Vector& p) const
+bool ArrangeSpriteOP::Cross::Contain(const sm::vec2& p) const
 {
 	return ee::Math2D::GetDistance(pos, p) < RADIUS;
 }

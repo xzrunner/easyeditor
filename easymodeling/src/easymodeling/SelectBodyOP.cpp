@@ -38,7 +38,7 @@ bool SelectBodyOP::OnMouseMove(int x, int y)
 
 	m_mouseOn = NULL;
 
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	ee::Sprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
 	if (selected)
 		m_mouseOn = static_cast<Body*>(selected->GetUserData());
@@ -54,7 +54,7 @@ bool SelectBodyOP::OnMouseLeftDClick(int x, int y)
 
 	// todo
 
-// 	ee::Vector pos = m_stage->transPosScreenToProject(x, y);
+// 	sm::vec2 pos = m_stage->transPosScreenToProject(x, y);
 // 	ee::Sprite* selected = m_spritesImpl->querySpriteByPos(pos);
 // 	if (selected)
 // 	{
@@ -96,7 +96,7 @@ bool SelectBodyOP::Clear()
 void SelectBodyOP::DrawSelectedVisitor::
 Visit(ee::Object* object, bool& next) 
 {
-	std::vector<ee::Vector> bound;
+	std::vector<sm::vec2> bound;
 	ee::Sprite* sprite = static_cast<ee::Sprite*>(object);
 	Body* body = static_cast<Body*>(sprite->GetUserData());
 	DrawUtils::DrawBody(body, DrawUtils::e_selected);

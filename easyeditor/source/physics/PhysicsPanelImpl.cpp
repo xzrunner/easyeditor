@@ -10,7 +10,7 @@ PhysicsPanelImpl::PhysicsPanelImpl()
 	, m_velocityIterations(8)
 	, m_positionIterations(3)
 {
-	m_world = createWorld(Vector(0.0f, -10.0f));
+	m_world = createWorld(sm::vec2(0.0f, -10.0f));
 
 	BodyFactory::setWorld(m_world);
 
@@ -42,7 +42,7 @@ void PhysicsPanelImpl::drawPhysics()
 	m_world->DrawDebugData();
 }
 
-b2World* PhysicsPanelImpl::createWorld(const Vector& gravity)
+b2World* PhysicsPanelImpl::createWorld(const sm::vec2& gravity)
 {
 	b2World* world;
 

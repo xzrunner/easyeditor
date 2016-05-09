@@ -2,7 +2,8 @@
 #define _EASYMESH_CREATE_STRIP_OP_H_
 
 #include <ee/ZoomViewOP.h>
-#include <ee/Vector.h>
+
+#include <SM_Vector.h>
 
 namespace emesh
 {
@@ -25,9 +26,10 @@ public:
 private:
 	StagePanel* m_stage;
 
-	ee::Vector* m_selected;
+	sm::vec2* m_selected;
 
-	ee::Vector m_last_right;
+	sm::vec2 m_last_right;
+	bool m_last_right_valid;
 
 }; // CreateStripOP
 

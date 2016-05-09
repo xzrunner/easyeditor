@@ -1,8 +1,6 @@
 #ifndef _EASYNAVMESH_MESH_H_
 #define _EASYNAVMESH_MESH_H_
 
-#include <ee/Vector.h>
-
 #include <vector>
 
 namespace ee { class Rect; }
@@ -15,7 +13,7 @@ class Mesh
 public:
 	Mesh(const ee::Rect& region);
 
-	void AddHole(const std::vector<ee::Vector>& hole);
+	void AddHole(const std::vector<sm::vec2>& hole);
 
 	void Draw() const;
 
@@ -25,16 +23,16 @@ private:
 private:
 	struct Hole
 	{
-		Hole(const std::vector<ee::Vector>& edge) : edge(edge) {}
-		std::vector<ee::Vector> edge;
+		Hole(const std::vector<sm::vec2>& edge) : edge(edge) {}
+		std::vector<sm::vec2> edge;
 	};
 
 private:
-	std::vector<ee::Vector> m_bound;
+	std::vector<sm::vec2> m_bound;
 
 	std::vector<Hole> m_holes;
 
-	std::vector<ee::Vector> m_triangles;
+	std::vector<sm::vec2> m_triangles;
 
 }; // Mesh
 

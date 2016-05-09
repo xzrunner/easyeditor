@@ -14,8 +14,8 @@ QuadIcon::QuadIcon()
 	memset(m_screen, 0, sizeof(m_screen));
 }
 
-QuadIcon::QuadIcon(ee::Image* img, const ee::Vector* src, 
-				   const ee::Vector* screen)
+QuadIcon::QuadIcon(ee::Image* img, const sm::vec2* src, 
+				   const sm::vec2* screen)
 	: Icon(img)
 {
 	memcpy(m_src, src, sizeof(m_src));
@@ -42,9 +42,9 @@ void QuadIcon::StoreToFile(Json::Value& value) const
 	}
 }
 
-void QuadIcon::GetBound(float process, ee::Vector bound[4]) const
+void QuadIcon::GetBound(float process, sm::vec2 bound[4]) const
 {
-	memcpy(bound, m_src, sizeof(ee::Vector) * 4);
+	memcpy(bound, m_src, sizeof(sm::vec2) * 4);
 }
 
 void QuadIcon::Draw(const sm::mat4& mt, float process) const
@@ -53,7 +53,7 @@ void QuadIcon::Draw(const sm::mat4& mt, float process) const
 		return;
 	}
 
-	ee::Vector vertices[4];
+	sm::vec2 vertices[4];
 	for (int i = 0; i < 4; ++i) {
 		vertices[i] = ee::Math2D::TransVector(m_screen[i], mt);
 	}
@@ -80,7 +80,7 @@ ee::Rect QuadIcon::GetRegion(float process) const
 	return ret;
 }
 
-void QuadIcon::SetScreen(const ee::Vector* screen)
+void QuadIcon::SetScreen(const sm::vec2* screen)
 {
 	float w = static_cast<float>(m_img->GetClippedWidth()),
 		  h = static_cast<float>(m_img->GetClippedHeight());

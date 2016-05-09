@@ -9,7 +9,7 @@
 namespace ee
 {
 
-RotateSpriteAOP::RotateSpriteAOP(const std::vector<Sprite*>& sprites, const Vector& start, const Vector& end)
+RotateSpriteAOP::RotateSpriteAOP(const std::vector<Sprite*>& sprites, const sm::vec2& start, const sm::vec2& end)
 {
 	Init(sprites, start, end);
 }
@@ -19,7 +19,7 @@ RotateSpriteAOP::RotateSpriteAOP(const std::vector<Sprite*>& sprites, float angl
 	Init(sprites, angle);
 }
 
-RotateSpriteAOP::RotateSpriteAOP(const SpriteSelection& selection, const Vector& start, const Vector& end)
+RotateSpriteAOP::RotateSpriteAOP(const SpriteSelection& selection, const sm::vec2& start, const sm::vec2& end)
 {
 	std::vector<Sprite*> sprites;
 	selection.Traverse(FetchAllVisitor<Sprite>(sprites));
@@ -42,7 +42,7 @@ RotateSpriteAOP::~RotateSpriteAOP()
 
 void RotateSpriteAOP::Undo()
 {
-	if (m_start.IsValid() && m_end.IsValid()) 
+	if (m_inited) 
 	{
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
@@ -63,7 +63,7 @@ void RotateSpriteAOP::Undo()
 
 void RotateSpriteAOP::Redo()
 {
-	if (m_start.IsValid() && m_end.IsValid()) 
+	if (m_inited) 
 	{
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
@@ -96,8 +96,9 @@ Json::Value RotateSpriteAOP::Store(const std::vector<Sprite*>& sprites) const
 }
 
 void RotateSpriteAOP::Init(const std::vector<Sprite*>& sprites, 
-						   const Vector& start, const Vector& end)
+						   const sm::vec2& start, const sm::vec2& end)
 {
+	m_inited = true;
 	m_start = start;
 	m_end = end;
 	m_angle = 0;
@@ -111,8 +112,7 @@ void RotateSpriteAOP::Init(const std::vector<Sprite*>& sprites,
 
 void RotateSpriteAOP::Init(const std::vector<Sprite*>& sprites, float angle)
 {
-	m_start.SetInvalid();
-	m_end.SetInvalid();
+	m_inited = false;
 	m_angle = angle;
 
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) 

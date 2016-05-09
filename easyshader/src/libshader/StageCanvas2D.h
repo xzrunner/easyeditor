@@ -14,7 +14,7 @@ public:
 	StageCanvas2D(StagePanel2D* stage);
 	virtual ~StageCanvas2D();
 
-	void OnMousePressed(const ee::Vector& pos);
+	void OnMousePressed(const sm::vec2& pos);
 
 protected:
 	virtual void OnDrawSprites() const;

@@ -42,7 +42,7 @@ void ShapeToBin::Pack(const PackShape* shape, uint8_t** ptr)
 	pack(num, ptr);
 	
 	for (int i = 0, n = shape->vertices.size(); i < n; ++i) {
-		const ee::Vector& pos = shape->vertices[i];
+		const sm::vec2& pos = shape->vertices[i];
 		int32_t x = static_cast<int>(floor(pos.x * SCALE + 0.5f)),
 			    y =-static_cast<int>(floor(pos.y * SCALE + 0.5f));
 		pack(x, ptr);

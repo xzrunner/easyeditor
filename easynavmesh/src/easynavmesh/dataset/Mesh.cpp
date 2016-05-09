@@ -9,13 +9,13 @@ namespace enav
 
 Mesh::Mesh(const ee::Rect& region)
 {
-	m_bound.push_back(ee::Vector(region.xmin, region.ymin));
-	m_bound.push_back(ee::Vector(region.xmin, region.ymax));
-	m_bound.push_back(ee::Vector(region.xmax, region.ymax));
-	m_bound.push_back(ee::Vector(region.xmax, region.ymin));
+	m_bound.push_back(sm::vec2(region.xmin, region.ymin));
+	m_bound.push_back(sm::vec2(region.xmin, region.ymax));
+	m_bound.push_back(sm::vec2(region.xmax, region.ymax));
+	m_bound.push_back(sm::vec2(region.xmax, region.ymin));
 }
 
-void Mesh::AddHole(const std::vector<ee::Vector>& hole)
+void Mesh::AddHole(const std::vector<sm::vec2>& hole)
 {
 	m_holes.push_back(Hole(hole));
 
@@ -24,7 +24,7 @@ void Mesh::AddHole(const std::vector<ee::Vector>& hole)
 
 void Mesh::Build()
 {
-	std::vector<std::vector<ee::Vector> > holes;
+	std::vector<std::vector<sm::vec2> > holes;
 	for (int i = 0, n = m_holes.size(); i < n; ++i) {
 		holes.push_back(m_holes[i].edge);
 	}
@@ -34,7 +34,7 @@ void Mesh::Build()
 void Mesh::Draw() const
 {
 // 	for (int i = 0, n = m_triangles.size(); i < n; i += 3) {
-// 		std::vector<ee::Vector> tri;
+// 		std::vector<sm::vec2> tri;
 // 		tri.push_back(m_triangles[i]);
 // 		tri.push_back(m_triangles[i+1]);
 // 		tri.push_back(m_triangles[i+2]);

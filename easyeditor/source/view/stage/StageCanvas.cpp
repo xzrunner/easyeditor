@@ -91,7 +91,7 @@ void StageCanvas::SetCurrentCanvas()
 
 	RenderContextStack::Instance()->SetCurrCtx(m_render_context);
 
-	Vector offset;
+	sm::vec2 offset;
 	float scale;
 	if (m_render_context->GetModelView(offset, scale)) {
 		m_render_context->SetModelView(offset, scale);

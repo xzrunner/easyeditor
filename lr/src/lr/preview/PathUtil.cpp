@@ -39,7 +39,7 @@ void VisitedList::DebugDraw() const
 	std::set<VisitedNode*, VisitedNode::IDAscending>::const_iterator itr
 		= m_data.begin();
 	for ( ; itr != m_data.end(); ++itr) {
-		ee::Vector pos = m_nw->TransIDToPos((*itr)->m_id);
+		sm::vec2 pos = m_nw->TransIDToPos((*itr)->m_id);
 		ee::RVG::Color(ee::MID_RED);
 		ee::RVG::PointSize(5);
 		ee::RVG::Point(pos);

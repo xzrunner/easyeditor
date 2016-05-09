@@ -365,7 +365,7 @@ float DistanceFieldFont::getDistanceToEdge(unsigned char* pixels, unsigned char*
 				float s_dis;
 				if (m_cache[pos] == 0) {
 					if (isEdge(edge_pixels, width, height, i, j)) {
-						s_dis = ee::Math2D::GetDistanceSquare(ee::Vector(x, y), ee::Vector(i, j));
+						s_dis = ee::Math2D::GetDistanceSquare(sm::vec2(x, y), sm::vec2(i, j));
 						m_cache[pos] = s_dis + 1;
 					} else {
 						m_cache[pos] = -1;	// not edge

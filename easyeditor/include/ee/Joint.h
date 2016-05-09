@@ -7,12 +7,11 @@
 //namespace ee
 //{
 //	struct JointDef;
-//	class Vector;
 //
 //	class Joint
 //	{
 //	public:
-//		Joint(b2World* world, const JointDef& params, const Vector& anchor, 
+//		Joint(b2World* world, const JointDef& params, const sm::vec2& anchor, 
 //			b2Body* b0, b2Body* b1, bool isMotor, float scale);
 //		~Joint();
 //
@@ -20,7 +19,7 @@
 //		void setAngleLimit(bool isLeft);
 //
 //	private:
-//		void initialize(const JointDef& params, const Vector& anchor, b2Body* b0, b2Body* b1, bool isMotor);
+//		void initialize(const JointDef& params, const sm::vec2& anchor, b2Body* b0, b2Body* b1, bool isMotor);
 //
 //	private:
 //		float m_scale;

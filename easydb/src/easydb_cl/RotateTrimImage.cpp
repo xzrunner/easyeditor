@@ -95,7 +95,7 @@ void RotateTrimImage::RotateTrim(ee::Snapshoot& ss, const std::string& dir)
 
 			ee::Image* image = static_cast<ee::ImageSymbol*>(symbol)->GetImage();
 			int width, height;
-			ee::Vector center;
+			sm::vec2 center;
 			float angle;
 			bool success = GetRotateTrimInfo(image, width, height, center, angle);
 			if (!success || angle == 0) {
@@ -127,7 +127,7 @@ void RotateTrimImage::RotateTrim(ee::Snapshoot& ss, const std::string& dir)
 }
 
 bool RotateTrimImage::GetRotateTrimInfo(const ee::Image* image, int& width, int& height,
-										ee::Vector& center, float& angle) const
+										sm::vec2& center, float& angle) const
 {
 	eimage::ExtractOutlineRaw raw(*image);
 	raw.CreateBorderLineAndMerge();
@@ -136,7 +136,7 @@ bool RotateTrimImage::GetRotateTrimInfo(const ee::Image* image, int& width, int&
 	}
 	raw.CreateBorderConvexHull();
 
-	ee::Vector bound[4];
+	sm::vec2 bound[4];
 	bool is_rotate = ee::MinBoundingBox::Do(raw.GetConvexHull(), bound);
 
 	center = (bound[0] + bound[2]) * 0.5f;
@@ -155,9 +155,9 @@ bool RotateTrimImage::GetRotateTrimInfo(const ee::Image* image, int& width, int&
 			}
 		}
 
-		const ee::Vector& s = bound[left_idx];
-		const ee::Vector& e = bound[left_idx == 3 ? 0 : left_idx + 1];
-		ee::Vector right = s;
+		const sm::vec2& s = bound[left_idx];
+		const sm::vec2& e = bound[left_idx == 3 ? 0 : left_idx + 1];
+		sm::vec2 right = s;
 		right.x += 1;
 		angle = -ee::Math2D::GetAngle(s, e, right);
 		center = ee::Math2D::RotateVector(center, angle);

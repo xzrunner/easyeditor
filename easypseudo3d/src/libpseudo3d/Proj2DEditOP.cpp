@@ -28,19 +28,19 @@ bool Proj2DEditOP::OnKeyDown(int keyCode)
 	switch (keyCode)
 	{
 	case 'a': case 'A':
-		cam->Translate(ee::Vector(-OFFSET, 0));
+		cam->Translate(sm::vec2(-OFFSET, 0));
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		break;
 	case 'd': case 'D':
-		cam->Translate(ee::Vector(OFFSET, 0));
+		cam->Translate(sm::vec2(OFFSET, 0));
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		break;
 	case 's': case 'S':
-		cam->Translate(ee::Vector(0, -OFFSET));
+		cam->Translate(sm::vec2(0, -OFFSET));
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		break;
 	case 'w': case 'W':
-		cam->Translate(ee::Vector(0, OFFSET));
+		cam->Translate(sm::vec2(0, OFFSET));
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		break;
 	}
@@ -51,7 +51,7 @@ bool Proj2DEditOP::onDraw() const
 {
 	if (m_player) {
 		ee::Camera* cam = m_stage->GetCamera();
-		const ee::Vector& center = cam->GetPosition();
+		const sm::vec2& center = cam->GetPosition();
 		ee::SpriteRenderer::Draw(m_player, sm::mat4(), center);
 	}
 	return false;

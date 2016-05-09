@@ -11,7 +11,7 @@ Box2DRender::Box2DRender(float ratio)
 
 void Box2DRender::DrawPolygon(const b2Vec2* vertices, int vertexCount, const b2Color& color)
 {
-	std::vector<Vector> _vertices;
+	std::vector<sm::vec2> _vertices;
 	TransVertices(vertices, vertexCount, _vertices);
 
 	RVG::Color(TransColor(color));
@@ -21,7 +21,7 @@ void Box2DRender::DrawPolygon(const b2Vec2* vertices, int vertexCount, const b2C
 
 void Box2DRender::DrawSolidPolygon(const b2Vec2* vertices, int vertexCount, const b2Color& color)
 {
-	std::vector<Vector> _vertices;
+	std::vector<sm::vec2> _vertices;
 	TransVertices(vertices, vertexCount, _vertices);
 
 	// todo draw with triangles
@@ -40,7 +40,7 @@ void Box2DRender::DrawCircle(const b2Vec2& center, float32 radius, const b2Color
 
 void Box2DRender::DrawSolidCircle(const b2Vec2& center, float32 radius, const b2Vec2& axis, const b2Color& color)
 {
-	Vector _center = TransVertex(center);
+	sm::vec2 _center = TransVertex(center);
 	float _radius = radius * m_ratio;
 	RVG::Color(TransColor(color, 0.5f));
 	RVG::Circle(_center, _radius, true);
@@ -87,16 +87,16 @@ void Box2DRender::DrawAABB(b2AABB* aabb, const b2Color& c)
 	RVG::Rect(TransVertex(aabb->lowerBound), TransVertex(aabb->upperBound), false);
 }
 
-Vector Box2DRender::TransVertex(const b2Vec2& vertex) const
+sm::vec2 Box2DRender::TransVertex(const b2Vec2& vertex) const
 {
-	return Vector(vertex.x * m_ratio, vertex.y * m_ratio);
+	return sm::vec2(vertex.x * m_ratio, vertex.y * m_ratio);
 }
 
-void Box2DRender::TransVertices(const b2Vec2* src, int count, std::vector<Vector>& dst) const
+void Box2DRender::TransVertices(const b2Vec2* src, int count, std::vector<sm::vec2>& dst) const
 {
 	dst.reserve(count);
 	for (int i = 0; i < count; ++i) {
-		Vector p(src[i].x, src[i].y);
+		sm::vec2 p(src[i].x, src[i].y);
 		p *= m_ratio;
 		dst.push_back(p);
 	}

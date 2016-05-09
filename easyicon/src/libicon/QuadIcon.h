@@ -10,28 +10,28 @@ class QuadIcon : public Icon
 {
 public:
 	QuadIcon();
-	QuadIcon(ee::Image* img, const ee::Vector* src, 
-		const ee::Vector* screen);
+	QuadIcon(ee::Image* img, const sm::vec2* src, 
+		const sm::vec2* screen);
 
 	virtual const char* GetIconDesc() const { return "quad"; }
 
 	virtual void LoadFromFile(const Json::Value& value);
 	virtual void StoreToFile(Json::Value& value) const;
 
-	virtual void GetBound(float process, ee::Vector bound[4]) const;
+	virtual void GetBound(float process, sm::vec2 bound[4]) const;
 
 	virtual void Draw(const sm::mat4& mt, float process) const;
 
 	virtual ee::Rect GetRegion(float process) const;
 
-	const ee::Vector* GetScreen() const { return m_screen; }
-	void SetScreen(const ee::Vector* screen);
+	const sm::vec2* GetScreen() const { return m_screen; }
+	void SetScreen(const sm::vec2* screen);
 
 protected:
 	virtual void AfterSetImage();
 
 private:
-	ee::Vector m_src[4], m_screen[4];
+	sm::vec2 m_src[4], m_screen[4];
 
 }; // QuadIcon
 

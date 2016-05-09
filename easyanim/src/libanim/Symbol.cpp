@@ -88,7 +88,7 @@ void Symbol::InitBounding()
 			Frame* frame = layer->frames[i];
 			for (int i = 0, n = frame->sprites.size(); i < n; ++i)
 			{
-				std::vector<ee::Vector> vertices;
+				std::vector<sm::vec2> vertices;
 				frame->sprites[i]->GetBounding()->GetBoundPos(vertices);
 				for (int i = 0, n = vertices.size(); i < n; ++i) {
 					m_rect.Combine(vertices[i]);

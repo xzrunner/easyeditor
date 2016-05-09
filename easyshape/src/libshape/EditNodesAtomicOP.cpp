@@ -7,7 +7,7 @@ namespace edit_nodes
 {
 
 ModifyNodesAOP::ModifyNodesAOP(const std::vector<ChainShape*>& chains, 
-							   const std::vector<std::vector<ee::Vector> >& dstChains)
+							   const std::vector<std::vector<sm::vec2> >& dstChains)
 {
 	m_chains.reserve(chains.size());
 	for (size_t i = 0, n = chains.size(); i < n; ++i)

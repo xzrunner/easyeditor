@@ -28,7 +28,7 @@ MultiSpritesImpl::~MultiSpritesImpl()
 	m_sprite_selection->Release();
 }
 
-Sprite* MultiSpritesImpl::QuerySpriteByPos(const Vector& pos) const
+Sprite* MultiSpritesImpl::QuerySpriteByPos(const sm::vec2& pos) const
 {
 	Sprite* selected = NULL;
 	TraverseSprites(PointQueryVisitor(pos, &selected), DT_EDITABLE, false);

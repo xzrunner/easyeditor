@@ -30,7 +30,7 @@ void RightPopupMenu::SetRightPopupMenu(wxMenu& menu, int x, int y)
 {
 	ee::SpriteSelection* selection = m_stage->GetSpriteSelection();
 	if (selection->Size() == 1) {
-		ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 		selection->Traverse(ee::PointQueryVisitor(pos, &m_sprite));
 		CreateShapeMenu(menu);
 		CreateAnimMenu(menu);

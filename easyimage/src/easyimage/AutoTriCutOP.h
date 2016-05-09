@@ -2,7 +2,6 @@
 #define _EASYIMAGE_AUTO_TRI_CUT_OP_H_
 
 #include <ee/ZoomViewOP.h>
-#include <ee/Vector.h>
 
 #include <vector>
 
@@ -19,11 +18,11 @@ public:
 	virtual bool OnDraw() const;
 
 private:
-	std::vector<ee::Vector> m_raw_bound_line;
-	std::vector<ee::Vector> m_raw_bound_line_merged;
-	std::vector<ee::Vector> m_raw_bound_points;
+	std::vector<sm::vec2> m_raw_bound_line;
+	std::vector<sm::vec2> m_raw_bound_line_merged;
+	std::vector<sm::vec2> m_raw_bound_points;
 
-	std::vector<ee::Vector> m_fine_bound_line;
+	std::vector<sm::vec2> m_fine_bound_line;
 
 	friend class AutoTriCutCMPT;
 

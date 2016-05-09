@@ -45,7 +45,7 @@ void FileIO::Load(const char* filename, ee::LibraryPanel* library,
  	while (!spriteValue.isNull()) {
 		ee::Sprite* sprite = Load(spriteValue, dir);
 		if (need_offset) {
-			sprite->Translate(ee::Vector(-150, -150));
+			sprite->Translate(sm::vec2(-150, -150));
 		}
 		ee::InsertSpriteSJ::Instance()->Insert(sprite);
  		spriteValue = value["sprite"][i++];

@@ -5,7 +5,6 @@
 #include "sprite_msg.h"
 #include "script_type.h"
 #include "FetchAllVisitor.h"
-#include "Vector.h"
 #include "Sprite.h"
 
 namespace ee
@@ -62,7 +61,7 @@ int w_stage_move(lua_State* L)
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
 		Sprite* s = sprites[i];
-		Vector pos = s->GetPosition() + Vector(x, y);
+		sm::vec2 pos = s->GetPosition() + sm::vec2(x, y);
 		s->SetTransform(pos, s->GetAngle());
 	}
 	return 0;		

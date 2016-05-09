@@ -21,6 +21,7 @@ EditPointOP::EditPointOP(wxWindow* wnd, ee::EditPanelImpl* stage,
 	: ee::ZoomViewOP(wnd, stage, true)
 	, m_shapes_impl(shapes_impl)
 	, m_node_capture(node_capture)
+	, m_pos_valid(false)
 {
 	m_cursor = wxCursor(wxCURSOR_PENCIL);
 
@@ -46,6 +47,7 @@ bool EditPointOP::OnMouseLeftDown(int x, int y)
 	if (ee::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	m_pos = m_stage->TransPosScrToProj(x, y);
+	m_pos_valid = true;
 
 	m_shapes_impl->GetShapeSelection()->Clear();
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
@@ -70,11 +72,12 @@ bool EditPointOP::OnMouseLeftUp(int x, int y)
 {
 	if (ee::ZoomViewOP::OnMouseLeftUp(x, y)) return true;
 
-	if (!m_pos.IsValid()) {
+	if (!m_pos_valid) {
 		return false;
 	}
 
 	m_pos = m_stage->TransPosScrToProj(x, y);
+	m_pos_valid = true;
 	if (!m_captured.shape) {
 		PointShape* point = new PointShape(m_pos);
 		m_shapes_impl->GetShapeSelection()->Add(point);
@@ -96,7 +99,7 @@ bool EditPointOP::OnMouseRightDown(int x, int y)
 		return false;
 	}
 
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	NodeCapture capture(m_shapes_impl, tolerance);
 	capture.captureEditable(pos, m_captured);
 	if (m_captured.shape) {
@@ -118,7 +121,7 @@ bool EditPointOP::OnMouseMove(int x, int y)
 		return false;
 	}
 
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	NodeCapture capture(m_shapes_impl, tolerance);
 	ee::Shape* old = m_captured.shape;
 	capture.captureEditable(pos, m_captured);
@@ -134,6 +137,7 @@ bool EditPointOP::OnMouseDrag(int x, int y)
 	if (ee::ZoomViewOP::OnMouseDrag(x, y)) return true;
 
 	m_pos = m_stage->TransPosScrToProj(x, y);
+	m_pos_valid = true;
 	if (m_captured.shape && 
 		get_shape_type(m_captured.shape->GetShapeDesc()) == ST_POINT) {		
 		PointShape* point = static_cast<PointShape*>(m_captured.shape);
@@ -148,7 +152,7 @@ bool EditPointOP::OnDraw() const
 {
 	if (ee::ZoomViewOP::OnDraw()) return true;
 
-	if (m_pos.IsValid()) {
+	if (m_pos_valid) {
 		ee::RVG::Color(ee::LIGHT_RED);
 		ee::RVG::Circle(m_pos, m_node_capture->GetValue(), true);
 	}
@@ -160,7 +164,7 @@ bool EditPointOP::Clear()
 {
 	if (ee::ZoomViewOP::Clear()) return true;
 
-	m_pos.SetInvalid();
+	m_pos_valid = false;
 
 	return false;
 }

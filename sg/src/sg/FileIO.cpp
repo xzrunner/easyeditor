@@ -72,7 +72,7 @@ ee::Sprite* FileIO::load(const Json::Value& value, StagePanel* stage, const std:
 	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	SetSymbolUserData(symbol);
 
-	ee::Vector pos;
+	sm::vec2 pos;
 	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 	sprite->tag = value["tag"].asString();
 	symbol->Release();

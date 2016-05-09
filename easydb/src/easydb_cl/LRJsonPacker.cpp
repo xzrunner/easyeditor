@@ -206,7 +206,7 @@ void LRJsonPacker::ParserShapeFromShape(const Json::Value& src_val, const lr::Gr
 
 		Json::Value dst_val;
 		dst_val["name"] = shape_val["name"];
-		ParserShape(shape, ee::Vector(0, 0), 0, grids, force_grids, dst_val);
+		ParserShape(shape, sm::vec2(0, 0), 0, grids, force_grids, dst_val);
 
 		int sz = out_val[name].size();
 		out_val[name][sz] = dst_val;
@@ -217,14 +217,14 @@ void LRJsonPacker::ParserShapeFromShape(const Json::Value& src_val, const lr::Gr
 	}
 }
 
-void LRJsonPacker::ParserShape(ee::Shape* shape, const ee::Vector& offset, float angle,
+void LRJsonPacker::ParserShape(ee::Shape* shape, const sm::vec2& offset, float angle,
 							   const lr::Grids& grids, bool force_grids, Json::Value& out_val)
 {
 	if (eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(shape))
 	{
 		std::vector<int> grid_idx;
 
-		std::vector<ee::Vector> bound = poly->GetVertices();
+		std::vector<sm::vec2> bound = poly->GetVertices();
 		for (int i = 0, n = bound.size(); i < n; ++i) {
 			bound[i] = ee::Math2D::RotateVector(bound[i], angle) + offset;
 		}
@@ -237,7 +237,7 @@ void LRJsonPacker::ParserShape(ee::Shape* shape, const ee::Vector& offset, float
 	}
 	else if (eshape::ChainShape* chain = dynamic_cast<eshape::ChainShape*>(shape))
 	{
-		std::vector<ee::Vector> bound = chain->GetVertices();
+		std::vector<sm::vec2> bound = chain->GetVertices();
 		for (int i = 0, n = bound.size(); i < n; ++i) {
 			bound[i] = ee::Math2D::RotateVector(bound[i], angle) + offset;
 		}
@@ -388,7 +388,7 @@ void LRJsonPacker::ParserCharacterFromSprite(const Json::Value& src_val, const l
 					float x = spr_val["position"]["x"].asDouble(),
 						y = spr_val["position"]["y"].asDouble();
 					float ang = spr_val["angle"].asDouble();					
-					ParserShape(poly, ee::Vector(x, y), ang, grids, true, char_val["grids"]);
+					ParserShape(poly, sm::vec2(x, y), ang, grids, true, char_val["grids"]);
 				}
 			}
 		}

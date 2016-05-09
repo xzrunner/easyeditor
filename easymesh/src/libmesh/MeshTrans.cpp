@@ -12,7 +12,7 @@ namespace emesh
 void MeshTrans::Load(const Json::Value& value)
 {
 	m_map.clear();
-	std::vector<ee::Vector> from, to;
+	std::vector<sm::vec2> from, to;
 	ee::JsonSerializer::Load(value["trans"]["from"], from);
 	ee::JsonSerializer::Load(value["trans"]["to"], to);
 	for (int i = 0, n = from.size(); i < n; ++i) {
@@ -25,7 +25,7 @@ void MeshTrans::Store(Json::Value& value) const
 	Json::Value& trans_val = value["trans"];
 
 	int count = 0;
-	std::map<ee::Vector, ee::Vector, ee::VectorCmp>::const_iterator itr 
+	std::map<sm::vec2, sm::vec2, sm::Vector2Cmp>::const_iterator itr 
 		= m_map.begin();
 	for ( ; itr != m_map.end(); ++itr) 
 	{
@@ -72,7 +72,7 @@ void MeshTrans::StoreToMesh(Mesh* mesh) const
 	}
 	for (std::set<Node*>::iterator itr = unique.begin(); itr != unique.end(); ++itr) {
 		Node* node = *itr;
-		std::map<ee::Vector, ee::Vector, ee::VectorCmp>::const_iterator itr_find 
+		std::map<sm::vec2, sm::vec2, sm::Vector2Cmp>::const_iterator itr_find 
 			= m_map.find(node->ori_xy);
 		if (itr_find != m_map.end()) {
 			node->xy = itr_find->second;
@@ -83,12 +83,12 @@ void MeshTrans::StoreToMesh(Mesh* mesh) const
 void MeshTrans::SetTween(const MeshTrans& s, const MeshTrans& e, float process)
 {
 	m_map.clear();
-	std::map<ee::Vector, ee::Vector, ee::VectorCmp>::const_iterator itr_s 
+	std::map<sm::vec2, sm::vec2, sm::Vector2Cmp>::const_iterator itr_s 
 		= s.m_map.begin();
 	for ( ; itr_s != s.m_map.end(); ++itr_s) {
-		std::map<ee::Vector, ee::Vector, ee::VectorCmp>::const_iterator itr_e
+		std::map<sm::vec2, sm::vec2, sm::Vector2Cmp>::const_iterator itr_e
 			= e.m_map.find(itr_s->first);
-		ee::Vector pos;
+		sm::vec2 pos;
 		if (itr_e == e.m_map.end()) {
 			pos = itr_s->second + (itr_s->first - itr_s->second) * process;
 		} else {
@@ -96,13 +96,13 @@ void MeshTrans::SetTween(const MeshTrans& s, const MeshTrans& e, float process)
 		}
 		m_map.insert(std::make_pair(itr_s->first, pos));
 	}
-	std::map<ee::Vector, ee::Vector, ee::VectorCmp>::const_iterator itr_e 
+	std::map<sm::vec2, sm::vec2, sm::Vector2Cmp>::const_iterator itr_e 
 		= e.m_map.begin();
 	for ( ; itr_e != e.m_map.end(); ++itr_e) {
-		std::map<ee::Vector, ee::Vector, ee::VectorCmp>::const_iterator itr_s
+		std::map<sm::vec2, sm::vec2, sm::Vector2Cmp>::const_iterator itr_s
 			= s.m_map.find(itr_e->first);
 		if (itr_s == s.m_map.end()) {
-			ee::Vector pos = itr_e->first + (itr_e->second - itr_e->first) * process;
+			sm::vec2 pos = itr_e->first + (itr_e->second - itr_e->first) * process;
 			m_map.insert(std::make_pair(itr_e->first, pos));
 		}
 	}

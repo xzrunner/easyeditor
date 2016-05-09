@@ -103,7 +103,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 
 void StagePanel::Insert(ee::Sprite* spr)
 {
-	const ee::Vector& pos = spr->GetPosition();
+	const sm::vec2& pos = spr->GetPosition();
 	int col, row;
 	ComposeGrids::Query(pos, &col, &row);
 	if (col == -1 || row == -1) {

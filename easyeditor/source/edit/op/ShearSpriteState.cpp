@@ -24,23 +24,23 @@ ShearSpriteState::~ShearSpriteState()
 	m_sprite->Release();
 }
 
-void ShearSpriteState::OnMouseRelease(const Vector& pos)
+void ShearSpriteState::OnMouseRelease(const sm::vec2& pos)
 {
 	AtomicOP* aop = new ShearSpriteAOP(m_sprite, m_sprite->GetShear(), m_first_shear);
 	EditAddRecordSJ::Instance()->Add(aop);
 }
 
-bool ShearSpriteState::OnMouseDrag(const Vector& pos)
+bool ShearSpriteState::OnMouseDrag(const sm::vec2& pos)
 {
 	Shear2(pos);
 	return true;
 }
 
-void ShearSpriteState::Shear(const Vector& curr)
+void ShearSpriteState::Shear(const sm::vec2& curr)
 {
 	// fix pos
-	Vector pos;
-	Vector ctrls[8];
+	sm::vec2 pos;
+	sm::vec2 ctrls[8];
 	SpriteCtrlNode::GetSpriteCtrlNodes(m_sprite, ctrls);
 	if (m_ctrl_node.type == SpriteCtrlNode::UP) {
 		Math2D::GetFootOfPerpendicular(ctrls[SpriteCtrlNode::LEFT_UP], ctrls[SpriteCtrlNode::RIGHT_UP], curr, &pos);
@@ -80,7 +80,7 @@ void ShearSpriteState::Shear(const Vector& curr)
 //  	pos.x -= px;
 //  	pos.y -= py;
 
-	Vector offset = m_sprite->GetOffset();
+	sm::vec2 offset = m_sprite->GetOffset();
 // 	offset.x += px - r.CenterX();
 // 	offset.y += py - r.CenterY();
 
@@ -123,10 +123,10 @@ void ShearSpriteState::Shear(const Vector& curr)
 			ky = (pos.y - s*sx*x - kx*s*sx*y - c*sy*y - py) / (c*sy*x);
 	}
 
-	m_sprite->SetShear(Vector(kx, ky));
+	m_sprite->SetShear(sm::vec2(kx, ky));
 }
 
-void ShearSpriteState::Shear2(const Vector& curr)
+void ShearSpriteState::Shear2(const sm::vec2& curr)
 {
 	Rect region = m_sprite->GetSymbol().GetSize();
 
@@ -136,16 +136,16 @@ void ShearSpriteState::Shear2(const Vector& curr)
 		ky = m_sprite->GetShear().y;
 	float sx = m_sprite->GetScale().x,
 		sy = m_sprite->GetScale().y;
-	Vector ctrls[8];
+	sm::vec2 ctrls[8];
 	SpriteCtrlNode::GetSpriteCtrlNodes(m_sprite, ctrls);
 
-	Vector center = (ctrls[SpriteCtrlNode::LEFT] + ctrls[SpriteCtrlNode::RIGHT]) * 0.5f;
+	sm::vec2 center = (ctrls[SpriteCtrlNode::LEFT] + ctrls[SpriteCtrlNode::RIGHT]) * 0.5f;
 
 	switch (m_ctrl_node.type)
 	{
 	case SpriteCtrlNode::UP: case SpriteCtrlNode::DOWN:
 		{
-			Vector ori, now;
+			sm::vec2 ori, now;
 			if (m_ctrl_node.type == SpriteCtrlNode::UP) {
 				Math2D::GetFootOfPerpendicular(ctrls[SpriteCtrlNode::LEFT_UP], ctrls[SpriteCtrlNode::RIGHT_UP], center, &ori);
 				Math2D::GetFootOfPerpendicular(ctrls[SpriteCtrlNode::LEFT_UP], ctrls[SpriteCtrlNode::RIGHT_UP], curr, &now);
@@ -156,16 +156,16 @@ void ShearSpriteState::Shear2(const Vector& curr)
 
 			float dis = Math2D::GetDistance(ori, now);
 			kx = dis / hh;
-			if (vec_cross(center - ori, now - ori) < 0) {
+			if ((center - ori).Cross(now - ori) < 0) {
 				kx = -kx;
 			}
 			kx /= sx;
-			m_sprite->SetShear(Vector(kx, ky));
+			m_sprite->SetShear(sm::vec2(kx, ky));
 		}
 		break;
 	case SpriteCtrlNode::LEFT: case SpriteCtrlNode::RIGHT:
 		{
-			Vector ori, now;
+			sm::vec2 ori, now;
 			if (m_ctrl_node.type == SpriteCtrlNode::LEFT) {
 				Math2D::GetFootOfPerpendicular(ctrls[SpriteCtrlNode::LEFT_DOWN], ctrls[SpriteCtrlNode::LEFT_UP], center, &ori);
 				Math2D::GetFootOfPerpendicular(ctrls[SpriteCtrlNode::LEFT_DOWN], ctrls[SpriteCtrlNode::LEFT_UP], curr, &now);
@@ -176,11 +176,11 @@ void ShearSpriteState::Shear2(const Vector& curr)
 
 			float dis = Math2D::GetDistance(ori, now);
 			ky = dis / hw;
-			if (vec_cross(center - ori, now - ori) > 0) {
+			if ((center - ori).Cross(now - ori) < 0) {
 				ky = -ky;
 			}
 			ky /= sy;
-			m_sprite->SetShear(Vector(kx, ky));
+			m_sprite->SetShear(sm::vec2(kx, ky));
 		}
 		break;
 	}

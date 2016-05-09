@@ -118,7 +118,7 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 
 		std::string spr_path = std::string(out_img_dir + "\\" + img_name);
 		ee::Sprite* spr = new ee::NullSprite(new ee::NullSymbol(spr_path, r.w, r.h));
-		ee::Vector offset;
+		sm::vec2 offset;
 		offset.x = img_r.xmin + r.x + r.w * 0.5f - img->GetWidth() * 0.5f;
 		offset.y = img_r.ymin + r.y + r.h * 0.5f - img->GetHeight() * 0.5f;
 		spr->Translate(offset);

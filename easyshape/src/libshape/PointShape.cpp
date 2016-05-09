@@ -12,7 +12,7 @@ PointShape::PointShape()
 {
 }
 
-PointShape::PointShape(const ee::Vector& pos)
+PointShape::PointShape(const sm::vec2& pos)
 	: m_pos(pos)
 	, m_rect(m_pos, RADIUS, RADIUS)
 {
@@ -29,7 +29,7 @@ PointShape* PointShape::Clone() const
 	return new PointShape(*this);
 }
 
-bool PointShape::IsContain(const ee::Vector& pos) const
+bool PointShape::IsContain(const sm::vec2& pos) const
 {
 	return ee::Math2D::IsPointInRect(pos, m_rect);
 }
@@ -39,7 +39,7 @@ bool PointShape::IsIntersect(const ee::Rect& rect) const
 	return ee::Math2D::IsRectIntersectRect(rect, m_rect);
 }
 
-void PointShape::Translate(const ee::Vector& offset)
+void PointShape::Translate(const sm::vec2& offset)
 {
 	m_pos += offset;
 	m_rect.Translate(offset);
@@ -47,7 +47,7 @@ void PointShape::Translate(const ee::Vector& offset)
 
 void PointShape::Draw(const sm::mat4& mt, const ee::RenderColor& color) const
 {
-	ee::Vector c = ee::Math2D::TransVector(m_pos, mt);
+	sm::vec2 c = ee::Math2D::TransVector(m_pos, mt);
 	float r = ee::Math2D::TransLen(RADIUS, mt);
 	ee::RVG::Color(color.multi);
 	ee::RVG::Circle(c, r, true);

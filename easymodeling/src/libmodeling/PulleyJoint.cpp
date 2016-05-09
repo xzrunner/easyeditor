@@ -17,12 +17,12 @@ PulleyJoint::PulleyJoint(Body* b0, Body* b1)
 	m_ground_anchor_a.y += 10;
 	m_ground_anchor_b.y += 10;
 
-	ee::Vector center = (b0->m_sprite->GetPosition() + b1->m_sprite->GetPosition()) * 0.5f;
+	sm::vec2 center = (b0->m_sprite->GetPosition() + b1->m_sprite->GetPosition()) * 0.5f;
 	SetLocalAnchorA(center);
 	SetLocalAnchorB(center);
 }
 
-bool PulleyJoint::IsContain(const ee::Vector& pos) const
+bool PulleyJoint::IsContain(const sm::vec2& pos) const
 {
 	return ee::Math2D::GetDistance(GetWorldAnchorA(), pos) < JOINT_RADIUS_OUT
 		|| ee::Math2D::GetDistance(GetWorldAnchorB(), pos) < JOINT_RADIUS_OUT
@@ -40,7 +40,7 @@ bool PulleyJoint::IsIntersect(const ee::Rect& rect) const
 
 void PulleyJoint::Draw(DrawType type) const
 {
-	const ee::Vector anchorA = GetWorldAnchorA(),
+	const sm::vec2 anchorA = GetWorldAnchorA(),
 		anchorB = GetWorldAnchorB();
 
 	if (type == e_selected || type == e_mouseOn)
@@ -67,27 +67,27 @@ void PulleyJoint::Draw(DrawType type) const
 }
 
 
-ee::Vector PulleyJoint::GetWorldAnchorA() const
+sm::vec2 PulleyJoint::GetWorldAnchorA() const
 {
 	return TransLocalToWorld(m_local_anchor_a, m_body_a->m_sprite);
 }
 
-ee::Vector PulleyJoint::GetWorldAnchorB() const
+sm::vec2 PulleyJoint::GetWorldAnchorB() const
 {
 	return TransLocalToWorld(m_local_anchor_b, m_body_b->m_sprite);
 }
 
-void PulleyJoint::SetLocalAnchorA(const ee::Vector& world)
+void PulleyJoint::SetLocalAnchorA(const sm::vec2& world)
 {
 	m_local_anchor_a = TransWorldToLocal(world, m_body_a->m_sprite);
 }
 
-void PulleyJoint::SetLocalAnchorB(const ee::Vector& world)
+void PulleyJoint::SetLocalAnchorB(const sm::vec2& world)
 {
 	m_local_anchor_b = TransWorldToLocal(world, m_body_b->m_sprite);
 }
 
-void PulleyJoint::DrawAnchor(const ee::Vector& pos, DrawType type) const
+void PulleyJoint::DrawAnchor(const sm::vec2& pos, DrawType type) const
 {
 	ee::Colorf color;
 	switch (type)

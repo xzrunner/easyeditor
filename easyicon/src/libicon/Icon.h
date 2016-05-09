@@ -4,7 +4,6 @@
 #include <json/json.h>
 
 #include <ee/Object.h>
-#include <ee/Vector.h>
 #include <ee/Rect.h>
 
 #include <SM_Matrix.h>
@@ -27,15 +26,15 @@ public:
 	virtual void StoreToFile(Json::Value& value) const = 0;
 
 	// return [0, 1]
-	virtual void GetBound(float process, ee::Vector bound[4]) const = 0;
+	virtual void GetBound(float process, sm::vec2 bound[4]) const = 0;
 
 	virtual void Draw(const sm::mat4& mt, float process) const;
 
 	virtual ee::Rect GetRegion(float process) const;
 
-	void GetTexCoords(float process, ee::Vector* tex_coords) const;
-	void GetScreenCoords(float process, const ee::Vector* tex_coords,
-		ee::Vector* screen_coords) const;
+	void GetTexCoords(float process, sm::vec2* tex_coords) const;
+	void GetScreenCoords(float process, const sm::vec2* tex_coords,
+		sm::vec2* screen_coords) const;
 
 	void ReloadTexture() const;
 

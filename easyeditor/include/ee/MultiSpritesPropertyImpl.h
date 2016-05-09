@@ -1,8 +1,9 @@
 #ifndef _EASYEDITOR_MULTI_SPRITES_PROPERTY_IMPL_H_
 #define _EASYEDITOR_MULTI_SPRITES_PROPERTY_IMPL_H_
 
-#include "Vector.h"
 #include "Color.h"
+
+#include <SM_Vector.h>
 
 #include <wx/chartype.h>
 
@@ -27,14 +28,14 @@ public:
 public:
 	std::string GetTag() const;
 	const wxChar* GetClip() const;
-	Vector GetPosition() const;
+	sm::vec2 GetPosition() const;
 	Colorf GetMultiColor() const;
 	Colorf GetAddColor() const;
 	Colorf GetTransColorR() const;
 	Colorf GetTransColorG() const;
 	Colorf GetTransColorB() const;
 	float GetAngle() const;
-	Vector GetScale() const;
+	sm::vec2 GetScale() const;
 	bool GetMirrorX() const;
 	bool GetMirrorY() const;
 	bool GetVisible() const;
@@ -60,7 +61,7 @@ public:
 	void OnAngleChange(float angle);
 	void OnScaleChange(float dx, float dy);
 
-	Vector GetOverallCenter() const;
+	sm::vec2 GetOverallCenter() const;
 
 private:
 	enum Bool3Type

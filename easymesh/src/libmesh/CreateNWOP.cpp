@@ -44,12 +44,12 @@ bool CreateNWOP::OnKeyDown(int keyCode)
 
 bool CreateNWOP::OnMouseLeftDown(int x, int y)
 {
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	Network* nw = static_cast<Network*>(m_stage->GetMesh());
 	if (!nw) {
 		return false;
 	}
-	ee::Vector* selected = nw->QueryInner(pos);
+	sm::vec2* selected = nw->QueryInner(pos);
 	if (selected) {
 		m_selected_inner = selected;
 		return false;
@@ -90,7 +90,7 @@ bool CreateNWOP::OnMouseLeftUp(int x, int y)
 
 bool CreateNWOP::OnMouseRightDown(int x, int y)
 {
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	Network* nw = static_cast<Network*>(m_stage->GetMesh());
 	if (nw->RemoveInner(pos)) {
 		RefreshAll();

@@ -11,7 +11,7 @@ class CosineShape : public ChainShape
 public:
 	CosineShape();
 	CosineShape(const CosineShape& curve);
-	CosineShape(const std::vector<ee::Vector>& vertices);
+	CosineShape(const std::vector<sm::vec2>& vertices);
 	virtual ~CosineShape();
 
 	//
@@ -23,7 +23,7 @@ public:
 	// Shape interface
 	//
 	virtual const char* GetShapeDesc() const { return "cosine-curve"; }
-	virtual void Translate(const ee::Vector& offset);
+	virtual void Translate(const sm::vec2& offset);
 	virtual void Draw(const sm::mat4& mt,
 		const ee::RenderColor& color = ee::RenderColor()) const;
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
@@ -31,19 +31,19 @@ public:
 	//
 	// ChainShape interface
 	//
-	virtual void insertVertices(size_t index, const ee::Vector& pos);
-	virtual void removeVertices(const ee::Vector& pos);
-	virtual void changeVertices(const ee::Vector& from, const ee::Vector& to);
+	virtual void insertVertices(size_t index, const sm::vec2& pos);
+	virtual void removeVertices(const sm::vec2& pos);
+	virtual void changeVertices(const sm::vec2& from, const sm::vec2& to);
 	virtual void refresh();
 
-	const std::vector<ee::Vector>& getMidPoints() const { return m_midPoints; }
+	const std::vector<sm::vec2>& getMidPoints() const { return m_midPoints; }
 	void setMidPoints();
 
 private:
 	static const float SAMPLING_WIDTH;
 
 private:
-	std::vector<ee::Vector> m_midPoints;
+	std::vector<sm::vec2> m_midPoints;
 
 }; // CosineShape
 

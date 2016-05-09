@@ -26,7 +26,7 @@ void MaxRectsBinaryArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites
 	for (int i = 0; i < sz; ++i) {
 		ee::Sprite* sprite = sprites[i];
 		const etexpacker::Rect& r = output[i];
-		ee::Vector pos;
+		sm::vec2 pos;
 		pos.x = r.x + r.width * 0.5f;
 		pos.y = r.y + r.height * 0.5f;
 		sprite->SetTransform(pos, sprite->GetAngle());

@@ -6,8 +6,8 @@
 namespace ee
 {
 
-void CosineSmooth::Do(const std::vector<Vector>& src, float sampling_width, 
-					  std::vector<Vector>& dst)
+void CosineSmooth::Do(const std::vector<sm::vec2>& src, float sampling_width, 
+					  std::vector<sm::vec2>& dst)
 {
 	dst.clear();
 
@@ -15,7 +15,7 @@ void CosineSmooth::Do(const std::vector<Vector>& src, float sampling_width,
 
 	for (size_t i = 0, n = src.size() - 1; i < n; ++i)
 	{
-		const Vector& p0 = src[i],
+		const sm::vec2& p0 = src[i],
 			p1 = src[i+1];
 		const size_t samplingCount = static_cast<size_t>(std::floor(std::abs(p1.x - p0.x) / sampling_width));
 		const float dx = (p1.x - p0.x) / samplingCount;
@@ -25,7 +25,7 @@ void CosineSmooth::Do(const std::vector<Vector>& src, float sampling_width,
 		dst.push_back(p0);
 		for (size_t j = 1; j < samplingCount; ++j)
 		{
-			Vector pt;
+			sm::vec2 pt;
 			pt.x = p0.x + j * dx;
 			pt.y = yMid + ampl * cos(da * j);
 			dst.push_back(pt);

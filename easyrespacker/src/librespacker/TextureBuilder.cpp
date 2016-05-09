@@ -82,8 +82,8 @@ void TextureBuilder::Load(const etexture::Symbol* symbol, PackPicture* pic)
 		throw ee::Exception("TextureBuilder::Load !material, filepath: %s", symbol->GetFilepath().c_str());
 	}
 
-	const std::vector<ee::Vector>& vertices = material->GetTriangles();
-	const std::vector<ee::Vector>& texcoords = material->GetTexcoords();
+	const std::vector<sm::vec2>& vertices = material->GetTriangles();
+	const std::vector<sm::vec2>& texcoords = material->GetTexcoords();
 	if ((vertices.size() != texcoords.size()) || (vertices.size() % 3 != 0)) {
 		throw ee::Exception("TextureBuilder::Load err meaterial, filepath: %s", symbol->GetFilepath().c_str());
 	}

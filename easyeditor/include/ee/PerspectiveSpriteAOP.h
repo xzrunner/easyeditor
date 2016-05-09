@@ -2,7 +2,8 @@
 #define _EASYEDITOR_PERSPECTIVE_SPRITE_AOP_H_
 
 #include "AtomicOP.h"
-#include "Vector.h"
+
+#include <SM_Vector.h>
 
 namespace ee
 {
@@ -12,8 +13,8 @@ class Sprite;
 class PerspectiveSpriteAOP : public AtomicOP
 {
 public:
-	PerspectiveSpriteAOP(Sprite* sprite, const Vector& new_persp,
-		const Vector& old_persp);
+	PerspectiveSpriteAOP(Sprite* sprite, const sm::vec2& new_persp,
+		const sm::vec2& old_persp);
 
 	virtual void Undo();
 	virtual void Redo();
@@ -23,7 +24,7 @@ public:
 private:
 	Sprite* m_spr;
 
-	Vector m_new_persp, m_old_persp;
+	sm::vec2 m_new_persp, m_old_persp;
 
 }; // PerspectiveSpriteAOP
 

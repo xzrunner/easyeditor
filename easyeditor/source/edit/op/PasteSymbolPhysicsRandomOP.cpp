@@ -30,12 +30,13 @@ bool PasteSymbolPhysicsRandomOP::OnMouseLeftDown(int x, int y)
 	if (symbol) 
 	{
 		m_pos = m_stage->TransPosScrToProj(x, y);
+		m_pos_valid = true;
 
 		Sprite* sprite = SpriteFactory::Instance()->Create(symbol);
 		sprite->Translate(m_pos);
 
 		if (m_random_value.scale != 1.0f) {
-			sprite->SetScale(Vector(m_random_value.scale, m_random_value.scale));
+			sprite->SetScale(sm::vec2(m_random_value.scale, m_random_value.scale));
 		}
 		if (m_random_value.angle != 0.0f) {
 			sprite->SetTransform(m_pos, m_random_value.angle);
@@ -72,7 +73,7 @@ bool PasteSymbolPhysicsRandomOP::OnDraw() const
 	if (!symbol)  {
 		symbol = m_library->GetSymbol();
 	}
-	if (symbol && m_pos.IsValid()) {
+	if (symbol && m_pos_valid) {
 		SpriteRenderer::Draw(symbol, sm::mat4(), m_pos, m_random_value.angle, m_random_value.scale);
 	}
 

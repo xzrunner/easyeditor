@@ -33,7 +33,8 @@ private:
 
 	NodeAddr m_captured;
 
-	ee::Vector m_pos;
+	sm::vec2 m_pos;
+	bool m_pos_valid;
 
 }; // EditPointOP
 

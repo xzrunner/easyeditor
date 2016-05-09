@@ -4,7 +4,6 @@
 #include "DrawRectangleOP.h"
 
 #include <ee/common_type.h>
-#include <ee/Vector.h>
 #include <ee/Visitor.h>
 #include <ee/Rect.h>
 
@@ -31,7 +30,7 @@ public:
 	virtual bool OnDraw() const;
 	virtual bool Clear();
 
-	void FetchSelectedNode(std::vector<ee::Vector>& nodes) const;
+	void FetchSelectedNode(std::vector<sm::vec2>& nodes) const;
 
 	static int GetThreshold();
 
@@ -46,18 +45,18 @@ protected:
 	{
 	public:
 		ChainShape* chain;
-		std::vector<ee::Vector> selectedNodes;
+		std::vector<sm::vec2> selectedNodes;
 	}; // ChainSelectedNodes
 
 private:
 	class PosQueryVisitor : public ee::Visitor
 	{
 	public:
-		PosQueryVisitor(const ee::Vector& pos, ChainSelectedNodes** result);
+		PosQueryVisitor(const sm::vec2& pos, ChainSelectedNodes** result);
 		virtual void Visit(Object* object, bool& next);
 
 	private:
-		const ee::Vector& m_pos;
+		const sm::vec2& m_pos;
 		ee::Rect m_rect;
 		ChainSelectedNodes** m_result;
 
@@ -81,8 +80,9 @@ protected:
 private:
 	ee::MultiShapesImpl* m_shape_impl;
 
-	ee::Vector m_first_pos;
-
+	sm::vec2 m_first_pos;
+	bool m_first_pos_valid;
+	
 }; // SelectNodesOP
 
 }

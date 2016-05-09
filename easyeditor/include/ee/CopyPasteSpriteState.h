@@ -2,7 +2,6 @@
 #define _EASYEDITOR_COPY_PASTE_SPRITE_STATE_H_
 
 #include "ArrangeSpriteState.h"
-#include "Vector.h"
 
 #include <vector>
 
@@ -18,11 +17,11 @@ public:
 	CopyPasteSpriteState(SpriteSelection* selection);
 	virtual ~CopyPasteSpriteState();
 
-	virtual void OnMousePress(const Vector& pos);
-	virtual bool OnMouseDrag(const Vector& pos);
+	virtual void OnMousePress(const sm::vec2& pos);
+	virtual bool OnMouseDrag(const sm::vec2& pos);
 
 private:
-	Vector m_last_pos;
+	sm::vec2 m_last_pos;
 
 	std::vector<Sprite*> m_sprites;
 	

@@ -128,7 +128,7 @@ void StagePanel::InitPosition()
 		Node* node = m_graphics.Query(sprite);
 		if (!node || node->in.empty())
 		{
-			ee::Vector pos;
+			sm::vec2 pos;
 			float radius = ee::Random::GetNum0To1() * 4096;
 			float angle = ee::Random::GetNum(0, SM_PI*2);
 			pos.x = cos(angle)*radius;
@@ -152,7 +152,7 @@ void StagePanel::InitPosition()
 			{
 				ee::Sprite* to = node->out[i];
 
-				ee::Vector pos = sprite->GetPosition();
+				sm::vec2 pos = sprite->GetPosition();
 				pos.x += cos(angle*i)*radius;
 				pos.y += sin(angle*i)*radius;
 // 				if (to->getPosition().x != 0 || to->getPosition().y != 0)

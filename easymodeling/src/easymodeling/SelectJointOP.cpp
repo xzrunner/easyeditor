@@ -42,7 +42,7 @@ bool SelectJointOP::OnKeyDown(int keyCode)
 
 bool SelectJointOP::OnMouseLeftDown(int x, int y)
 {
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	Joint* selected = static_cast<StagePanel*>(m_wnd)->queryJointByPos(pos);
 	if (selected && !m_selected || !selected && m_selected)
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -92,7 +92,7 @@ bool SelectJointOP::OnMouseLeftDown(int x, int y)
 
 bool SelectJointOP::OnMouseLeftUp(int x, int y)
 {
-	//ee::Vector pos = m_stage->transPosScreenToProject(x, y);
+	//sm::vec2 pos = m_stage->transPosScreenToProject(x, y);
 	//selectedJoints.clear();
 	//static_cast<StagePanel*>(m_stage)->queryJointsByRect(ee::Rect(pos, m_firstPos), selectedJoints);
 	//if (selectedJoints.size() == 1)
@@ -113,7 +113,7 @@ bool SelectJointOP::OnMouseMove(int x, int y)
 	if (SelectBodyOP::OnMouseMove(x, y)) 
 		return true;
 
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	Joint* joint = static_cast<StagePanel*>(m_wnd)->queryJointByPos(pos);
 	if (joint && !m_mouseOn || !joint && m_mouseOn)
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -130,7 +130,7 @@ bool SelectJointOP::OnMouseDrag(int x, int y)
 
 	if (m_selected)
 	{
-		ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 		switch (m_selected->m_type)
 		{
 		case Joint::e_revoluteJoint:
@@ -273,7 +273,7 @@ bool SelectJointOP::Clear()
 void SelectJointOP::DrawSelectedVisitor::
 Visit(ee::Object* object, bool& next) 
 {
-	std::vector<ee::Vector> bound;
+	std::vector<sm::vec2> bound;
 	ee::Sprite* sprite = static_cast<ee::Sprite*>(object);
 	Body* body = static_cast<Body*>(sprite->GetUserData());
 	DrawUtils::DrawBody(body, DrawUtils::e_selected);

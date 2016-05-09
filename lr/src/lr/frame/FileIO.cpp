@@ -63,7 +63,7 @@ void FileIO::Load(const char* filename, LibraryPanel* library,
 			  y = value["camera"]["y"].asDouble();
 		ee::OrthoCamera* cam = static_cast<ee::OrthoCamera*>(ee::CameraMgr::Instance()->GetCamera());
 		cam->SetScale(s);
-		cam->SetPosition(ee::Vector(x, y));
+		cam->SetPosition(sm::vec2(x, y));
 		cam->UpdateModelView();
 	}
 

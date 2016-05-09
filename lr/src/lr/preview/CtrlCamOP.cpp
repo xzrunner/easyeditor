@@ -45,7 +45,7 @@ void CtrlCamOP::OffsetCamera(float dx, float dy)
 	SettingCfg* cfg = SettingCfg::Instance();
 	if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) {
 		ee::OrthoCamera* cam = static_cast<ee::OrthoCamera*>(ee::CameraMgr::Instance()->GetCamera());
-		cam->Translate(ee::Vector(dx, dy));
+		cam->Translate(sm::vec2(dx, dy));
 	}
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }

@@ -7,7 +7,9 @@
 #include <ee/Cloneable.h>
 #include <ee/Color.h>
 
-namespace ee { class Symbol; class Vector; class Rect; class RenderParams; }
+#include <SM_Vector.h>
+
+namespace ee { class Symbol; class Rect; class RenderParams; }
 
 namespace emesh
 {
@@ -35,7 +37,7 @@ public:
 	virtual void Update() {}
 	virtual void Refresh() {}
 
-	Node* PointQueryNode(const ee::Vector& p);
+	Node* PointQueryNode(const sm::vec2& p);
 	void RectQueryNodes(const ee::Rect& r, std::vector<Node*>& nodes);
 
 	const ee::Symbol* GetBaseSymbol() const { return m_base; }

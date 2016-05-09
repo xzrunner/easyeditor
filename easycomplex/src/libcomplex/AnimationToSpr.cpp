@@ -127,8 +127,8 @@ void AnimationToSpr::TransSpriteMat(ee::Sprite* spr, const erespacker::PackAnima
 	}
 	spr->SetMirror(xmirror, ymirror);
 
-	spr->SetScale(ee::Vector(sx, sy));
-	spr->SetTransform(ee::Vector(dx, dy), angle);
+	spr->SetScale(sm::vec2(sx, sy));
+	spr->SetTransform(sm::vec2(dx, dy), angle);
 }
 
 void AnimationToSpr::TransSpriteCol(ee::Sprite* spr, const erespacker::PackAnimation::SpriteTrans& t)

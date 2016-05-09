@@ -254,7 +254,7 @@ void RightPopupMenu::OnSelected(int x, int y)
 	m_selected_sprs.clear();
 	m_edited_sprs.clear();
 
-	Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 
 	PointMultiQueryVisitor visitor_selected(pos);
 	m_selection->Traverse(visitor_selected);

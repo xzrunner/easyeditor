@@ -2,7 +2,8 @@
 #define _EASYEDITOR_SHEAR_SPRITE_AOP_H_
 
 #include "AtomicOP.h"
-#include "Vector.h"
+
+#include <SM_Vector.h>
 
 namespace ee
 {
@@ -10,8 +11,8 @@ namespace ee
 class ShearSpriteAOP : public AtomicOP
 {
 public:
-	ShearSpriteAOP(Sprite* sprite, const Vector& new_shear, 
-		const Vector& old_shear);
+	ShearSpriteAOP(Sprite* sprite, const sm::vec2& new_shear, 
+		const sm::vec2& old_shear);
 	virtual ~ShearSpriteAOP();
 
 	virtual void Undo();
@@ -22,7 +23,7 @@ public:
 private:
 	std::vector<Sprite*> m_sprites;
 
-	Vector m_old_shear, m_new_shear;
+	sm::vec2 m_old_shear, m_new_shear;
 
 }; // ShearSpriteAOP 
 

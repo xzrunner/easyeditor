@@ -56,7 +56,7 @@ void RenderContextStack::Pop()
 	ScreenCache::Instance()->SetSize(width, height);
 }
 
-void RenderContextStack::SetModelView(const Vector& offset, float scale)
+void RenderContextStack::SetModelView(const sm::vec2& offset, float scale)
 {
 	if (m_curr_ctx) {
 		m_curr_ctx->SetModelView(offset, scale);
@@ -80,7 +80,7 @@ void RenderContextStack::SetProjection(int width, int height)
 	}
 }
 
-bool RenderContextStack::GetModelView(Vector& offset, float& scale) const
+bool RenderContextStack::GetModelView(sm::vec2& offset, float& scale) const
 {
 	if (!m_curr_ctx) {
 		return false;

@@ -69,7 +69,7 @@ void StageCanvas::DrawSprBound() const
 
 	sm::mat4 mt;
 	m_edited->GetTransMatrix(mt);
-	ee::Vector min(-hw, -hh), max(hw, hh);
+	sm::vec2 min(-hw, -hh), max(hw, hh);
 	min = ee::Math2D::TransVector(min, mt);
 	max = ee::Math2D::TransVector(max, mt);
 

@@ -13,11 +13,11 @@ namespace ecomplex
 class SphereRotateState : public ee::ArrangeSpriteState
 {
 public:
-	SphereRotateState(ee::EditPanelImpl* stage, const ee::Vector& first_pos,
+	SphereRotateState(ee::EditPanelImpl* stage, const sm::vec2& first_pos,
 		sm::Quaternion& dir);
 
-	virtual void OnMouseRelease(const ee::Vector& pos);
-	virtual bool OnMouseDrag(const ee::Vector& pos);
+	virtual void OnMouseRelease(const sm::vec2& pos);
+	virtual bool OnMouseDrag(const sm::vec2& pos);
 
 private:
 	sm::vec3 MapToSphere(int x, int y);

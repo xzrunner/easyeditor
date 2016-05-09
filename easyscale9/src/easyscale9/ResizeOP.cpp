@@ -43,7 +43,7 @@ bool ResizeOP::OnMouseDrag(int x, int y)
 	{
 		float width, height;
 
-		ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 
 		Scale9Type type = symbol->GetScale9Data().GetType();
 		if (type == e_9Grid || 

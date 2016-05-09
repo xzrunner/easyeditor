@@ -135,10 +135,10 @@ void StageCanvas::DrawRegion() const
 	ee::RVG::LineWidth(2);
 
 	ee::RVG::Color(ee::LIGHT_GREY);
-	ee::RVG::Rect(ee::Vector(0, 0), cfg->m_map_width * 0.5f, cfg->m_map_height * 0.5f, false);
+	ee::RVG::Rect(sm::vec2(0, 0), cfg->m_map_width * 0.5f, cfg->m_map_height * 0.5f, false);
 
 	ee::RVG::Color(ee::LIGHT_RED);
-	ee::RVG::Rect(ee::Vector(cfg->m_view_dx, cfg->m_view_dy), cfg->m_view_width * 0.5f, cfg->m_view_height * 0.5f, false);
+	ee::RVG::Rect(sm::vec2(cfg->m_view_dx, cfg->m_view_dy), cfg->m_view_width * 0.5f, cfg->m_view_height * 0.5f, false);
 
 	DrawPseudo3dBound();
 
@@ -152,9 +152,9 @@ void StageCanvas::DrawPseudo3dBound() const
 		ee::Camera* cam = static_cast<ee::Camera*>(ee::CameraMgr::Instance()->GetCamera());
 		int w, h;
 		ee::ScreenCache::Instance()->GetSize(w, h);
-//		ee::Vector center_world(0, 0);
-//		ee::Vector center_screen = cam->TransPosProjectToScreen(center_world, w, h);
-		ee::Vector center_screen(w * 0.5f, h * 0.5f);
+//		sm::vec2 center_world(0, 0);
+//		sm::vec2 center_screen = cam->TransPosProjectToScreen(center_world, w, h);
+		sm::vec2 center_screen(w * 0.5f, h * 0.5f);
 
 		m_bound_pseudo3d.clear();
 		m_bound_pseudo3d.push_back(cam->TransPosScreenToProject(center_screen.x - ee::HALF_SCREEN_HEIGHT, center_screen.y - ee::HALF_SCREEN_WIDTH, w, h));

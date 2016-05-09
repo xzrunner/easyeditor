@@ -31,7 +31,7 @@ StageCanvas2D::~StageCanvas2D()
 {
 }
 
-void StageCanvas2D::OnMousePressed(const ee::Vector& pos)
+void StageCanvas2D::OnMousePressed(const sm::vec2& pos)
 {
 	m_start_time = clock();
 
@@ -40,7 +40,7 @@ void StageCanvas2D::OnMousePressed(const ee::Vector& pos)
 	if (shader && sprite) {
 		ee::ShaderMgr::Instance()->SetShader(ee::ShaderMgr::SPRITE);
 
-		ee::Vector center = sprite->GetCenter();
+		sm::vec2 center = sprite->GetCenter();
 		ee::Rect r = sprite->GetSymbol().GetSize();
 		float x = (pos.x - center.x) / r.Width() + 0.5f,
 			  y = (pos.y - center.y) / r.Width() + 0.5f;
@@ -58,7 +58,7 @@ void StageCanvas2D::OnDrawSprites() const
 void StageCanvas2D::DrawBackground() const
 {
 	ee::RVG::Color(ee::LIGHT_RED);
-	ee::RVG::Rect(ee::Vector(0, 0), ee::HALF_SCREEN_WIDTH, ee::HALF_SCREEN_HEIGHT, false);
+	ee::RVG::Rect(sm::vec2(0, 0), ee::HALF_SCREEN_WIDTH, ee::HALF_SCREEN_HEIGHT, false);
 }
 
 void StageCanvas2D::DrawSprites() const

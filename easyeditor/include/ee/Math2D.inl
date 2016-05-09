@@ -1,7 +1,6 @@
 #ifndef _EASYEDITOR_MATH2D_INL_
 #define _EASYEDITOR_MATH2D_INL_
 
-#include "Vector.h"
 #include "Rect.h"
 
 #include <sm_const.h>
@@ -20,14 +19,14 @@ bool Math2D::IsBetween(float bound0, float bound1, float test)
 }
 
 inline
-bool Math2D::IsTheSamePos(const Vector& p0, const Vector& p1, const float tolerance)
+bool Math2D::IsTheSamePos(const sm::vec2& p0, const sm::vec2& p1, const float tolerance)
 {
 	return fabs(p0.x - p1.x) <= tolerance
 		&& fabs(p0.y - p1.y) <= tolerance;
 }
 
 inline
-bool Math2D::IsPointAtSegmentLeft(const Vector& p, const Vector& s, const Vector& e)
+bool Math2D::IsPointAtSegmentLeft(const sm::vec2& p, const sm::vec2& s, const sm::vec2& e)
 {
 	return (p.y - s.y) * (e.x - s.x) - (p.x - s.x) * (e.y - s.y) > FLT_EPSILON;
 }
@@ -46,20 +45,20 @@ bool Math2D::IsRectContainRect(const Rect& r0, const Rect& r1)
 }
 
 inline
-bool Math2D::IsSegmentIntersectRect(const Vector& b, const Vector& e, const Rect& aabb)
+bool Math2D::IsSegmentIntersectRect(const sm::vec2& b, const sm::vec2& e, const Rect& aabb)
 {
 	return IsSegmentIntersectRect(b.x, b.y, e.x, e.y, aabb.xmin, aabb.ymin, aabb.xmax, aabb.ymax);
 }
 
 inline
-bool Math2D::IsPointInRect(const Vector& pos, const Rect& aabb)
+bool Math2D::IsPointInRect(const sm::vec2& pos, const Rect& aabb)
 {
 	return pos.x > aabb.xmin && pos.x < aabb.xmax
 		&& pos.y > aabb.ymin && pos.y < aabb.ymax;
 }
 
 inline
-bool Math2D::IsPointInRect(const Vector& pos, const Vector& center, float hw, float hh)
+bool Math2D::IsPointInRect(const sm::vec2& pos, const sm::vec2& center, float hw, float hh)
 {
 	return pos.x > center.x - hw && pos.x < center.x + hw 
 		&& pos.y > center.y - hh && pos.y < center.y + hh;
@@ -86,19 +85,19 @@ float Math2D::FindYOnSeg(float x1, float y1, float x2, float y2, float x)
 }
 
 inline
-float Math2D::FindXOnSeg(const Vector& b, const Vector& e, float y)
+float Math2D::FindXOnSeg(const sm::vec2& b, const sm::vec2& e, float y)
 {
 	return FindXOnSeg(b.x, b.y, e.x, e.y, y);
 }
 
 inline
-float Math2D::FindYOnSeg(const Vector& b, const Vector& e, float x)
+float Math2D::FindYOnSeg(const sm::vec2& b, const sm::vec2& e, float x)
 {
 	return FindYOnSeg(b.x, b.y, e.x, e.y, x);
 }
 
 inline
-float Math2D::GetDistance(const Vector& p0, const Vector& p1)
+float Math2D::GetDistance(const sm::vec2& p0, const sm::vec2& p1)
 {
 	const float dx = p0.x - p1.x,
 		dy = p0.y - p1.y;
@@ -106,7 +105,7 @@ float Math2D::GetDistance(const Vector& p0, const Vector& p1)
 }
 
 inline
-float Math2D::GetDistanceSquare(const Vector& p0, const Vector& p1)
+float Math2D::GetDistanceSquare(const sm::vec2& p0, const sm::vec2& p1)
 {
 	const float dx = p0.x - p1.x,
 		dy = p0.y - p1.y;
@@ -114,9 +113,9 @@ float Math2D::GetDistanceSquare(const Vector& p0, const Vector& p1)
 }
 
 inline
-Vector Math2D::GetTriGravityCenter(const Vector& p0, const Vector& p1, const Vector& p2)
+sm::vec2 Math2D::GetTriGravityCenter(const sm::vec2& p0, const sm::vec2& p1, const sm::vec2& p2)
 {
-	return Vector((p0.x + p1.x + p2.x) / 3, (p0.y + p1.y + p2.y) / 3);
+	return sm::vec2((p0.x + p1.x + p2.x) / 3, (p0.y + p1.y + p2.y) / 3);
 }
 
 inline
@@ -126,7 +125,7 @@ int Math2D::GetNextIdxInRing(int sz, int curr, int step)
 }
 
 inline
-bool Math2D::IsTwoPointsSame(const Vector& p0, const Vector& p1) 
+bool Math2D::IsTwoPointsSame(const sm::vec2& p0, const sm::vec2& p1) 
 {
 	return fabs(p0.x - p1.x) < SM_RAD_TO_DEG
 		&& fabs(p0.y - p1.y) < SM_RAD_TO_DEG;

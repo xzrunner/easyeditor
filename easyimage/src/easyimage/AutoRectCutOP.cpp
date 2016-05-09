@@ -45,7 +45,7 @@ bool AutoRectCutOP::OnMouseRightDown(int x, int y)
 {
 	if (ee::ZoomViewOP::OnMouseRightDown(x, y)) return true;
 
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	bool removed = m_rects.Remove(pos);
 	if (removed) {
 		m_selected = NULL;
@@ -61,7 +61,7 @@ bool AutoRectCutOP::OnMouseDrag(int x, int y)
 
 	if (m_selected)
 	{
-		ee::Vector curr = m_stage->TransPosScrToProj(x, y);
+		sm::vec2 curr = m_stage->TransPosScrToProj(x, y);
 		m_rects.MoveRect(m_selected, m_last_pos, curr);
 		m_last_pos = curr;
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -74,7 +74,7 @@ bool AutoRectCutOP::OnMouseLeftDClick(int x, int y)
 {
 	if (ee::ZoomViewOP::OnMouseLeftDClick(x, y)) return true;
 
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	ee::Rect* r = m_rects.QueryRect(pos);
 	if (r) {
 		m_rects.Insert(ee::Rect(*r), true);
@@ -90,13 +90,13 @@ bool AutoRectCutOP::OnDraw() const
 	if (ee::ZoomViewOP::OnDraw()) return true;
 
 	ee::RVG::Color(ee::Colorf(1, 0, 0));
-	ee::RVG::Cross(ee::Vector(0, 0), 100, 100);
+	ee::RVG::Cross(sm::vec2(0, 0), 100, 100);
 
 	m_rects.Draw();
 
 	if (m_selected) {
 		ee::RVG::Color(ee::LIGHT_GREEN);
-		ee::RVG::Rect(ee::Vector(m_selected->xmin, m_selected->ymin), ee::Vector(m_selected->xmax, m_selected->ymax), true);
+		ee::RVG::Rect(sm::vec2(m_selected->xmin, m_selected->ymin), sm::vec2(m_selected->xmax, m_selected->ymax), true);
 	}
 
 	return false;

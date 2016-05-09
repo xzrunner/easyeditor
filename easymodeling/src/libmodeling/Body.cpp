@@ -27,7 +27,7 @@ Body::~Body()
 	m_fixtures.clear();
 }
 
-bool Body::IsContain(const ee::Vector& pos) const
+bool Body::IsContain(const sm::vec2& pos) const
 {
 	for (size_t i = 0, n = m_fixtures.size(); i < n; ++i)
 		if (m_fixtures[i]->IsContain(pos))

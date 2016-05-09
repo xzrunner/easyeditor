@@ -46,7 +46,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 {
 	if (ee::SelectSpritesOP::OnMouseLeftDClick(x, y)) return true;
 
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	ee::Sprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
 	if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(selected))
 	{

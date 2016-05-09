@@ -173,7 +173,7 @@ void PackAnimation::LoadSprMat(const ee::Sprite* spr, SpriteTrans& trans, bool f
 	mat[1] = mat[2] = mat[4] = mat[5] = 0;
 	mat[0] = mat[3] = 1;
 
-	ee::Vector center = spr->GetCenter();
+	sm::vec2 center = spr->GetCenter();
 
 	bool xmir, ymir;
 	spr->GetMirror(xmir, ymir);

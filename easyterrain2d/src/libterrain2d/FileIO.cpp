@@ -44,7 +44,7 @@ OceanMesh* FileIO::LoadOceanMesh(const std::string& dir, const Json::Value& valu
 		return NULL;
 	}
 
-	std::vector<ee::Vector> bounding;
+	std::vector<sm::vec2> bounding;
 	ee::JsonSerializer::Load(value["bound"], bounding);
 	eshape::PolygonShape* shape = new eshape::PolygonShape(bounding);
 
@@ -67,7 +67,7 @@ OceanMesh* FileIO::LoadOceanMesh(const std::string& dir, const Json::Value& valu
 	ocean->OpenUVMove(value["uv_move"]["open"].asBool());
 	float x = value["uv_move"]["speed"]["x"].asDouble() * 0.01f,
 		y = value["uv_move"]["speed"]["y"].asDouble() * 0.01f;
-	ocean->SetTexcoordsSpeed(ee::Vector(x, y));
+	ocean->SetTexcoordsSpeed(sm::vec2(x, y));
 
 	ocean->OpenBlend(value["tex_blend"]["open"].asBool());
 	ocean->SetBlendSpeed(value["tex_blend"]["speed"].asDouble() * 0.01f);

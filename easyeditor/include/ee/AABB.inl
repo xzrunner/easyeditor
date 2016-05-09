@@ -57,7 +57,7 @@ void AABB::SetMirror(bool xmirror, bool ymirror)
 }
 
 inline 
-void AABB::Combine(const Vector& pos)
+void AABB::Combine(const sm::vec2& pos)
 {
 	m_rect.Combine(pos - m_position);
 }
@@ -89,20 +89,20 @@ float AABB::Height() const
 }
 
 inline
-Vector AABB::Center() const
+sm::vec2 AABB::Center() const
 {
 	return m_position;
 }
 
 inline
-void AABB::GetBoundPos(std::vector<Vector>& bound) const
+void AABB::GetBoundPos(std::vector<sm::vec2>& bound) const
 {
 	if (m_rect.IsValid()) {
 		bound.clear();
-		bound.push_back(Vector(m_rect.xmin, m_rect.ymin) + m_position);
-		bound.push_back(Vector(m_rect.xmax, m_rect.ymin) + m_position);
-		bound.push_back(Vector(m_rect.xmax, m_rect.ymax) + m_position);
-		bound.push_back(Vector(m_rect.xmin, m_rect.ymax) + m_position);
+		bound.push_back(sm::vec2(m_rect.xmin, m_rect.ymin) + m_position);
+		bound.push_back(sm::vec2(m_rect.xmax, m_rect.ymin) + m_position);
+		bound.push_back(sm::vec2(m_rect.xmax, m_rect.ymax) + m_position);
+		bound.push_back(sm::vec2(m_rect.xmin, m_rect.ymax) + m_position);
 	}
 }
 

@@ -42,9 +42,9 @@ void StagePanel::TraverseSprites(ee::Visitor& visitor, ee::DataTraverseType type
 	m_checkboard.Traverse(visitor);
 }
 
-void StagePanel::TransCoordsToGridPos(const ee::Vector& pos, int& row, int& col) const
+void StagePanel::TransCoordsToGridPos(const sm::vec2& pos, int& row, int& col) const
 {
-	ee::Vector p;
+	sm::vec2 p;
 	if (m_is_flat) {
 		p = pos;
 	} else {
@@ -54,7 +54,7 @@ void StagePanel::TransCoordsToGridPos(const ee::Vector& pos, int& row, int& col)
 	row = std::max(0.0f, std::min(p.y / m_edge, (float)(m_row - 1)));
 }
 
-void StagePanel::TransGridPosToCoords(int row, int col, ee::Vector& pos) const
+void StagePanel::TransGridPosToCoords(int row, int col, sm::vec2& pos) const
 {
 	pos.x = m_edge * col + m_edge * 0.5f;
 	pos.y = m_edge * row + m_edge * 0.5f;
@@ -63,9 +63,9 @@ void StagePanel::TransGridPosToCoords(int row, int col, ee::Vector& pos) const
 	}
 }
 
-void StagePanel::TransCoordsToGridPosNew(const ee::Vector& pos, int& row, int& col) const
+void StagePanel::TransCoordsToGridPosNew(const sm::vec2& pos, int& row, int& col) const
 {
-	ee::Vector p;
+	sm::vec2 p;
 	if (m_is_flat) {
 		p = pos;
 	} else {
@@ -79,7 +79,7 @@ void StagePanel::TransCoordsToGridPosNew(const ee::Vector& pos, int& row, int& c
 	row = ROW - 1 - row;
 }
 
-void StagePanel::TransGridPosToCoordsNew(int row, int col, ee::Vector& pos) const
+void StagePanel::TransGridPosToCoordsNew(int row, int col, sm::vec2& pos) const
 {
 	pos.x = m_edge * (COL - 1 - col) + m_edge * 0.5f;
 	pos.y = m_edge * (ROW - 1 - row) + m_edge * 0.5f;
@@ -114,7 +114,7 @@ void StagePanel::SetPerspective(bool is_flat)
 		TransCoordsToGridPos(sprite->GetPosition(), row, col);
 		m_is_flat = !m_is_flat;
 
-		ee::Vector pos;
+		sm::vec2 pos;
 		TransGridPosToCoords(row, col, pos);
 		m_is_flat = !m_is_flat;
 
@@ -205,12 +205,12 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 	}
 }
 
-ee::Vector StagePanel::FixSpriteLocation(const ee::Vector& pos) const
+sm::vec2 StagePanel::FixSpriteLocation(const sm::vec2& pos) const
 {
 	int row, col;
 	TransCoordsToGridPos(pos, row, col);
 
-	ee::Vector ret;
+	sm::vec2 ret;
 	TransGridPosToCoords(row, col, ret);
 	return ret;
 }

@@ -26,14 +26,14 @@ void SpriteBlend::Draw(const Sprite* spr, const sm::mat4& mt)
 
 	RenderContextStack* rc = RenderContextStack::Instance();
 
-	Vector ori_offset;
+	sm::vec2 ori_offset;
 	float ori_scale;
 	rc->GetModelView(ori_offset, ori_scale);
 
 	int ori_width, ori_height;
 	rc->GetProjection(ori_width, ori_height);
 
-	rc->SetModelView(Vector(0, 0), 1);
+	rc->SetModelView(sm::vec2(0, 0), 1);
 	int edge = dtexf_c1_get_texture_size();
 	rc->SetProjection(edge, edge);
 	GL::Viewport(0, 0, edge, edge);
@@ -78,16 +78,16 @@ void SpriteBlend::DrawTmpToScreen(const Sprite* sprite, const sm::mat4& mt)
 
 	Rect r = sprite->GetSymbol().GetSize();
 
-	Vector vertices[4];
-	vertices[0] = Vector(r.xmin, r.ymin);
-	vertices[1] = Vector(r.xmin, r.ymax);
-	vertices[2] = Vector(r.xmax, r.ymax);
-	vertices[3] = Vector(r.xmax, r.ymin);
+	sm::vec2 vertices[4];
+	vertices[0] = sm::vec2(r.xmin, r.ymin);
+	vertices[1] = sm::vec2(r.xmin, r.ymax);
+	vertices[2] = sm::vec2(r.xmax, r.ymax);
+	vertices[3] = sm::vec2(r.xmax, r.ymin);
 	for (int i = 0; i < 4; ++i) {
 		vertices[i] = Math2D::TransVector(vertices[i], t);
 	}
 
-	Vector texcoords[4];
+	sm::vec2 texcoords[4];
 	int edge = dtexf_c1_get_texture_size();
 	for (int i = 0; i < 4; ++i) {
 		texcoords[i] = vertices[i] - sprite->GetPosition();

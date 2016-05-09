@@ -2,7 +2,8 @@
 #define _EASYSCALE9_RESIZE_BASE_OP_H_
 
 #include <ee/ZoomViewOP.h>
-#include <ee/Vector.h>
+
+#include <SM_Vector.h>
 
 namespace escale9
 {
@@ -42,7 +43,7 @@ protected:
 private:
 	mutable Symbol* m_symbol;
 
-	ee::Vector m_firstPos;
+	sm::vec2 m_firstPos;
 
 }; // ResizeBaseOP
 

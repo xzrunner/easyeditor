@@ -6,8 +6,8 @@
 namespace ee
 {
 
-void ConvexHull::Do(const std::vector<Vector>& points, 
-					std::vector<Vector>& convex_hull)
+void ConvexHull::Do(const std::vector<sm::vec2>& points, 
+					std::vector<sm::vec2>& convex_hull)
 {
 	convex_hull.clear();
 
@@ -25,10 +25,10 @@ void ConvexHull::Do(const std::vector<Vector>& points,
 		return;
 	}
 
-	std::vector<Vector> sorted(points);
-	sort(sorted.begin(), sorted.end(), VectorCmpX());
+	std::vector<sm::vec2> sorted(points);
+	sort(sorted.begin(), sorted.end(), sm::Vector2CmpX());
 
-	std::vector<Vector> upper, lower;
+	std::vector<sm::vec2> upper, lower;
 	upper.reserve(points.size());
 	lower.reserve(points.size());
 	upper.push_back(sorted[0]);

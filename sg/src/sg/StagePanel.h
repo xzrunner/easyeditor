@@ -26,11 +26,11 @@ public:
 	virtual void TraverseSprites(ee::Visitor& visitor, 
 		ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
 
-	void TransCoordsToGridPos(const ee::Vector& pos, int& row, int& col) const;
-	void TransGridPosToCoords(int row, int col, ee::Vector& pos) const;
+	void TransCoordsToGridPos(const sm::vec2& pos, int& row, int& col) const;
+	void TransGridPosToCoords(int row, int col, sm::vec2& pos) const;
 
-	void TransCoordsToGridPosNew(const ee::Vector& pos, int& row, int& col) const;
-	void TransGridPosToCoordsNew(int row, int col, ee::Vector& pos) const;
+	void TransCoordsToGridPosNew(const sm::vec2& pos, int& row, int& col) const;
+	void TransGridPosToCoordsNew(int row, int col, sm::vec2& pos) const;
 
 	void UpdateAllSpritesLocation();
 
@@ -65,7 +65,7 @@ protected:
 	virtual void OnNotify(int sj_id, void* ud);
 
 private:
-	ee::Vector FixSpriteLocation(const ee::Vector& pos) const;
+	sm::vec2 FixSpriteLocation(const sm::vec2& pos) const;
 
 	void ChangeSymbolRemain(ee::Sprite* sprite, bool increase) const;
 

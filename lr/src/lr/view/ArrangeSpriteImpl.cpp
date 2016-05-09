@@ -76,7 +76,7 @@ void ArrangeSpriteImpl::SetRightPopupMenu(wxMenu& menu, int x, int y)
 }
 
 ee::ArrangeSpriteState* ArrangeSpriteImpl::
-CreateRotateState(ee::SpriteSelection* selection, const ee::Vector& first_pos) const
+CreateRotateState(ee::SpriteSelection* selection, const sm::vec2& first_pos) const
 {
 	std::vector<ee::Sprite*> sprites;
 	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
@@ -92,7 +92,7 @@ CreateRotateState(ee::SpriteSelection* selection, const ee::Vector& first_pos) c
 //////////////////////////////////////////////////////////////////////////
 
 ArrangeSpriteImpl::RotateSpriteState::
-RotateSpriteState(ee::SpriteSelection* selection, const ee::Vector& first_pos,
+RotateSpriteState(ee::SpriteSelection* selection, const sm::vec2& first_pos,
 				  CharacterAllDirections* dirs)
 	: ee::RotateSpriteState(selection, first_pos)
 	, m_dirs(dirs)
@@ -100,7 +100,7 @@ RotateSpriteState(ee::SpriteSelection* selection, const ee::Vector& first_pos,
 }
 
 void ArrangeSpriteImpl::RotateSpriteState::
-Rotate(const ee::Vector& dst)
+Rotate(const sm::vec2& dst)
 {
 	std::vector<ee::Sprite*> sprs;
 	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
@@ -109,7 +109,7 @@ Rotate(const ee::Vector& dst)
 		ee::Sprite* spr = sprs[i];
 		std::string filepath = spr->GetSymbol().GetFilepath();
 		if (!CharacterFileName::IsValidFilepath(filepath)) {
-			ee::Vector center = spr->GetPosition() + spr->GetOffset();
+			sm::vec2 center = spr->GetPosition() + spr->GetOffset();
 			float angle = ee::Math2D::GetAngleInDirection(center, m_last_pos, dst);
 			spr->Rotate(angle);
 		}

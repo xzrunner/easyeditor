@@ -27,17 +27,17 @@ protected:
 	virtual void SetRightPopupMenu(wxMenu& menu, int x, int y);
 
 	virtual ee::ArrangeSpriteState* CreateRotateState(ee::SpriteSelection* selection, 
-		const ee::Vector& first_pos) const;
+		const sm::vec2& first_pos) const;
 
 private:
 	class RotateSpriteState : public ee::RotateSpriteState
 	{
 	public:
-		RotateSpriteState(ee::SpriteSelection* selection, const ee::Vector& first_pos,
+		RotateSpriteState(ee::SpriteSelection* selection, const sm::vec2& first_pos,
 			CharacterAllDirections* dirs);
 
 	protected:
-		virtual void Rotate(const ee::Vector& dst);
+		virtual void Rotate(const sm::vec2& dst);
 
 	private:
 		static int GetAnglePos(float angle);

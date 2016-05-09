@@ -68,7 +68,7 @@ void FileIO::LoadFromEasypackerFile(const char* filename)
 		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 		symbol->Release();
 
-		ee::Vector pos;
+		sm::vec2 pos;
 		pos.x = tex.region.left + tex.region.width * 0.5f;
 		pos.y = tex.region.low + tex.region.height * 0.5f;
 		if (tex.bRotate)
@@ -114,7 +114,7 @@ void FileIO::LoadFromTexPackerFile(const char* filename)
 
 		int width = frame_val["sourceSize"]["w"].asInt();
 		int height = frame_val["sourceSize"]["h"].asInt();
-		ee::Vector pos;
+		sm::vec2 pos;
 		float angle = 0;
 		if (frame_val["rotated"].asBool())
 		{
@@ -182,7 +182,7 @@ void FileIO::StoreImage(const char* filename)
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
 		ee::Sprite* sprite = sprites[i];
-		const ee::Vector& center = sprite->GetPosition();
+		const sm::vec2& center = sprite->GetPosition();
 
 		float sw, sh;
 		if (sprite->GetAngle() == 0)
@@ -340,7 +340,7 @@ void FileIO::StoreTexpackerPosition(const char* filename)
 // 			val["spriteSourceSize"]["x"] = r.xmin + 0.5f * img->GetOriginWidth();
 // 			val["spriteSourceSize"]["y"] = img->GetOriginHeight() - (r.ymax + 0.5f * img->GetOriginHeight());
 // 			
-// 			const ee::Vector& pos = sprite->GetPosition();
+// 			const sm::vec2& pos = sprite->GetPosition();
 // 			val["frame"]["x"] = pos.x + r.xmin;
 // 			val["frame"]["y"] = Context::Instance()->height - (pos.y + r.ymax);
 // 
@@ -363,7 +363,7 @@ Json::Value FileIO::Store(const ee::Sprite* sprite)
 	const ee::Symbol& symbol = sprite->GetSymbol();
 	const float w = symbol.GetSize().Width(),
 		h = symbol.GetSize().Height();
-	const ee::Vector& pos = sprite->GetPosition();
+	const sm::vec2& pos = sprite->GetPosition();
 
 	bool bRotate = sprite->GetAngle() != 0;
 	float left, low, width, height;

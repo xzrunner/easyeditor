@@ -38,17 +38,17 @@ void AnchorMgr::OnViewChanged(int width, int height)
 	float hw = width * 0.5f,
 		  hh = height * 0.5f;
 
-	ChangeAnchorPos(m_anchors[0], ee::Vector(-hw, hh));
-	ChangeAnchorPos(m_anchors[1], ee::Vector(0.0f, hh));
-	ChangeAnchorPos(m_anchors[2], ee::Vector(hw, hh));
+	ChangeAnchorPos(m_anchors[0], sm::vec2(-hw, hh));
+	ChangeAnchorPos(m_anchors[1], sm::vec2(0.0f, hh));
+	ChangeAnchorPos(m_anchors[2], sm::vec2(hw, hh));
 
-	ChangeAnchorPos(m_anchors[3], ee::Vector(-hw, 0.0f));
-	ChangeAnchorPos(m_anchors[4], ee::Vector(0.0f, 0.0f));
-	ChangeAnchorPos(m_anchors[5], ee::Vector(hw, 0.0f));
+	ChangeAnchorPos(m_anchors[3], sm::vec2(-hw, 0.0f));
+	ChangeAnchorPos(m_anchors[4], sm::vec2(0.0f, 0.0f));
+	ChangeAnchorPos(m_anchors[5], sm::vec2(hw, 0.0f));
 
-	ChangeAnchorPos(m_anchors[6], ee::Vector(-hw, -hh));
-	ChangeAnchorPos(m_anchors[7], ee::Vector(0.0f, -hh));
-	ChangeAnchorPos(m_anchors[8], ee::Vector(hw, -hh));
+	ChangeAnchorPos(m_anchors[6], sm::vec2(-hw, -hh));
+	ChangeAnchorPos(m_anchors[7], sm::vec2(0.0f, -hh));
+	ChangeAnchorPos(m_anchors[8], sm::vec2(hw, -hh));
 }
 
 void AnchorMgr::OnSprPosChanged(ee::Sprite* spr)
@@ -156,7 +156,7 @@ void AnchorMgr::Clear()
 	}
 }
 
-void AnchorMgr::ChangeAnchorPos(Anchor& anchor, const ee::Vector& pos)
+void AnchorMgr::ChangeAnchorPos(Anchor& anchor, const sm::vec2& pos)
 {
 	anchor.pos = pos;
 	for (int i = 0, n = anchor.sprites.size(); i < n; ++i) {

@@ -26,7 +26,7 @@ void ChangedRectIcon::StoreToFile(Json::Value& value) const
 	ee::JsonSerializer::Store(m_end, value["end"]);
 }
 
-void ChangedRectIcon::GetBound(float process, ee::Vector bound[4]) const
+void ChangedRectIcon::GetBound(float process, sm::vec2 bound[4]) const
 {
 	float xmin = m_begin.xmin + (m_end.xmin - m_begin.xmin) * process,
 		xmax = m_begin.xmax + (m_end.xmax - m_begin.xmax) * process,

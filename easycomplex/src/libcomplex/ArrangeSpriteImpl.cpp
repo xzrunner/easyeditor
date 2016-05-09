@@ -16,7 +16,7 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(StagePanel* stage, ee::PropertySettingPanel
 }
 
 ee::ArrangeSpriteState* ArrangeSpriteImpl::CreateRotateState(ee::SpriteSelection* selection, 
-															 const ee::Vector& first_pos) const
+															 const sm::vec2& first_pos) const
 {
 	std::vector<ee::Sprite*> sprites;
 	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));

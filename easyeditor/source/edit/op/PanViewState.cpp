@@ -11,8 +11,8 @@ namespace ee
 
 PanViewState::PanViewState(EditPanelImpl* stage)
 	: m_stage(stage)
+	, m_last_pos_valid(false)
 {
-	m_last_pos.SetInvalid();
 }
 
 PanViewState::~PanViewState()
@@ -32,22 +32,23 @@ void PanViewState::UnBind()
 bool PanViewState::OnMousePress(int x, int y)
 {
 	m_last_pos.Set(x, y);
+	m_last_pos_valid = true;
 	return false;
 }
 
 bool PanViewState::OnMouseRelease(int x, int y)
 {
-	m_last_pos.SetInvalid();
+	m_last_pos_valid = false;
 	return false;
 }
 
 bool PanViewState::OnMouseDrag(int x, int y)
 {
-	if (!m_last_pos.IsValid()) {
+	if (!m_last_pos_valid) {
 		return false;
 	}
 
-	Vector offset(m_last_pos.x - x, m_last_pos.y - y);
+	sm::vec2 offset(m_last_pos.x - x, m_last_pos.y - y);
 	offset.y = -offset.y;
 	if (CameraMgr::Instance()->IsType(CameraMgr::ORTHO)) {
 		OrthoCamera* cam = static_cast<OrthoCamera*>(CameraMgr::Instance()->GetCamera());
@@ -56,8 +57,8 @@ bool PanViewState::OnMouseDrag(int x, int y)
 		Pseudo3DCamera* cam = static_cast<Pseudo3DCamera*>(CameraMgr::Instance()->GetCamera());		
 		int w, h;
 		ScreenCache::Instance()->GetSize(w, h);
-		Vector last = cam->TransPosScreenToProject(m_last_pos.x, m_last_pos.y, w, h);
-		Vector curr = cam->TransPosScreenToProject(x, y, w, h);
+		sm::vec2 last = cam->TransPosScreenToProject(m_last_pos.x, m_last_pos.y, w, h);
+		sm::vec2 curr = cam->TransPosScreenToProject(x, y, w, h);
 		cam->Translate(sm::vec3(curr.x - last.x, curr.y - last.y, 0));
 	}
 

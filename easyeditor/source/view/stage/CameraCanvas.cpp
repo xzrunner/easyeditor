@@ -37,7 +37,7 @@ void CameraCanvas::OnSize(int w, int h)
 	//////////////////////////////////////////////////////////////////////////
 
 // 	glViewport(0, 0, w, h);
-// 	Vector scale;
+// 	sm::vec2 scale;
 // 	scale.x = scale.y = 1.0f / m_camera->getScale();
 // 	m_screen.SetSize(w, h);
 // 	m_screen.SetCamera(-m_camera->getCenter(), scale);

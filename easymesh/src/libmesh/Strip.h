@@ -37,10 +37,10 @@ public:
 	virtual void Reset();
 	virtual void Clear();
 
-	void InsertNode(const ee::Vector& p);
-	void RemoveNode(const ee::Vector& p);
-	ee::Vector* FindNode(const ee::Vector& p);
-	void MoveNode(ee::Vector* src, const ee::Vector& dst);
+	void InsertNode(const sm::vec2& p);
+	void RemoveNode(const sm::vec2& p);
+	sm::vec2* FindNode(const sm::vec2& p);
+	void MoveNode(sm::vec2* src, const sm::vec2& dst);
 
 	static const char* GetType() { return "strip"; }
 
@@ -50,43 +50,43 @@ private:
 	void RefreshTriangles();
 	void CopyTriangles(const Strip& strip);
 
-	void AbsorbNodeToRegion(ee::Vector& node);
+	void AbsorbNodeToRegion(sm::vec2& node);
 	void RemoveCornerFromNodes();
 
-	void GetTransList(std::vector<std::pair<ee::Vector, ee::Vector> >& trans_list) const;
+	void GetTransList(std::vector<std::pair<sm::vec2, sm::vec2> >& trans_list) const;
 
-	static void TranslateNode(Node* node, const std::vector<std::pair<ee::Vector, ee::Vector> >& trans_list);
-	static void TranslateNode(ee::Vector& node, const std::vector<std::pair<ee::Vector, ee::Vector> >& trans_list);
+	static void TranslateNode(Node* node, const std::vector<std::pair<sm::vec2, sm::vec2> >& trans_list);
+	static void TranslateNode(sm::vec2& node, const std::vector<std::pair<sm::vec2, sm::vec2> >& trans_list);
 
-	static void MapUV2XY(const std::vector<ee::Vector>& nodes, int index, const ee::Vector& pos, 
-		std::vector<std::pair<ee::Vector, ee::Vector> >& trans_list);
+	static void MapUV2XY(const std::vector<sm::vec2>& nodes, int index, const sm::vec2& pos, 
+		std::vector<std::pair<sm::vec2, sm::vec2> >& trans_list);
 
 private:
 	class NodeList
 	{
 	public:
-		void Reset(const ee::Vector& begin,
-			const ee::Vector& end);
+		void Reset(const sm::vec2& begin,
+			const sm::vec2& end);
 
-		void Insert(const ee::Vector& p);
+		void Insert(const sm::vec2& p);
 		void Remove(int idx);
 
-		int GetNodeInsertPos(const ee::Vector& p, ee::Vector& nearest);
+		int GetNodeInsertPos(const sm::vec2& p, sm::vec2& nearest);
 
-		int QueryIndex(const ee::Vector& p, float radius) const;
-		ee::Vector* QueryPointer(const ee::Vector& p, float radius);
+		int QueryIndex(const sm::vec2& p, float radius) const;
+		sm::vec2* QueryPointer(const sm::vec2& p, float radius);
 
-		bool IsRegionContain(const ee::Vector& p) const;
+		bool IsRegionContain(const sm::vec2& p) const;
 
 		int Size() const { return m_ori.size(); }
 
 		void Sort();
 
 	private:
-		static void Insert(std::vector<ee::Vector>& nodes, const ee::Vector& p);
+		static void Insert(std::vector<sm::vec2>& nodes, const sm::vec2& p);
 
 	public:
-		std::vector<ee::Vector> m_ori, m_ext;
+		std::vector<sm::vec2> m_ori, m_ext;
 
 	}; // NodeList
 

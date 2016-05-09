@@ -33,7 +33,7 @@ StagePanel::~StagePanel()
 	Clear();
 }
 
-ee::Sprite* StagePanel::QuerySpriteByPos(const ee::Vector& pos) const
+ee::Sprite* StagePanel::QuerySpriteByPos(const sm::vec2& pos) const
 {
 	ee::Sprite* result = NULL;
 	TraverseSprites(PointQueryVisitor(pos, &result), ee::DT_EDITABLE, false);
@@ -45,7 +45,7 @@ void StagePanel::QuerySpritesByRect(const ee::Rect& rect, std::vector<ee::Sprite
 	TraverseSprites(RectQueryVisitor(rect, result), ee::DT_EDITABLE);
 }
 
-Joint* StagePanel::queryJointByPos(const ee::Vector& pos) const
+Joint* StagePanel::queryJointByPos(const sm::vec2& pos) const
 {
 	for (size_t i = 0, n = m_joints.size(); i < n; ++i)
 		if (m_joints[i]->IsContain(pos))
@@ -136,17 +136,17 @@ void StagePanel::loadBody(const std::string& filepath, Body& body)
 		// 		}
 		// 		else if (eshape::RectShape* rect = dynamic_cast<eshape::RectShape*>(shapes[i]))
 		// 		{
-		// 			std::vector<ee::Vector> vertices(4);
-		//  			vertices[0] = ee::Vector(rect->m_rect.xmin, rect->m_rect.ymin);
-		//  			vertices[1] = ee::Vector(rect->m_rect.xmax, rect->m_rect.ymin);
-		//  			vertices[2] = ee::Vector(rect->m_rect.xmax, rect->m_rect.ymax);
-		//  			vertices[3] = ee::Vector(rect->m_rect.xmin, rect->m_rect.ymax);
+		// 			std::vector<sm::vec2> vertices(4);
+		//  			vertices[0] = sm::vec2(rect->m_rect.xmin, rect->m_rect.ymin);
+		//  			vertices[1] = sm::vec2(rect->m_rect.xmax, rect->m_rect.ymin);
+		//  			vertices[2] = sm::vec2(rect->m_rect.xmax, rect->m_rect.ymax);
+		//  			vertices[3] = sm::vec2(rect->m_rect.xmin, rect->m_rect.ymax);
 		// 
 		// 			fixture->shape = new eshape::ChainShape(vertices, true);
 		// 		}
 		// 		else if (eshape::CircleShape* circle = dynamic_cast<eshape::CircleShape*>(shapes[i]))
 		// 		{
-		// 			fixture->shape = new eshape::CircleShape(ee::Vector(), circle->radius);
+		// 			fixture->shape = new eshape::CircleShape(sm::vec2(), circle->radius);
 		// 		}
 		body.m_fixtures.push_back(fixture);
 
@@ -161,7 +161,7 @@ void StagePanel::loadBody(ee::Sprite* sprite, Body& body)
 
 	const float width = sprite->GetSymbol().GetSize().Width(),
 		height = sprite->GetSymbol().GetSize().Height();
-	fixture->m_shape = new eshape::RectShape(ee::Vector(0, 0), width * 0.5f, height * 0.5f);
+	fixture->m_shape = new eshape::RectShape(sm::vec2(0, 0), width * 0.5f, height * 0.5f);
 
 	body.m_fixtures.push_back(fixture);
 }
@@ -218,7 +218,7 @@ void StagePanel::Clear()
 //////////////////////////////////////////////////////////////////////////
 
 StagePanel::PointQueryVisitor::
-	PointQueryVisitor(const ee::Vector& pos, ee::Sprite** pResult)
+	PointQueryVisitor(const sm::vec2& pos, ee::Sprite** pResult)
 	: m_pos(pos)
 {
 	m_pResult = pResult;

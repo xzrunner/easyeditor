@@ -29,23 +29,23 @@ void Joint::DrawBodyFlag() const
 	DrawBodyFlag(m_body_b->m_sprite->GetPosition());
 }
 
-ee::Vector Joint::TransWorldToLocal(const ee::Vector& world, 
+sm::vec2 Joint::TransWorldToLocal(const sm::vec2& world, 
 									const ee::Sprite* sprite)
 {
 	return ee::Math2D::RotateVector(world - sprite->GetPosition(), -sprite->GetAngle());
 }
 
-ee::Vector Joint::TransLocalToWorld(const ee::Vector& local, 
+sm::vec2 Joint::TransLocalToWorld(const sm::vec2& local, 
 									const ee::Sprite* sprite)
 {
 	return ee::Math2D::RotateVector(local, sprite->GetAngle()) + sprite->GetPosition();
 }
 
-void Joint::DrawBodyFlag(const ee::Vector& pos) const
+void Joint::DrawBodyFlag(const sm::vec2& pos) const
 {
 	const float edge = 2.5f;
 
-	std::vector<ee::Vector> vertices(4, pos);
+	std::vector<sm::vec2> vertices(4, pos);
 	vertices[0].x -= edge;
 	vertices[1].x += edge;
 	vertices[2].y -= edge;

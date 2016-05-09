@@ -1,6 +1,5 @@
 #include "EE_GTxt.h"
 #include "Color.h"
-#include "Vector.h"
 #include "Math2D.h"
 #include "RenderColor.h"
 #include "Symbol.h"
@@ -44,16 +43,16 @@ render_glyph(int id, float* _texcoords, float x, float y, float w, float h, stru
 	y += ds->offset_y;
 	float hw = w * 0.5f * ds->scale, hh = h * 0.5f * ds->scale;
 
-	Vector vertices[4];
-	vertices[0] = Vector(x - hw, y + hh);
-	vertices[1] = Vector(x - hw, y - hh);
-	vertices[2] = Vector(x + hw, y - hh);
-	vertices[3] = Vector(x + hw, y + hh);
+	sm::vec2 vertices[4];
+	vertices[0] = sm::vec2(x - hw, y + hh);
+	vertices[1] = sm::vec2(x - hw, y - hh);
+	vertices[2] = sm::vec2(x + hw, y - hh);
+	vertices[3] = sm::vec2(x + hw, y + hh);
 	for (int i = 0; i < 4; ++i) {
 		vertices[i] = Math2D::TransVector(vertices[i], *rp->mt);
 	}
 
-	Vector texcoords[4];
+	sm::vec2 texcoords[4];
 	texcoords[0].Set(_texcoords[0], _texcoords[1]);
 	texcoords[1].Set(_texcoords[2], _texcoords[3]);
 	texcoords[2].Set(_texcoords[4], _texcoords[5]);
@@ -93,7 +92,7 @@ render_decoration(const sm::mat4& mat, float x, float y, float w, float h, struc
 	float hw = w * 0.5f,
 		  hh = h * 0.5f;
 	if (d->type == GRDT_OVERLINE || d->type == GRDT_UNDERLINE || d->type == GRDT_STRIKETHROUGH) {
-		Vector left(x - hw, y), right(x + hw, y);
+		sm::vec2 left(x - hw, y), right(x + hw, y);
 		switch (d->type) 
 		{
 		case GRDT_OVERLINE:
@@ -108,20 +107,20 @@ render_decoration(const sm::mat4& mat, float x, float y, float w, float h, struc
 		}
 		RVG::Line(Math2D::TransVector(left, mat), Math2D::TransVector(right, mat));
 	} else if (d->type == GRDT_BORDER || d->type == GRDT_BG) {
-		Vector min(x - hw, ds->row_y), 
+		sm::vec2 min(x - hw, ds->row_y), 
 			   max(x + hw, ds->row_y + ds->row_h);
 		min = Math2D::TransVector(min, mat);
 		max = Math2D::TransVector(max, mat);
 		if (d->type == GRDT_BG) {
 			RVG::Rect(min, max, true);
 		} else if (ds->pos_type != GRPT_NULL) {
-			RVG::Line(min, Vector(max.x, min.y));
-			RVG::Line(Vector(min.x, max.y), max);
+			RVG::Line(min, sm::vec2(max.x, min.y));
+			RVG::Line(sm::vec2(min.x, max.y), max);
 			if (ds->pos_type == GRPT_BEGIN) {
-				RVG::Line(min, Vector(min.x, max.y));
+				RVG::Line(min, sm::vec2(min.x, max.y));
 			}
 			if (ds->pos_type == GRPT_END) {
-				RVG::Line(Vector(max.x, min.y), max);
+				RVG::Line(sm::vec2(max.x, min.y), max);
 			}
 		}
 	}
@@ -189,7 +188,7 @@ ext_sym_render(void* ext_sym, float x, float y, void* ud) {
 	}
 
 	SpriteRenderer::Draw((Symbol*)ext_sym, 
-		RenderParams(*((sm::mat4*)ud)), Vector(x, y));
+		RenderParams(*((sm::mat4*)ud)), sm::vec2(x, y));
 }
 
 void GTxt::Draw(const gtxt_label_style& style, const sm::mat4& mt, const Colorf& mul, 

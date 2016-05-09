@@ -648,17 +648,17 @@ void ParserLuaFile::Picture::Part::transform(ee::Sprite* sprite) const
 		buf.insert(dst[i].y);
 	}
 	float pre_rotate = 0;
-	ee::Vector _dst[4];
-	memcpy(&_dst[0].x, &dst[0].x, sizeof(ee::Vector)*4);
+	sm::vec2 _dst[4];
+	memcpy(&_dst[0].x, &dst[0].x, sizeof(sm::vec2)*4);
 	if (buf.size() != 4)
 	{
-		ee::Vector center(0, 0);
+		sm::vec2 center(0, 0);
 		for (int i = 0; i < 4; ++i) {
 			center += dst[i];
 		}
 		center /= 4;
 
-		ee::Vector other = (dst[0] + dst[1]) * 0.5f;
+		sm::vec2 other = (dst[0] + dst[1]) * 0.5f;
 		float angle = ee::Math2D::GetLineAngle(center, other);
 		for (int i = 0; i < 4; ++i) {
 			_dst[i] = center + ee::Math2D::RotateVector(dst[i] - center, -angle);
@@ -709,7 +709,7 @@ void ParserLuaFile::Picture::Part::transform(ee::Sprite* sprite) const
 		angle = SM_PI;
 	}
 
-	ee::Vector scenter = (src[0] + src[1] + src[2] + src[3]) * 0.25f, 
+	sm::vec2 scenter = (src[0] + src[1] + src[2] + src[3]) * 0.25f, 
 		dcenter = (_dst[0] + _dst[1] + _dst[2] + _dst[3]) * 0.25f;
 	float sw = fabs(src[0].x - scenter.x), sh = fabs(src[0].y - scenter.y);
 	float dw = fabs(_dst[0].x - dcenter.x), dh = fabs(_dst[0].y - dcenter.y);
@@ -725,17 +725,17 @@ void ParserLuaFile::Picture::Part::transform(ee::Sprite* sprite) const
 		sx = dw / 16.0f / sw;
 		sy = dh / 16.0f / sh;
 	}
-	sprite->SetScale(ee::Vector(sx, sy));
+	sprite->SetScale(sm::vec2(sx, sy));
 
 	sprite->SetMirror(xMirror, yMirror);
 	angle = -angle;
-	sprite->SetTransform(ee::Vector(dcenter.x / 16, - dcenter.y / 16), pre_rotate + angle);
+	sprite->SetTransform(sm::vec2(dcenter.x / 16, - dcenter.y / 16), pre_rotate + angle);
 }
 
-std::string ParserLuaFile::Picture::Part::dstMode(const ee::Vector _dst[4]) const
+std::string ParserLuaFile::Picture::Part::dstMode(const sm::vec2 _dst[4]) const
 {
 	int sm[4], dm[4];
-	ee::Vector scenter = (src[0] + src[1] + src[2] + src[3]) * 0.25f, 
+	sm::vec2 scenter = (src[0] + src[1] + src[2] + src[3]) * 0.25f, 
 		dcenter = (_dst[0] + _dst[1] + _dst[2] + _dst[3]) * 0.25f;
 	for (int i = 0; i < 4; ++i)
 		sm[i] = nodeMode(scenter, src[i]);
@@ -748,7 +748,7 @@ std::string ParserLuaFile::Picture::Part::dstMode(const ee::Vector _dst[4]) cons
 	return ss.str();
 }
 
-int ParserLuaFile::Picture::Part::nodeMode(const ee::Vector& center, const ee::Vector& node)
+int ParserLuaFile::Picture::Part::nodeMode(const sm::vec2& center, const sm::vec2& node)
 {
 	if (node.x < center.x)
 	{
@@ -836,10 +836,10 @@ void ParserLuaFile::Animation::Item::transform(ee::Sprite* spr) const
 		angle = -angle;
 
 		spr->Rotate(angle);
-		spr->Translate(ee::Vector(x, y));
-		const ee::Vector& scale = spr->GetScale();
-		spr->SetScale(ee::Vector(scale.x * sx, scale.y * sy));
-		spr->SetShear(ee::Vector(kx, ky));
+		spr->Translate(sm::vec2(x, y));
+		const sm::vec2& scale = spr->GetScale();
+		spr->SetScale(sm::vec2(scale.x * sx, scale.y * sy));
+		spr->SetShear(sm::vec2(kx, ky));
 	}
 }
 

@@ -1,6 +1,8 @@
 #ifndef _EASYEDITOR_ARRANGE_SPRITE_OP_H_
 #define _EASYEDITOR_ARRANGE_SPRITE_OP_H_
 
+#include <SM_Vector.h>
+
 #include <wx/wx.h>
 
 namespace ee
@@ -12,7 +14,6 @@ class MultiSpritesImpl;
 class PropertySettingPanel;
 class EditCMPT;
 class Sprite;
-class Vector;
 struct ArrangeSpriteConfig;
 
 template <typename TBase>
@@ -42,7 +43,7 @@ public:
 	virtual bool IsEmpty() const;
 
 protected:
-	virtual Sprite* SelectByPos(const Vector& pos) const;
+	virtual Sprite* SelectByPos(const sm::vec2& pos) const;
 
 private:
 	ArrangeSpriteImpl* m_impl;

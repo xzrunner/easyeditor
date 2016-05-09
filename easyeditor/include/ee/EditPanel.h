@@ -1,7 +1,7 @@
 #ifndef _EASYEDITOR_EDIT_PANEL_H_
 #define _EASYEDITOR_EDIT_PANEL_H_
 
-#include "Vector.h"
+#include <SM_Vector.h>
 
 #include <wx/wx.h>
 
@@ -32,8 +32,8 @@ public:
 
 	EditPanelImpl* GetStageImpl() { return m_impl; }
 
-	Vector TransPosScrToProj(int x, int y) const;
-	Vector TransPosProjToScr(const Vector& proj) const;
+	sm::vec2 TransPosScrToProj(int x, int y) const;
+	sm::vec2 TransPosProjToScr(const sm::vec2& proj) const;
 
 	void DrawEditOP() const;
 

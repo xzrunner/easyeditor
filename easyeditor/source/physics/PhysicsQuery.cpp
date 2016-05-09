@@ -1,12 +1,11 @@
 #include "PhysicsQuery.h"
 #include "physics_const.h"
-#include "Vector.h"
 #include "Math2D.h"
 
 namespace ee
 {
 
-b2Body* PhysicsQuery::QueryOn(b2World* world, const Vector& pos)
+b2Body* PhysicsQuery::QueryOn(b2World* world, const sm::vec2& pos)
 {
 	const b2Vec2 b2Pos(pos.x / BOX2D_SCALE_FACTOR, pos.y / BOX2D_SCALE_FACTOR);
 
@@ -27,7 +26,7 @@ b2Body* PhysicsQuery::QueryOn(b2World* world, const Vector& pos)
 		return NULL;
 }
 
-b2Body* PhysicsQuery::QueryNear(b2World* world, const Vector& pos)
+b2Body* PhysicsQuery::QueryNear(b2World* world, const sm::vec2& pos)
 {
 	b2Body* onBody = QueryOn(world, pos);
 	if (onBody)
@@ -41,7 +40,7 @@ b2Body* PhysicsQuery::QueryNear(b2World* world, const Vector& pos)
 		for (b2Body* b = world->GetBodyList(); b; b = b->GetNext())
 		{
 			b2Vec2 bPos = b->GetPosition();
-			const float dis = Math2D::GetDistance(pos, Vector(bPos.x, bPos.y));
+			const float dis = Math2D::GetDistance(pos, sm::vec2(bPos.x, bPos.y));
 			if (dis < nearDis)
 			{
 				nearDis = dis;

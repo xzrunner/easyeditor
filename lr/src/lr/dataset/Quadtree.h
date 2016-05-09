@@ -5,7 +5,7 @@
 
 #include <vector>
 
-namespace ee { class Rect; class Sprite; class Vector; }
+namespace ee { class Rect; class Sprite; }
 
 namespace lr
 {
@@ -22,7 +22,7 @@ public:
 
 	void DebugDraw() const;
 
-	void SelectNode(const ee::Vector& pos);
+	void SelectNode(const sm::vec2& pos);
 
 private:
 	class Node
@@ -37,7 +37,7 @@ private:
 
 	private:
 		bool IsIntersect(const ee::Rect& rect) const;
-		bool IsContain(const ee::Vector& pos) const;
+		bool IsContain(const sm::vec2& pos) const;
 		bool IsContain(const ee::Sprite* spr) const;
 
 		bool NeedSplit() const;

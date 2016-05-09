@@ -52,23 +52,24 @@ private:
 	class OffsetVisitor : public ee::Visitor
 	{
 	public:
-		OffsetVisitor(const ee::Vector& offset);
+		OffsetVisitor(const sm::vec2& offset);
 
 		virtual void Visit(ee::Object* object, bool& next);
 
 	private:
-		const ee::Vector& m_offset;
+		const sm::vec2& m_offset;
 
 	}; // OffsetVisitor
 
 private:
 	EditPolylinesCMPT* m_cmpt;
 
-	std::map<ChainShape*, ChainShape*> m_simplifyBuffer;
+	std::map<ChainShape*, ChainShape*> m_simplify_buffer;
 
-	ee::Vector m_lastPos;
+	sm::vec2 m_last_pos;
+	bool m_last_pos_valid;
 
-	bool m_bDirty;
+	bool m_is_dirty;
 
 }; // EditPolylinesOP
 

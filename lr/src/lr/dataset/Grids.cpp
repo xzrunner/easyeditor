@@ -66,11 +66,11 @@ void Grids::Build(int width, int height)
 	m_flat_bound.push_back(TransToFlatView(-width*0.5f, -height*0.5f));
 }
 
-std::vector<int> Grids::IntersectPolygon(const std::vector<ee::Vector>& poly) const
+std::vector<int> Grids::IntersectPolygon(const std::vector<sm::vec2>& poly) const
 {
 	std::vector<int> ret;
 
-	std::vector<ee::Vector> poly_flat;
+	std::vector<sm::vec2> poly_flat;
 	TransVerticesToFlat(poly, poly_flat);
 
 	int xmin, xmax, ymin, ymax;
@@ -89,11 +89,11 @@ std::vector<int> Grids::IntersectPolygon(const std::vector<ee::Vector>& poly) co
 	return ret;
 }
 
-std::vector<int> Grids::IntersectPolyline(const std::vector<ee::Vector>& path) const
+std::vector<int> Grids::IntersectPolyline(const std::vector<sm::vec2>& path) const
 {
 	std::vector<int> ret;
 
-	std::vector<ee::Vector> poly_flat;
+	std::vector<sm::vec2> poly_flat;
 	TransVerticesToFlat(path, poly_flat);
 
 	int xmin, xmax, ymin, ymax;
@@ -112,22 +112,22 @@ std::vector<int> Grids::IntersectPolyline(const std::vector<ee::Vector>& path) c
 	return ret;
 }
 
-ee::Vector Grids::TransToBirdView(float x, float y)
+sm::vec2 Grids::TransToBirdView(float x, float y)
 {
-	ee::Vector ret = ee::Math2D::RotateVector(ee::Vector(x, y), SM_PI / 4);
+	sm::vec2 ret = ee::Math2D::RotateVector(sm::vec2(x, y), SM_PI / 4);
 	ret.y *= PROJ_TRANS;
 	return ret;
 }
 
-ee::Vector Grids::TransToFlatView(float x, float y)
+sm::vec2 Grids::TransToFlatView(float x, float y)
 {
-	ee::Vector ret = ee::Vector(x, y);
+	sm::vec2 ret = sm::vec2(x, y);
 	ret.y /= PROJ_TRANS;
 	ret = ee::Math2D::RotateVector(ret, - SM_PI / 4);
 	return ret;
 }
 
-void Grids::GetGridRegion(const std::vector<ee::Vector>& area, 
+void Grids::GetGridRegion(const std::vector<sm::vec2>& area, 
 						  int& xmin, int& xmax, int& ymin, int& ymax) const
 {
 	ee::Rect r;
@@ -144,7 +144,7 @@ void Grids::GetGridRegion(const std::vector<ee::Vector>& area,
 	ymax = std::min((float)m_row, (top-r.ymin)/BIRD_HH+2);
 }
 
-void Grids::TransVerticesToFlat(const std::vector<ee::Vector>& src, std::vector<ee::Vector>& dst)
+void Grids::TransVerticesToFlat(const std::vector<sm::vec2>& src, std::vector<sm::vec2>& dst)
 {
 	dst.resize(src.size());
 	for (int i = 0, n = src.size(); i < n; ++i) {
@@ -158,12 +158,12 @@ void Grids::TransVerticesToFlat(const std::vector<ee::Vector>& src, std::vector<
 
 Grids::Grid::Grid(float left, float top)
 {
-	m_bird_bound.push_back(ee::Vector(left+Grids::BIRD_HW, top));
-	m_bird_bound.push_back(ee::Vector(left, top-Grids::BIRD_HH));
-	m_bird_bound.push_back(ee::Vector(left+Grids::BIRD_HW, top-Grids::BIRD_HH*2));
-	m_bird_bound.push_back(ee::Vector(left+Grids::BIRD_HW*2, top-Grids::BIRD_HH));
+	m_bird_bound.push_back(sm::vec2(left+Grids::BIRD_HW, top));
+	m_bird_bound.push_back(sm::vec2(left, top-Grids::BIRD_HH));
+	m_bird_bound.push_back(sm::vec2(left+Grids::BIRD_HW, top-Grids::BIRD_HH*2));
+	m_bird_bound.push_back(sm::vec2(left+Grids::BIRD_HW*2, top-Grids::BIRD_HH));
 
-	ee::Vector flat[4];
+	sm::vec2 flat[4];
 	for (int i = 0; i < 4; ++i) {
 		flat[i] = TransToFlatView(m_bird_bound[i].x, m_bird_bound[i].y);
 		m_flat_bound.Combine(flat[i]);

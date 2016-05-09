@@ -3,7 +3,7 @@
 
 #include "ICommand.h"
 
-#include <ee/Vector.h>
+#include <SM_Vector.h>
 
 #include <json/json.h>
 
@@ -44,7 +44,7 @@ private:
 	std::string CreateNewComplexFile(const Json::Value& value) const;
 	void ResetOldSpriteVal(Json::Value& val, const std::string& name, const std::string& tag) const;
 
-	void FixPosWithShape(ee::Vector& pos, const std::string& filepath) const;
+	void FixPosWithShape(sm::vec2& pos, const std::string& filepath) const;
 
 private:
 	mutable int m_count;

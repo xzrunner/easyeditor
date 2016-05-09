@@ -4,7 +4,6 @@
 #include "Cloneable.h"
 #include "UserDataImpl.h"
 #include "Object.h"
-#include "Vector.h"
 
 #include <SM_Matrix.h>
 
@@ -13,7 +12,6 @@
 namespace ee
 {
 
-class Vector;
 class Rect;
 class Symbol;
 class BoundingBox;
@@ -51,23 +49,23 @@ public:
 
 	virtual PropertySetting* CreatePropertySetting(EditPanelImpl* stage);
 
-	virtual void SetTransform(const Vector& position, float angle);
-	const Vector& GetPosition() const { return m_pos; }
+	virtual void SetTransform(const sm::vec2& position, float angle);
+	const sm::vec2& GetPosition() const { return m_pos; }
 	float GetAngle() const { return m_angle; }
 
-	const Vector& GetScale() const { return m_scale; }
-	void SetScale(const Vector& scale);
+	const sm::vec2& GetScale() const { return m_scale; }
+	void SetScale(const sm::vec2& scale);
 
-	const Vector& GetShear() const { return m_shear; }
-	void SetShear(const Vector& shear);
+	const sm::vec2& GetShear() const { return m_shear; }
+	void SetShear(const sm::vec2& shear);
 
-	const Vector& GetOffset() const { return m_offset; }
-	void SetOffset(const Vector& offset);
+	const sm::vec2& GetOffset() const { return m_offset; }
+	void SetOffset(const sm::vec2& offset);
 
-	bool IsContain(const Vector& pos) const;
+	bool IsContain(const sm::vec2& pos) const;
 	bool IsIntersect(const Rect& rect) const;
 
-	void Translate(const Vector& offset);
+	void Translate(const sm::vec2& offset);
 	void Rotate(float delta);
 
 	void SetMirror(bool xMirror, bool yMirror);
@@ -75,10 +73,10 @@ public:
 	bool GetMirrorX() const { return m_xMirror; }
 	bool GetMirrorY() const { return m_yMirror; }
 
-	const Vector& GetPerspective() const { return m_perspective; }
-	void SetPerspective(const Vector& perspective) { m_perspective = perspective; }
+	const sm::vec2& GetPerspective() const { return m_perspective; }
+	void SetPerspective(const sm::vec2& perspective) { m_perspective = perspective; }
 
-	Vector GetCenter() const;
+	sm::vec2 GetCenter() const;
 
 	BoundingBox* GetBounding() const {
 		return m_bounding;
@@ -120,15 +118,15 @@ public:
 	bool editable;
 
 protected:
-	Vector m_pos;
+	sm::vec2 m_pos;
 	float m_angle;
-	Vector m_offset;
-	Vector m_scale;
-	Vector m_shear;
+	sm::vec2 m_offset;
+	sm::vec2 m_scale;
+	sm::vec2 m_shear;
 
 	bool m_xMirror, m_yMirror;
 
-	Vector m_perspective;
+	sm::vec2 m_perspective;
 
 	BoundingBox* m_bounding;
 	

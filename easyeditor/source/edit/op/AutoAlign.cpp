@@ -136,14 +136,14 @@ void AutoAlign::Align(const Sprite* src, Sprite* dst)
 	if (float dis = fabs(dst_up - src_up) < nearest)
 	{
 		nearest = dis;
-		dst->SetTransform(Vector(dst->GetPosition().x, dst->GetPosition().y + src_up - dst_up), dst->GetAngle());
+		dst->SetTransform(sm::vec2(dst->GetPosition().x, dst->GetPosition().y + src_up - dst_up), dst->GetAngle());
 		m_hor[0].Set(src_cx - LEN, src_up);
 		m_hor[1].Set(src_cx + LEN, src_up);
 	}
 	else if (float dis = fabs(dst_up - src_down) < nearest)
 	{
 		nearest = dis;
-		dst->SetTransform(Vector(dst->GetPosition().x, dst->GetPosition().y + src_down - dst_up), dst->GetAngle());
+		dst->SetTransform(sm::vec2(dst->GetPosition().x, dst->GetPosition().y + src_down - dst_up), dst->GetAngle());
 		m_hor[0].Set(src_cx - LEN, src_down);
 		m_hor[1].Set(src_cx + LEN, src_down);
 	}		
@@ -152,14 +152,14 @@ void AutoAlign::Align(const Sprite* src, Sprite* dst)
 	if (float dis = fabs(dst_down - src_up) < nearest)
 	{
 		nearest = dis;
-		dst->SetTransform(Vector(dst->GetPosition().x, dst->GetPosition().y + src_up - dst_down), dst->GetAngle());
+		dst->SetTransform(sm::vec2(dst->GetPosition().x, dst->GetPosition().y + src_up - dst_down), dst->GetAngle());
 		m_hor[0].Set(src_cx - LEN, src_up);
 		m_hor[1].Set(src_cx + LEN, src_up);
 	}
 	else if (float dis = fabs(dst_down - src_down) < nearest)
 	{
 		nearest = dis;
-		dst->SetTransform(Vector(dst->GetPosition().x, dst->GetPosition().y + src_down - dst_down), dst->GetAngle());
+		dst->SetTransform(sm::vec2(dst->GetPosition().x, dst->GetPosition().y + src_down - dst_down), dst->GetAngle());
 		m_hor[0].Set(src_cx - LEN, src_down);
 		m_hor[1].Set(src_cx + LEN, src_down);
 	}	
@@ -169,14 +169,14 @@ void AutoAlign::Align(const Sprite* src, Sprite* dst)
 	if (float dis = fabs(dst_left - src_left) < nearest)
 	{
 		nearest = dis;
-		dst->SetTransform(Vector(dst->GetPosition().x + src_left - dst_left, dst->GetPosition().y), dst->GetAngle());
+		dst->SetTransform(sm::vec2(dst->GetPosition().x + src_left - dst_left, dst->GetPosition().y), dst->GetAngle());
 		m_ver[0].Set(src_left, src_cy - LEN);
 		m_ver[1].Set(src_left, src_cy + LEN);
 	}
 	else if (float dis = fabs(dst_left - src_right) < nearest)
 	{
 		nearest = dis;
-		dst->SetTransform(Vector(dst->GetPosition().x + src_right - dst_left, dst->GetPosition().y), dst->GetAngle());
+		dst->SetTransform(sm::vec2(dst->GetPosition().x + src_right - dst_left, dst->GetPosition().y), dst->GetAngle());
 		m_ver[0].Set(src_right, src_cy - LEN);
 		m_ver[1].Set(src_right, src_cy + LEN);
 	}
@@ -185,14 +185,14 @@ void AutoAlign::Align(const Sprite* src, Sprite* dst)
 	if (float dis = fabs(dst_right - src_left) < nearest)
 	{
 		nearest = dis;
-		dst->SetTransform(Vector(dst->GetPosition().x + src_left - dst_right, dst->GetPosition().y), dst->GetAngle());
+		dst->SetTransform(sm::vec2(dst->GetPosition().x + src_left - dst_right, dst->GetPosition().y), dst->GetAngle());
 		m_ver[0].Set(src_left, src_cy - LEN);
 		m_ver[1].Set(src_left, src_cy + LEN);
 	}
 	else if (float dis = fabs(dst_right - src_right) < nearest)
 	{
 		nearest = dis;
-		dst->SetTransform(Vector(dst->GetPosition().x + src_right - dst_right, dst->GetPosition().y), dst->GetAngle());
+		dst->SetTransform(sm::vec2(dst->GetPosition().x + src_right - dst_right, dst->GetPosition().y), dst->GetAngle());
 		m_ver[0].Set(src_right, src_cy - LEN);
 		m_ver[1].Set(src_right, src_cy + LEN);
 	}

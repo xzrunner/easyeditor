@@ -46,8 +46,8 @@ public:
 
 	void DebugDraw() const;
 
-	void Pathfinding(const ee::Vector& start, const ee::Vector& end);
-	void PointQuery(const ee::Vector& pos);
+	void Pathfinding(const sm::vec2& start, const sm::vec2& end);
+	void PointQuery(const sm::vec2& pos);
 
 	void SetLayers(const std::vector<Layer*>& layers);
 	const std::vector<Layer*>& GetLayers() const { return m_layers; }

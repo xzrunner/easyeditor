@@ -13,7 +13,6 @@
 namespace ee
 {
 
-class Vector;
 class Rect;
 class PropertySetting;
 class EditPanelImpl;
@@ -37,10 +36,10 @@ public:
 
 	virtual const char* GetShapeDesc() const = 0;
 
-	virtual bool IsContain(const Vector& pos) const = 0;
+	virtual bool IsContain(const sm::vec2& pos) const = 0;
 	virtual bool IsIntersect(const Rect& rect) const = 0;
 
-	virtual void Translate(const Vector& offset) = 0;
+	virtual void Translate(const sm::vec2& offset) = 0;
 //	virtual void Rotate(float delta) = 0;
 
 	virtual const Rect& GetRect() const = 0;

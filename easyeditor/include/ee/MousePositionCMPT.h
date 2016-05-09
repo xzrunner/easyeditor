@@ -3,10 +3,10 @@
 
 #include "EditCMPT.h"
 
+#include <SM_Vector.h>
+
 namespace ee
 {
-
-class Vector;
 
 class MousePositionCMPT : public EditCMPT
 {
@@ -14,7 +14,7 @@ public:
 	MousePositionCMPT(wxWindow* parent, const std::string& name, 
 		wxWindow* stage_wnd, EditPanelImpl* stage, bool create_op = true);
 
-	void updatePosition(const Vector& pos);
+	void updatePosition(const sm::vec2& pos);
 
 protected:
 	virtual wxSizer* InitLayout();

@@ -1,7 +1,7 @@
 #ifndef _EASYEDITOR_TEXTURE_FACTORY_H_
 #define _EASYEDITOR_TEXTURE_FACTORY_H_
 
-#include "Vector.h"
+#include <SM_Vector.h>
 
 #include <string>
 
@@ -21,7 +21,7 @@ public:
 	const uint8_t* Load(const std::string& filepath, 
 		int& width, int& height, int& channels, int& format) const;
 	void Load(const std::string& filepath,
-		float& ori_w, float& ori_h, Vector& offset) const;
+		float& ori_w, float& ori_h, sm::vec2& offset) const;
 
 	static TextureFactory* Instance();
 

@@ -23,26 +23,26 @@ public:
 	virtual bool IsValid() const;
 	virtual void MakeInfinite();
 
-	virtual void SetTransform(const Vector& position, const Vector& offset, float angle);
+	virtual void SetTransform(const sm::vec2& position, const sm::vec2& offset, float angle);
 	virtual void SetMirror(bool xmirror, bool ymirror);
 
-	virtual void Combine(const Vector& pos);
+	virtual void Combine(const sm::vec2& pos);
 	virtual void Combine(const Rect& rect);
 
-	virtual bool IsContain(const Vector& pos) const;
+	virtual bool IsContain(const sm::vec2& pos) const;
 	virtual bool IsContain(const Rect& rect) const;
 	virtual bool IsIntersect(const Rect& rect) const;
 	
 	virtual float Area() const;
 	virtual float Width() const;
 	virtual float Height() const;
-	virtual Vector Center() const;
+	virtual sm::vec2 Center() const;
 
-	virtual void GetBoundPos(std::vector<Vector>& bound) const;
+	virtual void GetBoundPos(std::vector<sm::vec2>& bound) const;
 
 private:
 	Rect m_rect;
-	Vector m_position;
+	sm::vec2 m_position;
 
 }; // AABB
 

@@ -3,8 +3,6 @@
 
 #include "IScene.h"
 
-#include <ee/Vector.h>
-
 #include <vector>
 
 namespace ee { class EditPanelImpl; class Symbol; }
@@ -28,13 +26,13 @@ private:
 	void InitCamera();
 	void InitEditOP();
 
-	void CalProjInfo(const ee::Vector& src_pos, ee::Vector* dst_pos, float* dst_scale) const;
+	void CalProjInfo(const sm::vec2& src_pos, sm::vec2* dst_pos, float* dst_scale) const;
 
 private:
 	ee::EditPanelImpl* m_stage;
 
 	std::vector<ee::Symbol*> m_buildings;
-	std::vector<ee::Vector> m_positions;
+	std::vector<sm::vec2> m_positions;
 
 }; // Projection2DScene
 

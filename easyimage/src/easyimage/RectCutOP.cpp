@@ -17,10 +17,10 @@ RectCutOP::RectCutOP(RectCutCMPT* cmpt, StagePanel* stage)
 	, m_cmpt(cmpt)
 	, m_stage(stage)
 	, m_rect_selected(NULL)
+	, m_first_pos_valid(false)
+	, m_curr_pos_valid(false)
+	, m_captured_valid(false)
 {
-	m_first_pos.SetInvalid();
-	m_curr_pos.SetInvalid();
-	m_captured.SetInvalid();
 }
 
 bool RectCutOP::OnMouseLeftDown(int x, int y)
@@ -29,7 +29,7 @@ bool RectCutOP::OnMouseLeftDown(int x, int y)
 
 	if (!m_stage->GetImage()) return false;
 
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	m_node_selected = m_rects.QueryNode(pos);
 
 	return false;
@@ -73,6 +73,7 @@ bool RectCutOP::OnMouseRightDown(int x, int y)
 	if (!m_stage->GetImage()) return false;
 
 	m_first_pos = m_stage->TransPosScrToProj(x, y);
+	m_first_pos_valid = true;
 	FixedPos(m_first_pos);
 
 	return false;
@@ -84,13 +85,14 @@ bool RectCutOP::OnMouseRightUp(int x, int y)
 
 	if (!m_stage->GetImage()) return false;
 
-	if (!m_first_pos.IsValid()) {
+	if (!m_first_pos_valid) {
 		return false;
 	}
 
 	const float RADIUS = 5;
 	// remove rect
 	m_curr_pos = m_stage->TransPosScrToProj(x, y);
+	m_curr_pos_valid = true;
 	if (ee::Math2D::GetDistance(m_curr_pos, m_first_pos) < RADIUS)
 	{
 		bool removed = m_rects.Remove(m_curr_pos);
@@ -98,8 +100,8 @@ bool RectCutOP::OnMouseRightUp(int x, int y)
 			m_node_selected.rect = NULL;
 			m_rect_selected = NULL;
 
-			m_first_pos.SetInvalid();
-			m_curr_pos.SetInvalid();
+			m_first_pos_valid = false;
+			m_curr_pos_valid = false;
 			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 	}
@@ -111,8 +113,8 @@ bool RectCutOP::OnMouseRightUp(int x, int y)
 		{
 			m_rects.Insert(ee::Rect(m_first_pos, m_curr_pos));
 
-			m_first_pos.SetInvalid();
-			m_curr_pos.SetInvalid();
+			m_first_pos_valid = false;
+			m_curr_pos_valid = false;
 			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 	}
@@ -127,8 +129,10 @@ bool RectCutOP::OnMouseMove(int x, int y)
 	if (!m_stage->GetImage()) return false;
 
 	m_curr_pos = m_stage->TransPosScrToProj(x, y);
+	m_curr_pos_valid = true;
 	m_rect_selected = m_rects.QueryRect(m_curr_pos);
 	m_captured = m_rects.QueryNearestAxis(m_curr_pos);
+	m_captured_valid = true;
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	return false;
@@ -141,10 +145,12 @@ bool RectCutOP::OnMouseDrag(int x, int y)
 	if (!m_stage->GetImage()) return false;
 
 	// create rect
-	if (m_first_pos.IsValid())
+	if (m_first_pos_valid)
 	{
 		m_curr_pos = m_stage->TransPosScrToProj(x, y);
+		m_curr_pos_valid = true;
 		m_captured = m_rects.QueryNearestAxis(m_curr_pos);
+		m_captured_valid = true;
 
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
@@ -152,9 +158,11 @@ bool RectCutOP::OnMouseDrag(int x, int y)
 	else if (m_node_selected.rect)
 	{
 		m_curr_pos = m_stage->TransPosScrToProj(x, y);
+		m_curr_pos_valid = true;
 		m_captured = m_rects.QueryNearestAxis(m_curr_pos, m_node_selected.rect);
+		m_captured_valid = true;
 
-		ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 		m_rects.MoveNode(m_node_selected, pos);
 		m_node_selected.pos = pos;
 
@@ -163,9 +171,10 @@ bool RectCutOP::OnMouseDrag(int x, int y)
 	// move rect
 	else if (m_rect_selected)
 	{
-		ee::Vector curr = m_stage->TransPosScrToProj(x, y);
+		sm::vec2 curr = m_stage->TransPosScrToProj(x, y);
 		m_rects.MoveRect(m_rect_selected, m_curr_pos, curr);
 		m_curr_pos = curr;
+		m_curr_pos_valid = true;
 
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
@@ -178,13 +187,13 @@ bool RectCutOP::OnDraw() const
 	if (ee::ZoomViewOP::OnDraw()) return true;
 
 	ee::RVG::Color(ee::Colorf(1, 0, 0));
-	ee::RVG::Cross(ee::Vector(0, 0), 100, 100);
+	ee::RVG::Cross(sm::vec2(0, 0), 100, 100);
 
 	if (!m_stage->GetImage()) return false;
 
 	m_rects.Draw();
 
-	if (m_first_pos.IsValid() && m_curr_pos.IsValid())
+	if (m_first_pos_valid && m_curr_pos_valid)
 	{
 		ee::RVG::Color(ee::LIGHT_RED);
 		ee::RVG::Rect(m_first_pos, m_curr_pos, false);
@@ -194,13 +203,13 @@ bool RectCutOP::OnDraw() const
 
 	if (m_rect_selected) {
 		ee::RVG::Color(ee::LIGHT_GREEN);
-		ee::RVG::Rect(ee::Vector(m_rect_selected->xmin, m_rect_selected->ymin), 
-			ee::Vector(m_rect_selected->xmax, m_rect_selected->ymax), true);
+		ee::RVG::Rect(sm::vec2(m_rect_selected->xmin, m_rect_selected->ymin), 
+			sm::vec2(m_rect_selected->xmax, m_rect_selected->ymax), true);
 	}
 	if (m_node_selected.rect) {
 		ee::RVG::Color(ee::LIGHT_GREEN);
-		ee::RVG::Rect(ee::Vector(m_node_selected.rect->xmin, m_node_selected.rect->ymin), 
-			ee::Vector(m_node_selected.rect->ymin, m_node_selected.rect->ymax), true);
+		ee::RVG::Rect(sm::vec2(m_node_selected.rect->xmin, m_node_selected.rect->ymin), 
+			sm::vec2(m_node_selected.rect->ymin, m_node_selected.rect->ymax), true);
 	}
 
 	return false;
@@ -210,8 +219,7 @@ bool RectCutOP::Clear()
 {
 	if (ee::ZoomViewOP::Clear()) return true;
 
-	m_first_pos.SetInvalid();
-	m_curr_pos.SetInvalid();
+	m_first_pos_valid = m_curr_pos_valid = false;
 
 	m_rects.Clear();
 	m_rect_selected = NULL;
@@ -236,28 +244,29 @@ void RectCutOP::LoadImageFromFile(const std::string& filepath)
 
 void RectCutOP::DrawCaptureLine() const
 {
-	if (!m_curr_pos.IsValid()) return;
-	if (!m_captured.IsValid()) return;
+	if (!m_curr_pos_valid || !m_captured_valid) return;
 
 	const float EDGE = 4096;
-	if (m_captured.x != ee::FLT_INVALID)
+//	if (m_captured.x != ee::FLT_INVALID)
+	if (m_captured.x != FLT_MAX)
 	{
-		ee::Vector p0(m_captured.x, -EDGE);
-		ee::Vector p1(m_captured.x, EDGE);
+		sm::vec2 p0(m_captured.x, -EDGE);
+		sm::vec2 p1(m_captured.x, EDGE);
 		ee::RVG::Color(ee::Colorf(0, 0, 0));
 		ee::RVG::DashLine(p0, p1);
 	}
 
-	if (m_captured.y != ee::FLT_INVALID)
+//	if (m_captured.y != ee::FLT_INVALID)
+	if (m_captured.y != FLT_MAX)
 	{
-		ee::Vector p0(-EDGE, m_captured.y);
-		ee::Vector p1(EDGE, m_captured.y);
+		sm::vec2 p0(-EDGE, m_captured.y);
+		sm::vec2 p1(EDGE, m_captured.y);
 		ee::RVG::Color(ee::Colorf(0, 0, 0));
 		ee::RVG::DashLine(p0, p1);
 	}
 }
 
-void RectCutOP::FixedPos(ee::Vector& pos) const
+void RectCutOP::FixedPos(sm::vec2& pos) const
 {
 	const float RADIUS = 5;
 	if (fabs(pos.x - m_captured.x) > RADIUS || 
@@ -266,10 +275,12 @@ void RectCutOP::FixedPos(ee::Vector& pos) const
 	}
 	
 	// by capture
-	if (m_captured.x != ee::FLT_INVALID) {
+//	if (m_captured.x != ee::FLT_INVALID) {
+	if (m_captured.x != FLT_MAX) {
 		pos.x = m_captured.x;
 	}
-	if (m_captured.y != ee::FLT_INVALID) {
+//	if (m_captured.y != ee::FLT_INVALID) {
+	if (m_captured.y != FLT_MAX) {
 		pos.y = m_captured.y;
 	}
 

@@ -37,7 +37,7 @@ void SkeletonImpl::OnKeyDown(int keyCode)
 
 void SkeletonImpl::OnMouseLeftDown(int x, int y)
 {
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	m_first_pos = pos;
 
 	SkeletonData* skeleton = get_curr_skeleton();
@@ -88,7 +88,7 @@ void SkeletonImpl::OnMouseDrag(int x, int y)
 {
 	if (m_selected_joint)
 	{
-		ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 		m_selected_joint->SetPosition(pos);
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
@@ -152,13 +152,13 @@ void SkeletonImpl::SetRightPopupMenu(wxMenu& menu, int x, int y)
 }
 
 ee::ArrangeSpriteState* 
-SkeletonImpl::CreateTranslateState(ee::SpriteSelection* selection, const ee::Vector& first_pos) const
+SkeletonImpl::CreateTranslateState(ee::SpriteSelection* selection, const sm::vec2& first_pos) const
 {
 	return new TranslateSpriteState(selection, first_pos);
 }
 
 ee::ArrangeSpriteState* 
-SkeletonImpl::CreateRotateState(ee::SpriteSelection* selection, const ee::Vector& first_pos) const
+SkeletonImpl::CreateRotateState(ee::SpriteSelection* selection, const sm::vec2& first_pos) const
 {
 	return new RotateSpriteState(selection, first_pos);
 }

@@ -25,13 +25,13 @@ public:
 	float GetWaveSpeed() const { return m_wave_speed; }
 	float GetWaveHeight() const { return m_wave_height; }
 	bool IsUVMoveOpen() const { return m_uv_move_open; }
-	const ee::Vector& GetUVMoveSpeed() const { return m_texcoords_spd; }
+	const sm::vec2& GetUVMoveSpeed() const { return m_texcoords_spd; }
 	bool IsTexBlendOpen() const { return m_blend_open; }
 	float GetTexBlendSpeed() const { return m_blend_speed; }
 
 	void SetSmallGridSize(int row, int col);
 	void SetWaveInfo(float speed, float height);
-	void SetTexcoordsSpeed(const ee::Vector& speed);
+	void SetTexcoordsSpeed(const sm::vec2& speed);
 	void SetBlendSpeed(float spd);
 
 	void Update(float dt);
@@ -61,12 +61,12 @@ public:
 private:
 	void Clear();
 
-	ee::Rect CalBoundRegion(const std::vector<ee::Vector>& bound) const; 
-	void CalSegments(const ee::Rect& region, std::vector<ee::Vector>& segs) const;
-	void CalTrisTexcords(const ee::Rect& region, const std::vector<ee::Vector>& vertices,
-		std::vector<ee::Vector>& texcoords) const;
-	void BuildGrids(const ee::Rect& region, const std::vector<ee::Vector>& vertices, 
-		const std::vector<ee::Vector>& texcoords, const std::vector<ee::Vector>& bound);
+	ee::Rect CalBoundRegion(const std::vector<sm::vec2>& bound) const; 
+	void CalSegments(const ee::Rect& region, std::vector<sm::vec2>& segs) const;
+	void CalTrisTexcords(const ee::Rect& region, const std::vector<sm::vec2>& vertices,
+		std::vector<sm::vec2>& texcoords) const;
+	void BuildGrids(const ee::Rect& region, const std::vector<sm::vec2>& vertices, 
+		const std::vector<sm::vec2>& texcoords, const std::vector<sm::vec2>& bound);
 
 	void UpdateWave(float during);
 	void UpdateUVMove(float dt);
@@ -83,7 +83,7 @@ private:
 	float m_wave_speed, m_wave_height;
 
 	bool m_uv_move_open;
-	ee::Vector m_texcoords_base, m_texcoords_spd;
+	sm::vec2 m_texcoords_base, m_texcoords_spd;
 
 	bool m_blend_open;
 	float m_blend_base, m_blend_speed;

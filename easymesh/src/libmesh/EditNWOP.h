@@ -22,14 +22,14 @@ public:
 	virtual bool OnDraw() const;
 
 private:
-	void TranslasteNode(const ee::Vector& offset);
-	void RotateNode(const ee::Vector& dst);
+	void TranslasteNode(const sm::vec2& offset);
+	void RotateNode(const sm::vec2& dst);
 
 private:
-	ee::Vector m_last_pos;
+	sm::vec2 m_last_pos;
 
 	bool m_right_press;
-	ee::Vector m_center;
+	sm::vec2 m_center;
 
 	bool m_select_center;
 

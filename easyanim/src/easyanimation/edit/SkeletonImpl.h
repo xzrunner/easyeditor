@@ -27,14 +27,14 @@ protected:
 	virtual void SetRightPopupMenu(wxMenu& menu, int x, int y);
 
 	virtual ee::ArrangeSpriteState* CreateTranslateState(ee::SpriteSelection* selection, 
-		const ee::Vector& first_pos) const;
+		const sm::vec2& first_pos) const;
 	virtual ee::ArrangeSpriteState* CreateRotateState(ee::SpriteSelection* selection, 
-		const ee::Vector& first_pos) const;
+		const sm::vec2& first_pos) const;
 
 private:
 	Joint* m_selected_joint;
 
-	ee::Vector m_first_pos;
+	sm::vec2 m_first_pos;
 
 }; // SkeletonImpl 
 

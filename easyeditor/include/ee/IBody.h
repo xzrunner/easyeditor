@@ -4,6 +4,8 @@
 #include "Cloneable.h"
 #include "Object.h"
 
+#include <SM_Vector.h>
+
 #include <Box2D/Box2D.h>
 
 #include <string>
@@ -12,7 +14,6 @@ namespace ee
 {
 
 class Rect;
-class Vector;
 
 class IBody : public Cloneable, public Object
 {
@@ -24,7 +25,7 @@ public:
 	//
 	virtual IBody* Clone() const;
 
-	virtual void GetRect(Rect& rect, const Vector& position, float angle) const = 0;
+	virtual void GetRect(Rect& rect, const sm::vec2& position, float angle) const = 0;
 
 	b2Body* GetBody() const;
 	void SetBody(b2Body* body);
@@ -38,7 +39,7 @@ public:
 	void SetFriction(float friction);
 	void SetCollisionFilter(const b2Filter& filter);
 
-	void SetTransform(const Vector& pos, float angle);
+	void SetTransform(const sm::vec2& pos, float angle);
 
 protected:
 	IBody() {}

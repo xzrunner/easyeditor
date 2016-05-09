@@ -28,12 +28,12 @@ private:
 	class NearestQueryVisitor : public Visitor
 	{
 	public:
-		NearestQueryVisitor(const Vector& pos, Sprite** ret);
+		NearestQueryVisitor(const sm::vec2& pos, Sprite** ret);
 
 		virtual void Visit(Object* object, bool& next);
 
 	private:
-		const Vector& m_pos;
+		const sm::vec2& m_pos;
 
 		float m_dis;
 

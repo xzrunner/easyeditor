@@ -71,7 +71,7 @@ bool ComposeOP::OnDraw() const
 
 ee::Sprite* ComposeOP::SelectByPos(int x, int y)
 {
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	int col, row;
 	ComposeGrids::Query(pos, &col, &row);
 	if (col == -1 || row == -1) {

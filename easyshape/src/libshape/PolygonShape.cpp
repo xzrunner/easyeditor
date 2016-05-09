@@ -31,7 +31,7 @@ PolygonShape::PolygonShape(const PolygonShape& polygon)
 	}
 }
 
-PolygonShape::PolygonShape(const std::vector<ee::Vector>& vertices)
+PolygonShape::PolygonShape(const std::vector<sm::vec2>& vertices)
 	: ChainShape(vertices, true)
 	, m_material(NULL)
 {
@@ -53,7 +53,7 @@ PolygonShape* PolygonShape::Clone() const
 	return new PolygonShape(*this);
 }
 
-bool PolygonShape::IsContain(const ee::Vector& pos) const
+bool PolygonShape::IsContain(const sm::vec2& pos) const
 {
 	return ee::Math2D::IsPointInRect(pos, m_rect) 
 		&& ee::Math2D::IsPointInArea(pos, m_vertices);
@@ -63,7 +63,7 @@ bool PolygonShape::IsContain(const ee::Vector& pos) const
 // {
 // }
 
-void PolygonShape::Translate(const ee::Vector& offset)
+void PolygonShape::Translate(const sm::vec2& offset)
 {
 	ChainShape::Translate(offset);
 	if (m_material) {

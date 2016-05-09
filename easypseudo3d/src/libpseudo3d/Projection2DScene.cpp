@@ -29,22 +29,22 @@ void Projection2DScene::Load(const char* filename)
 	ee::SpriteFactory* spr_fac = ee::SpriteFactory::Instance();
 
 	m_buildings.push_back(sym_mgr->FetchSymbol("mmzb/1002_3_lv5.png"));
-	m_positions.push_back(ee::Vector(0, 0));
+	m_positions.push_back(sm::vec2(0, 0));
 
 	m_buildings.push_back(sym_mgr->FetchSymbol("mmzb/1005_3_lv12.png"));
-	m_positions.push_back(ee::Vector(DIS, 0));
+	m_positions.push_back(sm::vec2(DIS, 0));
 
 	m_buildings.push_back(sym_mgr->FetchSymbol("mmzb/b0013_base.png"));
-	m_positions.push_back(ee::Vector(DIS * 2, 0));
+	m_positions.push_back(sm::vec2(DIS * 2, 0));
 
 	m_buildings.push_back(sym_mgr->FetchSymbol("mmzb/b0016_base.png"));
-	m_positions.push_back(ee::Vector(0, DIS));
+	m_positions.push_back(sm::vec2(0, DIS));
 
 	m_buildings.push_back(sym_mgr->FetchSymbol("mmzb/b0017_base.png"));
-	m_positions.push_back(ee::Vector(DIS, DIS));
+	m_positions.push_back(sm::vec2(DIS, DIS));
 
 	m_buildings.push_back(sym_mgr->FetchSymbol("mmzb/b0021_base.png"));
-	m_positions.push_back(ee::Vector(DIS * 2, DIS));
+	m_positions.push_back(sm::vec2(DIS * 2, DIS));
 
 	InitCamera();
 	InitEditOP();
@@ -56,7 +56,7 @@ void Projection2DScene::Draw() const
 	for (int i = 0, n = m_buildings.size(); i < n; ++i) {
 		ee::Symbol* sym = m_buildings[i];
 
-		ee::Vector pos;
+		sm::vec2 pos;
 		float scale;
 		CalProjInfo(m_positions[i], &pos, &scale);
 
@@ -67,7 +67,7 @@ void Projection2DScene::Draw() const
 void Projection2DScene::InitCamera()
 {
 	ee::Camera* cam = m_stage->GetCamera();
-	cam->Translate(ee::Vector(600, 0));
+	cam->Translate(sm::vec2(600, 0));
 	cam->SetScale(2);
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
@@ -77,12 +77,12 @@ void Projection2DScene::InitEditOP()
 	static_cast<Proj2DEditOP*>(m_stage->GetEditOP())->InitPlayer();
 }
 
-void Projection2DScene::CalProjInfo(const ee::Vector& src_pos, ee::Vector* dst_pos, float* dst_scale) const
+void Projection2DScene::CalProjInfo(const sm::vec2& src_pos, sm::vec2* dst_pos, float* dst_scale) const
 {
 	static const int VIEW_DIS = 600;
 
 	ee::Camera* cam = m_stage->GetCamera();
-	const ee::Vector& cam_pos = cam->GetPosition();
+	const sm::vec2& cam_pos = cam->GetPosition();
 
 	float x = cam_pos.x;
 	float y = cam_pos.y;

@@ -19,18 +19,18 @@ void OrthoCamera::Reset()
 	UpdateModelView();
 }
 
-Vector OrthoCamera::TransPosScreenToProject(int x, int y, int width, int height) const
+sm::vec2 OrthoCamera::TransPosScreenToProject(int x, int y, int width, int height) const
 {
-	Vector proj;
+	sm::vec2 proj;
 	const int xView = x, yView = height - y;
 	proj.x = (xView - (width >> 1)) * m_scale + m_center.x;
 	proj.y = (yView - (height >> 1)) * m_scale + m_center.y;
 	return proj;
 }
 
-Vector OrthoCamera::TransPosProjectToScreen(const Vector& proj, int width, int height) const
+sm::vec2 OrthoCamera::TransPosProjectToScreen(const sm::vec2& proj, int width, int height) const
 {
-	Vector scr;
+	sm::vec2 scr;
 	float xView = (proj.x - m_center.x) / m_scale + (width >> 1),
 		yView = (proj.y - m_center.y) / m_scale + (height >> 1);
 	scr.x = xView;
@@ -43,7 +43,7 @@ void OrthoCamera::UpdateModelView() const
 	RenderContextStack::Instance()->SetModelView(-m_center, 1/m_scale);
 }
 
-void OrthoCamera::Translate(const Vector& offset)
+void OrthoCamera::Translate(const sm::vec2& offset)
 {
 	m_center += offset * m_scale;
 	UpdateModelView();

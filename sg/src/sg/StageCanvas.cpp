@@ -39,19 +39,19 @@ StageCanvas::~StageCanvas()
 void StageCanvas::SetBackground(ee::Symbol* background)
 {
 	m_background = ee::SpriteFactory::Instance()->Create(background);
-	m_background->Translate(ee::Vector(0.0f, m_background->GetBounding()->Height() * 0.375f));
+	m_background->Translate(sm::vec2(0.0f, m_background->GetBounding()->Height() * 0.375f));
 }
 
-ee::Vector StageCanvas::TransToBirdView(const ee::Vector& pos)
+sm::vec2 StageCanvas::TransToBirdView(const sm::vec2& pos)
 {
-	ee::Vector ret = ee::Math2D::RotateVector(pos, SM_PI / 4);
+	sm::vec2 ret = ee::Math2D::RotateVector(pos, SM_PI / 4);
 	ret.y *= VIEW_TRANS;
 	return ret;
 }
 
-ee::Vector StageCanvas::TransToFlatView(const ee::Vector& pos)
+sm::vec2 StageCanvas::TransToFlatView(const sm::vec2& pos)
 {
-	ee::Vector ret = pos;
+	sm::vec2 ret = pos;
 	ret.y /= VIEW_TRANS;
 	ret = ee::Math2D::RotateVector(ret, - SM_PI / 4);
 	return ret;
@@ -110,22 +110,22 @@ void StageCanvas::DrawGuideLines() const
 	if (is_flat)
 	{
 		for (int i = 0; i <= row; ++i) {
-			ee::RVG::Line(ee::Vector(0, i*edge), ee::Vector(width, i*edge));
+			ee::RVG::Line(sm::vec2(0, i*edge), sm::vec2(width, i*edge));
 		}
 		for (int i = 0; i <= col; ++i) {
-			ee::RVG::Line(ee::Vector(i*edge, 0), ee::Vector(i*edge, height));
+			ee::RVG::Line(sm::vec2(i*edge, 0), sm::vec2(i*edge, height));
 		}
 	}
 	else
 	{
 		for (int i = 0; i <= row; ++i) {
-			ee::Vector s = TransToBirdView(ee::Vector(0, i*edge));
-			ee::Vector e = TransToBirdView(ee::Vector(width, i*edge));
+			sm::vec2 s = TransToBirdView(sm::vec2(0, i*edge));
+			sm::vec2 e = TransToBirdView(sm::vec2(width, i*edge));
 			ee::RVG::Line(s, e);
 		}
 		for (int i = 0; i <= col; ++i) {
-			ee::Vector s = TransToBirdView(ee::Vector(i*edge, 0));
-			ee::Vector e = TransToBirdView(ee::Vector(i*edge, height));
+			sm::vec2 s = TransToBirdView(sm::vec2(i*edge, 0));
+			sm::vec2 e = TransToBirdView(sm::vec2(i*edge, height));
 			ee::RVG::Line(s, e);
 		}
 	}
@@ -164,16 +164,16 @@ void StageCanvas::DrawSprites() const
 			SymbolExt* info = static_cast<SymbolExt*>(sprite->GetSymbol().GetUserData());
 			{
 				if (info->wall_type == 0) {
-					ee::Vector pos = sprite->GetPosition() + ee::Vector(0, 4);
+					sm::vec2 pos = sprite->GetPosition() + sm::vec2(0, 4);
 					ee::SpriteRenderer::Draw(&sprite->GetSymbol(), sm::mat4(), pos);
 				} else if (info->wall_type == 1) {
-					ee::Vector pos = sprite->GetPosition() + ee::Vector(-10, 8);
+					sm::vec2 pos = sprite->GetPosition() + sm::vec2(-10, 8);
 					ee::SpriteRenderer::Draw(&sprite->GetSymbol(), sm::mat4(), pos);
 				} else if (info->wall_type == 2) {
-					ee::Vector pos = sprite->GetPosition() + ee::Vector(10, 8);
+					sm::vec2 pos = sprite->GetPosition() + sm::vec2(10, 8);
 					ee::SpriteRenderer::Draw(&sprite->GetSymbol(), sm::mat4(), pos);
 				} else if (info->wall_type == 3) {
-					ee::Vector pos = sprite->GetPosition() + ee::Vector(0, 6);
+					sm::vec2 pos = sprite->GetPosition() + sm::vec2(0, 6);
 					ee::SpriteRenderer::Draw(&sprite->GetSymbol(), sm::mat4(), pos);
 				}
 			}

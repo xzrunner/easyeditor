@@ -20,16 +20,16 @@ bool EditClipboxOP::OnMouseLeftDown(int x, int y)
 {
 	if (ee::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 
 	m_clipbox_selected = -1;
-	if (ee::Math2D::GetDistance(ee::Vector(m_rect.xmin, m_rect.ymin), pos) < NODE_RADIUS) {
+	if (ee::Math2D::GetDistance(sm::vec2(m_rect.xmin, m_rect.ymin), pos) < NODE_RADIUS) {
 		m_clipbox_selected = 0;
-	} else if (ee::Math2D::GetDistance(ee::Vector(m_rect.xmin, m_rect.ymax), pos) < NODE_RADIUS) {
+	} else if (ee::Math2D::GetDistance(sm::vec2(m_rect.xmin, m_rect.ymax), pos) < NODE_RADIUS) {
 		m_clipbox_selected = 1;
-	} else if (ee::Math2D::GetDistance(ee::Vector(m_rect.xmax, m_rect.ymax), pos) < NODE_RADIUS) {
+	} else if (ee::Math2D::GetDistance(sm::vec2(m_rect.xmax, m_rect.ymax), pos) < NODE_RADIUS) {
 		m_clipbox_selected = 2;
-	} else if (ee::Math2D::GetDistance(ee::Vector(m_rect.xmax, m_rect.ymin), pos) < NODE_RADIUS) {
+	} else if (ee::Math2D::GetDistance(sm::vec2(m_rect.xmax, m_rect.ymin), pos) < NODE_RADIUS) {
 		m_clipbox_selected = 3;
 	}
 
@@ -53,7 +53,7 @@ bool EditClipboxOP::OnMouseDrag(int x, int y)
 		return false;
 	}
 
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	if (m_clipbox_selected == 0) {
 		m_rect.xmin = std::min(m_rect.xmax, pos.x);			
 		m_rect.ymin = std::min(m_rect.ymax, pos.y);
@@ -78,12 +78,12 @@ bool EditClipboxOP::OnDraw() const
 	
 	ee::RVG::Color(ee::LIGHT_GREEN);
 
-	ee::RVG::Rect(ee::Vector(m_rect.xmin, m_rect.ymin), ee::Vector(m_rect.xmax, m_rect.ymax), false);
+	ee::RVG::Rect(sm::vec2(m_rect.xmin, m_rect.ymin), sm::vec2(m_rect.xmax, m_rect.ymax), false);
 
-	ee::RVG::Circle(ee::Vector(m_rect.xmin, m_rect.ymin), NODE_RADIUS, true);
-	ee::RVG::Circle(ee::Vector(m_rect.xmin, m_rect.ymax), NODE_RADIUS, true);
-	ee::RVG::Circle(ee::Vector(m_rect.xmax, m_rect.ymax), NODE_RADIUS, true);
-	ee::RVG::Circle(ee::Vector(m_rect.xmax, m_rect.ymin), NODE_RADIUS, true);
+	ee::RVG::Circle(sm::vec2(m_rect.xmin, m_rect.ymin), NODE_RADIUS, true);
+	ee::RVG::Circle(sm::vec2(m_rect.xmin, m_rect.ymax), NODE_RADIUS, true);
+	ee::RVG::Circle(sm::vec2(m_rect.xmax, m_rect.ymax), NODE_RADIUS, true);
+	ee::RVG::Circle(sm::vec2(m_rect.xmax, m_rect.ymin), NODE_RADIUS, true);
 
 	return false;
 }

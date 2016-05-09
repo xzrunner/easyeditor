@@ -7,31 +7,31 @@
 namespace eshape
 {
 
-void Material::Translate(const ee::Vector& offset)
+void Material::Translate(const sm::vec2& offset)
 {
 	for (int i = 0, n = m_tris.size(); i < n; ++i) {
 		m_tris[i] += offset;
 	}
 }
 
-void Material::BuildBegin(const std::vector<ee::Vector>& outline)
+void Material::BuildBegin(const std::vector<sm::vec2>& outline)
 {
 	m_outline = outline;
 	m_segments.clear();
 	m_holes.clear();
 }
 
-void Material::BuildSetSegments(const std::vector<ee::Vector>& segs) 
+void Material::BuildSetSegments(const std::vector<sm::vec2>& segs) 
 { 
 	m_segments = segs;
 }
 
-void Material::BuildSetHoles(const std::vector<std::vector<ee::Vector> >& holes) 
+void Material::BuildSetHoles(const std::vector<std::vector<sm::vec2> >& holes) 
 { 
 	m_holes = holes; 
 }
 
-void Material::Refresh(const std::vector<ee::Vector>& vertices)
+void Material::Refresh(const std::vector<sm::vec2>& vertices)
 {
 	BuildBegin(vertices);
 	BuildEnd();
@@ -39,13 +39,13 @@ void Material::Refresh(const std::vector<ee::Vector>& vertices)
 
 void Material::DebugDrawTris(const sm::mat4& mt) const
 {
-	std::vector<ee::Vector> buf;
+	std::vector<sm::vec2> buf;
 	for (size_t i = 0, n = m_tris.size(); i < n; ++i)
 	{
 		buf.push_back(m_tris[i]);
 		if (buf.size() == 3)
 		{
-			std::vector<ee::Vector> vertices;
+			std::vector<sm::vec2> vertices;
 			ee::Math2D::TransVertices(mt, buf, vertices);
 			ee::RVG::Color(ee::Colorf(0, 1, 0));
 			ee::RVG::Polyline(vertices, true);

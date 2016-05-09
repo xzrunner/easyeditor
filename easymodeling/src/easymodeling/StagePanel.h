@@ -17,10 +17,10 @@ public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame);
 	virtual ~StagePanel();
 
-	virtual ee::Sprite* QuerySpriteByPos(const ee::Vector& pos) const;
+	virtual ee::Sprite* QuerySpriteByPos(const sm::vec2& pos) const;
 	virtual void QuerySpritesByRect(const ee::Rect& rect, std::vector<ee::Sprite*>& result) const;		
 
-	Joint* queryJointByPos(const ee::Vector& pos) const;
+	Joint* queryJointByPos(const sm::vec2& pos) const;
 	void queryJointsByRect(const ee::Rect& rect, std::vector<Joint*>& result) const;
 
 	void insertJoint(Joint* joint) {
@@ -49,11 +49,11 @@ private:
 	class PointQueryVisitor : public ee::Visitor
 	{
 	public:
-		PointQueryVisitor(const ee::Vector& pos, ee::Sprite** pResult);
+		PointQueryVisitor(const sm::vec2& pos, ee::Sprite** pResult);
 		virtual void Visit(ee::Object* object, bool& next);
 
 	private:
-		const ee::Vector& m_pos;
+		const sm::vec2& m_pos;
 		ee::Sprite** m_pResult;
 
 	}; // PointQueryVisitor

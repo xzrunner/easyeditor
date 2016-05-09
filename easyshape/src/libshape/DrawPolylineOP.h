@@ -2,7 +2,8 @@
 #define _EASYSHAPE_DRAW_POLYLINE_OP_H_
 
 #include <ee/ZoomViewOP.h>
-#include <ee/Vector.h>
+
+#include <SM_Vector.h>
 
 #include <vector>
 
@@ -23,18 +24,19 @@ public:
 	virtual bool Clear();
 
 	void SetLoop(bool is_loop) {
-		m_isClosed = is_loop;
+		m_is_closed = is_loop;
 	}
 
 private:
 	bool ShouldFixPos() const;
 
 protected:
-	mutable std::vector<ee::Vector> m_polyline;
-	ee::Vector m_curr_pos;
+	mutable std::vector<sm::vec2> m_polyline;
+	sm::vec2 m_curr_pos;
+	bool m_curr_pos_valid;
 
 private:
-	bool m_isClosed;
+	bool m_is_closed;
 
 	// todo
 	friend class EditPolylineImpl;

@@ -1,7 +1,7 @@
 #ifndef _EASYEDITOR_SGI_H_
 #define _EASYEDITOR_SGI_H_
 
-#include "Vector.h"
+#include <SM_Vector.h>
 
 #include <vector>
 
@@ -11,8 +11,8 @@ namespace ee
 class SGI
 {
 public:
-	static void Do(const std::vector<Vector>& src,
-		std::vector<std::vector<Vector> >& dst);
+	static void Do(const std::vector<sm::vec2>& src,
+		std::vector<std::vector<sm::vec2> >& dst);
 
 private:
 	struct Edge;
@@ -21,7 +21,7 @@ private:
 	{
 		bool used;
 
-		Vector nodes[3];
+		sm::vec2 nodes[3];
 
 		// [0] v0-v1, [1] v1-v2, [2] v2-v0
 		Edge* edges[3];
@@ -34,7 +34,7 @@ private:
 
 	struct Edge
 	{
-		Vector start, end;
+		sm::vec2 start, end;
 
 		Triangle *left, *right;
 
@@ -47,7 +47,7 @@ private:
 	static void InsertEdge(std::vector<Edge*>& edges, Triangle* tri,
 		int index);
 
-	static void Traversal(Triangle* tri, std::vector<Vector>& strip, int level = 0);
+	static void Traversal(Triangle* tri, std::vector<sm::vec2>& strip, int level = 0);
 
 	static int GetDegree(Triangle* tri, int level);
 

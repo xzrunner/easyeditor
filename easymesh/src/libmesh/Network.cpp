@@ -67,11 +67,11 @@ void Network::Load(const Json::Value& value)
 		delete m_nw;
 	}
 
-	std::vector<ee::Vector> outline;
+	std::vector<sm::vec2> outline;
 	ee::JsonSerializer::Load(value["shape"]["outline"], outline);
 	m_nw = new NetworkShape(new eshape::ChainShape(outline, true), m_node_radius);
 
-	std::vector<ee::Vector> inner;
+	std::vector<sm::vec2> inner;
 	ee::JsonSerializer::Load(value["shape"]["inner"], inner);
 	m_nw->SetInnerVertices(inner);
 
@@ -110,26 +110,26 @@ void Network::OffsetUV(float dx, float dy)
 	//	int height = m_region.rect.Height();
 	//
 	//	const float MAX = 99999;
-	//	std::vector<ee::Vector> tris;
-	//	std::vector<ee::Vector> lines;
+	//	std::vector<sm::vec2> tris;
+	//	std::vector<sm::vec2> lines;
 	//	if (m_uv_offset.x != 0)
 	//	{
 	//		float x = -width*0.5f + width*m_uv_offset.x;
-	//		lines.push_back(ee::Vector(x, -MAX));
-	//		lines.push_back(ee::Vector(x, MAX));
+	//		lines.push_back(sm::vec2(x, -MAX));
+	//		lines.push_back(sm::vec2(x, MAX));
 	//	}
 	//	if (m_uv_offset.y != 0)
 	//	{
 	//		float y = -height*0.5f + height*m_uv_offset.y;
-	//		lines.push_back(ee::Vector(-MAX, y));
-	//		lines.push_back(ee::Vector(MAX, y));
+	//		lines.push_back(sm::vec2(-MAX, y));
+	//		lines.push_back(sm::vec2(MAX, y));
 	//	}
 	//
-	//	std::vector<ee::Vector> bound;
+	//	std::vector<sm::vec2> bound;
 	//	GetRegionBound(bound);
 	//	ee::Triangulation::pointsAndLines(bound, m_region.nodes, lines, tris);
 	//
-	//	std::vector<std::pair<ee::Vector, ee::Vector> > trans_list;
+	//	std::vector<std::pair<sm::vec2, sm::vec2> > trans_list;
 	//	std::set<Node*> nodes;
 	//	for (int i = 0, n = m_tris.size(); i < n; ++i)
 	//	{
@@ -159,13 +159,13 @@ void Network::OffsetUV(float dx, float dy)
 	//				if ((y > curr->ori_xy.y && y < next->ori_xy.y || 
 	//					y < curr->ori_xy.y && y > next->ori_xy.y) &&
 	//					(curr->ori_xy != curr->xy || next->ori_xy != next->xy)) {
-	//// 						ee::Vector from, to;
+	//// 						sm::vec2 from, to;
 	//// 						from.y = to.y = y;
 	//// 						from.x = ee::Math2D::findXOnSeg(curr->ori_xy, next->ori_xy, y);
 	//// 						to.x = ee::Math2D::findXOnSeg(curr->xy, next->xy, y);
 	//
-	//						ee::Vector pos(0.0f, y);
-	//						ee::Vector from, to;
+	//						sm::vec2 pos(0.0f, y);
+	//						sm::vec2 from, to;
 	//						ee::Math2D::getFootOfPerpendicular(curr->ori_xy, next->ori_xy, pos, &from);
 	//
 	//						float p = ee::Math2D::getDistance(pos, curr->ori_xy) / ee::Math2D::getDistance(curr->ori_xy, next->ori_xy);
@@ -287,7 +287,7 @@ void Network::Clear()
 	ClearTriangles();
 }
 
-bool Network::InsertInner(const ee::Vector& pos)
+bool Network::InsertInner(const sm::vec2& pos)
 {
 	if (!m_nw) {
 		return false;
@@ -296,7 +296,7 @@ bool Network::InsertInner(const ee::Vector& pos)
 	}
 }
 
-bool Network::RemoveInner(const ee::Vector& pos)
+bool Network::RemoveInner(const sm::vec2& pos)
 {
 	if (!m_nw) {
 		return false;
@@ -305,7 +305,7 @@ bool Network::RemoveInner(const ee::Vector& pos)
 	}
 }
 
-ee::Vector* Network::QueryInner(const ee::Vector& pos)
+sm::vec2* Network::QueryInner(const sm::vec2& pos)
 {
 	if (!m_nw) {
 		return NULL;
@@ -318,22 +318,22 @@ void Network::RefreshTriangles()
 {
 	ClearTriangles();
 
-	std::vector<ee::Vector> tris;
+	std::vector<sm::vec2> tris;
 	GetTriangulation(tris);
 	
 	LoadFromTriangulation(tris);
 }
  
-void Network::GetTriangulation(std::vector<ee::Vector>& tris)
+void Network::GetTriangulation(std::vector<sm::vec2>& tris)
 {
 	if (m_nw) {
 		ee::Triangulation::Points(m_nw->GetVertices(), m_nw->GetInnerVertices(), tris);
 	}
 }
 
-void Network::LoadFromTriangulation(const std::vector<ee::Vector>& tris)
+void Network::LoadFromTriangulation(const std::vector<sm::vec2>& tris)
 {
-	std::map<ee::Vector, Node*, ee::VectorCmp> map2Node;
+	std::map<sm::vec2, Node*, sm::Vector2Cmp> map2Node;
 	Node null;
 	for (int i = 0, n = tris.size(); i < n; ++i)
 		map2Node.insert(std::make_pair(tris[i], &null));
@@ -343,7 +343,7 @@ void Network::LoadFromTriangulation(const std::vector<ee::Vector>& tris)
 		Triangle* tri = new Triangle;
 		for (int j = 0; j < 3; ++j)
 		{
-			std::map<ee::Vector, Node*, ee::VectorCmp>::iterator itr 
+			std::map<sm::vec2, Node*, sm::Vector2Cmp>::iterator itr 
 				= map2Node.find(tris[ptr++]);
 			assert(itr != map2Node.end());
 			if (itr->second == &null) {
@@ -357,26 +357,26 @@ void Network::LoadFromTriangulation(const std::vector<ee::Vector>& tris)
 	}
 }
 
-void Network::GetRegionBound(std::vector<ee::Vector>& bound) const
+void Network::GetRegionBound(std::vector<sm::vec2>& bound) const
 {
 // 	if (m_use_region) {
 // 		const ee::Rect& r = m_region.rect;
-// 		bound.push_back(ee::Vector(r.xmin, r.ymin));
-// 		bound.push_back(ee::Vector(r.xmin, r.ymax));
-// 		bound.push_back(ee::Vector(r.xmax, r.ymax));
-// 		bound.push_back(ee::Vector(r.xmax, r.ymin));
+// 		bound.push_back(sm::vec2(r.xmin, r.ymin));
+// 		bound.push_back(sm::vec2(r.xmin, r.ymax));
+// 		bound.push_back(sm::vec2(r.xmax, r.ymax));
+// 		bound.push_back(sm::vec2(r.xmax, r.ymin));
 // 	} else {
 // 		std::copy(m_region.nodes.begin(), m_region.nodes.end(), back_inserter(bound));
 // 	}
 }
 
-//void Network::getLinesCutByUVBounds(std::vector<ee::Vector>& lines)
+//void Network::getLinesCutByUVBounds(std::vector<sm::vec2>& lines)
 //{
 //	// hori
 //	if (m_uv_offset.y != 0)
 //	{
 //		int height = m_region.rect.Height();
-//		std::set<ee::Vector, ee::VectorCmpX> nodes;
+//		std::set<sm::vec2, ee::VectorCmpX> nodes;
 //		float y = -height*0.5f + height*m_uv_offset.y;
 //		for (int i = 0, n = m_tris.size(); i < n; ++i)
 //		{
@@ -389,7 +389,7 @@ void Network::GetRegionBound(std::vector<ee::Vector>& bound) const
 //				}
 //				float x = ee::Math2D::findXOnSeg(sn->xy, en->xy, y);
 //				if (x > sn->xy.x && x < en->xy.x) {
-//					nodes.insert(ee::Vector(x, y));
+//					nodes.insert(sm::vec2(x, y));
 //				}
 //			}
 //		}
@@ -400,7 +400,7 @@ void Network::GetRegionBound(std::vector<ee::Vector>& bound) const
 //	if (m_uv_offset.x != 0)
 //	{
 //		int width = m_region.rect.Width();
-//		std::set<ee::Vector, ee::VectorCmpY> nodes;
+//		std::set<sm::vec2, ee::VectorCmpY> nodes;
 //		float x = -width*0.5f + width*m_uv_offset.x;
 //		for (int i = 0, n = m_tris.size(); i < n; ++i)
 //		{
@@ -413,7 +413,7 @@ void Network::GetRegionBound(std::vector<ee::Vector>& bound) const
 //				}
 //				float y = ee::Math2D::findXOnSeg(sn->xy, en->xy, x);
 //				if (y > sn->xy.y && y < en->xy.y) {
-//					nodes.insert(ee::Vector(x, y));
+//					nodes.insert(sm::vec2(x, y));
 //				}
 //			}
 //		}

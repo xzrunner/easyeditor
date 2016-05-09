@@ -3,7 +3,7 @@
 
 #include "Mesh.h"
 
-namespace ee { class Visitor; class Shape; class Vector; }
+namespace ee { class Visitor; class Shape; }
 
 namespace emesh
 {

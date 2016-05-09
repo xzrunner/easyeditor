@@ -48,7 +48,7 @@ void Pseudo3DCamera::Reset()
 	UpdateModelView();
 }
 
-Vector Pseudo3DCamera::TransPosScreenToProject(int x, int y, int width, int height) const
+sm::vec2 Pseudo3DCamera::TransPosScreenToProject(int x, int y, int width, int height) const
 {
 	sm_ivec2 screen;
 	screen.x = x;
@@ -57,15 +57,15 @@ Vector Pseudo3DCamera::TransPosScreenToProject(int x, int y, int width, int heig
 	sm_vec2 world;
 	c25_screen_to_world(m_cam, &world, &screen, width, height);
 
-	return Vector(world.x, world.y);
+	return sm::vec2(world.x, world.y);
 }
 
-Vector Pseudo3DCamera::TransPosProjectToScreen(const Vector& proj, int width, int height) const
+sm::vec2 Pseudo3DCamera::TransPosProjectToScreen(const sm::vec2& proj, int width, int height) const
 {
 	return TransPosProjectToScreen(sm::vec3(proj.x, proj.y, 0), width, height);
 }
 
-Vector Pseudo3DCamera::TransPosProjectToScreen(const sm::vec3& proj, int width, int height) const
+sm::vec2 Pseudo3DCamera::TransPosProjectToScreen(const sm::vec3& proj, int width, int height) const
 {
 	sm_vec3 world;
 	world.x = proj.x;
@@ -75,7 +75,7 @@ Vector Pseudo3DCamera::TransPosProjectToScreen(const sm::vec3& proj, int width, 
 	sm_ivec2 screen;
 	c25_world_to_screen(m_cam, &screen, &world, width, height);
 
-	return Vector(screen.x, screen.y);
+	return sm::vec2(screen.x, screen.y);
 }
 
 void Pseudo3DCamera::UpdateModelView() const
@@ -91,9 +91,9 @@ float Pseudo3DCamera::GetScale() const
 	return 1;
 }
 
-const Vector& Pseudo3DCamera::GetPosition() const
+const sm::vec2& Pseudo3DCamera::GetPosition() const
 {
-	return Vector(0, 0);
+	return sm::vec2(0, 0);
 }
 
 void Pseudo3DCamera::Translate(const sm::vec3& offset)

@@ -37,7 +37,8 @@ private:
 	void CopyFromSelection();
 
 protected:
-	Vector m_first_pos;
+	sm::vec2 m_first_pos;
+	bool m_first_pos_valid;
 
 	ShapeSelection* m_selection;
 
@@ -45,10 +46,10 @@ private:
 	class TranslateVisitor : public Visitor
 	{
 	public:
-		TranslateVisitor(const Vector& offset) : m_offset(offset) {}
+		TranslateVisitor(const sm::vec2& offset) : m_offset(offset) {}
 		virtual void Visit(Object* object, bool& next);
 	private:
-		Vector m_offset;
+		sm::vec2 m_offset;
 	}; // TranslateVisitor
 
 private:
@@ -61,7 +62,7 @@ private:
 	// To disable mouse able when press ctrl and window query
 	bool m_bDraggable;
 
-	Vector m_move_last_pos;
+	sm::vec2 m_move_last_pos;
 
 }; // SelectShapesOP
 

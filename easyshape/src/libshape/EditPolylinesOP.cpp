@@ -17,10 +17,9 @@ EditPolylinesOP::EditPolylinesOP(wxWindow* wnd, ee::EditPanelImpl* stage,
 								 EditPolylinesCMPT* cmpt)
 	: ee::SelectShapesOP(wnd, stage, shapes_impl, cmpt)
 	, m_cmpt(cmpt)
-	, m_bDirty(false)
+	, m_is_dirty(false)
+	, m_last_pos_valid(false)
 {
-	m_lastPos.SetInvalid();
-
 	clearBuffer();
 }
 
@@ -28,10 +27,12 @@ bool EditPolylinesOP::OnMouseLeftDown(int x, int y)
 {
 	if (ee::SelectShapesOP::OnMouseLeftDown(x, y)) return true;
 
-	if (!m_first_pos.IsValid())
-		m_lastPos = m_stage->TransPosScrToProj(x, y);
-	else
-		m_lastPos.SetInvalid();
+	if (!m_last_pos_valid) {
+		m_last_pos = m_stage->TransPosScrToProj(x, y);
+		m_last_pos_valid = true;
+	} else {
+		m_last_pos_valid = false;
+	}
 
 	return false;
 }
@@ -40,11 +41,11 @@ bool EditPolylinesOP::OnMouseLeftUp(int x, int y)
 {
 	if (ee::SelectShapesOP::OnMouseLeftUp(x, y)) return true;
 
-	if (m_bDirty)
+	if (m_is_dirty)
 		m_selection->Traverse(UpdateChainVisitor());
 
 	clearBuffer();
-	m_selection->Traverse(UpdateBufferVisitor(m_simplifyBuffer));
+	m_selection->Traverse(UpdateBufferVisitor(m_simplify_buffer));
 
 	return false;
 }
@@ -53,14 +54,15 @@ bool EditPolylinesOP::OnMouseDrag(int x, int y)
 {
 	if (ee::SelectShapesOP::OnMouseDrag(x, y)) return true;
 
-	if (m_lastPos.IsValid())
+	if (m_last_pos_valid)
 	{
-		ee::Vector currPos = m_stage->TransPosScrToProj(x, y);
-		ee::Vector offset = currPos - m_lastPos;
+		sm::vec2 curr_pos = m_stage->TransPosScrToProj(x, y);
+		sm::vec2 offset = curr_pos - m_last_pos;
 		m_selection->Traverse(OffsetVisitor(offset));
-		m_lastPos = currPos;
+		m_last_pos = curr_pos;
+		m_last_pos_valid = true;
 
-		m_bDirty = true;
+		m_is_dirty = true;
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
@@ -74,8 +76,8 @@ bool EditPolylinesOP::OnDraw() const
 	ee::RenderColor color;
 	color.multi.Set(0.8f, 0.8f, 0.2f);
 
-	std::map<ChainShape*, ChainShape*>::const_iterator itr = m_simplifyBuffer.begin();
-	for ( ; itr != m_simplifyBuffer.end(); ++itr) {
+	std::map<ChainShape*, ChainShape*>::const_iterator itr = m_simplify_buffer.begin();
+	for ( ; itr != m_simplify_buffer.end(); ++itr) {
 		itr->second->Draw(sm::mat4(), color);
 		ee::RVG::Color(ee::Colorf(0.2f, 0.2f, 0.8f));
 		ee::RVG::Circles(itr->second->GetVertices(), ee::SettingData::ctl_pos_sz, true);
@@ -95,10 +97,10 @@ bool EditPolylinesOP::Clear()
 
 void EditPolylinesOP::simplify()
 {
-	std::map<ChainShape*, ChainShape*>::iterator itr = m_simplifyBuffer.begin();
-	for ( ; itr != m_simplifyBuffer.end(); ++itr)
+	std::map<ChainShape*, ChainShape*>::iterator itr = m_simplify_buffer.begin();
+	for ( ; itr != m_simplify_buffer.end(); ++itr)
 	{
-		std::vector<ee::Vector> simplified;
+		std::vector<sm::vec2> simplified;
 		ee::DouglasPeucker::Do(itr->first->GetVertices(), m_cmpt->GetSimplifyThreshold(), simplified);
 		itr->second->Load(simplified);
 	}
@@ -108,8 +110,8 @@ void EditPolylinesOP::simplify()
 
 void EditPolylinesOP::updateFromSimplified()
 {
-	std::map<ChainShape*, ChainShape*>::iterator itr = m_simplifyBuffer.begin();
-	for ( ; itr != m_simplifyBuffer.end(); ++itr)
+	std::map<ChainShape*, ChainShape*>::iterator itr = m_simplify_buffer.begin();
+	for ( ; itr != m_simplify_buffer.end(); ++itr)
 		itr->first->Load(itr->second->GetVertices());
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -117,12 +119,12 @@ void EditPolylinesOP::updateFromSimplified()
 
 void EditPolylinesOP::clearBuffer()
 {
-	std::map<ChainShape*, ChainShape*>::iterator itr = m_simplifyBuffer.begin();
-	for ( ; itr != m_simplifyBuffer.end(); ++itr)
+	std::map<ChainShape*, ChainShape*>::iterator itr = m_simplify_buffer.begin();
+	for ( ; itr != m_simplify_buffer.end(); ++itr)
 		delete itr->second;
-	m_simplifyBuffer.clear();
+	m_simplify_buffer.clear();
 
-	m_bDirty = false;
+	m_is_dirty = false;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -164,7 +166,7 @@ Visit(Object* object, bool& next)
 //////////////////////////////////////////////////////////////////////////
 
 EditPolylinesOP::OffsetVisitor::
-OffsetVisitor(const ee::Vector& offset)
+OffsetVisitor(const sm::vec2& offset)
 	: m_offset(offset)
 {
 }

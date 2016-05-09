@@ -2,7 +2,6 @@
 #define _EASYEDITOR_MOVE_SPRITE_STATE_H_
 
 #include "ArrangeSpriteState.h"
-#include "Vector.h"
 
 #include <vector>
 
@@ -18,13 +17,13 @@ public:
 	MoveSpriteState(SpriteSelection* selection);
 	virtual ~MoveSpriteState();
 
-	virtual	bool OnMouseMove(const Vector& pos);
+	virtual	bool OnMouseMove(const sm::vec2& pos);
 
 private:
 	std::vector<Sprite*> m_sprites;
 
-	Vector m_center;
-	std::vector<Vector> m_offset;
+	sm::vec2 m_center;
+	std::vector<sm::vec2> m_offset;
 
 }; // MoveSpriteState
 

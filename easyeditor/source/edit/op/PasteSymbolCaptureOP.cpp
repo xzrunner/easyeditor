@@ -16,8 +16,8 @@ PasteSymbolCaptureOP::PasteSymbolCaptureOP(wxWindow* wnd, EditPanelImpl* stage, 
 	: PasteSymbolOP(wnd, stage, library)
 	, m_cmpt(cmpt)
 	, m_bCaptured(false)
+	, m_last_pos_valid(false)
 {
-	m_lastPos.SetInvalid();
 }
 
 bool PasteSymbolCaptureOP::OnMouseLeftDown(int x, int y)
@@ -27,7 +27,8 @@ bool PasteSymbolCaptureOP::OnMouseLeftDown(int x, int y)
 	{
 		if (!m_bCaptured)
 			m_pos = m_stage->TransPosScrToProj(x, y);
-		m_lastPos = m_pos;
+		m_last_pos = m_pos;
+		m_last_pos_valid = true;
 
 		Sprite* sprite = SpriteFactory::Instance()->Create(symbol);
 		sprite->Translate(m_pos);
@@ -44,12 +45,12 @@ bool PasteSymbolCaptureOP::OnMouseMove(int x, int y)
 
 	m_bCaptured = false;
 	m_pos = m_stage->TransPosScrToProj(x, y);
-	if (m_lastPos.IsValid())
+	if (m_last_pos_valid)
 	{
-		Vector offset = m_cmpt->GetOffset();
-		Vector newPos = m_lastPos + offset;
+		sm::vec2 offset = m_cmpt->GetOffset();
+		sm::vec2 newPos = m_last_pos + offset;
 		if (Math2D::GetDistance(m_pos, newPos) < 
-			Math2D::GetDistance(offset, Vector(0, 0)))
+			Math2D::GetDistance(offset, sm::vec2(0, 0)))
 		{
 			m_bCaptured = true;
 			m_pos = newPos;
@@ -64,7 +65,7 @@ bool PasteSymbolCaptureOP::Clear()
 {
 	if (PasteSymbolOP::Clear()) return true;
 
-	m_lastPos.SetInvalid();
+	m_last_pos_valid = false;
 
 	return false;
 }

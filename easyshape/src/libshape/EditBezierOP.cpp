@@ -22,6 +22,8 @@ EditBezierOP::EditBezierOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiSha
 	, m_property(property)
 	, m_shapes_impl(shapes_impl)
 	, m_node_capture(node_capture)
+	, m_first_pos_valid(false)
+	, m_curr_pos_valid(false)
 {
 	m_cursor = wxCursor(wxCURSOR_PENCIL);
 
@@ -46,7 +48,8 @@ bool EditBezierOP::OnMouseLeftDown(int x, int y)
 {
 	if (ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
-	m_firstPress = m_curr_pos = m_stage->TransPosScrToProj(x, y);
+	m_first_pos = m_curr_pos = m_stage->TransPosScrToProj(x, y);
+	m_first_pos_valid = m_curr_pos_valid = true;
 
 	m_shapes_impl->GetShapeSelection()->Clear();
 
@@ -54,7 +57,7 @@ bool EditBezierOP::OnMouseLeftDown(int x, int y)
 	if (tolerance != 0)
 	{	
 		NodeCapture capture(m_shapes_impl, tolerance);
-		capture.captureEditable(m_firstPress, m_captured);
+		capture.captureEditable(m_first_pos, m_captured);
  		if (BezierShape* bezier = dynamic_cast<BezierShape*>(m_captured.shape))
 		{
 			m_shapes_impl->GetShapeSelection()->Add(bezier);
@@ -75,14 +78,15 @@ bool EditBezierOP::OnMouseLeftUp(int x, int y)
 
 	if (!m_captured.shape)
 	{
-		if (m_firstPress.IsValid())
+		if (m_first_pos_valid)
 		{
 			m_curr_pos = m_stage->TransPosScrToProj(x, y);
+			m_curr_pos_valid = true;
 
-			const float dis = ee::Math2D::GetDistance(m_firstPress, m_curr_pos);
+			const float dis = ee::Math2D::GetDistance(m_first_pos, m_curr_pos);
 			if (dis > 1)
 			{
-				BezierShape* bezier = new BezierShape(m_firstPress, m_curr_pos);
+				BezierShape* bezier = new BezierShape(m_first_pos, m_curr_pos);
 				ee::SelectShapeSJ::Instance()->Select(bezier);
 				ee::InsertShapeSJ::Instance()->Insert(bezier);
 			}
@@ -108,6 +112,7 @@ bool EditBezierOP::OnMouseRightDown(int x, int y)
 	if (tolerance != 0)
 	{
 		m_curr_pos = m_stage->TransPosScrToProj(x, y);
+		m_curr_pos_valid = true;
 
 		NodeCapture capture(m_shapes_impl, tolerance);
 		capture.captureEditable(m_curr_pos, m_captured);
@@ -131,7 +136,7 @@ bool EditBezierOP::OnMouseMove(int x, int y)
 {
 	if (ZoomViewOP::OnMouseMove(x, y)) return true;
 
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
 	{	
@@ -151,18 +156,20 @@ bool EditBezierOP::OnMouseDrag(int x, int y)
 	if (ZoomViewOP::OnMouseDrag(x, y)) return true;
 
 	m_curr_pos = m_stage->TransPosScrToProj(x, y);
+	m_curr_pos_valid = true;
 
 	if (m_captured.shape)
 	{
 		if (BezierShape* bezier = dynamic_cast<BezierShape*>(m_captured.shape))
 		{
-			ee::Vector center(bezier->GetRect().CenterX(), bezier->GetRect().CenterY());
+			sm::vec2 center(bezier->GetRect().CenterX(), bezier->GetRect().CenterY());
 
-			if (!m_captured.pos.IsValid()) {
+			if (!m_captured.pos_valid) {
 				bezier->Translate(m_curr_pos - center);
 			} else {
 				bezier->MoveCtrlNode(m_captured.pos, m_curr_pos);
 				m_captured.pos = m_curr_pos;
+				m_captured.pos_valid = true;
 			}
 
 			m_property->EnablePropertyGrid(false);
@@ -185,11 +192,11 @@ bool EditBezierOP::OnDraw() const
 			int tolerance = m_node_capture->GetValue();
 			if (BezierShape* bezier = dynamic_cast<BezierShape*>(m_captured.shape))
 			{
-				ee::Vector c(bezier->GetRect().CenterX(), bezier->GetRect().CenterY());
+				sm::vec2 c(bezier->GetRect().CenterX(), bezier->GetRect().CenterY());
 				
 				ee::RVG::Color(ee::Colorf(0.4f, 1.0f, 0.4f));
 				ee::RVG::Circle(c, tolerance, true);
-				if (m_captured.pos.IsValid()) {
+				if (m_captured.pos_valid) {
 					ee::RVG::Color(ee::Colorf(1.0f, 0.4f, 0.4f));
 					ee::RVG::Circle(m_captured.pos, tolerance, true);
 				}
@@ -198,9 +205,9 @@ bool EditBezierOP::OnDraw() const
 	}
 	else
 	{
-		if (m_firstPress.IsValid() && m_curr_pos.IsValid())
+		if (m_first_pos_valid && m_curr_pos_valid)
 		{
-			BezierShape bezier(m_firstPress, m_curr_pos);
+			BezierShape bezier(m_first_pos, m_curr_pos);
 			bezier.Draw(sm::mat4());
 		}
 	}
@@ -212,8 +219,8 @@ bool EditBezierOP::Clear()
 {
 	if (ZoomViewOP::Clear()) return true;
 
-	m_firstPress.SetInvalid();
-	m_curr_pos.SetInvalid();
+	m_first_pos_valid = false;
+	m_curr_pos_valid = false;
 
 	return false;
 }

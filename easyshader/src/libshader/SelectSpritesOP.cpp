@@ -19,7 +19,7 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 		return true;
 	}
 
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	static_cast<StageCanvas2D*>(m_stage->GetCanvas())->OnMousePressed(pos);
 
 	return false;

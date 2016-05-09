@@ -3,8 +3,6 @@
 
 #include "Joint.h"
 
-#include <ee/Vector.h>
-
 namespace emodeling
 {
 
@@ -13,26 +11,26 @@ class DistanceJoint : public Joint
 public:
 	DistanceJoint(Body* b0, Body* b1);
 
-	virtual bool IsContain(const ee::Vector& pos) const;
+	virtual bool IsContain(const sm::vec2& pos) const;
 	virtual bool IsIntersect(const ee::Rect& rect) const;
 
 	virtual void Draw(DrawType type) const;
 
-	ee::Vector GetWorldAnchorA() const;
-	ee::Vector GetWorldAnchorB() const;
+	sm::vec2 GetWorldAnchorA() const;
+	sm::vec2 GetWorldAnchorB() const;
 
-	void SetLocalAnchorA(const ee::Vector& world);
-	void SetLocalAnchorB(const ee::Vector& world);
+	void SetLocalAnchorA(const sm::vec2& world);
+	void SetLocalAnchorB(const sm::vec2& world);
 
 private:
-	void DrawAnchor(const ee::Vector& pos, DrawType type) const;
+	void DrawAnchor(const sm::vec2& pos, DrawType type) const;
 
-	void DrawConnection(const ee::Vector& worldAnchorA, 
-		const ee::Vector& worldAnchorB, DrawType type) const;
+	void DrawConnection(const sm::vec2& worldAnchorA, 
+		const sm::vec2& worldAnchorB, DrawType type) const;
 
 public:
-	ee::Vector m_local_anchor_a;
-	ee::Vector m_local_anchor_b;
+	sm::vec2 m_local_anchor_a;
+	sm::vec2 m_local_anchor_b;
 
 	float m_frequency_hz;
 	float m_damping_ratio;

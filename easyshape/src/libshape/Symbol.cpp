@@ -194,7 +194,7 @@ void Symbol::LoadBGOutline(ee::Symbol* bg)
 	reader.parse(fin, value);
 	fin.close();
 
-	std::vector<ee::Vector> vertices;
+	std::vector<sm::vec2> vertices;
 	ee::JsonSerializer::Load(value["normal"], vertices);
 	if (!vertices.empty()) {
 		ee::Shape* shape = new PolygonShape(vertices);
@@ -223,7 +223,7 @@ void Symbol::LoadBGTriStrip(ee::Symbol* bg)
 	int i = 0;
 	Json::Value strip_val = value["strips"][i++];
 	while (!strip_val.isNull()) {
-		std::vector<ee::Vector> strip;
+		std::vector<sm::vec2> strip;
 		ee::JsonSerializer::Load(strip_val, strip);
 		m_bg_tri_strips.push_back(strip);
 		strip_val = value["strip"][i++];

@@ -5,7 +5,7 @@
 #include "TextureMgr.h"
 #include "../SymbolDependanceSorter.h"
 
-#include <ee/Vector.h>
+#include <SM_Vector.h>
 
 namespace ecoco
 {
@@ -29,9 +29,9 @@ public:
 
 		// 0 3
 		// 1 2
-		ee::Vector scr[4];
+		sm::vec2 scr[4];
 
-		ee::Vector offset;
+		sm::vec2 offset;
 	};
 
 public:

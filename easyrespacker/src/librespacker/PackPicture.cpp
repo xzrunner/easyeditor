@@ -55,7 +55,7 @@ void PackPicture::UnpackFromBin(uint8_t** ptr, const std::vector<ee::Image*>& im
 }
 
 void PackPicture::GetImgSrcPos(const ee::TexturePacker& tp, const ee::Image* img, 
-							   const ee::Vector* texture_coord, int* src)
+							   const sm::vec2* texture_coord, int* src)
 {
 	const ee::TexturePacker::Frame* tp_frame = tp.Query(img->GetFilepath());
 	if (!tp_frame) {

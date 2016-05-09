@@ -2,7 +2,6 @@
 #define _EASYEDITOR_SPRITE_RENDERER_H_
 
 #include "RenderColor.h"
-#include "Vector.h"
 #include "RenderParams.h"
 
 namespace ee
@@ -11,7 +10,6 @@ namespace ee
 class Sprite;
 class Symbol;
 class SpriteBatch;
-class Vector;
 class FBO;
 
 class SpriteRenderer
@@ -26,7 +24,7 @@ public:
 
 	static void Draw(const Symbol* symbol, 
 		             const RenderParams& trans = RenderParams(),
-			         const Vector& pos = Vector(0, 0),
+			         const sm::vec2& pos = sm::vec2(0, 0),
 			         float angle = 0.0f, 
 			         float xScale = 1.0f, 
 			         float yScale = 1.0f,

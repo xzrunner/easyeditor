@@ -28,7 +28,7 @@ bool ArrangeSpriteOP::OnMouseLeftDClick(int x, int y)
 
 	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
 
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	ee::Sprite* selected = stage->QuerySpriteByPos(pos);
 	if (!selected) {
 		return false;
@@ -74,7 +74,7 @@ void ArrangeSpriteOP::onDirectionKeyDown(ee::DirectionType type)
 			break;
 		}
 
-		ee::Vector pos;
+		sm::vec2 pos;
 		stage->TransGridPosToCoords(row, col, pos);
 		s->SetTransform(pos, s->GetAngle());
 	}

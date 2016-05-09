@@ -29,7 +29,8 @@ private:
 
 	ee::PropertySettingPanel* m_property;
 
-	ee::Vector m_first_pos;
+	sm::vec2 m_first_pos;
+	bool m_first_pos_valid;
 
 	Fixture* m_selected;
 	Fixture* m_mouseOn;

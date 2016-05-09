@@ -17,11 +17,11 @@ TrapezoidalDec::~TrapezoidalDec()
 	delete m_root;
 }
 
-void TrapezoidalDec::Insert(const Vector& p0, const Vector& p1)
+void TrapezoidalDec::Insert(const sm::vec2& p0, const sm::vec2& p1)
 {
 	if (p0 == p1) return;
 
-	Vector left, right;
+	sm::vec2 left, right;
 	if (p0.x < p1.x) {
 		left = p0;
 		right = p1;
@@ -45,7 +45,7 @@ void TrapezoidalDec::Insert(const Vector& p0, const Vector& p1)
 	}
 }
 
-void TrapezoidalDec::InitRoot(const Vector& lpos, const Vector& rpos)
+void TrapezoidalDec::InitRoot(const sm::vec2& lpos, const sm::vec2& rpos)
 {
 	Node* left = new Node(lpos);
 	Node* right = new Node(rpos);
@@ -69,7 +69,7 @@ void TrapezoidalDec::InitRoot(const Vector& lpos, const Vector& rpos)
 	seg->SetChild1(a3);
 }
 
-void TrapezoidalDec::InsertSeg(const Vector& lpos, const Vector& rpos)
+void TrapezoidalDec::InsertSeg(const sm::vec2& lpos, const sm::vec2& rpos)
 {
 // 	Area* a0 = m_root->Query(lpos);
 // 	Area* a1 = m_root->Query(rpos);
@@ -82,7 +82,7 @@ void TrapezoidalDec::InsertSeg(const Vector& lpos, const Vector& rpos)
 //////////////////////////////////////////////////////////////////////////
 
 TrapezoidalDec::INode* TrapezoidalDec::Node::
-Query(const Vector& pos)
+Query(const sm::vec2& pos)
 {
 	assert(m_child0 && m_child1);
 	if (pos.x < m_pos.x) {
@@ -97,7 +97,7 @@ Query(const Vector& pos)
 //////////////////////////////////////////////////////////////////////////
 
 TrapezoidalDec::INode* TrapezoidalDec::Seg::
-Query(const Vector& pos)
+Query(const sm::vec2& pos)
 {
 	assert(m_child0 && m_child1);
 	if (Math2D::IsPointAtSegmentLeft(pos, m_left->m_pos, m_right->m_pos)) {
@@ -112,7 +112,7 @@ Query(const Vector& pos)
 //////////////////////////////////////////////////////////////////////////
 
 TrapezoidalDec::INode* TrapezoidalDec::Area::
-Query(const Vector& pos)
+Query(const sm::vec2& pos)
 {
 	// todo assert
 	return this;

@@ -73,7 +73,7 @@ void MoveTexcoordsCMPT::OnOpenMoveChanged(wxCommandEvent& event)
 
 void MoveTexcoordsCMPT::OnChangeUVSpeed(wxSpinEvent& event)
 {
-	ee::Vector speed(m_speed_x->GetValue() * 0.01f, m_speed_y->GetValue() * 0.01f);
+	sm::vec2 speed(m_speed_x->GetValue() * 0.01f, m_speed_y->GetValue() * 0.01f);
 	std::vector<OceanMesh*>& oceans = m_stage_panel->GetOceans();
 	for (int i = 0, n = oceans.size(); i < n; ++i) {
 		oceans[i]->SetTexcoordsSpeed(speed);

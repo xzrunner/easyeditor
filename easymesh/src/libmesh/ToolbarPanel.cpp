@@ -59,7 +59,7 @@ void ToolbarPanel::OnSetSpeed(wxCommandEvent& event)
 	double x, y;
 	m_ctrl_xspeed->GetValue().ToDouble(&x);
 	m_ctrl_yspeed->GetValue().ToDouble(&y);
-	m_sprite->SetSpeed(ee::Vector(x, y));
+	m_sprite->SetSpeed(sm::vec2(x, y));
 }
 
 }

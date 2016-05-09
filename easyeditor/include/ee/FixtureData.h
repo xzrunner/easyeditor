@@ -1,9 +1,9 @@
 #ifndef _EASYEDITOR_FIXTURE_DATA_H_
 #define _EASYEDITOR_FIXTURE_DATA_H_
 
-#include "Vector.h"
-
 #include <string>
+
+#include <SM_Vector.h>
 
 namespace ee
 {
@@ -11,7 +11,7 @@ namespace ee
 struct FixtureDataInfo
 {
 	std::string filepath;
-	Vector pos;
+	sm::vec2 pos;
 	float angle;
 	float scale;
 

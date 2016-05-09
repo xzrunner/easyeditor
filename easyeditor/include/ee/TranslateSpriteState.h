@@ -2,7 +2,6 @@
 #define _EASYEDITOR_TRANSLATE_SPRITE_STATE_H_
 
 #include "ArrangeSpriteState.h"
-#include "Vector.h"
 #include "Visitor.h"
 
 namespace ee
@@ -13,17 +12,17 @@ class SpriteSelection;
 class TranslateSpriteState : public ArrangeSpriteState
 {
 public:
-	TranslateSpriteState(SpriteSelection* selection, const Vector& first_pos);
+	TranslateSpriteState(SpriteSelection* selection, const sm::vec2& first_pos);
 	virtual ~TranslateSpriteState();
 
-	virtual	void OnMousePress(const Vector& pos);
-	virtual void OnMouseRelease(const Vector& pos);
-	virtual	bool OnMouseDrag(const Vector& pos);
+	virtual	void OnMousePress(const sm::vec2& pos);
+	virtual void OnMouseRelease(const sm::vec2& pos);
+	virtual	bool OnMouseDrag(const sm::vec2& pos);
 
 	virtual bool OnDirectionKeyDown(DirectionType type);
 
 protected:
-	virtual void Translate(const Vector& offset);
+	virtual void Translate(const sm::vec2& offset);
 
 protected:
 	SpriteSelection* GetSelection() { return m_selection; } 
@@ -32,16 +31,17 @@ private:
 	class TranslateVisitor : public Visitor
 	{
 	public:
-		TranslateVisitor(const Vector& offset) : m_offset(offset) {}
+		TranslateVisitor(const sm::vec2& offset) : m_offset(offset) {}
 		virtual void Visit(Object* object, bool& next);
 	private:
-		Vector m_offset;
+		sm::vec2 m_offset;
 	}; // TranslateVisitor
 
 private:
 	SpriteSelection* m_selection;
 
-	Vector m_first_pos, m_last_pos;
+	sm::vec2 m_first_pos, m_last_pos;
+	bool m_last_valid;
 
 	bool m_dirty;
 	

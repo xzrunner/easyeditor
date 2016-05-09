@@ -4,7 +4,6 @@
 #include "EditableMesh.h"
 
 #include <ee/Rect.h>
-#include <ee/Vector.h>
 
 namespace eshape { class ChainShape; }
 
@@ -45,9 +44,9 @@ public:
  	virtual void Reset();
  	virtual void Clear();
 
-	bool InsertInner(const ee::Vector& pos);
-	bool RemoveInner(const ee::Vector& pos);
-	ee::Vector* QueryInner(const ee::Vector& pos);
+	bool InsertInner(const sm::vec2& pos);
+	bool RemoveInner(const sm::vec2& pos);
+	sm::vec2* QueryInner(const sm::vec2& pos);
 
 	static const char* GetType() { return "network"; }
 
@@ -57,17 +56,17 @@ private:
 private:
 	void RefreshTriangles();
 
-	void GetTriangulation(std::vector<ee::Vector>& tris);
-	void LoadFromTriangulation(const std::vector<ee::Vector>& tris);
+	void GetTriangulation(std::vector<sm::vec2>& tris);
+	void LoadFromTriangulation(const std::vector<sm::vec2>& tris);
 
-	void GetRegionBound(std::vector<ee::Vector>& bound) const;
+	void GetRegionBound(std::vector<sm::vec2>& bound) const;
 
-//	void getLinesCutByUVBounds(std::vector<ee::Vector>& lines);
+//	void getLinesCutByUVBounds(std::vector<sm::vec2>& lines);
 
 private:
 	NetworkShape* m_nw;
 
-	ee::Vector m_uv_offset;
+	sm::vec2 m_uv_offset;
 
 }; // Network
 

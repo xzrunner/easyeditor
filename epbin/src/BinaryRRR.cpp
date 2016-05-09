@@ -13,6 +13,7 @@
 #include <wx/string.h>
 
 #include <algorithm>
+#include <iostream>
 
 namespace epbin
 {

@@ -51,7 +51,7 @@ bool DrawPencilPolygonOP::OnMouseLeftUp(int x, int y)
 
 	if (!m_curve.empty())
 	{
-		std::vector<ee::Vector> simplified;
+		std::vector<sm::vec2> simplified;
 		ee::DouglasPeucker::Do(m_curve, m_simplify->GetValue(), simplified);
 		NewPolygon(simplified);
 		Clear();
@@ -62,7 +62,7 @@ bool DrawPencilPolygonOP::OnMouseLeftUp(int x, int y)
 	return false;
 }
 
-void DrawPencilPolygonOP::NewPolygon(const std::vector<ee::Vector>& poly)
+void DrawPencilPolygonOP::NewPolygon(const std::vector<sm::vec2>& poly)
 {
 	Type type = (Type)m_cmpt->GetSelected();
 	if (type == e_normal) {
@@ -78,51 +78,51 @@ void DrawPencilPolygonOP::NewPolygon(const std::vector<ee::Vector>& poly)
 	}
 }
 
-void DrawPencilPolygonOP::UnionPolygon(const std::vector<ee::Vector>& poly)
+void DrawPencilPolygonOP::UnionPolygon(const std::vector<sm::vec2>& poly)
 {
-	std::vector<std::vector<ee::Vector> > sub_points;
+	std::vector<std::vector<sm::vec2> > sub_points;
 	PrepareSubjectPaths(sub_points);
 
-	std::vector<std::vector<ee::Vector> > result = 
+	std::vector<std::vector<sm::vec2> > result = 
 		ee::PolygonClipper::Union(sub_points, poly);
 
 	ReplacePolygons(result);
 }
 
-void DrawPencilPolygonOP::DifferencePolygon(const std::vector<ee::Vector>& poly)
+void DrawPencilPolygonOP::DifferencePolygon(const std::vector<sm::vec2>& poly)
 {
-	std::vector<std::vector<ee::Vector> > sub_points;
+	std::vector<std::vector<sm::vec2> > sub_points;
 	PrepareSubjectPaths(sub_points);
 
-	std::vector<std::vector<ee::Vector> > result = 
+	std::vector<std::vector<sm::vec2> > result = 
 		ee::PolygonClipper::Difference(sub_points, poly);
 
 	ReplacePolygons(result);
 }
 
-void DrawPencilPolygonOP::IntersectionPolygon(const std::vector<ee::Vector>& poly)
+void DrawPencilPolygonOP::IntersectionPolygon(const std::vector<sm::vec2>& poly)
 {
-	std::vector<std::vector<ee::Vector> > sub_points;
+	std::vector<std::vector<sm::vec2> > sub_points;
 	PrepareSubjectPaths(sub_points);
 
-	std::vector<std::vector<ee::Vector> > result = 
+	std::vector<std::vector<sm::vec2> > result = 
 		ee::PolygonClipper::Intersection(sub_points, poly);
 
 	ReplacePolygons(result);
 }
 
-void DrawPencilPolygonOP::XorPolygon(const std::vector<ee::Vector>& poly)
+void DrawPencilPolygonOP::XorPolygon(const std::vector<sm::vec2>& poly)
 {
-	std::vector<std::vector<ee::Vector> > sub_points;
+	std::vector<std::vector<sm::vec2> > sub_points;
 	PrepareSubjectPaths(sub_points);
 
-	std::vector<std::vector<ee::Vector> > result = 
+	std::vector<std::vector<sm::vec2> > result = 
 		ee::PolygonClipper::Xor(sub_points, poly);
 
 	ReplacePolygons(result);
 }
 
-void DrawPencilPolygonOP::PrepareSubjectPaths(std::vector<std::vector<ee::Vector> >& paths) const
+void DrawPencilPolygonOP::PrepareSubjectPaths(std::vector<std::vector<sm::vec2> >& paths) const
 {
 	std::vector<PolygonShape*> shapes;
 	m_shapes_impl->TraverseShapes(ee::FetchAllVisitor<PolygonShape>(shapes));
@@ -134,7 +134,7 @@ void DrawPencilPolygonOP::PrepareSubjectPaths(std::vector<std::vector<ee::Vector
 	}
 }
 
-void DrawPencilPolygonOP::ReplacePolygons(const std::vector<std::vector<ee::Vector> >& paths)
+void DrawPencilPolygonOP::ReplacePolygons(const std::vector<std::vector<sm::vec2> >& paths)
 {
 	// for shadow, fixme!
 	if (paths.size() > 1) {

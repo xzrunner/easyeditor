@@ -57,85 +57,80 @@ bool PasteSymbolTileOP::OnMouseMove(int x, int y)
 	m_bCaptured = false;
 	m_pos = m_stage->TransPosScrToProj(x, y);
 
-	Vector offset = m_cmpt->GetOffset();
-	const float dis = offset.Length() * 0.5f;
 	Sprite* sprite = NULL;
 	m_spritesImpl->TraverseSprites(NearestQueryVisitor(m_pos, &sprite), DT_EDITABLE);
 	if (!sprite) return false;
 
-	const Vector& capture = sprite->GetPosition();
-	if (capture.IsValid())
+	const sm::vec2& capture = sprite->GetPosition();
+	sm::vec2 offset = m_cmpt->GetOffset();
+	const float dis = offset.Length() * 0.5f;
+	do
 	{
-		Vector offset = m_cmpt->GetOffset();
-		const float dis = offset.Length() * 0.5f;
-		do
+		sm::vec2 newPos = sm::vec2(capture.x + offset.x, capture.y + offset.y);
+		if (Math2D::GetDistance(m_pos, newPos) < dis)
 		{
-			Vector newPos = Vector(capture.x + offset.x, capture.y + offset.y);
-			if (Math2D::GetDistance(m_pos, newPos) < dis)
-			{
-				m_bCaptured = true;
-				m_pos = newPos;
-				break;
-			}
+			m_bCaptured = true;
+			m_pos = newPos;
+			break;
+		}
 
-			newPos = Vector(capture.x + offset.x, capture.y - offset.y);
-			if (Math2D::GetDistance(m_pos, newPos) < dis)
-			{
-				m_bCaptured = true;
-				m_pos = newPos;
-				break;
-			}
+		newPos = sm::vec2(capture.x + offset.x, capture.y - offset.y);
+		if (Math2D::GetDistance(m_pos, newPos) < dis)
+		{
+			m_bCaptured = true;
+			m_pos = newPos;
+			break;
+		}
 
-			newPos = Vector(capture.x - offset.x, capture.y + offset.y);
-			if (Math2D::GetDistance(m_pos, newPos) < dis)
-			{
-				m_bCaptured = true;
-				m_pos = newPos;
-				break;
-			}
+		newPos = sm::vec2(capture.x - offset.x, capture.y + offset.y);
+		if (Math2D::GetDistance(m_pos, newPos) < dis)
+		{
+			m_bCaptured = true;
+			m_pos = newPos;
+			break;
+		}
 
-			newPos = Vector(capture.x - offset.x, capture.y - offset.y);
-			if (Math2D::GetDistance(m_pos, newPos) < dis)
-			{
-				m_bCaptured = true;
-				m_pos = newPos;
-				break;
-			}
+		newPos = sm::vec2(capture.x - offset.x, capture.y - offset.y);
+		if (Math2D::GetDistance(m_pos, newPos) < dis)
+		{
+			m_bCaptured = true;
+			m_pos = newPos;
+			break;
+		}
 
-			newPos = Vector(capture.x, capture.y - offset.y);
-			if (Math2D::GetDistance(m_pos, newPos) < dis)
-			{
-				m_bCaptured = true;
-				m_pos = newPos;
-				break;
-			}
+		newPos = sm::vec2(capture.x, capture.y - offset.y);
+		if (Math2D::GetDistance(m_pos, newPos) < dis)
+		{
+			m_bCaptured = true;
+			m_pos = newPos;
+			break;
+		}
 
-			newPos = Vector(capture.x, capture.y + offset.y);
-			if (Math2D::GetDistance(m_pos, newPos) < dis)
-			{
-				m_bCaptured = true;
-				m_pos = newPos;
-				break;
-			}
+		newPos = sm::vec2(capture.x, capture.y + offset.y);
+		if (Math2D::GetDistance(m_pos, newPos) < dis)
+		{
+			m_bCaptured = true;
+			m_pos = newPos;
+			break;
+		}
 
-			newPos = Vector(capture.x - offset.x, capture.y);
-			if (Math2D::GetDistance(m_pos, newPos) < dis)
-			{
-				m_bCaptured = true;
-				m_pos = newPos;
-				break;
-			}
+		newPos = sm::vec2(capture.x - offset.x, capture.y);
+		if (Math2D::GetDistance(m_pos, newPos) < dis)
+		{
+			m_bCaptured = true;
+			m_pos = newPos;
+			break;
+		}
 
-			newPos = Vector(capture.x + offset.x, capture.y);
-			if (Math2D::GetDistance(m_pos, newPos) < dis)
-			{
-				m_bCaptured = true;
-				m_pos = newPos;
-				break;
-			}
+		newPos = sm::vec2(capture.x + offset.x, capture.y);
+		if (Math2D::GetDistance(m_pos, newPos) < dis)
+		{
+			m_bCaptured = true;
+			m_pos = newPos;
+			break;
+		}
 
-		} while (0);
-	}
+	} while (0);
 	SetCanvasDirtySJ::Instance()->SetDirty();
 
 	return false;
@@ -146,7 +141,7 @@ bool PasteSymbolTileOP::OnDraw() const
 	if (ZoomViewOP::OnDraw()) return true;
 
 	Symbol* symbol = m_library->GetSymbol();
-	if (symbol && m_pos.IsValid())
+	if (symbol && m_pos_valid)
 	{
 		if (m_scale) {
 			SpriteRenderer::Draw(symbol, sm::mat4(), m_pos, m_rotate, *m_scale);
@@ -163,7 +158,7 @@ bool PasteSymbolTileOP::OnDraw() const
 //////////////////////////////////////////////////////////////////////////
 
 PasteSymbolTileOP::NearestQueryVisitor::
-NearestQueryVisitor(const Vector& pos, Sprite** ret)
+NearestQueryVisitor(const sm::vec2& pos, Sprite** ret)
 	: m_pos(pos)
 	, m_dis(FLT_MAX)
 	, m_result(ret)

@@ -14,8 +14,8 @@ namespace eshape
 
 EditNodesOP::EditNodesOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapes_impl)
 	: SelectNodesOP(wnd, stage, shapes_impl, NULL)
+	, m_last_pos_valid(false)
 {
-	m_last_pos.SetInvalid();
 }
 
 bool EditNodesOP::OnKeyDown(int keyCode)
@@ -41,10 +41,12 @@ bool EditNodesOP::OnMouseLeftDown(int x, int y)
 
 	if (m_stage->GetKeyState(WXK_CONTROL)) return false;
 
-	if (m_node_selection.empty())
-		m_last_pos.SetInvalid();
-	else
+	if (m_node_selection.empty()) {
+		m_last_pos_valid = false;
+	} else {
 		m_last_pos = m_stage->TransPosScrToProj(x, y);
+		m_last_pos_valid = true;
+	}
 
 	return false;
 }
@@ -55,23 +57,24 @@ bool EditNodesOP::OnMouseDrag(int x, int y)
 
 	if (m_stage->GetKeyState(WXK_CONTROL)) return false;
 
-	if (m_last_pos.IsValid())
+	if (m_last_pos_valid)
 	{
-		ee::Vector currPos = m_stage->TransPosScrToProj(x, y);
-		ee::Vector offset = currPos - m_last_pos;
+		sm::vec2 curr_pos = m_stage->TransPosScrToProj(x, y);
+		sm::vec2 offset = curr_pos - m_last_pos;
 		for (size_t i = 0, n = m_node_selection.size(); i < n; ++i)
 		{
 			SelectNodesOP::ChainSelectedNodes* selected = m_node_selection[i];
 			for (size_t j = 0, m = selected->selectedNodes.size(); j < m; ++j)
 			{
-				const ee::Vector& from = selected->selectedNodes[j];
-				ee::Vector to = from + offset;
+				const sm::vec2& from = selected->selectedNodes[j];
+				sm::vec2 to = from + offset;
 				selected->chain->Change(from, to);
 				selected->selectedNodes[j] = to;
 			}
 			selected->chain->refresh();
 		}
-		m_last_pos = currPos;
+		m_last_pos = curr_pos;
+		m_last_pos_valid = true;
 
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
@@ -99,7 +102,7 @@ bool EditNodesOP::Clear()
 {
 	if (SelectNodesOP::Clear()) return true;
 
-	m_last_pos.SetInvalid();
+	m_last_pos_valid = false;
 	m_buffer.clear();
 
 	return false;
@@ -132,13 +135,13 @@ void EditNodesOP::Smooth(float samplingWidth)
 void EditNodesOP::UpdateModified()
 {
 	std::vector<ChainShape*> chains;
-	std::vector<std::vector<ee::Vector> > chainsDst;
+	std::vector<std::vector<sm::vec2> > chainsDst;
 
 	for (size_t i = 0, n = m_buffer.size(); i < n; ++i)
 	{
-		const std::vector<ee::Vector>& chain = m_buffer[i].src->chain->GetVertices();
-		const std::vector<ee::Vector>& src = m_buffer[i].src->selectedNodes;
-		const std::vector<ee::Vector>& dst = m_buffer[i].dst;
+		const std::vector<sm::vec2>& chain = m_buffer[i].src->chain->GetVertices();
+		const std::vector<sm::vec2>& src = m_buffer[i].src->selectedNodes;
+		const std::vector<sm::vec2>& dst = m_buffer[i].dst;
 
 		size_t begin = 0, end = chain.size() - 1;
 		for (size_t j = 0, m = chain.size(); j < m; ++j)
@@ -159,7 +162,7 @@ void EditNodesOP::UpdateModified()
 		}
 
 		assert(begin <= end);
-		std::vector<ee::Vector> result;
+		std::vector<sm::vec2> result;
 		copy(chain.begin(), chain.begin() + begin, back_inserter(result));
 		copy(dst.begin(), dst.end(), back_inserter(result));
 		copy(chain.begin() + end + 1, chain.end(), back_inserter(result));

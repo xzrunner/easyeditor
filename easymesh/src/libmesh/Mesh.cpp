@@ -59,7 +59,7 @@ Mesh::~Mesh()
 	ClearTriangles();
 }
 
-Node* Mesh::PointQueryNode(const ee::Vector& p)
+Node* Mesh::PointQueryNode(const sm::vec2& p)
 {
 	Node* node = NULL;
 	float nearest = FLT_MAX;
@@ -115,7 +115,7 @@ void Mesh::ClearTriangles()
 
 void Mesh::StoreTriangles(Json::Value& value) const
 {
-	std::vector<ee::Vector> transform;
+	std::vector<sm::vec2> transform;
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
 	{
 		Triangle* tri = m_tris[i];
@@ -127,7 +127,7 @@ void Mesh::StoreTriangles(Json::Value& value) const
 
 void Mesh::LoadTriangles(const Json::Value& value)
 {
-	std::vector<ee::Vector> transform;
+	std::vector<sm::vec2> transform;
 	ee::JsonSerializer::Load(value, transform);
 	int itr = 0;
 	for (int i = 0, n = m_tris.size(); i < n; ++i)

@@ -11,8 +11,8 @@ class MeshShape : public emesh::Mesh
 public:
 	MeshShape(const ee::Symbol* base);
 
-	void InsertTriangle(const ee::Vector* vertices, 
-		const ee::Vector* texcoords, const std::vector<ee::Vector>& bound);
+	void InsertTriangle(const sm::vec2* vertices, 
+		const sm::vec2* texcoords, const std::vector<sm::vec2>& bound);
 
 private:
 	static const bool IS_BOUND = true;

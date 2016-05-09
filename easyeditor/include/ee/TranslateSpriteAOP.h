@@ -2,7 +2,8 @@
 #define _EASYEDITOR_TRANSLATE_SPRITE_AOP_H_
 
 #include "AtomicOP.h"
-#include "Vector.h"
+
+#include <SM_Vector.h>
 
 namespace ee
 {
@@ -13,9 +14,9 @@ class SpriteSelection;
 class TranslateSpriteAOP : public AtomicOP
 {
 public:
-	TranslateSpriteAOP(const SpriteSelection& selection, const Vector& offset);
-	TranslateSpriteAOP(Sprite* sprite, const Vector& offset);
-	TranslateSpriteAOP(const std::vector<Sprite*>& sprites, const Vector& offset);
+	TranslateSpriteAOP(const SpriteSelection& selection, const sm::vec2& offset);
+	TranslateSpriteAOP(Sprite* sprite, const sm::vec2& offset);
+	TranslateSpriteAOP(const std::vector<Sprite*>& sprites, const sm::vec2& offset);
 	virtual ~TranslateSpriteAOP();
 
 	virtual void Undo();
@@ -26,7 +27,7 @@ public:
 private:
 	std::vector<Sprite*> m_sprites;
 
-	Vector m_offset;
+	sm::vec2 m_offset;
 
 }; // TranslateSpriteAOP 
 

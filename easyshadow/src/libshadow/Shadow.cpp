@@ -40,7 +40,7 @@ void Shadow::LoadFromFile(const Json::Value& value)
 	ee::JsonSerializer::Load(value["outer color"], m_outer_color);
 	m_radius = static_cast<float>(value["radius"].asDouble());
 
-	std::vector<ee::Vector> loop;
+	std::vector<sm::vec2> loop;
 	ee::JsonSerializer::Load(value["inner loop"], loop);
 	BuildInnerLine(loop);
 }
@@ -57,7 +57,7 @@ void Shadow::Draw(const sm::mat4& mt, float alpha) const
 //	ShadowShader* shader = static_cast<ShadowShader*>(shader_mgr->GetShapeShader());
 //	shader->SetAlpha(alpha);
 
-	std::vector<ee::Vector> tris;
+	std::vector<sm::vec2> tris;
 	ee::Math2D::TransVertices(mt, m_tris, tris);
 	ee::RVG::Triangles(tris, m_colors);
 
@@ -114,7 +114,7 @@ void Shadow::BuildOutterLine()
 	BuildFace();
 }
 
-void Shadow::BuildInnerLine(const std::vector<ee::Vector>& loop)
+void Shadow::BuildInnerLine(const std::vector<sm::vec2>& loop)
 {
 	if (loop.empty()) {
 		return;
@@ -145,7 +145,7 @@ void Shadow::InitShader()
 //	m_shader_idx = ee::ShaderMgr::Instance()->AddShapeShader(shader);
 }
 
-void Shadow::BuildInnerLoop(const std::vector<ee::Vector>& loop)
+void Shadow::BuildInnerLoop(const std::vector<sm::vec2>& loop)
 {
 	m_inner_loop.clear();
 	int sz = loop.size();
@@ -160,8 +160,8 @@ void Shadow::BuildInnerLoop(const std::vector<ee::Vector>& loop)
 		}
 	}
 
-	const ee::Vector& prev = loop[(leftmost - 1 + sz) % sz];
-	const ee::Vector& next = loop[(leftmost + 1) % sz];
+	const sm::vec2& prev = loop[(leftmost - 1 + sz) % sz];
+	const sm::vec2& next = loop[(leftmost + 1) % sz];
 	if (ee::Math2D::IsTurnLeft(prev, loop[leftmost], next)) {
 		copy(loop.rbegin(), loop.rend(), back_inserter(m_inner_loop));
 	} else {
@@ -179,15 +179,15 @@ void Shadow::BuildOuterLoop()
 
 	for (int i = 0; i < sz; ++i)
 	{
-		const ee::Vector& curr(m_inner_loop[i]),
+		const sm::vec2& curr(m_inner_loop[i]),
 			&prev(m_inner_loop[(i - 1 + sz) % sz]),
 			&next(m_inner_loop[(i + 1) % sz]);
 		
-		ee::Vector cb, ce, nb, ne;
+		sm::vec2 cb, ce, nb, ne;
 		ee::Math2D::SideOffsetSegment(prev, curr, true, m_radius, cb, ce);
 		ee::Math2D::SideOffsetSegment(curr, next, true, m_radius, nb, ne);
 
- 		ee::Vector cross;
+ 		sm::vec2 cross;
 		ee::Math2D::GetTwoLineCross(cb, ce, nb, ne, &cross);
 		m_outer_loop.push_back(cross);
 

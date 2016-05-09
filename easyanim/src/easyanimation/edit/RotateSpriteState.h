@@ -9,10 +9,10 @@ namespace eanim
 class RotateSpriteState : public ee::RotateSpriteState
 {
 public:
-	RotateSpriteState(ee::SpriteSelection* selection, const ee::Vector& first_pos);
+	RotateSpriteState(ee::SpriteSelection* selection, const sm::vec2& first_pos);
 
 protected:
-	virtual void Rotate(const ee::Vector& dst);
+	virtual void Rotate(const sm::vec2& dst);
 
 }; // RotateSpriteState
 

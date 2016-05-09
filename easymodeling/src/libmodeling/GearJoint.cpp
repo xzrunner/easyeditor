@@ -11,7 +11,7 @@ GearJoint::GearJoint(Body* b0, Body* b1, Joint* j1, Joint* j2)
 {
 }
 
-bool GearJoint::IsContain(const ee::Vector& pos) const
+bool GearJoint::IsContain(const sm::vec2& pos) const
 {
 	return m_joint1->IsContain(pos) || m_joint2->IsContain(pos);
 }

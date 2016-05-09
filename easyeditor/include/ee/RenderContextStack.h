@@ -1,6 +1,8 @@
 #ifndef _EASYEDITOR_RENDER_CONTEXT_STACK_H_
 #define _EASYEDITOR_RENDER_CONTEXT_STACK_H_
 
+#include <SM_Vector.h>
+
 #include <vector>
 
 namespace ee
@@ -8,7 +10,6 @@ namespace ee
 
 class StageCanvas;
 class RenderContext;
-class Vector;
 
 class RenderContextStack
 {
@@ -16,10 +17,10 @@ public:
 	void Push(StageCanvas* canvas, RenderContext* render);
 	void Pop();
 
-	void SetModelView(const Vector& offset, float scale);
+	void SetModelView(const sm::vec2& offset, float scale);
 	void SetProjection(int width, int height);
 
-	bool GetModelView(Vector& offset, float& scale) const;
+	bool GetModelView(sm::vec2& offset, float& scale) const;
 	bool GetProjection(int& width, int& height) const;
 
 	void SetCurrCtx(RenderContext* ctx);

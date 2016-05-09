@@ -22,7 +22,7 @@ int w_SpriteSelection_move(lua_State* L)
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
 		Sprite* s = sprites[i];
-		Vector pos = s->GetPosition() + Vector(x, y);
+		sm::vec2 pos = s->GetPosition() + sm::vec2(x, y);
 		s->SetTransform(pos, s->GetAngle());
 	}
 	return 0;		

@@ -1,6 +1,5 @@
 #include "MousePositionCMPT.h"
 #include "MousePositionOP.h"
-#include "Vector.h"
 #include "StringHelper.h"
 
 namespace ee
@@ -16,7 +15,7 @@ MousePositionCMPT::MousePositionCMPT(wxWindow* parent, const std::string& name,
 	}
 }
 
-void MousePositionCMPT::updatePosition(const Vector& pos)
+void MousePositionCMPT::updatePosition(const sm::vec2& pos)
 {
 	m_xText->ChangeValue(StringHelper::ToString(pos.x));
 	m_yText->ChangeValue(StringHelper::ToString(pos.y));

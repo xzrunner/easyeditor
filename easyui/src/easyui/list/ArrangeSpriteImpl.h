@@ -17,7 +17,7 @@ public:
 
 private:
 	virtual ee::ArrangeSpriteState* CreateTranslateState(ee::SpriteSelection* selection, 
-		const ee::Vector& first_pos) const;
+		const sm::vec2& first_pos) const;
 
 private:
 	StagePanel* m_stage;

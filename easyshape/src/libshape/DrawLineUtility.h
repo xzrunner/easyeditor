@@ -1,8 +1,9 @@
 #ifndef _EASYSHAPE_DRAW_LINE_UTILITY_H_
 #define _EASYSHAPE_DRAW_LINE_UTILITY_H_
 
-#include <ee/Vector.h>
 #include <ee/KeysState.h>
+
+#include <SM_Vector.h>
 
 #include <vector>
 
@@ -13,9 +14,9 @@ class DrawLineUtility
 {
 public:
 
-	static bool IsStraightOpen(const std::vector<ee::Vector>& lines, const ee::KeysState& key_state);
+	static bool IsStraightOpen(const std::vector<sm::vec2>& lines, const ee::KeysState& key_state);
 
-	static ee::Vector FixPosTo8DirStraight(const ee::Vector& last, const ee::Vector& curr);
+	static sm::vec2 FixPosTo8DirStraight(const sm::vec2& last, const sm::vec2& curr);
 
 }; // DrawLineUtility
 

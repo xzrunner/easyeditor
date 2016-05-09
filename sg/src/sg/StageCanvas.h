@@ -18,8 +18,8 @@ public:
 
 	void SetBackground(ee::Symbol* background);
 
-	static ee::Vector TransToBirdView(const ee::Vector& pos);
-	static ee::Vector TransToFlatView(const ee::Vector& pos);
+	static sm::vec2 TransToBirdView(const sm::vec2& pos);
+	static sm::vec2 TransToFlatView(const sm::vec2& pos);
 
 protected:
 	virtual void OnDrawSprites() const;

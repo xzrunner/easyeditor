@@ -33,7 +33,7 @@ void Love2dCode::Resolve()
 		ee::Sprite* sprite = sprites[i];
 
 		const ee::Symbol& symbol = sprite->GetSymbol();
-		const ee::Vector& pos = sprite->GetPosition();
+		const sm::vec2& pos = sprite->GetPosition();
 
 		std::string name = ee::FileHelper::GetFilename(symbol.GetFilepath());
 

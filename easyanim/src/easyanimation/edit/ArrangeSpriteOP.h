@@ -34,9 +34,9 @@ private:
 
 		Cross();
 		void Draw() const;
-		bool Contain(const ee::Vector& p) const;
+		bool Contain(const sm::vec2& p) const;
 
-		ee::Vector pos;
+		sm::vec2 pos;
 
 	}; // Cross
 

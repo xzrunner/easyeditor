@@ -73,7 +73,7 @@ StageDropTarget(StagePanel* stage, ee::LibraryPanel* library)
 }
 
 bool StagePanel::StageDropTarget::
-OnDropSymbol(ee::Symbol* symbol, const ee::Vector& pos)
+OnDropSymbol(ee::Symbol* symbol, const sm::vec2& pos)
 {
 	if (ee::ImageSymbol* image = dynamic_cast<ee::ImageSymbol*>(symbol))
 	{

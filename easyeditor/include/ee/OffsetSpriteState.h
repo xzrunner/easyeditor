@@ -2,7 +2,6 @@
 #define _EASYEDITOR_OFFSET_SPRITE_STATE_H_
 
 #include "ArrangeSpriteState.h"
-#include "Vector.h"
 
 namespace ee
 {
@@ -15,13 +14,13 @@ public:
 	OffsetSpriteState(Sprite* sprite);
 	virtual ~OffsetSpriteState();
 
-	virtual void OnMouseRelease(const Vector& pos);
-	virtual	bool OnMouseDrag(const Vector& pos);
+	virtual void OnMouseRelease(const sm::vec2& pos);
+	virtual	bool OnMouseDrag(const sm::vec2& pos);
 
 private:
 	Sprite* m_sprite;
 
-	Vector m_old_offset;
+	sm::vec2 m_old_offset;
 
 }; // OffsetSpriteState
 

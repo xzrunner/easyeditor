@@ -28,7 +28,7 @@ void ShapeToLuaString::Pack(const PackShape* shape, ebuilder::CodeGenerator& gen
 	std::stringstream ss;
 	ss << "vertices = {";
 	for (int i = 0, n = shape->vertices.size(); i < n; ++i) {
-		const ee::Vector& pos = shape->vertices[i];
+		const sm::vec2& pos = shape->vertices[i];
 		int32_t x = floor(pos.x * SCALE + 0.5f),
 			    y =-floor(pos.y * SCALE + 0.5f);
 		ss << x << ", " << y << ", ";

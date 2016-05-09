@@ -5,7 +5,7 @@
 
 #include <vector>
 
-namespace ee { class Shape; class Vector; class Rect; }
+namespace ee { class Shape; class Rect; }
 
 namespace emodeling
 {
@@ -18,14 +18,14 @@ public:
 	Fixture();
 	~Fixture();
 
-	bool IsContain(const ee::Vector& pos) const;
+	bool IsContain(const sm::vec2& pos) const;
 	bool IsIntersect(const ee::Rect& rect) const;
 
 	void Draw(const sm::mat4& mt, const ee::Colorf& cFace, 
 		const ee::Colorf& cEdge) const;
 
 private:
-	void TransLocalToWorld(const std::vector<ee::Vector>& local, std::vector<ee::Vector>& world) const;
+	void TransLocalToWorld(const std::vector<sm::vec2>& local, std::vector<sm::vec2>& world) const;
 
 public:
 	std::string m_name;

@@ -23,7 +23,8 @@ private:
 	void BreakUpSelection();
 
 private:
-	ee::Vector m_first_press;
+	sm::vec2 m_first_press;
+	bool m_first_press_valid;
 
 	OpenSymbolDialog m_open_symbol;
 

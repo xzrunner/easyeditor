@@ -11,12 +11,12 @@ namespace eanim
 {
 
 RotateSpriteState::RotateSpriteState(ee::SpriteSelection* selection, 
-									 const ee::Vector& first_pos)
+									 const sm::vec2& first_pos)
 	: ee::RotateSpriteState(selection, first_pos)
 {
 }
 
-void RotateSpriteState::Rotate(const ee::Vector& dst)
+void RotateSpriteState::Rotate(const sm::vec2& dst)
 {
 	ee::RotateSpriteState::Rotate(dst);
 

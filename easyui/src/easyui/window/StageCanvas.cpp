@@ -54,7 +54,7 @@ void StageCanvas::DrawGuideLines() const
 	window::QueryWindowViewSizeSJ::Instance()->Query(width, height);
 
 	ee::RVG::Color(ee::LIGHT_GREY);
-	ee::RVG::Rect(ee::Vector(0, 0), width * 0.5f, height * 0.5f, false);
+	ee::RVG::Rect(sm::vec2(0, 0), width * 0.5f, height * 0.5f, false);
 }
 
 }

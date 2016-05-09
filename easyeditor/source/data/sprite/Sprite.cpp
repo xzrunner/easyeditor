@@ -29,7 +29,6 @@ Sprite::Sprite()
 	visiable = editable = true;
 
 	m_angle = 0.0f;
-	m_offset.SetInvalid();
 	m_scale.Set(1, 1);
 	m_shear.Set(0, 0);
 	m_xMirror = m_yMirror = false;
@@ -92,7 +91,7 @@ void Sprite::Load(const Json::Value& val)
 	rp->LoadFromFile(val);
 
 	// scale
-	Vector scale;
+	sm::vec2 scale;
 	if (val["scale"].isNull())
 	{
 		scale.x = static_cast<float>(val["x scale"].asDouble());
@@ -105,7 +104,7 @@ void Sprite::Load(const Json::Value& val)
 	SetScale(scale);
 
 	// shear
-	Vector shear;
+	sm::vec2 shear;
 	if (!val["x shear"].isNull())
 	{
 		shear.x = static_cast<float>(val["x shear"].asDouble());
@@ -125,7 +124,7 @@ void Sprite::Load(const Json::Value& val)
 	// perspective
 	if (!val["x perspective"].isNull())
 	{
-		Vector persp;
+		sm::vec2 persp;
 		persp.x = static_cast<float>(val["x perspective"].asDouble());
 		persp.y = static_cast<float>(val["y perspective"].asDouble());
 		SetPerspective(persp);
@@ -142,7 +141,7 @@ void Sprite::Load(const Json::Value& val)
 	{
 		ox = oy = 0;
 	}
-	SetOffset(Vector(ox, oy));
+	SetOffset(sm::vec2(ox, oy));
 
 	// translate
 	float x = static_cast<float>(val["position"]["x"].asDouble());
@@ -153,7 +152,7 @@ void Sprite::Load(const Json::Value& val)
 
 	// rotate
 	float angle = static_cast<float>(val["angle"].asDouble());
-	SetTransform(Vector(x, y), angle);
+	SetTransform(sm::vec2(x, y), angle);
 
 	// anchor
 	m_is_anchor = val["anchor"].asBool();
@@ -201,9 +200,9 @@ void Sprite::BuildBounding()
 		return;
 	}
 
-	if (!m_offset.IsValid()) {
+//	if (!m_offset.IsValid()) {
 		m_offset.Set(rect.CenterX(), rect.CenterY());
-	}
+//	}
 	rect.Scale(m_scale.x, m_scale.y);
 	rect.Shear(m_shear.x, m_shear.y);
 	m_bounding->InitFromRect(rect);
@@ -215,20 +214,20 @@ PropertySetting* Sprite::CreatePropertySetting(EditPanelImpl* stage)
 	return new SpritePropertySetting(stage, this);
 }
 
-void Sprite::SetTransform(const Vector& position, float angle)
+void Sprite::SetTransform(const sm::vec2& position, float angle)
 {
 	if (m_pos != position) Translate(position - m_pos);
 	if (m_angle != angle) Rotate(angle - m_angle);
 }
 
-void Sprite::SetScale(const Vector& scale)
+void Sprite::SetScale(const sm::vec2& scale)
 {
-	Vector dscale;
+	sm::vec2 dscale;
 	dscale.x = scale.x / m_scale.x;
 	dscale.y = scale.y / m_scale.y;
 
-	Vector old_offset = m_offset;
-	Vector new_offset(m_offset.x * dscale.x, m_offset.y * dscale.y);
+	sm::vec2 old_offset = m_offset;
+	sm::vec2 new_offset(m_offset.x * dscale.x, m_offset.y * dscale.y);
 	m_offset = new_offset;
 
 	Translate(old_offset - new_offset);
@@ -239,7 +238,7 @@ void Sprite::SetScale(const Vector& scale)
 // 	mat_old.scale(m_scale.x, m_scale.y);
 // 	mat_new.scale(xScale, yScale);
 // 
-// 	Vector offset = Math2D::TransVector(m_offset, mat_new) - Math2D::TransVector(m_offset, mat_old);
+// 	sm::vec2 offset = Math2D::TransVector(m_offset, mat_new) - Math2D::TransVector(m_offset, mat_old);
 // 
 // 	m_offset += offset;
 // 	translate(-offset);
@@ -250,13 +249,13 @@ void Sprite::SetScale(const Vector& scale)
 	BuildBounding();
  }
 
-void Sprite::SetShear(const Vector& shear)
+void Sprite::SetShear(const sm::vec2& shear)
 {
 	sm::mat4 mat_old, mat_new;
 	mat_old.Shear(m_shear.x, m_shear.y);
 	mat_new.Shear(shear.x, shear.y);
 
-	Vector offset = Math2D::TransVector(m_offset, mat_new) - Math2D::TransVector(m_offset, mat_old);
+	sm::vec2 offset = Math2D::TransVector(m_offset, mat_new) - Math2D::TransVector(m_offset, mat_old);
 
 	m_offset += offset;
 	Translate(-offset);
@@ -265,12 +264,12 @@ void Sprite::SetShear(const Vector& shear)
 	BuildBounding();
 }
 
-void Sprite::SetOffset(const Vector& offset) 
+void Sprite::SetOffset(const sm::vec2& offset) 
 {
 	// rotate + offset -> offset + rotate	
-	Vector old_center = GetCenter();
+	sm::vec2 old_center = GetCenter();
 	m_offset = offset;
-	Vector new_center = GetCenter();
+	sm::vec2 new_center = GetCenter();
 	m_pos += (old_center - new_center);
 
 	if (m_bounding) {
@@ -278,7 +277,7 @@ void Sprite::SetOffset(const Vector& offset)
 	}
 }
 
-bool Sprite::IsContain(const Vector& pos) const
+bool Sprite::IsContain(const sm::vec2& pos) const
 {
 	return m_bounding ? m_bounding->IsContain(pos) : false;
 }
@@ -288,7 +287,7 @@ bool Sprite::IsIntersect(const Rect& rect) const
 	return m_bounding ? m_bounding->IsIntersect(rect) : false;
 }
 
-void Sprite::Translate(const Vector& offset)
+void Sprite::Translate(const sm::vec2& offset)
 {
 #ifdef OPEN_SCREEN_CACHE
 	bool find = SpatialPartition::Instance()->Remove(this);
@@ -352,16 +351,16 @@ void Sprite::SetMirror(bool xMirror, bool yMirror)
 	}
 }
 
-Vector Sprite::GetCenter() const
+sm::vec2 Sprite::GetCenter() const
 {
-	Vector center_offset = Math2D::RotateVector(-m_offset, m_angle) + m_offset;
-	Vector center = m_pos + center_offset;
+	sm::vec2 center_offset = Math2D::RotateVector(-m_offset, m_angle) + m_offset;
+	sm::vec2 center = m_pos + center_offset;
 	return center;
 }
 
 Rect Sprite::GetRect() const
 {
-	std::vector<Vector> bound;
+	std::vector<sm::vec2> bound;
 	GetBounding()->GetBoundPos(bound);
 	Rect rect;
 	for (int i = 0, n = bound.size(); i < n; ++i) {
@@ -375,7 +374,7 @@ void Sprite::GetTransMatrix(sm::mat4& mt) const
 	const float xScale = m_xMirror ? -m_scale.x : m_scale.x,
 		yScale = m_yMirror ? -m_scale.y : m_scale.y;
 
-	Vector center = GetCenter();
+	sm::vec2 center = GetCenter();
 	mt.SetTransformation(center.x, center.y, m_angle, 
 		xScale, yScale, 0, 0, m_shear.x, m_shear.y);
 }

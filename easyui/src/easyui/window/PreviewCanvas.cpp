@@ -31,7 +31,7 @@ void PreviewCanvas::OnDrawSprites() const
 		// 		if (!sprite->visiable)
 		// 			continue;
 
-		const ee::Vector& pos = spr->GetPosition();
+		const sm::vec2& pos = spr->GetPosition();
 
 		sm::mat4 inv_mt = spr->GetTransInvMatrix();
 		sm::mat4 translate_mt;

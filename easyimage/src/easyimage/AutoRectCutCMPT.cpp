@@ -81,7 +81,7 @@ wxSizer* AutoRectCutCMPT::InitLayout()
 // 	int height = wxVariant(m_height_choice->GetString(m_height_choice->GetSelection())).GetInteger();
 // 
 // 	AutoRectCutOP* op = static_cast<AutoRectCutOP*>(m_editop);
-// 	op->getRectMgr().insert(ee::Rect(ee::Vector(0, 0), ee::Vector((float)width, (float)height)));
+// 	op->getRectMgr().insert(ee::Rect(sm::vec2(0, 0), sm::vec2((float)width, (float)height)));
 // 
 // 	m_stage->Refresh();
 // }
@@ -104,7 +104,7 @@ void AutoRectCutCMPT::OnCreateRects(wxCommandEvent& event)
 			y = result[i].y,
 			w = result[i].w,
 			h = result[i].h;
-		rects.Insert(ee::Rect(ee::Vector(x, y), ee::Vector(x+w, y+h)), true);
+		rects.Insert(ee::Rect(sm::vec2(x, y), sm::vec2(x+w, y+h)), true);
 	}
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();

@@ -1,6 +1,5 @@
 #include "FontBlankSymbol.h"
 #include "FontBlankSprite.h"
-#include "Vector.h"
 #include "trans_color.h"
 #include "FileType.h"
 #include "FileHelper.h"
@@ -117,7 +116,7 @@ void FontBlankSymbol::DrawBackground(const FontBlankSprite* fb, const sm::mat4& 
 		hh = fb->height * 0.5f;
 	}
 
-	ee::Vector min(-hw, -hh), max(hw, hh);
+	sm::vec2 min(-hw, -hh), max(hw, hh);
 	min = ee::Math2D::TransVector(min, mt);
 	max = ee::Math2D::TransVector(max, mt);
 
@@ -130,7 +129,7 @@ void FontBlankSymbol::DrawText(const FontBlankSprite* fb, const sm::mat4& mt) co
 // 		if (const FontBlankSprite* font = dynamic_cast<const FontBlankSprite*>(sprite)) {
 // 			const std::string& str = font->GetTextContext();
 // 			if (!str.empty()) {
-// 				Vector pos = Math2D::TransVector(Vector(0, 0), mt);
+// 				sm::vec2 pos = Math2D::TransVector(sm::vec2(0, 0), mt);
 // 
 // 				LabelStyle style;
 // 				style.has_edge = font->has_edge;

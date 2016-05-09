@@ -13,8 +13,8 @@ class ComplexPolygonShape : public PolygonShape
 public:
 	ComplexPolygonShape();
 	ComplexPolygonShape(const ComplexPolygonShape& poly);
-	ComplexPolygonShape(const std::vector<ee::Vector>& outline,
-		const std::vector<std::vector<ee::Vector> >& holes);
+	ComplexPolygonShape(const std::vector<sm::vec2>& outline,
+		const std::vector<std::vector<sm::vec2> >& holes);
 
 	//
 	// IObject interface
@@ -25,16 +25,16 @@ public:
 	// Shape interface
 	//
 	virtual const char* GetShapeDesc() const { return "complex-polygon"; }
-	virtual bool IsContain(const ee::Vector& pos) const;
+	virtual bool IsContain(const sm::vec2& pos) const;
 	virtual bool IsIntersect(const ee::Rect& rect) const;
-	virtual void Translate(const ee::Vector& offset);
+	virtual void Translate(const sm::vec2& offset);
 	virtual void Draw(const sm::mat4& mt,
 		const ee::RenderColor& color = ee::RenderColor()) const;
 
-	const std::vector<std::vector<ee::Vector> >& GetHoles() const { return m_holes; }
+	const std::vector<std::vector<sm::vec2> >& GetHoles() const { return m_holes; }
 
 private:
-	std::vector<std::vector<ee::Vector> > m_holes;
+	std::vector<std::vector<sm::vec2> > m_holes;
 
 }; // ComplexPolygonShape
 

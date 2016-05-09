@@ -3,7 +3,6 @@
 #include "check_params.h"
 
 #include <ee/FileHelper.h>
-#include <ee/Vector.h>
 #include <ee/Math2D.h>
 
 #include <fstream>
@@ -75,20 +74,20 @@ bool FixRotateTrimJson::FixSprite(const std::string& filepath, Json::Value& spri
 
 	TrimInfo trim = itr->second;
 
-	ee::Vector old_pos, old_offset;
+	sm::vec2 old_pos, old_offset;
 	old_pos.x = sprite_val["position"]["x"].asDouble();
 	old_pos.y = sprite_val["position"]["y"].asDouble();
 	old_offset.x = sprite_val["x offset"].asDouble();
 	old_offset.y = sprite_val["y offset"].asDouble();
 	float old_angle = sprite_val["angle"].asDouble();
 
-	ee::Vector new_offset = ee::Math2D::RotateVector(old_offset, old_angle);
+	sm::vec2 new_offset = ee::Math2D::RotateVector(old_offset, old_angle);
 
-	ee::Vector trim_offset = ee::Math2D::RotateVector(ee::Vector(trim.x, trim.y), -trim.angle);
+	sm::vec2 trim_offset = ee::Math2D::RotateVector(sm::vec2(trim.x, trim.y), -trim.angle);
 
 	float new_angle = old_angle - trim.angle;
 
-	ee::Vector new_pos = ee::Math2D::RotateVector(-old_offset, old_angle) + old_offset + old_pos 
+	sm::vec2 new_pos = ee::Math2D::RotateVector(-old_offset, old_angle) + old_offset + old_pos 
 		- ee::Math2D::RotateVector(-new_offset, new_angle) - new_offset - trim_offset;
 
 	sprite_val["position"]["x"] = new_pos.x;

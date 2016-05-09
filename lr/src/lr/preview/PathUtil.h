@@ -1,7 +1,7 @@
 #ifndef _LR_PREVIEW_PATH_UTIL_H_
 #define _LR_PREVIEW_PATH_UTIL_H_
 
-#include <ee/Vector.h>
+#include <SM_Vector.h>
 
 #include <functional>
 #include <set>
@@ -14,7 +14,7 @@ namespace preview
 class INetwork
 {
 public:
-	virtual ee::Vector TransIDToPos(int id) const = 0;
+	virtual sm::vec2 TransIDToPos(int id) const = 0;
 
 }; // INetwork
 

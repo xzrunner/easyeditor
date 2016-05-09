@@ -99,7 +99,7 @@ void RectBinArrange::AfterPacking(float xoffset,
 		if (rect.height != 0)
 		{
 			ee::Rect r = sprite->GetSymbol().GetSize();
-			ee::Vector pos;
+			sm::vec2 pos;
 			float angle = 0;
 			if (r.Width() == rect.width && r.Height() == rect.height)
 			{

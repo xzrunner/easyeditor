@@ -95,12 +95,12 @@ void ImageBuilder::TransScreen(PackPicture::Quad& quad, const ee::Sprite* spr)
 
 	// 4. rotate
 	for (size_t i = 0; i < 4; ++i) {
-		ee::Vector rot = ee::Math2D::RotateVector(quad.screen_coord[i], spr->GetAngle());
+		sm::vec2 rot = ee::Math2D::RotateVector(quad.screen_coord[i], spr->GetAngle());
 		quad.screen_coord[i] = rot;
 	}
 
 	// 5. translate
-	ee::Vector center = spr->GetCenter();
+	sm::vec2 center = spr->GetCenter();
 	for (size_t i = 0; i < 4; ++i)
 		quad.screen_coord[i] += center;
 

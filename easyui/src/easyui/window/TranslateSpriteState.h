@@ -15,9 +15,9 @@ class TranslateSpriteState : public ee::TranslateSpriteState
 {
 public:
 	TranslateSpriteState(StagePanel* stage, ee::SpriteSelection* selection, 
-		const ee::Vector& first_pos, AnchorMgr* anchor_mgr);
+		const sm::vec2& first_pos, AnchorMgr* anchor_mgr);
 
-	virtual void OnMouseRelease(const ee::Vector& pos);
+	virtual void OnMouseRelease(const sm::vec2& pos);
 
 private:
 	class Visitor : public ee::Visitor

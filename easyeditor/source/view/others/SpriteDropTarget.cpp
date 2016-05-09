@@ -1,5 +1,4 @@
 #include "SpriteDropTarget.h"
-#include "Vector.h"
 #include "Symbol.h"
 #include "Sprite.h"
 #include "SpriteFactory.h"
@@ -30,7 +29,7 @@ bool SpriteDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& data)
 	Symbol* symbol = m_library->GetSymbol(index);
 	if (symbol)
 	{
-		Vector pos = m_stage->TransPosScrToProj(x, y);
+		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 		Sprite* sprite = SpriteFactory::Instance()->Create(symbol);
 		sprite->Translate(pos);
 		InsertSpriteSJ::Instance()->Insert(sprite);

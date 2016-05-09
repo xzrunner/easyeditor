@@ -34,9 +34,9 @@ bool EditQuadOP::OnMouseLeftDown(int x, int y)
 
 	m_selected = -1;
 
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 
-	const ee::Vector* screen = static_cast<QuadIcon*>(icon)->GetScreen();
+	const sm::vec2* screen = static_cast<QuadIcon*>(icon)->GetScreen();
 	for (int i = 0; i < 4; ++i) {
 		if (ee::Math2D::GetDistance(screen[i], pos) < CTRL_NODE_RADIUS) {
 			m_selected = i;
@@ -70,7 +70,7 @@ bool EditQuadOP::OnMouseDrag(int x, int y)
 
 	QuadIcon* quad_icon = static_cast<QuadIcon*>(icon);
 
-	ee::Vector screen[4];
+	sm::vec2 screen[4];
 	memcpy(screen, quad_icon->GetScreen(), sizeof(screen));	
 	screen[m_selected] = m_stage->TransPosScrToProj(x, y);
 
@@ -120,12 +120,12 @@ bool EditQuadOP::OnDraw() const
 		h = img->GetClippedHeight();
 	ee::RVG::Color(ee::LIGHT_RED);
 	ee::RVG::LineWidth(1);
-	ee::RVG::Rect(ee::Vector(0, 0), w * 0.5f, h * 0.5f, false);
+	ee::RVG::Rect(sm::vec2(0, 0), w * 0.5f, h * 0.5f, false);
 	ee::RVG::LineWidth(2);
 
 	QuadIcon* quad_icon = static_cast<QuadIcon*>(icon);
 
-	std::vector<ee::Vector> screen;
+	std::vector<sm::vec2> screen;
 	for (int i = 0; i < 4; ++i) {
 		screen.push_back(quad_icon->GetScreen()[i]);
 	}

@@ -8,7 +8,7 @@
 namespace eshape
 {
 
-ColorMaterial::ColorMaterial(const std::vector<ee::Vector>& vertices, 
+ColorMaterial::ColorMaterial(const std::vector<sm::vec2>& vertices, 
 							 const ee::Colorf& color)
 	: m_color(color)
 {
@@ -26,7 +26,7 @@ Json::Value ColorMaterial::Store(const std::string& dirpath) const
 
 void ColorMaterial::Draw(const sm::mat4& mt, const ee::RenderColor& color) const
 {
-	std::vector<ee::Vector> tris;
+	std::vector<sm::vec2> tris;
 	ee::Math2D::TransVertices(mt, m_tris, tris);
 	ee::RVG::Color(ee::col_mul(m_color, color.multi));
 	ee::RVG::Triangles(tris);
@@ -41,7 +41,7 @@ void ColorMaterial::BuildEnd()
 {
 	m_tris.clear();
 
-	std::vector<ee::Vector> outline;
+	std::vector<sm::vec2> outline;
 	ee::Math2D::RemoveDuplicatePoints(m_outline, outline);
 
 	if (!m_segments.empty()) {

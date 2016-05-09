@@ -8,7 +8,7 @@ namespace eshape
 {
 
 RectShape::RectShape()
-	: m_rect(ee::Vector(0, 0), 1, 1)
+	: m_rect(sm::vec2(0, 0), 1, 1)
 {
 }
 
@@ -17,12 +17,12 @@ RectShape::RectShape(const RectShape& rect)
 {
 }
 
-RectShape::RectShape(const ee::Vector& p0, const ee::Vector& p1)
+RectShape::RectShape(const sm::vec2& p0, const sm::vec2& p1)
 	: m_rect(p0, p1)
 {
 }
 
-RectShape::RectShape(const ee::Vector& center, float hWidth, float hHeight)
+RectShape::RectShape(const sm::vec2& center, float hWidth, float hHeight)
 	: m_rect(center, hWidth, hHeight)
 {
 }
@@ -32,7 +32,7 @@ RectShape* RectShape::Clone() const
 	return new RectShape(*this);
 }
 
-bool RectShape::IsContain(const ee::Vector& pos) const
+bool RectShape::IsContain(const sm::vec2& pos) const
 {
 	return ee::Math2D::IsPointInRect(pos, m_rect);
 }
@@ -42,14 +42,14 @@ bool RectShape::IsIntersect(const ee::Rect& rect) const
 	return ee::Math2D::IsRectIntersectRect(rect, m_rect);
 }
 
-void RectShape::Translate(const ee::Vector& offset)
+void RectShape::Translate(const sm::vec2& offset)
 {
 	m_rect.Translate(offset);
 }
 
 void RectShape::Draw(const sm::mat4& mt, const ee::RenderColor& color) const
 {
-	ee::Vector min(m_rect.xmin, m_rect.ymin),
+	sm::vec2 min(m_rect.xmin, m_rect.ymin),
 		max(m_rect.xmax, m_rect.ymax);
 	min = ee::Math2D::TransVector(min, mt);
 	max = ee::Math2D::TransVector(max, mt);

@@ -1,7 +1,11 @@
 #ifndef _EASYEDITOR_RECT_H_
 #define _EASYEDITOR_RECT_H_
 
-#include "Vector.h"
+#include <SM_Vector.h>
+
+#include <algorithm>
+
+#include <float.h>
 
 namespace ee
 {
@@ -14,13 +18,13 @@ public:
 
 public:
 	Rect() { MakeInfinite(); }
-	Rect(const Vector& p0, const Vector& p1) {
+	Rect(const sm::vec2& p0, const sm::vec2& p1) {
 		xmin = (std::min)(p0.x, p1.x);
 		ymin = (std::min)(p0.y, p1.y);
 		xmax = (std::max)(p0.x, p1.x);
 		ymax = (std::max)(p0.y, p1.y);
 	}
-	Rect(const Vector& center, float hWidth, float hHeight) {
+	Rect(const sm::vec2& center, float hWidth, float hHeight) {
 		xmin = center.x - hWidth;
 		xmax = center.x + hWidth;
 		ymin = center.y - hHeight;
@@ -57,9 +61,9 @@ public:
 
 	float CenterX() const { return (xmin + xmax) * 0.5f; }
 	float CenterY() const { return (ymin + ymax) * 0.5f; }
-	Vector Center() const { return Vector(CenterX(), CenterY()); }
+	sm::vec2 Center() const { return sm::vec2(CenterX(), CenterY()); }
 
-	void Translate(const Vector& offset)
+	void Translate(const sm::vec2& offset)
 	{
 		xmin += offset.x;
 		xmax += offset.x;
@@ -79,7 +83,7 @@ public:
 	{
 		// x' = x + y*kx
 		// y' = x*ky + y
-		Vector v[4];
+		sm::vec2 v[4];
 		v[0].x = xmin + ymin*sx;
 		v[0].y = xmin*sy + ymin;
 		v[1].x = xmax + ymin*sx;
@@ -101,7 +105,7 @@ public:
 		}
 	}
 
-	void Combine(const Vector& pos)
+	void Combine(const sm::vec2& pos)
 	{
 		if (pos.x < xmin) xmin = pos.x;
 		if (pos.x > xmax) xmax = pos.x;

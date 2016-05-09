@@ -10,7 +10,7 @@
 namespace ee
 {
 
-DelaunayTriangulation::DelaunayTriangulation(const std::vector<Vector>& src, bool bFixBound /*= true*/)
+DelaunayTriangulation::DelaunayTriangulation(const std::vector<sm::vec2>& src, bool bFixBound /*= true*/)
 {
 	if (src.size() >= 3)
 	{
@@ -54,38 +54,38 @@ DelaunayTriangulation::~DelaunayTriangulation()
 	for_each(edges.begin(), edges.end(), DeletePointerFunctor<Edge>());
 }
 
-void DelaunayTriangulation::GetAllTrisInRegion(std::vector<std::vector<Vector> >& triBounds, 
-											   const std::vector<Vector>& region) const
+void DelaunayTriangulation::GetAllTrisInRegion(std::vector<std::vector<sm::vec2> >& triBounds, 
+											   const std::vector<sm::vec2>& region) const
 {
 	std::vector<Triangle*> tris = GetAllTris();
 	for (size_t i = 0, n = tris.size(); i < n; ++i)
 	{
 		Triangle* src = tris[i];
-		std::vector<Vector> bound;
+		std::vector<sm::vec2> bound;
 		src->GetNodesPos(bound);
 
-		Vector p = Math2D::GetTriGravityCenter(bound[0], bound[1], bound[2]);
+		sm::vec2 p = Math2D::GetTriGravityCenter(bound[0], bound[1], bound[2]);
 		if (Math2D::IsPointInArea(p, region))
 			triBounds.push_back(bound);
 	}
 }
 
-void DelaunayTriangulation::GetAllTrisInRegion(std::vector<Vector>& triBounds, const std::vector<Vector>& region) const
+void DelaunayTriangulation::GetAllTrisInRegion(std::vector<sm::vec2>& triBounds, const std::vector<sm::vec2>& region) const
 {
 	std::vector<Triangle*> tris = GetAllTris();
 	for (size_t i = 0, n = tris.size(); i < n; ++i)
 	{
 		Triangle* src = tris[i];
-		std::vector<Vector> bound;
+		std::vector<sm::vec2> bound;
 		src->GetNodesPos(bound);
 
-		Vector p = Math2D::GetTriGravityCenter(bound[0], bound[1], bound[2]);
+		sm::vec2 p = Math2D::GetTriGravityCenter(bound[0], bound[1], bound[2]);
 		if (Math2D::IsPointInArea(p, region))
 			copy(bound.begin(), bound.end(), back_inserter(triBounds));
 	}
 }
 
-bool DelaunayTriangulation::InsertNode(const Vector& p)
+bool DelaunayTriangulation::InsertNode(const sm::vec2& p)
 {
 	int type = Math2D::CheckPosInTriangle(p, m_root->m_nodes[0]->m_pos, m_root->m_nodes[1]->m_pos, m_root->m_nodes[2]->m_pos);
 	if (type == -1 || type == 3)
@@ -112,7 +112,7 @@ bool DelaunayTriangulation::InsertNode(const Vector& p)
 	}
 }
 
-void DelaunayTriangulation::DeleteNodes(const std::vector<Vector>& pos)
+void DelaunayTriangulation::DeleteNodes(const std::vector<sm::vec2>& pos)
 {
 	for (size_t i = 0; i < pos.size(); ++i)
 	{
@@ -129,7 +129,7 @@ void DelaunayTriangulation::DeleteNodes(const std::vector<Vector>& pos)
 	SetAllDestTris();
 }
 
-bool DelaunayTriangulation::IsBoundNode(const Vector& n) const
+bool DelaunayTriangulation::IsBoundNode(const sm::vec2& n) const
 {
 	Node tmp(n);
 	std::set<Node*, NodeCmp>::const_iterator itr = m_nodes.find(&tmp);
@@ -139,9 +139,9 @@ bool DelaunayTriangulation::IsBoundNode(const Vector& n) const
 		return (*itr)->IsMargin();
 }
 
-void DelaunayTriangulation::GetBoundLinePos(std::vector<std::vector<Vector> >& bounds) const
+void DelaunayTriangulation::GetBoundLinePos(std::vector<std::vector<sm::vec2> >& bounds) const
 {
-	std::set<Vector, PosDownCmp> leftPos;
+	std::set<sm::vec2, PosDownCmp> leftPos;
 	std::set<Node*, NodeCmp>::const_iterator itr = m_nodes.begin();
 	for ( ; itr != m_nodes.end(); ++itr)
 		if (IsBoundNode((*itr)->m_pos))
@@ -149,7 +149,7 @@ void DelaunayTriangulation::GetBoundLinePos(std::vector<std::vector<Vector> >& b
 
 	while (!leftPos.empty())
 	{
-		std::vector<Vector> bound;
+		std::vector<sm::vec2> bound;
 		bound.push_back(*leftPos.begin());
 		leftPos.erase(leftPos.begin());
 		while (true)
@@ -159,13 +159,13 @@ void DelaunayTriangulation::GetBoundLinePos(std::vector<std::vector<Vector> >& b
 			assert(ptrCurrNode != m_nodes.end());
 
 			float minAngle = FLT_MAX;
-			Vector nextPos;
+			sm::vec2 nextPos;
 			for (size_t i = 0; i < (*ptrCurrNode)->m_edges.size(); ++i)
 			{
 				Edge* e((*ptrCurrNode)->m_edges[i]);
 				if (e->IsMargin())
 				{
-					Vector otherPos(e->m_start == *ptrCurrNode ? e->m_end->m_pos : e->m_start->m_pos);
+					sm::vec2 otherPos(e->m_start == *ptrCurrNode ? e->m_end->m_pos : e->m_start->m_pos);
 
 					if (bound.size() >= 2 && otherPos == bound[bound.size() - 2])
 						continue;
@@ -197,7 +197,7 @@ void DelaunayTriangulation::GetBoundLinePos(std::vector<std::vector<Vector> >& b
 	}	
 }
 
-void DelaunayTriangulation::GetSurroundPos(const Vector& pos, std::vector<Vector>& surround) const
+void DelaunayTriangulation::GetSurroundPos(const sm::vec2& pos, std::vector<sm::vec2>& surround) const
 {
 	Node tmp(pos);
 	std::set<Node*, NodeCmp>::const_iterator itr = m_nodes.find(&tmp);
@@ -289,11 +289,11 @@ void DelaunayTriangulation::Edge::
 	if (m_start->m_fake && m_end->m_fake)
 		return;
 
-	Vector checkPos(m_left.second->m_pos), fixPos(m_right.second->m_pos);
+	sm::vec2 checkPos(m_left.second->m_pos), fixPos(m_right.second->m_pos);
 	if (checkRightTri)
 		std::swap(checkPos, fixPos);
 
-	Vector center;
+	sm::vec2 center;
 	Math2D::GetCircumcenter(m_start->m_pos, m_end->m_pos, fixPos, &center);
 	if (Math2D::GetDistance(checkPos, center) < Math2D::GetDistance(fixPos, center))
 	{
@@ -566,14 +566,14 @@ void DelaunayTriangulation::DeleteNode(const Node* n)
 //		---------
 //	p1				p2
 
-void DelaunayTriangulation::InitSurrondTri(const std::vector<Vector>& src)
+void DelaunayTriangulation::InitSurrondTri(const std::vector<sm::vec2>& src)
 {
 	Rect rect;
 	Math2D::GetMBR(src, &rect);
 	float extend = std::max(rect.Width(), rect.Height()) * BOUND_EXTEND_TIMES;
-	Vector center(0.5f * (rect.xmin + rect.xmax), 0.5f * (rect.ymin + rect.ymax));
+	sm::vec2 center(0.5f * (rect.xmin + rect.xmax), 0.5f * (rect.ymin + rect.ymax));
 
-	Vector p0(center.x, center.y + extend), 
+	sm::vec2 p0(center.x, center.y + extend), 
 		p1(center.x - extend, center.y - extend), 
 		p2(center.x + extend, center.y - extend);
 
@@ -582,7 +582,7 @@ void DelaunayTriangulation::InitSurrondTri(const std::vector<Vector>& src)
 	m_root->InitTri(new Node(p0, true), new Node(p1, true), new Node(p2, true));
 }
 
-void DelaunayTriangulation::InitSrcNodes(const std::vector<Vector>& src)
+void DelaunayTriangulation::InitSrcNodes(const std::vector<sm::vec2>& src)
 {
 	for(size_t i = 0; i < src.size(); ++i)
 		m_nodes.insert(new Node(src[i]));
@@ -786,7 +786,7 @@ void DelaunayTriangulation::CheckSingleNode()
 				tri = e->LeftTri();
 				if (!tri->IsFake() && tri->m_removed)
 				{
-					Vector other = e->LeftNode()->m_pos;
+					sm::vec2 other = e->LeftNode()->m_pos;
 					float maxLenEdge = std::max(
 						Math2D::GetDistance(e->m_start->m_pos, other),
 						Math2D::GetDistance(e->m_end->m_pos, other)
@@ -801,7 +801,7 @@ void DelaunayTriangulation::CheckSingleNode()
 				tri = e->RightTri();
 				if (!tri->IsFake() && tri->m_removed)
 				{
-					Vector other = e->RightNode()->m_pos;
+					sm::vec2 other = e->RightNode()->m_pos;
 					float maxLenEdge = std::max(
 						Math2D::GetDistance(e->m_start->m_pos, other),
 						Math2D::GetDistance(e->m_end->m_pos, other)

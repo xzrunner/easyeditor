@@ -3,10 +3,12 @@
 
 #include "ICommand.h"
 
+#include <SM_Vector.h>
+
 #include <wx/wx.h>
 #include <map>
 
-namespace ee { class Snapshoot; class Vector; }
+namespace ee { class Snapshoot; }
 namespace Json { class Value; }
 
 namespace edb
@@ -31,14 +33,14 @@ private:
 	void Scale(ee::Snapshoot& ss, const std::string& dir, float scale) const;
 
 	void ScaleImage(const std::string& filepath, float scale, ee::Snapshoot& ss,
-		std::map<std::string, ee::Vector>& mapImg2Center) const;
+		std::map<std::string, sm::vec2>& mapImg2Center) const;
 	void ScaleComplex(const std::string& filepath, float scale,
-		const std::map<std::string, ee::Vector>& mapImg2Center) const;
+		const std::map<std::string, sm::vec2>& mapImg2Center) const;
 	void ScaleAnim(const std::string& filepath, float scale,
-		const std::map<std::string, ee::Vector>& mapImg2Center) const;
+		const std::map<std::string, sm::vec2>& mapImg2Center) const;
 
-	ee::Vector GetScaledPos(Json::Value& sprite_val, float scale, 
-		const ee::Vector& img_offset) const;
+	sm::vec2 GetScaledPos(Json::Value& sprite_val, float scale, 
+		const sm::vec2& img_offset) const;
 
 }; // ScaleOverall
 

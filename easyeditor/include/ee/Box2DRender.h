@@ -1,8 +1,9 @@
 #ifndef _EASYEDITOR_BOX2D_RENDER_H_
 #define _EASYEDITOR_BOX2D_RENDER_H_
 
-#include "Vector.h"
 #include "Color.h"
+
+#include <SM_Vector.h>
 
 #include <Box2D/Box2D.h>
 
@@ -35,9 +36,9 @@ public:
 	virtual void DrawAABB(b2AABB* aabb, const b2Color& color);
 
 private:
-	Vector TransVertex(const b2Vec2& vertex) const;
+	sm::vec2 TransVertex(const b2Vec2& vertex) const;
 
-	void TransVertices(const b2Vec2* src, int count, std::vector<Vector>& dst) const;
+	void TransVertices(const b2Vec2* src, int count, std::vector<sm::vec2>& dst) const;
 
 	Colorf TransColor(const b2Color& col, float alpha = 1) const;
 

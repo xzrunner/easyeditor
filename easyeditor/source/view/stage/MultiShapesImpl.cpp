@@ -21,7 +21,7 @@ MultiShapesImpl::~MultiShapesImpl()
 	m_shape_selection->Release();
 }
 
-Shape* MultiShapesImpl::QueryShapeByPos(const Vector& pos) const
+Shape* MultiShapesImpl::QueryShapeByPos(const sm::vec2& pos) const
 {
 	Shape* result = NULL;
 	TraverseShapes(PointQueryVisitor(pos, &result), DT_EDITABLE);
@@ -67,7 +67,7 @@ void MultiShapesImpl::OnNotify(int sj_id, void* ud)
 // class MultiShapesImpl::PointQueryVisitor
 //////////////////////////////////////////////////////////////////////////
 
-MultiShapesImpl::PointQueryVisitor::PointQueryVisitor(const Vector& pos, Shape** pResult)
+MultiShapesImpl::PointQueryVisitor::PointQueryVisitor(const sm::vec2& pos, Shape** pResult)
 	: m_pos(pos)
 {
 	m_pResult = pResult;

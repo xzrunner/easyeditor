@@ -1,7 +1,7 @@
 #ifndef _EASYEDITOR_DELAUNAY_TRIANGULATION_H_
 #define _EASYEDITOR_DELAUNAY_TRIANGULATION_H_
 
-#include "Vector.h"
+#include <SM_Vector.h>
 
 #include <vector>
 #include <set>
@@ -17,28 +17,28 @@ public:
 	class NodeCmp;
 
 public:
-	DelaunayTriangulation(const std::vector<Vector>& src, bool bFixBound = true);
+	DelaunayTriangulation(const std::vector<sm::vec2>& src, bool bFixBound = true);
 	~DelaunayTriangulation();
 
 	const std::vector<Triangle*>& GetAllTris() const { return m_tris; }
 	const std::set<Node*, NodeCmp>& GetAllNodes() const { return m_nodes; }
-	void GetAllTrisInRegion(std::vector<std::vector<Vector> >& triBounds, const std::vector<Vector>& region) const;
-	void GetAllTrisInRegion(std::vector<Vector>& triBounds, const std::vector<Vector>& region) const;
+	void GetAllTrisInRegion(std::vector<std::vector<sm::vec2> >& triBounds, const std::vector<sm::vec2>& region) const;
+	void GetAllTrisInRegion(std::vector<sm::vec2>& triBounds, const std::vector<sm::vec2>& region) const;
 
-	bool InsertNode(const Vector& p);
-	void DeleteNodes(const std::vector<Vector>& pos);
+	bool InsertNode(const sm::vec2& p);
+	void DeleteNodes(const std::vector<sm::vec2>& pos);
 
-	bool IsBoundNode(const Vector& n) const;
-	void GetBoundLinePos(std::vector<std::vector<Vector> >& bounds) const;
+	bool IsBoundNode(const sm::vec2& n) const;
+	void GetBoundLinePos(std::vector<std::vector<sm::vec2> >& bounds) const;
 
-	void GetSurroundPos(const Vector& pos, std::vector<Vector>& surround) const;
+	void GetSurroundPos(const sm::vec2& pos, std::vector<sm::vec2>& surround) const;
 
 public:
 	class Edge;
 	class Node
 	{
 	public:
-		Node(const Vector& pos, bool bFake = false) 
+		Node(const sm::vec2& pos, bool bFake = false) 
 			: m_pos(pos), m_fake(bFake) {}
 
 		void GetSurroundTris(std::vector<const Triangle*>& tris) const;
@@ -46,7 +46,7 @@ public:
 		bool IsMargin() const;
 
 	public:
-		const Vector m_pos;
+		const sm::vec2 m_pos;
 		const bool m_fake;
 
 	private:
@@ -115,7 +115,7 @@ public:
 
 		void InsertNode(Node* n);
 
-		void GetNodesPos(std::vector<Vector>& pos) const {
+		void GetNodesPos(std::vector<sm::vec2>& pos) const {
 			for (size_t i = 0; i < 3; ++i)
 				pos.push_back(m_nodes[i]->m_pos);
 		}
@@ -151,8 +151,8 @@ private:
 	bool InsertNode(Node* n);
 	void DeleteNode(const Node* n);
 
-	void InitSurrondTri(const std::vector<Vector>& src);
-	void InitSrcNodes(const std::vector<Vector>& src);
+	void InitSurrondTri(const std::vector<sm::vec2>& src);
+	void InitSrcNodes(const std::vector<sm::vec2>& src);
 	void BuildTriangulationStruct();
 	void SetAllDestTris(bool bFixBound = true);
 
@@ -186,7 +186,7 @@ public:
 	class PosDownCmp
 	{
 	public:
-		bool operator () (const Vector& lhs, const Vector&  rhs) const {
+		bool operator () (const sm::vec2& lhs, const sm::vec2&  rhs) const {
 			return lhs.y > rhs.y
 				|| lhs.y == rhs.y && lhs.y < rhs.y;
 		}

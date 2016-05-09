@@ -90,7 +90,7 @@ render_func(void* symbol, float* mat, float x, float y, float angle, float scale
 	}
 	trans.mt = mt;
 
-	ee::SpriteRenderer::Draw(sym, trans, ee::Vector(x, y), angle, scale, scale, 0, 0);
+	ee::SpriteRenderer::Draw(sym, trans, sm::vec2(x, y), angle, scale, scale, 0, 0);
 
 	// todo bind
 	// 	if (p->bind_ps) {
@@ -102,7 +102,7 @@ render_func(void* symbol, float* mat, float x, float y, float angle, float scale
 	// todo record
 	// 	AnimRecorder* curr_record = m_anim_recorder ? m_anim_recorder : recorder;
 	// 	if (curr_record) {
-	// 		ee::Vector fixed = ee::Math2D::TransVector(pos, _mt);
+	// 		sm::vec2 fixed = ee::Math2D::TransVector(pos, _mt);
 	// 		curr_record->AddItem(symbol->GetFilepath(), fixed.x, fixed.y, p->angle, s, mul_col, add_col);
 	// 	}
 }
@@ -111,7 +111,7 @@ static void
 add_func(p3d_particle* p, void* ud)
 {
 //  	ParticleSystem* ps = (ParticleSystem*)ud;
-//  	const ee::Vector& pos = ps->GetPosition();
+//  	const sm::vec2& pos = ps->GetPosition();
 //  	p->init_pos.x = pos.x;
 //  	p->init_pos.y = pos.y;
 }

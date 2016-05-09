@@ -5,7 +5,6 @@
 #include "MeshTrans.h"
 
 #include <ee/Sprite.h>
-#include <ee/Vector.h>
 
 namespace emesh
 {
@@ -33,8 +32,8 @@ public:
 	virtual void Load(const Json::Value& val);
 	virtual void Store(Json::Value& val) const;
 
-	const ee::Vector& GetSpeed() const { return m_speed; }
-	void SetSpeed(const ee::Vector& spd) { m_speed = spd; }
+	const sm::vec2& GetSpeed() const { return m_speed; }
+	void SetSpeed(const sm::vec2& spd) { m_speed = spd; }
 
 	void SetTween(Sprite* begin, Sprite* end, float process);
 
@@ -48,7 +47,7 @@ public:
 private:
 	Symbol* m_symbol;
 
-	ee::Vector m_speed;
+	sm::vec2 m_speed;
 
 	mutable MeshTrans m_trans;
 

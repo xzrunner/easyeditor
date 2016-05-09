@@ -1,5 +1,4 @@
 #include "DrawSelectedSpriteVisitor.h"
-#include "Vector.h"
 #include "Sprite.h"
 #include "BoundingBox.h"
 #include "EE_RVG.h"
@@ -21,7 +20,7 @@ DrawSelectedSpriteVisitor::DrawSelectedSpriteVisitor(const Colorf& color)
 
 void DrawSelectedSpriteVisitor::Visit(Object* object, bool& next) 
 {
-	std::vector<Vector> bound;
+	std::vector<sm::vec2> bound;
 	Sprite* sprite = static_cast<Sprite*>(object);
 	sprite->GetBounding()->GetBoundPos(bound);
 
@@ -42,7 +41,7 @@ void DrawSelectedSpriteVisitor::Visit(Object* object, bool& next)
 
 			sm::mat4 mt;
 			s->GetTransMatrix(mt);
-			ee::Vector min(-hw, -hh), max(hw, hh);
+			sm::vec2 min(-hw, -hh), max(hw, hh);
 			min = ee::Math2D::TransVector(min, mt);
 			max = ee::Math2D::TransVector(max, mt);
 

@@ -35,7 +35,7 @@ public:
 	virtual bool Clear();
 
 protected:
-	virtual Sprite* SelectByPos(const Vector& pos) const;
+	virtual Sprite* SelectByPos(const sm::vec2& pos) const;
 
 	virtual void PasteSprToClipboard(const Sprite* spr, Json::Value& value) const;
 	virtual void CopySprFromClipboard(Sprite* spr, const Json::Value& value) const;
@@ -52,8 +52,8 @@ protected:
 	EditCMPT* m_callback;
 
 private:
-	Vector m_left_first_pos;
-	Vector m_right_first_pos;
+	sm::vec2 m_left_first_pos, m_right_first_pos;
+	bool m_left_first_pos_valid;
 
 	// To disable mouse able when press ctrl and window query
 	bool m_draggable;

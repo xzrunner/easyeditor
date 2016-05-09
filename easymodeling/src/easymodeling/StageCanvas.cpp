@@ -50,7 +50,7 @@ void StageCanvas::DrawSprites() const
 void StageCanvas::DrawCrossLine() const
 {
 	const float halfEdge = 1000.0f;
-	std::vector<ee::Vector> vertices(4);
+	std::vector<sm::vec2> vertices(4);
 	vertices[0].x = -halfEdge;
 	vertices[1].x = halfEdge;
 	vertices[2].y = -halfEdge;
@@ -66,18 +66,18 @@ void StageCanvas::DrawLines() const
  	const float halfEdge = 100.0f;
 	// green
 	{
-		std::vector<ee::Vector> vertices;
+		std::vector<sm::vec2> vertices;
 		size_t size = halfEdge * 2 * 2 * 2;
 		vertices.reserve(size);
 		for (float x = -halfEdge; x <= halfEdge; x += 1.0f)
 		{
-			vertices.push_back(ee::Vector(x, -halfEdge));
-			vertices.push_back(ee::Vector(x, halfEdge));
+			vertices.push_back(sm::vec2(x, -halfEdge));
+			vertices.push_back(sm::vec2(x, halfEdge));
 		}
 		for (float y = -halfEdge; y <= halfEdge; y += 1.0f)
 		{
-			vertices.push_back(ee::Vector(-halfEdge, y));
-			vertices.push_back(ee::Vector(halfEdge, y));
+			vertices.push_back(sm::vec2(-halfEdge, y));
+			vertices.push_back(sm::vec2(halfEdge, y));
 		}
 		ee::RVG::Color(ee::Colorf(0.7f, 0.9f, 0.7f));
 		ee::RVG::LineWidth(1);
@@ -86,18 +86,18 @@ void StageCanvas::DrawLines() const
 	}
 	// red
 	{
-		std::vector<ee::Vector> vertices;
+		std::vector<sm::vec2> vertices;
 		size_t size = halfEdge * 0.1f * 2 * 2 * 2;
 		vertices.reserve(size);
 		for (float x = -halfEdge; x <= halfEdge; x += 10)
 		{
-			vertices.push_back(ee::Vector(x, -halfEdge));
-			vertices.push_back(ee::Vector(x, halfEdge));
+			vertices.push_back(sm::vec2(x, -halfEdge));
+			vertices.push_back(sm::vec2(x, halfEdge));
 		}
 		for (float y = -halfEdge; y <= halfEdge; y += 10)
 		{
-			vertices.push_back(ee::Vector(-halfEdge, y));
-			vertices.push_back(ee::Vector(halfEdge, y));
+			vertices.push_back(sm::vec2(-halfEdge, y));
+			vertices.push_back(sm::vec2(halfEdge, y));
 		}
 		ee::RVG::Color(ee::Colorf(0.9f, 0.7f, 0.7f));
 		ee::RVG::LineWidth(1);

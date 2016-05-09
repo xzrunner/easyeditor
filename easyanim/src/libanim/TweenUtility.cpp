@@ -56,28 +56,28 @@ bool TweenUtility::IsTweenMatched(const ee::Sprite* s0, const ee::Sprite* s1)
 
 void TweenUtility::GetTweenSprite(ee::Sprite* start, ee::Sprite* end, ee::Sprite* tween, float process)
 {
- 	ee::Vector shear;
+ 	sm::vec2 shear;
  	shear.x = (end->GetShear().x - start->GetShear().x) * process + start->GetShear().x;
  	shear.y = (end->GetShear().y - start->GetShear().y) * process + start->GetShear().y;
  	tween->SetShear(shear);
 
 	float xscale = (end->GetScale().x - start->GetScale().x) * process + start->GetScale().x,
 		yscale = (end->GetScale().y - start->GetScale().y) * process + start->GetScale().y;
-	tween->SetScale(ee::Vector(xscale, yscale));
+	tween->SetScale(sm::vec2(xscale, yscale));
 
-	ee::Vector offset = (end->GetOffset() - start->GetOffset()) * process + start->GetOffset();
+	sm::vec2 offset = (end->GetOffset() - start->GetOffset()) * process + start->GetOffset();
 	tween->SetOffset(offset);
 
-	tween->SetTransform(ee::Vector(0, 0), 0);
+	tween->SetTransform(sm::vec2(0, 0), 0);
 
-	ee::Vector center_s = start->GetCenter(), center_e = end->GetCenter();
+	sm::vec2 center_s = start->GetCenter(), center_e = end->GetCenter();
 
 	float angle = (end->GetAngle() - start->GetAngle()) * process + start->GetAngle();
-	ee::Vector base_s = start->GetPosition() + start->GetOffset(),
+	sm::vec2 base_s = start->GetPosition() + start->GetOffset(),
 		base_e = end->GetPosition() + end->GetOffset();
-	ee::Vector base_t = (base_e - base_s) * process + base_s;
+	sm::vec2 base_t = (base_e - base_s) * process + base_s;
 
-	ee::Vector pos_t = base_t -  offset;
+	sm::vec2 pos_t = base_t -  offset;
 	tween->SetTransform(pos_t, angle);
 
 	tween->rp->color.add = col_interpolate(start->rp->color.add, end->rp->color.add, process);

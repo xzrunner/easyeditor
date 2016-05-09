@@ -72,7 +72,7 @@ ComplexBody::ComplexBody(b2World* world, const std::vector<FixtureDataInfo>& fix
 	}
 }
 
-void ComplexBody::GetRect(Rect& rect, const Vector& position, float angle) const
+void ComplexBody::GetRect(Rect& rect, const sm::vec2& position, float angle) const
 {
 	rect.MakeInfinite();
 	for (b2Fixture* f = m_body->GetFixtureList(); f; f = f->GetNext())
@@ -83,7 +83,7 @@ void ComplexBody::GetRect(Rect& rect, const Vector& position, float angle) const
 			for (int i = 0; i < poly->GetVertexCount(); ++i)
 			{
 				const b2Vec2& p = poly->m_vertices[i];
-				Vector transform = Math2D::RotateVector(Vector(p.x, p.y), angle) + position;
+				sm::vec2 transform = Math2D::RotateVector(sm::vec2(p.x, p.y), angle) + position;
 				rect.Combine(transform);
 			}
 		}

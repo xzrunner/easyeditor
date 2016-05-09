@@ -5,7 +5,7 @@
 
 #include <map>
 
-namespace ee { class Sprite; class Symbol; class Vector; class Visitor; }
+namespace ee { class Sprite; class Symbol; class Visitor; }
 
 namespace sg
 {
@@ -24,7 +24,7 @@ public:
 	void Clear();
 
 	bool IsValid(ee::Sprite* sprite) const;
-	bool IsValid(const ee::Symbol& symbol, const ee::Vector& pos) const;
+	bool IsValid(const ee::Symbol& symbol, const sm::vec2& pos) const;
 
 	void DebugDraw() const;
 
@@ -40,9 +40,9 @@ private:
 
 	ee::Sprite* m_grid[ROW][COL];
 
-	std::map<ee::Sprite*, ee::Vector> m_map_sprite2pos;
+	std::map<ee::Sprite*, sm::vec2> m_map_sprite2pos;
 
-	std::map<ee::Sprite*, ee::Vector> m_map_removed;
+	std::map<ee::Sprite*, sm::vec2> m_map_removed;
 
 }; // CheckerBoard
 

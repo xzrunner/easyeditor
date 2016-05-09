@@ -11,8 +11,8 @@ namespace eimage
 static const int STEPS_COUNT = 3;
 static const float STEPS[STEPS_COUNT] = {1/8.0f, 1/16.0f, 1/32.0f};
 
-ExtractOutlineFine::ExtractOutlineFine(const std::vector<ee::Vector>& raw_border, 
-									   const std::vector<ee::Vector>& raw_border_merged)
+ExtractOutlineFine::ExtractOutlineFine(const std::vector<sm::vec2>& raw_border, 
+									   const std::vector<sm::vec2>& raw_border_merged)
 	: m_raw_border(raw_border)
 	, m_raw_border_merged(raw_border_merged)
 {
@@ -44,11 +44,11 @@ void ExtractOutlineFine::OutlineByAddNode(float area_tol, float perimeter_tol,
 {
 	m_fine_border.clear();
 
-	ee::Vector bound[4];
+	sm::vec2 bound[4];
 	ee::MinBoundingBox::Do(m_raw_border, bound);
 	m_fine_border.assign(bound, bound+4);
 
-	std::vector<ee::Vector> last_fine_border = m_fine_border;
+	std::vector<sm::vec2> last_fine_border = m_fine_border;
 
 	int count = 0;
 	bool success = false;
@@ -58,11 +58,11 @@ void ExtractOutlineFine::OutlineByAddNode(float area_tol, float perimeter_tol,
 		float area = ee::Math2D::GetPolygonArea(m_fine_border);
 
 		// remove one node
-		ee::Vector r_new0, r_new1;
+		sm::vec2 r_new0, r_new1;
 		int r_idx = 0;
 		float r_area_decrease = 0;
 		for (int i = 0, n = m_fine_border.size(); i < n; ++i) {
-			ee::Vector _new0, _new1;
+			sm::vec2 _new0, _new1;
 			float _area_decrease = 0;
 			RemoveOneNode(i, _new0, _new1, _area_decrease);
 			if (_area_decrease > r_area_decrease) {
@@ -74,11 +74,11 @@ void ExtractOutlineFine::OutlineByAddNode(float area_tol, float perimeter_tol,
 		}
 
 		// add one node
-		ee::Vector a_new_start, a_new_end, a_new_node;
+		sm::vec2 a_new_start, a_new_end, a_new_node;
 		int a_idx = 0;
 		float a_area_decrease = 0;
 		for (int i = 0, n = m_fine_border.size(); i < n; ++i) {
-			ee::Vector _new_start, _new_end, _new_node;
+			sm::vec2 _new_start, _new_end, _new_node;
 			float _area_decrease = 0;
 			AddOneNode(i, _new_start, _new_end, _new_node, _area_decrease);
 			if (_area_decrease > a_area_decrease) {
@@ -101,9 +101,9 @@ void ExtractOutlineFine::OutlineByAddNode(float area_tol, float perimeter_tol,
 			}
 		} else {
 			if (a_area_decrease / area > area_tol) {
-				const ee::Vector& start = m_fine_border[a_idx];
-				const ee::Vector& start_prev = m_fine_border[(a_idx+m_fine_border.size()-1)%m_fine_border.size()];
-				ee::Vector cross_start;
+				const sm::vec2& start = m_fine_border[a_idx];
+				const sm::vec2& start_prev = m_fine_border[(a_idx+m_fine_border.size()-1)%m_fine_border.size()];
+				sm::vec2 cross_start;
 				int new_node_pos;
 				ee::Math2D::GetTwoLineCross(a_new_node, a_new_start, start_prev, start, &cross_start);
 				if (ee::Math2D::GetDistanceSquare(cross_start, a_new_start) < ee::Math2D::GetDistanceSquare(cross_start, a_new_node) &&
@@ -111,7 +111,7 @@ void ExtractOutlineFine::OutlineByAddNode(float area_tol, float perimeter_tol,
 					new_node_pos = (a_idx+1)%m_fine_border.size();
 					m_fine_border[a_idx] = cross_start;
 				} else {					
-					std::vector<ee::Vector>::iterator itr = 
+					std::vector<sm::vec2>::iterator itr = 
 						m_fine_border.insert(m_fine_border.begin()+((a_idx+1)%m_fine_border.size()), a_new_start);
 					++itr;
 					if (itr == m_fine_border.end()) {
@@ -121,9 +121,9 @@ void ExtractOutlineFine::OutlineByAddNode(float area_tol, float perimeter_tol,
 				}
 				m_fine_border.insert(m_fine_border.begin()+new_node_pos, a_new_node);
 
-				const ee::Vector& end = m_fine_border[(new_node_pos+1)%m_fine_border.size()];
-				const ee::Vector& end_next = m_fine_border[(new_node_pos+2)%m_fine_border.size()];
-				ee::Vector cross_end;
+				const sm::vec2& end = m_fine_border[(new_node_pos+1)%m_fine_border.size()];
+				const sm::vec2& end_next = m_fine_border[(new_node_pos+2)%m_fine_border.size()];
+				sm::vec2 cross_end;
 				ee::Math2D::GetTwoLineCross(a_new_node, a_new_end, end_next, end, &cross_end);
 				if (ee::Math2D::GetDistanceSquare(cross_end, a_new_end) < ee::Math2D::GetDistanceSquare(cross_end, a_new_node) &&
 					ee::Math2D::GetDistanceSquare(cross_end, a_new_node) >= ee::Math2D::GetDistanceSquare(a_new_end, a_new_node)) {
@@ -169,15 +169,15 @@ void ExtractOutlineFine::OutlineByAddNode(float area_tol, float perimeter_tol,
 	} while (++count < max_step);
 }
 
-void ExtractOutlineFine::RemoveOneNode(int idx, ee::Vector& new0, ee::Vector& new1, float& decrease) const
+void ExtractOutlineFine::RemoveOneNode(int idx, sm::vec2& new0, sm::vec2& new1, float& decrease) const
 {
 	decrease = 0;
 
-	const ee::Vector& curr = m_fine_border[idx];
-	const ee::Vector& prev = m_fine_border[(idx+m_fine_border.size()-1)%m_fine_border.size()];
-	const ee::Vector& next = m_fine_border[(idx+1)%m_fine_border.size()];
-	ee::Vector s0 = curr - prev, s1 = next - curr;
-	if (vec_cross(s0, s1) >= 0) {
+	const sm::vec2& curr = m_fine_border[idx];
+	const sm::vec2& prev = m_fine_border[(idx+m_fine_border.size()-1)%m_fine_border.size()];
+	const sm::vec2& next = m_fine_border[(idx+1)%m_fine_border.size()];
+	sm::vec2 s0 = curr - prev, s1 = next - curr;
+	if (s0.Cross(s1) >= 0) {
 		return;
 	}
 
@@ -186,9 +186,9 @@ void ExtractOutlineFine::RemoveOneNode(int idx, ee::Vector& new0, ee::Vector& ne
 	float area_max = 0;
 	float idx_e = 0;
 	for (float i = 0; i < len_prev; i+=1) {
-		ee::Vector s = prev + (curr-prev)*(i/len_prev);
+		sm::vec2 s = prev + (curr-prev)*(i/len_prev);
 		for (float j = idx_e; j < len_next; j+=1) {
-			ee::Vector e = curr + (next-curr)*(j/len_next);
+			sm::vec2 e = curr + (next-curr)*(j/len_next);
 			if (IsCutTriLegal(curr, s, e)) {
 				float a = ee::Math2D::GetTriangleArea(s, curr, e);
 				if (a > decrease) {
@@ -205,23 +205,23 @@ void ExtractOutlineFine::RemoveOneNode(int idx, ee::Vector& new0, ee::Vector& ne
 }
 
 // todo 太小边的探索尽快终止掉
-void ExtractOutlineFine::AddOneNode(int idx, ee::Vector& new_start, ee::Vector& new_end, 
-									ee::Vector& new_node, float& decrease) const
+void ExtractOutlineFine::AddOneNode(int idx, sm::vec2& new_start, sm::vec2& new_end, 
+									sm::vec2& new_node, float& decrease) const
 {
 	decrease = 0;
-	const ee::Vector& curr = m_fine_border[idx];
-	const ee::Vector& next = m_fine_border[(idx+1)%m_fine_border.size()];
+	const sm::vec2& curr = m_fine_border[idx];
+	const sm::vec2& next = m_fine_border[(idx+1)%m_fine_border.size()];
 	float best_score = 0;
-	ee::Vector best_node;
+	sm::vec2 best_node;
 	// init region
 	float best_start_scale, best_end_scale;
 	assert(STEPS_COUNT > 0);
 	float step = STEPS[0];
 	for (float start_scale = 0; start_scale < 1; start_scale += step) {
-		ee::Vector start_pos = curr + (next-curr)*start_scale;
+		sm::vec2 start_pos = curr + (next-curr)*start_scale;
 		for (float end_scale = 1; end_scale > start_scale; end_scale -= step) {
-			ee::Vector end_pos = curr + (next-curr)*end_scale;
-			ee::Vector mid_pos;
+			sm::vec2 end_pos = curr + (next-curr)*end_scale;
+			sm::vec2 mid_pos;
 			float score;
 			MidPosExplore(start_pos, end_pos, mid_pos, score);
 			if (score > best_score) {
@@ -241,16 +241,16 @@ void ExtractOutlineFine::AddOneNode(int idx, ee::Vector& new_start, ee::Vector& 
 	decrease = best_score;
 }
 
-bool ExtractOutlineFine::IsCutTriLegal(const ee::Vector& center, 
-									   const ee::Vector& p0, 
-									   const ee::Vector& p1) const
+bool ExtractOutlineFine::IsCutTriLegal(const sm::vec2& center, 
+									   const sm::vec2& p0, 
+									   const sm::vec2& p1) const
 {
 	if (ee::Math2D::IsSegmentIntersectPolyline(p0, p1, m_fine_border)) {
 		return false;
 	}
 
-	ee::Vector tri_v[3] = {center, p0, p1};
-	std::vector<ee::Vector> tri;
+	sm::vec2 tri_v[3] = {center, p0, p1};
+	std::vector<sm::vec2> tri;
 	tri.assign(tri_v, tri_v+3);
 	if (ee::Math2D::IsPolygonIntersectPolygon(m_raw_border_merged, tri)) {
 		return false;
@@ -259,19 +259,19 @@ bool ExtractOutlineFine::IsCutTriLegal(const ee::Vector& center,
 	return true;
 }
 
-bool ExtractOutlineFine::IsAddTriLeagal(const ee::Vector& p0, const ee::Vector& p1, const ee::Vector& p2) const
+bool ExtractOutlineFine::IsAddTriLeagal(const sm::vec2& p0, const sm::vec2& p1, const sm::vec2& p2) const
 {
-	ee::Vector tri_v[3] = {p0, p1, p2};
-	std::vector<ee::Vector> tri;
+	sm::vec2 tri_v[3] = {p0, p1, p2};
+	std::vector<sm::vec2> tri;
 	tri.assign(tri_v, tri_v+3);
 	return !ee::Math2D::IsPolygonIntersectPolygon(m_raw_border_merged, tri)
 		&& !ee::Math2D::IsPolygonIntersectPolygon(m_fine_border, tri);
 }
 
 // 已经是算出来的
-void ExtractOutlineFine::StartPosExplore(const ee::Vector& p0, const ee::Vector& p1, 
+void ExtractOutlineFine::StartPosExplore(const sm::vec2& p0, const sm::vec2& p1, 
 										 float& start_scale, float& end_scale, 
-										 ee::Vector& mid, float& score) const
+										 sm::vec2& mid, float& score) const
 {
 	for (int s = 1; s < STEPS_COUNT; ++s)
 	{
@@ -280,13 +280,13 @@ void ExtractOutlineFine::StartPosExplore(const ee::Vector& p0, const ee::Vector&
 		// ori
 		float ori_end_scale = end_scale;
 		float ori_score = 0;
-		ee::Vector ori_mid;
+		sm::vec2 ori_mid;
 		EndPosExplore(step, p0, p1, start_scale, end_scale, ori_mid, ori_score);
 		// sub
 		float sub_start_scale = start_scale - step;
 		float sub_end_scale = end_scale;
 		float sub_score = 0;
-		ee::Vector sub_mid;
+		sm::vec2 sub_mid;
 		if (sub_start_scale <= 1 && sub_start_scale < end_scale) {
 			EndPosExplore(step, p0, p1, sub_start_scale, sub_end_scale, sub_mid, sub_score);
 		}
@@ -294,7 +294,7 @@ void ExtractOutlineFine::StartPosExplore(const ee::Vector& p0, const ee::Vector&
 		float add_start_scale = start_scale + step;
 		float add_end_scale = end_scale;
 		float add_score = 0;
-		ee::Vector add_mid;
+		sm::vec2 add_mid;
 		if (add_start_scale <= 1 && add_start_scale < end_scale) {
 			EndPosExplore(step, p0, p1, add_start_scale, add_end_scale, add_mid, add_score);
 		}
@@ -339,13 +339,13 @@ void ExtractOutlineFine::StartPosExplore(const ee::Vector& p0, const ee::Vector&
 }
 
 // 参数的score没算出
-void ExtractOutlineFine::EndPosExplore(float step, const ee::Vector& p0, const ee::Vector& p1, float start_scale, 
-									   float& end_scale, ee::Vector& mid, float& score) const
+void ExtractOutlineFine::EndPosExplore(float step, const sm::vec2& p0, const sm::vec2& p1, float start_scale, 
+									   float& end_scale, sm::vec2& mid, float& score) const
 {
- 	ee::Vector start_pos = p0 + (p1-p0)*start_scale,
+ 	sm::vec2 start_pos = p0 + (p1-p0)*start_scale,
  		end_pos = p0 + (p1-p0)*end_scale;
 	float curr_score;
-	ee::Vector curr_mid;
+	sm::vec2 curr_mid;
 	MidPosExplore(start_pos, end_pos, curr_mid, curr_score);
 	if (curr_score <= score) {
 		return;
@@ -358,17 +358,17 @@ void ExtractOutlineFine::EndPosExplore(float step, const ee::Vector& p0, const e
 	// sub
 	float sub_end_scale = end_scale - curr_step;
 	float sub_score = 0;
-	ee::Vector sub_mid;
+	sm::vec2 sub_mid;
 	if (sub_end_scale <= 1 && sub_end_scale > start_scale) {
-		ee::Vector e = p0 + (p1-p0)*sub_end_scale;
+		sm::vec2 e = p0 + (p1-p0)*sub_end_scale;
 		MidPosExplore(start_pos, e, sub_mid, sub_score);
 	}
 	// add
 	float add_end_scale = end_scale + curr_step;
 	float add_score = 0;
-	ee::Vector add_mid;
+	sm::vec2 add_mid;
 	if (add_end_scale <= 1 && add_end_scale > start_scale) {
-		ee::Vector e = p0 + (p1-p0)*add_end_scale;
+		sm::vec2 e = p0 + (p1-p0)*add_end_scale;
 		MidPosExplore(start_pos, e, add_mid, add_score);
 	}
 	// decide direction
@@ -389,9 +389,9 @@ void ExtractOutlineFine::EndPosExplore(float step, const ee::Vector& p0, const e
 	float curr_end_scale = end_scale + curr_step;
 	while (curr_end_scale <= 1 && curr_end_scale > start_scale)
 	{
-		ee::Vector curr_mid;
+		sm::vec2 curr_mid;
 		float curr_score;
-		ee::Vector e = p0 + (p1-p0)*curr_end_scale;
+		sm::vec2 e = p0 + (p1-p0)*curr_end_scale;
 		MidPosExplore(start_pos, e, curr_mid, curr_score);
 		if (curr_score > score) {
 			score = curr_score;
@@ -404,23 +404,23 @@ void ExtractOutlineFine::EndPosExplore(float step, const ee::Vector& p0, const e
 	}
 }
 
-void ExtractOutlineFine::MidPosExplore(const ee::Vector& start, const ee::Vector& end, 
-									   ee::Vector& mid, float& score) const
+void ExtractOutlineFine::MidPosExplore(const sm::vec2& start, const sm::vec2& end, 
+									   sm::vec2& mid, float& score) const
 {
 	//// order
 	//// 3 4 5
 	//// 2   6
 	//// 1 0 7
 	//static const int DIR_COUNT = 8;
-	//static const ee::Vector DIRS[DIR_COUNT] = {
-	//	ee::Vector( 0, -1),
-	//	ee::Vector(-1, -1),
-	//	ee::Vector(-1,  0),
-	//	ee::Vector(-1,  1),
-	//	ee::Vector( 0,  1),
-	//	ee::Vector( 1,  1),
-	//	ee::Vector( 1,  0),
-	//	ee::Vector( 1, -1),
+	//static const sm::vec2 DIRS[DIR_COUNT] = {
+	//	sm::vec2( 0, -1),
+	//	sm::vec2(-1, -1),
+	//	sm::vec2(-1,  0),
+	//	sm::vec2(-1,  1),
+	//	sm::vec2( 0,  1),
+	//	sm::vec2( 1,  1),
+	//	sm::vec2( 1,  0),
+	//	sm::vec2( 1, -1),
 	//};
 
 	static const int STEPS_COUNT = 6;
@@ -436,8 +436,8 @@ void ExtractOutlineFine::MidPosExplore(const ee::Vector& start, const ee::Vector
 			float old_score = score;
 			for (int j = 0, m = m_rotate_lut.size(); j < m; ++j)
 			{
-				ee::Vector offset = m_rotate_lut[j] * step;
-				ee::Vector curr_mid = mid + offset;
+				sm::vec2 offset = m_rotate_lut[j] * step;
+				sm::vec2 curr_mid = mid + offset;
 				float area = ee::Math2D::GetTriangleArea(start, curr_mid, end);
 				if (area > score &&
 					ee::Math2D::IsPointInArea(curr_mid, m_fine_border)) {
@@ -470,12 +470,12 @@ void ExtractOutlineFine::ReduceNode(float tolerance)
 		success = false;
 		for (int i = 0, n = m_fine_border.size(); i < n; ++i)
 		{
-			const ee::Vector& curr = m_fine_border[i];
-			const ee::Vector& prev = m_fine_border[(i+m_fine_border.size()-1)%m_fine_border.size()];
-			const ee::Vector& next = m_fine_border[(i+1)%m_fine_border.size()];
-			ee::Vector s0 = curr - prev, s1 = next - curr;
+			const sm::vec2& curr = m_fine_border[i];
+			const sm::vec2& prev = m_fine_border[(i+m_fine_border.size()-1)%m_fine_border.size()];
+			const sm::vec2& next = m_fine_border[(i+1)%m_fine_border.size()];
+			sm::vec2 s0 = curr - prev, s1 = next - curr;
 			// area increase & perimeter decrease
-			if (vec_cross(s0, s1) >= 0) 
+			if (s0.Cross(s1) >= 0) 
 			{
 				float a = ee::Math2D::GetTriangleArea(curr, prev, next);
 				if (a < area_limit && IsAddTriLeagal(prev, next, curr))
@@ -516,16 +516,16 @@ void ExtractOutlineFine::ReduceEdge(float area_tol, float perimeter_tol)
 		success = false;
 		for (int i = 0, n = m_fine_border.size(); i < n; ++i)
 		{
-			const ee::Vector& start = m_fine_border[i];
-			const ee::Vector& start_prev = m_fine_border[(i+m_fine_border.size()-1)%m_fine_border.size()];
-			const ee::Vector& end = m_fine_border[(i+1)%m_fine_border.size()];
-			const ee::Vector& end_next = m_fine_border[(i+2)%m_fine_border.size()];
+			const sm::vec2& start = m_fine_border[i];
+			const sm::vec2& start_prev = m_fine_border[(i+m_fine_border.size()-1)%m_fine_border.size()];
+			const sm::vec2& end = m_fine_border[(i+1)%m_fine_border.size()];
+			const sm::vec2& end_next = m_fine_border[(i+2)%m_fine_border.size()];
 			assert(start != end);
 			if (start_prev == end_next) {
 				continue;
 			}
 			
-			ee::Vector intersect;
+			sm::vec2 intersect;
 			bool cross = ee::Math2D::GetTwoLineCross(start_prev, start, end, end_next, &intersect);
 			if (!cross) {
 				continue;
@@ -592,7 +592,7 @@ void ExtractOutlineFine::InitRotateLUT()
 	for (int i = 0; i < DIR_COUNT; ++i) 
 	{
 		float angle = 2 * SM_PI * i / DIR_COUNT;
-		ee::Vector dir(cos(angle), sin(angle));
+		sm::vec2 dir(cos(angle), sin(angle));
 		m_rotate_lut.push_back(dir);
 	}
 }

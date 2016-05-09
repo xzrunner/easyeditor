@@ -24,10 +24,9 @@ SelectSpritesOP::SelectSpritesOP(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
 								 ee::EditCMPT* callback/* = NULL*/)
 	: ee::SelectSpritesOP(stage_wnd, stage, sprites_impl, callback)
 	, m_open_symbol(stage_wnd, stage, sprites_impl)
+	, m_first_press_valid(false)
 {
 	stage->SetCursor(wxCursor(wxCURSOR_PENCIL));
-
-	m_first_press.SetInvalid();
 }
 
 bool SelectSpritesOP::OnKeyDown(int keyCode)
@@ -54,16 +53,17 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 {
 	if (ee::SelectSpritesOP::OnMouseLeftDown(x, y)) return true;
 
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 
 	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
 	stage->PointQuery(pos);
 
-	if (m_first_press.IsValid()) {
+	if (m_first_press_valid) {
 		stage->Pathfinding(m_first_press, pos);
-		m_first_press.SetInvalid();
+		m_first_press_valid = false;
 	} else {
 		m_first_press = pos;
+		m_first_press_valid = true;
 	}
 
 	return false;
@@ -73,7 +73,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 {
 	if (ee::SelectSpritesOP::OnMouseLeftDClick(x, y)) return true;
 
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 
 	ee::Sprite* selected = NULL;
 	m_selection->Traverse(ee::PointQueryVisitor(pos, &selected));

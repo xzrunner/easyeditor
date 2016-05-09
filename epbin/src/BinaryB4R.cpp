@@ -11,6 +11,7 @@
 // #include <dtex_b4r.h>
 
 #include <algorithm>
+#include <iostream>
 
 #include <wx/string.h>
 

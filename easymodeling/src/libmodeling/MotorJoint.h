@@ -3,8 +3,6 @@
 
 #include "Joint.h"
 
-#include <ee/Vector.h>
-
 #include <vector>
 
 namespace emodeling
@@ -15,16 +13,16 @@ class MotorJoint : public Joint
 public:
 	MotorJoint(Body* b0, Body* b1);
 
-	virtual bool IsContain(const ee::Vector& pos) const;
+	virtual bool IsContain(const sm::vec2& pos) const;
 	virtual bool IsIntersect(const ee::Rect& rect) const;
 
 	virtual void Draw(DrawType type) const;
 
 private:
-	void DrawAnchor(const ee::Vector& pos, DrawType type) const;
+	void DrawAnchor(const sm::vec2& pos, DrawType type) const;
 
 public:
-	ee::Vector m_linear_offset;
+	sm::vec2 m_linear_offset;
 	float m_angular_offset;
 
 	float m_max_force;

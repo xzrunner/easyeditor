@@ -36,7 +36,7 @@ void SpritePropertyImpl::Translate(float x, float y)
 		return;
 	}
 
-	Vector new_pos(x, y);
+	sm::vec2 new_pos(x, y);
 
 	std::vector<Sprite*> sprites;
 	sprites.push_back(m_sprite);
@@ -66,8 +66,8 @@ void SpritePropertyImpl::Scale(float sx, float sy)
 		return;
 	}
 
-	EditAddRecordSJ::Instance()->Add(new ScaleSpriteAOP(m_sprite, Vector(sx, sy), m_sprite->GetScale()));
-	m_sprite->SetScale(Vector(sx, sy));
+	EditAddRecordSJ::Instance()->Add(new ScaleSpriteAOP(m_sprite, sm::vec2(sx, sy), m_sprite->GetScale()));
+	m_sprite->SetScale(sm::vec2(sx, sy));
 }
 
 void SpritePropertyImpl::Shear(float kx, float ky)
@@ -77,15 +77,15 @@ void SpritePropertyImpl::Shear(float kx, float ky)
 	}
 
 	EditAddRecordSJ::Instance()->Add(new ShearSpriteAOP(m_sprite, 
-		Vector(kx, ky), m_sprite->GetShear()));
-	m_sprite->SetShear(Vector(kx, ky));
+		sm::vec2(kx, ky), m_sprite->GetShear()));
+	m_sprite->SetShear(sm::vec2(kx, ky));
 }
 
 void SpritePropertyImpl::Offset(float ox, float oy)
 {
 	EditAddRecordSJ::Instance()->Add(new OffsetSpriteAOP(m_sprite, 
-		Vector(ox, oy), m_sprite->GetOffset()));
-	m_sprite->SetOffset(Vector(ox, oy));
+		sm::vec2(ox, oy), m_sprite->GetOffset()));
+	m_sprite->SetOffset(sm::vec2(ox, oy));
 }
 
 void SpritePropertyImpl::Mirror(bool mx, bool my)
@@ -106,8 +106,8 @@ void SpritePropertyImpl::Perspective(float px, float py)
 	}
 
 	EditAddRecordSJ::Instance()->Add(new PerspectiveSpriteAOP(m_sprite, 
-		Vector(px, py), m_sprite->GetPerspective()));
-	m_sprite->SetPerspective(Vector(px, py));
+		sm::vec2(px, py), m_sprite->GetPerspective()));
+	m_sprite->SetPerspective(sm::vec2(px, py));
 }
 
 }

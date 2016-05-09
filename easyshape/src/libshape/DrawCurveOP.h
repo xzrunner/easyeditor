@@ -2,7 +2,8 @@
 #define _EASYSHAPE_DRAW_CURVE_OP_H_
 
 #include <ee/ZoomViewOP.h>
-#include <ee/Vector.h>
+
+#include <SM_Vector.h>
 
 #include <vector>
 
@@ -24,11 +25,13 @@ public:
 	virtual bool Clear();
 
 protected:
-	std::vector<ee::Vector> m_curve;
+	std::vector<sm::vec2> m_curve;
 
 private:
-	ee::Vector m_firstPos;
-	bool m_startDraw;
+	sm::vec2 m_first_pos;
+	bool m_first_pos_valid;
+
+	bool m_start_draw;
 
 	bool m_straight_mode;
 

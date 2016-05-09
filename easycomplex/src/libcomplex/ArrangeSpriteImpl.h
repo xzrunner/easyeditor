@@ -15,7 +15,7 @@ public:
 
 protected:
 	virtual ee::ArrangeSpriteState* CreateRotateState(ee::SpriteSelection* selection, 
-		const ee::Vector& first_pos) const;
+		const sm::vec2& first_pos) const;
 
 }; // ArrangeSpriteImpl
 

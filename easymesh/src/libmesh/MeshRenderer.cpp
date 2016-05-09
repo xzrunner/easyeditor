@@ -3,7 +3,6 @@
 #include "Triangle.h"
 #include "color_config.h"
 
-#include <ee/Vector.h>
 #include <ee/EE_RVG.h>
 #include <ee/SpriteRenderer.h>
 #include <ee/RenderContextStack.h>
@@ -22,8 +21,8 @@ namespace emesh
 
 void MeshRenderer::DrawInfoUV(const Mesh* mesh)
 {
-	std::set<ee::Vector, ee::VectorCmp> unique;
-	std::vector<ee::Vector> tmp(3);
+	std::set<sm::vec2, sm::Vector2Cmp> unique;
+	std::vector<sm::vec2> tmp(3);
 	const std::vector<Triangle*>& tris = mesh->GetTriangles();
 	float w = mesh->GetWidth(),
 		  h = mesh->GetHeight();
@@ -39,7 +38,7 @@ void MeshRenderer::DrawInfoUV(const Mesh* mesh)
 		ee::RVG::Color(RED);
 		ee::RVG::Polyline(tmp, true);
 	}
-	std::vector<ee::Vector> nodes;
+	std::vector<sm::vec2> nodes;
 	copy(unique.begin(), unique.end(), back_inserter(nodes));
 	ee::RVG::Color(BLUE);
 	ee::RVG::Circles(nodes, mesh->GetNodeRegion(), true);
@@ -47,8 +46,8 @@ void MeshRenderer::DrawInfoUV(const Mesh* mesh)
 
 void MeshRenderer::DrawInfoXY(const Mesh* mesh)
 {
-	std::set<ee::Vector, ee::VectorCmp> unique;
-	std::vector<ee::Vector> tmp(3);
+	std::set<sm::vec2, sm::Vector2Cmp> unique;
+	std::vector<sm::vec2> tmp(3);
 	const std::vector<Triangle*>& tris = mesh->GetTriangles();
 	for (int i = 0, n = tris.size(); i < n; ++i)
 	{
@@ -61,7 +60,7 @@ void MeshRenderer::DrawInfoXY(const Mesh* mesh)
 		ee::RVG::Color(RED);
 		ee::RVG::Polyline(tmp, true);
 	}
-	std::vector<ee::Vector> nodes;
+	std::vector<sm::vec2> nodes;
 	copy(unique.begin(), unique.end(), back_inserter(nodes));
 	ee::RVG::Color(BLUE);
 	ee::RVG::Circles(nodes, mesh->GetNodeRegion(), true);
@@ -73,14 +72,14 @@ void MeshRenderer::DrawTexture(const Mesh* mesh, const ee::RenderParams& params)
 
 	ee::RenderContextStack* rc = ee::RenderContextStack::Instance();
 
-	ee::Vector ori_offset;
+	sm::vec2 ori_offset;
 	float ori_scale;
 	rc->GetModelView(ori_offset, ori_scale);
 
 	int ori_width, ori_height;
 	rc->GetProjection(ori_width, ori_height);
 
-	rc->SetModelView(ee::Vector(0, 0), 1);
+	rc->SetModelView(sm::vec2(0, 0), 1);
 	int edge = dtexf_c1_get_texture_size();
 	rc->SetProjection(edge, edge);
 	ee::GL::Viewport(0, 0, edge, edge);
@@ -113,7 +112,7 @@ void MeshRenderer::DrawMesh(const Mesh* mesh, const ee::RenderParams& params, in
 	for (int i = 0, n = tris.size(); i < n; ++i)
 	{
 		Triangle* tri = tris[i];
-		ee::Vector vertices[4], texcoords[4];
+		sm::vec2 vertices[4], texcoords[4];
 		for (int i = 0; i < 3; ++i)
 		{
 			vertices[i] = ee::Math2D::TransVector(tri->nodes[i]->xy, params.mt);

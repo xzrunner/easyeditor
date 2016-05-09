@@ -20,7 +20,7 @@ Joint::Joint(ee::Sprite* sprite)
 	CreateId();
 }
 
-Joint::Joint(ee::Sprite* sprite, const ee::Vector& pos)
+Joint::Joint(ee::Sprite* sprite, const sm::vec2& pos)
 	: m_sprite(sprite)
 	, m_parent(NULL)
 {
@@ -51,13 +51,13 @@ void Joint::Draw() const
 	ee::RVG::Circle(GetWorldPos(), REGION, false);
 	if (m_parent)
 	{
-		ee::Vector s = GetWorldPos();
-		ee::Vector e = m_sprite->GetPosition() * 2 - s;
+		sm::vec2 s = GetWorldPos();
+		sm::vec2 e = m_sprite->GetPosition() * 2 - s;
 
 		const float w = 0.1f;
-		ee::Vector mid = s + (e-s)*w;
-		ee::Vector left = mid + ee::Math2D::RotateVectorRightAngle(s - mid, false);
-		ee::Vector right = mid + ee::Math2D::RotateVectorRightAngle(s - mid, true);
+		sm::vec2 mid = s + (e-s)*w;
+		sm::vec2 left = mid + ee::Math2D::RotateVectorRightAngle(s - mid, false);
+		sm::vec2 right = mid + ee::Math2D::RotateVectorRightAngle(s - mid, true);
 
 		ee::RVG::Color(ee::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
 		ee::RVG::Line(s, left);
@@ -67,27 +67,27 @@ void Joint::Draw() const
 	}
 }
 
-bool Joint::Contain(const ee::Vector& pos) const
+bool Joint::Contain(const sm::vec2& pos) const
 {
 	return ee::Math2D::GetDistance(pos, GetWorldPos()) < REGION;
 }
 
-bool Joint::Intersect(const ee::Vector& pos) const
+bool Joint::Intersect(const sm::vec2& pos) const
 {
 	return ee::Math2D::GetDistance(pos, GetWorldPos()) < REGION * 2;
 }
 
-void Joint::SetPosition(const ee::Vector& pos) 
+void Joint::SetPosition(const sm::vec2& pos) 
 {
 	m_relative_pos = GetRelativePos(pos);
 }
 
-ee::Vector Joint::GetWorldPos() const
+sm::vec2 Joint::GetWorldPos() const
 {
 	return m_sprite->GetPosition() + ee::Math2D::RotateVector(GetRelativePos(), m_sprite->GetAngle());
 }
 
-ee::Vector Joint::GetRelativePos(const ee::Vector& pos) const
+sm::vec2 Joint::GetRelativePos(const sm::vec2& pos) const
 {
 	return ee::Math2D::RotateVector(pos - m_sprite->GetPosition(), -m_sprite->GetAngle());
 }
@@ -122,9 +122,9 @@ void Joint::CreateId()
 	m_id = ++id;
 }
 
-ee::Vector Joint::GetRelativePos() const
+sm::vec2 Joint::GetRelativePos() const
 {
-	ee::Vector pos = m_relative_pos;
+	sm::vec2 pos = m_relative_pos;
 	pos.x *= m_sprite->GetScale().x;
 	pos.y *= m_sprite->GetScale().y;
 	return pos;

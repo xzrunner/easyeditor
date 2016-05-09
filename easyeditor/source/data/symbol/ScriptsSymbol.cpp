@@ -21,7 +21,7 @@ void ScriptsSymbol::LoadResources()
 
 Rect ScriptsSymbol::GetSize(const Sprite* sprite) const 
 { 
-//	return Rect(Vector(FLT_MAX, FLT_MAX), 0, 0);
+//	return Rect(sm::vec2(FLT_MAX, FLT_MAX), 0, 0);
 	return Rect();
 }
 

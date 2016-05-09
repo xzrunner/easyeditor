@@ -7,17 +7,17 @@
 namespace eshape
 {
 
-bool DrawLineUtility::IsStraightOpen(const std::vector<ee::Vector>& lines, 
+bool DrawLineUtility::IsStraightOpen(const std::vector<sm::vec2>& lines, 
 									 const ee::KeysState& key_state)
 {
 	return !lines.empty() && key_state.GetKeyState(WXK_SHIFT);
 }
 
-ee::Vector DrawLineUtility::FixPosTo8DirStraight(const ee::Vector& last, 
-												  const ee::Vector& curr)
+sm::vec2 DrawLineUtility::FixPosTo8DirStraight(const sm::vec2& last, 
+												  const sm::vec2& curr)
 {
 	float nearest;
-	ee::Vector fixed = curr;
+	sm::vec2 fixed = curr;
 
 	const float dx = fabs(curr.x - last.x);
 	nearest = dx;
@@ -30,7 +30,7 @@ ee::Vector DrawLineUtility::FixPosTo8DirStraight(const ee::Vector& last,
 		fixed.Set(curr.x, last.y);
 	}
 
-	ee::Vector other(last.x + 1, last.y - 1);
+	sm::vec2 other(last.x + 1, last.y - 1);
 	const float dxyDown = ee::Math2D::GetDisPointToStraightLine(curr, last, other);
 	if (dxyDown < nearest)
 	{

@@ -30,7 +30,7 @@ Fixture::~Fixture()
 	m_shape->Release();
 }
 
-bool Fixture::IsContain(const ee::Vector& pos) const
+bool Fixture::IsContain(const sm::vec2& pos) const
 {
 	if (eshape::CircleShape* circle = dynamic_cast<eshape::CircleShape*>(m_shape))
 	{
@@ -39,25 +39,25 @@ bool Fixture::IsContain(const ee::Vector& pos) const
 	}
 	else if (eshape::RectShape* rect = dynamic_cast<eshape::RectShape*>(m_shape))
 	{
-		std::vector<ee::Vector> boundary(4);
+		std::vector<sm::vec2> boundary(4);
 		boundary[0].Set(rect->m_rect.xmin, rect->m_rect.ymin);
 		boundary[1].Set(rect->m_rect.xmax, rect->m_rect.ymin);
 		boundary[2].Set(rect->m_rect.xmax, rect->m_rect.ymax);
 		boundary[3].Set(rect->m_rect.xmin, rect->m_rect.ymax);
 
-		std::vector<ee::Vector> fixed;
+		std::vector<sm::vec2> fixed;
 		TransLocalToWorld(boundary, fixed);
 		return ee::Math2D::IsPointInArea(pos, fixed);
 	}
 	else if (eshape::PolygonShape* polygon = dynamic_cast<eshape::PolygonShape*>(m_shape))
 	{
-		std::vector<ee::Vector> fixed;
+		std::vector<sm::vec2> fixed;
 		TransLocalToWorld(polygon->GetVertices(), fixed);
 		return ee::Math2D::IsPointInArea(pos, fixed);
 	}
 	else if (eshape::ChainShape* chain = dynamic_cast<eshape::ChainShape*>(m_shape))
 	{
-		std::vector<ee::Vector> fixed;
+		std::vector<sm::vec2> fixed;
 		TransLocalToWorld(chain->GetVertices(), fixed);
 		return ee::Math2D::GetDisPointToPolyline(pos, fixed) < 1;
 	}
@@ -74,25 +74,25 @@ bool Fixture::IsIntersect(const ee::Rect& rect) const
 	}
 	else if (eshape::RectShape* r = dynamic_cast<eshape::RectShape*>(m_shape))
 	{
-		std::vector<ee::Vector> boundary(4);
-		boundary[0].Set(r->m_rect.xmin, r->m_rect.ymin);
-		boundary[1].Set(r->m_rect.xmax, r->m_rect.ymin);
-		boundary[2].Set(r->m_rect.xmax, r->m_rect.ymax);
-		boundary[3].Set(r->m_rect.xmin, r->m_rect.ymax);
+		std::vector<sm::vec2> boundary(4);
+		boundary[0].Assign(r->m_rect.xmin, r->m_rect.ymin);
+		boundary[1].Assign(r->m_rect.xmax, r->m_rect.ymin);
+		boundary[2].Assign(r->m_rect.xmax, r->m_rect.ymax);
+		boundary[3].Assign(r->m_rect.xmin, r->m_rect.ymax);
 		
-		std::vector<ee::Vector> fixed;
+		std::vector<sm::vec2> fixed;
 		TransLocalToWorld(boundary, fixed);
 		return ee::Math2D::IsPolylineIntersectRect(fixed, true, rect);
 	}
 	else if (eshape::PolygonShape* polygon = dynamic_cast<eshape::PolygonShape*>(m_shape))
 	{
-		std::vector<ee::Vector> fixed;
+		std::vector<sm::vec2> fixed;
 		TransLocalToWorld(polygon->GetVertices(), fixed);
 		return ee::Math2D::IsPolylineIntersectRect(fixed, true, rect);
 	}
 	else if (eshape::ChainShape* chain = dynamic_cast<eshape::ChainShape*>(m_shape))
 	{
-		std::vector<ee::Vector> fixed;
+		std::vector<sm::vec2> fixed;
 		TransLocalToWorld(chain->GetVertices(), fixed);
 		return ee::Math2D::IsPolylineIntersectRect(fixed, false, rect);
 	}
@@ -104,7 +104,7 @@ void Fixture::Draw(const sm::mat4& mt, const ee::Colorf& cFace, const ee::Colorf
 {
 	if (eshape::CircleShape* circle = dynamic_cast<eshape::CircleShape*>(m_shape))
 	{
-		ee::Vector c = ee::Math2D::TransVector(circle->center, mt);
+		sm::vec2 c = ee::Math2D::TransVector(circle->center, mt);
 		float r = ee::Math2D::TransLen(circle->radius, mt);
 		ee::RVG::Color(cFace);
 		ee::RVG::Circle(c, r, true);
@@ -113,7 +113,7 @@ void Fixture::Draw(const sm::mat4& mt, const ee::Colorf& cFace, const ee::Colorf
 	}
 	else if (eshape::RectShape* rect = dynamic_cast<eshape::RectShape*>(m_shape))
 	{
-		ee::Vector min(rect->m_rect.xmin, rect->m_rect.ymin),
+		sm::vec2 min(rect->m_rect.xmin, rect->m_rect.ymin),
 			max(rect->m_rect.xmax, rect->m_rect.ymax);
 		min = ee::Math2D::TransVector(min, mt);
 		max = ee::Math2D::TransVector(max, mt);
@@ -123,7 +123,7 @@ void Fixture::Draw(const sm::mat4& mt, const ee::Colorf& cFace, const ee::Colorf
 	}
 	else if (eshape::PolygonShape* polygon = dynamic_cast<eshape::PolygonShape*>(m_shape))
 	{
-		std::vector<ee::Vector> vertices;
+		std::vector<sm::vec2> vertices;
 		ee::Math2D::TransVertices(mt, polygon->GetVertices(), vertices);
 		// todo draw with triangles
 //		ee::PrimitiveDraw::DrawPolygon(vertices, cFace);
@@ -132,15 +132,15 @@ void Fixture::Draw(const sm::mat4& mt, const ee::Colorf& cFace, const ee::Colorf
 	}
 	else if (eshape::ChainShape* chain = dynamic_cast<eshape::ChainShape*>(m_shape))
 	{
-		std::vector<ee::Vector> vertices;
+		std::vector<sm::vec2> vertices;
 		ee::Math2D::TransVertices(mt, chain->GetVertices(), vertices);
 		ee::RVG::Color(cEdge);
 		ee::RVG::Polyline(vertices, chain->IsClosed());
 	}
 }
 
-void Fixture::TransLocalToWorld(const std::vector<ee::Vector>& local, 
-								std::vector<ee::Vector>& world) const
+void Fixture::TransLocalToWorld(const std::vector<sm::vec2>& local, 
+								std::vector<sm::vec2>& world) const
 {
 	world.resize(local.size());
 	for (size_t i = 0, n = local.size(); i < n ; ++i)

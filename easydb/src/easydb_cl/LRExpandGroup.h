@@ -3,11 +3,9 @@
 
 #include "ICommand.h"
 
-#include <ee/Vector.h>
+#include <SM_Vector.h>
 
 #include <json/json.h>
-
-namespace ee { class Vector; }
 
 namespace edb
 {
@@ -36,9 +34,9 @@ private:
 	{
 		Trans() : translation(0, 0), angle(0), scale(1, 1), xmirror(false), ymirror(false) {}
 
-		ee::Vector translation;
+		sm::vec2 translation;
 		float angle;
-		ee::Vector scale;
+		sm::vec2 scale;
 		bool xmirror, ymirror;
 	};
 

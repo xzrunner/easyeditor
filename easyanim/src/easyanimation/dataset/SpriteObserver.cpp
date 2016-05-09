@@ -13,7 +13,7 @@ SpriteObserver::SpriteObserver(const Layer& layer)
 {
 }
 
-void SpriteObserver::Translate(ee::Sprite* sprite, const ee::Vector& offset)
+void SpriteObserver::Translate(ee::Sprite* sprite, const sm::vec2& offset)
 {
 	if (!m_enable) {
 		return;

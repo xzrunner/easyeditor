@@ -56,10 +56,10 @@ bool EditPanelImpl::Update(int version)
 	}
 }
 
-Vector EditPanelImpl::TransPosScrToProj(int x, int y) const
+sm::vec2 EditPanelImpl::TransPosScrToProj(int x, int y) const
 {
 	if (!m_stage) {
-		return Vector(0, 0);
+		return sm::vec2(0, 0);
 	}
 
 	int w = m_stage->GetSize().GetWidth(),
@@ -67,10 +67,10 @@ Vector EditPanelImpl::TransPosScrToProj(int x, int y) const
 	return CameraMgr::Instance()->GetCamera()->TransPosScreenToProject(x, y, w, h);
 }
 
-Vector EditPanelImpl::TransPosProjToScr(const Vector& proj) const
+sm::vec2 EditPanelImpl::TransPosProjToScr(const sm::vec2& proj) const
 {
 	if (!m_stage) {
-		return Vector(0, 0);
+		return sm::vec2(0, 0);
 	}
 
 	int w = m_stage->GetSize().GetWidth(),
@@ -116,7 +116,7 @@ void EditPanelImpl::OnMouse(wxMouseEvent& event)
 #ifdef _DEBUG
 	if (wxFrame* frame = dynamic_cast<wxFrame*>(m_frame)) 
 	{
-		Vector pos = TransPosScrToProj(event.GetX(), event.GetY());
+		sm::vec2 pos = TransPosScrToProj(event.GetX(), event.GetY());
 		std::string msg = ee::StringHelper::Format("Mouse: %.1f, %.1f", pos.x, pos.y);
 		static_cast<wxFrame*>(m_frame)->SetStatusText(msg);
 	}

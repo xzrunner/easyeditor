@@ -38,7 +38,7 @@ void ArrangeSpriteImpl::OnMouseRightUp(int x, int y)
 		std::vector<ee::Sprite*> sprites;
 		m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
 
-		const ee::Vector& pos = sprites[0]->GetPosition();
+		const sm::vec2& pos = sprites[0]->GetPosition();
 		float angle = sprites[0]->GetAngle();
 		if (angle == 0)
 			angle = SM_PI * 0.5f;
@@ -68,7 +68,7 @@ Visit(ee::Object* object, bool& next)
 {
 	ee::Sprite* sprite = static_cast<ee::Sprite*>(object);
 
-	const ee::Vector& pos = sprite->GetPosition();
+	const sm::vec2& pos = sprite->GetPosition();
 
 	const float s = Context::Instance()->scale,
 		p = Context::Instance()->padding;
@@ -84,7 +84,7 @@ Visit(ee::Object* object, bool& next)
 		height = sprite->GetSymbol().GetSize().Width() * s + p;
 	}
 
-	ee::Vector leftTop;
+	sm::vec2 leftTop;
 	leftTop.x = pos.x - width * 0.5f;
 	leftTop.y = pos.y - height * 0.5f;
 
@@ -95,7 +95,7 @@ Visit(ee::Object* object, bool& next)
 		return;
 	}
 
-	ee::Vector fixedCenter;
+	sm::vec2 fixedCenter;
 	fixedCenter.x = leftTop.x > 0 ? leftTop.x + 0.5f : leftTop.x - 0.5f;
 	fixedCenter.y = leftTop.y > 0 ? leftTop.y + 0.5f : leftTop.y - 0.5f;
 	fixedCenter.x = int(fixedCenter.x) + width * 0.5f;

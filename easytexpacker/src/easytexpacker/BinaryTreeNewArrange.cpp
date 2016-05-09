@@ -52,7 +52,7 @@ void BinaryTreeNewArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites)
 				float h = r.Height() * scale + PADDING*2;
 				if ((w > tot_w || h > tot_h) &&
 					(w > tot_h || h > tot_w)) {
-					ee::Vector pos;
+					sm::vec2 pos;
 					pos.x = tot_w * INVALID_SPRITE_OFFSET_FACTOR;
 					pos.y = tot_h * INVALID_SPRITE_OFFSET_FACTOR;
 					s->SetTransform(pos, 0);
@@ -60,7 +60,7 @@ void BinaryTreeNewArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites)
 					remain.push_back(s);
 				}
 			} else {
-				s->Translate(ee::Vector(x_offset, 0.0f));
+				s->Translate(sm::vec2(x_offset, 0.0f));
 			}
 		}
 		x_offset += Context::Instance()->width * TEXTURE_X_OFFSET_FACTOR;
@@ -106,7 +106,7 @@ Insert(ee::ImageSprite& img) const
 	if (!n) {
 		return false;
 	} else {
-		ee::Vector pos;
+		sm::vec2 pos;
 		pos.x = n->GetCenterX();
 		pos.y = n->GetCenterY();
 		float angle = n->IsRotated() ? SM_PI*0.5f : 0;

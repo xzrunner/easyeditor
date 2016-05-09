@@ -141,8 +141,8 @@ void GenRegularRectBinary::LoadRegularRectPackFile(const std::string& json_file,
 		ee::Rect r;
 		for (int j = 0, m = pic->parts.size(); j < m; ++j) {
 			const Rect& r_src = pic->parts[j]->src;
-			r.Combine(ee::Vector(r_src.x, r_src.y));
-			r.Combine(ee::Vector(r_src.x+r_src.w, r_src.y+r_src.h));
+			r.Combine(sm::vec2(r_src.x, r_src.y));
+			r.Combine(sm::vec2(r_src.x+r_src.w, r_src.y+r_src.h));
 			pic->w = r.Width();
 			pic->h = r.Height();
 		}

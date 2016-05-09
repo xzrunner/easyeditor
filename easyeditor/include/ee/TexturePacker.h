@@ -1,7 +1,7 @@
 #ifndef _EASYEDITOR_TEXTURE_PACKER_H_
 #define _EASYEDITOR_TEXTURE_PACKER_H_
 
-#include "Vector.h"
+#include <SM_Vector.h>
 
 #include <json/json.h>
 
@@ -57,9 +57,9 @@ public:
 	{
 		// 0 3
 		// 1 2
-		Vector tex_coords[4];
+		sm::vec2 tex_coords[4];
 
-		Vector offset;
+		sm::vec2 offset;
 
 		void Load(const FrameSrcData& src, const Texture* tex);
 	};

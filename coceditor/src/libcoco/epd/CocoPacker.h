@@ -53,8 +53,8 @@ private:
 	void ParserAnimation(const eanim::Symbol* symbol);
 	void ParserScale9(const escale9::Symbol* symbol);
 
-	void CalSrcFromUV(ee::Vector src[4], TPParser::Picture* picture);
-	void CalSrcFromUVFixed(ee::Vector src[4], TPParser::Picture* picture);
+	void CalSrcFromUV(sm::vec2 src[4], TPParser::Picture* picture);
+	void CalSrcFromUVFixed(sm::vec2 src[4], TPParser::Picture* picture);
 	int ParserMesh(const emesh::Sprite* sprite);
 	int ParserTerrain2D(const eterrain2d::Sprite* sprite);
 	int ParserTexture(const etexture::Sprite* sprite);

@@ -235,17 +235,17 @@ void Scale9Data::ResizeScale9(Scale9Type type, ee::Sprite* const sprites[3][3],
 			h2 = sprites[0][2]->GetSymbol().GetSize().Height(),
 			h1 = height - h0 - h2;
 
-		ResizeSprite(sprites[0][0], ee::Vector(-w0*0.5f-w1*0.5f, -h0*0.5f-h1*0.5f), w0, h0);
-		ResizeSprite(sprites[0][1], ee::Vector(0.0f, -h0*0.5f-h1*0.5f), w1, h0);
-		ResizeSprite(sprites[0][2], ee::Vector(w1*0.5f+w2*0.5f, -h0*0.5f-h1*0.5f), w2, h0);
+		ResizeSprite(sprites[0][0], sm::vec2(-w0*0.5f-w1*0.5f, -h0*0.5f-h1*0.5f), w0, h0);
+		ResizeSprite(sprites[0][1], sm::vec2(0.0f, -h0*0.5f-h1*0.5f), w1, h0);
+		ResizeSprite(sprites[0][2], sm::vec2(w1*0.5f+w2*0.5f, -h0*0.5f-h1*0.5f), w2, h0);
 
-		ResizeSprite(sprites[1][0], ee::Vector(-w0*0.5f-w1*0.5f, 0.0f), w0, h1);
-		ResizeSprite(sprites[1][1], ee::Vector(0.0f, 0.0f), w1, h1);
-		ResizeSprite(sprites[1][2], ee::Vector(w1*0.5f+w2*0.5f, 0.0f), w2, h1);
+		ResizeSprite(sprites[1][0], sm::vec2(-w0*0.5f-w1*0.5f, 0.0f), w0, h1);
+		ResizeSprite(sprites[1][1], sm::vec2(0.0f, 0.0f), w1, h1);
+		ResizeSprite(sprites[1][2], sm::vec2(w1*0.5f+w2*0.5f, 0.0f), w2, h1);
 
-		ResizeSprite(sprites[2][0], ee::Vector(-w0*0.5f-w1*0.5f, h1*0.5f+h2*0.5f), w0, h2);
-		ResizeSprite(sprites[2][1], ee::Vector(0.0f, h1*0.5f+h2*0.5f), w1, h2);
-		ResizeSprite(sprites[2][2], ee::Vector(w1*0.5f+w2*0.5f, h1*0.5f+h2*0.5f), w2, h2);		
+		ResizeSprite(sprites[2][0], sm::vec2(-w0*0.5f-w1*0.5f, h1*0.5f+h2*0.5f), w0, h2);
+		ResizeSprite(sprites[2][1], sm::vec2(0.0f, h1*0.5f+h2*0.5f), w1, h2);
+		ResizeSprite(sprites[2][2], sm::vec2(w1*0.5f+w2*0.5f, h1*0.5f+h2*0.5f), w2, h2);		
 	}
 	else if (type == e_9GridHollow)
 	{
@@ -256,16 +256,16 @@ void Scale9Data::ResizeScale9(Scale9Type type, ee::Sprite* const sprites[3][3],
 			h2 = sprites[0][2]->GetSymbol().GetSize().Height(),
 			h1 = height - h0 - h2;
 
-		ResizeSprite(sprites[0][0], ee::Vector(-w0*0.5f-w1*0.5f, -h0*0.5f-h1*0.5f), w0, h0);
-		ResizeSprite(sprites[0][1], ee::Vector(0.0f, -h0*0.5f-h1*0.5f), w1, h0);
-		ResizeSprite(sprites[0][2], ee::Vector(w1*0.5f+w2*0.5f, -h0*0.5f-h1*0.5f), w2, h0);
+		ResizeSprite(sprites[0][0], sm::vec2(-w0*0.5f-w1*0.5f, -h0*0.5f-h1*0.5f), w0, h0);
+		ResizeSprite(sprites[0][1], sm::vec2(0.0f, -h0*0.5f-h1*0.5f), w1, h0);
+		ResizeSprite(sprites[0][2], sm::vec2(w1*0.5f+w2*0.5f, -h0*0.5f-h1*0.5f), w2, h0);
 
-		ResizeSprite(sprites[1][0], ee::Vector(-w0*0.5f-w1*0.5f, 0.0f), w0, h1);
-		ResizeSprite(sprites[1][2], ee::Vector(w1*0.5f+w2*0.5f, 0.0f), w2, h1);
+		ResizeSprite(sprites[1][0], sm::vec2(-w0*0.5f-w1*0.5f, 0.0f), w0, h1);
+		ResizeSprite(sprites[1][2], sm::vec2(w1*0.5f+w2*0.5f, 0.0f), w2, h1);
 
-		ResizeSprite(sprites[2][0], ee::Vector(-w0*0.5f-w1*0.5f, h1*0.5f+h2*0.5f), w0, h2);
-		ResizeSprite(sprites[2][1], ee::Vector(0.0f, h1*0.5f+h2*0.5f), w1, h2);
-		ResizeSprite(sprites[2][2], ee::Vector(w1*0.5f+w2*0.5f, h1*0.5f+h2*0.5f), w2, h2);
+		ResizeSprite(sprites[2][0], sm::vec2(-w0*0.5f-w1*0.5f, h1*0.5f+h2*0.5f), w0, h2);
+		ResizeSprite(sprites[2][1], sm::vec2(0.0f, h1*0.5f+h2*0.5f), w1, h2);
+		ResizeSprite(sprites[2][2], sm::vec2(w1*0.5f+w2*0.5f, h1*0.5f+h2*0.5f), w2, h2);
 	}
 	else if (type == e_6GridUpper)
 	{
@@ -275,13 +275,13 @@ void Scale9Data::ResizeScale9(Scale9Type type, ee::Sprite* const sprites[3][3],
 		const float h2 = sprites[2][0]->GetSymbol().GetSize().Height(),
 			h1 = height - h2;
 
-		ResizeSprite(sprites[1][0], ee::Vector(-w0*0.5f-w1*0.5f, 0.0f), w0, h1);
-		ResizeSprite(sprites[1][1], ee::Vector(0.0f, 0.0f), w1, h1);
-		ResizeSprite(sprites[1][2], ee::Vector(w1*0.5f+w2*0.5f, 0.0f), w2, h1);
+		ResizeSprite(sprites[1][0], sm::vec2(-w0*0.5f-w1*0.5f, 0.0f), w0, h1);
+		ResizeSprite(sprites[1][1], sm::vec2(0.0f, 0.0f), w1, h1);
+		ResizeSprite(sprites[1][2], sm::vec2(w1*0.5f+w2*0.5f, 0.0f), w2, h1);
 
-		ResizeSprite(sprites[2][0], ee::Vector(-w0*0.5f-w1*0.5f, h1*0.5f+h2*0.5f), w0, h2);
-		ResizeSprite(sprites[2][1], ee::Vector(0.0f, h1*0.5f+h2*0.5f), w1, h2);
-		ResizeSprite(sprites[2][2], ee::Vector(w1*0.5f+w2*0.5f, h1*0.5f+h2*0.5f), w2, h2);
+		ResizeSprite(sprites[2][0], sm::vec2(-w0*0.5f-w1*0.5f, h1*0.5f+h2*0.5f), w0, h2);
+		ResizeSprite(sprites[2][1], sm::vec2(0.0f, h1*0.5f+h2*0.5f), w1, h2);
+		ResizeSprite(sprites[2][2], sm::vec2(w1*0.5f+w2*0.5f, h1*0.5f+h2*0.5f), w2, h2);
 	}
 	else if (type == e_3GridHor)
 	{
@@ -289,9 +289,9 @@ void Scale9Data::ResizeScale9(Scale9Type type, ee::Sprite* const sprites[3][3],
 			w2 = sprites[1][2]->GetSymbol().GetSize().Width(),
 			w1 = width - w0 - w2; 
 
-		ResizeSprite(sprites[1][0], ee::Vector(-w0*0.5f-w1*0.5f, 0.0f), w0, height);
-		ResizeSprite(sprites[1][1], ee::Vector(0.0f, 0.0f), w1, height);
-		ResizeSprite(sprites[1][2], ee::Vector(w1*0.5f+w2*0.5f, 0.0f), w2, height);
+		ResizeSprite(sprites[1][0], sm::vec2(-w0*0.5f-w1*0.5f, 0.0f), w0, height);
+		ResizeSprite(sprites[1][1], sm::vec2(0.0f, 0.0f), w1, height);
+		ResizeSprite(sprites[1][2], sm::vec2(w1*0.5f+w2*0.5f, 0.0f), w2, height);
 	}
 	else if (type == e_3GridVer)
 	{
@@ -299,13 +299,13 @@ void Scale9Data::ResizeScale9(Scale9Type type, ee::Sprite* const sprites[3][3],
 			h2 = sprites[2][1]->GetSymbol().GetSize().Height(),
 			h1 = height - h0 - h2;
 
-		ResizeSprite(sprites[0][1], ee::Vector(0.0f, -h0*0.5f-h1*0.5f), width, h0);
-		ResizeSprite(sprites[1][1], ee::Vector(0.0f, 0.0f), width, h1);
-		ResizeSprite(sprites[2][1], ee::Vector(0.0f, h1*0.5f+h2*0.5f), width, h2);
+		ResizeSprite(sprites[0][1], sm::vec2(0.0f, -h0*0.5f-h1*0.5f), width, h0);
+		ResizeSprite(sprites[1][1], sm::vec2(0.0f, 0.0f), width, h1);
+		ResizeSprite(sprites[2][1], sm::vec2(0.0f, h1*0.5f+h2*0.5f), width, h2);
 	}	
 }
 
-void Scale9Data::ResizeSprite(ee::Sprite* sprite, const ee::Vector& center, 
+void Scale9Data::ResizeSprite(ee::Sprite* sprite, const sm::vec2& center, 
 							  float width, float height)
 {
 	if (width <= 0) {
@@ -323,9 +323,9 @@ void Scale9Data::ResizeSprite(ee::Sprite* sprite, const ee::Vector& center,
 	sprite->SetTransform(center, sprite->GetAngle());
 	const float times = sprite->GetAngle() / SM_PI;
 	if (times - (int)(times + 0.01f) < 0.3f)
-		sprite->SetScale(ee::Vector(width / w, height / h));
+		sprite->SetScale(sm::vec2(width / w, height / h));
 	else
-		sprite->SetScale(ee::Vector(height / w, width / h));
+		sprite->SetScale(sm::vec2(height / w, width / h));
 
 	sprite->Translate(ee::Math2D::RotateVector(sprite->GetOffset(), sprite->GetAngle()) - sprite->GetOffset());
 }

@@ -20,7 +20,7 @@ public:
 
 	virtual void drawPhysics();
 
-	b2World* createWorld(const Vector& gravity);
+	b2World* createWorld(const sm::vec2& gravity);
 
 	void pause();
 

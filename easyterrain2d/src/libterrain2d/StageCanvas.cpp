@@ -64,7 +64,7 @@ void StageCanvas::DrawBG() const
 {
 	ee::RVG::Color(ee::LIGHT_GREY);
 	const float EDGE = 100;
-	ee::RVG::Cross(ee::Vector(0,0), EDGE, EDGE);
+	ee::RVG::Cross(sm::vec2(0,0), EDGE, EDGE);
 }
 
 void StageCanvas::Update()

@@ -41,7 +41,7 @@ public:
 	virtual void Clear();
 
 	// query edited sprite, include its extra edit region
-	Sprite* QueryEditedSprite(const Vector& pos) const;
+	Sprite* QueryEditedSprite(const sm::vec2& pos) const;
 
 	bool IsSelectionEmpty() const;
 
@@ -51,8 +51,8 @@ protected:
 
 	virtual void SetRightPopupMenu(wxMenu& menu, int x, int y);
 
-	virtual ArrangeSpriteState* CreateTranslateState(SpriteSelection* selection, const Vector& first_pos) const;
-	virtual ArrangeSpriteState* CreateRotateState(SpriteSelection* selection, const Vector& first_pos) const;
+	virtual ArrangeSpriteState* CreateTranslateState(SpriteSelection* selection, const sm::vec2& first_pos) const;
+	virtual ArrangeSpriteState* CreateRotateState(SpriteSelection* selection, const sm::vec2& first_pos) const;
 	virtual ArrangeSpriteState* CreateScaleState(Sprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const;
 	virtual ArrangeSpriteState* CreateShearState(Sprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const;
 	virtual ArrangeSpriteState* CreateOffsetState(Sprite* sprite) const;
@@ -70,7 +70,7 @@ private:
 	void UpOneLayer();
 	void DownOneLayer();
 
-	Vector GetSprOffset(const Sprite* spr) const;
+	sm::vec2 GetSprOffset(const Sprite* spr) const;
 
 	void OnSpriteShortcutKey(int keycode);
 
@@ -93,7 +93,8 @@ private:
 
 	ArrangeSpriteState* m_op_state;
 
-	Vector m_left_down_pos, m_right_down_pos;
+	sm::vec2 m_left_down_pos, m_right_down_pos;
+	bool m_left_pos_valid, m_right_pos_valid;
 
 	mutable float m_ctrl_node_radius;
 

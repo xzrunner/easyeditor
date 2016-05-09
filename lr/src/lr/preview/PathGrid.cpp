@@ -20,7 +20,7 @@ void PathGrid::DisableRegion(const ee::Sprite* spr, bool disable)
 	m_nw.SetStatus(spr->GetRect(), !disable);
 }
 
-void PathGrid::QueryRoute(const ee::Vector& start, const ee::Vector& end)
+void PathGrid::QueryRoute(const sm::vec2& start, const sm::vec2& end)
 {
 	VisitedNode* node = m_nw.QueryRoute(start, end);
 	if (!node) {
@@ -33,7 +33,7 @@ void PathGrid::QueryRoute(const ee::Vector& start, const ee::Vector& end)
 	while (node) {
 		int y = node->m_id / m_nw.m_col;
 		int x = node->m_id - y * m_nw.m_col;
-		m_routes.push_back(ee::Vector((x+0.5f)*m_nw.m_width+dx, (y+0.5f)*m_nw.m_height+dy));
+		m_routes.push_back(sm::vec2((x+0.5f)*m_nw.m_width+dx, (y+0.5f)*m_nw.m_height+dy));
 		node = node->m_prev;
 	}
 }
@@ -72,11 +72,10 @@ PathGrid::Network::
 	delete[] m_nodes;
 }
 
-ee::Vector PathGrid::Network::
+sm::vec2 PathGrid::Network::
 TransIDToPos(int id) const
 {
-	ee::Vector ret;
-	ret.SetInvalid();
+	sm::vec2 ret;
 
 	int y = id / m_col;
 	int x = id - y * m_col;
@@ -110,7 +109,7 @@ SetStatus(const ee::Rect& region, bool used)
 }
 
 VisitedNode* PathGrid::Network::
-QueryRoute(const ee::Vector& start, const ee::Vector& end)
+QueryRoute(const sm::vec2& start, const sm::vec2& end)
 {
 	if (!ee::Math2D::IsPointInRect(start, m_region) || !ee::Math2D::IsPointInRect(end, m_region)) {
 		return NULL;
@@ -148,8 +147,8 @@ DebugDraw() const
 			if (!m_nodes[idx++].m_used) {
 				continue;
 			}
-			ee::Vector p0(x * m_width + dx, y * m_height + dy);
-			ee::Vector p1(p0.x + m_width, p0.y + m_height);
+			sm::vec2 p0(x * m_width + dx, y * m_height + dy);
+			sm::vec2 p1(p0.x + m_width, p0.y + m_height);
 			ee::RVG::Color(ee::LIGHT_GREEN);
 			ee::RVG::Rect(p0, p1, true);
 		}
@@ -159,7 +158,7 @@ DebugDraw() const
 }
 
 PathGrid::Node* PathGrid::Network::
-QueryNode(const ee::Vector& pos) const
+QueryNode(const sm::vec2& pos) const
 {
 	if (!ee::Math2D::IsPointInRect(pos, m_region)) {
 		return NULL;
@@ -173,7 +172,7 @@ QueryNode(const ee::Vector& pos) const
 }
 
 void PathGrid::Network::
-Expand(VisitedNode* node, const ee::Vector& end)
+Expand(VisitedNode* node, const sm::vec2& end)
 {
 	std::vector<Connection> connections;
 	GetConnections(node, connections);

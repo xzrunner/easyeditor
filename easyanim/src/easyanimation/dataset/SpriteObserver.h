@@ -15,7 +15,7 @@ class SpriteObserver : public ee::SpriteObserver
 public:
 	SpriteObserver(const Layer& layer);
 
-	virtual void Translate(ee::Sprite* sprite, const ee::Vector& offset);
+	virtual void Translate(ee::Sprite* sprite, const sm::vec2& offset);
 	virtual void Rotate(ee::Sprite* sprite, float delta);
 
 	void insert(const ee::Sprite* sprite, int frame);

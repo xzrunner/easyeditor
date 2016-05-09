@@ -23,27 +23,27 @@ PerspectiveSpriteState::~PerspectiveSpriteState()
 	m_sprite->Release();
 }
 
-void PerspectiveSpriteState::OnMouseRelease(const Vector& pos)
+void PerspectiveSpriteState::OnMouseRelease(const sm::vec2& pos)
 {
 	AtomicOP* aop = new PerspectiveSpriteAOP(m_sprite, m_sprite->GetPerspective(), m_first_persp);
 	EditAddRecordSJ::Instance()->Add(aop);
 }
 
-bool PerspectiveSpriteState::OnMouseDrag(const Vector& pos)
+bool PerspectiveSpriteState::OnMouseDrag(const sm::vec2& pos)
 {
 	Perspective(pos);
 	return true;
 }
 
-void PerspectiveSpriteState::Perspective(const Vector& curr)
+void PerspectiveSpriteState::Perspective(const sm::vec2& curr)
 {
 	Rect r = m_sprite->GetSymbol().GetSize(m_sprite);
 	sm::mat4 t;
 	t.SetTransformation(m_sprite->GetPosition().x, m_sprite->GetPosition().y, m_sprite->GetAngle(),
 		m_sprite->GetScale().x, m_sprite->GetScale().y, 0, 0, m_sprite->GetShear().x, m_sprite->GetShear().y);
 
-	Vector old = Math2D::TransVector(curr, t.Inverted());
-	Vector persp;
+	sm::vec2 old = Math2D::TransVector(curr, t.Inverted());
+	sm::vec2 persp;
 	if (m_ctrl_node.type == SpriteCtrlNode::LEFT_DOWN) {
 		persp.x = r.xmin - old.x;
 		persp.y = r.ymin - old.y;

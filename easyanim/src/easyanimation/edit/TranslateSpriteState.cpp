@@ -11,12 +11,12 @@ namespace eanim
 {
 
 TranslateSpriteState::TranslateSpriteState(ee::SpriteSelection* selection, 
-										   const ee::Vector& first_pos)
+										   const sm::vec2& first_pos)
 	: ee::TranslateSpriteState(selection, first_pos)
 {
 }
 
-void TranslateSpriteState::Translate(const ee::Vector& offset)
+void TranslateSpriteState::Translate(const sm::vec2& offset)
 {
 	ee::TranslateSpriteState::Translate(offset);
 

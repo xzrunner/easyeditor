@@ -14,13 +14,13 @@ public:
 	virtual std::string Type() const { return "perspective"; }
 	virtual void Reset();
 
-	virtual Vector TransPosScreenToProject(int x, int y, int width, int height) const;
-	virtual Vector TransPosProjectToScreen(const Vector& proj, int width, int height) const;
+	virtual sm::vec2 TransPosScreenToProject(int x, int y, int width, int height) const;
+	virtual sm::vec2 TransPosProjectToScreen(const sm::vec2& proj, int width, int height) const;
 
 	virtual void UpdateModelView() const;
 
 	virtual float GetScale() const;
-	virtual const Vector& GetPosition() const;
+	virtual const sm::vec2& GetPosition() const;
 
 }; // PerspectiveCamera
 

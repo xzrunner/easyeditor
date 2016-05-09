@@ -14,10 +14,10 @@ class TranslateSpriteState : public ee::TranslateSpriteState
 {
 public:
 	TranslateSpriteState(ee::SpriteSelection* selection, 
-		const ee::Vector& first_pos, UIList* list);
+		const sm::vec2& first_pos, UIList* list);
 
 protected:
-	virtual void Translate(const ee::Vector& offset);
+	virtual void Translate(const sm::vec2& offset);
 
 private:
 	UIList* m_list;

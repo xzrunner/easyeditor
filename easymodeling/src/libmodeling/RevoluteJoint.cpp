@@ -18,12 +18,12 @@ RevoluteJoint::RevoluteJoint(Body* b0, Body* b1)
 	, m_max_motor_torque(0.0f)
 	, m_motor_speed(0.0f)
 {
-	ee::Vector center = (b0->m_sprite->GetPosition() + b1->m_sprite->GetPosition()) * 0.5f;
+	sm::vec2 center = (b0->m_sprite->GetPosition() + b1->m_sprite->GetPosition()) * 0.5f;
 	SetLocalAnchorA(center);
 	SetLocalAnchorB(center);
 }
 
-bool RevoluteJoint::IsContain(const ee::Vector& pos) const
+bool RevoluteJoint::IsContain(const sm::vec2& pos) const
 {
 	return ee::Math2D::GetDistance(GetWorldAnchorA(), pos) < JOINT_RADIUS_OUT
 		|| ee::Math2D::GetDistance(GetWorldAnchorB(), pos) < JOINT_RADIUS_OUT;
@@ -37,7 +37,7 @@ bool RevoluteJoint::IsIntersect(const ee::Rect& rect) const
 
 void RevoluteJoint::Draw(DrawType type) const
 {
-	const ee::Vector anchorA = GetWorldAnchorA(),
+	const sm::vec2 anchorA = GetWorldAnchorA(),
 		anchorB = GetWorldAnchorB();
 
 	if (type == e_selected || type == e_mouseOn)
@@ -56,27 +56,27 @@ void RevoluteJoint::Draw(DrawType type) const
 	DrawAnchor(anchorB, type);
 }
 
-ee::Vector RevoluteJoint::GetWorldAnchorA() const
+sm::vec2 RevoluteJoint::GetWorldAnchorA() const
 {
 	return TransLocalToWorld(m_local_anchor_a, m_body_a->m_sprite);
 }
 
-ee::Vector RevoluteJoint::GetWorldAnchorB() const
+sm::vec2 RevoluteJoint::GetWorldAnchorB() const
 {
 	return TransLocalToWorld(m_local_anchor_b, m_body_b->m_sprite);
 }
 
-void RevoluteJoint::SetLocalAnchorA(const ee::Vector& world)
+void RevoluteJoint::SetLocalAnchorA(const sm::vec2& world)
 {
 	m_local_anchor_a = TransWorldToLocal(world, m_body_a->m_sprite);
 }
 
-void RevoluteJoint::SetLocalAnchorB(const ee::Vector& world)
+void RevoluteJoint::SetLocalAnchorB(const sm::vec2& world)
 {
 	m_local_anchor_b = TransWorldToLocal(world, m_body_b->m_sprite);
 }
 
-void RevoluteJoint::DrawAnchor(const ee::Vector& pos, DrawType type) const
+void RevoluteJoint::DrawAnchor(const sm::vec2& pos, DrawType type) const
 {
 	ee::Colorf color;
 	switch (type)

@@ -13,19 +13,19 @@ public:
 	ShearSpriteState(Sprite* sprite, const SpriteCtrlNode::Node& ctrl_node);
 	virtual ~ShearSpriteState();
 
-	virtual void OnMouseRelease(const Vector& pos);
-	virtual	bool OnMouseDrag(const Vector& pos);
+	virtual void OnMouseRelease(const sm::vec2& pos);
+	virtual	bool OnMouseDrag(const sm::vec2& pos);
 
 private:
-	void Shear(const Vector& curr);
-	void Shear2(const Vector& curr);
+	void Shear(const sm::vec2& curr);
+	void Shear2(const sm::vec2& curr);
 
 private:
 	Sprite* m_sprite;
 
 	SpriteCtrlNode::Node m_ctrl_node;
 
-	Vector m_first_shear;
+	sm::vec2 m_first_shear;
 
 }; // ShearSpriteState
 

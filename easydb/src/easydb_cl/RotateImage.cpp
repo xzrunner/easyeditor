@@ -78,8 +78,8 @@ void RotateImage::Rotate(ee::Snapshoot& ss, const std::string& src_dir, const st
 			for (int deg = 10; deg <= 90; deg += 10) {
 				float rad = deg * SM_DEG_TO_RAD;
 				sprite->SetTransform(sprite->GetPosition(), rad);
-				int width = ee::Math2D::RotateVector(ee::Vector(r.xmax, r.ymax), -rad).x * 2;
-				int height = ee::Math2D::RotateVector(ee::Vector(r.xmin, r.ymax), -rad).y * 2;
+				int width = ee::Math2D::RotateVector(sm::vec2(r.xmax, r.ymax), -rad).x * 2;
+				int height = ee::Math2D::RotateVector(sm::vec2(r.xmin, r.ymax), -rad).y * 2;
 				ss.DrawSprite(sprite, true, width, height);
 
 				std::string name = ee::FileHelper::GetFilename(filepath);

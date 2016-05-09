@@ -1,7 +1,7 @@
 #ifndef _EASYIMAGE_RECT_MGR_H_
 #define _EASYIMAGE_RECT_MGR_H_
 
-#include <ee/Vector.h>
+#include <SM_Vector.h>
 
 #include <json/json.h>
 
@@ -18,7 +18,7 @@ public:
 	struct Node
 	{
 		const ee::Rect* rect;
-		ee::Vector pos;
+		sm::vec2 pos;
 
 		Node() : rect(NULL) {}
 	};
@@ -32,16 +32,16 @@ public:
 	void Draw() const;
 
 	void Insert(const ee::Rect& rect, bool force = false);
-	bool Remove(const ee::Vector& pos);
+	bool Remove(const sm::vec2& pos);
 
-	ee::Vector QueryNearestAxis(const ee::Vector& pos, const ee::Rect* except = NULL) const;
+	sm::vec2 QueryNearestAxis(const sm::vec2& pos, const ee::Rect* except = NULL) const;
 
-	Node QueryNode(const ee::Vector& pos) const;
+	Node QueryNode(const sm::vec2& pos) const;
 
-	ee::Rect* QueryRect(const ee::Vector& pos) const;
+	ee::Rect* QueryRect(const sm::vec2& pos) const;
 
-	bool MoveNode(const Node& node, const ee::Vector& pos);
-	void MoveRect(const ee::Rect* rect, const ee::Vector& from, const ee::Vector& to);
+	bool MoveNode(const Node& node, const sm::vec2& pos);
+	void MoveRect(const ee::Rect* rect, const sm::vec2& from, const sm::vec2& to);
 
 	const std::vector<ee::Rect*>& GetAllRect() const {
 		return m_rects;

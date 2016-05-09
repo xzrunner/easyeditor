@@ -33,7 +33,7 @@ void RectCutLoader::LoadOnlyJson(const std::string& pack_file, const std::string
 		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(s.filepath);
 		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 
-		ee::Vector pos;
+		sm::vec2 pos;
 		pos.x = s.src.x + s.src.w * 0.5f;
 		pos.y = s.src.y + s.src.h * 0.5f;
 		pos.x += 400;
@@ -72,7 +72,7 @@ void RectCutLoader::LoadJsonAndImg(const std::string& pack_file, const std::stri
 			angle = -SM_PI * 0.5f;
 		}
 
-		ee::Vector pos;
+		sm::vec2 pos;
 		pos.x = pic.src.x + pic.src.w * 0.5f;
 		pos.y = pic.src.y + pic.src.h * 0.5f;
 		pos.x += 400;
@@ -105,10 +105,10 @@ void RectCutLoader::LoadJsonAndImg(const std::string& pack_file, const std::stri
 //	{
 //		const Picture& pic = pictures[i];
 //		ee::Rect r_src, r_dst;
-//		r_src.combine(ee::Vector(pic.src.x, pic.src.y));
-//		r_src.combine(ee::Vector(pic.src.x+pic.src.w, pic.src.y+pic.src.h));
-//		r_dst.combine(ee::Vector(pic.dst.x, pic.dst.y));
-//		r_dst.combine(ee::Vector(pic.dst.x+pic.dst.w, pic.dst.y+pic.dst.h));
+//		r_src.combine(sm::vec2(pic.src.x, pic.src.y));
+//		r_src.combine(sm::vec2(pic.src.x+pic.src.w, pic.src.y+pic.src.h));
+//		r_dst.combine(sm::vec2(pic.dst.x, pic.dst.y));
+//		r_dst.combine(sm::vec2(pic.dst.x+pic.dst.w, pic.dst.y+pic.dst.h));
 //		dtex->AddImageWithRegion(img, r_src, r_dst, pic.src.h != pic.dst.h);
 //	}
 //	dtex->EndImageWithRegion();

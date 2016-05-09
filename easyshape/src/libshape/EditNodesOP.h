@@ -27,11 +27,12 @@ private:
 	struct Modified
 	{
 		SelectNodesOP::ChainSelectedNodes* src;
-		std::vector<ee::Vector> dst;
+		std::vector<sm::vec2> dst;
 	};
 
 private:
-	ee::Vector m_last_pos;
+	sm::vec2 m_last_pos;
+	bool m_last_pos_valid;
 
 	std::vector<Modified> m_buffer;
 

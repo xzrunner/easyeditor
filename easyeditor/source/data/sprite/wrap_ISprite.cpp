@@ -23,7 +23,7 @@ int w_Sprite_clone(lua_State* L)
 int w_Sprite_getPosition(lua_State* L)
 {
 	Sprite* t = luax_checksprite(L, 1);
-	const Vector& pos = t->GetPosition();
+	const sm::vec2& pos = t->GetPosition();
 	lua_pushnumber(L, pos.x);
 	lua_pushnumber(L, pos.y);
 	return 2;
@@ -34,7 +34,7 @@ int w_Sprite_setPosition(lua_State* L)
 	Sprite* t = luax_checksprite(L, 1);
 	float x = (float)luaL_checknumber(L, 2);
 	float y = (float)luaL_checknumber(L, 3);
-	t->SetTransform(Vector(x, y), t->GetAngle());
+	t->SetTransform(sm::vec2(x, y), t->GetAngle());
 	return 0;
 }
 
@@ -43,7 +43,7 @@ int w_Sprite_move(lua_State* L)
 	Sprite* t = luax_checksprite(L, 1);
 	float x = (float)luaL_checknumber(L, 2);
 	float y = (float)luaL_checknumber(L, 3);
-	t->SetTransform(t->GetPosition() + Vector(x, y), t->GetAngle());
+	t->SetTransform(t->GetPosition() + sm::vec2(x, y), t->GetAngle());
 	return 0;
 }
 

@@ -112,7 +112,7 @@ void EditPolylinesCMPT::onMergeTwoChain(wxCommandEvent& event)
 		ChainShape *chain0 = static_cast<ChainShape*>(shapes[0]),
 			*chain1 = static_cast<ChainShape*>(shapes[1]);
 
-		std::vector<ee::Vector> merged;
+		std::vector<sm::vec2> merged;
 		Math::mergeTwoChains(*chain0, *chain1, merged);
 
 		chain0->Load(merged);
@@ -146,7 +146,7 @@ void EditPolylinesCMPT::onTranslate(wxCommandEvent& event)
 		}
 	}
 
-	const ee::Vector offset(-leftmost, 0.0f);
+	const sm::vec2 offset(-leftmost, 0.0f);
 	for (size_t i = 0, n = chains.size(); i < n; ++i) {
 		chains[i]->Translate(offset);
 	}

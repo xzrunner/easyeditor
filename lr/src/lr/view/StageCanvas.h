@@ -31,7 +31,7 @@ private:
 private:
 	StagePanel* m_stage;
 
-	mutable std::vector<ee::Vector> m_bound_pseudo3d;
+	mutable std::vector<sm::vec2> m_bound_pseudo3d;
 
 }; // StageCanvas
 

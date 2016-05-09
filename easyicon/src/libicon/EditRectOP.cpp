@@ -34,16 +34,16 @@ bool EditRectOP::OnMouseLeftDown(int x, int y)
 
 	m_selected = PT_NULL;
 
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 
 	ee::Rect r = icon->GetRegion(1);
-	if (ee::Math2D::GetDistance(ee::Vector(r.xmin, r.ymin), pos) < CTRL_NODE_RADIUS) {
+	if (ee::Math2D::GetDistance(sm::vec2(r.xmin, r.ymin), pos) < CTRL_NODE_RADIUS) {
 		m_selected = PT_LEFT_LOW;
-	} else if (ee::Math2D::GetDistance(ee::Vector(r.xmin, r.ymax), pos) < CTRL_NODE_RADIUS) {
+	} else if (ee::Math2D::GetDistance(sm::vec2(r.xmin, r.ymax), pos) < CTRL_NODE_RADIUS) {
 		m_selected = PT_LEFT_TOP;
-	} else if (ee::Math2D::GetDistance(ee::Vector(r.xmax, r.ymax), pos) < CTRL_NODE_RADIUS) {
+	} else if (ee::Math2D::GetDistance(sm::vec2(r.xmax, r.ymax), pos) < CTRL_NODE_RADIUS) {
 		m_selected = PT_RIGHT_TOP;
-	} else if (ee::Math2D::GetDistance(ee::Vector(r.xmax, r.ymin), pos) < CTRL_NODE_RADIUS) {
+	} else if (ee::Math2D::GetDistance(sm::vec2(r.xmax, r.ymin), pos) < CTRL_NODE_RADIUS) {
 		m_selected = PT_RIGHT_LOW;
 	}
 
@@ -74,7 +74,7 @@ bool EditRectOP::OnMouseDrag(int x, int y)
 
 	ee::Rect r = icon->GetRegion(1);
 
-	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	if (m_selected == PT_LEFT_LOW) {
 		r.xmin = pos.x;
 		r.ymin = pos.y;
@@ -135,15 +135,15 @@ bool EditRectOP::OnDraw() const
 		  h = img->GetClippedHeight();
 	ee::RVG::Color(ee::LIGHT_RED);
 	ee::RVG::LineWidth(1);
-	ee::RVG::Rect(ee::Vector(0, 0), w * 0.5f, h * 0.5f, false);
+	ee::RVG::Rect(sm::vec2(0, 0), w * 0.5f, h * 0.5f, false);
 
 	ee::Rect r = icon->GetRegion(1);
 	ee::RVG::Color(ee::LIGHT_GREEN);
-	ee::RVG::Rect(ee::Vector(r.xmin, r.ymin), ee::Vector(r.xmax, r.ymax), false);
-	ee::RVG::Rect(ee::Vector(r.xmin, r.ymin), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, true);
-	ee::RVG::Rect(ee::Vector(r.xmin, r.ymax), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, true);
-	ee::RVG::Rect(ee::Vector(r.xmax, r.ymax), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, true);
-	ee::RVG::Rect(ee::Vector(r.xmax, r.ymin), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, true);
+	ee::RVG::Rect(sm::vec2(r.xmin, r.ymin), sm::vec2(r.xmax, r.ymax), false);
+	ee::RVG::Rect(sm::vec2(r.xmin, r.ymin), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, true);
+	ee::RVG::Rect(sm::vec2(r.xmin, r.ymax), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, true);
+	ee::RVG::Rect(sm::vec2(r.xmax, r.ymax), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, true);
+	ee::RVG::Rect(sm::vec2(r.xmax, r.ymin), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, true);
 
 	ee::RVG::LineWidth(2);
 

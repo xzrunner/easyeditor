@@ -210,7 +210,7 @@ void ImageToolbarPage::OnChangeScale(wxSpinEvent& event)
 	std::vector<ee::Sprite*> sprites;
 	m_stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-		sprites[i]->SetScale(ee::Vector(scale, scale));
+		sprites[i]->SetScale(sm::vec2(scale, scale));
 	}
 
 	m_stage->ArrangeAllSprites(true);

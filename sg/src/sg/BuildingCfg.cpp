@@ -103,8 +103,8 @@ void BuildingCfg::InitGrid(const Json::Value& value)
 	float angle = value["grid"]["angle"].asInt();
 	float scale = value["grid"]["scale"].asDouble();
 	float alpha = value["grid"]["alpha"].asInt();
-	sprite->SetTransform(ee::Vector(0, 0), angle * SM_DEG_TO_RAD);
-	sprite->SetScale(ee::Vector(scale, scale));
+	sprite->SetTransform(sm::vec2(0, 0), angle * SM_DEG_TO_RAD);
+	sprite->SetScale(sm::vec2(scale, scale));
 	SymbolRender::Instance()->SetGrid(sprite);
 	symbol->Release();
 }
@@ -129,7 +129,7 @@ void BuildingCfg::InitGrass(const Json::Value& value)
 		float scale = grassVal["scale"].asDouble();
 		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-		sprite->SetScale(ee::Vector(scale, scale));
+		sprite->SetScale(sm::vec2(scale, scale));
 		SymbolRender::Instance()->SetGrass(i-1, sprite);
 
 		grassVal = value["grass"]["levels"][i++];

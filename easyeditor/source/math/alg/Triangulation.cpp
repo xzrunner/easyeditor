@@ -62,24 +62,24 @@ static void implement(struct triangulateio& in, struct triangulateio& out, Trian
 
 static void finish(struct triangulateio& in, 
 				   struct triangulateio& out, 
-				   const std::vector<Vector>& bound, 
-				   std::vector<Vector>& result)
+				   const std::vector<sm::vec2>& bound, 
+				   std::vector<sm::vec2>& result)
 {
 	int index = 0;
 	for (size_t i = 0; i < out.numberoftriangles; ++i)
 	{
-		std::vector<Vector> tri;
+		std::vector<sm::vec2> tri;
 		for (size_t j = 0; j < out.numberofcorners; ++j)
 		{
 			int pIndex = out.trianglelist[index++];
 
-			Vector p;
+			sm::vec2 p;
 			p.x = out.pointlist[pIndex * 2];
 			p.y = out.pointlist[pIndex * 2 + 1];
 			tri.push_back(p);
 		}
 
-		Vector center = Math2D::GetTriGravityCenter(tri[0], tri[1], tri[2]);
+		sm::vec2 center = Math2D::GetTriGravityCenter(tri[0], tri[1], tri[2]);
 		if (Math2D::IsPointInArea(center, bound))
 			copy(tri.begin(), tri.end(), back_inserter(result));
 	}
@@ -109,14 +109,14 @@ static void finish(struct triangulateio& in,
 	trifree((VOID*)out.normlist);
 }
 
-void Triangulation::Normal(const std::vector<Vector>& bound, 
-						   std::vector<Vector>& result, 
+void Triangulation::Normal(const std::vector<sm::vec2>& bound, 
+						   std::vector<sm::vec2>& result, 
 						   Type type)
 {
 	struct triangulateio in, out;
 	init(in, out);
 
-	std::vector<Vector> bound_fixed;
+	std::vector<sm::vec2> bound_fixed;
 	VerifyBound(bound, bound_fixed);
 
 	in.numberofpoints = bound_fixed.size();
@@ -150,8 +150,8 @@ void Triangulation::Normal(const std::vector<Vector>& bound,
 	finish(in, out, bound_fixed, result);
 }
 
-void Triangulation::Holes(const std::vector<Vector>& bound, const std::vector<std::vector<Vector> >& holes, 
-						  std::vector<Vector>& result, Type type)
+void Triangulation::Holes(const std::vector<sm::vec2>& bound, const std::vector<std::vector<sm::vec2> >& holes, 
+						  std::vector<sm::vec2>& result, Type type)
 {
 	if (!holes.empty()) {
 		return HolesNew(bound, holes[0], result, type);
@@ -160,7 +160,7 @@ void Triangulation::Holes(const std::vector<Vector>& bound, const std::vector<st
 	struct triangulateio in, out;
 	init(in, out);
 
-	std::vector<Vector> bound_fixed;
+	std::vector<sm::vec2> bound_fixed;
 	VerifyBound(bound, bound_fixed);
 
 	in.numberofpoints = bound_fixed.size();
@@ -194,7 +194,7 @@ void Triangulation::Holes(const std::vector<Vector>& bound, const std::vector<st
  	in.holelist[0] = 0;
  	in.holelist[1] = 0;
 
-// 	std::vector<Vector> hole_fixed;
+// 	std::vector<sm::vec2> hole_fixed;
 // 	VerifyBound(holes[0], hole_fixed);
 // 	in.numberofholes = hole_fixed.size();
 // 	in.holelist = (REAL*)malloc(in.numberofholes * 2 * sizeof(REAL));
@@ -211,13 +211,13 @@ void Triangulation::Holes(const std::vector<Vector>& bound, const std::vector<st
 	finish(in, out, bound_fixed, result);
 }
 
-void Triangulation::HolesNew(const std::vector<Vector>& bound, const std::vector<Vector>& hole,
-							 std::vector<Vector>& result, Type type)
+void Triangulation::HolesNew(const std::vector<sm::vec2>& bound, const std::vector<sm::vec2>& hole,
+							 std::vector<sm::vec2>& result, Type type)
 {
 	struct triangulateio in, out;
 	init(in, out);
 
-	std::vector<Vector> bound_fixed, hole_fixed;
+	std::vector<sm::vec2> bound_fixed, hole_fixed;
 	VerifyBound(bound, bound_fixed);
 	VerifyBound(hole, hole_fixed);
 
@@ -231,7 +231,7 @@ void Triangulation::HolesNew(const std::vector<Vector>& bound, const std::vector
 		in.pointlist[index++] = bound_fixed[i].x;
 		in.pointlist[index++] = bound_fixed[i].y;
 	}
-	Vector hold_center;
+	sm::vec2 hold_center;
 	for (size_t i = 0, n = hole_fixed.size(); i < n; ++i)
 	{
 		in.pointlist[index++] = hole_fixed[i].x;
@@ -270,7 +270,7 @@ void Triangulation::HolesNew(const std::vector<Vector>& bound, const std::vector
 	in.holelist[0] = hold_center.x;
 	in.holelist[1] = hold_center.y;
 
-	// 	std::vector<Vector> hole_fixed;
+	// 	std::vector<sm::vec2> hole_fixed;
 	// 	VerifyBound(holes[0], hole_fixed);
 	// 	in.numberofholes = hole_fixed.size();
 	// 	in.holelist = (REAL*)malloc(in.numberofholes * 2 * sizeof(REAL));
@@ -287,15 +287,15 @@ void Triangulation::HolesNew(const std::vector<Vector>& bound, const std::vector
 	finish(in, out, bound_fixed, result);
 }
 
-void Triangulation::Points(const std::vector<Vector>& bound, 
-						   const std::vector<Vector>& points,
-						   std::vector<Vector>& result, 
+void Triangulation::Points(const std::vector<sm::vec2>& bound, 
+						   const std::vector<sm::vec2>& points,
+						   std::vector<sm::vec2>& result, 
 						   Type type)
 {
 	struct triangulateio in, out;
 	init(in, out);
 
-	std::vector<Vector> bound_fixed;
+	std::vector<sm::vec2> bound_fixed;
 	VerifyBound(bound, bound_fixed);
 
 	in.numberofpoints = bound_fixed.size() + points.size();
@@ -335,15 +335,15 @@ void Triangulation::Points(const std::vector<Vector>& bound,
 	finish(in, out, bound_fixed, result);
 }
 
-void Triangulation::Lines(const std::vector<Vector>& bound, 
-						  const std::vector<Vector>& lines,
-						  std::vector<Vector>& result, 
+void Triangulation::Lines(const std::vector<sm::vec2>& bound, 
+						  const std::vector<sm::vec2>& lines,
+						  std::vector<sm::vec2>& result, 
 						  Type type)
 {
 	struct triangulateio in, out;
 	init(in, out);
 
-	std::vector<Vector> bound_fixed;
+	std::vector<sm::vec2> bound_fixed;
 	VerifyBound(bound, bound_fixed);
 
 	in.numberofpoints = bound_fixed.size() + lines.size();
@@ -390,13 +390,13 @@ void Triangulation::Lines(const std::vector<Vector>& bound,
 	finish(in, out, bound_fixed, result);
 }
 
-void Triangulation::PointsAndLines(const std::vector<Vector>& bound, const std::vector<Vector>& points,
-								   const std::vector<Vector>& lines, std::vector<Vector>& result, Type type /*= e_Constrained*/)
+void Triangulation::PointsAndLines(const std::vector<sm::vec2>& bound, const std::vector<sm::vec2>& points,
+								   const std::vector<sm::vec2>& lines, std::vector<sm::vec2>& result, Type type /*= e_Constrained*/)
 {
 	struct triangulateio in, out;
 	init(in, out);
 
-	std::vector<Vector> bound_fixed;
+	std::vector<sm::vec2> bound_fixed;
 	VerifyBound(bound, bound_fixed);
 
 	in.numberofpoints = bound_fixed.size() + lines.size() + points.size();
@@ -448,10 +448,10 @@ void Triangulation::PointsAndLines(const std::vector<Vector>& bound, const std::
 	finish(in, out, bound_fixed, result);
 }
 
-void Triangulation::LinesAndLoops(const std::vector<Vector>& bound, 
-								  const std::vector<Vector>& lines,
-								  const std::vector<std::vector<Vector> >& loops, 
-								  std::vector<Vector>& result, 
+void Triangulation::LinesAndLoops(const std::vector<sm::vec2>& bound, 
+								  const std::vector<sm::vec2>& lines,
+								  const std::vector<std::vector<sm::vec2> >& loops, 
+								  std::vector<sm::vec2>& result, 
 								  Type type)
 {
 	struct triangulateio in, out;
@@ -461,7 +461,7 @@ void Triangulation::LinesAndLoops(const std::vector<Vector>& bound,
 	for (size_t i = 0, n = loops.size(); i < n; ++i)
 		loopSize += loops[i].size();
 
-	std::vector<Vector> bound_fixed;
+	std::vector<sm::vec2> bound_fixed;
 	VerifyBound(bound, bound_fixed);
 
 	in.numberofpoints = bound_fixed.size() + lines.size() + loopSize;
@@ -531,13 +531,13 @@ void Triangulation::LinesAndLoops(const std::vector<Vector>& bound,
 	finish(in, out, bound_fixed, result);
 }
 
-void Triangulation::Strips(const std::vector<Vector>& triangulates, 
-	std::vector<std::vector<Vector> >& strips)
+void Triangulation::Strips(const std::vector<sm::vec2>& triangulates, 
+	std::vector<std::vector<sm::vec2> >& strips)
 {
 	SGI::Do(triangulates, strips);
 }
 
-void Triangulation::VerifyBound(const std::vector<Vector>& src, std::vector<Vector>& dst)
+void Triangulation::VerifyBound(const std::vector<sm::vec2>& src, std::vector<sm::vec2>& dst)
 {
 	for (int i = 0, n = src.size(); i < n; ++i)
 	{
