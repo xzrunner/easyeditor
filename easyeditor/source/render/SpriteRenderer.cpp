@@ -25,27 +25,27 @@ void SpriteRenderer::Draw(const Sprite* spr,
 		return;
 	}
 
-	BlendMode blend;
-	if (trans.shader.blend != BM_NULL) {
+	s2::BlendMode blend;
+	if (trans.shader.blend != s2::BM_NULL) {
 		blend = trans.shader.blend;
 	} else {
 		blend = spr->rp->shader.blend;
 	}
 
-	FilterMode filter;
-	if (trans.shader.filter != FM_NULL) {
+	s2::FilterMode filter;
+	if (trans.shader.filter != s2::FM_NULL) {
 		filter = trans.shader.filter;
 	} else {
 		filter = spr->rp->shader.filter;
 	}
 
  	RenderCamera ct;
-	if (trans.camera.mode != CM_ORTHO) {
+	if (trans.camera.mode != s2::CM_ORTHO) {
 		ct.mode = trans.camera.mode;
 	} else {
 		ct.mode = spr->rp->camera.mode;
 	}
-	if (ct.mode == CM_PERSPECTIVE_AUTO_HEIGHT) {
+	if (ct.mode == s2::CM_PERSPECTIVE_AUTO_HEIGHT) {
 		if (trans.camera.base_y == FLT_MAX) {
 			ct.base_y = trans.camera.base_y;
 			std::vector<sm::vec2> bound;
@@ -61,12 +61,12 @@ void SpriteRenderer::Draw(const Sprite* spr,
 	}
 
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
-	if (blend != BM_NULL) {
+	if (blend != s2::BM_NULL) {
 		const Camera* cam = CameraMgr::Instance()->GetCamera();
 		if (cam->Type() == "ortho") {
 			SpriteBlend::Draw(spr, trans.mt);
 		}
-	} else if (filter != FM_NULL) {
+	} else if (filter != s2::FM_NULL) {
 		if (trans.set_shader) {
 			mgr->SetShader(sl::FILTER);
 		}

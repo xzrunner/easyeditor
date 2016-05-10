@@ -12,7 +12,7 @@ namespace lr
 {
 
 ShapeLayer::ShapeLayer(int id, LibraryPanel* library)
-: Layer(id, library, ee::CM_ORTHO)
+	: Layer(id, library, s2::CM_ORTHO)
 {
 }
 

@@ -1,29 +1,30 @@
 #ifndef _SPRITE2_RENDER_PARAMS_H_
 #define _SPRITE2_RENDER_PARAMS_H_
 
+#include "Matrix.h"
+#include "RenderColor.h"
+#include "RenderShader.h"
+#include "RenderCamera.h"
+
 namespace s2
 {
+
+class Sprite;
 
 class RenderParams
 {
 public:
-	Sprite*		root_spr;
+	Sprite* root_spr;
 
-	bool		set_shader;
+	bool set_shader;
 
-	Matrix		mat;
+	Matrix mat;
 
-	// color
-	Color		col_mul, col_add;
-	Color		col_rmap, col_gmap, col_bmap;
+	RenderColor	color;
+	
+	RenderShader shader;
 
-	// shader
-	FilterMode	filter;
-	BlendMode	blend;
-
-	// camera
-	CameraMode	camera;
-	float		camera_base_y;	
+	RenderCamera camera;
 	
 public:
 	RenderParams();

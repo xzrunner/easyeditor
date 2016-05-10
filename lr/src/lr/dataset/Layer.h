@@ -25,7 +25,7 @@ class LibraryPanel;
 class Layer : public ee::Object
 {
 public:
-	Layer(int id, LibraryPanel* library, ee::CameraMode cam);
+	Layer(int id, LibraryPanel* library, s2::CameraMode cam);
 	
 	virtual void TraverseSprite(ee::Visitor& visitor, bool order = true) const;
 	virtual void TraverseSprite(ee::Visitor& visitor, ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
@@ -101,7 +101,7 @@ protected:
 private:
 	int m_id;
 
-	ee::CameraMode m_cam_mode;
+	s2::CameraMode m_cam_mode;
 
 	std::string m_name;
 

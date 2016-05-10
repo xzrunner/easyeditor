@@ -45,7 +45,9 @@ ImageSprite* ImageSprite::Clone() const
 
 bool ImageSprite::Update(int version)
 {
-	return rp->shader.filter == FM_HEAT_HAZE || rp->shader.filter == FM_SHOCK_WAVE || rp->shader.filter == FM_SWIRL;
+	return rp->shader.filter == s2::FM_HEAT_HAZE 
+		|| rp->shader.filter == s2::FM_SHOCK_WAVE 
+		|| rp->shader.filter == s2::FM_SWIRL;
 }
 
 const ImageSymbol& ImageSprite::GetSymbol() const

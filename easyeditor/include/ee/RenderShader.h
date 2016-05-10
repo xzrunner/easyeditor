@@ -18,8 +18,8 @@ public:
 	void StoreToFile(Json::Value& val) const;
 
 public:
-	BlendMode blend;
-	FilterMode filter;
+	s2::BlendMode blend;
+	s2::FilterMode filter;
 
 }; // RenderShader
 

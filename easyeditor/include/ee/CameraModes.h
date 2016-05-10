@@ -1,27 +1,22 @@
 #ifndef _EASYEDITOR_CAMERA_MODES_H_
 #define _EASYEDITOR_CAMERA_MODES_H_
 
+#include <sprite2/CameraMode.h>
+
 #include <string>
 #include <vector>
 
 namespace ee
 {
 
-enum CameraMode
-{
-	CM_ORTHO					= 0,
-	CM_PERSPECTIVE_NO_HEIGHT,
-	CM_PERSPECTIVE_AUTO_HEIGHT,
-};
-
 class CameraModes
 {
 public:
-	CameraMode GetModeFromNameEN(const std::string& name) const;
-	std::string GetNameENFromMode(CameraMode mode) const;
+	s2::CameraMode GetModeFromNameEN(const std::string& name) const;
+	std::string GetNameENFromMode(s2::CameraMode mode) const;
 
-	CameraMode GetIDFromIdx(int idx) const;
-	int GetIdxFromID(CameraMode mode) const;
+	s2::CameraMode GetIDFromIdx(int idx) const;
+	int GetIdxFromID(s2::CameraMode mode) const;
 
 	void GetAllNameCN(std::vector<std::string>& names) const;
 
@@ -33,10 +28,10 @@ private:
 private:
 	struct Item
 	{
-		Item(CameraMode mode, const std::string& name_en, const std::string& name_cn)
+		Item(s2::CameraMode mode, const std::string& name_en, const std::string& name_cn)
 			: mode(mode), name_en(name_en), name_cn(name_cn) {}
 
-		CameraMode mode;
+		s2::CameraMode mode;
 		std::string name_en;
 		std::string name_cn;
 	};

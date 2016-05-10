@@ -6,13 +6,20 @@ namespace s2
 
 inline
 Color::Color() 
-	: rgba(0) 
+	: r(0)
+	, g(0)
+	, b(0)
+	, a(0)
 {}
 
 inline
 Color::Color(uint32_t rgba) 
-	: rgba(rgba) 
-{}
+{
+	r = (rgba >> 24) & 0xff;
+	g = (rgba >> 16) & 0xff;
+	b = (rgba >>  8) & 0xff;
+	a = rgba         & 0xff;
+}
 
 inline
 Color::Color(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
@@ -21,6 +28,12 @@ Color::Color(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 	, b(b)
 	, a(a) 
 {}
+
+inline
+uint32_t Color::ToABGR() const
+{
+	return (a << 24 ) | (b << 16) | (g << 8) | r;
+}
 
 }
 

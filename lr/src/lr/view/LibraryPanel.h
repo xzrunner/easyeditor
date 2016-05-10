@@ -47,7 +47,7 @@ public:
 	Layer* GetTerrainLayer();
 
 	LayerType GetLayerType(int idx) const;
-	ee::CameraMode GetLayerCameraMode(int idx) const;
+	s2::CameraMode GetLayerCameraMode(int idx) const;
 
 	Layer* GetLayer(int idx);
 

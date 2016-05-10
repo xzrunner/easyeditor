@@ -18,7 +18,7 @@ namespace lr
 {
 
 LibraryPage::LibraryPage(LibraryPanel* library, const std::string& name, 
-						 LayerType type, int id, ee::CameraMode cam)
+						 LayerType type, int id, s2::CameraMode cam)
 	: ee::LibraryPage(library->GetNotebook(), name)
 	, m_layer_type(type)
 	, m_cam_mode(cam)

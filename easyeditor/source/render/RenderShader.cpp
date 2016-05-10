@@ -5,8 +5,8 @@ namespace ee
 {
 
 RenderShader::RenderShader()
-	: blend(BM_NULL)
-	, filter(FM_NULL)
+	: blend(s2::BM_NULL)
+	, filter(s2::FM_NULL)
 {
 }
 

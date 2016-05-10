@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\easyimage\src;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\sm\src\sm;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\easyimage\src;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\sprite2\src;..\..\..\..\sm\src\sm;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -107,7 +107,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\easyimage\src;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\sm\src\sm;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\easyimage\src;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\sprite2\src;..\..\..\..\sm\src\sm;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"

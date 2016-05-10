@@ -1,4 +1,5 @@
 #include "RenderParams.h"
+#include "CameraModes.h"
 
 namespace ee
 {

@@ -2,10 +2,9 @@
 #define _SPRITE2_SPRITE_H_
 
 #include "AABB.h"
-#include "Color.h"
-#include "FilterMode.h"
-#include "BlendMode.h"
-#include "CameraMode.h"
+#include "RenderColor.h"
+#include "RenderShader.h"
+#include "RenderCamera.h"
 
 #include <SM_Vector.h>
 
@@ -36,15 +35,9 @@ protected:
 	/************************************************************************/
 	/* draw                                                                 */
 	/************************************************************************/
-
-	Color		m_col_mul, m_col_add;
-	Color		m_col_rmap, m_col_gmap, m_col_bmap;
-
-	FilterMode	m_filter;
-	BlendMode	m_blend;
-
-	CameraMode	m_camera;
-	float		m_camera_base_y;	
+	RenderColor	 m_color;
+	RenderShader m_shader;
+	RenderCamera m_camera;
 
 }; // Sprite
 

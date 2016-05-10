@@ -185,11 +185,23 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\sprite2\RenderCamera.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\sprite2\RenderColor.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\sprite2\RenderParams.h"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\src\sprite2\RenderParams.inl"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\sprite2\RenderShader.h"
 				>
 			</File>
 		</Filter>

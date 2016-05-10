@@ -7,7 +7,7 @@
 namespace lr
 {
 
-Layer* LayerFactory::Create(int id, LibraryPanel* library, LayerType type, ee::CameraMode cam)
+Layer* LayerFactory::Create(int id, LibraryPanel* library, LayerType type, s2::CameraMode cam)
 {
 	if (type == LT_DEFAULT) {
 		return new Layer(id, library, cam);
