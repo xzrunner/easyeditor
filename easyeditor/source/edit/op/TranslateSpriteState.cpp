@@ -14,7 +14,7 @@ TranslateSpriteState::TranslateSpriteState(SpriteSelection* selection,
 	m_selection->Retain();
 
 	m_first_pos = m_last_pos = first_pos;
-	m_last_valid = true;
+	m_last_valid = false;
 }
 
 TranslateSpriteState::~TranslateSpriteState()
