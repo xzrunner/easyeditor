@@ -10,12 +10,12 @@ namespace ee
 void SpriteCtrlNode::GetSpriteCtrlNodes(const Sprite* sprite, sm::vec2 nodes[8])
 {
 	Rect r = sprite->GetSymbol().GetSize(sprite);
-	if (sprite->GetMirrorX()) { 
+	if (sprite->GetMirror().x) { 
 		r.xmin = -r.xmin;
 		r.xmax = -r.xmax;
 		std::swap(r.xmin, r.xmax);
 	}
-	if (sprite->GetMirrorY()) {
+	if (sprite->GetMirror().y) {
 		r.ymin = -r.ymin;
 		r.ymax = -r.ymax;
 		std::swap(r.ymin, r.ymax);
@@ -45,12 +45,12 @@ void SpriteCtrlNode::GetSpriteCtrlNodes(const Sprite* sprite, sm::vec2 nodes[8])
 void SpriteCtrlNode::GetSpriteCtrlNodesExt(const Sprite* sprite, sm::vec2 nodes[4])
 {
 	Rect r = sprite->GetSymbol().GetSize(sprite);
-	if (sprite->GetMirrorX()) { 
+	if (sprite->GetMirror().x) { 
 		r.xmin = -r.xmin;
 		r.xmax = -r.xmax;
 		std::swap(r.xmin, r.xmax);
 	}
-	if (sprite->GetMirrorY()) {
+	if (sprite->GetMirror().y) {
 		r.ymin = -r.ymin;
 		r.ymax = -r.ymax;
 		std::swap(r.ymin, r.ymax);

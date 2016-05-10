@@ -604,7 +604,7 @@ void ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	{
 		for (int i = 0, n = sprites.size(); i < n; ++i) {
 			Sprite* spr = sprites[i];
-			spr->SetMirror(!spr->GetMirrorX(), spr->GetMirrorY());
+			spr->SetMirror(!spr->GetMirror().x, spr->GetMirror().y);
 		}
 		SetCanvasDirtySJ::Instance()->SetDirty();
 	} 
@@ -613,7 +613,7 @@ void ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	{
 		for (int i = 0, n = sprites.size(); i < n; ++i) {
 			Sprite* spr = sprites[i];
-			spr->SetMirror(spr->GetMirrorX(), !spr->GetMirrorY());
+			spr->SetMirror(spr->GetMirror().x, !spr->GetMirror().y);
 		}
 		SetCanvasDirtySJ::Instance()->SetDirty();
 	} 

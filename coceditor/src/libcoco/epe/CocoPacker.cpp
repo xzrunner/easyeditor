@@ -214,14 +214,13 @@ void CocoPacker::resolvePicture(const ee::ImageSprite* sprite)
 	//	screen[i].y -= center.y;
 	//}
 	// 4. mirror
-	bool xMirror, yMirror;
-	sprite->GetMirror(xMirror, yMirror);
-	if (xMirror)
+	sm::bvec2 mirror = sprite->GetMirror();
+	if (mirror.x)
 	{
 		std::swap(screen[0].x, screen[3].x);
 		std::swap(screen[1].x, screen[2].x);
 	}
-	if (yMirror)
+	if (mirror.y)
 	{
 		std::swap(screen[1].y, screen[0].y);
 		std::swap(screen[2].y, screen[3].y);
@@ -797,10 +796,9 @@ void CocoPacker::transToMat(const ee::Sprite* sprite, float mat[6], bool force /
 			y = sprite->GetCenter().y;
 		float sx = sprite->GetScale().x,
 			sy = sprite->GetScale().y;
-		bool xMirror, yMirror;
-		sprite->GetMirror(xMirror, yMirror);
-		if (xMirror) sx = -sx;
-		if (yMirror) sy = -sy;
+		sm::bvec2 mirror = sprite->GetMirror();
+		if (mirror.x) sx = -sx;
+		if (mirror.y) sy = -sy;
 		float c = cos(-sprite->GetAngle()),
 			s = sin(-sprite->GetAngle());
 		float kx = sprite->GetShear().x,

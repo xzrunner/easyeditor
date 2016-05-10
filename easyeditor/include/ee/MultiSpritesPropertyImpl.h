@@ -35,8 +35,7 @@ public:
 	s2::Color GetTransColorB() const;
 	float GetAngle() const;
 	sm::vec2 GetScale() const;
-	bool GetMirrorX() const;
-	bool GetMirrorY() const;
+	sm::bvec2 GetMirror() const;
 	bool GetVisible() const;
 	bool GetEditable() const;
 
@@ -47,8 +46,7 @@ public:
 	void SetColorAdd(const s2::Color& col);
 	void SetColorAlpha(int alpha);
 	void SetAngle(bool overall, float angle);
-	void SetScale(bool overall, float sx, float sy);
-	void SetMirrorX(bool overall, bool mirror);
+	void SetScale(bool overall, float sx, float sy);void SetMirrorX(bool overall, bool mirror);
 	void SetMirrorY(bool overall, bool mirror);
 	void SetVisible(bool visible);
 	void SetEditable(bool editable);

@@ -518,13 +518,12 @@ void CocoPacker::ParserPicture(const ee::ImageSprite* sprite, PicFixType tsrc, P
 	screen[1].y -= sy * hw;
 	screen[0].y -= sy * hw;
 	// 2. mirror
-	bool xMirror, yMirror;
-	sprite->GetMirror(xMirror, yMirror);
-	if (xMirror) {
+	sm::bvec2 mirror = sprite->GetMirror();
+	if (mirror.x) {
 		for (size_t i = 0; i < 4; ++i)
 			screen[i].x = -screen[i].x;
 	}
-	if (yMirror) {
+	if (mirror.y) {
 		for (size_t i = 0; i < 4; ++i)
 			screen[i].y = -screen[i].y;
 	}
@@ -543,10 +542,10 @@ void CocoPacker::ParserPicture(const ee::ImageSprite* sprite, PicFixType tsrc, P
  	sm::vec2 offset = picture->offset;
  	offset.x *= sprite->GetScale().x / picture->invscale;
  	offset.y *= sprite->GetScale().y / picture->invscale;
-	if (xMirror) {
+	if (mirror.x) {
 		offset.x = -offset.x;
 	}
-	if (yMirror) {
+	if (mirror.y) {
 		offset.y = -offset.y;
 	}
  	sm::vec2 center = sprite->GetCenter();
@@ -1907,8 +1906,7 @@ void CocoPacker::TransToMat(const ee::Sprite* sprite, float mat[6], bool force /
 		// |        1 | |        1 | |        1 | | x  y  1 |
 		//     skew        scale        rotate        move
 
-		bool xMirror, yMirror;
-		sprite->GetMirror(xMirror, yMirror);
+		sm::bvec2 mirror = sprite->GetMirror();
 
 		sm::vec2 center = sprite->GetCenter();
 		if (dynamic_cast<const ee::ImageSprite*>(sprite))
@@ -1920,10 +1918,10 @@ void CocoPacker::TransToMat(const ee::Sprite* sprite, float mat[6], bool force /
 			}
 
 			sm::vec2 offset = picture->offset;
-			if (xMirror) {
+			if (mirror.x) {
 				offset.x = -offset.x;
 			}
-			if (yMirror) {
+			if (mirror.y) {
 				offset.y = -offset.y;
 			}
 			offset.x *= sprite->GetScale().x / picture->invscale;
@@ -1932,8 +1930,8 @@ void CocoPacker::TransToMat(const ee::Sprite* sprite, float mat[6], bool force /
 		}
 		float sx = sprite->GetScale().x,
 			  sy = sprite->GetScale().y;
-		if (xMirror) sx = -sx;
-		if (yMirror) sy = -sy;
+		if (mirror.x) sx = -sx;
+		if (mirror.y) sy = -sy;
 
 		float c = cos(-sprite->GetAngle()),
 			s = sin(-sprite->GetAngle());

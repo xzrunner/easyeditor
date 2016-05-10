@@ -68,10 +68,8 @@ public:
 	void Translate(const sm::vec2& offset);
 	void Rotate(float delta);
 
-	void SetMirror(bool xMirror, bool yMirror);
-	void GetMirror(bool& xMirror, bool& yMirror) const { xMirror = m_xMirror; yMirror = m_yMirror; }
-	bool GetMirrorX() const { return m_xMirror; }
-	bool GetMirrorY() const { return m_yMirror; }
+	void SetMirror(bool x_mirror, bool y_mirror);
+	const sm::bvec2& GetMirror() const { return m_mirror; }
 
 	const sm::vec2& GetPerspective() const { return m_perspective; }
 	void SetPerspective(const sm::vec2& perspective) { m_perspective = perspective; }
@@ -118,15 +116,14 @@ public:
 	bool editable;
 
 protected:
-	sm::vec2 m_pos;
-	float m_angle;
-	sm::vec2 m_offset;
-	sm::vec2 m_scale;
-	sm::vec2 m_shear;
+	sm::vec2	m_pos;
+	float		m_angle;
+	sm::vec2	m_offset;
+	sm::vec2	m_scale;
+	sm::vec2	m_shear;
 
-	bool m_xMirror, m_yMirror;
-
-	sm::vec2 m_perspective;
+	sm::bvec2	m_mirror;
+	sm::vec2	m_perspective;
 
 	BoundingBox* m_bounding;
 	

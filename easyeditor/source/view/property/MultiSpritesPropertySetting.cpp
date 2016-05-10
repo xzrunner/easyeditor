@@ -168,8 +168,8 @@ void MultiSpritesPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	pg->GetProperty(wxT("Scale.X"))->SetValue(scale.x);
 	pg->GetProperty(wxT("Scale.Y"))->SetValue(scale.y);
 	pg->GetProperty(wxT("Scale"))->SetValue(pg->GetProperty(wxT("Scale"))->GenerateComposedValue());
-	pg->GetProperty(wxT("Mirror.Horizontal"))->SetValue(m_impl->GetMirrorX());
-	pg->GetProperty(wxT("Mirror.Vertical"))->SetValue(m_impl->GetMirrorY());
+	pg->GetProperty(wxT("Mirror.Horizontal"))->SetValue(m_impl->GetMirror().x);
+	pg->GetProperty(wxT("Mirror.Vertical"))->SetValue(m_impl->GetMirror().y);
 	pg->GetProperty(wxT("Mirror"))->SetValue(pg->GetProperty(wxT("Mirror"))->GenerateComposedValue());
 
 	pg->GetProperty(wxT("Visible"))->SetValue(m_impl->GetVisible());
@@ -283,9 +283,9 @@ void MultiSpritesPropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	wxPGProperty* mirror_prop = pg->Append(new wxStringProperty(wxT("Mirror"), wxPG_LABEL, wxT("<composed>")));
 	mirror_prop->SetExpanded(false);
-	pg->AppendIn(mirror_prop, new wxBoolProperty(wxT("Horizontal"), wxPG_LABEL, m_impl->GetMirrorX()));
+	pg->AppendIn(mirror_prop, new wxBoolProperty(wxT("Horizontal"), wxPG_LABEL, m_impl->GetMirror().x));
 	pg->SetPropertyAttribute("Mirror.Horizontal", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
-	pg->AppendIn(mirror_prop, new wxBoolProperty(wxT("Vertical"), wxPG_LABEL, m_impl->GetMirrorY()));
+	pg->AppendIn(mirror_prop, new wxBoolProperty(wxT("Vertical"), wxPG_LABEL, m_impl->GetMirror().y));
 	pg->SetPropertyAttribute("Mirror.Vertical", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
 	// edit

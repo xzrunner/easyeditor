@@ -95,7 +95,7 @@ void SpritePropertyImpl::Mirror(bool mx, bool my)
 	}
 
 	EditAddRecordSJ::Instance()->Add(new MirrorSpriteAOP(m_sprite, 
-		m_sprite->GetMirrorX(), m_sprite->GetMirrorY(), mx, my));
+		m_sprite->GetMirror().x, m_sprite->GetMirror().y, mx, my));
 	m_sprite->SetMirror(mx, my);
 }
 

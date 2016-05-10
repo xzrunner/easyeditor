@@ -162,17 +162,13 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 	}
 	else if (name == wxT("Mirror.Horizontal"))
 	{
-		bool xMirror, yMirror;
-		spr->GetMirror(xMirror, yMirror);
 //		spr->setMirror(wxANY_AS(value, bool), yMirror);
-		m_impl->Mirror(wxANY_AS(value, bool), yMirror);
+		m_impl->Mirror(wxANY_AS(value, bool), spr->GetMirror().y);
 	}
 	else if (name == wxT("Mirror.Vertical"))
 	{
-		bool xMirror, yMirror;
-		spr->GetMirror(xMirror, yMirror);
 //		spr->setMirror(xMirror, wxANY_AS(value, bool));
-		m_impl->Mirror(xMirror, wxANY_AS(value, bool));
+		m_impl->Mirror(spr->GetMirror().x, wxANY_AS(value, bool));
 	}
 	// perspective
 	else if (name == wxT("Perspective"))
@@ -263,10 +259,9 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	pg->GetProperty(wxT("Offset.Y"))->SetValue(spr->GetOffset().y);
 	pg->GetProperty(wxT("Offset"))->SetValue(pg->GetProperty(wxT("Offset"))->GenerateComposedValue());
 
-	bool xMirror, yMirror;
-	spr->GetMirror(xMirror, yMirror);
-	pg->GetProperty(wxT("Mirror.Horizontal"))->SetValue(xMirror);
-	pg->GetProperty(wxT("Mirror.Vertical"))->SetValue(yMirror);
+	sm::bvec2 mirror = spr->GetMirror();
+	pg->GetProperty(wxT("Mirror.Horizontal"))->SetValue(mirror.x);
+	pg->GetProperty(wxT("Mirror.Vertical"))->SetValue(mirror.y);
 	pg->GetProperty(wxT("Mirror"))->SetValue(pg->GetProperty(wxT("Mirror"))->GenerateComposedValue());
 
 	pg->GetProperty(wxT("Perspective.X"))->SetValue(spr->GetPerspective().x);
@@ -411,11 +406,10 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	wxPGProperty* mirrorProp = pg->Append(new wxStringProperty(wxT("Mirror"), wxPG_LABEL, wxT("<composed>")));
 	mirrorProp->SetExpanded(false);
-	bool xMirror, yMirror;
-	spr->GetMirror(xMirror, yMirror);
-	pg->AppendIn(mirrorProp, new wxBoolProperty(wxT("Horizontal"), wxPG_LABEL, xMirror));
+	sm::bvec2 mirror = spr->GetMirror();
+	pg->AppendIn(mirrorProp, new wxBoolProperty(wxT("Horizontal"), wxPG_LABEL, mirror.x));
 	pg->SetPropertyAttribute("Mirror.Horizontal", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
-	pg->AppendIn(mirrorProp, new wxBoolProperty(wxT("Vertical"), wxPG_LABEL, yMirror));
+	pg->AppendIn(mirrorProp, new wxBoolProperty(wxT("Vertical"), wxPG_LABEL, mirror.y));
 	pg->SetPropertyAttribute("Mirror.Vertical", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
 	wxPGProperty* persp_prop = pg->Append(new wxStringProperty(wxT("Perspective"), wxPG_LABEL, wxT("<composed>")));

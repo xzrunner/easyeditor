@@ -174,15 +174,13 @@ void PackAnimation::LoadSprMat(const ee::Sprite* spr, SpriteTrans& trans, bool f
 
 	sm::vec2 center = spr->GetCenter();
 
-	bool xmir, ymir;
-	spr->GetMirror(xmir, ymir);
-
+	sm::bvec2 mirror = spr->GetMirror();
 	float sx = spr->GetScale().x,
 		sy = spr->GetScale().y;
-	if (xmir) {
+	if (mirror.x) {
 		sx = -sx;
 	}
-	if (ymir) {
+	if (mirror.y) {
 		sy = -sy;
 	}
 

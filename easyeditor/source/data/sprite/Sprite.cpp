@@ -31,7 +31,7 @@ Sprite::Sprite()
 	m_angle = 0.0f;
 	m_scale.Set(1, 1);
 	m_shear.Set(0, 0);
-	m_xMirror = m_yMirror = false;
+	m_mirror.Set(false, false);
 	m_perspective.Set(0, 0);
 	m_bounding = NULL;
 
@@ -55,8 +55,7 @@ Sprite::Sprite(const Sprite& sprite)
 	m_offset = sprite.m_offset;
 	m_scale = sprite.m_scale;
 	m_shear = sprite.m_shear;
-	m_xMirror = sprite.m_xMirror;
-	m_yMirror = sprite.m_yMirror;
+	m_mirror = sprite.m_mirror;
 	m_perspective = sprite.m_perspective;
 	m_bounding = sprite.m_bounding->Clone();
 
@@ -177,8 +176,8 @@ void Sprite::Store(Json::Value& val) const
 	val["x shear"] = m_shear.x;
 	val["y shear"] = m_shear.y;
 
-	val["x mirror"] = m_xMirror;
-	val["y mirror"] = m_yMirror;
+	val["x mirror"] = m_mirror.x;
+	val["y mirror"] = m_mirror.y;
 
 	val["x offset"] = m_offset.x;
 	val["y offset"] = m_offset.y;
@@ -332,10 +331,10 @@ void Sprite::Rotate(float delta)
 #endif // OPEN_SCREEN_CACHE
 }
 
-void Sprite::SetMirror(bool xMirror, bool yMirror) 
+void Sprite::SetMirror(bool x_mirror, bool y_mirror) 
 { 
-	bool x_dirty = xMirror != m_xMirror,
-		 y_dirty = yMirror != m_yMirror;
+	bool x_dirty = (x_mirror != m_mirror.x),
+		 y_dirty = (y_mirror != m_mirror.y);
 
 	if (x_dirty) {
 		m_offset.x = -m_offset.x;
@@ -344,7 +343,8 @@ void Sprite::SetMirror(bool xMirror, bool yMirror)
 		m_offset.y = -m_offset.y;
 	}
 
-	m_xMirror = xMirror; m_yMirror = yMirror; 
+	m_mirror.x = x_mirror;
+	m_mirror.y = y_mirror;
 	if (m_bounding) {
 		m_bounding->SetMirror(x_dirty, y_dirty);
 		m_bounding->SetTransform(m_pos, m_offset, m_angle);
@@ -371,12 +371,12 @@ Rect Sprite::GetRect() const
 
 void Sprite::GetTransMatrix(sm::mat4& mt) const
 {
-	const float xScale = m_xMirror ? -m_scale.x : m_scale.x,
-		yScale = m_yMirror ? -m_scale.y : m_scale.y;
+	const float x_scale = m_mirror.x ? -m_scale.x : m_scale.x,
+		y_scale = m_mirror.y ? -m_scale.y : m_scale.y;
 
 	sm::vec2 center = GetCenter();
 	mt.SetTransformation(center.x, center.y, m_angle, 
-		xScale, yScale, 0, 0, m_shear.x, m_shear.y);
+		x_scale, y_scale, 0, 0, m_shear.x, m_shear.y);
 }
 
 sm::mat4 Sprite::GetTransInvMatrix() const

@@ -148,7 +148,7 @@ void RightPopupMenu::HandleAnimMenu(int id)
 		assert(CharacterFileName::IsValidFilepath(filepath));
 		CharacterFileName name(filepath);
 		int dir = 1 + (name.GetField(CharacterFileName::FT_DIRECTION)[0] - '1');
-		if (m_sprite->GetMirrorX()) {
+		if (m_sprite->GetMirror().x) {
 			dir = 10 - dir;
 		}
 
