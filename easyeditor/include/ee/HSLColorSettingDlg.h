@@ -35,7 +35,8 @@ private:
 
 	wxPanel* m_color_bg;
 
-	ColorSlider *m_h, *m_s, *m_l;
+	ColorSlider *m_h_ctrl, *m_s_ctrl, *m_l_ctrl;
+	float m_h, m_s, m_l;
 
 }; // HSLColorSettingDlg
 

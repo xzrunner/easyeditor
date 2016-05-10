@@ -8,10 +8,12 @@ namespace ee
 HSLColorSettingDlg::HSLColorSettingDlg(wxWindow* parent, ColorMonitor* lsn, const s2::Color& col, const wxPoint& pos)
 	: wxDialog(parent, wxID_ANY, "HSL Color Setting", pos, wxSize(450, 300))
 	, m_lsn(lsn)
-	, m_h(NULL)
-	, m_s(NULL)
-	, m_l(NULL)
+	, m_h_ctrl(NULL)
+	, m_s_ctrl(NULL)
+	, m_l_ctrl(NULL)
 {
+	m_h = m_s = m_l = 0;
+
 	InitLayout();
 	SetColor(col);
 }
@@ -19,26 +21,30 @@ HSLColorSettingDlg::HSLColorSettingDlg(wxWindow* parent, ColorMonitor* lsn, cons
 s2::Color HSLColorSettingDlg::GetColor() const
 {
 	float r, g, b;
-	hsl2rgb(m_h->GetColorValue() / 255.0f, m_s->GetColorValue() / 255.0f, m_l->GetColorValue() / 255.0f, r, g, b);
+	hsl2rgb(m_h, m_s, m_l, r, g, b);
 	return s2::Color((int)(r * 255 + 0.5f), (int)(g * 255 + 0.5f), (int)(b * 255 + 0.5f));
 }
 
 void HSLColorSettingDlg::OnColorChanged()
 {
-	int h = m_h->GetColorValue();
-	int s = m_s->GetColorValue();
-	int l = m_l->GetColorValue();
-	m_h->SetColorRegion(s2::Color(0, s, l), s2::Color(255, s, l));
-	m_s->SetColorRegion(s2::Color(h, 0, l), s2::Color(h, 255, l));
-	m_l->SetColorRegion(s2::Color(h, s, 0), s2::Color(h, s, 255));
+	int h = m_h_ctrl->GetColorValue(),
+		s = m_s_ctrl->GetColorValue(),
+		l = m_l_ctrl->GetColorValue();
+	m_h = h / 255.0f;
+	m_s = s / 255.0f;
+	m_l = l / 255.0f;
+
+	m_h_ctrl->SetColorRegion(s2::Color(0, s, l), s2::Color(255, s, l));
+	m_s_ctrl->SetColorRegion(s2::Color(h, 0, l), s2::Color(h, 255, l));
+	m_l_ctrl->SetColorRegion(s2::Color(h, s, 0), s2::Color(h, s, 255));
 
 	float r, g, b;
-	hsl2rgb(m_h->GetColorValue() / 255.0f, m_s->GetColorValue() / 255.0f, m_l->GetColorValue() / 255.0f, r, g, b);
+	hsl2rgb(m_h, m_s, m_l, r, g, b);
 	m_color_bg->SetBackgroundColour(wxColour(r * 255 + 0.5f, g * 255 + 0.5f, b * 255 + 0.5f));
 	m_color_bg->Refresh(true);
 
 	if (m_lsn) {
-		m_lsn->OnColorChanged(GetColor());
+		m_lsn->OnColorChanged(s2::Color((int)(r * 255 + 0.5f), (int)(g * 255 + 0.5f), (int)(b * 255 + 0.5f)));
 	}
 }
 
@@ -63,14 +69,14 @@ void HSLColorSettingDlg::InitLayout()
 		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, "setting");
 		wxBoxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 
-		m_h = new ColorSlider(this, this, "色相", false);
-		sizer->Add(m_h);
+		m_h_ctrl = new ColorSlider(this, this, "色相", false);
+		sizer->Add(m_h_ctrl);
 		sizer->AddSpacer(10);
-		m_s = new ColorSlider(this, this, "饱和度", false);
-		sizer->Add(m_s);
+		m_s_ctrl = new ColorSlider(this, this, "饱和度", false);
+		sizer->Add(m_s_ctrl);
 		sizer->AddSpacer(10);
-		m_l = new ColorSlider(this, this, "亮度", false);
-		sizer->Add(m_l);
+		m_l_ctrl = new ColorSlider(this, this, "亮度", false);
+		sizer->Add(m_l_ctrl);
 
 		top_sizer->Add(sizer);
 	}
@@ -85,18 +91,17 @@ void HSLColorSettingDlg::InitLayout()
 
 void HSLColorSettingDlg::SetColor(const s2::Color& col)
 {
-	float h, s, l;
-	rgb2hsl(col.r / 255.0f, col.g / 255.0f, col.b / 255.0f, h, s, l);
+	rgb2hsl(col.r / 255.0f, col.g / 255.0f, col.b / 255.0f, m_h, m_s, m_l);
 
-	int ih = (int)(h * 255 + 0.5f),
-		is = (int)(s * 255 + 0.5f),
-		il = (int)(l * 255 + 0.5f);
-	m_h->SetColorValue(ih);
-	m_s->SetColorValue(is);
-	m_l->SetColorValue(il);
-	m_h->SetColorRegion(s2::Color(0, is, il), s2::Color(255, is, il));
-	m_s->SetColorRegion(s2::Color(ih, 0, il), s2::Color(ih, 255, il));
-	m_l->SetColorRegion(s2::Color(ih, is, 0), s2::Color(ih, is, 255));
+	int ih = (int)(m_h * 255 + 0.5f),
+		is = (int)(m_s * 255 + 0.5f),
+		il = (int)(m_l * 255 + 0.5f);
+	m_h_ctrl->SetColorValue(ih);
+	m_s_ctrl->SetColorValue(is);
+	m_l_ctrl->SetColorValue(il);
+	m_h_ctrl->SetColorRegion(s2::Color(0, is, il), s2::Color(255, is, il));
+	m_s_ctrl->SetColorRegion(s2::Color(ih, 0, il), s2::Color(ih, 255, il));
+	m_l_ctrl->SetColorRegion(s2::Color(ih, is, 0), s2::Color(ih, is, 255));
 
 	m_color_bg->SetBackgroundColour(wxColour(col.r, col.g, col.b));
 	m_color_bg->Refresh(true);
