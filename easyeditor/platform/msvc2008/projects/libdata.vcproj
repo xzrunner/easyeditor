@@ -169,14 +169,6 @@
 				Name="color"
 				>
 				<File
-					RelativePath="..\..\..\include\ee\Color.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\ee\Color.inl"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\include\ee\color_config.h"
 					>
 				</File>
