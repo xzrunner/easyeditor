@@ -29,7 +29,7 @@ void ColorSlider::SetColorValue(int col)
 	m_spin->SetValue(col);
 }
 
-void ColorSlider::SetColorRegion(const Colorf& begin, const Colorf& end)
+void ColorSlider::SetColorRegion(const s2::Color& begin, const s2::Color& end)
 {
 	m_color_bg->SetColor(begin, end);
 }

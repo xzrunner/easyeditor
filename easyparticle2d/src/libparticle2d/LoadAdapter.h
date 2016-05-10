@@ -1,9 +1,8 @@
 #ifndef _EASYPARTICLE2D_LOAD_ADAPTER_H_
 #define _EASYPARTICLE2D_LOAD_ADAPTER_H_
 
-#include <ee/Color.h>
-
 #include <SM_Vector.h>
+#include <sprite2/Color.h>
 
 #include <json/json.h>
 
@@ -25,8 +24,8 @@ public:
 
 		float scale_start, scale_end;
 
-		ee::Colorf col_mul_start, col_mul_end;
-		ee::Colorf col_add_start, col_add_end;
+		s2::Color col_mul_start, col_mul_end;
+		s2::Color col_add_start, col_add_end;
 
 		std::string filepath;
 	}; // Component

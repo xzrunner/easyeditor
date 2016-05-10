@@ -1,7 +1,5 @@
 #include "LabelToLuaString.h"
 
-#include <ee/trans_color.h>
-
 #include <easybuilder.h>
 
 namespace lua = ebuilder::lua;
@@ -26,12 +24,12 @@ void LabelToLuaString::Pack(const PackLabel* label, ebuilder::CodeGenerator& gen
 	lua::connect(gen, 3, 
 		lua::assign("font", label->font), 
 		lua::assign("font_size", label->font_size),
-		lua::assign("font_color", ee::TransColor(label->font_color, ee::PT_RGBA)));
+		lua::assign("font_color", label->font_color.ToRGBA()));
 
 	lua::connect(gen, 3, 
 		lua::assign("edge", label->edge), 
 		lua::assign("edge_size", label->edge_size),
-		lua::assign("edge_color", ee::TransColor(label->edge_color, ee::PT_RGBA)));
+		lua::assign("edge_color", label->edge_color.ToRGBA()));
 
 	lua::connect(gen, 2, 
 		lua::assign("align_hori", label->align_hori), 

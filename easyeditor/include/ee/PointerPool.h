@@ -1,6 +1,8 @@
 #ifndef _EASYEDITOR_POINTER_POOL_H_
 #define _EASYEDITOR_POINTER_POOL_H_
 
+#include <stddef.h>
+
 namespace ee
 {
 

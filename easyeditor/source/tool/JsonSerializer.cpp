@@ -51,7 +51,7 @@ void JsonSerializer::Load(const Json::Value& value, std::vector<sm::vec2>& point
 	}
 }
 
-void JsonSerializer::Store(const std::vector<Colorf>& colors, Json::Value& value)
+void JsonSerializer::Store(const std::vector<s2::Color>& colors, Json::Value& value)
 {
 	for (int i = 0, n = colors.size(); i < n; ++i)
 	{
@@ -62,7 +62,7 @@ void JsonSerializer::Store(const std::vector<Colorf>& colors, Json::Value& value
 	}
 }
 
-void JsonSerializer::Load(const Json::Value& value, std::vector<Colorf>& colors)
+void JsonSerializer::Load(const Json::Value& value, std::vector<s2::Color>& colors)
 {
 	colors.reserve(value["r"].size());
 
@@ -75,11 +75,11 @@ void JsonSerializer::Load(const Json::Value& value, std::vector<Colorf>& colors)
 
 	++i;
 	while (!rval.isNull() && !gval.isNull() && !bval.isNull() && !aval.isNull()) {
-		Colorf col;
-		col.r = static_cast<float>(rval.asDouble());
-		col.g = static_cast<float>(gval.asDouble());
-		col.b = static_cast<float>(bval.asDouble());
-		col.a = static_cast<float>(aval.asDouble());
+		s2::Color col;
+		col.r = static_cast<int>(rval.asDouble() * 255);
+		col.g = static_cast<int>(gval.asDouble() * 255);
+		col.b = static_cast<int>(bval.asDouble() * 255);
+		col.a = static_cast<int>(aval.asDouble() * 255);
 		colors.push_back(col);
 
 		rval = value["r"][i];
@@ -107,7 +107,7 @@ void JsonSerializer::Load(const Json::Value& value, Rect& r)
 	r.ymax = static_cast<float>(value["ymax"].asDouble());
 }
 
-void JsonSerializer::Store(const Colorf& col, Json::Value& value)
+void JsonSerializer::Store(const s2::Color& col, Json::Value& value)
 {
 	value["r"] = col.r;
 	value["g"] = col.g;
@@ -115,12 +115,12 @@ void JsonSerializer::Store(const Colorf& col, Json::Value& value)
 	value["a"] = col.a;
 }
 
-void JsonSerializer::Load(const Json::Value& value, Colorf& col)
+void JsonSerializer::Load(const Json::Value& value, s2::Color& col)
 {
-	col.r = static_cast<float>(value["r"].asDouble());
-	col.g = static_cast<float>(value["g"].asDouble());
-	col.b = static_cast<float>(value["b"].asDouble());
-	col.a = static_cast<float>(value["a"].asDouble());
+	col.r = static_cast<int>(value["r"].asDouble() * 255);
+	col.g = static_cast<int>(value["g"].asDouble() * 255);
+	col.b = static_cast<int>(value["b"].asDouble() * 255);
+	col.a = static_cast<int>(value["a"].asDouble() * 255);
 }
 
 }

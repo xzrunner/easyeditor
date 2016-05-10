@@ -1,9 +1,8 @@
 #ifndef _EASYEDITOR_JSON_SERIALIZER_H_
 #define _EASYEDITOR_JSON_SERIALIZER_H_
 
-#include "Color.h"
-
 #include <SM_Vector.h>
+#include <sprite2/Color.h>
 
 #include <json/value.h>
 
@@ -20,14 +19,14 @@ public:
 	static void Store(const std::vector<sm::vec2>& points, Json::Value& value);
 	static void Load(const Json::Value& value, std::vector<sm::vec2>& points);
 
-	static void Store(const std::vector<Colorf>& colors, Json::Value& value);
-	static void Load(const Json::Value& value, std::vector<Colorf>& colors);
+	static void Store(const std::vector<s2::Color>& colors, Json::Value& value);
+	static void Load(const Json::Value& value, std::vector<s2::Color>& colors);
 
 	static void Store(const Rect& r, Json::Value& value);
 	static void Load(const Json::Value& value, Rect& r);
 
-	static void Store(const Colorf& col, Json::Value& value);
-	static void Load(const Json::Value& value, Colorf& col);
+	static void Store(const s2::Color& col, Json::Value& value);
+	static void Load(const Json::Value& value, s2::Color& col);
 
 }; // JsonSerializer
 

@@ -1,9 +1,8 @@
 #ifndef _EASYEDITOR_MULTI_SPRITES_PROPERTY_IMPL_H_
 #define _EASYEDITOR_MULTI_SPRITES_PROPERTY_IMPL_H_
 
-#include "Color.h"
-
 #include <SM_Vector.h>
+#include <sprite2/Color.h>
 
 #include <wx/chartype.h>
 
@@ -29,11 +28,11 @@ public:
 	std::string GetTag() const;
 	const wxChar* GetClip() const;
 	sm::vec2 GetPosition() const;
-	Colorf GetMultiColor() const;
-	Colorf GetAddColor() const;
-	Colorf GetTransColorR() const;
-	Colorf GetTransColorG() const;
-	Colorf GetTransColorB() const;
+	s2::Color GetMultiColor() const;
+	s2::Color GetAddColor() const;
+	s2::Color GetTransColorR() const;
+	s2::Color GetTransColorG() const;
+	s2::Color GetTransColorB() const;
 	float GetAngle() const;
 	sm::vec2 GetScale() const;
 	bool GetMirrorX() const;
@@ -44,9 +43,9 @@ public:
 	void SetTag(const std::string& tag);
 	void SetClip(int clip);
 	void SetPos(float x, float y);
-	void SetColorMul(const Colorf& col);
-	void SetColorAdd(const Colorf& col);
-	void SetColorAlpha(float alpha);
+	void SetColorMul(const s2::Color& col);
+	void SetColorAdd(const s2::Color& col);
+	void SetColorAlpha(int alpha);
 	void SetAngle(bool overall, float angle);
 	void SetScale(bool overall, float sx, float sy);
 	void SetMirrorX(bool overall, bool mirror);

@@ -89,9 +89,9 @@ bool EditNodesOP::OnDraw() const
 	const float radius = ee::SettingData::ctl_pos_sz == 0 ? 3 : ee::SettingData::ctl_pos_sz;
 	for (size_t i = 0, n = m_buffer.size(); i < n; ++i)
 	{
-		ee::RVG::Color(ee::Colorf(0.8f, 0.2f, 0.2f));
+		ee::RVG::Color(s2::Color(204, 51, 51));
 		ee::RVG::Polyline(m_buffer[i].dst, false);
-		ee::RVG::Color(ee::Colorf(0.2f, 0.2f, 0.8f));
+		ee::RVG::Color(s2::Color(51, 51, 204));
 		ee::RVG::Circles(m_buffer[i].dst, radius, true);
 	}
 

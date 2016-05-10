@@ -62,7 +62,7 @@ render_func(void* symbol, float* mat, float x, float y, float angle, float scale
 
 	ee::RenderParams trans;
 	trans.mt = mt;
-	memcpy(&trans.color.multi, mul_col, sizeof(*mul_col));
+	memcpy(&trans.color.mul, mul_col, sizeof(*mul_col));
 	memcpy(&trans.color.add, add_col, sizeof(*add_col));
 
 	ee::SpriteRenderer::Draw(sym, trans, sm::vec2(x, y), angle, scale, scale, 0, 0);

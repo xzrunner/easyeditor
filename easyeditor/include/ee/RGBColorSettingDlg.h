@@ -15,20 +15,20 @@ class ColorSlider;
 class RGBColorSettingDlg : public wxDialog, public ColorMonitor
 {
 public:
-	RGBColorSettingDlg(wxWindow* parent, ColorMonitor* lsn, const Colorf& col,
+	RGBColorSettingDlg(wxWindow* parent, ColorMonitor* lsn, const s2::Color& col,
 		const wxPoint& pos = wxDefaultPosition);
 
 	//
 	// interface ColorMonitor
 	//
-	virtual Colorf GetColor() const;
+	virtual s2::Color GetColor() const;
 	virtual void OnColorChanged();
-	virtual void OnColorChanged(const Colorf& col);
+	virtual void OnColorChanged(const s2::Color& col);
 
 private:
 	void InitLayout();
 
-	void SetColor(const Colorf& col);
+	void SetColor(const s2::Color& col);
 
 private:
 	ColorMonitor* m_lsn;

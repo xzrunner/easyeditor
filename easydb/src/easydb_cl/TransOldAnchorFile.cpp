@@ -100,7 +100,7 @@ void TransOldAnchorFile::TransAnimation(const std::string& filepath) const
 bool TransOldAnchorFile::IsAnchor(const ee::Sprite* spr) const
 {	
 	if (const ee::FontBlankSprite* font = dynamic_cast<const ee::FontBlankSprite*>(spr)) {
-		return font->font.empty() && font->font_color == ee::Colorf(0, 0, 0, 0);
+		return font->font.empty() && font->font_color == s2::Color(0, 0, 0, 0);
 	} else if (const ecomplex::Sprite* complex = dynamic_cast<const ecomplex::Sprite*>(spr)) {
 		if (complex->GetSymbol().m_sprites.size() == 1) {
 			return IsAnchor(complex->GetSymbol().m_sprites[0]);

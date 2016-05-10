@@ -2,7 +2,8 @@
 #define _EASYEDITOR_SET_SPRITE_COLOR_AOP_H_
 
 #include "AtomicOP.h"
-#include "Color.h"
+
+#include <sprite2/Color.h>
 
 namespace ee
 {
@@ -13,8 +14,8 @@ class Sprite;
 	class SetSprite##name##ColorAOP : public AtomicOP \
 	{ \
 	public: \
-		SetSprite##name##ColorAOP(Sprite* sprite, const Colorf& color); \
-		SetSprite##name##ColorAOP(const std::vector<Sprite*>& sprites, const Colorf& color); \
+		SetSprite##name##ColorAOP(Sprite* sprite, const s2::Color& color); \
+		SetSprite##name##ColorAOP(const std::vector<Sprite*>& sprites, const s2::Color& color); \
 		virtual ~SetSprite##name##ColorAOP(); \
 	\
 		virtual void Undo(); \
@@ -24,9 +25,9 @@ class Sprite;
 	\
 	private: \
 		std::vector<Sprite*> m_sprites; \
-		std::vector<Colorf> m_old_color; \
+		std::vector<s2::Color> m_old_color; \
 	\
-		Colorf m_new_color; \
+		s2::Color m_new_color; \
 	}; \
 
 SET_SPRITE_COLOR_AOP_DEC(Mul)

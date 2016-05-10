@@ -60,7 +60,7 @@ void Particle::Draw(const sm::mat4& mt) const
 
 	sm::vec2 pos = eparticle3d::TransCoords3To2(m_position);
 	ee::SpriteRenderer::Draw(m_symbol, _mt, pos, m_angle, 
-		scale, scale/*, 0, 0, multi*/);
+		scale, scale/*, 0, 0, mul*/);
 }
 
 void Particle::LoadFromFile(const Json::Value& val)

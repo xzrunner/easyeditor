@@ -2,8 +2,6 @@
 #include "pack_unpack.h"
 #include "typedef.h"
 
-#include <ee/trans_color.h>
-
 #include <spritepack.h>
 
 namespace erespacker
@@ -32,7 +30,7 @@ void ShapeToBin::Pack(const PackShape* shape, uint8_t** ptr)
 	uint8_t shape_type = shape->type;
 	pack(shape_type, ptr);
 
-	uint32_t font_color = ee::color2int(shape->color, ee::PT_RGBA);
+	uint32_t font_color = shape->color.ToRGBA();
 	pack(font_color, ptr);
 
 	if (shape->vertices.size() > USHRT_MAX) {

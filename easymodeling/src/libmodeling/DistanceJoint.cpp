@@ -34,9 +34,9 @@ void DistanceJoint::Draw(DrawType type) const
 
 	if (type == e_selected || type == e_mouseOn)
 	{
-		ee::RVG::Color(ee::Colorf(0.4f, 0.8f, 0.4f));
+		ee::RVG::Color(s2::Color(102, 204, 102));
 		ee::RVG::DashLine(anchorA, m_body_a->m_sprite->GetPosition());
-		ee::RVG::Color(ee::Colorf(0.4f, 0.4f, 0.8f));
+		ee::RVG::Color(s2::Color(102, 102, 204));
 		ee::RVG::DashLine(anchorB, m_body_b->m_sprite->GetPosition());
 
 		DrawBodyFlag();
@@ -70,17 +70,17 @@ void DistanceJoint::SetLocalAnchorB(const sm::vec2& world)
 
 void DistanceJoint::DrawAnchor(const sm::vec2& pos, DrawType type) const
 {
-	ee::Colorf color;
+	s2::Color color;
 	switch (type)
 	{
 	case e_default:
-		color.Set(0.8f, 0.8f, 0.8f);
+		color.FromFloat(0.8f, 0.8f, 0.8f);
 		break;
 	case e_mouseOn:
-		color.Set(1, 1, 1);
+		color.FromFloat(1, 1, 1);
 		break;
 	case e_selected:
-		color.Set(1, 1, 0);
+		color.FromFloat(1, 1, 0);
 		break;
 	}
 
@@ -92,17 +92,17 @@ void DistanceJoint::DrawAnchor(const sm::vec2& pos, DrawType type) const
 void DistanceJoint::DrawConnection(const sm::vec2& worldAnchorA, 
 								   const sm::vec2& worldAnchorB, DrawType type) const
 {
-	ee::Colorf color;
+	s2::Color color;
 	switch (type)
 	{
 	case e_default:
-		color.Set(0.8f, 0.8f, 0.8f);
+		color.FromFloat(0.8f, 0.8f, 0.8f);
 		break;
 	case e_mouseOn:
-		color.Set(1, 1, 1);
+		color.FromFloat(1, 1, 1);
 		break;
 	case e_selected:
-		color.Set(1, 1, 0);
+		color.FromFloat(1, 1, 0);
 		break;
 	}
 

@@ -319,14 +319,14 @@ void EditPolylineImpl::drawCaptured(const NodeAddr& captured) const
 	if (ChainShape* chain = dynamic_cast<ChainShape*>(captured.shape))
 	{
 		if (captured.pos_valid) {
-			ee::RVG::Color(ee::Colorf(1.0f, 0.4f, 0.4f));
+			ee::RVG::Color(s2::Color(255, 102, 102));
 			ee::RVG::Circle(captured.pos, m_node_capture->GetValue(), true);
 		}
 
 		sm::vec2 center;
 		center.x = chain->GetRect().CenterX();
 		center.y = chain->GetRect().CenterY();
-		ee::RVG::Color(ee::Colorf(0.4f, 1.0f, 0.4f));
+		ee::RVG::Color(s2::Color(102, 255, 102));
 		ee::RVG::Circle(center, m_node_capture->GetValue(), true);
 	}
 }

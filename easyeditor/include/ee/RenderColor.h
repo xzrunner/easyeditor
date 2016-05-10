@@ -1,24 +1,18 @@
 #ifndef _EASYEDITOR_RENDER_COLOR_H_
 #define _EASYEDITOR_RENDER_COLOR_H_
 
-#include "Color.h"
+#include <sprite2/RenderColor.h>
 
 #include <json/json.h>
 
 namespace ee
 {
 
-class RenderColor
+class RenderColor : public s2::RenderColor
 {
 public:
-	RenderColor();
-
 	void LoadFromFile(const Json::Value& val);
 	void StoreToFile(Json::Value& val) const;
-
-public:
-	Colorf multi, add;
-	Colorf r, g, b;
 
 }; // RenderColor
 

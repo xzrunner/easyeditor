@@ -2,8 +2,6 @@
 #include "LuaDataHelper.h"
 #include "typedef.h"
 
-#include <ee/trans_color.h>
-
 #include <assert.h>
 
 namespace erespacker
@@ -12,14 +10,14 @@ namespace erespacker
 void ShapeFromLua::Unpack(lua_State* L, PackShape* shape)
 {
 	shape->type = ShapeType(LuaDataHelper::GetIntField(L, "shape_type"));
-	shape->color = ee::TransColor((uint32_t)LuaDataHelper::GetDoubleField(L, "color"), ee::PT_RGBA);
+	shape->color.FromRGBA((uint32_t)LuaDataHelper::GetDoubleField(L, "color"));
 
 	int num = LuaDataHelper::GetIntField(L, "vertices_num");
 	shape->vertices.resize(num);
 	lua_getfield(L, -1, "vertices");
 	int len = lua_rawlen(L, -1);
 	assert(len == num * 2);
-	for (int i = i; i <= len; ++i) 
+	for (int i = 0; i <= len; ++i) 
 	{
 		lua_pushinteger(L, i);
 		lua_gettable(L, -2);

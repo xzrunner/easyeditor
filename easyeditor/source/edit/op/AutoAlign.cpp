@@ -6,7 +6,6 @@
 #include "MultiSpritesImpl.h"
 #include "EE_RVG.h"
 #include "FetchAllVisitor.h"
-#include "Color.h"
 
 namespace ee
 {
@@ -27,7 +26,7 @@ void AutoAlign::Align(const std::vector<Sprite*>& sprites)
 	std::vector<Sprite*> sources;
 	m_sprites_impl->TraverseSprites(FetchAllVisitor<Sprite>(sources));
 
-	// not support multi src now
+	// not support mul src now
 	if (sprites.size() > 1)
 		return;
 
@@ -202,7 +201,7 @@ void AutoAlign::Draw() const
 {
 	if (m_open)
 	{
-		RVG::Color(Colorf(0, 0, 0));
+		RVG::Color(s2::Color(0, 0, 0));
 		if (m_hor[0] != m_hor[1]) {
 			RVG::DashLine(m_hor[0], m_hor[1]);
 		}

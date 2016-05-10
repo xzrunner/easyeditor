@@ -8,8 +8,8 @@
 #include <ee/Exception.h>
 #include <ee/SymbolMgr.h>
 #include <ee/Image.h>
-#include <ee/trans_color.h>
 #include <ee/Math2D.h>
+#include <ee/trans_color.h>
 
 #include <easybuilder.h>
 #include <easycomplex.h>
@@ -1645,7 +1645,7 @@ void CocoPacker::ParserSpriteForComponent(const ee::Sprite* sprite, std::vector<
 		if (isFont)
 		{
 			const ee::FontBlankSprite* font = dynamic_cast<const ee::FontBlankSprite*>(sprite);
-			bool is_mount_node = font && font->font.empty() && font->font_color == ee::Colorf(0, 0, 0, 0);
+			bool is_mount_node = font && font->font.empty() && font->font_color == s2::Color(0, 0, 0, 0);
 			if (is_mount_node)
 			{
 				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
@@ -1655,7 +1655,7 @@ void CocoPacker::ParserSpriteForComponent(const ee::Sprite* sprite, std::vector<
 			{
 				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
 				std::string aFont = lua::assign("font", "\""+font->font+"\"");
-				std::string aColor = lua::assign("color", TransColor(font->font_color, ee::PT_ARGB));
+				std::string aColor = lua::assign("color", ee::color2str(font->font_color, ee::PT_ARGB));
 
 //				std::string aAlign = lua::assign("align", ee::StringHelper::ToString(font->align));
 				int align_hori = font->align_hori;
@@ -1677,7 +1677,7 @@ void CocoPacker::ParserSpriteForComponent(const ee::Sprite* sprite, std::vector<
 			const ecomplex::Sprite* ecomplex = dynamic_cast<const ecomplex::Sprite*>(sprite);
 			if (ecomplex && ecomplex->GetSymbol().m_sprites.size() == 1) {
 				const ee::FontBlankSprite* font = dynamic_cast<const ee::FontBlankSprite*>(ecomplex->GetSymbol().m_sprites[0]);
-				is_mount_node = font && font->font.empty() && font->font_color == ee::Colorf(0, 0, 0, 0);
+				is_mount_node = font && font->font.empty() && font->font_color == s2::Color(0, 0, 0, 0);
 			}
 			if (is_mount_node) {
 				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
@@ -1712,7 +1712,7 @@ void CocoPacker::ParserSpriteForComponent(const ee::Sprite* sprite, std::vector<
 			const ecomplex::Sprite* ecomplex = dynamic_cast<const ecomplex::Sprite*>(sprite);
 			if (ecomplex && ecomplex->GetSymbol().m_sprites.size() == 1) {
 				const ee::FontBlankSprite* font = dynamic_cast<const ee::FontBlankSprite*>(ecomplex->GetSymbol().m_sprites[0]);
-				is_mount_node = font && font->font.empty() && font->font_color == ee::Colorf(0, 0, 0, 0);
+				is_mount_node = font && font->font.empty() && font->font_color == s2::Color(0, 0, 0, 0);
 			}
 			if (is_mount_node) {
 				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
@@ -1869,7 +1869,7 @@ void CocoPacker::ParserFontForFrame(const ee::FontBlankSprite* sprite, int id)
 	float mat[6];
 	TransToMat(sprite, mat, true);
 
-	bool isNullNode = sprite->font.empty() && sprite->font_color == ee::Colorf(0, 0, 0, 0);
+	bool isNullNode = sprite->font.empty() && sprite->font_color == s2::Color(0, 0, 0, 0);
 	if (!isNullNode)
 	{
 		// move to left-top
@@ -1957,23 +1957,23 @@ void CocoPacker::TransToMat(const ee::Sprite* sprite, float mat[6], bool force /
 
 void CocoPacker::GetColorAssignParams(const ee::Sprite* spr, std::vector<std::string>& params) const
 {
-	if (spr->rp->color.multi != ee::Colorf(1,1,1,1) || spr->rp->color.add != ee::Colorf(0,0,0,0)) 
+	if (spr->rp->color.mul != s2::Color(1,1,1,1) || spr->rp->color.add != s2::Color(0,0,0,0)) 
 	{
-		std::string str_multi = lua::assign("color", ee::TransColor(spr->rp->color.multi, ee::PT_BGRA));
+		std::string str_multi = lua::assign("color", color2int(spr->rp->color.mul, ee::PT_BGRA));
 		params.push_back(str_multi);
-		std::string str_add = lua::assign("add", ee::TransColor(spr->rp->color.add, ee::PT_ABGR));
+		std::string str_add = lua::assign("add", color2int(spr->rp->color.add, ee::PT_ABGR));
 		params.push_back(str_add);
 	}
 
-	if (spr->rp->color.r != ee::Colorf(1, 0, 0, 1) || spr->rp->color.g != ee::Colorf(0, 1, 0, 1) || spr->rp->color.b != ee::Colorf(0, 0, 1, 1))
+	if (spr->rp->color.rmap != s2::Color(255, 0, 0, 255) || spr->rp->color.gmap != s2::Color(0, 255, 0, 255) || spr->rp->color.bmap != s2::Color(0, 0, 255, 255))
 	{
-		std::string str_r = lua::assign("r_map", ee::TransColor(spr->rp->color.r, ee::PT_RGBA));
+		std::string str_r = lua::assign("r_map", ee::color2str(spr->rp->color.rmap, ee::PT_RGBA));
 		params.push_back(str_r);
 
-		std::string str_g = lua::assign("g_map", ee::TransColor(spr->rp->color.g, ee::PT_RGBA));
+		std::string str_g = lua::assign("g_map", ee::color2str(spr->rp->color.gmap, ee::PT_RGBA));
 		params.push_back(str_g);
 
-		std::string str_b = lua::assign("b_map", ee::TransColor(spr->rp->color.b, ee::PT_RGBA));
+		std::string str_b = lua::assign("b_map", ee::color2str(spr->rp->color.bmap, ee::PT_RGBA));
 		params.push_back(str_b);
 	}
 }

@@ -1,7 +1,7 @@
 #ifndef _EASYPARTICLE3D_INVERT_RECORDER_H_
 #define _EASYPARTICLE3D_INVERT_RECORDER_H_
 
-#include <ee/Color.h>
+#include <sprite2/Color.h>
 
 #include <json/json.h>
 
@@ -46,7 +46,7 @@ private:
 		std::string symbol;
 		float start_scale, end_scale; 
 		float start_alpha, end_alpha;
-		ee::Colorf mul_col, add_col;
+		s2::Color mul_col, add_col;
 
 	}; // Item
 

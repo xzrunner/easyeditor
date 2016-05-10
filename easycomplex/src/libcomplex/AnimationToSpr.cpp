@@ -3,6 +3,7 @@
 #include "Symbol.h"
 #include "Sprite.h"
 
+#include <ee/BlendModes.h>
 #include <ee/trans_color.h>
 
 #include <easyanim.h>
@@ -133,12 +134,12 @@ void AnimationToSpr::TransSpriteMat(ee::Sprite* spr, const erespacker::PackAnima
 
 void AnimationToSpr::TransSpriteCol(ee::Sprite* spr, const erespacker::PackAnimation::SpriteTrans& t)
 {
-	spr->rp->color.multi = ee::TransColor(t.color, ee::PT_ARGB);
-	spr->rp->color.add = ee::TransColor(t.additive, ee::PT_ARGB);
+	spr->rp->color.mul = int2color(t.color, ee::PT_ARGB);
+	spr->rp->color.add = int2color(t.additive, ee::PT_ARGB);
 
-	spr->rp->color.r = ee::TransColor(t.rmap, ee::PT_RGBA);
-	spr->rp->color.g = ee::TransColor(t.gmap, ee::PT_RGBA);
-	spr->rp->color.b = ee::TransColor(t.bmap, ee::PT_RGBA);
+	spr->rp->color.rmap = int2color(t.rmap, ee::PT_RGBA);
+	spr->rp->color.gmap = int2color(t.gmap, ee::PT_RGBA);
+	spr->rp->color.bmap = int2color(t.bmap, ee::PT_RGBA);
 }
 
 

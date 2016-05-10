@@ -4,7 +4,8 @@
 #include "Symbol.h"
 
 #include <ee/Sprite.h>
-#include <ee/Color.h>
+
+#include <sprite2/Color.h>
 
 namespace etext
 {
@@ -43,9 +44,9 @@ public:
 	int GetFontSize() const { return m_font_size; }
 	void SetFontSize(int size) { m_font_size = size; }
 
-	const ee::Colorf& GetFontColor() const { return m_font_color; }
-	ee::Colorf& GetFontColor() { return m_font_color; }
-	void SetFontColor(const ee::Colorf& col) { m_font_color = col; }
+	const s2::Color& GetFontColor() const { return m_font_color; }
+	s2::Color& GetFontColor() { return m_font_color; }
+	void SetFontColor(const s2::Color& col) { m_font_color = col; }
 
 	bool GetEdge() const { return m_edge; }
 	void SetEdge(bool edge) { m_edge = edge; }
@@ -53,8 +54,8 @@ public:
 	float GetEdgeSize() const { return m_edge_size; }
 	void SetEdgeSize(float size) { m_edge_size = size; }
 
-	const ee::Colorf& GetEdgeColor() const { return m_edge_color; }
-	void SetEdgeColor(const ee::Colorf& col) { m_edge_color = col; }
+	const s2::Color& GetEdgeColor() const { return m_edge_color; }
+	void SetEdgeColor(const s2::Color& col) { m_edge_color = col; }
 
 	void GetAlign(int& halign, int& valign) const;
 	void SetAlign(int halign, int valign);
@@ -81,11 +82,11 @@ private:
 
 	int m_font;
 	int m_font_size;
-	ee::Colorf m_font_color;
+	s2::Color m_font_color;
 
 	bool m_edge;
 	float m_edge_size;
-	ee::Colorf m_edge_color;
+	s2::Color m_edge_color;
 
 	HoriAlignType m_align_hori;
 	VertAlignType m_align_vert;

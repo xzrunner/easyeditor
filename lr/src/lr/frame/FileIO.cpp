@@ -10,10 +10,10 @@
 #include <ee/CameraMgr.h>
 #include <ee/OrthoCamera.h>
 #include <ee/panel_msg.h>
-#include <ee/trans_color.h>
 #include <ee/FileHelper.h>
 #include <ee/Sprite.h>
 #include <ee/Shape.h>
+#include <ee/trans_color.h>
 
 #include <fstream>
 
@@ -70,11 +70,11 @@ void FileIO::Load(const char* filename, LibraryPanel* library,
 	// screen
 	if (!value["screen"]["multi_col"].isNull()) {
 		std::string str = value["screen"]["multi_col"].asString();
-		stage->GetScreenMultiColor() = ee::TransColor(str, ee::PT_RGBA);
+		stage->GetScreenMultiColor() = str2color(str, ee::PT_RGBA);
 	}
 	if (!value["screen"]["add_col"].isNull()) {
 		std::string str = value["screen"]["add_col"].asString();
-		stage->GetScreenAddColor() = ee::TransColor(str, ee::PT_RGBA);
+		stage->GetScreenAddColor() = str2color(str, ee::PT_RGBA);
 	}
 
 	// layers
@@ -122,8 +122,8 @@ void FileIO::Store(const char* filename, LibraryPanel* library,
 	value["camera"]["y"] = cam->GetPosition().y;
 
 	// screen
-	value["screen"]["multi_col"] = ee::TransColor(stage->GetScreenMultiColor(), ee::PT_RGBA);
-	value["screen"]["add_col"] = ee::TransColor(stage->GetScreenAddColor(), ee::PT_RGBA);
+	value["screen"]["multi_col"] = ee::color2str(stage->GetScreenMultiColor(), ee::PT_RGBA);
+	value["screen"]["add_col"]   = ee::color2str(stage->GetScreenAddColor(), ee::PT_RGBA);
 
 	// layers
 	std::string dir = ee::FileHelper::GetFileDir(filename) + "\\";

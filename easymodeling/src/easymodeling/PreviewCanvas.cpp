@@ -14,7 +14,7 @@ PreviewCanvas::PreviewCanvas(PreviewPanel* editPanel)
 	: ee::CameraCanvas(editPanel, editPanel->GetStageImpl())
 	, m_stage_panel(editPanel)
 {
-	SetBgColor(ee::Colorf(0, 0, 0));
+	SetBgColor(s2::Color(0, 0, 0));
 }
 
 PreviewCanvas::~PreviewCanvas()
@@ -33,15 +33,15 @@ void PreviewCanvas::OnDrawSprites() const
  
  		if (op->m_curr_pos.IsValid())
  		{
-			ee::RVG::Color(ee::Colorf(1, 1, 1));
+			ee::RVG::Color(s2::Color(255, 255, 255));
 			ee::RVG::LineWidth(1);
  			ee::RVG::Line(first, op->m_curr_pos);
 			ee::RVG::LineWidth(2);
 
-			ee::RVG::Color(ee::Colorf(0, 1, 0));
+			ee::RVG::Color(s2::Color(0, 255, 0));
  			ee::RVG::Circle(op->m_curr_pos, 2, true);
  		}
-		ee::RVG::Color(ee::Colorf(0, 1, 0));
+		ee::RVG::Color(s2::Color(0, 255, 0));
  		ee::RVG::Circle(first, 2, true);
  	}
 }

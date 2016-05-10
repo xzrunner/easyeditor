@@ -23,7 +23,7 @@ AnimRecorder::~AnimRecorder()
 }
 
 void AnimRecorder::AddItem(const std::string& filepath, float x, float y, float angle, 
-						   float scale, const ee::Colorf& mul_col, const ee::Colorf& add_col)
+						   float scale, const s2::Color& mul_col, const s2::Color& add_col)
 {
 	while (!m_curr_frame) {
 		m_curr_frame = m_frame_pool.GetPointer();
@@ -87,7 +87,7 @@ void AnimRecorder::StoreToFile(const std::string& filepath) const
 
 			spr->SetTransform(sm::vec2(item->x, item->y), item->angle);
 			spr->SetScale(sm::vec2(item->scale, item->scale));
-			spr->rp->color.multi = item->mul_col;
+			spr->rp->color.mul = item->mul_col;
 
 			frame->sprites.push_back(spr);
 		}

@@ -1,7 +1,7 @@
 #ifndef _EASYEDITOR_COLOR_SLIDER_H_
 #define _EASYEDITOR_COLOR_SLIDER_H_
 
-#include "Color.h"
+#include <sprite2/Color.h>
 
 #include <wx/wx.h>
 
@@ -21,7 +21,7 @@ public:
 	int GetColorValue() const;
 	void SetColorValue(int col);
 
-	void SetColorRegion(const Colorf& begin, const Colorf& end);
+	void SetColorRegion(const s2::Color& begin, const s2::Color& end);
 
 private:
 	void InitLayout(const std::string& title, bool is_rgb);

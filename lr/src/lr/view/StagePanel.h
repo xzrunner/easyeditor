@@ -7,7 +7,8 @@
 #include <ee/EditPanel.h>
 #include <ee/MultiSpritesImpl.h>
 #include <ee/MultiShapesImpl.h>
-#include <ee/Color.h>
+
+#include <sprite2/Color.h>
 
 namespace ee { class PropertySettingPanel; class LibraryPanel; }
 
@@ -65,8 +66,8 @@ public:
 
 	ee::LibraryPanel* GetLibrary() { return m_library; }
 
-	ee::Colorf& GetScreenMultiColor();
-	ee::Colorf& GetScreenAddColor();
+	s2::Color& GetScreenMultiColor();
+	s2::Color& GetScreenAddColor();
 
 protected:
 	virtual void OnMouseHook(wxMouseEvent& event);

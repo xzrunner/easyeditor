@@ -1,8 +1,9 @@
 #ifndef _EASYEDITOR_DRAW_SELECTED_SPRITE_VISITOR_H_
 #define _EASYEDITOR_DRAW_SELECTED_SPRITE_VISITOR_H_
 
+#include <sprite2/Color.h>
+
 #include "Visitor.h"
-#include "Color.h"
 
 namespace ee
 {
@@ -10,12 +11,12 @@ namespace ee
 class DrawSelectedSpriteVisitor : public Visitor
 {
 public:
-	DrawSelectedSpriteVisitor(const Colorf& color);
+	DrawSelectedSpriteVisitor(const s2::Color& color);
 
 	virtual void Visit(Object* object, bool& next);
 
 private:
-	Colorf m_color;
+	s2::Color m_color;
 
 }; // DrawSelectedSpriteVisitor
 

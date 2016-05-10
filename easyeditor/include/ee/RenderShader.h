@@ -1,25 +1,18 @@
 #ifndef _EASYEDITOR_RENDER_SHADER_H_
 #define _EASYEDITOR_RENDER_SHADER_H_
 
-#include "BlendModes.h"
-#include "FilterModes.h"
+#include <sprite2/RenderShader.h>
 
 #include <json/json.h>
 
 namespace ee
 {
 
-class RenderShader
+class RenderShader : public s2::RenderShader
 {
 public:
-	RenderShader();
-
 	void LoadFromFile(const Json::Value& val);
 	void StoreToFile(Json::Value& val) const;
-
-public:
-	s2::BlendMode blend;
-	s2::FilterMode filter;
 
 }; // RenderShader
 

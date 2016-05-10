@@ -236,7 +236,7 @@ void ComponentPanel::OnBindPS(wxCommandEvent& event)
 
 //void ComponentPanel::OnSetMultiCol(wxCommandEvent& event)
 //{
-//	ee::Colorf col;
+//	s2::Color col;
 //	memcpy(&col.r, &m_pc->col_mul.r, sizeof(m_pc->col_mul));
 //
 //	ee::RGBColorSettingDlg dlg(this, NULL, col);
@@ -250,7 +250,7 @@ void ComponentPanel::OnBindPS(wxCommandEvent& event)
 //
 //void ComponentPanel::OnSetAddCol(wxCommandEvent& event)
 //{
-//	ee::Colorf col;
+//	s2::Color col;
 //	memcpy(&col.r, &m_pc->col_add.r, sizeof(m_pc->col_add));
 //
 //	ee::RGBColorSettingDlg dlg(this, NULL, col);
@@ -277,10 +277,10 @@ void ComponentPanel::OnSetMultiCol(wxCommandEvent& event)
 	if (dlg.ShowModal() == wxID_OK)
 	{
 		const wxColor& col = dlg.GetColourData().GetColour();
-		m_pc->col_mul.r = col.Red() / 255.0f;
-		m_pc->col_mul.g = col.Green() / 255.0f;
-		m_pc->col_mul.b = col.Blue() / 255.0f;
-		m_pc->col_mul.a = col.Alpha() / 255.0f;
+		m_pc->col_mul.r = col.Red();
+		m_pc->col_mul.g = col.Green();
+		m_pc->col_mul.b = col.Blue();
+		m_pc->col_mul.a = col.Alpha();
 
 		SetBtnColor();
 	}
@@ -301,10 +301,10 @@ void ComponentPanel::OnSetAddCol(wxCommandEvent& event)
 	if (dlg.ShowModal() == wxID_OK)
 	{
 		const wxColor& col = dlg.GetColourData().GetColour();
-		m_pc->col_add.r = col.Red() / 255.0f;
-		m_pc->col_add.g = col.Green() / 255.0f;
-		m_pc->col_add.b = col.Blue() / 255.0f;
-		m_pc->col_add.a = col.Alpha() / 255.0f;
+		m_pc->col_add.r = col.Red();
+		m_pc->col_add.g = col.Green();
+		m_pc->col_add.b = col.Blue();
+		m_pc->col_add.a = col.Alpha();
 
 		SetBtnColor();
 	}

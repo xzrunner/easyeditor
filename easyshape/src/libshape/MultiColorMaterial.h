@@ -10,7 +10,7 @@
 //{
 //public:
 //	MultiColorMaterial(const std::vector<sm::vec2>& vertices,
-//		const ee::Colorf& color);
+//		const s2::Color& color);
 //
 //	virtual Json::Value Store(const std::string& dirpath) const;
 //
@@ -24,7 +24,7 @@
 //		const std::vector<sm::vec2>& segments);
 //
 //private:
-//	std::vector<ee::Colorf> m_colors;
+//	std::vector<s2::Color> m_colors;
 //
 //}; // MultiColorMaterial
 //

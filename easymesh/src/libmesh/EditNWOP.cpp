@@ -124,9 +124,9 @@ bool EditNWOP::OnDraw() const
 		MeshRenderer::DrawInfoXY(mesh);
 	}
 
-	ee::RVG::Color(ee::Colorf(0.2f, 0.8f, 0.4f));
+	ee::RVG::Color(s2::Color(51, 204, 51));
 	ee::RVG::Cross(m_center, CENTER_EDGE);
-	ee::RVG::Color(ee::Colorf(0.2f, 0.4f, 0.8f));
+	ee::RVG::Color(s2::Color(51, 102, 204));
 	ee::RVG::Circle(m_center, CENTER_RADIUS, true);
 
 	if (SelectNodesOP::OnDraw())

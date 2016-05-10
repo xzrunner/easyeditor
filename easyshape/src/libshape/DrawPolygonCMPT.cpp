@@ -101,28 +101,28 @@ void DrawPolygonCMPT::OnSetColor(wxCommandEvent& event)
 	case 0:
 		if (ee::Config::Instance()->GetSettings().color_setting_dlg_type == ee::CSDT_HSL)
 		{
- 			// todo trans between wxColor and ee::Colorf
- 			ee::Colorf col;
- 			col.r = m_color.Red() / 255.0f;
- 			col.g = m_color.Green() / 255.0f;
- 			col.b = m_color.Blue() / 255.0f;
+ 			// todo trans between wxColor and s2::Color
+ 			s2::Color col;
+ 			col.r = m_color.Red();
+ 			col.g = m_color.Green();
+ 			col.b = m_color.Blue();
  			ee::HSLColorSettingDlg dlg(m_stage_wnd, NULL, col);
  			if (dlg.ShowModal() == wxID_OK) {
  				col = dlg.GetColor();
- 				m_color.Set(col.r * 255, col.g * 255, col.b * 255);
+ 				m_color.Set(col.r, col.g, col.b);
  			}
 		}
 		else
 		{
-			// todo trans between wxColor and ee::Colorf
-			ee::Colorf col;
-			col.r = m_color.Red() / 255.0f;
-			col.g = m_color.Green() / 255.0f;
-			col.b = m_color.Blue() / 255.0f;
+			// todo trans between wxColor and s2::Color
+			s2::Color col;
+			col.r = m_color.Red();
+			col.g = m_color.Green();
+			col.b = m_color.Blue();
 			ee::RGBColorSettingDlg dlg(m_stage_wnd, NULL, col);
 			if (dlg.ShowModal() == wxID_OK) {
 				col = dlg.GetColor();
-				m_color.Set(col.r * 255, col.g * 255, col.b * 255);
+				m_color.Set(col.r, col.g, col.b);
 			}
 		}
 		break;
@@ -156,7 +156,7 @@ void DrawPolygonCMPT::OnTriggerFillingColor(wxCommandEvent& event)
 		switch (m_filling_type_choice->GetSelection()) 
 		{
 		case 0:
-			poly->SetMaterialColor(ee::Colorf(m_color.Red() / 255.0f, m_color.Green() / 255.0f, m_color.Blue() / 255.0f));
+			poly->SetMaterialColor(s2::Color(m_color.Red(), m_color.Green(), m_color.Blue()));
 			break;
 		case 1:
 			poly->SetMaterialTexture(static_cast<ee::ImageSymbol*>(ee::SymbolMgr::Instance()->FetchSymbol(m_filepath)));

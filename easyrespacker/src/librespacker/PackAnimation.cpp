@@ -14,7 +14,6 @@
 #include <ee/Sprite.h>
 #include <ee/FileType.h>
 #include <ee/ImageSprite.h>
-#include <ee/trans_color.h>
 #include <ee/RenderParams.h>
 
 namespace erespacker
@@ -210,12 +209,12 @@ void PackAnimation::LoadSprMat(const ee::Sprite* spr, SpriteTrans& trans, bool f
 
 void PackAnimation::LoadSprColor(const ee::Sprite* spr, SpriteTrans& trans)
 {
-	trans.color = ee::color2int(spr->rp->color.multi, ee::PT_ARGB);
-	trans.additive = ee::color2int(spr->rp->color.add, ee::PT_ARGB);
+	trans.color = spr->rp->color.mul.ToABGR();
+	trans.additive = spr->rp->color.mul.ToABGR();
 
-	trans.rmap = ee::color2int(spr->rp->color.r, ee::PT_RGBA);
-	trans.gmap = ee::color2int(spr->rp->color.g, ee::PT_RGBA);
-	trans.bmap = ee::color2int(spr->rp->color.b, ee::PT_RGBA);	
+	trans.rmap = spr->rp->color.rmap.ToRGBA();
+	trans.gmap = spr->rp->color.rmap.ToRGBA();
+	trans.bmap = spr->rp->color.rmap.ToRGBA();	
 }
 
 bool PackAnimation::IsMatrixIdentity(const int* mat)

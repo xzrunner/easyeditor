@@ -4,7 +4,6 @@
 #include <ee/EditPanelImpl.h>
 #include <ee/panel_msg.h>
 #include <ee/EE_RVG.h>
-#include <ee/Color.h>
 
 namespace eshape
 {
@@ -67,7 +66,7 @@ bool DrawCurveOP::OnDraw() const
 	if (ee::ZoomViewOP::OnDraw()) return true;
 
 	if (!m_curve.empty()) {
-		ee::RVG::Color(ee::Colorf(0, 0, 0));
+		ee::RVG::Color(s2::Color(0, 0, 0));
 		ee::RVG::LineWidth(1);
 		ee::RVG::Polyline(m_curve, false);
 	}

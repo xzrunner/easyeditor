@@ -198,10 +198,10 @@ bool EditCircleOP::OnDraw() const
 			int tolerance = m_node_capture->GetValue();
 			if (CircleShape* circle = dynamic_cast<CircleShape*>(m_captured.shape))
 			{
-				ee::RVG::Color(ee::Colorf(0.4f, 1.0f, 0.4f));
+				ee::RVG::Color(s2::Color(102, 255, 102));
 				ee::RVG::Circle(circle->center, tolerance, true);
 				if (!m_captured.pos_valid) {
-					ee::RVG::Color(ee::Colorf(1.0f, 0.4f, 0.4f));
+					ee::RVG::Color(s2::Color(255, 102, 102));
 					ee::RVG::Circle(circle->center, circle->radius, false);
 				}
 			}
@@ -210,7 +210,7 @@ bool EditCircleOP::OnDraw() const
 	else
 	{
 		if (m_first_pos_valid && m_curr_pos_valid) {
-			ee::RVG::Color(ee::Colorf(0, 0, 0));
+			ee::RVG::Color(s2::Color(0, 0, 0));
 			ee::RVG::Circle(m_first_pos, ee::Math2D::GetDistance(m_first_pos, m_curr_pos), false, 32);
 		}
 	}

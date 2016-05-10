@@ -5,7 +5,6 @@
 #include <ee/Math2D.h>
 #include <ee/Triangulation.h>
 #include <ee/ImageSymbol.h>
-#include <ee/trans_color.h>
 
 #include <shaderlab.h>
 
@@ -119,11 +118,11 @@ void OceanMesh::Draw(const ee::RenderParams& trans, bool draw_tris) const
 	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
 	shader->SetColorMap(0x000000ff, 0x0000ff00, 0x00ff0000);
 	if (m_blend_open && m_image1) {
-		shader->SetColor(ee::color2int(ee::Colorf(1, 1, 1, m_blend_base), ee::PT_ABGR), 0);
+		shader->SetColor(s2::Color(255, 255, 255, (int)(m_blend_base * 255 + 0.5f)).ToABGR(), 0);
 		for (int i = 0, n = m_grids.size(); i < n; ++i) {
 			emesh::MeshRenderer::DrawMesh(m_grids[i], trans, m_image0->GetTexID());
 		}
-		shader->SetColor(ee::color2int(ee::Colorf(1, 1, 1, 1 - m_blend_base), ee::PT_ABGR), 0);
+		shader->SetColor(s2::Color(255, 255, 255, (int)((1 - m_blend_base) * 255 + 0.5f)).ToABGR(), 0);
 		for (int i = 0, n = m_grids.size(); i < n; ++i) {
 			emesh::MeshRenderer::DrawMesh(m_grids[i], trans, m_image1->GetTexID());
 		}

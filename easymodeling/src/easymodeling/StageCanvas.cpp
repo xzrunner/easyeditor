@@ -15,7 +15,7 @@ StageCanvas::StageCanvas(StagePanel* editPanel)
 	: ee::CameraCanvas(editPanel, editPanel->GetStageImpl())
 	, m_stage_panel(editPanel)
 {
-	m_bg_color.Set(0, 0, 0, 1);
+	m_bg_color.FromFloat(0, 0, 0, 1);
 }
 
 StageCanvas::~StageCanvas()
@@ -55,7 +55,7 @@ void StageCanvas::DrawCrossLine() const
 	vertices[1].x = halfEdge;
 	vertices[2].y = -halfEdge;
 	vertices[3].y = halfEdge;
-	ee::RVG::Color(ee::Colorf(0.7f, 0.9f, 0.7f));
+	ee::RVG::Color(s2::Color(0.7f, 0.9f, 0.7f));
 	ee::RVG::LineWidth(1);
 	ee::RVG::Lines(vertices);
 	ee::RVG::LineWidth(2);
@@ -79,7 +79,7 @@ void StageCanvas::DrawLines() const
 			vertices.push_back(sm::vec2(-halfEdge, y));
 			vertices.push_back(sm::vec2(halfEdge, y));
 		}
-		ee::RVG::Color(ee::Colorf(0.7f, 0.9f, 0.7f));
+		ee::RVG::Color(s2::Color(0.7f, 0.9f, 0.7f));
 		ee::RVG::LineWidth(1);
 		ee::RVG::Lines(vertices);
 		ee::RVG::LineWidth(2);
@@ -99,7 +99,7 @@ void StageCanvas::DrawLines() const
 			vertices.push_back(sm::vec2(-halfEdge, y));
 			vertices.push_back(sm::vec2(halfEdge, y));
 		}
-		ee::RVG::Color(ee::Colorf(0.9f, 0.7f, 0.7f));
+		ee::RVG::Color(s2::Color(0.9f, 0.7f, 0.7f));
 		ee::RVG::LineWidth(1);
 		ee::RVG::Lines(vertices);
 		ee::RVG::LineWidth(2);

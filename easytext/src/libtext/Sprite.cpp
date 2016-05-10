@@ -1,8 +1,8 @@
 #include "Sprite.h"
 #include "PropertySetting.h"
 
-#include <ee/trans_color.h>
 #include <ee/SpriteFactory.h>
+#include <ee/trans_color.h>
 
 namespace etext
 {
@@ -15,11 +15,11 @@ Sprite::Sprite()
 
 	m_font = 0;
 	m_font_size = 16;
-	m_font_color.Set(1, 1, 1);
+	m_font_color.FromFloat(1, 1, 1);
 
 	m_edge = false;
 	m_edge_size = 1;
-	m_edge_color.Set(0, 0, 0);
+	m_edge_color.FromFloat(0, 0, 0);
 
 	m_align_hori = HAT_LEFT;
 	m_align_vert = VAT_TOP;
@@ -66,11 +66,11 @@ Sprite::Sprite(Symbol* symbol)
 
 	m_font = symbol->m_font;
 	m_font_size = symbol->m_font_size;
-	m_font_color = ee::TransColor(symbol->m_font_color, ee::PT_RGBA);
+	m_font_color = str2color(symbol->m_font_color, ee::PT_RGBA);
 
 	m_edge = symbol->m_edge;
 	m_edge_size = symbol->m_edge_size;
-	m_edge_color = ee::TransColor(symbol->m_edge_color, ee::PT_RGBA);
+	m_edge_color = str2color(symbol->m_edge_color, ee::PT_RGBA);
 
 	m_align_hori = symbol->m_align_hori;
 	m_align_vert = symbol->m_align_vert;
@@ -123,11 +123,11 @@ void Sprite::Load(const Json::Value& val)
 
 	m_font = text_val["font"].asInt();
 	m_font_size = text_val["font_size"].asInt();
-	m_font_color = TransColor(text_val["font_color"].asString(), ee::PT_RGBA);
+	m_font_color = str2color(text_val["font_color"].asString(), ee::PT_RGBA);
 
 	m_edge = text_val["edge"].asBool();
 	m_edge_size = text_val["edge_size"].asInt();
-	m_edge_color = TransColor(text_val["edge_color"].asString(), ee::PT_RGBA);	
+	m_edge_color = str2color(text_val["edge_color"].asString(), ee::PT_RGBA);
 
 	m_align_hori = HoriAlignType(text_val["align_hori"].asInt());
 	m_align_vert = VertAlignType(text_val["align_vert"].asInt());
@@ -152,11 +152,11 @@ void Sprite::Store(Json::Value& val) const
 
 	text_val["font"] = m_font;
 	text_val["font_size"] = m_font_size;
-	text_val["font_color"] = TransColor(m_font_color, ee::PT_RGBA);
+	text_val["font_color"] = color2str(m_font_color, ee::PT_RGBA);
 
 	text_val["edge"] = m_edge;
 	text_val["edge_size"] = m_edge_size;
-	text_val["edge_color"] = TransColor(m_edge_color, ee::PT_RGBA);
+	text_val["edge_color"] = color2str(m_edge_color, ee::PT_RGBA);
 
 	text_val["align_hori"] = m_align_hori;
 	text_val["align_vert"] = m_align_vert;

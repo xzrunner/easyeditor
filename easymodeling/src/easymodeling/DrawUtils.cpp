@@ -7,7 +7,7 @@ namespace emodeling
 
 void DrawUtils::DrawBody(Body* body, DrawType dType)
 {
-	ee::Colorf cFace, cEdge;
+	s2::Color cFace, cEdge;
 	GetBodyColor(body->m_type, dType, cFace, cEdge);
 
 	sm::mat4 mt;
@@ -18,7 +18,7 @@ void DrawUtils::DrawBody(Body* body, DrawType dType)
 void DrawUtils::DrawFixture(Fixture* fixture, 
 							DrawType dType, bool onlyFixture)
 {
-	ee::Colorf cFace, cEdge;
+	s2::Color cFace, cEdge;
 	if (onlyFixture)
 		GetFixtureColor(dType, cFace, cEdge);
 	else
@@ -30,18 +30,18 @@ void DrawUtils::DrawFixture(Fixture* fixture,
 }
 
 void DrawUtils::GetBodyColor(Body::Type type, DrawType dType,
-							 ee::Colorf& cFace, ee::Colorf& cEdge)
+							 s2::Color& cFace, s2::Color& cEdge)
 {
 	switch (type)
 	{
 	case Body::e_static:
-		cFace.Set(0.5f, 0.9f, 0.5f, 0.2f);
+		cFace.FromFloat(0.5f, 0.9f, 0.5f, 0.2f);
 		break;
 	case Body::e_kinematic:
-		cFace.Set(0.5f, 0.5f, 0.9f, 0.2f);
+		cFace.FromFloat(0.5f, 0.5f, 0.9f, 0.2f);
 		break;
 	case Body::e_dynamic:
-		cFace.Set(0.5f, 0.5f, 0.3f, 0.2f);
+		cFace.FromFloat(0.5f, 0.5f, 0.3f, 0.2f);
 		break;
 	}
 
@@ -59,7 +59,7 @@ void DrawUtils::GetBodyColor(Body::Type type, DrawType dType,
 		break;
 	case e_selected:
 		{
-			ee::Colorf c = cFace;
+			s2::Color c = cFace;
 			c.r *= rScale;
 			c.g *= gScale;
 			c.b *= bScale;
@@ -71,9 +71,9 @@ void DrawUtils::GetBodyColor(Body::Type type, DrawType dType,
 	cEdge = ColorEnlarge(cFace, 1.05f);
 }
 
-void DrawUtils::GetFixtureColor(DrawType type, ee::Colorf& cFace, ee::Colorf& cEdge)
+void DrawUtils::GetFixtureColor(DrawType type, s2::Color& cFace, s2::Color& cEdge)
 {
-	cFace.Set(0.6f, 0.35f, 0.6f, 0.5f);
+	cFace.FromFloat(0.6f, 0.35f, 0.6f, 0.5f);
 	switch (type)
 	{
 	case e_mouseOn:
@@ -87,9 +87,9 @@ void DrawUtils::GetFixtureColor(DrawType type, ee::Colorf& cFace, ee::Colorf& cE
 	cEdge = ColorEnlarge(cFace, 1.1f);
 }
 
-ee::Colorf DrawUtils::ColorEnlarge(const ee::Colorf& color, float factor)
+s2::Color DrawUtils::ColorEnlarge(const s2::Color& color, float factor)
 {
-	ee::Colorf ret = color;
+	s2::Color ret = color;
 	ret.r = std::min(color.r * factor, 1.0f);
 	ret.g = std::min(color.g * factor, 1.0f);
 	ret.b = std::min(color.b * factor, 1.0f);

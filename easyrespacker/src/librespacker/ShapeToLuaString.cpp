@@ -1,8 +1,6 @@
 #include "ShapeToLuaString.h"
 #include "typedef.h"
 
-#include <ee/trans_color.h>
-
 #include <easybuilder.h>
 
 namespace lua = ebuilder::lua;
@@ -21,7 +19,7 @@ void ShapeToLuaString::Pack(const PackShape* shape, ebuilder::CodeGenerator& gen
 	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(shape->GetSprID()));
 
 	lua::assign_with_end(gen, "shape_type", shape->type);
-	lua::assign_with_end(gen, "color", ee::TransColor(shape->color, ee::PT_RGBA));
+	lua::assign_with_end(gen, "color", shape->color.ToRGBA());
 
 	lua::assign_with_end(gen, "vertices_num", shape->vertices.size());
 

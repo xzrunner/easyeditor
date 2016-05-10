@@ -54,6 +54,17 @@ bool TweenUtility::IsTweenMatched(const ee::Sprite* s0, const ee::Sprite* s1)
 	}
 }
 
+static inline
+s2::Color color_interpolate(const s2::Color& begin, const s2::Color& end, float scale)
+{
+	s2::Color ret;
+	ret.r = begin.r + (end.r - begin.r) * scale;
+	ret.g = begin.g + (end.g - begin.g) * scale;
+	ret.b = begin.b + (end.b - begin.b) * scale;
+	ret.a = begin.a + (end.a - begin.a) * scale;
+	return ret;
+}
+
 void TweenUtility::GetTweenSprite(ee::Sprite* start, ee::Sprite* end, ee::Sprite* tween, float process)
 {
  	sm::vec2 shear;
@@ -80,8 +91,8 @@ void TweenUtility::GetTweenSprite(ee::Sprite* start, ee::Sprite* end, ee::Sprite
 	sm::vec2 pos_t = base_t -  offset;
 	tween->SetTransform(pos_t, angle);
 
-	tween->rp->color.add = col_interpolate(start->rp->color.add, end->rp->color.add, process);
-	tween->rp->color.multi = col_interpolate(start->rp->color.multi, end->rp->color.multi, process);
+	tween->rp->color.add = color_interpolate(start->rp->color.add, end->rp->color.add, process);
+	tween->rp->color.mul = color_interpolate(start->rp->color.mul, end->rp->color.mul, process);
 
 	if (escale9::Sprite* s9_s = dynamic_cast<escale9::Sprite*>(start))
 	{

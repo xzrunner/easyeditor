@@ -8,7 +8,7 @@
 namespace e3d
 {
 
-void DrawLine(const sm::vec3& p0, const sm::vec3& p1, ee::Colorf color)
+void DrawLine(const sm::vec3& p0, const sm::vec3& p1, s2::Color color)
 {
 	sm::vec3 vertices[] = {p0, p1};
 
@@ -17,7 +17,7 @@ void DrawLine(const sm::vec3& p0, const sm::vec3& p1, ee::Colorf color)
 	mgr->DrawShape(GL_LINES, &vertices[0].x, 2, color, true);
 }
 
-void DrawTriLine(const sm::vec3& p0, const sm::vec3& p1, const sm::vec3& p2, ee::Colorf color)
+void DrawTriLine(const sm::vec3& p0, const sm::vec3& p1, const sm::vec3& p2, s2::Color color)
 {
 	sm::vec3 vertices[] = {p0, p1, p2};
 
@@ -26,12 +26,12 @@ void DrawTriLine(const sm::vec3& p0, const sm::vec3& p1, const sm::vec3& p2, ee:
 	mgr->DrawShape(GL_LINE_LOOP, &vertices[0].x, 3, color, true);
 }
 
-void DrawCube(const AABB& aabb, ee::Colorf color)
+void DrawCube(const AABB& aabb, s2::Color color)
 {
 	DrawCube(aabb.Min(), aabb.Max(), color);
 }
 
-void DrawCube(const sm::mat4& mat, const AABB& aabb, ee::Colorf color)
+void DrawCube(const sm::mat4& mat, const AABB& aabb, s2::Color color)
 {
 	const sm::vec3& min = aabb.Min();
 	const sm::vec3& max = aabb.Max();
@@ -80,7 +80,7 @@ void DrawCube(const sm::mat4& mat, const AABB& aabb, ee::Colorf color)
 	mgr->DrawShape(GL_LINES, &vertices[0].x, 8, color, indices, 24);
 }
 
-void DrawCube(const sm::vec3& min, const sm::vec3& max, ee::Colorf color)
+void DrawCube(const sm::vec3& min, const sm::vec3& max, s2::Color color)
 {
 	float vertices[24];
 	int idx = 0;
@@ -255,7 +255,7 @@ void DrawCube(const sm::vec3& min, const sm::vec3& max, int texid)
 	mgr->DrawTri(vertices, texcoords, 2 * 6 * 3, texid);
 }
 
-void DrawCross(const sm::vec3& center, const sm::vec3& size, ee::Colorf color)
+void DrawCross(const sm::vec3& center, const sm::vec3& size, s2::Color color)
 {
 	float vertices[18];
 	int idx = 0;
@@ -286,7 +286,7 @@ void DrawCross(const sm::vec3& center, const sm::vec3& size, ee::Colorf color)
 	mgr->DrawShape(GL_LINES, vertices, 6, color, true);
 }
 
-void DrawGrids(const sm::vec3& min, const sm::vec3& max, const sm::vec3& size, ee::Colorf color)
+void DrawGrids(const sm::vec3& min, const sm::vec3& max, const sm::vec3& size, s2::Color color)
 {
 	std::vector<sm::vec3> lines;
 	int cx = size.x ? ceil(max.x - min.x) / size.x : 1;
@@ -319,7 +319,7 @@ void DrawGrids(const sm::vec3& min, const sm::vec3& max, const sm::vec3& size, e
 	mgr->DrawShape(GL_LINES, &lines[0].x, lines.size(), color, true);
 }
 
-void DrawPoints(const std::vector<sm::vec3>& points, ee::Colorf color)
+void DrawPoints(const std::vector<sm::vec3>& points, s2::Color color)
 {
 	ShaderMgr* mgr = ShaderMgr::Instance();
 	mgr->Shape();

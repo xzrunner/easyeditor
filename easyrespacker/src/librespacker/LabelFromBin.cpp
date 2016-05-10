@@ -1,8 +1,6 @@
 #include "LabelFromBin.h"
 #include "pack_unpack.h"
 
-#include <ee/trans_color.h>
-
 #include <spritepack.h>
 
 namespace erespacker
@@ -36,7 +34,7 @@ void LabelFromBin::Unpack(uint8_t** ptr, PackLabel* label)
 
 	uint32_t font_color;
 	unpack(font_color, ptr);
-	label->font_color = ee::TransColor(font_color, ee::PT_RGBA);
+	label->font_color.FromRGBA(font_color);
 
 	uint8_t edge;
 	unpack(edge, ptr);
@@ -48,7 +46,7 @@ void LabelFromBin::Unpack(uint8_t** ptr, PackLabel* label)
 
 	uint32_t edge_color;
 	unpack(edge_color, ptr);
-	label->edge_color = ee::TransColor(edge_color, ee::PT_RGBA);
+	label->edge_color.FromRGBA(edge_color);
 
 	uint8_t align_hori, align_vert;
 	unpack(align_hori, ptr);

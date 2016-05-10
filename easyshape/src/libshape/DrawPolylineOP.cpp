@@ -4,7 +4,6 @@
 #include <ee/EditPanelImpl.h>
 #include <ee/panel_msg.h>
 #include <ee/EE_RVG.h>
-#include <ee/Color.h>
 
 namespace eshape
 {
@@ -80,7 +79,7 @@ bool DrawPolylineOP::OnDraw() const
 
 	if (!m_polyline.empty())
 	{
-		ee::RVG::Color(ee::Colorf(0, 0, 0));
+		ee::RVG::Color(s2::Color(0, 0, 0));
 		if (m_curr_pos_valid)
 		{
 			m_polyline.push_back(m_curr_pos);

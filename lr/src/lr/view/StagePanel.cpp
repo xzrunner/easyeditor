@@ -226,13 +226,13 @@ void StagePanel::BuildGrids(int w, int h)
 	}
 }
 
-ee::Colorf& StagePanel::GetScreenMultiColor()
+s2::Color& StagePanel::GetScreenMultiColor()
 {
 	StageCanvas* canvas = static_cast<StageCanvas*>(GetCanvas());
 	return canvas->GetMultiColor();
 }
 
-ee::Colorf& StagePanel::GetScreenAddColor()
+s2::Color& StagePanel::GetScreenAddColor()
 {
 	StageCanvas* canvas = static_cast<StageCanvas*>(GetCanvas());
 	return canvas->GetAddColor();	

@@ -9,7 +9,6 @@
 #include <ee/std_functor.h>
 #include <ee/JsonSerializer.h>
 #include <ee/RenderParams.h>
-#include <ee/trans_color.h>
 
 #include <shaderlab.h>
 

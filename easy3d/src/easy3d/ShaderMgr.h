@@ -1,8 +1,6 @@
 #ifndef _EASY3D_SHADER_MGR_H_
 #define _EASY3D_SHADER_MGR_H_
 
-#include <ee/Color.h>
-
 namespace e3d
 {
 
@@ -26,10 +24,10 @@ public:
 
 	void DrawModel(const IModel* model, const sm::mat4& m);
 	void DrawShape(int type, const float* vertices, int count, 
-		const ee::Colorf& col, bool force);
+		const s2::Color& col, bool force);
 	void DrawShape(int type, const float* vertices, int count, 
-		ee::Colorf* cols, bool force = true);
-	void DrawShape(int type, const float* vertices, int vcount, const ee::Colorf& col,
+		s2::Color* cols, bool force = true);
+	void DrawShape(int type, const float* vertices, int vcount, const s2::Color& col,
 		unsigned short* indices, int icount);
 	void DrawTri(const sm::vec3 vertices[3], const sm::vec2 texcoords[3], int texid);
 	void DrawTri(const float* vertices, const float* texcoords, int count, int texid);

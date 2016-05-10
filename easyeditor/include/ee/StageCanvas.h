@@ -2,9 +2,10 @@
 #define _EASYEDITOR_STAGE_CANVAS_H_
 
 #include "Screen.h"
-#include "Color.h"
 #include "Object.h"
 #include "Observer.h"
+
+#include <sprite2/Color.h>
 
 #include <wx/glcanvas.h>
 #include <wx/timer.h>
@@ -22,7 +23,7 @@ public:
 		bool use_context_stack = true);
 	virtual ~StageCanvas();
 
-	void SetBgColor(const Colorf& color);
+	void SetBgColor(const s2::Color& color);
 
 	void SetCurrentCanvas();
 
@@ -67,7 +68,7 @@ private:
 protected:
 	EditPanelImpl* m_stage;
 
-	Colorf m_bg_color;
+	s2::Color m_bg_color;
 
 	int m_width, m_height;
 

@@ -24,7 +24,6 @@
 #include "ImageClip.h"
 #include "ImageTrim.h"
 #include "RenderParams.h"
-#include "trans_color.h"
 
 #include <shaderlab.h>
 
@@ -198,8 +197,7 @@ void Image::Draw(const RenderParams& trans, const Sprite* spr,
 	if (mgr->GetShaderType() == sl::BLEND) 
 	{
 		sl::BlendShader* shader = static_cast<sl::BlendShader*>(mgr->GetShader(sl::BLEND));
-		shader->SetColor(ee::color2int(trans.color.multi, ee::PT_ABGR),
-			ee::color2int(trans.color.add, ee::PT_ABGR));
+		shader->SetColor(trans.color.mul.ToABGR(), trans.color.add.ToABGR());
 
 		assert(spr);
 
@@ -243,11 +241,8 @@ void Image::Draw(const RenderParams& trans, const Sprite* spr,
 				shader->Draw(&vertices[0].x, &texcoords[0].x, texid);
 			} else if (mgr->GetShaderType() == sl::SPRITE2) {
 				sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
-				shader->SetColor(ee::color2int(trans.color.multi, ee::PT_ABGR),
-					ee::color2int(trans.color.add, ee::PT_ABGR));
-				shader->SetColorMap(ee::color2int(trans.color.r, ee::PT_ABGR),
-					ee::color2int(trans.color.g, ee::PT_ABGR),
-					ee::color2int(trans.color.b, ee::PT_ABGR));
+				shader->SetColor(trans.color.mul.ToABGR(), trans.color.add.ToABGR());
+				shader->SetColorMap(trans.color.rmap.ToABGR(),trans.color.gmap.ToABGR(), trans.color.bmap.ToABGR());
 				shader->Draw(&vertices[0].x, &texcoords[0].x, texid);
 			}
 		} 
@@ -275,11 +270,8 @@ void Image::Draw(const RenderParams& trans, const Sprite* spr,
 
 			mgr->SetShader(sl::SPRITE3);
 			sl::Sprite3Shader* shader = static_cast<sl::Sprite3Shader*>(mgr->GetShader(sl::SPRITE3));
-			shader->SetColor(ee::color2int(trans.color.multi, ee::PT_ABGR),
-				ee::color2int(trans.color.add, ee::PT_ABGR));
-			shader->SetColorMap(ee::color2int(trans.color.r, ee::PT_ABGR),
-				ee::color2int(trans.color.g, ee::PT_ABGR),
-				ee::color2int(trans.color.b, ee::PT_ABGR));
+			shader->SetColor(trans.color.mul.ToABGR(), trans.color.add.ToABGR());
+			shader->SetColorMap(trans.color.rmap.ToABGR(), trans.color.gmap.ToABGR(), trans.color.bmap.ToABGR());
 			shader->Draw(&_vertices[0].x, &_texcoords[0].x, texid);
 		}
 	}

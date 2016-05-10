@@ -161,7 +161,7 @@ _clear_color(float xmin, float ymin, float xmax, float ymax) {
 // 	mgr->SetShader(ShaderMgr::SHAPE);
 // 	ShapeShader* shader = static_cast<ShapeShader*>(mgr->GetShader(ShaderMgr::SHAPE));
 // 	
-// 	shader->SetColor(Colorf(0, 0, 0, 0));
+// 	shader->SetColor(s2::Color(0, 0, 0, 0));
 // 
 // 	std::vector<sm::vec2> triangles;
 // 	triangles.push_back(sm::vec2(xmin, ymin));

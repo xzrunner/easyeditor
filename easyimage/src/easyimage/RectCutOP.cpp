@@ -186,7 +186,7 @@ bool RectCutOP::OnDraw() const
 {
 	if (ee::ZoomViewOP::OnDraw()) return true;
 
-	ee::RVG::Color(ee::Colorf(1, 0, 0));
+	ee::RVG::Color(s2::Color(255, 0, 0));
 	ee::RVG::Cross(sm::vec2(0, 0), 100, 100);
 
 	if (!m_stage->GetImage()) return false;
@@ -252,7 +252,7 @@ void RectCutOP::DrawCaptureLine() const
 	{
 		sm::vec2 p0(m_captured.x, -EDGE);
 		sm::vec2 p1(m_captured.x, EDGE);
-		ee::RVG::Color(ee::Colorf(0, 0, 0));
+		ee::RVG::Color(s2::Color(0, 0, 0));
 		ee::RVG::DashLine(p0, p1);
 	}
 
@@ -261,7 +261,7 @@ void RectCutOP::DrawCaptureLine() const
 	{
 		sm::vec2 p0(-EDGE, m_captured.y);
 		sm::vec2 p1(EDGE, m_captured.y);
-		ee::RVG::Color(ee::Colorf(0, 0, 0));
+		ee::RVG::Color(s2::Color(0, 0, 0));
 		ee::RVG::DashLine(p0, p1);
 	}
 }

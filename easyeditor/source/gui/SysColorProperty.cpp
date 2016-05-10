@@ -1,6 +1,5 @@
 #include "SysColorProperty.h"
 #include "ColorMonitor.h"
-#include "Color.h"
 
 #include <wx/colordlg.h>
 
@@ -33,7 +32,7 @@ bool SysColorProperty::OnButtonClick( wxPropertyGrid* propGrid, wxString& value 
 	{
 		*m_color_data = dlg.GetColourData();
 		const wxColor& col = dlg.GetColourData().GetColour();
-		m_lsn->OnColorChanged(Colorf(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f));
+		m_lsn->OnColorChanged(s2::Color(col.Red(), col.Green(), col.Blue()));
 	}
 
 	return false;

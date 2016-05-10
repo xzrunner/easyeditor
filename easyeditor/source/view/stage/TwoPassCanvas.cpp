@@ -8,7 +8,6 @@
 #include "EE_SP.h"
 #include "ScreenCache.h"
 #include "Camera.h"
-#include "trans_color.h"
 
 #include <shaderlab.h>
 
@@ -38,15 +37,13 @@ static void
 _before_draw(void* ud) {
 	TwoPassCanvas::ScreenStyle* stype = (TwoPassCanvas::ScreenStyle*)ud;
 	RenderColor color;
-	color.multi = stype->multi_col;
+	color.mul = stype->multi_col;
 	color.add = stype->add_col;
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
-	shader->SetColor(ee::color2int(color.multi, ee::PT_ABGR),
-		ee::color2int(color.add, ee::PT_ABGR));
-	shader->SetColorMap(ee::color2int(color.r, ee::PT_ABGR),
-		ee::color2int(color.g, ee::PT_ABGR),
-		ee::color2int(color.b, ee::PT_ABGR));}
+	shader->SetColor(color.mul.ToABGR(), color.add.ToABGR());
+	shader->SetColorMap(color.rmap.ToABGR(), color.gmap.ToABGR(), color.bmap.ToABGR());
+}
 
 #ifdef OPEN_SCREEN_CACHE
 
@@ -73,7 +70,7 @@ void TwoPassCanvas::OnDrawWhole() const
 	// Draw to Screen
 	//////////////////////////////////////////////////////////////////////////
 
-	glClearColor(m_bg_color.r, m_bg_color.g, m_bg_color.b, m_bg_color.a);
+	glClearColor(m_bg_color.r / 255.0f, m_bg_color.g / 255.0f, m_bg_color.b / 255.0f, m_bg_color.a / 255.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	sc->DrawToScreen(&_before_draw, (ScreenStyle*)(&m_scr_style));
@@ -102,14 +99,14 @@ void TwoPassCanvas::OnDrawWhole() const
 		//////////////////////////////////////////////////////////////////////////
 		// Draw to Screen
 		//////////////////////////////////////////////////////////////////////////
-		glClearColor(m_bg_color.r, m_bg_color.g, m_bg_color.b, m_bg_color.a);
+		glClearColor(m_bg_color.r / 255.0f, m_bg_color.g / 255.0f, m_bg_color.b / 255.0f, m_bg_color.a / 255.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		ScreenCache::Instance()->DrawToScreen(&_before_draw, (ScreenStyle*)(&m_scr_style));
  	} 
  	//else 
  	//{
- 	//	glClearColor(m_bg_color.r, m_bg_color.g, m_bg_color.b, m_bg_color.a);
+ 	//	glClearColor(m_bg_color.r / 255.0f, m_bg_color.g / 255.0f, m_bg_color.b / 255.0f, m_bg_color.a / 255.0f);
  	//	glClear(GL_COLOR_BUFFER_BIT);
  
  	//	OnDrawSprites();

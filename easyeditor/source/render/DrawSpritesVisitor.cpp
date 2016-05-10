@@ -5,6 +5,7 @@
 #include "SettingData.h"
 #include "Config.h"
 #include "EE_GTxt.h"
+#include "FilterModes.h"
 
 namespace ee
 {

@@ -4,57 +4,48 @@
 namespace ee
 {
 
-RenderColor::RenderColor()
-	: multi(1, 1, 1, 1)
-	, add(0, 0, 0, 0)
-	, r(1, 0, 0, 0)
-	, g(0, 1, 0, 0)
-	, b(0, 0, 1, 0)
-{
-}
-
 void RenderColor::LoadFromFile(const Json::Value& val)
 {
 	std::string str = val["multi color"].asString();
 	if (str.empty()) {
-		multi = Colorf(1, 1, 1, 1);
+		mul = s2::Color(0xffffffff);
 	} else {
-		multi = TransColor(str, PT_BGRA);
+		mul = str2color(str, PT_BGRA);
 	}
 	str = val["add color"].asString();
 	if (str.empty()) {
-		add = Colorf(0, 0, 0, 0);
+		add = s2::Color(0);
 	} else {
-		add = TransColor(str, PT_ABGR);
+		add = str2color(str, PT_ABGR);
 	}
 
 	str = val["r trans"].asString();
 	if (str.empty()) {
-		r = Colorf(1, 0, 0, 1);
+		rmap = s2::Color(255, 0, 0, 0);
 	} else {
-		r = TransColor(str, PT_RGBA);
+		rmap = str2color(str, PT_RGBA);
 	}
 	str = val["g trans"].asString();
 	if (str.empty()) {
-		g = Colorf(0, 1, 0, 1);
+		gmap = s2::Color(0, 255, 0, 0);
 	} else {
-		g = TransColor(str, PT_RGBA);
+		gmap = str2color(str, PT_RGBA);
 	}
 	str = val["b trans"].asString();
 	if (str.empty()) {
-		b = Colorf(0, 0, 1, 1);
+		bmap = s2::Color(0, 0, 255, 0);
 	} else {
-		b = TransColor(str, PT_RGBA);
+		bmap = str2color(str, PT_RGBA);
 	}
 }
 
 void RenderColor::StoreToFile(Json::Value& val) const
 {
-	val["multi color"] = TransColor(multi, PT_BGRA);
-	val["add color"] = TransColor(add, PT_ABGR);
-	val["r trans"] = TransColor(r, PT_RGBA);
-	val["g trans"] = TransColor(g, PT_RGBA);
-	val["b trans"] = TransColor(b, PT_RGBA);
+	val["multi color"]	= color2str(mul, PT_BGRA);
+	val["add color"]	= color2str(add, PT_ABGR);
+	val["r trans"]		= color2str(rmap, PT_RGBA);
+	val["g trans"]		= color2str(gmap, PT_RGBA);
+	val["b trans"]		= color2str(bmap, PT_RGBA);
 }
 
 }

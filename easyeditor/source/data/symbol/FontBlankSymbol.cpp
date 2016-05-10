@@ -1,6 +1,5 @@
 #include "FontBlankSymbol.h"
 #include "FontBlankSprite.h"
-#include "trans_color.h"
 #include "FileType.h"
 #include "FileHelper.h"
 #include "Config.h"
@@ -107,7 +106,7 @@ void FontBlankSymbol::LoadResources()
 
 void FontBlankSymbol::DrawBackground(const FontBlankSprite* fb, const sm::mat4& mt) const
 {
-	RVG::Color(ee::Colorf(0.7f, 0.7f, 0.7f, 0.7f));
+	RVG::Color(s2::Color(179, 179, 179, 179));
 
 	float hw = width * 0.5f,
 		  hh = height * 0.5f;

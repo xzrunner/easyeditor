@@ -42,18 +42,18 @@ void MultiSpritesPropertySetting::OnPropertyGridChange(const std::string& name, 
 	else if (name == "Color.Multi")
 	{
 		wxColour col = wxANY_AS(value, wxColour);
-		m_impl->SetColorMul(Colorf(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f));
+		m_impl->SetColorMul(s2::Color(col.Red(), col.Green(), col.Blue()));
 	}
 	else if (name == "Color.Add")
 	{
 		wxColour col = wxANY_AS(value, wxColour);
-		m_impl->SetColorAdd(Colorf(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f));
+		m_impl->SetColorAdd(s2::Color(col.Red(), col.Green(), col.Blue()));
 	}
 	else if (name == "Color.Alpha")
 	{
 		int alpha = wxANY_AS(value, int);
 		alpha = std::max(0, std::min(255, alpha));
-		m_impl->SetColorAlpha(alpha / 255.0f);
+		m_impl->SetColorAlpha(alpha);
 	}
 	else if (name == "Color Conversion.R")
 	{
@@ -140,13 +140,13 @@ void MultiSpritesPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	pg->GetProperty(wxT("Tag"))->SetValue(m_impl->GetTag());
 	pg->GetProperty(wxT("Clip"))->SetValue(m_impl->GetClip());
 
-	Colorf mul_col = m_impl->GetMultiColor();
-	Colorf add_col = m_impl->GetAddColor();
-	wxColour wx_mul_col = wxColour(mul_col.r*255, mul_col.g*255, mul_col.b*255, mul_col.a*255);
-	wxColour wx_add_col = wxColour(add_col.r*255, add_col.g*255, add_col.b*255, add_col.a*255);
+	s2::Color mul_col = m_impl->GetMultiColor();
+	s2::Color add_col = m_impl->GetAddColor();
+	wxColour wx_mul_col = wxColour(mul_col.r, mul_col.g, mul_col.b, mul_col.a);
+	wxColour wx_add_col = wxColour(add_col.r, add_col.g, add_col.b, add_col.a);
 	pg->SetPropertyValueString(wxT("Color.Multi"), wx_mul_col.GetAsString());
 	pg->SetPropertyValueString(wxT("Color.Add"), wx_add_col.GetAsString());
-	pg->GetProperty(wxT("Color.Alpha"))->SetValue((int)(mul_col.a*255));
+	pg->GetProperty(wxT("Color.Alpha"))->SetValue(mul_col.a);
 
 	pg->GetProperty(wxT("对齐"))->SetValue(wxT("无"));
 	pg->GetProperty(wxT("居中"))->SetValue(wxT("无"));
@@ -190,10 +190,10 @@ void MultiSpritesPropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->GetProperty(wxT("Clip"))->SetValue(m_impl->GetClip());
 
 	wxPGProperty* col_prop = pg->Append(new wxStringProperty(wxT("Color"), wxPG_LABEL, wxT("<composed>")));
-	Colorf mul_col = m_impl->GetMultiColor();
-	Colorf add_col = m_impl->GetAddColor();
-	wxColour wx_mul_col = wxColour(mul_col.r*255, mul_col.g*255, mul_col.b*255, mul_col.a*255);
-	wxColour wx_add_col = wxColour(add_col.r*255, add_col.g*255, add_col.b*255, add_col.a*255);
+	s2::Color mul_col = m_impl->GetMultiColor();
+	s2::Color add_col = m_impl->GetAddColor();
+	wxColour wx_mul_col = wxColour(mul_col.r, mul_col.g, mul_col.b, mul_col.a);
+	wxColour wx_add_col = wxColour(add_col.r, add_col.g, add_col.b, add_col.a);
 	col_prop->SetExpanded(false);
 	pg->AppendIn(col_prop, new wxColourProperty(wxT("Multi"), wxPG_LABEL, wx_mul_col));
 	pg->AppendIn(col_prop, new wxColourProperty(wxT("Add"), wxPG_LABEL, wx_add_col));

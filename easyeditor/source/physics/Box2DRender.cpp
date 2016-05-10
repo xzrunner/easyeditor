@@ -102,9 +102,9 @@ void Box2DRender::TransVertices(const b2Vec2* src, int count, std::vector<sm::ve
 	}
 }
 
-Colorf Box2DRender::TransColor(const b2Color& col, float alpha) const
+s2::Color Box2DRender::TransColor(const b2Color& col, float alpha) const
 {
-	return Colorf(col.r, col.g, col.b, alpha);
+	return s2::Color((int)(col.r * 255), (int)(col.g * 255), (int)(col.b * 255), (int)(alpha * 255));
 }
 
 }

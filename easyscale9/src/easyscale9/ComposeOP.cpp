@@ -64,7 +64,7 @@ bool ComposeOP::OnDraw() const
 	}
 
 	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
-	stage->GetSpriteSelection()->Traverse(ee::DrawSelectedSpriteVisitor(ee::Colorf(1, 0, 0)));
+	stage->GetSpriteSelection()->Traverse(ee::DrawSelectedSpriteVisitor(s2::Color(255, 0, 0)));
 
 	return false;
 }

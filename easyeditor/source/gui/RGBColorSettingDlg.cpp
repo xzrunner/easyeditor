@@ -4,7 +4,7 @@
 namespace ee
 {
 
-RGBColorSettingDlg::RGBColorSettingDlg(wxWindow* parent, ColorMonitor* lsn, const Colorf& col, const wxPoint& pos)
+RGBColorSettingDlg::RGBColorSettingDlg(wxWindow* parent, ColorMonitor* lsn, const s2::Color& col, const wxPoint& pos)
 	: wxDialog(parent, wxID_ANY, "RGB Color Setting", pos, wxSize(450, 300))
 	, m_lsn(lsn)
 	, m_r(NULL)
@@ -15,23 +15,23 @@ RGBColorSettingDlg::RGBColorSettingDlg(wxWindow* parent, ColorMonitor* lsn, cons
 	SetColor(col);
 }
 
-Colorf RGBColorSettingDlg::GetColor() const
+s2::Color RGBColorSettingDlg::GetColor() const
 {
-	Colorf col;
-	col.r = m_r->GetColorValue() / 255.0f;
-	col.g = m_g->GetColorValue() / 255.0f;
-	col.b = m_b->GetColorValue() / 255.0f;
+	s2::Color col;
+	col.r = m_r->GetColorValue();
+	col.g = m_g->GetColorValue();
+	col.b = m_b->GetColorValue();
 	return col;
 }
 
 void RGBColorSettingDlg::OnColorChanged()
 {
-	float r = m_r->GetColorValue() / 255.0f;
-	float g = m_g->GetColorValue() / 255.0f;
-	float b = m_b->GetColorValue() / 255.0f;
-	m_r->SetColorRegion(Colorf(0, g, b), Colorf(1, g, b));
-	m_g->SetColorRegion(Colorf(r, 0, b), Colorf(r, 1, b));
-	m_b->SetColorRegion(Colorf(r, g, 0), Colorf(r, g, 1));
+	int r = m_r->GetColorValue();
+	int g = m_g->GetColorValue();
+	int b = m_b->GetColorValue();
+	m_r->SetColorRegion(s2::Color(0, g, b), s2::Color(1, g, b));
+	m_g->SetColorRegion(s2::Color(r, 0, b), s2::Color(r, 1, b));
+	m_b->SetColorRegion(s2::Color(r, g, 0), s2::Color(r, g, 1));
 
 	m_color_bg->SetBackgroundColour(wxColour(m_r->GetColorValue(), 
 		m_g->GetColorValue(), m_b->GetColorValue()));
@@ -42,7 +42,7 @@ void RGBColorSettingDlg::OnColorChanged()
 	}
 }
 
-void RGBColorSettingDlg::OnColorChanged(const Colorf& col)
+void RGBColorSettingDlg::OnColorChanged(const s2::Color& col)
 {
 	OnColorChanged();
 }
@@ -83,11 +83,11 @@ void RGBColorSettingDlg::InitLayout()
 	top_sizer->Fit(this);
 }
 
-void RGBColorSettingDlg::SetColor(const Colorf& col)
+void RGBColorSettingDlg::SetColor(const s2::Color& col)
 {
-	m_r->SetColorValue(col.r * 255);
-	m_g->SetColorValue(col.g * 255);
-	m_b->SetColorValue(col.b * 255);
+	m_r->SetColorValue(col.r);
+	m_g->SetColorValue(col.g);
+	m_b->SetColorValue(col.b);
 	OnColorChanged(col);
 }
 

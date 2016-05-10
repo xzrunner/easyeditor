@@ -2,7 +2,6 @@
 
 #include <ee/EE_RVG.h>
 #include <ee/Math2D.h>
-#include <ee/Color.h>
 
 namespace eshape
 {
@@ -47,7 +46,7 @@ void Material::DebugDrawTris(const sm::mat4& mt) const
 		{
 			std::vector<sm::vec2> vertices;
 			ee::Math2D::TransVertices(mt, buf, vertices);
-			ee::RVG::Color(ee::Colorf(0, 1, 0));
+			ee::RVG::Color(s2::Color(0, 255, 0));
 			ee::RVG::Polyline(vertices, true);
 			buf.clear();
 		}

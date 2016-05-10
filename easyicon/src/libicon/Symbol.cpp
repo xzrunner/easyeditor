@@ -4,7 +4,6 @@
 #include "FileIO.h"
 
 #include <ee/RenderParams.h>
-#include <ee/trans_color.h>
 
 #include <shaderlab.h>
 
@@ -39,11 +38,8 @@ void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr,
 
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
-	shader->SetColor(ee::color2int(trans.color.multi, ee::PT_ABGR),
-		ee::color2int(trans.color.add, ee::PT_ABGR));
-	shader->SetColorMap(ee::color2int(trans.color.r, ee::PT_ABGR),
-		ee::color2int(trans.color.g, ee::PT_ABGR),
-		ee::color2int(trans.color.b, ee::PT_ABGR));
+	shader->SetColor(trans.color.mul.ToABGR(), trans.color.add.ToABGR());
+	shader->SetColorMap(trans.color.rmap.ToABGR(), trans.color.gmap.ToABGR(), trans.color.bmap.ToABGR());
 
 	float process = 1;
 	if (spr) {

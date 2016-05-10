@@ -363,7 +363,7 @@ void ArrangeSpriteImpl::OnDraw(const Camera& cam) const
 				sm::vec2 ctrl_nodes[4];
 				SpriteCtrlNode::GetSpriteCtrlNodesExt(selected, ctrl_nodes);
 				for (int i = 0; i < 4; ++i) {
-					RVG::Color(Colorf(0.2f, 0.8f, 0.2f));
+					RVG::Color(s2::Color(51, 204, 51));
 					RVG::Circle(ctrl_nodes[i], m_ctrl_node_radius, true);
 				}
 			}
@@ -372,11 +372,11 @@ void ArrangeSpriteImpl::OnDraw(const Camera& cam) const
 				sm::vec2 ctrl_nodes[8];
 				SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrl_nodes);
 				for (int i = 0; i < 4; ++i) {
-					RVG::Color(Colorf(0.2f, 0.8f, 0.2f));
+					RVG::Color(s2::Color(51, 204, 51));
 					RVG::Circle(ctrl_nodes[i], m_ctrl_node_radius, false);
 				}
 				for (int i = 4; i < 8; ++i) {
-					RVG::Color(Colorf(0.2f, 0.8f, 0.2f));
+					RVG::Color(s2::Color(51, 204, 51));
 					RVG::Circle(ctrl_nodes[i], m_ctrl_node_radius, true);
 				}
 			}
@@ -384,7 +384,7 @@ void ArrangeSpriteImpl::OnDraw(const Camera& cam) const
 			if (m_cfg.is_offset_open)
 			{
 				sm::vec2 offset = GetSprOffset(selected);
-				RVG::Color(Colorf(0.8f, 0.2f, 0.2f));
+				RVG::Color(s2::Color(204, 51, 51));
 				RVG::Circle(offset, m_ctrl_node_radius, true);
 			}
 		}
@@ -617,24 +617,24 @@ void ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 		}
 		SetCanvasDirtySJ::Instance()->SetDirty();
 	} 
-	// multi color
+	// mul color
 	else if (keycode == 'm' || keycode == 'M') 
 	{
 		if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_RGB) {
-			RGBColorSettingDlg dlg(m_wnd, NULL, sprites[0]->rp->color.multi, pos);
+			RGBColorSettingDlg dlg(m_wnd, NULL, sprites[0]->rp->color.mul, pos);
 			if (dlg.ShowModal() == wxID_OK) {
-				Colorf col = dlg.GetColor();
+				s2::Color col = dlg.GetColor();
 				for (int i = 0, n = sprites.size(); i < n; ++i) {
-					sprites[i]->rp->color.multi = col;
+					sprites[i]->rp->color.mul = col;
 				}
 				SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		} else {
-			HSLColorSettingDlg dlg(m_wnd, NULL, sprites[0]->rp->color.multi, pos);
+			HSLColorSettingDlg dlg(m_wnd, NULL, sprites[0]->rp->color.mul, pos);
 			if (dlg.ShowModal() == wxID_OK) {
-				Colorf col = dlg.GetColor();
+				s2::Color col = dlg.GetColor();
 				for (int i = 0, n = sprites.size(); i < n; ++i) {
-					sprites[i]->rp->color.multi = col;
+					sprites[i]->rp->color.mul = col;
 				}
 				SetCanvasDirtySJ::Instance()->SetDirty();
 			}
@@ -646,7 +646,7 @@ void ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 		if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_RGB) {
 			RGBColorSettingDlg dlg(m_wnd, NULL, sprites[0]->rp->color.add, pos);
 			if (dlg.ShowModal() == wxID_OK) {
-				Colorf col = dlg.GetColor();
+				s2::Color col = dlg.GetColor();
 				for (int i = 0, n = sprites.size(); i < n; ++i) {
 					sprites[i]->rp->color.add = col;
 				}
@@ -655,7 +655,7 @@ void ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 		} else {
 			HSLColorSettingDlg dlg(m_wnd, NULL, sprites[0]->rp->color.add, pos);
 			if (dlg.ShowModal() == wxID_OK) {
-				Colorf col = dlg.GetColor();
+				s2::Color col = dlg.GetColor();
 				for (int i = 0, n = sprites.size(); i < n; ++i) {
 					sprites[i]->rp->color.add = col;
 				}
@@ -666,17 +666,17 @@ void ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	// alpha
 	else if (keycode == 't' || keycode == 'T') 
 	{
-		AlphaSettingDlg dlg(m_wnd, sprites[0]->rp->color.multi, pos);
-		float old_alpha = sprites[0]->rp->color.multi.a;
+		AlphaSettingDlg dlg(m_wnd, sprites[0]->rp->color.mul, pos);
+		float old_alpha = sprites[0]->rp->color.mul.a;
 		int state = dlg.ShowModal();
 		if (state == wxID_OK) {
 			float alpha = dlg.GetColor().a;
 			for (int i = 0, n = sprites.size(); i < n; ++i) {
-				sprites[i]->rp->color.multi.a = alpha;
+				sprites[i]->rp->color.mul.a = alpha;
 			}
 			SetCanvasDirtySJ::Instance()->SetDirty();
 		} else if (state == wxID_CANCEL) {
-			sprites[0]->rp->color.multi.a = old_alpha;
+			sprites[0]->rp->color.mul.a = old_alpha;
 			SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 	}

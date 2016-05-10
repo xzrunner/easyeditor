@@ -1,14 +1,10 @@
 #include "RenderShader.h"
 #include "Config.h"
+#include "BlendModes.h"
+#include "FilterModes.h"
 
 namespace ee
 {
-
-RenderShader::RenderShader()
-	: blend(s2::BM_NULL)
-	, filter(s2::FM_NULL)
-{
-}
 
 void RenderShader::LoadFromFile(const Json::Value& val)
 {

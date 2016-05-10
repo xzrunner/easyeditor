@@ -7,7 +7,6 @@
 #include <ee/SpriteRenderer.h>
 #include <ee/RenderContextStack.h>
 #include <ee/GL.h>
-#include <ee/trans_color.h>
 #include <ee/Math2D.h>
 
 #include <shaderlab.h>
@@ -98,11 +97,8 @@ void MeshRenderer::DrawMesh(const Mesh* mesh, const ee::RenderParams& params, in
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	mgr->SetShader(sl::SPRITE2);
 	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader());
-	shader->SetColor(ee::color2int(params.color.multi, ee::PT_ABGR),
-		ee::color2int(params.color.add, ee::PT_ABGR));
-	shader->SetColorMap(ee::color2int(params.color.r, ee::PT_ABGR),
-		ee::color2int(params.color.g, ee::PT_ABGR),
-		ee::color2int(params.color.b, ee::PT_ABGR));
+	shader->SetColor(params.color.mul.ToABGR(), params.color.add.ToABGR());
+	shader->SetColorMap(params.color.rmap.ToABGR(), params.color.gmap.ToABGR(), params.color.bmap.ToABGR());
 
 	int dst_edge = dtexf_c1_get_texture_size();
 	float ori_w = mesh->GetWidth(),

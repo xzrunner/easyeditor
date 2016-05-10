@@ -5,7 +5,6 @@
 #include <ee/Config.h>
 #include <ee/EE_RVG.h>
 #include <ee/EE_GTxt.h>
-#include <ee/trans_color.h>
 #include <ee/Math2D.h>
 #include <ee/RenderParams.h>
 
@@ -87,7 +86,7 @@ void Symbol::DrawBackground(const ee::Sprite* sprite, const sm::mat4& mt) const
 	}
 
 	if (const Sprite* font = dynamic_cast<const Sprite*>(sprite)) {
-		ee::RVG::Color(ee::Colorf(0.7f, 0.7f, 0.7f, 0.7f));
+		ee::RVG::Color(s2::Color(179, 179, 179, 179));
 
 		int w, h;
 		font->GetSize(w, h);
@@ -121,13 +120,13 @@ void Symbol::DrawText(const ee::Sprite* sprite, const ee::RenderParams& trans) c
 
 		style.gs.font = font->GetFont();
 		style.gs.font_size = font->GetFontSize();
-		style.gs.font_color.integer = color2int(font->GetFontColor(), ee::PT_RGBA);
+		style.gs.font_color.integer = font->GetFontColor().ToRGBA();
 
 		style.gs.edge = font->GetEdge();
 		style.gs.edge_size = font->GetEdgeSize();
-		style.gs.edge_color.integer = color2int(font->GetEdgeColor(), ee::PT_RGBA);
+		style.gs.edge_color.integer = font->GetEdgeColor().ToRGBA();
 
-		ee::GTxt::Instance()->Draw(style, trans.mt, trans.color.multi, trans.color.add, font->GetText(), font->GetTime());
+		ee::GTxt::Instance()->Draw(style, trans.mt, trans.color.mul, trans.color.add, font->GetText(), font->GetTime());
 		font->UpdateTime();
 	}
 }

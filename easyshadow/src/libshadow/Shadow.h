@@ -3,9 +3,9 @@
 
 #include <ee/Object.h>
 #include <ee/Rect.h>
-#include <ee/Color.h>
 
 #include <SM_Matrix.h>
+#include <sprite2/Color.h>
 
 #include <json/json.h>
 
@@ -29,10 +29,10 @@ public:
 
 	const ee::Rect& GetRegion() const { return m_region; }
 
-	const ee::Colorf& GetInnerColor() const { return m_inner_color; }
-	const ee::Colorf& GetOuterColor() const { return m_outer_color; }
-	void SetInnerColer(const ee::Colorf& col);
-	void SetOuterColer(const ee::Colorf& col);
+	const s2::Color& GetInnerColor() const { return m_inner_color; }
+	const s2::Color& GetOuterColor() const { return m_outer_color; }
+	void SetInnerColer(const s2::Color& col);
+	void SetOuterColer(const s2::Color& col);
 
 	void SetRadius(float r) { m_radius = r; }
 
@@ -50,10 +50,10 @@ private:
 	std::vector<sm::vec2> m_inner_loop;
 	std::vector<sm::vec2> m_outer_loop;
 
-	ee::Colorf m_inner_color, m_outer_color;
+	s2::Color m_inner_color, m_outer_color;
 
 	std::vector<sm::vec2> m_tris;	
-	std::vector<ee::Colorf> m_colors;	
+	std::vector<s2::Color> m_colors;	
 
 	ee::Rect m_region;
 

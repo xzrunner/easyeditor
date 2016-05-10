@@ -3,9 +3,8 @@
 
 #include "IPackNode.h"
 
-#include <ee/Color.h>
-
 #include <SM_Vector.h>
+#include <sprite2/Color.h>
 
 namespace erespacker
 {
@@ -26,7 +25,7 @@ class PackShape : public IPackNode
 public:
 	ShapeType type;
 
-	ee::Colorf color;
+	s2::Color color;
 
 	std::vector<sm::vec2> vertices;
 

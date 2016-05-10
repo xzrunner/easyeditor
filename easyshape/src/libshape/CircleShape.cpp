@@ -81,7 +81,7 @@ void CircleShape::Draw(const sm::mat4& mt, const ee::RenderColor& color) const
 {
 	sm::vec2 c = ee::Math2D::TransVector(center, mt);
 	float r = ee::Math2D::TransLen(radius, mt);
-	ee::RVG::Color(color.multi);
+	ee::RVG::Color(color.mul);
 	ee::RVG::Circle(c, r, false, 32);
 }
 

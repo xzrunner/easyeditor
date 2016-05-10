@@ -137,7 +137,7 @@ void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr,
 		if (m_clipbox.Width() > 0 && m_clipbox.Height() > 0) {
 			sm::vec2 min(m_clipbox.xmin, m_clipbox.ymin), 
 				max(m_clipbox.xmax, m_clipbox.ymax);
-			ee::RVG::Color(ee::Colorf(0, 0.8f, 0));
+			ee::RVG::Color(s2::Color(0, 204, 0));
 			ee::RVG::Rect(ee::Math2D::TransVector(min, trans.mt), ee::Math2D::TransVector(max, trans.mt), false);
 		}
 	}

@@ -3,7 +3,6 @@
 #include "RecentFilesMenu.h"
 #include "FileHelper.h"
 #include "Exception.h"
-#include "Color.h"
 #include "SettingData.h"
 #include "StackTrace.h"
 #include "ExceptionDlg.h"
@@ -240,7 +239,7 @@ void Frame::OnSettings(wxCommandEvent& event)
 	SettingsDialog dlg(this);
 	dlg.ShowModal();
 
-	const Colorf& col = Config::Instance()->GetSettings().bg_color;
+	const s2::Color& col = Config::Instance()->GetSettings().bg_color;
 	const_cast<EditPanel*>(m_task->GetEditPanel())->GetCanvas()->SetBgColor(col);
 }
 

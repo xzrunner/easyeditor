@@ -1,112 +1,12 @@
 #include "trans_color.h"
 
-#include <string>
-
 #include <assert.h>
 
 namespace ee
 {
 
-Colorf TransColor(const std::string& str, PixelType type) 
-{
-	std::string snum = str;
-
-	if (snum.empty())
-		return Colorf(0, 0, 0, 0);
-
-	if (snum == "0xffffffff")
-		return Colorf(1, 1, 1, 1);
-
-	if (snum[0] != '0' || (snum[1] != 'x' && snum[1] != 'X'))
-	{
-		int n = atoi(snum.c_str());
-		char buffer[33];
-		_itoa(n, buffer, 16);
-		snum = "0x" + std::string(buffer);
-	}
-
-	int len = snum.length();
-
-	Colorf ret(0, 0, 0, 1);
-	if (len == 4)
-	{
-		if (type == PT_RGBA || PT_BGRA)
-			ret.a = TransColor(snum[2], snum[3]);
-		else if (type == PT_ARGB)
-			ret.b = TransColor(snum[2], snum[3]);
-		else if (type == PT_ABGR)
-			ret.r = TransColor(snum[2], snum[3]);
-	}
-	else if (len == 10)
-	{
-		if (type == PT_RGBA) {
-			ret.r = TransColor(snum[2], snum[3]);
-			ret.g = TransColor(snum[4], snum[5]);
-			ret.b = TransColor(snum[6], snum[7]);
-			ret.a = TransColor(snum[8], snum[9]);
-		} else if (type == PT_ARGB) {
-			ret.a = TransColor(snum[2], snum[3]);
-			ret.r = TransColor(snum[4], snum[5]);
-			ret.g = TransColor(snum[6], snum[7]);
-			ret.b = TransColor(snum[8], snum[9]);
-		} else if (type == PT_ABGR) {
-			ret.a = TransColor(snum[2], snum[3]);
-			ret.b = TransColor(snum[4], snum[5]);
-			ret.g = TransColor(snum[6], snum[7]);
-			ret.r = TransColor(snum[8], snum[9]);
-		}  else if (type == PT_BGRA) {
-			ret.b = TransColor(snum[2], snum[3]);
-			ret.g = TransColor(snum[4], snum[5]);
-			ret.r = TransColor(snum[6], snum[7]);
-			ret.a = TransColor(snum[8], snum[9]);
-		}
-	}
-
-	return ret;
-}
-
-Colorf TransColor(int color, PixelType type)
-{
-	Colorf ret(0, 0, 0, 1);
-	if (type == PT_RGBA)
-	{
-		ret.r = (color >> 24 & 0xff) / 255.0f;
-		ret.g = (color >> 16 & 0xff) / 255.0f;
-		ret.b = (color >> 8 & 0xff) / 255.0f;
-		ret.a = (color & 0xff) / 255.0f;
-	}
-	else if (type == PT_ARGB)
-	{
-		ret.a = (color >> 24 & 0xff) / 255.0f;
-		ret.r = (color >> 16 & 0xff) / 255.0f;
-		ret.g = (color >> 8 & 0xff) / 255.0f;
-		ret.b = (color & 0xff) / 255.0f;
-	}
-	else if (type == PT_ABGR)
-	{
-		ret.a = (color >> 24 & 0xff) / 255.0f;
-		ret.b = (color >> 16 & 0xff) / 255.0f;
-		ret.g = (color >> 8 & 0xff) / 255.0f;
-		ret.r = (color & 0xff) / 255.0f;
-	}
-	else if (type == PT_BGRA)
-	{
-		ret.b = (color >> 24 & 0xff) / 255.0f;
-		ret.g = (color >> 16 & 0xff) / 255.0f;
-		ret.r = (color >> 8 & 0xff) / 255.0f;
-		ret.a = (color & 0xff) / 255.0f;
-	}
-	return ret;
-}
-
-float TransColor(char high, char low) 
-{
-	int col = TransHex(high) * 16 + TransHex(low);
-	assert(col >= 0 && col <= 255);
-	return col / 255.0f;
-}
-
-int TransHex(char c) 
+static inline 
+int char2hex(char c)
 {
 	if (c >= '0' && c <= '9')
 		return c - '0';
@@ -120,49 +20,75 @@ int TransHex(char c)
 	}
 }
 
-std::string TransColor(const Colorf& col, PixelType type) 
+static inline 
+int char2channel(char high, char low)
 {
-	std::string ret = "0x";
-	if (type == PT_RGBA) {
-		ret += TransColor(col.r);
-		ret += TransColor(col.g);
-		ret += TransColor(col.b);
-		ret += TransColor(col.a);
-	} else if (type == PT_ARGB) {
-		ret += TransColor(col.a);
-		ret += TransColor(col.r);
-		ret += TransColor(col.g);
-		ret += TransColor(col.b);
-	} else if (type == PT_ABGR) {
-		ret += TransColor(col.a);
-		ret += TransColor(col.b);
-		ret += TransColor(col.g);
-		ret += TransColor(col.r);
-	} else if (type == PT_BGRA) {
-		ret += TransColor(col.b);
-		ret += TransColor(col.g);
-		ret += TransColor(col.r);
-		ret += TransColor(col.a);
+	int col = char2hex(high) * 16 + char2hex(low);
+	assert(col >= 0 && col <= 255);
+	return col;
+}
+
+s2::Color str2color(const std::string& str, PixelType type)
+{
+	std::string snum = str;
+
+	if (snum.empty()) {
+		return s2::Color();
 	}
+	if (snum == "0xffffffff") {
+		return s2::Color(0xffffffff);
+	}
+
+	if (snum[0] != '0' || (snum[1] != 'x' && snum[1] != 'X'))
+	{
+		int n = atoi(snum.c_str());
+		char buffer[33];
+		_itoa(n, buffer, 16);
+		snum = "0x" + std::string(buffer);
+	}
+
+	int len = snum.length();
+
+	s2::Color ret(0, 0, 0, 1);
+	if (len == 4)
+	{
+		if (type == PT_RGBA || PT_BGRA)
+			ret.a = char2channel(snum[2], snum[3]);
+		else if (type == PT_ARGB)
+			ret.b = char2channel(snum[2], snum[3]);
+		else if (type == PT_ABGR)
+			ret.r = char2channel(snum[2], snum[3]);
+	}
+	else if (len == 10)
+	{
+		if (type == PT_RGBA) {
+			ret.r = char2channel(snum[2], snum[3]);
+			ret.g = char2channel(snum[4], snum[5]);
+			ret.b = char2channel(snum[6], snum[7]);
+			ret.a = char2channel(snum[8], snum[9]);
+		} else if (type == PT_ARGB) {
+			ret.a = char2channel(snum[2], snum[3]);
+			ret.r = char2channel(snum[4], snum[5]);
+			ret.g = char2channel(snum[6], snum[7]);
+			ret.b = char2channel(snum[8], snum[9]);
+		} else if (type == PT_ABGR) {
+			ret.a = char2channel(snum[2], snum[3]);
+			ret.b = char2channel(snum[4], snum[5]);
+			ret.g = char2channel(snum[6], snum[7]);
+			ret.r = char2channel(snum[8], snum[9]);
+		}  else if (type == PT_BGRA) {
+			ret.b = char2channel(snum[2], snum[3]);
+			ret.g = char2channel(snum[4], snum[5]);
+			ret.r = char2channel(snum[6], snum[7]);
+			ret.a = char2channel(snum[8], snum[9]);
+		}
+	}
+
 	return ret;
 }
 
-std::string TransColor(float col) 
-{
-	assert(col >= 0 && col <= 1.0f);
-
-	int c = (int)(col * 255 + 0.5f);
-	int high = c / 16;
-	int low = c % 16;
-
-	std::string ret;
-	ret += TransHex(high);
-	ret += TransHex(low);
-
-	return ret;
-}
-
-char TransHex(int v) 
+static inline
+char hex2char(int v) 
 {
 	assert(v >= 0 && v <= 15);
 	if (v >= 0 && v <= 9)
@@ -175,39 +101,100 @@ char TransHex(int v)
 	}
 }
 
-uint32_t color2int(const Colorf& col, PixelType type)
+static inline
+std::string channel2char(int col) 
 {
-	uint32_t ret = 0;
+	assert(col >= 0 && col <= 255);
+
+	int high = col / 16,
+		low  = col % 16;
+
+	std::string ret;
+	ret += hex2char(high);
+	ret += hex2char(low);
+
+	return ret;
+}
+
+std::string color2str(const s2::Color& col, PixelType type)
+{
+	std::string ret = "0x";
 	if (type == PT_RGBA) {
-		ret = (color2int(col.r)) << 24 
-			| (color2int(col.g)) << 16
-			| (color2int(col.b)) << 8
-			| (color2int(col.a));
+		ret += channel2char(col.r);
+		ret += channel2char(col.g);
+		ret += channel2char(col.b);
+		ret += channel2char(col.a);
 	} else if (type == PT_ARGB) {
-		ret = (color2int(col.a)) << 24 
-			| (color2int(col.r)) << 16
-			| (color2int(col.g)) << 8
-			| (color2int(col.b));
+		ret += channel2char(col.a);
+		ret += channel2char(col.r);
+		ret += channel2char(col.g);
+		ret += channel2char(col.b);
 	} else if (type == PT_ABGR) {
-		ret = (color2int(col.a)) << 24 
-			| (color2int(col.b)) << 16
-			| (color2int(col.g)) << 8
-			| (color2int(col.r));
+		ret += channel2char(col.a);
+		ret += channel2char(col.b);
+		ret += channel2char(col.g);
+		ret += channel2char(col.r);
 	} else if (type == PT_BGRA) {
-		ret = (color2int(col.b)) << 24 
-			| (color2int(col.g)) << 16
-			| (color2int(col.r)) << 8
-			| (color2int(col.a));
+		ret += channel2char(col.b);
+		ret += channel2char(col.g);
+		ret += channel2char(col.r);
+		ret += channel2char(col.a);
 	}
 	return ret;
 }
 
-uint32_t color2int(float col)
+s2::Color int2color(uint32_t i, PixelType type)
 {
-	assert(col >= 0 && col <= 1.0f);
+	s2::Color col;
+	switch (type)
+	{
+	case PT_RGBA:
+		col.r = (i >> 24) & 0xff;
+		col.g = (i >> 16) & 0xff;
+		col.b = (i >> 8)  & 0xff;
+		col.a = i         & 0xff;
+		break;
+	case PT_ARGB:
+		col.a = (i >> 24) & 0xff;
+		col.r = (i >> 16) & 0xff;
+		col.g = (i >> 8)  & 0xff;
+		col.b = i         & 0xff;
+		break;
+	case PT_ABGR:
+		col.a = (i >> 24) & 0xff;
+		col.b = (i >> 16) & 0xff;
+		col.g = (i >> 8)  & 0xff;
+		col.r = i         & 0xff;
+		break;
+	case PT_BGRA:
+		col.b = (i >> 24) & 0xff;
+		col.g = (i >> 16) & 0xff;
+		col.r = (i >> 8)  & 0xff;
+		col.a = i         & 0xff;
+		break;
+	}
+	return col;
+}
 
-	uint32_t c = ((uint32_t)(col * 255 + 0.5f) & 0xff);
-	return c;
+uint32_t color2int(const s2::Color& col, PixelType type)
+{
+	uint32_t i = 0;
+	switch (type)
+	{
+	case PT_RGBA:
+		i  = (col.r << 24 ) | (col.g << 16) | (col.b << 8) | col.a;
+		break;
+	case PT_ARGB:
+		i  = (col.a << 24 ) | (col.r << 16) | (col.g << 8) | col.b;
+		break;
+	case PT_ABGR:
+		i  = (col.a << 24 ) | (col.b << 16) | (col.g << 8) | col.r;
+		break;
+	case PT_BGRA:
+		i  = (col.b << 24 ) | (col.g << 16) | (col.r << 8) | col.a;
+		break;
+	}
+	return i;
 }
 
 }

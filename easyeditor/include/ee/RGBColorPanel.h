@@ -3,7 +3,6 @@
 
 #include "TweenColorPanel.h"
 #include "SimpleGLCanvas.h"
-#include "Color.h"
 
 #include <wx/wx.h>
 
@@ -19,7 +18,7 @@ public:
 	//
 	// interface TweenColorPanel
 	//
-	virtual void SetColor(const Colorf& begin, const Colorf& end);
+	virtual void SetColor(const s2::Color& begin, const s2::Color& end);
 
 private:
 	void OnSize(wxSizeEvent& event);
@@ -30,13 +29,13 @@ private:
 	public:
 		Canvas(wxWindow* parent);
 
-		void SetColor(const Colorf& begin, const Colorf& end);
+		void SetColor(const s2::Color& begin, const s2::Color& end);
 
 	protected:
 		virtual void OnDraw() const;
 
 	private:
-		Colorf m_col_begin, m_col_end;
+		s2::Color m_col_begin, m_col_end;
 
 	}; // Canvas
 

@@ -11,7 +11,7 @@ namespace ee
 
 #define SET_SPRITE_COLOR_AOP_DEF(name, var) \
 	\
-	SetSprite##name##ColorAOP::SetSprite##name##ColorAOP(Sprite* sprite, const Colorf& color) \
+	SetSprite##name##ColorAOP::SetSprite##name##ColorAOP(Sprite* sprite, const s2::Color& color) \
 		: m_new_color(color) \
 	{ \
 		sprite->Retain(); \
@@ -19,7 +19,7 @@ namespace ee
 		m_old_color.push_back(sprite->rp->color.##var##); \
 	} \
 	\
-	SetSprite##name##ColorAOP::SetSprite##name##ColorAOP(const std::vector<Sprite*>& sprites, const Colorf& color) \
+	SetSprite##name##ColorAOP::SetSprite##name##ColorAOP(const std::vector<Sprite*>& sprites, const s2::Color& color) \
 		: m_new_color(color) \
 	{ \
 		for_each(sprites.begin(), sprites.end(), RetainObjectFunctor<Sprite>()); \
@@ -56,10 +56,10 @@ namespace ee
 		return ret; \
 	} \
 
-SET_SPRITE_COLOR_AOP_DEF(Mul, multi)
+SET_SPRITE_COLOR_AOP_DEF(Mul, mul)
 SET_SPRITE_COLOR_AOP_DEF(Add, add)
-SET_SPRITE_COLOR_AOP_DEF(TransR, r)
-SET_SPRITE_COLOR_AOP_DEF(TransG, g)
-SET_SPRITE_COLOR_AOP_DEF(TransB, b)
+SET_SPRITE_COLOR_AOP_DEF(TransR, rmap)
+SET_SPRITE_COLOR_AOP_DEF(TransG, gmap)
+SET_SPRITE_COLOR_AOP_DEF(TransB, bmap)
 
 }

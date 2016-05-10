@@ -135,7 +135,7 @@ void CheckerBoard::DebugDraw() const
 			if (m_grid[i][j]) {
 				sm::vec2 pos;
 				m_stage->TransGridPosToCoords(i, j, pos);
-				ee::RVG::Color(ee::Colorf(0, 0, 0));
+				ee::RVG::Color(s2::Color(0, 0, 0));
 				ee::RVG::Circle(pos, 10, true);
 			}
 		}

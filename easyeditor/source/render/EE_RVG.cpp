@@ -1,6 +1,4 @@
 #include "EE_RVG.h"
-#include "Color.h"
-#include "trans_color.h"
 #include "CameraMgr.h"
 
 #include <rvg.h>
@@ -14,15 +12,15 @@ void RVG::Init()
 	rvg_style_init();
 }
 
-void RVG::Color(const Colorf& color)
+void RVG::Color(const s2::Color& color)
 {
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) {
 		sl::Shape2Shader* shader = static_cast<sl::Shape2Shader*>(mgr->GetShader(sl::SHAPE2));
-		shader->SetColor(color2int(color, PT_ABGR));
+		shader->SetColor(color.ToABGR());
 	} else {
 		sl::Shape3Shader* shader = static_cast<sl::Shape3Shader*>(mgr->GetShader(sl::SHAPE3));
-		shader->SetColor(color2int(color, PT_ABGR));
+		shader->SetColor(color.ToABGR());
 	}
 }
 
@@ -168,7 +166,7 @@ void RVG::Triangles(const std::vector<sm::vec2>& triangles)
 	}
 }
 
-void RVG::Triangles(const std::vector<sm::vec2>& triangles, const std::vector<Colorf>& colors)
+void RVG::Triangles(const std::vector<sm::vec2>& triangles, const std::vector<s2::Color>& colors)
 {
 	// todo
 }

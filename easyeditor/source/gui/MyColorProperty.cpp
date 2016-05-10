@@ -32,7 +32,7 @@ wxVariant MyColorProperty::ChildChanged(wxVariant& thisValue,
                                         wxVariant& childValue ) const
 {
 // 	if (m_color) {
-// //		return wxColour(m_color->r*255, m_color->g*255, m_color->b*255, m_color->a*255);
+// //		return wxColour(m_color->r, m_color->g, m_color->b, m_color->a);
 // 		return wxNullColour;
 // 	} else {
 		return wxNullColour;

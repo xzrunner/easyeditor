@@ -7,14 +7,13 @@
 namespace ee
 {
 
-Colorf hsl2rgb(float h, float s, float l)
+void hsl2rgb(float h, float s, float l, float& r, float& g, float& b)
 {
-	float r, g, b;
 	r = g = b = l;		// default to gray
 
 	float v = (l <= 0.5f) ? (l * (1.0f + s)) : (l + s - l * s);
 	if (v <= 0) {
-		return Colorf(r, g, b);
+		return;
 	}
 
 	float m = l + l - v;
@@ -58,27 +57,24 @@ Colorf hsl2rgb(float h, float s, float l)
 		b = mid2;
 		break;
 	}
-
-	return Colorf(r, g, b);
 }
 
-Colorf rgb2hsl(float r, float g, float b)
+void rgb2hsl(float r, float g, float b, float& h, float& s, float& l)
 {
-	float h, s, l;
 	h = s = l = 0;		// default to black
 
 	float v = std::max(std::max(r, g), b);
 	float m = std::min(std::min(r, g), b);
 	l = (m + v) / 2.0f;
 	if (l <= 0.0) {
-		return Colorf(h, s, l);
+		return;
 	}
 	float vm = v - m;
 	s = vm;
 	if (s > 0.0f) {
 		s /= (l <= 0.5f) ? (v + m ) : (2.0f - v - m) ;
 	} else {
-		return Colorf(h, s, l);
+		return;
 	}
 	float r2 = (v - r) / vm;
 	float g2 = (v - g) / vm;
@@ -92,7 +88,7 @@ Colorf rgb2hsl(float r, float g, float b)
 	}
 	h /= 6.0;
 
-	return Colorf(h, s, l);
+	return;
 }
 
 }

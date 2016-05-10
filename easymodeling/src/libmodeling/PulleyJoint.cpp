@@ -45,14 +45,14 @@ void PulleyJoint::Draw(DrawType type) const
 
 	if (type == e_selected || type == e_mouseOn)
 	{
-		ee::RVG::Color(ee::Colorf(1, 0, 0));
+		ee::RVG::Color(s2::Color(255, 0, 0));
 		ee::RVG::DashLine(anchorA, anchorB);
-		ee::RVG::Color(ee::Colorf(0.4f, 0.8f, 0.4f));
+		ee::RVG::Color(s2::Color(102, 204, 102));
 		ee::RVG::DashLine(anchorA, m_body_a->m_sprite->GetPosition());
-		ee::RVG::Color(ee::Colorf(0.4f, 0.4f, 0.8f));
+		ee::RVG::Color(s2::Color(102, 102, 204));
 		ee::RVG::DashLine(anchorB, m_body_b->m_sprite->GetPosition());
 
-		ee::RVG::Color(ee::Colorf(0.8f, 0.8f, 0.4f));
+		ee::RVG::Color(s2::Color(204, 204, 102));
 		ee::RVG::Line(anchorA, m_ground_anchor_a);
 		ee::RVG::Line(anchorB, m_ground_anchor_b);
 		ee::RVG::Line(m_ground_anchor_a, m_ground_anchor_b);
@@ -89,17 +89,17 @@ void PulleyJoint::SetLocalAnchorB(const sm::vec2& world)
 
 void PulleyJoint::DrawAnchor(const sm::vec2& pos, DrawType type) const
 {
-	ee::Colorf color;
+	s2::Color color;
 	switch (type)
 	{
 	case e_default:
-		color.Set(0.8f, 0.8f, 0.8f);
+		color.FromFloat(0.8f, 0.8f, 0.8f);
 		break;
 	case e_mouseOn:
-		color.Set(1, 1, 1);
+		color.FromFloat(1, 1, 1);
 		break;
 	case e_selected:
-		color.Set(1, 1, 0);
+		color.FromFloat(1, 1, 0);
 		break;
 	}
 

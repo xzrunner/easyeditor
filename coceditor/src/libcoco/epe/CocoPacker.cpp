@@ -5,9 +5,9 @@
 
 #include <ee/ImageSprite.h>
 #include <ee/FontBlankSprite.h>
-#include <ee/trans_color.h>
 #include <ee/Exception.h>
 #include <ee/Math2D.h>
+#include <ee/trans_color.h>
 
 #include <easycomplex.h>
 #include <easyanim.h>
@@ -328,7 +328,7 @@ void CocoPacker::resolveFont(const ee::FontBlankSprite* sprite)
 	}
 
 	std::string aFont = lua::assign("font", "\""+sprite->font+"\"");
-	std::string aColor = lua::assign("color", TransColor(sprite->font_color, ee::PT_ARGB));
+	std::string aColor = lua::assign("color", ee::color2str(sprite->font_color, ee::PT_ARGB));
 //	std::string aAlign = lua::assign("align", ee::StringHelper::ToString(sprite->align));
 	std::string aAlign = lua::assign("align", ee::StringHelper::ToString(sprite->align_hori));
 	std::string aSize = lua::assign("size", ee::StringHelper::ToString(sprite->size));
@@ -706,10 +706,10 @@ void CocoPacker::resolveSpriteForFrame(const ee::Sprite* spr, int id, bool force
 		m[3], m[4], m[5]);
 	std::string assignMat = lua::assign("mat", smat);
 
-	if (spr->rp->color.multi != ee::Colorf(1,1,1,1) || spr->rp->color.add != ee::Colorf(0,0,0,0))
+	if (spr->rp->color.mul != s2::Color(255, 255, 255, 255) || spr->rp->color.add != s2::Color(0,0,0,0))
 	{
-		std::string assignColor = lua::assign("color", ee::TransColor(spr->rp->color.multi, ee::PT_BGRA));
-		std::string assignAdd = lua::assign("add", ee::TransColor(spr->rp->color.add, ee::PT_ABGR));
+		std::string assignColor = lua::assign("color", ee::color2str(spr->rp->color.mul, ee::PT_BGRA));
+		std::string assignAdd = lua::assign("add", ee::color2str(spr->rp->color.add, ee::PT_ABGR));
 		lua::tableassign(m_gen, "", 4, assignIndex, assignColor, assignAdd, assignMat);
 	}
 	else
@@ -730,10 +730,10 @@ void CocoPacker::resolveSpriteForFrameImage(const ee::Sprite* spr, int id)
 		m[3], m[4], m[5]);
 	std::string assignMat = lua::assign("mat", smat);
 
-	if (spr->rp->color.multi != ee::Colorf(1,1,1,1) || spr->rp->color.add != ee::Colorf(0,0,0,0))
+	if (spr->rp->color.mul != s2::Color(1,1,1,1) || spr->rp->color.add != s2::Color(0,0,0,0))
 	{
-		std::string assignColor = lua::assign("color", ee::TransColor(spr->rp->color.multi, ee::PT_BGRA));
-		std::string assignAdd = lua::assign("add", ee::TransColor(spr->rp->color.add, ee::PT_ABGR));
+		std::string assignColor = lua::assign("color", ee::color2str(spr->rp->color.mul, ee::PT_BGRA));
+		std::string assignAdd = lua::assign("add", ee::color2str(spr->rp->color.add, ee::PT_ABGR));
 		if (spr->clip)
 			lua::tableassign(m_gen, "", 5, assignIndex, assignColor, assignAdd, assignMat, "clip=true");
 		else
@@ -755,7 +755,7 @@ void CocoPacker::resolveSpriteForFrameFont(const ee::FontBlankSprite* sprite, in
 	float mat[6];
 	transToMat(sprite, mat, true);
 
-	bool isNullNode = sprite->font.empty() && sprite->font_color == ee::Colorf(0, 0, 0, 0);
+	bool isNullNode = sprite->font.empty() && sprite->font_color == s2::Color(0, 0, 0, 0);
 	if (!isNullNode)
 	{
 		// flip y

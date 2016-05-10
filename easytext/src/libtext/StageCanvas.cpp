@@ -59,7 +59,7 @@ void StageCanvas::OnDrawSprites() const
 
 void StageCanvas::DrawSprBound() const
 {
-	ee::RVG::Color(ee::Colorf(0.8f, 0.4f, 0.4f));
+	ee::RVG::Color(s2::Color(204, 102, 102));
 
 	const Sprite* font = static_cast<const Sprite*>(m_edited);
 	int w, h;

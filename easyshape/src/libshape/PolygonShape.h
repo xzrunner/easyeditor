@@ -42,7 +42,7 @@ public:
 	//
 	virtual void refresh();
 
-	void SetMaterialColor(const ee::Colorf& color);
+	void SetMaterialColor(const s2::Color& color);
 	void SetMaterialTexture(ee::ImageSymbol* image);
 
 	Json::Value StoreMaterial(const std::string& dirpath) const;

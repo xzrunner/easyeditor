@@ -3,7 +3,6 @@
 #include "Sprite.h"
 #include "Symbol.h"
 #include "Math2D.h"
-#include "Color.h"
 #include "BoundingBox.h"
 #include "EE_RVG.h"
 #include "color_config.h"
@@ -128,20 +127,11 @@ void SpriteRenderer::DrawImpl(const Sprite* spr,
 
 	RenderColor col_new;
 
-	col_new.multi = col_mul(spr->rp->color.multi, trans.color.multi);
-	col_new.add = col_add(spr->rp->color.add, trans.color.add);
-
-	col_new.r.r = spr->rp->color.r.r * trans.color.r.r + spr->rp->color.r.g * trans.color.g.r + spr->rp->color.r.b * trans.color.b.r;
-	col_new.r.g = spr->rp->color.r.r * trans.color.r.g + spr->rp->color.r.g * trans.color.g.g + spr->rp->color.r.b * trans.color.b.g;
-	col_new.r.b = spr->rp->color.r.r * trans.color.r.b + spr->rp->color.r.g * trans.color.g.b + spr->rp->color.r.b * trans.color.b.b;
-
-	col_new.g.r = spr->rp->color.g.r * trans.color.r.r + spr->rp->color.g.g * trans.color.g.r + spr->rp->color.g.b * trans.color.b.r;
-	col_new.g.g = spr->rp->color.g.r * trans.color.r.g + spr->rp->color.g.g * trans.color.g.g + spr->rp->color.g.b * trans.color.b.g;
-	col_new.g.b = spr->rp->color.g.r * trans.color.r.b + spr->rp->color.g.g * trans.color.g.b + spr->rp->color.g.b * trans.color.b.b;
-
-	col_new.b.r = spr->rp->color.b.r * trans.color.r.r + spr->rp->color.b.g * trans.color.g.r + spr->rp->color.b.b * trans.color.b.r;
-	col_new.b.g = spr->rp->color.b.r * trans.color.r.g + spr->rp->color.b.g * trans.color.g.g + spr->rp->color.b.b * trans.color.b.g;
-	col_new.b.b = spr->rp->color.b.r * trans.color.r.b + spr->rp->color.b.g * trans.color.g.b + spr->rp->color.b.b * trans.color.b.b;
+	col_new.mul	 = spr->rp->color.mul * trans.color.mul;
+	col_new.add	 = spr->rp->color.add + trans.color.add;
+	col_new.rmap = spr->rp->color.rmap.MapMul(trans.color.rmap, trans.color.gmap, trans.color.bmap);
+	col_new.gmap = spr->rp->color.gmap.MapMul(trans.color.rmap, trans.color.gmap, trans.color.bmap);
+	col_new.bmap = spr->rp->color.bmap.MapMul(trans.color.rmap, trans.color.gmap, trans.color.bmap);
 
 	RenderParams _trans = trans;
 	_trans.mt = t;

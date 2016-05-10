@@ -23,7 +23,7 @@ StageCanvas2D::StageCanvas2D(StagePanel2D* stage)
 	, m_stage(stage)
 	, m_start_time(0)
 {
-	m_bg_color.Set(1, 1, 1, 1);
+	m_bg_color.FromFloat(1, 1, 1, 1);
 	m_timer.Start(100);
 }
 

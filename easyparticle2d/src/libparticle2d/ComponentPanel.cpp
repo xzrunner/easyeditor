@@ -184,7 +184,7 @@ void ComponentPanel::OnSetAddColEnd(wxCommandEvent& event)
 
 void ComponentPanel::UpdateColor(ps_color4f& color)
 {
-	ee::Colorf tmp;
+	s2::Color tmp;
 	memcpy(&tmp.r, &color.r, sizeof(color));
 
 	ee::RGBColorSettingDlg dlg(this, NULL, tmp);

@@ -3,7 +3,6 @@
 
 #include "color_config.h"
 #include "ColorMonitor.h"
-#include "Color.h"
 
 #include <wx/wx.h>
 
@@ -17,19 +16,19 @@ class HSLColorSettingDlg : public wxDialog, public ColorMonitor
 {
 public:
 	HSLColorSettingDlg(wxWindow* parent, ColorMonitor* lsn, 
-		const Colorf& col = WHITE, const wxPoint& pos = wxDefaultPosition);
+		const s2::Color& col = WHITE, const wxPoint& pos = wxDefaultPosition);
 
 	//
 	// interface ColorMonitor
 	//
-	virtual Colorf GetColor() const;
+	virtual s2::Color GetColor() const;
 	virtual void OnColorChanged();
-	virtual void OnColorChanged(const Colorf& col);
+	virtual void OnColorChanged(const s2::Color& col);
 
 private:
 	void InitLayout();
 
-	void SetColor(const Colorf& col);
+	void SetColor(const s2::Color& col);
 
 private:
 	ColorMonitor* m_lsn;

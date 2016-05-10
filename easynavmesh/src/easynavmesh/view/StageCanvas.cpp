@@ -20,7 +20,7 @@ StageCanvas::StageCanvas(StagePanel* stage)
 
 void StageCanvas::OnDrawSprites() const
 {
-	ee::RVG::Color(ee::Colorf(0.8f, 0.8f, 0.8f));
+	ee::RVG::Color(s2::Color(204, 204, 204));
 	ee::RVG::LineWidth(2);
 	const ee::Rect& r = m_stage->GetRegion();
 	ee::RVG::Rect(sm::vec2(r.xmin, r.ymin), sm::vec2(r.xmax, r.ymax), false);

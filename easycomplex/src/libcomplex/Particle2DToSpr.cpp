@@ -91,11 +91,10 @@ p2d_emitter_cfg* Particle2DToSpr::LoadConfig(const erespacker::PackParticle2D* p
 		dst.scale_start = src.scale_start;
 		dst.scale_end = src.scale_end;
 
-		ee::Colorf 
-			col_mul_start = ee::TransColor(src.col_mul_start, ee::PT_ARGB),
-			col_mul_end = ee::TransColor(src.col_mul_end, ee::PT_ARGB),
-			col_add_start = ee::TransColor(src.col_add_start, ee::PT_ARGB),
-			col_add_end = ee::TransColor(src.col_add_end, ee::PT_ARGB);
+		s2::Color col_mul_start = int2color(src.col_mul_start, ee::PT_ARGB),
+			      col_mul_end	= int2color(src.col_mul_end, ee::PT_ARGB),
+				  col_add_start = int2color(src.col_add_start, ee::PT_ARGB),
+				  col_add_end	= int2color(src.col_add_end, ee::PT_ARGB);
 
 		memcpy(&dst.col_mul_start.r, &col_mul_start.r, sizeof(col_mul_start));
 		memcpy(&dst.col_mul_end.r, &col_mul_end.r, sizeof(col_mul_end));

@@ -13,23 +13,23 @@ class ColorSlider;
 class AlphaSettingDlg : public wxDialog, public ColorMonitor
 {
 public:
-	AlphaSettingDlg(wxWindow* parent, Colorf& color,
+	AlphaSettingDlg(wxWindow* parent, s2::Color& color,
 		const wxPoint& pos = wxDefaultPosition);
 
 	//
 	// interface ColorMonitor
 	//
-	virtual Colorf GetColor() const;
+	virtual s2::Color GetColor() const;
 	virtual void OnColorChanged();
-	virtual void OnColorChanged(const Colorf& color);
+	virtual void OnColorChanged(const s2::Color& color);
 
 private:
 	void InitLayout();
 
-	void SetColor(const Colorf& color);
+	void SetColor(const s2::Color& color);
 
 private:
-	Colorf& m_color;
+	s2::Color& m_color;
 
 	ColorSlider* m_alpha;
 

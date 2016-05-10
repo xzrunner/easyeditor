@@ -30,7 +30,7 @@ void StageCanvas::OnDrawSprites() const
 
 void StageCanvas::DrawGuideLines() const
 {
-	ee::RVG::Color(ee::Colorf(1, 0, 0));
+	ee::RVG::Color(s2::Color(255, 0, 0));
 	ee::RVG::Cross(sm::vec2(0, 0), 100, 100);
 }
 

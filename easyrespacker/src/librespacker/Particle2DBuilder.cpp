@@ -4,7 +4,6 @@
 
 #include <ee/Visitor.h>
 #include <ee/Exception.h>
-#include <ee/trans_color.h>
 
 #include <easyparticle2d.h>
 
@@ -128,17 +127,15 @@ void Particle2DBuilder::Load(const eparticle2d::Symbol* symbol, PackParticle2D* 
 		comp.scale_start = p_symbol.scale_start;
 		comp.scale_end = p_symbol.scale_end;
 
-		ee::Colorf col_mul_start(p_symbol.col_mul_start.r, p_symbol.col_mul_start.g, p_symbol.col_mul_start.b, p_symbol.col_mul_start.a);
-		comp.col_mul_start = ee::color2int(col_mul_start, ee::PT_ARGB);
+		comp.col_mul_start = s2::Color((int)(p_symbol.col_mul_start.r * 255), (int)(p_symbol.col_mul_start.g * 255), 
+			(int)(p_symbol.col_mul_start.b * 255), (int)(p_symbol.col_mul_start.a * 255)).ToABGR();
+		comp.col_mul_end = s2::Color((int)(p_symbol.col_mul_end.r * 255), (int)(p_symbol.col_mul_end.g * 255), 
+			(int)(p_symbol.col_mul_end.b * 255), (int)(p_symbol.col_mul_end.a * 255)).ToABGR();
 
-		ee::Colorf col_mul_end(p_symbol.col_mul_end.r, p_symbol.col_mul_end.g, p_symbol.col_mul_end.b, p_symbol.col_mul_end.a);
-		comp.col_mul_end = ee::color2int(col_mul_end, ee::PT_ARGB);
-
-		ee::Colorf col_add_start(p_symbol.col_add_start.r, p_symbol.col_add_start.g, p_symbol.col_add_start.b, p_symbol.col_add_start.a);
-		comp.col_add_start = ee::color2int(col_add_start, ee::PT_ARGB);
-
-		ee::Colorf col_add_end(p_symbol.col_add_end.r, p_symbol.col_add_end.g, p_symbol.col_add_end.b, p_symbol.col_add_end.a);
-		comp.col_add_end = ee::color2int(col_add_end, ee::PT_ARGB);
+		comp.col_add_start = s2::Color((int)(p_symbol.col_add_start.r * 255), (int)(p_symbol.col_add_start.g * 255), 
+			(int)(p_symbol.col_add_start.b * 255), (int)(p_symbol.col_add_start.a * 255)).ToABGR();
+		comp.col_add_end = s2::Color((int)(p_symbol.col_add_end.r * 255), (int)(p_symbol.col_add_end.g * 255), 
+			(int)(p_symbol.col_add_end.b * 255), (int)(p_symbol.col_add_end.a * 255)).ToABGR();
 
 		ee::Symbol* symbol = static_cast<ee::Symbol*>(p_symbol.ud);
 		comp.node = PackNodeFactory::Instance()->Create(symbol);

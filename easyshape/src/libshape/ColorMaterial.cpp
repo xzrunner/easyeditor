@@ -9,7 +9,7 @@ namespace eshape
 {
 
 ColorMaterial::ColorMaterial(const std::vector<sm::vec2>& vertices, 
-							 const ee::Colorf& color)
+							 const s2::Color& color)
 	: m_color(color)
 {
 	BuildBegin(vertices);
@@ -20,7 +20,7 @@ Json::Value ColorMaterial::Store(const std::string& dirpath) const
 {
 	Json::Value val;
 	val["type"] = "color";
-	val["color"] = m_color.Pack();
+	val["color"] = m_color.ToRGBA();
 	return val;
 }
 
@@ -28,11 +28,11 @@ void ColorMaterial::Draw(const sm::mat4& mt, const ee::RenderColor& color) const
 {
 	std::vector<sm::vec2> tris;
 	ee::Math2D::TransVertices(mt, m_tris, tris);
-	ee::RVG::Color(ee::col_mul(m_color, color.multi));
+	ee::RVG::Color(m_color * color.mul);
 	ee::RVG::Triangles(tris);
 
 	//ee::ShaderMgr::Instance()->RVG();
-	//ee::Colorf c = ee::cMul(m_color, color.multi);
+	//s2::Color c = ee::cMul(m_color, color.mul);
 	//ee::PrimitiveDrawRVG::SetColor(ee::trans_color2int(c, ee::PT_ABGR));
 	//ee::PrimitiveDrawRVG::Triangles(mt, m_tris);
 }

@@ -74,12 +74,12 @@ bool EditPolylinesOP::OnDraw() const
 	if (ee::SelectShapesOP::OnDraw()) return true;
 
 	ee::RenderColor color;
-	color.multi.Set(0.8f, 0.8f, 0.2f);
+	color.mul.FromFloat(0.8f, 0.8f, 0.2f);
 
 	std::map<ChainShape*, ChainShape*>::const_iterator itr = m_simplify_buffer.begin();
 	for ( ; itr != m_simplify_buffer.end(); ++itr) {
 		itr->second->Draw(sm::mat4(), color);
-		ee::RVG::Color(ee::Colorf(0.2f, 0.2f, 0.8f));
+		ee::RVG::Color(s2::Color(51, 51, 204));
 		ee::RVG::Circles(itr->second->GetVertices(), ee::SettingData::ctl_pos_sz, true);
 	}
 

@@ -3,7 +3,8 @@
 
 #include "Sprite.h"
 #include "FontBlankSymbol.h"
-#include "Color.h"
+
+#include <sprite2/Color.h>
 
 namespace ee
 {
@@ -68,7 +69,7 @@ public:
 
 	bool has_edge;
 
-	Colorf font_color;
+	s2::Color font_color;
 
 	HoriAlignType align_hori;
 	VertAlignType align_vert;

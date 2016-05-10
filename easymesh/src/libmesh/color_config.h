@@ -1,14 +1,14 @@
 #ifndef _EASYMESH_COLOR_CONFIG_H_
 #define _EASYMESH_COLOR_CONFIG_H_
 
-#include <ee/Color.h>
+#include <sprite2/Color.h>
 
 namespace emesh
 {
 
-static ee::Colorf RED	(0.8f, 0.2f, 0.4f, 0.5f);
-static ee::Colorf GREEN	(0.4f, 0.8f, 0.2f, 0.5f);
-static ee::Colorf BLUE	(0.4f, 0.2f, 0.8f, 0.5f);
+static s2::Color RED	(204, 51, 102, 128);
+static s2::Color GREEN	(102, 204, 51, 128);
+static s2::Color BLUE	(102, 51, 204, 128);
 
 }
 

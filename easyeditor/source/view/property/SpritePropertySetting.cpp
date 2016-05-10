@@ -3,7 +3,6 @@
 #include "PropertySettingPanel.h"
 #include "PropertyColorMonitor.h"
 #include "Math2D.h"
-#include "trans_color.h"
 #include "Config.h"
 #include "SettingData.h"
 #include "Sprite.h"
@@ -18,6 +17,7 @@
 #include "SetSpriteColorAOP.h"
 #include "FileHelper.h"
 #include "RenderParams.h"
+#include "FilterModes.h"
 
 #include <wx/propgrid/advprops.h>
 
@@ -60,14 +60,14 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 	else if (name == "Color.Multi" && Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_DEFAULT)
 	{
 		wxColour wx_col = wxANY_AS(value, wxColour);
-		Colorf col(wx_col.Red() / 255.0f, wx_col.Green() / 255.0f, wx_col.Blue() / 255.0f, spr->rp->color.multi.a);
+		s2::Color col(wx_col.Red(), wx_col.Green(), wx_col.Blue(), spr->rp->color.mul.a);
 		EditAddRecordSJ::Instance()->Add(new SetSpriteMulColorAOP(spr, col));
-		spr->rp->color.multi = col;
+		spr->rp->color.mul = col;
 	}
 	else if (name == "Color.Add" && Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_DEFAULT)
 	{
 		wxColour wx_col = wxANY_AS(value, wxColour);
-		Colorf col(wx_col.Red() / 255.0f, wx_col.Green() / 255.0f, wx_col.Blue() / 255.0f, spr->rp->color.add.a);
+		s2::Color col(wx_col.Red(), wx_col.Green(), wx_col.Blue(), spr->rp->color.add.a);
 		EditAddRecordSJ::Instance()->Add(new SetSpriteAddColorAOP(spr, col));
 		spr->rp->color.add = col;
 	}
@@ -76,26 +76,26 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 		int alpha = wxANY_AS(value, int);
 		alpha = std::max(0, std::min(255, alpha));
 
-		Colorf col = spr->rp->color.multi;
-		col.a = alpha / 255.0f;
+		s2::Color col = spr->rp->color.mul;
+		col.a = alpha;
 		EditAddRecordSJ::Instance()->Add(new SetSpriteMulColorAOP(spr, col));
 
-		spr->rp->color.multi = col;
+		spr->rp->color.mul = col;
 	}
 // 	else if (name == "Color.R")
 // 	{
 // 		wxColour col = wxANY_AS(value, wxColour);
-// 		spr->rp->r_trans.set(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, col.Alpha() / 255.0f);
+// 		spr->rp->r_trans.set(col.Red(), col.Green(), col.Blue(), col.Alpha());
 // 	}
 // 	else if (name == "Color.G")
 // 	{
 // 		wxColour col = wxANY_AS(value, wxColour);
-// 		spr->rp->g_trans.set(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, col.Alpha() / 255.0f);
+// 		spr->rp->g_trans.set(col.Red(), col.Green(), col.Blue(), col.Alpha());
 // 	}
 // 	else if (name == "Color.B")
 // 	{
 // 		wxColour col = wxANY_AS(value, wxColour);
-// 		spr->rp->b_trans.set(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, col.Alpha() / 255.0f);
+// 		spr->rp->b_trans.set(col.Red(), col.Green(), col.Blue(), col.Alpha());
 // 	}
 	else if (name == "Blend")
 	{
@@ -215,16 +215,16 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	pg->GetProperty(wxT("Tag"))->SetValue(spr->tag);
 
 	if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_DEFAULT) {
-		wxColour mul_col = wxColour(spr->rp->color.multi.r*255, spr->rp->color.multi.g*255, spr->rp->color.multi.b*255, spr->rp->color.multi.a*255);
-		wxColour add_col = wxColour(spr->rp->color.add.r*255, spr->rp->color.add.g*255, spr->rp->color.add.b*255, spr->rp->color.add.a*255);
+		wxColour mul_col = wxColour(spr->rp->color.mul.r, spr->rp->color.mul.g, spr->rp->color.mul.b, spr->rp->color.mul.a);
+		wxColour add_col = wxColour(spr->rp->color.add.r, spr->rp->color.add.g, spr->rp->color.add.b, spr->rp->color.add.a);
 		pg->SetPropertyValueString(wxT("Color.Multi"), mul_col.GetAsString());
 		pg->SetPropertyValueString(wxT("Color.Add"), add_col.GetAsString());
 	}
-	pg->GetProperty(wxT("Color.Alpha"))->SetValue((int)(spr->rp->color.multi.a*255));
+	pg->GetProperty(wxT("Color.Alpha"))->SetValue(spr->rp->color.mul.a);
 
-// 	wxColour r_trans = wxColour(spr->rp->r_trans.r*255, spr->rp->r_trans.g*255, spr->rp->r_trans.b*255, spr->rp->r_trans.a*255);
-// 	wxColour g_trans = wxColour(spr->rp->g_trans.r*255, spr->rp->g_trans.g*255, spr->rp->g_trans.b*255, spr->rp->g_trans.a*255);
-// 	wxColour b_trans = wxColour(spr->rp->b_trans.r*255, spr->rp->b_trans.g*255, spr->rp->b_trans.b*255, spr->rp->b_trans.a*255);
+// 	wxColour r_trans = wxColour(spr->rp->r_trans.r, spr->rp->r_trans.g, spr->rp->r_trans.b, spr->rp->r_trans.a);
+// 	wxColour g_trans = wxColour(spr->rp->g_trans.r, spr->rp->g_trans.g, spr->rp->g_trans.b, spr->rp->g_trans.a);
+// 	wxColour b_trans = wxColour(spr->rp->b_trans.r, spr->rp->b_trans.g, spr->rp->b_trans.b, spr->rp->b_trans.a);
 // 	pg->SetPropertyValueString(wxT("Color.R"), r_trans.GetAsString());
 // 	pg->SetPropertyValueString(wxT("Color.G"), g_trans.GetAsString());
 // 	pg->SetPropertyValueString(wxT("Color.B"), b_trans.GetAsString());
@@ -234,13 +234,13 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	pg->GetProperty(wxT("Filter"))->SetValue(FilterModes::Instance()->GetIdxFromMode(spr->rp->shader.filter));
 
 	MyColorProperty* rp = static_cast<MyColorProperty*>(pg->GetProperty("Color Conversion.R"));
-	rp->SetListener(new PropertyColorListener(&spr->rp->color.r));
+	rp->SetListener(new PropertyColorListener(&spr->rp->color.rmap));
 
 	MyColorProperty* gp = static_cast<MyColorProperty*>(pg->GetProperty("Color Conversion.G"));
-	gp->SetListener(new PropertyColorListener(&spr->rp->color.g));
+	gp->SetListener(new PropertyColorListener(&spr->rp->color.gmap));
 
 	MyColorProperty* bp = static_cast<MyColorProperty*>(pg->GetProperty("Color Conversion.B"));
-	bp->SetListener(new PropertyColorListener(&spr->rp->color.b));
+	bp->SetListener(new PropertyColorListener(&spr->rp->color.bmap));
 
 	pg->GetProperty(wxT("Clip"))->SetValue(spr->clip);
 
@@ -305,13 +305,13 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 	col_prop->SetExpanded(false);
 
 	if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_DEFAULT) {
-		wxColour mul_col = wxColour(spr->rp->color.multi.r*255, spr->rp->color.multi.g*255, spr->rp->color.multi.b*255, spr->rp->color.multi.a*255);
-		wxColour add_col = wxColour(spr->rp->color.add.r*255, spr->rp->color.add.g*255, spr->rp->color.add.b*255, spr->rp->color.add.a*255);
+		wxColour mul_col = wxColour(spr->rp->color.mul.r, spr->rp->color.mul.g, spr->rp->color.mul.b, spr->rp->color.mul.a);
+		wxColour add_col = wxColour(spr->rp->color.add.r, spr->rp->color.add.g, spr->rp->color.add.b, spr->rp->color.add.a);
 		pg->AppendIn(col_prop, new wxColourProperty(wxT("Multi"), wxPG_LABEL, mul_col));
 		pg->AppendIn(col_prop, new wxColourProperty(wxT("Add"), wxPG_LABEL, add_col));
 	} else {
 		MyColorProperty* multi_prop = new MyColorProperty("Multi");
-		multi_prop->SetListener(new PropertyColorListener(&spr->rp->color.multi));
+		multi_prop->SetListener(new PropertyColorListener(&spr->rp->color.mul));
 		pg->AppendIn(col_prop, multi_prop);
 
 		MyColorProperty* add_prop = new MyColorProperty("Add");
@@ -319,7 +319,7 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 		pg->AppendIn(col_prop, add_prop);
 	}
 
-	pg->AppendIn(col_prop, new wxIntProperty(wxT("Alpha"), wxPG_LABEL, spr->rp->color.multi.a*255));
+	pg->AppendIn(col_prop, new wxIntProperty(wxT("Alpha"), wxPG_LABEL, spr->rp->color.mul.a));
 	pg->SetPropertyAttribute(wxT("Color.Alpha"), "Min", 0);
 	pg->SetPropertyAttribute(wxT("Color.Alpha"), "Max", 255);
 
@@ -327,20 +327,20 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 	col_conv_prop->SetExpanded(false);
 
 	MyColorProperty* col_r_prop = new MyColorProperty("R");
-	col_r_prop->SetListener(new PropertyColorListener(&spr->rp->color.r));
+	col_r_prop->SetListener(new PropertyColorListener(&spr->rp->color.rmap));
 	pg->AppendIn(col_conv_prop, col_r_prop);
 
 	MyColorProperty* col_g_prop = new MyColorProperty("G");
-	col_g_prop->SetListener(new PropertyColorListener(&spr->rp->color.g));
+	col_g_prop->SetListener(new PropertyColorListener(&spr->rp->color.gmap));
 	pg->AppendIn(col_conv_prop, col_g_prop);
 
 	MyColorProperty* col_b_prop = new MyColorProperty("B");
-	col_b_prop->SetListener(new PropertyColorListener(&spr->rp->color.b));
+	col_b_prop->SetListener(new PropertyColorListener(&spr->rp->color.bmap));
 	pg->AppendIn(col_conv_prop, col_b_prop);
 
-// 	wxColour r_trans = wxColour(spr->rp->r_trans.r*255, spr->rp->r_trans.g*255, spr->rp->r_trans.b*255, spr->rp->r_trans.a*255);
-// 	wxColour g_trans = wxColour(spr->rp->g_trans.r*255, spr->rp->g_trans.g*255, spr->rp->g_trans.b*255, spr->rp->g_trans.a*255);
-// 	wxColour b_trans = wxColour(spr->rp->b_trans.r*255, spr->rp->b_trans.g*255, spr->rp->b_trans.b*255, spr->rp->b_trans.a*255);
+// 	wxColour r_trans = wxColour(spr->rp->r_trans.r, spr->rp->r_trans.g, spr->rp->r_trans.b, spr->rp->r_trans.a);
+// 	wxColour g_trans = wxColour(spr->rp->g_trans.r, spr->rp->g_trans.g, spr->rp->g_trans.b, spr->rp->g_trans.a);
+// 	wxColour b_trans = wxColour(spr->rp->b_trans.r, spr->rp->b_trans.g, spr->rp->b_trans.b, spr->rp->b_trans.a);
 // 	pg->AppendIn(colProp, new wxColourProperty(wxT("R"), wxPG_LABEL, r_trans));
 // 	pg->AppendIn(colProp, new wxColourProperty(wxT("G"), wxPG_LABEL, g_trans));
 // 	pg->AppendIn(colProp, new wxColourProperty(wxT("B"), wxPG_LABEL, b_trans));

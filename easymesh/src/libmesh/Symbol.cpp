@@ -7,7 +7,6 @@
 
 #include <ee/Image.h>
 #include <ee/RenderParams.h>
-#include <ee/trans_color.h>
 
 #include <shaderlab.h>
 
@@ -74,11 +73,8 @@ void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr,
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	mgr->SetShader(sl::SPRITE2);
 	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader());
-	shader->SetColor(ee::color2int(trans.color.multi, ee::PT_ABGR),
-		ee::color2int(trans.color.add, ee::PT_ABGR));
-	shader->SetColorMap(ee::color2int(trans.color.r, ee::PT_ABGR),
-		ee::color2int(trans.color.g, ee::PT_ABGR),
-		ee::color2int(trans.color.b, ee::PT_ABGR));
+	shader->SetColor(trans.color.mul.ToABGR(), trans.color.add.ToABGR());
+	shader->SetColorMap(trans.color.rmap.ToABGR(), trans.color.gmap.ToABGR(), trans.color.bmap.ToABGR());
 
 	if (spr) {
 		const MeshTrans& mtrans = static_cast<const Sprite*>(spr)->GetMeshTrans();

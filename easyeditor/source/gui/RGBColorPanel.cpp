@@ -18,7 +18,7 @@ RGBColorPanel::~RGBColorPanel()
 	delete m_canvas;
 }
 
-void RGBColorPanel::SetColor(const Colorf& begin, const Colorf& end)
+void RGBColorPanel::SetColor(const s2::Color& begin, const s2::Color& end)
 {
 	m_canvas->SetColor(begin, end);
 }
@@ -39,7 +39,7 @@ Canvas(wxWindow* parent)
 }
 
 void RGBColorPanel::Canvas::
-SetColor(const Colorf& begin, const Colorf& end)
+SetColor(const s2::Color& begin, const s2::Color& end)
 {
 	m_col_begin = begin;
 	m_col_end = end;

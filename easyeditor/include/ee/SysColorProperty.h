@@ -8,7 +8,6 @@ namespace ee
 {
 
 class ColorMonitor;
-class Colorf;
 
 class SysColorProperty : public wxLongStringProperty
 {

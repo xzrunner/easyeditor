@@ -37,7 +37,7 @@ void FontBlankPropertySetting::OnPropertyGridChange(const std::string& name, con
 		}
 	} else if (name == wxT("FontColor")) {
 		wxColour col = wxANY_AS(value, wxColour);
-		sprite->font_color.Set(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, col.Alpha() / 255.0f);
+		sprite->font_color.FromFloat(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, col.Alpha() / 255.0f);
 	} else if (name == wxT("Align.Hori")) {
 		sprite->align_hori = FontBlankSprite::HoriAlignType(wxANY_AS(value, int));
 	} else if (name == wxT("Align.Vert")) {
@@ -77,7 +77,7 @@ void FontBlankPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 
 	pg->GetProperty(wxT("Edge"))->SetValue(sprite->has_edge);
 
-	wxColour col = wxColour(sprite->font_color.r*255, sprite->font_color.g*255, sprite->font_color.b*255, sprite->font_color.a*255);
+	wxColour col = wxColour(sprite->font_color.r, sprite->font_color.g, sprite->font_color.b, sprite->font_color.a);
 	pg->SetPropertyValueString(wxT("FontColor"), col.GetAsString());
 
 	pg->GetProperty(wxT("Align.Hori"))->SetValue(HORI_ALIGN_LABELS[sprite->align_hori]);
@@ -102,7 +102,7 @@ void FontBlankPropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->Append(new wxBoolProperty(wxT("Edge"), wxPG_LABEL, spr->has_edge));
 	pg->SetPropertyAttribute("Edge", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
-	wxColour col = wxColour(spr->rp->color.add.r*255, spr->rp->color.add.g*255, spr->rp->color.add.b*255, spr->rp->color.add.a*255);
+	wxColour col = wxColour(spr->rp->color.add.r, spr->rp->color.add.g, spr->rp->color.add.b, spr->rp->color.add.a);
 	pg->Append(new wxColourProperty(wxT("FontColor"), wxPG_LABEL, col));
 	pg->SetPropertyAttribute("FontColor", "HasAlpha", true);
 

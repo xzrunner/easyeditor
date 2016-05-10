@@ -105,15 +105,15 @@ void ChainShape::Draw(const sm::mat4& mt, const ee::RenderColor& color) const
 
 	std::vector<sm::vec2> vertices;
 	ee::Math2D::TransVertices(mt, m_vertices, vertices);
-	ee::RVG::Color(color.multi);
+	ee::RVG::Color(color.mul);
 	ee::RVG::Polyline(vertices, m_loop);
 	if (ee::SettingData::ctl_pos_sz != 0) {
 		float len = ee::Math2D::TransLen(ee::SettingData::ctl_pos_sz, mt);
-		ee::RVG::Color(ee::Colorf(0.4f, 0.8f, 0.4f));
+		ee::RVG::Color(s2::Color(102, 204, 102));
 		ee::RVG::Circles(vertices, len, true);
 	}
 	if (m_draw_dir) {
-		ee::RVG::Color(color.multi);
+		ee::RVG::Color(color.mul);
 		ee::RVG::Circle(vertices[0], 10, true);
 	}
 }

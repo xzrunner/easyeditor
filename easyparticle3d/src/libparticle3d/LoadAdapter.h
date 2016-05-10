@@ -1,7 +1,7 @@
 #ifndef _EASYPARTICLE3D_LOAD_ADAPTER_H_
 #define _EASYPARTICLE3D_LOAD_ADAPTER_H_
 
-#include <ee/Color.h>
+#include <sprite2/Color.h>
 
 #include <json/json.h>
 
@@ -30,7 +30,7 @@ public:
 
 		float angle, angle_var;
 
-		ee::Colorf col_mul, col_add;
+		s2::Color col_mul, col_add;
 		float alpha_start, alpha_end;
 
 		float start_z;

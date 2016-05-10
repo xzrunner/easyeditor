@@ -89,7 +89,7 @@ void SymbolRender::DrawGrids(const ee::Symbol& symbol,
 	int row, col;
 	m_stage->TransCoordsToGridPos(pos, row, col);
 
-	ee::Colorf color = valid ? ee::Colorf(0, 1.0f, 0, 0.8f) : ee::Colorf(1, 0, 0, 0.8f);
+	s2::Color color = valid ? s2::Color(0, 255, 0, 204) : s2::Color(255, 0, 0, 204);
 
 	SymbolExt* info = static_cast<SymbolExt*>(symbol.GetUserData());
 	int center = (info->size >> 1);
@@ -110,7 +110,7 @@ void SymbolRender::DrawGrids(const ee::Symbol& symbol,
 				m_stage->TransGridPosToCoords(row + i - center, col + j - center, pos);
 				m_grid->SetTransform(pos, m_grid->GetAngle());
 				ee::RenderColor ct;
-				ct.multi = color;
+				ct.mul = color;
 				ee::SpriteRenderer::Draw(m_grid, NULL, ee::RenderParams(sm::mat4(), ct));
 			}
 		}
@@ -169,7 +169,7 @@ void SymbolRender::DrawRegion(const ee::Symbol& symbol, const sm::vec2& pos)
 
 	float s = (float)(max_reg) / m_region_size;
 	ee::RenderColor ct;
-	ct.multi = ee::Colorf(1, 0, 0);
+	ct.mul = s2::Color(255, 0, 0);
 	ee::SpriteRenderer::Draw(m_region, ee::RenderParams(sm::mat4(), ct), pos, 0, s, s, 0, 0);
 	if (min_reg != 0) {
 		float s = (float)(min_reg) / m_region_size;

@@ -1,9 +1,9 @@
 #ifndef	_EASYEDITOR_TRANS_COLOR_H_
 #define _EASYEDITOR_TRANS_COLOR_H_
 
-#include "Color.h"
+#include <sprite2/Color.h>
 
-#include <stdint.h>
+#include <string>
 
 namespace ee
 {
@@ -21,17 +21,11 @@ enum PixelType
 	PT_BGRA
 };
 
-Colorf TransColor(const std::string& str, PixelType type);
-Colorf TransColor(int color, PixelType type);
-float TransColor(char high, char low);
-int TransHex(char c);
+s2::Color str2color(const std::string& str, PixelType type);
+std::string color2str(const s2::Color& col, PixelType type);
 
-std::string TransColor(const Colorf& col, PixelType type);
-std::string TransColor(float col);
-char TransHex(int v);
-
-uint32_t color2int(const Colorf& col, PixelType type);
-uint32_t color2int(float col);
+s2::Color int2color(uint32_t i, PixelType type);
+uint32_t color2int(const s2::Color& col, PixelType type);
 
 }
 

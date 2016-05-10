@@ -15,8 +15,8 @@ class StageCanvas : public ee::CameraCanvas
 public:
 	StageCanvas(StagePanel* stage);
 
-	ee::Colorf& GetMultiColor() { return m_scr_style.multi_col; }
-	ee::Colorf& GetAddColor() { return m_scr_style.add_col; }
+	s2::Color& GetMultiColor() { return m_scr_style.multi_col; }
+	s2::Color& GetAddColor() { return m_scr_style.add_col; }
 
 protected:
 	virtual void OnDrawSprites() const;

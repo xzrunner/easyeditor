@@ -1,9 +1,10 @@
 #include "FixSpriteColor.h"
 #include "check_params.h"
 
-#include <ee/Color.h>
-#include <ee/trans_color.h>
 #include <ee/FileHelper.h>
+#include <ee/trans_color.h>
+
+#include <sprite2/Color.h>
 
 #include <fstream>
 
@@ -47,8 +48,8 @@ bool FixSpriteColor::FixSprite(const std::string& filepath, Json::Value& sprite_
 		return false;
 	}
 
-	ee::Colorf col = ee::TransColor(str, ee::PT_ARGB);
-	sprite_val["add color"] = ee::TransColor(col, ee::PT_ABGR);
+	s2::Color col = ee::str2color(str, ee::PT_ARGB);
+	sprite_val["add color"] = ee::color2str(col, ee::PT_ABGR);
 
 	return true;
 }

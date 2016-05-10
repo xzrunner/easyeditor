@@ -132,7 +132,7 @@ void PolygonShape::refresh()
 	}
 }
 
-void PolygonShape::SetMaterialColor(const ee::Colorf& color)
+void PolygonShape::SetMaterialColor(const s2::Color& color)
 {
 	if (m_material) {
 		m_material->Release();
@@ -174,8 +174,8 @@ void PolygonShape::LoadMaterial(const std::string& dirpath, const Json::Value& v
 
 	std::string type = val["type"].asString();
 	if (type == "color") {
-		ee::Colorf col;
-		col.Unpack(val["color"].asUInt());
+		s2::Color col;
+		col.FromRGBA(val["color"].asUInt());
 		m_material = new ColorMaterial(m_vertices, col);
 	} else if (type == "texture") {
 		std::string path = val["texture path"].asString();

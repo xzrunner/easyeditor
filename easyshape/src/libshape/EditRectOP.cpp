@@ -210,10 +210,10 @@ bool EditRectOP::OnDraw() const
 			if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape))
 			{
 				sm::vec2 pos(rect->m_rect.CenterX(), rect->m_rect.CenterY());
-				ee::RVG::Color(ee::Colorf(0.4f, 1.0f, 0.4f));
+				ee::RVG::Color(s2::Color(102, 255, 102));
 				ee::RVG::Circle(pos, tolerance, true);
 				if (m_captured.pos_valid) {
-					ee::RVG::Color(ee::Colorf(1.0f, 0.4f, 0.4f));
+					ee::RVG::Color(s2::Color(255, 102, 102));
 					ee::RVG::Circle(m_captured.pos, tolerance, true);
 				}
 			}

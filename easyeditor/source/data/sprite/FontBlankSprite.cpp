@@ -3,19 +3,19 @@
 #include "Rect.h"
 #include "BoundingBox.h"
 #include "BBFactory.h"
-#include "trans_color.h"
 #include "FontBlankPropertySetting.h"
 #include "RenderParams.h"
+#include "trans_color.h"
 
 namespace ee
 {
 
 FontBlankSprite::FontBlankSprite()
 	: m_symbol(NULL)
+	, font_color(0xffffffff)
 {
 	font = "";
 	has_edge = false;
-	font_color.Set(1, 1, 1, 1);
 	align_hori = HAT_LEFT;
 	align_vert = VAT_TOP;
 	size = 16;
@@ -30,7 +30,7 @@ FontBlankSprite::FontBlankSprite(const FontBlankSprite& sprite)
 	m_symbol->Retain();
 	font = sprite.font;
 	has_edge = sprite.has_edge;
-	font_color = sprite.rp->color.multi;
+	font_color = sprite.rp->color.mul;
 	align_hori = sprite.align_hori;
 	align_vert = sprite.align_vert;
 	size = sprite.size;
@@ -44,7 +44,7 @@ FontBlankSprite::FontBlankSprite(FontBlankSymbol* symbol)
 {
 	m_symbol->Retain();
 	font = m_symbol->font;
-	font_color = TransColor(m_symbol->color, PT_ARGB);
+	font_color = str2color(m_symbol->color, PT_ARGB);
 
 	if (symbol->align_hori == 0)
 		align_hori = HAT_LEFT;
@@ -106,7 +106,7 @@ void FontBlankSprite::Load(const Json::Value& val)
 	if (val["font"].isNull())
 	{
 		font = m_symbol->font;
-		font_color = TransColor(m_symbol->color, PT_ARGB);
+		font_color = str2color(m_symbol->color, PT_ARGB);
 		align_hori = HoriAlignType((int)m_symbol->align_hori);
 		align_vert = VertAlignType((int)m_symbol->align_vert);
 		size	= static_cast<int>(m_symbol->size);
@@ -117,7 +117,7 @@ void FontBlankSprite::Load(const Json::Value& val)
 	else
 	{
 		font = val["font"].asString();
-		font_color = TransColor(val["color"].asString(), PT_ARGB);
+		font_color = str2color(val["color"].asString(), PT_ARGB);
 		// is old version data
 		if (!val["align"].isNull()) {
 			align_hori = HoriAlignType(val["align"].asInt());
@@ -144,7 +144,7 @@ void FontBlankSprite::Store(Json::Value& val) const
 	Sprite::Store(val);
 
 	val["font"] = font;
-	val["color"] = TransColor(font_color, PT_ARGB);
+	val["color"] = color2str(font_color, PT_ARGB);
 	val["align hori"] = align_hori;
 	val["align vert"] = align_vert;
 	val["size"] = size;

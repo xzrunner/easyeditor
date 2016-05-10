@@ -5,7 +5,6 @@
 
 #include <ee/Object.h>
 #include <ee/Cloneable.h>
-#include <ee/Color.h>
 
 #include <SM_Vector.h>
 

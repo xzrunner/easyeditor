@@ -1,7 +1,6 @@
 #ifndef _EASYMODELING_BODY_H_
 #define _EASYMODELING_BODY_H_
 
-#include <ee/Color.h>
 #include <ee/Object.h>
 
 #include <SM_Matrix.h>
@@ -32,8 +31,8 @@ public:
 	bool IsContain(const sm::vec2& pos) const;
 	bool IsIntersect(const ee::Rect& rect) const;
 
-	void Draw(const sm::mat4& mt, const ee::Colorf& cFace, 
-		const ee::Colorf& cEdge) const;
+	void Draw(const sm::mat4& mt, const s2::Color& cFace, 
+		const s2::Color& cEdge) const;
 
 public:
 	std::string m_name;

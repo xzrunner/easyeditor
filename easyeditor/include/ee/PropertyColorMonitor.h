@@ -9,17 +9,17 @@ namespace ee
 class PropertyColorListener : public ColorMonitor
 {
 public:
-	PropertyColorListener(Colorf* col);
+	PropertyColorListener(s2::Color* col);
 
 	//
 	// interface ColorMonitor
 	//
-	virtual Colorf GetColor() const;
+	virtual s2::Color GetColor() const;
 	virtual void OnColorChanged();
-	virtual void OnColorChanged(const Colorf& col);
+	virtual void OnColorChanged(const s2::Color& col);
 
 private:
-	Colorf* m_col;
+	s2::Color* m_col;
 
 }; // PropertyColorListener
 

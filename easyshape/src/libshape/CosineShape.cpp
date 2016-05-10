@@ -54,14 +54,14 @@ void CosineShape::Draw(const sm::mat4& mt, const ee::RenderColor& color) const
 {
 	if (m_vertices.empty()) return;
 
-	ee::RVG::Color(color.multi);
+	ee::RVG::Color(color.mul);
 	ee::RVG::Polyline(m_midPoints, m_loop);
 	if (ee::SettingData::ctl_pos_sz != 0) {
-		ee::RVG::Color(ee::Colorf(0.4f, 0.8f, 0.4f));
+		ee::RVG::Color(s2::Color(102, 204, 102));
 		ee::RVG::Circles(m_vertices, static_cast<float>(ee::SettingData::ctl_pos_sz), true);
 	}
 	if (ee::SettingData::ctl_pos_sz != 0) {
-		ee::RVG::Color(ee::Colorf(0.8f, 0.8f, 0.4f));
+		ee::RVG::Color(s2::Color(204, 204, 102));
 		ee::RVG::Circles(m_midPoints, ee::SettingData::ctl_pos_sz * 0.5f, true);
 	}
 }

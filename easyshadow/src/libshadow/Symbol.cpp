@@ -39,7 +39,7 @@ void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr,
 				  const ee::Sprite* root) const
 {
 	if (m_shadow) {
-		m_shadow->Draw(trans.mt, trans.color.multi.a);
+		m_shadow->Draw(trans.mt, trans.color.mul.a);
 	}
 }
 

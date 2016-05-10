@@ -1,7 +1,7 @@
 #ifndef _EASYEDITOR_SETTING_DATA_H_
 #define _EASYEDITOR_SETTING_DATA_H_
 
-#include "Color.h"
+#include <sprite2/Color.h>
 
 #include <json/json.h>
 
@@ -44,7 +44,7 @@ public:
 	bool visible_shape;
 	bool visible_tex_edge;
 	bool particle3d_loop;
-	Colorf bg_color;
+	s2::Color bg_color;
 	bool visible_spr_update;
 
 	// widgets

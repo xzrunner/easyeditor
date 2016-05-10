@@ -19,7 +19,7 @@ HSLColorPanel::~HSLColorPanel()
 	delete m_canvas;
 }
 
-void HSLColorPanel::SetColor(const Colorf& begin, const Colorf& end)
+void HSLColorPanel::SetColor(const s2::Color& begin, const s2::Color& end)
 {
 	m_canvas->SetColor(begin, end);
 }
@@ -40,7 +40,7 @@ Canvas(wxWindow* parent)
 }
 
 void HSLColorPanel::Canvas::
-SetColor(const Colorf& begin, const Colorf& end)
+SetColor(const s2::Color& begin, const s2::Color& end)
 {
 	m_col_begin = begin;
 	m_col_end = end;
@@ -51,21 +51,22 @@ void HSLColorPanel::Canvas::
 OnDraw() const
 {
 	const int COUNT = 100;
-	const Colorf& begin = m_col_begin, end = m_col_end;
+	const s2::Color& begin = m_col_begin, end = m_col_end;
 
 	glBegin(GL_QUADS);
 	for (int i = 0; i < COUNT; ++i)
 	{
 		float p = (float)i / COUNT;
-		float h = (end.r - begin.r) * p + begin.r;
-		float s = (end.g - begin.g) * p + begin.g;
-		float l = (end.b - begin.b) * p + begin.b;
+		float h = ((end.r - begin.r) * p + begin.r) / 255.0f;
+		float s = ((end.g - begin.g) * p + begin.g) / 255.0f;
+		float l = ((end.b - begin.b) * p + begin.b) / 255.0f;
 
-		Colorf rgb = hsl2rgb(h, s, l);
-		glColor3f(rgb.r, rgb.g, rgb.b);
+		float r, g, b;
+		hsl2rgb(h, s, l, r, g, b);
+		glColor3f(r, g, b);
 
 		float sx = -1 + 2.0f / COUNT * i,
-			ex = -1 + 2.0f / COUNT * (i + 1);
+			  ex = -1 + 2.0f / COUNT * (i + 1);
 		glVertex2f(sx, -1);
 		glVertex2f(sx, 1);
 		glVertex2f(ex, 1);

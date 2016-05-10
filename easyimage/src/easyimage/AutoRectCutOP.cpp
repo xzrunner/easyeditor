@@ -89,7 +89,7 @@ bool AutoRectCutOP::OnDraw() const
 {
 	if (ee::ZoomViewOP::OnDraw()) return true;
 
-	ee::RVG::Color(ee::Colorf(1, 0, 0));
+	ee::RVG::Color(s2::Color(255, 0, 0));
 	ee::RVG::Cross(sm::vec2(0, 0), 100, 100);
 
 	m_rects.Draw();

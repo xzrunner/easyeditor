@@ -2,8 +2,6 @@
 #include "pack_unpack.h"
 #include "typedef.h"
 
-#include <ee/trans_color.h>
-
 #include <spritepack.h>
 
 namespace erespacker
@@ -21,7 +19,7 @@ void ShapeFromBin::Unpack(uint8_t** ptr, PackShape* shape)
 	
 	uint32_t color;
 	unpack(color, ptr);
-	shape->color = ee::TransColor(color, ee::PT_RGBA);
+	shape->color.FromRGBA(color);
 
 	uint16_t num;
 	unpack(num, ptr);

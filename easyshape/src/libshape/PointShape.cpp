@@ -49,7 +49,7 @@ void PointShape::Draw(const sm::mat4& mt, const ee::RenderColor& color) const
 {
 	sm::vec2 c = ee::Math2D::TransVector(m_pos, mt);
 	float r = ee::Math2D::TransLen(RADIUS, mt);
-	ee::RVG::Color(color.multi);
+	ee::RVG::Color(color.mul);
 	ee::RVG::Circle(c, r, true);
 }
 

@@ -2,13 +2,13 @@
 #define _EASYEDITOR_RVG_H_
 
 #include <SM_Vector.h>
+#include <sprite2/Color.h>
 
 #include <vector>
 
 namespace ee
 {
 
-class Colorf;
 class Rect;
 
 class RVG
@@ -17,7 +17,7 @@ public:
 	// config
 	static void Init();	
 
-	static void Color(const Colorf& color);
+	static void Color(const s2::Color& color);
 	static void PointSize(float size);
 	static void LineWidth(float width);
 
@@ -36,7 +36,7 @@ public:
 
 	// face
 	static void Triangles(const std::vector<sm::vec2>& triangles);
-	static void Triangles(const std::vector<sm::vec2>& triangles, const std::vector<Colorf>& colors);
+	static void Triangles(const std::vector<sm::vec2>& triangles, const std::vector<s2::Color>& colors);
 	static void TriangleStrip(const std::vector<sm::vec2>& triangles);
 
 	static void Rect(const sm::vec2& center, float hw, float hh, bool filling);

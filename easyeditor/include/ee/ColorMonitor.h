@@ -1,7 +1,7 @@
 #ifndef _EASYEDITOR_COLOR_MONITOR_H_
 #define _EASYEDITOR_COLOR_MONITOR_H_
 
-#include "Color.h"
+#include <sprite2/Color.h>
 
 namespace ee
 {
@@ -9,9 +9,9 @@ namespace ee
 class ColorMonitor
 {
 public:
-	virtual Colorf GetColor() const = 0;
+	virtual s2::Color GetColor() const = 0;
 	virtual void OnColorChanged() = 0;
-	virtual void OnColorChanged(const Colorf& col) = 0;
+	virtual void OnColorChanged(const s2::Color& col) = 0;
 	virtual ~ColorMonitor() {}
 
 }; // ColorMonitor

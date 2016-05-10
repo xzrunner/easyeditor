@@ -1,5 +1,4 @@
 #include "EE_GTxt.h"
-#include "Color.h"
 #include "Math2D.h"
 #include "RenderColor.h"
 #include "Symbol.h"
@@ -9,7 +8,6 @@
 #include "Config.h"
 #include "StringHelper.h"
 #include "EE_RVG.h"
-#include "trans_color.h"
 
 #include <gtxt.h>
 #include <shaderlab.h>
@@ -20,8 +18,8 @@ namespace ee
 struct render_params
 {
 	const sm::mat4* mt;
-	const Colorf* mul;
-	const Colorf* add;
+	const s2::Color* mul;
+	const s2::Color* add;
 };
 
 GTxt* GTxt::m_instance = NULL;
@@ -60,9 +58,9 @@ render_glyph(int id, float* _texcoords, float x, float y, float w, float h, stru
 
 	RenderColor color;
 	if (rp->mul) {
-		Colorf multi_col = *rp->mul;
-		multi_col.a *= ds->alpha;
-		color.multi = multi_col;
+		s2::Color multi_col = *rp->mul;
+		multi_col.a = static_cast<int>(multi_col.a * ds->alpha);
+		color.mul = multi_col;
 	} 
 	if (rp->add) {
 		color.add = *rp->add;
@@ -71,8 +69,8 @@ render_glyph(int id, float* _texcoords, float x, float y, float w, float h, stru
 	sl::ShaderMgr* sl_mgr = sl::ShaderMgr::Instance();
 	sl_mgr->SetShader(sl::SPRITE2);
 	sl::Sprite2Shader* sl_shader = static_cast<sl::Sprite2Shader*>(sl_mgr->GetShader());
-	sl_shader->SetColor(color2int(color.multi, PT_ABGR), color2int(color.add, PT_ABGR));
-	sl_shader->SetColorMap(color2int(color.r, PT_ABGR), color2int(color.g, PT_ABGR), color2int(color.b, PT_ABGR));
+	sl_shader->SetColor(color.mul.ToABGR(), color.add.ToABGR());
+	sl_shader->SetColorMap(color.rmap.ToABGR(), color.gmap.ToABGR(), color.bmap.ToABGR());
 	sl_shader->Draw(&vertices[0].x, &texcoords[0].x, id);
 }
 
@@ -191,8 +189,8 @@ ext_sym_render(void* ext_sym, float x, float y, void* ud) {
 		RenderParams(*((sm::mat4*)ud)), sm::vec2(x, y));
 }
 
-void GTxt::Draw(const gtxt_label_style& style, const sm::mat4& mt, const Colorf& mul, 
-				const Colorf& add, const std::string& text, int time) const
+void GTxt::Draw(const gtxt_label_style& style, const sm::mat4& mt, const s2::Color& mul, 
+				const s2::Color& add, const std::string& text, int time) const
 {
 	render_params rp;
 	rp.mt = &mt;

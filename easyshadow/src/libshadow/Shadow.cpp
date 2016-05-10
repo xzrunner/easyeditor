@@ -18,8 +18,8 @@ int Shadow::m_shader_idx = -1;
 Shadow::Shadow(float radius)
 	: m_radius(radius)
 {
-	m_inner_color.Set(0, 0, 0, 1);
-	m_outer_color.Set(0.5f, 0.5f, 0.5f, 0);
+	m_inner_color.FromFloat(0, 0, 0, 1);
+	m_outer_color.FromFloat(0.5f, 0.5f, 0.5f, 0);
 }
 
 Shadow::~Shadow()
@@ -124,14 +124,14 @@ void Shadow::BuildInnerLine(const std::vector<sm::vec2>& loop)
 	BuildOutterLine();
 }
 
-void Shadow::SetInnerColer(const ee::Colorf& col) 
+void Shadow::SetInnerColer(const s2::Color& col) 
 { 
 	m_inner_color.r = col.r;
 	m_inner_color.g = col.g;
 	m_inner_color.b = col.b;
 }
 
-void Shadow::SetOuterColer(const ee::Colorf& col) 
+void Shadow::SetOuterColer(const s2::Color& col) 
 { 
 	m_outer_color.r = col.r; 
 	m_outer_color.g = col.g; 

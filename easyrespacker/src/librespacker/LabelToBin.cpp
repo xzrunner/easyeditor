@@ -1,8 +1,6 @@
 #include "LabelToBin.h"
 #include "pack_unpack.h"
 
-#include <ee/trans_color.h>
-
 #include <spritepack.h>
 
 namespace erespacker
@@ -51,14 +49,14 @@ void LabelToBin::Pack(const PackLabel* label, uint8_t** ptr)
 	pack(font, ptr);
 	uint8_t font_size = label->font_size;
 	pack(font_size, ptr);
-	uint32_t font_color = ee::color2int(label->font_color, ee::PT_RGBA);
+	uint32_t font_color = label->font_color.ToABGR();
 	pack(font_color, ptr);
 
 	uint8_t edge = label->edge ? 1 : 0;
 	pack(edge, ptr);
 	uint16_t edge_size = (int)(label->edge_size * 1024);
 	pack(edge_size, ptr);
-	uint32_t edge_color = ee::color2int(label->edge_color, ee::PT_RGBA);
+	uint32_t edge_color = label->edge_color.ToRGBA();
 	pack(edge_color, ptr);
 
 	uint8_t align_hori = label->align_hori;

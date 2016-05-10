@@ -4,7 +4,7 @@
 //{
 //
 //MultiColorMaterial::MultiColorMaterial(const std::vector<sm::vec2>& vertices, 
-//							 const ee::Colorf& color)
+//							 const s2::Color& color)
 //{
 //	Build(vertices);
 //}

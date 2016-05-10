@@ -24,11 +24,11 @@ public:
 
 private:
 	static void GetBodyColor(Body::Type type, DrawType dType,
-		ee::Colorf& cFace, ee::Colorf& cEdge);
-	static void GetFixtureColor(DrawType type, ee::Colorf& cFace, 
-		ee::Colorf& cEdge);
+		s2::Color& cFace, s2::Color& cEdge);
+	static void GetFixtureColor(DrawType type, s2::Color& cFace, 
+		s2::Color& cEdge);
 
-	static ee::Colorf ColorEnlarge(const ee::Colorf& color, float factor);
+	static s2::Color ColorEnlarge(const s2::Color& color, float factor);
 
 }; // DrawUtils
 

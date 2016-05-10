@@ -73,17 +73,17 @@ void ShaderMgr::DrawModel(const IModel* model, const sm::mat4& m)
 	m_model_shader->Draw(model, m);
 }
 
-void ShaderMgr::DrawShape(int type, const float* vertices, int count, const ee::Colorf& col, bool force)
+void ShaderMgr::DrawShape(int type, const float* vertices, int count, const s2::Color& col, bool force)
 {
 	m_shape_shader->Draw(type, vertices, count, col, force);
 }
 
-void ShaderMgr::DrawShape(int type, const float* vertices, int count, ee::Colorf* cols, bool force)
+void ShaderMgr::DrawShape(int type, const float* vertices, int count, s2::Color* cols, bool force)
 {
 	m_shape_shader->Draw(type, vertices, count, cols, force);
 }
 
-void ShaderMgr::DrawShape(int type, const float* vertices, int vcount, const ee::Colorf& col, 
+void ShaderMgr::DrawShape(int type, const float* vertices, int vcount, const s2::Color& col, 
 						  unsigned short* indices, int icount)
 {
 	m_shape_shader->Draw(type, vertices, vcount, col, indices, icount);

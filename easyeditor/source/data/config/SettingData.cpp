@@ -25,7 +25,7 @@ SettingData::SettingData()
 	visible_shape = true;
 	visible_tex_edge = true;
 	particle3d_loop = true;
-	bg_color.Set(0.5f, 0.5f, 0.5f);
+	bg_color.FromFloat(0.5f, 0.5f, 0.5f);
 	visible_spr_update = true;
 
 	img_list_compact = false;

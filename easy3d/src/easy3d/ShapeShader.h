@@ -2,7 +2,6 @@
 #define _EASY3D_SHAPE_SHADER_H_
 
 #include <ee/IShader.h>
-#include <ee/Color.h>
 
 namespace e3d
 {
@@ -28,22 +27,22 @@ public:
 	void SetModelView(const sm::mat4& mat);
 
 	void Draw(int type, const float* vertices, int count, 
-		const ee::Colorf& col, bool force = true);
+		const s2::Color& col, bool force = true);
 	void Draw(int type, const float* vertices, int count, 
-		ee::Colorf* cols, bool force = true);
+		s2::Color* cols, bool force = true);
 	void Draw(int type, const float* vertices, int vcount, 
-		const ee::Colorf& col, unsigned short* indices, int icount);
+		const s2::Color& col, unsigned short* indices, int icount);
 
 protected:
 	virtual void BindAttrib(GLuint prog);
 
 private:
 	void CopyVertex(const float* vertices, int count, int color);
-	void CopyVertex(const float* vertices, int count, ee::Colorf* cols);
+	void CopyVertex(const float* vertices, int count, s2::Color* cols);
 
 	void Commit(int type, unsigned short* indices, int count);
 
-	static int PackColor(const ee::Colorf& col);
+	static int PackColor(const s2::Color& col);
 
 private:
 	GLuint m_model_view, m_projection;
