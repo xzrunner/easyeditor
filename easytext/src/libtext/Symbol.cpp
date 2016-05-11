@@ -35,10 +35,6 @@ void Symbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
  	}
 }
 
-void Symbol::ReloadTexture() const
-{
-}
-
 ee::Rect Symbol::GetSize(const ee::Sprite* sprite) const
 {
 	if (sprite) {

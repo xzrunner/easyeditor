@@ -31,7 +31,7 @@ public:
 	//	
 	virtual void ClearUserData(bool deletePtr);
 
-	virtual void ReloadTexture() const = 0;
+	virtual void ReloadTexture() const {}
 	virtual Rect GetSize(const Sprite* sprite = NULL) const = 0;
 	virtual void InvalidRect(const sm::mat4& mt) const {}
 

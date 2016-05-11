@@ -31,10 +31,6 @@ FontBlankSymbol::~FontBlankSymbol()
 {
 }
 
-void FontBlankSymbol::ReloadTexture() const
-{
-}
-
 void FontBlankSymbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
 {
 	const SettingData& setting = Config::Instance()->GetSettings();

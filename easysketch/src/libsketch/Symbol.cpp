@@ -24,10 +24,6 @@ Symbol* Symbol::Clone() const
 	return new Symbol(*this); 
 }
 
-void Symbol::ReloadTexture() const
-{
-}
-
 void Symbol::Draw(const s2::RenderParams& trans, const ee::Sprite* spr, 
 				  const ee::Sprite* root) const
 {
