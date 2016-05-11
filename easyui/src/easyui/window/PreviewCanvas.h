@@ -3,6 +3,8 @@
 
 #include <ee/CameraCanvas.h>
 
+#include <SM_Matrix.h>
+
 namespace ee { class PlayControl; class Sprite; }
 
 namespace eui

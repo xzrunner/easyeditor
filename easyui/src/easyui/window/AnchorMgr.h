@@ -3,6 +3,8 @@
 
 #include <ee/Observer.h>
 
+#include <SM_Vector.h>
+
 #include <json/json.h>
 
 namespace ee { class Sprite; }

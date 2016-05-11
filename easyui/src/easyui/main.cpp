@@ -12,6 +12,7 @@
 //#include <easyejoy2d.h>
 #include <easyterrain2d.h>
 #include <easytext.h>
+#include <easytexture.h>
 
 #include <ee/SymbolFactory.h>
 #include <ee/SpriteFactory.h>
@@ -46,6 +47,9 @@ static void InitSymbolCreators()
 
 	ee::SymbolFactory::RegisterCreator(etext::FILE_TAG, &etext::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(etext::FILE_TAG, &etext::Sprite::Create);
+
+	ee::SymbolFactory::RegisterCreator(etexture::FILE_TAG, &etexture::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(etexture::FILE_TAG, &etexture::Sprite::Create);
 }
 
 bool MyApp::OnInit()
