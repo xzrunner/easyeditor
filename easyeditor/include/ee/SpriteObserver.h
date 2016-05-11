@@ -1,6 +1,8 @@
 #ifndef _EASYEDITOR_SPRITE_OBSERVER_H_
 #define _EASYEDITOR_SPRITE_OBSERVER_H_
 
+#include <SM_Vector.h>
+
 namespace ee
 {
 

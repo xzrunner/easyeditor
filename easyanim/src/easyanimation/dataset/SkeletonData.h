@@ -1,6 +1,8 @@
 #ifndef _EASYANIM_SKELETON_DATA_H_
 #define _EASYANIM_SKELETON_DATA_H_
 
+#include <SM_Vector.h>
+
 #include <vector>
 #include <map>
 
