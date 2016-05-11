@@ -48,7 +48,7 @@ void Symbol::Release() const
 	for_each(m_sprites.begin(), m_sprites.end(), ee::ReleaseObjectFunctor<ee::Sprite>());
 }
 
-void Symbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
+void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 {
  	const ee::TPNode* n = NULL;
 	if (ee::Config::Instance()->IsUseDTex() && 
@@ -112,13 +112,13 @@ void Symbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
  	else
 	{
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-			ee::SpriteRenderer::Draw(m_sprites[i], trans);
+			ee::SpriteRenderer::Draw(m_sprites[i], params);
 		}
 		if (m_clipbox.Width() > 0 && m_clipbox.Height() > 0) {
 			sm::vec2 min(m_clipbox.xmin, m_clipbox.ymin), 
 				max(m_clipbox.xmax, m_clipbox.ymax);
 			ee::RVG::Color(s2::Color(0, 204, 0));
-			ee::RVG::Rect(ee::Math2D::TransVector(min, trans.mt), ee::Math2D::TransVector(max, trans.mt), false);
+			ee::RVG::Rect(ee::Math2D::TransVector(min, params.mt), ee::Math2D::TransVector(max, params.mt), false);
 		}
 	}
 }

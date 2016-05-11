@@ -33,7 +33,7 @@ public:
 
 	void ReloadTexture() const;
 
-	void Draw(const s2::RenderParams& trans, const s2::Sprite* spr = NULL) const;
+	void Draw(const s2::RenderParams& params, const ee::Sprite* spr = NULL) const;
 
 	void GetSize(float& width, float& height) const;
 
@@ -47,7 +47,7 @@ public:
 	ee::Sprite* GetSprite(int i, int j) const { return m_sprites[i][j]; }
 
 	static void DrawScale9(Scale9Type type, ee::Sprite* const sprites[3][3], 
-		const s2::RenderParams& trans);
+		const s2::RenderParams& params);
 
 	static void ResizeScale9(Scale9Type type, ee::Sprite* const sprites[3][3],
 		float width, float height);

@@ -72,11 +72,11 @@ render_func(void* symbol, float* mat, float x, float y, float angle, float scale
 
 	ee::Symbol* sym = static_cast<ee::Symbol*>(symbol);
 
-	s2::RenderParams trans;
-	memcpy(&trans.color.mul, mul_col, sizeof(*mul_col));
-	memcpy(&trans.color.add, add_col, sizeof(*add_col));
-	trans.color.mul = trans.color.mul * rp->ct.mul;
-	trans.color.add = trans.color.add + rp->ct.add;
+	s2::RenderParams params;
+	memcpy(&params.color.mul, mul_col, sizeof(*mul_col));
+	memcpy(&params.color.add, add_col, sizeof(*add_col));
+	params.color.mul = params.color.mul * rp->ct.mul;
+	params.color.add = params.color.add + rp->ct.add;
 	// todo color trans
 
 	sm::mat4 mt = rp->mat;
@@ -88,9 +88,9 @@ render_func(void* symbol, float* mat, float x, float y, float angle, float scale
 		mt.x[12]= mat[4];
 		mt.x[13]= mat[5];
 	}
-	trans.mt = mt;
+	params.mt = mt;
 
-	ee::SpriteRenderer::Draw(sym, trans, sm::vec2(x, y), angle, scale, scale, 0, 0);
+	ee::SpriteRenderer::Draw(sym, params, sm::vec2(x, y), angle, scale, scale, 0, 0);
 
 	// todo bind
 	// 	if (p->bind_ps) {

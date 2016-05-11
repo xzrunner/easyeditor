@@ -6,6 +6,8 @@
 #include "FontBlankPropertySetting.h"
 #include "trans_color.h"
 
+#include <sprite2/RenderColor.h>
+
 namespace ee
 {
 

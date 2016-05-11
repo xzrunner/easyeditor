@@ -5,6 +5,16 @@
 namespace ee
 {
 
+Symbol::Symbol()
+	: m_impl(NULL)
+{
+}
+
+Symbol::Symbol(const Symbol& sym)
+	: m_impl(NULL)
+{
+}
+
 Symbol::~Symbol()
 {
 	SymbolMgr::Instance()->Remove(this);

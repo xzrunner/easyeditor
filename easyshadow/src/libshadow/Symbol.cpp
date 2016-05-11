@@ -31,10 +31,10 @@ Symbol* Symbol::Clone() const
 	return new Symbol(*this);
 }
 
-void Symbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
+void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 {
 	if (m_shadow) {
-		m_shadow->Draw(trans.mt, trans.color.mul.a);
+		m_shadow->Draw(params.mt, params.color.mul.a);
 	}
 }
 

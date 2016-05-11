@@ -30,6 +30,8 @@
 #include "CopyPasteSpriteState.h"
 #include "PerspectiveSpriteState.h"
 
+#include <sprite2/RenderColor.h>
+
 namespace ee
 {
 

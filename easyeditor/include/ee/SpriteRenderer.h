@@ -16,13 +16,13 @@ class SpriteRenderer
 {
 public:
 	static void Draw(const Sprite* sprite, 
-			         const s2::RenderParams& trans = s2::RenderParams());
+			         const s2::RenderParams& params = s2::RenderParams());
 
 	static void InvalidRect(const Sprite* sprite, 
 		                    const sm::mat4& mt = sm::mat4());
 
 	static void Draw(const Symbol* symbol, 
-		             const s2::RenderParams& trans = s2::RenderParams(),
+		             const s2::RenderParams& params = s2::RenderParams(),
 			         const sm::vec2& pos = sm::vec2(0, 0),
 			         float angle = 0.0f, 
 			         float xScale = 1.0f, 
@@ -32,7 +32,7 @@ public:
 
 private:
 	static void DrawImpl(const Sprite* sprite, 
-  				         const s2::RenderParams& trans);
+  				         const s2::RenderParams& params);
 	
 }; // SpriteRenderer
 

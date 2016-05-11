@@ -4,6 +4,8 @@
 #include "EditPanelImpl.h"
 #include "panel_msg.h"
 
+#include <sprite2/RenderColor.h>
+
 #include <wx/propgrid/advprops.h>
 
 namespace ee

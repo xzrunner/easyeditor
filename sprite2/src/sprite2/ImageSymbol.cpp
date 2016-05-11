@@ -12,7 +12,7 @@ ImageSymbol::ImageSymbol()
 {
 }
 
-void ImageSymbol::Draw(const RenderParams& params, const Sprite* spr, const Sprite* root) const
+void ImageSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 {
 	
 }

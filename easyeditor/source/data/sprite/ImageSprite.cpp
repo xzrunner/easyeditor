@@ -6,30 +6,37 @@
 #include "BBFactory.h"
 #include "BoundingBox.h"
 
+#include <sprite2/RenderShader.h>
+#include <sprite2/ImageSprite.h>
+
 namespace ee
 {
 
 ImageSprite::ImageSprite()
 	: m_symbol(NULL)
 {
+	m_core = new s2::ImageSprite;
 }
 
 ImageSprite::ImageSprite(const ImageSprite& sprite)
 	: Sprite(sprite)
 	, m_symbol(sprite.m_symbol)
 {
+	m_core = new s2::ImageSprite;
 	m_symbol->Retain();
 }
 
 ImageSprite::ImageSprite(ImageSymbol* symbol)
 	: m_symbol(symbol)
 {
+	m_core = new s2::ImageSprite;
 	m_symbol->Retain();
 	BuildBounding();
 }
 
 ImageSprite::~ImageSprite()
 {
+	delete m_core;
 	if (m_symbol) {
 		m_symbol->Release();
 	}
@@ -44,6 +51,8 @@ ImageSprite* ImageSprite::Clone() const
 
 bool ImageSprite::Update(float dt)
 {
+	if (m_core->Update(dt)) return true;
+
 	return GetShader().filter == s2::FM_HEAT_HAZE 
 		|| GetShader().filter == s2::FM_SHOCK_WAVE 
 		|| GetShader().filter == s2::FM_SWIRL;
@@ -76,17 +85,17 @@ void ImageSprite::BuildBoundingFromTexCoords(float* texCoords)
  	rect.ymax = height * (texCoords[3] - 0.5f);
  
  	sm::vec2 center(rect.CenterX(), rect.CenterY());
- 	float hWidth = (rect.xmax - rect.xmin) * 0.5f * m_scale.x,
- 		hHeight = (rect.ymax - rect.ymin) * 0.5f * m_scale.y;
+ 	float hWidth = (rect.xmax - rect.xmin) * 0.5f * m_core->Scale().x,
+ 		hHeight = (rect.ymax - rect.ymin) * 0.5f * m_core->Scale().y;
  	rect.xmin = -hWidth;
  	rect.xmax = hWidth;
  	rect.ymin = -hHeight;
  	rect.ymax = hHeight;
  
- 	sm::vec2 offset = Math2D::RotateVector(center, m_angle);
- 	rect.Translate(m_position + offset);
+ 	sm::vec2 offset = Math2D::RotateVector(center, m_core->Angle());
+ 	rect.Translate(m_core->Position() + offset);
  	m_bounding->InitFromRect(rect);
- 	m_bounding->SetTransform(m_position, m_offset, m_angle);
+ 	m_bounding->SetTransform(m_core->Position(), m_offset, m_core->Angle());
 }
 
 }

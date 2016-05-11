@@ -26,20 +26,20 @@ Symbol::~Symbol()
 	clear();
 }
 
-void Symbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
+void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 {
 	if (m_index != 0) {
-		Utility::DrawAnimSymbol(this, trans, m_index);
+		Utility::DrawAnimSymbol(this, params, m_index);
 	} else {
 		static clock_t init = 0;
 		if (init == 0) {
 			init = clock();
-			Utility::DrawAnimSymbol(this, trans, 1);
+			Utility::DrawAnimSymbol(this, params, 1);
 		} else {
 			clock_t curr = clock();
 			float during = (float)(curr - init) / CLOCKS_PER_SEC;
 			int index = during / (1.0f / m_fps);
-			Utility::DrawAnimSymbol(this, trans, index % getMaxFrameIndex() + 1);
+			Utility::DrawAnimSymbol(this, params, index % getMaxFrameIndex() + 1);
 		}
 	}
 }

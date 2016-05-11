@@ -10,6 +10,8 @@
 #include "SetSpritePosAOP.h"
 #include "TranslateSpriteAOP.h"
 
+#include <sprite2/RenderColor.h>
+
 #include <wx/string.h>
 
 #include <algorithm>

@@ -17,35 +17,35 @@ namespace ee
 {
 
 void SpriteRenderer::Draw(const Sprite* spr, 
-						  const s2::RenderParams& trans)
+						  const s2::RenderParams& params)
 {
 	if (!spr->visiable) {
 		return;
 	}
 
 	s2::BlendMode blend;
-	if (trans.shader.blend != s2::BM_NULL) {
-		blend = trans.shader.blend;
+	if (params.shader.blend != s2::BM_NULL) {
+		blend = params.shader.blend;
 	} else {
 		blend = spr->GetShader().blend;
 	}
 
 	s2::FilterMode filter;
-	if (trans.shader.filter != s2::FM_NULL) {
-		filter = trans.shader.filter;
+	if (params.shader.filter != s2::FM_NULL) {
+		filter = params.shader.filter;
 	} else {
 		filter = spr->GetShader().filter;
 	}
 
 	s2::RenderCamera ct;
-	if (trans.camera.mode != s2::CM_ORTHO) {
-		ct.mode = trans.camera.mode;
+	if (params.camera.mode != s2::CM_ORTHO) {
+		ct.mode = params.camera.mode;
 	} else {
 		ct.mode = spr->GetCamera().mode;
 	}
 	if (ct.mode == s2::CM_PERSPECTIVE_AUTO_HEIGHT) {
-		if (trans.camera.base_y == FLT_MAX) {
-			ct.base_y = trans.camera.base_y;
+		if (params.camera.base_y == FLT_MAX) {
+			ct.base_y = params.camera.base_y;
 			std::vector<sm::vec2> bound;
 			spr->GetBounding()->GetBoundPos(bound);
 			for (int i = 0, n = bound.size(); i < n; ++i) {
@@ -54,7 +54,7 @@ void SpriteRenderer::Draw(const Sprite* spr,
 				}
 			}
 		} else {
-			ct.base_y = trans.camera.base_y;
+			ct.base_y = params.camera.base_y;
 		}
 	}
 
@@ -62,23 +62,23 @@ void SpriteRenderer::Draw(const Sprite* spr,
 	if (blend != s2::BM_NULL) {
 		const Camera* cam = CameraMgr::Instance()->GetCamera();
 		if (cam->Type() == "ortho") {
-			SpriteBlend::Draw(spr, trans.mt);
+			SpriteBlend::Draw(spr, params.mt);
 		}
 	} else if (filter != s2::FM_NULL) {
-		if (trans.set_shader) {
+		if (params.set_shader) {
 			mgr->SetShader(sl::FILTER);
 		}
 		sl::FilterShader* shader = static_cast<sl::FilterShader*>(mgr->GetShader(sl::FILTER));
 		shader->SetMode(sl::FILTER_MODE(filter));
-		s2::RenderParams t = trans;
+		s2::RenderParams t = params;
 		t.shader.filter = filter;
 		t.camera = ct;
 		DrawImpl(spr, t);
 	} else {
-		if (trans.set_shader) {
+		if (params.set_shader) {
 			mgr->SetShader(sl::SPRITE2);
 		}
-		s2::RenderParams t = trans;
+		s2::RenderParams t = params;
 		t.camera = ct;
 		DrawImpl(spr, t);
 	}
@@ -98,7 +98,7 @@ void SpriteRenderer::InvalidRect(const Sprite* sprite, const sm::mat4& mt)
 }
 
 void SpriteRenderer::Draw(const Symbol* symbol, 
-						  const s2::RenderParams& trans /*= s2::RenderParams()*/,
+						  const s2::RenderParams& params /*= s2::RenderParams()*/,
 						  const sm::vec2& pos, 
 						  float angle/* = 0.0f*/, 
 						  float xScale/* = 1.0f*/, 
@@ -108,30 +108,30 @@ void SpriteRenderer::Draw(const Symbol* symbol,
 {
 	sm::mat4 mt;
 	mt.SetTransformation(pos.x, pos.y, angle, xScale, yScale, 0, 0, xShear, yShear);
-	mt = mt * trans.mt;
+	mt = mt * params.mt;
 
-	s2::RenderParams t = trans;
+	s2::RenderParams t = params;
 	t.mt = mt;
 
 	symbol->Draw(t);
 }
 
 void SpriteRenderer::DrawImpl(const Sprite* spr, 
-							  const s2::RenderParams& trans)
+							  const s2::RenderParams& params)
 {
 	sm::mat4 t;
 	spr->GetTransMatrix(t);
-	t = t * trans.mt;
+	t = t * params.mt;
 
 	s2::RenderColor col_new;
 
-	col_new.mul	 = spr->GetColor().mul * trans.color.mul;
-	col_new.add	 = spr->GetColor().add + trans.color.add;
-	col_new.rmap = spr->GetColor().rmap.MapMul(trans.color.rmap, trans.color.gmap, trans.color.bmap);
-	col_new.gmap = spr->GetColor().gmap.MapMul(trans.color.rmap, trans.color.gmap, trans.color.bmap);
-	col_new.bmap = spr->GetColor().bmap.MapMul(trans.color.rmap, trans.color.gmap, trans.color.bmap);
+	col_new.mul	 = spr->GetColor().mul * params.color.mul;
+	col_new.add	 = spr->GetColor().add + params.color.add;
+	col_new.rmap = spr->GetColor().rmap.MapMul(params.color.rmap, params.color.gmap, params.color.bmap);
+	col_new.gmap = spr->GetColor().gmap.MapMul(params.color.rmap, params.color.gmap, params.color.bmap);
+	col_new.bmap = spr->GetColor().bmap.MapMul(params.color.rmap, params.color.gmap, params.color.bmap);
 
-	s2::RenderParams _trans = trans;
+	s2::RenderParams _trans = params;
 	_trans.mt = t;
 	_trans.color = col_new;
 
@@ -142,7 +142,7 @@ void SpriteRenderer::DrawImpl(const Sprite* spr,
 		std::vector<sm::vec2> bound;
 		spr->GetBounding()->GetBoundPos(bound);
 		for (int i = 0, n = bound.size(); i < n; ++i) {
-			bound[i] = Math2D::TransVector(bound[i], trans.mt);
+			bound[i] = Math2D::TransVector(bound[i], params.mt);
 		}
 		RVG::Color(BLACK);
 		RVG::LineWidth(4);

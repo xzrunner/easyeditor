@@ -100,9 +100,9 @@ void Sprite::SetSize(float w, float h)
 	BuildBounding();
 }
 
-void Sprite::Draw(const s2::RenderParams& trans) const
+void Sprite::Draw(const s2::RenderParams& params) const
 {
-	m_data.Draw(trans);
+	m_data.Draw(params);
 }
 
 }

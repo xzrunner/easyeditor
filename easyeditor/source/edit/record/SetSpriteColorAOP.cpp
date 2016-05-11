@@ -1,6 +1,8 @@
 #include "SetSpriteColorAOP.h"
 #include "Sprite.h"
 
+#include <sprite2/RenderColor.h>
+
 #include <algorithm>
 
 #include <assert.h>

@@ -38,7 +38,7 @@ public:
 	int GetClippedHeight() const;
 	const uint8_t* GetPixelData() const;
 
-	void Draw(const s2::RenderParams& trans, const s2::Sprite* spr = NULL) const;
+	void Draw(const s2::RenderParams& params, const ee::Sprite* spr = NULL) const;
 	void InvalidRect(const sm::mat4& mt) const;
 
 	const sm::vec2& GetOffset() const { return m_offset; }

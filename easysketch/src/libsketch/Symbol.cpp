@@ -24,7 +24,7 @@ Symbol* Symbol::Clone() const
 	return new Symbol(*this); 
 }
 
-void Symbol::Draw(const s2::RenderParams& trans, const ee::Sprite* spr, 
+void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr, 
 				  const ee::Sprite* root) const
 {
 	if (!spr) {

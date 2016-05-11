@@ -6,9 +6,10 @@
 #include "Object.h"
 
 #include <SM_Matrix.h>
-#include <sprite2/Sprite.h>
 
 #include <json/json.h>
+
+namespace s2 { class Sprite; class RenderColor; class RenderShader; class RenderCamera; }
 
 namespace ee
 {
@@ -20,7 +21,7 @@ class PropertySetting;
 class EditPanelImpl;
 class SpriteObserver;
 
-class Sprite : public s2::Sprite, public Cloneable, public UserDataImpl, public Object
+class Sprite : public Cloneable, public UserDataImpl, public Object
 {
 public:
 	Sprite();
@@ -37,6 +38,8 @@ public:
 	//	
 	virtual void ClearUserData(bool deletePtr);
 
+	virtual bool Update(float dt) = 0;
+
 	virtual const Symbol& GetSymbol() const = 0;
 	virtual void SetSymbol(Symbol* symbol) = 0;
 
@@ -48,13 +51,13 @@ public:
 	virtual PropertySetting* CreatePropertySetting(EditPanelImpl* stage);
 
 	virtual void SetTransform(const sm::vec2& position, float angle);
-	const sm::vec2& GetPosition() const { return m_position; }
-	float GetAngle() const { return m_angle; }
+	const sm::vec2& GetPosition() const;
+	float GetAngle() const;
 
-	const sm::vec2& GetScale() const { return m_scale; }
+	const sm::vec2& GetScale() const;
 	void SetScale(const sm::vec2& scale);
 
-	const sm::vec2& GetShear() const { return m_shear; }
+	const sm::vec2& GetShear() const;
 	void SetShear(const sm::vec2& shear);
 
 	const sm::vec2& GetOffset() const { return m_offset; }
@@ -74,11 +77,11 @@ public:
 
 	sm::vec2 GetCenter() const;
 
-	const s2::RenderColor& GetColor() const { return m_color; }
-	s2::RenderColor& GetColor() { return m_color; }
-	const s2::RenderShader& GetShader() const { return m_shader; }
-	s2::RenderShader& GetShader() { return m_shader; }
-	const s2::RenderCamera& GetCamera() const { return m_camera; }
+	const s2::RenderColor& GetColor() const;
+	s2::RenderColor& GetColor();
+	const s2::RenderShader& GetShader() const;
+	s2::RenderShader& GetShader();
+	const s2::RenderCamera& GetCamera() const;
 
 	BoundingBox* GetBounding() const {
 		return m_bounding;
@@ -94,6 +97,8 @@ public:
 
 	bool IsAnchor() const { return m_is_anchor; }
 	void SetAnchor(bool anchor) { m_is_anchor = anchor; }
+
+	const s2::Sprite* GetCore() const { return m_core; }
 
 protected:
 	template<typename T>
@@ -113,6 +118,8 @@ public:
 	bool editable;
 
 protected:
+	s2::Sprite*	m_core;
+
 	sm::vec2	m_offset;
 	bool		m_offset_valid;
 	sm::bvec2	m_mirror;

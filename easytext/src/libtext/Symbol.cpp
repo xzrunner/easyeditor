@@ -24,14 +24,14 @@ Symbol::~Symbol()
 {
 }
 
-void Symbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
+void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 {
 	const ee::SettingData& setting = ee::Config::Instance()->GetSettings();
 	if (setting.visible_label_bg) {
-		DrawBackground(spr, trans.mt);
+		DrawBackground(spr, params.mt);
 	} 
  	if (setting.visible_label_text) {
- 		DrawText(spr, trans);
+ 		DrawText(spr, params);
  	}
 }
 
@@ -75,7 +75,7 @@ void Symbol::LoadResources()
 	m_align_vert = (VertAlignType)(value["align_vert"].asInt());
 }
 
-void Symbol::DrawBackground(const s2::Sprite* sprite, const sm::mat4& mt) const
+void Symbol::DrawBackground(const ee::Sprite* sprite, const sm::mat4& mt) const
 {
 	if (!sprite) {
 		return;
@@ -97,7 +97,7 @@ void Symbol::DrawBackground(const s2::Sprite* sprite, const sm::mat4& mt) const
 	}
 }
 
-void Symbol::DrawText(const s2::Sprite* sprite, const s2::RenderParams& trans) const
+void Symbol::DrawText(const ee::Sprite* sprite, const s2::RenderParams& params) const
 {
 	if (!sprite) {
 		return;
@@ -122,7 +122,7 @@ void Symbol::DrawText(const s2::Sprite* sprite, const s2::RenderParams& trans) c
 		style.gs.edge_size = font->GetEdgeSize();
 		style.gs.edge_color.integer = font->GetEdgeColor().ToRGBA();
 
-		ee::GTxt::Instance()->Draw(style, trans.mt, trans.color.mul, trans.color.add, font->GetText(), font->GetTime());
+		ee::GTxt::Instance()->Draw(style, params.mt, params.color.mul, params.color.add, font->GetText(), font->GetTime());
 		font->UpdateTime();
 	}
 }

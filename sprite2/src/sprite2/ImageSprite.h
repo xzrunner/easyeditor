@@ -13,7 +13,7 @@ class ImageSprite : public Sprite
 public:
 	ImageSprite();
 	
-	virtual bool Update(float dt) const { return false; }
+	virtual bool Update(float dt) { return false; }
 	
 private:
 	ImageSymbol* m_sym;

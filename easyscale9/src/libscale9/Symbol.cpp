@@ -19,9 +19,9 @@ Symbol::Symbol(const Symbol& symbol)
 {
 }
 
-void Symbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
+void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 {
-	m_data.Draw(trans, spr);
+	m_data.Draw(params, spr);
 }
 
 void Symbol::ReloadTexture() const

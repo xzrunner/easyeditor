@@ -37,9 +37,9 @@ ImageSymbol* ImageSymbol::Clone() const
 	return NULL;
 }
 
-void ImageSymbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
+void ImageSymbol::Draw(const s2::RenderParams& params, const Sprite* spr) const
 {
-	m_image->Draw(trans, spr);
+	m_image->Draw(params, spr);
 }
 
 void ImageSymbol::ReloadTexture() const

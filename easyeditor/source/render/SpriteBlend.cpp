@@ -63,7 +63,7 @@ void SpriteBlend::DrawSprToTmp(const Sprite* spr, const sm::mat4& mt)
 	s2::RenderParams params;
 	params.mt = mt;
 	params.set_shader = false;
-	params.root_spr = spr;
+	params.root_spr = spr->GetCore();
 	SpriteRenderer::Draw(spr, params);
 	const_cast<Sprite*>(spr)->GetShader().blend = mode;
 

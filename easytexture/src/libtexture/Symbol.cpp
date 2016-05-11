@@ -36,15 +36,15 @@ Symbol* Symbol::Clone() const
 	return new Symbol(*this);
 }
 
-void Symbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
+void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 {
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
-	shader->SetColor(trans.color.mul.ToABGR(), trans.color.add.ToABGR());
-	shader->SetColorMap(trans.color.rmap.ToABGR(), trans.color.gmap.ToABGR(), trans.color.bmap.ToABGR());
+	shader->SetColor(params.color.mul.ToABGR(), params.color.add.ToABGR());
+	shader->SetColorMap(params.color.rmap.ToABGR(), params.color.gmap.ToABGR(), params.color.bmap.ToABGR());
 
 	for (int i = 0, n = m_shapes.size(); i < n; ++i) {
-		m_shapes[i]->Draw(trans.mt, trans.color);
+		m_shapes[i]->Draw(params.mt, params.color);
 	}
 }
 

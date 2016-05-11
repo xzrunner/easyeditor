@@ -65,13 +65,13 @@ void Scale9Data::ReloadTexture() const
 	}
 }
 
-void Scale9Data::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
+void Scale9Data::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 {
 	if (spr) {
 		const Sprite* _spr = static_cast<const Sprite*>(spr);
-		_spr->Draw(trans);
+		_spr->Draw(params);
 	} else {
-		DrawScale9(m_type, m_sprites, trans);
+		DrawScale9(m_type, m_sprites, params);
 	}
 }
 
@@ -178,7 +178,7 @@ void Scale9Data::LoadFromFile(const std::string& filepath)
 }
 
 void Scale9Data::DrawScale9(Scale9Type type, ee::Sprite* const sprites[3][3], 
-							const s2::RenderParams& trans)
+							const s2::RenderParams& params)
 {
 	switch (type)
 	{
@@ -186,7 +186,7 @@ void Scale9Data::DrawScale9(Scale9Type type, ee::Sprite* const sprites[3][3],
 		for (size_t i = 0; i < 3; ++i) {
 			for (size_t j = 0; j < 3; ++j) {
 				if (!sprites[i][j]) continue;
-				ee::SpriteRenderer::Draw(sprites[i][j], trans);
+				ee::SpriteRenderer::Draw(sprites[i][j], params);
 			}
 		}
 		break;
@@ -195,27 +195,27 @@ void Scale9Data::DrawScale9(Scale9Type type, ee::Sprite* const sprites[3][3],
 			for (size_t j = 0; j < 3; ++j) {
 				if (i == 1 && j == 1) continue;
 				if (!sprites[i][j]) continue;
-				ee::SpriteRenderer::Draw(sprites[i][j], trans);
+				ee::SpriteRenderer::Draw(sprites[i][j], params);
 			}
 		}
 		break;
 	case e_3GridHor:
 		for (size_t i = 0; i < 3; ++i) {
 			if (!sprites[1][i]) continue;
-			ee::SpriteRenderer::Draw(sprites[1][i], trans);
+			ee::SpriteRenderer::Draw(sprites[1][i], params);
 		}
 		break;
 	case e_3GridVer:
 		for (size_t i = 0; i < 3; ++i) {
 			if (!sprites[i][1]) continue;
-			ee::SpriteRenderer::Draw(sprites[i][1], trans);
+			ee::SpriteRenderer::Draw(sprites[i][1], params);
 		}
 		break;
 	case e_6GridUpper:
 		for (size_t i = 1; i < 3; ++i) {
 			for (size_t j = 0; j < 3; ++j) {
 				if (!sprites[i][j]) continue;
-				ee::SpriteRenderer::Draw(sprites[i][j], trans);
+				ee::SpriteRenderer::Draw(sprites[i][j], params);
 			}
 		}
 		break;

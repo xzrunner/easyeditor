@@ -15,6 +15,10 @@
 #include <ee/FileType.h>
 #include <ee/ImageSprite.h>
 
+#include <sprite2/RenderColor.h>
+#include <sprite2/RenderShader.h>
+#include <sprite2/RenderCamera.h>
+
 namespace erespacker
 {
 

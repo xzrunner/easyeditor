@@ -51,18 +51,18 @@ Symbol* Symbol::Clone() const
 	return new Symbol(*this); 
 }
 
-void Symbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
+void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 {
  	if (m_bg) {
- 		m_bg->Draw(trans, spr);
+ 		m_bg->Draw(params, spr);
  	}
 	if (ee::Config::Instance()->GetSettings().visible_shape)
 	{
 		for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
-			m_bg_outline[i]->Draw(trans.mt);
+			m_bg_outline[i]->Draw(params.mt);
 		}
 		for (size_t i = 0, n = m_shapes.size(); i < n; ++i) {
-			m_shapes[i]->Draw(trans.mt);
+			m_shapes[i]->Draw(params.mt);
 		}
 	}
 }

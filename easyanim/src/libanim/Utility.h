@@ -12,7 +12,7 @@ class Utility
 {
 public:
 	static void DrawAnimSymbol(const Symbol* symbol, 
-		const s2::RenderParams& trans = s2::RenderParams(),
+		const s2::RenderParams& params = s2::RenderParams(),
 		int index = 1);
 
 	static void GetCurrSprites(const Symbol* symbol, int index, std::vector<ee::Sprite*>& sprites);

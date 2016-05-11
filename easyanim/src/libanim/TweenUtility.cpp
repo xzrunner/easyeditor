@@ -4,6 +4,8 @@
 #include <easyicon.h>
 #include <easymesh.h>
 
+#include <sprite2/RenderColor.h>
+
 namespace eanim
 {
 

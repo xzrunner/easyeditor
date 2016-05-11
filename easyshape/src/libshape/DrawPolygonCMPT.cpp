@@ -101,7 +101,7 @@ void DrawPolygonCMPT::OnSetColor(wxCommandEvent& event)
 	case 0:
 		if (ee::Config::Instance()->GetSettings().color_setting_dlg_type == ee::CSDT_HSL)
 		{
- 			// todo trans between wxColor and s2::Color
+ 			// todo params between wxColor and s2::Color
  			s2::Color col;
  			col.r = m_color.Red();
  			col.g = m_color.Green();
@@ -114,7 +114,7 @@ void DrawPolygonCMPT::OnSetColor(wxCommandEvent& event)
 		}
 		else
 		{
-			// todo trans between wxColor and s2::Color
+			// todo params between wxColor and s2::Color
 			s2::Color col;
 			col.r = m_color.Red();
 			col.g = m_color.Green();

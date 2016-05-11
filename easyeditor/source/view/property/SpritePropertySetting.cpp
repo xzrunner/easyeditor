@@ -18,6 +18,9 @@
 #include "FileHelper.h"
 #include "FilterModes.h"
 
+#include <sprite2/RenderColor.h>
+#include <sprite2/RenderShader.h>
+
 #include <wx/propgrid/advprops.h>
 
 namespace ee

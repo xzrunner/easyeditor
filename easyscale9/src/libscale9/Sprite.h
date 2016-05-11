@@ -34,7 +34,7 @@ public:
 	void GetSize(float& w, float& h) const;
 	void SetSize(float w, float h);
 
-	void Draw(const s2::RenderParams& trans) const;
+	void Draw(const s2::RenderParams& params) const;
 
 	Scale9Type GetScale9Type() const { return m_data.GetType(); }
 

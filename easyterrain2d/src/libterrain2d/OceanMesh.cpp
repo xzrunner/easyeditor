@@ -112,7 +112,7 @@ void OceanMesh::Update(float dt)
 	}
 }
 
-void OceanMesh::Draw(const s2::RenderParams& trans, bool draw_tris) const
+void OceanMesh::Draw(const s2::RenderParams& params, bool draw_tris) const
 {
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
@@ -120,16 +120,16 @@ void OceanMesh::Draw(const s2::RenderParams& trans, bool draw_tris) const
 	if (m_blend_open && m_image1) {
 		shader->SetColor(s2::Color(255, 255, 255, (int)(m_blend_base * 255 + 0.5f)).ToABGR(), 0);
 		for (int i = 0, n = m_grids.size(); i < n; ++i) {
-			emesh::MeshRenderer::DrawMesh(m_grids[i], trans, m_image0->GetTexID());
+			emesh::MeshRenderer::DrawMesh(m_grids[i], params, m_image0->GetTexID());
 		}
 		shader->SetColor(s2::Color(255, 255, 255, (int)((1 - m_blend_base) * 255 + 0.5f)).ToABGR(), 0);
 		for (int i = 0, n = m_grids.size(); i < n; ++i) {
-			emesh::MeshRenderer::DrawMesh(m_grids[i], trans, m_image1->GetTexID());
+			emesh::MeshRenderer::DrawMesh(m_grids[i], params, m_image1->GetTexID());
 		}
 	} else {
 		shader->SetColor(0xffffffff, 0);
 		for (int i = 0, n = m_grids.size(); i < n; ++i) {
-			emesh::MeshRenderer::DrawTexture(m_grids[i], trans);
+			emesh::MeshRenderer::DrawTexture(m_grids[i], params);
 		}
 	}
 

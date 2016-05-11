@@ -21,7 +21,7 @@ public:
 	//
 	// Symbol interface
 	//	
-	virtual void Draw(const s2::RenderParams& trans, const s2::Sprite* spr = NULL) const {}
+	virtual void Draw(const s2::RenderParams& params, const ee::Sprite* spr = NULL) const {}
 	virtual Rect GetSize(const Sprite* sprite = NULL) const {
 		return m_size;
 	}

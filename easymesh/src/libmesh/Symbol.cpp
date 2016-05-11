@@ -57,7 +57,7 @@ Symbol* Symbol::Clone() const
 	return new Symbol(*this);
 }
 
-void Symbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
+void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 {
 	if (!m_mesh) {
 		return;
@@ -66,14 +66,14 @@ void Symbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	mgr->SetShader(sl::SPRITE2);
 	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader());
-	shader->SetColor(trans.color.mul.ToABGR(), trans.color.add.ToABGR());
-	shader->SetColorMap(trans.color.rmap.ToABGR(), trans.color.gmap.ToABGR(), trans.color.bmap.ToABGR());
+	shader->SetColor(params.color.mul.ToABGR(), params.color.add.ToABGR());
+	shader->SetColorMap(params.color.rmap.ToABGR(), params.color.gmap.ToABGR(), params.color.bmap.ToABGR());
 
 	if (spr) {
 		const MeshTrans& mtrans = static_cast<const Sprite*>(spr)->GetMeshTrans();
 		mtrans.StoreToMesh(m_mesh);
 	}
-	MeshRenderer::DrawTexture(m_mesh, trans);
+	MeshRenderer::DrawTexture(m_mesh, params);
 	if (!m_pause && spr)
 	{
 		const Sprite* s = static_cast<const Sprite*>(spr);

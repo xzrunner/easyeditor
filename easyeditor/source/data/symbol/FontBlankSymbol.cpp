@@ -31,15 +31,15 @@ FontBlankSymbol::~FontBlankSymbol()
 {
 }
 
-void FontBlankSymbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
+void FontBlankSymbol::Draw(const s2::RenderParams& params, const Sprite* spr) const
 {
 	const SettingData& setting = Config::Instance()->GetSettings();
 	const FontBlankSprite* fb = (const FontBlankSprite*)spr;
 	if (setting.visible_label_bg) {
- 		DrawBackground(fb, trans.mt);
+ 		DrawBackground(fb, params.mt);
  	} 
 	if (setting.visible_label_text) {
-		DrawText(fb, trans.mt);
+		DrawText(fb, params.mt);
 	}
 }
 

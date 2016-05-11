@@ -13,10 +13,9 @@ class ImageSymbol : public Symbol
 public:
 	ImageSymbol();
 
-	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL, 
-		const Sprite* root = NULL) const;
+	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const;
 
-private:
+protected:
 	uint32_t m_tex_id;
 	uint16_t m_xmin, m_ymin, m_xmax, m_ymax;
 

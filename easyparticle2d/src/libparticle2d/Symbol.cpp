@@ -27,21 +27,21 @@ Symbol* Symbol::Clone() const
 	return new Symbol(*this);
 }
 
-void Symbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
+void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 {
 	if (!spr) {
 		return;
 	}
 
 	Sprite* p2d_spr = const_cast<Sprite*>(static_cast<const Sprite*>(spr));
-	p2d_spr->SetMatrix(trans.mt);
+	p2d_spr->SetMatrix(params.mt);
 
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
-	shader->SetColor(trans.color.mul.ToABGR(), trans.color.add.ToABGR());
-	shader->SetColorMap(trans.color.rmap.ToABGR(), trans.color.gmap.ToABGR(), trans.color.bmap.ToABGR());
+	shader->SetColor(params.color.mul.ToABGR(), params.color.add.ToABGR());
+	shader->SetColorMap(params.color.rmap.ToABGR(), params.color.gmap.ToABGR(), params.color.bmap.ToABGR());
 
-	p2d_spr->Draw(trans.mt);		
+	p2d_spr->Draw(params.mt);		
 }
 
 void Symbol::ReloadTexture() const

@@ -17,7 +17,7 @@ Symbol::~Symbol()
 {
 }
 
-void Symbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
+void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 {
 	if (!spr) {
 		return;
