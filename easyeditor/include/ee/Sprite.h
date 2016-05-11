@@ -114,6 +114,7 @@ public:
 
 protected:
 	sm::vec2	m_offset;
+	bool		m_offset_valid;
 	sm::bvec2	m_mirror;
 	sm::vec2	m_perspective;
 

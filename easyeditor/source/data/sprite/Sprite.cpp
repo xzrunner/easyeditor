@@ -20,6 +20,7 @@ namespace ee
 
 Sprite::Sprite()
 	: m_observer(NULL)
+	, m_offset_valid(false)
 {
 	clip = false;
 
@@ -34,6 +35,7 @@ Sprite::Sprite()
 
 Sprite::Sprite(const Sprite& sprite)
 	: m_observer(NULL)
+	, m_offset_valid(sprite.m_offset_valid)
 {
 	name = sprite.name;
 	tag = sprite.tag;
@@ -190,9 +192,9 @@ void Sprite::BuildBounding()
 		return;
 	}
 
-//	if (!m_offset.IsValid()) {
+	if (!m_offset_valid) {
 		m_offset.Set(rect.CenterX(), rect.CenterY());
-//	}
+	}
 	rect.Scale(m_scale.x, m_scale.y);
 	rect.Shear(m_shear.x, m_shear.y);
 	m_bounding->InitFromRect(rect);
@@ -219,6 +221,7 @@ void Sprite::SetScale(const sm::vec2& scale)
 	sm::vec2 old_offset = m_offset;
 	sm::vec2 new_offset(m_offset.x * dscale.x, m_offset.y * dscale.y);
 	m_offset = new_offset;
+	m_offset_valid = true;
 
 	Translate(old_offset - new_offset);
 
@@ -259,6 +262,7 @@ void Sprite::SetOffset(const sm::vec2& offset)
 	// rotate + offset -> offset + rotate	
 	sm::vec2 old_center = GetCenter();
 	m_offset = offset;
+	m_offset_valid = true;
 	sm::vec2 new_center = GetCenter();
 	m_position += (old_center - new_center);
 

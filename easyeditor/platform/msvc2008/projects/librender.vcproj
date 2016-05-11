@@ -289,18 +289,6 @@
 					>
 				</File>
 			</Filter>
-			<Filter
-				Name="params"
-				>
-				<File
-					RelativePath="..\..\..\source\render\RenderParams.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\ee\RenderParams.h"
-					>
-				</File>
-			</Filter>
 		</Filter>
 		<Filter
 			Name="utility"
