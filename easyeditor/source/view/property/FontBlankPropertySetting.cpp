@@ -102,7 +102,7 @@ void FontBlankPropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->Append(new wxBoolProperty(wxT("Edge"), wxPG_LABEL, spr->has_edge));
 	pg->SetPropertyAttribute("Edge", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
-	wxColour col = wxColour(spr->rp->color.add.r, spr->rp->color.add.g, spr->rp->color.add.b, spr->rp->color.add.a);
+	wxColour col = wxColour(spr->GetColor().add.r, spr->GetColor().add.g, spr->GetColor().add.b, spr->GetColor().add.a);
 	pg->Append(new wxColourProperty(wxT("FontColor"), wxPG_LABEL, col));
 	pg->SetPropertyAttribute("FontColor", "HasAlpha", true);
 

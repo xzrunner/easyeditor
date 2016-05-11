@@ -38,7 +38,7 @@ void PreviewCanvas::OnDrawSprites() const
 		translate_mt.Translate(pos.x, pos.y, 0);
 		sm::mat4 mt = translate_mt * (m_scale_mt * inv_mt);
 
-		ee::SpriteRenderer::Draw(spr, NULL, ee::RenderParams(mt, spr->rp->color));
+		ee::SpriteRenderer::Draw(spr, NULL, ee::RenderParams(mt, spr->GetColor()));
 	}
 }
 

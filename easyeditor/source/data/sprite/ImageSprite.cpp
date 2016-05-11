@@ -43,11 +43,11 @@ ImageSprite* ImageSprite::Clone() const
 	return sprite;
 }
 
-bool ImageSprite::Update(int version)
+bool ImageSprite::Update(float dt)
 {
-	return rp->shader.filter == s2::FM_HEAT_HAZE 
-		|| rp->shader.filter == s2::FM_SHOCK_WAVE 
-		|| rp->shader.filter == s2::FM_SWIRL;
+	return GetShader().filter == s2::FM_HEAT_HAZE 
+		|| GetShader().filter == s2::FM_SHOCK_WAVE 
+		|| GetShader().filter == s2::FM_SWIRL;
 }
 
 const ImageSymbol& ImageSprite::GetSymbol() const
@@ -85,9 +85,9 @@ void ImageSprite::BuildBoundingFromTexCoords(float* texCoords)
  	rect.ymax = hHeight;
  
  	sm::vec2 offset = Math2D::RotateVector(center, m_angle);
- 	rect.Translate(m_pos + offset);
+ 	rect.Translate(m_position + offset);
  	m_bounding->InitFromRect(rect);
- 	m_bounding->SetTransform(m_pos, m_offset, m_angle);
+ 	m_bounding->SetTransform(m_position, m_offset, m_angle);
 }
 
 }

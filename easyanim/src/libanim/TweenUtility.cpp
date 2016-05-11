@@ -91,8 +91,8 @@ void TweenUtility::GetTweenSprite(ee::Sprite* start, ee::Sprite* end, ee::Sprite
 	sm::vec2 pos_t = base_t -  offset;
 	tween->SetTransform(pos_t, angle);
 
-	tween->rp->color.add = color_interpolate(start->rp->color.add, end->rp->color.add, process);
-	tween->rp->color.mul = color_interpolate(start->rp->color.mul, end->rp->color.mul, process);
+	tween->GetColor().add = color_interpolate(start->GetColor().add, end->GetColor().add, process);
+	tween->GetColor().mul = color_interpolate(start->GetColor().mul, end->GetColor().mul, process);
 
 	if (escale9::Sprite* s9_s = dynamic_cast<escale9::Sprite*>(start))
 	{

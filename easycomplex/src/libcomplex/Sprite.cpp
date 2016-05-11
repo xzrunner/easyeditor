@@ -38,12 +38,12 @@ Sprite* Sprite::Clone() const
 	return sprite;
 }
 
-bool Sprite::Update(int version) 
+bool Sprite::Update(float dt) 
 { 
 	bool ret = false;
 	for (int i = 0, n = m_symbol->m_sprites.size(); i < n; ++i) {
 		ee::Sprite* spr = m_symbol->m_sprites[i];
-		if (spr->Update(version)) {
+		if (spr->Update(dt)) {
 			ret = true;
 		}
 	}

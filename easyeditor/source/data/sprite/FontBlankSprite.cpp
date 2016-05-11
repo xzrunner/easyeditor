@@ -30,7 +30,7 @@ FontBlankSprite::FontBlankSprite(const FontBlankSprite& sprite)
 	m_symbol->Retain();
 	font = sprite.font;
 	has_edge = sprite.has_edge;
-	font_color = sprite.rp->color.mul;
+	font_color = sprite.GetColor().mul;
 	align_hori = sprite.align_hori;
 	align_vert = sprite.align_vert;
 	size = sprite.size;

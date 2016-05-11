@@ -25,7 +25,7 @@ StagePanel::~StagePanel()
 {
 }
 
-bool StagePanel::Update(int version)
+bool StagePanel::Update(float dt)
 {
 	PS::Instance()->UpdateTime();
 	if (m_ps) {

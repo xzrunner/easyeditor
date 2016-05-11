@@ -16,7 +16,7 @@ class Sprite
 public:
 	Sprite();
 	
-	virtual bool Update(float dt) const = 0;
+	virtual bool Update(float dt) = 0;
 
 protected:
 	/************************************************************************/

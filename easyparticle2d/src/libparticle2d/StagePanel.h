@@ -20,7 +20,7 @@ public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 		LibraryPanel* library);
 
-	virtual bool Update(int version);
+	virtual bool Update(float dt);
 
 	void SetPSMat(const sm::vec2& pos);
 	const sm::mat4& GetPSMat() const { return m_ps_mat; }

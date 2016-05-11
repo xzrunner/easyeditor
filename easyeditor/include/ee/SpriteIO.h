@@ -3,7 +3,7 @@
 
 #include <json/json.h>
 
-namespace s2 { class RenderColor; class RenderShader; }
+namespace s2 { class RenderColor; class RenderShader; class RenderCamera; }
 
 namespace ee
 {
@@ -16,7 +16,10 @@ public:
 
 	static void LoadShader(const Json::Value& val, s2::RenderShader& shader);
 	static void StoreShader(Json::Value& val, const s2::RenderShader& shader);	
-	
+
+	static void LoadCamera(const Json::Value& val, s2::RenderCamera& camera);
+	static void StoreCamera(Json::Value& val, const s2::RenderCamera& camera);	
+
 }; // SpriteIO
 
 }

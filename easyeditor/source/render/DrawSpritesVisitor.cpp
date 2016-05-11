@@ -24,7 +24,7 @@ void DrawSpritesVisitor::Visit(Object* object, bool& next)
 		return;
 	}
 
-	int filter_mode_idx = FilterModes::Instance()->QueryShaderIdx(spr->rp->shader.filter);
+	int filter_mode_idx = FilterModes::Instance()->QueryShaderIdx(spr->GetShader().filter);
 //	ShaderMgr::Instance()->SetSpriteShader(filter_mode_idx);
 
 	DrawSprite(spr);

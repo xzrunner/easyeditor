@@ -63,7 +63,7 @@ bool Layer::InsertSprite(Object* obj, int idx)
 	ee::Sprite* spr = static_cast<ee::Sprite*>(obj);
 	CheckSpriteName(spr);
 
-	spr->rp->camera.mode = m_cam_mode;
+	spr->GetCamera().mode = m_cam_mode;
 
 	if (m_layer_mgr.selected) {
 		return m_layer_mgr.selected->Insert(spr);
@@ -180,7 +180,7 @@ void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
 	}
 }
 
-bool Layer::Update(int version)
+bool Layer::Update(float dt)
 {
 	bool ret = false;
 
@@ -225,7 +225,7 @@ void Layer::LoadSprites(const Json::Value& val, const std::string& dir,
 	Json::Value spr_val = val[idx++];
 	while (!spr_val.isNull()) {
 		ee::Sprite* spr = LoadSprite(spr_val, dir, base_path);
-		spr->rp->camera.mode = m_cam_mode;
+		spr->GetCamera().mode = m_cam_mode;
 		m_sprites.Insert(spr);
 		spr->Release();
 		spr_val = val[idx++];

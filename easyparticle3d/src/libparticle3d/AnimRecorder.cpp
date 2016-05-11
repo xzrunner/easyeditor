@@ -87,7 +87,7 @@ void AnimRecorder::StoreToFile(const std::string& filepath) const
 
 			spr->SetTransform(sm::vec2(item->x, item->y), item->angle);
 			spr->SetScale(sm::vec2(item->scale, item->scale));
-			spr->rp->color.mul = item->mul_col;
+			spr->GetColor().mul = item->mul_col;
 
 			frame->sprites.push_back(spr);
 		}

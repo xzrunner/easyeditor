@@ -789,8 +789,8 @@ void ParserLuaFile::Animation::Item::transform(ee::Sprite* spr) const
 
 	if (is_full && valid)
 	{
-		spr->rp->color.mul = ee::int2color(color, ee::PT_BGRA);
-		spr->rp->color.add = ee::int2color(add, ee::PT_ABGR);
+		spr->GetColor().mul = ee::int2color(color, ee::PT_BGRA);
+		spr->GetColor().add = ee::int2color(add, ee::PT_ABGR);
 
 		float x = mat[4] / 16.0f,
 			y = mat[5] / 16.0f;

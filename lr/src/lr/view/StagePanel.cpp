@@ -102,7 +102,7 @@ StagePanel::~StagePanel()
 // 	}
 // }
 
-bool StagePanel::Update(int version)
+bool StagePanel::Update(float dt)
 {
 	if (!m_enable_update) {
 		return false;

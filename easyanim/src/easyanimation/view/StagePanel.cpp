@@ -47,7 +47,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 	RegistSubject(RemoveLayerSJ::Instance());
 }
 
-bool StagePanel::Update(int version)
+bool StagePanel::Update(float dt)
 {
 	bool dirty = ee::SceneNodeMgr::Instance()->Update(1 / 30.0f);
 

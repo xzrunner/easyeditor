@@ -13,7 +13,7 @@ public:
 	PreviewStage(wxWindow* parent, wxTopLevelWindow* frame,
 		ee::PlayControl& control);
 	
-	virtual bool Update(int version);
+	virtual bool Update(float dt);
 	
 private:
 	ee::PlayControl& m_control;

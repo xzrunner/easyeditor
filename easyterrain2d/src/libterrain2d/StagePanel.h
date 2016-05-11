@@ -24,7 +24,7 @@ public:
 		const ee::MultiSpritesImpl* bg_sprites, ee::LibraryPanel* library);
 	virtual ~StagePanel();
 
-	virtual bool Update(int version);
+	virtual bool Update(float dt);
 
 	void Store(const std::string& dir, Json::Value& value) const;
 	void Load(const std::string& dir, const Json::Value& value, 

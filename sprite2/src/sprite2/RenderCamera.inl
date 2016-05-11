@@ -1,6 +1,8 @@
 #ifndef _SPRITE2_RENDER_CAMERA_INL_
 #define _SPRITE2_RENDER_CAMERA_INL_
 
+#include <sm_const.h>
+
 #include <string.h>
 #include <float.h>
 

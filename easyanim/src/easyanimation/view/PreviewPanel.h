@@ -17,7 +17,7 @@ public:
 	//
 	// ee::EditPanel interface
 	//
-	virtual bool Update(int version);
+	virtual bool Update(float dt);
 
 private:
 	ee::PlayControl& m_ctrl;

@@ -28,21 +28,21 @@ void SpriteRenderer::Draw(const Sprite* spr,
 	if (trans.shader.blend != s2::BM_NULL) {
 		blend = trans.shader.blend;
 	} else {
-		blend = spr->rp->shader.blend;
+		blend = spr->GetShader().blend;
 	}
 
 	s2::FilterMode filter;
 	if (trans.shader.filter != s2::FM_NULL) {
 		filter = trans.shader.filter;
 	} else {
-		filter = spr->rp->shader.filter;
+		filter = spr->GetShader().filter;
 	}
 
 	s2::RenderCamera ct;
 	if (trans.camera.mode != s2::CM_ORTHO) {
 		ct.mode = trans.camera.mode;
 	} else {
-		ct.mode = spr->rp->camera.mode;
+		ct.mode = spr->GetCamera().mode;
 	}
 	if (ct.mode == s2::CM_PERSPECTIVE_AUTO_HEIGHT) {
 		if (trans.camera.base_y == FLT_MAX) {
@@ -127,11 +127,11 @@ void SpriteRenderer::DrawImpl(const Sprite* spr,
 
 	s2::RenderColor col_new;
 
-	col_new.mul	 = spr->rp->color.mul * trans.color.mul;
-	col_new.add	 = spr->rp->color.add + trans.color.add;
-	col_new.rmap = spr->rp->color.rmap.MapMul(trans.color.rmap, trans.color.gmap, trans.color.bmap);
-	col_new.gmap = spr->rp->color.gmap.MapMul(trans.color.rmap, trans.color.gmap, trans.color.bmap);
-	col_new.bmap = spr->rp->color.bmap.MapMul(trans.color.rmap, trans.color.gmap, trans.color.bmap);
+	col_new.mul	 = spr->GetColor().mul * trans.color.mul;
+	col_new.add	 = spr->GetColor().add + trans.color.add;
+	col_new.rmap = spr->GetColor().rmap.MapMul(trans.color.rmap, trans.color.gmap, trans.color.bmap);
+	col_new.gmap = spr->GetColor().gmap.MapMul(trans.color.rmap, trans.color.gmap, trans.color.bmap);
+	col_new.bmap = spr->GetColor().bmap.MapMul(trans.color.rmap, trans.color.gmap, trans.color.bmap);
 
 	RenderParams _trans = trans;
 	_trans.mt = t;

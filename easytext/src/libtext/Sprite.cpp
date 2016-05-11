@@ -97,7 +97,7 @@ Sprite* Sprite::Clone() const
 	return sprite;
 }
 
-bool Sprite::Update(int version) 
+bool Sprite::Update(float dt) 
 { 
 	return m_text.find("dynamic") != std::string::npos;
 }

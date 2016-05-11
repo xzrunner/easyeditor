@@ -27,7 +27,7 @@ public:
 	//
 	// Sprite interface
 	//
-	virtual bool Update(int version);
+	virtual bool Update(float dt);
 	virtual const Symbol& GetSymbol() const;
 	virtual void SetSymbol(ee::Symbol* symbol);
 

@@ -27,7 +27,7 @@ public:
 
 	void SetEditPanelNull();
 	
-	bool Update(int version);
+	bool Update(float dt);
 
 	sm::vec2 TransPosScrToProj(int x, int y) const;
 	sm::vec2 TransPosProjToScr(const sm::vec2& proj) const;

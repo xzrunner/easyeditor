@@ -24,7 +24,7 @@ public:
 	//
 	// Sprite interface
 	//
-	virtual bool Update(int version) { return true; }
+	virtual bool Update(float dt) { return true; }
 	virtual const Symbol& GetSymbol() const;
 	virtual void SetSymbol(ee::Symbol* symbol);
 	virtual void Load(const Json::Value& val);

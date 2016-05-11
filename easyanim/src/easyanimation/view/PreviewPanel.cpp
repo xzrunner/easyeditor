@@ -14,7 +14,7 @@ PreviewPanel::PreviewPanel(wxWindow* parent, wxTopLevelWindow* frame,
 {
 }
 
-bool PreviewPanel::Update(int version)
+bool PreviewPanel::Update(float dt)
 {
 	ee::SceneNodeMgr::Instance()->Update(1 / 30.0f);
 

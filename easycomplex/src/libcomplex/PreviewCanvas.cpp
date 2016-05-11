@@ -22,7 +22,7 @@ void PreviewCanvas::OnDrawSprites() const
 // 		if (!sprite->visiable)
 // 			continue;
 		ee::SpriteRenderer::Draw(spr, NULL, 
-			ee::RenderParams(sm::mat4(), spr->rp->color));
+			ee::RenderParams(sm::mat4(), spr->GetColor()));
 	}
 }
 

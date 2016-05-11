@@ -20,7 +20,7 @@ namespace ee
 
 void SpriteBlend::Draw(const Sprite* spr, const sm::mat4& mt)
 {
-	assert(spr->rp->shader.blend != s2::BM_NULL);
+	assert(spr->GetShader().blend != s2::BM_NULL);
 
 	sl::ShaderMgr::Instance()->GetShader()->Commit();
 
@@ -56,14 +56,14 @@ void SpriteBlend::DrawSprToTmp(const Sprite* spr, const sm::mat4& mt)
 	dtexf_c1_clear(0, -2, 2, 0);
 
 	mgr->SetShader(sl::BLEND);
-	s2::BlendMode mode = spr->rp->shader.blend;
+	s2::BlendMode mode = spr->GetShader().blend;
 	shader->SetMode(mode);
 
-	const_cast<Sprite*>(spr)->rp->shader.blend = s2::BM_NULL;
+	const_cast<Sprite*>(spr)->GetShader().blend = s2::BM_NULL;
 	RenderParams params(mt);
 	params.set_shader = false;
 	SpriteRenderer::Draw(spr, spr, params);
-	const_cast<Sprite*>(spr)->rp->shader.blend = mode;
+	const_cast<Sprite*>(spr)->GetShader().blend = mode;
 
 	shader->Commit();
 

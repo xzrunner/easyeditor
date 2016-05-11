@@ -3,9 +3,11 @@
 #include "Config.h"
 #include "BlendModes.h"
 #include "FilterModes.h"
+#include "CameraModes.h"
 
 #include <sprite2/RenderColor.h>
 #include <sprite2/RenderShader.h>
+#include <sprite2/RenderCamera.h>
 
 namespace ee
 {
@@ -77,6 +79,17 @@ void SpriteIO::StoreShader(Json::Value& val, const s2::RenderShader& shader)
 		val["blend"] = BlendModes::Instance()->GetNameENFromMode(shader.blend);
 		val["filter"] = FilterModes::Instance()->GetNameENFromMode(shader.filter);
 	}
+}
+
+void SpriteIO::LoadCamera(const Json::Value& val, s2::RenderCamera& camera)
+{
+	std::string disc = val["camera"].asString();
+	camera.mode = CameraModes::Instance()->GetModeFromNameEN(disc);
+}
+
+void SpriteIO::StoreCamera(Json::Value& val, const s2::RenderCamera& camera)
+{
+	val["camera"] = CameraModes::Instance()->GetNameENFromMode(camera.mode);
 }
 
 }

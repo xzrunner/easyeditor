@@ -8,7 +8,7 @@
 #include "SpriteFactory.h"
 #include "SpriteObserver.h"
 #include "SpritePropertySetting.h"
-#include "RenderParams.h"
+#include "SpriteIO.h"
 
 #ifdef OPEN_SCREEN_CACHE
 #include "render/SpriteRenderer.h"
@@ -23,13 +23,8 @@ Sprite::Sprite()
 {
 	clip = false;
 
-	rp = new RenderParams;
-
 	visiable = editable = true;
 
-	m_angle = 0.0f;
-	m_scale.Set(1, 1);
-	m_shear.Set(0, 0);
 	m_mirror.Set(false, false);
 	m_perspective.Set(0, 0);
 	m_bounding = NULL;
@@ -44,16 +39,10 @@ Sprite::Sprite(const Sprite& sprite)
 	tag = sprite.tag;
 	clip = sprite.clip;
 
-	rp = new RenderParams(*sprite.rp);
-
 	visiable = sprite.visiable;
 	editable = sprite.editable;
 
-	m_pos = sprite.m_pos;
-	m_angle = sprite.m_angle;
 	m_offset = sprite.m_offset;
-	m_scale = sprite.m_scale;
-	m_shear = sprite.m_shear;
 	m_mirror = sprite.m_mirror;
 	m_perspective = sprite.m_perspective;
 	m_bounding = sprite.m_bounding->Clone();
@@ -63,7 +52,6 @@ Sprite::Sprite(const Sprite& sprite)
 
 Sprite::~Sprite()
 {
-	delete rp;
 	delete m_bounding;
 	SpriteFactory::Instance()->Remove(this);
 }
@@ -86,7 +74,9 @@ void Sprite::Load(const Json::Value& val)
 	clip = val["clip"].asBool();
 
 	// trans
-	rp->LoadFromFile(val);
+	SpriteIO::LoadColor(val, m_color);
+	SpriteIO::LoadShader(val, m_shader);
+	SpriteIO::LoadCamera(val, m_camera);
 
 	// scale
 	sm::vec2 scale;
@@ -162,10 +152,12 @@ void Sprite::Store(Json::Value& val) const
 	val["tag"] = tag;
 	val["clip"] = clip;
 
-	rp->StoreToFile(val);
+	SpriteIO::StoreColor(val, m_color);
+	SpriteIO::StoreShader(val, m_shader);
+	SpriteIO::StoreCamera(val, m_camera);
 
-	val["position"]["x"] = m_pos.x;
-	val["position"]["y"] = m_pos.y;
+	val["position"]["x"] = m_position.x;
+	val["position"]["y"] = m_position.y;
 
 	val["angle"] = m_angle;
 
@@ -204,7 +196,7 @@ void Sprite::BuildBounding()
 	rect.Scale(m_scale.x, m_scale.y);
 	rect.Shear(m_shear.x, m_shear.y);
 	m_bounding->InitFromRect(rect);
-	m_bounding->SetTransform(m_pos, m_offset, m_angle);
+	m_bounding->SetTransform(m_position, m_offset, m_angle);
 }
 
 PropertySetting* Sprite::CreatePropertySetting(EditPanelImpl* stage)
@@ -214,7 +206,7 @@ PropertySetting* Sprite::CreatePropertySetting(EditPanelImpl* stage)
 
 void Sprite::SetTransform(const sm::vec2& position, float angle)
 {
-	if (m_pos != position) Translate(position - m_pos);
+	if (m_position != position) Translate(position - m_position);
 	if (m_angle != angle) Rotate(angle - m_angle);
 }
 
@@ -268,10 +260,10 @@ void Sprite::SetOffset(const sm::vec2& offset)
 	sm::vec2 old_center = GetCenter();
 	m_offset = offset;
 	sm::vec2 new_center = GetCenter();
-	m_pos += (old_center - new_center);
+	m_position += (old_center - new_center);
 
 	if (m_bounding) {
-		m_bounding->SetTransform(m_pos, m_offset, m_angle);
+		m_bounding->SetTransform(m_position, m_offset, m_angle);
 	}
 }
 
@@ -297,9 +289,9 @@ void Sprite::Translate(const sm::vec2& offset)
 	if (m_observer)
 		m_observer->Translate(this, offset);
 
-	m_pos += offset;
+	m_position += offset;
 	if (m_bounding) {
-		m_bounding->SetTransform(m_pos, m_offset, m_angle);
+		m_bounding->SetTransform(m_position, m_offset, m_angle);
 	}
 
 #ifdef OPEN_SCREEN_CACHE
@@ -322,7 +314,7 @@ void Sprite::Rotate(float delta)
 	m_angle += delta;
 
 	if (m_bounding) {
-		m_bounding->SetTransform(m_pos, m_offset, m_angle);
+		m_bounding->SetTransform(m_position, m_offset, m_angle);
 	}
 
 #ifdef OPEN_SCREEN_CACHE
@@ -346,14 +338,14 @@ void Sprite::SetMirror(bool x_mirror, bool y_mirror)
 	m_mirror.y = y_mirror;
 	if (m_bounding) {
 		m_bounding->SetMirror(x_dirty, y_dirty);
-		m_bounding->SetTransform(m_pos, m_offset, m_angle);
+		m_bounding->SetTransform(m_position, m_offset, m_angle);
 	}
 }
 
 sm::vec2 Sprite::GetCenter() const
 {
 	sm::vec2 center_offset = Math2D::RotateVector(-m_offset, m_angle) + m_offset;
-	sm::vec2 center = m_pos + center_offset;
+	sm::vec2 center = m_position + center_offset;
 	return center;
 }
 
@@ -383,7 +375,7 @@ sm::mat4 Sprite::GetTransInvMatrix() const
 	sm::mat4 mat;
 	mat.RotateZ(-m_angle);
 	mat.Shear(-m_shear.x, -m_shear.y);
-	mat.Translate(-m_pos.x/m_scale.x, -m_pos.y/m_scale.y, 0);
+	mat.Translate(-m_position.x/m_scale.x, -m_position.y/m_scale.y, 0);
 	mat.Scale(1/m_scale.x, 1/m_scale.y, 1);
 	return mat;
 }

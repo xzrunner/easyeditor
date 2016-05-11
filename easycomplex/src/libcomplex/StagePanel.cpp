@@ -65,12 +65,12 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	RegistSubject(ee::ClearSpriteSJ::Instance());
 }
 
-bool StagePanel::Update(int version)
+bool StagePanel::Update(float dt)
 {
 	bool dirty = ee::SceneNodeMgr::Instance()->Update(1 / 30.0f);
 	for (int i = 0, n = m_symbol->m_sprites.size(); i < n; ++i) {
 		ee::Sprite* spr = m_symbol->m_sprites[i];
-		if (spr->Update(version)) {
+		if (spr->Update(dt)) {
 			dirty = true;
 		}
 	}

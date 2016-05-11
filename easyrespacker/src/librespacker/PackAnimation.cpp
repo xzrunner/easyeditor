@@ -151,9 +151,9 @@ void PackAnimation::LoadSprTrans(const ee::Sprite* spr, SpriteTrans& trans, bool
 {
 	LoadSprMat(spr, trans, force_mat);
 	LoadSprColor(spr, trans);
-	trans.blend = static_cast<int>(spr->rp->shader.blend);
-	trans.filter = static_cast<int>(spr->rp->shader.filter);
-	trans.camera = static_cast<int>(spr->rp->camera.mode);
+	trans.blend = static_cast<int>(spr->GetShader().blend);
+	trans.filter = static_cast<int>(spr->GetShader().filter);
+	trans.camera = static_cast<int>(spr->GetCamera().mode);
 }
 
 void PackAnimation::LoadSprMat(const ee::Sprite* spr, SpriteTrans& trans, bool force)
@@ -207,12 +207,12 @@ void PackAnimation::LoadSprMat(const ee::Sprite* spr, SpriteTrans& trans, bool f
 
 void PackAnimation::LoadSprColor(const ee::Sprite* spr, SpriteTrans& trans)
 {
-	trans.color = spr->rp->color.mul.ToABGR();
-	trans.additive = spr->rp->color.mul.ToABGR();
+	trans.color = spr->GetColor().mul.ToABGR();
+	trans.additive = spr->GetColor().mul.ToABGR();
 
-	trans.rmap = spr->rp->color.rmap.ToRGBA();
-	trans.gmap = spr->rp->color.rmap.ToRGBA();
-	trans.bmap = spr->rp->color.rmap.ToRGBA();	
+	trans.rmap = spr->GetColor().rmap.ToRGBA();
+	trans.gmap = spr->GetColor().rmap.ToRGBA();
+	trans.bmap = spr->GetColor().rmap.ToRGBA();	
 }
 
 bool PackAnimation::IsMatrixIdentity(const int* mat)

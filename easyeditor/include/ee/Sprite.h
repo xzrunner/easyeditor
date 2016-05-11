@@ -6,6 +6,7 @@
 #include "Object.h"
 
 #include <SM_Matrix.h>
+#include <sprite2/Sprite.h>
 
 #include <json/json.h>
 
@@ -18,9 +19,8 @@ class BoundingBox;
 class PropertySetting;
 class EditPanelImpl;
 class SpriteObserver;
-class RenderParams;
 
-class Sprite : public Cloneable, public UserDataImpl, public Object
+class Sprite : public s2::Sprite, public Cloneable, public UserDataImpl, public Object
 {
 public:
 	Sprite();
@@ -37,8 +37,6 @@ public:
 	//	
 	virtual void ClearUserData(bool deletePtr);
 
-	virtual bool Update(int version) = 0;
-
 	virtual const Symbol& GetSymbol() const = 0;
 	virtual void SetSymbol(Symbol* symbol) = 0;
 
@@ -50,7 +48,7 @@ public:
 	virtual PropertySetting* CreatePropertySetting(EditPanelImpl* stage);
 
 	virtual void SetTransform(const sm::vec2& position, float angle);
-	const sm::vec2& GetPosition() const { return m_pos; }
+	const sm::vec2& GetPosition() const { return m_position; }
 	float GetAngle() const { return m_angle; }
 
 	const sm::vec2& GetScale() const { return m_scale; }
@@ -75,6 +73,12 @@ public:
 	void SetPerspective(const sm::vec2& perspective) { m_perspective = perspective; }
 
 	sm::vec2 GetCenter() const;
+
+	const s2::RenderColor& GetColor() const { return m_color; }
+	s2::RenderColor& GetColor() { return m_color; }
+	const s2::RenderShader& GetShader() const { return m_shader; }
+	s2::RenderShader& GetShader() { return m_shader; }
+	const s2::RenderCamera& GetCamera() const { return m_camera; }
 
 	BoundingBox* GetBounding() const {
 		return m_bounding;
@@ -104,20 +108,12 @@ public:
 	std::string tag;
 	bool clip;
 
-	// render
-	RenderParams* rp;
-
 	// edit
 	bool visiable;
 	bool editable;
 
 protected:
-	sm::vec2	m_pos;
-	float		m_angle;
 	sm::vec2	m_offset;
-	sm::vec2	m_scale;
-	sm::vec2	m_shear;
-
 	sm::bvec2	m_mirror;
 	sm::vec2	m_perspective;
 
