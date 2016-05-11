@@ -14,7 +14,6 @@
 #include <ee/SymbolSearcher.h>
 #include <ee/SpriteFactory.h>
 #include <ee/SymbolMgr.h>
-#include <ee/RenderParams.h>
 
 #include <easyshape.h>
 #include <easycomplex.h>

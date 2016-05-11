@@ -86,7 +86,7 @@ void Quadtree::DebugDraw() const
 		s2::RenderColor color;
 		color.mul = ee::LIGHT_BLUE;
 		for (int i = 0, n = m_selected->m_sprites.size(); i < n; ++i) {
-			ee::SpriteRenderer::Draw(m_selected->m_sprites[i], NULL, ee::RenderParams(sm::mat4(), color));
+			ee::SpriteRenderer::Draw(m_selected->m_sprites[i], NULL, s2::RenderParams(sm::mat4(), color));
 		}
 	}
 }

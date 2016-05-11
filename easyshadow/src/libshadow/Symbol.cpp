@@ -3,7 +3,7 @@
 #include "config.h"
 #include "FileIO.h"
 
-#include <ee/RenderParams.h>
+#include <sprite2/RenderParams.h>
 
 namespace eshadow
 {
@@ -31,16 +31,15 @@ Symbol* Symbol::Clone() const
 	return new Symbol(*this);
 }
 
-void Symbol::ReloadTexture() const
-{
-}
-
-void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr, 
-				  const ee::Sprite* root) const
+void Symbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
 {
 	if (m_shadow) {
 		m_shadow->Draw(trans.mt, trans.color.mul.a);
 	}
+}
+
+void Symbol::ReloadTexture() const
+{
 }
 
 ee::Rect Symbol::GetSize(const ee::Sprite* sprite) const

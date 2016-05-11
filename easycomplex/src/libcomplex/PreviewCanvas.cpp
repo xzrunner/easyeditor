@@ -21,8 +21,9 @@ void PreviewCanvas::OnDrawSprites() const
 		const ee::Sprite* spr = m_sprites[i];
 // 		if (!sprite->visiable)
 // 			continue;
-		ee::SpriteRenderer::Draw(spr, NULL, 
-			ee::RenderParams(sm::mat4(), spr->GetColor()));
+		s2::RenderParams params;
+		params.color = spr->GetColor();
+		ee::SpriteRenderer::Draw(spr, params);
 	}
 }
 

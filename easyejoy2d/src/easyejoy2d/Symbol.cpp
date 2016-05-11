@@ -41,12 +41,7 @@ Symbol* Symbol::Clone() const
 	return new Symbol(*this);
 }
 
-void Symbol::ReloadTexture() const
-{
-}
-
-void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr, 
-				  const ee::Sprite* root) const
+void Symbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
 {
 	if (!m_spr) {
 		return;
@@ -54,6 +49,10 @@ void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr,
 
 	DrawToEJScreen();
 	DrawFromEJScreen();
+}
+
+void Symbol::ReloadTexture() const
+{
 }
 
 ee::Rect Symbol::GetSize(const ee::Sprite* sprite) const

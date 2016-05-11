@@ -48,27 +48,7 @@ void Symbol::Release() const
 	for_each(m_sprites.begin(), m_sprites.end(), ee::ReleaseObjectFunctor<ee::Sprite>());
 }
 
-void Symbol::ReloadTexture() const
-{
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-		if (etext::Sprite* text = dynamic_cast<etext::Sprite*>(m_sprites[i])) {
-//			// todo
-//			ee::GTxt::Instance()->Reload(text);
-		}
-	}
-
-	std::set<const ee::Symbol*> symbols;
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-		symbols.insert(&m_sprites[i]->GetSymbol());
-	}
-	std::set<const ee::Symbol*>::iterator itr = symbols.begin();
-	for ( ; itr != symbols.end(); ++itr) {
-		(*itr)->ReloadTexture();
-	}
-}
-
-void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr, 
-				  const ee::Sprite* root) const
+void Symbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
 {
  	const ee::TPNode* n = NULL;
 	if (ee::Config::Instance()->IsUseDTex() && 
@@ -132,7 +112,7 @@ void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr,
  	else
 	{
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-			ee::SpriteRenderer::Draw(m_sprites[i], root, trans);
+			ee::SpriteRenderer::Draw(m_sprites[i], trans);
 		}
 		if (m_clipbox.Width() > 0 && m_clipbox.Height() > 0) {
 			sm::vec2 min(m_clipbox.xmin, m_clipbox.ymin), 
@@ -140,6 +120,25 @@ void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr,
 			ee::RVG::Color(s2::Color(0, 204, 0));
 			ee::RVG::Rect(ee::Math2D::TransVector(min, trans.mt), ee::Math2D::TransVector(max, trans.mt), false);
 		}
+	}
+}
+
+void Symbol::ReloadTexture() const
+{
+	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
+		if (etext::Sprite* text = dynamic_cast<etext::Sprite*>(m_sprites[i])) {
+			//			// todo
+			//			ee::GTxt::Instance()->Reload(text);
+		}
+	}
+
+	std::set<const ee::Symbol*> symbols;
+	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
+		symbols.insert(&m_sprites[i]->GetSymbol());
+	}
+	std::set<const ee::Symbol*>::iterator itr = symbols.begin();
+	for ( ; itr != symbols.end(); ++itr) {
+		(*itr)->ReloadTexture();
 	}
 }
 

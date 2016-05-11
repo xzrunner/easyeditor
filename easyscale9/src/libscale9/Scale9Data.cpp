@@ -65,14 +65,13 @@ void Scale9Data::ReloadTexture() const
 	}
 }
 
-void Scale9Data::Draw(const ee::RenderParams& trans, const ee::Sprite* spr, 
-					  const ee::Sprite* root) const
+void Scale9Data::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
 {
 	if (spr) {
 		const Sprite* _spr = static_cast<const Sprite*>(spr);
 		_spr->Draw(trans);
 	} else {
-		DrawScale9(m_type, m_sprites, trans, root);
+		DrawScale9(m_type, m_sprites, trans);
 	}
 }
 
@@ -179,7 +178,7 @@ void Scale9Data::LoadFromFile(const std::string& filepath)
 }
 
 void Scale9Data::DrawScale9(Scale9Type type, ee::Sprite* const sprites[3][3], 
-							const ee::RenderParams& trans, const ee::Sprite* root)
+							const s2::RenderParams& trans)
 {
 	switch (type)
 	{
@@ -187,7 +186,7 @@ void Scale9Data::DrawScale9(Scale9Type type, ee::Sprite* const sprites[3][3],
 		for (size_t i = 0; i < 3; ++i) {
 			for (size_t j = 0; j < 3; ++j) {
 				if (!sprites[i][j]) continue;
-				ee::SpriteRenderer::Draw(sprites[i][j], root, trans);
+				ee::SpriteRenderer::Draw(sprites[i][j], trans);
 			}
 		}
 		break;
@@ -196,27 +195,27 @@ void Scale9Data::DrawScale9(Scale9Type type, ee::Sprite* const sprites[3][3],
 			for (size_t j = 0; j < 3; ++j) {
 				if (i == 1 && j == 1) continue;
 				if (!sprites[i][j]) continue;
-				ee::SpriteRenderer::Draw(sprites[i][j], root, trans);
+				ee::SpriteRenderer::Draw(sprites[i][j], trans);
 			}
 		}
 		break;
 	case e_3GridHor:
 		for (size_t i = 0; i < 3; ++i) {
 			if (!sprites[1][i]) continue;
-			ee::SpriteRenderer::Draw(sprites[1][i], root, trans);
+			ee::SpriteRenderer::Draw(sprites[1][i], trans);
 		}
 		break;
 	case e_3GridVer:
 		for (size_t i = 0; i < 3; ++i) {
 			if (!sprites[i][1]) continue;
-			ee::SpriteRenderer::Draw(sprites[i][1], root, trans);
+			ee::SpriteRenderer::Draw(sprites[i][1], trans);
 		}
 		break;
 	case e_6GridUpper:
 		for (size_t i = 1; i < 3; ++i) {
 			for (size_t j = 0; j < 3; ++j) {
 				if (!sprites[i][j]) continue;
-				ee::SpriteRenderer::Draw(sprites[i][j], root, trans);
+				ee::SpriteRenderer::Draw(sprites[i][j], trans);
 			}
 		}
 		break;

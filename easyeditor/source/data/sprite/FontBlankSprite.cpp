@@ -4,7 +4,6 @@
 #include "BoundingBox.h"
 #include "BBFactory.h"
 #include "FontBlankPropertySetting.h"
-#include "RenderParams.h"
 #include "trans_color.h"
 
 namespace ee

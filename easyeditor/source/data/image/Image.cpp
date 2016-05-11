@@ -23,7 +23,6 @@
 #include "Pseudo3DCamera.h"
 #include "ImageClip.h"
 #include "ImageTrim.h"
-#include "RenderParams.h"
 
 #include <shaderlab.h>
 
@@ -140,16 +139,16 @@ const uint8_t* Image::GetPixelData() const
 	return m_tex->GetPixelData(); 
 }
 
-void Image::Draw(const RenderParams& trans, const Sprite* spr, 
-				 const Sprite* root) const
+void Image::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
 {
 	float hw = m_tex->GetWidth() * 0.5f,
 		  hh = m_tex->GetHeight() * 0.5f;
 
 	float px = 0, py = 0;
 	if (spr) {
-		px = spr->GetPerspective().x;
-		py = spr->GetPerspective().y;
+		const Sprite* ee_spr = static_cast<const Sprite*>(spr);
+		px = ee_spr->GetPerspective().x;
+		py = ee_spr->GetPerspective().y;
 	}
 
 	sm::vec2 vertices[4];
@@ -201,8 +200,9 @@ void Image::Draw(const RenderParams& trans, const Sprite* spr,
 
 		assert(spr);
 
-		if (root) {
-			sm::vec2 offset = root->GetPosition();
+		if (trans.root_spr) {
+			const Sprite* ee_spr = static_cast<const Sprite*>(trans.root_spr);
+			sm::vec2 offset = ee_spr->GetPosition();
 			for (int i = 0; i < 4; ++i) {
 				vertices[i] -= offset;
 			}

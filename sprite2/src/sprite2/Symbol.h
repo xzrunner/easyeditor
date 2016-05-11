@@ -13,8 +13,7 @@ class Symbol
 {
 public:
 
-	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL, 
-		const Sprite* root = NULL) const = 0;
+	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const = 0;
 
 }; // Symbol
 

@@ -61,9 +61,9 @@ bool PasteSymbolOP::OnDraw() const
 	if (symbol && m_pos_valid)
 	{
 		if (m_scale) {
-			SpriteRenderer::Draw(symbol, sm::mat4(), m_pos, 0.0f, *m_scale);
+			SpriteRenderer::Draw(symbol, s2::RenderParams(), m_pos, 0.0f, *m_scale);
 		} else {
-			SpriteRenderer::Draw(symbol, sm::mat4(), m_pos);
+			SpriteRenderer::Draw(symbol, s2::RenderParams(), m_pos);
 		}
 	}
 

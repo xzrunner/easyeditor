@@ -4,10 +4,9 @@
 #include "FileIO.h"
 #include "PSConfigMgr.h"
 
-#include <ee/RenderParams.h>
-
 #include <ps_2d.h>
 #include <shaderlab.h>
+#include <sprite2/RenderParams.h>
 
 namespace eparticle2d
 {
@@ -28,16 +27,7 @@ Symbol* Symbol::Clone() const
 	return new Symbol(*this);
 }
 
-void Symbol::ReloadTexture() const
-{
-	for (int i = 0; i < m_et_cfg->symbol_count; ++i) {
-		ee::Symbol* symbol = static_cast<ee::Symbol*>(m_et_cfg->symbols[i].ud);
-		symbol->ReloadTexture();
-	}
-}
-
-void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr, 
-				  const ee::Sprite* root) const
+void Symbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
 {
 	if (!spr) {
 		return;
@@ -52,6 +42,14 @@ void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr,
 	shader->SetColorMap(trans.color.rmap.ToABGR(), trans.color.gmap.ToABGR(), trans.color.bmap.ToABGR());
 
 	p2d_spr->Draw(trans.mt);		
+}
+
+void Symbol::ReloadTexture() const
+{
+	for (int i = 0; i < m_et_cfg->symbol_count; ++i) {
+		ee::Symbol* symbol = static_cast<ee::Symbol*>(m_et_cfg->symbols[i].ud);
+		symbol->ReloadTexture();
+	}
 }
 
 ee::Rect Symbol::GetSize(const ee::Sprite* sprite) const

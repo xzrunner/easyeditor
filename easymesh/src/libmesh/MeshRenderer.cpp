@@ -65,7 +65,7 @@ void MeshRenderer::DrawInfoXY(const Mesh* mesh)
 	ee::RVG::Circles(nodes, mesh->GetNodeRegion(), true);
 }
 
-void MeshRenderer::DrawTexture(const Mesh* mesh, const ee::RenderParams& params)
+void MeshRenderer::DrawTexture(const Mesh* mesh, const s2::RenderParams& params)
 {
 	sl::ShaderMgr::Instance()->GetShader()->Commit();
 
@@ -92,7 +92,7 @@ void MeshRenderer::DrawTexture(const Mesh* mesh, const ee::RenderParams& params)
 	DrawTmpToScreen(mesh, params);
 }
 
-void MeshRenderer::DrawMesh(const Mesh* mesh, const ee::RenderParams& params, int texid)
+void MeshRenderer::DrawMesh(const Mesh* mesh, const s2::RenderParams& params, int texid)
 {
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	mgr->SetShader(sl::SPRITE2);
@@ -122,12 +122,12 @@ void MeshRenderer::DrawMesh(const Mesh* mesh, const ee::RenderParams& params, in
 	}
 }
 
-void MeshRenderer::DrawMeshToTmp(const Mesh* mesh, const ee::RenderParams& params)
+void MeshRenderer::DrawMeshToTmp(const Mesh* mesh, const s2::RenderParams& params)
 {
 	dtexf_c1_bind();
 	dtexf_c1_clear(0, -2, 2, 0);
 
-	ee::RenderParams _params = params;
+	s2::RenderParams _params = params;
 	_params.mt.Identity();
 	ee::SpriteRenderer::Draw(mesh->GetBaseSymbol(), _params);
 
@@ -136,7 +136,7 @@ void MeshRenderer::DrawMeshToTmp(const Mesh* mesh, const ee::RenderParams& param
 	dtexf_c1_unbind();
 }
 
-void MeshRenderer::DrawTmpToScreen(const Mesh* mesh, const ee::RenderParams& params)
+void MeshRenderer::DrawTmpToScreen(const Mesh* mesh, const s2::RenderParams& params)
 {
 	DrawMesh(mesh, params, dtexf_c1_get_texture_id());
 }

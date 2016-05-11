@@ -59,7 +59,7 @@ render_func(void* symbol, float* mat, float x, float y, float angle, float scale
 
 	ee::Symbol* sym = static_cast<ee::Symbol*>(symbol);
 
-	ee::RenderParams trans;
+	s2::RenderParams trans;
 	trans.mt = mt;
 	memcpy(&trans.color.mul, mul_col, sizeof(*mul_col));
 	memcpy(&trans.color.add, add_col, sizeof(*add_col));

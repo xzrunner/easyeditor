@@ -1,7 +1,7 @@
 #ifndef _SPRITE2_RENDER_PARAMS_H_
 #define _SPRITE2_RENDER_PARAMS_H_
 
-#include "Matrix.h"
+//#include "Matrix.h"
 #include "RenderColor.h"
 #include "RenderShader.h"
 #include "RenderCamera.h"
@@ -14,11 +14,12 @@ class Sprite;
 class RenderParams
 {
 public:
-	Sprite* root_spr;
+	const Sprite* root_spr;	// for blend
 
 	bool set_shader;
 
-	Matrix mat;
+//	Matrix mt;
+	sm::mat4 mt;
 
 	RenderColor	color;
 	

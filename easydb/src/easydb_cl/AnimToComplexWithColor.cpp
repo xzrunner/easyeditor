@@ -6,7 +6,6 @@
 #include <ee/NullSymbol.h>
 #include <ee/StringHelper.h>
 #include <ee/convert_color.h>
-#include <ee/RenderParams.h>
 
 #include <easycomplex.h>
 

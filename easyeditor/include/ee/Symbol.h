@@ -7,6 +7,7 @@
 #include "Rect.h"
 
 #include <SM_Matrix.h>
+#include <sprite2/Symbol.h>
 
 #include <set>
 
@@ -14,9 +15,8 @@ namespace ee
 {
 
 class Sprite;
-class RenderParams;
 
-class Symbol : public ListItem, public UserDataImpl
+class Symbol : public s2::Symbol, public ListItem, public UserDataImpl
 {
 public:
 	virtual ~Symbol();
@@ -32,8 +32,6 @@ public:
 	virtual void ClearUserData(bool deletePtr);
 
 	virtual void ReloadTexture() const = 0;
-	virtual void Draw(const RenderParams& trans, const Sprite* spr = NULL, 
-		const Sprite* root = NULL) const = 0;
 	virtual Rect GetSize(const Sprite* sprite = NULL) const = 0;
 	virtual void InvalidRect(const sm::mat4& mt) const {}
 

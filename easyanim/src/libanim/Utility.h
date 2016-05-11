@@ -3,7 +3,7 @@
 
 #include "Symbol.h"
 
-#include <ee/RenderParams.h>
+#include <sprite2/RenderParams.h>
 
 namespace eanim
 {
@@ -11,10 +11,8 @@ namespace eanim
 class Utility
 {
 public:
-	static void DrawAnimSymbol(
-		const Symbol* symbol, 
-		const ee::Sprite* root,
-		const ee::RenderParams& trans = ee::RenderParams(),
+	static void DrawAnimSymbol(const Symbol* symbol, 
+		const s2::RenderParams& trans = s2::RenderParams(),
 		int index = 1);
 
 	static void GetCurrSprites(const Symbol* symbol, int index, std::vector<ee::Sprite*>& sprites);

@@ -4,12 +4,12 @@
 #include "Sprite.h"
 #include "Symbol.h"
 #include "Camera.h"
-#include "RenderParams.h"
 
 #include <dtex_cs.h>
 #include <dtex_screen.h>
 #include <dtex_gl.h>
 #include <shaderlab.h>
+#include <sprite2/RenderParams.h>
 
 #include <gl/glew.h>
 
@@ -93,9 +93,9 @@ static void _cs_draw(struct dtex_cs_rect* r, void* ud)
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		const Sprite* spr = sprites[i];
 
-		sm::mat4 t;
-		spr->GetTransMatrix(t);
-		spr->GetSymbol().Draw(RenderParams(t));
+		s2::RenderParams params;
+		spr->GetTransMatrix(params.mt);
+		spr->GetSymbol().Draw(params);
 	}
 
 	sl::ShaderMgr::Instance()->GetShader()->Commit();

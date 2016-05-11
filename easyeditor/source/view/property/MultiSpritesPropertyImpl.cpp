@@ -9,7 +9,6 @@
 #include "SetSpriteColorAOP.h"
 #include "SetSpritePosAOP.h"
 #include "TranslateSpriteAOP.h"
-#include "RenderParams.h"
 
 #include <wx/string.h>
 

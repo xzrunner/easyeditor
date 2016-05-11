@@ -3,7 +3,6 @@
 #include "FontBlankSprite.h"
 #include "EditPanelImpl.h"
 #include "panel_msg.h"
-#include "RenderParams.h"
 
 #include <wx/propgrid/advprops.h>
 

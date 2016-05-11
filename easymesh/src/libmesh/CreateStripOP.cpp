@@ -6,7 +6,6 @@
 
 #include <ee/panel_msg.h>
 #include <ee/Image.h>
-#include <ee/RenderParams.h>
 #include <ee/SpriteRenderer.h>
 
 namespace emesh

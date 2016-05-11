@@ -2,7 +2,7 @@
 #include "StagePanel.h"
 #include "OceanMesh.h"
 
-#include <ee/RenderParams.h>
+#include <sprite2/RenderParams.h>
 
 namespace eterrain2d
 {
@@ -22,7 +22,7 @@ bool WaveVerticesOP::OnDraw() const
 
 	const std::vector<OceanMesh*>& oceans = m_stage->GetOceans();
 	for (int i = 0, n = oceans.size(); i < n; ++i) {
-		oceans[i]->Draw(ee::RenderParams(), m_draw_tris);
+		oceans[i]->Draw(s2::RenderParams(), m_draw_tris);
 	}
 
 	return false;

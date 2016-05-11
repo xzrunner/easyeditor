@@ -4,9 +4,9 @@
 
 #include <ee/ImageSymbol.h>
 #include <ee/FileHelper.h>
-#include <ee/RenderParams.h>
 
 #include <shaderlab.h>
+#include <sprite2/RenderParams.h>
 
 #include <algorithm>
 
@@ -32,23 +32,7 @@ Symbol::~Symbol()
 	Clear();
 }
 
-void Symbol::ReloadTexture() const
-{
-	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
-		OceanMesh* ocean = m_oceans[i];
-		const ee::ImageSymbol* img0 = ocean->GetImage0();
-		if (img0) {
-			img0->ReloadTexture();
-		}
-		const ee::ImageSymbol* img1 = ocean->GetImage1();
-		if (img1) {
-			img1->ReloadTexture();
-		}
-	}	
-}
-
-void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr, 
-				  const ee::Sprite* root) const
+void Symbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
 {
 	clock_t curr = clock();
 	if (m_time == 0) {
@@ -71,6 +55,21 @@ void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr,
 	}
 
 	m_time = curr;
+}
+
+void Symbol::ReloadTexture() const
+{
+	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
+		OceanMesh* ocean = m_oceans[i];
+		const ee::ImageSymbol* img0 = ocean->GetImage0();
+		if (img0) {
+			img0->ReloadTexture();
+		}
+		const ee::ImageSymbol* img1 = ocean->GetImage1();
+		if (img1) {
+			img1->ReloadTexture();
+		}
+	}	
 }
 
 ee::Rect Symbol::GetSize(const ee::Sprite* sprite) const

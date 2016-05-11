@@ -53,8 +53,9 @@ void StageCanvas::OnDrawSprites() const
 {
 	if (m_edited && m_bg) 
 	{
-		sm::mat4 mat(m_edited->GetTransInvMatrix());
-		ee::SpriteRenderer::Draw(m_bg, NULL, mat);
+		s2::RenderParams params;
+		params.mt = m_edited->GetTransInvMatrix();
+		ee::SpriteRenderer::Draw(m_bg, params);
 	}
 
 	m_shape_impl->TraverseShapes(ee::DrawShapesVisitor(ee::Rect()), ee::DT_VISIBLE);
@@ -63,7 +64,7 @@ void StageCanvas::OnDrawSprites() const
 
 	if (!m_edited) {
 		const ee::Symbol& symbol = m_stage->GetSymbol();
-		symbol.Draw(sm::mat4());
+		symbol.Draw(s2::RenderParams());
 	}
 
 	m_stage->DrawEditOP();

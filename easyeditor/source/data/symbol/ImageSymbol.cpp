@@ -37,15 +37,14 @@ ImageSymbol* ImageSymbol::Clone() const
 	return NULL;
 }
 
+void ImageSymbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
+{
+	m_image->Draw(trans, spr);
+}
+
 void ImageSymbol::ReloadTexture() const
 {
 	m_image->ReloadTexture();
-}
-
-void ImageSymbol::Draw(const RenderParams& trans, const Sprite* spr, 
-					   const Sprite* root) const
-{
-	m_image->Draw(trans, spr, root);
 }
 
 Rect ImageSymbol::GetSize(const Sprite* sprite/* = NULL*/) const

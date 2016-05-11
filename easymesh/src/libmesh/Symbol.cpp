@@ -6,7 +6,8 @@
 #include "MeshRenderer.h"
 
 #include <ee/Image.h>
-#include <ee/RenderParams.h>
+
+#include <sprite2/RenderParams.h>
 
 #include <shaderlab.h>
 
@@ -56,15 +57,7 @@ Symbol* Symbol::Clone() const
 	return new Symbol(*this);
 }
 
-void Symbol::ReloadTexture() const
-{
-	if (m_base) {
-		m_base->ReloadTexture();
-	}
-}
-
-void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr, 
-				  const ee::Sprite* root) const
+void Symbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
 {
 	if (!m_mesh) {
 		return;
@@ -88,6 +81,13 @@ void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr,
 		if (spd.x != 0 || spd.y != 0) {
 			m_mesh->OffsetUV(spd.x, spd.y);
 		}
+	}
+}
+
+void Symbol::ReloadTexture() const
+{
+	if (m_base) {
+		m_base->ReloadTexture();
 	}
 }
 

@@ -42,8 +42,9 @@ void StageCanvas::OnDrawSprites() const
 {
 	if (m_edited && m_bg) 
 	{
-		sm::mat4 mat(m_edited->GetTransInvMatrix());
-		ee::SpriteRenderer::Draw(m_bg, NULL, mat);
+		s2::RenderParams params;
+		params.mt = m_edited->GetTransInvMatrix();
+		ee::SpriteRenderer::Draw(m_bg, params);
 	}
 
 	ee::Rect sr = m_screen.GetRegion();

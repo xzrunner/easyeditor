@@ -183,9 +183,9 @@ ext_sym_render(void* ext_sym, float x, float y, void* ud) {
 	if (!ext_sym) {
 		return;
 	}
-
-	SpriteRenderer::Draw((Symbol*)ext_sym, 
-		RenderParams(*((sm::mat4*)ud)), sm::vec2(x, y));
+	s2::RenderParams params;
+	params.mt = *((sm::mat4*)ud);
+	SpriteRenderer::Draw((Symbol*)ext_sym, params, sm::vec2(x, y));
 }
 
 void GTxt::Draw(const gtxt_label_style& style, const sm::mat4& mt, const s2::Color& mul, 

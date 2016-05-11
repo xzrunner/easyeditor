@@ -17,8 +17,7 @@ namespace ee
 {
 
 void SpriteRenderer::Draw(const Sprite* spr, 
-						  const Sprite* root,
-						  const RenderParams& trans)
+						  const s2::RenderParams& trans)
 {
 	if (!spr->visiable) {
 		return;
@@ -71,17 +70,17 @@ void SpriteRenderer::Draw(const Sprite* spr,
 		}
 		sl::FilterShader* shader = static_cast<sl::FilterShader*>(mgr->GetShader(sl::FILTER));
 		shader->SetMode(sl::FILTER_MODE(filter));
-		RenderParams t = trans;
+		s2::RenderParams t = trans;
 		t.shader.filter = filter;
 		t.camera = ct;
-		DrawImpl(spr, root, t);
+		DrawImpl(spr, t);
 	} else {
 		if (trans.set_shader) {
 			mgr->SetShader(sl::SPRITE2);
 		}
-		RenderParams t = trans;
+		s2::RenderParams t = trans;
 		t.camera = ct;
-		DrawImpl(spr, root, t);
+		DrawImpl(spr, t);
 	}
 }
 
@@ -99,7 +98,7 @@ void SpriteRenderer::InvalidRect(const Sprite* sprite, const sm::mat4& mt)
 }
 
 void SpriteRenderer::Draw(const Symbol* symbol, 
-						  const RenderParams& trans /*= RenderParams()*/,
+						  const s2::RenderParams& trans /*= s2::RenderParams()*/,
 						  const sm::vec2& pos, 
 						  float angle/* = 0.0f*/, 
 						  float xScale/* = 1.0f*/, 
@@ -111,15 +110,14 @@ void SpriteRenderer::Draw(const Symbol* symbol,
 	mt.SetTransformation(pos.x, pos.y, angle, xScale, yScale, 0, 0, xShear, yShear);
 	mt = mt * trans.mt;
 
-	RenderParams t = trans;
+	s2::RenderParams t = trans;
 	t.mt = mt;
 
 	symbol->Draw(t);
 }
 
 void SpriteRenderer::DrawImpl(const Sprite* spr, 
-							  const Sprite* root,
-							  const RenderParams& trans)
+							  const s2::RenderParams& trans)
 {
 	sm::mat4 t;
 	spr->GetTransMatrix(t);
@@ -133,11 +131,11 @@ void SpriteRenderer::DrawImpl(const Sprite* spr,
 	col_new.gmap = spr->GetColor().gmap.MapMul(trans.color.rmap, trans.color.gmap, trans.color.bmap);
 	col_new.bmap = spr->GetColor().bmap.MapMul(trans.color.rmap, trans.color.gmap, trans.color.bmap);
 
-	RenderParams _trans = trans;
+	s2::RenderParams _trans = trans;
 	_trans.mt = t;
 	_trans.color = col_new;
 
-	spr->GetSymbol().Draw(_trans, spr, root);
+	spr->GetSymbol().Draw(_trans, spr);
 
 	if (spr->IsAnchor() && Config::Instance()->GetSettings().draw_anchor) 
 	{

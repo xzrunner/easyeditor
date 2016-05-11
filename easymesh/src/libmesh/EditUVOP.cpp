@@ -3,7 +3,7 @@
 #include "Mesh.h"
 #include "MeshRenderer.h"
 
-#include <ee/RenderParams.h>
+#include <sprite2/RenderParams.h>
 
 namespace emesh
 {
@@ -18,7 +18,7 @@ bool EditUVOP::OnDraw() const
 {
 	if (Mesh* mesh = m_stage->GetMesh())
 	{
-		MeshRenderer::DrawTexture(mesh, ee::RenderParams());
+		MeshRenderer::DrawTexture(mesh, s2::RenderParams());
 		MeshRenderer::DrawInfoXY(mesh);
 	}
 

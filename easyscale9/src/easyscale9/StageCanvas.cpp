@@ -10,7 +10,6 @@
 #include <ee/Camera.h>
 #include <ee/CameraMgr.h>
 #include <ee/color_config.h>
-#include <ee/RenderParams.h>
 #include <ee/cfg_const.h>
 
 namespace escale9
@@ -43,7 +42,7 @@ void StageCanvas::OnDrawSprites() const
 
 		ee::Symbol* symbol = m_stage_panel->getPatchSymbol();
 		if (symbol)
-			symbol->Draw(ee::RenderParams());
+			symbol->Draw(s2::RenderParams());
 	}
 	m_stage_panel->DrawEditOP();
 }

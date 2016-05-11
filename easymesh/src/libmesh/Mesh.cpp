@@ -7,7 +7,6 @@
 #include <ee/Math2D.h>
 #include <ee/std_functor.h>
 #include <ee/JsonSerializer.h>
-#include <ee/RenderParams.h>
 
 #include <shaderlab.h>
 

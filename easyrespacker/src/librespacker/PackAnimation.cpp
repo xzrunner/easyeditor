@@ -14,7 +14,6 @@
 #include <ee/Sprite.h>
 #include <ee/FileType.h>
 #include <ee/ImageSprite.h>
-#include <ee/RenderParams.h>
 
 namespace erespacker
 {

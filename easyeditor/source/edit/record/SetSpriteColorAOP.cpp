@@ -1,6 +1,5 @@
 #include "SetSpriteColorAOP.h"
 #include "Sprite.h"
-#include "RenderParams.h"
 
 #include <algorithm>
 

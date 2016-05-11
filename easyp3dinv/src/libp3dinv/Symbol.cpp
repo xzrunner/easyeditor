@@ -2,7 +2,7 @@
 #include "Sprite.h"
 #include "ParticleSystem.h"
 
-#include <ee/RenderParams.h>
+#include <sprite2/RenderParams.h>
 
 namespace ep3dinv
 {
@@ -19,18 +19,17 @@ Symbol::~Symbol()
 	}
 }
 
-void Symbol::ReloadTexture() const
-{
-	// fixme
-}
-
-void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr, 
-				  const ee::Sprite* root) const
+void Symbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
 {
 	if (m_ps) {
 		m_ps->Update(1.0f / 30);
 		m_ps->Draw(trans.mt);
 	}
+}
+
+void Symbol::ReloadTexture() const
+{
+	// fixme
 }
 
 ee::Rect Symbol::GetSize(const ee::Sprite* sprite) const

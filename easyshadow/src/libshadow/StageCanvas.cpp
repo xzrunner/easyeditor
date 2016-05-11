@@ -37,11 +37,12 @@ void StageCanvas::OnDrawSprites() const
 {
 	if (m_edited && m_bg) 
 	{
-		sm::mat4 mat(m_edited->GetTransInvMatrix());
-		ee::SpriteRenderer::Draw(m_bg, NULL, mat);
+		s2::RenderParams params;
+		params.mt = m_edited->GetTransInvMatrix();
+		ee::SpriteRenderer::Draw(m_bg, params);
 	}
 
-	m_stage->GetSymbol()->Draw(sm::mat4());
+	m_stage->GetSymbol()->Draw(s2::RenderParams());
 	m_stage->DrawEditOP();
 }
 

@@ -187,11 +187,11 @@ void FBO::DrawFBO(const Symbol* symbol, bool whitebg, float scale)
 	ctx_stack->SetProjection(w, h);
 	GL::Viewport(0, 0, w, h);
 
-	sm::mat4 mt;
+	s2::RenderParams params;
 	float dx = -symbol->GetSize().CenterX();
 	float dy = symbol->GetSize().CenterY();
-	mt.Translate(dx * scale, dy * scale, 0);
-	SpriteRenderer::Draw(symbol, mt, sm::vec2(0, 0), 0.0f, scale, -scale);
+	params.mt.Translate(dx * scale, dy * scale, 0);
+	SpriteRenderer::Draw(symbol, params, sm::vec2(0, 0), 0.0f, scale, -scale);
 
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
 	mgr->GetShader()->Commit();
@@ -239,12 +239,11 @@ void FBO::DrawFBO(const Sprite* sprite, bool clear, int width, int height,
 	ctx_stack->SetProjection(width, height);
 	GL::Viewport(0, 0, width, height);
 
-	sm::mat4 mt;
-	mt.Scale(scale, -scale, 1);
-	mt.Translate(-dx, -dy, 0);
-	RenderParams params(mt);
+	s2::RenderParams params;
+	params.mt.Scale(scale, -scale, 1);
+	params.mt.Translate(-dx, -dy, 0);
 	params.set_shader = false;
-	SpriteRenderer::Draw(sprite, NULL, params);
+	SpriteRenderer::Draw(sprite, params);
 
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
 	mgr->GetShader()->Commit();

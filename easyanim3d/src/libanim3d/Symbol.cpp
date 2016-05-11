@@ -17,12 +17,7 @@ Symbol::~Symbol()
 {
 }
 
-void Symbol::ReloadTexture() const
-{
-}
-
-void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr, 
-				  const ee::Sprite* root) const
+void Symbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
 {
 	if (!spr) {
 		return;
@@ -38,6 +33,10 @@ void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr,
 
 	mgr->Model();
 	mgr->DrawModel(m_model, mat);
+}
+
+void Symbol::ReloadTexture() const
+{
 }
 
 ee::Rect Symbol::GetSize(const ee::Sprite* sprite) const

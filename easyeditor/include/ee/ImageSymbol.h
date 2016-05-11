@@ -23,9 +23,8 @@ public:
 	//
 	// Symbol interface
 	//
+	virtual void Draw(const s2::RenderParams& trans, const s2::Sprite* spr = NULL) const;
 	virtual void ReloadTexture() const;
-	virtual void Draw(const RenderParams& trans, const Sprite* spr = NULL, 
-		const Sprite* root = NULL) const;
 	virtual Rect GetSize(const Sprite* sprite = NULL) const;
 	virtual void InvalidRect(const sm::mat4& mt) const;
 

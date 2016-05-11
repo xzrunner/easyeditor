@@ -112,7 +112,7 @@ void OceanMesh::Update(float dt)
 	}
 }
 
-void OceanMesh::Draw(const ee::RenderParams& trans, bool draw_tris) const
+void OceanMesh::Draw(const s2::RenderParams& trans, bool draw_tris) const
 {
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));

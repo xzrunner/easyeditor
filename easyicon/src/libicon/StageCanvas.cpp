@@ -41,15 +41,16 @@ void StageCanvas::OnDrawSprites() const
 {
 	if (m_edited && m_bg) 
 	{
-		sm::mat4 mat(m_edited->GetTransInvMatrix());
-		ee::SpriteRenderer::Draw(m_bg, NULL, mat);
+		s2::RenderParams params;
+		params.mt = m_edited->GetTransInvMatrix();
+		ee::SpriteRenderer::Draw(m_bg, params);
 	}
 
 	Sprite sprite;
 	sprite.SetSymbol(&m_stage->GetSymbol());
 	sprite.SetProcess(0.5f);
 
-	m_stage->GetSymbol().Draw(ee::RenderParams(), &sprite);
+	m_stage->GetSymbol().Draw(s2::RenderParams(), &sprite);
 
 	ee::RVG::Color(s2::Color(255, 0, 0));
 	ee::RVG::Cross(sm::vec2(0, 0), 100, 100);

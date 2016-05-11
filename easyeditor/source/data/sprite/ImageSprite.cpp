@@ -5,7 +5,6 @@
 #include "Math2D.h"
 #include "BBFactory.h"
 #include "BoundingBox.h"
-#include "RenderParams.h"
 
 namespace ee
 {

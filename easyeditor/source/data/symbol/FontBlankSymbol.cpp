@@ -7,7 +7,8 @@
 #include "StringHelper.h"
 #include "EE_RVG.h"
 #include "Math2D.h"
-#include "RenderParams.h"
+
+#include <sprite2/RenderParams.h>
 
 #include <json/json.h>
 
@@ -34,8 +35,7 @@ void FontBlankSymbol::ReloadTexture() const
 {
 }
 
-void FontBlankSymbol::Draw(const RenderParams& trans, const Sprite* spr, 
-						   const Sprite* root) const
+void FontBlankSymbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
 {
 	const SettingData& setting = Config::Instance()->GetSettings();
 	const FontBlankSprite* fb = (const FontBlankSprite*)spr;

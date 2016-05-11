@@ -8,6 +8,8 @@
 
 #include <stdint.h>
 
+namespace s2 { class Sprite; class RenderParams; }
+
 namespace ee
 {
 
@@ -15,7 +17,6 @@ class Sprite;
 class Texture;
 class ImageData;
 class FBO;
-class RenderParams;
 
 class Image : public Object
 {
@@ -37,8 +38,7 @@ public:
 	int GetClippedHeight() const;
 	const uint8_t* GetPixelData() const;
 
-	void Draw(const RenderParams& trans, const Sprite* spr = NULL, 
-		const Sprite* root = NULL) const;
+	void Draw(const s2::RenderParams& trans, const s2::Sprite* spr = NULL) const;
 	void InvalidRect(const sm::mat4& mt) const;
 
 	const sm::vec2& GetOffset() const { return m_offset; }

@@ -9,7 +9,8 @@
 #include <ee/EE_RVG.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/EditPanelImpl.h>
-#include <ee/RenderParams.h>
+
+#include <sprite2/RenderParams.h>
 
 namespace emesh
 {
@@ -120,7 +121,7 @@ bool EditNWOP::OnDraw() const
 {
 	if (Mesh* mesh = static_cast<StagePanel*>(m_wnd)->GetMesh())
 	{
-		MeshRenderer::DrawTexture(mesh, ee::RenderParams());
+		MeshRenderer::DrawTexture(mesh, s2::RenderParams());
 		MeshRenderer::DrawInfoXY(mesh);
 	}
 

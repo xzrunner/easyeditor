@@ -1,10 +1,12 @@
 #include "Symbol.h"
 
 #include <ee/FileHelper.h>
-#include <ee/RenderParams.h>
 
 #include <easyshape.h>
+
 #include <shaderlab.h>
+#include <sprite2/RenderParams.h>
+
 
 namespace etexture
 {
@@ -34,15 +36,7 @@ Symbol* Symbol::Clone() const
 	return new Symbol(*this);
 }
 
-void Symbol::ReloadTexture() const
-{
-	for (int i = 0, n = m_shapes.size(); i < n; ++i) {
-		m_shapes[i]->ReloadTexture();
-	}
-}
-
-void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr, 
-				  const ee::Sprite* root) const
+void Symbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
 {
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
@@ -51,6 +45,13 @@ void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr,
 
 	for (int i = 0, n = m_shapes.size(); i < n; ++i) {
 		m_shapes[i]->Draw(trans.mt, trans.color);
+	}
+}
+
+void Symbol::ReloadTexture() const
+{
+	for (int i = 0, n = m_shapes.size(); i < n; ++i) {
+		m_shapes[i]->ReloadTexture();
 	}
 }
 

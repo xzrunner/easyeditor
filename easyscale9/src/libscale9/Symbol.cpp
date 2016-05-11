@@ -19,15 +19,14 @@ Symbol::Symbol(const Symbol& symbol)
 {
 }
 
+void Symbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
+{
+	m_data.Draw(trans, spr);
+}
+
 void Symbol::ReloadTexture() const
 {
 	m_data.ReloadTexture();
-}
-
-void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr, 
-				  const ee::Sprite* root) const
-{
-	m_data.Draw(trans, spr, root);
 }
 
 ee::Rect Symbol::GetSize(const ee::Sprite* sprite/* = NULL*/) const

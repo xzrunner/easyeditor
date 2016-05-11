@@ -16,7 +16,6 @@
 #include "panel_msg.h"
 #include "SetSpriteColorAOP.h"
 #include "FileHelper.h"
-#include "RenderParams.h"
 #include "FilterModes.h"
 
 #include <wx/propgrid/advprops.h>

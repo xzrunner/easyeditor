@@ -1,7 +1,5 @@
 #include "TweenUtility.h"
 
-#include <ee/RenderParams.h>
-
 #include <easyscale9.h>
 #include <easyicon.h>
 #include <easymesh.h>

@@ -36,19 +36,19 @@ inline AABB::AABB()
 inline void AABB::MakeInfinite() 
 {
 	for (int i = 0; i < 3; ++i) {
-		m_min[i] = FLT_MAX;
-		m_max[i] = -FLT_MAX;
+		m_min.xyz[i] = FLT_MAX;
+		m_max.xyz[i] = -FLT_MAX;
 	}
 }
 
 inline void AABB::Combine(const sm::vec3& pos) 
 {
 	for (int i = 0; i < 3; ++i) {
-		if (pos[i] < m_min[i]) {
-			m_min[i] = pos[i];
+		if (pos.xyz[i] < m_min.xyz[i]) {
+			m_min.xyz[i] = pos.xyz[i];
 		}
-		if (pos[i] > m_max[i]) {
-			m_max[i] = pos[i];
+		if (pos.xyz[i] > m_max.xyz[i]) {
+			m_max.xyz[i] = pos.xyz[i];
 		}
 	}
 }

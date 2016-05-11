@@ -20,17 +20,16 @@ Symbol::~Symbol()
 	Clear();
 }
 
+void Symbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
+{
+
+}
+
 void Symbol::ReloadTexture() const
 {
 	for (int i = 0, n = m_symbols.size(); i < n; ++i) {
 		m_symbols[i]->ReloadTexture();
 	}
-}
-
-void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr, 
-				  const ee::Sprite* root) const
-{
-	
 }
 
 ee::Rect Symbol::GetSize(const ee::Sprite* sprite/* = NULL*/) const

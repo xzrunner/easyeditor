@@ -20,7 +20,6 @@
 #include "FetchAllVisitor.h"
 #include "sprite_msg.h"
 #include "EditOP.h"
-#include "RenderParams.h"
 
 #include "TranslateSpriteState.h"
 #include "RotateSpriteState.h"

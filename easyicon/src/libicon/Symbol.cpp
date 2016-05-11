@@ -3,9 +3,8 @@
 #include "Icon.h"
 #include "FileIO.h"
 
-#include <ee/RenderParams.h>
-
 #include <shaderlab.h>
+#include <sprite2/RenderParams.h>
 
 namespace eicon
 {
@@ -22,15 +21,7 @@ Symbol::~Symbol()
 	}
 }
 
-void Symbol::ReloadTexture() const
-{
-	if (m_icon) {
-		m_icon->ReloadTexture();
-	}
-}
-
-void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr, 
-				  const ee::Sprite* root) const
+void Symbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
 {
 	if (!m_icon) {
 		return;
@@ -46,6 +37,13 @@ void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr,
 		process = static_cast<const Sprite*>(spr)->GetProcess();
 	}
 	m_icon->Draw(trans.mt, process);
+}
+
+void Symbol::ReloadTexture() const
+{
+	if (m_icon) {
+		m_icon->ReloadTexture();
+	}
 }
 
 ee::Rect Symbol::GetSize(const ee::Sprite* sprite) const

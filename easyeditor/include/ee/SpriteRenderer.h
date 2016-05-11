@@ -1,7 +1,8 @@
 #ifndef _EASYEDITOR_SPRITE_RENDERER_H_
 #define _EASYEDITOR_SPRITE_RENDERER_H_
 
-#include "RenderParams.h"
+#include <SM_Matrix.h>
+#include <sprite2/RenderParams.h>
 
 namespace ee
 {
@@ -15,14 +16,13 @@ class SpriteRenderer
 {
 public:
 	static void Draw(const Sprite* sprite, 
-		             const Sprite* root = NULL,
-			         const RenderParams& trans = RenderParams());
+			         const s2::RenderParams& trans = s2::RenderParams());
 
 	static void InvalidRect(const Sprite* sprite, 
 		                    const sm::mat4& mt = sm::mat4());
 
 	static void Draw(const Symbol* symbol, 
-		             const RenderParams& trans = RenderParams(),
+		             const s2::RenderParams& trans = s2::RenderParams(),
 			         const sm::vec2& pos = sm::vec2(0, 0),
 			         float angle = 0.0f, 
 			         float xScale = 1.0f, 
@@ -32,8 +32,7 @@ public:
 
 private:
 	static void DrawImpl(const Sprite* sprite, 
-		                 const Sprite* root,
-  				         const RenderParams& trans);
+  				         const s2::RenderParams& trans);
 	
 }; // SpriteRenderer
 

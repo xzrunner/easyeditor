@@ -6,7 +6,6 @@
 #include <ee/BoundingBox.h>
 #include <ee/FileHelper.h>
 #include <ee/SymbolSearcher.h>
-#include <ee/RenderParams.h>
 
 #include <easycomplex.h>
 
@@ -27,6 +26,24 @@ Symbol::~Symbol()
 	clear();
 }
 
+void Symbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
+{
+	if (m_index != 0) {
+		Utility::DrawAnimSymbol(this, trans, m_index);
+	} else {
+		static clock_t init = 0;
+		if (init == 0) {
+			init = clock();
+			Utility::DrawAnimSymbol(this, trans, 1);
+		} else {
+			clock_t curr = clock();
+			float during = (float)(curr - init) / CLOCKS_PER_SEC;
+			int index = during / (1.0f / m_fps);
+			Utility::DrawAnimSymbol(this, trans, index % getMaxFrameIndex() + 1);
+		}
+	}
+}
+
 void Symbol::ReloadTexture() const
 {
 	for (size_t i = 0, n = m_layers.size(); i < n; ++i)
@@ -37,25 +54,6 @@ void Symbol::ReloadTexture() const
 			Frame* frame = layer->frames[j];
 			for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
 				frame->sprites[k]->GetSymbol().ReloadTexture();
-		}
-	}
-}
-
-void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr, 
-				  const ee::Sprite* root) const
-{
-	if (m_index != 0) {
-		Utility::DrawAnimSymbol(this, root, trans, m_index);
-	} else {
-		static clock_t init = 0;
-		if (init == 0) {
-			init = clock();
-			Utility::DrawAnimSymbol(this, root, trans, 1);
-		} else {
-			clock_t curr = clock();
-			float during = (float)(curr - init) / CLOCKS_PER_SEC;
-			int index = during / (1.0f / m_fps);
-			Utility::DrawAnimSymbol(this, root, trans, index % getMaxFrameIndex() + 1);
 		}
 	}
 }

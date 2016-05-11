@@ -6,7 +6,8 @@
 #include <ee/EE_RVG.h>
 #include <ee/EE_GTxt.h>
 #include <ee/Math2D.h>
-#include <ee/RenderParams.h>
+
+#include <sprite2/RenderParams.h>
 
 #include <gtxt.h>
 
@@ -23,12 +24,7 @@ Symbol::~Symbol()
 {
 }
 
-void Symbol::ReloadTexture() const
-{
-}
-
-void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr, 
-				  const ee::Sprite* root) const
+void Symbol::Draw(const s2::RenderParams& trans, const s2::Sprite* spr) const
 {
 	const ee::SettingData& setting = ee::Config::Instance()->GetSettings();
 	if (setting.visible_label_bg) {
@@ -37,6 +33,10 @@ void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr,
  	if (setting.visible_label_text) {
  		DrawText(spr, trans);
  	}
+}
+
+void Symbol::ReloadTexture() const
+{
 }
 
 ee::Rect Symbol::GetSize(const ee::Sprite* sprite) const
@@ -79,7 +79,7 @@ void Symbol::LoadResources()
 	m_align_vert = (VertAlignType)(value["align_vert"].asInt());
 }
 
-void Symbol::DrawBackground(const ee::Sprite* sprite, const sm::mat4& mt) const
+void Symbol::DrawBackground(const s2::Sprite* sprite, const sm::mat4& mt) const
 {
 	if (!sprite) {
 		return;
@@ -101,7 +101,7 @@ void Symbol::DrawBackground(const ee::Sprite* sprite, const sm::mat4& mt) const
 	}
 }
 
-void Symbol::DrawText(const ee::Sprite* sprite, const ee::RenderParams& trans) const
+void Symbol::DrawText(const s2::Sprite* sprite, const s2::RenderParams& trans) const
 {
 	if (!sprite) {
 		return;

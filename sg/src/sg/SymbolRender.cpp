@@ -111,7 +111,7 @@ void SymbolRender::DrawGrids(const ee::Symbol& symbol,
 				m_grid->SetTransform(pos, m_grid->GetAngle());
 				s2::RenderColor ct;
 				ct.mul = color;
-				ee::SpriteRenderer::Draw(m_grid, NULL, ee::RenderParams(sm::mat4(), ct));
+				ee::SpriteRenderer::Draw(m_grid, NULL, s2::RenderParams(sm::mat4(), ct));
 			}
 		}
 	}
@@ -170,7 +170,7 @@ void SymbolRender::DrawRegion(const ee::Symbol& symbol, const sm::vec2& pos)
 	float s = (float)(max_reg) / m_region_size;
 	s2::RenderColor ct;
 	ct.mul = s2::Color(255, 0, 0);
-	ee::SpriteRenderer::Draw(m_region, ee::RenderParams(sm::mat4(), ct), pos, 0, s, s, 0, 0);
+	ee::SpriteRenderer::Draw(m_region, s2::RenderParams(sm::mat4(), ct), pos, 0, s, s, 0, 0);
 	if (min_reg != 0) {
 		float s = (float)(min_reg) / m_region_size;
 		ee::SpriteRenderer::Draw(m_region, sm::mat4(), pos, 0, s, s);
