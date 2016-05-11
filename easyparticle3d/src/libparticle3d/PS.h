@@ -1,10 +1,10 @@
 #ifndef _EASYPARTICLE3D_PS_H_
 #define _EASYPARTICLE3D_PS_H_
 
-#include <ee/RenderColor.h>
 #include <ee/SceneNode.h>
 
 #include <SM_Matrix.h>
+#include <sprite2/RenderColor.h>
 
 struct p3d_sprite;
 
@@ -15,7 +15,7 @@ class RenderParams
 {
 public:
 	sm::mat4 mat;
-	ee::RenderColor ct;
+	s2::RenderColor ct;
 	p3d_sprite* p3d;
 
 	RenderParams() : p3d(NULL) {}

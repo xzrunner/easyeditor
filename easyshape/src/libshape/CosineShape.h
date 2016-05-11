@@ -25,7 +25,7 @@ public:
 	virtual const char* GetShapeDesc() const { return "cosine-curve"; }
 	virtual void Translate(const sm::vec2& offset);
 	virtual void Draw(const sm::mat4& mt,
-		const ee::RenderColor& color = ee::RenderColor()) const;
+		const s2::RenderColor& color = s2::RenderColor()) const;
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
 
 	//

@@ -47,7 +47,7 @@ void RectShape::Translate(const sm::vec2& offset)
 	m_rect.Translate(offset);
 }
 
-void RectShape::Draw(const sm::mat4& mt, const ee::RenderColor& color) const
+void RectShape::Draw(const sm::mat4& mt, const s2::RenderColor& color) const
 {
 	sm::vec2 min(m_rect.xmin, m_rect.ymin),
 		max(m_rect.xmax, m_rect.ymax);

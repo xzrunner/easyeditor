@@ -1,6 +1,5 @@
 #include "EE_GTxt.h"
 #include "Math2D.h"
-#include "RenderColor.h"
 #include "Symbol.h"
 #include "SymbolMgr.h"
 #include "SpriteRenderer.h"
@@ -56,7 +55,7 @@ render_glyph(int id, float* _texcoords, float x, float y, float w, float h, stru
 	texcoords[2].Set(_texcoords[4], _texcoords[5]);
 	texcoords[3].Set(_texcoords[6], _texcoords[7]);
 
-	RenderColor color;
+	s2::RenderColor color;
 	if (rp->mul) {
 		s2::Color multi_col = *rp->mul;
 		multi_col.a = static_cast<int>(multi_col.a * ds->alpha);

@@ -250,7 +250,7 @@ void Image::Draw(const RenderParams& trans, const Sprite* spr,
 		{
 			const Pseudo3DCamera* pcam = static_cast<const Pseudo3DCamera*>(cam);
 			float z[4];
-			trans.camera.CalculateZ(pcam, vertices, z);
+			trans.camera.CalculateZ(pcam->GetAngle(), vertices, z);
 
 			std::vector<sm::vec3> _vertices;
 			_vertices.push_back(sm::vec3(vertices[0].x, vertices[0].y, z[0]));

@@ -107,10 +107,6 @@ public:
 	// render
 	RenderParams* rp;
 
-// 	RenderColor color;
-// 	RenderShader shader;
-// 	RenderCamera camera;
-
 	// edit
 	bool visiable;
 	bool editable;

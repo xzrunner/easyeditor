@@ -1,7 +1,6 @@
 #include "PS.h"
 #include "ParticleSystem.h"
 
-#include <ee/RenderColor.h>
 #include <ee/SpriteRenderer.h>
 
 #include <ps_2d.h>

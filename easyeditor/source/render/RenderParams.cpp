@@ -1,5 +1,6 @@
 #include "RenderParams.h"
 #include "CameraModes.h"
+#include "SpriteIO.h"
 
 namespace ee
 {
@@ -21,7 +22,7 @@ RenderParams::RenderParams(const sm::mat4& mt)
 	, mt(mt) 
 {}
 
-RenderParams::RenderParams(const sm::mat4& mt, const RenderColor& color) 
+RenderParams::RenderParams(const sm::mat4& mt, const s2::RenderColor& color) 
 	: set_shader(true)
 	, mt(mt)
 	, color(color)
@@ -29,8 +30,8 @@ RenderParams::RenderParams(const sm::mat4& mt, const RenderColor& color)
 
 void RenderParams::LoadFromFile(const Json::Value& val)
 {
-	color.LoadFromFile(val);
-	shader.LoadFromFile(val);
+	SpriteIO::LoadColor(val, color);
+	SpriteIO::LoadShader(val, shader);
 
 	std::string disc = val["camera"].asString();
 	camera.mode = CameraModes::Instance()->GetModeFromNameEN(disc);
@@ -38,8 +39,8 @@ void RenderParams::LoadFromFile(const Json::Value& val)
 
 void RenderParams::StoreToFile(Json::Value& val) const
 {
-	color.StoreToFile(val);
-	shader.StoreToFile(val);
+	SpriteIO::StoreColor(val, color);
+	SpriteIO::StoreShader(val, shader);
 
 	val["camera"] = CameraModes::Instance()->GetNameENFromMode(camera.mode);
 }

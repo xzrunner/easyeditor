@@ -45,7 +45,7 @@ void PointShape::Translate(const sm::vec2& offset)
 	m_rect.Translate(offset);
 }
 
-void PointShape::Draw(const sm::mat4& mt, const ee::RenderColor& color) const
+void PointShape::Draw(const sm::mat4& mt, const s2::RenderColor& color) const
 {
 	sm::vec2 c = ee::Math2D::TransVector(m_pos, mt);
 	float r = ee::Math2D::TransLen(RADIUS, mt);

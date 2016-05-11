@@ -1,6 +1,5 @@
 #include "EE_DTex.h"
 #include "Image.h"
-#include "RenderColor.h"
 #include "RenderContextStack.h"
 #include "EE_ShaderLab.h"
 #include "EE_RVG.h"

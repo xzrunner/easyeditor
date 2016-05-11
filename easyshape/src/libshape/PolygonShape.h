@@ -31,7 +31,7 @@ public:
 	// todo
 	//virtual bool isIntersect(const ee::Rect& rect) const;
 	virtual void Translate(const sm::vec2& offset);
-	virtual void Draw(const sm::mat4& mt, const ee::RenderColor& color) const;
+	virtual void Draw(const sm::mat4& mt, const s2::RenderColor& color) const;
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
 	virtual void LoadFromFile(const Json::Value& value, const std::string& dir);
 	virtual void StoreToFile(Json::Value& value, const std::string& dir) const;

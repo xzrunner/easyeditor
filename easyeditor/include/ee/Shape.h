@@ -4,9 +4,9 @@
 #include "Cloneable.h"
 #include "UserDataImpl.h"
 #include "Object.h"
-#include "RenderColor.h"
 
 #include <SM_Matrix.h>
+#include <sprite2/RenderColor.h>
 
 #include <json/json.h>
 
@@ -16,7 +16,6 @@ namespace ee
 class Rect;
 class PropertySetting;
 class EditPanelImpl;
-class RenderColor;
 
 class Shape : public Cloneable, public UserDataImpl, public Object
 {
@@ -45,7 +44,7 @@ public:
 	virtual const Rect& GetRect() const = 0;
 
 	virtual void Draw(const sm::mat4& mt, 
-		const RenderColor& color = RenderColor()) const = 0;
+		const s2::RenderColor& color = s2::RenderColor()) const = 0;
 
 	virtual PropertySetting* CreatePropertySetting(EditPanelImpl* stage) = 0;
 

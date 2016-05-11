@@ -717,6 +717,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\source\data\sprite\SpriteIO.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\SpriteIO.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\include\ee\SpriteObserver.h"
 					>
 				</File>

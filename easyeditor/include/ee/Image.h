@@ -3,7 +3,6 @@
 
 #include "ResourcesMgr.h"
 #include "Object.h"
-#include "RenderColor.h"
 
 #include <SM_Matrix.h>
 

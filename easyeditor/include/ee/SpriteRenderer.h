@@ -1,7 +1,6 @@
 #ifndef _EASYEDITOR_SPRITE_RENDERER_H_
 #define _EASYEDITOR_SPRITE_RENDERER_H_
 
-#include "RenderColor.h"
 #include "RenderParams.h"
 
 namespace ee

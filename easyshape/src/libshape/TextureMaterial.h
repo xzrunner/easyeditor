@@ -19,7 +19,7 @@ public:
 	virtual Json::Value Store(const std::string& dirpath) const;
 
 	virtual void Translate(const sm::vec2& offset);
-	virtual void Draw(const sm::mat4& mt, const ee::RenderColor& color) const;	
+	virtual void Draw(const sm::mat4& mt, const s2::RenderColor& color) const;	
 
 	virtual void ReloadTexture();
 

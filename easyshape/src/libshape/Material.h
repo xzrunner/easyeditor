@@ -8,6 +8,7 @@
 #include <SM_Matrix.h>
 
 namespace ee { class RenderColor; }
+namespace s2 { class RenderColor; }
 
 namespace eshape
 {
@@ -21,7 +22,7 @@ public:
 	virtual Json::Value Store(const std::string& dirpath) const = 0;
 
 	virtual void Translate(const sm::vec2& offset);
-	virtual void Draw(const sm::mat4& mt, const ee::RenderColor& color) const = 0;
+	virtual void Draw(const sm::mat4& mt, const s2::RenderColor& color) const = 0;
 
 	virtual void ReloadTexture() = 0;
 

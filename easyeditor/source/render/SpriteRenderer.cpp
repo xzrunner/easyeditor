@@ -38,7 +38,7 @@ void SpriteRenderer::Draw(const Sprite* spr,
 		filter = spr->rp->shader.filter;
 	}
 
- 	RenderCamera ct;
+	s2::RenderCamera ct;
 	if (trans.camera.mode != s2::CM_ORTHO) {
 		ct.mode = trans.camera.mode;
 	} else {
@@ -125,7 +125,7 @@ void SpriteRenderer::DrawImpl(const Sprite* spr,
 	spr->GetTransMatrix(t);
 	t = t * trans.mt;
 
-	RenderColor col_new;
+	s2::RenderColor col_new;
 
 	col_new.mul	 = spr->rp->color.mul * trans.color.mul;
 	col_new.add	 = spr->rp->color.add + trans.color.add;

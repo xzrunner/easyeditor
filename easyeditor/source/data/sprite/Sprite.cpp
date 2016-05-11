@@ -6,7 +6,6 @@
 #include "BBFactory.h"
 #include "BoundingBox.h"
 #include "SpriteFactory.h"
-#include "RenderColor.h"
 #include "SpriteObserver.h"
 #include "SpritePropertySetting.h"
 #include "RenderParams.h"

@@ -73,7 +73,7 @@ void BezierShape::Translate(const sm::vec2& offset)
 	}
 }
 
-void BezierShape::Draw(const sm::mat4& mt, const ee::RenderColor& color) const
+void BezierShape::Draw(const sm::mat4& mt, const s2::RenderColor& color) const
 {
 	ChainShape::Draw(mt, color);
 

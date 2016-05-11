@@ -293,35 +293,11 @@
 				Name="params"
 				>
 				<File
-					RelativePath="..\..\..\source\render\RenderCamera.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\ee\RenderCamera.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\source\render\RenderColor.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\ee\RenderColor.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\source\render\RenderParams.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\..\..\include\ee\RenderParams.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\source\render\RenderShader.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\ee\RenderShader.h"
 					>
 				</File>
 			</Filter>

@@ -5,7 +5,6 @@
 #include <ee/Symbol.h>
 #include <ee/EE_RVG.h>
 #include <ee/Math2D.h>
-#include <ee/RenderColor.h>
 #include <ee/std_functor.h>
 #include <ee/JsonSerializer.h>
 #include <ee/RenderParams.h>

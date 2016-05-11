@@ -3,7 +3,8 @@
 
 #include "Visitor.h"
 #include "Rect.h"
-#include "RenderColor.h"
+
+#include <sprite2/RenderColor.h>
 
 namespace ee
 {
@@ -18,7 +19,7 @@ public:
 private:
 	Rect m_screen_region;
 
-	RenderColor m_ct;
+	s2::RenderColor m_ct;
 
 }; // DrawShapesVisitor
 

@@ -29,7 +29,7 @@ public:
 	virtual bool IsIntersect(const ee::Rect& rect) const;
 	virtual void Translate(const sm::vec2& offset);
 	virtual void Draw(const sm::mat4& mt,
-		const ee::RenderColor& color = ee::RenderColor()) const;
+		const s2::RenderColor& color = s2::RenderColor()) const;
 
 	const std::vector<std::vector<sm::vec2> >& GetHoles() const { return m_holes; }
 

@@ -1,9 +1,10 @@
 #include "ColorMaterial.h"
 
-#include <ee/RenderColor.h>
 #include <ee/EE_RVG.h>
 #include <ee/Math2D.h>
 #include <ee/Triangulation.h>
+
+#include <sprite2/RenderColor.h>
 
 namespace eshape
 {
@@ -24,7 +25,7 @@ Json::Value ColorMaterial::Store(const std::string& dirpath) const
 	return val;
 }
 
-void ColorMaterial::Draw(const sm::mat4& mt, const ee::RenderColor& color) const
+void ColorMaterial::Draw(const sm::mat4& mt, const s2::RenderColor& color) const
 {
 	std::vector<sm::vec2> tris;
 	ee::Math2D::TransVertices(mt, m_tris, tris);

@@ -157,23 +157,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\sprite2\BlendMode.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\sprite2\CameraMode.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\sprite2\Color.h"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\src\sprite2\Color.inl"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\sprite2\FilterMode.h"
 				>
 			</File>
 			<File
@@ -184,26 +172,46 @@
 				RelativePath="..\..\..\src\sprite2\Matrix.inl"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\src\sprite2\RenderCamera.h"
+			<Filter
+				Name="render"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\sprite2\RenderColor.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\sprite2\RenderParams.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\sprite2\RenderParams.inl"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\sprite2\RenderShader.h"
-				>
-			</File>
+				<File
+					RelativePath="..\..\..\src\sprite2\BlendMode.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\sprite2\CameraMode.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\sprite2\FilterMode.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\sprite2\RenderCamera.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\sprite2\RenderCamera.inl"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\sprite2\RenderColor.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\sprite2\RenderParams.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\sprite2\RenderParams.inl"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\sprite2\RenderShader.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="sprites"
