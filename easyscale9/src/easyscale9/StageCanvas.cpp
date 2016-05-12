@@ -3,14 +3,16 @@
 #include "ToolbarPanel.h"
 #include "ComposeGrids.h"
 
-#include <easyscale9.h>
-
 #include <ee/DrawSpritesVisitor.h>
 #include <ee/EE_RVG.h>
 #include <ee/Camera.h>
 #include <ee/CameraMgr.h>
 #include <ee/color_config.h>
 #include <ee/cfg_const.h>
+
+#include <easyscale9.h>
+
+#include <sprite2/RenderParams.h>
 
 namespace escale9
 {
