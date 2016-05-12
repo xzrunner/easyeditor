@@ -111,7 +111,7 @@ bool StagePanel::Update(float dt)
 	bool ret = false;
 
 	for (int i = 0, n = m_layers.size(); i < n; ++i) {
-		if (m_layers[i]->Update(version)) {
+		if (m_layers[i]->Update(dt)) {
 			ret = true;
 		}
 	}

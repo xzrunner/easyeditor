@@ -430,6 +430,12 @@ const s2::RenderCamera& Sprite::GetCamera() const
 	return m_core->Camera();
 }
 
+s2::RenderCamera& Sprite::GetCamera()
+{ 
+	assert(m_core);
+	return m_core->Camera();
+}
+
 Rect Sprite::GetRect() const
 {
 	std::vector<sm::vec2> bound;

@@ -82,6 +82,7 @@ public:
 	const s2::RenderShader& GetShader() const;
 	s2::RenderShader& GetShader();
 	const s2::RenderCamera& GetCamera() const;
+	s2::RenderCamera& GetCamera();
 
 	BoundingBox* GetBounding() const {
 		return m_bounding;

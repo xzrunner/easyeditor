@@ -18,6 +18,8 @@
 #include <easyshape.h>
 #include <easycomplex.h>
 
+#include <sprite2/RenderCamera.h>
+
 namespace lr
 {
 
@@ -186,7 +188,7 @@ bool Layer::Update(float dt)
 	std::vector<ee::Sprite*> sprites;
 	TraverseSprite(ee::FetchAllVisitor<ee::Sprite>(sprites), true);
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		bool dirty = sprites[i]->Update(version);
+		bool dirty = sprites[i]->Update(dt);
 		if (dirty) {
 			ret = true;
 		}

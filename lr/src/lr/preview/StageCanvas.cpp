@@ -24,9 +24,9 @@ void StageCanvas::OnDrawSprites() const
 		const ee::Sprite* spr = m_sprites[i];
 		// 		if (!sprite->visiable)
 		// 			continue;
-		s2::RenderParams trans;
-		trans.color = spr->GetColor();
-		ee::SpriteRenderer::Draw(spr, NULL, trans);
+		s2::RenderParams params;
+		params.color = spr->GetColor();
+		ee::SpriteRenderer::Draw(spr, params);
 	}
 }
 
