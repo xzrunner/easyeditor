@@ -283,6 +283,14 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\..\src\shaderlab\shader\BurningMapProg.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\shaderlab\shader\BurningMapProg.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\shaderlab\shader\EdgeDetectProg.cpp"
 						>
 					</File>
@@ -739,6 +747,18 @@
 						</File>
 						<File
 							RelativePath="..\..\..\src\shaderlab\parser\Swirl.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="burning_map"
+						>
+						<File
+							RelativePath="..\..\..\src\shaderlab\parser\burning_map.frag"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\shaderlab\parser\BurningMap.h"
 							>
 						</File>
 					</Filter>

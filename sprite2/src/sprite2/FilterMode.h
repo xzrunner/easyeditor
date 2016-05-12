@@ -19,6 +19,7 @@ enum FilterMode
 	FM_HEAT_HAZE			= 30,
 	FM_SHOCK_WAVE,
 	FM_SWIRL,
+	FM_BURNING_MAP,
 
 }; // FilterMode
 

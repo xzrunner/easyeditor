@@ -56,7 +56,8 @@ bool ImageSprite::Update(float dt)
 
 	return GetShader().filter == s2::FM_HEAT_HAZE 
 		|| GetShader().filter == s2::FM_SHOCK_WAVE 
-		|| GetShader().filter == s2::FM_SWIRL;
+		|| GetShader().filter == s2::FM_SWIRL
+		|| GetShader().filter == s2::FM_BURNING_MAP;
 }
 
 const ImageSymbol& ImageSprite::GetSymbol() const

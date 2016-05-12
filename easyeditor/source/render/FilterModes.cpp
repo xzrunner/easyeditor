@@ -20,6 +20,7 @@ FilterModes::FilterModes()
 	m_modes.push_back(Item(s2::FM_HEAT_HAZE, "heat haze", "ÈÈö²"));
 	m_modes.push_back(Item(s2::FM_SHOCK_WAVE, "shock wave", "³å»÷²¨"));
 	m_modes.push_back(Item(s2::FM_SWIRL, "swirl", "äöÎÐ"));
+	m_modes.push_back(Item(s2::FM_BURNING_MAP, "burning map", "ÉÕµØÍ¼"));
 }
 
 s2::FilterMode FilterModes::GetModeFromNameEN(const std::string& name) const
