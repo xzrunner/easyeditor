@@ -38,7 +38,7 @@ Sprite::Sprite(const Sprite& sprite)
 	: ee::Sprite(sprite)
 	, m_symbol(sprite.m_symbol)
 {
-	m_core = new s2::TextSprite;
+	m_core = new s2::TextSprite(*static_cast<s2::TextSprite*>(sprite.m_core));
 
 	m_symbol->Retain();
 

@@ -17,7 +17,7 @@ Sprite::Sprite(const Sprite& sprite)
 	: ee::Sprite(sprite)
 	, m_symbol(sprite.m_symbol)
 {
-	m_core = new s2::DummySprite;
+	m_core = new s2::DummySprite(*static_cast<s2::DummySprite*>(sprite.m_core));
 
 	if (m_symbol) {
 		m_symbol->Retain();

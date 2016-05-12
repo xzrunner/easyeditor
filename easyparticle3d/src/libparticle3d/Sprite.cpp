@@ -28,7 +28,7 @@ Sprite::Sprite(const Sprite& sprite)
 	, m_alone(sprite.m_alone)
 	, m_reuse(sprite.m_reuse)
 {
-	m_core = new s2::Particle3dSprite;
+	m_core = new s2::Particle3dSprite(*static_cast<s2::Particle3dSprite*>(sprite.m_core));
 
 	m_symbol->Retain();
 

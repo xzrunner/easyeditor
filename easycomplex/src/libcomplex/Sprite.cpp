@@ -17,7 +17,7 @@ Sprite::Sprite(const Sprite& sprite)
 	: ee::Sprite(sprite)
 	, m_symbol(sprite.m_symbol)
 {
-	m_core = new s2::ComplexSprite;
+	m_core = new s2::ComplexSprite(*static_cast<s2::ComplexSprite*>(sprite.m_core));
 
 	m_symbol->Retain();
 }

@@ -31,7 +31,7 @@ FontBlankSprite::FontBlankSprite(const FontBlankSprite& sprite)
 	: Sprite(sprite)
 	, m_symbol(sprite.m_symbol)
 {
-	m_core = new s2::DummySprite;
+	m_core = new s2::DummySprite(*static_cast<s2::DummySprite*>(sprite.m_core));
 
 	m_symbol->Retain();
 	font = sprite.font;
