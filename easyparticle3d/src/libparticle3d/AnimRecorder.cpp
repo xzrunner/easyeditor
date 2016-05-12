@@ -1,7 +1,7 @@
 #include "AnimRecorder.h"
 
-#include <ee/NullSprite.h>
-#include <ee/NullSymbol.h>
+#include <ee/DummySprite.h>
+#include <ee/DummySymbol.h>
 
 #include <easyanim.h>
 
@@ -82,8 +82,8 @@ void AnimRecorder::StoreToFile(const std::string& filepath) const
 		for (int j = 0, m = record_frame->items.size(); j < m; ++j)
 		{
 			Item* item = record_frame->items[j];
-			ee::Sprite* spr = new ee::NullSprite(
-				new ee::NullSymbol(item->filepath));
+			ee::Sprite* spr = new ee::DummySprite(
+				new ee::DummySymbol(item->filepath));
 
 			spr->SetTransform(sm::vec2(item->x, item->y), item->angle);
 			spr->SetScale(sm::vec2(item->scale, item->scale));

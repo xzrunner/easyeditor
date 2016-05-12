@@ -1,22 +1,29 @@
 #include "Sprite.h"
 
+#include <sprite2/DummySprite.h>
+
 namespace eterrain2d
 {
 
 Sprite::Sprite()
 	: m_symbol(NULL)
 {
+	m_core = new s2::DummySprite;
 }
 
 Sprite::Sprite(const Sprite& s)
 	: ee::Sprite(s)
 {
+	m_core = new s2::DummySprite;
+
 	m_symbol = s.m_symbol->Clone();
 }
 
 Sprite::Sprite(Symbol* symbol)
 	: m_symbol(symbol)
 {
+	m_core = new s2::DummySprite;
+
 //	rotate(-m_symbol->GetOceanAngle());
 	m_symbol->Retain();
 	BuildBounding();
@@ -24,6 +31,8 @@ Sprite::Sprite(Symbol* symbol)
 
 Sprite::~Sprite()
 {
+	delete m_core; m_core = NULL;
+
 	if (m_symbol) {
 		m_symbol->Release();
 	}

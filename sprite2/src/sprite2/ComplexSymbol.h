@@ -13,8 +13,7 @@ class ComplexSymbol : public Symbol
 public:
 	ComplexSymbol();
 
-	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL, 
-		const Sprite* root = NULL) const;
+	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const;
 
 	const std::vector<Sprite*>& GetChildren() const { return m_children; }
 

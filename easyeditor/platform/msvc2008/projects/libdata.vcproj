@@ -446,6 +446,10 @@
 			Name="symbol"
 			>
 			<File
+				RelativePath="..\..\..\include\ee\DummySymbol.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\source\data\symbol\FontBlankSymbol.cpp"
 				>
 			</File>
@@ -472,10 +476,6 @@
 			<Filter
 				Name="base"
 				>
-				<File
-					RelativePath="..\..\..\include\ee\NullSymbol.h"
-					>
-				</File>
 				<File
 					RelativePath="..\..\..\source\data\symbol\Symbol.cpp"
 					>
@@ -662,6 +662,14 @@
 			Name="sprite"
 			>
 			<File
+				RelativePath="..\..\..\source\data\sprite\DummySprite.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\DummySprite.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\source\data\sprite\FontBlankSprite.cpp"
 				>
 			</File>
@@ -688,10 +696,6 @@
 			<Filter
 				Name="base"
 				>
-				<File
-					RelativePath="..\..\..\include\ee\NullSprite.h"
-					>
-				</File>
 				<File
 					RelativePath="..\..\..\source\data\sprite\Sprite.cpp"
 					>

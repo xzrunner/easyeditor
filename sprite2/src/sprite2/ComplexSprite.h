@@ -13,7 +13,7 @@ class ComplexSprite : public Sprite
 public:
 	ComplexSprite();
 	
-	virtual bool Update(float dt) const;
+	virtual bool Update(float dt);
 	
 private:
 	ComplexSymbol* m_sym;

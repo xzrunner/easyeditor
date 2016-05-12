@@ -70,7 +70,7 @@ void SymbolMgr::Remove(const Symbol* symbol)
 	std::string lowerpath = symbol->GetFilepath();
 	StringHelper::ToLower(lowerpath);
 	std::map<std::string, Symbol*>::iterator itr = m_symbols.find(lowerpath);
-	// todo: new NullSymbol()
+	// todo: new DummySymbol()
 //	assert(itr != m_symbols.end());
 	if (itr != m_symbols.end()) {
 		m_symbols.erase(itr);

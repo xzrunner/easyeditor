@@ -4,12 +4,16 @@
 #include <ee/SpriteFactory.h>
 #include <ee/trans_color.h>
 
+#include <sprite2/TextSprite.h>
+
 namespace etext
 {
 
 Sprite::Sprite()
 	: m_symbol(NULL)
 {
+	m_core = new s2::TextSprite;
+
 	m_width = 100;
 	m_height = 20;
 
@@ -34,6 +38,8 @@ Sprite::Sprite(const Sprite& sprite)
 	: ee::Sprite(sprite)
 	, m_symbol(sprite.m_symbol)
 {
+	m_core = new s2::TextSprite;
+
 	m_symbol->Retain();
 
 	m_width = sprite.m_width;
@@ -59,6 +65,8 @@ Sprite::Sprite(const Sprite& sprite)
 Sprite::Sprite(Symbol* symbol)
 	: m_symbol(symbol)
 {
+	m_core = new s2::TextSprite;
+
 	m_symbol->Retain();
 
 	m_width = symbol->m_width;
@@ -85,6 +93,8 @@ Sprite::Sprite(Symbol* symbol)
 
 Sprite::~Sprite()
 {
+	delete m_core; m_core = NULL;
+
 	if (m_symbol) {
 		m_symbol->Release();
 	}

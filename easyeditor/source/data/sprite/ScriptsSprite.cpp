@@ -2,23 +2,30 @@
 #include "SpriteFactory.h"
 #include "scripts.h"
 
+#include <sprite2/DummySprite.h>
+
 namespace ee
 {
 
 ScriptsSprite::ScriptsSprite()
 	: m_symbol(NULL)
 {
+	m_core = new s2::DummySprite;
 }
 
 ScriptsSprite::ScriptsSprite(ScriptsSymbol* symbol)
 	: m_symbol(symbol)
 {
+	m_core = new s2::DummySprite;
+
 	m_symbol->Retain();
 	scripts_do_string(symbol->GetContent().c_str());
 }
 
 ScriptsSprite::~ScriptsSprite()
 {
+	delete m_core; m_core = NULL;
+
 	if (m_symbol) {
 		m_symbol->Release();
 	}

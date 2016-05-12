@@ -36,7 +36,7 @@ ImageSprite::ImageSprite(ImageSymbol* symbol)
 
 ImageSprite::~ImageSprite()
 {
-	delete m_core;
+	delete m_core; m_core = NULL;
 	if (m_symbol) {
 		m_symbol->Release();
 	}

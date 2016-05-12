@@ -3,12 +3,15 @@
 
 #include <ee/SpriteFactory.h>
 
+#include <sprite2/Scale9Sprite.h>
+
 namespace escale9
 {
 
 Sprite::Sprite()
 	: m_symbol(NULL)
 {
+	m_core = new s2::Scale9Sprite;
 }
 
 Sprite::Sprite(const Sprite& sprite)
@@ -16,6 +19,8 @@ Sprite::Sprite(const Sprite& sprite)
 	, m_symbol(sprite.m_symbol)
 	, m_data(sprite.m_data)
 {
+	m_core = new s2::Scale9Sprite;
+
 	m_symbol->Retain();
 }
 
@@ -23,13 +28,16 @@ Sprite::Sprite(Symbol* symbol)
 	: m_symbol(symbol)
 	, m_data(symbol->GetScale9Data())
 {
-	m_symbol->Retain();
+	m_core = new s2::Scale9Sprite;
 
+	m_symbol->Retain();
 	BuildBounding();
 }
 
 Sprite::~Sprite()
 {
+	delete m_core; m_core = NULL;
+
 	if (m_symbol) {
 		m_symbol->Release();
 	}

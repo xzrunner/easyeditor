@@ -3,8 +3,8 @@
 #include <ee/Image.h>
 #include <ee/ImageClip.h>
 #include <ee/ImageSaver.h>
-#include <ee/NullSprite.h>
-#include <ee/NullSymbol.h>
+#include <ee/DummySprite.h>
+#include <ee/DummySymbol.h>
 #include <ee/FileType.h>
 #include <ee/ImageSymbol.h>
 #include <ee/ImageSprite.h>
@@ -336,7 +336,7 @@ void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames
 					ee::ImageSaver::StoreToFile(pixels, width, height, 4, outfile, ee::ImageSaver::e_png);
 
 				std::string outpath = outfile + ".png";
-				ee::Sprite* sprite = new ee::NullSprite(new ee::NullSymbol(outpath, width, height));
+				ee::Sprite* sprite = new ee::DummySprite(new ee::DummySymbol(outpath, width, height));
 				part->transform(sprite);
 				symbol->m_sprites.push_back(sprite);
 			}
@@ -400,14 +400,14 @@ void ParserLuaFile::transAniToAnimationFile(const std::string& outfloder, int id
 			if (itr != m_mapPictures.end())
 			{
 				Picture* pic = itr->second;
-				sprite = new ee::NullSprite(new ee::NullSymbol(pic->filename, pic->width, pic->height));
+				sprite = new ee::DummySprite(new ee::DummySymbol(pic->filename, pic->width, pic->height));
 			}
 			else
 			{
 				std::map<int, Animation*>::iterator itr = m_mapAnims.find(ani->component[item->index]);
 				assert(itr != m_mapAnims.end());
 				Animation* ani = itr->second;
-				sprite = new ee::NullSprite(new ee::NullSymbol(ani->filename));
+				sprite = new ee::DummySprite(new ee::DummySymbol(ani->filename));
 			}
 			item->transform(sprite);
 			frame->sprites.push_back(sprite);
@@ -445,14 +445,14 @@ void ParserLuaFile::transAniToComplexFile(const std::string& outfloder, int id, 
 		if (itr != m_mapPictures.end())
 		{
 			Picture* pic = itr->second;
-			sprite = new ee::NullSprite(new ee::NullSymbol(pic->filename, pic->width, pic->height));
+			sprite = new ee::DummySprite(new ee::DummySymbol(pic->filename, pic->width, pic->height));
 		}
 		else
 		{
 			std::map<int, Animation*>::iterator itr = m_mapAnims.find(ani->component[item->index]);
 			assert(itr != m_mapAnims.end());
 			Animation* ani = itr->second;
-			sprite = new ee::NullSprite(new ee::NullSymbol(ani->filename));
+			sprite = new ee::DummySprite(new ee::DummySymbol(ani->filename));
 		}
 		item->transform(sprite);
 		symbol->m_sprites.push_back(sprite);

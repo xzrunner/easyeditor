@@ -8,6 +8,7 @@
 #include <ps_3d.h>
 #include <ps_3d_sprite.h>
 #include <ps_3d_buffer.h>
+#include <sprite2/Particle3dSprite.h>
 
 namespace eparticle3d
 {
@@ -18,6 +19,7 @@ Sprite::Sprite()
 	, m_alone(false)
 	, m_reuse(false)
 {
+	m_core = new s2::Particle3dSprite;
 }
 
 Sprite::Sprite(const Sprite& sprite)
@@ -26,6 +28,8 @@ Sprite::Sprite(const Sprite& sprite)
 	, m_alone(sprite.m_alone)
 	, m_reuse(sprite.m_reuse)
 {
+	m_core = new s2::Particle3dSprite;
+
 	m_symbol->Retain();
 
 //	CreatePS();
@@ -42,6 +46,8 @@ Sprite::Sprite(Symbol* symbol)
 	, m_alone(false)
 	, m_reuse(false)
 {
+	m_core = new s2::Particle3dSprite;
+
 	m_symbol->Retain();
 	BuildBounding();
 
@@ -50,6 +56,8 @@ Sprite::Sprite(Symbol* symbol)
 
 Sprite::~Sprite()
 {
+	delete m_core; m_core = NULL;
+
 	if (m_symbol) {
 		m_symbol->Release();
 	}

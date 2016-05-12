@@ -4,7 +4,7 @@
 #include <ee/FileHelper.h>
 #include <ee/FileType.h>
 #include <ee/JsonSerializer.h>
-#include <ee/NullSymbol.h>
+#include <ee/DummySymbol.h>
 
 #include <easyimage.h>
 #include <easyshape.h>
@@ -77,7 +77,7 @@ void OutlineToPolygon::Trigger(const std::string& dir) const
 		eshape::PolygonShape poly(vertices);
 		shapes.push_back(&poly);
 
-		ee::NullSymbol bg(filepath);
+		ee::DummySymbol bg(filepath);
 
 		eshape::FileIO::StoreToFile(shape_path.c_str(), shapes, &bg);
 	}

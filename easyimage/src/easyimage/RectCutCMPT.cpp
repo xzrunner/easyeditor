@@ -9,8 +9,8 @@
 #include <ee/StringHelper.h>
 #include <ee/panel_msg.h>
 #include <ee/ImageSaver.h>
-#include <ee/NullSprite.h>
-#include <ee/NullSymbol.h>
+#include <ee/DummySprite.h>
+#include <ee/DummySymbol.h>
 #include <ee/FinishDialog.h>
 #include <ee/ImageClip.h>
 
@@ -251,7 +251,7 @@ void RectCutCMPT::OnOutputData(wxCommandEvent& event)
 		ee::ImageSaver::StoreToFile(pixels, width, height, 4, img_filename, ee::ImageSaver::e_png);
 
 		std::string img_fullname = img_filename + ".png";
-		ee::Sprite* sprite = new ee::NullSprite(new ee::NullSymbol(img_fullname, width, height));
+		ee::Sprite* sprite = new ee::DummySprite(new ee::DummySymbol(img_fullname, width, height));
 		sm::vec2 off;
 		off.x = r.CenterX() - image->GetClippedWidth() * 0.5f;
 		off.y = r.CenterY() - image->GetClippedHeight() * 0.5f;

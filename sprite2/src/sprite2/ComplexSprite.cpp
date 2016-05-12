@@ -9,7 +9,7 @@ ComplexSprite::ComplexSprite()
 {
 }
 
-bool ComplexSprite::Update(float dt) const
+bool ComplexSprite::Update(float dt)
 {
 	if (!m_sym) {
 		return false;

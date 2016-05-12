@@ -58,10 +58,6 @@ Sprite::Sprite(const Sprite& sprite)
 
 Sprite::~Sprite()
 {
-	if (m_core) {
-		delete m_core;
-	}
-
 	delete m_bounding;
 	SpriteFactory::Instance()->Remove(this);
 }

@@ -5,12 +5,16 @@
 #include <ee/BBFactory.h>
 #include <ee/BoundingBox.h>
 
+#include <sprite2/DummySprite.h>
+
 namespace emesh
 {
 
 Sprite::Sprite()
 	: m_symbol(NULL)
 {
+	m_core = new s2::DummySprite;
+
 //	m_speed.set(0, -0.01f);
 }
 
@@ -19,6 +23,8 @@ Sprite::Sprite(const Sprite& s)
 	, m_speed(s.m_speed)
 	, m_trans(s.m_trans)
 {
+	m_core = new s2::DummySprite;
+
 	m_symbol = s.m_symbol;
 	m_symbol->Retain();
 }
@@ -26,6 +32,8 @@ Sprite::Sprite(const Sprite& s)
 Sprite::Sprite(Symbol* symbol)
 	: m_symbol(symbol)
 {
+	m_core = new s2::DummySprite;
+
 //	m_speed.set(0, -0.01f);
 
 	m_trans.LoadFromMesh(symbol->GetMesh());
@@ -36,6 +44,8 @@ Sprite::Sprite(Symbol* symbol)
 
 Sprite::~Sprite()
 {
+	delete m_core; m_core = NULL;
+
 	if (m_symbol) {
 		m_symbol->Release();
 	}

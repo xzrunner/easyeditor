@@ -1,16 +1,16 @@
-#ifndef _EASYEDITOR_NULL_SYMBOL_H_
-#define _EASYEDITOR_NULL_SYMBOL_H_
+#ifndef _EASYEDITOR_DUMMY_SYMBOL_H_
+#define _EASYEDITOR_DUMMY_SYMBOL_H_
 
 #include "Symbol.h"
 
 namespace ee
 {
 
-class NullSymbol : public Symbol
+class DummySymbol : public Symbol
 {
 public:
-	NullSymbol(const std::string& filename) { m_filepath = filename; }
-	NullSymbol(const std::string& filename, int width, int height)
+	DummySymbol(const std::string& filename) { m_filepath = filename; }
+	DummySymbol(const std::string& filename, int width, int height)
 		: m_size(static_cast<float>(width), static_cast<float>(height)) { m_filepath = filename; }
 
 	//
@@ -32,8 +32,8 @@ protected:
 private:
 	Rect m_size;
 
-}; // NullSymbol
+}; // DummySymbol
 
 }
 
-#endif // _EASYEDITOR_NULL_SYMBOL_H_
+#endif // _EASYEDITOR_DUMMY_SYMBOL_H_

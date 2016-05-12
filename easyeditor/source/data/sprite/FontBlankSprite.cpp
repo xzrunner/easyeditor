@@ -7,6 +7,7 @@
 #include "trans_color.h"
 
 #include <sprite2/RenderColor.h>
+#include <sprite2/DummySprite.h>
 
 namespace ee
 {
@@ -15,6 +16,8 @@ FontBlankSprite::FontBlankSprite()
 	: m_symbol(NULL)
 	, font_color(0xffffffff)
 {
+	m_core = new s2::DummySprite;
+
 	font = "";
 	has_edge = false;
 	align_hori = HAT_LEFT;
@@ -28,6 +31,8 @@ FontBlankSprite::FontBlankSprite(const FontBlankSprite& sprite)
 	: Sprite(sprite)
 	, m_symbol(sprite.m_symbol)
 {
+	m_core = new s2::DummySprite;
+
 	m_symbol->Retain();
 	font = sprite.font;
 	has_edge = sprite.has_edge;
@@ -43,6 +48,8 @@ FontBlankSprite::FontBlankSprite(const FontBlankSprite& sprite)
 FontBlankSprite::FontBlankSprite(FontBlankSymbol* symbol)
 	: m_symbol(symbol)
 {
+	m_core = new s2::DummySprite;
+
 	m_symbol->Retain();
 	font = m_symbol->font;
 	font_color = str2color(m_symbol->color, PT_ARGB);
@@ -77,6 +84,8 @@ FontBlankSprite::FontBlankSprite(FontBlankSymbol* symbol)
 
 FontBlankSprite::~FontBlankSprite()
 {
+	delete m_core; m_core = NULL;
+
 	if (m_symbol) {
 		m_symbol->Release();
 	}

@@ -2,18 +2,23 @@
 
 #include <ee/SpriteFactory.h>
 
+#include <sprite2/DummySprite.h>
+
 namespace etexture
 {
 
 Sprite::Sprite()
 	: m_symbol(NULL)
 {
+	m_core = new s2::DummySprite;
 }
 
 Sprite::Sprite(const Sprite& sprite)
 	: ee::Sprite(sprite)
 	, m_symbol(sprite.m_symbol)
 {
+	m_core = new s2::DummySprite;
+
 	if (m_symbol) {
 		m_symbol->Retain();
 	}
@@ -22,6 +27,8 @@ Sprite::Sprite(const Sprite& sprite)
 Sprite::Sprite(Symbol* symbol)
 	: m_symbol(symbol)
 {
+	m_core = new s2::DummySprite;
+
 	if (m_symbol) {
 		m_symbol->Retain();
 	}
@@ -30,6 +37,8 @@ Sprite::Sprite(Symbol* symbol)
 
 Sprite::~Sprite()
 {
+	delete m_core; m_core = NULL;
+
 	if (m_symbol) {
 		m_symbol->Release();
 	}

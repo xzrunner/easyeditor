@@ -8,7 +8,7 @@ ComplexSymbol::ComplexSymbol()
 
 }
 
-void ComplexSymbol::Draw(const RenderParams& params, const Sprite* spr, const Sprite* root) const
+void ComplexSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 {
 	
 }

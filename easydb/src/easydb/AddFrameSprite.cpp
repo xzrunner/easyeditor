@@ -2,8 +2,8 @@
 #include "check_params.h"
 
 #include <ee/FileHelper.h>
-#include <ee/NullSymbol.h>
-#include <ee/NullSprite.h>
+#include <ee/DummySymbol.h>
+#include <ee/DummySprite.h>
 
 #include <fstream>
 
@@ -51,8 +51,8 @@ void AddFrameSprite::Trigger(const std::string& dir, const std::string& sprite_p
 
 		std::string json_file = filename;
 
-		ee::NullSymbol symbol("");
-		ee::NullSprite sprite(&symbol);
+		ee::DummySymbol symbol("");
+		ee::DummySprite sprite(&symbol);
 		Json::Value actor_val;
 		sprite.Store(actor_val);
 		std::string dir = ee::FileHelper::GetFileDir(json_file);

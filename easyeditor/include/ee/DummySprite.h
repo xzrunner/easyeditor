@@ -1,5 +1,5 @@
-#ifndef _EASYEDITOR_NULL_SPRITE_H_
-#define _EASYEDITOR_NULL_SPRITE_H_
+#ifndef _EASYEDITOR_DUMMY_SPRITE_H_
+#define _EASYEDITOR_DUMMY_SPRITE_H_
 
 #include "Sprite.h"
 #include "Symbol.h"
@@ -9,23 +9,17 @@ namespace ee
 
 class Symbol;
 
-class NullSprite : public Sprite
+class DummySprite : public Sprite
 {
 public:
-	NullSprite(Symbol* symbol) 
-		: m_symbol(symbol) {
-			m_symbol->Retain();
-	}
-	~NullSprite() {
-		if (m_symbol) {
-			m_symbol->Release();
-		}
-	}
+	DummySprite();
+	DummySprite(Symbol* symbol);
+	~DummySprite();
 
 	//
 	// IObject interface
 	//
-	virtual NullSprite* Clone() const { return NULL; }
+	virtual DummySprite* Clone() const { return NULL; }
 
 	//
 	// Sprite interface
@@ -37,8 +31,8 @@ public:
 private:
 	Symbol* m_symbol;
 
-}; // NullSprite
+}; // DummySprite
 
 }
 
-#endif // _EASYEDITOR_NULL_SPRITE_H_
+#endif // _EASYEDITOR_DUMMY_SPRITE_H_

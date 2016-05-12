@@ -3,6 +3,8 @@
 
 #include <ee/SpriteFactory.h>
 
+#include <sprite2/DummySprite.h>
+
 namespace eicon
 {
 
@@ -10,6 +12,7 @@ Sprite::Sprite()
 	: m_symbol(NULL)
 	, m_process(1)
 {
+	m_core = new s2::DummySprite;
 }
 
 Sprite::Sprite(const Sprite& sprite)
@@ -17,6 +20,8 @@ Sprite::Sprite(const Sprite& sprite)
 	, m_symbol(sprite.m_symbol)
 	, m_process(sprite.m_process)
 {
+	m_core = new s2::DummySprite;
+
 	m_symbol->Retain();
 }
 
@@ -24,12 +29,16 @@ Sprite::Sprite(Symbol* symbol)
 	: m_symbol(symbol)
 	, m_process(1)
 {
+	m_core = new s2::DummySprite;
+
 	m_symbol->Retain();
 	BuildBounding();	
 }
 
 Sprite::~Sprite()
 {
+	delete m_core; m_core = NULL;
+
 	if (m_symbol) {
 		m_symbol->Release();
 	}

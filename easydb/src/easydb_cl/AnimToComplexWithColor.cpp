@@ -2,8 +2,8 @@
 #include "check_params.h"
 
 #include <ee/FileHelper.h>
-#include <ee/NullSprite.h>
-#include <ee/NullSymbol.h>
+#include <ee/DummySprite.h>
+#include <ee/DummySymbol.h>
 #include <ee/StringHelper.h>
 #include <ee/convert_color.h>
 
@@ -56,7 +56,7 @@ void AnimToComplexWithColor::Run(const std::string& cfg_filepath)
 		std::string filepath = ParserTrans(line, trans);
 
 		ecomplex::Symbol* symbol = new ecomplex::Symbol;
-		ee::Sprite* sprite = new ee::NullSprite(new ee::NullSymbol(dir + "\\" + filepath + ".json"));
+		ee::Sprite* sprite = new ee::DummySprite(new ee::DummySymbol(dir + "\\" + filepath + ".json"));
 		TransSpr(trans, sprite);
 		symbol->m_sprites.push_back(sprite);
 

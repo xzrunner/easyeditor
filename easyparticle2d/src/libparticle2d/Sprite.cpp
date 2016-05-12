@@ -3,10 +3,11 @@
 #include "ParticleSystem.h"
 #include "PropertySetting.h"
 
-#include <ps_2d.h>
-
 #include <ee/Sprite.h>
 #include <ee/SpriteFactory.h>
+
+#include <ps_2d.h>
+#include <sprite2/Particle2dSprite.h>
 
 namespace eparticle2d
 {
@@ -15,6 +16,7 @@ Sprite::Sprite()
 	: m_symbol(NULL)
 	, m_ps(NULL)
 {
+	m_core = new s2::Particle2dSprite;
 }
 
 Sprite::Sprite(const Sprite& sprite)
@@ -22,6 +24,8 @@ Sprite::Sprite(const Sprite& sprite)
 	, m_symbol(sprite.m_symbol)
 	, m_ps(NULL)
 {
+	m_core = new s2::Particle2dSprite;
+
 	if (m_symbol) {
 		m_symbol->Retain();
 	}
@@ -37,6 +41,8 @@ Sprite::Sprite(Symbol* symbol)
 	: m_symbol(symbol)
 	, m_ps(NULL)
 {
+	m_core = new s2::Particle2dSprite;
+
 	if (m_symbol) {
 		m_symbol->Retain();
 	}
@@ -50,6 +56,8 @@ Sprite::Sprite(Symbol* symbol)
 
 Sprite::~Sprite()
 {
+	delete m_core; m_core = NULL;
+
 	if (m_symbol) {
 		m_symbol->Release();
 	}

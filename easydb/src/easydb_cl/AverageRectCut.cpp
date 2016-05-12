@@ -7,8 +7,8 @@
 #include <ee/ImageClip.h>
 #include <ee/StringHelper.h>
 #include <ee/ImageSaver.h>
-#include <ee/NullSprite.h>
-#include <ee/NullSymbol.h>
+#include <ee/DummySprite.h>
+#include <ee/DummySymbol.h>
 #include <ee/SettingData.h>
 #include <ee/Config.h>
 
@@ -133,7 +133,7 @@ void AverageRectCut::RectCutImage(const std::string& src_dir, const std::string&
 			delete[] pixels;
 
 			std::string spr_path = std::string(out_img_dir + "\\" + img_name);
-			ee::Sprite* spr = new ee::NullSprite(new ee::NullSymbol(spr_path, w, h));
+			ee::Sprite* spr = new ee::DummySprite(new ee::DummySymbol(spr_path, w, h));
 			sm::vec2 offset;
 			offset.x = img_r.xmin + xmin + w * 0.5f - img->GetWidth() * 0.5f;
 			offset.y = img_r.ymin + ymin + h * 0.5f - img->GetHeight() * 0.5f;
