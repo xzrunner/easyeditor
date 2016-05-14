@@ -9,6 +9,8 @@
 
 #include <easycomplex.h>
 
+#include <sprite2/RenderColor.h>
+
 #include <fstream>
 
 namespace edb
@@ -96,7 +98,7 @@ std::string AnimToComplexWithColor::ParserTrans(const std::string& str, struct T
 			token[ptr] == "b") 
 		{
 			set_color = true;
-			ee::Colori* col;
+			s2::Color* col;
 			if (token[ptr] == "r") {
 				col = &t.col_r;
 				t.type |= CC_R;

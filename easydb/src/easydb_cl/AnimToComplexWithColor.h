@@ -3,6 +3,8 @@
 
 #include "ICommand.h"
 
+#include <sprite2/Color.h>
+
 namespace ee { class Sprite; }
 
 namespace edb
@@ -34,7 +36,7 @@ private:
 	struct Trans
 	{
 		int type;
-		ee::Colori col_r, col_g, col_b;
+		s2::Color col_r, col_g, col_b;
 		std::string ext;
 	};
 
