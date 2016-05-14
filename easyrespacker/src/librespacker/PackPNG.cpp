@@ -46,9 +46,20 @@ void PackPNG::Load(const std::string& filepath)
 
 	m_width = w;
 	m_height = h;
-	m_buffer = buf;
-	if (c != 4) {
-		throw ee::Exception("PackPNG::Load: image is not rgba.");
+	if (c == 3) {
+		m_buffer = new uint8_t[w * h * 4];
+		uint8_t *src = buf, *dst = m_buffer;
+		for (int i = 0, n = w * h; i < n; ++i) {
+			memcpy(dst, src, sizeof(uint8_t) * 3);
+			src += 3;
+			dst += 3;
+			*dst = 255;
+			dst += 1;
+		}
+	} else if (c == 4) {
+		m_buffer = buf;
+	} else {
+		throw ee::Exception("PackPNG::Load: error channels %d.", c);
 	}
 
 	if (m_type == TT_PNG4) {
