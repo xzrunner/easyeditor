@@ -163,17 +163,18 @@ void LoadAdapter::LoadComponent(const std::string& dir, const Json::Value& comp_
 	}
 
 	if (!comp_val["mul_col"].isNull()) {
-		comp.col_mul.r = comp_val["mul_col"]["r"].asDouble();
-		comp.col_mul.g = comp_val["mul_col"]["g"].asDouble();
-		comp.col_mul.b = comp_val["mul_col"]["b"].asDouble();
+		comp.col_mul.r = comp_val["mul_col"]["r"].asDouble() * 255;
+		comp.col_mul.g = comp_val["mul_col"]["g"].asDouble() * 255;
+		comp.col_mul.b = comp_val["mul_col"]["b"].asDouble() * 255;
 	} else {
-		comp.col_mul.r = comp.col_mul.g = comp.col_mul.b = 1;
+		comp.col_mul.r = comp.col_mul.g = comp.col_mul.b = 255;
 	}
+	comp.col_mul.a = 255;
 
 	if (!comp_val["add_col"].isNull()) {
-		comp.col_add.r = comp_val["add_col"]["r"].asDouble();
-		comp.col_add.g = comp_val["add_col"]["g"].asDouble();
-		comp.col_add.b = comp_val["add_col"]["b"].asDouble();
+		comp.col_add.r = comp_val["add_col"]["r"].asDouble() * 255;
+		comp.col_add.g = comp_val["add_col"]["g"].asDouble() * 255;
+		comp.col_add.b = comp_val["add_col"]["b"].asDouble() * 255;
 	} else {
 		comp.col_add.r = comp.col_add.g = comp.col_add.b = 0;
 	}
