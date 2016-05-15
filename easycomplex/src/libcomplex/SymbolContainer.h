@@ -3,6 +3,10 @@
 
 #include <ee/DataContainer.h>
 
+#include <vector>
+
+namespace ee { class Sprite; }
+
 namespace ecomplex
 {
 
@@ -25,6 +29,9 @@ public:
 	virtual bool Clear();
 	virtual bool ResetOrder(const Object* obj, bool up);
 	virtual bool ResetOrderMost(const Object* obj, bool up);
+
+private:
+	void GetSprites(std::vector<ee::Sprite*>& sprites) const;
 
 private:
 	Symbol* m_symbol;

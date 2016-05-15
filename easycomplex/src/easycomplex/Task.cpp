@@ -137,7 +137,7 @@ void Task::LoadGroupTree(const char* filepath)
 	} else {
 		std::map<std::string, std::vector<ee::Sprite*> > map_actions;
 		std::vector<ee::Sprite*> others;
-		ecoco::Utility::GroupSpritesFromTag(m_stage->getSymbol()->m_sprites, map_actions, others);
+		ecoco::Utility::GroupSpritesFromTag(m_stage->getSymbol()->GetChildren(), map_actions, others);
 		m_grouptree->InitGroups(map_actions);
 	}
 }

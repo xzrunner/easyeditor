@@ -16,7 +16,7 @@ Sprite::Sprite()
 	: m_symbol(NULL)
 	, m_ps(NULL)
 {
-	m_core = new s2::Particle2dSprite;
+	m_core = new s2::Particle2dSprite(this);
 }
 
 Sprite::Sprite(const Sprite& sprite)
@@ -41,7 +41,7 @@ Sprite::Sprite(Symbol* symbol)
 	: m_symbol(symbol)
 	, m_ps(NULL)
 {
-	m_core = new s2::Particle2dSprite;
+	m_core = new s2::Particle2dSprite(this);
 
 	if (m_symbol) {
 		m_symbol->Retain();

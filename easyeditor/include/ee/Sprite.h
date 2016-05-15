@@ -100,6 +100,7 @@ public:
 	void SetAnchor(bool anchor) { m_is_anchor = anchor; }
 
 	const s2::Sprite* GetCore() const { return m_core; }
+	s2::Sprite* GetCore() { return m_core; }
 
 protected:
 	template<typename T>

@@ -13,6 +13,8 @@
 #include <ee/Image.h>
 #include <ee/SymbolMgr.h>
 
+#include <sprite2/Sprite.h>
+
 namespace ecoco
 {
 
@@ -43,8 +45,11 @@ void SymbolDependanceSorter::fetch(const std::vector<const ee::Symbol*>& symbols
 		const ee::Symbol* symbol = symbols[i];
 		if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(symbol))
 		{
-			for (size_t j = 0, n = complex->m_sprites.size(); j < n; ++j)
-				buffer.push(&complex->m_sprites[j]->GetSymbol());
+			const std::vector<s2::Sprite*>& children = complex->GetChildren();
+			for (size_t j = 0, n = children.size(); j < n; ++j) {
+				ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+				buffer.push(&child->GetSymbol());	
+			}
 		}
 		else if (const eanim::Symbol* anim = dynamic_cast<const eanim::Symbol*>(symbol))
 		{
@@ -110,9 +115,10 @@ void SymbolDependanceSorter::fetch(const std::vector<const ee::Symbol*>& symbols
 			if (m_unique.find(complex) == m_unique.end())
 			{
 				m_unique.insert(complex);
-				for (size_t i = 0, n = complex->m_sprites.size(); i < n; ++i)
+				const std::vector<s2::Sprite*>& children = complex->GetChildren();
+				for (size_t i = 0, n = children.size(); i < n; ++i)
 				{
-					ee::Sprite* child = complex->m_sprites[i];
+					ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
 					buffer.push(&child->GetSymbol());
 
 					// patch for scale9
@@ -197,8 +203,10 @@ void SymbolDependanceSorter::sort()
 			else if (ecomplex::Symbol* complex = dynamic_cast<ecomplex::Symbol*>(symbol))
 			{
 				bool prepared = true;
-				for (size_t i = 0, n = complex->m_sprites.size(); i < n && prepared; ++i) {
-					if (!IsSymbolPrepared(complex->m_sprites[i])) {
+				const std::vector<s2::Sprite*>& children = complex->GetChildren();
+				for (size_t i = 0, n = children.size(); i < n && prepared; ++i) {
+					ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+					if (!IsSymbolPrepared(child)) {
 						prepared = false;
 					}
 				}

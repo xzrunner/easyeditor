@@ -7,6 +7,8 @@
 #include <easycomplex.h>
 #include <easytext.h>
 
+#include <sprite2/Sprite.h>
+
 namespace edb
 {
 
@@ -50,8 +52,10 @@ void TransNewTextFile::Run(const std::string& folder)
 			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			if (ecomplex::Symbol* complex = dynamic_cast<ecomplex::Symbol*>(sym)) {
 				bool dirty = false;
-				for (int i = 0, n = complex->m_sprites.size(); i < n; ++i) {
-					if (etext::Sprite* text = dynamic_cast<etext::Sprite*>(complex->m_sprites[i])) {
+				const std::vector<s2::Sprite*>& children = complex->GetChildren();
+				for (int i = 0, n = children.size(); i < n; ++i) {
+					ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+					if (etext::Sprite* text = dynamic_cast<etext::Sprite*>(child)) {
 						dirty = true;
 						text->SetFontSize(text->GetFontSize() + 8);
 					}

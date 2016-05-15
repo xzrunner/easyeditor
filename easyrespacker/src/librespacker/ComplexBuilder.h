@@ -8,6 +8,7 @@
 
 namespace ecomplex { class Symbol; }
 namespace ee { class Sprite; }
+namespace s2 { class Sprite; }
 
 namespace erespacker
 {
@@ -32,7 +33,7 @@ private:
 
 	IPackNode* LoadAnchor(const ecomplex::Symbol* symbol);
 
-	static void GroupFromTag(const std::vector<ee::Sprite*>& src, 
+	static void GroupFromTag(const std::vector<s2::Sprite*>& src, 
 		std::map<std::string, std::vector<ee::Sprite*> >& dst,
 		std::vector<ee::Sprite*>& others);
 

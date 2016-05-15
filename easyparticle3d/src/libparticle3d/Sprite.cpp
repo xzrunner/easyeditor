@@ -19,7 +19,7 @@ Sprite::Sprite()
 	, m_alone(false)
 	, m_reuse(false)
 {
-	m_core = new s2::Particle3dSprite;
+	m_core = new s2::Particle3dSprite(this);
 }
 
 Sprite::Sprite(const Sprite& sprite)
@@ -46,7 +46,7 @@ Sprite::Sprite(Symbol* symbol)
 	, m_alone(false)
 	, m_reuse(false)
 {
-	m_core = new s2::Particle3dSprite;
+	m_core = new s2::Particle3dSprite(this);
 
 	m_symbol->Retain();
 	BuildBounding();

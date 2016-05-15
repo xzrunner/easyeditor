@@ -11,7 +11,7 @@ class ComplexSymbol;
 class ComplexSprite : public Sprite
 {
 public:
-	ComplexSprite();
+	ComplexSprite(void* ud);
 	
 	virtual bool Update(float dt);
 	

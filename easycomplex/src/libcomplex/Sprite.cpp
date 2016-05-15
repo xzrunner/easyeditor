@@ -10,7 +10,7 @@ namespace ecomplex
 Sprite::Sprite()
 	: m_symbol(NULL)
 {
-	m_core = new s2::ComplexSprite;
+	m_core = new s2::ComplexSprite(this);
 }
 
 Sprite::Sprite(const Sprite& sprite)
@@ -25,7 +25,7 @@ Sprite::Sprite(const Sprite& sprite)
 Sprite::Sprite(Symbol* symbol)
 	: m_symbol(symbol)
 {
-	m_core = new s2::ComplexSprite;
+	m_core = new s2::ComplexSprite(this);
 
 	m_symbol->Retain();
 	BuildBounding();	
@@ -50,11 +50,13 @@ Sprite* Sprite::Clone() const
 bool Sprite::Update(float dt) 
 { 
 	bool ret = false;
-	for (int i = 0, n = m_symbol->m_sprites.size(); i < n; ++i) {
-		ee::Sprite* spr = m_symbol->m_sprites[i];
-		if (spr->Update(dt)) {
+	const std::vector<s2::Sprite*>& children = m_symbol->GetChildren();
+	for (int i = 0, n = children.size(); i < n; ++i) {
+		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+		if (child->Update(dt)) {
 			ret = true;
 		}
+
 	}
 	return ret; 
 }

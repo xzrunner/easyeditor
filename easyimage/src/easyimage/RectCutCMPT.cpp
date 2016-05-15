@@ -256,7 +256,7 @@ void RectCutCMPT::OnOutputData(wxCommandEvent& event)
 		off.x = r.CenterX() - image->GetClippedWidth() * 0.5f;
 		off.y = r.CenterY() - image->GetClippedHeight() * 0.5f;
 		sprite->Translate(off);
-		complex->m_sprites.push_back(sprite);
+		complex->Add(sprite);
 	}
 
 	std::string tag = ee::FileType::GetTag(ee::FileType::e_complex);

@@ -5,6 +5,8 @@
 #include <ee/Exception.h>
 #include <ee/Sprite.h>
 
+#include <sprite2/Sprite.h>
+
 #include <fstream>
 
 namespace ecomplex
@@ -27,8 +29,11 @@ void FileStorer::Store(const char* filepath, const Symbol* symbol)
 	value["use_render_cache"] = symbol->m_use_render_cache;
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath) + "\\";
-	for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
-		value["sprite"][i] = Store(symbol->m_sprites[i], dir);
+	const std::vector<s2::Sprite*>& children = symbol->GetChildren();
+	for (int i = 0, n = children.size(); i < n; ++i) {
+		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+		value["sprite"][i] = Store(child, dir);
+	}
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -53,8 +58,12 @@ void FileStorer::StoreWithHistory(const char* filepath, const Symbol* symbol)
 	value["use_render_cache"] = symbol->m_use_render_cache;
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath) + "\\";
-	for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
-		value["sprite"][i] = Store(symbol->m_sprites[i], dir);
+
+	const std::vector<s2::Sprite*>& children = symbol->GetChildren();
+	for (int i = 0, n = children.size(); i < n; ++i) {
+		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+		value["sprite"][i] = Store(child, dir);
+	}
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -74,10 +83,11 @@ void FileStorer::CenterSymbol(Symbol* symbol)
 	sm::vec2 offset;
 	offset.x = symbol->m_rect.CenterX();
 	offset.y = symbol->m_rect.CenterY();
-	for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
-	{
-		ee::Sprite* sprite = symbol->m_sprites[i];
-		sprite->Translate(-offset);
+
+	const std::vector<s2::Sprite*>& children = symbol->GetChildren();
+	for (int i = 0, n = children.size(); i < n; ++i) {
+		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+		child->Translate(-offset);
 	}
 	symbol->m_rect.Translate(-offset);
 }

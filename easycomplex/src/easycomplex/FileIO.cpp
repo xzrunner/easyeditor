@@ -6,6 +6,8 @@
 
 #include <easycomplex.h>
 
+#include <sprite2/Sprite.h>
+
 #include <queue>
 
 namespace ecomplex
@@ -17,8 +19,11 @@ void FileIO::load(const Task* task, const char* filename)
 	symbol->LoadFromFile(filename);
 
 	task->m_library->LoadFromSymbolMgr(*ee::SymbolMgr::Instance());
-	for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
-		task->m_viewlist->Insert(symbol->m_sprites[i]);
+	const std::vector<s2::Sprite*>& children = symbol->GetChildren();
+	for (int i = 0, n = children.size(); i < n; ++i) {
+		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+		task->m_viewlist->Insert(child);
+	}
 
 	//task->m_stage->loadHistoryList(filename, symbol->m_sprites);
 
@@ -33,16 +38,22 @@ void FileIO::store(const Task* task, const char* filename)
 	ecomplex::Symbol* root = task->m_stage->getSymbol();
 	ecomplex::FileStorer::StoreWithHistory(filename, root);
 	std::queue<const ecomplex::Symbol*> buffer;
-	for (size_t i = 0, n = root->m_sprites.size(); i < n ;++i)
-		if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(root->m_sprites[i]))
+	const std::vector<s2::Sprite*>& children = root->GetChildren();
+	for (size_t i = 0, n = children.size(); i < n ;++i) {
+		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+		if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(child))
 			buffer.push(&complex->GetSymbol());
+	}
 	while (!buffer.empty())
 	{
 		const ecomplex::Symbol* symbol = buffer.front(); buffer.pop();
 		ecomplex::FileStorer::Store(symbol->GetFilepath().c_str(), symbol);
-		for (size_t i = 0, n = symbol->m_sprites.size(); i < n ;++i)
-			if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(symbol->m_sprites[i]))
+		const std::vector<s2::Sprite*>& children = symbol->GetChildren();
+		for (size_t i = 0, n = children.size(); i < n ;++i) {
+			ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+			if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(child))
 				buffer.push(&complex->GetSymbol());
+		}
 	}
 }
 

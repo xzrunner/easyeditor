@@ -11,7 +11,7 @@ namespace s2
 class AnimSymbol : public Symbol
 {
 public:
-	AnimSymbol();
+	AnimSymbol(void* ud);
 
 	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const;
 

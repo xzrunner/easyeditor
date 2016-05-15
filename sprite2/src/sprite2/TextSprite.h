@@ -11,7 +11,7 @@ class TextSymbol;
 class TextSprite : public Sprite
 {
 public:
-	TextSprite();
+	TextSprite(void* ud);
 	
 	virtual bool Update(float dt) { return false; }
 	

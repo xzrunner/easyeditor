@@ -5,6 +5,8 @@
 
 #include <vector>
 
+namespace s2 { class Sprite; class ComplexSymbol; }
+
 namespace ecomplex
 {
 
@@ -12,6 +14,7 @@ class Symbol : public ee::Symbol
 {
 public:
 	Symbol();
+	Symbol(const Symbol& sym);
 	virtual ~Symbol();
 
 	//
@@ -32,11 +35,14 @@ public:
 	virtual void ReloadTexture() const;
 	virtual ee::Rect GetSize(const ee::Sprite* sprite = NULL) const;
 
-	bool isOneLayer() const;
+	bool IsOneLayer() const;
 
 	void InitBounding();
 
+	void Add(ee::Sprite* spr);
 	void Clear();
+
+	const std::vector<s2::Sprite*>& GetChildren() const;
 
 	static ee::Symbol* Create() { return new Symbol(); }
 
@@ -55,7 +61,7 @@ public:
 
 	// todo: 
 public:
-	std::vector<ee::Sprite*> m_sprites;
+//	std::vector<ee::Sprite*> m_sprites;
 
 	std::vector<Group> m_groups;
 
@@ -66,6 +72,8 @@ public:
 	bool m_use_render_cache;
 
 private:
+	s2::ComplexSymbol* m_core;
+
 	mutable int m_render_version;
 	mutable bool m_render_cache_open;
 

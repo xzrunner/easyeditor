@@ -3,8 +3,9 @@
 namespace s2
 {
 
-AnimSprite::AnimSprite()
-	: m_sym(NULL)
+AnimSprite::AnimSprite(void* ud)
+	: Sprite(ud)
+	, m_sym(NULL)
 {
 }
 

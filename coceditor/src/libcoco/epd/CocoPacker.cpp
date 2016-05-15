@@ -21,6 +21,8 @@
 #include <easyicon.h>
 #include <epbin.h>
 
+#include <sprite2/Sprite.h>
+
 #include <queue>
 
 namespace ecoco
@@ -92,9 +94,10 @@ void CocoPacker::ResolveSymbols()
 		}
 		else if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(symbol))
 		{
-			for (size_t i = 0, n = complex->m_sprites.size(); i < n; ++i)
+			const std::vector<s2::Sprite*>& children = complex->GetChildren();			
+			for (size_t i = 0, n = children.size(); i < n; ++i)
 			{
-				ee::Sprite* sprite = complex->m_sprites[i];
+				ee::Sprite* sprite = static_cast<ee::Sprite*>(children[i]->GetUD());
 				if (ee::ImageSprite* image = dynamic_cast<ee::ImageSprite*>(sprite))
 				{
 					m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
@@ -839,14 +842,17 @@ void CocoPacker::ParserComplex(const ecomplex::Symbol* symbol)
 	std::vector<std::pair<int, std::string> > order;
 	{
 		lua::TableAssign ta(*m_gen, "component", true);
-		for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
-			ParserSpriteForComponent(symbol->m_sprites[i], ids, unique, order);
+		const std::vector<s2::Sprite*>& children = symbol->GetChildren();
+		for (int i = 0, n = children.size(); i < n; ++i) {
+			ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+			ParserSpriteForComponent(child, ids, unique, order);
+		}
 	}
 
 	// children
 	std::map<std::string, std::vector<ee::Sprite*> > map_actions;
 	std::vector<ee::Sprite*> others;
-	Utility::GroupSpritesFromTag(symbol->m_sprites, map_actions, others);
+	Utility::GroupSpritesFromTag(symbol->GetChildren(), map_actions, others);
 	if (!map_actions.empty())
 	{
 		std::map<std::string, std::vector<ee::Sprite*> >::iterator itr;
@@ -857,12 +863,15 @@ void CocoPacker::ParserComplex(const ecomplex::Symbol* symbol)
 			// frame 0
 			{
 				lua::TableAssign ta(*m_gen, "", true);
+				const std::vector<s2::Sprite*>& children = symbol->GetChildren();
 				for (size_t i = 0, n = itr->second.size(); i < n; ++i)
 				{
 					int idx = -1;
-					for (idx = 0; idx < symbol->m_sprites.size(); ++idx)
-						if (symbol->m_sprites[idx] == itr->second[i])
+					for (idx = 0; idx < children.size(); ++idx) {
+						ee::Sprite* child = static_cast<ee::Sprite*>(children[idx]->GetUD());
+						if (child == itr->second[i])
 							break;
+					}
 					ParserSpriteForFrame(itr->second[i], idx, ids, order);
 				}
 			}
@@ -874,12 +883,15 @@ void CocoPacker::ParserComplex(const ecomplex::Symbol* symbol)
  		// frame 0
  		{
  			lua::TableAssign ta(*m_gen, "", true);
+			const std::vector<s2::Sprite*>& children = symbol->GetChildren();
   			for (size_t i = 0, n = others.size(); i < n; ++i)
 			{
 				int idx = -1;
-				for (idx = 0; idx < symbol->m_sprites.size(); ++idx)
-					if (symbol->m_sprites[idx] == others[i])
+				for (idx = 0; idx < children.size(); ++idx) {
+					ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());					
+					if (child == others[i])
 						break;
+				}
  				ParserSpriteForFrame(others[i], idx, ids, order);
 			}
  		}
@@ -1674,8 +1686,8 @@ void CocoPacker::ParserSpriteForComponent(const ee::Sprite* sprite, std::vector<
 		{
 			bool is_mount_node = false;
 			const ecomplex::Sprite* ecomplex = dynamic_cast<const ecomplex::Sprite*>(sprite);
-			if (ecomplex && ecomplex->GetSymbol().m_sprites.size() == 1) {
-				const ee::FontBlankSprite* font = dynamic_cast<const ee::FontBlankSprite*>(ecomplex->GetSymbol().m_sprites[0]);
+			if (ecomplex && ecomplex->GetSymbol().GetChildren().size() == 1) {
+				const ee::FontBlankSprite* font = dynamic_cast<const ee::FontBlankSprite*>(ecomplex->GetSymbol().GetChildren()[0]);
 				is_mount_node = font && font->font.empty() && font->font_color == s2::Color(0, 0, 0, 0);
 			}
 			if (is_mount_node) {
@@ -1709,8 +1721,9 @@ void CocoPacker::ParserSpriteForComponent(const ee::Sprite* sprite, std::vector<
 		{
 			bool is_mount_node = false;
 			const ecomplex::Sprite* ecomplex = dynamic_cast<const ecomplex::Sprite*>(sprite);
-			if (ecomplex && ecomplex->GetSymbol().m_sprites.size() == 1) {
-				const ee::FontBlankSprite* font = dynamic_cast<const ee::FontBlankSprite*>(ecomplex->GetSymbol().m_sprites[0]);
+			if (ecomplex && ecomplex->GetSymbol().GetChildren().size() == 1) {
+				ee::Sprite* child = static_cast<ee::Sprite*>(ecomplex->GetSymbol().GetChildren()[0]->GetUD());				
+				const ee::FontBlankSprite* font = dynamic_cast<const ee::FontBlankSprite*>(child);
 				is_mount_node = font && font->font.empty() && font->font_color == s2::Color(0, 0, 0, 0);
 			}
 			if (is_mount_node) {

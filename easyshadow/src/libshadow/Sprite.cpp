@@ -11,7 +11,7 @@ namespace eshadow
 Sprite::Sprite()
 	: m_symbol(NULL)
 {
-	m_core = new s2::DummySprite;
+	m_core = new s2::DummySprite(this);
 }
 
 Sprite::Sprite(const Sprite& sprite)
@@ -28,7 +28,7 @@ Sprite::Sprite(const Sprite& sprite)
 Sprite::Sprite(Symbol* symbol)
 	: m_symbol(symbol)
 {
-	m_core = new s2::DummySprite;
+	m_core = new s2::DummySprite(this);
 
 	if (m_symbol) {
 		m_symbol->Retain();

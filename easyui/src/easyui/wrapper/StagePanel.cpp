@@ -16,6 +16,8 @@
 
 #include <easycomplex.h>
 
+#include <sprite2/Sprite.h>
+
 #include <fstream>
 #include <algorithm>
 
@@ -79,8 +81,9 @@ void StagePanel::LoadFromFile(const char* filename)
 	items_filepath = ee::FileHelper::GetAbsolutePathFromFile(filename, items_filepath);
 	ecomplex::Symbol items_complex;
 	items_complex.LoadFromFile(items_filepath);
-	for (int i = 0, n = items_complex.m_sprites.size(); i < n; ++i) {
-		ee::Sprite* spr = items_complex.m_sprites[i];
+	const std::vector<s2::Sprite*>& children = items_complex.GetChildren();
+	for (int i = 0, n = children.size(); i < n; ++i) {
+		ee::Sprite* spr = static_cast<ee::Sprite*>(children[i]->GetUD());
 		ee::InsertSpriteSJ::Instance()->Insert(spr);
 	}
 }
@@ -94,8 +97,12 @@ void StagePanel::StoreToFile(const char* filename) const
 
 	// items complex
 	ecomplex::Symbol items_complex;
-	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(items_complex.m_sprites));
-	for_each(items_complex.m_sprites.begin(), items_complex.m_sprites.end(), ee::RetainObjectFunctor<ee::Sprite>());
+	std::vector<ee::Sprite*> sprites;
+	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
+	for_each(sprites.begin(), sprites.end(), ee::RetainObjectFunctor<ee::Sprite>());
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		items_complex.Add(sprites[i]);
+	}
 	std::string items_path = name + "_items_complex[gen].json";
 	items_complex.SetFilepath(items_path);
 	ecomplex::FileStorer::Store(items_path.c_str(), &items_complex);
@@ -106,7 +113,7 @@ void StagePanel::StoreToFile(const char* filename) const
 	items_sprite.name = "anchor";
 	ecomplex::Symbol wrapper_complex;
 	wrapper_complex.m_clipbox = m_clipbox;
-	wrapper_complex.m_sprites.push_back(&items_sprite);
+	wrapper_complex.Add(&items_sprite);
 	items_sprite.Retain();
 	std::string top_path = name + "_wrapper_complex[gen].json";
 	wrapper_complex.SetFilepath(top_path);

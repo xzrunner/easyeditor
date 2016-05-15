@@ -4,6 +4,8 @@
 #include <ee/ObjectVector.h>
 #include <ee/Sprite.h>
 
+#include <sprite2/Sprite.h>
+
 namespace ecomplex
 {
 
@@ -20,44 +22,70 @@ SymbolContainer::~SymbolContainer()
 
 void SymbolContainer::Traverse(ee::Visitor& visitor, bool order/* = true*/) const
 {
-	ee::ObjectVector<ee::Sprite>::Traverse(m_symbol->m_sprites, visitor, order);
+	std::vector<ee::Sprite*> sprites;
+	GetSprites(sprites);
+	ee::ObjectVector<ee::Sprite>::Traverse(sprites, visitor, order);
 }
 
 void SymbolContainer::Traverse(ee::Visitor& visitor, ee::DataTraverseType type, bool order) const
 {
-	ee::ObjectVector<ee::Sprite>::Traverse(m_symbol->m_sprites, visitor, type, order);
+	std::vector<ee::Sprite*> sprites;
+	GetSprites(sprites);
+	ee::ObjectVector<ee::Sprite>::Traverse(sprites, visitor, type, order);
 }
 
 bool SymbolContainer::Remove(Object* obj)
 {
-	return ee::ObjectVector<ee::Sprite>::Remove(m_symbol->m_sprites, static_cast<ee::Sprite*>(obj));
+	std::vector<ee::Sprite*> sprites;
+	GetSprites(sprites);
+	return ee::ObjectVector<ee::Sprite>::Remove(sprites, static_cast<ee::Sprite*>(obj));
 }
 
 bool SymbolContainer::Insert(Object* obj)
 {
-	return ee::ObjectVector<ee::Sprite>::Insert(m_symbol->m_sprites, static_cast<ee::Sprite*>(obj));
+	std::vector<ee::Sprite*> sprites;
+	GetSprites(sprites);
+	return ee::ObjectVector<ee::Sprite>::Insert(sprites, static_cast<ee::Sprite*>(obj));
 }
 
 bool SymbolContainer::Insert(Object* obj, int idx)
 {
-	return ee::ObjectVector<ee::Sprite>::Insert(m_symbol->m_sprites, static_cast<ee::Sprite*>(obj), idx);	
+	std::vector<ee::Sprite*> sprites;
+	GetSprites(sprites);
+	return ee::ObjectVector<ee::Sprite>::Insert(sprites, static_cast<ee::Sprite*>(obj), idx);	
 }
 
 bool SymbolContainer::Clear()
 {
-	return ee::ObjectVector<ee::Sprite>::Clear(m_symbol->m_sprites);
+	std::vector<ee::Sprite*> sprites;
+	GetSprites(sprites);
+	return ee::ObjectVector<ee::Sprite>::Clear(sprites);
 }
 
 bool SymbolContainer::ResetOrder(const Object* obj, bool up)
 {
-	return ee::ObjectVector<ee::Sprite>::ResetOrder(m_symbol->m_sprites, 
+	std::vector<ee::Sprite*> sprites;
+	GetSprites(sprites);
+	return ee::ObjectVector<ee::Sprite>::ResetOrder(sprites, 
 		static_cast<const ee::Sprite*>(obj), up);
 }
 
 bool SymbolContainer::ResetOrderMost(const Object* obj, bool up)
 {
-	return ee::ObjectVector<ee::Sprite>::ResetOrderMost(m_symbol->m_sprites, 
+	std::vector<ee::Sprite*> sprites;
+	GetSprites(sprites);
+	return ee::ObjectVector<ee::Sprite>::ResetOrderMost(sprites, 
 		static_cast<const ee::Sprite*>(obj), up);
+}
+
+void SymbolContainer::GetSprites(std::vector<ee::Sprite*>& sprites) const
+{
+	const std::vector<s2::Sprite*>& children = m_symbol->GetChildren();
+	sprites.reserve(children.size());
+	for (int i = 0, n = children.size(); i < n; ++i) {
+		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+		sprites.push_back(child);
+	}
 }
 
 }

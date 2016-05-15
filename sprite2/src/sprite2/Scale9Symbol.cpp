@@ -3,7 +3,8 @@
 namespace s2
 {
 
-Scale9Symbol::Scale9Symbol()
+Scale9Symbol::Scale9Symbol(void* ud)
+	: Symbol(ud)
 {
 }
 

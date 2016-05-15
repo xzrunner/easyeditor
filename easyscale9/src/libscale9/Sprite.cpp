@@ -11,7 +11,7 @@ namespace escale9
 Sprite::Sprite()
 	: m_symbol(NULL)
 {
-	m_core = new s2::Scale9Sprite;
+	m_core = new s2::Scale9Sprite(this);
 }
 
 Sprite::Sprite(const Sprite& sprite)
@@ -28,7 +28,7 @@ Sprite::Sprite(Symbol* symbol)
 	: m_symbol(symbol)
 	, m_data(symbol->GetScale9Data())
 {
-	m_core = new s2::Scale9Sprite;
+	m_core = new s2::Scale9Sprite(this);
 
 	m_symbol->Retain();
 	BuildBounding();

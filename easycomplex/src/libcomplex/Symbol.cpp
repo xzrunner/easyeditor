@@ -13,6 +13,9 @@
 
 #include <easytext.h>
 
+#include <sprite2/ComplexSymbol.h>
+#include <sprite2/Sprite.h>
+
 #include <queue>
 
 namespace ecomplex
@@ -25,27 +28,41 @@ Symbol::Symbol()
 	, m_render_version(0)
 	, m_render_cache_open(true)
 {
+	m_core = new s2::ComplexSymbol(this);
+
 	static int id = 0;
 	m_name = FILE_TAG + wxVariant(id++);
 
 	m_clipbox.xmin = m_clipbox.xmax = m_clipbox.ymin = m_clipbox.ymax = 0;
 }
 
+Symbol::Symbol(const Symbol& sym)
+	: m_rect(sym.m_rect)
+	, m_clipbox(sym.m_clipbox)
+	, m_use_render_cache(sym.m_use_render_cache)
+	, m_render_version(sym.m_render_version)
+	, m_render_cache_open(sym.m_render_cache_open)
+{
+	m_core = new s2::ComplexSymbol(*sym.m_core);
+}
+
 Symbol::~Symbol()
 {
 	Clear();
+
+	delete m_core;
 }
 
 void Symbol::Retain() const
 {
-	ee::Object::Retain();
-	for_each(m_sprites.begin(), m_sprites.end(), ee::RetainObjectFunctor<ee::Sprite>());
+	ee::Object::Retain();	
+//	for_each(m_sprites.begin(), m_sprites.end(), ee::RetainObjectFunctor<ee::Sprite>());
 }
 
 void Symbol::Release() const
 {
 	ee::Object::Release();
-	for_each(m_sprites.begin(), m_sprites.end(), ee::ReleaseObjectFunctor<ee::Sprite>());
+//	for_each(m_sprites.begin(), m_sprites.end(), ee::ReleaseObjectFunctor<ee::Sprite>());
 }
 
 void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
@@ -111,8 +128,10 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
  	}
  	else
 	{
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-			ee::SpriteRenderer::Draw(m_sprites[i], params);
+		const std::vector<s2::Sprite*>& children = m_core->GetChildren();
+		for (int i = 0, n = children.size(); i < n; ++i) {
+			ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+			ee::SpriteRenderer::Draw(child, params);
 		}
 		if (m_clipbox.Width() > 0 && m_clipbox.Height() > 0) {
 			sm::vec2 min(m_clipbox.xmin, m_clipbox.ymin), 
@@ -125,16 +144,18 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 
 void Symbol::ReloadTexture() const
 {
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-		if (etext::Sprite* text = dynamic_cast<etext::Sprite*>(m_sprites[i])) {
+	const std::vector<s2::Sprite*>& children = m_core->GetChildren();
+	for (int i = 0, n = children.size(); i < n; ++i) {
+		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+		if (etext::Sprite* text = dynamic_cast<etext::Sprite*>(child)) {
 			//			// todo
 			//			ee::GTxt::Instance()->Reload(text);
 		}
 	}
-
 	std::set<const ee::Symbol*> symbols;
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-		symbols.insert(&m_sprites[i]->GetSymbol());
+	for (int i = 0, n = children.size(); i < n; ++i) {
+		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+		symbols.insert(&child->GetSymbol());
 	}
 	std::set<const ee::Symbol*>::iterator itr = symbols.begin();
 	for ( ; itr != symbols.end(); ++itr) {
@@ -147,23 +168,29 @@ ee::Rect Symbol::GetSize(const ee::Sprite* sprite/* = NULL*/) const
 	return m_rect;
 }
 
-bool Symbol::isOneLayer() const
+bool Symbol::IsOneLayer() const
 {
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-		if (dynamic_cast<Sprite*>(m_sprites[i]))
+	const std::vector<s2::Sprite*>& children = m_core->GetChildren();
+	for (int i = 0, n = children.size(); i < n; ++i) {
+		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+		if (dynamic_cast<Sprite*>(child)) {
 			return false;
+		}
+	}
 	return true;
 }
 
 void Symbol::InitBounding()
 {
 	m_rect.MakeInfinite();
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-	{
+	const std::vector<s2::Sprite*>& children = m_core->GetChildren();
+	for (int i = 0, n = children.size(); i < n; ++i) {
+		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
 		std::vector<sm::vec2> vertices;
-		m_sprites[i]->GetBounding()->GetBoundPos(vertices);
-		for (size_t j = 0, m = vertices.size(); j < m; ++j)
+		child->GetBounding()->GetBoundPos(vertices);
+		for (int j = 0, m = vertices.size(); j < m; ++j) {
 			m_rect.Combine(vertices[j]);
+		}
 	}
 
 	// 为兼容老数据，临时去掉
@@ -180,11 +207,24 @@ void Symbol::LoadResources()
 	FileLoader::Load(m_filepath, this);
 }
 
+void Symbol::Add(ee::Sprite* spr)
+{
+	m_core->Add(spr->GetCore());
+}
+
 void Symbol::Clear()
 {
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-		m_sprites[i]->Release();
-	m_sprites.clear();
+	const std::vector<s2::Sprite*>& children = m_core->GetChildren();
+	for (int i = 0, n = children.size(); i < n; ++i) {
+		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+		child->Release();
+	}
+	m_core->Clear();
+}
+
+const std::vector<s2::Sprite*>& Symbol::GetChildren() const
+{
+	return m_core->GetChildren();
 }
 
 }

@@ -11,6 +11,8 @@
 #include <ee/SpriteFactory.h>
 #include <ee/Sprite.h>
 
+#include <sprite2/Sprite.h>
+
 #include <wx/splitter.h>
 
 namespace ecomplex
@@ -107,10 +109,12 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 
 void EditDialog::LoadSymbolInfo()
 {
-	for (size_t i = 0, n = m_symbol->m_sprites.size(); i < n; ++i) {
-		m_library->AddSymbol(const_cast<ee::Symbol*>(&m_symbol->m_sprites[i]->GetSymbol()));
-		m_viewlist->Insert(m_symbol->m_sprites[i]);
-	}
+	const std::vector<s2::Sprite*>& children = m_symbol->GetChildren();
+	for (int i = 0, n = children.size(); i < n; ++i) {
+		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+		m_library->AddSymbol(const_cast<ee::Symbol*>(&child->GetSymbol()));
+		m_viewlist->Insert(child);
+	}	
 }
 
 }

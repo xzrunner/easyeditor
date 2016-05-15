@@ -60,7 +60,7 @@ void AnimToComplexWithColor::Run(const std::string& cfg_filepath)
 		ecomplex::Symbol* symbol = new ecomplex::Symbol;
 		ee::Sprite* sprite = new ee::DummySprite(new ee::DummySymbol(dir + "\\" + filepath + ".json"));
 		TransSpr(trans, sprite);
-		symbol->m_sprites.push_back(sprite);
+		symbol->Add(sprite);
 
 		std::string output = filepath.substr(0, filepath.find_last_of('_'));
 		int pos = output.find_last_of('_');

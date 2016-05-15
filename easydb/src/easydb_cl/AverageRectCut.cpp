@@ -138,7 +138,7 @@ void AverageRectCut::RectCutImage(const std::string& src_dir, const std::string&
 			offset.x = img_r.xmin + xmin + w * 0.5f - img->GetWidth() * 0.5f;
 			offset.y = img_r.ymin + ymin + h * 0.5f - img->GetHeight() * 0.5f;
 			spr->Translate(offset);
-			complex.m_sprites.push_back(spr);
+			complex.Add(spr);
 		}
 	}
 

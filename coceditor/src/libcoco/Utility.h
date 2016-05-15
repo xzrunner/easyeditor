@@ -5,6 +5,7 @@
 #include <map>
 
 namespace ee { class Sprite; }
+namespace s2 { class Sprite; }
 
 namespace ecoco
 {
@@ -12,7 +13,7 @@ namespace ecoco
 class Utility
 {
 public:
-	static void GroupSpritesFromTag(const std::vector<ee::Sprite*>& src, 
+	static void GroupSpritesFromTag(const std::vector<s2::Sprite*>& src, 
 		std::map<std::string, std::vector<ee::Sprite*> >& dst, std::vector<ee::Sprite*>& others);
 
 }; // Utility

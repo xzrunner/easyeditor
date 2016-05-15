@@ -11,7 +11,7 @@ namespace s2
 class Particle3dSymbol : public Symbol
 {
 public:
-	Particle3dSymbol();
+	Particle3dSymbol(void* ud);
 
 	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const;
 

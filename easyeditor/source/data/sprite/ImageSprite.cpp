@@ -15,7 +15,7 @@ namespace ee
 ImageSprite::ImageSprite()
 	: m_symbol(NULL)
 {
-	m_core = new s2::ImageSprite;
+	m_core = new s2::ImageSprite(this);
 }
 
 ImageSprite::ImageSprite(const ImageSprite& sprite)
@@ -30,7 +30,7 @@ ImageSprite::ImageSprite(const ImageSprite& sprite)
 ImageSprite::ImageSprite(ImageSymbol* symbol)
 	: m_symbol(symbol)
 {
-	m_core = new s2::ImageSprite;
+	m_core = new s2::ImageSprite(this);
 	m_symbol->Retain();
 	BuildBounding();
 }

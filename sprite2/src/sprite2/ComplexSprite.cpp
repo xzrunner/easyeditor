@@ -4,8 +4,9 @@
 namespace s2
 {
 
-ComplexSprite::ComplexSprite()
-	: m_sym(NULL)
+ComplexSprite::ComplexSprite(void* ud)
+	: Sprite(ud)
+	, m_sym(NULL)
 {
 }
 

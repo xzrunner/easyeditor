@@ -25,7 +25,7 @@ void LoadFromLua::Load(const Json::Value& value, const std::string& dir,
 	std::string export_name = value["export name"].asString();
 
 	erespacker::IPackNode* node = erespacker::UnpackNodeFactory::Instance()->Query(export_name);
-	symbol->m_sprites.push_back(NodeToSprite::Trans(node));
+	symbol->Add(NodeToSprite::Trans(node));
 }
 
 void LoadFromLua::LoadImages(const std::string& name, std::vector<ee::Image*>& images)

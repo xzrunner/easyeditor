@@ -7,6 +7,8 @@
 
 #include <easycomplex.h>
 
+#include <sprite2/Sprite.h>
+
 namespace lr
 {
 
@@ -15,12 +17,15 @@ ee::Sprite* GroupHelper::Group(const std::vector<ee::Sprite*>& sprites,
 {
 	ecomplex::Symbol* sym = new ecomplex::Symbol();
 	sym->SetFilepath(GROUP_TAG);
-	sym->m_sprites = sprites;
-	for_each(sprites.begin(), sprites.end(), ee::RetainObjectFunctor<ee::Sprite>());
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		sprites[i]->Retain();
+		sym->Add(sprites[i]);
+	}
+
 	sym->InitBounding();
 	sm::vec2 c = sym->GetSize().Center();
-	for (int i = 0, n = sym->m_sprites.size(); i < n; ++i) {
-		sym->m_sprites[i]->Translate(-c);
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		sprites[i]->Translate(-c);
 	}
 	sym->InitBounding();
 
@@ -41,9 +46,10 @@ void GroupHelper::BreakUp(ee::Sprite* group, std::vector<ee::Sprite*>& sprites)
 	const sm::vec2& pos = group->GetPosition();
 	const sm::vec2& scale = group->GetScale();
 	float angle = group->GetAngle();
-	for (int i = 0, n = comp->m_sprites.size(); i < n; ++i) 
+	const std::vector<s2::Sprite*>& children = comp->GetChildren();
+	for (int i = 0, n = children.size(); i < n; ++i) 
 	{
-		ee::Sprite* spr = comp->m_sprites[i]->Clone();
+		ee::Sprite* spr = static_cast<ee::Sprite*>(children[i]->GetUD())->Clone();
 
 		sm::vec2 _scale = spr->GetScale();
 		_scale.x *= scale.x;

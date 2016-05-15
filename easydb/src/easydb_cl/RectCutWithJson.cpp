@@ -122,7 +122,7 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 		offset.x = img_r.xmin + r.x + r.w * 0.5f - img->GetWidth() * 0.5f;
 		offset.y = img_r.ymin + r.y + r.h * 0.5f - img->GetHeight() * 0.5f;
 		spr->Translate(offset);
-		complex.m_sprites.push_back(spr);
+		complex.Add(spr);
 	}
 
 	std::string json_out_path = out_json_dir + "\\" + filename + "_complex.json";

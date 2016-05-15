@@ -11,7 +11,7 @@ namespace s2
 class Particle2dSymbol : public Symbol
 {
 public:
-	Particle2dSymbol();
+	Particle2dSymbol(void* ud);
 
 	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const;
 

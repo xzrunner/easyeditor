@@ -5,8 +5,9 @@
 namespace s2
 {
 
-ImageSprite::ImageSprite()
-	: m_sym(NULL)
+ImageSprite::ImageSprite(void* ud)
+	: Sprite(ud)
+	, m_sym(NULL)
 {
 }
 

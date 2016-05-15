@@ -11,7 +11,7 @@ class ImageSymbol;
 class ImageSprite : public Sprite
 {
 public:
-	ImageSprite();
+	ImageSprite(void* ud);
 	
 	virtual bool Update(float dt) { return false; }
 	

@@ -11,7 +11,7 @@ namespace s2
 class TextSymbol : public Symbol
 {
 public:
-	TextSymbol();
+	TextSymbol(void* ud);
 
 	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const;
 

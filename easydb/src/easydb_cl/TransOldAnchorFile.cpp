@@ -8,6 +8,8 @@
 #include <easycomplex.h>
 #include <easyanim.h>
 
+#include <sprite2/Sprite.h>
+
 namespace edb
 {
 
@@ -60,8 +62,9 @@ void TransOldAnchorFile::TransComplex(const std::string& filepath) const
 	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	ecomplex::Symbol* complex = static_cast<ecomplex::Symbol*>(sym);
 	bool dirty = false;
-	for (int i = 0, n = complex->m_sprites.size(); i < n; ++i) {
-		ee::Sprite* spr = complex->m_sprites[i];
+	const std::vector<s2::Sprite*>& children = complex->GetChildren();
+	for (int i = 0, n = children.size(); i < n; ++i) {
+		ee::Sprite* spr = static_cast<ee::Sprite*>(children[i]->GetUD());
 		if (IsAnchor(spr)) {
 			spr->SetAnchor(true);
 			dirty = true;
@@ -102,8 +105,10 @@ bool TransOldAnchorFile::IsAnchor(const ee::Sprite* spr) const
 	if (const ee::FontBlankSprite* font = dynamic_cast<const ee::FontBlankSprite*>(spr)) {
 		return font->font.empty() && font->font_color == s2::Color(0, 0, 0, 0);
 	} else if (const ecomplex::Sprite* complex = dynamic_cast<const ecomplex::Sprite*>(spr)) {
-		if (complex->GetSymbol().m_sprites.size() == 1) {
-			return IsAnchor(complex->GetSymbol().m_sprites[0]);
+		const std::vector<s2::Sprite*>& children = complex->GetSymbol().GetChildren();
+		if (children.size() == 1) {
+			ee::Sprite* child = static_cast<ee::Sprite*>(children[0]->GetUD());
+			return IsAnchor(child);
 		} else {
 			return false;
 		}

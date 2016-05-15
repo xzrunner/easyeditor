@@ -5,6 +5,8 @@
 #include <easycomplex.h>
 #include <easybuilder.h>
 
+#include <sprite2/Sprite.h>
+
 #include <queue>
 
 namespace ecomplex
@@ -45,9 +47,10 @@ void Code::ResolveUI(const Symbol& symbol)
 		{
 			Node parent = buffer.front(); buffer.pop();
 			const Symbol& parent_symbol = parent.symbol;
-			for (int i = 0, n = parent_symbol.m_sprites.size(); i < n; ++i)
+			const std::vector<s2::Sprite*>& children = parent_symbol.GetChildren();
+			for (int i = 0, n = children.size(); i < n; ++i)
 			{
-				ee::Sprite* child = parent_symbol.m_sprites[i];
+				ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
 				if (child->name.empty() || child->name[0] == '_') {
 					continue;
 				}
@@ -102,9 +105,10 @@ void Code::ResolveText(const Symbol& symbol)
  	while (!buffer.empty()) 
  	{
  		const Symbol* parent = buffer.front(); buffer.pop();
- 		for (int i = 0, n = parent->m_sprites.size(); i < n; ++i)
+		const std::vector<s2::Sprite*>& children = parent->GetChildren();
+ 		for (int i = 0, n = children.size(); i < n; ++i)
  		{
- 			ee::Sprite* child = parent->m_sprites[i];
+			ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
  			if (child->name.empty() || child->name[0] == '_') {
  				continue;
  			}

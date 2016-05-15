@@ -19,6 +19,7 @@
 #include <easycomplex.h>
 
 #include <sprite2/RenderCamera.h>
+#include <sprite2/Sprite.h>
 
 namespace lr
 {
@@ -363,11 +364,12 @@ void Layer::StoreGroup(ee::Sprite* spr, Json::Value& val, const std::string& dir
 
 	ecomplex::Symbol* comp = &dynamic_cast<ecomplex::Symbol&>(const_cast<ee::Symbol&>(spr->GetSymbol()));
 	assert(comp);
-	std::vector<ee::Sprite*>& sprites = comp->m_sprites;
+	const std::vector<s2::Sprite*>& children = comp->GetChildren();
 	int count = 0;
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
+	for (int i = 0, n = children.size(); i < n; ++i) {
 		Json::Value cval;
-		if (StoreSprite(sprites[i], cval, dir)) {
+		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+		if (StoreSprite(child, cval, dir)) {
 			val["group"][count++] = cval;
 		}
 	}

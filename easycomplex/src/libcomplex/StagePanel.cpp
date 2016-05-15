@@ -14,6 +14,8 @@
 #include <ee/sprite_msg.h>
 #include <ee/subject_id.h>
 
+#include <sprite2/Sprite.h>
+
 namespace ee { extern StageModule MODULE_STAGE; }
 
 namespace ecomplex
@@ -68,9 +70,10 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 bool StagePanel::Update(float dt)
 {
 	bool dirty = ee::SceneNodeMgr::Instance()->Update(1 / 30.0f);
-	for (int i = 0, n = m_symbol->m_sprites.size(); i < n; ++i) {
-		ee::Sprite* spr = m_symbol->m_sprites[i];
-		if (spr->Update(dt)) {
+	const std::vector<s2::Sprite*>& children = m_symbol->GetChildren();
+	for (int i = 0, n = children.size(); i < n; ++i) {
+		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+		if (child->Update(dt)) {
 			dirty = true;
 		}
 	}
@@ -89,11 +92,9 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 void StagePanel::Clear()
 {
 	Symbol* symbol = getSymbol();
-	for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
-		symbol->m_sprites[i]->Release();
-	symbol->m_sprites.clear();
-
 	symbol->m_clipbox = ee::Rect(0, 0);
+
+	m_symbol->Clear();
 }
 
 } // complex

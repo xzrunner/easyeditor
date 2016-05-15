@@ -7,6 +7,8 @@
 
 #include <easycomplex.h>
 
+#include <sprite2/Sprite.h>
+
 #include <algorithm>
 
 namespace eui
@@ -114,9 +116,11 @@ void UIList::StoreToFile(const char* filename) const
 	// items complex
 	ecomplex::Symbol items_complex;
 	for_each(m_items.begin(), m_items.end(), ee::RetainObjectFunctor<ee::Sprite>());
-	items_complex.m_sprites = m_items;
-	for (int i = 0, n = items_complex.m_sprites.size(); i < n; ++i) {
-		ee::Sprite* spr = items_complex.m_sprites[i];
+	for (int i = 0, n = m_items.size(); i < n; ++i) {
+		items_complex.Add(m_items[i]);
+	}
+	for (int i = 0, n = m_items.size(); i < n; ++i) {
+		ee::Sprite* spr = m_items[i];
 		spr->name = "item" + ee::StringHelper::ToString(i+1);
 		spr->Retain();
 	}
@@ -129,7 +133,7 @@ void UIList::StoreToFile(const char* filename) const
 	items_sprite.name = "anchor";
 	ecomplex::Symbol wrapper_complex;
 	wrapper_complex.m_clipbox = m_clipbox;
-	wrapper_complex.m_sprites.push_back(&items_sprite);
+	wrapper_complex.Add(&items_sprite);
 	items_sprite.Retain();
 	std::string top_path = name + "_wrapper_complex[gen].json";
 	wrapper_complex.SetFilepath(top_path);
@@ -193,14 +197,15 @@ void UIList::LoadFromFile(const char* filename)
 	items_filepath = ee::FileHelper::GetAbsolutePathFromFile(filename, items_filepath);
 	ecomplex::Symbol items_complex;
 	items_complex.LoadFromFile(items_filepath);
-	for (int i = 0, n = items_complex.m_sprites.size(); i < n; ++i) {
-		ee::Sprite* spr = items_complex.m_sprites[i];
+	const std::vector<s2::Sprite*>& children = items_complex.GetChildren();
+	for (int i = 0, n = children.size(); i < n; ++i) {
+		ee::Sprite* spr = static_cast<ee::Sprite*>(children[i]->GetUD());
 		spr->Retain();
 		m_items.push_back(spr);
 	}
 
-	if (!items_complex.m_sprites.empty()) {
-		m_item_spr = items_complex.m_sprites[0]->Clone();
+	if (!children.empty()) {
+		m_item_spr = static_cast<ee::Sprite*>(children[0]->GetUD())->Clone();
 	}
 }
 

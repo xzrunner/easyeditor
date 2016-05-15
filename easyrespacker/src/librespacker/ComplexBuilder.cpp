@@ -17,6 +17,8 @@
 
 #include <easycomplex.h>
 
+#include <sprite2/Sprite.h>
+
 #include <algorithm>
 
 namespace erespacker
@@ -85,7 +87,7 @@ IPackNode* ComplexBuilder::LoadComplex(const ecomplex::Symbol* symbol)
 
 	std::map<std::string, std::vector<ee::Sprite*> > map_actions;
 	std::vector<ee::Sprite*> others;
-	GroupFromTag(symbol->m_sprites, map_actions, others);
+	GroupFromTag(symbol->GetChildren(), map_actions, others);
 	
 	if (map_actions.empty()) 
 	{
@@ -97,8 +99,10 @@ IPackNode* ComplexBuilder::LoadComplex(const ecomplex::Symbol* symbol)
 		if (cb) {
 			node->CreateClipboxFramePart(cb, frame);
 		}
-		for (int i = 0, n = symbol->m_sprites.size(); i < n; ++i) {
-			node->CreateFramePart(symbol->m_sprites[i], frame);
+		const std::vector<s2::Sprite*>& children = symbol->GetChildren();
+		for (int i = 0, n = children.size(); i < n; ++i) {
+			ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+			node->CreateFramePart(child, frame);
 		}
 		node->frames.push_back(frame);
 	}
@@ -134,9 +138,11 @@ IPackNode* ComplexBuilder::LoadComplex(const ecomplex::Symbol* symbol)
 
 IPackNode* ComplexBuilder::LoadAnchor(const ecomplex::Symbol* symbol)
 {
-	assert(symbol->m_sprites.size() == 1);
+	const std::vector<s2::Sprite*>& children = symbol->GetChildren();
+	assert(children.size() == 1);
 
-	if (!Utility::IsNameValid(symbol->m_sprites[0]->name)) {
+	ee::Sprite* child = static_cast<ee::Sprite*>(children[0]->GetUD());
+	if (!Utility::IsNameValid(child->name)) {
 		return NULL;
 	}
 
@@ -149,7 +155,7 @@ IPackNode* ComplexBuilder::LoadAnchor(const ecomplex::Symbol* symbol)
 	node->actions.push_back(action);
 
 	PackAnimation::Frame frame;
-	node->CreateFramePart(symbol->m_sprites[0], frame);
+	node->CreateFramePart(child, frame);
 	node->frames.push_back(frame);
 
 	m_map_data.insert(std::make_pair(symbol, node));
@@ -157,13 +163,13 @@ IPackNode* ComplexBuilder::LoadAnchor(const ecomplex::Symbol* symbol)
 	return node;
 }
 
-void ComplexBuilder::GroupFromTag(const std::vector<ee::Sprite*>& src, 
+void ComplexBuilder::GroupFromTag(const std::vector<s2::Sprite*>& src, 
 								  std::map<std::string, std::vector<ee::Sprite*> >& dst, 
 								  std::vector<ee::Sprite*>& others)
 {
 	for (int i = 0, n = src.size(); i < n; ++i)
 	{
-		ee::Sprite* sprite = src[i];
+		ee::Sprite* sprite = static_cast<ee::Sprite*>(src[i]->GetUD());
 		if (sprite->tag.empty())
 		{
 			others.push_back(sprite);

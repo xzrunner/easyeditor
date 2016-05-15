@@ -40,7 +40,7 @@ void LoadFromJson::Load(const Json::Value& value, const std::string& dir, Symbol
 
 		symbol->Release();
 
-		static_cast<Symbol*>(complex)->m_sprites.push_back(sprite);
+		static_cast<Symbol*>(complex)->Add(sprite);
 #ifdef OPEN_SCREEN_CACHE
 		ee::SpatialPartition::Instance()->Insert(sprite);
 		ee::SpriteRenderer::InvalidRect(sprite);

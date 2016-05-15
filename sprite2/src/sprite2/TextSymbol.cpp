@@ -3,7 +3,8 @@
 namespace s2
 {
 
-TextSymbol::TextSymbol()
+TextSymbol::TextSymbol(void* ud)
+	: Symbol(ud)
 {
 }
 

@@ -5,8 +5,9 @@
 namespace s2
 {
 
-TextSprite::TextSprite()
-	: m_sym(NULL)
+TextSprite::TextSprite(void* ud)
+	: Sprite(ud)
+	, m_sym(NULL)
 {
 }
 

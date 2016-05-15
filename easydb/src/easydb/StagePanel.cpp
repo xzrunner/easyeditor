@@ -85,9 +85,10 @@ void StagePanel::InitConnection()
 		if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(from))
 		{
 			const ecomplex::Symbol& symbol = complex->GetSymbol();
-			for (size_t i = 0, n = symbol.m_sprites.size(); i < n; ++i)
+			const std::vector<s2::Sprite*>& children = symbol.GetChildren();
+			for (size_t i = 0, n = children.size(); i < n; ++i)
 			{
-				ee::Sprite* child = symbol.m_sprites[i];
+				ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
 				for (size_t i = 0, n = sprites.size(); i < n; ++i)
 					if (&child->GetSymbol() == &sprites[i]->GetSymbol())
 						m_graphics.Connect(from, sprites[i]);

@@ -11,7 +11,7 @@ class AnimSymbol;
 class AnimSprite : public Sprite
 {
 public:
-	AnimSprite();
+	AnimSprite(void* ud);
 	
 	virtual bool Update(float dt) { return false; }
 	

@@ -5,6 +5,8 @@
 #include <easycomplex.h>
 #include <easybuilder.h>
 
+#include <sprite2/Sprite.h>
+
 #include <queue>
 
 namespace eui
@@ -72,8 +74,10 @@ void Code::ResolveUI(const std::vector<ee::Sprite*>& sprites)
 			}
 			else if (const ecomplex::Sprite* e_spr = dynamic_cast<const ecomplex::Sprite*>(spr)) 
 			{
-				for (int i = 0, n = e_spr->GetSymbol().m_sprites.size(); i < n; ++i) {
-					Node node(e_spr->GetSymbol().m_sprites[i], "");
+				const std::vector<s2::Sprite*>& children = e_spr->GetSymbol().GetChildren();
+				for (int i = 0, n = children.size(); i < n; ++i) {
+					ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+					Node node(child, "");
 					buffer.push(node);
 				}
 			}
@@ -127,8 +131,10 @@ void Code::ResolveText(const std::vector<ee::Sprite*>& sprites)
 		}
 		else if (ecomplex::Sprite* e_spr = dynamic_cast<ecomplex::Sprite*>(spr)) 
 		{
-			for (int i = 0, n = e_spr->GetSymbol().m_sprites.size(); i < n; ++i) {
-				buffer.push(e_spr->GetSymbol().m_sprites[i]);
+			const std::vector<s2::Sprite*>& children = e_spr->GetSymbol().GetChildren();
+			for (int i = 0, n = children.size(); i < n; ++i) {
+				ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+				buffer.push(child);
 			}
 		}
  	}

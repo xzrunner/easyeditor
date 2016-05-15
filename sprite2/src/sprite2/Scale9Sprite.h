@@ -11,7 +11,7 @@ class Scale9Symbol;
 class Scale9Sprite : public Sprite
 {
 public:
-	Scale9Sprite();
+	Scale9Sprite(void* ud);
 	
 	virtual bool Update(float dt) { return false; }
 	

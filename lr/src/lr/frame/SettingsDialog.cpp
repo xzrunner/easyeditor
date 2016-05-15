@@ -11,6 +11,8 @@
 #include <easyterrain2d.h>
 #include <easycomplex.h>
 
+#include <sprite2/Sprite.h>
+
 namespace lr
 {
 
@@ -232,8 +234,10 @@ void SettingDialog::SetTerrain2dUpdate(ee::Sprite* spr, bool open)
 	if (eterrain2d::Sprite* terr = dynamic_cast<eterrain2d::Sprite*>(spr)) {
 		const_cast<eterrain2d::Symbol&>(terr->GetSymbol()).SetUpdateOpen(open);
 	} else if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(spr)) {
-		for (int i = 0, n = complex->GetSymbol().m_sprites.size(); i < n; ++i) {
-			SetTerrain2dUpdate(complex->GetSymbol().m_sprites[i], open);
+		const std::vector<s2::Sprite*>& children = complex->GetSymbol().GetChildren();
+		for (int i = 0, n = children.size(); i < n; ++i) {
+			ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+			SetTerrain2dUpdate(child, open);
 		}
 	}
 }

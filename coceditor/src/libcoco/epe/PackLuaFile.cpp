@@ -23,7 +23,7 @@ void PackLuaFile::pack(const std::vector<const ee::Sprite*>& sprites,
 	{
 		ee::Sprite* sprite = const_cast<ee::Sprite*>(sprites[i]);
 		sprite->Retain();
-		root.m_sprites.push_back(sprite);
+		root.Add(sprite);
 	}
 
 	// get all symbols

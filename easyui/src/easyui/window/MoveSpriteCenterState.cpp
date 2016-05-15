@@ -4,6 +4,8 @@
 
 #include <easycomplex.h>
 
+#include <sprite2/Sprite.h>
+
 namespace eui
 {
 namespace window
@@ -55,9 +57,10 @@ bool MoveSpriteCenterState::OnMouseDrag(const sm::vec2& pos)
 	m_dirty = true;
 
 	ecomplex::Symbol& sym = const_cast<ecomplex::Symbol&>(m_spr->GetSymbol());
-	for (int i = 0, n = sym.m_sprites.size(); i < n; ++i) {
-		ee::Sprite* spr = sym.m_sprites[i];
-		spr->Translate(offset);
+	const std::vector<s2::Sprite*>& children = sym.GetChildren();
+	for (int i = 0, n = children.size(); i < n; ++i) {
+		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+		child->Translate(offset);
 	}
 
 	ecomplex::FileStorer::Store(sym.GetFilepath().c_str(), &sym);

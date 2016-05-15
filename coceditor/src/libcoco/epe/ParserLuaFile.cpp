@@ -338,7 +338,7 @@ void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames
 				std::string outpath = outfile + ".png";
 				ee::Sprite* sprite = new ee::DummySprite(new ee::DummySymbol(outpath, width, height));
 				part->transform(sprite);
-				symbol->m_sprites.push_back(sprite);
+				symbol->Add(sprite);
 			}
 		}
 
@@ -455,7 +455,7 @@ void ParserLuaFile::transAniToComplexFile(const std::string& outfloder, int id, 
 			sprite = new ee::DummySprite(new ee::DummySymbol(ani->filename));
 		}
 		item->transform(sprite);
-		symbol->m_sprites.push_back(sprite);
+		symbol->Add(sprite);
 	}
 
 	std::stringstream ss;
@@ -504,7 +504,7 @@ void ParserLuaFile::transPicToMemory(const std::vector<std::string>& texfilename
 
 			ee::Sprite* sprite = new ee::ImageSprite(image);
 			part->transform(sprite);
-			symbol->m_sprites.push_back(sprite);
+			symbol->Add(sprite);
 		}
 
 		// todo filepath
@@ -603,7 +603,7 @@ void ParserLuaFile::transAniToComplexMemory(int id, Animation* ani)
 			sprite = ee::SpriteFactory::Instance()->Create(itr->second);
 		}
 		item->transform(sprite);
-		symbol->m_sprites.push_back(sprite);
+		symbol->Add(sprite);
 	}
 
 	// todo filepath

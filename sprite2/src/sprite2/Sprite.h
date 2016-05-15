@@ -14,10 +14,12 @@ namespace s2
 class Sprite
 {
 public:
-	Sprite();
+	Sprite(void* ud);
 	
 	virtual bool Update(float dt) = 0;
 	
+	void* GetUD() { return m_ud; }
+
 #ifdef S2_EXTEND
 	const sm::vec2& Position() const	{ return m_position; }
 	sm::vec2& Position()				{ return m_position; }
@@ -55,6 +57,8 @@ protected:
 	RenderColor	 m_color;
 	RenderShader m_shader;
 	RenderCamera m_camera;
+
+	void* m_ud;	// for extend
 
 }; // Sprite
 

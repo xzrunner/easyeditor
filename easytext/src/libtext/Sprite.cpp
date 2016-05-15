@@ -12,7 +12,7 @@ namespace etext
 Sprite::Sprite()
 	: m_symbol(NULL)
 {
-	m_core = new s2::TextSprite;
+	m_core = new s2::TextSprite(this);
 
 	m_width = 100;
 	m_height = 20;
@@ -65,7 +65,7 @@ Sprite::Sprite(const Sprite& sprite)
 Sprite::Sprite(Symbol* symbol)
 	: m_symbol(symbol)
 {
-	m_core = new s2::TextSprite;
+	m_core = new s2::TextSprite(this);
 
 	m_symbol->Retain();
 

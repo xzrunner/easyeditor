@@ -9,7 +9,7 @@ namespace s2
 class Scale9Symbol : public Symbol
 {
 public:
-	Scale9Symbol();
+	Scale9Symbol(void* ud);
 
 	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const;
 

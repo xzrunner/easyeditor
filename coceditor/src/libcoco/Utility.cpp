@@ -3,16 +3,18 @@
 #include <ee/Sprite.h>
 #include <ee/StringHelper.h>
 
+#include <sprite2/Sprite.h>
+
 namespace ecoco
 {
 
-void Utility::GroupSpritesFromTag(const std::vector<ee::Sprite*>& src, 
+void Utility::GroupSpritesFromTag(const std::vector<s2::Sprite*>& src, 
 								  std::map<std::string, std::vector<ee::Sprite*> >& dst,
 								  std::vector<ee::Sprite*>& others)
 {
 	for (int i = 0, n = src.size(); i < n; ++i)
 	{
-		ee::Sprite* sprite = src[i];
+		ee::Sprite* sprite = static_cast<ee::Sprite*>(src[i]->GetUD());
 		if (sprite->tag.empty())
 		{
 			others.push_back(sprite);

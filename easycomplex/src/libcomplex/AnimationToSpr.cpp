@@ -32,10 +32,10 @@ ee::Sprite* AnimationToSpr::TransComplex(const erespacker::PackAnimation* anim)
 		const erespacker::PackAnimation::Part& part = src.parts[i];
 		ee::Sprite* spr = NodeToSprite::Trans(anim->components[part.comp_idx].node);
 		TransSprite(spr, part.t);
-		dst->m_sprites.push_back(spr);
+		dst->Add(spr);
 	}
 	dst->InitBounding();
-	complex->m_sprites.push_back(new Sprite(dst));
+	complex->Add(new Sprite(dst));
 	complex->InitBounding();
 	return new Sprite(complex);
 }

@@ -1,6 +1,8 @@
 #ifndef _EASYDB_GRAPHICS_H_
 #define _EASYDB_GRAPHICS_H_
 
+#include <SM_Vector.h>
+
 #include <vector>
 #include <map>
 

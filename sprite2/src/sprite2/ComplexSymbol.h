@@ -11,11 +11,14 @@ namespace s2
 class ComplexSymbol : public Symbol
 {
 public:
-	ComplexSymbol();
+	ComplexSymbol(void* ud);
 
 	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const;
 
 	const std::vector<Sprite*>& GetChildren() const { return m_children; }
+
+	void Add(Sprite* spr);
+	void Clear();
 
 private:
 	std::vector<Sprite*> m_children;

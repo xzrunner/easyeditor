@@ -11,7 +11,7 @@ class Particle3dSymbol;
 class Particle3dSprite : public Sprite
 {
 public:
-	Particle3dSprite();
+	Particle3dSprite(void* ud);
 	
 	virtual bool Update(float dt) { return false; }
 	

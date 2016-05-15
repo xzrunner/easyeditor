@@ -16,7 +16,7 @@ ee::Sprite* PictureToSpr::Trans(const erespacker::PackPicture* pic)
 	} else if (pic->quads.size() > 1) {
 		ecomplex::Symbol* complex = new ecomplex::Symbol;
 		for (int i = 0, n = pic->quads.size(); i < n; ++i) {
-			complex->m_sprites.push_back(TransQuad(&pic->quads[i]));
+			complex->Add(TransQuad(&pic->quads[i]));
 		}
 		complex->InitBounding();
 		return new Sprite(complex);

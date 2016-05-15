@@ -13,6 +13,8 @@
 #include <easyanim.h>
 #include <easyscale9.h>
 
+#include <sprite2/Sprite.h>
+
 namespace ecoco
 {
 namespace epe
@@ -35,21 +37,20 @@ void CocoPacker::pack(const std::vector<const ee::Symbol*>& symbols)
 		const ee::Symbol* symbol = symbols[i];
 		if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(symbol))
 		{
-			for (size_t i = 0, n = complex->m_sprites.size(); i < n; ++i)
-			{
-				ee::Sprite* sprite = complex->m_sprites[i];
-				if (ee::ImageSprite* image = dynamic_cast<ee::ImageSprite*>(sprite))
+			const std::vector<s2::Sprite*>& children = complex->GetChildren();
+			for (int i = 0, n = children.size(); i < n; ++i) {
+				ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+				if (ee::ImageSprite* image = dynamic_cast<ee::ImageSprite*>(child))
 				{
-					m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
+					m_mapSpriteID.insert(std::make_pair(child, m_id++));
 					resolvePicture(image);
 				}
-				else if (ee::FontBlankSprite* font = dynamic_cast<ee::FontBlankSprite*>(sprite))
+				else if (ee::FontBlankSprite* font = dynamic_cast<ee::FontBlankSprite*>(child))
 				{
-					m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
+					m_mapSpriteID.insert(std::make_pair(child, m_id++));
 					resolveFont(font);
 				}
 			}
-
 			m_mapSymbolID.insert(std::make_pair(symbol, m_id++));
 			resolveAnimation(complex);
 		}
@@ -372,14 +373,18 @@ void CocoPacker::resolveAnimation(const ecomplex::Symbol* symbol)
 	std::vector<std::pair<int, std::string> > order;
 	{
 		lua::TableAssign ta(m_gen, "component", true);
-		for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
-			resolveSpriteForComponent(symbol->m_sprites[i], ids, unique, order);
+		const std::vector<s2::Sprite*>& children = symbol->GetChildren();
+		for (int i = 0, n = children.size(); i < n; ++i) {
+			ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+			resolveSpriteForComponent(child, ids, unique, order);
+		}
 	}
 
 	// children
 	std::map<std::string, std::vector<ee::Sprite*> > map_actions;
 	std::vector<ee::Sprite*> others;
-	Utility::GroupSpritesFromTag(symbol->m_sprites, map_actions, others);
+	const std::vector<s2::Sprite*>& children = symbol->GetChildren();
+	Utility::GroupSpritesFromTag(children, map_actions, others);
 	if (!map_actions.empty())
 	{
 		std::map<std::string, std::vector<ee::Sprite*> >::iterator itr;
@@ -393,9 +398,11 @@ void CocoPacker::resolveAnimation(const ecomplex::Symbol* symbol)
 				for (size_t i = 0, n = itr->second.size(); i < n; ++i)
 				{
 					int idx = -1;
-					for (idx = 0; idx < symbol->m_sprites.size(); ++idx)
-						if (symbol->m_sprites[idx] == itr->second[i])
+					for (idx = 0; idx < children.size(); ++idx) {
+						ee::Sprite* child = static_cast<ee::Sprite*>(children[idx]->GetUD());
+						if (child == itr->second[i])
 							break;
+					}
 					resolveSpriteForFrame(itr->second[i], idx, ids, order);
 				}
 			}
@@ -410,9 +417,11 @@ void CocoPacker::resolveAnimation(const ecomplex::Symbol* symbol)
 			for (size_t i = 0, n = others.size(); i < n; ++i)
 			{
 				int idx = -1;
-				for (idx = 0; idx < symbol->m_sprites.size(); ++idx)
-					if (symbol->m_sprites[idx] == others[i])
+				for (idx = 0; idx < children.size(); ++idx) {
+					ee::Sprite* child = static_cast<ee::Sprite*>(children[idx]->GetUD());
+					if (child == others[i])
 						break;
+				}
 				resolveSpriteForFrame(others[i], idx, ids, order);
 			}
 		}
