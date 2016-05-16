@@ -324,7 +324,9 @@ void ViewlistList::SelectSet(SpriteSelection* set)
 	set->Traverse(FetchAllVisitor<Sprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		int idx = QuerySprIdx(sprites[i]);
-		VerticalImageList::Select(idx, true);
+		if (idx >= 0) {
+			VerticalImageList::Select(idx, true);
+		}
 	}
 }
 
