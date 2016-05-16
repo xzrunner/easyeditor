@@ -8,13 +8,13 @@ namespace ee
 DummySprite::DummySprite()
 	: m_symbol(NULL)
 {
-	m_core = new s2::DummySprite(this);
+	m_core = new s2::DummySprite();
 }
 
 DummySprite::DummySprite(Symbol* symbol) 
 	: m_symbol(symbol) 
 {
-	m_core = new s2::DummySprite(this);
+	m_core = new s2::DummySprite();
 	m_symbol->Retain();
 }
 

@@ -10,7 +10,7 @@ namespace eanim3d
 Sprite::Sprite()
 	: m_symbol(NULL)
 {
-	m_core = new s2::DummySprite(this);
+	m_core = new s2::DummySprite();
 }
 
 Sprite::Sprite(const Sprite& sprite)
@@ -25,7 +25,7 @@ Sprite::Sprite(const Sprite& sprite)
 Sprite::Sprite(Symbol* symbol)
 	: m_symbol(symbol)
 {
-	m_core = new s2::DummySprite(this);
+	m_core = new s2::DummySprite();
 
 	m_symbol->Retain();
 	BuildBounding();	

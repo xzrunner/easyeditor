@@ -12,7 +12,7 @@ Sprite::Sprite()
 	: m_symbol(NULL)
 	, m_process(1)
 {
-	m_core = new s2::DummySprite(this);
+	m_core = new s2::DummySprite();
 }
 
 Sprite::Sprite(const Sprite& sprite)
@@ -29,7 +29,7 @@ Sprite::Sprite(Symbol* symbol)
 	: m_symbol(symbol)
 	, m_process(1)
 {
-	m_core = new s2::DummySprite(this);
+	m_core = new s2::DummySprite();
 
 	m_symbol->Retain();
 	BuildBounding();	

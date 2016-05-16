@@ -9,6 +9,8 @@ namespace s2
 class DummySprite : public Sprite
 {
 public:
+	DummySprite() : Sprite(NULL) {}
+
 	virtual bool Update(float dt) { return false; }
 
 }; // DummySprite

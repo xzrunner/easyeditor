@@ -16,7 +16,7 @@ FontBlankSprite::FontBlankSprite()
 	: m_symbol(NULL)
 	, font_color(0xffffffff)
 {
-	m_core = new s2::DummySprite(this);
+	m_core = new s2::DummySprite();
 
 	font = "";
 	has_edge = false;
@@ -48,7 +48,7 @@ FontBlankSprite::FontBlankSprite(const FontBlankSprite& sprite)
 FontBlankSprite::FontBlankSprite(FontBlankSymbol* symbol)
 	: m_symbol(symbol)
 {
-	m_core = new s2::DummySprite(this);
+	m_core = new s2::DummySprite();
 
 	m_symbol->Retain();
 	font = m_symbol->font;
