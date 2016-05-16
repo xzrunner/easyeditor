@@ -1,6 +1,8 @@
 #ifndef _SPRITE2_SYMBOL_H_
 #define _SPRITE2_SYMBOL_H_
 
+#include "Object.h"
+
 #include <stddef.h>
 
 namespace s2
@@ -9,7 +11,7 @@ namespace s2
 class RenderParams;
 class Sprite;
 
-class Symbol
+class Symbol : public Object
 {
 public:
 	Symbol(void* ud) : m_ud(ud) {}

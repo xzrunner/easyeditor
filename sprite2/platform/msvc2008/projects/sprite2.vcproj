@@ -377,6 +377,14 @@
 				</File>
 			</Filter>
 		</Filter>
+		<Filter
+			Name="utility"
+			>
+			<File
+				RelativePath="..\..\..\src\sprite2\Object.h"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

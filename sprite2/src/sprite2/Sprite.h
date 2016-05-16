@@ -5,13 +5,14 @@
 #include "RenderColor.h"
 #include "RenderShader.h"
 #include "RenderCamera.h"
+#include "Object.h"
 
 #include <SM_Vector.h>
 
 namespace s2
 {
 
-class Sprite
+class Sprite : public Object
 {
 public:
 	Sprite(void* ud);
