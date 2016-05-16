@@ -231,8 +231,16 @@ p3d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
 		dst.angle = src.angle;
 		dst.angle_var = src.angle_var;
 
-		memcpy(&dst.col_mul.r, &src.col_mul.r, sizeof(src.col_mul));
-		memcpy(&dst.col_add.r, &src.col_add.r, sizeof(src.col_add));
+		dst.col_mul.r = src.col_mul.r / 255.0f;
+		dst.col_mul.g = src.col_mul.g / 255.0f;
+		dst.col_mul.b = src.col_mul.b / 255.0f;
+		dst.col_mul.a = src.col_mul.a / 255.0f;
+
+		dst.col_add.r = src.col_add.r / 255.0f;
+		dst.col_add.g = src.col_add.g / 255.0f;
+		dst.col_add.b = src.col_add.b / 255.0f;
+		dst.col_add.a = src.col_add.a / 255.0f;
+
 		dst.alpha_start = src.alpha_start * 0.01f;
 		dst.alpha_end = src.alpha_end * 0.01f;
 

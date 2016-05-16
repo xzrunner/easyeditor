@@ -73,10 +73,20 @@ render_func(void* symbol, float* mat, float x, float y, float angle, float scale
 	ee::Symbol* sym = static_cast<ee::Symbol*>(symbol);
 
 	s2::RenderParams params;
-	memcpy(&params.color.mul, mul_col, sizeof(*mul_col));
-	memcpy(&params.color.add, add_col, sizeof(*add_col));
+
+	params.color.mul.r = (int)(mul_col->r * 255.0f + 0.5f);
+	params.color.mul.g = (int)(mul_col->g * 255.0f + 0.5f);
+	params.color.mul.b = (int)(mul_col->b * 255.0f + 0.5f);
+	params.color.mul.a = (int)(mul_col->a * 255.0f + 0.5f);
+
+	params.color.add.r = (int)(add_col->r * 255.0f + 0.5f);
+	params.color.add.g = (int)(add_col->g * 255.0f + 0.5f);
+	params.color.add.b = (int)(add_col->b * 255.0f + 0.5f);
+	params.color.add.a = (int)(add_col->a * 255.0f + 0.5f);
+
 	params.color.mul = params.color.mul * rp->ct.mul;
 	params.color.add = params.color.add + rp->ct.add;
+
 	// todo color trans
 
 	sm::mat4 mt = rp->mat;
