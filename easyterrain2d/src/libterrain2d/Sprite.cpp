@@ -8,13 +8,13 @@ namespace eterrain2d
 Sprite::Sprite()
 	: m_symbol(NULL)
 {
-	m_core = new s2::DummySprite();
+	m_core = new s2::DummySprite(this);
 }
 
 Sprite::Sprite(const Sprite& s)
 	: ee::Sprite(s)
 {
-	m_core = new s2::DummySprite();
+	m_core = new s2::DummySprite(this);
 
 	m_symbol = s.m_symbol->Clone();
 }
@@ -22,7 +22,7 @@ Sprite::Sprite(const Sprite& s)
 Sprite::Sprite(Symbol* symbol)
 	: m_symbol(symbol)
 {
-	m_core = new s2::DummySprite();
+	m_core = new s2::DummySprite(this);
 
 //	rotate(-m_symbol->GetOceanAngle());
 	m_symbol->Retain();

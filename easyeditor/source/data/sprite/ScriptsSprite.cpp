@@ -10,13 +10,13 @@ namespace ee
 ScriptsSprite::ScriptsSprite()
 	: m_symbol(NULL)
 {
-	m_core = new s2::DummySprite();
+	m_core = new s2::DummySprite(this);
 }
 
 ScriptsSprite::ScriptsSprite(ScriptsSymbol* symbol)
 	: m_symbol(symbol)
 {
-	m_core = new s2::DummySprite();
+	m_core = new s2::DummySprite(this);
 
 	m_symbol->Retain();
 	scripts_do_string(symbol->GetContent().c_str());
