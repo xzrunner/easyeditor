@@ -81,10 +81,12 @@ bool Bitmap::LoadFromFile(const std::string& filepath)
 		Symbol* symbol = SymbolMgr::Instance()->FetchSymbol(filepath);
 		Rect rect = symbol->GetSize();
 		float w = std::max(1.0f, rect.Width()),
-			h = std::max(1.0f, rect.Height());
+			  h = std::max(1.0f, rect.Height());
 		float scale = w > (MAX_WIDTH / SCALE) ? (MAX_WIDTH / w) : SCALE; 
 		w *= scale;
 		h *= scale;
+		w = std::max(1.0f, w);
+		h = std::max(1.0f, h);
 
 		Snapshoot ss(w, h);
 		unsigned char* rgba = ss.OutputToMemory(symbol, true, scale);
