@@ -5,6 +5,8 @@
 #include <ee/std_functor.h>
 #include <ee/Sprite.h>
 
+#include <sprite2/Sprite.h>
+
 #include <algorithm>
 
 #include <assert.h>
@@ -28,19 +30,21 @@ void Utility::DrawAnimSymbol(const Symbol* symbol,
 
 void Utility::GetCurrSprites(const Symbol* symbol, int index, std::vector<ee::Sprite*>& sprites)
 {
-	for (size_t i = 0, n = symbol->m_layers.size(); i < n; ++i)
+	const std::vector<s2::AnimSymbol::Layer*>& layers = symbol->GetLayers();
+	for (size_t i = 0, n = layers.size(); i < n; ++i)
 	{
-		Symbol::Layer* layer = symbol->m_layers[i];
+		s2::AnimSymbol::Layer* layer = layers[i];
 
-		Symbol::Frame *curr_f = GetCurrFrame(layer, index),
-			          *next_f = GetNextFrame(layer, index);
+		s2::AnimSymbol::Frame *curr_f = GetCurrFrame(layer, index),
+			                  *next_f = GetNextFrame(layer, index);
 		if (!curr_f)
 			continue;
 
-		if (!curr_f->bClassicTween || !next_f)
+		if (!curr_f->tween || !next_f)
 		{
 			for (size_t i = 0, n = curr_f->sprites.size(); i < n; ++i) {
-				sprites.push_back(curr_f->sprites[i]->Clone());	
+				ee::Sprite* spr = static_cast<ee::Sprite*>(curr_f->sprites[i]->GetUD());
+				sprites.push_back(spr->Clone());	
 			}
 		}
 		else
@@ -52,13 +56,13 @@ void Utility::GetCurrSprites(const Symbol* symbol, int index, std::vector<ee::Sp
 	}
 }
 
-Symbol::Frame* Utility::GetCurrFrame(Symbol::Layer* layer, int index)
+s2::AnimSymbol::Frame* Utility::GetCurrFrame(s2::AnimSymbol::Layer* layer, int index)
 {
 	if (layer->frames.empty()) return NULL;
 
-	Symbol::Frame *prev = NULL, *curr = NULL;
+	s2::AnimSymbol::Frame *prev = NULL, *curr = NULL;
 	for (size_t i = 0, n = layer->frames.size(); i < n; ++i) {
-		Symbol::Frame* frame = layer->frames[i];
+		s2::AnimSymbol::Frame* frame = layer->frames[i];
 		if (frame->index >= index) {
 			curr = frame;
 			break;
@@ -79,11 +83,11 @@ Symbol::Frame* Utility::GetCurrFrame(Symbol::Layer* layer, int index)
 	}
 }
 
-Symbol::Frame* Utility::GetNextFrame(Symbol::Layer* layer, int index)
+s2::AnimSymbol::Frame* Utility::GetNextFrame(s2::AnimSymbol::Layer* layer, int index)
 {
 	for (size_t i = 0, n = layer->frames.size(); i < n; ++i)
 	{
-		Symbol::Frame* frame = layer->frames[i];
+		s2::AnimSymbol::Frame* frame = layer->frames[i];
 		if (frame->index > index)
 			return frame;
 	}

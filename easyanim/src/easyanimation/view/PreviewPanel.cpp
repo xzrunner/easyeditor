@@ -22,7 +22,7 @@ bool PreviewPanel::Update(float dt)
 	PreviewUtility::GetCurrSprites(m_ctrl, sprites);
 
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		sprites[i]->Update(version);
+		sprites[i]->Update(dt);
 	}
 
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {

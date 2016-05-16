@@ -4,6 +4,7 @@
 #include <vector>
 
 namespace ee { class Sprite; }
+namespace s2 { class Sprite; }
 
 namespace eanim
 {
@@ -11,6 +12,9 @@ namespace eanim
 class TweenUtility
 {
 public:
+	static void GetTweenSprites(const std::vector<s2::Sprite*>& start, 
+		const std::vector<s2::Sprite*>& end, 
+		std::vector<ee::Sprite*>& tween, float process);
 	static void GetTweenSprites(const std::vector<ee::Sprite*>& start, 
 		const std::vector<ee::Sprite*>& end, 
 		std::vector<ee::Sprite*>& tween, float process);

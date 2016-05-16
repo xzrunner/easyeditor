@@ -44,9 +44,9 @@ Joint::~Joint()
 
 void Joint::Draw() const
 {
-	ee::RVG::Color(s2::Color(0.2f, 0.8f, 0.2f, 0.5f));
+	ee::RVG::Color(s2::Color(51, 204, 51, 128));
 	ee::RVG::Circle(GetWorldPos(), REGION, true);
-	ee::RVG::Color(s2::Color(0.8f, 0.2f, 0.2f, 0.5f));
+	ee::RVG::Color(s2::Color(204, 51, 51, 128));
 	ee::RVG::Circle(GetWorldPos(), REGION, false);
 	if (m_parent)
 	{
@@ -58,7 +58,7 @@ void Joint::Draw() const
 		sm::vec2 left = mid + ee::Math2D::RotateVectorRightAngle(s - mid, false);
 		sm::vec2 right = mid + ee::Math2D::RotateVectorRightAngle(s - mid, true);
 
-		ee::RVG::Color(s2::Color(0.8f, 0.2f, 0.2f, 0.5f));
+		ee::RVG::Color(s2::Color(204, 51, 51, 128));
 		ee::RVG::Line(s, left);
 		ee::RVG::Line(left, e);
 		ee::RVG::Line(e, right);

@@ -18,8 +18,8 @@ public:
 	static void GetCurrSprites(const Symbol* symbol, int index, std::vector<ee::Sprite*>& sprites);
 
 private:
-	static Symbol::Frame* GetCurrFrame(Symbol::Layer* layer, int index);
-	static Symbol::Frame* GetNextFrame(Symbol::Layer* layer, int index);
+	static s2::AnimSymbol::Frame* GetCurrFrame(s2::AnimSymbol::Layer* layer, int index);
+	static s2::AnimSymbol::Frame* GetNextFrame(s2::AnimSymbol::Layer* layer, int index);
 
 }; // Utility
 

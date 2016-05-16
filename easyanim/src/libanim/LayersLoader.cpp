@@ -11,21 +11,21 @@ namespace eanim
 
 void LayersLoader::LoadLayers(const Json::Value& value, 
 							  const std::string& dir, 
-							  std::vector<Symbol::Layer*>& layers) const
+							  std::vector<s2::AnimSymbol::Layer*>& layers) const
 {
 	int i = 0;
 	Json::Value layer_val = value["layer"][i++];
 	while (!layer_val.isNull()) {
-		Symbol::Layer* dst_layer = new Symbol::Layer;
+		s2::AnimSymbol::Layer* dst_layer = new s2::AnimSymbol::Layer;
 		dst_layer->name = layer_val["name"].asString();
 		// frames
 		int j = 0;
 		Json::Value frame_val = layer_val["frame"][j++];
 		while (!frame_val.isNull()) {
-			Symbol::Frame* dst_frame = new Symbol::Frame;
+			s2::AnimSymbol::Frame* dst_frame = new s2::AnimSymbol::Frame;
 			//dstFrame->id = frameValue["id"].asInt();
 			dst_frame->index = frame_val["time"].asInt();
-			dst_frame->bClassicTween = frame_val["tween"].asBool();
+			dst_frame->tween = frame_val["tween"].asBool();
 			// sprites
 			int k = 0;
 			Json::Value spr_val = frame_val["actor"][k++];
@@ -42,7 +42,7 @@ void LayersLoader::LoadLayers(const Json::Value& value,
 				ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 				symbol->Release();
 				sprite->Load(spr_val);
-				dst_frame->sprites.push_back(sprite);
+				dst_frame->sprites.push_back(sprite->GetCore());
 				spr_val = frame_val["actor"][k++];
 			}
 			dst_layer->frames.push_back(dst_frame);

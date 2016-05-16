@@ -28,6 +28,7 @@ Symbol::Symbol()
 	, m_render_version(0)
 	, m_render_cache_open(true)
 {
+	this->Retain();
 	m_core = new s2::ComplexSymbol(this);
 
 	static int id = 0;
@@ -43,6 +44,7 @@ Symbol::Symbol(const Symbol& sym)
 	, m_render_version(sym.m_render_version)
 	, m_render_cache_open(sym.m_render_cache_open)
 {
+	this->Retain();
 	m_core = new s2::ComplexSymbol(*sym.m_core);
 }
 
@@ -50,6 +52,7 @@ Symbol::~Symbol()
 {
 	Clear();
 
+	this->Release();
 	delete m_core;
 }
 

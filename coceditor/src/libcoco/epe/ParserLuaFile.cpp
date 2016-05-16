@@ -380,16 +380,16 @@ void ParserLuaFile::transAniToFiles(const std::string& outfloder)
 void ParserLuaFile::transAniToAnimationFile(const std::string& outfloder, int id, Animation* ani)
 {
 	eanim::Symbol* symbol = new eanim::Symbol;
-	eanim::Symbol::Layer* layer = new eanim::Symbol::Layer;
+	s2::AnimSymbol::Layer* layer = new s2::AnimSymbol::Layer;
 	symbol->name = ani->export_name;
 	symbol->setFPS(30);
 	for (int i = 0, n = ani->frames.size(); i < n; ++i)
 	{
 		//				std::cout << "frame: [" << i << "/" << ani->frames.size() << "]" << std::endl;
 
-		eanim::Symbol::Frame* frame = new eanim::Symbol::Frame;
+		s2::AnimSymbol::Frame* frame = new s2::AnimSymbol::Frame;
 		frame->index = i+1;
-		frame->bClassicTween = false;
+		frame->tween = false;
 		for (int j = 0, m = ani->frames[i].size(); j < m; ++j)
 		{
 			//					std::cout << "item: [" << j << "/" << ani->frames[i].size() << "]" << std::endl;
@@ -410,11 +410,11 @@ void ParserLuaFile::transAniToAnimationFile(const std::string& outfloder, int id
 				sprite = new ee::DummySprite(new ee::DummySymbol(ani->filename));
 			}
 			item->transform(sprite);
-			frame->sprites.push_back(sprite);
+			frame->sprites.push_back(sprite->GetCore());
 		}
 		layer->frames.push_back(frame);
 	}
-	symbol->m_layers.push_back(layer);
+	symbol->AddLayer(layer);
 
 	std::stringstream ss;
 	if (symbol->name.empty()) {
@@ -532,16 +532,16 @@ void ParserLuaFile::transAniToMemory()
 void ParserLuaFile::transAniToAnimationMemory(int id, Animation* ani)
 {
 	eanim::Symbol* symbol = new eanim::Symbol;
-	eanim::Symbol::Layer* layer = new eanim::Symbol::Layer;
+	s2::AnimSymbol::Layer* layer = new s2::AnimSymbol::Layer;
 	symbol->name = ani->export_name;
 	symbol->setFPS(30);
 	for (int i = 0, n = ani->frames.size(); i < n; ++i)
 	{
 		// std::cout << "frame: [" << i << "/" << ani->frames.size() << "]" << std::endl;
 
-		eanim::Symbol::Frame* frame = new eanim::Symbol::Frame;
+		s2::AnimSymbol::Frame* frame = new s2::AnimSymbol::Frame;
 		frame->index = i + 1;
-		frame->bClassicTween = false;
+		frame->tween = false;
 		for (int j = 0, m = ani->frames[i].size(); j < m; ++j)
 		{
 			// std::cout << "item: [" << j << "/" << ani->frames[i].size() << "]" << std::endl;
@@ -564,11 +564,11 @@ void ParserLuaFile::transAniToAnimationMemory(int id, Animation* ani)
 				sprite = ee::SpriteFactory::Instance()->Create(itr->second);
 			}
 			item->transform(sprite);
-			frame->sprites.push_back(sprite);
+			frame->sprites.push_back(sprite->GetCore());
 		}
 		layer->frames.push_back(frame);
 	}
-	symbol->m_layers.push_back(layer);
+	symbol->AddLayer(layer);
 
 	// todo filepath
 	//symbol->InitThumbnail();

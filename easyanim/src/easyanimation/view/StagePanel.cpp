@@ -56,7 +56,7 @@ bool StagePanel::Update(float dt)
 		return true;
 	}
 
-	CheckUpdateVisitor visitor(version);
+	CheckUpdateVisitor visitor(dt);
 	TraverseSprites(visitor, ee::DT_ALL, true);
 	if (visitor.NeedUpdate()) {
 		dirty = true;
@@ -256,8 +256,8 @@ void StagePanel::InsertWithoutUD(ee::Sprite* spr)
 //////////////////////////////////////////////////////////////////////////
 
 StagePanel::CheckUpdateVisitor::
-CheckUpdateVisitor(int version) 
-	: m_version(version)
+CheckUpdateVisitor(float dt) 
+	: m_dt(dt)
 	, m_update(false) 
 {}
 
@@ -265,7 +265,7 @@ void StagePanel::CheckUpdateVisitor::
 Visit(ee::Object* object, bool& next)
 {
 	ee::Sprite* spr = static_cast<ee::Sprite*>(object);
-	if (spr->Update(m_version)) {
+	if (spr->Update(m_dt)) {
 		m_update = true;
 		next = false;
 	} else {

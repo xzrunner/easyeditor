@@ -17,6 +17,10 @@ public:
 
 	const std::vector<Sprite*>& GetChildren() const { return m_children; }
 
+	/**
+	 *  @note
+	 *    api for dynamic change
+	 */
 	bool Add(Sprite* spr, int idx = -1);
 	bool Remove(Sprite* spr);
 	bool Clear();

@@ -57,15 +57,16 @@ void CocoPacker::pack(const std::vector<const ee::Symbol*>& symbols)
 		else if (const eanim::Symbol* anim = dynamic_cast<const eanim::Symbol*>(symbol))
 		{
 			std::set<const ee::ImageSymbol*> unique;
-			for (size_t i = 0, n = anim->m_layers.size(); i < n; ++i)
+			const std::vector<s2::AnimSymbol::Layer*>& layers = anim->GetLayers();
+			for (size_t i = 0, n = layers.size(); i < n; ++i)
 			{
-				eanim::Symbol::Layer* layer = anim->m_layers[i];
+				s2::AnimSymbol::Layer* layer = layers[i];
 				for (size_t j = 0, m = layer->frames.size(); j < m; ++j)
 				{
-					eanim::Symbol::Frame* frame = layer->frames[j];
+					s2::AnimSymbol::Frame* frame = layer->frames[j];
 					for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
 					{
-						ee::Sprite* sprite = frame->sprites[k];
+						ee::Sprite* sprite = static_cast<ee::Sprite*>(frame->sprites[k]->GetUD());
 						if (ee::ImageSprite* image = dynamic_cast<ee::ImageSprite*>(sprite))
 							unique.insert(&image->GetSymbol());
 						else if (ee::FontBlankSprite* font = dynamic_cast<ee::FontBlankSprite*>(sprite))
@@ -451,16 +452,17 @@ void CocoPacker::resolveAnimation(const eanim::Symbol* symbol)
 	std::vector<std::pair<int, std::string> > order;
 	{
 		lua::TableAssign ta(m_gen, "component", true);
+		const std::vector<s2::AnimSymbol::Layer*>& layers = symbol->GetLayers();
 		for (size_t i = 0, n = symbol->getMaxFrameIndex(); i < n; ++i)
 		{
-			for (size_t j = 0, m = symbol->m_layers.size(); j < m; ++j)
+			for (size_t j = 0, m = layers.size(); j < m; ++j)
 			{
-				eanim::Symbol::Layer* layer = symbol->m_layers[j];
+				s2::AnimSymbol::Layer* layer = layers[j];
 				if (i < layer->frames.size())
 				{
-					eanim::Symbol::Frame* frame = layer->frames[i];
+					s2::AnimSymbol::Frame* frame = layer->frames[i];
 					for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
-						resolveSpriteForComponent(frame->sprites[k], ids, unique, order);
+						resolveSpriteForComponent(static_cast<ee::Sprite*>(frame->sprites[k]->GetUD()), ids, unique, order);
 				}
 			}
 		}

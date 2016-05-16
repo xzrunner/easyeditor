@@ -45,22 +45,22 @@ ee::Sprite* AnimationToSpr::TransAnim(const erespacker::PackAnimation* anim)
 	assert(!anim->actions.empty() && anim->actions[0].size >= 1);
 
 	eanim::Symbol* anim_symbol = new eanim::Symbol;
-	eanim::Symbol::Layer* layer = new eanim::Symbol::Layer;
+	s2::AnimSymbol::Layer* layer = new s2::AnimSymbol::Layer;
 	for (int i = 0; i < anim->actions[0].size; ++i) {
 		const erespacker::PackAnimation::Frame& src = anim->frames[i];
-		eanim::Symbol::Frame* frame = new eanim::Symbol::Frame;
+		s2::AnimSymbol::Frame* frame = new s2::AnimSymbol::Frame;
 		frame->index = i;
-		frame->bClassicTween = false;
+		frame->tween = false;
 		for (int j = 0, m = src.parts.size(); j < m; ++j) {
 			const erespacker::PackAnimation::Part& part = src.parts[j];
 			ee::Sprite* spr = NodeToSprite::Trans(anim->components[part.comp_idx].node);
 			TransSprite(spr, part.t);
-			frame->sprites.push_back(spr);
+			frame->sprites.push_back(spr->GetCore());
 		}
 		layer->frames.push_back(frame);
 	}
 	anim_symbol->setFPS(30);
-	anim_symbol->m_layers.push_back(layer);
+	anim_symbol->AddLayer(layer);
 	anim_symbol->InitBounding();
 	return new eanim::Sprite(anim_symbol);
 }

@@ -81,12 +81,13 @@ void TransOldAnchorFile::TransAnimation(const std::string& filepath) const
 	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	eanim::Symbol* anim = static_cast<eanim::Symbol*>(sym);
 	bool dirty = false;
-	for (int i = 0, n = anim->m_layers.size(); i < n; ++i) {
-		eanim::Symbol::Layer* layer = anim->m_layers[i];
+	const std::vector<s2::AnimSymbol::Layer*>& layers = anim->GetLayers();
+	for (int i = 0, n = layers.size(); i < n; ++i) {
+		s2::AnimSymbol::Layer* layer = layers[i];
 		for (int j = 0, m = layer->frames.size(); j < m; ++j) {
-			eanim::Symbol::Frame* frame = layer->frames[j];
+			s2::AnimSymbol::Frame* frame = layer->frames[j];
 			for (int k = 0, l = frame->sprites.size(); k < l; ++k) {
-				ee::Sprite* spr = frame->sprites[k];
+				ee::Sprite* spr = static_cast<ee::Sprite*>(frame->sprites[k]->GetUD());
 				if (IsAnchor(spr)) {
 					spr->SetAnchor(true);
 					dirty = true;

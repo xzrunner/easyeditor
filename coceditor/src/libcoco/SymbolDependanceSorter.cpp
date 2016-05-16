@@ -53,14 +53,17 @@ void SymbolDependanceSorter::fetch(const std::vector<const ee::Symbol*>& symbols
 		}
 		else if (const eanim::Symbol* anim = dynamic_cast<const eanim::Symbol*>(symbol))
 		{
-			for (size_t i = 0, n = anim->m_layers.size(); i < n; ++i)
+			const std::vector<s2::AnimSymbol::Layer*>& layers = anim->GetLayers();
+			for (size_t i = 0, n = layers.size(); i < n; ++i)
 			{
-				eanim::Symbol::Layer* layer = anim->m_layers[i];
+				s2::AnimSymbol::Layer* layer = layers[i];
 				for (size_t j = 0, m = layer->frames.size(); j < m; ++j)
 				{
-					eanim::Symbol::Frame* frame = layer->frames[j];
-					for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
-						buffer.push(&frame->sprites[k]->GetSymbol());
+					s2::AnimSymbol::Frame* frame = layer->frames[j];
+					for (size_t k = 0, l = frame->sprites.size(); k < l; ++k) {
+						ee::Sprite* spr = static_cast<ee::Sprite*>(frame->sprites[k]->GetUD());
+						buffer.push(&spr->GetSymbol());
+					}
 				}
 			}
 		}
@@ -133,15 +136,16 @@ void SymbolDependanceSorter::fetch(const std::vector<const ee::Symbol*>& symbols
 			if (m_unique.find(anim) == m_unique.end())
 			{
 				m_unique.insert(anim);
-				for (size_t i = 0, n = anim->m_layers.size(); i < n; ++i)
+				const std::vector<s2::AnimSymbol::Layer*>& layers = anim->GetLayers();
+				for (size_t i = 0, n = layers.size(); i < n; ++i)
 				{
-					eanim::Symbol::Layer* layer = anim->m_layers[i];
+					s2::AnimSymbol::Layer* layer = layers[i];
 					for (size_t j = 0, m = layer->frames.size(); j < m; ++j)
 					{
-						eanim::Symbol::Frame* frame = layer->frames[j];
+						s2::AnimSymbol::Frame* frame = layer->frames[j];
 						for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
 						{
-							ee::Sprite* child = frame->sprites[k];
+							ee::Sprite* child = static_cast<ee::Sprite*>(frame->sprites[k]->GetUD());
 							buffer.push(&child->GetSymbol());
 
 							// patch for scale9
@@ -220,15 +224,19 @@ void SymbolDependanceSorter::sort()
 			else if (eanim::Symbol* anim = dynamic_cast<eanim::Symbol*>(symbol))
 			{
 				bool prepared = true;
-				for (size_t i = 0, n = anim->m_layers.size(); i < n && prepared; ++i)
+				const std::vector<s2::AnimSymbol::Layer*>& layers = anim->GetLayers();
+				for (size_t i = 0, n = layers.size(); i < n && prepared; ++i)
 				{
-					eanim::Symbol::Layer* layer = anim->m_layers[i];
+					s2::AnimSymbol::Layer* layer = layers[i];
 					for (size_t j = 0, m = layer->frames.size(); j < m && prepared; ++j)
 					{
-						eanim::Symbol::Frame* frame = layer->frames[j];
-						for (size_t k = 0, l = frame->sprites.size(); k < l && prepared; ++k)
-							if (!IsSymbolPrepared(frame->sprites[k]))
+						s2::AnimSymbol::Frame* frame = layer->frames[j];
+						for (size_t k = 0, l = frame->sprites.size(); k < l && prepared; ++k) {
+							ee::Sprite* spr = static_cast<ee::Sprite*>(frame->sprites[k]->GetUD());
+							if (!IsSymbolPrepared(spr)) {
 								prepared = false;
+							}
+						}
 					}
 				}
 				if (prepared)

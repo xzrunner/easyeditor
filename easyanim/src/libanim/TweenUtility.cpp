@@ -5,21 +5,59 @@
 #include <easymesh.h>
 
 #include <sprite2/RenderColor.h>
+#include <sprite2/Sprite.h>
 
 namespace eanim
 {
 
-void TweenUtility::GetTweenSprites(const std::vector<ee::Sprite*>& start, const std::vector<ee::Sprite*>& end, 
-	std::vector<ee::Sprite*>& tween, float process)
+void TweenUtility::GetTweenSprites(const std::vector<s2::Sprite*>& start, 
+								   const std::vector<s2::Sprite*>& end, 
+								   std::vector<ee::Sprite*>& tween, 
+								   float process)
 {
-	for (size_t i = 0, n = start.size(); i < n; ++i)
+	for (int i = 0, n = start.size(); i < n; ++i)
 	{
-		ee::Sprite *start_spr = start[i], *end_spr = NULL;
-		for (size_t j = 0, m = end.size(); j < m; ++j)
+		ee::Sprite *start_spr = static_cast<ee::Sprite*>(start[i]->GetUD()), 
+			       *end_spr = NULL;
+//		s2::Sprite* s2_start_spr = static_cast<ee::Sprite*>(start_spr->GetUD());
+		for (int j = 0, m = end.size(); j < m; ++j)
 		{
-			if (IsTweenMatched(start_spr, end[j]))
+			ee::Sprite* spr = static_cast<ee::Sprite*>(end[j]->GetUD());
+			if (IsTweenMatched(start_spr, spr))
 			{
-				end_spr = end[j];
+				end_spr = spr;
+				break;
+			}
+		}
+
+		if (end_spr)
+		{
+			ee::Sprite* tween_spr = start_spr->Clone();
+			GetTweenSprite(start_spr, end_spr, tween_spr, process);
+			tween.push_back(tween_spr);
+		}
+		else
+		{
+			tween.push_back(start_spr->Clone());
+		}
+	}
+}
+
+void TweenUtility::GetTweenSprites(const std::vector<ee::Sprite*>& start, 
+								   const std::vector<ee::Sprite*>& end, 
+								   std::vector<ee::Sprite*>& tween, float process)
+{
+	for (int i = 0, n = start.size(); i < n; ++i)
+	{
+		ee::Sprite *start_spr = start[i], 
+			       *end_spr = NULL;
+		//		s2::Sprite* s2_start_spr = static_cast<ee::Sprite*>(start_spr->GetUD());
+		for (int j = 0, m = end.size(); j < m; ++j)
+		{
+			ee::Sprite* spr = end[j];
+			if (IsTweenMatched(start_spr, spr))
+			{
+				end_spr = spr;
 				break;
 			}
 		}

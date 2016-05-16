@@ -3,6 +3,8 @@
 
 #include <ee/Symbol.h>
 
+#include <sprite2/AnimSymbol.h>
+
 #include <vector>
 
 namespace eanim
@@ -12,24 +14,6 @@ class LayersLoader;
 
 class Symbol : public ee::Symbol
 {
-public:
-	struct Frame
-	{
-//		int id;
-		int index;
-		std::vector<ee::Sprite*> sprites;
-		bool bClassicTween;
-	};
-
-	struct Layer
-	{
-		std::string name;
-		std::vector<Frame*> frames;
-
-		Frame* getCurrFrame(int index) const;
-		Frame* getNextFrame(int index) const;
-	};
-
 public:
 	Symbol();
 	virtual ~Symbol();
@@ -59,18 +43,20 @@ public:
 
 	void LoadFromFile(const LayersLoader& loader);
 
+	const std::vector<s2::AnimSymbol::Layer*>& GetLayers() const { return m_core->GetLayers(); }
+	void AddLayer(s2::AnimSymbol::Layer* layer) { m_core->AddLayer(layer); }
+
 	static ee::Symbol* Create() { return new Symbol(); }
 
 protected:
 	virtual void LoadResources();
 
 private:
-	void clear();
-
-public:
-	std::vector<Layer*> m_layers;
+	void Clear();
 
 private:
+	s2::AnimSymbol* m_core;
+
 	ee::Rect m_rect;
 
 	int m_fps;

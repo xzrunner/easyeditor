@@ -1,7 +1,10 @@
 #include "FileSaver.h"
+#include "Symbol.h"
 
 #include <ee/FileHelper.h>
 #include <ee/Sprite.h>
+
+#include <sprite2/Sprite.h>
 
 #include <fstream>
 
@@ -16,9 +19,10 @@ void FileSaver::Store(const std::string& filepath, const Symbol& symbol)
 
 	value["fps"] = symbol.getFPS();
 
+	const std::vector<s2::AnimSymbol::Layer*>& layers = symbol.GetLayers();
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
-	for (size_t i = 0, n = symbol.m_layers.size(); i < n; ++i)
-		Store(value["layer"][i], symbol.m_layers[i], dir);
+	for (size_t i = 0, n = layers.size(); i < n; ++i)
+		Store(value["layer"][i], layers[i], dir);
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -28,23 +32,25 @@ void FileSaver::Store(const std::string& filepath, const Symbol& symbol)
 	fout.close();
 }
 
-void FileSaver::Store(Json::Value& value, Symbol::Layer* layer, const std::string& dir)
+void FileSaver::Store(Json::Value& value, s2::AnimSymbol::Layer* layer, const std::string& dir)
 {
 	value["name"] = layer->name;
 	for (size_t i = 0, n = layer->frames.size(); i < n; ++i)
 		Store(value["frame"][i], layer->frames[i], dir);
 }
 
-void FileSaver::Store(Json::Value& value, Symbol::Frame* frame, const std::string& dir)
+void FileSaver::Store(Json::Value& value, s2::AnimSymbol::Frame* frame, const std::string& dir)
 {
 	value["time"] = frame->index;
 	for (size_t i = 0, n = frame->sprites.size(); i < n; ++i)
 		Store(value["actor"][i], frame->sprites[i], dir);
 }
 
-void FileSaver::Store(Json::Value& value, ee::Sprite* sprite, const std::string& dir)
+void FileSaver::Store(Json::Value& value, s2::Sprite* sprite, const std::string& dir)
 {
-	const ee::Symbol& symbol = sprite->GetSymbol();
+	ee::Sprite* ee_spr = static_cast<ee::Sprite*>(sprite->GetUD());
+
+	const ee::Symbol& symbol = ee_spr->GetSymbol();
 
 	// filepath
 	value["filepath"] = ee::FileHelper::GetRelativePath(dir, symbol.GetFilepath());
@@ -55,7 +61,7 @@ void FileSaver::Store(Json::Value& value, ee::Sprite* sprite, const std::string&
 		value["filepaths"][i] = *itr;
 	}
 	// other
-	sprite->Store(value);
+	ee_spr->Store(value);
 }
 
 } // anim

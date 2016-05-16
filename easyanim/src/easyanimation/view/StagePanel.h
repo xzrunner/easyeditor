@@ -60,14 +60,14 @@ private:
 	class CheckUpdateVisitor : public ee::Visitor
 	{
 	public:
-		CheckUpdateVisitor(int version);
+		CheckUpdateVisitor(float dt);
 
 		virtual void Visit(ee::Object* object, bool& next);
 
 		bool NeedUpdate() const { return m_update; }
 
 	private:
-		int m_version;
+		float m_dt;
 		bool m_update;
 
 	}; // CheckUpdateVisitor

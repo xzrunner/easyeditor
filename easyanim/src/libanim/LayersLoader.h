@@ -3,6 +3,8 @@
 
 #include "Symbol.h"
 
+#include <sprite2/AnimSymbol.h>
+
 #include <json/json.h>
 
 namespace eanim
@@ -12,7 +14,7 @@ class LayersLoader
 {
 public:
 	void LoadLayers(const Json::Value& value, const std::string& dir,
-		std::vector<Symbol::Layer*>& layers) const;
+		std::vector<s2::AnimSymbol::Layer*>& layers) const;
 
 protected:
 	virtual std::string GetSymbolPath(const std::string& dir, 

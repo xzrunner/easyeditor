@@ -9,6 +9,8 @@
 
 #include <easycomplex.h>
 
+#include <sprite2/Sprite.h>
+
 #include <fstream>
 
 namespace eanim
@@ -17,13 +19,19 @@ namespace eanim
 Symbol::Symbol()
 	: m_index(0)
 {
+	this->Retain();
+	m_core = new s2::AnimSymbol(this);
+
 	static int id = 0;
 	m_name = eanim::FILE_TAG + wxVariant(id++);
 }
 
 Symbol::~Symbol()
 {
-	clear();
+	this->Release();
+	delete m_core;
+
+	Clear();
 }
 
 void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
@@ -46,14 +54,17 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 
 void Symbol::ReloadTexture() const
 {
-	for (size_t i = 0, n = m_layers.size(); i < n; ++i)
+	const std::vector<s2::AnimSymbol::Layer*>& layers = m_core->GetLayers();
+	for (int i = 0, n = layers.size(); i < n; ++i)
 	{
-		Layer* layer = m_layers[i];
-		for (size_t j = 0, m = layer->frames.size(); j < m; ++j)
+		s2::AnimSymbol::Layer* layer = layers[i];
+		for (int j = 0, m = layer->frames.size(); j < m; ++j)
 		{
-			Frame* frame = layer->frames[j];
-			for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
-				frame->sprites[k]->GetSymbol().ReloadTexture();
+			s2::AnimSymbol::Frame* frame = layer->frames[j];
+			for (int k = 0, l = frame->sprites.size(); k < l; ++k) {
+				ee::Sprite* spr = static_cast<ee::Sprite*>(frame->sprites[k]->GetUD());
+				spr->GetSymbol().ReloadTexture();
+			}
 		}
 	}
 }
@@ -66,11 +77,13 @@ ee::Rect Symbol::GetSize(const ee::Sprite* sprite/* = NULL*/) const
 size_t Symbol::getMaxFrameIndex() const
 {
 	int index = 0;
-	for (size_t i = 0, n = m_layers.size(); i < n; ++i)
+	const std::vector<s2::AnimSymbol::Layer*>& layers = m_core->GetLayers();
+	for (int i = 0, n = layers.size(); i < n; ++i)
 	{
-		Layer* layer = m_layers[i];
-		for (size_t j = 0, m = layer->frames.size(); j < m; ++j)
+		s2::AnimSymbol::Layer* layer = layers[i];
+		for (int j = 0, m = layer->frames.size(); j < m; ++j) {
 			index = std::max(index, layer->frames[j]->index);
+		}
 	}
 	return index;
 }
@@ -78,16 +91,18 @@ size_t Symbol::getMaxFrameIndex() const
 void Symbol::InitBounding()
 {
 	m_rect.MakeInfinite();
-	for (int i = 0, n = m_layers.size(); i < n; ++i)
+	const std::vector<s2::AnimSymbol::Layer*>& layers = m_core->GetLayers();
+	for (int i = 0, n = layers.size(); i < n; ++i)
 	{
-		Layer* layer = m_layers[i];
+		s2::AnimSymbol::Layer* layer = layers[i];
 		for (int i = 0, n = layer->frames.size(); i < n; ++i)
 		{
-			Frame* frame = layer->frames[i];
+			s2::AnimSymbol::Frame* frame = layer->frames[i];
 			for (int i = 0, n = frame->sprites.size(); i < n; ++i)
 			{
 				std::vector<sm::vec2> vertices;
-				frame->sprites[i]->GetBounding()->GetBoundPos(vertices);
+				ee::Sprite* spr = static_cast<ee::Sprite*>(frame->sprites[i]->GetUD());
+				spr->GetBounding()->GetBoundPos(vertices);
 				for (int i = 0, n = vertices.size(); i < n; ++i) {
 					m_rect.Combine(vertices[i]);
 				}
@@ -98,7 +113,7 @@ void Symbol::InitBounding()
 
 void Symbol::LoadFromFile(const LayersLoader& loader)
 {
-	clear();
+	Clear();
 
 	Json::Value value;
 	Json::Reader reader;
@@ -113,7 +128,11 @@ void Symbol::LoadFromFile(const LayersLoader& loader)
 
 	std::string dir = ee::FileHelper::GetFileDir(m_filepath);
 
-	loader.LoadLayers(value, dir, m_layers);
+	std::vector<s2::AnimSymbol::Layer*> layers;
+	loader.LoadLayers(value, dir, layers);
+	for (int i = 0, n = layers.size(); i < n; ++i) {
+		m_core->AddLayer(layers[i]);
+	}
 
 	InitBounding();
 }
@@ -134,53 +153,23 @@ void Symbol::LoadResources()
 	LoadFromFile(loader);
 }
 
-void Symbol::clear()
+void Symbol::Clear()
 {
-	for (size_t i = 0, n = m_layers.size(); i < n; ++i)
-	{
-		Layer* layer = m_layers[i];
-		for (size_t j = 0, m = layer->frames.size(); j < m; ++j)
-		{
-			Frame* frame = layer->frames[j];
-			for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
-				frame->sprites[k]->Release();
-			delete frame;
-		}
-		delete layer;
-	}
-	m_layers.clear();
+	m_core->Clear();
 
 	m_index = 0;
-}
 
-//////////////////////////////////////////////////////////////////////////
-// class Symbol::Layer
-//////////////////////////////////////////////////////////////////////////
-
-Symbol::Frame* Symbol::Layer::getCurrFrame(int index) const
-{
-	Symbol::Frame* ret = NULL;
-
-	for (size_t i = 0, n = frames.size(); i < n; ++i)
-	{
-		Symbol::Frame* frame = frames[i];
-		if (frame->index <= index)
-			ret = frame;
-		else
-			break;
+	const std::vector<s2::AnimSymbol::Layer*>& layers = m_core->GetLayers();
+	for (int i = 0, n = layers.size(); i < n; ++i) {
+		s2::AnimSymbol::Layer* layer = layers[i];
+		for (int j = 0, m = layer->frames.size(); j < m; ++j) {
+			s2::AnimSymbol::Frame* frame = layer->frames[j];
+			for (int k = 0, l = frame->sprites.size(); k < l; ++k) {
+				ee::Sprite* spr = static_cast<ee::Sprite*>(frame->sprites[k]->GetUD());
+				spr->Release();
+			}
+		}
 	}
-	return ret;
-}
-
-Symbol::Frame* Symbol::Layer::getNextFrame(int index) const
-{
-	for (size_t i = 0, n = frames.size(); i < n; ++i)
-	{
-		Symbol::Frame* frame = frames[i];
-		if (frame->index > index)
-			return frame;
-	}
-	return NULL;
 }
 
 }

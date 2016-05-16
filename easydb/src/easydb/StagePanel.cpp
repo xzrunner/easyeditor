@@ -17,6 +17,8 @@
 #include <easycomplex.h>
 #include <easyanim.h>
 
+#include <sprite2/Sprite.h>
+
 namespace edb
 {
 
@@ -97,15 +99,16 @@ void StagePanel::InitConnection()
 		else if (eanim::Sprite* anim = dynamic_cast<eanim::Sprite*>(from))
 		{
 			const eanim::Symbol& symbol = anim->GetSymbol();
-			for (size_t i = 0, n = symbol.m_layers.size(); i < n; ++i)
+			const std::vector<s2::AnimSymbol::Layer*>& layers = symbol.GetLayers();
+			for (size_t i = 0, n = layers.size(); i < n; ++i)
 			{
-				eanim::Symbol::Layer* layer = symbol.m_layers[i];
+				s2::AnimSymbol::Layer* layer = layers[i];
 				for (size_t i = 0, n = layer->frames.size(); i < n; ++i)
 				{
-					eanim::Symbol::Frame* frame = layer->frames[i];
+					s2::AnimSymbol::Frame* frame = layer->frames[i];
 					for (size_t i = 0, n = frame->sprites.size(); i < n; ++i)
 					{
-						ee::Sprite* child = frame->sprites[i];
+						ee::Sprite* child = static_cast<ee::Sprite*>(frame->sprites[i]->GetUD());
 						for (size_t i = 0, n = sprites.size(); i < n; ++i)
 							if (&child->GetSymbol() == &sprites[i]->GetSymbol())
 								m_graphics.Connect(from, sprites[i]);
