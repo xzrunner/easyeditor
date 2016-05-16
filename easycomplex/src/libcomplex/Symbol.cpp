@@ -207,19 +207,45 @@ void Symbol::LoadResources()
 	FileLoader::Load(m_filepath, this);
 }
 
-void Symbol::Add(ee::Sprite* spr)
+bool Symbol::Add(ee::Sprite* spr, int idx)
 {
-	m_core->Add(spr->GetCore());
+	bool ret = m_core->Add(spr->GetCore(), idx);
+	if (ret) {
+		spr->Retain();
+	}
+	return ret;
 }
 
-void Symbol::Clear()
+bool Symbol::Remove(ee::Sprite* spr)
 {
-	const std::vector<s2::Sprite*>& children = m_core->GetChildren();
-	for (int i = 0, n = children.size(); i < n; ++i) {
-		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
-		child->Release();
+	bool ret = m_core->Remove(spr->GetCore());
+	if (ret) {
+		spr->Release();
 	}
-	m_core->Clear();
+	return ret;
+}
+
+bool Symbol::Clear()
+{
+	bool ret = m_core->Clear();
+	if (ret) {
+		const std::vector<s2::Sprite*>& children = m_core->GetChildren();
+		for (int i = 0, n = children.size(); i < n; ++i) {
+			ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+			child->Release();
+		}
+	}
+	return ret;
+}
+
+bool Symbol::ResetOrder(const ee::Sprite* spr, bool up)
+{
+	return m_core->ResetOrder(spr->GetCore(), up);
+}
+
+bool Symbol::ResetOrderMost(const ee::Sprite* spr, bool up)
+{
+	return m_core->ResetOrderMost(spr->GetCore(), up);
 }
 
 const std::vector<s2::Sprite*>& Symbol::GetChildren() const

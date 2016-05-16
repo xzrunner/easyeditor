@@ -39,8 +39,11 @@ public:
 
 	void InitBounding();
 
-	void Add(ee::Sprite* spr);
-	void Clear();
+	bool Add(ee::Sprite* spr, int idx = -1);
+	bool Remove(ee::Sprite* spr);
+	bool Clear();
+	bool ResetOrder(const ee::Sprite* spr, bool up);
+	bool ResetOrderMost(const ee::Sprite* spr, bool up);
 
 	const std::vector<s2::Sprite*>& GetChildren() const;
 
@@ -61,8 +64,6 @@ public:
 
 	// todo: 
 public:
-//	std::vector<ee::Sprite*> m_sprites;
-
 	std::vector<Group> m_groups;
 
 	ee::Rect m_rect;
