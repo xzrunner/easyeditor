@@ -110,9 +110,13 @@ std::string AnimToComplexWithColor::ParserTrans(const std::string& str, struct T
 				t.type |= CC_B;
 			}
 			++ptr;
-			ee::StringHelper::FromString(token[ptr++], col->r);
-			ee::StringHelper::FromString(token[ptr++], col->g);
-			ee::StringHelper::FromString(token[ptr++], col->b);
+			int r, g, b;
+			ee::StringHelper::FromString(token[ptr++], r);
+			ee::StringHelper::FromString(token[ptr++], g);
+			ee::StringHelper::FromString(token[ptr++], b);
+			col->r = r;
+			col->g = g;
+			col->b = b;
 		} 
 		else 
 		{
