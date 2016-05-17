@@ -3,21 +3,54 @@
 
 #include "Symbol.h"
 
+#include <SM_Vector.h>
+
 #include <stdint.h>
 
 namespace s2
 {
 
+class Texture;
+
 class ImageSymbol : public Symbol
 {
 public:
-	ImageSymbol(void* ud);
+	struct Quad
+	{
+		uint16_t xmin, ymin;
+		uint16_t xmax, ymax;
+	}; // Quad
+
+public:
+	ImageSymbol(void* ud,
+				void  (*query_texcoords)(void* ud, float* texcoords, int* texid),
+				void  (*proj2screen)(float px, float py, int w, int h, float* sx, float* sy), 
+				bool  (*is_ortho_cam)(),
+				void  (*get_screen_size)(int* w, int* h),
+				float (*get_p3d_cam_angle)(),
+				int   (*get_screen_cache_texid)());
 
 	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const;
 
+	void InitTex(Texture* tex, const Quad& quad, float xoff, float yoff);
+
+private:
+	void DrawBlend(const RenderParams& params, sm::vec2* vertices, float* texcoords, int texid) const;
+	void DrawOrtho(const RenderParams& params, sm::vec2* vertices, float* texcoords, int texid) const;
+	void DrawPseudo3D(const RenderParams& params, sm::vec2* vertices, float* texcoords, int texid) const;
+
 protected:
-	uint32_t m_tex_id;
-	uint16_t m_xmin, m_ymin, m_xmax, m_ymax;
+	Texture* m_tex;
+
+	Quad m_quad;
+	float m_xoff, m_yoff;
+
+	void  (*m_query_texcoords)(void* ud, float* texcoords, int* texid);
+	void  (*m_proj2screen)(float px, float py, int w, int h, float* sx, float* sy);
+	bool  (*m_is_ortho_cam)();
+	void  (*m_get_screen_size)(int* w, int* h);
+	float (*m_get_p3d_cam_angle)();
+	int   (*m_get_screen_cache_texid)();
 
 }; // ImageSymbol
 

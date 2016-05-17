@@ -8,7 +8,7 @@
 
 #include <stdint.h>
 
-namespace s2 { class Sprite; class RenderParams; }
+namespace s2 { class Sprite; class RenderParams; class Texture; }
 
 namespace ee
 {
@@ -38,12 +38,15 @@ public:
 	int GetClippedHeight() const;
 	const uint8_t* GetPixelData() const;
 
-	void Draw(const s2::RenderParams& params, const ee::Sprite* spr = NULL) const;
 	void InvalidRect(const sm::mat4& mt) const;
 
 	const sm::vec2& GetOffset() const { return m_offset; }
 
 	const ImageData* GetImageData() const;
+
+	void QueryTexcoords(float* texcoords, int* texid) const;
+
+	s2::Texture* GetS2Tex() { return m_s2_tex; }
 
 private:
 	void LoadWithClip(const std::string& filepath);
@@ -52,10 +55,13 @@ private:
 
 private:
 	Texture* m_tex;
+	s2::Texture* m_s2_tex;
 
 	float m_ori_w, m_ori_h;
 
 	sm::vec2 m_offset;
+
+	int m_xmin, m_ymin;
 
 }; // Image
 

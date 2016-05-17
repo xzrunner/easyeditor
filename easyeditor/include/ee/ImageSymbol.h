@@ -3,6 +3,8 @@
 
 #include "Symbol.h"
 
+namespace s2 { class ImageSymbol; }
+
 namespace ee
 {
 
@@ -44,6 +46,9 @@ protected:
 	Image* m_image;
 
 	Rect m_region;
+
+private:
+	s2::ImageSymbol* m_core;
 
 }; // ImageSymbol
 

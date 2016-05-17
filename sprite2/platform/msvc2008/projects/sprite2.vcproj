@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\editor-external\c99"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\editor-external\c99"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;S2_EXTEND"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -105,7 +105,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\editor-external\c99"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\editor-external\c99"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;S2_EXTEND"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -148,30 +148,6 @@
 		<Filter
 			Name="dataset"
 			>
-			<File
-				RelativePath="..\..\..\src\sprite2\AABB.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\sprite2\AABB.inl"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\sprite2\Color.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\sprite2\Color.inl"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\sprite2\Matrix.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\sprite2\Matrix.inl"
-				>
-			</File>
 			<Filter
 				Name="render"
 				>
@@ -209,6 +185,54 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\sprite2\RenderShader.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="primitive"
+				>
+				<File
+					RelativePath="..\..\..\src\sprite2\AABB.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\sprite2\AABB.inl"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\sprite2\Color.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\sprite2\Color.inl"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\sprite2\Matrix.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\sprite2\Matrix.inl"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="resources"
+				>
+				<File
+					RelativePath="..\..\..\src\sprite2\Package.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\sprite2\Package.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\sprite2\Texture.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\sprite2\Texture.h"
 					>
 				</File>
 			</Filter>

@@ -18,7 +18,7 @@ public:
 
 	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const = 0;
 
-	void* GetUD() { return m_ud; }
+	void* GetUD() const { return m_ud; }
 
 private:
 	void* m_ud;

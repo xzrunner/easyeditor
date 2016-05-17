@@ -6,6 +6,8 @@
 #include "RenderShader.h"
 #include "RenderCamera.h"
 
+#include <SM_Matrix.h>
+
 namespace s2
 {
 
