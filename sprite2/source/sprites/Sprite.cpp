@@ -12,4 +12,9 @@ Sprite::Sprite(void* ud)
 {
 }
 
+// void Sprite::MultiplyRenderParams(const RenderParams& src, RenderParams& dst) const
+// {
+// 	
+// }
+
 }

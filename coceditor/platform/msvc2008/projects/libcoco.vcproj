@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\easy3d\src\easy3d;..\..\..\..\sprite2\src;..\..\..\..\sm\src\sm;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easycomplex\src;..\..\..\..\easymesh\src;..\..\..\..\easyimage\src;..\..\..\..\epbin\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\particle\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyparticle3d\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\easy3d\src\easy3d;..\..\..\..\sprite2\include;..\..\..\..\sm\src\sm;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easycomplex\src;..\..\..\..\easymesh\src;..\..\..\..\easyimage\src;..\..\..\..\epbin\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\particle\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyparticle3d\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -107,7 +107,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\easy3d\src\easy3d;..\..\..\..\sprite2\src;..\..\..\..\sm\src\sm;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easycomplex\src;..\..\..\..\easymesh\src;..\..\..\..\easyimage\src;..\..\..\..\epbin\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\particle\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyparticle3d\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\easy3d\src\easy3d;..\..\..\..\sprite2\include;..\..\..\..\sm\src\sm;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easycomplex\src;..\..\..\..\easymesh\src;..\..\..\..\easyimage\src;..\..\..\..\epbin\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\particle\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyparticle3d\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"

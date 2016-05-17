@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\editor-external\c99"
+				AdditionalIncludeDirectories="..\..\..\include\sprite2;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\editor-external\c99"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;S2_EXTEND"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -105,7 +105,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\editor-external\c99"
+				AdditionalIncludeDirectories="..\..\..\include\sprite2;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\editor-external\c99"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;S2_EXTEND"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -152,39 +152,39 @@
 				Name="render"
 				>
 				<File
-					RelativePath="..\..\..\src\sprite2\BlendMode.h"
+					RelativePath="..\..\..\include\sprite2\BlendMode.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\CameraMode.h"
+					RelativePath="..\..\..\include\sprite2\CameraMode.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\FilterMode.h"
+					RelativePath="..\..\..\include\sprite2\FilterMode.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\RenderCamera.h"
+					RelativePath="..\..\..\include\sprite2\RenderCamera.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\RenderCamera.inl"
+					RelativePath="..\..\..\include\sprite2\RenderCamera.inl"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\RenderColor.h"
+					RelativePath="..\..\..\include\sprite2\RenderColor.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\RenderParams.h"
+					RelativePath="..\..\..\include\sprite2\RenderParams.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\RenderParams.inl"
+					RelativePath="..\..\..\include\sprite2\RenderParams.inl"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\RenderShader.h"
+					RelativePath="..\..\..\include\sprite2\RenderShader.h"
 					>
 				</File>
 			</Filter>
@@ -192,27 +192,27 @@
 				Name="primitive"
 				>
 				<File
-					RelativePath="..\..\..\src\sprite2\AABB.h"
+					RelativePath="..\..\..\include\sprite2\AABB.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\AABB.inl"
+					RelativePath="..\..\..\include\sprite2\AABB.inl"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\Color.h"
+					RelativePath="..\..\..\include\sprite2\Color.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\Color.inl"
+					RelativePath="..\..\..\include\sprite2\Color.inl"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\Matrix.h"
+					RelativePath="..\..\..\include\sprite2\Matrix.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\Matrix.inl"
+					RelativePath="..\..\..\include\sprite2\Matrix.inl"
 					>
 				</File>
 			</Filter>
@@ -220,19 +220,19 @@
 				Name="resources"
 				>
 				<File
-					RelativePath="..\..\..\src\sprite2\Package.cpp"
+					RelativePath="..\..\..\source\dataset\Package.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\Package.h"
+					RelativePath="..\..\..\include\sprite2\Package.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\Texture.cpp"
+					RelativePath="..\..\..\source\dataset\Texture.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\Texture.h"
+					RelativePath="..\..\..\include\sprite2\Texture.h"
 					>
 				</File>
 			</Filter>
@@ -241,34 +241,34 @@
 			Name="sprites"
 			>
 			<File
-				RelativePath="..\..\..\src\sprite2\Sprite.cpp"
+				RelativePath="..\..\..\source\sprites\Sprite.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\sprite2\Sprite.h"
+				RelativePath="..\..\..\include\sprite2\Sprite.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\sprite2\Symbol.h"
+				RelativePath="..\..\..\include\sprite2\Symbol.h"
 				>
 			</File>
 			<Filter
 				Name="image"
 				>
 				<File
-					RelativePath="..\..\..\src\sprite2\ImageSprite.cpp"
+					RelativePath="..\..\..\source\sprites\ImageSprite.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\ImageSprite.h"
+					RelativePath="..\..\..\include\sprite2\ImageSprite.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\ImageSymbol.cpp"
+					RelativePath="..\..\..\source\sprites\ImageSymbol.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\ImageSymbol.h"
+					RelativePath="..\..\..\include\sprite2\ImageSymbol.h"
 					>
 				</File>
 			</Filter>
@@ -276,19 +276,19 @@
 				Name="complex"
 				>
 				<File
-					RelativePath="..\..\..\src\sprite2\ComplexSprite.cpp"
+					RelativePath="..\..\..\source\sprites\ComplexSprite.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\ComplexSprite.h"
+					RelativePath="..\..\..\include\sprite2\ComplexSprite.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\ComplexSymbol.cpp"
+					RelativePath="..\..\..\source\sprites\ComplexSymbol.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\ComplexSymbol.h"
+					RelativePath="..\..\..\include\sprite2\ComplexSymbol.h"
 					>
 				</File>
 			</Filter>
@@ -296,7 +296,7 @@
 				Name="dummy"
 				>
 				<File
-					RelativePath="..\..\..\src\sprite2\DummySprite.h"
+					RelativePath="..\..\..\include\sprite2\DummySprite.h"
 					>
 				</File>
 			</Filter>
@@ -304,19 +304,19 @@
 				Name="anim"
 				>
 				<File
-					RelativePath="..\..\..\src\sprite2\AnimSprite.cpp"
+					RelativePath="..\..\..\source\sprites\AnimSprite.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\AnimSprite.h"
+					RelativePath="..\..\..\include\sprite2\AnimSprite.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\AnimSymbol.cpp"
+					RelativePath="..\..\..\source\sprites\AnimSymbol.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\AnimSymbol.h"
+					RelativePath="..\..\..\include\sprite2\AnimSymbol.h"
 					>
 				</File>
 			</Filter>
@@ -324,19 +324,19 @@
 				Name="particle3d"
 				>
 				<File
-					RelativePath="..\..\..\src\sprite2\Particle3dSprite.cpp"
+					RelativePath="..\..\..\source\sprites\Particle3dSprite.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\Particle3dSprite.h"
+					RelativePath="..\..\..\include\sprite2\Particle3dSprite.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\Particle3dSymbol.cpp"
+					RelativePath="..\..\..\source\sprites\Particle3dSymbol.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\Particle3dSymbol.h"
+					RelativePath="..\..\..\include\sprite2\Particle3dSymbol.h"
 					>
 				</File>
 			</Filter>
@@ -344,19 +344,19 @@
 				Name="scale9"
 				>
 				<File
-					RelativePath="..\..\..\src\sprite2\Scale9Sprite.cpp"
+					RelativePath="..\..\..\source\sprites\Scale9Sprite.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\Scale9Sprite.h"
+					RelativePath="..\..\..\include\sprite2\Scale9Sprite.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\Scale9Symbol.cpp"
+					RelativePath="..\..\..\source\sprites\Scale9Symbol.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\Scale9Symbol.h"
+					RelativePath="..\..\..\include\sprite2\Scale9Symbol.h"
 					>
 				</File>
 			</Filter>
@@ -364,19 +364,19 @@
 				Name="particle2d"
 				>
 				<File
-					RelativePath="..\..\..\src\sprite2\Particle2dSprite.cpp"
+					RelativePath="..\..\..\source\sprites\Particle2dSprite.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\Particle2dSprite.h"
+					RelativePath="..\..\..\include\sprite2\Particle2dSprite.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\Particle2dSymbol.cpp"
+					RelativePath="..\..\..\source\sprites\Particle2dSymbol.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\Particle2dSymbol.h"
+					RelativePath="..\..\..\include\sprite2\Particle2dSymbol.h"
 					>
 				</File>
 			</Filter>
@@ -384,19 +384,19 @@
 				Name="text"
 				>
 				<File
-					RelativePath="..\..\..\src\sprite2\TextSprite.cpp"
+					RelativePath="..\..\..\source\sprites\TextSprite.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\TextSprite.h"
+					RelativePath="..\..\..\include\sprite2\TextSprite.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\TextSymbol.cpp"
+					RelativePath="..\..\..\source\sprites\TextSymbol.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\sprite2\TextSymbol.h"
+					RelativePath="..\..\..\include\sprite2\TextSymbol.h"
 					>
 				</File>
 			</Filter>
@@ -405,7 +405,7 @@
 			Name="utility"
 			>
 			<File
-				RelativePath="..\..\..\src\sprite2\Object.h"
+				RelativePath="..\..\..\include\sprite2\Object.h"
 				>
 			</File>
 		</Filter>

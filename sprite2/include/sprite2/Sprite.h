@@ -40,6 +40,9 @@ public:
 #endif // S2_EXTEND
 
 protected:
+//	void MultiplyRenderParams(const RenderParams& src, RenderParams& dst) const;
+
+protected:
 	/************************************************************************/
 	/* geometry                                                             */
 	/************************************************************************/
@@ -47,6 +50,8 @@ protected:
 	float		m_angle;
 	sm::vec2	m_scale;
 	sm::vec2	m_shear;
+
+	sm::vec2	m_offset;
 
 	AABB		m_aabb;
 	

@@ -7,6 +7,7 @@ namespace s2
 {
 
 class Scale9Symbol;
+class RenderParams;
 
 class Scale9Sprite : public Sprite
 {
@@ -15,8 +16,17 @@ public:
 	
 	virtual bool Update(float dt) { return false; }
 	
+	void Draw(const RenderParams& params) const;
+
 private:
 	Scale9Symbol* m_sym;
+
+	float m_width, m_height;
+
+	// 0 1 2
+	// 3 4 5
+	// 6 7 9
+	Sprite* m_grids[9];
 
 }; // Scale9Sprite
 
