@@ -1,6 +1,5 @@
 #include "TexturePacker.h"
 
-#include <ee/Rect.h>
 #include <ee/cfg_const.h>
 
 #include <vector>
@@ -33,7 +32,7 @@ void TexturePacker::Pack(const std::set<ee::Image*>& images)
 	for (int i = 0, n = sorted.size(); i < n; ++i)
 	{
 		ee::Image* img = sorted[i];
-		ee::Rect r;
+		sm::rect r;
 		int w = img->GetClippedWidth() + extra_tot,
 			h = img->GetClippedHeight() + extra_tot;
 		assert(w < m_edge && h < m_edge);
@@ -69,18 +68,19 @@ void TexturePacker::StoreToMemory()
 	m_pixels = new uint8_t[size];
 	memset(&m_pixels[0], 0, size);
 
-	std::map<ee::Image*, ee::Rect>::iterator itr 
+	std::map<ee::Image*, sm::rect>::iterator itr 
 		= m_map_img2rect.begin();
 	int size_line = m_edge * channels;
 	for ( ; itr != m_map_img2rect.end(); ++itr)
 	{
 		const unsigned char* pixels = itr->first->GetPixelData();
-		const ee::Rect& r = itr->second;
+		const sm::rect& r = itr->second;
+		sm::vec2 sz = r.Size();
 		//////////////////////////////////////////////////////////////////////////
-		int src_line_size = static_cast<int>(r.Width() * channels);
-		for (int i = 0, n = static_cast<int>(r.Height()); i < n ;++i)
+		int src_line_size = static_cast<int>(sz.x * channels);
+		for (int i = 0, n = static_cast<int>(sz.y); i < n ;++i)
 		{
-			int ptr_src = src_line_size * (static_cast<int>(r.Height()) - i - 1);
+			int ptr_src = src_line_size * (static_cast<int>(sz.y) - i - 1);
 			int ptr_dst = static_cast<int>(size_line * (r.ymin + i) + r.xmin * channels);
 			memcpy(&m_pixels[ptr_dst], &pixels[ptr_src], src_line_size);
 			for (int j = 0; j < m_extrude; ++j)
@@ -94,10 +94,10 @@ void TexturePacker::StoreToMemory()
 		{
 			int ptr_src = size_line * r.ymin + xoffset;
 			int ptr_dst = size_line * (r.ymin - i - 1) + xoffset;
-			memcpy(&m_pixels[ptr_dst], &m_pixels[ptr_src], channels * (r.Width() + 2 * m_extrude));
-			ptr_src = size_line * (r.ymin + r.Height() - 1) + xoffset;
-			ptr_dst = size_line * (r.ymin + r.Height() + i) + xoffset;
-			memcpy(&m_pixels[ptr_dst], &m_pixels[ptr_src], channels * (r.Width() + 2 * m_extrude));
+			memcpy(&m_pixels[ptr_dst], &m_pixels[ptr_src], channels * (sz.x + 2 * m_extrude));
+			ptr_src = size_line * (r.ymin + sz.y - 1) + xoffset;
+			ptr_dst = size_line * (r.ymin + sz.y + i) + xoffset;
+			memcpy(&m_pixels[ptr_dst], &m_pixels[ptr_src], channels * (sz.x + 2 * m_extrude));
 		}
 	}
 }
@@ -108,9 +108,9 @@ void TexturePacker::StoreToFile(const std::string& floder, const std::string& fi
 	ee::ImageSaver::StoreToFile(m_pixels, m_edge, m_edge, 4, filepath, type);
 }
 
-const ee::Rect* TexturePacker::Query(ee::Image* image) const
+const sm::rect* TexturePacker::Query(ee::Image* image) const
 {
-	std::map<ee::Image*, ee::Rect>::const_iterator itr 
+	std::map<ee::Image*, sm::rect>::const_iterator itr 
 		= m_map_img2rect.find(image);
 	if (itr != m_map_img2rect.end())
 		return &itr->second;

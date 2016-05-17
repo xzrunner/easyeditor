@@ -1,7 +1,6 @@
 #include "PolygonBody.h"
 #include "BodyData.h"
 #include "physics_const.h"
-#include "Rect.h"
 #include "Math2D.h"
 
 #include <Box2D/Box2D.h>
@@ -62,9 +61,9 @@ PolygonBody::PolygonBody(b2World* world, float hWidth, float hHeight,
 	m_body->CreateFixture(&fd);
 }
 
-void PolygonBody::GetRect(Rect& rect, const sm::vec2& position, float angle) const
+void PolygonBody::GetRect(sm::rect& rect, const sm::vec2& position, float angle) const
 {
-	rect.MakeInfinite();
+	rect.MakeEmpty();
 	for (b2Fixture* f = m_body->GetFixtureList(); f; f = f->GetNext())
 	{
 		b2PolygonShape* poly = dynamic_cast<b2PolygonShape*>(f->GetShape());

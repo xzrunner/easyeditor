@@ -7,7 +7,6 @@
 #include <ee/Config.h>
 #include <ee/FileHelper.h>
 #include <ee/SymbolMgr.h>
-#include <ee/Rect.h>
 #include <ee/Sprite.h>
 #include <ee/Symbol.h>
 #include <ee/SpriteFactory.h>
@@ -82,7 +81,7 @@ void ScaleImage::Scale(ee::Snapshoot& ss, const std::string& src, const std::str
 	if (ee::FileType::IsType(filepath, ee::FileType::e_image))
 	{
 		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-		ee::Rect r = symbol->GetSize();
+		sm::rect r = symbol->GetSize();
 
 		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 		sprite->SetScale(sm::vec2(scale, scale));

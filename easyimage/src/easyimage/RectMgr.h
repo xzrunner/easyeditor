@@ -17,7 +17,7 @@ class RectMgr
 public:
 	struct Node
 	{
-		const ee::Rect* rect;
+		const sm::rect* rect;
 		sm::vec2 pos;
 
 		Node() : rect(NULL) {}
@@ -31,26 +31,26 @@ public:
 
 	void Draw() const;
 
-	void Insert(const ee::Rect& rect, bool force = false);
+	void Insert(const sm::rect& rect, bool force = false);
 	bool Remove(const sm::vec2& pos);
 
-	sm::vec2 QueryNearestAxis(const sm::vec2& pos, const ee::Rect* except = NULL) const;
+	sm::vec2 QueryNearestAxis(const sm::vec2& pos, const sm::rect* except = NULL) const;
 
 	Node QueryNode(const sm::vec2& pos) const;
 
-	ee::Rect* QueryRect(const sm::vec2& pos) const;
+	sm::rect* QueryRect(const sm::vec2& pos) const;
 
 	bool MoveNode(const Node& node, const sm::vec2& pos);
-	void MoveRect(const ee::Rect* rect, const sm::vec2& from, const sm::vec2& to);
+	void MoveRect(const sm::rect* rect, const sm::vec2& from, const sm::vec2& to);
 
-	const std::vector<ee::Rect*>& GetAllRect() const {
+	const std::vector<sm::rect*>& GetAllRect() const {
 		return m_rects;
 	}
 
 	void Clear();
 
 private:
-	std::vector<ee::Rect*> m_rects;
+	std::vector<sm::rect*> m_rects;
 
 }; // RectMgr
 

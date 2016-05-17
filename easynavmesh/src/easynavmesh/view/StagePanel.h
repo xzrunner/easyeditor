@@ -4,7 +4,6 @@
 #include <ee/EditPanel.h>
 #include <ee/SpritesPanelImpl.h>
 #include <ee/ShapesPanelImpl.h>
-#include <ee/Rect.h>
 
 namespace ee { class PropertySettingPanel; }
 
@@ -20,7 +19,7 @@ public:
 		ee::LibraryPanel* library, ee::PropertySettingPanel* property);
 	virtual ~StagePanel();
 
-	const ee::Rect& GetRegion() const { return m_region; }
+	const sm::rect& GetRegion() const { return m_region; }
 
 	const Mesh* GetMesh() const { return m_mesh; }
 
@@ -31,7 +30,7 @@ protected:
 	virtual void OnNotify(int sj_id, void* ud);
 
 private:
-	ee::Rect m_region;
+	sm::rect m_region;
 
 	Mesh* m_mesh;
 

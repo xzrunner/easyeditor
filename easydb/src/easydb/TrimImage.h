@@ -30,7 +30,7 @@ public:
 private:
 	void Trigger(const std::string& src_dir, const std::string& dst_dir);
 
-	void StoreBoundInfo(const ee::ImageData& img, const ee::Rect& r, Json::Value& val) const;
+	void StoreBoundInfo(const ee::ImageData& img, const sm::rect& r, Json::Value& val) const;
 	bool IsTransparent(const ee::ImageData& img, int x, int y) const;
 
 	void Trim(const std::string& filepath);

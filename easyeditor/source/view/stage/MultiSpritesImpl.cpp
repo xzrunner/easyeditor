@@ -1,7 +1,6 @@
 #include "MultiSpritesImpl.h"
 #include "SpriteSelection.h"
 #include "BoundingBox.h"
-#include "Rect.h"
 #include "Visitor.h"
 #include "subject_id.h"
 #include "sprite_msg.h"
@@ -34,7 +33,7 @@ Sprite* MultiSpritesImpl::QuerySpriteByPos(const sm::vec2& pos) const
 	TraverseSprites(PointQueryVisitor(pos, &selected), DT_EDITABLE, false);
 	if (selected && !selected->editable) {
 		std::vector<Sprite*> sprites;
-		QuerySpritesByRect(Rect(pos, 1, 1), false, sprites);
+		QuerySpritesByRect(sm::rect(pos, 1, 1), false, sprites);
 		if (!sprites.empty()) {
 			selected = sprites.back();
 		} else {
@@ -44,7 +43,7 @@ Sprite* MultiSpritesImpl::QuerySpriteByPos(const sm::vec2& pos) const
 	return selected;
 }
 
-void MultiSpritesImpl::QuerySpritesByRect(const Rect& rect, bool contain, std::vector<Sprite*>& result) const
+void MultiSpritesImpl::QuerySpritesByRect(const sm::rect& rect, bool contain, std::vector<Sprite*>& result) const
 {
 	TraverseSprites(RectQueryVisitor(rect, contain, result), DT_EDITABLE);
 }

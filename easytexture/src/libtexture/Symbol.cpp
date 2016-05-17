@@ -55,9 +55,9 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-ee::Rect Symbol::GetSize(const ee::Sprite* sprite) const
+sm::rect Symbol::GetSize(const ee::Sprite* sprite) const
 {
-	ee::Rect rect;
+	sm::rect rect;
 	for (size_t i = 0, n = m_shapes.size(); i < n; ++i) {
 		rect.Combine(m_shapes[i]->GetRect());
 	}

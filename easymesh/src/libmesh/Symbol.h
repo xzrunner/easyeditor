@@ -2,7 +2,6 @@
 #define _EASYMESH_SYMBOL_H_
 
 #include <ee/Symbol.h>
-#include <ee/Rect.h>
 
 namespace ee { class Image; }
 
@@ -28,7 +27,7 @@ public:
 	//
 	virtual void Draw(const s2::RenderParams& params, const ee::Sprite* spr = NULL) const;
 	virtual void ReloadTexture() const;
-	virtual ee::Rect GetSize(const ee::Sprite* sprite = NULL) const {
+	virtual sm::rect GetSize(const ee::Sprite* sprite = NULL) const {
 		return m_region;
 	}
 
@@ -55,7 +54,7 @@ private:
 
 	bool m_pause;
 
-	ee::Rect m_region;
+	sm::rect m_region;
 
 }; // Symbol
 

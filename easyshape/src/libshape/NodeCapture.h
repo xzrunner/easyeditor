@@ -2,7 +2,7 @@
 #define _EASYSHAPE_NODE_CAPTURE_H_
 
 #include <ee/Visitor.h>
-#include <ee/Rect.h>
+#include <SM_Rect.h>
 
 namespace ee { class Shape; class MultiShapesImpl; }
 
@@ -56,7 +56,7 @@ private:
 		const sm::vec2& m_pos;
 		float m_tolerance;
 
-		ee::Rect m_rect;
+		sm::rect m_rect;
 		NodeAddr& m_result;
 
 	}; // RectQueryVisitor

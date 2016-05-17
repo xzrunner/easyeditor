@@ -1,6 +1,5 @@
 #include "ImageClip.h"
 #include "ImageData.h"
-#include "Rect.h"
 
 namespace ee
 {
@@ -21,7 +20,7 @@ ImageClip::~ImageClip()
 	delete[] m_check;
 }
 
-const uint8_t* ImageClip::Clip(const Rect& r) const
+const uint8_t* ImageClip::Clip(const sm::rect& r) const
 {
 	return Clip(
 		static_cast<int>(r.xmin), 

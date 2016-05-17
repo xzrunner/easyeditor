@@ -30,7 +30,7 @@ bool PulleyJoint::IsContain(const sm::vec2& pos) const
 		|| ee::Math2D::GetDistance(m_ground_anchor_b, pos) < JOINT_RADIUS_OUT;
 }
 
-bool PulleyJoint::IsIntersect(const ee::Rect& rect) const
+bool PulleyJoint::IsIntersect(const sm::rect& rect) const
 {
 	return ee::Math2D::IsPointInRect(GetWorldAnchorA(), rect) 
 		|| ee::Math2D::IsPointInRect(GetWorldAnchorB(), rect)

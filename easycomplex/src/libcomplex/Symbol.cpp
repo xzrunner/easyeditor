@@ -136,7 +136,9 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 			ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
 			ee::SpriteRenderer::Draw(child, params);
 		}
-		if (m_clipbox.Width() > 0 && m_clipbox.Height() > 0) {
+		sm::vec2 sz = m_clipbox.Size();
+		if (sz.x > 0 && sz.y > 0) 
+		{
 			sm::vec2 min(m_clipbox.xmin, m_clipbox.ymin), 
 				max(m_clipbox.xmax, m_clipbox.ymax);
 			ee::RVG::Color(s2::Color(0, 204, 0));
@@ -166,7 +168,7 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-ee::Rect Symbol::GetSize(const ee::Sprite* sprite/* = NULL*/) const
+sm::rect Symbol::GetSize(const ee::Sprite* sprite/* = NULL*/) const
 {
 	return m_rect;
 }
@@ -185,7 +187,7 @@ bool Symbol::IsOneLayer() const
 
 void Symbol::InitBounding()
 {
-	m_rect.MakeInfinite();
+	m_rect.MakeEmpty();
 	const std::vector<s2::Sprite*>& children = m_core->GetChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
 		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());

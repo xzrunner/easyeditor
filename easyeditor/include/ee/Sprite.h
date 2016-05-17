@@ -6,6 +6,7 @@
 #include "Object.h"
 
 #include <SM_Matrix.h>
+#include <SM_Rect.h>
 
 #include <json/json.h>
 
@@ -14,7 +15,6 @@ namespace s2 { class Sprite; class RenderColor; class RenderShader; class Render
 namespace ee
 {
 
-class Rect;
 class Symbol;
 class BoundingBox;
 class PropertySetting;
@@ -64,7 +64,7 @@ public:
 	void SetOffset(const sm::vec2& offset);
 
 	bool IsContain(const sm::vec2& pos) const;
-	bool IsIntersect(const Rect& rect) const;
+	bool IsIntersect(const sm::rect& rect) const;
 
 	void Translate(const sm::vec2& offset);
 	void Rotate(float delta);
@@ -87,7 +87,7 @@ public:
 	BoundingBox* GetBounding() const {
 		return m_bounding;
 	}
-	Rect GetRect() const;
+	sm::rect GetRect() const;
 
 	void SetObserver(SpriteObserver* observer) {
 		m_observer = observer;

@@ -266,9 +266,7 @@ bool EditPolylineImpl::OnMouseDrag(int x, int y)
 			}
 			else
 			{
-				sm::vec2 old;
-				old.x = chain->GetRect().CenterX();
-				old.y = chain->GetRect().CenterY();
+				sm::vec2 old = chain->GetRect().Center();
 				chain->Translate(pos - old);
 			}
 
@@ -323,9 +321,7 @@ void EditPolylineImpl::drawCaptured(const NodeAddr& captured) const
 			ee::RVG::Circle(captured.pos, m_node_capture->GetValue(), true);
 		}
 
-		sm::vec2 center;
-		center.x = chain->GetRect().CenterX();
-		center.y = chain->GetRect().CenterY();
+		sm::vec2 center = chain->GetRect().Center();
 		ee::RVG::Color(s2::Color(102, 255, 102));
 		ee::RVG::Circle(center, m_node_capture->GetValue(), true);
 	}
@@ -355,7 +351,7 @@ InterruptChainVisitor(const sm::vec2& pos, int tol)
 void EditPolylineImpl::InterruptChainVisitor::
 Visit(ee::Object* object, bool& next) 
 {
-	ee::Rect rect(m_pos, m_tol, m_tol);
+	sm::rect rect(m_pos, m_tol, m_tol);
 
 	ChainShape* chain = static_cast<ChainShape*>(object);
 	if (!chain->IsIntersect(rect)) 
@@ -412,7 +408,7 @@ Visit(ee::Object* object, bool& next)
 		return;
 	}
 
-	ee::Rect rect(m_pos, m_tol, m_tol);
+	sm::rect rect(m_pos, m_tol, m_tol);
 
 	if (!chain->IsIntersect(rect)) 
 	{

@@ -1,7 +1,8 @@
 #ifndef _EASYEDITOR_SCREEN_H_
 #define _EASYEDITOR_SCREEN_H_
 
-#include "Rect.h"
+#include <SM_Vector.h>
+#include <SM_Rect.h>
 
 namespace ee
 {
@@ -33,7 +34,7 @@ public:
 
 	void UpdateModelView() const;
 
-	Rect GetRegion() const;
+	sm::rect GetRegion() const;
 
 private:
 	sm::vec2 m_size;

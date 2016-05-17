@@ -1,6 +1,5 @@
 #include "FontBlankSprite.h"
 #include "SpriteFactory.h"
-#include "Rect.h"
 #include "BoundingBox.h"
 #include "BBFactory.h"
 #include "FontBlankPropertySetting.h"

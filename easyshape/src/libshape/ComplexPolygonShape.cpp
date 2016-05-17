@@ -39,7 +39,7 @@ bool ComplexPolygonShape::IsContain(const sm::vec2& pos) const
 	return false;
 }
 
-bool ComplexPolygonShape::IsIntersect(const ee::Rect& rect) const
+bool ComplexPolygonShape::IsIntersect(const sm::rect& rect) const
 {
 	return ee::Math2D::IsPolygonIntersectRect(m_vertices, rect);
 }

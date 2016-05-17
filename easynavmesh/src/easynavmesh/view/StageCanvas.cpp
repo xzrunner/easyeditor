@@ -22,7 +22,7 @@ void StageCanvas::OnDrawSprites() const
 {
 	ee::RVG::Color(s2::Color(204, 204, 204));
 	ee::RVG::LineWidth(2);
-	const ee::Rect& r = m_stage->GetRegion();
+	const sm::rect& r = m_stage->GetRegion();
 	ee::RVG::Rect(sm::vec2(r.xmin, r.ymin), sm::vec2(r.xmax, r.ymax), false);
 
 	m_stage->TraverseSprites(ee::DrawSpritesVisitor(r, 1), ee::DT_VISIBLE);

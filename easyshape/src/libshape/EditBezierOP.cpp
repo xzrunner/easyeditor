@@ -162,7 +162,7 @@ bool EditBezierOP::OnMouseDrag(int x, int y)
 	{
 		if (BezierShape* bezier = dynamic_cast<BezierShape*>(m_captured.shape))
 		{
-			sm::vec2 center(bezier->GetRect().CenterX(), bezier->GetRect().CenterY());
+			sm::vec2 center = bezier->GetRect().Center();
 
 			if (!m_captured.pos_valid) {
 				bezier->Translate(m_curr_pos - center);
@@ -192,7 +192,7 @@ bool EditBezierOP::OnDraw() const
 			int tolerance = m_node_capture->GetValue();
 			if (BezierShape* bezier = dynamic_cast<BezierShape*>(m_captured.shape))
 			{
-				sm::vec2 c(bezier->GetRect().CenterX(), bezier->GetRect().CenterY());
+				sm::vec2 c = bezier->GetRect().Center();
 				
 				ee::RVG::Color(s2::Color(102, 255, 102));
 				ee::RVG::Circle(c, tolerance, true);

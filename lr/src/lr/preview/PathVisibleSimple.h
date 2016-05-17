@@ -4,8 +4,8 @@
 #include "IPathfinding.h"
 #include "PathUtil.h"
 
-#include <ee/Rect.h>
- 
+#include <SM_Rect.h>
+
 #include <vector>
 #include <map>
 
@@ -17,7 +17,7 @@ namespace preview
 class PathVisibleSimple : public IPathfinding, public INetwork
 {
 public:
-	PathVisibleSimple(const ee::Rect& region);
+	PathVisibleSimple(const sm::rect& region);
 
 	//
 	// interface IPathfinding
@@ -75,7 +75,7 @@ private:
 	void GetConnections(VisitedNode* node, std::vector<Connection>& connections) const;
 
 private:
-	ee::Rect m_region;
+	sm::rect m_region;
 
 	VisitedList m_visited;
 	CandidateList m_candidate;

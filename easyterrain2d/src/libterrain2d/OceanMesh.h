@@ -48,7 +48,7 @@ public:
 	bool IsBlendOpen() const { return m_blend_open; }
 	void SetImage1(const ee::ImageSymbol* image);
 
-	ee::Rect GetRegion() const;
+	sm::rect GetRegion() const;
 
 	void SetBoundLock(bool lock) { m_lock_bound = lock; }
 	bool IsBoundLockOpen() const { return m_lock_bound; }
@@ -61,11 +61,11 @@ public:
 private:
 	void Clear();
 
-	ee::Rect CalBoundRegion(const std::vector<sm::vec2>& bound) const; 
-	void CalSegments(const ee::Rect& region, std::vector<sm::vec2>& segs) const;
-	void CalTrisTexcords(const ee::Rect& region, const std::vector<sm::vec2>& vertices,
+	sm::rect CalBoundRegion(const std::vector<sm::vec2>& bound) const; 
+	void CalSegments(const sm::rect& region, std::vector<sm::vec2>& segs) const;
+	void CalTrisTexcords(const sm::rect& region, const std::vector<sm::vec2>& vertices,
 		std::vector<sm::vec2>& texcoords) const;
-	void BuildGrids(const ee::Rect& region, const std::vector<sm::vec2>& vertices, 
+	void BuildGrids(const sm::rect& region, const std::vector<sm::vec2>& vertices, 
 		const std::vector<sm::vec2>& texcoords, const std::vector<sm::vec2>& bound);
 
 	void UpdateWave(float during);
@@ -91,7 +91,7 @@ private:
 	bool m_lock_bound;
 
 	// debug
-	mutable ee::Rect debug_r;
+	mutable sm::rect debug_r;
 
 	float m_during;
 

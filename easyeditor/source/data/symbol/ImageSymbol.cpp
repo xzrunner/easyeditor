@@ -96,7 +96,7 @@ void ImageSymbol::ReloadTexture() const
 	m_image->ReloadTexture();
 }
 
-Rect ImageSymbol::GetSize(const Sprite* sprite/* = NULL*/) const
+sm::rect ImageSymbol::GetSize(const Sprite* sprite/* = NULL*/) const
 {
 	return m_region;
 }

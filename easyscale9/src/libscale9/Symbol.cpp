@@ -29,7 +29,7 @@ void Symbol::ReloadTexture() const
 	m_data.ReloadTexture();
 }
 
-ee::Rect Symbol::GetSize(const ee::Sprite* sprite/* = NULL*/) const
+sm::rect Symbol::GetSize(const ee::Sprite* sprite/* = NULL*/) const
 {
 	float w, h;
 	if (sprite) {
@@ -38,7 +38,7 @@ ee::Rect Symbol::GetSize(const ee::Sprite* sprite/* = NULL*/) const
 	} else {
 		m_data.GetSize(w, h);
 	}
-	return ee::Rect(w, h);
+	return sm::rect(sm::vec2(0, 0), w, h);
 }
 
 void Symbol::ResizeScale9(float width, float height)

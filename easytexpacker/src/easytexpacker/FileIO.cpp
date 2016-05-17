@@ -334,7 +334,7 @@ void FileIO::StoreTexpackerPosition(const char* filename)
 // 			val["sourceSize"]["w"] = img->GetOriginWidth();
 // 			val["sourceSize"]["h"] = img->GetOriginHeight();
 // 
-// 			ee::Rect r = img->GetClippedRegion();
+// 			sm::rect r = img->GetClippedRegion();
 // 			val["frame"]["w"] = val["spriteSourceSize"]["w"] = r.Width();
 // 			val["frame"]["h"] = val["spriteSourceSize"]["h"] = r.Height();
 // 			val["spriteSourceSize"]["x"] = r.xmin + 0.5f * img->GetOriginWidth();

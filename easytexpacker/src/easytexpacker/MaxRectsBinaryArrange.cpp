@@ -1,6 +1,5 @@
 #include "MaxRectsBinaryArrange.h"
 
-#include <ee/Rect.h>
 #include <ee/ImageSprite.h>
 
 #include <easytexpacker.h>
@@ -14,7 +13,7 @@ void MaxRectsBinaryArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites
 	std::vector<etexpacker::RectSize> rects;
 	rects.reserve(sz);
 	for (int i = 0; i < sz; ++i) {
-		ee::Rect r = sprites[i]->GetSymbol().GetSize();
+		sm::rect r = sprites[i]->GetSymbol().GetSize();
 		rects.push_back(etexpacker::RectSize(r.Width(), r.Height()));
 	}
 	std::vector<etexpacker::Rect> output;

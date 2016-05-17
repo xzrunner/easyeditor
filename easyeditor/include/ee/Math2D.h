@@ -2,6 +2,7 @@
 #define _EASYEDITOR_MATH2D_H_
 
 #include <SM_Matrix.h>
+#include <SM_Rect.h>
 
 #include <vector>
 
@@ -9,8 +10,6 @@
 
 namespace ee
 {
-
-class Rect;
 
 class Math2D
 {
@@ -34,31 +33,31 @@ public:
 	// To check if angle a-center-b is acute.
 	static bool IsAcuteAngle(const sm::vec2& a, const sm::vec2& center, const sm::vec2& b);
 
-	static bool IsRectIntersectRect(const Rect& r0, const Rect& r1);
+	static bool IsRectIntersectRect(const sm::rect& r0, const sm::rect& r1);
 
 	// To check if r1 in r0
-	static bool IsRectContainRect(const Rect& r0, const Rect& r1);
+	static bool IsRectContainRect(const sm::rect& r0, const sm::rect& r1);
 
-	// To check if the segment intersect with the Rect.
+	// To check if the segment intersect with the sm::rect.
 	static bool IsSegmentIntersectRect(float lx1, float ly1, float lx2, float ly2,
 		float ax1, float ay1, float ax2, float ay2);
-	static bool IsSegmentIntersectRect(const sm::vec2& b, const sm::vec2& e, const Rect& aabb);
+	static bool IsSegmentIntersectRect(const sm::vec2& b, const sm::vec2& e, const sm::rect& aabb);
 
 	static bool IsPolygonIntersectPolygon(const std::vector<sm::vec2>& poly0, const std::vector<sm::vec2>& poly1);
 	static bool IsPolygonInPolygon(const std::vector<sm::vec2>& in, const std::vector<sm::vec2>& out);
 
-	static bool IsPolygonIntersectRect(const std::vector<sm::vec2>& poly, const Rect& rect);
+	static bool IsPolygonIntersectRect(const std::vector<sm::vec2>& poly, const sm::rect& rect);
 
 	static bool IsSegmentIntersectPolyline(const sm::vec2& s, const sm::vec2& e, const std::vector<sm::vec2>& poly);
 
-	static bool IsPolylineIntersectRect(const std::vector<sm::vec2>& polyline, bool isLoop, const Rect& aabb);
+	static bool IsPolylineIntersectRect(const std::vector<sm::vec2>& polyline, bool isLoop, const sm::rect& aabb);
 	static bool isPolylineIntersectPolylinI(const std::vector<sm::vec2>& polyline0, const std::vector<sm::vec2>& polyline1);
 
-	static bool IsCircleIntersectRect(const sm::vec2& center, float radius, const Rect& aabb);
+	static bool IsCircleIntersectRect(const sm::vec2& center, float radius, const sm::rect& aabb);
 
 	static bool IsPointInTriangle(const sm::vec2& p, const sm::vec2& a, const sm::vec2& b, const sm::vec2& c);
 
-	static bool IsPointInRect(const sm::vec2& pos, const Rect& aabb);
+	static bool IsPointInRect(const sm::vec2& pos, const sm::rect& aabb);
 
 	static bool IsPointInRect(const sm::vec2& pos, const sm::vec2& center, float hw, float hh);
 
@@ -169,7 +168,7 @@ public:
 
 	static sm::vec2 TransCoordsWorldToLocal(const sm::vec2& origin, const sm::vec2& xDir, const sm::vec2& world);
 
-	static void GetMBR(const std::vector<sm::vec2>& pos, Rect* mbr);
+	static void GetMBR(const std::vector<sm::vec2>& pos, sm::rect* mbr);
 
 	static sm::vec2 GetTriGravityCenter(const sm::vec2& p0, const sm::vec2& p1, const sm::vec2& p2);
 

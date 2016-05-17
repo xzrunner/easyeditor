@@ -1,5 +1,4 @@
 #include "SelectSpritesOP.h"
-#include "Rect.h"
 #include "FontBlankSprite.h"
 #include "SymbolMgr.h"
 #include "SpriteFactory.h"
@@ -160,7 +159,7 @@ bool SelectSpritesOP::OnMouseLeftUp(int x, int y)
 	}
 
 	sm::vec2 end = m_stage->TransPosScrToProj(x, y);
-	Rect rect(m_left_first_pos, end);
+	sm::rect rect(m_left_first_pos, end);
 	std::vector<Sprite*> sprites;
 	m_spritesImpl->QuerySpritesByRect(rect, m_left_first_pos.x < end.x, sprites);
 	if (m_stage->GetKeyState(WXK_CONTROL))

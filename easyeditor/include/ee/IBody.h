@@ -5,6 +5,7 @@
 #include "Object.h"
 
 #include <SM_Vector.h>
+#include <SM_Rect.h>
 
 #include <Box2D/Box2D.h>
 
@@ -12,8 +13,6 @@
 
 namespace ee
 {
-
-class Rect;
 
 class IBody : public Cloneable, public Object
 {
@@ -25,7 +24,7 @@ public:
 	//
 	virtual IBody* Clone() const;
 
-	virtual void GetRect(Rect& rect, const sm::vec2& position, float angle) const = 0;
+	virtual void GetRect(sm::rect& rect, const sm::vec2& position, float angle) const = 0;
 
 	b2Body* GetBody() const;
 	void SetBody(b2Body* body);

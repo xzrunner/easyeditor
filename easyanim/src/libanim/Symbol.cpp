@@ -69,7 +69,7 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-ee::Rect Symbol::GetSize(const ee::Sprite* sprite/* = NULL*/) const
+sm::rect Symbol::GetSize(const ee::Sprite* sprite/* = NULL*/) const
 {
 	return m_rect;
 }
@@ -90,7 +90,7 @@ size_t Symbol::getMaxFrameIndex() const
 
 void Symbol::InitBounding()
 {
-	m_rect.MakeInfinite();
+	m_rect.MakeEmpty();
 	const std::vector<s2::AnimSymbol::Layer*>& layers = m_core->GetLayers();
 	for (int i = 0, n = layers.size(); i < n; ++i)
 	{

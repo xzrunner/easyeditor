@@ -26,7 +26,7 @@ public:
 	//
 	virtual void Draw(const s2::RenderParams& params, const ee::Sprite* spr = NULL) const;
 	virtual void ReloadTexture() const;
-	virtual ee::Rect GetSize(const ee::Sprite* sprite = NULL) const;
+	virtual sm::rect GetSize(const ee::Sprite* sprite = NULL) const;
 
 protected:
 	virtual void LoadResources();
@@ -50,7 +50,7 @@ private:
 	void Clear();
 
 private:
-	ee::Rect m_rect;
+	sm::rect m_rect;
 
 	std::vector<eanim::Symbol*> m_symbols;	
 

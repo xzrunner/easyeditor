@@ -94,7 +94,7 @@ bool SelectJointOP::OnMouseLeftUp(int x, int y)
 {
 	//sm::vec2 pos = m_stage->transPosScreenToProject(x, y);
 	//selectedJoints.clear();
-	//static_cast<StagePanel*>(m_stage)->queryJointsByRect(ee::Rect(pos, m_firstPos), selectedJoints);
+	//static_cast<StagePanel*>(m_stage)->queryJointsByRect(sm::rect(pos, m_firstPos), selectedJoints);
 	//if (selectedJoints.size() == 1)
 	//	m_property_panel->SetPropertySetting(new JointPropertySetting(m_stage, selectedJoints[0]));
 

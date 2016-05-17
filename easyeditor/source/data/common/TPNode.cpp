@@ -36,7 +36,7 @@ TPNode::TPNode(int width, int height)
 
 TPNode* TPNode::Insert(int w, int h)
 {
-// 	Rect r = img.getSymbol().getImage()->getRegion();
+// 	sm::rect r = img.getSymbol().getImage()->getRegion();
 // 	int w = r.Width(),
 // 		h = r.Height();
 

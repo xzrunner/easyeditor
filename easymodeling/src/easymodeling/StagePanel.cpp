@@ -40,7 +40,7 @@ ee::Sprite* StagePanel::QuerySpriteByPos(const sm::vec2& pos) const
 	return result;
 }
 
-void StagePanel::QuerySpritesByRect(const ee::Rect& rect, std::vector<ee::Sprite*>& result) const
+void StagePanel::QuerySpritesByRect(const sm::rect& rect, std::vector<ee::Sprite*>& result) const
 {
 	TraverseSprites(RectQueryVisitor(rect, result), ee::DT_EDITABLE);
 }
@@ -53,7 +53,7 @@ Joint* StagePanel::queryJointByPos(const sm::vec2& pos) const
 	return NULL;
 }
 
-void StagePanel::queryJointsByRect(const ee::Rect& rect, std::vector<Joint*>& result) const
+void StagePanel::queryJointsByRect(const sm::rect& rect, std::vector<Joint*>& result) const
 {
 	for (size_t i = 0, n = m_joints.size(); i < n; ++i)
 	{
@@ -246,7 +246,7 @@ void StagePanel::PointQueryVisitor::
 //////////////////////////////////////////////////////////////////////////
 
 StagePanel::RectQueryVisitor::
-	RectQueryVisitor(const ee::Rect& rect, std::vector<ee::Sprite*>& result)
+	RectQueryVisitor(const sm::rect& rect, std::vector<ee::Sprite*>& result)
 	: m_rect(rect), m_result(result)
 {
 }

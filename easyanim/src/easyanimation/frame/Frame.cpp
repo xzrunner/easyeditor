@@ -153,7 +153,7 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 	std::vector<ee::Sprite*> sprites;
 	((StagePanel*)(m_task->GetEditPanel()))->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites), ee::DT_VISIBLE);
 
-	ee::Rect region;
+	sm::rect region;
  	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
  		std::vector<sm::vec2> vertices;
  		sprites[i]->GetBounding()->GetBoundPos(vertices);

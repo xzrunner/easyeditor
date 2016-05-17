@@ -172,7 +172,7 @@ void CocoPacker::resolvePicture(const ee::ImageSprite* sprite)
 	// tex
 	// todo: specify only 1 texture
 	std::string assignTex = lua::assign("tex", ee::StringHelper::ToString(1));
-	const ee::Rect* pr = m_tex.Query(sprite->GetSymbol().GetImage());
+	const sm::rect* pr = m_tex.Query(sprite->GetSymbol().GetImage());
 
 	// src
 	int x0 = pr->xmin, y0 = pr->ymax;
@@ -188,8 +188,9 @@ void CocoPacker::resolvePicture(const ee::ImageSprite* sprite)
 		sx1, sy1, sx2, sy2, sx3, sy3));
 
 	// screen
-	const float hw = pr->Width() * 0.5f,
-		hh = pr->Height() * 0.5f;
+	sm::vec2 sz = pr->Size();
+	const float hw = sz.x * 0.5f, 
+		        hh = sz.y * 0.5f;
 	sm::vec2 screen[4];
 	screen[0].Set(-hw, hh);
 	screen[1].Set(-hw, -hh);
@@ -267,7 +268,7 @@ void CocoPacker::resolvePicture(const ee::ImageSymbol* symbol)
 	// tex
 	// todo: specify only 1 texture
 	std::string assignTex = lua::assign("tex", ee::StringHelper::ToString(1));
-	const ee::Rect* pr = m_tex.Query(symbol->GetImage());
+	const sm::rect* pr = m_tex.Query(symbol->GetImage());
 
 	// src
 	int x0 = pr->xmin, y0 = pr->ymax;
@@ -283,8 +284,9 @@ void CocoPacker::resolvePicture(const ee::ImageSymbol* symbol)
 		sx1, sy1, sx2, sy2, sx3, sy3));
 
 	// screen
-	const float hw = pr->Width() * 0.5f,
-		hh = pr->Height() * 0.5f;
+	sm::vec2 sz = pr->Size();
+	const float hw = sz.x * 0.5f,
+		        hh = sz.y * 0.5f;
 	sm::vec2 screen[4];
 	screen[0].Set(-hw, hh);
 	screen[1].Set(-hw, -hh);
@@ -358,7 +360,7 @@ void CocoPacker::resolveAnimation(const ecomplex::Symbol* symbol)
 	m_gen.line(lua::assign("id", sid) + ",");
 
 	// clipbox
-	const ee::Rect& cb = symbol->m_clipbox;
+	const sm::rect& cb = symbol->m_clipbox;
 	if (cb.xmin != 0 || cb.xmax != 0 || cb.ymin != 0 || cb.ymax != 0)
 	{
 		std::string width = ee::StringHelper::ToString(cb.xmax - cb.xmin);

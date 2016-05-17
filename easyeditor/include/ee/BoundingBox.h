@@ -4,13 +4,12 @@
 #include "Cloneable.h"
 
 #include <SM_Vector.h>
+#include <SM_Rect.h>
 
 #include <vector>
 
 namespace ee
 {
-
-class Rect;
 
 class BoundingBox : public Cloneable
 {
@@ -20,20 +19,20 @@ public:
 	//
 	virtual BoundingBox* Clone() const = 0;
 
-	virtual void InitFromRect(const Rect& rect) = 0;
+	virtual void InitFromRect(const sm::rect& rect) = 0;
 
 	virtual bool IsValid() const = 0;
-	virtual void MakeInfinite() = 0;
+	virtual void MakeEmpty() = 0;
 
 	virtual void SetTransform(const sm::vec2& position, const sm::vec2& offset, float angle) = 0;
 	virtual void SetMirror(bool xmirror, bool ymirror) = 0;
 
 	virtual void Combine(const sm::vec2& pos) = 0;
-	virtual void Combine(const Rect& rect) = 0;
+	virtual void Combine(const sm::rect& rect) = 0;
 
 	virtual bool IsContain(const sm::vec2& pos) const = 0;
-	virtual bool IsContain(const Rect& rect) const = 0;
-	virtual bool IsIntersect(const Rect& rect) const = 0;
+	virtual bool IsContain(const sm::rect& rect) const = 0;
+	virtual bool IsIntersect(const sm::rect& rect) const = 0;
 
 	virtual float Area() const = 0;
 	virtual float Width() const = 0;

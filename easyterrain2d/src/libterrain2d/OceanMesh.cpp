@@ -51,7 +51,7 @@ void OceanMesh::Build()
 	std::vector<sm::vec2> bound;
 	ee::Math2D::RemoveDuplicatePoints(m_shape->GetVertices(), bound);
 
-	ee::Rect r = CalBoundRegion(bound);
+	sm::rect r = CalBoundRegion(bound);
 
 	std::vector<sm::vec2> segs;
 	CalSegments(r, segs);
@@ -163,17 +163,18 @@ void OceanMesh::OpenBlend(bool open)
 
 void OceanMesh::SetImage1(const ee::ImageSymbol* image)
 {
-	if (m_image0->GetSize().Width() != image->GetSize().Width() ||
-		m_image0->GetSize().Height() != image->GetSize().Height()) {
+	sm::vec2 sz0 = m_image1->GetSize().Size(),
+		     sz = image->GetSize().Size();
+	if (sz0.x != sz.x || sz0.y != sz.y) {
 		return;
 	}
 
 	m_image1 = image;
 }
 
-ee::Rect OceanMesh::GetRegion() const
+sm::rect OceanMesh::GetRegion() const
 {
-	ee::Rect ret;
+	sm::rect ret;
 	for (int i = 0, n = m_grids.size(); i < n; ++i) {
 		emesh::Mesh* shape = m_grids[i];
 		ret.Combine(shape->GetRegion());
@@ -211,9 +212,9 @@ void OceanMesh::Clear()
 	m_grids.clear();
 }
 
-ee::Rect OceanMesh::CalBoundRegion(const std::vector<sm::vec2>& bound) const
+sm::rect OceanMesh::CalBoundRegion(const std::vector<sm::vec2>& bound) const
 {
-	ee::Rect r;
+	sm::rect r;
 	for (int i = 0, n = bound.size(); i < n; ++i) {
 		r.Combine(bound[i]);
 	}
@@ -221,12 +222,11 @@ ee::Rect OceanMesh::CalBoundRegion(const std::vector<sm::vec2>& bound) const
 	return r;
 }
 
-void OceanMesh::CalSegments(const ee::Rect& r, std::vector<sm::vec2>& segs) const
+void OceanMesh::CalSegments(const sm::rect& r, std::vector<sm::vec2>& segs) const
 {
-	int img_w = m_image0->GetSize().Width(),
-		img_h = m_image0->GetSize().Height();
-	float dw = img_w / m_col,
-		  dh = img_h / m_row;
+	sm::vec2 sz = m_image0->GetSize().Size();
+	float dw = sz.x / m_col,
+		  dh = sz.y / m_row;
 	for (float x = r.xmin; x < r.xmax; x += dw) {
 		segs.push_back(sm::vec2(x, r.ymin - 1));
 		segs.push_back(sm::vec2(x, r.ymax + 1));
@@ -237,18 +237,18 @@ void OceanMesh::CalSegments(const ee::Rect& r, std::vector<sm::vec2>& segs) cons
 	}
 
  	if (m_texcoords_base.x != 0) {
- 		float offset = m_texcoords_base.x * img_w;
+ 		float offset = m_texcoords_base.x * sz.x;
 		if (fabs(offset - (int)(offset / dw) * dw) > 1) {
-			for (float x = r.xmin + offset; x < r.xmax; x += img_w) {
+			for (float x = r.xmin + offset; x < r.xmax; x += sz.x) {
 				segs.push_back(sm::vec2(x, r.ymin - 1));
 				segs.push_back(sm::vec2(x, r.ymax + 1));
 			}
 		}
  	}
  	if (m_texcoords_base.y != 0) {
- 		float offset = m_texcoords_base.y * img_h;
+ 		float offset = m_texcoords_base.y * sz.y;
 		if (fabs(offset - (int)(offset / dh) * dh) > 1) {
-			for (float y = r.ymin + offset; y < r.ymax; y += img_h) {
+			for (float y = r.ymin + offset; y < r.ymax; y += sz.y) {
 				segs.push_back(sm::vec2(r.xmin - 1, y));
 				segs.push_back(sm::vec2(r.xmax + 1, y));
 			}
@@ -256,16 +256,15 @@ void OceanMesh::CalSegments(const ee::Rect& r, std::vector<sm::vec2>& segs) cons
  	}
 }
 
-void OceanMesh::CalTrisTexcords(const ee::Rect& r, 
+void OceanMesh::CalTrisTexcords(const sm::rect& r, 
 								const std::vector<sm::vec2>& tris_vertices,
 								std::vector<sm::vec2>& texcoords) const
 {
-	float img_w = m_image0->GetSize().Width(),
-		  img_h = m_image0->GetSize().Height();
+	sm::vec2 sz = m_image0->GetSize().Size();
 
 	sm::vec2 left_low;
-	left_low.x = r.xmin - (1 - m_texcoords_base.x) * img_w;
-	left_low.y = r.ymin - (1 - m_texcoords_base.y) * img_h;
+	left_low.x = r.xmin - (1 - m_texcoords_base.x) * sz.x;
+	left_low.y = r.ymin - (1 - m_texcoords_base.y) * sz.y;
 	assert(tris_vertices.size() % 3 == 0);
 	for (int i = 0, n = tris_vertices.size(); i < n; i += 3)
 	{
@@ -273,28 +272,28 @@ void OceanMesh::CalTrisTexcords(const ee::Rect& r,
 		center /= 3;
 
 		sm::vec2 base;
-		int ix = (center.x - left_low.x) / img_w,
-			iy = (center.y - left_low.y) / img_h;
-		base.x = left_low.x + img_w * ix;
-		base.y = left_low.y + img_h * iy;
+		int ix = (center.x - left_low.x) / sz.x,
+			iy = (center.y - left_low.y) / sz.y;
+		base.x = left_low.x + sz.x * ix;
+		base.y = left_low.y + sz.y * iy;
 
 		for (int j = 0; j < 3; ++j) {
-			float tx = (tris_vertices[i+j].x - base.x) / img_w,
-				  ty = (tris_vertices[i+j].y - base.y) / img_h;
+			float tx = (tris_vertices[i+j].x - base.x) / sz.x,
+				  ty = (tris_vertices[i+j].y - base.y) / sz.y;
 			texcoords.push_back(sm::vec2(tx, ty));
 		}
 	}
 }
 
-void OceanMesh::BuildGrids(const ee::Rect& region, 
+void OceanMesh::BuildGrids(const sm::rect& region, 
 						   const std::vector<sm::vec2>& vertices, 
 						   const std::vector<sm::vec2>& texcoords,
 						   const std::vector<sm::vec2>& bound)
 {
-	float img_w = m_image0->GetSize().Width(),
-		  img_h = m_image0->GetSize().Height();
-	int cx = std::ceil(region.Width() / img_w),
-		cy = std::ceil(region.Height() / img_h);
+	sm::vec2 sz = m_image0->GetSize().Size();
+	sm::vec2 r_sz = region.Size();
+	int cx = std::ceil(r_sz.x / sz.x),
+		cy = std::ceil(r_sz.y / sz.y);
 	std::vector<MeshShape*> grids;
 	grids.resize(cx * cy, NULL);
 	for (int i = 0, n = vertices.size(); i < n; i += 3)
@@ -302,8 +301,8 @@ void OceanMesh::BuildGrids(const ee::Rect& region,
 		sm::vec2 center = vertices[i] + vertices[i+1] + vertices[i+2];
 		center /= 3;
 
-		int ix = (center.x - region.xmin) / img_w,
-			iy = (center.y - region.ymin) / img_h;
+		int ix = (center.x - region.xmin) / sz.x,
+			iy = (center.y - region.ymin) / sz.y;
 		MeshShape** grid = &grids[iy * cx + ix];
 		if (!*grid) {
 			*grid = new MeshShape(m_image0);
@@ -320,8 +319,7 @@ void OceanMesh::BuildGrids(const ee::Rect& region,
 
 void OceanMesh::UpdateWave(float during)
 {
-	int img_w = m_image0->GetSize().Width(),
-		img_h = m_image0->GetSize().Height();
+	sm::vec2 sz = m_image0->GetSize().Size();
 	for (int i = 0, n = m_grids.size(); i < n; ++i) {
 		MeshShape* grid = m_grids[i];
 		const std::vector<emesh::Triangle*>& tris = grid->GetTriangles();
@@ -334,8 +332,8 @@ void OceanMesh::UpdateWave(float during)
 				}
 
   				// todo
-  				float x_times = (n->ori_xy.x - debug_r.xmin - m_texcoords_base.x * img_w) / img_w,
-  					  y_times = (n->ori_xy.y - debug_r.ymin - m_texcoords_base.y * img_h) / img_h;
+  				float x_times = (n->ori_xy.x - debug_r.xmin - m_texcoords_base.x * sz.x) / sz.x,
+  					  y_times = (n->ori_xy.y - debug_r.ymin - m_texcoords_base.y * sz.y) / sz.y;
 //   				if (fabs(x_times - (int)x_times) < 0.001f || 
 //   					fabs(y_times - (int)y_times) < 0.001f) {
 				if (fabs(y_times - (int)y_times) < 0.001f) {
@@ -343,14 +341,14 @@ void OceanMesh::UpdateWave(float during)
 //   					//n->xy.y = n->ori_xy.y;
 //  					n->xy.y = n->ori_xy.y + m_wave_height * cos(dis);
 
-					float dis = n->ori_xy.y - m_texcoords_base.y * img_h + m_wave_speed * during;
+					float dis = n->ori_xy.y - m_texcoords_base.y * sz.y + m_wave_speed * during;
 					n->xy.y = n->ori_xy.y + m_wave_height * cos(dis);
   				} else {
   					float dis = n->ori_xy.y - m_wave_speed * during;
   					n->xy.y = n->ori_xy.y + m_wave_height * cos(dis);
   				}
 
-// 				float dis = n->ori_xy.y + m_texcoords_base.y * img_h - m_wave_speed * during;
+// 				float dis = n->ori_xy.y + m_texcoords_base.y * sz.y - m_wave_speed * during;
 // 				n->xy.y = n->ori_xy.y + m_wave_height * cos(dis);
 
 // 				float dis = n->ori_xy.y - m_wave_speed * during;

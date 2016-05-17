@@ -59,7 +59,7 @@ bool PolygonShape::IsContain(const sm::vec2& pos) const
 		&& ee::Math2D::IsPointInArea(pos, m_vertices);
 }
 
-// bool PolygonShape::isIntersect(const ee::Rect& rect) const
+// bool PolygonShape::isIntersect(const sm::rect& rect) const
 // {
 // }
 

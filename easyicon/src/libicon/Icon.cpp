@@ -52,9 +52,9 @@ void Icon::Draw(const sm::mat4& mt, float process) const
 	shader->Draw(&scr_coords[0].x, &tex_coords[0].x, texid);
 }
 
-ee::Rect Icon::GetRegion(float process) const
+sm::rect Icon::GetRegion(float process) const
 {
-	ee::Rect ret;
+	sm::rect ret;
 
 	if (!m_img) {
 		return ret;

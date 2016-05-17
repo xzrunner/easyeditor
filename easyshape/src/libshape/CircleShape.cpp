@@ -38,7 +38,7 @@ bool CircleShape::IsContain(const sm::vec2& pos) const
 	return ee::Math2D::GetDistance(center, pos) < QUERY_ACCURACY;
 }
 
-bool CircleShape::IsIntersect(const ee::Rect& rect) const
+bool CircleShape::IsIntersect(const sm::rect& rect) const
 {
 	const float cx = (rect.xmin + rect.xmax) * 0.5f,
 		cy = (rect.ymin + rect.ymax) * 0.5f;
@@ -98,7 +98,7 @@ void CircleShape::LoadFromFile(const Json::Value& value, const std::string& dir)
 	center.y = value["y"].asDouble();
 	radius = value["radius"].asDouble();
 
-	m_rect = ee::Rect(center, radius, radius);
+	m_rect = sm::rect(center, radius, radius);
 }
 
 void CircleShape::StoreToFile(Json::Value& value, const std::string& dir) const

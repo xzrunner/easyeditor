@@ -35,7 +35,7 @@ bool Body::IsContain(const sm::vec2& pos) const
 	return false;
 }
 
-bool Body::IsIntersect(const ee::Rect& rect) const
+bool Body::IsIntersect(const sm::rect& rect) const
 {
 	for (size_t i = 0, n = m_fixtures.size(); i < n; ++i)
 		if (m_fixtures[i]->IsIntersect(rect))

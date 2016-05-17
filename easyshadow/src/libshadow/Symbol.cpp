@@ -38,12 +38,12 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 	}
 }
 
-ee::Rect Symbol::GetSize(const ee::Sprite* sprite) const
+sm::rect Symbol::GetSize(const ee::Sprite* sprite) const
 {
 	if (m_shadow) {
 		return m_shadow->GetRegion();
 	} else {
-		return ee::Rect(200, 200);
+		return sm::rect(sm::vec2(0, 0), 200, 200);
 	}
 }
 

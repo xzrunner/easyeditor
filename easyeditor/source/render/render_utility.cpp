@@ -38,7 +38,7 @@ Sprite* draw_all_to_one_spr(const std::vector<Sprite*>& sprites)
 		return NULL;
 	}
 
-	Rect r;
+	sm::rect r;
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		std::vector<sm::vec2> bound;
 		sprites[i]->GetBounding()->GetBoundPos(bound);
@@ -47,16 +47,15 @@ Sprite* draw_all_to_one_spr(const std::vector<Sprite*>& sprites)
 		}
 	}
 
-	float scale = cal_texture_size(r.Width(), r.Height());
-	float w = r.Width() * scale,
-		h = r.Height() * scale;
-	float dx = r.CenterX() * scale,
-		dy = r.CenterY() * scale;
+	sm::vec2 sz = r.Size();
+	float scale = cal_texture_size(sz.x, sz.y);
+	sz *= scale;
+	sm::vec2 center = r.Center() * scale;
 
-	Snapshoot ss(static_cast<int>(w), static_cast<int>(h));
+	Snapshoot ss(static_cast<int>(sz.x), static_cast<int>(sz.y));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		ee::Sprite* spr = sprites[i];
-		ss.DrawSprite(spr, false, static_cast<int>(w), static_cast<int>(h), dx, dy, scale);
+		ss.DrawSprite(spr, false, static_cast<int>(sz.x), static_cast<int>(sz.y), center.x, center.y, scale);
 	}
 
 	Image* img = new Image(ss.GetFBO());
@@ -64,7 +63,7 @@ Sprite* draw_all_to_one_spr(const std::vector<Sprite*>& sprites)
 	ImageSprite* spr = new ImageSprite(symbol);
 
 	spr->SetMirror(false, true);
-	spr->SetTransform(sm::vec2(dx, dy), 0);
+	spr->SetTransform(sm::vec2(center.x, center.y), 0);
 	spr->SetScale(sm::vec2(1.0f / scale, 1.0f / scale));
 
 	return spr;

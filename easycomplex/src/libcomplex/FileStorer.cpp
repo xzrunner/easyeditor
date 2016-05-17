@@ -80,10 +80,7 @@ void FileStorer::StoreWithHistory(const char* filepath, const Symbol* symbol)
 
 void FileStorer::CenterSymbol(Symbol* symbol)
 {
-	sm::vec2 offset;
-	offset.x = symbol->m_rect.CenterX();
-	offset.y = symbol->m_rect.CenterY();
-
+	sm::vec2 offset = symbol->m_rect.Center();
 	const std::vector<s2::Sprite*>& children = symbol->GetChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
 		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());

@@ -2,7 +2,6 @@
 #include "Context.h"
 #include "config.h"
 
-#include <ee/Rect.h>
 #include <ee/ImageSprite.h>
 #include <ee/TPNode.h>
 #include <ee/Image.h>
@@ -47,7 +46,7 @@ void BinaryTreeNewArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites)
 			ee::ImageSprite* s = sorted[i];
 			bool success = Insert(*s);
 			if (!success) {
-				ee::Rect r = s->GetSymbol().GetSize();
+				sm::rect r = s->GetSymbol().GetSize();
 				float w = r.Width() * scale + PADDING*2;
 				float h = r.Height() * scale + PADDING*2;
 				if ((w > tot_w || h > tot_h) &&

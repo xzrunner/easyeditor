@@ -2,9 +2,9 @@
 #define _EASYSHADOW_SHADOW_H_
 
 #include <ee/Object.h>
-#include <ee/Rect.h>
 
 #include <SM_Matrix.h>
+#include <SM_Rect.h>
 #include <sprite2/Color.h>
 
 #include <json/json.h>
@@ -27,7 +27,7 @@ public:
 	void BuildOutterLine();
 	void BuildInnerLine(const std::vector<sm::vec2>& loop);
 
-	const ee::Rect& GetRegion() const { return m_region; }
+	const sm::rect& GetRegion() const { return m_region; }
 
 	const s2::Color& GetInnerColor() const { return m_inner_color; }
 	const s2::Color& GetOuterColor() const { return m_outer_color; }
@@ -55,7 +55,7 @@ private:
 	std::vector<sm::vec2> m_tris;	
 	std::vector<s2::Color> m_colors;	
 
-	ee::Rect m_region;
+	sm::rect m_region;
 
 	static int m_shader_idx;
 

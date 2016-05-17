@@ -45,7 +45,7 @@ wxSizer* ToolbarPanel::InitLayout()
 	}
 	sizer->AddSpacer(20);
 	{
-		const ee::Rect& r = m_stage_panel->GetList().GetClipbox();
+		const sm::rect& r = m_stage_panel->GetList().GetClipbox();
 		{
 			wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
 			csizer->Add(new wxStaticText(this, wxID_ANY, "width"), 0, wxLEFT | wxRIGHT, 5);
@@ -102,7 +102,7 @@ void ToolbarPanel::OnChangeSize(wxCommandEvent& event)
 	int hw = ee::StringHelper::FromString<float>(m_width_text->GetValue().ToStdString()) * 0.5f;
 	int hh = ee::StringHelper::FromString<float>(m_height_text->GetValue().ToStdString()) * 0.5f;
 
-	ee::Rect& r = m_stage_panel->GetList().GetClipbox();
+	sm::rect& r = m_stage_panel->GetList().GetClipbox();
 	r.xmin = -hw;
 	r.xmax = hw;
 	r.ymin = -hh;

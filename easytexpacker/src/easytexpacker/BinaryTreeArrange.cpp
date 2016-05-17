@@ -61,7 +61,7 @@ void BinaryTreeArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites)
 			{
 				for (size_t j = i; j < n; ++j)
 				{
-					ee::Rect r = sorted[j]->GetSymbol().GetSize();
+					sm::rect r = sorted[j]->GetSymbol().GetSize();
 					sm::vec2 pos;
 					pos.x = -SPACING - r.Width() * 0.5f - r.CenterX();
 					pos.y = -SPACING - r.Height() * 0.5f - r.CenterY();

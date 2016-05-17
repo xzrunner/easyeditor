@@ -3,7 +3,6 @@
 
 #include <easyimage.h>
 
-#include <ee/Rect.h>
 #include <ee/Sprite.h>
 #include <ee/Symbol.h>
 
@@ -24,7 +23,7 @@ bool ImageProcessOP::OnActive()
 
 	if (const ee::Sprite* sprite = m_stage->GetImage())
 	{
-		ee::Rect r = sprite->GetSymbol().GetSize();
+		sm::rect r = sprite->GetSymbol().GetSize();
 
 		ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
 		LanczosResamplingShader* shader = new LanczosResamplingShader;

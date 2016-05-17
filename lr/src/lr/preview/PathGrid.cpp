@@ -10,7 +10,7 @@ namespace lr
 namespace preview
 {
 
-PathGrid::PathGrid(const ee::Rect& region, int row, int col)
+PathGrid::PathGrid(const sm::rect& region, int row, int col)
 	: m_nw(region, row, col)
 {
 }
@@ -27,8 +27,9 @@ void PathGrid::QueryRoute(const sm::vec2& start, const sm::vec2& end)
 		return;
 	}
 
-	float dx = -m_nw.m_region.Width() * 0.5f,
-		dy = -m_nw.m_region.Height() * 0.5f;
+	sm::vec2 sz = m_nw.m_region.Size();
+	float dx = -sz.x * 0.5f,
+		  dy = -sz.y * 0.5f;
 	m_routes.clear();
 	while (node) {
 		int y = node->m_id / m_nw.m_col;
@@ -50,14 +51,15 @@ void PathGrid::DebugDraw() const
 //////////////////////////////////////////////////////////////////////////
 
 PathGrid::Network::
-Network(const ee::Rect& region, int row, int col)
+Network(const sm::rect& region, int row, int col)
 	: m_region(region)
 	, m_row(row)
 	, m_col(col)
 	, m_visited(this)
 {
-	m_width = m_region.Width() / m_col;
-	m_height = m_region.Height() / m_row;
+	sm::vec2 r_sz = m_region.Size();
+	m_width = r_sz.x / m_col;
+	m_height = r_sz.y / m_row;
 
 	int sz = m_row * m_col;
 	m_nodes = new Node[sz];
@@ -84,14 +86,15 @@ TransIDToPos(int id) const
 		return ret;
 	}
 
-	ret.x = m_width * x - m_region.Width() * 0.5f;
-	ret.y = m_height * y - m_region.Height() * 0.5f;
+	sm::vec2 sz = m_region.Size();
+	ret.x = m_width * x - sz.x * 0.5f;
+	ret.y = m_height * y - sz.y * 0.5f;
 
 	return ret;
 }
 
 void PathGrid::Network::
-SetStatus(const ee::Rect& region, bool used)
+SetStatus(const sm::rect& region, bool used)
 {
 	if (!ee::Math2D::IsRectContainRect(m_region, region)) {
 		return;
@@ -139,8 +142,9 @@ QueryRoute(const sm::vec2& start, const sm::vec2& end)
 void PathGrid::Network::
 DebugDraw() const
 {
-	float dx = -m_region.Width() * 0.5f,
-		dy = -m_region.Height() * 0.5f;
+	sm::vec2 sz = m_region.Size();
+	float dx = -sz.x * 0.5f,
+		  dy = -sz.y * 0.5f;
 	int idx = 0;
 	for (int y = 0; y < m_row; ++y) {
 		for (int x = 0; x < m_col; ++x) {
@@ -164,8 +168,9 @@ QueryNode(const sm::vec2& pos) const
 		return NULL;
 	}
 
-	float dx = m_region.Width() * 0.5f,
-		dy = m_region.Height() * 0.5f;
+	sm::vec2 sz = m_region.Size();
+	float dx = sz.x * 0.5f,
+		  dy = sz.y * 0.5f;
 	int x = floor((pos.x+dx) / m_width),
 		y = floor((pos.y+dy) / m_height);
 	return &m_nodes[y * m_col + x];

@@ -29,7 +29,7 @@ public:
 	//
 	virtual void Draw(const s2::RenderParams& params, const ee::Sprite* spr = NULL) const;
 	virtual void ReloadTexture() const;
-	virtual ee::Rect GetSize(const ee::Sprite* sprite = NULL) const;
+	virtual sm::rect GetSize(const ee::Sprite* sprite = NULL) const;
 
 	std::vector<OceanMesh*>& GetOceans() { return m_oceans; }
 	const std::vector<OceanMesh*>& GetOceans() const { return m_oceans; }

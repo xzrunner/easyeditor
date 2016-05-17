@@ -2,7 +2,6 @@
 #define _EASYSHAPE_RECT_SHAPE_H_
 
 #include <ee/Shape.h>
-#include <ee/Rect.h>
 
 namespace eshape
 {
@@ -25,16 +24,16 @@ public:
 	//
 	virtual const char* GetShapeDesc() const { return "rect"; }
 	virtual bool IsContain(const sm::vec2& pos) const;
-	virtual bool IsIntersect(const ee::Rect& rect) const;
+	virtual bool IsIntersect(const sm::rect& rect) const;
 	virtual void Translate(const sm::vec2& offset);
-	virtual const ee::Rect& GetRect() const { return m_rect; }
+	virtual const sm::rect& GetRect() const { return m_rect; }
 	virtual void Draw(const sm::mat4& mt, const s2::RenderColor& color = s2::RenderColor()) const;
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
 	virtual void LoadFromFile(const Json::Value& value, const std::string& dir);
 	virtual void StoreToFile(Json::Value& value, const std::string& dir) const;
 
 public:
-	ee::Rect m_rect;
+	sm::rect m_rect;
 
 }; // RectShape
 

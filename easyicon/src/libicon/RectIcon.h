@@ -18,7 +18,7 @@ public:
 
 	virtual void GetBound(float process, sm::vec2 bound[4]) const;
 
-	void SetRegion(const ee::Rect& r);
+	void SetRegion(const sm::rect& r);
 
 private:
 	sm::vec2 m_min, m_max;

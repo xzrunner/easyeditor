@@ -1,7 +1,6 @@
 #include "CircleBody.h"
 #include "BodyData.h"
 #include "physics_const.h"
-#include "Rect.h"
 
 #include <Box2D/Box2D.h>
 
@@ -46,7 +45,7 @@ CircleBody::CircleBody(b2World* world, float radius)
 	m_body->CreateFixture(&fd);
 }
 
-void CircleBody::GetRect(Rect& rect, const sm::vec2& position, float angle) const
+void CircleBody::GetRect(sm::rect& rect, const sm::vec2& position, float angle) const
 {
 	b2Shape* shape = m_body->GetFixtureList()->GetShape();
 	b2CircleShape* circle = dynamic_cast<b2CircleShape*>(shape);

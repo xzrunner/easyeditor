@@ -40,11 +40,11 @@ Mesh::Mesh(const ee::Symbol* base)
 	m_base = base;
 	m_base->Retain();
 
-	ee::Rect r = m_base->GetSize();
-	m_width = r.Width();
-	m_height = r.Height();
+	sm::vec2 sz = m_base->GetSize().Size();
+	m_width = sz.x;
+	m_height = sz.y;
 
-	m_node_radius = std::min(m_width * 0.1f, 5.0f);
+	m_node_radius = std::min(sz.x * 0.1f, 5.0f);
 }
 
 Mesh::~Mesh()
@@ -74,7 +74,7 @@ Node* Mesh::PointQueryNode(const sm::vec2& p)
 	return node;
 }
 
-void Mesh::RectQueryNodes(const ee::Rect& r, std::vector<Node*>& nodes)
+void Mesh::RectQueryNodes(const sm::rect& r, std::vector<Node*>& nodes)
 {
 	std::set<Node*> unique;
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
@@ -91,9 +91,9 @@ void Mesh::RectQueryNodes(const ee::Rect& r, std::vector<Node*>& nodes)
 	}
 }
 
-ee::Rect Mesh::GetRegion() const
+sm::rect Mesh::GetRegion() const
 {
-	ee::Rect r;
+	sm::rect r;
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
 	{
 		Triangle* tri = m_tris[i];

@@ -4,7 +4,6 @@
 
 #include <ee/sprite_msg.h>
 #include <ee/FetchAllVisitor.h>
-#include <ee/Rect.h>
 #include <ee/Sprite.h>
 #include <ee/SpriteFactory.h>
 #include <ee/BoundingBox.h>
@@ -41,7 +40,7 @@ void FileIO::Store(const char* filename)
  	std::vector<ee::Sprite*> sprites;
 	Context::Instance()->stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
  
- 	ee::Rect rect;
+ 	sm::rect rect;
  	for (size_t i = 0, n = sprites.size(); i < n; ++i)
  	{
  		std::vector<sm::vec2> vertices;

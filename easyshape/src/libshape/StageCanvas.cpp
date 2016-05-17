@@ -58,7 +58,7 @@ void StageCanvas::OnDrawSprites() const
 		ee::SpriteRenderer::Draw(m_bg, params);
 	}
 
-	m_shape_impl->TraverseShapes(ee::DrawShapesVisitor(ee::Rect()), ee::DT_VISIBLE);
+	m_shape_impl->TraverseShapes(ee::DrawShapesVisitor(sm::rect()), ee::DT_VISIBLE);
 
 	eshape::StageCanvas::DrawGuideLines();
 

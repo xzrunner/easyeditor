@@ -2,7 +2,6 @@
 #define _EASYEDITOR_RECT_QUERY_VISITOR_H_
 
 #include "Visitor.h"
-#include "Rect.h"
 #include "Sprite.h"
 #include "BoundingBox.h"
 
@@ -14,18 +13,18 @@ namespace ee
 class RectQueryVisitor : public Visitor
 {
 public:
-	RectQueryVisitor(const Rect& rect, bool contain, std::vector<Sprite*>& result);
+	RectQueryVisitor(const sm::rect& rect, bool contain, std::vector<Sprite*>& result);
 	virtual void Visit(Object* object, bool& next);
 
 private:
-	const Rect& m_rect;
+	const sm::rect& m_rect;
 	bool m_contain;
 	std::vector<Sprite*>& m_result;
 
 }; // RectQueryVisitor
 
 inline
-RectQueryVisitor::RectQueryVisitor(const Rect& rect, bool contain, std::vector<Sprite*>& result)
+RectQueryVisitor::RectQueryVisitor(const sm::rect& rect, bool contain, std::vector<Sprite*>& result)
 	: m_rect(rect)
 	, m_contain(contain)
 	, m_result(result)

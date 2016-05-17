@@ -127,8 +127,8 @@ void Strip::OffsetUV(float dx, float dy)
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
 	{
 		Triangle* tri = m_tris[i];
-		ee::Rect r;
-		r.MakeInfinite();
+		sm::rect r;
+		r.MakeEmpty();
 		for (int i = 0; i < 3; ++i) {
 			r.Combine(tri->nodes[i]->uv);
 		}

@@ -23,7 +23,7 @@ bool RopeJoint::IsContain(const sm::vec2& pos) const
 		|| ee::Math2D::GetDistance(GetWorldAnchorB(), pos) < JOINT_RADIUS_OUT;
 }
 
-bool RopeJoint::IsIntersect(const ee::Rect& rect) const
+bool RopeJoint::IsIntersect(const sm::rect& rect) const
 {
 	return ee::Math2D::IsPointInRect(GetWorldAnchorA(), rect) 
 		|| ee::Math2D::IsPointInRect(GetWorldAnchorB(), rect);

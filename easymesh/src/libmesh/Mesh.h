@@ -7,6 +7,7 @@
 #include <ee/Cloneable.h>
 
 #include <SM_Vector.h>
+#include <SM_Rect.h>
 
 namespace ee { class Symbol; class Rect; class RenderParams; }
 
@@ -37,7 +38,7 @@ public:
 	virtual void Refresh() {}
 
 	Node* PointQueryNode(const sm::vec2& p);
-	void RectQueryNodes(const ee::Rect& r, std::vector<Node*>& nodes);
+	void RectQueryNodes(const sm::rect& r, std::vector<Node*>& nodes);
 
 	const ee::Symbol* GetBaseSymbol() const { return m_base; }
 
@@ -48,7 +49,7 @@ public:
 	float GetWidth() const { return m_width; }
 	float GetHeight() const { return m_height; }
 
-	ee::Rect GetRegion() const;
+	sm::rect GetRegion() const;
 
 protected:
 	void ClearTriangles();

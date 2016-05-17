@@ -101,8 +101,8 @@ void CocoPacker::ResolveSymbols()
 				if (ee::ImageSprite* image = dynamic_cast<ee::ImageSprite*>(sprite))
 				{
 					m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
-
-					if (image->GetSymbol().GetSize().Width() == 4 && image->GetSymbol().GetSize().Height() == 4)
+					sm::vec2 sz = image->GetSymbol().GetSize().Size();
+					if (sz.x == 4 && sz.y == 4)
 						ParserPicture(image, e_bothfix);
 					else
 						ParserPicture(image);
@@ -280,7 +280,7 @@ void CocoPacker::ResolveSymbols()
 				if (itrFind == m_mapSymbolID.end())
 				{
 					m_mapSymbolID.insert(std::make_pair(*itr, m_id++));
-					if ((*itr)->GetSize().Width() <= 4)
+					if ((*itr)->GetSize().Size().x <= 4)
 						ParserPicture(*itr, e_xfix);
 					else
 						ParserPicture(*itr);
@@ -827,7 +827,7 @@ void CocoPacker::ParserComplex(const ecomplex::Symbol* symbol)
 	ParserSymbolBase(symbol);
 
 	// clipbox
-	const ee::Rect& cb = symbol->m_clipbox;
+	const sm::rect& cb = symbol->m_clipbox;
 	if (cb.xmin != 0 || cb.xmax != 0 || cb.ymin != 0 || cb.ymax != 0)
 	{
 		std::string width = ee::StringHelper::ToString(cb.xmax - cb.xmin);

@@ -87,7 +87,7 @@ OnDropText(wxCoord x, wxCoord y, const wxString& text)
 // 	// fixme
 // 	sm::vec2 pos = m_stage->transPosScreenToProject(x, y);
 // 	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-// 	ee::Rect r = sprite->getSymbol().getSize();
+// 	sm::rect r = sprite->getSymbol().getSize();
 // 	if (pos.x < 0) {
 // 		sprite->setTransform(sm::vec2(-r.Width() * 0.5f - 10, 0.0f), 0);
 // 		m_stage->m_left = sprite;

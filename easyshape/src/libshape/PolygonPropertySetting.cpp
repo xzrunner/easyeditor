@@ -33,14 +33,14 @@ void PolygonPropertySetting::OnPropertyGridChange(const std::string& name, const
 	else if (name == wxT("X"))
 	{
 		const float x = wxANY_AS(value, float);
-		const float dx = x - m_poly->GetRect().CenterX();
+		const float dx = x - m_poly->GetRect().Center().x;
 		m_poly->Translate(sm::vec2(dx, 0.0f));
 		m_poly->refresh();
 	}
 	else if (name == wxT("Y"))
 	{
 		const float y = wxANY_AS(value, float);
-		const float dy = y - m_poly->GetRect().CenterY();
+		const float dy = y - m_poly->GetRect().Center().y;
 		m_poly->Translate(sm::vec2(0.0f, dy));
 		m_poly->refresh();
 	}
@@ -49,7 +49,7 @@ void PolygonPropertySetting::OnPropertyGridChange(const std::string& name, const
 		int type = wxANY_AS(value, int);
 		if (type == 1)
 		{
-			float x = m_poly->GetRect().CenterX();
+			float x = m_poly->GetRect().Center().x;
 			std::vector<sm::vec2> vertices = m_poly->GetVertices();
 			for (size_t i = 0, n = vertices.size(); i < n; ++i)
 				vertices[i].x = x * 2 - vertices[i].x;
@@ -58,7 +58,7 @@ void PolygonPropertySetting::OnPropertyGridChange(const std::string& name, const
 		}
 		else if (type == 2)
 		{
-			float y = m_poly->GetRect().CenterY();
+			float y = m_poly->GetRect().Center().y;
 			std::vector<sm::vec2> vertices = m_poly->GetVertices();
 			for (size_t i = 0, n = vertices.size(); i < n; ++i)
 				vertices[i].y = y * 2 - vertices[i].y;
@@ -79,8 +79,9 @@ void PolygonPropertySetting::OnPropertyGridChange(const std::string& name, const
 void PolygonPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
 	pg->GetProperty(wxT("Name"))->SetValue(m_poly->name);
-	pg->GetProperty(wxT("X"))->SetValue(m_poly->GetRect().CenterX());
-	pg->GetProperty(wxT("Y"))->SetValue(m_poly->GetRect().CenterY());
+	sm::vec2 center = m_poly->GetRect().Center();
+	pg->GetProperty(wxT("X"))->SetValue(center.x);
+	pg->GetProperty(wxT("Y"))->SetValue(center.y);
 	pg->GetProperty(wxT("Mirror"))->SetValue(wxT("none"));
 }
 
@@ -90,11 +91,13 @@ void PolygonPropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_poly->name));
 
-	pg->Append(new wxFloatProperty(wxT("X"), wxPG_LABEL, m_poly->GetRect().CenterX()));
+	sm::vec2 center = m_poly->GetRect().Center();
+
+	pg->Append(new wxFloatProperty(wxT("X"), wxPG_LABEL, center.x));
 	pg->SetPropertyAttribute(wxT("X"), wxPG_ATTR_UNITS, wxT("pixels"));
 	pg->SetPropertyAttribute(wxT("X"), "Precision", 1);
 
-	pg->Append(new wxFloatProperty(wxT("Y"), wxPG_LABEL, m_poly->GetRect().CenterY()));
+	pg->Append(new wxFloatProperty(wxT("Y"), wxPG_LABEL, center.y));
 	pg->SetPropertyAttribute(wxT("Y"), wxPG_ATTR_UNITS, wxT("pixels"));
 	pg->SetPropertyAttribute(wxT("Y"), "Precision", 1);
 

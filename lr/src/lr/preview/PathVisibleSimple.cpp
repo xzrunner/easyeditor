@@ -12,7 +12,7 @@ namespace lr
 namespace preview
 {
 
-PathVisibleSimple::PathVisibleSimple(const ee::Rect& region)
+PathVisibleSimple::PathVisibleSimple(const sm::rect& region)
 	: m_region(region)
 	, m_visited(this)
 	, m_node_id(0)

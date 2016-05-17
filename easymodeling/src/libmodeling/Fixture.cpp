@@ -65,7 +65,7 @@ bool Fixture::IsContain(const sm::vec2& pos) const
 		return false;
 }
 
-bool Fixture::IsIntersect(const ee::Rect& rect) const
+bool Fixture::IsIntersect(const sm::rect& rect) const
 {
 	if (eshape::CircleShape* circle = dynamic_cast<eshape::CircleShape*>(m_shape))
 	{

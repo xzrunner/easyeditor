@@ -42,7 +42,7 @@ public:
 	virtual ~Joint() {}
 	
 	virtual bool IsContain(const sm::vec2& pos) const = 0;
-	virtual bool IsIntersect(const ee::Rect& rect) const = 0;
+	virtual bool IsIntersect(const sm::rect& rect) const = 0;
 
 	virtual void Draw(DrawType type) const = 0;
 

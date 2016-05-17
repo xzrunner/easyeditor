@@ -1,7 +1,6 @@
 #include "GenRegularRectBinary.h"
 
 #include <ee/FileHelper.h>
-#include <ee/Rect.h>
 #include <ee/StringHelper.h>
 #include <ee/Exception.h>
 
@@ -138,7 +137,7 @@ void GenRegularRectBinary::LoadRegularRectPackFile(const std::string& json_file,
 	// set picture region
 	for (int i = 0, n = m_pics.size(); i < n; ++i) {
 		Picture* pic = m_pics[i];
-		ee::Rect r;
+		sm::rect r;
 		for (int j = 0, m = pic->parts.size(); j < m; ++j) {
 			const Rect& r_src = pic->parts[j]->src;
 			r.Combine(sm::vec2(r_src.x, r_src.y));

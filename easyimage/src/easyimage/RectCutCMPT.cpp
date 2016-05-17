@@ -5,7 +5,6 @@
 #include <ee/FileHelper.h>
 #include <ee/ImageSprite.h>
 #include <ee/Image.h>
-#include <ee/Rect.h>
 #include <ee/StringHelper.h>
 #include <ee/panel_msg.h>
 #include <ee/ImageSaver.h>
@@ -216,7 +215,7 @@ void RectCutCMPT::OnSetJsonPath(wxCommandEvent& event)
 void RectCutCMPT::OnOutputData(wxCommandEvent& event)
 {
 	RectCutOP* op = static_cast<RectCutOP*>(m_editop);
-	const std::vector<ee::Rect*>& rects = op->GetRectMgr().GetAllRect();
+	const std::vector<sm::rect*>& rects = op->GetRectMgr().GetAllRect();
 	if (rects.empty()) {
 		return;
 	}
@@ -240,7 +239,7 @@ void RectCutCMPT::OnOutputData(wxCommandEvent& event)
 	ecomplex::Symbol* complex = new ecomplex::Symbol;
 	for (int i = 0, n = rects.size(); i < n; ++i)
 	{
-		const ee::Rect& r = *rects[i];
+		const sm::rect& r = *rects[i];
 
 		ee::ImageClip clip(*image->GetImageData());
 		const uint8_t* pixels = clip.Clip(r.xmin, r.xmax, r.ymin, r.ymax);
@@ -275,7 +274,7 @@ void RectCutCMPT::OnAddRect(wxCommandEvent& event)
 	m_heightCtrl->GetValue().ToDouble(&height);
 	
 	RectCutOP* op = static_cast<RectCutOP*>(m_editop);
-	op->GetRectMgr().Insert(ee::Rect(sm::vec2(0, 0), sm::vec2((float)width, (float)height)));
+	op->GetRectMgr().Insert(sm::rect(sm::vec2(0, 0), sm::vec2((float)width, (float)height)));
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }

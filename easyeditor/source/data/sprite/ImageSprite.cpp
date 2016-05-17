@@ -74,19 +74,18 @@ void ImageSprite::BuildBoundingFromTexCoords(float* texCoords)
 {
 	if (!m_symbol) return;
 
- 	int width = m_symbol->GetSize().Width(),
- 		height = m_symbol->GetSize().Height();
- 
+	sm::vec2 sz = m_symbol->GetSize().Size();
+
  	delete m_bounding;
  	m_bounding = BBFactory::CreateBB(e_obb);
  
- 	Rect rect;
- 	rect.xmin = width * (texCoords[0] - 0.5f);
- 	rect.xmax = width * (texCoords[2] - 0.5f);
- 	rect.ymin = height * (texCoords[1] - 0.5f);
- 	rect.ymax = height * (texCoords[3] - 0.5f);
+ 	sm::rect rect;
+ 	rect.xmin = sz.x * (texCoords[0] - 0.5f);
+ 	rect.xmax = sz.x * (texCoords[2] - 0.5f);
+ 	rect.ymin = sz.y * (texCoords[1] - 0.5f);
+ 	rect.ymax = sz.y * (texCoords[3] - 0.5f);
  
- 	sm::vec2 center(rect.CenterX(), rect.CenterY());
+ 	sm::vec2 center = rect.Center();
  	float hWidth = (rect.xmax - rect.xmin) * 0.5f * m_core->Scale().x,
  		hHeight = (rect.ymax - rect.ymin) * 0.5f * m_core->Scale().y;
  	rect.xmin = -hWidth;

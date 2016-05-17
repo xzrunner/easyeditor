@@ -17,7 +17,7 @@ public:
 	ChainBody(b2World* world, const std::vector<sm::vec2>& vertices, bool isLoop, float scale = 1.0f);
 	ChainBody(b2World* world, float scale = 1.0f);
 
-	virtual void GetRect(Rect& rect, const sm::vec2& position, float angle) const;
+	virtual void GetRect(sm::rect& rect, const sm::vec2& position, float angle) const;
 
 }; // ChainBody
 

@@ -173,9 +173,9 @@ ext_sym_get_size(void* ext_sym, int* width, int* height) {
 	}
 
 	Symbol* sym = (Symbol*)ext_sym;
-	Rect sz = sym->GetSize();
-	*width  = static_cast<int>(sz.Width());
-	*height = static_cast<int>(sz.Height());
+	sm::vec2 sz = sym->GetSize().Size();
+	*width  = static_cast<int>(sz.x);
+	*height = static_cast<int>(sz.y);
 }
 
 void

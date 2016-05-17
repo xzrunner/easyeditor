@@ -5,7 +5,7 @@
 namespace ee
 {
 
-DrawShapesVisitor::DrawShapesVisitor(const Rect& screen_region)
+DrawShapesVisitor::DrawShapesVisitor(const sm::rect& screen_region)
 	: m_screen_region(screen_region)
 {
 }

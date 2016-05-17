@@ -4,6 +4,8 @@
 #include <ee/ImageSaver.h>
 #include <ee/Image.h>
 
+#include <SM_Rect.h>
+
 #include <set>
 #include <map>
 
@@ -31,10 +33,10 @@ public:
 	void StoreToMemory();
 	void StoreToFile(const std::string& floder, const std::string& filename, ee::ImageSaver::Type type);
 
-	const ee::Rect* Query(ee::Image* image) const;
+	const sm::rect* Query(ee::Image* image) const;
 
 private:
-	std::map<ee::Image*, ee::Rect> m_map_img2rect;
+	std::map<ee::Image*, sm::rect> m_map_img2rect;
 	
 	int m_edge;
 

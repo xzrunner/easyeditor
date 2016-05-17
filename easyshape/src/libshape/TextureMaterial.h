@@ -3,7 +3,7 @@
 
 #include "Material.h"
 
-#include <ee/Rect.h>
+#include <SM_Rect.h>
 
 namespace ee { class ImageSymbol; }
 
@@ -31,11 +31,11 @@ protected:
 	virtual void BuildEnd();
 
 private:
-	ee::Rect GetBoundingRegion(const std::vector<sm::vec2>& bounding) const;
+	sm::rect GetBoundingRegion(const std::vector<sm::vec2>& bounding) const;
 
-	void GetTexBoundarySegments(const ee::Rect& rect, std::vector<sm::vec2>& segments);
+	void GetTexBoundarySegments(const sm::rect& rect, std::vector<sm::vec2>& segments);
 
-	void CalTexcoords(const ee::Rect& rect);
+	void CalTexcoords(const sm::rect& rect);
 
 private:
 	ee::ImageSymbol* m_image;

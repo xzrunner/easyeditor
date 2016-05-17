@@ -105,8 +105,8 @@ void EditDialog::InitCamera(ee::Sprite* spr) const
 	}
 
 	wxSize sz = GetSize();
-	ee::Rect r = spr->GetRect();
-	float scale = std::min(sz.GetWidth() / r.Width(), sz.GetHeight() / r.Height());
+	sm::vec2 r_sz = spr->GetRect().Size();
+	float scale = std::min(sz.GetWidth() / r_sz.x, sz.GetHeight() / r_sz.y);
 
 	ee::OrthoCamera* cam = static_cast<ee::OrthoCamera*>(ee::CameraMgr::Instance()->GetCamera());
 	cam->SetScale(1 / scale);

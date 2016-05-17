@@ -28,7 +28,7 @@ Shape* MultiShapesImpl::QueryShapeByPos(const sm::vec2& pos) const
 	return result;
 }
 
-void MultiShapesImpl::QueryShapesByRect(const Rect& rect, std::vector<Shape*>& result) const
+void MultiShapesImpl::QueryShapesByRect(const sm::rect& rect, std::vector<Shape*>& result) const
 {
 	TraverseShapes(RectQueryVisitor(rect, result), DT_EDITABLE);
 }
@@ -92,7 +92,7 @@ void MultiShapesImpl::PointQueryVisitor::Visit(Object* object, bool& next)
 // class MultiShapesImpl::RectQueryVisitor
 //////////////////////////////////////////////////////////////////////////
 
-MultiShapesImpl::RectQueryVisitor::RectQueryVisitor(const Rect& rect, std::vector<Shape*>& result)
+MultiShapesImpl::RectQueryVisitor::RectQueryVisitor(const sm::rect& rect, std::vector<Shape*>& result)
 	: m_rect(rect), m_result(result)
 {
 }

@@ -1,12 +1,12 @@
 #ifndef _EASYICON_ICON_H_
 #define _EASYICON_ICON_H_
 
-#include <json/json.h>
-
 #include <ee/Object.h>
-#include <ee/Rect.h>
 
 #include <SM_Matrix.h>
+#include <SM_Rect.h>
+
+#include <json/json.h>
 
 namespace ee { class Image; }
 
@@ -30,7 +30,7 @@ public:
 
 	virtual void Draw(const sm::mat4& mt, float process) const;
 
-	virtual ee::Rect GetRegion(float process) const;
+	virtual sm::rect GetRegion(float process) const;
 
 	void GetTexCoords(float process, sm::vec2* tex_coords) const;
 	void GetScreenCoords(float process, const sm::vec2* tex_coords,

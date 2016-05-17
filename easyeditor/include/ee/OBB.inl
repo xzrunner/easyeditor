@@ -25,7 +25,7 @@ OBB* OBB::Clone() const
 }
 
 inline 
-void OBB::InitFromRect(const Rect& rect)
+void OBB::InitFromRect(const sm::rect& rect)
 {
 	m_rect = rect;
 	m_position.Set(0, 0);
@@ -39,9 +39,9 @@ bool OBB::IsValid() const
 }
 
 inline 
-void OBB::MakeInfinite()
+void OBB::MakeEmpty()
 {
-	m_rect.MakeInfinite();
+	m_rect.MakeEmpty();
 }
 
 inline
@@ -69,12 +69,12 @@ void OBB::Combine(const sm::vec2& pos)
 }
 
 inline 
-void OBB::Combine(const Rect& rect)
+void OBB::Combine(const sm::rect& rect)
 {
 	if (m_rect.IsValid()) {
 		TransToAABB();
 	}
-	Rect r(rect);
+	sm::rect r(rect);
 	r.Translate(-m_position);
 	m_rect.Combine(r);
 }
@@ -82,19 +82,20 @@ void OBB::Combine(const Rect& rect)
 inline
 float OBB::Area() const
 {
-	return m_rect.Width() * m_rect.Height();
+	sm::vec2 sz = m_rect.Size();
+	return sz.x * sz.y;
 }
 
 inline
 float OBB::Width() const
 {
-	return m_rect.Width();
+	return m_rect.Size().x;
 }
 
 inline
 float OBB::Height() const
 {
-	return m_rect.Height();
+	return m_rect.Size().y;
 }
 
 inline

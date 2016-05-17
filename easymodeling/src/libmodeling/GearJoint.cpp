@@ -16,7 +16,7 @@ bool GearJoint::IsContain(const sm::vec2& pos) const
 	return m_joint1->IsContain(pos) || m_joint2->IsContain(pos);
 }
 
-bool GearJoint::IsIntersect(const ee::Rect& rect) const
+bool GearJoint::IsIntersect(const sm::rect& rect) const
 {
 	return m_joint1->IsIntersect(rect) || m_joint2->IsIntersect(rect);
 }

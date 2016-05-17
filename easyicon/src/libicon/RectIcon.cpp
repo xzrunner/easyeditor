@@ -35,7 +35,7 @@ void RectIcon::GetBound(float process, sm::vec2 bound[4]) const
 	bound[3].Set(m_max.x, m_min.y);
 }
 
-void RectIcon::SetRegion(const ee::Rect& r)
+void RectIcon::SetRegion(const sm::rect& r)
 {
 	float w = static_cast<float>(m_img->GetClippedWidth()),
 		  h = static_cast<float>(m_img->GetClippedHeight());

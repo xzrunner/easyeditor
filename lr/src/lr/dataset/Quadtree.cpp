@@ -12,7 +12,7 @@
 namespace lr
 {
 
-Quadtree::Quadtree(const ee::Rect& rect)
+Quadtree::Quadtree(const sm::rect& rect)
 	: m_selected(NULL)
 {
 	m_root = new Node(rect);
@@ -28,7 +28,7 @@ void Quadtree::Insert(const ee::Sprite* spr)
 	m_root->Insert(spr);
 }
 
-std::vector<const ee::Sprite*> Quadtree::Query(const ee::Rect& rect) const
+std::vector<const ee::Sprite*> Quadtree::Query(const sm::rect& rect) const
 {
 	std::set<const ee::Sprite*> set_sprites;
 
@@ -122,7 +122,7 @@ const float Quadtree::Node::MAX_AREA = 0.5f;
 const int Quadtree::Node::MIN_GRID = 8;
 
 Quadtree::Node::
-Node(const ee::Rect& rect)
+Node(const sm::rect& rect)
 	: m_rect(rect)
 {
 	memset(m_children, 0, sizeof(m_children));
@@ -155,7 +155,7 @@ Insert(const ee::Sprite* spr)
 	} 
 	else 
 	{
-		ee::Rect rect = spr->GetRect();
+		sm::rect rect = spr->GetRect();
 		for (int i = 0; i < 4; ++i) {
 			Node* child = m_children[i];
 			if (child->IsIntersect(rect)) {
@@ -172,7 +172,7 @@ IsLeaf() const
 }
 
 bool Quadtree::Node::
-IsIntersect(const ee::Rect& rect) const
+IsIntersect(const sm::rect& rect) const
 {
 	return ee::Math2D::IsRectIntersectRect(m_rect, rect);
 }
@@ -213,7 +213,8 @@ NeedSplit() const
 		a_shape += GetContainArea(m_sprites[i]);
 	}
 
-	float a_rect = m_rect.Width() * m_rect.Height();
+	sm::vec2 sz = m_rect.Size();
+	float a_rect = sz.x * sz.y;
 	float p = a_shape / a_rect;
 
 	if (fabs(a_rect - 0) < 0.001f) {
@@ -230,16 +231,17 @@ Split()
 	for (int i = 0; i < 4; ++i) {
 		m_children[i] = new Node(m_rect);
 	}
+	sm::vec2 center = m_rect.Center();
 	m_children[0]->m_rect.xmax = m_children[2]->m_rect.xmax = 
-		m_children[1]->m_rect.xmin = m_children[3]->m_rect.xmin = m_rect.CenterX();
+		m_children[1]->m_rect.xmin = m_children[3]->m_rect.xmin = center.x;
 	m_children[2]->m_rect.ymax = m_children[3]->m_rect.ymax = 
-		m_children[0]->m_rect.ymin = m_children[1]->m_rect.ymin = m_rect.CenterY();
+		m_children[0]->m_rect.ymin = m_children[1]->m_rect.ymin = center.y;
 
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		const ee::Sprite* spr = m_sprites[i];
 		for (int j = 0; j < 4; ++j) {
 			Node* node = m_children[j];
-			ee::Rect rect = spr->GetRect();
+			sm::rect rect = spr->GetRect();
 			if (node->IsIntersect(rect)) {
 				node->Insert(spr);
 			}

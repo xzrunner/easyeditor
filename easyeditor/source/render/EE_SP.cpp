@@ -1,5 +1,4 @@
 #include "EE_SP.h"
-#include "Rect.h"
 #include "Sprite.h"
 #include "BoundingBox.h"
 #include "EE_RVG.h"
@@ -48,7 +47,7 @@ bool SpatialPartition::Remove(const Sprite* spr)
 	return sp_null_remove(SIDX, (Sprite*)spr);
 }
 
-void SpatialPartition::Query(const Rect& region, std::vector<const Sprite*>& result) const
+void SpatialPartition::Query(const sm::rect& region, std::vector<const Sprite*>& result) const
 {
 	sp_region r;
 	r.xmin = region.xmin;

@@ -1,5 +1,4 @@
 #include "JsonSerializer.h"
-#include "Rect.h"
 
 namespace ee
 {
@@ -91,7 +90,7 @@ void JsonSerializer::Load(const Json::Value& value, std::vector<s2::Color>& colo
 	}
 }
 
-void JsonSerializer::Store(const Rect& r, Json::Value& value)
+void JsonSerializer::Store(const sm::rect& r, Json::Value& value)
 {
 	value["xmin"] = r.xmin;
 	value["xmax"] = r.xmax;
@@ -99,7 +98,7 @@ void JsonSerializer::Store(const Rect& r, Json::Value& value)
 	value["ymax"] = r.ymax;
 }
 
-void JsonSerializer::Load(const Json::Value& value, Rect& r)
+void JsonSerializer::Load(const Json::Value& value, sm::rect& r)
 {
 	r.xmin = static_cast<float>(value["xmin"].asDouble());
 	r.xmax = static_cast<float>(value["xmax"].asDouble());

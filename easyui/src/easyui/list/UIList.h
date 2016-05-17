@@ -1,8 +1,6 @@
 #ifndef _EASYUI_LIST_UI_LIST_H_
 #define _EASYUI_LIST_UI_LIST_H_
 
-#include <ee/Rect.h>
-
 #include <json/json.h>
 
 namespace ee { class Sprite; class Visitor; }
@@ -27,7 +25,7 @@ public:
 	bool ReFilling();
 	bool Arrange(const ee::Sprite* spr);
 
-	ee::Rect& GetClipbox() { return m_clipbox; }
+	sm::rect& GetClipbox() { return m_clipbox; }
 
 	bool IsHoriEnable() const { return m_horizontal; }
 	bool IsVertEnable() const { return m_vertical; }
@@ -39,7 +37,7 @@ private:
 	bool Arrange(float hori_space, float vert_space);
 
 private:
-	ee::Rect m_clipbox;
+	sm::rect m_clipbox;
 
 	std::vector<ee::Sprite*> m_items;
 //	ee::Sprite *m_base_spr, *m_hori_spr, *m_vert_spr;

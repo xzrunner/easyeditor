@@ -125,14 +125,14 @@ void BezierShape::createCurve()
 
 void BezierShape::Mirror(bool x, bool y)
 {
-	float cx = GetRect().CenterX();
-	float cy = GetRect().CenterY();
-	for (int i = 0; i < CTRL_NODE_COUNT; ++i) {
+	sm::vec2 center = GetRect().Center();
+	for (int i = 0; i < CTRL_NODE_COUNT; ++i) 
+	{
 		if (x) {
-			m_control_nodes[i].x = cx * 2 - m_control_nodes[i].x;
+			m_control_nodes[i].x = center.x * 2 - m_control_nodes[i].x;
 		}
 		if (y) {
-			m_control_nodes[i].y = cy * 2 - m_control_nodes[i].y;			
+			m_control_nodes[i].y = center.y * 2 - m_control_nodes[i].y;			
 		}
 	}
 }

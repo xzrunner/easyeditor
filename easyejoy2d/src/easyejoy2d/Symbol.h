@@ -24,7 +24,7 @@ public:
 	// Symbol interfaces
 	//
 	virtual void Draw(const s2::RenderParams& params, const ee::Sprite* spr = NULL) const;
-	virtual ee::Rect GetSize(const ee::Sprite* sprite = NULL) const;
+	virtual sm::rect GetSize(const ee::Sprite* sprite = NULL) const;
 
 	static ee::Symbol* Create() { return new Symbol(); }
 

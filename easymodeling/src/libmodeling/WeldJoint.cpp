@@ -25,7 +25,7 @@ bool WeldJoint::IsContain(const sm::vec2& pos) const
 		|| ee::Math2D::GetDistance(GetWorldAnchorB(), pos) < JOINT_RADIUS_OUT;
 }
 
-bool WeldJoint::IsIntersect(const ee::Rect& rect) const
+bool WeldJoint::IsIntersect(const sm::rect& rect) const
 {
 	return ee::Math2D::IsPointInRect(GetWorldAnchorA(), rect) 
 		|| ee::Math2D::IsPointInRect(GetWorldAnchorB(), rect);

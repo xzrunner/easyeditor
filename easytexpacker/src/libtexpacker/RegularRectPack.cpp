@@ -4,7 +4,6 @@
 #include <ee/StringHelper.h>
 #include <ee/std_functor.h>
 #include <ee/math_common.h>
-#include <ee/Rect.h>
 #include <ee/FileType.h>
 
 #include <json/json.h>

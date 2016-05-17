@@ -24,7 +24,7 @@ bool MotorJoint::IsContain(const sm::vec2& pos) const
 	return ee::Math2D::GetDistance(center, pos) < JOINT_RADIUS_OUT;
 }
 
-bool MotorJoint::IsIntersect(const ee::Rect& rect) const
+bool MotorJoint::IsIntersect(const sm::rect& rect) const
 {
 	const sm::vec2 center = (m_body_a->m_sprite->GetPosition() + m_body_b->m_sprite->GetPosition()) * 0.5f;
 	return ee::Math2D::IsPointInRect(center, rect);

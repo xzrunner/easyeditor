@@ -4,7 +4,7 @@
 #include "IPathfinding.h"
 #include "PathUtil.h"
 
-#include <ee/Rect.h>
+#include <SM_Rect.h>
 
 #include <vector>
 
@@ -16,7 +16,7 @@ namespace preview
 class PathGrid : public IPathfinding
 {
 public:
-	PathGrid(const ee::Rect& region, int row, int col);
+	PathGrid(const sm::rect& region, int row, int col);
 
 	virtual void DisableRegion(const ee::Sprite* spr, bool disable);
 
@@ -47,12 +47,12 @@ private:
 	class Network : public INetwork
 	{
 	public:
-		Network(const ee::Rect& region, int row, int col);
+		Network(const sm::rect& region, int row, int col);
 		~Network();
 
 		virtual sm::vec2 TransIDToPos(int id) const;
 
-		void SetStatus(const ee::Rect& region, bool used);
+		void SetStatus(const sm::rect& region, bool used);
 
 		VisitedNode* QueryRoute(const sm::vec2& start, const sm::vec2& end);
 
@@ -66,7 +66,7 @@ private:
 		void GetConnections(VisitedNode* node, std::vector<Connection>& connections) const;
 
 	private:
-		ee::Rect m_region;
+		sm::rect m_region;
 
 		int m_row, m_col;
 		float m_width, m_height;

@@ -35,15 +35,15 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
  	}
 }
 
-ee::Rect Symbol::GetSize(const ee::Sprite* sprite) const
+sm::rect Symbol::GetSize(const ee::Sprite* sprite) const
 {
 	if (sprite) {
 		const Sprite* font = static_cast<const Sprite*>(sprite);
 		int w, h;
 		font->GetSize(w, h);
-		return ee::Rect(static_cast<float>(w), static_cast<float>(h));
+		return sm::rect(sm::vec2(0, 0), static_cast<float>(w), static_cast<float>(h));
 	} else {
-		return ee::Rect(static_cast<float>(m_width), static_cast<float>(m_height));
+		return sm::rect(sm::vec2(0, 0), static_cast<float>(m_width), static_cast<float>(m_height));
 	}
 }
 

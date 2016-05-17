@@ -290,11 +290,11 @@ bool UIList::Filling()
 	m_items.clear();
 
 	sm::vec2 base = m_item_spr->GetPosition();
-	ee::Rect item_r = m_item_spr->GetRect();
+	sm::rect item_r = m_item_spr->GetRect();
 	float hw = item_r.Width() * 0.5f;
 	float hh = item_r.Height() * 0.5f;
 
-	ee::Rect region = m_clipbox;
+	sm::rect region = m_clipbox;
 	if (m_horizontal) {
 		region.xmax += m_hori_space * 2;
 	}

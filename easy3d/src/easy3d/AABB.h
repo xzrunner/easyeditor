@@ -13,7 +13,7 @@ class AABB
 public:
 	AABB();
 
-	void MakeInfinite();
+	void MakeEmpty();
 
 	void Combine(const sm::vec3& pos);
 
@@ -30,10 +30,10 @@ private:
 
 inline AABB::AABB() 
 { 
-	MakeInfinite(); 
+	MakeEmpty(); 
 }
 
-inline void AABB::MakeInfinite() 
+inline void AABB::MakeEmpty() 
 {
 	for (int i = 0; i < 3; ++i) {
 		m_min.xyz[i] = FLT_MAX;

@@ -8,7 +8,6 @@
 #include <ee/Config.h>
 #include <ee/SymbolMgr.h>
 #include <ee/SpriteFactory.h>
-#include <ee/Rect.h>
 #include <ee/Math2D.h>
 #include <ee/Sprite.h>
 #include <ee/StringHelper.h>
@@ -74,7 +73,7 @@ void RotateImage::Rotate(ee::Snapshoot& ss, const std::string& src_dir, const st
 		{
 			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-			ee::Rect r = symbol->GetSize();
+			sm::rect r = symbol->GetSize();
 			for (int deg = 10; deg <= 90; deg += 10) {
 				float rad = deg * SM_DEG_TO_RAD;
 				sprite->SetTransform(sprite->GetPosition(), rad);

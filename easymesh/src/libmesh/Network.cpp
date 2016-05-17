@@ -201,7 +201,7 @@ void Network::OffsetUV(float dx, float dy)
 	//	for (int i = 0, n = m_tris.size(); i < n; ++i)
 	//	{
 	//		Triangle* tri = m_tris[i];
-	//		ee::Rect r;
+	//		sm::rect r;
 	//		r.makeInfinite();
 	//		for (int i = 0; i < 3; ++i) {
 	//			r.combine(tri->nodes[i]->uv);
@@ -360,7 +360,7 @@ void Network::LoadFromTriangulation(const std::vector<sm::vec2>& tris)
 void Network::GetRegionBound(std::vector<sm::vec2>& bound) const
 {
 // 	if (m_use_region) {
-// 		const ee::Rect& r = m_region.rect;
+// 		const sm::rect& r = m_region.rect;
 // 		bound.push_back(sm::vec2(r.xmin, r.ymin));
 // 		bound.push_back(sm::vec2(r.xmin, r.ymax));
 // 		bound.push_back(sm::vec2(r.xmax, r.ymax));

@@ -22,7 +22,7 @@ public:
 
 	virtual void Draw(const sm::mat4& mt, float process) const;
 
-	virtual ee::Rect GetRegion(float process) const;
+	virtual sm::rect GetRegion(float process) const;
 
 	const sm::vec2* GetScreen() const { return m_screen; }
 	void SetScreen(const sm::vec2* screen);

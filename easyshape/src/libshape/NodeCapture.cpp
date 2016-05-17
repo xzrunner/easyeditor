@@ -92,8 +92,8 @@ bool NodeCapture::RectQueryVisitor::
 Visit(BezierShape* bezier)
 {
 	// capture center
-	const ee::Rect& rect = bezier->GetRect();
-	if (ee::Math2D::GetDistance(sm::vec2(rect.CenterX(), rect.CenterY()), m_pos) < m_tolerance)
+	const sm::rect& rect = bezier->GetRect();
+	if (ee::Math2D::GetDistance(rect.Center(), m_pos) < m_tolerance)
 	{
 		m_result.shape = bezier;
 		m_result.pos_valid = false;
@@ -118,8 +118,8 @@ bool NodeCapture::RectQueryVisitor::
 Visit(ChainShape* chain)
 {
 	// capture center
-	const ee::Rect& rect = chain->GetRect();
-	if (ee::Math2D::GetDistance(sm::vec2(rect.CenterX(), rect.CenterY()), m_pos) < m_tolerance)
+	const sm::rect& rect = chain->GetRect();
+	if (ee::Math2D::GetDistance(rect.Center(), m_pos) < m_tolerance)
 	{
 		m_result.shape = chain;
 		m_result.pos_valid = false;
@@ -177,7 +177,7 @@ bool NodeCapture::RectQueryVisitor::
 Visit(RectShape* rect)
 {
 	// capture center
-	if (ee::Math2D::GetDistance(m_pos, sm::vec2(rect->m_rect.CenterX(), rect->m_rect.CenterY())) < m_tolerance)
+	if (ee::Math2D::GetDistance(m_pos, rect->m_rect.Center()) < m_tolerance)
 	{
 		m_result.shape = rect;
 		m_result.pos_valid = false;

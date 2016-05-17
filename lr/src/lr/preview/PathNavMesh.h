@@ -4,7 +4,7 @@
 #include "IPathfinding.h"
 #include "PathUtil.h"
 
-#include <ee/Rect.h>
+#include <SM_Rect.h>
 
 #include <vector>
 #include <map>
@@ -17,7 +17,7 @@ namespace preview
 class PathNavMesh : public IPathfinding, public INetwork
 {
 public:
-	PathNavMesh(const ee::Rect& region);
+	PathNavMesh(const sm::rect& region);
 
 	//
 	// interface IPathfinding
@@ -43,7 +43,7 @@ private:
 	}; // Node
 
 private:
-	ee::Rect m_region;
+	sm::rect m_region;
 
 	Node* m_nodes;
 

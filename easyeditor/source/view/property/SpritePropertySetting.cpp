@@ -141,7 +141,8 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 	{
 		double w, h;
 		SplitString2Double(value, &w, &h);
-		m_impl->Scale(w/spr->GetSymbol().GetSize().Width(), h/spr->GetSymbol().GetSize().Height());
+		sm::vec2 sz = spr->GetSymbol().GetSize().Size();
+		m_impl->Scale(w / sz.x, h / sz.y);
 	}
 	// shear
 	else if (name == wxT("Shear"))
@@ -251,8 +252,9 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	pg->GetProperty(wxT("Scale.X"))->SetValue(spr->GetScale().x);
 	pg->GetProperty(wxT("Scale.Y"))->SetValue(spr->GetScale().y);
 	pg->GetProperty(wxT("Scale"))->SetValue(pg->GetProperty(wxT("Scale"))->GenerateComposedValue());
-	pg->GetProperty(wxT("Size.Width"))->SetValue(spr->GetSymbol().GetSize(spr).Width() * spr->GetScale().x);
-	pg->GetProperty(wxT("Size.Height"))->SetValue(spr->GetSymbol().GetSize(spr).Height() * spr->GetScale().y);
+	sm::vec2 sz = spr->GetSymbol().GetSize(spr).Size();
+	pg->GetProperty(wxT("Size.Width"))->SetValue(sz.x * spr->GetScale().x);
+	pg->GetProperty(wxT("Size.Height"))->SetValue(sz.y * spr->GetScale().y);
 	pg->GetProperty(wxT("Size"))->SetValue(pg->GetProperty(wxT("Size"))->GenerateComposedValue());
 	pg->GetProperty(wxT("Shear.X"))->SetValue(spr->GetShear().x);
 	pg->GetProperty(wxT("Shear.Y"))->SetValue(spr->GetShear().y);
@@ -381,10 +383,11 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	wxPGProperty* sizeProp = pg->Append(new wxStringProperty(wxT("Size"), wxPG_LABEL, wxT("<composed>")));
 	sizeProp->SetExpanded(false);
-	pg->AppendIn(sizeProp, new wxFloatProperty(wxT("Width"), wxPG_LABEL, spr->GetSymbol().GetSize().Width() * spr->GetScale().x));
+	sm::vec2 sz = spr->GetSymbol().GetSize().Size();
+	pg->AppendIn(sizeProp, new wxFloatProperty(wxT("Width"), wxPG_LABEL, sz.x * spr->GetScale().x));
 	pg->SetPropertyAttribute(wxT("Size.Width"), wxPG_ATTR_UNITS, wxT("pixels"));
 	pg->SetPropertyAttribute(wxT("Size.Width"), "Precision", 2);
-	pg->AppendIn(sizeProp, new wxFloatProperty(wxT("Height"), wxPG_LABEL, spr->GetSymbol().GetSize().Height() * spr->GetScale().y));
+	pg->AppendIn(sizeProp, new wxFloatProperty(wxT("Height"), wxPG_LABEL, sz.y * spr->GetScale().y));
 	pg->SetPropertyAttribute(wxT("Size.Height"), wxPG_ATTR_UNITS, wxT("pixels"));
 	pg->SetPropertyAttribute(wxT("Size.Height"), "Precision", 2);
 

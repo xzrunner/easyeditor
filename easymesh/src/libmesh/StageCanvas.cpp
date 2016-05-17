@@ -25,7 +25,7 @@ void StageCanvas::OnDrawSprites() const
 
 	m_stage->DrawEditOP();
 
-	m_panel->TraverseShapes(ee::DrawShapesVisitor(ee::Rect()), ee::DT_VISIBLE);
+	m_panel->TraverseShapes(ee::DrawShapesVisitor(sm::rect()), ee::DT_VISIBLE);
 }
 
 }

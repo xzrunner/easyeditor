@@ -26,7 +26,7 @@ public:
 	//
 	virtual const char* GetShapeDesc() const { return "complex-polygon"; }
 	virtual bool IsContain(const sm::vec2& pos) const;
-	virtual bool IsIntersect(const ee::Rect& rect) const;
+	virtual bool IsIntersect(const sm::rect& rect) const;
 	virtual void Translate(const sm::vec2& offset);
 	virtual void Draw(const sm::mat4& mt,
 		const s2::RenderColor& color = s2::RenderColor()) const;

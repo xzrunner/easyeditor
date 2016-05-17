@@ -12,7 +12,7 @@ public:
 	WheelJoint(Body* b0, Body* b1);
 
 	virtual bool IsContain(const sm::vec2& pos) const;
-	virtual bool IsIntersect(const ee::Rect& rect) const;
+	virtual bool IsIntersect(const sm::rect& rect) const;
 
 	virtual void Draw(DrawType type) const;
 

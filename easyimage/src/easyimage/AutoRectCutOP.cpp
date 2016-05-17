@@ -2,7 +2,6 @@
 #include "StagePanel.h"
 
 #include <ee/EditPanelImpl.h>
-#include <ee/Rect.h>
 #include <ee/panel_msg.h>
 #include <ee/EE_RVG.h>
 #include <ee/color_config.h>
@@ -75,9 +74,9 @@ bool AutoRectCutOP::OnMouseLeftDClick(int x, int y)
 	if (ee::ZoomViewOP::OnMouseLeftDClick(x, y)) return true;
 
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-	ee::Rect* r = m_rects.QueryRect(pos);
+	sm::rect* r = m_rects.QueryRect(pos);
 	if (r) {
-		m_rects.Insert(ee::Rect(*r), true);
+		m_rects.Insert(sm::rect(*r), true);
 		m_last_pos = pos;
 		m_selected = r;
 	}

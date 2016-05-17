@@ -1,5 +1,4 @@
 #include "SelectShapesOP.h"
-#include "Rect.h"
 #include "MultiShapesImpl.h"
 #include "ShapeSelection.h"
 #include "EditPanelImpl.h"
@@ -122,7 +121,7 @@ bool SelectShapesOP::OnMouseLeftUp(int x, int y)
 
 	if (m_first_pos_valid)
 	{
-		Rect rect(m_first_pos, m_stage->TransPosScrToProj(x, y));
+		sm::rect rect(m_first_pos, m_stage->TransPosScrToProj(x, y));
 		std::vector<Shape*> shapes;
 		m_shape_impl->QueryShapesByRect(rect, shapes);
 		for (size_t i = 0, n = shapes.size(); i < n; ++i)

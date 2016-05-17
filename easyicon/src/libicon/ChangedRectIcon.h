@@ -19,7 +19,7 @@ public:
 	virtual void GetBound(float process, sm::vec2 bound[4]) const;
 
 private:
-	ee::Rect m_begin, m_end;
+	sm::rect m_begin, m_end;
 
 }; // ChangedRectIcon
 

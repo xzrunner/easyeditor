@@ -228,6 +228,18 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="rect"
+			>
+			<File
+				RelativePath="..\..\..\src\sm\SM_Rect.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\sm\SM_Rect.inl"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

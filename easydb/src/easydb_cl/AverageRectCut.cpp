@@ -88,7 +88,7 @@ void AverageRectCut::RectCutImage(const std::string& src_dir, const std::string&
 	ee::ImageData* img = ee::ImageDataMgr::Instance()->GetItem(filepath);		
 
 	ee::ImageTrim trim(*img);
-	ee::Rect img_r = trim.Trim();
+	sm::rect img_r = trim.Trim();
 	if (!img_r.IsValid()) {
 		img_r.xmin = img_r.ymin = 0;
 		img_r.xmax = img->GetWidth();

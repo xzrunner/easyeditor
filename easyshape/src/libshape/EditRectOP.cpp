@@ -166,7 +166,7 @@ bool EditRectOP::OnMouseDrag(int x, int y)
 	{
 		if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape))
 		{
-			sm::vec2 center(rect->m_rect.CenterX(), rect->m_rect.CenterY());
+			sm::vec2 center = rect->m_rect.Center();
 
 			// move
 			if (!m_captured.pos_valid)
@@ -209,7 +209,7 @@ bool EditRectOP::OnDraw() const
 			int tolerance = m_node_capture->GetValue();
 			if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape))
 			{
-				sm::vec2 pos(rect->m_rect.CenterX(), rect->m_rect.CenterY());
+				sm::vec2 pos = rect->m_rect.Center();
 				ee::RVG::Color(s2::Color(102, 255, 102));
 				ee::RVG::Circle(pos, tolerance, true);
 				if (m_captured.pos_valid) {

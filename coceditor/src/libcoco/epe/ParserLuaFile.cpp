@@ -353,8 +353,9 @@ void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames
 		ecomplex::FileStorer::Store(filename.c_str(), symbol);
 
 		pic->filename = filename;
-		pic->width = symbol->GetSize().Width();
-		pic->height = symbol->GetSize().Height();
+		sm::vec2 sz = symbol->GetSize().Size();
+		pic->width = sz.x;
+		pic->height = sz.y;
 
 		delete symbol;
 	}
@@ -495,7 +496,7 @@ void ParserLuaFile::transPicToMemory(const std::vector<std::string>& texfilename
 			Picture::Part* part = pic->parts[i];
 
 			ee::ImageSymbol* image = new ee::ImageSymbol(images[part->tex], texfilenames[part->tex]);
-			ee::Rect r;
+			sm::rect r;
 			r.xmin = part->xmin;
 			r.xmax = part->xmax;
 			r.ymin = part->ymin;

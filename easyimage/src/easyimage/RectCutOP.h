@@ -51,7 +51,7 @@ private:
 	bool m_captured_valid;
 
 	RectMgr::Node m_node_selected;
-	ee::Rect* m_rect_selected;
+	sm::rect* m_rect_selected;
 
 	RectMgr m_rects;
 

@@ -223,8 +223,9 @@ void Image::LoadWithClip(const std::string& filepath)
 	else 
 	{
 		ImageTrim trim(*img_data);
-		Rect r = trim.Trim();
-		if (r.Width() >= img_data->GetWidth() && r.Height() >= img_data->GetHeight()) {
+		sm::rect r = trim.Trim();
+		sm::vec2 sz = r.Size();
+		if (sz.x >= img_data->GetWidth() && sz.y >= img_data->GetHeight()) {
 			m_tex->LoadFromMemory(img_data);
 		} else {
 			int w = img_data->GetWidth(),
@@ -233,11 +234,13 @@ void Image::LoadWithClip(const std::string& filepath)
 			ImageClip clip(*img_data);
 			const uint8_t* c_pixels = clip.Clip(r);
 
-			img_data->SetContent(c_pixels, r.Width(), r.Height());
+			sm::vec2 sz = r.Size();
+			img_data->SetContent(c_pixels, sz.x, sz.y);
 			m_tex->LoadFromMemory(img_data);
 
-			m_offset.x = r.CenterX() - w * 0.5f;
-			m_offset.y = r.CenterY() - h * 0.5f;
+			sm::vec2 center = r.Center();
+			m_offset.x = center.x - w * 0.5f;
+			m_offset.y = center.y - h * 0.5f;
 
 			m_xmin = r.xmin;
 			m_ymin = r.ymin;

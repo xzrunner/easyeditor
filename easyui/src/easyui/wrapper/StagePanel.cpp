@@ -131,7 +131,7 @@ void StagePanel::StoreToFile(const char* filename) const
 	value["clipbox"]["h"] = m_clipbox.Height();
 	value["clipbox"]["x"] = m_clipbox.xmin;
 	value["clipbox"]["y"] = m_clipbox.ymax;
-	ee::Rect r = items_sprite.GetRect();
+	sm::rect r = items_sprite.GetRect();
 	value["children"]["w"] = r.Width();
 	value["children"]["h"] = r.Height();
 	Json::StyledStreamWriter writer;

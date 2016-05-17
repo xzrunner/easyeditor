@@ -24,7 +24,7 @@ public:
 	//
 	virtual void Draw(const s2::RenderParams& params, const ee::Sprite* spr = NULL) const;
 	virtual void ReloadTexture() const;
-	virtual ee::Rect GetSize(const ee::Sprite* sprite = NULL) const;
+	virtual sm::rect GetSize(const ee::Sprite* sprite = NULL) const;
 
 	void ResizeScale9(float width, float height);
 	void ComposeFromSprites(ee::Sprite* sprites[3][3], float width, float height);

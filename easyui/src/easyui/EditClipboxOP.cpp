@@ -10,7 +10,7 @@ namespace eui
 {
 
 EditClipboxOP::EditClipboxOP(wxWindow* wnd, ee::EditPanelImpl* edit_impl,
-							 ee::Rect& rect)
+							 sm::rect& rect)
 	: ee::ZoomViewOP(wnd, edit_impl, true)
 	, m_rect(rect)
 {

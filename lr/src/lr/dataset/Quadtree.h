@@ -1,7 +1,7 @@
 #ifndef _LR_QUADTREE_H_
 #define _LR_QUADTREE_H_
 
-#include <ee/Rect.h>
+#include <SM_Rect.h>
 
 #include <vector>
 
@@ -13,12 +13,12 @@ namespace lr
 class Quadtree
 {
 public:
-	Quadtree(const ee::Rect& rect);
+	Quadtree(const sm::rect& rect);
 	~Quadtree();
 
 	void Insert(const ee::Sprite* spr);
 	
-	std::vector<const ee::Sprite*> Query(const ee::Rect& rect) const;
+	std::vector<const ee::Sprite*> Query(const sm::rect& rect) const;
 
 	void DebugDraw() const;
 
@@ -28,7 +28,7 @@ private:
 	class Node
 	{
 	public:
-		Node(const ee::Rect& rect);
+		Node(const sm::rect& rect);
 		~Node();
 
 		void Insert(const ee::Sprite* spr);
@@ -36,7 +36,7 @@ private:
 		bool IsLeaf() const;
 
 	private:
-		bool IsIntersect(const ee::Rect& rect) const;
+		bool IsIntersect(const sm::rect& rect) const;
 		bool IsContain(const sm::vec2& pos) const;
 		bool IsContain(const ee::Sprite* spr) const;
 
@@ -51,7 +51,7 @@ private:
 		static const int MIN_GRID;
 
 	private:
-		ee::Rect m_rect;
+		sm::rect m_rect;
 
 		// 0 1
 		// 2 3

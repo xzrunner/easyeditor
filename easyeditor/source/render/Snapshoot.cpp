@@ -33,17 +33,15 @@ unsigned char* Snapshoot::OutputToMemory(const Symbol* symbol, bool whitebg,
 {
 	m_fbo->DrawSymbol(symbol, whitebg, scale);
 
-	float w = symbol->GetSize().Width(),
-		h = symbol->GetSize().Height();
-	w *= scale;
-	h *= scale;
+	sm::vec2 sz = symbol->GetSize().Size();
+	sz *= scale;
 
-	size_t size = static_cast<int>(w) * static_cast<int>(h) * 4;
+	size_t size = static_cast<int>(sz.x) * static_cast<int>(sz.y) * 4;
 	unsigned char* pixels = new unsigned char[size];
 	if(!pixels) return NULL;
 	memset(&pixels[0], 0, size);	
 
-	m_fbo->ReadPixels(pixels, static_cast<int>(w), static_cast<int>(h));
+	m_fbo->ReadPixels(pixels, static_cast<int>(sz.x), static_cast<int>(sz.y));
 
 	return pixels;
 }
@@ -51,8 +49,9 @@ unsigned char* Snapshoot::OutputToMemory(const Symbol* symbol, bool whitebg,
 void Snapshoot::OutputToImageFile(const Symbol* symbol, const std::string& filename,
 								  float scale) const
 {
-	int w = static_cast<int>(symbol->GetSize().Width() * scale),
-		h = static_cast<int>(symbol->GetSize().Height() * scale);
+	sm::vec2 sz = symbol->GetSize().Size() * scale;
+	int w = static_cast<int>(sz.x),
+		h = static_cast<int>(sz.y);
 	unsigned char* pixels = OutputToMemory(symbol, false, scale);
 	ImageSaver::StoreToFile(pixels, w, h, 4, filename, ImageSaver::e_png, false);
 	delete[] pixels;

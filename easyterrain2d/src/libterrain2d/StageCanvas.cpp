@@ -48,7 +48,7 @@ void StageCanvas::OnDrawSprites() const
 
 	DrawBG();
 
-	ee::Rect sr = m_screen.GetRegion();
+	sm::rect sr = m_screen.GetRegion();
 	float scale = ee::CameraMgr::Instance()->GetCamera()->GetScale();
 	m_panel->TraverseSprites(ee::DrawSpritesVisitor(sr, scale), ee::DT_VISIBLE);
 //	m_panel->traverseShapes(ee::DrawShapesVisitor(sr), ee::DT_VISIBLE);

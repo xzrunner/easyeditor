@@ -130,7 +130,7 @@ bool SelectNodesOP::OnMouseLeftUp(int x, int y)
 
 	if (m_first_pos_valid)
 	{
-		ee::Rect rect(m_first_pos, m_stage->TransPosScrToProj(x, y));
+		sm::rect rect(m_first_pos, m_stage->TransPosScrToProj(x, y));
 		m_shape_impl->TraverseShapes(RectQueryVisitor(rect, m_node_selection), 
 			ee::DT_SELECTABLE);
 		m_first_pos_valid = false;
@@ -283,7 +283,7 @@ Visit(Object* object, bool& next)
 //////////////////////////////////////////////////////////////////////////
 
 SelectNodesOP::RectQueryVisitor::
-RectQueryVisitor(const ee::Rect& rect, std::vector<ChainSelectedNodes*>& result)
+RectQueryVisitor(const sm::rect& rect, std::vector<ChainSelectedNodes*>& result)
 	: m_rect(rect)
 	, m_result(result)
 {

@@ -46,9 +46,9 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-ee::Rect Symbol::GetSize(const ee::Sprite* sprite) const
+sm::rect Symbol::GetSize(const ee::Sprite* sprite) const
 {
-	ee::Rect r;
+	sm::rect r;
 	if (!m_icon) {
 		return r;
 	}

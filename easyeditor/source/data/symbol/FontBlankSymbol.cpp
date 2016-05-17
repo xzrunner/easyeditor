@@ -43,7 +43,7 @@ void FontBlankSymbol::Draw(const s2::RenderParams& params, const Sprite* spr) co
 	}
 }
 
-Rect FontBlankSymbol::GetSize(const Sprite* sprite/* = NULL*/) const
+sm::rect FontBlankSymbol::GetSize(const Sprite* sprite/* = NULL*/) const
 {
 	float w = width, h = height;
 	if (sprite) {
@@ -53,7 +53,7 @@ Rect FontBlankSymbol::GetSize(const Sprite* sprite/* = NULL*/) const
 			h = font->height;
 		}
 	}
-	return Rect(w, h);
+	return sm::rect(sm::vec2(0, 0), w, h);
 }
 
 bool FontBlankSymbol::LoadFont(const std::string& _filename)

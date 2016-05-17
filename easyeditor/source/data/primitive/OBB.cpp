@@ -16,7 +16,7 @@ bool OBB::IsContain(const sm::vec2& pos) const
 	return Math2D::IsPointInRect(trans, m_rect);
 }
 
-bool OBB::IsContain(const Rect& rect) const
+bool OBB::IsContain(const sm::rect& rect) const
 {
 	sm::vec2 trans;
 	trans = Math2D::RotateVector(sm::vec2(m_rect.xmin, m_rect.ymax), m_angle) + m_position;
@@ -30,7 +30,7 @@ bool OBB::IsContain(const Rect& rect) const
 	return true;
 }
 
-bool OBB::IsIntersect(const Rect& rect) const
+bool OBB::IsIntersect(const sm::rect& rect) const
 {
 	// 0 3
 	// 1 2
@@ -80,7 +80,7 @@ void OBB::TransToAABB()
 	sm::vec2 transLeftLow = Math2D::RotateVector(leftLow, m_angle),
 		transRightTop = Math2D::RotateVector(rightTop, m_angle);
 
-	m_rect.MakeInfinite();
+	m_rect.MakeEmpty();
 	m_rect.Combine(transLeftLow);
 	m_rect.Combine(transRightTop);
 

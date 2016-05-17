@@ -2,7 +2,6 @@
 #define _EASYUI_EDIT_CLIPBOX_OP_H_
 
 #include <ee/ZoomViewOP.h>
-#include <ee/Rect.h>
 
 namespace eui
 {
@@ -11,7 +10,7 @@ class EditClipboxOP : public ee::ZoomViewOP
 {
 public:
 	EditClipboxOP(wxWindow* wnd, ee::EditPanelImpl* edit_impl, 
-		ee::Rect& rect);
+		sm::rect& rect);
 
 	virtual bool OnMouseLeftDown(int x, int y);
 	virtual bool OnMouseLeftUp(int x, int y);
@@ -23,7 +22,7 @@ private:
 	static const int NODE_RADIUS = 10;
 
 private:
-	ee::Rect& m_rect;
+	sm::rect& m_rect;
 
 	// 1 2
 	// 0 3

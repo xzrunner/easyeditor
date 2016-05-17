@@ -33,7 +33,7 @@ public:
 	//
 	virtual void Draw(const s2::RenderParams& params, const ee::Sprite* spr = NULL) const;
 	virtual void ReloadTexture() const;
-	virtual ee::Rect GetSize(const ee::Sprite* sprite = NULL) const;
+	virtual sm::rect GetSize(const ee::Sprite* sprite = NULL) const;
 
 	bool IsOneLayer() const;
 
@@ -66,9 +66,9 @@ public:
 public:
 	std::vector<Group> m_groups;
 
-	ee::Rect m_rect;
+	sm::rect m_rect;
 
-	ee::Rect m_clipbox;
+	sm::rect m_clipbox;
 
 	bool m_use_render_cache;
 

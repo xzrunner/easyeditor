@@ -171,7 +171,7 @@ void Shadow::BuildInnerLoop(const std::vector<sm::vec2>& loop)
 
 void Shadow::BuildOuterLoop()
 {
-	m_region.MakeInfinite();
+	m_region.MakeEmpty();
 
 	m_outer_loop.clear();
 	int sz = m_inner_loop.size();

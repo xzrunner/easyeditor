@@ -50,14 +50,14 @@ int w_Sprite_move(lua_State* L)
 int w_Sprite_width(lua_State* L)
 {
 	Sprite* t = luax_checksprite(L, 1);
-	lua_pushnumber(L, t->GetSymbol().GetSize().Width());
+	lua_pushnumber(L, t->GetSymbol().GetSize().Size().x);
 	return 1;
 }
 
 int w_Sprite_height(lua_State* L)
 {
 	Sprite* t = luax_checksprite(L, 1);
-	lua_pushnumber(L, t->GetSymbol().GetSize().Height());
+	lua_pushnumber(L, t->GetSymbol().GetSize().Size().y);
 	return 1;
 }
 

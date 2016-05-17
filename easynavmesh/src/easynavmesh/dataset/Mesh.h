@@ -11,7 +11,7 @@ namespace enav
 class Mesh
 {
 public:
-	Mesh(const ee::Rect& region);
+	Mesh(const sm::rect& region);
 
 	void AddHole(const std::vector<sm::vec2>& hole);
 

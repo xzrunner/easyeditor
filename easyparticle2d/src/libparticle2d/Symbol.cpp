@@ -52,9 +52,9 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-ee::Rect Symbol::GetSize(const ee::Sprite* sprite) const
+sm::rect Symbol::GetSize(const ee::Sprite* sprite) const
 {
-	return ee::Rect(200, 200);
+	return sm::rect(sm::vec2(0, 0), 200, 200);
 }
 
 void Symbol::LoadResources()

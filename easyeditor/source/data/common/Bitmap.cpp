@@ -79,9 +79,9 @@ bool Bitmap::LoadFromFile(const std::string& filepath)
 	else
 	{
 		Symbol* symbol = SymbolMgr::Instance()->FetchSymbol(filepath);
-		Rect rect = symbol->GetSize();
-		float w = std::max(1.0f, rect.Width()),
-			  h = std::max(1.0f, rect.Height());
+		sm::rect rect = symbol->GetSize();
+		float w = std::max(1.0f, rect.Size().x),
+			  h = std::max(1.0f, rect.Size().y);
 		float scale = w > (MAX_WIDTH / SCALE) ? (MAX_WIDTH / w) : SCALE; 
 		w *= scale;
 		h *= scale;
@@ -149,7 +149,7 @@ void Bitmap::GetImage(const std::string& filepath, wxImage& dst_img)
 	ImageData* img_data = ImageDataMgr::Instance()->GetItem(filepath);
 	int h = img_data->GetHeight();
 	ImageTrim trim(*img_data);
-	Rect trim_r = trim.Trim();
+	sm::rect trim_r = trim.Trim();
 	img_data->Release();
 
 	if (trim_r.IsValid()) {

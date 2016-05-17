@@ -79,7 +79,7 @@ bool SelectNodesOP::OnMouseLeftUp(int x, int y)
 	if (m_first_pos_valid && mesh)
 	{
 		sm::vec2 end = m_stage->TransPosScrToProj(x, y);
-		ee::Rect rect(m_first_pos, end);
+		sm::rect rect(m_first_pos, end);
 		std::vector<Node*> nodes;
 		mesh->RectQueryNodes(rect, nodes);
 		for (size_t i = 0, n = nodes.size(); i < n; ++i) {

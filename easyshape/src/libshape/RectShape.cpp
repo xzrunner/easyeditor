@@ -37,7 +37,7 @@ bool RectShape::IsContain(const sm::vec2& pos) const
 	return ee::Math2D::IsPointInRect(pos, m_rect);
 }
 
-bool RectShape::IsIntersect(const ee::Rect& rect) const
+bool RectShape::IsIntersect(const sm::rect& rect) const
 {
 	return ee::Math2D::IsRectIntersectRect(rect, m_rect);
 }

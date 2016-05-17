@@ -3,8 +3,6 @@
 
 #include "EditableMesh.h"
 
-#include <ee/Rect.h>
-
 namespace eshape { class ChainShape; }
 
 namespace emesh

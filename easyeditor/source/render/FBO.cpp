@@ -180,16 +180,18 @@ void FBO::DrawFBO(const Symbol* symbol, bool whitebg, float scale)
 		has_context = false;
 	}
 
-	Rect rect = symbol->GetSize();
-	int w = static_cast<int>(rect.Width() * scale),
-		h = static_cast<int>(rect.Height() * scale);
+	sm::rect rect = symbol->GetSize();
+	sm::vec2 sz = rect.Size();
+	int w = static_cast<int>(sz.x * scale),
+		h = static_cast<int>(sz.y * scale);
 	ctx_stack->SetModelView(sm::vec2(0, 0), 1);
 	ctx_stack->SetProjection(w, h);
 	GL::Viewport(0, 0, w, h);
 
 	s2::RenderParams params;
-	float dx = -symbol->GetSize().CenterX();
-	float dy = symbol->GetSize().CenterY();
+	sm::vec2 center = rect.Center();
+	float dx = -center.x;
+	float dy = center.y;
 	params.mt.Translate(dx * scale, dy * scale, 0);
 	SpriteRenderer::Draw(symbol, params, sm::vec2(0, 0), 0.0f, scale, -scale);
 

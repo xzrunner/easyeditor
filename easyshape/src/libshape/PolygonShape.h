@@ -29,7 +29,7 @@ public:
 	virtual const char* GetShapeDesc() const { return "polygon"; }
 	virtual bool IsContain(const sm::vec2& pos) const;
 	// todo
-	//virtual bool isIntersect(const ee::Rect& rect) const;
+	//virtual bool isIntersect(const sm::rect& rect) const;
 	virtual void Translate(const sm::vec2& offset);
 	virtual void Draw(const sm::mat4& mt, const s2::RenderColor& color) const;
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);

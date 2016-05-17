@@ -23,7 +23,7 @@ public:
 	// Symbol interfaces
 	//
 	virtual void Draw(const s2::RenderParams& params, const Sprite* spr = NULL) const;
-	virtual Rect GetSize(const Sprite* sprite = NULL) const;
+	virtual sm::rect GetSize(const Sprite* sprite = NULL) const;
 
 	bool LoadFont(const std::string& filename);
 

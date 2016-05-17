@@ -36,7 +36,7 @@ bool EditRectOP::OnMouseLeftDown(int x, int y)
 
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 
-	ee::Rect r = icon->GetRegion(1);
+	sm::rect r = icon->GetRegion(1);
 	if (ee::Math2D::GetDistance(sm::vec2(r.xmin, r.ymin), pos) < CTRL_NODE_RADIUS) {
 		m_selected = PT_LEFT_LOW;
 	} else if (ee::Math2D::GetDistance(sm::vec2(r.xmin, r.ymax), pos) < CTRL_NODE_RADIUS) {
@@ -72,7 +72,7 @@ bool EditRectOP::OnMouseDrag(int x, int y)
 		return false;
 	}
 
-	ee::Rect r = icon->GetRegion(1);
+	sm::rect r = icon->GetRegion(1);
 
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	if (m_selected == PT_LEFT_LOW) {
@@ -137,7 +137,7 @@ bool EditRectOP::OnDraw() const
 	ee::RVG::LineWidth(1);
 	ee::RVG::Rect(sm::vec2(0, 0), w * 0.5f, h * 0.5f, false);
 
-	ee::Rect r = icon->GetRegion(1);
+	sm::rect r = icon->GetRegion(1);
 	ee::RVG::Color(ee::LIGHT_GREEN);
 	ee::RVG::Rect(sm::vec2(r.xmin, r.ymin), sm::vec2(r.xmax, r.ymax), false);
 	ee::RVG::Rect(sm::vec2(r.xmin, r.ymin), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, true);

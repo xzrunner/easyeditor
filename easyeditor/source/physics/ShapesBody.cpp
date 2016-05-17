@@ -1,7 +1,6 @@
 #include "ShapesBody.h"
 #include "BodyData.h"
 #include "physics_const.h"
-#include "Rect.h"
 #include "Math2D.h"
 
 #include <Box2D/Box2D.h>
@@ -58,9 +57,9 @@ ShapesBody::ShapesBody(b2World* world, const BodyData& bodyData, float scale/* =
 	}
 }
 
-void ShapesBody::GetRect(Rect& rect, const sm::vec2& position, float angle) const
+void ShapesBody::GetRect(sm::rect& rect, const sm::vec2& position, float angle) const
 {
-	rect.MakeInfinite();
+	rect.MakeEmpty();
 	for (b2Fixture* f = m_body->GetFixtureList(); f; f = f->GetNext())
 	{
 		if (b2PolygonShape* poly = dynamic_cast<b2PolygonShape*>(f->GetShape()))

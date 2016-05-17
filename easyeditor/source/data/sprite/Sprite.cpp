@@ -197,16 +197,16 @@ void Sprite::BuildBounding()
 		m_bounding = BBFactory::CreateBB(e_obb);
 	}
 	const Symbol& symbol = GetSymbol();
-	Rect rect(symbol.GetSize(this));
+	sm::rect rect(symbol.GetSize(this));
 	if (!rect.IsValid()) {
 		return;
 	}
 
 	if (!m_offset_valid) {
-		m_offset.Set(rect.CenterX(), rect.CenterY());
+		m_offset = rect.Center();
 	}
 	rect.Scale(m_core->Scale().x, m_core->Scale().y);
-	rect.Shear(m_core->Shear().x, m_core->Shear().y);
+//	rect.Shear(m_core->Shear().x, m_core->Shear().y);
 	m_bounding->InitFromRect(rect);
 	m_bounding->SetTransform(m_core->Position(), m_offset, m_core->Angle());
 }
@@ -316,7 +316,7 @@ bool Sprite::IsContain(const sm::vec2& pos) const
 	return m_bounding ? m_bounding->IsContain(pos) : false;
 }
 
-bool Sprite::IsIntersect(const Rect& rect) const
+bool Sprite::IsIntersect(const sm::rect& rect) const
 {
 	return m_bounding ? m_bounding->IsIntersect(rect) : false;
 }
@@ -436,11 +436,11 @@ s2::RenderCamera& Sprite::GetCamera()
 	return m_core->Camera();
 }
 
-Rect Sprite::GetRect() const
+sm::rect Sprite::GetRect() const
 {
 	std::vector<sm::vec2> bound;
 	GetBounding()->GetBoundPos(bound);
-	Rect rect;
+	sm::rect rect;
 	for (int i = 0, n = bound.size(); i < n; ++i) {
 		rect.Combine(bound[i]);
 	}

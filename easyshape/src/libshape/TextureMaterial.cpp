@@ -107,7 +107,7 @@ void TextureMaterial::BuildEnd()
 	std::vector<sm::vec2> outline;
 	ee::Math2D::RemoveDuplicatePoints(m_outline, outline);
 
-	ee::Rect r = GetBoundingRegion(outline);
+	sm::rect r = GetBoundingRegion(outline);
 
 	std::vector<sm::vec2> segments;
 	GetTexBoundarySegments(r, segments);
@@ -120,36 +120,34 @@ void TextureMaterial::BuildEnd()
 	CalTexcoords(r);
 }
 
-ee::Rect TextureMaterial::GetBoundingRegion(const std::vector<sm::vec2>& bounding) const
+sm::rect TextureMaterial::GetBoundingRegion(const std::vector<sm::vec2>& bounding) const
 {
-	ee::Rect r;
+	sm::rect r;
 	for (int i = 0, n = bounding.size(); i < n; ++i) {
 		r.Combine(bounding[i]);
 	}
 	return r;
 }
 
-void TextureMaterial::GetTexBoundarySegments(const ee::Rect& rect, std::vector<sm::vec2>& segments)
+void TextureMaterial::GetTexBoundarySegments(const sm::rect& rect, std::vector<sm::vec2>& segments)
 {
 	static const int EXTEND = 1;
-	int width = m_image->GetSize().Width(),
-		height = m_image->GetSize().Height();
-	for (float x = rect.xmin; x < rect.xmax; x += width)
+	sm::vec2 sz = m_image->GetSize().Size();
+	for (float x = rect.xmin; x < rect.xmax; x += sz.x)
 	{
  		segments.push_back(sm::vec2(x, rect.ymin - EXTEND));
  		segments.push_back(sm::vec2(x, rect.ymax + EXTEND));
 	}
-	for (float y = rect.ymin; y < rect.ymax; y += height)
+	for (float y = rect.ymin; y < rect.ymax; y += sz.y)
 	{
  		segments.push_back(sm::vec2(rect.xmin - EXTEND, y));
  		segments.push_back(sm::vec2(rect.xmax + EXTEND, y));
 	}
 }
 
-void TextureMaterial::CalTexcoords(const ee::Rect& rect)
+void TextureMaterial::CalTexcoords(const sm::rect& rect)
 {
-	int width = m_image->GetSize().Width(),
-		height = m_image->GetSize().Height();
+	sm::vec2 sz = m_image->GetSize().Size();
 	int index = 0;
 	for (size_t i = 0, n = m_tris.size() / 3; i < n; ++i)
 	{
@@ -162,16 +160,16 @@ void TextureMaterial::CalTexcoords(const ee::Rect& rect)
 		cx /= 3;
 		cy /= 3;
 
-		int ix = (cx - rect.xmin) / width,
-			iy = (cy - rect.ymin) / height;
+		int ix = (cx - rect.xmin) / sz.x,
+			iy = (cy - rect.ymin) / sz.y;
 		sm::vec2 base;
-		base.x = rect.xmin + width * ix;
-		base.y = rect.ymin + height * iy;
+		base.x = rect.xmin + sz.x * ix;
+		base.y = rect.ymin + sz.y * iy;
 
 		for (size_t j = 0; j < 3; ++j)
 		{
-			float tx = (m_tris[index + j].x - base.x) / width,
-				  ty = (m_tris[index + j].y - base.y) / height;
+			float tx = (m_tris[index + j].x - base.x) / sz.x,
+				  ty = (m_tris[index + j].y - base.y) / sz.y;
 			m_tris_texcoord.push_back(sm::vec2(tx, ty));
 		}
 

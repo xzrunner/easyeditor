@@ -1,7 +1,6 @@
 #include "ComplexBody.h"
 #include "BodyData.h"
 #include "physics_const.h"
-#include "Rect.h"
 #include "Math2D.h"
 
 #include <Box2D/Box2D.h>
@@ -72,9 +71,9 @@ ComplexBody::ComplexBody(b2World* world, const std::vector<FixtureDataInfo>& fix
 	}
 }
 
-void ComplexBody::GetRect(Rect& rect, const sm::vec2& position, float angle) const
+void ComplexBody::GetRect(sm::rect& rect, const sm::vec2& position, float angle) const
 {
-	rect.MakeInfinite();
+	rect.MakeEmpty();
 	for (b2Fixture* f = m_body->GetFixtureList(); f; f = f->GetNext())
 	{
 		b2PolygonShape* poly = dynamic_cast<b2PolygonShape*>(f->GetShape());
@@ -93,7 +92,7 @@ void ComplexBody::GetRect(Rect& rect, const sm::vec2& position, float angle) con
 			b2CircleShape* circle = dynamic_cast<b2CircleShape*>(shape);
 			if (circle)
 			{
-				Rect part;
+				sm::rect part;
 				part.xmin = position.x - circle->m_radius;
 				part.xmax = position.x + circle->m_radius;
 				part.ymin = position.y - circle->m_radius;

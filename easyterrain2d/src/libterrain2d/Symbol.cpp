@@ -72,9 +72,9 @@ void Symbol::ReloadTexture() const
 	}	
 }
 
-ee::Rect Symbol::GetSize(const ee::Sprite* sprite) const
+sm::rect Symbol::GetSize(const ee::Sprite* sprite) const
 {
-	ee::Rect ret;
+	sm::rect ret;
 	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
 		ret.Combine(m_oceans[i]->GetRegion());
 	}

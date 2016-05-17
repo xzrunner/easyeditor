@@ -3,8 +3,6 @@
 
 #include "BaseStrategy.h"
 
-#include <ee/Rect.h>
-
 namespace ee { class Sprite; }
 
 namespace etexpacker
@@ -27,7 +25,7 @@ private:
 	{
 		Node* child[2];
 		ee::Sprite* texture;
-		ee::Rect rc;
+		sm::rect rc;
 
 		Node();
 		~Node();

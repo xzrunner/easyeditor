@@ -568,9 +568,10 @@ void DelaunayTriangulation::DeleteNode(const Node* n)
 
 void DelaunayTriangulation::InitSurrondTri(const std::vector<sm::vec2>& src)
 {
-	Rect rect;
+	sm::rect rect;
 	Math2D::GetMBR(src, &rect);
-	float extend = std::max(rect.Width(), rect.Height()) * BOUND_EXTEND_TIMES;
+	sm::vec2 sz = rect.Size();
+	float extend = std::max(sz.x, sz.y) * BOUND_EXTEND_TIMES;
 	sm::vec2 center(0.5f * (rect.xmin + rect.xmax), 0.5f * (rect.ymin + rect.ymax));
 
 	sm::vec2 p0(center.x, center.y + extend), 

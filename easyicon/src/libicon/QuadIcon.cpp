@@ -64,9 +64,9 @@ void QuadIcon::Draw(const sm::mat4& mt, float process) const
 	shader->Draw(&vertices[0].x, &m_src[0].x, m_img->GetTexID());
 }
 
-ee::Rect QuadIcon::GetRegion(float process) const
+sm::rect QuadIcon::GetRegion(float process) const
 {
-	ee::Rect ret;
+	sm::rect ret;
 
 	for (int i = 0; i < 4; ++i) {
 		float x = m_screen[i].x,

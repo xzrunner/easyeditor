@@ -1,6 +1,5 @@
 #include "ScreenCache.h"
 #include "EE_SP.h"
-#include "Rect.h"
 #include "Sprite.h"
 #include "Symbol.h"
 #include "Camera.h"
@@ -81,7 +80,7 @@ static void _cs_draw(struct dtex_cs_rect* r, void* ud)
 	dtex_gl_scissor(x, y, w, h);
 	dtex_gl_clear_color(0, 1, 0, 1);
 
-	Rect rq;
+	sm::rect rq;
 	rq.xmin = r->xmin;
 	rq.ymin = r->ymin;
 	rq.xmax = r->xmax;

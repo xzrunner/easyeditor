@@ -237,15 +237,14 @@ bool Math2D::IsPolygonInPolygon(const std::vector<sm::vec2>& in, const std::vect
 	return true;	
 }
 
-bool Math2D::IsPolygonIntersectRect(const std::vector<sm::vec2>& poly, const Rect& rect)
+bool Math2D::IsPolygonIntersectRect(const std::vector<sm::vec2>& poly, const sm::rect& rect)
 {
 	if (poly.size() < 3) {
 		return false;
 	}
 
-	if (IsPointInArea(sm::vec2(rect.CenterX(), rect.CenterY()), poly) ||
-		IsPointInRect(poly[0], rect)) {
-			return true;
+	if (IsPointInArea(rect.Center(), poly) || IsPointInRect(poly[0], rect)) {
+		return true;
 	}
 
  	std::vector<sm::vec2> poly2;
@@ -308,7 +307,7 @@ bool Math2D::IsSegmentIntersectPolyline(const sm::vec2& s, const sm::vec2& e, co
 	return false;
 }
 
-bool Math2D::IsPolylineIntersectRect(const std::vector<sm::vec2>& polyline, bool isLoop, const Rect& aabb)
+bool Math2D::IsPolylineIntersectRect(const std::vector<sm::vec2>& polyline, bool isLoop, const sm::rect& aabb)
 {
 	if (polyline.size() < 2) return false;
 
@@ -407,7 +406,7 @@ bool Math2D::isPolylineIntersectPolylinI(const std::vector<sm::vec2>& poly0, con
 	return false;	
 }
 
-bool Math2D::IsCircleIntersectRect(const sm::vec2& center, float radius, const Rect& aabb)
+bool Math2D::IsCircleIntersectRect(const sm::vec2& center, float radius, const sm::rect& aabb)
 {
 	if (IsPointInRect(center, aabb))
 		return true;
@@ -449,7 +448,7 @@ bool Math2D::IsPointInArea(const sm::vec2& pos, const std::vector<sm::vec2>& are
 
 bool Math2D::IsPointOnPolyline(const sm::vec2& pos, const std::vector<sm::vec2>& poly)
 {
-	Rect r(pos, SM_RAD_TO_DEG, SM_RAD_TO_DEG);
+	sm::rect r(pos, SM_RAD_TO_DEG, SM_RAD_TO_DEG);
 	return IsPolylineIntersectRect(poly, true, r);
 }
 
@@ -711,7 +710,7 @@ bool Math2D::GetTwoSegmentCross(const sm::vec2& s0, const sm::vec2& e0, const sm
 int Math2D::TestPointOnSection(const sm::vec2& startPos, const sm::vec2& endPos, const sm::vec2& thdPos, float tolerance/* = FLT_EPSILON*/)
 {
 	assert(tolerance > 0.0);
-	Rect aabb;
+	sm::rect aabb;
 	aabb.xmin = thdPos.x - tolerance / 2.0f;
 	aabb.xmax = thdPos.x + tolerance / 2.0f;
 	aabb.ymin = thdPos.y - tolerance / 2.0f;
@@ -913,7 +912,7 @@ sm::vec2 Math2D::TransCoordsWorldToLocal(const sm::vec2& origin, const sm::vec2&
 	return local;
 }
 
-void Math2D::GetMBR(const std::vector<sm::vec2>& pos, Rect* mbr)
+void Math2D::GetMBR(const std::vector<sm::vec2>& pos, sm::rect* mbr)
 {
 	if (pos.empty()) return;
 

@@ -130,7 +130,7 @@ sm::vec2 Grids::TransToFlatView(float x, float y)
 void Grids::GetGridRegion(const std::vector<sm::vec2>& area, 
 						  int& xmin, int& xmax, int& ymin, int& ymax) const
 {
-	ee::Rect r;
+	sm::rect r;
 	for (int i = 0, n = area.size(); i < n; ++i) {
 		r.Combine(area[i]);
 	}

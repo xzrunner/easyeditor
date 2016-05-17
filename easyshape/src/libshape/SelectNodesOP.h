@@ -5,7 +5,8 @@
 
 #include <ee/common_type.h>
 #include <ee/Visitor.h>
-#include <ee/Rect.h>
+
+#include <SM_Rect.h>
 
 #include <vector>
 
@@ -57,7 +58,7 @@ private:
 
 	private:
 		const sm::vec2& m_pos;
-		ee::Rect m_rect;
+		sm::rect m_rect;
 		ChainSelectedNodes** m_result;
 
 	}; // PosQueryVisitor
@@ -65,11 +66,11 @@ private:
 	class RectQueryVisitor : public ee::Visitor
 	{
 	public:
-		RectQueryVisitor(const ee::Rect& rect, std::vector<ChainSelectedNodes*>& result);
+		RectQueryVisitor(const sm::rect& rect, std::vector<ChainSelectedNodes*>& result);
 		virtual void Visit(Object* object, bool& next);
 
 	private:
-		const ee::Rect& m_rect;
+		const sm::rect& m_rect;
 		std::vector<ChainSelectedNodes*>& m_result;
 
 	}; // RectQueryVisitor

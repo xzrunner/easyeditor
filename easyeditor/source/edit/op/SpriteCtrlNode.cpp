@@ -1,5 +1,4 @@
 #include "SpriteCtrlNode.h"
-#include "Rect.h"
 #include "Sprite.h"
 #include "Symbol.h"
 #include "Math2D.h"
@@ -9,7 +8,7 @@ namespace ee
 
 void SpriteCtrlNode::GetSpriteCtrlNodes(const Sprite* sprite, sm::vec2 nodes[8])
 {
-	Rect r = sprite->GetSymbol().GetSize(sprite);
+	sm::rect r = sprite->GetSymbol().GetSize(sprite);
 	if (sprite->GetMirror().x) { 
 		r.xmin = -r.xmin;
 		r.xmax = -r.xmax;
@@ -30,10 +29,11 @@ void SpriteCtrlNode::GetSpriteCtrlNodes(const Sprite* sprite, sm::vec2 nodes[8])
 	nodes[2] = Math2D::TransVector(sm::vec2(r.xmin, r.ymin), t);
 	nodes[3] = Math2D::TransVector(sm::vec2(r.xmax, r.ymin), t);
 	// shear
-	nodes[4] = Math2D::TransVector(sm::vec2(r.CenterX(), r.ymax), t);
-	nodes[5] = Math2D::TransVector(sm::vec2(r.xmin, r.CenterY()), t);
-	nodes[6] = Math2D::TransVector(sm::vec2(r.xmax, r.CenterY()), t);
-	nodes[7] = Math2D::TransVector(sm::vec2(r.CenterX(), r.ymin), t);
+	sm::vec2 center = r.Center();
+	nodes[4] = Math2D::TransVector(sm::vec2(center.x, r.ymax), t);
+	nodes[5] = Math2D::TransVector(sm::vec2(r.xmin, center.y), t);
+	nodes[6] = Math2D::TransVector(sm::vec2(r.xmax, center.y), t);
+	nodes[7] = Math2D::TransVector(sm::vec2(center.x, r.ymin), t);
 	// fix for offset
 	sm::vec2 offset = sprite->GetOffset();
 	sm::vec2 fix = Math2D::RotateVector(-offset, sprite->GetAngle()) + offset;
@@ -44,7 +44,7 @@ void SpriteCtrlNode::GetSpriteCtrlNodes(const Sprite* sprite, sm::vec2 nodes[8])
 
 void SpriteCtrlNode::GetSpriteCtrlNodesExt(const Sprite* sprite, sm::vec2 nodes[4])
 {
-	Rect r = sprite->GetSymbol().GetSize(sprite);
+	sm::rect r = sprite->GetSymbol().GetSize(sprite);
 	if (sprite->GetMirror().x) { 
 		r.xmin = -r.xmin;
 		r.xmax = -r.xmax;

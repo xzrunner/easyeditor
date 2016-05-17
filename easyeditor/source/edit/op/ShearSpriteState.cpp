@@ -76,7 +76,7 @@ void ShearSpriteState::Shear(const sm::vec2& curr)
 	float kx = m_sprite->GetShear().x,
 		ky = m_sprite->GetShear().y;
 
-	Rect r = m_sprite->GetSymbol().GetSize();
+	sm::rect r = m_sprite->GetSymbol().GetSize();
 //  	pos.x -= px;
 //  	pos.y -= py;
 
@@ -88,8 +88,8 @@ void ShearSpriteState::Shear(const sm::vec2& curr)
 // 	py = r.CenterY();
 
 	float x, y;
-	float hw = r.Width() * 0.5f,
-		hh = r.Height() * 0.5f;
+	sm::vec2 sz = r.Size();
+	float hw = sz.x * 0.5f, hh = sz.y * 0.5f;
 	if (m_ctrl_node.type == SpriteCtrlNode::UP)
 	{
 		x = 0; y = hh - offset.y;		
@@ -128,14 +128,15 @@ void ShearSpriteState::Shear(const sm::vec2& curr)
 
 void ShearSpriteState::Shear2(const sm::vec2& curr)
 {
-	Rect region = m_sprite->GetSymbol().GetSize();
+	sm::rect region = m_sprite->GetSymbol().GetSize();
 
-	float hw = region.Width() * 0.5f,
-		hh = region.Height() * 0.5f;
+	sm::vec2 sz = region.Size();
+	float hw = sz.x * 0.5f, 
+		  hh = sz.y * 0.5f;
 	float kx = m_sprite->GetShear().x,
-		ky = m_sprite->GetShear().y;
+		  ky = m_sprite->GetShear().y;
 	float sx = m_sprite->GetScale().x,
-		sy = m_sprite->GetScale().y;
+		  sy = m_sprite->GetScale().y;
 	sm::vec2 ctrls[8];
 	SpriteCtrlNode::GetSpriteCtrlNodes(m_sprite, ctrls);
 

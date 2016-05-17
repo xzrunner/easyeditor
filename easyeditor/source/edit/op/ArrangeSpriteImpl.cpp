@@ -354,8 +354,8 @@ void ArrangeSpriteImpl::OnDraw(const Camera& cam) const
 		m_selection->Traverse(FetchAllVisitor<Sprite>(sprites));
 		selected = sprites[0];
 
-		Rect r = selected->GetRect();
-		float max_e = std::max(r.Width(), r.Height());
+		sm::vec2 sz = selected->GetRect().Size();
+		float max_e = std::max(sz.x, sz.y);
 		if (m_ctrl_node_radius > max_e * 0.1f) {
 			m_ctrl_node_radius = 0;
 		} else {

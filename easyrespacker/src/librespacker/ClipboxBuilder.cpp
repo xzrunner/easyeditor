@@ -51,13 +51,14 @@ const IPackNode* ClipboxBuilder::Create(const ecomplex::Symbol* complex)
 		return NULL;
 	}
 
-	const ee::Rect& r = complex->m_clipbox;
+	const sm::rect& r = complex->m_clipbox;
 
 	PackClipbox* cb = new PackClipbox;
 	cb->x = r.xmin;
 	cb->y = r.ymax;
-	cb->w = r.Width();
-	cb->h = r.Height();
+	sm::vec2 sz = r.Size();
+	cb->w = sz.x;
+	cb->h = sz.y;
 	m_map_clipbox.insert(std::make_pair(complex, cb));
 
 	return cb;

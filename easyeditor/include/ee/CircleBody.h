@@ -14,7 +14,7 @@ public:
 	CircleBody(b2World* world, const BodyData& bodyData, float scale = 1.0f);
 	CircleBody(b2World* world, float radius);
 
-	virtual void GetRect(Rect& rect, const sm::vec2& position, float angle) const;
+	virtual void GetRect(sm::rect& rect, const sm::vec2& position, float angle) const;
 
 }; // CircleBody
 

@@ -19,7 +19,7 @@ bool CreateRegionOP::OnDraw() const
 		return true;
 	}
 
-	m_shapes_impl->TraverseShapes(ee::DrawShapesVisitor(ee::Rect()), ee::DT_VISIBLE);
+	m_shapes_impl->TraverseShapes(ee::DrawShapesVisitor(sm::rect()), ee::DT_VISIBLE);
 
 	return false;
 }

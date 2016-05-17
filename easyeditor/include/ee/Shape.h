@@ -6,6 +6,7 @@
 #include "Object.h"
 
 #include <SM_Matrix.h>
+#include <SM_Rect.h>
 #include <sprite2/RenderColor.h>
 
 #include <json/json.h>
@@ -13,7 +14,6 @@
 namespace ee
 {
 
-class Rect;
 class PropertySetting;
 class EditPanelImpl;
 
@@ -36,12 +36,12 @@ public:
 	virtual const char* GetShapeDesc() const = 0;
 
 	virtual bool IsContain(const sm::vec2& pos) const = 0;
-	virtual bool IsIntersect(const Rect& rect) const = 0;
+	virtual bool IsIntersect(const sm::rect& rect) const = 0;
 
 	virtual void Translate(const sm::vec2& offset) = 0;
 //	virtual void Rotate(float delta) = 0;
 
-	virtual const Rect& GetRect() const = 0;
+	virtual const sm::rect& GetRect() const = 0;
 
 	virtual void Draw(const sm::mat4& mt, 
 		const s2::RenderColor& color = s2::RenderColor()) const = 0;

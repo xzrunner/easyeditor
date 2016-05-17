@@ -8,7 +8,6 @@
 #include <ee/Sprite.h>
 #include <ee/panel_msg.h>
 #include <ee/PropertySettingPanel.h>
-#include <ee/Rect.h>
 
 namespace emodeling
 {
@@ -72,7 +71,7 @@ bool SelectFixtureOP::OnMouseLeftUp(int x, int y)
 
 	if (m_first_pos_valid)
 	{
-		ee::Rect rect(m_first_pos, m_stage->TransPosScrToProj(x, y));
+		sm::rect rect(m_first_pos, m_stage->TransPosScrToProj(x, y));
 		std::vector<ee::Sprite*> sprites;
 		m_stagePanel->QuerySpritesByRect(rect, sprites);
 

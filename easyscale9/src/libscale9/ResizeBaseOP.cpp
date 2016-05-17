@@ -28,8 +28,8 @@ bool ResizeBaseOP::OnMouseLeftDown(int x, int y)
 
 	m_firstPos = m_stage->TransPosScrToProj(x, y);
 
-	const float hw = m_symbol->GetSize().Width() * 0.5f,
-		hh = m_symbol->GetSize().Height() * 0.5f;
+	sm::vec2 sz = m_symbol->GetSize().Size();
+	const float hw = sz.x * 0.5f, hh = sz.y * 0.5f;
 	if (ee::Math2D::IsPointInRect(m_firstPos, sm::vec2(-hw, -hh), REGION, REGION))
 		m_status = e_leftlow;
 	else if (ee::Math2D::IsPointInRect(m_firstPos, sm::vec2(hw, -hh), REGION, REGION))
@@ -79,9 +79,9 @@ bool ResizeBaseOP::OnDraw() const
 	if (ee::ZoomViewOP::OnDraw()) return true;
 
 	ee::SpriteRenderer::Draw(m_symbol);
-
-	const float hw = m_symbol->GetSize().Width() * 0.5f,
-		hh = m_symbol->GetSize().Height() * 0.5f;
+	
+	sm::vec2 sz = m_symbol->GetSize().Size();
+	const float hw = sz.x * 0.5f, hh = sz.y * 0.5f;
 	const float r = REGION;
 	ee::RVG::Rect(sm::vec2(-hw, -hh), r, r, false);
 	ee::RVG::Rect(sm::vec2( hw, -hh), r, r, false);

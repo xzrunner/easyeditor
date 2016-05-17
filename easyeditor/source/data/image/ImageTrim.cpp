@@ -9,10 +9,10 @@ ImageTrim::ImageTrim(const ImageData& img_data)
 {
 }
 
-Rect ImageTrim::Trim() const
+sm::rect ImageTrim::Trim() const
 {
-	Rect sub;
-	sub.MakeInfinite();
+	sm::rect sub;
+	sub.MakeEmpty();
 
 	if (m_img_data.GetChannels() != 4) {
 		return sub;
@@ -94,9 +94,9 @@ Rect ImageTrim::Trim() const
 	if (sub.IsValid()) {
 		return sub;
 	} else {
-		Rect ret;
+		sm::rect ret;
 
-// 		const Rect& r = m_image->getRegion();
+// 		const sm::rect& r = m_image->getRegion();
 // 		ret.xmin = ret.ymin = 0;
 // 		ret.xmax = r.Width();
 // 		ret.ymax = r.Height();

@@ -1,7 +1,7 @@
 #ifndef _EASYEDITOR_IMAGE_TRIM_H_
 #define _EASYEDITOR_IMAGE_TRIM_H_
 
-#include "Rect.h"
+#include <SM_Rect.h>
 
 namespace ee
 {
@@ -15,7 +15,7 @@ public:
 
 	// remove transparent border
 	// return: make to center
-	Rect Trim() const;
+	sm::rect Trim() const;
 
 private:
 	bool IsTransparent(int x, int y) const;

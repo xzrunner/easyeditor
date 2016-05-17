@@ -43,9 +43,9 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr,
 	mgr->DrawModel(m_model, mat);
 }
 
-ee::Rect Symbol::GetSize(const ee::Sprite* sprite/* = NULL*/) const
+sm::rect Symbol::GetSize(const ee::Sprite* sprite/* = NULL*/) const
 {
-	return ee::Rect(100, 100);
+	return sm::rect(100, 100);
 }
 
 void Symbol::SetModel(e3d::IModel* model)

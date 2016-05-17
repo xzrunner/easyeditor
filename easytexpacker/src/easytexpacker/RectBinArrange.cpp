@@ -3,7 +3,6 @@
 #include "Context.h"
 
 // Rectangle Bin
-#include <Rect.h>
 #include <GuillotineBinPack.h>
 #include <MaxRectsBinPack.h>
 #include <ShelfBinPack.h>
@@ -98,7 +97,7 @@ void RectBinArrange::AfterPacking(float xoffset,
 		ee::ImageSprite* sprite = sprites[i];
 		if (rect.height != 0)
 		{
-			ee::Rect r = sprite->GetSymbol().GetSize();
+			sm::rect r = sprite->GetSymbol().GetSize();
 			sm::vec2 pos;
 			float angle = 0;
 			if (r.Width() == rect.width && r.Height() == rect.height)

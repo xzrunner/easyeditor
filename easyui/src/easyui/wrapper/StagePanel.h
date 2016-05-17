@@ -4,7 +4,6 @@
 #include "UIStagePage.h"
 
 #include <ee/SpritesPanelImpl.h>
-#include <ee/Rect.h>
 
 class wxGLContext;
 
@@ -33,7 +32,7 @@ public:
 	virtual void OnPreview() {}
 	virtual void OnCode() const {}
 
-	ee::Rect& GetClipbox() { return m_clipbox; }
+	sm::rect& GetClipbox() { return m_clipbox; }
 
 private:
 	TopPannels* m_top_pannels;
@@ -41,7 +40,7 @@ private:
 
 	int m_toolbar_idx;
 
-	ee::Rect m_clipbox;
+	sm::rect m_clipbox;
 
 }; // StagePanel
 

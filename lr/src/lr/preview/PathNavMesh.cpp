@@ -13,7 +13,7 @@ namespace lr
 namespace preview
 {
 
-PathNavMesh::PathNavMesh(const ee::Rect& region)
+PathNavMesh::PathNavMesh(const sm::rect& region)
 	: m_region(region)
 	, m_visited(this)
 {

@@ -104,7 +104,7 @@ void RectCutLoader::LoadJsonAndImg(const std::string& pack_file, const std::stri
 //	for (int i = 0, n = pictures.size(); i < n; ++i)
 //	{
 //		const Picture& pic = pictures[i];
-//		ee::Rect r_src, r_dst;
+//		sm::rect r_src, r_dst;
 //		r_src.combine(sm::vec2(pic.src.x, pic.src.y));
 //		r_src.combine(sm::vec2(pic.src.x+pic.src.w, pic.src.y+pic.src.h));
 //		r_dst.combine(sm::vec2(pic.dst.x, pic.dst.y));

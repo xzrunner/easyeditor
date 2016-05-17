@@ -14,16 +14,16 @@ bool AABB::IsContain(const sm::vec2& pos) const
 	return Math2D::IsPointInRect(pos - m_position, m_rect);
 }
 
-bool AABB::IsContain(const Rect& rect) const
+bool AABB::IsContain(const sm::rect& rect) const
 {
-	Rect r(rect);
+	sm::rect r(rect);
 	r.Translate(-m_position);
 	return Math2D::IsRectContainRect(m_rect, r);
 }
 
-bool AABB::IsIntersect(const Rect& rect) const
+bool AABB::IsIntersect(const sm::rect& rect) const
 {
-	Rect r(rect);
+	sm::rect r(rect);
 	r.Translate(-m_position);
 	return Math2D::IsRectIntersectRect(m_rect, r);
 }

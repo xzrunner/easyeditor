@@ -227,26 +227,6 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="type"
-			>
-			<File
-				RelativePath="..\..\..\include\ee\Random.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\Random.inl"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\Rect.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\Rect.inl"
-				>
-			</File>
-		</Filter>
-		<Filter
 			Name="external"
 			>
 			<Filter
@@ -276,6 +256,14 @@
 		</File>
 		<File
 			RelativePath="..\..\..\include\ee\math_common.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\include\ee\Random.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\include\ee\Random.inl"
 			>
 		</File>
 		<File

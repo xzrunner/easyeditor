@@ -2,9 +2,9 @@
 #define _EASYEDITOR_DRAW_SHAPES_VISITOR_H_
 
 #include "Visitor.h"
-#include "Rect.h"
 
 #include <sprite2/RenderColor.h>
+#include <SM_Rect.h>
 
 namespace ee
 {
@@ -12,12 +12,12 @@ namespace ee
 class DrawShapesVisitor : public Visitor
 {
 public:
-	DrawShapesVisitor(const Rect& screen_region);
+	DrawShapesVisitor(const sm::rect& screen_region);
 
 	virtual void Visit(Object* object, bool& next);
 
 private:
-	Rect m_screen_region;
+	sm::rect m_screen_region;
 
 	s2::RenderColor m_ct;
 

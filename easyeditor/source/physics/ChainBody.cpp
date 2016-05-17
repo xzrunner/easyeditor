@@ -1,7 +1,6 @@
 #include "ChainBody.h"
 #include "BodyData.h"
 #include "physics_const.h"
-#include "Rect.h"
 #include "Math2D.h"
 
 #include <Box2D/Box2D.h>
@@ -71,9 +70,9 @@ ChainBody::ChainBody(b2World* world, float scale/* = 1.0f*/)
 	m_body = world->CreateBody(&bd);
 }
  
-void ChainBody::GetRect(Rect& rect, const sm::vec2& position, float angle) const
+void ChainBody::GetRect(sm::rect& rect, const sm::vec2& position, float angle) const
 {
-	rect.MakeInfinite();
+	rect.MakeEmpty();
 	for (b2Fixture* f = m_body->GetFixtureList(); f; f = f->GetNext())
 	{
 		b2ChainShape* chain = dynamic_cast<b2ChainShape*>(f->GetShape());

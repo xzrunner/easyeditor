@@ -2,7 +2,6 @@
 #include "StagePanel.h"
 
 #include <ee/panel_msg.h>
-#include <ee/Rect.h>
 #include <ee/Math2D.h>
 #include <ee/EE_RVG.h>
 #include <ee/color_config.h>
@@ -111,7 +110,7 @@ bool RectCutOP::OnMouseRightUp(int x, int y)
 		FixedPos(m_curr_pos);
 		if (m_first_pos.x != m_curr_pos.x && m_first_pos.y != m_curr_pos.y)
 		{
-			m_rects.Insert(ee::Rect(m_first_pos, m_curr_pos));
+			m_rects.Insert(sm::rect(m_first_pos, m_curr_pos));
 
 			m_first_pos_valid = false;
 			m_curr_pos_valid = false;

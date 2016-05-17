@@ -52,12 +52,12 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	}
 
 	if (TEST_QUADTREE) {
-		m_sindex = new Quadtree(ee::Rect(MAP_EDGE_LEN, MAP_EDGE_LEN));
+		m_sindex = new Quadtree(sm::rect(sm::vec2(0, 0), MAP_EDGE_LEN, MAP_EDGE_LEN));
 	}
 	if (PATHFINDING) {
-		//	m_pathfinding = new preview::PathGrid(ee::Rect(MAP_EDGE_LEN, MAP_EDGE_LEN), 256, 256);
-		//m_pathfinding = new preview::PathNavMesh(ee::Rect(MAP_EDGE_LEN, MAP_EDGE_LEN));
-		m_pathfinding = new preview::PathVisibleSimple(ee::Rect(MAP_EDGE_LEN, MAP_EDGE_LEN));
+		//	m_pathfinding = new preview::PathGrid(sm::rect(MAP_EDGE_LEN, MAP_EDGE_LEN), 256, 256);
+		//m_pathfinding = new preview::PathNavMesh(sm::rect(MAP_EDGE_LEN, MAP_EDGE_LEN));
+		m_pathfinding = new preview::PathVisibleSimple(sm::rect(sm::vec2(0, 0), MAP_EDGE_LEN, MAP_EDGE_LEN));
 	}
 
 	ArrangeSpriteImpl* arrange_impl = new ArrangeSpriteImpl(library, property, this, &m_chara_dirs);

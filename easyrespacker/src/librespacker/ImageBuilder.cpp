@@ -51,7 +51,7 @@ void ImageBuilder::LoadPictureQuad(const ee::ImageSprite* img, PackPicture::Quad
 	quad.texture_coord[2].Set(1, 1);
 	quad.texture_coord[3].Set(1, 0);
 
-	ee::Rect r = img->GetSymbol().GetSize();	
+	sm::rect r = img->GetSymbol().GetSize();	
 	quad.screen_coord[0].Set(r.xmin, r.ymin);
 	quad.screen_coord[1].Set(r.xmin, r.ymax);
 	quad.screen_coord[2].Set(r.xmax, r.ymax);

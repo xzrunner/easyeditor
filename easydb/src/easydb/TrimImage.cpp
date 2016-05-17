@@ -5,7 +5,6 @@
 #include <ee/FileHelper.h>
 #include <ee/Config.h>
 #include <ee/ImageData.h>
-#include <ee/Rect.h>
 #include <ee/ImageTrim.h>
 #include <ee/StringHelper.h>
 #include <ee/ImageClip.h>
@@ -87,7 +86,7 @@ void TrimImage::Trigger(const std::string& src_dir, const std::string& dst_dir)
 	m_json_cfg.OutputToFile(out_json_filepath, m_dst_dir);
 }
 
-void TrimImage::StoreBoundInfo(const ee::ImageData& img, const ee::Rect& r, 
+void TrimImage::StoreBoundInfo(const ee::ImageData& img, const sm::rect& r, 
 							   Json::Value& val) const
 {
 	// left
@@ -178,7 +177,7 @@ void TrimImage::Trim(const std::string& filepath)
 	ee::ImageData* img = ee::ImageDataMgr::Instance()->GetItem(filepath);
 
 	ee::ImageTrim trim(*img);
-	ee::Rect r = trim.Trim();
+	sm::rect r = trim.Trim();
 	bool trimed = r.IsValid();
 	if (!r.IsValid()) {
 		r.xmin = r.ymin = 0;

@@ -2,7 +2,6 @@
 #define _EASYEDITOR_AABB_H_
 
 #include "BoundingBox.h"
-#include "Rect.h"
 
 namespace ee
 {
@@ -18,20 +17,20 @@ public:
 	//
 	virtual AABB* Clone() const;
 
-	virtual void InitFromRect(const Rect& rect);
+	virtual void InitFromRect(const sm::rect& rect);
 
 	virtual bool IsValid() const;
-	virtual void MakeInfinite();
+	virtual void MakeEmpty();
 
 	virtual void SetTransform(const sm::vec2& position, const sm::vec2& offset, float angle);
 	virtual void SetMirror(bool xmirror, bool ymirror);
 
 	virtual void Combine(const sm::vec2& pos);
-	virtual void Combine(const Rect& rect);
+	virtual void Combine(const sm::rect& rect);
 
 	virtual bool IsContain(const sm::vec2& pos) const;
-	virtual bool IsContain(const Rect& rect) const;
-	virtual bool IsIntersect(const Rect& rect) const;
+	virtual bool IsContain(const sm::rect& rect) const;
+	virtual bool IsIntersect(const sm::rect& rect) const;
 	
 	virtual float Area() const;
 	virtual float Width() const;
@@ -41,7 +40,7 @@ public:
 	virtual void GetBoundPos(std::vector<sm::vec2>& bound) const;
 
 private:
-	Rect m_rect;
+	sm::rect m_rect;
 	sm::vec2 m_position;
 
 }; // AABB

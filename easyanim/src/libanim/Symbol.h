@@ -28,7 +28,7 @@ public:
 	//
 	virtual void Draw(const s2::RenderParams& params, const ee::Sprite* spr = NULL) const;
 	virtual void ReloadTexture() const;
-	virtual ee::Rect GetSize(const ee::Sprite* sprite = NULL) const;
+	virtual sm::rect GetSize(const ee::Sprite* sprite = NULL) const;
 
 	size_t getMaxFrameIndex() const;
 
@@ -57,7 +57,7 @@ private:
 private:
 	s2::AnimSymbol* m_core;
 
-	ee::Rect m_rect;
+	sm::rect m_rect;
 
 	int m_fps;
 

@@ -4,9 +4,9 @@
 #include "ListItem.h"
 #include "UserDataImpl.h"
 #include "ResourcesMgr.h"
-#include "Rect.h"
 
 #include <SM_Matrix.h>
+#include <SM_Rect.h>
 
 #include <set>
 
@@ -36,7 +36,7 @@ public:
 
 	virtual void Draw(const s2::RenderParams& params, const Sprite* spr = NULL) const = 0;
 	virtual void ReloadTexture() const {}
-	virtual Rect GetSize(const Sprite* sprite = NULL) const = 0;
+	virtual sm::rect GetSize(const Sprite* sprite = NULL) const = 0;
 	virtual void InvalidRect(const sm::mat4& mt) const {}
 
 	bool LoadFromFile(const std::string& filepath);

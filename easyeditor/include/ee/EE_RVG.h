@@ -2,14 +2,13 @@
 #define _EASYEDITOR_RVG_H_
 
 #include <SM_Vector.h>
+#include <SM_Rect.h>
 #include <sprite2/Color.h>
 
 #include <vector>
 
 namespace ee
 {
-
-class Rect;
 
 class RVG
 {

@@ -1,8 +1,6 @@
 #ifndef _EASYEDITOR_MATH2D_INL_
 #define _EASYEDITOR_MATH2D_INL_
 
-#include "Rect.h"
-
 #include <sm_const.h>
 
 namespace ee
@@ -32,26 +30,26 @@ bool Math2D::IsPointAtSegmentLeft(const sm::vec2& p, const sm::vec2& s, const sm
 }
 
 inline
-bool Math2D::IsRectIntersectRect(const Rect& r0, const Rect& r1)
+bool Math2D::IsRectIntersectRect(const sm::rect& r0, const sm::rect& r1)
 {
 	return !(r0.xmin >= r1.xmax || r0.xmax <= r1.xmin || r0.ymin >= r1.ymax || r0.ymax <= r1.ymin);
 }
 
 inline
-bool Math2D::IsRectContainRect(const Rect& r0, const Rect& r1)
+bool Math2D::IsRectContainRect(const sm::rect& r0, const sm::rect& r1)
 {
 	return r1.xmin >= r0.xmin && r1.xmax <= r0.xmax 
 		&& r1.ymin >= r0.ymin && r1.ymax <= r0.ymax;
 }
 
 inline
-bool Math2D::IsSegmentIntersectRect(const sm::vec2& b, const sm::vec2& e, const Rect& aabb)
+bool Math2D::IsSegmentIntersectRect(const sm::vec2& b, const sm::vec2& e, const sm::rect& aabb)
 {
 	return IsSegmentIntersectRect(b.x, b.y, e.x, e.y, aabb.xmin, aabb.ymin, aabb.xmax, aabb.ymax);
 }
 
 inline
-bool Math2D::IsPointInRect(const sm::vec2& pos, const Rect& aabb)
+bool Math2D::IsPointInRect(const sm::vec2& pos, const sm::rect& aabb)
 {
 	return pos.x > aabb.xmin && pos.x < aabb.xmax
 		&& pos.y > aabb.ymin && pos.y < aabb.ymax;

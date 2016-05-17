@@ -28,7 +28,7 @@ public:
 private:
 	RectMgr m_rects;
 
-	ee::Rect* m_selected;
+	sm::rect* m_selected;
 
 	sm::vec2 m_last_pos;
 

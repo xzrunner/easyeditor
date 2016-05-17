@@ -18,10 +18,10 @@ public:
 	virtual ~StagePanel();
 
 	virtual ee::Sprite* QuerySpriteByPos(const sm::vec2& pos) const;
-	virtual void QuerySpritesByRect(const ee::Rect& rect, std::vector<ee::Sprite*>& result) const;		
+	virtual void QuerySpritesByRect(const sm::rect& rect, std::vector<ee::Sprite*>& result) const;		
 
 	Joint* queryJointByPos(const sm::vec2& pos) const;
-	void queryJointsByRect(const ee::Rect& rect, std::vector<Joint*>& result) const;
+	void queryJointsByRect(const sm::rect& rect, std::vector<Joint*>& result) const;
 
 	void insertJoint(Joint* joint) {
 		m_joints.push_back(joint);
@@ -61,11 +61,11 @@ private:
 	class RectQueryVisitor : public ee::Visitor
 	{
 	public:
-		RectQueryVisitor(const ee::Rect& rect, std::vector<ee::Sprite*>& result);
+		RectQueryVisitor(const sm::rect& rect, std::vector<ee::Sprite*>& result);
 		virtual void Visit(ee::Object* object, bool& next);
 
 	private:
-		const ee::Rect& m_rect;
+		const sm::rect& m_rect;
 		std::vector<ee::Sprite*>& m_result;
 
 	}; // RectQueryVisitor

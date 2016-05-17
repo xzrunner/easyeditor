@@ -1,7 +1,7 @@
 #ifndef _LR_GRIDS_H_
 #define _LR_GRIDS_H_
 
-#include <ee/Rect.h>
+#include <SM_Rect.h>
 
 #include <vector>
 
@@ -50,7 +50,7 @@ private:
 
 		// top left bottom right
 		std::vector<sm::vec2> m_bird_bound;
-		ee::Rect m_flat_bound;
+		sm::rect m_flat_bound;
 	}; // Grid
 
 private:

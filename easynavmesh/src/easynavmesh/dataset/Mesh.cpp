@@ -1,13 +1,12 @@
 #include "Mesh.h"
 
-#include <ee/Rect.h>
 #include <ee/Triangulation.h>
 #include <ee/EE_RVG.h>
 
 namespace enav
 {
 
-Mesh::Mesh(const ee::Rect& region)
+Mesh::Mesh(const sm::rect& region)
 {
 	m_bound.push_back(sm::vec2(region.xmin, region.ymin));
 	m_bound.push_back(sm::vec2(region.xmin, region.ymax));

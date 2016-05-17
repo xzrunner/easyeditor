@@ -74,9 +74,9 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-ee::Rect Symbol::GetSize(const ee::Sprite* sprite/* = NULL*/) const
+sm::rect Symbol::GetSize(const ee::Sprite* sprite/* = NULL*/) const
 {
-	ee::Rect rect;
+	sm::rect rect;
 	for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
 		rect.Combine(m_bg_outline[i]->GetRect());
 	}

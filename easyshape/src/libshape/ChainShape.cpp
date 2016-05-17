@@ -43,7 +43,7 @@ bool ChainShape::IsContain(const sm::vec2& pos) const
 	}
 	else
 	{
-		ee::Rect rect(m_rect);
+		sm::rect rect(m_rect);
 		rect.xmin -= QUERY_ACCURACY;
 		rect.xmax += QUERY_ACCURACY;
 		rect.ymin -= QUERY_ACCURACY;
@@ -67,7 +67,7 @@ bool ChainShape::IsContain(const sm::vec2& pos) const
 	}
 }
 
-bool ChainShape::IsIntersect(const ee::Rect& rect) const
+bool ChainShape::IsIntersect(const sm::rect& rect) const
 {
 	if (m_vertices.empty() || !ee::Math2D::IsRectIntersectRect(rect, m_rect))	
 		return false;
@@ -196,7 +196,7 @@ void ChainShape::Load(const std::vector<sm::vec2>& vertices)
 
 void ChainShape::InitBounding()
 {
-	m_rect.MakeInfinite();
+	m_rect.MakeEmpty();
 	for (size_t i = 0, n = m_vertices.size(); i < n; ++i)
 		m_rect.Combine(m_vertices[i]);
 }
