@@ -39,6 +39,7 @@ private:
 
 	void HoriMirror();
 	void VertMirror();
+	void FilterParams();
 
 	void SelectSame();
 
@@ -53,6 +54,7 @@ private:
 		MENU_DOWN_MOST,
 		MENU_HORI_MIRROR,
 		MENU_VERT_MIRROR,
+		MENU_FILTER_PARAMS,
 		MENU_SELECT_SAME,
 		MENU_COMMON_END			= 10099,
 

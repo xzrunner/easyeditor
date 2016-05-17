@@ -69,13 +69,20 @@ void RightPopupMenu::CreateCommonMenu(wxMenu& menu)
 	m_parent->Bind(wxEVT_COMMAND_MENU_SELECTED, &EditPanelImpl::OnRightPopupMenu, m_stage, MENU_HORI_MIRROR);
 	menu.Append(MENU_HORI_MIRROR, "水平镜像");
 	m_parent->Bind(wxEVT_COMMAND_MENU_SELECTED, &EditPanelImpl::OnRightPopupMenu, m_stage, MENU_VERT_MIRROR);
-	menu.Append(MENU_VERT_MIRROR, "竖直镜像");	
+	menu.Append(MENU_VERT_MIRROR, "竖直镜像");
 
 	menu.AppendSeparator();
 
-	if (m_edited_sprs.size() == 1) {
+	if (m_edited_sprs.size() == 1) 
+	{
+		m_parent->Bind(wxEVT_COMMAND_MENU_SELECTED, &EditPanelImpl::OnRightPopupMenu, m_stage, MENU_FILTER_PARAMS);
+		menu.Append(MENU_FILTER_PARAMS, "滤镜参数");
+
+		menu.AppendSeparator();
+
 		m_parent->Bind(wxEVT_COMMAND_MENU_SELECTED, &EditPanelImpl::OnRightPopupMenu, m_stage, MENU_SELECT_SAME);
 		menu.Append(MENU_SELECT_SAME, "选择相同");
+
 		menu.AppendSeparator();
 	}
 }
@@ -134,6 +141,9 @@ void RightPopupMenu::HandleCommonMenu(int id)
 		break;
 	case MENU_VERT_MIRROR:
 		VertMirror();
+		break;
+	case MENU_FILTER_PARAMS:
+		FilterParams();
 		break;
 	case MENU_SELECT_SAME:
 		SelectSame();
@@ -229,6 +239,14 @@ void RightPopupMenu::VertMirror()
 	if (dirty) {
 		SetCanvasDirtySJ::Instance()->SetDirty();
 	}
+}
+
+void RightPopupMenu::FilterParams()
+{
+	std::vector<Sprite*> selected;
+	m_selection->Traverse(FetchAllVisitor<Sprite>(selected));
+	assert(selected.size() == 1);
+	Sprite* spr = selected[0];
 }
 
 void RightPopupMenu::SelectSame()

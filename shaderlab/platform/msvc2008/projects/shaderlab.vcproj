@@ -274,86 +274,134 @@
 				<Filter
 					Name="progs"
 					>
-					<File
-						RelativePath="..\..\..\src\shaderlab\shader\BlurProg.cpp"
+					<Filter
+						Name="blur"
 						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\shaderlab\shader\BlurProg.h"
+						<File
+							RelativePath="..\..\..\src\shaderlab\shader\BlurProg.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\shaderlab\shader\BlurProg.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="burning_map"
 						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\shaderlab\shader\BurningMapProg.cpp"
+						<File
+							RelativePath="..\..\..\src\shaderlab\shader\BurningMapProg.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\shaderlab\shader\BurningMapProg.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="edge_detect"
 						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\shaderlab\shader\BurningMapProg.h"
+						<File
+							RelativePath="..\..\..\src\shaderlab\shader\EdgeDetectProg.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\shaderlab\shader\EdgeDetectProg.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="gaussian_blur"
 						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\shaderlab\shader\EdgeDetectProg.cpp"
+						<File
+							RelativePath="..\..\..\src\shaderlab\shader\GaussianBlurHoriProg.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\shaderlab\shader\GaussianBlurHoriProg.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\shaderlab\shader\GaussianBlurVertProg.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\shaderlab\shader\GaussianBlurVertProg.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="gray"
 						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\shaderlab\shader\EdgeDetectProg.h"
+						<File
+							RelativePath="..\..\..\src\shaderlab\shader\GrayProg.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\shaderlab\shader\GrayProg.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="heat_haze"
 						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\shaderlab\shader\GaussianBlurProg.cpp"
+						<File
+							RelativePath="..\..\..\src\shaderlab\shader\HeatHazeProg.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\shaderlab\shader\HeatHazeProg.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="outline"
 						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\shaderlab\shader\GaussianBlurProg.h"
+						<File
+							RelativePath="..\..\..\src\shaderlab\shader\OutlineProg.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\shaderlab\shader\OutlineProg.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="relief"
 						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\shaderlab\shader\GrayProg.cpp"
+						<File
+							RelativePath="..\..\..\src\shaderlab\shader\ReliefProg.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\shaderlab\shader\ReliefProg.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="shock_wave"
 						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\shaderlab\shader\GrayProg.h"
+						<File
+							RelativePath="..\..\..\src\shaderlab\shader\ShockWaveProg.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\shaderlab\shader\ShockWaveProg.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="swirl"
 						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\shaderlab\shader\HeatHazeProg.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\shaderlab\shader\HeatHazeProg.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\shaderlab\shader\OutlineProg.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\shaderlab\shader\OutlineProg.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\shaderlab\shader\ReliefProg.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\shaderlab\shader\ReliefProg.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\shaderlab\shader\ShockWaveProg.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\shaderlab\shader\ShockWaveProg.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\shaderlab\shader\SwirlProg.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\shaderlab\shader\SwirlProg.h"
-						>
-					</File>
+						<File
+							RelativePath="..\..\..\src\shaderlab\shader\SwirlProg.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\shaderlab\shader\SwirlProg.h"
+							>
+						</File>
+					</Filter>
 				</Filter>
 			</Filter>
 			<Filter
@@ -674,11 +722,19 @@
 						Name="gaussian_blur"
 						>
 						<File
-							RelativePath="..\..\..\src\shaderlab\parser\gaussian_blur.frag"
+							RelativePath="..\..\..\src\shaderlab\parser\gaussian_blur_hori.frag"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\shaderlab\parser\GaussianBlur.h"
+							RelativePath="..\..\..\src\shaderlab\parser\gaussian_blur_vert.frag"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\shaderlab\parser\GaussianBlurHori.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\shaderlab\parser\GaussianBlurVert.h"
 							>
 						</File>
 					</Filter>

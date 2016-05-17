@@ -13,6 +13,8 @@ public:
 	FilterMode	filter;
 	BlendMode	blend;
 
+	float filter_params[4];
+
 public:
 	RenderShader() 
 		: filter(FM_NULL)

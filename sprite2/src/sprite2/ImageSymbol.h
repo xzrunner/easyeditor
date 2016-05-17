@@ -39,6 +39,8 @@ private:
 	void DrawOrtho(const RenderParams& params, sm::vec2* vertices, float* texcoords, int texid) const;
 	void DrawPseudo3D(const RenderParams& params, sm::vec2* vertices, float* texcoords, int texid) const;
 
+	void DrawGaussianBlur(const RenderParams& params, sm::vec2* vertices, float* texcoords, int texid) const;
+
 protected:
 	Texture* m_tex;
 
