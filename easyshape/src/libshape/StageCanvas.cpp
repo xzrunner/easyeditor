@@ -43,6 +43,13 @@ StageCanvas::StageCanvas(StagePanel* stage,
 	}
 }
 
+StageCanvas::~StageCanvas()
+{
+	if (m_bg) {
+		m_bg->Release();
+	}
+}
+
 void StageCanvas::DrawGuideLines() const
 {
 	ee::RVG::Color(ee::LIGHT_GREY);

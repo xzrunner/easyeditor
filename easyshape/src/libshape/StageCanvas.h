@@ -16,6 +16,7 @@ public:
 	StageCanvas(StagePanel* stage);
 	StageCanvas(StagePanel* stage, wxGLContext* glctx,
 		ee::Sprite* edited, const ee::MultiSpritesImpl* bg_sprites);
+	virtual ~StageCanvas();
 
 public:
 	void DrawGuideLines() const;

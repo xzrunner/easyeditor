@@ -36,6 +36,13 @@ StageCanvas::StageCanvas(StagePanel* stage, wxGLContext* glctx,
 	m_bg = ee::draw_all_to_one_spr(sprites, m_edited);
 }
 
+StageCanvas::~StageCanvas()
+{
+	if (m_bg) {
+		m_bg->Release();
+	}
+}
+
 void StageCanvas::OnDrawSprites() const
 {
 	if (m_edited && m_bg) 

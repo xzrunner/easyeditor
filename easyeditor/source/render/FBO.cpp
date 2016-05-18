@@ -100,6 +100,8 @@ void FBO::CreateFBO(int w, int h)
 
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, sl::ShaderMgr::Instance()->GetContext()->GetTarget());
 	glBindTexture(GL_TEXTURE_2D, 0);
+
+	delete[] empty_data;
 }
 
 void FBO::ReleaseFBO()

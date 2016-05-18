@@ -37,6 +37,13 @@ StageCanvas::StageCanvas(StagePanel* stage,
 	}
 }
 
+StageCanvas::~StageCanvas()
+{
+	if (m_bg) {
+		m_bg->Release();
+	}
+}
+
 void StageCanvas::OnDrawSprites() const
 {
 	if (m_edited && m_bg) 
