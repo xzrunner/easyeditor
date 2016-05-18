@@ -64,6 +64,7 @@ ImageSymbol::ImageSymbol(Image* image, const std::string& filename)
 {
 	m_image->Retain();
 	m_core = new s2::ImageSymbol(this, query_texcoords, proj2screen, is_ortho_cam, get_screen_size, get_p3d_cam_angle, get_screen_cache_texid);
+	InitCoreTex();
 
 	m_filepath = filename;
 	InitRegion();
@@ -120,12 +121,7 @@ void ImageSymbol::LoadResources()
 
 	InitRegion();
 
-	s2::ImageSymbol::Quad q;
-	q.xmin = q.ymin = 0;
-	q.xmax = m_image->GetClippedWidth();
-	q.ymax = m_image->GetClippedHeight();
-	const sm::vec2& off = m_image->GetOffset();
-	m_core->InitTex(m_image->GetS2Tex(), q, off.x, off.y);
+	InitCoreTex();
 }
 
 void ImageSymbol::InitRegion()
@@ -139,6 +135,16 @@ void ImageSymbol::InitRegion()
 	m_region.xmax =  hw + dx;
 	m_region.ymin = -hh + dy;
 	m_region.ymax =  hh + dy;
+}
+
+void ImageSymbol::InitCoreTex()
+{
+	s2::ImageSymbol::Quad q;
+	q.xmin = q.ymin = 0;
+	q.xmax = m_image->GetClippedWidth();
+	q.ymax = m_image->GetClippedHeight();
+	const sm::vec2& off = m_image->GetOffset();
+	m_core->InitTex(m_image->GetS2Tex(), q, off.x, off.y);
 }
 
 }

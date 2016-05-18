@@ -42,6 +42,8 @@ protected:
 private:
 	void InitRegion();
 
+	void InitCoreTex();
+
 protected:
 	Image* m_image;
 
