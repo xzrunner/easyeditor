@@ -185,18 +185,6 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="plane"
-			>
-			<File
-				RelativePath="..\..\..\src\sm\SM_Plane.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\sm\SM_Plane.inl"
-				>
-			</File>
-		</Filter>
-		<Filter
 			Name="quaternion"
 			>
 			<File
@@ -209,8 +197,16 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="test"
+			Name="math"
 			>
+			<File
+				RelativePath="..\..\..\src\sm\SM_Calc.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\sm\SM_Calc.inl"
+				>
+			</File>
 			<File
 				RelativePath="..\..\..\src\sm\SM_Test.h"
 				>
@@ -229,16 +225,32 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="rect"
+			Name="complex"
 			>
-			<File
-				RelativePath="..\..\..\src\sm\SM_Rect.h"
+			<Filter
+				Name="plane"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\sm\SM_Rect.inl"
+				<File
+					RelativePath="..\..\..\src\sm\SM_Plane.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\sm\SM_Plane.inl"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="rect"
 				>
-			</File>
+				<File
+					RelativePath="..\..\..\src\sm\SM_Rect.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\sm\SM_Rect.inl"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>
