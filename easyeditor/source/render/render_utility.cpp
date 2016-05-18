@@ -55,7 +55,7 @@ Sprite* draw_all_to_one_spr(const std::vector<Sprite*>& sprites)
 	Snapshoot ss(static_cast<int>(sz.x), static_cast<int>(sz.y));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		ee::Sprite* spr = sprites[i];
-		ss.DrawSprite(spr, false, static_cast<int>(sz.x), static_cast<int>(sz.y), center.x, center.y, scale);
+		ss.DrawSprite(spr, false, static_cast<int>(sz.x + 0.5f), static_cast<int>(sz.y + 0.5f), center.x, center.y, scale);
 	}
 
 	Image* img = new Image(ss.GetFBO());
@@ -63,7 +63,7 @@ Sprite* draw_all_to_one_spr(const std::vector<Sprite*>& sprites)
 	ImageSprite* spr = new ImageSprite(symbol);
 
 	spr->SetMirror(false, true);
-	spr->SetTransform(sm::vec2(center.x, center.y), 0);
+	spr->SetTransform(r.Center(), 0);
 	spr->SetScale(sm::vec2(1.0f / scale, 1.0f / scale));
 
 	return spr;
