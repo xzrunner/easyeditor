@@ -85,8 +85,7 @@ bool RenderContextStack::GetModelView(sm::vec2& offset, float& scale) const
 	if (!m_curr_ctx) {
 		return false;
 	} else {
-		m_curr_ctx->GetModelView(offset, scale);
-		return true;
+		return m_curr_ctx->GetModelView(offset, scale);
 	}
 }
 

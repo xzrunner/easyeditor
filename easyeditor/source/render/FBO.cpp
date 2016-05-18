@@ -243,7 +243,7 @@ void FBO::DrawFBO(const Sprite* sprite, bool clear, int width, int height,
 
 	s2::RenderParams params;
 	params.mt.Scale(scale, -scale, 1);
-	params.mt.Translate(-dx, -dy, 0);
+	params.mt.Translate(-dx, dy, 0);
 	params.set_shader = false;
 	SpriteRenderer::Draw(sprite, params);
 
