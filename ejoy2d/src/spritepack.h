@@ -19,6 +19,8 @@
 #define TYPE_P3D_SPR		10
 #define TYPE_P2D_SPR		11
 #define TYPE_SHAPE			12
+#define TYPE_MESH			13
+#define TYPE_MESH_SPR		14
 
 #define ANCHOR_ID 0xffff
 #define SCREEN_SCALE 16
@@ -98,7 +100,15 @@ struct pack_shape {
 	int32_t* vertices;
 };
 
-#define SIZEOF_SHAPE (sizeof(struct pack_shape) + 2 * PTR_SIZE_DIFF)
+#define SIZEOF_SHAPE (sizeof(struct pack_shape) + PTR_SIZE_DIFF)
+
+struct pack_mesh {
+	int id;
+	int num;
+	int32_t* vertices;
+};
+
+#define SIZEOF_MESH (sizeof(struct pack_mesh) + PTR_SIZE_DIFF)
 
 struct pack_poly {
 	uint16_t *texture_coord;

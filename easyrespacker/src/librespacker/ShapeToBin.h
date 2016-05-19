@@ -1,12 +1,14 @@
 #ifndef _EASYRESPACKER_SHAPE_TO_BIN_H_
 #define _EASYRESPACKER_SHAPE_TO_BIN_H_
 
-#include "PackShape.h"
+#include "NodeToBin.h"
 
 namespace erespacker
 {
 
-class ShapeToBin
+class PackShape;
+
+class ShapeToBin : private NodeToBin
 {
 public:
 	static int Size(const PackShape* shape);

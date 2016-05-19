@@ -1,6 +1,12 @@
 #ifndef _EASYRESPACKER_NODE_TO_BIN_H_
 #define _EASYRESPACKER_NODE_TO_BIN_H_
 
+#include <SM_Vector.h>
+
+#include <vector>
+
+#include <stdint.h>
+
 namespace erespacker
 {
 
@@ -12,6 +18,9 @@ public:
 	static int TransFloat(float f);
 	static int TransFloatX100(float f);
 	static int TransBool(bool b);
+
+	static int  SizeVertices(const std::vector<sm::vec2>& vertices);
+	static void PackVertices(const std::vector<sm::vec2>& vertices, uint8_t** ptr);
 
 }; // NodeToBin
 

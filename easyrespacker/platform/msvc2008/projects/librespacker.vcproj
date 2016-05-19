@@ -336,6 +336,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="12.mesh_spr"
+				>
+				<File
+					RelativePath="..\..\..\src\librespacker\MeshSprBuilder.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\librespacker\MeshSprBuilder.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="nodes"
@@ -859,21 +871,41 @@
 					Name="lua"
 					>
 					<File
-						RelativePath="..\..\..\src\librespacker\MeshFromLua.cpp"
+						RelativePath="..\..\..\src\librespacker\MeshFromLuaString.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\librespacker\MeshFromLua.h"
+						RelativePath="..\..\..\src\librespacker\MeshFromLuaString.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\librespacker\MeshToLua.cpp"
+						RelativePath="..\..\..\src\librespacker\MeshToLuaString.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\librespacker\MeshToLua.h"
+						RelativePath="..\..\..\src\librespacker\MeshToLuaString.h"
 						>
 					</File>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="12.mesh_spr"
+				>
+				<File
+					RelativePath="..\..\..\src\librespacker\PackMeshSpr.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\librespacker\PackMeshSpr.h"
+					>
+				</File>
+				<Filter
+					Name="bin"
+					>
+				</Filter>
+				<Filter
+					Name="lua"
+					>
 				</Filter>
 			</Filter>
 		</Filter>

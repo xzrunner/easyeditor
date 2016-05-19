@@ -1,4 +1,5 @@
 #include "ShapeFromBin.h"
+#include "PackShape.h"
 #include "pack_unpack.h"
 #include "typedef.h"
 
@@ -9,7 +10,7 @@ namespace erespacker
 
 int ShapeFromBin::Size(const PackShape* shape)
 {
-	return SIZEOF_SHAPE + shape->vertices.size() * sizeof(int32_t) * 2;
+	return SIZEOF_SHAPE + SizeVertices(shape->vertices);
 }
 
 void ShapeFromBin::Unpack(uint8_t** ptr, PackShape* shape)
@@ -21,21 +22,7 @@ void ShapeFromBin::Unpack(uint8_t** ptr, PackShape* shape)
 	unpack(color, ptr);
 	shape->color.FromRGBA(color);
 
-	uint16_t num;
-	unpack(num, ptr);
-	
-	shape->vertices.reserve(num);
-	for (int i = 0; i < num; ++i) {
-		int32_t x, y;
-		unpack(x, ptr);
-		unpack(y, ptr);
-
-		sm::vec2 pos;
-		pos.x = (float)x / SCALE;
-		pos.y =-(float)y / SCALE;
-
-		shape->vertices.push_back(pos);
-	}
+	UnpackVertices(shape->vertices, ptr);
 }
 
 }

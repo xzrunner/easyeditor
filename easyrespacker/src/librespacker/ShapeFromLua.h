@@ -1,12 +1,14 @@
 #ifndef _EASYRESPACKER_SHAPE_FROM_LUA_H_
 #define _EASYRESPACKER_SHAPE_FROM_LUA_H_
 
-#include "PackShape.h"
+#include "NodeFromLua.h"
 
 namespace erespacker
 {
 
-class ShapeFromLua
+class PackShape;
+
+class ShapeFromLua : private NodeFromLua
 {
 public:
 	static void Unpack(lua_State* L, PackShape* shape);

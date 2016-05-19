@@ -1,6 +1,12 @@
 #ifndef _EASYRESPACKER_NODE_FROMI_LUA_H_
 #define _EASYRESPACKER_NODE_FROMI_LUA_H_
 
+#include <SM_Vector.h>
+
+#include <lua.h>
+
+#include <vector>
+
 namespace erespacker
 {
 
@@ -10,6 +16,8 @@ public:
 	static float TransTime(int time);
 	static float TransDegree(int deg);
 	static float TransFloatX100(int f);
+
+	static void UnpackVertices(std::vector<sm::vec2>& vertices, lua_State* L);
 
 }; // NodeFromLua
 
