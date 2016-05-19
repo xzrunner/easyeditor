@@ -37,8 +37,6 @@ public:
 
 	void SetPause(bool pause) { m_pause = pause; }
 
-	void CreateMesh();
-
 	static ee::Symbol* Create() { return new Symbol(); }
 
 protected:
@@ -48,8 +46,6 @@ private:
 	void InitBounding();
 
 private:
-	ee::Symbol* m_base;
-
 	Mesh* m_mesh;
 
 	bool m_pause;

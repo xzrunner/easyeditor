@@ -11,12 +11,13 @@
 
 #include <shaderlab.h>
 
+#include <assert.h>
+
 namespace emesh
 {
 
 Symbol::Symbol()
-	: m_base(NULL)
-	, m_mesh(NULL)
+	: m_mesh(NULL)
 	, m_pause(false)
 {
 }
@@ -24,27 +25,16 @@ Symbol::Symbol()
 Symbol::Symbol(const Symbol& s)
 	: ee::Symbol(s)
 {
-	m_base = s.m_base;
-	m_base->Retain();
-
 	m_mesh = s.m_mesh->Clone();
 }
 
 Symbol::Symbol(ee::Symbol* base)
 {
-	m_base = base;
-	m_base->Retain();
-
-	m_mesh = MeshFactory::Instance()->CreateMesh(m_base);
+	m_mesh = MeshFactory::Instance()->CreateMesh(base);
 }
 
 Symbol::~Symbol()
 {
-	if (m_base)
-	{
-		m_base->Release();
-		m_base = NULL;
-	}
 	if (m_mesh)
 	{
 		m_mesh->Release();
@@ -69,15 +59,17 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 	shader->SetColor(params.color.mul.ToABGR(), params.color.add.ToABGR());
 	shader->SetColorMap(params.color.rmap.ToABGR(), params.color.gmap.ToABGR(), params.color.bmap.ToABGR());
 
-	if (spr) {
-		const MeshTrans& mtrans = static_cast<const Sprite*>(spr)->GetMeshTrans();
+	const Sprite* mesh_spr = static_cast<const Sprite*>(spr);
+	if (mesh_spr) {
+		const MeshTrans& mtrans = mesh_spr->GetMeshTrans();
 		mtrans.StoreToMesh(m_mesh);
 	}
-	MeshRenderer::DrawTexture(m_mesh, params);
-	if (!m_pause && spr)
+
+	MeshRenderer::DrawTexture(m_mesh, params, mesh_spr ? mesh_spr->GetBaseSym() : NULL);
+
+	if (!m_pause && mesh_spr)
 	{
-		const Sprite* s = static_cast<const Sprite*>(spr);
-		sm::vec2 spd = s->GetSpeed();
+		sm::vec2 spd = mesh_spr->GetSpeed();
 		if (spd.x != 0 || spd.y != 0) {
 			m_mesh->OffsetUV(spd.x, spd.y);
 		}
@@ -86,8 +78,8 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 
 void Symbol::ReloadTexture() const
 {
-	if (m_base) {
-		m_base->ReloadTexture();
+	if (const ee::Symbol* sym = m_mesh->GetBaseSymbol()) {
+		sym->ReloadTexture();
 	}
 }
 
@@ -103,14 +95,6 @@ void Symbol::SetMesh(Mesh* mesh)
 	}
 	mesh->Retain();
 	m_mesh = mesh;
-}
-
-void Symbol::CreateMesh()
-{
-	if (m_mesh) {
-		m_mesh->Release();
-	}
-	m_mesh = MeshFactory::Instance()->CreateMesh(m_base);
 }
 
 void Symbol::LoadResources()

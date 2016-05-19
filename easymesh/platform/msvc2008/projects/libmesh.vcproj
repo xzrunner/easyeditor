@@ -196,6 +196,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="property"
+				>
+				<File
+					RelativePath="..\..\..\src\libmesh\PropertySetting.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\PropertySetting.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="dataset"

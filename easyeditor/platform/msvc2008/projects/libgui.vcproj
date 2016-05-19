@@ -230,6 +230,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\include\ee\OpenSymbolMonitor.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\source\gui\SelectDrawTypeWidget.cpp"
 				>
 			</File>
@@ -287,6 +291,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\include\ee\MyColorProperty.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\source\gui\OpenSymbolProperty.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\OpenSymbolProperty.h"
 				>
 			</File>
 			<File

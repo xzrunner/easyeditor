@@ -86,11 +86,14 @@ void StagePanel::UpdateSymbol()
 	}
 }
 
-void StagePanel::CreateShape()
+void StagePanel::RecreateMesh()
 {
-	if (m_symbol) {
-		m_symbol->CreateMesh();
-	}
+	const ee::Symbol* base_sym = m_symbol->GetMesh()->GetBaseSymbol();
+	Symbol* mesh_sym = new Symbol(const_cast<ee::Symbol*>(base_sym));
+	m_symbol->Release();
+	m_symbol = mesh_sym;
+	GetEditOP()->Clear();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void StagePanel::Init(ee::LibraryPanel* library)

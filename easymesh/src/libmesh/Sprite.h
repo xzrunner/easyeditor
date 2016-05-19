@@ -32,6 +32,8 @@ public:
 	virtual void Load(const Json::Value& val);
 	virtual void Store(Json::Value& val) const;
 
+	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
+
 	const sm::vec2& GetSpeed() const { return m_speed; }
 	void SetSpeed(const sm::vec2& spd) { m_speed = spd; }
 
@@ -39,6 +41,9 @@ public:
 
 	const MeshTrans& GetMeshTrans() const { return m_trans; }
 	MeshTrans& GetMeshTrans() { return m_trans; }
+
+	const ee::Symbol* GetBaseSym() const { return m_base; }
+	void SetBaseSym(const ee::Symbol* sym) { m_base->Release(); m_base = sym; }
 
 	static ee::Sprite* Create(ee::Symbol* symbol) {
 		return new Sprite(static_cast<Symbol*>(symbol));
@@ -50,6 +55,8 @@ private:
 	sm::vec2 m_speed;
 
 	mutable MeshTrans m_trans;
+
+	const ee::Symbol* m_base;
 
 }; // Sprite
 

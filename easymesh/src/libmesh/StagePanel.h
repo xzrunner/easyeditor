@@ -49,7 +49,7 @@ public:
 
 	void UpdateSymbol();
 
-	void CreateShape();
+	void RecreateMesh();
 
 protected:
 	//

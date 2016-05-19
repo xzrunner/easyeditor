@@ -70,12 +70,12 @@ void CreateNWCMPT::onChangeType(wxCommandEvent& event)
 	case 0:
 		MeshFactory::Instance()->SetShapeType(ST_NETWORK);
 		LoadEditOP(m_mesh_op);
-		m_stage->CreateShape();
+		m_stage->RecreateMesh();
 		break;
 	case 1:
 		MeshFactory::Instance()->SetShapeType(ST_STRIP);
 		LoadEditOP(m_strip_op);
-		m_stage->CreateShape();
+		m_stage->RecreateMesh();
 		break;
 	}
 }

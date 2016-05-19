@@ -65,7 +65,8 @@ void MeshRenderer::DrawInfoXY(const Mesh* mesh)
 	ee::RVG::Circles(nodes, mesh->GetNodeRegion(), true);
 }
 
-void MeshRenderer::DrawTexture(const Mesh* mesh, const s2::RenderParams& params)
+void MeshRenderer::DrawTexture(const Mesh* mesh, const s2::RenderParams& params,
+							   const ee::Symbol* base_sym)
 {
 	sl::ShaderMgr::Instance()->GetShader()->Commit();
 
@@ -83,7 +84,7 @@ void MeshRenderer::DrawTexture(const Mesh* mesh, const s2::RenderParams& params)
 	rc->SetProjection(edge, edge);
 	ee::GL::Viewport(0, 0, edge, edge);
 
-	DrawMeshToTmp(mesh, params);
+	DrawMeshToTmp(mesh, params, base_sym);
 
 	rc->SetModelView(ori_offset, ori_scale);
 	rc->SetProjection(ori_width, ori_height);
@@ -122,14 +123,19 @@ void MeshRenderer::DrawMesh(const Mesh* mesh, const s2::RenderParams& params, in
 	}
 }
 
-void MeshRenderer::DrawMeshToTmp(const Mesh* mesh, const s2::RenderParams& params)
+void MeshRenderer::DrawMeshToTmp(const Mesh* mesh, const s2::RenderParams& params,
+								 const ee::Symbol* base_sym)
 {
 	dtexf_c1_bind();
 	dtexf_c1_clear(0, -2, 2, 0);
 
 	s2::RenderParams _params = params;
 	_params.mt.Identity();
-	ee::SpriteRenderer::Draw(mesh->GetBaseSymbol(), _params);
+	if (base_sym) {
+		ee::SpriteRenderer::Draw(base_sym, _params);
+	} else {
+		ee::SpriteRenderer::Draw(mesh->GetBaseSymbol(), _params);
+	}
 
 	sl::ShaderMgr::Instance()->GetShader()->Commit();
 
