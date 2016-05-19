@@ -72,7 +72,7 @@ void Sprite::ClearUserData(bool deletePtr)
 	delete m_ud, m_ud = NULL;
 }
 
-void Sprite::Load(const Json::Value& val)
+void Sprite::Load(const Json::Value& val, const std::string& dir)
 {
 	assert(m_core);
 
@@ -154,7 +154,7 @@ void Sprite::Load(const Json::Value& val)
 	m_is_anchor = val["anchor"].asBool();
 }
 
-void Sprite::Store(Json::Value& val) const
+void Sprite::Store(Json::Value& val, const std::string& dir) const
 {
 	assert(m_core);
 

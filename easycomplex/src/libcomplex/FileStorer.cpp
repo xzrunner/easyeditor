@@ -103,7 +103,7 @@ Json::Value FileStorer::Store(ee::Sprite* sprite, const std::string& dir)
 		value["filepaths"][i] = *itr;
 	}
 	// other
-	sprite->Store(value);
+	sprite->Store(value, dir);
 
 	return value;
 }

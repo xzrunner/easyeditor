@@ -30,8 +30,8 @@ public:
 	virtual const Symbol& GetSymbol() const;
 	virtual void SetSymbol(ee::Symbol* symbol);
 
-	virtual void Load(const Json::Value& val);
-	virtual void Store(Json::Value& val) const;
+	virtual void Load(const Json::Value& val, const std::string& dir = "");
+	virtual void Store(Json::Value& val, const std::string& dir = "") const;
 
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
 

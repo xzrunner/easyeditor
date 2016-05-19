@@ -324,6 +324,18 @@
 				Name="08.p2d_spr"
 				>
 			</Filter>
+			<Filter
+				Name="11.mesh"
+				>
+				<File
+					RelativePath="..\..\..\src\librespacker\MeshBuilder.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\librespacker\MeshBuilder.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="nodes"
@@ -808,6 +820,58 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\librespacker\NodeToLua.h"
+						>
+					</File>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="11.mesh"
+				>
+				<File
+					RelativePath="..\..\..\src\librespacker\PackMesh.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\librespacker\PackMesh.h"
+					>
+				</File>
+				<Filter
+					Name="bin"
+					>
+					<File
+						RelativePath="..\..\..\src\librespacker\MeshFromBin.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\MeshFromBin.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\MeshToBin.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\MeshToBin.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="lua"
+					>
+					<File
+						RelativePath="..\..\..\src\librespacker\MeshFromLua.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\MeshFromLua.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\MeshToLua.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\MeshToLua.h"
 						>
 					</File>
 				</Filter>

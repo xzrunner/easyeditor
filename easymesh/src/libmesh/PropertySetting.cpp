@@ -9,7 +9,7 @@ namespace emesh
 PropertySetting::PropertySetting(ee::EditPanelImpl* edit_impl, Sprite* sprite)
 	: ee::SpritePropertySetting(edit_impl, sprite)
 {
-	m_type = "Mesh";	
+	m_type = "Mesh";
 }
 
 void PropertySetting::OnPropertyGridChange(const std::string& name, const wxAny& value)
@@ -20,6 +20,11 @@ void PropertySetting::OnPropertyGridChange(const std::string& name, const wxAny&
 void PropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
 	ee::SpritePropertySetting::UpdateProperties(pg);
+
+// 	Sprite* spr = static_cast<Sprite*>(GetSprite());
+// 	m_lsn->ChangeSpr(spr);
+
+//	pg->GetProperty("MeshSymbol")->SetValue(spr->GetSymbol().GetFilepath());
 }
 
 void PropertySetting::InitProperties(wxPropertyGrid* pg)
@@ -29,12 +34,10 @@ void PropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->Append(new wxPropertyCategory("MESH", wxPG_LABEL));
 
 	Sprite* spr = static_cast<Sprite*>(GetSprite());
-// 	std::string base_path = spr->GetBaseSym()->GetFilepath();
-// 	pg->Append(new wxStringProperty(wxT("BasePath"), wxPG_LABEL, base_path));
-// 	pg->SetPropertyReadOnly("BasePath");
-
 	ee::OpenSymbolProperty* prop = new ee::OpenSymbolProperty("MeshSymbol", "zz-name", spr->GetBaseSym()->GetFilepath());
-	prop->SetListener(new OpenSymbolMonitor(spr));
+	OpenSymbolMonitor* lsn = new OpenSymbolMonitor(spr);
+	prop->SetListener(lsn);
+	lsn->Release();
 	pg->Append(prop);
 }
 

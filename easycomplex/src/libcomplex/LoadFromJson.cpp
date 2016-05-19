@@ -36,7 +36,7 @@ void LoadFromJson::Load(const Json::Value& value, const std::string& dir, Symbol
 
 		//		symbol->refresh();
 		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-		sprite->Load(spriteValue);
+		sprite->Load(spriteValue, dir);
 
 		symbol->Release();
 

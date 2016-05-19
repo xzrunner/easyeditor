@@ -46,8 +46,8 @@ public:
 	virtual const FontBlankSymbol& GetSymbol() const;
 	virtual void SetSymbol(Symbol* symbol);
 
-	virtual void Load(const Json::Value& val);
-	virtual void Store(Json::Value& val) const;
+	virtual void Load(const Json::Value& val, const std::string& dir = "");
+	virtual void Store(Json::Value& val, const std::string& dir = "") const;
 
 	virtual PropertySetting* CreatePropertySetting(EditPanelImpl* stage);
 

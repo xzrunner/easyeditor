@@ -5,6 +5,8 @@
 
 #include <ee/BBFactory.h>
 #include <ee/BoundingBox.h>
+#include <ee/FileHelper.h>
+#include <ee/SymbolMgr.h>
 
 #include <sprite2/DummySprite.h>
 
@@ -76,16 +78,22 @@ void Sprite::SetSymbol(ee::Symbol* symbol)
 	ee::Sprite::SetSymbol(&m_symbol, symbol);
 }
 
-void Sprite::Load(const Json::Value& val)
+void Sprite::Load(const Json::Value& val, const std::string& dir)
 {
 	ee::Sprite::Load(val);
 	
 	const Json::Value& mesh_val = val["mesh"];
 	m_trans.Load(mesh_val);
 	m_trans.StoreToMesh(m_symbol->GetMesh());
+
+	if (!mesh_val["base_symbol"].isNull()) {
+		m_base->Release();
+		std::string path = ee::FileHelper::GetAbsolutePath(dir, mesh_val["base_symbol"].asString());
+		m_base = ee::SymbolMgr::Instance()->FetchSymbol(path);
+	}
 }
 
-void Sprite::Store(Json::Value& val) const
+void Sprite::Store(Json::Value& val, const std::string& dir) const
 {
 	ee::Sprite::Store(val);
 
@@ -93,8 +101,8 @@ void Sprite::Store(Json::Value& val) const
 
 //	m_trans.LoadFromMesh(m_symbol->GetMesh());
 	m_trans.Store(mesh_val);
-
-//	mesh_val["base_symbol"]
+	
+	mesh_val["base_symbol"] = ee::FileHelper::GetRelativePath(dir, m_base->GetFilepath());
 
 	val["mesh"] = mesh_val;
 }

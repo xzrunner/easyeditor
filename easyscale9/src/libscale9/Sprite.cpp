@@ -60,7 +60,7 @@ void Sprite::SetSymbol(ee::Symbol* symbol)
 	ee::Sprite::SetSymbol(&m_symbol, symbol);
 }
 
-void Sprite::Load(const Json::Value& val)
+void Sprite::Load(const Json::Value& val, const std::string& dir)
 {
 	ee::Sprite::Load(val);
 
@@ -82,7 +82,7 @@ void Sprite::Load(const Json::Value& val)
 	SetSize(w, h);
 }
 
-void Sprite::Store(Json::Value& val) const
+void Sprite::Store(Json::Value& val, const std::string& dir) const
 {
 	ee::Sprite::Store(val);
 

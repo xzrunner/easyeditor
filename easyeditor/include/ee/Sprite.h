@@ -43,8 +43,8 @@ public:
 	virtual const Symbol& GetSymbol() const = 0;
 	virtual void SetSymbol(Symbol* symbol) = 0;
 
-	virtual void Load(const Json::Value& val);
-	virtual void Store(Json::Value& val) const;
+	virtual void Load(const Json::Value& val, const std::string& dir = "");
+	virtual void Store(Json::Value& val, const std::string& dir = "") const;
 
 	virtual void BuildBounding();
 

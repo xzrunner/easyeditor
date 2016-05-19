@@ -26,12 +26,10 @@ private:
 	public:
 		OpenSymbolMonitor(Sprite* spr) : m_spr(spr) {}
 		virtual void OnOpenSymbol(ee::Symbol* sym);
+//		void ChangeSpr(Sprite* spr) { m_spr = spr; }
 	private:
 		Sprite* m_spr;
 	}; // OpenSymbolMonitor
-
-private:
-//	wxWindow* m_parent;
 
 }; // PropertySetting
 	

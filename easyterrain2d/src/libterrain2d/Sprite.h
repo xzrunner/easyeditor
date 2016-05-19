@@ -27,7 +27,8 @@ public:
 	virtual bool Update(float dt) { return true; }
 	virtual const Symbol& GetSymbol() const;
 	virtual void SetSymbol(ee::Symbol* symbol);
-	virtual void Load(const Json::Value& val);
+
+	virtual void Load(const Json::Value& val, const std::string& dir = "");
 
 	static ee::Sprite* Create(ee::Symbol* symbol) {
 		return new Sprite(static_cast<Symbol*>(symbol));

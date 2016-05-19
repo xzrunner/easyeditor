@@ -107,7 +107,7 @@ void FontBlankSprite::SetSymbol(Symbol* symbol)
 	Sprite::SetSymbol(&m_symbol, symbol);
 }
 
-void FontBlankSprite::Load(const Json::Value& val)
+void FontBlankSprite::Load(const Json::Value& val, const std::string& dir)
 {
 	Sprite::Load(val);
 
@@ -148,7 +148,7 @@ void FontBlankSprite::Load(const Json::Value& val)
 	BuildBounding();
 }
 
-void FontBlankSprite::Store(Json::Value& val) const
+void FontBlankSprite::Store(Json::Value& val, const std::string& dir) const
 {
 	Sprite::Store(val);
 

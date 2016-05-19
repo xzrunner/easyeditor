@@ -20,7 +20,11 @@ OpenSymbolProperty::OpenSymbolProperty(const wxString& label, const wxString& na
 {}
 
 OpenSymbolProperty::~OpenSymbolProperty() 
-{}
+{
+	if (m_lsn) {
+		m_lsn->Release();
+	}
+}
 
 wxVariant OpenSymbolProperty::ChildChanged(wxVariant& thisValue,
                                         int childIndex,
@@ -48,8 +52,9 @@ bool OpenSymbolProperty::OnButtonClick( wxPropertyGrid* propGrid, wxString& valu
 		return false;
 	}
 
-	std::string dir = FileHelper::GetFileDir(GetValue());
-	wxFileDialog dlg(m_parent, wxT("Open Symbol"), dir, wxEmptyString, "*.json", wxFD_OPEN);
+	std::string filepath = GetValue();
+	std::string dirpath = FileHelper::GetFileDir(filepath);
+	wxFileDialog dlg(m_parent, wxT("Open Symbol"), dirpath, filepath, "*.json", wxFD_OPEN);
 	if (dlg.ShowModal() == wxID_OK)
 	{
 		std::string sym_path = dlg.GetPath();
@@ -68,10 +73,7 @@ bool OpenSymbolProperty::OnButtonClick( wxPropertyGrid* propGrid, wxString& valu
 
 void OpenSymbolProperty::SetListener(OpenSymbolMonitor* lsn) 
 { 
-	if (m_lsn) {
-		delete m_lsn;
-	}
-	m_lsn = lsn; 
+	obj_assign(m_lsn, lsn);
 }
 
 }

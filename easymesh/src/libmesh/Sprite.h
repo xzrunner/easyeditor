@@ -29,8 +29,8 @@ public:
 	virtual const Symbol& GetSymbol() const;
 	virtual void SetSymbol(ee::Symbol* symbol);
 
-	virtual void Load(const Json::Value& val);
-	virtual void Store(Json::Value& val) const;
+	virtual void Load(const Json::Value& val, const std::string& dir = "");
+	virtual void Store(Json::Value& val, const std::string& dir = "") const;
 
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
 
@@ -43,7 +43,7 @@ public:
 	MeshTrans& GetMeshTrans() { return m_trans; }
 
 	const ee::Symbol* GetBaseSym() const { return m_base; }
-	void SetBaseSym(const ee::Symbol* sym) { m_base->Release(); m_base = sym; }
+	void SetBaseSym(const ee::Symbol* sym) { ee::obj_assign(m_base, sym); }
 
 	static ee::Sprite* Create(ee::Symbol* symbol) {
 		return new Sprite(static_cast<Symbol*>(symbol));
