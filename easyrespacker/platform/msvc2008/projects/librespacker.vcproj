@@ -902,10 +902,42 @@
 				<Filter
 					Name="bin"
 					>
+					<File
+						RelativePath="..\..\..\src\librespacker\MeshSprFromBin.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\MeshSprFromBin.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\MeshSprToBin.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\MeshSprToBin.h"
+						>
+					</File>
 				</Filter>
 				<Filter
 					Name="lua"
 					>
+					<File
+						RelativePath="..\..\..\src\librespacker\MeshSprFromLua.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\MeshSprFromLua.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\MeshSprToLuaString.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\MeshSprToLuaString.h"
+						>
+					</File>
 				</Filter>
 			</Filter>
 		</Filter>

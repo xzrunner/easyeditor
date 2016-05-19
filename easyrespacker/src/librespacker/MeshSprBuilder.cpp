@@ -1,5 +1,5 @@
 #include "MeshSprBuilder.h"
-#include "PackMesh.h"
+#include "PackMeshSpr.h"
 #include "PackNodeFactory.h"
 
 #include <ee/std_functor.h>
@@ -33,19 +33,20 @@ void MeshSprBuilder::Traverse(ee::Visitor& visitor) const
 	}
 }
 
-const IPackNode* MeshSprBuilder::Create(const emesh::Symbol* sym)
+const IPackNode* MeshSprBuilder::Create(const emesh::Sprite* spr)
 {
-	PackMesh* node = new PackMesh;
+	PackMeshSpr* node = new PackMeshSpr;
 
-	node->base_sym = PackNodeFactory::Instance()->Create(sym->GetMesh()->GetBaseSymbol());
+	node->mesh = PackNodeFactory::Instance()->Create(&spr->GetSymbol());
 
-	const std::vector<emesh::Triangle*>& tris = sym->GetMesh()->GetTriangles();
-	node->triangles.reserve(tris.size() * 3);
-	for (int i = 0, n = tris.size(); i < n; ++i) {
-		emesh::Triangle* tri = tris[i];
-		for (int j = 0; j < 3; ++j) {
-			node->triangles.push_back(tri->nodes[j]->xy);
-		}
+	node->base = PackNodeFactory::Instance()->Create(spr->GetBaseSym());
+	
+	const std::map<sm::vec2, sm::vec2, sm::Vector2Cmp>& map = spr->GetMeshTrans().GetMap();
+	node->trans_pairs.reserve(map.size() * 2);
+	std::map<sm::vec2, sm::vec2, sm::Vector2Cmp>::const_iterator itr = map.begin();
+	for ( ; itr != map.end(); ++itr) {
+		node->trans_pairs.push_back(itr->first);
+		node->trans_pairs.push_back(itr->second);
 	}
 
 	return node;

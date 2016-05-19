@@ -15,7 +15,7 @@ public:
 
 	static void Pack(const PackMesh* mesh, uint8_t** ptr);
 
-}; // ShapeToBin
+}; // MeshToBin
 
 }
 

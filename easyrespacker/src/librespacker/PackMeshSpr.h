@@ -11,9 +11,11 @@ namespace erespacker
 class PackMeshSpr : public IPackNode
 {
 public:
-	const IPackNode* node;
+	const IPackNode* mesh;
 
-	std::vector<sm::vec2> from, to;
+	const IPackNode* base;
+
+	std::vector<sm::vec2> trans_pairs;
 	
 public:	
 	PackMeshSpr() {}

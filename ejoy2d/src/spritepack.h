@@ -110,6 +110,15 @@ struct pack_mesh {
 
 #define SIZEOF_MESH (sizeof(struct pack_mesh) + PTR_SIZE_DIFF)
 
+struct pack_mesh_spr {
+	int base_id;
+	int mesh_id;
+	int num;
+	int32_t* trans_pairs;
+};
+
+#define SIZEOF_MESH_SPR (sizeof(struct pack_mesh_spr) + PTR_SIZE_DIFF)
+
 struct pack_poly {
 	uint16_t *texture_coord;
 	int32_t *screen_coord;

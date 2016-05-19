@@ -15,8 +15,8 @@ PackP3dSpr::PackP3dSpr(int id)
 }
 
 void PackP3dSpr::PackToLuaString(ebuilder::CodeGenerator& gen, 
-									 const ee::TexturePacker& tp,
-									 float scale) const
+								 const ee::TexturePacker& tp,
+								 float scale) const
 {
 	return P3dSprToLuaString::Pack(this, gen);
 }
@@ -32,8 +32,8 @@ int PackP3dSpr::SizeOfPackToBin() const
 }
 
 void PackP3dSpr::PackToBin(uint8_t** ptr, 
-							   const ee::TexturePacker& tp,
-							   float scale) const
+						   const ee::TexturePacker& tp,
+						   float scale) const
 {
 	P3dSprToBin::Pack(this, ptr);
 }

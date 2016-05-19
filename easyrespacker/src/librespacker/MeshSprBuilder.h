@@ -2,9 +2,9 @@
 #define _EASYRESPACKER_MESH_SPR_BUILDER_H_
 
 #include "INodeBuilder.h"
-#include "PackMesh.h"
+#include "PackMeshSpr.h"
 
-namespace emesh { class Sprite; class Symbol; }
+namespace emesh { class Sprite; }
 
 namespace erespacker
 {
@@ -19,7 +19,7 @@ public:
 
 	virtual void Traverse(ee::Visitor& visitor) const;
 
-	const IPackNode* Create(const emesh::Symbol* sym);
+	const IPackNode* Create(const emesh::Sprite* spr);
 
 private:
 	ExportNameSet& m_export_set;

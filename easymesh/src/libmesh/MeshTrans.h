@@ -21,6 +21,8 @@ public:
 
 	void SetTween(const MeshTrans& s, const MeshTrans& e, float process);
 
+	const std::map<sm::vec2, sm::vec2, sm::Vector2Cmp>& GetMap() const { return m_map; }
+
 private:
 	std::map<sm::vec2, sm::vec2, sm::Vector2Cmp> m_map;
 
