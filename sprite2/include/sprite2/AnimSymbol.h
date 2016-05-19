@@ -15,7 +15,7 @@ public:
 	{
 	public:
 		int index;
-		std::vector<s2::Sprite*> sprites;
+		std::vector<Sprite*> sprites;
 		bool tween;
 
 	public:

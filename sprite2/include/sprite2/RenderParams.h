@@ -27,7 +27,7 @@ public:
 	
 	RenderShader shader;
 
-	s2::RenderCamera camera;
+	RenderCamera camera;
 	
 public:
 	RenderParams();
