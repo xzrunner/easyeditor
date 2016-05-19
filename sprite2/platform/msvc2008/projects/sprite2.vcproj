@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\include\sprite2;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\editor-external\c99"
+				AdditionalIncludeDirectories="..\..\..\include\sprite2;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\editor-external\c99"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;S2_EXTEND"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -105,7 +105,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\include\sprite2;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\editor-external\c99"
+				AdditionalIncludeDirectories="..\..\..\include\sprite2;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\editor-external\c99"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;S2_EXTEND"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -251,6 +251,78 @@
 					RelativePath="..\..\..\include\sprite2\OBB.inl"
 					>
 				</File>
+			</Filter>
+			<Filter
+				Name="shape"
+				>
+				<File
+					RelativePath="..\..\..\source\dataset\BezierShape.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\BezierShape.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\dataset\ChainShape.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\ChainShape.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\dataset\CircleShape.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\CircleShape.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\dataset\CosineShape.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\CosineShape.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\dataset\PointShape.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\PointShape.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\dataset\PolygonShape.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\PolygonShape.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\dataset\RectShape.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\RectShape.h"
+					>
+				</File>
+				<Filter
+					Name="base"
+					>
+					<File
+						RelativePath="..\..\..\include\sprite2\Shape.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\include\sprite2\ShapeConfig.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter
@@ -502,6 +574,26 @@
 			>
 			<File
 				RelativePath="..\..\..\include\sprite2\Object.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\sprite2\Singleton.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="render"
+			>
+			<File
+				RelativePath="..\..\..\include\sprite2\S2_CameraMgr.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\source\render\S2_RVG.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\sprite2\S2_RVG.h"
 				>
 			</File>
 		</Filter>
