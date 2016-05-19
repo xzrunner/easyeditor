@@ -496,12 +496,12 @@ void ParserLuaFile::transPicToMemory(const std::vector<std::string>& texfilename
 			Picture::Part* part = pic->parts[i];
 
 			ee::ImageSymbol* image = new ee::ImageSymbol(images[part->tex], texfilenames[part->tex]);
-			sm::rect r;
-			r.xmin = part->xmin;
-			r.xmax = part->xmax;
-			r.ymin = part->ymin;
-			r.ymax = part->ymax;
-			image->SetRegion(r);
+// 			sm::rect r;
+// 			r.xmin = part->xmin;
+// 			r.xmax = part->xmax;
+// 			r.ymin = part->ymin;
+// 			r.ymax = part->ymax;
+// 			image->SetRegion(r);
 
 			ee::Sprite* sprite = new ee::ImageSprite(image);
 			part->transform(sprite);

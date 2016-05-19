@@ -67,7 +67,6 @@ ImageSymbol::ImageSymbol(Image* image, const std::string& filename)
 	InitCoreTex();
 
 	m_filepath = filename;
-	InitRegion();
 }
 
 ImageSymbol::~ImageSymbol()
@@ -99,7 +98,7 @@ void ImageSymbol::ReloadTexture() const
 
 sm::rect ImageSymbol::GetSize(const Sprite* sprite/* = NULL*/) const
 {
-	return m_region;
+	return m_core->GetSize();
 }
 
 void ImageSymbol::InvalidRect(const sm::mat4& mt) const
@@ -119,22 +118,7 @@ void ImageSymbol::LoadResources()
 	ImageMgr::Instance()->GetItem(m_filepath, &m_image);
 	img_data->Release();
 
-	InitRegion();
-
 	InitCoreTex();
-}
-
-void ImageSymbol::InitRegion()
-{
-	float hw = m_image->GetClippedWidth() * 0.5f,
-		hh = m_image->GetClippedHeight() * 0.5f;
-	float dx = m_image->GetOffset().x,
-		dy = m_image->GetOffset().y;
-
-	m_region.xmin = -hw + dx;
-	m_region.xmax =  hw + dx;
-	m_region.ymin = -hh + dy;
-	m_region.ymax =  hh + dy;
 }
 
 void ImageSymbol::InitCoreTex()
@@ -144,7 +128,7 @@ void ImageSymbol::InitCoreTex()
 	q.xmax = m_image->GetClippedWidth();
 	q.ymax = m_image->GetClippedHeight();
 	const sm::vec2& off = m_image->GetOffset();
-	m_core->InitTex(m_image->GetS2Tex(), q, off.x, off.y);
+	m_core->InitTex(m_image->GetS2Tex(), q, off);
 }
 
 }

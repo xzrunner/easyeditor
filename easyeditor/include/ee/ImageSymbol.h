@@ -34,20 +34,14 @@ public:
 
 	Image* GetImage() const { return m_image; }
 
-	void SetRegion(const sm::rect& region) { m_region = region; }
-
 protected:
 	virtual void LoadResources();
 
 private:
-	void InitRegion();
-
 	void InitCoreTex();
 
 protected:
 	Image* m_image;
-
-	sm::rect m_region;
 
 private:
 	s2::ImageSymbol* m_core;
