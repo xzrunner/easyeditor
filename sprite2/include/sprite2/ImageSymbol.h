@@ -3,8 +3,6 @@
 
 #include "Symbol.h"
 
-#include <SM_Vector.h>
-
 #include <stdint.h>
 
 namespace s2
@@ -32,7 +30,7 @@ public:
 
 	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const;
 
-	void InitTex(Texture* tex, const Quad& quad, float xoff, float yoff);
+	void InitTex(Texture* tex, const Quad& quad, const sm::vec2& offset);
 
 private:
 	void DrawBlend(const RenderParams& params, sm::vec2* vertices, float* texcoords, int texid) const;
@@ -42,10 +40,10 @@ private:
 	void DrawGaussianBlur(const RenderParams& params, sm::vec2* vertices, float* texcoords, int texid) const;
 
 protected:
-	Texture* m_tex;
+	Texture*	m_tex;
 
-	Quad m_quad;
-	float m_xoff, m_yoff;
+	Quad		m_quad;
+	sm::vec2	m_offset;
 
 	void  (*m_query_texcoords)(void* ud, float* texcoords, int* texid);
 	void  (*m_proj2screen)(float px, float py, int w, int h, float* sx, float* sy);

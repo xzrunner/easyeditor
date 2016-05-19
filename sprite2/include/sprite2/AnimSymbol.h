@@ -42,10 +42,9 @@ public:
 
 	const std::vector<Layer*>& GetLayers() const { return m_layers; }
 
-	/**
-	 *  @note
-	 *    api for dynamic change
-	 */	
+	/************************************************************************/
+	/* api for dynamic change                                               */
+	/************************************************************************/
 	void AddLayer(Layer* layer);
 	bool Clear();
 

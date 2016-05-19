@@ -6,8 +6,6 @@
 namespace s2
 {
 
-class ImageSymbol;
-
 class ImageSprite : public Sprite
 {
 public:
@@ -16,7 +14,8 @@ public:
 	virtual bool Update(float dt) { return false; }
 	
 private:
-	ImageSymbol* m_sym;
+	ImageSprite() {}
+	const ImageSprite& operator = (const ImageSprite& spr) { return *this; }
 
 }; // ImageSprite
 

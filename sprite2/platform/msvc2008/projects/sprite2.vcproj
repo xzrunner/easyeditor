@@ -192,14 +192,6 @@
 				Name="primitive"
 				>
 				<File
-					RelativePath="..\..\..\include\sprite2\AABB.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\sprite2\AABB.inl"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\include\sprite2\Color.h"
 					>
 				</File>
@@ -233,6 +225,30 @@
 				</File>
 				<File
 					RelativePath="..\..\..\include\sprite2\Texture.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="bound"
+				>
+				<File
+					RelativePath="..\..\..\include\sprite2\AABB.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\AABB.inl"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\Bounding.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\OBB.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\OBB.inl"
 					>
 				</File>
 			</Filter>
@@ -397,6 +413,86 @@
 				</File>
 				<File
 					RelativePath="..\..\..\include\sprite2\TextSymbol.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="shape"
+				>
+				<File
+					RelativePath="..\..\..\source\sprites\ShapeSprite.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\ShapeSprite.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\sprites\ShapeSymbol.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\ShapeSymbol.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="mesh"
+				>
+				<File
+					RelativePath="..\..\..\source\sprites\MeshSprite.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\MeshSprite.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\sprites\MeshSymbol.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\MeshSymbol.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="texture"
+				>
+				<File
+					RelativePath="..\..\..\source\sprites\TextureSprite.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\TextureSprite.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\sprites\TextureSymbol.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\TextureSymbol.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="icon"
+				>
+				<File
+					RelativePath="..\..\..\source\sprites\IconSprite.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\IconSprite.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\sprites\IconSymbol.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\IconSymbol.h"
 					>
 				</File>
 			</Filter>

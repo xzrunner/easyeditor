@@ -6,8 +6,6 @@
 namespace s2
 {
 
-class TextSymbol;
-
 class TextSprite : public Sprite
 {
 public:
@@ -16,7 +14,8 @@ public:
 	virtual bool Update(float dt) { return false; }
 	
 private:
-	TextSymbol* m_sym;
+	TextSprite() {}
+	const TextSprite& operator = (const TextSprite& spr) { return *this; }
 
 }; // TextSprite
 

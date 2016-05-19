@@ -3,6 +3,8 @@
 
 #include "Object.h"
 
+#include <SM_Rect.h>
+
 #include <stddef.h>
 
 namespace s2
@@ -18,7 +20,14 @@ public:
 
 	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const = 0;
 
+	const sm::rect& GetSize(const Sprite* sprite = NULL) const {
+		return m_size;
+	}
+
 	void* GetUD() const { return m_ud; }
+
+protected:
+	sm::rect m_size;
 
 private:
 	void* m_ud;

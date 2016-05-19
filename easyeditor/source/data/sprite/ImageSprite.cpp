@@ -86,17 +86,17 @@ void ImageSprite::BuildBoundingFromTexCoords(float* texCoords)
  	rect.ymax = sz.y * (texCoords[3] - 0.5f);
  
  	sm::vec2 center = rect.Center();
- 	float hWidth = (rect.xmax - rect.xmin) * 0.5f * m_core->Scale().x,
- 		hHeight = (rect.ymax - rect.ymin) * 0.5f * m_core->Scale().y;
+ 	float hWidth = (rect.xmax - rect.xmin) * 0.5f * m_core->GetScale().x,
+ 		hHeight = (rect.ymax - rect.ymin) * 0.5f * m_core->GetScale().y;
  	rect.xmin = -hWidth;
  	rect.xmax = hWidth;
  	rect.ymin = -hHeight;
  	rect.ymax = hHeight;
  
- 	sm::vec2 offset = Math2D::RotateVector(center, m_core->Angle());
- 	rect.Translate(m_core->Position() + offset);
+ 	sm::vec2 offset = Math2D::RotateVector(center, m_core->GetAngle());
+ 	rect.Translate(m_core->GetPosition() + offset);
  	m_bounding->InitFromRect(rect);
- 	m_bounding->SetTransform(m_core->Position(), m_offset, m_core->Angle());
+ 	m_bounding->SetTransform(m_core->GetPosition(), m_offset, m_core->GetAngle());
 }
 
 }

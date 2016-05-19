@@ -13,6 +13,10 @@ public:
 
 	virtual bool Update(float dt) { return false; }
 
+private:
+	DummySprite() {}
+	const DummySprite& operator = (const DummySprite& spr) { return *this; }
+
 }; // DummySprite
 
 }

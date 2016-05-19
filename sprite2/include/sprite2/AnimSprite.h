@@ -6,8 +6,6 @@
 namespace s2
 {
 
-class AnimSymbol;
-
 class AnimSprite : public Sprite
 {
 public:
@@ -16,7 +14,8 @@ public:
 	virtual bool Update(float dt) { return false; }
 	
 private:
-	AnimSymbol* m_sym;
+	AnimSprite() {}
+	const AnimSprite& operator = (const AnimSprite& spr) { return *this; }
 
 }; // AnimSprite
 

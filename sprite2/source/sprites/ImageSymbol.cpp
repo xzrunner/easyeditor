@@ -30,18 +30,11 @@ ImageSymbol::ImageSymbol(void* ud,
 
 void ImageSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 {
-	uint16_t tex_w, tex_h;
-	m_tex->GetSize(tex_w, tex_h);
-	float xmin = m_quad.xmin - tex_w * 0.5f + m_xoff,
-		  ymin = m_quad.ymin - tex_h * 0.5f + m_yoff;
-	float xmax = m_quad.xmax - tex_w * 0.5f + m_xoff,
-		  ymax = m_quad.ymax - tex_h * 0.5f + m_yoff;
-	
 	sm::vec2 vertices[4];
-	vertices[0] = sm::vec2(xmin, ymin);
-	vertices[1] = sm::vec2(xmax, ymin);
-	vertices[2] = sm::vec2(xmax, ymax);
-	vertices[3] = sm::vec2(xmin, ymax);
+	vertices[0] = sm::vec2(m_size.xmin, m_size.ymin);
+	vertices[1] = sm::vec2(m_size.xmax, m_size.ymin);
+	vertices[2] = sm::vec2(m_size.xmax, m_size.ymax);
+	vertices[3] = sm::vec2(m_size.xmin, m_size.ymax);
 	for (int i = 0; i < 4; ++i) {
 		vertices[i] = params.mt * vertices[i];
 	}
@@ -62,12 +55,18 @@ void ImageSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 	}
 }
 
-void ImageSymbol::InitTex(Texture* tex, const Quad& quad, float xoff, float yoff)
+void ImageSymbol::InitTex(Texture* tex, const Quad& quad, const sm::vec2& offset)
 {
 	m_tex = tex;
 	m_quad = quad;
-	m_xoff = xoff;
-	m_yoff = yoff;
+	m_offset = offset;
+
+	uint16_t tex_w, tex_h;
+	m_tex->GetSize(tex_w, tex_h);
+	m_size.xmin = m_quad.xmin - tex_w * 0.5f + m_offset.x;
+	m_size.ymin = m_quad.ymin - tex_h * 0.5f + m_offset.y;
+	m_size.xmax = m_quad.xmax - tex_w * 0.5f + m_offset.x;
+	m_size.ymax = m_quad.ymax - tex_h * 0.5f + m_offset.y;
 }
 
 void ImageSymbol::DrawBlend(const RenderParams& params, sm::vec2* vertices, float* texcoords, int texid) const
@@ -77,7 +76,7 @@ void ImageSymbol::DrawBlend(const RenderParams& params, sm::vec2* vertices, floa
 	shader->SetColor(params.color.mul.ToABGR(), params.color.add.ToABGR());
 
 	if (params.root_spr) {
-		sm::vec2 offset = params.root_spr->Position();
+		sm::vec2 offset = params.root_spr->GetPosition();
 		for (int i = 0; i < 4; ++i) {
 			vertices[i] -= offset;
 		}

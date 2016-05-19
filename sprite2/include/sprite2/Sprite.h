@@ -12,59 +12,76 @@
 namespace s2
 {
 
+class Symbol;
+
 class Sprite : public Object
 {
 public:
+	Sprite(const Sprite& spr);
 	Sprite(void* ud);
+	virtual ~Sprite();
 	
 	virtual bool Update(float dt) = 0;
-	
+
 	void* GetUD() { return m_ud; }
 
-#ifdef S2_EXTEND
-	const sm::vec2& Position() const	{ return m_position; }
-	sm::vec2& Position()				{ return m_position; }
-	const float& Angle() const			{ return m_angle; }
-	float& Angle()						{ return m_angle; }
-	const sm::vec2& Scale() const		{ return m_scale; }
-	sm::vec2& Scale()					{ return m_scale; }
-	const sm::vec2& Shear() const		{ return m_shear; }
-	sm::vec2& Shear()					{ return m_shear; }
+	/************************************************************************/
+	/* api for dynamic change                                               */
+	/************************************************************************/
 
-	const RenderColor& Color() const	{ return m_color; }
-	RenderColor& Color()				{ return m_color; }
-	const RenderShader& Shader() const	{ return m_shader; }
-	RenderShader& Shader()				{ return m_shader; }
-	const RenderCamera& Camera() const	{ return m_camera; }
-	RenderCamera& Camera()				{ return m_camera; }
-#endif // S2_EXTEND
+	const sm::vec2&		GetPosition() const	{ return m_position; }
+	const float&		GetAngle() const	{ return m_angle; }
+	const sm::vec2&		GetScale() const	{ return m_scale; }
+	const sm::vec2&		GetShear() const	{ return m_shear; }
+
+	const RenderColor&	Color() const		{ return m_color; }
+	RenderColor&		Color()				{ return m_color; }
+	const RenderShader& Shader() const		{ return m_shader; }
+	RenderShader&		Shader()			{ return m_shader; }
+	const RenderCamera& Camera() const		{ return m_camera; }
+	RenderCamera&		Camera()			{ return m_camera; }
+
+	void SetPosition(const sm::vec2& pos);
+	void SetAngle(float angle);
+	void SetScale(const sm::vec2& scale);
+	void SetShear(const sm::vec2& shear);
 
 protected:
+	Sprite() {}
+	const Sprite& operator = (const Sprite& spr) { return *this; }
+
 //	void MultiplyRenderParams(const RenderParams& src, RenderParams& dst) const;
 
+private:
+	void UpdateBounding();
+
 protected:
+	Symbol*			m_sym;
+
+private:
 	/************************************************************************/
 	/* geometry                                                             */
 	/************************************************************************/
-	sm::vec2	m_position;
-	float		m_angle;
-	sm::vec2	m_scale;
-	sm::vec2	m_shear;
+	sm::vec2		m_position;
+	float			m_angle;
+	sm::vec2		m_scale;
+	sm::vec2		m_shear;
 
-	sm::vec2	m_offset;
+	sm::vec2		m_offset;
 
-	AABB		m_aabb;
-	
+	Bounding*		m_bounding;
+	bool			m_bounding_dirty;
+
 	// todo mat
 
 	/************************************************************************/
 	/* draw                                                                 */
 	/************************************************************************/
-	RenderColor	 m_color;
-	RenderShader m_shader;
-	RenderCamera m_camera;
+	RenderColor		m_color;
+	RenderShader	m_shader;
+	RenderCamera	m_camera;
 
-	void* m_ud;	// for extend
+	void*			m_ud;	// for extend
 
 }; // Sprite
 

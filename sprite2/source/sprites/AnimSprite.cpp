@@ -5,7 +5,6 @@ namespace s2
 
 AnimSprite::AnimSprite(void* ud)
 	: Sprite(ud)
-	, m_sym(NULL)
 {
 }
 

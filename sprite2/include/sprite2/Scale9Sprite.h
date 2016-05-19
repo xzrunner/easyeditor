@@ -6,12 +6,12 @@
 namespace s2
 {
 
-class Scale9Symbol;
 class RenderParams;
 
 class Scale9Sprite : public Sprite
 {
 public:
+	Scale9Sprite(const Scale9Sprite& spr);
 	Scale9Sprite(void* ud);
 	
 	virtual bool Update(float dt) { return false; }
@@ -19,8 +19,10 @@ public:
 	void Draw(const RenderParams& params) const;
 
 private:
-	Scale9Symbol* m_sym;
+	Scale9Sprite() {}
+	const Scale9Sprite& operator = (const Scale9Sprite& spr) { return *this; }
 
+private:
 	float m_width, m_height;
 
 	// 0 1 2

@@ -6,8 +6,6 @@
 namespace s2
 {
 
-class ComplexSymbol;
-
 class ComplexSprite : public Sprite
 {
 public:
@@ -16,7 +14,8 @@ public:
 	virtual bool Update(float dt);
 	
 private:
-	ComplexSymbol* m_sym;
+	ComplexSprite() {}
+	const ComplexSprite& operator = (const ComplexSprite& spr) { return *this; }
 
 }; // ComplexSprite
 

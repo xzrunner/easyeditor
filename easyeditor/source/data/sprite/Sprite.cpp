@@ -166,16 +166,16 @@ void Sprite::Store(Json::Value& val) const
 	SpriteIO::StoreShader(val, m_core->Shader());
 	SpriteIO::StoreCamera(val, m_core->Camera());
 
-	val["position"]["x"] = m_core->Position().x;
-	val["position"]["y"] = m_core->Position().y;
+	val["position"]["x"] = m_core->GetPosition().x;
+	val["position"]["y"] = m_core->GetPosition().y;
 
-	val["angle"] = m_core->Angle();
+	val["angle"] = m_core->GetAngle();
 
-	val["x scale"] = m_core->Scale().x;
-	val["y scale"] = m_core->Scale().y;
+	val["x scale"] = m_core->GetScale().x;
+	val["y scale"] = m_core->GetScale().y;
 
-	val["x shear"] = m_core->Shear().x;
-	val["y shear"] = m_core->Shear().y;
+	val["x shear"] = m_core->GetShear().x;
+	val["y shear"] = m_core->GetShear().y;
 
 	val["x mirror"] = m_mirror.x;
 	val["y mirror"] = m_mirror.y;
@@ -205,10 +205,10 @@ void Sprite::BuildBounding()
 	if (!m_offset_valid) {
 		m_offset = rect.Center();
 	}
-	rect.Scale(m_core->Scale().x, m_core->Scale().y);
+	rect.Scale(m_core->GetScale().x, m_core->GetScale().y);
 //	rect.Shear(m_core->Shear().x, m_core->Shear().y);
 	m_bounding->InitFromRect(rect);
-	m_bounding->SetTransform(m_core->Position(), m_offset, m_core->Angle());
+	m_bounding->SetTransform(m_core->GetPosition(), m_offset, m_core->GetAngle());
 }
 
 PropertySetting* Sprite::CreatePropertySetting(EditPanelImpl* stage)
@@ -219,26 +219,26 @@ PropertySetting* Sprite::CreatePropertySetting(EditPanelImpl* stage)
 void Sprite::SetTransform(const sm::vec2& position, float angle)
 {
 	assert(m_core);
-	if (m_core->Position() != position) Translate(position - m_core->Position());
-	if (m_core->Angle() != angle) Rotate(angle - m_core->Angle());
+	if (m_core->GetPosition() != position) Translate(position - m_core->GetPosition());
+	if (m_core->GetAngle() != angle) Rotate(angle - m_core->GetAngle());
 }
 
 const sm::vec2& Sprite::GetPosition() const 
 { 
 	assert(m_core);
-	return m_core->Position(); 
+	return m_core->GetPosition(); 
 }
 
 float Sprite::GetAngle() const 
 {
 	assert(m_core);
-	return m_core->Angle(); 
+	return m_core->GetAngle(); 
 }
 
 const sm::vec2& Sprite::GetScale() const 
 { 
 	assert(m_core);
-	return m_core->Scale(); 
+	return m_core->GetScale(); 
 }
 
 void Sprite::SetScale(const sm::vec2& scale)
@@ -246,8 +246,8 @@ void Sprite::SetScale(const sm::vec2& scale)
 	assert(m_core);
 
 	sm::vec2 dscale;
-	dscale.x = scale.x / m_core->Scale().x;
-	dscale.y = scale.y / m_core->Scale().y;
+	dscale.x = scale.x / m_core->GetScale().x;
+	dscale.y = scale.y / m_core->GetScale().y;
 
 	sm::vec2 old_offset = m_offset;
 	sm::vec2 new_offset(m_offset.x * dscale.x, m_offset.y * dscale.y);
@@ -269,21 +269,21 @@ void Sprite::SetScale(const sm::vec2& scale)
 
 	//////////////////////////////////////////////////////////////////////////
 
-	m_core->Scale() = scale;
+	m_core->SetScale(scale);
 	BuildBounding();
 }
 
 const sm::vec2& Sprite::GetShear() const
 {
 	assert(m_core);
-	return m_core->Shear();
+	return m_core->GetShear();
 }
 
 void Sprite::SetShear(const sm::vec2& shear)
 {
 	assert(m_core);
 	sm::mat4 mat_old, mat_new;
-	mat_old.Shear(m_core->Shear().x, m_core->Shear().y);
+	mat_old.Shear(m_core->GetShear().x, m_core->GetShear().y);
 	mat_new.Shear(shear.x, shear.y);
 
 	sm::vec2 offset = Math2D::TransVector(m_offset, mat_new) - Math2D::TransVector(m_offset, mat_old);
@@ -291,7 +291,7 @@ void Sprite::SetShear(const sm::vec2& shear)
 	m_offset += offset;
 	Translate(-offset);
 
-	m_core->Shear() = shear;
+	m_core->SetShear(shear);
 	BuildBounding();
 }
 
@@ -304,10 +304,10 @@ void Sprite::SetOffset(const sm::vec2& offset)
 	m_offset = offset;
 	m_offset_valid = true;
 	sm::vec2 new_center = GetCenter();
-	m_core->Position() += (old_center - new_center);
+	m_core->SetPosition(m_core->GetPosition() + old_center - new_center);
 
 	if (m_bounding) {
-		m_bounding->SetTransform(m_core->Position(), m_offset, m_core->Angle());
+		m_bounding->SetTransform(m_core->GetPosition(), m_offset, m_core->GetAngle());
 	}
 }
 
@@ -335,9 +335,9 @@ void Sprite::Translate(const sm::vec2& offset)
 	if (m_observer)
 		m_observer->Translate(this, offset);
 
-	m_core->Position() += offset;
+	m_core->SetPosition(m_core->GetPosition() + offset);
 	if (m_bounding) {
-		m_bounding->SetTransform(m_core->Position(), m_offset, m_core->Angle());
+		m_bounding->SetTransform(m_core->GetPosition(), m_offset, m_core->GetAngle());
 	}
 
 #ifdef OPEN_SCREEN_CACHE
@@ -359,10 +359,10 @@ void Sprite::Rotate(float delta)
 	if (m_observer)
 		m_observer->Rotate(this, delta);
 
-	m_core->Angle() += delta;
+	m_core->SetAngle(m_core->GetAngle() + delta);
 
 	if (m_bounding) {
-		m_bounding->SetTransform(m_core->Position(), m_offset, m_core->Angle());
+		m_bounding->SetTransform(m_core->GetPosition(), m_offset, m_core->GetAngle());
 	}
 
 #ifdef OPEN_SCREEN_CACHE
@@ -388,15 +388,15 @@ void Sprite::SetMirror(bool x_mirror, bool y_mirror)
 	m_mirror.y = y_mirror;
 	if (m_bounding) {
 		m_bounding->SetMirror(x_dirty, y_dirty);
-		m_bounding->SetTransform(m_core->Position(), m_offset, m_core->Angle());
+		m_bounding->SetTransform(m_core->GetPosition(), m_offset, m_core->GetAngle());
 	}
 }
 
 sm::vec2 Sprite::GetCenter() const
 {
 	assert(m_core);
-	sm::vec2 center_offset = Math2D::RotateVector(-m_offset, m_core->Angle()) + m_offset;
-	sm::vec2 center = m_core->Position() + center_offset;
+	sm::vec2 center_offset = Math2D::RotateVector(-m_offset, m_core->GetAngle()) + m_offset;
+	sm::vec2 center = m_core->GetPosition() + center_offset;
 	return center;
 }
 
@@ -450,22 +450,22 @@ sm::rect Sprite::GetRect() const
 void Sprite::GetTransMatrix(sm::mat4& mt) const
 {
 	assert(m_core);
-	const float x_scale = m_mirror.x ? -m_core->Scale().x : m_core->Scale().x,
-		y_scale = m_mirror.y ? -m_core->Scale().y : m_core->Scale().y;
+	const float x_scale = m_mirror.x ? -m_core->GetScale().x : m_core->GetScale().x,
+		y_scale = m_mirror.y ? -m_core->GetScale().y : m_core->GetScale().y;
 
 	sm::vec2 center = GetCenter();
-	mt.SetTransformation(center.x, center.y, m_core->Angle(), 
-		x_scale, y_scale, 0, 0, m_core->Shear().x, m_core->Shear().y);
+	mt.SetTransformation(center.x, center.y, m_core->GetAngle(), 
+		x_scale, y_scale, 0, 0, m_core->GetShear().x, m_core->GetShear().y);
 }
 
 sm::mat4 Sprite::GetTransInvMatrix() const
 {
 	assert(m_core);
 	sm::mat4 mat;
-	mat.RotateZ(-m_core->Angle());
-	mat.Shear(-m_core->Shear().x, -m_core->Shear().y);
-	mat.Translate(-m_core->Position().x/m_core->Scale().x, -m_core->Position().y/m_core->Scale().y, 0);
-	mat.Scale(1/m_core->Scale().x, 1/m_core->Scale().y, 1);
+	mat.RotateZ(-m_core->GetAngle());
+	mat.Shear(-m_core->GetShear().x, -m_core->GetShear().y);
+	mat.Translate(-m_core->GetPosition().x/m_core->GetScale().x, -m_core->GetPosition().y/m_core->GetScale().y, 0);
+	mat.Scale(1/m_core->GetScale().x, 1/m_core->GetScale().y, 1);
 	return mat;
 }
 

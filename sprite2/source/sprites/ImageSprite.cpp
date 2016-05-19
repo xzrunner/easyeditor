@@ -7,7 +7,6 @@ namespace s2
 
 ImageSprite::ImageSprite(void* ud)
 	: Sprite(ud)
-	, m_sym(NULL)
 {
 }
 

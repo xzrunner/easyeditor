@@ -6,8 +6,6 @@
 namespace s2
 {
 
-class Particle3dSymbol;
-
 class Particle3dSprite : public Sprite
 {
 public:
@@ -16,7 +14,8 @@ public:
 	virtual bool Update(float dt) { return false; }
 	
 private:
-	Particle3dSymbol* m_sym;
+	Particle3dSprite() {}
+	const Particle3dSprite& operator = (const Particle3dSprite& spr) { return *this; }
 
 }; // Particle3dSprite
 

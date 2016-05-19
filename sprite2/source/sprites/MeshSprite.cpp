@@ -1,11 +1,11 @@
-#include "TextSprite.h"
+#include "MeshSprite.h"
 
 #include <stddef.h>
 
 namespace s2
 {
 
-TextSprite::TextSprite(void* ud)
+MeshSprite::MeshSprite(void* ud)
 	: Sprite(ud)
 {
 }
