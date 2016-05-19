@@ -1,7 +1,7 @@
 #include "PackMesh.h"
 
 #include "MeshToLuaString.h"
-#include "MeshFromLuaString.h"
+#include "MeshFromLua.h"
 
 #include "MeshToBin.h"
 #include "MeshFromBin.h"
@@ -21,7 +21,7 @@ void PackMesh::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePa
 
 void PackMesh::UnpackFromLua(lua_State* L, const std::vector<ee::Image*>& images)
 {
-	MeshFromLuaString::Unpack(L, this);
+	MeshFromLua::Unpack(L, this);
 }
 
 int PackMesh::SizeOfPackToBin() const

@@ -1,4 +1,4 @@
-#include "MeshFromLuaString.h"
+#include "MeshFromLua.h"
 #include "PackMesh.h"
 #include "UnpackNodeFactory.h"
 #include "LuaDataHelper.h"
@@ -6,7 +6,7 @@
 namespace erespacker
 {
 
-void MeshFromLuaString::Unpack(lua_State* L, PackMesh* mesh)
+void MeshFromLua::Unpack(lua_State* L, PackMesh* mesh)
 {
 	UnpackNodeFactory* factory = UnpackNodeFactory::Instance();
 	int base_sym_id = LuaDataHelper::GetIntField(L, "base_sym_id");

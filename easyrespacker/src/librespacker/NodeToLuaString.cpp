@@ -1,4 +1,4 @@
-#include "NodeToLua.h"
+#include "NodeToLuaString.h"
 #include "typedef.h"
 
 #include <ee/Math2D.h>
@@ -13,32 +13,32 @@ namespace lua = ebuilder::lua;
 namespace erespacker
 {
 
-int NodeToLua::TransTime(float time)
+int NodeToLuaString::TransTime(float time)
 {
 	return static_cast<int>(floor(time * 1000 + 0.5f));
 }
 
-int NodeToLua::TransRadian(float r)
+int NodeToLuaString::TransRadian(float r)
 {
 	return static_cast<int>(floor(r * SM_RAD_TO_DEG + 0.5f));
 }
 
-int NodeToLua::TransFloat(float f)
+int NodeToLuaString::TransFloat(float f)
 {
 	return static_cast<int>(floor(f + 0.5f));
 }
 
-int NodeToLua::TransFloatX100(float f)
+int NodeToLuaString::TransFloatX100(float f)
 {
 	return TransFloat(100 * f);
 }
 
-std::string NodeToLua::TransBool(bool b)
+std::string NodeToLuaString::TransBool(bool b)
 {
 	return b ? "true" : "false";
 }
 
-void NodeToLua::PackVertices(const std::vector<sm::vec2>& vertices, 
+void NodeToLuaString::PackVertices(const std::vector<sm::vec2>& vertices, 
 							 ebuilder::CodeGenerator& gen)
 {
 	lua::assign_with_end(gen, "vertices_num", vertices.size());

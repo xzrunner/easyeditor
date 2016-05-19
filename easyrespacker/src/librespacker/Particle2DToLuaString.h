@@ -1,13 +1,13 @@
 #ifndef _EASYRESPACKER_PARTICLE2D_TO_LUA_STRING_H_
 #define _EASYRESPACKER_PARTICLE2D_TO_LUA_STRING_H_
 
-#include "NodeToLua.h"
+#include "NodeToLuaString.h"
 #include "PackParticle2D.h"
 
 namespace erespacker
 {
 
-class Particle2DToLuaString : private NodeToLua
+class Particle2DToLuaString : private NodeToLuaString
 {
 public:
 	static void Pack(const PackParticle2D* p2d, ebuilder::CodeGenerator& gen);

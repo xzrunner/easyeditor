@@ -1,5 +1,5 @@
-#ifndef _EASYRESPACKER_NODE_TO_LUA_H_
-#define _EASYRESPACKER_NODE_TO_LUA_H_
+#ifndef _EASYRESPACKER_NODE_TO_LUA_STRING_H_
+#define _EASYRESPACKER_NODE_TO_LUA_STRING_H_
 
 #include <SM_Vector.h>
 
@@ -10,7 +10,7 @@ namespace ebuilder { class CodeGenerator; }
 namespace erespacker
 {
 
-class NodeToLua
+class NodeToLuaString
 {
 public:
 	static int TransTime(float time);
@@ -21,8 +21,8 @@ public:
 
 	static void PackVertices(const std::vector<sm::vec2>& vertices, ebuilder::CodeGenerator& gen);
 
-}; // NodeToLua
+}; // NodeToLuaString
 
 }
 
-#endif // _EASYRESPACKER_NODE_TO_LUA_H_
+#endif // _EASYRESPACKER_NODE_TO_LUA_STRING_H_

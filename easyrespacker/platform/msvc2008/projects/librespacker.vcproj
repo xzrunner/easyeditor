@@ -827,11 +827,11 @@
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\librespacker\NodeToLua.cpp"
+						RelativePath="..\..\..\src\librespacker\NodeToLuaString.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\librespacker\NodeToLua.h"
+						RelativePath="..\..\..\src\librespacker\NodeToLuaString.h"
 						>
 					</File>
 				</Filter>
@@ -871,11 +871,11 @@
 					Name="lua"
 					>
 					<File
-						RelativePath="..\..\..\src\librespacker\MeshFromLuaString.cpp"
+						RelativePath="..\..\..\src\librespacker\MeshFromLua.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\librespacker\MeshFromLuaString.h"
+						RelativePath="..\..\..\src\librespacker\MeshFromLua.h"
 						>
 					</File>
 					<File
