@@ -1,6 +1,8 @@
 #ifndef _EASYRESPACKER_NODE_FROMI_BIN_H_
 #define _EASYRESPACKER_NODE_FROMI_BIN_H_
 
+#include "typedef.h"
+
 #include <SM_Vector.h>
 
 #include <vector>
@@ -19,7 +21,8 @@ public:
 	static bool  TransBool(int b);
 
 	static int  SizeVertices(const std::vector<sm::vec2>& vertices);
-	static void UnpackVertices(std::vector<sm::vec2>& vertices, uint8_t** ptr);
+	static void UnpackVertices(std::vector<sm::vec2>& vertices, 
+		uint8_t** ptr, bool reverse_y = true, int scale = SCALE);
 
 }; // NodeFromBin
 

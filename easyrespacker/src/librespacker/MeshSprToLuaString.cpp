@@ -24,7 +24,7 @@ void MeshSprToLuaString::Pack(const PackMeshSpr* mesh, ebuilder::CodeGenerator& 
 	lua::connect(gen, 1, 
 		lua::assign("base_id", mesh->base->GetSprID()));
 	
-	PackVertices(mesh->trans_pairs, gen);	
+	PackVertices(mesh->trans_pairs, gen, "trans_pairs");
 
 	gen.detab();
 	gen.line("},");

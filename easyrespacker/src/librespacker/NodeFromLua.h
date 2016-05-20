@@ -1,6 +1,8 @@
 #ifndef _EASYRESPACKER_NODE_FROMI_LUA_H_
 #define _EASYRESPACKER_NODE_FROMI_LUA_H_
 
+#include "typedef.h"
+
 #include <SM_Vector.h>
 
 extern "C" {
@@ -19,7 +21,8 @@ public:
 	static float TransDegree(int deg);
 	static float TransFloatX100(int f);
 
-	static void UnpackVertices(std::vector<sm::vec2>& vertices, lua_State* L);
+	static void UnpackVertices(std::vector<sm::vec2>& vertices, lua_State* L, 
+		const std::string& name, bool reverse_y = true, int scale = SCALE);
 
 }; // NodeFromLua
 

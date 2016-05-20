@@ -1,6 +1,5 @@
 #include "NodeFromLua.h"
 #include "LuaDataHelper.h"
-#include "typedef.h"
 
 #include <ee/Math2D.h>
 
@@ -25,12 +24,13 @@ float NodeFromLua::TransFloatX100(int f)
 	return f * 0.01f;
 }
 
-void NodeFromLua::UnpackVertices(std::vector<sm::vec2>& vertices, lua_State* L)
+void NodeFromLua::UnpackVertices(std::vector<sm::vec2>& vertices, lua_State* L, 
+								 const std::string& name, bool reverse_y, int scale)
 {
-	int num = LuaDataHelper::GetIntField(L, "vertices_num");
+	int num = LuaDataHelper::GetIntField(L, (name + "_num").c_str());
 	vertices.clear();
 	vertices.resize(num);
-	lua_getfield(L, -1, "vertices");
+	lua_getfield(L, -1, name.c_str());
 	int len = lua_rawlen(L, -1);
 	assert(len == num * 2);
 	for (int i = 0; i <= len; ++i) 
@@ -39,9 +39,12 @@ void NodeFromLua::UnpackVertices(std::vector<sm::vec2>& vertices, lua_State* L)
 		lua_gettable(L, -2);
 		int screen = static_cast<int>(lua_tonumber(L, -1));
 		if (i % 2) {
-			vertices[(i - 1) / 2].x = screen / SCALE;
+			vertices[(i - 1) / 2].x = (float)screen / scale;
 		} else {
-			vertices[(i - 1) / 2].y =-screen / SCALE;
+			vertices[(i - 1) / 2].y = (float)screen / scale;
+		}
+		if (reverse_y) {
+			vertices[(i - 1) / 2].y = -vertices[(i - 1) / 2].y;
 		}
 		lua_pop(L, 1);
 	}

@@ -211,11 +211,11 @@ void PackAnimation::LoadSprMat(const ee::Sprite* spr, SpriteTrans& trans, bool f
 void PackAnimation::LoadSprColor(const ee::Sprite* spr, SpriteTrans& trans)
 {
 	trans.color = spr->GetColor().mul.ToABGR();
-	trans.additive = spr->GetColor().mul.ToABGR();
+	trans.additive = spr->GetColor().add.ToABGR();
 
 	trans.rmap = spr->GetColor().rmap.ToRGBA();
-	trans.gmap = spr->GetColor().rmap.ToRGBA();
-	trans.bmap = spr->GetColor().rmap.ToRGBA();	
+	trans.gmap = spr->GetColor().gmap.ToRGBA();
+	trans.bmap = spr->GetColor().bmap.ToRGBA();	
 }
 
 bool PackAnimation::IsMatrixIdentity(const int* mat)

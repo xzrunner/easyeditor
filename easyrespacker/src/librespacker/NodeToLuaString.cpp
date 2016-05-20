@@ -1,5 +1,4 @@
 #include "NodeToLuaString.h"
-#include "typedef.h"
 
 #include <ee/Math2D.h>
 
@@ -38,18 +37,21 @@ std::string NodeToLuaString::TransBool(bool b)
 	return b ? "true" : "false";
 }
 
-void NodeToLuaString::PackVertices(const std::vector<sm::vec2>& vertices, 
-							 ebuilder::CodeGenerator& gen)
+void NodeToLuaString::PackVertices(const std::vector<sm::vec2>& vertices, ebuilder::CodeGenerator& gen, 
+								   const std::string& name, bool reverse_y, int scale)
 {
-	lua::assign_with_end(gen, "vertices_num", vertices.size());
+	lua::assign_with_end(gen, name + "_num", vertices.size());
 
 	std::stringstream ss;
-	ss << "vertices = {";
+	ss << name << " = {";
 	for (int i = 0, n = vertices.size(); i < n; ++i) 
 	{
 		const sm::vec2& pos = vertices[i];
-		int32_t x = floor(pos.x * SCALE + 0.5f),
-			    y =-floor(pos.y * SCALE + 0.5f);
+		int32_t x = floor(pos.x * scale + 0.5f),
+			    y = floor(pos.y * scale + 0.5f);
+		if (reverse_y) {
+			y = -y;
+		}
 		ss << x << ", " << y << ", ";
 	}
 	ss << "}";

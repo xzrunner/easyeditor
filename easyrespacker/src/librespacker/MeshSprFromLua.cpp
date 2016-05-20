@@ -22,7 +22,7 @@ void MeshSprFromLua::Unpack(lua_State* L, PackMeshSpr* mesh)
 		factory->AddUnassigned(base_id, &mesh->base);
 	}
 
-	UnpackVertices(mesh->trans_pairs, L);
+	UnpackVertices(mesh->trans_pairs, L, "trans_pairs");
 }
 
 }

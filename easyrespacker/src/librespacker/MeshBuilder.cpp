@@ -35,11 +35,14 @@ const IPackNode* MeshBuilder::Create(const emesh::Symbol* sym)
 	node->base = PackNodeFactory::Instance()->Create(sym->GetMesh()->GetBaseSymbol());
 
 	const std::vector<emesh::Triangle*>& tris = sym->GetMesh()->GetTriangles();
-	node->triangles.reserve(tris.size() * 3);
+	int sz = tris.size() * 3;
+	node->tri_vertices.reserve(sz);
+	node->tri_vertices.reserve(sz);
 	for (int i = 0, n = tris.size(); i < n; ++i) {
 		emesh::Triangle* tri = tris[i];
 		for (int j = 0; j < 3; ++j) {
-			node->triangles.push_back(tri->nodes[j]->xy);
+			node->tri_texcoords.push_back(tri->nodes[j]->uv);
+			node->tri_vertices.push_back(tri->nodes[j]->ori_xy);
 		}
 	}
 

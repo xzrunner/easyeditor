@@ -1,6 +1,5 @@
 #include "NodeToBin.h"
 #include "pack_unpack.h"
-#include "typedef.h"
 
 #include <ee/Math2D.h>
 #include <ee/Exception.h>
@@ -43,7 +42,8 @@ int NodeToBin::SizeVertices(const std::vector<sm::vec2>& vertices)
 	return sz;
 }
 
-void NodeToBin::PackVertices(const std::vector<sm::vec2>& vertices, uint8_t** ptr)
+void NodeToBin::PackVertices(const std::vector<sm::vec2>& vertices, uint8_t** ptr, 
+							 bool reverse_y, int scale)
 {
 	if (vertices.size() > USHRT_MAX) {
 		throw ee::Exception("NodeToBin::PackVertices num too large.");
@@ -52,10 +52,14 @@ void NodeToBin::PackVertices(const std::vector<sm::vec2>& vertices, uint8_t** pt
 	uint16_t num = vertices.size();
 	pack(num, ptr);
 
-	for (int i = 0, n = vertices.size(); i < n; ++i) {
+	for (int i = 0, n = vertices.size(); i < n; ++i) 
+	{
 		const sm::vec2& pos = vertices[i];
-		int32_t x = static_cast<int>(floor(pos.x * SCALE + 0.5f)),
-			    y =-static_cast<int>(floor(pos.y * SCALE + 0.5f));
+		int32_t x = static_cast<int>(floor(pos.x * scale + 0.5f)),
+			    y = static_cast<int>(floor(pos.y * scale + 0.5f));
+		if (reverse_y) {
+			y = -y;
+		}
 		pack(x, ptr);
 		pack(y, ptr);
 	}

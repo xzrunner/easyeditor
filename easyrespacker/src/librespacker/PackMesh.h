@@ -13,7 +13,7 @@ class PackMesh : public IPackNode
 public:
 	const IPackNode* base;
 
-	std::vector<sm::vec2> triangles;
+	std::vector<sm::vec2> tri_texcoords, tri_vertices;
 	
 public:	
 	PackMesh() {}

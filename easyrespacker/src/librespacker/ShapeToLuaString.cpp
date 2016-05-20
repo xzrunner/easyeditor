@@ -22,7 +22,7 @@ void ShapeToLuaString::Pack(const PackShape* shape, ebuilder::CodeGenerator& gen
 	lua::assign_with_end(gen, "shape_type", shape->type);
 	lua::assign_with_end(gen, "color", shape->color.ToRGBA());
 
-	PackVertices(shape->vertices, gen);
+	PackVertices(shape->vertices, gen, "vertices");
 
 	gen.detab();
 	gen.line("},");

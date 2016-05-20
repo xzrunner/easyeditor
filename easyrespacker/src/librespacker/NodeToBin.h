@@ -1,6 +1,8 @@
 #ifndef _EASYRESPACKER_NODE_TO_BIN_H_
 #define _EASYRESPACKER_NODE_TO_BIN_H_
 
+#include "typedef.h"
+
 #include <SM_Vector.h>
 
 #include <vector>
@@ -20,7 +22,8 @@ public:
 	static int TransBool(bool b);
 
 	static int  SizeVertices(const std::vector<sm::vec2>& vertices);
-	static void PackVertices(const std::vector<sm::vec2>& vertices, uint8_t** ptr);
+	static void PackVertices(const std::vector<sm::vec2>& vertices, 
+		uint8_t** ptr, bool reverse_y = true, int scale = SCALE);
 
 }; // NodeToBin
 

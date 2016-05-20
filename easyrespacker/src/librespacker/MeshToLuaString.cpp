@@ -3,6 +3,8 @@
 
 #include <easybuilder.h>
 
+#include <limits>
+
 namespace lua = ebuilder::lua;
 
 namespace erespacker
@@ -23,8 +25,9 @@ void MeshToLuaString::Pack(const PackMesh* mesh, ebuilder::CodeGenerator& gen)
 
 	lua::connect(gen, 1, 
 		lua::assign("base_id", mesh->base->GetSprID()));
-	
-	PackVertices(mesh->triangles, gen);	
+
+	PackVertices(mesh->tri_texcoords, gen, "texcoords", false, 0xffff);
+	PackVertices(mesh->tri_vertices, gen, "vertices");
 
 	gen.detab();
 	gen.line("},");

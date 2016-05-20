@@ -1,6 +1,5 @@
 #include "NodeFromBin.h"
 #include "pack_unpack.h"
-#include "typedef.h"
 
 #include <ee/Math2D.h>
 
@@ -32,7 +31,8 @@ int NodeFromBin::SizeVertices(const std::vector<sm::vec2>& vertices)
 	return vertices.size() * sizeof(int32_t) * 2;
 }
 
-void NodeFromBin::UnpackVertices(std::vector<sm::vec2>& vertices, uint8_t** ptr)
+void NodeFromBin::UnpackVertices(std::vector<sm::vec2>& vertices, uint8_t** ptr, 
+								 bool reverse_y, int scale)
 {
 	uint16_t num;
 	unpack(num, ptr);
@@ -46,8 +46,12 @@ void NodeFromBin::UnpackVertices(std::vector<sm::vec2>& vertices, uint8_t** ptr)
 		unpack(y, ptr);
 
 		sm::vec2 pos;
-		pos.x = (float)x / SCALE;
-		pos.y =-(float)y / SCALE;
+		pos.x = (float)x / scale;
+		pos.y = (float)y / scale;
+
+		if (reverse_y) {
+			pos.y = -pos.y;
+		}
 
 		vertices.push_back(pos);
 	}

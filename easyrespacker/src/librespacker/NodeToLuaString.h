@@ -1,6 +1,8 @@
 #ifndef _EASYRESPACKER_NODE_TO_LUA_STRING_H_
 #define _EASYRESPACKER_NODE_TO_LUA_STRING_H_
 
+#include "typedef.h"
+
 #include <SM_Vector.h>
 
 #include <vector>
@@ -19,7 +21,8 @@ public:
 	static int TransFloatX100(float f);
 	static std::string TransBool(bool b);
 
-	static void PackVertices(const std::vector<sm::vec2>& vertices, ebuilder::CodeGenerator& gen);
+	static void PackVertices(const std::vector<sm::vec2>& vertices, ebuilder::CodeGenerator& gen, 
+		const std::string& name, bool reverse_y = true, int scale = SCALE);
 
 }; // NodeToLuaString
 
