@@ -3,7 +3,9 @@
 
 #include <SM_Vector.h>
 
+extern "C" {
 #include <lua.h>
+};
 
 #include <vector>
 
