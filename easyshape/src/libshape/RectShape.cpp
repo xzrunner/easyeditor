@@ -8,22 +8,17 @@ namespace eshape
 {
 
 RectShape::RectShape()
-	: m_rect(sm::vec2(0, 0), 1, 1)
+	: m_core(sm::rect(sm::vec2(0, 0), 1, 1))
 {
 }
 
-RectShape::RectShape(const RectShape& rect)
-	: m_rect(rect.m_rect)
-{
-}
-
-RectShape::RectShape(const sm::vec2& p0, const sm::vec2& p1)
-	: m_rect(p0, p1)
+RectShape::RectShape(const sm::rect& r)
+	: m_core(r)
 {
 }
 
 RectShape::RectShape(const sm::vec2& center, float hWidth, float hHeight)
-	: m_rect(center, hWidth, hHeight)
+: m_core(sm::rect(center, hWidth * 2, hHeight * 2))
 {
 }
 
@@ -32,28 +27,11 @@ RectShape* RectShape::Clone() const
 	return new RectShape(*this);
 }
 
-bool RectShape::IsContain(const sm::vec2& pos) const
-{
-	return ee::Math2D::IsPointInRect(pos, m_rect);
-}
-
-bool RectShape::IsIntersect(const sm::rect& rect) const
-{
-	return ee::Math2D::IsRectIntersectRect(rect, m_rect);
-}
-
 void RectShape::Translate(const sm::vec2& offset)
 {
-	m_rect.Translate(offset);
-}
-
-void RectShape::Draw(const sm::mat4& mt, const s2::RenderColor& color) const
-{
-	sm::vec2 min(m_rect.xmin, m_rect.ymin),
-		max(m_rect.xmax, m_rect.ymax);
-	min = ee::Math2D::TransVector(min, mt);
-	max = ee::Math2D::TransVector(max, mt);
-	ee::RVG::Rect(min, max, false);
+	sm::rect r = m_core.GetRect();
+	r.Translate(offset);
+	m_core.SetRect(r);
 }
 
 ee::PropertySetting* RectShape::CreatePropertySetting(ee::EditPanelImpl* stage)
@@ -65,20 +43,23 @@ void RectShape::LoadFromFile(const Json::Value& value, const std::string& dir)
 {
 	ee::Shape::LoadFromFile(value, dir);
 
-	m_rect.xmin = value["xmin"].asDouble();
-	m_rect.xmax = value["xmax"].asDouble();
-	m_rect.ymin = value["ymin"].asDouble();
-	m_rect.ymax = value["ymax"].asDouble();
+	sm::rect r;
+	r.xmin = value["xmin"].asDouble();
+	r.xmax = value["xmax"].asDouble();
+	r.ymin = value["ymin"].asDouble();
+	r.ymax = value["ymax"].asDouble();
+	m_core.SetRect(r);
 }
 
 void RectShape::StoreToFile(Json::Value& value, const std::string& dir) const
 {
 	ee::Shape::StoreToFile(value, dir);
 
-	value["xmin"] = m_rect.xmin;
-	value["xmax"] = m_rect.xmax;
-	value["ymin"] = m_rect.ymin;
-	value["ymax"] = m_rect.ymax;
+	const sm::rect& r = m_core.GetRect();
+	value["xmin"] = r.xmin;
+	value["xmax"] = r.xmax;
+	value["ymin"] = r.ymin;
+	value["ymax"] = r.ymax;
 }
 
 }

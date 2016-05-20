@@ -1,0 +1,31 @@
+#include "RectShape.h"
+#include "S2_RVG.h"
+
+#include <SM_Test.h>
+
+namespace s2
+{
+
+RectShape::RectShape(const sm::rect& r)
+	: Shape(r)
+{
+}
+
+bool RectShape::IsContain(const sm::vec2& pos) const
+{
+	return sm::is_point_in_rect(pos, m_region);
+}
+
+bool RectShape::IsIntersect(const sm::rect& rect) const
+{
+	return sm::is_rect_intersect_rect(rect, m_region);
+}
+
+void RectShape::Draw(const sm::mat4& mt, const RenderColor& color) const
+{
+	sm::vec2 min(m_region.xmin, m_region.ymin),
+		     max(m_region.xmax, m_region.ymax);
+	RVG::Rect(min, max, false);
+}
+
+}

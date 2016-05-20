@@ -3,6 +3,7 @@
 #include "S2_RVG.h"
 
 #include <SM_Test.h>
+#include <SM_Calc.h>
 
 namespace s2
 {
@@ -31,6 +32,15 @@ void PointShape::Draw(const sm::mat4& mt, const RenderColor& color) const
 	float r = sm::mat_trans_len(SHAPE_NODE_RADIUS, mt);
 	RVG::Color(color.mul);
 	RVG::Circle(center, r, true);
+}
+
+void PointShape::SetPos(const sm::vec2& pos)
+{
+	if (m_pos != pos)
+	{
+		m_region.Translate(pos - m_pos);
+		m_pos = pos;
+	}
 }
 
 }

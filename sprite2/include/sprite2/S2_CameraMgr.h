@@ -18,7 +18,7 @@ public:
 	};
 
 public:
-	bool IsType(Type t) const;
+	bool IsType(Type t) const { return m_type == t; }
 
 private:
 	Type m_type;

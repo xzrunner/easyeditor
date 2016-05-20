@@ -9,6 +9,7 @@ namespace s2
 class PointShape : public Shape
 {
 public:
+	PointShape() {}
 	PointShape(const sm::vec2& pos);
 	
 	virtual bool IsContain(const sm::vec2& pos) const;
@@ -16,6 +17,9 @@ public:
 
 	virtual void Draw(const sm::mat4& mt, 
 		const RenderColor& color = RenderColor()) const;
+
+	const sm::vec2& GetPos() const { return m_pos; }
+	void SetPos(const sm::vec2& pos);
 
 private:
 	sm::vec2 m_pos;

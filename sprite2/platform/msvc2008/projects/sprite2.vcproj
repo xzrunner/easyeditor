@@ -264,14 +264,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\source\dataset\ChainShape.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\sprite2\ChainShape.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\source\dataset\CircleShape.cpp"
 					>
 				</File>
@@ -301,6 +293,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\include\sprite2\PolygonShape.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\dataset\PolylineShape.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\PolylineShape.h"
 					>
 				</File>
 				<File
@@ -584,6 +584,10 @@
 		<Filter
 			Name="render"
 			>
+			<File
+				RelativePath="..\..\..\source\render\S2_CameraMgr.cpp"
+				>
+			</File>
 			<File
 				RelativePath="..\..\..\include\sprite2\S2_CameraMgr.h"
 				>

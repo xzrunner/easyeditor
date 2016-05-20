@@ -88,7 +88,7 @@ bool EditRectOP::OnMouseLeftUp(int x, int y)
 			const float dis = ee::Math2D::GetDistance(m_first_pos, m_curr_pos);
 			if (dis > 1)
 			{
-				RectShape* rect = new RectShape(m_first_pos, m_curr_pos);
+				RectShape* rect = new RectShape(sm::rect(m_first_pos, m_curr_pos));
 				ee::SelectShapeSJ::Instance()->Select(rect);
 				ee::InsertShapeSJ::Instance()->Insert(NULL);
 			}
@@ -166,27 +166,29 @@ bool EditRectOP::OnMouseDrag(int x, int y)
 	{
 		if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape))
 		{
-			sm::vec2 center = rect->m_rect.Center();
+			sm::vec2 center = rect->GetRect().Center();
 
+			sm::rect r = rect->GetRect();
 			// move
 			if (!m_captured.pos_valid)
 			{
-				rect->m_rect.Translate(m_curr_pos - center);
+				r.Translate(m_curr_pos - center);
 			}
 			// change size
 			else 
 			{
 				if (m_captured.pos.x > center.x)
-					rect->m_rect.xmax = m_curr_pos.x;
+					r.xmax = m_curr_pos.x;
 				else
-					rect->m_rect.xmin = m_curr_pos.x;
+					r.xmin = m_curr_pos.x;
 				if (m_captured.pos.y > center.y)
-					rect->m_rect.ymax = m_curr_pos.y;
+					r.ymax = m_curr_pos.y;
 				else
-					rect->m_rect.ymin = m_curr_pos.y;
+					r.ymin = m_curr_pos.y;
 
 				m_captured.pos = m_curr_pos;
 			}
+			rect->SetRect(r);
 
 			m_property->EnablePropertyGrid(false);
 
@@ -209,7 +211,7 @@ bool EditRectOP::OnDraw() const
 			int tolerance = m_node_capture->GetValue();
 			if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape))
 			{
-				sm::vec2 pos = rect->m_rect.Center();
+				sm::vec2 pos = rect->GetRect().Center();
 				ee::RVG::Color(s2::Color(102, 255, 102));
 				ee::RVG::Circle(pos, tolerance, true);
 				if (m_captured.pos_valid) {

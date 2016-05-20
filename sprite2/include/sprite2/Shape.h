@@ -13,6 +13,8 @@ namespace s2
 class Shape
 {
 public:
+	Shape() {}
+	Shape(const sm::rect& r) : m_region(r) {}
 	
 	virtual bool IsContain(const sm::vec2& pos) const = 0;
 	virtual bool IsIntersect(const sm::rect& rect) const = 0;

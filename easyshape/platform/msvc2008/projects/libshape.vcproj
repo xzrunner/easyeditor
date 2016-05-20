@@ -212,6 +212,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\libshape\ChainShapeNew.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libshape\ChainShapeNew.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libshape\CircleShape.cpp"
 					>
 				</File>

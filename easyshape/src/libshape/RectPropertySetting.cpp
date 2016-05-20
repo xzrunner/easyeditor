@@ -26,31 +26,39 @@ void RectPropertySetting::OnPropertyGridChange(const std::string& name, const wx
 	}
 	else if (name == wxT("X"))
 	{
+		sm::rect r = m_rect->GetRect();
 		const float x = wxANY_AS(value, float);
-		const float hw = m_rect->m_rect.Size().x * 0.5f;
-		m_rect->m_rect.xmin = x - hw;
-		m_rect->m_rect.xmax = x + hw;
+		const float hw = r.Size().x * 0.5f;
+		r.xmin = x - hw;
+		r.xmax = x + hw;
+		m_rect->SetRect(r);
 	}
 	else if (name == wxT("Y"))
 	{
+		sm::rect r = m_rect->GetRect();
 		const float y = wxANY_AS(value, float);
-		const float hh = m_rect->m_rect.Size().y * 0.5f;
-		m_rect->m_rect.ymin = y - hh;
-		m_rect->m_rect.ymax = y + hh;
+		const float hh = r.Size().y * 0.5f;
+		r.ymin = y - hh;
+		r.ymax = y + hh;
+		m_rect->SetRect(r);
 	}
 	else if (name == wxT("Half Width"))
 	{
-		const float x = m_rect->m_rect.Center().x;
+		sm::rect r = m_rect->GetRect();
+		const float x = r.Center().x;
 		const float hw = wxANY_AS(value, float);
-		m_rect->m_rect.xmin = x - hw;
-		m_rect->m_rect.xmax = x + hw;
+		r.xmin = x - hw;
+		r.xmax = x + hw;
+		m_rect->SetRect(r);
 	}
 	else if (name == wxT("Half Height"))
 	{
-		const float y = m_rect->m_rect.Center().y;
+		sm::rect r = m_rect->GetRect();
+		const float y = r.Center().y;
 		const float hh = wxANY_AS(value, float);
-		m_rect->m_rect.ymin = y - hh;
-		m_rect->m_rect.ymax = y + hh;
+		r.ymin = y - hh;
+		r.ymax = y + hh;
+		m_rect->SetRect(r);
 	}
 	else
 	{
@@ -64,11 +72,12 @@ void RectPropertySetting::OnPropertyGridChange(const std::string& name, const wx
 
 void RectPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
+	const sm::rect& r = m_rect->GetRect();
 	pg->GetProperty(wxT("Name"))->SetValue(m_rect->name);
-	pg->GetProperty(wxT("X"))->SetValue(m_rect->m_rect.Center().x);
-	pg->GetProperty(wxT("Y"))->SetValue(m_rect->m_rect.Center().y);
-	pg->GetProperty(wxT("Half Width"))->SetValue(m_rect->m_rect.Size().x * 0.5f);
-	pg->GetProperty(wxT("Half Height"))->SetValue(m_rect->m_rect.Size().y * 0.5f);
+	pg->GetProperty(wxT("X"))->SetValue(r.Center().x);
+	pg->GetProperty(wxT("Y"))->SetValue(r.Center().y);
+	pg->GetProperty(wxT("Half Width"))->SetValue(r.Size().x * 0.5f);
+	pg->GetProperty(wxT("Half Height"))->SetValue(r.Size().y * 0.5f);
 }
 
 void RectPropertySetting::InitProperties(wxPropertyGrid* pg)
@@ -77,19 +86,21 @@ void RectPropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_rect->name));
 
-	pg->Append(new wxFloatProperty(wxT("X"), wxPG_LABEL, m_rect->m_rect.Center().x));
+	const sm::rect& r = m_rect->GetRect();
+
+	pg->Append(new wxFloatProperty(wxT("X"), wxPG_LABEL, r.Center().x));
 	pg->SetPropertyAttribute(wxT("X"), wxPG_ATTR_UNITS, wxT("pixels"));
 	pg->SetPropertyAttribute(wxT("X"), "Precision", 1);
 
-	pg->Append(new wxFloatProperty(wxT("Y"), wxPG_LABEL, m_rect->m_rect.Center().y));
+	pg->Append(new wxFloatProperty(wxT("Y"), wxPG_LABEL, r.Center().y));
 	pg->SetPropertyAttribute(wxT("Y"), wxPG_ATTR_UNITS, wxT("pixels"));
 	pg->SetPropertyAttribute(wxT("Y"), "Precision", 1);
 
-	pg->Append(new wxFloatProperty(wxT("Half Width"), wxPG_LABEL, m_rect->m_rect.Size().x * 0.5f));
+	pg->Append(new wxFloatProperty(wxT("Half Width"), wxPG_LABEL, r.Size().x * 0.5f));
 	pg->SetPropertyAttribute(wxT("Half Width"), wxPG_ATTR_UNITS, wxT("pixels"));
 	pg->SetPropertyAttribute(wxT("Half Width"), "Precision", 1);
 
-	pg->Append(new wxFloatProperty(wxT("Half Height"), wxPG_LABEL, m_rect->m_rect.Size().y * 0.5f));
+	pg->Append(new wxFloatProperty(wxT("Half Height"), wxPG_LABEL, r.Size().y * 0.5f));
 	pg->SetPropertyAttribute(wxT("Half Height"), wxPG_ATTR_UNITS, wxT("pixels"));
 	pg->SetPropertyAttribute(wxT("Half Height"), "Precision", 1);
 }

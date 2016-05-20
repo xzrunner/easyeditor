@@ -30,9 +30,10 @@ void Paskage::PackShape(ee::Shape* shape, std::ofstream& fout)
 		int type = e_circle;
 		fout.write(reinterpret_cast<const char*>(&type), sizeof(int));
 
-		fout.write(reinterpret_cast<const char*>(&circle->center.x), sizeof(float));
-		fout.write(reinterpret_cast<const char*>(&circle->center.y), sizeof(float));
-		fout.write(reinterpret_cast<const char*>(&circle->radius), sizeof(float));
+		fout.write(reinterpret_cast<const char*>(&circle->GetCenter().x), sizeof(float));
+		fout.write(reinterpret_cast<const char*>(&circle->GetCenter().y), sizeof(float));
+		float r = circle->GetRadius();
+		fout.write(reinterpret_cast<const char*>(&r), sizeof(float));
 	}
 }
 

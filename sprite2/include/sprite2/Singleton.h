@@ -1,6 +1,8 @@
 #ifndef _SPRITE2_SINGLETON_H_
 #define _SPRITE2_SINGLETON_H_
 
+#include <stddef.h>
+
 namespace s2
 {
 

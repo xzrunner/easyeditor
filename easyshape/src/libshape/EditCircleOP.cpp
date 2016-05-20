@@ -171,10 +171,10 @@ bool EditCircleOP::OnMouseDrag(int x, int y)
 		{
 			// move  
 			if (m_captured.pos_valid)
-				circle->center = m_curr_pos;
+				circle->SetCenter(m_curr_pos);
 			// change size
 			else
-				circle->radius = ee::Math2D::GetDistance(m_curr_pos, circle->center);
+				circle->SetRadius(ee::Math2D::GetDistance(m_curr_pos, circle->GetCenter()));
 
 			if (m_property) {
 				m_property->EnablePropertyGrid(false);
@@ -199,10 +199,10 @@ bool EditCircleOP::OnDraw() const
 			if (CircleShape* circle = dynamic_cast<CircleShape*>(m_captured.shape))
 			{
 				ee::RVG::Color(s2::Color(102, 255, 102));
-				ee::RVG::Circle(circle->center, tolerance, true);
+				ee::RVG::Circle(circle->GetCenter(), tolerance, true);
 				if (!m_captured.pos_valid) {
 					ee::RVG::Color(s2::Color(255, 102, 102));
-					ee::RVG::Circle(circle->center, circle->radius, false);
+					ee::RVG::Circle(circle->GetCenter(), circle->GetRadius(), false);
 				}
 			}
 		}

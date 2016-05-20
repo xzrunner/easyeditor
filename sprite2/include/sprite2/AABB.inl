@@ -2,6 +2,7 @@
 #define _SPRITE2_AABB_INL_
 
 #include <SM_Test.h>
+#include <SM_Calc.h>
 
 namespace s2
 {

@@ -41,10 +41,8 @@ void BezierPropertySetting::OnPropertyGridChange(const std::string& name, const 
 		int type = wxANY_AS(value, int);
 		if (type == 1) {
 			m_bezier->Mirror(true, false);
-			m_bezier->createCurve();
 		} else if (type == 2) {
 			m_bezier->Mirror(false, true);
-			m_bezier->createCurve();
 		}
 	}
 	else
