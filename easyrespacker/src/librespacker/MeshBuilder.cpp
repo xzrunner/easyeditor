@@ -12,11 +12,6 @@
 namespace erespacker
 {
 
-MeshBuilder::MeshBuilder(ExportNameSet& export_set)
-	: m_export_set(export_set)
-{
-}
-
 MeshBuilder::~MeshBuilder()
 {
 	for_each(m_nodes.begin(), m_nodes.end(), ee::DeletePointerFunctor<IPackNode>());
@@ -37,7 +32,7 @@ const IPackNode* MeshBuilder::Create(const emesh::Symbol* sym)
 {
 	PackMesh* node = new PackMesh;
 
-	node->base_sym = PackNodeFactory::Instance()->Create(sym->GetMesh()->GetBaseSymbol());
+	node->base = PackNodeFactory::Instance()->Create(sym->GetMesh()->GetBaseSymbol());
 
 	const std::vector<emesh::Triangle*>& tris = sym->GetMesh()->GetTriangles();
 	node->triangles.reserve(tris.size() * 3);
@@ -47,6 +42,8 @@ const IPackNode* MeshBuilder::Create(const emesh::Symbol* sym)
 			node->triangles.push_back(tri->nodes[j]->xy);
 		}
 	}
+
+	m_nodes.push_back(node);
 
 	return node;
 }

@@ -12,11 +12,6 @@
 namespace erespacker
 {
 
-MeshSprBuilder::MeshSprBuilder(ExportNameSet& export_set)
-	: m_export_set(export_set)
-{
-}
-
 MeshSprBuilder::~MeshSprBuilder()
 {
 	for_each(m_nodes.begin(), m_nodes.end(), ee::DeletePointerFunctor<IPackNode>());
@@ -48,6 +43,8 @@ const IPackNode* MeshSprBuilder::Create(const emesh::Sprite* spr)
 		node->trans_pairs.push_back(itr->first);
 		node->trans_pairs.push_back(itr->second);
 	}
+
+	m_nodes.push_back(node);
 
 	return node;
 }

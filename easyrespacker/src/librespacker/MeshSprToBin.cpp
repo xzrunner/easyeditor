@@ -12,11 +12,11 @@ namespace erespacker
 int MeshSprToBin::Size(const PackMeshSpr* mesh)
 {
 	int sz = 0;
-	sz += sizeof(uint16_t);				// id
-	sz += sizeof(uint8_t);				// type
-	sz += sizeof(uint16_t);				// mesh id
-	sz += sizeof(uint16_t);				// base id
-	SizeVertices(mesh->trans_pairs);	// triangles
+	sz += sizeof(uint16_t);					// id
+	sz += sizeof(uint8_t);					// type
+	sz += sizeof(uint16_t);					// mesh id
+	sz += sizeof(uint16_t);					// base id
+	sz += SizeVertices(mesh->trans_pairs);	// triangles
 	return sz;
 }
 

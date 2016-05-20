@@ -11,7 +11,7 @@ namespace erespacker
 class PackMesh : public IPackNode
 {
 public:
-	const IPackNode* base_sym;
+	const IPackNode* base;
 
 	std::vector<sm::vec2> triangles;
 	

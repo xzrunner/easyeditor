@@ -13,9 +13,7 @@ void MeshSprToLuaString::Pack(const PackMeshSpr* mesh, ebuilder::CodeGenerator& 
 	gen.line("{");
 	gen.tab();
 
-	lua::comments(gen, "file: " + mesh->GetFilepath());
-
-	lua::assign_with_end(gen, "type", "\"mesh\"");
+	lua::assign_with_end(gen, "type", "\"mesh_spr\"");
 	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(mesh->GetSprID()));
 	if (!mesh->export_name.empty()) {
 		lua::assign_with_end(gen, "export", "\"" + mesh->export_name + "\"");

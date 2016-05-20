@@ -22,7 +22,7 @@ void MeshToLuaString::Pack(const PackMesh* mesh, ebuilder::CodeGenerator& gen)
 	}
 
 	lua::connect(gen, 1, 
-		lua::assign("base_sym_id", mesh->base_sym->GetSprID()));
+		lua::assign("base_id", mesh->base->GetSprID()));
 	
 	PackVertices(mesh->triangles, gen);	
 

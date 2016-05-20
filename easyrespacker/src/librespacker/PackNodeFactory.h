@@ -44,6 +44,12 @@ class ClipboxBuilder;
 // shape
 class ShapeBuilder;
 
+// mesh
+class MeshBuilder;
+
+// mesh spr
+class MeshSprBuilder;
+
 class PackNodeFactory
 {
 public:
@@ -107,6 +113,12 @@ private:
 
 	// shape
 	ShapeBuilder* m_shape_builder;
+
+	// mesh
+	MeshBuilder* m_mesh_builder;
+
+	// mesh spr
+	MeshSprBuilder* m_mesh_spr_builder;
 
 private:
 	static PackNodeFactory* m_instance;

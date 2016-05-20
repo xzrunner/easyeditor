@@ -14,7 +14,7 @@ class ExportNameSet;
 class MeshBuilder : public INodeBuilder
 {
 public:
-	MeshBuilder(ExportNameSet& export_set);
+	MeshBuilder() {}
 	virtual ~MeshBuilder();
 
 	virtual void Traverse(ee::Visitor& visitor) const;
@@ -22,8 +22,6 @@ public:
 	const IPackNode* Create(const emesh::Symbol* sym);
 
 private:
-	ExportNameSet& m_export_set;
-
 	std::vector<IPackNode*> m_nodes;
 
 }; // MeshBuilder

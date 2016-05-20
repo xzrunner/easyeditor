@@ -47,6 +47,12 @@
 // shape
 #include "ShapeBuilder.h"
 
+// mesh
+#include "MeshBuilder.h"
+
+// mesh spr
+#include "MeshSprBuilder.h"
+
 #include <spritepack.h>
 
 namespace erespacker
@@ -87,6 +93,12 @@ PackNodeFactory::PackNodeFactory()
 
 	// shape
 	m_builders.push_back(m_shape_builder = new ShapeBuilder);
+
+	// mesh
+	m_builders.push_back(m_mesh_builder = new MeshBuilder);
+
+	// mesh spr
+	m_builders.push_back(m_mesh_spr_builder = new MeshSprBuilder);
 }
 
 const IPackNode* PackNodeFactory::Create(const ee::Sprite* spr)
@@ -140,6 +152,11 @@ const IPackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 		node = m_particle2d_builder->Create(&p2d->GetSymbol());
 	}
 
+	// mesh spr
+	else if (const emesh::Sprite* mesh = dynamic_cast<const emesh::Sprite*>(spr)) {
+		node = m_mesh_spr_builder->Create(mesh);
+	}
+
 	else {
 		throw ee::Exception("PackNodeFactory::Create unknown sprite type.");
 	}
@@ -183,6 +200,11 @@ const IPackNode* PackNodeFactory::Create(const ee::Symbol* symbol)
 	// particle2d
 	else if (const eparticle2d::Symbol* p2d = dynamic_cast<const eparticle2d::Symbol*>(symbol)) {
 		node = m_particle2d_builder->Create(p2d);
+	}
+
+	// mesh
+	else if (const emesh::Symbol* mesh = dynamic_cast<const emesh::Symbol*>(symbol)) {
+		node = m_mesh_builder->Create(mesh);
 	}
 
 	else {

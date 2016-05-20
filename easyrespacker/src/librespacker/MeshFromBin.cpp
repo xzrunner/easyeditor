@@ -18,11 +18,11 @@ void MeshFromBin::Unpack(uint8_t** ptr, PackMesh* mesh)
 {
 	UnpackNodeFactory* factory = UnpackNodeFactory::Instance();
 
-	uint16_t base_sym_id;
-	unpack(base_sym_id, ptr);
-	mesh->base_sym = factory->Query(base_sym_id);
-	if (!mesh->base_sym) {
-		factory->AddUnassigned(base_sym_id, &mesh->base_sym);
+	uint16_t base_id;
+	unpack(base_id, ptr);
+	mesh->base = factory->Query(base_id);
+	if (!mesh->base) {
+		factory->AddUnassigned(base_id, &mesh->base);
 	}
 
 	UnpackVertices(mesh->triangles, ptr);

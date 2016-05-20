@@ -12,10 +12,10 @@ namespace erespacker
 int MeshToBin::Size(const PackMesh* mesh)
 {
 	int sz = 0;
-	sz += sizeof(uint16_t);			// id
-	sz += sizeof(uint8_t);			// type
-	sz += sizeof(uint16_t);			// base sym id
-	SizeVertices(mesh->triangles);	// triangles
+	sz += sizeof(uint16_t);					// id
+	sz += sizeof(uint8_t);					// type
+	sz += sizeof(uint16_t);					// base sym id
+	sz += SizeVertices(mesh->triangles);	// triangles
 	return sz;
 }
 
@@ -27,8 +27,8 @@ void MeshToBin::Pack(const PackMesh* mesh, uint8_t** ptr)
 	uint8_t type = TYPE_MESH;
 	pack(type, ptr);
  
-	assert(mesh->base_sym);
-	uint16_t base_id = mesh->base_sym->GetSprID();
+	assert(mesh->base);
+	uint16_t base_id = mesh->base->GetSprID();
 	pack(base_id, ptr);
 
 	PackVertices(mesh->triangles, ptr);

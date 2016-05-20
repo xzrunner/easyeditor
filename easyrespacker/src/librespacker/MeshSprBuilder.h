@@ -14,7 +14,6 @@ class ExportNameSet;
 class MeshSprBuilder : public INodeBuilder
 {
 public:
-	MeshSprBuilder(ExportNameSet& export_set);
 	virtual ~MeshSprBuilder();
 
 	virtual void Traverse(ee::Visitor& visitor) const;
@@ -22,8 +21,6 @@ public:
 	const IPackNode* Create(const emesh::Sprite* spr);
 
 private:
-	ExportNameSet& m_export_set;
-
 	std::vector<IPackNode*> m_nodes;
 
 }; // MeshSprBuilder
