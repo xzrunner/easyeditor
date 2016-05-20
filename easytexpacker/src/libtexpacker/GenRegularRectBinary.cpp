@@ -4,6 +4,8 @@
 #include <ee/StringHelper.h>
 #include <ee/Exception.h>
 
+#include <SM_Rect.h>
+
 #include <json/json.h>
 
 #include <fstream>
@@ -142,8 +144,9 @@ void GenRegularRectBinary::LoadRegularRectPackFile(const std::string& json_file,
 			const Rect& r_src = pic->parts[j]->src;
 			r.Combine(sm::vec2(r_src.x, r_src.y));
 			r.Combine(sm::vec2(r_src.x+r_src.w, r_src.y+r_src.h));
-			pic->w = r.Width();
-			pic->h = r.Height();
+			const sm::vec2& sz = r.Size();
+			pic->w = sz.x;
+			pic->h = sz.y;
 		}
 	}
 

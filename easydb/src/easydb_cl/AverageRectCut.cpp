@@ -95,9 +95,11 @@ void AverageRectCut::RectCutImage(const std::string& src_dir, const std::string&
 		img_r.ymax = img->GetHeight();
 	}
 
+	const sm::vec2& sz = img_r.Size();
+
 	ee::ImageClip clip(*img);
 	const uint8_t* pixels = clip.Clip(img_r.xmin, img_r.xmax, img_r.ymin, img_r.ymax);
-	ee::ImageData* img_trimed = new ee::ImageData(pixels, img_r.Width(), img_r.Height(), 4);
+	ee::ImageData* img_trimed = new ee::ImageData(pixels, sz.x, sz.y, 4);
 
 	std::string filename = ee::FileHelper::GetRelativePath(src_dir, filepath);
 	filename = filename.substr(0, filename.find_last_of('.'));
@@ -106,10 +108,10 @@ void AverageRectCut::RectCutImage(const std::string& src_dir, const std::string&
 	ecomplex::Symbol complex;
 	ee::ImageClip img_cut(*img_trimed, false);
 
-	int row = std::ceil(img_r.Height() / min_edge),
-		col = std::ceil(img_r.Width() / min_edge);
-	float xedge = img_r.Width() / col,
-		  yedge = img_r.Height() / row;
+	int row = std::ceil(sz.y / min_edge),
+		col = std::ceil(sz.x / min_edge);
+	float xedge = sz.x / col,
+		  yedge = sz.y / row;
 	for (int y = 0; y < row; ++y) {
 		for (int x = 0; x < col; ++x) {
 			int xmin = std::floor(xedge * x),
@@ -117,10 +119,10 @@ void AverageRectCut::RectCutImage(const std::string& src_dir, const std::string&
 			int xmax = std::floor(xedge * (x + 1)),
 				ymax = std::floor(yedge * (y + 1));
 			if (x == col - 1) {
-				xmax = img_r.Width();
+				xmax = sz.x;
 			}
 			if (y == row - 1) {
-				ymax = img_r.Height();
+				ymax = sz.y;
 			}
 
 			int w = xmax - xmin,

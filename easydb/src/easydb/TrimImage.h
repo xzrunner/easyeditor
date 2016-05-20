@@ -3,6 +3,8 @@
 
 #include "ICommand.h"
 
+#include <SM_Rect.h>
+
 #include <json/json.h>
 
 #include <stdint.h>

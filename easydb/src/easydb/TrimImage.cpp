@@ -193,8 +193,9 @@ void TrimImage::Trim(const std::string& filepath)
 	spr_val["source size"]["h"] = img->GetHeight();
 	spr_val["position"]["x"] = r.xmin;
 	spr_val["position"]["y"] = img->GetHeight() - r.ymax;
-	spr_val["position"]["w"] = r.Width();
-	spr_val["position"]["h"] = r.Height();
+	const sm::vec2& sz = r.Size();
+	spr_val["position"]["w"] = sz.x;
+	spr_val["position"]["h"] = sz.y;
 	int64_t time = GetFileModifyTime(filepath);
 	spr_val["time"] = ee::StringHelper::ToString(time);
 	StoreBoundInfo(*img, r, spr_val);
@@ -207,11 +208,11 @@ void TrimImage::Trim(const std::string& filepath)
 	if (trimed) {
 		ee::ImageClip clip(*img);
 		const uint8_t* pixels = clip.Clip(r.xmin, r.xmax, r.ymin, r.ymax);
-		ee::ImageSaver::StoreToFile(pixels, r.Width(), r.Height(), img->GetChannels(), 
+		ee::ImageSaver::StoreToFile(pixels, sz.x, sz.y, img->GetChannels(), 
 			out_filepath, ee::ImageSaver::e_png);
 		delete[] pixels;
 	} else {
-		ee::ImageSaver::StoreToFile(img->GetPixelData(), r.Width(), r.Height(), img->GetChannels(), 
+		ee::ImageSaver::StoreToFile(img->GetPixelData(), sz.x, sz.y, img->GetChannels(), 
 			out_filepath, ee::ImageSaver::e_png);
 	}
 

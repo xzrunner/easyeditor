@@ -93,9 +93,7 @@ void ScaleOverall::ScaleImage(const std::string& filepath, float scale, ee::Snap
 	
 	ee::ImageSymbol* img = static_cast<ee::ImageSymbol*>(symbol);
 
-	sm::vec2 img_offset;
-	img_offset.x = img->GetSize().CenterX();
-	img_offset.y = img->GetSize().CenterY();
+	sm::vec2 img_offset = img->GetSize().Center();
 	mapImg2Center.insert(std::make_pair(filepath, img_offset));
 
 	ss.OutputToImageFile(symbol, filepath, scale);

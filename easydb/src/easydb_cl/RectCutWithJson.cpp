@@ -94,7 +94,8 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 
 	ee::ImageClip clip(*img);
 	const uint8_t* pixels = clip.Clip(img_r.xmin, img_r.xmax, img_r.ymin, img_r.ymax);
-	ee::ImageData* img_trimed = new ee::ImageData(pixels, img_r.Width(), img_r.Height(), 4);
+	const sm::vec2& sz = img_r.Size();
+	ee::ImageData* img_trimed = new ee::ImageData(pixels, sz.x, sz.y, 4);
 
 	std::string filename = ee::FileHelper::GetRelativePath(src_dir, filepath);
 	filename = filename.substr(0, filename.find_last_of('.'));
@@ -102,7 +103,7 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 
 	ecomplex::Symbol complex;
 
-	eimage::RegularRectCut rect_cut(pixels, img_r.Width(), img_r.Height());
+	eimage::RegularRectCut rect_cut(pixels, sz.x, sz.y);
 	rect_cut.AutoCut();
 	const std::vector<eimage::Rect>& rects = rect_cut.GetResult();
 	ee::ImageClip img_cut(*img_trimed, true);

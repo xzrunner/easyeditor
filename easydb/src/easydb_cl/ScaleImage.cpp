@@ -86,8 +86,9 @@ void ScaleImage::Scale(ee::Snapshoot& ss, const std::string& src, const std::str
 		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 		sprite->SetScale(sm::vec2(scale, scale));
 
-		int width = r.Width() * scale,
-			height = r.Height() * scale;
+		const sm::vec2& sz = r.Size();
+		int width = sz.x * scale,
+			height = sz.y * scale;
 		ss.DrawSprite(sprite, true, width, height);
 
 		sprite->Release();
