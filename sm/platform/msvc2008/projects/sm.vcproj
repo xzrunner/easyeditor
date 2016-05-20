@@ -208,6 +208,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\sm\SM_Test.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\sm\SM_Test.h"
 				>
 			</File>
