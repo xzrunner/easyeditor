@@ -18,10 +18,10 @@ public:
 	virtual void Draw(const sm::mat4& mt, 
 		const RenderColor& color = RenderColor()) const;
 
-	const sm::vec2& GetPos() const { return m_pos; }
-	void SetPos(const sm::vec2& pos);
+protected:
+	virtual void UpdateBounding();
 
-private:
+protected:
 	sm::vec2 m_pos;
 
 }; // PointShape

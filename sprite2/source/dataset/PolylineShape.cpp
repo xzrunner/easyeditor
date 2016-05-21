@@ -1,6 +1,6 @@
 #include "PolylineShape.h"
 #include "ShapeConfig.h"
-#include "S2_RVG.h"
+#include "ShapeVertices.h"
 
 #include <SM_Test.h>
 #include <SM_Calc.h>
@@ -12,7 +12,7 @@ PolylineShape::PolylineShape(const std::vector<sm::vec2>& vertices, bool closed)
 	: m_vertices(vertices)
 	, m_closed(closed)
 {
-	UpdateRegion();
+	UpdateBounding();
 }
 
 bool PolylineShape::IsContain(const sm::vec2& pos) const
@@ -27,7 +27,7 @@ bool PolylineShape::IsContain(const sm::vec2& pos) const
 	}
 	else
 	{
-		sm::rect rect(m_region);
+		sm::rect rect(m_bounding);
 		rect.xmin -= SHAPE_NODE_RADIUS;
 		rect.xmax += SHAPE_NODE_RADIUS;
 		rect.ymin -= SHAPE_NODE_RADIUS;
@@ -58,7 +58,7 @@ bool PolylineShape::IsContain(const sm::vec2& pos) const
 
 bool PolylineShape::IsIntersect(const sm::rect& rect) const
 {
-	if (m_vertices.empty() || !sm::is_rect_intersect_rect(rect, m_region)) {
+	if (m_vertices.empty() || !sm::is_rect_intersect_rect(rect, m_bounding)) {
 		return false;
 	}
 
@@ -85,29 +85,14 @@ bool PolylineShape::IsIntersect(const sm::rect& rect) const
 
 void PolylineShape::Draw(const sm::mat4& mt, const RenderColor& color) const
 {
-	if (m_vertices.empty()) {
-		return;
-	}
-
-	std::vector<sm::vec2> vertices(m_vertices);
-	for (int i = 0, n = vertices.size(); i , n; ++i) {
-		vertices[i] = mt * vertices[i];
-	}
-	RVG::Color(color.mul);
-	RVG::Polyline(vertices, m_closed);
+	ShapeVertices::Draw(m_vertices, m_closed, mt, color);
 }
 
-void PolylineShape::SetVertices(const std::vector<sm::vec2>& vertices)
+void PolylineShape::UpdateBounding()
 {
-	m_vertices = vertices;
-	UpdateRegion();
-}
-
-void PolylineShape::UpdateRegion()
-{
-	m_region.MakeEmpty();
+	m_bounding.MakeEmpty();
 	for (int i = 0, n = m_vertices.size(); i < n; ++i) {
-		m_region.Combine(m_vertices[i]);
+		m_bounding.Combine(m_vertices[i]);
 	}
 }
 

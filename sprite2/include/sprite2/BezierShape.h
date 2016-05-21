@@ -17,21 +17,20 @@ public:
 	virtual void Draw(const sm::mat4& mt, 
 		const RenderColor& color = RenderColor()) const;
 
-	const sm::vec2* GetCtrlNodes() const { return m_control_nodes; }
-	void SetCtrlNodes(const sm::vec2* ctrl_nodes);
+// 	const sm::vec2* GetCtrlNodes() const { return m_control_nodes; }
+// 	void SetCtrlNodes(const sm::vec2* ctrl_nodes) {
+	// 	memcpy(m_control_nodes, ctrl_nodes, sizeof(m_control_nodes));
+	// 	UpdateCurve();
+//}
 
 private:
-// 	void CopyCtrlNodes(const sm::vec2* ctrl_points) {
-// 		memcpy(m_control_nodes, ctrl_points, sizeof(m_control_nodes));
-// 	}
-
-	void BuildCurve();
+	void UpdatePolyline();
 	sm::vec2 PointOnCubicBezier(float t);
 
 public:
 	static const int CTRL_NODE_COUNT = 4;
 
-private:
+protected:
 	// [0] start, [1] ctrl1, [2] ctrl2, [3] end
 	sm::vec2 m_control_nodes[CTRL_NODE_COUNT];
 

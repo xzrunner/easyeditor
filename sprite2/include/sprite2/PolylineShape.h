@@ -20,16 +20,10 @@ public:
 	virtual void Draw(const sm::mat4& mt, 
 		const RenderColor& color = RenderColor()) const;
 
-	void SetClosed(bool closed) { m_closed = closed; }
-	bool IsClosed() const { return m_closed; }
+protected:
+	virtual void UpdateBounding();
 
-	void SetVertices(const std::vector<sm::vec2>& vertices);
-	const std::vector<sm::vec2>& GetVertices() const { return m_vertices; }
-
-private:
-	void UpdateRegion();
-
-private:
+protected:
 	std::vector<sm::vec2> m_vertices;
 	bool m_closed;
 

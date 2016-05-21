@@ -17,7 +17,7 @@ BezierShape::BezierShape(const sm::vec2& start, const sm::vec2& end)
 	m_control_nodes[1] = mid + sm::rotate_vector_right_angle(offset, true);
 	m_control_nodes[2] = mid + sm::rotate_vector_right_angle(offset, false);
 
-	BuildCurve();
+	UpdatePolyline();
 }
 
 bool BezierShape::IsContain(const sm::vec2& pos) const
@@ -41,13 +41,7 @@ void BezierShape::Draw(const sm::mat4& mt, const RenderColor& color) const
 	}
 }
 
-void BezierShape::SetCtrlNodes(const sm::vec2* ctrl_nodes)
-{
-	memcpy(m_control_nodes, ctrl_nodes, sizeof(m_control_nodes));
-	BuildCurve();
-}
-
-void BezierShape::BuildCurve()
+void BezierShape::UpdatePolyline()
 {
 	const int num = std::max(20, (int)(sm::dis_pos_to_pos(m_control_nodes[0], m_control_nodes[3]) / 10));
 	float dt = 1.0f / (num - 1);
@@ -55,7 +49,9 @@ void BezierShape::BuildCurve()
 	for (size_t i = 0; i < num; ++i) {
 		vertices[i] = PointOnCubicBezier(i * dt);
 	}
-	SetVertices(vertices);
+
+	m_vertices = vertices;
+	UpdateBounding();
 }
 
 sm::vec2 BezierShape::PointOnCubicBezier(float t)

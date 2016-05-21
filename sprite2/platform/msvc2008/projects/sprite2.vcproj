@@ -323,6 +323,18 @@
 						>
 					</File>
 				</Filter>
+				<Filter
+					Name="utility"
+					>
+					<File
+						RelativePath="..\..\..\source\dataset\ShapeVertices.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\include\sprite2\ShapeVertices.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter

@@ -9,10 +9,10 @@ namespace s2
 {
 
 CircleShape::CircleShape(const sm::vec2& center, float radius)
-: Shape(sm::rect(center, radius * 2, radius * 2))
-	, m_center(center)
+	: m_center(center)
 	, m_radius(radius)
 {
+	UpdateBounding();
 }
 
 bool CircleShape::IsContain(const sm::vec2& pos) const
@@ -57,16 +57,9 @@ void CircleShape::Draw(const sm::mat4& mt, const RenderColor& color) const
 	RVG::Circle(c, r, false, 32);
 }
 
-void CircleShape::SetCenter(const sm::vec2& center)
+void CircleShape::UpdateBounding()
 {
-	m_center = center;
-	m_region = sm::rect(m_center, m_radius * 2, m_radius * 2);
-}
-
-void CircleShape::SetRaidius(float radius)
-{
-	m_radius = radius;
-	m_region = sm::rect(m_center, m_radius * 2, m_radius * 2);
+	m_bounding = sm::rect(m_center, m_radius * 2, m_radius * 2);	
 }
 
 }

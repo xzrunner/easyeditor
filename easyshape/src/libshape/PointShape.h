@@ -8,12 +8,12 @@
 namespace eshape
 {
 
-class PointShape : public ee::Shape
+class PointShape : public ee::Shape, private s2::PointShape
 {
 public:
 	PointShape() {}
 	PointShape(const sm::vec2& pos) 
-		: m_core(pos) 
+		: s2::PointShape(pos) 
 	{}
 
 	//
@@ -28,17 +28,17 @@ public:
 	//
 	virtual const char* GetShapeDesc() const { return "point"; }
 	virtual bool IsContain(const sm::vec2& pos) const {
-		return m_core.IsContain(pos);
+		return s2::PointShape::IsContain(pos);
 	}
 	virtual bool IsIntersect(const sm::rect& rect) const {
-		return m_core.IsIntersect(rect);
+		return s2::PointShape::IsIntersect(rect);
 	}
 	virtual void Translate(const sm::vec2& offset) {
-		m_core.SetPos(m_core.GetPos() + offset);
+		SetPos(m_pos + offset);
 	}
-	virtual const sm::rect& GetRect() const { return m_core.GetRegion(); }
+	virtual const sm::rect& GetRect() const { return s2::PointShape::GetBounding(); }
 	virtual void Draw(const sm::mat4& mt, const s2::RenderColor& color = s2::RenderColor()) const {
-		m_core.Draw(mt, color);
+		s2::PointShape::Draw(mt, color);
 	}
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage) {
 		return NULL;
@@ -47,14 +47,12 @@ public:
 	virtual void StoreToFile(Json::Value& value, const std::string& dir) const;
 
 	const sm::vec2& GetPos() const { 
-		return m_core.GetPos(); 
+		return m_pos; 
 	}
 	void SetPos(const sm::vec2& pos) { 
-		m_core.SetPos(pos); 
+		m_pos = pos;
+		UpdateBounding();
 	}
-
-private:
-	s2::PointShape m_core;
 
 }; // PointShape
 

@@ -204,6 +204,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\libshape\BezierShapeNew.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libshape\BezierShapNew.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libshape\ChainShape.cpp"
 					>
 				</File>

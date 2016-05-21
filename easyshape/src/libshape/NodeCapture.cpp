@@ -102,7 +102,7 @@ Visit(BezierShape* bezier)
 
 	// capture control points
 	const sm::vec2* ctrl_nodes = bezier->GetCtrlNodes();
-	for (int i = 0; i < s2::BezierShape::CTRL_NODE_COUNT; ++i) {
+	for (int i = 0; i < BezierShape::CTRL_NODE_COUNT; ++i) {
 		if (ee::Math2D::GetDistance(ctrl_nodes[i], m_pos) < m_tolerance) {
 			m_result.shape = bezier;
 			m_result.pos = ctrl_nodes[i];

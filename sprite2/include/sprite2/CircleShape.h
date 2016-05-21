@@ -18,13 +18,16 @@ public:
 	virtual void Draw(const sm::mat4& mt, 
 		const RenderColor& color = RenderColor()) const;
 
-	const sm::vec2& GetCenter() const { return m_center; }
-	void SetCenter(const sm::vec2& center);
+// 	const sm::vec2& GetCenter() const { return m_center; }
+// 	void SetCenter(const sm::vec2& center);
+// 
+// 	float GetRadius() const { return m_radius; }
+// 	void SetRaidius(float radius);
 
-	float GetRadius() const { return m_radius; }
-	void SetRaidius(float radius);
+protected:
+	virtual void UpdateBounding();
 
-private:
+protected:
 	sm::vec2 m_center;
 	float m_radius;
 

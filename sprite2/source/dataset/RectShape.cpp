@@ -7,24 +7,24 @@ namespace s2
 {
 
 RectShape::RectShape(const sm::rect& r)
-	: Shape(r)
 {
+	m_bounding = r;
 }
 
 bool RectShape::IsContain(const sm::vec2& pos) const
 {
-	return sm::is_point_in_rect(pos, m_region);
+	return sm::is_point_in_rect(pos, m_bounding);
 }
 
 bool RectShape::IsIntersect(const sm::rect& rect) const
 {
-	return sm::is_rect_intersect_rect(rect, m_region);
+	return sm::is_rect_intersect_rect(rect, m_bounding);
 }
 
 void RectShape::Draw(const sm::mat4& mt, const RenderColor& color) const
 {
-	sm::vec2 min(m_region.xmin, m_region.ymin),
-		     max(m_region.xmax, m_region.ymax);
+	sm::vec2 min(m_bounding.xmin, m_bounding.ymin),
+		     max(m_bounding.xmax, m_bounding.ymax);
 	RVG::Rect(min, max, false);
 }
 

@@ -11,19 +11,17 @@ namespace s2
 PointShape::PointShape(const sm::vec2& pos)
 	: m_pos(pos)
 {
-	float h = SHAPE_NODE_RADIUS * 0.5f;
-	m_region.xmin = m_region.ymin = -h;
-	m_region.xmax = m_region.ymax = h;
+	UpdateBounding();
 }
 
 bool PointShape::IsContain(const sm::vec2& pos) const
 {
-	return sm::is_point_in_rect(pos, m_region);	
+	return sm::is_point_in_rect(pos, m_bounding);	
 }
 
 bool PointShape::IsIntersect(const sm::rect& rect) const
 {
-	return sm::is_rect_intersect_rect(rect, m_region);
+	return sm::is_rect_intersect_rect(rect, m_bounding);
 }
 
 void PointShape::Draw(const sm::mat4& mt, const RenderColor& color) const
@@ -34,13 +32,10 @@ void PointShape::Draw(const sm::mat4& mt, const RenderColor& color) const
 	RVG::Circle(center, r, true);
 }
 
-void PointShape::SetPos(const sm::vec2& pos)
+void PointShape::UpdateBounding()
 {
-	if (m_pos != pos)
-	{
-		m_region.Translate(pos - m_pos);
-		m_pos = pos;
-	}
+	m_bounding.xmin = m_bounding.ymin = -SHAPE_NODE_RADIUS;
+	m_bounding.xmax = m_bounding.ymax =  SHAPE_NODE_RADIUS;
 }
 
 }

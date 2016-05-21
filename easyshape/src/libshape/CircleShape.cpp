@@ -8,7 +8,7 @@ namespace eshape
 {
 
 CircleShape::CircleShape(const sm::vec2& center, float radius)
-	: m_core(center, radius)
+	: s2::CircleShape(center, radius)
 {
 }
 
@@ -19,7 +19,7 @@ CircleShape* CircleShape::Clone() const
 
 void CircleShape::Translate(const sm::vec2& offset)
 {
-	m_core.SetCenter(m_core.GetCenter() + offset);
+	SetCenter(m_center + offset);
 }
 
 ee::PropertySetting* CircleShape::CreatePropertySetting(ee::EditPanelImpl* stage)
@@ -34,21 +34,20 @@ void CircleShape::LoadFromFile(const Json::Value& value, const std::string& dir)
 	sm::vec2 center;
 	center.x = value["x"].asDouble();
 	center.y = value["y"].asDouble();
+	SetCenter(center);
 	
 	float radius = value["radius"].asDouble();
-
-	m_core = s2::CircleShape(center, radius);
+	SetRadius(radius);
 }
 
 void CircleShape::StoreToFile(Json::Value& value, const std::string& dir) const
 {
 	ee::Shape::StoreToFile(value, dir);
 
-	const sm::vec2& center = m_core.GetCenter();
-	value["x"] = center.x;
-	value["y"] = center.y;
+	value["x"] = m_center.x;
+	value["y"] = m_center.y;
 
-	value["radius"] = m_core.GetRadius();
+	value["radius"] = m_radius;
 }
 
 }
