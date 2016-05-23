@@ -49,7 +49,7 @@ void LabelToBin::Pack(const PackLabel* label, uint8_t** ptr)
 	pack(font, ptr);
 	uint8_t font_size = label->font_size;
 	pack(font_size, ptr);
-	uint32_t font_color = label->font_color.ToABGR();
+	uint32_t font_color = label->font_color.ToRGBA();
 	pack(font_color, ptr);
 
 	uint8_t edge = label->edge ? 1 : 0;
