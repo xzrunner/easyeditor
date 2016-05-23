@@ -125,8 +125,8 @@ bool PackAnimation::AddComponent(const IPackNode* node, const std::string& name,
 				&& !name.empty()) 
 			{
 				ee::FileType::Type type = ee::FileType::GetType(node->GetFilepath());
-				if (type == ee::FileType::e_image ||
-					type == ee::FileType::e_complex ||
+//				if (type == ee::FileType::e_image ||
+				if (type == ee::FileType::e_complex ||
 					type == ee::FileType::e_anim ||
 					type == ee::FileType::e_text) {
 					comp_idx = i;
