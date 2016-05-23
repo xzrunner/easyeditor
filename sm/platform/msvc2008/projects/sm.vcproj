@@ -256,6 +256,34 @@
 				</File>
 			</Filter>
 		</Filter>
+		<Filter
+			Name="algorithms"
+			>
+			<File
+				RelativePath="..\..\..\src\sm\SM_ConvexHull.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\sm\SM_ConvexHull.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\sm\SM_CosineSmooth.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\sm\SM_CosineSmooth.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\sm\SM_DouglasPeucker.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\sm\SM_DouglasPeucker.h"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>
