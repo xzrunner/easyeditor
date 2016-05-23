@@ -14,6 +14,7 @@
 #include <ee/Sprite.h>
 #include <ee/FileType.h>
 #include <ee/ImageSprite.h>
+#include <ee/trans_color.h>
 
 #include <sprite2/RenderColor.h>
 #include <sprite2/RenderShader.h>
@@ -210,8 +211,8 @@ void PackAnimation::LoadSprMat(const ee::Sprite* spr, SpriteTrans& trans, bool f
 
 void PackAnimation::LoadSprColor(const ee::Sprite* spr, SpriteTrans& trans)
 {
-	trans.color = spr->GetColor().mul.ToABGR();
-	trans.additive = spr->GetColor().add.ToABGR();
+	trans.color = ee::color2int(spr->GetColor().mul, ee::PT_ARGB);
+	trans.additive = ee::color2int(spr->GetColor().add, ee::PT_ARGB);
 
 	trans.rmap = spr->GetColor().rmap.ToRGBA();
 	trans.gmap = spr->GetColor().gmap.ToRGBA();

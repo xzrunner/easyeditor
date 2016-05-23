@@ -104,11 +104,13 @@ struct pack_shape {
 
 struct pack_mesh {
 	int id;
-	int num;
+	int texcoords_num;
+	int32_t* texcoords;
+	int vertices_num;
 	int32_t* vertices;
 };
 
-#define SIZEOF_MESH (sizeof(struct pack_mesh) + PTR_SIZE_DIFF)
+#define SIZEOF_MESH (sizeof(struct pack_mesh) + PTR_SIZE_DIFF * 2)
 
 struct pack_mesh_spr {
 	int base_id;
