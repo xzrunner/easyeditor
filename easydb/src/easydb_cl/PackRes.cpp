@@ -311,6 +311,18 @@ void PackRes::GetImagesFromJson(const std::vector<std::string>& src_dirs, const 
 			comp_val = value["components"][i++];
 		}
 	}
+	else if (ee::FileType::IsType(filepath, ee::FileType::e_mesh))
+	{
+		Json::Value value;
+		Json::Reader reader;
+		std::locale::global(std::locale(""));
+		std::ifstream fin(filepath.c_str());
+		std::locale::global(std::locale("C"));
+		reader.parse(fin, value);
+		fin.close();
+
+		GetImagesFromJson(src_dirs, value["base_symbol"].asString(), img_set);
+	}
 	else if (filepath.find("_history.json")) 
 	{
 	}
