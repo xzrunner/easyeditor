@@ -18,7 +18,7 @@
 namespace emesh
 {
 
-void MeshRenderer::DrawInfoUV(const Mesh* mesh)
+void MeshRenderer::DrawInfoUV(const Mesh* mesh, const sm::mat4* mt)
 {
 	std::set<sm::vec2, sm::Vector2Cmp> unique;
 	std::vector<sm::vec2> tmp(3);
@@ -32,6 +32,9 @@ void MeshRenderer::DrawInfoUV(const Mesh* mesh)
 		{
 			tmp[i].x = (tri->nodes[i]->uv.x - 0.5f) * w;
 			tmp[i].y = (tri->nodes[i]->uv.y - 0.5f) * h;
+			if (mt) {
+				tmp[i] = *mt * tmp[i];
+			}
 			unique.insert(tmp[i]);
 		}
 		ee::RVG::Color(RED);
@@ -43,7 +46,7 @@ void MeshRenderer::DrawInfoUV(const Mesh* mesh)
 	ee::RVG::Circles(nodes, mesh->GetNodeRegion(), true);
 }
 
-void MeshRenderer::DrawInfoXY(const Mesh* mesh)
+void MeshRenderer::DrawInfoXY(const Mesh* mesh, const sm::mat4* mt)
 {
 	std::set<sm::vec2, sm::Vector2Cmp> unique;
 	std::vector<sm::vec2> tmp(3);
@@ -54,6 +57,9 @@ void MeshRenderer::DrawInfoXY(const Mesh* mesh)
 		for (int i = 0; i < 3; ++i)
 		{
 			tmp[i] = tri->nodes[i]->xy;
+			if (mt) {
+				tmp[i] = *mt * tmp[i];
+			}
 			unique.insert(tmp[i]);
 		}
 		ee::RVG::Color(RED);

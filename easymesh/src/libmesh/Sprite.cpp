@@ -16,6 +16,7 @@ namespace emesh
 Sprite::Sprite()
 	: m_symbol(NULL)
 	, m_base(NULL)
+	, m_only_draw_bound(false)
 {
 	m_core = new s2::DummySprite(this);
 
@@ -26,6 +27,7 @@ Sprite::Sprite(const Sprite& s)
 	: ee::Sprite(s)
 	, m_speed(s.m_speed)
 	, m_trans(s.m_trans)
+	, m_only_draw_bound(s.m_only_draw_bound)
 {
 	m_core = new s2::DummySprite(this);
 	if (m_base = s.m_base) {
@@ -38,6 +40,7 @@ Sprite::Sprite(const Sprite& s)
 
 Sprite::Sprite(Symbol* symbol)
 	: m_symbol(symbol)
+	, m_only_draw_bound(false)
 {
 	m_core = new s2::DummySprite(this);
 	if (m_base = symbol->GetMesh()->GetBaseSymbol()) {

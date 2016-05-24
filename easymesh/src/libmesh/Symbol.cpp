@@ -65,7 +65,11 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 		mtrans.StoreToMesh(m_mesh);
 	}
 
-	MeshRenderer::DrawTexture(m_mesh, params, mesh_spr ? mesh_spr->GetBaseSym() : NULL);
+	if (mesh_spr && mesh_spr->OnlyDrawBound()) {
+		MeshRenderer::DrawInfoXY(m_mesh, &params.mt);
+ 	} else {
+ 		MeshRenderer::DrawTexture(m_mesh, params, mesh_spr ? mesh_spr->GetBaseSym() : NULL);
+ 	}
 
 	if (!m_pause && mesh_spr)
 	{

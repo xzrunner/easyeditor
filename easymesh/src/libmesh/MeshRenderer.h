@@ -1,6 +1,8 @@
 #ifndef _EASYMESH_MESH_RENDERER_H_
 #define _EASYMESH_MESH_RENDERER_H_
 
+#include <SM_Matrix.h>
+
 #include <stddef.h>
 
 namespace s2 { class RenderParams; }
@@ -14,8 +16,8 @@ class Mesh;
 class MeshRenderer
 {
 public:
-	static void DrawInfoUV(const Mesh* mesh);
-	static void DrawInfoXY(const Mesh* mesh);
+	static void DrawInfoUV(const Mesh* mesh, const sm::mat4* mt = NULL);
+	static void DrawInfoXY(const Mesh* mesh, const sm::mat4* mt = NULL);
 
 	static void DrawTexture(const Mesh* mesh, const s2::RenderParams& params, 
 		const ee::Symbol* base_sym = NULL);
