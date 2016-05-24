@@ -18,10 +18,10 @@ public:
 	void InitTexturePacker(const std::string& src_data_dir);
 	void AddTextureFromConfig(const std::string& filepath);
 
-	const uint8_t* Load(const std::string& filepath, 
-		int& width, int& height, int& channels, int& format) const;
-	void Load(const std::string& filepath,
-		float& ori_w, float& ori_h, sm::vec2& offset) const;
+	const uint8_t* Load(const std::string& filepath, int& width, 
+		int& height, int& channels, int& format) const;
+	void Load(const std::string& filepath, float& ori_w, float& ori_h, 
+		int& w, int& h, sm::vec2& offset) const;
 
 	static TextureFactory* Instance();
 

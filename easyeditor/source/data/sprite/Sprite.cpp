@@ -208,6 +208,7 @@ void Sprite::BuildBounding()
 	rect.Scale(m_core->GetScale().x, m_core->GetScale().y);
 //	rect.Shear(m_core->Shear().x, m_core->Shear().y);
 	m_bounding->InitFromRect(rect);
+	m_bounding->SetMirror(m_mirror.x, m_mirror.y);
 	m_bounding->SetTransform(m_core->GetPosition(), m_offset, m_core->GetAngle());
 }
 

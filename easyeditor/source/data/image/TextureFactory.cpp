@@ -44,8 +44,8 @@ const uint8_t* TextureFactory::Load(const std::string& filepath, int& width,
 	}
 }
 
-void TextureFactory::Load(const std::string& filepath, float& ori_w, 
-						  float& ori_h, sm::vec2& offset) const
+void TextureFactory::Load(const std::string& filepath, float& ori_w, float& ori_h, 
+						  int& w, int& h, sm::vec2& offset) const
 {
 	const TexturePacker::Frame* frame = NULL;
 	if (!Config::Instance()->GetSettings().load_image && m_tp) {
@@ -56,6 +56,9 @@ void TextureFactory::Load(const std::string& filepath, float& ori_w,
 
 		ori_w = static_cast<float>(src.src_width);
 		ori_h = static_cast<float>(src.src_height);
+
+		w = src.sprite_source_size.w;
+		h = src.sprite_source_size.h;
 
 		offset.x = src.sprite_source_size.x + src.sprite_source_size.w * 0.5f - ori_w * 0.5f;
 		offset.y = -(src.sprite_source_size.y + src.sprite_source_size.h * 0.5f - ori_h * 0.5f);

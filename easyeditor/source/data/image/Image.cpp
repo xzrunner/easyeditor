@@ -69,7 +69,9 @@ bool Image::LoadFromFile(const std::string& filepath)
 {
 	if (!Config::Instance()->GetSettings().load_image) {
 		m_tex->LoadFromMemory(ImageDataMgr::Instance()->GetItem(filepath));
-		TextureFactory::Instance()->Load(filepath, m_ori_w, m_ori_h, m_offset);
+		int w, h;
+		TextureFactory::Instance()->Load(filepath, m_ori_w, m_ori_h, w, h, m_offset);
+		m_s2_tex->Init(w, h, 0);
 		return true;
 	}
 
@@ -87,7 +89,7 @@ bool Image::LoadFromFile(const std::string& filepath)
 		m_ori_h = m_tex->GetHeight();
 	}
 
-	m_s2_tex->Init(m_tex->GetWidth(), m_tex->GetHeight(), m_tex->GetTexID());                                
+	m_s2_tex->Init(m_tex->GetWidth(), m_tex->GetHeight(), m_tex->GetTexID());
 
 	if (m_tex->GetWidth() == 0 || m_tex->GetHeight() == 0) {
 		return true;
