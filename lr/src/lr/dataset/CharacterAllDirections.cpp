@@ -20,7 +20,9 @@ void CharacterAllDirections::BuildSymbolDirections(const CharacterFileName& name
 		std::string val;
 		val.push_back(char('1' + i));
 		std::string filepath = name.GetFilepathSwitchField(CharacterFileName::FT_DIRECTION, val);
-		assert(ee::FileHelper::IsFileExist(filepath));
+		if (!ee::FileHelper::IsFileExist(filepath)) {
+			return;
+		}
 		dirs.symbols[i] = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	}
 	m_map2symbols.insert(std::make_pair(key, dirs));
