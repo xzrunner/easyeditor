@@ -742,6 +742,10 @@
 						Name="gray"
 						>
 						<File
+							RelativePath="..\..\..\src\shaderlab\parser\Gray.cpp"
+							>
+						</File>
+						<File
 							RelativePath="..\..\..\src\shaderlab\parser\Gray.h"
 							>
 						</File>

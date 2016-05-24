@@ -111,6 +111,7 @@ void ImageSymbol::DrawOrtho(const RenderParams& params, sm::vec2* vertices, floa
 // 	shader->SetColor(trans.color);
 	if (mgr->GetShaderType() == sl::FILTER) {
 		sl::FilterShader* shader = static_cast<sl::FilterShader*>(mgr->GetShader(sl::FILTER));
+		shader->SetColor(params.color.mul.ToABGR(), params.color.add.ToABGR());
 		if (shader->GetMode() == sl::FM_GAUSSIAN_BLUR_HORI || shader->GetMode() == sl::FM_GAUSSIAN_BLUR_VERT) {
 			DrawGaussianBlur(params, vertices, texcoords, texid);
 		} else {
