@@ -17,7 +17,7 @@ int ShapeToBin::Size(const PackShape* shape)
 	sz += sizeof(uint8_t);			// type
 	sz += sizeof(uint8_t);			// shape type
 	sz += sizeof(uint32_t);			// color
-	SizeVertices(shape->vertices);	// vertices
+	sz += SizeVertices(shape->vertices);	// vertices
 	return sz;
 }
 
