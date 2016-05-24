@@ -5,6 +5,8 @@
 #include <ee/SpriteRenderer.h>
 #include <ee/EditPanelImpl.h>
 #include <ee/DrawShapesVisitor.h>
+#include <ee/Config.h>
+#include <ee/EE_DTex.h>
 
 namespace emesh
 {
@@ -26,6 +28,12 @@ void StageCanvas::OnDrawSprites() const
 	m_stage->DrawEditOP();
 
 	m_panel->TraverseShapes(ee::DrawShapesVisitor(sm::rect()), ee::DT_VISIBLE);
+
+#ifdef _DEBUG 
+	if (ee::Config::Instance()->IsUseDTex()) {
+		ee::DTex::Instance()->DebugDraw();
+	}
+#endif
 }
 
 }
