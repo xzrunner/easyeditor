@@ -1,5 +1,5 @@
-#ifndef _E_EASYCOMPLEX_RECT_CUT_LOADER_H_
-#define _E_EASYCOMPLEX_RECT_CUT_LOADER_H_
+#ifndef _EASYCOMPLEX_RECT_CUT_LOADER_H_
+#define _EASYCOMPLEX_RECT_CUT_LOADER_H_
 
 #include <wx/wx.h>
 #include <vector>
@@ -41,4 +41,4 @@ private:
 
 }
 
-#endif // _E_EASYCOMPLEX_RECT_CUT_LOADER_H_
+#endif // _EASYCOMPLEX_RECT_CUT_LOADER_H_
