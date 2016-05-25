@@ -19,6 +19,7 @@ public:
 	RotateSpriteAOP(const std::vector<Sprite*>& sprites, const sm::vec2& start, const sm::vec2& end);
 	RotateSpriteAOP(const std::vector<Sprite*>& sprites, float angle);
 	RotateSpriteAOP(const SpriteSelection& selection, const sm::vec2& start, const sm::vec2& end);
+	RotateSpriteAOP(const SpriteSelection& selection, float angle);
 	RotateSpriteAOP(Sprite* sprite, float angle);
 	virtual ~RotateSpriteAOP();
 

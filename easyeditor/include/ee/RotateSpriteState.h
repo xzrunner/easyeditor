@@ -30,16 +30,20 @@ private:
 	class RotateVisitor : public Visitor
 	{
 	public:
-		RotateVisitor(const sm::vec2& start, const sm::vec2& end) : m_start(start), m_end(end) {}
+		RotateVisitor(const sm::vec2& start, const sm::vec2& end, float& angle) 
+			: m_start(start), m_end(end), m_angle(angle) {}
 		virtual void Visit(Object* object, bool& next);
 	private:
 		sm::vec2 m_start, m_end;
+		float& m_angle;
 	}; // RotateVisitor
 
 protected:
 	SpriteSelection* m_selection;
 
 	sm::vec2 m_first_pos, m_last_pos;
+
+	float m_angle;
 
 }; // RotateSpriteState
 

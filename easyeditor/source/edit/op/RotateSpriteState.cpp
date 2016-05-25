@@ -9,6 +9,7 @@ namespace ee
 
 RotateSpriteState::RotateSpriteState(SpriteSelection* selection, 
 									 const sm::vec2& first_pos)
+	: m_angle(0)
 {
 	m_selection = selection;
 	m_selection->Retain();
@@ -24,7 +25,7 @@ RotateSpriteState::~RotateSpriteState()
 void RotateSpriteState::OnMouseRelease(const sm::vec2& pos)
 {
 	if (pos != m_first_pos) {
-		AtomicOP* aop = new RotateSpriteAOP(*m_selection, m_first_pos, pos);
+		AtomicOP* aop = new RotateSpriteAOP(*m_selection, m_angle);
 		EditAddRecordSJ::Instance()->Add(aop);
 	}
 }
@@ -41,7 +42,7 @@ bool RotateSpriteState::OnMouseDrag(const sm::vec2& pos)
 
 void RotateSpriteState::Rotate(const sm::vec2& dst)
 {
-	m_selection->Traverse(RotateVisitor(m_last_pos, dst));
+	m_selection->Traverse(RotateVisitor(m_last_pos, dst, m_angle));
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -56,6 +57,8 @@ Visit(Object* object, bool& next)
 	sm::vec2 center = sprite->GetPosition() + sprite->GetOffset();
 	float angle = Math2D::GetAngleInDirection(center, m_start, m_end);
 	sprite->Rotate(angle);
+
+	m_angle += angle;
 
 	next = false;
 }

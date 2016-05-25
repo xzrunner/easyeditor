@@ -26,6 +26,13 @@ RotateSpriteAOP::RotateSpriteAOP(const SpriteSelection& selection, const sm::vec
 	Init(sprites, start, end);
 }
 
+RotateSpriteAOP::RotateSpriteAOP(const SpriteSelection& selection, float angle)
+{
+	std::vector<Sprite*> sprites;
+	selection.Traverse(FetchAllVisitor<Sprite>(sprites));
+	Init(sprites, angle);
+}
+
 RotateSpriteAOP::RotateSpriteAOP(Sprite* sprite, float angle)
 {
 	std::vector<Sprite*> sprites;
