@@ -55,12 +55,8 @@ void StagePanel::TraverseShapes(ee::Visitor& visitor,
 }
 
 void StagePanel::SetMeshSymbol(Symbol* symbol)
-{
-	if (m_symbol != symbol) {
-		m_symbol->Release();
-		m_symbol = symbol;
-		m_symbol->Retain();
-	}
+{	
+	ee::obj_assign(m_symbol, symbol);
 }
 
 const Symbol* StagePanel::GetMeshSymbol() const

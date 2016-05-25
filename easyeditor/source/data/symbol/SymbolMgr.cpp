@@ -41,7 +41,7 @@ Symbol* SymbolMgr::FetchSymbol(const std::string& filepath)
 		if (!symbol) 
 		{
 			const char* path = filepath.c_str();
-			throw Exception("Create symbol %s fail!", path);
+			throw Exception("Create symbol fail: %s", path);
 //			return NULL;
 		}
 		bool isLoaded = symbol->LoadFromFile(fixed_path);

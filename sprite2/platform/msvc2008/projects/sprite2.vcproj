@@ -164,6 +164,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\include\sprite2\MaskMode.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\include\sprite2\RenderCamera.h"
 					>
 				</File>
@@ -590,6 +594,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\include\sprite2\Singleton.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\sprite2\Uncopyable.h"
 				>
 			</File>
 		</Filter>

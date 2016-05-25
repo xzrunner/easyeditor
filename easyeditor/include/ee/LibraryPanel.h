@@ -48,6 +48,7 @@ public:
 	void LoadDefaultSymbol();
 
 	LibraryPage* GetCurrPage() { return m_selected; }
+	const LibraryPage* GetCurrPage() const { return m_selected; }
 	void SetCurrPage(int idx);
  
 protected:

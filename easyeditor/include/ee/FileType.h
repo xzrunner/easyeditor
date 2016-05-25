@@ -35,6 +35,7 @@ public:
 		e_shadow,
 		e_ui,
 		e_text,
+		e_mask,
 	};
 
 	static Type GetType(const std::string& filename);
