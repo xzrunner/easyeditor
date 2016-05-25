@@ -1,5 +1,5 @@
-#ifndef _LR_PREVIEW_PATH_NAV_MASH_H_
-#define _LR_PREVIEW_PATH_NAV_MASH_H_
+#ifndef _LR_PREVIEW_PATH_NAV_MESH_H_
+#define _LR_PREVIEW_PATH_NAV_MESH_H_
 
 #include "IPathfinding.h"
 #include "PathUtil.h"
@@ -59,4 +59,4 @@ private:
 }
 }
 
-#endif // _LR_PREVIEW_PATH_NAV_MASH_H_
+#endif // _LR_PREVIEW_PATH_NAV_MESH_H_

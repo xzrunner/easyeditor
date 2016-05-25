@@ -25,13 +25,14 @@ void ShaderLab::Init()
 	mgr->CreateContext(4096);
 	sl::RenderContext* rc = mgr->GetContext();
 
-	mgr->CreateShader(sl::SHAPE2, new sl::Shape2Shader(rc));
-	mgr->CreateShader(sl::SHAPE3, new sl::Shape3Shader(rc));
-	mgr->CreateShader(sl::SPRITE2, new sl::Sprite2Shader(rc));
-	mgr->CreateShader(sl::SPRITE3, new sl::Sprite3Shader(rc));
-	mgr->CreateShader(sl::BLEND, new sl::BlendShader(rc));
-	mgr->CreateShader(sl::FILTER, new sl::FilterShader(rc));
-	mgr->CreateShader(sl::MODEL3, new sl::Model3Shader(rc));
+	mgr->CreateShader(sl::SHAPE2,	new sl::Shape2Shader(rc));
+	mgr->CreateShader(sl::SHAPE3,	new sl::Shape3Shader(rc));
+	mgr->CreateShader(sl::SPRITE2,	new sl::Sprite2Shader(rc));
+	mgr->CreateShader(sl::SPRITE3,	new sl::Sprite3Shader(rc));
+	mgr->CreateShader(sl::BLEND,	new sl::BlendShader(rc));
+	mgr->CreateShader(sl::FILTER,	new sl::FilterShader(rc));
+	mgr->CreateShader(sl::MODEL3,	new sl::Model3Shader(rc));
+	mgr->CreateShader(sl::MASK,		new sl::MaskShader(rc));
 }
 
 void ShaderLab::Update(float dt)
