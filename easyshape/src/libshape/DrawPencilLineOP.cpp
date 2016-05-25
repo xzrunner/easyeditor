@@ -24,7 +24,9 @@ bool DrawPencilLineOP::OnMouseLeftUp(int x, int y)
 	{
 		std::vector<sm::vec2> simplified;
 		ee::DouglasPeucker::Do(m_curve, m_simplify->GetValue(), simplified);
-		ee::InsertShapeSJ::Instance()->Insert(new ChainShape(simplified, false));
+		ChainShape* chain = new ChainShape(simplified, false);
+		ee::InsertShapeSJ::Instance()->Insert(chain);
+		chain->Release();
 		Clear();
 
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();

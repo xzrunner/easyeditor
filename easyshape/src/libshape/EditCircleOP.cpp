@@ -91,7 +91,8 @@ bool EditCircleOP::OnMouseLeftUp(int x, int y)
 			{
 				CircleShape* circle = new CircleShape(m_first_pos, radius);
 				ee::SelectShapeSJ::Instance()->Select(circle);
-				ee::InsertShapeSJ::Instance()->Insert(NULL);
+				ee::InsertShapeSJ::Instance()->Insert(circle);
+				circle->Release();
 			}
 		}
 	}

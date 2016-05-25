@@ -19,6 +19,7 @@ bool DrawCosineCurveOP::OnMouseLeftDClick(int x, int y)
 	curve->setMidPoints();
 
 	ee::InsertShapeSJ::Instance()->Insert(curve);
+	curve->Release();
 
 	m_polyline.clear();
 	m_curr_pos_valid = false;

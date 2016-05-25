@@ -57,7 +57,9 @@ bool SelectShapesOP::OnKeyDown(int keyCode)
 	else if (m_stage->GetKeyState(WXK_CONTROL) && (keyCode == 'v' || keyCode == 'V'))
 	{
 		for (size_t i = 0, n = m_clipboard.size(); i < n; ++i) {
-			InsertShapeSJ::Instance()->Insert(m_clipboard[i]->Clone());
+			Shape* shape = m_clipboard[i]->Clone();
+			InsertShapeSJ::Instance()->Insert(shape);
+			shape->Release();
 		}
 	}
 
@@ -194,7 +196,9 @@ void SelectShapesOP::PasteToSelection() const
 void SelectShapesOP::CopyFromSelection()
 {
 	for (size_t i = 0, n = m_clipboard.size(); i < n; ++i) {
-		InsertShapeSJ::Instance()->Insert(m_clipboard[i]->Clone());
+		Shape* shape = m_clipboard[i]->Clone();
+		InsertShapeSJ::Instance()->Insert(shape);
+		shape->Release();
 	}
 }
 

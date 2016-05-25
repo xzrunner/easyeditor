@@ -19,7 +19,9 @@ bool DrawPolygonOP::OnMouseLeftDClick(int x, int y)
 
 	if (m_polyline.size() >= 3)
 	{
-		ee::InsertShapeSJ::Instance()->Insert(new PolygonShape(m_polyline));
+		PolygonShape* poly = new PolygonShape(m_polyline);
+		ee::InsertShapeSJ::Instance()->Insert(poly);
+		poly->Release();
 		m_polyline.clear();
 		m_curr_pos_valid = false;
 	}

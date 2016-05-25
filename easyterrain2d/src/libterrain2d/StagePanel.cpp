@@ -46,7 +46,6 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	m_oceans = static_cast<Sprite*>(edited)->GetSymbol().GetOceans();
 	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
  		OceanMesh* ocean = m_oceans[i];
- 		ocean->Retain();
 		ee::InsertShapeSJ::Instance()->Insert(
 			const_cast<eshape::PolygonShape*>(ocean->GetBounding()));
 	}

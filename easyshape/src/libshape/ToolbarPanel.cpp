@@ -126,7 +126,9 @@ void ToolbarPanel::OnCreateBounding(wxCommandEvent& event)
 	for (int i = 0, n = bounding.size(); i < n; ++i) {
 		bounding[i] += offset;
 	}
-	ee::InsertShapeSJ::Instance()->Insert(new eshape::PolygonShape(bounding));
+	eshape::PolygonShape* poly = new eshape::PolygonShape(bounding);
+	ee::InsertShapeSJ::Instance()->Insert(poly);
+	poly->Release();
 
 	SetChoice(3);
 }

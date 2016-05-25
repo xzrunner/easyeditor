@@ -90,7 +90,8 @@ bool EditRectOP::OnMouseLeftUp(int x, int y)
 			{
 				RectShape* rect = new RectShape(sm::rect(m_first_pos, m_curr_pos));
 				ee::SelectShapeSJ::Instance()->Select(rect);
-				ee::InsertShapeSJ::Instance()->Insert(NULL);
+				ee::InsertShapeSJ::Instance()->Insert(rect);
+				rect->Release();
 			}
 		}
 	}

@@ -89,6 +89,7 @@ bool EditBezierOP::OnMouseLeftUp(int x, int y)
 				BezierShape* bezier = new BezierShape(m_first_pos, m_curr_pos);
 				ee::SelectShapeSJ::Instance()->Select(bezier);
 				ee::InsertShapeSJ::Instance()->Insert(bezier);
+				bezier->Release();
 			}
 		}
 	}
