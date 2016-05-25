@@ -17,7 +17,7 @@ public:
 public:
 	Color();
 	Color(uint32_t rgba);
-	Color(int r, int g, int b, int a = 255);
+	explicit Color(int r, int g, int b, int a = 255);
 
 	bool operator != (const Color& col) const;
 	bool operator == (const Color& col) const;
@@ -35,10 +35,6 @@ public:
 	uint32_t ToRGBA() const;
 	void FromRGBA(uint32_t rgba);
 	
-private:
-	Color(float r, float g, float b, float a) {}
-	Color(float r, float g, float b) {}
-
 }; // Color
 
 }
