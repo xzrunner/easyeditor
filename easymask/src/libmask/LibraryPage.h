@@ -9,9 +9,9 @@ namespace emask
 class LibraryPage : public ee::LibraryPage
 {
 public:
-	LibraryPage(wxWindow* parent, const std::string& name);
+	LibraryPage(wxWindow* parent);
 
-	virtual bool IsHandleSymbol(ee::Symbol* symbol) const { return true; }
+	virtual bool IsHandleSymbol(ee::Symbol* symbol) const;
 
 protected:
 	virtual void OnAddPress(wxCommandEvent& event);

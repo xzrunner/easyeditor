@@ -11,7 +11,8 @@ namespace emask
 {
 
 class LibraryPanel;
-class StagePanel;
+class StagePanel; 
+class ToolbarPanel;
 
 class Task : public ee::Task
 {
@@ -30,15 +31,19 @@ public:
 
 private:
 	void InitLayout();
+	wxWindow* InitLayoutLeft(wxWindow* parent);
+	wxWindow* InitLayoutCenter(wxWindow* parent);
+	wxWindow* InitLayoutRight(wxWindow* parent);
 
 private:
 	wxWindow* m_root;
 
 	wxFrame* m_parent;
 
- 	LibraryPanel* m_library;
-	ee::PropertySettingPanel* m_property;
- 	StagePanel* m_stage;
+	LibraryPanel*				m_library;
+	ee::PropertySettingPanel*	m_property;
+ 	StagePanel*		m_stage;
+	ToolbarPanel*		m_toolbar;
 
 }; // Task
 

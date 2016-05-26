@@ -1,5 +1,5 @@
 #include "LibraryPanel.h"
-#include "LibraryPage.h"
+#include "LayerLibraryPage.h"
 
 #include <wx/notebook.h>
 
@@ -10,8 +10,8 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	: ee::LibraryPanel(parent)
 {
 	wxWindow* nb = GetNotebook();
-	AddPage(m_base_page = new LibraryPage(nb, "╣в╡Ц"));
-	AddPage(m_mask_page = new LibraryPage(nb, "узуж╡Ц"));
+	AddPage(m_base_page = new LayerLibraryPage(nb, "╣в╡Ц", false));
+	AddPage(m_mask_page = new LayerLibraryPage(nb, "узуж╡Ц", true));
 }
 
 }

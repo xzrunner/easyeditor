@@ -152,6 +152,14 @@
 				Name="library"
 				>
 				<File
+					RelativePath="..\..\..\src\libmask\LayerLibraryPage.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmask\LayerLibraryPage.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libmask\LibraryPage.cpp"
 					>
 				</File>
@@ -185,6 +193,18 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\libmask\StagePanel.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="toolbar"
+				>
+				<File
+					RelativePath="..\..\..\src\libmask\ToolbarPanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmask\ToolbarPanel.h"
 					>
 				</File>
 			</Filter>

@@ -7,6 +7,8 @@
 #include <ee/RenderContextStack.h>
 #include <ee/GL.h>
 #include <ee/BoundingBox.h>
+#include <ee/ImageSprite.h>
+#include <ee/Image.h>
 
 #include <dtex_facade.h>
 #include <shaderlab.h>
@@ -111,10 +113,10 @@ void Symbol::DrawSprToTmp(const sm::mat4& mt) const
 	dtexf_c1_bind();
 	dtexf_c1_clear(0, -2, 2, 0);
 
-	mgr->SetShader(sl::MASK);
-
 	s2::RenderParams params;
 	params.mt = mt;
+	const sm::vec2& offset = m_base_spr->GetPosition();
+	params.mt.Translate(-offset.x, -offset.y, 0);
 	params.set_shader = false;
 	params.root_spr = m_base_spr->GetCore();
 	ee::SpriteRenderer::Draw(m_base_spr, params);
@@ -138,23 +140,32 @@ void Symbol::DrawTmpToScreen(const sm::mat4& mt) const
 	vertices[2] = sm::vec2(r.xmax, r.ymax);
 	vertices[3] = sm::vec2(r.xmax, r.ymin);
 	for (int i = 0; i < 4; ++i) {
-		vertices[i] = ee::Math2D::TransVector(vertices[i], t);
+		vertices[i] = t * vertices[i];
 	}
 
 	sm::vec2 texcoords[4];
+	const sm::vec2& offset = m_base_spr->GetPosition();
 	int edge = dtexf_c1_get_texture_size();
 	for (int i = 0; i < 4; ++i) {
-		texcoords[i] = vertices[i] - m_mask_spr->GetPosition();
+		texcoords[i] = vertices[i] - offset;
 		texcoords[i].x = texcoords[i].x / edge + 0.5f;
 		texcoords[i].y = texcoords[i].y / edge + 0.5f;
 	}
 
+	sm::vec2 texcoords_mask[4];
+	texcoords_mask[0].Set(0, 0);
+	texcoords_mask[1].Set(0, 1);
+	texcoords_mask[2].Set(1, 1);
+	texcoords_mask[3].Set(1, 0);
+
+	ee::ImageSprite* img_spr = dynamic_cast<ee::ImageSprite*>(m_mask_spr);
+	assert(img_spr);
+	int tex_mask = img_spr->GetSymbol().GetImage()->GetTexID();
+
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
-	mgr->SetShader(sl::SPRITE2);
-	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
-	shader->SetColor(0xffffffff, 0);
-	shader->SetColorMap(0x000000ff, 0x0000ff00, 0x00ff0000);
-	shader->Draw(&vertices[0].x, &texcoords[0].x, dtexf_c1_get_texture_id());
+	mgr->SetShader(sl::MASK);
+	sl::MaskShader* shader = static_cast<sl::MaskShader*>(mgr->GetShader());
+	shader->Draw(&vertices[0].x, &texcoords[0].x, &texcoords_mask[0].x, dtexf_c1_get_texture_id(), tex_mask);
 }
 
 }

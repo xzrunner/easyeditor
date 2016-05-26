@@ -13,6 +13,10 @@ public:
 
 	bool IsCurrBase() const { return GetCurrPage() == m_base_page; }
 
+	ee::LibraryPage* GetPage(bool base) {
+		return base ? m_base_page : m_mask_page;
+	}
+
 private:
 	ee::LibraryPage *m_base_page, *m_mask_page;
 

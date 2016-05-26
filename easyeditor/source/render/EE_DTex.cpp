@@ -292,7 +292,9 @@ void DTex::OnSize(int w, int h)
 
 void DTex::DebugDraw() const
 {
-	sl::ShaderMgr::Instance()->GetShader()->Commit();
+	if (sl::Shader* shader = sl::ShaderMgr::Instance()->GetShader()) {
+		shader->Commit();
+	}
 	dtexf_debug_draw();
 }
 

@@ -101,9 +101,6 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
 	m_stage = new ecomplex::StagePanel(parent, m_parent, m_property, m_library);
 	m_property->SetEditPanel(m_stage->GetStageImpl());
-
-	m_property->SetEditPanel(m_stage->GetStageImpl());
-
 	return m_stage;
 }
 

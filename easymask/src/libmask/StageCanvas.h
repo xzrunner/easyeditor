@@ -13,11 +13,17 @@ class StageCanvas : public ee::CameraCanvas
 public:
 	StageCanvas(StagePanel* stage);
 
+	void SetMaskRender(bool mask_render) { 
+		m_mask_render = mask_render; 
+	}
+
 protected:
 	virtual void OnDrawSprites() const;
 
 private:
 	StagePanel* m_stage;
+
+	bool m_mask_render;
 
 }; // StageCanvas
 

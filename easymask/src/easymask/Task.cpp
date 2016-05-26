@@ -4,6 +4,8 @@
 #include <ee/Bitmap.h>
 #include <ee/PropertySettingPanel.h>
 #include <ee/FileType.h>
+#include <ee/LibraryPage.h>
+#include <ee/LibraryList.h>
 
 #include <easymask.h>
 
@@ -29,8 +31,22 @@ Task::~Task()
 
 void Task::Load(const char* filepath)
 {
-	if (ee::FileType::IsType(filepath, ee::FileType::e_mask)) {
-		FileIO::Load(filepath, m_stage->GetSymbol());
+	if (!ee::FileType::IsType(filepath, ee::FileType::e_mask)) {
+		return;
+	}
+
+	FileIO::Load(filepath, m_stage->GetSymbol());
+
+	Symbol* sym = m_stage->GetSymbol();
+	if (ee::Sprite* spr = sym->GetSprite(true)) {
+		ee::LibraryList* base_list = m_library->GetPage(true)->GetList();
+		ee::Symbol* base_sym = const_cast<ee::Symbol*>(&spr->GetSymbol());
+		base_list->Insert(base_sym);
+	}
+	if (ee::Sprite* spr = sym->GetSprite(false)) {
+		ee::LibraryList* mask_list = m_library->GetPage(false)->GetList();
+		ee::Symbol* mask_sym = const_cast<ee::Symbol*>(&spr->GetSymbol());
+		mask_list->Insert(mask_sym);
 	}
 }
 
@@ -52,23 +68,46 @@ const ee::EditPanel* Task::GetEditPanel() const
 
 void Task::InitLayout()
 {
-	wxSplitterWindow* vert_split = new wxSplitterWindow(m_parent);
-	wxSplitterWindow* hori_split = new wxSplitterWindow(vert_split);
+	wxSplitterWindow* right_split = new wxSplitterWindow(m_parent);
+	wxSplitterWindow* left_split = new wxSplitterWindow(right_split);
 
-	m_property = new ee::PropertySettingPanel(hori_split);
-	m_library = new LibraryPanel(hori_split);
+	wxWindow* left = InitLayoutLeft(left_split);
+	wxWindow* center = InitLayoutCenter(left_split);
+	wxWindow* right = InitLayoutRight(right_split);
 
-	m_stage = new StagePanel(vert_split, m_parent, m_property, m_library);
+	left_split->SetSashGravity(0.2f);
+	left_split->SplitVertically(left, center);
 
+	right_split->SetSashGravity(0.85f);
+	right_split->SplitVertically(left_split, right);
+
+	m_root = right_split;
+}
+
+wxWindow* Task::InitLayoutLeft(wxWindow* parent)
+{
+	wxSplitterWindow* split = new wxSplitterWindow(parent);
+
+	m_library = new LibraryPanel(split);
+	m_property = new ee::PropertySettingPanel(split);
+
+	split->SetSashGravity(0.55f);
+	split->SplitHorizontally(m_library, m_property);
+
+	return split;
+}
+
+wxWindow* Task::InitLayoutCenter(wxWindow* parent)
+{
+	m_stage = new StagePanel(parent, m_parent, m_property, m_library);
 	m_property->SetEditPanel(m_stage->GetStageImpl());
+	return m_stage;
+}
 
-	hori_split->SetSashGravity(0.55f);
-	hori_split->SplitHorizontally(m_library, m_property);
-
-	vert_split->SetSashGravity(0.2f);
-	vert_split->SplitVertically(hori_split, m_stage);
-
-	m_root = vert_split;
+wxWindow* Task::InitLayoutRight(wxWindow* parent)
+{
+	m_toolbar = new ToolbarPanel(parent, m_stage);
+	return m_toolbar;
 }
 
 }
