@@ -73,9 +73,7 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 
 	float sw, sh;
 	m_symbol->GetScale9Data().GetSize(sw, sh);
-	if (sw != w || sh != h)
-	{
-		m_symbol = m_symbol->Clone();
+	if (sw != w || sh != h) {
 		m_symbol->ResizeScale9(w, h);
 	}
 
