@@ -40,7 +40,7 @@ void StageCanvas::OnDrawSprites() const
 	else
 	{
 		ee::RVG::Color(ee::LIGHT_GREY);
-		ee::RVG::Rect(sm::vec2(0, 0), ee::SCREEN_WIDTH, ee::SCREEN_HEIGHT, false);
+		ee::RVG::Rect(sm::vec2(0, 0), ee::HALF_SCREEN_WIDTH, ee::HALF_SCREEN_HEIGHT, false);
 
 		ee::Symbol* symbol = m_stage_panel->getPatchSymbol();
 		if (symbol)

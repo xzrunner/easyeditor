@@ -144,7 +144,7 @@ void StageCanvas::DrawBackground() const
 	if (Settings::bVisibleBGRect) {
 		ee::RVG::Color(s2::Color(204, 204, 204));
 		ee::RVG::LineWidth(2);
-		ee::RVG::Rect(sm::vec2(0, 0), ee::SCREEN_WIDTH, ee::SCREEN_HEIGHT, false);
+		ee::RVG::Rect(sm::vec2(0, 0), ee::HALF_SCREEN_WIDTH, ee::HALF_SCREEN_HEIGHT, false);
 	}
 }
 
