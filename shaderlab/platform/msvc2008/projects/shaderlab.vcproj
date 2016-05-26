@@ -402,6 +402,10 @@
 							>
 						</File>
 					</Filter>
+					<Filter
+						Name="mask"
+						>
+					</Filter>
 				</Filter>
 			</Filter>
 			<Filter
@@ -475,6 +479,18 @@
 						>
 					</File>
 				</Filter>
+			</Filter>
+			<Filter
+				Name="mask"
+				>
+				<File
+					RelativePath="..\..\..\src\shaderlab\shader\MaskShader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\shaderlab\shader\MaskShader.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter
@@ -836,6 +852,22 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\shaderlab\parser\Blend.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="mask"
+					>
+					<File
+						RelativePath="..\..\..\src\shaderlab\parser\Mask.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\shaderlab\parser\Mask.frag"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\shaderlab\parser\Mask.h"
 						>
 					</File>
 				</Filter>
