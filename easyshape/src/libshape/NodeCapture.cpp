@@ -81,7 +81,7 @@ Visit(PointShape* point)
 {
 	if (ee::Math2D::GetDistance(point->GetPos(), m_pos) < m_tolerance) {
 		m_result.shape = point;
-		m_result.pos_valid = false;
+		m_result.pos.MakeInvalid();
 		return true;
 	} else {
 		return false;
@@ -96,7 +96,7 @@ Visit(BezierShape* bezier)
 	if (ee::Math2D::GetDistance(rect.Center(), m_pos) < m_tolerance)
 	{
 		m_result.shape = bezier;
-		m_result.pos_valid = false;
+		m_result.pos.MakeInvalid();
 		return true;
 	}
 
@@ -106,7 +106,6 @@ Visit(BezierShape* bezier)
 		if (ee::Math2D::GetDistance(ctrl_nodes[i], m_pos) < m_tolerance) {
 			m_result.shape = bezier;
 			m_result.pos = ctrl_nodes[i];
-			m_result.pos_valid = true;
 			return true;
 		}
 	}
@@ -122,7 +121,7 @@ Visit(PolylineShape* polyline)
 	if (ee::Math2D::GetDistance(rect.Center(), m_pos) < m_tolerance)
 	{
 		m_result.shape = polyline;
-		m_result.pos_valid = false;
+		m_result.pos.MakeInvalid();
 		return true;
 	}
 
@@ -140,7 +139,6 @@ Visit(PolylineShape* polyline)
 		{
 			m_result.shape = polyline;
 			m_result.pos = vertices[i];
-			m_result.pos_valid = true;
 			return true;
 		}
 	}
@@ -158,7 +156,6 @@ Visit(CircleShape* circle)
 	{
 		m_result.shape = circle;
 		m_result.pos = circle->GetCenter();
-		m_result.pos_valid = true;
 		return true;
 	}
 	// capture ring
@@ -166,7 +163,7 @@ Visit(CircleShape* circle)
 		&& dis > circle->GetRadius() - m_tolerance)
 	{
 		m_result.shape = circle;
-		m_result.pos_valid = false;
+		m_result.pos.MakeInvalid();
 		return true;
 	}
 
@@ -180,7 +177,7 @@ Visit(RectShape* rect)
 	if (ee::Math2D::GetDistance(m_pos, rect->GetRect().Center()) < m_tolerance)
 	{
 		m_result.shape = rect;
-		m_result.pos_valid = false;
+		m_result.pos.MakeInvalid();
 		return true;
 	}
 	// capture edge
@@ -188,28 +185,24 @@ Visit(RectShape* rect)
 	{
 		m_result.shape = rect;
 		m_result.pos = sm::vec2(rect->GetRect().xmin, rect->GetRect().ymin);
-		m_result.pos_valid = true;
 		return true;
 	}
 	else if (ee::Math2D::GetDistance(m_pos, sm::vec2(rect->GetRect().xmin, rect->GetRect().ymax)) < m_tolerance)
 	{
 		m_result.shape = rect;
 		m_result.pos = sm::vec2(rect->GetRect().xmin, rect->GetRect().ymax);
-		m_result.pos_valid = true;
 		return true;
 	}
 	else if (ee::Math2D::GetDistance(m_pos, sm::vec2(rect->GetRect().xmax, rect->GetRect().ymax)) < m_tolerance)
 	{
 		m_result.shape = rect;
 		m_result.pos = sm::vec2(rect->GetRect().xmax, rect->GetRect().ymax);
-		m_result.pos_valid = true;
 		return true;
 	}
 	else if (ee::Math2D::GetDistance(m_pos, sm::vec2(rect->GetRect().xmax, rect->GetRect().ymin)) < m_tolerance)
 	{
 		m_result.shape = rect;
 		m_result.pos = sm::vec2(rect->GetRect().xmax, rect->GetRect().ymin);
-		m_result.pos_valid = true;
 		return true;
 	}
 	return false;

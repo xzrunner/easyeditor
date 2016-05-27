@@ -17,7 +17,6 @@ MoveSpriteCenterState::MoveSpriteCenterState(ecomplex::Sprite* spr,
 	, m_dirty(false)
 {
 	m_first_pos = m_last_pos = first_pos;
-	m_last_pos_valid = true;
 }
 
 MoveSpriteCenterState::~MoveSpriteCenterState()
@@ -27,12 +26,11 @@ MoveSpriteCenterState::~MoveSpriteCenterState()
 void MoveSpriteCenterState::OnMousePress(const sm::vec2& pos)
 {
 	m_first_pos = m_last_pos = pos;
-	m_last_pos_valid = true;
 }
 
 void MoveSpriteCenterState::OnMouseRelease(const sm::vec2& pos)
 {
-	m_last_pos_valid = false;
+	m_last_pos.MakeInvalid();
 	// todo edit history
 
 	if (m_dirty && m_spr) {
@@ -46,13 +44,12 @@ void MoveSpriteCenterState::OnMouseRelease(const sm::vec2& pos)
 
 bool MoveSpriteCenterState::OnMouseDrag(const sm::vec2& pos)
 {
-	if (!m_spr || !m_last_pos_valid) {
+	if (!m_spr || !m_last_pos.IsValid()) {
 		return false;
 	}
 
 	sm::vec2 offset = m_last_pos - pos;
 	m_last_pos = pos;
-	m_last_pos_valid = true;
 
 	m_dirty = true;
 

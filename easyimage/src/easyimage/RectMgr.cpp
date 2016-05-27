@@ -144,25 +144,21 @@ RectMgr::Node RectMgr::QueryNode(const sm::vec2& pos) const
 		const sm::rect* r = m_rects[i];
 
 		sm::vec2 selected;
-		bool selected_valid = false;
+		selected.MakeInvalid();
 
 		if (fabs(pos.x - r->xmin) < RADIUS) {
 			selected.x = r->xmin;
-			selected_valid = true;
 		} else if (fabs(pos.x - r->xmax) < RADIUS) {
 			selected.x = r->xmax;
-			selected_valid = true;
 		}
 
 		if (fabs(pos.y - r->ymin) < RADIUS) {
 			selected.y = r->ymin;
-			selected_valid = true;
 		} else if (fabs(pos.y - r->ymax) < RADIUS) {
 			selected.y = r->ymax;
-			selected_valid = true;
 		}
 
-		if (selected_valid) {
+		if (selected.IsValid()) {
 			ret.rect = r;
 			ret.pos = selected;
 			return ret;

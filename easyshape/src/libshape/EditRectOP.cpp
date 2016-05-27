@@ -25,9 +25,10 @@ EditRectOP::EditRectOP(wxWindow* wnd, ee::EditPanelImpl* stage,
 	, m_property(property)
 	, m_shapes_impl(shapes_impl)
 	, m_node_capture(node_capture)
-	, m_first_pos_valid(false)
-	, m_curr_pos_valid(false)
 {
+	m_first_pos.MakeInvalid();
+	m_curr_pos.MakeInvalid();
+
 	m_cursor = wxCursor(wxCURSOR_PENCIL);
 
 	Clear();
@@ -40,7 +41,7 @@ bool EditRectOP::OnKeyDown(int keyCode)
 	if (keyCode == WXK_DELETE)
 	{
 		m_shapes_impl->ClearSelectedShape();
-		m_captured.clear();
+		m_captured.Clear();
 		ee::SelectShapeSJ::Instance()->Select(NULL);
 	}
 
@@ -52,7 +53,6 @@ bool EditRectOP::OnMouseLeftDown(int x, int y)
 	if (ee::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	m_first_pos = m_curr_pos = m_stage->TransPosScrToProj(x, y);
-	m_first_pos_valid = m_curr_pos_valid = true;
 
 	m_shapes_impl->GetShapeSelection()->Clear();
 
@@ -70,7 +70,7 @@ bool EditRectOP::OnMouseLeftDown(int x, int y)
 	}
 	else
 	{
-		m_captured.clear();
+		m_captured.Clear();
 	}
 
 	return false;
@@ -82,10 +82,9 @@ bool EditRectOP::OnMouseLeftUp(int x, int y)
 
 	if (!m_captured.shape)
 	{
-		if (m_first_pos_valid)
+		if (m_first_pos.IsValid())
 		{
 			m_curr_pos = m_stage->TransPosScrToProj(x, y);
-			m_curr_pos_valid = true;
 
 			const float dis = ee::Math2D::GetDistance(m_first_pos, m_curr_pos);
 			if (dis > 1)
@@ -119,7 +118,6 @@ bool EditRectOP::OnMouseRightDown(int x, int y)
 	if (tolerance != 0)
 	{
 		m_curr_pos = m_stage->TransPosScrToProj(x, y);
-		m_curr_pos_valid = true;
 
 		NodeCapture capture(m_shapes_impl, tolerance);
 		capture.captureEditable(m_curr_pos, m_captured);
@@ -127,13 +125,13 @@ bool EditRectOP::OnMouseRightDown(int x, int y)
 		{
 			ee::RemoveShapeSJ::Instance()->Remove(m_captured.shape);
 			m_shapes_impl->GetShapeSelection()->Clear();
-			m_captured.clear();
+			m_captured.Clear();
 			ee::SelectShapeSJ::Instance()->Select(NULL);
 		}
 	}
 	else
 	{
-		m_captured.clear();
+		m_captured.Clear();
 	}
 
 	return false;
@@ -163,7 +161,6 @@ bool EditRectOP::OnMouseDrag(int x, int y)
 	if (ee::ZoomViewOP::OnMouseDrag(x, y)) return true;
 
 	m_curr_pos = m_stage->TransPosScrToProj(x, y);
-	m_curr_pos_valid = true;
 
 	if (m_captured.shape)
 	{
@@ -173,7 +170,7 @@ bool EditRectOP::OnMouseDrag(int x, int y)
 
 			sm::rect r = rect->GetRect();
 			// move
-			if (!m_captured.pos_valid)
+			if (!m_captured.pos.IsValid())
 			{
 				r.Translate(m_curr_pos - center);
 			}
@@ -216,7 +213,7 @@ bool EditRectOP::OnDraw() const
 				sm::vec2 pos = rect->GetRect().Center();
 				ee::RVG::Color(s2::Color(102, 255, 102));
 				ee::RVG::Circle(pos, tolerance, true);
-				if (m_captured.pos_valid) {
+				if (m_captured.pos.IsValid()) {
 					ee::RVG::Color(s2::Color(255, 102, 102));
 					ee::RVG::Circle(m_captured.pos, tolerance, true);
 				}
@@ -225,7 +222,7 @@ bool EditRectOP::OnDraw() const
 	}
 	else
 	{
-		if (m_first_pos_valid && m_curr_pos_valid) {
+		if (m_first_pos.IsValid() && m_curr_pos.IsValid()) {
 			ee::RVG::Rect(m_first_pos, m_curr_pos, false);
 		}
 	}
@@ -237,7 +234,8 @@ bool EditRectOP::Clear()
 {
 	if (ee::ZoomViewOP::Clear()) return true;
 
-	m_first_pos_valid = m_curr_pos_valid = false;
+	m_first_pos.MakeInvalid();
+	m_curr_pos.MakeInvalid();
 
 	return false;
 }

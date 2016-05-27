@@ -23,7 +23,7 @@ bool DrawPolygonOP::OnMouseLeftDClick(int x, int y)
 		ee::InsertShapeSJ::Instance()->Insert(poly);
 		poly->Release();
 		m_polyline.clear();
-		m_curr_pos_valid = false;
+		m_curr_pos.MakeInvalid();
 	}
 
 	return false;

@@ -33,7 +33,6 @@ private:
 protected:
 	mutable std::vector<sm::vec2> m_polyline;
 	sm::vec2 m_curr_pos;
-	bool m_curr_pos_valid;
 
 private:
 	bool m_is_closed;

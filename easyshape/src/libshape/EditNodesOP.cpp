@@ -14,8 +14,8 @@ namespace eshape
 
 EditNodesOP::EditNodesOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapes_impl)
 	: SelectNodesOP(wnd, stage, shapes_impl, NULL)
-	, m_last_pos_valid(false)
 {
+	m_last_pos.MakeInvalid();
 }
 
 bool EditNodesOP::OnKeyDown(int keyCode)
@@ -42,10 +42,9 @@ bool EditNodesOP::OnMouseLeftDown(int x, int y)
 	if (m_stage->GetKeyState(WXK_CONTROL)) return false;
 
 	if (m_node_selection.empty()) {
-		m_last_pos_valid = false;
+		m_last_pos.MakeInvalid();
 	} else {
 		m_last_pos = m_stage->TransPosScrToProj(x, y);
-		m_last_pos_valid = true;
 	}
 
 	return false;
@@ -57,7 +56,7 @@ bool EditNodesOP::OnMouseDrag(int x, int y)
 
 	if (m_stage->GetKeyState(WXK_CONTROL)) return false;
 
-	if (m_last_pos_valid)
+	if (m_last_pos.IsValid())
 	{
 		sm::vec2 curr_pos = m_stage->TransPosScrToProj(x, y);
 		sm::vec2 offset = curr_pos - m_last_pos;
@@ -73,7 +72,6 @@ bool EditNodesOP::OnMouseDrag(int x, int y)
 			}
 		}
 		m_last_pos = curr_pos;
-		m_last_pos_valid = true;
 
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
@@ -101,7 +99,7 @@ bool EditNodesOP::Clear()
 {
 	if (SelectNodesOP::Clear()) return true;
 
-	m_last_pos_valid = false;
+	m_last_pos.MakeInvalid();
 	m_buffer.clear();
 
 	return false;

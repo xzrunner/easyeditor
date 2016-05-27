@@ -60,7 +60,7 @@ bool PasteSymbolRandomOP::OnDraw() const
 	if (!symbol) {
 		symbol = m_library->GetSymbol();
 	}
-	if (symbol && m_pos_valid) {
+	if (symbol && m_pos.IsValid()) {
 		SpriteRenderer::Draw(symbol, s2::RenderParams(), m_pos, m_random_val.angle, m_random_val.scale);
 	}
 

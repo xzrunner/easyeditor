@@ -22,7 +22,6 @@ public:
 
 protected:
 	sm::vec2 m_first_pos, m_last_pos;
-	bool m_first_valid, m_last_valid;
 
 }; // DrawRectangleOP
 

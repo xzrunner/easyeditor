@@ -34,7 +34,6 @@ private:
 	ee::OneFloatValue* m_node_capture;
 
 	sm::vec2 m_first_pos, m_curr_pos;
-	bool m_first_pos_valid, m_curr_pos_valid;
 
 	NodeAddr m_captured;
 

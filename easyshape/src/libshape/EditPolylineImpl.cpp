@@ -38,7 +38,7 @@ EditPolylineImpl::EditPolylineImpl(wxWindow* wnd, ee::EditPanelImpl* stage,
 	m_node_capture = node_capture;
 
 	m_selectOP = select_op;
-	m_last_left_down_pos_valid = false;
+	m_last_left_down_pos.MakeInvalid();
 	m_is_select_open = false;
 
 	m_draw_op = draw_op;
@@ -52,8 +52,8 @@ bool EditPolylineImpl::OnKeyDown(int keyCode)
 {
 	if (keyCode == WXK_DELETE)
 	{
-		m_captured_editable.clear();
-		m_captureSelectable.clear();
+		m_captured_editable.Clear();
+		m_captureSelectable.Clear();
 	}
 	return m_selectOP->OnKeyDown(keyCode);
 }
@@ -81,14 +81,14 @@ bool EditPolylineImpl::OnMouseLeftDown(int x, int y)
 			// 			sm::vec2 screen = m_stage->transPosProjectToScreen(m_capturedEditable.pos);
 			// 			bNotDeliver = m_draw_op->OnMouseLeftDown(screen.x, screen.y);
 
-			if (m_captured_editable.pos_valid)
+			if (m_captured_editable.pos.IsValid())
 				m_draw_op->m_polyline.push_back(m_captured_editable.pos);
 
 			checkActiveShape(m_captured_editable);
 		}
 		else if (m_captureSelectable.shape)
 		{
-			if (m_captureSelectable.pos_valid)
+			if (m_captureSelectable.pos.IsValid())
 				m_draw_op->m_polyline.push_back(m_captureSelectable.pos);
 
 			checkActiveShape(m_captureSelectable);
@@ -97,7 +97,6 @@ bool EditPolylineImpl::OnMouseLeftDown(int x, int y)
 		{
 			if (m_draw_op->m_polyline.empty()) {
 				m_last_left_down_pos = sm::vec2(x, y);
-				m_last_left_down_pos_valid = true;
 			}
 
 			if (tolerance != 0 && m_draw_op->m_polyline.empty())
@@ -167,7 +166,7 @@ bool EditPolylineImpl::OnMouseLeftUp(int x, int y)
 	{
 		m_selectOP->OnMouseLeftUp(x, y);
 		m_is_select_open = false;
-		m_last_left_down_pos_valid = false;
+		m_last_left_down_pos.MakeInvalid();
 	}
 
 
@@ -185,7 +184,7 @@ bool EditPolylineImpl::OnMouseRightDown(int x, int y)
 			capture.captureEditable(m_stage->TransPosScrToProj(x, y), m_captured_editable);
 			if (m_captured_editable.shape)
 			{
-				if (m_captured_editable.pos_valid)
+				if (m_captured_editable.pos.IsValid())
 				{
 					PolylineShape* polyline = dynamic_cast<PolylineShape*>(m_captured_editable.shape);
 					polyline->RemoveVertex(m_captured_editable.pos);
@@ -195,8 +194,8 @@ bool EditPolylineImpl::OnMouseRightDown(int x, int y)
 				{
 					ee::RemoveShapeSJ::Instance()->Remove(m_captured_editable.shape);
 					m_shapes_impl->GetShapeSelection()->Clear();
-					m_captured_editable.clear();
-					m_captureSelectable.clear();
+					m_captured_editable.Clear();
+					m_captureSelectable.Clear();
 					m_dirty = true;
 					ee::SelectShapeSJ::Instance()->Select(NULL);
 				}
@@ -257,7 +256,7 @@ bool EditPolylineImpl::OnMouseDrag(int x, int y)
 		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 		if (PolylineShape* polyline = dynamic_cast<PolylineShape*>(m_captured_editable.shape))
 		{
-			if (m_captured_editable.pos_valid)
+			if (m_captured_editable.pos.IsValid())
 			{
 				polyline->ChangeVertex(m_captured_editable.pos, pos);
 				m_captured_editable.pos = pos;
@@ -276,7 +275,7 @@ bool EditPolylineImpl::OnMouseDrag(int x, int y)
 			}
 		}
 	}
-	else if (m_last_left_down_pos_valid
+	else if (m_last_left_down_pos.IsValid()
 		&& ee::Math2D::GetDistance(m_last_left_down_pos, sm::vec2(x, y)) < DRAG_SELECT_TOL)
 		//		&& (m_lastLeftDownPos.x != x || m_lastLeftDownPos.y != y))
 	{
@@ -313,7 +312,7 @@ void EditPolylineImpl::drawCaptured(const NodeAddr& captured) const
 {
 	if (PolylineShape* polyline = dynamic_cast<PolylineShape*>(captured.shape))
 	{
-		if (captured.pos_valid) {
+		if (captured.pos.IsValid()) {
 			ee::RVG::Color(s2::Color(255, 102, 102));
 			ee::RVG::Circle(captured.pos, m_node_capture->GetValue(), true);
 		}
@@ -348,9 +347,13 @@ InterruptChainVisitor(const sm::vec2& pos, int tol)
 void EditPolylineImpl::InterruptChainVisitor::
 Visit(ee::Object* object, bool& next) 
 {
-	sm::rect rect(m_pos, m_tol, m_tol);
+	PolylineShape* polyline = dynamic_cast<PolylineShape*>(object);
+	if (!polyline) {
+		next = true;
+		return;
+	}
 
-	PolylineShape* polyline = static_cast<PolylineShape*>(object);
+	sm::rect rect(m_pos, m_tol, m_tol);
 	if (!polyline->IsIntersect(rect)) 
 	{
 		next = true;
@@ -390,8 +393,8 @@ EditPolylineImpl::NearestNodeVisitor::
 NearestNodeVisitor(const sm::vec2& pos, int tol)
 	: m_pos(pos)
 	, m_tol(tol)
-	, m_nearest_valid(false)
 {
+	m_nearest.MakeInvalid();
 	m_dis = FLT_MAX;
 }
 
@@ -421,7 +424,6 @@ Visit(ee::Object* object, bool& next)
 		{
 			m_dis = dis;
 			m_nearest = vertices[i];
-			m_nearest_valid = true;
 		}
 	}
 

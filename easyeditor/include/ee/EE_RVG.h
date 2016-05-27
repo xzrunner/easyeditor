@@ -3,9 +3,10 @@
 
 #include <SM_Vector.h>
 #include <SM_Rect.h>
-#include <sprite2/Color.h>
 
 #include <vector>
+
+namespace s2 { class Color; }
 
 namespace ee
 {

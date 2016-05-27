@@ -3,6 +3,7 @@
 
 #include <rvg.h>
 #include <shaderlab.h>
+#include <sprite2/Color.h>
 
 namespace ee
 {

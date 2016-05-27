@@ -8,6 +8,7 @@
 #include <vector>
 
 namespace ee { class Rect; class Sprite; }
+namespace s2 { class Color; }
 
 namespace emodeling
 {

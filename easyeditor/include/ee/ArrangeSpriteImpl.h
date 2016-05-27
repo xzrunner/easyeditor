@@ -94,7 +94,6 @@ private:
 	ArrangeSpriteState* m_op_state;
 
 	sm::vec2 m_left_down_pos, m_right_down_pos;
-	bool m_left_pos_valid, m_right_pos_valid;
 
 	mutable float m_ctrl_node_radius;
 

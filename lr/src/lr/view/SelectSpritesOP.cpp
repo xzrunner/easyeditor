@@ -24,8 +24,8 @@ SelectSpritesOP::SelectSpritesOP(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
 								 ee::EditCMPT* callback/* = NULL*/)
 	: ee::SelectSpritesOP(stage_wnd, stage, sprites_impl, callback)
 	, m_open_symbol(stage_wnd, stage, sprites_impl)
-	, m_first_press_valid(false)
 {
+	m_first_press.MakeInvalid();
 	stage->SetCursor(wxCursor(wxCURSOR_PENCIL));
 }
 
@@ -58,12 +58,11 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
 	stage->PointQuery(pos);
 
-	if (m_first_press_valid) {
+	if (m_first_press.IsValid()) {
 		stage->Pathfinding(m_first_press, pos);
-		m_first_press_valid = false;
+		m_first_press.MakeInvalid();
 	} else {
 		m_first_press = pos;
-		m_first_press_valid = true;
 	}
 
 	return false;

@@ -21,7 +21,7 @@ bool DrawLoopOP::OnMouseLeftDClick(int x, int y)
 	shape->Release();
 
 	m_polyline.clear();
-	m_curr_pos_valid = false;
+	m_curr_pos.MakeInvalid();
 
 	return false;
 }

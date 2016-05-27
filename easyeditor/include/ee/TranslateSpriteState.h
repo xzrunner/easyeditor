@@ -41,7 +41,6 @@ private:
 	SpriteSelection* m_selection;
 
 	sm::vec2 m_first_pos, m_last_pos;
-	bool m_last_valid;
 
 	bool m_dirty;
 	

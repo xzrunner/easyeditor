@@ -15,8 +15,8 @@ CreateStripOP::CreateStripOP(StagePanel* stage)
 	: ee::ZoomViewOP(stage, stage->GetStageImpl(), true, false)
 	, m_stage(stage)
 	, m_selected(NULL)
-	, m_last_right_valid(false)
 {
+	m_last_right.MakeInvalid();
 }
 
 bool CreateStripOP::OnMouseLeftDown(int x, int y)
@@ -62,9 +62,7 @@ bool CreateStripOP::OnMouseRightDown(int x, int y)
 		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 		strip->RemoveNode(pos);
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
-
 		m_last_right = pos;
-		m_last_right_valid = true;
 	}
 
 	return false;
@@ -75,7 +73,7 @@ bool CreateStripOP::OnMouseRightUp(int x, int y)
 	if (ee::ZoomViewOP::OnMouseRightUp(x, y))
 		return true;
 
-	m_last_right_valid = false;
+	m_last_right.MakeInvalid();
 
 	return false;
 }
@@ -88,13 +86,12 @@ bool CreateStripOP::OnMouseDrag(int x, int y)
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 
 	// move background
-	if (m_last_right_valid)
+	if (m_last_right.IsValid())
 	{
 		sm::vec2 offset = pos - m_last_right;
 		StagePanel* stage = static_cast<StagePanel*>(m_stage);
 		stage->TranslateBackground(offset);
 		m_last_right = pos;
-		m_last_right_valid = true;
 	}
 
 	if (!m_selected) {

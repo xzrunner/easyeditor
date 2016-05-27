@@ -27,7 +27,6 @@ private:
 	EditPanelImpl* m_stage;
 
 	sm::vec2 m_last_pos;
-	bool m_last_pos_valid;
 
 }; // PanViewState
 

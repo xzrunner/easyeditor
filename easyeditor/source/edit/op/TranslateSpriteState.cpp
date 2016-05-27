@@ -14,7 +14,6 @@ TranslateSpriteState::TranslateSpriteState(SpriteSelection* selection,
 	m_selection->Retain();
 
 	m_first_pos = m_last_pos = first_pos;
-	m_last_valid = false;
 }
 
 TranslateSpriteState::~TranslateSpriteState()
@@ -25,12 +24,11 @@ TranslateSpriteState::~TranslateSpriteState()
 void TranslateSpriteState::OnMousePress(const sm::vec2& pos)
 {
 	m_first_pos = m_last_pos = pos;
-	m_last_valid = true;
 }
 
 void TranslateSpriteState::OnMouseRelease(const sm::vec2& pos)
 {
-	m_last_valid = false;
+	m_last_pos.MakeInvalid();
 	if (m_dirty) {
 		m_dirty = false;
 		AtomicOP* aop = new TranslateSpriteAOP(*m_selection, pos - m_first_pos);
@@ -40,14 +38,13 @@ void TranslateSpriteState::OnMouseRelease(const sm::vec2& pos)
 
 bool TranslateSpriteState::OnMouseDrag(const sm::vec2& pos)
 {
-	if (m_selection->IsEmpty() || !m_last_valid) {
+	if (m_selection->IsEmpty() || !m_last_pos.IsValid()) {
 		return false;
 	}
 
 	m_dirty = true;
 	Translate(pos - m_last_pos);
 	m_last_pos = pos;
-	m_last_valid = true;
 
 	return true;
 }

@@ -5,6 +5,8 @@
 #include <ee/panel_msg.h>
 #include <ee/EE_RVG.h>
 
+#include <sprite2/Color.h>
+
 namespace eshape
 {
 
@@ -12,8 +14,8 @@ DrawCurveOP::DrawCurveOP(wxWindow* wnd, ee::EditPanelImpl* stage)
 	: ee::ZoomViewOP(wnd, stage, true)
 	, m_start_draw(false)
 	, m_straight_mode(false)
-	, m_first_pos_valid(false)
 {
+	m_first_pos.MakeInvalid();
 	m_cursor = wxCursor(wxCURSOR_PENCIL);
 }
 
@@ -22,7 +24,6 @@ bool DrawCurveOP::OnMouseLeftDown(int x, int y)
 	if (ee::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	m_first_pos.Set(x, y);
-	m_first_pos_valid = true;
 
 	return false;
 }
@@ -31,7 +32,8 @@ bool DrawCurveOP::OnMouseLeftUp(int x, int y)
 {
 	if (ee::ZoomViewOP::OnMouseLeftUp(x, y)) return true;
 
-	m_first_pos_valid = false;
+	m_first_pos.MakeInvalid();
+
 	m_start_draw = false;
 
 	return false;
@@ -41,7 +43,7 @@ bool DrawCurveOP::OnMouseDrag(int x, int y)
 {
 	if (ee::ZoomViewOP::OnMouseDrag(x, y)) return true;
 
-	if (!m_start_draw && m_first_pos_valid && 
+	if (!m_start_draw && m_first_pos.IsValid() && 
 		(m_first_pos.x != x || m_first_pos.y != y)) {
 		m_start_draw = true;
 	}
@@ -79,7 +81,7 @@ bool DrawCurveOP::Clear()
 	if (ee::ZoomViewOP::Clear()) return true;
 
 	m_curve.clear();
-	m_first_pos_valid = false;
+	m_first_pos.MakeInvalid();
 	m_start_draw = false;
 
 	return false;

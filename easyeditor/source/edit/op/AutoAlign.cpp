@@ -7,6 +7,8 @@
 #include "EE_RVG.h"
 #include "FetchAllVisitor.h"
 
+#include <sprite2/Color.h>
+
 namespace ee
 {
 

@@ -45,10 +45,8 @@ private:
 	StagePanel* m_stage;
 
 	sm::vec2 m_first_pos, m_curr_pos;
-	bool m_first_pos_valid, m_curr_pos_valid;
 
 	sm::vec2 m_captured;
-	bool m_captured_valid;
 
 	RectMgr::Node m_node_selected;
 	sm::rect* m_rect_selected;

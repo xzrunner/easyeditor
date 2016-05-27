@@ -16,10 +16,10 @@ RectCutOP::RectCutOP(RectCutCMPT* cmpt, StagePanel* stage)
 	, m_cmpt(cmpt)
 	, m_stage(stage)
 	, m_rect_selected(NULL)
-	, m_first_pos_valid(false)
-	, m_curr_pos_valid(false)
-	, m_captured_valid(false)
 {
+	m_first_pos.MakeInvalid();
+	m_curr_pos.MakeInvalid();
+	m_captured.MakeInvalid();
 }
 
 bool RectCutOP::OnMouseLeftDown(int x, int y)
@@ -72,7 +72,6 @@ bool RectCutOP::OnMouseRightDown(int x, int y)
 	if (!m_stage->GetImage()) return false;
 
 	m_first_pos = m_stage->TransPosScrToProj(x, y);
-	m_first_pos_valid = true;
 	FixedPos(m_first_pos);
 
 	return false;
@@ -84,14 +83,13 @@ bool RectCutOP::OnMouseRightUp(int x, int y)
 
 	if (!m_stage->GetImage()) return false;
 
-	if (!m_first_pos_valid) {
+	if (!m_first_pos.IsValid()) {
 		return false;
 	}
 
 	const float RADIUS = 5;
 	// remove rect
 	m_curr_pos = m_stage->TransPosScrToProj(x, y);
-	m_curr_pos_valid = true;
 	if (ee::Math2D::GetDistance(m_curr_pos, m_first_pos) < RADIUS)
 	{
 		bool removed = m_rects.Remove(m_curr_pos);
@@ -99,8 +97,9 @@ bool RectCutOP::OnMouseRightUp(int x, int y)
 			m_node_selected.rect = NULL;
 			m_rect_selected = NULL;
 
-			m_first_pos_valid = false;
-			m_curr_pos_valid = false;
+			m_first_pos.MakeInvalid();
+			m_curr_pos.MakeInvalid();
+
 			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 	}
@@ -112,8 +111,9 @@ bool RectCutOP::OnMouseRightUp(int x, int y)
 		{
 			m_rects.Insert(sm::rect(m_first_pos, m_curr_pos));
 
-			m_first_pos_valid = false;
-			m_curr_pos_valid = false;
+			m_first_pos.MakeInvalid();
+			m_curr_pos.MakeInvalid();
+
 			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 	}
@@ -128,10 +128,8 @@ bool RectCutOP::OnMouseMove(int x, int y)
 	if (!m_stage->GetImage()) return false;
 
 	m_curr_pos = m_stage->TransPosScrToProj(x, y);
-	m_curr_pos_valid = true;
 	m_rect_selected = m_rects.QueryRect(m_curr_pos);
 	m_captured = m_rects.QueryNearestAxis(m_curr_pos);
-	m_captured_valid = true;
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	return false;
@@ -144,12 +142,10 @@ bool RectCutOP::OnMouseDrag(int x, int y)
 	if (!m_stage->GetImage()) return false;
 
 	// create rect
-	if (m_first_pos_valid)
+	if (m_first_pos.IsValid())
 	{
 		m_curr_pos = m_stage->TransPosScrToProj(x, y);
-		m_curr_pos_valid = true;
 		m_captured = m_rects.QueryNearestAxis(m_curr_pos);
-		m_captured_valid = true;
 
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
@@ -157,9 +153,7 @@ bool RectCutOP::OnMouseDrag(int x, int y)
 	else if (m_node_selected.rect)
 	{
 		m_curr_pos = m_stage->TransPosScrToProj(x, y);
-		m_curr_pos_valid = true;
 		m_captured = m_rects.QueryNearestAxis(m_curr_pos, m_node_selected.rect);
-		m_captured_valid = true;
 
 		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 		m_rects.MoveNode(m_node_selected, pos);
@@ -173,7 +167,6 @@ bool RectCutOP::OnMouseDrag(int x, int y)
 		sm::vec2 curr = m_stage->TransPosScrToProj(x, y);
 		m_rects.MoveRect(m_rect_selected, m_curr_pos, curr);
 		m_curr_pos = curr;
-		m_curr_pos_valid = true;
 
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
@@ -192,7 +185,7 @@ bool RectCutOP::OnDraw() const
 
 	m_rects.Draw();
 
-	if (m_first_pos_valid && m_curr_pos_valid)
+	if (m_first_pos.IsValid() && m_curr_pos.IsValid())
 	{
 		ee::RVG::Color(ee::LIGHT_RED);
 		ee::RVG::Rect(m_first_pos, m_curr_pos, false);
@@ -218,7 +211,8 @@ bool RectCutOP::Clear()
 {
 	if (ee::ZoomViewOP::Clear()) return true;
 
-	m_first_pos_valid = m_curr_pos_valid = false;
+	m_first_pos.MakeInvalid();
+	m_curr_pos.MakeInvalid();
 
 	m_rects.Clear();
 	m_rect_selected = NULL;
@@ -243,7 +237,7 @@ void RectCutOP::LoadImageFromFile(const std::string& filepath)
 
 void RectCutOP::DrawCaptureLine() const
 {
-	if (!m_curr_pos_valid || !m_captured_valid) return;
+	if (!m_curr_pos.IsValid() || !m_captured.IsValid()) return;
 
 	const float EDGE = 4096;
 //	if (m_captured.x != ee::FLT_INVALID)
@@ -288,19 +282,18 @@ void RectCutOP::FixedPos(sm::vec2& pos) const
 	pos.y = std::ceil(pos.y);
 
 	// to image
-	float w = m_stage->GetImage()->GetSymbol().GetSize().Width();
-	float h = m_stage->GetImage()->GetSymbol().GetSize().Height();
+	sm::vec2 sz = m_stage->GetImage()->GetSymbol().GetSize().Size();
 	if (pos.x < 0) {
 		pos.x = 0;
 	}
-	if (pos.x > w) {
-		pos.x = w;
+	if (pos.x > sz.x) {
+		pos.x = sz.x;
 	}
 	if (pos.y < 0) {
 		pos.y = 0;
 	}
-	if (pos.y > h) {
-		pos.y = h;
+	if (pos.y > sz.y) {
+		pos.y = sz.y;
 	}
 }
 

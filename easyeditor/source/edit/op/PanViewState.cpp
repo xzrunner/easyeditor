@@ -11,8 +11,8 @@ namespace ee
 
 PanViewState::PanViewState(EditPanelImpl* stage)
 	: m_stage(stage)
-	, m_last_pos_valid(false)
 {
+	m_last_pos.MakeInvalid();
 }
 
 PanViewState::~PanViewState()
@@ -32,19 +32,18 @@ void PanViewState::UnBind()
 bool PanViewState::OnMousePress(int x, int y)
 {
 	m_last_pos.Set(x, y);
-	m_last_pos_valid = true;
 	return false;
 }
 
 bool PanViewState::OnMouseRelease(int x, int y)
 {
-	m_last_pos_valid = false;
+	m_last_pos.MakeInvalid();
 	return false;
 }
 
 bool PanViewState::OnMouseDrag(int x, int y)
 {
-	if (!m_last_pos_valid) {
+	if (!m_last_pos.IsValid()) {
 		return false;
 	}
 

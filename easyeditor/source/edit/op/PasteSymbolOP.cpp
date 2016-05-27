@@ -16,8 +16,8 @@ PasteSymbolOP::PasteSymbolOP(wxWindow* wnd, EditPanelImpl* stage,
 	: ZoomViewOP(wnd, stage, true)
 	, m_library(library)
 	, m_scale(pScale)
-	, m_pos_valid(false)
 {
+	m_pos.MakeInvalid();
 	m_cursor = wxCursor(wxCURSOR_PAINT_BRUSH);
 }
 
@@ -29,7 +29,6 @@ bool PasteSymbolOP::OnMouseLeftDown(int x, int y)
 	if (symbol)
 	{
 		m_pos = m_stage->TransPosScrToProj(x, y);
-		m_pos_valid = true;
 		Sprite* sprite = SpriteFactory::Instance()->Create(symbol);
 		sprite->Translate(m_pos);
 		if (m_scale) {
@@ -47,7 +46,6 @@ bool PasteSymbolOP::OnMouseMove(int x, int y)
 	if (ZoomViewOP::OnMouseMove(x, y)) return true;
 
 	m_pos = m_stage->TransPosScrToProj(x, y);
-	m_pos_valid = true;
 	SetCanvasDirtySJ::Instance()->SetDirty();
 
 	return false;
@@ -58,7 +56,7 @@ bool PasteSymbolOP::OnDraw() const
 	if (ZoomViewOP::OnDraw()) return true;
 
 	Symbol* symbol = m_library->GetSymbol();
-	if (symbol && m_pos_valid)
+	if (symbol && m_pos.IsValid())
 	{
 		if (m_scale) {
 			SpriteRenderer::Draw(symbol, s2::RenderParams(), m_pos, 0.0f, *m_scale);
@@ -74,7 +72,7 @@ bool PasteSymbolOP::Clear()
 {
 	if (ZoomViewOP::Clear()) return true;
 
-	m_pos_valid = false;
+	m_pos.MakeInvalid();
 
 	return false;
 }

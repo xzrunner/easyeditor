@@ -25,7 +25,6 @@ private:
 	ecomplex::Sprite* m_spr;
 
 	sm::vec2 m_first_pos, m_last_pos;
-	bool m_last_pos_valid;
 
 	bool m_dirty;
 

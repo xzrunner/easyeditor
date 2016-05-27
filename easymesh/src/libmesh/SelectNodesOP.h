@@ -29,7 +29,6 @@ protected:
 
 private:
 	sm::vec2 m_first_pos;
-	bool m_first_pos_valid;
 
 	// To disable mouse able when press ctrl and window query
 	bool m_draggable;

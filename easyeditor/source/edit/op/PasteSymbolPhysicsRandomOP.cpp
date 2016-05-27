@@ -30,7 +30,6 @@ bool PasteSymbolPhysicsRandomOP::OnMouseLeftDown(int x, int y)
 	if (symbol) 
 	{
 		m_pos = m_stage->TransPosScrToProj(x, y);
-		m_pos_valid = true;
 
 		Sprite* sprite = SpriteFactory::Instance()->Create(symbol);
 		sprite->Translate(m_pos);
@@ -73,7 +72,7 @@ bool PasteSymbolPhysicsRandomOP::OnDraw() const
 	if (!symbol)  {
 		symbol = m_library->GetSymbol();
 	}
-	if (symbol && m_pos_valid) {
+	if (symbol && m_pos.IsValid()) {
 		SpriteRenderer::Draw(symbol, s2::RenderParams(), m_pos, m_random_value.angle, m_random_value.scale);
 	}
 

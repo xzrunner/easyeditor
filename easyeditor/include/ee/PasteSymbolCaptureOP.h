@@ -26,7 +26,6 @@ private:
 
 	bool m_bCaptured;
 	sm::vec2 m_last_pos;
-	bool m_last_pos_valid;
 
 }; // PasteSymbolCaptureOP
 

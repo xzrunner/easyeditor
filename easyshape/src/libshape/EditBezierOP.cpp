@@ -22,9 +22,10 @@ EditBezierOP::EditBezierOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiSha
 	, m_property(property)
 	, m_shapes_impl(shapes_impl)
 	, m_node_capture(node_capture)
-	, m_first_pos_valid(false)
-	, m_curr_pos_valid(false)
 {
+	m_first_pos.MakeInvalid();
+	m_curr_pos.MakeInvalid();
+
 	m_cursor = wxCursor(wxCURSOR_PENCIL);
 
 	Clear();
@@ -37,7 +38,7 @@ bool EditBezierOP::OnKeyDown(int keyCode)
 	if (keyCode == WXK_DELETE)
 	{
 		m_shapes_impl->ClearSelectedShape();
-		m_captured.clear();
+		m_captured.Clear();
 		ee::SelectShapeSJ::Instance()->Select(NULL);
 	}
 
@@ -49,7 +50,6 @@ bool EditBezierOP::OnMouseLeftDown(int x, int y)
 	if (ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	m_first_pos = m_curr_pos = m_stage->TransPosScrToProj(x, y);
-	m_first_pos_valid = m_curr_pos_valid = true;
 
 	m_shapes_impl->GetShapeSelection()->Clear();
 
@@ -66,7 +66,7 @@ bool EditBezierOP::OnMouseLeftDown(int x, int y)
 	}
 	else
 	{
-		m_captured.clear();
+		m_captured.Clear();
 	}
 
 	return false;
@@ -78,10 +78,9 @@ bool EditBezierOP::OnMouseLeftUp(int x, int y)
 
 	if (!m_captured.shape)
 	{
-		if (m_first_pos_valid)
+		if (m_first_pos.IsValid())
 		{
 			m_curr_pos = m_stage->TransPosScrToProj(x, y);
-			m_curr_pos_valid = true;
 
 			const float dis = ee::Math2D::GetDistance(m_first_pos, m_curr_pos);
 			if (dis > 1)
@@ -113,7 +112,6 @@ bool EditBezierOP::OnMouseRightDown(int x, int y)
 	if (tolerance != 0)
 	{
 		m_curr_pos = m_stage->TransPosScrToProj(x, y);
-		m_curr_pos_valid = true;
 
 		NodeCapture capture(m_shapes_impl, tolerance);
 		capture.captureEditable(m_curr_pos, m_captured);
@@ -121,13 +119,13 @@ bool EditBezierOP::OnMouseRightDown(int x, int y)
 		{
 			ee::RemoveShapeSJ::Instance()->Remove(m_captured.shape);
 			m_shapes_impl->GetShapeSelection()->Clear();
-			m_captured.clear();
+			m_captured.Clear();
 			ee::SelectShapeSJ::Instance()->Select(NULL);
 		}
 	}
 	else
 	{
-		m_captured.clear();
+		m_captured.Clear();
 	}
 
 	return false;
@@ -157,7 +155,6 @@ bool EditBezierOP::OnMouseDrag(int x, int y)
 	if (ZoomViewOP::OnMouseDrag(x, y)) return true;
 
 	m_curr_pos = m_stage->TransPosScrToProj(x, y);
-	m_curr_pos_valid = true;
 
 	if (m_captured.shape)
 	{
@@ -165,12 +162,11 @@ bool EditBezierOP::OnMouseDrag(int x, int y)
 		{
 			sm::vec2 center = bezier->GetRect().Center();
 
-			if (!m_captured.pos_valid) {
+			if (!m_captured.pos.IsValid()) {
 				bezier->Translate(m_curr_pos - center);
 			} else {
 				bezier->MoveCtrlNode(m_captured.pos, m_curr_pos);
 				m_captured.pos = m_curr_pos;
-				m_captured.pos_valid = true;
 			}
 
 			m_property->EnablePropertyGrid(false);
@@ -197,7 +193,7 @@ bool EditBezierOP::OnDraw() const
 				
 				ee::RVG::Color(s2::Color(102, 255, 102));
 				ee::RVG::Circle(c, tolerance, true);
-				if (m_captured.pos_valid) {
+				if (m_captured.pos.IsValid()) {
 					ee::RVG::Color(s2::Color(255, 102, 102));
 					ee::RVG::Circle(m_captured.pos, tolerance, true);
 				}
@@ -206,7 +202,7 @@ bool EditBezierOP::OnDraw() const
 	}
 	else
 	{
-		if (m_first_pos_valid && m_curr_pos_valid)
+		if (m_first_pos.IsValid() && m_curr_pos.IsValid())
 		{
 			BezierShape bezier(m_first_pos, m_curr_pos);
 			bezier.Draw(sm::mat4());
@@ -220,8 +216,8 @@ bool EditBezierOP::Clear()
 {
 	if (ZoomViewOP::Clear()) return true;
 
-	m_first_pos_valid = false;
-	m_curr_pos_valid = false;
+	m_first_pos.MakeInvalid();
+	m_curr_pos.MakeInvalid();
 
 	return false;
 }

@@ -55,9 +55,10 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(wxWindow* wnd, EditPanelImpl* stage,
 
 	m_selection = sprites_impl->GetSpriteSelection();
 	m_selection->Retain();
-	
-	m_left_pos_valid = m_right_pos_valid = false;
 
+	m_left_down_pos.MakeInvalid();
+	m_right_down_pos.MakeInvalid();
+	
 	m_ctrl_node_radius = CTRL_NODE_RADIUS;
 }
 
@@ -133,7 +134,6 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 {
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	m_left_down_pos = pos;
-	m_left_pos_valid = true;
 
 	m_align.SetInvisible();
 
@@ -251,7 +251,6 @@ void ArrangeSpriteImpl::OnMouseRightDown(int x, int y)
 {
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	m_right_down_pos = pos;
-	m_right_pos_valid = true;
 
 	Sprite* selected = NULL;
 	if (m_selection->Size() == 1)
@@ -288,7 +287,7 @@ void ArrangeSpriteImpl::OnMouseRightDown(int x, int y)
 
 void ArrangeSpriteImpl::OnMouseRightUp(int x, int y)
 {
-	if (!m_right_pos_valid) {
+	if (!m_right_down_pos.IsValid()) {
 		return;
 	}
 

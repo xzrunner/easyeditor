@@ -21,7 +21,7 @@ PasteSpriteOP::PasteSpriteOP(wxWindow* wnd, EditPanelImpl* stage,
 	m_selection = sprites_impl->GetSpriteSelection();
 	m_selection->Retain();
 
-	m_pos_valid = false;
+	m_pos.MakeInvalid();
 }
 
 PasteSpriteOP::~PasteSpriteOP()
@@ -107,7 +107,7 @@ bool PasteSpriteOP::OnDraw() const
 {
 	if (SelectSpritesOP::OnDraw()) return true;
 
-	if (m_pos_valid) {
+	if (m_pos.IsValid()) {
 		if (m_cmpt)
 			m_batch.Draw(m_pos, m_cmpt->isHorMirror(), m_cmpt->isVerMirror());
 		else
@@ -121,7 +121,8 @@ bool PasteSpriteOP::Clear()
 {
 	if (SelectSpritesOP::Clear()) return true;
 
-	m_pos_valid = false;
+	m_pos.MakeInvalid();
+
 	m_batch.Clear();
 
 	return false;
@@ -130,14 +131,13 @@ bool PasteSpriteOP::Clear()
 void PasteSpriteOP::setMousePos(int x, int y)
 {
 	m_pos = m_stage->TransPosScrToProj(x, y);
-	m_pos_valid = true;
 	if (m_stage->GetKeyState(WXK_SHIFT))
 		fixPosOrthogonal();
 }
 
 void PasteSpriteOP::fixPosOrthogonal()
 {
-	if (m_pos_valid && m_batch.IsCenterValid())
+	if (m_pos.IsValid() && m_batch.IsCenterValid())
 	{
 		const sm::vec2& center = m_batch.GetCenter();
 		if (fabs(m_pos.x - center.x) < fabs(m_pos.y - center.y))

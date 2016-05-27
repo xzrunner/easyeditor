@@ -18,8 +18,9 @@ EditPolylinesOP::EditPolylinesOP(wxWindow* wnd, ee::EditPanelImpl* stage,
 	: ee::SelectShapesOP(wnd, stage, shapes_impl, cmpt)
 	, m_cmpt(cmpt)
 	, m_is_dirty(false)
-	, m_last_pos_valid(false)
 {
+	m_last_pos.MakeInvalid();
+
 	clearBuffer();
 }
 
@@ -27,11 +28,10 @@ bool EditPolylinesOP::OnMouseLeftDown(int x, int y)
 {
 	if (ee::SelectShapesOP::OnMouseLeftDown(x, y)) return true;
 
-	if (!m_last_pos_valid) {
+	if (!m_last_pos.IsValid()) {
 		m_last_pos = m_stage->TransPosScrToProj(x, y);
-		m_last_pos_valid = true;
 	} else {
-		m_last_pos_valid = false;
+		m_last_pos.MakeInvalid();
 	}
 
 	return false;
@@ -51,13 +51,12 @@ bool EditPolylinesOP::OnMouseDrag(int x, int y)
 {
 	if (ee::SelectShapesOP::OnMouseDrag(x, y)) return true;
 
-	if (m_last_pos_valid)
+	if (m_last_pos.IsValid())
 	{
 		sm::vec2 curr_pos = m_stage->TransPosScrToProj(x, y);
 		sm::vec2 offset = curr_pos - m_last_pos;
 		m_selection->Traverse(OffsetVisitor(offset));
 		m_last_pos = curr_pos;
-		m_last_pos_valid = true;
 
 		m_is_dirty = true;
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();

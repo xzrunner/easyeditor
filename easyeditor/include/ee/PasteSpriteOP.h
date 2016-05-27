@@ -67,7 +67,6 @@ private:
 	SpriteSelection* m_selection;
 
 	sm::vec2 m_pos;
-	bool m_pos_valid;
 
 	SpriteBatch m_batch;
 

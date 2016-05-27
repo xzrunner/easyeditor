@@ -61,7 +61,6 @@ private:
 	std::map<ChainShape*, ChainShape*> m_simplify_buffer;
 
 	sm::vec2 m_last_pos;
-	bool m_last_pos_valid;
 
 	bool m_is_dirty;
 

@@ -38,7 +38,6 @@ private:
 
 protected:
 	sm::vec2 m_first_pos;
-	bool m_first_pos_valid;
 
 	ShapeSelection* m_selection;
 

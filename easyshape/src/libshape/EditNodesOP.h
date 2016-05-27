@@ -32,7 +32,6 @@ private:
 
 private:
 	sm::vec2 m_last_pos;
-	bool m_last_pos_valid;
 
 	std::vector<Modified> m_buffer;
 

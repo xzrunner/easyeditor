@@ -19,13 +19,16 @@ struct NodeAddr
 {
 	ee::Shape* shape;
 	sm::vec2 pos;
-	bool pos_valid;
 
-	NodeAddr() : shape(NULL) {}
+	NodeAddr() 
+		: shape(NULL) 
+	{
+		pos.MakeInvalid();
+	}
 
-	void clear() {
+	void Clear() {
 		shape = NULL;
-		pos_valid = false;
+		pos.MakeInvalid();
 	}
 };
 

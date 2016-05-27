@@ -30,7 +30,6 @@ private:
 	ee::PropertySettingPanel* m_property;
 
 	sm::vec2 m_first_pos;
-	bool m_first_pos_valid;
 
 	Fixture* m_selected;
 	Fixture* m_mouseOn;

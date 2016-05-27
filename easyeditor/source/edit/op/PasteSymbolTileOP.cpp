@@ -141,7 +141,7 @@ bool PasteSymbolTileOP::OnDraw() const
 	if (ZoomViewOP::OnDraw()) return true;
 
 	Symbol* symbol = m_library->GetSymbol();
-	if (symbol && m_pos_valid)
+	if (symbol && m_pos.IsValid())
 	{
 		if (m_scale) {
 			SpriteRenderer::Draw(symbol, s2::RenderParams(), m_pos, m_rotate, *m_scale);

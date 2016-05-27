@@ -29,7 +29,6 @@ private:
 	sm::vec2* m_selected;
 
 	sm::vec2 m_last_right;
-	bool m_last_right_valid;
 
 }; // CreateStripOP
 

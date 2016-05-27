@@ -29,8 +29,9 @@ SelectSpritesOP::SelectSpritesOP(wxWindow* wnd, EditPanelImpl* stage,
 	, m_spritesImpl(sprites_impl)
 	, m_draggable(true)
 	, m_rect_select(false)
-	, m_left_first_pos_valid(false)
 {
+	m_left_first_pos.MakeInvalid();
+
 	m_selection = sprites_impl->GetSpriteSelection();
 	m_selection->Retain();
 }
@@ -121,7 +122,7 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 				SelectSpriteSJ::Instance()->Select(selected, true);
 			}
 		}
-		m_left_first_pos_valid = false;
+		m_left_first_pos.MakeInvalid();
 
 		if (m_callback)
 			m_callback->UpdateControlValue();
@@ -131,10 +132,9 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 		DrawSelectRectOP::OnMouseLeftDown(x, y);
 
 		if (m_stage->GetKeyState(WXK_SPACE)) {
-			m_left_first_pos_valid = false;
+			m_left_first_pos.MakeInvalid();
 		} else {
 			m_left_first_pos = pos;
-			m_left_first_pos_valid = true;
 		}
 
 		if (m_stage->GetKeyState(WXK_CONTROL)) {
@@ -154,7 +154,7 @@ bool SelectSpritesOP::OnMouseLeftUp(int x, int y)
 
 	m_draggable = true;
 
-	if (!m_left_first_pos_valid) {
+	if (!m_left_first_pos.IsValid()) {
 		return false;
 	}
 
@@ -183,7 +183,7 @@ bool SelectSpritesOP::OnMouseLeftUp(int x, int y)
 
 	SelectSpriteSetSJ::Instance()->Select(m_selection, m_spritesImpl);
 
-	m_left_first_pos_valid = false;
+	m_left_first_pos.MakeInvalid();
 
 	if (m_callback) {
 		m_callback->UpdateControlValue();
@@ -246,7 +246,7 @@ bool SelectSpritesOP::Clear()
 	m_selection->Clear();
 	ClearSpriteSelectionSJ::Instance()->Clear();
 
-	m_left_first_pos_valid = false;
+	m_left_first_pos.MakeInvalid();
 
 	return false;
 }

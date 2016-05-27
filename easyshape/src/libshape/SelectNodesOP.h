@@ -82,7 +82,6 @@ private:
 	ee::MultiShapesImpl* m_shape_impl;
 
 	sm::vec2 m_first_pos;
-	bool m_first_pos_valid;
 	
 }; // SelectNodesOP
 

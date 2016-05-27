@@ -101,27 +101,25 @@ void ExtractOutlineRaw::CreateBorderLine()
 	// find start, downmost and leftmost
 	bool* flag = new bool[m_width * m_height];
 	sm::vec2 first;
-	bool first_valid = false;
+	first.MakeInvalid();
 	for (int y = 0; y < m_height; ++y) {
 		for (int x = 0; x < m_width; ++x) {
 			bool is_border = IsPixelBorder(x, y);
 			flag[m_width*y+x] = is_border;
 			if (is_border) {
-				if (first_valid) {
+				if (first.IsValid()) {
 					if (y < first.y || y == first.y && x < first.x) {
 						first.Set(static_cast<float>(x), static_cast<float>(y));
-						first_valid = true;
 					}
 				} else {
 					first.Set(static_cast<float>(x), static_cast<float>(y));
-					first_valid = true;
 				}
 			}
 		}
 	}
 
 	sm::vec2 curr_pos = first;
-	bool curr_valid = first_valid;
+	bool curr_valid = first.IsValid();
 	int curr_dir = -1;
 	while (curr_valid) 
 	{

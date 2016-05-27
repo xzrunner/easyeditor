@@ -20,8 +20,8 @@ SelectNodesOP::SelectNodesOP(wxWindow* wnd, ee::EditPanelImpl* stage,
 							 ee::EditCMPT* callback /*= NULL*/)
 	: DrawRectangleOP(wnd, stage)
 	, m_shape_impl(shapes_impl)
-	, m_first_pos_valid(false)
 {
+	m_first_pos.MakeInvalid();
 }
 
 SelectNodesOP::~SelectNodesOP()
@@ -109,13 +109,12 @@ bool SelectNodesOP::OnMouseLeftDown(int x, int y)
 				delete selected;
 		}
 
-		m_first_pos_valid = false;
+		m_first_pos.MakeInvalid();
 	}
 	else
 	{
 		DrawRectangleOP::OnMouseLeftDown(x, y);
 		m_first_pos = pos;
-		m_first_pos_valid = true;
 		if (!m_stage->GetKeyState(WXK_CONTROL))
 			ClearSelectedNodes();
 
@@ -128,12 +127,12 @@ bool SelectNodesOP::OnMouseLeftUp(int x, int y)
 {
 	if (DrawRectangleOP::OnMouseLeftUp(x, y)) return true;
 
-	if (m_first_pos_valid)
+	if (m_first_pos.IsValid())
 	{
 		sm::rect rect(m_first_pos, m_stage->TransPosScrToProj(x, y));
 		m_shape_impl->TraverseShapes(RectQueryVisitor(rect, m_node_selection), 
 			ee::DT_SELECTABLE);
-		m_first_pos_valid = false;
+		m_first_pos.MakeInvalid();
 	}
 
 	return false;
@@ -168,7 +167,7 @@ bool SelectNodesOP::Clear()
 	if (DrawRectangleOP::Clear()) return true;
 
 	ClearSelectedNodes();
-	m_first_pos_valid = false;
+	m_first_pos.MakeInvalid();
 
 	return false;
 }
@@ -255,7 +254,11 @@ PosQueryVisitor(const sm::vec2& pos, ChainSelectedNodes** result)
 void SelectNodesOP::PosQueryVisitor::
 Visit(Object* object, bool& next)
 {
-	PolylineShape* polyline = static_cast<PolylineShape*>(object);
+	PolylineShape* polyline = dynamic_cast<PolylineShape*>(object);
+	if (!polyline) {
+		next = true;
+		return;
+	}
 
 	if (ee::Math2D::IsRectIntersectRect(polyline->GetRect(), m_rect))
 	{
@@ -292,7 +295,11 @@ RectQueryVisitor(const sm::rect& rect, std::vector<ChainSelectedNodes*>& result)
 void SelectNodesOP::RectQueryVisitor::
 Visit(Object* object, bool& next)
 {
-	PolylineShape* polyline = static_cast<PolylineShape*>(object);
+	PolylineShape* polyline = dynamic_cast<PolylineShape*>(object);
+	if (!polyline) {
+		next = true;
+		return;
+	}
 
 	if (ee::Math2D::IsRectIntersectRect(polyline->GetRect(), m_rect))
 	{

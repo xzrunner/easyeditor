@@ -5,13 +5,16 @@
 #include <ee/panel_msg.h>
 #include <ee/EE_RVG.h>
 
+#include <sprite2/Color.h>
+
 namespace eshape
 {
 
 DrawPolylineOP::DrawPolylineOP(wxWindow* wnd, ee::EditPanelImpl* stage, bool isClosed)
 	: ee::ZoomViewOP(wnd, stage, true, false)
-	, m_curr_pos_valid(false)
 {
+	m_curr_pos.MakeInvalid();
+
 	m_cursor = wxCursor(wxCURSOR_RIGHT_ARROW);
 
 	m_is_closed = isClosed;
@@ -38,7 +41,9 @@ bool DrawPolylineOP::OnMouseRightDown(int x, int y)
 	if (!m_polyline.empty())
 	{
 		m_polyline.pop_back();
-		if (m_polyline.empty()) m_curr_pos_valid = false;
+		if (m_polyline.empty()) {
+			m_curr_pos.MakeInvalid();
+		}
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
@@ -56,7 +61,6 @@ bool DrawPolylineOP::OnMouseMove(int x, int y)
 		pos = DrawLineUtility::FixPosTo8DirStraight(m_polyline.back(), pos);
 	}
 	m_curr_pos = pos;
-	m_curr_pos_valid = true;
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	return false;
@@ -80,7 +84,7 @@ bool DrawPolylineOP::OnDraw() const
 	if (!m_polyline.empty())
 	{
 		ee::RVG::Color(s2::Color(0, 0, 0));
-		if (m_curr_pos_valid)
+		if (m_curr_pos.IsValid())
 		{
 			m_polyline.push_back(m_curr_pos);
 			ee::RVG::Polyline(m_polyline, false);
@@ -100,7 +104,7 @@ bool DrawPolylineOP::Clear()
 	if (ee::ZoomViewOP::Clear()) return true;
 
 	m_polyline.clear();
-	m_curr_pos_valid = false;
+	m_curr_pos.MakeInvalid();
 
 	return false;
 }

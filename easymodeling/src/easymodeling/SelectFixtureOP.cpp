@@ -18,8 +18,8 @@ SelectFixtureOP::SelectFixtureOP(StagePanel* editPanel, ee::PropertySettingPanel
 	, m_mouseOn(NULL)
 	, m_stagePanel(editPanel)
 	, m_property(property)
-	, m_first_pos_valid(false)
 {
+	m_first_pos.MakeInvalid();
 }
 
 SelectFixtureOP::~SelectFixtureOP()
@@ -53,7 +53,6 @@ bool SelectFixtureOP::OnMouseLeftDown(int x, int y)
 		{
 			ee::DrawRectangleOP::OnMouseLeftDown(x, y);
 			m_first_pos = pos;
-			m_first_pos_valid = true;
 			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 	}
@@ -69,7 +68,7 @@ bool SelectFixtureOP::OnMouseLeftUp(int x, int y)
 {
 	if (ee::DrawRectangleOP::OnMouseLeftUp(x, y)) return true;
 
-	if (m_first_pos_valid)
+	if (m_first_pos.IsValid())
 	{
 		sm::rect rect(m_first_pos, m_stage->TransPosScrToProj(x, y));
 		std::vector<ee::Sprite*> sprites;
@@ -94,7 +93,7 @@ bool SelectFixtureOP::OnMouseLeftUp(int x, int y)
 		else
 			m_property->SetPropertySetting(new WorldPropertySetting(m_stage));
 
-		m_first_pos_valid = false;
+		m_first_pos.MakeInvalid();
 	}
 
 	return false;
@@ -145,7 +144,7 @@ bool SelectFixtureOP::Clear()
 {
 	if (ee::DrawRectangleOP::Clear()) return true;
 
-	m_first_pos_valid = false;
+	m_first_pos.MakeInvalid();
 
 	m_selected = m_mouseOn = NULL;
 

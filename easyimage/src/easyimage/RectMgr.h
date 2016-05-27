@@ -2,6 +2,7 @@
 #define _EASYIMAGE_RECT_MGR_H_
 
 #include <SM_Vector.h>
+#include <SM_Rect.h>
 
 #include <json/json.h>
 

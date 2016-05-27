@@ -29,7 +29,6 @@ protected:
 
 private:
 	sm::vec2 m_first_pos;
-	bool m_first_pos_valid;
 
 	bool m_start_draw;
 

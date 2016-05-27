@@ -34,7 +34,6 @@ private:
 	NodeAddr m_captured;
 
 	sm::vec2 m_pos;
-	bool m_pos_valid;
 
 }; // EditPointOP
 

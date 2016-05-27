@@ -74,7 +74,6 @@ private:
 
 		float m_dis;
 		sm::vec2 m_nearest;
-		bool m_nearest_valid;
 
 	}; // NearestNodeVisitor
 
@@ -102,7 +101,6 @@ protected:
 
 private:
 	sm::vec2 m_last_left_down_pos;
-	bool m_last_left_down_pos_valid;
 
 	bool m_is_select_open;
 

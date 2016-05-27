@@ -28,7 +28,6 @@ protected:
 	float* m_scale;
 
 	sm::vec2 m_pos;
-	bool m_pos_valid;
 
 }; // PasteSymbolOP
 
