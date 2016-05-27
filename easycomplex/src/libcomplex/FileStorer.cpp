@@ -5,7 +5,7 @@
 #include <ee/Exception.h>
 #include <ee/Sprite.h>
 
-#include <sprite2/Sprite.h>
+#include <sprite2/S2_Sprite.h>
 
 #include <fstream>
 

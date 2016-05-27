@@ -14,7 +14,7 @@
 #include <ee/sprite_msg.h>
 #include <ee/subject_id.h>
 
-#include <sprite2/Sprite.h>
+#include <sprite2/S2_Sprite.h>
 
 namespace ee { extern StageModule MODULE_STAGE; }
 

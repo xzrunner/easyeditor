@@ -4,7 +4,7 @@
 #include <ee/SpriteFactory.h>
 #include <ee/trans_color.h>
 
-#include <sprite2/TextSprite.h>
+#include <sprite2/TextboxSprite.h>
 
 namespace etext
 {
@@ -12,7 +12,7 @@ namespace etext
 Sprite::Sprite()
 	: m_symbol(NULL)
 {
-	m_core = new s2::TextSprite(this);
+	m_core = new s2::TextboxSprite(this);
 
 	m_width = 100;
 	m_height = 20;
@@ -38,7 +38,7 @@ Sprite::Sprite(const Sprite& sprite)
 	: ee::Sprite(sprite)
 	, m_symbol(sprite.m_symbol)
 {
-	m_core = new s2::TextSprite(*static_cast<s2::TextSprite*>(sprite.m_core));
+	m_core = new s2::TextboxSprite(*static_cast<s2::TextboxSprite*>(sprite.m_core));
 
 	m_symbol->Retain();
 
@@ -65,7 +65,7 @@ Sprite::Sprite(const Sprite& sprite)
 Sprite::Sprite(Symbol* symbol)
 	: m_symbol(symbol)
 {
-	m_core = new s2::TextSprite(this);
+	m_core = new s2::TextboxSprite(this);
 
 	m_symbol->Retain();
 

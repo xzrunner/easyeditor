@@ -25,7 +25,7 @@
 #include "ImageTrim.h"
 
 #include <shaderlab.h>
-#include <sprite2/Sprite.h>
+#include <sprite2/S2_Sprite.h>
 #include <sprite2/Texture.h>
 
 namespace ee

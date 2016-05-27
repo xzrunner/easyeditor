@@ -11,7 +11,7 @@
 #include <easyterrain2d.h>
 #include <easycomplex.h>
 
-#include <sprite2/Sprite.h>
+#include <sprite2/S2_Sprite.h>
 
 namespace lr
 {

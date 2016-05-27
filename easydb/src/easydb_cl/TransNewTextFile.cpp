@@ -7,7 +7,7 @@
 #include <easycomplex.h>
 #include <easytext.h>
 
-#include <sprite2/Sprite.h>
+#include <sprite2/S2_Sprite.h>
 
 namespace edb
 {

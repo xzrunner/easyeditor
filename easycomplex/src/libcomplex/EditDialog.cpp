@@ -11,7 +11,7 @@
 #include <ee/SpriteFactory.h>
 #include <ee/Sprite.h>
 
-#include <sprite2/Sprite.h>
+#include <sprite2/S2_Sprite.h>
 
 #include <wx/splitter.h>
 
