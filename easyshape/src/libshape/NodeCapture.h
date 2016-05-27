@@ -11,8 +11,8 @@ namespace eshape
 
 class PointShape;
 class BezierShape;
-class ChainShape;
 class CircleShape;
+class PolylineShape;
 class RectShape;
 
 struct NodeAddr
@@ -48,7 +48,7 @@ private:
 	private:
 		bool Visit(PointShape* point);
 		bool Visit(BezierShape* bezier);
-		bool Visit(ChainShape* chain);
+		bool Visit(PolylineShape* polyline);
 		bool Visit(CircleShape* circle);
 		bool Visit(RectShape* rect);
 

@@ -16,8 +16,6 @@ bool DrawCosineCurveOP::OnMouseLeftDClick(int x, int y)
 	if (DrawPolylineOP::OnMouseLeftDClick(x, y)) return true;
 
 	CosineShape* curve = new CosineShape(m_polyline);
-	curve->setMidPoints();
-
 	ee::InsertShapeSJ::Instance()->Insert(curve);
 	curve->Release();
 

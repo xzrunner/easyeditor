@@ -2,9 +2,9 @@
 #include "ShapeType.h"
 
 #include "PointShape.h"
-#include "BezierShape.h"
-#include "ChainShape.h"
 #include "CircleShape.h"
+#include "BezierShape.h"
+#include "PolylineShape.h"
 #include "CosineShape.h"
 #include "PolygonShape.h"
 #include "RectShape.h"
@@ -65,7 +65,7 @@ Visit(ee::Object* object, bool& next)
 		next = !Visit(static_cast<BezierShape*>(shape));
 		break;
 	case ST_CHAIN: case ST_POLYGON: case ST_COMPLEX_POLYGON: case ST_COSINE_CURVE:
-		next = !Visit(static_cast<ChainShape*>(shape));
+		next = !Visit(static_cast<PolylineShape*>(shape));
 		break;
 	case ST_CIRCLE:
 		next = !Visit(static_cast<CircleShape*>(shape));
@@ -102,7 +102,7 @@ Visit(BezierShape* bezier)
 
 	// capture control points
 	const sm::vec2* ctrl_nodes = bezier->GetCtrlNodes();
-	for (int i = 0; i < BezierShape::CTRL_NODE_COUNT; ++i) {
+	for (int i = 0; i < s2::BezierShape::CTRL_NODE_COUNT; ++i) {
 		if (ee::Math2D::GetDistance(ctrl_nodes[i], m_pos) < m_tolerance) {
 			m_result.shape = bezier;
 			m_result.pos = ctrl_nodes[i];
@@ -115,30 +115,30 @@ Visit(BezierShape* bezier)
 }
 
 bool NodeCapture::RectQueryVisitor::
-Visit(ChainShape* chain)
+Visit(PolylineShape* polyline)
 {
 	// capture center
-	const sm::rect& rect = chain->GetRect();
+	const sm::rect& rect = polyline->GetRect();
 	if (ee::Math2D::GetDistance(rect.Center(), m_pos) < m_tolerance)
 	{
-		m_result.shape = chain;
+		m_result.shape = polyline;
 		m_result.pos_valid = false;
 		return true;
 	}
 
 	// capture control points
-	if (!ee::Math2D::IsRectIntersectRect(m_rect, chain->GetRect()))
+	if (!ee::Math2D::IsRectIntersectRect(m_rect, polyline->GetRect()))
 		return false;
 
-	if (!chain->IsIntersect(m_rect)) 
+	if (!polyline->IsIntersect(m_rect)) 
 		return false;
 
-	const std::vector<sm::vec2>& vertices = chain->GetVertices();
+	const std::vector<sm::vec2>& vertices = polyline->GetVertices();
 	for (size_t i = 0, n = vertices.size(); i < n; ++i)
 	{
 		if (ee::Math2D::GetDistance(vertices[i], m_pos) < m_tolerance)
 		{
-			m_result.shape = chain;
+			m_result.shape = polyline;
 			m_result.pos = vertices[i];
 			m_result.pos_valid = true;
 			return true;

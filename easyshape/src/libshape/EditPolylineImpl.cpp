@@ -52,7 +52,7 @@ bool EditPolylineImpl::OnKeyDown(int keyCode)
 {
 	if (keyCode == WXK_DELETE)
 	{
-		m_capturedEditable.clear();
+		m_captured_editable.clear();
 		m_captureSelectable.clear();
 	}
 	return m_selectOP->OnKeyDown(keyCode);
@@ -71,20 +71,20 @@ bool EditPolylineImpl::OnMouseLeftDown(int x, int y)
 		{	
 			NodeCapture capture(m_shapes_impl, tolerance);
 			sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-			capture.captureEditable(pos, m_capturedEditable);
-			if (!m_capturedEditable.shape)
+			capture.captureEditable(pos, m_captured_editable);
+			if (!m_captured_editable.shape)
 				capture.captureSelectable(pos, m_captureSelectable);
 		}
 
-		if (m_capturedEditable.shape)
+		if (m_captured_editable.shape)
 		{
 			// 			sm::vec2 screen = m_stage->transPosProjectToScreen(m_capturedEditable.pos);
 			// 			bNotDeliver = m_draw_op->OnMouseLeftDown(screen.x, screen.y);
 
-			if (m_capturedEditable.pos_valid)
-				m_draw_op->m_polyline.push_back(m_capturedEditable.pos);
+			if (m_captured_editable.pos_valid)
+				m_draw_op->m_polyline.push_back(m_captured_editable.pos);
 
-			checkActiveShape(m_capturedEditable);
+			checkActiveShape(m_captured_editable);
 		}
 		else if (m_captureSelectable.shape)
 		{
@@ -105,13 +105,13 @@ bool EditPolylineImpl::OnMouseLeftDown(int x, int y)
 				sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 				InterruptChainVisitor interrupt(pos, tolerance);
 				m_shapes_impl->TraverseShapes(interrupt, ee::DT_EDITABLE);
-				if (interrupt.getInterruptedChain())
+				if (interrupt.GetInterruptedPolyline())
 				{
-					m_capturedEditable.shape = interrupt.getInterruptedChain();
-					m_capturedEditable.pos = pos;
+					m_captured_editable.shape = interrupt.GetInterruptedPolyline();
+					m_captured_editable.pos = pos;
 					ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
-					checkActiveShape(m_capturedEditable);
+					checkActiveShape(m_captured_editable);
 				}
 				else
 				{
@@ -141,26 +141,25 @@ bool EditPolylineImpl::OnMouseLeftUp(int x, int y)
 		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 		NearestNodeVisitor nearest(pos, tolerance);
 		m_shapes_impl->TraverseShapes(nearest, ee::DT_VISIBLE);
-		float dis = ee::Math2D::GetDistance(nearest.getNearestNode(), pos);
+		float dis = ee::Math2D::GetDistance(nearest.GetNearestNode(), pos);
 		if (dis < tolerance)
 		{
-			if (m_capturedEditable.shape)
+			if (m_captured_editable.shape)
 			{
-				ChainShape* chain = dynamic_cast<ChainShape*>(m_capturedEditable.shape);
-				chain->Change(m_capturedEditable.pos, nearest.getNearestNode());
-				chain->refresh();
+				PolylineShape* polyline = dynamic_cast<PolylineShape*>(m_captured_editable.shape);
+				polyline->ChangeVertex(m_captured_editable.pos, nearest.GetNearestNode());
 				m_dirty = true;
-				m_capturedEditable.pos = nearest.getNearestNode();
+				m_captured_editable.pos = nearest.GetNearestNode();
 				ee::SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		}
 
-		if (m_capturedEditable.shape)
+		if (m_captured_editable.shape)
 		{
 			if (m_property) {
 				m_property->EnablePropertyGrid(true);
 			}
-			checkActiveShape(m_capturedEditable);
+			checkActiveShape(m_captured_editable);
 		}
 	}
 
@@ -183,26 +182,25 @@ bool EditPolylineImpl::OnMouseRightDown(int x, int y)
 		if (tolerance != 0)
 		{
 			NodeCapture capture(m_shapes_impl, tolerance);
-			capture.captureEditable(m_stage->TransPosScrToProj(x, y), m_capturedEditable);
-			if (m_capturedEditable.shape)
+			capture.captureEditable(m_stage->TransPosScrToProj(x, y), m_captured_editable);
+			if (m_captured_editable.shape)
 			{
-				if (m_capturedEditable.pos_valid)
+				if (m_captured_editable.pos_valid)
 				{
-					ChainShape* chain = dynamic_cast<ChainShape*>(m_capturedEditable.shape);
-					chain->Remove(m_capturedEditable.pos);
-					chain->refresh();
+					PolylineShape* polyline = dynamic_cast<PolylineShape*>(m_captured_editable.shape);
+					polyline->RemoveVertex(m_captured_editable.pos);
 					m_dirty = true;
 				}
 				else
 				{
-					ee::RemoveShapeSJ::Instance()->Remove(m_capturedEditable.shape);
+					ee::RemoveShapeSJ::Instance()->Remove(m_captured_editable.shape);
 					m_shapes_impl->GetShapeSelection()->Clear();
-					m_capturedEditable.clear();
+					m_captured_editable.clear();
 					m_captureSelectable.clear();
 					m_dirty = true;
 					ee::SelectShapeSJ::Instance()->Select(NULL);
 				}
-				m_capturedEditable.shape = NULL;
+				m_captured_editable.shape = NULL;
 				ee::SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		}
@@ -223,9 +221,9 @@ bool EditPolylineImpl::OnMouseMove(int x, int y)
 		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 		NodeCapture capture(m_shapes_impl, tolerance);
 		{
-			ee::Shape* old = m_capturedEditable.shape;
-			capture.captureEditable(pos, m_capturedEditable);
-			if (old && !m_capturedEditable.shape || !old && m_capturedEditable.shape) {
+			ee::Shape* old = m_captured_editable.shape;
+			capture.captureEditable(pos, m_captured_editable);
+			if (old && !m_captured_editable.shape || !old && m_captured_editable.shape) {
 				ee::SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		}
@@ -245,11 +243,11 @@ bool EditPolylineImpl::OnMouseDrag(int x, int y)
 {
 	if (m_is_select_open)
 		m_selectOP->OnMouseDrag(x, y);
-	else if (m_capturedEditable.shape)
+	else if (m_captured_editable.shape)
 	{
 		if (m_draw_op->m_polyline.size() > 1)
 		{
-			m_capturedEditable.shape = NULL;
+			m_captured_editable.shape = NULL;
 			return false;
 		}
 
@@ -257,20 +255,19 @@ bool EditPolylineImpl::OnMouseDrag(int x, int y)
 			m_draw_op->m_polyline.clear();
 
 		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-		if (ChainShape* chain = dynamic_cast<ChainShape*>(m_capturedEditable.shape))
+		if (PolylineShape* polyline = dynamic_cast<PolylineShape*>(m_captured_editable.shape))
 		{
-			if (m_capturedEditable.pos_valid)
+			if (m_captured_editable.pos_valid)
 			{
-				chain->Change(m_capturedEditable.pos, pos);
-				m_capturedEditable.pos = pos;
+				polyline->ChangeVertex(m_captured_editable.pos, pos);
+				m_captured_editable.pos = pos;
 			}
 			else
 			{
-				sm::vec2 old = chain->GetRect().Center();
-				chain->Translate(pos - old);
+				sm::vec2 old = polyline->GetRect().Center();
+				polyline->Translate(pos - old);
 			}
 
-			chain->refresh();
 			m_dirty = true;
 			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
@@ -297,8 +294,8 @@ void EditPolylineImpl::OnDraw() const
 	m_selectOP->OnDraw();
 	if (m_node_capture)
 	{
-		if (m_capturedEditable.shape) {
-			drawCaptured(m_capturedEditable);
+		if (m_captured_editable.shape) {
+			drawCaptured(m_captured_editable);
 		} else if (m_captureSelectable.shape) {
 			drawCaptured(m_captureSelectable);
 		}
@@ -308,20 +305,20 @@ void EditPolylineImpl::OnDraw() const
 void EditPolylineImpl::Clear()
 {
 	m_selectOP->Clear();
-	m_capturedEditable.shape = NULL;
+	m_captured_editable.shape = NULL;
 	m_captureSelectable.shape = NULL;
 }
 
 void EditPolylineImpl::drawCaptured(const NodeAddr& captured) const
 {
-	if (ChainShape* chain = dynamic_cast<ChainShape*>(captured.shape))
+	if (PolylineShape* polyline = dynamic_cast<PolylineShape*>(captured.shape))
 	{
 		if (captured.pos_valid) {
 			ee::RVG::Color(s2::Color(255, 102, 102));
 			ee::RVG::Circle(captured.pos, m_node_capture->GetValue(), true);
 		}
 
-		sm::vec2 center = chain->GetRect().Center();
+		sm::vec2 center = polyline->GetRect().Center();
 		ee::RVG::Color(s2::Color(102, 255, 102));
 		ee::RVG::Circle(center, m_node_capture->GetValue(), true);
 	}
@@ -342,9 +339,9 @@ void EditPolylineImpl::checkActiveShape(const NodeAddr& captured)
 
 EditPolylineImpl::InterruptChainVisitor::
 InterruptChainVisitor(const sm::vec2& pos, int tol)
-: m_pos(pos)
-, m_tol(tol)
-, m_chain(NULL)
+	: m_pos(pos)
+	, m_tol(tol)
+	, m_polyline(NULL)
 {
 }
 
@@ -353,30 +350,30 @@ Visit(ee::Object* object, bool& next)
 {
 	sm::rect rect(m_pos, m_tol, m_tol);
 
-	ChainShape* chain = static_cast<ChainShape*>(object);
-	if (!chain->IsIntersect(rect)) 
+	PolylineShape* polyline = static_cast<PolylineShape*>(object);
+	if (!polyline->IsIntersect(rect)) 
 	{
 		next = true;
 		return;
 	}
 
-	size_t iPos;
-	const std::vector<sm::vec2>& vertices = chain->GetVertices();
-	float dis = ee::Math2D::GetDisPointToPolyline(m_pos, vertices, &iPos);
+	size_t idx;
+	const std::vector<sm::vec2>& vertices = polyline->GetVertices();
+	float dis = ee::Math2D::GetDisPointToPolyline(m_pos, vertices, &idx);
 	if (dis < m_tol)
 	{
-		chain->Add(iPos + 1, m_pos);
-		m_chain = chain;
+		polyline->AddVertex(idx + 1, m_pos);
+		m_polyline = polyline;
 		next = false;
 		return;
 	}
-	else if (chain->IsClosed() && vertices.size() > 1)
+	else if (polyline->IsClosed() && vertices.size() > 1)
 	{
 		float dis = ee::Math2D::GetDisPointToSegment(m_pos, vertices.front(), vertices.back());
 		if (dis < m_tol)
 		{
-			chain->Add(vertices.size(), m_pos);
-			m_chain = chain;
+			polyline->AddVertex(vertices.size(), m_pos);
+			m_polyline = polyline;
 			next = false;
 			return;
 		}
@@ -401,8 +398,8 @@ NearestNodeVisitor(const sm::vec2& pos, int tol)
 void EditPolylineImpl::NearestNodeVisitor::
 Visit(ee::Object* object, bool& next)
 {
-	ChainShape* chain = dynamic_cast<ChainShape*>(object);
-	if (!chain) 
+	PolylineShape* polyline = dynamic_cast<PolylineShape*>(object);
+	if (!polyline) 
 	{
 		next = true;
 		return;
@@ -410,13 +407,13 @@ Visit(ee::Object* object, bool& next)
 
 	sm::rect rect(m_pos, m_tol, m_tol);
 
-	if (!chain->IsIntersect(rect)) 
+	if (!polyline->IsIntersect(rect)) 
 	{
 		next = true;
 		return;
 	}
 
-	const std::vector<sm::vec2>& vertices = chain->GetVertices();
+	const std::vector<sm::vec2>& vertices = polyline->GetVertices();
 	for (size_t i = 0, n = vertices.size(); i < n; ++i)
 	{
 		float dis = ee::Math2D::GetDistance(m_pos, vertices[i]);

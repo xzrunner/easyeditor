@@ -5,7 +5,7 @@
 #include "BezierShape.h"
 #include "ChainShape.h"
 #include "CircleShape.h"
-#include "ComplexPolygonShape.h"
+//#include "ComplexPolygonShape.h"
 #include "CosineShape.h"
 #include "PolygonShape.h"
 #include "RectShape.h"
@@ -34,9 +34,9 @@ ee::Shape* ShapeFactory::CreateShapeFromFile(const Json::Value& value,
 	case ST_CIRCLE:
 		shape = new CircleShape;
 		break;
-	case ST_COMPLEX_POLYGON:
-		shape = new ComplexPolygonShape;
-		break;
+// 	case ST_COMPLEX_POLYGON:
+// 		shape = new ComplexPolygonShape;
+// 		break;
 	case ST_COSINE_CURVE:
 		shape = new CosineShape;
 		break;

@@ -196,102 +196,106 @@
 				Name="shape"
 				>
 				<File
-					RelativePath="..\..\..\src\libshape\BezierShape.cpp"
+					RelativePath="..\..\..\src\libshape\ShapeFactory.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libshape\BezierShape.h"
+					RelativePath="..\..\..\src\libshape\ShapeFactory.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libshape\BezierShapeNew.cpp"
+					RelativePath="..\..\..\src\libshape\ShapeType.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libshape\BezierShapNew.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libshape\ChainShape.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libshape\ChainShape.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libshape\ChainShapeNew.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libshape\ChainShapeNew.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libshape\CircleShape.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libshape\CircleShape.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libshape\ComplexPolygonShape.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libshape\ComplexPolygonShape.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libshape\CosineShape.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libshape\CosineShape.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libshape\PointShape.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libshape\PointShape.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libshape\PolygonShape.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libshape\PolygonShape.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libshape\RectShape.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libshape\RectShape.h"
+					RelativePath="..\..\..\src\libshape\ShapeType.h"
 					>
 				</File>
 				<Filter
-					Name="tools"
+					Name="polyline"
 					>
 					<File
-						RelativePath="..\..\..\src\libshape\ShapeFactory.cpp"
+						RelativePath="..\..\..\src\libshape\BezierShape.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\libshape\ShapeFactory.h"
+						RelativePath="..\..\..\src\libshape\BezierShape.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\libshape\ShapeType.cpp"
+						RelativePath="..\..\..\src\libshape\ChainShape.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\libshape\ShapeType.h"
+						RelativePath="..\..\..\src\libshape\ChainShape.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\ComplexPolygonShape.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\ComplexPolygonShape.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\CosineShape.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\CosineShape.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\PolygonShape.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\PolygonShape.h"
+						>
+					</File>
+					<Filter
+						Name="utility"
+						>
+						<File
+							RelativePath="..\..\..\src\libshape\PolylineEditor.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\libshape\PolylineEditor.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\libshape\PolylineShape.h"
+							>
+						</File>
+					</Filter>
+				</Filter>
+				<Filter
+					Name="primitive"
+					>
+					<File
+						RelativePath="..\..\..\src\libshape\CircleShape.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\CircleShape.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\PointShape.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\PointShape.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\RectShape.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\RectShape.h"
 						>
 					</File>
 				</Filter>

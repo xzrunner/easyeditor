@@ -1,35 +1,35 @@
 #include "EditNodesAtomicOP.h"
-#include "ChainShape.h"
+#include "PolylineShape.h"
 
 namespace eshape
 {
 namespace edit_nodes
 {
 
-ModifyNodesAOP::ModifyNodesAOP(const std::vector<ChainShape*>& chains, 
-							   const std::vector<std::vector<sm::vec2> >& dstChains)
+ModifyNodesAOP::ModifyNodesAOP(const std::vector<PolylineShape*>& polylines, 
+							   const std::vector<std::vector<sm::vec2> >& dst_polylines)
 {
-	m_chains.reserve(chains.size());
-	for (size_t i = 0, n = chains.size(); i < n; ++i)
+	m_polylines.reserve(polylines.size());
+	for (size_t i = 0, n = polylines.size(); i < n; ++i)
 	{
-		chains[i]->Retain();
-		m_chains.push_back(chains[i]);
+		polylines[i]->Retain();
+		m_polylines.push_back(polylines[i]);
 
-		m_src.push_back(chains[i]->GetVertices());
-		m_dst.push_back(dstChains[i]);
+		m_src.push_back(polylines[i]->GetVertices());
+		m_dst.push_back(dst_polylines[i]);
 	}
 }
 
 void ModifyNodesAOP::Undo()
 {
-	for (size_t i = 0, n = m_chains.size(); i< n; ++i)
-		m_chains[i]->Load(m_src[i]);
+	for (size_t i = 0, n = m_polylines.size(); i< n; ++i)
+		m_polylines[i]->SetVertices(m_src[i]);
 }
 
 void ModifyNodesAOP::Redo()
 {
-	for (size_t i = 0, n = m_chains.size(); i< n; ++i)
-		m_chains[i]->Load(m_dst[i]);
+	for (size_t i = 0, n = m_polylines.size(); i< n; ++i)
+		m_polylines[i]->SetVertices(m_dst[i]);
 }
 
 } // edit_nodes

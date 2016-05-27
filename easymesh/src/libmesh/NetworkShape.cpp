@@ -41,14 +41,16 @@ void NetworkShape::Draw(const sm::mat4& mt, const s2::RenderColor& color) const
 void NetworkShape::LoadFromFile(const Json::Value& value, const std::string& dir)
 {
 	const Json::Value& shape_val = value["shape"];
-	ee::JsonSerializer::Load(shape_val["outline"], m_vertices);
+	std::vector<sm::vec2> vertices;
+	ee::JsonSerializer::Load(shape_val["outline"], vertices);
+	SetVertices(vertices);
 	ee::JsonSerializer::Load(shape_val["inner"], m_inner_vertices);
 }
 
 void NetworkShape::StoreToFile(Json::Value& value, const std::string& dir) const
 {
 	Json::Value& shape_val = value["shape"];
-	ee::JsonSerializer::Store(m_vertices, shape_val["outline"]);
+	ee::JsonSerializer::Store(GetVertices(), shape_val["outline"]);
 	ee::JsonSerializer::Store(m_inner_vertices, shape_val["inner"]);
 }
 

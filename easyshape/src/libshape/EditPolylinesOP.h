@@ -31,12 +31,6 @@ private:
 	void clearBuffer();
 
 private:
-	class UpdateChainVisitor : public ee::Visitor
-	{
-	public:
-		virtual void Visit(Object* object, bool& next);
-	}; // UpdateChainVisitor
-
 	class UpdateBufferVisitor : public ee::Visitor
 	{
 	public:
@@ -45,7 +39,7 @@ private:
 		virtual void Visit(Object* object, bool& next);
 
 	private:
-		std::map<ChainShape*, ChainShape*>& m_simplifyBuffer;
+		std::map<ChainShape*, ChainShape*>& m_simplify_buffer;
 
 	}; // UpdateBufferVisitor
 

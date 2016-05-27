@@ -292,14 +292,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\source\dataset\PolygonShape.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\sprite2\PolygonShape.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\source\dataset\PolylineShape.cpp"
 					>
 				</File>
@@ -590,6 +582,14 @@
 			>
 			<File
 				RelativePath="..\..\..\include\sprite2\Object.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\sprite2\RefCountObj.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\sprite2\RefCountObj.inl"
 				>
 			</File>
 			<File

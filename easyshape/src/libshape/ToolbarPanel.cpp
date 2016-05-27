@@ -57,17 +57,17 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, ee::PropertySettingPanel* property,
 	AddChild(new DrawLineCMPT(this, "折线", stage, stage->GetStageImpl(), stage, property));
 	// polygon
 	AddChild(new DrawPolygon2CMPT(this, "多边形", stage, stage->GetStageImpl(), stage, property));
-	// complex polygon
-	{
-		ee::OneFloatValueCMPT* capture_cmpt = new ee::OneFloatValueCMPT(this, "复杂多边形", stage->GetStageImpl(), "node capture", 5, 30, 10);
-//		ee::EditOP* op = new DrawComplexPolygonOP(stage, stage, property, capture_cmpt);
-
-		ee::EditOP* op = new EditPolylineOP<DrawComplexPolygonOP, ee::SelectShapesOP>
-			(stage, stage->GetStageImpl(), stage, property, capture_cmpt, capture_cmpt);
-
-		capture_cmpt->SetEditOP(op);
-		AddChild(capture_cmpt);
-	}
+//	// complex polygon
+//	{
+//		ee::OneFloatValueCMPT* capture_cmpt = new ee::OneFloatValueCMPT(this, "复杂多边形", stage->GetStageImpl(), "node capture", 5, 30, 10);
+////		ee::EditOP* op = new DrawComplexPolygonOP(stage, stage, property, capture_cmpt);
+//
+//		ee::EditOP* op = new EditPolylineOP<DrawComplexPolygonOP, ee::SelectShapesOP>
+//			(stage, stage->GetStageImpl(), stage, property, capture_cmpt, capture_cmpt);
+//
+//		capture_cmpt->SetEditOP(op);
+//		AddChild(capture_cmpt);
+//	}
 	// bezier
 	{
 		ee::OneFloatValueCMPT* capture_cmpt = new ee::OneFloatValueCMPT(this, "贝塞尔曲线", stage->GetStageImpl(), "node capture", 5, 30, 10);

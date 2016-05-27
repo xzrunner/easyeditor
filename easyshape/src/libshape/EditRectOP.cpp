@@ -12,6 +12,8 @@
 #include <ee/Math2D.h>
 #include <ee/PropertySettingPanel.h>
 
+#include <SM_Calc.h>
+
 namespace eshape
 {
 
@@ -192,11 +194,10 @@ bool EditRectOP::OnMouseDrag(int x, int y)
 			rect->SetRect(r);
 
 			m_property->EnablePropertyGrid(false);
-
-			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 	}
 
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	return false;
 }
@@ -224,8 +225,9 @@ bool EditRectOP::OnDraw() const
 	}
 	else
 	{
-		if (m_first_pos_valid && m_curr_pos_valid)
+		if (m_first_pos_valid && m_curr_pos_valid) {
 			ee::RVG::Rect(m_first_pos, m_curr_pos, false);
+		}
 	}
 
 	return false;

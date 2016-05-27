@@ -13,6 +13,7 @@ namespace eshape
 class ChainShape;
 class DrawPolylineOP;
 class IOperaterBase;
+class PolylineShape;
 
 class EditPolylineImpl
 {
@@ -47,12 +48,12 @@ private:
 
 		virtual void Visit(ee::Object* object, bool& next);
 
-		ChainShape* getInterruptedChain() { return m_chain; }
+		PolylineShape* GetInterruptedPolyline() { return m_polyline; }
 
 	private:
 		const sm::vec2& m_pos;
 		int m_tol;
-		ChainShape* m_chain;
+		PolylineShape* m_polyline;
 
 	}; // InterruptChainVisitor
 
@@ -63,7 +64,7 @@ private:
 
 		virtual void Visit(ee::Object* object, bool& next);
 
-		const sm::vec2& getNearestNode() const {
+		const sm::vec2& GetNearestNode() const {
 			return m_nearest;
 		}
 
@@ -94,7 +95,7 @@ private:
 	ee::EditPanelImpl* m_stage;
 
 protected:
-	NodeAddr m_capturedEditable, m_captureSelectable;
+	NodeAddr m_captured_editable, m_captureSelectable;
 
 protected:
 	ee::EditOP* m_selectOP;

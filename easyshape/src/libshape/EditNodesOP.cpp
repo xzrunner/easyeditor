@@ -26,7 +26,7 @@ bool EditNodesOP::OnKeyDown(int keyCode)
 		{
 			SelectNodesOP::ChainSelectedNodes* selected = m_node_selection[i];
 			for (size_t j = 0, m = selected->selectedNodes.size(); j < m; ++j)
-				selected->chain->Remove(selected->selectedNodes[j]);
+				selected->polyline->RemoveVertex(selected->selectedNodes[j]);
 		}
 	}
 
@@ -68,10 +68,9 @@ bool EditNodesOP::OnMouseDrag(int x, int y)
 			{
 				const sm::vec2& from = selected->selectedNodes[j];
 				sm::vec2 to = from + offset;
-				selected->chain->Change(from, to);
+				selected->polyline->ChangeVertex(from, to);
 				selected->selectedNodes[j] = to;
 			}
-			selected->chain->refresh();
 		}
 		m_last_pos = curr_pos;
 		m_last_pos_valid = true;
@@ -134,12 +133,12 @@ void EditNodesOP::Smooth(float samplingWidth)
 
 void EditNodesOP::UpdateModified()
 {
-	std::vector<ChainShape*> chains;
+	std::vector<PolylineShape*> polylines;
 	std::vector<std::vector<sm::vec2> > chainsDst;
 
 	for (size_t i = 0, n = m_buffer.size(); i < n; ++i)
 	{
-		const std::vector<sm::vec2>& chain = m_buffer[i].src->chain->GetVertices();
+		const std::vector<sm::vec2>& chain = m_buffer[i].src->polyline->GetVertices();
 		const std::vector<sm::vec2>& src = m_buffer[i].src->selectedNodes;
 		const std::vector<sm::vec2>& dst = m_buffer[i].dst;
 
@@ -167,13 +166,13 @@ void EditNodesOP::UpdateModified()
 		copy(dst.begin(), dst.end(), back_inserter(result));
 		copy(chain.begin() + end + 1, chain.end(), back_inserter(result));
 
-		m_buffer[i].src->chain->Load(result);
+		m_buffer[i].src->polyline->SetVertices(result);
 
-		chains.push_back(m_buffer[i].src->chain);
+		polylines.push_back(m_buffer[i].src->polyline);
 		chainsDst.push_back(result);
 	}
 
-	ee::EditAddRecordSJ::Instance()->Add(new edit_nodes::ModifyNodesAOP(chains, chainsDst));
+	ee::EditAddRecordSJ::Instance()->Add(new edit_nodes::ModifyNodesAOP(polylines, chainsDst));
 
 	m_buffer.clear();
 	ClearSelectedNodes();

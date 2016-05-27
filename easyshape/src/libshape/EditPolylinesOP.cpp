@@ -41,9 +41,6 @@ bool EditPolylinesOP::OnMouseLeftUp(int x, int y)
 {
 	if (ee::SelectShapesOP::OnMouseLeftUp(x, y)) return true;
 
-	if (m_is_dirty)
-		m_selection->Traverse(UpdateChainVisitor());
-
 	clearBuffer();
 	m_selection->Traverse(UpdateBufferVisitor(m_simplify_buffer));
 
@@ -102,7 +99,7 @@ void EditPolylinesOP::simplify()
 	{
 		std::vector<sm::vec2> simplified;
 		ee::DouglasPeucker::Do(itr->first->GetVertices(), m_cmpt->GetSimplifyThreshold(), simplified);
-		itr->second->Load(simplified);
+		itr->second->SetVertices(simplified);
 	}
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -112,7 +109,7 @@ void EditPolylinesOP::updateFromSimplified()
 {
 	std::map<ChainShape*, ChainShape*>::iterator itr = m_simplify_buffer.begin();
 	for ( ; itr != m_simplify_buffer.end(); ++itr)
-		itr->first->Load(itr->second->GetVertices());
+		itr->first->SetVertices(itr->second->GetVertices());
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
@@ -128,26 +125,12 @@ void EditPolylinesOP::clearBuffer()
 }
 
 //////////////////////////////////////////////////////////////////////////
-// class EditPolylinesOP::UpdateChainVisitor
-//////////////////////////////////////////////////////////////////////////
-
-void EditPolylinesOP::UpdateChainVisitor::
-Visit(Object* object, bool& next)
-{
-	ChainShape* chain = static_cast<ChainShape*>(object);
-
-	chain->refresh();
-
-	next = true;
-}
-
-//////////////////////////////////////////////////////////////////////////
 // class EditPolylinesOP::UpdateBufferVisitor
 //////////////////////////////////////////////////////////////////////////
 
 EditPolylinesOP::UpdateBufferVisitor::
 UpdateBufferVisitor(std::map<ChainShape*, ChainShape*>& simplifyBuffer)
-	: m_simplifyBuffer(simplifyBuffer)
+	: m_simplify_buffer(simplifyBuffer)
 {
 }
 
@@ -155,9 +138,7 @@ void EditPolylinesOP::UpdateBufferVisitor::
 Visit(Object* object, bool& next)
 {
 	ChainShape* chain = static_cast<ChainShape*>(object);
-
-	m_simplifyBuffer.insert(std::make_pair(chain, chain->Clone()));
-
+	m_simplify_buffer.insert(std::make_pair(chain, chain->Clone()));
 	next = true;
 }
 

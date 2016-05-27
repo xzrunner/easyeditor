@@ -8,7 +8,7 @@
 namespace eshape
 {
 
-class ChainShape;
+class PolylineShape;
 
 namespace edit_nodes
 {
@@ -16,8 +16,8 @@ namespace edit_nodes
 class ModifyNodesAOP : public ee::AtomicOP
 {
 public:
-	ModifyNodesAOP(const std::vector<ChainShape*>& chains, 
-		const std::vector<std::vector<sm::vec2> >& dstChains);
+	ModifyNodesAOP(const std::vector<PolylineShape*>& polylines, 
+		const std::vector<std::vector<sm::vec2> >& dst_polylines);
 
 	virtual void Undo();
 	virtual void Redo();
@@ -25,7 +25,7 @@ public:
 	virtual Json::Value Store(const std::vector<ee::Sprite*>& sprites) const { return NULL; }
 
 private:
-	std::vector<ChainShape*> m_chains;
+	std::vector<PolylineShape*> m_polylines;
 	std::vector<std::vector<sm::vec2> > m_src, m_dst;
 
 }; // ModifyNodesAOP

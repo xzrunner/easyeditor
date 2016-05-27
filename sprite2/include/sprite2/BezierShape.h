@@ -23,8 +23,10 @@ public:
 	// 	UpdateCurve();
 //}
 
-private:
+protected:
 	void UpdatePolyline();
+
+private:
 	sm::vec2 PointOnCubicBezier(float t);
 
 public:

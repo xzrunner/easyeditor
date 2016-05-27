@@ -197,7 +197,7 @@ void OceanMesh::Rotate(float angle)
 	for (int i = 0, n = vertices.size(); i < n; ++i) {
 		vertices[i] = ee::Math2D::RotateVector(vertices[i], angle);
 	}
-	m_shape->Load(vertices);
+	m_shape->SetVertices(vertices);
 
 	m_texcoords_spd.y = -sqrt(m_texcoords_spd.x * m_texcoords_spd.x 
 		+ m_texcoords_spd.y * m_texcoords_spd.y);

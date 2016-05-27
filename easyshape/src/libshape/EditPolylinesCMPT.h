@@ -22,15 +22,15 @@ protected:
 	virtual wxSizer* InitLayout();
 
 private:
-	wxSizer* initSimplifyPanel();
-	wxSizer* initSmoothPanel();
-	wxSizer* initEditPanel();
+	wxSizer* InitSimplifyPanel();
+	wxSizer* InitSmoothPanel();
+	wxSizer* InitEditPanel();
 
-	void onSimplifyThresholdChanged(wxSpinEvent& event);
-	void onUpdateFromSimplified(wxCommandEvent& event);
+	void OnSimplifyThresholdChanged(wxSpinEvent& event);
+	void OnUpdateFromSimplified(wxCommandEvent& event);
 
-	void onMergeTwoChain(wxCommandEvent& event);
-	void onTranslate(wxCommandEvent& event);
+	void OnMergeTwoChain(wxCommandEvent& event);
+	void OnTranslate(wxCommandEvent& event);
 
 private:
 	ee::MultiShapesImpl* m_shapes_impl;

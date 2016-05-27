@@ -2,6 +2,7 @@
 #include "PolygonPropertySetting.h"
 #include "ColorMaterial.h"
 #include "TextureMaterial.h"
+#include "PolylineEditor.h"
 
 #include <ee/Math2D.h>
 #include <ee/SymbolMgr.h>
@@ -16,28 +17,37 @@ namespace eshape
 PolygonShape::PolygonShape()
 	: m_material(NULL)
 {
-	m_draw_dir = false;
+}
+
+PolygonShape::PolygonShape(const std::vector<sm::vec2>& vertices)
+	: s2::PolylineShape(vertices, true)
+	, m_material(NULL)
+{
+	SetMaterialColor(ee::LIGHT_GREEN);
 }
 
 PolygonShape::PolygonShape(const PolygonShape& polygon)
-	: ChainShape(polygon)
+	: s2::PolylineShape(polygon)
 	, m_material(NULL)
 {
-	m_draw_dir = false;
-
 	if (polygon.m_material) {
 		m_material = polygon.m_material;
 		polygon.m_material->Retain();
 	}
 }
 
-PolygonShape::PolygonShape(const std::vector<sm::vec2>& vertices)
-	: ChainShape(vertices, true)
-	, m_material(NULL)
+PolygonShape& PolygonShape::operator = (const PolygonShape& polygon)
 {
-	m_draw_dir = false;
+	m_vertices = polygon.m_vertices;
+	m_closed = true;
 
-	SetMaterialColor(ee::LIGHT_GREEN);
+	if (polygon.m_material) {
+		m_material = polygon.m_material;
+		polygon.m_material->Retain();
+	} else {
+		m_material = NULL;
+	}
+	return *this;
 }
 
 PolygonShape::~PolygonShape()
@@ -53,19 +63,13 @@ PolygonShape* PolygonShape::Clone() const
 	return new PolygonShape(*this);
 }
 
-bool PolygonShape::IsContain(const sm::vec2& pos) const
-{
-	return ee::Math2D::IsPointInRect(pos, m_rect) 
-		&& ee::Math2D::IsPointInArea(pos, m_vertices);
-}
-
-// bool PolygonShape::isIntersect(const sm::rect& rect) const
-// {
-// }
-
 void PolygonShape::Translate(const sm::vec2& offset)
 {
-	ChainShape::Translate(offset);
+	for (int i = 0, n = m_vertices.size(); i < n; ++i) {
+		m_vertices[i] += offset;
+	}
+	m_bounding.Translate(offset);
+
 	if (m_material) {
 		m_material->Translate(offset);
 	}
@@ -81,7 +85,7 @@ void PolygonShape::Draw(const sm::mat4& mt, const s2::RenderColor& color) const
 	}
 
 	if (ee::Config::Instance()->GetSettings().visible_tex_edge) {
-		ChainShape::Draw(mt, color);
+		s2::PolylineShape::Draw(mt, color);
 	}
 }
 
@@ -94,16 +98,16 @@ void PolygonShape::LoadFromFile(const Json::Value& value, const std::string& dir
 {
 	ee::Shape::LoadFromFile(value, dir);
 
-	size_t num = value["vertices"]["x"].size();
+	int num = value["vertices"]["x"].size();
 	m_vertices.resize(num);
-	for (size_t i = 0; i < num; ++i) {
+	for (int i = 0; i < num; ++i) {
 		m_vertices[i].x = value["vertices"]["x"][i].asDouble();
 		m_vertices[i].y = value["vertices"]["y"][i].asDouble();
 	}
 
-	m_loop = true;
+	m_closed = true;
 
-	ChainShape::InitBounding();
+	UpdateBounding();
 
 	LoadMaterial(dir, value["material"]);
 }
@@ -125,8 +129,34 @@ void PolygonShape::ReloadTexture()
 	m_material->ReloadTexture();
 }
 
-void PolygonShape::refresh()
+void PolygonShape::AddVertex(int index, const sm::vec2& pos)
 {
+	PolylineEditor::AddVertex(m_vertices, m_bounding, index, pos);
+	if (m_material) {
+		m_material->Refresh(m_vertices);
+	}
+}
+
+void PolygonShape::RemoveVertex(const sm::vec2& pos)
+{
+	PolylineEditor::RemoveVertex(m_vertices, m_bounding, pos);
+	if (m_material) {
+		m_material->Refresh(m_vertices);
+	}
+}
+
+void PolygonShape::ChangeVertex(const sm::vec2& from, const sm::vec2& to)
+{
+	PolylineEditor::ChangeVertex(m_vertices, m_bounding, from, to);
+	if (m_material) {
+		m_material->Refresh(m_vertices);
+	}
+}
+
+void PolygonShape::SetVertices(const std::vector<sm::vec2>& vertices)
+{
+	m_vertices = vertices;
+	UpdateBounding();
 	if (m_material) {
 		m_material->Refresh(m_vertices);
 	}

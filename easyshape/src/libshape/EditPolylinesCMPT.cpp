@@ -42,31 +42,31 @@ wxSizer* EditPolylinesCMPT::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
-	sizer->Add(initSimplifyPanel());
+	sizer->Add(InitSimplifyPanel());
 	sizer->AddSpacer(20);
-	sizer->Add(initEditPanel());
+	sizer->Add(InitEditPanel());
 
 	return sizer;
 }
 
-wxSizer* EditPolylinesCMPT::initSimplifyPanel()
+wxSizer* EditPolylinesCMPT::InitSimplifyPanel()
 {
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("化简"));
 	wxBoxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 
 	m_simplify_spin = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, 
 		wxSize(70, -1), wxSP_ARROW_KEYS, 0, 1000, 30);
-	Connect(m_simplify_spin->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(EditPolylinesCMPT::onSimplifyThresholdChanged));
+	Connect(m_simplify_spin->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(EditPolylinesCMPT::OnSimplifyThresholdChanged));
 	sizer->Add(m_simplify_spin);
 
 	wxButton* btnOK = new wxButton(this, wxID_ANY, wxT("确定"), wxDefaultPosition, wxSize(70, -1));
-	Connect(btnOK->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(EditPolylinesCMPT::onUpdateFromSimplified));
+	Connect(btnOK->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(EditPolylinesCMPT::OnUpdateFromSimplified));
 	sizer->Add(btnOK);
 
 	return sizer;
 }
 
-wxSizer* EditPolylinesCMPT::initSmoothPanel()
+wxSizer* EditPolylinesCMPT::InitSmoothPanel()
 {
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("平滑"));
 	wxBoxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
@@ -74,49 +74,48 @@ wxSizer* EditPolylinesCMPT::initSmoothPanel()
 	return sizer;
 }
 
-wxSizer* EditPolylinesCMPT::initEditPanel()
+wxSizer* EditPolylinesCMPT::InitEditPanel()
 {
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT(""));
 	wxBoxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 	{
 		m_btn_merge = new wxButton(this, wxID_ANY, wxT("合并"));
 		m_btn_merge->Enable(false);
-		Connect(m_btn_merge->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(EditPolylinesCMPT::onMergeTwoChain));
+		Connect(m_btn_merge->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(EditPolylinesCMPT::OnMergeTwoChain));
 		sizer->Add(m_btn_merge);
 	}
 	sizer->AddSpacer(10);
 	{
 		wxButton* btn = new wxButton(this, wxID_ANY, wxT("水平偏移到(x=0)"));
-		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(EditPolylinesCMPT::onTranslate));
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(EditPolylinesCMPT::OnTranslate));
 		sizer->Add(btn);
 	}
 	return sizer;
 }
 
-void EditPolylinesCMPT::onSimplifyThresholdChanged(wxSpinEvent& event)
+void EditPolylinesCMPT::OnSimplifyThresholdChanged(wxSpinEvent& event)
 {
 	static_cast<EditPolylinesOP*>(m_editop)->simplify();
 }
 
-void EditPolylinesCMPT::onUpdateFromSimplified(wxCommandEvent& event)
+void EditPolylinesCMPT::OnUpdateFromSimplified(wxCommandEvent& event)
 {
 	static_cast<EditPolylinesOP*>(m_editop)->updateFromSimplified();
 }
 
-void EditPolylinesCMPT::onMergeTwoChain(wxCommandEvent& event)
+void EditPolylinesCMPT::OnMergeTwoChain(wxCommandEvent& event)
 {
 	std::vector<ee::Shape*> shapes;
 	m_shapes_impl->GetShapeSelection()->Traverse(ee::FetchAllVisitor<ee::Shape>(shapes));
 	if (shapes.size() == 2)
 	{
 		ChainShape *chain0 = static_cast<ChainShape*>(shapes[0]),
-			*chain1 = static_cast<ChainShape*>(shapes[1]);
+			       *chain1 = static_cast<ChainShape*>(shapes[1]);
 
 		std::vector<sm::vec2> merged;
 		Math::mergeTwoChains(*chain0, *chain1, merged);
 
-		chain0->Load(merged);
-		chain0->refresh();
+		chain0->SetVertices(merged);
 		ee::RemoveShapeSJ::Instance()->Remove(chain1);
 		m_shapes_impl->GetShapeSelection()->Clear();
 
@@ -128,27 +127,27 @@ void EditPolylinesCMPT::onMergeTwoChain(wxCommandEvent& event)
 	}
 }
 
-void EditPolylinesCMPT::onTranslate(wxCommandEvent& event)
+void EditPolylinesCMPT::OnTranslate(wxCommandEvent& event)
 {
 	std::vector<ee::Shape*> shapes;
 	m_shapes_impl->GetShapeSelection()->Traverse(ee::FetchAllVisitor<ee::Shape>(shapes));
 
 	float leftmost = FLT_MAX;
-	std::vector<ChainShape*> chains;
-	for (size_t i = 0, n = shapes.size(); i < n; ++i)
+	std::vector<PolylineShape*> polylines;
+	for (int i = 0, n = shapes.size(); i < n; ++i)
 	{
-		ChainShape* chain = dynamic_cast<ChainShape*>(shapes[i]);
-		if (chain) 
+		PolylineShape* polyline = dynamic_cast<PolylineShape*>(shapes[i]);
+		if (polyline) 
 		{
-			chains.push_back(chain);
-			if (chain->GetRect().xmin < leftmost)
-				leftmost = chain->GetRect().xmin;
+			polylines.push_back(polyline);
+			if (polyline->GetRect().xmin < leftmost)
+				leftmost = polyline->GetRect().xmin;
 		}
 	}
 
 	const sm::vec2 offset(-leftmost, 0.0f);
-	for (size_t i = 0, n = chains.size(); i < n; ++i) {
-		chains[i]->Translate(offset);
+	for (size_t i = 0, n = polylines.size(); i < n; ++i) {
+		polylines[i]->Translate(offset);
 	}
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();

@@ -18,7 +18,7 @@ public:
 private:
 	void UpdatePolyline();
 
-private:
+protected:
 	std::vector<sm::vec2> m_mid_points;
 
 }; // CosineShape

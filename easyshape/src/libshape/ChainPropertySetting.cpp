@@ -49,7 +49,7 @@ void ChainPropertySetting::OnPropertyGridChange(const std::string& name, const w
 			std::vector<sm::vec2> vertices = m_chain->GetVertices();
 			for (size_t i = 0, n = vertices.size(); i < n; ++i)
 				vertices[i].x = x * 2 - vertices[i].x;
-			m_chain->Load(vertices);
+			m_chain->SetVertices(vertices);
 		}
 		else if (type == 2)
 		{
@@ -57,7 +57,7 @@ void ChainPropertySetting::OnPropertyGridChange(const std::string& name, const w
 			std::vector<sm::vec2> vertices = m_chain->GetVertices();
 			for (size_t i = 0, n = vertices.size(); i < n; ++i)
 				vertices[i].y = y * 2 - vertices[i].y;
-			m_chain->Load(vertices);
+			m_chain->SetVertices(vertices);
 		}
 	}
 	else

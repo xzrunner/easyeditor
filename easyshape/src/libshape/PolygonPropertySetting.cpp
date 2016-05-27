@@ -35,14 +35,12 @@ void PolygonPropertySetting::OnPropertyGridChange(const std::string& name, const
 		const float x = wxANY_AS(value, float);
 		const float dx = x - m_poly->GetRect().Center().x;
 		m_poly->Translate(sm::vec2(dx, 0.0f));
-		m_poly->refresh();
 	}
 	else if (name == wxT("Y"))
 	{
 		const float y = wxANY_AS(value, float);
 		const float dy = y - m_poly->GetRect().Center().y;
 		m_poly->Translate(sm::vec2(0.0f, dy));
-		m_poly->refresh();
 	}
 	else if (name == wxT("Mirror"))
 	{
@@ -53,8 +51,7 @@ void PolygonPropertySetting::OnPropertyGridChange(const std::string& name, const
 			std::vector<sm::vec2> vertices = m_poly->GetVertices();
 			for (size_t i = 0, n = vertices.size(); i < n; ++i)
 				vertices[i].x = x * 2 - vertices[i].x;
-			m_poly->Load(vertices);
-			m_poly->refresh();
+			m_poly->SetVertices(vertices);
 		}
 		else if (type == 2)
 		{
@@ -62,8 +59,7 @@ void PolygonPropertySetting::OnPropertyGridChange(const std::string& name, const
 			std::vector<sm::vec2> vertices = m_poly->GetVertices();
 			for (size_t i = 0, n = vertices.size(); i < n; ++i)
 				vertices[i].y = y * 2 - vertices[i].y;
-			m_poly->Load(vertices);
-			m_poly->refresh();
+			m_poly->SetVertices(vertices);
 		}
 	}
 	else

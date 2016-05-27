@@ -68,7 +68,7 @@ bool SelectNodesOP::OnMouseLeftDown(int x, int y)
 			for (size_t i = 0, n = m_node_selection.size(); i < n && !isExist; ++i)
 			{
 				ChainSelectedNodes* chainNodes = m_node_selection[i];
-				if (chainNodes->chain != selected->chain) continue;
+				if (chainNodes->polyline != selected->polyline) continue;
 				for (size_t j = 0, m = chainNodes->selectedNodes.size(); j < m && !isExist; ++j)
 				{
 					if (ee::Math2D::GetDistance(pos, chainNodes->selectedNodes[j]) < GetThreshold())
@@ -92,7 +92,7 @@ bool SelectNodesOP::OnMouseLeftDown(int x, int y)
 			for (size_t i = 0, n = m_node_selection.size(); i < n && !isExist; ++i)
 			{
 				ChainSelectedNodes* chainNodes = m_node_selection[i];
-				if (chainNodes->chain != selected->chain) continue;
+				if (chainNodes->polyline != selected->polyline) continue;
 				for (size_t j = 0, m = chainNodes->selectedNodes.size(); j < m && !isExist; ++j)
 				{
 					if (ee::Math2D::GetDistance(pos, chainNodes->selectedNodes[j]) < GetThreshold())
@@ -229,7 +229,7 @@ void SelectNodesOP::OnDirectionKeyDown(ee::DirectionType type)
 		for (int j = 0, m = nodes->selectedNodes.size(); j < m; ++j) {
 			const sm::vec2& from = nodes->selectedNodes[j];
 			sm::vec2 to = from + offset;
-			nodes->chain->Change(from, to);
+			nodes->polyline->ChangeVertex(from, to);
 			nodes->selectedNodes[j] = to;
 			dirty = true;
 		}
@@ -255,17 +255,17 @@ PosQueryVisitor(const sm::vec2& pos, ChainSelectedNodes** result)
 void SelectNodesOP::PosQueryVisitor::
 Visit(Object* object, bool& next)
 {
-	ChainShape* chain = static_cast<ChainShape*>(object);
+	PolylineShape* polyline = static_cast<PolylineShape*>(object);
 
-	if (ee::Math2D::IsRectIntersectRect(chain->GetRect(), m_rect))
+	if (ee::Math2D::IsRectIntersectRect(polyline->GetRect(), m_rect))
 	{
-		const std::vector<sm::vec2>& vertices = chain->GetVertices();
+		const std::vector<sm::vec2>& vertices = polyline->GetVertices();
 		for (size_t i = 0, n = vertices.size(); i < n; ++i)
 		{
 			if (ee::Math2D::GetDistance(m_pos, vertices[i]) < SelectNodesOP::GetThreshold())
 			{
 				ChainSelectedNodes* result = new ChainSelectedNodes;
-				result->chain = chain;
+				result->polyline = polyline;
 				result->selectedNodes.push_back(vertices[i]);
 				*m_result = result;
 
@@ -292,14 +292,14 @@ RectQueryVisitor(const sm::rect& rect, std::vector<ChainSelectedNodes*>& result)
 void SelectNodesOP::RectQueryVisitor::
 Visit(Object* object, bool& next)
 {
-	ChainShape* chain = static_cast<ChainShape*>(object);
+	PolylineShape* polyline = static_cast<PolylineShape*>(object);
 
-	if (ee::Math2D::IsRectIntersectRect(chain->GetRect(), m_rect))
+	if (ee::Math2D::IsRectIntersectRect(polyline->GetRect(), m_rect))
 	{
 		ChainSelectedNodes* result = new ChainSelectedNodes;
-		result->chain = chain;
+		result->polyline = polyline;
 
-		const std::vector<sm::vec2>& vertices = chain->GetVertices();
+		const std::vector<sm::vec2>& vertices = polyline->GetVertices();
 		for (size_t i = 0, n = vertices.size(); i < n; ++i)
 		{
 			if (ee::Math2D::IsPointInRect(vertices[i], m_rect))
