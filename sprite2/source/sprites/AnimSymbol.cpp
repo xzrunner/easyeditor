@@ -1,5 +1,5 @@
 #include "AnimSymbol.h"
-#include "Sprite.h"
+#include "S2_Sprite.h"
 
 namespace s2
 {
@@ -27,7 +27,7 @@ bool AnimSymbol::Clear()
  		for (int j = 0, m = layer->frames.size(); j < m; ++j) {
  			Frame* frame = layer->frames[j];
  			for (int k = 0, l = frame->sprites.size(); k < l; ++k) {
- 				frame->sprites[k]->Release();
+ 				frame->sprites[k]->RemoveReference();
 				dirty = true;
  			}
 			delete frame;

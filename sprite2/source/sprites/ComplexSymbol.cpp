@@ -1,5 +1,5 @@
 #include "ComplexSymbol.h"
-#include "Sprite.h"
+#include "S2_Sprite.h"
 
 namespace s2
 {
@@ -16,7 +16,7 @@ void ComplexSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 
 bool ComplexSymbol::Add(Sprite* spr, int idx)
 {
-	spr->Retain();
+	spr->AddReference();
 	if (m_children.empty() || 
 		idx >= m_children.size() ||
 		idx < 0) {
@@ -31,7 +31,7 @@ bool ComplexSymbol::Remove(Sprite* spr)
 {
 	for (int i = 0, n = m_children.size(); i < n; ++i) {
 		if (spr == m_children[i]) {
-			spr->Release();
+			spr->RemoveReference();
 			m_children.erase(m_children.begin() + i);
 			return true;
 		}
@@ -46,7 +46,7 @@ bool ComplexSymbol::Clear()
 	}
 
 	for (int i = 0, n = m_children.size(); i < n; ++i) {
-		m_children[i]->Release();
+		m_children[i]->RemoveReference();
 	}
 	m_children.clear();
 	return true;

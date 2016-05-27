@@ -1,5 +1,5 @@
-#include "Sprite.h"
-#include "Symbol.h"
+#include "S2_Sprite.h"
+#include "S2_Symbol.h"
 #include "OBB.h"
 
 namespace s2

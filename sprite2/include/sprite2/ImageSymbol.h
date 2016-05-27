@@ -1,7 +1,7 @@
 #ifndef _SPRITE2_IMAGE_SYMBOL_H_
 #define _SPRITE2_IMAGE_SYMBOL_H_
 
-#include "Symbol.h"
+#include "S2_Symbol.h"
 
 #include <stdint.h>
 
@@ -28,7 +28,7 @@ public:
 				float (*get_p3d_cam_angle)(),
 				int   (*get_screen_cache_texid)());
 
-	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const;
+	virtual void Draw(const RenderParams& params, const Sprite* spr) const;
 
 	void InitTex(Texture* tex, const Quad& quad, const sm::vec2& offset);
 

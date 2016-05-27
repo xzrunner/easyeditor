@@ -1,7 +1,7 @@
 #ifndef _SPRITE2_ICON_SYMBOL_H_
 #define _SPRITE2_ICON_SYMBOL_H_
 
-#include "Symbol.h"
+#include "S2_Symbol.h"
 
 #include <stdint.h>
 
@@ -13,7 +13,7 @@ class IconSymbol : public Symbol
 public:
 	IconSymbol(void* ud);
 
-	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const;
+	virtual void Draw(const RenderParams& params, const Sprite* spr) const;
 
 }; // IconSymbol
 

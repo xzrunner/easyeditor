@@ -6,7 +6,6 @@ namespace s2
 
 inline
 Matrix::Matrix()
-	: 
 {
 	m[0] = 1024;
 	m[1] = 0;

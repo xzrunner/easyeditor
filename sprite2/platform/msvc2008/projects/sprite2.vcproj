@@ -41,8 +41,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\include\sprite2;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\editor-external\c99"
-				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;S2_EXTEND"
+				AdditionalIncludeDirectories="..\..\..\..\ejoy2d\src;..\..\..\include\sprite2;..\..\..\..\gtxt\src\gtxt;..\..\..\..\particle\src;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\dtex\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include"
+				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;S2_EXTEND;USED_IN_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -105,8 +105,8 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\include\sprite2;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\editor-external\c99"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;S2_EXTEND"
+				AdditionalIncludeDirectories="..\..\..\..\ejoy2d\src;..\..\..\include\sprite2;..\..\..\..\gtxt\src\gtxt;..\..\..\..\particle\src;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\dtex\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;S2_EXTEND;USED_IN_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
@@ -256,96 +256,20 @@
 					>
 				</File>
 			</Filter>
-			<Filter
-				Name="shape"
-				>
-				<File
-					RelativePath="..\..\..\source\dataset\BezierShape.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\sprite2\BezierShape.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\source\dataset\CircleShape.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\sprite2\CircleShape.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\source\dataset\CosineShape.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\sprite2\CosineShape.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\source\dataset\PointShape.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\sprite2\PointShape.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\source\dataset\PolylineShape.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\sprite2\PolylineShape.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\source\dataset\RectShape.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\sprite2\RectShape.h"
-					>
-				</File>
-				<Filter
-					Name="base"
-					>
-					<File
-						RelativePath="..\..\..\include\sprite2\Shape.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\include\sprite2\ShapeConfig.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="utility"
-					>
-					<File
-						RelativePath="..\..\..\source\dataset\ShapeVertices.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\include\sprite2\ShapeVertices.h"
-						>
-					</File>
-				</Filter>
-			</Filter>
 		</Filter>
 		<Filter
 			Name="sprites"
 			>
 			<File
-				RelativePath="..\..\..\source\sprites\Sprite.cpp"
+				RelativePath="..\..\..\source\sprites\S2_Sprite.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\include\sprite2\Sprite.h"
+				RelativePath="..\..\..\include\sprite2\S2_Sprite.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\include\sprite2\Symbol.h"
+				RelativePath="..\..\..\include\sprite2\S2_Symbol.h"
 				>
 			</File>
 			<Filter
@@ -477,22 +401,26 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="text"
+				Name="textbox"
 				>
 				<File
-					RelativePath="..\..\..\source\sprites\TextSprite.cpp"
+					RelativePath="..\..\..\include\sprite2\Textbox.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\include\sprite2\TextSprite.h"
+					RelativePath="..\..\..\source\sprites\TextboxSprite.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\source\sprites\TextSymbol.cpp"
+					RelativePath="..\..\..\include\sprite2\TextboxSprite.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\include\sprite2\TextSymbol.h"
+					RelativePath="..\..\..\source\sprites\TextboxSymbol.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\TextboxSymbol.h"
 					>
 				</File>
 			</Filter>
@@ -515,6 +443,82 @@
 					RelativePath="..\..\..\include\sprite2\ShapeSymbol.h"
 					>
 				</File>
+				<Filter
+					Name="shape"
+					>
+					<File
+						RelativePath="..\..\..\source\sprites\BezierShape.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\include\sprite2\BezierShape.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\source\sprites\CircleShape.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\include\sprite2\CircleShape.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\source\sprites\CosineShape.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\include\sprite2\CosineShape.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\source\sprites\PointShape.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\include\sprite2\PointShape.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\source\sprites\PolylineShape.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\include\sprite2\PolylineShape.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\source\sprites\RectShape.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\include\sprite2\RectShape.h"
+						>
+					</File>
+					<Filter
+						Name="base"
+						>
+						<File
+							RelativePath="..\..\..\include\sprite2\Shape.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\include\sprite2\ShapeConfig.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="utility"
+						>
+						<File
+							RelativePath="..\..\..\source\sprites\ShapeVertices.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\include\sprite2\ShapeVertices.h"
+							>
+						</File>
+					</Filter>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="mesh"
@@ -576,6 +580,10 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="mask"
+				>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="utility"
@@ -610,6 +618,22 @@
 			</File>
 			<File
 				RelativePath="..\..\..\include\sprite2\S2_CameraMgr.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\source\render\S2_DTex.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\sprite2\S2_DTex.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\source\render\S2_GTxt.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\sprite2\S2_GTxt.h"
 				>
 			</File>
 			<File

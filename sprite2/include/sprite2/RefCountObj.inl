@@ -6,15 +6,13 @@ namespace s2
 
 inline
 RefCountObj::RefCountObj()
-	: m_ref_count(0)
-	, m_shareable(true)
+	: m_ref_count(1)
 {
 }
 
 inline
 RefCountObj::RefCountObj(const RefCountObj& obj)
-	: m_ref_count(0)
-	, m_shareable(true)
+	: m_ref_count(1)
 {
 }
 
@@ -43,22 +41,20 @@ void RefCountObj::RemoveReference()
 	}
 }
 
-inline
-void RefCountObj::MarkUnshareable()
+template<class T>
+void rcobj_assign(T*& lhs, T*& rhs)
 {
-	m_shareable = false;
-}
+	if (lhs == rhs) {
+		return;
+	}
 
-inline
-bool RefCountObj::IsShareable() const
-{
-	return m_shareable;
-}
-
-inline
-bool RefCountObj::IsSheared() const
-{
-	return m_ref_count > 1;
+	if (lhs) {
+		lhs->RemoveReference();
+	}
+	lhs = rhs;
+	if (rhs) {
+		rhs->AddReference();
+	}
 }
 
 }

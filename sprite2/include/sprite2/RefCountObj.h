@@ -15,13 +15,8 @@ public:
 	void AddReference();
 	void RemoveReference();
 
-	void MarkUnshareable();
-	bool IsShareable() const;
-	bool IsSheared() const;
-
 private:
 	int m_ref_count;
-	bool m_shareable;
 
 }; // RefCountObj
 

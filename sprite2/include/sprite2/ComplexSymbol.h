@@ -1,7 +1,7 @@
 #ifndef _SPRITE2_COMPLEX_SYMBOL_H_
 #define _SPRITE2_COMPLEX_SYMBOL_H_
 
-#include "Symbol.h"
+#include "S2_Symbol.h"
 
 #include <vector>
 
@@ -13,7 +13,7 @@ class ComplexSymbol : public Symbol
 public:
 	ComplexSymbol(void* ud);
 
-	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const;
+	virtual void Draw(const RenderParams& params, const Sprite* spr) const;
 
 	const std::vector<Sprite*>& GetChildren() const { return m_children; }
 

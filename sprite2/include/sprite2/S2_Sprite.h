@@ -5,7 +5,7 @@
 #include "RenderColor.h"
 #include "RenderShader.h"
 #include "RenderCamera.h"
-#include "Object.h"
+#include "RefCountObj.h"
 
 #include <SM_Vector.h>
 
@@ -14,7 +14,7 @@ namespace s2
 
 class Symbol;
 
-class Sprite : public Object
+class Sprite : public RefCountObj
 {
 public:
 	Sprite(const Sprite& spr);

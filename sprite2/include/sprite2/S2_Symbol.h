@@ -1,7 +1,7 @@
 #ifndef _SPRITE2_SYMBOL_H_
 #define _SPRITE2_SYMBOL_H_
 
-#include "Object.h"
+#include "RefCountObj.h"
 
 #include <SM_Rect.h>
 
@@ -13,12 +13,12 @@ namespace s2
 class RenderParams;
 class Sprite;
 
-class Symbol : public Object
+class Symbol : public RefCountObj
 {
 public:
 	Symbol(void* ud) : m_ud(ud) {}
 
-	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const = 0;
+	virtual void Draw(const RenderParams& params, const Sprite* spr) const = 0;
 
 	const sm::rect& GetSize(const Sprite* sprite = NULL) const {
 		return m_size;

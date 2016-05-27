@@ -1,16 +1,17 @@
 #ifndef _SPRITE2_SHAPE_H_
 #define _SPRITE2_SHAPE_H_
 
+#include "RenderColor.h"
+#include "RefCountObj.h"
+
 #include <SM_Vector.h>
 #include <SM_Rect.h>
 #include <SM_Matrix.h>
 
-#include "RenderColor.h"
-
 namespace s2
 {
 
-class Shape
+class Shape : public RefCountObj
 {
 public:
 	Shape() {}

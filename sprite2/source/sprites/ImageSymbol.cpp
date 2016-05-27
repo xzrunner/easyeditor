@@ -1,7 +1,7 @@
 #include "ImageSymbol.h"
 #include "Texture.h"
 #include "RenderParams.h"
-#include "Sprite.h"
+#include "S2_Sprite.h"
 
 #include <SM_Matrix.h>
 #include <shaderlab.h>

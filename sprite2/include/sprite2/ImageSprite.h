@@ -1,7 +1,7 @@
 #ifndef _SPRITE2_IMAGE_SPRITE_H_
 #define _SPRITE2_IMAGE_SPRITE_H_
 
-#include "Sprite.h"
+#include "S2_Sprite.h"
 
 namespace s2
 {

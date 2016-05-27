@@ -1,7 +1,7 @@
 #ifndef _SPRITE2_ANIM_SYMBOL_H_
 #define _SPRITE2_ANIM_SYMBOL_H_
 
-#include "Symbol.h"
+#include "S2_Symbol.h"
 
 #include <vector>
 
@@ -38,7 +38,7 @@ public:
 public:
 	AnimSymbol(void* ud);
 
-	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const;
+	virtual void Draw(const RenderParams& params, const Sprite* spr) const;
 
 	const std::vector<Layer*>& GetLayers() const { return m_layers; }
 
