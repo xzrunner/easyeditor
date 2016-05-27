@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\sprite2\include;..\..\..\..\sm\src\sm;..\..\..\..\easy3d\src\easy3d;..\..\..\..\ejoy2d\src\;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easycomplex\src;..\..\..\..\easymesh\src;..\..\..\..\easyimage\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\particle\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easytext\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\sprite2\include;..\..\..\..\sm\src\sm;..\..\..\..\easy3d\src\easy3d;..\..\..\..\ejoy2d\src\;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easycomplex\src;..\..\..\..\easymesh\src;..\..\..\..\easymask\src;..\..\..\..\easyimage\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\particle\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easytext\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -107,7 +107,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\sprite2\include;..\..\..\..\sm\src\sm;..\..\..\..\easy3d\src\easy3d;..\..\..\..\ejoy2d\src\;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easycomplex\src;..\..\..\..\easymesh\src;..\..\..\..\easyimage\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\particle\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easytext\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\sprite2\include;..\..\..\..\sm\src\sm;..\..\..\..\easy3d\src\easy3d;..\..\..\..\ejoy2d\src\;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easycomplex\src;..\..\..\..\easymesh\src;..\..\..\..\easymask\src;..\..\..\..\easyimage\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\particle\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easytext\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -345,6 +345,18 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\librespacker\MeshSprBuilder.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="13.mask"
+				>
+				<File
+					RelativePath="..\..\..\src\librespacker\MaskBuilder.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\librespacker\MaskBuilder.h"
 					>
 				</File>
 			</Filter>
@@ -936,6 +948,58 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\librespacker\MeshSprToLuaString.h"
+						>
+					</File>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="13.mask"
+				>
+				<File
+					RelativePath="..\..\..\src\librespacker\PackMask.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\librespacker\PackMask.h"
+					>
+				</File>
+				<Filter
+					Name="bin"
+					>
+					<File
+						RelativePath="..\..\..\src\librespacker\MaskFromBin.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\MaskFromBin.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\MaskToBin.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\MaskToBin.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="lua"
+					>
+					<File
+						RelativePath="..\..\..\src\librespacker\MaskFromLua.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\MaskFromLua.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\MaskToLuaString.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\MaskToLuaString.h"
 						>
 					</File>
 				</Filter>

@@ -50,6 +50,9 @@ class MeshBuilder;
 // mesh spr
 class MeshSprBuilder;
 
+// mask
+class MaskBuilder;
+
 class PackNodeFactory
 {
 public:
@@ -119,6 +122,9 @@ private:
 
 	// mesh spr
 	MeshSprBuilder* m_mesh_spr_builder;
+
+	// mask
+	MaskBuilder* m_mask_builder;
 
 private:
 	static PackNodeFactory* m_instance;

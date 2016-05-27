@@ -53,6 +53,10 @@
 // mesh spr
 #include "MeshSprBuilder.h"
 
+// mask
+#include "MaskBuilder.h"
+#include <easymask.h>
+
 #include <spritepack.h>
 
 namespace erespacker
@@ -99,6 +103,9 @@ PackNodeFactory::PackNodeFactory()
 
 	// mesh spr
 	m_builders.push_back(m_mesh_spr_builder = new MeshSprBuilder);
+
+	// mask
+	m_builders.push_back(m_mask_builder = new MaskBuilder);
 }
 
 const IPackNode* PackNodeFactory::Create(const ee::Sprite* spr)
@@ -155,6 +162,11 @@ const IPackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 	// mesh spr
 	else if (const emesh::Sprite* mesh = dynamic_cast<const emesh::Sprite*>(spr)) {
 		node = m_mesh_spr_builder->Create(mesh);
+	}
+
+	// mask
+	else if (const emask::Sprite* mask = dynamic_cast<const emask::Sprite*>(spr)) {
+		node = m_mask_builder->Create(&mask->GetSymbol());
 	}
 
 	else {

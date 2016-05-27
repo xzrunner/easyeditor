@@ -17,6 +17,7 @@
 #include <easyparticle3d.h>
 #include <easyparticle2d.h>
 #include <easytext.h>
+#include <easymask.h>
 
 static void InitSymbolCreators() 
 {
@@ -52,6 +53,9 @@ static void InitSymbolCreators()
 
 	ee::SymbolFactory::RegisterCreator(etext::FILE_TAG, &etext::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(etext::FILE_TAG, &etext::Sprite::Create);
+
+	ee::SymbolFactory::RegisterCreator(emask::FILE_TAG, &emask::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(emask::FILE_TAG, &emask::Sprite::Create);
 }
 
 static void Help()

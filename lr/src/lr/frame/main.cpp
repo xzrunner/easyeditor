@@ -16,6 +16,7 @@
 #include <easyscale9.h>
 #include <easyicon.h>
 #include <easytext.h>
+#include <easymask.h>
 
 IMPLEMENT_APP(MyApp)
 
@@ -53,6 +54,9 @@ static void InitSymbolCreators()
 
 	ee::SymbolFactory::RegisterCreator(etext::FILE_TAG, &etext::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(etext::FILE_TAG, &etext::Sprite::Create);
+
+	ee::SymbolFactory::RegisterCreator(emask::FILE_TAG, &emask::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(emask::FILE_TAG, &emask::Sprite::Create);
 }
 
 bool MyApp::OnInit()

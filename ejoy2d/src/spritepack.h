@@ -21,6 +21,7 @@
 #define TYPE_SHAPE			12
 #define TYPE_MESH			13
 #define TYPE_MESH_SPR		14
+#define TYPE_MASK		    15
 
 #define ANCHOR_ID 0xffff
 #define SCREEN_SCALE 16
@@ -120,6 +121,13 @@ struct pack_mesh_spr {
 };
 
 #define SIZEOF_MESH_SPR (sizeof(struct pack_mesh_spr) + PTR_SIZE_DIFF)
+
+struct pack_mask {
+	int base_id;
+	int mask_id;
+};
+
+#define SIZEOF_MASK (sizeof(struct pack_mask))
 
 struct pack_poly {
 	uint16_t *texture_coord;

@@ -204,7 +204,11 @@ void PackRes::GetImagesFromJson(const std::vector<std::string>& src_dirs, const 
 {
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
 
-	if (ee::FileType::IsType(filepath, ee::FileType::e_complex)) 
+	if (ee::FileType::IsType(filepath, ee::FileType::e_image))
+	{
+		img_set.insert(filepath);
+	}
+	else if (ee::FileType::IsType(filepath, ee::FileType::e_complex)) 
 	{
 		Json::Value value;
 		Json::Reader reader;
@@ -322,6 +326,19 @@ void PackRes::GetImagesFromJson(const std::vector<std::string>& src_dirs, const 
 		fin.close();
 
 		GetImagesFromJson(src_dirs, value["base_symbol"].asString(), img_set);
+	}
+	else if (ee::FileType::IsType(filepath, ee::FileType::e_mask))
+	{
+		Json::Value value;
+		Json::Reader reader;
+		std::locale::global(std::locale(""));
+		std::ifstream fin(filepath.c_str());
+		std::locale::global(std::locale("C"));
+		reader.parse(fin, value);
+		fin.close();
+
+		GetImagesFromJson(src_dirs, value["base"]["filepath"].asString(), img_set);
+		GetImagesFromJson(src_dirs, value["mask"]["filepath"].asString(), img_set);
 	}
 	else if (filepath.find("_history.json")) 
 	{
