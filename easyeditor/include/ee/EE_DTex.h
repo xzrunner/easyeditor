@@ -10,6 +10,7 @@ namespace ee
 {
 
 class Image;
+class DTexC1;
 
 class DTex
 {
@@ -28,6 +29,9 @@ public:
 
 	dtex_cg* GetDtexCG();
 
+	DTexC1* GetFbo0() { return m_fbo0; }
+	DTexC1* GetFbo1() { return m_fbo1; }
+
 	void OnSize(int w, int h);
 
 	void DebugDraw() const;
@@ -40,6 +44,8 @@ private:
 
 private:
 	std::map<std::string, int> m_path2id;
+
+	DTexC1 *m_fbo0, *m_fbo1;
 
 private:
 	static DTex* m_instance;

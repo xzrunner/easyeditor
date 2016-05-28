@@ -112,11 +112,7 @@ void ImageSymbol::DrawOrtho(const RenderParams& params, sm::vec2* vertices, floa
 	if (mgr->GetShaderType() == sl::FILTER) {
 		sl::FilterShader* shader = static_cast<sl::FilterShader*>(mgr->GetShader(sl::FILTER));
 		shader->SetColor(params.color.mul.ToABGR(), params.color.add.ToABGR());
-		if (shader->GetMode() == sl::FM_GAUSSIAN_BLUR_HORI || shader->GetMode() == sl::FM_GAUSSIAN_BLUR_VERT) {
-			DrawGaussianBlur(params, vertices, texcoords, texid);
-		} else {
-			shader->Draw(&vertices[0].x, texcoords, texid);
-		}
+		shader->Draw(&vertices[0].x, texcoords, texid);
 	} else if (mgr->GetShaderType() == sl::SPRITE2) {
 		sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
 		shader->SetColor(params.color.mul.ToABGR(), params.color.add.ToABGR());
@@ -154,11 +150,6 @@ void ImageSymbol::DrawPseudo3D(const RenderParams& params, sm::vec2* vertices, f
 	shader->SetColor(params.color.mul.ToABGR(), params.color.add.ToABGR());
 	shader->SetColorMap(params.color.rmap.ToABGR(), params.color.gmap.ToABGR(), params.color.bmap.ToABGR());
 	shader->Draw(&_vertices[0].x, &_texcoords[0].x, texid);
-}
-
-void ImageSymbol::DrawGaussianBlur(const RenderParams& params, sm::vec2* vertices, float* texcoords, int texid) const
-{
-	// todo fbo use dtex_c1 ?, should pass texture size!
 }
 
 }

@@ -10,6 +10,7 @@
 #include "Camera.h"
 #include "Config.h"
 #include "SettingData.h"
+#include "SpriteGaussianBlur.h"
 
 #include <shaderlab.h>
 
@@ -65,15 +66,19 @@ void SpriteRenderer::Draw(const Sprite* spr,
 			SpriteBlend::Draw(spr, params.mt);
 		}
 	} else if (filter != s2::FM_NULL) {
-		if (params.set_shader) {
-			mgr->SetShader(sl::FILTER);
-		}
-		sl::FilterShader* shader = static_cast<sl::FilterShader*>(mgr->GetShader(sl::FILTER));
-		shader->SetMode(sl::FILTER_MODE(filter));
 		s2::RenderParams t = params;
 		t.shader.filter = filter;
 		t.camera = ct;
-		DrawImpl(spr, t);
+		if (t.shader.filter == s2::FM_GAUSSIAN_BLUR) {
+			SpriteGaussianBlur::Draw(spr, t.mt);
+		} else {
+			if (params.set_shader) {
+				mgr->SetShader(sl::FILTER);
+			}
+			sl::FilterShader* shader = static_cast<sl::FilterShader*>(mgr->GetShader(sl::FILTER));
+			shader->SetMode(sl::FILTER_MODE(filter));
+			DrawImpl(spr, t);
+		}
 	} else {
 		if (params.set_shader) {
 			mgr->SetShader(sl::SPRITE2);

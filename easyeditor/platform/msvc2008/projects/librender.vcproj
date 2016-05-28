@@ -154,6 +154,14 @@
 			Name="adapter"
 			>
 			<File
+				RelativePath="..\..\..\include\ee\DTexC1.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\DTexC1.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\source\render\EE_DTex.cpp"
 				>
 			</File>
@@ -251,6 +259,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\include\ee\SpriteBlend.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\source\render\SpriteGaussianBlur.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\SpriteGaussianBlur.h"
 				>
 			</File>
 			<File
