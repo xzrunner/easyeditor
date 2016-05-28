@@ -11,6 +11,7 @@ enum FilterMode
 	FM_EDGE_DETECTION		= 10,
 	FM_RELIEF,
 	FM_OUTLINE,
+	FM_OUTER_GLOW,
 
 	FM_GRAY					= 20,
 	FM_BLUR,

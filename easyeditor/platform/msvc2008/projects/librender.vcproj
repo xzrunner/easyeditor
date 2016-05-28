@@ -270,6 +270,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\source\render\SpriteOuterGlow.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\SpriteOuterGlow.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\source\render\SpriteRenderer.cpp"
 				>
 			</File>

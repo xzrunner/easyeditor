@@ -12,6 +12,7 @@ FilterModes::FilterModes()
 	m_modes.push_back(Item(s2::FM_EDGE_DETECTION, "edge detection", "边界检测"));
 	m_modes.push_back(Item(s2::FM_RELIEF, "relief", "浮雕"));
 	m_modes.push_back(Item(s2::FM_OUTLINE, "outline", "包围"));
+	m_modes.push_back(Item(s2::FM_OUTER_GLOW, "outer glow", "外发光"));
 
 	m_modes.push_back(Item(s2::FM_GRAY, "gray", "灰度"));
 	m_modes.push_back(Item(s2::FM_BLUR, "blur", "模糊"));

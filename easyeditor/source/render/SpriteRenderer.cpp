@@ -11,6 +11,7 @@
 #include "Config.h"
 #include "SettingData.h"
 #include "SpriteGaussianBlur.h"
+#include "SpriteOuterGlow.h"
 
 #include <shaderlab.h>
 
@@ -70,7 +71,9 @@ void SpriteRenderer::Draw(const Sprite* spr,
 		t.shader.filter = filter;
 		t.camera = ct;
 		if (t.shader.filter == s2::FM_GAUSSIAN_BLUR) {
-			SpriteGaussianBlur::Draw(spr, t.mt);
+			SpriteGaussianBlur::Draw(spr, t);
+		} else if (t.shader.filter == s2::FM_OUTER_GLOW) {
+			SpriteOuterGlow::Draw(spr, t);
 		} else {
 			if (params.set_shader) {
 				mgr->SetShader(sl::FILTER);
