@@ -152,30 +152,6 @@
 				Name="render"
 				>
 				<File
-					RelativePath="..\..\..\include\sprite2\BlendMode.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\sprite2\CameraMode.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\sprite2\FilterMode.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\sprite2\MaskMode.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\sprite2\RenderCamera.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\sprite2\RenderCamera.inl"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\include\sprite2\RenderColor.h"
 					>
 				</File>
@@ -188,9 +164,109 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\source\dataset\RenderShader.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\include\sprite2\RenderShader.h"
 					>
 				</File>
+				<Filter
+					Name="filter"
+					>
+					<File
+						RelativePath="..\..\..\source\dataset\FilterFactory.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\include\sprite2\FilterFactory.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\include\sprite2\FilterMode.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\include\sprite2\RenderFilter.h"
+						>
+					</File>
+					<Filter
+						Name="items"
+						>
+						<File
+							RelativePath="..\..\..\include\sprite2\RFBlur.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\include\sprite2\RFBurningMap.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\include\sprite2\RFEdgeDetection.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\include\sprite2\RFGaussianBlur.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\include\sprite2\RFGray.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\include\sprite2\RFHeatHaze.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\include\sprite2\RFNull.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\include\sprite2\RFOuterGlow.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\include\sprite2\RFOutline.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\include\sprite2\RFRelief.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\include\sprite2\RFShockWave.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\include\sprite2\RFSwirl.h"
+							>
+						</File>
+					</Filter>
+				</Filter>
+				<Filter
+					Name="blend"
+					>
+					<File
+						RelativePath="..\..\..\include\sprite2\BlendMode.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="camera"
+					>
+					<File
+						RelativePath="..\..\..\include\sprite2\CameraMode.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\include\sprite2\RenderCamera.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\include\sprite2\RenderCamera.inl"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="primitive"
@@ -588,6 +664,10 @@
 		<Filter
 			Name="utility"
 			>
+			<File
+				RelativePath="..\..\..\include\sprite2\Cloneable.h"
+				>
+			</File>
 			<File
 				RelativePath="..\..\..\include\sprite2\Object.h"
 				>

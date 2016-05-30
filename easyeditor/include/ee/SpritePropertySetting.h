@@ -37,9 +37,6 @@ protected:
 	Sprite* GetSprite();
 
 private:
-	wxArrayString TransToWXStringArray(const std::vector<std::string>& src);
-
-private:
 	SpritePropertyImpl* m_impl;
 
 	wxPropertyGrid* m_pg;

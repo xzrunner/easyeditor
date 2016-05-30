@@ -386,6 +386,18 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="utility"
+			>
+			<File
+				RelativePath="..\..\..\source\gui\WXHelper.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\WXHelper.h"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

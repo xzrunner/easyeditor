@@ -6,6 +6,7 @@
 
 #include <shaderlab.h>
 #include <sprite2/RenderParams.h>
+#include <sprite2/FilterFactory.h>
 
 namespace ee
 {
@@ -18,12 +19,12 @@ void SpriteOuterGlow::Draw(const Sprite* spr, const s2::RenderParams& params)
 	s2::RenderParams _params = params;
 	_params.set_shader = false;
 	_params.root_spr = spr->GetCore();
-	_params.shader.filter = s2::FM_NULL;
+	_params.shader.filter = s2::FilterFactory::Instance()->GetTemp(s2::FM_NULL);
 
 	Sprite* spr_no_const = const_cast<Sprite*>(spr);
 
-	s2::FilterMode ori_filter = spr->GetShader().filter;
-	spr_no_const->GetShader().filter = s2::FM_NULL;
+	s2::RenderFilter* ori_filter = spr->GetShader().filter;
+	spr_no_const->GetShader().filter = s2::FilterFactory::Instance()->GetTemp(s2::FM_NULL);
 
 	s2::RenderColor ori_color = spr->GetColor();
 	spr_no_const->GetColor() = s2::RenderColor();

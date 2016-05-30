@@ -1,23 +1,26 @@
 #ifndef _SPRITE2_RENDER_SHADER_H_
 #define _SPRITE2_RENDER_SHADER_H_
 
-#include "FilterMode.h"
 #include "BlendMode.h"
+
+#include <stddef.h>
 
 namespace s2
 {
 
+class RenderFilter;
+
 class RenderShader
 {
 public:
-	FilterMode	filter;
-	BlendMode	blend;
+	RenderFilter*	filter;
+	BlendMode		blend;
 
 	float filter_params[4];
 
 public:
-	RenderShader() 
-		: filter(FM_NULL)
+	RenderShader()
+		: filter(NULL)
 		, blend(BM_NULL)
 	{}
 

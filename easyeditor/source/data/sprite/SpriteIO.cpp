@@ -8,6 +8,10 @@
 #include <sprite2/RenderColor.h>
 #include <sprite2/RenderShader.h>
 #include <sprite2/RenderCamera.h>
+#include <sprite2/FilterFactory.h>
+#include <sprite2/RenderFilter.h>
+
+#include <assert.h>
 
 namespace ee
 {
@@ -68,7 +72,9 @@ void SpriteIO::LoadShader(const Json::Value& val, s2::RenderShader& shader)
 	if (!val["filter"].isNull()) {
 		std::string disc = val["filter"].asString();
 		if (Config::Instance()->IsRenderOpen()) {
-			shader.filter = FilterModes::Instance()->GetModeFromNameEN(disc);
+			s2::FilterMode filter = FilterModes::Instance()->GetModeFromNameEN(disc);
+			assert(!shader.filter);
+			shader.filter = s2::FilterFactory::Instance()->Create(filter);
 		}
 	}
 }
@@ -77,7 +83,7 @@ void SpriteIO::StoreShader(Json::Value& val, const s2::RenderShader& shader)
 {
 	if (Config::Instance()->IsRenderOpen()) {
 		val["blend"] = BlendModes::Instance()->GetNameENFromMode(shader.blend);
-		val["filter"] = FilterModes::Instance()->GetNameENFromMode(shader.filter);
+		val["filter"] = FilterModes::Instance()->GetNameENFromMode(shader.filter->GetMode());
 	}
 }
 

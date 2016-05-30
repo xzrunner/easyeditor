@@ -8,6 +8,11 @@
 
 #include <shaderlab.h>
 #include <sprite2/RenderParams.h>
+#include <sprite2/FilterFactory.h>
+#include <sprite2/RenderFilter.h>
+#include <sprite2/RFGaussianBlur.h>
+
+#include <assert.h>
 
 namespace ee
 {
@@ -46,8 +51,9 @@ void SpriteGaussianBlur::DrawToFbo0(const Sprite* spr, const s2::RenderParams& p
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	mgr->SetShader(sl::FILTER);
 
-	const int TIMES = 9;
-	for (int i = 0; i < TIMES; ++i) {
+	assert(params.shader.filter->GetMode() == s2::FM_GAUSSIAN_BLUR);
+	s2::RFGaussianBlur* filter = static_cast<s2::RFGaussianBlur*>(params.shader.filter);
+	for (int i = 0, n = filter->GetIterations(); i < n; ++i) {
 		DrawBetweenFBO(fbo0, fbo1, true, params.color);
 		DrawBetweenFBO(fbo1, fbo0, false, params.color);
 	}
@@ -93,14 +99,14 @@ void SpriteGaussianBlur::DrawInit(const Sprite* spr, const s2::RenderParams& par
 	_params.mt.Translate(-offset.x, -offset.y, 0);
 	_params.set_shader = false;
 	_params.root_spr = spr->GetCore();
-	_params.shader.filter = s2::FM_NULL;
+	_params.shader.filter = s2::FilterFactory::Instance()->GetTemp(s2::FM_NULL);
 
-	s2::FilterMode filter = spr->GetShader().filter;
-	const_cast<Sprite*>(spr)->GetShader().filter = s2::FM_NULL;
+	s2::RenderFilter* ori_filter = spr->GetShader().filter;
+	const_cast<Sprite*>(spr)->GetShader().filter = s2::FilterFactory::Instance()->GetTemp(s2::FM_NULL);
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	mgr->SetShader(sl::SPRITE2);
 	SpriteRenderer::Draw(spr, _params);
-	const_cast<Sprite*>(spr)->GetShader().filter = filter;
+	const_cast<Sprite*>(spr)->GetShader().filter = ori_filter;
 
 	fbo->Unbind();
 }

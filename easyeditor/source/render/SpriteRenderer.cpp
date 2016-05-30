@@ -13,6 +13,8 @@
 #include "SpriteGaussianBlur.h"
 #include "SpriteOuterGlow.h"
 
+#include <sprite2/RenderFilter.h>
+
 #include <shaderlab.h>
 
 namespace ee
@@ -32,8 +34,8 @@ void SpriteRenderer::Draw(const Sprite* spr,
 		blend = spr->GetShader().blend;
 	}
 
-	s2::FilterMode filter;
-	if (params.shader.filter != s2::FM_NULL) {
+	s2::RenderFilter* filter;
+	if (params.shader.filter && params.shader.filter->GetMode()!= s2::FM_NULL) {
 		filter = params.shader.filter;
 	} else {
 		filter = spr->GetShader().filter;
@@ -66,20 +68,20 @@ void SpriteRenderer::Draw(const Sprite* spr,
 		if (cam->Type() == "ortho") {
 			SpriteBlend::Draw(spr, params.mt);
 		}
-	} else if (filter != s2::FM_NULL) {
+	} else if (filter->GetMode() != s2::FM_NULL) {
 		s2::RenderParams t = params;
 		t.shader.filter = filter;
 		t.camera = ct;
-		if (t.shader.filter == s2::FM_GAUSSIAN_BLUR) {
+		if (filter->GetMode() == s2::FM_GAUSSIAN_BLUR) {
 			SpriteGaussianBlur::Draw(spr, t);
-		} else if (t.shader.filter == s2::FM_OUTER_GLOW) {
+		} else if (filter->GetMode() == s2::FM_OUTER_GLOW) {
 			SpriteOuterGlow::Draw(spr, t);
 		} else {
 			if (params.set_shader) {
 				mgr->SetShader(sl::FILTER);
 			}
 			sl::FilterShader* shader = static_cast<sl::FilterShader*>(mgr->GetShader(sl::FILTER));
-			shader->SetMode(sl::FILTER_MODE(filter));
+			shader->SetMode(sl::FILTER_MODE(filter->GetMode()));
 			DrawImpl(spr, t);
 		}
 	} else {

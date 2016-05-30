@@ -1,6 +1,8 @@
 #include "S2_Sprite.h"
 #include "S2_Symbol.h"
 #include "OBB.h"
+#include "RenderFilter.h"
+#include "FilterFactory.h"
 
 namespace s2
 {
@@ -15,6 +17,8 @@ Sprite::Sprite(void* ud)
 {
 	m_bounding = new OBB();
 	m_bounding_dirty = true;
+
+	m_shader.filter = FilterFactory::Instance()->Create(FM_NULL);
 }
 
 Sprite::Sprite(const Sprite& spr, void* ud)
@@ -31,11 +35,15 @@ Sprite::Sprite(const Sprite& spr, void* ud)
 {
 	m_bounding = new OBB(*static_cast<OBB*>(spr.m_bounding));
 	m_bounding_dirty = false;
+
+	m_shader.filter = FilterFactory::Instance()->Create(spr.Shader().filter->GetMode());
 }
 
 Sprite::~Sprite()
 {
 	delete m_bounding;
+
+	delete m_shader.filter;
 }
 
 void Sprite::SetPosition(const sm::vec2& pos)

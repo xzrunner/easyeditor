@@ -8,6 +8,8 @@
 
 #include <sprite2/RenderShader.h>
 #include <sprite2/ImageSprite.h>
+#include <sprite2/FilterMode.h>
+#include <sprite2/RenderFilter.h>
 
 namespace ee
 {
@@ -54,10 +56,11 @@ bool ImageSprite::Update(float dt)
 {
 	if (m_core->Update(dt)) return true;
 
-	return GetShader().filter == s2::FM_HEAT_HAZE 
-		|| GetShader().filter == s2::FM_SHOCK_WAVE 
-		|| GetShader().filter == s2::FM_SWIRL
-		|| GetShader().filter == s2::FM_BURNING_MAP;
+	s2::FilterMode filter = GetShader().filter->GetMode();
+	return filter == s2::FM_HEAT_HAZE 
+		|| filter == s2::FM_SHOCK_WAVE 
+		|| filter == s2::FM_SWIRL
+		|| filter == s2::FM_BURNING_MAP;
 }
 
 const ImageSymbol& ImageSprite::GetSymbol() const

@@ -1,0 +1,87 @@
+#include "SpriteFilterPSHelper.h"
+#include "FilterModes.h"
+#include "WXHelper.h"
+#include "Sprite.h"
+#include "SpriteGaussianBlur.h"
+#include "StringHelper.h"
+
+#include <sprite2/RenderShader.h>
+#include <sprite2/RenderFilter.h>
+#include <sprite2/FilterFactory.h>
+#include <sprite2/RFGaussianBlur.h>
+
+#include <vector>
+
+namespace ee
+{
+
+void SpriteFilterPSHelper::InitPS(const Sprite* spr, wxPropertyGrid* pg)
+{
+	std::vector<std::string> names;
+	FilterModes::Instance()->GetAllNameCN(names);
+	wxEnumProperty* filter_prop = new wxEnumProperty("Filter", wxPG_LABEL, WXHelper::ToWXStringArray(names));
+	s2::FilterMode filter = spr->GetShader().filter->GetMode();
+	int idx = FilterModes::Instance()->GetIdxFromMode(filter);
+	filter_prop->SetValue(idx);
+	pg->Append(filter_prop);
+
+	filter_prop->SetExpanded(true);
+	CreateSubPS(pg, filter_prop, spr->GetShader().filter);
+}
+
+bool SpriteFilterPSHelper::FromPS(const std::string& name, const wxAny& value, Sprite* spr)
+{
+	bool ret = false;
+	if (name == "Filter")
+	{
+		int idx = wxANY_AS(value, int);
+		s2::FilterMode filter = FilterModes::Instance()->GetModeFromIdx(idx);
+		delete spr->GetShader().filter;
+		spr->GetShader().filter = s2::FilterFactory::Instance()->Create(filter);
+		ret = true;
+	}
+	else
+	{
+		switch (spr->GetShader().filter->GetMode())
+		{
+		case s2::FM_GAUSSIAN_BLUR:
+			if (name == "Filter.Iterations")
+			{
+				int iterations = wxANY_AS(value, int);
+				s2::RFGaussianBlur* filter = static_cast<s2::RFGaussianBlur*>(spr->GetShader().filter);
+				filter->SetIterations(iterations);
+				ret = true;
+			}
+			break;
+		}
+	}
+	return ret;
+}
+
+void SpriteFilterPSHelper::ToPS(const Sprite* spr, wxPropertyGrid* pg)
+{
+	wxPGProperty* filter_prop = pg->GetProperty("Filter");
+
+	const s2::RenderFilter* filter = spr->GetShader().filter;
+	filter_prop->SetValue(FilterModes::Instance()->GetIdxFromMode(filter->GetMode()));
+
+	filter_prop->DeleteChildren();
+	CreateSubPS(pg, filter_prop, filter);
+}
+
+void SpriteFilterPSHelper::CreateSubPS(wxPropertyGrid* pg, wxPGProperty* parent, const s2::RenderFilter* filter)
+{
+	s2::FilterMode mode = filter->GetMode();
+	switch (mode)
+	{
+	case s2::FM_GAUSSIAN_BLUR:
+		{
+			const s2::RFGaussianBlur* gb = static_cast<const s2::RFGaussianBlur*>(filter);
+			wxPGProperty* prop = new wxIntProperty("Iterations", wxPG_LABEL, gb->GetIterations());
+			pg->AppendIn(parent, prop);
+		}
+		break;
+	}
+}
+
+}

@@ -19,6 +19,7 @@
 #include <sprite2/RenderColor.h>
 #include <sprite2/RenderShader.h>
 #include <sprite2/RenderCamera.h>
+#include <sprite2/RenderFilter.h>
 
 namespace erespacker
 {
@@ -158,7 +159,7 @@ void PackAnimation::LoadSprTrans(const ee::Sprite* spr, SpriteTrans& trans, bool
 	LoadSprMat(spr, trans, force_mat);
 	LoadSprColor(spr, trans);
 	trans.blend = static_cast<int>(spr->GetShader().blend);
-	trans.filter = static_cast<int>(spr->GetShader().filter);
+	trans.filter = static_cast<int>(spr->GetShader().filter->GetMode());
 	trans.camera = static_cast<int>(spr->GetCamera().mode);
 }
 

@@ -7,6 +7,8 @@
 #include "EE_GTxt.h"
 #include "FilterModes.h"
 
+#include <sprite2/RenderFilter.h>
+
 namespace ee
 {
 
@@ -24,7 +26,7 @@ void DrawSpritesVisitor::Visit(Object* object, bool& next)
 		return;
 	}
 
-	int filter_mode_idx = FilterModes::Instance()->QueryShaderIdx(spr->GetShader().filter);
+	int filter_mode_idx = FilterModes::Instance()->QueryShaderIdx(spr->GetShader().filter->GetMode());
 //	ShaderMgr::Instance()->SetSpriteShader(filter_mode_idx);
 
 	DrawSprite(spr);
