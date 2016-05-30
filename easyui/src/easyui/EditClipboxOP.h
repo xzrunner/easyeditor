@@ -3,6 +3,8 @@
 
 #include <ee/ZoomViewOP.h>
 
+#include <SM_Rect.h>
+
 namespace eui
 {
 

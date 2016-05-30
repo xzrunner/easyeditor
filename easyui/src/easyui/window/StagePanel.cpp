@@ -128,8 +128,9 @@ void StagePanel::StoreToFile(const char* filename) const
 
 	// wrapper complex
 	ecomplex::Symbol wrapper_complex;
-	for_each(sprites.begin(), sprites.end(), ee::RetainObjectFunctor<ee::Sprite>());
-	wrapper_complex.m_sprites = sprites;
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		wrapper_complex.Add(sprites[i]);
+	}
 	std::string name = filename;
 	name = name.substr(0, name.find_last_of('_'));
 	std::string wrapper_path = name + "_wrapper_complex[gen].json";

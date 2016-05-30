@@ -27,6 +27,11 @@ void ToolbarPanel::EnableVert(bool enable)
 	m_vert_check->SetValue(enable);
 }
 
+void ToolbarPanel::EnableReverseOrder(bool enable)
+{
+	m_reverse_check->SetValue(enable);
+}
+
 void ToolbarPanel::SetSizeText(int width, int height)
 {
 	m_width_text->SetValue(ee::StringHelper::ToString(width));
@@ -45,12 +50,12 @@ wxSizer* ToolbarPanel::InitLayout()
 	}
 	sizer->AddSpacer(20);
 	{
-		const sm::rect& r = m_stage_panel->GetList().GetClipbox();
+		sm::vec2 sz = m_stage_panel->GetList().GetClipbox().Size();
 		{
 			wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
 			csizer->Add(new wxStaticText(this, wxID_ANY, "width"), 0, wxLEFT | wxRIGHT, 5);
 
-			m_width_text = new wxTextCtrl(this, wxID_ANY, ee::StringHelper::ToString(r.Width()),
+			m_width_text = new wxTextCtrl(this, wxID_ANY, ee::StringHelper::ToString(sz.x),
 				wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
 			Connect(m_width_text->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeSize));
 			csizer->Add(m_width_text);
@@ -62,7 +67,7 @@ wxSizer* ToolbarPanel::InitLayout()
 			wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
 			csizer->Add(new wxStaticText(this, wxID_ANY, "height"), 0, wxLEFT | wxRIGHT, 5);
 
-			m_height_text = new wxTextCtrl(this, wxID_ANY, ee::StringHelper::ToString(r.Height()),
+			m_height_text = new wxTextCtrl(this, wxID_ANY, ee::StringHelper::ToString(sz.y),
 				wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
 			Connect(m_height_text->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeSize));
 			csizer->Add(m_height_text);
@@ -85,6 +90,13 @@ wxSizer* ToolbarPanel::InitLayout()
 				wxCommandEventHandler(ToolbarPanel::OnChangeVert));
 			sizer->Add(m_vert_check);
 		}
+	}
+	sizer->AddSpacer(20);
+	{
+		m_reverse_check = new wxCheckBox(this, wxID_ANY, wxT("reverse order"));
+		Connect(m_reverse_check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
+			wxCommandEventHandler(ToolbarPanel::OnReverseOrder));
+		sizer->Add(m_reverse_check);		
 	}
 	return sizer;
 }
@@ -119,6 +131,12 @@ void ToolbarPanel::OnChangeHori(wxCommandEvent& event)
 void ToolbarPanel::OnChangeVert(wxCommandEvent& event)
 {
 	m_stage_panel->GetList().EnableVert(event.IsChecked());
+}
+
+void ToolbarPanel::OnReverseOrder(wxCommandEvent& event)
+{
+	m_stage_panel->GetList().EnableReverseOrder(event.IsChecked());
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 }

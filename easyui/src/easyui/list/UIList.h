@@ -1,6 +1,8 @@
 #ifndef _EASYUI_LIST_UI_LIST_H_
 #define _EASYUI_LIST_UI_LIST_H_
 
+#include <SM_Rect.h>
+
 #include <json/json.h>
 
 namespace ee { class Sprite; class Visitor; }
@@ -32,6 +34,9 @@ public:
 	void EnableHori(bool enable);
 	void EnableVert(bool enable);
 
+	bool IsReverseOrderEnable() const { return m_reverse_order; }
+	void EnableReverseOrder(bool enable) { m_reverse_order = enable; }
+
 private:
 	bool Filling();
 	bool Arrange(float hori_space, float vert_space);
@@ -51,6 +56,8 @@ private:
 
 	float m_hori_space;
 	float m_vert_space;	
+
+	bool m_reverse_order;
 
 }; // UIList
 

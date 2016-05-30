@@ -17,6 +17,7 @@ namespace list
 {
 
 UIList::UIList()
+	: m_reverse_order(false)
 {
 	m_clipbox.xmin = m_clipbox.ymin = -200;
 	m_clipbox.xmax = m_clipbox.ymax =  200;
@@ -99,10 +100,18 @@ bool UIList::ClearAllSprite()
 
 void UIList::TraverseSprites(ee::Visitor& visitor) const
 {
-	for (int i = 0, n = m_items.size(); i < n; ++i) {
-		bool has_next;
-		visitor.Visit(m_items[i], has_next);
-		if (!has_next) break;
+	if (m_reverse_order) {
+		for (int i = m_items.size() - 1; i >= 0; --i) {
+			bool has_next;
+			visitor.Visit(m_items[i], has_next);
+			if (!has_next) break;
+		}
+	} else {
+		for (int i = 0, n = m_items.size(); i < n; ++i) {
+			bool has_next;
+			visitor.Visit(m_items[i], has_next);
+			if (!has_next) break;
+		}
 	}
 }
 
@@ -115,14 +124,18 @@ void UIList::StoreToFile(const char* filename) const
 
 	// items complex
 	ecomplex::Symbol items_complex;
-	for_each(m_items.begin(), m_items.end(), ee::RetainObjectFunctor<ee::Sprite>());
-	for (int i = 0, n = m_items.size(); i < n; ++i) {
-		items_complex.Add(m_items[i]);
-	}
-	for (int i = 0, n = m_items.size(); i < n; ++i) {
-		ee::Sprite* spr = m_items[i];
-		spr->name = "item" + ee::StringHelper::ToString(i+1);
-		spr->Retain();
+	if (m_reverse_order) {
+		for (int i = m_items.size() - 1; i >= 0; --i) {
+			ee::Sprite* spr = m_items[i];
+			spr->name = "item" + ee::StringHelper::ToString(m_items.size() - i);
+			items_complex.Add(spr);
+		}
+	} else {
+		for (int i = 0, n = m_items.size(); i < n; ++i) {
+			ee::Sprite* spr = m_items[i];
+			spr->name = "item" + ee::StringHelper::ToString(i + 1);
+			items_complex.Add(spr);
+		}
 	}
 	std::string items_path = name + "_items_complex[gen].json";
 	items_complex.SetFilepath(items_path);
@@ -147,8 +160,10 @@ void UIList::StoreToFile(const char* filename) const
 	value["type"] = get_widget_desc(ID_LIST);
 	value["horizontal"] = m_horizontal;
 	value["vertical"] = m_vertical;
-	value["clipbox"]["w"] = m_clipbox.Width();
-	value["clipbox"]["h"] = m_clipbox.Height();
+	value["reverse_order"] = m_reverse_order;
+	sm::vec2 cb_sz = m_clipbox.Size();
+	value["clipbox"]["w"] = cb_sz.x;
+	value["clipbox"]["h"] = cb_sz.y;
 	value["clipbox"]["x"] = m_clipbox.xmin;
 	value["clipbox"]["y"] = m_clipbox.ymax;
 	value["hori space"] = m_hori_space;
@@ -187,6 +202,12 @@ void UIList::LoadFromFile(const char* filename)
 	m_horizontal = value["horizontal"].asBool();
 	m_vertical = value["vertical"].asBool();
 
+	if (!value["reverse_order"].isNull()) {
+		m_reverse_order = value["reverse_order"].asBool();
+	} else {
+		m_reverse_order = false;
+	}
+
 	m_hori_count = value["hori count"].asInt();
 	m_vert_count = value["vert count"].asInt();
 
@@ -198,10 +219,18 @@ void UIList::LoadFromFile(const char* filename)
 	ecomplex::Symbol items_complex;
 	items_complex.LoadFromFile(items_filepath);
 	const std::vector<s2::Sprite*>& children = items_complex.GetChildren();
-	for (int i = 0, n = children.size(); i < n; ++i) {
-		ee::Sprite* spr = static_cast<ee::Sprite*>(children[i]->GetUD());
-		spr->Retain();
-		m_items.push_back(spr);
+	if (!m_reverse_order) {
+		for (int i = 0, n = children.size(); i < n; ++i) {
+			ee::Sprite* spr = static_cast<ee::Sprite*>(children[i]->GetUD());
+			spr->Retain();
+			m_items.push_back(spr);
+		}
+	} else {
+		for (int i = 0, n = children.size(); i < n; ++i) {
+			ee::Sprite* spr = static_cast<ee::Sprite*>(children[i]->GetUD());
+			spr->Retain();
+			m_items.insert(m_items.begin(), spr);
+		}
 	}
 
 	if (!children.empty()) {
@@ -290,9 +319,9 @@ bool UIList::Filling()
 	m_items.clear();
 
 	sm::vec2 base = m_item_spr->GetPosition();
-	sm::rect item_r = m_item_spr->GetRect();
-	float hw = item_r.Width() * 0.5f;
-	float hh = item_r.Height() * 0.5f;
+	sm::vec2 item_sz = m_item_spr->GetRect().Size();
+	float hw = item_sz.x * 0.5f;
+	float hh = item_sz.y * 0.5f;
 
 	sm::rect region = m_clipbox;
 	if (m_horizontal) {

@@ -18,6 +18,8 @@ public:
 	void EnableHori(bool enable);
 	void EnableVert(bool enable);
 
+	void EnableReverseOrder(bool enable);
+
 	void SetSizeText(int width, int height);
 
 protected:
@@ -31,6 +33,8 @@ private:
 	void OnChangeHori(wxCommandEvent& event);
 	void OnChangeVert(wxCommandEvent& event);
 
+	void OnReverseOrder(wxCommandEvent& event);
+
 private:
 	StagePanel* m_stage_panel;
 
@@ -39,6 +43,8 @@ private:
 
 	wxCheckBox* m_hori_check;
 	wxCheckBox* m_vert_check;
+
+	wxCheckBox* m_reverse_check;
 
 }; // ToolbarPanel
 
