@@ -4,6 +4,8 @@
 #include <ee/EE_RVG.h>
 #include <ee/Math2D.h>
 
+#include <sprite2/Color.h>
+
 #include <assert.h>
 
 namespace eanim

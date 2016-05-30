@@ -190,15 +190,14 @@ void FileIO::StoreAsGif(const std::string& src, const std::string& dst)
 	eanim::Symbol* anim = static_cast<eanim::Symbol*>(symbol);
 
 	int max_frame = anim->getMaxFrameIndex();
-	int width = symbol->GetSize().Width();
-	int height = symbol->GetSize().Height();
-	AnimatedGifSaver saver(width, height);
+	sm::vec2 sz = symbol->GetSize().Size();
+	AnimatedGifSaver saver(sz.x, sz.y);
 	for (int i = 0; i < max_frame; ++i)
 	{
 		anim->setFrameIndex(i + 1);
 		uint8_t* rgba = ss.OutputToMemory(symbol, true);
 
-		uint8_t* rgb = eimage::RGBA2RGB(rgba, width, height, true);
+		uint8_t* rgb = eimage::RGBA2RGB(rgba, sz.x, sz.y, true);
 		saver.AddFrame(rgb, 1.0f / anim->getFPS());
 		delete[] rgba;
 		delete[] rgb;
@@ -263,7 +262,7 @@ KeyFrame* FileIO::LoadFrame(Layer* layer, const Json::Value& frameValue, const s
 	Json::Value actorValue = frameValue["actor"][i++];
 	while (!actorValue.isNull()) {
 		ee::Sprite* actor = LoadActor(actorValue, dir);
-		frame->Insert(actor);
+		frame->Insert(actor, INT_MAX);
 		actor->Release();
 		actorValue = frameValue["actor"][i++];
 	}
@@ -425,7 +424,7 @@ KeyFrame* FileIO::LoadFrame(Layer* layer, rapidxml::xml_node<>* frameNode,
 		->first_node("DOMSymbolInstance");
 	while (actorNode) {
 		ee::Sprite* actor = LoadActor(actorNode, mapNamePath);
-		frame->Insert(actor);
+		frame->Insert(actor, INT_MAX);
 		actor->Release();
 		actorNode = actorNode->next_sibling();
 	}

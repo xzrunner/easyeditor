@@ -153,7 +153,7 @@ void KeysContentEdit::PasteSelection()
 			symbol->RefreshThumbnail(filepath);
 			ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(symbol);
 			spr->Load(s_val);
-			frame->Insert(spr);
+			frame->Insert(spr, INT_MAX);
 			spr->Release();
 			symbol->Release();
 		}

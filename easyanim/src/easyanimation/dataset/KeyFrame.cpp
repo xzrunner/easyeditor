@@ -3,6 +3,8 @@
 #include "Layer.h"
 #include "SpriteUserData.h"
 
+#include <ee/ObjectVector.h>
+
 #include <easymesh.h>
 #include <easyanim.h>
 #include <easyparticle3d.h>
@@ -55,12 +57,12 @@ void KeyFrame::CopyFromOther(const KeyFrame* src)
 	// todo spr's ud
 }
 
-void KeyFrame::Insert(ee::Sprite* sprite)
+void KeyFrame::Insert(ee::Sprite* sprite, int idx)
 {
 	sprite->Retain();
 
 	set_sprite_user_data(sprite, m_layer, this);
-	m_sprites.push_back(sprite);
+	ee::ObjectVector<ee::Sprite>::Insert(m_sprites, sprite, idx);
 	if (m_layer) {
 		sprite->SetObserver(&m_layer->GetSpriteObserver());
 		m_layer->GetSpriteObserver().insert(sprite, m_time);
@@ -74,64 +76,17 @@ bool KeyFrame::Remove(ee::Sprite* sprite)
 		m_layer->GetSpriteObserver().remove(sprite);
 	}
 
-	std::vector<ee::Sprite*>::iterator itr = m_sprites.begin();
-	for ( ; itr != m_sprites.end(); ++itr) 
-	{
-		if (*itr != sprite) {
-			continue;
-		}
-
-		(*itr)->Release();
-		m_sprites.erase(itr);
-
-		return true;
-	}
-
-	return false;
+	return ee::ObjectVector<ee::Sprite>::Remove(m_sprites, sprite);
 }
 
 bool KeyFrame::Reorder(const ee::Sprite* sprite, bool up)
 {
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-	{
-		if (m_sprites[i] != sprite) {
-			continue;
-		}
-
-		if (up && i != n - 1) {
-			std::swap(m_sprites[i], m_sprites[i+1]);
-			return true;
-		} else if (!up && i != 0) {
-			std::swap(m_sprites[i], m_sprites[i-1]);
-			return true;
-		}
-
-		return false;
-	}
-
-	return false;
+	return ee::ObjectVector<ee::Sprite>::ResetOrder(m_sprites, sprite, up);
 }
 
 bool KeyFrame::ReorderMost(const ee::Sprite* sprite, bool up)
 {
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-	{
-		if (m_sprites[i] != sprite) {
-			continue;
-		}
-
-		if (up && i != n - 1) {
-			std::swap(m_sprites[i], m_sprites[n - 1]);
-			return true;
-		} else if (!up && i != 0) {
-			std::swap(m_sprites[i], m_sprites[0]);
-			return true;
-		}
-
-		return false;
-	}
-
-	return false;
+	return ee::ObjectVector<ee::Sprite>::ResetOrderMost(m_sprites, sprite, up);
 }
 
 void KeyFrame::Clear()
@@ -140,8 +95,8 @@ void KeyFrame::Clear()
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 			m_layer->GetSpriteObserver().remove(m_sprites[i]);
 	}
-	for_each(m_sprites.begin(), m_sprites.end(), ee::ReleaseObjectFunctor<ee::Sprite>());
-	m_sprites.clear();
+
+	ee::ObjectVector<ee::Sprite>::Clear(m_sprites);
 }
 
 void KeyFrame::GetTweenSprite(const KeyFrame* start, const KeyFrame* end, 

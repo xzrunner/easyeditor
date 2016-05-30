@@ -122,7 +122,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 	case ee::MSG_INSERT_SPRITE:
 		{
 			ee::InsertSpriteSJ::Params* p = (ee::InsertSpriteSJ::Params*)ud;
-			Insert(p->spr);
+			Insert(p->spr, p->idx);
 		}
 		break;
 	case ee::MSG_REMOVE_SPRITE:
@@ -204,12 +204,12 @@ void StagePanel::ReorderMost(ee::Sprite* spr, bool up)
 	}
 }
 
-void StagePanel::Insert(ee::Sprite* spr)
+void StagePanel::Insert(ee::Sprite* spr, int idx)
 {
 	if (spr->GetUserData()) {
-		InsertWithUD(spr);
+		InsertWithUD(spr, idx);
 	} else {
-		InsertWithoutUD(spr);
+		InsertWithoutUD(spr, idx);
 	}
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
@@ -221,7 +221,7 @@ void StagePanel::Remove(ee::Sprite* spr)
 	}
 }
 
-void StagePanel::InsertWithUD(ee::Sprite* spr)
+void StagePanel::InsertWithUD(ee::Sprite* spr, int idx)
 {
 	SpriteUserData* ud = (SpriteUserData*)spr->GetUserData();
 	assert(ud);
@@ -234,20 +234,20 @@ void StagePanel::InsertWithUD(ee::Sprite* spr)
 		}
 
 		assert(m_frame);
-		m_frame->Insert(spr);
+		m_frame->Insert(spr, idx);
 
 		ud->layer = DataMgr::Instance()->GetLayers().GetLayer(ud->layer_idx);
 		ud->frame = m_frame;
 	} else {
 		assert(ud->frame);
-		ud->frame->Insert(spr);
+		ud->frame->Insert(spr, idx);
 	}
 }
 
-void StagePanel::InsertWithoutUD(ee::Sprite* spr)
+void StagePanel::InsertWithoutUD(ee::Sprite* spr, int idx)
 {
 	if (m_frame) {
-		m_frame->Insert(spr);
+		m_frame->Insert(spr, idx);
 	}
 }
 

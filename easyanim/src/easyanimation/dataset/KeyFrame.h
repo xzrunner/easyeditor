@@ -24,7 +24,7 @@ public:
 		return m_sprites.empty();
 	}
 
-	void Insert(ee::Sprite* sprite);
+	void Insert(ee::Sprite* sprite, int idx);
 	bool Remove(ee::Sprite* sprite);
 	bool Reorder(const ee::Sprite* sprite, bool up);
 	bool ReorderMost(const ee::Sprite* sprite, bool up);

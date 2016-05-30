@@ -162,9 +162,11 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 		}
  	}
 
-	ee::Snapshoot ss(region.Width(), region.Height());
+	sm::vec2 sz = region.Size();
+	sm::vec2 c = region.Center();
+	ee::Snapshoot ss(sz.x, sz.y);
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-		ss.DrawSprite(sprites[i], false, region.CenterX(), region.CenterY());
+		ss.DrawSprite(sprites[i], false, c.x, c.y);
 	}
 
 	ss.SaveToFile(filepath);

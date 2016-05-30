@@ -175,7 +175,7 @@ void CommonCMPT::OnLoadFromFolder(wxCommandEvent& event)
 			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(itr->second[i]);
 //			symbol->refresh();
 			ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-			frame->Insert(sprite);
+			frame->Insert(sprite, INT_MAX);
 			sprite->Release();
 			symbol->Release();
 		}
@@ -211,7 +211,7 @@ void CommonCMPT::OnLoadFromList(wxCommandEvent& event)
 		KeyFrame* frame = new KeyFrame(frame_idx);
 		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbols[i]);
 
-		frame->Insert(sprite);		
+		frame->Insert(sprite, INT_MAX);
 		layer->InsertKeyFrame(frame);
 
 		sprite->Release();

@@ -41,11 +41,11 @@ private:
 
 	void Reorder(ee::Sprite* spr, bool up);
 	void ReorderMost(ee::Sprite* spr, bool up);
-	void Insert(ee::Sprite* spr);
+	void Insert(ee::Sprite* spr, int idx);
 	void Remove(ee::Sprite* spr);
 
-	void InsertWithUD(ee::Sprite* spr);
-	void InsertWithoutUD(ee::Sprite* spr);
+	void InsertWithUD(ee::Sprite* spr, int idx);
+	void InsertWithoutUD(ee::Sprite* spr, int idx);
 
 	bool IsCurrFrameValid() const { return m_frame != NULL; }
 
