@@ -8,6 +8,7 @@
 #include <sprite2/RenderShader.h>
 #include <sprite2/RenderFilter.h>
 #include <sprite2/FilterFactory.h>
+#include <sprite2/RFEdgeDetection.h>
 #include <sprite2/RFGaussianBlur.h>
 
 #include <vector>
@@ -44,6 +45,15 @@ bool SpriteFilterPSHelper::FromPS(const std::string& name, const wxAny& value, S
 	{
 		switch (spr->GetShader().filter->GetMode())
 		{
+		case s2::FM_EDGE_DETECTION:
+			if (name == "Filter.Blend")
+			{
+				float blend = wxANY_AS(value, float);
+				s2::RFEdgeDetection* filter = static_cast<s2::RFEdgeDetection*>(spr->GetShader().filter);
+				filter->SetBlend(blend);
+				ret = true;
+			}
+			break;
 		case s2::FM_GAUSSIAN_BLUR:
 			if (name == "Filter.Iterations")
 			{
@@ -74,6 +84,13 @@ void SpriteFilterPSHelper::CreateSubPS(wxPropertyGrid* pg, wxPGProperty* parent,
 	s2::FilterMode mode = filter->GetMode();
 	switch (mode)
 	{
+	case s2::FM_EDGE_DETECTION:
+		{
+			const s2::RFEdgeDetection* ed = static_cast<const s2::RFEdgeDetection*>(filter);
+			wxPGProperty* prop = new wxFloatProperty("Blend", wxPG_LABEL, ed->GetBlend());
+			pg->AppendIn(parent, prop);
+		}
+		break;
 	case s2::FM_GAUSSIAN_BLUR:
 		{
 			const s2::RFGaussianBlur* gb = static_cast<const s2::RFGaussianBlur*>(filter);

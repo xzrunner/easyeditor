@@ -14,6 +14,7 @@
 #include "SpriteOuterGlow.h"
 
 #include <sprite2/RenderFilter.h>
+#include <sprite2/RFEdgeDetection.h>
 
 #include <shaderlab.h>
 
@@ -82,6 +83,16 @@ void SpriteRenderer::Draw(const Sprite* spr,
 			}
 			sl::FilterShader* shader = static_cast<sl::FilterShader*>(mgr->GetShader(sl::FILTER));
 			shader->SetMode(sl::FILTER_MODE(filter->GetMode()));
+			switch (filter->GetMode())
+			{
+			case s2::FM_EDGE_DETECTION:
+				{
+					s2::RFEdgeDetection* ed = static_cast<s2::RFEdgeDetection*>(filter);
+					sl::EdgeDetectProg* prog = static_cast<sl::EdgeDetectProg*>(shader->GetProgram(sl::FM_EDGE_DETECTION));
+					prog->SetBlend(ed->GetBlend());
+				}
+				break;
+			}
 			DrawImpl(spr, t);
 		}
 	} else {
