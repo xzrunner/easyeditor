@@ -10,7 +10,8 @@ class ImageSprite : public Sprite
 {
 public:
 	ImageSprite(void* ud);
-	
+	ImageSprite(const ImageSprite& spr, void* ud);
+
 	virtual bool Update(float dt) { return false; }
 	
 private:

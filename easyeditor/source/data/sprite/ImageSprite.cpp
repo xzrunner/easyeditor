@@ -22,7 +22,7 @@ ImageSprite::ImageSprite(const ImageSprite& sprite)
 	: Sprite(sprite)
 	, m_symbol(sprite.m_symbol)
 {
-	m_core = new s2::ImageSprite(*static_cast<s2::ImageSprite*>(sprite.m_core));
+	m_core = new s2::ImageSprite(*static_cast<s2::ImageSprite*>(sprite.m_core), this);
 
 	m_symbol->Retain();
 }

@@ -10,7 +10,8 @@ class Particle2dSprite : public Sprite
 {
 public:
 	Particle2dSprite(void* ud);
-	
+	Particle2dSprite(const Particle2dSprite& spr, void* ud);
+
 	virtual bool Update(float dt) { return false; }
 	
 private:

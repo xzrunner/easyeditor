@@ -10,4 +10,9 @@ IconSprite::IconSprite(void* ud)
 {
 }
 
+IconSprite::IconSprite(const IconSprite& spr, void* ud)
+	: Sprite(spr, ud)
+{
+}
+
 }

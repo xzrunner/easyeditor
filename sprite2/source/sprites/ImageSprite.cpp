@@ -10,4 +10,9 @@ ImageSprite::ImageSprite(void* ud)
 {
 }
 
+ImageSprite::ImageSprite(const ImageSprite& spr, void* ud)
+	: Sprite(spr, ud)
+{
+}
+
 }

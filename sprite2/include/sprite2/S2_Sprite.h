@@ -17,8 +17,8 @@ class Symbol;
 class Sprite : public RefCountObj
 {
 public:
-	Sprite(const Sprite& spr);
 	Sprite(void* ud);
+	Sprite(const Sprite& spr, void* ud);
 	virtual ~Sprite();
 	
 	virtual bool Update(float dt) = 0;
@@ -47,7 +47,8 @@ public:
 	void SetShear(const sm::vec2& shear);
 
 protected:
-	Sprite() {}
+	Sprite();
+	Sprite(const Sprite& spr);
 	const Sprite& operator = (const Sprite& spr) { return *this; }
 
 //	void MultiplyRenderParams(const RenderParams& src, RenderParams& dst) const;

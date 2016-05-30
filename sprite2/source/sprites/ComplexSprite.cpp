@@ -9,6 +9,11 @@ ComplexSprite::ComplexSprite(void* ud)
 {
 }
 
+ComplexSprite::ComplexSprite(const ComplexSprite& spr, void* ud)
+	: Sprite(spr, ud)
+{
+}
+
 bool ComplexSprite::Update(float dt)
 {
 	if (!m_sym) {

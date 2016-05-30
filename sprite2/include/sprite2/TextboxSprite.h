@@ -12,7 +12,8 @@ class TextboxSprite : public Sprite
 {
 public:
 	TextboxSprite(void* ud);
-	
+	TextboxSprite(const TextboxSprite& spr, void* ud);
+
 	virtual bool Update(float dt) { return false; }
 
 	const Textbox* GetTextbox() const { return m_tb; }

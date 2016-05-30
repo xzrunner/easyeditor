@@ -5,22 +5,6 @@
 namespace s2
 {
 
-Sprite::Sprite(const Sprite& spr)
-	: m_sym(NULL)
-	, m_position(spr.m_position)
-	, m_angle(spr.m_angle)
-	, m_scale(spr.m_scale)
-	, m_shear(spr.m_shear)
-	, m_offset(spr.m_offset)
-	, m_color(spr.m_color)
-	, m_shader(spr.m_shader)
-	, m_camera(spr.m_camera)
-	, m_ud(spr.m_ud)
-{
-	m_bounding = new OBB(*static_cast<OBB*>(spr.m_bounding));
-	m_bounding_dirty = false;
-}
-
 Sprite::Sprite(void* ud)
 	: m_sym(NULL)
 	, m_position(0, 0)
@@ -31,6 +15,22 @@ Sprite::Sprite(void* ud)
 {
 	m_bounding = new OBB();
 	m_bounding_dirty = true;
+}
+
+Sprite::Sprite(const Sprite& spr, void* ud)
+	: m_sym(NULL)
+	, m_position(spr.m_position)
+	, m_angle(spr.m_angle)
+	, m_scale(spr.m_scale)
+	, m_shear(spr.m_shear)
+	, m_offset(spr.m_offset)
+	, m_color(spr.m_color)
+	, m_shader(spr.m_shader)
+	, m_camera(spr.m_camera)
+	, m_ud(ud)
+{
+	m_bounding = new OBB(*static_cast<OBB*>(spr.m_bounding));
+	m_bounding_dirty = false;
 }
 
 Sprite::~Sprite()

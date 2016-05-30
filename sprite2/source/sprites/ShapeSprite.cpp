@@ -10,4 +10,9 @@ ShapeSprite::ShapeSprite(void* ud)
 {
 }
 
+ShapeSprite::ShapeSprite(const ShapeSprite& spr, void* ud)
+	: Sprite(spr, ud)
+{
+}
+
 }

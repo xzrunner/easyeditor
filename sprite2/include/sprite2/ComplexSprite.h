@@ -10,7 +10,8 @@ class ComplexSprite : public Sprite
 {
 public:
 	ComplexSprite(void* ud);
-	
+	ComplexSprite(const ComplexSprite& spr, void* ud);
+
 	virtual bool Update(float dt);
 	
 private:

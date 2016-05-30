@@ -24,7 +24,7 @@ Sprite::Sprite(const Sprite& sprite)
 	, m_symbol(sprite.m_symbol)
 	, m_ps(NULL)
 {
-	m_core = new s2::Particle2dSprite(*static_cast<s2::Particle2dSprite*>(sprite.m_core));
+	m_core = new s2::Particle2dSprite(*static_cast<s2::Particle2dSprite*>(sprite.m_core), this);
 
 	if (m_symbol) {
 		m_symbol->Retain();

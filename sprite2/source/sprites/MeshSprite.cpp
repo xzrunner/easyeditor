@@ -10,4 +10,9 @@ MeshSprite::MeshSprite(void* ud)
 {
 }
 
+MeshSprite::MeshSprite(const MeshSprite& spr, void* ud)
+	: Sprite(spr, ud)
+{
+}
+
 }

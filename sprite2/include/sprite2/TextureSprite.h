@@ -10,7 +10,8 @@ class TextureSprite : public Sprite
 {
 public:
 	TextureSprite(void* ud);
-	
+	TextureSprite(const TextureSprite& spr, void* ud);
+
 	virtual bool Update(float dt) { return false; }
 	
 private:

@@ -10,7 +10,8 @@ class ShapeSprite : public Sprite
 {
 public:
 	ShapeSprite(void* ud);
-	
+	ShapeSprite(const ShapeSprite& spr, void* ud);
+
 	virtual bool Update(float dt) { return false; }
 	
 private:

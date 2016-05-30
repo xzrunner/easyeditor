@@ -10,4 +10,9 @@ TextboxSprite::TextboxSprite(void* ud)
 {
 }
 
+TextboxSprite::TextboxSprite(const TextboxSprite& spr, void* ud)
+	: Sprite(spr, ud)
+{
+}
+
 }

@@ -8,4 +8,9 @@ AnimSprite::AnimSprite(void* ud)
 {
 }
 
+AnimSprite::AnimSprite(const AnimSprite& spr, void* ud)
+	: Sprite(spr, ud)
+{
+}
+
 }

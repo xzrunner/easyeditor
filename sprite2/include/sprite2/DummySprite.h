@@ -10,6 +10,7 @@ class DummySprite : public Sprite
 {
 public:
 	DummySprite(void* ud) : Sprite(ud) {}
+	DummySprite(const DummySprite& spr, void* ud) : Sprite(spr, ud) {}
 
 	virtual bool Update(float dt) { return false; }
 

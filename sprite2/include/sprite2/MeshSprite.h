@@ -10,7 +10,8 @@ class MeshSprite : public Sprite
 {
 public:
 	MeshSprite(void* ud);
-	
+	MeshSprite(const MeshSprite& spr, void* ud);
+
 	virtual bool Update(float dt) { return false; }
 	
 private:

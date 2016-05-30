@@ -5,14 +5,14 @@
 namespace s2
 {
 
-Scale9Sprite::Scale9Sprite(const Scale9Sprite& spr)
-	: Sprite(spr)
+Scale9Sprite::Scale9Sprite(void* ud)
+	: Sprite(ud)
 {
 	// todo
 }
 
-Scale9Sprite::Scale9Sprite(void* ud)
-	: Sprite(ud)
+Scale9Sprite::Scale9Sprite(const Scale9Sprite& spr, void* ud)
+	: Sprite(spr, ud)
 {
 	// todo
 }

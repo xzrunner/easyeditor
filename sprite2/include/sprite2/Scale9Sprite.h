@@ -11,9 +11,9 @@ class RenderParams;
 class Scale9Sprite : public Sprite
 {
 public:
-	Scale9Sprite(const Scale9Sprite& spr);
 	Scale9Sprite(void* ud);
-	
+	Scale9Sprite(const Scale9Sprite& spr, void* ud);
+
 	virtual bool Update(float dt) { return false; }
 	
 	void Draw(const RenderParams& params) const;

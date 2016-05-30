@@ -10,7 +10,8 @@ class IconSprite : public Sprite
 {
 public:
 	IconSprite(void* ud);
-	
+	IconSprite(const IconSprite& spr, void* ud);
+
 	virtual bool Update(float dt) { return false; }
 	
 private:

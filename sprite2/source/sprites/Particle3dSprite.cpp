@@ -10,4 +10,9 @@ Particle3dSprite::Particle3dSprite(void* ud)
 {
 }
 
+Particle3dSprite::Particle3dSprite(const Particle3dSprite& spr, void* ud)
+	: Sprite(spr, ud)
+{
+}
+
 }

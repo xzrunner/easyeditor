@@ -10,4 +10,9 @@ TextureSprite::TextureSprite(void* ud)
 {
 }
 
+TextureSprite::TextureSprite(const TextureSprite& spr, void* ud)
+	: Sprite(spr, ud)
+{
+}
+
 }

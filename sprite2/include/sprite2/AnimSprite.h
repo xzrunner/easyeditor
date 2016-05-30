@@ -10,6 +10,7 @@ class AnimSprite : public Sprite
 {
 public:
 	AnimSprite(void* ud);
+	AnimSprite(const AnimSprite& spr, void* ud);
 	
 	virtual bool Update(float dt) { return false; }
 	

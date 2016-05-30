@@ -19,7 +19,7 @@ Sprite::Sprite(const Sprite& sprite)
 	, m_symbol(sprite.m_symbol)
 	, m_data(sprite.m_data)
 {
-	m_core = new s2::Scale9Sprite(*static_cast<s2::Scale9Sprite*>(sprite.m_core));
+	m_core = new s2::Scale9Sprite(*static_cast<s2::Scale9Sprite*>(sprite.m_core), this);
 
 	m_symbol->Retain();
 }
