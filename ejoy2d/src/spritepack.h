@@ -98,6 +98,7 @@ struct pack_shape {
 	int type;
 	uint32_t color;
 	int num;
+	char pad[4];
 	int32_t* vertices;
 };
 
@@ -108,6 +109,7 @@ struct pack_mesh {
 	int texcoords_num;
 	int32_t* texcoords;
 	int vertices_num;
+	char pad[4];
 	int32_t* vertices;
 };
 
@@ -117,6 +119,7 @@ struct pack_mesh_spr {
 	int base_id;
 	int mesh_id;
 	int num;
+	char pad[4];
 	int32_t* trans_pairs;
 };
 
