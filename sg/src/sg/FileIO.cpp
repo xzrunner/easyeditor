@@ -74,7 +74,7 @@ ee::Sprite* FileIO::load(const Json::Value& value, StagePanel* stage, const std:
 
 	sm::vec2 pos;
 	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-	sprite->tag = value["tag"].asString();
+	sprite->SetTag(value["tag"].asString());
 	symbol->Release();
 
 	//// old
@@ -132,7 +132,7 @@ Json::Value FileIO::store(const ee::Sprite* sprite, StagePanel* stage,
 
 	value["row"] = row;
 	value["col"] = col;
-	value["tag"] = sprite->tag;
+	value["tag"] = sprite->GetTag();
 
 	value["name"] = symbol_info->building->name;
 	

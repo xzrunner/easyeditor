@@ -49,7 +49,7 @@ void Layer::TraverseSprite(ee::Visitor& visitor, ee::DataTraverseType type, bool
 bool Layer::RemoveSprite(Object* obj)
 {
 	ee::Sprite* spr = static_cast<ee::Sprite*>(obj);
-	m_name_set.erase(spr->name);
+	m_name_set.erase(spr->GetName());
 
 	const std::vector<ee::Layer*>& layers = m_layer_mgr.GetAllLayers();
 	for (int i = 0, n = layers.size(); i < n; ++i) {
@@ -277,24 +277,24 @@ void Layer::LoadFromBaseFile(int layer_idx, const std::string& filepath, const s
 void Layer::CheckSpriteName(ee::Sprite* spr)
 {
 	std::set<std::string>::iterator itr 
-		= m_name_set.find(spr->name);
+		= m_name_set.find(spr->GetName());
 	if (itr != m_name_set.end()) 
 	{
-		spr->name = "_sprite" + ee::StringHelper::ToString(++m_next_id);
-		assert(m_name_set.find(spr->name) == m_name_set.end());
+		spr->SetName("_sprite" + ee::StringHelper::ToString(++m_next_id));
+		assert(m_name_set.find(spr->GetName()) == m_name_set.end());
 	}
 	else
 	{
-		int pos = spr->name.find("_sprite");
+		int pos = spr->GetName().find("_sprite");
 		if (pos != std::string::npos) {
-			std::string str = spr->name.substr(pos + 7);
+			std::string str = spr->GetName().substr(pos + 7);
 			int num = atoi(str.c_str());
 			if (m_next_id < num) {
 				m_next_id = num;
 			}
 		}
 	}
-	m_name_set.insert(spr->name);
+	m_name_set.insert(spr->GetName());
 }
 
 void Layer::LoadShapesUD(const Json::Value& spr_val, ee::Sprite* spr) const
@@ -410,10 +410,12 @@ ee::Sprite* Layer::LoadSprite(const Json::Value& val, const std::string& dir, co
 	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 	sprite->Load(val);
 
-	if (!sprite->tag.empty() && sprite->tag[sprite->tag.size()-1] != ';') {
-		sprite->tag += ";";
+	std::string tag = sprite->GetTag();
+	if (!tag.empty() && tag[tag.size()-1] != ';') {
+		tag += ";";
 	}
-	sprite->tag += spr_tag;
+	tag += spr_tag;
+	sprite->SetTag(tag);
 
 	if (!base_path.empty()) {
 		BaseFileUD* ud = new BaseFileUD(base_path);
@@ -473,7 +475,7 @@ void Layer::QueryNameVisitor<T>::
 Visit(Object* object, bool& next)
 {
 	T* t = static_cast<T*>(object);
-	if (t->name == m_name) {
+	if (t->GetName() == m_name) {
 		m_result = t;
 		next = false;
 	} else {

@@ -77,18 +77,21 @@ void TweenUtility::GetTweenSprites(const std::vector<ee::Sprite*>& start,
 
 bool TweenUtility::IsTweenMatched(const ee::Sprite* s0, const ee::Sprite* s1)
 {
+	const std::string& name0 = s0->GetName(),
+		name1 = s1->GetName();
+
 	bool auto_named = false;
-	if (!s0->name.empty() && s0->name[0] == '_' && !s1->name.empty() && s1->name[0] == '_') {
+	if (!name0.empty() && name0[0] == '_' && !name1.empty() && name1[0] == '_') {
 		auto_named = true;
 	}
 
-	if (auto_named && s0->name == s1->name) {
+	if (auto_named && name0 == name1) {
 		return true;
-	} else if (s0->name.empty() && s1->name.empty()) {
+	} else if (name0.empty() && name1.empty()) {
 		//		return s0->getSymbol().getFilepath() == s1->getSymbol().getFilepath();
 		return false;
 	} else {
-		return s0->name == s1->name;
+		return name0 == name1;
 	}
 }
 

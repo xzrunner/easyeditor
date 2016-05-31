@@ -100,7 +100,7 @@ void RightPopupMenu::CreateLayerTagMenu(wxMenu& menu)
 
 	if (m_sprite && m_stage->GetSpriteSelection()->Size() == 1) 
 	{
-		const std::string& tag = m_sprite->tag;
+		const std::string& tag = m_sprite->GetTag();
 		if (tag.find(std::string(COVER_LAYER_TAG)) == std::string::npos) {
 			m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnRightPopupMenu, m_stage, MENU_COVER_LAYER_TAG_ID);
 			menu.Append(MENU_COVER_LAYER_TAG_ID, "ÕÚµ²²ã");		
@@ -195,8 +195,8 @@ void RightPopupMenu::HandleLayerTagMenu(int id)
 	for (int i = 0, n = sprites.size(); i < n; ++i) 
 	{
 		ee::Sprite* spr = sprites[i];
-		std::string& tag = spr->tag;
 
+		std::string tag = spr->GetTag();
 		size_t p_begin = tag.find("layer=");
 		if (p_begin != std::string::npos) {
 			size_t p_end = tag.find(";", p_begin) + 1;
@@ -204,12 +204,14 @@ void RightPopupMenu::HandleLayerTagMenu(int id)
 		}
 
 		if (id == MENU_COVER_LAYER_TAG_ID) {
-			spr->tag += std::string(COVER_LAYER_TAG) + ";";
+			tag += std::string(COVER_LAYER_TAG) + ";";
 			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		} else if (id == MENU_TOP_LAYER_TAG_ID) {
-			spr->tag += std::string(TOP_LAYER_TAG) + ";";
+			tag += std::string(TOP_LAYER_TAG) + ";";
 			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
+
+		spr->SetTag(tag);
 	}
 }
 

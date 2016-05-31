@@ -50,9 +50,21 @@ public:
 
 	virtual PropertySetting* CreatePropertySetting(EditPanelImpl* stage);
 
-	virtual void SetTransform(const sm::vec2& position, float angle);
+	/************************************************************************/
+	/* core                                                                 */
+	/************************************************************************/
+	const s2::Sprite* GetCore() const { return m_core; }
+	s2::Sprite* GetCore() { return m_core; }
+
+	/************************************************************************/
+	/* geometry                                                             */
+	/************************************************************************/
+	void SetTransform(const sm::vec2& position, float angle);
 	const sm::vec2& GetPosition() const;
 	float GetAngle() const;
+
+	void Translate(const sm::vec2& offset);
+	void Rotate(float delta);
 
 	const sm::vec2& GetScale() const;
 	void SetScale(const sm::vec2& scale);
@@ -63,20 +75,27 @@ public:
 	const sm::vec2& GetOffset() const { return m_offset; }
 	void SetOffset(const sm::vec2& offset);
 
-	bool IsContain(const sm::vec2& pos) const;
-	bool IsIntersect(const sm::rect& rect) const;
-
-	void Translate(const sm::vec2& offset);
-	void Rotate(float delta);
-
 	void SetMirror(bool x_mirror, bool y_mirror);
 	const sm::bvec2& GetMirror() const { return m_mirror; }
 
 	const sm::vec2& GetPerspective() const { return m_perspective; }
 	void SetPerspective(const sm::vec2& perspective) { m_perspective = perspective; }
 
-	sm::vec2 GetCenter() const;
+	bool IsContain(const sm::vec2& pos) const;
+	bool IsIntersect(const sm::rect& rect) const;
 
+	sm::vec2 GetCenter() const;
+	sm::rect GetRect() const;
+
+	BoundingBox* GetBounding() const { return m_bounding; }
+	void SetBounding(BoundingBox* bb);
+
+	void GetTransMatrix(sm::mat4& mt) const;
+	sm::mat4 GetTransInvMatrix() const;
+
+	/************************************************************************/
+	/* render                                                               */
+	/************************************************************************/
 	const s2::RenderColor& GetColor() const;
 	s2::RenderColor& GetColor();
 	const s2::RenderShader& GetShader() const;
@@ -84,28 +103,34 @@ public:
 	const s2::RenderCamera& GetCamera() const;
 	s2::RenderCamera& GetCamera();
 
-	BoundingBox* GetBounding() const {
-		return m_bounding;
-	}
-	sm::rect GetRect() const;
+	/************************************************************************/
+	/* info                                                                 */
+	/************************************************************************/
+	const std::string& GetName() const { return m_name; }
+	void SetName(const std::string& name) { m_name = name; }
+	const std::string& GetTag() const { return m_tag; }
+	void SetTag(const std::string& tag) { m_tag = tag; }
 
-	void SetObserver(SpriteObserver* observer) {
-		m_observer = observer;
-	}
-
-	void GetTransMatrix(sm::mat4& mt) const;
-	sm::mat4 GetTransInvMatrix() const;
+	bool IsClip() const { return m_clip; }
+	void SetClip(bool clip) { m_clip = clip; }
 
 	bool IsAnchor() const { return m_is_anchor; }
 	void SetAnchor(bool anchor) { m_is_anchor = anchor; }
 
-	const s2::Sprite* GetCore() const { return m_core; }
-	s2::Sprite* GetCore() { return m_core; }
-
+	/************************************************************************/
+	/* edit                                                                 */
+	/************************************************************************/
 	bool IsVisible() const { return m_visible; }
 	void SetVisible(bool visible) { m_visible = visible; }
 	bool IsEditable() const { return m_editable; }
 	void SetEditable(bool editable) { m_editable = editable; }
+
+	/************************************************************************/
+	/* extend                                                               */
+	/************************************************************************/
+	void SetObserver(SpriteObserver* observer) {
+		m_observer = observer;
+	}
 
 protected:
 	template<typename T>
@@ -114,28 +139,39 @@ protected:
 private:
 	const Sprite& operator = (const Sprite& spr) { return spr; }
 
-public:
-	// info
-	std::string name;
-	std::string tag;
-	bool clip;
-
 protected:
+	/************************************************************************/
+	/* core                                                                 */
+	/************************************************************************/
 	s2::Sprite*		m_core;
 
+private:
+	/************************************************************************/
+	/* geometry                                                             */
+	/************************************************************************/
 	sm::vec2		m_offset;
 	sm::bvec2		m_mirror;
 	sm::vec2		m_perspective;
-
 	BoundingBox*	m_bounding;
-	
-	SpriteObserver* m_observer;
 
+	/************************************************************************/
+	/* info                                                                 */
+	/************************************************************************/
+	std::string		m_name;
+	std::string		m_tag;
+	bool			m_clip;
+	bool			m_is_anchor;
+
+	/************************************************************************/
+	/* edit                                                                 */
+	/************************************************************************/
 	bool			m_visible;
 	bool			m_editable;
 
-private:
-	bool m_is_anchor;
+	/************************************************************************/
+	/* extend                                                               */
+	/************************************************************************/
+	SpriteObserver* m_observer;
 
 }; // Sprite
 

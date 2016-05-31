@@ -1654,6 +1654,8 @@ void CocoPacker::ParserSpriteForComponent(const ee::Sprite* sprite, std::vector<
 
 	ids.push_back(id);
 
+	const std::string& name = sprite->GetName();
+
 	std::map<int, std::vector<std::string> >::iterator itr = unique.find(id);
 	if (unique.find(id) == unique.end())
 	{
@@ -1663,12 +1665,12 @@ void CocoPacker::ParserSpriteForComponent(const ee::Sprite* sprite, std::vector<
 			bool is_mount_node = font && font->font.empty() && font->font_color == s2::Color(0, 0, 0, 0);
 			if (is_mount_node)
 			{
-				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
+				std::string aName = lua::assign("name", "\""+name+"\"");
 				lua::tableassign(*m_gen, "", 1, aName);
 			}
 			else
 			{
-				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
+				std::string aName = lua::assign("name", "\""+name+"\"");
 				std::string aFont = lua::assign("font", "\""+font->font+"\"");
 				std::string aColor = lua::assign("color", ee::color2str(font->font_color, ee::PT_ARGB));
 
@@ -1695,13 +1697,13 @@ void CocoPacker::ParserSpriteForComponent(const ee::Sprite* sprite, std::vector<
 				is_mount_node = font && font->font.empty() && font->font_color == s2::Color(0, 0, 0, 0);
 			}
 			if (is_mount_node) {
-				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
+				std::string aName = lua::assign("name", "\""+name+"\"");
 				lua::tableassign(*m_gen, "", 1, aName);
 			} else {
 				std::string aID = lua::assign("id", ee::StringHelper::ToString(id));
-				if (!sprite->name.empty() && sprite->name[0] != '_')
+				if (!name.empty() && name[0] != '_')
 				{
-					std::string aName = lua::assign("name", "\""+sprite->name+"\"");
+					std::string aName = lua::assign("name", "\""+name+"\"");
 					lua::tableassign(*m_gen, "", 2, aName, aID);
 				}
 				else
@@ -1711,15 +1713,15 @@ void CocoPacker::ParserSpriteForComponent(const ee::Sprite* sprite, std::vector<
 			}
 		}
 		std::vector<std::string> names;
-		names.push_back(sprite->name);
+		names.push_back(name);
 		unique.insert(std::make_pair(id, names));
-		order.push_back(std::make_pair(id, sprite->name));
+		order.push_back(std::make_pair(id, name));
 	}
 	else
 	{
 		int i = 0;
 		for (int n = itr->second.size(); i < n; ++i)
-			if (itr->second[i] == sprite->name)
+			if (itr->second[i] == name)
 				break;
 		if (i == itr->second.size() && !isFont)
 		{
@@ -1731,13 +1733,13 @@ void CocoPacker::ParserSpriteForComponent(const ee::Sprite* sprite, std::vector<
 				is_mount_node = font && font->font.empty() && font->font_color == s2::Color(0, 0, 0, 0);
 			}
 			if (is_mount_node) {
-				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
+				std::string aName = lua::assign("name", "\""+name+"\"");
 				lua::tableassign(*m_gen, "", 1, aName);
 			} else {
 				std::string aID = lua::assign("id", ee::StringHelper::ToString(id));
-				if (!sprite->name.empty() && sprite->name[0] != '_')
+				if (!name.empty() && name[0] != '_')
 				{
-					std::string aName = lua::assign("name", "\""+sprite->name+"\"");
+					std::string aName = lua::assign("name", "\""+name+"\"");
 					lua::tableassign(*m_gen, "", 2, aName, aID);
 				}
 				else
@@ -1746,12 +1748,12 @@ void CocoPacker::ParserSpriteForComponent(const ee::Sprite* sprite, std::vector<
 				}
 			}
 
-			order.push_back(std::make_pair(id, sprite->name));
+			order.push_back(std::make_pair(id, name));
 		}
-		itr->second.push_back(sprite->name);
+		itr->second.push_back(name);
 
-//		if (!sprite->name.empty())
-//			order.push_back(std::make_pair(id, sprite->name));
+//		if (!name.empty())
+//			order.push_back(std::make_pair(id, name));
 	}
 }
 
@@ -1760,14 +1762,15 @@ void CocoPacker::ParserSpriteForFrame(const ee::Sprite* sprite, int index,
 {
 	int id = ids[index];
 	int cindex = -1;
+	const std::string& name = sprite->GetName();
 	for (size_t i = 0, n = order.size(); i < n; ++i)
-		if (id == order[i].first && sprite->name == order[i].second)
+		if (id == order[i].first && name == order[i].second)
 		{
 			cindex = i;
 			break;
 		}
 	if (cindex == -1) {
-		std::string str = sprite->name + " not found in order!";
+		std::string str = name + " not found in order!";
 		throw ee::Exception(str);
 	}	
 
@@ -1784,6 +1787,7 @@ void CocoPacker::ParserSpriteForFrame(const ee::Sprite* sprite,
 									  const std::vector<std::pair<int, std::string> >& order,
 									  const std::map<int, int>& map_id2idx)
 {
+	const std::string& name = sprite->GetName();
 	if (const eicon::Sprite* icon = dynamic_cast<const eicon::Sprite*>(sprite)) 
 	{
 		int id = QueryIconID(icon);
@@ -1803,7 +1807,7 @@ void CocoPacker::ParserSpriteForFrame(const ee::Sprite* sprite,
 
 		int cindex = -1;
 		for (size_t i = 0, n = order.size(); i < n; ++i) {
-			if (id == order[i].first && sprite->name == order[i].second) {
+			if (id == order[i].first && name == order[i].second) {
 				cindex = i;
 				break;
 			}
@@ -1820,7 +1824,7 @@ void CocoPacker::ParserSpriteForFrame(const ee::Sprite* sprite,
 		}
 
 		if (cindex == -1) {
-			std::string str = sprite->name + " not in order!";
+			std::string str = name + " not in order!";
 			throw ee::Exception(str);
 		}
 
@@ -1869,7 +1873,7 @@ void CocoPacker::ParserImageForFrame(const ee::Sprite* sprite, int id)
 	std::string assignMat = lua::assign("mat", smat);
 	params.push_back(assignMat);
 
-	if (sprite->clip) {
+	if (sprite->IsClip()) {
 		params.push_back("clip=true");
 	}
 

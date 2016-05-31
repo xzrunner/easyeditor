@@ -323,7 +323,7 @@ void FileIO::LoadSkeleton(const Json::Value& skeletonValue, const std::vector<ee
 		ee::Sprite* sprite = NULL;
 		for (int i = 0, n = sprites.size(); i < n; ++i)
 		{
-			if (sprites[i]->name == spriteName) 
+			if (sprites[i]->GetName() == spriteName) 
 			{
 				sprite = sprites[i];
 				break;
@@ -353,7 +353,7 @@ void FileIO::LoadSkeleton(const Json::Value& skeletonValue, const std::vector<ee
 		ee::Sprite* sprite = NULL;
 		for (int i = 0, n = sprites.size(); i < n; ++i)
 		{
-			if (sprites[i]->name == spriteName) 
+			if (sprites[i]->GetName() == spriteName) 
 			{
 				sprite = sprites[i];
 				break;
@@ -538,7 +538,7 @@ Json::Value FileIO::StoreSkeleton(const SkeletonData& skeleton)
 		= skeleton.m_map_joints.begin();
 	for (int i = 0; itr != skeleton.m_map_joints.end(); ++itr, ++i)
 	{
-		value[i]["sprite"] = itr->first->name;
+		value[i]["sprite"] = itr->first->GetName();
 		for (int j = 0, m = itr->second.size(); j < m; ++j)
 		{
 			Joint* joint = itr->second[j];

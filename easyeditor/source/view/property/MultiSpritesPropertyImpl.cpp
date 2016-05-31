@@ -49,9 +49,9 @@ std::string MultiSpritesPropertyImpl::GetTag() const
 		return "";
 	}
 
-	std::string tag = m_sprites[0]->tag;
+	std::string tag = m_sprites[0]->GetTag();
 	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
-		if (tag != m_sprites[i]->tag) {
+		if (tag != m_sprites[i]->GetTag()) {
 			return "[different]";
 		}
 	}
@@ -64,9 +64,9 @@ const wxChar* MultiSpritesPropertyImpl::GetClip() const
 		return BOOL_3TYPE_LABELS[e_bool_different];
 	}
 
-	bool clip = m_sprites[0]->clip;
+	bool clip = m_sprites[0]->IsClip();
 	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
-		if (clip != m_sprites[i]->clip) {
+		if (clip != m_sprites[i]->IsClip()) {
 			return BOOL_3TYPE_LABELS[e_bool_different];
 		}
 	}
@@ -258,7 +258,7 @@ void MultiSpritesPropertyImpl::SetTag(const std::string& tag)
 	SetWndDirtySJ::Instance()->SetDirty();
 
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->tag = tag;
+		m_sprites[i]->SetTag(tag);
 	}
 }
 
@@ -269,11 +269,11 @@ void MultiSpritesPropertyImpl::SetClip(int clip)
 	Bool3Type type = (Bool3Type)clip;
 	if (type == e_bool_true) {
 		for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-			m_sprites[i]->clip = true;
+			m_sprites[i]->SetClip(true);
 		}
 	} else if (type == e_bool_false) {
 		for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-			m_sprites[i]->clip = false;
+			m_sprites[i]->SetClip(false);
 		}
 	}
 }

@@ -173,7 +173,7 @@ wxTreeItemId GroupTreeCtrl::AddSprite(wxTreeItemId parent, Sprite* spr)
 	bool ok = group->Insert(spr);
 	if (ok) {
 		GroupTreeItem* data = new GroupTreeSpriteItem(spr);
-		return AddNode(parent, spr->name, data);
+		return AddNode(parent, spr->GetName(), data);
 	} else {
 		return m_root;
 	}
@@ -433,7 +433,7 @@ void GroupTreeCtrl::OnLabelEdited(wxTreeEvent& event)
 	GroupTreeItem* data = (GroupTreeItem*)GetItemData(m_selected_item);
 	if (data && !data->IsGroup()) {
 		Sprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
-		spr->name = event.GetLabel();
+		spr->SetName(event.GetLabel().ToStdString());
 		SpriteNameChangeSJ::Instance()->OnSpriteNameChanged(spr, this);
 	}
 }
@@ -458,7 +458,7 @@ void GroupTreeCtrl::OnMenuAddSprites(wxCommandEvent& event)
 		bool ok = group->Insert(spr);
 		if (ok) {
 			GroupTreeItem* data = new GroupTreeSpriteItem(spr);
-			AddNode(m_on_menu_id, spr->name, data);
+			AddNode(m_on_menu_id, spr->GetName(), data);
 		}
 	}
 }
@@ -590,7 +590,7 @@ void GroupTreeCtrl::ChangeName(Sprite* spr)
 	Traverse(visitor);
 	wxTreeItemId id = visitor.GetItemID();
 
-	SetItemText(id, spr->name);
+	SetItemText(id, spr->GetName());
 }
 
 void GroupTreeCtrl::Select(Sprite* spr, bool clear)

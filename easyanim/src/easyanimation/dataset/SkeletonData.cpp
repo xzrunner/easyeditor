@@ -37,14 +37,14 @@ void SkeletonData::CopyFrom(const std::vector<ee::Sprite*>& sprites,
 	std::map<ee::Sprite*, std::vector<Joint*> >::const_iterator itr
 		= skeleton.m_map_joints.begin();
 	for ( ; itr != skeleton.m_map_joints.end(); ++itr)
-		if (!GetSpriteByName(sprites, itr->first->name))
+		if (!GetSpriteByName(sprites, itr->first->GetName()))
 			return;
 
 	// prepare
 	std::map<Joint*, Joint*> mapCovJoint;
 	for (itr = skeleton.m_map_joints.begin() ; itr != skeleton.m_map_joints.end(); ++itr)
 	{
-		ee::Sprite* sprite = GetSpriteByName(sprites, itr->first->name);
+		ee::Sprite* sprite = GetSpriteByName(sprites, itr->first->GetName());
 		if (sprite == NULL)
 			return;
 
@@ -96,7 +96,7 @@ void SkeletonData::CopyFrom(const std::vector<ee::Sprite*>& sprites,
 		ee::Sprite* src_sprite = itr->first;
 		std::vector<Joint*> src_joints = itr->second;
 
-		ee::Sprite* dst_sprite = GetSpriteByName(sprites, src_sprite->name);
+		ee::Sprite* dst_sprite = GetSpriteByName(sprites, src_sprite->GetName());
 		std::vector<Joint*> dst_joints;
 		for (int i = 0, n = src_joints.size(); i < n; ++i)
 		{
@@ -284,7 +284,7 @@ void SkeletonData::GetTweenSprites(SkeletonData& start, SkeletonData& end,
 			= end.m_map_joints.begin();
 		for ( ; itr_e != end.m_map_joints.end(); ++itr_e)
 		{
-			if (s->name == itr_e->first->name)
+			if (s->GetName() == itr_e->first->GetName())
 			{
 				ee::Sprite* e = itr_e->first;
 				
@@ -292,7 +292,7 @@ void SkeletonData::GetTweenSprites(SkeletonData& start, SkeletonData& end,
 				std::map<ee::Sprite*, std::vector<Joint*> >::iterator itr_mid = mid.m_map_joints.begin();
 				for ( ; itr_mid != mid.m_map_joints.end(); ++itr_mid)
 				{
-					if (itr_mid->first->name == s->name)
+					if (itr_mid->first->GetName() == s->GetName())
 					{
 						sprite = itr_mid->first;
 						break;
@@ -359,7 +359,7 @@ void SkeletonData::Translate(ee::Sprite* sprite, const sm::vec2& offset)
 ee::Sprite* SkeletonData::GetSpriteByName(const std::vector<ee::Sprite*>& sprites, const std::string& name)
 {
 	for (int i = 0, n = sprites.size(); i < n; ++i)
-		if (sprites[i]->name == name)
+		if (sprites[i]->GetName() == name)
 			return sprites[i];
 	return NULL;
 }

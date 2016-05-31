@@ -79,8 +79,7 @@ void ImageSprite::BuildBoundingFromTexCoords(float* texCoords)
 
 	sm::vec2 sz = m_symbol->GetSize().Size();
 
- 	delete m_bounding;
- 	m_bounding = BBFactory::CreateBB(e_obb);
+	ee::BoundingBox* bb = BBFactory::CreateBB(e_obb);
  
  	sm::rect rect;
  	rect.xmin = sz.x * (texCoords[0] - 0.5f);
@@ -98,8 +97,9 @@ void ImageSprite::BuildBoundingFromTexCoords(float* texCoords)
  
  	sm::vec2 offset = Math2D::RotateVector(center, m_core->GetAngle());
  	rect.Translate(m_core->GetPosition() + offset);
- 	m_bounding->InitFromRect(rect);
- 	m_bounding->SetTransform(m_core->GetPosition(), m_offset, m_core->GetAngle());
+ 	bb->InitFromRect(rect);
+ 	bb->SetTransform(m_core->GetPosition(), GetOffset(), m_core->GetAngle());
+	SetBounding(bb);
 }
 
 }

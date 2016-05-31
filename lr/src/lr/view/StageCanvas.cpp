@@ -69,7 +69,7 @@ void StageCanvas::DrawSprites() const
 	for (int i = 0, n = all_sprites.size(); i < n; ++i) {
 		ee::Sprite* spr = all_sprites[i];
 
-		const std::string& tag = spr->tag;
+		const std::string& tag = spr->GetTag();
 		if (tag.find(TOP_LAYER_TAG) != std::string::npos) {
 			top_layer.push_back(spr);
 		} else if (tag.find(COVER_LAYER_TAG) != std::string::npos
@@ -120,12 +120,13 @@ void StageCanvas::DrawSprite(ee::Sprite* spr, bool draw_edge) const
 	ee::SpriteRenderer::Draw(spr);
 
 	ee::SettingData& cfg = ee::Config::Instance()->GetSettings();
-	if (cfg.visible_node_name && !spr->name.empty() && spr->name[0] != '_') {
+	const std::string& name = spr->GetName();
+	if (cfg.visible_node_name && !name.empty() && name[0] != '_') {
 		sm::mat4 t;
 		spr->GetTransMatrix(t);
 		float s = std::max(1.0f, ee::CameraMgr::Instance()->GetCamera()->GetScale()) * cfg.node_name_scale;
 		t.Scale(s, s, 1);
-		ee::GTxt::Instance()->Draw(t, spr->name);
+		ee::GTxt::Instance()->Draw(t, name);
 	}
 }
 

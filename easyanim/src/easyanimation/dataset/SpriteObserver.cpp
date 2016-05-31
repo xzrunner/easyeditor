@@ -33,7 +33,7 @@ void SpriteObserver::Translate(ee::Sprite* sprite, const sm::vec2& offset)
 		const std::vector<ee::Sprite*>& sprites = frame->GetAllSprites();
 		for (int i = 0, n = sprites.size(); i < n; ++i)
 		{
-			if (sprites[i]->name == sprite->name)
+			if (sprites[i]->GetName() == sprite->GetName())
 				sprites[i]->Translate(offset);
 		}
 	}
@@ -61,7 +61,7 @@ void SpriteObserver::Rotate(ee::Sprite* sprite, float delta)
 		const std::vector<ee::Sprite*>& sprites = frame->GetAllSprites();
 		for (int i = 0, n = sprites.size(); i < n; ++i)
 		{
-			if (sprites[i]->name == sprite->name)
+			if (sprites[i]->GetName() == sprite->GetName())
 				sprites[i]->Rotate(delta);
 		}
 	}

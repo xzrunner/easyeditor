@@ -51,17 +51,19 @@ void Code::ResolveUI(const Symbol& symbol)
 			for (int i = 0, n = children.size(); i < n; ++i)
 			{
 				ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
-				if (child->name.empty() || child->name[0] == '_') {
+
+				const std::string& cname = child->GetName();
+				if (cname.empty() || cname[0] == '_') {
 					continue;
 				}
 
 				std::string path, name;
 				if (parent.path.empty()) {
-					path = child->name;
-					name = child->name;
+					path = cname;
+					name = cname;
 				} else {
-					path = parent.path + "." + child->name;
-					name = parent.name + "_" + child->name;
+					path = parent.path + "." + cname;
+					name = parent.name + "_" + cname;
 				}
 
 				gen_path->line(lua::assign("path."+name, "\""+path+"\""));
@@ -109,7 +111,9 @@ void Code::ResolveText(const Symbol& symbol)
  		for (int i = 0, n = children.size(); i < n; ++i)
  		{
 			ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
- 			if (child->name.empty() || child->name[0] == '_') {
+
+			const std::string& name = child->GetName();
+ 			if (name.empty() || name[0] == '_') {
  				continue;
  			}
  

@@ -60,11 +60,11 @@ Sprite* SpriteFactory::Create(Symbol* symbol)
 
 	if (sprite) {
 		Insert(sprite);
-		sprite->name = std::string("_sprite") + StringHelper::ToString(m_id++);
+		sprite->SetName(std::string("_sprite") + StringHelper::ToString(m_id++));
 	}
 
 	if (!symbol->tag.empty()) {
-		sprite->tag = "[symbol]";
+		sprite->SetTag("[symbol]");
 	}
 
 	return sprite;

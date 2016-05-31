@@ -22,38 +22,32 @@ namespace ee
 
 Sprite::Sprite()
 	: m_core(NULL)
+	, m_mirror(false, false)
+	, m_perspective(0, 0)
+	, m_bounding(NULL)
+	, m_clip(false)
+	, m_is_anchor(false)
+	, m_visible(true)
+	, m_editable(true)
 	, m_observer(NULL)
 {
 	m_offset.MakeInvalid();
-
-	clip = false;
-
-	m_visible = m_editable = true;
-
-	m_mirror.Set(false, false);
-	m_perspective.Set(0, 0);
-	m_bounding = NULL;
-
-	m_is_anchor = false;
 }
 
 Sprite::Sprite(const Sprite& sprite)
 	: m_core(NULL)
+	, m_offset(sprite.m_offset)
+	, m_mirror(sprite.m_mirror)
+	, m_perspective(sprite.m_perspective)
+	, m_bounding(sprite.m_bounding->Clone())
+	, m_name(sprite.m_name)
+	, m_tag(sprite.m_tag)
+	, m_clip(sprite.m_clip)
+	, m_is_anchor(sprite.m_is_anchor)
+	, m_visible(sprite.m_visible)
+	, m_editable(sprite.m_editable)
 	, m_observer(NULL)
 {
-	name = sprite.name;
-	tag = sprite.tag;
-	clip = sprite.clip;
-
-	m_visible = sprite.m_visible;
-	m_editable = sprite.m_editable;
-
-	m_offset = sprite.m_offset;
-	m_mirror = sprite.m_mirror;
-	m_perspective = sprite.m_perspective;
-	m_bounding = sprite.m_bounding->Clone();
-
-	m_is_anchor = sprite.m_is_anchor;
 }
 
 Sprite::~Sprite()
@@ -74,130 +68,12 @@ void Sprite::ClearUserData(bool deletePtr)
 
 void Sprite::Load(const Json::Value& val, const std::string& dir)
 {
-	assert(m_core);
-
-	// info
-	name = val["name"].asString();
-	tag = val["tag"].asString();
-	clip = val["clip"].asBool();
-
-	// trans
-	SpriteIO::LoadColor(val, m_core->Color());
-	SpriteIO::LoadShader(val, m_core->Shader());
-	SpriteIO::LoadCamera(val, m_core->Camera());
-
-	// scale
-	sm::vec2 scale;
-	if (val["scale"].isNull())
-	{
-		scale.x = static_cast<float>(val["x scale"].asDouble());
-		scale.y = static_cast<float>(val["y scale"].asDouble());
-	}
-	else
-	{
-		scale.x = scale.y = static_cast<float>(val["scale"].asDouble());
-	}
-	SetScale(scale);
-
-	// shear
-	sm::vec2 shear;
-	if (!val["x shear"].isNull())
-	{
-		shear.x = static_cast<float>(val["x shear"].asDouble());
-		shear.y = static_cast<float>(val["y shear"].asDouble());
-	}
-	else
-	{
-		shear.Set(0, 0);
-	}
-	SetShear(shear);
-
-	// mirror
-	bool mx = val["x mirror"].asBool();
-	bool my = val["y mirror"].asBool();
-	SetMirror(mx, my);
-
-	// perspective
-	if (!val["x perspective"].isNull())
-	{
-		sm::vec2 persp;
-		persp.x = static_cast<float>(val["x perspective"].asDouble());
-		persp.y = static_cast<float>(val["y perspective"].asDouble());
-		SetPerspective(persp);
-	}
-
-	// offset
-	float ox, oy;
-	if (!val["x offset"].isNull())
-	{
-		ox = static_cast<float>(val["x offset"].asDouble());
-		oy = static_cast<float>(val["y offset"].asDouble());
-	}
-	else
-	{
-		ox = oy = 0;
-	}
-	SetOffset(sm::vec2(ox, oy));
-
-	// translate
-	float x = static_cast<float>(val["position"]["x"].asDouble());
-	float y = static_cast<float>(val["position"]["y"].asDouble());
-	if (fabs(x) >= FLT_MAX || fabs(y) >= FLT_MAX) {
-		throw Exception("sprite pos err, filepath: %s, name: %s", val["filepath"].asString().c_str(), name.c_str());
-	}
-
-	// rotate
-	float angle = static_cast<float>(val["angle"].asDouble());
-	SetTransform(sm::vec2(x, y), angle);
-
-	// anchor
-	m_is_anchor = val["anchor"].asBool();
-
-	// editable, visible
-	if (!val["editable"].isNull()) {
-		m_editable = val["editable"].asBool();
-	}
-	if (!val["visible"].isNull()) {
-		m_visible = val["visible"].asBool();
-	}
+	SpriteIO::Load(val, this);
 }
 
 void Sprite::Store(Json::Value& val, const std::string& dir) const
 {
-	assert(m_core);
-
-	val["name"] = name;
-	val["tag"] = tag;
-	val["clip"] = clip;
-
-	SpriteIO::StoreColor(val, m_core->Color());
-	SpriteIO::StoreShader(val, m_core->Shader());
-	SpriteIO::StoreCamera(val, m_core->Camera());
-
-	val["position"]["x"] = m_core->GetPosition().x;
-	val["position"]["y"] = m_core->GetPosition().y;
-
-	val["angle"] = m_core->GetAngle();
-
-	val["x scale"] = m_core->GetScale().x;
-	val["y scale"] = m_core->GetScale().y;
-
-	val["x shear"] = m_core->GetShear().x;
-	val["y shear"] = m_core->GetShear().y;
-
-	val["x mirror"] = m_mirror.x;
-	val["y mirror"] = m_mirror.y;
-
-	val["x offset"] = m_offset.x;
-	val["y offset"] = m_offset.y;
-
-	val["x perspective"] = m_perspective.x;
-	val["y perspective"] = m_perspective.y;
-
-	val["anchor"] = m_is_anchor;
-
-	val["visible"] = m_visible;
-	val["editable"] = m_editable;
+	SpriteIO::Store(val, this);
 }
 
 void Sprite::BuildBounding()
@@ -228,6 +104,10 @@ PropertySetting* Sprite::CreatePropertySetting(EditPanelImpl* stage)
 	return new SpritePropertySetting(stage, this);
 }
 
+/************************************************************************/
+/* geometry                                                             */
+/************************************************************************/
+
 void Sprite::SetTransform(const sm::vec2& position, float angle)
 {
 	assert(m_core);
@@ -245,6 +125,55 @@ float Sprite::GetAngle() const
 {
 	assert(m_core);
 	return m_core->GetAngle(); 
+}
+
+void Sprite::Translate(const sm::vec2& offset)
+{
+	assert(m_core);
+
+#ifdef OPEN_SCREEN_CACHE
+	bool find = SpatialPartition::Instance()->Remove(this);
+	if (find) {
+		SpriteRenderer::InvalidRect(this);
+	}
+#endif // OPEN_SCREEN_CACHE
+
+	if (m_observer)
+		m_observer->Translate(this, offset);
+
+	m_core->SetPosition(m_core->GetPosition() + offset);
+	if (m_bounding) {
+		m_bounding->SetTransform(m_core->GetPosition(), m_offset, m_core->GetAngle());
+	}
+
+#ifdef OPEN_SCREEN_CACHE
+	if (find) {
+		SpriteRenderer::InvalidRect(this);
+		SpatialPartition::Instance()->Insert(this);
+	}
+#endif // OPEN_SCREEN_CACHE
+}
+
+void Sprite::Rotate(float delta)
+{
+	assert(m_core);
+
+#ifdef OPEN_SCREEN_CACHE
+	SpatialPartition::Instance()->Remove(this);
+#endif // OPEN_SCREEN_CACHE
+
+	if (m_observer)
+		m_observer->Rotate(this, delta);
+
+	m_core->SetAngle(m_core->GetAngle() + delta);
+
+	if (m_bounding) {
+		m_bounding->SetTransform(m_core->GetPosition(), m_offset, m_core->GetAngle());
+	}
+
+#ifdef OPEN_SCREEN_CACHE
+	SpatialPartition::Instance()->Insert(this);
+#endif // OPEN_SCREEN_CACHE
 }
 
 const sm::vec2& Sprite::GetScale() const 
@@ -321,71 +250,12 @@ void Sprite::SetOffset(const sm::vec2& offset)
 	}
 }
 
-bool Sprite::IsContain(const sm::vec2& pos) const
-{
-	return m_bounding ? m_bounding->IsContain(pos) : false;
-}
-
-bool Sprite::IsIntersect(const sm::rect& rect) const
-{
-	return m_bounding ? m_bounding->IsIntersect(rect) : false;
-}
-
-void Sprite::Translate(const sm::vec2& offset)
-{
-	assert(m_core);
-
-#ifdef OPEN_SCREEN_CACHE
-	bool find = SpatialPartition::Instance()->Remove(this);
-	if (find) {
-		SpriteRenderer::InvalidRect(this);
-	}
-#endif // OPEN_SCREEN_CACHE
-
-	if (m_observer)
-		m_observer->Translate(this, offset);
-
-	m_core->SetPosition(m_core->GetPosition() + offset);
-	if (m_bounding) {
-		m_bounding->SetTransform(m_core->GetPosition(), m_offset, m_core->GetAngle());
-	}
-
-#ifdef OPEN_SCREEN_CACHE
-	if (find) {
-		SpriteRenderer::InvalidRect(this);
-		SpatialPartition::Instance()->Insert(this);
-	}
-#endif // OPEN_SCREEN_CACHE
-}
-
-void Sprite::Rotate(float delta)
-{
-	assert(m_core);
-
-#ifdef OPEN_SCREEN_CACHE
-	SpatialPartition::Instance()->Remove(this);
-#endif // OPEN_SCREEN_CACHE
-
-	if (m_observer)
-		m_observer->Rotate(this, delta);
-
-	m_core->SetAngle(m_core->GetAngle() + delta);
-
-	if (m_bounding) {
-		m_bounding->SetTransform(m_core->GetPosition(), m_offset, m_core->GetAngle());
-	}
-
-#ifdef OPEN_SCREEN_CACHE
-	SpatialPartition::Instance()->Insert(this);
-#endif // OPEN_SCREEN_CACHE
-}
-
 void Sprite::SetMirror(bool x_mirror, bool y_mirror) 
 { 
 	assert(m_core);
 
 	bool x_dirty = (x_mirror != m_mirror.x),
-		 y_dirty = (y_mirror != m_mirror.y);
+		y_dirty = (y_mirror != m_mirror.y);
 
 	if (x_dirty) {
 		m_offset.x = -m_offset.x;
@@ -402,6 +272,16 @@ void Sprite::SetMirror(bool x_mirror, bool y_mirror)
 	}
 }
 
+bool Sprite::IsContain(const sm::vec2& pos) const
+{
+	return m_bounding ? m_bounding->IsContain(pos) : false;
+}
+
+bool Sprite::IsIntersect(const sm::rect& rect) const
+{
+	return m_bounding ? m_bounding->IsIntersect(rect) : false;
+}
+
 sm::vec2 Sprite::GetCenter() const
 {
 	assert(m_core);
@@ -409,6 +289,55 @@ sm::vec2 Sprite::GetCenter() const
 	sm::vec2 center = m_core->GetPosition() + center_offset;
 	return center;
 }
+
+sm::rect Sprite::GetRect() const
+{
+	std::vector<sm::vec2> bound;
+	GetBounding()->GetBoundPos(bound);
+	sm::rect rect;
+	for (int i = 0, n = bound.size(); i < n; ++i) {
+		rect.Combine(bound[i]);
+	}
+	return rect;
+}
+
+void Sprite::SetBounding(BoundingBox* bb)
+{
+	if (m_bounding == bb) {
+		return;
+	}
+
+	if (m_bounding) {
+		delete m_bounding;
+	}
+	m_bounding = bb;
+}
+
+void Sprite::GetTransMatrix(sm::mat4& mt) const
+{
+	assert(m_core);
+	const float x_scale = m_mirror.x ? -m_core->GetScale().x : m_core->GetScale().x,
+		y_scale = m_mirror.y ? -m_core->GetScale().y : m_core->GetScale().y;
+
+	sm::vec2 center = GetCenter();
+	mt.SetTransformation(center.x, center.y, m_core->GetAngle(), 
+		x_scale, y_scale, 0, 0, m_core->GetShear().x, m_core->GetShear().y);
+}
+
+sm::mat4 Sprite::GetTransInvMatrix() const
+{
+	assert(m_core);
+	sm::mat4 mat;
+	mat.RotateZ(-m_core->GetAngle());
+	mat.Shear(-m_core->GetShear().x, -m_core->GetShear().y);
+	mat.Translate(-m_core->GetPosition().x/m_core->GetScale().x, -m_core->GetPosition().y/m_core->GetScale().y, 0);
+	mat.Scale(1/m_core->GetScale().x, 1/m_core->GetScale().y, 1);
+	return mat;
+}
+
+/************************************************************************/
+/* render                                                               */
+/************************************************************************/
 
 const s2::RenderColor& Sprite::GetColor() const 
 { 
@@ -444,39 +373,6 @@ s2::RenderCamera& Sprite::GetCamera()
 { 
 	assert(m_core);
 	return m_core->Camera();
-}
-
-sm::rect Sprite::GetRect() const
-{
-	std::vector<sm::vec2> bound;
-	GetBounding()->GetBoundPos(bound);
-	sm::rect rect;
-	for (int i = 0, n = bound.size(); i < n; ++i) {
-		rect.Combine(bound[i]);
-	}
-	return rect;
-}
-
-void Sprite::GetTransMatrix(sm::mat4& mt) const
-{
-	assert(m_core);
-	const float x_scale = m_mirror.x ? -m_core->GetScale().x : m_core->GetScale().x,
-		y_scale = m_mirror.y ? -m_core->GetScale().y : m_core->GetScale().y;
-
-	sm::vec2 center = GetCenter();
-	mt.SetTransformation(center.x, center.y, m_core->GetAngle(), 
-		x_scale, y_scale, 0, 0, m_core->GetShear().x, m_core->GetShear().y);
-}
-
-sm::mat4 Sprite::GetTransInvMatrix() const
-{
-	assert(m_core);
-	sm::mat4 mat;
-	mat.RotateZ(-m_core->GetAngle());
-	mat.Shear(-m_core->GetShear().x, -m_core->GetShear().y);
-	mat.Translate(-m_core->GetPosition().x/m_core->GetScale().x, -m_core->GetPosition().y/m_core->GetScale().y, 0);
-	mat.Scale(1/m_core->GetScale().x, 1/m_core->GetScale().y, 1);
-	return mat;
 }
 
 //////////////////////////////////////////////////////////////////////////

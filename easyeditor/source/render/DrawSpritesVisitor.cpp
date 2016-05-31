@@ -32,12 +32,14 @@ void DrawSpritesVisitor::Visit(Object* object, bool& next)
 	DrawSprite(spr);
 
 	SettingData& cfg = Config::Instance()->GetSettings();
-	if (cfg.visible_node_name && !spr->name.empty() && spr->name[0] != '_') {
+	const std::string& name = spr->GetName();
+	if (cfg.visible_node_name && !name.empty() && name[0] != '_') 
+	{
 		sm::mat4 t;
 		spr->GetTransMatrix(t);
 		float s = std::max(1.0f, m_cam_scale) * cfg.node_name_scale;
 		t.Scale(s, s, 1);
-		GTxt::Instance()->Draw(t, spr->name);
+		GTxt::Instance()->Draw(t, name);
 	}
 }
 

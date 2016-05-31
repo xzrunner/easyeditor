@@ -88,7 +88,7 @@ void AnchorMgr::StoreToFile(Json::Value& value) const
 		for (int j = 0; j < m_anchors[i].sprites.size(); ++j) {
 			ee::Sprite* spr = m_anchors[i].sprites[j];
 			Json::Value spr_val;
-			spr_val["name"] = spr->name;
+			spr_val["name"] = spr->GetName();
 			spr_val["filepath"] = spr->GetSymbol().GetFilepath();
 			a_val[j] = spr_val;
 		}
@@ -173,7 +173,7 @@ void AnchorMgr::LoadAnchorData(const std::vector<ee::Sprite*>& sprites,
 		std::string name = val.asString();
 		ee::Sprite* spr = NULL;
 		for (int j = 0, m = sprites.size(); j < m; ++j) {
-			if (sprites[j]->name == name) {
+			if (sprites[j]->GetName() == name) {
 				spr = sprites[j];
 				break;
 			}

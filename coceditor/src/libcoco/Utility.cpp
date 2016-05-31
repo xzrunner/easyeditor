@@ -15,14 +15,14 @@ void Utility::GroupSpritesFromTag(const std::vector<s2::Sprite*>& src,
 	for (int i = 0, n = src.size(); i < n; ++i)
 	{
 		ee::Sprite* sprite = static_cast<ee::Sprite*>(src[i]->GetUD());
-		if (sprite->tag.empty())
+		if (sprite->GetTag().empty())
 		{
 			others.push_back(sprite);
 		}
 		else
 		{
 			std::vector<std::string> tags;
-			ee::StringHelper::Split(sprite->tag, ";", tags);
+			ee::StringHelper::Split(sprite->GetTag(), ";", tags);
 			bool is_action = false;
 			for (int i = 0, n = tags.size(); i < n; ++i)
 			{

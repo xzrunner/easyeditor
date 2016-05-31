@@ -36,7 +36,7 @@ bool ShapeLayer::InsertSprite(Object* obj)
 		ud->shape_names.push_back(shapes[i]->name);
 	}
 
-	ee::Sprite* base_spr = m_library->GetTerrainLayer()->QuerySprite(spr->name);
+	ee::Sprite* base_spr = m_library->GetTerrainLayer()->QuerySprite(spr->GetName());
 	base_spr->SetUserData(ud);	
 
 	return true;

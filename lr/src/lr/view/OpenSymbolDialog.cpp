@@ -53,17 +53,17 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 		static_cast<LibraryPanel*>(stage->GetLibrary())->GetAllPathName(path_names);
 		UnitEditDlg dlg(m_wnd, spr, path_names);
 		if (dlg.ShowModal() == wxID_OK) {
-			spr->tag = dlg.ToString();
+			spr->SetTag(dlg.ToString());
 		}
 	} 
 	else if (static_cast<LibraryPanel*>(stage->GetLibrary())->IsCurrLevelLayer())  {
 		LevelEditDlg dlg(m_wnd, spr);
 		if (dlg.ShowModal() == wxID_OK) {
-			bool use_symbol = spr->tag.find("[symbol]") != std::string::npos;
+			bool use_symbol = spr->GetTag().find("[symbol]") != std::string::npos;
 			if (use_symbol) {
-				spr->tag = "[symbol];";
+				spr->SetTag("[symbol];");
 			}
-			spr->tag = dlg.ToString();
+			spr->SetTag(dlg.ToString());
 		}
 	}
 	else if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(spr))
@@ -123,8 +123,8 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 	{
 		ee::SpriteDialog dlg(m_wnd, spr);
 		if (dlg.ShowModal() == wxID_OK) {
-			spr->name = dlg.GetNameStr();
-			spr->tag = dlg.GetTagStr();
+			spr->SetName(dlg.GetNameStr());
+			spr->SetTag(dlg.GetTagStr());
 		}
 	}
 

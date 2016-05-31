@@ -53,12 +53,12 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 	// base
 	if (name == wxT("Name"))
 	{
-		spr->name = wxANY_AS(value, wxString);
+		spr->SetName(wxANY_AS(value, wxString).ToStdString());
 		SpriteNameChangeSJ::Instance()->OnSpriteNameChanged(spr, this);
 	}
 	else if (name == "Tag")
 	{
-		spr->tag = wxANY_AS(value, wxString);
+		spr->SetTag(wxANY_AS(value, wxString).ToStdString());
 	}
 	// color
 	else if (name == "Color.Multi" && Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_DEFAULT)
@@ -108,7 +108,7 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 	}
 	else if (name == wxT("Clip"))
 	{
-		spr->clip = wxANY_AS(value, bool);
+		spr->SetClip(wxANY_AS(value, bool));
 	}
 	else if (name == "Anchor")
 	{
@@ -211,8 +211,8 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	std::string filename = FileHelper::GetFilenameWithExtension(spr->GetSymbol().GetFilepath());
 	pg->GetProperty(wxT("FileName"))->SetValue(filename);
 
-	pg->GetProperty(wxT("Name"))->SetValue(spr->name);
-	pg->GetProperty(wxT("Tag"))->SetValue(spr->tag);
+	pg->GetProperty(wxT("Name"))->SetValue(spr->GetName());
+	pg->GetProperty(wxT("Tag"))->SetValue(spr->GetTag());
 
 	if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_DEFAULT) {
 		wxColour mul_col = wxColour(spr->GetColor().mul.r, spr->GetColor().mul.g, spr->GetColor().mul.b, spr->GetColor().mul.a);
@@ -242,7 +242,7 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	MyColorProperty* bp = static_cast<MyColorProperty*>(pg->GetProperty("Color Conversion.B"));
 	bp->SetListener(new PropertyColorListener(&spr->GetColor().bmap));
 
-	pg->GetProperty(wxT("Clip"))->SetValue(spr->clip);
+	pg->GetProperty(wxT("Clip"))->SetValue(spr->IsClip());
 
 	pg->GetProperty(wxT("Anchor"))->SetValue(spr->IsAnchor());
 
@@ -285,15 +285,15 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	pg->Append(new wxPropertyCategory("BASE", wxPG_LABEL));
 
-	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, spr->name));
+	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, spr->GetName()));
 
 	std::string filename = FileHelper::GetFilenameWithExtension(spr->GetSymbol().GetFilepath());
 	pg->Append(new wxStringProperty(wxT("FileName"), wxPG_LABEL, filename));
 	pg->SetPropertyReadOnly("FileName");
 
-	pg->Append(new wxStringProperty("Tag", wxPG_LABEL, spr->tag));
+	pg->Append(new wxStringProperty("Tag", wxPG_LABEL, spr->GetTag()));
 
-	pg->Append(new wxBoolProperty("Clip", wxPG_LABEL, spr->clip));
+	pg->Append(new wxBoolProperty("Clip", wxPG_LABEL, spr->IsClip()));
 	pg->SetPropertyAttribute("Clip", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
 	pg->Append(new wxBoolProperty("Anchor", wxPG_LABEL, spr->IsAnchor()));
@@ -435,7 +435,7 @@ void SpritePropertySetting::OnNotify(int sj_id, void* ud)
 	if (sj_id == MSG_SPRITE_NAME_CHANGE) {
 		Sprite* spr = (Sprite*)ud;
 		if (GetSprite() == spr && m_pg) {
-			m_pg->GetProperty(wxT("Name"))->SetValue(spr->name);	
+			m_pg->GetProperty(wxT("Name"))->SetValue(spr->GetName());	
 		}
 	}
 }

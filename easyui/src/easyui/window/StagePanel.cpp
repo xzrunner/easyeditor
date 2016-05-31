@@ -260,8 +260,8 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 			ee::Sprite* spr = p->spr;
 			std::string type = "";
 			SymbolCfg::Instance()->QueryType(&spr->GetSymbol(), type);
-			if (type.empty() && spr->tag.find("type=unknown") == std::string::npos) {
-				spr->tag = "type=unknown;" + spr->tag;
+			if (type.empty() && spr->GetTag().find("type=unknown") == std::string::npos) {
+				spr->SetTag("type=unknown;" + spr->GetTag());
 			}
 		}
 		break;

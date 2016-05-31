@@ -33,7 +33,7 @@ ee::Sprite* GroupHelper::Group(const std::vector<ee::Sprite*>& sprites,
 	sym->SetName(name);
 	ecomplex::Sprite* spr = new ecomplex::Sprite(sym);
 	spr->Translate(c);
-	spr->name = name;
+	spr->SetName(name);
 
 	return spr;
 }

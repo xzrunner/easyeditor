@@ -69,8 +69,8 @@ void PackAnimation::CreateFramePart(const ee::Sprite* spr, Frame& frame)
 
 	PackAnimation::Part part;
 	std::string name = "";
-	if (Utility::IsNameValid(spr->name)) {
-		name = spr->name;
+	if (Utility::IsNameValid(spr->GetName())) {
+		name = spr->GetName();
 	}
 
 	bool force_mat = AddComponent(node, name, part.comp_idx);

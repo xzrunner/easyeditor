@@ -65,7 +65,7 @@ int w_Sprite_setName(lua_State* L)
 {
 	Sprite* t = luax_checksprite(L, 1);
 	const char* str = luaL_checkstring(L, 2);
-	t->name = str;
+	t->SetName(str);
 	return 0;
 }
 

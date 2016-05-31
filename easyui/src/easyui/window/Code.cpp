@@ -52,18 +52,19 @@ void Code::ResolveUI(const std::vector<ee::Sprite*>& sprites)
 		{
 			Node parent = buffer.front(); buffer.pop();
 			const ee::Sprite* spr = parent.sprite;
-
-			if (spr->name.empty() || spr->name[0] == '_') {
+	
+			const std::string& spr_name = spr->GetName();
+			if (spr_name.empty() || spr_name[0] == '_') {
 				continue;
 			}
 
 			std::string path, name;
 			if (parent.path.empty()) {
-				path = spr->name;
-				name = spr->name;
+				path = spr_name;
+				name = spr_name;
 			} else {
-				path = parent.path + "." + spr->name;
-				name = parent.name + "_" + spr->name;
+				path = parent.path + "." + spr_name;
+				name = parent.name + "_" + spr_name;
 			}
 
 			gen_path->line(lua::assign("path."+name, "\""+path+"\""));
@@ -113,7 +114,8 @@ void Code::ResolveText(const std::vector<ee::Sprite*>& sprites)
  	{
 		ee::Sprite* spr = buffer.front(); buffer.pop();
 
-		if (spr->name.empty() || spr->name[0] == '_') {
+		const std::string& name = spr->GetName();
+		if (name.empty() || name[0] == '_') {
 			continue;
 		}
 

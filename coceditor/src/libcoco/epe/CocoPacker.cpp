@@ -608,13 +608,15 @@ void CocoPacker::resolveSpriteForComponent(const ee::Sprite* sprite, std::vector
 
 	ids.push_back(id);
 
+	const std::string& name = sprite->GetName();
+
 	std::map<int, std::vector<std::string> >::iterator itr = unique.find(id);
 	if (unique.find(id) == unique.end())
 	{
 		std::string aID = lua::assign("id", ee::StringHelper::ToString(id));
-		if (!sprite->name.empty() && sprite->name[0] != '_')
+		if (!name.empty() && name[0] != '_')
 		{
-			std::string aName = lua::assign("name", "\""+sprite->name+"\"");
+			std::string aName = lua::assign("name", "\""+name+"\"");
 			lua::tableassign(m_gen, "", 2, aName, aID);
 		}
 		else
@@ -623,22 +625,22 @@ void CocoPacker::resolveSpriteForComponent(const ee::Sprite* sprite, std::vector
 		}
 
 		std::vector<std::string> names;
-		names.push_back(sprite->name);
+		names.push_back(name);
 		unique.insert(std::make_pair(id, names));
-		order.push_back(std::make_pair(id, sprite->name));
+		order.push_back(std::make_pair(id, name));
 	}
 	else
 	{
 		int i = 0;
 		for (int n = itr->second.size(); i < n; ++i)
-			if (itr->second[i] == sprite->name)
+			if (itr->second[i] == name)
 				break;
 		if (i == itr->second.size() && !isFont)
 		{
 			std::string aID = lua::assign("id", ee::StringHelper::ToString(id));
-			if (!sprite->name.empty() && sprite->name[0] != '_')
+			if (!name.empty() && name[0] != '_')
 			{
-				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
+				std::string aName = lua::assign("name", "\""+name+"\"");
 				lua::tableassign(m_gen, "", 2, aName, aID);
 			}
 			else
@@ -646,9 +648,9 @@ void CocoPacker::resolveSpriteForComponent(const ee::Sprite* sprite, std::vector
 				lua::tableassign(m_gen, "", 1, aID);
 			}
 
-			order.push_back(std::make_pair(id, sprite->name));
+			order.push_back(std::make_pair(id, name));
 		}
-		itr->second.push_back(sprite->name);
+		itr->second.push_back(name);
 	}
 }
 
@@ -658,7 +660,7 @@ void CocoPacker::resolveSpriteForFrame(const ee::Sprite* sprite, int index,
 	int id = ids[index];
 	int cindex = -1;
 	for (size_t i = 0, n = order.size(); i < n; ++i)
-		if (id == order[i].first && sprite->name == order[i].second)
+		if (id == order[i].first && sprite->GetName() == order[i].second)
 		{
 			cindex = i;
 			break;
@@ -681,7 +683,7 @@ void CocoPacker::resolveSpriteForFrame(const ee::Sprite* sprite, const std::vect
 	int id = itr->second;
 	int cindex = -1;
 	for (size_t i = 0, n = order.size(); i < n; ++i)
-		if (id == order[i].first && sprite->name == order[i].second)
+		if (id == order[i].first && sprite->GetName() == order[i].second)
 		{
 			cindex = i;
 			break;
@@ -746,14 +748,14 @@ void CocoPacker::resolveSpriteForFrameImage(const ee::Sprite* spr, int id)
 	{
 		std::string assignColor = lua::assign("color", ee::color2str(spr->GetColor().mul, ee::PT_BGRA));
 		std::string assignAdd = lua::assign("add", ee::color2str(spr->GetColor().add, ee::PT_ABGR));
-		if (spr->clip)
+		if (spr->IsClip())
 			lua::tableassign(m_gen, "", 5, assignIndex, assignColor, assignAdd, assignMat, "clip=true");
 		else
 			lua::tableassign(m_gen, "", 4, assignIndex, assignColor, assignAdd, assignMat);
 	}
 	else
 	{
-		if (spr->clip)
+		if (spr->IsClip())
 			lua::tableassign(m_gen, "", 3, assignIndex, assignMat, "clip=true");
 		else
 			lua::tableassign(m_gen, "", 2, assignIndex, assignMat);

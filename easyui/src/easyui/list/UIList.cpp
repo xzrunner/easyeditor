@@ -127,13 +127,13 @@ void UIList::StoreToFile(const char* filename) const
 	if (m_reverse_order) {
 		for (int i = m_items.size() - 1; i >= 0; --i) {
 			ee::Sprite* spr = m_items[i];
-			spr->name = "item" + ee::StringHelper::ToString(m_items.size() - i);
+			spr->SetName("item" + ee::StringHelper::ToString(m_items.size() - i));
 			items_complex.Add(spr);
 		}
 	} else {
 		for (int i = 0, n = m_items.size(); i < n; ++i) {
 			ee::Sprite* spr = m_items[i];
-			spr->name = "item" + ee::StringHelper::ToString(i + 1);
+			spr->SetName("item" + ee::StringHelper::ToString(i + 1));
 			items_complex.Add(spr);
 		}
 	}
@@ -143,7 +143,7 @@ void UIList::StoreToFile(const char* filename) const
 
 	// wrapper complex
 	ecomplex::Sprite items_sprite(&items_complex);
-	items_sprite.name = "anchor";
+	items_sprite.SetName("anchor");
 	ecomplex::Symbol wrapper_complex;
 	wrapper_complex.m_clipbox = m_clipbox;
 	wrapper_complex.Add(&items_sprite);

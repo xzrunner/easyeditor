@@ -43,7 +43,7 @@ void GroupTreeIO::Load(const Json::Value& value)
 					Sprite* spr = NULL;
 
 					for (int i = 0, n = sprites.size(); i < n; ++i) {
-						if (node.name == sprites[i]->name) {
+						if (node.name == sprites[i]->GetName()) {
 							spr = sprites[i];
 							break;
 						}
