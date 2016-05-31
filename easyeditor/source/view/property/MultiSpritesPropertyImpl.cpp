@@ -229,9 +229,9 @@ bool MultiSpritesPropertyImpl::GetVisible() const
 		return true;
 	}
 
-	bool ret = m_sprites[0]->visiable;
+	bool ret = m_sprites[0]->IsVisible();
 	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
-		if (ret != m_sprites[i]->visiable) {
+		if (ret != m_sprites[i]->IsVisible()) {
 			return true;
 		}
 	}
@@ -244,9 +244,9 @@ bool MultiSpritesPropertyImpl::GetEditable() const
 		return true;
 	}
 
-	bool ret = m_sprites[0]->editable;
+	bool ret = m_sprites[0]->IsEditable();
 	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
-		if (ret != m_sprites[i]->editable) {
+		if (ret != m_sprites[i]->IsEditable()) {
 			return true;
 		}
 	}
@@ -408,7 +408,7 @@ void MultiSpritesPropertyImpl::SetVisible(bool visible)
 {
 	SetWndDirtySJ::Instance()->SetDirty();
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->visiable = visible;
+		m_sprites[i]->SetVisible(visible);
 	}
 }
 
@@ -416,7 +416,7 @@ void MultiSpritesPropertyImpl::SetEditable(bool editable)
 {
 	SetWndDirtySJ::Instance()->SetDirty();
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->editable = editable;
+		m_sprites[i]->SetEditable(editable);
 	}
 }
 

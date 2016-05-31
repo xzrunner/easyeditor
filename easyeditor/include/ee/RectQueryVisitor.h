@@ -37,7 +37,7 @@ void RectQueryVisitor::Visit(Object* object, bool& next)
 	Sprite* sprite = static_cast<Sprite*>(object);
 // 	if (sprite->editable && sprite->isIntersect(m_rect))
 // 		m_result.push_back(sprite);
-	if (sprite->editable)
+	if (sprite->IsEditable())
 	{
 		BoundingBox* bv = sprite->GetBounding();
 // 		if (!m_contain && bv->isIntersect(m_rect))

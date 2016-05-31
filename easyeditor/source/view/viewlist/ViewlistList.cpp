@@ -194,10 +194,10 @@ void ViewlistList::OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const
 
 	Sprite* spr = m_sprites[n];
 
-	dc.SetBrush(spr->visiable ? *wxBLACK_BRUSH : *wxWHITE_BRUSH);
+	dc.SetBrush(spr->IsVisible() ? *wxBLACK_BRUSH : *wxWHITE_BRUSH);
 	dc.DrawRectangle(rect.x + BTN_SPACE, rect.y + BTN_SPACE, BTN_EDGE, BTN_EDGE);
 
-	dc.SetBrush(spr->editable ? *wxBLACK_BRUSH : *wxWHITE_BRUSH);
+	dc.SetBrush(spr->IsEditable() ? *wxBLACK_BRUSH : *wxWHITE_BRUSH);
 	dc.DrawRectangle(rect.x + rect.width - BTN_SPACE - BTN_EDGE, rect.y + BTN_SPACE, BTN_EDGE, BTN_EDGE);
 }
 
@@ -231,10 +231,10 @@ void ViewlistList::OnKeyDown(wxKeyEvent& event)
 	{
 		int keycode = event.GetKeyCode();
 		if (keycode == 'e' || keycode == 'E') {
-			m_selected_spr->editable = !m_selected_spr->editable;
+			m_selected_spr->SetEditable(!m_selected_spr->IsEditable());
 			Refresh();
 		} else if (keycode == 's' || keycode == 'S') {
-			m_selected_spr->visiable = !m_selected_spr->visiable;
+			m_selected_spr->SetVisible(!m_selected_spr->IsVisible());
 			SetCanvasDirtySJ::Instance()->SetDirty();
 			Refresh();
 		}
@@ -262,9 +262,9 @@ void ViewlistList::OnMouse(wxMouseEvent& event)
 
 	Sprite* spr = m_sprites[curr_pos];
 	if (pos.x <= BTN_SPACE + BTN_EDGE) {
-		spr->visiable = !spr->visiable;
+		spr->SetVisible(!spr->IsVisible());
 	} else {
-		spr->editable = !spr->editable;
+		spr->SetEditable(!spr->IsEditable());
 	}
 	RefreshPanelSJ::Instance()->Refresh();
 }

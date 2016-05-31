@@ -31,7 +31,7 @@ Sprite* MultiSpritesImpl::QuerySpriteByPos(const sm::vec2& pos) const
 {
 	Sprite* selected = NULL;
 	TraverseSprites(PointQueryVisitor(pos, &selected), DT_EDITABLE, false);
-	if (selected && !selected->editable) {
+	if (selected && !selected->IsEditable()) {
 		std::vector<Sprite*> sprites;
 		QuerySpritesByRect(sm::rect(pos, 1, 1), false, sprites);
 		if (!sprites.empty()) {

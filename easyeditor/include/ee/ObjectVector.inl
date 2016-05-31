@@ -118,8 +118,8 @@ inline void ObjectVector<T>::Traverse(const std::vector<T*>& objs,
 		std::vector<T*>::const_iterator itr = objs.begin();
 		for ( ; itr != objs.end(); ++itr)
 		{
-			if (type == DT_EDITABLE && (*itr)->editable ||
-				type == DT_VISIBLE && (*itr)->visiable ||
+			if (type == DT_EDITABLE && (*itr)->IsEditable() ||
+				type == DT_VISIBLE && (*itr)->IsVisible() ||
 				type == DT_ALL || type == DT_SELECTABLE)
 			{
 				bool next;

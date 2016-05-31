@@ -28,7 +28,7 @@ Sprite::Sprite()
 
 	clip = false;
 
-	visiable = editable = true;
+	m_visible = m_editable = true;
 
 	m_mirror.Set(false, false);
 	m_perspective.Set(0, 0);
@@ -45,8 +45,8 @@ Sprite::Sprite(const Sprite& sprite)
 	tag = sprite.tag;
 	clip = sprite.clip;
 
-	visiable = sprite.visiable;
-	editable = sprite.editable;
+	m_visible = sprite.m_visible;
+	m_editable = sprite.m_editable;
 
 	m_offset = sprite.m_offset;
 	m_mirror = sprite.m_mirror;
@@ -152,6 +152,14 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 
 	// anchor
 	m_is_anchor = val["anchor"].asBool();
+
+	// editable, visible
+	if (!val["editable"].isNull()) {
+		m_editable = val["editable"].asBool();
+	}
+	if (!val["visible"].isNull()) {
+		m_visible = val["visible"].asBool();
+	}
 }
 
 void Sprite::Store(Json::Value& val, const std::string& dir) const
@@ -187,6 +195,9 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 	val["y perspective"] = m_perspective.y;
 
 	val["anchor"] = m_is_anchor;
+
+	val["visible"] = m_visible;
+	val["editable"] = m_editable;
 }
 
 void Sprite::BuildBounding()

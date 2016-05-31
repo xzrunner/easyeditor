@@ -24,7 +24,7 @@ namespace ee
 void SpriteRenderer::Draw(const Sprite* spr, 
 						  const s2::RenderParams& params)
 {
-	if (!spr->visiable) {
+	if (!spr->IsVisible()) {
 		return;
 	}
 
@@ -107,7 +107,7 @@ void SpriteRenderer::Draw(const Sprite* spr,
 
 void SpriteRenderer::InvalidRect(const Sprite* sprite, const sm::mat4& mt)
 {
-	if (!sprite->visiable) {
+	if (!sprite->IsVisible()) {
 		return;
 	}
 

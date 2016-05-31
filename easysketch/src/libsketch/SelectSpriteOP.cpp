@@ -24,7 +24,7 @@ bool SelectSpriteOP::OnMouseLeftDown(int x, int y)
 	if (ee::EditOP::OnMouseLeftDown(x, y)) return true;
 
 	ee::Sprite* selected = SelectByPos(sm::ivec2(x, y));
-	if (selected && selected->editable)
+	if (selected && selected->IsEditable())
 	{
 		if (m_stage->GetKeyState(WXK_CONTROL)) 
 		{

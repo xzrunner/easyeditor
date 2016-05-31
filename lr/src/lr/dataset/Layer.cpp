@@ -418,7 +418,7 @@ ee::Sprite* Layer::LoadSprite(const Json::Value& val, const std::string& dir, co
 	if (!base_path.empty()) {
 		BaseFileUD* ud = new BaseFileUD(base_path);
 		sprite->SetUserData(ud);
-		sprite->editable = false;
+		sprite->SetEditable(false);
 	}
 	CheckSpriteName(sprite);
 

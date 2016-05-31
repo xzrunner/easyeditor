@@ -68,7 +68,7 @@ void StageCanvas2D::DrawSprites() const
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
 		ee::Sprite* sprite = sprites[i];
-		if (!sprite->visiable)
+		if (!sprite->IsVisible())
 			continue;
 		ee::SpriteRenderer::Draw(sprites[i]);
 	}

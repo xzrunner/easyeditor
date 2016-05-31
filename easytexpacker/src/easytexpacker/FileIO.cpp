@@ -133,7 +133,7 @@ void FileIO::LoadFromTexPackerFile(const char* filename)
 		}
 		sprite->SetTransform(pos, angle);
 
-		sprite->editable = false;
+		sprite->SetEditable(false);
 
 		Json::Value* val = new Json::Value;
 		*val = frame_val;

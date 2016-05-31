@@ -589,20 +589,20 @@ void ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	// editable
 	if (keycode == 'e' || keycode == 'E')
 	{
-		bool editable = !sprites[0]->editable;
+		bool editable = !sprites[0]->IsEditable();
 		for (int i = 0, n = sprites.size(); i < n; ++i) {
 			ee::Sprite* spr = sprites[i];
-			spr->editable = editable;
+			spr->SetEditable(editable);
 		}
 		RefreshPanelSJ::Instance()->Refresh();
 	}
 	// visible
 	else if (keycode == 's' || keycode == 'S')
 	{
-		bool visible = !sprites[0]->visiable;
+		bool visible = !sprites[0]->IsVisible();
 		for (int i = 0, n = sprites.size(); i < n; ++i) {
 			ee::Sprite* spr = sprites[i];
-			spr->visiable = visible;
+			spr->SetVisible(visible);
 		}
 		SetCanvasDirtySJ::Instance()->SetDirty();
 		RefreshPanelSJ::Instance()->Refresh();

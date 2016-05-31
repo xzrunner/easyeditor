@@ -216,7 +216,7 @@ VisitLeaf(wxTreeItemId id)
 		group->SetVisible(!group->GetVisible());
 	} else {
 	 	Sprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
-	 	spr->visiable = !spr->visiable;
+	 	spr->SetVisible(!spr->IsVisible());
 	}
 	return false;
 }
@@ -239,7 +239,7 @@ VisitLeaf(wxTreeItemId id)
 		group->SetEditable(!group->GetEditable());
 	} else {
 		Sprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
-		spr->editable = !spr->editable;
+		spr->SetEditable(!spr->IsEditable());
 	}
 	return false;
 }
@@ -258,7 +258,7 @@ VisitLeaf(wxTreeItemId id)
 		group->SetVisible(m_visible);
 	} else {
 		Sprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
-		spr->visiable = m_visible;
+		spr->SetVisible(m_visible);
 	}
 	return false;
 }
@@ -281,7 +281,7 @@ VisitLeaf(wxTreeItemId id)
 		group->SetEditable(m_editable);
 	} else {
 		Sprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
-		spr->editable = m_editable;
+		spr->SetEditable(m_editable);
 	}
 	return false;
 }

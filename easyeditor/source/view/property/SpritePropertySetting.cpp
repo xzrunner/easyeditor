@@ -180,12 +180,12 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 	// other
 	else if (name == wxT("Visiable"))
 	{
-		spr->visiable = wxANY_AS(value, bool);
+		spr->SetVisible(wxANY_AS(value, bool));
 		RefreshPanelSJ::Instance()->Refresh();
 	}
 	else if (name == wxT("Editable"))
 	{
-		spr->editable = wxANY_AS(value, bool);
+		spr->SetEditable(wxANY_AS(value, bool));
 		RefreshPanelSJ::Instance()->Refresh();
 	}
 	else if (SpriteFilterPSHelper::FromPS(name, value, spr))
@@ -273,8 +273,8 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	pg->GetProperty(wxT("Perspective.Y"))->SetValue(spr->GetPerspective().y);
 	pg->GetProperty(wxT("Perspective"))->SetValue(pg->GetProperty(wxT("Perspective"))->GenerateComposedValue());
 
-	pg->GetProperty(wxT("Visiable"))->SetValue(spr->visiable);
-	pg->GetProperty(wxT("Editable"))->SetValue(spr->editable);
+	pg->GetProperty(wxT("Visiable"))->SetValue(spr->IsVisible());
+	pg->GetProperty(wxT("Editable"))->SetValue(spr->IsEditable());
 }
 
 void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
@@ -424,9 +424,9 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->SetPropertyAttribute(wxT("Perspective.Y"), "Precision", 1);
 
 	pg->Append(new wxPropertyCategory("EDIT", wxPG_LABEL));
-	pg->Append(new wxBoolProperty("Visiable", wxPG_LABEL, spr->visiable));
+	pg->Append(new wxBoolProperty("Visiable", wxPG_LABEL, spr->IsVisible()));
 	pg->SetPropertyAttribute("Visiable", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
-	pg->Append(new wxBoolProperty("Editable", wxPG_LABEL, spr->editable));
+	pg->Append(new wxBoolProperty("Editable", wxPG_LABEL, spr->IsEditable()));
 	pg->SetPropertyAttribute("Editable", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 }
 

@@ -102,6 +102,11 @@ public:
 	const s2::Sprite* GetCore() const { return m_core; }
 	s2::Sprite* GetCore() { return m_core; }
 
+	bool IsVisible() const { return m_visible; }
+	void SetVisible(bool visible) { m_visible = visible; }
+	bool IsEditable() const { return m_editable; }
+	void SetEditable(bool editable) { m_editable = editable; }
+
 protected:
 	template<typename T>
 	void SetSymbol(T** dst, Symbol* src);
@@ -115,20 +120,19 @@ public:
 	std::string tag;
 	bool clip;
 
-	// edit
-	bool visiable;
-	bool editable;
-
 protected:
-	s2::Sprite*	m_core;
+	s2::Sprite*		m_core;
 
-	sm::vec2	m_offset;
-	sm::bvec2	m_mirror;
-	sm::vec2	m_perspective;
+	sm::vec2		m_offset;
+	sm::bvec2		m_mirror;
+	sm::vec2		m_perspective;
 
-	BoundingBox* m_bounding;
+	BoundingBox*	m_bounding;
 	
 	SpriteObserver* m_observer;
+
+	bool			m_visible;
+	bool			m_editable;
 
 private:
 	bool m_is_anchor;

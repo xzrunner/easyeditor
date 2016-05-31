@@ -102,7 +102,7 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 	}
 	if (selected)
 	{
-		assert(selected->editable);
+		assert(selected->IsEditable());
 		if (m_stage->GetKeyState(WXK_CONTROL))
 		{
 			if (m_selection->IsExist(selected)) {
@@ -263,7 +263,7 @@ Sprite* SelectSpritesOP::SelectByPos(const sm::vec2& pos) const
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
 		Sprite* spr = sprites[i];
-		if (spr->editable && spr->IsContain(pos)) {
+		if (spr->IsEditable() && spr->IsContain(pos)) {
 			selected = spr;
 			break;
 		}
