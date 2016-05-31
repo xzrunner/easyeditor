@@ -83,9 +83,9 @@ p3d_emitter_cfg* Particle3DToSpr::LoadConfig(const erespacker::PackParticle3D* p
 
 		s2::Color col_mul = int2color(src.col_mul, ee::PT_ARGB),
 			      col_add = int2color(src.col_add, ee::PT_ARGB);
-		memcpy(&dst.col_mul.r, &col_mul.r, sizeof(col_mul));
-		memcpy(&dst.col_add.r, &col_add.r, sizeof(col_add));
-		
+		dst.col_mul = eparticle3d::ColorFromS2(col_mul);
+		dst.col_add = eparticle3d::ColorFromS2(col_add);
+
 		dst.alpha_start = src.alpha_start;
 		dst.alpha_end = src.alpha_end;
 

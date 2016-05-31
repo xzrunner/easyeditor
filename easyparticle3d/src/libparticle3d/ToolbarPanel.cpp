@@ -7,6 +7,7 @@
 #include "PSConfigMgr.h"
 #include "ComponentPanel.h"
 #include "language.h"
+#include "utility.h"
 
 #include <ee/panel_msg.h>
 #include <ee/SliderCtrl.h>
@@ -117,8 +118,9 @@ void ToolbarPanel::Add(const LoadAdapter::Component& comp, ee::LibraryPanel* lib
 
 	cp->SetValue(PS_ROTATE, ee::UICallback::Data(comp.angle - comp.angle_var, comp.angle + comp.angle_var));
 
-	memcpy(&pc->col_mul.r, &comp.col_mul.r, sizeof(pc->col_mul));
-	memcpy(&pc->col_add.r, &comp.col_add.r, sizeof(pc->col_add));
+	pc->col_mul = ColorFromS2(comp.col_mul);
+	pc->col_add = ColorFromS2(comp.col_add);
+
 	cp->SetValue(PS_ALPHA, ee::UICallback::Data(comp.alpha_start, comp.alpha_end));
 	cp->SetBtnColor();
 

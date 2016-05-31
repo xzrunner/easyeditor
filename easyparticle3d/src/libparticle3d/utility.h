@@ -2,6 +2,9 @@
 #define _EASYPARTICLE3D_UTILITY_H_
 
 #include <SM_Matrix.h>
+#include <sprite2/Color.h>
+
+#include <ps_utility.h>
 
 namespace eparticle3d
 {
@@ -23,6 +26,16 @@ inline sm::vec2 TransCoords3To2(const float position[3], const sm::mat4& directi
 	float x = (gx - gy) * 36,
 		y = (gx + gy) * 26 + trans_pos3.z * 0.5f;
 	return sm::vec2(x, y);
+}
+
+inline ps_color4f ColorFromS2(const s2::Color& col)
+{
+	ps_color4f ret;
+	ret.r = col.r / 255.0f;
+	ret.g = col.g / 255.0f;
+	ret.b = col.b / 255.0f;
+	ret.a = col.a / 255.0f;
+	return ret;
 }
 
 }

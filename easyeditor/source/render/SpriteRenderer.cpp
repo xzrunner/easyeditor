@@ -134,6 +134,16 @@ void SpriteRenderer::Draw(const Symbol* symbol,
 	s2::RenderParams t = params;
 	t.mt = mt;
 
+	if (t.shader.blend != s2::BM_NULL) {
+		;
+	} else if (t.shader.filter && t.shader.filter->GetMode() != s2::FM_NULL) {
+		;
+	} else {
+		if (t.set_shader) {
+			sl::ShaderMgr::Instance()->SetShader(sl::SPRITE2);
+		}
+	}
+
 	symbol->Draw(t);
 }
 
