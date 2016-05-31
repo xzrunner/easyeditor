@@ -4,6 +4,7 @@
 #include "P3dSprBuilder.h"
 
 #include <ee/Visitor.h>
+#include <ee/trans_color.h>
 
 #include <easyparticle3d.h>
 
@@ -111,10 +112,12 @@ void Particle3DBuilder::Load(const eparticle3d::Symbol* symbol, PackParticle3D* 
 		comp.angle = p_symbol.angle;
 		comp.angle_var = p_symbol.angle_var;
 
-		comp.col_mul = s2::Color((int)(p_symbol.col_mul.r * 255), (int)(p_symbol.col_mul.g * 255), 
-			(int)(p_symbol.col_mul.b * 255), (int)(p_symbol.col_mul.a * 255)).ToABGR();
-		comp.col_add = s2::Color((int)(p_symbol.col_add.r * 255), (int)(p_symbol.col_add.g * 255), 
-			(int)(p_symbol.col_add.b * 255), (int)(p_symbol.col_add.a * 255)).ToABGR();
+		s2::Color mul((int)(p_symbol.col_mul.r * 255), (int)(p_symbol.col_mul.g * 255), 
+			(int)(p_symbol.col_mul.b * 255), (int)(p_symbol.col_mul.a * 255));
+		s2::Color add((int)(p_symbol.col_add.r * 255), (int)(p_symbol.col_add.g * 255), 
+			(int)(p_symbol.col_add.b * 255), (int)(p_symbol.col_add.a * 255));
+		comp.col_mul = ee::color2int(mul, ee::PT_ARGB);
+		comp.col_add = ee::color2int(add, ee::PT_ARGB);
 		comp.alpha_start = p_symbol.alpha_start * 255.0f + 0.5f;
 		comp.alpha_end = p_symbol.alpha_end * 255.0f + 0.5f;
 
