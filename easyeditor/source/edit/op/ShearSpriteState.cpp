@@ -177,7 +177,7 @@ void ShearSpriteState::Shear2(const sm::vec2& curr)
 
 			float dis = Math2D::GetDistance(ori, now);
 			ky = dis / hw;
-			if ((center - ori).Cross(now - ori) < 0) {
+			if ((center - ori).Cross(now - ori) > 0) {
 				ky = -ky;
 			}
 			ky /= sy;
