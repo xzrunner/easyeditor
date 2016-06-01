@@ -40,7 +40,7 @@ void SpriteIO::LoadGeometry(const Json::Value& val, Sprite* spr)
 {
 	// scale
 	sm::vec2 scale(1, 1);
-	if (!val["x scale"].isNull() && !val["y scale"])
+	if (!val["x scale"].isNull() && !val["y scale"].isNull())
 	{
 		scale.x = static_cast<float>(val["x scale"].asDouble());
 		scale.y = static_cast<float>(val["y scale"].asDouble());
