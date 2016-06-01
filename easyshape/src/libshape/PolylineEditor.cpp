@@ -6,7 +6,11 @@ namespace eshape
 bool PolylineEditor::AddVertex(std::vector<sm::vec2>& vertices, sm::rect& bounding,
 							   int index, const sm::vec2& pos)
 {
-	if (index >= 0 && index < vertices.size()) {
+	if (index == vertices.size()) {
+		vertices.push_back(pos);
+		bounding.Combine(pos);
+		return true;		
+	} else if (index >= 0 && index < vertices.size()) {
 		vertices.insert(vertices.begin() + index, pos);
 		bounding.Combine(pos);
 		return true;
