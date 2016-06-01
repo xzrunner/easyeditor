@@ -27,7 +27,7 @@ public:
 
 //		void removeSprite(ee::Sprite* sprite);
 
-	const std::vector<Layer*>& CetAllLayers() const {
+	const std::vector<Layer*>& GetAllLayers() const {
 		return m_layers;
 	}
 

@@ -48,7 +48,7 @@ void KeyFrame::CopyFromOther(const KeyFrame* src)
 
 		if (m_layer) {
 			s->SetObserver(&m_layer->GetSpriteObserver());
-			m_layer->GetSpriteObserver().insert(s, m_time);
+			m_layer->GetSpriteObserver().Insert(s, m_time);
 		}
 	}
 
@@ -65,7 +65,7 @@ void KeyFrame::Insert(ee::Sprite* sprite, int idx)
 	ee::ObjectVector<ee::Sprite>::Insert(m_sprites, sprite, idx);
 	if (m_layer) {
 		sprite->SetObserver(&m_layer->GetSpriteObserver());
-		m_layer->GetSpriteObserver().insert(sprite, m_time);
+		m_layer->GetSpriteObserver().Insert(sprite, m_time);
 	}
 }
 
@@ -73,7 +73,7 @@ bool KeyFrame::Remove(ee::Sprite* sprite)
 {
 	m_skeleton.RemoveSprite(sprite);
 	if (m_layer) {
-		m_layer->GetSpriteObserver().remove(sprite);
+		m_layer->GetSpriteObserver().Remove(sprite);
 	}
 
 	return ee::ObjectVector<ee::Sprite>::Remove(m_sprites, sprite);
@@ -93,7 +93,7 @@ void KeyFrame::Clear()
 {
 	if (m_layer) {
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-			m_layer->GetSpriteObserver().remove(m_sprites[i]);
+			m_layer->GetSpriteObserver().Remove(m_sprites[i]);
 	}
 
 	ee::ObjectVector<ee::Sprite>::Clear(m_sprites);

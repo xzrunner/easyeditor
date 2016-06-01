@@ -24,9 +24,12 @@ protected:
 
 private:
 	wxSizer* InitTemplateLayout();
+	wxSizer* InitCommonLayout();
 
 	void OnChangeAnim(wxCommandEvent& event);
 	void OnSetTemplateDir(wxCommandEvent& event);
+
+	void OnOpPass(wxCommandEvent& event);
 
 private:
 	wxSizer* m_tl_sizer;

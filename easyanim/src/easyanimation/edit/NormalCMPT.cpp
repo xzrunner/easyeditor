@@ -1,4 +1,4 @@
-#include "CommonCMPT.h"
+#include "NormalCMPT.h"
 #include "ArrangeSpriteOP.h"
 
 #include "view/ViewMgr.h"
@@ -24,19 +24,19 @@
 namespace eanim
 {
 
-CommonCMPT::CommonCMPT(wxWindow* parent, const std::string& name, bool vertical)
+NormalCMPT::NormalCMPT(wxWindow* parent, const std::string& name, bool vertical)
 	: ee::EditCMPT(parent, name, ViewMgr::Instance()->stage->GetStageImpl())
 	, m_vertical(vertical)
 {
 	m_editop = new ArrangeSpriteOP(ViewMgr::Instance()->stage);
 }
 
-wxSizer* CommonCMPT::InitLayout()
+wxSizer* NormalCMPT::InitLayout()
 {
 	return InitEditPanel();
 }
 
-wxSizer* CommonCMPT::InitEditPanel()
+wxSizer* NormalCMPT::InitEditPanel()
 {
 	int orient = m_vertical ? wxVERTICAL : wxHORIZONTAL;
 	wxBoxSizer* sizer = new wxBoxSizer(orient);
@@ -50,14 +50,14 @@ wxSizer* CommonCMPT::InitEditPanel()
 	return sizer;
 }
 
-wxSizer* CommonCMPT::InitLoadPanel()
+wxSizer* NormalCMPT::InitLoadPanel()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	// folder
 	{
 		wxButton* btnLoad = new wxButton(this, wxID_ANY, wxT("Load Folder"));
 		Connect(btnLoad->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
-			wxCommandEventHandler(CommonCMPT::OnLoadFromFolder));
+			wxCommandEventHandler(NormalCMPT::OnLoadFromFolder));
 		sizer->Add(btnLoad);
 	}
 	sizer->AddSpacer(10);
@@ -65,13 +65,13 @@ wxSizer* CommonCMPT::InitLoadPanel()
 	{
 		wxButton* btnLoad = new wxButton(this, wxID_ANY, wxT("Load List"));
 		Connect(btnLoad->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
-			wxCommandEventHandler(CommonCMPT::OnLoadFromList));
+			wxCommandEventHandler(NormalCMPT::OnLoadFromList));
 		sizer->Add(btnLoad);
 	}
 	return sizer;
 }
 
-wxSizer* CommonCMPT::InitFillingPanel()
+wxSizer* NormalCMPT::InitFillingPanel()
 {
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Filling"));
 	int orient = m_vertical ? wxVERTICAL : wxHORIZONTAL;
@@ -90,13 +90,13 @@ wxSizer* CommonCMPT::InitFillingPanel()
 	{
 		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Filling"));
 		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
-			wxCommandEventHandler(CommonCMPT::OnFillingFrames));
+			wxCommandEventHandler(NormalCMPT::OnFillingFrames));
 		filling_sizer->Add(btn);
 	}
 	return filling_sizer;
 }
 
-wxSizer* CommonCMPT::InitSettingsPanel()
+wxSizer* NormalCMPT::InitSettingsPanel()
 {
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("¸¨ÖúÏß"));
 	int orient = m_vertical ? wxVERTICAL : wxHORIZONTAL;
@@ -105,16 +105,16 @@ wxSizer* CommonCMPT::InitSettingsPanel()
 	wxButton* btnAdd = new wxButton(this, wxID_ANY, "+", wxDefaultPosition, wxSize(25, 25));
 	sizer->Add(btnAdd, 0, wxLEFT | wxRIGHT, 5);
 	Connect(btnAdd->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
-		wxCommandEventHandler(CommonCMPT::OnAddCross));
+		wxCommandEventHandler(NormalCMPT::OnAddCross));
 	wxButton* btnDel = new wxButton(this, wxID_ANY, "-", wxDefaultPosition, wxSize(25, 25));
 	sizer->Add(btnDel, 0, wxLEFT | wxRIGHT, 5);
 	Connect(btnDel->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
-		wxCommandEventHandler(CommonCMPT::OnDelCross));
+		wxCommandEventHandler(NormalCMPT::OnDelCross));
 
 	return sizer;
 }
 
-void CommonCMPT::OnLoadFromFolder(wxCommandEvent& event)
+void NormalCMPT::OnLoadFromFolder(wxCommandEvent& event)
 {
 	ArrangeSpriteOP* op = static_cast<ArrangeSpriteOP*>(m_editop);
 	op->SetMouseMoveFocus(false);
@@ -188,7 +188,7 @@ void CommonCMPT::OnLoadFromFolder(wxCommandEvent& event)
 	ViewMgr::Instance()->library->LoadFromSymbolMgr(*ee::SymbolMgr::Instance());
 }
 
-void CommonCMPT::OnLoadFromList(wxCommandEvent& event)
+void NormalCMPT::OnLoadFromList(wxCommandEvent& event)
 {
 	std::vector<ee::Symbol*> symbols;
 	ViewMgr::Instance()->img_page->GetList()->
@@ -223,7 +223,7 @@ void CommonCMPT::OnLoadFromList(wxCommandEvent& event)
 	SetSelectedSJ::Instance()->Set(0, 0);
 }
 
-void CommonCMPT::OnFillingFrames(wxCommandEvent& event)
+void NormalCMPT::OnFillingFrames(wxCommandEvent& event)
 {
 	int tot = m_filling->GetValue() - 1;
 	for (size_t i = 0, n = DataMgr::Instance()->GetLayers().Size(); i < n; ++i)
@@ -251,19 +251,19 @@ void CommonCMPT::OnFillingFrames(wxCommandEvent& event)
 	}
 }
 
-void CommonCMPT::OnChangeAnim(wxCommandEvent& event)
+void NormalCMPT::OnChangeAnim(wxCommandEvent& event)
 {
 	DataMgr::Instance()->GetTemplate().SetChoice(event.GetInt());
 	FileIO::Reload();
 }
 
-void CommonCMPT::OnAddCross(wxCommandEvent& event)
+void NormalCMPT::OnAddCross(wxCommandEvent& event)
 {
 	static_cast<ArrangeSpriteOP*>(m_editop)->AddCross();
 
 }
 
-void CommonCMPT::OnDelCross(wxCommandEvent& event)
+void NormalCMPT::OnDelCross(wxCommandEvent& event)
 {
 	static_cast<ArrangeSpriteOP*>(m_editop)->DelCross();
 }

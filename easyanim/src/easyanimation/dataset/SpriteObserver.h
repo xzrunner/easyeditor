@@ -18,8 +18,10 @@ public:
 	virtual void Translate(ee::Sprite* sprite, const sm::vec2& offset);
 	virtual void Rotate(ee::Sprite* sprite, float delta);
 
-	void insert(const ee::Sprite* sprite, int frame);
-	void remove(const ee::Sprite* sprite);
+	void Insert(const ee::Sprite* sprite, int frame);
+	void Remove(const ee::Sprite* sprite);
+
+	void Enable(bool enable) { m_enable = enable; }
 
 private:
 	const Layer& m_layer;

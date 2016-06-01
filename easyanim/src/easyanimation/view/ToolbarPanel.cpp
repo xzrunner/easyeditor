@@ -1,10 +1,11 @@
 #include "ToolbarPanel.h"
 #include "StagePanel.h"
 
-#include "edit/CommonCMPT.h"
+#include "edit/NormalCMPT.h"
 #include "edit/SkeletonCMPT.h"
 #include "view/ViewMgr.h"
 #include "dataset/DataMgr.h"
+#include "dataset/Layer.h"
 #include "frame/FileIO.h"
 
 #include <ee/sprite_msg.h>
@@ -20,7 +21,7 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, bool vertical)
 	: ee::ToolbarPanel(parent, ViewMgr::Instance()->stage->GetStageImpl(), vertical)
 	, m_tl_anim_choice(NULL)
 {
-	AddChild(new CommonCMPT(this, "Common", vertical));
+	AddChild(new NormalCMPT(this, "Normal", vertical));
 	AddChild(new SkeletonCMPT(this, "Skeleton", vertical));
 	SetSizer(InitLayout());	
 
@@ -60,8 +61,11 @@ wxSizer* ToolbarPanel::InitLayout()
 	}
 	sizer->AddSpacer(10);
 	{
-		wxSizer* sz = InitTemplateLayout();
-		sizer->Add(sz);
+		sizer->Add(InitTemplateLayout());
+	}
+	sizer->AddSpacer(10);
+	{
+		sizer->Add(InitCommonLayout());
 	}
 	return sizer;
 }
@@ -95,6 +99,19 @@ wxSizer* ToolbarPanel::InitTemplateLayout()
 	return m_tl_sizer;
 }
 
+wxSizer* ToolbarPanel::InitCommonLayout()
+{
+	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, "Common");
+	wxStaticBoxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
+	
+	wxCheckBox* op_pass = new wxCheckBox(this, wxID_ANY, "²Ù×÷¼Ì³Ð");
+	op_pass->SetValue(false);
+	Connect(op_pass->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ToolbarPanel::OnOpPass));
+	sizer->Add(op_pass);
+	
+	return sizer;
+}
+
 void ToolbarPanel::OnChangeAnim(wxCommandEvent& event)
 {
 	DataMgr::Instance()->GetTemplate().SetChoice(event.GetInt());
@@ -121,6 +138,15 @@ void ToolbarPanel::OnSetTemplateDir(wxCommandEvent& event)
 	}
 
 	op->SetMouseMoveFocus(true);
+}
+
+void ToolbarPanel::OnOpPass(wxCommandEvent& event)
+{
+	bool enable = event.IsChecked();
+	const std::vector<Layer*>& layers = DataMgr::Instance()->GetLayers().GetAllLayers();
+	for (int i = 0, n = layers.size(); i < n; ++i) {
+		layers[i]->GetSpriteObserver().Enable(enable);
+	}
 }
 
 } // eanim

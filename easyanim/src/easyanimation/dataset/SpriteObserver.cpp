@@ -9,7 +9,7 @@ namespace eanim
 
 SpriteObserver::SpriteObserver(const Layer& layer)
 	: m_layer(layer)
-	, m_enable(true)
+	, m_enable(false)
 {
 }
 
@@ -69,12 +69,12 @@ void SpriteObserver::Rotate(ee::Sprite* sprite, float delta)
 	m_enable = true;
 }
 
-void SpriteObserver::insert(const ee::Sprite* sprite, int frame)
+void SpriteObserver::Insert(const ee::Sprite* sprite, int frame)
 {
 	m_map2frame.insert(std::make_pair(const_cast<ee::Sprite*>(sprite), frame));
 }
 
-void SpriteObserver::remove(const ee::Sprite* sprite)
+void SpriteObserver::Remove(const ee::Sprite* sprite)
 {
 	std::map<ee::Sprite*, int>::iterator itr 
 		= m_map2frame.find(const_cast<ee::Sprite*>(sprite));

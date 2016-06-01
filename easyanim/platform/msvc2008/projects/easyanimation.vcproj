@@ -556,11 +556,11 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easyanimation\edit\CommonCMPT.cpp"
+					RelativePath="..\..\..\src\easyanimation\edit\NormalCMPT.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easyanimation\edit\CommonCMPT.h"
+					RelativePath="..\..\..\src\easyanimation\edit\NormalCMPT.h"
 					>
 				</File>
 				<File

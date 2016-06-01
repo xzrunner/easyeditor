@@ -1,5 +1,5 @@
-#ifndef _EASYANIM_COMMON_CMPT_H_
-#define _EASYANIM_COMMON_CMPT_H_
+#ifndef _EASYANIM_NORMAL_CMPT_H_
+#define _EASYANIM_NORMAL_CMPT_H_
 
 #include <ee/EditCMPT.h>
 
@@ -9,10 +9,10 @@ namespace eanim
 class LayersMgr;
 class StagePanel;
 
-class CommonCMPT : public ee::EditCMPT
+class NormalCMPT : public ee::EditCMPT
 {
 public:
-	CommonCMPT(wxWindow* parent, const std::string& name, bool vertical);
+	NormalCMPT(wxWindow* parent, const std::string& name, bool vertical);
 
 protected:
 	virtual wxSizer* InitLayout();
@@ -39,8 +39,8 @@ private:
 
 	wxSpinCtrl* m_filling;
 
-}; // CommonCMPT
+}; // NormalCMPT
 
 }
 
-#endif // _EASYANIM_COMMON_CMPT_H_
+#endif // _EASYANIM_NORMAL_CMPT_H_
