@@ -159,7 +159,7 @@ void OpenSymbolDialog::UpdateShapeFromETexture(etexture::Sprite* spr)
 	create_shapes_from_etxture(spr, shapes);
 	for (int i = 0, n = shapes.size(); i < n; ++i) {
 		layer->InsertShape(shapes[i]);
-		sud->shape_names.push_back(shapes[i]->name);
+		sud->shape_names.push_back(shapes[i]->GetName());
 	}
 }
 

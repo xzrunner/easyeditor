@@ -382,7 +382,7 @@ void LRJsonPacker::ParserCharacterFromSprite(const Json::Value& src_val, const l
 			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(shape_filepath);
 			const std::vector<ee::Shape*>& shapes = static_cast<eshape::Symbol*>(symbol)->GetShapes();
 			if (!shapes.empty()) {
-				tag_ext = shapes[0]->name;
+				tag_ext = shapes[0]->GetName();
 
 				if (eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(shapes[0])) {
 					float x = spr_val["position"]["x"].asDouble(),

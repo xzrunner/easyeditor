@@ -28,7 +28,7 @@ void PolygonPropertySetting::OnPropertyGridChange(const std::string& name, const
 	bool dirty = true;
 	if (name == wxT("Name"))
 	{
-		m_poly->name = wxANY_AS(value, wxString);
+		m_poly->SetName(wxANY_AS(value, wxString).ToStdString());
 	}
 	else if (name == wxT("X"))
 	{
@@ -74,7 +74,7 @@ void PolygonPropertySetting::OnPropertyGridChange(const std::string& name, const
 
 void PolygonPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
-	pg->GetProperty(wxT("Name"))->SetValue(m_poly->name);
+	pg->GetProperty(wxT("Name"))->SetValue(m_poly->GetName());
 	sm::vec2 center = m_poly->GetRect().Center();
 	pg->GetProperty(wxT("X"))->SetValue(center.x);
 	pg->GetProperty(wxT("Y"))->SetValue(center.y);
@@ -85,7 +85,7 @@ void PolygonPropertySetting::InitProperties(wxPropertyGrid* pg)
 {
 	pg->Clear();
 
-	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_poly->name));
+	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_poly->GetName()));
 
 	sm::vec2 center = m_poly->GetRect().Center();
 

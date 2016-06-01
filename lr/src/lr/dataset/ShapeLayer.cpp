@@ -33,7 +33,7 @@ bool ShapeLayer::InsertSprite(Object* obj)
 	ShapesUD* ud = new ShapesUD;
 	ud->layer_id = GetID();
 	for (int i = 0, n = shapes.size(); i < n; ++i) {
-		ud->shape_names.push_back(shapes[i]->name);
+		ud->shape_names.push_back(shapes[i]->GetName());
 	}
 
 	ee::Sprite* base_spr = m_library->GetTerrainLayer()->QuerySprite(spr->GetName());

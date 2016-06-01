@@ -22,7 +22,7 @@ void ChainPropertySetting::OnPropertyGridChange(const std::string& name, const w
 	bool dirty = true;
 	if (name == wxT("Name"))
 	{
-		m_chain->name = wxANY_AS(value, wxString);
+		m_chain->SetName(wxANY_AS(value, wxString).ToStdString());
 	}
 	else if (name == wxT("X"))
 	{
@@ -72,7 +72,7 @@ void ChainPropertySetting::OnPropertyGridChange(const std::string& name, const w
 
 void ChainPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
-	pg->GetProperty(wxT("Name"))->SetValue(m_chain->name);
+	pg->GetProperty(wxT("Name"))->SetValue(m_chain->GetName());
 	sm::vec2 center = m_chain->GetRect().Center();
 	pg->GetProperty(wxT("X"))->SetValue(center.x);
 	pg->GetProperty(wxT("Y"))->SetValue(center.y);
@@ -84,7 +84,7 @@ void ChainPropertySetting::InitProperties(wxPropertyGrid* pg)
 {
 	pg->Clear();
 
-	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_chain->name));
+	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_chain->GetName()));
 
 	sm::vec2 center = m_chain->GetRect().Center();
 

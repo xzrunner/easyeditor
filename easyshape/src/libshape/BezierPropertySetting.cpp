@@ -22,7 +22,7 @@ void BezierPropertySetting::OnPropertyGridChange(const std::string& name, const 
 	bool dirty = true;
 	if (name == wxT("Name"))
 	{
-		m_bezier->name = wxANY_AS(value, wxString);
+		m_bezier->SetName(wxANY_AS(value, wxString).ToStdString());
 	}
 	else if (name == wxT("X"))
 	{
@@ -57,7 +57,7 @@ void BezierPropertySetting::OnPropertyGridChange(const std::string& name, const 
 
 void BezierPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
-	pg->GetProperty(wxT("Name"))->SetValue(m_bezier->name);
+	pg->GetProperty(wxT("Name"))->SetValue(m_bezier->GetName());
 	sm::vec2 center = m_bezier->GetRect().Center();
 	pg->GetProperty(wxT("X"))->SetValue(center.x);
 	pg->GetProperty(wxT("Y"))->SetValue(center.y);
@@ -68,7 +68,7 @@ void BezierPropertySetting::InitProperties(wxPropertyGrid* pg)
 {
 	pg->Clear();
 
-	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_bezier->name));
+	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_bezier->GetName()));
 
 	sm::vec2 center = m_bezier->GetRect().Center();
 

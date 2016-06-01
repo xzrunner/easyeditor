@@ -21,7 +21,7 @@ void CirclePropertySetting::OnPropertyGridChange(const std::string& name, const 
 
 	bool dirty = true;
 	if (name == wxT("Name")) {
-		m_circle->name = wxANY_AS(value, wxString);
+		m_circle->SetName(wxANY_AS(value, wxString).ToStdString());
 	} else if (name == wxT("X")) {
 		sm::vec2 c = m_circle->GetCenter();
 		c.x = wxANY_AS(value, float);
@@ -44,7 +44,7 @@ void CirclePropertySetting::OnPropertyGridChange(const std::string& name, const 
 
 void CirclePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
-	pg->GetProperty(wxT("Name"))->SetValue(m_circle->name);
+	pg->GetProperty(wxT("Name"))->SetValue(m_circle->GetName());
 	pg->GetProperty(wxT("X"))->SetValue(m_circle->GetCenter().x);
 	pg->GetProperty(wxT("Y"))->SetValue(m_circle->GetCenter().y);
 	pg->GetProperty(wxT("Radius"))->SetValue(m_circle->GetRadius());
@@ -54,7 +54,7 @@ void CirclePropertySetting::InitProperties(wxPropertyGrid* pg)
 {
 	pg->Clear();
 
-	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_circle->name));
+	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_circle->GetName()));
 
 	pg->Append(new wxFloatProperty(wxT("X"), wxPG_LABEL, m_circle->GetCenter().x));
 	pg->SetPropertyAttribute(wxT("X"), wxPG_ATTR_UNITS, wxT("pixels"));

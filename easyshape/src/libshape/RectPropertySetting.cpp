@@ -22,7 +22,7 @@ void RectPropertySetting::OnPropertyGridChange(const std::string& name, const wx
 	bool dirty = true;
 	if (name == wxT("Name"))
 	{
-		m_rect->name = wxANY_AS(value, wxString);
+		m_rect->SetName(wxANY_AS(value, wxString).ToStdString());
 	}
 	else if (name == wxT("X"))
 	{
@@ -73,7 +73,7 @@ void RectPropertySetting::OnPropertyGridChange(const std::string& name, const wx
 void RectPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
 	const sm::rect& r = m_rect->GetRect();
-	pg->GetProperty(wxT("Name"))->SetValue(m_rect->name);
+	pg->GetProperty(wxT("Name"))->SetValue(m_rect->GetName());
 	pg->GetProperty(wxT("X"))->SetValue(r.Center().x);
 	pg->GetProperty(wxT("Y"))->SetValue(r.Center().y);
 	pg->GetProperty(wxT("Half Width"))->SetValue(r.Size().x * 0.5f);
@@ -84,7 +84,7 @@ void RectPropertySetting::InitProperties(wxPropertyGrid* pg)
 {
 	pg->Clear();
 
-	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_rect->name));
+	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_rect->GetName()));
 
 	const sm::rect& r = m_rect->GetRect();
 

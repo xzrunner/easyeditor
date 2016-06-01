@@ -53,11 +53,14 @@ public:
 
 	virtual void ReloadTexture() {}
 
+	const std::string& GetName() const { return m_name; }
+	void SetName(const std::string& name) { m_name = name; }
+
 protected:
 	static const int QUERY_ACCURACY = 5;
 
-public:
-	std::string name;
+private:
+	std::string m_name;
 
 }; // Shape
 

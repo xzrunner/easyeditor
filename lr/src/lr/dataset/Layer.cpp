@@ -397,7 +397,7 @@ ee::Sprite* Layer::LoadSprite(const Json::Value& val, const std::string& dir, co
 		symbol = ee::SymbolMgr::Instance()->FetchSymbol(shape_filepath);
 		const std::vector<ee::Shape*>& shapes = static_cast<eshape::Symbol*>(symbol)->GetShapes();
 		if (!shapes.empty()) {
-			spr_tag = shapes[0]->name;
+			spr_tag = shapes[0]->GetName();
 		}
 	} else {
 		symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);

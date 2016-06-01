@@ -301,7 +301,7 @@ void LibraryPanel::GetAllPathName(std::vector<std::string>& names) const
 	std::vector<ee::Shape*> shapes;
 	layer->TraverseShape(ee::FetchAllVisitor<ee::Shape>(shapes));
 	for (int i = 0, n = shapes.size(); i < n; ++i) {
-		names.push_back(shapes[i]->name);
+		names.push_back(shapes[i]->GetName());
 	}
 }
 
