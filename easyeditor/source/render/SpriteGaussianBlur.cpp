@@ -5,6 +5,7 @@
 #include "GL.h"
 #include "Sprite.h"
 #include "SpriteRenderer.h"
+#include "BoundingBox.h"
 
 #include <shaderlab.h>
 #include <sprite2/RenderParams.h>
@@ -51,11 +52,13 @@ void SpriteGaussianBlur::DrawToFbo0(const Sprite* spr, const s2::RenderParams& p
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	mgr->SetShader(sl::FILTER);
 
+	float tex_width = spr->GetBounding()->Width(),
+		  tex_height = spr->GetBounding()->Height();
 	assert(params.shader.filter->GetMode() == s2::FM_GAUSSIAN_BLUR);
 	s2::RFGaussianBlur* filter = static_cast<s2::RFGaussianBlur*>(params.shader.filter);
 	for (int i = 0, n = filter->GetIterations(); i < n; ++i) {
-		DrawBetweenFBO(fbo0, fbo1, true, params.color);
-		DrawBetweenFBO(fbo1, fbo0, false, params.color);
+		DrawBetweenFBO(fbo0, fbo1, true, params.color, tex_width);
+		DrawBetweenFBO(fbo1, fbo0, false, params.color, tex_height);
 	}
 
 	rc->SetModelView(ori_offset, ori_scale);
@@ -111,14 +114,24 @@ void SpriteGaussianBlur::DrawInit(const Sprite* spr, const s2::RenderParams& par
 	fbo->Unbind();
 }
 
-void SpriteGaussianBlur::DrawBetweenFBO(DTexC1* from, DTexC1* to, bool hori, const s2::RenderColor& col)
+void SpriteGaussianBlur::DrawBetweenFBO(DTexC1* from, DTexC1* to, bool hori, const s2::RenderColor& col, float tex_size)
 {
 	to->Bind();
 	to->Clear(0, -2, 2, 0);
 
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	sl::FilterShader* shader = static_cast<sl::FilterShader*>(mgr->GetShader(sl::FILTER));
-	shader->SetMode(hori ? sl::FM_GAUSSIAN_BLUR_HORI : sl::FM_GAUSSIAN_BLUR_VERT);
+	if (hori) {
+		shader->SetMode(sl::FM_GAUSSIAN_BLUR_HORI);
+		sl::GaussianBlurHoriProg* prog = static_cast<sl::GaussianBlurHoriProg*>(shader->GetProgram(sl::FM_GAUSSIAN_BLUR_HORI));
+		prog->SetTexWidth(from->GetTextureSize());
+//		prog->SetTexWidth(tex_size);
+	} else {
+		shader->SetMode(sl::FM_GAUSSIAN_BLUR_VERT);
+		sl::GaussianBlurVertProg* prog = static_cast<sl::GaussianBlurVertProg*>(shader->GetProgram(sl::FM_GAUSSIAN_BLUR_VERT));
+		prog->SetTexHeight(from->GetTextureSize());
+//		prog->SetTexHeight(tex_size);		
+	}
 	shader->SetColor(col.mul.ToABGR(), col.add.ToABGR());
 
 	sm::vec2 vertices[4], texcoords[4];

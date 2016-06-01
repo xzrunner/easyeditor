@@ -23,7 +23,7 @@ public:
 private:
 	static void DrawInit(const Sprite* spr, const s2::RenderParams& params, DTexC1* fbo);
 
-	static void DrawBetweenFBO(DTexC1* from, DTexC1* to, bool hori, const s2::RenderColor& col);
+	static void DrawBetweenFBO(DTexC1* from, DTexC1* to, bool hori, const s2::RenderColor& col, float tex_size);
 
 }; // SpriteGaussianBlur
 
