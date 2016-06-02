@@ -20,7 +20,7 @@ static inline float hue2rgb(float p, float q, float t)
 void hsl2rgb(float h, float s, float l, float& r, float& g, float& b)
 {
 	if (s == 0) {
-		r = g = b = 1;
+		r = g = b = l;
 	} else {
 		float q = l < 0.5 ? l * (1 + s) : l + s - l * s;
 		float p = 2 * l - q;
