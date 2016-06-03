@@ -3,6 +3,8 @@
 
 #include "ICommand.h"
 
+#include <vector>
+
 namespace etexpacker { class ImageTrimData; }
 
 namespace edb
@@ -24,10 +26,33 @@ public:
 	static ICommand* Create() { return new PackTexture(); }
 
 private:
-	void RunFromConfig(const std::string& cfg_file);
-	void RunFromCmd(etexpacker::ImageTrimData* trim, const std::string& src_dir, const std::string& src_ignore,
-		const std::string& dst_file, int static_size, int max_size, int min_size, int extrude_min, int extrude_max,
-		int start_id);
+	struct Package
+	{
+		std::vector<std::string> sources;
+		std::vector<std::string> ignores;
+
+		std::string format;
+		std::string quality;
+
+		int size_min, size_max;
+
+		etexpacker::ImageTrimData* trim;
+
+		int extrude_min, extrude_max;
+
+		Package()
+		{
+			size_min = size_max = 0;
+			trim = NULL;
+			extrude_min = extrude_max = 0;
+		}
+	}; // Package
+
+private:
+	static void Pack(const std::vector<Package>& packages, const std::string& src_dir, const std::string& dst_file);
+		
+	static etexpacker::ImageTrimData* PreparePackages(const std::string& str, std::vector<Package>& packages, std::string& dst);
+	static void PackPackage(const Package& pkg, const std::string& src_dir, const std::string& dst_file, int& start_id);
 
 }; // PackTexture
 

@@ -72,15 +72,18 @@ void FileHelper::FetchAllFiles(const std::string& dirpath, wxArrayString& files)
 	dir.Traverse(traverser);
 }
 
-void FileHelper::FetchAllFiles(const std::string& dirpath, const std::string& ignore_dir, wxArrayString& files)
+void FileHelper::FetchAllFiles(const std::string& dirpath, const std::vector<std::string>& ignore_dirs, wxArrayString& files)
 {
 	class DirTraverser : public wxDirTraverser
 	{
 	public:
-		DirTraverser(wxArrayString& files, const wxString& ignore_dir) 
+		DirTraverser(wxArrayString& files, const std::vector<std::string>& ignore_dirs) 
 			: m_files(files)
-			, m_ignore_dir(ignore_dir)
-		{}
+		{
+			for (int i = 0, n = ignore_dirs.size(); i < n; ++i) {
+				m_ignore_dirs.insert(ignore_dirs[i]);
+			}
+		}
 
 		virtual wxDirTraverseResult OnFile(const wxString& filename)
 		{
@@ -90,7 +93,7 @@ void FileHelper::FetchAllFiles(const std::string& dirpath, const std::string& ig
 
 		virtual wxDirTraverseResult OnDir(const wxString& dirname)
 		{
-			if (dirname == m_ignore_dir) {
+			if (m_ignore_dirs.find(dirname.ToStdString()) != m_ignore_dirs.end()) {
 				return wxDIR_IGNORE;
 			} else {
 				return wxDIR_CONTINUE;
@@ -99,11 +102,11 @@ void FileHelper::FetchAllFiles(const std::string& dirpath, const std::string& ig
 
 	private:
 		wxArrayString& m_files;
-		std::string m_ignore_dir;
+		std::set<std::string> m_ignore_dirs;
 
 	}; // DirTraverser
 
-	DirTraverser traverser(files, ignore_dir);
+	DirTraverser traverser(files, ignore_dirs);
 
 	wxDir dir(dirpath);
 	dir.Traverse(traverser);

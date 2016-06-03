@@ -12,7 +12,7 @@ class TransToPVR
 {
 public:
 	TransToPVR(const uint8_t* pixels, int width, int height, int channels,
-		bool align_bottom = false);
+		bool align_bottom = false, bool fastest = false);
 	~TransToPVR();
 
 	void OutputFile(const std::string& filepath) const;
@@ -52,6 +52,8 @@ private:
 	uint8_t* m_pvr_pixels;
 
 	PVRTexHeader m_header;
+
+	bool m_fastest;
 
 }; // TransToPVR
 

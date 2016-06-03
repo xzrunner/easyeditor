@@ -6,8 +6,13 @@
 #include <ee/SettingData.h>
 #include <ee/Config.h>
 #include <ee/EE_ShaderLab.h>
+#include <ee/StringHelper.h>
+#include <ee/LibpngAdapter.h>
 
 #include <easytexpacker.h>
+#include <easyimage.h>
+
+#include <wx/filefn.h>
 
 #include <fstream>
 
@@ -26,7 +31,7 @@ std::string PackTexture::Description() const
 
 std::string PackTexture::Usage() const
 {
-	std::string cmd0 = Command() + " [cfg file]";
+	std::string cmd0 = Command() + " [json str]";
 	std::string cmd1 = Command() + " [src dir] [dst dir] [min size] [max size] [trim file] [extrude]";
 	return cmd0 + " or " + cmd1;
 }
@@ -40,82 +45,51 @@ int PackTexture::Run(int argc, char *argv[])
 		return ret;
 	}
 
-	if (argc == 3) {
-		RunFromConfig(argv[2]);
-	} else {
-		etexpacker::ImageTrimData* trim = NULL;
+	// one param
+	if (argc == 3) 
+	{
+		std::vector<Package> packages;
+		std::string dst_file;
+		etexpacker::ImageTrimData* trim = PreparePackages(argv[2], packages, dst_file);
+		Pack(packages, argv[2], dst_file);
+		delete trim;
+	}
+	// multi params
+	else 
+	{
+		Package pkg;
+
+		pkg.sources.push_back(argv[2]);
+		pkg.format = "png";
+
+		pkg.size_min = atof(argv[6]);
+		pkg.size_max = atof(argv[5]);
+
 		if (argc > 6) {
-			if (strcmp(argv[6], "null") == 0) {
-				trim = NULL;
-			} else {
-				trim = new etexpacker::ImageTrimData(argv[6]);
+			if (strcmp(argv[6], "null") != 0) {
+				pkg.trim = new etexpacker::ImageTrimData(argv[6]);
 			}
 		}
+
 		int extrude = 1;
 		if (argc > 7) {
 			extrude = atoi(argv[7]);
 		}
-		std::string ignore;
-		if (argc > 8) {
-			ignore = argv[8];
-		}
-		int start_id = 1;
-		if (argc > 9) {
-			start_id = atoi(argv[9]);
-		}
-		RunFromCmd(trim, argv[2], ignore, argv[3], -1, atof(argv[5]), atof(argv[4]), extrude, extrude, start_id);
+		pkg.extrude_min = pkg.extrude_max = extrude;
+
+		std::vector<Package> packages;
+		packages.push_back(pkg);
+		std::string dst_file = argv[3];
+		Pack(packages, argv[2], dst_file);
+
+		delete pkg.trim;
 	}
 
 	return 0;
 }
 
-void PackTexture::RunFromConfig(const std::string& cfg_file)
-{	
-	Json::Value value;
-	Json::Reader reader;
-	std::locale::global(std::locale(""));
-	std::ifstream fin(cfg_file.c_str());
-	std::locale::global(std::locale("C"));
-	reader.parse(fin, value);
-	fin.close();
-
-	std::string dir = ee::FileHelper::GetFileDir(cfg_file);
-
-	std::string src_dir = ee::FileHelper::GetAbsolutePath(dir, value["src"].asString());
-	std::string dst_file = ee::FileHelper::GetAbsolutePath(dir, value["dst"].asString());
-
- 	etexpacker::ImageTrimData* trim = NULL;
- 	if (!value["trim file"].isNull()) {
- 		std::string trim_file = ee::FileHelper::GetAbsolutePath(dir, value["trim file"].asString());
- 		trim = new etexpacker::ImageTrimData(trim_file);
- 	}
-
- 	int static_size = value["static size"].asInt(),
- 		max_size = value["max size"].asInt(),
- 		min_size = value["min size"].asInt();
- 	int extrude_min = value["extrude min"].asInt(),
- 		extrude_max = value["extrude max"].asInt();
-
-	RunFromCmd(trim, src_dir, dst_file, "", static_size, max_size, min_size, extrude_min, extrude_max, 1);
-
-	delete trim;
-}
-
-void PackTexture::RunFromCmd(etexpacker::ImageTrimData* trim, const std::string& src_dir, const std::string& src_ignore,
-							 const std::string& dst_file, int static_size, int max_size, int min_size, int extrude_min, int extrude_max,
-							 int start_id) 
+void PackTexture::Pack(const std::vector<Package>& packages, const std::string& src_dir, const std::string& dst_file)
 {
-	std::vector<std::string> images;
-
-	wxArrayString files;
-	ee::FileHelper::FetchAllFiles(src_dir, src_ignore, files);
-	for (int i = 0, n = files.size(); i < n; ++i) {
-		if (ee::FileType::IsType(files[i].ToStdString(), ee::FileType::e_image)) {
-			std::string filepath = ee::FileHelper::FormatFilepathAbsolute(files[i].ToStdString());
-			images.push_back(filepath);
-		}
-	}
-
 	std::string dst_dir = ee::FileHelper::GetFileDir(dst_file);
 	ee::FileHelper::MkDir(dst_dir);
 
@@ -123,12 +97,121 @@ void PackTexture::RunFromCmd(etexpacker::ImageTrimData* trim, const std::string&
 	bool ori_cfg = sd.open_image_edge_clip;
 	sd.open_image_edge_clip = false;
 
-	etexpacker::NormalPack tex_packer(images, trim, extrude_min, extrude_max, start_id);
-	tex_packer.Pack(static_size, max_size, min_size);
-	tex_packer.OutputInfo(src_dir, dst_file + ".json");
-	tex_packer.OutputImage(dst_file + ".png");
+	int start_id = 1;
+	for (int i = 0, n = packages.size(); i < n; ++i) {
+		PackPackage(packages[i], src_dir, dst_file, start_id);
+	}
 
 	sd.open_image_edge_clip = ori_cfg;
+}
+
+etexpacker::ImageTrimData* PackTexture::PreparePackages(const std::string& str, std::vector<Package>& packages, std::string& dst)
+{
+	Json::Value value;
+	Json::Reader reader;
+	reader.parse(str, value);
+
+	std::string src_dir = value["src"].asString();
+	dst = value["dst"].asString();
+	etexpacker::ImageTrimData* trim = NULL;
+	if (!value["trim_file"].isNull()) {
+		std::string trim_file = value["trim_file"].asString();
+		trim = new etexpacker::ImageTrimData(trim_file);
+	}
+
+	const Json::Value& pkgs_val = value["packages"];
+	for (int i = 0, n = pkgs_val.size(); i < n; ++i)
+	{
+		const Json::Value& v = pkgs_val[i];
+		Package pkg;
+		if (v["src"].isString()) {
+			pkg.sources.push_back(v["src"].asString());
+		} else {
+			assert(v["src"].isArray());
+			for (int i = 0, n = v["src"].size(); i < n; ++i) {
+				pkg.sources.push_back(v["src"][i].asString());
+			}
+		}
+		pkg.format = v["format"].asString();
+		pkg.quality = v["quality"].asString();
+		pkg.size_max = v["size_max"].asInt();
+		pkg.size_min = v["size_min"].asInt();
+		pkg.trim = trim;
+		pkg.extrude_min = v["extrude_min"].asInt();
+		pkg.extrude_max = v["extrude_max"].asInt();
+		packages.push_back(pkg);
+	}
+
+	for (int i = 0, n = packages.size(); i < n; ++i) {
+		Package& pkg0 = packages[i];
+		if (pkg0.sources.size() == 1 && pkg0.sources[0] == "others") 
+		{
+			for (int j = 0; j < n; ++j) 
+			{
+				if (j == i) continue;
+				const Package& pkg1 = packages[j];
+				if (pkg1.sources.size() == 1 && pkg1.sources[0] == "others")  {
+					continue;
+				}
+				for (int k = 0, m = pkg1.sources.size(); k < m; ++k) {
+					const std::string& path = pkg1.sources[k];
+					if (path != "others" && path != src_dir) {
+						pkg0.ignores.push_back(path);
+					}
+				}
+			}
+			pkg0.sources[0] = src_dir;
+		}
+	}
+
+	return trim;
+}
+
+void PackTexture::PackPackage(const Package& pkg, const std::string& src_dir, 
+							  const std::string& dst_file, int& start_id)
+{
+	std::vector<std::string> images;
+
+	wxArrayString files;
+	if (pkg.ignores.empty()) {
+		for (int i = 0, n = pkg.sources.size(); i < n; ++i) {
+			ee::FileHelper::FetchAllFiles(pkg.sources[i], files);
+		}
+	} else {
+		for (int i = 0, n = pkg.sources.size(); i < n; ++i) {
+			ee::FileHelper::FetchAllFiles(pkg.sources[i], pkg.ignores, files);
+		}
+	}
+	for (int i = 0, n = files.size(); i < n; ++i) {
+		if (ee::FileType::IsType(files[i].ToStdString(), ee::FileType::e_image)) {
+			std::string filepath = ee::FileHelper::FormatFilepathAbsolute(files[i].ToStdString());
+			images.push_back(filepath);
+		}
+	}
+
+	etexpacker::NormalPack tex_packer(images, pkg.trim, pkg.extrude_min, pkg.extrude_max, start_id);
+	tex_packer.Pack(0, pkg.size_max, pkg.size_min);
+	tex_packer.OutputInfo(src_dir, dst_file + ".json");
+	tex_packer.OutputImage(dst_file + ".png");
+	int begin = start_id;
+	start_id += tex_packer.DstTexCount();
+	int end = start_id;
+	
+	if (pkg.format == "pvr") 
+	{
+		for (int i = begin; i < end; ++i) 
+		{
+			std::string src = dst_file + ee::StringHelper::ToString(i) + ".png";
+			std::string dst = dst_file + ee::StringHelper::ToString(i) + ".pvr";
+
+			int w, h, c, f;
+			uint8_t* pixels = ee::LibpngAdapter::Read(src.c_str(), w, h, c, f);
+			eimage::TransToPVR trans(pixels, w, h, c, false, pkg.quality == "fastest");
+
+			trans.OutputFile(dst);
+			wxRemoveFile(src);
+		}
+	}
 }
 
 }

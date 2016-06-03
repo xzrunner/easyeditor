@@ -16,12 +16,13 @@ namespace eimage
 {
 
 TransToPVR::TransToPVR(const uint8_t* pixels, int width, int height, int channels,
-					   bool align_bottom)
+					   bool align_bottom, bool fastest)
 	: m_pixels(NULL)
 	, m_width(0)
 	, m_height(0)
 	, m_pvr_size(0)
 	, m_pvr_pixels(NULL)
+	, m_fastest(fastest)
 {
 	InitSrcImage(pixels, width, height, channels, align_bottom);
 	InitPVRHeader();
@@ -110,8 +111,10 @@ void TransToPVR::TransPVR()
 	header.setPixelFormat(pvrtexture::PixelType('r','g','b','a',8,8,8,8));
 
 	pvrtexture::CPVRTexture texture = pvrtexture::CPVRTexture(header, m_pixels);
-//	pvrtexture::ECompressorQuality quality = pvrtexture::ePVRTCFastest;
 	pvrtexture::ECompressorQuality quality = pvrtexture::ePVRTCBest;
+	if (m_fastest) {
+		quality = pvrtexture::ePVRTCFastest;
+	}
 	bool suc = Transcode(texture, pvrtexture::PixelType(ePVRTPF_PVRTCI_4bpp_RGBA), texture.getChannelType(), texture.getColourSpace(), quality, false);
 	assert(suc);
 
