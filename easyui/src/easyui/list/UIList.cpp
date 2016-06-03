@@ -127,7 +127,7 @@ void UIList::StoreToFile(const char* filename) const
 	if (m_reverse_order) {
 		for (int i = m_items.size() - 1; i >= 0; --i) {
 			ee::Sprite* spr = m_items[i];
-			spr->SetName("item" + ee::StringHelper::ToString(m_items.size() - i));
+			spr->SetName("item" + ee::StringHelper::ToString(i + 1));
 			items_complex.Add(spr);
 		}
 	} else {
