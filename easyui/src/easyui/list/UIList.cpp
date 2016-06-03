@@ -225,16 +225,18 @@ void UIList::LoadFromFile(const char* filename)
 			spr->Retain();
 			m_items.push_back(spr);
 		}
+		if (!children.empty()) {
+			m_item_spr = static_cast<ee::Sprite*>(children[0]->GetUD())->Clone();
+		}
 	} else {
 		for (int i = 0, n = children.size(); i < n; ++i) {
 			ee::Sprite* spr = static_cast<ee::Sprite*>(children[i]->GetUD());
 			spr->Retain();
 			m_items.insert(m_items.begin(), spr);
 		}
-	}
-
-	if (!children.empty()) {
-		m_item_spr = static_cast<ee::Sprite*>(children[0]->GetUD())->Clone();
+		if (!children.empty()) {
+			m_item_spr = static_cast<ee::Sprite*>(children.back()->GetUD())->Clone();
+		}
 	}
 }
 
