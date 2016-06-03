@@ -49,9 +49,9 @@ int PackTexture::Run(int argc, char *argv[])
 	if (argc == 3) 
 	{
 		std::vector<Package> packages;
-		std::string dst_file;
-		etexpacker::ImageTrimData* trim = PreparePackages(argv[2], packages, dst_file);
-		Pack(packages, argv[2], dst_file);
+		std::string src_dir, dst_file;
+		etexpacker::ImageTrimData* trim = PreparePackages(argv[2], packages, src_dir, dst_file);
+		Pack(packages, src_dir, dst_file);
 		delete trim;
 	}
 	// multi params
@@ -105,14 +105,15 @@ void PackTexture::Pack(const std::vector<Package>& packages, const std::string& 
 	sd.open_image_edge_clip = ori_cfg;
 }
 
-etexpacker::ImageTrimData* PackTexture::PreparePackages(const std::string& str, std::vector<Package>& packages, std::string& dst)
+etexpacker::ImageTrimData* PackTexture::PreparePackages(const std::string& str, std::vector<Package>& packages, 
+														std::string& src_dir, std::string& dst_file)
 {
 	Json::Value value;
 	Json::Reader reader;
 	reader.parse(str, value);
 
-	std::string src_dir = value["src"].asString();
-	dst = value["dst"].asString();
+	src_dir = value["src"].asString();
+	dst_file = value["dst"].asString();
 	etexpacker::ImageTrimData* trim = NULL;
 	if (!value["trim_file"].isNull()) {
 		std::string trim_file = value["trim_file"].asString();

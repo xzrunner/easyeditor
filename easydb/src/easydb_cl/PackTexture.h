@@ -51,7 +51,7 @@ private:
 private:
 	static void Pack(const std::vector<Package>& packages, const std::string& src_dir, const std::string& dst_file);
 		
-	static etexpacker::ImageTrimData* PreparePackages(const std::string& str, std::vector<Package>& packages, std::string& dst);
+	static etexpacker::ImageTrimData* PreparePackages(const std::string& str, std::vector<Package>& packages, std::string& src, std::string& dst);
 	static void PackPackage(const Package& pkg, const std::string& src_dir, const std::string& dst_file, int& start_id);
 
 }; // PackTexture
