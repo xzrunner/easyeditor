@@ -59,9 +59,9 @@ void ResPacker::OutputEpe(const std::string& outfile, bool compress, float scale
 	PackToBin::PackEPE(outfile + ".epe", m_tp, compress, scale);
 }
 
-void ResPacker::OutputEpt(const std::string& outfile, TextureType type, int LOD, float scale) const
+void ResPacker::OutputEpt(const std::string& outfile, int LOD, float scale) const
 {
-	PackToBin::PackEPT(outfile, m_tp, type, LOD, scale);
+	PackToBin::PackEPT(outfile, m_tp, LOD, scale);
 }
 
 void ResPacker::OutputUIExtra(const std::string& outfile) const

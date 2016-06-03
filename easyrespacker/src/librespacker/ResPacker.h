@@ -25,7 +25,7 @@ public:
 	void OutputLua(const std::string& outfile, float scale = 1) const;
 
 	void OutputEpe(const std::string& outfile, bool compress, float scale = 1) const;
-	void OutputEpt(const std::string& outfile, TextureType type, int LOD = 0, float scale = 1) const;
+	void OutputEpt(const std::string& outfile, int LOD = 0, float scale = 1) const;
 
 	void OutputUIExtra(const std::string& outfile) const;
 

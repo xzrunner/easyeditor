@@ -32,13 +32,10 @@ void PackToBin::PackEPE(const std::string& filepath,
 	}
 	std::sort(nodes.begin(), nodes.end(), PackNodeCmp());
 
-	std::vector<std::string> textures;
-	tp.GetAllTextureFilename(textures);
-
 	// header
 	uint16_t export_n = export_set.size();
 	uint16_t maxid = nodes[nodes.size() - 1]->GetSprID();
-	uint16_t tex = textures.size();
+	uint16_t tex = tp.GetTextures().size();
 	uint32_t unpack_sz = 0;
 	unpack_sz += SIZEOF_PACK + tex * sizeof(int);
 	int align_n = (maxid + 1 + 3) & ~3;
@@ -104,50 +101,26 @@ void PackToBin::PackEPE(const std::string& filepath,
 	fout.close();
 }
 
-void PackToBin::PackEPT(const std::string& filepath, const ee::TexturePacker& tp, 
-						TextureType type, int LOD, float scale)
+void PackToBin::PackEPT(const std::string& filepath, const ee::TexturePacker& tp, int LOD, float scale)
 {
-	std::string ext;
-	switch (type) 
+	const std::vector<const ee::TexturePacker::Texture*>& textures = tp.GetTextures();
+	for (int i = 0, n = textures.size(); i < n; ++i) 
 	{
-	case TT_PNG4: case TT_PNG8:
-		ext = ".png";
-		break;
-	case TT_PVR:
-		ext = ".pvr";
-		break;
-	case TT_PKM:
-		ext = ".pkm";
-		break;
-	}
+		const ee::TexturePacker::Texture* tex = textures[i];
 
-	PackImage* packer;
-	switch (type)
-	{
-	case TT_PNG4:
-		packer = new PackPNG(false);
-		break;
-	case TT_PNG8:
-		packer = new PackPNG(true);
-		break;
-	case TT_PVR:
-		packer = new PackPVR();
-		break;
-	case TT_PKM:
-		packer = new PackPKM();
-		break;
-	default:
-		throw ee::Exception("PackToBin::PackEPT unknown type: %d\n", type);
-	}
+		PackImage* packer = NULL;
+		if (tex->format == "png") {
+			packer = new PackPNG(true);
+		} else if (tex->format == "pvr") {
+			packer = new PackPVR();
+		} else if (tex->format == "pkm") {
+			packer = new PackPKM();
+		} else {
+			throw ee::Exception("PackToBin::PackEPT unknown type: %s\n", tex->format.c_str());
+		}
 
-	std::vector<std::string> filenames;
-	tp.GetAllTextureFilename(filenames);
-	for (int i = 0, n = filenames.size(); i < n; ++i) 
-	{
-		std::string str = filenames[i];
-		str = str.substr(0, str.find_last_of('.')) + ext;
-
-		packer->Load(str);
+		std::string img_path = tex->filepath.substr(0, tex->filepath.find_last_of('.') + 1) + tex->format;
+		packer->Load(img_path);
 
 		float pack_scale = scale;
 		for (int lod = 0; lod <= LOD; ++lod) 
@@ -163,9 +136,9 @@ void PackToBin::PackEPT(const std::string& filepath, const ee::TexturePacker& tp
 			packer->Store(out_filepath, pack_scale);
 			pack_scale *= 0.5f;
 		}
-	}
 
-	delete packer;
+		delete packer;
+	}
 }
 
 void PackToBin::PackEPT(const std::string& src_file, const std::string& dst_file, TextureType type)

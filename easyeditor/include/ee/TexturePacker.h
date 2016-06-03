@@ -25,8 +25,6 @@ public:
 
 	int QueryIdx(const std::string& filepath) const;
 
-	void GetAllTextureFilename(std::vector<std::string>& filenames) const;
-
 public:
 	struct Region
 	{
@@ -83,6 +81,8 @@ public:
 
 		int width, height;
 
+		std::string format;
+
 		std::map<std::string, Frame> frames;
 
 		bool is_easydb;
@@ -94,10 +94,13 @@ public:
 		const Frame* Query(const std::string& filepath) const;
 	};
 
+public:
+	const std::vector<const Texture*>& GetTextures() const { return m_textures; }
+
 private:
 	std::string m_src_data_dir;
 
-	std::vector<Texture*> m_textures;
+	std::vector<const Texture*> m_textures;
 
 }; // TexturePacker
 

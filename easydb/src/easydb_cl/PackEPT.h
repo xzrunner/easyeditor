@@ -3,9 +3,6 @@
 
 #include "ICommand.h"
 
-
-#include <easyrespacker.h>
-
 namespace edb
 {
 
@@ -25,7 +22,7 @@ public:
 	static ICommand* Create() { return new PackEPT(); }
 
 	void Trigger(const std::string& tp_json, const std::string& tp_dir, 
-		const std::string& out_file, erespacker::TextureType type);
+		const std::string& out_file);
 
 }; // PackEPT
 

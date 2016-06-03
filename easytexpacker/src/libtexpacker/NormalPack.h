@@ -22,7 +22,8 @@ public:
 
 	void Pack(int static_size, int max_size = 4096, int min_size = 0);
 
-	void OutputInfo(const std::string& dir, const std::string& dst_file) const;
+	void OutputInfo(const std::string& dir, const std::string& dst_file, 
+		const std::string& format = "png") const;
 	void OutputImage(const std::string& filepath) const;
 
 	int DstTexCount() const { return m_dst_img_idx.size(); }

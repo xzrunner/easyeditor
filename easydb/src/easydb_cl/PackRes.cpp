@@ -572,7 +572,7 @@ void PackRes::PackLuaAndBinFiles(const Json::Value& pkg_val, const std::string& 
 
 	erespacker::ResPacker packer(config_dir, output_name, output_dir);
 	packer.OutputEpe(output_name, true);
-	packer.OutputEpt(output_name, erespacker::TT_PNG8, LOD);
+	packer.OutputEpt(output_name, LOD);
 	erespacker::ResPacker::OutputEptDesc(output_name, output_name);
 
 	// debug

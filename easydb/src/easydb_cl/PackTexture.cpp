@@ -192,7 +192,7 @@ void PackTexture::PackPackage(const Package& pkg, const std::string& src_dir,
 
 	etexpacker::NormalPack tex_packer(images, pkg.trim, pkg.extrude_min, pkg.extrude_max, start_id);
 	tex_packer.Pack(0, pkg.size_max, pkg.size_min);
-	tex_packer.OutputInfo(src_dir, dst_file + ".json");
+	tex_packer.OutputInfo(src_dir, dst_file + ".json", pkg.format);
 	tex_packer.OutputImage(dst_file + ".png");
 	int begin = start_id;
 	start_id += tex_packer.DstTexCount();

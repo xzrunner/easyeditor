@@ -39,7 +39,7 @@ void NormalPack::Pack(int static_size, int max_size, int min_size)
 	}
 }
 
-void NormalPack::OutputInfo(const std::string& dir, const std::string& dst_file) const
+void NormalPack::OutputInfo(const std::string& dir, const std::string& dst_file, const std::string& format) const
 {
 	assert(m_filepaths.size() == m_src_sizes.size() && m_filepaths.size() == m_dst_pos.size());
 
@@ -142,6 +142,7 @@ void NormalPack::OutputInfo(const std::string& dir, const std::string& dst_file)
 		meta_val["size"]["h"] = m_dst_img_sz[i].height;
 		meta_val["scale"] = "1";
 		meta_val["app"] = "easydb";
+		meta_val["format"] = format;
 
 		value["meta"] = meta_val;
 

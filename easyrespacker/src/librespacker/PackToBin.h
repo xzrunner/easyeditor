@@ -17,7 +17,7 @@ public:
 		bool compress, float scale);	
 
 	static void PackEPT(const std::string& filepath, const ee::TexturePacker& tp,
-		TextureType type, int LOD, float scale);	
+		int LOD, float scale);	
 	static void PackEPT(const std::string& src_file, const std::string& dst_file, 
 		TextureType type);
 

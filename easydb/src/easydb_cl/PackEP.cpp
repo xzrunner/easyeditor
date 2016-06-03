@@ -72,7 +72,7 @@ void PackEP::Trigger(const std::string& json_dir, const std::string& tp_json,
 		packer.OutputLua(out_file + ".lua", scale);
 	} else if (type == "ep") {
 		packer.OutputEpe(out_file, true, scale);
-		packer.OutputEpt(out_file, erespacker::TT_PNG8, LOD, scale);
+		packer.OutputEpt(out_file, LOD, scale);
 		erespacker::ResPacker::OutputEptDesc(out_file, tp_json);
 		packer.OutputUIExtra(out_file);
 		packer.OutputSprID(out_file);
@@ -81,7 +81,7 @@ void PackEP::Trigger(const std::string& json_dir, const std::string& tp_json,
 		packer.OutputUIExtra(out_file);
 		packer.OutputSprID(out_file);
 	} else if (type == "ept") {
-		packer.OutputEpt(out_file, erespacker::TT_PNG8, LOD, scale);
+		packer.OutputEpt(out_file, LOD, scale);
 		erespacker::ResPacker::OutputEptDesc(out_file, tp_json);
 	} else if (type == "debug") {
 		packer.OutputLua(out_file + ".lua", scale);
@@ -91,7 +91,7 @@ void PackEP::Trigger(const std::string& json_dir, const std::string& tp_json,
 	} else if (type == "all") {
 		packer.OutputLua(out_file + ".lua", scale);
 		packer.OutputEpe(out_file, true, scale);
-		packer.OutputEpt(out_file, erespacker::TT_PNG8, LOD, scale);
+		packer.OutputEpt(out_file, LOD, scale);
 		erespacker::ResPacker::OutputEptDesc(out_file, tp_json);
 		packer.OutputUIExtra(out_file);
 		packer.OutputSprID(out_file);

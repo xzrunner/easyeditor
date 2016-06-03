@@ -67,14 +67,6 @@ int TexturePacker::QueryIdx(const std::string& filepath) const
 	return -1;
 }
 
-void TexturePacker::GetAllTextureFilename(std::vector<std::string>& filenames) const
-{
-	filenames.clear();
-	for (int i = 0, n = m_textures.size(); i < n; ++i) {
-		filenames.push_back(m_textures[i]->filepath);
-	}
-}
-
 //////////////////////////////////////////////////////////////////////////
 // struct TexturePacker::Region
 //////////////////////////////////////////////////////////////////////////
@@ -177,6 +169,12 @@ Load(const Json::Value& value, const std::string& src_data_dir)
 {
 	width = value["meta"]["size"]["w"].asInt();
 	height = value["meta"]["size"]["h"].asInt();
+
+	if (value["meta"]["format"].isNull()) {
+		format = "png";
+	} else {
+		format = value["meta"]["format"].asString();
+	}
 
 // 	std::string scale = value["meta"]["scale"].asString();
 // 	m_invscale = atof(scale.c_str());
