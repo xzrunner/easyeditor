@@ -48,7 +48,7 @@ void AlphaSettingDlg::InitLayout()
 
 void AlphaSettingDlg::SetColor(const s2::Color& color)
 {
-	m_alpha->SetColorValue(color.a * 255);
+	m_alpha->SetColorValue(color.a);
 	OnColorChanged(color);
 }
 
