@@ -31,7 +31,7 @@ public:
 
 	void OutputSprID(const std::string& outfile) const;
 
-	static void OutputEptDesc(const std::string& outfile, const std::string& tp_name);
+	void OutputEptDesc(const std::string& outfile) const;
 
 private:
 	void LoadJsonData(const std::string& dir);

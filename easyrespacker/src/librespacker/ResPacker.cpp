@@ -20,6 +20,8 @@
 #include <easyanim.h>
 #include <easyparticle3d.h>
 
+#include <dtex_typedef.h>
+
 #include <fstream>
 
 namespace erespacker
@@ -116,53 +118,53 @@ void ResPacker::OutputSprID(const std::string& outfile) const
 	fout.close();	
 }
 
-void ResPacker::OutputEptDesc(const std::string& outfile, const std::string& tp_name)
+void ResPacker::OutputEptDesc(const std::string& outfile) const
 {
-	std::vector<int> images_sz;
-
-	int i = 1;
-	while (true) {
-		std::string tp_path = tp_name + ee::StringHelper::ToString(i) + ".json";
-		if (ee::FileHelper::IsFileExist(tp_path)) {
-			Json::Value value;
-			Json::Reader reader;
-			std::locale::global(std::locale(""));
-			std::ifstream fin(tp_path.c_str());
-			std::locale::global(std::locale("C"));
-			reader.parse(fin, value);
-			fin.close();
-
-			Json::Value meta_val = value["meta"];
-			assert(!meta_val.isNull());
-			Json::Value sz_val = meta_val["size"];
-			assert(!sz_val.isNull());
-			int w = sz_val["w"].asInt();
-			int h = sz_val["h"].asInt();
-			assert(w == h);
-
-			images_sz.push_back(w);
-		} else {
-			break;
-		}
-		++i;
-	}
-
 	std::string filepath = outfile + ".ept";
 	std::locale::global(std::locale(""));
 	std::ofstream fout(filepath.c_str(), std::ios::binary);
 	std::locale::global(std::locale("C"));	
 
-	int img_sz = images_sz.size();
+	const std::vector<const ee::TexturePacker::Texture*>& textures = m_tp.GetTextures();
+	
+	int count = textures.size();
 
 	int out_sz = 0;
-	out_sz += sizeof(int) + img_sz * sizeof(int);
+	out_sz += sizeof(int);						// version
+	out_sz += sizeof(int);						// count
+	out_sz += count * sizeof(uint16_t) * 2;		// size
+	out_sz += count * sizeof(uint16_t);			// type
 
+	// file header
 	out_sz = -out_sz;
 	fout.write(reinterpret_cast<const char*>(&out_sz), sizeof(out_sz));
 
-	fout.write(reinterpret_cast<const char*>(&img_sz), sizeof(img_sz));
-	for (int i = 0; i < img_sz; ++i) {
-		fout.write(reinterpret_cast<const char*>(&images_sz[i]), sizeof(images_sz[i]));
+	// version
+	int version = -1;
+	fout.write(reinterpret_cast<const char*>(&version), sizeof(version));
+
+	// count
+	fout.write(reinterpret_cast<const char*>(&count), sizeof(count));
+
+	// size & type
+	for (int i = 0; i < count; ++i) 
+	{
+		const ee::TexturePacker::Texture* tex = textures[i];
+
+		// size
+		uint16_t w = tex->width,
+			     h = tex->height;
+		fout.write(reinterpret_cast<const char*>(&w), sizeof(w));
+		fout.write(reinterpret_cast<const char*>(&h), sizeof(h));
+
+		// type
+		uint16_t type = DTEX_PNG8;
+		if (tex->format == "pvr") {
+			type = DTEX_PVR;
+		} else if (tex->format == "pkm") {
+			type = DTEX_PKM;
+		}
+		fout.write(reinterpret_cast<const char*>(&type), sizeof(type));
 	}
 
 	fout.close();

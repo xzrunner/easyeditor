@@ -25,6 +25,9 @@ public:
 
 	int QueryIdx(const std::string& filepath) const;
 
+	struct Texture;
+	const std::vector<const Texture*>& GetTextures() const { return m_textures; }
+
 public:
 	struct Region
 	{
@@ -93,9 +96,6 @@ public:
 
 		const Frame* Query(const std::string& filepath) const;
 	};
-
-public:
-	const std::vector<const Texture*>& GetTextures() const { return m_textures; }
 
 private:
 	std::string m_src_data_dir;
