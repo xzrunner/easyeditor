@@ -13,7 +13,7 @@ namespace erespacker
 
 int MeshFromBin::Size(const PackMesh* mesh)
 {
-	return SIZEOF_MESH + SizeVertices(mesh->tri_texcoords) + SizeVertices(mesh->tri_vertices);
+	return SIZEOF_MESH + SizeVertices(mesh->tri_texcoords) + SizeVertices(mesh->tri_vertices) * 2;
 }
 
 void MeshFromBin::Unpack(uint8_t** ptr, PackMesh* mesh)
