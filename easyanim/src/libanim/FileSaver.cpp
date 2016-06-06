@@ -61,7 +61,7 @@ void FileSaver::Store(Json::Value& value, s2::Sprite* sprite, const std::string&
 		value["filepaths"][i] = *itr;
 	}
 	// other
-	ee_spr->Store(value);
+	ee_spr->Store(value, dir);
 }
 
 } // anim

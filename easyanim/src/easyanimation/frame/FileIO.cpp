@@ -304,7 +304,7 @@ ee::Sprite* FileIO::LoadActor(const Json::Value& actorValue, const std::string& 
 	ee::SymbolSearcher::SetSymbolFilepaths(dir, symbol, actorValue);
 //	symbol->refresh();
 	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-	sprite->Load(actorValue);
+	sprite->Load(actorValue, dir);
 	symbol->Release();
 
 	return sprite;
@@ -525,7 +525,7 @@ Json::Value FileIO::StoreActor(const ee::Sprite* sprite, const std::string& dir,
 		value["filepaths"][i] = *itr;
 	}
 	// other
-	sprite->Store(value);
+	sprite->Store(value, dir);
 
 	return value;
 }
