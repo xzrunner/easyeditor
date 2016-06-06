@@ -34,8 +34,13 @@ protected:
 
 private:
 	void Draw(const sm::mat4& mt) const;
-	void DrawSprToTmp(const sm::mat4& mt) const;
-	void DrawTmpToScreen(const sm::mat4& mt) const;
+
+// 	void DrawSprToTmp(const sm::mat4& mt) const;
+// 	void DrawTmpToScreen(const sm::mat4& mt) const;
+
+	void DrawBaseToFbo0(const sm::mat4& mt) const;
+	void DrawMaskToFbo1(const sm::mat4& mt) const;
+	void DrawMashFromFbo(const sm::mat4& mt) const;
 
 private:
 	ee::Sprite *m_base_spr, *m_mask_spr;

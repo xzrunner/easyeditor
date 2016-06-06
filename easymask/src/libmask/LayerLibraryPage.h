@@ -9,15 +9,12 @@ namespace emask
 class LayerLibraryPage : public ee::LibraryPage
 {
 public:
-	LayerLibraryPage(wxWindow* parent, const std::string& name, bool only_img);
+	LayerLibraryPage(wxWindow* parent, const std::string& name);
 
-	virtual bool IsHandleSymbol(ee::Symbol* symbol) const;
+	virtual bool IsHandleSymbol(ee::Symbol* symbol) const { return true; } 
 
 protected:
 	virtual void OnAddPress(wxCommandEvent& event);
-
-private:
-	bool m_only_img;
 
 }; // LayerLibraryPage
 

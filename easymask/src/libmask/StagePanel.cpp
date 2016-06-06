@@ -39,7 +39,16 @@ StagePanel::~StagePanel()
 
 bool StagePanel::Update(float dt)
 {
-	return false;
+	bool ret = false;
+	ee::Sprite* base = m_sym->GetSprite(true);
+	if (base && base->Update(dt)) {
+		ret = true;
+	}
+	ee::Sprite* mask = m_sym->GetSprite(false);
+	if (mask && mask->Update(dt)) {
+		ret = true;
+	}
+	return ret;
 }
 
 void StagePanel::TraverseSprites(ee::Visitor& visitor, ee::DataTraverseType type, bool order) const
