@@ -62,7 +62,7 @@ int PackTexture::Run(int argc, char *argv[])
 		pkg.sources.push_back(argv[2]);
 		pkg.format = "png";
 
-		pkg.size_min = atof(argv[6]);
+		pkg.size_min = atof(argv[4]);
 		pkg.size_max = atof(argv[5]);
 
 		if (argc > 6) {
