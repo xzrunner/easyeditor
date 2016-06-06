@@ -47,6 +47,20 @@ Sprite* Sprite::Clone() const
 	return sprite;
 }
 
+bool Sprite::Update(float dt)
+{
+	bool ret = false;
+	ee::Sprite* base = m_symbol->GetSprite(true);
+	if (base && base->Update(dt)) {
+		ret = true;
+	}
+	ee::Sprite* mask = m_symbol->GetSprite(false);
+	if (mask && mask->Update(dt)) {
+		ret = true;
+	}
+	return ret;
+}
+
 const Symbol& Sprite::GetSymbol() const
 {
 	return *m_symbol;
