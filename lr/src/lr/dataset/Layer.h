@@ -49,6 +49,8 @@ public:
 	void SetEditable(bool editable) { m_editable = editable; }
 	void SetVisible(bool visible) { m_visible = visible; }
 
+	void ResetSpritesVisibleEditable();
+
 	void LoadFromFile(const Json::Value& val, const std::string& dir, int layer_idx);
 	void StoreToFile(Json::Value& val, const std::string& dir) const;
 

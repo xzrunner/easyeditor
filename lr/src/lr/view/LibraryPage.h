@@ -48,6 +48,8 @@ private:
 	void OnChangeVisible(wxCommandEvent& event);
 	void OnChangeEditable(wxCommandEvent& event);
 
+	void OnResetSpritesVisibleEditable(wxCommandEvent& event);
+
 	void VisibleAllSprites(bool visible);
 	void EditableAllSprites(bool visible);
 
@@ -59,6 +61,8 @@ private:
 
 	wxCheckBox* m_visible_ctrl;
 	wxCheckBox* m_editable_ctrl;
+
+	wxButton* m_reset;
 
 	int m_curr_op_idx;
 	std::vector<ee::EditOP*> m_editops;

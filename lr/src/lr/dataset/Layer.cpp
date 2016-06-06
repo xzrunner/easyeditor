@@ -126,6 +126,17 @@ bool Layer::ClearShape()
 	return m_shapes.Clear();
 }
 
+void Layer::ResetSpritesVisibleEditable()
+{
+	std::vector<ee::Sprite*> sprites;
+	m_sprites.Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites), ee::DT_ALL);
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		ee::Sprite* spr = sprites[i];
+		spr->SetVisible(true);
+		spr->SetEditable(true);
+	}
+}
+
 void Layer::LoadFromFile(const Json::Value& val, const std::string& dir, int layer_idx)
 {
 	m_name = val["name"].asString();

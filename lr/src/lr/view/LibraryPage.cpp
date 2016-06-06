@@ -93,6 +93,12 @@ void LibraryPage::InitLayoutExtend(wxSizer* sizer)
 			wxCommandEventHandler(LibraryPage::OnChangeEditable));
 		sizer->Add(m_editable_ctrl, 0, wxALIGN_LEFT);
 	}
+	{
+		m_reset = new wxButton(this, wxID_ANY, "ÖØÖÃ", wxDefaultPosition, wxSize(40, 20));
+		Connect(m_reset->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, 
+			wxCommandEventHandler(LibraryPage::OnResetSpritesVisibleEditable));
+		sizer->Add(m_reset, 0, wxALIGN_RIGHT);
+	}
 	sizer->AddSpacer(20);
 }
 
@@ -124,6 +130,13 @@ void LibraryPage::OnChangeVisible(wxCommandEvent& event)
 void LibraryPage::OnChangeEditable(wxCommandEvent& event)
 {
 	m_layer->SetEditable(event.IsChecked());
+}
+
+void LibraryPage::OnResetSpritesVisibleEditable(wxCommandEvent& event)
+{
+	m_layer->ResetSpritesVisibleEditable();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::RefreshPanelSJ::Instance()->Refresh();
 }
 
 }
