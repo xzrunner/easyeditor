@@ -263,6 +263,14 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\..\source\tool\Logger.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\include\ee\Logger.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\source\tool\PlayControl.cpp"
 			>
 		</File>
