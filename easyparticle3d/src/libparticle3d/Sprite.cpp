@@ -18,6 +18,7 @@ Sprite::Sprite()
 	, m_spr(NULL)
 	, m_alone(false)
 	, m_reuse(false)
+	, m_spr_ref(false)
 {
 	m_core = new s2::Particle3dSprite(this);
 }
@@ -27,6 +28,7 @@ Sprite::Sprite(const Sprite& sprite)
 	, m_symbol(sprite.m_symbol)
 	, m_alone(sprite.m_alone)
 	, m_reuse(sprite.m_reuse)
+	, m_spr_ref(true)
 {
 	m_core = new s2::Particle3dSprite(*static_cast<s2::Particle3dSprite*>(sprite.m_core), this);
 
@@ -62,7 +64,8 @@ Sprite::~Sprite()
 		m_symbol->Release();
 	}
 
-	if (m_spr) {
+	if (!m_spr_ref && m_spr) 
+	{
 		if (!m_alone) {
 			p3d_emitter_release(m_spr->et);
 		} else {

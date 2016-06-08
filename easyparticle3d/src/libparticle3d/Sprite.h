@@ -83,6 +83,8 @@ private:
 
 	mutable RenderParams m_rp;
 
+	bool m_spr_ref;
+
 }; // Sprite
 
 }
