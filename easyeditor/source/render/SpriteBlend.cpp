@@ -34,7 +34,7 @@ void SpriteBlend::Draw(const Sprite* spr, const sm::mat4& mt)
 	rc->GetProjection(ori_width, ori_height);
 
 	rc->SetModelView(sm::vec2(0, 0), 1);
-	int edge = dtexf_c1_get_texture_size();
+	int edge = dtexf_t0_get_texture_size();
 	rc->SetProjection(edge, edge);
 	GL::Viewport(0, 0, edge, edge);
 
@@ -52,8 +52,8 @@ void SpriteBlend::DrawSprToTmp(const Sprite* spr, const sm::mat4& mt)
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	sl::BlendShader* shader = static_cast<sl::BlendShader*>(mgr->GetShader(sl::BLEND));
 
-	dtexf_c1_bind();
-	dtexf_c1_clear(0, -2, 2, 0);
+	dtexf_t0_bind();
+	dtexf_t0_clear(0, -2, 2, 0);
 
 	mgr->SetShader(sl::BLEND);
 	s2::BlendMode mode = spr->GetShader().blend;
@@ -69,7 +69,7 @@ void SpriteBlend::DrawSprToTmp(const Sprite* spr, const sm::mat4& mt)
 
 	shader->Commit();
 
-	dtexf_c1_unbind();
+	dtexf_t0_unbind();
 }
 
 void SpriteBlend::DrawTmpToScreen(const Sprite* sprite, const sm::mat4& mt)
@@ -90,7 +90,7 @@ void SpriteBlend::DrawTmpToScreen(const Sprite* sprite, const sm::mat4& mt)
 	}
 
 	sm::vec2 texcoords[4];
-	int edge = dtexf_c1_get_texture_size();
+	int edge = dtexf_t0_get_texture_size();
 	for (int i = 0; i < 4; ++i) {
 		texcoords[i] = vertices[i] - sprite->GetPosition();
 		texcoords[i].x = texcoords[i].x / edge + 0.5f;
@@ -102,7 +102,7 @@ void SpriteBlend::DrawTmpToScreen(const Sprite* sprite, const sm::mat4& mt)
 	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
 	shader->SetColor(0xffffffff, 0);
 	shader->SetColorMap(0x000000ff, 0x0000ff00, 0x00ff0000);
-	shader->Draw(&vertices[0].x, &texcoords[0].x, dtexf_c1_get_texture_id());
+	shader->Draw(&vertices[0].x, &texcoords[0].x, dtexf_t0_get_texture_id());
 }
 
 }

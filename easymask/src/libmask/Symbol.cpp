@@ -122,7 +122,7 @@ void Symbol::Draw(const sm::mat4& mt) const
 // 	rc->GetProjection(ori_width, ori_height);
 // 
 // 	rc->SetModelView(sm::vec2(0, 0), 1);
-// 	int edge = dtexf_c1_get_texture_size();
+// 	int edge = dtexf_t0_get_texture_size();
 // 	rc->SetProjection(edge, edge);
 // 	ee::GL::Viewport(0, 0, edge, edge);
 // 
@@ -140,8 +140,8 @@ void Symbol::Draw(const sm::mat4& mt) const
 //	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 //	sl::BlendShader* shader = static_cast<sl::BlendShader*>(mgr->GetShader(sl::BLEND));
 //
-//	dtexf_c1_bind();
-//	dtexf_c1_clear(0, -2, 2, 0);
+//	dtexf_t0_bind();
+//	dtexf_t0_clear(0, -2, 2, 0);
 //
 //	s2::RenderParams params;
 //	params.mt = mt;
@@ -153,7 +153,7 @@ void Symbol::Draw(const sm::mat4& mt) const
 //
 //	shader->Commit();
 //
-//	dtexf_c1_unbind();
+//	dtexf_t0_unbind();
 //}
 //
 //void Symbol::DrawTmpToScreen(const sm::mat4& mt) const
@@ -175,7 +175,7 @@ void Symbol::Draw(const sm::mat4& mt) const
 //
 //	sm::vec2 texcoords[4];
 //	const sm::vec2& offset = m_base_spr->GetPosition();
-//	int edge = dtexf_c1_get_texture_size();
+//	int edge = dtexf_t0_get_texture_size();
 //	for (int i = 0; i < 4; ++i) {
 //		texcoords[i] = vertices[i] - offset;
 //		texcoords[i].x = texcoords[i].x / edge + 0.5f;
@@ -195,7 +195,7 @@ void Symbol::Draw(const sm::mat4& mt) const
 //	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 //	mgr->SetShader(sl::MASK);
 //	sl::MaskShader* shader = static_cast<sl::MaskShader*>(mgr->GetShader());
-//	shader->Draw(&vertices[0].x, &texcoords[0].x, &texcoords_mask[0].x, dtexf_c1_get_texture_id(), tex_mask);
+//	shader->Draw(&vertices[0].x, &texcoords[0].x, &texcoords_mask[0].x, dtexf_t0_get_texture_id(), tex_mask);
 //}
 
 void Symbol::DrawBaseToFbo0(const sm::mat4& mt) const

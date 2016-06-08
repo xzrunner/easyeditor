@@ -86,7 +86,7 @@ void MeshRenderer::DrawTexture(const Mesh* mesh, const s2::RenderParams& params,
 	rc->GetProjection(ori_width, ori_height);
 
 	rc->SetModelView(sm::vec2(0, 0), 1);
-	int edge = dtexf_c1_get_texture_size();
+	int edge = dtexf_t0_get_texture_size();
 	rc->SetProjection(edge, edge);
 	ee::GL::Viewport(0, 0, edge, edge);
 
@@ -107,7 +107,7 @@ void MeshRenderer::DrawMesh(const Mesh* mesh, const s2::RenderParams& params, in
 	shader->SetColor(params.color.mul.ToABGR(), params.color.add.ToABGR());
 	shader->SetColorMap(params.color.rmap.ToABGR(), params.color.gmap.ToABGR(), params.color.bmap.ToABGR());
 
-	int dst_edge = dtexf_c1_get_texture_size();
+	int dst_edge = dtexf_t0_get_texture_size();
 	float ori_w = mesh->GetWidth(),
 		  ori_h = mesh->GetHeight();
 
@@ -132,8 +132,8 @@ void MeshRenderer::DrawMesh(const Mesh* mesh, const s2::RenderParams& params, in
 void MeshRenderer::DrawMeshToTmp(const Mesh* mesh, const s2::RenderParams& params,
 								 const ee::Symbol* base_sym)
 {
-	dtexf_c1_bind();
-	dtexf_c1_clear(0, -2, 2, 0);
+	dtexf_t0_bind();
+	dtexf_t0_clear(0, -2, 2, 0);
 
 	s2::RenderParams _params = params;
 	_params.mt.Identity();
@@ -145,12 +145,12 @@ void MeshRenderer::DrawMeshToTmp(const Mesh* mesh, const s2::RenderParams& param
 
 	sl::ShaderMgr::Instance()->GetShader()->Commit();
 
-	dtexf_c1_unbind();
+	dtexf_t0_unbind();
 }
 
 void MeshRenderer::DrawTmpToScreen(const Mesh* mesh, const s2::RenderParams& params)
 {
-	DrawMesh(mesh, params, dtexf_c1_get_texture_id());
+	DrawMesh(mesh, params, dtexf_t0_get_texture_id());
 }
 
 }
