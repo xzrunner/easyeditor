@@ -9,7 +9,6 @@ namespace ee
 {
 
 class Sprite;
-class DTexC1;
 
 class SpriteGaussianBlur
 {
@@ -18,12 +17,12 @@ public:
 
 	static void DrawToFbo0(const Sprite* spr, const s2::RenderParams& params);
 
-	static void DrawToScreen(DTexC1* fbo, const sm::vec2& offset);
+	static void DrawToScreen(bool is_target0, const sm::vec2& offset);
 
 private:
-	static void DrawInit(const Sprite* spr, const s2::RenderParams& params, DTexC1* fbo);
+	static void DrawInit(const Sprite* spr, const s2::RenderParams& params, bool is_target0);
 
-	static void DrawBetweenFBO(DTexC1* from, DTexC1* to, bool hori, const s2::RenderColor& col, float tex_size);
+	static void DrawBetweenFBO(bool is_t0_to_t1, bool hori, const s2::RenderColor& col, float tex_size);
 
 }; // SpriteGaussianBlur
 

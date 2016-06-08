@@ -14,7 +14,7 @@ namespace ee
 void SpriteOuterGlow::Draw(const Sprite* spr, const s2::RenderParams& params)
 {
 	SpriteGaussianBlur::DrawToFbo0(spr, params);
-	SpriteGaussianBlur::DrawToScreen(DTex::Instance()->GetFbo0(), spr->GetPosition());
+	SpriteGaussianBlur::DrawToScreen(true, spr->GetPosition());
 
 	s2::RenderParams _params = params;
 	_params.set_shader = false;

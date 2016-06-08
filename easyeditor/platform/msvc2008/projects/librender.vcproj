@@ -154,14 +154,6 @@
 			Name="adapter"
 			>
 			<File
-				RelativePath="..\..\..\include\ee\DTexC1.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\DTexC1.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\source\render\EE_DTex.cpp"
 				>
 			</File>

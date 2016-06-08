@@ -10,7 +10,6 @@
 #include <ee/ImageSprite.h>
 #include <ee/Image.h>
 #include <ee/EE_DTex.h>
-#include <ee/DTexC1.h>
 
 #include <dtex_facade.h>
 #include <shaderlab.h>
@@ -94,7 +93,7 @@ void Symbol::Draw(const sm::mat4& mt) const
 	rc->GetProjection(ori_width, ori_height);
 
 	rc->SetModelView(sm::vec2(0, 0), 1);
-	int edge = ee::DTex::Instance()->GetFbo0()->GetTextureSize();
+	int edge = dtexf_t0_get_texture_size();
 	rc->SetProjection(edge, edge);
 	ee::GL::Viewport(0, 0, edge, edge);
 
@@ -200,10 +199,8 @@ void Symbol::Draw(const sm::mat4& mt) const
 
 void Symbol::DrawBaseToFbo0(const sm::mat4& mt) const
 {
-	ee::DTexC1* fbo0 = ee::DTex::Instance()->GetFbo0();
-
-	fbo0->Bind();
-	fbo0->Clear(0, -2, 2, 0);
+	dtexf_t0_bind();
+	dtexf_t0_clear(0, -2, 2, 0);
 
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	sl::BlendShader* shader = static_cast<sl::BlendShader*>(mgr->GetShader(sl::SPRITE2));
@@ -218,15 +215,13 @@ void Symbol::DrawBaseToFbo0(const sm::mat4& mt) const
 
 	shader->Commit();
 
-	fbo0->Unbind();
+	dtexf_t0_unbind();
 }
 
 void Symbol::DrawMaskToFbo1(const sm::mat4& mt) const
 {
-	ee::DTexC1* fbo1 = ee::DTex::Instance()->GetFbo1();
-
-	fbo1->Bind();
-	fbo1->Clear(0, -2, 2, 0);
+	dtexf_t1_bind();
+	dtexf_t1_clear(0, -2, 2, 0);
 
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	sl::BlendShader* shader = static_cast<sl::BlendShader*>(mgr->GetShader(sl::SPRITE2));
@@ -241,15 +236,11 @@ void Symbol::DrawMaskToFbo1(const sm::mat4& mt) const
 
 	shader->Commit();
 
-	fbo1->Unbind();
+	dtexf_t1_unbind();
 }
 
 void Symbol::DrawMashFromFbo(const sm::mat4& mt) const
 {
-	ee::DTex* dtex = ee::DTex::Instance();
-	ee::DTexC1 *fbo0 = dtex->GetFbo0(),
-		       *fbo1 = dtex->GetFbo1();
-
 	sm::mat4 t;
 	m_mask_spr->GetTransMatrix(t);
 	t = t * mt;
@@ -267,7 +258,7 @@ void Symbol::DrawMashFromFbo(const sm::mat4& mt) const
 
 	sm::vec2 texcoords[4];
 	const sm::vec2& offset = m_base_spr->GetPosition();
-	int edge0 = fbo0->GetTextureSize();
+	int edge0 = dtexf_t0_get_texture_size();
 	for (int i = 0; i < 4; ++i) {
 		texcoords[i] = vertices[i] - offset;
 		texcoords[i].x = texcoords[i].x / edge0 + 0.5f;
@@ -275,7 +266,7 @@ void Symbol::DrawMashFromFbo(const sm::mat4& mt) const
 	}
 
 	sm::vec2 texcoords_mask[4];
-	int edge1 = fbo1->GetTextureSize();
+	int edge1 = dtexf_t1_get_texture_size();
 	for (int i = 0; i < 4; ++i) {
 		texcoords_mask[i] = vertices[i] - offset;
 		texcoords_mask[i].x = texcoords_mask[i].x / edge1 + 0.5f;
@@ -285,7 +276,7 @@ void Symbol::DrawMashFromFbo(const sm::mat4& mt) const
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	mgr->SetShader(sl::MASK);
 	sl::MaskShader* shader = static_cast<sl::MaskShader*>(mgr->GetShader());
-	shader->Draw(&vertices[0].x, &texcoords[0].x, &texcoords_mask[0].x, fbo0->GetTextureId(), fbo1->GetTextureId());
+	shader->Draw(&vertices[0].x, &texcoords[0].x, &texcoords_mask[0].x, dtexf_t0_get_texture_id(), dtexf_t1_get_texture_id());
 }
 
 }

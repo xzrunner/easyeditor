@@ -3,7 +3,6 @@
 #include "RenderContextStack.h"
 #include "EE_ShaderLab.h"
 #include "EE_RVG.h"
-#include "DTexC1.h"
 
 #include <dtex.h>
 #include <shaderlab.h>
@@ -206,15 +205,6 @@ DTex::DTex()
 	dtex_gl_texture_init(&_texture_create, &_texture_release, &_texture_update, &_texture_id);
 
 	dtexf_create(CFG);
-
-	m_fbo0 = new DTexC1(1024);
-	m_fbo1 = new DTexC1(1024);
-}
-
-DTex::~DTex()
-{
-	delete m_fbo0;
-	delete m_fbo1;
 }
 
 void DTex::LoadBegin()
