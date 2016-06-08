@@ -63,6 +63,9 @@ public:
 	// draw
 	bool draw_anchor;
 
+	// file
+	bool spr_output_compress;
+
 public:
 	SettingData();
 

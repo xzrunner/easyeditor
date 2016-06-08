@@ -38,6 +38,8 @@ SettingData::SettingData()
 	color_setting_dlg_type = CSDT_DEFAULT;
 
 	draw_anchor = true;
+
+	spr_output_compress = true;
 }
 
 void SettingData::LoadFromFile(const Json::Value& value)
@@ -100,6 +102,10 @@ void SettingData::LoadFromFile(const Json::Value& value)
 
 	if (!value["draw_anchor"].isNull()) {
 		draw_anchor = value["draw_anchor"].asBool();
+	}
+
+	if (!value["spr_output_compress"].isNull()) {
+		spr_output_compress = value["spr_output_compress"].asBool();
 	}
 }
 

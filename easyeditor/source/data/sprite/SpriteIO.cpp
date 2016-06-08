@@ -5,6 +5,7 @@
 #include "FilterModes.h"
 #include "CameraModes.h"
 #include "Sprite.h"
+#include "SettingData.h"
 
 #include <sprite2/RenderColor.h>
 #include <sprite2/RenderShader.h>
@@ -104,45 +105,47 @@ void SpriteIO::LoadGeometry(const Json::Value& val, Sprite* spr)
 
 void SpriteIO::StoreGeometry(Json::Value& val, const Sprite* spr)
 {
+	bool compress = Config::Instance()->GetSettings().spr_output_compress;
+
 	const sm::vec2& pos = spr->GetPosition();
-	if (pos != sm::vec2(0, 0)) {
+	if (!compress || pos != sm::vec2(0, 0)) {
 		val["position"]["x"] = pos.x;
 		val["position"]["y"] = pos.y;
 	}
 
 	float angle = spr->GetAngle();
-	if (angle != 0) {
+	if (!compress || angle != 0) {
 		val["angle"] = angle;
 	}
 
 	const sm::vec2& scale = spr->GetScale();
-	if (scale != sm::vec2(1, 1)) {
+	if (!compress || scale != sm::vec2(1, 1)) {
 		val["x scale"] = scale.x;
 		val["y scale"] = scale.y;
 	}
 
 	const sm::vec2& shear = spr->GetShear();
-	if (shear != sm::vec2(0, 0)) {
+	if (!compress || shear != sm::vec2(0, 0)) {
 		val["x shear"] = shear.x;
 		val["y shear"] = shear.y;
 	}
 
 	const sm::vec2& offset = spr->GetOffset();
-	if (offset != sm::vec2(0, 0)) {
+	if (!compress || offset != sm::vec2(0, 0)) {
 		val["x offset"] = offset.x;
 		val["y offset"] = offset.y;
 	}
 
 	const sm::bvec2& mirror = spr->GetMirror();
-	if (mirror.x) {
+	if (!compress || mirror.x) {
 		val["x mirror"] = mirror.x;
 	}
-	if (mirror.y) {
+	if (!compress || mirror.y) {
 		val["y mirror"] = mirror.y;
 	}
 
 	const sm::vec2& perspective = spr->GetPerspective();
-	if (perspective != sm::vec2(0, 0)) {
+	if (!compress || perspective != sm::vec2(0, 0)) {
 		val["x perspective"] = perspective.x;
 		val["y perspective"] = perspective.y;
 	}
@@ -191,22 +194,24 @@ void SpriteIO::LoadInfo(const Json::Value& val, Sprite* spr)
 
 void SpriteIO::StoreInfo(Json::Value& val, const Sprite* spr)
 {
+	bool compress = Config::Instance()->GetSettings().spr_output_compress;
+
 	const std::string& name = spr->GetName();
-	if (!name.empty()) {
+	if (!compress || !name.empty()) {
 		val["name"] = name;
 	}
 
 	const std::string& tag = spr->GetTag();
-	if (!tag.empty()) {
+	if (!compress || !tag.empty()) {
 		val["tag"] = tag;		
 	}
 
-	if (spr->IsClip()) {
-		val["clip"] = true;
+	if (!compress || spr->IsClip()) {
+		val["clip"] = spr->IsClip();
 	}
 
-	if (spr->IsAnchor()) {
-		val["anchor"] = true;
+	if (!compress || spr->IsAnchor()) {
+		val["anchor"] = spr->IsAnchor();
 	}
 }
 
@@ -222,11 +227,13 @@ void SpriteIO::LoadEdit(const Json::Value& val, Sprite* spr)
 
 void SpriteIO::StoreEdit(Json::Value& val, const Sprite* spr)
 {
-	if (!spr->IsVisible()) {
-		val["visible"] = false;
+	bool compress = Config::Instance()->GetSettings().spr_output_compress;
+
+	if (!compress || !spr->IsVisible()) {
+		val["visible"] = spr->IsVisible();
 	}
-	if (!spr->IsEditable()) {
-		val["editable"] = false;
+	if (!compress || !spr->IsEditable()) {
+		val["editable"] = spr->IsEditable();
 	}
 }
 
@@ -265,20 +272,22 @@ void SpriteIO::LoadColor(const Json::Value& val, s2::RenderColor& color)
 
 void SpriteIO::StoreColor(Json::Value& val, const s2::RenderColor& color)
 {
-	if (color.mul != s2::Color(0xffffffff)) {
+	bool compress = Config::Instance()->GetSettings().spr_output_compress;
+
+	if (!compress || color.mul != s2::Color(0xffffffff)) {
 		val["multi color"]	= color2str(color.mul, PT_BGRA);
 	}
-	if (color.add != s2::Color(0)) {
+	if (!compress || color.add != s2::Color(0)) {
 		val["add color"]	= color2str(color.add, PT_ABGR);
 	}
 
-	if (color.rmap != s2::Color(255, 0, 0, 0)) {
+	if (!compress || color.rmap != s2::Color(255, 0, 0, 0)) {
 		val["r trans"]		= color2str(color.rmap, PT_RGBA);
 	}
-	if (color.gmap != s2::Color(0, 255, 0, 0)) {
+	if (!compress || color.gmap != s2::Color(0, 255, 0, 0)) {
 		val["g trans"]		= color2str(color.gmap, PT_RGBA);
 	}
-	if (color.bmap != s2::Color(0, 0, 255, 0)) {
+	if (!compress || color.bmap != s2::Color(0, 0, 255, 0)) {
 		val["b trans"]		= color2str(color.bmap, PT_RGBA);
 	}
 }
