@@ -326,6 +326,13 @@ void Sprite::OnActive()
 	}
 }
 
+void Sprite::SetTween(Sprite* begin, Sprite* end, float process)
+{
+	// todo
+	m_mat.x[12] = begin->m_mat.x[12] + (end->m_mat.x[12] - begin->m_mat.x[12]) * process;
+	m_mat.x[13] = begin->m_mat.x[13] + (end->m_mat.x[13] - begin->m_mat.x[13]) * process;
+}
+
 void Sprite::CreatePS()
 {
 	const p3d_emitter_cfg* cfg = m_symbol->GetEmitterCfg();

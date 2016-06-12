@@ -61,6 +61,8 @@ public:
 
 	void OnActive();
 
+	void SetTween(Sprite* begin, Sprite* end, float process);
+
 	static ee::Sprite* Create(ee::Symbol* symbol) {
 		return new Sprite(static_cast<Symbol*>(symbol));
 	}
