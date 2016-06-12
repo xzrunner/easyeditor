@@ -244,6 +244,7 @@ void ViewlistList::OnKeyDown(wxKeyEvent& event)
 void ViewlistList::OnMouse(wxMouseEvent& event)
 {
 	if (!event.LeftDown()) {
+		event.Skip();
 		return;
 	}
 
