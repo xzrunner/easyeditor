@@ -12,6 +12,7 @@
 #include <easycomplex.h>
 #include <easyanim.h>
 #include <easymesh.h>
+#include <easymask.h>
 #include <easyscale9.h>
 #include <easyicon.h>
 #include <easyparticle3d.h>
@@ -140,6 +141,7 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 	library->AddPage(new ecomplex::LibraryPage(nb));
 	library->AddPage(new eanim::LibraryPage(nb));
 	library->AddPage(new emesh::LibraryPage(nb));
+	library->AddPage(new emask::LibraryPage(nb));
 	library->AddPage(new escale9::LibraryPage(nb));
 	library->AddPage(new eicon::LibraryPage(nb));
 	library->AddPage(new eparticle3d::LibraryPage(nb));
