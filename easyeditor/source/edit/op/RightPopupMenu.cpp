@@ -75,11 +75,6 @@ void RightPopupMenu::CreateCommonMenu(wxMenu& menu)
 
 	if (m_edited_sprs.size() == 1) 
 	{
-		m_parent->Bind(wxEVT_COMMAND_MENU_SELECTED, &EditPanelImpl::OnRightPopupMenu, m_stage, MENU_FILTER_PARAMS);
-		menu.Append(MENU_FILTER_PARAMS, "滤镜参数");
-
-		menu.AppendSeparator();
-
 		m_parent->Bind(wxEVT_COMMAND_MENU_SELECTED, &EditPanelImpl::OnRightPopupMenu, m_stage, MENU_SELECT_SAME);
 		menu.Append(MENU_SELECT_SAME, "选择相同");
 
