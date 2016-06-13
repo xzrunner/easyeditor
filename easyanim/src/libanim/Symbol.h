@@ -46,6 +46,8 @@ public:
 	const std::vector<s2::AnimSymbol::Layer*>& GetLayers() const { return m_core->GetLayers(); }
 	void AddLayer(s2::AnimSymbol::Layer* layer) { m_core->AddLayer(layer); }
 
+	int GetCurrFrame() const;
+
 	static ee::Symbol* Create() { return new Symbol(); }
 
 protected:
@@ -62,6 +64,8 @@ private:
 	int m_fps;
 
 	int m_index; // for draw certain frame
+
+	mutable long m_init_time;
 
 }; // Symbol
 

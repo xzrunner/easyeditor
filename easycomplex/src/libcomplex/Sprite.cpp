@@ -47,13 +47,17 @@ Sprite* Sprite::Clone() const
 	return sprite;
 }
 
-bool Sprite::Update(float dt) 
+bool Sprite::Update(float dt, const sm::mat4& mat) 
 { 
+	sm::mat4 mt;
+	GetTransMatrix(mt);
+	mt = mt * mat;
+
 	bool ret = false;
 	const std::vector<s2::Sprite*>& children = m_symbol->GetChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
 		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
-		if (child->Update(dt)) {
+		if (child->Update(dt, mt)) {
 			ret = true;
 		}
 

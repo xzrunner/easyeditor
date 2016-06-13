@@ -41,11 +41,11 @@ bool StagePanel::Update(float dt)
 {
 	bool ret = false;
 	ee::Sprite* base = m_sym->GetSprite(true);
-	if (base && base->Update(dt)) {
+	if (base && base->Update(dt, sm::mat4())) {
 		ret = true;
 	}
 	ee::Sprite* mask = m_sym->GetSprite(false);
-	if (mask && mask->Update(dt)) {
+	if (mask && mask->Update(dt, sm::mat4())) {
 		ret = true;
 	}
 	return ret;

@@ -84,7 +84,7 @@ Sprite* Sprite::Clone() const
 	return sprite;
 }
 
-bool Sprite::Update(float dt)
+bool Sprite::Update(float dt, const sm::mat4& mat)
 {
 	PS::Instance()->UpdateTime();
 
@@ -102,12 +102,15 @@ bool Sprite::Update(float dt)
 		}
 
 		float mt[6];
-		mt[0] = m_mat.x[0];
-		mt[1] = m_mat.x[1];
-		mt[2] = m_mat.x[4];
-		mt[3] = m_mat.x[5];
-		mt[4] = m_mat.x[12];
-		mt[5] = m_mat.x[13];	
+		sm::mat4 inner_mat;
+		GetTransMatrix(inner_mat);
+		inner_mat = inner_mat * mat;
+		mt[0] = inner_mat.x[0];
+		mt[1] = inner_mat.x[1];
+		mt[2] = inner_mat.x[4];
+		mt[3] = inner_mat.x[5];
+		mt[4] = inner_mat.x[12];
+		mt[5] = inner_mat.x[13];	
 
 		float dt = time - et->time;
 		p3d_emitter_update(et, dt, mt);
@@ -225,10 +228,10 @@ void Sprite::Draw(const sm::mat4& mt) const
 	}
 }
 
-void Sprite::SetMatrix(const sm::mat4& mat) 
+void Sprite::SetOuterMatrix(const sm::mat4& mat) 
 { 
-	m_mat = mat;
-	if (m_spr && m_alone) {
+	if (m_spr && m_alone) 
+	{
 		float* mt = m_spr->mat;
 		mt[0] = mat.x[0];
 		mt[1] = mat.x[1];
@@ -324,13 +327,6 @@ void Sprite::OnActive()
 	if (m_alone) {
 		p3d_buffer_insert(m_spr);
 	}
-}
-
-void Sprite::SetTween(Sprite* begin, Sprite* end, float process)
-{
-	// todo
-	m_mat.x[12] = begin->m_mat.x[12] + (end->m_mat.x[12] - begin->m_mat.x[12]) * process;
-	m_mat.x[13] = begin->m_mat.x[13] + (end->m_mat.x[13] - begin->m_mat.x[13]) * process;
 }
 
 void Sprite::CreatePS()

@@ -27,7 +27,7 @@ public:
 	//
 	// Sprite interface
 	//
-	virtual bool Update(float dt);
+	virtual bool Update(float dt, const sm::mat4& mat);
 	virtual const Symbol& GetSymbol() const;
 	virtual void SetSymbol(ee::Symbol* symbol);
 
@@ -40,7 +40,7 @@ public:
 
 	void Draw(const sm::mat4& mt) const;
 
-	void SetMatrix(const sm::mat4& mat);
+	void SetOuterMatrix(const sm::mat4& mat);
 
 	sm::Quaternion& GetDir() { return m_dir; }
 	const sm::Quaternion& GetDir() const { return m_dir; }
@@ -61,8 +61,6 @@ public:
 
 	void OnActive();
 
-	void SetTween(Sprite* begin, Sprite* end, float process);
-
 	static ee::Sprite* Create(ee::Symbol* symbol) {
 		return new Sprite(static_cast<Symbol*>(symbol));
 	}
@@ -75,8 +73,6 @@ protected:
 
 private:
 	p3d_sprite* m_spr;
-
-	sm::mat4 m_mat;
 
 	sm::Quaternion m_dir;
 

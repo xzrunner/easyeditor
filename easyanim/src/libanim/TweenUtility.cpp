@@ -163,13 +163,6 @@ void TweenUtility::GetTweenSprite(ee::Sprite* start, ee::Sprite* end, ee::Sprite
 		assert(mesh_e && mesh_t);
 		mesh_t->SetTween(mesh_s, mesh_e, process);
 	}
-	else if (eparticle3d::Sprite* p3d_s = dynamic_cast<eparticle3d::Sprite*>(start))
-	{
-		eparticle3d::Sprite* p3d_e = dynamic_cast<eparticle3d::Sprite*>(end);
-		eparticle3d::Sprite* p3d_t = dynamic_cast<eparticle3d::Sprite*>(tween);
-		assert(p3d_e && p3d_t);
-		p3d_t->SetTween(p3d_s, p3d_e, process);
-	}
 }
 
 }

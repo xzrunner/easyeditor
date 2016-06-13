@@ -20,11 +20,9 @@ void Utility::DrawAnimSymbol(const Symbol* symbol,
 {
 	std::vector<ee::Sprite*> sprites;
 	GetCurrSprites(symbol, index, sprites);
-
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
 		ee::SpriteRenderer::Draw(sprites[i], params);
 	}
-
 	for_each(sprites.begin(), sprites.end(), ee::DeletePointerFunctor<ee::Sprite>());
 }
 

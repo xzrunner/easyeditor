@@ -25,7 +25,7 @@ public:
 	//
 	// Sprite interface
 	//
-	virtual bool Update(float dt);
+	virtual bool Update(float dt, const sm::mat4& mat);
 	virtual const ImageSymbol& GetSymbol() const;
 	virtual void SetSymbol(Symbol* symbol);
 

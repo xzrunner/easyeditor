@@ -73,7 +73,7 @@ bool StagePanel::Update(float dt)
 	const std::vector<s2::Sprite*>& children = m_symbol->GetChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
 		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
-		if (child->Update(dt)) {
+		if (child->Update(dt, sm::mat4())) {
 			dirty = true;
 		}
 	}

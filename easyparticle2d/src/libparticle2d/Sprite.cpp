@@ -72,7 +72,7 @@ Sprite* Sprite::Clone() const
 	return sprite;
 }
 
-bool Sprite::Update(float dt)
+bool Sprite::Update(float dt, const sm::mat4& mat)
 {
 	PS::Instance()->UpdateTime();
 	return m_ps->Update(m_mat);

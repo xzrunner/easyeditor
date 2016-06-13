@@ -18,6 +18,7 @@ namespace eanim
 
 Symbol::Symbol()
 	: m_index(0)
+	, m_init_time(0)
 {
 	this->Retain();
 	m_core = new s2::AnimSymbol(this);
@@ -39,15 +40,11 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 	if (m_index != 0) {
 		Utility::DrawAnimSymbol(this, params, m_index);
 	} else {
-		static clock_t init = 0;
-		if (init == 0) {
-			init = clock();
+		if (m_init_time == 0) {
+			m_init_time = clock();
 			Utility::DrawAnimSymbol(this, params, 1);
 		} else {
-			clock_t curr = clock();
-			float during = (float)(curr - init) / CLOCKS_PER_SEC;
-			int index = during / (1.0f / m_fps);
-			Utility::DrawAnimSymbol(this, params, index % getMaxFrameIndex() + 1);
+			Utility::DrawAnimSymbol(this, params, GetCurrFrame());
 		}
 	}
 }
@@ -135,6 +132,14 @@ void Symbol::LoadFromFile(const LayersLoader& loader)
 	}
 
 	InitBounding();
+}
+
+int Symbol::GetCurrFrame() const
+{
+	clock_t curr = clock();
+	float during = (float)(curr - m_init_time) / CLOCKS_PER_SEC;
+	int index = during / (1.0f / m_fps);
+	return index % getMaxFrameIndex() + 1;
 }
 
 void Symbol::LoadResources()

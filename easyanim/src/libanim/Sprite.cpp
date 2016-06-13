@@ -1,6 +1,8 @@
 #include "Sprite.h"
+#include "Utility.h"
 
 #include <ee/SpriteFactory.h>
+#include <ee/std_functor.h>
 
 #include <sprite2/AnimSprite.h>
 
@@ -47,9 +49,19 @@ Sprite* Sprite::Clone() const
 	return sprite; 
 }
 
-bool Sprite::Update(float dt) 
-{ 
-	return true; 
+bool Sprite::Update(float dt, const sm::mat4& mat) 
+{
+	sm::mat4 mt;
+	GetTransMatrix(mt);
+	mt = mt * mat;
+
+	std::vector<ee::Sprite*> sprites;
+	Utility::GetCurrSprites(m_symbol, m_symbol->GetCurrFrame(), sprites);
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		sprites[i]->Update(dt, mt);
+	}
+	for_each(sprites.begin(), sprites.end(), ee::DeletePointerFunctor<ee::Sprite>());
+	return true;
 }
 
 const Symbol& Sprite::GetSymbol() const

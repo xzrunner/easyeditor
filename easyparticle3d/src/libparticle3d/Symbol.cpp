@@ -42,7 +42,7 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 	}
 
 	Sprite* p3d_spr = const_cast<Sprite*>(static_cast<const Sprite*>(spr));
-	p3d_spr->SetMatrix(params.mt);
+	p3d_spr->SetOuterMatrix(params.mt);
 	if (p3d_spr->IsAlone()) {
 		p3d_sprite* p3d = p3d_spr->GetP3D();
 		if (!p3d) {
