@@ -8,12 +8,14 @@
 #include <sprite2/RenderParams.h>
 #include <sprite2/FilterFactory.h>
 
+#include <assert.h>
+
 namespace ee
 {
 
-void SpriteOuterGlow::Draw(const Sprite* spr, const s2::RenderParams& params)
+void SpriteOuterGlow::Draw(const Sprite* spr, const s2::RenderParams& params, int iterations)
 {
-	SpriteGaussianBlur::DrawToFbo0(spr, params);
+	SpriteGaussianBlur::DrawToFbo0(spr, params, iterations);
 	SpriteGaussianBlur::DrawToScreen(true, spr->GetPosition());
 
 	s2::RenderParams _params = params;

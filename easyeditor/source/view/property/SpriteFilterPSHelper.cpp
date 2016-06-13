@@ -10,6 +10,7 @@
 #include <sprite2/FilterFactory.h>
 #include <sprite2/RFEdgeDetection.h>
 #include <sprite2/RFGaussianBlur.h>
+#include <sprite2/RFOuterGlow.h>
 
 #include <vector>
 
@@ -63,6 +64,15 @@ bool SpriteFilterPSHelper::FromPS(const std::string& name, const wxAny& value, S
 				ret = true;
 			}
 			break;
+		case s2::FM_OUTER_GLOW:
+			if (name == "Filter.Iterations")
+			{
+				int iterations = wxANY_AS(value, int);
+				s2::RFOuterGlow* filter = static_cast<s2::RFOuterGlow*>(spr->GetShader().filter);
+				filter->SetIterations(iterations);
+				ret = true;
+			}
+			break;
 		}
 	}
 	return ret;
@@ -95,6 +105,13 @@ void SpriteFilterPSHelper::CreateSubPS(wxPropertyGrid* pg, wxPGProperty* parent,
 		{
 			const s2::RFGaussianBlur* gb = static_cast<const s2::RFGaussianBlur*>(filter);
 			wxPGProperty* prop = new wxIntProperty("Iterations", wxPG_LABEL, gb->GetIterations());
+			pg->AppendIn(parent, prop);
+		}
+		break;
+	case s2::FM_OUTER_GLOW:
+		{
+			const s2::RFOuterGlow* og = static_cast<const s2::RFOuterGlow*>(filter);
+			wxPGProperty* prop = new wxIntProperty("Iterations", wxPG_LABEL, og->GetIterations());
 			pg->AppendIn(parent, prop);
 		}
 		break;

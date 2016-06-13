@@ -15,6 +15,8 @@
 
 #include <sprite2/RenderFilter.h>
 #include <sprite2/RFEdgeDetection.h>
+#include <sprite2/RFGaussianBlur.h>
+#include <sprite2/RFOuterGlow.h>
 
 #include <shaderlab.h>
 
@@ -74,9 +76,11 @@ void SpriteRenderer::Draw(const Sprite* spr,
 		t.shader.filter = filter;
 		t.camera = ct;
 		if (filter->GetMode() == s2::FM_GAUSSIAN_BLUR) {
-			SpriteGaussianBlur::Draw(spr, t);
+			int itrs = static_cast<s2::RFGaussianBlur*>(filter)->GetIterations();
+			SpriteGaussianBlur::Draw(spr, t, itrs);
 		} else if (filter->GetMode() == s2::FM_OUTER_GLOW) {
-			SpriteOuterGlow::Draw(spr, t);
+			int itrs = static_cast<s2::RFOuterGlow*>(filter)->GetIterations();
+			SpriteOuterGlow::Draw(spr, t, itrs);
 		} else {
 			if (params.set_shader) {
 				mgr->SetShader(sl::FILTER);

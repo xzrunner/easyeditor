@@ -11,7 +11,7 @@ class Sprite;
 class SpriteOuterGlow
 {
 public:
-	static void Draw(const Sprite* spr, const s2::RenderParams& params);
+	static void Draw(const Sprite* spr, const s2::RenderParams& params, int iterations);
 
 }; // SpriteOuterGlow
 

@@ -9,8 +9,6 @@
 #include <shaderlab.h>
 #include <sprite2/RenderParams.h>
 #include <sprite2/FilterFactory.h>
-#include <sprite2/RenderFilter.h>
-#include <sprite2/RFGaussianBlur.h>
 #include <dtex_facade.h>
 
 #include <assert.h>
@@ -18,13 +16,13 @@
 namespace ee
 {
 
-void SpriteGaussianBlur::Draw(const Sprite* spr, const s2::RenderParams& params)
+void SpriteGaussianBlur::Draw(const Sprite* spr, const s2::RenderParams& params, int iterations)
 {
-	DrawToFbo0(spr, params);
+	DrawToFbo0(spr, params, iterations);
 	DrawToScreen(true, spr->GetPosition());
 }
 
-void SpriteGaussianBlur::DrawToFbo0(const Sprite* spr, const s2::RenderParams& params)
+void SpriteGaussianBlur::DrawToFbo0(const Sprite* spr, const s2::RenderParams& params, int iterations)
 {
 	sl::ShaderMgr::Instance()->GetShader()->Commit();
 
@@ -51,9 +49,7 @@ void SpriteGaussianBlur::DrawToFbo0(const Sprite* spr, const s2::RenderParams& p
 
 	float tex_width = spr->GetBounding()->Width(),
 		  tex_height = spr->GetBounding()->Height();
-	assert(params.shader.filter->GetMode() == s2::FM_GAUSSIAN_BLUR);
-	s2::RFGaussianBlur* filter = static_cast<s2::RFGaussianBlur*>(params.shader.filter);
-	for (int i = 0, n = filter->GetIterations(); i < n; ++i) {
+	for (int i = 0; i < iterations; ++i) {
 		DrawBetweenFBO(true, true, params.color, tex_width);
 		DrawBetweenFBO(false, false, params.color, tex_height);
 	}

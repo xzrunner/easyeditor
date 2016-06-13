@@ -14,6 +14,7 @@
 #include <sprite2/RenderFilter.h>
 #include <sprite2/RFEdgeDetection.h>
 #include <sprite2/RFGaussianBlur.h>
+#include <sprite2/RFOuterGlow.h>
 #include <sprite2/S2_Sprite.h>
 
 #include <assert.h>
@@ -339,6 +340,13 @@ void SpriteIO::LoadShader(const Json::Value& val, s2::RenderShader& shader)
 					filter->SetIterations(iterations);
 				}
 				break;
+			case s2::FM_OUTER_GLOW:
+				{
+					int iterations = fval["iterations"].asInt();
+					s2::RFOuterGlow* filter = static_cast<s2::RFOuterGlow*>(shader.filter);
+					filter->SetIterations(iterations);
+				}
+				break;
 			}
 		}
 	}
@@ -374,6 +382,12 @@ void SpriteIO::StoreShader(Json::Value& val, const s2::RenderShader& shader)
 		case s2::FM_GAUSSIAN_BLUR:
 			{
 				s2::RFGaussianBlur* filter = static_cast<s2::RFGaussianBlur*>(shader.filter);
+				fval["iterations"] = filter->GetIterations();
+			}
+			break;
+		case s2::FM_OUTER_GLOW:
+			{
+				s2::RFOuterGlow* filter = static_cast<s2::RFOuterGlow*>(shader.filter);
 				fval["iterations"] = filter->GetIterations();
 			}
 			break;

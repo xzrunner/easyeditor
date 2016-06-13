@@ -13,9 +13,9 @@ class Sprite;
 class SpriteGaussianBlur
 {
 public:
-	static void Draw(const Sprite* spr, const s2::RenderParams& params);
+	static void Draw(const Sprite* spr, const s2::RenderParams& params, int iterations);
 
-	static void DrawToFbo0(const Sprite* spr, const s2::RenderParams& params);
+	static void DrawToFbo0(const Sprite* spr, const s2::RenderParams& params, int iterations);
 
 	static void DrawToScreen(bool is_target0, const sm::vec2& offset);
 
