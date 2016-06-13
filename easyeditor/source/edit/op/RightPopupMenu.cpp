@@ -137,9 +137,6 @@ void RightPopupMenu::HandleCommonMenu(int id)
 	case MENU_VERT_MIRROR:
 		VertMirror();
 		break;
-	case MENU_FILTER_PARAMS:
-		FilterParams();
-		break;
 	case MENU_SELECT_SAME:
 		SelectSame();
 		break;
