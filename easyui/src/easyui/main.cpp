@@ -7,6 +7,7 @@
 #include <easyanim.h>
 #include <easyscale9.h>
 #include <easymesh.h>
+#include <easymask.h>
 #include <easyparticle3d.h>
 #include <easyparticle2d.h>
 //#include <easyejoy2d.h>
@@ -32,6 +33,9 @@ static void InitSymbolCreators()
 
 	ee::SymbolFactory::RegisterCreator(emesh::FILE_TAG, &emesh::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(emesh::FILE_TAG, &emesh::Sprite::Create);
+
+	ee::SymbolFactory::RegisterCreator(emask::FILE_TAG, &emask::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(emask::FILE_TAG, &emask::Sprite::Create);
 
 	ee::SymbolFactory::RegisterCreator(eparticle3d::FILE_TAG, &eparticle3d::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(eparticle3d::FILE_TAG, &eparticle3d::Sprite::Create);
