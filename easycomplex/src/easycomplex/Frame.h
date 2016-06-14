@@ -16,6 +16,8 @@ protected:
 
 	virtual void OnSettings(wxCommandEvent& event);
 
+	virtual std::string GetFileFilter() const;
+
 private:
 	void onPreview(wxCommandEvent& event);
 	void OnEJPreview(wxCommandEvent& event);

@@ -36,6 +36,7 @@ public:
 		e_ui,
 		e_text,
 		e_mask,
+		e_psd,
 	};
 
 	static Type GetType(const std::string& filename);

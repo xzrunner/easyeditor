@@ -188,6 +188,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\libcomplex\LoadFromPSD.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\LoadFromPSD.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libcomplex\NodeToSprite.cpp"
 					>
 				</File>

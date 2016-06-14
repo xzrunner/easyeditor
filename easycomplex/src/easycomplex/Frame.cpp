@@ -72,6 +72,14 @@ void Frame::OnSettings(wxCommandEvent& event)
 	const_cast<ee::EditPanel*>(m_task->GetEditPanel())->GetCanvas()->SetBgColor(col);
 }
 
+std::string Frame::GetFileFilter() const
+{
+	std::string tag = ee::FileType::GetTag(ee::FileType::e_complex);
+	std::string filter = "*_" + tag + ".json";
+	filter += "; *_psd.json";
+	return filter;
+}
+
 void Frame::onPreview(wxCommandEvent& event)
 {
 // 	ee::Symbol* symbol = ee::SymbolMgr::Instance()->fetchSymbol("default.ttf");

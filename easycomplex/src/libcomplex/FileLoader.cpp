@@ -1,9 +1,11 @@
 #include "FileLoader.h"
 #include "Symbol.h"
+#include "config.h"
 
 #include "LoadFromJson.h"
 #include "LoadFromLua.h"
 #include "LoadFromBin.h"
+#include "LoadFromPSD.h"
 
 #include <ee/Config.h>
 #include <ee/EE_DTex.h>
@@ -133,8 +135,10 @@ void FileLoader::Load(const std::string& filepath, Symbol* complex)
 		LoadFromLua::Load(value, dir, complex);
 	} else if (!value["bin file"].isNull()) {
 		LoadFromBin::Load(value, dir, complex);
-	} else {
+	} else if (ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
 		LoadFromJson::Load(value, dir, complex);
+	} else if (ee::FileType::IsType(filepath, ee::FileType::e_psd)) {
+		LoadFromPSD::Load(value, dir, complex);
 	}
 
 	complex->InitBounding();
