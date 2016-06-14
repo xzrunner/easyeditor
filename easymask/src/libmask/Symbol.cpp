@@ -119,7 +119,6 @@ void Symbol::DrawBaseToFbo0() const
 	const sm::vec2& offset = m_base_spr->GetPosition();
 	params.mt.Translate(-offset.x, -offset.y, 0);
 	params.set_shader = false;
-	params.root_spr = m_base_spr->GetCore();
 	ee::SpriteRenderer::Draw(m_base_spr, params);
 
 	shader->Commit();
@@ -139,7 +138,6 @@ void Symbol::DrawMaskToFbo1() const
 	const sm::vec2& offset = m_base_spr->GetPosition();
 	params.mt.Translate(-offset.x, -offset.y, 0);
 	params.set_shader = false;
-	params.root_spr = m_mask_spr->GetCore();
 	ee::SpriteRenderer::Draw(m_mask_spr, params);
 
 	shader->Commit();

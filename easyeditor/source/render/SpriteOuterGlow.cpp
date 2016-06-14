@@ -20,7 +20,6 @@ void SpriteOuterGlow::Draw(const Sprite* spr, const s2::RenderParams& params, in
 
 	s2::RenderParams _params = params;
 	_params.set_shader = false;
-	_params.root_spr = spr->GetCore();
 	_params.shader.filter = s2::FilterFactory::Instance()->GetTemp(s2::FM_NULL);
 
 	Sprite* spr_no_const = const_cast<Sprite*>(spr);

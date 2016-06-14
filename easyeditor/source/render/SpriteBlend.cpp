@@ -63,7 +63,7 @@ void SpriteBlend::DrawSprToTmp(const Sprite* spr, const sm::mat4& mt)
 	s2::RenderParams params;
 	params.mt = mt;
 	params.set_shader = false;
-	params.root_spr = spr->GetCore();
+	params.vertex_offset = - (mt * spr->GetPosition());
 	SpriteRenderer::Draw(spr, params);
 	const_cast<Sprite*>(spr)->GetShader().blend = mode;
 
@@ -89,10 +89,12 @@ void SpriteBlend::DrawTmpToScreen(const Sprite* sprite, const sm::mat4& mt)
 		vertices[i] = Math2D::TransVector(vertices[i], t);
 	}
 
+	sm::vec2 vertex_offset = - (mt * sprite->GetPosition());
+
 	sm::vec2 texcoords[4];
 	int edge = dtexf_t0_get_texture_size();
 	for (int i = 0; i < 4; ++i) {
-		texcoords[i] = vertices[i] - sprite->GetPosition();
+		texcoords[i] = vertices[i] + vertex_offset;
 		texcoords[i].x = texcoords[i].x / edge + 0.5f;
 		texcoords[i].y = texcoords[i].y / edge + 0.5f;
 	}

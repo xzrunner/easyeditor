@@ -105,7 +105,6 @@ void SpriteGaussianBlur::DrawInit(const Sprite* spr, const s2::RenderParams& par
 	const sm::vec2& offset = spr->GetPosition();
 	_params.mt.Translate(-offset.x, -offset.y, 0);
 	_params.set_shader = false;
-	_params.root_spr = spr->GetCore();
 	_params.shader.filter = s2::FilterFactory::Instance()->GetTemp(s2::FM_NULL);
 
 	s2::RenderFilter* ori_filter = spr->GetShader().filter;

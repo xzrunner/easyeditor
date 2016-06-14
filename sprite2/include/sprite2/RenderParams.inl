@@ -6,7 +6,7 @@ namespace s2
 
 inline
 RenderParams::RenderParams()
-	: root_spr(NULL)
+	: vertex_offset(0, 0)
 	, set_shader(true)
 {
 }

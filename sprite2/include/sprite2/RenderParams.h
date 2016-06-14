@@ -16,7 +16,7 @@ class Sprite;
 class RenderParams
 {
 public:
-	const Sprite* root_spr;	// for blend
+	sm::vec2 vertex_offset;		// for blend
 
 	bool set_shader;
 

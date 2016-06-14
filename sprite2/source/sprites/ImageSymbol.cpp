@@ -75,11 +75,8 @@ void ImageSymbol::DrawBlend(const RenderParams& params, sm::vec2* vertices, floa
 	sl::BlendShader* shader = static_cast<sl::BlendShader*>(mgr->GetShader(sl::BLEND));
 	shader->SetColor(params.color.mul.ToABGR(), params.color.add.ToABGR());
 
-	if (params.root_spr) {
-		sm::vec2 offset = params.root_spr->GetPosition();
-		for (int i = 0; i < 4; ++i) {
-			vertices[i] -= offset;
-		}
+	for (int i = 0; i < 4; ++i) {
+		vertices[i] += params.vertex_offset;
 	}
 
 	sm::vec2 vertices_scr[4];
