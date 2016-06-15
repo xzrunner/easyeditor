@@ -12,6 +12,8 @@ public:
 	Color mul, add;
 	Color rmap, gmap, bmap;
 
+	RenderColor operator * (const RenderColor& rc) const;
+
 public:
 	RenderColor() 
 		: mul(0xffffffff)

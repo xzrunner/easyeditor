@@ -152,6 +152,10 @@
 				Name="render"
 				>
 				<File
+					RelativePath="..\..\..\source\dataset\RenderColor.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\include\sprite2\RenderColor.h"
 					>
 				</File>
