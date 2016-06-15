@@ -3,6 +3,8 @@
 
 #include <ee/ZoomViewOP.h>
 
+#include <SM_Vector.h>
+
 #include <vector>
 
 namespace eimage

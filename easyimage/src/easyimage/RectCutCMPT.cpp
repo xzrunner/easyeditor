@@ -243,17 +243,16 @@ void RectCutCMPT::OnOutputData(wxCommandEvent& event)
 
 		ee::ImageClip clip(*image->GetImageData());
 		const uint8_t* pixels = clip.Clip(r.xmin, r.xmax, r.ymin, r.ymax);
-		float width = r.Width();
-		float height = r.Height();
+		sm::vec2 sz = r.Size();
 
 		std::string img_filename = imageDir + "\\" + imageName + "_" + ee::StringHelper::ToString(i);
-		ee::ImageSaver::StoreToFile(pixels, width, height, 4, img_filename, ee::ImageSaver::e_png);
+		ee::ImageSaver::StoreToFile(pixels, sz.x, sz.y, 4, img_filename, ee::ImageSaver::e_png);
 
 		std::string img_fullname = img_filename + ".png";
-		ee::Sprite* sprite = new ee::DummySprite(new ee::DummySymbol(img_fullname, width, height));
-		sm::vec2 off;
-		off.x = r.CenterX() - image->GetClippedWidth() * 0.5f;
-		off.y = r.CenterY() - image->GetClippedHeight() * 0.5f;
+		ee::Sprite* sprite = new ee::DummySprite(new ee::DummySymbol(img_fullname, sz.x, sz.y));
+		sm::vec2 off = r.Center();
+		off.x -= image->GetClippedWidth() * 0.5f;
+		off.y -= image->GetClippedHeight() * 0.5f;
 		sprite->Translate(off);
 		complex->Add(sprite);
 	}

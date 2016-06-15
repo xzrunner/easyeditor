@@ -25,11 +25,11 @@ bool ImageProcessOP::OnActive()
 	{
 		sm::rect r = sprite->GetSymbol().GetSize();
 
-		ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
-		LanczosResamplingShader* shader = new LanczosResamplingShader;
-		shader->Load();
+//		ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
+//		LanczosResamplingShader* shader = new LanczosResamplingShader;
+//		shader->Load();
 // 		shader->SetTexelSize(1/r.Width(), 1/r.Height());
-		shader->SetTexelSize(1.0f/4096, 1.0f/4096);
+//		shader->SetTexelSize(1.0f/4096, 1.0f/4096);
 //		shader_mgr->SetSpriteShader(shader);
 	}
 

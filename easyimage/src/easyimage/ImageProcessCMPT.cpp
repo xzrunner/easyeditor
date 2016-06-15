@@ -71,90 +71,90 @@ wxSizer* ImageProcessCMPT::InitLayout()
 
 void ImageProcessCMPT::OnNormal(wxCommandEvent& event)
 {
-	ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
-	ee::SpriteShader* shader = new ee::SpriteShader;
-	try {
-		shader->Load();
-	} catch (ee::Exception& e) {
-		ee::ExceptionDlg dlg(m_parent, e);
-		dlg.ShowModal();
-	}
-//	shader_mgr->SetSpriteShader(shader);
-	ee::SetCanvasDirtySJ::Instance()->SetDirty();
+// 	ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
+// 	ee::SpriteShader* shader = new ee::SpriteShader;
+// 	try {
+// 		shader->Load();
+// 	} catch (ee::Exception& e) {
+// 		ee::ExceptionDlg dlg(m_parent, e);
+// 		dlg.ShowModal();
+// 	}
+// 	shader_mgr->SetSpriteShader(shader);
+// 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void ImageProcessCMPT::OnEdgeDetection(wxCommandEvent& event)
 {
-	ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
-	m_edge_shader = new EdgeDetectionShader;
-	try {
-		m_edge_shader->Load();
-	} catch (ee::Exception& e) {
-		ee::ExceptionDlg dlg(m_parent, e);
-		dlg.ShowModal();
-	}
-//	shader_mgr->SetSpriteShader(m_edge_shader);
-	ee::SetCanvasDirtySJ::Instance()->SetDirty();
+// 	ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
+// 	m_edge_shader = new EdgeDetectionShader;
+// 	try {
+// 		m_edge_shader->Load();
+// 	} catch (ee::Exception& e) {
+// 		ee::ExceptionDlg dlg(m_parent, e);
+// 		dlg.ShowModal();
+// 	}
+// 	shader_mgr->SetSpriteShader(m_edge_shader);
+// 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void ImageProcessCMPT::OnSetEdgeBlend(wxScrollEvent& event)
 {
-	if (m_edge_shader) {
-		ee::ShaderMgr::Instance()->SetShader(ee::ShaderMgr::SPRITE);
-		m_edge_shader->SetBlend(event.GetInt() * 0.01f);
-		ee::SetCanvasDirtySJ::Instance()->SetDirty();
-	}
+// 	if (m_edge_shader) {
+// 		ee::ShaderMgr::Instance()->SetShader(ee::ShaderMgr::SPRITE);
+// 		m_edge_shader->SetBlend(event.GetInt() * 0.01f);
+// 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
+// 	}
 }
 
 void ImageProcessCMPT::OnRelief(wxCommandEvent& event)
 {
-	ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
-	ReliefShader* shader = new ReliefShader;
-	try {
-		shader->Load();
-	} catch (ee::Exception& e) {
-		ee::ExceptionDlg dlg(m_parent, e);
-		dlg.ShowModal();
-	}
-//	shader_mgr->SetSpriteShader(shader);
-	ee::SetCanvasDirtySJ::Instance()->SetDirty();
+// 	ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
+// 	ReliefShader* shader = new ReliefShader;
+// 	try {
+// 		shader->Load();
+// 	} catch (ee::Exception& e) {
+// 		ee::ExceptionDlg dlg(m_parent, e);
+// 		dlg.ShowModal();
+// 	}
+// 	shader_mgr->SetSpriteShader(shader);
+// 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void ImageProcessCMPT::OnOutline(wxCommandEvent& event)
 {
-	ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
-	OutlineShader* shader = new OutlineShader;
-	try {
-		shader->Load();
-	} catch (ee::Exception& e) {
-		ee::ExceptionDlg dlg(m_parent, e);
-		dlg.ShowModal();
-	}
-//	shader_mgr->SetSpriteShader(shader);
-	ee::SetCanvasDirtySJ::Instance()->SetDirty();
+// 	ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
+// 	OutlineShader* shader = new OutlineShader;
+// 	try {
+// 		shader->Load();
+// 	} catch (ee::Exception& e) {
+// 		ee::ExceptionDlg dlg(m_parent, e);
+// 		dlg.ShowModal();
+// 	}
+// 	shader_mgr->SetSpriteShader(shader);
+// 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void ImageProcessCMPT::OnBlur(wxCommandEvent& event)
 {
-	ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
-	m_blur_shader = new BlurShader;
-	try {
-		m_blur_shader->Load();
-	} catch (ee::Exception& e) {
-		ee::ExceptionDlg dlg(m_parent, e);
-		dlg.ShowModal();
-	}
-//	shader_mgr->SetSpriteShader(m_blur_shader);
-	ee::SetCanvasDirtySJ::Instance()->SetDirty();
+// 	ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
+// 	m_blur_shader = new BlurShader;
+// 	try {
+// 		m_blur_shader->Load();
+// 	} catch (ee::Exception& e) {
+// 		ee::ExceptionDlg dlg(m_parent, e);
+// 		dlg.ShowModal();
+// 	}
+// 	shader_mgr->SetSpriteShader(m_blur_shader);
+// 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void ImageProcessCMPT::OnSetBlurRadius(wxScrollEvent& event)
 {
-	if (m_blur_shader) {
-		ee::ShaderMgr::Instance()->SetShader(ee::ShaderMgr::SPRITE);
-		m_blur_shader->SetRadius(event.GetInt() * 0.1f);
-		ee::SetCanvasDirtySJ::Instance()->SetDirty();
-	}
+// 	if (m_blur_shader) {
+// 		ee::ShaderMgr::Instance()->SetShader(ee::ShaderMgr::SPRITE);
+// 		m_blur_shader->SetRadius(event.GetInt() * 0.1f);
+// 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
+// 	}
 }
 
 }

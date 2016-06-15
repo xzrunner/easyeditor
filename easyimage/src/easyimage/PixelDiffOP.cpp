@@ -4,7 +4,6 @@
 #include <ee/Image.h>
 #include <ee/ImageSymbol.h>
 #include <ee/ImageSprite.h>
-#include <ee/ShaderMgr.h>
 
 namespace eimage
 {
@@ -62,9 +61,9 @@ bool PixelDiffOP::OnActive()
 		return true;
 	}
 
-	ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
-	ee::SpriteShader* shader = new ee::SpriteShader;
-	shader->Load();
+// 	ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
+// 	ee::SpriteShader* shader = new ee::SpriteShader;
+// 	shader->Load();
 //	shader_mgr->SetSpriteShader(shader);
 
 	return false;
