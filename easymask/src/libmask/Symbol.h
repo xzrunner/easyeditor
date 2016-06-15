@@ -23,9 +23,8 @@ public:
 	virtual void Draw(const s2::RenderParams& params, const ee::Sprite* spr = NULL) const;
 	virtual sm::rect GetSize(const ee::Sprite* sprite = NULL) const;
 
-	ee::Sprite* GetSprite(bool is_base) { return is_base ? m_base_spr : m_mask_spr; }
-	const ee::Sprite* GetSprite(bool is_base) const { return is_base ? m_base_spr : m_mask_spr; }
-	void SetSprite(ee::Sprite* spr, bool is_base);
+	const ee::Symbol* GetSymbol(bool is_base) const { return is_base ? m_base : m_mask; }
+	void SetSymbol(const ee::Symbol* sym, bool is_base);
 
 	static ee::Symbol* Create() { return new Symbol(); }
 
@@ -40,7 +39,7 @@ private:
 	void DrawMashFromFbo(const sm::mat4& mt) const;
 
 private:
-	ee::Sprite *m_base_spr, *m_mask_spr;
+	const ee::Symbol *m_base, *m_mask;
 
 	sm::rect m_bounding;
 

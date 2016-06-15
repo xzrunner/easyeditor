@@ -49,17 +49,7 @@ Sprite* Sprite::Clone() const
 
 bool Sprite::Update(float dt, const sm::mat4& mat)
 {
-	bool ret = false;
-	sm::mat4 mt = GetTransMatrix() * mat;
-	ee::Sprite* base = m_symbol->GetSprite(true);
-	if (base && base->Update(dt, mt)) {
-		ret = true;
-	}
-	ee::Sprite* mask = m_symbol->GetSprite(false);
-	if (mask && mask->Update(dt, mt)) {
-		ret = true;
-	}
-	return ret;
+	return true;
 }
 
 const Symbol& Sprite::GetSymbol() const

@@ -7,6 +7,7 @@
 #include <ee/DrawSpritesVisitor.h>
 #include <ee/Config.h>
 #include <ee/EE_DTex.h>
+#include <ee/SpriteRenderer.h>
 
 #include <sprite2/RenderParams.h>
 
@@ -22,12 +23,18 @@ StageCanvas::StageCanvas(StagePanel* stage)
 
 void StageCanvas::OnDrawSprites() const
 {
+	Symbol* sym = m_stage->GetSymbol();
 	if (m_mask_render) {
-		m_stage->GetSymbol()->Draw(s2::RenderParams(), NULL);
+		sym->Draw(s2::RenderParams(), NULL);
 	} else {
-	 	sm::rect sr = m_screen.GetRegion();
-	 	float scale = ee::CameraMgr::Instance()->GetCamera()->GetScale();
-	 	m_stage->TraverseSprites(ee::DrawSpritesVisitor(sr, scale), ee::DT_VISIBLE);
+		const ee::Symbol *base = sym->GetSymbol(true),
+			*mask = sym->GetSymbol(false);
+		if (base) {
+			ee::SpriteRenderer::Draw(base);
+		}
+		if (mask) {
+			ee::SpriteRenderer::Draw(mask);
+		}
 	}
 
 	m_stage->DrawEditOP();

@@ -20,58 +20,46 @@ namespace emask
 {
 
 Symbol::Symbol()
-	: m_base_spr(NULL)
-	, m_mask_spr(NULL)
+	: m_base(NULL)
+	, m_mask(NULL)
 {
 }
 
 Symbol::~Symbol()
 {
-	if (m_base_spr) {
-		m_base_spr->Release();
+	if (m_base) {
+		m_base->Release();
 	}
-	if (m_mask_spr) {
-		m_mask_spr->Release();
+	if (m_mask) {
+		m_mask->Release();
 	}
 }
 
 void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 {
-	if (m_base_spr && m_mask_spr) {
+	if (m_base && m_mask) {
 		Draw(params.mt);
 	} else {
-		if (m_base_spr) {
-			ee::SpriteRenderer::Draw(m_base_spr, params);
-		} else if (m_mask_spr) {
-			ee::SpriteRenderer::Draw(m_mask_spr, params);
+		if (m_base) {
+			ee::SpriteRenderer::Draw(m_base, params);
+		} else if (m_mask) {
+			ee::SpriteRenderer::Draw(m_mask, params);
 		}		
 	}
 }
 
 sm::rect Symbol::GetSize(const ee::Sprite* sprite) const
 {
-	return m_bounding;
+	if (m_mask) {
+		return m_mask->GetSize();
+	} else {
+		return sm::rect(sm::vec2(0, 0), 100, 100);
+	}
 }
 
-void Symbol::SetSprite(ee::Sprite* spr, bool is_base) 
+void Symbol::SetSymbol(const ee::Symbol* sym, bool is_base)
 {
-	ee::obj_assign(is_base ? m_base_spr : m_mask_spr, spr);
-
-	m_bounding.MakeEmpty();
-	if (m_base_spr) {
-		std::vector<sm::vec2> vertices;
-		m_base_spr->GetBounding()->GetBoundPos(vertices);
-		for (int j = 0, m = vertices.size(); j < m; ++j) {
-			m_bounding.Combine(vertices[j]);
-		}
-	}
-	if (m_mask_spr) {
-		std::vector<sm::vec2> vertices;
-		m_mask_spr->GetBounding()->GetBoundPos(vertices);
-		for (int j = 0, m = vertices.size(); j < m; ++j) {
-			m_bounding.Combine(vertices[j]);
-		}
-	}
+	ee::obj_assign(is_base ? m_base: m_mask, sym);
 }
 
 void Symbol::LoadResources()
@@ -116,10 +104,8 @@ void Symbol::DrawBaseToFbo0() const
 	sl::BlendShader* shader = static_cast<sl::BlendShader*>(mgr->GetShader(sl::SPRITE2));
 
 	s2::RenderParams params;
-	const sm::vec2& offset = m_base_spr->GetPosition();
-	params.mt.Translate(-offset.x, -offset.y, 0);
 	params.set_shader = false;
-	ee::SpriteRenderer::Draw(m_base_spr, params);
+	ee::SpriteRenderer::Draw(m_base, params);
 
 	shader->Commit();
 
@@ -135,10 +121,8 @@ void Symbol::DrawMaskToFbo1() const
 	sl::BlendShader* shader = static_cast<sl::BlendShader*>(mgr->GetShader(sl::SPRITE2));
 
 	s2::RenderParams params;
-	const sm::vec2& offset = m_base_spr->GetPosition();
-	params.mt.Translate(-offset.x, -offset.y, 0);
 	params.set_shader = false;
-	ee::SpriteRenderer::Draw(m_mask_spr, params);
+	ee::SpriteRenderer::Draw(m_mask, params);
 
 	shader->Commit();
 
@@ -147,23 +131,17 @@ void Symbol::DrawMaskToFbo1() const
 
 void Symbol::DrawMashFromFbo(const sm::mat4& mt) const
 {
-	sm::mat4 t = m_mask_spr->GetTransMatrix();
-	sm::rect r = m_mask_spr->GetSymbol().GetSize();
-
 	sm::vec2 vertices[4];
+	sm::rect r = m_mask->GetSize();
 	vertices[0] = sm::vec2(r.xmin, r.ymin);
 	vertices[1] = sm::vec2(r.xmin, r.ymax);
 	vertices[2] = sm::vec2(r.xmax, r.ymax);
 	vertices[3] = sm::vec2(r.xmax, r.ymin);
-	for (int i = 0; i < 4; ++i) {
-		vertices[i] = t * vertices[i];
-	}
 
 	sm::vec2 texcoords[4];
-	const sm::vec2& offset = m_base_spr->GetPosition();
 	int edge0 = dtexf_t0_get_texture_size();
 	for (int i = 0; i < 4; ++i) {
-		texcoords[i] = vertices[i] - offset;
+		texcoords[i] = vertices[i];
 		texcoords[i].x = texcoords[i].x / edge0 + 0.5f;
 		texcoords[i].y = texcoords[i].y / edge0 + 0.5f;
 	}
@@ -171,7 +149,7 @@ void Symbol::DrawMashFromFbo(const sm::mat4& mt) const
 	sm::vec2 texcoords_mask[4];
 	int edge1 = dtexf_t1_get_texture_size();
 	for (int i = 0; i < 4; ++i) {
-		texcoords_mask[i] = vertices[i] - offset;
+		texcoords_mask[i] = vertices[i];
 		texcoords_mask[i].x = texcoords_mask[i].x / edge1 + 0.5f;
 		texcoords_mask[i].y = texcoords_mask[i].y / edge1 + 0.5f;
 	}

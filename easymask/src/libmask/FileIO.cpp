@@ -20,13 +20,13 @@ void FileIO::Store(const char* filepath, const Symbol* sym)
 
 	value["name"] = sym->name;
 
-	const ee::Sprite *base = sym->GetSprite(true),
-		             *mask = sym->GetSprite(false);
+	const ee::Symbol *base = sym->GetSymbol(true),
+		             *mask = sym->GetSymbol(false);
 	if (base) {
-		value["base"] = Store(dir, base);
+		value["base"]["filepath"] = ee::FileHelper::GetRelativePath(dir, base->GetFilepath());
 	}
 	if (mask) {
-		value["mask"] = Store(dir, mask);
+		value["mask"]["filepath"] = ee::FileHelper::GetRelativePath(dir, mask->GetFilepath());
 	}
 
 	Json::StyledStreamWriter writer;
@@ -52,33 +52,19 @@ void FileIO::Load(const char* filepath, Symbol* sym)
 	sym->name = value["name"].asString();
 
 	if (!value["base"].isNull()) {
-		ee::Sprite* spr = Load(dir, value["base"]);
-		sym->SetSprite(spr, true);
+		std::string filepath = ee::FileHelper::GetAbsolutePath(dir, value["base"]["filepath"].asString());
+		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		static_cast<Symbol*>(sym)->SetSymbol(sym, true);
+		sym->Release();
 	}
 	if (!value["mask"].isNull()) {
-		ee::Sprite* spr = Load(dir, value["mask"]);
-		sym->SetSprite(spr, false);
+		std::string filepath = ee::FileHelper::GetAbsolutePath(dir, value["mask"]["filepath"].asString());
+		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		static_cast<Symbol*>(sym)->SetSymbol(sym, false);
+		sym->Release();
 	}
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
-}
-
-Json::Value FileIO::Store(const std::string& dir, const ee::Sprite* spr)
-{
-	Json::Value val;
-	val["filepath"] = ee::FileHelper::GetRelativePath(dir, spr->GetSymbol().GetFilepath());
-	spr->Store(val, dir);
-	return val;
-}
-
-ee::Sprite* FileIO::Load(const std::string& dir, const Json::Value& val)
-{
-	std::string filepath = ee::FileHelper::GetAbsolutePath(dir, val["filepath"].asString());
-	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-	ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
-	spr->Load(val, dir);
-	sym->Release();
-	return spr;
 }
 
 }

@@ -16,8 +16,7 @@ class LibraryPanel;
 class StagePanel : public ee::EditPanel, public ee::MultiSpritesImpl
 {
 public:
-	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		ee::PropertySettingPanel* property, LibraryPanel* library);
+	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, LibraryPanel* library);
 	virtual ~StagePanel();
 
 	//
@@ -29,7 +28,7 @@ public:
 	// ee::MultiSpritesImpl interface
 	//
 	virtual void TraverseSprites(ee::Visitor& visitor, 
-		ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
+		ee::DataTraverseType type = ee::DT_ALL, bool order = true) const {}
 
 	Symbol* GetSymbol() { return m_sym; }
 	void SetSymbol(Symbol* symbol);

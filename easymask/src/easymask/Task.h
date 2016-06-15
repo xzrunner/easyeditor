@@ -31,19 +31,15 @@ public:
 
 private:
 	void InitLayout();
-	wxWindow* InitLayoutLeft(wxWindow* parent);
-	wxWindow* InitLayoutCenter(wxWindow* parent);
-	wxWindow* InitLayoutRight(wxWindow* parent);
 
 private:
 	wxWindow* m_root;
 
 	wxFrame* m_parent;
 
-	LibraryPanel*				m_library;
-	ee::PropertySettingPanel*	m_property;
+	LibraryPanel*	m_library;
  	StagePanel*		m_stage;
-	ToolbarPanel*		m_toolbar;
+	ToolbarPanel*	m_toolbar;
 
 }; // Task
 
