@@ -53,15 +53,15 @@ void FileIO::Load(const char* filepath, Symbol* sym)
 
 	if (!value["base"].isNull()) {
 		std::string filepath = ee::FileHelper::GetAbsolutePath(dir, value["base"]["filepath"].asString());
-		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-		static_cast<Symbol*>(sym)->SetSymbol(sym, true);
-		sym->Release();
+		ee::Symbol* base = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		static_cast<Symbol*>(sym)->SetSymbol(base, true);
+		base->Release();
 	}
 	if (!value["mask"].isNull()) {
 		std::string filepath = ee::FileHelper::GetAbsolutePath(dir, value["mask"]["filepath"].asString());
-		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-		static_cast<Symbol*>(sym)->SetSymbol(sym, false);
-		sym->Release();
+		ee::Symbol* mask = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		static_cast<Symbol*>(sym)->SetSymbol(mask, false);
+		mask->Release();
 	}
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
