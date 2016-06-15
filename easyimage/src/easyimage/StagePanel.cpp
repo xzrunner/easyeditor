@@ -8,6 +8,8 @@
 #include <ee/LibraryPanel.h>
 #include <ee/SpriteFactory.h>
 #include <ee/panel_msg.h>
+#include <ee/ImageSymbol.h>
+#include <ee/Image.h>
 
 namespace eimage
 {
@@ -45,11 +47,12 @@ void StagePanel::SetImage(const std::string& filepath)
 
 void StagePanel::SetImage(ee::Symbol* symbol)
 {
+	ee::ImageSymbol* img_sym = static_cast<ee::ImageSymbol*>(symbol);
+	sm::vec2 offset = - img_sym->GetImage()->GetOffset();
+
 	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-	sm::vec2 off;
-	off.x = sprite->GetSymbol().GetSize().Width() * 0.5f;
-	off.y = sprite->GetSymbol().GetSize().Height() * 0.5f;
-	sprite->Translate(off);
+	offset += sprite->GetSymbol().GetSize().Size() * 0.5f;
+	sprite->Translate(offset);
 	m_image = sprite;
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
