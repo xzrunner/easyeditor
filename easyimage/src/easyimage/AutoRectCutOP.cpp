@@ -76,7 +76,7 @@ bool AutoRectCutOP::OnMouseLeftDClick(int x, int y)
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	sm::rect* r = m_rects.QueryRect(pos);
 	if (r) {
-		m_rects.Insert(sm::rect(*r), true);
+		m_rects.Insert(sm::rect(*r));
 		m_last_pos = pos;
 		m_selected = r;
 	}

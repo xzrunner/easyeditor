@@ -61,16 +61,8 @@ void RectMgr::Draw() const
 	}
 }
 
-void RectMgr::Insert(const sm::rect& rect, bool force)
+void RectMgr::Insert(const sm::rect& rect)
 {
-	if (!force) {
-		for (int i = 0, n = m_rects.size(); i < n; ++i) {
-			if (ee::Math2D::IsRectIntersectRect(*m_rects[i], rect)) {
-				return;
-			}
-		}
-	}
-
 	m_rects.push_back(new sm::rect(rect));
 }
 
@@ -90,6 +82,7 @@ bool RectMgr::Remove(const sm::vec2& pos)
 sm::vec2 RectMgr::QueryNearestAxis(const sm::vec2& pos, const sm::rect* except) const
 {
 	sm::vec2 ret;
+	ret.MakeInvalid();
 
 	float minx = FLT_MAX,
 		  miny = FLT_MAX;
@@ -201,13 +194,14 @@ bool RectMgr::MoveNode(const Node& node, const sm::vec2& to)
 		ptr_y = &rect.ymax;
 	}
 
-	if (ptr_x && ptr_y)
-	{
+	if (ptr_x) {
 		*ptr_x = to.x;
-		*ptr_y = to.y;
 		if (rect.xmin > rect.xmax) {
 			std::swap(rect.xmin, rect.xmax);
 		}
+	}
+	if (ptr_y) {
+		*ptr_y = to.y;
 		if (rect.ymin > rect.ymax) {
 			std::swap(rect.ymin, rect.ymax);
 		}

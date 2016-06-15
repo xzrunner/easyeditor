@@ -32,7 +32,7 @@ public:
 
 	void Draw() const;
 
-	void Insert(const sm::rect& rect, bool force = false);
+	void Insert(const sm::rect& rect);
 	bool Remove(const sm::vec2& pos);
 
 	sm::vec2 QueryNearestAxis(const sm::vec2& pos, const sm::rect* except = NULL) const;

@@ -55,10 +55,10 @@ bool RectCutOP::OnMouseLeftUp(int x, int y)
 	// fix rect
 	if (m_rect_selected)
 	{
-		m_rect_selected->xmin = ceil(m_rect_selected->xmin);
-		m_rect_selected->xmax = ceil(m_rect_selected->xmax);
-		m_rect_selected->ymin = ceil(m_rect_selected->ymin);
-		m_rect_selected->ymax = ceil(m_rect_selected->ymax);
+		m_rect_selected->xmin = std::floor(m_rect_selected->xmin + 0.5f);
+		m_rect_selected->xmax = std::floor(m_rect_selected->xmax + 0.5f);
+		m_rect_selected->ymin = std::floor(m_rect_selected->ymin + 0.5f);
+		m_rect_selected->ymax = std::floor(m_rect_selected->ymax + 0.5f);
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
@@ -130,6 +130,7 @@ bool RectCutOP::OnMouseMove(int x, int y)
 	m_curr_pos = m_stage->TransPosScrToProj(x, y);
 	m_rect_selected = m_rects.QueryRect(m_curr_pos);
 	m_captured = m_rects.QueryNearestAxis(m_curr_pos);
+
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	return false;
@@ -201,7 +202,7 @@ bool RectCutOP::OnDraw() const
 	if (m_node_selected.rect) {
 		ee::RVG::Color(ee::LIGHT_GREEN);
 		ee::RVG::Rect(sm::vec2(m_node_selected.rect->xmin, m_node_selected.rect->ymin), 
-			sm::vec2(m_node_selected.rect->ymin, m_node_selected.rect->ymax), true);
+			sm::vec2(m_node_selected.rect->xmax, m_node_selected.rect->ymax), true);
 	}
 
 	return false;
@@ -240,7 +241,6 @@ void RectCutOP::DrawCaptureLine() const
 	if (!m_curr_pos.IsValid() || !m_captured.IsValid()) return;
 
 	const float EDGE = 4096;
-//	if (m_captured.x != ee::FLT_INVALID)
 	if (m_captured.x != FLT_MAX)
 	{
 		sm::vec2 p0(m_captured.x, -EDGE);
@@ -249,7 +249,6 @@ void RectCutOP::DrawCaptureLine() const
 		ee::RVG::DashLine(p0, p1);
 	}
 
-//	if (m_captured.y != ee::FLT_INVALID)
 	if (m_captured.y != FLT_MAX)
 	{
 		sm::vec2 p0(-EDGE, m_captured.y);
@@ -261,25 +260,9 @@ void RectCutOP::DrawCaptureLine() const
 
 void RectCutOP::FixedPos(sm::vec2& pos) const
 {
-	const float RADIUS = 5;
-	if (fabs(pos.x - m_captured.x) > RADIUS || 
-		fabs(pos.y - m_captured.y) > RADIUS) {
-		return;
-	}
-	
-	// by capture
-//	if (m_captured.x != ee::FLT_INVALID) {
-	if (m_captured.x != FLT_MAX) {
-		pos.x = m_captured.x;
-	}
-//	if (m_captured.y != ee::FLT_INVALID) {
-	if (m_captured.y != FLT_MAX) {
-		pos.y = m_captured.y;
-	}
-
 	// to int
-	pos.x = std::ceil(pos.x);
-	pos.y = std::ceil(pos.y);
+	pos.x = std::floor(pos.x + 0.5f);
+	pos.y = std::floor(pos.y + 0.5f);
 
 	// to image
 	sm::vec2 sz = m_stage->GetImage()->GetSymbol().GetSize().Size();
@@ -295,6 +278,19 @@ void RectCutOP::FixedPos(sm::vec2& pos) const
 	if (pos.y > sz.y) {
 		pos.y = sz.y;
 	}
+
+	// to capture
+	const float RADIUS = 5;
+	if (fabs(pos.x - m_captured.x) <= RADIUS &&
+		fabs(pos.y - m_captured.y) <= RADIUS) 
+	{
+		if (m_captured.x != FLT_MAX) {
+			pos.x = m_captured.x;
+		}
+		if (m_captured.y != FLT_MAX) {
+			pos.y = m_captured.y;
+		}
+	}	
 }
 
 }

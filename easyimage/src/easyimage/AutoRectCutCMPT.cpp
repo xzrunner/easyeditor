@@ -104,7 +104,7 @@ void AutoRectCutCMPT::OnCreateRects(wxCommandEvent& event)
 			y = result[i].y,
 			w = result[i].w,
 			h = result[i].h;
-		rects.Insert(sm::rect(sm::vec2(x, y), sm::vec2(x+w, y+h)), true);
+		rects.Insert(sm::rect(sm::vec2(x, y), sm::vec2(x+w, y+h)));
 	}
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
