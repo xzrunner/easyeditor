@@ -42,7 +42,6 @@ void LibraryScriptsPage::OnAddPress(wxCommandEvent& event)
 			try {
 				std::string filepath = filenames[i].ToStdString();
 				Symbol* symbol = SymbolMgr::Instance()->FetchSymbol(filepath);
-				symbol->RefreshThumbnail(filepath);
 				m_list->Insert(symbol);
 				symbol->Release();
 			} catch (Exception& e) {
