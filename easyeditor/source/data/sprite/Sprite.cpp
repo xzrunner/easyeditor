@@ -313,15 +313,17 @@ void Sprite::SetBounding(BoundingBox* bb)
 	m_bounding = bb;
 }
 
-void Sprite::GetTransMatrix(sm::mat4& mt) const
+sm::mat4 Sprite::GetTransMatrix() const
 {
 	assert(m_core);
 	const float x_scale = m_mirror.x ? -m_core->GetScale().x : m_core->GetScale().x,
 		y_scale = m_mirror.y ? -m_core->GetScale().y : m_core->GetScale().y;
 
 	sm::vec2 center = GetCenter();
+	sm::mat4 mt;
 	mt.SetTransformation(center.x, center.y, m_core->GetAngle(), 
 		x_scale, y_scale, 0, 0, m_core->GetShear().x, m_core->GetShear().y);
+	return mt;
 }
 
 sm::mat4 Sprite::GetTransInvMatrix() const

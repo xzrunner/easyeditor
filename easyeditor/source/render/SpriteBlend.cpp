@@ -74,10 +74,7 @@ void SpriteBlend::DrawSprToTmp(const Sprite* spr, const sm::mat4& mt)
 
 void SpriteBlend::DrawTmpToScreen(const Sprite* sprite, const sm::mat4& mt)
 {
-	sm::mat4 t;
-	sprite->GetTransMatrix(t);
-	t = t * mt;
-
+	sm::mat4 t = sprite->GetTransMatrix() * mt;
 	sm::rect r = sprite->GetSymbol().GetSize();
 
 	sm::vec2 vertices[4];

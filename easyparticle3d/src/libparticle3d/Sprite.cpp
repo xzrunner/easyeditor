@@ -102,9 +102,7 @@ bool Sprite::Update(float dt, const sm::mat4& mat)
 		}
 
 		float mt[6];
-		sm::mat4 inner_mat;
-		GetTransMatrix(inner_mat);
-		inner_mat = inner_mat * mat;
+		sm::mat4 inner_mat = GetTransMatrix() * mat;
 		mt[0] = inner_mat.x[0];
 		mt[1] = inner_mat.x[1];
 		mt[2] = inner_mat.x[4];

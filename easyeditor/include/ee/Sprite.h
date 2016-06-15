@@ -90,7 +90,7 @@ public:
 	BoundingBox* GetBounding() const { return m_bounding; }
 	void SetBounding(BoundingBox* bb);
 
-	void GetTransMatrix(sm::mat4& mt) const;
+	sm::mat4 GetTransMatrix() const;
 	sm::mat4 GetTransInvMatrix() const;
 
 	/************************************************************************/

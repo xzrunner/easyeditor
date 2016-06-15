@@ -93,7 +93,7 @@ static void _cs_draw(struct dtex_cs_rect* r, void* ud)
 		const Sprite* spr = sprites[i];
 
 		s2::RenderParams params;
-		spr->GetTransMatrix(params.mt);
+		params.mt = spr->GetTransMatrix();
 		spr->GetSymbol().Draw(params);
 	}
 

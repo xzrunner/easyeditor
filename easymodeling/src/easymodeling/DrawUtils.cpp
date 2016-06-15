@@ -10,9 +10,7 @@ void DrawUtils::DrawBody(Body* body, DrawType dType)
 	s2::Color cFace, cEdge;
 	GetBodyColor(body->m_type, dType, cFace, cEdge);
 
-	sm::mat4 mt;
-	body->m_sprite->GetTransMatrix(mt);
-	body->Draw(mt, cFace, cEdge);
+	body->Draw(body->m_sprite->GetTransMatrix(), cFace, cEdge);
 }
 
 void DrawUtils::DrawFixture(Fixture* fixture, 
@@ -24,9 +22,7 @@ void DrawUtils::DrawFixture(Fixture* fixture,
 	else
 		GetBodyColor(fixture->m_body->m_type, dType, cFace, cEdge);
 
-	sm::mat4 mt;
-	fixture->m_body->m_sprite->GetTransMatrix(mt);
-	fixture->Draw(mt, cFace, cEdge);
+	fixture->Draw(fixture->m_body->m_sprite->GetTransMatrix(), cFace, cEdge);
 }
 
 void DrawUtils::GetBodyColor(Body::Type type, DrawType dType,

@@ -147,9 +147,7 @@ void Symbol::DrawMaskToFbo1() const
 
 void Symbol::DrawMashFromFbo(const sm::mat4& mt) const
 {
-	sm::mat4 t;
-	m_mask_spr->GetTransMatrix(t);
-
+	sm::mat4 t = m_mask_spr->GetTransMatrix();
 	sm::rect r = m_mask_spr->GetSymbol().GetSize();
 
 	sm::vec2 vertices[4];

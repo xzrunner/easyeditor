@@ -39,8 +39,7 @@ void DrawSelectedSpriteVisitor::Visit(Object* object, bool& next)
 			float hw = img->GetOriginWidth() * 0.5f,
 				hh = img->GetOriginHeight() * 0.5f;
 
-			sm::mat4 mt;
-			s->GetTransMatrix(mt);
+			sm::mat4 mt = s->GetTransMatrix();
 			sm::vec2 min(-hw, -hh), max(hw, hh);
 			min = ee::Math2D::TransVector(min, mt);
 			max = ee::Math2D::TransVector(max, mt);

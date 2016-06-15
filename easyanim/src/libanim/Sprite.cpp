@@ -51,10 +51,7 @@ Sprite* Sprite::Clone() const
 
 bool Sprite::Update(float dt, const sm::mat4& mat) 
 {
-	sm::mat4 mt;
-	GetTransMatrix(mt);
-	mt = mt * mat;
-
+	sm::mat4 mt = GetTransMatrix() * mat;
 	std::vector<ee::Sprite*> sprites;
 	Utility::GetCurrSprites(m_symbol, m_symbol->GetCurrFrame(), sprites);
 	for (int i = 0, n = sprites.size(); i < n; ++i) {

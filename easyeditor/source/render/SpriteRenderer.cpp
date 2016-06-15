@@ -115,11 +115,7 @@ void SpriteRenderer::InvalidRect(const Sprite* sprite, const sm::mat4& mt)
 		return;
 	}
 
-	sm::mat4 t;
-	sprite->GetTransMatrix(t);
-	t = t * mt;
-	
-	sprite->GetSymbol().InvalidRect(t);
+	sprite->GetSymbol().InvalidRect(sprite->GetTransMatrix() * mt);
 }
 
 void SpriteRenderer::Draw(const Symbol* symbol, 
@@ -154,23 +150,11 @@ void SpriteRenderer::Draw(const Symbol* symbol,
 void SpriteRenderer::DrawImpl(const Sprite* spr, 
 							  const s2::RenderParams& params)
 {
-	sm::mat4 t;
-	spr->GetTransMatrix(t);
-	t = t * params.mt;
+	s2::RenderParams trans = params;
+	trans.mt = spr->GetTransMatrix() * params.mt;
+	trans.color = spr->GetColor() * params.color;
 
-	s2::RenderColor col_new;
-
-	col_new.mul	 = spr->GetColor().mul * params.color.mul;
-	col_new.add	 = spr->GetColor().add + params.color.add;
-	col_new.rmap = spr->GetColor().rmap.MapMul(params.color.rmap, params.color.gmap, params.color.bmap);
-	col_new.gmap = spr->GetColor().gmap.MapMul(params.color.rmap, params.color.gmap, params.color.bmap);
-	col_new.bmap = spr->GetColor().bmap.MapMul(params.color.rmap, params.color.gmap, params.color.bmap);
-
-	s2::RenderParams _trans = params;
-	_trans.mt = t;
-	_trans.color = col_new;
-
-	spr->GetSymbol().Draw(_trans, spr);
+	spr->GetSymbol().Draw(trans, spr);
 
 	if (spr->IsAnchor() && Config::Instance()->GetSettings().draw_anchor) 
 	{

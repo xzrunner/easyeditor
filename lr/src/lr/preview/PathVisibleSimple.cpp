@@ -99,8 +99,7 @@ void PathVisibleSimple::InsertBoundary(const ee::Sprite* spr)
 	// fix
 	std::vector<sm::vec2> fixed;
 	ee::Math2D::RemoveDuplicatePoints(bound, fixed);
-	sm::mat4 mat;
-	spr->GetTransMatrix(mat);
+	sm::mat4 mat = spr->GetTransMatrix();
 	for (int i = 0; i < fixed.size(); ++i) {
 		fixed[i] = ee::Math2D::TransVector(fixed[i], mat);
 	}
