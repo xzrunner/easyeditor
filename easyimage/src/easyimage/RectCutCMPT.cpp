@@ -88,6 +88,12 @@ wxSizer* RectCutCMPT::InitLayout()
 	sizer->Add(InitDataOutputLayout());
 	sizer->AddSpacer(10);
 	sizer->Add(InitAddRectLayout());
+	sizer->AddSpacer(10);
+	{
+		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Auto"));
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(RectCutCMPT::OnAutoCreateRects));
+		sizer->Add(btn);
+	}
 	return sizer;
 }
 
@@ -276,6 +282,48 @@ void RectCutCMPT::OnAddRect(wxCommandEvent& event)
 	op->GetRectMgr().Insert(sm::rect(sm::vec2(0, 0), sm::vec2((float)width, (float)height)));
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
+}
+
+void RectCutCMPT::OnAutoCreateRects(wxCommandEvent& event)
+{
+	const ee::Sprite* sprite = m_stage->GetImage();
+	const ee::ImageSprite* img_sprite 
+		= dynamic_cast<const ee::ImageSprite*>(sprite);
+	assert(img_sprite);
+	const ee::Image* img = img_sprite->GetSymbol().GetImage();
+
+	RectMgr& rects = static_cast<RectCutOP*>(m_editop)->GetRectMgr();
+
+	std::vector<Rect> pre_rects;
+	const std::vector<sm::rect*>& _rects = rects.GetAllRect();
+	for (int i = 0, n = _rects.size(); i < n; ++i) {
+		const sm::rect& src = *_rects[i];
+		Rect dst;
+		dst.x = src.xmin;
+		dst.y = src.ymin;
+		dst.w = src.xmax - src.xmin;
+		dst.h = src.ymax - src.ymin;
+		dst.is_const = true;
+		pre_rects.push_back(dst);
+	}
+	rects.Clear();
+
+	RegularRectCut cut(*img, pre_rects);
+	cut.AutoCut();
+
+	const std::vector<Rect>& result = cut.GetResult();
+	for (int i = 0, n = result.size(); i < n; ++i) {
+		int x = result[i].x,
+			y = result[i].y,
+			w = result[i].w,
+			h = result[i].h;
+		rects.Insert(sm::rect(sm::vec2(x, y), sm::vec2(x+w, y+h)));
+	}
+
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
+
+	std::string msg = ee::StringHelper::Format("Left: %d, Used: %d", cut.GetLeftArea(), cut.GetUseArea());
+	wxMessageBox(msg, wxT("Statics"), wxOK | wxICON_INFORMATION, this);
 }
 
 }

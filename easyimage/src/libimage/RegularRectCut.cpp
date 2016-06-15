@@ -23,9 +23,22 @@ static const int TRY_MIN_LIMIT = 2;
 
 RegularRectCut::RegularRectCut(const ee::Image& image)
 {
-	LoadPixels(image.GetPixelData(), image.GetOriginWidth(), image.GetOriginHeight());
+	LoadPixels(image.GetPixelData(), image.GetClippedWidth(), image.GetClippedHeight());
 
 	m_area_array = new PixelAreaLUT(m_pixels, m_width, m_height, true);
+}
+
+RegularRectCut::RegularRectCut(const ee::Image& image, const std::vector<Rect>& pre_rects)
+{
+	LoadPixels(image.GetPixelData(), image.GetClippedWidth(), image.GetClippedHeight());
+
+	m_area_array = new PixelAreaLUT(m_pixels, m_width, m_height, true);
+
+	for (int i = 0, n = pre_rects.size(); i < n; ++i) {
+		const Rect& r = pre_rects[i];
+		m_area_array->CutByRect(r.x, r.y, r.w, r.h, m_left_area);
+		m_result.push_back(r);
+	}
 }
 
 RegularRectCut::RegularRectCut(const uint8_t* pixels, int width, int height)

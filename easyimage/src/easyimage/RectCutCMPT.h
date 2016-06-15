@@ -29,6 +29,7 @@ private:
 	void OnSetJsonPath(wxCommandEvent& event);
 	void OnOutputData(wxCommandEvent& event);
 	void OnAddRect(wxCommandEvent& event);
+	void OnAutoCreateRects(wxCommandEvent& event);
 
 private:
 	StagePanel* m_stage;

@@ -18,6 +18,7 @@ class RegularRectCut
 {
 public:
 	RegularRectCut(const ee::Image& image);
+	RegularRectCut(const ee::Image& image, const std::vector<Rect>& pre_rects);
 	RegularRectCut(const uint8_t* pixels, int width, int height);
 	~RegularRectCut();
 

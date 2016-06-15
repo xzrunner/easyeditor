@@ -8,9 +8,10 @@ struct Rect
 {
 	Rect() {
 		x = y = w = h = 0;
+		is_const = false;
 	}
 	Rect(int x, int y, int w, int h) 
-		: x(x), y(y), w(w), h(h) {}
+		: x(x), y(y), w(w), h(h), is_const(false) {}
 
 	bool operator != (const Rect& r) const {
 // 		return r.x != x || r.y != y 
@@ -24,6 +25,8 @@ struct Rect
 
 	int x, y;
 	int w, h;
+
+	bool is_const;
 };
 
 }

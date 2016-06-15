@@ -10,9 +10,13 @@ PixelUncoveredLUT::PixelUncoveredLUT(int width, int height)
 	, m_height(height)
 {
 	int sz = m_width * m_height;
+
 	m_covered_count = new int[sz];
 	m_empty_area = new int[sz];
 	m_multi_area = new int[sz];
+
+	m_const_count = new int[sz];
+	m_const_area = new int[sz];
 }
 
 PixelUncoveredLUT::~PixelUncoveredLUT()
@@ -20,6 +24,9 @@ PixelUncoveredLUT::~PixelUncoveredLUT()
 	delete[] m_covered_count;
 	delete[] m_empty_area;
 	delete[] m_multi_area;
+
+	delete[] m_const_count;
+	delete[] m_const_area;
 }
 
 int PixelUncoveredLUT::GetUncoveredArea(int x, int y, int w, int h) const
@@ -30,6 +37,11 @@ int PixelUncoveredLUT::GetUncoveredArea(int x, int y, int w, int h) const
 int PixelUncoveredLUT::GetMultiArea(int x, int y, int w, int h) const
 {
 	return GetArea(m_multi_area, x, y, w, h);	
+}
+
+bool PixelUncoveredLUT::IntersectConstArea(int x, int y, int w, int h) const
+{
+	return GetArea(m_const_area, x, y, w, h) != 0;
 }
 
 void PixelUncoveredLUT::LoadRects(const std::vector<Rect>& rects)
@@ -77,6 +89,40 @@ void PixelUncoveredLUT::LoadRects(const std::vector<Rect>& rects)
 				curr += m_covered_count[curr_idx] - 1;
 			}
 			m_multi_area[curr_idx] = curr;
+
+			++curr_idx;
+		}
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	memset(m_const_count, 0, sizeof(int) * sz);
+	for (int i = 0, n = rects.size(); i < n; ++i) {
+		const Rect& r = rects[i];
+		if (!r.is_const) {
+			continue;
+		}
+		for (int x = r.x; x < r.x + r.w; ++x) {
+			assert(x >= 0 && x < m_width);
+			for (int y = r.y; y < r.y + r.h; ++y) {
+				assert(y >= 0 && y < m_height);
+				++m_const_count[y * m_width + x];
+			}
+		}
+	}
+
+	memset(m_const_area, 0, sizeof(int) * sz);
+	curr_idx = 0;
+	for (int y = 0; y < m_height; ++y) {
+		for (int x = 0; x < m_width; ++x) {
+			int left = x > 0 ? m_const_area[curr_idx-1] : 0;
+			int down = y > 0 ? m_const_area[curr_idx-m_width] : 0;
+			int left_down = (x > 0 && y > 0) ? m_const_area[curr_idx-m_width-1] : 0;
+			int curr = left + down - left_down;
+			if (m_const_count[curr_idx] != 0) {
+				++curr;
+			}
+			m_const_area[curr_idx] = curr;
 
 			++curr_idx;
 		}

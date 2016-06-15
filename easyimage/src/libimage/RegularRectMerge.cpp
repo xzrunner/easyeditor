@@ -73,8 +73,14 @@ void RegularRectMerge::Merge()
 
 		for (int i = 0, n = rects.size(); i < n - 1 && cost_min > 0; ++i) {
 			const Rect& r0 = rects[i];
+			if (r0.is_const) {
+				continue;
+			}
 			for (int j = i + 1; j < n && cost_min > 0; ++j) {
 				const Rect& r1 = rects[j];
+				if (r1.is_const) {
+					continue;
+				}
 	 			int left = std::min(r0.x, r1.x),
 	 				right = std::max(r0.x + r0.w, r1.x + r1.w);
 	 			int down = std::min(r0.y, r1.y),
@@ -163,6 +169,10 @@ int RegularRectMerge::ComputeCost(const Rect& r, const std::vector<Rect>& rects)
 			r.x < b.x && (r.y + r.h > b.y + b.h)) {
 			cost += (r.x + r.w - 1 - b.x) * (b.y + b.h - r.y);
 		}
+	}
+
+	if (m_uncovered_lut->IntersectConstArea(r.x, r.y, r.w, r.h)) {
+		return INT_MAX;
 	}
 
 	cost += m_uncovered_lut->GetUncoveredArea(r.x, r.y, r.w, r.h);
