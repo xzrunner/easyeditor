@@ -231,15 +231,15 @@ void RectCutCMPT::OnOutputData(wxCommandEvent& event)
 		return;
 	}
 
-	const ee::ImageSprite* imgSprite = dynamic_cast<const ee::ImageSprite*>(sprite);
-	if (!imgSprite) {
+	const ee::ImageSprite* img_spr = dynamic_cast<const ee::ImageSprite*>(sprite);
+	if (!img_spr) {
 		return;
 	}
 
-	ee::Image* image = imgSprite->GetSymbol().GetImage();
+	ee::Image* image = img_spr->GetSymbol().GetImage();
 
-	std::string imageDir = m_imagePath->GetValue();
-	std::string jsonDir = m_jsonPath->GetValue();
+	std::string img_dir = m_imagePath->GetValue();
+	std::string json_dir = m_jsonPath->GetValue();
 
 	
 	sm::vec2 center = op->GetCenter();
@@ -248,8 +248,9 @@ void RectCutCMPT::OnOutputData(wxCommandEvent& event)
 		center.y = image->GetClippedHeight() * 0.5f;
 	}
 
-	std::string imageName = ee::FileHelper::GetFilename(image->GetFilepath());
-	ecomplex::Symbol* complex = new ecomplex::Symbol;
+	std::string img_name = ee::FileHelper::GetFilename(image->GetFilepath());
+	ecomplex::Symbol* complex_all = new ecomplex::Symbol;
+	ecomplex::Symbol* complex_part = new ecomplex::Symbol;
 	for (int i = 0, n = rects.size(); i < n; ++i)
 	{
 		const sm::rect& r = *rects[i];
@@ -258,19 +259,36 @@ void RectCutCMPT::OnOutputData(wxCommandEvent& event)
 		const uint8_t* pixels = clip.Clip(r.xmin, r.xmax, r.ymin, r.ymax);
 		sm::vec2 sz = r.Size();
 
-		std::string img_filename = imageDir + "\\" + imageName + "_" + ee::StringHelper::ToString(i) + ".png";
+		std::string img_filename = img_dir + "\\" + img_name + "_" + ee::StringHelper::ToString(i) + ".png";
 		ee::ImageSaver::StoreToFile(pixels, sz.x, sz.y, 4, img_filename, ee::ImageSaver::e_png);
 
 		ee::Sprite* sprite = new ee::DummySprite(new ee::DummySymbol(img_filename, sz.x, sz.y));
 		sm::vec2 offset = r.Center() - center;
 		sprite->Translate(offset);
-		complex->Add(sprite);
+		complex_all->Add(sprite);
+
+		for (int j = 0, m = m_part_rects.size(); j < m; ++j) {
+			if (m_part_rects[j] == r) {
+				sprite->Retain();
+				complex_part->Add(sprite);
+				break;
+			}
+		}
 	}
+	complex_all->name = img_name;
+	complex_part->name = img_name + "_part";
 
 	std::string tag = ee::FileType::GetTag(ee::FileType::e_complex);
-	std::string json_filename = jsonDir + "\\" + imageName + "_" + tag + ".json";
-	ecomplex::FileStorer::Store(json_filename.c_str(), complex);
-	delete complex;
+
+	std::string filename_all = json_dir + "\\" + img_name + "_" + tag + ".json";
+	ecomplex::FileStorer::Store(filename_all.c_str(), complex_all);
+	delete complex_all;
+
+	if (!complex_part->GetChildren().empty()) {
+		std::string filename_part = json_dir + "\\" + img_name + "_part_" + tag + ".json";
+		ecomplex::FileStorer::Store(filename_part.c_str(), complex_part);
+	}
+	delete complex_part;
 
 	ee::FinishDialog dlg(this);
 	dlg.ShowModal();
@@ -298,10 +316,12 @@ void RectCutCMPT::OnAutoCreateRects(wxCommandEvent& event)
 
 	RectMgr& rects = static_cast<RectCutOP*>(m_editop)->GetRectMgr();
 
+	m_part_rects.clear();
 	std::vector<Rect> pre_rects;
 	const std::vector<sm::rect*>& _rects = rects.GetAllRect();
 	for (int i = 0, n = _rects.size(); i < n; ++i) {
 		const sm::rect& src = *_rects[i];
+		m_part_rects.push_back(src);
 		Rect dst;
 		dst.x = src.xmin;
 		dst.y = src.ymin;

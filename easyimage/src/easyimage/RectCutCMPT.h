@@ -3,6 +3,8 @@
 
 #include <ee/EditCMPT.h>
 
+#include <SM_Rect.h>
+
 namespace eimage
 {
 
@@ -37,6 +39,8 @@ private:
 	wxTextCtrl *m_imagePath, *m_jsonPath;
 
 	wxTextCtrl *m_widthCtrl, *m_heightCtrl;
+
+	std::vector<sm::rect> m_part_rects;
 
 }; // RectCutCMPT
 
