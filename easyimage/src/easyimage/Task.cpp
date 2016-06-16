@@ -7,6 +7,8 @@
 #include <ee/Bitmap.h>
 #include <ee/LibraryImagePage.h>
 #include <ee/PropertySettingPanel.h>
+#include <ee/SettingData.h>
+#include <ee/Config.h>
 
 namespace eimage
 {
@@ -15,6 +17,9 @@ Task::Task(wxFrame* parent)
 	: m_root(NULL)
 	, m_parent(parent)
 {
+	ee::SettingData& setting = ee::Config::Instance()->GetSettings();
+	setting.pre_multi_alpha = false;
+
 	InitLayout();
 }
 
