@@ -24,21 +24,65 @@ namespace ee
 
 void SpriteIO::Load(const Json::Value& val, Sprite* spr)
 {
-	LoadGeometry(val, spr);
-	LoadShader(val, spr);
-	LoadInfo(val, spr);
-	LoadEdit(val, spr);
+	Data data;
+	Load(val, data);
+
+	LoadGeometry(data, spr);
+	LoadRender(data, spr);
+	LoadInfo(data, spr);
+	LoadEdit(data, spr);
 }
 
 void SpriteIO::Store(Json::Value& val, const Sprite* spr)
 {
-	StoreGeometry(val, spr);
-	StoreShader(val, spr);
-	StoreInfo(val, spr);
-	StoreEdit(val, spr);
+	Data data;
+
+	StoreGeometry(data, spr);
+	StoreRender(data, spr);
+	StoreInfo(data, spr);
+	StoreEdit(data, spr);
+
+	Store(val, data);
 }
 
-void SpriteIO::LoadGeometry(const Json::Value& val, Sprite* spr)
+void SpriteIO::Load(const Json::Value& val, Data& data)
+{
+	LoadGeometry(val, data);
+	LoadRender(val, data);
+	LoadInfo(val, data);
+	LoadEdit(val, data);
+}
+
+void SpriteIO::Store(Json::Value& val, const Data& data)
+{
+	StoreGeometry(val, data);
+	StoreRender(val, data);
+	StoreInfo(val, data);
+	StoreEdit(val, data);
+}
+
+void SpriteIO::LoadGeometry(const Data& data, Sprite* spr)
+{
+	spr->SetScale(data.scale);
+	spr->SetShear(data.shear);
+	spr->SetMirror(data.mirror.x, data.mirror.y);
+	spr->SetPerspective(data.perspective);
+	spr->SetOffset(data.offset);
+	spr->SetTransform(data.position, data.angle);
+}
+
+void SpriteIO::StoreGeometry(Data& data, const Sprite* spr)
+{
+	data.position = spr->GetPosition();
+	data.angle = spr->GetAngle();
+	data.scale = spr->GetScale();
+	data.shear = spr->GetShear();
+	data.offset = spr->GetOffset();
+	data.mirror = spr->GetMirror();
+	data.perspective = spr->GetPerspective();
+}
+
+void SpriteIO::LoadGeometry(const Json::Value& val, Data& data)
 {
 	// scale
 	sm::vec2 scale(1, 1);
@@ -51,7 +95,7 @@ void SpriteIO::LoadGeometry(const Json::Value& val, Sprite* spr)
 	{
 		scale.x = scale.y = static_cast<float>(val["scale"].asDouble());
 	}
-	spr->SetScale(scale);
+	data.scale = scale;
 
 	// shear
 	sm::vec2 shear(0, 0);
@@ -60,26 +104,26 @@ void SpriteIO::LoadGeometry(const Json::Value& val, Sprite* spr)
 		shear.x = static_cast<float>(val["x shear"].asDouble());
 		shear.y = static_cast<float>(val["y shear"].asDouble());
 	}
-	spr->SetShear(shear);
+	data.shear = shear;
 
 	// mirror
-	bool mx = false, my = false;
+	sm::bvec2 mirror(false, false);
 	if (!val["x mirror"].isNull()) {
-		mx = val["x mirror"].asBool();
+		mirror.x = val["x mirror"].asBool();
 	}
 	if (!val["y mirror"].isNull()) {
-		my = val["y mirror"].asBool();
+		mirror.y = val["y mirror"].asBool();
 	}
-	spr->SetMirror(mx, my);
+	data.mirror = mirror;
 
 	// perspective
+	sm::vec2 perspective(0, 0);
 	if (!val["x perspective"].isNull() && !val["y perspective"].isNull())
 	{
-		sm::vec2 persp;
-		persp.x = static_cast<float>(val["x perspective"].asDouble());
-		persp.y = static_cast<float>(val["y perspective"].asDouble());
-		spr->SetPerspective(persp);
+		perspective.x = static_cast<float>(val["x perspective"].asDouble());
+		perspective.y = static_cast<float>(val["y perspective"].asDouble());
 	}
+	data.perspective = perspective;
 
 	// offset
 	sm::vec2 offset(0 ,0);
@@ -88,7 +132,7 @@ void SpriteIO::LoadGeometry(const Json::Value& val, Sprite* spr)
 		offset.x = static_cast<float>(val["x offset"].asDouble());
 		offset.y = static_cast<float>(val["y offset"].asDouble());
 	}
-	spr->SetOffset(offset);
+	data.offset = offset;
 
 	// translate
 	sm::vec2 pos(0, 0);
@@ -96,254 +140,315 @@ void SpriteIO::LoadGeometry(const Json::Value& val, Sprite* spr)
 		pos.x = static_cast<float>(val["position"]["x"].asDouble());
 		pos.y = static_cast<float>(val["position"]["y"].asDouble());
 	}
+	data.position = pos;
+
 	// rotate
 	float angle = 0;
 	if (!val["angle"].isNull()) {
 		angle = static_cast<float>(val["angle"].asDouble());
 	}
-	spr->SetTransform(pos, angle);
+	data.angle = angle;
 }
 
-void SpriteIO::StoreGeometry(Json::Value& val, const Sprite* spr)
+void SpriteIO::StoreGeometry(Json::Value& val, const Data& data)
 {
 	bool compress = Config::Instance()->GetSettings().spr_output_compress;
 
-	const sm::vec2& pos = spr->GetPosition();
-	if (!compress || pos != sm::vec2(0, 0)) {
-		val["position"]["x"] = pos.x;
-		val["position"]["y"] = pos.y;
+	if (!compress || data.position != sm::vec2(0, 0)) {
+		val["position"]["x"] = data.position.x;
+		val["position"]["y"] = data.position.y;
 	}
 
-	float angle = spr->GetAngle();
-	if (!compress || angle != 0) {
-		val["angle"] = angle;
+	if (!compress || data.angle != 0) {
+		val["angle"] = data.angle;
 	}
 
-	const sm::vec2& scale = spr->GetScale();
-	if (!compress || scale != sm::vec2(1, 1)) {
-		val["x scale"] = scale.x;
-		val["y scale"] = scale.y;
+	if (!compress || data.scale != sm::vec2(1, 1)) {
+		val["x scale"] = data.scale.x;
+		val["y scale"] = data.scale.y;
 	}
 
-	const sm::vec2& shear = spr->GetShear();
-	if (!compress || shear != sm::vec2(0, 0)) {
-		val["x shear"] = shear.x;
-		val["y shear"] = shear.y;
+	if (!compress || data.shear != sm::vec2(0, 0)) {
+		val["x shear"] = data.shear.x;
+		val["y shear"] = data.shear.y;
 	}
 
-	const sm::vec2& offset = spr->GetOffset();
-	if (!compress || offset != sm::vec2(0, 0)) {
-		val["x offset"] = offset.x;
-		val["y offset"] = offset.y;
+	if (!compress || data.offset != sm::vec2(0, 0)) {
+		val["x offset"] = data.offset.x;
+		val["y offset"] = data.offset.y;
 	}
 
-	const sm::bvec2& mirror = spr->GetMirror();
-	if (!compress || mirror.x) {
-		val["x mirror"] = mirror.x;
+	if (!compress || data.mirror.x) {
+		val["x mirror"] = data.mirror.x;
 	}
-	if (!compress || mirror.y) {
-		val["y mirror"] = mirror.y;
+	if (!compress || data.mirror.y) {
+		val["y mirror"] = data.mirror.y;
 	}
 
-	const sm::vec2& perspective = spr->GetPerspective();
-	if (!compress || perspective != sm::vec2(0, 0)) {
-		val["x perspective"] = perspective.x;
-		val["y perspective"] = perspective.y;
+	if (!compress || data.perspective != sm::vec2(0, 0)) {
+		val["x perspective"] = data.perspective.x;
+		val["y perspective"] = data.perspective.y;
 	}
 }
 
-void SpriteIO::LoadShader(const Json::Value& val, Sprite* spr)
+void SpriteIO::LoadRender(const Data& data, Sprite* spr)
 {
-	LoadColor(val, spr->GetCore()->Color());
-	LoadShader(val, spr->GetCore()->Shader());
-	LoadCamera(val, spr->GetCore()->Camera());	
+	LoadColor(data, spr->GetColor());
+	LoadShader(data, spr->GetShader());
+	LoadCamera(data, spr->GetCamera());	
 }
 
-void SpriteIO::StoreShader(Json::Value& val, const Sprite* spr)
+void SpriteIO::StoreRender(Data& data, const Sprite* spr)
 {
-	StoreColor(val, spr->GetCore()->Color());
-	StoreShader(val, spr->GetCore()->Shader());
-	StoreCamera(val, spr->GetCore()->Camera());	
+	StoreColor(data, spr->GetColor());
+	StoreShader(data, spr->GetShader());
+	StoreCamera(data, spr->GetCamera());	
 }
 
-void SpriteIO::LoadInfo(const Json::Value& val, Sprite* spr)
+void SpriteIO::LoadRender(const Json::Value& val, Data& data)
+{
+	LoadColor(val, data);
+	LoadShader(val, data);
+	LoadCamera(val, data);	
+}
+
+void SpriteIO::StoreRender(Json::Value& val, const Data& data)
+{
+	StoreColor(val, data);
+	StoreShader(val, data);
+	StoreCamera(val, data);	
+}
+
+void SpriteIO::LoadInfo(const Data& data, Sprite* spr)
+{
+	spr->SetName(data.name);
+	spr->SetTag(data.tag);
+	spr->SetClip(data.clip);
+	spr->SetAnchor(data.anchor);
+}
+
+void SpriteIO::StoreInfo(Data& data, const Sprite* spr)
+{
+	data.name = spr->GetName();
+	data.tag = spr->GetTag();
+	data.clip = spr->IsClip();
+	data.anchor = spr->IsAnchor();
+}
+
+void SpriteIO::LoadInfo(const Json::Value& val, Data& data)
 {
 	if (!val["name"].isNull()) {
-		spr->SetName(val["name"].asString());
+		data.name = val["name"].asString();
 	} else {
-		spr->SetName("");
+		data.name = "";
 	}
 
 	if (!val["tag"].isNull()) {
-		spr->SetTag(val["tag"].asString());
+		data.tag = val["tag"].asString();
 	} else {
-		spr->SetTag("");
+		data.tag = "";
 	}
 
 	if (!val["clip"].isNull()) {
-		spr->SetClip(val["clip"].asBool());
+		data.clip = val["clip"].asBool();
 	} else {
-		spr->SetClip(false);
+		data.clip = false;
 	}
 
 	if (!val["anchor"].isNull()) {
-		spr->SetAnchor(val["anchor"].asBool());
+		data.anchor = val["anchor"].asBool();
 	} else {
-		spr->SetAnchor(false);
+		data.anchor = false;
 	}
 }
 
-void SpriteIO::StoreInfo(Json::Value& val, const Sprite* spr)
+void SpriteIO::StoreInfo(Json::Value& val, const Data& data)
 {
 	bool compress = Config::Instance()->GetSettings().spr_output_compress;
 
-	const std::string& name = spr->GetName();
-	if (!compress || !name.empty()) {
-		val["name"] = name;
+	if (!compress || !data.name.empty()) {
+		val["name"] = data.name;
 	}
 
-	const std::string& tag = spr->GetTag();
-	if (!compress || !tag.empty()) {
-		val["tag"] = tag;		
+	if (!compress || !data.tag.empty()) {
+		val["tag"] = data.tag;		
 	}
 
-	if (!compress || spr->IsClip()) {
-		val["clip"] = spr->IsClip();
+	if (!compress || data.clip) {
+		val["clip"] = data.clip;
 	}
 
-	if (!compress || spr->IsAnchor()) {
-		val["anchor"] = spr->IsAnchor();
+	if (!compress || data.anchor) {
+		val["anchor"] = data.anchor;
 	}
 }
 
-void SpriteIO::LoadEdit(const Json::Value& val, Sprite* spr)
+void SpriteIO::LoadEdit(const Data& data, Sprite* spr)
+{
+	spr->SetVisible(data.visible);
+	spr->SetEditable(data.editable);
+}
+
+void SpriteIO::StoreEdit(Data& data, const Sprite* spr)
+{
+	data.visible = spr->IsVisible();
+	data.editable = spr->IsEditable();
+}
+
+void SpriteIO::LoadEdit(const Json::Value& val, Data& data)
 {
 	if (!val["visible"].isNull()) {
-		spr->SetVisible(val["visible"].asBool());
+		data.visible = val["visible"].asBool();
+	} else {
+		data.visible = true;
 	}
 	if (!val["editable"].isNull()) {
-		spr->SetEditable(val["editable"].asBool());
-	}	
+		data.editable = val["editable"].asBool();
+	} else {
+		data.editable = true;
+	}
 }
 
-void SpriteIO::StoreEdit(Json::Value& val, const Sprite* spr)
+void SpriteIO::StoreEdit(Json::Value& val, const Data& data)
 {
 	bool compress = Config::Instance()->GetSettings().spr_output_compress;
 
-	if (!compress || !spr->IsVisible()) {
-		val["visible"] = spr->IsVisible();
+	if (!compress || !data.visible) {
+		val["visible"] = data.visible;
 	}
-	if (!compress || !spr->IsEditable()) {
-		val["editable"] = spr->IsEditable();
+	if (!compress || !data.editable) {
+		val["editable"] = data.editable;
 	}
 }
 
-void SpriteIO::LoadColor(const Json::Value& val, s2::RenderColor& color)
+void SpriteIO::LoadColor(const Data& data, s2::RenderColor& color)
+{
+	color = data.col;
+}
+
+void SpriteIO::StoreColor(Data& data, const s2::RenderColor& color)
+{
+	data.col = color;
+}
+
+void SpriteIO::LoadColor(const Json::Value& val, Data& data)
 {
 	if (!val["multi color"].isNull()) {
-		color.mul = str2color(val["multi color"].asString(), PT_BGRA);
+		data.col.mul = str2color(val["multi color"].asString(), PT_BGRA);
 	} else {
-		color.mul = s2::Color(0xffffffff);
+		data.col.mul = s2::Color(0xffffffff);
 	}
 
 	if (!val["add color"].isNull()) {
-		color.add = str2color(val["add color"].asString(), PT_ABGR);
+		data.col.add = str2color(val["add color"].asString(), PT_ABGR);
 	} else {
-		color.add = s2::Color(0);
+		data.col.add = s2::Color(0);
 	}
 
 	if (!val["r trans"].isNull()) {
-		color.rmap = str2color(val["r trans"].asString(), PT_RGBA);
+		data.col.rmap = str2color(val["r trans"].asString(), PT_RGBA);
 	} else {
-		color.rmap = s2::Color(255, 0, 0, 0);
+		data.col.rmap = s2::Color(255, 0, 0, 0);
 	}
 
 	if (!val["g trans"].isNull()) {
-		color.gmap = str2color(val["g trans"].asString(), PT_RGBA);
+		data.col.gmap = str2color(val["g trans"].asString(), PT_RGBA);
 	} else {
-		color.gmap = s2::Color(0, 255, 0, 0);
+		data.col.gmap = s2::Color(0, 255, 0, 0);
 	}
 
 	if (!val["b trans"].isNull()) {
-		color.bmap = str2color(val["b trans"].asString(), PT_RGBA);
+		data.col.bmap = str2color(val["b trans"].asString(), PT_RGBA);
 	} else {
-		color.bmap = s2::Color(0, 0, 255, 0);
+		data.col.bmap = s2::Color(0, 0, 255, 0);
 	}
 }
 
-void SpriteIO::StoreColor(Json::Value& val, const s2::RenderColor& color)
+void SpriteIO::StoreColor(Json::Value& val, const Data& data)
 {
 	bool compress = Config::Instance()->GetSettings().spr_output_compress;
 
-	if (!compress || color.mul != s2::Color(0xffffffff)) {
-		val["multi color"]	= color2str(color.mul, PT_BGRA);
+	if (!compress || data.col.mul != s2::Color(0xffffffff)) {
+		val["multi color"]	= color2str(data.col.mul, PT_BGRA);
 	}
-	if (!compress || color.add != s2::Color(0)) {
-		val["add color"]	= color2str(color.add, PT_ABGR);
+	if (!compress || data.col.add != s2::Color(0)) {
+		val["add color"]	= color2str(data.col.add, PT_ABGR);
 	}
 
-	if (!compress || color.rmap != s2::Color(255, 0, 0, 0)) {
-		val["r trans"]		= color2str(color.rmap, PT_RGBA);
+	if (!compress || data.col.rmap != s2::Color(255, 0, 0, 0)) {
+		val["r trans"]		= color2str(data.col.rmap, PT_RGBA);
 	}
-	if (!compress || color.gmap != s2::Color(0, 255, 0, 0)) {
-		val["g trans"]		= color2str(color.gmap, PT_RGBA);
+	if (!compress || data.col.gmap != s2::Color(0, 255, 0, 0)) {
+		val["g trans"]		= color2str(data.col.gmap, PT_RGBA);
 	}
-	if (!compress || color.bmap != s2::Color(0, 0, 255, 0)) {
-		val["b trans"]		= color2str(color.bmap, PT_RGBA);
+	if (!compress || data.col.bmap != s2::Color(0, 0, 255, 0)) {
+		val["b trans"]		= color2str(data.col.bmap, PT_RGBA);
 	}
 }
 
-void SpriteIO::LoadShader(const Json::Value& val, s2::RenderShader& shader)
+void SpriteIO::LoadShader(const Data& data, s2::RenderShader& shader)
 {
+	shader.blend = data.blend;
+	shader.filter = data.filter;
+}
+
+void SpriteIO::StoreShader(Data& data, const s2::RenderShader& shader)
+{
+	data.blend = shader.blend;
+	data.filter = shader.filter;
+}
+
+void SpriteIO::LoadShader(const Json::Value& val, Data& data)
+{
+	data.blend = s2::BM_NULL;
+	if (data.filter) {
+		delete data.filter;
+		data.filter = NULL;
+	}
+
 	if (!Config::Instance()->IsRenderOpen()) {
 		return;
 	}
 
 	if (!val["blend"].isNull()) {
 		std::string disc = val["blend"].asString();
-		shader.blend = BlendModes::Instance()->GetModeFromNameEN(disc);
-	} else {
-		shader.blend = s2::BM_NULL;
+		data.blend = BlendModes::Instance()->GetModeFromNameEN(disc);
 	}
 
-	if (shader.filter) {
-		delete shader.filter;
-		shader.filter = NULL;
-	}
 	if (!val["filter"].isNull()) 
 	{
 		if (val["filter"].isString()) 
 		{
 			std::string disc = val["filter"].asString();
 			s2::FilterMode filter = FilterModes::Instance()->GetModeFromNameEN(disc);
-			shader.filter = s2::FilterFactory::Instance()->Create(filter);
+			data.filter = s2::FilterFactory::Instance()->Create(filter);
 		} 
 		else 
 		{
 			const Json::Value& fval = val["filter"];
 			std::string disc = fval["mode"].asString();
 			s2::FilterMode filter = FilterModes::Instance()->GetModeFromNameEN(disc);
-			shader.filter = s2::FilterFactory::Instance()->Create(filter);
+			data.filter = s2::FilterFactory::Instance()->Create(filter);
 			switch (filter)
 			{
 			case s2::FM_EDGE_DETECTION:
 				{
 					float blend = (float)(fval["blend"].asDouble());
-					s2::RFEdgeDetection* filter = static_cast<s2::RFEdgeDetection*>(shader.filter);
+					s2::RFEdgeDetection* filter = static_cast<s2::RFEdgeDetection*>(data.filter);
 					filter->SetBlend(blend);
 				}
 				break;
 			case s2::FM_GAUSSIAN_BLUR:
 				{
 					int iterations = fval["iterations"].asInt();
-					s2::RFGaussianBlur* filter = static_cast<s2::RFGaussianBlur*>(shader.filter);
+					s2::RFGaussianBlur* filter = static_cast<s2::RFGaussianBlur*>(data.filter);
 					filter->SetIterations(iterations);
 				}
 				break;
 			case s2::FM_OUTER_GLOW:
 				{
 					int iterations = fval["iterations"].asInt();
-					s2::RFOuterGlow* filter = static_cast<s2::RFOuterGlow*>(shader.filter);
+					s2::RFOuterGlow* filter = static_cast<s2::RFOuterGlow*>(data.filter);
 					filter->SetIterations(iterations);
 				}
 				break;
@@ -352,21 +457,21 @@ void SpriteIO::LoadShader(const Json::Value& val, s2::RenderShader& shader)
 	}
 	else
 	{
-		shader.filter = s2::FilterFactory::Instance()->Create(s2::FM_NULL);
+		data.filter = s2::FilterFactory::Instance()->Create(s2::FM_NULL);
 	}
 }
 
-void SpriteIO::StoreShader(Json::Value& val, const s2::RenderShader& shader)
+void SpriteIO::StoreShader(Json::Value& val, const Data& data)
 {
 	if (!Config::Instance()->IsRenderOpen()) {
 		return;
 	}
 
-	if (shader.blend != s2::BM_NULL) {
-		val["blend"] = BlendModes::Instance()->GetNameENFromMode(shader.blend);
+	if (data.blend != s2::BM_NULL) {
+		val["blend"] = BlendModes::Instance()->GetNameENFromMode(data.blend);
 	}
 
-	s2::FilterMode mode = shader.filter->GetMode();
+	s2::FilterMode mode = data.filter->GetMode();
 	if (mode != s2::FM_NULL)
 	{
 		Json::Value fval;
@@ -375,19 +480,19 @@ void SpriteIO::StoreShader(Json::Value& val, const s2::RenderShader& shader)
 		{
 		case s2::FM_EDGE_DETECTION:
 			{
-				s2::RFEdgeDetection* filter = static_cast<s2::RFEdgeDetection*>(shader.filter);
+				s2::RFEdgeDetection* filter = static_cast<s2::RFEdgeDetection*>(data.filter);
 				fval["blend"] = filter->GetBlend();
 			}
 			break;
 		case s2::FM_GAUSSIAN_BLUR:
 			{
-				s2::RFGaussianBlur* filter = static_cast<s2::RFGaussianBlur*>(shader.filter);
+				s2::RFGaussianBlur* filter = static_cast<s2::RFGaussianBlur*>(data.filter);
 				fval["iterations"] = filter->GetIterations();
 			}
 			break;
 		case s2::FM_OUTER_GLOW:
 			{
-				s2::RFOuterGlow* filter = static_cast<s2::RFOuterGlow*>(shader.filter);
+				s2::RFOuterGlow* filter = static_cast<s2::RFOuterGlow*>(data.filter);
 				fval["iterations"] = filter->GetIterations();
 			}
 			break;
@@ -396,20 +501,30 @@ void SpriteIO::StoreShader(Json::Value& val, const s2::RenderShader& shader)
 	}
 }
 
-void SpriteIO::LoadCamera(const Json::Value& val, s2::RenderCamera& camera)
+void SpriteIO::LoadCamera(const Data& data, s2::RenderCamera& camera)
+{
+	camera.mode = data.camera;
+}
+
+void SpriteIO::StoreCamera(Data& data, const s2::RenderCamera& camera)
+{
+	data.camera = camera.mode;
+}
+
+void SpriteIO::LoadCamera(const Json::Value& val, Data& data)
 {
 	if (!val["camera"].isNull()) {
 		std::string disc = val["camera"].asString();
-		camera.mode = CameraModes::Instance()->GetModeFromNameEN(disc);
+		data.camera = CameraModes::Instance()->GetModeFromNameEN(disc);
 	} else {
-		camera.mode = s2::CM_ORTHO;
+		data.camera = s2::CM_ORTHO;
 	}
 }
 
-void SpriteIO::StoreCamera(Json::Value& val, const s2::RenderCamera& camera)
+void SpriteIO::StoreCamera(Json::Value& val, const Data& data)
 {
-	if (camera.mode != s2::CM_ORTHO) {
-		val["camera"] = CameraModes::Instance()->GetNameENFromMode(camera.mode);
+	if (data.camera != s2::CM_ORTHO) {
+		val["camera"] = CameraModes::Instance()->GetNameENFromMode(data.camera);
 	}
 }
 
