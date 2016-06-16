@@ -101,7 +101,8 @@ void Symbol::DrawBaseToFbo0() const
 	dtexf_t0_clear(0, -2, 2, 0);
 
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
-	sl::BlendShader* shader = static_cast<sl::BlendShader*>(mgr->GetShader(sl::SPRITE2));
+	mgr->SetShader(sl::SPRITE2);
+	sl::Shader* shader = mgr->GetShader();
 
 	s2::RenderParams params;
 	params.set_shader = false;
@@ -118,7 +119,8 @@ void Symbol::DrawMaskToFbo1() const
 	dtexf_t1_clear(0, -2, 2, 0);
 
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
-	sl::BlendShader* shader = static_cast<sl::BlendShader*>(mgr->GetShader(sl::SPRITE2));
+	mgr->SetShader(sl::SPRITE2);
+	sl::Shader* shader = mgr->GetShader();
 
 	s2::RenderParams params;
 	params.set_shader = false;
