@@ -251,7 +251,7 @@ void RectCutCMPT::OnOutputData(wxCommandEvent& event)
 		const uint8_t* pixels = clip.Clip(r.xmin, r.xmax, r.ymin, r.ymax);
 		sm::vec2 sz = r.Size();
 
-		std::string img_filename = imageDir + "\\" + imageName + "_" + ee::StringHelper::ToString(i);
+		std::string img_filename = imageDir + "\\" + imageName + "_" + ee::StringHelper::ToString(i) + ".png";
 		ee::ImageSaver::StoreToFile(pixels, sz.x, sz.y, 4, img_filename, ee::ImageSaver::e_png);
 
 		std::string img_fullname = img_filename + ".png";
