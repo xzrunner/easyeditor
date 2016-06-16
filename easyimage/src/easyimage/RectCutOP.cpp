@@ -29,7 +29,11 @@ bool RectCutOP::OnMouseLeftDown(int x, int y)
 	if (!m_stage->GetImage()) return false;
 
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-	m_node_selected = m_rects.QueryNode(pos);
+	if (m_center.Contain(pos)) {
+		m_center.selected = true;
+	} else {
+		m_node_selected = m_rects.QueryNode(pos);
+	}
 
 	return false;
 }
@@ -39,6 +43,8 @@ bool RectCutOP::OnMouseLeftUp(int x, int y)
 	if (ee::ZoomViewOP::OnMouseLeftUp(x, y)) return true;
 
 	if (!m_stage->GetImage()) return false;
+
+	m_center.selected = false;
 
 	// move node
 	if (m_node_selected.rect)
@@ -142,21 +148,27 @@ bool RectCutOP::OnMouseDrag(int x, int y)
 
 	if (!m_stage->GetImage()) return false;
 
-	// create rect
-	if (m_first_pos.IsValid())
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
+	// move center
+	if (m_center.selected)
 	{
-		m_curr_pos = m_stage->TransPosScrToProj(x, y);
+		m_center.pos = pos;
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
+	}
+	// create rect
+	else if (m_first_pos.IsValid())
+	{
+		m_curr_pos = pos;
 		m_captured = m_rects.QueryNearestAxis(m_curr_pos);
 
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
-	// move rect's node
+	// move rect edge
 	else if (m_node_selected.rect)
 	{
-		m_curr_pos = m_stage->TransPosScrToProj(x, y);
+		m_curr_pos = pos;
 		m_captured = m_rects.QueryNearestAxis(m_curr_pos, m_node_selected.rect);
 
-		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 		m_rects.MoveNode(m_node_selected, pos);
 		m_node_selected.pos = pos;
 
@@ -165,7 +177,7 @@ bool RectCutOP::OnMouseDrag(int x, int y)
 	// move rect
 	else if (m_rect_selected)
 	{
-		sm::vec2 curr = m_stage->TransPosScrToProj(x, y);
+		sm::vec2 curr = pos;
 		m_rects.MoveRect(m_rect_selected, m_curr_pos, curr);
 		m_curr_pos = curr;
 
@@ -204,6 +216,8 @@ bool RectCutOP::OnDraw() const
 		ee::RVG::Rect(sm::vec2(m_node_selected.rect->xmin, m_node_selected.rect->ymin), 
 			sm::vec2(m_node_selected.rect->xmax, m_node_selected.rect->ymax), true);
 	}
+
+	m_center.Draw();
 
 	return false;
 }
@@ -291,6 +305,28 @@ void RectCutOP::FixedPos(sm::vec2& pos) const
 			pos.y = m_captured.y;
 		}
 	}	
+}
+
+//////////////////////////////////////////////////////////////////////////
+// class RectCutOP::Cross
+//////////////////////////////////////////////////////////////////////////
+
+RectCutOP::Cross::Cross()
+	: pos(0, 0)
+	, selected(false)
+{
+}
+
+void RectCutOP::Cross::Draw() const
+{
+	ee::RVG::Color(ee::BLACK);
+	ee::RVG::Circle(pos, RADIUS, false);
+	ee::RVG::Cross(pos, LENGTH);
+}
+
+bool RectCutOP::Cross::Contain(const sm::vec2& p) const
+{
+	return ee::Math2D::GetDistance(pos, p) < RADIUS;
 }
 
 }

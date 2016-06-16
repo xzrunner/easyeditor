@@ -241,6 +241,13 @@ void RectCutCMPT::OnOutputData(wxCommandEvent& event)
 	std::string imageDir = m_imagePath->GetValue();
 	std::string jsonDir = m_jsonPath->GetValue();
 
+	
+	sm::vec2 center = op->GetCenter();
+	if (center == sm::vec2(0, 0)) {
+		center.x = image->GetClippedWidth() * 0.5f;
+		center.y = image->GetClippedHeight() * 0.5f;
+	}
+
 	std::string imageName = ee::FileHelper::GetFilename(image->GetFilepath());
 	ecomplex::Symbol* complex = new ecomplex::Symbol;
 	for (int i = 0, n = rects.size(); i < n; ++i)
@@ -254,12 +261,9 @@ void RectCutCMPT::OnOutputData(wxCommandEvent& event)
 		std::string img_filename = imageDir + "\\" + imageName + "_" + ee::StringHelper::ToString(i) + ".png";
 		ee::ImageSaver::StoreToFile(pixels, sz.x, sz.y, 4, img_filename, ee::ImageSaver::e_png);
 
-		std::string img_fullname = img_filename + ".png";
-		ee::Sprite* sprite = new ee::DummySprite(new ee::DummySymbol(img_fullname, sz.x, sz.y));
-		sm::vec2 off = r.Center();
-		off.x -= image->GetClippedWidth() * 0.5f;
-		off.y -= image->GetClippedHeight() * 0.5f;
-		sprite->Translate(off);
+		ee::Sprite* sprite = new ee::DummySprite(new ee::DummySymbol(img_filename, sz.x, sz.y));
+		sm::vec2 offset = r.Center() - center;
+		sprite->Translate(offset);
 		complex->Add(sprite);
 	}
 

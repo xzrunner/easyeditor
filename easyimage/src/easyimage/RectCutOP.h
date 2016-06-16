@@ -34,10 +34,28 @@ public:
 
 	RectCutCMPT* GetEditCMPT() const { return m_cmpt; }
 
+	const sm::vec2& GetCenter() const { return m_center.pos; }
+
 private:
 	void DrawCaptureLine() const;
 
 	void FixedPos(sm::vec2& pos) const;
+
+private:
+	struct Cross
+	{
+		static const int RADIUS = 10;
+		static const int LENGTH = 100;
+
+		Cross();
+		void Draw() const;
+		bool Contain(const sm::vec2& p) const;
+
+		sm::vec2 pos;
+
+		bool selected;
+
+	}; // Cross
 
 private:
 	RectCutCMPT* m_cmpt;
@@ -52,6 +70,8 @@ private:
 	sm::rect* m_rect_selected;
 
 	RectMgr m_rects;
+
+	Cross m_center;
 
 }; // RectCutOP 
 
