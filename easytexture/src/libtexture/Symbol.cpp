@@ -38,13 +38,19 @@ Symbol* Symbol::Clone() const
 
 void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 {
+	s2::RenderParams p = params;
+	if (spr) {
+		p.mt = spr->GetTransMatrix() * params.mt;
+		p.color = spr->GetColor() * params.color;
+	}
+
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
-	shader->SetColor(params.color.mul.ToABGR(), params.color.add.ToABGR());
-	shader->SetColorMap(params.color.rmap.ToABGR(), params.color.gmap.ToABGR(), params.color.bmap.ToABGR());
+	shader->SetColor(p.color.mul.ToABGR(), p.color.add.ToABGR());
+	shader->SetColorMap(p.color.rmap.ToABGR(), p.color.gmap.ToABGR(), p.color.bmap.ToABGR());
 
 	for (int i = 0, n = m_shapes.size(); i < n; ++i) {
-		m_shapes[i]->Draw(params.mt, params.color);
+		m_shapes[i]->Draw(p.mt, p.color);
 	}
 }
 

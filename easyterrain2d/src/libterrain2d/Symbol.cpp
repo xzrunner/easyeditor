@@ -34,6 +34,12 @@ Symbol::~Symbol()
 
 void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 {
+	s2::RenderParams p = params;
+	if (spr) {
+		p.mt = spr->GetTransMatrix() * params.mt;
+		p.color = spr->GetColor() * params.color;
+	}
+
 	clock_t curr = clock();
 	if (m_time == 0) {
 		m_time = curr;
@@ -42,8 +48,8 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
-	shader->SetColor(params.color.mul.ToABGR(), params.color.add.ToABGR());
-	shader->SetColorMap(params.color.rmap.ToABGR(), params.color.gmap.ToABGR(), params.color.bmap.ToABGR());
+	shader->SetColor(p.color.mul.ToABGR(), p.color.add.ToABGR());
+	shader->SetColorMap(p.color.rmap.ToABGR(), p.color.gmap.ToABGR(), p.color.bmap.ToABGR());
 
 	float dt = (float)(curr - m_time) / CLOCKS_PER_SEC;
 	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
@@ -51,7 +57,7 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 		if (m_update) {
 			ocean->Update(dt);
 		}
-		ocean->Draw(params, false);
+		ocean->Draw(p, false);
 	}
 
 	m_time = curr;

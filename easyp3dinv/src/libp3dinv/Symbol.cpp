@@ -21,9 +21,14 @@ Symbol::~Symbol()
 
 void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 {
+	s2::RenderParams p = params;
+	if (spr) {
+		p.mt = spr->GetTransMatrix() * params.mt;
+		p.color = spr->GetColor() * params.color;
+	}
 	if (m_ps) {
 		m_ps->Update(1.0f / 30);
-		m_ps->Draw(params.mt);
+		m_ps->Draw(p.mt);
 	}
 }
 

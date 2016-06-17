@@ -53,11 +53,17 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 		return;
 	}
 
+	s2::RenderParams p = params;
+	if (spr) {
+		p.mt = spr->GetTransMatrix() * params.mt;
+		p.color = spr->GetColor() * params.color;
+	}
+
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	mgr->SetShader(sl::SPRITE2);
 	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader());
-	shader->SetColor(params.color.mul.ToABGR(), params.color.add.ToABGR());
-	shader->SetColorMap(params.color.rmap.ToABGR(), params.color.gmap.ToABGR(), params.color.bmap.ToABGR());
+	shader->SetColor(p.color.mul.ToABGR(), p.color.add.ToABGR());
+	shader->SetColorMap(p.color.rmap.ToABGR(), p.color.gmap.ToABGR(), p.color.bmap.ToABGR());
 
 	const Sprite* mesh_spr = static_cast<const Sprite*>(spr);
 	if (mesh_spr) {
@@ -66,9 +72,9 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 	}
 
 	if (mesh_spr && mesh_spr->OnlyDrawBound()) {
-		MeshRenderer::DrawInfoXY(m_mesh, &params.mt);
+		MeshRenderer::DrawInfoXY(m_mesh, &p.mt);
  	} else {
- 		MeshRenderer::DrawTexture(m_mesh, params, mesh_spr ? mesh_spr->GetBaseSym() : NULL);
+ 		MeshRenderer::DrawTexture(m_mesh, p, mesh_spr ? mesh_spr->GetBaseSym() : NULL);
  	}
 
 	if (!m_pause && mesh_spr)

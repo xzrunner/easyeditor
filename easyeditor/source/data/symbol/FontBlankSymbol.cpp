@@ -33,13 +33,18 @@ FontBlankSymbol::~FontBlankSymbol()
 
 void FontBlankSymbol::Draw(const s2::RenderParams& params, const Sprite* spr) const
 {
+	s2::RenderParams p = params;
+	if (spr) {
+		p.mt = spr->GetTransMatrix() * params.mt;
+		p.color = spr->GetColor() * params.color;
+	}
 	const SettingData& setting = Config::Instance()->GetSettings();
 	const FontBlankSprite* fb = (const FontBlankSprite*)spr;
 	if (setting.visible_label_bg) {
- 		DrawBackground(fb, params.mt);
+ 		DrawBackground(fb, p.mt);
  	} 
 	if (setting.visible_label_text) {
-		DrawText(fb, params.mt);
+		DrawText(fb, p.mt);
 	}
 }
 

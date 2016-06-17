@@ -16,7 +16,7 @@ public:
 	// config
 	static void Init();	
 
-	static void Color(const Color& color);
+	static void SetColor(const Color& color);
 	static void PointSize(float size);
 	static void LineWidth(float width);
 
@@ -35,7 +35,7 @@ public:
 
 	// face
 	static void Triangles(const std::vector<sm::vec2>& triangles);
-	static void Triangles(const std::vector<sm::vec2>& triangles, const std::vector<s2::Color>& colors);
+	static void Triangles(const std::vector<sm::vec2>& triangles, const std::vector<Color>& colors);
 	static void TriangleStrip(const std::vector<sm::vec2>& triangles);
 
 	static void Rect(const sm::vec2& center, float hw, float hh, bool filling);

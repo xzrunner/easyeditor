@@ -28,7 +28,7 @@ void PointShape::Draw(const sm::mat4& mt, const RenderColor& color) const
 {
 	sm::vec2 center = mt * m_pos;
 	float r = sm::mat_trans_len(SHAPE_NODE_RADIUS, mt);
-	RVG::Color(color.mul);
+	RVG::SetColor(color.mul);
 	RVG::Circle(center, r, true);
 }
 

@@ -41,31 +41,34 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 		return;
 	}
 
+	s2::RenderParams p = params;
+	p.color = spr->GetColor() * params.color;
+
 	Sprite* p3d_spr = const_cast<Sprite*>(static_cast<const Sprite*>(spr));
-	p3d_spr->SetOuterMatrix(params.mt);
+	p3d_spr->SetOuterMatrix(p.mt);
 	if (p3d_spr->IsAlone()) {
 		p3d_sprite* p3d = p3d_spr->GetP3D();
 		if (!p3d) {
 			return;
 		}
 		RenderParams* rp = static_cast<RenderParams*>(p3d->draw_params);
-		rp->mat = params.mt;
-		rp->ct = params.color;
-		p3d->mat[0] = params.mt.x[0];
-		p3d->mat[1] = params.mt.x[1];
-		p3d->mat[2] = params.mt.x[4];
-		p3d->mat[3] = params.mt.x[5];
-		p3d->mat[4] = params.mt.x[12];
-		p3d->mat[5] = params.mt.x[13];	
+		rp->mat = p.mt;
+		rp->ct = p.color;
+		p3d->mat[0] = p.mt.x[0];
+		p3d->mat[1] = p.mt.x[1];
+		p3d->mat[2] = p.mt.x[4];
+		p3d->mat[3] = p.mt.x[5];
+		p3d->mat[4] = p.mt.x[12];
+		p3d->mat[5] = p.mt.x[13];	
 		return;
 	}
 
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
-	shader->SetColor(params.color.mul.ToABGR(), params.color.add.ToABGR());
-	shader->SetColorMap(params.color.rmap.ToABGR(), params.color.gmap.ToABGR(), params.color.bmap.ToABGR());
+	shader->SetColor(p.color.mul.ToABGR(), p.color.add.ToABGR());
+	shader->SetColorMap(p.color.rmap.ToABGR(), p.color.gmap.ToABGR(), p.color.bmap.ToABGR());
 
-	p3d_spr->Draw(params.mt);
+	p3d_spr->Draw(p.mt);
 }
 
 void Symbol::ReloadTexture() const

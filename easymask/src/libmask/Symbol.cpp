@@ -37,13 +37,18 @@ Symbol::~Symbol()
 
 void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 {
+	s2::RenderParams p = params;
+	if (spr) {
+		p.mt = spr->GetTransMatrix() * params.mt;
+		p.color = spr->GetColor() * params.color;
+	}
 	if (m_base && m_mask) {
-		Draw(params.mt);
+		Draw(p.mt);
 	} else {
 		if (m_base) {
-			ee::SpriteRenderer::Draw(m_base, params);
+			ee::SpriteRenderer::Draw(m_base, p);
 		} else if (m_mask) {
-			ee::SpriteRenderer::Draw(m_mask, params);
+			ee::SpriteRenderer::Draw(m_mask, p);
 		}		
 	}
 }

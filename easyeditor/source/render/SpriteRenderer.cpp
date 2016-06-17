@@ -30,68 +30,36 @@ void SpriteRenderer::Draw(const Sprite* spr,
 		return;
 	}
 
-	s2::BlendMode blend;
-	if (params.shader.blend != s2::BM_NULL) {
-		blend = params.shader.blend;
-	} else {
-		blend = spr->GetShader().blend;
-	}
-
-	s2::RenderFilter* filter;
-	if (params.shader.filter && params.shader.filter->GetMode()!= s2::FM_NULL) {
-		filter = params.shader.filter;
-	} else {
-		filter = spr->GetShader().filter;
-	}
-
-	s2::RenderCamera ct;
-	if (params.camera.mode != s2::CM_ORTHO) {
-		ct.mode = params.camera.mode;
-	} else {
-		ct.mode = spr->GetCamera().mode;
-	}
-	if (ct.mode == s2::CM_PERSPECTIVE_AUTO_HEIGHT) {
-		if (params.camera.base_y == FLT_MAX) {
-			ct.base_y = params.camera.base_y;
-			std::vector<sm::vec2> bound;
-			spr->GetBounding()->GetBoundPos(bound);
-			for (int i = 0, n = bound.size(); i < n; ++i) {
-				if (bound[i].y < ct.base_y) {
-					ct.base_y = bound[i].y;
-				}
-			}
-		} else {
-			ct.base_y = params.camera.base_y;
-		}
-	}
+	s2::RenderShader rs = spr->GetShader() * params.shader;
+	s2::RenderCamera rc = spr->GetCamera() * params.camera;
 
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
-	if (blend != s2::BM_NULL) {
+	if (rs.blend != s2::BM_NULL) {
 		const Camera* cam = CameraMgr::Instance()->GetCamera();
 		if (cam->Type() == "ortho") {
 			SpriteBlend::Draw(spr, params.mt);
 		}
-	} else if (filter->GetMode() != s2::FM_NULL) {
+	} else if (rs.filter->GetMode() != s2::FM_NULL) {
 		s2::RenderParams t = params;
-		t.shader.filter = filter;
-		t.camera = ct;
-		if (filter->GetMode() == s2::FM_GAUSSIAN_BLUR) {
-			int itrs = static_cast<s2::RFGaussianBlur*>(filter)->GetIterations();
+		t.shader.filter = rs.filter;
+		t.camera = rc;
+		if (rs.filter->GetMode() == s2::FM_GAUSSIAN_BLUR) {
+			int itrs = static_cast<s2::RFGaussianBlur*>(rs.filter)->GetIterations();
 			SpriteGaussianBlur::Draw(spr, t, itrs);
-		} else if (filter->GetMode() == s2::FM_OUTER_GLOW) {
-			int itrs = static_cast<s2::RFOuterGlow*>(filter)->GetIterations();
+		} else if (rs.filter->GetMode() == s2::FM_OUTER_GLOW) {
+			int itrs = static_cast<s2::RFOuterGlow*>(rs.filter)->GetIterations();
 			SpriteOuterGlow::Draw(spr, t, itrs);
 		} else {
 			if (params.set_shader) {
 				mgr->SetShader(sl::FILTER);
 			}
 			sl::FilterShader* shader = static_cast<sl::FilterShader*>(mgr->GetShader(sl::FILTER));
-			shader->SetMode(sl::FILTER_MODE(filter->GetMode()));
-			switch (filter->GetMode())
+			shader->SetMode(sl::FILTER_MODE(rs.filter->GetMode()));
+			switch (rs.filter->GetMode())
 			{
 			case s2::FM_EDGE_DETECTION:
 				{
-					s2::RFEdgeDetection* ed = static_cast<s2::RFEdgeDetection*>(filter);
+					s2::RFEdgeDetection* ed = static_cast<s2::RFEdgeDetection*>(rs.filter);
 					sl::EdgeDetectProg* prog = static_cast<sl::EdgeDetectProg*>(shader->GetProgram(sl::FM_EDGE_DETECTION));
 					prog->SetBlend(ed->GetBlend());
 				}
@@ -104,7 +72,7 @@ void SpriteRenderer::Draw(const Sprite* spr,
 			mgr->SetShader(sl::SPRITE2);
 		}
 		s2::RenderParams t = params;
-		t.camera = ct;
+		t.camera = rc;
 		DrawImpl(spr, t);
 	}
 }
@@ -150,11 +118,7 @@ void SpriteRenderer::Draw(const Symbol* symbol,
 void SpriteRenderer::DrawImpl(const Sprite* spr, 
 							  const s2::RenderParams& params)
 {
-	s2::RenderParams trans = params;
-	trans.mt = spr->GetTransMatrix() * params.mt;
-	trans.color = spr->GetColor() * params.color;
-
-	spr->GetSymbol().Draw(trans, spr);
+	spr->GetSymbol().Draw(params, spr);
 
 	if (spr->IsAnchor() && Config::Instance()->GetSettings().draw_anchor) 
 	{

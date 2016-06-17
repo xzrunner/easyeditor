@@ -26,12 +26,17 @@ Symbol::~Symbol()
 
 void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 {
+	s2::RenderParams p = params;
+	if (spr) {
+		p.mt = spr->GetTransMatrix() * params.mt;
+		p.color = spr->GetColor() * params.color;
+	}
 	const ee::SettingData& setting = ee::Config::Instance()->GetSettings();
 	if (setting.visible_label_bg) {
-		DrawBackground(spr, params.mt);
+		DrawBackground(spr, p.mt);
 	} 
  	if (setting.visible_label_text) {
- 		DrawText(spr, params);
+ 		DrawText(spr, p);
  	}
 }
 

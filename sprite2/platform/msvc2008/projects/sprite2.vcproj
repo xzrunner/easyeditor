@@ -263,11 +263,11 @@
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\include\sprite2\RenderCamera.h"
+						RelativePath="..\..\..\include\sprite2\RenderCamera.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\include\sprite2\RenderCamera.inl"
+						RelativePath="..\..\..\include\sprite2\RenderCamera.h"
 						>
 					</File>
 				</Filter>

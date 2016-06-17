@@ -16,13 +16,11 @@ public:
 	RenderFilter*	filter;
 	BlendMode		blend;
 
-	float filter_params[4];
-
 public:
-	RenderShader()
-		: filter(NULL)
-		, blend(BM_NULL)
-	{}
+	RenderShader();
+	~RenderShader();
+
+	RenderShader operator * (const RenderShader& rs) const;
 
 }; // RenderShader
 

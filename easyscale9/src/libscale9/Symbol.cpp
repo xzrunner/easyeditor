@@ -4,6 +4,8 @@
 
 #include <ee/StringHelper.h>
 
+#include <sprite2/RenderParams.h>
+
 namespace escale9
 {
 
@@ -21,7 +23,12 @@ Symbol::Symbol(const Symbol& symbol)
 
 void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 {
-	m_data.Draw(params, spr);
+	s2::RenderParams p = params;
+	if (spr) {
+		p.mt = spr->GetTransMatrix() * params.mt;
+		p.color = spr->GetColor() * params.color;
+	}
+	m_data.Draw(p, spr);
 }
 
 void Symbol::ReloadTexture() const

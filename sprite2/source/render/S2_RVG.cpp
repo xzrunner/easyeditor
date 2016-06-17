@@ -13,7 +13,7 @@ void RVG::Init()
 	rvg_style_init();
 }
 
-void RVG::Color(const s2::Color& color)
+void RVG::SetColor(const Color& color)
 {
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	if (CameraMgr::Instance()->IsType(CameraMgr::ORTHO)) {
@@ -167,7 +167,7 @@ void RVG::Triangles(const std::vector<sm::vec2>& triangles)
 	}
 }
 
-void RVG::Triangles(const std::vector<sm::vec2>& triangles, const std::vector<s2::Color>& colors)
+void RVG::Triangles(const std::vector<sm::vec2>& triangles, const std::vector<Color>& colors)
 {
 	// todo
 }

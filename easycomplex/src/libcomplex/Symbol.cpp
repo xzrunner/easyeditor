@@ -70,6 +70,12 @@ void Symbol::Release() const
 
 void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 {
+	s2::RenderParams p = params;
+	if (spr) {
+		p.mt = spr->GetTransMatrix() * params.mt;
+		p.color = spr->GetColor() * params.color;
+	}
+
  	const ee::TPNode* n = NULL;
 	if (ee::Config::Instance()->IsUseDTex() && 
 		m_render_cache_open) 
@@ -134,7 +140,7 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 		const std::vector<s2::Sprite*>& children = m_core->GetChildren();
 		for (int i = 0, n = children.size(); i < n; ++i) {
 			ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
-			ee::SpriteRenderer::Draw(child, params);
+			ee::SpriteRenderer::Draw(child, p);
 		}
 		sm::vec2 sz = m_clipbox.Size();
 		if (sz.x > 0 && sz.y > 0) 
@@ -142,7 +148,7 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 			sm::vec2 min(m_clipbox.xmin, m_clipbox.ymin), 
 				max(m_clipbox.xmax, m_clipbox.ymax);
 			ee::RVG::Color(s2::Color(0, 204, 0));
-			ee::RVG::Rect(ee::Math2D::TransVector(min, params.mt), ee::Math2D::TransVector(max, params.mt), false);
+			ee::RVG::Rect(ee::Math2D::TransVector(min, p.mt), ee::Math2D::TransVector(max, p.mt), false);
 		}
 	}
 }

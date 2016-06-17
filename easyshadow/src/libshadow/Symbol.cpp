@@ -5,6 +5,8 @@
 
 #include <sprite2/RenderParams.h>
 
+#include <ee/Sprite.h>
+
 namespace eshadow
 {
 
@@ -33,8 +35,13 @@ Symbol* Symbol::Clone() const
 
 void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 {
+	s2::RenderParams p = params;
+	if (spr) {
+		p.mt = spr->GetTransMatrix() * params.mt;
+		p.color = spr->GetColor() * params.color;
+	}
 	if (m_shadow) {
-		m_shadow->Draw(params.mt, params.color.mul.a);
+		m_shadow->Draw(p.mt, p.color.mul.a);
 	}
 }
 

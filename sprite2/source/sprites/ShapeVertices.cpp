@@ -16,7 +16,7 @@ void ShapeVertices::Draw(const std::vector<sm::vec2>& vertices, bool closed,
 	for (int i = 0, n = vertices.size(); i < n; ++i) {
 		trans[i] = mt * vertices[i];
 	}
-	RVG::Color(color.mul);
+	RVG::SetColor(color.mul);
 	RVG::Polyline(trans, closed);
 }
 

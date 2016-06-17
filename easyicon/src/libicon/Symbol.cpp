@@ -27,16 +27,22 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 		return;
 	}
 
+	s2::RenderParams p = params;
+	if (spr) {
+		p.mt = spr->GetTransMatrix() * params.mt;
+		p.color = spr->GetColor() * params.color;
+	}
+
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
-	shader->SetColor(params.color.mul.ToABGR(), params.color.add.ToABGR());
-	shader->SetColorMap(params.color.rmap.ToABGR(), params.color.gmap.ToABGR(), params.color.bmap.ToABGR());
+	shader->SetColor(p.color.mul.ToABGR(), p.color.add.ToABGR());
+	shader->SetColorMap(p.color.rmap.ToABGR(), p.color.gmap.ToABGR(), p.color.bmap.ToABGR());
 
 	float process = 1;
 	if (spr) {
 		process = static_cast<const Sprite*>(spr)->GetProcess();
 	}
-	m_icon->Draw(params.mt, process);
+	m_icon->Draw(p.mt, process);
 }
 
 void Symbol::ReloadTexture() const

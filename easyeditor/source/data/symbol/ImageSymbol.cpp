@@ -10,6 +10,7 @@
 #include "Pseudo3DCamera.h"
 
 #include <sprite2/ImageSymbol.h>
+#include <sprite2/RenderParams.h>
 
 namespace ee
 {
@@ -88,7 +89,12 @@ ImageSymbol* ImageSymbol::Clone() const
 
 void ImageSymbol::Draw(const s2::RenderParams& params, const Sprite* spr) const
 {
-	m_core->Draw(params, spr ? spr->GetCore() : NULL);
+	s2::RenderParams p = params;
+	if (spr) {
+		p.mt = spr->GetTransMatrix() * params.mt;
+		p.color = spr->GetColor() * params.color;
+	}
+	m_core->Draw(p, spr ? spr->GetCore() : NULL);
 }
 
 void ImageSymbol::ReloadTexture() const

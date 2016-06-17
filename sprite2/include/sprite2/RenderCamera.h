@@ -17,12 +17,12 @@ public:
 public:
 	RenderCamera();
 
+	RenderCamera operator * (const RenderCamera& rc) const;
+
 	void CalculateZ(float cam_angle, sm::vec2 vertices[4], float z[4]) const;
 
 }; // RenderCamera
 
 }
-
-#include "RenderCamera.inl"
 
 #endif // _SPRITE2_RENDER_CAMERA_H_

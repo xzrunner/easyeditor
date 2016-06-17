@@ -89,16 +89,18 @@ render_func(void* symbol, float* mat, float x, float y, float angle, float scale
 
 	// todo color trans
 
-	sm::mat4 mt = rp->mat;
-	if (!rp->p3d->local_mode_draw) {
-		mt.x[0] = mat[0];
-		mt.x[1] = mat[1];
-		mt.x[4] = mat[2];
-		mt.x[5] = mat[3];
-		mt.x[12]= mat[4];
-		mt.x[13]= mat[5];
+	if (rp->p3d->local_mode_draw) {
+		params.mt = rp->mat;
+	} else {
+		sm::mat4 _mat;
+		_mat.x[0] = mat[0];
+		_mat.x[1] = mat[1];
+		_mat.x[4] = mat[2];
+		_mat.x[5] = mat[3];
+		_mat.x[12]= mat[4];
+		_mat.x[13]= mat[5];
+		params.mt = _mat * rp->mat;
 	}
-	params.mt = mt;
 
 	ee::SpriteRenderer::Draw(sym, params, sm::vec2(x, y), angle, scale, scale, 0, 0);
 

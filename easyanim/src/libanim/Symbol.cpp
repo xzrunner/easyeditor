@@ -37,14 +37,20 @@ Symbol::~Symbol()
 
 void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 {
+	s2::RenderParams p = params;
+	if (spr) {
+		p.mt = spr->GetTransMatrix() * params.mt;
+		p.color = spr->GetColor() * params.color;
+	}
+
 	if (m_index != 0) {
-		Utility::DrawAnimSymbol(this, params, m_index);
+		Utility::DrawAnimSymbol(this, p, m_index);
 	} else {
 		if (m_init_time == 0) {
 			m_init_time = clock();
-			Utility::DrawAnimSymbol(this, params, 1);
+			Utility::DrawAnimSymbol(this, p, 1);
 		} else {
-			Utility::DrawAnimSymbol(this, params, GetCurrFrame());
+			Utility::DrawAnimSymbol(this, p, GetCurrFrame());
 		}
 	}
 }

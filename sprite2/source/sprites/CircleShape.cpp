@@ -53,7 +53,7 @@ void CircleShape::Draw(const sm::mat4& mt, const RenderColor& color) const
 {
 	sm::vec2 c = mt * m_center;
 	float r = sm::mat_trans_len(m_radius, mt);
-	RVG::Color(color.mul);
+	RVG::SetColor(color.mul);
 	RVG::Circle(c, r, false, 32);
 }
 

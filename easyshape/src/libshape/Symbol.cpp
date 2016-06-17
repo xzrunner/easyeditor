@@ -9,6 +9,7 @@
 #include <ee/SettingData.h>
 #include <ee/Visitor.h>
 #include <ee/JsonSerializer.h>
+#include <ee/Sprite.h>
 
 #include <sprite2/RenderParams.h>
 
@@ -53,16 +54,22 @@ Symbol* Symbol::Clone() const
 
 void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 {
+	s2::RenderParams p = params;
+	if (spr) {
+		p.mt = spr->GetTransMatrix() * params.mt;
+		p.color = spr->GetColor() * params.color;
+	}
+
  	if (m_bg) {
- 		m_bg->Draw(params, spr);
+ 		m_bg->Draw(p, spr);
  	}
 	if (ee::Config::Instance()->GetSettings().visible_shape)
 	{
 		for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
-			m_bg_outline[i]->Draw(params.mt);
+			m_bg_outline[i]->Draw(p.mt);
 		}
 		for (size_t i = 0, n = m_shapes.size(); i < n; ++i) {
-			m_shapes[i]->Draw(params.mt);
+			m_shapes[i]->Draw(p.mt);
 		}
 	}
 }
