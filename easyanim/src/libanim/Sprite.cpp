@@ -49,13 +49,12 @@ Sprite* Sprite::Clone() const
 	return sprite; 
 }
 
-bool Sprite::Update(float dt, const sm::mat4& mat) 
+bool Sprite::Update(float dt) 
 {
-	sm::mat4 mt = GetTransMatrix() * mat;
 	std::vector<ee::Sprite*> sprites;
 	Utility::GetCurrSprites(m_symbol, m_symbol->GetCurrFrame(), sprites);
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		sprites[i]->Update(dt, mt);
+		sprites[i]->Update(dt);
 	}
 	for_each(sprites.begin(), sprites.end(), ee::DeletePointerFunctor<ee::Sprite>());
 	return true;

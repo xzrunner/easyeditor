@@ -47,7 +47,7 @@ Sprite* Sprite::Clone() const
 	return sprite;
 }
 
-bool Sprite::Update(float dt, const sm::mat4& mat)
+bool Sprite::Update(float dt)
 {
 	return true;
 }

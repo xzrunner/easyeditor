@@ -38,7 +38,7 @@ public:
 	//	
 	virtual void ClearUserData(bool deletePtr);
 
-	virtual bool Update(float dt, const sm::mat4& mat) = 0;
+	virtual bool Update(float dt) = 0;
 
 	virtual const Symbol& GetSymbol() const = 0;
 	virtual void SetSymbol(Symbol* symbol) = 0;
