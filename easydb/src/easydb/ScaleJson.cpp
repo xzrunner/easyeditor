@@ -2,6 +2,7 @@
 #include "check_params.h"
 
 #include <ee/FileHelper.h>
+#include <ee/SpriteIO.h>
 
 #include <fstream>
 
