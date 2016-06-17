@@ -375,13 +375,13 @@ void SpriteIO::StoreColor(Json::Value& val, const Data& data)
 		val["add color"]	= color2str(data.col.add, PT_ABGR);
 	}
 
-	if (!compress || data.col.rmap != s2::Color(255, 0, 0, 0)) {
+	if (!compress || data.col.rmap.r != 255 || data.col.rmap.g != 0 || data.col.rmap.b != 0) {
 		val["r trans"]		= color2str(data.col.rmap, PT_RGBA);
 	}
-	if (!compress || data.col.gmap != s2::Color(0, 255, 0, 0)) {
+	if (!compress || data.col.gmap.r != 0 || data.col.gmap.g != 255 || data.col.gmap.b != 0) {
 		val["g trans"]		= color2str(data.col.gmap, PT_RGBA);
 	}
-	if (!compress || data.col.bmap != s2::Color(0, 0, 255, 0)) {
+	if (!compress || data.col.bmap.r != 0 || data.col.bmap.g != 0 || data.col.bmap.b != 255) {
 		val["b trans"]		= color2str(data.col.bmap, PT_RGBA);
 	}
 }
