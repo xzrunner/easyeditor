@@ -22,6 +22,7 @@ public:
 	virtual bool OnMouseRightUp(int x, int y);
 	virtual bool OnMouseMove(int x, int y);
 	virtual bool OnMouseDrag(int x, int y);
+	virtual bool OnMouseLeftDClick(int x, int y);
 
 	virtual bool OnDraw() const;
 	virtual bool Clear();

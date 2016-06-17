@@ -187,6 +187,19 @@ bool RectCutOP::OnMouseDrag(int x, int y)
 	return false;
 }
 
+bool RectCutOP::OnMouseLeftDClick(int x, int y)
+{
+	if (ee::ZoomViewOP::OnMouseLeftDClick(x, y)) return true;
+
+	if (!m_stage->GetImage()) return false;
+
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
+	sm::rect* rect = m_rects.QueryRect(pos);
+	m_center.pos = rect->Center();
+
+	return false;
+}
+
 bool RectCutOP::OnDraw() const
 {
 	if (ee::ZoomViewOP::OnDraw()) return true;
