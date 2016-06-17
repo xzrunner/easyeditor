@@ -103,7 +103,7 @@ void RegularRectCondense::LoadPixels(const std::vector<Rect>& rects,
 
 void RegularRectCondense::CondenseEmpty(Grid* g)
 {
-	if (g->r.w == 0 || g->r.h == 0) {
+	if (g->r.w == 0 || g->r.h == 0 || g->r.is_const) {
 		return;
 	}
 
