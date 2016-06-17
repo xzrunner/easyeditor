@@ -50,8 +50,8 @@ int LRJsonPacker::Run(int argc, char *argv[])
 
 void LRJsonPacker::Run(const std::string& filepath)
 {
-	std::string str = filepath.substr(0, filepath.find("_lr.json"));
-	if (str.find(".") != std::string::npos) {
+	std::string filename = ee::FileHelper::GetFilename(filepath);
+	if (filename.find(".") != std::string::npos) {
 		PackLogic(filepath);
 	} else {
 		PackGraphics(filepath);
