@@ -147,6 +147,7 @@ void LRExpandGroup::LoadSprites(const Json::Value& src_spr_val, const Trans& tra
 		nd.position = ee::Math2D::RotateVector(sm::vec2(new_x, new_y), trans.angle) + trans.translation;
 
 		int sz = dst_sprs_val.size();
+		dst_sprs_val[sz] = src_spr_val;
 		ee::SpriteIO::Store(dst_sprs_val[sz], nd);
 	}
 }

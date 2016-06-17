@@ -170,6 +170,7 @@ std::string LRSeparateComplex::CreateNewComplexFile(const Json::Value& value) co
 	ee::SpriteIO::Load(spr_val, data);
 	FixPosWithShape(data.position, value["filepath"].asString());
 	int idx = 0;
+	out_val["sprite"][idx] = spr_val;
 	ee::SpriteIO::Store(out_val["sprite"][idx], data);
 
 	std::string outpath = m_output_dir + "\\" + name + "_complex.json";
