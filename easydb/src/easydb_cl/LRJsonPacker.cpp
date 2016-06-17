@@ -525,13 +525,12 @@ void LRJsonPacker::ParserSpecialFromSprite(const Json::Value& src_val, const std
 
 void LRJsonPacker::ParserSpecialLayer(const Json::Value& spr_val, const std::string& name, Json::Value& out_val)
 {
-	ee::SpriteIO::Data src_data, dst_data;
+	ee::SpriteIO::Data src_data;
 	ee::SpriteIO::Load(spr_val, src_data);
 
-// 	float px = spr_val["position"]["x"].asDouble(),
-// 		py = spr_val["position"]["y"].asDouble();
+	Json::Value dec_val;
 
-	dst_data.position = src_data.position;
+	sm::vec2 pos = src_data.position;
 
 	std::string s_name;
 	std::string export_name;
@@ -555,17 +554,17 @@ void LRJsonPacker::ParserSpecialLayer(const Json::Value& spr_val, const std::str
 
 		ee::SpriteIO::Data data;
 		ee::SpriteIO::Load(val["sprite"][idx], data);
-		dst_data.position += data.position;
+		pos += data.position;
 	}
-
 
 	if (!s_name.empty() && s_name[0] != '_') {
-		dst_data.name = s_name;
+		dec_val["name"] = s_name;
 	}
 
-	Json::Value dec_val;
 	dec_val["export"] = export_name;
-	ee::SpriteIO::Store(dec_val, dst_data);
+
+	dec_val["x"] = pos.x;
+	dec_val["y"] = pos.y;
 
 	int sz = out_val[name].size();
 	out_val[name][sz] = dec_val;
