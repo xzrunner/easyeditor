@@ -11,6 +11,7 @@
 #include <ee/ImageSymbol.h>
 #include <ee/Math2D.h>
 #include <ee/EE_ShaderLab.h>
+#include <ee/SpriteIO.h>
 
 #include <fstream>
 
@@ -201,20 +202,13 @@ void ScaleOverall::ScaleAnim(const std::string& path, float scale,
 sm::vec2 ScaleOverall::GetScaledPos(Json::Value& sprite_val, float scale, 
 									   const sm::vec2& img_offset) const
 {
-	sm::vec2 pos;
-	pos.x = sprite_val["position"]["x"].asDouble();
-	pos.y = sprite_val["position"]["y"].asDouble();
-
-	float angle = sprite_val["angle"].asDouble();
-
-	sm::vec2 offset;
-	offset.x = sprite_val["x offset"].asDouble();
-	offset.y = sprite_val["y offset"].asDouble();
+	ee::SpriteIO::Data data;
+	ee::SpriteIO::Load(sprite_val, data);
 
 // 	sm::vec2 center = pos + ee::Math2D::RotateVector(-offset, angle);
 // 	center = center + ee::Math2D::RotateVector(img_offset, angle);
 
-	sm::vec2 center = pos + ee::Math2D::RotateVector(img_offset, angle);
+	sm::vec2 center = data.position + ee::Math2D::RotateVector(img_offset, data.angle);
 
 	center *= scale;
 

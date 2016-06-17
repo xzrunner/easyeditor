@@ -22,6 +22,27 @@
 namespace ee
 {
 
+SpriteIO::Data::Data()
+{
+	position	= sm::vec2(0, 0);
+	angle		= 0;
+	scale		= sm::vec2(1, 1);
+	shear		= sm::vec2(0, 0);
+	offset		= sm::vec2(0, 0);
+	mirror		= sm::bvec2(false, false);
+	perspective	= sm::vec2(0, 0);
+
+	blend		= s2::BM_NULL;
+	filter		= NULL;
+	camera		= s2::CM_ORTHO;
+
+	clip		= false;
+	anchor		= false;
+
+	visible		= true;
+	editable	= true;
+}
+
 void SpriteIO::Load(const Json::Value& val, Sprite* spr)
 {
 	Data data;

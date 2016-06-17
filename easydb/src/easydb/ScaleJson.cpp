@@ -128,10 +128,13 @@ void ScaleJson::ScaleAnim(const std::string& path, float scale, const std::strin
 
 void ScaleJson::ScaleSprite(Json::Value& sprite_val, float scale) const
 {
-	sprite_val["x scale"] = sprite_val["x scale"].asDouble() * scale;
-	sprite_val["y scale"] = sprite_val["y scale"].asDouble() * scale;
-	sprite_val["position"]["x"] = sprite_val["position"]["x"].asDouble() * scale;
-	sprite_val["position"]["y"] = sprite_val["position"]["y"].asDouble() * scale;
+	ee::SpriteIO::Data data;
+	ee::SpriteIO::Load(sprite_val, data);
+
+	data.scale *= scale;
+	data.position *= scale;
+
+	ee::SpriteIO::Store(sprite_val, data);
 }
 
 }

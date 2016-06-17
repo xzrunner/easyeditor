@@ -25,7 +25,7 @@ public:
 public:
 	struct Data
 	{
-		Data() :  filter(NULL) {}
+		Data();
 		// pass filter to spr
 //		~Data() { delete filter; }
 

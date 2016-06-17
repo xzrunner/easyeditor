@@ -3,6 +3,7 @@
 
 #include <ee/FileHelper.h>
 #include <ee/Math2D.h>
+#include <ee/SpriteIO.h>
 
 #include <fstream>
 
@@ -90,37 +91,31 @@ void LRExpandGroup::Expand(const Json::Value& src_val, Json::Value& dst_val)
 void LRExpandGroup::LoadSprites(const Json::Value& src_spr_val, const Trans& trans, Json::Value& dst_sprs_val)
 {
 	std::string filepath = src_spr_val["filepath"].asString();
+
+	ee::SpriteIO::Data data;
+	ee::SpriteIO::Load(src_spr_val, data);
 	if (filepath == "group") 
 	{
 		const Json::Value& gval = src_spr_val["group"];
 
-		sm::vec2 translation;
-		translation.x = src_spr_val["position"]["x"].asDouble();
-		translation.y = src_spr_val["position"]["y"].asDouble();
-		float angle = src_spr_val["angle"].asDouble();
-		sm::vec2 scale;
-		scale.x = src_spr_val["x scale"].asDouble();
-		scale.y = src_spr_val["y scale"].asDouble();
-		bool xmirror = src_spr_val["x mirror"].asBool(),
-			 ymirror = src_spr_val["y mirror"].asBool();
 		if (trans.xmirror) {
-			translation.x = -translation.x;
-			angle = -angle;
+			data.position.x = -data.position.x;
+			data.angle = -data.angle;
 		}
 		if (trans.ymirror) {
-			translation.y = -translation.y;
-			angle = -angle;
+			data.position.y = -data.position.y;
+			data.angle = -data.angle;
 		}
 
 		Trans t;
-		t.angle = angle + trans.angle;
-		t.scale.x = scale.x * trans.scale.x;
-		t.scale.y = scale.y * trans.scale.y;
-		t.xmirror = (xmirror && !trans.xmirror) || (!xmirror && trans.xmirror);
-		t.ymirror = (ymirror && !trans.ymirror) || (!ymirror && trans.ymirror);
+		t.angle = data.angle + trans.angle;
+		t.scale.x = data.scale.x * trans.scale.x;
+		t.scale.y = data.scale.y * trans.scale.y;
+		t.xmirror = (data.mirror.x && !trans.xmirror) || (!data.mirror.x && trans.xmirror);
+		t.ymirror = (data.mirror.y && !trans.ymirror) || (!data.mirror.y && trans.ymirror);
 
-		float new_x = translation.x * trans.scale.x,
-			  new_y = translation.y * trans.scale.y;
+		float new_x = data.position.x * trans.scale.x,
+			  new_y = data.position.y * trans.scale.y;
 		t.translation = ee::Math2D::RotateVector(sm::vec2(new_x, new_y), trans.angle);
 		t.translation += trans.translation;
 
@@ -131,37 +126,28 @@ void LRExpandGroup::LoadSprites(const Json::Value& src_spr_val, const Trans& tra
 	} 
 	else 
 	{
-		float old_x = src_spr_val["position"]["x"].asDouble(),
-			  old_y = src_spr_val["position"]["y"].asDouble();
-		float old_angle = src_spr_val["angle"].asDouble();
-		float old_sx = src_spr_val["x scale"].asDouble(),
-			  old_sy = src_spr_val["y scale"].asDouble();
-		bool old_mx = src_spr_val["x mirror"].asBool(),
-			 old_my = src_spr_val["y mirror"].asBool();
+		ee::SpriteIO::Data nd = data;
+
 		if (trans.xmirror) {
-			old_x = -old_x;
-			old_angle = -old_angle;
+			nd.position.x = -data.position.x;
+			nd.angle = -data.angle;
 		}
 		if (trans.ymirror) {
-			old_y = -old_y;
-			old_angle = -old_angle;
+			nd.position.y = -data.position.y;
+			nd.angle = -data.angle;
 		}
 
+		nd.angle = nd.angle + trans.angle;
+		nd.scale.x = nd.scale.x * trans.scale.x;
+		nd.scale.y = nd.scale.y * trans.scale.y;
+		nd.mirror.x = (nd.mirror.x && !trans.xmirror) || (!nd.mirror.x && trans.xmirror);
+		nd.mirror.y = (nd.mirror.y && !trans.ymirror) || (!nd.mirror.y && trans.ymirror);
+		float new_x = data.position.x * trans.scale.x,
+			  new_y = data.position.y * trans.scale.y;
+		nd.position = ee::Math2D::RotateVector(sm::vec2(new_x, new_y), trans.angle) + trans.translation;
+
 		int sz = dst_sprs_val.size();
-		dst_sprs_val[sz] = src_spr_val;
-		dst_sprs_val[sz]["angle"] = old_angle + trans.angle;
-		dst_sprs_val[sz]["x scale"] = old_sx * trans.scale.x;
-		dst_sprs_val[sz]["y scale"] = old_sy * trans.scale.y;
-		dst_sprs_val[sz]["x mirror"] = (old_mx && !trans.xmirror) || (!old_mx && trans.xmirror);
-		dst_sprs_val[sz]["y mirror"] = (old_my && !trans.ymirror) || (!old_my && trans.ymirror);
-
-		float new_x = old_x * trans.scale.x,
-			  new_y = old_y * trans.scale.y;
-		sm::vec2 new_pos = ee::Math2D::RotateVector(sm::vec2(new_x, new_y), trans.angle);
-		new_pos += trans.translation;
-
-		dst_sprs_val[sz]["position"]["x"] = new_pos.x;
-		dst_sprs_val[sz]["position"]["y"] = new_pos.y;
+		ee::SpriteIO::Store(dst_sprs_val[sz], nd);
 	}
 }
 

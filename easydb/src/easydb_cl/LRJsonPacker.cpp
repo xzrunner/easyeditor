@@ -11,6 +11,7 @@
 #include <ee/Exception.h>
 #include <ee/StringHelper.h>
 #include <ee/Math2D.h>
+#include <ee/SpriteIO.h>
 
 #include <lr/dataset/Grids.h>
 #include <lr/dataset/CharacterFileName.h>
@@ -328,10 +329,14 @@ void LRJsonPacker::ParserCameraFromSprite(const Json::Value& src_val, const char
 	while (!spr_val.isNull()) 
 	{
 		Json::Value cam_val;
-		cam_val["name"] = spr_val["name"];
-		cam_val["x"] = spr_val["position"]["x"];
-		cam_val["y"] = spr_val["position"]["y"];
-		cam_val["scale"] = spr_val["x scale"];
+
+		ee::SpriteIO::Data data;
+		ee::SpriteIO::Load(spr_val, data);
+
+		cam_val["name"] = data.name;
+		cam_val["x"] = data.position.x;
+		cam_val["y"] = data.position.y;
+		cam_val["scale"] = data.scale.x;
 
 		int sz = out_val[name].size();
 		out_val[name][sz] = cam_val;
@@ -369,10 +374,13 @@ void LRJsonPacker::ParserCharacterFromSprite(const Json::Value& src_val, const l
 			continue;
 		}				
 
+		ee::SpriteIO::Data data;
+		ee::SpriteIO::Load(spr_val, data);
+
 		Json::Value char_val;
-		char_val["name"] = spr_val["name"];
-		char_val["x"] = spr_val["position"]["x"];
-		char_val["y"] = spr_val["position"]["y"];
+		char_val["name"] = data.name;
+		char_val["x"] = data.position.x;
+		char_val["y"] = data.position.y;
 
 		// region
 		std::string shape_tag = ee::FileType::GetTag(ee::FileType::e_shape);
@@ -385,16 +393,13 @@ void LRJsonPacker::ParserCharacterFromSprite(const Json::Value& src_val, const l
 				tag_ext = shapes[0]->GetName();
 
 				if (eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(shapes[0])) {
-					float x = spr_val["position"]["x"].asDouble(),
-						y = spr_val["position"]["y"].asDouble();
-					float ang = spr_val["angle"].asDouble();					
-					ParserShape(poly, sm::vec2(x, y), ang, grids, true, char_val["grids"]);
+					ParserShape(poly, data.position, data.angle, grids, true, char_val["grids"]);
 				}
 			}
 		}
 
 		// tags
-		std::string tag = spr_val["tag"].asString();
+		std::string tag = data.tag;
 		if (!tag.empty() && tag[tag.size()-1] != ';') {
 			tag += ";";
 		}
@@ -408,7 +413,7 @@ void LRJsonPacker::ParserCharacterFromSprite(const Json::Value& src_val, const l
 
 		// angle
 		int dir = 1 + (out_name.GetField(lr::CharacterFileName::FT_DIRECTION)[0] - '1');
-		if (spr_val["x mirror"].asBool()) {
+		if (data.mirror.x) {
 			dir = 10 - dir;
 		}
 		dir = (dir + 7) % 8;
@@ -520,10 +525,13 @@ void LRJsonPacker::ParserSpecialFromSprite(const Json::Value& src_val, const std
 
 void LRJsonPacker::ParserSpecialLayer(const Json::Value& spr_val, const std::string& name, Json::Value& out_val)
 {
-	Json::Value dec_val;
+	ee::SpriteIO::Data src_data, dst_data;
+	ee::SpriteIO::Load(spr_val, src_data);
 
-	float px = spr_val["position"]["x"].asDouble(),
-		py = spr_val["position"]["y"].asDouble();
+// 	float px = spr_val["position"]["x"].asDouble(),
+// 		py = spr_val["position"]["y"].asDouble();
+
+	dst_data.position = src_data.position;
 
 	std::string s_name;
 	std::string export_name;
@@ -544,19 +552,20 @@ void LRJsonPacker::ParserSpecialLayer(const Json::Value& spr_val, const std::str
 		s_name = val["sprite"][(Json::Value::UInt)0]["name"].asString();
 
 		int idx = 0;
-		const Json::Value& spr_val = val["sprite"][idx];
-		float cx = spr_val["position"]["x"].asDouble(),
-			cy = spr_val["position"]["y"].asDouble(); 
-		px += cx;
-		py += cy;
-	}
-	if (!s_name.empty() && s_name[0] != '_') {
-		dec_val["name"] = s_name;
-	}
-	dec_val["export"] = export_name;
 
-	dec_val["x"] = px;
-	dec_val["y"] = py;
+		ee::SpriteIO::Data data;
+		ee::SpriteIO::Load(val["sprite"][idx], data);
+		dst_data.position += data.position;
+	}
+
+
+	if (!s_name.empty() && s_name[0] != '_') {
+		dst_data.name = s_name;
+	}
+
+	Json::Value dec_val;
+	dec_val["export"] = export_name;
+	ee::SpriteIO::Store(dec_val, dst_data);
 
 	int sz = out_val[name].size();
 	out_val[name][sz] = dec_val;
@@ -567,12 +576,13 @@ void LRJsonPacker::ParserParticleLayer(const Json::Value& spr_val, Json::Value& 
 {
 	Json::Value dec_val;
 
-	dec_val["x"] = spr_val["position"]["x"].asDouble();
-	dec_val["y"] = spr_val["position"]["y"].asDouble();
+	ee::SpriteIO::Data data;
+	ee::SpriteIO::Load(spr_val, data);
 
-	float sx = spr_val["x scale"].asDouble(),
-		sy = spr_val["y scale"].asDouble();
-	dec_val["scale"] = std::max(sx, sy);
+	dec_val["x"] = data.position.x;
+	dec_val["y"] = data.position.y;
+
+	dec_val["scale"] = std::max(data.scale.x, data.scale.y);
 
 	std::string sym_path = spr_val["filepath"].asString();
 	std::string name = ee::FileHelper::GetFilename(sym_path);

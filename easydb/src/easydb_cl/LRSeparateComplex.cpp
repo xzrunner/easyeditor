@@ -6,6 +6,7 @@
 #include <ee/StringHelper.h>
 #include <ee/SymbolMgr.h>
 #include <ee/Exception.h>
+#include <ee/SpriteIO.h>
 
 #include <easyshape.h>
 
@@ -165,16 +166,11 @@ std::string LRSeparateComplex::CreateNewComplexFile(const Json::Value& value) co
 		m_dir + "\\" + spr_val["filepath"].asString());
 	spr_val["filepath"] = relative_path;
 
-	sm::vec2 pos;
-	pos.x = spr_val["position"]["x"].asDouble();
-	pos.y = spr_val["position"]["y"].asDouble();
-	FixPosWithShape(pos, value["filepath"].asString());
-
-	spr_val["position"]["x"] = pos.x;
-	spr_val["position"]["y"] = pos.y;
-
+	ee::SpriteIO::Data data;
+	ee::SpriteIO::Load(spr_val, data);
+	FixPosWithShape(data.position, value["filepath"].asString());
 	int idx = 0;
-	out_val["sprite"][idx] = spr_val;
+	ee::SpriteIO::Store(out_val["sprite"][idx], data);
 
 	std::string outpath = m_output_dir + "\\" + name + "_complex.json";
 	Json::StyledStreamWriter writer;
@@ -190,28 +186,11 @@ std::string LRSeparateComplex::CreateNewComplexFile(const Json::Value& value) co
 void LRSeparateComplex::ResetOldSpriteVal(Json::Value& val, const std::string& export_name, const std::string& tag) const
 {
 	val["filepath"] = export_name + "_complex.json";
-	val["position"]["x"] = 0;
-	val["position"]["y"] = 0;
-
-	val["angle"] = 0;
-	val["x scale"] = 1;
-	val["y scale"] = 1;
-	val["x shear"] = 0;
-	val["y shear"] = 0;
-	val["x offset"] = 0;
-	val["y offset"] = 0;
-	val["x mirror"] = false;
-	val["y mirror"] = false;
-
 	val["export"] = export_name;
-	val["tag"] = tag;
-	val["clip"] = false;
-
-	val["multi color"] = "0xffffffff";
-	val["add color"] = "0x00000000";
-	val["r trans"] = "0xff0000ff";
-	val["g trans"] = "0x00ff00ff";
-	val["b trans"] = "0x0000ffff";
+	
+	ee::SpriteIO::Data data;
+	data.tag = tag;
+	ee::SpriteIO::Store(val, data);
 }
 
 void LRSeparateComplex::FixPosWithShape(sm::vec2& pos, const std::string& filepath) const

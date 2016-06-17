@@ -2,6 +2,7 @@
 #include "check_params.h"
 
 #include <ee/std_functor.h>
+#include <ee/SpriteIO.h>
 
 #include <fstream>
 #include <algorithm>
@@ -118,13 +119,13 @@ Sprite(const Json::Value& json_val)
 	id = curr_id++;
 
 	filepath = json_val["filepath"].asString();
-	pos.x = json_val["position"]["x"].asDouble();
-	pos.y = json_val["position"]["y"].asDouble();
-	angle = json_val["angle"].asDouble();
-	scale.x = json_val["x scale"].asDouble();
-	scale.y = json_val["y scale"].asDouble();
-	shear.x = json_val["x shear"].asDouble();
-	shear.y = json_val["y shear"].asDouble();
+
+	ee::SpriteIO::Data data;
+	ee::SpriteIO::Load(json_val, data);
+	pos = data.position;
+	angle = data.angle;
+	scale = data.scale;
+	shear = data.shear;
 }
 
 bool RemoveDuplicateSprite::Sprite::
