@@ -50,6 +50,14 @@ void RectCutCMPT::OnSaveEditOP(wxCommandEvent& event)
 		value["center"]["x"] = center.x;
 		value["center"]["y"] = center.y;
 
+		for (int i = 0, n = m_part_rects.size(); i < n; ++i) {
+			const sm::rect& r = m_part_rects[i];
+			value["part_rect"][i]["xmin"] = r.xmin;
+			value["part_rect"][i]["xmax"] = r.xmax;
+			value["part_rect"][i]["ymin"] = r.ymin;
+			value["part_rect"][i]["ymax"] = r.ymax;
+		}
+
 		std::string filename = ee::FileHelper::GetFilenameAddTag(dlg.GetPath().ToStdString(), FILTER, "json");
 		Json::StyledStreamWriter writer;
 		std::locale::global(std::locale(""));
@@ -81,6 +89,18 @@ void RectCutCMPT::OnLoadEditOP(wxCommandEvent& event)
 		center.x = value["center"]["x"].asDouble();
 		center.y = value["center"]["y"].asDouble();
 		op->SetCenter(center);
+
+		int i = 0;
+		Json::Value val = value["part_rect"][i++];
+		while (!val.isNull()) {
+			sm::rect r;
+			r.xmin = static_cast<float>(val["xmin"].asDouble());
+			r.xmax = static_cast<float>(val["xmax"].asDouble());
+			r.ymin = static_cast<float>(val["ymin"].asDouble());
+			r.ymax = static_cast<float>(val["ymax"].asDouble());
+			m_part_rects.push_back(r);
+			val = value["part_rect"][i++];
+		}
 
 		std::string dlgpath = ee::FileHelper::GetFileDir(filename);
 		std::string path = value["image filepath"].asString();
