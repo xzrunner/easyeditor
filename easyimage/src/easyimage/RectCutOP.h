@@ -36,6 +36,7 @@ public:
 	RectCutCMPT* GetEditCMPT() const { return m_cmpt; }
 
 	const sm::vec2& GetCenter() const { return m_center.pos; }
+	void SetCenter(const sm::vec2& center) { m_center.pos = center; }
 
 private:
 	void DrawCaptureLine() const;

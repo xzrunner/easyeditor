@@ -46,6 +46,10 @@ void RectCutCMPT::OnSaveEditOP(wxCommandEvent& event)
 		value["image filepath"] = ee::FileHelper::GetRelativePath(dir, filepath);
 		op->GetRectMgr().Store(value);
 
+		const sm::vec2& center = op->GetCenter();
+		value["center"]["x"] = center.x;
+		value["center"]["y"] = center.y;
+
 		std::string filename = ee::FileHelper::GetFilenameAddTag(dlg.GetPath().ToStdString(), FILTER, "json");
 		Json::StyledStreamWriter writer;
 		std::locale::global(std::locale(""));
@@ -72,10 +76,17 @@ void RectCutCMPT::OnLoadEditOP(wxCommandEvent& event)
 		fin.close();
 
 		RectCutOP* op = static_cast<RectCutOP*>(m_editop);
+
+		sm::vec2 center;
+		center.x = value["center"]["x"].asDouble();
+		center.y = value["center"]["y"].asDouble();
+		op->SetCenter(center);
+
 		std::string dlgpath = ee::FileHelper::GetFileDir(filename);
 		std::string path = value["image filepath"].asString();
 		std::string absolutePath = ee::FileHelper::GetAbsolutePath(dlgpath, path);
 		op->LoadImageFromFile(absolutePath);
+
 		op->GetRectMgr().Load(value);
 	}
 }

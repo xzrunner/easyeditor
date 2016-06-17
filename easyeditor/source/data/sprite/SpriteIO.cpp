@@ -492,7 +492,10 @@ void SpriteIO::StoreShader(Json::Value& val, const Data& data)
 		val["blend"] = BlendModes::Instance()->GetNameENFromMode(data.blend);
 	}
 
-	s2::FilterMode mode = data.filter->GetMode();
+	s2::FilterMode mode = s2::FM_NULL;
+	if (data.filter) {
+		mode = data.filter->GetMode();
+	}
 	if (mode != s2::FM_NULL)
 	{
 		Json::Value fval;
