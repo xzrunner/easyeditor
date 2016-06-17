@@ -45,7 +45,7 @@ void Frame::OnSaveAs(wxCommandEvent& event)
 	if (!m_task) return;
 
 	try {
-		std::string filter = GetFileFilter() + "|PNG files (*.png)|*.png";
+		std::string filter = GetFileFilter() + "; *.png";
 		wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, filter, wxFD_SAVE);
 		if (dlg.ShowModal() == wxID_OK)
 		{
