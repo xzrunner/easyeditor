@@ -126,6 +126,15 @@ bool Layer::ClearShape()
 	return m_shapes.Clear();
 }
 
+bool Layer::IsEditable() const 
+{
+	if (!m_base_filepath.empty()) {
+		return false;
+	} else {
+		return m_editable; 
+	}
+}
+
 void Layer::ResetSpritesVisibleEditable()
 {
 	std::vector<ee::Sprite*> sprites;

@@ -43,7 +43,7 @@ public:
 	void SetName(const std::string& name) { m_name = name; }
 	const std::string& GetName() const { return m_name; }
 
-	bool IsEditable() const { return m_editable; }
+	bool IsEditable() const;
 	bool IsVisible() const { return m_visible; }
 
 	void SetEditable(bool editable) { m_editable = editable; }
