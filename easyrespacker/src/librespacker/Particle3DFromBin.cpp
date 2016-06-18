@@ -59,8 +59,9 @@ void Particle3DFromBin::Unpack(uint8_t** ptr, PackParticle3D* p3d)
 	p3d->radial_spd = radial_spd;
 	p3d->radial_spd_var = radial_spd_var;
 
-	uint16_t tangential_spd, tangential_spd_var;
+	int16_t tangential_spd;
 	unpack(tangential_spd, ptr);
+	uint16_t tangential_spd_var;
 	unpack(tangential_spd_var, ptr);
 	p3d->tangential_spd = tangential_spd;
 	p3d->tangential_spd_var = tangential_spd_var;	

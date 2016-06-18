@@ -75,7 +75,7 @@ void Particle3DToBin::Pack(const PackParticle3D* p3d, uint8_t** ptr)
 	uint16_t radial_spd_var = TransFloat(p3d->radial_spd_var);
 	pack(radial_spd_var, ptr);
 
-	uint16_t tangential_spd = TransFloat(p3d->tangential_spd);
+	int16_t tangential_spd = TransFloat(p3d->tangential_spd);
 	pack(tangential_spd, ptr);
 	uint16_t tangential_spd_var = TransFloat(p3d->tangential_spd_var);
 	pack(tangential_spd_var, ptr);
