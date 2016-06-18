@@ -66,7 +66,7 @@ void SymbolPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 		pg->GetProperty(wxT("Tag"))->SetValue(m_symbol->tag);
 	} else {
 		pg->GetProperty(wxT("Name"))->SetValue(*m_name);
-		pg->GetProperty(wxT("Name"))->SetValue(*m_tag);
+		pg->GetProperty(wxT("Tag"))->SetValue(*m_tag);
 	}
 }
 

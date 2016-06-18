@@ -30,7 +30,7 @@ void FileIO::Store(const std::string& filepath, ParticleSystem* ps,
 	toolbar->Store(value);
 	value["version"] = VERSION;
 
-//	value["name"] = toolbar->m_name->GetValue();
+	value["name"] = ps->name;
 
 	value["static_mode"] = toolbar->m_static_mode->GetValue();
 
@@ -121,7 +121,7 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 
 	toolbar->Load(value, version);
 
-//	toolbar->m_name->SetValue(adapter.name);
+	ps->name = adapter.name;
 
 	bool static_mode = false;
 	if (!value["static_mode"].isNull()) {
