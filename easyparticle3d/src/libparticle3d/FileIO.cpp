@@ -12,6 +12,7 @@
 #include <ee/SliderCtrl.h>
 #include <ee/Math2D.h>
 #include <ee/SymbolMgr.h>
+#include <ee/Exception.h>
 
 #include <ps_3d.h>
 
@@ -249,6 +250,9 @@ p3d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
 		}
 
 		dst.ud = ee::SymbolMgr::Instance()->FetchSymbol(src.filepath);
+		if (!dst.ud) {
+			throw ee::Exception("Symbol doesn't exist, [parent]:%s, [child]:%s !", filepath.c_str(), src.filepath.c_str());
+		}
 	}
 
 	return cfg;
