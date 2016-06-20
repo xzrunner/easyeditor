@@ -349,11 +349,7 @@ void ArrangeSpriteImpl::OnPopMenuSelected(int type)
 
 void ArrangeSpriteImpl::OnDraw(const Camera& cam) const
 {
-	m_ctrl_node_radius = std::min(CTRL_NODE_RADIUS * cam.GetScale(), MAX_CTRL_NODE_RADIUS);
-	if (m_ctrl_node_radius / cam.GetScale() < 5) {
-		m_ctrl_node_radius = 0;
-	}
-
+	m_ctrl_node_radius = CTRL_NODE_RADIUS * cam.GetScale();
 	if (m_cfg.is_deform_open && m_selection->Size() == 1)
 	{
 		Sprite* selected = NULL;
@@ -363,7 +359,9 @@ void ArrangeSpriteImpl::OnDraw(const Camera& cam) const
 
 		sm::vec2 sz = selected->GetRect().Size();
 		float max_e = std::max(sz.x, sz.y);
-		if (m_ctrl_node_radius > max_e * 0.1f) {
+		if (max_e / cam.GetScale() < 100) {
+			m_ctrl_node_radius = 0;
+		} else if (m_ctrl_node_radius > max_e * 0.1f) {
 			m_ctrl_node_radius = 0;
 		} else {
 			if (m_stage->GetKeyState(WXK_SHIFT)) 
