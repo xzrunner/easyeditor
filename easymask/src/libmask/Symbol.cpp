@@ -43,7 +43,7 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 		p.color = spr->GetColor() * params.color;
 	}
 	if (m_base && m_mask) {
-		Draw(p.mt);
+		DrawImpl(p);
 	} else {
 		if (m_base) {
 			ee::SpriteRenderer::Draw(m_base, p);
@@ -72,7 +72,7 @@ void Symbol::LoadResources()
 	FileIO::Load(m_filepath.c_str(), this);
 }
 
-void Symbol::Draw(const sm::mat4& mt) const
+void Symbol::DrawImpl(const s2::RenderParams& params) const
 {
 	sl::ShaderMgr::Instance()->GetShader()->Commit();
 
@@ -90,17 +90,17 @@ void Symbol::Draw(const sm::mat4& mt) const
 	rc->SetProjection(edge, edge);
 	ee::GL::Viewport(0, 0, edge, edge);
 
-	DrawBaseToFbo0();
+	DrawBaseToFbo0(params.color);
 	DrawMaskToFbo1();
 
 	rc->SetModelView(ori_offset, ori_scale);
 	rc->SetProjection(ori_width, ori_height);
 	ee::GL::Viewport(0, 0, ori_width, ori_height);
 
-	DrawMashFromFbo(mt);
+	DrawMashFromFbo(params.mt);
 }
 
-void Symbol::DrawBaseToFbo0() const
+void Symbol::DrawBaseToFbo0(const s2::RenderColor& rc) const
 {
 	dtexf_t0_bind();
 	dtexf_t0_clear(0, -2, 2, 0);
@@ -111,6 +111,7 @@ void Symbol::DrawBaseToFbo0() const
 
 	s2::RenderParams params;
 	params.set_shader = false;
+	params.color = rc;
 	ee::SpriteRenderer::Draw(m_base, params);
 
 	shader->Commit();

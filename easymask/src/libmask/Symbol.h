@@ -3,6 +3,8 @@
 
 #include <ee/Symbol.h>
 
+namespace s2 { class RenderColor; }
+
 namespace emask
 {
 
@@ -32,9 +34,9 @@ protected:
 	virtual void LoadResources();
 
 private:
-	void Draw(const sm::mat4& mt) const;
+	void DrawImpl(const s2::RenderParams& params) const;
 
-	void DrawBaseToFbo0() const;
+	void DrawBaseToFbo0(const s2::RenderColor& rc) const;
 	void DrawMaskToFbo1() const;
 	void DrawMashFromFbo(const sm::mat4& mt) const;
 
