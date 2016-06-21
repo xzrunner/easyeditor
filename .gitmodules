@@ -28,3 +28,9 @@
 [submodule "camera25/src/camera25"]
 	path = camera25/src/camera25
 	url = ssh://tea.ejoy.com:3222/LR/camera25.git
+[submodule "fs/src/fs"]
+	path = fs/src/fs
+	url = ssh://git@tea.ejoy.com:3222/LR/fs.git
+[submodule "logger/src/logger"]
+	path = logger/src/logger
+	url = ssh://git@tea.ejoy.com:3222/LR/logger.git
