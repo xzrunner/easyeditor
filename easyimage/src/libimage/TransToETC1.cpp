@@ -3,7 +3,7 @@
 #include <ee/math_common.h>
 #include <ee/ImagePack.h>
 
-//#include <rg_etc1.h>
+#include <rg_etc1.h>
 #include <etcpack_lib.h>
 
 #include <fstream>
@@ -134,40 +134,40 @@ void TransToETC1::EncodeETC1()
 
 void TransToETC1::EncodeETC1ByRgEtc1()
 {
-// 	assert(m_width % 4 == 0 && m_height % 4 == 0);
-// 
-// 	rg_etc1::pack_etc1_block_init();
-// 	int bw = m_width / 4;
-// 	int bh = m_height / 4;
-// 
-// 	m_etc1_size = bw * bh * 8;
-// 	m_etc1_pixels = new uint8_t[m_etc1_size];
-// 	m_etc1_alpha_pixels = new uint8_t[m_etc1_size];
-// 
-// 	rg_etc1::etc1_pack_params params;
-// //	params.m_quality = rg_etc1::cLowQuality;	
-// 	params.m_quality = rg_etc1::cHighQuality;
-// 	params.m_dithering = false;
-// 	// rgb
-// 	for (int y = 0; y < bh; ++y) {
-// 		for (int x = 0; x < bw; ++x) {
-// 			uint8_t block[64];
-// 			for (int iy = 0; iy < 4; iy++) {
-// 				memcpy(block + 16 * iy, m_pixels + ((y * 4 + iy) * m_width + x * 4) * 4, 16);
-// 			}
-// 			rg_etc1::pack_etc1_block(m_etc1_pixels + (bw * y + x) * 8, (const unsigned int*)block, params);
-// 		}
-// 	}
-// 	// alpha
-// 	for (int y = 0; y < bh; ++y) {
-// 		for (int x = 0; x < bw; ++x) {
-// 			uint8_t block[64];
-// 			for (int iy = 0; iy < 4; iy++) {
-// 				memcpy(block + 16 * iy, m_alpha_pixels + ((y * 4 + iy) * m_width + x * 4) * 4, 16);
-// 			}
-// 			rg_etc1::pack_etc1_block(m_etc1_alpha_pixels + (bw * y + x) * 8, (const unsigned int*)block, params);
-// 		}
-// 	}
+	assert(m_width % 4 == 0 && m_height % 4 == 0);
+
+	rg_etc1::pack_etc1_block_init();
+	int bw = m_width / 4;
+	int bh = m_height / 4;
+
+	m_etc1_size = bw * bh * 8;
+	m_etc1_pixels = new uint8_t[m_etc1_size];
+	m_etc1_alpha_pixels = new uint8_t[m_etc1_size];
+
+	rg_etc1::etc1_pack_params params;
+//	params.m_quality = rg_etc1::cLowQuality;	
+	params.m_quality = rg_etc1::cHighQuality;
+	params.m_dithering = false;
+	// rgb
+	for (int y = 0; y < bh; ++y) {
+		for (int x = 0; x < bw; ++x) {
+			uint8_t block[64];
+			for (int iy = 0; iy < 4; iy++) {
+				memcpy(block + 16 * iy, m_pixels + ((y * 4 + iy) * m_width + x * 4) * 4, 16);
+			}
+			rg_etc1::pack_etc1_block(m_etc1_pixels + (bw * y + x) * 8, (const unsigned int*)block, params);
+		}
+	}
+	// alpha
+	for (int y = 0; y < bh; ++y) {
+		for (int x = 0; x < bw; ++x) {
+			uint8_t block[64];
+			for (int iy = 0; iy < 4; iy++) {
+				memcpy(block + 16 * iy, m_alpha_pixels + ((y * 4 + iy) * m_width + x * 4) * 4, 16);
+			}
+			rg_etc1::pack_etc1_block(m_etc1_alpha_pixels + (bw * y + x) * 8, (const unsigned int*)block, params);
+		}
+	}
 }
 
 void TransToETC1::EncodeETC1ByEtcPack()
