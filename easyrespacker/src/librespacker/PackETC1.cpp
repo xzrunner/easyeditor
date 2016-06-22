@@ -1,4 +1,4 @@
-#include "PackPKM.h"
+#include "PackETC1.h"
 #include "Lzma.h"
 #include "typedef.h"
 
@@ -24,20 +24,20 @@ struct PKMHeader
 	unsigned char heightLSB;
 };
 
-PackPKM::PackPKM()
+PackETC1::PackETC1()
 {
-	m_type = TT_PKM;
+	m_type = TT_ETC1;
 
 	m_width = m_height = 0;
 	m_rgb_buf = m_alpha_buf = NULL;
 }
 
-PackPKM::~PackPKM()
+PackETC1::~PackETC1()
 {
 	Clear();
 }
 
-void PackPKM::Load(const std::string& filepath)
+void PackETC1::Load(const std::string& filepath)
 {
 	Clear();
 
@@ -49,7 +49,7 @@ void PackPKM::Load(const std::string& filepath)
 	assert(w == m_width && h == m_height);
 }
 
-void PackPKM::Store(const std::string& filepath, float scale) const
+void PackETC1::Store(const std::string& filepath, float scale) const
 {
 	std::locale::global(std::locale(""));
 	std::ofstream fout(filepath.c_str(), std::ios::binary);
@@ -108,13 +108,13 @@ void PackPKM::Store(const std::string& filepath, float scale) const
 	fout.close();
 }
 
-void PackPKM::Clear()
+void PackETC1::Clear()
 {
 	delete m_rgb_buf, m_rgb_buf = NULL;
 	delete m_alpha_buf, m_alpha_buf = NULL;
 }
 
-void PackPKM::LoadCompressed(const std::string& filename, uint8_t*& buf, 
+void PackETC1::LoadCompressed(const std::string& filename, uint8_t*& buf, 
 							   int& width, int& height)
 {
 	std::ifstream fin(filename.c_str(), std::ios::binary);

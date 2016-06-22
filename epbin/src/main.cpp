@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 	//} else if (type == "pvr") {
 	//	t = epbin::TT_PVR;
 	//} else if (type == "pkm") {
-	//	t = epbin::TT_PKM;
+	//	t = epbin::TT_ETC1;
 	//} else {
 	//	std::cout << "unknown type " << type << "\n";
 	//	return 1;

@@ -1036,15 +1036,15 @@
 				Name="image"
 				>
 				<File
+					RelativePath="..\..\..\src\librespacker\PackETC1.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\librespacker\PackETC1.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\librespacker\PackImage.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\librespacker\PackPKM.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\librespacker\PackPKM.h"
 					>
 				</File>
 				<File

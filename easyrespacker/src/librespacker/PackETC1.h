@@ -1,5 +1,5 @@
-#ifndef _EASYRESPACKER_PACK_PKM_H_
-#define _EASYRESPACKER_PACK_PKM_H_
+#ifndef _EASYRESPACKER_PACK_ETC1_H_
+#define _EASYRESPACKER_PACK_ETC1_H_
 
 #include "PackImage.h"
 
@@ -8,11 +8,11 @@
 namespace erespacker
 {
 
-class PackPKM : public PackImage
+class PackETC1 : public PackImage
 {
 public:
-	PackPKM();
-	virtual ~PackPKM();
+	PackETC1();
+	virtual ~PackETC1();
 
 	virtual void Load(const std::string& filepath);
 	virtual void Store(const std::string& filepath, float scale) const;
@@ -31,4 +31,4 @@ private:
 
 }
 
-#endif // _EASYRESPACKER_PACK_PKM_H_
+#endif // _EASYRESPACKER_PACK_ETC1_H_

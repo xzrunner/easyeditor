@@ -521,7 +521,7 @@ void PackRes::PackBinFiles(const Json::Value& pkg_val, const std::string& config
 	if (type == "pvr") {
 		tex_type = epbin::TT_PVR;
 	} else if (type == "etc1") {
-		tex_type = epbin::TT_PKM;
+		tex_type = epbin::TT_ETC1;
 	}
  	epbin::BinaryEPP epp(dst_name, tex_type);
  	epp.Pack(epp_path);

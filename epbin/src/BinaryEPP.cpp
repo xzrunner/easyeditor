@@ -31,7 +31,7 @@ void BinaryEPP::Pack(const std::string& outfile) const
 	//case TT_PVR:
 	//	ext = ".pvr";
 	//	break;
-	//case TT_PKM:
+	//case TT_ETC1:
 	//	ext = ".pkm";
 	//	break;
 	//}
@@ -62,7 +62,7 @@ void BinaryEPP::Pack(const std::string& outfile) const
 	//	case TT_PVR:
 	//		loader = new PVRLoader();
 	//		break;
-	//	case TT_PKM:
+	//	case TT_ETC1:
 	//		loader = new PKMLoader();
 	//		break;
 	//	default:

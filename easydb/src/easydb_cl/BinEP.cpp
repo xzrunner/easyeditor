@@ -47,8 +47,8 @@ void BinEP::Trigger(const std::string& filename, const std::string& type,
 		t = epbin::TT_PNG8;
 	} else if (type == "pvr") {
 		t = epbin::TT_PVR;
-	} else if (type == "pkm") {
-		t = epbin::TT_PKM;
+	} else if (type == "etc1") {
+		t = epbin::TT_ETC1;
 	} else {
 		throw ee::Exception("BinEP::Trigger unknown type: %s\n", type);
 	}

@@ -11,7 +11,7 @@ enum TextureType
 	TT_PNG4,
 	TT_PNG8,
 	TT_PVR,
-	TT_PKM
+	TT_ETC1,
 };
 
 class BinaryEPP
