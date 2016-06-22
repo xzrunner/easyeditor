@@ -11,7 +11,8 @@ namespace eimage
 class TransToETC1
 {
 public:
-	TransToETC1(const uint8_t* pixels, int width, int height, int channels);
+	TransToETC1(const uint8_t* pixels, int width, int height, int channels,
+		bool align_bottom = false, bool fastest = false);
 	~TransToETC1();
 
 	void OutputFile(const std::string& filepath) const;
@@ -19,7 +20,8 @@ public:
 	uint8_t* GetPixelsData(int& width, int& height) const;
 
 private:
-	void InitSrcImage(const uint8_t* pixels, int width, int height, int channels);
+	void InitSrcImage(const uint8_t* pixels, int width, int height, int channels,
+		bool align_bottom);
 	void InitSrcImageAlpha();
 
 	void InitETC1Header();
@@ -49,6 +51,8 @@ private:
 	uint8_t *m_etc1_pixels, *m_etc1_alpha_pixels;
 
 	PKMHeader m_header;
+
+	bool m_fastest;
 
 }; // TransToETC1
 

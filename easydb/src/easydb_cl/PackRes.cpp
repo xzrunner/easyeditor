@@ -143,7 +143,7 @@ void PackRes::CompressTexture(const std::string& filepath, const std::string& ty
 		trans.OutputFile(out_file);	
 	} else if (type == "etc1") {
 		std::string out_file = filepath.substr(0, filepath.find_last_of('.'));
-		eimage::TransToETC1 trans(pixels, w, h, c);
+		eimage::TransToETC1 trans(pixels, w, h, c, true);
 		trans.OutputFile(out_file);					
 	}
 	delete[] pixels;

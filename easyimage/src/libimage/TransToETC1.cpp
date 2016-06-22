@@ -13,7 +13,8 @@
 namespace eimage
 {
 
-TransToETC1::TransToETC1(const uint8_t* pixels, int width, int height, int channels)
+TransToETC1::TransToETC1(const uint8_t* pixels, int width, int height, int channels,
+						 bool align_bottom, bool fastest)
 	: m_pixels(NULL)
 	, m_alpha_pixels(NULL)
 	, m_width(0)
@@ -21,8 +22,9 @@ TransToETC1::TransToETC1(const uint8_t* pixels, int width, int height, int chann
 	, m_etc1_size(0)
 	, m_etc1_pixels(NULL)
 	, m_etc1_alpha_pixels(NULL)
+	, m_fastest(fastest)
 {
-	InitSrcImage(pixels, width, height, channels);
+	InitSrcImage(pixels, width, height, channels, align_bottom);
 	InitSrcImageAlpha();
 
 	InitETC1Header();
@@ -66,7 +68,7 @@ uint8_t* TransToETC1::GetPixelsData(int& width, int& height) const
 	return pixels;
 }
 
-void TransToETC1::InitSrcImage(const uint8_t* pixels, int width, int height, int channels)
+void TransToETC1::InitSrcImage(const uint8_t* pixels, int width, int height, int channels, bool align_bottom)
 {
 	assert(channels == 4);
 	if (ee::is_power_of_two(width) &&
@@ -87,7 +89,8 @@ void TransToETC1::InitSrcImage(const uint8_t* pixels, int width, int height, int
 		int nw = ee::next_p2(width),
 			nh = ee::next_p2(height);
 		ee::ImagePack pack(nw, nh);
-		pack.AddImage(pixels, width, height, 0, 0, ee::ImagePack::PT_NORMAL);
+		int h = align_bottom ? nh - height : 0;
+		pack.AddImage(pixels, width, height, 0, h, ee::ImagePack::PT_NORMAL);
 
 		size_t sz = sizeof(uint8_t) * nw * nh * channels;
 		m_pixels = new uint8_t[sz];
@@ -145,8 +148,10 @@ void TransToETC1::EncodeETC1ByRgEtc1()
 	m_etc1_alpha_pixels = new uint8_t[m_etc1_size];
 
 	rg_etc1::etc1_pack_params params;
-//	params.m_quality = rg_etc1::cLowQuality;	
 	params.m_quality = rg_etc1::cHighQuality;
+	if (m_fastest) {
+		params.m_quality = rg_etc1::cLowQuality;
+	}
 	params.m_dithering = false;
 	// rgb
 	for (int y = 0; y < bh; ++y) {
