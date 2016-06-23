@@ -189,7 +189,7 @@ ext_sym_render(void* ext_sym, float x, float y, void* ud) {
 }
 
 void GTxt::Draw(const gtxt_label_style& style, const sm::mat4& mt, const s2::Color& mul, 
-				const s2::Color& add, const std::string& text, int time) const
+				const s2::Color& add, const std::string& text, int time, bool richtext) const
 {
 	render_params rp;
 	rp.mt = &mt;
@@ -197,10 +197,10 @@ void GTxt::Draw(const gtxt_label_style& style, const sm::mat4& mt, const s2::Col
 	rp.add = &add;
 
 	std::string utf8 = StringHelper::ToUtf8(text);
-	if (!style.richtext) {
-		gtxt_label_draw(utf8.c_str(), &style, render, (void*)&rp);		
-	} else {
+	if (richtext) {
 		gtxt_label_draw_richtext(utf8.c_str(), &style, time, render, (void*)&rp);
+	} else {
+		gtxt_label_draw(utf8.c_str(), &style, render, (void*)&rp);
 	}
 }
 

@@ -124,8 +124,6 @@ void Symbol::DrawText(const ee::Sprite* sprite, const s2::RenderParams& params) 
 		font->GetAlign(style.align_h, style.align_v);
 		font->GetSpace(style.space_h, style.space_v);
 
-		style.richtext = font->GetRichtext();
-
 		style.gs.font = font->GetFont();
 		style.gs.font_size = font->GetFontSize();
 		style.gs.font_color.integer = font->GetFontColor().ToRGBA();
@@ -134,7 +132,7 @@ void Symbol::DrawText(const ee::Sprite* sprite, const s2::RenderParams& params) 
 		style.gs.edge_size = font->GetEdgeSize();
 		style.gs.edge_color.integer = font->GetEdgeColor().ToRGBA();
 
-		ee::GTxt::Instance()->Draw(style, params.mt, params.color.mul, params.color.add, font->GetText(), font->GetTime());
+		ee::GTxt::Instance()->Draw(style, params.mt, params.color.mul, params.color.add, font->GetText(), font->GetTime(), font->GetRichtext());
 		font->UpdateTime();
 	}
 }
