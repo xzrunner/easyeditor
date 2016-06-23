@@ -78,6 +78,11 @@ void Symbol::LoadResources()
 
 	m_align_hori = (HoriAlignType)(value["align_hori"].asInt());
 	m_align_vert = (VertAlignType)(value["align_vert"].asInt());
+
+	m_richtext = true;
+	if (!value["richtext"].isNull()) {
+		m_richtext = value["richtext"].asBool();
+	}
 }
 
 void Symbol::DrawBackground(const ee::Sprite* sprite, const sm::mat4& mt) const
@@ -118,6 +123,8 @@ void Symbol::DrawText(const ee::Sprite* sprite, const s2::RenderParams& params) 
 		font->GetSize(style.width, style.height);
 		font->GetAlign(style.align_h, style.align_v);
 		font->GetSpace(style.space_h, style.space_v);
+
+		style.richtext = font->GetRichtext();
 
 		style.gs.font = font->GetFont();
 		style.gs.font_size = font->GetFontSize();

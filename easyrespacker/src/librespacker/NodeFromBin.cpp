@@ -21,6 +21,11 @@ float NodeFromBin::TransFloatX100(int f)
 	return f * 0.01f;
 }
 
+float NodeFromBin::TransFloatX1024(int f)
+{
+	return f / 1024.0f;
+}
+
 bool NodeFromBin::TransBool(int b)
 {
 	return b == 0 ? false : true;

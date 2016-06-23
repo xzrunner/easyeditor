@@ -19,6 +19,7 @@ public:
 	static int TransRadian(float r);
 	static int TransFloat(float f);
 	static int TransFloatX100(float f);
+	static int TransFloatX1024(float f);
 	static int TransBool(bool b);
 
 	static int  SizeVertices(const std::vector<sm::vec2>& vertices);

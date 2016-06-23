@@ -73,6 +73,9 @@ struct pack_label {
 	float space_hori;
 	float space_vert;
 
+	int richtext;
+	int pad;
+
 	const char* text;
 	const char* tid;
 };

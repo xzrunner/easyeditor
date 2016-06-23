@@ -1,12 +1,14 @@
 #ifndef _EASYRESPACKER_LABEL_TO_BIN_H_
 #define _EASYRESPACKER_LABEL_TO_BIN_H_
 
-#include "PackLabel.h"
+#include "NodeToBin.h"
 
 namespace erespacker
 {
 
-class LabelToBin
+class PackLabel;
+
+class LabelToBin : private NodeToBin
 {
 public:
 	static int Size(const PackLabel* label);

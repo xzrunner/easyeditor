@@ -70,6 +70,8 @@ const IPackNode* TextBuilder::Create(const etext::Sprite* spr)
 	node->space_hori = space_h;
 	node->space_vert = space_v;
 
+	node->richtext = spr->GetRichtext();
+
 	node->text = spr->GetText();
 	node->tid = spr->GetTID();
 

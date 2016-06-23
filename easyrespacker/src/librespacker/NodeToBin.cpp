@@ -29,6 +29,11 @@ int NodeToBin::TransFloatX100(float f)
 	return TransFloat(100 * f);
 }
 
+int NodeToBin::TransFloatX1024(float f)
+{
+	return static_cast<int>(f * 1024 + 0.5f);
+}
+
 int NodeToBin::TransBool(bool b)
 {
 	return b ? 1 : 0;

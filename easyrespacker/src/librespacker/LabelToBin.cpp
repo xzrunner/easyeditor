@@ -1,5 +1,6 @@
 #include "LabelToBin.h"
 #include "pack_unpack.h"
+#include "PackLabel.h"
 
 #include <spritepack.h>
 
@@ -27,6 +28,8 @@ int LabelToBin::Size(const PackLabel* label)
 
 	sz += sizeof(uint16_t) * 2;			// space
 
+	sz += sizeof(uint8_t);				// richtext
+
 	sz += sizeof_pack_str(label->text);	// text
 	sz += sizeof_pack_str(label->tid);	// tid
 
@@ -52,9 +55,9 @@ void LabelToBin::Pack(const PackLabel* label, uint8_t** ptr)
 	uint32_t font_color = label->font_color.ToRGBA();
 	pack(font_color, ptr);
 
-	uint8_t edge = label->edge ? 1 : 0;
+	uint8_t edge = TransBool(label->edge);
 	pack(edge, ptr);
-	uint16_t edge_size = (int)(label->edge_size * 1024);
+	uint16_t edge_size = TransFloatX1024(label->edge_size);
 	pack(edge_size, ptr);
 	uint32_t edge_color = label->edge_color.ToRGBA();
 	pack(edge_color, ptr);
@@ -64,10 +67,13 @@ void LabelToBin::Pack(const PackLabel* label, uint8_t** ptr)
 	uint8_t align_vert = label->align_vert;
 	pack(align_vert, ptr);
 
-	uint16_t space_hori = (int)(label->space_hori * 1024);
-	uint16_t space_vert = (int)(label->space_vert * 1024);
+	uint16_t space_hori = TransFloatX1024(label->space_hori);
+	uint16_t space_vert = TransFloatX1024(label->space_vert);
 	pack(space_hori, ptr);
 	pack(space_vert, ptr);
+
+	uint8_t richtext = TransBool(label->richtext);
+	pack(richtext, ptr);
 
 	pack_str(label->text, ptr);
 	pack_str(label->tid, ptr);

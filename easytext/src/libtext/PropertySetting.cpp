@@ -79,6 +79,8 @@ void PropertySetting::OnPropertyGridChange(const std::string& name, const wxAny&
 		spr->GetAlign(h, v);
 		v = wxANY_AS(value, int);
 		spr->SetAlign(h, v);
+	} else if (name == "Richtext") {
+		spr->SetRichtext(wxANY_AS(value, bool));
 	} else if (name == "TextContent") {
 		spr->SetText(wxANY_AS(value, wxString).ToStdString());
 	} else if (name == "TextID") {
@@ -119,6 +121,8 @@ void PropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	spr->GetAlign(halign, valign);
 	pg->GetProperty("Align.Hori")->SetValue(HORI_ALIGN_LABELS[halign]);
 	pg->GetProperty("Align.Vert")->SetValue(VERT_ALIGN_LABELS[valign]);
+
+	pg->GetProperty("Richtext")->SetValue(spr->GetRichtext());
 
 	pg->GetProperty("TextContent")->SetValue(spr->GetText());
 	pg->GetProperty("TextID")->SetValue(spr->GetTID());
@@ -178,6 +182,9 @@ void PropertySetting::InitProperties(wxPropertyGrid* pg)
 	wxEnumProperty* vert_align_prop = new wxEnumProperty("Vert", wxPG_LABEL, VERT_ALIGN_LABELS);
 	vert_align_prop->SetValue(VERT_ALIGN_LABELS[valign]);
 	pg->AppendIn(align_prop, vert_align_prop);
+
+	pg->Append(new wxBoolProperty("Richtext", wxPG_LABEL, spr->GetRichtext()));
+	pg->SetPropertyAttribute("Richtext", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
 	pg->Append(new wxStringProperty("TextContent", wxPG_LABEL, spr->GetText()));
 	pg->Append(new wxStringProperty("TextID", wxPG_LABEL, spr->GetTID()));

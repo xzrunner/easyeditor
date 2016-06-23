@@ -63,6 +63,9 @@ public:
 	void GetSpace(float& hori, float& vert) const;
 	void SetSpace(float hori, float vert);
 
+	bool GetRichtext() const { return m_richtext; }
+	void SetRichtext(bool richtext) { m_richtext = richtext; }
+
 	const std::string& GetText() const { return m_text; }
 	void SetText(const std::string& text) { m_text = text; }
 
@@ -93,6 +96,8 @@ private:
 
 	float m_space_hori;
 	float m_space_vert;
+
+	bool m_richtext;
 
 private:
 	std::string m_text;

@@ -23,6 +23,8 @@ void LabelFromLua::Unpack(lua_State* L, PackLabel* label)
 	label->space_hori = static_cast<float>(LuaDataHelper::GetDoubleField(L, "space_hori"));
 	label->space_vert = static_cast<float>(LuaDataHelper::GetDoubleField(L, "space_vert"));
 
+	label->richtext = LuaDataHelper::GetBoolField(L, "richtext");
+
 	label->text = LuaDataHelper::GetStringField(L, "text");
 	label->tid = LuaDataHelper::GetStringField(L, "tid");
 }

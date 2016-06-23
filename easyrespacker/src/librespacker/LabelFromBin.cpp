@@ -1,5 +1,6 @@
 #include "LabelFromBin.h"
 #include "pack_unpack.h"
+#include "PackLabel.h"
 
 #include <spritepack.h>
 
@@ -38,11 +39,11 @@ void LabelFromBin::Unpack(uint8_t** ptr, PackLabel* label)
 
 	uint8_t edge;
 	unpack(edge, ptr);
-	label->edge = edge == 0 ? false : true;
+	label->edge = TransBool(edge);
 
 	uint16_t edge_size;
 	unpack(edge_size, ptr);
-	label->edge_size = edge_size / 1024.0f;
+	label->edge_size = TransFloatX1024(edge_size);
 
 	uint32_t edge_color;
 	unpack(edge_color, ptr);
@@ -57,8 +58,12 @@ void LabelFromBin::Unpack(uint8_t** ptr, PackLabel* label)
 	uint16_t space_hori, space_vert;
 	unpack(space_hori, ptr);
 	unpack(space_vert, ptr);
-	label->space_hori = space_hori / 1024.0f;
-	label->space_vert = space_vert / 1024.0f;
+	label->space_hori = TransFloatX1024(space_hori);
+	label->space_vert = TransFloatX1024(space_vert);
+
+	uint8_t richtext;
+	unpack(richtext, ptr);
+	label->richtext = TransBool(richtext);
 
 	unpack_str(label->text, ptr);
 	unpack_str(label->tid, ptr);

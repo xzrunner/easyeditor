@@ -28,6 +28,8 @@ public:
 	float space_hori;
 	float space_vert;
 
+	bool richtext;
+
 	std::string text;
 	std::string tid;
 

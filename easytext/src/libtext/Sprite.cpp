@@ -31,6 +31,8 @@ Sprite::Sprite()
 	m_space_hori = 1;
 	m_space_vert = 1;
 
+	m_richtext = true;
+
 	m_time = 0;
 }
 
@@ -59,6 +61,8 @@ Sprite::Sprite(const Sprite& sprite)
 	m_space_hori = sprite.m_space_hori;
 	m_space_vert = sprite.m_space_vert;
 
+	m_richtext = sprite.m_richtext;
+
 	m_time = sprite.m_time;
 }
 
@@ -85,6 +89,8 @@ Sprite::Sprite(Symbol* symbol)
 
 	m_space_hori = symbol->m_space_hori;
 	m_space_vert = symbol->m_space_vert;
+
+	m_richtext = symbol->m_richtext;
 
 	m_time = 0;
 
@@ -148,6 +154,11 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 	m_text = text_val["text"].asString();
 	m_tid = text_val["tid"].asString();
 
+	m_richtext = true;
+	if (!text_val["richtext"].isNull()) {
+		m_richtext = text_val["richtext"].asBool();
+	}
+
 	BuildBounding();
 }
 
@@ -176,6 +187,8 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 
 	text_val["text"] = m_text;
 	text_val["tid"] = m_tid;
+
+	text_val["richtext"] = m_richtext;
 
 	val["text"] = text_val;
 }

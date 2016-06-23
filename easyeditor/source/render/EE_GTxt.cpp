@@ -197,7 +197,11 @@ void GTxt::Draw(const gtxt_label_style& style, const sm::mat4& mt, const s2::Col
 	rp.add = &add;
 
 	std::string utf8 = StringHelper::ToUtf8(text);
-	gtxt_label_draw_richtext(utf8.c_str(), &style, time, render, (void*)&rp);
+	if (!style.richtext) {
+		gtxt_label_draw(utf8.c_str(), &style, render, (void*)&rp);		
+	} else {
+		gtxt_label_draw_richtext(utf8.c_str(), &style, time, render, (void*)&rp);
+	}
 }
 
 void GTxt::Draw(const sm::mat4& mt, const std::string& str) const

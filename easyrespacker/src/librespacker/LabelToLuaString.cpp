@@ -39,6 +39,9 @@ void LabelToLuaString::Pack(const PackLabel* label, ebuilder::CodeGenerator& gen
 		lua::assign("space_hori", label->space_hori), 
 		lua::assign("space_vert", label->space_vert));
 
+	lua::connect(gen, 1, 
+		lua::assign("richtext", label->richtext));
+
 	lua::connect(gen, 2, 
 		lua::assign("text", "\"" + label->text + "\""),
 		lua::assign("tid", "\"" + label->tid + "\""));

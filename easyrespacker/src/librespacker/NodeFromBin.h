@@ -18,6 +18,7 @@ public:
 	static float TransTime(int time);
 	static float TransDegree(int deg);
 	static float TransFloatX100(int f);
+	static float TransFloatX1024(int f);
 	static bool  TransBool(int b);
 
 	static int  SizeVertices(const std::vector<sm::vec2>& vertices);
