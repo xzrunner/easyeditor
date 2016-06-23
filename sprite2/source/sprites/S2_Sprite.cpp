@@ -36,7 +36,11 @@ Sprite::Sprite(const Sprite& spr, void* ud)
 	m_bounding = new OBB(*static_cast<OBB*>(spr.m_bounding));
 	m_bounding_dirty = false;
 
-	m_shader.filter = FilterFactory::Instance()->Create(spr.Shader().filter->GetMode());
+	FilterMode fm = FM_NULL;
+	if (spr.Shader().filter) {
+		fm = spr.Shader().filter->GetMode();
+	}
+	m_shader.filter = FilterFactory::Instance()->Create(fm);
 }
 
 Sprite::~Sprite()

@@ -36,6 +36,10 @@ unsigned char* Snapshoot::OutputToMemory(const Symbol* symbol, bool whitebg,
 	sm::vec2 sz = symbol->GetSize().Size();
 	sz *= scale;
 
+	if (sz.x > m_fbo->GetWidth() || sz.y > m_fbo->GetHeight()) {
+		return NULL;
+	}
+
 	size_t size = static_cast<int>(sz.x) * static_cast<int>(sz.y) * 4;
 	unsigned char* pixels = new unsigned char[size];
 	if(!pixels) return NULL;
@@ -53,8 +57,10 @@ void Snapshoot::OutputToImageFile(const Symbol* symbol, const std::string& filen
 	int w = static_cast<int>(sz.x),
 		h = static_cast<int>(sz.y);
 	unsigned char* pixels = OutputToMemory(symbol, false, scale);
-	ImageSaver::StoreToFile(pixels, w, h, 4, filename, ImageSaver::e_png, false);
-	delete[] pixels;
+	if (pixels) {
+		ImageSaver::StoreToFile(pixels, w, h, 4, filename, ImageSaver::e_png, false);
+		delete[] pixels;
+	}
 }
 
 void Snapshoot::DrawSprite(const Sprite* sprite, bool clear,

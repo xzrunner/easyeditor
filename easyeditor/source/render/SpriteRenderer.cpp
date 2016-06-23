@@ -39,7 +39,7 @@ void SpriteRenderer::Draw(const Sprite* spr,
 		if (cam->Type() == "ortho") {
 			SpriteBlend::Draw(spr, params.mt);
 		}
-	} else if (rs.filter->GetMode() != s2::FM_NULL) {
+	} else if (rs.filter && rs.filter->GetMode() != s2::FM_NULL) {
 		s2::RenderParams t = params;
 		t.shader.filter = rs.filter;
 		t.camera = rc;
