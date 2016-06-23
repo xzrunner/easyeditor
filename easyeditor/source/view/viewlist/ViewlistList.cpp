@@ -312,6 +312,9 @@ void ViewlistList::ReorderSelected(bool up)
 
 void ViewlistList::Select(Sprite* spr, bool clear)
 {
+	if (clear) {
+		SetSelection(-1);
+	}
 	int idx = QuerySprIdx(spr);
 	if (idx >= 0) {
 		SetSelection(idx);

@@ -136,6 +136,8 @@ void SelectSpritesOP::BreakUpSelection()
 			continue;
 		}
 
+		ee::SelectSpriteSJ::Instance()->Select(spr, true);
+
 		std::vector<ee::Sprite*> children;
 		GroupHelper::BreakUp(spr, children);
  		for (int j = 0, m = children.size(); j < m; ++j) {
