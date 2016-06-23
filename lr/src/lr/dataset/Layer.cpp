@@ -209,7 +209,7 @@ bool Layer::Update(float dt)
 	std::vector<ee::Sprite*> sprites;
 	TraverseSprite(ee::FetchAllVisitor<ee::Sprite>(sprites), true);
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		bool dirty = sprites[i]->Update(dt, sm::mat4());
+		bool dirty = sprites[i]->Update(dt);
 		if (dirty) {
 			ret = true;
 		}
