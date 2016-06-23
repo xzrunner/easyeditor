@@ -186,12 +186,16 @@ std::string LRSeparateComplex::CreateNewComplexFile(const Json::Value& value) co
 
 void LRSeparateComplex::ResetOldSpriteVal(Json::Value& val, const std::string& export_name, const std::string& tag) const
 {
-	val["filepath"] = export_name + "_complex.json";
-	val["export"] = export_name;
+
+	Json::Value _val;
+	_val["filepath"] = export_name + "_complex.json";
+	_val["export"] = export_name;
 	
 	ee::SpriteIO::Data data;
 	data.tag = tag;
-	ee::SpriteIO::Store(val, data);
+	ee::SpriteIO::Store(_val, data);
+
+	val = _val;
 }
 
 void LRSeparateComplex::FixPosWithShape(sm::vec2& pos, const std::string& filepath) const
