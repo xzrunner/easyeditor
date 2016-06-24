@@ -23,6 +23,7 @@ enum TextureType
 	TT_PNG8,
 	TT_PVR,
 	TT_ETC1,
+	TT_ETC2,
 };
 
 }

@@ -1044,6 +1044,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\librespacker\PackETC2.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\librespacker\PackETC2.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\librespacker\PackImage.h"
 					>
 				</File>

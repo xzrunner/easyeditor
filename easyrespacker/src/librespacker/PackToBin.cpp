@@ -7,6 +7,7 @@
 #include "PackPNG.h"
 #include "PackPVR.h"
 #include "PackETC1.h"
+#include "PackETC2.h"
 
 #include <ee/TexturePacker.h>
 #include <ee/StringHelper.h>
@@ -115,6 +116,8 @@ void PackToBin::PackEPT(const std::string& filepath, const ee::TexturePacker& tp
 			packer = new PackPVR();
 		} else if (tex->format == "etc1") {
 			packer = new PackETC1();
+		} else if (tex->format == "etc2") {
+			packer = new PackETC2();
 		} else {
 			throw ee::Exception("PackToBin::PackEPT unknown type: %s\n", tex->format.c_str());
 		}
@@ -152,7 +155,7 @@ void PackToBin::PackEPT(const std::string& src_file, const std::string& dst_file
 	case TT_PVR:
 		ext = ".pvr";
 		break;
-	case TT_ETC1:
+	case TT_ETC1: case TT_ETC2:
 		ext = ".pkm";
 		break;
 	}
@@ -171,6 +174,9 @@ void PackToBin::PackEPT(const std::string& src_file, const std::string& dst_file
 		break;
 	case TT_ETC1:
 		packer = new PackETC1();
+		break;
+	case TT_ETC2:
+		packer = new PackETC2();
 		break;
 	default:
 		throw ee::Exception("PackToBin::PackEPT unknown type: %d\n", type);

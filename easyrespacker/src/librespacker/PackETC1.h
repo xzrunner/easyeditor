@@ -27,7 +27,7 @@ private:
 
 	uint8_t *m_rgb_buf, *m_alpha_buf;
 
-}; // PackPKM
+}; // PackETC1
 
 }
 

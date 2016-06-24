@@ -305,6 +305,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\libimage\TransToETC2.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libimage\TransToETC2.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libimage\TransToPVR.cpp"
 				>
 			</File>

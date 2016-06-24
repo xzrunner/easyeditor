@@ -127,7 +127,7 @@ void PackETC1::LoadCompressed(const std::string& filename, uint8_t*& buf,
 	uint32_t sz = (width * height) >> 1;
 	buf = new uint8_t[sz];
 	if (!buf) {
-		throw ee::Exception("Out of memory: PackPKM::LoadCompressed %s \n", filename.c_str());
+		throw ee::Exception("Out of memory: PackETC1::LoadCompressed %s \n", filename.c_str());
 	}
 	fin.read(reinterpret_cast<char*>(buf), sz);
 

@@ -131,8 +131,8 @@ void TransToETC1::InitETC1Header()
 
 void TransToETC1::EncodeETC1()
 {
-	EncodeETC1ByRgEtc1();
-//	EncodeETC1ByEtcPack();
+//	EncodeETC1ByRgEtc1();
+	EncodeETC1ByEtcPack();
 }
 
 void TransToETC1::EncodeETC1ByRgEtc1()

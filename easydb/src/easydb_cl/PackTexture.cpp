@@ -228,6 +228,21 @@ void PackTexture::PackPackage(const Package& pkg, const std::string& src_dir,
 			wxRemoveFile(src);
 		}
 	}
+	else if (pkg.format == "etc2")
+	{
+		for (int i = begin; i < end; ++i) 
+		{
+			std::string src = dst_file + ee::StringHelper::ToString(i) + ".png";
+			std::string dst = dst_file + ee::StringHelper::ToString(i);
+
+			int w, h, c, f;
+			uint8_t* pixels = ee::LibpngAdapter::Read(src.c_str(), w, h, c, f);
+			eimage::TransToETC2 trans(pixels, w, h, c, false, pkg.quality == "fastest");
+
+			trans.OutputFile(dst);
+			wxRemoveFile(src);
+		}
+	}
 }
 
 }

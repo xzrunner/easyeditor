@@ -33,6 +33,7 @@
 #include "OutlineToTriStrip.h"
 #include "TransToPVR.h"
 #include "TransToETC1.h"
+#include "TransToETC2.h"
 #include "BinRRR.h"
 #include "BinB4R.h"
 #include "BlockCompress.h"
@@ -101,6 +102,7 @@ void CommandLoader::Init()
 	fc->Register(OutlineToTriStrip::Create());
 	fc->Register(TransToPVR::Create());
 	fc->Register(TransToETC1::Create());
+	fc->Register(TransToETC2::Create());
 	fc->Register(BinRRR::Create());
 	fc->Register(BinB4R::Create());
 	fc->Register(BlockCompress::Create());

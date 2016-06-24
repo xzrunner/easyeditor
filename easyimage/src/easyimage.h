@@ -9,6 +9,7 @@
 
 #include "libimage/TransToPVR.h"
 #include "libimage/TransToETC1.h"
+#include "libimage/TransToETC2.h"
 
 #include "libimage/BlockCompress.h"
 
