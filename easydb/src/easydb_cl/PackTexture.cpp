@@ -233,7 +233,7 @@ void PackTexture::PackPackage(const Package& pkg, const std::string& src_dir,
 		for (int i = begin; i < end; ++i) 
 		{
 			std::string src = dst_file + ee::StringHelper::ToString(i) + ".png";
-			std::string dst = dst_file + ee::StringHelper::ToString(i);
+			std::string dst = dst_file + ee::StringHelper::ToString(i) + ".pkm";
 
 			int w, h, c, f;
 			uint8_t* pixels = ee::LibpngAdapter::Read(src.c_str(), w, h, c, f);
