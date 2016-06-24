@@ -48,7 +48,7 @@ void PackETC2::Load(const std::string& filepath)
 
 	m_width = (header.paddedWidthMSB << 8) | header.paddedWidthLSB;
 	m_height = (header.paddedHeightMSB << 8) | header.paddedHeightLSB;
-	uint32_t sz = (m_width * m_height) >> 1;
+	uint32_t sz = m_width * m_height;
 	m_buf = new uint8_t[sz];
 	if (!m_buf) {
 		throw ee::Exception("Out of memory: PackETC2::LoadCompressed %s \n", filepath.c_str());

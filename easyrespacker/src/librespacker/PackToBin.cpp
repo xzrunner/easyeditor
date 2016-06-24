@@ -109,20 +109,23 @@ void PackToBin::PackEPT(const std::string& filepath, const ee::TexturePacker& tp
 	{
 		const ee::TexturePacker::Texture* tex = textures[i];
 
+		std::string img_path = tex->filepath.substr(0, tex->filepath.find_last_of('.'));
 		PackImage* packer = NULL;
 		if (tex->format == "png") {
 			packer = new PackPNG(true);
+			img_path += ".png";
 		} else if (tex->format == "pvr") {
 			packer = new PackPVR();
+			img_path += ".pvr";
 		} else if (tex->format == "etc1") {
 			packer = new PackETC1();
 		} else if (tex->format == "etc2") {
 			packer = new PackETC2();
+			img_path += ".pkm";
 		} else {
 			throw ee::Exception("PackToBin::PackEPT unknown type: %s\n", tex->format.c_str());
 		}
 
-		std::string img_path = tex->filepath.substr(0, tex->filepath.find_last_of('.') + 1) + tex->format;
 		packer->Load(img_path);
 
 		float pack_scale = scale;

@@ -161,8 +161,10 @@ void ResPacker::OutputEptDesc(const std::string& outfile) const
 		uint16_t type = DTEX_PNG8;
 		if (tex->format == "pvr") {
 			type = DTEX_PVR;
-		} else if (tex->format == "pkm") {
-			type = DTEX_PKM;
+		} else if (tex->format == "etc1") {
+			type = DTEX_ETC1;
+		} else if (tex->format == "etc2") {
+			type = DTEX_ETC2;
 		}
 		fout.write(reinterpret_cast<const char*>(&type), sizeof(type));
 	}
