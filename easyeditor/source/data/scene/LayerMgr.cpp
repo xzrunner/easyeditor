@@ -62,6 +62,7 @@ Layer* LayerMgr::GetLayer(int idx)
 void LayerMgr::Clear()
 {
 	for_each(m_layers.begin(), m_layers.end(), ReleaseObjectFunctor<Layer>());
+	m_layers.clear();
 }
 
 void LayerMgr::LoadFromFile(const Json::Value& val, const std::string& dir)
