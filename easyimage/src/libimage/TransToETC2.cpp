@@ -19,6 +19,9 @@ TransToETC2::TransToETC2(const uint8_t* pixels, int width, int height, int chann
 	, m_fastest(fastest)
 	, m_perceptual(false)
 {
+	readCompressParams();
+	setupAlphaTableAndValtab();
+
 	Prepare(pixels, width, height, channels, align_bottom);
 	Encode();
 }
