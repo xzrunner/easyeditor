@@ -46,6 +46,7 @@ void LayerList::Insert()
 	}
 
 	Layer* layer = new Layer;
+	m_layer_mgr->Insert(layer);
 	Insert(layer);
 	layer->Release();
 }
@@ -69,8 +70,6 @@ void LayerList::Remove()
 
 void LayerList::Insert(Layer* layer)
 {
-	m_layer_mgr->Insert(layer);
-
 	long item = InsertItem(0, "");
 
 	SetItem(item, 0, layer->name);
