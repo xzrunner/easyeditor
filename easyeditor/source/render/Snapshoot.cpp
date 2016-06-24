@@ -36,16 +36,20 @@ unsigned char* Snapshoot::OutputToMemory(const Symbol* symbol, bool whitebg,
 	sm::vec2 sz = symbol->GetSize().Size();
 	sz *= scale;
 
-	if (sz.x > m_fbo->GetWidth() || sz.y > m_fbo->GetHeight()) {
+	int w = static_cast<int>(sz.x),
+		h = static_cast<int>(sz.y);
+	if (w > m_fbo->GetWidth() || h > m_fbo->GetHeight()) {
 		return NULL;
 	}
 
-	size_t size = static_cast<int>(sz.x) * static_cast<int>(sz.y) * 4;
+	size_t size = w * h * 4;
 	unsigned char* pixels = new unsigned char[size];
-	if(!pixels) return NULL;
+	if(!pixels) {
+		return NULL;
+	}
 	memset(&pixels[0], 0, size);	
 
-	m_fbo->ReadPixels(pixels, static_cast<int>(sz.x), static_cast<int>(sz.y));
+	m_fbo->ReadPixels(pixels, w, h);
 
 	return pixels;
 }
