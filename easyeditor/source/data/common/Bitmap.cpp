@@ -59,12 +59,27 @@ bool Bitmap::LoadFromFile(const std::string& filepath)
 		inited = true;
 	}
 
-	if (filepath.find("pvr") != std::string::npos) 
+	if (filepath.find("pvr") != std::string::npos || filepath.find("pkm") != std::string::npos) 
 	{
 		ImageData* img_data = ImageDataMgr::Instance()->GetItem(filepath);
-		wxImage image(img_data->GetWidth(), img_data->GetHeight(), (unsigned char*)(img_data->GetPixelData()), true);
-//		image.SetData((unsigned char*)(img_data->GetPixelData()), img_data->GetWidth(), img_data->GetHeight());
+
+		int w = img_data->GetWidth(),
+			h = img_data->GetHeight();
+		const uint8_t* data = img_data->GetPixelData();
+
+		uint8_t* rgb_data = new uint8_t[w * h * 3];
+		const uint8_t* src = data;
+		uint8_t* dst = rgb_data;
+		for (int i = 0, n = w * h; i < n; ++i) {
+			memcpy(dst, src, 3);
+			src += 4;
+			dst += 3;
+		}
+
+		wxImage image(w, h, rgb_data, true);
 		InitBmp(image, true);
+
+		delete rgb_data;
 	}
 	else if (FileType::IsType(filepath, FileType::e_image))
 	{

@@ -58,7 +58,7 @@ void TransToETC2::Format(const std::string& filepath)
 
 	int w, h, c, f;
 	uint8_t* pixels = ee::LibpngAdapter::Read(filepath.c_str(), w, h, c, f);
-	eimage::TransToETC2 trans(pixels, w, h, c, false, true);
+	eimage::TransToETC2 trans(pixels, w, h, c, eimage::TransToETC2::RGBA1, false, true);
 	std::string out_file = filepath.substr(0, filepath.find_last_of('.')) + ".pkm";
 	trans.OutputFile(out_file);
 }

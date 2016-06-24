@@ -36,7 +36,7 @@ Sprite* SpriteFactory::Create(Symbol* symbol)
 		std::string ext = FileHelper::GetExtension(filepath);
 		StringHelper::ToLower(ext);
 
-		if (ext == "png" || ext == "jpg" || ext == "bmp" || ext == "pvr")
+		if (ext == "png" || ext == "jpg" || ext == "bmp" || ext == "pvr" || ext == "pkm")
 		{
 			sprite = new ImageSprite(static_cast<ImageSymbol*>(symbol));
 		}

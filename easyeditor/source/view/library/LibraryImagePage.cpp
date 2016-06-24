@@ -23,7 +23,7 @@ bool LibraryImagePage::IsHandleSymbol(Symbol* symbol) const
 
 void LibraryImagePage::OnAddPress(wxCommandEvent& event)
 {
-	std::string formatFilter = m_support_bmp ? "*.png;*.jpg;*.bmp;*.pvr" : "*.png;*.jpg;*.bmp;*.pvr";
+	std::string formatFilter = m_support_bmp ? "*.png;*.jpg;*.bmp;*.pvr;*.pkm" : "*.png;*.jpg;*.bmp;*.pvr;*.pkm";
 	wxFileDialog dlg(this, wxT("Choose images"), wxEmptyString, 
 		wxEmptyString, formatFilter, wxFD_OPEN | wxFD_MULTIPLE);
 	if (dlg.ShowModal() == wxID_OK)

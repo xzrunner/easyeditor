@@ -2,6 +2,7 @@
 
 #include <ee/math_common.h>
 #include <ee/ImagePack.h>
+#include <ee/Exception.h>
 
 #include <etcpack_lib.h>
 
@@ -13,8 +14,9 @@ namespace eimage
 {
 
 TransToETC2::TransToETC2(const uint8_t* pixels, int width, int height, int channels,
-						 bool align_bottom, bool fastest)
-	: m_fastest(fastest)
+						 Type type, bool align_bottom, bool fastest)
+	: m_type(type)
+	, m_fastest(fastest)
 	, m_perceptual(false)
 {
 	Prepare(pixels, width, height, channels, align_bottom);
@@ -32,7 +34,7 @@ void TransToETC2::OutputFile(const std::string& filepath) const
 {
 	std::ofstream fout(filepath.c_str(), std::ios::binary);
 	OutputHeader(fout);
-	fout.write(reinterpret_cast<const char*>(m_compressed), m_width * m_height);
+	fout.write(reinterpret_cast<const char*>(m_compressed), m_size);
 	fout.close();
 }
 
@@ -42,7 +44,7 @@ uint8_t* TransToETC2::GetPixelsData(int& width, int& height) const
 	height = m_height;
 
 	int sz = m_width * m_height;
-	uint8_t* pixels = new uint8_t[sz];
+	uint8_t* pixels = new uint8_t[m_size];
 	memcpy(pixels, m_compressed, sz);
 	return pixels;
 }
@@ -63,7 +65,12 @@ void TransToETC2::Prepare(const uint8_t* pixels)
 		memcpy(out_rgb, in, 3);
 		out_rgb += 3;
 		in += 3;
-		*out_alpha++ = *in++;
+
+		if (m_type == RGBA1) {
+			*out_alpha++ = (*in++) > 180 ? 255 : 0;
+		} else {
+			*out_alpha++ = *in++;
+		}
 	}
 }
 
@@ -91,7 +98,32 @@ void TransToETC2::Prepare(const uint8_t* pixels, int width, int height, int chan
 		Prepare(pack.GetPixels());
 	}
 
-	m_compressed = new uint8_t[m_width * m_height];
+	if (m_type == RGBA) {
+		m_size = m_width * m_height;
+	} else {
+		m_size = m_width * m_height / 2;		
+	}
+
+	m_compressed = new uint8_t[m_size];
+}
+
+static void WriteRGB(uint8_t*& output, unsigned int block1, unsigned int block2)
+{
+	output[0] = (block1 >> 24) & 0xFF;
+	output[1] = (block1 >> 16) & 0xFF;
+	output[2] = (block1 >> 8) & 0xFF;
+	output[3] =  block1 & 0xFF;
+	output[4] = (block2 >> 24) & 0xFF;
+	output[5] = (block2 >> 16) & 0xFF;
+	output[6] = (block2 >> 8) & 0xFF;
+	output[7] =  block2 & 0xFF;
+	output += 8;
+}
+
+static void WriteAlpha(uint8_t*& output, uint8_t* alphadata)
+{
+	memcpy(output, alphadata, 8);
+	output += 8;
 }
 
 void TransToETC2::Encode()
@@ -104,43 +136,36 @@ void TransToETC2::Encode()
 	int bh = m_height / 4;
 	for (int y = 0; y < bh; ++y) {
 		for (int x = 0; x < bw; ++x) {
-			// rgb
-			unsigned int block1, block2;
-			if (m_perceptual) {
-				if (m_fastest) {
-					compressBlockETC2FastPerceptual(m_rgb_data, decoded, m_width, m_height, x * 4, y * 4, block1, block2);
-				} else {
-					compressBlockETC2ExhaustivePerceptual(m_rgb_data, decoded, m_width, m_height, x * 4, y * 4, block1, block2);
+			switch (m_type) 
+			{
+			case RGB:
+				{
+					unsigned int block1, block2;
+					ComputeRGB(decoded, x, y, block1, block2);
+					WriteRGB(output, block1, block2);
 				}
-			} else {
-				if (m_fastest) {
-					compressBlockETC2Fast(m_rgb_data, NULL, decoded, m_width, m_height, x * 4, y * 4, block1, block2);
-				} else {
-					compressBlockETC2Exhaustive(m_rgb_data, decoded, m_width, m_height, x * 4, y * 4, block1, block2);
+				break;
+			case RGBA:
+				{
+					uint8_t alphadata[8];
+					ComputeAlpha(x, y, alphadata);
+					WriteAlpha(output, alphadata);
+
+					unsigned int block1, block2;
+					ComputeRGB(decoded, x, y, block1, block2);
+					WriteRGB(output, block1, block2);					
 				}
+				break;
+			case RGBA1:
+				{
+					unsigned int block1, block2;
+					compressBlockETC2RGBA1(m_rgb_data, m_alpha_data, decoded, m_width, m_height, x * 4, y * 4, block1, block2);
+					WriteRGB(output, block1, block2);					
+				}
+				break;
+			default:
+				throw ee::Exception("TransToETC2::Encode: Unknown type");
 			}
-
-			// alpha
-			uint8_t alphadata[8];
-			if (m_fastest) {
-				compressBlockAlphaFast(m_alpha_data, x * 4, y * 4, m_width, m_height, alphadata);
-			} else {
-				compressBlockAlphaSlow(m_alpha_data, x * 4, y * 4, m_width, m_height, alphadata);
-			}
-
-			// output
-			memcpy(output, alphadata, 8);
-			output += 8;
-
-			output[0] = (block1 >> 24) & 0xFF;
-			output[1] = (block1 >> 16) & 0xFF;
-			output[2] = (block1 >> 8) & 0xFF;
-			output[3] =  block1 & 0xFF;
-			output[4] = (block2 >> 24) & 0xFF;
-			output[5] = (block2 >> 16) & 0xFF;
-			output[6] = (block2 >> 8) & 0xFF;
-			output[7] =  block2 & 0xFF;
-			output += 8;
 		}
 	}
 }
@@ -170,8 +195,36 @@ void TransToETC2::OutputHeader(std::ofstream& fout) const
 	// ETC2PACKAGE_RG_NO_MIPMAPS            6                 GL_COMPRESSED_RG11_EAC
 	// ETC2PACKAGE_R_SIGNED_NO_MIPMAPS      7                 GL_COMPRESSED_SIGNED_R11_EAC
 	// ETC2PACKAGE_RG_SIGNED_NO_MIPMAPS     8                 GL_COMPRESSED_SIGNED_RG11_EAC
-	unsigned short ETC2PACKAGE_RGBA_NO_MIPMAPS = 3;
-	WriteBigEndian2byteWord(&ETC2PACKAGE_RGBA_NO_MIPMAPS, fout);
+
+	enum ETC_TYPE
+	{
+		ETC1_RGB_NO_MIPMAPS = 0,
+		ETC2PACKAGE_RGB_NO_MIPMAPS,
+		ETC2PACKAGE_RGBA_NO_MIPMAPS_OLD,
+		ETC2PACKAGE_RGBA_NO_MIPMAPS,
+		ETC2PACKAGE_RGBA1_NO_MIPMAPS,
+		ETC2PACKAGE_R_NO_MIPMAPS,
+		ETC2PACKAGE_RG_NO_MIPMAPS,
+		ETC2PACKAGE_R_SIGNED_NO_MIPMAPS,
+		ETC2PACKAGE_RG_SIGNED_NO_MIPMAPS
+	};
+
+	unsigned short type;
+	switch (m_type)
+	{
+	case RGB:
+		type = ETC2PACKAGE_RGB_NO_MIPMAPS;
+		break;
+	case RGBA:
+		type = ETC2PACKAGE_RGBA_NO_MIPMAPS;
+		break;
+	case RGBA1:
+		type = ETC2PACKAGE_RGBA1_NO_MIPMAPS;
+		break;
+	default:
+		throw ee::Exception("TransToETC2::OutputHeader: Unknown type");
+	}
+	WriteBigEndian2byteWord(&type, fout);
 
 	unsigned short w = m_width, h = m_height;
 	WriteBigEndian2byteWord(&w, fout);
@@ -179,6 +232,32 @@ void TransToETC2::OutputHeader(std::ofstream& fout) const
 
 	WriteBigEndian2byteWord(&w, fout);
 	WriteBigEndian2byteWord(&h, fout);	
+}
+
+void TransToETC2::ComputeRGB(uint8_t* decoded, int x, int y, unsigned int& block1, unsigned int& block2)
+{
+	if (m_perceptual) {
+		if (m_fastest) {
+			compressBlockETC2FastPerceptual(m_rgb_data, decoded, m_width, m_height, x * 4, y * 4, block1, block2);
+		} else {
+			compressBlockETC2ExhaustivePerceptual(m_rgb_data, decoded, m_width, m_height, x * 4, y * 4, block1, block2);
+		}
+	} else {
+		if (m_fastest) {
+			compressBlockETC2Fast(m_rgb_data, NULL, decoded, m_width, m_height, x * 4, y * 4, block1, block2);
+		} else {
+			compressBlockETC2Exhaustive(m_rgb_data, decoded, m_width, m_height, x * 4, y * 4, block1, block2);
+		}
+	}
+}
+
+void TransToETC2::ComputeAlpha(int x, int y, uint8_t* alphadata)
+{
+	if (m_fastest) {
+		compressBlockAlphaFast(m_alpha_data, x * 4, y * 4, m_width, m_height, alphadata);
+	} else {
+		compressBlockAlphaSlow(m_alpha_data, x * 4, y * 4, m_width, m_height, alphadata);
+	}
 }
 
 void TransToETC2::WriteBigEndian2byteWord(unsigned short* blockadr, std::ofstream& fout)

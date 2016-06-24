@@ -328,6 +328,14 @@
 				Name="etcpack"
 				>
 				<File
+					RelativePath="..\..\..\..\editor-external\etcpack\c_wrap_etcpack.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\editor-external\etcpack\c_wrap_etcpack.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\..\editor-external\etcpack\source\etcdec.cxx"
 					>
 				</File>

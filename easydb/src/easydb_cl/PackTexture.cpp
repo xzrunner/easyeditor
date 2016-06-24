@@ -237,7 +237,7 @@ void PackTexture::PackPackage(const Package& pkg, const std::string& src_dir,
 
 			int w, h, c, f;
 			uint8_t* pixels = ee::LibpngAdapter::Read(src.c_str(), w, h, c, f);
-			eimage::TransToETC2 trans(pixels, w, h, c, false, pkg.quality == "fastest");
+			eimage::TransToETC2 trans(pixels, w, h, c, eimage::TransToETC2::RGBA, false, pkg.quality == "fastest");
 
 			trans.OutputFile(dst);
 			wxRemoveFile(src);
