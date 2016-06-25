@@ -60,10 +60,12 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 		LevelEditDlg dlg(m_wnd, spr);
 		if (dlg.ShowModal() == wxID_OK) {
 			bool use_symbol = spr->GetTag().find("[symbol]") != std::string::npos;
+			std::string tag;
 			if (use_symbol) {
-				spr->SetTag("[symbol];");
+				tag = "[symbol];";
 			}
-			spr->SetTag(dlg.ToString());
+			tag += dlg.ToString();
+			spr->SetTag(tag);
 		}
 	}
 	else if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(spr))
