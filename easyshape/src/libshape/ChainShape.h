@@ -28,7 +28,7 @@ public:
 	virtual void Translate(const sm::vec2& offset);
 	virtual const sm::rect& GetRect() const { return s2::PolylineShape::GetBounding(); }
 	virtual void Draw(const sm::mat4& mt,
-		const s2::RenderColor& color = s2::RenderColor()) const { s2::PolylineShape::Draw(mt, color); }
+		const s2::RenderColor& color = s2::RenderColor()) const;
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
 	virtual void LoadFromFile(const Json::Value& value, const std::string& dir);
 	virtual void StoreToFile(Json::Value& value, const std::string& dir) const;

@@ -4,6 +4,9 @@
 
 #include <ee/Math2D.h>
 #include <ee/SettingData.h>
+#include <ee/EE_RVG.h>
+
+#include <SM_Calc.h>
 
 namespace eshape
 {
@@ -30,6 +33,26 @@ void ChainShape::Translate(const sm::vec2& offset)
 		m_vertices[i] += offset;
 	}
 	m_bounding.Translate(offset);
+}
+
+void ChainShape::Draw(const sm::mat4& mt, const s2::RenderColor& color) const
+{
+	s2::PolylineShape::Draw(mt, color);
+
+	if (m_draw_dir && m_vertices.size() >= 2) 
+	{
+		sm::vec2 s = m_vertices[m_vertices.size() - 2],
+			     e = m_vertices[m_vertices.size() - 1];
+		const float LEN = 20;
+		sm::vec2 seg = s - e;
+		seg.Normalize();
+		seg *= LEN;
+		sm::vec2 left, right;
+		left = e + sm::rotate_vector(seg, - SM_PI / 6);
+		right = e + sm::rotate_vector(seg, SM_PI / 6);
+		ee::RVG::Line(e, left); 
+		ee::RVG::Line(e, right);
+	}
 }
 
 ee::PropertySetting* ChainShape::CreatePropertySetting(ee::EditPanelImpl* stage)
