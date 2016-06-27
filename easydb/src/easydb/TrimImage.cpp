@@ -63,8 +63,11 @@ void TrimImage::Trigger(const std::string& src_dir, const std::string& dst_dir)
 
 	wxArrayString files;
 	ee::FileHelper::FetchAllFiles(m_src_dir, files);
+	std::cout << "Trim image.\n";
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
+		ee::ConsoleProgressBar::Print(i, n);
+
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath();
@@ -72,8 +75,6 @@ void TrimImage::Trigger(const std::string& src_dir, const std::string& dst_dir)
 		if (!ee::FileType::IsType(filepath, ee::FileType::e_image)) {
 			continue;
 		}
-
-		std::cout << i << " / " << n << " : " << filepath << "\n";
 
 		int64_t img_ori_time = m_json_cfg.QueryTime(ee::FileHelper::GetRelativePath(m_src_dir, filepath)),
 			img_new_time = GetFileModifyTime(filepath);

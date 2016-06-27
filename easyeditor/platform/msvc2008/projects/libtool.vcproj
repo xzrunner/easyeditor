@@ -231,6 +231,14 @@
 			</File>
 		</Filter>
 		<File
+			RelativePath="..\..\..\source\tool\ConsoleProgressBar.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\include\ee\ConsoleProgressBar.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\source\tool\Exception.cpp"
 			>
 		</File>
