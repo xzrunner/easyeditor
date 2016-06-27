@@ -9,6 +9,7 @@
 #include <ee/StringHelper.h>
 #include <ee/ImageClip.h>
 #include <ee/ImageSaver.h>
+#include <ee/ConsoleProgressBar.h>
 
 #include <easyimage.h>
 

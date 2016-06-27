@@ -185,29 +185,18 @@ const sm::vec2& Sprite::GetScale() const
 void Sprite::SetScale(const sm::vec2& scale)
 {
 	assert(m_core);
+	const sm::vec2& old_scale = m_core->GetScale();
+	if (old_scale.x != 0 && old_scale.y != 0) {
+		sm::vec2 dscale;
+		dscale.x = scale.x / m_core->GetScale().x;
+		dscale.y = scale.y / m_core->GetScale().y;
 
-	sm::vec2 dscale;
-	dscale.x = scale.x / m_core->GetScale().x;
-	dscale.y = scale.y / m_core->GetScale().y;
+		sm::vec2 old_offset = m_offset;
+		sm::vec2 new_offset(m_offset.x * dscale.x, m_offset.y * dscale.y);
+		m_offset = new_offset;
 
-	sm::vec2 old_offset = m_offset;
-	sm::vec2 new_offset(m_offset.x * dscale.x, m_offset.y * dscale.y);
-	m_offset = new_offset;
-
-	Translate(old_offset - new_offset);
-
-	//////////////////////////////////////////////////////////////////////////
-
-// 	sm::mat4 mat_old, mat_new;
-// 	mat_old.scale(m_impl->Scale().x, m_impl->Scale().y);
-// 	mat_new.scale(xScale, yScale);
-// 
-// 	sm::vec2 offset = Math2D::TransVector(m_offset, mat_new) - Math2D::TransVector(m_offset, mat_old);
-// 
-// 	m_offset += offset;
-// 	translate(-offset);
-
-	//////////////////////////////////////////////////////////////////////////
+		Translate(old_offset - new_offset);
+	}
 
 	m_core->SetScale(scale);
 	BuildBounding();
