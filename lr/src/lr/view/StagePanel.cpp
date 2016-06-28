@@ -8,6 +8,7 @@
 #include "dataset/Grids.h"
 #include "dataset/Quadtree.h"
 #include "dataset/Layer.h"
+#include "dataset/TagCfg.h"
 #include "view/LibraryPage.h"
 #include "preview/PathGrid.h"
 #include "preview/PathNavMesh.h"
@@ -357,6 +358,12 @@ void StagePanel::ReorderSpriteMost(ee::Sprite* spr, bool up)
 
 void StagePanel::InsertSprite(ee::Sprite* spr, int idx)
 {
+	// tag
+	std::string tag = TagCfg::Instance()->Query(&spr->GetSymbol());
+	if (spr->GetTag().find(tag) == std::string::npos) {
+		spr->SetTag(tag + spr->GetTag());
+	}
+
 	Layer* layer = static_cast<LibraryPage*>(m_library->GetCurrPage())->GetLayer();
 	if (layer->InsertSprite(spr, idx)) {
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();

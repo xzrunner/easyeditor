@@ -585,6 +585,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="tag"
+				>
+				<File
+					RelativePath="..\..\..\src\lr\dataset\TagCfg.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\dataset\TagCfg.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="preview"
