@@ -68,7 +68,7 @@ void read_memory_cb(png_structp png, png_bytep data, png_size_t size)
 }
 
 uint8_t* LibpngAdapter::Read(const char* filename, int& width, int& height, 
-							 int& channels, int& format)
+							 int& channels, int& format, bool reverse)
 {
 	std::locale::global(std::locale(""));
 	std::ifstream fin(filename, std::ios::binary);
@@ -169,9 +169,14 @@ uint8_t* LibpngAdapter::Read(const char* filename, int& width, int& height,
 		if (!lImageBuffer) break;
 		lRowPtrs = new png_bytep[lHeight];
 		if (!lRowPtrs) break;
-		for (unsigned int i = 0; i < lHeight; ++i) 
-		{
-			lRowPtrs[lHeight - (i + 1)] = lImageBuffer + i * lRowSize;
+		if (reverse) {
+	 		for (unsigned int i = 0; i < lHeight; ++i) {
+	 			lRowPtrs[lHeight - (i + 1)] = lImageBuffer + i * lRowSize;
+	 		}
+		} else {
+			for (unsigned int i = 0; i < lHeight; ++i) {
+				lRowPtrs[i] = lImageBuffer + i * lRowSize;
+			}
 		}
 		png_read_image(lPngPtr, lRowPtrs);
 

@@ -13,7 +13,7 @@ public:
 		const char* filename, bool reverse = true);
 
 	static uint8_t* Read(const char* filename, int& width, int& height, 
-		int& channels, int& format);
+		int& channels, int& format, bool reverse = true);
 
 	static void ReadHeader(const char* filename, int& width, int& height);
 

@@ -206,7 +206,7 @@ void PackTexture::PackPackage(const Package& pkg, const std::string& src_dir,
 			std::string dst = dst_file + ee::StringHelper::ToString(i) + ".pvr";
 
 			int w, h, c, f;
-			uint8_t* pixels = ee::LibpngAdapter::Read(src.c_str(), w, h, c, f);
+			uint8_t* pixels = ee::LibpngAdapter::Read(src.c_str(), w, h, c, f, false);
 			eimage::TransToPVR trans(pixels, w, h, c, false, pkg.quality == "fastest");
 
 			trans.OutputFile(dst);
@@ -221,7 +221,7 @@ void PackTexture::PackPackage(const Package& pkg, const std::string& src_dir,
 			std::string dst = dst_file + ee::StringHelper::ToString(i);
 
 			int w, h, c, f;
-			uint8_t* pixels = ee::LibpngAdapter::Read(src.c_str(), w, h, c, f);
+			uint8_t* pixels = ee::LibpngAdapter::Read(src.c_str(), w, h, c, f, false);
 			eimage::TransToETC1 trans(pixels, w, h, c, false, pkg.quality == "fastest");
 
 			trans.OutputFile(dst);
@@ -236,7 +236,7 @@ void PackTexture::PackPackage(const Package& pkg, const std::string& src_dir,
 			std::string dst = dst_file + ee::StringHelper::ToString(i) + ".pkm";
 
 			int w, h, c, f;
-			uint8_t* pixels = ee::LibpngAdapter::Read(src.c_str(), w, h, c, f);
+			uint8_t* pixels = ee::LibpngAdapter::Read(src.c_str(), w, h, c, f, false);
 			eimage::TransToETC2 trans(pixels, w, h, c, eimage::TransToETC2::RGBA, false, pkg.quality == "fastest");
 
 			trans.OutputFile(dst);
