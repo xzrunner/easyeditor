@@ -172,7 +172,10 @@ void LRJsonPacker::ParserShapeFromSprite(const Json::Value& src_val, const lr::G
 	while (!spr_val.isNull()) {
 		std::string spr_path = ee::SymbolSearcher::GetSymbolPath(m_dir, spr_val);
 		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(spr_path);
-		assert(symbol);
+		if (!symbol) {
+			throw ee::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", 
+				m_dir.c_str(), spr_path.c_str());
+		}
 
 		Json::Value dst_val;
 		dst_val["name"] = spr_val["name"];
