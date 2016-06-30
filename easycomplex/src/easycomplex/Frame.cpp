@@ -45,7 +45,9 @@ void Frame::OnSaveAs(wxCommandEvent& event)
 	if (!m_task) return;
 
 	try {
-		std::string filter = GetFileFilter() + "; *.png";
+		std::string filter = GetFileFilter();
+		std::string png_filter = "PNG files (*.png)|*.png";
+		filter += "|" + png_filter;
 		wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, filter, wxFD_SAVE);
 		if (dlg.ShowModal() == wxID_OK)
 		{
@@ -75,9 +77,9 @@ void Frame::OnSettings(wxCommandEvent& event)
 std::string Frame::GetFileFilter() const
 {
 	std::string tag = ee::FileType::GetTag(ee::FileType::e_complex);
-	std::string filter = "*_" + tag + ".json";
-	filter += "; *_psd.json";
-	return filter;
+	std::string complex_filter = GetJsonFileFilter(tag),
+		        psd_filter = GetJsonFileFilter("psd");
+	return complex_filter + "|" + psd_filter;
 }
 
 void Frame::onPreview(wxCommandEvent& event)
@@ -150,7 +152,7 @@ void Frame::onCode(wxCommandEvent& event)
 
 		ebuilder::CodeGenerator gen;
 		Code code(gen);
-		code.ResolveUI(*stage->getSymbol());
+		code.ResolveUI(*stage->GetSymbol());
 		page->SetReadOnly(false);
 		page->SetText(gen.toText());
 		page->SetReadOnly(true);
@@ -163,7 +165,7 @@ void Frame::onCode(wxCommandEvent& event)
 
 		ebuilder::CodeGenerator gen;
 		Code code(gen);
-		code.ResolveText(*stage->getSymbol());
+		code.ResolveText(*stage->GetSymbol());
 		page->SetReadOnly(false);
 		page->SetText(gen.toText());
 		page->SetReadOnly(true);
@@ -195,7 +197,7 @@ void Frame::onCode(wxCommandEvent& event)
 void Frame::SaveAsPNG(const std::string& filepath) const
 {
 	ee::Snapshoot ss;
-	Symbol* symbol = ((StagePanel*)(m_task->GetEditPanel()))->getSymbol();
+	Symbol* symbol = ((StagePanel*)(m_task->GetEditPanel()))->GetSymbol();
 	symbol->InitBounding();
 	ss.OutputToImageFile(symbol, filepath);
 }
