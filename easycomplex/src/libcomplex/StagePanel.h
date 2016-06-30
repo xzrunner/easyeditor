@@ -29,7 +29,8 @@ public:
 	//
 	virtual bool Update(float dt);
 
-	Symbol* getSymbol() { return m_symbol; }
+	const Symbol* GetSymbol() const { return m_symbol; }
+	Symbol* GetSymbol() { return m_symbol; }
 
 protected:
 	//

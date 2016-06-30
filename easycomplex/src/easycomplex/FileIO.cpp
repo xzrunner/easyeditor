@@ -15,7 +15,7 @@ namespace ecomplex
 
 void FileIO::load(const Task* task, const char* filename)
 {
-	ecomplex::Symbol* symbol = task->m_stage->getSymbol();
+	ecomplex::Symbol* symbol = task->m_stage->GetSymbol();
 	symbol->LoadFromFile(filename);
 
 	task->m_library->LoadFromSymbolMgr(*ee::SymbolMgr::Instance());
@@ -35,7 +35,7 @@ void FileIO::store(const Task* task, const char* filename)
 {
 //		ecomplex::FileSaver::store(filename, Context::Instance()->stage->getSymbol());
 
-	ecomplex::Symbol* root = task->m_stage->getSymbol();
+	ecomplex::Symbol* root = task->m_stage->GetSymbol();
 	ecomplex::FileStorer::StoreWithHistory(filename, root);
 	std::queue<const ecomplex::Symbol*> buffer;
 	const std::vector<s2::Sprite*>& children = root->GetChildren();

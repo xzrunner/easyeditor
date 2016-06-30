@@ -91,9 +91,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 
 void StagePanel::Clear()
 {
-	Symbol* symbol = getSymbol();
-	symbol->m_clipbox = sm::rect(sm::vec2(0, 0), 0, 0);
-
+	m_symbol->m_clipbox = sm::rect(sm::vec2(0, 0), 0, 0);
 	m_symbol->Clear();
 }
 

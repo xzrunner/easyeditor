@@ -14,7 +14,8 @@ PropertySettingPanel::PropertySettingPanel(wxWindow* parent)
 
 ee::PropertySetting* PropertySettingPanel::CreateDefaultProperty() const
 {
-	return new SymbolPropertySetting(static_cast<StagePanel*>(m_stage->GetEditPanel())->getSymbol());
+	StagePanel* stage = static_cast<StagePanel*>(m_stage->GetEditPanel());
+	return new SymbolPropertySetting(stage->GetSymbol());
 }
 
 }
