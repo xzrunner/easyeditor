@@ -44,7 +44,7 @@ private:
 	void Clear();
 
 private:
-	static const int RADIUS = 50;
+	static const int RADIUS = 10;
 
 	static const int ANCHOR_COUNT = 9;
 
