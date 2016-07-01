@@ -48,6 +48,9 @@ public:
 
 	int GetCurrFrame() const;
 
+	void SetLoop(bool loop) { m_loop = loop; }
+	void ResetTime() { m_init_time = 0; }
+
 	static ee::Symbol* Create() { return new Symbol(); }
 
 protected:
@@ -66,6 +69,8 @@ private:
 	int m_index; // for draw certain frame
 
 	mutable long m_init_time;
+
+	bool m_loop;
 
 }; // Symbol
 

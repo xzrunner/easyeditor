@@ -19,6 +19,7 @@ namespace eanim
 Symbol::Symbol()
 	: m_index(0)
 	, m_init_time(0)
+	, m_loop(true)
 {
 	this->Retain();
 	m_core = new s2::AnimSymbol(this);
@@ -145,7 +146,12 @@ int Symbol::GetCurrFrame() const
 	clock_t curr = clock();
 	float during = (float)(curr - m_init_time) / CLOCKS_PER_SEC;
 	int index = during / (1.0f / m_fps);
-	return index % getMaxFrameIndex() + 1;
+	int max_frame = getMaxFrameIndex();
+	if (!m_loop && index > max_frame) {
+		return 1;
+	} else {
+		return index % max_frame + 1;
+	}
 }
 
 void Symbol::LoadResources()

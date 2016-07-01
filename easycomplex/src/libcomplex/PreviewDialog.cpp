@@ -6,6 +6,8 @@
 #include <ee/SettingData.h>
 #include <ee/Config.h>
 
+#include <easyanim.h>
+
 namespace ecomplex
 {
 
@@ -19,12 +21,24 @@ PreviewDialog::PreviewDialog(wxWindow* parent, wxGLContext* glctx,
 
 	ee::SettingData& data = ee::Config::Instance()->GetSettings();
 	data.particle3d_loop = false;
+
+	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
+		if (const eanim::Sprite* anim = dynamic_cast<const eanim::Sprite*>(m_sprites[i])) {
+			const_cast<eanim::Symbol&>(anim->GetSymbol()).SetLoop(false);
+		}
+	}
 }
 
 PreviewDialog::~PreviewDialog()
 {
 	ee::SettingData& data = ee::Config::Instance()->GetSettings();
 	data.particle3d_loop = true;
+
+	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
+		if (const eanim::Sprite* anim = dynamic_cast<const eanim::Sprite*>(m_sprites[i])) {
+			const_cast<eanim::Symbol&>(anim->GetSymbol()).SetLoop(true);
+		}
+	}
 }
 
 void PreviewDialog::InitLayout(wxGLContext* glctx)

@@ -1,6 +1,7 @@
 #include "PreviewEditOP.h"
 
 #include <easyparticle3d.h>
+#include <easyanim.h>
 
 namespace ecomplex
 {
@@ -21,6 +22,8 @@ bool PreviewEditOP::OnMouseLeftDown(int x, int y)
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		if (const eparticle3d::Sprite* particle = dynamic_cast<const eparticle3d::Sprite*>(m_sprites[i])) {
 			const_cast<eparticle3d::Sprite*>(particle)->Start();
+		} else if (const eanim::Sprite* anim = dynamic_cast<const eanim::Sprite*>(m_sprites[i])) {
+			const_cast<eanim::Symbol&>(anim->GetSymbol()).ResetTime();
 		}
 	}
 
