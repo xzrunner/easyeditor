@@ -14,8 +14,12 @@ public:
 	SelectSpritesOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
 		ee::MultiSpritesImpl* sprites_impl, ee::EditCMPT* callback = NULL);
 
-//		virtual bool OnKeyDown(int keyCode);
+	virtual bool OnKeyDown(int keyCode);
 	virtual bool OnMouseLeftDClick(int x, int y);
+
+private:
+	void GroupSelection();
+	void BreakUpSelection();
 
 private:
 	OpenSymbolDialog m_open_symbol;

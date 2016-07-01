@@ -493,6 +493,14 @@
 			Name="utility"
 			>
 			<File
+				RelativePath="..\..\..\src\libcomplex\GroupHelper.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libcomplex\GroupHelper.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libcomplex\OpenSymbolDialog.cpp"
 				>
 			</File>

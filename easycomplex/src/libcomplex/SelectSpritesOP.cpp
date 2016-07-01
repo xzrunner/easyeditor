@@ -1,11 +1,16 @@
 #include "SelectSpritesOP.h"
-
-// for debug
-//#include "MyThread.h"
-#include "RectCutLoader.h"
+#include "StagePanel.h"
+#include "Symbol.h"
+#include "Sprite.h"
+#include "GroupHelper.h"
 
 #include <ee/EditPanelImpl.h>
 #include <ee/MultiSpritesImpl.h>
+#include <ee/SpriteSelection.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/FileHelper.h>
+#include <ee/StringHelper.h>
+#include <ee/sprite_msg.h>
 
 namespace ecomplex
 {
@@ -17,30 +22,25 @@ SelectSpritesOP::SelectSpritesOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::Mu
 {
 }
 
-// bool SelectSpritesOP::OnKeyDown(int keyCode)
-// {
-// 	if (ee::SelectSpritesOP::OnKeyDown(keyCode)) {
-// 		return true;
-// 	}
-// 
-// 	//  	if (keyCode == WXK_ESCAPE)
-// 	//  	{
-// 	//  		MyThread* t = new MyThread();
-// 	//  		t->Create();
-// 	//  		t->Run();
-// 	//  	}
-// 
-//  	if (keyCode == WXK_SPACE)
-//  	{
-//  		RectCutLoader loader((StagePanel*)(m_stage));
-// // 		loader.LoadOnlyJson("E:\\debug\\character\\debug_pack\\pack.json", "2013baji1_attack1_2_1_011");
-// 		loader.LoadJsonAndImg("E:\\debug\\character\\pack\\pack.json", "shadow");
-// // 		loader.LoadToDtex("E:\\debug\\character\\debug_pack\\pack.json", "2013baji1_attack1_2_1_011");
-// //		loader.LoadToDtex("E:\\debug\\character\\pack\\pack.rrp", "2013baji1_attack1_2_1_011");
-//  	}
-// 
-// 	return false;
-// }
+bool SelectSpritesOP::OnKeyDown(int keyCode)
+{
+	if (ee::SelectSpritesOP::OnKeyDown(keyCode)) {
+		return true;
+	}
+
+	if (m_stage->GetKeyState(WXK_CONTROL) && (keyCode == 'g' || keyCode == 'G'))
+	{
+		GroupSelection();
+		return true;
+	}
+	else if (m_stage->GetKeyState(WXK_CONTROL) && (keyCode == 'b' || keyCode == 'B'))
+	{
+		BreakUpSelection();
+		return true;
+	}
+
+	return false;
+}
 
 bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 {
@@ -53,6 +53,61 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	}
 
 	return false;
+}
+
+void SelectSpritesOP::GroupSelection()
+{
+	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
+	const Symbol* parent = stage->GetSymbol();
+	if (!parent || m_selection->IsEmpty()) {
+		return;
+	}
+
+	std::vector<ee::Sprite*> sprites;
+	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
+
+	Sprite* spr = GroupHelper::Group(sprites);
+	std::string filepath = ee::FileHelper::GetFileDir(parent->GetFilepath());
+	filepath += "\\_tmp_";
+	filepath += ee::StringHelper::ToString(wxDateTime::Now().GetTicks());
+	filepath += "_" + ee::FileType::GetTag(ee::FileType::e_complex) + ".json";
+	const_cast<Symbol&>(spr->GetSymbol()).SetFilepath(filepath);
+
+	ee::InsertSpriteSJ::Instance()->Insert(spr);
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		ee::RemoveSpriteSJ::Instance()->Remove(sprites[i]);
+	}
+}
+
+void SelectSpritesOP::BreakUpSelection()
+{
+	if (m_selection->IsEmpty()) {
+		return;
+	}
+
+	std::string tag = "_" + ee::FileType::GetTag(ee::FileType::e_complex) + ".json";
+	std::vector<ee::Sprite*> sprites;
+	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
+	for (int i = 0, n = sprites.size(); i < n; ++i) 
+	{
+		ee::Sprite* spr = sprites[i];
+		if (spr->GetSymbol().GetFilepath().find(tag) == std::string::npos) {
+			continue;
+		}
+		
+		ee::SelectSpriteSJ::Instance()->Select(spr, true);
+
+		std::vector<ee::Sprite*> children;
+		GroupHelper::BreakUp(spr, children);
+		for (int j = 0, m = children.size(); j < m; ++j) {
+			ee::Sprite* spr = children[j];
+			ee::InsertSpriteSJ::Instance()->Insert(spr);
+			spr->Release();
+		}
+		
+		ee::RemoveSpriteSJ::Instance()->Remove(spr);
+		spr->Release();
+	}
 }
 
 } // complex

@@ -50,7 +50,7 @@ void AnimTemplate::PreparePaths(const std::string& filepath)
 
 	for (int i = 0; i < dirs.size(); ++i) {
 		std::string path = ee::FileHelper::GetRelativePath(dir, dirs[i].ToStdString()),
-			name = ee::FileHelper::GetDirName(dirs[i].ToStdString());
+			name = ee::FileHelper::GetFilenameWithExtension(dirs[i].ToStdString());
 		Add(path, name);
 	}
 }

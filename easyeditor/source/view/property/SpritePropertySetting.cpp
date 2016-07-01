@@ -50,8 +50,21 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 
 	bool dirty = true;
 
+	// res
+	if (name == "FileDir")
+	{
+		std::string file = ee::FileHelper::GetFilenameWithExtension(spr->GetSymbol().GetFilepath());
+		std::string filepath = wxANY_AS(value, wxString).ToStdString() + "\\" + file;
+		const_cast<Symbol&>(spr->GetSymbol()).SetFilepath(filepath);
+	}
+	else if (name == "FileName")
+	{
+		std::string dir = ee::FileHelper::GetFileDir(spr->GetSymbol().GetFilepath());
+		std::string filepath = dir + "\\" + wxANY_AS(value, wxString).ToStdString();
+		const_cast<Symbol&>(spr->GetSymbol()).SetFilepath(filepath);
+	}
 	// base
-	if (name == wxT("Name"))
+	else if (name == wxT("Name"))
 	{
 		spr->SetName(wxANY_AS(value, wxString).ToStdString());
 		SpriteNameChangeSJ::Instance()->OnSpriteNameChanged(spr, this);
@@ -208,6 +221,9 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 
 	Sprite* spr = m_impl->GetSprite();
 
+	std::string filedir = FileHelper::GetFileDir(spr->GetSymbol().GetFilepath());
+	pg->GetProperty(wxT("FileDir"))->SetValue(filedir);
+
 	std::string filename = FileHelper::GetFilenameWithExtension(spr->GetSymbol().GetFilepath());
 	pg->GetProperty(wxT("FileName"))->SetValue(filename);
 
@@ -283,14 +299,17 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	pg->Clear();
 
+	pg->Append(new wxPropertyCategory("RES", wxPG_LABEL));
+
+	std::string filedir = FileHelper::GetFileDir(spr->GetSymbol().GetFilepath());
+	pg->Append(new wxStringProperty("FileDir", wxPG_LABEL, filedir));
+
+	std::string filename = FileHelper::GetFilenameWithExtension(spr->GetSymbol().GetFilepath());
+	pg->Append(new wxStringProperty("FileName", wxPG_LABEL, filename));
+
 	pg->Append(new wxPropertyCategory("BASE", wxPG_LABEL));
 
 	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, spr->GetName()));
-
-	std::string filename = FileHelper::GetFilenameWithExtension(spr->GetSymbol().GetFilepath());
-	pg->Append(new wxStringProperty(wxT("FileName"), wxPG_LABEL, filename));
-	pg->SetPropertyReadOnly("FileName");
-
 	pg->Append(new wxStringProperty("Tag", wxPG_LABEL, spr->GetTag()));
 
 	pg->Append(new wxBoolProperty("Clip", wxPG_LABEL, spr->IsClip()));

@@ -47,9 +47,6 @@ public:
 	// get string after the last '\'
 	static std::string GetFilenameWithExtension(const std::string& filepath);
 
-	// get string after the last '\'
-	static std::string GetDirName(const std::string& dir);
-
 	// get path absolute - dir
 	static std::string GetRelativePath(const std::string& dir, const std::string& absolute);
 

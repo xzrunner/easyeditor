@@ -229,11 +229,6 @@ std::string FileHelper::GetFilenameWithExtension(const std::string& filepath)
 	return filepath.substr(pos_divide + 1);
 }
 
-std::string FileHelper::GetDirName(const std::string& dir)
-{
-	return GetFilenameWithExtension(dir);
-}
-
 std::string FileHelper::GetRelativePath(const std::string& dir, const std::string& absolute)
 {
 	wxFileName filename(absolute);

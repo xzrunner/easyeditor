@@ -17,5 +17,6 @@
 #include "libcomplex/ViewlistListImpl.h"
 #include "libcomplex/PreviewDialog.h"
 #include "libcomplex/SphereRotateState.h"
+#include "libcomplex/GroupHelper.h"
 
 #endif // _EASYCOMPLEX_H_
