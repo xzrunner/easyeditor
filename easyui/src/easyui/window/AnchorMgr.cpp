@@ -114,16 +114,21 @@ void AnchorMgr::OnNotify(int sj_id, void* ud)
 
 void AnchorMgr::Insert(ee::Sprite* spr)
 {
+	float nearest = FLT_MAX;
+	int selected = -1;
 	for (int i = 0; i < ANCHOR_COUNT; ++i)
 	{
 		Anchor& anchor = m_anchors[i];
-		if (ee::Math2D::GetDistance(anchor.pos, spr->GetPosition()) < RADIUS) {
-			spr->Retain();
-			anchor.sprites.push_back(spr);
-			spr->SetTransform(anchor.pos, 0);
-			break;
+		float dis = ee::Math2D::GetDistance(anchor.pos, spr->GetPosition());
+		if (dis < nearest) 
+		{
+			nearest = dis;
+			selected = i;
 		}
 	}
+	spr->Retain();
+	m_anchors[selected].sprites.push_back(spr);
+	spr->SetTransform(m_anchors[selected].pos, 0);
 }
 
 void AnchorMgr::Remove(ee::Sprite* spr)
