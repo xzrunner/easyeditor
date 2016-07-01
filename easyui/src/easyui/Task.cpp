@@ -7,6 +7,7 @@
 #include <ee/SymbolMgr.h>
 #include <ee/Bitmap.h>
 #include <ee/PropertySettingPanel.h>
+#include <ee/ViewlistPanel.h>
 
 namespace eui
 {
@@ -85,8 +86,15 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 
 wxWindow* Task::InitLayoutRight(wxWindow* parent)
 {
-	m_top_pannels.toolbar = new TopToolbarPanel(parent);
-	return m_top_pannels.toolbar;
+	wxSplitterWindow* split = new wxSplitterWindow(parent);
+
+	m_top_pannels.viewlist = new ee::ViewlistPanel(split);
+	m_top_pannels.toolbar = new TopToolbarPanel(split);
+
+	split->SetSashGravity(0.8f);
+	split->SplitHorizontally(m_top_pannels.viewlist, m_top_pannels.toolbar);
+
+	return split;
 }
 
 }

@@ -1,7 +1,7 @@
 #ifndef _EASYUI_TOP_PANNELS_H_
 #define _EASYUI_TOP_PANNELS_H_
 
-namespace ee { class PropertySettingPanel; }
+namespace ee { class PropertySettingPanel; class ViewlistPanel; }
 
 namespace eui
 {
@@ -19,6 +19,7 @@ public:
 
 	TopStagePanel* stage;
 
+	ee::ViewlistPanel* viewlist;
 	TopToolbarPanel* toolbar;
 
 public:
