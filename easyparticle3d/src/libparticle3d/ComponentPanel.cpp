@@ -86,8 +86,8 @@ const ps_color4f& ComponentPanel::GetAddColor() const
 
 void ComponentPanel::SetBtnColor()
 {
-	m_mul_col_btn->SetBackgroundColour(wxColour(m_pc->col_mul.r * 255, m_pc->col_mul.g * 255, m_pc->col_mul.b * 255));
-	m_add_col_btn->SetBackgroundColour(wxColour(m_pc->col_add.r * 255, m_pc->col_add.g * 255, m_pc->col_add.b * 255));
+	m_mul_col_btn->SetBackgroundColour(wxColour(m_pc->col_mul.r * 255.0f, m_pc->col_mul.g * 255.0f, m_pc->col_mul.b * 255.0f));
+	m_add_col_btn->SetBackgroundColour(wxColour(m_pc->col_add.r * 255.0f, m_pc->col_add.g * 255.0f, m_pc->col_add.b * 255.0f));
 }
 
 void ComponentPanel::SetCount(int count)
@@ -265,7 +265,7 @@ void ComponentPanel::OnBindPS(wxCommandEvent& event)
 void ComponentPanel::OnSetMultiCol(wxCommandEvent& event)
 {
 	wxColourData data;
-	data.SetColour(wxColour(m_pc->col_mul.r * 255, m_pc->col_mul.g * 255, m_pc->col_mul.b * 255));
+	data.SetColour(wxColour(m_pc->col_mul.r, m_pc->col_mul.g, m_pc->col_mul.b));
 	wxColourDialog dlg(m_parent, &data);
 
 	dlg.SetTitle(wxT("Multi Color"));
@@ -277,10 +277,10 @@ void ComponentPanel::OnSetMultiCol(wxCommandEvent& event)
 	if (dlg.ShowModal() == wxID_OK)
 	{
 		const wxColor& col = dlg.GetColourData().GetColour();
-		m_pc->col_mul.r = col.Red();
-		m_pc->col_mul.g = col.Green();
-		m_pc->col_mul.b = col.Blue();
-		m_pc->col_mul.a = col.Alpha();
+		m_pc->col_mul.r = col.Red() / 255.0f;
+		m_pc->col_mul.g = col.Green() / 255.0f;
+		m_pc->col_mul.b = col.Blue() / 255.0f;
+		m_pc->col_mul.a = col.Alpha() / 255.0f;
 
 		SetBtnColor();
 	}
@@ -289,7 +289,7 @@ void ComponentPanel::OnSetMultiCol(wxCommandEvent& event)
 void ComponentPanel::OnSetAddCol(wxCommandEvent& event)
 {
 	wxColourData data;
-	data.SetColour(wxColour(m_pc->col_add.r * 255, m_pc->col_add.g * 255, m_pc->col_add.b * 255));
+	data.SetColour(wxColour(m_pc->col_add.r, m_pc->col_add.g, m_pc->col_add.b));
 	wxColourDialog dlg(m_parent, &data);
 
 	dlg.SetTitle(wxT("Add Color"));
@@ -301,10 +301,10 @@ void ComponentPanel::OnSetAddCol(wxCommandEvent& event)
 	if (dlg.ShowModal() == wxID_OK)
 	{
 		const wxColor& col = dlg.GetColourData().GetColour();
-		m_pc->col_add.r = col.Red();
-		m_pc->col_add.g = col.Green();
-		m_pc->col_add.b = col.Blue();
-		m_pc->col_add.a = col.Alpha();
+		m_pc->col_add.r = col.Red() / 255.0f;
+		m_pc->col_add.g = col.Green() / 255.0f;
+		m_pc->col_add.b = col.Blue() / 255.0f;
+		m_pc->col_add.a = col.Alpha() / 255.0f;
 
 		SetBtnColor();
 	}
