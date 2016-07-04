@@ -441,6 +441,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\dtex_bitmap.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_bitmap.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\dtex_debug.c"
 				>
 			</File>
