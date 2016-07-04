@@ -45,6 +45,7 @@ public:
 	void OnMouse(wxMouseEvent& event);
 	void OnKeyDown(wxKeyEvent& event);
 	void OnKeyUp(wxKeyEvent& event);
+	void OnChar(wxKeyEvent& event);
 	void OnMouseWheelRotation(int x, int y, int direction);
 
 	void Undo();

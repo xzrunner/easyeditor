@@ -49,25 +49,25 @@ bool TranslateSpriteState::OnMouseDrag(const sm::vec2& pos)
 	return true;
 }
 
-bool TranslateSpriteState::OnDirectionKeyDown(DirectionType type)
+bool TranslateSpriteState::OnDirectionKeyDown(int type)
 {
 	if (m_selection->IsEmpty()) return false;
 
 	sm::vec2 offset;
-
-	switch (type)
+	float len = (type & KEY_SHIFT) ? 10 : 1;
+	switch (type & 0xf)
 	{
-	case e_left:
-		offset.Set(-1, 0);
+	case KEY_LEFT:
+		offset.Set(-len, 0);
 		break;
-	case e_right:
-		offset.Set(1, 0);
+	case KEY_RIGHT:
+		offset.Set(len, 0);
 		break;
-	case e_down:
-		offset.Set(0, -1);
+	case KEY_DOWN:
+		offset.Set(0, -len);
 		break;
-	case e_up:
-		offset.Set(0, 1);
+	case KEY_UP:
+		offset.Set(0, len);
 		break;
 	}
 

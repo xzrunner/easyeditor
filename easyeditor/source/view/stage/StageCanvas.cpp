@@ -24,6 +24,7 @@ BEGIN_EVENT_TABLE(StageCanvas, wxGLCanvas)
  	EVT_MOUSE_EVENTS(StageCanvas::OnMouse)
  	EVT_KEY_DOWN(StageCanvas::OnKeyDown)
 	EVT_KEY_UP(StageCanvas::OnKeyUp)
+	EVT_CHAR(StageCanvas::OnChar)
 	EVT_TIMER(TIMER_ID, StageCanvas::OnTimer)
 	EVT_KILL_FOCUS(StageCanvas::OnKillFocus)
 END_EVENT_TABLE()
@@ -197,6 +198,11 @@ void StageCanvas::OnKeyDown(wxKeyEvent& event)
 void StageCanvas::OnKeyUp(wxKeyEvent& event)
 {
 	m_stage->OnKeyUp(event);
+}
+
+void StageCanvas::OnChar(wxKeyEvent& event)
+{
+	m_stage->OnChar(event);
 }
 
 void StageCanvas::OnTimer(wxTimerEvent& event)

@@ -5,7 +5,7 @@
 #include "AutoAlign.h"
 #include "SpriteCtrlNode.h"
 #include "RightPopupMenu.h"
-#include "common_type.h"
+#include "key_type.h"
 
 #include <wx/menu.h>
 
@@ -26,8 +26,10 @@ public:
 		PropertySettingPanel* property, const ArrangeSpriteConfig& cfg = ArrangeSpriteConfig());
 	~ArrangeSpriteImpl();
 
-	virtual void OnKeyDown(int keyCode);
+	virtual bool OnKeyDown(int keyCode);
 	virtual void OnKeyUp(int keyCode);
+	virtual void OnChar(int keyCode);
+
 	virtual void OnMouseLeftDown(int x, int y);
 	virtual void OnMouseLeftUp(int x, int y);
 	virtual void OnMouseRightDown(int x, int y);
@@ -46,7 +48,7 @@ public:
 	bool IsSelectionEmpty() const;
 
 protected:
-	virtual void OnDirectionKeyDown(DirectionType type);
+	virtual void OnDirectionKeyDown(int type);
 	virtual void OnSpaceKeyDown();
 
 	virtual void SetRightPopupMenu(wxMenu& menu, int x, int y);
@@ -72,7 +74,7 @@ private:
 
 	sm::vec2 GetSprOffset(const Sprite* spr) const;
 
-	void OnSpriteShortcutKey(int keycode);
+	bool OnSpriteShortcutKey(int keycode);
 
 private:
 	static const float CTRL_NODE_RADIUS;

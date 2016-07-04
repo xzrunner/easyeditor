@@ -68,46 +68,41 @@ ArrangeSpriteImpl::~ArrangeSpriteImpl()
 	delete m_op_state;
 }
 
-void ArrangeSpriteImpl::OnKeyDown(int keycode)
+bool ArrangeSpriteImpl::OnKeyDown(int keycode)
 {
-	if (m_stage->GetKeyState(WXK_SHIFT)) {
-		OnSpriteShortcutKey(keycode);
-		return;
+	if (m_stage->GetKeyState(WXK_SHIFT) && OnSpriteShortcutKey(keycode)) {
+		return true;
 	}
 
+	bool ret = false;
 	switch (keycode)
 	{
 	case WXK_DELETE:
+		ret = true;
 		OnDeleteKeyDown();
 		break;
 	case WXK_PAGEUP:
+		ret = true;
 		UpOneLayer();
 		break;
 	case WXK_PAGEDOWN:
+		ret = true;
 		DownOneLayer();
 		break;
-	case 'a': case 'A':
-		OnDirectionKeyDown(e_left);
-		break;
-	case 'd': case 'D':
-		OnDirectionKeyDown(e_right);
-		break;
-	case 's': case 'S':
-		OnDirectionKeyDown(e_down);
-		break;
-	case 'w': case 'W':
-		OnDirectionKeyDown(e_up);
-		break;
 	case '[':
+		ret = true;
 		DownOneLayer();
 		break;
 	case ']':
+		ret = true;
 		UpOneLayer();
 		break;
 	case 'm' : case 'M':
+		ret = true;
 		ChangeOPState(new MoveSpriteState(m_selection));
 		break;
 	case WXK_SPACE:
+		ret = true;
 		OnSpaceKeyDown();
 		break;
 
@@ -119,6 +114,8 @@ void ArrangeSpriteImpl::OnKeyDown(int keycode)
 // 		ShaderMgr::Instance()->SetBufferData(false);
 // 		break;
 	}
+
+	return ret;
 }
 
 void ArrangeSpriteImpl::OnKeyUp(int keyCode)
@@ -127,6 +124,37 @@ void ArrangeSpriteImpl::OnKeyUp(int keyCode)
 	{
 		m_property_panel->EnablePropertyGrid(true);
 		m_property_panel->UpdatePropertyGrid();
+	}
+}
+
+void ArrangeSpriteImpl::OnChar(int keycode)
+{
+	switch (keycode)
+	{
+	case 'a':
+		OnDirectionKeyDown(KEY_LEFT);
+		break;
+	case 'd':
+		OnDirectionKeyDown(KEY_RIGHT);
+		break;
+	case 's':
+		OnDirectionKeyDown(KEY_DOWN);
+		break;
+	case 'w':
+		OnDirectionKeyDown(KEY_UP);
+		break;
+	case 'A':
+		OnDirectionKeyDown(KEY_LEFT | KEY_SHIFT);
+		break;
+	case 'D':
+		OnDirectionKeyDown(KEY_RIGHT | KEY_SHIFT);
+		break;
+	case 'S':
+		OnDirectionKeyDown(KEY_DOWN | KEY_SHIFT);
+		break;
+	case 'W':
+		OnDirectionKeyDown(KEY_UP | KEY_SHIFT);
+		break;
 	}
 }
 
@@ -452,7 +480,7 @@ bool ArrangeSpriteImpl::IsSelectionEmpty() const
 	return m_selection->IsEmpty();
 }
 
-void ArrangeSpriteImpl::OnDirectionKeyDown(DirectionType type)
+void ArrangeSpriteImpl::OnDirectionKeyDown(int type)
 {
 	if (!m_op_state) return;
 
@@ -572,12 +600,12 @@ sm::vec2 ArrangeSpriteImpl::GetSprOffset(const Sprite* spr) const
 	return offset;
 }
 
-void ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
+bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 {
 	std::vector<Sprite*> sprites;
 	m_selection->Traverse(FetchAllVisitor<Sprite>(sprites));
 	if (sprites.empty()) {
-		return;
+		return false;
 	}
 
 	sm::vec2 proj_pos = sprites[0]->GetPosition();
@@ -593,6 +621,7 @@ void ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 			spr->SetEditable(editable);
 		}
 		RefreshPanelSJ::Instance()->Refresh();
+		return true;
 	}
 	// visible
 	else if (keycode == 's' || keycode == 'S')
@@ -604,6 +633,7 @@ void ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 		}
 		SetCanvasDirtySJ::Instance()->SetDirty();
 		RefreshPanelSJ::Instance()->Refresh();
+		return true;
 	}
 	// hori mirror
 	else if (keycode == 'h' || keycode == 'H') 
@@ -613,6 +643,7 @@ void ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 			spr->SetMirror(!spr->GetMirror().x, spr->GetMirror().y);
 		}
 		SetCanvasDirtySJ::Instance()->SetDirty();
+		return true;
 	} 
 	// vert mirror
 	else if (keycode == 'v' || keycode == 'V') 
@@ -622,6 +653,7 @@ void ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 			spr->SetMirror(spr->GetMirror().x, !spr->GetMirror().y);
 		}
 		SetCanvasDirtySJ::Instance()->SetDirty();
+		return true;
 	} 
 	// mul color
 	else if (keycode == 'm' || keycode == 'M') 
@@ -645,6 +677,7 @@ void ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 				SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		}
+		return true;
 	} 
 	// add color
 	else if (keycode == 'a' || keycode == 'A') 
@@ -668,6 +701,7 @@ void ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 				SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		}
+		return true;
 	}
 	// alpha
 	else if (keycode == 't' || keycode == 'T') 
@@ -685,7 +719,9 @@ void ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 			sprites[0]->GetColor().mul.a = old_alpha;
 			SetCanvasDirtySJ::Instance()->SetDirty();
 		}
+		return true;
 	}
+	return false;
 }
 
 }

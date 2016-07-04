@@ -1,7 +1,7 @@
 #ifndef _EASYEDITOR_SPRITE_ARRANGE_STATE_H_
 #define _EASYEDITOR_SPRITE_ARRANGE_STATE_H_
 
-#include "common_type.h"
+#include "key_type.h"
 
 #include <SM_Vector.h>
 
@@ -20,7 +20,7 @@ public:
 	virtual bool OnMouseMove(const sm::vec2& pos) { return false; }
 	virtual bool OnMouseDrag(const sm::vec2& pos) { return false; }
 
-	virtual bool OnDirectionKeyDown(DirectionType type) { return false; }
+	virtual bool OnDirectionKeyDown(int type) { return false; }
 
 }; // IArrangeState
 

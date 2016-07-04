@@ -17,6 +17,8 @@ public:
 
 	virtual bool OnKeyDown(int keyCode) { return false; }
 	virtual bool OnKeyUp(int keyCode) { return false; }
+	virtual bool OnChar(int keyCode) { return false; }
+
 	virtual bool OnMouseLeftDown(int x, int y) { return false; }
 	virtual bool OnMouseLeftUp(int x, int y) { return false; }
 	virtual bool OnMouseRightDown(int x, int y) { return false; }

@@ -39,16 +39,16 @@ bool SelectNodesOP::OnKeyDown(int keyCode)
 		ClearSelectedNodes();
 		break;
 	case 'a': case 'A':
-		OnDirectionKeyDown(ee::e_left);
+		OnDirectionKeyDown(ee::KEY_LEFT);
 		break;
 	case 'd': case 'D':
-		OnDirectionKeyDown(ee::e_right);
+		OnDirectionKeyDown(ee::KEY_RIGHT);
 		break;
 	case 's': case 'S':
-		OnDirectionKeyDown(ee::e_down);
+		OnDirectionKeyDown(ee::KEY_DOWN);
 		break;
 	case 'w': case 'W':
-		OnDirectionKeyDown(ee::e_up);
+		OnDirectionKeyDown(ee::KEY_UP);
 		break;
 	}
 
@@ -199,7 +199,7 @@ void SelectNodesOP::ClearSelectedNodes()
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void SelectNodesOP::OnDirectionKeyDown(ee::DirectionType type)
+void SelectNodesOP::OnDirectionKeyDown(int type)
 {
 	if (m_node_selection.empty()) {
 		return;
@@ -208,16 +208,16 @@ void SelectNodesOP::OnDirectionKeyDown(ee::DirectionType type)
 	sm::vec2 offset;
 	switch (type)
 	{
-	case ee::e_left:
+	case ee::KEY_LEFT:
 		offset.x -= 1;
 		break;
-	case ee::e_right:
+	case ee::KEY_RIGHT:
 		offset.x += 1;
 		break;
-	case ee::e_down:
+	case ee::KEY_DOWN:
 		offset.y -= 1;
 		break;
-	case ee::e_up:
+	case ee::KEY_UP:
 		offset.y += 1;
 		break;
 	}

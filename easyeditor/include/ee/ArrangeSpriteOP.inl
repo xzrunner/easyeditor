@@ -39,7 +39,7 @@ template <typename TBase>
 bool ArrangeSpriteOP<TBase>::OnKeyDown(int keyCode)
 {
 	if (TBase::OnKeyDown(keyCode)) return true;
-	m_impl->OnKeyDown(keyCode);
+	if (m_impl->OnKeyDown(keyCode)) return true;
 	return false;
 }
 
@@ -48,6 +48,14 @@ bool ArrangeSpriteOP<TBase>::OnKeyUp(int keyCode)
 {
 	if (TBase::OnKeyUp(keyCode)) return true;
 	m_impl->OnKeyUp(keyCode);
+	return false;
+}
+
+template <typename TBase>
+bool ArrangeSpriteOP<TBase>::OnChar(int keyCode)
+{
+	if (TBase::OnChar(keyCode)) return true;
+	m_impl->OnChar(keyCode);
 	return false;
 }
 

@@ -60,6 +60,7 @@ private:
 	void OnMouse(wxMouseEvent& event);
 	void OnKeyDown(wxKeyEvent& event);
 	void OnKeyUp(wxKeyEvent& event);
+	void OnChar(wxKeyEvent& event);
 
 	void OnTimer(wxTimerEvent& event);
 

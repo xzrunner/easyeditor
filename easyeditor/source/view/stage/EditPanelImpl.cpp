@@ -169,8 +169,8 @@ void EditPanelImpl::OnKeyDown(wxKeyEvent& event)
 		break;
 	}
 
-	if (m_edit_op) {
-		m_edit_op->OnKeyDown(key_code);
+	if (m_edit_op && !m_edit_op->OnKeyDown(key_code)) {
+		event.Skip();
 	}
 
 	if (m_stage) {
@@ -185,6 +185,16 @@ void EditPanelImpl::OnKeyUp(wxKeyEvent& event)
 
 	if (m_edit_op) {
 		m_edit_op->OnKeyUp(key_code);
+	}
+}
+
+void EditPanelImpl::OnChar(wxKeyEvent& event)
+{
+	int key_code = event.GetKeyCode();
+	m_keys_state.OnKeyDown(key_code);
+
+	if (m_edit_op) {
+		m_edit_op->OnChar(key_code);
 	}
 }
 

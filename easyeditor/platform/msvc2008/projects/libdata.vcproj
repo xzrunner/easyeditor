@@ -374,11 +374,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\include\ee\common_type.h"
+				RelativePath="..\..\..\include\ee\DataTraverseType.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\include\ee\DataTraverseType.h"
+				RelativePath="..\..\..\include\ee\key_type.h"
 				>
 			</File>
 			<File

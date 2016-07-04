@@ -3,7 +3,7 @@
 
 #include "DrawRectangleOP.h"
 
-#include <ee/common_type.h>
+#include <ee/key_type.h>
 #include <ee/Visitor.h>
 
 #include <SM_Rect.h>
@@ -39,7 +39,7 @@ protected:
 	void ClearSelectedNodes();
 
 private:
-	void OnDirectionKeyDown(ee::DirectionType type);
+	void OnDirectionKeyDown(int type);
 
 protected:
 	struct ChainSelectedNodes

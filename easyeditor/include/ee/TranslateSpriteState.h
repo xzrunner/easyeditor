@@ -19,7 +19,7 @@ public:
 	virtual void OnMouseRelease(const sm::vec2& pos);
 	virtual	bool OnMouseDrag(const sm::vec2& pos);
 
-	virtual bool OnDirectionKeyDown(DirectionType type);
+	virtual bool OnDirectionKeyDown(int type);
 
 protected:
 	virtual void Translate(const sm::vec2& offset);
