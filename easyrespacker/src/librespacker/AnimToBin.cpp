@@ -124,7 +124,9 @@ void AnimToBin::PackFrame(const PackAnimation::Frame& frame, uint8_t** ptr)
 		if (t.additive != 0) {
 			type |= TAG_ADDITIVE;
 		}
-		if (t.rmap != 0xff0000ff || t.gmap != 0x00ff00ff || t.bmap != 0x0000ffff) {
+		if ((t.rmap != 0xff0000ff && t.rmap != 0xff000000) || 
+			(t.gmap != 0x00ff00ff && t.gmap != 0x00ff0000) || 
+			(t.bmap != 0x0000ffff && t.bmap != 0x0000ff00)) {
 			type |= TAG_COLMAP;
 		}
 		if (t.blend != 0) {
