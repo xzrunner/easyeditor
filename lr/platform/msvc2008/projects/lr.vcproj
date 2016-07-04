@@ -457,6 +457,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\lr\dataset\NewComplexUD.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\lr\dataset\ShapesUD.h"
 					>
 				</File>
@@ -572,18 +576,6 @@
 						>
 					</File>
 				</Filter>
-			</Filter>
-			<Filter
-				Name="group"
-				>
-				<File
-					RelativePath="..\..\..\src\lr\dataset\GroupHelper.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\lr\dataset\GroupHelper.h"
-					>
-				</File>
 			</Filter>
 			<Filter
 				Name="tag"

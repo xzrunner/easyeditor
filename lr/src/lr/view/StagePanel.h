@@ -69,6 +69,9 @@ public:
 	s2::Color& GetScreenMultiColor();
 	s2::Color& GetScreenAddColor();
 
+	void SetResDir(const std::string& res_dir) { m_res_dir = res_dir; }
+	const std::string& GetResDir() const { return m_res_dir; }
+
 protected:
 	virtual void OnMouseHook(wxMouseEvent& event);
 	virtual void OnKeyHook(int key_code);
@@ -107,6 +110,8 @@ private:
 	CharacterAllDirections m_chara_dirs;
 
 	bool m_enable_update;
+
+	std::string m_res_dir;
 
 }; // StagePanel
 

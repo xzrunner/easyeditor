@@ -79,6 +79,7 @@ void FileIO::Load(const char* filename, LibraryPanel* library,
 
 	// layers
 	std::string dir = ee::FileHelper::GetFileDir(filename);
+	stage->SetResDir(dir);
 	LoadLayers(value["layer"], stage, library, dir);
 
 // 	// groups

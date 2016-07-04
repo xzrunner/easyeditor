@@ -1,7 +1,7 @@
 #include "SelectSpritesOP.h"
 #include "StagePanel.h"
 
-#include "dataset/GroupHelper.h"
+#include "dataset/NewComplexUD.h"
 #include "view/typedef.h"
 
 #include <ee/EditPanelImpl.h>
@@ -16,6 +16,10 @@
 #include <ee/SpriteFactory.h>
 #include <ee/PointQueryVisitor.h>
 #include <ee/TranslateSpriteAOP.h>
+#include <ee/StringHelper.h>
+#include <ee/FileType.h>
+
+#include <easycomplex.h>
 
 namespace lr
 {
@@ -35,14 +39,20 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 		return true;
 	}
 
-	if (m_stage->GetKeyState(WXK_CONTROL) && (keyCode == 'g' || keyCode == 'G'))
-	{
-		GroupSelection();
+	// group
+	if (m_stage->GetKeyState(WXK_ALT) && (keyCode == 'g' || keyCode == 'G')) {
+		BuildGroup();
+		return true;
+	} else if (m_stage->GetKeyState(WXK_ALT) && (keyCode == 'b' || keyCode == 'B')) {
+		BreakUpGroup();
 		return true;
 	}
-	else if (m_stage->GetKeyState(WXK_CONTROL) && (keyCode == 'b' || keyCode == 'B'))
-	{
-		BreakUpSelection();
+	// complex
+	else if (m_stage->GetKeyState(WXK_CONTROL) && (keyCode == 'g' || keyCode == 'G')) {
+		BuildComplex();
+		return true;
+	} else if (m_stage->GetKeyState(WXK_CONTROL) && (keyCode == 'b' || keyCode == 'B')) {
+		BreakUpComplex();
 		return true;
 	}
 
@@ -86,7 +96,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	return false;
 }
 
-void SelectSpritesOP::GroupSelection()
+void SelectSpritesOP::BuildGroup()
 {
 	if (m_selection->IsEmpty()) {
 		return;
@@ -95,10 +105,14 @@ void SelectSpritesOP::GroupSelection()
 	std::vector<ee::Sprite*> sprites;
 	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
 
-	ee::Sprite* group = GroupHelper::Group(sprites, "_group");
-	ee::SpriteFactory::Instance()->Insert(group);
+	ecomplex::Sprite* spr = ecomplex::GroupHelper::Group(sprites);
+	ecomplex::Symbol& sym = const_cast<ecomplex::Symbol&>(spr->GetSymbol());
+	sym.SetFilepath(GROUP_TAG);
+	sym.name = "_group";
+	sym.SetName("_group");
+	spr->SetName("_group");
 
-	ee::AtomicOP* move_op = new ee::TranslateSpriteAOP(sprites, -group->GetPosition());
+	ee::AtomicOP* move_op = new ee::TranslateSpriteAOP(sprites, -spr->GetPosition());
 
 	std::vector<ee::Sprite*> removed;
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
@@ -110,9 +124,9 @@ void SelectSpritesOP::GroupSelection()
 	}
 	ee::AtomicOP* del_op = new ee::DeleteSpriteAOP(removed);
 
-	ee::InsertSpriteSJ::Instance()->Insert(group);
-	ee::AtomicOP* add_op = new ee::InsertSpriteAOP(group);
-	group->Release();
+	ee::InsertSpriteSJ::Instance()->Insert(spr);
+	ee::AtomicOP* add_op = new ee::InsertSpriteAOP(spr);
+	spr->Release();
 
 	ee::CombineAOP* combine = new ee::CombineAOP;
 	combine->Insert(move_op);
@@ -121,7 +135,7 @@ void SelectSpritesOP::GroupSelection()
 	ee::EditAddRecordSJ::Instance()->Add(combine);
 }
 
-void SelectSpritesOP::BreakUpSelection()
+void SelectSpritesOP::BreakUpGroup()
 {
 	if (m_selection->IsEmpty()) {
 		return;
@@ -139,12 +153,68 @@ void SelectSpritesOP::BreakUpSelection()
 		ee::SelectSpriteSJ::Instance()->Select(spr, true);
 
 		std::vector<ee::Sprite*> children;
-		GroupHelper::BreakUp(spr, children);
+		ecomplex::GroupHelper::BreakUp(spr, children);
  		for (int j = 0, m = children.size(); j < m; ++j) {
 			ee::Sprite* spr = children[j];
  			ee::InsertSpriteSJ::Instance()->Insert(spr);
 			spr->Release();
  		}
+
+		ee::RemoveSpriteSJ::Instance()->Remove(spr);
+		spr->Release();
+	}
+}
+
+void SelectSpritesOP::BuildComplex()
+{
+	if (m_selection->IsEmpty()) {
+		return;
+	}
+
+	std::vector<ee::Sprite*> sprites;
+	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
+
+	ecomplex::Sprite* spr = ecomplex::GroupHelper::Group(sprites);
+	spr->SetUserData(new NewComplexUD());
+
+	ecomplex::Symbol& sym = const_cast<ecomplex::Symbol&>(spr->GetSymbol());
+	std::string filepath = static_cast<StagePanel*>(m_wnd)->GetResDir();
+	filepath += "\\_tmp_";
+	filepath += ee::StringHelper::ToString(wxDateTime::Now().GetTicks());
+	filepath += "_" + ee::FileType::GetTag(ee::FileType::e_complex) + ".json";
+	sym.SetFilepath(filepath);
+
+	ee::InsertSpriteSJ::Instance()->Insert(spr);
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		ee::RemoveSpriteSJ::Instance()->Remove(sprites[i]);
+	}
+}
+
+void SelectSpritesOP::BreakUpComplex()
+{
+	if (m_selection->IsEmpty()) {
+		return;
+	}
+
+	std::string tag = "_" + ee::FileType::GetTag(ee::FileType::e_complex) + ".json";
+	std::vector<ee::Sprite*> sprites;
+	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
+	for (int i = 0, n = sprites.size(); i < n; ++i) 
+	{
+		ee::Sprite* spr = sprites[i];
+		if (spr->GetSymbol().GetFilepath().find(tag) == std::string::npos) {
+			continue;
+		}
+
+		ee::SelectSpriteSJ::Instance()->Select(spr, true);
+
+		std::vector<ee::Sprite*> children;
+		ecomplex::GroupHelper::BreakUp(spr, children);
+		for (int j = 0, m = children.size(); j < m; ++j) {
+			ee::Sprite* spr = children[j];
+			ee::InsertSpriteSJ::Instance()->Insert(spr);
+			spr->Release();
+		}
 
 		ee::RemoveSpriteSJ::Instance()->Remove(spr);
 		spr->Release();

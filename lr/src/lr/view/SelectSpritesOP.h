@@ -19,8 +19,11 @@ public:
 	virtual bool OnMouseLeftDClick(int x, int y);
 
 private:
-	void GroupSelection();
-	void BreakUpSelection();
+	void BuildGroup();
+	void BreakUpGroup();
+
+	void BuildComplex();
+	void BreakUpComplex();
 
 private:
 	sm::vec2 m_first_press;

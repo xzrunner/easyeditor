@@ -1,7 +1,6 @@
 #include "Layer.h"
 #include "ShapesUD.h"
 #include "BaseFileUD.h"
-#include "GroupHelper.h"
 
 #include "view/LibraryPanel.h"
 #include "view/typedef.h"
@@ -181,8 +180,18 @@ void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
 	int count = 0;
 	for (int i = 0, n = sprites.size(); i < n; ++i) 
 	{
+		ee::Sprite* spr = sprites[i];
+		if (spr->GetUserData()) {
+			UserData* ud = static_cast<UserData*>(spr->GetUserData());
+			if (ud->type == UT_NEW_COMPLEX) {
+				const ee::Symbol* sym = &spr->GetSymbol();
+				ecomplex::FileStorer::Store(sym->GetFilepath().c_str(), 
+					static_cast<const ecomplex::Symbol*>(sym));
+			}
+		}
+
 		Json::Value cval;
-		if (StoreSprite(sprites[i], cval, dir)) {
+		if (StoreSprite(spr, cval, dir)) {
 			val["sprite"][count++] = cval;
 		}
 	}
@@ -370,11 +379,18 @@ ee::Sprite* Layer::LoadGroup(const Json::Value& val, const std::string& dir, con
 	}
 
 	std::string name = val["group_name"].asString();
-	ee::Sprite* group = GroupHelper::Group(sprites, name);
-	ee::SpriteFactory::Instance()->Insert(group);
-	group->Load(val);
+
+	ecomplex::Sprite* spr = ecomplex::GroupHelper::Group(sprites);
+	ecomplex::Symbol& sym = const_cast<ecomplex::Symbol&>(spr->GetSymbol());
+	sym.SetFilepath(GROUP_TAG);
+	sym.name = name;
+	sym.SetName(name);
+	spr->SetName(name);
+
+	ee::SpriteFactory::Instance()->Insert(spr);
+	spr->Load(val);
 	for_each(sprites.begin(), sprites.end(), ee::ReleaseObjectFunctor<ee::Sprite>());
-	return group;
+	return spr;
 }
 
 void Layer::StoreGroup(ee::Sprite* spr, Json::Value& val, const std::string& dir) const

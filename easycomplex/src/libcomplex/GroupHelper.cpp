@@ -3,6 +3,7 @@
 #include "Sprite.h"
 
 #include <ee/Math2D.h>
+#include <ee/SpriteFactory.h>
 
 #include <sprite2/S2_Sprite.h>
 
@@ -27,6 +28,7 @@ Sprite* GroupHelper::Group(const std::vector<ee::Sprite*>& sprites)
 
 	Sprite* spr = new Sprite(sym);
 	spr->Translate(c);
+	ee::SpriteFactory::Instance()->Insert(spr);
 
 	return spr;
 }
