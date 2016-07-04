@@ -38,9 +38,15 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* to
 	, m_top_pannels(top_pannels)
 	, m_symbols_cfg(this, top_pannels->library->GetUILibrary())
 {
-	SetEditOP(new ee::ArrangeSpriteOP<ecomplex::SelectSpritesOP>(this, GetStageImpl(), this, top_pannels->property, 
-		NULL, ee::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, top_pannels->property)));
-	SetCanvas(new StageCanvas(this));
+	ee::ArrangeSpriteOP<ecomplex::SelectSpritesOP>* edit_op = new ee::ArrangeSpriteOP<ecomplex::SelectSpritesOP>(
+		this, GetStageImpl(), this, top_pannels->property, NULL, ee::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, top_pannels->property));
+	static_cast<ecomplex::SelectSpritesOP*>(edit_op)->SetGuides(&m_guides);
+	SetEditOP(edit_op);
+	edit_op->Release();
+
+	ee::StageCanvas* canvas = new StageCanvas(this);
+	SetCanvas(canvas);
+	canvas->Release();
 
 	int width, height;
 	window::QueryWindowViewSizeSJ::Instance()->Query(width, height);

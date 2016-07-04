@@ -4,6 +4,7 @@
 #include "SelectSpritesOP.h"
 
 #include <ee/ArrangeSpriteOP.h>
+#include <ee/CrossGuides.h>
 
 namespace eanim
 {
@@ -14,7 +15,6 @@ class ArrangeSpriteOP : public ee::ArrangeSpriteOP<SelectSpritesOP>
 {
 public:
 	ArrangeSpriteOP(StagePanel* stage);
-	virtual ~ArrangeSpriteOP();
 
 	virtual bool OnKeyDown(int keyCode);
 	virtual bool OnMouseLeftDown(int x, int y);
@@ -27,22 +27,7 @@ public:
 	void DelCross();
 
 private:
-	struct Cross
-	{
-		static const int RADIUS = 10;
-		static const int LENGTH = 100;
-
-		Cross();
-		void Draw() const;
-		bool Contain(const sm::vec2& p) const;
-
-		sm::vec2 pos;
-
-	}; // Cross
-
-private:
-	std::vector<Cross*> m_crosses;
-	Cross* m_selected;
+	ee::CrossGuides m_guides;
 
 }; // ArrangeSpriteOP
 

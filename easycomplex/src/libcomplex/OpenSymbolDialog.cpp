@@ -27,7 +27,7 @@ OpenSymbolDialog::OpenSymbolDialog(wxWindow* wnd, ee::EditPanelImpl* stage,
 {
 }
 
-void OpenSymbolDialog::Open(ee::Sprite* spr)
+void OpenSymbolDialog::Open(ee::Sprite* spr, ee::CrossGuides* guides)
 {
 	if (!spr) {
 		return;
@@ -47,7 +47,7 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 	{
  		Symbol& symbol = const_cast<Symbol&>(complex->GetSymbol());
 
- 		EditDialog dlg(m_wnd, &symbol, m_stage->GetCanvas()->GetGLContext());
+ 		EditDialog dlg(m_wnd, &symbol, m_stage->GetCanvas()->GetGLContext(), guides);
  		dlg.ShowModal();
 
 		//////////////////////////////////////////////////////////////////////////

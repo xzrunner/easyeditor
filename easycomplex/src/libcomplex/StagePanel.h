@@ -4,7 +4,7 @@
 #include <ee/EditPanel.h>
 #include <ee/SpritesPanelImpl.h>
 
-namespace ee { class PropertySettingPanel; }
+namespace ee { class PropertySettingPanel; class CrossGuides; }
 
 class wxGLContext;
 
@@ -22,7 +22,7 @@ public:
 		ee::PropertySettingPanel* property, LibraryPanel* library);
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, Symbol* symbol, 
 		ee::PropertySettingPanel* property, LibraryPanel* library, 
-		wxGLContext* glctx);
+		wxGLContext* glctx, ee::CrossGuides* guides = NULL);
 
 	//
 	// ee::EditPanel interface

@@ -23,25 +23,25 @@ BEGIN_EVENT_TABLE(EditDialog, wxDialog)
 END_EVENT_TABLE()
 
 EditDialog::EditDialog(wxWindow* parent, Symbol* symbol,
-					   wxGLContext* glctx)
+					   wxGLContext* glctx, ee::CrossGuides* guides)
 	: wxDialog(parent, wxID_ANY, "Edit Complex", wxDefaultPosition, 
 	wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 	, m_symbol(symbol)
 {
 	SetTitle(symbol->GetFilepath());
-	InitLayout(glctx);
+	InitLayout(glctx, guides);
 	LoadSymbolInfo();
 
 	m_property->SetDefaultPropertySetting();
 }
 
-void EditDialog::InitLayout(wxGLContext* glctx)
+void EditDialog::InitLayout(wxGLContext* glctx, ee::CrossGuides* guides)
 {
 	wxSplitterWindow* right_split = new wxSplitterWindow(this);
 	wxSplitterWindow* left_split = new wxSplitterWindow(right_split);
 
 	wxWindow* left = InitLayoutLeft(left_split);
-	wxWindow* center = InitLayoutCenter(left_split, glctx);
+	wxWindow* center = InitLayoutCenter(left_split, glctx, guides);
 	wxWindow* right = InitLayoutRight(right_split);
 
 	left_split->SetSashGravity(0.15f);
@@ -65,10 +65,11 @@ wxWindow* EditDialog::InitLayoutLeft(wxWindow* parent)
 	return split;
 }
 
-wxWindow* EditDialog::InitLayoutCenter(wxWindow* parent, wxGLContext* glctx)
+wxWindow* EditDialog::InitLayoutCenter(wxWindow* parent, wxGLContext* glctx,
+									   ee::CrossGuides* guides)
 {
 	m_stage = new StagePanel(parent, this, m_symbol, m_property, 
-		static_cast<ecomplex::LibraryPanel*>(m_library), glctx);
+		static_cast<ecomplex::LibraryPanel*>(m_library), glctx, guides);
 	m_property->SetEditPanel(m_stage->GetStageImpl());
 	return m_stage;
 }

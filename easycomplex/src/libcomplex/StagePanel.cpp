@@ -48,13 +48,15 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   Symbol* symbol,
 					   ee::PropertySettingPanel* property,
 					   LibraryPanel* library,
-					   wxGLContext* glctx)
+					   wxGLContext* glctx,
+					   ee::CrossGuides* guides)
 	: EditPanel(parent, frame)
 	, ee::SpritesPanelImpl(GetStageImpl(), new SymbolContainer(m_symbol = symbol))
 	, m_library(library)
 {
-	ee::EditOP* editop = new ee::ArrangeSpriteOP<SelectSpritesOP>(this, GetStageImpl(), this, property, 
-		NULL, ee::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, property));
+	ee::ArrangeSpriteOP<SelectSpritesOP>* editop = new ee::ArrangeSpriteOP<SelectSpritesOP>(
+		this, GetStageImpl(), this, property, NULL, ee::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, property));
+	static_cast<SelectSpritesOP*>(editop)->SetGuides(guides);
 	SetEditOP(editop);
 	editop->Release();
 

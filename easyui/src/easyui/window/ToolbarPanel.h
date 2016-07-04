@@ -28,7 +28,14 @@ protected:
 	virtual void OnNotify(int sj_id, void* ud);
 
 private:
+	wxSizer* InitNameLayout();
+	wxSizer* InitViewLayout();
+	wxSizer* InitCrossLayout();
+
 	void OnChangeSize(wxCommandEvent& event);
+
+	void OnAddCross(wxCommandEvent& event);
+	void OnDelCross(wxCommandEvent& event);
 
 private:
 	StagePanel* m_stage_panel;

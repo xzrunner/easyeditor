@@ -9,6 +9,8 @@
 #include <ee/Camera.h>
 #include <ee/color_config.h>
 #include <ee/Math2D.h>
+#include <ee/std_functor.h>
+#include <ee/panel_msg.h>
 
 #include <easycomplex.h>
 
@@ -58,17 +60,17 @@ void ArrangeSpriteImpl::OnDraw(const ee::Camera& cam) const
 		m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
 		if (sprites.size() == 1) {
 			m_selected = sprites[0];
-		} else {
-			return;
 		}
 	}
 
-	sm::vec2 pos = m_selected->GetPosition();
-	m_center_node_radius = std::min(CENTER_NODE_RADIUS * cam.GetScale(), MAX_CENTER_NODE_RADIUS);
-	ee::RVG::Color(ee::RED);
-	ee::RVG::Circle(pos, m_center_node_radius, false);
-	ee::RVG::Color(ee::GREEN);
-	ee::RVG::Cross(pos, m_center_node_radius * 2, m_center_node_radius * 2);
+	if (m_selected) {
+		sm::vec2 pos = m_selected->GetPosition();
+		m_center_node_radius = std::min(CENTER_NODE_RADIUS * cam.GetScale(), MAX_CENTER_NODE_RADIUS);
+		ee::RVG::Color(ee::RED);
+		ee::RVG::Circle(pos, m_center_node_radius, false);
+		ee::RVG::Color(ee::GREEN);
+		ee::RVG::Cross(pos, m_center_node_radius * 2, m_center_node_radius * 2);
+	}
 }
 
 ee::ArrangeSpriteState* ArrangeSpriteImpl::

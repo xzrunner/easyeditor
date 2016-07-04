@@ -5,7 +5,7 @@
 
 class wxGLContext;
 
-namespace ee { class LibraryPanel; class ViewlistPanel; }
+namespace ee { class LibraryPanel; class ViewlistPanel; class CrossGuides; }
 
 namespace ecomplex
 {
@@ -18,12 +18,12 @@ class EditDialog : public wxDialog
 {
 public:
 	EditDialog(wxWindow* parent, Symbol* symbol, 
-		wxGLContext* glctx);
+		wxGLContext* glctx, ee::CrossGuides* guides = NULL);
 
 private:
-	void InitLayout(wxGLContext* glctx);
+	void InitLayout(wxGLContext* glctx, ee::CrossGuides* guides);
 	wxWindow* InitLayoutLeft(wxWindow* parent);
-	wxWindow* InitLayoutCenter(wxWindow* parent, wxGLContext* glctx);
+	wxWindow* InitLayoutCenter(wxWindow* parent, wxGLContext* glctx, ee::CrossGuides* guides);
 	wxWindow* InitLayoutRight(wxWindow* parent);
 
 	void OnCloseEvent(wxCloseEvent& event);

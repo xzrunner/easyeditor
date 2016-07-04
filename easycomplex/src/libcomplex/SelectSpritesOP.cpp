@@ -11,6 +11,8 @@
 #include <ee/FileHelper.h>
 #include <ee/StringHelper.h>
 #include <ee/sprite_msg.h>
+#include <ee/CrossGuides.h>
+#include <ee/panel_msg.h>
 
 namespace ecomplex
 {
@@ -19,6 +21,7 @@ SelectSpritesOP::SelectSpritesOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::Mu
 								 ee::EditCMPT* callback/* = NULL*/)
 	: ee::SelectSpritesOP(wnd, stage, sprites_impl, callback)
 	, m_open_symbol(wnd, stage, sprites_impl)
+	, m_guides(NULL)
 {
 }
 
@@ -42,6 +45,34 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 	return false;
 }
 
+bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
+{
+	if (m_guides && m_guides->OnMouseDown(m_stage->TransPosScrToProj(x, y))) {
+		return true;
+	} else {
+		return ee::SelectSpritesOP::OnMouseLeftDown(x, y);
+	}
+}
+
+bool SelectSpritesOP::OnMouseLeftUp(int x, int y)
+{
+	if (m_guides && m_guides->OnMouseUp(m_stage->TransPosScrToProj(x, y))) {
+		return true;
+	} else {
+		return ee::SelectSpritesOP::OnMouseLeftUp(x, y);
+	}
+}
+
+bool SelectSpritesOP::OnMouseDrag(int x, int y)
+{
+	if (m_guides && m_guides->OnMouseDrag(m_stage->TransPosScrToProj(x, y))) {
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
+		return true;
+	} else {
+		return ee::SelectSpritesOP::OnMouseDrag(x, y);
+	}
+}
+
 bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 {
 	if (ee::SelectSpritesOP::OnMouseLeftDClick(x, y)) return true;
@@ -49,10 +80,20 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	ee::Sprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
 	if (selected) {
-		m_open_symbol.Open(selected);
+		m_open_symbol.Open(selected, m_guides);
 	}
 
 	return false;
+}
+
+bool SelectSpritesOP::OnDraw() const
+{
+	bool ret = ee::SelectSpritesOP::OnDraw();
+	if (m_guides) {
+		m_guides->Draw();
+	}
+	return ret;
+
 }
 
 void SelectSpritesOP::GroupSelection()

@@ -6,6 +6,7 @@
 #include "UIStagePage.h"
 
 #include <ee/SpritesPanelImpl.h>
+#include <ee/CrossGuides.h>
 
 namespace eui
 {
@@ -38,6 +39,8 @@ public:
 
 	void SetViewSize(int width, int height);
 
+	ee::CrossGuides& GetCrossGuides() { return m_guides; }
+
 protected:
 	//
 	//	interface Observer
@@ -55,6 +58,8 @@ private:
 
 	int m_toolbar_idx;
 	ToolbarPanel* m_toolbar;
+
+	ee::CrossGuides m_guides;
 
 }; // StagePanel
 
