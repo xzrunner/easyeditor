@@ -34,6 +34,7 @@ public:
 	virtual void Draw(const s2::RenderParams& params, const ee::Sprite* spr = NULL) const;
 	virtual void ReloadTexture() const;
 	virtual sm::rect GetSize(const ee::Sprite* sprite = NULL) const;
+	virtual void Traverse(ee::Visitor& visitor);
 
 	bool IsOneLayer() const;
 

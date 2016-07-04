@@ -10,6 +10,7 @@
 #include <ee/SpriteRenderer.h>
 #include <ee/BoundingBox.h>
 #include <ee/Math2D.h>
+#include <ee/Visitor.h>
 
 #include <easytext.h>
 
@@ -177,6 +178,17 @@ void Symbol::ReloadTexture() const
 sm::rect Symbol::GetSize(const ee::Sprite* sprite/* = NULL*/) const
 {
 	return m_rect;
+}
+
+void Symbol::Traverse(ee::Visitor& visitor)
+{
+	const std::vector<s2::Sprite*>& children = GetChildren();
+	for (int i = 0, n = children.size(); i < n; ++i) {
+		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+		bool next;
+		visitor.Visit(child, next);
+		const_cast<ee::Symbol&>(child->GetSymbol()).Traverse(visitor);
+	}
 }
 
 bool Symbol::IsOneLayer() const

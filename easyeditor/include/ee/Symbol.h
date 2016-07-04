@@ -38,6 +38,7 @@ public:
 	virtual void ReloadTexture() const {}
 	virtual sm::rect GetSize(const Sprite* sprite = NULL) const = 0;
 	virtual void InvalidRect(const sm::mat4& mt) const {}
+	virtual void Traverse(Visitor& visitor) {}
 
 	bool LoadFromFile(const std::string& filepath);
 

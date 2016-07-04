@@ -6,6 +6,7 @@
 #include <ee/BoundingBox.h>
 #include <ee/FileHelper.h>
 #include <ee/SymbolSearcher.h>
+#include <ee/Visitor.h>
 
 #include <easycomplex.h>
 
@@ -76,6 +77,25 @@ void Symbol::ReloadTexture() const
 sm::rect Symbol::GetSize(const ee::Sprite* sprite/* = NULL*/) const
 {
 	return m_rect;
+}
+
+void Symbol::Traverse(ee::Visitor& visitor)
+{
+	const std::vector<s2::AnimSymbol::Layer*>& layers = m_core->GetLayers();
+	for (int i = 0, n = layers.size(); i < n; ++i)
+	{
+		s2::AnimSymbol::Layer* layer = layers[i];
+		for (int j = 0, m = layer->frames.size(); j < m; ++j)
+		{
+			s2::AnimSymbol::Frame* frame = layer->frames[j];
+			for (int k = 0, l = frame->sprites.size(); k < l; ++k) {
+				ee::Sprite* spr = static_cast<ee::Sprite*>(frame->sprites[k]->GetUD());
+				bool next;
+				visitor.Visit(spr, next);
+				const_cast<ee::Symbol&>(spr->GetSymbol()).Traverse(visitor);
+			}
+		}
+	}
 }
 
 size_t Symbol::getMaxFrameIndex() const

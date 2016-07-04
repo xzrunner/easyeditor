@@ -5,11 +5,22 @@
 
 #include <ee/SettingData.h>
 #include <ee/Config.h>
+#include <ee/Visitor.h>
 
 #include <easyanim.h>
 
 namespace ecomplex
 {
+
+class InitVisitor : public ee::Visitor
+{
+public:
+	virtual void Visit(ee::Object* object, bool& next) {
+		if (const eanim::Sprite* anim = dynamic_cast<const eanim::Sprite*>(object)) {
+			const_cast<eanim::Symbol&>(anim->GetSymbol()).SetLoop(false);
+		}
+	}
+}; // InitVisitor
 
 PreviewDialog::PreviewDialog(wxWindow* parent, wxGLContext* glctx,
 							 const std::vector<const ee::Sprite*>& sprites)
@@ -22,10 +33,12 @@ PreviewDialog::PreviewDialog(wxWindow* parent, wxGLContext* glctx,
 	ee::SettingData& data = ee::Config::Instance()->GetSettings();
 	data.particle3d_loop = false;
 
+	InitVisitor init;
+	bool next;
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		if (const eanim::Sprite* anim = dynamic_cast<const eanim::Sprite*>(m_sprites[i])) {
-			const_cast<eanim::Symbol&>(anim->GetSymbol()).SetLoop(false);
-		}
+		ee::Sprite* spr = const_cast<ee::Sprite*>(m_sprites[i]);
+		init.Visit(spr, next);
+		const_cast<ee::Symbol&>(spr->GetSymbol()).Traverse(init);
 	}
 }
 
