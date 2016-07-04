@@ -31,12 +31,12 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 		return true;
 	}
 
-	if (m_stage->GetKeyState(WXK_CONTROL) && (keyCode == 'g' || keyCode == 'G'))
+	if (m_stage->GetKeyState(WXK_CONTROL) && keyCode == 'G')
 	{
 		GroupSelection();
 		return true;
 	}
-	else if (m_stage->GetKeyState(WXK_CONTROL) && (keyCode == 'b' || keyCode == 'B'))
+	else if (m_stage->GetKeyState(WXK_CONTROL) && keyCode == 'B')
 	{
 		BreakUpSelection();
 		return true;

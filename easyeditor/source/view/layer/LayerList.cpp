@@ -209,12 +209,12 @@ void LayerList::OnListKeyDown(wxListEvent& event)
 	int keycode = event.GetKeyCode();
 	if (keycode == WXK_DELETE) {
 		Remove(m_layer_mgr->selected);
-	} else if (keycode == 'v' || keycode == 'V') {
+	} else if (keycode == 'V') {
 		layer->visible = !layer->visible;
 		std::string tag = layer->visible ? "T" : "F";
 		SetItem(m_selected, 2, tag);
 		SetCanvasDirtySJ::Instance()->SetDirty();
-	} else if (keycode == 'e' || keycode == 'E') {
+	} else if (keycode == 'E') {
 		layer->editable = !layer->editable;
 		std::string tag = layer->editable ? "T" : "F";
 		SetItem(m_selected, 3, tag);

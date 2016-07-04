@@ -17,7 +17,7 @@ public:
 	virtual bool OnMouseLeftDClick(int x, int y);
 
 protected:
-	virtual void onDirectionKeyDown(ee::DirectionType type);
+	virtual void onDirectionKeyDown(int type);
 
 	virtual void PasteSprToClipboard(const ee::Sprite* spr, Json::Value& value) const;
 	virtual void CopySprFromClipboard(ee::Sprite* spr, const Json::Value& value) const;

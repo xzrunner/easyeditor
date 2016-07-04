@@ -47,7 +47,7 @@ bool ArrangeSpriteOP::OnMouseLeftDClick(int x, int y)
 	return false;
 }
 
-void ArrangeSpriteOP::onDirectionKeyDown(ee::DirectionType type)
+void ArrangeSpriteOP::onDirectionKeyDown(int type)
 {
 	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
 
@@ -60,16 +60,16 @@ void ArrangeSpriteOP::onDirectionKeyDown(ee::DirectionType type)
 		stage->TransCoordsToGridPos(s->GetPosition(), row, col);
 		switch (type)
 		{
-		case ee::e_up:
+		case ee::KEY_UP:
 			++row;
 			break;
-		case ee::e_down:
+		case ee::KEY_DOWN:
 			--row;
 			break;
-		case ee::e_left:
+		case ee::KEY_LEFT:
 			--col;
 			break;
-		case ee::e_right:
+		case ee::KEY_RIGHT:
 			++col;
 			break;
 		}

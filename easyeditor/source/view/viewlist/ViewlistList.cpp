@@ -230,10 +230,10 @@ void ViewlistList::OnKeyDown(wxKeyEvent& event)
 	if (m_selected_spr && GetKeyState(WXK_SHIFT))
 	{
 		int keycode = event.GetKeyCode();
-		if (keycode == 'e' || keycode == 'E') {
+		if (keycode == 'E') {
 			m_selected_spr->SetEditable(!m_selected_spr->IsEditable());
 			Refresh();
-		} else if (keycode == 's' || keycode == 'S') {
+		} else if (keycode == 'S') {
 			m_selected_spr->SetVisible(!m_selected_spr->IsVisible());
 			SetCanvasDirtySJ::Instance()->SetDirty();
 			Refresh();

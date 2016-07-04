@@ -151,9 +151,9 @@ void EditPanelImpl::OnKeyDown(wxKeyEvent& event)
 	int key_code = event.GetKeyCode();
 	m_keys_state.OnKeyDown(key_code);
 
-	if (GetKeyState(WXK_CONTROL) && (key_code == 'z' || key_code == 'Z')) {
+	if (GetKeyState(WXK_CONTROL) && key_code == 'Z') {
 		Undo();
-	} else if (GetKeyState(WXK_CONTROL) && (key_code == 'y' || key_code == 'Y')) {
+	} else if (GetKeyState(WXK_CONTROL) && key_code == 'Y') {
 		Redo();
 	}
 

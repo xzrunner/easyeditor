@@ -114,15 +114,15 @@ void KeysContentWidget::OnKeyDown(wxKeyEvent& event)
 		OnInsertFrame();
 	} else if (key_code == 0x2D) {
 		OnDeleteFrame();
-	} else if (m_keys_state.GetKeyState(WXK_CONTROL) && (key_code == 'c' || key_code == 'C')) {
+	} else if (m_keys_state.GetKeyState(WXK_CONTROL) && key_code == 'C') {
 		m_editop.CopySelection();
-	} else if (m_keys_state.GetKeyState(WXK_CONTROL) && (key_code == 'v' || key_code == 'V')) {
+	} else if (m_keys_state.GetKeyState(WXK_CONTROL) && key_code == 'V') {
 		m_editop.PasteSelection();
 	} else if (key_code == WXK_DELETE) {
 		m_editop.DeleteSelection();
-	} else if (m_keys_state.GetKeyState(WXK_CONTROL) && (key_code == 'z' || key_code == 'Z')) {
+	} else if (m_keys_state.GetKeyState(WXK_CONTROL) && key_code == 'Z') {
 		ee::EditUndoSJ::Instance()->Undo();
-	} else if (m_keys_state.GetKeyState(WXK_CONTROL) && (key_code == 'y' || key_code == 'Y')) {
+	} else if (m_keys_state.GetKeyState(WXK_CONTROL) && key_code == 'Y') {
 		ee::EditRedoSJ::Instance()->Redo();
 	}
 }

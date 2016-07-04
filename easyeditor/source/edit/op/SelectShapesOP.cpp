@@ -41,12 +41,12 @@ bool SelectShapesOP::OnKeyDown(int keyCode)
 		m_shape_impl->ClearSelectedShape();
 		Clear();
 	}
-	else if (m_stage->GetKeyState(WXK_CONTROL) && (keyCode == 'x' || keyCode == 'X'))
+	else if (m_stage->GetKeyState(WXK_CONTROL) && keyCode == 'X')
 	{
 		PasteToSelection();
 		m_shape_impl->ClearSelectedShape();
 	}
-	else if (m_stage->GetKeyState(WXK_CONTROL) && (keyCode == 'c' || keyCode == 'C'))
+	else if (m_stage->GetKeyState(WXK_CONTROL) && keyCode == 'C')
 	{
 		clearClipboard();
 
@@ -55,7 +55,7 @@ bool SelectShapesOP::OnKeyDown(int keyCode)
 		for (size_t i = 0, n = shapes.size(); i < n; ++i)
 			m_clipboard.push_back(shapes[i]->Clone());
 	}
-	else if (m_stage->GetKeyState(WXK_CONTROL) && (keyCode == 'v' || keyCode == 'V'))
+	else if (m_stage->GetKeyState(WXK_CONTROL) && keyCode == 'V')
 	{
 		for (size_t i = 0, n = m_clipboard.size(); i < n; ++i) {
 			Shape* shape = m_clipboard[i]->Clone();

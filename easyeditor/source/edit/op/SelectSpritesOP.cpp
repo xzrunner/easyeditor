@@ -53,12 +53,12 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 		m_spritesImpl->ClearSelectedSprite();
 		return true;
 	}
-	else if (m_stage->GetKeyState(WXK_CONTROL) && (keyCode == 'c' || keyCode == 'C'))
+	else if (m_stage->GetKeyState(WXK_CONTROL) && keyCode == 'C')
 	{
 		PasteToSelection();
 		return true;
 	}
-	else if (m_stage->GetKeyState(WXK_CONTROL) && (keyCode == 'v' || keyCode == 'V'))
+	else if (m_stage->GetKeyState(WXK_CONTROL) && keyCode == 'V')
 	{
 		CopyFromSelection();
 		return true;

@@ -40,18 +40,18 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 	}
 
 	// group
-	if (m_stage->GetKeyState(WXK_ALT) && (keyCode == 'g' || keyCode == 'G')) {
+	if (m_stage->GetKeyState(WXK_ALT) && keyCode == 'G') {
 		BuildGroup();
 		return true;
-	} else if (m_stage->GetKeyState(WXK_ALT) && (keyCode == 'b' || keyCode == 'B')) {
+	} else if (m_stage->GetKeyState(WXK_ALT) && keyCode == 'B') {
 		BreakUpGroup();
 		return true;
 	}
 	// complex
-	else if (m_stage->GetKeyState(WXK_CONTROL) && (keyCode == 'g' || keyCode == 'G')) {
+	else if (m_stage->GetKeyState(WXK_CONTROL) && keyCode == 'G') {
 		BuildComplex();
 		return true;
-	} else if (m_stage->GetKeyState(WXK_CONTROL) && (keyCode == 'b' || keyCode == 'B')) {
+	} else if (m_stage->GetKeyState(WXK_CONTROL) && keyCode == 'B') {
 		BreakUpComplex();
 		return true;
 	}

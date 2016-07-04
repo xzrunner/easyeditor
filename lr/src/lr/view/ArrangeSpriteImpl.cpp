@@ -37,10 +37,10 @@ void ArrangeSpriteImpl::OnKeyDown(int key_code)
 
 	if (m_stage->GetKeyState(WXK_SHIFT))
 	{
-		if (key_code == 'o' || key_code == 'O') {
+		if (key_code == 'O') {
 			ee::CameraMgr::Instance()->SetCamera(ee::CameraMgr::ORTHO);
 			ee::SetCanvasDirtySJ::Instance()->SetDirty();			
-		} else if (key_code == 'p' || key_code == 'P') {
+		} else if (key_code == 'P') {
 			ee::CameraMgr::Instance()->SetCamera(ee::CameraMgr::PSEUDO3D);
 			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		}

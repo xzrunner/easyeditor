@@ -613,7 +613,7 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	wxPoint pos(screen_pos.x, screen_pos.y);
 
 	// editable
-	if (keycode == 'e' || keycode == 'E')
+	if (keycode == 'E')
 	{
 		bool editable = !sprites[0]->IsEditable();
 		for (int i = 0, n = sprites.size(); i < n; ++i) {
@@ -624,7 +624,7 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 		return true;
 	}
 	// visible
-	else if (keycode == 's' || keycode == 'S')
+	else if (keycode == 'S')
 	{
 		bool visible = !sprites[0]->IsVisible();
 		for (int i = 0, n = sprites.size(); i < n; ++i) {
@@ -636,7 +636,7 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 		return true;
 	}
 	// hori mirror
-	else if (keycode == 'h' || keycode == 'H') 
+	else if (keycode == 'H') 
 	{
 		for (int i = 0, n = sprites.size(); i < n; ++i) {
 			Sprite* spr = sprites[i];
@@ -646,7 +646,7 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 		return true;
 	} 
 	// vert mirror
-	else if (keycode == 'v' || keycode == 'V') 
+	else if (keycode == 'V') 
 	{
 		for (int i = 0, n = sprites.size(); i < n; ++i) {
 			Sprite* spr = sprites[i];
@@ -656,7 +656,7 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 		return true;
 	} 
 	// mul color
-	else if (keycode == 'm' || keycode == 'M') 
+	else if (keycode == 'M') 
 	{
 		if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_RGB) {
 			RGBColorSettingDlg dlg(m_wnd, NULL, sprites[0]->GetColor().mul, pos);
@@ -680,7 +680,7 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 		return true;
 	} 
 	// add color
-	else if (keycode == 'a' || keycode == 'A') 
+	else if (keycode == 'A') 
 	{
 		if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_RGB) {
 			RGBColorSettingDlg dlg(m_wnd, NULL, sprites[0]->GetColor().add, pos);
@@ -704,7 +704,7 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 		return true;
 	}
 	// alpha
-	else if (keycode == 't' || keycode == 'T') 
+	else if (keycode == 'T') 
 	{
 		AlphaSettingDlg dlg(m_wnd, sprites[0]->GetColor().mul, pos);
 		float old_alpha = sprites[0]->GetColor().mul.a;
