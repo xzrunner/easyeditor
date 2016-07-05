@@ -580,8 +580,15 @@ void ArrangeSpriteImpl::UpOneLayer()
 {
 	std::vector<Sprite*> selected;
 	m_selection->Traverse(FetchAllVisitor<Sprite>(selected));
-	for (size_t i = 0, n = selected.size(); i < n; ++i) {
+
+	SortSpriteSJ::Instance()->Sort(selected);
+	for (int i = selected.size() - 1; i >= 0; --i) {
 		ReorderSpriteSJ::Instance()->Reorder(selected[i], true);
+	}
+
+	ClearSpriteSelectionSJ::Instance()->Clear();
+	for (int i = selected.size() - 1; i >= 0; --i) {
+		SelectSpriteSJ::Instance()->Select(selected[i], false);
 	}
 }
 
@@ -589,8 +596,15 @@ void ArrangeSpriteImpl::DownOneLayer()
 {
 	std::vector<Sprite*> selected;
 	m_selection->Traverse(FetchAllVisitor<Sprite>(selected));
-	for (size_t i = 0, n = selected.size(); i < n; ++i) {
+
+	SortSpriteSJ::Instance()->Sort(selected);
+	for (int i = 0, n = selected.size(); i < n; ++i) {
 		ReorderSpriteSJ::Instance()->Reorder(selected[i], false);
+	}
+
+	ClearSpriteSelectionSJ::Instance()->Clear();
+	for (int i = 0, n = selected.size(); i < n; ++i) {
+		SelectSpriteSJ::Instance()->Select(selected[i], false);
 	}
 }
 

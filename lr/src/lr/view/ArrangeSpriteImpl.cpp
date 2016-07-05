@@ -31,18 +31,20 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(ee::LibraryPanel* library,
 {
 }
 
-void ArrangeSpriteImpl::OnKeyDown(int key_code)
+bool ArrangeSpriteImpl::OnKeyDown(int key_code)
 {
-	ee::ArrangeSpriteImpl::OnKeyDown(key_code);
+	bool ret = ee::ArrangeSpriteImpl::OnKeyDown(key_code);
 
 	if (m_stage->GetKeyState(WXK_SHIFT))
 	{
 		if (key_code == 'O') {
 			ee::CameraMgr::Instance()->SetCamera(ee::CameraMgr::ORTHO);
-			ee::SetCanvasDirtySJ::Instance()->SetDirty();			
+			ee::SetCanvasDirtySJ::Instance()->SetDirty();
+			ret = true;
 		} else if (key_code == 'P') {
 			ee::CameraMgr::Instance()->SetCamera(ee::CameraMgr::PSEUDO3D);
 			ee::SetCanvasDirtySJ::Instance()->SetDirty();
+			ret = true;
 		}
 	}
 	else
@@ -54,13 +56,16 @@ void ArrangeSpriteImpl::OnKeyDown(int key_code)
 			{
 			case WXK_PAGEDOWN:
 				cam->Rotate(1);
+				ret = true;
 				break;
 			case WXK_PAGEUP:
 				cam->Rotate(-1);
+				ret = true;
 				break;
 			}
 		}
 	}
+	return ret;
 }
 
 void ArrangeSpriteImpl::OnPopMenuSelected(int type)

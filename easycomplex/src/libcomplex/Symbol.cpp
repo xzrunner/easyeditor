@@ -271,6 +271,30 @@ bool Symbol::ResetOrderMost(const ee::Sprite* spr, bool up)
 	return m_core->ResetOrderMost(spr->GetCore(), up);
 }
 
+bool Symbol::Sort(std::vector<ee::Sprite*>& sprites)
+{
+	std::vector<s2::Sprite*> ordered;
+	ordered.reserve(sprites.size());
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		ordered.push_back(sprites[i]->GetCore());
+	}
+
+	if (m_core->Sort(ordered))
+	{
+		std::vector<ee::Sprite*> dst;
+		dst.reserve(sprites.size());
+		for (int i = 0, n = ordered.size(); i < n; ++i) {
+			dst.push_back(static_cast<ee::Sprite*>(ordered[i]->GetUD()));
+		}
+		sprites = dst;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 const std::vector<s2::Sprite*>& Symbol::GetChildren() const
 {
 	return m_core->GetChildren();

@@ -86,6 +86,7 @@ private:
 
 	void ReorderSprite(ee::Sprite* spr, bool up);
 	void ReorderSpriteMost(ee::Sprite* spr, bool up);
+	void SortSprites(std::vector<ee::Sprite*>& sprites);
 	void InsertSprite(ee::Sprite* spr, int idx);
 	void RemoveSprite(ee::Sprite* spr);
 	void ClearSprite();

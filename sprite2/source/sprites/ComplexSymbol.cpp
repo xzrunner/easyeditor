@@ -1,6 +1,8 @@
 #include "ComplexSymbol.h"
 #include "S2_Sprite.h"
 
+#include <map>
+
 namespace s2
 {
 
@@ -93,6 +95,32 @@ bool ComplexSymbol::ResetOrderMost(const Sprite* spr, bool up)
 		return false;
 	}
 	return false;
+}
+
+bool ComplexSymbol::Sort(std::vector<Sprite*>& sprites)
+{
+	std::map<int, Sprite*> order_sorted;
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		Sprite* obj = sprites[i];
+		for (int j = 0, m = m_children.size(); j < m; ++j) {
+			if (obj == m_children[j]) {
+				order_sorted.insert(std::make_pair(j, obj));
+			}
+		}
+	}
+
+	if (order_sorted.size() != sprites.size()) {
+		return false;
+	}
+
+	std::vector<Sprite*> list_dst;
+	list_dst.reserve(sprites.size());
+	std::map<int, Sprite*>::iterator itr = order_sorted.begin();
+	for ( ; itr != order_sorted.end(); ++itr) {
+		list_dst.push_back(itr->second);
+	}
+	sprites = list_dst;
+	return true;
 }
 
 }

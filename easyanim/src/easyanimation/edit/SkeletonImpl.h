@@ -13,7 +13,7 @@ class SkeletonImpl : public ee::ArrangeSpriteImpl
 public:
 	SkeletonImpl();
 
-	virtual void OnKeyDown(int keyCode);
+	virtual bool OnKeyDown(int keyCode);
 	virtual void OnMouseLeftDown(int x, int y);
 	virtual void OnMouseLeftUp(int x, int y);
 	virtual void OnMouseRightDown(int x, int y);

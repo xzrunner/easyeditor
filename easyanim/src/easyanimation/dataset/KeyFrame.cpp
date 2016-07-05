@@ -89,6 +89,11 @@ bool KeyFrame::ReorderMost(const ee::Sprite* sprite, bool up)
 	return ee::ObjectVector<ee::Sprite>::ResetOrderMost(m_sprites, sprite, up);
 }
 
+bool KeyFrame::Sort(std::vector<ee::Sprite*>& sprites)
+{
+	return ee::ObjectVector<ee::Sprite>::Sort(m_sprites, sprites);
+}
+
 void KeyFrame::Clear()
 {
 	if (m_layer) {

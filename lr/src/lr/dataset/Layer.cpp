@@ -93,6 +93,11 @@ bool Layer::ResetOrderSpriteMost(const Object* obj, bool up)
 	return m_sprites.ResetOrderMost(static_cast<const ee::Sprite*>(obj), up);
 }
 
+bool Layer::SortSrites(std::vector<ee::Sprite*>& sprites)
+{
+	return m_sprites.Sort(sprites);
+}
+
 void Layer::TraverseShape(ee::Visitor& visitor, bool order) const
 {
 	m_shapes.Traverse(visitor, order);

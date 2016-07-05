@@ -119,6 +119,14 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 			ReorderMost(p->spr, p->up);
 		}
 		break;
+	case ee::MSG_SORT_SPRITES:
+		{
+			std::vector<ee::Sprite*>& sprites = *(std::vector<ee::Sprite*>*)ud;
+			if (m_frame) {
+				m_frame->Sort(sprites);
+			}
+		}
+		break;
 	case ee::MSG_INSERT_SPRITE:
 		{
 			ee::InsertSpriteSJ::Params* p = (ee::InsertSpriteSJ::Params*)ud;

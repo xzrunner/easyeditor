@@ -50,6 +50,11 @@ bool SpritesContainer::ResetOrderMost(const Object* obj, bool up)
 	return m_sprites.ResetOrderMost(static_cast<const Sprite*>(obj), up);	
 }
 
+bool SpritesContainer::Sort(std::vector<Sprite*>& sprites)
+{
+	return m_sprites.Sort(sprites);
+}
+
 int SpritesContainer::Size() const
 {
 	return m_sprites.Size();

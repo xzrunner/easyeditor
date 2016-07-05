@@ -25,7 +25,7 @@ void InsertSpriteSJ::Insert(Sprite* spr, int idx, Observer* except)
 	} else {
 		p.idx = idx;
 	}
-	Notify((void*)&p, except);
+	Notify(&p, except);
 }
 
 SUBJECT_DEFINITION(QuerySelectedSpriteLayerSJ, MSG_QUERY_SPR_LAYER)
@@ -39,7 +39,7 @@ int QuerySelectedSpriteLayerSJ::Query()
 SUBJECT_DEFINITION(RemoveSpriteSJ, MSG_REMOVE_SPRITE)
 void RemoveSpriteSJ::Remove(Sprite* spr, Observer* except)
 {
-	Notify((void*)spr, except);
+	Notify(spr, except);
 }
 
 SUBJECT_DEFINITION(ReorderSpriteMostSJ, MSG_REORDER_SPRITE_MOST)
@@ -48,7 +48,7 @@ void ReorderSpriteMostSJ::Reorder(Sprite* spr, bool up, Observer* except)
 	Params p;
 	p.spr = spr;
 	p.up = up;
-	Notify((void*)&p, except);
+	Notify(&p, except);
 }
 
 SUBJECT_DEFINITION(ReorderSpriteSJ, MSG_REORDER_SPRITE)
@@ -57,7 +57,13 @@ void ReorderSpriteSJ::Reorder(Sprite* spr, bool up, Observer* except)
 	Params p;
 	p.spr = spr;
 	p.up = up;
-	Notify((void*)&p, except);
+	Notify(&p, except);
+}
+
+SUBJECT_DEFINITION(SortSpriteSJ, MSG_SORT_SPRITES)
+void SortSpriteSJ::Sort(std::vector<Sprite*>& sprites, Observer* except)
+{
+	Notify(&sprites, except);
 }
 
 SUBJECT_DEFINITION(SelectSpriteSetSJ, MSG_SELECT_SPRITE_SET)
@@ -72,7 +78,7 @@ void SelectSpriteSJ::Select(Sprite* spr, bool clear, Observer* except)
 	Params p;
 	p.spr = spr;
 	p.clear = clear;
-	Notify((void*)&p, except);
+	Notify(&p, except);
 }
 
 SUBJECT_DEFINITION(ClearSpriteSelectionSJ, MSG_CLEAR_SPRITE_SELECTION)

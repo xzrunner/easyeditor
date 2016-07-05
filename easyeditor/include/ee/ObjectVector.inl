@@ -66,6 +66,12 @@ bool ObjectVector<T>::ResetOrderMost(const T* obj, bool up)
 }
 
 template<class T>
+bool ObjectVector<T>::Sort(std::vector<T*>& list)
+{
+	return Sort(m_objs, list);
+}
+
+template<class T>
 bool ObjectVector<T>::IsExist(T* obj) const
 {
 	for (int i = 0, n = m_objs.size(); i < n; ++i) {
@@ -238,6 +244,32 @@ inline bool ObjectVector<T>::ResetOrderMost(std::vector<T*>& objs, const T* obj,
 		return false;
 	}
 	return false;
+}
+
+template<class T>
+inline bool ObjectVector<T>::Sort(std::vector<T*>& objs, std::vector<T*>& list) {
+	std::map<int, T*> order_sorted;
+	for (int i = 0, n = list.size(); i , n; ++i) {
+		T* obj = list[i];
+		for (int j = 0, m = objs.size(); j < m; ++j) {
+			if (obj == objs[j]) {
+				order_sorted.insert(std::make_pair(j, obj));
+			}
+		}
+	}
+
+	if (order_sorted.size() != list.size()) {
+		return false;
+	}
+	
+	std::vector<T*> list_dst;
+	list_dst.reserve(list.size());
+	std::map<int, T*>::iterator itr = order_sorted.begin();
+	for ( ; itr != order_sorted.end(); ++itr) {
+		list_dst.push_back(itr->second);
+	}
+	list = list_dst;
+	return true;
 }
 
 }

@@ -501,6 +501,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\include\ee\SprDataContainer.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\source\view\stage\SpritesContainer.cpp"
 					>
 				</File>

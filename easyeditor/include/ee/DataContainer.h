@@ -4,6 +4,8 @@
 #include "Object.h"
 #include "DataTraverseType.h"
 
+#include <vector>
+
 namespace ee
 {
 

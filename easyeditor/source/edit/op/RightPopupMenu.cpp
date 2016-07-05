@@ -181,15 +181,19 @@ void RightPopupMenu::HandleDebugTagMenu(int id)
 
 void RightPopupMenu::UpOneLayer()
 {
-	for (size_t i = 0, n = m_edited_sprs.size(); i < n; ++i) {
+	SortSpriteSJ::Instance()->Sort(m_edited_sprs);
+	for (int i = m_edited_sprs.size() - 1; i >= 0; --i) {
 		ReorderSpriteSJ::Instance()->Reorder(m_edited_sprs[i], true);
+		SelectSpriteSJ::Instance()->Select(m_edited_sprs[i], false);
 	}
 }
 
 void RightPopupMenu::DownOneLayer()
 {
-	for (size_t i = 0, n = m_edited_sprs.size(); i < n; ++i) {
+	SortSpriteSJ::Instance()->Sort(m_edited_sprs);
+	for (int i = 0, n = m_edited_sprs.size(); i < n; ++i) {
 		ReorderSpriteSJ::Instance()->Reorder(m_edited_sprs[i], false);
+		SelectSpriteSJ::Instance()->Select(m_edited_sprs[i], false);
 	}
 }
 

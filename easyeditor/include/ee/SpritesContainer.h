@@ -1,7 +1,7 @@
 #ifndef _EASYEDITOR_SPRITES_CONTAINER_H_
 #define _EASYEDITOR_SPRITES_CONTAINER_H_
 
-#include "DataContainer.h"
+#include "SprDataContainer.h"
 #include "ObjectVector.h"
 
 namespace ee
@@ -9,7 +9,7 @@ namespace ee
 
 class Sprite;
 
-class SpritesContainer : public DataContainer
+class SpritesContainer : public SprDataContainer
 {
 public:
 	virtual ~SpritesContainer();
@@ -25,6 +25,10 @@ public:
 	virtual bool Clear();
 	virtual bool ResetOrder(const Object* obj, bool up);
 	virtual bool ResetOrderMost(const Object* obj, bool up);
+	//
+	// SprDataContainer interface
+	//
+	virtual bool Sort(std::vector<Sprite*>& sprites);
 
 	int Size() const;
 

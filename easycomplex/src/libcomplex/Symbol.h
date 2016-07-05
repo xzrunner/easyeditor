@@ -45,6 +45,7 @@ public:
 	bool Clear();
 	bool ResetOrder(const ee::Sprite* spr, bool up);
 	bool ResetOrderMost(const ee::Sprite* spr, bool up);
+	bool Sort(std::vector<ee::Sprite*>& sprites);
 
 	const std::vector<s2::Sprite*>& GetChildren() const;
 

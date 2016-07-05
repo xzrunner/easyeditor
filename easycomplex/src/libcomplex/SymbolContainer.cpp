@@ -69,6 +69,11 @@ bool SymbolContainer::ResetOrderMost(const Object* obj, bool up)
 	return m_symbol->ResetOrderMost(spr, up);
 }
 
+bool SymbolContainer::Sort(std::vector<ee::Sprite*>& sprites)
+{
+	return m_symbol->Sort(sprites);
+}
+
 void SymbolContainer::GetSprites(std::vector<ee::Sprite*>& sprites) const
 {
 	const std::vector<s2::Sprite*>& children = m_symbol->GetChildren();

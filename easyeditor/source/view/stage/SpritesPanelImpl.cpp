@@ -65,6 +65,12 @@ void SpritesPanelImpl::OnNotify(int sj_id, void* ud)
 			SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;
+	case MSG_SORT_SPRITES:
+		{
+			std::vector<ee::Sprite*>& sprites = *(std::vector<ee::Sprite*>*)ud;
+			static_cast<SprDataContainer*>(m_container)->Sort(sprites);
+		}
+		break;
 	case MSG_INSERT_SPRITE:
 		{
 			InsertSpriteSJ::Params* p = (InsertSpriteSJ::Params*)ud;
@@ -100,6 +106,7 @@ void SpritesPanelImpl::InitSubjects()
 {
 	RegistSubject(ReorderSpriteSJ::Instance());
 	RegistSubject(ReorderSpriteMostSJ::Instance());
+	RegistSubject(SortSpriteSJ::Instance());
 	RegistSubject(InsertSpriteSJ::Instance());
 	RegistSubject(RemoveSpriteSJ::Instance());
 	RegistSubject(ClearSpriteSJ::Instance());

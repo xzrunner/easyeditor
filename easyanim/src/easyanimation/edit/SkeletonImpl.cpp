@@ -29,10 +29,13 @@ SkeletonImpl::SkeletonImpl()
 {
 }
 
-void SkeletonImpl::OnKeyDown(int keyCode)
+bool SkeletonImpl::OnKeyDown(int keyCode)
 {
-	ee::ArrangeSpriteImpl::OnKeyDown(keyCode);
-	KeyDownHandler::Instance()->Process(keyCode);
+	bool ret = ee::ArrangeSpriteImpl::OnKeyDown(keyCode);
+	if (KeyDownHandler::Instance()->Process(keyCode)) {
+		ret = true;
+	}
+	return ret;
 }
 
 void SkeletonImpl::OnMouseLeftDown(int x, int y)

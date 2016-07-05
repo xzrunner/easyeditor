@@ -28,6 +28,7 @@ public:
 	bool Remove(ee::Sprite* sprite);
 	bool Reorder(const ee::Sprite* sprite, bool up);
 	bool ReorderMost(const ee::Sprite* sprite, bool up);
+	bool Sort(std::vector<ee::Sprite*>& sprites);
 
 	int Size() const { return m_sprites.size(); }
 	const ee::Sprite* GetSprite(int index) {

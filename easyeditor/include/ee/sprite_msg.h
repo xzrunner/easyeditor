@@ -3,6 +3,8 @@
 
 #include "Subject.h"
 
+#include <vector>
+
 namespace ee
 {
 
@@ -63,6 +65,13 @@ public:
 	void Reorder(Sprite* spr, bool up, Observer* except = NULL);
 	SUBJECT_DECLARATION(ReorderSpriteSJ)
 }; // ReorderSpriteSJ
+
+class SortSpriteSJ : public Subject
+{
+public:
+	void Sort(std::vector<Sprite*>& sprites, Observer* except = NULL);
+	SUBJECT_DECLARATION(SortSpriteSJ)
+}; // SortSpriteSJ
 
 class SpriteSelection;
 class SelectSpriteSetSJ : public Subject

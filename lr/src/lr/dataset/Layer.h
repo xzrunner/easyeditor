@@ -34,6 +34,7 @@ public:
 	virtual bool ClearSprite();
 	virtual bool ResetOrderSprite(const Object* obj, bool up);
 	virtual bool ResetOrderSpriteMost(const Object* obj, bool up);
+	virtual bool SortSrites(std::vector<ee::Sprite*>& sprites);
 
 	virtual void TraverseShape(ee::Visitor& visitor, bool order = true) const;
 	virtual bool RemoveShape(Object* obj);

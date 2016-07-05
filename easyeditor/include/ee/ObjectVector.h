@@ -29,6 +29,7 @@ public:
 
 	bool ResetOrder(const T* obj, bool up);
 	bool ResetOrderMost(const T* obj, bool up);
+	bool Sort(std::vector<T*>& list);
 
 	bool IsExist(T* obj) const;
 
@@ -47,6 +48,7 @@ public:
 
 	static bool ResetOrder(std::vector<T*>& objs, const T* obj, bool up);
 	static bool ResetOrderMost(std::vector<T*>& objs, const T* obj, bool up);
+	static bool Sort(std::vector<T*>& objs, std::vector<T*>& list);
 
 private:
 	std::vector<T*> m_objs;

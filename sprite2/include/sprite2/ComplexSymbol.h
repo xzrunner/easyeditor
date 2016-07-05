@@ -25,6 +25,7 @@ public:
 	bool Clear();
 	bool ResetOrder(const Sprite* spr, bool up);
 	bool ResetOrderMost(const Sprite* spr, bool up);
+	bool Sort(std::vector<Sprite*>& sprites);
 
 private:
 	std::vector<Sprite*> m_children;
