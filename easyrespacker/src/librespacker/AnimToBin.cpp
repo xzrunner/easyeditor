@@ -88,7 +88,9 @@ int AnimToBin::FrameSize(const PackAnimation::Frame& frame)
 		if (t.additive != 0) {
 			ret += sizeof(uint32_t);
 		}
-		if (t.rmap != 0xff0000ff || t.gmap != 0x00ff00ff || t.bmap != 0x0000ffff) {
+		if ((t.rmap != 0xff0000ff && t.rmap != 0xff000000) || 
+			(t.gmap != 0x00ff00ff && t.gmap != 0x00ff0000) || 
+			(t.bmap != 0x0000ffff && t.bmap != 0x0000ff00)) {
 			ret += sizeof(uint32_t) * 3;
 		}
 		if (t.blend != 0) {
