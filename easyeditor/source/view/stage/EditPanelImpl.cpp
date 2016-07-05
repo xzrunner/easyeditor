@@ -169,7 +169,7 @@ void EditPanelImpl::OnKeyDown(wxKeyEvent& event)
 		break;
 	}
 
-	if (m_edit_op && !m_edit_op->OnKeyDown(key_code)) {
+	if (m_edit_op && m_edit_op->OnKeyDown(key_code)) {
 		event.Skip();
 	}
 
