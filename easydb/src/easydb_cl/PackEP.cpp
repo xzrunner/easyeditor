@@ -4,6 +4,8 @@
 
 #include <ee/Config.h>
 #include <ee/EE_ShaderLab.h>
+#include <ee/ImageData.h>
+#include <ee/FileHelper.h>
 
 #include <easyrespacker.h>
 
@@ -22,12 +24,12 @@ std::string PackEP::Description() const
 
 std::string PackEP::Usage() const
 {
-	return Command() + " [json dir] [tp json] [tp dir] [output file] [output type] [LOD] [SCALE]";
+	return Command() + " [json dir] [tp json] [tp dir] [output file] [output type] [LOD] [SCALE] [DEFAULT SYMBOL]";
 }
 
 int PackEP::Run(int argc, char *argv[])
 {
-	if (!check_number(this, argc, 7)) return -1;
+	if (!check_number(this, argc, 8)) return -1;
 	if (!check_folder(argv[2])) return -1;
 	if (!check_folder(argv[4])) return -1;
 
@@ -49,7 +51,12 @@ int PackEP::Run(int argc, char *argv[])
 	ee::Config::Instance()->EnableRender(true);
 
 // 	Trigger(argv[2], argv[3], argv[4], argv[5], argv[6], argv[7], LOD, scale);
-	Trigger(argv[2], argv[3], argv[4], argv[5], argv[6], LOD, scale);
+
+	std::string default_sym;
+	if (argc >= 10) {
+		default_sym = argv[9];
+	}
+	Trigger(argv[2], argv[3], argv[4], argv[5], argv[6], LOD, scale, default_sym);
 
 	return 0;
 }
@@ -60,8 +67,11 @@ int PackEP::Run(int argc, char *argv[])
 // 					 const std::string& type, int LOD, float scale)
 void PackEP::Trigger(const std::string& json_dir, const std::string& tp_json,
 					 const std::string& tp_dir, const std::string& out_file,
-					 const std::string& type, int LOD, float scale)
+					 const std::string& type, int LOD, float scale,
+					 const std::string& default_sym)
 {
+	ee::ImageDataMgr::Instance()->SetDefaultSym(ee::FileHelper::FormatFilepathAbsolute(default_sym));
+
 	erespacker::ResPacker packer(json_dir, tp_json, tp_dir);
 	if (type == "ept_desc") {
 		packer.OutputEptDesc(out_file);

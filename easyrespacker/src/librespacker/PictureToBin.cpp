@@ -4,6 +4,7 @@
 
 #include <ee/TexturePacker.h>
 #include <ee/Image.h>
+#include <ee/ImageData.h>
 
 #include <spritepack.h>
 
@@ -48,6 +49,9 @@ void PictureToBin::PackQuad(const PackPicture::Quad& quad, uint8_t** ptr,
 							 const ee::TexturePacker& tp, float scale)
 {
 	uint8_t idx = tp.QueryIdx(quad.img->GetFilepath());
+	if (idx == 0xff) {
+		idx = tp.QueryIdx(ee::ImageDataMgr::Instance()->GetDefaultSym());
+	}
 	pack(idx, ptr);
 
 	int src[8];

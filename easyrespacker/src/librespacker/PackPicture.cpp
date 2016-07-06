@@ -11,6 +11,7 @@
 #include <ee/TexturePacker.h>
 #include <ee/Image.h>
 #include <ee/Exception.h>
+#include <ee/ImageData.h>
 
 namespace erespacker
 {
@@ -58,6 +59,9 @@ void PackPicture::GetImgSrcPos(const ee::TexturePacker& tp, const ee::Image* img
 							   const sm::vec2* texture_coord, int* src)
 {
 	const ee::TexturePacker::Frame* tp_frame = tp.Query(img->GetFilepath());
+	if (!tp_frame && ee::ImageDataMgr::Instance()->GetDefaultSym() != "") {
+		tp_frame = tp.Query(ee::ImageDataMgr::Instance()->GetDefaultSym());
+	}
 	if (!tp_frame) {
 		std::string str = img->GetFilepath();
 		throw ee::Exception("Image can't find in tp, %s", str.c_str());
@@ -82,7 +86,11 @@ void PackPicture::GetImgSrcPos(const ee::TexturePacker& tp, const ee::Image* img
 		}
 	}
 
-	int h = tp.GetTextureHeight(tp.QueryIdx(img->GetFilepath()));
+	int idx = tp.QueryIdx(img->GetFilepath());
+	if (idx == -1) {
+		idx = tp.QueryIdx(ee::ImageDataMgr::Instance()->GetDefaultSym());
+	}
+	int h = tp.GetTextureHeight(idx);
 	for (int i = 0; i < 4; ++i) {
 		src[i*2+1] = h - src[i*2+1];
 	}

@@ -3,6 +3,7 @@
 #include "ImageLoader.h"
 #include "Config.h"
 #include "SettingData.h"
+#include "ImageData.h"
 
 namespace ee
 {
@@ -32,6 +33,9 @@ const uint8_t* TextureFactory::Load(const std::string& filepath, int& width,
 	const TexturePacker::Frame* frame = NULL;
 	if (!Config::Instance()->GetSettings().load_image && m_tp) {
 		frame = m_tp->Query(filepath);
+		if (!frame) {
+			frame = m_tp->Query(ImageDataMgr::Instance()->GetDefaultSym());
+		}
 	}
 	if (frame) {
 		width = frame->src.frame.w;
@@ -50,6 +54,9 @@ void TextureFactory::Load(const std::string& filepath, float& ori_w, float& ori_
 	const TexturePacker::Frame* frame = NULL;
 	if (!Config::Instance()->GetSettings().load_image && m_tp) {
 		frame = m_tp->Query(filepath);
+	}
+	if (!frame) {
+		frame = m_tp->Query(ImageDataMgr::Instance()->GetDefaultSym());
 	}
 	if (frame) {
 		const TexturePacker::FrameSrcData& src = frame->src;

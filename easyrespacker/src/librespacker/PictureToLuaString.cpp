@@ -3,6 +3,7 @@
 
 #include <ee/TexturePacker.h>
 #include <ee/Image.h>
+#include <ee/ImageData.h>
 
 #include <easybuilder.h>
 
@@ -38,6 +39,9 @@ void PictureToLuaString::PackQuad(const PackPicture::Quad& quad,
 								  float scale)
 {
 	int idx = tp.QueryIdx(quad.img->GetFilepath());
+	if (idx == -1) {
+		idx = tp.QueryIdx(ee::ImageDataMgr::Instance()->GetDefaultSym());
+	}
 	std::string tex_str = lua::assign("tex", ee::StringHelper::ToString(idx));
 
 	char buff[256];

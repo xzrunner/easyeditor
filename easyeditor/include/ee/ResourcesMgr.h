@@ -27,6 +27,9 @@ public:
 		return m_items.size();
 	}
 
+	void SetDefaultSym(const std::string& filepath) { m_default_sym = filepath; }
+	const std::string& GetDefaultSym() const { return m_default_sym; }
+
 protected:
 	ResourcesMgr();
 	~ResourcesMgr();
@@ -35,6 +38,8 @@ private:
 	static ResourcesMgr<T>* m_instance;
 
 	std::map<std::string, T*> m_items;
+
+	std::string m_default_sym;
 
 }; // ResourcesMgr
 

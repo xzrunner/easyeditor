@@ -28,8 +28,7 @@ void Symbol::ClearUserData(bool deletePtr)
 bool Symbol::LoadFromFile(const std::string& filepath)
 {
 	m_filepath = FileHelper::GetExistFilepath(filepath);
-	if (m_filepath == wxEmptyString)
-	{
+	if (m_filepath == wxEmptyString) {
 		m_name = "error";
 		m_bitmap = NULL;
 		return false;
