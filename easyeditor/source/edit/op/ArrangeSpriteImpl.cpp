@@ -356,9 +356,9 @@ void ArrangeSpriteImpl::OnMouseMove(int x, int y)
 
 void ArrangeSpriteImpl::OnMouseDrag(int x, int y)
 {
-	if (!m_left_down_pos.IsValid() && !m_right_down_pos.IsValid()) {
-		return;
-	}
+// 	if (!m_left_down_pos.IsValid() && !m_right_down_pos.IsValid()) {
+// 		return;
+// 	}
 
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	if (m_op_state && m_op_state->OnMouseDrag(pos))
