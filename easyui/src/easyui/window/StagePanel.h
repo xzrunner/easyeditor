@@ -4,6 +4,7 @@
 #include "SymbolsCfg.h"
 #include "AnchorMgr.h"
 #include "UIStagePage.h"
+#include "OpenSymbolLsn.h"
 
 #include <ee/SpritesPanelImpl.h>
 #include <ee/CrossGuides.h>
@@ -60,6 +61,8 @@ private:
 	ToolbarPanel* m_toolbar;
 
 	ee::CrossGuides m_guides;
+
+	OpenSymbolLsn m_open_sym_lsn;
 
 }; // StagePanel
 

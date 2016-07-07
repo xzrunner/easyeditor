@@ -508,6 +508,10 @@
 				RelativePath="..\..\..\src\libcomplex\OpenSymbolDialog.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\libcomplex\OpenSymbolLsn.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath="..\..\..\src\libcomplex\config.h"

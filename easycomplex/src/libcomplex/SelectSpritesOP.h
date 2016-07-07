@@ -24,6 +24,8 @@ public:
 
 	void SetGuides(ee::CrossGuides* guides) { m_guides = guides; }
 
+	void RegOpenSymDlgLsn(OpenSymbolLsn* lsn) { m_open_symbol.RegistLsn(lsn); }
+
 private:
 	void GroupSelection();
 	void BreakUpSelection();

@@ -500,6 +500,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\easyui\window\OpenSymbolLsn.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\window\OpenSymbolLsn.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\easyui\window\TranslateSpriteState.cpp"
 					>
 					<FileConfiguration

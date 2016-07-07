@@ -37,12 +37,16 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* to
 	, ee::SpritesPanelImpl(GetStageImpl(), top_pannels->library->GetUILibrary())
 	, m_top_pannels(top_pannels)
 	, m_symbols_cfg(this, top_pannels->library->GetUILibrary())
+	, m_open_sym_lsn(&m_anchor_mgr)
 {
 	ee::ArrangeSpriteOP<ecomplex::SelectSpritesOP>* edit_op = new ee::ArrangeSpriteOP<ecomplex::SelectSpritesOP>(
 		this, GetStageImpl(), this, top_pannels->property, NULL, ee::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, top_pannels->property));
 	static_cast<ecomplex::SelectSpritesOP*>(edit_op)->SetGuides(&m_guides);
 	SetEditOP(edit_op);
 	edit_op->Release();
+
+	ecomplex::SelectSpritesOP* eop = static_cast<ecomplex::SelectSpritesOP*>(edit_op);
+	eop->RegOpenSymDlgLsn(&m_open_sym_lsn);
 
 	ee::StageCanvas* canvas = new StageCanvas(this);
 	SetCanvas(canvas);
