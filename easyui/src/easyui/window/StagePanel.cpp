@@ -12,6 +12,7 @@
 #include "SymbolCfg.h"
 #include "FileIO.h"
 #include "Sprite.h"
+#include "SpriteDropTarget.h"
 
 #include <ee/ArrangeSpriteOP.h>
 #include <ee/FetchAllVisitor.h>
@@ -37,7 +38,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* to
 	, m_top_pannels(top_pannels)
 	, m_symbols_cfg(this, top_pannels->library->GetUILibrary())
 {
-	SetDropTarget(new ee::SpriteDropTarget(GetStageImpl(), top_pannels->library->GetUILibrary()));
+	SetDropTarget(new SpriteDropTarget(GetStageImpl(), top_pannels->library->GetUILibrary()));
 
 	ee::ArrangeSpriteOP<ecomplex::SelectSpritesOP>* edit_op = new ee::ArrangeSpriteOP<ecomplex::SelectSpritesOP>(
 		this, GetStageImpl(), this, top_pannels->property, NULL, ee::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, top_pannels->property));

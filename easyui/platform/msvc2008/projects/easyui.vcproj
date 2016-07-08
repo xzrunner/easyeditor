@@ -316,6 +316,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\easyui\window\SpriteDropTarget.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\window\SpriteDropTarget.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\easyui\window\StageCanvas.cpp"
 					>
 					<FileConfiguration
@@ -940,10 +948,6 @@
 				RelativePath="..\..\..\src\easyui\EditClipboxOP.h"
 				>
 			</File>
-		</Filter>
-		<Filter
-			Name="0. allwnds"
-			>
 		</Filter>
 		<File
 			RelativePath="..\..\..\..\editor-external\wx\include\wx\msw\wx.rc"
