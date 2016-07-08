@@ -68,7 +68,7 @@ ee::AtomicOP* Layer::RemoveFrameRegion(int begin, int end)
 
 	int cut_len = end - begin + 1;
 	if (del_first && !frames.empty()) {
-		cut_len += frames[0]->GetTime() - 2;
+		cut_len = frames[0]->GetTime() - 1;
 	}
 	for (int i = 0, n = frames.size(); i < n; ++i) {
 		KeyFrame* frame = frames[i];
