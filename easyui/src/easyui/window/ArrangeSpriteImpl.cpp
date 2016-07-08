@@ -76,7 +76,7 @@ void ArrangeSpriteImpl::OnDraw(const ee::Camera& cam) const
 ee::ArrangeSpriteState* ArrangeSpriteImpl::
 CreateTranslateState(ee::SpriteSelection* selection, const sm::vec2& first_pos) const
 {
-	return new TranslateSpriteState(m_stage, selection, first_pos, m_stage->GetAnchorMgr()); 
+	return new TranslateSpriteState(m_stage, selection, first_pos, &m_stage->GetSymbol()->GetAnchorMgr()); 
 }
 
 }

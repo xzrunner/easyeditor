@@ -1,7 +1,9 @@
 #include "LibraryPage.h"
+#include "Symbol.h"
 
 #include <ee/SymbolMgr.h>
 #include <ee/LibraryList.h>
+#include <ee/StringHelper.h>
 
 #include <easycomplex.h>
 
@@ -10,24 +12,33 @@ namespace eui
 namespace window
 {
 
-LibraryPage::LibraryPage(wxWindow* parent, const char* name)
+LibraryPage::LibraryPage(wxWindow* parent, const char* name,
+						 const std::string& filter)
 	: ee::LibraryPage(parent, name)
+	, m_filter(filter)
 {
 	InitLayout();
 }
 
 bool LibraryPage::IsHandleSymbol(ee::Symbol* symbol) const
 {
-// 	return dynamic_cast<ee::ImageSymbol*>(symbol) != NULL
-// 		|| dynamic_cast<ecomplex::Symbol*>(symbol) != NULL;
-
-	return true;
+	if (m_filter == "ui") {
+		return dynamic_cast<Symbol*>(symbol) != NULL;	
+	} else {
+		return true;
+	}
 }
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
+	std::string filter;
+	if (m_filter.empty()) {
+		filter = "*.*";
+	} else {
+		filter = ee::StringHelper::Format("JSON files (*_%s.json)|*_%s.json", m_filter.c_str(), m_filter.c_str());
+	}
 	wxFileDialog dlg(this, wxT("µº»Îsymbol"), wxEmptyString, 
-		wxEmptyString, "*.*", wxFD_OPEN | wxFD_MULTIPLE);
+		wxEmptyString, filter, wxFD_OPEN | wxFD_MULTIPLE);
 	if (dlg.ShowModal() == wxID_OK)
 	{
 		wxArrayString filenames;

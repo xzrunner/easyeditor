@@ -29,7 +29,7 @@ private:
 
 private:
 	void InitLibrarySymbols(const Json::Value& value);
-	void InitLibrarySymbols(const Json::Value& value, const std::string& name);
+	void InitLibrarySymbols(const Json::Value& value, const std::string& name, const std::string& filter = "");
 	void InitLibrarySymbols(const Json::Value& value, std::vector<Symbol*>& symbols);
 
 	void ResetLibraryList(LibraryPage* library, const std::vector<Symbol*>& symbols);

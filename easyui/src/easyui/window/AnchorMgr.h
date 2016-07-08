@@ -1,47 +1,42 @@
 #ifndef _EASYUI_WINDOW_ANCHOR_MGR_H_
 #define _EASYUI_WINDOW_ANCHOR_MGR_H_
 
-#include <ee/Observer.h>
-
 #include <SM_Vector.h>
 
 #include <json/json.h>
 
-namespace ee { class Sprite; }
+namespace ee { class Sprite; class Visitor; }
+namespace s2 { class RenderParams; }
 
 namespace eui
 {
 namespace window
 {
 
-class AnchorMgr : public ee::Observer
+class AnchorMgr
 {
 public:
 	AnchorMgr();
 	~AnchorMgr();
 
-	void OnViewChanged(int width, int height);
-
-	void OnSprPosChanged(ee::Sprite* spr);
-
-	void Draw() const;
-
 	void LoadFromFile(const Json::Value& value, 
 		const std::vector<ee::Sprite*>& sprites);
-	void StoreToFile(Json::Value& value) const;
+	void StoreToFile(Json::Value& value, const std::string& dir) const;
+
+	void OnViewChanged(int width, int height);
+	void OnSprPosChanged(ee::Sprite* spr);
+
+	void DrawSprites(const s2::RenderParams& params) const;
+	void DrawNodes(const s2::RenderParams& params) const;
+
+	void Traverse(ee::Visitor& visitor);
+	void Remove(ee::Sprite* spr);
+	void Insert(ee::Sprite* spr);
+	void Clear();
+	void ResetOrder(ee::Sprite* spr, bool up);
+	void ResetOrderMost(ee::Sprite* spr, bool up);
 
 	static int GetAnchorRadius() { return RADIUS; }
-
-protected:
-	//
-	//	interface Observer
-	//
-	virtual void OnNotify(int sj_id, void* ud);
-
-private:
-	void Insert(ee::Sprite* spr);
-	void Remove(ee::Sprite* spr);
-	void Clear();
 
 private:
 	static const int RADIUS = 10;
@@ -53,7 +48,6 @@ private:
 	{
 		sm::vec2 pos;
 		std::vector<ee::Sprite*> sprites;
-		
 	}; // Anchor
 
 private:
@@ -67,6 +61,8 @@ private:
 	// 3 4 5
 	// 6 7 8
 	Anchor m_anchors[ANCHOR_COUNT];
+
+	std::vector<ee::Sprite*> m_sprites;
 
 }; // AnchorMgr
 

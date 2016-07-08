@@ -51,6 +51,7 @@ void SymbolsCfg::LoadConfig()
 
 void SymbolsCfg::InitLibrarySymbols(const Json::Value& value)
 {
+	InitLibrarySymbols(value["window"], "窗口", "ui");
 	InitLibrarySymbols(value["button"], "按钮");
 	InitLibrarySymbols(value["list"], "列表");
 	InitLibrarySymbols(value["textbox"], "文本框");
@@ -58,14 +59,14 @@ void SymbolsCfg::InitLibrarySymbols(const Json::Value& value)
 	InitLibrarySymbols(value["other"], "其他");
 }
 
-void SymbolsCfg::InitLibrarySymbols(const Json::Value& value, const std::string& name)
+void SymbolsCfg::InitLibrarySymbols(const Json::Value& value, const std::string& name, const std::string& filter)
 {
 	std::vector<Symbol*> symbols;
 
 	InitLibrarySymbols(value, symbols);
 
 	wxWindow* nb = m_library->GetNotebook();
-	LibraryPage* page = new LibraryPage(nb, name.c_str());
+	LibraryPage* page = new LibraryPage(nb, name.c_str(), filter);
 	m_library->AddPage(page);
 
 	ResetLibraryList(page, symbols);

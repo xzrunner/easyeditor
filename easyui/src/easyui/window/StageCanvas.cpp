@@ -11,6 +11,8 @@
 #include <ee/Config.h>
 #include <ee/color_config.h>
 
+#include <sprite2/RenderParams.h>
+
 namespace eui
 {
 namespace window
@@ -37,7 +39,7 @@ void StageCanvas::OnDrawSprites() const
 	float scale = ee::CameraMgr::Instance()->GetCamera()->GetScale();
 	m_stage->TraverseSprites(ee::DrawSpritesVisitor(sr, scale), ee::DT_VISIBLE);
 
-	m_stage->GetAnchorMgr()->Draw();
+	m_stage->GetSymbol()->Draw(s2::RenderParams());
 
 	m_stage->DrawEditOP();
 

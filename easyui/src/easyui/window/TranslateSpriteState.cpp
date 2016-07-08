@@ -1,6 +1,7 @@
 #include "TranslateSpriteState.h"
 #include "AnchorMgr.h"
 #include "StagePanel.h"
+#include "Sprite.h"
 
 #include <ee/SpriteSelection.h>
 #include <ee/panel_msg.h>
@@ -34,8 +35,12 @@ void TranslateSpriteState::OnMouseRelease(const sm::vec2& pos)
 void TranslateSpriteState::Visitor::
 Visit(ee::Object* object, bool& next)
 {
-	ee::Sprite* sprite = static_cast<ee::Sprite*>(object);
-	m_anchor_mgr->OnSprPosChanged(sprite);
+	ee::Sprite* spr = static_cast<ee::Sprite*>(object);
+	if (dynamic_cast<Sprite*>(spr) != NULL) {
+		spr->SetTransform(sm::vec2(0, 0), 0);
+	} else {
+		m_anchor_mgr->OnSprPosChanged(spr);
+	}
 	next = true;
 }
 

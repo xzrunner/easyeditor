@@ -3,6 +3,9 @@
 #include "Task.h"
 #include "config.h"
 
+#include "window/Symbol.h"
+#include "window/Sprite.h"
+
 #include <easycomplex.h>
 #include <easyanim.h>
 #include <easyscale9.h>
@@ -54,6 +57,9 @@ static void InitSymbolCreators()
 
 	ee::SymbolFactory::RegisterCreator(etexture::FILE_TAG, &etexture::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(etexture::FILE_TAG, &etexture::Sprite::Create);
+
+	ee::SymbolFactory::RegisterCreator(eui::FILE_TAG, &eui::window::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(eui::FILE_TAG, &eui::window::Sprite::Create);
 }
 
 bool MyApp::OnInit()

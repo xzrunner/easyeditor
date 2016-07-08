@@ -214,7 +214,7 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="topview"
+			Name="view"
 			>
 			<File
 				RelativePath="..\..\..\src\easyui\TopLibraryPanel.cpp"
@@ -286,7 +286,7 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="window"
+			Name="1. window"
 			>
 			<Filter
 				Name="view"
@@ -440,6 +440,22 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\easyui\window\Sprite.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\window\Sprite.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\window\Symbol.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\window\Symbol.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\easyui\window\SymbolsCfg.cpp"
 					>
 					<FileConfiguration
@@ -497,14 +513,6 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\easyui\window\MoveSpriteCenterState.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyui\window\OpenSymbolLsn.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyui\window\OpenSymbolLsn.h"
 					>
 				</File>
 				<File
@@ -636,9 +644,21 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="frame"
+				>
+				<File
+					RelativePath="..\..\..\src\easyui\window\FileIO.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\window\FileIO.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
-			Name="list"
+			Name="2. list"
 			>
 			<Filter
 				Name="view"
@@ -822,7 +842,7 @@
 			</Filter>
 		</Filter>
 		<Filter
-			Name="wrapper"
+			Name="3. wrapper"
 			>
 			<File
 				RelativePath="..\..\..\src\easyui\wrapper\EditOP.cpp"
@@ -922,7 +942,7 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="config"
+			Name="0. allwnds"
 			>
 		</Filter>
 		<File

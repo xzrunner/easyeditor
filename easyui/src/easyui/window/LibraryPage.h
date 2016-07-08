@@ -11,12 +11,16 @@ namespace window
 class LibraryPage : public ee::LibraryPage
 {
 public:
-	LibraryPage(wxWindow* parent, const char* name);
+	LibraryPage(wxWindow* parent, const char* name, 
+		const std::string& filter);
 
 	virtual bool IsHandleSymbol(ee::Symbol* symbol) const;
 
 protected:
 	virtual void OnAddPress(wxCommandEvent& event);
+
+private:
+	std::string m_filter;
 
 }; // LibraryPage 
 

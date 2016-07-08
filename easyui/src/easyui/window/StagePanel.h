@@ -1,12 +1,11 @@
 #ifndef _EASYUI_WINDOW_STAGE_PANEL_H_
 #define _EASYUI_WINDOW_STAGE_PANEL_H_
 
+#include "Symbol.h"
 #include "SymbolsCfg.h"
-#include "AnchorMgr.h"
 #include "UIStagePage.h"
-#include "OpenSymbolLsn.h"
 
-#include <ee/SpritesPanelImpl.h>
+#include <ee/MultiSpritesImpl.h>
 #include <ee/CrossGuides.h>
 
 namespace eui
@@ -20,10 +19,11 @@ namespace window
 class SymbolsCfg;
 class ToolbarPanel;
 
-class StagePanel : public UIStagePage, public ee::SpritesPanelImpl
+class StagePanel : public UIStagePage, public ee::MultiSpritesImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* top_pannels);
+	virtual ~StagePanel();
 
 	//
 	// UIStagePage interface
@@ -34,9 +34,15 @@ public:
 	virtual void OnPreview();
 	virtual void OnCode() const;
 
+	//
+	// MultiSpritesImpl interface
+	//
+	virtual void TraverseSprites(ee::Visitor& visitor, 
+		ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
+
 	void InitConfig();
 
-	AnchorMgr* GetAnchorMgr() { return &m_anchor_mgr; }
+	Symbol* GetSymbol() { return m_sym; }
 
 	void SetViewSize(int width, int height);
 
@@ -49,20 +55,19 @@ protected:
 	virtual void OnNotify(int sj_id, void* ud);
 
 private:
+	void InitSubjects();
+
+private:
+	Symbol* m_sym;
+
 	TopPannels* m_top_pannels;
 
 	SymbolsCfg m_symbols_cfg;
-
-	AnchorMgr m_anchor_mgr;
-
-	int m_view_width, m_view_height;
 
 	int m_toolbar_idx;
 	ToolbarPanel* m_toolbar;
 
 	ee::CrossGuides m_guides;
-
-	OpenSymbolLsn m_open_sym_lsn;
 
 }; // StagePanel
 
