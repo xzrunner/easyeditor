@@ -16,6 +16,9 @@ public:
 	virtual void Output(const std::string& dir, Json::Value& value) const;
 
 private:
+	void LoadItems(const Json::Value& value, const std::string& dir);
+
+private:
 	struct Item {
 		std::string name;
 		std::string filepath;
