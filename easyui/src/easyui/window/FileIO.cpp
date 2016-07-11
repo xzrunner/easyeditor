@@ -35,7 +35,7 @@ void FileIO::Store(const char* filepath, const Symbol* sym)
 
 	std::vector<ee::Sprite*> sprites;
 	const_cast<Symbol*>(sym)->GetAnchorMgr().Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	StoreWrapper(filepath, sym->name, sprites);
+	value["wrapper filepath"] = StoreWrapper(filepath, sym->name, sprites);
 
 	StoreRefs(value, sym, dir);
 
@@ -93,7 +93,7 @@ std::string FileIO::StoreWrapper(const std::string& filepath, const std::string&
 	wrapper_complex.name = name;
 	ecomplex::FileStorer::Store(wrapper_path.c_str(), &wrapper_complex);
 
-	return ee::FileHelper::GetRelativePath(dir, wrapper_path);;
+	return ee::FileHelper::GetRelativePath(dir, wrapper_path);
 }
 
 void FileIO::LoadSprites(const Json::Value& val, Symbol* sym, const std::string& dir)
