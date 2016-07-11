@@ -87,8 +87,7 @@ std::string FileIO::StoreWrapper(const std::string& filepath, const std::string&
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		wrapper_complex.Add(sprites[i]);
 	}
-	std::string filename = filepath;
-	filename = name.substr(0, name.find_last_of('_'));
+	std::string filename = filepath.substr(0, filepath.find_last_of('_'));
 	std::string wrapper_path = filename + "_wrapper_complex[gen].json";
 	wrapper_complex.SetFilepath(wrapper_path);
 	wrapper_complex.name = name;
