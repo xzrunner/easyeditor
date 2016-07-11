@@ -51,6 +51,9 @@ private:
 	}; // Anchor
 
 private:
+	Anchor* GetNearestAnchor(const sm::vec2& pos);
+	void Move(ee::Sprite* spr);
+
 	static void ChangeAnchorPos(Anchor& anchor, const sm::vec2& pos);
 
 	static void LoadAnchorData(const std::vector<ee::Sprite*>& sprites,

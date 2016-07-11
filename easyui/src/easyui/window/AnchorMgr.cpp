@@ -94,8 +94,7 @@ void AnchorMgr::OnViewChanged(int width, int height)
 
 void AnchorMgr::OnSprPosChanged(ee::Sprite* spr)
 {
-	Remove(spr);
-	Insert(spr);
+	Move(spr);
 }
 
 void AnchorMgr::DrawSprites(const s2::RenderParams& params) const
@@ -149,23 +148,12 @@ void AnchorMgr::Remove(ee::Sprite* spr)
 
 void AnchorMgr::Insert(ee::Sprite* spr)
 {
-	float nearest = FLT_MAX;
-	int selected = -1;
-	for (int i = 0; i < ANCHOR_COUNT; ++i)
-	{
-		Anchor& anchor = m_anchors[i];
-		float dis = ee::Math2D::GetDistance(anchor.pos, spr->GetPosition());
-		if (dis < nearest) 
-		{
-			nearest = dis;
-			selected = i;
-		}
-	}
+	Anchor* anchor = GetNearestAnchor(spr->GetPosition());
 
-	spr->SetTransform(m_anchors[selected].pos, 0);
+	spr->SetTransform(anchor->pos, 0);
 
 	spr->Retain();
-	m_anchors[selected].sprites.push_back(spr);
+	anchor->sprites.push_back(spr);
 
 	spr->Retain();
 	m_sprites.push_back(spr);
@@ -193,6 +181,29 @@ void AnchorMgr::ResetOrder(ee::Sprite* spr, bool up)
 void AnchorMgr::ResetOrderMost(ee::Sprite* spr, bool up)
 {
 	ee::ObjectVector<ee::Sprite>::ResetOrderMost(m_sprites, spr, up);
+}
+
+AnchorMgr::Anchor* AnchorMgr::GetNearestAnchor(const sm::vec2& pos)
+{
+	float nearest = FLT_MAX;
+	int selected = -1;
+	for (int i = 0; i < ANCHOR_COUNT; ++i)
+	{
+		Anchor& anchor = m_anchors[i];
+		float dis = ee::Math2D::GetDistance(anchor.pos, pos);
+		if (dis < nearest) 
+		{
+			nearest = dis;
+			selected = i;
+		}
+	}
+	return (selected == -1) ? NULL : &m_anchors[selected];
+}
+
+void AnchorMgr::Move(ee::Sprite* spr)
+{
+	Anchor* anchor = GetNearestAnchor(spr->GetPosition());
+	spr->SetTransform(anchor->pos, 0);
 }
 
 void AnchorMgr::ChangeAnchorPos(Anchor& anchor, const sm::vec2& pos)
