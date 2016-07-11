@@ -14,7 +14,9 @@ class StackWalkerToConsole : public StackWalker
 protected:
 	virtual void OnOutput(LPCSTR szText) 
 	{
+		std::locale::global(std::locale(""));		
 		std::ofstream fout("stacktrace.txt", std::ios::app);
+		std::locale::global(std::locale("C"));
 
 		fout << szText << std::endl;
 

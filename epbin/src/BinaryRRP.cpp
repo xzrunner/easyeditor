@@ -66,7 +66,9 @@ void BinaryRRP::Pack(const std::string& outfile, bool compress) const
 // 	delete[] data_buf;
 // 
 // 	// write to file
+//	std::locale::global(std::locale(""));	
 // 	std::ofstream fout(outfile.c_str(), std::ios::binary);
+//	std::locale::global(std::locale("C"));	
 // 	if (compress)
 // 	{
 // 		uint8_t* dst = NULL;
@@ -94,7 +96,9 @@ void BinaryRRP::LoadMulti(const std::string& json_file, const std::string& img_i
 		std::stringstream ss;
 		ss << json_file << i << ".json";
 
+		std::locale::global(std::locale(""));
 		std::ifstream fin(ss.str().c_str(), std::ios::binary);
+		std::locale::global(std::locale("C"));	
 		if (fin.fail()) {
 			break;
 		}

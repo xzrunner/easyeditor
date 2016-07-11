@@ -107,10 +107,10 @@ void UniqueImage::FixImagePath(const std::string& animpath)
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
 	std::ifstream fin(animpath.c_str());
+	std::locale::global(std::locale("C"));	
 	if (fin.fail()) {
 		throw ee::Exception("FixImagePath fin.fail");
 	}
-	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();
 

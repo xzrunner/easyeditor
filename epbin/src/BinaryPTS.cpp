@@ -63,7 +63,9 @@ void BinaryPTS::Pack(const std::string& outfile, bool compress) const
 // 	delete[] data_buf;
 // 
 // 	// write to file
+//	std::locale::global(std::locale(""));	
 // 	std::ofstream fout(outfile.c_str(), std::ios::binary);
+//	std::locale::global(std::locale("C"));	
 // 	if (compress)
 // 	{
 // 		uint8_t* dst = NULL;

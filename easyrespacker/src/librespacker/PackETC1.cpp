@@ -117,7 +117,9 @@ void PackETC1::Clear()
 void PackETC1::LoadCompressed(const std::string& filename, uint8_t*& buf, 
 							   int& width, int& height)
 {
+	std::locale::global(std::locale(""));	
 	std::ifstream fin(filename.c_str(), std::ios::binary);
+	std::locale::global(std::locale("C"));
 
 	PKMHeader header;
 	fin.read(reinterpret_cast<char*>(&header), sizeof(header));

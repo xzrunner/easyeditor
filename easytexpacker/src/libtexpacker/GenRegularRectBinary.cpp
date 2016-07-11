@@ -39,7 +39,9 @@ void GenRegularRectBinary::PackToBinary() const
 	std::string dir = ee::FileHelper::GetFileDir(m_filepath);
 	std::string filepath = dir + "\\pack.rrp";
 
+	std::locale::global(std::locale(""));
 	std::ofstream fout(filepath.c_str(), std::ios::binary);
+	std::locale::global(std::locale("C"));
 	int pic_sz = m_pics.size();
 	fout.write(reinterpret_cast<const char*>(&pic_sz), sizeof(int32_t));
 	for (int i = 0, n = m_pics.size(); i < n; ++i)

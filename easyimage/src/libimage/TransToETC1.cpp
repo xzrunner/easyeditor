@@ -43,14 +43,18 @@ void TransToETC1::OutputFile(const std::string& filepath) const
 {
 	{
 		std::string full_path = filepath + ".pkm";
+		std::locale::global(std::locale(""));
 		std::ofstream fout(full_path.c_str(), std::ios::binary);
+		std::locale::global(std::locale("C"));
 		fout.write(reinterpret_cast<const char*>(&m_header), sizeof(m_header));
 		fout.write(reinterpret_cast<const char*>(m_etc1_pixels), m_etc1_size);
 		fout.close();
 	}
 	{
 		std::string full_path = filepath + "_alpha.pkm";
+		std::locale::global(std::locale(""));
 		std::ofstream fout(full_path.c_str(), std::ios::binary);
+		std::locale::global(std::locale("C"));
 		fout.write(reinterpret_cast<const char*>(&m_header), sizeof(m_header));
 		fout.write(reinterpret_cast<const char*>(m_etc1_alpha_pixels), m_etc1_size);
 		fout.close();

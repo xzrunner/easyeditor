@@ -157,7 +157,9 @@ void RectCutLoader::LoadRRPFile(const std::string& pack_file, int img_id,
 {
 	pictures.clear();
 
+	std::locale::global(std::locale(""));
 	std::ifstream fin(pack_file.c_str(), std::ios::binary);
+	std::locale::global(std::locale("C"));
 
 	int pic_sz = 0;
 	fin.read(reinterpret_cast<char*>(&pic_sz), sizeof(int32_t));

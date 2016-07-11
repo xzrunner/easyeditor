@@ -40,7 +40,9 @@ int NumberImages::Run(int argc, char *argv[])
 
 void NumberImages::Trigger(const std::string& src_dir, const std::string& dst_file)
 {
+	std::locale::global(std::locale(""));	
 	std::ofstream fout(dst_file.c_str());
+	std::locale::global(std::locale("C"));
 
 	wxArrayString files;
 	ee::FileHelper::FetchAllFiles(src_dir, files);

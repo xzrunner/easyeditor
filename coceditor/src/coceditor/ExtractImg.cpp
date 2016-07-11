@@ -23,7 +23,9 @@ namespace coceditor
 // 		};
 // 		std::vector<Item> list[4];
 // 
+//		std::locale::global(std::locale(""));
 // 		std::ifstream fin(path.c_str());
+//		std::locale::global(std::locale("C"));		
 // 		std::string name;
 // 		while (fin >> name)
 // 		{

@@ -63,7 +63,9 @@ void DistanceFieldFont::readFromLuaFile(const char* filename) const
 
 void DistanceFieldFont::test(const char* filename)
 {
+//	std::locale::global(std::locale(""));	
 // 	std::ifstream fin(filename);
+//	std::locale::global(std::locale("C"));	
 // 	std::string str;
 // 	while (getline(fin, str)) {
 // 		std::set<int> unicodes;

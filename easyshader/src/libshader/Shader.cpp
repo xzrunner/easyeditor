@@ -54,7 +54,9 @@ ShaderImpl(const std::string& vert_filepath, const std::string& frag_filepath)
 void Shader::ShaderImpl::
 ReadFromFile(const std::string& filepath, std::string& output)
 {
+	std::locale::global(std::locale(""));	
 	std::ifstream fin(filepath.c_str());
+	std::locale::global(std::locale("C"));
 
 	std::stringstream buffer;
 	buffer << fin.rdbuf();

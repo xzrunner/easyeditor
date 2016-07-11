@@ -37,7 +37,9 @@ void BlockCompress::Compress()
 
 	PrintStatistics();
 
+	std::locale::global(std::locale(""));
 	std::ofstream fout("block_compress.txt");
+	std::locale::global(std::locale("C"));
 	float used = static_cast<float>(m_used_block * 16);
 	fout << used / m_tot_area << " " << used / (m_tot_block * 16) << std::endl;
 	fout.close();

@@ -76,7 +76,9 @@ const char* RotateTrimImage::GetOutputFileName()
 void RotateTrimImage::RotateTrim(ee::Snapshoot& ss, const std::string& dir)
 {
 	std::string output_file = dir + "\\" + OUTPUT_FILE;
+	std::locale::global(std::locale(""));	
 	std::ofstream fout(output_file.c_str(), std::ios::binary);
+	std::locale::global(std::locale("C"));	
 	if (fout.fail()) {
 		std::cout << "Can't open output file. \n";
 		return;

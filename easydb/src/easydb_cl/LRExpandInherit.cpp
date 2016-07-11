@@ -79,8 +79,8 @@ void LRExpandInherit::ExtendLayer(const std::string& dir, const std::string& fil
 {
 	Json::Value lr_val;
 	Json::Reader reader;
-	std::locale::global(std::locale(""));
 	std::string full_path = ee::FileHelper::GetAbsolutePath(dir, filepath);
+	std::locale::global(std::locale(""));
 	std::ifstream fin(full_path.c_str());
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, lr_val);

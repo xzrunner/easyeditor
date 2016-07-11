@@ -34,7 +34,9 @@ void ImageIDer::Load(const std::string& filepath)
 {
 	std::string dir = get_file_dir(filepath);
 
+	std::locale::global(std::locale(""));
 	std::ifstream fin(filepath.c_str());
+	std::locale::global(std::locale("C"));
 	std::string line;
 	int id = 1;
 	while (std::getline(fin, line)) {

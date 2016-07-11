@@ -99,7 +99,9 @@ bool FixRotateTrimJson::FixSprite(const std::string& filepath, Json::Value& spri
 void FixRotateTrimJson::LoadTrimInfo(const std::string& dir)
 {
 	std::string trim_file = dir + "\\" + RotateTrimImage::GetOutputFileName();
+	std::locale::global(std::locale(""));	
 	std::ifstream fin(trim_file.c_str(), std::ios::binary);
+	std::locale::global(std::locale("C"));
 	if (!fin) {
 		std::cout << "Can't open trim file. \n";
 		return;

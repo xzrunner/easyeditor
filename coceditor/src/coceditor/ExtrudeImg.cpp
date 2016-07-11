@@ -36,7 +36,9 @@ std::string ExtrudeImg::GetFileName() const
 
 void ExtrudeImg::Load()
 {
+	std::locale::global(std::locale(""));
 	std::ifstream fin(_filename.c_str(), std::ios::binary);
+	std::locale::global(std::locale("C"));
 	assert(!fin.fail());
 
 	// get length of file:

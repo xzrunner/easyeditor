@@ -21,7 +21,9 @@ ModelObj::ModelObj(const char* filename, float scale /*= 1.0f*/)
 
 void ModelObj::Import(const char* filename)
 {
+	std::locale::global(std::locale(""));
 	std::ifstream fin(filename);
+	std::locale::global(std::locale("C"));
 	assert(fin);
 
 	while (fin) {
@@ -167,7 +169,9 @@ void ModelObj::InitAllMeshes()
 
 void ModelObj::HandleMaterial(const char* filename)
 {
+	std::locale::global(std::locale(""));
 	std::ifstream fin(filename);
+	std::locale::global(std::locale("C"));
 	assert(fin);
 
 	MaterialInfo material;
