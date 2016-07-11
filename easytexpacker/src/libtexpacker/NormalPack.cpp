@@ -224,11 +224,15 @@ void NormalPack::Pack(PACK_STRATEGY strategy, int static_size, int max_size, int
 
 		RectSize sz;
 		ee::LibpngAdapter::ReadHeader(path.c_str(), sz.width, sz.height);
+		if (sz.width > max_size || sz.height > max_size) {
+			throw ee::Exception("NormalPack::Pack no sapce file: %s, src_sz: %d %d, dst_sz: %d\n", 
+				m_filepaths[i].c_str(), sz.width, sz.height, max_size);
+		}
 
 		if (m_trim_info) {
 			const ImageTrimData::Trim* t = m_trim_info->Query(m_filepaths[i]);
 			if (!t) {
-				throw ee::Exception("NormalPack::OutputInfo didn't find trim_info info: %s\n", m_filepaths[i]);
+				throw ee::Exception("NormalPack::Pack didn't find trim_info info: %s\n", m_filepaths[i]);
 			}
 			int e_left, e_right, e_bottom, e_up;
 			assert(t->w == sz.width && t->h == sz.height);
