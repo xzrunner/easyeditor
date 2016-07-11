@@ -72,7 +72,7 @@ ImageSymbol::ImageSymbol(Image* image, const std::string& filename)
 
 ImageSymbol::~ImageSymbol()
 {
-	delete m_core;
+	m_core->RemoveReference();
 
 	if (m_bitmap) {
 		m_bitmap->Release();

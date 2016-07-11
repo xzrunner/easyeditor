@@ -5,7 +5,7 @@
 
 #include <vector>
 
-namespace etexpacker { class ImageTrimData; }
+namespace etexpacker { class ImageTrimData; class NormalPack; }
 
 namespace edb
 {
@@ -23,6 +23,11 @@ public:
 	virtual std::string Usage() const;
 	virtual int Run(int argc, char *argv[]);
 
+	void Pack(const std::string& str_val);
+
+	static void CompressPackedTex(const etexpacker::NormalPack& tp, int start_id,
+		const std::string& file, const std::string& fmt, bool fast);
+	
 	static ICommand* Create() { return new PackTexture(); }
 
 private:

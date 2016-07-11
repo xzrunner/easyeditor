@@ -110,45 +110,49 @@ void LRPacker::PackEP(const std::string& tmp_dir, const std::string& tmp_lr_file
 	pkg_val["name"] = lr_name + "_scene";
 
 	int idx = 0;
-	pkg_val["json list"][idx] = lr_name + "_base_complex.json";
+	pkg_val["src"][idx] = lr_name + "_base_complex.json";
 	++idx;
-	pkg_val["json list"][idx] = lr_name + "_top_complex.json";
+	pkg_val["src"][idx] = lr_name + "_top_complex.json";
 	++idx;
 	{
 		int i = 0;
 		std::string filename = "name_" + ee::StringHelper::ToString(i) + "_complex.json";
 		std::string dir = ee::FileHelper::GetFileDir(tmp_lr_file);
 		while (ee::FileHelper::IsFileExist(dir + "\\" + filename)) {
-			pkg_val["json list"][idx++] = filename;
+			pkg_val["src"][idx++] = filename;
 			++i;
 			filename = "name_" + ee::StringHelper::ToString(i) + "_complex.json";
 		}
 	}
 
-	// 		int idx = 0;
-	// 		pkg_val["json list"][idx] = ".";
-
 	std::string _out_dir = ee::FileHelper::GetRelativePath(tmp_dir, out_dir);
-	pkg_val["output dir"] = _out_dir;
-
-	pkg_val["texture type"] = "png";
-	pkg_val["tp extrude"] = 4;
-
 	pkg_val["LOD"] = LOD;
 
 	idx = 0;
+	// png
+	pkg_val["dst"] = _out_dir + "\\png";
+	pkg_val["format"] = "png";
+	pkg_val["extrude"] = 1;
+	pkg_val["fast"] = true;
 	val["packages"][idx] = pkg_val;
-
-	std::string cfg_file = tmp_dir + "\\config.json";
-	Json::StyledStreamWriter writer;
-	std::locale::global(std::locale(""));
-	std::ofstream fout(cfg_file.c_str());
-	std::locale::global(std::locale("C"));
-	writer.write(fout, val);
-	fout.close();
-
-	PackRes pack;
-	pack.Trigger(cfg_file);
+	PackRes pack_png;
+	pack_png.Trigger(val.toStyledString(), tmp_dir);
+	// pvr
+	pkg_val["dst"] = _out_dir + "\\pvr";
+	pkg_val["format"] = "pvr";
+	pkg_val["extrude"] = 4;
+	pkg_val["fast"] = true;
+	val["packages"][idx] = pkg_val;
+	PackRes pack_pvr;
+	pack_pvr.Trigger(val.toStyledString(), tmp_dir);
+	// etc2
+	pkg_val["dst"] = _out_dir + "\\etc2";
+	pkg_val["format"] = "etc2";
+	pkg_val["extrude"] = 1;
+	pkg_val["fast"] = true;
+	val["packages"][idx] = pkg_val;
+	PackRes pack_etc2;
+	pack_etc2.Trigger(val.toStyledString(), tmp_dir);
 }
 
 }

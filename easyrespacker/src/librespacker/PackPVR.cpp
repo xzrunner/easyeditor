@@ -122,7 +122,9 @@ void PackPVR::Load(const std::string& filepath)
 {
 	Clear();
 
+	std::locale::global(std::locale(""));
 	std::ifstream fin(filepath.c_str(), std::ios::binary);
+	std::locale::global(std::locale("C"));
 	
 	PVRTexHeader header;
 	uint8_t* bytes = NULL;

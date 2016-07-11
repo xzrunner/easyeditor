@@ -72,6 +72,8 @@ public:
 	const TextBuilder* GetTextBuilder() const { return m_text_builder; }
 	TextBuilder* GetTextBuilder() { return m_text_builder; }
 
+	void Release();
+
 	static PackNodeFactory* Instance();
 
 private:

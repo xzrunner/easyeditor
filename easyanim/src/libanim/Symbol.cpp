@@ -22,7 +22,6 @@ Symbol::Symbol()
 	, m_init_time(0)
 	, m_loop(true)
 {
-	this->Retain();
 	m_core = new s2::AnimSymbol(this);
 
 	static int id = 0;
@@ -31,8 +30,7 @@ Symbol::Symbol()
 
 Symbol::~Symbol()
 {
-	this->Release();
-	delete m_core;
+	m_core->RemoveReference();
 
 	Clear();
 }

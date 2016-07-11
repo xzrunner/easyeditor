@@ -16,6 +16,8 @@ public:
 
 	const std::map<std::string, int>& GetData() const { return m_map; }
 
+	void Clear() { m_map.clear(); }
+
 private:
 	std::map<std::string, int> m_map;
 

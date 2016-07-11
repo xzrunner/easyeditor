@@ -48,11 +48,7 @@ int PackTexture::Run(int argc, char *argv[])
 	// one param
 	if (argc == 3) 
 	{
-		std::vector<Package> packages;
-		std::string src_dir, dst_file;
-		etexpacker::ImageTrimData* trim = PreparePackages(argv[2], packages, src_dir, dst_file);
-		Pack(packages, src_dir, dst_file);
-		delete trim;
+		Pack(argv[2]);
 	}
 	// multi params
 	else 
@@ -88,6 +84,15 @@ int PackTexture::Run(int argc, char *argv[])
 	return 0;
 }
 
+void PackTexture::Pack(const std::string& str_val)
+{
+	std::vector<Package> packages;
+	std::string src_dir, dst_file;
+	etexpacker::ImageTrimData* trim = PreparePackages(str_val, packages, src_dir, dst_file);
+	Pack(packages, src_dir, dst_file);
+	delete trim;
+}
+
 void PackTexture::Pack(const std::vector<Package>& packages, const std::string& src_dir, const std::string& dst_file)
 {
 	std::string dst_dir = ee::FileHelper::GetFileDir(dst_file);
@@ -103,6 +108,62 @@ void PackTexture::Pack(const std::vector<Package>& packages, const std::string& 
 	}
 
 	sd.open_image_edge_clip = ori_cfg;
+}
+
+void PackTexture::CompressPackedTex(const etexpacker::NormalPack& tp, int start_id,
+									const std::string& file, const std::string& fmt, bool fast)
+{
+	int begin = start_id;
+	start_id += tp.DstTexCount();
+	int end = start_id;
+	if (fmt == "pvr") 
+	{
+		for (int i = begin; i < end; ++i) 
+		{
+			std::string src = file + ee::StringHelper::ToString(i) + ".png";
+			std::string dst = file + ee::StringHelper::ToString(i) + ".pvr";
+
+			int w, h, c, f;
+			uint8_t* pixels = ee::LibpngAdapter::Read(src.c_str(), w, h, c, f);
+			eimage::TransToPVR trans(pixels, w, h, c, false, fast);
+			delete[] pixels;
+
+			trans.OutputFile(dst);
+			wxRemoveFile(src);
+		}
+	}
+	else if (fmt == "etc1")
+	{
+		for (int i = begin; i < end; ++i) 
+		{
+			std::string src = file + ee::StringHelper::ToString(i) + ".png";
+			std::string dst = file + ee::StringHelper::ToString(i);
+
+			int w, h, c, f;
+			uint8_t* pixels = ee::LibpngAdapter::Read(src.c_str(), w, h, c, f);
+			eimage::TransToETC1 trans(pixels, w, h, c, false, fast);
+			delete[] pixels;
+
+			trans.OutputFile(dst);
+			wxRemoveFile(src);
+		}
+	}
+	else if (fmt == "etc2")
+	{
+		for (int i = begin; i < end; ++i) 
+		{
+			std::string src = file + ee::StringHelper::ToString(i) + ".png";
+			std::string dst = file + ee::StringHelper::ToString(i) + ".pkm";
+
+			int w, h, c, f;
+			uint8_t* pixels = ee::LibpngAdapter::Read(src.c_str(), w, h, c, f);
+			eimage::TransToETC2 trans(pixels, w, h, c, eimage::TransToETC2::RGBA, false, fast);
+			delete[] pixels;
+
+			trans.OutputFile(dst);
+			wxRemoveFile(src);
+		}
+	}
 }
 
 etexpacker::ImageTrimData* PackTexture::PreparePackages(const std::string& str, std::vector<Package>& packages, 
@@ -194,55 +255,8 @@ void PackTexture::PackPackage(const Package& pkg, const std::string& src_dir,
 	tex_packer.Pack(0, pkg.size_max, pkg.size_min);
 	tex_packer.OutputInfo(src_dir, dst_file + ".json", pkg.format);
 	tex_packer.OutputImage(dst_file + ".png");
-	int begin = start_id;
-	start_id += tex_packer.DstTexCount();
-	int end = start_id;
-	
-	if (pkg.format == "pvr") 
-	{
-		for (int i = begin; i < end; ++i) 
-		{
-			std::string src = dst_file + ee::StringHelper::ToString(i) + ".png";
-			std::string dst = dst_file + ee::StringHelper::ToString(i) + ".pvr";
 
-			int w, h, c, f;
-			uint8_t* pixels = ee::LibpngAdapter::Read(src.c_str(), w, h, c, f);
-			eimage::TransToPVR trans(pixels, w, h, c, false, pkg.quality == "fastest");
-
-			trans.OutputFile(dst);
-			wxRemoveFile(src);
-		}
-	}
-	else if (pkg.format == "etc1")
-	{
-		for (int i = begin; i < end; ++i) 
-		{
-			std::string src = dst_file + ee::StringHelper::ToString(i) + ".png";
-			std::string dst = dst_file + ee::StringHelper::ToString(i);
-
-			int w, h, c, f;
-			uint8_t* pixels = ee::LibpngAdapter::Read(src.c_str(), w, h, c, f);
-			eimage::TransToETC1 trans(pixels, w, h, c, false, pkg.quality == "fastest");
-
-			trans.OutputFile(dst);
-			wxRemoveFile(src);
-		}
-	}
-	else if (pkg.format == "etc2")
-	{
-		for (int i = begin; i < end; ++i) 
-		{
-			std::string src = dst_file + ee::StringHelper::ToString(i) + ".png";
-			std::string dst = dst_file + ee::StringHelper::ToString(i) + ".pkm";
-
-			int w, h, c, f;
-			uint8_t* pixels = ee::LibpngAdapter::Read(src.c_str(), w, h, c, f);
-			eimage::TransToETC2 trans(pixels, w, h, c, eimage::TransToETC2::RGBA, false, pkg.quality == "fastest");
-
-			trans.OutputFile(dst);
-			wxRemoveFile(src);
-		}
-	}
+	CompressPackedTex(tex_packer, start_id, dst_file, pkg.format, pkg.quality == "fastest");
 }
 
 }

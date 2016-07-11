@@ -36,7 +36,9 @@ TransToETC2::~TransToETC2()
 
 void TransToETC2::OutputFile(const std::string& filepath) const
 {
+	std::locale::global(std::locale(""));
 	std::ofstream fout(filepath.c_str(), std::ios::binary);
+	std::locale::global(std::locale("C"));
 	OutputHeader(fout);
 	fout.write(reinterpret_cast<const char*>(m_compressed), m_size);
 	fout.close();

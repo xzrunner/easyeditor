@@ -27,14 +27,12 @@ public:
 
 	static ICommand* Create() { return new PackRes(); }
 
-	void Trigger(const std::string& config_path);
+	void Trigger(const std::string& str_val, const std::string& dir);
 
 private:
 	void Prepare(const Json::Value& pkg_val, const std::string& config_dir);
 
-	void PackTexture(const Json::Value& pkg_val, const std::string& config_dir,
-		const etexpacker::ImageTrimData* trim) const;
-	void CompressTexture(const std::string& filepath, const std::string& type) const;
+	void PackTexture(const Json::Value& pkg_val, const std::string& config_dir) const;
 	void GetAllImages(const Json::Value& pkg_val, const std::string& config_dir,
 		std::vector<std::string>& images) const;
 	void GetImagesFromCfg(const Json::Value& pkg_val, const std::string& config_dir,

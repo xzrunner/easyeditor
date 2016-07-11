@@ -57,7 +57,7 @@ Sprite::Sprite(Symbol* symbol)
 
 Sprite::~Sprite()
 {
-	delete m_core; m_core = NULL;
+	m_core->RemoveReference();
 	if (m_base) {
 		m_base->Release();
 	}

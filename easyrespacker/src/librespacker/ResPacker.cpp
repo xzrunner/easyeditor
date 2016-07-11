@@ -51,6 +51,12 @@ ResPacker::ResPacker(const std::string& json_dir, const std::string& tp_name,
 	data.load_image = old_cfg;
 }
 
+ResPacker::~ResPacker()
+{
+	for_each(m_symbols.begin(), m_symbols.end(), ee::ReleaseObjectFunctor<const ee::Symbol>());
+	PackNodeFactory::Instance()->Release();
+}
+
 void ResPacker::OutputLua(const std::string& outfile, float scale) const
 {
 	PackToLuaString::Pack(outfile, m_tp, scale);

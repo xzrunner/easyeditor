@@ -21,6 +21,7 @@ public:
 		const std::string& tp_dir);
 // 	ResPacker(const std::string& json_dir, const std::string& tp_name, 
 // 		const std::string& tp_dir, const std::string& pkgs_cfg_file);
+	~ResPacker();
 	
 	void OutputLua(const std::string& outfile, float scale = 1) const;
 

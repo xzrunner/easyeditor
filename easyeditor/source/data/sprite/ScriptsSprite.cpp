@@ -24,7 +24,7 @@ ScriptsSprite::ScriptsSprite(ScriptsSymbol* symbol)
 
 ScriptsSprite::~ScriptsSprite()
 {
-	delete m_core; m_core = NULL;
+	m_core->RemoveReference();
 
 	if (m_symbol) {
 		m_symbol->Release();

@@ -5,6 +5,7 @@
 #include <ee/Exception.h>
 #include <ee/FileHelper.h>
 #include <ee/FetchAllVisitor.h>
+#include <ee/std_functor.h>
 
 // picture
 #include "ImageBuilder.h"
@@ -240,6 +241,14 @@ void PackNodeFactory::GetAllNodes(std::vector<IPackNode*>& nodes) const
 	for (int i = 0, n = m_builders.size(); i < n; ++i) {
 		m_builders[i]->Traverse(ee::FetchAllVisitor<IPackNode>(nodes));
 	}
+}
+
+void PackNodeFactory::Release()
+{
+	m_files_dir = "";
+	m_export_set.Clear();
+	for_each(m_builders.begin(), m_builders.end(), ee::DeletePointerFunctor<INodeBuilder>());
+	m_instance = NULL;
 }
 
 PackNodeFactory* PackNodeFactory::Instance()

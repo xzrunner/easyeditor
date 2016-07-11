@@ -20,6 +20,7 @@ TextureImgData::~TextureImgData()
 	}
 
 	if (m_img_data) {
+		ImageDataMgr::Instance()->RemoveItem(m_img_data->GetFilepath());
 		m_img_data->Release();
 	}
 }

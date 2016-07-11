@@ -41,7 +41,9 @@ void PackETC2::Load(const std::string& filepath)
 {
 	Clear();
 
+	std::locale::global(std::locale(""));
 	std::ifstream fin(filepath.c_str(), std::ios::binary);
+	std::locale::global(std::locale("C"));
 
 	PKMHeader header;
 	fin.read(reinterpret_cast<char*>(&header), sizeof(header));

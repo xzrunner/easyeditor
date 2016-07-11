@@ -29,7 +29,6 @@ Symbol::Symbol()
 	, m_render_version(0)
 	, m_render_cache_open(true)
 {
-	this->Retain();
 	m_core = new s2::ComplexSymbol(this);
 
 	static int id = 0;
@@ -45,16 +44,13 @@ Symbol::Symbol(const Symbol& sym)
 	, m_render_version(sym.m_render_version)
 	, m_render_cache_open(sym.m_render_cache_open)
 {
-	this->Retain();
 	m_core = new s2::ComplexSymbol(*sym.m_core);
 }
 
 Symbol::~Symbol()
 {
 	Clear();
-
-	this->Release();
-	delete m_core;
+	m_core->RemoveReference();
 }
 
 void Symbol::Retain() const
@@ -250,15 +246,12 @@ bool Symbol::Remove(ee::Sprite* spr)
 
 bool Symbol::Clear()
 {
-	bool ret = m_core->Clear();
-	if (ret) {
-		const std::vector<s2::Sprite*>& children = m_core->GetChildren();
-		for (int i = 0, n = children.size(); i < n; ++i) {
-			ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
-			child->Release();
-		}
+	const std::vector<s2::Sprite*>& children = m_core->GetChildren();
+	for (int i = 0, n = children.size(); i < n; ++i) {
+		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+		child->Release();
 	}
-	return ret;
+	return m_core->Clear();
 }
 
 bool Symbol::ResetOrder(const ee::Sprite* spr, bool up)

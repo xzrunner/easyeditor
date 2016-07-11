@@ -38,6 +38,8 @@ Bitmap::~Bitmap()
 
 bool Bitmap::LoadFromFile(const std::string& filepath)
 {
+	m_filename = filepath;
+
 	if (!Config::Instance()->GetSettings().load_image) {
 		return true;
 	}
@@ -46,7 +48,6 @@ bool Bitmap::LoadFromFile(const std::string& filepath)
 		throw Exception("File: %s don't exist!", filepath.c_str());
 	}
 
-	m_filename = filepath;
 	const GLubyte* test = glGetString(GL_VERSION);
 	if (!test) {
 		return true;

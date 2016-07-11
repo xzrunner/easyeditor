@@ -37,7 +37,9 @@ TransToPVR::~TransToPVR()
 
 void TransToPVR::OutputFile(const std::string& filepath) const
 {
+	std::locale::global(std::locale(""));
 	std::ofstream fout(filepath.c_str(), std::ios::binary);
+	std::locale::global(std::locale("C"));
 	fout.write(reinterpret_cast<const char*>(&m_header), sizeof(m_header));
 	fout.write(reinterpret_cast<const char*>(m_pvr_pixels), m_pvr_size);
 	fout.close();
