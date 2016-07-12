@@ -68,9 +68,14 @@ inline void ResourcesMgr<T>::RemoveItem(const std::string& filename)
 template<class T>
 inline void ResourcesMgr<T>::Clear()
 {
+	std::vector<T*> items;
 	std::map<std::string, T*>::iterator itr = m_items.begin();
-	for ( ; itr != m_items.end(); ++itr)
-		delete itr->second;
+	for ( ; itr != m_items.end(); ++itr) {
+		items.push_back(itr->second);
+	}
+	for (int i = 0, n = items.size(); i < n; ++i) {
+		delete items[i];
+	}
 	m_items.clear();
 }
 
