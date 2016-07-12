@@ -5,6 +5,7 @@
 #include <ee/FileHelper.h>
 #include <ee/std_functor.h>
 #include <ee/StringHelper.h>
+#include <ee/Exception.h>
 
 #include <algorithm>
 
@@ -23,6 +24,7 @@ PackUIWindowTask::PackUIWindowTask(const std::string& filepath, const Json::Valu
 	m_wrapper_filepath = value["wrapper filepath"].asString();
 	m_wrapper_filepath = ee::FileHelper::GetAbsolutePathFromFile(filepath, m_wrapper_filepath);
 	m_wrapper_filepath = ee::FileHelper::FormatFilepathAbsolute(m_wrapper_filepath);
+
 	PackUI::Instance()->Instance()->AddListener(m_wrapper_filepath, this);
 
 	LoadItems(value, ee::FileHelper::GetFileDir(filepath));
@@ -50,6 +52,10 @@ void PackUIWindowTask::OnKnownPackID(const std::string& filepath, int id)
 
 void PackUIWindowTask::Output(const std::string& dir, Json::Value& value) const
 {
+	if (m_wrapper_id == -1) {
+		throw ee::Exception("PackUIWindowTask::Output out id -1, wrapper_file %s", m_wrapper_filepath.c_str());
+	}
+
 	Json::Value val;
 
 	val["type"] = UI_WINDOW;
