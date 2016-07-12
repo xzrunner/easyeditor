@@ -1,4 +1,5 @@
 #include "UIList.h"
+#include "widget_id.h"
 
 #include <ee/FileHelper.h>
 #include <ee/Visitor.h>

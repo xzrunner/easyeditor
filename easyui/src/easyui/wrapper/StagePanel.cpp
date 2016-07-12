@@ -5,6 +5,7 @@
 #include "TopPannels.h"
 #include "TopLibraryPanel.h"
 #include "TopToolbarPanel.h"
+#include "widget_id.h"
 
 #include <ee/wrap_StagePanel.h>
 #include <ee/FileHelper.h>
