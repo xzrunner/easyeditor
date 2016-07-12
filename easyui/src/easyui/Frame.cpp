@@ -17,6 +17,11 @@ Frame::Frame(const std::string& title, const std::string& filetag)
 	m_code_menu->Append(ID_CODE, wxT("Info\tCtrl+I"), wxT("Info"));
 }
 
+void Frame::SetFileFilter(const std::string& filter)
+{
+	m_filetag = filter;
+}
+
 void Frame::OnPreview(wxCommandEvent& event)
 {
 	static_cast<Task*>(m_task)->GetSelectedStagePage()->OnPreview();

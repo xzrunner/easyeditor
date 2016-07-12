@@ -10,13 +10,14 @@
 namespace eui
 {
 
+class Frame;
 class TopPannels;
 class UIStagePage;
 
 class TopStagePanel : public wxPanel
 {
 public:
-	TopStagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* top_pannels);
+	TopStagePanel(wxWindow* parent, Frame* frame, TopPannels* top_pannels);
 
 	UIStagePage* GetSelectedPage();
 
@@ -28,7 +29,7 @@ private:
 	void OnPageChanged(wxNotebookEvent& event);
 
 private:
-	wxTopLevelWindow* m_frame;
+	Frame* m_frame;
 
 	TopPannels* m_top_pannels;
 

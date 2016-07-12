@@ -1,5 +1,4 @@
 #include "FileIO.h"
-#include "widget_id.h"
 #include "Symbol.h"
 #include "Sprite.h"
 #include "ChangeWindowViewSizeSJ.h"
@@ -25,7 +24,6 @@ void FileIO::Store(const char* filepath, const Symbol* sym)
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath) + "\\";
 
-	value["type"] = get_widget_desc(ID_WINDOW);
 	value["name"] = sym->name;
 
 	sym->GetAnchorMgr().StoreToFile(value, dir);
@@ -33,9 +31,9 @@ void FileIO::Store(const char* filepath, const Symbol* sym)
 	value["view"]["width"] = sym->GetWidth();
 	value["view"]["height"] = sym->GetHeight();
 
-	std::vector<ee::Sprite*> sprites;
-	const_cast<Symbol*>(sym)->GetAnchorMgr().Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	value["wrapper filepath"] = StoreWrapper(filepath, sym->name, sprites);
+// 	std::vector<ee::Sprite*> sprites;
+// 	const_cast<Symbol*>(sym)->GetAnchorMgr().Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
+// 	value["wrapper filepath"] = StoreWrapper(filepath, sym->name, sprites);
 
 	StoreRefs(value, sym, dir);
 
@@ -56,11 +54,6 @@ void FileIO::Load(const char* filepath, Symbol* sym)
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();
-
-	std::string type = value["type"].asString();
-	if (!type.empty() && !is_widget(type, ID_WINDOW)) {
-		return;
-	}
 
 	sym->name = value["name"].asString();
 

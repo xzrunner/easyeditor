@@ -3,9 +3,7 @@
 #include "Task.h"
 #include "config.h"
 
-#include "window/Symbol.h"
-#include "window/Sprite.h"
-
+#include <easyui.h>
 #include <easycomplex.h>
 #include <easyanim.h>
 #include <easyscale9.h>
@@ -20,6 +18,7 @@
 
 #include <ee/SymbolFactory.h>
 #include <ee/SpriteFactory.h>
+#include <ee/FileType.h>
 
 IMPLEMENT_APP(MyApp)
 
@@ -58,15 +57,17 @@ static void InitSymbolCreators()
 	ee::SymbolFactory::RegisterCreator(etexture::FILE_TAG, &etexture::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(etexture::FILE_TAG, &etexture::Sprite::Create);
 
-	ee::SymbolFactory::RegisterCreator(eui::FILE_TAG, &eui::window::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(eui::FILE_TAG, &eui::window::Sprite::Create);
+	std::string type = ee::FileType::GetTag(ee::FileType::e_uiwnd);
+	ee::SymbolFactory::RegisterCreator(type, &eui::window::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(type, &eui::window::Sprite::Create);
 }
 
 bool MyApp::OnInit()
 {
 	InitSymbolCreators();
 
-	eui::Frame* frame = new eui::Frame("EasyUI", eui::FILE_TAG);
+	std::string type = ee::FileType::GetTag(ee::FileType::e_uiwnd);
+	eui::Frame* frame = new eui::Frame("EasyUI", type);
 	eui::Task* task = new eui::Task(frame);
 	frame->SetTask(task);
 	frame->Show(true);

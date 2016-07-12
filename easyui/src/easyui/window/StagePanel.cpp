@@ -5,13 +5,9 @@
 #include "TopLibraryPanel.h"
 #include "ToolbarPanel.h"
 #include "TopToolbarPanel.h"
-#include "message_id.h"
-#include "QueryWindowViewSizeSJ.h"
 #include "PreviewDialog.h"
 #include "Code.h"
 #include "SymbolCfg.h"
-#include "FileIO.h"
-#include "Sprite.h"
 #include "SpriteDropTarget.h"
 
 #include <ee/ArrangeSpriteOP.h>
@@ -23,6 +19,7 @@
 #include <ee/SpriteDropTarget.h>
 #include <ee/ViewlistPanel.h>
 
+#include <easyui.h>
 #include <easycomplex.h>
 #include <easybuilder.h>
 

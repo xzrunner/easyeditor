@@ -12,6 +12,7 @@
 #include <ee/std_functor.h>
 #include <ee/panel_msg.h>
 
+#include <easyui.h>
 #include <easycomplex.h>
 
 namespace eui

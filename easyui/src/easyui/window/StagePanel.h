@@ -1,7 +1,6 @@
 #ifndef _EASYUI_WINDOW_STAGE_PANEL_H_
 #define _EASYUI_WINDOW_STAGE_PANEL_H_
 
-#include "Symbol.h"
 #include "SymbolsCfg.h"
 #include "UIStagePage.h"
 
@@ -16,6 +15,7 @@ class TopPannels;
 namespace window
 {
 
+class Symbol;
 class SymbolsCfg;
 class ToolbarPanel;
 

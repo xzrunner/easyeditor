@@ -11,6 +11,8 @@ class Frame : public ee::Frame
 public:
 	Frame(const std::string& title, const std::string& filetag);
 
+	void SetFileFilter(const std::string& filter);
+
 private:
 	void OnPreview(wxCommandEvent& event);
 	void OnCode(wxCommandEvent& event);

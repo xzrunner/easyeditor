@@ -1,7 +1,6 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
 #include "TidCfg.h"
-#include "QueryWindowViewSizeSJ.h"
 
 #include <ee/DrawSpritesVisitor.h>
 #include <ee/Camera.h>
@@ -12,6 +11,8 @@
 #include <ee/color_config.h>
 
 #include <sprite2/RenderParams.h>
+
+#include <easyui.h>
 
 namespace eui
 {

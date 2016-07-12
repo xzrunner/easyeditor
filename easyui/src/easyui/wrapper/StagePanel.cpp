@@ -5,7 +5,6 @@
 #include "TopPannels.h"
 #include "TopLibraryPanel.h"
 #include "TopToolbarPanel.h"
-#include "widget_id.h"
 
 #include <ee/wrap_StagePanel.h>
 #include <ee/FileHelper.h>
@@ -14,6 +13,7 @@
 #include <ee/SpriteSelection.h>
 #include <ee/FetchAllVisitor.h>
 
+#include <easyui.h>
 #include <easycomplex.h>
 
 #include <sprite2/S2_Sprite.h>

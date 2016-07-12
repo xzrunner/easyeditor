@@ -1,5 +1,6 @@
 #include "PreviewCanvas.h"
-#include "QueryWindowViewSizeSJ.h"
+
+#include <easyui.h>
 
 #include <ee/Sprite.h>
 #include <ee/SpriteRenderer.h>

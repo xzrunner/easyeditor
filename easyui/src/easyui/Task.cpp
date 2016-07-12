@@ -3,6 +3,7 @@
 #include "TopStagePanel.h"
 #include "TopLibraryPanel.h"
 #include "TopToolbarPanel.h"
+#include "Frame.h"
 
 #include <ee/SymbolMgr.h>
 #include <ee/Bitmap.h>
@@ -12,9 +13,9 @@
 namespace eui
 {
 
-Task::Task(wxFrame* parent)
+Task::Task(Frame* frame)
 	: m_root(NULL)
-	, m_parent(parent)
+	, m_frame(frame)
 {
 	InitLayout();
 }
@@ -49,7 +50,7 @@ UIStagePage* Task::GetSelectedStagePage()
 
 void Task::InitLayout()
 {
-	wxSplitterWindow* right_split = new wxSplitterWindow(m_parent);
+	wxSplitterWindow* right_split = new wxSplitterWindow(m_frame);
 	wxSplitterWindow* left_split = new wxSplitterWindow(right_split);
 
 	wxWindow* right = InitLayoutRight(right_split);
@@ -80,7 +81,7 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 
 wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
-	m_top_pannels.stage = new TopStagePanel(parent, m_parent, &m_top_pannels);
+	m_top_pannels.stage = new TopStagePanel(parent, m_frame, &m_top_pannels);
 	return m_top_pannels.stage;
 }
 

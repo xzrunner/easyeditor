@@ -1,10 +1,10 @@
 #include "TranslateSpriteState.h"
-#include "AnchorMgr.h"
 #include "StagePanel.h"
-#include "Sprite.h"
 
 #include <ee/SpriteSelection.h>
 #include <ee/panel_msg.h>
+
+#include <easyui.h>
 
 namespace eui
 {

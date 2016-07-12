@@ -2,6 +2,7 @@
 #include "TopLibraryPanel.h"
 #include "TopPannels.h"
 #include "TopToolbarPanel.h"
+#include "Frame.h"
 
 #include "window/StagePanel.h"
 #include "list/StagePanel.h"
@@ -9,6 +10,7 @@
 
 #include <ee/StageCanvas.h>
 #include <ee/EditPanelImpl.h>
+#include <ee/FileType.h>
 
 namespace eui
 {
@@ -18,7 +20,7 @@ BEGIN_EVENT_TABLE(TopStagePanel, wxPanel)
 	EVT_NOTEBOOK_PAGE_CHANGED(wxID_ANY, TopStagePanel::OnPageChanged)
 END_EVENT_TABLE()
 
-TopStagePanel::TopStagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* top_pannels)
+TopStagePanel::TopStagePanel(wxWindow* parent, Frame* frame, TopPannels* top_pannels)
 	: wxPanel(parent)
 	, m_frame(frame)
 	, m_top_pannels(top_pannels)
@@ -83,8 +85,15 @@ void TopStagePanel::OnPageChanging(wxNotebookEvent& event)
 
 void TopStagePanel::OnPageChanged(wxNotebookEvent& event)
 {
-	m_pages[m_notebook->GetSelection()]->EnablePage(true);
+	int idx = m_notebook->GetSelection();
+	m_pages[idx]->EnablePage(true);
 	m_top_pannels->library->Layout();
+
+	if (idx == 0) {
+		m_frame->SetFileFilter(ee::FileType::GetTag(ee::FileType::e_uiwnd));
+	} else {
+		m_frame->SetFileFilter(ee::FileType::GetTag(ee::FileType::e_ui));
+	}
 }
 
 }

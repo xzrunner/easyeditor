@@ -4,15 +4,12 @@ namespace eui
 {
 
 static const std::string TYPE_UNKNOWN	= "";
-static const std::string TYPE_WINDOW	= "window";
 static const std::string TYPE_LIST		= "list";
 static const std::string TYPE_WRAPPER	= "wrapper";
 
 const std::string& get_widget_desc(WIDGET_ID id)
 {
-	if (id == ID_WINDOW) {
-		return TYPE_WINDOW;
-	} else if (id == ID_LIST) {
+	if (id == ID_LIST) {
 		return TYPE_LIST;
 	} else if (id == ID_WRAPPER) {
 		return TYPE_WRAPPER;

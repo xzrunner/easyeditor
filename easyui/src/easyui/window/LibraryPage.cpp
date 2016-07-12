@@ -1,10 +1,10 @@
 #include "LibraryPage.h"
-#include "Symbol.h"
 
 #include <ee/SymbolMgr.h>
 #include <ee/LibraryList.h>
 #include <ee/StringHelper.h>
 
+#include <easyui.h>
 #include <easycomplex.h>
 
 namespace eui

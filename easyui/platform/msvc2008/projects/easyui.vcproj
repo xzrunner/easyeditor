@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src\easyui;..\..\..\..\sprite2\include;..\..\..\..\sm\src\sm;..\..\..\..\easyeditor\include;..\..\..\..\easy3d\src\easy3d;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easymesh\src;..\..\..\..\easymask\src;..\..\..\..\easytexture\src;..\..\..\..\easyshape\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easybuilder\src;..\..\..\..\easytext\src;..\..\..\..\particle\src"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\src\easyui;..\..\..\..\sprite2\include;..\..\..\..\sm\src\sm;..\..\..\..\easyeditor\include;..\..\..\..\easy3d\src\easy3d;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easymesh\src;..\..\..\..\easymask\src;..\..\..\..\easytexture\src;..\..\..\..\easyshape\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easybuilder\src;..\..\..\..\easytext\src;..\..\..\..\particle\src"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -121,7 +121,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src\easyui;..\..\..\..\sprite2\include;..\..\..\..\sm\src\sm;..\..\..\..\easyeditor\include;..\..\..\..\easy3d\src\easy3d;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easymesh\src;..\..\..\..\easymask\src;..\..\..\..\easytexture\src;..\..\..\..\easyshape\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easybuilder\src;..\..\..\..\easytext\src;..\..\..\..\particle\src"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\src\easyui;..\..\..\..\sprite2\include;..\..\..\..\sm\src\sm;..\..\..\..\easyeditor\include;..\..\..\..\easy3d\src\easy3d;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easymesh\src;..\..\..\..\easymask\src;..\..\..\..\easytexture\src;..\..\..\..\easyshape\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easybuilder\src;..\..\..\..\easytext\src;..\..\..\..\particle\src"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -248,10 +248,6 @@
 		<Filter
 			Name="dataset"
 			>
-			<File
-				RelativePath="..\..\..\src\easyui\message_id.h"
-				>
-			</File>
 			<File
 				RelativePath="..\..\..\src\easyui\SymbolCfg.cpp"
 				>
@@ -400,30 +396,6 @@
 				Name="dataset"
 				>
 				<File
-					RelativePath="..\..\..\src\easyui\window\AnchorMgr.cpp"
-					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							ObjectFile="$(IntDir)\window\"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							ObjectFile="$(IntDir)\window\"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyui\window\AnchorMgr.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\easyui\window\Code.cpp"
 					>
 					<FileConfiguration
@@ -445,22 +417,6 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\easyui\window\Code.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyui\window\Sprite.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyui\window\Sprite.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyui\window\Symbol.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyui\window\Symbol.h"
 					>
 				</File>
 				<File
@@ -549,58 +505,6 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="message"
-				>
-				<File
-					RelativePath="..\..\..\src\easyui\window\ChangeWindowViewSizeSJ.cpp"
-					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							ObjectFile="$(IntDir)\window\"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							ObjectFile="$(IntDir)\window\"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyui\window\ChangeWindowViewSizeSJ.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyui\window\QueryWindowViewSizeSJ.cpp"
-					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							ObjectFile="$(IntDir)\window\"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							ObjectFile="$(IntDir)\window\"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyui\window\QueryWindowViewSizeSJ.h"
-					>
-				</File>
-			</Filter>
-			<Filter
 				Name="preview"
 				>
 				<File
@@ -649,18 +553,6 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\easyui\window\PreviewDialog.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="frame"
-				>
-				<File
-					RelativePath="..\..\..\src\easyui\window\FileIO.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyui\window\FileIO.h"
 					>
 				</File>
 			</Filter>

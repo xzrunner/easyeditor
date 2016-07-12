@@ -1,10 +1,10 @@
 #include "UIList.h"
-#include "widget_id.h"
 
 #include <ee/FileHelper.h>
 #include <ee/Visitor.h>
 #include <ee/StringHelper.h>
 
+#include <easyui.h>
 #include <easycomplex.h>
 
 #include <sprite2/S2_Sprite.h>

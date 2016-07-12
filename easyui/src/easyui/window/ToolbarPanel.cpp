@@ -1,11 +1,10 @@
 #include "ToolbarPanel.h"
 #include "StagePanel.h"
-#include "message_id.h"
-#include "QueryWindowViewSizeSJ.h"
-#include "ChangeWindowViewSizeSJ.h"
 
 #include <ee/StringHelper.h>
 #include <ee/panel_msg.h>
+
+#include <easyui.h>
 
 namespace eui
 {

@@ -10,12 +10,13 @@
 namespace eui
 {
 
+class Frame;
 class UIStagePage;
 
 class Task : public ee::Task
 {
 public:
-	Task(wxFrame* parent);
+	Task(Frame* frame);
 	virtual ~Task();
 
 	virtual void Load(const char* filepath);
@@ -37,7 +38,7 @@ private:
 
 private:
 	wxWindow* m_root;
-	wxFrame* m_parent;
+	Frame* m_frame;
 
 	TopPannels m_top_pannels;
 
