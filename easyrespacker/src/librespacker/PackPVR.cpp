@@ -2,6 +2,17 @@
 #include "Lzma.h"
 #include "typedef.h"
 
+#include <ee/Symbol.h>
+#include <ee/SymbolMgr.h>
+#include <ee/Snapshoot.h>
+#include <ee/SettingData.h>
+#include <ee/Config.h>
+#include <ee/ImageVerticalFlip.h>
+
+#include <easyimage.h>
+
+#include <string>
+
 #include <assert.h>
 
 namespace erespacker
@@ -103,14 +114,16 @@ enum EPVRTPixelFormat
 	ePVRTPF_NumCompressedPFs
 };
 
-PackPVR::PackPVR()
+PackPVR::PackPVR(bool fast)
+	: m_fast(fast)
+	, m_internal_format(COMPRESSED_RGBA_PVRTC_4BPPV1_IMG)
+	, m_has_alpha(0)
+	, m_width(0)
+	, m_height(0)
+	, m_data_sz(0)
+	, m_buffer(NULL)
 {
 	m_type = TT_PVR;
-
-	m_tex.width = m_tex.height = 0;
-	m_tex.internal_format = COMPRESSED_RGBA_PVRTC_4BPPV1_IMG;
-	m_tex.has_alpha = 0;
-	ClearImageData();
 }
 
 PackPVR::~PackPVR()
@@ -121,6 +134,8 @@ PackPVR::~PackPVR()
 void PackPVR::Load(const std::string& filepath)
 {
 	Clear();
+
+	m_base_path = filepath.substr(0, filepath.find_last_of('.')) + ".png";
 
 	std::locale::global(std::locale(""));
 	std::ifstream fin(filepath.c_str(), std::ios::binary);
@@ -193,58 +208,28 @@ void PackPVR::Load(const std::string& filepath)
 		}
 	}
 
-	uint32_t width = 0, height = 0, bpp = 4;
-	uint32_t blockSize = 0, widthBlocks = 0, heightBlocks = 0;
 	if (formatFlags == kPVRTextureFlagTypePVRTC_4 || formatFlags == kPVRTextureFlagTypePVRTC_2)
 	{
-		ClearImageData();
 		if (formatFlags == kPVRTextureFlagTypePVRTC_4) {
-			m_tex.internal_format = COMPRESSED_RGBA_PVRTC_4BPPV1_IMG;
+			m_internal_format = COMPRESSED_RGBA_PVRTC_4BPPV1_IMG;
 		} else if (formatFlags == kPVRTextureFlagTypePVRTC_2) {
-			m_tex.internal_format = COMPRESSED_RGBA_PVRTC_2BPPV1_IMG;
+			m_internal_format = COMPRESSED_RGBA_PVRTC_2BPPV1_IMG;
 		}
-		m_tex.width = width = header.width;
-		m_tex.height = height = header.height;
+		m_width = header.width;
+		m_height = header.height;
 		if (header.bitmaskAlpha) {
-			m_tex.has_alpha = 1;
+			m_has_alpha = 1;
 		} else {
-			m_tex.has_alpha = 0;
+			m_has_alpha = 0;
 		}
 
-		// no mipmap
-		// Calculate the data size for each texture level and respect the minimum number of blocks
-		// while (dataOffset < dataLength){
-		if (formatFlags == kPVRTextureFlagTypePVRTC_4) {
-			blockSize = 4 * 4;
-			widthBlocks = width / 4;
-			heightBlocks = height / 4;
-			bpp = 4;
-		} else {
-			blockSize = 8 * 4;
-			widthBlocks = width / 8;
-			heightBlocks = height / 4;
-			bpp = 2;						
+		m_data_sz = CalTexSize(m_internal_format, m_width, m_height);
+		m_buffer = new uint8_t[m_data_sz];
+		if (!m_buffer) {
+			fin.close();
+			return;
 		}
-
-		// Clamp to minimum number of blocks
-		if (widthBlocks < 2) {
-			widthBlocks = 2;
-		}
-		if (heightBlocks < 2) {
-			heightBlocks = 2;
-		}
-
-		uint32_t dataSize = widthBlocks * heightBlocks * ((blockSize * bpp) / 8);
-		assert(m_tex.image_data_count < 10);
-		assert(dataSize < sizeof(m_tex.image_data[0].data));
-		m_tex.image_data[m_tex.image_data_count].size = dataSize;
-		fin.read(reinterpret_cast<char*>(&m_tex.image_data[m_tex.image_data_count].data), dataSize);		
-		++m_tex.image_data_count;
-
-		width = std::max((int)(width >> 1), 1);
-		height = std::max((int)(height >> 1), 1);
-
-		// }
+		fin.read(reinterpret_cast<char*>(m_buffer), m_data_sz);		
 	}
 
 	fin.close();
@@ -255,33 +240,77 @@ void PackPVR::Store(const std::string& filepath, float scale) const
 	std::locale::global(std::locale(""));
 	std::ofstream fout(filepath.c_str(), std::ios::binary);
 	std::locale::global(std::locale("C"));
+	if (scale == 1) {
+		Store(fout, m_buffer, m_data_sz, m_width, m_height);
+	} else {
+		StoreScaled(fout, scale);
+	}
+	fout.close();
+}
 
+int PackPVR::CalTexSize(int type, int width, int height)
+{
+	uint32_t bpp = 4;
+	uint32_t block_sz = 0, w_blocks = 0, h_blocks = 0;
+	// no mipmap
+	// Calculate the data size for each texture level and respect the minimum number of blocks
+	// while (dataOffset < dataLength){
+	if (type == COMPRESSED_RGBA_PVRTC_4BPPV1_IMG) {
+		block_sz = 4 * 4;
+		w_blocks = width / 4;
+		h_blocks = height / 4;
+		bpp = 4;
+	} else {
+		block_sz = 8 * 4;
+		w_blocks = width / 8;
+		h_blocks = height / 4;
+		bpp = 2;						
+	}
+
+	// Clamp to minimum number of blocks
+	if (w_blocks < 2) {
+		w_blocks = 2;
+	}
+	if (h_blocks < 2) {
+		h_blocks = 2;
+	}
+
+	return w_blocks * h_blocks * ((block_sz * bpp) / 8);
+}
+
+void PackPVR::Clear()
+{
+	m_internal_format = COMPRESSED_RGBA_PVRTC_4BPPV1_IMG;
+	m_has_alpha = 0;
+	m_width = m_height = 0;
+	m_data_sz = 0;
+	delete[] m_buffer, m_buffer = NULL;
+}
+
+void PackPVR::Store(std::ofstream& fout, uint8_t* buffer, int buf_sz, int width, int height) const
+{
 	if (m_compress)
 	{
 		size_t sz = sizeof(int8_t) + sizeof(int8_t) + sizeof(int16_t) * 2;
-		for (int i = 0; i < m_tex.image_data_count; ++i) {
-			const Slice& s = m_tex.image_data[i];
-			sz += sizeof(uint32_t);
-			sz += s.size;
-		}
+		sz += sizeof(uint32_t);
+		sz += buf_sz;
+
 		uint8_t* buf = new uint8_t[sz];
 		uint8_t* ptr = buf;
 
 		memcpy(ptr, &m_type, sizeof(int8_t));
 		ptr += sizeof(int8_t);
-		memcpy(ptr, &m_tex.internal_format, sizeof(int8_t));
+		memcpy(ptr, &m_internal_format, sizeof(int8_t));
 		ptr += sizeof(int8_t);
-		memcpy(ptr, &m_tex.width, sizeof(int16_t));
+		memcpy(ptr, &width, sizeof(int16_t));
 		ptr += sizeof(int16_t);
-		memcpy(ptr, &m_tex.height, sizeof(int16_t));
+		memcpy(ptr, &height, sizeof(int16_t));
 		ptr += sizeof(int16_t);
-		for (int i = 0; i < m_tex.image_data_count; ++i) {
-			const Slice& s = m_tex.image_data[i];
-			memcpy(ptr, &s.size, sizeof(uint32_t));
-			ptr += sizeof(uint32_t);
-			memcpy(ptr, &s.data[0], s.size);
-			ptr += s.size;
-		}
+
+		memcpy(ptr, &buf_sz, sizeof(uint32_t));
+		ptr += sizeof(uint32_t);
+		memcpy(ptr, buffer, buf_sz);
+		ptr += buf_sz;
 
 		uint8_t* dst = NULL;
 		size_t dst_sz;
@@ -301,35 +330,49 @@ void PackPVR::Store(const std::string& filepath, float scale) const
 		sz += sizeof(int8_t);	// internal_format
 		sz += sizeof(int16_t);	// width
 		sz += sizeof(int16_t);	// height
-		for (int i = 0; i < m_tex.image_data_count; ++i) {
-			const Slice& s = m_tex.image_data[i];
-			sz += sizeof(uint32_t) + s.size;
-		}
+		sz += sizeof(uint32_t) + buf_sz;
+
 		sz = -sz;
 		fout.write(reinterpret_cast<const char*>(&sz), sizeof(int32_t));
 
 		fout.write(reinterpret_cast<const char*>(&m_type), sizeof(int8_t));
-		fout.write(reinterpret_cast<const char*>(&m_tex.internal_format), sizeof(int8_t));
-		fout.write(reinterpret_cast<const char*>(&m_tex.width), sizeof(int16_t));
-		fout.write(reinterpret_cast<const char*>(&m_tex.height), sizeof(int16_t));
-		for (int i = 0; i < m_tex.image_data_count; ++i) {
-			const Slice& s = m_tex.image_data[i];
-			fout.write(reinterpret_cast<const char*>(&s.size), sizeof(uint32_t));
-			fout.write(reinterpret_cast<const char*>(&s.data[0]), s.size);
-		}		
+		fout.write(reinterpret_cast<const char*>(&m_internal_format), sizeof(int8_t));
+		fout.write(reinterpret_cast<const char*>(&width), sizeof(int16_t));
+		fout.write(reinterpret_cast<const char*>(&height), sizeof(int16_t));
+		fout.write(reinterpret_cast<const char*>(&buf_sz), sizeof(uint32_t));
+		fout.write(reinterpret_cast<const char*>(buffer), buf_sz);
 	}
-
-	fout.close();
 }
 
-void PackPVR::Clear()
+void PackPVR::StoreScaled(std::ofstream& fout, float scale) const
 {
-	// todo: release buf
-}
+	ee::SettingData& sd = ee::Config::Instance()->GetSettings();
+	bool old_clip = sd.open_image_edge_clip;
+	bool old_premul = sd.pre_multi_alpha;
+	sd.open_image_edge_clip = false;
+	sd.pre_multi_alpha = false;
 
-void PackPVR::ClearImageData()
-{
-	m_tex.image_data_count = 0;
+	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(m_base_path);
+	int w = static_cast<int>(m_width * scale),
+		h = static_cast<int>(m_height * scale);
+	ee::Snapshoot ss;
+	uint8_t* png_buf = ss.OutputToMemory(sym, false, scale);
+	sym->Release();
+
+	ee::ImageVerticalFlip revert(png_buf, w, h);
+	uint8_t* buf_revert = revert.Revert();		
+	delete[] png_buf;
+
+	eimage::TransToPVR trans(buf_revert, w, h, 4, false, m_fast);
+	delete[] buf_revert;
+
+	uint8_t* pvr_buf = trans.GetPixelsData(w, h);
+	int sz = CalTexSize(m_internal_format, w, h);
+	Store(fout, pvr_buf, sz, w, h);
+	delete[] pvr_buf;
+
+	sd.open_image_edge_clip = old_clip;
+	sd.pre_multi_alpha = old_premul;
 }
 
 }

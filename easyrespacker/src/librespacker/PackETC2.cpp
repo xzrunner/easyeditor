@@ -3,6 +3,14 @@
 #include "typedef.h"
 
 #include <ee/Exception.h>
+#include <ee/Symbol.h>
+#include <ee/SymbolMgr.h>
+#include <ee/Snapshoot.h>
+#include <ee/SettingData.h>
+#include <ee/Config.h>
+#include <ee/ImageVerticalFlip.h>
+
+#include <easyimage.h>
 
 #include <string>
 
@@ -24,7 +32,8 @@ struct PKMHeader
 	unsigned char heightLSB;
 };
 
-PackETC2::PackETC2()
+PackETC2::PackETC2(bool fast)
+	: m_fast(fast)
 {
 	m_type = TT_ETC2;
 
@@ -41,6 +50,8 @@ void PackETC2::Load(const std::string& filepath)
 {
 	Clear();
 
+	m_base_path = filepath.substr(0, filepath.find_last_of('.')) + ".png";
+
 	std::locale::global(std::locale(""));
 	std::ifstream fin(filepath.c_str(), std::ios::binary);
 	std::locale::global(std::locale("C"));
@@ -53,7 +64,7 @@ void PackETC2::Load(const std::string& filepath)
 	uint32_t sz = m_width * m_height;
 	m_buf = new uint8_t[sz];
 	if (!m_buf) {
-		throw ee::Exception("Out of memory: PackETC2::LoadCompressed %s \n", filepath.c_str());
+		throw ee::Exception("Out of memory: PackETC2::Load %s \n", filepath.c_str());
 	}
 	fin.read(reinterpret_cast<char*>(m_buf), sz);
 
@@ -65,10 +76,24 @@ void PackETC2::Store(const std::string& filepath, float scale) const
 	std::locale::global(std::locale(""));
 	std::ofstream fout(filepath.c_str(), std::ios::binary);
 	std::locale::global(std::locale("C"));
+	if (scale == 1) {
+		Store(fout, m_buf, m_width, m_height);
+	} else {
 
-	size_t body_sz = m_width * m_height;
+	}
+	fout.close();
+}
+
+void PackETC2::Clear()
+{
+	delete m_buf, m_buf = NULL;
+}
+
+void PackETC2::Store(std::ofstream& fout, uint8_t* buffer, int width, int height) const
+{
 	if (m_compress)
 	{
+		size_t body_sz = m_width * m_height;
 		size_t tot_size = sizeof(int8_t) + sizeof(int16_t) * 2 + body_sz;
 		uint8_t* buf = new uint8_t[tot_size];
 		uint8_t* ptr = buf;
@@ -97,7 +122,6 @@ void PackETC2::Store(const std::string& filepath, float scale) const
 	else
 	{
 		int body_sz = (m_width * m_height) >> 1;
-
 		int sz = 0;
 		sz += sizeof(int8_t);	// type
 		sz += sizeof(int16_t);	// width
@@ -113,12 +137,36 @@ void PackETC2::Store(const std::string& filepath, float scale) const
 		fout.write(reinterpret_cast<const char*>(m_buf), body_sz);
 	}
 
-	fout.close();
 }
 
-void PackETC2::Clear()
+void PackETC2::StoreScaled(std::ofstream& fout, float scale) const
 {
-	delete m_buf, m_buf = NULL;
+	ee::SettingData& sd = ee::Config::Instance()->GetSettings();
+	bool old_clip = sd.open_image_edge_clip;
+	bool old_premul = sd.pre_multi_alpha;
+	sd.open_image_edge_clip = false;
+	sd.pre_multi_alpha = false;
+
+	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(m_base_path);
+	int w = static_cast<int>(m_width * scale),
+		h = static_cast<int>(m_height * scale);
+	ee::Snapshoot ss;
+	uint8_t* png_buf = ss.OutputToMemory(sym, false, scale);
+	sym->Release();
+
+	ee::ImageVerticalFlip revert(png_buf, w, h);
+	uint8_t* buf_revert = revert.Revert();		
+	delete[] png_buf;
+
+	eimage::TransToETC2 trans(buf_revert, w, h, 4, eimage::TransToETC2::RGBA, false, m_fast);
+	delete[] buf_revert;
+
+	uint8_t* etc2_buf = trans.GetPixelsData(w, h);
+	Store(fout, etc2_buf, w, h);
+	delete[] etc2_buf;
+
+	sd.open_image_edge_clip = old_clip;
+	sd.pre_multi_alpha = old_premul;
 }
 
 }

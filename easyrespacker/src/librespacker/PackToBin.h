@@ -13,13 +13,10 @@ namespace erespacker
 class PackToBin
 {
 public:
-	static void PackEPE(const std::string& filepath, const ee::TexturePacker& tp,
-		bool compress, float scale);	
+	static void PackEPE(const std::string& filepath, const ee::TexturePacker& tp, bool compress, float scale);
 
-	static void PackEPT(const std::string& filepath, const ee::TexturePacker& tp,
-		int LOD, float scale);	
-	static void PackEPT(const std::string& src_file, const std::string& dst_file, 
-		TextureType type);
+	static void PackEPT(const std::string& filepath, const ee::TexturePacker& tp, int LOD, float scale);	
+	static void PackEPT(const std::string& src_file, const std::string& dst_file, TextureType type);
 
 }; // PackToBin
 

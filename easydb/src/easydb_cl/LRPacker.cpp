@@ -14,6 +14,10 @@
 #include <ee/StringHelper.h>
 #include <ee/Config.h>
 #include <ee/EE_ShaderLab.h>
+#include <ee/Bitmap.h>
+#include <ee/Image.h>
+#include <ee/ImageData.h>
+#include <ee/SymbolMgr.h>
 
 #include <wx/stdpaths.h>
 
@@ -49,8 +53,8 @@ int LRPacker::Run(int argc, char *argv[])
 
 	bool only_json = ee::StringHelper::FromString<bool>(argv[5]);
 
-	ee::FileHelper::MkDir(tmp_dir, true);
-	ee::FileHelper::MkDir(out_dir, true);
+	ee::FileHelper::MkDir(tmp_dir, false);
+	ee::FileHelper::MkDir(out_dir, false);
 
 	int ret = init_gl();
 	if (ret < 0) {
@@ -84,7 +88,13 @@ int LRPacker::Run(int argc, char *argv[])
 	// 5
 	if (only_json != 1) {
 		int LOD = ee::StringHelper::FromString<int>(argv[6]);
-		PackEP(tmp_dir, tmp_lr_file, out_dir, LOD);
+
+		std::string fmt = "png";
+		if (argc > 7) {
+			fmt = argv[7];
+		}
+
+		PackEP(tmp_dir, tmp_lr_file, out_dir, LOD, fmt);
 	}
 
 	// end
@@ -95,7 +105,8 @@ int LRPacker::Run(int argc, char *argv[])
 }
 
 void LRPacker::PackEP(const std::string& tmp_dir, const std::string& tmp_lr_file,
-					  const std::string& out_dir, int LOD)
+					  const std::string& out_dir, int LOD,
+					  const std::string& fmt)
 {
 	Json::Value val;
 
@@ -129,30 +140,42 @@ void LRPacker::PackEP(const std::string& tmp_dir, const std::string& tmp_lr_file
 	pkg_val["LOD"] = LOD;
 
 	idx = 0;
-	// png
-	pkg_val["dst"] = _out_dir + "\\png";
-	pkg_val["format"] = "png";
-	pkg_val["extrude"] = 1;
-	pkg_val["fast"] = true;
-	val["packages"][idx] = pkg_val;
-	PackRes pack_png;
-	pack_png.Trigger(val.toStyledString(), tmp_dir);
-	// pvr
-	pkg_val["dst"] = _out_dir + "\\pvr";
-	pkg_val["format"] = "pvr";
-	pkg_val["extrude"] = 4;
-	pkg_val["fast"] = true;
-	val["packages"][idx] = pkg_val;
-	PackRes pack_pvr;
-	pack_pvr.Trigger(val.toStyledString(), tmp_dir);
-	// etc2
-	pkg_val["dst"] = _out_dir + "\\etc2";
-	pkg_val["format"] = "etc2";
-	pkg_val["extrude"] = 1;
-	pkg_val["fast"] = true;
-	val["packages"][idx] = pkg_val;
-	PackRes pack_etc2;
-	pack_etc2.Trigger(val.toStyledString(), tmp_dir);
+	if (fmt == "png")
+	{
+		pkg_val["dst"] = _out_dir + "\\png";
+		pkg_val["format"] = "png";
+		pkg_val["extrude"] = 1;
+		val["packages"][idx] = pkg_val;
+		PackRes pack;
+		pack.Trigger(val.toStyledString(), tmp_dir);
+	}
+	else if (fmt == "pvr")
+	{
+		pkg_val["dst"] = _out_dir + "\\pvr";
+		pkg_val["format"] = "pvr";
+		pkg_val["extrude"] = 4;
+		val["packages"][idx] = pkg_val;
+		PackRes pack;
+		pack.Trigger(val.toStyledString(), tmp_dir);
+	}
+	else if (fmt == "etc2")
+	{
+		pkg_val["dst"] = _out_dir + "\\etc2";
+		pkg_val["format"] = "etc2";
+		pkg_val["extrude"] = 1;
+		val["packages"][idx] = pkg_val;
+		PackRes pack;
+		pack.Trigger(val.toStyledString(), tmp_dir);
+	}
+}
+
+void LRPacker::ClearCached()
+{
+	ee::SymbolMgr::Instance()->Clear();
+
+	ee::BitmapMgr::Instance()->Clear();
+	ee::ImageMgr::Instance()->Clear();
+	ee::ImageDataMgr::Instance()->Clear();
 }
 
 }

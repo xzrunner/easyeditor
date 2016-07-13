@@ -11,37 +11,32 @@ namespace erespacker
 class PackPVR : public PackImage
 {
 public:
-	PackPVR();
+	PackPVR(bool fast);
 	virtual ~PackPVR();
 
 	virtual void Load(const std::string& filepath);
 	virtual void Store(const std::string& filepath, float scale) const;
 
+	static int CalTexSize(int type, int width, int height);
+
 private:
 	void Clear();
 
-	void ClearImageData();
+	void Store(std::ofstream& fout, uint8_t* buffer, int buf_sz,
+		int width, int height) const;
+	void StoreScaled(std::ofstream& fout, float scale) const;
 
 private:
-	struct Slice
-	{
-		int size;
-		uint8_t data[2048*2048];
-	};
+	bool m_fast;
+	std::string m_base_path;
 
-	struct PvrTexture
-	{
-		Slice image_data[10];
-		int image_data_count;
+	int m_internal_format;
+	int m_has_alpha;
 
-		int internal_format;
-		int width;
-		int height;
-		int has_alpha;
-	};
+	int m_width, m_height;
 
-private:
-	PvrTexture m_tex;
+	int m_data_sz;
+	uint8_t* m_buffer;
 
 }; // PackPVR
 

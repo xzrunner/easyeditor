@@ -129,7 +129,7 @@ void PackTexture::CompressPackedTex(const etexpacker::NormalPack& tp, int& start
 			delete[] pixels;
 
 			trans.OutputFile(dst);
-			wxRemoveFile(src);
+//			wxRemoveFile(src);
 		}
 	}
 	else if (fmt == "etc1")
@@ -145,7 +145,7 @@ void PackTexture::CompressPackedTex(const etexpacker::NormalPack& tp, int& start
 			delete[] pixels;
 
 			trans.OutputFile(dst);
-			wxRemoveFile(src);
+//			wxRemoveFile(src);
 		}
 	}
 	else if (fmt == "etc2")
@@ -161,7 +161,7 @@ void PackTexture::CompressPackedTex(const etexpacker::NormalPack& tp, int& start
 			delete[] pixels;
 
 			trans.OutputFile(dst);
-			wxRemoveFile(src);
+//			wxRemoveFile(src);
 		}
 	}
 }

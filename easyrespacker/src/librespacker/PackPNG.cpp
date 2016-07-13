@@ -18,7 +18,9 @@ namespace erespacker
 {
 
 PackPNG::PackPNG(bool png8)
-	: m_buffer(NULL)
+	: m_width(0)
+	, m_height(0)
+	, m_buffer(NULL)
 {
 	m_type = png8 ? TT_PNG8 : TT_PNG4;
 }
@@ -72,35 +74,33 @@ void PackPNG::Store(const std::string& filepath, float scale) const
 	std::locale::global(std::locale(""));
 	std::ofstream fout(filepath.c_str(), std::ios::binary);
 	std::locale::global(std::locale("C"));
-
 	if (scale == 1) {
 		Store(fout, m_buffer, m_width, m_height);
 	} else {
-		size_t sz = m_width * m_height * 4;
-		uint8_t* buf = new uint8_t[sz];
-		memcpy(buf, m_buffer, sz);
-
-		ee::ImageData img_data(buf, m_width, m_height, 4);
-		ee::Image img(&img_data);
-		ee::ImageSymbol symbol(&img, "");
-
-		int width = static_cast<int>(m_width * scale),
-			height= static_cast<int>(m_height * scale);
-		ee::Snapshoot ss;
-		uint8_t* buffer = ss.OutputToMemory(&symbol, false, scale);
-		RevertAndStore(fout, buffer, width, height);
-		delete[] buffer;
+		StoreScaled(fout, scale);
 	}
-
 	fout.close();
 }
 
-void PackPNG::RevertAndStore(std::ofstream& fout, uint8_t* buffer, int width, int height) const
+void PackPNG::StoreScaled(std::ofstream& fout, float scale) const
 {
+	size_t sz = m_width * m_height * 4;
+	uint8_t* buf = new uint8_t[sz];
+	memcpy(buf, m_buffer, sz);
+
+	ee::ImageData img_data(buf, m_width, m_height, 4);
+	ee::Image img(&img_data);
+	ee::ImageSymbol symbol(&img, "");
+
+	int width = static_cast<int>(m_width * scale),
+		height= static_cast<int>(m_height * scale);
+	ee::Snapshoot ss;
+	uint8_t* buffer = ss.OutputToMemory(&symbol, false, scale);
 	ee::ImageVerticalFlip revert(buffer, width, height);
 	uint8_t* buf_revert = revert.Revert();		
 	Store(fout, buf_revert, width, height);
 	delete[] buf_revert;
+	delete[] buffer;
 }
 
 void PackPNG::Clear()

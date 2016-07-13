@@ -117,7 +117,7 @@ void PackRes::PackTexture(const Json::Value& pkg_val, const std::string& config_
 	std::string img_path = dst_name + ".png";
 	tex_packer->OutputImage(img_path);
 	int start_id = 1;
-	PackTexture::CompressPackedTex(*tex_packer, start_id, dst_name, fmt, pkg_val["fast"].asBool());
+	PackTexture::CompressPackedTex(*tex_packer, start_id, dst_name, fmt, false);
 	delete tex_packer;
 
 	sd.open_image_edge_clip = ori_cfg;

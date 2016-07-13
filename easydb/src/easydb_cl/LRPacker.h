@@ -25,7 +25,9 @@ public:
 
 private:
 	void PackEP(const std::string& tmp_dir, const std::string& tmp_lr_file,
-		const std::string& out_dir, int LOD);
+		const std::string& out_dir, int LOD, const std::string& fmt);
+
+	void ClearCached();
 
 }; // LRPacker
 
