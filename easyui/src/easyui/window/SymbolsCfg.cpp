@@ -9,6 +9,7 @@
 #include <ee/LibraryList.h>
 #include <ee/SymbolMgr.h>
 #include <ee/Symbol.h>
+#include <ee/FileType.h>
 
 #include <algorithm>
 #include <fstream>
@@ -51,7 +52,7 @@ void SymbolsCfg::LoadConfig()
 
 void SymbolsCfg::InitLibrarySymbols(const Json::Value& value)
 {
-	InitLibrarySymbols(value["window"], "窗口", "ui");
+	InitLibrarySymbols(value["window"], "窗口", ee::FileType::GetTag(ee::FileType::e_uiwnd));
 	InitLibrarySymbols(value["button"], "按钮");
 	InitLibrarySymbols(value["list"], "列表");
 	InitLibrarySymbols(value["textbox"], "文本框");

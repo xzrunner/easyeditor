@@ -3,6 +3,7 @@
 #include <ee/SymbolMgr.h>
 #include <ee/LibraryList.h>
 #include <ee/StringHelper.h>
+#include <ee/FileType.h>
 
 #include <easyui.h>
 #include <easycomplex.h>
@@ -22,7 +23,7 @@ LibraryPage::LibraryPage(wxWindow* parent, const char* name,
 
 bool LibraryPage::IsHandleSymbol(ee::Symbol* symbol) const
 {
-	if (m_filter == "ui") {
+	if (m_filter == ee::FileType::GetTag(ee::FileType::e_uiwnd)) {
 		return dynamic_cast<Symbol*>(symbol) != NULL;	
 	} else {
 		return true;
