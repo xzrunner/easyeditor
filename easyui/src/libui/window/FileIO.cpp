@@ -71,6 +71,43 @@ void FileIO::Load(const char* filepath, Symbol* sym)
 	LoadRefs(value, sym, dir);
 }
 
+void FileIO::FetchSprites(const std::string& filepath, std::vector<ee::Sprite*>& sprites)
+{
+	std::string dir = ee::FileHelper::GetFileDir(filepath);
+
+	Json::Value val;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filepath.c_str());
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, val);
+	fin.close();
+
+	int idx = 0;
+	Json::Value spr_val = val["sprite"][idx++];
+	while (!spr_val.isNull()) {
+		std::string path = ee::SymbolSearcher::GetSymbolPath(dir, spr_val);
+		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(path);
+
+		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+		spr->Load(spr_val);
+		spr->Retain();
+		sprites.push_back(spr);
+		spr->Release();
+		sym->Release();
+
+		spr_val = val["sprite"][idx++];
+	}
+
+	idx = 0;
+	Json::Value ref_val = val["ref_spr"][idx++];
+	while (!ref_val.isNull()) {
+		std::string filepath = ee::SymbolSearcher::GetSymbolPath(dir, ref_val);
+		FetchSprites(filepath, sprites);
+		ref_val = val["ref_spr"][idx++];
+	}
+}
+
 std::string FileIO::StoreWrapper(const std::string& filepath, const std::string& name,
 								 const std::vector<ee::Sprite*>& sprites)
 {

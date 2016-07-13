@@ -40,6 +40,8 @@ private:
 
 	void Pack() const;
 
+	void AddUIWndSymbol(const std::string& filepath);
+
 private:
 	std::vector<const ee::Symbol*> m_symbols;
 

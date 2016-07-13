@@ -21,6 +21,8 @@ public:
 	static void Store(const char* filepath, const Symbol* sym);
 	static void Load(const char* filepath, Symbol* sym);
 
+	static void FetchSprites(const std::string& filepath, std::vector<ee::Sprite*>& sprites);
+
 private:
 	static std::string StoreWrapper(const std::string& filepath,
 		const std::string& name, const std::vector<ee::Sprite*>& sprites);

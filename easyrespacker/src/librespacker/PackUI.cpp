@@ -32,8 +32,6 @@ void PackUI::AddTask(const std::string& filepath)
 	PackUITask* task = NULL;
 	if (type == UI_LIST) {
 		task = new PackUIListTask(filepath, value);
-	} else if (type == UI_WINDOW) {
-		task = new PackUIWindowTask(filepath, value);
 	} else if (type == UI_WRAPPER) {
 		task = new PackUIWrapperTask(filepath, value);
 	} else {
@@ -41,6 +39,20 @@ void PackUI::AddTask(const std::string& filepath)
 		return;
 	}
 	m_tasks.push_back(task);
+}
+
+void PackUI::AddWindowTask(const std::string& filepath)
+{
+	Json::Value value;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filepath.c_str());
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, value);
+	fin.close();
+
+	assert(ee::FileType::IsType(filepath, ee::FileType::e_uiwnd));
+	m_tasks.push_back(new PackUIWindowTask(filepath, value));
 }
 
 void PackUI::OnKnownPackID(const std::string& filepath, int id)

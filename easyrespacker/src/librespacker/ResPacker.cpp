@@ -2,6 +2,7 @@
 #include "PackAnimation.h"
 #include "PackNodeFactory.h"
 #include "PackUI.h"
+#include "PackUIWindowTask.h"
 
 #include "PackToLuaString.h"
 #include "PackToBin.h"
@@ -19,6 +20,7 @@
 #include <easycomplex.h>
 #include <easyanim.h>
 #include <easyparticle3d.h>
+#include <easyui.h>
 
 #include <dtex_typedef.h>
 
@@ -195,6 +197,9 @@ void ResPacker::LoadJsonData(const std::string& dir)
 			filepaths.push_back(filepath);
 		} else if (ee::FileType::IsType(filepath, ee::FileType::e_ui)) {
 			PackUI::Instance()->AddTask(filepath);
+		} else if (ee::FileType::IsType(filepath, ee::FileType::e_uiwnd)) {
+			PackUI::Instance()->AddWindowTask(filepath);
+			AddUIWndSymbol(filepath);
 		}
 	}
 
@@ -236,6 +241,32 @@ void ResPacker::Pack() const
 			throw ee::Exception("ResPacker::Pack unhandled type.");
 		}
 	}
+}
+
+void ResPacker::AddUIWndSymbol(const std::string& filepath)
+{
+	Json::Value val;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filepath.c_str());
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, val);
+	fin.close();
+
+	std::vector<ee::Sprite*> sprites;
+	eui::window::FileIO::FetchSprites(filepath, sprites);
+
+	ecomplex::Symbol* sym = new ecomplex::Symbol();	
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		sym->Add(sprites[i]);
+	}
+	for_each(sprites.begin(), sprites.end(), ee::ReleaseObjectFunctor<ee::Sprite>());
+
+	std::string wrapper_path = PackUIWindowTask::GetWrapperFilepath(filepath);
+	sym->SetFilepath(wrapper_path);
+	sym->name = val["name"].asString();
+
+	m_symbols.push_back(sym);
 }
 
 }

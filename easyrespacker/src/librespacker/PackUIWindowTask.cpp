@@ -21,10 +21,7 @@ PackUIWindowTask::PackUIWindowTask(const std::string& filepath, const Json::Valu
 	m_width = value["view"]["width"].asInt();
 	m_height = value["view"]["height"].asInt();
 
-	m_wrapper_filepath = value["wrapper filepath"].asString();
-	m_wrapper_filepath = ee::FileHelper::GetAbsolutePathFromFile(filepath, m_wrapper_filepath);
-	m_wrapper_filepath = ee::FileHelper::FormatFilepathAbsolute(m_wrapper_filepath);
-
+	m_wrapper_filepath = GetWrapperFilepath(filepath);
 	PackUI::Instance()->Instance()->AddListener(m_wrapper_filepath, this);
 
 	LoadItems(value, ee::FileHelper::GetFileDir(filepath));
@@ -53,7 +50,7 @@ void PackUIWindowTask::OnKnownPackID(const std::string& filepath, int id)
 void PackUIWindowTask::Output(const std::string& dir, Json::Value& value) const
 {
 	if (m_wrapper_id == -1) {
-		throw ee::Exception("PackUIWindowTask::Output out id -1, wrapper_file %s", m_wrapper_filepath.c_str());
+		throw ee::Exception("Unknown uiwnd id, wrapper_file %s", m_wrapper_filepath.c_str());
 	}
 
 	Json::Value val;
@@ -69,6 +66,10 @@ void PackUIWindowTask::Output(const std::string& dir, Json::Value& value) const
 
 	for (int i = 0, n = m_items.size(); i < n; ++i) {
 		Item* item = m_items[i];
+		if (item->id == -1) {
+			throw ee::Exception("Unknown uiwnd's item id, wrapper_file %s, name %s, filepath %s", 
+				m_wrapper_filepath.c_str(), item->name.c_str(), item->filepath.c_str());
+		}
 		Json::Value item_val;
 		item_val["id"] = item->id;
 		item_val["anchor"] = item->anchor;
@@ -76,6 +77,12 @@ void PackUIWindowTask::Output(const std::string& dir, Json::Value& value) const
 	}
 
 	value[value.size()] = val;
+}
+
+std::string PackUIWindowTask::GetWrapperFilepath(const std::string& filepath)
+{
+	std::string filename = filepath.substr(0, filepath.find_last_of('_'));
+	return ee::FileHelper::FormatFilepathAbsolute(filename + "_wrapper_complex[gen].json");
 }
 
 void PackUIWindowTask::LoadItems(const Json::Value& value, const std::string& dir)

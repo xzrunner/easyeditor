@@ -17,6 +17,7 @@ class PackUI
 {
 public:
 	void AddTask(const std::string& filepath);
+	void AddWindowTask(const std::string& filepath);
 	
 	void OnKnownPackID(const std::string& filepath, int id);
 

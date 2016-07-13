@@ -15,6 +15,8 @@ public:
 	virtual void OnKnownPackID(const std::string& filepath, int id);
 	virtual void Output(const std::string& dir, Json::Value& value) const;
 
+	static std::string GetWrapperFilepath(const std::string& filepath);
+
 private:
 	void LoadItems(const Json::Value& value, const std::string& dir);
 
