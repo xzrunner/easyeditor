@@ -25,7 +25,7 @@ public:
 
 	void Pack(const std::string& str_val);
 
-	static void CompressPackedTex(const etexpacker::NormalPack& tp, int start_id,
+	static void CompressPackedTex(const etexpacker::NormalPack& tp, int& start_id,
 		const std::string& file, const std::string& fmt, bool fast);
 	
 	static ICommand* Create() { return new PackTexture(); }

@@ -110,7 +110,7 @@ void PackTexture::Pack(const std::vector<Package>& packages, const std::string& 
 	sd.open_image_edge_clip = ori_cfg;
 }
 
-void PackTexture::CompressPackedTex(const etexpacker::NormalPack& tp, int start_id,
+void PackTexture::CompressPackedTex(const etexpacker::NormalPack& tp, int& start_id,
 									const std::string& file, const std::string& fmt, bool fast)
 {
 	int begin = start_id;
