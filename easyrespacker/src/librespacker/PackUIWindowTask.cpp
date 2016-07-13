@@ -134,7 +134,7 @@ void PackUIWindowTask::LoadItems(const Json::Value& value, const std::string& di
 
 	idx = 0;
 	Json::Value ref_val = value["ref_spr"][idx++];
-	while (!spr_val.isNull()) {
+	while (!ref_val.isNull()) {
 		std::string filepath = ref_val["filepath"].asString();
 		filepath = ee::FileHelper::GetAbsolutePath(dir, filepath);
 
