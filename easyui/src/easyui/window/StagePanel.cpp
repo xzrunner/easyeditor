@@ -81,6 +81,7 @@ void StagePanel::LoadFromFile(const char* filename)
 
 void StagePanel::StoreToFile(const char* filename) const
 {
+	m_sym->name = m_toolbar->GetWindowName();
 	FileIO::Store(filename, m_sym);
 }
 
