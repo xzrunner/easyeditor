@@ -79,7 +79,7 @@ void PackETC2::Store(const std::string& filepath, float scale) const
 	if (scale == 1) {
 		Store(fout, m_buf, m_width, m_height);
 	} else {
-
+		StoreScaled(fout, scale);
 	}
 	fout.close();
 }
