@@ -93,18 +93,18 @@ void PackETC2::Store(std::ofstream& fout, uint8_t* buffer, int width, int height
 {
 	if (m_compress)
 	{
-		size_t body_sz = m_width * m_height;
+		size_t body_sz = width * height;
 		size_t tot_size = sizeof(int8_t) + sizeof(int16_t) * 2 + body_sz;
 		uint8_t* buf = new uint8_t[tot_size];
 		uint8_t* ptr = buf;
 
 		memcpy(ptr, &m_type, sizeof(int8_t));
 		ptr += sizeof(int8_t);
-		memcpy(ptr, &m_width, sizeof(int16_t));
+		memcpy(ptr, &width, sizeof(int16_t));
 		ptr += sizeof(int16_t);
-		memcpy(ptr, &m_height, sizeof(int16_t));
+		memcpy(ptr, &height, sizeof(int16_t));
 		ptr += sizeof(int16_t);
-		memcpy(ptr, m_buf, body_sz);
+		memcpy(ptr, buffer, body_sz);
 		ptr += body_sz;
 
 		uint8_t* dst = NULL;
@@ -121,7 +121,7 @@ void PackETC2::Store(std::ofstream& fout, uint8_t* buffer, int width, int height
 	}
 	else
 	{
-		int body_sz = (m_width * m_height) >> 1;
+		int body_sz = width * height;
 		int sz = 0;
 		sz += sizeof(int8_t);	// type
 		sz += sizeof(int16_t);	// width
@@ -131,10 +131,10 @@ void PackETC2::Store(std::ofstream& fout, uint8_t* buffer, int width, int height
 		fout.write(reinterpret_cast<const char*>(&sz), sizeof(int32_t));
 
 		fout.write(reinterpret_cast<const char*>(&m_type), sizeof(int8_t));
-		fout.write(reinterpret_cast<const char*>(&m_width), sizeof(int16_t));
-		fout.write(reinterpret_cast<const char*>(&m_height), sizeof(int16_t));
+		fout.write(reinterpret_cast<const char*>(&width), sizeof(int16_t));
+		fout.write(reinterpret_cast<const char*>(&height), sizeof(int16_t));
 
-		fout.write(reinterpret_cast<const char*>(m_buf), body_sz);
+		fout.write(reinterpret_cast<const char*>(buffer), body_sz);
 	}
 
 }
