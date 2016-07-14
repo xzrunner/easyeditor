@@ -5,7 +5,7 @@
 
 #include <stddef.h>
 
-namespace ee { class EditPanelImpl; class MultiSpritesImpl; class Sprite; class CrossGuides; }
+namespace ee { class EditPanelImpl; class MultiSpritesImpl; class Sprite; class CrossGuides; class ViewlistPanel; }
 
 class wxWindow;
 
@@ -26,12 +26,17 @@ public:
 		m_lsns.push_back(lsn);
 	}
 
+	// todo
+	void SetViewlist(ee::ViewlistPanel* viewlist) { m_viewlist = viewlist; }
+
 private:
 	wxWindow* m_wnd;
 
 	ee::EditPanelImpl* m_stage;
 
 	ee::MultiSpritesImpl* m_sprites_impl;
+
+	ee::ViewlistPanel* m_viewlist;
 
 	std::vector<OpenSymbolLsn*> m_lsns;
 

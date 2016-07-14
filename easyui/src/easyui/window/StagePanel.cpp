@@ -39,7 +39,9 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* to
 
 	ee::ArrangeSpriteOP<ecomplex::SelectSpritesOP>* edit_op = new ee::ArrangeSpriteOP<ecomplex::SelectSpritesOP>(
 		this, GetStageImpl(), this, top_pannels->property, NULL, ee::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, top_pannels->property));
-	static_cast<ecomplex::SelectSpritesOP*>(edit_op)->SetGuides(&m_guides);
+	ecomplex::SelectSpritesOP* select_op = static_cast<ecomplex::SelectSpritesOP*>(edit_op);
+	select_op->SetGuides(&m_guides);
+	select_op->SetOpenSymbolDialogViewlist(top_pannels->viewlist);
 	SetEditOP(edit_op);
 	edit_op->Release();
 

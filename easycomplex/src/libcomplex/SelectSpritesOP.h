@@ -26,6 +26,11 @@ public:
 
 	void RegOpenSymDlgLsn(OpenSymbolLsn* lsn) { m_open_symbol.RegistLsn(lsn); }
 
+	// todo
+	void SetOpenSymbolDialogViewlist(ee::ViewlistPanel* viewlist) {
+		m_open_symbol.SetViewlist(viewlist);
+	}
+
 private:
 	void GroupSelection();
 	void BreakUpSelection();

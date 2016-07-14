@@ -16,6 +16,7 @@
 #include <ee/EditPanelImpl.h>
 #include <ee/FontBlankSprite.h>
 #include <ee/TextDialog.h>
+#include <ee/ViewlistPanel.h>
 
 namespace ecomplex
 {
@@ -25,6 +26,7 @@ OpenSymbolDialog::OpenSymbolDialog(wxWindow* wnd, ee::EditPanelImpl* stage,
 	: m_wnd(wnd)
 	, m_stage(stage)
 	, m_sprites_impl(sprites_impl)
+	, m_viewlist(NULL)
 {
 }
 
@@ -43,6 +45,9 @@ void OpenSymbolDialog::Open(ee::Sprite* spr, ee::CrossGuides* guides)
 	m_stage->EnableObserve(false);
 	m_stage->GetCanvas()->EnableObserve(false);
 	m_stage->GetCanvas()->SetDrawable(false);
+	if (m_viewlist) {
+		m_viewlist->EnableObserve(false);
+	}
 	for (int i = 0, n = m_lsns.size(); i < n; ++i) {
 		m_lsns[i]->BeforeOpen();
 	}
@@ -105,6 +110,9 @@ void OpenSymbolDialog::Open(ee::Sprite* spr, ee::CrossGuides* guides)
 	m_stage->EnableObserve(true);
 	m_stage->GetCanvas()->EnableObserve(true);
 	m_stage->GetCanvas()->SetDrawable(true);
+	if (m_viewlist) {
+		m_viewlist->EnableObserve(true);
+	}
 	for (int i = 0, n = m_lsns.size(); i < n; ++i) {
 		m_lsns[i]->AfterOpen();
 	}

@@ -20,6 +20,8 @@ public:
 
 	void SetListImpl(ViewlistListImpl* impl);
 
+	void EnableObserve(bool enable);
+
 private:
 	void InitLayout();
 

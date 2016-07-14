@@ -26,6 +26,11 @@ void ViewlistPanel::SetListImpl(ViewlistListImpl* impl)
 	m_list->SetImpl(impl);	
 }
 
+void ViewlistPanel::EnableObserve(bool enable)
+{
+	m_list->EnableObserve(enable);
+}
+
 void ViewlistPanel::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
