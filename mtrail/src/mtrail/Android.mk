@@ -1,0 +1,13 @@
+INNER_SAVED_LOCAL_PATH := $(LOCAL_PATH)
+
+LOCAL_PATH:= $(call my-dir)
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := mtrail
+
+LOCAL_SRC_FILES := \
+
+include $(BUILD_STATIC_LIBRARY)
+
+LOCAL_PATH := $(INNER_SAVED_LOCAL_PATH)
