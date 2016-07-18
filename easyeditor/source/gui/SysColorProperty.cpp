@@ -16,7 +16,9 @@ SysColorProperty::SysColorProperty(const wxString& label, const wxString& name)
 {}
 
 SysColorProperty::~SysColorProperty() 
-{}
+{
+	delete m_lsn;
+}
 
 bool SysColorProperty::OnButtonClick( wxPropertyGrid* propGrid, wxString& value )
 {
