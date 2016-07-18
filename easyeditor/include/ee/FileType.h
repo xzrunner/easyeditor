@@ -38,6 +38,7 @@ public:
 		e_mask,
 		e_psd,
 		e_uiwnd,
+		e_trail,
 	};
 
 	static Type GetType(const std::string& filename);

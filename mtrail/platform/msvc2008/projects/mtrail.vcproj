@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="1.ps"
-	ProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
-	RootNamespace="particle"
+	Name="1.mtrail"
+	ProjectGUID="{09C39B9E-27F5-4B39-9829-2815FD1C5469}"
+	RootNamespace="mtrail"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -18,8 +18,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\particle\x86\Debug"
-			IntermediateDirectory="..\particle\x86\Debug\obj"
+			OutputDirectory="..\mtrail\x86\Debug"
+			IntermediateDirectory="..\mtrail\x86\Debug\obj"
 			ConfigurationType="4"
 			CharacterSet="1"
 			>
@@ -41,8 +41,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\editor-external\c99;..\..\..\..\logger\src\logger"
-				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
+				AdditionalIncludeDirectories="..\..\..\..\logger\src\logger;..\..\..\..\editor-external\c99"
+				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -80,8 +80,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\particle\x86\Release"
-			IntermediateDirectory="..\particle\x86\Release\obj"
+			OutputDirectory="..\mtrail\x86\Release"
+			IntermediateDirectory="..\mtrail\x86\Release\obj"
 			ConfigurationType="4"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
@@ -105,8 +105,8 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\editor-external\c99;..\..\..\..\logger\src\logger"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
+				AdditionalIncludeDirectories="..\..\..\..\logger\src\logger;..\..\..\..\editor-external\c99"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
@@ -146,51 +146,19 @@
 	</References>
 	<Files>
 		<File
-			RelativePath="..\..\..\src\ps.h"
+			RelativePath="..\..\..\src\mtrail\mt_2d.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\ps_2d.c"
+			RelativePath="..\..\..\src\mtrail\mt_2d.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\ps_2d.h"
+			RelativePath="..\..\..\src\mtrail\mt_array.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\ps_3d.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\ps_3d.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\ps_3d_buffer.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\ps_3d_buffer.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\ps_3d_sprite.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\ps_3d_sprite.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\ps_array.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\ps_utility.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\ps_utility.h"
+			RelativePath="..\..\..\src\mtrail\mt_utility.h"
 			>
 		</File>
 	</Files>

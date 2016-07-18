@@ -1,0 +1,127 @@
+#include "MotionTrail.h"
+#include "mt_config.h"
+#include "MTrail.h"
+
+#include <mt_2d.h>
+
+#include <assert.h>
+#include <string>
+
+namespace etrail
+{
+
+MotionTrail::MotionTrail(t2d_emitter_cfg* cfg)
+{
+	MTrail::Instance();
+
+	Init(cfg);
+}
+
+void MotionTrail::SetValue(int key, const ee::UICallback::Data& data)
+{
+	t2d_emitter_cfg* cfg = const_cast<t2d_emitter_cfg*>(m_spr->cfg);
+
+	switch (key)
+	{
+	case MT_COUNT:
+		cfg->count = static_cast<int>(data.val0);
+		break;
+	}
+}
+
+void MotionTrail::GetValue(int key, ee::UICallback::Data& data)
+{
+	switch (key)
+	{
+	case MT_COUNT:
+		data.val0 = static_cast<float>(m_spr->cfg->count);
+		break;
+	}
+}
+
+void MotionTrail::Draw(const sm::mat4& mt) const
+{
+	m_rp.mat = const_cast<sm::mat4&>(mt);
+	t2d_emitter_draw(m_spr, &m_rp);
+}
+
+bool MotionTrail::Update(const sm::mat4& mat)
+{
+	float time = MTrail::Instance()->GetTime();
+	assert(m_spr->time <= time);
+	if (m_spr->time == time) {
+		return false;
+	}
+
+	float mt[6];
+	mt[0] = mat.x[0];
+	mt[1] = mat.x[1];
+	mt[2] = mat.x[4];
+	mt[3] = mat.x[5];
+	mt[4] = mat.x[12];
+	mt[5] = mat.x[13];	
+
+	float dt = time - m_spr->time;
+	t2d_emitter_update(m_spr, dt, mt);
+	m_spr->time = time;
+
+	return true;
+}
+
+void MotionTrail::Start()
+{
+	t2d_emitter_start(m_spr);
+}
+
+void MotionTrail::Clear()
+{
+
+}
+
+t2d_symbol* MotionTrail::AddSymbol(ee::Symbol* symbol)
+{
+	assert(m_spr->cfg->symbol_count < MAX_COMPONENTS);
+
+	t2d_emitter_cfg* cfg = const_cast<t2d_emitter_cfg*>(m_spr->cfg);
+	t2d_symbol& comp = m_spr->cfg->symbols[cfg->symbol_count++];
+	memset(&comp, 0, SIZEOF_T2D_SYMBOL);
+
+	comp.mode.B.ud = symbol;
+
+	return &comp;
+}
+
+void MotionTrail::DelSymbol(int idx)
+{
+	if (idx < 0 || idx >= m_spr->cfg->symbol_count) {
+		return;
+	}
+
+	t2d_emitter_cfg* cfg = const_cast<t2d_emitter_cfg*>(m_spr->cfg);
+	if (cfg->symbol_count == 1) {
+		cfg->symbol_count = 0;
+	} else {
+		for (int i = idx; i < cfg->symbol_count - 1; ++i) {
+			const t2d_symbol* src = &cfg->symbols[i+1];
+			t2d_symbol* dst = &cfg->symbols[i];
+			memcpy(dst, src, sizeof(t2d_symbol));
+		}
+		--cfg->symbol_count;
+	}
+}
+
+void MotionTrail::DelAllSymbol()
+{
+	const_cast<t2d_emitter_cfg*>(m_spr->cfg)->symbol_count = 0;
+
+}
+
+void MotionTrail::Init(const t2d_emitter_cfg* cfg)
+{
+	m_spr = t2d_emitter_create(cfg);
+	assert(m_spr);
+
+	m_rp.trail = m_spr;
+}
+
+}

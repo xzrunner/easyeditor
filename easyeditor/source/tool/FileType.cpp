@@ -25,6 +25,7 @@ static const std::string TAG_TEXT		= "text";
 static const std::string TAG_MASK		= "mask";
 static const std::string TAG_PSD		= "psd";
 static const std::string TAG_UIWND		= "uiwnd";
+static const std::string TAG_TRAIL		= "trail";
 
 static const std::string TAG_GEN		= "gen";
 
@@ -66,6 +67,7 @@ FileType::Type FileType::GetType(const std::string& filename)
 		else if (ext == TAG_MASK) return e_mask;
 		else if (ext == TAG_PSD) return e_psd;
 		else if (ext == TAG_UIWND) return e_uiwnd;
+		else if (ext == TAG_TRAIL) return e_trail;
 		else return e_unknown;
 	}
 	else if (extension == ".lua")
@@ -156,6 +158,9 @@ std::string FileType::GetTag(Type type)
 		break;
 	case e_uiwnd:
 		ext = TAG_UIWND;
+		break;
+	case e_trail:
+		ext = TAG_TRAIL;
 		break;
 	}
 	return ext;
