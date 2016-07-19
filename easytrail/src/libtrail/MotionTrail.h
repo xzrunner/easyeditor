@@ -29,15 +29,17 @@ public:
 	virtual void GetValue(int key, ee::UICallback::Data& data);
 
 	void Draw(const sm::mat4& mt) const;
-	bool Update(const sm::mat4& mat);
+	bool Update(const sm::vec2& pos);
 
 	void Start();
+	void Stop();
 
 	void Clear();
 
 	t2d_symbol* AddSymbol(ee::Symbol* symbol);
 	void DelSymbol(int idx);
 	void DelAllSymbol();
+	t2d_symbol* GetSymbol(int idx);
 
 private:
 	void Init(const t2d_emitter_cfg* cfg);

@@ -200,6 +200,14 @@
 			Name="math"
 			>
 			<File
+				RelativePath="..\..\..\src\sm\sm_c_calc.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\sm\sm_c_calc.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\sm\SM_Calc.h"
 				>
 			</File>

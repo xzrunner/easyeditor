@@ -4,6 +4,7 @@
 #include <ee/SpriteRenderer.h>
 
 #include <mt_2d.h>
+#include <shaderlab.h>
 
 #include <time.h>
 #include <assert.h>
@@ -55,7 +56,7 @@ void MTrail::UpdateTime()
 }
 
 static void 
-render_func(void* symbol, float* mat, float x, float y, const void* ud)
+render_symbol_func(void* symbol, float x, float y, float angle, uint8_t* mul_col, uint8_t* add_col, const void* ud)
 {
 	assert(ud);
 	const RenderParams* rp = (static_cast<const RenderParams*>(ud));
@@ -65,22 +66,28 @@ render_func(void* symbol, float* mat, float x, float y, const void* ud)
 
 	s2::RenderParams params;
 
-	sm::mat4 _mat;
-	_mat.x[0] = mat[0];
-	_mat.x[1] = mat[1];
-	_mat.x[4] = mat[2];
-	_mat.x[5] = mat[3];
-	_mat.x[12]= mat[4];
-	_mat.x[13]= mat[5];
-	params.mt = _mat * rp->mat;
+	memcpy(&params.color.mul.r, mul_col, sizeof(uint8_t) * 4);
+	memcpy(&params.color.add.r, add_col, sizeof(uint8_t) * 4);
+	params.color.mul = params.color.mul * rp->ct.mul;
+	params.color.add = params.color.add + rp->ct.add;
 
-	ee::SpriteRenderer::Draw(sym, params, sm::vec2(x, y));
+	ee::SpriteRenderer::Draw(sym, params, sm::vec2(x, y), angle - SM_PI * 0.5f);
+}
+
+static void 
+render_shape_func(const float* positions, const uint32_t* colors, int count)
+{
+	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
+	mgr->SetShader(sl::SHAPE2);
+	sl::Shape2Shader* shader = static_cast<sl::Shape2Shader*>(mgr->GetShader());
+	shader->SetType(0x0005);	// todo from rvg_render.c
+	shader->Draw(positions, colors, count);
 }
 
 void MTrail::Init()
 {
 	t2d_init();
-	t2d_regist_cb(render_func);	
+	t2d_regist_cb(render_symbol_func, render_shape_func);	
 }
 
 }

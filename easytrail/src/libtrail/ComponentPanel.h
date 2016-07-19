@@ -27,6 +27,8 @@ public:
 	virtual void SetValue(int key, const ee::UICallback::Data& data);
 	virtual void GetValue(int key, ee::UICallback::Data& data);
 
+	void SetSymbol(t2d_symbol* sym) { m_pc = sym; }
+
 private:
 	void InitLayout();
 	void InitLayout(wxSizer* sizer);

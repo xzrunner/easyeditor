@@ -1,4 +1,5 @@
 #include "ComponentPanel.h"
+#include "ToolbarPanel.h"
 #include "mt_config.h"
 
 #include <ee/SliderCtrl.h>
@@ -66,7 +67,6 @@ void ComponentPanel::InitLayout(wxSizer* top_sizer)
 				Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ComponentPanel::OnDelete));
 				vert_sizer->Add(btn);
 			}
-//			vert_sizer->AddSpacer(8);
 			hori_sizer->Add(vert_sizer);
 		}
 		hori_sizer->AddSpacer(20);
@@ -96,7 +96,7 @@ void ComponentPanel::InitLayout(wxSizer* top_sizer)
 
 void ComponentPanel::OnDelete(wxCommandEvent& event)
 {
-//	m_toolbar->OnDelChild(this);
+	m_toolbar->OnDelChild(this);
 }
 
 }

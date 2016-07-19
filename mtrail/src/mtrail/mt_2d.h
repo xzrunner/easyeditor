@@ -8,14 +8,16 @@ extern "C"
 
 #include "mt_utility.h"
 
+#include <sm_c_vector.h>
+
 #include <stdbool.h>
 
 #define T2D_MODE_SHAPE	0
 #define T2D_MODE_SYMBOL	1
 
 struct t2d_symbol {	
-	struct mt_color col_mul_start, col_mul_end;
-	struct mt_color col_add_start, col_add_end;
+	struct mt_color col_mul, col_add;
+	float alpha_start, alpha_end;
 
 	union {
 		// shape
@@ -37,11 +39,11 @@ struct t2d_symbol {
 struct t2d_particle {
 	struct t2d_symbol* sym;
 
-	float mat[6];
-
 	float life;
+	float lifetime;
 
-	struct mt_vec2 pos;
+	struct sm_vec2 pos;
+	float angle;
 
 	struct mt_color col_mul, col_mul_delta;
 	struct mt_color col_add, col_add_delta;
@@ -66,7 +68,10 @@ struct t2d_particle {
 struct t2d_emitter_cfg {
 	int count;
 
-	float life, life_var;
+	float life_begin;
+	float life_offset;
+
+	float fadeout_time;
 
 	int mode_type;
 	union {
@@ -104,15 +109,17 @@ struct t2d_emitter {
 #define SIZEOF_T2D_EMITTER (sizeof(struct t2d_emitter) + PTR_SIZE_DIFF * 3)
 
 void t2d_init();
-void t2d_regist_cb(void (*render_func)(void* symbol, float* mat, float x, float y, const void* ud));
+void t2d_regist_cb(void (*render_symbol_func)(void* symbol, float x, float y, float angle, uint8_t* mul_col, uint8_t* add_col, const void* ud),
+				   void (*render_shape_func)(const float* positions, const uint32_t* colors, int count));
 
 struct t2d_emitter* t2d_emitter_create(const struct t2d_emitter_cfg* cfg);
 void t2d_emitter_release(struct t2d_emitter*);
 void t2d_emitter_clear(struct t2d_emitter*);
 
 void t2d_emitter_start(struct t2d_emitter*);
+void t2d_emitter_stop(struct t2d_emitter*);
 
-void t2d_emitter_update(struct t2d_emitter* et, float dt, float* mat);
+void t2d_emitter_update(struct t2d_emitter* et, float dt, struct sm_vec2* pos);
 void t2d_emitter_draw(struct t2d_emitter* et, const void* ud);
 
 #endif // motion_trail_2d_h

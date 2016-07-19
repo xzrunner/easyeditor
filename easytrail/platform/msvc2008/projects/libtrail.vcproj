@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\..\sprite2\include;..\..\..\..\sm\src\sm;..\..\..\..\mtrail\src\mtrail;..\..\..\..\easyeditor\include;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;"
+				AdditionalIncludeDirectories="..\..\..\..\sprite2\include;..\..\..\..\sm\src\sm;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\mtrail\src\mtrail;..\..\..\..\easyeditor\include;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;..\..\..\..\easyanim\src;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -105,7 +105,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\..\sprite2\include;..\..\..\..\sm\src\sm;..\..\..\..\mtrail\src\mtrail;..\..\..\..\easyeditor\include;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;"
+				AdditionalIncludeDirectories="..\..\..\..\sprite2\include;..\..\..\..\sm\src\sm;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\mtrail\src\mtrail;..\..\..\..\easyeditor\include;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;..\..\..\..\easyanim\src;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"

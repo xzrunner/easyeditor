@@ -30,15 +30,10 @@ bool StagePanel::Update(float dt)
 {
 	MTrail::Instance()->UpdateTime();
 	if (m_trail) {
-		return m_trail->Update(m_mat);
+		return m_trail->Update(m_pos);
 	} else {
 		return false;
 	}
-}
-
-void StagePanel::SetTrailMat(const sm::vec2& pos)
-{
-	m_mat = sm::mat4::Translated(pos.x, pos.y, 0);
 }
 
 }

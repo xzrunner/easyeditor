@@ -1,5 +1,7 @@
 #include "Math2D.h"
 
+#include <SM_Calc.h>
+
 #include <assert.h>
 
 namespace ee
@@ -683,18 +685,7 @@ float Math2D::GetTriangleArea(const sm::vec2& p0, const sm::vec2& p1, const sm::
 
 bool Math2D::GetTwoLineCross(const sm::vec2& s0, const sm::vec2& e0, const sm::vec2& s1, const sm::vec2& e1, sm::vec2* cross)
 {
-	// If they are parallel ?
-	float denominatorX = (e1.y - s1.y) * (e0.x - s0.x) - (e0.y - s0.y) * (e1.x - s1.x),
-		  denominatorY = (e1.x - s1.x) * (e0.y - s0.y) - (e0.x - s0.x) * (e1.y - s1.y);
-	if (fabs(denominatorX) < FLT_EPSILON || fabs(denominatorY) < FLT_EPSILON)
-	{
-		cross->x = cross->y = FLT_MAX;
-		return false;
-	} else {
-		cross->x = ( (e0.x * s0.y - s0.x * e0.y) * (e1.x - s1.x) - (e1.x * s1.y - s1.x * e1.y) * (e0.x - s0.x) ) / denominatorX;
-		cross->y = ( (e0.y * s0.x - s0.y * e0.x) * (e1.y - s1.y) - (e1.y * s1.x - s1.y * e1.x) * (e0.y - s0.y) ) / denominatorY;
-		return true;
-	}
+	return sm::intersect_line_line(s0, e0, s1, e1, cross);
 }
 
 bool Math2D::GetTwoSegmentCross(const sm::vec2& s0, const sm::vec2& e0, const sm::vec2& s1, const sm::vec2& e1, sm::vec2* cross)

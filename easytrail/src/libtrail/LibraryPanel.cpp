@@ -2,6 +2,8 @@
 
 #include <ee/LibraryImagePage.h>
 
+#include <easyanim.h>
+
 #include <wx/notebook.h>
 
 namespace etrail
@@ -12,6 +14,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 {
 	wxWindow* nb = GetNotebook();
 	AddPage(new ee::LibraryImagePage(nb));
+	AddPage(new eanim::LibraryPage(nb));
 }
 
 }

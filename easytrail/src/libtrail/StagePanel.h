@@ -23,14 +23,13 @@ public:
 
 	virtual bool Update(float dt);
 
-	void SetTrailMat(const sm::vec2& pos);
-	const sm::mat4& SetTrailMat() const { return m_mat; }
+	void SetPos(const sm::vec2& pos) { m_pos = pos; }
 
 public:
 	MotionTrail* m_trail;
 
 private:
-	sm::mat4 m_mat;
+	sm::vec2 m_pos;
 
 }; // StagePanel
 

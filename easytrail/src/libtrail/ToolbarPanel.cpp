@@ -73,13 +73,39 @@ void ToolbarPanel::InitTrail()
 
 void ToolbarPanel::OnDelChild(ComponentPanel* child)
 {
+	if (m_children.empty()) return;
 
+	m_stage->m_trail->Clear();
+
+	int idx = -1;
+	for (int i = 0, n = m_children.size(); i < n; ++i) {
+		if (m_children[i] == child) {
+			idx = i;
+			break;
+		}
+	}
+	if (idx == -1) {
+		return;
+	}
+
+	m_comp_sizer->Detach(m_children[idx]);
+	delete m_children[idx];
+	m_children.erase(m_children.begin() + idx);
+
+	m_stage->m_trail->DelSymbol(idx);
+
+	this->Layout();	
+
+	for (int i = 0, n = m_children.size(); i < n; ++i) {
+		m_children[i]->SetSymbol(m_stage->m_trail->GetSymbol(i));
+	}
 }
 
 wxSizer* ToolbarPanel::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 	sizer->Add(CreateMainLayout());
+	sizer->AddSpacer(10);
 	sizer->Add(CreateComponentLayout());
 	return sizer;
 }
@@ -99,6 +125,27 @@ wxSizer* ToolbarPanel::CreateMainLayout()
 		"count", this, MT_COUNT, ee::SliderItem("", "", 20, 1, 500));
 	top_sizer->Add(s_count);
 	m_sliders.push_back(s_count);
+
+	top_sizer->AddSpacer(10);
+
+	// Life Time Begin
+	ee::SliderCtrlOne* s_life_begin = new ee::SliderCtrlOne(this, "起点生命周期(ms)", 
+		"life begin", this, MT_LIFETIME_BEGIN, ee::SliderItem("", "", 1000, -1, 5000));
+	top_sizer->Add(s_life_begin);
+	m_sliders.push_back(s_life_begin);
+	// Life Time Offset
+	ee::SliderCtrlOne* s_life_offset = new ee::SliderCtrlOne(this, "生命周期增量(ms)", 
+		"life offset", this, MT_LIFETIME_OFFSET, ee::SliderItem("", "", 0, 0, 1000));
+	top_sizer->Add(s_life_offset);
+	m_sliders.push_back(s_life_offset);
+
+	top_sizer->AddSpacer(10);
+
+	// Fadeout Time
+	ee::SliderCtrlOne* s_fadeout = new ee::SliderCtrlOne(this, "消逝时间", 
+		"fadeout_time", this, MT_FADEOUT_TIME, ee::SliderItem("", "", 0, 0, 2500));
+	top_sizer->Add(s_fadeout);
+	m_sliders.push_back(s_fadeout);
 
 	return top_sizer;
 }
