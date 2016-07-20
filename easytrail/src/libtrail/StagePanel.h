@@ -28,6 +28,8 @@ public:
 public:
 	MotionTrail* m_trail;
 
+//	std::vector<MotionTrail*> m_trails;
+
 private:
 	sm::vec2 m_pos;
 

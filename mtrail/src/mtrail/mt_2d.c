@@ -212,14 +212,19 @@ _add_shape_node(struct t2d_emitter* et, float* positions, uint32_t* colors, int*
 
 	struct mt_color col;
 	float proc = (p->lifetime - p->life) / p->lifetime;
-	col = p->sym->col_mul;
+
+//	col = p->sym->col_mul;
+	col.r = 0;
+	col.g = 128;
+	col.b = 0;
+	col.a = 255;
+
 	if (p->life < et->cfg->fadeout_time) {
 		col.a *= p->life / et->cfg->fadeout_time;
 	}
-	float alpha = proc * (p->sym->alpha_end - p->sym->alpha_start) + p->sym->alpha_start;
-	col.a *= alpha;
+// 	float alpha = proc * (p->sym->alpha_end - p->sym->alpha_start) + p->sym->alpha_start;
+// 	col.a *= alpha;
 
-	col.a = 0;
 	colors[*ptr] = (col.a << 24) | (col.b << 16) | (col.g << 8) | col.r;
 	++*ptr;
 }
@@ -248,8 +253,12 @@ _draw_shape(struct t2d_emitter* et, const void* ud) {
 	prev = curr;
 	curr = curr->next;
 
+	int idx = 0;
 	while (curr) {
-		_offset_segment(&prev->pos, &curr->pos, MAX_HW, &l2, &l3, &r2, &r3);
+		int tot = et->particle_count - 3;
+//		float w = (0.1f + 0.9f * (tot - idx) / tot) * MAX_HW;
+		float w = MAX_HW;
+		_offset_segment(&prev->pos, &curr->pos, w, &l2, &l3, &r2, &r3);
 
 		struct sm_vec2 lc, rc;
 		sm_intersect_line_line(&l0, &l1, &l2, &l3, &lc);
@@ -264,6 +273,8 @@ _draw_shape(struct t2d_emitter* et, const void* ud) {
 
 		prev = curr;
 		curr = curr->next;
+
+		++idx;
 	}
 
 	if (et->particle_count == 2) {

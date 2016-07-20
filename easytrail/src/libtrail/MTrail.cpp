@@ -80,6 +80,9 @@ render_shape_func(const float* positions, const uint32_t* colors, int count)
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	mgr->SetShader(sl::SHAPE2);
 	sl::Shape2Shader* shader = static_cast<sl::Shape2Shader*>(mgr->GetShader());
+
+//	shader->Commit();
+
 	shader->SetType(0x0005);	// todo from rvg_render.c
 	shader->Draw(positions, colors, count);
 }

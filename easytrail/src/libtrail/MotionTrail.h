@@ -41,6 +41,8 @@ public:
 	void DelAllSymbol();
 	t2d_symbol* GetSymbol(int idx);
 
+	t2d_emitter_cfg* GetConfig();
+
 private:
 	void Init(const t2d_emitter_cfg* cfg);
 

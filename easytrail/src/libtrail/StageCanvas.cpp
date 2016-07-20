@@ -38,6 +38,9 @@ void StageCanvas::OnDrawSprites() const
 	if (trail) {
 		trail->Draw(sm::mat4());
 	}
+// 	for (int i = 0, n = m_stage->m_trails.size(); i < n; ++i) {
+// 		m_stage->m_trails[i]->Draw(sm::mat4());
+// 	}
 
 	m_stage->DrawEditOP();
 }

@@ -152,6 +152,11 @@ t2d_symbol* MotionTrail::GetSymbol(int idx)
 	}
 }
 
+t2d_emitter_cfg* MotionTrail::GetConfig() 
+{ 
+	return const_cast<t2d_emitter_cfg*>(m_spr->cfg);
+}
+
 void MotionTrail::Init(const t2d_emitter_cfg* cfg)
 {
 	m_spr = t2d_emitter_create(cfg);

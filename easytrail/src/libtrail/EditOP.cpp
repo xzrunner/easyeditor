@@ -2,6 +2,8 @@
 #include "StagePanel.h"
 #include "MotionTrail.h"
 
+//#include "MTConfigMgr.h"
+
 namespace etrail
 {
 
@@ -26,6 +28,9 @@ bool EditOP::OnMouseLeftUp(int x, int y)
 	if (ee::ZoomViewOP::OnMouseLeftUp(x, y)) return true;
 
 	m_stage->m_trail->Stop();
+
+// 	m_stage->m_trails.push_back(m_stage->m_trail);
+// 	m_stage->m_trail = new MotionTrail(m_stage->m_trail->GetConfig());
 
 	return false;
 }
