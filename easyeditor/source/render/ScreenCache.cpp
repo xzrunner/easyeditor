@@ -109,7 +109,7 @@ void ScreenCache::Draw(const Camera* cam)
 
 void ScreenCache::DrawToScreen(void (*before_draw)(void* ud), void* ud)
 {
-	dtex_cs_draw(CS, before_draw, ud);
+	dtex_cs_draw(CS, 1, 1, 1, 1, before_draw, ud);
 }
 
 int ScreenCache::GetTexID() const
