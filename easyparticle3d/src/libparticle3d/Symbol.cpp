@@ -69,10 +69,9 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 	shader->SetColorMap(p.color.rmap.ToABGR(), p.color.gmap.ToABGR(), p.color.bmap.ToABGR());
 
 	if (p3d_spr->IsLocalModeDraw()) {
-		p3d_spr->Draw(spr->GetTransMatrix() * params.mt);
-	} else {
-		p3d_spr->Draw(p.mt);
+		p.mt = spr->GetTransMatrix() * p.mt;
 	}
+	p3d_spr->Draw(p);
 }
 
 void Symbol::ReloadTexture() const

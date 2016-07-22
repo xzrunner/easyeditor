@@ -9,6 +9,7 @@
 #include <ps_3d_sprite.h>
 #include <ps_3d_buffer.h>
 #include <sprite2/Particle3dSprite.h>
+#include <sprite2/RenderParams.h>
 
 namespace eparticle3d
 {
@@ -217,10 +218,11 @@ void Sprite::Start()
 	}
 }
 
-void Sprite::Draw(const sm::mat4& mt) const
+void Sprite::Draw(const s2::RenderParams& params) const
 {
 	if (!m_alone && m_spr) {
-		m_rp.mat = mt;
+		m_rp.mat = params.mt;
+		m_rp.ct = params.color;
 		m_rp.p3d = m_spr;
 		p3d_emitter_draw(m_spr->et, &m_rp);
 	}

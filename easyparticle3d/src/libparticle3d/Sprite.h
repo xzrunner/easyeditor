@@ -38,7 +38,7 @@ public:
 
 	void Start();
 
-	void Draw(const sm::mat4& mt) const;
+	void Draw(const s2::RenderParams& params) const;
 
 	void SetOuterMatrix(const sm::mat4& mat);
 
