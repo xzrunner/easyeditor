@@ -2,6 +2,7 @@
 
 #include <ee/SpriteRenderer.h>
 #include <ee/Sprite.h>
+#include <ee/SceneNode.h>
 
 namespace ecomplex
 {
@@ -25,6 +26,8 @@ void PreviewCanvas::OnDrawSprites() const
 		params.color = spr->GetColor();
 		ee::SpriteRenderer::Draw(spr, params);
 	}
+
+	ee::SceneNodeMgr::Instance()->Draw();
 }
 
 }
