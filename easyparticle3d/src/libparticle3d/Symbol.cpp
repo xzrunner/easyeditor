@@ -54,12 +54,13 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 		RenderParams* rp = static_cast<RenderParams*>(p3d->draw_params);
 		rp->mat = p.mt;
 		rp->ct = p.color;
-		p3d->mat[0] = p.mt.x[0];
-		p3d->mat[1] = p.mt.x[1];
-		p3d->mat[2] = p.mt.x[4];
-		p3d->mat[3] = p.mt.x[5];
-		p3d->mat[4] = p.mt.x[12];
-		p3d->mat[5] = p.mt.x[13];	
+		sm::mat4 mt = spr->GetTransMatrix() * p.mt;
+		p3d->mat[0] = mt.x[0];
+		p3d->mat[1] = mt.x[1];
+		p3d->mat[2] = mt.x[4];
+		p3d->mat[3] = mt.x[5];
+		p3d->mat[4] = mt.x[12];
+		p3d->mat[5] = mt.x[13];	
 		return;
 	}
 
