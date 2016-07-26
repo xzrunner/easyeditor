@@ -64,6 +64,9 @@ Sprite::Sprite(const Sprite& sprite)
 	m_richtext = sprite.m_richtext;
 
 	m_time = sprite.m_time;
+
+	m_text = sprite.m_text;
+	m_tid = sprite.m_tid;
 }
 
 Sprite::Sprite(Symbol* symbol)
