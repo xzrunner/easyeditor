@@ -19,6 +19,7 @@
 #include "FilterModes.h"
 #include "WXHelper.h"
 #include "SpriteFilterPSHelper.h"
+#include "FileDirProperty.h"
 
 #include <sprite2/RenderColor.h>
 #include <sprite2/RenderShader.h>
@@ -221,9 +222,6 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 
 	Sprite* spr = m_impl->GetSprite();
 
-	std::string filedir = FileHelper::GetFileDir(spr->GetSymbol().GetFilepath());
-	pg->GetProperty(wxT("FileDir"))->SetValue(filedir);
-
 	std::string filename = FileHelper::GetFilenameWithExtension(spr->GetSymbol().GetFilepath());
 	pg->GetProperty(wxT("FileName"))->SetValue(filename);
 
@@ -302,7 +300,7 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->Append(new wxPropertyCategory("RES", wxPG_LABEL));
 
 	std::string filedir = FileHelper::GetFileDir(spr->GetSymbol().GetFilepath());
-	pg->Append(new wxStringProperty("FileDir", wxPG_LABEL, filedir));
+	pg->Append(new FileDirProperty("FileDir", wxPG_LABEL, filedir));
 
 	std::string filename = FileHelper::GetFilenameWithExtension(spr->GetSymbol().GetFilepath());
 	pg->Append(new wxStringProperty("FileName", wxPG_LABEL, filename));
