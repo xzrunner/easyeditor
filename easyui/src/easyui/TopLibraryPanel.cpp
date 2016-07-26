@@ -4,6 +4,7 @@
 #include <ee/LibraryScriptsPage.h>
 
 #include <easycomplex.h>
+#include <easyanim.h>
 #include <easytext.h>
 
 namespace eui
@@ -47,6 +48,7 @@ void TopLibraryPanel::InitLayout()
 	wxWindow* nb = m_library_raw->GetNotebook();
 	m_library_raw->AddPage(new ee::LibraryImagePage(nb));
 	m_library_raw->AddPage(new ecomplex::LibraryPage(nb));
+	m_library_raw->AddPage(new eanim::LibraryPage(nb));
 	m_library_raw->AddPage(new etext::LibraryPage(nb));
 	m_library_raw->AddPage(new ee::LibraryScriptsPage(nb));
 	sizer->Add(m_library_raw, 1, wxEXPAND);
