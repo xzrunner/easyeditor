@@ -4,6 +4,7 @@
 #include "EditPanelImpl.h"
 #include "StageCanvas.h"
 #include "panel_msg.h"
+#include "FileHelper.h"
 
 namespace ee
 {
@@ -62,6 +63,7 @@ void SymbolPropertySetting::OnPropertyGridChange(const std::string& name, const 
 void SymbolPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
 	if (m_symbol) {
+		pg->GetProperty(wxT("Filepath"))->SetValue(m_symbol->GetFilepath());
 		pg->GetProperty(wxT("Name"))->SetValue(m_symbol->name);
 		pg->GetProperty(wxT("Tag"))->SetValue(m_symbol->tag);
 	} else {
@@ -75,6 +77,9 @@ void SymbolPropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->Clear();
 
 	if (m_symbol) {
+		pg->Append(new wxStringProperty(wxT("Filepath"), wxPG_LABEL, m_symbol->GetFilepath()));
+		pg->SetPropertyReadOnly("Filepath");
+
 		pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_symbol->name));
 		pg->Append(new wxStringProperty(wxT("Tag"), wxPG_LABEL, m_symbol->tag));
 	} else {
