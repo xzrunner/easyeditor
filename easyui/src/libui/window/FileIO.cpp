@@ -8,6 +8,7 @@
 #include <ee/SymbolMgr.h>
 #include <ee/SpriteFactory.h>
 #include <ee/FetchAllVisitor.h>
+#include <ee/Exception.h>
 
 #include <easycomplex.h>
 
@@ -88,6 +89,10 @@ void FileIO::FetchSprites(const std::string& filepath, std::vector<ee::Sprite*>&
 	while (!spr_val.isNull()) {
 		std::string path = ee::SymbolSearcher::GetSymbolPath(dir, spr_val);
 		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(path);
+		if (!sym) {
+			std::string filepath = spr_val["filepath"].asString();
+			throw ee::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", dir.c_str(), filepath.c_str());
+		}
 
 		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
 		spr->Load(spr_val);
