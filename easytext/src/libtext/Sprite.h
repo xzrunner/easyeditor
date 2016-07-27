@@ -63,6 +63,9 @@ public:
 	void GetSpace(float& hori, float& vert) const;
 	void SetSpace(float hori, float vert);
 
+	bool GetOverflow() const { return m_overflow; }
+	void SetOverflow(bool overflow) { m_overflow = overflow; }
+
 	bool GetRichtext() const { return m_richtext; }
 	void SetRichtext(bool richtext) { m_richtext = richtext; }
 
@@ -96,6 +99,8 @@ private:
 
 	float m_space_hori;
 	float m_space_vert;
+
+	bool m_overflow;
 
 	bool m_richtext;
 

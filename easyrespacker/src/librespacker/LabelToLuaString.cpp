@@ -40,6 +40,9 @@ void LabelToLuaString::Pack(const PackLabel* label, ebuilder::CodeGenerator& gen
 		lua::assign("space_vert", label->space_vert));
 
 	lua::connect(gen, 1, 
+		lua::assign("overflow", label->overflow));
+
+	lua::connect(gen, 1, 
 		lua::assign("richtext", label->richtext));
 
 	lua::connect(gen, 2, 

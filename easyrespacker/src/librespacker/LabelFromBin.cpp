@@ -61,9 +61,12 @@ void LabelFromBin::Unpack(uint8_t** ptr, PackLabel* label)
 	label->space_hori = TransFloatX1024(space_hori);
 	label->space_vert = TransFloatX1024(space_vert);
 
-	uint8_t richtext;
-	unpack(richtext, ptr);
+	uint8_t pack8;
+	unpack(pack8, ptr);
+	uint8_t richtext = pack8 & 0x1;
+	uint8_t overflow = pack8 & 0x2;;
 	label->richtext = TransBool(richtext);
+	label->overflow = TransBool(overflow);
 
 	unpack_str(label->text, ptr);
 	unpack_str(label->tid, ptr);

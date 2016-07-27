@@ -28,7 +28,7 @@ int LabelToBin::Size(const PackLabel* label)
 
 	sz += sizeof(uint16_t) * 2;			// space
 
-	sz += sizeof(uint8_t);				// richtext
+	sz += sizeof(uint8_t);				// richtext & overflow
 
 	sz += sizeof_pack_str(label->text);	// text
 	sz += sizeof_pack_str(label->tid);	// tid
@@ -72,8 +72,10 @@ void LabelToBin::Pack(const PackLabel* label, uint8_t** ptr)
 	pack(space_hori, ptr);
 	pack(space_vert, ptr);
 
+	uint8_t overflow = TransBool(label->overflow);
 	uint8_t richtext = TransBool(label->richtext);
-	pack(richtext, ptr);
+	uint8_t pack8 = (richtext) | (overflow << 1);
+	pack(pack8, ptr);
 
 	pack_str(label->text, ptr);
 	pack_str(label->tid, ptr);

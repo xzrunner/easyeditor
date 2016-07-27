@@ -52,6 +52,8 @@ private:
 	float m_space_hori;
 	float m_space_vert;
 
+	bool m_overflow;
+
 	bool m_richtext;
 
 private:

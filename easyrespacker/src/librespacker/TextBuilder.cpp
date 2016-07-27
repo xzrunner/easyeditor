@@ -70,6 +70,8 @@ const IPackNode* TextBuilder::Create(const etext::Sprite* spr)
 	node->space_hori = space_h;
 	node->space_vert = space_v;
 
+	node->overflow = spr->GetOverflow();
+
 	node->richtext = spr->GetRichtext();
 
 	node->text = spr->GetText();
@@ -145,7 +147,11 @@ const IPackNode* TextBuilder::QueryCache(const etext::Sprite* spr) const
  
  			label->space_hori	== space_h &&
  			label->space_vert	== space_v &&
- 
+
+			label->overflow	    == spr->GetOverflow() &&
+			
+			label->richtext		== spr->GetRichtext() &&
+
  			label->text			== spr->GetText() &&
  			label->tid			== spr->GetTID()) {
  			return label;
