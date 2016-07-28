@@ -63,10 +63,11 @@ void StagePanel::rebuildPatchSymbol()
 	float width = m_toolbar->getWidth(),
 		  height = m_toolbar->getHeight();
 
+	sm::vec2 sz = m_sprites[1][1]->GetSymbol().GetSize().Size();
 	if (type == e_3GridHor) {
-		height = m_sprites[1][1]->GetSymbol().GetSize().Height();
+		height = sz.y;
 	} else if (type == e_3GridVer) {
-		width = m_sprites[1][1]->GetSymbol().GetSize().Width();
+		width = sz.x;
 	}
 
 	m_symbol->ComposeFromSprites(m_sprites, width, height);
