@@ -113,14 +113,12 @@ void EditPanelImpl::SetCanvas(StageCanvas* canvas)
 
 void EditPanelImpl::OnMouse(wxMouseEvent& event)
 {
-#ifdef _DEBUG
 	if (wxFrame* frame = dynamic_cast<wxFrame*>(m_frame)) 
 	{
 		sm::vec2 pos = TransPosScrToProj(event.GetX(), event.GetY());
 		std::string msg = ee::StringHelper::Format("Mouse: %.1f, %.1f", pos.x, pos.y);
 		static_cast<wxFrame*>(m_frame)->SetStatusText(msg);
 	}
-#endif
 
 	if (!m_edit_op) return;
 

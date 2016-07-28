@@ -47,9 +47,9 @@ Frame::Frame(const std::string& title, const std::string& filetag, const wxSize&
 	LoadWindowConfig();
 	LoadTmpInfo();
 	InitMenuBar();
-#ifdef _DEBUG
 	InitStatueBar();
 
+#ifdef _DEBUG
 	wxLog::SetActiveTarget(new wxLogWindow(this, _T("Log window")));
 	m_log_chain = new wxLogChain(new wxLogStderr);
 #else
