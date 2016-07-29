@@ -15,9 +15,9 @@ namespace etext
 {
 
 const wxChar* HORI_ALIGN_LABELS[] = { 
-	wxT("left"), wxT("right"), wxT("center"), wxT("auto"), NULL };
+	wxT("left"), wxT("right"), wxT("center"), wxT("auto"), wxT("tile"), NULL };
 const wxChar* VERT_ALIGN_LABELS[] = { 
-	wxT("top"), wxT("bottom"), wxT("center"), wxT("auto"), NULL };
+	wxT("top"), wxT("bottom"), wxT("center"), wxT("auto"), wxT("tile"), NULL };
 
 PropertySetting::PropertySetting(ee::EditPanelImpl* edit_impl, Sprite* sprite)
 	: ee::SpritePropertySetting(edit_impl, sprite)
