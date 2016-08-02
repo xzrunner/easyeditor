@@ -154,6 +154,10 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\..\src\ds\ds_freelist.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\ds\ds_hash.c"
 			>
 		</File>

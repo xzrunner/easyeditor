@@ -1,6 +1,8 @@
 #include "EE_GTxt.h"
 #include "Math2D.h"
 #include "Symbol.h"
+#include "ImageSymbol.h"
+#include "Image.h"
 #include "SymbolMgr.h"
 #include "SpriteRenderer.h"
 #include "EE_DTex.h"
@@ -8,6 +10,7 @@
 #include "StringHelper.h"
 #include "EE_RVG.h"
 
+#include <dtex_cg.h>
 #include <gtxt.h>
 #include <shaderlab.h>
 
@@ -188,6 +191,26 @@ ext_sym_render(void* ext_sym, float x, float y, void* ud) {
 	SpriteRenderer::Draw((Symbol*)ext_sym, params, sm::vec2(x, y));
 }
 
+float* 
+uf_query_and_load(void* ud, struct dtex_glyph* glyph) {
+	DTex* dtex = DTex::Instance();
+	dtex_cg* cg = dtex->GetDtexCG();
+	ImageSymbol* sym = (ImageSymbol*)ud;
+	int texid = 0;
+	return dtex->Query(sym->GetImage(), &texid);
+//	sm::vec2 sz = sym->GetSize().Size();
+//	int texid = sym->GetImage()->GetTexID();
+//	float* texcoords = dtex_cg_load_tex(cg, texid, (int)sz.x, (int)sz.y, glyph);
+// 	if (texcoords) {
+// 		return texcoords;
+// 	} else {
+// 		dtex->LoadBegin();
+// 		dtex->Load(sym->GetImage());
+// 		dtex->LoadEnd();
+// 		return NULL;
+// 	}
+}
+
 void GTxt::Draw(const gtxt_label_style& style, const sm::mat4& mt, const s2::Color& mul, 
 				const s2::Color& add, const std::string& text, int time, bool richtext) const
 {
@@ -268,6 +291,21 @@ GTxt* GTxt::Instance()
 	return m_instance;
 }
 
+static void
+init_user_font() {
+	gtxt_uf_cb_init(uf_query_and_load);
+
+	gtxt_uf_create();
+	gtxt_uf_add_font("zz", 16);
+
+	for (int i = 0; i < 10; ++i) {
+		std::string filepath = "D:\\projects\\lr\\lr_rawres\\res_ui\\data\\editor_data\\ui_sg\\zi_" + StringHelper::ToString(i) + ".png";
+		Symbol* sym = SymbolMgr::Instance()->FetchSymbol(filepath);
+		sm::vec2 sz = sym->GetSize().Size();
+		gtxt_uf_add_char(0, 48 + i, (int)sz.x, (int)sz.y, sym);		
+	}
+}
+
 void GTxt::Init()
 {
 	dtex_cg* cg = DTex::Instance()->GetDtexCG();
@@ -284,6 +322,8 @@ void GTxt::Init()
 	gtxt_glyph_create(50, 500, NULL);
 
 	gtxt_richtext_ext_sym_cb_init(&ext_sym_create, &ext_sym_release, &ext_sym_get_size, &ext_sym_render, NULL);
+
+	init_user_font();
 }
 
 }
