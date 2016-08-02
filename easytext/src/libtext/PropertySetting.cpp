@@ -105,9 +105,14 @@ void PropertySetting::UpdateProperties(wxPropertyGrid* pg)
 
 	const std::vector<std::pair<std::string, std::string> >& 
 		fonts = ee::Config::Instance()->GetFonts();
+	const std::vector<std::pair<std::string, std::string> >& 
+		user_fonts = ee::Config::Instance()->GetUserFonts();
 	wxArrayString choices;
 	for (int i = 0, n = fonts.size(); i < n; ++i) {
 		choices.push_back(fonts[i].first);
+	}
+	for (int i = 0, n = user_fonts.size(); i < n; ++i) {
+		choices.push_back(user_fonts[i].first);
 	}
 	pg->GetProperty("Font")->SetValue(choices[spr->GetFont()]);
 	pg->GetProperty("FontSize")->SetValue(spr->GetFontSize());
@@ -149,9 +154,14 @@ void PropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	const std::vector<std::pair<std::string, std::string> >& 
 		fonts = ee::Config::Instance()->GetFonts();
+	const std::vector<std::pair<std::string, std::string> >& 
+		user_fonts = ee::Config::Instance()->GetUserFonts();
 	wxArrayString choices;
 	for (int i = 0, n = fonts.size(); i < n; ++i) {
 		choices.push_back(fonts[i].first);
+	}
+	for (int i = 0, n = user_fonts.size(); i < n; ++i) {
+		choices.push_back(user_fonts[i].first);
 	}
 	pg->Append(new wxEnumProperty("Font", wxPG_LABEL, choices));
 	pg->Append(new wxIntProperty("FontSize", wxPG_LABEL, spr->GetFontSize()));

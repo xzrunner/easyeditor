@@ -32,8 +32,36 @@ GTxt::GTxt()
 	Init();
 }
 
-void GTxt::LoadFont(const char* filepath)
+void GTxt::LoadFont(const std::string& name, const std::string& filepath)
 {
+	gtxt_ft_add_font(name.c_str(), filepath.c_str());
+}
+
+void GTxt::LoadUserFont(const std::string& name, const std::string& filepath)
+{
+	Json::Value value;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filepath.c_str());
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, value);
+	fin.close();
+
+	int sz = value["chars"].size();
+
+	int font = gtxt_uf_add_font(name.c_str(), sz + 1);
+
+	int idx = 0;
+	Json::Value c_val = value["chars"][idx++];
+	while (!c_val.isNull()) {
+		std::string str = c_val["str"].asString();
+		std::string utf8 = StringHelper::ToUtf8(str);
+		std::string filepath = c_val["filepath"].asString();
+		Symbol* sym = SymbolMgr::Instance()->FetchSymbol(filepath);
+		sm::vec2 sz = sym->GetSize().Size();
+		gtxt_uf_add_char(font, utf8.c_str(), (int)sz.x, (int)sz.y, sym);
+		c_val = value["chars"][idx++];
+	}
 }
 
 static void
@@ -44,10 +72,10 @@ render_glyph(int id, float* _texcoords, float x, float y, float w, float h, stru
 	float hw = w * 0.5f * ds->scale, hh = h * 0.5f * ds->scale;
 
 	sm::vec2 vertices[4];
-	vertices[0] = sm::vec2(x - hw, y + hh);
-	vertices[1] = sm::vec2(x - hw, y - hh);
-	vertices[2] = sm::vec2(x + hw, y - hh);
-	vertices[3] = sm::vec2(x + hw, y + hh);
+	vertices[0] = sm::vec2(x - hw, y - hh);
+	vertices[1] = sm::vec2(x + hw, y - hh);
+	vertices[2] = sm::vec2(x + hw, y + hh);
+	vertices[3] = sm::vec2(x - hw, y + hh);
 	for (int i = 0; i < 4; ++i) {
 		vertices[i] = Math2D::TransVector(vertices[i], *rp->mt);
 	}
@@ -291,21 +319,6 @@ GTxt* GTxt::Instance()
 	return m_instance;
 }
 
-static void
-init_user_font() {
-	gtxt_uf_cb_init(uf_query_and_load);
-
-	gtxt_uf_create();
-	gtxt_uf_add_font("zz", 16);
-
-	for (int i = 0; i < 10; ++i) {
-		std::string filepath = "D:\\projects\\lr\\lr_rawres\\res_ui\\data\\editor_data\\ui_sg\\zi_" + StringHelper::ToString(i) + ".png";
-		Symbol* sym = SymbolMgr::Instance()->FetchSymbol(filepath);
-		sm::vec2 sz = sym->GetSize().Size();
-		gtxt_uf_add_char(0, 48 + i, (int)sz.x, (int)sz.y, sym);		
-	}
-}
-
 void GTxt::Init()
 {
 	dtex_cg* cg = DTex::Instance()->GetDtexCG();
@@ -316,14 +329,20 @@ void GTxt::Init()
 	const std::vector<std::pair<std::string, std::string> >& 
 		fonts = Config::Instance()->GetFonts();
 	for (int i = 0, n = fonts.size(); i < n; ++i) {
-		gtxt_ft_add_font(fonts[i].first.c_str(), fonts[i].second.c_str());
-	}	
+		LoadFont(fonts[i].first.c_str(), fonts[i].second.c_str());
+	}
 
 	gtxt_glyph_create(50, 500, NULL);
 
 	gtxt_richtext_ext_sym_cb_init(&ext_sym_create, &ext_sym_release, &ext_sym_get_size, &ext_sym_render, NULL);
 
-	init_user_font();
+	gtxt_uf_cb_init(uf_query_and_load);
+	gtxt_uf_create();
+	const std::vector<std::pair<std::string, std::string> >& 
+		user_fonts = Config::Instance()->GetUserFonts();
+	for (int i = 0, n = user_fonts.size(); i < n; ++i) {
+		LoadUserFont(user_fonts[i].first, user_fonts[i].second);
+	}
 }
 
 }

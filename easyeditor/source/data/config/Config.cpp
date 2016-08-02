@@ -79,6 +79,7 @@ void Config::LoadFromFile(const char* filename)
  	m_use_dtex = m_value["use_dtex"].asBool();
 
 	LoadFontCfg(m_value["font"]);
+	LoadUserFontCfg(m_value["user_font"]);
 
 	m_settings->LoadFromFile(m_value);
 
@@ -93,6 +94,18 @@ void Config::LoadFontCfg(const Json::Value& value)
 		std::string name = font_val["name"].asString();
 		std::string filepath = font_val["filepath"].asString();
 		m_fonts.push_back(std::make_pair(name, filepath));
+		font_val = value[idx++];
+	}
+}
+
+void Config::LoadUserFontCfg(const Json::Value& value)
+{
+	int idx = 0;
+	Json::Value font_val = value[idx++];
+	while (!font_val.isNull()) {
+		std::string name = font_val["name"].asString();
+		std::string filepath = font_val["filepath"].asString();
+		m_user_fonts.push_back(std::make_pair(name, filepath));
 		font_val = value[idx++];
 	}
 }

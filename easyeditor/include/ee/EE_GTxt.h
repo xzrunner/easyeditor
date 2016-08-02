@@ -14,7 +14,8 @@ namespace ee
 class GTxt
 {
 public:
-	void LoadFont(const char* filepath);
+	void LoadFont(const std::string& name, const std::string& filepath);
+	void LoadUserFont(const std::string& name, const std::string& filepath);
 
  	void Draw(const gtxt_label_style& style, const sm::mat4& mt, const s2::Color& mul, 
 		const s2::Color& add, const std::string& text, int time, bool richtext) const;

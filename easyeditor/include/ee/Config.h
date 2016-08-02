@@ -30,6 +30,7 @@ public:
 	SettingData& GetSettings() { return *m_settings; }
 
 	const std::vector<std::pair<std::string, std::string> >& GetFonts() const { return m_fonts; }
+	const std::vector<std::pair<std::string, std::string> >& GetUserFonts() const { return m_user_fonts; }
 
 private:
 	Config();
@@ -37,6 +38,7 @@ private:
 	void LoadFromFile(const char* filename);
 
 	void LoadFontCfg(const Json::Value& value);
+	void LoadUserFontCfg(const Json::Value& value);
 
 private:
 	Json::Value m_value;
@@ -45,6 +47,7 @@ private:
 	bool m_use_render;
 
 	std::vector<std::pair<std::string, std::string> > m_fonts;
+	std::vector<std::pair<std::string, std::string> > m_user_fonts;
 
 	std::set<std::string> m_resource_paths;
 

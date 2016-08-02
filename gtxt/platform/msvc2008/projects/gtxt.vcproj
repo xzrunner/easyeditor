@@ -209,6 +209,14 @@
 			RelativePath="..\..\..\src\gtxt\gtxt_user_font.h"
 			>
 		</File>
+		<File
+			RelativePath="..\..\..\src\gtxt\gtxt_util.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\gtxt\gtxt_util.h"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

@@ -131,8 +131,7 @@ void Symbol::DrawText(const ee::Sprite* sprite, const s2::RenderParams& params) 
 
 		style.overflow = font->GetOverflow();
 
-//		style.gs.font = font->GetFont();
-		style.gs.font = 3;
+		style.gs.font = font->GetFont();
 		style.gs.font_size = font->GetFontSize();
 		style.gs.font_color.integer = font->GetFontColor().ToRGBA();
 
