@@ -117,6 +117,9 @@ static void _draw_flush()
 	}
 }
 
+static void _scissor_enable() {}
+static void _scissor_disable() {}
+
 #define IS_POT(x) ((x) > 0 && ((x) & ((x) -1)) == 0)
 
 static int _texture_create(int type, int width, int height, const void* data, int channel,unsigned int id) {
@@ -199,7 +202,7 @@ static const char* CFG =
 DTex::DTex()
 {
 	dtex_shader_init(&_program, &_blend, &_set_texture, &_get_texture, &_set_target, &_get_target,
-		&_draw_begin, &_draw, &_draw_end, &_draw_flush);
+		&_draw_begin, &_draw, &_draw_end, &_draw_flush, &_scissor_enable, _scissor_disable);
 
 	dtex_gl_init(&_clear_color);
 	dtex_gl_texture_init(&_texture_create, &_texture_release, &_texture_update, &_texture_id);
