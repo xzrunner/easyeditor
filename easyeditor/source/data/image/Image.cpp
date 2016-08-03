@@ -195,19 +195,13 @@ void Image::QueryTexcoords(float* texcoords, int* texid) const
 	else
 	{
 		*texid = GetTexID();
-
 		float txmin, txmax, tymin, tymax;
 		txmin = tymin = 0;
 		txmax = tymax = 1;
-
-		texcoords[0] = txmin;
-		texcoords[1] = tymin;
-		texcoords[2] = txmax;
-		texcoords[3] = tymin;
-		texcoords[4] = txmax;
-		texcoords[5] = tymax;
-		texcoords[6] = txmin;
-		texcoords[7] = tymax;
+		texcoords[0] = txmin; texcoords[1] = tymin;
+		texcoords[2] = txmin; texcoords[3] = tymax;
+		texcoords[4] = txmax; texcoords[5] = tymax;
+		texcoords[6] = txmax; texcoords[7] = tymin;
 	}
 }
 
