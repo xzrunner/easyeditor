@@ -32,9 +32,9 @@ void ImageSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 {
 	sm::vec2 vertices[4];
 	vertices[0] = sm::vec2(m_size.xmin, m_size.ymin);
-	vertices[1] = sm::vec2(m_size.xmax, m_size.ymin);
+	vertices[1] = sm::vec2(m_size.xmin, m_size.ymax);
 	vertices[2] = sm::vec2(m_size.xmax, m_size.ymax);
-	vertices[3] = sm::vec2(m_size.xmin, m_size.ymax);
+	vertices[3] = sm::vec2(m_size.xmax, m_size.ymin);
 	for (int i = 0; i < 4; ++i) {
 		vertices[i] = params.mt * vertices[i];
 	}
@@ -85,9 +85,9 @@ void ImageSymbol::DrawBlend(const RenderParams& params, sm::vec2* vertices, floa
 	float img_hw = tex_w * 0.5f,
 		  img_hh = tex_h * 0.5f;
 	vertices_scr[0] = params.mt * sm::vec2(-img_hw, -img_hh);
-	vertices_scr[1] = params.mt * sm::vec2( img_hw, -img_hh);
+	vertices_scr[1] = params.mt * sm::vec2(-img_hw,  img_hh);
 	vertices_scr[2] = params.mt * sm::vec2( img_hw,  img_hh);
-	vertices_scr[3] = params.mt * sm::vec2(-img_hw,  img_hh);
+	vertices_scr[3] = params.mt * sm::vec2( img_hw, -img_hh);
 
 	sm::vec2 tex_coords_base[4];
 	int w, h;
