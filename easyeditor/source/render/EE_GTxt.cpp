@@ -73,9 +73,9 @@ render_glyph(int id, float* _texcoords, float x, float y, float w, float h, stru
 
 	sm::vec2 vertices[4];
 	vertices[0] = sm::vec2(x - hw, y - hh);
-	vertices[1] = sm::vec2(x + hw, y - hh);
+	vertices[1] = sm::vec2(x - hw, y + hh);
 	vertices[2] = sm::vec2(x + hw, y + hh);
-	vertices[3] = sm::vec2(x - hw, y + hh);
+	vertices[3] = sm::vec2(x + hw, y - hh);
 	for (int i = 0; i < 4; ++i) {
 		vertices[i] = Math2D::TransVector(vertices[i], *rp->mt);
 	}
