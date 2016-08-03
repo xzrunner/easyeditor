@@ -70,6 +70,10 @@ void PackUIWindowTask::Output(const std::string& dir, Json::Value& value) const
 			throw ee::Exception("Unknown uiwnd's item id, wrapper_file %s, name %s, filepath %s", 
 				m_wrapper_filepath.c_str(), item->name.c_str(), item->filepath.c_str());
 		}
+		if (item->anchor == -1) {
+			throw ee::Exception("Unknown uiwnd's item anchor, wrapper_file %s, name %s, filepath %s, repeated name", 
+				m_wrapper_filepath.c_str(), item->name.c_str(), item->filepath.c_str());
+		}
 		Json::Value item_val;
 		item_val["id"] = item->id;
 		item_val["anchor"] = item->anchor;
