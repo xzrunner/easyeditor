@@ -45,7 +45,11 @@ void InputPanel::InitLayout()
 
 void InputPanel::OnEnterPress(wxCommandEvent& event)
 {
-	m_spr->SetText(m_text_ctrl->GetValue().ToStdString());
+	std::string str = m_text_ctrl->GetValue().ToStdString();
+	while (!str.empty() && str[str.size() - 1] == '\n') {
+		str.erase(--str.end());
+	}
+	m_spr->SetText(str);
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
