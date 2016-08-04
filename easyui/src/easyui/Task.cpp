@@ -43,6 +43,11 @@ void Task::Store(const char* filename) const
 	}
 }
 
+const ee::EditPanel* Task::GetEditPanel() const 
+{ 
+	return m_top_pannels.stage->GetSelectedPage();
+}
+
 UIStagePage* Task::GetSelectedStagePage()
 {
 	return m_top_pannels.stage->GetSelectedPage();

@@ -26,7 +26,7 @@ public:
 
 	virtual void GetAllSprite(std::vector<const ee::Sprite*>& sprites) const {}
 
-	virtual const ee::EditPanel* GetEditPanel() const { return NULL; }
+	virtual const ee::EditPanel* GetEditPanel() const;
 
 	UIStagePage* GetSelectedStagePage();
 
