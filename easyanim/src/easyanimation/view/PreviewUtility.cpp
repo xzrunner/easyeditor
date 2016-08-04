@@ -40,7 +40,7 @@ void PreviewUtility::GetCurrSprites(const ee::PlayControl& ctrl, std::vector<ee:
 		{
 			assert(frame_idx >= curr_f->GetTime() && frame_idx < next_f->GetTime());
 			float process = (float) (frame_idx - curr_f->GetTime()) / (next_f->GetTime() - curr_f->GetTime());
-			curr_f->GetTweenSprite(curr_f, next_f, sprites, process);
+			KeyFrame::GetTweenSprite(curr_f, next_f, sprites, process);
 		}
 	}
 }

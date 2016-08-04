@@ -104,34 +104,6 @@ void KeyFrame::Clear()
 	ee::ObjectVector<ee::Sprite>::Clear(m_sprites);
 }
 
-void KeyFrame::GetTweenSprite(const KeyFrame* start, const KeyFrame* end, 
-							  std::vector<ee::Sprite*>& tween, float process) const
-{
-// 	// old
-// 	for (int i = 0, n = start->Size(); i < n; ++i)
-// 	{
-// 		ee::Sprite* s = start->m_sprites[i];
-// 		for (int j = 0, m = end->Size(); j < m; ++j) {
-// 			ee::Sprite* e = end->m_sprites[j];
-// 			if (IsTweenMatched(s, e))
-// 			{
-// 				ee::Sprite* mid = s->clone();
-// 				GetTweenSprite(s, e, mid, process);
-// 				tween.push_back(mid);
-// 			}
-// 		}
-// 	}
-
-  	SkeletonData &s_skeleton = const_cast<KeyFrame*>(start)->GetSkeletonData(),
-  		&e_skeleton = const_cast<KeyFrame*>(end)->GetSkeletonData();
-	if (!s_skeleton.Empty() && !e_skeleton.Empty()) {
-		SkeletonData::GetTweenSprites(s_skeleton, e_skeleton, tween, process);
-	} else {
-		// new
-		eanim::TweenUtility::GetTweenSprites(start->m_sprites, end->m_sprites, tween, process);
-	}
-}
-
 void KeyFrame::OnActive()
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
@@ -140,6 +112,34 @@ void KeyFrame::OnActive()
 				p3d->OnActive();
 			}
 		}
+	}
+}
+
+void KeyFrame::GetTweenSprite(const KeyFrame* start, const KeyFrame* end, 
+							  std::vector<ee::Sprite*>& tween, float process)
+{
+	// 	// old
+	// 	for (int i = 0, n = start->Size(); i < n; ++i)
+	// 	{
+	// 		ee::Sprite* s = start->m_sprites[i];
+	// 		for (int j = 0, m = end->Size(); j < m; ++j) {
+	// 			ee::Sprite* e = end->m_sprites[j];
+	// 			if (IsTweenMatched(s, e))
+	// 			{
+	// 				ee::Sprite* mid = s->clone();
+	// 				GetTweenSprite(s, e, mid, process);
+	// 				tween.push_back(mid);
+	// 			}
+	// 		}
+	// 	}
+
+	SkeletonData &s_skeleton = const_cast<KeyFrame*>(start)->GetSkeletonData(),
+		&e_skeleton = const_cast<KeyFrame*>(end)->GetSkeletonData();
+	if (!s_skeleton.Empty() && !e_skeleton.Empty()) {
+		SkeletonData::GetTweenSprites(s_skeleton, e_skeleton, tween, process);
+	} else {
+		// new
+		eanim::TweenUtility::GetTweenSprites(start->m_sprites, end->m_sprites, tween, process);
 	}
 }
 

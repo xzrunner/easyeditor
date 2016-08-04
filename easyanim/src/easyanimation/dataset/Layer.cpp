@@ -6,6 +6,7 @@
 #include "message/messages.h"
 
 #include <ee/StringHelper.h>
+#include <ee/Sprite.h>
 
 namespace eanim
 {
@@ -158,25 +159,36 @@ void Layer::InsertKeyFrame(KeyFrame* frame)
 
 void Layer::InsertKeyFrame(int time)
 {
-	if (!m_frames.empty())
+	if (m_frames.empty()) {
+		InsertKeyFrame(1, new KeyFrame(1));
+		return;
+	}
+
+	KeyFrame* frame = new KeyFrame(time);
+	if (GetMaxFrameTime() < time)
 	{
-		if (GetMaxFrameTime() < time)
-		{
-			KeyFrame* frame = new KeyFrame(time);
-			frame->CopyFromOther(GetEndFrame());
-			InsertKeyFrame(time, frame);
-			frame->Release();
-		}
-		else
-		{
-			InsertKeyFrame(time, new KeyFrame(time));
-		}
-		SetSelectedSJ::Instance()->Set(-1, time - 1);
+		frame->CopyFromOther(GetEndFrame());
 	}
 	else
 	{
-		InsertKeyFrame(1, new KeyFrame(1));
+		KeyFrame *prev = GetPrevKeyFrame(time),
+			     *next = GetNextKeyFrame(time);
+		if (prev->HasClassicTween() && next) {
+			float process = (float) (time - prev->GetTime()) / (next->GetTime() - prev->GetTime());
+			std::vector<ee::Sprite*> sprites;
+			KeyFrame::GetTweenSprite(prev, next, sprites, process);
+			for (int i = 0, n = sprites.size(); i < n; ++i) {
+				frame->Insert(sprites[i], INT_MAX);
+			}
+			for_each(sprites.begin(), sprites.end(), ee::ReleaseObjectFunctor<ee::Sprite>());
+			frame->SetClassicTween(true);
+		} else {
+			frame->CopyFromOther(prev);
+		}
 	}
+	InsertKeyFrame(time, frame);
+	frame->Release();
+	SetSelectedSJ::Instance()->Set(-1, time - 1);
 }
 
 void Layer::RemoveKeyFrame(int time)

@@ -47,12 +47,12 @@ public:
 
 	SkeletonData& GetSkeletonData() { return m_skeleton; }
 
-	void GetTweenSprite(const KeyFrame* start, const KeyFrame* end, std::vector<ee::Sprite*>& tween, float process) const;
-
 	int GetID() const { return m_id; }
 	void SetID(int id) { m_id = id; }
 
 	void OnActive();
+
+	static void GetTweenSprite(const KeyFrame* start, const KeyFrame* end, std::vector<ee::Sprite*>& tween, float process);
 
 // private:
 // 	void GetTweenSprite(ee::Sprite* start, ee::Sprite* end, ee::Sprite* tween, float process) const;
