@@ -76,7 +76,7 @@ private:
 
 	bool OnSpriteShortcutKey(int keycode);
 
-private:
+public:
 	static const float CTRL_NODE_RADIUS;
 	static const float MAX_CTRL_NODE_RADIUS;
 
