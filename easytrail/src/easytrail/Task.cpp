@@ -26,12 +26,14 @@ Task::~Task()
 	delete m_root;
 }
 
-void Task::Load(const char* filename)
+void Task::Load(const char* filepath)
 {
+	FileIO::Load(filepath, m_stage->m_trail, m_toolbar, m_library);
 }
 
-void Task::Store(const char* filename) const
+void Task::Store(const char* filepath) const
 {
+	FileIO::Store(filepath, m_stage->m_trail, m_toolbar);
 }
 
 bool Task::IsDirty() const
@@ -86,8 +88,8 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 
 wxWindow* Task::InitLayoutRight(wxWindow* parent)
 {
-	ToolbarPanel* toolbar = new ToolbarPanel(parent, m_library, static_cast<StagePanel*>(m_stage));
-	return toolbar;
+	m_toolbar = new ToolbarPanel(parent, m_library, static_cast<StagePanel*>(m_stage));
+	return m_toolbar;
 }
 
 }

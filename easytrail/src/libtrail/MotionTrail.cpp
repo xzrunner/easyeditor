@@ -110,11 +110,13 @@ t2d_symbol* MotionTrail::AddSymbol(ee::Symbol* symbol)
 	memset(&comp, 0, SIZEOF_T2D_SYMBOL);
 
 	comp.color.r = comp.color.g = comp.color.b = comp.color.a = 255;
-//	comp.col_add.r = comp.col_add.g = comp.col_add.b = 0;
-
-//	comp.alpha_start = comp.alpha_end = 1;
-
-	comp.mode.B.ud = symbol;
+	if (cfg->mode_type == T2D_MODE_IMAGE) {
+		//	comp.col_add.r = comp.col_add.g = comp.col_add.b = 0;
+		//	comp.alpha_start = comp.alpha_end = 1;
+		comp.mode.B.ud = symbol;
+	} else {
+		
+	}
 
 	return &comp;
 }

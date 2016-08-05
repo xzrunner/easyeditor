@@ -6,6 +6,7 @@
 #include <ee/SliderCtrlTwo.h>
 #include <ee/Symbol.h>
 #include <ee/FileType.h>
+#include <ee/FileHelper.h>
 
 #include <mt_2d.h>
 
@@ -26,6 +27,16 @@ void ImageCompPanel::SetValue(int key, const ee::UICallback::Data& data)
 void ImageCompPanel::GetValue(int key, ee::UICallback::Data& data)
 {
 
+}
+
+void ImageCompPanel::Load(const Json::Value& val)
+{
+	ComponentPanel::Load(val);
+}
+
+void ImageCompPanel::Store(Json::Value& val) const
+{
+	ComponentPanel::Store(val);
 }
 
 void ImageCompPanel::InitLayout(wxSizer* top_sizer)
@@ -67,6 +78,13 @@ void ImageCompPanel::InitLayout(wxSizer* top_sizer)
 	top_sizer->Add(s_alpha);
 	top_sizer->AddSpacer(10);
 	m_sliders.push_back(s_alpha);
+}
+
+std::string ImageCompPanel::GetTitle() const
+{
+	std::string name = static_cast<ee::Symbol*>(m_pc->mode.B.ud)->GetFilepath();
+	name = ee::FileHelper::GetFilename(name);
+	return name;
 }
 
 void ImageCompPanel::OnDelete(wxCommandEvent& event)

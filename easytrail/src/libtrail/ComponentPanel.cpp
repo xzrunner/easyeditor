@@ -2,7 +2,6 @@
 #include "ToolbarPanel.h"
 
 #include <ee/Symbol.h>
-#include <ee/FileHelper.h>
 #include <ee/SliderCtrl.h>
 
 #include <mt_2d.h>
@@ -12,14 +11,32 @@
 namespace etrail
 {
 
+ComponentPanel::ComponentPanel(wxWindow* parent, t2d_symbol* pc, ToolbarPanel* toolbar)	
+	: wxPanel(parent)
+	, m_pc(pc)
+	, m_toolbar(toolbar) 
+{}
+
+void ComponentPanel::Load(const Json::Value& val)
+{
+	for (int i = 0, n = m_sliders.size(); i < n; ++i) {
+		m_sliders[i]->Load(val, 0);
+		m_sliders[i]->Update();
+	}
+}
+
+void ComponentPanel::Store(Json::Value& val) const
+{
+	for (int i = 0, n = m_sliders.size(); i < n; ++i) {
+		m_sliders[i]->Store(val);
+	}
+}
+
 void ComponentPanel::InitLayout()
 {
 	wxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
 
-	std::string name = static_cast<ee::Symbol*>(m_pc->mode.B.ud)->GetFilepath();
-	name = ee::FileHelper::GetFilename(name);
-
-	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, name); 
+	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, GetTitle()); 
 	wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 	InitLayout(sizer);
 	top_sizer->Add(sizer);

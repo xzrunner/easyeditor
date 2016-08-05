@@ -28,10 +28,8 @@ public:
 	virtual void SetValue(int key, const ee::UICallback::Data& data);
 	virtual void GetValue(int key, ee::UICallback::Data& data);
 
-	void Load(const Json::Value& val, int version);
+	void Load(const Json::Value& val);
 	void Store(Json::Value& val) const;
-
-//	void Add(const LoadAdapter::Component& comp, ee::LibraryPanel* library);
 
 	void InitTrail();
 
@@ -53,7 +51,7 @@ private:
 
 	void OnChangeMode(wxCommandEvent& event);
 
-	void OnAddChild(wxCommandEvent& event, ee::Symbol* symbol);
+	ComponentPanel* OnAddChild(ee::Symbol* symbol);
 	void OnDelAllChild(wxCommandEvent& event);
 
 private:

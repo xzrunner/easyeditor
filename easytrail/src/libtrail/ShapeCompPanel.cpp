@@ -15,6 +15,7 @@ ShapeCompPanel::ShapeCompPanel(wxWindow* parent, t2d_symbol* pc, ToolbarPanel* t
 	: ComponentPanel(parent, pc, toolbar)
 {
 	ComponentPanel::InitLayout();
+	SetBtnColor();
 }
 
 void ShapeCompPanel::SetValue(int key, const ee::UICallback::Data& data)
@@ -41,6 +42,30 @@ void ShapeCompPanel::GetValue(int key, ee::UICallback::Data& data)
 		data.val0 = m_pc->mode.A.acuity * 100;
 		break;
 	}
+}
+
+void ShapeCompPanel::Load(const Json::Value& val)
+{
+	ComponentPanel::Load(val);
+
+	Json::Value col_val = val["color"];
+	m_pc->color.r = col_val["r"].asInt();
+	m_pc->color.g = col_val["g"].asInt();
+	m_pc->color.b = col_val["b"].asInt();
+	m_pc->color.a = col_val["a"].asInt();
+	SetBtnColor();
+}
+
+void ShapeCompPanel::Store(Json::Value& val) const
+{
+	ComponentPanel::Store(val);
+
+	Json::Value col_val;
+	col_val["r"] = m_pc->color.r;
+	col_val["g"] = m_pc->color.g;
+	col_val["b"] = m_pc->color.b;
+	col_val["a"] = m_pc->color.a;
+	val["color"] = col_val;
 }
 
 void ShapeCompPanel::InitLayout(wxSizer* top_sizer)
@@ -101,8 +126,14 @@ void ShapeCompPanel::OnSetColor(wxCommandEvent& event)
 		m_pc->color.g = col.Green();
 		m_pc->color.b = col.Blue();
 		m_pc->color.a = col.Alpha();
-		m_col_btn->SetBackgroundColour(col);
+		SetBtnColor();
 	}
+}
+
+void ShapeCompPanel::SetBtnColor()
+{
+	wxColor wx_col(m_pc->color.r, m_pc->color.g, m_pc->color.b, m_pc->color.a);
+	m_col_btn->SetBackgroundColour(wx_col);
 }
 
 }

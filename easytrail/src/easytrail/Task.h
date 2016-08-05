@@ -5,10 +5,13 @@
 
 #include <wx/splitter.h>
 
-namespace ee { class LibraryPanel; class PropertySettingPanel; class EditPanel; }
+namespace ee { class LibraryPanel; class PropertySettingPanel; }
 
 namespace etrail
 {
+
+class StagePanel;
+class ToolbarPanel;
 
 class Task : public ee::Task
 {
@@ -38,7 +41,8 @@ private:
 
  	ee::LibraryPanel* m_library;
 	ee::PropertySettingPanel* m_property;
- 	ee::EditPanel* m_stage;
+ 	StagePanel* m_stage;
+	ToolbarPanel* m_toolbar;
 
 }; // Task
 

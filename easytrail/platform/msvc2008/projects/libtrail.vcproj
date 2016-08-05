@@ -296,14 +296,6 @@
 				RelativePath="..\..\..\src\libtrail\FileIO.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\src\libtrail\LoadAdapter.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libtrail\LoadAdapter.h"
-				>
-			</File>
 		</Filter>
 	</Files>
 	<Globals>

@@ -44,20 +44,46 @@ void ToolbarPanel::GetValue(int key, ee::UICallback::Data& data)
 	}	
 }
 
-void ToolbarPanel::Load(const Json::Value& val, int version)
+void ToolbarPanel::Load(const Json::Value& val)
 {
+	for (int i = 0, n = m_sliders.size(); i < n; ++i) {
+		m_sliders[i]->Load(val, 0);
+		m_sliders[i]->Update();
+	}
 
+	int mode = val["mode"].asInt();
+	m_mode_choice->SetSelection(mode);
+	t2d_emitter_cfg* cfg = m_stage->m_trail->GetConfig();
+	cfg->mode_type = mode;
+
+	int idx = 0;
+	Json::Value comp_val = val["components"][idx++];
+	while (!comp_val.isNull()) {
+		ComponentPanel* cp = NULL;
+		if (mode == T2D_MODE_IMAGE) {
+
+		} else if (mode == T2D_MODE_SHAPE) {
+			cp = OnAddChild(NULL);
+		}
+ 		if (cp) {
+ 			cp->Load(comp_val);
+ 		}	
+
+		comp_val = val["components"][idx++];
+	}
 }
 
 void ToolbarPanel::Store(Json::Value& val) const
 {
+	for (int i = 0, n = m_sliders.size(); i < n; ++i) {
+		m_sliders[i]->Store(val);
+	}
 
+	val["mode"] = m_mode_choice->GetSelection();
+	for (int i = 0, n = m_children.size(); i < n; ++i) {
+		m_children[i]->Store(val["components"][i]);
+	}
 }
-
-// void ToolbarPanel::Add(const LoadAdapter::Component& comp, ee::LibraryPanel* library)
-// {
-// 
-// }
 
 void ToolbarPanel::InitTrail()
 {
@@ -141,12 +167,12 @@ wxSizer* ToolbarPanel::CreateMainLayout()
 
 	// Life Time Begin
 	ee::SliderCtrlOne* s_life_begin = new ee::SliderCtrlOne(this, "起点生命周期(ms)", 
-		"life begin", this, MT_LIFETIME_BEGIN, ee::SliderItem("", "", 1000, -1, 5000));
+		"life_begin", this, MT_LIFETIME_BEGIN, ee::SliderItem("", "", 1000, -1, 5000));
 	top_sizer->Add(s_life_begin);
 	m_sliders.push_back(s_life_begin);
 	// Life Time Offset
 	ee::SliderCtrlOne* s_life_offset = new ee::SliderCtrlOne(this, "生命周期增量(ms)", 
-		"life offset", this, MT_LIFETIME_OFFSET, ee::SliderItem("", "", 0, 0, 1000));
+		"life_offset", this, MT_LIFETIME_OFFSET, ee::SliderItem("", "", 0, 0, 1000));
 	top_sizer->Add(s_life_offset);
 	m_sliders.push_back(s_life_offset);
 
@@ -200,7 +226,7 @@ void ToolbarPanel::OnChangeMode(wxCommandEvent& event)
 	}
 }
 
-void ToolbarPanel::OnAddChild(wxCommandEvent& event, ee::Symbol* symbol)
+ComponentPanel* ToolbarPanel::OnAddChild(ee::Symbol* symbol)
 {
 	t2d_symbol* mt = m_stage->m_trail->AddSymbol(symbol);
 	ComponentPanel* cp = NULL;
@@ -215,6 +241,7 @@ void ToolbarPanel::OnAddChild(wxCommandEvent& event, ee::Symbol* symbol)
 	m_comp_sizer->AddSpacer(10);
 	m_children.push_back(cp);
 	this->Layout();
+	return cp;
 }
 
 void ToolbarPanel::OnDelAllChild(wxCommandEvent& event)
@@ -265,7 +292,7 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
 	ee::Symbol* symbol = m_library->GetSymbol(index);
 	if (symbol)
 	{
-		m_toolbar->OnAddChild(wxCommandEvent(), symbol);
+		m_toolbar->OnAddChild(symbol);
 //		m_stage->m_ps->Start();
 	}
 

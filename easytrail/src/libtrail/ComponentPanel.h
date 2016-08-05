@@ -4,6 +4,7 @@
 #include <ee/UICallback.h>
 
 #include <wx/panel.h>
+#include <json/json.h>
 
 #include <vector>
 
@@ -19,13 +20,16 @@ class ToolbarPanel;
 class ComponentPanel : public wxPanel, public ee::UICallback
 {
 public:
-	ComponentPanel(wxWindow* parent, t2d_symbol* pc, ToolbarPanel* toolbar)	
-		: wxPanel(parent), m_pc(pc), m_toolbar(toolbar) {}
+	ComponentPanel(wxWindow* parent, t2d_symbol* pc, ToolbarPanel* toolbar);
+
+	virtual void Load(const Json::Value& val);
+	virtual void Store(Json::Value& val) const;
 
 	void SetSymbol(t2d_symbol* sym) { m_pc = sym; }
 
 protected:
 	virtual void InitLayout(wxSizer* sizer) = 0;
+	virtual std::string GetTitle() const = 0;
 
 	void InitLayout();
 
