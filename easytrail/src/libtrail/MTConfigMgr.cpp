@@ -26,8 +26,7 @@ t2d_emitter_cfg* MTConfigMgr::GetDefaultConfig()
 	}
 	memset(cfg, 0, sz);
 	cfg->symbols = (t2d_symbol*)(cfg+1);
-//	cfg->mode_type = T2D_MODE_SYMBOL;
-	cfg->mode_type = T2D_MODE_SHAPE;
+	cfg->mode_type = T2D_MODE_IMAGE;
 	return cfg;
 }
 

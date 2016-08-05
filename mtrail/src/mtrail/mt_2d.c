@@ -212,13 +212,7 @@ _add_shape_node(struct t2d_emitter* et, float* positions, uint32_t* colors, int*
 
 	struct mt_color col;
 	float proc = (p->lifetime - p->life) / p->lifetime;
-
-//	col = p->sym->col_mul;
-	col.r = 0;
-	col.g = 128;
-	col.b = 0;
-	col.a = 255;
-
+	col = p->sym->color;
 	if (p->life < et->cfg->fadeout_time) {
 		col.a *= p->life / et->cfg->fadeout_time;
 	}
@@ -243,11 +237,10 @@ _draw_shape(struct t2d_emitter* et, const void* ud) {
 	struct sm_vec2 l0, l1, r0, r1;
 	struct sm_vec2 l2, l3, r2, r3;
 
-	const float MAX_HW = 5;
-
 	int ptr = 0;
 	struct t2d_particle *prev = et->head, *curr = prev->next;
-	_offset_segment(&prev->pos, &curr->pos, MAX_HW, &l0, &l1, &r0, &r1);
+	float hw = prev->sym->mode.A.size * 0.5f;
+	_offset_segment(&prev->pos, &curr->pos, hw, &l0, &l1, &r0, &r1);
 	_add_shape_node(et, positions, colors, &ptr, &l0, prev);
 	_add_shape_node(et, positions, colors, &ptr, &r0, prev);
 	prev = curr;
@@ -256,13 +249,18 @@ _draw_shape(struct t2d_emitter* et, const void* ud) {
 	int idx = 0;
 	while (curr) {
 		int tot = et->particle_count - 3;
-//		float w = (0.1f + 0.9f * (tot - idx) / tot) * MAX_HW;
-		float w = MAX_HW;
-		_offset_segment(&prev->pos, &curr->pos, w, &l2, &l3, &r2, &r3);
+		float hw = prev->sym->mode.A.size * 0.5f;
+		if (tot != 0) {
+			float f = prev->sym->mode.A.acuity;
+			hw = (1 - f +  f * (tot - idx) / tot) * prev->sym->mode.A.size * 0.5f;
+		}
+		_offset_segment(&prev->pos, &curr->pos, hw, &l2, &l3, &r2, &r3);
 
 		struct sm_vec2 lc, rc;
-		sm_intersect_line_line(&l0, &l1, &l2, &l3, &lc);
-		sm_intersect_line_line(&r0, &r1, &r2, &r3, &rc);
+		lc.x = (l1.x + l2.x) * 0.5f;
+		lc.y = (l1.y + l2.y) * 0.5f;
+		rc.x = (r1.x + r2.x) * 0.5f;
+		rc.y = (r1.y + r2.y) * 0.5f;
 		_add_shape_node(et, positions, colors, &ptr, &lc, prev);
 		_add_shape_node(et, positions, colors, &ptr, &rc, prev);
 
@@ -289,21 +287,23 @@ _draw_shape(struct t2d_emitter* et, const void* ud) {
 }
 
 static void
-_draw_symbol(struct t2d_emitter* et, const void* ud) {
+_draw_image(struct t2d_emitter* et, const void* ud) {
 	struct mt_color mul_col;
 
 	struct t2d_particle* p = et->head;
 	while (p) {
 		float proc = (p->lifetime - p->life) / p->lifetime;
 
-		mul_col = p->sym->col_mul;
+		mul_col = p->sym->color;
 		if (p->life < et->cfg->fadeout_time) {
 			mul_col.a *= p->life / et->cfg->fadeout_time;
 		}
-		float alpha = proc * (p->sym->alpha_end - p->sym->alpha_start) + p->sym->alpha_start;
+		float a_start = p->sym->mode.B.alpha_start,
+			  a_end = p->sym->mode.B.alpha_end;
+		float alpha = proc * (a_end - a_start) + a_start;
 		mul_col.a *= alpha;
 
-		RENDER_SYMBOL_FUNC(p->sym->mode.B.ud, p->pos.x, p->pos.y, p->angle, mul_col.rgba, p->sym->col_add.rgba, ud);
+		RENDER_SYMBOL_FUNC(p->sym->mode.B.ud, p->pos.x, p->pos.y, p->angle, mul_col.rgba, p->sym->mode.B.color_add.rgba, ud);
 		p = p->next;
 	}
 }
@@ -312,7 +312,7 @@ void
 t2d_emitter_draw(struct t2d_emitter* et, const void* ud) {
 	if (et->cfg->mode_type == T2D_MODE_SHAPE) {
 		_draw_shape(et, ud);
-	} else if (et->cfg->mode_type == T2D_MODE_SYMBOL) {
-		_draw_symbol(et, ud);
+	} else if (et->cfg->mode_type == T2D_MODE_IMAGE) {
+		_draw_image(et, ud);
 	}
 }

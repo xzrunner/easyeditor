@@ -51,6 +51,8 @@ private:
 
 	void Clear();
 
+	void OnChangeMode(wxCommandEvent& event);
+
 	void OnAddChild(wxCommandEvent& event, ee::Symbol* symbol);
 	void OnDelAllChild(wxCommandEvent& event);
 
@@ -72,6 +74,8 @@ private:
 
 private:
 	StagePanel* m_stage;
+
+	wxChoice* m_mode_choice;
 
 	std::vector<ee::SliderCtrl*> m_sliders;
 

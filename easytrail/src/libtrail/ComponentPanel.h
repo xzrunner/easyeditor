@@ -19,30 +19,24 @@ class ToolbarPanel;
 class ComponentPanel : public wxPanel, public ee::UICallback
 {
 public:
-	ComponentPanel(wxWindow* parent, t2d_symbol* pc, ToolbarPanel* toolbar);
-
-	//
-	// UICallback interface
-	//
-	virtual void SetValue(int key, const ee::UICallback::Data& data);
-	virtual void GetValue(int key, ee::UICallback::Data& data);
+	ComponentPanel(wxWindow* parent, t2d_symbol* pc, ToolbarPanel* toolbar)	
+		: wxPanel(parent), m_pc(pc), m_toolbar(toolbar) {}
 
 	void SetSymbol(t2d_symbol* sym) { m_pc = sym; }
 
-private:
+protected:
+	virtual void InitLayout(wxSizer* sizer) = 0;
+
 	void InitLayout();
-	void InitLayout(wxSizer* sizer);
 
 	void OnDelete(wxCommandEvent& event);
 
-private:
+protected:
 	t2d_symbol* m_pc;
 
 	ToolbarPanel* m_toolbar;
 
 	std::vector<ee::SliderCtrl*> m_sliders;
-
-//	wxButton *m_mul_col_btn, *m_add_col_btn;
 
 }; // ComponentPanel
 

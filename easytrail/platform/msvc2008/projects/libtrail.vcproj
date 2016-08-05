@@ -208,6 +208,22 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\libtrail\ImageCompPanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libtrail\ImageCompPanel.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libtrail\ShapeCompPanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libtrail\ShapeCompPanel.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libtrail\ToolbarPanel.cpp"
 					>
 				</File>

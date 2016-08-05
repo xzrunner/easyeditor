@@ -13,6 +13,9 @@ enum MT_PROPERTY
 
 	MT_SCALE,
 	MT_ALPHA,
+
+	MT_LINE_WIDTH,
+	MT_ACUITY,
 };
 
 static const int MAX_COMPONENTS = 256;

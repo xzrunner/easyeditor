@@ -12,21 +12,23 @@ extern "C"
 
 #include <stdbool.h>
 
-#define T2D_MODE_SHAPE	0
-#define T2D_MODE_SYMBOL	1
+#define T2D_MODE_IMAGE	0
+#define T2D_MODE_SHAPE	1
 
 struct t2d_symbol {	
-	struct mt_color col_mul, col_add;
-	float alpha_start, alpha_end;
+	struct mt_color color;
 
 	union {
 		// shape
 		struct {
 			float size;
+			float acuity;
 		} A;
 
 		// symbol
 		struct {
+			struct mt_color color_add;
+			float alpha_start, alpha_end;
 			float radius;
 			float scale_start, scale_end;
 			void* ud;

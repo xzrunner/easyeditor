@@ -2,8 +2,9 @@
 #include "StagePanel.h"
 #include "MTConfigMgr.h"
 #include "MotionTrail.h"
-#include "ComponentPanel.h"
 #include "mt_config.h"
+#include "ImageCompPanel.h"
+#include "ShapeCompPanel.h"
 
 #include <ee/panel_msg.h>
 #include <ee/SliderCtrl.h>
@@ -120,6 +121,16 @@ wxSizer* ToolbarPanel::CreateMainLayout()
 	wxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
 	top_sizer->AddSpacer(10);
 
+	// Mode
+	wxArrayString modes_str;
+	modes_str.push_back("image");
+	modes_str.push_back("shape");
+	m_mode_choice = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, modes_str);
+	m_mode_choice->SetSelection(0);
+	Connect(m_mode_choice->GetId(), wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(ToolbarPanel::OnChangeMode));
+	top_sizer->Add(m_mode_choice);
+	top_sizer->AddSpacer(30);
+	
 	// Count
 	ee::SliderCtrlOne* s_count = new ee::SliderCtrlOne(this, "ÊýÁ¿", 
 		"count", this, MT_COUNT, ee::SliderItem("", "", 20, 1, 500));
@@ -175,10 +186,31 @@ void ToolbarPanel::Clear()
 	OnDelAllChild(wxCommandEvent());
 }
 
+void ToolbarPanel::OnChangeMode(wxCommandEvent& event)
+{
+	Clear();
+
+	t2d_emitter_cfg* cfg = m_stage->m_trail->GetConfig();
+	int idx = m_mode_choice->GetSelection();
+	if (idx == 0) {
+		cfg->mode_type = T2D_MODE_IMAGE;
+	} else {
+		assert(idx == 1);
+		cfg->mode_type = T2D_MODE_SHAPE;
+	}
+}
+
 void ToolbarPanel::OnAddChild(wxCommandEvent& event, ee::Symbol* symbol)
 {
 	t2d_symbol* mt = m_stage->m_trail->AddSymbol(symbol);
-	ComponentPanel* cp = new ComponentPanel(this, mt, this);
+	ComponentPanel* cp = NULL;
+	t2d_emitter_cfg* cfg = m_stage->m_trail->GetConfig();
+	if (cfg->mode_type == T2D_MODE_IMAGE) {
+		cp = new ImageCompPanel(this, mt, this);	
+	} else {
+		assert(cfg->mode_type == T2D_MODE_SHAPE);
+		cp = new ShapeCompPanel(this, mt, this);	
+	}
 	m_comp_sizer->Insert(m_children.size(), cp);
 	m_comp_sizer->AddSpacer(10);
 	m_children.push_back(cp);
