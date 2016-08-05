@@ -177,7 +177,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 				}
 			}
 
-			eparticle3d::PS::Instance()->BufferClear();
+			eparticle3d::PSNode::Instance()->BufferClear();
 			if (m_frame) {
 				m_frame->OnActive();
 			}

@@ -1,4 +1,4 @@
-#include "PS.h"
+#include "PSNode.h"
 #include "ParticleSystem.h"
 
 #include <ps_3d.h>
@@ -13,17 +13,17 @@
 namespace eparticle3d
 {
 
-PS* PS::m_instance = NULL;
+PSNode* PSNode::m_instance = NULL;
 
-PS* PS::Instance()
+PSNode* PSNode::Instance()
 {
 	if (!m_instance) {
-		m_instance = new PS();
+		m_instance = new PSNode();
 	}
 	return m_instance;
 }
 
-PS::PS()
+PSNode::PSNode()
 	: m_time(0)
 {
 	Init();
@@ -31,23 +31,23 @@ PS::PS()
 	ee::SceneNodeMgr::Instance()->Add(this);
 }
 
-bool PS::Update(float dt)
+bool PSNode::Update(float dt)
 {
 	UpdateTime();
 	return p3d_buffer_update(GetTime());
 }
 
-void PS::Draw() const
+void PSNode::Draw() const
 {
 	p3d_buffer_draw(0, 0, 1);
 }
 
-void PS::BufferClear()
+void PSNode::BufferClear()
 {
 	p3d_buffer_clear();
 }
 
-void PS::UpdateTime()
+void PSNode::UpdateTime()
 {
 	static clock_t last = 0;
 	if (last == 0) {
@@ -162,7 +162,7 @@ release_draw_params_func(struct p3d_sprite* spr) {
 	spr->draw_params = NULL;
 }
 
-void PS::Init()
+void PSNode::Init()
 {
 	p3d_init();
 	p3d_regist_cb(render_func, add_func, remove_func);	

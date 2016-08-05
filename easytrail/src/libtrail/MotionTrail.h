@@ -1,7 +1,7 @@
 #ifndef _EASYTRAIL_MOTION_TRAIL_H_
 #define _EASYTRAIL_MOTION_TRAIL_H_
 
-#include "MTrail.h"
+#include "TrailNode.h"
 
 #include <ee/Object.h>
 #include <ee/UICallback.h>

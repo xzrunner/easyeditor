@@ -1,6 +1,6 @@
 #include "ParticleSystem.h"
 #include "ps_config.h"
-#include "PS.h"
+#include "PSNode.h"
 
 #include <ee/Math2D.h>
 #include <ee/Symbol.h>
@@ -14,14 +14,14 @@ namespace eparticle2d
 
 ParticleSystem::ParticleSystem(p2d_emitter_cfg* cfg)
 {
-	PS::Instance();
+	PSNode::Instance();
 
 	m_et = p2d_emitter_create(cfg);
 }
 
 ParticleSystem::ParticleSystem(const ParticleSystem& ps)
 {
-	PS::Instance();
+	PSNode::Instance();
 
 	m_pos = ps.m_pos;
 	m_et = p2d_emitter_create(ps.m_et->cfg);
@@ -179,7 +179,7 @@ void ParticleSystem::Draw(const sm::mat4& mt) const
 
 bool ParticleSystem::Update(const sm::mat4& mat)
 {
-	float time = PS::Instance()->GetTime();
+	float time = PSNode::Instance()->GetTime();
 	assert(m_et->time <= time);
 	if (m_et->time == time) {
 		return false;

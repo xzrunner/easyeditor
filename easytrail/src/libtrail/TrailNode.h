@@ -1,5 +1,5 @@
-#ifndef _EASYTRAIL_MTRAIL_H_
-#define _EASYTRAIL_MTRAIL_H_
+#ifndef _EASYTRAIL_TRAIL_NODE_H_
+#define _EASYTRAIL_TRAIL_NODE_H_
 
 #include <ee/SceneNode.h>
 
@@ -21,7 +21,7 @@ public:
 	RenderParams() : trail(NULL) {}
 };
 
-class MTrail : ee::SceneNode
+class TrailNode : ee::SceneNode
 {
 public:
 	//
@@ -33,10 +33,10 @@ public:
 	void UpdateTime();
 	float GetTime() const { return m_time; }
 
-	static MTrail* Instance();
+	static TrailNode* Instance();
 
 private:
-	MTrail();
+	TrailNode();
 
 	void Init();
 
@@ -44,10 +44,10 @@ private:
 	float m_time;
 
 private:
-	static MTrail* m_instance;
+	static TrailNode* m_instance;
 
-}; // MTrail
+}; // TrailNode
 
 }
 
-#endif // _EASYTRAIL_MTRAIL_H_
+#endif // _EASYTRAIL_TRAIL_NODE_H_

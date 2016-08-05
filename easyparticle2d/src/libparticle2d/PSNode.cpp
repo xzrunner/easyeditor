@@ -1,4 +1,4 @@
-#include "PS.h"
+#include "PSNode.h"
 #include "ParticleSystem.h"
 
 #include <ee/SpriteRenderer.h>
@@ -10,23 +10,23 @@
 namespace eparticle2d
 {
 
-PS* PS::m_instance = NULL;
+PSNode* PSNode::m_instance = NULL;
 
-PS* PS::Instance()
+PSNode* PSNode::Instance()
 {
 	if (!m_instance) {
-		m_instance = new PS();
+		m_instance = new PSNode();
 	}
 	return m_instance;
 }
 
-PS::PS()
+PSNode::PSNode()
 	: m_time(0)
 {
 	Init();
 }
 
-void PS::UpdateTime()
+void PSNode::UpdateTime()
 {
 	static clock_t last = 0;
 	if (last == 0) {
@@ -67,7 +67,7 @@ render_func(void* symbol, float* mat, float x, float y, float angle, float scale
 	ee::SpriteRenderer::Draw(sym, params, sm::vec2(x, y), angle, scale, scale, 0, 0);
 }
 
-void PS::Init()
+void PSNode::Init()
 {
 	p2d_init();
 	p2d_regist_cb(render_func);	

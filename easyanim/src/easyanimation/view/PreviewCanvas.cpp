@@ -57,7 +57,7 @@ void PreviewCanvas::OnTimer()
 // todo: waste time!
 void PreviewCanvas::DrawStageData() const
 {
-	eparticle3d::PS::Instance()->BufferClear();
+	eparticle3d::PSNode::Instance()->BufferClear();
 
 	std::vector<ee::Sprite*> sprites;
 	PreviewUtility::GetCurrSprites(m_control, sprites);

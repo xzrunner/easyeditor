@@ -3,7 +3,7 @@
 #include "ParticleSystem.h"
 #include "FileIO.h"
 #include "PSConfigMgr.h"
-#include "PS.h"
+#include "PSNode.h"
 
 #include <ps_3d.h>
 #include <ps_3d_sprite.h>
@@ -20,14 +20,14 @@ Symbol::Symbol()
 	, m_loop(true)
 	, m_local(true)
 {
-	PS::Instance();
+	PSNode::Instance();
 }
 
 Symbol::Symbol(const Symbol& s)
 	: ee::Symbol(s)
 	, m_et_cfg(s.m_et_cfg)
 {
-	PS::Instance();
+	PSNode::Instance();
 }
 
 Symbol* Symbol::Clone() const

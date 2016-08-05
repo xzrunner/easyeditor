@@ -237,14 +237,6 @@
 			Name="dataset"
 			>
 			<File
-				RelativePath="..\..\..\src\libtrail\MTrail.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libtrail\MTrail.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\libtrail\Sprite.cpp"
 				>
 			</File>
@@ -258,6 +250,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\libtrail\Symbol.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libtrail\TrailNode.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libtrail\TrailNode.h"
 				>
 			</File>
 		</Filter>

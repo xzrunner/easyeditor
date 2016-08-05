@@ -1,7 +1,7 @@
 #ifndef _EASYPARTICLE3D_PARTICLE_SYSTEM_H_
 #define _EASYPARTICLE3D_PARTICLE_SYSTEM_H_
 
-#include "PS.h"
+#include "PSNode.h"
 
 #include <ee/Object.h>
 #include <ee/Cloneable.h>

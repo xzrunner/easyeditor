@@ -1,5 +1,5 @@
-#ifndef _EASYPARTICLE3D_PS_H_
-#define _EASYPARTICLE3D_PS_H_
+#ifndef _EASYPARTICLE3D_PS_NODE_H_
+#define _EASYPARTICLE3D_PS_NODE_H_
 
 #include <ee/SceneNode.h>
 
@@ -21,7 +21,7 @@ public:
 	RenderParams() : p3d(NULL) {}
 };
 
-class PS : public ee::SceneNode
+class PSNode : public ee::SceneNode
 {
 public:
 	//
@@ -35,10 +35,10 @@ public:
 	void UpdateTime();
 	float GetTime() const { return m_time; }
 
-	static PS* Instance();
+	static PSNode* Instance();
 
 private:
-	PS();
+	PSNode();
 
 	void Init();
 
@@ -46,10 +46,10 @@ private:
 	float m_time;
 
 private:
-	static PS* m_instance;
+	static PSNode* m_instance;
 
-}; // PS
+}; // PSNode
 
 }
 
-#endif // _EASYPARTICLE3D_PS_H_
+#endif // _EASYPARTICLE3D_PS_NODE_H_

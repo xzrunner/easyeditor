@@ -1,5 +1,5 @@
 #include "Sprite.h"
-#include "PS.h"
+#include "PSNode.h"
 #include "ParticleSystem.h"
 #include "PropertySetting.h"
 
@@ -74,7 +74,7 @@ Sprite* Sprite::Clone() const
 
 bool Sprite::Update(float dt)
 {
-	PS::Instance()->UpdateTime();
+	PSNode::Instance()->UpdateTime();
 	return m_ps->Update(m_mat);
 }
 

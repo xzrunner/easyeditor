@@ -4,7 +4,7 @@
 #include "LibraryPanel.h"
 #include "ToolBarPanel.h"
 #include "ParticleSystem.h"
-#include "PS.h"
+#include "PSNode.h"
 
 namespace eparticle3d
 {
@@ -27,7 +27,7 @@ StagePanel::~StagePanel()
 
 bool StagePanel::Update(float dt)
 {
-	PS::Instance()->UpdateTime();
+	PSNode::Instance()->UpdateTime();
 	if (m_ps) {
 		return m_ps->Update(m_ps_mat);
 	} else {

@@ -2,7 +2,7 @@
 #define _EASYPARTICLE3D_SPRITE_H_
 
 #include "Symbol.h"
-#include "PS.h"
+#include "PSNode.h"
 
 #include <ee/Sprite.h>
 

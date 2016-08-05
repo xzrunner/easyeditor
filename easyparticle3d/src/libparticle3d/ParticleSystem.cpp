@@ -2,7 +2,7 @@
 #include "AnimRecorder.h"
 #include "InvertRecord.h"
 #include "ps_config.h"
-#include "PS.h"
+#include "PSNode.h"
 
 #include <ps_3d.h>
 #include <ps_3d_sprite.h>
@@ -19,7 +19,7 @@ ParticleSystem::ParticleSystem(p3d_emitter_cfg* cfg, bool record)
 	: m_anim_recorder(NULL)
 	, m_inv_record(NULL)
 {
-	PS::Instance();
+	PSNode::Instance();
 
 	if (record) {
 		m_anim_recorder = new AnimRecorder(4096);
@@ -33,7 +33,7 @@ ParticleSystem::ParticleSystem(const ParticleSystem& ps)
 	: m_anim_recorder(NULL)
 	, m_inv_record(NULL)
 {
-	PS::Instance();
+	PSNode::Instance();
 
 	Init(ps.m_spr->et->cfg);
 }
@@ -165,7 +165,7 @@ void ParticleSystem::Draw(const sm::mat4& mt, AnimRecorder* recorder) const
 
 bool ParticleSystem::Update(const sm::mat4& mat)
 {
-	float time = PS::Instance()->GetTime();
+	float time = PSNode::Instance()->GetTime();
 	assert(m_spr->et->time <= time);
 	if (m_spr->et->time == time) {
 		return false;

@@ -1,6 +1,6 @@
 #include "MotionTrail.h"
 #include "mt_config.h"
-#include "MTrail.h"
+#include "TrailNode.h"
 
 #include <mt_2d.h>
 
@@ -12,7 +12,7 @@ namespace etrail
 
 MotionTrail::MotionTrail(t2d_emitter_cfg* cfg)
 {
-	MTrail::Instance();
+	TrailNode::Instance();
 
 	Init(cfg);
 }
@@ -73,7 +73,7 @@ void MotionTrail::Draw(const sm::mat4& mt) const
 
 bool MotionTrail::Update(const sm::vec2& pos)
 {
-	float time = MTrail::Instance()->GetTime();
+	float time = TrailNode::Instance()->GetTime();
 	assert(m_spr->time <= time);
 	if (m_spr->time == time) {
 		return false;

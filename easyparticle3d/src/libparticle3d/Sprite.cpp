@@ -1,6 +1,6 @@
 #include "Sprite.h"
 #include "ParticleSystem.h"
-#include "PS.h"
+#include "PSNode.h"
 #include "SpritePropertySetting.h"
 
 #include <ee/SpriteFactory.h>
@@ -87,7 +87,7 @@ Sprite* Sprite::Clone() const
 
 bool Sprite::Update(float dt)
 {
-	PS::Instance()->UpdateTime();
+	PSNode::Instance()->UpdateTime();
 
 	if (!m_spr) {
 		return true;
@@ -96,7 +96,7 @@ bool Sprite::Update(float dt)
 	} else {
 		p3d_emitter* et = m_spr->et;
 
-		float time = PS::Instance()->GetTime();
+		float time = PSNode::Instance()->GetTime();
 		assert(et->time <= time);
 		if (et->time == time) {
 			return false;

@@ -1,4 +1,4 @@
-#include "MTrail.h"
+#include "TrailNode.h"
 
 #include <ee/Symbol.h>
 #include <ee/SpriteRenderer.h>
@@ -12,17 +12,17 @@
 namespace etrail
 {
 
-MTrail* MTrail::m_instance = NULL;
+TrailNode* TrailNode::m_instance = NULL;
 
-MTrail* MTrail::Instance()
+TrailNode* TrailNode::Instance()
 {
 	if (!m_instance) {
-		m_instance = new MTrail();
+		m_instance = new TrailNode();
 	}
 	return m_instance;
 }
 
-MTrail::MTrail()
+TrailNode::TrailNode()
 	: m_time(0)
 {
 	Init();
@@ -30,17 +30,17 @@ MTrail::MTrail()
 	ee::SceneNodeMgr::Instance()->Add(this);
 }
 
-bool MTrail::Update(float dt)
+bool TrailNode::Update(float dt)
 {
 	return true;
 }
 
-void MTrail::Draw() const
+void TrailNode::Draw() const
 {
 	
 }
 
-void MTrail::UpdateTime()
+void TrailNode::UpdateTime()
 {
 	static clock_t last = 0;
 	if (last == 0) {
@@ -87,7 +87,7 @@ render_shape_func(const float* positions, const uint32_t* colors, int count)
 	shader->Draw(positions, colors, count);
 }
 
-void MTrail::Init()
+void TrailNode::Init()
 {
 	t2d_init();
 	t2d_regist_cb(render_symbol_func, render_shape_func);	
