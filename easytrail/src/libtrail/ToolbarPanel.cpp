@@ -10,6 +10,9 @@
 #include <ee/SliderCtrl.h>
 #include <ee/LibraryPanel.h>
 #include <ee/SliderCtrlOne.h>
+#include <ee/FileHelper.h>
+#include <ee/SymbolMgr.h>
+#include <ee/Symbol.h>
 
 #include <mt_2d.h>
 
@@ -44,7 +47,7 @@ void ToolbarPanel::GetValue(int key, ee::UICallback::Data& data)
 	}	
 }
 
-void ToolbarPanel::Load(const Json::Value& val)
+void ToolbarPanel::Load(const Json::Value& val, const std::string& dir)
 {
 	for (int i = 0, n = m_sliders.size(); i < n; ++i) {
 		m_sliders[i]->Load(val, 0);
@@ -61,19 +64,22 @@ void ToolbarPanel::Load(const Json::Value& val)
 	while (!comp_val.isNull()) {
 		ComponentPanel* cp = NULL;
 		if (mode == T2D_MODE_IMAGE) {
-
+			std::string filepath = comp_val["filepath"].asString();
+			filepath = ee::FileHelper::GetAbsolutePath(dir, filepath);
+			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+			cp = OnAddChild(sym);
 		} else if (mode == T2D_MODE_SHAPE) {
 			cp = OnAddChild(NULL);
 		}
  		if (cp) {
- 			cp->Load(comp_val);
+ 			cp->Load(comp_val, dir);
  		}	
 
 		comp_val = val["components"][idx++];
 	}
 }
 
-void ToolbarPanel::Store(Json::Value& val) const
+void ToolbarPanel::Store(Json::Value& val, const std::string& dir) const
 {
 	for (int i = 0, n = m_sliders.size(); i < n; ++i) {
 		m_sliders[i]->Store(val);
@@ -81,7 +87,7 @@ void ToolbarPanel::Store(Json::Value& val) const
 
 	val["mode"] = m_mode_choice->GetSelection();
 	for (int i = 0, n = m_children.size(); i < n; ++i) {
-		m_children[i]->Store(val["components"][i]);
+		m_children[i]->Store(val["components"][i], dir);
 	}
 }
 

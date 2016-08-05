@@ -8,6 +8,8 @@
 
 #include <vector>
 
+#include <stdint.h>
+
 struct t2d_symbol;
 
 namespace ee { class SliderCtrl; }
@@ -22,8 +24,8 @@ class ComponentPanel : public wxPanel, public ee::UICallback
 public:
 	ComponentPanel(wxWindow* parent, t2d_symbol* pc, ToolbarPanel* toolbar);
 
-	virtual void Load(const Json::Value& val);
-	virtual void Store(Json::Value& val) const;
+	virtual void Load(const Json::Value& val, const std::string& dir);
+	virtual void Store(Json::Value& val, const std::string& dir) const;
 
 	void SetSymbol(t2d_symbol* sym) { m_pc = sym; }
 
@@ -31,9 +33,13 @@ protected:
 	virtual void InitLayout(wxSizer* sizer) = 0;
 	virtual std::string GetTitle() const = 0;
 
+	virtual void UpdateBtnColor() = 0;
+
 	void InitLayout();
 
 	void OnDelete(wxCommandEvent& event);
+
+	void ChangeColor(uint8_t rgba[4]);
 
 protected:
 	t2d_symbol* m_pc;

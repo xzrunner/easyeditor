@@ -1,6 +1,8 @@
 #include "FileIO.h"
 #include "ToolbarPanel.h"
 
+#include <ee/FileHelper.h>
+
 #include <json/json.h>
 
 #include <fstream>
@@ -11,7 +13,8 @@ namespace etrail
 void FileIO::Store(const std::string& filepath, MotionTrail* mt, ToolbarPanel* toolbar)
 {
 	Json::Value value;
-	toolbar->Store(value);
+	std::string dir = ee::FileHelper::GetFileDir(filepath);
+	toolbar->Store(value, dir);
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -31,7 +34,8 @@ void FileIO::Load(const std::string& filepath, MotionTrail* mt, ToolbarPanel* to
 	reader.parse(fin, value);
 	fin.close();
 
-	toolbar->Load(value);
+	std::string dir = ee::FileHelper::GetFileDir(filepath);
+	toolbar->Load(value, dir);
 }
 
 MotionTrail* FileIO::LoadMT(const std::string& filepath)

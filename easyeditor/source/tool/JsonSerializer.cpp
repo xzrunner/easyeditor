@@ -122,4 +122,20 @@ void JsonSerializer::Load(const Json::Value& value, s2::Color& col)
 	col.a = static_cast<int>(value["a"].asDouble() * 255);
 }
 
+void JsonSerializer::Store(const uint8_t rgba[4], Json::Value& value)
+{
+	value["r"] = rgba[0];
+	value["g"] = rgba[1];
+	value["b"] = rgba[2];
+	value["a"] = rgba[3];
+}
+
+void JsonSerializer::Load(const Json::Value& value, uint8_t rgba[4])
+{
+	rgba[0] = value["r"].asInt();
+	rgba[1] = value["g"].asInt();
+	rgba[2] = value["b"].asInt();
+	rgba[3] = value["a"].asInt();
+}
+
 }

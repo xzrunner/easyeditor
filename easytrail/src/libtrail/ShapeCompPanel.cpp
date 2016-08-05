@@ -2,11 +2,9 @@
 #include "mt_config.h"
 
 #include <ee/SliderCtrlOne.h>
+#include <ee/JsonSerializer.h>
 
 #include <mt_2d.h>
-
-#include <wx/colourdata.h>
-#include <wx/colordlg.h>
 
 namespace etrail
 {
@@ -15,7 +13,7 @@ ShapeCompPanel::ShapeCompPanel(wxWindow* parent, t2d_symbol* pc, ToolbarPanel* t
 	: ComponentPanel(parent, pc, toolbar)
 {
 	ComponentPanel::InitLayout();
-	SetBtnColor();
+	UpdateBtnColor();
 }
 
 void ShapeCompPanel::SetValue(int key, const ee::UICallback::Data& data)
@@ -23,10 +21,10 @@ void ShapeCompPanel::SetValue(int key, const ee::UICallback::Data& data)
 	switch (key)
 	{
 	case MT_LINE_WIDTH:
-		m_pc->mode.A.size = data.val0;
+		m_pc->mode.B.size = data.val0;
 		break;
 	case MT_ACUITY:
-		m_pc->mode.A.acuity = data.val0 * 0.01f;
+		m_pc->mode.B.acuity = data.val0 * 0.01f;
 		break;
 	}
 }
@@ -36,36 +34,30 @@ void ShapeCompPanel::GetValue(int key, ee::UICallback::Data& data)
 	switch (key)
 	{
 	case MT_LINE_WIDTH:
-		data.val0 = m_pc->mode.A.size;
+		data.val0 = m_pc->mode.B.size;
 		break;
 	case MT_ACUITY:
-		data.val0 = m_pc->mode.A.acuity * 100;
+		data.val0 = m_pc->mode.B.acuity * 100;
 		break;
 	}
 }
 
-void ShapeCompPanel::Load(const Json::Value& val)
+void ShapeCompPanel::Load(const Json::Value& val, const std::string& dir)
 {
-	ComponentPanel::Load(val);
+	ComponentPanel::Load(val, dir);
 
-	Json::Value col_val = val["color"];
-	m_pc->color.r = col_val["r"].asInt();
-	m_pc->color.g = col_val["g"].asInt();
-	m_pc->color.b = col_val["b"].asInt();
-	m_pc->color.a = col_val["a"].asInt();
-	SetBtnColor();
+	ee::JsonSerializer::Load(val["color_begin"], m_pc->col_begin.rgba);
+	ee::JsonSerializer::Load(val["color_end"], m_pc->col_end.rgba);
+
+	UpdateBtnColor();
 }
 
-void ShapeCompPanel::Store(Json::Value& val) const
+void ShapeCompPanel::Store(Json::Value& val, const std::string& dir) const
 {
-	ComponentPanel::Store(val);
+	ComponentPanel::Store(val, dir);
 
-	Json::Value col_val;
-	col_val["r"] = m_pc->color.r;
-	col_val["g"] = m_pc->color.g;
-	col_val["b"] = m_pc->color.b;
-	col_val["a"] = m_pc->color.a;
-	val["color"] = col_val;
+	ee::JsonSerializer::Store(m_pc->col_begin.rgba, val["color_begin"]);
+	ee::JsonSerializer::Store(m_pc->col_end.rgba, val["color_end"]);
 }
 
 void ShapeCompPanel::InitLayout(wxSizer* top_sizer)
@@ -82,15 +74,26 @@ void ShapeCompPanel::InitLayout(wxSizer* top_sizer)
 		hori_sizer->AddSpacer(20);
 		// Color
 		{
-			wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, "颜色");
+			wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, "起始颜色");
 			wxBoxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 
-			m_col_btn = new wxButton(this, wxID_ANY);
-			Connect(m_col_btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ShapeCompPanel::OnSetColor));
-			sizer->Add(m_col_btn);
+			m_begin_col_btn = new wxButton(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(60, 20));
+			Connect(m_begin_col_btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ShapeCompPanel::OnSetBeginColor));
+			sizer->Add(m_begin_col_btn);
 
 			hori_sizer->Add(sizer);
 		}
+		{
+			wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, "结束颜色");
+			wxBoxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
+
+			m_end_col_btn = new wxButton(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(60, 20));
+			Connect(m_end_col_btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ShapeCompPanel::OnSetEndColor));
+			sizer->Add(m_end_col_btn);
+
+			hori_sizer->Add(sizer);
+		}
+
 		top_sizer->Add(hori_sizer);
 	}
 
@@ -107,33 +110,23 @@ void ShapeCompPanel::InitLayout(wxSizer* top_sizer)
 	m_sliders.push_back(s_acuity);
 }
 
-void ShapeCompPanel::OnSetColor(wxCommandEvent& event)
+void ShapeCompPanel::UpdateBtnColor()
 {
-	wxColourData data;
-	data.SetColour(wxColour(m_pc->color.r, m_pc->color.g, m_pc->color.b));
-	wxColourDialog dlg(m_parent, &data);
+	wxColor col_begin(m_pc->col_begin.r, m_pc->col_begin.g, m_pc->col_begin.b, m_pc->col_begin.a);
+	m_begin_col_btn->SetBackgroundColour(col_begin);
 
-	dlg.SetTitle(wxT("Set Color"));
-
-	wxPoint pos = wxGetMousePosition();
-	pos.x -= 400;
-	dlg.SetPosition(pos);
-
-	if (dlg.ShowModal() == wxID_OK)
-	{
-		const wxColor& col = dlg.GetColourData().GetColour();
-		m_pc->color.r = col.Red();
-		m_pc->color.g = col.Green();
-		m_pc->color.b = col.Blue();
-		m_pc->color.a = col.Alpha();
-		SetBtnColor();
-	}
+	wxColor col_end(m_pc->col_end.r, m_pc->col_end.g, m_pc->col_end.b, m_pc->col_end.a);
+	m_end_col_btn->SetBackgroundColour(col_end);
 }
 
-void ShapeCompPanel::SetBtnColor()
+void ShapeCompPanel::OnSetBeginColor(wxCommandEvent& event)
 {
-	wxColor wx_col(m_pc->color.r, m_pc->color.g, m_pc->color.b, m_pc->color.a);
-	m_col_btn->SetBackgroundColour(wx_col);
+	ChangeColor(m_pc->col_begin.rgba);
+}
+
+void ShapeCompPanel::OnSetEndColor(wxCommandEvent& event)
+{
+	ChangeColor(m_pc->col_end.rgba);
 }
 
 }

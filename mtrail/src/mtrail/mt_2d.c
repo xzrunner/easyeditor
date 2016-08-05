@@ -14,7 +14,7 @@
 static struct t2d_particle* PARTICLE_ARRAY = NULL;
 static struct t2d_emitter*	EMITTER_ARRAY = NULL;
 
-void (*RENDER_SYMBOL_FUNC)(void* symbol, float x, float y, float angle, uint8_t* mul_col, uint8_t* add_col, const void* ud);
+void (*RENDER_SYMBOL_FUNC)(void* symbol, float x, float y, float angle, float scale, uint8_t* mul_col, uint8_t* add_col, const void* ud);
 void (*RENDER_SHAPE_FUNC)(const float* positions, const uint32_t* colors, int count);
 
 void 
@@ -39,7 +39,7 @@ t2d_init() {
 }
 
 void 
-t2d_regist_cb(void (*render_symbol_func)(void* symbol, float x, float y, float angle, uint8_t* mul_col, uint8_t* add_col, const void* ud),
+t2d_regist_cb(void (*render_symbol_func)(void* symbol, float x, float y, float angle, float scale, uint8_t* mul_col, uint8_t* add_col, const void* ud),
 			  void (*render_shape_func)(const float* positions, const uint32_t* colors, int count)) {
 	RENDER_SYMBOL_FUNC = render_symbol_func;
 	RENDER_SHAPE_FUNC = render_shape_func;
@@ -204,20 +204,32 @@ _offset_segment(struct sm_vec2* s, struct sm_vec2* e, float half_width,
 	sm_vec2_add(re, e, &tmp);
 }
 
+static inline void
+_float_lerp(float begin, float end, float* lerp, float proc) {
+	*lerp = proc * (end - begin) + begin;
+}
+
+static inline void
+_color_lerp(struct mt_color* begin, struct mt_color* end, struct mt_color* lerp, float proc) {
+	lerp->r = proc * (end->r - begin->r) + begin->r;
+	lerp->g = proc * (end->g - begin->g) + begin->g;
+	lerp->b = proc * (end->b - begin->b) + begin->b;
+	lerp->a = proc * (end->a - begin->a) + begin->a;
+}
+
 static void
 _add_shape_node(struct t2d_emitter* et, float* positions, uint32_t* colors, int* ptr, 
                 struct sm_vec2* pos, struct t2d_particle* p) {
 	positions[*ptr * 2] = pos->x;
 	positions[*ptr * 2 + 1] = pos->y;
 
-	struct mt_color col;
 	float proc = (p->lifetime - p->life) / p->lifetime;
-	col = p->sym->color;
+
+	struct mt_color col;
+	_color_lerp(&p->sym->col_begin, &p->sym->col_end, &col, proc);
 	if (p->life < et->cfg->fadeout_time) {
 		col.a *= p->life / et->cfg->fadeout_time;
 	}
-// 	float alpha = proc * (p->sym->alpha_end - p->sym->alpha_start) + p->sym->alpha_start;
-// 	col.a *= alpha;
 
 	colors[*ptr] = (col.a << 24) | (col.b << 16) | (col.g << 8) | col.r;
 	++*ptr;
@@ -239,7 +251,7 @@ _draw_shape(struct t2d_emitter* et, const void* ud) {
 
 	int ptr = 0;
 	struct t2d_particle *prev = et->head, *curr = prev->next;
-	float hw = prev->sym->mode.A.size * 0.5f;
+	float hw = prev->sym->mode.B.size * 0.5f;
 	_offset_segment(&prev->pos, &curr->pos, hw, &l0, &l1, &r0, &r1);
 	_add_shape_node(et, positions, colors, &ptr, &l0, prev);
 	_add_shape_node(et, positions, colors, &ptr, &r0, prev);
@@ -249,10 +261,10 @@ _draw_shape(struct t2d_emitter* et, const void* ud) {
 	int idx = 0;
 	while (curr) {
 		int tot = et->particle_count - 3;
-		float hw = prev->sym->mode.A.size * 0.5f;
+		float hw = prev->sym->mode.B.size * 0.5f;
 		if (tot != 0) {
-			float f = prev->sym->mode.A.acuity;
-			hw = (1 - f +  f * (tot - idx) / tot) * prev->sym->mode.A.size * 0.5f;
+			float f = prev->sym->mode.B.acuity;
+			hw = (1 - f +  f * (tot - idx) / tot) * prev->sym->mode.B.size * 0.5f;
 		}
 		_offset_segment(&prev->pos, &curr->pos, hw, &l2, &l3, &r2, &r3);
 
@@ -288,22 +300,22 @@ _draw_shape(struct t2d_emitter* et, const void* ud) {
 
 static void
 _draw_image(struct t2d_emitter* et, const void* ud) {
-	struct mt_color mul_col;
+	struct mt_color col_mul, col_add;
+	float scale;
 
 	struct t2d_particle* p = et->head;
 	while (p) {
 		float proc = (p->lifetime - p->life) / p->lifetime;
 
-		mul_col = p->sym->color;
+		_color_lerp(&p->sym->col_begin, &p->sym->col_end, &col_mul, proc);
+		_color_lerp(&p->sym->mode.A.col_add_begin, &p->sym->mode.A.col_add_end, &col_add, proc);
 		if (p->life < et->cfg->fadeout_time) {
-			mul_col.a *= p->life / et->cfg->fadeout_time;
+			col_mul.a *= p->life / et->cfg->fadeout_time;
 		}
-		float a_start = p->sym->mode.B.alpha_start,
-			  a_end = p->sym->mode.B.alpha_end;
-		float alpha = proc * (a_end - a_start) + a_start;
-		mul_col.a *= alpha;
 
-		RENDER_SYMBOL_FUNC(p->sym->mode.B.ud, p->pos.x, p->pos.y, p->angle, mul_col.rgba, p->sym->mode.B.color_add.rgba, ud);
+		_float_lerp(p->sym->mode.A.scale_begin, p->sym->mode.A.scale_end, &scale, proc);
+
+		RENDER_SYMBOL_FUNC(p->sym->mode.A.ud, p->pos.x, p->pos.y, p->angle, scale, col_mul.rgba, col_add.rgba, ud);
 		p = p->next;
 	}
 }

@@ -16,22 +16,20 @@ extern "C"
 #define T2D_MODE_SHAPE	1
 
 struct t2d_symbol {	
-	struct mt_color color;
+	struct mt_color col_begin, col_end;
 
 	union {
+		// image
+		struct {
+			struct mt_color col_add_begin, col_add_end;
+			float scale_begin, scale_end;
+			void* ud;
+		} A;
+
 		// shape
 		struct {
 			float size;
 			float acuity;
-		} A;
-
-		// symbol
-		struct {
-			struct mt_color color_add;
-			float alpha_start, alpha_end;
-			float radius;
-			float scale_start, scale_end;
-			void* ud;
 		} B;
 	} mode;
 };
@@ -51,14 +49,14 @@ struct t2d_particle {
 	struct mt_color col_add, col_add_delta;
 
 	union {
+		// image
+		struct {
+			int zz;
+		} A;
+
 		// shape
 		struct {
 			float size, size_delta;
-		} A;
-
-		// symbol
-		struct {
-			int zz;
 		} B;
 	} mode;
 
@@ -77,15 +75,15 @@ struct t2d_emitter_cfg {
 
 	int mode_type;
 	union {
-		// shape
-		struct {
-			int zz;
-		} A;
-
-		// symbol
+		// image
 		struct {
 			int sym_count;
 			struct t2d_symbol* syms;
+		} A;
+
+		// shape
+		struct {
+			int zz;
 		} B;
 	} mode;
 
@@ -111,7 +109,7 @@ struct t2d_emitter {
 #define SIZEOF_T2D_EMITTER (sizeof(struct t2d_emitter) + PTR_SIZE_DIFF * 3)
 
 void t2d_init();
-void t2d_regist_cb(void (*render_symbol_func)(void* symbol, float x, float y, float angle, uint8_t* mul_col, uint8_t* add_col, const void* ud),
+void t2d_regist_cb(void (*render_symbol_func)(void* symbol, float x, float y, float angle, float scale, uint8_t* mul_col, uint8_t* add_col, const void* ud),
 				   void (*render_shape_func)(const float* positions, const uint32_t* colors, int count));
 
 struct t2d_emitter* t2d_emitter_create(const struct t2d_emitter_cfg* cfg);

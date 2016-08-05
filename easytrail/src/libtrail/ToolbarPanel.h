@@ -28,8 +28,8 @@ public:
 	virtual void SetValue(int key, const ee::UICallback::Data& data);
 	virtual void GetValue(int key, ee::UICallback::Data& data);
 
-	void Load(const Json::Value& val);
-	void Store(Json::Value& val) const;
+	void Load(const Json::Value& val, const std::string& dir);
+	void Store(Json::Value& val, const std::string& dir) const;
 
 	void InitTrail();
 

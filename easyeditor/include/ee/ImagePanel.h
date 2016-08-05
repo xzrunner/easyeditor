@@ -12,7 +12,6 @@ public:
 	ImagePanel(wxWindow* parent, const std::string& filepath, float max_len);
 
 private:
-	void OnSize(wxSizeEvent& event);
 	void OnPaint(wxPaintEvent& event);
 
 	void Draw(wxDC& dc) const;

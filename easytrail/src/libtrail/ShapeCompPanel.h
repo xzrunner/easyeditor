@@ -21,20 +21,21 @@ public:
 	virtual void SetValue(int key, const ee::UICallback::Data& data);
 	virtual void GetValue(int key, ee::UICallback::Data& data);
 
-	virtual void Load(const Json::Value& val);
-	virtual void Store(Json::Value& val) const;
+	virtual void Load(const Json::Value& val, const std::string& dir);
+	virtual void Store(Json::Value& val, const std::string& dir) const;
 
 protected:
 	virtual void InitLayout(wxSizer* sizer);
 	virtual std::string GetTitle() const { return ""; }
 
-private:
-	void OnSetColor(wxCommandEvent& event);
-
-	void SetBtnColor();
+	virtual void UpdateBtnColor();
 
 private:
-	wxButton* m_col_btn;
+	void OnSetBeginColor(wxCommandEvent& event);
+	void OnSetEndColor(wxCommandEvent& event);
+
+private:
+	wxButton *m_begin_col_btn, *m_end_col_btn;
 
 }; // ShapeCompPanel
 

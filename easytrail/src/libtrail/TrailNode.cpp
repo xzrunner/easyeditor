@@ -56,7 +56,7 @@ void TrailNode::UpdateTime()
 }
 
 static void 
-render_symbol_func(void* symbol, float x, float y, float angle, uint8_t* mul_col, uint8_t* add_col, const void* ud)
+render_symbol_func(void* symbol, float x, float y, float angle, float scale, uint8_t* mul_col, uint8_t* add_col, const void* ud)
 {
 	assert(ud);
 	const RenderParams* rp = (static_cast<const RenderParams*>(ud));
@@ -71,7 +71,7 @@ render_symbol_func(void* symbol, float x, float y, float angle, uint8_t* mul_col
 	params.color.mul = params.color.mul * rp->ct.mul;
 	params.color.add = params.color.add + rp->ct.add;
 
-	ee::SpriteRenderer::Draw(sym, params, sm::vec2(x, y), angle - SM_PI * 0.5f);
+	ee::SpriteRenderer::Draw(sym, params, sm::vec2(x, y), angle - SM_PI * 0.5f, scale, scale);
 }
 
 static void 

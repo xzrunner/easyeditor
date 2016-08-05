@@ -27,6 +27,9 @@ public:
 	static void Store(const s2::Color& col, Json::Value& value);
 	static void Load(const Json::Value& value, s2::Color& col);
 
+	static void Store(const uint8_t rgba[4], Json::Value& value);
+	static void Load(const Json::Value& value, uint8_t rgba[4]);
+
 }; // JsonSerializer
 
 }
