@@ -34,3 +34,6 @@
 [submodule "logger/src/logger"]
 	path = logger/src/logger
 	url = ssh://git@tea.ejoy.com:3222/LR/logger.git
+[submodule "mtrail/src/mtrail"]
+	path = mtrail/src/mtrail
+	url = ssh://git@tea.ejoy.com:3222/LR/mtrail.git
