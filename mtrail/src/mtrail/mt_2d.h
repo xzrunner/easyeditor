@@ -44,21 +44,7 @@ struct t2d_particle {
 
 	struct sm_vec2 pos;
 	float angle;
-
-	struct mt_color col_mul, col_mul_delta;
-	struct mt_color col_add, col_add_delta;
-
-	union {
-		// image
-		struct {
-			int zz;
-		} A;
-
-		// shape
-		struct {
-			float size, size_delta;
-		} B;
-	} mode;
+	int _dummy;		// unused: dummy for align to 64bit
 
 	struct t2d_particle* next;
 };
@@ -74,18 +60,6 @@ struct t2d_emitter_cfg {
 	float fadeout_time;
 
 	int mode_type;
-	union {
-		// image
-		struct {
-			int sym_count;
-			struct t2d_symbol* syms;
-		} A;
-
-		// shape
-		struct {
-			int zz;
-		} B;
-	} mode;
 
 	int symbol_count;
 	struct t2d_symbol* symbols;
@@ -105,8 +79,6 @@ struct t2d_emitter {
 
 	struct t2d_emitter* next;
 };
-
-#define SIZEOF_T2D_EMITTER (sizeof(struct t2d_emitter) + PTR_SIZE_DIFF * 3)
 
 void t2d_init();
 void t2d_regist_cb(void (*render_symbol_func)(void* symbol, float x, float y, float angle, float scale, uint8_t* mul_col, uint8_t* add_col, const void* ud),
