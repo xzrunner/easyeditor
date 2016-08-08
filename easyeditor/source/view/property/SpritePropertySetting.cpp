@@ -152,7 +152,7 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 	{
 		double w, h;
 		SplitString2Double(value, &w, &h);
-		sm::vec2 sz = spr->GetSymbol().GetSize().Size();
+		sm::vec2 sz = spr->GetSymbol().GetSize(spr).Size();
 		m_impl->Scale(w / sz.x, h / sz.y);
 	}
 	// shear
