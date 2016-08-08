@@ -379,17 +379,6 @@ void CocoPacker::PackCompColor(Json::Value& child_val, ebuilder::CodeGenerator& 
 		s = ee::StringHelper::ToString(child_val["add_col"]["b"].asDouble());
 		lua::assign(gen, "['add_col_b']", s+",");
 	}
-
-	if (child_val["alpha"].isNull()) {
-		lua::assign(gen, "['start_alpha']", "100,");
-		lua::assign(gen, "['end_alpha']", "100,");
-	} else {
-		s = ee::StringHelper::ToString(child_val["alpha"]["start"].asDouble());
-		lua::assign(gen, "['start_alpha']", s+",");
-
-		s = ee::StringHelper::ToString(child_val["alpha"]["end"].asDouble());
-		lua::assign(gen, "['end_alpha']", s+",");
-	}
 }
 
 }

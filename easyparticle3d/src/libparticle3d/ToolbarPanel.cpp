@@ -118,11 +118,12 @@ void ToolbarPanel::Add(const LoadAdapter::Component& comp, ee::LibraryPanel* lib
 
 	cp->SetValue(PS_ROTATE, ee::UICallback::Data(comp.angle - comp.angle_var, comp.angle + comp.angle_var));
 
-	pc->col_mul = ColorFromS2(comp.col_mul);
-	pc->col_add = ColorFromS2(comp.col_add);
+	pc->mul_col_begin = ColorFromS2(comp.mul_col_begin);
+	pc->mul_col_end = ColorFromS2(comp.mul_col_end);
+	pc->add_col_begin = ColorFromS2(comp.add_col_begin);
+	pc->add_col_end = ColorFromS2(comp.add_col_end);
 
-	cp->SetValue(PS_ALPHA, ee::UICallback::Data(comp.alpha_start, comp.alpha_end));
-	cp->SetBtnColor();
+	cp->UpdateBtnColor();
 
 	for (int i = 0, n = cp->m_sliders.size(); i < n; ++i) {
 		cp->m_sliders[i]->Load();

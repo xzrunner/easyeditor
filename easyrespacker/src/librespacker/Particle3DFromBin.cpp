@@ -146,17 +146,16 @@ void Particle3DFromBin::UnpackComponent(uint8_t** ptr, PackParticle3D* p3d)
 	comp.angle = TransDegree(angle);
 	comp.angle_var = TransDegree(angle_var);
 
-	uint32_t col_mul, col_add;
-	unpack(col_mul, ptr);
-	unpack(col_add, ptr);
-	comp.col_mul = col_mul;
-	comp.col_add = col_add;
-
-	uint16_t alpha_start, alpha_end;
-	unpack(alpha_start, ptr);
-	unpack(alpha_end, ptr);
-	comp.alpha_start = static_cast<int>(alpha_start);
-	comp.alpha_end = static_cast<int>(alpha_end);
+	uint32_t mul_col_begin, mul_col_end, 
+		     add_col_begin, add_col_end;
+	unpack(mul_col_begin, ptr);
+	unpack(mul_col_end, ptr);
+	unpack(add_col_begin, ptr);
+	unpack(add_col_end, ptr);
+	comp.mul_col_begin = mul_col_begin;
+	comp.mul_col_end = mul_col_end;
+	comp.add_col_begin = add_col_begin;
+	comp.add_col_end = add_col_end;
 }
 
 }

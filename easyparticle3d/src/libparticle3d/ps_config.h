@@ -21,7 +21,6 @@ enum PS_PROPERTY
 
 	PS_SCALE,
 	PS_ROTATE,
-	PS_ALPHA,
 };
 
 static const int MAX_COMPONENTS = 256;

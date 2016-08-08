@@ -91,15 +91,15 @@ p2d_emitter_cfg* Particle2DToSpr::LoadConfig(const erespacker::PackParticle2D* p
 		dst.scale_start = src.scale_start;
 		dst.scale_end = src.scale_end;
 
-		s2::Color col_mul_start = int2color(src.col_mul_start, ee::PT_ARGB),
-			      col_mul_end	= int2color(src.col_mul_end, ee::PT_ARGB),
-				  col_add_start = int2color(src.col_add_start, ee::PT_ARGB),
-				  col_add_end	= int2color(src.col_add_end, ee::PT_ARGB);
+		s2::Color mul_col_start = int2color(src.mul_col_start, ee::PT_ARGB),
+			      mul_col_end	= int2color(src.mul_col_end, ee::PT_ARGB),
+				  add_col_start = int2color(src.add_col_start, ee::PT_ARGB),
+				  add_col_end	= int2color(src.add_col_end, ee::PT_ARGB);
 
-		memcpy(&dst.col_mul_start.r, &col_mul_start.r, sizeof(col_mul_start));
-		memcpy(&dst.col_mul_end.r, &col_mul_end.r, sizeof(col_mul_end));
-		memcpy(&dst.col_add_start.r, &col_add_start.r, sizeof(col_add_start));
-		memcpy(&dst.col_add_end.r, &col_add_end.r, sizeof(col_add_end));
+		memcpy(&dst.mul_col_start.r, &mul_col_start.r, sizeof(mul_col_start));
+		memcpy(&dst.mul_col_end.r, &mul_col_end.r, sizeof(mul_col_end));
+		memcpy(&dst.add_col_start.r, &add_col_start.r, sizeof(add_col_start));
+		memcpy(&dst.add_col_end.r, &add_col_end.r, sizeof(add_col_end));
 		
 		ee::Sprite* spr = NodeToSprite::Trans(src.node);
 		dst.ud = const_cast<ee::Symbol*>(&spr->GetSymbol());

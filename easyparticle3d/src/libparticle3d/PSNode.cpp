@@ -64,7 +64,7 @@ void PSNode::UpdateTime()
 
 static void 
 render_func(void* symbol, float* mat, float x, float y, float angle, float scale, 
-            struct ps_color4f* mul_col, struct ps_color4f* add_col, const void* ud)
+            struct ps_color* mul_col, struct ps_color* add_col, const void* ud)
 {
 	assert(ud);
 	const RenderParams* rp = (static_cast<const RenderParams*>(ud));
@@ -74,15 +74,15 @@ render_func(void* symbol, float* mat, float x, float y, float angle, float scale
 
 	s2::RenderParams params;
 
-	params.color.mul.r = (int)(mul_col->r * 255.0f + 0.5f);
-	params.color.mul.g = (int)(mul_col->g * 255.0f + 0.5f);
-	params.color.mul.b = (int)(mul_col->b * 255.0f + 0.5f);
-	params.color.mul.a = (int)(mul_col->a * 255.0f + 0.5f);
+	params.color.mul.r = mul_col->r;
+	params.color.mul.g = mul_col->g;
+	params.color.mul.b = mul_col->b;
+	params.color.mul.a = mul_col->a;
 
-	params.color.add.r = (int)(add_col->r * 255.0f + 0.5f);
-	params.color.add.g = (int)(add_col->g * 255.0f + 0.5f);
-	params.color.add.b = (int)(add_col->b * 255.0f + 0.5f);
-	params.color.add.a = (int)(add_col->a * 255.0f + 0.5f);
+	params.color.add.r = add_col->r;
+	params.color.add.g = add_col->g;
+	params.color.add.b = add_col->b;
+	params.color.add.a = add_col->a;
 
 	params.color.mul = params.color.mul * rp->ct.mul;
 	params.color.add = params.color.add + rp->ct.add;

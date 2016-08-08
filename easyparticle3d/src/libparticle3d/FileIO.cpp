@@ -13,6 +13,7 @@
 #include <ee/Math2D.h>
 #include <ee/SymbolMgr.h>
 #include <ee/Exception.h>
+#include <ee/JsonSerializer.h>
 
 #include <ps_3d.h>
 
@@ -72,16 +73,10 @@ void FileIO::Store(const std::string& filepath, ParticleSystem* ps,
 			cp->m_sliders[j]->Store(value["components"][i]);
 		}
 
-		Json::Value col_val;
-		col_val["r"] = pc->col_mul.r;
-		col_val["g"] = pc->col_mul.g;
-		col_val["b"] = pc->col_mul.b;
-		value["components"][i]["mul_col"] = col_val;
-
-		col_val["r"] = pc->col_add.r;
-		col_val["g"] = pc->col_add.g;
-		col_val["b"] = pc->col_add.b;
-		value["components"][i]["add_col"] = col_val;
+		ee::JsonSerializer::Store(pc->mul_col_begin.rgba, value["components"][i]["mul_col_begin"]);
+		ee::JsonSerializer::Store(pc->mul_col_end.rgba, value["components"][i]["mul_col_end"]);
+		ee::JsonSerializer::Store(pc->add_col_begin.rgba, value["components"][i]["add_col_begin"]);
+		ee::JsonSerializer::Store(pc->add_col_end.rgba, value["components"][i]["add_col_end"]);
 	}
 
 	Json::StyledStreamWriter writer;
@@ -232,18 +227,10 @@ p3d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
 		dst.angle = src.angle;
 		dst.angle_var = src.angle_var;
 
-		dst.col_mul.r = src.col_mul.r / 255.0f;
-		dst.col_mul.g = src.col_mul.g / 255.0f;
-		dst.col_mul.b = src.col_mul.b / 255.0f;
-		dst.col_mul.a = src.col_mul.a / 255.0f;
-
-		dst.col_add.r = src.col_add.r / 255.0f;
-		dst.col_add.g = src.col_add.g / 255.0f;
-		dst.col_add.b = src.col_add.b / 255.0f;
-		dst.col_add.a = src.col_add.a / 255.0f;
-
-		dst.alpha_start = src.alpha_start * 0.01f;
-		dst.alpha_end = src.alpha_end * 0.01f;
+		memcpy(&dst.mul_col_begin.r, &src.mul_col_begin.r, sizeof(dst.mul_col_begin));
+		memcpy(&dst.mul_col_end.r, &src.mul_col_end.r, sizeof(dst.mul_col_end));
+		memcpy(&dst.add_col_begin.r, &src.add_col_begin.r, sizeof(dst.add_col_begin));
+		memcpy(&dst.add_col_end.r, &src.add_col_end.r, sizeof(dst.add_col_end));
 
 		if (ee::FileHelper::IsFileExist(src.bind_filepath)) {
 			dst.bind_ps_cfg = PSConfigMgr::Instance()->GetConfig(src.bind_filepath);

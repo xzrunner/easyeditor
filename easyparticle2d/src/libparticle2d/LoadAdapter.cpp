@@ -3,6 +3,7 @@
 #include <ee/Exception.h>
 #include <ee/Math2D.h>
 #include <ee/FileHelper.h>
+#include <ee/JsonSerializer.h>
 
 #include <ps_2d.h>
 
@@ -102,23 +103,10 @@ void LoadAdapter::LoadComponent(const std::string& dir, const Json::Value& comp_
 	comp.scale_start		= comp_val["scale"]["start"].asDouble();
 	comp.scale_end			= comp_val["scale"]["end"].asDouble();
 
-	comp.col_mul_start.r	= comp_val["col_mul_start"]["r"].asDouble();
-	comp.col_mul_start.g	= comp_val["col_mul_start"]["g"].asDouble();
-	comp.col_mul_start.b	= comp_val["col_mul_start"]["b"].asDouble();
-	comp.col_mul_start.a	= comp_val["col_mul_start"]["a"].asDouble();
-
-	comp.col_mul_end.r		= comp_val["col_mul_end"]["r"].asDouble();
-	comp.col_mul_end.g		= comp_val["col_mul_end"]["g"].asDouble();
-	comp.col_mul_end.b		= comp_val["col_mul_end"]["b"].asDouble();
-	comp.col_mul_end.a		= comp_val["col_mul_end"]["a"].asDouble();
-
-	comp.col_add_start.r	= comp_val["col_add_start"]["r"].asDouble();
-	comp.col_add_start.g	= comp_val["col_add_start"]["g"].asDouble();
-	comp.col_add_start.b	= comp_val["col_add_start"]["b"].asDouble();
-
-	comp.col_add_end.r		= comp_val["col_add_end"]["r"].asDouble();
-	comp.col_add_end.g		= comp_val["col_add_end"]["g"].asDouble();
-	comp.col_add_end.b		= comp_val["col_add_end"]["b"].asDouble();
+	ee::JsonSerializer::Load(comp_val["mul_col_start"], comp.mul_col_start);
+	ee::JsonSerializer::Load(comp_val["mul_col_end"], comp.mul_col_end);
+	ee::JsonSerializer::Load(comp_val["add_col_start"], comp.add_col_start);
+	ee::JsonSerializer::Load(comp_val["add_col_end"], comp.add_col_end);
 
 	comp.filepath = comp_val["filepath"].asString();
 	comp.filepath = ee::FileHelper::GetAbsolutePath(dir, comp.filepath);

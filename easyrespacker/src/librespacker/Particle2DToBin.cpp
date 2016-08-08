@@ -180,15 +180,15 @@ void Particle2DToBin::PackComponent(const PackParticle2D::Component& comp,
 	uint16_t scale_end = TransFloatX100(comp.scale_end);
 	pack(scale_end, ptr);
 
-	uint32_t col_mul_start = comp.col_mul_start;
-	pack(col_mul_start, ptr);
-	uint32_t col_mul_end = comp.col_mul_end;
-	pack(col_mul_end, ptr);
+	uint32_t mul_col_start = comp.mul_col_start;
+	pack(mul_col_start, ptr);
+	uint32_t mul_col_end = comp.mul_col_end;
+	pack(mul_col_end, ptr);
 
-	uint32_t col_add_start = comp.col_add_start;
-	pack(col_add_start, ptr);
-	uint32_t col_add_end = comp.col_add_end;
-	pack(col_add_end, ptr);
+	uint32_t add_col_start = comp.add_col_start;
+	pack(add_col_start, ptr);
+	uint32_t add_col_end = comp.add_col_end;
+	pack(add_col_end, ptr);
 }
 
 }

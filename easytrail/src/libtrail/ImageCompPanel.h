@@ -12,7 +12,6 @@ class ImageCompPanel : public ComponentPanel
 {
 public:
 	ImageCompPanel(wxWindow* parent, t2d_symbol* pc, ToolbarPanel* toolbar);
-	virtual ~ImageCompPanel();
 
 	//
 	// UICallback interface

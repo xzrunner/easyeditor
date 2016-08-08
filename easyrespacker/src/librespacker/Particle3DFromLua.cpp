@@ -49,10 +49,10 @@ void Particle3DFromLua::UnpackComponents(lua_State* L, PackParticle3D* p3d)
 		comp.angle = static_cast<float>(LuaDataHelper::GetIntField(L, "angle"));
 		comp.angle_var = static_cast<float>(LuaDataHelper::GetIntField(L, "angle_var"));
 
-		comp.col_mul = (uint32_t)LuaDataHelper::GetDoubleField(L, "col_mul");
-		comp.col_add = (uint32_t)LuaDataHelper::GetDoubleField(L, "col_add");
-		comp.alpha_start = (uint8_t)LuaDataHelper::GetIntField(L, "alpha_start");
-		comp.alpha_end = (uint8_t)LuaDataHelper::GetIntField(L, "alpha_end");
+		comp.mul_col_begin = (uint32_t)LuaDataHelper::GetDoubleField(L, "mul_col_begin");
+		comp.mul_col_end = (uint32_t)LuaDataHelper::GetDoubleField(L, "mul_col_end");
+		comp.add_col_begin = (uint32_t)LuaDataHelper::GetDoubleField(L, "add_col_begin");
+		comp.add_col_end = (uint32_t)LuaDataHelper::GetDoubleField(L, "add_col_end");
 
 		lua_pop(L, 1);
 	}

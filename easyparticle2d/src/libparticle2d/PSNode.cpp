@@ -43,7 +43,7 @@ void PSNode::UpdateTime()
 
 static void 
 render_func(void* symbol, float* mat, float x, float y, float angle, float scale, 
-            struct ps_color4f* mul_col, struct ps_color4f* add_col, const void* ud)
+            struct ps_color* mul_col, struct ps_color* add_col, const void* ud)
 {
 	sm::mat4 mt;
 	if (ud) {

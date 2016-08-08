@@ -127,15 +127,15 @@ void Particle2DBuilder::Load(const eparticle2d::Symbol* symbol, PackParticle2D* 
 		comp.scale_start = p_symbol.scale_start;
 		comp.scale_end = p_symbol.scale_end;
 
-		comp.col_mul_start = s2::Color((int)(p_symbol.col_mul_start.r * 255), (int)(p_symbol.col_mul_start.g * 255), 
-			(int)(p_symbol.col_mul_start.b * 255), (int)(p_symbol.col_mul_start.a * 255)).ToABGR();
-		comp.col_mul_end = s2::Color((int)(p_symbol.col_mul_end.r * 255), (int)(p_symbol.col_mul_end.g * 255), 
-			(int)(p_symbol.col_mul_end.b * 255), (int)(p_symbol.col_mul_end.a * 255)).ToABGR();
+		comp.mul_col_start = s2::Color((int)(p_symbol.mul_col_start.r * 255), (int)(p_symbol.mul_col_start.g * 255), 
+			(int)(p_symbol.mul_col_start.b * 255), (int)(p_symbol.mul_col_start.a * 255)).ToABGR();
+		comp.mul_col_end = s2::Color((int)(p_symbol.mul_col_end.r * 255), (int)(p_symbol.mul_col_end.g * 255), 
+			(int)(p_symbol.mul_col_end.b * 255), (int)(p_symbol.mul_col_end.a * 255)).ToABGR();
 
-		comp.col_add_start = s2::Color((int)(p_symbol.col_add_start.r * 255), (int)(p_symbol.col_add_start.g * 255), 
-			(int)(p_symbol.col_add_start.b * 255), (int)(p_symbol.col_add_start.a * 255)).ToABGR();
-		comp.col_add_end = s2::Color((int)(p_symbol.col_add_end.r * 255), (int)(p_symbol.col_add_end.g * 255), 
-			(int)(p_symbol.col_add_end.b * 255), (int)(p_symbol.col_add_end.a * 255)).ToABGR();
+		comp.add_col_start = s2::Color((int)(p_symbol.add_col_start.r * 255), (int)(p_symbol.add_col_start.g * 255), 
+			(int)(p_symbol.add_col_start.b * 255), (int)(p_symbol.add_col_start.a * 255)).ToABGR();
+		comp.add_col_end = s2::Color((int)(p_symbol.add_col_end.r * 255), (int)(p_symbol.add_col_end.g * 255), 
+			(int)(p_symbol.add_col_end.b * 255), (int)(p_symbol.add_col_end.a * 255)).ToABGR();
 
 		ee::Symbol* symbol = static_cast<ee::Symbol*>(p_symbol.ud);
 		comp.node = PackNodeFactory::Instance()->Create(symbol);

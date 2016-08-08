@@ -341,10 +341,10 @@ p3d_symbol* ParticleSystem::AddSymbol(ee::Symbol* symbol)
 
 	comp.scale_start = comp.scale_end = 1;
 
-	comp.col_mul.r = comp.col_mul.g = comp.col_mul.b = comp.col_mul.a = 1;
-	comp.col_add.r = comp.col_add.g = comp.col_add.b = 0;
-
-	comp.alpha_start = comp.alpha_end = 1;
+	comp.mul_col_begin.r = comp.mul_col_begin.g = comp.mul_col_begin.b = comp.mul_col_begin.a = 255;
+	comp.mul_col_end.r = comp.mul_col_end.g = comp.mul_col_end.b = comp.mul_col_end.a = 255;
+	comp.add_col_begin.r = comp.add_col_begin.g = comp.add_col_begin.b = comp.add_col_begin.a = 0;
+	comp.add_col_end.r = comp.add_col_end.g = comp.add_col_end.b = comp.add_col_end.a = 0;
 
 	comp.ud = symbol;
 

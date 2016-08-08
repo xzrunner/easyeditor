@@ -2,6 +2,7 @@
 
 #include <ee/Math2D.h>
 #include <ee/FileHelper.h>
+#include <ee/JsonSerializer.h>
 
 #include <ps_3d.h>
 
@@ -163,27 +164,47 @@ void LoadAdapter::LoadComponent(const std::string& dir, const Json::Value& comp_
 	}
 
 	if (!comp_val["mul_col"].isNull()) {
-		comp.col_mul.r = comp_val["mul_col"]["r"].asDouble() * 255;
-		comp.col_mul.g = comp_val["mul_col"]["g"].asDouble() * 255;
-		comp.col_mul.b = comp_val["mul_col"]["b"].asDouble() * 255;
+		comp.mul_col_begin.r = comp_val["mul_col"]["r"].asDouble() * 255;
+		comp.mul_col_begin.g = comp_val["mul_col"]["g"].asDouble() * 255;
+		comp.mul_col_begin.b = comp_val["mul_col"]["b"].asDouble() * 255;
+		comp.mul_col_begin.a = 255;
+		comp.mul_col_end = comp.mul_col_begin;
 	} else {
-		comp.col_mul.r = comp.col_mul.g = comp.col_mul.b = 255;
+		if (!comp_val["mul_col_begin"].isNull()) {
+			ee::JsonSerializer::Load(comp_val["mul_col_begin"], comp.mul_col_begin);
+		} else {
+			comp.mul_col_begin.r = comp.mul_col_begin.g = comp.mul_col_begin.b = comp.mul_col_begin.a = 255;
+		}
+		if (!comp_val["mul_col_end"].isNull()) {
+			ee::JsonSerializer::Load(comp_val["mul_col_end"], comp.mul_col_end);
+		} else {
+			comp.mul_col_end.r = comp.mul_col_end.g = comp.mul_col_end.b = comp.mul_col_end.a = 255;
+		}
 	}
-	comp.col_mul.a = 255;
 
 	if (!comp_val["add_col"].isNull()) {
-		comp.col_add.r = comp_val["add_col"]["r"].asDouble() * 255;
-		comp.col_add.g = comp_val["add_col"]["g"].asDouble() * 255;
-		comp.col_add.b = comp_val["add_col"]["b"].asDouble() * 255;
+		comp.add_col_begin.r = comp_val["add_col"]["r"].asDouble() * 255;
+		comp.add_col_begin.g = comp_val["add_col"]["g"].asDouble() * 255;
+		comp.add_col_begin.b = comp_val["add_col"]["b"].asDouble() * 255;
+		comp.add_col_end = comp.add_col_begin;
 	} else {
-		comp.col_add.r = comp.col_add.g = comp.col_add.b = 0;
+		if (!comp_val["add_col_begin"].isNull()) {
+			ee::JsonSerializer::Load(comp_val["add_col_begin"], comp.add_col_begin);
+		} else {
+			comp.add_col_begin.r = comp.add_col_begin.g = comp.add_col_begin.b = comp.add_col_begin.a = 0;
+		}
+		if (!comp_val["add_col_end"].isNull()) {
+			ee::JsonSerializer::Load(comp_val["add_col_end"], comp.add_col_end);
+		} else {
+			comp.add_col_end.r = comp.add_col_end.g = comp.add_col_end.b = comp.add_col_end.a = 0;
+		}
 	}
 
 	if (!comp_val["alpha"].isNull()) {
-		comp.alpha_start = comp_val["alpha"]["start"].asInt();
-		comp.alpha_end = comp_val["alpha"]["end"].asInt();
-	} else {
-		comp.alpha_start = comp.alpha_end = 100;
+		float begin = comp_val["alpha"]["start"].asDouble() * 0.01f,
+			  end = comp_val["alpha"]["end"].asDouble() * 0.01f;
+		comp.mul_col_begin.a *= begin;
+		comp.mul_col_end.a *= end;
 	}
 
 	comp.start_z = comp_val["start_z"].asInt();

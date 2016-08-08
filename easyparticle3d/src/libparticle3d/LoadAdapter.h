@@ -30,8 +30,8 @@ public:
 
 		float angle, angle_var;
 
-		s2::Color col_mul, col_add;
-		float alpha_start, alpha_end;
+		s2::Color mul_col_begin, mul_col_end,
+			      add_col_begin, add_col_end;
 
 		float start_z;
 	};

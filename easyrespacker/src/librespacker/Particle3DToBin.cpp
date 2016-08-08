@@ -148,15 +148,14 @@ void Particle3DToBin::PackComponent(const PackParticle3D::Component& comp,
 	uint16_t angle_var = TransFloat(comp.angle_var);
 	pack(angle_var, ptr);
 
-	uint32_t col_mul = comp.col_mul;
-	pack(col_mul, ptr);
-	uint32_t col_add = comp.col_add;
-	pack(col_add, ptr);
-
-	uint16_t alpha_start = comp.alpha_start;
-	pack(alpha_start, ptr);
-	uint16_t alpha_end = comp.alpha_end;
-	pack(alpha_end, ptr);
+	uint32_t mul_col_begin = comp.mul_col_begin;
+	pack(mul_col_begin, ptr);
+	uint32_t mul_col_end = comp.mul_col_end;
+	pack(mul_col_end, ptr);
+	uint32_t add_col_begin = comp.add_col_begin;
+	pack(add_col_begin, ptr);
+	uint32_t add_col_end = comp.add_col_end;
+	pack(add_col_end, ptr);
 }
 
 }

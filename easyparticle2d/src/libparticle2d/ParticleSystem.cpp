@@ -279,10 +279,10 @@ p2d_symbol* ParticleSystem::AddSymbol(ee::Symbol* symbol)
 
 	comp.scale_start = comp.scale_end = 0;
 
-	comp.col_mul_start.r = comp.col_mul_start.g = comp.col_mul_start.b = comp.col_mul_start.a = 1;
-	comp.col_mul_end = comp.col_mul_start;
-	memset(&comp.col_add_start, 0, sizeof(comp.col_add_start));
-	memset(&comp.col_add_end, 0, sizeof(comp.col_add_end));
+	comp.mul_col_start.r = comp.mul_col_start.g = comp.mul_col_start.b = comp.mul_col_start.a = 1;
+	comp.mul_col_end = comp.mul_col_start;
+	memset(&comp.add_col_start, 0, sizeof(comp.add_col_start));
+	memset(&comp.add_col_end, 0, sizeof(comp.add_col_end));
 
 	comp.ud = symbol;
 

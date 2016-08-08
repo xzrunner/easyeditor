@@ -11,6 +11,7 @@
 #include <ee/Symbol.h>
 #include <ee/Math2D.h>
 #include <ee/SymbolMgr.h>
+#include <ee/JsonSerializer.h>
 
 #include <json/json.h>
 
@@ -47,29 +48,10 @@ void FileIO::Store(const std::string& filepath, ToolbarPanel* toolbar)
 			cp->m_sliders[j]->Store(cval);
 		}
 
-		Json::Value col_val;
-
-		col_val["r"] = p_symbol->col_mul_start.r;
-		col_val["g"] = p_symbol->col_mul_start.g;
-		col_val["b"] = p_symbol->col_mul_start.b;
-		col_val["a"] = p_symbol->col_mul_start.a;
-		cval["col_mul_start"] = col_val;
-
-		col_val["r"] = p_symbol->col_mul_end.r;
-		col_val["g"] = p_symbol->col_mul_end.g;
-		col_val["b"] = p_symbol->col_mul_end.b;
-		col_val["a"] = p_symbol->col_mul_end.a;
-		cval["col_mul_end"] = col_val;
-
-		col_val["r"] = p_symbol->col_add_start.r;
-		col_val["g"] = p_symbol->col_add_start.g;
-		col_val["b"] = p_symbol->col_add_start.b;
-		cval["col_add_start"] = col_val;
-
-		col_val["r"] = p_symbol->col_add_end.r;
-		col_val["g"] = p_symbol->col_add_end.g;
-		col_val["b"] = p_symbol->col_add_end.b;
-		cval["col_add_end"] = col_val;
+		ee::JsonSerializer::Store(p_symbol->mul_col_start.rgba, cval["mul_col_start"]);
+		ee::JsonSerializer::Store(p_symbol->mul_col_end.rgba, cval["mul_col_end"]);
+		ee::JsonSerializer::Store(p_symbol->add_col_start.rgba, cval["add_col_start"]);
+		ee::JsonSerializer::Store(p_symbol->add_col_end.rgba, cval["add_col_end"]);
 
 		value["components"][i] = cval;
 	}
@@ -206,10 +188,10 @@ p2d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
 		dst.scale_start = src.scale_start * 0.01f;
 		dst.scale_end = src.scale_end * 0.01f;
 
-		memcpy(&dst.col_mul_start.r, &src.col_mul_start.r, sizeof(src.col_mul_start));
-		memcpy(&dst.col_mul_end.r, &src.col_mul_end.r, sizeof(src.col_mul_end));
-		memcpy(&dst.col_add_start.r, &src.col_add_start.r, sizeof(src.col_add_start));
-		memcpy(&dst.col_add_end.r, &src.col_add_end.r, sizeof(src.col_add_end));
+		memcpy(&dst.mul_col_start.r, &src.mul_col_start.r, sizeof(src.mul_col_start));
+		memcpy(&dst.mul_col_end.r, &src.mul_col_end.r, sizeof(src.mul_col_end));
+		memcpy(&dst.add_col_start.r, &src.add_col_start.r, sizeof(src.add_col_start));
+		memcpy(&dst.add_col_end.r, &src.add_col_end.r, sizeof(src.add_col_end));
 
 		dst.ud = ee::SymbolMgr::Instance()->FetchSymbol(src.filepath);
 	}

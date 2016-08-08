@@ -104,10 +104,10 @@ void Particle3DToLuaString::PackComponent(const PackParticle3D::Component& comp,
 		lua::assign("angle_var", TransFloat(comp.angle_var)));
 
 	lua::connect(gen, 4, 
-		lua::assign("col_mul", comp.col_mul), 
-		lua::assign("col_add", comp.col_add),
-		lua::assign("alpha_start", (int)comp.alpha_start), 
-		lua::assign("alpha_end", (int)comp.alpha_end));
+		lua::assign("mul_col_begin", comp.mul_col_begin), 
+		lua::assign("mul_col_end", comp.mul_col_end),
+		lua::assign("add_col_begin", comp.add_col_begin), 
+		lua::assign("add_col_end", comp.add_col_end));
 }
 
 }

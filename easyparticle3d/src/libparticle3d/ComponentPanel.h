@@ -7,10 +7,12 @@
 
 #include <vector>
 
+#include <stdint.h>
+
 namespace ee { class SliderCtrl; }
 
 struct p3d_symbol;
-struct ps_color4f;
+struct ps_color;
 class wxTextCtrl;
 class wxButton;
 
@@ -30,10 +32,7 @@ public:
 	virtual void SetValue(int key, const ee::UICallback::Data& data);
 	virtual void GetValue(int key, ee::UICallback::Data& data);
 
-	const ps_color4f& GetMulColor() const;
-	const ps_color4f& GetAddColor() const;
-
-	void SetBtnColor();
+	void UpdateBtnColor();
 
 	void SetCount(int count);
 
@@ -47,8 +46,12 @@ private:
 
 	void OnBindPS(wxCommandEvent& event);
 
-	void OnSetMultiCol(wxCommandEvent& event);
-	void OnSetAddCol(wxCommandEvent& event);
+	void OnSetBeginMulCol(wxCommandEvent& event);
+	void OnSetEndMulCol(wxCommandEvent& event);
+	void OnSetBeginAddCol(wxCommandEvent& event);
+	void OnSetEndAddCol(wxCommandEvent& event);
+
+	void ChangeColor(uint8_t rgba[4]);
 
 private:
 	p3d_symbol* m_pc;
@@ -61,7 +64,8 @@ private:
 
 	wxSpinCtrl* m_count;
 
-	wxButton *m_mul_col_btn, *m_add_col_btn;
+	wxButton *m_begin_mul_col_btn, *m_end_mul_col_btn;
+	wxButton *m_begin_add_col_btn, *m_end_add_col_btn;
 
 	friend class FileIO;
 	friend class ToolbarPanel;

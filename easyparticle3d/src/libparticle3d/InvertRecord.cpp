@@ -3,6 +3,7 @@
 
 #include <ee/std_functor.h>
 #include <ee/Symbol.h>
+#include <ee/JsonSerializer.h>
 
 #include <ps_3d.h>
 
@@ -74,16 +75,15 @@ Item(p3d_particle* p)
 	rotate = p->cfg.angular_spd;
 	angle = p->angle;
 
-	symbol = static_cast<ee::Symbol*>(p->cfg.symbol->ud)->GetFilepath();
+	symbol = static_cast<ee::Symbol*>(p->cfg.sym->ud)->GetFilepath();
 
-	start_scale = p->cfg.symbol->scale_start;
-	end_scale = p->cfg.symbol->scale_end;
+	scale_start = p->cfg.sym->scale_start;
+	scale_end = p->cfg.sym->scale_end;
 
-	start_alpha = p->cfg.symbol->alpha_start;
-	end_alpha = p->cfg.symbol->alpha_end;
-
-	memcpy(&mul_col.r, &p->cfg.symbol->col_mul.r, sizeof(p->cfg.symbol->col_mul));
-	memcpy(&add_col.r, &p->cfg.symbol->col_add.r, sizeof(p->cfg.symbol->col_add));
+	memcpy(&mul_col_begin.r, &p->cfg.sym->mul_col_begin.r, sizeof(p->cfg.sym->mul_col_begin));
+	memcpy(&mul_col_end.r, &p->cfg.sym->mul_col_end.r, sizeof(p->cfg.sym->mul_col_end));
+	memcpy(&add_col_begin.r, &p->cfg.sym->add_col_begin.r, sizeof(p->cfg.sym->add_col_begin));
+	memcpy(&add_col_end.r, &p->cfg.sym->add_col_end.r, sizeof(p->cfg.sym->add_col_end));
 }
 
 void InvertRecord::Item::
@@ -106,22 +106,13 @@ StoreToFile(Json::Value& val) const
 	val["angle"] = angle;
 
 	val["symbol"] = symbol;
-	val["start_scale"] = start_scale;
-	val["end_scale"] = end_scale;
-	val["start_alpha"] = start_alpha;
-	val["end_alpha"] = end_alpha;
+	val["start_scale"] = scale_start;
+	val["end_scale"] = scale_end;
 
-	Json::Value mul_col_val;
-	mul_col_val["r"] = mul_col.r;
-	mul_col_val["g"] = mul_col.g;
-	mul_col_val["b"] = mul_col.b;
-	val["mul_col"] = mul_col_val;
-
-	Json::Value add_col_val;
-	add_col_val["r"] = add_col.r;
-	add_col_val["g"] = add_col.g;
-	add_col_val["b"] = add_col.b;
-	val["add_col"] = add_col_val;
+	ee::JsonSerializer::Store(mul_col_begin, val["mul_col_begin"]);
+	ee::JsonSerializer::Store(mul_col_end, val["mul_col_end"]);
+	ee::JsonSerializer::Store(add_col_begin, val["add_col_begin"]);
+	ee::JsonSerializer::Store(add_col_end, val["add_col_end"]);
 }
 
 }

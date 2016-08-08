@@ -21,12 +21,6 @@ ImageCompPanel::ImageCompPanel(wxWindow* parent, t2d_symbol* pc, ToolbarPanel* t
 	UpdateBtnColor();
 }
 
-ImageCompPanel::~ImageCompPanel()
-{
-	ee::Symbol* sym = static_cast<ee::Symbol*>(m_pc->mode.A.ud);
-	sym->Release();
-}
-
 void ImageCompPanel::SetValue(int key, const ee::UICallback::Data& data)
 {
 	switch (key)
@@ -55,8 +49,8 @@ void ImageCompPanel::Load(const Json::Value& val, const std::string& dir)
 
 	ee::JsonSerializer::Load(val["mul_col_begin"], m_pc->col_begin.rgba);
 	ee::JsonSerializer::Load(val["mul_col_end"], m_pc->col_end.rgba);
-	ee::JsonSerializer::Load(val["add_col_begin"], m_pc->mode.A.col_add_begin.rgba);
-	ee::JsonSerializer::Load(val["add_col_end"], m_pc->mode.A.col_add_end.rgba);
+	ee::JsonSerializer::Load(val["add_col_begin"], m_pc->mode.A.add_col_begin.rgba);
+	ee::JsonSerializer::Load(val["add_col_end"], m_pc->mode.A.add_col_end.rgba);
 
 	UpdateBtnColor();
 }
@@ -67,8 +61,8 @@ void ImageCompPanel::Store(Json::Value& val, const std::string& dir) const
 
 	ee::JsonSerializer::Store(m_pc->col_begin.rgba, val["mul_col_begin"]);
 	ee::JsonSerializer::Store(m_pc->col_end.rgba, val["mul_col_end"]);
-	ee::JsonSerializer::Store(m_pc->mode.A.col_add_begin.rgba, val["add_col_begin"]);
-	ee::JsonSerializer::Store(m_pc->mode.A.col_add_end.rgba, val["add_col_end"]);
+	ee::JsonSerializer::Store(m_pc->mode.A.add_col_begin.rgba, val["add_col_begin"]);
+	ee::JsonSerializer::Store(m_pc->mode.A.add_col_end.rgba, val["add_col_end"]);
 
 	ee::Symbol* symbol = static_cast<ee::Symbol*>(m_pc->mode.A.ud);
 	val["filepath"] = ee::FileHelper::GetRelativePath(dir, symbol->GetFilepath());
@@ -166,10 +160,10 @@ void ImageCompPanel::UpdateBtnColor()
 	wxColor mul_col_end(m_pc->col_end.r, m_pc->col_end.g, m_pc->col_end.b, m_pc->col_end.a);
 	m_end_mul_col_btn->SetBackgroundColour(mul_col_end);
 
-	wxColor add_col_begin(m_pc->mode.A.col_add_begin.r, m_pc->mode.A.col_add_begin.g, m_pc->mode.A.col_add_begin.b, m_pc->mode.A.col_add_begin.a);
+	wxColor add_col_begin(m_pc->mode.A.add_col_begin.r, m_pc->mode.A.add_col_begin.g, m_pc->mode.A.add_col_begin.b, m_pc->mode.A.add_col_begin.a);
 	m_begin_add_col_btn->SetBackgroundColour(add_col_begin);
 
-	wxColor add_col_end(m_pc->mode.A.col_add_end.r, m_pc->mode.A.col_add_end.g, m_pc->mode.A.col_add_end.b, m_pc->mode.A.col_add_end.a);
+	wxColor add_col_end(m_pc->mode.A.add_col_end.r, m_pc->mode.A.add_col_end.g, m_pc->mode.A.add_col_end.b, m_pc->mode.A.add_col_end.a);
 	m_end_add_col_btn->SetBackgroundColour(add_col_end);
 }
 
@@ -185,12 +179,12 @@ void ImageCompPanel::OnSetEndMulCol(wxCommandEvent& event)
 
 void ImageCompPanel::OnSetBeginAddCol(wxCommandEvent& event)
 {
-	ChangeColor(m_pc->mode.A.col_add_begin.rgba);
+	ChangeColor(m_pc->mode.A.add_col_begin.rgba);
 }
 
 void ImageCompPanel::OnSetEndAddCol(wxCommandEvent& event)
 {
-	ChangeColor(m_pc->mode.A.col_add_end.rgba);
+	ChangeColor(m_pc->mode.A.add_col_end.rgba);
 }
 
 }

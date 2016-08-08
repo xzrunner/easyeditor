@@ -51,10 +51,10 @@ void Particle2DFromLua::UnpackComponents(lua_State* L, PackParticle2D* p2d)
 		comp.scale_start = TransFloatX100(LuaDataHelper::GetIntField(L, "scale_start"));
 		comp.scale_end = TransFloatX100(LuaDataHelper::GetIntField(L, "scale_end"));
 
-		comp.col_mul_start = (uint32_t)LuaDataHelper::GetDoubleField(L, "col_mul_start");
-		comp.col_mul_end = (uint32_t)LuaDataHelper::GetDoubleField(L, "col_mul_end");
-		comp.col_add_start = (uint32_t)LuaDataHelper::GetDoubleField(L, "col_add_start");
-		comp.col_add_end = (uint32_t)LuaDataHelper::GetDoubleField(L, "col_add_end");
+		comp.mul_col_start = (uint32_t)LuaDataHelper::GetDoubleField(L, "mul_col_start");
+		comp.mul_col_end = (uint32_t)LuaDataHelper::GetDoubleField(L, "mul_col_end");
+		comp.add_col_start = (uint32_t)LuaDataHelper::GetDoubleField(L, "add_col_start");
+		comp.add_col_end = (uint32_t)LuaDataHelper::GetDoubleField(L, "add_col_end");
 
 		lua_pop(L, 1);
 	}

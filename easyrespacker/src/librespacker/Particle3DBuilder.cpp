@@ -112,14 +112,10 @@ void Particle3DBuilder::Load(const eparticle3d::Symbol* symbol, PackParticle3D* 
 		comp.angle = p_symbol.angle;
 		comp.angle_var = p_symbol.angle_var;
 
-		s2::Color mul((int)(p_symbol.col_mul.r * 255), (int)(p_symbol.col_mul.g * 255), 
-			(int)(p_symbol.col_mul.b * 255), (int)(p_symbol.col_mul.a * 255));
-		s2::Color add((int)(p_symbol.col_add.r * 255), (int)(p_symbol.col_add.g * 255), 
-			(int)(p_symbol.col_add.b * 255), (int)(p_symbol.col_add.a * 255));
-		comp.col_mul = ee::color2int(mul, ee::PT_ARGB);
-		comp.col_add = ee::color2int(add, ee::PT_ARGB);
-		comp.alpha_start = p_symbol.alpha_start * 255.0f + 0.5f;
-		comp.alpha_end = p_symbol.alpha_end * 255.0f + 0.5f;
+		comp.mul_col_begin = ee::color2int(s2::Color(p_symbol.mul_col_begin.r, p_symbol.mul_col_begin.g, p_symbol.mul_col_begin.b, p_symbol.mul_col_begin.a), ee::PT_ARGB);
+		comp.mul_col_end = ee::color2int(s2::Color(p_symbol.mul_col_end.r, p_symbol.mul_col_end.g, p_symbol.mul_col_end.b, p_symbol.mul_col_end.a), ee::PT_ARGB);
+		comp.add_col_begin = ee::color2int(s2::Color(p_symbol.add_col_begin.r, p_symbol.add_col_begin.g, p_symbol.add_col_begin.b, p_symbol.add_col_begin.a), ee::PT_ARGB);
+		comp.add_col_end = ee::color2int(s2::Color(p_symbol.add_col_end.r, p_symbol.add_col_end.g, p_symbol.add_col_end.b, p_symbol.add_col_end.a), ee::PT_ARGB);
 
 		ee::Symbol* symbol = static_cast<ee::Symbol*>(p_symbol.ud);
 		comp.node = PackNodeFactory::Instance()->Create(symbol);

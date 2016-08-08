@@ -18,6 +18,12 @@ ComponentPanel::ComponentPanel(wxWindow* parent, t2d_symbol* pc, ToolbarPanel* t
 	, m_toolbar(toolbar) 
 {}
 
+ComponentPanel::~ComponentPanel()
+{
+	ee::Symbol* sym = static_cast<ee::Symbol*>(m_pc->mode.A.ud);
+	sym->Release();
+}
+
 void ComponentPanel::Load(const Json::Value& val, const std::string& dir)
 {
 	for (int i = 0, n = m_sliders.size(); i < n; ++i) {

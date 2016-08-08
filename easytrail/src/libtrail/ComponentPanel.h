@@ -23,6 +23,7 @@ class ComponentPanel : public wxPanel, public ee::UICallback
 {
 public:
 	ComponentPanel(wxWindow* parent, t2d_symbol* pc, ToolbarPanel* toolbar);
+	virtual ~ComponentPanel();
 
 	virtual void Load(const Json::Value& val, const std::string& dir);
 	virtual void Store(Json::Value& val, const std::string& dir) const;

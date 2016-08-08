@@ -39,7 +39,7 @@ private:
 	void OnSetAddColStart(wxCommandEvent& event);
 	void OnSetAddColEnd(wxCommandEvent& event);
 
-	void UpdateColor(ps_color4f& color);
+	void UpdateColor(ps_color& color);
 
 private:
 	p2d_symbol* m_component;
