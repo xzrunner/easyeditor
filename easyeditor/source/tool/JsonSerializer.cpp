@@ -116,10 +116,10 @@ void JsonSerializer::Store(const s2::Color& col, Json::Value& value)
 
 void JsonSerializer::Load(const Json::Value& value, s2::Color& col)
 {
-	col.r = static_cast<int>(value["r"].asDouble() * 255);
-	col.g = static_cast<int>(value["g"].asDouble() * 255);
-	col.b = static_cast<int>(value["b"].asDouble() * 255);
-	col.a = static_cast<int>(value["a"].asDouble() * 255);
+	col.r = value["r"].asUInt();
+	col.g = value["g"].asUInt();
+	col.b = value["b"].asUInt();
+	col.a = value["a"].asUInt();
 }
 
 void JsonSerializer::Store(const uint8_t rgba[4], Json::Value& value)
