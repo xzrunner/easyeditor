@@ -99,6 +99,8 @@ void Particle3DFromLua::UnpackBody(lua_State* L, PackParticle3D* p3d)
 	p3d->start_height = static_cast<float>(LuaDataHelper::GetIntField(L, "start_height"));
 
 	p3d->orient_to_movement = LuaDataHelper::GetBoolField(L, "orient_to_movement");
+
+	p3d->blend = LuaDataHelper::GetIntField(L, "blend");
 }
 
 }

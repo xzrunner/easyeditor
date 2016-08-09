@@ -27,7 +27,7 @@ int Particle3DToBin::Size(const PackParticle3D* p3d)
 	sz += sizeof(uint8_t);						// ground
 	sz += sizeof(uint16_t) * 2;					// start position
 	sz += sizeof(uint8_t);						// orient_to_movement
-	// todo struct ps_vec3 dir
+	sz += sizeof(uint8_t);						// blend
 	return sz;
 }
 
@@ -115,6 +115,9 @@ void Particle3DToBin::Pack(const PackParticle3D* p3d, uint8_t** ptr)
 
 	uint8_t orient_to_movement = TransBool(p3d->orient_to_movement);
 	pack(orient_to_movement, ptr);
+
+	uint8_t blend = p3d->blend;
+	pack(blend, ptr);
 }
 
 int Particle3DToBin::ComponentSize()
@@ -124,8 +127,7 @@ int Particle3DToBin::ComponentSize()
 	sz += sizeof(uint16_t);			// count
 	sz += sizeof(uint16_t) * 2;		// scale
 	sz += sizeof(uint16_t) * 2;		// angle
-	sz += sizeof(uint32_t) * 2;		// color
-	sz += sizeof(uint16_t) * 2;		// alpha
+	sz += sizeof(uint32_t) * 4;		// color
 	return sz;
 }
 
