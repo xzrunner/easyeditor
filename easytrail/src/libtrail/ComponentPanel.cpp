@@ -21,7 +21,9 @@ ComponentPanel::ComponentPanel(wxWindow* parent, t2d_symbol* pc, ToolbarPanel* t
 ComponentPanel::~ComponentPanel()
 {
 	ee::Symbol* sym = static_cast<ee::Symbol*>(m_pc->mode.A.ud);
-	sym->Release();
+	if (sym) {
+		sym->Release();
+	}
 }
 
 void ComponentPanel::Load(const Json::Value& val, const std::string& dir)

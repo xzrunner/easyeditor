@@ -234,7 +234,9 @@ void ToolbarPanel::OnChangeMode(wxCommandEvent& event)
 
 ComponentPanel* ToolbarPanel::OnAddChild(ee::Symbol* symbol)
 {
-	symbol->Retain();
+	if (symbol) {
+		symbol->Retain();
+	}
 	t2d_symbol* mt = m_stage->m_trail->AddSymbol(symbol);
 	ComponentPanel* cp = NULL;
 	t2d_emitter_cfg* cfg = m_stage->m_trail->GetConfig();
