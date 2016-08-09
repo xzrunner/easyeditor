@@ -33,6 +33,8 @@ public:
 		s2::Color mul_col_begin, mul_col_end,
 			      add_col_begin, add_col_end;
 
+		float alpha_start, alpha_end;
+
 		float start_z;
 	};
 

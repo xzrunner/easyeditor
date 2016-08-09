@@ -201,10 +201,17 @@ void LoadAdapter::LoadComponent(const std::string& dir, const Json::Value& comp_
 	}
 
 	if (!comp_val["alpha"].isNull()) {
-		float begin = comp_val["alpha"]["start"].asDouble() * 0.01f,
-			  end = comp_val["alpha"]["end"].asDouble() * 0.01f;
-		comp.mul_col_begin.a *= begin;
+		float start = comp_val["alpha"]["start"].asInt() * 0.01f;
+		float end = comp_val["alpha"]["end"].asInt() * 0.01f;
+		comp.mul_col_begin.a *= start;
 		comp.mul_col_end.a *= end;
+		comp.alpha_start = 255 * start;
+		comp.alpha_end = 255 * end;
+	}
+
+	if (!comp_val["alpha2"].isNull()) {
+		comp.alpha_start = comp_val["alpha2"]["start"].asInt();
+		comp.alpha_end = comp_val["alpha2"]["end"].asInt();
 	}
 
 	comp.start_z = comp_val["start_z"].asInt();

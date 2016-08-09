@@ -52,6 +52,7 @@ enum {
 	LK_ROTATE,
 	LK_COL_MUL,
 	LK_COL_ADD,
+	LK_ALPHA,
 	LK_BIND_PS,
 };
 
@@ -103,6 +104,7 @@ static const char* EN[] = {
 	"Rotate (deg)",
 	"Col Mul",
 	"Col Add",
+	"Alpha",
 	"Bind PS",
 };
 
@@ -154,6 +156,7 @@ static const char* CN[] = {
 	"旋转",
 	"乘色",
 	"加色",
+	"透明度",
 	"绑定发射器",
 };
 

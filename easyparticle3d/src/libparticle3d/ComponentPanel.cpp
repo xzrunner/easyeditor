@@ -49,6 +49,10 @@ void ComponentPanel::SetValue(int key, const ee::UICallback::Data& data)
 		m_pc->angle = (data.val0 + data.val1) * 0.5f * SM_DEG_TO_RAD;
 		m_pc->angle_var = (data.val1 - data.val0) * 0.5f * SM_DEG_TO_RAD;
 		break;
+	case PS_ALPHA:
+		m_pc->mul_col_begin.a = data.val0;
+		m_pc->mul_col_end.a = data.val1;
+		break;
 	}
 }
 
@@ -63,6 +67,10 @@ void ComponentPanel::GetValue(int key, ee::UICallback::Data& data)
 	case PS_ROTATE:
 		data.val0 = (m_pc->angle + m_pc->angle_var) * SM_RAD_TO_DEG;
 		data.val1 = (m_pc->angle - m_pc->angle_var) * SM_RAD_TO_DEG;
+		break;
+	case PS_ALPHA:
+		data.val0 = m_pc->mul_col_begin.a;
+		data.val1 = m_pc->mul_col_end.a;
 		break;
 	}
 }
@@ -204,6 +212,12 @@ void ComponentPanel::InitLayout(wxSizer* top_sizer)
 
 		top_sizer->Add(hori_sizer);
 	}
+	// Alpha
+	ee::SliderCtrlTwo* s_alpha = new ee::SliderCtrlTwo(this, LANG[LK_ALPHA], "alpha2", this, PS_ALPHA, 
+	ee::SliderItem(LANG[LK_START], "start", 255, 0, 255), ee::SliderItem(LANG[LK_END], "end", 255, 0, 255));
+	top_sizer->Add(s_alpha);
+	top_sizer->AddSpacer(10);
+	m_sliders.push_back(s_alpha);
 
 //	wxBoxSizer* color_sz = new wxBoxSizer(wxHORIZONTAL);
 // 	// Multi Color

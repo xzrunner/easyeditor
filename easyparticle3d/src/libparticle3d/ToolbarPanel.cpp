@@ -124,6 +124,8 @@ void ToolbarPanel::Add(const LoadAdapter::Component& comp, ee::LibraryPanel* lib
 	pc->add_col_begin = ColorFromS2(comp.add_col_begin);
 	pc->add_col_end = ColorFromS2(comp.add_col_end);
 
+	cp->SetValue(PS_ALPHA, ee::UICallback::Data(comp.alpha_start, comp.alpha_end));
+
 	cp->UpdateBtnColor();
 
 	for (int i = 0, n = cp->m_sliders.size(); i < n; ++i) {
