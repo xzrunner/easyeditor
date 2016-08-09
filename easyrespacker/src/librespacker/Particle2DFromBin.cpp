@@ -164,15 +164,15 @@ void Particle2DFromBin::UnpackComponent(uint8_t** ptr, PackParticle2D* p2d)
 	comp.scale_start = TransFloatX100(scale_start);
 	comp.scale_end = TransFloatX100(scale_end);
 
-	uint32_t mul_col_start, mul_col_end,
-		add_col_start, add_col_end;
-	unpack(mul_col_start, ptr);
+	uint32_t mul_col_begin, mul_col_end,
+		add_col_begin, add_col_end;
+	unpack(mul_col_begin, ptr);
 	unpack(mul_col_end, ptr);
-	unpack(add_col_start, ptr);
+	unpack(add_col_begin, ptr);
 	unpack(add_col_end, ptr);
-	comp.mul_col_start = mul_col_start;
+	comp.mul_col_begin = mul_col_begin;
 	comp.mul_col_end = mul_col_end;
-	comp.add_col_start = add_col_start;
+	comp.add_col_begin = add_col_begin;
 	comp.add_col_end = add_col_end;
 }
 

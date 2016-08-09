@@ -91,14 +91,14 @@ p2d_emitter_cfg* Particle2DToSpr::LoadConfig(const erespacker::PackParticle2D* p
 		dst.scale_start = src.scale_start;
 		dst.scale_end = src.scale_end;
 
-		s2::Color mul_col_start = int2color(src.mul_col_start, ee::PT_ARGB),
+		s2::Color mul_col_begin = int2color(src.mul_col_begin, ee::PT_ARGB),
 			      mul_col_end	= int2color(src.mul_col_end, ee::PT_ARGB),
-				  add_col_start = int2color(src.add_col_start, ee::PT_ARGB),
+				  add_col_begin = int2color(src.add_col_begin, ee::PT_ARGB),
 				  add_col_end	= int2color(src.add_col_end, ee::PT_ARGB);
 
-		memcpy(&dst.mul_col_start.r, &mul_col_start.r, sizeof(mul_col_start));
+		memcpy(&dst.mul_col_begin.r, &mul_col_begin.r, sizeof(mul_col_begin));
 		memcpy(&dst.mul_col_end.r, &mul_col_end.r, sizeof(mul_col_end));
-		memcpy(&dst.add_col_start.r, &add_col_start.r, sizeof(add_col_start));
+		memcpy(&dst.add_col_begin.r, &add_col_begin.r, sizeof(add_col_begin));
 		memcpy(&dst.add_col_end.r, &add_col_end.r, sizeof(add_col_end));
 		
 		ee::Sprite* spr = NodeToSprite::Trans(src.node);

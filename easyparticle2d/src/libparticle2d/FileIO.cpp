@@ -48,9 +48,9 @@ void FileIO::Store(const std::string& filepath, ToolbarPanel* toolbar)
 			cp->m_sliders[j]->Store(cval);
 		}
 
-		ee::JsonSerializer::Store(p_symbol->mul_col_start.rgba, cval["mul_col_start"]);
+		ee::JsonSerializer::Store(p_symbol->mul_col_begin.rgba, cval["mul_col_begin"]);
 		ee::JsonSerializer::Store(p_symbol->mul_col_end.rgba, cval["mul_col_end"]);
-		ee::JsonSerializer::Store(p_symbol->add_col_start.rgba, cval["add_col_start"]);
+		ee::JsonSerializer::Store(p_symbol->add_col_begin.rgba, cval["add_col_begin"]);
 		ee::JsonSerializer::Store(p_symbol->add_col_end.rgba, cval["add_col_end"]);
 
 		value["components"][i] = cval;
@@ -188,9 +188,9 @@ p2d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
 		dst.scale_start = src.scale_start * 0.01f;
 		dst.scale_end = src.scale_end * 0.01f;
 
-		memcpy(&dst.mul_col_start.r, &src.mul_col_start.r, sizeof(src.mul_col_start));
+		memcpy(&dst.mul_col_begin.r, &src.mul_col_begin.r, sizeof(src.mul_col_begin));
 		memcpy(&dst.mul_col_end.r, &src.mul_col_end.r, sizeof(src.mul_col_end));
-		memcpy(&dst.add_col_start.r, &src.add_col_start.r, sizeof(src.add_col_start));
+		memcpy(&dst.add_col_begin.r, &src.add_col_begin.r, sizeof(src.add_col_begin));
 		memcpy(&dst.add_col_end.r, &src.add_col_end.r, sizeof(src.add_col_end));
 
 		dst.ud = ee::SymbolMgr::Instance()->FetchSymbol(src.filepath);

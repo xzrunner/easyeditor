@@ -127,9 +127,9 @@ void Particle2DToLuaString::PackComponent(const PackParticle2D::Component& comp,
  		lua::assign("scale_end", TransFloatX100(comp.scale_end)));
  
  	lua::connect(gen, 4, 
- 		lua::assign("mul_col_start", comp.mul_col_start), 
+ 		lua::assign("mul_col_begin", comp.mul_col_begin), 
  		lua::assign("mul_col_end", comp.mul_col_end),
- 		lua::assign("add_col_start", comp.add_col_start), 
+ 		lua::assign("add_col_begin", comp.add_col_begin), 
  		lua::assign("add_col_end", comp.add_col_end));
 }
 

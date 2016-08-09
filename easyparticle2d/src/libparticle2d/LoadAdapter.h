@@ -24,8 +24,8 @@ public:
 
 		float scale_start, scale_end;
 
-		s2::Color mul_col_start, mul_col_end;
-		s2::Color add_col_start, add_col_end;
+		s2::Color mul_col_begin, mul_col_end;
+		s2::Color add_col_begin, add_col_end;
 
 		std::string filepath;
 	}; // Component

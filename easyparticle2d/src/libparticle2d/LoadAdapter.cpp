@@ -103,9 +103,9 @@ void LoadAdapter::LoadComponent(const std::string& dir, const Json::Value& comp_
 	comp.scale_start		= comp_val["scale"]["start"].asDouble();
 	comp.scale_end			= comp_val["scale"]["end"].asDouble();
 
-	ee::JsonSerializer::Load(comp_val["mul_col_start"], comp.mul_col_start);
+	ee::JsonSerializer::Load(comp_val["mul_col_begin"], comp.mul_col_begin);
 	ee::JsonSerializer::Load(comp_val["mul_col_end"], comp.mul_col_end);
-	ee::JsonSerializer::Load(comp_val["add_col_start"], comp.add_col_start);
+	ee::JsonSerializer::Load(comp_val["add_col_begin"], comp.add_col_begin);
 	ee::JsonSerializer::Load(comp_val["add_col_end"], comp.add_col_end);
 
 	comp.filepath = comp_val["filepath"].asString();

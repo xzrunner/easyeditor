@@ -38,7 +38,7 @@ void ComponentPanel::SetValue(int key, const ee::UICallback::Data& data)
 		m_component->scale_end = data.val1 * 0.01f;
 		break;
 	case PS_ALPHA:
-		m_component->mul_col_start.a = data.val0 / 100;
+		m_component->mul_col_begin.a = data.val0 / 100;
 		m_component->mul_col_end.a = data.val1 / 100;
 		break;
 	}
@@ -57,7 +57,7 @@ void ComponentPanel::GetValue(int key, ee::UICallback::Data& data)
 		data.val1 = m_component->scale_end * 100;
 		break;
 	case PS_ALPHA:
-		data.val0 = m_component->mul_col_start.a * 100;
+		data.val0 = m_component->mul_col_begin.a * 100;
 		data.val1 = m_component->mul_col_end.a * 100;
 		break;
 	}
@@ -164,7 +164,7 @@ void ComponentPanel::OnDelete(wxCommandEvent& event)
 
 void ComponentPanel::OnSetMultiColStart(wxCommandEvent& event)
 {
-	UpdateColor(m_component->mul_col_start);
+	UpdateColor(m_component->mul_col_begin);
 }
 
 void ComponentPanel::OnSetMultiColEnd(wxCommandEvent& event)
@@ -174,7 +174,7 @@ void ComponentPanel::OnSetMultiColEnd(wxCommandEvent& event)
 
 void ComponentPanel::OnSetAddColStart(wxCommandEvent& event)
 {
-	UpdateColor(m_component->add_col_start);
+	UpdateColor(m_component->add_col_begin);
 }
 
 void ComponentPanel::OnSetAddColEnd(wxCommandEvent& event)

@@ -90,9 +90,9 @@ void ToolbarPanel::Add(const LoadAdapter::Component& comp)
 
 	cp->SetValue(PS_SCALE, ee::UICallback::Data(comp.scale_start, comp.scale_end));
 
-	memcpy(&p_symbol->mul_col_start.r, &comp.mul_col_start.r, sizeof(p_symbol->mul_col_start));
+	memcpy(&p_symbol->mul_col_begin.r, &comp.mul_col_begin.r, sizeof(p_symbol->mul_col_begin));
 	memcpy(&p_symbol->mul_col_end.r, &comp.mul_col_end.r, sizeof(p_symbol->mul_col_end));
-	memcpy(&p_symbol->add_col_start.r, &comp.add_col_start.r, sizeof(p_symbol->add_col_start));
+	memcpy(&p_symbol->add_col_begin.r, &comp.add_col_begin.r, sizeof(p_symbol->add_col_begin));
 	memcpy(&p_symbol->add_col_end.r, &comp.add_col_end.r, sizeof(p_symbol->add_col_end));
 
 	m_comp_sizer->Insert(m_children.size(), cp);

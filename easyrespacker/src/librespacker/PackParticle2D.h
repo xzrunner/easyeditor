@@ -17,8 +17,8 @@ public:
 
 		float scale_start, scale_end;
 
-		uint32_t mul_col_start, mul_col_end;
-		uint32_t add_col_start, add_col_end;
+		uint32_t mul_col_begin, mul_col_end;
+		uint32_t add_col_begin, add_col_end;
 
 		const IPackNode* node;
 	};
