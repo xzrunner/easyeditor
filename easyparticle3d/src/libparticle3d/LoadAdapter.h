@@ -68,12 +68,12 @@ public:
 
 	int ground;
 
-	bool additive_blend;
-
 	float start_radius, start_height;
 
 	bool orient_to_movement;
 	bool orient_to_parent;
+
+	int blend;
 
 	std::vector<Component> components;
 

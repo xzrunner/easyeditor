@@ -78,6 +78,12 @@ enum BLEND_FORMAT {
 	BLEND_SRC_ALPHA_SATURATE,
 };
 
+enum BLEND_FUNC {
+	BLEND_FUNC_ADD = 0,
+	BLEND_FUNC_SUBTRACT,
+	BLEND_FUNC_REVERSE_SUBTRACT,
+};
+
 enum DEPTH_FORMAT {
 	DEPTH_DISABLE = 0,
 	DEPTH_LESS_EQUAL,
@@ -153,7 +159,8 @@ void render_shader_setuniform(struct render *R, int loc, enum UNIFORM_FORMAT for
 void render_setviewport(struct render *R, int x, int y, int width, int height );
 void render_setscissor(struct render *R, int x, int y, int width, int height );
 
-void render_setblend(struct render *R, enum BLEND_FORMAT src, enum BLEND_FORMAT dst);
+void render_set_blendfunc(struct render *R, enum BLEND_FORMAT src, enum BLEND_FORMAT dst);
+void render_set_blendeq(struct render *R, enum BLEND_FUNC eq);
 void render_setdepth(struct render *R, enum DEPTH_FORMAT d);
 void render_setcull(struct render *R, enum CULL_MODE c);
 void render_enabledepthmask(struct render *R, int enable);

@@ -31,13 +31,15 @@
 #define MAX_VB_SLOT 8
 #define MAX_ATTRIB 16
 #define MAX_TEXTURE 8
-#define CHANGE_VERTEXARRAY 0x1
-#define CHANGE_TEXTURE 0x2
-#define CHANGE_BLEND 0x4
-#define CHANGE_DEPTH 0x8
-#define CHANGE_CULL 0x10
-#define CHANGE_TARGET 0x20
-#define CHANGE_SCISSOR 0x40
+
+#define CHANGE_VERTEXARRAY	0x1
+#define CHANGE_TEXTURE		0x2
+#define CHANGE_BLEND_FUNC	0x4
+#define CHANGE_BLEND_EQ		0x8
+#define CHANGE_DEPTH		0x10
+#define CHANGE_CULL			0x20
+#define CHANGE_TARGET		0x40
+#define CHANGE_SCISSOR		0x80
 
 //#define CHECK_GL_ERROR
 //#define CHECK_GL_ERROR assert(check_opengl_error());
@@ -95,6 +97,7 @@ struct rstate {
 	RID target;
 	enum BLEND_FORMAT blend_src;
 	enum BLEND_FORMAT blend_dst;
+	enum BLEND_FUNC blend_func;
 	enum DEPTH_FORMAT depth;
 	enum CULL_MODE cull;
 	int depthmask;
@@ -797,12 +800,19 @@ render_texture_subupdate(struct render *R, RID id, const void *pixels, int x, in
 	CHECK_GL_ERROR
 }
 
-// blend mode
+// blend func
 void 
-render_setblend(struct render *R, enum BLEND_FORMAT src, enum BLEND_FORMAT dst) {
+render_set_blendfunc(struct render *R, enum BLEND_FORMAT src, enum BLEND_FORMAT dst) {
 	R->current.blend_src = src;
 	R->current.blend_dst = dst;
-	R->changeflag |= CHANGE_BLEND;
+	R->changeflag |= CHANGE_BLEND_FUNC;
+}
+
+// blend equation
+void 
+render_set_blendeq(struct render *R, enum BLEND_FUNC eq) {
+	R->current.blend_func = eq;
+	R->changeflag |= CHANGE_BLEND_EQ;
 }
 
 // depth
@@ -929,7 +939,7 @@ render_state_commit(struct render *R) {
 		}
 	}
 
-	if (R->changeflag & CHANGE_BLEND) {
+	if (R->changeflag & CHANGE_BLEND_FUNC) {
 		if (R->last.blend_src != R->current.blend_src || R->last.blend_dst != R->current.blend_dst) {
 			if (R->current.blend_src == BLEND_DISABLE) {
 				glDisable(GL_BLEND);
@@ -957,6 +967,19 @@ render_state_commit(struct render *R) {
 
 			R->last.blend_src = src;
 			R->last.blend_dst = dst;
+		}
+	}
+
+	if (R->changeflag & CHANGE_BLEND_EQ) {
+		if (R->last.blend_func != R->current.blend_func) {
+			static GLenum blend[] = {
+				GL_FUNC_ADD,
+				GL_FUNC_SUBTRACT,
+				GL_FUNC_REVERSE_SUBTRACT,
+			};
+			enum BLEND_FUNC func = R->current.blend_func;
+			glBlendEquation(blend[func]);
+			R->last.blend_func = func;
 		}
 	}
 

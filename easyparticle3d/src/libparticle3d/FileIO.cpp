@@ -50,6 +50,8 @@ void FileIO::Store(const std::string& filepath, ParticleSystem* ps,
 
 //	value["orient_to_parent"] = toolbar->m_orient_to_parent->GetValue();
 
+	value["blend"] = toolbar->m_blend->GetSelection();
+
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	for (size_t i = 0, n = toolbar->m_children.size(); i < n; ++i)
 	{
@@ -141,6 +143,9 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 
 //	toolbar->m_orient_to_parent->SetValue(adapter.orient_to_parent);
 
+	toolbar->m_blend->SetSelection(adapter.blend);
+	ps->SetBlend(adapter.blend);
+
 	for (size_t i = 0, n = adapter.components.size(); i < n; ++i) {
 		toolbar->Add(adapter.components[i], library);
 	}
@@ -169,6 +174,8 @@ p3d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
 	p3d_emitter_cfg* cfg = (p3d_emitter_cfg*) operator new(sz);
 	memset(cfg, 0, sz);
 	
+	cfg->blend = adapter.blend;
+
 	cfg->static_mode = adapter.static_mode;
 
 	cfg->emission_time = adapter.emission_time;
@@ -207,6 +214,8 @@ p3d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
 	cfg->start_height = adapter.start_height;
 
 	cfg->orient_to_movement = adapter.orient_to_movement;
+
+	cfg->blend = adapter.blend;
 
 	// todo dir
 	cfg->dir.x = 0;

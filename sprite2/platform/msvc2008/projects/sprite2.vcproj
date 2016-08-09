@@ -254,6 +254,10 @@
 						RelativePath="..\..\..\include\sprite2\BlendMode.h"
 						>
 					</File>
+					<File
+						RelativePath="..\..\..\include\sprite2\FastBlendMode.h"
+						>
+					</File>
 				</Filter>
 				<Filter
 					Name="camera"

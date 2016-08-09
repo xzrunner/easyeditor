@@ -43,7 +43,7 @@ public:
 	virtual void Draw(const sm::mat4& mt, AnimRecorder* recorder = NULL) const;
 
 	bool Update(const sm::mat4& mat);
-	
+
 	void SetStaticMode(bool is_static);
 
 	void SetDirection(float x, float y, float z);
@@ -74,6 +74,8 @@ public:
 	void SetGround(int ground);
 
 	void SetOrientToMovement(bool open);
+
+	void SetBlend(int blend);
 
 	p3d_symbol* AddSymbol(ee::Symbol* symbol);
 	void DelSymbol(int idx);

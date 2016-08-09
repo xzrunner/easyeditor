@@ -3,6 +3,7 @@
 
 #include <SM_Vector.h>
 #include <sprite2/BlendMode.h>
+#include <sprite2/FastBlendMode.h>
 #include <sprite2/FilterMode.h>
 #include <sprite2/CameraMode.h>
 #include <sprite2/RenderColor.h>
@@ -41,6 +42,7 @@ public:
 		// shader
 		s2::RenderColor	col;
  		s2::BlendMode	blend;
+		s2::FastBlendMode fast_blend;
 		s2::RenderFilter* filter;
 		s2::CameraMode	camera;
 

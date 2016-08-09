@@ -3,8 +3,6 @@
 
 #include "IPackNode.h"
 
-
-
 namespace erespacker
 {
 
@@ -24,6 +22,8 @@ public:
 
 		const IPackNode* node;
 	};
+
+	int blend;
 
 	bool static_mode;
 

@@ -4,6 +4,7 @@
 #include <ps_3d.h>
 #include <ps_3d_sprite.h>
 #include <ps_3d_buffer.h>
+#include <shaderlab.h>
 
 #include <ee/SpriteRenderer.h>
 
@@ -59,6 +60,27 @@ void PSNode::UpdateTime()
 			m_time += dt;
 			last = curr;
 		}
+	}
+}
+
+static void
+blend_func(int blend)
+{
+	sl::RenderContext* ctx = sl::ShaderMgr::Instance()->GetContext();
+	switch (blend)
+	{
+	case s2::FBM_NULL:
+		ctx->SetBlend(2, 6);		// BLEND_GL_ONE, BLEND_GL_ONE_MINUS_SRC_ALPHA
+		ctx->SetBlendEquation(0);	// BLEND_FUNC_ADD
+		break;
+	case s2::FBM_ADD:
+		ctx->SetBlend(2, 2);		// BLEND_GL_ONE, BLEND_GL_ONE
+		ctx->SetBlendEquation(0);	// BLEND_FUNC_ADD
+		break;
+	case s2::FBM_SUBTRACT:
+		ctx->SetBlend(2, 6);		// BLEND_GL_ONE, BLEND_GL_ONE_MINUS_SRC_ALPHA
+		ctx->SetBlendEquation(1);	// BLEND_FUNC_SUBTRACT
+		break;
 	}
 }
 
@@ -165,7 +187,7 @@ release_draw_params_func(struct p3d_sprite* spr) {
 void PSNode::Init()
 {
 	p3d_init();
-	p3d_regist_cb(render_func, add_func, remove_func);	
+	p3d_regist_cb(blend_func, render_func, add_func, remove_func);	
 	p3d_buffer_init(update_srt_func, buf_remove_func);
 	p3d_sprite_init(create_draw_params_func, release_draw_params_func);
 }

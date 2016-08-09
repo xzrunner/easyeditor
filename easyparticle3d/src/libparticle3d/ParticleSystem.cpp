@@ -6,6 +6,7 @@
 
 #include <ps_3d.h>
 #include <ps_3d_sprite.h>
+#include <shaderlab.h>
 
 #include <ee/Math2D.h>
 #include <ee/Symbol.h>
@@ -161,6 +162,8 @@ void ParticleSystem::Draw(const sm::mat4& mt, AnimRecorder* recorder) const
 
 	m_rp.mat = const_cast<sm::mat4&>(mt);
 	p3d_emitter_draw(m_spr->et, &m_rp);
+
+	sl::ShaderMgr::Instance()->GetContext()->SetDefaultBlend();
 }
 
 bool ParticleSystem::Update(const sm::mat4& mat)
@@ -329,6 +332,11 @@ void ParticleSystem::SetGround(int ground)
 void ParticleSystem::SetOrientToMovement(bool open) 
 { 
 	const_cast<p3d_emitter_cfg*>(m_spr->et->cfg)->orient_to_movement = open;
+}
+
+void ParticleSystem::SetBlend(int blend)
+{
+	const_cast<p3d_emitter_cfg*>(m_spr->et->cfg)->blend = blend;	
 }
 
 p3d_symbol* ParticleSystem::AddSymbol(ee::Symbol* symbol)

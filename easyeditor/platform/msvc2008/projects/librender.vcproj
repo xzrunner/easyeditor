@@ -297,6 +297,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\include\ee\FastBlendModes.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\FastBlendModes.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\source\render\FilterModes.cpp"
 					>
 				</File>

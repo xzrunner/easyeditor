@@ -2,6 +2,7 @@
 #define _SPRITE2_RENDER_SHADER_H_
 
 #include "BlendMode.h"
+#include "FastBlendMode.h"
 
 #include <stddef.h>
 
@@ -15,6 +16,7 @@ class RenderShader
 public:
 	RenderFilter*	filter;
 	BlendMode		blend;
+	FastBlendMode	fast_blend;
 
 public:
 	RenderShader();

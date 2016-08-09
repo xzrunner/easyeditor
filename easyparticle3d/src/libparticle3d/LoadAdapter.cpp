@@ -107,13 +107,13 @@ void LoadAdapter::Load(const std::string& filepath)
 		ground = value["ground"].asInt();
 	}
 
-	additive_blend = value["additive_blend"].asBool();
-
 	start_radius = abs(static_cast<float>(value["start_pos"]["radius"].asInt()));
 	start_height = static_cast<float>(value["start_pos"]["height"].asInt());
 
 	orient_to_movement = value["orient_to_movement"].asBool();
 	orient_to_parent = value["orient_to_parent"].asBool();
+
+	blend = value["blend"].asInt();
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	int i = 0;

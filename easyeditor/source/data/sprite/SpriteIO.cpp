@@ -2,6 +2,7 @@
 #include "trans_color.h"
 #include "Config.h"
 #include "BlendModes.h"
+#include "FastBlendModes.h"
 #include "FilterModes.h"
 #include "CameraModes.h"
 #include "Sprite.h"
@@ -33,6 +34,7 @@ SpriteIO::Data::Data()
 	perspective	= sm::vec2(0, 0);
 
 	blend		= s2::BM_NULL;
+	fast_blend	= s2::FBM_NULL;
 	filter		= NULL;
 	camera		= s2::CM_ORTHO;
 
@@ -410,18 +412,21 @@ void SpriteIO::StoreColor(Json::Value& val, const Data& data)
 void SpriteIO::LoadShader(const Data& data, s2::RenderShader& shader)
 {
 	shader.blend = data.blend;
+	shader.fast_blend = data.fast_blend;
 	shader.filter = data.filter;
 }
 
 void SpriteIO::StoreShader(Data& data, const s2::RenderShader& shader)
 {
 	data.blend = shader.blend;
+	data.fast_blend = shader.fast_blend;
 	data.filter = shader.filter;
 }
 
 void SpriteIO::LoadShader(const Json::Value& val, Data& data)
 {
 	data.blend = s2::BM_NULL;
+	data.fast_blend = s2::FBM_NULL;
 	if (data.filter) {
 		delete data.filter;
 		data.filter = NULL;
@@ -434,6 +439,11 @@ void SpriteIO::LoadShader(const Json::Value& val, Data& data)
 	if (!val["blend"].isNull()) {
 		std::string disc = val["blend"].asString();
 		data.blend = BlendModes::Instance()->GetModeFromNameEN(disc);
+	}
+
+	if (!val["fast_blend"].isNull()) {
+		std::string disc = val["fast_blend"].asString();
+		data.fast_blend = FastBlendModes::Instance()->GetModeFromNameEN(disc);
 	}
 
 	if (!val["filter"].isNull()) 
@@ -490,6 +500,10 @@ void SpriteIO::StoreShader(Json::Value& val, const Data& data)
 
 	if (data.blend != s2::BM_NULL) {
 		val["blend"] = BlendModes::Instance()->GetNameENFromMode(data.blend);
+	}
+
+	if (data.fast_blend != s2::FBM_NULL) {
+		val["fast_blend"] = FastBlendModes::Instance()->GetNameENFromMode(data.fast_blend);
 	}
 
 	s2::FilterMode mode = s2::FM_NULL;

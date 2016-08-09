@@ -10,6 +10,7 @@
 #include "StageCanvas.h"
 #include "EditPanelImpl.h"
 #include "BlendModes.h"
+#include "FastBlendModes.h"
 #include "MyColorProperty.h"
 #include "subject_id.h"
 #include "sprite_msg.h"
@@ -119,6 +120,11 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 	{
 		int idx = wxANY_AS(value, int);
 		spr->GetShader().blend = BlendModes::Instance()->GetIDFromIdx(idx);
+	}
+	else if (name == "FastBlend") 
+	{
+		int idx = wxANY_AS(value, int);
+		spr->GetShader().fast_blend = FastBlendModes::Instance()->GetIDFromIdx(idx);
 	}
 	else if (name == wxT("Clip"))
 	{
@@ -245,6 +251,8 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 
 	pg->GetProperty(wxT("Blend"))->SetValue(BlendModes::Instance()->GetIdxFromID(spr->GetShader().blend));
 
+	pg->GetProperty(wxT("FastBlend"))->SetValue(FastBlendModes::Instance()->GetIdxFromID(spr->GetShader().fast_blend));
+
 	SpriteFilterPSHelper::ToPS(spr, pg);
 
 	MyColorProperty* rp = static_cast<MyColorProperty*>(pg->GetProperty("Color Conversion.R"));
@@ -362,12 +370,19 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 // 	pg->AppendIn(colProp, new wxColourProperty(wxT("G"), wxPG_LABEL, g_trans));
 // 	pg->AppendIn(colProp, new wxColourProperty(wxT("B"), wxPG_LABEL, b_trans));
 
-	std::vector<std::string> names;
-	BlendModes::Instance()->GetAllNameCN(names);
-	wxEnumProperty* blend_prop = new wxEnumProperty(wxT("Blend"), wxPG_LABEL, WXHelper::ToWXStringArray(names));
-	int idx = BlendModes::Instance()->GetIdxFromID(spr->GetShader().blend);
-	blend_prop->SetValue(idx);
+	std::vector<std::string> blend_names;
+	BlendModes::Instance()->GetAllNameCN(blend_names);
+	wxEnumProperty* blend_prop = new wxEnumProperty(wxT("Blend"), wxPG_LABEL, WXHelper::ToWXStringArray(blend_names));
+	int blend_idx = BlendModes::Instance()->GetIdxFromID(spr->GetShader().blend);
+	blend_prop->SetValue(blend_idx);
 	pg->Append(blend_prop);
+
+	std::vector<std::string> fast_blend_names;
+	FastBlendModes::Instance()->GetAllNameCN(fast_blend_names);
+	wxEnumProperty* fast_blend_prop = new wxEnumProperty(wxT("FastBlend"), wxPG_LABEL, WXHelper::ToWXStringArray(fast_blend_names));
+	int fast_blend_idx = FastBlendModes::Instance()->GetIdxFromID(spr->GetShader().fast_blend);
+	fast_blend_prop->SetValue(fast_blend_idx);
+	pg->Append(fast_blend_prop);
 
 	SpriteFilterPSHelper::InitPS(spr, pg);
 

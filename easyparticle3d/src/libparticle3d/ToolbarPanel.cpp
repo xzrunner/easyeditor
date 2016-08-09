@@ -17,6 +17,7 @@
 #include <ee/subject_id.h>
 #include <ee/SliderCtrlOne.h>
 #include <ee/SliderCtrlTwo.h>
+#include <ee/FastBlendModes.h>
 
 #include <ps_3d.h>
 
@@ -358,6 +359,25 @@ wxSizer* ToolbarPanel::CreateMainLayout()
 	// 	}
 	// 	leftSizer->AddSpacer(10);
 
+	// Blend
+	{
+		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
+
+		sizer->Add(new wxStaticText(this, wxID_ANY, "»ìºÏ"));
+
+		std::vector<std::string> names;
+		ee::FastBlendModes::Instance()->GetAllNameCN(names);
+		wxArrayString wx_names;
+		for (int i = 0, n = names.size(); i < n; ++i) {
+			wx_names.Add(names[i]);
+		}
+		m_blend = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wx_names);
+		m_blend->SetSelection(0);
+		Connect(m_blend->GetId(), wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(ToolbarPanel::OnSetBlend));
+		sizer->Add(m_blend);
+
+		top_sizer->Add(sizer);
+	}
 
 	return top_sizer;
 }
@@ -455,9 +475,7 @@ void ToolbarPanel::OnAddChild(wxCommandEvent& event, ee::Symbol* symbol)
 void ToolbarPanel::OnSetStaticMode(wxCommandEvent& event)
 {
 	bool static_mode = event.IsChecked();
-	m_count_ctrl->Enable(!static_mode);
-	m_time_ctrl->Enable(!static_mode);
-	m_stage->m_ps->SetStaticMode(static_mode);
+	OnSetStaticMode(static_mode);
 }
 
 void ToolbarPanel::OnDelAllChild(wxCommandEvent& event)
@@ -510,6 +528,12 @@ void ToolbarPanel::OnSetGround(wxCommandEvent& event)
 void ToolbarPanel::OnSetOrientToMovement(wxCommandEvent& event)
 {
 	m_stage->m_ps->SetOrientToMovement(event.IsChecked());
+}
+
+void ToolbarPanel::OnSetBlend(wxCommandEvent& event)
+{
+	int blend = m_blend->GetSelection();
+	m_stage->m_ps->SetBlend(blend);
 }
 
 //////////////////////////////////////////////////////////////////////////

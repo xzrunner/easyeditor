@@ -58,6 +58,8 @@ void Particle3DBuilder::Load(const eparticle3d::Symbol* symbol, PackParticle3D* 
 {
 	const p3d_emitter_cfg* cfg = symbol->GetEmitterCfg();
 	
+	ps->blend = cfg->blend;
+
 	ps->static_mode = cfg->static_mode;
 
 	ps->emission_time = cfg->emission_time;

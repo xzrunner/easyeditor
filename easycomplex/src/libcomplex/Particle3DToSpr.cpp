@@ -22,6 +22,8 @@ p3d_emitter_cfg* Particle3DToSpr::LoadConfig(const erespacker::PackParticle3D* p
 	p3d_emitter_cfg* cfg = (p3d_emitter_cfg*) operator new(sz);
 	memset(cfg, 0, sz);
 
+	cfg->blend = p3d->blend;
+
 	cfg->static_mode = p3d->static_mode;
 
 	cfg->emission_time = p3d->emission_time;

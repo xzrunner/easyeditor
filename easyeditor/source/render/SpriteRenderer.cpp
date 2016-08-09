@@ -33,6 +33,23 @@ void SpriteRenderer::Draw(const Sprite* spr,
 	s2::RenderShader rs = spr->GetShader() * params.shader;
 	s2::RenderCamera rc = spr->GetCamera() * params.camera;
 
+	sl::RenderContext* ctx = sl::ShaderMgr::Instance()->GetContext();
+	switch (rs.fast_blend)
+	{
+	case s2::FBM_NULL:
+		ctx->SetBlend(2, 6);		// BLEND_GL_ONE, BLEND_GL_ONE_MINUS_SRC_ALPHA
+		ctx->SetBlendEquation(0);	// BLEND_FUNC_ADD
+		break;
+	case s2::FBM_ADD:
+		ctx->SetBlend(2, 2);		// BLEND_GL_ONE, BLEND_GL_ONE
+		ctx->SetBlendEquation(0);	// BLEND_FUNC_ADD
+		break;
+	case s2::FBM_SUBTRACT:
+		ctx->SetBlend(2, 6);		// BLEND_GL_ONE, BLEND_GL_ONE_MINUS_SRC_ALPHA
+		ctx->SetBlendEquation(1);	// BLEND_FUNC_SUBTRACT
+		break;
+	}
+
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	if (rs.blend != s2::BM_NULL) {
 		const Camera* cam = CameraMgr::Instance()->GetCamera();
