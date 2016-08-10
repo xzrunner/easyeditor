@@ -53,6 +53,9 @@ class MeshSprBuilder;
 // mask
 class MaskBuilder;
 
+// trail
+class TrailBuilder;
+
 class PackNodeFactory
 {
 public:
@@ -127,6 +130,9 @@ private:
 
 	// mask
 	MaskBuilder* m_mask_builder;
+
+	// trail
+	TrailBuilder* m_trail_builder;
 
 private:
 	static PackNodeFactory* m_instance;

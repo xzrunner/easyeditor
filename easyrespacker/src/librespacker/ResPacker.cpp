@@ -21,6 +21,7 @@
 #include <easyanim.h>
 #include <easyparticle3d.h>
 #include <easyui.h>
+#include <easytrail.h>
 
 #include <dtex_typedef.h>
 
@@ -193,7 +194,8 @@ void ResPacker::LoadJsonData(const std::string& dir)
 		std::string filepath = filename.GetFullPath();
 		if (ee::FileType::IsType(filepath, ee::FileType::e_complex) || 
 			ee::FileType::IsType(filepath, ee::FileType::e_anim) ||
-			ee::FileType::IsType(filepath, ee::FileType::e_particle3d)) {
+			ee::FileType::IsType(filepath, ee::FileType::e_particle3d) ||
+			ee::FileType::IsType(filepath, ee::FileType::e_trail)) {
 			filepaths.push_back(filepath);
 		} else if (ee::FileType::IsType(filepath, ee::FileType::e_ui)) {
 			PackUI::Instance()->AddTask(filepath);
@@ -237,6 +239,8 @@ void ResPacker::Pack() const
 			factory->Create(anim);
 		} else if (const eparticle3d::Symbol* p3d = dynamic_cast<const eparticle3d::Symbol*>(symbol)) {
 			factory->Create(p3d);
+		} else if (const etrail::Symbol* trail = dynamic_cast<const etrail::Symbol*>(symbol)) {
+			factory->Create(trail);
 		} else {
 			throw ee::Exception("ResPacker::Pack unhandled type.");
 		}

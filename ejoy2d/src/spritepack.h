@@ -22,6 +22,7 @@
 #define TYPE_MESH			13
 #define TYPE_MESH_SPR		14
 #define TYPE_MASK		    15
+#define TYPE_TRAIL		    16
 
 #define ANCHOR_ID 0xffff
 #define SCREEN_SCALE 16

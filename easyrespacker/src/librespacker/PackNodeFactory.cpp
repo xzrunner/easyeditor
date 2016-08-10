@@ -58,6 +58,10 @@
 #include "MaskBuilder.h"
 #include <easymask.h>
 
+// trail
+#include "TrailBuilder.h"
+#include <easytrail.h>
+
 #include <spritepack.h>
 
 namespace erespacker
@@ -107,6 +111,9 @@ PackNodeFactory::PackNodeFactory()
 
 	// mask
 	m_builders.push_back(m_mask_builder = new MaskBuilder);
+
+	// trail
+	m_builders.push_back(m_trail_builder = new TrailBuilder(m_export_set));
 }
 
 const IPackNode* PackNodeFactory::Create(const ee::Sprite* spr)
@@ -218,6 +225,11 @@ const IPackNode* PackNodeFactory::Create(const ee::Symbol* symbol)
 	// mesh
 	else if (const emesh::Symbol* mesh = dynamic_cast<const emesh::Symbol*>(symbol)) {
 		node = m_mesh_builder->Create(mesh);
+	}
+
+	// trail
+	else if (const etrail::Symbol* trail = dynamic_cast<const etrail::Symbol*>(symbol)) {
+		node = m_trail_builder->Create(trail);
 	}
 
 	else {

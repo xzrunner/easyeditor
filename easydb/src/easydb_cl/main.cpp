@@ -5,6 +5,7 @@
 #include <ee/SpriteFactory.h>
 #include <ee/Config.h>
 #include <ee/Exception.h>
+#include <ee/FileType.h>
 
 #include <easycomplex.h>
 #include <easyanim.h>
@@ -18,6 +19,7 @@
 #include <easyparticle2d.h>
 #include <easytext.h>
 #include <easymask.h>
+#include <easytrail.h>
 
 static void InitSymbolCreators() 
 {
@@ -56,6 +58,9 @@ static void InitSymbolCreators()
 
 	ee::SymbolFactory::RegisterCreator(emask::FILE_TAG, &emask::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(emask::FILE_TAG, &emask::Sprite::Create);
+
+	ee::SymbolFactory::RegisterCreator(ee::FileType::GetTag(ee::FileType::e_trail), &etrail::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(ee::FileType::GetTag(ee::FileType::e_trail), &etrail::Sprite::Create);
 }
 
 static void Help()
