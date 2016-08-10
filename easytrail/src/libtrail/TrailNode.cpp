@@ -87,10 +87,10 @@ render_shape_func(const float* positions, const uint32_t* colors, int count, con
 			b = (col >> 16) & 0xff,
 			g = (col >>  8) & 0xff,
 			r = (col) & 0xff;
-		a *= rp->ct.mul.a / 255;
-		b *= rp->ct.mul.b / 255;
-		g *= rp->ct.mul.g / 255;
-		r *= rp->ct.mul.r / 255;
+		a *= rp->ct.mul.a / 255.0f;
+		b *= rp->ct.mul.b / 255.0f;
+		g *= rp->ct.mul.g / 255.0f;
+		r *= rp->ct.mul.r / 255.0f;
 		a += rp->ct.add.a;
 		b += rp->ct.add.b;
 		g += rp->ct.add.g;
