@@ -46,6 +46,9 @@ public:
 private:
 	void Init(const t2d_emitter_cfg* cfg);
 
+public:
+	std::string name;
+
 private:
 	mutable RenderParams m_rp;
 

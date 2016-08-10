@@ -38,7 +38,7 @@ void SymbolPropertySetting::OnPropertyGridChange(const std::string& name, const 
 			m_symbol->name = name;
 			m_symbol->SetName(name);
 			RefreshPanelSJ::Instance()->Refresh();
-		} else {
+		} else if (m_name) {
 			*m_name = wxANY_AS(value, wxString);
 		}
 	}
@@ -46,7 +46,7 @@ void SymbolPropertySetting::OnPropertyGridChange(const std::string& name, const 
 	{
 		if (m_symbol) {
 			m_symbol->tag = wxANY_AS(value, wxString);
-		} else {
+		} else if (m_tag) {
 			*m_tag = wxANY_AS(value, wxString);
 		}
 	}
@@ -67,8 +67,12 @@ void SymbolPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 		pg->GetProperty(wxT("Name"))->SetValue(m_symbol->name);
 		pg->GetProperty(wxT("Tag"))->SetValue(m_symbol->tag);
 	} else {
-		pg->GetProperty(wxT("Name"))->SetValue(*m_name);
-		pg->GetProperty(wxT("Tag"))->SetValue(*m_tag);
+		if (m_name) {
+			pg->GetProperty(wxT("Name"))->SetValue(*m_name);
+		}
+		if (m_tag) {
+			pg->GetProperty(wxT("Tag"))->SetValue(*m_tag);
+		}
 	}
 }
 
@@ -83,8 +87,12 @@ void SymbolPropertySetting::InitProperties(wxPropertyGrid* pg)
 		pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_symbol->name));
 		pg->Append(new wxStringProperty(wxT("Tag"), wxPG_LABEL, m_symbol->tag));
 	} else {
-		pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, *m_name));
-		pg->Append(new wxStringProperty(wxT("Tag"), wxPG_LABEL, *m_tag));
+		if (m_name) {
+			pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, *m_name));
+		}
+		if (m_tag) {
+			pg->Append(new wxStringProperty(wxT("Tag"), wxPG_LABEL, *m_tag));
+		}
 	}
 }
 

@@ -232,6 +232,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="property"
+				>
+				<File
+					RelativePath="..\..\..\src\libtrail\PropertySettingPanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libtrail\PropertySettingPanel.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="dataset"

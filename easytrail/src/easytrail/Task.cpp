@@ -3,6 +3,7 @@
 #include <ee/SymbolMgr.h>
 #include <ee/Bitmap.h>
 #include <ee/PropertySettingPanel.h>
+#include <ee/SymbolPropertySetting.h>
 
 #include <easytrail.h>
 
@@ -17,6 +18,9 @@ Task::Task(wxFrame* parent)
 	, m_stage(NULL)
 {
 	InitLayout();
+
+	m_property->SetPropertySetting(
+		new ee::SymbolPropertySetting(&m_stage->m_trail->name, NULL));
 }
 
 Task::~Task()
@@ -29,6 +33,8 @@ Task::~Task()
 void Task::Load(const char* filepath)
 {
 	FileIO::Load(filepath, m_stage->m_trail, m_toolbar, m_library);
+	m_property->SetPropertySetting(
+		new ee::SymbolPropertySetting(&m_stage->m_trail->name, NULL));
 }
 
 void Task::Store(const char* filepath) const
@@ -70,7 +76,7 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 
 	m_library = new LibraryPanel(split);
 
-	m_property = new ee::PropertySettingPanel(split);
+	m_property = new PropertySettingPanel(split);
 
 	split->SetSashGravity(0.55f);
 	split->SplitHorizontally(m_library, m_property);
@@ -82,7 +88,7 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
 	StagePanel* stage = new StagePanel(parent, m_parent, m_library, m_property);
 	m_stage = stage;
-	m_property->SetEditPanel(m_stage->GetStageImpl());
+	m_property->SetEditPanel(stage->GetStageImpl());
 	return m_stage;
 }
 

@@ -24,6 +24,8 @@ void FileIO::Store(const std::string& filepath, MotionTrail* mt, ToolbarPanel* t
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	toolbar->Store(value, dir);
 
+	value["name"] = mt->name;
+
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
 	std::ofstream fout(filepath.c_str());
@@ -44,6 +46,8 @@ void FileIO::Load(const std::string& filepath, MotionTrail* mt, ToolbarPanel* to
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	toolbar->Load(value, dir);
+
+	mt->name = value["name"].asString();
 }
 
 MotionTrail* FileIO::LoadMT(const std::string& filepath)
