@@ -118,9 +118,7 @@ void ShapeCompPanel::InitLayout(wxSizer* top_sizer)
 	ee::SliderCtrlTwo* s_alpha = new ee::SliderCtrlTwo(this, "透明度", "alpha", this, MT_ALPHA, 
 		ee::SliderItem("起始", "begin", 255, 0, 255), ee::SliderItem("结束", "end", 255, 0, 255));
 	top_sizer->Add(s_alpha);
-//	top_sizer->AddSpacer(10);
 	m_sliders.push_back(s_alpha);
-
 }
 
 void ShapeCompPanel::UpdateBtnColor()

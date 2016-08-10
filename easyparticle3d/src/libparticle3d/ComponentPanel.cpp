@@ -317,7 +317,6 @@ void ComponentPanel::ChangeColor(uint8_t rgba[4])
 		rgba[0] = col.Red();
 		rgba[1] = col.Green();
 		rgba[2] = col.Blue();
-		rgba[3] = col.Alpha();
 		UpdateBtnColor();
 	}
 }
