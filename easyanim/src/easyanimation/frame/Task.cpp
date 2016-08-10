@@ -16,6 +16,7 @@
 #include <easyscale9.h>
 #include <easyicon.h>
 #include <easyparticle3d.h>
+#include <easytrail.h>
 
 #include <ee/panel_msg.h>
 #include <ee/SymbolMgr.h>
@@ -145,6 +146,7 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 	library->AddPage(new escale9::LibraryPage(nb));
 	library->AddPage(new eicon::LibraryPage(nb));
 	library->AddPage(new eparticle3d::LibraryPage(nb));
+	library->AddPage(new etrail::LibraryPage(nb));
 	mgr->library = library;
 
 	// property

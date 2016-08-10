@@ -9,11 +9,13 @@
 #include <easymesh.h>
 #include <easymask.h>
 #include <easyparticle3d.h>
+#include <easytrail.h>
 #include <easyicon.h>
 #include <easytext.h>
 
 #include <ee/SymbolFactory.h>
 #include <ee/SpriteFactory.h>
+#include <ee/FileType.h>
 
 IMPLEMENT_APP(MyApp)
 
@@ -42,6 +44,9 @@ static void InitSymbolCreators()
 
 	ee::SymbolFactory::RegisterCreator(etext::FILE_TAG, &etext::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(etext::FILE_TAG, &etext::Sprite::Create);
+
+	ee::SymbolFactory::RegisterCreator(ee::FileType::GetTag(ee::FileType::e_trail), &etrail::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(ee::FileType::GetTag(ee::FileType::e_trail), &etrail::Sprite::Create);
 }
 
 bool MyApp::OnInit()
