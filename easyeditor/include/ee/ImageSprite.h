@@ -25,7 +25,7 @@ public:
 	//
 	// Sprite interface
 	//
-	virtual bool Update(float dt);
+	virtual bool Update(const s2::RenderParams& params, float dt);
 	virtual const ImageSymbol& GetSymbol() const;
 	virtual void SetSymbol(Symbol* symbol);
 

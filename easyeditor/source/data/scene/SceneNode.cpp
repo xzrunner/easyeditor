@@ -1,5 +1,7 @@
 #include "SceneNode.h"
 
+#include <sprite2/RenderParams.h>
+
 #include <stddef.h>
 
 namespace ee
@@ -30,7 +32,7 @@ bool SceneNodeMgr::Update(float dt)
 	bool dirty = false;
 	std::set<SceneNode*>::iterator itr = m_nodes.begin();
 	for ( ; itr != m_nodes.end(); ++itr) {
-		if ((*itr)->Update(dt)) {
+		if ((*itr)->Update(s2::RenderParams(), dt)) {
 			dirty = true;
 		}
 	}

@@ -42,7 +42,6 @@ public:
 	//
 	// Sprite interface
 	//
-	virtual bool Update(float dt) { return false; }
 	virtual const FontBlankSymbol& GetSymbol() const;
 	virtual void SetSymbol(Symbol* symbol);
 

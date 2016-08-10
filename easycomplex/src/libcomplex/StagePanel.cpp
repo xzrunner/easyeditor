@@ -15,6 +15,7 @@
 #include <ee/subject_id.h>
 
 #include <sprite2/S2_Sprite.h>
+#include <sprite2/RenderParams.h>
 
 namespace ee { extern StageModule MODULE_STAGE; }
 
@@ -75,7 +76,7 @@ bool StagePanel::Update(float dt)
 	const std::vector<s2::Sprite*>& children = m_symbol->GetChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
 		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
-		if (child->Update(dt)) {
+		if (child->Update(s2::RenderParams(), dt)) {
 			dirty = true;
 		}
 	}

@@ -32,7 +32,7 @@ PSNode::PSNode()
 	ee::SceneNodeMgr::Instance()->Add(this);
 }
 
-bool PSNode::Update(float dt)
+bool PSNode::Update(const s2::RenderParams& params, float dt)
 {
 	UpdateTime();
 	return p3d_buffer_update(GetTime());

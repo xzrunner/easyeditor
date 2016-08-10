@@ -3,6 +3,8 @@
 
 #include <set>
 
+namespace s2 { class RenderParams; }
+
 namespace ee
 {
 
@@ -10,7 +12,7 @@ class SceneNode
 {
 public:
 	virtual ~SceneNode() {}
-	virtual bool Update(float dt) = 0;
+	virtual bool Update(const s2::RenderParams& params, float dt) { return false; } 
 	virtual void Draw() const = 0;
 }; // SceneNode
 

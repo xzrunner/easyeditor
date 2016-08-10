@@ -85,7 +85,7 @@ Sprite* Sprite::Clone() const
 	return sprite;
 }
 
-bool Sprite::Update(float dt)
+bool Sprite::Update(const s2::RenderParams& params, float dt)
 {
 	PSNode::Instance()->UpdateTime();
 

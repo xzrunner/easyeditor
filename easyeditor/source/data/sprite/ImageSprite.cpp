@@ -52,7 +52,7 @@ ImageSprite* ImageSprite::Clone() const
 	return sprite;
 }
 
-bool ImageSprite::Update(float dt)
+bool ImageSprite::Update(const s2::RenderParams& params, float dt)
 {
 	if (m_core->Update(dt)) return true;
 

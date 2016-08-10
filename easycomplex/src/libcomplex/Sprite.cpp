@@ -3,6 +3,7 @@
 #include <ee/SpriteFactory.h>
 
 #include <sprite2/ComplexSprite.h>
+#include <sprite2/RenderParams.h>
 
 namespace ecomplex
 {
@@ -47,13 +48,16 @@ Sprite* Sprite::Clone() const
 	return sprite;
 }
 
-bool Sprite::Update(float dt) 
+bool Sprite::Update(const s2::RenderParams& params, float dt) 
 { 
+	s2::RenderParams p = params;
+	p.mt = GetTransMatrix() * params.mt;
+
 	bool ret = false;
 	const std::vector<s2::Sprite*>& children = m_symbol->GetChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
 		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
-		if (child->Update(dt)) {
+		if (child->Update(p, dt)) {
 			ret = true;
 		}
 

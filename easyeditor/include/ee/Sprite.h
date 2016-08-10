@@ -10,7 +10,7 @@
 
 #include <json/json.h>
 
-namespace s2 { class Sprite; class RenderColor; class RenderShader; class RenderCamera; }
+namespace s2 { class Sprite; class RenderColor; class RenderShader; class RenderCamera; class RenderParams; }
 
 namespace ee
 {
@@ -38,7 +38,7 @@ public:
 	//	
 	virtual void ClearUserData(bool deletePtr);
 
-	virtual bool Update(float dt) = 0;
+	virtual bool Update(const s2::RenderParams& params, float dt) { return false; }
 
 	virtual const Symbol& GetSymbol() const = 0;
 	virtual void SetSymbol(Symbol* symbol) = 0;

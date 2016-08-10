@@ -27,7 +27,7 @@ public:
 	//
 	// interface ee::SceneNode
 	//
-	virtual bool Update(float dt);
+	virtual bool Update(const s2::RenderParams& params, float dt);
 	virtual void Draw() const;
 
 	void BufferClear();

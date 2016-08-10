@@ -61,7 +61,7 @@ Sprite* Sprite::Clone() const
 	return sprite;
 }
 
-bool Sprite::Update(float dt)
+bool Sprite::Update(const s2::RenderParams& params, float dt)
 {
 	TrailNode::Instance()->UpdateTime();
 	
@@ -72,7 +72,7 @@ bool Sprite::Update(float dt)
 	}
 
 	dt = time - m_et->time;
-	const sm::vec2& pos = GetPosition();
+	sm::vec2 pos = params.mt * GetPosition();
 	t2d_emitter_update(m_et, dt, (sm_vec2*)(&pos));
 	m_et->time = time;
 

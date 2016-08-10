@@ -48,12 +48,12 @@ Sprite* Sprite::Clone() const
 	return sprite; 
 }
 
-bool Sprite::Update(float dt) 
+bool Sprite::Update(const s2::RenderParams& params, float dt) 
 {
 	std::vector<ee::Sprite*> sprites;
 	Utility::GetCurrSprites(m_symbol, m_symbol->GetCurrFrame(), sprites);
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		sprites[i]->Update(dt);
+		sprites[i]->Update(params, dt);
 	}
 	for_each(sprites.begin(), sprites.end(), ee::DeletePointerFunctor<ee::Sprite>());
 	return true;
