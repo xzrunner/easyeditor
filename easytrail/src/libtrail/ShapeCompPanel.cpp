@@ -2,6 +2,7 @@
 #include "mt_config.h"
 
 #include <ee/SliderCtrlOne.h>
+#include <ee/SliderCtrlTwo.h>
 #include <ee/JsonSerializer.h>
 
 #include <mt_2d.h>
@@ -18,6 +19,8 @@ ShapeCompPanel::ShapeCompPanel(wxWindow* parent, t2d_symbol* pc, ToolbarPanel* t
 
 void ShapeCompPanel::SetValue(int key, const ee::UICallback::Data& data)
 {
+	ComponentPanel::SetValue(key, data);
+
 	switch (key)
 	{
 	case MT_LINE_WIDTH:
@@ -31,6 +34,8 @@ void ShapeCompPanel::SetValue(int key, const ee::UICallback::Data& data)
 
 void ShapeCompPanel::GetValue(int key, ee::UICallback::Data& data)
 {
+	ComponentPanel::GetValue(key, data);
+
 	switch (key)
 	{
 	case MT_LINE_WIDTH:
@@ -108,6 +113,14 @@ void ShapeCompPanel::InitLayout(wxSizer* top_sizer)
 		ee::SliderItem("", "", 90, 0, 100));
 	top_sizer->Add(s_acuity);
 	m_sliders.push_back(s_acuity);
+
+	// Alpha
+	ee::SliderCtrlTwo* s_alpha = new ee::SliderCtrlTwo(this, "透明度", "alpha", this, MT_ALPHA, 
+		ee::SliderItem("起始", "begin", 255, 0, 255), ee::SliderItem("结束", "end", 255, 0, 255));
+	top_sizer->Add(s_alpha);
+//	top_sizer->AddSpacer(10);
+	m_sliders.push_back(s_alpha);
+
 }
 
 void ShapeCompPanel::UpdateBtnColor()

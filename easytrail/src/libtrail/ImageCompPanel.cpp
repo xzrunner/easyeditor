@@ -23,6 +23,8 @@ ImageCompPanel::ImageCompPanel(wxWindow* parent, t2d_symbol* pc, ToolbarPanel* t
 
 void ImageCompPanel::SetValue(int key, const ee::UICallback::Data& data)
 {
+	ComponentPanel::SetValue(key, data);
+
 	switch (key)
 	{
 	case MT_SCALE:
@@ -34,6 +36,8 @@ void ImageCompPanel::SetValue(int key, const ee::UICallback::Data& data)
 
 void ImageCompPanel::GetValue(int key, ee::UICallback::Data& data)
 {
+	ComponentPanel::GetValue(key, data);
+
 	switch (key)
 	{
 	case MT_SCALE:

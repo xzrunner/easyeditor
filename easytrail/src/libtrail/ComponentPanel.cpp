@@ -1,5 +1,6 @@
 #include "ComponentPanel.h"
 #include "ToolbarPanel.h"
+#include "mt_config.h"
 
 #include <ee/Symbol.h>
 #include <ee/SliderCtrl.h>
@@ -23,6 +24,28 @@ ComponentPanel::~ComponentPanel()
 	ee::Symbol* sym = static_cast<ee::Symbol*>(m_pc->mode.A.ud);
 	if (sym) {
 		sym->Release();
+	}
+}
+
+void ComponentPanel::SetValue(int key, const ee::UICallback::Data& data)
+{
+	switch (key)
+	{
+	case MT_ALPHA:
+		m_pc->col_begin.a = data.val0;
+		m_pc->col_end.a = data.val1;
+		break;
+	}
+}
+
+void ComponentPanel::GetValue(int key, ee::UICallback::Data& data)
+{
+	switch (key)
+	{
+	case MT_ALPHA:
+		data.val0 = m_pc->col_begin.a;
+		data.val1 = m_pc->col_end.a;
+		break;
 	}
 }
 
