@@ -17,6 +17,7 @@ namespace eparticle3d
 
 Symbol::Symbol()
 	: m_et_cfg(NULL)
+	, m_et(NULL)
 	, m_loop(true)
 	, m_local(true)
 {
@@ -26,6 +27,7 @@ Symbol::Symbol()
 Symbol::Symbol(const Symbol& s)
 	: ee::Symbol(s)
 	, m_et_cfg(s.m_et_cfg)
+	, m_et(NULL)
 {
 	PSNode::Instance();
 }

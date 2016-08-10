@@ -15,6 +15,7 @@
 #include <easyshadow.h>
 #include <easytext.h>
 #include <easymask.h>
+#include <easytrail.h>
 
 #include <ee/LibraryImagePage.h>
 #include <ee/LibraryFontBlankPage.h>
@@ -33,6 +34,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	AddPage(new escale9::LibraryPage(nb));
 	AddPage(new etext::LibraryPage(nb));
 	AddPage(new eparticle3d::LibraryPage(nb));
+	AddPage(new etrail::LibraryPage(nb));
 	AddPage(new etexture::LibraryPage(nb));
 	AddPage(new emesh::LibraryPage(nb));
 	AddPage(new emask::LibraryPage(nb));

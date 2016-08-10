@@ -60,7 +60,6 @@ render_symbol_func(void* symbol, float x, float y, float angle, float scale, uin
 {
 	assert(ud);
 	const RenderParams* rp = (static_cast<const RenderParams*>(ud));
-	assert(rp->trail);
 
 	ee::Symbol* sym = static_cast<ee::Symbol*>(symbol);
 
@@ -75,8 +74,30 @@ render_symbol_func(void* symbol, float x, float y, float angle, float scale, uin
 }
 
 static void 
-render_shape_func(const float* positions, const uint32_t* colors, int count)
+render_shape_func(const float* positions, const uint32_t* colors, int count, const void* ud)
 {
+	assert(ud);
+	const RenderParams* rp = (static_cast<const RenderParams*>(ud));
+
+	std::vector<uint32_t> t_colors;
+	t_colors.resize(count);
+	for (int i = 0; i < count; ++i) {
+		uint32_t col = colors[i];
+		int a = (col >> 24) & 0xff,
+			b = (col >> 16) & 0xff,
+			g = (col >>  8) & 0xff,
+			r = (col) & 0xff;
+		a *= rp->ct.mul.a / 255;
+		b *= rp->ct.mul.b / 255;
+		g *= rp->ct.mul.g / 255;
+		r *= rp->ct.mul.r / 255;
+		a += rp->ct.add.a;
+		b += rp->ct.add.b;
+		g += rp->ct.add.g;
+		r += rp->ct.add.r;
+		t_colors[i] = (a << 24) | (b << 16) | (g << 8) | r;
+	}
+
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	mgr->SetShader(sl::SHAPE2);
 	sl::Shape2Shader* shader = static_cast<sl::Shape2Shader*>(mgr->GetShader());
@@ -84,7 +105,7 @@ render_shape_func(const float* positions, const uint32_t* colors, int count)
 //	shader->Commit();
 
 	shader->SetType(0x0005);	// todo from rvg_render.c
-	shader->Draw(positions, colors, count);
+	shader->Draw(positions, &t_colors[0], count);
 }
 
 void TrailNode::Init()

@@ -1,4 +1,5 @@
 #include "MTConfigMgr.h"
+#include "FileIO.h"
 #include "mt_config.h"
 
 #include <mt_2d.h>
@@ -36,11 +37,9 @@ t2d_emitter_cfg* MTConfigMgr::GetConfig(const std::string& filepath)
 	if (itr != m_map2cfg.end()) {
 		return itr->second;
 	} else {
-// 		t2d_emitter_cfg* cfg = FileIO::LoadMTConfig(filepath);
-// 		m_map2cfg.insert(std::make_pair(filepath, cfg));
-// 		return cfg;
-
-		return NULL;
+		t2d_emitter_cfg* cfg = FileIO::LoadMTConfig(filepath);
+		m_map2cfg.insert(std::make_pair(filepath, cfg));
+		return cfg;
 	}
 }
 

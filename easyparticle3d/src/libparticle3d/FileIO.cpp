@@ -159,14 +159,6 @@ ParticleSystem* FileIO::LoadPS(const std::string& filepath)
 
 p3d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
 {
-	Json::Value value;
-	Json::Reader reader;
-	std::locale::global(std::locale(""));
-	std::ifstream fin(filepath.c_str());
-	std::locale::global(std::locale("C"));
-	reader.parse(fin, value);
-	fin.close();
-
 	LoadAdapter adapter;
 	adapter.Load(filepath);
 	

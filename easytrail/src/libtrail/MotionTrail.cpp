@@ -167,7 +167,7 @@ void MotionTrail::Init(const t2d_emitter_cfg* cfg)
 	m_spr = t2d_emitter_create(cfg);
 	assert(m_spr);
 
-	m_rp.trail = m_spr;
+//	m_rp.trail = m_spr;
 }
 
 }

@@ -4,6 +4,7 @@
 
 #include <ee/SymbolFactory.h>
 #include <ee/SpriteFactory.h>
+#include <ee/FileType.h>
 
 #include <easycomplex.h>
 #include <easyanim.h>
@@ -19,6 +20,7 @@
 #include <easyshadow.h>
 #include <easytext.h>
 #include <easymask.h>
+#include <easytrail.h>
 
 IMPLEMENT_APP(MyApp)
 
@@ -65,6 +67,9 @@ static void InitSymbolCreators()
 
 	ee::SymbolFactory::RegisterCreator(emask::FILE_TAG, &emask::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(emask::FILE_TAG, &emask::Sprite::Create);
+
+	ee::SymbolFactory::RegisterCreator(ee::FileType::GetTag(ee::FileType::e_trail), &etrail::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(ee::FileType::GetTag(ee::FileType::e_trail), &etrail::Sprite::Create);
 }
 
 bool MyApp::OnInit()

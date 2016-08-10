@@ -16,9 +16,9 @@ class RenderParams
 public:
 	sm::mat4 mat;
 	s2::RenderColor ct;
-	t2d_emitter* trail;
+//	t2d_emitter* trail;
 
-	RenderParams() : trail(NULL) {}
+//	RenderParams() : trail(NULL) {}
 };
 
 class TrailNode : ee::SceneNode

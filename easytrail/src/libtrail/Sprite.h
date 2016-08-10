@@ -2,10 +2,9 @@
 #define _EASYTRAIL_SPRITE_H_
 
 #include "Symbol.h"
+#include "TrailNode.h"
 
 #include <ee/Sprite.h>
-
-struct t2d_emitter;
 
 namespace etrail
 {
@@ -26,9 +25,11 @@ public:
 	//
 	// Sprite interface
 	//
-	virtual bool Update(float dt) { return false; }
+	virtual bool Update(float dt);
 	virtual const Symbol& GetSymbol() const;
 	virtual void SetSymbol(ee::Symbol* symbol);
+
+	void Draw(const s2::RenderParams& params) const;
 
 	static ee::Sprite* Create(ee::Symbol* symbol) {
 		return new Sprite(static_cast<Symbol*>(symbol));
@@ -38,7 +39,9 @@ protected:
 	Symbol* m_symbol;
 
 private:
-	t2d_emitter* m_spr;
+	t2d_emitter* m_et;
+
+	mutable RenderParams m_rp;
 
 }; // Sprite
 
