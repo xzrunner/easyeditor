@@ -3,6 +3,8 @@
 #include <ee/FileHelper.h>
 #include <ee/JsonSerializer.h>
 
+#include <mt_2d.h>
+
 #include <fstream>
 
 namespace etrail
@@ -67,7 +69,7 @@ void LoadAdapter::LoadShapeComp(const Json::Value& comp_val)
 	comp.acuity = comp_val["acuity"].asDouble() * 0.01f;
 
 	ee::JsonSerializer::Load(comp_val["color_begin"], comp.col_begin);
-	ee::JsonSerializer::Load(comp_val["color_begin"], comp.col_end);
+	ee::JsonSerializer::Load(comp_val["color_end"], comp.col_end);
 	
 	comp_shapes.push_back(comp);
 }

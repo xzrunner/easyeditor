@@ -56,12 +56,14 @@ void TrailToBin::Pack(const PackTrail* trail, uint8_t** ptr)
 
 	if (mode == T2D_MODE_IMAGE) {
 		uint16_t sz = trail->comp_images.size();
+		pack(sz, ptr);
 		for (int i = 0; i < sz; ++i) {
 			PackCompImage(trail->comp_images[i], ptr);
 		}
 	} else {
 		assert(mode == T2D_MODE_SHAPE);
 		uint16_t sz = trail->comp_shapes.size();
+		pack(sz, ptr);
 		for (int i = 0; i < sz; ++i) {
 			PackCompShape(trail->comp_shapes[i], ptr);
 		}
