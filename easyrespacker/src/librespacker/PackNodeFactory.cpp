@@ -177,6 +177,11 @@ const IPackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 		node = m_mask_builder->Create(&mask->GetSymbol());
 	}
 
+	// trail
+	else if (const etrail::Sprite* trail = dynamic_cast<const etrail::Sprite*>(spr)) {
+		node = m_trail_builder->Create(&trail->GetSymbol());
+	}
+
 	else {
 		throw ee::Exception("PackNodeFactory::Create unknown sprite type.");
 	}
