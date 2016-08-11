@@ -8,11 +8,12 @@
 #include <ee/ShapeSelection.h>
 #include <ee/OneFloatValue.h>
 #include <ee/panel_msg.h>
-#include <ee/EE_RVG.h>
 #include <ee/Math2D.h>
 #include <ee/PropertySettingPanel.h>
 
 #include <SM_Calc.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace eshape
 {
@@ -211,11 +212,11 @@ bool EditRectOP::OnDraw() const
 			if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape))
 			{
 				sm::vec2 pos = rect->GetRect().Center();
-				ee::RVG::Color(s2::Color(102, 255, 102));
-				ee::RVG::Circle(pos, tolerance, true);
+				s2::RVG::SetColor(s2::Color(102, 255, 102));
+				s2::RVG::Circle(pos, tolerance, true);
 				if (m_captured.pos.IsValid()) {
-					ee::RVG::Color(s2::Color(255, 102, 102));
-					ee::RVG::Circle(m_captured.pos, tolerance, true);
+					s2::RVG::SetColor(s2::Color(255, 102, 102));
+					s2::RVG::Circle(m_captured.pos, tolerance, true);
 				}
 			}
 		}
@@ -223,7 +224,7 @@ bool EditRectOP::OnDraw() const
 	else
 	{
 		if (m_first_pos.IsValid() && m_curr_pos.IsValid()) {
-			ee::RVG::Rect(m_first_pos, m_curr_pos, false);
+			s2::RVG::Rect(m_first_pos, m_curr_pos, false);
 		}
 	}
 

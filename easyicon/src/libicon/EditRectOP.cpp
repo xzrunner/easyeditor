@@ -7,8 +7,9 @@
 #include <ee/Math2D.h>
 #include <ee/panel_msg.h>
 #include <ee/Image.h>
-#include <ee/EE_RVG.h>
 #include <ee/color_config.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace eicon
 {
@@ -133,19 +134,19 @@ bool EditRectOP::OnDraw() const
 
 	float w = img->GetClippedWidth(),
 		  h = img->GetClippedHeight();
-	ee::RVG::Color(ee::LIGHT_RED);
-	ee::RVG::LineWidth(1);
-	ee::RVG::Rect(sm::vec2(0, 0), w * 0.5f, h * 0.5f, false);
+	s2::RVG::SetColor(ee::LIGHT_RED);
+	s2::RVG::LineWidth(1);
+	s2::RVG::Rect(sm::vec2(0, 0), w * 0.5f, h * 0.5f, false);
 
 	sm::rect r = icon->GetRegion(1);
-	ee::RVG::Color(ee::LIGHT_GREEN);
-	ee::RVG::Rect(sm::vec2(r.xmin, r.ymin), sm::vec2(r.xmax, r.ymax), false);
-	ee::RVG::Rect(sm::vec2(r.xmin, r.ymin), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, true);
-	ee::RVG::Rect(sm::vec2(r.xmin, r.ymax), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, true);
-	ee::RVG::Rect(sm::vec2(r.xmax, r.ymax), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, true);
-	ee::RVG::Rect(sm::vec2(r.xmax, r.ymin), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, true);
+	s2::RVG::SetColor(ee::LIGHT_GREEN);
+	s2::RVG::Rect(sm::vec2(r.xmin, r.ymin), sm::vec2(r.xmax, r.ymax), false);
+	s2::RVG::Rect(sm::vec2(r.xmin, r.ymin), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, true);
+	s2::RVG::Rect(sm::vec2(r.xmin, r.ymax), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, true);
+	s2::RVG::Rect(sm::vec2(r.xmax, r.ymax), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, true);
+	s2::RVG::Rect(sm::vec2(r.xmax, r.ymin), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, true);
 
-	ee::RVG::LineWidth(2);
+	s2::RVG::LineWidth(2);
 
 	return false;
 }

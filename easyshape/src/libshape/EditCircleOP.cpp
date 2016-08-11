@@ -9,9 +9,10 @@
 #include <ee/EditPanelImpl.h>
 #include <ee/ShapeSelection.h>
 #include <ee/Math2D.h>
-#include <ee/EE_RVG.h>
 #include <ee/PropertySettingPanel.h>
 #include <ee/panel_msg.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace eshape
 {
@@ -196,11 +197,11 @@ bool EditCircleOP::OnDraw() const
 			int tolerance = m_node_capture->GetValue();
 			if (CircleShape* circle = dynamic_cast<CircleShape*>(m_captured.shape))
 			{
-				ee::RVG::Color(s2::Color(102, 255, 102));
-				ee::RVG::Circle(circle->GetCenter(), tolerance, true);
+				s2::RVG::SetColor(s2::Color(102, 255, 102));
+				s2::RVG::Circle(circle->GetCenter(), tolerance, true);
 				if (!m_captured.pos.IsValid()) {
-					ee::RVG::Color(s2::Color(255, 102, 102));
-					ee::RVG::Circle(circle->GetCenter(), circle->GetRadius(), false);
+					s2::RVG::SetColor(s2::Color(255, 102, 102));
+					s2::RVG::Circle(circle->GetCenter(), circle->GetRadius(), false);
 				}
 			}
 		}
@@ -208,8 +209,8 @@ bool EditCircleOP::OnDraw() const
 	else
 	{
 		if (m_first_pos.IsValid() && m_curr_pos.IsValid()) {
-			ee::RVG::Color(s2::Color(0, 0, 0));
-			ee::RVG::Circle(m_first_pos, ee::Math2D::GetDistance(m_first_pos, m_curr_pos), false, 32);
+			s2::RVG::SetColor(s2::Color(0, 0, 0));
+			s2::RVG::Circle(m_first_pos, ee::Math2D::GetDistance(m_first_pos, m_curr_pos), false, 32);
 		}
 	}
 

@@ -2,8 +2,9 @@
 //#include "Material.h"
 //
 //#include <ee/Math2D.h>
-//#include <ee/EE_RVG.h>
 //#include <ee/SettingData.h>
+//
+//#include <sprite2/S2_RVG.h>
 //
 //namespace eshape
 //{
@@ -64,11 +65,11 @@
 //		for (int i = 0, n = m_holes.size(); i < n; ++i) {
 //			std::vector<sm::vec2> vertices;
 //			ee::Math2D::TransVertices(mt, m_holes[i], vertices);
-//			ee::RVG::Color(color.mul);
-//			ee::RVG::Polyline(vertices, m_loop);
+//			s2::RVG::SetColor(color.mul);
+//			s2::RVG::Polyline(vertices, m_loop);
 //			if (len != 0) {
-//				ee::RVG::Color(s2::Color(102, 204, 102));
-//				ee::RVG::Circles(vertices, len, true);
+//				s2::RVG::SetColor(s2::Color(102, 204, 102));
+//				s2::RVG::Circles(vertices, len, true);
 //			}
 //		}
 //	} 

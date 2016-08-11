@@ -4,13 +4,14 @@
 #include <ee/MultiSpritesImpl.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/render_utility.h>
-#include <ee/EE_RVG.h>
 #include <ee/cfg_const.h>
 #include <ee/color_config.h>
 #include <ee/Sprite.h>
 #include <ee/DrawShapesVisitor.h>
 #include <ee/SpriteRenderer.h>
 #include <ee/Symbol.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace eshape
 {
@@ -52,8 +53,8 @@ StageCanvas::~StageCanvas()
 
 void StageCanvas::DrawGuideLines() const
 {
-	ee::RVG::Color(ee::LIGHT_GREY);
-	ee::RVG::Rect(sm::vec2(0, 0), ee::HALF_SCREEN_WIDTH, ee::HALF_SCREEN_HEIGHT, false);
+	s2::RVG::SetColor(ee::LIGHT_GREY);
+	s2::RVG::Rect(sm::vec2(0, 0), ee::HALF_SCREEN_WIDTH, ee::HALF_SCREEN_HEIGHT, false);
 }
 
 void StageCanvas::OnDrawSprites() const

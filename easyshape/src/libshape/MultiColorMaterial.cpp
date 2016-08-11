@@ -19,7 +19,7 @@
 //
 //void MultiColorMaterial::Draw(const sm::mat4& mt) const
 //{
-//	ee::RVG::Triangles(mt, m_tris, m_color);
+//	s2::RVG::Triangles(mt, m_tris, m_color);
 //}
 //
 //void MultiColorMaterial::Build(const std::vector<sm::vec2>& vertices)

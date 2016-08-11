@@ -8,8 +8,9 @@
 #include <ee/SpriteRenderer.h>
 #include <ee/Config.h>
 #include <ee/EE_DTex.h>
-#include <ee/EE_RVG.h>
 #include <ee/Math2D.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace etext
 {
@@ -67,7 +68,7 @@ void StageCanvas::OnDrawSprites() const
 
 void StageCanvas::DrawSprBound() const
 {
-	ee::RVG::Color(s2::Color(204, 102, 102));
+	s2::RVG::SetColor(s2::Color(204, 102, 102));
 
 	const Sprite* font = static_cast<const Sprite*>(m_edited);
 	int w, h;
@@ -80,7 +81,7 @@ void StageCanvas::DrawSprBound() const
 	min = ee::Math2D::TransVector(min, mt);
 	max = ee::Math2D::TransVector(max, mt);
 
-	ee::RVG::Rect(min, max, false);
+	s2::RVG::Rect(min, max, false);
 }
 
 }

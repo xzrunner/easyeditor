@@ -9,8 +9,9 @@
 #include <ee/ShapeSelection.h>
 #include <ee/OneFloatValue.h>
 #include <ee/PropertySettingPanel.h>
-#include <ee/EE_RVG.h>
 #include <ee/panel_msg.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace eshape
 {
@@ -191,11 +192,11 @@ bool EditBezierOP::OnDraw() const
 			{
 				sm::vec2 c = bezier->GetRect().Center();
 				
-				ee::RVG::Color(s2::Color(102, 255, 102));
-				ee::RVG::Circle(c, tolerance, true);
+				s2::RVG::SetColor(s2::Color(102, 255, 102));
+				s2::RVG::Circle(c, tolerance, true);
 				if (m_captured.pos.IsValid()) {
-					ee::RVG::Color(s2::Color(255, 102, 102));
-					ee::RVG::Circle(m_captured.pos, tolerance, true);
+					s2::RVG::SetColor(s2::Color(255, 102, 102));
+					s2::RVG::Circle(m_captured.pos, tolerance, true);
 				}
 			}
 		}

@@ -5,10 +5,10 @@
 #include "Config.h"
 #include "SettingData.h"
 #include "StringHelper.h"
-#include "EE_RVG.h"
 #include "Math2D.h"
 
 #include <sprite2/RenderParams.h>
+#include <sprite2/S2_RVG.h>
 
 #include <json/json.h>
 
@@ -107,7 +107,7 @@ void FontBlankSymbol::LoadResources()
 
 void FontBlankSymbol::DrawBackground(const FontBlankSprite* fb, const sm::mat4& mt) const
 {
-	RVG::Color(s2::Color(179, 179, 179, 179));
+	s2::RVG::SetColor(s2::Color(179, 179, 179, 179));
 
 	float hw = width * 0.5f,
 		  hh = height * 0.5f;
@@ -120,7 +120,7 @@ void FontBlankSymbol::DrawBackground(const FontBlankSprite* fb, const sm::mat4& 
 	min = ee::Math2D::TransVector(min, mt);
 	max = ee::Math2D::TransVector(max, mt);
 
-	RVG::Rect(min, max, true);
+	s2::RVG::Rect(min, max, true);
 }
 
 void FontBlankSymbol::DrawText(const FontBlankSprite* fb, const sm::mat4& mt) const

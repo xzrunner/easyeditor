@@ -8,11 +8,12 @@
 #include "SpriteSelection.h"
 #include "EditPanelImpl.h"
 #include "DrawSelectedSpriteVisitor.h"
-#include "EE_RVG.h"
 #include "sprite_msg.h"
 #include "panel_msg.h"
 #include "FetchAllVisitor.h"
 #include "PointMultiQueryVisitor.h"
+
+#include <sprite2/S2_RVG.h>
 
 #include <wx/clipbrd.h>
 

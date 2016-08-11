@@ -3,8 +3,9 @@
 #include "Context.h"
 
 #include <ee/DrawShapesVisitor.h>
-#include <ee/EE_RVG.h>
 #include <ee/Sprite.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace edb
 {
@@ -41,8 +42,8 @@ void StageCanvas::drawConnection() const
 		for (size_t i = 0, n = itr->second->out.size(); i < n; ++i)
 		{
 			ee::Sprite* to = itr->second->out[i];
-			ee::RVG::Color(s2::Color(204, 204, 204));
-			ee::RVG::Line(from->GetPosition(), to->GetPosition());
+			s2::RVG::SetColor(s2::Color(204, 204, 204));
+			s2::RVG::Line(from->GetPosition(), to->GetPosition());
 		}
 	}
 }

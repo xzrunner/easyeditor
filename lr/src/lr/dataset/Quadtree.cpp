@@ -1,13 +1,15 @@
 #include "Quadtree.h"
 
-#include <ee/EE_RVG.h>
 #include <ee/SpriteRenderer.h>
 #include <ee/Math2D.h>
 #include <ee/color_config.h>
 #include <ee/Triangulation.h>
 
-#include <queue>
 #include <easyshape.h>
+
+#include <sprite2/S2_RVG.h>
+
+#include <queue>
 
 namespace lr
 {
@@ -63,10 +65,10 @@ void Quadtree::DebugDraw() const
 	while (!buffer.empty())
 	{
 		Node* node = buffer.front(); buffer.pop();
-		ee::RVG::Color(ee::LIGHT_GREY);
-		ee::RVG::LineWidth(1);
-		ee::RVG::Rect(sm::vec2(node->m_rect.xmin, node->m_rect.ymin), sm::vec2(node->m_rect.xmax, node->m_rect.ymax), false);
-		ee::RVG::LineWidth(2);
+		s2::RVG::SetColor(ee::LIGHT_GREY);
+		s2::RVG::LineWidth(1);
+		s2::RVG::Rect(sm::vec2(node->m_rect.xmin, node->m_rect.ymin), sm::vec2(node->m_rect.xmax, node->m_rect.ymax), false);
+		s2::RVG::LineWidth(2);
 
 		if (!node->IsLeaf()) 
 		{
@@ -78,10 +80,10 @@ void Quadtree::DebugDraw() const
 	}
 
 	if (m_selected) {
-		ee::RVG::Color(ee::LIGHT_RED);
-		ee::RVG::LineWidth(1);
-		ee::RVG::Rect(sm::vec2(m_selected->m_rect.xmin, m_selected->m_rect.ymin), sm::vec2(m_selected->m_rect.xmax, m_selected->m_rect.ymax), false);
-		ee::RVG::LineWidth(2);
+		s2::RVG::SetColor(ee::LIGHT_RED);
+		s2::RVG::LineWidth(1);
+		s2::RVG::Rect(sm::vec2(m_selected->m_rect.xmin, m_selected->m_rect.ymin), sm::vec2(m_selected->m_rect.xmax, m_selected->m_rect.ymax), false);
+		s2::RVG::LineWidth(2);
 
 		s2::RenderColor color;
 		color.mul = ee::LIGHT_BLUE;

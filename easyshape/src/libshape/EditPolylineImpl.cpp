@@ -15,8 +15,9 @@
 #include <ee/PropertySettingPanel.h>
 #include <ee/panel_msg.h>
 #include <ee/ShapeSelection.h>
-#include <ee/EE_RVG.h>
 #include <ee/shape_msg.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace eshape
 {
@@ -313,13 +314,13 @@ void EditPolylineImpl::drawCaptured(const NodeAddr& captured) const
 	if (PolylineShape* polyline = dynamic_cast<PolylineShape*>(captured.shape))
 	{
 		if (captured.pos.IsValid()) {
-			ee::RVG::Color(s2::Color(255, 102, 102));
-			ee::RVG::Circle(captured.pos, m_node_capture->GetValue(), true);
+			s2::RVG::SetColor(s2::Color(255, 102, 102));
+			s2::RVG::Circle(captured.pos, m_node_capture->GetValue(), true);
 		}
 
 		sm::vec2 center = polyline->GetRect().Center();
-		ee::RVG::Color(s2::Color(102, 255, 102));
-		ee::RVG::Circle(center, m_node_capture->GetValue(), true);
+		s2::RVG::SetColor(s2::Color(102, 255, 102));
+		s2::RVG::Circle(center, m_node_capture->GetValue(), true);
 	}
 }
 

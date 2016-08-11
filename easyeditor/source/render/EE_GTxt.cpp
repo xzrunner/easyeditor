@@ -8,11 +8,12 @@
 #include "EE_DTex.h"
 #include "Config.h"
 #include "StringHelper.h"
-#include "EE_RVG.h"
 
 #include <dtex_cg.h>
 #include <gtxt.h>
 #include <shaderlab.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace ee
 {
@@ -133,22 +134,22 @@ render_decoration(const sm::mat4& mat, float x, float y, float w, float h, struc
 			left.y = right.y = ds->row_y + ds->row_h * 0.5f;
 			break;
 		}
-		RVG::Line(Math2D::TransVector(left, mat), Math2D::TransVector(right, mat));
+		s2::RVG::Line(Math2D::TransVector(left, mat), Math2D::TransVector(right, mat));
 	} else if (d->type == GRDT_BORDER || d->type == GRDT_BG) {
 		sm::vec2 min(x - hw, ds->row_y), 
 			   max(x + hw, ds->row_y + ds->row_h);
 		min = Math2D::TransVector(min, mat);
 		max = Math2D::TransVector(max, mat);
 		if (d->type == GRDT_BG) {
-			RVG::Rect(min, max, true);
+			s2::RVG::Rect(min, max, true);
 		} else if (ds->pos_type != GRPT_NULL) {
-			RVG::Line(min, sm::vec2(max.x, min.y));
-			RVG::Line(sm::vec2(min.x, max.y), max);
+			s2::RVG::Line(min, sm::vec2(max.x, min.y));
+			s2::RVG::Line(sm::vec2(min.x, max.y), max);
 			if (ds->pos_type == GRPT_BEGIN) {
-				RVG::Line(min, sm::vec2(min.x, max.y));
+				s2::RVG::Line(min, sm::vec2(min.x, max.y));
 			}
 			if (ds->pos_type == GRPT_END) {
-				RVG::Line(sm::vec2(max.x, min.y), max);
+				s2::RVG::Line(sm::vec2(max.x, min.y), max);
 			}
 		}
 	}

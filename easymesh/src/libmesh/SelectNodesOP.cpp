@@ -5,8 +5,9 @@
 
 #include <ee/panel_msg.h>
 #include <ee/FetchAllVisitor.h>
-#include <ee/EE_RVG.h>
 #include <ee/EditPanelImpl.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace emesh
 {
@@ -118,8 +119,8 @@ bool SelectNodesOP::OnDraw() const
 		points.push_back(nodes[i]->xy);
 
 	if (Mesh* mesh = static_cast<StagePanel*>(m_wnd)->GetMesh()) {
-		ee::RVG::Color(GREEN);
-		ee::RVG::Circles(points, mesh->GetNodeRegion(), true);
+		s2::RVG::SetColor(GREEN);
+		s2::RVG::Circles(points, mesh->GetNodeRegion(), true);
 	}
 
 	return false;

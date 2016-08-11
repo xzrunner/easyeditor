@@ -3,11 +3,11 @@
 
 #include <ee/SettingData.h>
 #include <ee/Config.h>
-#include <ee/EE_RVG.h>
 #include <ee/EE_GTxt.h>
 #include <ee/Math2D.h>
 
 #include <sprite2/RenderParams.h>
+#include <sprite2/S2_RVG.h>
 
 #include <gtxt.h>
 
@@ -97,7 +97,7 @@ void Symbol::DrawBackground(const ee::Sprite* sprite, const sm::mat4& mt) const
 	}
 
 	if (const Sprite* font = dynamic_cast<const Sprite*>(sprite)) {
-		ee::RVG::Color(s2::Color(179, 179, 179, 179));
+		s2::RVG::SetColor(s2::Color(179, 179, 179, 179));
 
 		int w, h;
 		font->GetSize(w, h);
@@ -108,7 +108,7 @@ void Symbol::DrawBackground(const ee::Sprite* sprite, const sm::mat4& mt) const
 		min = ee::Math2D::TransVector(min, mt);
 		max = ee::Math2D::TransVector(max, mt);
 
-		ee::RVG::Rect(min, max, true);
+		s2::RVG::Rect(min, max, true);
 	}
 }
 

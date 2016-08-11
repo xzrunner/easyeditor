@@ -4,7 +4,6 @@
 #include "FileLoader.h"
 
 #include <ee/EE_GTxt.h>
-#include <ee/EE_RVG.h>
 #include <ee/TPNode.h>
 #include <ee/Config.h>
 #include <ee/SpriteRenderer.h>
@@ -16,6 +15,7 @@
 
 #include <sprite2/ComplexSymbol.h>
 #include <sprite2/S2_Sprite.h>
+#include <sprite2/S2_RVG.h>
 
 #include <queue>
 
@@ -144,8 +144,8 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 		{
 			sm::vec2 min(m_clipbox.xmin, m_clipbox.ymin), 
 				max(m_clipbox.xmax, m_clipbox.ymax);
-			ee::RVG::Color(s2::Color(0, 204, 0));
-			ee::RVG::Rect(ee::Math2D::TransVector(min, p.mt), ee::Math2D::TransVector(max, p.mt), false);
+			s2::RVG::SetColor(s2::Color(0, 204, 0));
+			s2::RVG::Rect(ee::Math2D::TransVector(min, p.mt), ee::Math2D::TransVector(max, p.mt), false);
 		}
 	}
 }

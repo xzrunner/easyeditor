@@ -3,7 +3,8 @@
 
 #include <ee/Sprite.h>
 #include <ee/Math2D.h>
-#include <ee/EE_RVG.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace emodeling
 {
@@ -37,12 +38,12 @@ void FrictionJoint::Draw(DrawType type) const
 
 	if (type == e_selected || type == e_mouseOn)
 	{
-		ee::RVG::Color(s2::Color(255, 0, 0));
-		ee::RVG::DashLine(anchorA, anchorB);
-		ee::RVG::Color(s2::Color(102, 204, 102));
-		ee::RVG::DashLine(anchorA, m_body_a->m_sprite->GetPosition());
-		ee::RVG::Color(s2::Color(102, 102, 204));
-		ee::RVG::DashLine(anchorB, m_body_b->m_sprite->GetPosition());
+		s2::RVG::SetColor(s2::Color(255, 0, 0));
+		s2::RVG::DashLine(anchorA, anchorB);
+		s2::RVG::SetColor(s2::Color(102, 204, 102));
+		s2::RVG::DashLine(anchorA, m_body_a->m_sprite->GetPosition());
+		s2::RVG::SetColor(s2::Color(102, 102, 204));
+		s2::RVG::DashLine(anchorB, m_body_b->m_sprite->GetPosition());
 
 		DrawBodyFlag();
 	}
@@ -87,9 +88,9 @@ void FrictionJoint::DrawAnchor(const sm::vec2& pos, DrawType type) const
 		break;
 	}
 
-	ee::RVG::Color(color);
-	ee::RVG::Circle(pos, JOINT_RADIUS_IN, true);
-	ee::RVG::Circle(pos, JOINT_RADIUS_OUT, false);
+	s2::RVG::SetColor(color);
+	s2::RVG::Circle(pos, JOINT_RADIUS_IN, true);
+	s2::RVG::Circle(pos, JOINT_RADIUS_OUT, false);
 }
 
 }

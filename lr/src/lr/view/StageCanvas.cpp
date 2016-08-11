@@ -16,7 +16,6 @@
 #include <ee/SettingData.h>
 #include <ee/Camera.h>
 #include <ee/CameraMgr.h>
-#include <ee/EE_RVG.h>
 #include <ee/color_config.h>
 #include <ee/ScreenCache.h>
 #include <ee/cfg_const.h>
@@ -25,6 +24,8 @@
 
 #include <easyparticle3d.h>
 #include <easytext.h>
+
+#include <sprite2/S2_RVG.h>
 
 #include <algorithm>
 
@@ -133,13 +134,13 @@ void StageCanvas::DrawRegion() const
 {
 	SettingCfg* cfg = SettingCfg::Instance();
 
-	ee::RVG::LineWidth(2);
+	s2::RVG::LineWidth(2);
 
-	ee::RVG::Color(ee::LIGHT_GREY);
-	ee::RVG::Rect(sm::vec2(0, 0), cfg->m_map_width * 0.5f, cfg->m_map_height * 0.5f, false);
+	s2::RVG::SetColor(ee::LIGHT_GREY);
+	s2::RVG::Rect(sm::vec2(0, 0), cfg->m_map_width * 0.5f, cfg->m_map_height * 0.5f, false);
 
-	ee::RVG::Color(ee::LIGHT_RED);
-	ee::RVG::Rect(sm::vec2(cfg->m_view_dx, cfg->m_view_dy), cfg->m_view_width * 0.5f, cfg->m_view_height * 0.5f, false);
+	s2::RVG::SetColor(ee::LIGHT_RED);
+	s2::RVG::Rect(sm::vec2(cfg->m_view_dx, cfg->m_view_dy), cfg->m_view_width * 0.5f, cfg->m_view_height * 0.5f, false);
 
 	DrawPseudo3dBound();
 
@@ -165,8 +166,8 @@ void StageCanvas::DrawPseudo3dBound() const
 	}
 
 	if (!m_bound_pseudo3d.empty()) {
-		ee::RVG::Color(ee::LIGHT_GREEN);
-		ee::RVG::Polyline(m_bound_pseudo3d, true);
+		s2::RVG::SetColor(ee::LIGHT_GREEN);
+		s2::RVG::Polyline(m_bound_pseudo3d, true);
 	}
 }
 

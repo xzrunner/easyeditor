@@ -6,7 +6,8 @@
 #include <ee/Math2D.h>
 #include <ee/panel_msg.h>
 #include <ee/SpriteRenderer.h>
-#include <ee/EE_RVG.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace escale9
 {
@@ -83,10 +84,10 @@ bool ResizeBaseOP::OnDraw() const
 	sm::vec2 sz = m_symbol->GetSize().Size();
 	const float hw = sz.x * 0.5f, hh = sz.y * 0.5f;
 	const float r = REGION;
-	ee::RVG::Rect(sm::vec2(-hw, -hh), r, r, false);
-	ee::RVG::Rect(sm::vec2( hw, -hh), r, r, false);
-	ee::RVG::Rect(sm::vec2( hw,  hh), r, r, false);
-	ee::RVG::Rect(sm::vec2(-hw,  hh), r, r, false);
+	s2::RVG::Rect(sm::vec2(-hw, -hh), r, r, false);
+	s2::RVG::Rect(sm::vec2( hw, -hh), r, r, false);
+	s2::RVG::Rect(sm::vec2( hw,  hh), r, r, false);
+	s2::RVG::Rect(sm::vec2(-hw,  hh), r, r, false);
 
 	return false;
 }

@@ -1,7 +1,8 @@
 #include "ComposeGrids.h"
 
-#include <ee/EE_RVG.h>
 #include <ee/color_config.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace escale9
 {
@@ -18,8 +19,8 @@ void ComposeGrids::Draw()
 			p0.x = X + EDGE*i;
 			p0.y = Y + EDGE*j;
 			sm::vec2 p1(p0.x + EDGE, p0.y + EDGE);
-			ee::RVG::Color(ee::LIGHT_GREY);
-			ee::RVG::Rect(p0, p1, false);
+			s2::RVG::SetColor(ee::LIGHT_GREY);
+			s2::RVG::Rect(p0, p1, false);
 		}
 	}
 }

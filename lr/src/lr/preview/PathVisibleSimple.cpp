@@ -1,11 +1,12 @@
 #include "PathVisibleSimple.h"
 
-#include <ee/EE_RVG.h>
 #include <ee/color_config.h>
 #include <ee/BoundingBox.h>
 #include <ee/Math2D.h>
 
 #include <easyshape.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace lr
 {
@@ -63,14 +64,14 @@ void PathVisibleSimple::DebugDraw() const
 			Node* node = itr->second[i];
 			for (int j = 0, m = node->connections.size(); j < m; ++j) {
 				const Connection& conn = node->connections[j];
-				ee::RVG::Color(ee::BLACK);
-				ee::RVG::Line(node->pos, conn.n->pos);
+				s2::RVG::SetColor(ee::BLACK);
+				s2::RVG::Line(node->pos, conn.n->pos);
 			}
 		}
 	}
 
-	ee::RVG::Color(ee::SELECT_RED);
-	ee::RVG::Polyline(m_routes, false);
+	s2::RVG::SetColor(ee::SELECT_RED);
+	s2::RVG::Polyline(m_routes, false);
 }
 
 sm::vec2 PathVisibleSimple::TransIDToPos(int id) const

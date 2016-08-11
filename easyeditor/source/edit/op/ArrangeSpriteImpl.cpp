@@ -12,7 +12,6 @@
 #include "TranslateSpriteAOP.h"
 #include "ScaleSpriteAOP.h"
 #include "ShearSpriteAOP.h"
-#include "EE_RVG.h"
 #include "panel_msg.h"
 #include "RGBColorSettingDlg.h"
 #include "HSLColorSettingDlg.h"
@@ -31,6 +30,7 @@
 #include "PerspectiveSpriteState.h"
 
 #include <sprite2/RenderColor.h>
+#include <sprite2/S2_RVG.h>
 
 namespace ee
 {
@@ -397,8 +397,8 @@ void ArrangeSpriteImpl::OnDraw(const Camera& cam) const
 				sm::vec2 ctrl_nodes[4];
 				SpriteCtrlNode::GetSpriteCtrlNodesExt(selected, ctrl_nodes);
 				for (int i = 0; i < 4; ++i) {
-					RVG::Color(s2::Color(51, 204, 51));
-					RVG::Circle(ctrl_nodes[i], m_ctrl_node_radius, true);
+					s2::RVG::SetColor(s2::Color(51, 204, 51));
+					s2::RVG::Circle(ctrl_nodes[i], m_ctrl_node_radius, true);
 				}
 			}
 			else
@@ -406,20 +406,20 @@ void ArrangeSpriteImpl::OnDraw(const Camera& cam) const
 				sm::vec2 ctrl_nodes[8];
 				SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrl_nodes);
 				for (int i = 0; i < 4; ++i) {
-					RVG::Color(s2::Color(51, 204, 51));
-					RVG::Circle(ctrl_nodes[i], m_ctrl_node_radius, false);
+					s2::RVG::SetColor(s2::Color(51, 204, 51));
+					s2::RVG::Circle(ctrl_nodes[i], m_ctrl_node_radius, false);
 				}
 				for (int i = 4; i < 8; ++i) {
-					RVG::Color(s2::Color(51, 204, 51));
-					RVG::Circle(ctrl_nodes[i], m_ctrl_node_radius, true);
+					s2::RVG::SetColor(s2::Color(51, 204, 51));
+					s2::RVG::Circle(ctrl_nodes[i], m_ctrl_node_radius, true);
 				}
 			}
 
 			if (m_cfg.is_offset_open)
 			{
 				sm::vec2 offset = GetSprOffset(selected);
-				RVG::Color(s2::Color(204, 51, 51));
-				RVG::Circle(offset, m_ctrl_node_radius, true);
+				s2::RVG::SetColor(s2::Color(204, 51, 51));
+				s2::RVG::Circle(offset, m_ctrl_node_radius, true);
 			}
 		}
 	}

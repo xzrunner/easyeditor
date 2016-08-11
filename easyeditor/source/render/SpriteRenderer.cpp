@@ -4,7 +4,6 @@
 #include "Symbol.h"
 #include "Math2D.h"
 #include "BoundingBox.h"
-#include "EE_RVG.h"
 #include "color_config.h"
 #include "CameraMgr.h"
 #include "Camera.h"
@@ -17,6 +16,7 @@
 #include <sprite2/RFEdgeDetection.h>
 #include <sprite2/RFGaussianBlur.h>
 #include <sprite2/RFOuterGlow.h>
+#include <sprite2/S2_RVG.h>
 
 #include <shaderlab.h>
 
@@ -144,11 +144,11 @@ void SpriteRenderer::DrawImpl(const Sprite* spr,
 		for (int i = 0, n = bound.size(); i < n; ++i) {
 			bound[i] = Math2D::TransVector(bound[i], params.mt);
 		}
-		RVG::Color(BLACK);
-		RVG::LineWidth(4);
-		RVG::Polyline(bound, true);
-		RVG::Line(bound[0], bound[2]);
-		RVG::Line(bound[1], bound[3]);
+		s2::RVG::SetColor(BLACK);
+		s2::RVG::LineWidth(4);
+		s2::RVG::Polyline(bound, true);
+		s2::RVG::Line(bound[0], bound[2]);
+		s2::RVG::Line(bound[1], bound[3]);
 	}
 }
 

@@ -6,11 +6,11 @@
 #include <ee/Camera.h>
 #include <ee/CameraMgr.h>
 #include <ee/EE_DTex.h>
-#include <ee/EE_RVG.h>
 #include <ee/Config.h>
 #include <ee/color_config.h>
 
 #include <sprite2/RenderParams.h>
+#include <sprite2/S2_RVG.h>
 
 #include <easyui.h>
 
@@ -56,8 +56,8 @@ void StageCanvas::DrawGuideLines() const
 	int width, height;
 	window::QueryWindowViewSizeSJ::Instance()->Query(width, height);
 
-	ee::RVG::Color(ee::LIGHT_GREY);
-	ee::RVG::Rect(sm::vec2(0, 0), width * 0.5f, height * 0.5f, false);
+	s2::RVG::SetColor(ee::LIGHT_GREY);
+	s2::RVG::Rect(sm::vec2(0, 0), width * 0.5f, height * 0.5f, false);
 }
 
 }

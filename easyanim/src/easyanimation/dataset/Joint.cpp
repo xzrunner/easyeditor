@@ -1,10 +1,10 @@
 #include "Joint.h"
 
 #include <ee/Sprite.h>
-#include <ee/EE_RVG.h>
 #include <ee/Math2D.h>
 
 #include <sprite2/Color.h>
+#include <sprite2/S2_RVG.h>
 
 #include <assert.h>
 
@@ -46,10 +46,10 @@ Joint::~Joint()
 
 void Joint::Draw() const
 {
-	ee::RVG::Color(s2::Color(51, 204, 51, 128));
-	ee::RVG::Circle(GetWorldPos(), REGION, true);
-	ee::RVG::Color(s2::Color(204, 51, 51, 128));
-	ee::RVG::Circle(GetWorldPos(), REGION, false);
+	s2::RVG::SetColor(s2::Color(51, 204, 51, 128));
+	s2::RVG::Circle(GetWorldPos(), REGION, true);
+	s2::RVG::SetColor(s2::Color(204, 51, 51, 128));
+	s2::RVG::Circle(GetWorldPos(), REGION, false);
 	if (m_parent)
 	{
 		sm::vec2 s = GetWorldPos();
@@ -60,11 +60,11 @@ void Joint::Draw() const
 		sm::vec2 left = mid + ee::Math2D::RotateVectorRightAngle(s - mid, false);
 		sm::vec2 right = mid + ee::Math2D::RotateVectorRightAngle(s - mid, true);
 
-		ee::RVG::Color(s2::Color(204, 51, 51, 128));
-		ee::RVG::Line(s, left);
-		ee::RVG::Line(left, e);
-		ee::RVG::Line(e, right);
-		ee::RVG::Line(right, s);
+		s2::RVG::SetColor(s2::Color(204, 51, 51, 128));
+		s2::RVG::Line(s, left);
+		s2::RVG::Line(left, e);
+		s2::RVG::Line(e, right);
+		s2::RVG::Line(right, s);
 	}
 }
 

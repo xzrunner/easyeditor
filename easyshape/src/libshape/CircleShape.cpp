@@ -2,7 +2,8 @@
 #include "CirclePropertySetting.h"
 
 #include <ee/Math2D.h>
-#include <ee/EE_RVG.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace eshape
 {

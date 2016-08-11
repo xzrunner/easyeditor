@@ -30,15 +30,15 @@ void CosineShape::Translate(const sm::vec2& offset)
 // {
 // 	if (m_vertices.empty()) return;
 // 
-// 	ee::RVG::Color(color.mul);
-// 	ee::RVG::Polyline(m_midPoints, m_loop);
+// 	s2::RVG::SetColor(color.mul);
+// 	s2::RVG::Polyline(m_midPoints, m_loop);
 // 	if (ee::SettingData::ctl_pos_sz != 0) {
-// 		ee::RVG::Color(s2::Color(102, 204, 102));
-// 		ee::RVG::Circles(m_vertices, static_cast<float>(ee::SettingData::ctl_pos_sz), true);
+// 		s2::RVG::SetColor(s2::Color(102, 204, 102));
+// 		s2::RVG::Circles(m_vertices, static_cast<float>(ee::SettingData::ctl_pos_sz), true);
 // 	}
 // 	if (ee::SettingData::ctl_pos_sz != 0) {
-// 		ee::RVG::Color(s2::Color(204, 204, 102));
-// 		ee::RVG::Circles(m_midPoints, ee::SettingData::ctl_pos_sz * 0.5f, true);
+// 		s2::RVG::SetColor(s2::Color(204, 204, 102));
+// 		s2::RVG::Circles(m_midPoints, ee::SettingData::ctl_pos_sz * 0.5f, true);
 // 	}
 // }
 

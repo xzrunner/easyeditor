@@ -2,7 +2,6 @@
 #include "QueryWindowViewSizeSJ.h"
 
 #include <ee/sprite_msg.h>
-#include <ee/EE_RVG.h>
 #include <ee/color_config.h>
 #include <ee/Sprite.h>
 #include <ee/subject_id.h>
@@ -14,6 +13,7 @@
 #include <ee/SpriteRenderer.h>
 
 #include <sprite2/RenderParams.h>
+#include <sprite2/S2_RVG.h>
 
 #include <algorithm>
 
@@ -111,10 +111,10 @@ void AnchorMgr::DrawSprites(const s2::RenderParams& params) const
 
 void AnchorMgr::DrawNodes(const s2::RenderParams& params) const
 {
-	ee::RVG::Color(ee::LIGHT_GREY);
+	s2::RVG::SetColor(ee::LIGHT_GREY);
 	for (int i = 0; i < ANCHOR_COUNT; ++i) {
 		const Anchor& anchor = m_anchors[i];
-		ee::RVG::Circle(anchor.pos, RADIUS, true);
+		s2::RVG::Circle(anchor.pos, RADIUS, true);
 	}
 }
 

@@ -5,8 +5,9 @@
 #include <ee/MultiSpritesImpl.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/SpriteRenderer.h>
-#include <ee/EE_RVG.h>
 #include <ee/render_utility.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace eicon
 {
@@ -59,8 +60,8 @@ void StageCanvas::OnDrawSprites() const
 
 	m_stage->GetSymbol().Draw(s2::RenderParams(), &sprite);
 
-	ee::RVG::Color(s2::Color(255, 0, 0));
-	ee::RVG::Cross(sm::vec2(0, 0), 100, 100);
+	s2::RVG::SetColor(s2::Color(255, 0, 0));
+	s2::RVG::Cross(sm::vec2(0, 0), 100, 100);
 
 	m_stage->DrawEditOP();
 }

@@ -1,5 +1,6 @@
 #include "Box2DRender.h"
-#include "EE_RVG.h"
+
+#include <sprite2/S2_RVG.h>
 
 namespace ee
 {

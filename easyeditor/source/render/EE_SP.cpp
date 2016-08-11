@@ -1,8 +1,9 @@
 #include "EE_SP.h"
 #include "Sprite.h"
 #include "BoundingBox.h"
-#include "EE_RVG.h"
 #include "color_config.h"
+
+#include <sprite2/S2_RVG.h>
 
 #include <sp_null.h>
 #include <sp_region.h>
@@ -66,8 +67,8 @@ void SpatialPartition::Query(const sm::rect& region, std::vector<const Sprite*>&
 
 static void _render(float xmin, float ymin, float xmax, float ymax) 
 {
-	RVG::Color(LIGHT_GREEN);
-	RVG::Rect(sm::vec2(xmin, ymin), sm::vec2(xmax, ymax), false);
+	s2::RVG::SetColor(LIGHT_GREEN);
+	s2::RVG::Rect(sm::vec2(xmin, ymin), sm::vec2(xmax, ymax), false);
 }
 
 void SpatialPartition::DebugDraw() const

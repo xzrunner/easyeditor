@@ -4,9 +4,9 @@
 
 #include <ee/Math2D.h>
 #include <ee/SettingData.h>
-#include <ee/EE_RVG.h>
 
 #include <SM_Calc.h>
+#include <sprite2/S2_RVG.h>
 
 namespace eshape
 {
@@ -50,8 +50,8 @@ void ChainShape::Draw(const sm::mat4& mt, const s2::RenderColor& color) const
 		sm::vec2 left, right;
 		left = e + sm::rotate_vector(seg, - SM_PI / 6);
 		right = e + sm::rotate_vector(seg, SM_PI / 6);
-		ee::RVG::Line(e, left); 
-		ee::RVG::Line(e, right);
+		s2::RVG::Line(e, left); 
+		s2::RVG::Line(e, right);
 	}
 }
 

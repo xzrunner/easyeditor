@@ -3,8 +3,9 @@
 
 #include <ee/Math2D.h>
 #include <ee/SettingData.h>
-#include <ee/EE_RVG.h>
 #include <ee/JsonSerializer.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace emesh
 {
@@ -34,8 +35,8 @@ void NetworkShape::Draw(const sm::mat4& mt, const s2::RenderColor& color) const
 {
 	eshape::ChainShape::Draw(mt, color);
 
-	ee::RVG::Color(BLUE);
-	ee::RVG::Circles(m_inner_vertices, m_node_radius, true);
+	s2::RVG::SetColor(BLUE);
+	s2::RVG::Circles(m_inner_vertices, m_node_radius, true);
 }
 
 void NetworkShape::LoadFromFile(const Json::Value& value, const std::string& dir)

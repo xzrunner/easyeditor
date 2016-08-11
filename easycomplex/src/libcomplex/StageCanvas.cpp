@@ -8,7 +8,6 @@
 #include <ee/SceneNode.h>
 #include <ee/Config.h>
 #include <ee/EE_DTex.h>
-#include <ee/EE_RVG.h>
 #include <ee/SpriteRenderer.h>
 #include <ee/color_config.h>
 #include <ee/CameraMgr.h>
@@ -16,6 +15,8 @@
 
 #include <easyanim.h>
 #include <easytext.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace ecomplex
 {
@@ -66,15 +67,15 @@ void StageCanvas::OnDrawSprites() const
 
 	ee::ScreenCache::Instance()->Draw(ee::CameraMgr::Instance()->GetCamera());
 
-	ee::RVG::Color(s2::Color(0, 0.8f, 0));
+	s2::RVG::SetColor(s2::Color(0, 0.8f, 0));
 	const sm::rect& r = m_stage->GetSymbol()->m_clipbox;
-	ee::RVG::Rect(sm::vec2(r.xmin, r.ymin), sm::vec2(r.xmax, r.ymax), m_clipboxStyle.filling);
+	s2::RVG::Rect(sm::vec2(r.xmin, r.ymin), sm::vec2(r.xmax, r.ymax), m_clipboxStyle.filling);
 
 	if (Settings::bVisibleBGCross)
 	{
 		const float EDGE = 100;
-		ee::RVG::Color(ee::LIGHT_GREY);
-		ee::RVG::Cross(sm::vec2(0,0), EDGE, EDGE);
+		s2::RVG::SetColor(ee::LIGHT_GREY);
+		s2::RVG::Cross(sm::vec2(0,0), EDGE, EDGE);
 	}
 
 	m_stage->DrawEditOP();
@@ -106,16 +107,16 @@ void StageCanvas::OnDrawSprites() const
 	const sm::rect& clipbox = m_stage->GetSymbol()->m_clipbox;
 	sm::vec2 sz = clipbox.Size();
 	if (sz.x != 0 && sz.y != 0) {
-		ee::RVG::Color(s2::Color(0, 204, 0));
-		ee::RVG::LineWidth(2);
-		ee::RVG::Rect(sm::vec2(clipbox.xmin, clipbox.ymin), sm::vec2(clipbox.xmax, clipbox.ymax), false);
+		s2::RVG::SetColor(s2::Color(0, 204, 0));
+		s2::RVG::LineWidth(2);
+		s2::RVG::Rect(sm::vec2(clipbox.xmin, clipbox.ymin), sm::vec2(clipbox.xmax, clipbox.ymax), false);
 	}
 
 	if (Settings::bVisibleBGCross)
 	{
 		const float EDGE = 100;
-		ee::RVG::Color(ee::LIGHT_GREY);
-		ee::RVG::Cross(sm::vec2(0,0), EDGE, EDGE);
+		s2::RVG::SetColor(ee::LIGHT_GREY);
+		s2::RVG::Cross(sm::vec2(0,0), EDGE, EDGE);
 	}
 
 	ee::SceneNodeMgr::Instance()->Draw();
@@ -142,9 +143,9 @@ void StageCanvas::DrawBackground() const
 	}
 
 	if (Settings::bVisibleBGRect) {
-		ee::RVG::Color(s2::Color(204, 204, 204));
-		ee::RVG::LineWidth(2);
-		ee::RVG::Rect(sm::vec2(0, 0), ee::HALF_SCREEN_WIDTH, ee::HALF_SCREEN_HEIGHT, false);
+		s2::RVG::SetColor(s2::Color(204, 204, 204));
+		s2::RVG::LineWidth(2);
+		s2::RVG::Rect(sm::vec2(0, 0), ee::HALF_SCREEN_WIDTH, ee::HALF_SCREEN_HEIGHT, false);
 	}
 }
 

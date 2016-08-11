@@ -6,7 +6,6 @@
 #include "dataset/LayersMgr.h"
 #include "message/messages.h"
 
-#include <ee/EE_RVG.h>
 #include <ee/color_config.h>
 #include <ee/PlayControl.h>
 #include <ee/panel_msg.h>
@@ -14,6 +13,8 @@
 
 #include <easyanim.h>
 #include <easyparticle3d.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace eanim
 {
@@ -31,8 +32,8 @@ void PreviewCanvas::OnDrawSprites() const
 {
 	float xedge = GetSize().GetWidth() * 0.5f;
 	float yedge = GetSize().GetHeight() * 0.5f;
-	ee::RVG::Color(ee::LIGHT_GREY);
-	ee::RVG::Cross(sm::vec2(0,0), xedge, yedge);
+	s2::RVG::SetColor(ee::LIGHT_GREY);
+	s2::RVG::Cross(sm::vec2(0,0), xedge, yedge);
 
 	DrawStageData();
 }

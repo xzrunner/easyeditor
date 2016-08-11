@@ -10,8 +10,9 @@
 #include "EditPanelImpl.h"
 #include "MultiSpritesImpl.h"
 #include "PropertySettingPanel.h"
-#include "EE_RVG.h"
 #include "CameraMgr.h"
+
+#include <sprite2/S2_RVG.h>
 
 namespace ee
 {

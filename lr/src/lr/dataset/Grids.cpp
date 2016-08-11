@@ -1,8 +1,9 @@
 #include "Grids.h"
 
-#include <ee/EE_RVG.h>
 #include <ee/color_config.h>
 #include <ee/Math2D.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace lr
 {
@@ -21,16 +22,16 @@ void Grids::Draw() const
 	for (int i = 0, n = m_grids.size(); i < n; ++i)
 	{
 		const Grid& g = m_grids[i];
-		ee::RVG::Color(ee::LIGHT_GREY);
-		ee::RVG::Polyline(g.m_bird_bound, true);
-//		ee::RVG::Rect(g.m_flat_bound, ee::LIGHT_GREY_LINE);
+		s2::RVG::SetColor(ee::LIGHT_GREY);
+		s2::RVG::Polyline(g.m_bird_bound, true);
+//		s2::RVG::Rect(g.m_flat_bound, ee::LIGHT_GREY_LINE);
 	}
-//	ee::RVG::Polyline(m_flat_bound, ee::LIGHT_GREY, true);
+//	s2::RVG::Polyline(m_flat_bound, ee::LIGHT_GREY, true);
 
 	for (int i = 0, n = m_debug_draw_grids.size(); i < n; ++i) {
 		const Grid& g = m_grids[m_debug_draw_grids[i]];
-		ee::RVG::Color(ee::BLUE);
-		ee::RVG::Polyline(g.m_bird_bound, true);
+		s2::RVG::SetColor(ee::BLUE);
+		s2::RVG::Polyline(g.m_bird_bound, true);
 	}
 }
 

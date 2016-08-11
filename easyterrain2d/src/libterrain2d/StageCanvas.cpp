@@ -6,11 +6,12 @@
 #include <ee/render_utility.h>
 #include <ee/SpriteRenderer.h>
 #include <ee/DrawSpritesVisitor.h>
-#include <ee/EE_RVG.h>
 #include <ee/Camera.h>
 #include <ee/CameraMgr.h>
 #include <ee/color_config.h>
 #include <ee/EditPanelImpl.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace eterrain2d
 {
@@ -70,9 +71,9 @@ void StageCanvas::OnTimer()
 
 void StageCanvas::DrawBG() const
 {
-	ee::RVG::Color(ee::LIGHT_GREY);
+	s2::RVG::SetColor(ee::LIGHT_GREY);
 	const float EDGE = 100;
-	ee::RVG::Cross(sm::vec2(0,0), EDGE, EDGE);
+	s2::RVG::Cross(sm::vec2(0,0), EDGE, EDGE);
 }
 
 void StageCanvas::Update()

@@ -5,7 +5,8 @@
 
 #include <ee/StringHelper.h>
 #include <ee/Math2D.h>
-#include <ee/EE_RVG.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace emodeling
 {
@@ -106,10 +107,10 @@ void Fixture::Draw(const sm::mat4& mt, const s2::Color& cFace, const s2::Color& 
 	{
 		sm::vec2 c = ee::Math2D::TransVector(circle->center, mt);
 		float r = ee::Math2D::TransLen(circle->radius, mt);
-		ee::RVG::Color(cFace);
-		ee::RVG::Circle(c, r, true);
-		ee::RVG::Color(cEdge);
-		ee::RVG::Circle(c, r, false, 32);
+		s2::RVG::SetColor(cFace);
+		s2::RVG::Circle(c, r, true);
+		s2::RVG::SetColor(cEdge);
+		s2::RVG::Circle(c, r, false, 32);
 	}
 	else if (eshape::RectShape* rect = dynamic_cast<eshape::RectShape*>(m_shape))
 	{
@@ -117,9 +118,9 @@ void Fixture::Draw(const sm::mat4& mt, const s2::Color& cFace, const s2::Color& 
 			max(rect->m_rect.xmax, rect->m_rect.ymax);
 		min = ee::Math2D::TransVector(min, mt);
 		max = ee::Math2D::TransVector(max, mt);
-		ee::RVG::Color(cFace);
-		ee::RVG::Rect(min, max, true);
-		ee::RVG::Rect(min, max, false);
+		s2::RVG::SetColor(cFace);
+		s2::RVG::Rect(min, max, true);
+		s2::RVG::Rect(min, max, false);
 	}
 	else if (eshape::PolygonShape* polygon = dynamic_cast<eshape::PolygonShape*>(m_shape))
 	{
@@ -127,15 +128,15 @@ void Fixture::Draw(const sm::mat4& mt, const s2::Color& cFace, const s2::Color& 
 		ee::Math2D::TransVertices(mt, polygon->GetVertices(), vertices);
 		// todo draw with triangles
 //		ee::PrimitiveDraw::DrawPolygon(vertices, cFace);
-		ee::RVG::Color(cEdge);
-		ee::RVG::Polyline(vertices, true);
+		s2::RVG::SetColor(cEdge);
+		s2::RVG::Polyline(vertices, true);
 	}
 	else if (eshape::ChainShape* chain = dynamic_cast<eshape::ChainShape*>(m_shape))
 	{
 		std::vector<sm::vec2> vertices;
 		ee::Math2D::TransVertices(mt, chain->GetVertices(), vertices);
-		ee::RVG::Color(cEdge);
-		ee::RVG::Polyline(vertices, chain->IsClosed());
+		s2::RVG::SetColor(cEdge);
+		s2::RVG::Polyline(vertices, chain->IsClosed());
 	}
 }
 

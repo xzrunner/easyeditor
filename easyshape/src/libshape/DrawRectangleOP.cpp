@@ -2,7 +2,8 @@
 
 #include <ee/EditPanelImpl.h>
 #include <ee/panel_msg.h>
-#include <ee/EE_RVG.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace eshape
 {
@@ -51,7 +52,7 @@ bool DrawRectangleOP::OnDraw() const
 	if (ee::ZoomViewOP::OnDraw()) return true;
 
 	if (m_first_pos.IsValid() && m_curr_pos.IsValid()) {
-		ee::RVG::Rect(m_first_pos, m_curr_pos, false);
+		s2::RVG::Rect(m_first_pos, m_curr_pos, false);
 	}
 
 	return false;

@@ -1,9 +1,10 @@
 #include "RectMgr.h"
 
-#include <ee/EE_RVG.h>
 #include <ee/color_config.h>
 #include <ee/Math2D.h>
 #include <ee/std_functor.h>
+
+#include <sprite2/S2_RVG.h>
 
 #include <algorithm>
 
@@ -53,11 +54,11 @@ void RectMgr::Draw() const
 	{
 		sm::vec2 min(m_rects[i]->xmin, m_rects[i]->ymin),
 			max(m_rects[i]->xmax, m_rects[i]->ymax);
-		ee::RVG::Color(ee::LIGHT_RED);
-		ee::RVG::Rect(min, max, true);
-		ee::RVG::LineWidth(1);
-		ee::RVG::Rect(min, max, true);
-		ee::RVG::LineWidth(2);
+		s2::RVG::SetColor(ee::LIGHT_RED);
+		s2::RVG::Rect(min, max, true);
+		s2::RVG::LineWidth(1);
+		s2::RVG::Rect(min, max, true);
+		s2::RVG::LineWidth(2);
 	}
 }
 

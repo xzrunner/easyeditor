@@ -5,9 +5,10 @@
 #include <ee/SpriteRenderer.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/Sprite.h>
-#include <ee/EE_RVG.h>
 #include <ee/DrawSpritesVisitor.h>
 #include <ee/DrawShapesVisitor.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace enav
 {
@@ -20,10 +21,10 @@ StageCanvas::StageCanvas(StagePanel* stage)
 
 void StageCanvas::OnDrawSprites() const
 {
-	ee::RVG::Color(s2::Color(204, 204, 204));
-	ee::RVG::LineWidth(2);
+	s2::RVG::SetColor(s2::Color(204, 204, 204));
+	s2::RVG::LineWidth(2);
 	const sm::rect& r = m_stage->GetRegion();
-	ee::RVG::Rect(sm::vec2(r.xmin, r.ymin), sm::vec2(r.xmax, r.ymax), false);
+	s2::RVG::Rect(sm::vec2(r.xmin, r.ymin), sm::vec2(r.xmax, r.ymax), false);
 
 	m_stage->TraverseSprites(ee::DrawSpritesVisitor(r, 1), ee::DT_VISIBLE);
 	m_stage->TraverseShapes(ee::DrawShapesVisitor(r), ee::DT_VISIBLE);

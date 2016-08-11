@@ -2,7 +2,8 @@
 #include "StagePanel.h"
 
 #include <ee/SpriteRenderer.h>
-#include <ee/EE_RVG.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace eimage
 {
@@ -20,8 +21,8 @@ void StageCanvas::OnDrawSprites() const
 		ee::SpriteRenderer::Draw(s);
 	}
 
-	ee::RVG::Color(s2::Color(255, 0, 0));
-	ee::RVG::Cross(sm::vec2(0, 0), 100, 100);
+	s2::RVG::SetColor(s2::Color(255, 0, 0));
+	s2::RVG::Cross(sm::vec2(0, 0), 100, 100);
 
 	m_stage->DrawEditOP();
 }

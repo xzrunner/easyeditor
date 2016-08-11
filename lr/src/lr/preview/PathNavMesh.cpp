@@ -3,10 +3,11 @@
 #include <ee/BoundingBox.h>
 #include <ee/Math2D.h>
 #include <ee/color_config.h>
-#include <ee/EE_RVG.h>
 #include <ee/Triangulation.h>
 
 #include <easyshape.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace lr
 {
@@ -77,8 +78,8 @@ void PathNavMesh::DebugDraw() const
 		polyline.push_back(m_tris[i++]);
 		polyline.push_back(m_tris[i++]);
 		polyline.push_back(m_tris[i++]);
-		ee::RVG::Color(ee::LIGHT_RED);
-		ee::RVG::Polyline(polyline, true);
+		s2::RVG::SetColor(ee::LIGHT_RED);
+		s2::RVG::Polyline(polyline, true);
 	}
 }
 

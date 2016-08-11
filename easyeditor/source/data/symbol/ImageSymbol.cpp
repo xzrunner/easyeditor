@@ -3,7 +3,6 @@
 #include "Image.h"
 #include "Sprite.h"
 #include "ImageData.h"
-#include "EE_RVG.h"
 #include "CameraMgr.h"
 #include "ScreenCache.h"
 #include "Camera.h"
@@ -11,6 +10,7 @@
 
 #include <sprite2/ImageSymbol.h>
 #include <sprite2/RenderParams.h>
+#include <sprite2/S2_RVG.h>
 
 namespace ee
 {

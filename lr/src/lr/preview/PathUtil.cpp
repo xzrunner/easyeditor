@@ -1,7 +1,8 @@
 #include "PathUtil.h"
 
-#include <ee/EE_RVG.h>
 #include <ee/color_config.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace lr
 {
@@ -40,9 +41,9 @@ void VisitedList::DebugDraw() const
 		= m_data.begin();
 	for ( ; itr != m_data.end(); ++itr) {
 		sm::vec2 pos = m_nw->TransIDToPos((*itr)->m_id);
-		ee::RVG::Color(ee::MID_RED);
-		ee::RVG::PointSize(5);
-		ee::RVG::Point(pos);
+		s2::RVG::SetColor(ee::MID_RED);
+		s2::RVG::PointSize(5);
+		s2::RVG::Point(pos);
 	}
 }
 

@@ -2,13 +2,14 @@
 #include "StagePanel2D.h"
 #include "Shader2D.h"
 
-#include <ee/EE_RVG.h>
 #include <ee/Sprite.h>
 #include <ee/SpriteRenderer.h>
 #include <ee/Symbol.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/color_config.h>
 #include <ee/cfg_const.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace eshader
 {
@@ -57,8 +58,8 @@ void StageCanvas2D::OnDrawSprites() const
 
 void StageCanvas2D::DrawBackground() const
 {
-	ee::RVG::Color(ee::LIGHT_RED);
-	ee::RVG::Rect(sm::vec2(0, 0), ee::HALF_SCREEN_WIDTH, ee::HALF_SCREEN_HEIGHT, false);
+	s2::RVG::SetColor(ee::LIGHT_RED);
+	s2::RVG::Rect(sm::vec2(0, 0), ee::HALF_SCREEN_WIDTH, ee::HALF_SCREEN_HEIGHT, false);
 }
 
 void StageCanvas2D::DrawSprites() const

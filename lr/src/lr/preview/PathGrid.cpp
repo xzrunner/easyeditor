@@ -1,9 +1,10 @@
 #include "PathGrid.h"
 
 #include <ee/Sprite.h>
-#include <ee/EE_RVG.h>
 #include <ee/color_config.h>
 #include <ee/Math2D.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace lr
 {
@@ -42,8 +43,8 @@ void PathGrid::QueryRoute(const sm::vec2& start, const sm::vec2& end)
 void PathGrid::DebugDraw() const
 {
 	m_nw.DebugDraw();	
-	ee::RVG::Color(ee::LIGHT_RED);
-	ee::RVG::Polyline(m_routes, false);
+	s2::RVG::SetColor(ee::LIGHT_RED);
+	s2::RVG::Polyline(m_routes, false);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -153,8 +154,8 @@ DebugDraw() const
 			}
 			sm::vec2 p0(x * m_width + dx, y * m_height + dy);
 			sm::vec2 p1(p0.x + m_width, p0.y + m_height);
-			ee::RVG::Color(ee::LIGHT_GREEN);
-			ee::RVG::Rect(p0, p1, true);
+			s2::RVG::SetColor(ee::LIGHT_GREEN);
+			s2::RVG::Rect(p0, p1, true);
 		}
 	}
 

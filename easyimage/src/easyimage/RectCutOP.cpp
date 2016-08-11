@@ -3,10 +3,11 @@
 
 #include <ee/panel_msg.h>
 #include <ee/Math2D.h>
-#include <ee/EE_RVG.h>
 #include <ee/color_config.h>
 #include <ee/Sprite.h>
 #include <ee/Symbol.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace eimage
 {
@@ -204,8 +205,8 @@ bool RectCutOP::OnDraw() const
 {
 	if (ee::ZoomViewOP::OnDraw()) return true;
 
-	ee::RVG::Color(s2::Color(255, 0, 0));
-	ee::RVG::Cross(sm::vec2(0, 0), 100, 100);
+	s2::RVG::SetColor(s2::Color(255, 0, 0));
+	s2::RVG::Cross(sm::vec2(0, 0), 100, 100);
 
 	if (!m_stage->GetImage()) return false;
 
@@ -213,20 +214,20 @@ bool RectCutOP::OnDraw() const
 
 	if (m_first_pos.IsValid() && m_curr_pos.IsValid())
 	{
-		ee::RVG::Color(ee::LIGHT_RED);
-		ee::RVG::Rect(m_first_pos, m_curr_pos, false);
+		s2::RVG::SetColor(ee::LIGHT_RED);
+		s2::RVG::Rect(m_first_pos, m_curr_pos, false);
 	}
 
 	DrawCaptureLine();
 
 	if (m_rect_selected) {
-		ee::RVG::Color(ee::LIGHT_GREEN);
-		ee::RVG::Rect(sm::vec2(m_rect_selected->xmin, m_rect_selected->ymin), 
+		s2::RVG::SetColor(ee::LIGHT_GREEN);
+		s2::RVG::Rect(sm::vec2(m_rect_selected->xmin, m_rect_selected->ymin), 
 			sm::vec2(m_rect_selected->xmax, m_rect_selected->ymax), true);
 	}
 	if (m_node_selected.rect) {
-		ee::RVG::Color(ee::LIGHT_GREEN);
-		ee::RVG::Rect(sm::vec2(m_node_selected.rect->xmin, m_node_selected.rect->ymin), 
+		s2::RVG::SetColor(ee::LIGHT_GREEN);
+		s2::RVG::Rect(sm::vec2(m_node_selected.rect->xmin, m_node_selected.rect->ymin), 
 			sm::vec2(m_node_selected.rect->xmax, m_node_selected.rect->ymax), true);
 	}
 
@@ -272,16 +273,16 @@ void RectCutOP::DrawCaptureLine() const
 	{
 		sm::vec2 p0(m_captured.x, -EDGE);
 		sm::vec2 p1(m_captured.x, EDGE);
-		ee::RVG::Color(s2::Color(0, 0, 0));
-		ee::RVG::DashLine(p0, p1);
+		s2::RVG::SetColor(s2::Color(0, 0, 0));
+		s2::RVG::DashLine(p0, p1);
 	}
 
 	if (m_captured.y != FLT_MAX)
 	{
 		sm::vec2 p0(-EDGE, m_captured.y);
 		sm::vec2 p1(EDGE, m_captured.y);
-		ee::RVG::Color(s2::Color(0, 0, 0));
-		ee::RVG::DashLine(p0, p1);
+		s2::RVG::SetColor(s2::Color(0, 0, 0));
+		s2::RVG::DashLine(p0, p1);
 	}
 }
 
@@ -332,9 +333,9 @@ RectCutOP::Cross::Cross()
 
 void RectCutOP::Cross::Draw() const
 {
-	ee::RVG::Color(ee::BLACK);
-	ee::RVG::Circle(pos, RADIUS, false);
-	ee::RVG::Cross(pos, LENGTH);
+	s2::RVG::SetColor(ee::BLACK);
+	s2::RVG::Circle(pos, RADIUS, false);
+	s2::RVG::Cross(pos, LENGTH);
 }
 
 bool RectCutOP::Cross::Contain(const sm::vec2& p) const

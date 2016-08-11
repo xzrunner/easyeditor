@@ -6,11 +6,11 @@
 
 #include <ee/Math2D.h>
 #include <ee/panel_msg.h>
-#include <ee/EE_RVG.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/EditPanelImpl.h>
 
 #include <sprite2/RenderParams.h>
+#include <sprite2/S2_RVG.h>
 
 namespace emesh
 {
@@ -125,10 +125,10 @@ bool EditNWOP::OnDraw() const
 		MeshRenderer::DrawInfoXY(mesh);
 	}
 
-	ee::RVG::Color(s2::Color(51, 204, 51));
-	ee::RVG::Cross(m_center, CENTER_EDGE);
-	ee::RVG::Color(s2::Color(51, 102, 204));
-	ee::RVG::Circle(m_center, CENTER_RADIUS, true);
+	s2::RVG::SetColor(s2::Color(51, 204, 51));
+	s2::RVG::Cross(m_center, CENTER_EDGE);
+	s2::RVG::SetColor(s2::Color(51, 102, 204));
+	s2::RVG::Circle(m_center, CENTER_RADIUS, true);
 
 	if (SelectNodesOP::OnDraw())
 		return true;

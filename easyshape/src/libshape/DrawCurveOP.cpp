@@ -3,9 +3,9 @@
 
 #include <ee/EditPanelImpl.h>
 #include <ee/panel_msg.h>
-#include <ee/EE_RVG.h>
 
 #include <sprite2/Color.h>
+#include <sprite2/S2_RVG.h>
 
 namespace eshape
 {
@@ -68,9 +68,9 @@ bool DrawCurveOP::OnDraw() const
 	if (ee::ZoomViewOP::OnDraw()) return true;
 
 	if (!m_curve.empty()) {
-		ee::RVG::Color(s2::Color(0, 0, 0));
-		ee::RVG::LineWidth(1);
-		ee::RVG::Polyline(m_curve, false);
+		s2::RVG::SetColor(s2::Color(0, 0, 0));
+		s2::RVG::LineWidth(1);
+		s2::RVG::Polyline(m_curve, false);
 	}
 
 	return false;

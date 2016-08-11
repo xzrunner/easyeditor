@@ -4,9 +4,10 @@
 
 #include <ee/Sprite.h>
 #include <ee/Symbol.h>
-#include <ee/EE_RVG.h>
 #include <ee/color_config.h>
 #include <ee/SpriteRenderer.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace sg
 {
@@ -67,8 +68,8 @@ void SymbolRender::DrawGrass(const ee::Symbol& symbol,
 		sm::rect r = grass->GetSymbol().GetSize();
 
 		float half_edge = info->size * EDGE * 0.5f;
-		ee::RVG::Color(ee::LIGHT_GREEN);
-		ee::RVG::Rect(p, half_edge, half_edge, true);
+		s2::RVG::SetColor(ee::LIGHT_GREEN);
+		s2::RVG::Rect(p, half_edge, half_edge, true);
 	}
 	else
 	{
@@ -99,8 +100,8 @@ void SymbolRender::DrawGrids(const ee::Symbol& symbol,
 		m_stage->TransGridPosToCoords(row, col, pos);
 
 		float half_edge = info->size * EDGE * 0.5f;
-		ee::RVG::Color(color);
- 		ee::RVG::Rect(pos, half_edge, half_edge, true);
+		s2::RVG::SetColor(color);
+ 		s2::RVG::Rect(pos, half_edge, half_edge, true);
 	}
 	else
 	{

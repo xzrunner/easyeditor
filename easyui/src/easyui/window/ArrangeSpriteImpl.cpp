@@ -3,7 +3,6 @@
 #include "StagePanel.h"
 #include "MoveSpriteCenterState.h"
 
-#include <ee/EE_RVG.h>
 #include <ee/SpriteSelection.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/Camera.h>
@@ -14,6 +13,8 @@
 
 #include <easyui.h>
 #include <easycomplex.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace eui
 {
@@ -67,10 +68,10 @@ void ArrangeSpriteImpl::OnDraw(const ee::Camera& cam) const
 	if (m_selected) {
 		sm::vec2 pos = m_selected->GetPosition();
 		m_center_node_radius = std::min(CENTER_NODE_RADIUS * cam.GetScale(), MAX_CENTER_NODE_RADIUS);
-		ee::RVG::Color(ee::RED);
-		ee::RVG::Circle(pos, m_center_node_radius, false);
-		ee::RVG::Color(ee::GREEN);
-		ee::RVG::Cross(pos, m_center_node_radius * 2, m_center_node_radius * 2);
+		s2::RVG::SetColor(ee::RED);
+		s2::RVG::Circle(pos, m_center_node_radius, false);
+		s2::RVG::SetColor(ee::GREEN);
+		s2::RVG::Cross(pos, m_center_node_radius * 2, m_center_node_radius * 2);
 	}
 }
 

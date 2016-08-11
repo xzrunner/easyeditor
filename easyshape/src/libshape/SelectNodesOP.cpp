@@ -5,10 +5,11 @@
 #include <ee/EditPanelImpl.h>
 #include <ee/MultiShapesImpl.h>
 #include <ee/Math2D.h>
-#include <ee/EE_RVG.h>
 #include <ee/SettingData.h>
 #include <ee/std_functor.h>
 #include <ee/panel_msg.h>
+
+#include <sprite2/S2_RVG.h>
 
 #include <algorithm>
 
@@ -156,8 +157,8 @@ bool SelectNodesOP::OnDraw() const
 		copy(selectedNodes.begin(), selectedNodes.end(), back_inserter(nodes));
 	}
 
-	ee::RVG::Color(s2::Color(204, 102, 102));
-	ee::RVG::Circles(nodes, GetThreshold(), true);
+	s2::RVG::SetColor(s2::Color(204, 102, 102));
+	s2::RVG::Circles(nodes, GetThreshold(), true);
 
 	return false;
 }

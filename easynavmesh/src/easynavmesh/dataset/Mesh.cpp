@@ -1,7 +1,8 @@
 #include "Mesh.h"
 
 #include <ee/Triangulation.h>
-#include <ee/EE_RVG.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace enav
 {
@@ -37,10 +38,10 @@ void Mesh::Draw() const
 // 		tri.push_back(m_triangles[i]);
 // 		tri.push_back(m_triangles[i+1]);
 // 		tri.push_back(m_triangles[i+2]);
-// 		ee::RVG::Triangles()
+// 		s2::RVG::Triangles()
 // 	}
 
-	ee::RVG::Triangles(m_triangles);
+	s2::RVG::Triangles(m_triangles);
 }
 
 }

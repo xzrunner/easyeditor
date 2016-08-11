@@ -6,9 +6,10 @@
 #include <ee/EditPanelImpl.h>
 #include <ee/Math2D.h>
 #include <ee/panel_msg.h>
-#include <ee/EE_RVG.h>
 #include <ee/color_config.h>
 #include <ee/Image.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace eicon
 {
@@ -118,10 +119,10 @@ bool EditQuadOP::OnDraw() const
 
 	float w = img->GetClippedWidth(),
 		h = img->GetClippedHeight();
-	ee::RVG::Color(ee::LIGHT_RED);
-	ee::RVG::LineWidth(1);
-	ee::RVG::Rect(sm::vec2(0, 0), w * 0.5f, h * 0.5f, false);
-	ee::RVG::LineWidth(2);
+	s2::RVG::SetColor(ee::LIGHT_RED);
+	s2::RVG::LineWidth(1);
+	s2::RVG::Rect(sm::vec2(0, 0), w * 0.5f, h * 0.5f, false);
+	s2::RVG::LineWidth(2);
 
 	QuadIcon* quad_icon = static_cast<QuadIcon*>(icon);
 
@@ -130,11 +131,11 @@ bool EditQuadOP::OnDraw() const
 		screen.push_back(quad_icon->GetScreen()[i]);
 	}
 
-	ee::RVG::Color(ee::LIGHT_GREEN);
-	ee::RVG::Polyline(screen, true);
+	s2::RVG::SetColor(ee::LIGHT_GREEN);
+	s2::RVG::Polyline(screen, true);
 	for (int i = 0; i < 4; ++i) {
-		ee::RVG::Color(ee::LIGHT_GREEN);
-		ee::RVG::Rect(screen[i], CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, true);
+		s2::RVG::SetColor(ee::LIGHT_GREEN);
+		s2::RVG::Rect(screen[i], CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, true);
 	}
 
 	return false;

@@ -3,12 +3,13 @@
 #include "color_config.h"
 
 #include <ee/Symbol.h>
-#include <ee/EE_RVG.h>
 #include <ee/Math2D.h>
 #include <ee/std_functor.h>
 #include <ee/JsonSerializer.h>
 
 #include <shaderlab.h>
+
+#include <sprite2/S2_RVG.h>
 
 #include <set>
 #include <algorithm>

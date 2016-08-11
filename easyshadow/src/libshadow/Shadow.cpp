@@ -2,11 +2,12 @@
 #include "ShadowShader.h"
 
 #include <ee/JsonSerializer.h>
-#include <ee/EE_RVG.h>
 #include <ee/Triangulation.h>
 #include <ee/Math2D.h>
 
 #include <shaderlab.h>
+
+#include <sprite2/S2_RVG.h>
 
 #include <assert.h>
 
@@ -59,10 +60,10 @@ void Shadow::Draw(const sm::mat4& mt, float alpha) const
 
 	std::vector<sm::vec2> tris;
 	ee::Math2D::TransVertices(mt, m_tris, tris);
-	ee::RVG::Triangles(tris, m_colors);
+	s2::RVG::Triangles(tris, m_colors);
 
-// 	ee::RVG::Polyline(mt, m_inner_loop, ee::LIGHT_RED, true);
-// 	ee::RVG::Polyline(mt, m_outer_loop, ee::LIGHT_GREEN, true);
+// 	s2::RVG::Polyline(mt, m_inner_loop, ee::LIGHT_RED, true);
+// 	s2::RVG::Polyline(mt, m_outer_loop, ee::LIGHT_GREEN, true);
 
 //	shader_mgr->SetShapeShader(0);
 	mgr->SetShader(sl::SHAPE2);

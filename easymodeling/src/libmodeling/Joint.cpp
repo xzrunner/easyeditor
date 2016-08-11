@@ -4,7 +4,8 @@
 #include <ee/StringHelper.h>
 #include <ee/Sprite.h>
 #include <ee/Math2D.h>
-#include <ee/EE_RVG.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace emodeling
 {
@@ -50,10 +51,10 @@ void Joint::DrawBodyFlag(const sm::vec2& pos) const
 	vertices[1].x += edge;
 	vertices[2].y -= edge;
 	vertices[3].y += edge;
-	ee::RVG::Color(s2::Color(0.4f, 0.8f, 0.8f));
-	ee::RVG::LineWidth(1);
-	ee::RVG::Lines(vertices);
-	ee::RVG::LineWidth(2);
+	s2::RVG::SetColor(s2::Color(0.4f, 0.8f, 0.8f));
+	s2::RVG::LineWidth(1);
+	s2::RVG::Lines(vertices);
+	s2::RVG::LineWidth(2);
 }
 
 }

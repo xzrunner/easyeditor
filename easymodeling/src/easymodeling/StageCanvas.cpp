@@ -6,7 +6,8 @@
 #include <ee/FetchAllVisitor.h>
 #include <ee/SpriteRenderer.h>
 #include <ee/Sprite.h>
-#include <ee/EE_RVG.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace emodeling
 {
@@ -55,10 +56,10 @@ void StageCanvas::DrawCrossLine() const
 	vertices[1].x = halfEdge;
 	vertices[2].y = -halfEdge;
 	vertices[3].y = halfEdge;
-	ee::RVG::Color(s2::Color(0.7f, 0.9f, 0.7f));
-	ee::RVG::LineWidth(1);
-	ee::RVG::Lines(vertices);
-	ee::RVG::LineWidth(2);
+	s2::RVG::SetColor(s2::Color(0.7f, 0.9f, 0.7f));
+	s2::RVG::LineWidth(1);
+	s2::RVG::Lines(vertices);
+	s2::RVG::LineWidth(2);
 }
 
 void StageCanvas::DrawLines() const
@@ -79,10 +80,10 @@ void StageCanvas::DrawLines() const
 			vertices.push_back(sm::vec2(-halfEdge, y));
 			vertices.push_back(sm::vec2(halfEdge, y));
 		}
-		ee::RVG::Color(s2::Color(0.7f, 0.9f, 0.7f));
-		ee::RVG::LineWidth(1);
-		ee::RVG::Lines(vertices);
-		ee::RVG::LineWidth(2);
+		s2::RVG::SetColor(s2::Color(0.7f, 0.9f, 0.7f));
+		s2::RVG::LineWidth(1);
+		s2::RVG::Lines(vertices);
+		s2::RVG::LineWidth(2);
 	}
 	// red
 	{
@@ -99,10 +100,10 @@ void StageCanvas::DrawLines() const
 			vertices.push_back(sm::vec2(-halfEdge, y));
 			vertices.push_back(sm::vec2(halfEdge, y));
 		}
-		ee::RVG::Color(s2::Color(0.9f, 0.7f, 0.7f));
-		ee::RVG::LineWidth(1);
-		ee::RVG::Lines(vertices);
-		ee::RVG::LineWidth(2);
+		s2::RVG::SetColor(s2::Color(0.9f, 0.7f, 0.7f));
+		s2::RVG::LineWidth(1);
+		s2::RVG::Lines(vertices);
+		s2::RVG::LineWidth(2);
 	}
 }
 

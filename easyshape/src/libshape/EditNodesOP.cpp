@@ -4,10 +4,11 @@
 
 #include <ee/panel_msg.h>
 #include <ee/EditPanelImpl.h>
-#include <ee/EE_RVG.h>
 #include <ee/CosineSmooth.h>
 #include <ee/SettingData.h>
 #include <ee/DouglasPeucker.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace eshape
 {
@@ -86,10 +87,10 @@ bool EditNodesOP::OnDraw() const
 	const float radius = ee::SettingData::ctl_pos_sz == 0 ? 3 : ee::SettingData::ctl_pos_sz;
 	for (size_t i = 0, n = m_buffer.size(); i < n; ++i)
 	{
-		ee::RVG::Color(s2::Color(204, 51, 51));
-		ee::RVG::Polyline(m_buffer[i].dst, false);
-		ee::RVG::Color(s2::Color(51, 51, 204));
-		ee::RVG::Circles(m_buffer[i].dst, radius, true);
+		s2::RVG::SetColor(s2::Color(204, 51, 51));
+		s2::RVG::Polyline(m_buffer[i].dst, false);
+		s2::RVG::SetColor(s2::Color(51, 51, 204));
+		s2::RVG::Circles(m_buffer[i].dst, radius, true);
 	}
 
 	return false;

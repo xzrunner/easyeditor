@@ -4,7 +4,8 @@
 #include <ee/DrawSpritesVisitor.h>
 #include <ee/Camera.h>
 #include <ee/CameraMgr.h>
-#include <ee/EE_RVG.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace eui
 {
@@ -30,8 +31,8 @@ void StageCanvas::OnDrawSprites() const
 
 void StageCanvas::DrawGuideLines() const
 {
-	ee::RVG::Color(s2::Color(255, 0, 0));
-	ee::RVG::Cross(sm::vec2(0, 0), 100, 100);
+	s2::RVG::SetColor(s2::Color(255, 0, 0));
+	s2::RVG::Cross(sm::vec2(0, 0), 100, 100);
 }
 
 }

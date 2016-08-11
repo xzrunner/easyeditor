@@ -4,10 +4,11 @@
 
 #include <ee/EditPanelImpl.h>
 #include <ee/ShapeSelection.h>
-#include <ee/EE_RVG.h>
 #include <ee/panel_msg.h>
 #include <ee/SettingData.h>
 #include <ee/DouglasPeucker.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace eshape
 {
@@ -75,8 +76,8 @@ bool EditPolylinesOP::OnDraw() const
 	std::map<ChainShape*, ChainShape*>::const_iterator itr = m_simplify_buffer.begin();
 	for ( ; itr != m_simplify_buffer.end(); ++itr) {
 		itr->second->Draw(sm::mat4(), color);
-		ee::RVG::Color(s2::Color(51, 51, 204));
-		ee::RVG::Circles(itr->second->GetVertices(), ee::SettingData::ctl_pos_sz, true);
+		s2::RVG::SetColor(s2::Color(51, 51, 204));
+		s2::RVG::Circles(itr->second->GetVertices(), ee::SettingData::ctl_pos_sz, true);
 	}
 
 	return false;

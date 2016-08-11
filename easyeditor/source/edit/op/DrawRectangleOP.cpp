@@ -1,8 +1,9 @@
 #include "DrawRectangleOP.h"
-#include "EE_RVG.h"
 #include "StageCanvas.h"
 #include "EditPanelImpl.h"
 #include "panel_msg.h"
+
+#include <sprite2/S2_RVG.h>
 
 namespace ee
 {
@@ -51,7 +52,7 @@ bool DrawRectangleOP::OnDraw() const
 	if (ZoomViewOP::OnDraw()) return true;
 
 	if (m_first_pos.IsValid() && m_last_pos.IsValid()) {
-		RVG::Rect(m_first_pos, m_last_pos, false);
+		s2::RVG::Rect(m_first_pos, m_last_pos, false);
 	}
 
 	return false;

@@ -2,8 +2,9 @@
 
 #include <ee/SettingData.h>
 #include <ee/Config.h>
-#include <ee/EE_RVG.h>
 #include <ee/color_config.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace eimage
 {
@@ -32,13 +33,13 @@ bool AutoTriCutOP::OnDraw() const
 		return true;
 	}
 
-// 	ee::RVG::Polyline(m_raw_bound_line, ee::LIGHT_RED, false);
-// 	ee::RVG::Points(m_raw_bound_points, ee::LIGHT_RED, 5);
+// 	s2::RVG::Polyline(m_raw_bound_line, ee::LIGHT_RED, false);
+// 	s2::RVG::Points(m_raw_bound_points, ee::LIGHT_RED, 5);
 
-	ee::RVG::Color(ee::LIGHT_RED);
- 	ee::RVG::Polyline(m_raw_bound_line_merged, false);
-	ee::RVG::Color(ee::LIGHT_BLUE);
- 	ee::RVG::Polyline(m_fine_bound_line, true);
+	s2::RVG::SetColor(ee::LIGHT_RED);
+ 	s2::RVG::Polyline(m_raw_bound_line_merged, false);
+	s2::RVG::SetColor(ee::LIGHT_BLUE);
+ 	s2::RVG::Polyline(m_fine_bound_line, true);
 
 	return false;
 }

@@ -1,9 +1,9 @@
 #include "Material.h"
 
-#include <ee/EE_RVG.h>
 #include <ee/Math2D.h>
 
 #include <sprite2/Color.h>
+#include <sprite2/S2_RVG.h>
 
 namespace eshape
 {
@@ -48,8 +48,8 @@ void Material::DebugDrawTris(const sm::mat4& mt) const
 		{
 			std::vector<sm::vec2> vertices;
 			ee::Math2D::TransVertices(mt, buf, vertices);
-			ee::RVG::Color(s2::Color(0, 255, 0));
-			ee::RVG::Polyline(vertices, true);
+			s2::RVG::SetColor(s2::Color(0, 255, 0));
+			s2::RVG::Polyline(vertices, true);
 			buf.clear();
 		}
 	}

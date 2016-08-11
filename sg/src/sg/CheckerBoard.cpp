@@ -3,9 +3,10 @@
 #include "SymbolExt.h"
 #include "tools.h"
 
-#include <ee/EE_RVG.h>
 #include <ee/SymbolMgr.h>
 #include <ee/Visitor.h>
+
+#include <sprite2/S2_RVG.h>
 
 #include <string>
 
@@ -135,8 +136,8 @@ void CheckerBoard::DebugDraw() const
 			if (m_grid[i][j]) {
 				sm::vec2 pos;
 				m_stage->TransGridPosToCoords(i, j, pos);
-				ee::RVG::Color(s2::Color(0, 0, 0));
-				ee::RVG::Circle(pos, 10, true);
+				s2::RVG::SetColor(s2::Color(0, 0, 0));
+				s2::RVG::Circle(pos, 10, true);
 			}
 		}
 	}

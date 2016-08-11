@@ -2,11 +2,12 @@
 #include "Image.h"
 #include "RenderContextStack.h"
 #include "EE_ShaderLab.h"
-#include "EE_RVG.h"
 
 #include <dtex.h>
 #include <shaderlab.h>
 #include <render/render.h>
+
+#include <sprite2/S2_RVG.h>
 
 #include <gl/glew.h>
 
@@ -171,7 +172,7 @@ _clear_color(float xmin, float ymin, float xmax, float ymax) {
 // 	triangles.push_back(sm::vec2(xmax, ymin));
 // 	triangles.push_back(sm::vec2(xmax, ymax));
 // 
-// 	RVG::TriangleStrip(triangles);
+// 	s2::RVG::TriangleStrip(triangles);
 // 
 // 	mgr->Commit();
 // 	ShaderLab::Instance()->Flush();

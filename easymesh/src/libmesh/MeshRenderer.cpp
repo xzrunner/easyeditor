@@ -3,7 +3,6 @@
 #include "Triangle.h"
 #include "color_config.h"
 
-#include <ee/EE_RVG.h>
 #include <ee/SpriteRenderer.h>
 #include <ee/RenderContextStack.h>
 #include <ee/GL.h>
@@ -11,6 +10,8 @@
 
 #include <shaderlab.h>
 #include <dtex_facade.h>
+
+#include <sprite2/S2_RVG.h>
 
 #include <set>
 #include <vector>
@@ -37,13 +38,13 @@ void MeshRenderer::DrawInfoUV(const Mesh* mesh, const sm::mat4* mt)
 			}
 			unique.insert(tmp[i]);
 		}
-		ee::RVG::Color(RED);
-		ee::RVG::Polyline(tmp, true);
+		s2::RVG::SetColor(RED);
+		s2::RVG::Polyline(tmp, true);
 	}
 	std::vector<sm::vec2> nodes;
 	copy(unique.begin(), unique.end(), back_inserter(nodes));
-	ee::RVG::Color(BLUE);
-	ee::RVG::Circles(nodes, mesh->GetNodeRegion(), true);
+	s2::RVG::SetColor(BLUE);
+	s2::RVG::Circles(nodes, mesh->GetNodeRegion(), true);
 }
 
 void MeshRenderer::DrawInfoXY(const Mesh* mesh, const sm::mat4* mt)
@@ -62,13 +63,13 @@ void MeshRenderer::DrawInfoXY(const Mesh* mesh, const sm::mat4* mt)
 			}
 			unique.insert(tmp[i]);
 		}
-		ee::RVG::Color(RED);
-		ee::RVG::Polyline(tmp, true);
+		s2::RVG::SetColor(RED);
+		s2::RVG::Polyline(tmp, true);
 	}
 	std::vector<sm::vec2> nodes;
 	copy(unique.begin(), unique.end(), back_inserter(nodes));
-	ee::RVG::Color(BLUE);
-	ee::RVG::Circles(nodes, mesh->GetNodeRegion(), true);
+	s2::RVG::SetColor(BLUE);
+	s2::RVG::Circles(nodes, mesh->GetNodeRegion(), true);
 }
 
 void MeshRenderer::DrawTexture(const Mesh* mesh, const s2::RenderParams& params,

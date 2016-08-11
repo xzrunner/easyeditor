@@ -1,9 +1,10 @@
 #include "CrossGuides.h"
 #include "std_functor.h"
-#include "EE_RVG.h"
 #include "color_config.h"
 
 #include <SM_Calc.h>
+
+#include <sprite2/S2_RVG.h>
 
 #include <algorithm>
 
@@ -92,11 +93,11 @@ CrossGuides::Cross::Cross()
 
 void CrossGuides::Cross::Draw() const
 {
-	RVG::Color(LIGHT_RED);
-	RVG::LineWidth(2);
+	s2::RVG::SetColor(LIGHT_RED);
+	s2::RVG::LineWidth(2);
 
-	RVG::Circle(pos, RADIUS, false);
-	RVG::Cross(pos, LENGTH);
+	s2::RVG::Circle(pos, RADIUS, false);
+	s2::RVG::Cross(pos, LENGTH);
 }
 
 bool CrossGuides::Cross::Contain(const sm::vec2& p) const

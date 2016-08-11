@@ -1,9 +1,10 @@
 #include "DrawSelectRectOP.h"
-#include "EE_RVG.h"
 #include "color_config.h"
 #include "StageCanvas.h"
 #include "EditPanelImpl.h"
 #include "panel_msg.h"
+
+#include <sprite2/S2_RVG.h>
 
 namespace ee
 {
@@ -58,20 +59,20 @@ bool DrawSelectRectOP::OnDraw() const
 		return false;
 	}
 
-	RVG::LineWidth(2);
+	s2::RVG::LineWidth(2);
 	if (m_last_pos.x > m_first_pos.x)
 	{
-		RVG::Color(LIGHT_GREEN);
-		RVG::Rect(m_first_pos, m_last_pos, true);
-		RVG::Color(SELECT_RED);
-		RVG::Rect(m_first_pos, m_last_pos, false);
+		s2::RVG::SetColor(LIGHT_GREEN);
+		s2::RVG::Rect(m_first_pos, m_last_pos, true);
+		s2::RVG::SetColor(SELECT_RED);
+		s2::RVG::Rect(m_first_pos, m_last_pos, false);
 	}
 	else
 	{
-		RVG::Color(LIGHT_BLUE);
-		RVG::Rect(m_first_pos, m_last_pos, true);
-		RVG::Color(SELECT_RED);
-		RVG::Rect(m_first_pos, m_last_pos, false);
+		s2::RVG::SetColor(LIGHT_BLUE);
+		s2::RVG::Rect(m_first_pos, m_last_pos, true);
+		s2::RVG::SetColor(SELECT_RED);
+		s2::RVG::Rect(m_first_pos, m_last_pos, false);
 	}
 
 	return false;

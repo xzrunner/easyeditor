@@ -3,8 +3,9 @@
 
 #include <ee/EditPanelImpl.h>
 #include <ee/panel_msg.h>
-#include <ee/EE_RVG.h>
 #include <ee/color_config.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace eimage
 {
@@ -88,14 +89,14 @@ bool AutoRectCutOP::OnDraw() const
 {
 	if (ee::ZoomViewOP::OnDraw()) return true;
 
-	ee::RVG::Color(s2::Color(255, 0, 0));
-	ee::RVG::Cross(sm::vec2(0, 0), 100, 100);
+	s2::RVG::SetColor(s2::Color(255, 0, 0));
+	s2::RVG::Cross(sm::vec2(0, 0), 100, 100);
 
 	m_rects.Draw();
 
 	if (m_selected) {
-		ee::RVG::Color(ee::LIGHT_GREEN);
-		ee::RVG::Rect(sm::vec2(m_selected->xmin, m_selected->ymin), sm::vec2(m_selected->xmax, m_selected->ymax), true);
+		s2::RVG::SetColor(ee::LIGHT_GREEN);
+		s2::RVG::Rect(sm::vec2(m_selected->xmin, m_selected->ymin), sm::vec2(m_selected->xmax, m_selected->ymax), true);
 	}
 
 	return false;

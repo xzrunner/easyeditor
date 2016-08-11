@@ -3,8 +3,9 @@
 #include <ee/EditPanelImpl.h>
 #include <ee/Math2D.h>
 #include <ee/panel_msg.h>
-#include <ee/EE_RVG.h>
 #include <ee/color_config.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace eui
 {
@@ -76,14 +77,14 @@ bool EditClipboxOP::OnDraw() const
 {
 	if (ee::ZoomViewOP::OnDraw()) return true;
 	
-	ee::RVG::Color(ee::LIGHT_GREEN);
+	s2::RVG::SetColor(ee::LIGHT_GREEN);
 
-	ee::RVG::Rect(sm::vec2(m_rect.xmin, m_rect.ymin), sm::vec2(m_rect.xmax, m_rect.ymax), false);
+	s2::RVG::Rect(sm::vec2(m_rect.xmin, m_rect.ymin), sm::vec2(m_rect.xmax, m_rect.ymax), false);
 
-	ee::RVG::Circle(sm::vec2(m_rect.xmin, m_rect.ymin), NODE_RADIUS, true);
-	ee::RVG::Circle(sm::vec2(m_rect.xmin, m_rect.ymax), NODE_RADIUS, true);
-	ee::RVG::Circle(sm::vec2(m_rect.xmax, m_rect.ymax), NODE_RADIUS, true);
-	ee::RVG::Circle(sm::vec2(m_rect.xmax, m_rect.ymin), NODE_RADIUS, true);
+	s2::RVG::Circle(sm::vec2(m_rect.xmin, m_rect.ymin), NODE_RADIUS, true);
+	s2::RVG::Circle(sm::vec2(m_rect.xmin, m_rect.ymax), NODE_RADIUS, true);
+	s2::RVG::Circle(sm::vec2(m_rect.xmax, m_rect.ymax), NODE_RADIUS, true);
+	s2::RVG::Circle(sm::vec2(m_rect.xmax, m_rect.ymin), NODE_RADIUS, true);
 
 	return false;
 }

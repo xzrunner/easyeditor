@@ -4,7 +4,6 @@
 #include "ComposeGrids.h"
 
 #include <ee/DrawSpritesVisitor.h>
-#include <ee/EE_RVG.h>
 #include <ee/Camera.h>
 #include <ee/CameraMgr.h>
 #include <ee/color_config.h>
@@ -13,6 +12,7 @@
 #include <easyscale9.h>
 
 #include <sprite2/RenderParams.h>
+#include <sprite2/S2_RVG.h>
 
 namespace escale9
 {
@@ -39,8 +39,8 @@ void StageCanvas::OnDrawSprites() const
 	}
 	else
 	{
-		ee::RVG::Color(ee::LIGHT_GREY);
-		ee::RVG::Rect(sm::vec2(0, 0), ee::HALF_SCREEN_WIDTH, ee::HALF_SCREEN_HEIGHT, false);
+		s2::RVG::SetColor(ee::LIGHT_GREY);
+		s2::RVG::Rect(sm::vec2(0, 0), ee::HALF_SCREEN_WIDTH, ee::HALF_SCREEN_HEIGHT, false);
 
 		ee::Symbol* symbol = m_stage_panel->getPatchSymbol();
 		if (symbol)

@@ -1,10 +1,10 @@
 #include "ColorMaterial.h"
 
-#include <ee/EE_RVG.h>
 #include <ee/Math2D.h>
 #include <ee/Triangulation.h>
 
 #include <sprite2/RenderColor.h>
+#include <sprite2/S2_RVG.h>
 
 namespace eshape
 {
@@ -29,8 +29,8 @@ void ColorMaterial::Draw(const sm::mat4& mt, const s2::RenderColor& color) const
 {
 	std::vector<sm::vec2> tris;
 	ee::Math2D::TransVertices(mt, m_tris, tris);
-	ee::RVG::Color(m_color * color.mul);
-	ee::RVG::Triangles(tris);
+	s2::RVG::SetColor(m_color * color.mul);
+	s2::RVG::Triangles(tris);
 
 	//ee::ShaderMgr::Instance()->RVG();
 	//s2::Color c = ee::cMul(m_color, color.mul);

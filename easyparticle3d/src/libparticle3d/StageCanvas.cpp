@@ -5,10 +5,11 @@
 #include <ee/FetchAllVisitor.h>
 #include <ee/Sprite.h>
 #include <ee/SpriteRenderer.h>
-#include <ee/EE_RVG.h>
 #include <ee/cfg_const.h>
 
 #include <ps_3d.h>
+
+#include <sprite2/S2_RVG.h>
 
 namespace eparticle3d
 {
@@ -51,9 +52,9 @@ void StageCanvas::OnDrawSprites() const
 
 void StageCanvas::DrawBackground() const
 {
-	ee::RVG::Color(s2::Color(204, 204, 204));
-	ee::RVG::LineWidth(2);
-	ee::RVG::Rect(sm::vec2(0, 0), ee::HALF_SCREEN_WIDTH, ee::HALF_SCREEN_HEIGHT, false);
+	s2::RVG::SetColor(s2::Color(204, 204, 204));
+	s2::RVG::LineWidth(2);
+	s2::RVG::Rect(sm::vec2(0, 0), ee::HALF_SCREEN_WIDTH, ee::HALF_SCREEN_HEIGHT, false);
 }
 
 }
