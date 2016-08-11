@@ -2,6 +2,8 @@
 #include "UnpackNodeFactory.h"
 #include "LuaDataHelper.h"
 
+#include <mt_2d.h>
+
 #include <assert.h>
 
 namespace erespacker
@@ -37,7 +39,7 @@ void TrailFromLua::UnpackComponents(lua_State* L, PackTrail* trail)
 	lua_getfield(L, -1, "component");
 	int comp_sz = lua_rawlen(L, -1);
 
-	if (trail->mode == 0) {
+	if (trail->mode == T2D_MODE_IMAGE) {
 		UnpackNodeFactory* factory = UnpackNodeFactory::Instance();
 		trail->comp_images.reserve(comp_sz);
 		for (int i = 1; i <= comp_sz; ++i)
@@ -66,7 +68,7 @@ void TrailFromLua::UnpackComponents(lua_State* L, PackTrail* trail)
 			lua_pop(L, 1);
 		}
 	} else {
-		assert(trail->mode == 1);
+		assert(trail->mode == T2D_MODE_SHAPE);
 		trail->comp_shapes.reserve(comp_sz);
 		for (int i = 1; i < comp_sz; ++i)
 		{

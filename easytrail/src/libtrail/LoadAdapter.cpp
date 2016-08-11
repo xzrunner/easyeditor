@@ -31,9 +31,10 @@ void LoadAdapter::Load(const std::string& filepath)
 	int idx = 0;
 	Json::Value comp_val = value["components"][idx++];
 	while (!comp_val.isNull()) {
-		if (mode == 0) {
+		if (mode == T2D_MODE_IMAGE) {
 			LoadImageComp(dir, comp_val);
 		} else {
+			assert(mode == T2D_MODE_SHAPE);
 			LoadShapeComp(comp_val);
 		}
 		comp_val = value["components"][idx++];

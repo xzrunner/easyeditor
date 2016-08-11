@@ -74,7 +74,7 @@ t2d_emitter_cfg* FileIO::LoadMTConfig(const std::string& filepath)
 
 	cfg->mode_type = adapter.mode;
 
-	if (adapter.mode == 0) {
+	if (adapter.mode == T2D_MODE_IMAGE) {
 		cfg->symbol_count = adapter.comp_images.size();
 		cfg->symbols = (t2d_symbol*)(cfg+1);
 		for (int i = 0; i < cfg->symbol_count; ++i) {
@@ -96,7 +96,7 @@ t2d_emitter_cfg* FileIO::LoadMTConfig(const std::string& filepath)
 			}
 		}
 	} else {
-		assert(adapter.mode == 1);
+		assert(adapter.mode == T2D_MODE_SHAPE);
 		cfg->symbol_count = adapter.comp_shapes.size();
 		cfg->symbols = (t2d_symbol*)(cfg+1);
 		for (int i = 0; i < cfg->symbol_count; ++i) {

@@ -2,6 +2,8 @@
 
 #include <easybuilder.h>
 
+#include <mt_2d.h>
+
 namespace lua = ebuilder::lua;
 
 namespace erespacker
@@ -38,10 +40,10 @@ void TrailToLuaString::PackMT(const PackTrail* trail, ebuilder::CodeGenerator& g
 		lua::assign("fadeout_time", TransTime(trail->fadeout_time)));
 
 	lua::TableAssign ta(gen, "component", true);
-	if (trail->mode == 0) {
+	if (trail->mode == T2D_MODE_IMAGE) {
 		PackCompImages(trail->comp_images, gen);
 	} else {
-		assert(trail->mode == 1);
+		assert(trail->mode == T2D_MODE_SHAPE);
 		PackCompShapes(trail->comp_shapes, gen);
 	}
 }

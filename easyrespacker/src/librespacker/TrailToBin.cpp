@@ -5,6 +5,7 @@
 
 // for TYPE_TRAIL
 #include <spritepack.h>
+#include <mt_2d.h>
 
 #include <limits>
 
@@ -22,10 +23,10 @@ int TrailToBin::Size(const PackTrail* trail)
 	sz += sizeof(uint16_t);			// life_offset
 	sz += sizeof(uint16_t);			// fadeout_time
 	sz += sizeof(uint16_t);			// component size
-	if (trail->mode == 0) {
+	if (trail->mode == T2D_MODE_IMAGE) {
 		sz += CompImageSize() * trail->comp_images.size();
 	} else {
-		assert(trail->mode == 1);
+		assert(trail->mode == T2D_MODE_SHAPE);
 		sz += CompShapeSize() * trail->comp_shapes.size();
 	}
 	return sz;
@@ -53,13 +54,13 @@ void TrailToBin::Pack(const PackTrail* trail, uint8_t** ptr)
 	uint16_t fadeout_time = TransTime(trail->fadeout_time);
 	pack(fadeout_time, ptr);
 
-	if (mode == 0) {
+	if (mode == T2D_MODE_IMAGE) {
 		uint16_t sz = trail->comp_images.size();
 		for (int i = 0; i < sz; ++i) {
 			PackCompImage(trail->comp_images[i], ptr);
 		}
 	} else {
-		assert(mode == 1);
+		assert(mode == T2D_MODE_SHAPE);
 		uint16_t sz = trail->comp_shapes.size();
 		for (int i = 0; i < sz; ++i) {
 			PackCompShape(trail->comp_shapes[i], ptr);

@@ -12,10 +12,10 @@ int TrailFromBin::Size(const PackTrail* trail)
 {
 	int sz = 0;
 	sz += SIZEOF_T2D_EMITTER_CFG;
-	if (trail->mode == 0) {
+	if (trail->mode == T2D_MODE_IMAGE) {
 		sz += trail->comp_images.size() * SIZEOF_T2D_SYMBOL;
 	} else {
-		assert(trail->mode == 1);
+		assert(trail->mode == T2D_MODE_SHAPE);
 		sz += trail->comp_shapes.size() * SIZEOF_T2D_SYMBOL;
 	}
 	return sz;
@@ -43,7 +43,7 @@ void TrailFromBin::Unpack(uint8_t** ptr, PackTrail* trail)
 
 	uint16_t comp_count;
 	unpack(comp_count, ptr);
-	if (mode == 0) {
+	if (mode == T2D_MODE_IMAGE) {
 		UnpackNodeFactory* factory = UnpackNodeFactory::Instance();
 
 		trail->comp_images.push_back(PackTrail::CompImage());
@@ -73,6 +73,7 @@ void TrailFromBin::Unpack(uint8_t** ptr, PackTrail* trail)
 		comp.add_col_begin = add_col_begin;
 		comp.add_col_end = add_col_end;		
 	} else {
+		assert(mode == T2D_MODE_SHAPE);
 		PackTrail::CompShape comp;
 
 		uint16_t linewidth;

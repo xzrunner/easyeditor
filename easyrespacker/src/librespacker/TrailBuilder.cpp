@@ -67,7 +67,7 @@ void TrailBuilder::Load(const etrail::Symbol* sym, PackTrail* trail)
 
 	trail->fadeout_time = cfg->fadeout_time;
 
-	if (trail->mode == 0) {
+	if (trail->mode == T2D_MODE_IMAGE) {
 		trail->comp_images.reserve(cfg->symbol_count);
 		for (int i = 0; i < cfg->symbol_count; ++i) {
 			const t2d_symbol& t_sym = cfg->symbols[i];
@@ -88,7 +88,7 @@ void TrailBuilder::Load(const etrail::Symbol* sym, PackTrail* trail)
 			trail->comp_images.push_back(comp);
 		}
 	} else {
-		assert(trail->mode == 1);
+		assert(trail->mode == T2D_MODE_SHAPE);
 		trail->comp_shapes.reserve(cfg->symbol_count);
 		for (int i = 0; i < cfg->symbol_count; ++i) {
 			const t2d_symbol& t_sym = cfg->symbols[i];
