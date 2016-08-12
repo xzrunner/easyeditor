@@ -27,7 +27,6 @@ Sprite::Sprite()
 	, m_bounding(NULL)
 	, m_clip(false)
 	, m_is_anchor(false)
-	, m_visible(true)
 	, m_editable(true)
 	, m_observer(NULL)
 {
@@ -44,7 +43,6 @@ Sprite::Sprite(const Sprite& sprite)
 	, m_tag(sprite.m_tag)
 	, m_clip(sprite.m_clip)
 	, m_is_anchor(sprite.m_is_anchor)
-	, m_visible(sprite.m_visible)
 	, m_editable(sprite.m_editable)
 	, m_observer(NULL)
 {
@@ -290,17 +288,17 @@ sm::rect Sprite::GetRect() const
 	return rect;
 }
 
-void Sprite::SetBounding(BoundingBox* bb)
-{
-	if (m_bounding == bb) {
-		return;
-	}
-
-	if (m_bounding) {
-		delete m_bounding;
-	}
-	m_bounding = bb;
-}
+//void Sprite::SetBounding(BoundingBox* bb)
+//{
+//	if (m_bounding == bb) {
+//		return;
+//	}
+//
+//	if (m_bounding) {
+//		delete m_bounding;
+//	}
+//	m_bounding = bb;
+//}
 
 sm::mat4 Sprite::GetTransMatrix() const
 {
@@ -364,6 +362,18 @@ s2::RenderCamera& Sprite::GetCamera()
 { 
 	assert(m_core);
 	return m_core->Camera();
+}
+
+bool Sprite::IsVisible() const 
+{ 
+	return m_core ? m_core->IsVisible() : false;
+}
+
+void Sprite::SetVisible(bool visible) 
+{ 
+	if (m_core) {
+		m_core->SetVisible(visible);
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////

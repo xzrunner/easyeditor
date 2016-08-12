@@ -112,7 +112,7 @@ bool Bitmap::LoadFromFile(const std::string& filepath)
 		wxImage image(w, h, rgb, true);
 		InitBmp(image, false);
 		delete[] rgb;
-		symbol->Release();
+		symbol->RemoveReference();
 	}
 
 	return true;
@@ -166,7 +166,7 @@ void Bitmap::GetImage(const std::string& filepath, wxImage& dst_img)
 	int h = img_data->GetHeight();
 	ImageTrim trim(*img_data);
 	sm::rect trim_r = trim.Trim();
-	img_data->Release();
+	img_data->RemoveReference();
 
 	if (trim_r.IsValid()) {
 		wxImage wx_img;

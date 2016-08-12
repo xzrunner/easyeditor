@@ -43,11 +43,11 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* to
 	select_op->SetGuides(&m_guides);
 	select_op->SetOpenSymbolDialogViewlist(top_pannels->viewlist);
 	SetEditOP(edit_op);
-	edit_op->Release();
+	edit_op->RemoveReference();
 
 	ee::StageCanvas* canvas = new StageCanvas(this);
 	SetCanvas(canvas);
-	canvas->Release();
+	canvas->RemoveReference();
 
 	int w, h;
 	QueryWindowViewSizeSJ::Instance()->Query(w, h);
@@ -62,7 +62,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* to
 
 StagePanel::~StagePanel()
 {
-	m_sym->Release();
+	m_sym->RemoveReference();
 }
 
 void StagePanel::LoadFromFile(const char* filename)

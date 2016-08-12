@@ -38,7 +38,7 @@ void LayerMgr::Insert(Layer* layer)
 		selected = layer;
 	}
 
-	layer->Retain();
+	layer->AddReference();
 	m_layers.push_back(layer);
 }
 
@@ -46,7 +46,7 @@ void LayerMgr::Remove(int idx)
 {
 	assert(idx >= 0 && idx < static_cast<int>(m_layers.size()));
 
-	m_layers[idx]->Release();
+	m_layers[idx]->RemoveReference();
 	m_layers.erase(m_layers.begin() + idx);
 }
 
@@ -61,7 +61,7 @@ Layer* LayerMgr::GetLayer(int idx)
 
 void LayerMgr::Clear()
 {
-	for_each(m_layers.begin(), m_layers.end(), ReleaseObjectFunctor<Layer>());
+	for_each(m_layers.begin(), m_layers.end(), cu::RemoveRefFonctor<Layer>());
 	m_layers.clear();
 }
 
@@ -73,7 +73,7 @@ void LayerMgr::LoadFromFile(const Json::Value& val, const std::string& dir)
 		Layer* layer = new Layer;
 		layer->LoadFromFile(l_val, dir);
 		Insert(layer);
-		layer->Release();
+		layer->RemoveReference();
 		l_val = val[idx++];
 	}
 }

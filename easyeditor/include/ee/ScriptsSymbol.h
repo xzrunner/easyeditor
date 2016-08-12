@@ -12,16 +12,12 @@ public:
 	ScriptsSymbol() {}
 	virtual ~ScriptsSymbol() {}
 
-	//
-	// Cloneable interface
-	//
-	virtual ScriptsSymbol* Clone() const { return NULL; }
-
-	//
-	// Symbol interfaces
-	//
+	/**
+	 *  @interface
+	 *    s2::Symbol
+	 */
 	virtual void Draw(const s2::RenderParams& params, const Sprite* spr = NULL) const {}
-	virtual sm::rect GetSize(const Sprite* sprite = NULL) const;
+	virtual sm::rect GetBounding(const s2::Sprite* spr = NULL) const { return sm::rect(0, 0); }
 
 	const std::string GetContent() const { return m_data; }
 

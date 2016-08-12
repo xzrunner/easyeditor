@@ -22,14 +22,14 @@ ShapesPanelImpl::ShapesPanelImpl(DataContainer* container)
 	: MultiShapesImpl()
 {
 	m_container = container;
-	m_container->Retain();
+	m_container->AddReference();
 
 	InitSubjects();
 }
 
 ShapesPanelImpl::~ShapesPanelImpl()
 {
-	m_container->Release();
+	m_container->RemoveReference();
 }
 
 void ShapesPanelImpl::TraverseShapes(Visitor& visitor, DataTraverseType type/* = e_allExisting*/) const

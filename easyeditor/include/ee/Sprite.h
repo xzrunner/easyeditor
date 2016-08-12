@@ -1,16 +1,13 @@
 #ifndef _EASYEDITOR_SPRITE_H_
 #define _EASYEDITOR_SPRITE_H_
 
-#include "Cloneable.h"
 #include "UserDataImpl.h"
-#include "Object.h"
 
 #include <SM_Matrix.h>
 #include <SM_Rect.h>
+#include <sprite2/S2_Sprite.h>
 
 #include <json/json.h>
-
-namespace s2 { class Sprite; class RenderColor; class RenderShader; class RenderCamera; class RenderParams; }
 
 namespace ee
 {
@@ -21,7 +18,7 @@ class PropertySetting;
 class EditPanelImpl;
 class SpriteObserver;
 
-class Sprite : public Cloneable, public UserDataImpl, public Object
+class Sprite : public virtual s2::Sprite, public UserDataImpl
 {
 public:
 	Sprite();
@@ -49,12 +46,6 @@ public:
 	virtual void BuildBounding();
 
 	virtual PropertySetting* CreatePropertySetting(EditPanelImpl* stage);
-
-	/************************************************************************/
-	/* core                                                                 */
-	/************************************************************************/
-	const s2::Sprite* GetCore() const { return m_core; }
-	s2::Sprite* GetCore() { return m_core; }
 
 	/************************************************************************/
 	/* geometry                                                             */
@@ -87,8 +78,8 @@ public:
 	sm::vec2 GetCenter() const;
 	sm::rect GetRect() const;
 
-	BoundingBox* GetBounding() const { return m_bounding; }
-	void SetBounding(BoundingBox* bb);
+// 	BoundingBox* GetBounding() const { return m_bounding; }
+// 	void SetBounding(BoundingBox* bb);
 
 	sm::mat4 GetTransMatrix() const;
 	sm::mat4 GetTransInvMatrix() const;
@@ -120,8 +111,8 @@ public:
 	/************************************************************************/
 	/* edit                                                                 */
 	/************************************************************************/
-	bool IsVisible() const { return m_visible; }
-	void SetVisible(bool visible) { m_visible = visible; }
+	bool IsVisible() const;
+	void SetVisible(bool visible);
 	bool IsEditable() const { return m_editable; }
 	void SetEditable(bool editable) { m_editable = editable; }
 
@@ -138,12 +129,6 @@ protected:
 
 private:
 	const Sprite& operator = (const Sprite& spr) { return spr; }
-
-protected:
-	/************************************************************************/
-	/* core                                                                 */
-	/************************************************************************/
-	s2::Sprite*		m_core;
 
 private:
 	/************************************************************************/
@@ -165,7 +150,6 @@ private:
 	/************************************************************************/
 	/* edit                                                                 */
 	/************************************************************************/
-	bool			m_visible;
 	bool			m_editable;
 
 	/************************************************************************/

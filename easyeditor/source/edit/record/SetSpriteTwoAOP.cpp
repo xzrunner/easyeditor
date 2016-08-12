@@ -13,7 +13,7 @@ namespace ee
 	SetSprite##name##AOP::SetSprite##name##AOP(const std::vector<Sprite*>& sprites, const sm::vec2& val)	\
 		: m_new(val) \
 	{ \
-		for_each(sprites.begin(), sprites.end(), RetainObjectFunctor<Sprite>()); \
+		for_each(sprites.begin(), sprites.end(), cu::AddRefFonctor<Sprite>()); \
 		m_sprites = sprites; \
 	\
 		for (int i = 0, n = sprites.size(); i < n; ++i) { \
@@ -23,7 +23,7 @@ namespace ee
 	\
 	SetSprite##name##AOP::~SetSprite##name##AOP() \
 	{ \
-		for_each(m_sprites.begin(), m_sprites.end(), ReleaseObjectFunctor<Sprite>()); \
+		for_each(m_sprites.begin(), m_sprites.end(), cu::RemoveRefFonctor<Sprite>()); \
 	} \
 	\
 	void SetSprite##name##AOP::Undo() \

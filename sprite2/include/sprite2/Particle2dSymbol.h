@@ -8,12 +8,17 @@
 namespace s2
 {
 
-class Particle2dSymbol : public Symbol
+class Particle2dSymbol : public VIRTUAL_INHERITANCE Symbol
 {
 public:
-	Particle2dSymbol(void* ud);
+	Particle2dSymbol();
 
-	virtual void Draw(const RenderParams& params, const Sprite* spr) const;
+	/**
+	 *  @interface
+	 *    Symbol
+	 */
+	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const;
+	virtual sm::rect GetBounding(const Sprite* spr = NULL) const { return sm::rect(0, 0); }
 
 }; // Particle2dSymbol
 

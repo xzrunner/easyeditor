@@ -2,6 +2,7 @@
 #define _EASYEDITOR_LIBRARY_PANEL_H_
 
 #include "Observer.h"
+#include "Visitor.h"
 
 #include <wx/wx.h>
 #include <wx/notebook.h>
@@ -15,7 +16,7 @@ class Symbol;
 class LibraryPage;
 class SymbolMgr;
 class LibraryList;
-class Visitor;
+class ListItem;
 
 class LibraryPanel : public wxPanel, public Observer
 {
@@ -38,7 +39,7 @@ public:
 	void LoadFromSymbolMgr(const SymbolMgr& mgr);
 	void LoadSymbol(Symbol* symbol);
 
-	void Traverse(Visitor& visitor) const;
+	void Traverse(Visitor<ListItem>& visitor) const;
 
 	wxWindow* GetNotebook() { return m_notebook; }
 

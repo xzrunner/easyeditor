@@ -15,7 +15,7 @@ inline void ObjSelectionSet<T>::Clear()
 {
 	std::vector<T*>::iterator itr = m_items.begin();
 	for ( ; itr != m_items.end(); ++itr) {
-		(*itr)->Release();
+		(*itr)->RemoveReference();
 	}
 	SelectionSet<T>::Clear();	
 }
@@ -24,7 +24,7 @@ template<class T>
 inline void ObjSelectionSet<T>::Add(T* item)
 {
 	if (item) {
-		item->Retain();
+		item->AddReference();
 		SelectionSet<T>::Add(item);
 	}
 }
@@ -33,7 +33,7 @@ template<class T>
 inline void ObjSelectionSet<T>::Remove(T* item)
 {
 	if (item) {
-		item->Release();
+		item->RemoveReference();
 		SelectionSet<T>::Remove(item);
 	}
 }

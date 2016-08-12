@@ -115,7 +115,7 @@ void Frame::OnSetBackground(wxCommandEvent& event)
 		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filename);
 		ee::StageCanvas* canvas = const_cast<ee::EditPanel*>(m_task->GetEditPanel())->GetCanvas();
 		static_cast<StageCanvas*>(canvas)->SetBackground(symbol);
-		symbol->Release();
+		symbol->RemoveReference();
 	}
 	else
 	{

@@ -50,7 +50,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			symbol->RefreshThumbnail(filepath);
 			m_list->Insert(symbol);
-			symbol->Release();
+			symbol->RemoveReference();
 		}
 	}
 }

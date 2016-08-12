@@ -14,14 +14,10 @@ public:
 	FontBlankSymbol();
 	virtual ~FontBlankSymbol();
 
-	//
-	// Cloneable interface
-	//
-	virtual FontBlankSymbol* Clone() const { return NULL; }
-
-	//
-	// Symbol interfaces
-	//
+	/**
+	 *  @interface
+	 *    s2::Symbol
+	 */
 	virtual void Draw(const s2::RenderParams& params, const Sprite* spr = NULL) const;
 	virtual sm::rect GetSize(const Sprite* sprite = NULL) const;
 

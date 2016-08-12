@@ -20,19 +20,19 @@ RenderShader RenderShader::operator * (const RenderShader& rs) const
 {
 	RenderShader ret;
 
-	if (rs.blend != s2::BM_NULL) {
+	if (rs.blend != BM_NULL) {
 		ret.blend = rs.blend;
 	} else {
 		ret.blend = blend;
 	}
 
-	if (rs.fast_blend != s2::FBM_NULL) {
+	if (rs.fast_blend != FBM_NULL) {
 		ret.fast_blend = rs.fast_blend;
 	} else {
 		ret.fast_blend = fast_blend;
 	}
 
-	if (rs.filter && rs.filter->GetMode()!= s2::FM_NULL) {
+	if (rs.filter && rs.filter->GetMode()!= FM_NULL) {
 		ret.filter = rs.filter;
 	} else {
 		ret.filter = filter;

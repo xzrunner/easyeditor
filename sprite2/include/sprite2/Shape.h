@@ -1,21 +1,31 @@
 #ifndef _SPRITE2_SHAPE_H_
 #define _SPRITE2_SHAPE_H_
 
+#include "pre_defined.h"
 #include "RenderColor.h"
-#include "RefCountObj.h"
 
 #include <SM_Vector.h>
 #include <SM_Rect.h>
 #include <SM_Matrix.h>
+#include <CU_RefCountObj.h>
+#include <CU_Cloneable.h>
 
 namespace s2
 {
 
-class Shape : public RefCountObj
+class Shape : public cu::RefCountObj, public cu::Cloneable
 {
 public:
 	Shape() {}
-	
+	Shape(const Shape& shape) : m_bounding(shape.m_bounding) {}
+	virtual ~Shape() {}
+
+	/**
+	 *  @interface
+	 *    Cloneable
+	 */
+	virtual Shape* Clone() const { return NULL; }
+
 	virtual bool IsContain(const sm::vec2& pos) const = 0;
 	virtual bool IsIntersect(const sm::rect& rect) const = 0;
 

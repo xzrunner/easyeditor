@@ -300,7 +300,7 @@ void RectCutCMPT::OnOutputData(wxCommandEvent& event)
 
 		for (int j = 0, m = m_part_rects.size(); j < m; ++j) {
 			if (m_part_rects[j] == r) {
-				sprite->Retain();
+				sprite->AddReference();
 				complex_part->Add(sprite);
 				break;
 			}

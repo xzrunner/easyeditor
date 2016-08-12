@@ -14,27 +14,27 @@ TranslateSpriteAOP::TranslateSpriteAOP(const SpriteSelection& selection, const s
 {
 	selection.Traverse(FetchAllVisitor<Sprite>(m_sprites));
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->Retain();
+		m_sprites[i]->AddReference();
 	}
 }
 
 TranslateSpriteAOP::TranslateSpriteAOP(Sprite* sprite, const sm::vec2& offset)
 	: m_offset(offset)
 {
-	sprite->Retain();
+	sprite->AddReference();
 	m_sprites.push_back(sprite);
 }
 
 TranslateSpriteAOP::TranslateSpriteAOP(const std::vector<Sprite*>& sprites, const sm::vec2& offset)
 	: m_offset(offset)
 {
-	for_each(sprites.begin(), sprites.end(), RetainObjectFunctor<Sprite>());
+	for_each(sprites.begin(), sprites.end(), cu::AddRefFonctor<Sprite>());
 	m_sprites = sprites;
 }
 
 TranslateSpriteAOP::~TranslateSpriteAOP()
 {
-	for_each(m_sprites.begin(), m_sprites.end(), ReleaseObjectFunctor<Sprite>());
+	for_each(m_sprites.begin(), m_sprites.end(), cu::RemoveRefFonctor<Sprite>());
 }
 
 void TranslateSpriteAOP::Undo()

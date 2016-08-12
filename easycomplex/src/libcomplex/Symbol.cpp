@@ -29,8 +29,6 @@ Symbol::Symbol()
 	, m_render_version(0)
 	, m_render_cache_open(true)
 {
-	m_core = new s2::ComplexSymbol(this);
-
 	static int id = 0;
 	m_name = FILE_TAG + wxVariant(id++);
 
@@ -38,39 +36,24 @@ Symbol::Symbol()
 }
 
 Symbol::Symbol(const Symbol& sym)
-	: m_rect(sym.m_rect)
-	, m_clipbox(sym.m_clipbox)
+	: m_clipbox(sym.m_clipbox)
 	, m_use_render_cache(sym.m_use_render_cache)
 	, m_render_version(sym.m_render_version)
 	, m_render_cache_open(sym.m_render_cache_open)
 {
-	m_core = new s2::ComplexSymbol(*sym.m_core);
 }
 
 Symbol::~Symbol()
 {
 	Clear();
-	m_core->RemoveReference();
 }
 
-void Symbol::Retain() const
-{
-	ee::Object::Retain();	
-//	for_each(m_sprites.begin(), m_sprites.end(), ee::RetainObjectFunctor<ee::Sprite>());
-}
-
-void Symbol::Release() const
-{
-	ee::Object::Release();
-//	for_each(m_sprites.begin(), m_sprites.end(), ee::ReleaseObjectFunctor<ee::Sprite>());
-}
-
-void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
+void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	s2::RenderParams p = params;
 	if (spr) {
-		p.mt = spr->GetTransMatrix() * params.mt;
-		p.color = spr->GetColor() * params.color;
+		p.mt = dynamic_cast<const ee::Sprite*>(spr)->GetTransMatrix() * params.mt;
+		p.color = spr->Color() * params.color;
 	}
 
  	const ee::TPNode* n = NULL;
@@ -134,9 +117,8 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
  	}
  	else
 	{
-		const std::vector<s2::Sprite*>& children = m_core->GetChildren();
-		for (int i = 0, n = children.size(); i < n; ++i) {
-			ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+		for (int i = 0, n = m_children.size(); i < n; ++i) {
+			ee::Sprite* child = dynamic_cast<ee::Sprite*>(m_children[i]);
 			ee::SpriteRenderer::Draw(child, p);
 		}
 		sm::vec2 sz = m_clipbox.Size();
@@ -152,17 +134,16 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 
 void Symbol::ReloadTexture() const
 {
-	const std::vector<s2::Sprite*>& children = m_core->GetChildren();
-	for (int i = 0, n = children.size(); i < n; ++i) {
-		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+	for (int i = 0, n = m_children.size(); i < n; ++i) {
+		ee::Sprite* child = dynamic_cast<ee::Sprite*>(m_children[i]);
 		if (etext::Sprite* text = dynamic_cast<etext::Sprite*>(child)) {
 			//			// todo
 			//			ee::GTxt::Instance()->Reload(text);
 		}
 	}
 	std::set<const ee::Symbol*> symbols;
-	for (int i = 0, n = children.size(); i < n; ++i) {
-		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+	for (int i = 0, n = m_children.size(); i < n; ++i) {
+		ee::Sprite* child = dynamic_cast<ee::Sprite*>(m_children[i]);
 		symbols.insert(&child->GetSymbol());
 	}
 	std::set<const ee::Symbol*>::iterator itr = symbols.begin();
@@ -171,126 +152,20 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-sm::rect Symbol::GetSize(const ee::Sprite* sprite/* = NULL*/) const
-{
-	return m_rect;
-}
-
-void Symbol::Traverse(ee::Visitor& visitor)
+void Symbol::Traverse(ee::Visitor<ee::Sprite>& visitor)
 {
 	const std::vector<s2::Sprite*>& children = GetChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
-		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 		bool next;
 		visitor.Visit(child, next);
 		const_cast<ee::Symbol&>(child->GetSymbol()).Traverse(visitor);
 	}
 }
 
-bool Symbol::IsOneLayer() const
-{
-	const std::vector<s2::Sprite*>& children = m_core->GetChildren();
-	for (int i = 0, n = children.size(); i < n; ++i) {
-		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
-		if (dynamic_cast<Sprite*>(child)) {
-			return false;
-		}
-	}
-	return true;
-}
-
-void Symbol::InitBounding()
-{
-	m_rect.MakeEmpty();
-	const std::vector<s2::Sprite*>& children = m_core->GetChildren();
-	for (int i = 0, n = children.size(); i < n; ++i) {
-		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
-		std::vector<sm::vec2> vertices;
-		child->GetBounding()->GetBoundPos(vertices);
-		for (int j = 0, m = vertices.size(); j < m; ++j) {
-			m_rect.Combine(vertices[j]);
-		}
-	}
-
-	// 为兼容老数据，临时去掉
-	//// to center
-	//float x = m_rect.CenterX(),
-	//	y = m_rect.CenterY();
-	//for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-	//	m_sprites[i]->translate(sm::vec2(-x, -y));
-	//m_rect.translate(sm::vec2(-x, -y));
-}
-
 void Symbol::LoadResources()
 {
 	FileLoader::Load(m_filepath, this);
-}
-
-bool Symbol::Add(ee::Sprite* spr, int idx)
-{
-	bool ret = m_core->Add(spr->GetCore(), idx);
-	if (ret) {
-		spr->Retain();
-	}
-	return ret;
-}
-
-bool Symbol::Remove(ee::Sprite* spr)
-{
-	bool ret = m_core->Remove(spr->GetCore());
-	if (ret) {
-		spr->Release();
-	}
-	return ret;
-}
-
-bool Symbol::Clear()
-{
-	const std::vector<s2::Sprite*>& children = m_core->GetChildren();
-	for (int i = 0, n = children.size(); i < n; ++i) {
-		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
-		child->Release();
-	}
-	return m_core->Clear();
-}
-
-bool Symbol::ResetOrder(const ee::Sprite* spr, bool up)
-{
-	return m_core->ResetOrder(spr->GetCore(), up);
-}
-
-bool Symbol::ResetOrderMost(const ee::Sprite* spr, bool up)
-{
-	return m_core->ResetOrderMost(spr->GetCore(), up);
-}
-
-bool Symbol::Sort(std::vector<ee::Sprite*>& sprites)
-{
-	std::vector<s2::Sprite*> ordered;
-	ordered.reserve(sprites.size());
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		ordered.push_back(sprites[i]->GetCore());
-	}
-
-	if (m_core->Sort(ordered))
-	{
-		std::vector<ee::Sprite*> dst;
-		dst.reserve(sprites.size());
-		for (int i = 0, n = ordered.size(); i < n; ++i) {
-			dst.push_back(static_cast<ee::Sprite*>(ordered[i]->GetUD()));
-		}
-		sprites = dst;
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
-const std::vector<s2::Sprite*>& Symbol::GetChildren() const
-{
-	return m_core->GetChildren();
 }
 
 }

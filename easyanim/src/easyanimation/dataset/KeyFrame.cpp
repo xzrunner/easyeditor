@@ -59,7 +59,7 @@ void KeyFrame::CopyFromOther(const KeyFrame* src)
 
 void KeyFrame::Insert(ee::Sprite* sprite, int idx)
 {
-	sprite->Retain();
+	sprite->AddReference();
 
 	set_sprite_user_data(sprite, m_layer, this);
 	ee::ObjectVector<ee::Sprite>::Insert(m_sprites, sprite, idx);

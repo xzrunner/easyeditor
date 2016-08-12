@@ -28,7 +28,7 @@ Fixture::Fixture()
 
 Fixture::~Fixture()
 {
-	m_shape->Release();
+	m_shape->RemoveReference();
 }
 
 bool Fixture::IsContain(const sm::vec2& pos) const

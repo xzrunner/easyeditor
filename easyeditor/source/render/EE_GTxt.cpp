@@ -194,7 +194,7 @@ ext_sym_release(void* ext_sym) {
 	}
 
 // 	Symbol* sym = (Symbol*)ext_sym;
-// 	sym->Release();
+// 	sym->RemoveReference();
 }
 
 void 

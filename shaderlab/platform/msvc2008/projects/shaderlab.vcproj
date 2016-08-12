@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src\shaderlab;..\..\..\..\ejoy2d\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\editor-external\c99"
+				AdditionalIncludeDirectories="..\..\..\src\shaderlab;..\..\..\..\ejoy2d\src;..\..\..\..\ds\src\ds;..\..\..\..\cu\src\cu;..\..\..\..\sm\src\sm;..\..\..\..\editor-external\c99"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;USED_IN_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -105,7 +105,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src\shaderlab;..\..\..\..\ejoy2d\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\editor-external\c99"
+				AdditionalIncludeDirectories="..\..\..\src\shaderlab;..\..\..\..\ejoy2d\src;..\..\..\..\ds\src\ds;..\..\..\..\cu\src\cu;..\..\..\..\sm\src\sm;..\..\..\..\editor-external\c99"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;USED_IN_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -502,10 +502,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\shaderlab\utility\Buffer.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\utility\Object.h"
 				>
 			</File>
 			<File

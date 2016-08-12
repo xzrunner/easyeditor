@@ -35,7 +35,7 @@ void LibraryImagePage::OnAddPress(wxCommandEvent& event)
 			try {
 				Symbol* symbol = SymbolMgr::Instance()->FetchSymbol(filenames[i].ToStdString());
 				m_list->Insert(symbol);
-				symbol->Release();
+				symbol->RemoveReference();
 			} catch (Exception& e) {
 				ExceptionDlg dlg(m_parent, e);
 				dlg.ShowModal();

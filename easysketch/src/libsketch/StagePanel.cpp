@@ -73,7 +73,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 
 void StagePanel::Insert(ee::Sprite* spr)
 {
-	spr->Retain();
+	spr->AddReference();
 	m_sprites.push_back(spr);
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
@@ -82,7 +82,7 @@ void StagePanel::Remove(ee::Sprite* spr)
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		if (m_sprites[i] == spr) {
-			spr->Release();
+			spr->RemoveReference();
 			m_sprites.erase(m_sprites.begin() + i);
 			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 			return;
@@ -93,7 +93,7 @@ void StagePanel::Remove(ee::Sprite* spr)
 void StagePanel::Clear()
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->Release();
+		m_sprites[i]->RemoveReference();
 	}
 	m_sprites.clear();
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();

@@ -1,8 +1,9 @@
 #ifndef _EASYEDITOR_SHADERLAB_H_
 #define _EASYEDITOR_SHADERLAB_H_
 
-#include "singleton.h"
 #include "texture_format.h"
+
+#include <CU_Singleton.h>
 
 #include <stdint.h>
 

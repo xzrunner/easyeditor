@@ -46,7 +46,7 @@ void Symbol::Traverse(ee::Visitor& visitor)
 
 void Symbol::InsertExtRef(Sprite* spr)
 {
-	spr->Retain();
+	spr->AddReference();
 	m_ext_refs.push_back(spr);
 }
 
@@ -55,7 +55,7 @@ void Symbol::RemoveExtRef(Sprite* spr)
 	std::vector<Sprite*>::iterator itr = m_ext_refs.begin();
 	for ( ; itr != m_ext_refs.end(); ) {
 		if (*itr == spr) {
-			spr->Release();
+			spr->RemoveReference();
 			itr = m_ext_refs.erase(itr);
 		} else {
 			++itr;
@@ -66,7 +66,7 @@ void Symbol::RemoveExtRef(Sprite* spr)
 void Symbol::ClearExtRef()
 {
 	for_each(m_ext_refs.begin(), m_ext_refs.end(), 
-		ee::ReleaseObjectFunctor<Sprite>());
+		ee::cu::RemoveRefFonctor<Sprite>());
 	m_ext_refs.clear();
 }
 

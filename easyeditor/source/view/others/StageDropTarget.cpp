@@ -46,7 +46,7 @@ void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 			sprite->Translate(pos);
 			InsertSpriteSJ::Instance()->Insert(sprite);
 		}
-		sprite->Release();
+		sprite->RemoveReference();
 	}
 }
 
@@ -68,9 +68,9 @@ void StageDropTarget::OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& fil
 			Sprite* sprite = SpriteFactory::Instance()->Create(symbol);
 			sprite->Translate(pos);
 			InsertSpriteSJ::Instance()->Insert(sprite);
-			sprite->Release();
+			sprite->RemoveReference();
 		}
-		symbol->Release();
+		symbol->RemoveReference();
 	}
 }
 

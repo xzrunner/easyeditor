@@ -18,7 +18,7 @@ SpritePropertyImpl::SpritePropertyImpl(EditPanelImpl* stage, Sprite* sprite)
 	, m_sprite(NULL)
 {
 	if (sprite) {
-		sprite->Retain();
+		sprite->AddReference();
 		m_sprite = sprite;
 	}
 }
@@ -26,7 +26,7 @@ SpritePropertyImpl::SpritePropertyImpl(EditPanelImpl* stage, Sprite* sprite)
 SpritePropertyImpl::~SpritePropertyImpl()
 {
 	if (m_sprite) {
-		m_sprite->Release();
+		m_sprite->RemoveReference();
 	}
 }
 

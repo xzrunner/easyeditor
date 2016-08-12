@@ -10,7 +10,7 @@ namespace s2
 
 class Texture;
 
-class ImageSymbol : public Symbol
+class ImageSymbol : public VIRTUAL_INHERITANCE Symbol
 {
 public:
 	struct Quad
@@ -20,17 +20,24 @@ public:
 	}; // Quad
 
 public:
-	ImageSymbol(void* ud,
-				void  (*query_texcoords)(void* ud, float* texcoords, int* texid),
-				void  (*proj2screen)(float px, float py, int w, int h, float* sx, float* sy), 
-				bool  (*is_ortho_cam)(),
-				void  (*get_screen_size)(int* w, int* h),
-				float (*get_p3d_cam_angle)(),
-				int   (*get_screen_cache_texid)());
+	ImageSymbol();
 
-	virtual void Draw(const RenderParams& params, const Sprite* spr) const;
+	/**
+	 *  @interface
+	 *    Symbol
+	 */
+	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const;
+	virtual sm::rect GetBounding(const Sprite* spr = NULL) const;
 
 	void InitTex(Texture* tex, const Quad& quad, const sm::vec2& offset);
+
+protected:
+	virtual void QueryTexcoords(float* texcoords, int& texid) const = 0;
+	virtual void Proj2Screen(float px, float py, int w, int h, float& sx, float& sy) const = 0;
+	virtual bool IsOrthoCam() const = 0;
+	virtual void GetScreenSize(int& w, int& h) const = 0;
+	virtual float GetP3dCamAngle() const = 0;
+	virtual int GetScreenCacheTexid() const = 0;
 
 private:
 	void DrawBlend(const RenderParams& params, sm::vec2* vertices, float* texcoords, int texid) const;
@@ -43,12 +50,7 @@ protected:
 	Quad		m_quad;
 	sm::vec2	m_offset;
 
-	void  (*m_query_texcoords)(void* ud, float* texcoords, int* texid);
-	void  (*m_proj2screen)(float px, float py, int w, int h, float* sx, float* sy);
-	bool  (*m_is_ortho_cam)();
-	void  (*m_get_screen_size)(int* w, int* h);
-	float (*m_get_p3d_cam_angle)();
-	int   (*m_get_screen_cache_texid)();
+	sm::rect	m_size;
 
 }; // ImageSymbol
 

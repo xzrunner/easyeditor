@@ -3,14 +3,18 @@
 namespace s2
 {
 
-AnimSprite::AnimSprite(void* ud)
-	: Sprite(ud)
+AnimSprite::AnimSprite()
 {
 }
 
-AnimSprite::AnimSprite(const AnimSprite& spr, void* ud)
-	: Sprite(spr, ud)
+AnimSprite::AnimSprite(const AnimSprite& spr)
+	: Sprite(spr)
 {
+}
+
+AnimSprite* AnimSprite::Clone() const
+{
+	return new AnimSprite(*this);
 }
 
 }

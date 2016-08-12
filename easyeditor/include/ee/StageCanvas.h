@@ -2,10 +2,10 @@
 #define _EASYEDITOR_STAGE_CANVAS_H_
 
 #include "Screen.h"
-#include "Object.h"
 #include "Observer.h"
 
 #include <sprite2/Color.h>
+#include <CU_RefCountObj.h>
 
 #include <wx/glcanvas.h>
 #include <wx/timer.h>
@@ -16,7 +16,7 @@ namespace ee
 class EditPanelImpl;
 class RenderContext;
 
-class StageCanvas : public wxGLCanvas, public Object, public Observer
+class StageCanvas : public wxGLCanvas, public Observer, public cu::RefCountObj
 {
 public:
 	StageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage, wxGLContext* glctx = NULL,

@@ -18,7 +18,7 @@ BodyEditStage::BodyEditStage(wxWindow* parent, wxTopLevelWindow* frame,
 // 		Body* bd = static_cast<Body*>(m_sprite->GetUserData());
 // 		Fixture* fixture = new Fixture;
 // 		fixture->body = bd;
-// 		shape->Retain();
+// 		shape->AddReference();
 // 		fixture->shape = shape;
 // 		bd->fixtures.push_back(fixture);
 // 	}
@@ -54,7 +54,7 @@ void BodyEditStage::loadShapes()
 // 		for (size_t i = 0, n = bd->fixtures.size(); i < n; ++i)
 // 		{
 // 			ee::Shape* shape = bd->fixtures[i]->shape;
-// 			shape->Retain();
+// 			shape->AddReference();
 // 			m_shapes.push_back(shape);
 // 		}
 // 	}

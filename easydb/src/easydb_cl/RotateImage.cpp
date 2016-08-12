@@ -86,8 +86,8 @@ void RotateImage::Rotate(ee::Snapshoot& ss, const std::string& src_dir, const st
 				ss.SaveToFile(outpath, width, height);
 			}
 
-			sprite->Release();
-			symbol->Release();
+			sprite->RemoveReference();
+			symbol->RemoveReference();
 		}
 	}
 }

@@ -44,7 +44,7 @@ bool UIList::InsertSprite(ee::Sprite* sprite, int idx)
 	}
 
 	if (m_hori_count ==  0 && m_vert_count == 0) {
-		sprite->Retain();
+		sprite->AddReference();
 		m_item_spr = sprite;
 		m_items.push_back(m_item_spr->Clone());
 		m_hori_count = m_vert_count = 1;
@@ -89,11 +89,11 @@ bool UIList::ClearAllSprite()
 	bool ret = !m_items.empty();
 
 	if (m_item_spr) {
-		m_item_spr->Release();
+		m_item_spr->RemoveReference();
 		m_item_spr = NULL;
 	}
 
-	for_each(m_items.begin(), m_items.end(), ee::ReleaseObjectFunctor<ee::Sprite>());
+	for_each(m_items.begin(), m_items.end(), ee::cu::RemoveRefFonctor<ee::Sprite>());
 	m_items.clear();
 
 	return ret;
@@ -148,7 +148,7 @@ void UIList::StoreToFile(const char* filename) const
 	ecomplex::Symbol wrapper_complex;
 	wrapper_complex.m_clipbox = m_clipbox;
 	wrapper_complex.Add(&items_sprite);
-	items_sprite.Retain();
+	items_sprite.AddReference();
 	std::string top_path = name + "_wrapper_complex[gen].json";
 	wrapper_complex.SetFilepath(top_path);
 	ecomplex::FileStorer::Store(top_path.c_str(), &wrapper_complex);
@@ -223,7 +223,7 @@ void UIList::LoadFromFile(const char* filename)
 	if (!m_reverse_order) {
 		for (int i = 0, n = children.size(); i < n; ++i) {
 			ee::Sprite* spr = static_cast<ee::Sprite*>(children[i]->GetUD());
-			spr->Retain();
+			spr->AddReference();
 			m_items.push_back(spr);
 		}
 		if (!children.empty()) {
@@ -232,7 +232,7 @@ void UIList::LoadFromFile(const char* filename)
 	} else {
 		for (int i = 0, n = children.size(); i < n; ++i) {
 			ee::Sprite* spr = static_cast<ee::Sprite*>(children[i]->GetUD());
-			spr->Retain();
+			spr->AddReference();
 			m_items.insert(m_items.begin(), spr);
 		}
 		if (!children.empty()) {
@@ -247,7 +247,7 @@ bool UIList::ReFilling()
 		return false;
 	}
 
-	for_each(m_items.begin(), m_items.end(), ee::ReleaseObjectFunctor<ee::Sprite>());
+	for_each(m_items.begin(), m_items.end(), ee::cu::RemoveRefFonctor<ee::Sprite>());
 	m_items.clear();
 
 	m_items.push_back(m_item_spr->Clone());
@@ -318,7 +318,7 @@ bool UIList::Filling()
 		((m_hori_count == 1 || m_vert_count == 1) &&
 		(m_hori_count > 1 || m_vert_count > 1)));
 
-	for_each(m_items.begin(), m_items.end(), ee::ReleaseObjectFunctor<ee::Sprite>());
+	for_each(m_items.begin(), m_items.end(), ee::cu::RemoveRefFonctor<ee::Sprite>());
 	m_items.clear();
 
 	sm::vec2 base = m_item_spr->GetPosition();

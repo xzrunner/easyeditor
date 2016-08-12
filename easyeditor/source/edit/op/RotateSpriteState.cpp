@@ -12,14 +12,14 @@ RotateSpriteState::RotateSpriteState(SpriteSelection* selection,
 	: m_angle(0)
 {
 	m_selection = selection;
-	m_selection->Retain();
+	m_selection->AddReference();
 
 	m_first_pos = m_last_pos = first_pos;
 }
 
 RotateSpriteState::~RotateSpriteState()
 {
-	m_selection->Release();
+	m_selection->RemoveReference();
 }
 
 void RotateSpriteState::OnMouseRelease(const sm::vec2& pos)
@@ -50,13 +50,11 @@ void RotateSpriteState::Rotate(const sm::vec2& dst)
 //////////////////////////////////////////////////////////////////////////
 
 void RotateSpriteState::RotateVisitor::
-Visit(Object* object, bool& next)
+Visit(Sprite* spr, bool& next)
 {
-	Sprite* sprite = static_cast<Sprite*>(object);
-
-	sm::vec2 center = sprite->GetPosition() + sprite->GetOffset();
+	sm::vec2 center = spr->GetPosition() + spr->GetOffset();
 	float angle = Math2D::GetAngleInDirection(center, m_start, m_end);
-	sprite->Rotate(angle);
+	spr->Rotate(angle);
 
 	m_angle += angle;
 

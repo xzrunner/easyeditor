@@ -1,22 +1,22 @@
 #ifndef _EASYEDITOR_BOUNDING_BOX_H_
 #define _EASYEDITOR_BOUNDING_BOX_H_
 
-#include "Cloneable.h"
-
 #include <SM_Vector.h>
 #include <SM_Rect.h>
+#include <CU_Cloneable.h>
 
 #include <vector>
 
 namespace ee
 {
 
-class BoundingBox : public Cloneable
+	class BoundingBox : public cu::Cloneable
 {
 public:
-	//
-	// Cloneable
-	//
+	/**
+	 *  @interface
+	 *    Cloneable
+	 */
 	virtual BoundingBox* Clone() const = 0;
 
 	virtual void InitFromRect(const sm::rect& rect) = 0;

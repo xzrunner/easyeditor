@@ -54,7 +54,7 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(wxWindow* wnd, EditPanelImpl* stage,
 	m_align.SetOpen(cfg.is_auto_align_open);
 
 	m_selection = sprites_impl->GetSpriteSelection();
-	m_selection->Retain();
+	m_selection->AddReference();
 
 	m_left_down_pos.MakeInvalid();
 	m_right_down_pos.MakeInvalid();
@@ -64,7 +64,7 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(wxWindow* wnd, EditPanelImpl* stage,
 
 ArrangeSpriteImpl::~ArrangeSpriteImpl()
 {
-	m_selection->Release();
+	m_selection->RemoveReference();
 	delete m_op_state;
 }
 

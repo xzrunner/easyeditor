@@ -28,10 +28,10 @@ Symbol::Symbol()
 Symbol::~Symbol()
 {
 	if (m_base) {
-		m_base->Release();
+		m_base->RemoveReference();
 	}
 	if (m_mask) {
-		m_mask->Release();
+		m_mask->RemoveReference();
 	}
 }
 

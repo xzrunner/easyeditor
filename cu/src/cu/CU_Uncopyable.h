@@ -1,7 +1,7 @@
-#ifndef _SPRITE2_UNCOPYABLE_H_
-#define _SPRITE2_UNCOPYABLE_H_
+#ifndef _CLASS_UTILITY_UNCOPYABLE_H_
+#define _CLASS_UTILITY_UNCOPYABLE_H_
 
-namespace s2
+namespace cu
 {
 
 class Uncopyable
@@ -18,4 +18,4 @@ private:
 
 }
 
-#endif // _SPRITE2_UNCOPYABLE_H_
+#endif // _CLASS_UTILITY_UNCOPYABLE_H_

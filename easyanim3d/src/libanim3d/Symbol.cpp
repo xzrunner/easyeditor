@@ -64,10 +64,10 @@ void Symbol::SetModel(e3d::IModel* model)
 	if (m_model != model)
 	{
 		if (m_model) {
-			m_model->Release();
+			m_model->RemoveReference();
 		}
 		m_model = model;
-		m_model->Retain();
+		m_model->AddReference();
 	}
 }
 

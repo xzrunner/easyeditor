@@ -8,22 +8,22 @@ namespace s2
 
 class Textbox;
 
-class TextboxSprite : public Sprite
+class TextboxSprite : public VIRTUAL_INHERITANCE Sprite
 {
 public:
-	TextboxSprite(void* ud);
-	TextboxSprite(const TextboxSprite& spr, void* ud);
+	TextboxSprite();
+	TextboxSprite(const TextboxSprite& spr);
 
-	virtual bool Update(float dt) { return false; }
+	/**
+	 *  @interface
+	 *    Cloneable
+	 */
+	virtual TextboxSprite* Clone() const;
 
 	const Textbox* GetTextbox() const { return m_tb; }
 
 	const std::string& GetText() const { return m_text; }
 	
-private:
-	TextboxSprite() {}
-	const TextboxSprite& operator = (const TextboxSprite& spr) { return *this; }
-
 private:
 	Textbox* m_tb;
 

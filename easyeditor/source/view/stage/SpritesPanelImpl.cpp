@@ -14,12 +14,12 @@
 namespace ee
 {
 
-SpritesPanelImpl::SpritesPanelImpl(EditPanelImpl* stage, DataContainer* container)
+SpritesPanelImpl::SpritesPanelImpl(EditPanelImpl* stage, DataContainer<Sprite>* container)
 	: MultiSpritesImpl(stage)
 	, m_stage(stage)
 {
 	m_container = container;
-	m_container->Retain();
+	m_container->AddReference();
 
 	InitSubjects();
 }
@@ -36,10 +36,10 @@ SpritesPanelImpl::SpritesPanelImpl(EditPanelImpl* stage, LibraryPanel* library)
 
 SpritesPanelImpl::~SpritesPanelImpl()
 {
-	m_container->Release();
+	m_container->RemoveReference();
 }
 
-void SpritesPanelImpl::TraverseSprites(Visitor& visitor, DataTraverseType type/* = e_allExisting*/,
+void SpritesPanelImpl::TraverseSprites(Visitor<Sprite>& visitor, DataTraverseType type/* = e_allExisting*/,
 									   bool order/* = true*/) const
 {
 	m_container->Traverse(visitor, type, order);

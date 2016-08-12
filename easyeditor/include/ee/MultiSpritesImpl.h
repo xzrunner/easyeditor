@@ -3,6 +3,8 @@
 
 #include "DataTraverseType.h"
 #include "Observer.h"
+#include "Visitor.h"
+#include "Sprite.h"
 
 #include <SM_Vector.h>
 #include <SM_Rect.h>
@@ -14,8 +16,6 @@ namespace ee
 
 class EditPanelImpl;
 class SpriteSelection;
-class Sprite;
-class Visitor;
 
 class MultiSpritesImpl : public Observer
 {
@@ -23,7 +23,7 @@ public:
 	MultiSpritesImpl(EditPanelImpl* stage);
 	virtual ~MultiSpritesImpl();
 
-	virtual void TraverseSprites(Visitor& visitor, 
+	virtual void TraverseSprites(Visitor<Sprite>& visitor, 
 		DataTraverseType type = DT_ALL, bool order = true) const = 0;
 
 	virtual Sprite* QuerySpriteByPos(const sm::vec2& pos) const;

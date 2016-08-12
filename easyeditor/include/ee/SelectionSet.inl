@@ -54,7 +54,7 @@ inline bool SelectionSet<T>::IsExist(T* sprite) const
 }
 
 template<class T>
-inline void SelectionSet<T>::Traverse(Visitor& visitor) const
+inline void SelectionSet<T>::Traverse(Visitor<T>& visitor) const
 {
 	std::vector<T*>::const_iterator itr = m_items.begin();
 	for ( ; itr != m_items.end(); ++itr)

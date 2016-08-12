@@ -22,7 +22,7 @@ Icon::Icon(ee::Image* img)
 Icon::~Icon()
 {
 	if (m_img) {
-		m_img->Release();
+		m_img->RemoveReference();
 	}
 }
 

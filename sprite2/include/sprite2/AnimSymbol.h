@@ -8,7 +8,7 @@
 namespace s2
 {
 
-class AnimSymbol : public Symbol
+class AnimSymbol : public VIRTUAL_INHERITANCE Symbol
 {
 public:
 	class Frame
@@ -36,9 +36,14 @@ public:
 	}; // Layer
 
 public:
-	AnimSymbol(void* ud);
+	AnimSymbol();
 
-	virtual void Draw(const RenderParams& params, const Sprite* spr) const;
+	/**
+	 *  @interface
+	 *    Symbol
+	 */
+	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const;
+	virtual sm::rect GetBounding(const Sprite* spr = NULL) const;
 
 	const std::vector<Layer*>& GetLayers() const { return m_layers; }
 
@@ -48,7 +53,7 @@ public:
 	void AddLayer(Layer* layer);
 	bool Clear();
 
-private:
+protected:
 	std::vector<Layer*> m_layers;
 
 }; // AnimSymbol

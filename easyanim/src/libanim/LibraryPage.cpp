@@ -62,7 +62,7 @@ void LibraryPage::LoadFromJsonFile(const std::string& filename)
 	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filename);
 	symbol->RefreshThumbnail(filename);
 	m_list->Insert(symbol);
-	symbol->Release();
+	symbol->RemoveReference();
 }
 
 void LibraryPage::LoadFromLuaFile(const std::string& filename)

@@ -50,7 +50,7 @@ Body* FileApapter::ToBody(const Json::Value& bodyValue, const std::string& dlg)
 
 	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-	symbol->Release();
+	symbol->RemoveReference();
 
 	sm::vec2 pos;
 	pos.x = bodyValue["position"]["x"].asDouble();

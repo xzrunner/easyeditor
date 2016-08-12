@@ -135,7 +135,7 @@ void AnchorMgr::Remove(ee::Sprite* spr)
 		std::vector<ee::Sprite*>::iterator itr = anchor.sprites.begin();
 		for ( ; itr != anchor.sprites.end(); ++itr) {
 			if (*itr == spr) {
-				spr->Release();
+				spr->RemoveReference();
 				anchor.sprites.erase(itr);
 				break;
 			}
@@ -144,7 +144,7 @@ void AnchorMgr::Remove(ee::Sprite* spr)
 
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		if (spr == m_sprites[i]) {
-			spr->Release();
+			spr->RemoveReference();
 			m_sprites.erase(m_sprites.begin() + i);
 			break;
 		}
@@ -157,10 +157,10 @@ void AnchorMgr::Insert(ee::Sprite* spr)
 
 	spr->SetTransform(anchor->pos, 0);
 
-	spr->Retain();
+	spr->AddReference();
 	anchor->sprites.push_back(spr);
 
-	spr->Retain();
+	spr->AddReference();
 	m_sprites.push_back(spr);
 }
 
@@ -169,12 +169,12 @@ void AnchorMgr::Clear()
 	for (int i = 0; i < ANCHOR_COUNT; ++i) {
 		Anchor& anchor = m_anchors[i];
 		for_each(anchor.sprites.begin(), anchor.sprites.end(), 
-			ee::ReleaseObjectFunctor<ee::Sprite>());
+			ee::cu::RemoveRefFonctor<ee::Sprite>());
 		anchor.sprites.clear();
 	}
 
 	for_each(m_sprites.begin(), m_sprites.end(), 
-		ee::ReleaseObjectFunctor<ee::Sprite>());
+		ee::cu::RemoveRefFonctor<ee::Sprite>());
 	m_sprites.clear();
 }
 

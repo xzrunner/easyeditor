@@ -5,14 +5,18 @@
 namespace s2
 {
 
-MeshSprite::MeshSprite(void* ud)
-	: Sprite(ud)
+MeshSprite::MeshSprite()
 {
 }
 
-MeshSprite::MeshSprite(const MeshSprite& spr, void* ud)
-	: Sprite(spr, ud)
+MeshSprite::MeshSprite(const MeshSprite& spr)
+	: Sprite(spr)
 {
+}
+
+MeshSprite* MeshSprite::Clone() const
+{
+	return new MeshSprite(*this);
 }
 
 }

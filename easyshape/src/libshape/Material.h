@@ -3,9 +3,8 @@
 
 #include <json/json.h>
 
-#include <ee/Object.h>
-
 #include <SM_Matrix.h>
+#include <CU_RefCountObj.h>
 
 namespace ee { class RenderColor; }
 namespace s2 { class RenderColor; }
@@ -13,7 +12,7 @@ namespace s2 { class RenderColor; }
 namespace eshape
 {
 
-class Material : public ee::Object
+class Material : public cu::RefCountObj
 {
 public:
 	Material() {}

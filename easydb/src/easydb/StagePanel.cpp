@@ -30,11 +30,11 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 {
 	ee::EditOP* editop = new ee::ArrangeSpriteOP<SelectSpritesOP>(this, this->GetStageImpl(), this);
 	SetEditOP(editop);
-	editop->Release();
+	editop->RemoveReference();
 
 	ee::StageCanvas* canvas = new StageCanvas(this);
 	SetCanvas(canvas);
-	canvas->Release();
+	canvas->RemoveReference();
 }
 
 StagePanel::~StagePanel()
@@ -56,7 +56,7 @@ void StagePanel::LoadFromDir(const std::string& dirpath)
 		{
 			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-			symbol->Release();
+			symbol->RemoveReference();
 			ee::InsertSpriteSJ::Instance()->Insert(sprite);
 		}
 	}

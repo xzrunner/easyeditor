@@ -101,7 +101,7 @@ void RotateTrimImage::RotateTrim(ee::Snapshoot& ss, const std::string& dir)
 			float angle;
 			bool success = GetRotateTrimInfo(image, width, height, center, angle);
 			if (!success || angle == 0) {
-				image->Release();
+				image->RemoveReference();
 				continue;
 			}
 
@@ -109,8 +109,8 @@ void RotateTrimImage::RotateTrim(ee::Snapshoot& ss, const std::string& dir)
 			sprite->SetTransform(center, angle);
 			ss.DrawSprite(sprite, true, width, height);
 
-			sprite->Release();
-			symbol->Release();
+			sprite->RemoveReference();
+			symbol->RemoveReference();
 
 			//std::string dir = ee::FileHelper::getFileDir(filepath);
 			//std::string name = ee::FileHelper::getFilename(filepath);

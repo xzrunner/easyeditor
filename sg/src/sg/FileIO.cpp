@@ -75,7 +75,7 @@ ee::Sprite* FileIO::load(const Json::Value& value, StagePanel* stage, const std:
 	sm::vec2 pos;
 	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 	sprite->SetTag(value["tag"].asString());
-	symbol->Release();
+	symbol->RemoveReference();
 
 	//// old
 	//stage->TransGridPosToCoords(row, col, pos);

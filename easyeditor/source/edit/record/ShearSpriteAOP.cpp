@@ -12,14 +12,14 @@ ShearSpriteAOP::ShearSpriteAOP(Sprite* sprite,
    : m_new_shear(new_shear)
    , m_old_shear(old_shear)
 {
-	sprite->Retain();
+	sprite->AddReference();
 	m_sprites.push_back(sprite);
 }
 
 ShearSpriteAOP::~ShearSpriteAOP()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->Release();
+		m_sprites[i]->RemoveReference();
 	}
 }
 

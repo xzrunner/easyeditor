@@ -96,10 +96,10 @@ void FileIO::FetchSprites(const std::string& filepath, std::vector<ee::Sprite*>&
 
 		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
 		spr->Load(spr_val);
-		spr->Retain();
+		spr->AddReference();
 		sprites.push_back(spr);
-		spr->Release();
-		sym->Release();
+		spr->RemoveReference();
+		sym->RemoveReference();
 
 		spr_val = val["sprite"][idx++];
 	}
@@ -144,8 +144,8 @@ void FileIO::LoadSprites(const Json::Value& val, Symbol* sym, const std::string&
 		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 		sprite->Load(spr_val);
 		anchors.Insert(sprite);
-		sprite->Release();
-		symbol->Release();
+		sprite->RemoveReference();
+		symbol->RemoveReference();
 
 		spr_val = val["sprite"][idx++];
 	}
@@ -178,8 +178,8 @@ void FileIO::LoadRefs(const Json::Value& val, Symbol* sym, const std::string& di
 		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 		sprite->Load(spr_val);
 		sym->InsertExtRef(static_cast<Sprite*>(sprite));
-		sprite->Release();
-		symbol->Release();
+		sprite->RemoveReference();
+		symbol->RemoveReference();
 
 		spr_val = val["ref_spr"][idx++];
 	}

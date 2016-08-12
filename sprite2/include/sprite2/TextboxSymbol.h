@@ -9,12 +9,18 @@
 namespace s2
 {
 
-class TextboxSymbol : public Symbol
+class TextboxSymbol : public VIRTUAL_INHERITANCE Symbol
 {
 public:
-	TextboxSymbol(void* ud, Textbox tb);
+	TextboxSymbol() {}
+	TextboxSymbol(Textbox tb);
 
-	virtual void Draw(const RenderParams& params, const Sprite* spr) const;
+	/**
+	 *  @interface
+	 *    Symbol
+	 */
+	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const;
+	virtual sm::rect GetBounding(const Sprite* spr = NULL) const;
 
 private:
 	Textbox m_tb;

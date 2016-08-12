@@ -74,7 +74,7 @@ void PreviewCanvas::DrawStageData() const
 	}
 
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-		sprites[i]->Release();
+		sprites[i]->RemoveReference();
 	}
 
 	ee::SceneNodeMgr::Instance()->Draw();

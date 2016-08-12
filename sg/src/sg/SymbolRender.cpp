@@ -28,11 +28,11 @@ SymbolRender::SymbolRender()
 
 SymbolRender::~SymbolRender()
 {
-	m_grid->Release();
-	m_arrow_down->Release();
-	m_arrow_right->Release();
+	m_grid->RemoveReference();
+	m_arrow_down->RemoveReference();
+	m_arrow_right->RemoveReference();
 	for (int i = 0; i < GRASS_COUNT; ++i) {
-		m_grass[i]->Release();
+		m_grass[i]->RemoveReference();
 	}
 }
 

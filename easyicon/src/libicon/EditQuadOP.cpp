@@ -96,7 +96,7 @@ bool EditQuadOP::OnActive()
 
 	icon = new QuadIcon;
 	stage->SetIcon(icon);
-	icon->Release();	
+	icon->RemoveReference();	
 
 	return false;
 }

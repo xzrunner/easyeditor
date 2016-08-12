@@ -205,7 +205,7 @@ void FileIO::StoreAsGif(const std::string& src, const std::string& dst)
 	anim->setFrameIndex(0);
 	saver.Save(dst.c_str());
 
-	symbol->Release();
+	symbol->RemoveReference();
 }
 
 void FileIO::StoreAsPng(const std::string& src, const std::string& dst)
@@ -217,7 +217,7 @@ void FileIO::StoreAsPng(const std::string& src, const std::string& dst)
 	ee::Snapshoot ss;
 	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(src);
 	ss.OutputToImageFile(symbol, dst);
-	symbol->Release();
+	symbol->RemoveReference();
 }
 
 Layer* FileIO::LoadLayer(const Json::Value& layerValue, const std::string& dir)
@@ -233,7 +233,7 @@ Layer* FileIO::LoadLayer(const Json::Value& layerValue, const std::string& dir)
 	while (!frameValue.isNull()) {
 		KeyFrame* frame = LoadFrame(layer, frameValue, dir);
 		layer->InsertKeyFrame(frame);
-		frame->Release();
+		frame->RemoveReference();
 		frameValue = layerValue["frame"][i++];
 	}
 
@@ -263,7 +263,7 @@ KeyFrame* FileIO::LoadFrame(Layer* layer, const Json::Value& frameValue, const s
 	while (!actorValue.isNull()) {
 		ee::Sprite* actor = LoadActor(actorValue, dir);
 		frame->Insert(actor, INT_MAX);
-		actor->Release();
+		actor->RemoveReference();
 		actorValue = frameValue["actor"][i++];
 	}
 
@@ -305,7 +305,7 @@ ee::Sprite* FileIO::LoadActor(const Json::Value& actorValue, const std::string& 
 //	symbol->refresh();
 	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 	sprite->Load(actorValue, dir);
-	symbol->Release();
+	symbol->RemoveReference();
 
 	return sprite;
 }
@@ -405,7 +405,7 @@ Layer* FileIO::LoadLayer(rapidxml::xml_node<>* layerNode,
 	while (frameNode) {
 		KeyFrame* frame = LoadFrame(layer, frameNode, mapNamePath);
 		layer->InsertKeyFrame(frame);
-		frame->Release();
+		frame->RemoveReference();
 		frameNode = frameNode->next_sibling();
 	}
 
@@ -425,7 +425,7 @@ KeyFrame* FileIO::LoadFrame(Layer* layer, rapidxml::xml_node<>* frameNode,
 	while (actorNode) {
 		ee::Sprite* actor = LoadActor(actorNode, mapNamePath);
 		frame->Insert(actor, INT_MAX);
-		actor->Release();
+		actor->RemoveReference();
 		actorNode = actorNode->next_sibling();
 	}
 
@@ -440,7 +440,7 @@ ee::Sprite* FileIO::LoadActor(rapidxml::xml_node<>* actorNode,
 	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 //	symbol->refresh();
 	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-	symbol->Release();
+	symbol->RemoveReference();
 
 	rapidxml::xml_node<>* matrixNode = actorNode->first_node("matrix")->first_node("Matrix");
 	std::string stx = matrixNode->first_attribute("tx")->value();

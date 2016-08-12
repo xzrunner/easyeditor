@@ -8,12 +8,17 @@
 namespace s2
 {
 
-class IconSymbol : public Symbol
+class IconSymbol : public VIRTUAL_INHERITANCE Symbol
 {
 public:
-	IconSymbol(void* ud);
+	IconSymbol();
 
-	virtual void Draw(const RenderParams& params, const Sprite* spr) const;
+	/**
+	 *  @interface
+	 *    Symbol
+	 */
+	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const;
+	virtual sm::rect GetBounding(const Sprite* spr = NULL) const { return sm::rect(0, 0); }
 
 }; // IconSymbol
 

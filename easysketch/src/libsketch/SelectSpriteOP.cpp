@@ -16,7 +16,7 @@ SelectSpriteOP::SelectSpriteOP(StagePanel* stage)
 	, m_stage(stage)
 {
 	m_selection = stage->GetSpriteSelection();
-	m_selection->Retain();
+	m_selection->AddReference();
 }
 
 bool SelectSpriteOP::OnMouseLeftDown(int x, int y)

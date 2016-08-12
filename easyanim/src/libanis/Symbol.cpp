@@ -71,7 +71,7 @@ void Symbol::LoadResources()
 
 void Symbol::Clear()
 {
-	for_each(m_symbols.begin(), m_symbols.end(), ee::ReleaseObjectFunctor<eanim::Symbol>());
+	for_each(m_symbols.begin(), m_symbols.end(), ee::cu::RemoveRefFonctor<eanim::Symbol>());
 	m_symbols.clear();
 }
 

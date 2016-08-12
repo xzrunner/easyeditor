@@ -26,7 +26,7 @@ bool EditChangedRectOP::OnActive()
 
 	icon = new ChangedRectIcon;
 	stage->SetIcon(icon);
-	icon->Release();	
+	icon->RemoveReference();	
 
 	return false;
 }

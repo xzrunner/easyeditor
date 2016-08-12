@@ -1,8 +1,6 @@
 #ifndef _EASYSHADOW_SHADOW_H_
 #define _EASYSHADOW_SHADOW_H_
 
-#include <ee/Object.h>
-
 #include <SM_Matrix.h>
 #include <SM_Rect.h>
 #include <sprite2/Color.h>

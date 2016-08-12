@@ -5,14 +5,19 @@
 namespace s2
 {
 
-ShapeSprite::ShapeSprite(void* ud)
-	: Sprite(ud)
+ShapeSprite::ShapeSprite()
+	: Sprite()
 {
 }
 
-ShapeSprite::ShapeSprite(const ShapeSprite& spr, void* ud)
-	: Sprite(spr, ud)
+ShapeSprite::ShapeSprite(const ShapeSprite& spr)
+	: Sprite(spr)
 {
+}
+
+ShapeSprite* ShapeSprite::Clone() const
+{
+	return new ShapeSprite(*this);
 }
 
 }

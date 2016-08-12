@@ -50,9 +50,9 @@ VerticalImageList::~VerticalImageList()
 
 void VerticalImageList::Clear()
 {
-	for (int i = 0, n = m_items.size(); i < n; ++i) {
-		m_items[i]->Release();
-	}
+// 	for (int i = 0, n = m_items.size(); i < n; ++i) {
+// 		m_items[i]->RemoveReference();
+// 	}
 	m_items.clear();
 	SetItemCount(0);
 	Refresh(true);
@@ -60,7 +60,7 @@ void VerticalImageList::Clear()
 
 void VerticalImageList::Insert(ListItem* item, int idx)
 {
-	item->Retain();
+//	item->AddReference();
 	if (idx < 0 || idx >= static_cast<int>(m_items.size())) {
 		m_items.push_back(item);
 		SetItemCount(m_items.size());
@@ -92,7 +92,7 @@ void VerticalImageList::Remove(int index)
 	if (index < 0 || index >= static_cast<int>(m_items.size()))
 		return;
 
-	m_items[index]->Release();
+//	m_items[index]->RemoveReference();
 	m_items.erase(m_items.begin() + index);
  	SetItemCount(m_items.size());
 	Refresh(true);
@@ -108,7 +108,7 @@ void VerticalImageList::Swap(int i0, int i1)
 	Refresh(true);
 }
 
-void VerticalImageList::Traverse(Visitor& visitor) const
+void VerticalImageList::Traverse(Visitor<ListItem>& visitor) const
 {
 	std::vector<ListItem*>::const_iterator itr = m_items.begin();
 	for ( ; itr != m_items.end(); ++itr)

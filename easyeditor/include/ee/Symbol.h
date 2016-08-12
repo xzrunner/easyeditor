@@ -7,38 +7,31 @@
 
 #include <SM_Matrix.h>
 #include <SM_Rect.h>
+#include <sprite2/S2_Symbol.h>
 
 #include <set>
-
-namespace s2 { class Symbol; class RenderParams; }
 
 namespace ee
 {
 
 class Sprite;
 
-class Symbol : public ListItem, public UserDataImpl
+class Symbol : public virtual s2::Symbol, public ListItem, public UserDataImpl
 {
 public:
 	Symbol();
 	Symbol(const Symbol& sym);
 	virtual ~Symbol();
 
-	//
-	// IObject interface
-	//	
-	virtual Symbol* Clone() const { return NULL; }
-
-	//
-	// UserDataImpl interface
-	//	
+	/**
+	 *  @interface
+	 *    UserDataImpl
+	 */
 	virtual void ClearUserData(bool deletePtr);
 
-	virtual void Draw(const s2::RenderParams& params, const Sprite* spr = NULL) const = 0;
 	virtual void ReloadTexture() const {}
-	virtual sm::rect GetSize(const Sprite* sprite = NULL) const = 0;
 	virtual void InvalidRect(const sm::mat4& mt) const {}
-	virtual void Traverse(Visitor& visitor) {}
+	virtual void Traverse(Visitor<Sprite>& visitor) {}
 
 	bool LoadFromFile(const std::string& filepath);
 
@@ -52,9 +45,6 @@ public:
 	const std::set<std::string>& GetFilepaths() const;
 	void SetFilepaths(const std::set<std::string>& filepaths);
 
-private:
-	const Symbol& operator = (const Symbol& sym) { return sym; }
-
 public:
 	std::string name;
 	std::string tag;
@@ -63,8 +53,6 @@ protected:
 	virtual void LoadResources() = 0;
 
 protected:
-	s2::Symbol* m_impl;
-
 	std::string m_filepath;
 
 private:

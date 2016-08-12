@@ -23,7 +23,7 @@ EditCMPT::EditCMPT(wxWindow* parent, const std::string& name, EditPanelImpl* sta
 EditCMPT::~EditCMPT()
 {
 	if (m_editop)
-		m_editop->Release();
+		m_editop->RemoveReference();
  
  	for_each(m_children.begin(), m_children.end(), DeletePointerFunctor<EditCMPT>());
 }
@@ -96,11 +96,11 @@ void EditCMPT::LoadEditOP(EditOP* op)
 	}
 
 	if (op) {
-		op->Retain();
+		op->AddReference();
 	}
 	if (m_editop) {
 		m_editop->Clear();
-		m_editop->Release();
+		m_editop->RemoveReference();
 	}
 	m_editop = op;
 
@@ -114,12 +114,12 @@ void EditCMPT::LoadEditOP(EditCMPT* cmpt)
 	}
 
 	if (m_editop) {
-		m_editop->Retain();
+		m_editop->AddReference();
 	}
 	if (cmpt->m_editop)
 	{
 		cmpt->m_editop->Clear();
-		cmpt->m_editop->Release();
+		cmpt->m_editop->RemoveReference();
 	}
 	cmpt->m_editop = m_editop;
 

@@ -22,7 +22,7 @@ IBody* BodyManager::LoadBody(Sprite* sprite)
 	IBody* body = CreateBody(sprite);
 	if (itr == m_map_body.end()) {
 		if (body) {
-			sprite->Retain();
+			sprite->AddReference();
 			m_map_body.insert(std::make_pair(sprite, body));
 		}
 	} else {
@@ -36,8 +36,8 @@ void BodyManager::UnloadBody(Sprite* sprite)
 	std::map<Sprite*, IBody*>::iterator itr = 
 		m_map_body.find(sprite);
 	if (itr != m_map_body.end()) {
-		itr->first->Release();
-		itr->second->Release();
+		itr->first->RemoveReference();
+		itr->second->RemoveReference();
 		m_map_body.erase(itr);
 	}
 }

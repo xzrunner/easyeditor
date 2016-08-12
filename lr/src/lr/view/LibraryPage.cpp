@@ -30,9 +30,9 @@ LibraryPage::LibraryPage(LibraryPanel* library, const std::string& name,
 
 LibraryPage::~LibraryPage()
 {
-	m_layer->Release();
+	m_layer->RemoveReference();
 
-	for_each(m_editops.begin(), m_editops.end(), ee::ReleaseObjectFunctor<ee::EditOP>());
+	for_each(m_editops.begin(), m_editops.end(), ee::cu::RemoveRefFonctor<ee::EditOP>());
 }
 
 bool LibraryPage::IsHandleSymbol(ee::Symbol* symbol) const
@@ -49,15 +49,15 @@ void LibraryPage::UpdateStatusFromLayer()
 void LibraryPage::SetLayer(Layer* layer)
 {
 	if (m_layer != layer) {
-		m_layer->Release();
-		layer->Retain();
+		m_layer->RemoveReference();
+		layer->AddReference();
 		m_layer = layer;
 	}
 }
 
 void LibraryPage::AddEditOP(ee::EditOP* editop)
 {
-	editop->Retain();
+	editop->AddReference();
 	m_editops.push_back(editop);
 	if (m_curr_op_idx < 0) {
 		m_curr_op_idx = 0;
@@ -116,7 +116,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			symbol->RefreshThumbnail(filepath);
 			m_list->Insert(symbol);
-			symbol->Release();
+			symbol->RemoveReference();
 		}
 	}
 }

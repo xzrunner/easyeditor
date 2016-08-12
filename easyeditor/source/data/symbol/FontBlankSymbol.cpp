@@ -50,6 +50,7 @@ void FontBlankSymbol::Draw(const s2::RenderParams& params, const Sprite* spr) co
 
 sm::rect FontBlankSymbol::GetSize(const Sprite* sprite/* = NULL*/) const
 {
+	sm::rect b;
 	float w = width, h = height;
 	if (sprite) {
 		const FontBlankSprite* font = dynamic_cast<const FontBlankSprite*>(sprite);
@@ -58,7 +59,8 @@ sm::rect FontBlankSymbol::GetSize(const Sprite* sprite/* = NULL*/) const
 			h = font->height;
 		}
 	}
-	return sm::rect(sm::vec2(0, 0), w, h);
+	b.Build(w, h);
+	return b;
 }
 
 bool FontBlankSymbol::LoadFont(const std::string& _filename)

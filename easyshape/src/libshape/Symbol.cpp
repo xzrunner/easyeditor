@@ -29,16 +29,16 @@ Symbol::Symbol(const Symbol& symbol)
 
 	m_bg = symbol.m_bg;
 	if (m_bg) {
-		m_bg->Retain();
+		m_bg->AddReference();
 	}
 	m_bg_outline.reserve(symbol.m_bg_outline.size());
 	for (size_t i = 0, n = symbol.m_bg_outline.size(); i < n; ++i) {
-		m_bg_outline.push_back(symbol.m_bg_outline[i]->Clone());
+		m_bg_outline.push_back(symbol.m_bg_outline[i]->EEClone());
 	}
 	
 	m_shapes.reserve(symbol.m_shapes.size());
 	for (size_t i = 0, n = symbol.m_shapes.size(); i < n; ++i) {
-		m_shapes.push_back(symbol.m_shapes[i]->Clone());
+		m_shapes.push_back(symbol.m_shapes[i]->EEClone());
 	}
 }
 
@@ -47,17 +47,12 @@ Symbol::~Symbol()
 	Clear();
 }
 
-Symbol* Symbol::Clone() const
-{
-	return new Symbol(*this); 
-}
-
-void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
+void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	s2::RenderParams p = params;
 	if (spr) {
-		p.mt = spr->GetTransMatrix() * params.mt;
-		p.color = spr->GetColor() * params.color;
+		p.mt = dynamic_cast<const ee::Sprite*>(spr)->GetTransMatrix() * params.mt;
+		p.color = spr->Color() * params.color;
 	}
 
  	if (m_bg) {
@@ -74,6 +69,18 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 	}
 }
 
+sm::rect Symbol::GetBounding(const s2::Sprite* spr) const
+{
+	sm::rect b;
+	for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
+		b.Combine(m_bg_outline[i]->GetBounding());
+	}
+	for (size_t i = 0, n = m_shapes.size(); i < n; ++i) {
+		b.Combine(m_shapes[i]->GetBounding());
+	}
+	return b;
+}
+
 void Symbol::ReloadTexture() const
 {
 	if (m_bg) {
@@ -81,19 +88,7 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-sm::rect Symbol::GetSize(const ee::Sprite* sprite/* = NULL*/) const
-{
-	sm::rect rect;
-	for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
-		rect.Combine(m_bg_outline[i]->GetRect());
-	}
-	for (size_t i = 0, n = m_shapes.size(); i < n; ++i) {
-		rect.Combine(m_shapes[i]->GetRect());
-	}
-	return rect;
-}
-
-void Symbol::Traverse(ee::Visitor& visitor) const
+void Symbol::Traverse(ee::Visitor<ee::Shape>& visitor) const
 {
 	for (int i = 0, n = m_bg_outline.size(); i < n; ++i) {
 		bool next;
@@ -113,7 +108,7 @@ bool Symbol::Add(ee::Shape* shape)
 		return false;
 	}
 
-	shape->Retain();
+	shape->AddReference();
 	m_shapes.push_back(shape);
 	return true;
 }
@@ -129,7 +124,7 @@ bool Symbol::Remove(ee::Shape* shape)
 		if (m_shapes[i] == shape) 
 		{
 			m_shapes.erase(m_shapes.begin() + i);
-			shape->Release();
+			shape->RemoveReference();
 			return true;
 		}
 	}
@@ -142,12 +137,12 @@ bool Symbol::Clear()
 	bool ret = !m_bg_outline.empty() || !m_shapes.empty();
 
 	for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
-		m_bg_outline[i]->Release();
+		m_bg_outline[i]->RemoveReference();
 	}
 	m_bg_outline.clear();
 
 	for (size_t i = 0, n = m_shapes.size(); i < n; ++i) {
-		m_shapes[i]->Release();
+		m_shapes[i]->RemoveReference();
 	}
 	m_shapes.clear();
 
@@ -160,7 +155,7 @@ void Symbol::SetBG(ee::Symbol* bg)
 		LoadBGOutline(bg);
 		LoadBGTriStrip(bg);
 	}
-	ee::obj_assign<ee::Symbol>(m_bg, bg);
+	cu::RefCountObjAssign(m_bg, bg);
 }
 
 void Symbol::StoreToFile(const char* filename) const
@@ -179,7 +174,7 @@ void Symbol::LoadResources()
 void Symbol::LoadBGOutline(ee::Symbol* bg)
 {
 	for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
-		m_bg_outline[i]->Release();
+		m_bg_outline[i]->RemoveReference();
 	}
 	m_bg_outline.clear();
 

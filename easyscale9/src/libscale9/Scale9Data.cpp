@@ -48,7 +48,7 @@ Scale9Data::~Scale9Data()
 	for (int i = 0; i < 3; ++i) {
 		for (int j = 0; j < 3; ++j) {
 			if (m_sprites[i][j]) {
-				m_sprites[i][j]->Release();
+				m_sprites[i][j]->RemoveReference();
 			}
 		}
 	}
@@ -99,7 +99,7 @@ void Scale9Data::Compose(ee::Sprite* sprites[3][3], float width, float height)
 	for (int i = 0; i < 3; ++i) {
 		for (int j = 0; j < 3; ++j) {
 			if (m_sprites[i][j]) {
-				m_sprites[i][j]->Release();
+				m_sprites[i][j]->RemoveReference();
 			}
 
 			ee::Sprite* src = sprites[i][j];
@@ -393,7 +393,7 @@ void Scale9Data::InitSprite(const Json::Value& spr_val, ee::Sprite** pSprite,
 	ee::SymbolSearcher::SetSymbolFilepaths(dir, symbol, spr_val);
 	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 	sprite->Load(spr_val);
-	symbol->Release();
+	symbol->RemoveReference();
 
 	*pSprite = sprite;
 }

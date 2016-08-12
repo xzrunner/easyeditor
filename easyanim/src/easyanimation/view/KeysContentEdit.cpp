@@ -154,8 +154,8 @@ void KeysContentEdit::PasteSelection()
 			ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(symbol);
 			spr->Load(s_val);
 			frame->Insert(spr, INT_MAX);
-			spr->Release();
-			symbol->Release();
+			spr->RemoveReference();
+			symbol->RemoveReference();
 		}
 
 		layer->InsertKeyFrame(frame);

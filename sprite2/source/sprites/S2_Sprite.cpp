@@ -7,13 +7,14 @@
 namespace s2
 {
 
-Sprite::Sprite(void* ud)
+Sprite::Sprite()
 	: m_sym(NULL)
 	, m_position(0, 0)
 	, m_angle(0)
 	, m_scale(1, 1)
 	, m_shear(0, 0)
-	, m_ud(ud)
+	, m_offset(0, 0)
+	, m_visible(true)
 {
 	m_bounding = new OBB();
 	m_bounding_dirty = true;
@@ -21,7 +22,7 @@ Sprite::Sprite(void* ud)
 	m_shader.filter = FilterFactory::Instance()->Create(FM_NULL);
 }
 
-Sprite::Sprite(const Sprite& spr, void* ud)
+Sprite::Sprite(const Sprite& spr)
 	: m_sym(NULL)
 	, m_position(spr.m_position)
 	, m_angle(spr.m_angle)
@@ -31,8 +32,13 @@ Sprite::Sprite(const Sprite& spr, void* ud)
 	, m_color(spr.m_color)
 	, m_shader(spr.m_shader)
 	, m_camera(spr.m_camera)
-	, m_ud(ud)
+	, m_visible(spr.m_visible)
 {
+	if (spr.m_sym) {
+		spr.m_sym->AddReference();
+		m_sym = spr.m_sym;
+	}
+
 	m_bounding = new OBB(*static_cast<OBB*>(spr.m_bounding));
 	m_bounding_dirty = false;
 
@@ -45,6 +51,10 @@ Sprite::Sprite(const Sprite& spr, void* ud)
 
 Sprite::~Sprite()
 {
+	if (m_sym) {
+		m_sym->RemoveReference();
+	}
+
 	delete m_bounding;
 
 	delete m_shader.filter;
@@ -79,10 +89,11 @@ void Sprite::SetShear(const sm::vec2& shear)
 // 	
 // }
 
+// todo: m_sym->GetBounding too slow, should be cached
 void Sprite::UpdateBounding()
 {
 	if (m_sym) {
-		m_bounding->Build(m_sym->GetSize(this), m_position, m_angle, m_scale, m_shear, m_offset);	
+		m_bounding->Build(m_sym->GetBounding(this), m_position, m_angle, m_scale, m_shear, m_offset);	
 	}
 }
 

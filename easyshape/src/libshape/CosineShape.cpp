@@ -10,11 +10,6 @@ CosineShape::CosineShape(const std::vector<sm::vec2>& vertices)
 {
 }
 
-CosineShape* CosineShape::Clone() const
-{
-	return new CosineShape(*this);	
-}
-
 void CosineShape::Translate(const sm::vec2& offset)
 {
 	for (int i = 0, n = m_mid_points.size(); i < n; ++i) {

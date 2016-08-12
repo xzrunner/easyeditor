@@ -25,7 +25,7 @@ Snapshoot::Snapshoot(int width, int height)
 
 Snapshoot::~Snapshoot()
 {
-	m_fbo->Release();	
+	m_fbo->RemoveReference();	
 }
 
 unsigned char* Snapshoot::OutputToMemory(const Symbol* symbol, bool whitebg,

@@ -1,7 +1,7 @@
 #ifndef _SPRITE2_CAMERA_MGR_H_
 #define _SPRITE2_CAMERA_MGR_H_
 
-#include "Singleton.h"
+#include <CU_Singleton.h>
 
 namespace s2
 {

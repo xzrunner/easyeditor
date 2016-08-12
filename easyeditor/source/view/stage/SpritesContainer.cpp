@@ -10,29 +10,29 @@ SpritesContainer::~SpritesContainer()
 	Clear();
 }
 
-void SpritesContainer::Traverse(Visitor& visitor, bool order/* = true*/) const
+void SpritesContainer::Traverse(Visitor<Sprite>& visitor, bool order/* = true*/) const
 {
 	m_sprites.Traverse(visitor, order);
 }
 
-void SpritesContainer::Traverse(Visitor& visitor, DataTraverseType type, bool order) const
+void SpritesContainer::Traverse(Visitor<Sprite>& visitor, DataTraverseType type, bool order) const
 {
 	m_sprites.Traverse(visitor, type, order);
 }
 
-bool SpritesContainer::Remove(Object* obj)
+bool SpritesContainer::Remove(Sprite* spr)
 {
-	return m_sprites.Remove(static_cast<Sprite*>(obj));
+	return m_sprites.Remove(spr);
 }
 
-bool SpritesContainer::Insert(Object* obj)
+bool SpritesContainer::Insert(Sprite* spr)
 {
-	return m_sprites.Insert(static_cast<Sprite*>(obj));
+	return m_sprites.Insert(spr);
 }
 
-bool SpritesContainer::Insert(Object* obj, int idx)
+bool SpritesContainer::Insert(Sprite* spr, int idx)
 {
-	return m_sprites.Insert(static_cast<Sprite*>(obj), idx);
+	return m_sprites.Insert(spr, idx);
 }
 
 bool SpritesContainer::Clear()
@@ -40,14 +40,14 @@ bool SpritesContainer::Clear()
 	return m_sprites.Clear();
 }
 
-bool SpritesContainer::ResetOrder(const Object* obj, bool up)
+bool SpritesContainer::ResetOrder(const Sprite* spr, bool up)
 {
-	return m_sprites.ResetOrder(static_cast<const Sprite*>(obj), up);
+	return m_sprites.ResetOrder(spr, up);
 }
 
-bool SpritesContainer::ResetOrderMost(const Object* obj, bool up)
+bool SpritesContainer::ResetOrderMost(const Sprite* spr, bool up)
 {
-	return m_sprites.ResetOrderMost(static_cast<const Sprite*>(obj), up);	
+	return m_sprites.ResetOrderMost(spr, up);	
 }
 
 bool SpritesContainer::Sort(std::vector<Sprite*>& sprites)

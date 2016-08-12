@@ -11,13 +11,13 @@ PolygonPropertySetting::PolygonPropertySetting(ee::EditPanelImpl* stage,
 	: PropertySetting("Polygon")
 	, m_stage(stage)
 {
-	poly->Retain();
+	poly->AddReference();
 	m_poly = poly;
 }
 
 PolygonPropertySetting::~PolygonPropertySetting()
 {
-	m_poly->Release();	
+	m_poly->RemoveReference();	
 }
 
 void PolygonPropertySetting::OnPropertyGridChange(const std::string& name, const wxAny& value)

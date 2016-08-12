@@ -91,8 +91,8 @@ void ScaleImage::Scale(ee::Snapshoot& ss, const std::string& src, const std::str
 			height = sz.y * scale;
 		ss.DrawSprite(sprite, true, width, height);
 
-		sprite->Release();
-		symbol->Release();
+		sprite->RemoveReference();
+		symbol->RemoveReference();
 
 		ss.SaveToFile(dst, width, height);
 	}

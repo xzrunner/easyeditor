@@ -5,25 +5,25 @@
 
 #include <ee/Symbol.h>
 
+#include <sprite2/TextboxSymbol.h>
+
 namespace etext
 {
 
-class Symbol : public ee::Symbol
+class Sprite;
+
+class Symbol : public ee::Symbol, public s2::TextboxSymbol
 {
 public:
 	Symbol();
 	virtual ~Symbol();
 
-	//
-	// Cloneable interface
-	//
-	virtual Symbol* Clone() const { return NULL; }
-
-	//
-	// Symbol interfaces
-	//
-	virtual void Draw(const s2::RenderParams& params, const ee::Sprite* spr = NULL) const;
-	virtual sm::rect GetSize(const ee::Sprite* sprite = NULL) const;
+	/**
+	 *  @interface
+	 *    s2::Symbol
+	 */
+	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
+	virtual sm::rect GetBounding(const s2::Sprite* spr = NULL) const;
 
 	static ee::Symbol* Create() { return new Symbol(); }
 
@@ -31,8 +31,8 @@ protected:
 	virtual void LoadResources();
 
 private:
-	void DrawBackground(const ee::Sprite* sprite, const sm::mat4& mt) const;
-	void DrawText(const ee::Sprite* sprite, const s2::RenderParams& params) const;
+	void DrawBackground(const Sprite* sprite, const sm::mat4& mt) const;
+	void DrawText(const Sprite* sprite, const s2::RenderParams& params) const;
 
 private:
 	int m_width;

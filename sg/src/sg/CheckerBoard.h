@@ -5,7 +5,7 @@
 
 #include <map>
 
-namespace ee { class Sprite; class Symbol; class Visitor; }
+namespace ee { class Sprite; class Symbol; }
 
 namespace sg
 {

@@ -18,7 +18,7 @@ ScriptsSprite::ScriptsSprite(ScriptsSymbol* symbol)
 {
 	m_core = new s2::DummySprite(this);
 
-	m_symbol->Retain();
+	m_symbol->AddReference();
 	scripts_do_string(symbol->GetContent().c_str());
 }
 
@@ -27,7 +27,7 @@ ScriptsSprite::~ScriptsSprite()
 	m_core->RemoveReference();
 
 	if (m_symbol) {
-		m_symbol->Release();
+		m_symbol->RemoveReference();
 	}
 }
 

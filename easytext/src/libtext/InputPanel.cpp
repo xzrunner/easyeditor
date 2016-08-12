@@ -13,7 +13,7 @@ InputPanel::InputPanel(wxWindow* parent, Sprite* spr,
 	: wxPanel(parent, wxID_ANY)
 	, m_stage_impl(stage_impl)
 {
-	spr->Retain();
+	spr->AddReference();
 	m_spr = spr;
 
 	InitLayout();
@@ -21,7 +21,7 @@ InputPanel::InputPanel(wxWindow* parent, Sprite* spr,
 
 InputPanel::~InputPanel()
 {
-	m_spr->Release();
+	m_spr->RemoveReference();
 }
 
 void InputPanel::InitLayout()

@@ -19,6 +19,11 @@ CosineShape::CosineShape(const std::vector<sm::vec2>& vertices)
 	UpdatePolyline();
 }
 
+CosineShape* CosineShape::Clone() const
+{
+	return new CosineShape(*this);
+}
+
 void CosineShape::Draw(const sm::mat4& mt, const RenderColor& color) const
 {
 	ShapeVertices::Draw(m_mid_points, m_closed, mt, color);

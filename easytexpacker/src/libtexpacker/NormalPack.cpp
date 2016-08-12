@@ -208,7 +208,7 @@ void NormalPack::OutputImage(const std::string& filepath) const
 				pack.AddImage(img, pos.x + e_left, pos.y + e_bottom, pos.width - e_left - e_right, pos.height - e_bottom - e_up, 
 					rot, CLOCKWISE_ROT, img->GetChannels() == 4, e_left, e_bottom, e_right, e_up);
 			}
-			img->Release();
+			img->RemoveReference();
 		}
 
 		std::string out_filepath = filepath;

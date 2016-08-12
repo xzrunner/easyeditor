@@ -3,8 +3,7 @@
 namespace s2
 {
 
-TextureSymbol::TextureSymbol(void* ud)
-	: Symbol(ud)
+TextureSymbol::TextureSymbol()
 {
 }
 

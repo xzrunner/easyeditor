@@ -2,6 +2,7 @@
 #define _EASYEDITOR_VERTICAL_IMAGE_LIST_H_
 
 #include "KeysState.h"
+#include "Visitor.h"
 
 #include <wx/wx.h>
 #include <wx/vlbox.h>
@@ -12,7 +13,6 @@ namespace ee
 {
 
 class ListItem;
-class Visitor;
 
 class VerticalImageList : public wxVListBox
 {
@@ -30,7 +30,7 @@ public:
 	virtual void Remove(int index);
 	virtual void Swap(int i0, int i1);
 
-	void Traverse(Visitor& visitor) const;
+	void Traverse(Visitor<ListItem>& visitor) const;
 
 	void SetFileter(const std::string& filter) {
 		m_name = filter;

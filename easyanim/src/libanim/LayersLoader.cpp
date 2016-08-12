@@ -40,7 +40,7 @@ void LayersLoader::LoadLayers(const Json::Value& value,
 				ee::SymbolSearcher::SetSymbolFilepaths(dir, symbol, spr_val);
 
 				ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-				symbol->Release();
+				symbol->RemoveReference();
 				sprite->Load(spr_val, dir);
 				dst_frame->sprites.push_back(sprite->GetCore());
 				spr_val = frame_val["actor"][k++];

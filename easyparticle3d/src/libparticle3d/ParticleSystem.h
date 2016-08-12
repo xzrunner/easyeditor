@@ -3,8 +3,6 @@
 
 #include "PSNode.h"
 
-#include <ee/Object.h>
-#include <ee/Cloneable.h>
 #include <ee/UICallback.h>
 #include <SM_Quaternion.h>
 

@@ -27,7 +27,7 @@
 //	ComplexPolygonShape* cpoly = CreateComplexPoly(m_polyline);
 //	if (cpoly) {
 //		ee::InsertShapeSJ::Instance()->Insert(cpoly);
-//		cpoly->Release();
+//		cpoly->RemoveReference();
 //	}
 //
 //	m_polyline.clear();

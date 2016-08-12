@@ -1,7 +1,7 @@
 #ifndef _SPRITE2_GTXT_H_
 #define _SPRITE2_GTXT_H_
 
-#include "Singleton.h"
+#include <CU_Singleton.h>
 
 namespace s2
 {

@@ -93,7 +93,7 @@ void TransToGif::Run(ee::Snapshoot& ss, const std::string& srcdir, const std::st
 			std::string filename = dstdir + "//" + name + ".gif";
 			saver.Save(filename.c_str());
 
-			symbol->Release();
+			symbol->RemoveReference();
 		}
 	}
 }

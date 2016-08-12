@@ -42,8 +42,8 @@ void RectCutLoader::LoadOnlyJson(const std::string& pack_file, const std::string
 
 		ee::InsertSpriteSJ::Instance()->Insert(sprite);
 
-		sprite->Release();
-		symbol->Release();
+		sprite->RemoveReference();
+		symbol->RemoveReference();
 	}
 }
 
@@ -81,13 +81,13 @@ void RectCutLoader::LoadJsonAndImg(const std::string& pack_file, const std::stri
 
 		ee::InsertSpriteSJ::Instance()->Insert(spr_sprite);
 
-		img_data->Release();
-		spr_sprite->Release();
-		spr_symbol->Release();
-		spr_img->Release();
+		img_data->RemoveReference();
+		spr_sprite->RemoveReference();
+		spr_symbol->RemoveReference();
+		spr_img->RemoveReference();
 	}
 
-	img->Release();
+	img->RemoveReference();
 }
 
 //void RectCutLoader::LoadToDtex(const std::string& pack_file, const std::string& img_name)
@@ -113,7 +113,7 @@ void RectCutLoader::LoadJsonAndImg(const std::string& pack_file, const std::stri
 //	}
 //	dtex->EndImageWithRegion();
 //
-//	img->Release();
+//	img->RemoveReference();
 //}
 
 void RectCutLoader::LoadJsonFile(const std::string& pack_file, const std::string& img_name,

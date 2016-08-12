@@ -111,7 +111,7 @@ bool EditRectOP::OnActive()
 
 	icon = new RectIcon;
 	stage->SetIcon(icon);
-	icon->Release();	
+	icon->RemoveReference();	
 
 	return false;
 }

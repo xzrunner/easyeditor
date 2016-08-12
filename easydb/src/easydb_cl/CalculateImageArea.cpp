@@ -52,7 +52,7 @@ void CalImageArea::Trigger(const std::string& dir)
 		{
 			ee::Image* img = ee::ImageMgr::Instance()->GetItem(filepath);
 			area += img->GetClippedWidth() * img->GetClippedHeight();
-			img->Release();
+			img->RemoveReference();
 		}
 	}
 

@@ -22,7 +22,7 @@ Symbol::Symbol(const Symbol& s)
 	for (int i = 0, n = s.m_shapes.size(); i < n; ++i) {
 		ee::Shape* shape = s.m_shapes[i];
 		m_shapes.push_back(shape);
-		shape->Retain();
+		shape->AddReference();
 	}
 }
 
@@ -96,7 +96,7 @@ void Symbol::LoadResources()
 void Symbol::Clear()
 {
 	for (int i = 0, n = m_shapes.size(); i < n; ++i) {
-		m_shapes[i]->Release();
+		m_shapes[i]->RemoveReference();
 	}
 	m_shapes.clear();
 }

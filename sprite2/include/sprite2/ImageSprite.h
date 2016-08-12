@@ -6,17 +6,17 @@
 namespace s2
 {
 
-class ImageSprite : public Sprite
+class ImageSprite : public VIRTUAL_INHERITANCE Sprite
 {
 public:
-	ImageSprite(void* ud);
-	ImageSprite(const ImageSprite& spr, void* ud);
+	ImageSprite();
+	ImageSprite(const ImageSprite& spr);
 
-	virtual bool Update(float dt) { return false; }
-	
-private:
-	ImageSprite() {}
-	const ImageSprite& operator = (const ImageSprite& spr) { return *this; }
+	/**
+	 *  @interface
+	 *    Cloneable
+	 */
+	virtual ImageSprite* Clone() const;
 
 }; // ImageSprite
 

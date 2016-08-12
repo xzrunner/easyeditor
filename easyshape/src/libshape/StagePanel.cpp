@@ -39,7 +39,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	SetCanvas(new StageCanvas(this, glctx, edited, bg_sprites));
 	m_symbol = (Symbol*)(&edited->GetSymbol());
 	if (m_symbol) {
-		m_symbol->Retain();
+		m_symbol->AddReference();
 	}
 
 	InitSubjects();
@@ -54,7 +54,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	SetCanvas(new StageCanvas(this));
 	m_symbol = symbol;
 	if (m_symbol) {
-		m_symbol->Retain();
+		m_symbol->AddReference();
 	}
 
 //	SetDropTarget(new DropTarget(this, library));
@@ -65,7 +65,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 StagePanel::~StagePanel()
 {
 	if (m_symbol) {
-		m_symbol->Release();
+		m_symbol->RemoveReference();
 	}
 }
 
@@ -146,11 +146,11 @@ void StagePanel::SetSymbolBG(ee::Symbol* symbol)
 //			std::vector<ee::Shape*>& shapes = symbol->m_shapes;
 //
 //			for (size_t i = 0, n = shapes.size(); i < n; ++i)
-//				shapes[i]->Release();
+//				shapes[i]->RemoveReference();
 //			shapes.clear();
 //
 //			for (size_t i = 0, n = m_shapes.size(); i < n; ++i)
-//				m_shapes[i]->Retain();
+//				m_shapes[i]->AddReference();
 //			copy(m_shapes.begin(), m_shapes.end(), back_inserter(shapes));
 //		}
 //
@@ -238,7 +238,7 @@ OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames)
 	if (success) {
 		m_stage->SetSymbolBG(symbol);
 	}
-	symbol->Release();
+	symbol->RemoveReference();
 }
 
 }

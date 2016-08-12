@@ -43,7 +43,7 @@ void LibraryScriptsPage::OnAddPress(wxCommandEvent& event)
 				std::string filepath = filenames[i].ToStdString();
 				Symbol* symbol = SymbolMgr::Instance()->FetchSymbol(filepath);
 				m_list->Insert(symbol);
-				symbol->Release();
+				symbol->RemoveReference();
 			} catch (Exception& e) {
 				ExceptionDlg dlg(m_parent, e);
 				dlg.ShowModal();

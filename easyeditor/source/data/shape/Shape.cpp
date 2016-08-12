@@ -10,6 +10,16 @@ Shape::Shape()
 	m_name = "shape" + StringHelper::ToString(index++);
 }
 
+Shape::Shape(const Shape& shape)
+	: m_name(shape.m_name)
+{
+}
+
+Shape::~Shape() 
+{ 
+	ClearUserData(true); 
+}
+
 void Shape::LoadFromFile(const Json::Value& value,
 						  const std::string& dir)
 {

@@ -135,9 +135,9 @@ UpdateBufferVisitor(std::map<ChainShape*, ChainShape*>& simplifyBuffer)
 }
 
 void EditPolylinesOP::UpdateBufferVisitor::
-Visit(Object* object, bool& next)
+Visit(ee::Shape* shape, bool& next)
 {
-	ChainShape* chain = static_cast<ChainShape*>(object);
+	ChainShape* chain = static_cast<ChainShape*>(shape);
 	m_simplify_buffer.insert(std::make_pair(chain, chain->Clone()));
 	next = true;
 }
@@ -153,9 +153,9 @@ OffsetVisitor(const sm::vec2& offset)
 }
 
 void EditPolylinesOP::OffsetVisitor::
-Visit(Object* object, bool& next)
+Visit(ee::Shape* shape, bool& next)
 {
-	ChainShape* chain = static_cast<ChainShape*>(object);
+	ChainShape* chain = static_cast<ChainShape*>(shape);
 	chain->Translate(m_offset);
 	next = true;
 }

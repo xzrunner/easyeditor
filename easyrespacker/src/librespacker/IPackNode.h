@@ -1,8 +1,6 @@
 #ifndef _EASYRESPACKER_IPACK_NODE_H_
 #define _EASYRESPACKER_IPACK_NODE_H_
 
-#include <ee/Object.h>
-
 extern "C" {
 	#include <lua.h>
 	#include <lualib.h>

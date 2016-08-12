@@ -82,7 +82,7 @@ bool EditPointOP::OnMouseLeftUp(int x, int y)
 		PointShape* point = new PointShape(m_pos);
 		m_shapes_impl->GetShapeSelection()->Add(point);
 		ee::InsertShapeSJ::Instance()->Insert(point);
-		point->Release();
+		point->RemoveReference();
 	}
 
 	Clear();

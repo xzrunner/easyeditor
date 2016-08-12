@@ -64,7 +64,7 @@ void TransNewTextFile::Run(const std::string& folder)
 					ecomplex::FileStorer::Store(filepath.c_str(), complex);
 				}
 			}
-			sym->Release();
+			sym->RemoveReference();
 		}
 	}
 }

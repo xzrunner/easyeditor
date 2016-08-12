@@ -5,6 +5,7 @@
 
 #include <ee/key_type.h>
 #include <ee/Visitor.h>
+#include <ee/Shape.h>
 
 #include <SM_Rect.h>
 
@@ -50,11 +51,11 @@ protected:
 	}; // ChainSelectedNodes
 
 private:
-	class PosQueryVisitor : public ee::Visitor
+	class PosQueryVisitor : public ee::Visitor<ee::Shape>
 	{
 	public:
 		PosQueryVisitor(const sm::vec2& pos, ChainSelectedNodes** result);
-		virtual void Visit(Object* object, bool& next);
+		virtual void Visit(ee::Shape* shape, bool& next);
 
 	private:
 		const sm::vec2& m_pos;
@@ -63,11 +64,11 @@ private:
 
 	}; // PosQueryVisitor
 
-	class RectQueryVisitor : public ee::Visitor
+	class RectQueryVisitor : public ee::Visitor<ee::Shape>
 	{
 	public:
 		RectQueryVisitor(const sm::rect& rect, std::vector<ChainSelectedNodes*>& result);
-		virtual void Visit(Object* object, bool& next);
+		virtual void Visit(ee::Shape* shape, bool& next);
 
 	private:
 		const sm::rect& m_rect;

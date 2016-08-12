@@ -17,7 +17,7 @@ Particle::Particle()
 Particle::~Particle()
 {
 	if (m_symbol) {
-		m_symbol->Release();
+		m_symbol->RemoveReference();
 	}
 }
 

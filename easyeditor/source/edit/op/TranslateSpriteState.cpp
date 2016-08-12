@@ -11,14 +11,14 @@ TranslateSpriteState::TranslateSpriteState(SpriteSelection* selection,
 	: m_dirty(false)
 {
 	m_selection = selection;
-	m_selection->Retain();
+	m_selection->AddReference();
 
 	m_first_pos = m_last_pos = first_pos;
 }
 
 TranslateSpriteState::~TranslateSpriteState()
 {
-	m_selection->Release();
+	m_selection->RemoveReference();
 }
 
 void TranslateSpriteState::OnMousePress(const sm::vec2& pos)
@@ -89,10 +89,9 @@ void TranslateSpriteState::Translate(const sm::vec2& offset)
 //////////////////////////////////////////////////////////////////////////
 
 void TranslateSpriteState::TranslateVisitor::
-Visit(Object* object, bool& next)
+Visit(Sprite* spr, bool& next)
 {
-	Sprite* sprite = static_cast<Sprite*>(object);
-	sprite->Translate(m_offset);
+	spr->Translate(m_offset);
 	next = true;
 }
 

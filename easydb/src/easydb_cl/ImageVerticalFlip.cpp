@@ -71,7 +71,7 @@ void ImageVerticalFlip::VerticalFlip(const std::string& filepath) const
 		img->GetChannels(), filepath, ee::ImageSaver::e_png);
 	delete[] pixels_revert;
 
-	img->Release();
+	img->RemoveReference();
 }
 
 }

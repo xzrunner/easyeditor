@@ -73,7 +73,7 @@ void TransOldAnchorFile::TransComplex(const std::string& filepath) const
 	if (dirty) {
 		ecomplex::FileStorer::Store(filepath.c_str(), complex);
 	}
-	sym->Release();
+	sym->RemoveReference();
 }
 
 void TransOldAnchorFile::TransAnimation(const std::string& filepath) const
@@ -98,7 +98,7 @@ void TransOldAnchorFile::TransAnimation(const std::string& filepath) const
 	if (dirty) {
 		eanim::FileSaver::Store(filepath, *anim);
 	}
-	sym->Release();
+	sym->RemoveReference();
 }
 
 bool TransOldAnchorFile::IsAnchor(const ee::Sprite* spr) const

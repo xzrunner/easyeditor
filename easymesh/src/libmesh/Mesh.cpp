@@ -33,15 +33,15 @@ Mesh::Mesh(const Mesh& mesh)
 	, m_node_radius(mesh.m_node_radius)
 {
 	m_base = mesh.m_base;
-	m_base->Retain();
+	m_base->AddReference();
 }
 
 Mesh::Mesh(const ee::Symbol* base)
 {
 	m_base = base;
-	m_base->Retain();
+	m_base->AddReference();
 
-	sm::vec2 sz = m_base->GetSize().Size();
+	sm::vec2 sz = m_base->GetBounding().Size();
 	m_width = sz.x;
 	m_height = sz.y;
 
@@ -51,7 +51,7 @@ Mesh::Mesh(const ee::Symbol* base)
 Mesh::~Mesh()
 {
 	if (m_base) {
-		m_base->Release();
+		m_base->RemoveReference();
 	}
 
 	ClearTriangles();

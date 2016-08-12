@@ -27,14 +27,14 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	SetCanvas(new StageCanvas(this, glctx, edited, bg_sprites));
 	m_symbol = (Symbol*)(&edited->GetSymbol());
 	if (m_symbol) {
-		m_symbol->Retain();
+		m_symbol->AddReference();
 	}
 }
 
 StagePanel::~StagePanel()
 {
 	if (m_symbol) {
-		m_symbol->Release();
+		m_symbol->RemoveReference();
 	}
 }
 

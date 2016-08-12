@@ -100,7 +100,7 @@ void StagePanel::StoreToFile(const char* filename) const
 	ecomplex::Symbol items_complex;
 	std::vector<ee::Sprite*> sprites;
 	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	for_each(sprites.begin(), sprites.end(), ee::RetainObjectFunctor<ee::Sprite>());
+	for_each(sprites.begin(), sprites.end(), ee::cu::AddRefFonctor<ee::Sprite>());
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		items_complex.Add(sprites[i]);
 	}
@@ -115,7 +115,7 @@ void StagePanel::StoreToFile(const char* filename) const
 	ecomplex::Symbol wrapper_complex;
 	wrapper_complex.m_clipbox = m_clipbox;
 	wrapper_complex.Add(&items_sprite);
-	items_sprite.Retain();
+	items_sprite.AddReference();
 	std::string top_path = name + "_wrapper_complex[gen].json";
 	wrapper_complex.SetFilepath(top_path);
 	ecomplex::FileStorer::Store(top_path.c_str(), &wrapper_complex);

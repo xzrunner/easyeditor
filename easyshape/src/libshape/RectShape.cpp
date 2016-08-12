@@ -22,11 +22,6 @@ RectShape::RectShape(const sm::vec2& center, float hwidth, float hheight)
 {
 }
 
-RectShape* RectShape::Clone() const
-{
-	return new RectShape(*this);
-}
-
 void RectShape::Translate(const sm::vec2& offset)
 {
 	sm::rect r = GetRect();

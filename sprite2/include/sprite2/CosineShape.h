@@ -12,6 +12,16 @@ public:
 	CosineShape();
 	CosineShape(const std::vector<sm::vec2>& vertices);
 
+	/**
+	 *  @interface
+	 *    Cloneable
+	 */
+	virtual CosineShape* Clone() const;	
+
+	/**
+	 *  @interface
+	 *    Shape
+	 */
 	virtual void Draw(const sm::mat4& mt, 
 		const RenderColor& color = RenderColor()) const;
 

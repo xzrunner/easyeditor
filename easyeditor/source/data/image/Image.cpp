@@ -243,7 +243,7 @@ void Image::LoadWithClip(const std::string& filepath)
 		}
 	}
 
-	img_data->Release();
+	img_data->RemoveReference();
 }
 
 bool Image::CanUseDTex() const

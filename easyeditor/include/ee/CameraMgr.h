@@ -1,7 +1,7 @@
 #ifndef _EASYEDITOR_CAMERA_MGR_H_
 #define _EASYEDITOR_CAMERA_MGR_H_
 
-#include "singleton.h"
+#include <CU_Singleton.h>
 
 namespace ee
 {

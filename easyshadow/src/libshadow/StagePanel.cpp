@@ -36,7 +36,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 	m_symbol = (Symbol*)(&edited->GetSymbol());
 	if (m_symbol) {
-		m_symbol->Retain();
+		m_symbol->AddReference();
 	}
 	LoadFromShadow();
 
@@ -46,10 +46,10 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 StagePanel::~StagePanel()
 {
 	if (m_symbol) {
-		m_symbol->Release();
+		m_symbol->RemoveReference();
 	}
 	if (m_loop) {
-		m_loop->Release();
+		m_loop->RemoveReference();
 	}
 }
 
@@ -76,7 +76,7 @@ void StagePanel::LoadFromShadow()
 	const Shadow* shadow = m_symbol->GetShadow();
 	const std::vector<sm::vec2>& loop = shadow->GetInnerLoop();
 	if (m_loop) {
-		m_loop->Release();
+		m_loop->RemoveReference();
 	}
 	m_loop = new eshape::PolygonShape(loop);
 }
@@ -97,7 +97,7 @@ void StagePanel::InsertShape(ee::Shape* shape)
 	}
 
 	m_loop = shape;
-	m_loop->Retain();
+	m_loop->AddReference();
 
 	eshape::PolygonShape* poly = static_cast<eshape::PolygonShape*>(shape);
 	m_symbol->GetShadow()->BuildInnerLine(poly->GetVertices());

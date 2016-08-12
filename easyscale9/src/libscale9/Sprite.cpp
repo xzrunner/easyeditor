@@ -21,7 +21,7 @@ Sprite::Sprite(const Sprite& sprite)
 {
 	m_core = new s2::Scale9Sprite(*static_cast<s2::Scale9Sprite*>(sprite.m_core), this);
 
-	m_symbol->Retain();
+	m_symbol->AddReference();
 }
 
 Sprite::Sprite(Symbol* symbol)
@@ -30,7 +30,7 @@ Sprite::Sprite(Symbol* symbol)
 {
 	m_core = new s2::Scale9Sprite(this);
 
-	m_symbol->Retain();
+	m_symbol->AddReference();
 	BuildBounding();
 }
 
@@ -39,7 +39,7 @@ Sprite::~Sprite()
 	m_core->RemoveReference();
 
 	if (m_symbol) {
-		m_symbol->Release();
+		m_symbol->RemoveReference();
 	}
 }
 

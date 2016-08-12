@@ -3,6 +3,7 @@
 
 #include "EditCMPT.h"
 #include "Visitor.h"
+#include "Sprite.h"
 
 #include <Box2D/Box2D.h>
 
@@ -27,7 +28,7 @@ protected:
 	virtual wxSizer* InitLayout();
 
 private:
-	class GetPhysicsStaticVisitor : public Visitor
+	class GetPhysicsStaticVisitor : public Visitor<Sprite>
 	{
 	public:
 		enum TYPE
@@ -39,7 +40,7 @@ private:
 
 	public:
 		GetPhysicsStaticVisitor();
-		virtual void Visit(Object* object, bool& next);
+		virtual void Visit(Sprite* spr, bool& next);
 		TYPE getType() const { return m_type; }
 
 	private:
@@ -47,11 +48,11 @@ private:
 
 	}; // GetPhysicsStaticVisitor
 
-	class SetPhysicsStaticVisitor : public Visitor
+	class SetPhysicsStaticVisitor : public Visitor<Sprite>
 	{
 	public:
 		SetPhysicsStaticVisitor(bool bChecked);
-		virtual void Visit(Object* object, bool& next);
+		virtual void Visit(Sprite* spr, bool& next);
 
 	private:
 		bool m_bChecked;

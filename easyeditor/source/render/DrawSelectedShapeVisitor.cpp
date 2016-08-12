@@ -4,9 +4,8 @@
 namespace ee
 {
 
-void DrawSelectedShapeVisitor::Visit(Object* object, bool& next) 
+void DrawSelectedShapeVisitor::Visit(Shape* shape, bool& next) 
 {
-	Shape* shape = static_cast<Shape*>(object);
 	s2::RenderColor col;
 	col.mul.FromFloat(1, 0, 0);
 	shape->Draw(sm::mat4(), col);

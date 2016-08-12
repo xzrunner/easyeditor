@@ -60,11 +60,11 @@ ee::Sprite* LoadFromPSD::LoadGroup(const Json::Value& value, const std::string& 
 	sym->InitBounding();
 	spr->BuildBounding();
 
-	spr->Retain();
+	spr->AddReference();
 	spr->SetVisible(visible);
 
-	sym->Release();
-	spr->Release();
+	sym->RemoveReference();
+	spr->RemoveReference();
 
 	return spr;
 }
@@ -86,13 +86,13 @@ ee::Sprite* LoadFromPSD::LoadLayer(const Json::Value& value, const std::string& 
 	std::string filepath = ee::FileHelper::GetAbsolutePath(dir, name) + ".png";
 	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
-	spr->Retain();
+	spr->AddReference();
 
 	spr->SetTransform(sm::vec2(left + width * 0.5f - tw * 0.5f, th * 0.5f - top - height * 0.5f), 0);
 	spr->SetVisible(visible);
 
-	sym->Release();
-	spr->Release();
+	sym->RemoveReference();
+	spr->RemoveReference();
 
 	return spr;
 }

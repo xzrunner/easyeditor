@@ -68,7 +68,7 @@ void DrawPencilPolygonOP::NewPolygon(const std::vector<sm::vec2>& poly)
 	if (type == e_normal) {
 		PolygonShape* polygon = new PolygonShape(poly);
 		ee::InsertShapeSJ::Instance()->Insert(polygon);
-		polygon->Release();
+		polygon->RemoveReference();
 	} else if (type == e_union) {
 		UnionPolygon(poly);
 	} else if (type == e_difference) {
@@ -147,7 +147,7 @@ void DrawPencilPolygonOP::ReplacePolygons(const std::vector<std::vector<sm::vec2
 	for (int i = 0, n = paths.size(); i < n; ++i) {
 		PolygonShape* poly = new PolygonShape(paths[i]);
 		ee::InsertShapeSJ::Instance()->Insert(poly);
-		poly->Release();
+		poly->RemoveReference();
 	}
 }
 

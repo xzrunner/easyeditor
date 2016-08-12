@@ -114,7 +114,7 @@ ee::Sprite* FileIO::Load(const Json::Value& value, const std::string& dir)
 	ee::SymbolSearcher::SetSymbolFilepaths(dir, symbol, value);
 	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 	sprite->Load(value);
-	symbol->Release();
+	symbol->RemoveReference();
 
 	return sprite;
 }

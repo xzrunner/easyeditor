@@ -40,7 +40,7 @@ void Frame::OnSaveAs(wxCommandEvent& event)
 				ee::Snapshoot ss;
 				ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(m_curr_filename);
 				ss.OutputToImageFile(symbol, filename);
-				symbol->Release();
+				symbol->RemoveReference();
 			}
 			else
 			{
@@ -68,8 +68,8 @@ void Frame::OnSetBackground(wxCommandEvent& event)
 		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 		StagePanel* stage = static_cast<Task*>(m_task)->getStagePanel();
 		stage->SetBackground(sprite);
-		sprite->Release();
-		symbol->Release();
+		sprite->RemoveReference();
+		symbol->RemoveReference();
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }

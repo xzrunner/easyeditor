@@ -46,11 +46,9 @@ RectQueryVisitor(const sm::vec2& pos, float tolerance, NodeAddr& result)
 }
 
 void NodeCapture::RectQueryVisitor::
-Visit(ee::Object* object, bool& next)
+Visit(ee::Shape* shape, bool& next)
 {
 	next = true;
-
-	ee::Shape* shape = dynamic_cast<ee::Shape*>(object);
 	if (!shape) {
 		return;
 	}

@@ -18,7 +18,7 @@ bool DrawPenLineOP::OnMouseLeftDClick(int x, int y)
 
 	ChainShape* chain = new ChainShape(m_polyline, false);
 	ee::InsertShapeSJ::Instance()->Insert(chain);
-	chain->Release();
+	chain->RemoveReference();
 	m_polyline.clear();
 	m_curr_pos.MakeInvalid();
 

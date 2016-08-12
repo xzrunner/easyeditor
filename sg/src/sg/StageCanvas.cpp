@@ -33,7 +33,7 @@ StageCanvas::StageCanvas(StagePanel* stage)
 StageCanvas::~StageCanvas()
 {
 	if (m_background) {
-		m_background->Release();
+		m_background->RemoveReference();
 	}
 }
 

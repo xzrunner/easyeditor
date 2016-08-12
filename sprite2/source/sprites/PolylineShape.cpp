@@ -15,6 +15,11 @@ PolylineShape::PolylineShape(const std::vector<sm::vec2>& vertices, bool closed)
 	UpdateBounding();
 }
 
+PolylineShape* PolylineShape::Clone() const
+{
+	return new PolylineShape(*this);
+}
+
 bool PolylineShape::IsContain(const sm::vec2& pos) const
 {
 	if (m_vertices.empty()) {

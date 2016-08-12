@@ -12,7 +12,7 @@ ModifyNodesAOP::ModifyNodesAOP(const std::vector<PolylineShape*>& polylines,
 	m_polylines.reserve(polylines.size());
 	for (size_t i = 0, n = polylines.size(); i < n; ++i)
 	{
-		polylines[i]->Retain();
+		polylines[i]->AddReference();
 		m_polylines.push_back(polylines[i]);
 
 		m_src.push_back(polylines[i]->GetVertices());

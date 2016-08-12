@@ -1,7 +1,6 @@
 #ifndef _EASYPARTICLE2D_PARTICLE_SYSTEM_H_
 #define _EASYPARTICLE2D_PARTICLE_SYSTEM_H_
 
-#include <ee/Object.h>
 #include <ee/UICallback.h>
 
 #include <SM_Matrix.h>

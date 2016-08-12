@@ -25,12 +25,12 @@ public:
 	virtual bool OnDraw() const;
 
 private:
-	class NearestQueryVisitor : public Visitor
+	class NearestQueryVisitor : public Visitor<Sprite>
 	{
 	public:
 		NearestQueryVisitor(const sm::vec2& pos, Sprite** ret);
 
-		virtual void Visit(Object* object, bool& next);
+		virtual void Visit(Sprite* spr, bool& next);
 
 	private:
 		const sm::vec2& m_pos;

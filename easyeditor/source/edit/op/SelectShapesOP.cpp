@@ -21,7 +21,7 @@ SelectShapesOP::SelectShapesOP(wxWindow* wnd, EditPanelImpl* stage, MultiShapesI
 	m_first_pos.MakeInvalid();
 
 	m_selection = shapes_impl->GetShapeSelection();
-	m_selection->Retain();
+	m_selection->AddReference();
 }
 
 SelectShapesOP::~SelectShapesOP()
@@ -29,7 +29,7 @@ SelectShapesOP::~SelectShapesOP()
 	clearClipboard();
 
  	m_selection->Clear();
- 	m_selection->Release();
+ 	m_selection->RemoveReference();
 }
 
 bool SelectShapesOP::OnKeyDown(int keyCode)
@@ -60,7 +60,7 @@ bool SelectShapesOP::OnKeyDown(int keyCode)
 		for (size_t i = 0, n = m_clipboard.size(); i < n; ++i) {
 			Shape* shape = m_clipboard[i]->Clone();
 			InsertShapeSJ::Instance()->Insert(shape);
-			shape->Release();
+			shape->RemoveReference();
 		}
 	}
 
@@ -181,7 +181,7 @@ bool SelectShapesOP::Clear()
 void SelectShapesOP::clearClipboard()
 {
  	for (size_t i = 0, n = m_clipboard.size(); i < n; ++i)
- 		m_clipboard[i]->Release();
+ 		m_clipboard[i]->RemoveReference();
  	m_clipboard.clear();
 }
 
@@ -199,7 +199,7 @@ void SelectShapesOP::CopyFromSelection()
 	for (size_t i = 0, n = m_clipboard.size(); i < n; ++i) {
 		Shape* shape = m_clipboard[i]->Clone();
 		InsertShapeSJ::Instance()->Insert(shape);
-		shape->Release();
+		shape->RemoveReference();
 	}
 }
 
@@ -208,9 +208,8 @@ void SelectShapesOP::CopyFromSelection()
 //////////////////////////////////////////////////////////////////////////
 
 void SelectShapesOP::TranslateVisitor::
-Visit(Object* object, bool& next)
+Visit(Shape* shape, bool& next)
 {
-	Shape* shape = static_cast<Shape*>(object);
 	shape->Translate(m_offset);
 	next = true;
 }

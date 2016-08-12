@@ -19,14 +19,14 @@ PasteSpriteOP::PasteSpriteOP(wxWindow* wnd, EditPanelImpl* stage,
 	, m_cmpt(cmpt)
 {
 	m_selection = sprites_impl->GetSpriteSelection();
-	m_selection->Retain();
+	m_selection->AddReference();
 
 	m_pos.MakeInvalid();
 }
 
 PasteSpriteOP::~PasteSpriteOP()
 {
-	m_selection->Release();
+	m_selection->RemoveReference();
 }
 
 bool PasteSpriteOP::OnKeyDown(int keyCode)
@@ -191,7 +191,7 @@ InsertToSpritesImpl(const sm::vec2& pos, bool isHorMirror, bool isVerMirror)
 		Sprite* newOne = sprite->Clone();
 		newOne->SetTransform(fixed + pos, newOne->GetAngle());
 		InsertSpriteSJ::Instance()->Insert(newOne);
-		newOne->Release();
+		newOne->RemoveReference();
 	}
 }
 

@@ -31,20 +31,20 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	ee::EditOP* op = new eshape::EditPolylineOP<eshape::DrawPolygonOP, ee::SelectShapesOP>(this, 
 		GetStageImpl(), this, NULL, new ee::OneFloatValueStatic(5), NULL);
 	SetEditOP(op);
-	op->Release();
+	op->RemoveReference();
 
 	StageCanvas* canvas = new StageCanvas(this, glctx, edited, bg_sprites);
 	SetCanvas(canvas);
 
 	m_symbol = (Symbol*)(&edited->GetSymbol());
 	if (m_symbol) {
-		m_symbol->Retain();
+		m_symbol->AddReference();
 	}
 }
 
 StagePanel::~StagePanel()
 {
-	m_symbol->Release();
+	m_symbol->RemoveReference();
 }
 
 }

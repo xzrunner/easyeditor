@@ -4,14 +4,30 @@
 namespace s2
 {
 
-AnimSymbol::AnimSymbol(void* ud)
-	: Symbol(ud)
+AnimSymbol::AnimSymbol()
 {
+	
 }
 
 void AnimSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 {
 
+}
+
+sm::rect AnimSymbol::GetBounding(const Sprite* spr) const
+{
+	sm::rect b;
+	b.MakeEmpty();
+	for (int i = 0, n = m_layers.size(); i < n; ++i) {
+		Layer* layer = m_layers[i];
+		for (int j = 0, m = layer->frames.size(); j < m; ++j) {
+			Frame* frame = layer->frames[j];
+			for (int k = 0, l = frame->sprites.size(); k < l; ++k) {
+				frame->sprites[k]->GetBounding()->CombineTo(b);
+			}
+		}
+	}
+	return b;
 }
 
 void AnimSymbol::AddLayer(Layer* layer)

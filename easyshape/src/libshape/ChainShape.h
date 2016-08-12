@@ -14,27 +14,27 @@ public:
 	ChainShape();
 	ChainShape(const std::vector<sm::vec2>& vertices, bool closed);
 
-	//
-	// IObject interface
-	//
-	virtual ChainShape* Clone() const;
-
-	//
-	// Shape interface
-	//
-	virtual const char* GetShapeDesc() const { return "chain"; }
-	virtual bool IsContain(const sm::vec2& pos) const { return s2::PolylineShape::IsContain(pos); }
-	virtual bool IsIntersect(const sm::rect& rect) const { return s2::PolylineShape::IsIntersect(rect); }
-	virtual void Translate(const sm::vec2& offset);
-	virtual const sm::rect& GetRect() const { return s2::PolylineShape::GetBounding(); }
-	virtual void Draw(const sm::mat4& mt,
+	/**
+	 *  @interface
+	 *    s2::Shape
+	 */
+	virtual void Draw(const sm::mat4& mt, 
 		const s2::RenderColor& color = s2::RenderColor()) const;
+
+	/**
+	 *  @interface
+	 *    ee::Shape
+	 */
+	virtual ChainShape* EEClone() const { return new ChainShape(*this); }
+	virtual const char* GetShapeDesc() const { return "chain"; }
+	virtual void Translate(const sm::vec2& offset);
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
 	virtual void LoadFromFile(const Json::Value& value, const std::string& dir);
 	virtual void StoreToFile(Json::Value& value, const std::string& dir) const;
 
-	/*
-	 *  interface PolylineShape
+	/**
+	 *  @interface
+	 *    PolylineShape
 	 */
 	virtual void AddVertex(int index, const sm::vec2& pos);
 	virtual void RemoveVertex(const sm::vec2& pos);

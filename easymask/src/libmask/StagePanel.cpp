@@ -21,18 +21,18 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, LibraryPanel* 
 {
 	ee::EditOP* op = new ee::ZoomViewOP(this, GetStageImpl(), true);
 	SetEditOP(op);
-	op->Release();
+	op->RemoveReference();
 
 	ee::StageCanvas* canvas = new StageCanvas(this);
 	SetCanvas(canvas);
-	canvas->Release();
+	canvas->RemoveReference();
 
 	SetDropTarget(new ee::StageDropTarget(this, GetStageImpl(), library));
 }
 
 StagePanel::~StagePanel()
 {	
-	m_sym->Release();
+	m_sym->RemoveReference();
 }
 
 bool StagePanel::Update(float dt)

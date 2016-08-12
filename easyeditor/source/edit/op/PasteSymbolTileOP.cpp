@@ -35,7 +35,7 @@ bool PasteSymbolTileOP::OnMouseLeftDown(int x, int y)
 		sprite->Translate(m_pos);
 		sprite->Rotate(m_rotate);
 		InsertSpriteSJ::Instance()->Insert(sprite);
-		sprite->Release();
+		sprite->RemoveReference();
 	}
 
 	return false;
@@ -166,14 +166,12 @@ NearestQueryVisitor(const sm::vec2& pos, Sprite** ret)
 }
 
 void PasteSymbolTileOP::NearestQueryVisitor::
-Visit(Object* object, bool& next)
+Visit(Sprite* spr, bool& next)
 {
-	Sprite* sprite = static_cast<Sprite*>(object);
-
-	const float dis = Math2D::GetDistance(sprite->GetPosition(), m_pos);
+	const float dis = Math2D::GetDistance(spr->GetPosition(), m_pos);
 	if (dis < m_dis)
 	{
-		*m_result = sprite;
+		*m_result = spr;
 		m_dis = dis;
 	}
 

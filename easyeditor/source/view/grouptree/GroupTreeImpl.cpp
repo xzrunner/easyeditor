@@ -17,7 +17,7 @@ QuerySpriteVisitor(wxTreeCtrl* treectrl, Sprite* spr)
 	, m_spr(spr)
 {
 	if (m_spr) {
-		m_spr->Retain();
+		m_spr->AddReference();
 	}
 }
 
@@ -25,7 +25,7 @@ GroupTreeImpl::QuerySpriteVisitor::
 ~QuerySpriteVisitor()
 {
 	if (m_spr) {
-		m_spr->Release();
+		m_spr->RemoveReference();
 	}
 }
 
@@ -58,7 +58,7 @@ RemoveVisitor(wxTreeCtrl* treectrl, Sprite* spr)
 	, m_finish(false)
 {
 	if (m_spr) {
-		m_spr->Retain();
+		m_spr->AddReference();
 	}
 }
 
@@ -66,7 +66,7 @@ GroupTreeImpl::RemoveVisitor::
 ~RemoveVisitor()
 {
 	if (m_spr) {
-		m_spr->Release();
+		m_spr->RemoveReference();
 	}
 }
 
@@ -120,7 +120,7 @@ SelectVisitor(wxTreeCtrl* treectrl, SpriteSelection* selection)
 	, m_selection(selection)
 {
 	if (m_selection) {
-		m_selection->Retain();
+		m_selection->AddReference();
 	}
 }
 
@@ -128,7 +128,7 @@ GroupTreeImpl::SelectVisitor::
 ~SelectVisitor()
 {
 	if (m_selection) {
-		m_selection->Release();
+		m_selection->RemoveReference();
 	}
 }
 

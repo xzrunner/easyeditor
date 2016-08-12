@@ -112,9 +112,9 @@ void StagePanel::Insert(ee::Sprite* spr)
 	}
 
 	if (m_sprites[row][col] && m_sprites[row][col] != spr) {
-		m_sprites[row][col]->Release();
+		m_sprites[row][col]->RemoveReference();
 	}
-	spr->Retain();
+	spr->AddReference();
 	m_sprites[row][col] = spr;
 
 	spr->SetTransform(ComposeGrids::GetGridCenter(col, row), spr->GetAngle());
@@ -133,7 +133,7 @@ void StagePanel::Remove(ee::Sprite* spr)
 			if (m_sprites[i][j] == spr)
 			{
 				m_sprites[i][j] = NULL;
-				spr->Release();
+				spr->RemoveReference();
 				ee::SetCanvasDirtySJ::Instance()->SetDirty();
 				return;
 			}
@@ -147,7 +147,7 @@ void StagePanel::Clear()
 		for (size_t j = 0; j < 3; ++j)
 		{
 			if (!m_sprites[i][j]) continue;
-			m_sprites[i][j]->Release();
+			m_sprites[i][j]->RemoveReference();
 		}
 	}
 	memset(m_sprites, 0, sizeof(int) * 9);

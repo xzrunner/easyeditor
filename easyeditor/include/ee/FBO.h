@@ -1,7 +1,7 @@
 #ifndef _EASYEDITOR_FBO_H_
 #define _EASYEDITOR_FBO_H_
 
-#include "Object.h"
+#include <CU_RefCountObj.h>
 
 #include <string>
 
@@ -14,7 +14,7 @@ class Sprite;
 class Shape;
 class Symbol;
 
-class FBO : public Object
+class FBO : public cu::RefCountObj
 {
 public:
 	FBO();

@@ -139,8 +139,8 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 	std::string json_out_path = out_json_dir + "\\" + filename + "_complex.json";
 	ecomplex::FileStorer::Store(json_out_path.c_str(), &complex);
 
-	img->Release();
-	img_trimed->Release();
+	img->RemoveReference();
+	img_trimed->RemoveReference();
 }
 
 void RectCutWithJson::FixComplex(const std::string& src_dir, const std::string& dst_dir, const std::string& filepath) const

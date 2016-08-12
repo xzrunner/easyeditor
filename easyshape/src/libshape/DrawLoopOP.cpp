@@ -18,7 +18,7 @@ bool DrawLoopOP::OnMouseLeftDClick(int x, int y)
 
 	ee::Shape* shape = new ChainShape(m_polyline, true);
 	ee::InsertShapeSJ::Instance()->Insert(shape);
-	shape->Release();
+	shape->RemoveReference();
 
 	m_polyline.clear();
 	m_curr_pos.MakeInvalid();

@@ -26,7 +26,7 @@ bool EditChangedSectorOP::OnActive()
 
 	icon = new ChangedSectorIcon;
 	stage->SetIcon(icon);
-	icon->Release();	
+	icon->RemoveReference();	
 
 	return false;
 }

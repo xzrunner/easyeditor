@@ -176,11 +176,11 @@ void NormalCMPT::OnLoadFromFolder(wxCommandEvent& event)
 //			symbol->refresh();
 			ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 			frame->Insert(sprite, INT_MAX);
-			sprite->Release();
-			symbol->Release();
+			sprite->RemoveReference();
+			symbol->RemoveReference();
 		}
 		layer->InsertKeyFrame(frame);
-		frame->Release();
+		frame->RemoveReference();
 	}
 	InsertLayerSJ::Instance()->Insert(layer);
 	SetSelectedSJ::Instance()->Set(0, 0);
@@ -214,8 +214,8 @@ void NormalCMPT::OnLoadFromList(wxCommandEvent& event)
 		frame->Insert(sprite, INT_MAX);
 		layer->InsertKeyFrame(frame);
 
-		sprite->Release();
-		frame->Release();
+		sprite->RemoveReference();
+		frame->RemoveReference();
 
 		frame_idx += space;
 	}	
@@ -239,14 +239,14 @@ void NormalCMPT::OnFillingFrames(wxCommandEvent& event)
 		for (size_t i = 0; itr != frames.end(); ++itr, ++i)
 		{
 			itr->second->SetTime(1+dis*i);
-			itr->second->Retain();
+			itr->second->AddReference();
 			fixed.push_back(itr->second);
 		}
 
 		layer->Clear();
 		for (size_t i = 0, n = fixed.size(); i < n; ++i) {
 			layer->InsertKeyFrame(fixed[i]);
-			fixed[i]->Release();
+			fixed[i]->RemoveReference();
 		}
 	}
 }

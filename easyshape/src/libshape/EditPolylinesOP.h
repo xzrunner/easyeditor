@@ -31,24 +31,24 @@ private:
 	void clearBuffer();
 
 private:
-	class UpdateBufferVisitor : public ee::Visitor
+	class UpdateBufferVisitor : public ee::Visitor<ee::Shape>
 	{
 	public:
 		UpdateBufferVisitor(std::map<ChainShape*, ChainShape*>& simplifyBuffer);
 
-		virtual void Visit(Object* object, bool& next);
+		virtual void Visit(ee::Shape* shape, bool& next);
 
 	private:
 		std::map<ChainShape*, ChainShape*>& m_simplify_buffer;
 
 	}; // UpdateBufferVisitor
 
-	class OffsetVisitor : public ee::Visitor
+	class OffsetVisitor : public ee::Visitor<ee::Shape>
 	{
 	public:
 		OffsetVisitor(const sm::vec2& offset);
 
-		virtual void Visit(ee::Object* object, bool& next);
+		virtual void Visit(ee::Shape* shape, bool& next);
 
 	private:
 		const sm::vec2& m_offset;

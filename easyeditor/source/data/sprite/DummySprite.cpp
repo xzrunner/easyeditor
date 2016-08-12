@@ -15,7 +15,7 @@ DummySprite::DummySprite(Symbol* symbol)
 	: m_symbol(symbol) 
 {
 	m_core = new s2::DummySprite(this);
-	m_symbol->Retain();
+	m_symbol->AddReference();
 }
 
 DummySprite::~DummySprite() 
@@ -23,7 +23,7 @@ DummySprite::~DummySprite()
 	m_core->RemoveReference();
 
 	if (m_symbol) {
-		m_symbol->Release();
+		m_symbol->RemoveReference();
 	}
 }
 

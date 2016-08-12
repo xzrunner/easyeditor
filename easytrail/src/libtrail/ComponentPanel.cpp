@@ -23,7 +23,7 @@ ComponentPanel::~ComponentPanel()
 {
 	ee::Symbol* sym = static_cast<ee::Symbol*>(m_pc->mode.A.ud);
 	if (sym) {
-		sym->Release();
+		sym->RemoveReference();
 	}
 }
 

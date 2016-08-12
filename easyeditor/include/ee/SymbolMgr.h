@@ -1,13 +1,14 @@
 #ifndef _EASYEDITOR_SYMBOL_MGR_H_
 #define _EASYEDITOR_SYMBOL_MGR_H_
 
+#include <Visitor.h>
+
 #include <map>
 
 namespace ee
 {
 
 class Symbol;
-class Visitor;
 
 class SymbolMgr
 {
@@ -18,7 +19,7 @@ public:
 
 	void Clear();
 
-	void Traverse(Visitor& visitor) const;
+	void Traverse(Visitor<Symbol>& visitor) const;
 
 	int Size() const {
 		return m_symbols.size();

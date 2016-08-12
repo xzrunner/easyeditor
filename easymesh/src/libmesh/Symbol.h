@@ -3,13 +3,15 @@
 
 #include <ee/Symbol.h>
 
+#include <sprite2/MeshSymbol.h>
+
 namespace ee { class Image; }
 
 namespace emesh
 {
 
 class Mesh;
-class Symbol : public ee::Symbol
+class Symbol : public ee::Symbol, public s2::MeshSymbol
 {
 public:
 	Symbol();
@@ -17,19 +19,18 @@ public:
 	Symbol(ee::Symbol* base);
 	virtual ~Symbol();
 
-	//
-	// Cloneable interface
-	//
-	virtual Symbol* Clone() const;
+	/**
+	 *  @interface
+	 *    s2::Symbol
+	 */
+	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
+	virtual sm::rect GetBounding(const s2::Sprite* spr = NULL) const;
 
-	//
-	// Symbol interfaces
-	//
-	virtual void Draw(const s2::RenderParams& params, const ee::Sprite* spr = NULL) const;
+	/**
+	 *  @interface
+	 *    ee::Symbol
+	 */
 	virtual void ReloadTexture() const;
-	virtual sm::rect GetSize(const ee::Sprite* sprite = NULL) const {
-		return m_region;
-	}
 
  	const Mesh* GetMesh() const { return m_mesh; }
  	Mesh* GetMesh() { return m_mesh; }
@@ -43,14 +44,9 @@ protected:
 	virtual void LoadResources();
 
 private:
-	void InitBounding();
-
-private:
 	Mesh* m_mesh;
 
 	bool m_pause;
-
-	sm::rect m_region;
 
 }; // Symbol
 

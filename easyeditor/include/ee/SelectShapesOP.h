@@ -42,11 +42,11 @@ protected:
 	ShapeSelection* m_selection;
 
 private:
-	class TranslateVisitor : public Visitor
+	class TranslateVisitor : public Visitor<Shape>
 	{
 	public:
 		TranslateVisitor(const sm::vec2& offset) : m_offset(offset) {}
-		virtual void Visit(Object* object, bool& next);
+		virtual void Visit(Shape* shape, bool& next);
 	private:
 		sm::vec2 m_offset;
 	}; // TranslateVisitor

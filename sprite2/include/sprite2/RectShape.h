@@ -6,15 +6,24 @@
 namespace s2
 {
 
-class RectShape : public Shape
+class RectShape : public VIRTUAL_INHERITANCE Shape
 {
 public:
 	RectShape() {}
 	RectShape(const sm::rect& r);
 	
+	/**
+	 *  @interface
+	 *    Cloneable
+	 */
+	virtual RectShape* Clone() const;
+
+	/**
+	 *  @interface
+	 *    Shape
+	 */
 	virtual bool IsContain(const sm::vec2& pos) const;
 	virtual bool IsIntersect(const sm::rect& rect) const;
-
 	virtual void Draw(const sm::mat4& mt, 
 		const RenderColor& color = RenderColor()) const;
 

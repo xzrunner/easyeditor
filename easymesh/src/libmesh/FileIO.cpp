@@ -69,7 +69,7 @@ void FileIO::Load(const char* filepath, Symbol* symbol)
 	{
 		mesh->Load(value);
 		symbol->SetMesh(mesh);
-		mesh->Release();
+		mesh->RemoveReference();
 	}
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();

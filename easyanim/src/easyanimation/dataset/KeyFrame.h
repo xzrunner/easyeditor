@@ -3,8 +3,6 @@
 
 #include "SkeletonData.h"
 
-#include <ee/Object.h>
-
 namespace eanim
 {
 

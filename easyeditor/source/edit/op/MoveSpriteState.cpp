@@ -14,7 +14,7 @@ MoveSpriteState::MoveSpriteState(SpriteSelection* selection)
 	if (!m_sprites.empty())
 	{
 		for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-			m_sprites[i]->Retain();
+			m_sprites[i]->AddReference();
 			m_center += m_sprites[i]->GetPosition();
 		}
 		m_center /= static_cast<float>(m_sprites.size());
@@ -27,7 +27,7 @@ MoveSpriteState::MoveSpriteState(SpriteSelection* selection)
 MoveSpriteState::~MoveSpriteState()
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->Release();
+		m_sprites[i]->RemoveReference();
 	}
 }
 

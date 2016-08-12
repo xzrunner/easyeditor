@@ -33,7 +33,7 @@ Sprite::Sprite(const Sprite& sprite)
 {
 	m_core = new s2::Particle3dSprite(*static_cast<s2::Particle3dSprite*>(sprite.m_core), this);
 
-	m_symbol->Retain();
+	m_symbol->AddReference();
 
 //	CreatePS();
 
@@ -51,7 +51,7 @@ Sprite::Sprite(Symbol* symbol)
 {
 	m_core = new s2::Particle3dSprite(this);
 
-	m_symbol->Retain();
+	m_symbol->AddReference();
 	BuildBounding();
 
 	CreatePS();
@@ -62,7 +62,7 @@ Sprite::~Sprite()
 	m_core->RemoveReference();
 
 	if (m_symbol) {
-		m_symbol->Release();
+		m_symbol->RemoveReference();
 	}
 
 	if (!m_spr_ref && m_spr) 

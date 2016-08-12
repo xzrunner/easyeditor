@@ -17,12 +17,12 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 {
 	StageCanvas* canvas = new StageCanvas(this);
 	SetCanvas(canvas);
-	canvas->Release();
+	canvas->RemoveReference();
 
 	ee::OneFloatValue* capture_val = new ee::OneFloatValueStatic(10);
 	ee::EditOP* editop = new eshape::EditPolylineOP<eshape::DrawPolygonOP, ee::SelectShapesOP>(this, GetStageImpl(), this, property, capture_val, NULL);
 	SetEditOP(editop);
-	editop->Release();
+	editop->RemoveReference();
 
 	const int HW = 512;
 	const int HH = 512;

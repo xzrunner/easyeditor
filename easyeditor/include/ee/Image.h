@@ -2,9 +2,9 @@
 #define _EASYEDITOR_IMAGE_H_
 
 #include "ResourcesMgr.h"
-#include "Object.h"
 
 #include <SM_Matrix.h>
+#include <CU_RefCountObj.h>
 
 #include <stdint.h>
 
@@ -18,7 +18,7 @@ class Texture;
 class ImageData;
 class FBO;
 
-class Image : public Object
+class Image : public cu::RefCountObj
 {
 public:
 	Image();

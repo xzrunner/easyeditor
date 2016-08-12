@@ -37,7 +37,7 @@ Symbol* Symbol::Clone() const
 	return new Symbol(*this);
 }
 
-void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
+void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	if (!spr) {
 		return;
@@ -77,6 +77,11 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 	p3d_spr->Draw(p);
 }
 
+sm::rect Symbol::GetBounding(const s2::Sprite* spr) const
+{
+	return sm::rect(sm::vec2(0, 0), 200, 200);
+}
+
 void Symbol::ReloadTexture() const
 {
 	for (int i = 0; i < m_et_cfg->symbol_count; ++i) {
@@ -85,12 +90,7 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-sm::rect Symbol::GetSize(const ee::Sprite* sprite) const
-{
-	return sm::rect(sm::vec2(0, 0), 200, 200);
-}
-
-void Symbol::Traverse(ee::Visitor& visitor)
+void Symbol::Traverse(ee::Visitor<ee::Sprite>& visitor)
 {
 	if (!m_et_cfg) {
 		return;

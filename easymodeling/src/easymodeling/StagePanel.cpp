@@ -150,7 +150,7 @@ void StagePanel::loadBody(const std::string& filepath, Body& body)
 		// 		}
 		body.m_fixtures.push_back(fixture);
 
-		//		shapes[i]->Release();
+		//		shapes[i]->RemoveReference();
 	}
 }
 

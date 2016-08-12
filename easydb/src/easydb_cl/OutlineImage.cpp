@@ -85,7 +85,7 @@ void OutlineImage::Trigger(const std::string& dir) const
 			fout.close();	
 		}
 
-		image->Release();
+		image->RemoveReference();
 	}
 }
 

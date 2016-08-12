@@ -3,34 +3,28 @@
 
 #include "Symbol.h"
 
+#include <sprite2/DummySymbol.h>
+
 namespace ee
 {
 
-class DummySymbol : public Symbol
+class DummySymbol : public Symbol, public s2::DummySymbol
 {
 public:
-	DummySymbol(const std::string& filename) { m_filepath = filename; }
-	DummySymbol(const std::string& filename, int width, int height)
-		: m_size(sm::vec2(0, 0), static_cast<float>(width), static_cast<float>(height)) { m_filepath = filename; }
+	DummySymbol(const std::string& filepath);
+	DummySymbol(const std::string& filepath, int width, int height);
 
-	//
-	// IObject interface
-	//	
-	virtual Symbol* Clone() const { return NULL; }
-
-	//
-	// Symbol interface
-	//	
-	virtual void Draw(const s2::RenderParams& params, const ee::Sprite* spr = NULL) const {}
-	virtual sm::rect GetSize(const Sprite* sprite = NULL) const {
-		return m_size;
-	}
+	/**
+	 *  @interface
+	 *    s2::Symbol
+	 */
+	virtual sm::rect GetBounding(const s2::Sprite* spr = NULL) const;
 
 protected:
 	virtual void LoadResources() {}
 
 private:
-	sm::rect m_size;
+	sm::rect m_bounding;
 
 }; // DummySymbol
 

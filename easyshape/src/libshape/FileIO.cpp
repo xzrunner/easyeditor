@@ -68,7 +68,7 @@ void FileIO::LoadFromFile(const char* filename,
 		std::string path = ee::FileHelper::GetAbsolutePath(dir, value["bg_symbol"].asString());
 		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(path);
 		ee::obj_assign<ee::Symbol>(bg, symbol);
-		symbol->Release();
+		symbol->RemoveReference();
 	}
 }
 

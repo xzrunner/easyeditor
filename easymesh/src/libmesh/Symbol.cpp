@@ -37,17 +37,12 @@ Symbol::~Symbol()
 {
 	if (m_mesh)
 	{
-		m_mesh->Release();
+		m_mesh->RemoveReference();
 		m_mesh = NULL;
 	}
 }
 
-Symbol* Symbol::Clone() const 
-{ 
-	return new Symbol(*this);
-}
-
-void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
+void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	if (!m_mesh) {
 		return;
@@ -55,8 +50,8 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 
 	s2::RenderParams p = params;
 	if (spr) {
-		p.mt = spr->GetTransMatrix() * params.mt;
-		p.color = spr->GetColor() * params.color;
+		p.mt = dynamic_cast<const ee::Sprite*>(spr)->GetTransMatrix() * params.mt;
+		p.color = spr->Color() * params.color;
 	}
 
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
@@ -65,7 +60,7 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 	shader->SetColor(p.color.mul.ToABGR(), p.color.add.ToABGR());
 	shader->SetColorMap(p.color.rmap.ToABGR(), p.color.gmap.ToABGR(), p.color.bmap.ToABGR());
 
-	const Sprite* mesh_spr = static_cast<const Sprite*>(spr);
+	const Sprite* mesh_spr = dynamic_cast<const Sprite*>(spr);
 	if (mesh_spr) {
 		const MeshTrans& mtrans = mesh_spr->GetMeshTrans();
 		mtrans.StoreToMesh(m_mesh);
@@ -86,6 +81,11 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 	}
 }
 
+sm::rect Symbol::GetBounding(const s2::Sprite* spr) const
+{
+	return m_mesh->GetRegion();
+}
+
 void Symbol::ReloadTexture() const
 {
 	if (const ee::Symbol* sym = m_mesh->GetBaseSymbol()) {
@@ -101,21 +101,15 @@ void Symbol::ReloadTexture() const
 void Symbol::SetMesh(Mesh* mesh)
 {
 	if (m_mesh) {
-		m_mesh->Release();
+		m_mesh->RemoveReference();
 	}
-	mesh->Retain();
+	mesh->AddReference();
 	m_mesh = mesh;
 }
 
 void Symbol::LoadResources()
 {
 	FileIO::Load(m_filepath.c_str(), this);
-	InitBounding();
-}
-
-void Symbol::InitBounding()
-{
-	m_region = m_mesh->GetRegion();
 }
 
 }

@@ -6,18 +6,24 @@
 namespace s2
 {
 
-class ComplexSprite : public Sprite
+class ComplexSprite : public VIRTUAL_INHERITANCE Sprite
 {
 public:
-	ComplexSprite(void* ud);
-	ComplexSprite(const ComplexSprite& spr, void* ud);
+	ComplexSprite();
+	ComplexSprite(const ComplexSprite& spr);
 
-	virtual bool Update(float dt);
+	/**
+	 *  @interface
+	 *    Cloneable
+	 */
+	virtual ComplexSprite* Clone() const;
+
+	/**
+	 *  @interface
+	 *    Sprite
+	 */
+	virtual bool Update(const RenderParams& params, float dt);
 	
-private:
-	ComplexSprite() {}
-	const ComplexSprite& operator = (const ComplexSprite& spr) { return *this; }
-
 }; // ComplexSprite
 
 }

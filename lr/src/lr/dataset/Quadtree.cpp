@@ -134,7 +134,7 @@ Quadtree::Node::
 ~Node()
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->Release();
+		m_sprites[i]->RemoveReference();
 	}
 	for (int i = 0; i < 4; ++i) {
 		delete m_children[i];
@@ -144,7 +144,7 @@ Quadtree::Node::
 void Quadtree::Node::
 Insert(const ee::Sprite* spr)
 {
-	spr->Retain();
+	spr->AddReference();
 
 	if (IsLeaf()) 
 	{

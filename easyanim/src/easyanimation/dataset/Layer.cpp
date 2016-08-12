@@ -58,7 +58,7 @@ ee::AtomicOP* Layer::RemoveFrameRegion(int begin, int end)
 				del_first = true;
 			}
 			aop->AddRemoved(itr->second);
-			itr->second->Release();
+			itr->second->RemoveReference();
 			itr = m_frames.erase(itr);
 		} else {
 			assert(itr->first > end);
@@ -77,7 +77,7 @@ ee::AtomicOP* Layer::RemoveFrameRegion(int begin, int end)
 		aop->AddChanged(frame, new_time);
 		frame->SetTime(new_time);
 		InsertKeyFrame(frame->GetTime(), frame);
-		frame->Release();
+		frame->RemoveReference();
 	}
 
 	int after_len = GetMaxFrameTime();
@@ -111,7 +111,7 @@ void Layer::InsertNullFrame(int time)
 		KeyFrame* frame = frames[i];
 		frame->SetTime(frame->GetTime() + 1);
 		InsertKeyFrame(frame->GetTime(), frame);
-		frame->Release();
+		frame->RemoveReference();
 	}
 }
 
@@ -138,7 +138,7 @@ void Layer::RemoveNullFrame(int time)
 		KeyFrame* frame = frames[i];
 		frame->SetTime(frame->GetTime() - 1);
 		InsertKeyFrame(frame->GetTime(), frame);
-		frame->Release();
+		frame->RemoveReference();
 	}
 }
 
@@ -150,7 +150,7 @@ void Layer::InsertKeyFrame(KeyFrame* frame)
 	if (!status.second && frame != status.first->second)
 	{
 		KeyFrame* old_frame = status.first->second;
-		old_frame->Release();
+		old_frame->RemoveReference();
 		status.first->second = frame;
 	}
 
@@ -180,14 +180,14 @@ void Layer::InsertKeyFrame(int time)
 			for (int i = 0, n = sprites.size(); i < n; ++i) {
 				frame->Insert(sprites[i], INT_MAX);
 			}
-			for_each(sprites.begin(), sprites.end(), ee::ReleaseObjectFunctor<ee::Sprite>());
+			for_each(sprites.begin(), sprites.end(), ee::cu::RemoveRefFonctor<ee::Sprite>());
 			frame->SetClassicTween(true);
 		} else {
 			frame->CopyFromOther(prev);
 		}
 	}
 	InsertKeyFrame(time, frame);
-	frame->Release();
+	frame->RemoveReference();
 	SetSelectedSJ::Instance()->Set(-1, time - 1);
 }
 
@@ -200,7 +200,7 @@ void Layer::RemoveKeyFrame(int time)
 	std::map<int, KeyFrame*>::iterator itr = m_frames.find(time);
 	assert(itr != m_frames.end());
 
-	itr->second->Release();
+	itr->second->RemoveReference();
 	m_frames.erase(itr);
 
 	int frame_idx = 0;
@@ -230,7 +230,7 @@ void Layer::ChangeKeyFrame(KeyFrame* frame, int to)
 
 	frame->SetTime(to);
 	InsertKeyFrame(frame->GetTime(), frame);
-	frame->Release();
+	frame->RemoveReference();
 }
 
 KeyFrame* Layer::GetCurrKeyFrame(int time)
@@ -297,7 +297,7 @@ void Layer::Clear()
 {
 	std::map<int, KeyFrame*>::iterator itr = m_frames.begin();
 	for ( ; itr != m_frames.end(); ++itr) {
-		itr->second->Release();
+		itr->second->RemoveReference();
 	}
 	m_frames.clear();
 }
@@ -310,7 +310,7 @@ Layer::InsertKeyFrame(int index, KeyFrame* frame)
 	std::pair<std::map<int, KeyFrame*>::iterator, bool> itr
 		= m_frames.insert(std::make_pair(index, frame));
 	if (itr.second) {
-		frame->Retain();
+		frame->AddReference();
 	}
 	return itr;
 }

@@ -7,17 +7,17 @@ namespace ee
 {
 
 template <typename T>
-class FetchAllVisitor : public Visitor
+class FetchAllVisitor : public Visitor<T>
 {
 public:
 	FetchAllVisitor(std::vector<T*>& result) 
 		: m_result(result) {}
 
-	virtual void Visit(Object* object, bool& next)
+	virtual void Visit(T* obj, bool& next)
 	{
-		T* item = dynamic_cast<T*>(object);
-		if (item)
-			m_result.push_back(item);
+		if (obj) {
+			m_result.push_back(obj);
+		}
 		next = true;
 	}
 

@@ -32,7 +32,7 @@ Symbol::~Symbol()
 	PackageMgr::Instance()->Remove(m_filepath);
 
 	if (m_spr) {
-		m_spr->Release();
+		m_spr->RemoveReference();
 	}
 }
 

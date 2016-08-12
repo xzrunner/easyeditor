@@ -84,7 +84,7 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 				delete[] pixels;
 			}
 
-			symbol->Release();
+			symbol->RemoveReference();
 		}
 	}
 }

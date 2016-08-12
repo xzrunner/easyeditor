@@ -6,11 +6,11 @@
 namespace ee
 {
 
-class PointQueryVisitor : public Visitor
+class PointQueryVisitor : public Visitor<Sprite>
 {
 public:
 	PointQueryVisitor(const sm::vec2& pos, Sprite** result);
-	virtual void Visit(Object* object, bool& next);
+	virtual void Visit(Sprite* spr, bool& next);
 
 private:
 	const sm::vec2& m_pos;
@@ -27,12 +27,11 @@ PointQueryVisitor::PointQueryVisitor(const sm::vec2& pos, Sprite** result)
 }
 
 inline
-void PointQueryVisitor::Visit(Object* object, bool& next)
+void PointQueryVisitor::Visit(Sprite* spr, bool& next)
 {
-	Sprite* sprite = static_cast<Sprite*>(object);
-	if (sprite->IsContain(m_pos))
+	if (spr->IsContain(m_pos))
 	{
-		obj_assign<Sprite>(*m_result, sprite);
+		cu::RefCountObjAssign(*m_result, spr);
 		next = false;
 	}
 	else

@@ -5,14 +5,18 @@
 namespace s2
 {
 
-ImageSprite::ImageSprite(void* ud)
-	: Sprite(ud)
+ImageSprite::ImageSprite()
 {
 }
 
-ImageSprite::ImageSprite(const ImageSprite& spr, void* ud)
-	: Sprite(spr, ud)
+ImageSprite::ImageSprite(const ImageSprite& spr)
+	: Sprite(spr)
 {
+}
+
+ImageSprite* ImageSprite::Clone() const
+{
+	return new ImageSprite(*this);
 }
 
 }

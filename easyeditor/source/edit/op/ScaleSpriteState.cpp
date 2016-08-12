@@ -14,7 +14,7 @@ ScaleSpriteState::ScaleSpriteState(Sprite* sprite, const SpriteCtrlNode::Node& c
 	: m_ctrl_node(ctrl_node)
 {
 	m_sprite = sprite;
-	m_sprite->Retain();
+	m_sprite->AddReference();
 
 	m_first_pos = m_sprite->GetPosition();
 	m_first_scale = m_sprite->GetScale();
@@ -22,7 +22,7 @@ ScaleSpriteState::ScaleSpriteState(Sprite* sprite, const SpriteCtrlNode::Node& c
 
 ScaleSpriteState::~ScaleSpriteState()
 {
-	m_sprite->Release();
+	m_sprite->RemoveReference();
 }
 
 void ScaleSpriteState::OnMouseRelease(const sm::vec2& pos)

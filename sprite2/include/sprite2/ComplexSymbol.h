@@ -8,12 +8,17 @@
 namespace s2
 {
 
-class ComplexSymbol : public Symbol
+class ComplexSymbol : public VIRTUAL_INHERITANCE Symbol
 {
 public:
-	ComplexSymbol(void* ud);
+	ComplexSymbol();
 
-	virtual void Draw(const RenderParams& params, const Sprite* spr) const;
+	/**
+	 *  @interface
+	 *    Symbol
+	 */
+	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const;
+	virtual sm::rect GetBounding(const Sprite* spr = NULL) const;
 
 	const std::vector<Sprite*>& GetChildren() const { return m_children; }
 
@@ -27,7 +32,7 @@ public:
 	bool ResetOrderMost(const Sprite* spr, bool up);
 	bool Sort(std::vector<Sprite*>& sprites);
 
-private:
+protected:
 	std::vector<Sprite*> m_children;
 
 }; // ComplexSymbol

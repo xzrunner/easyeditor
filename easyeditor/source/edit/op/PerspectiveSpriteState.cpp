@@ -13,14 +13,14 @@ PerspectiveSpriteState::PerspectiveSpriteState(Sprite* sprite,
 	: m_ctrl_node(ctrl_node)
 {
 	m_sprite = sprite;
-	m_sprite->Retain();
+	m_sprite->AddReference();
 
 	m_first_persp = m_sprite->GetPerspective();
 }
 
 PerspectiveSpriteState::~PerspectiveSpriteState()
 {
-	m_sprite->Release();
+	m_sprite->RemoveReference();
 }
 
 void PerspectiveSpriteState::OnMouseRelease(const sm::vec2& pos)

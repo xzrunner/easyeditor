@@ -26,14 +26,14 @@ ImageSprite::ImageSprite(const ImageSprite& sprite)
 {
 	m_core = new s2::ImageSprite(*static_cast<s2::ImageSprite*>(sprite.m_core), this);
 
-	m_symbol->Retain();
+	m_symbol->AddReference();
 }
 
 ImageSprite::ImageSprite(ImageSymbol* symbol)
 	: m_symbol(symbol)
 {
 	m_core = new s2::ImageSprite(this);
-	m_symbol->Retain();
+	m_symbol->AddReference();
 	BuildBounding();
 }
 
@@ -41,7 +41,7 @@ ImageSprite::~ImageSprite()
 {
 	m_core->RemoveReference();
 	if (m_symbol) {
-		m_symbol->Release();
+		m_symbol->RemoveReference();
 	}
 }
 

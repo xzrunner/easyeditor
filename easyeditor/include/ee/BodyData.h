@@ -2,9 +2,9 @@
 #define _EASYEDITOR_BODY_DATA_H_
 
 #include "ResourcesMgr.h"
-#include "Object.h"
 
 #include <SM_Vector.h>
+#include <CU_RefCountObj.h>
 
 #include <Box2D/Box2D.h>
 
@@ -16,7 +16,7 @@ namespace ee
 class BodyData;
 typedef ResourcesMgr<BodyData> BodyDataMgr;
 
-class BodyData : public Object
+class BodyData : public cu::RefCountObj
 {
 public:
 	enum Type

@@ -32,7 +32,7 @@ PolygonShape::PolygonShape(const PolygonShape& polygon)
 {
 	if (polygon.m_material) {
 		m_material = polygon.m_material;
-		polygon.m_material->Retain();
+		polygon.m_material->AddReference();
 	}
 }
 
@@ -43,7 +43,7 @@ PolygonShape& PolygonShape::operator = (const PolygonShape& polygon)
 
 	if (polygon.m_material) {
 		m_material = polygon.m_material;
-		polygon.m_material->Retain();
+		polygon.m_material->AddReference();
 	} else {
 		m_material = NULL;
 	}
@@ -53,26 +53,9 @@ PolygonShape& PolygonShape::operator = (const PolygonShape& polygon)
 PolygonShape::~PolygonShape()
 {
 	if (m_material) {
-		m_material->Release();
+		m_material->RemoveReference();
 	}
 	ClearUserData(true);
-}
-
-PolygonShape* PolygonShape::Clone() const
-{
-	return new PolygonShape(*this);
-}
-
-void PolygonShape::Translate(const sm::vec2& offset)
-{
-	for (int i = 0, n = m_vertices.size(); i < n; ++i) {
-		m_vertices[i] += offset;
-	}
-	m_bounding.Translate(offset);
-
-	if (m_material) {
-		m_material->Translate(offset);
-	}
 }
 
 void PolygonShape::Draw(const sm::mat4& mt, const s2::RenderColor& color) const
@@ -86,6 +69,18 @@ void PolygonShape::Draw(const sm::mat4& mt, const s2::RenderColor& color) const
 
 	if (ee::Config::Instance()->GetSettings().visible_tex_edge) {
 		s2::PolylineShape::Draw(mt, color);
+	}
+}
+
+void PolygonShape::Translate(const sm::vec2& offset)
+{
+	for (int i = 0, n = m_vertices.size(); i < n; ++i) {
+		m_vertices[i] += offset;
+	}
+	m_bounding.Translate(offset);
+
+	if (m_material) {
+		m_material->Translate(offset);
 	}
 }
 
@@ -165,7 +160,7 @@ void PolygonShape::SetVertices(const std::vector<sm::vec2>& vertices)
 void PolygonShape::SetMaterialColor(const s2::Color& color)
 {
 	if (m_material) {
-		m_material->Release();
+		m_material->RemoveReference();
 	}
 	m_material = new ColorMaterial(m_vertices, color);
 }
@@ -173,7 +168,7 @@ void PolygonShape::SetMaterialColor(const s2::Color& color)
 void PolygonShape::SetMaterialTexture(ee::ImageSymbol* image)
 {
 	if (m_material) {
-		m_material->Release();
+		m_material->RemoveReference();
 	}
 	m_material = new TextureMaterial(m_vertices, image);
 }
@@ -199,7 +194,7 @@ void PolygonShape::LoadMaterial(const std::string& dirpath, const Json::Value& v
 	}
 
 	if (m_material) {
-		m_material->Release();
+		m_material->RemoveReference();
 	}
 
 	std::string type = val["type"].asString();
@@ -212,7 +207,7 @@ void PolygonShape::LoadMaterial(const std::string& dirpath, const Json::Value& v
 		ee::ImageSymbol* symbol = static_cast<ee::ImageSymbol*>(
 			ee::SymbolMgr::Instance()->FetchSymbol(dirpath + "\\" + path));
 		m_material = new TextureMaterial(m_vertices, symbol);
-		symbol->Release();
+		symbol->RemoveReference();
 	}
 }
 

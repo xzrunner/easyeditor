@@ -17,7 +17,7 @@ Symbol::Symbol()
 Symbol::~Symbol()
 {
 	if (m_icon) {
-		m_icon->Release();
+		m_icon->RemoveReference();
 	}
 }
 
@@ -82,7 +82,7 @@ void Symbol::LoadResources()
 {
 	Icon* icon = FileIO::LoadFromFile(m_filepath.c_str());
 	SetIcon(icon);
-	icon->Release();
+	icon->RemoveReference();
 }
 
 }

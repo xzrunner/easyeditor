@@ -7,12 +7,12 @@ namespace ee
 TextureFBO::TextureFBO(const FBO* fbo)
 	: m_fbo(fbo)
 {
-	m_fbo->Retain();
+	m_fbo->AddReference();
 }
 
 TextureFBO::~TextureFBO()
 {
-	m_fbo->Release();
+	m_fbo->RemoveReference();
 }
 
 unsigned int TextureFBO::GetTexID() const 

@@ -1,6 +1,8 @@
 #ifndef _EASYEDITOR_LIBRARY_PAGE_H_
 #define _EASYEDITOR_LIBRARY_PAGE_H_
 
+#include "Visitor.h"
+
 #include <wx/wx.h>
 
 namespace ee
@@ -9,7 +11,6 @@ namespace ee
 class ListItem;
 class Symbol;
 class LibraryList;
-class Visitor;
 
 class LibraryPage : public wxWindow
 {
@@ -25,7 +26,7 @@ public:
 
 	virtual void OnActive() {}
 
-	void Traverse(Visitor& visitor) const;
+	void Traverse(Visitor<ListItem>& visitor) const;
 
 	const std::string& GetPageName() const { return m_name; }
 

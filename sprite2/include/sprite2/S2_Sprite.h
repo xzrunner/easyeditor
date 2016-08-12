@@ -1,29 +1,35 @@
 #ifndef _SPRITE2_SPRITE_H_
 #define _SPRITE2_SPRITE_H_
 
+#include "pre_defined.h"
 #include "AABB.h"
 #include "RenderColor.h"
 #include "RenderShader.h"
 #include "RenderCamera.h"
-#include "RefCountObj.h"
 
 #include <SM_Vector.h>
+#include <CU_RefCountObj.h>
+#include <CU_Cloneable.h>
 
 namespace s2
 {
 
+class RenderParams;
 class Symbol;
 
-class Sprite : public RefCountObj
+class Sprite : public cu::RefCountObj, public cu::Cloneable
 {
 public:
-	Sprite(void* ud);
-	Sprite(const Sprite& spr, void* ud);
+	Sprite();
+	Sprite(const Sprite& spr);
 	virtual ~Sprite();
 	
-	virtual bool Update(float dt) = 0;
+	virtual bool Update(const RenderParams& params, float dt) { return false; }
 
-	void* GetUD() { return m_ud; }
+	bool IsVisible() const { return m_visible; }
+	void SetVisible(bool visible) { m_visible = visible; }
+
+	const Bounding* GetBounding() const { return m_bounding; }
 
 	/************************************************************************/
 	/* api for dynamic change                                               */
@@ -47,9 +53,7 @@ public:
 	void SetShear(const sm::vec2& shear);
 
 protected:
-	Sprite();
-	Sprite(const Sprite& spr);
-	const Sprite& operator = (const Sprite& spr) { return *this; }
+	const Sprite& operator = (const Sprite& spr);
 
 //	void MultiplyRenderParams(const RenderParams& src, RenderParams& dst) const;
 
@@ -82,7 +86,16 @@ private:
 	RenderShader	m_shader;
 	RenderCamera	m_camera;
 
-	void*			m_ud;	// for extend
+	/************************************************************************/
+	/* message                                                              */
+	/************************************************************************/
+	bool			m_visible;
+
+// 	/************************************************************************/
+// 	/* extend                                                               */
+// 	/************************************************************************/
+// 	int				m_flags;
+//	void*			m_ud;
 
 }; // Sprite
 

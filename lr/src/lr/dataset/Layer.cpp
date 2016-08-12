@@ -263,7 +263,7 @@ void Layer::LoadSprites(const Json::Value& val, const std::string& dir,
 		ee::Sprite* spr = LoadSprite(spr_val, dir, base_path);
 		spr->GetCamera().mode = m_cam_mode;
 		m_sprites.Insert(spr);
-		spr->Release();
+		spr->RemoveReference();
 		spr_val = val[idx++];
 	}
 }
@@ -281,7 +281,7 @@ void Layer::LoadShapes(const Json::Value& val, const std::string& dir,
 			shape->SetUserData(ud);
 		}
 		m_shapes.Insert(shape);
-		shape->Release();
+		shape->RemoveReference();
 		shape_val = val[idx++];
 	}
 }
@@ -394,7 +394,7 @@ ee::Sprite* Layer::LoadGroup(const Json::Value& val, const std::string& dir, con
 
 	ee::SpriteFactory::Instance()->Insert(spr);
 	spr->Load(val);
-	for_each(sprites.begin(), sprites.end(), ee::ReleaseObjectFunctor<ee::Sprite>());
+	for_each(sprites.begin(), sprites.end(), ee::cu::RemoveRefFonctor<ee::Sprite>());
 	return spr;
 }
 
@@ -467,7 +467,7 @@ ee::Sprite* Layer::LoadSprite(const Json::Value& val, const std::string& dir, co
 
 	LoadShapesUD(val, sprite);
 
-	symbol->Release();
+	symbol->RemoveReference();
 
 	return sprite;
 }

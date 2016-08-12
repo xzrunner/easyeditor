@@ -185,7 +185,7 @@ void SelectNodesOP::FetchSelectedNode(std::vector<sm::vec2>& nodes) const
 	Math::mergeMultiChains(src, nodes);
 
 	for (size_t i = 0, n = src.size(); i < n; ++i)
-		src[i]->Release();
+		src[i]->RemoveReference();
 }
 
 int SelectNodesOP::GetThreshold()
@@ -253,9 +253,9 @@ PosQueryVisitor(const sm::vec2& pos, ChainSelectedNodes** result)
 }
 
 void SelectNodesOP::PosQueryVisitor::
-Visit(Object* object, bool& next)
+Visit(ee::Shape* shape, bool& next)
 {
-	PolylineShape* polyline = dynamic_cast<PolylineShape*>(object);
+	PolylineShape* polyline = dynamic_cast<PolylineShape*>(shape);
 	if (!polyline) {
 		next = true;
 		return;
@@ -294,9 +294,9 @@ RectQueryVisitor(const sm::rect& rect, std::vector<ChainSelectedNodes*>& result)
 }
 
 void SelectNodesOP::RectQueryVisitor::
-Visit(Object* object, bool& next)
+Visit(ee::Shape* shape, bool& next)
 {
-	PolylineShape* polyline = dynamic_cast<PolylineShape*>(object);
+	PolylineShape* polyline = dynamic_cast<PolylineShape*>(shape);
 	if (!polyline) {
 		next = true;
 		return;

@@ -223,7 +223,7 @@ void LRSeparateComplex::FixPosWithShape(sm::vec2& pos, const std::string& filepa
 		throw ee::Exception("shape file is not point:%s", filepath);
 	}
 
-	symbol->Release();
+	symbol->RemoveReference();
 }
 
 }

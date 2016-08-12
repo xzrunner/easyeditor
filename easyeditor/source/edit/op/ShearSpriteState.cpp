@@ -14,14 +14,14 @@ ShearSpriteState::ShearSpriteState(Sprite* sprite,
 	: m_ctrl_node(ctrl_node)
 {
 	m_sprite = sprite;
-	m_sprite->Retain();
+	m_sprite->AddReference();
 
 	m_first_shear = m_sprite->GetShear();
 }
 
 ShearSpriteState::~ShearSpriteState()
 {
-	m_sprite->Release();
+	m_sprite->RemoveReference();
 }
 
 void ShearSpriteState::OnMouseRelease(const sm::vec2& pos)

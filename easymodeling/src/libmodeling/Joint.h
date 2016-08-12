@@ -1,8 +1,6 @@
 #ifndef _EASYMODELING_JOINT_H_
 #define _EASYMODELING_JOINT_H_
 
-#include <ee/Object.h>
-
 #include <string>
 
 namespace ee { class Rect; class Sprite; }

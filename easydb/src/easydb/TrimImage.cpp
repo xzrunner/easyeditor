@@ -218,7 +218,7 @@ void TrimImage::Trim(const std::string& filepath)
 			out_filepath, ee::ImageSaver::e_png);
 	}
 
-	img->Release();
+	img->RemoveReference();
 }
 
 int64_t TrimImage::GetFileModifyTime(const std::string& filepath)

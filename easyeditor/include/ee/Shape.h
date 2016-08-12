@@ -1,13 +1,12 @@
 #ifndef _EASYEDITOR_SHAPE_H_
 #define _EASYEDITOR_SHAPE_H_
 
-#include "Cloneable.h"
 #include "UserDataImpl.h"
-#include "Object.h"
 
 #include <SM_Matrix.h>
 #include <SM_Rect.h>
 #include <sprite2/RenderColor.h>
+#include <sprite2/Shape.h>
 
 #include <json/json.h>
 
@@ -17,34 +16,25 @@ namespace ee
 class PropertySetting;
 class EditPanelImpl;
 
-class Shape : public Cloneable, public UserDataImpl, public Object
+class Shape : public virtual s2::Shape, public UserDataImpl
 {
 public:
 	Shape();
-	virtual ~Shape() { ClearUserData(true); }
+	Shape(const Shape& shape);
+	virtual ~Shape();
 
-	//
-	// UserDataImpl interface
-	//	
+	/**
+	 *  @interface
+	 *    UserDataImpl
+	 */
 	virtual void ClearUserData(bool deletePtr) {}
 
-	//
-	// Cloneable interface
-	//
-	virtual Shape* Clone() const { return NULL; }
+	virtual Shape* EEClone() const { return NULL; }
 
 	virtual const char* GetShapeDesc() const = 0;
 
-	virtual bool IsContain(const sm::vec2& pos) const = 0;
-	virtual bool IsIntersect(const sm::rect& rect) const = 0;
-
 	virtual void Translate(const sm::vec2& offset) = 0;
 //	virtual void Rotate(float delta) = 0;
-
-	virtual const sm::rect& GetRect() const = 0;
-
-	virtual void Draw(const sm::mat4& mt, 
-		const s2::RenderColor& color = s2::RenderColor()) const = 0;
 
 	virtual PropertySetting* CreatePropertySetting(EditPanelImpl* stage) = 0;
 

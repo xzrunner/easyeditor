@@ -3,8 +3,7 @@
 namespace s2
 {
 
-MeshSymbol::MeshSymbol(void* ud)
-	: Symbol(ud)
+MeshSymbol::MeshSymbol()
 {
 }
 

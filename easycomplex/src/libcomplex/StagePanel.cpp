@@ -32,11 +32,11 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	ee::EditOP* editop = new ee::ArrangeSpriteOP<SelectSpritesOP>(this, GetStageImpl(), this, property, 
 		NULL, ee::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, property));
 	SetEditOP(editop);
-	editop->Release();
+	editop->RemoveReference();
 
 	ee::StageCanvas* canvas = new StageCanvas(this, library);
 	SetCanvas(canvas);
-	canvas->Release();
+	canvas->RemoveReference();
 
 	SetDropTarget(new ee::StageDropTarget(this, GetStageImpl(), library));
 
@@ -59,11 +59,11 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 		this, GetStageImpl(), this, property, NULL, ee::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, property));
 	static_cast<SelectSpritesOP*>(editop)->SetGuides(guides);
 	SetEditOP(editop);
-	editop->Release();
+	editop->RemoveReference();
 
 	ee::StageCanvas* canvas = new StageCanvas(this, library, glctx);
 	SetCanvas(canvas);
-	canvas->Release();
+	canvas->RemoveReference();
 
 	SetDropTarget(new ee::StageDropTarget(this, GetStageImpl(), library));
 

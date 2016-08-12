@@ -203,7 +203,7 @@ const IPackNode* PackNodeFactory::Create(const ee::Symbol* symbol)
 	if (const ee::ImageSymbol* img_symbol = dynamic_cast<const ee::ImageSymbol*>(symbol)) {
 		ee::ImageSprite* img_spr = new ee::ImageSprite(const_cast<ee::ImageSymbol*>(img_symbol));
 		node = m_img_builder->Create(img_spr);
-		img_spr->Release();
+		img_spr->RemoveReference();
 	} else if (const etexture::Symbol* tex = dynamic_cast<const etexture::Symbol*>(symbol)) {
 		node = m_tex_builder->Create(tex);
 	}

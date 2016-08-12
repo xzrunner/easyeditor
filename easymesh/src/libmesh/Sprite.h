@@ -43,7 +43,7 @@ public:
 	MeshTrans& GetMeshTrans() { return m_trans; }
 
 	const ee::Symbol* GetBaseSym() const { return m_base; }
-	void SetBaseSym(const ee::Symbol* sym) { ee::obj_assign(m_base, sym); }
+	void SetBaseSym(const ee::Symbol* sym);
 
 	bool OnlyDrawBound() const { return m_only_draw_bound; }
 	void SetOnlyDrawBound(bool only_draw_bound) { m_only_draw_bound = only_draw_bound; }

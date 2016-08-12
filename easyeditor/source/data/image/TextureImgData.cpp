@@ -21,7 +21,7 @@ TextureImgData::~TextureImgData()
 
 	if (m_img_data) {
 		ImageDataMgr::Instance()->RemoveItem(m_img_data->GetFilepath());
-		m_img_data->Release();
+		m_img_data->RemoveReference();
 	}
 }
 
@@ -55,7 +55,7 @@ void TextureImgData::LoadFromFile(const std::string& filepath)
 	ImageData* img_data = ImageDataMgr::Instance()->GetItem(filepath);
 	if (img_data) {
 		LoadFromMemory(img_data);
-		img_data->Release();
+		img_data->RemoveReference();
 	}
 }
 

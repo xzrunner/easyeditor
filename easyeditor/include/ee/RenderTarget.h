@@ -1,7 +1,6 @@
 //#ifndef _EASYEDITOR_RENDER_TARGET_H_
 //#define _EASYEDITOR_RENDER_TARGET_H_
 //
-//#include "Object.h"
 //
 //namespace ee
 //{

@@ -80,10 +80,9 @@ GetPhysicsStaticVisitor()
 }
 
 void UniversalArrangeCMPT::GetPhysicsStaticVisitor::
-Visit(Object* object, bool& next)
+Visit(Sprite* spr, bool& next)
 {
-	Sprite* sprite = static_cast<Sprite*>(object);
-	const IBody* body = BodyManager::Instance()->QueryBody(sprite);
+	const IBody* body = BodyManager::Instance()->QueryBody(spr);
 	if (!body) {
 		next = true;
 		return;
@@ -114,10 +113,9 @@ SetPhysicsStaticVisitor(bool bChecked)
 }
 
 void UniversalArrangeCMPT::SetPhysicsStaticVisitor::
-Visit(Object* object, bool& next)
+Visit(Sprite* spr, bool& next)
 {
-	Sprite* sprite = static_cast<Sprite*>(object);
-	const IBody* body = BodyManager::Instance()->QueryBody(sprite);
+	const IBody* body = BodyManager::Instance()->QueryBody(spr);
 	if (body) {
 		body->GetBody()->SetType(m_bChecked ? b2_staticBody : b2_dynamicBody);
 	}

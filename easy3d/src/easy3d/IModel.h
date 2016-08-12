@@ -3,8 +3,6 @@
 
 #include "Mesh.h"
 
-#include <ee/Object.h>
-
 #include <vector>
 
 namespace e3d 

@@ -13,11 +13,6 @@ CircleShape::CircleShape(const sm::vec2& center, float radius)
 {
 }
 
-CircleShape* CircleShape::Clone() const
-{
-	return new CircleShape(*this);
-}
-
 void CircleShape::Translate(const sm::vec2& offset)
 {
 	SetCenter(m_center + offset);

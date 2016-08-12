@@ -34,10 +34,10 @@ EditPanelImpl::~EditPanelImpl()
 	Clear();
 
 	if (m_edit_op) {
-		m_edit_op->Release();
+		m_edit_op->RemoveReference();
 	}
 	if (m_canvas) {
-		m_canvas->Release();
+		m_canvas->RemoveReference();
 		m_canvas = NULL;
 	}
 }
@@ -92,12 +92,12 @@ void EditPanelImpl::SetEditOP(EditOP* editOP)
 	}
 
 	if (editOP) {
-		editOP->Retain();
+		editOP->AddReference();
 	}
 	if (m_edit_op)
 	{
 		m_edit_op->Clear();
-		m_edit_op->Release();
+		m_edit_op->RemoveReference();
 	}
 	m_edit_op = editOP;
 	if (m_edit_op) {

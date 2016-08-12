@@ -22,7 +22,7 @@ void PackLuaFile::pack(const std::vector<const ee::Sprite*>& sprites,
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
 		ee::Sprite* sprite = const_cast<ee::Sprite*>(sprites[i]);
-		sprite->Retain();
+		sprite->AddReference();
 		root.Add(sprite);
 	}
 

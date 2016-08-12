@@ -35,7 +35,7 @@ public:
 
 	// for background
 	void SetBackground(ee::Sprite* bg) { 
-		bg->Retain();
+		bg->AddReference();
 		m_background = bg; 
 	}
 	const ee::Sprite* GetBackground() const { return m_background; }

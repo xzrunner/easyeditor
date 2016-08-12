@@ -12,14 +12,14 @@ ScaleSpriteAOP::ScaleSpriteAOP(Sprite* sprite,
 	: m_new_scale(new_scale)
 	, m_old_scale(old_scale)
 {
-	sprite->Retain();
+	sprite->AddReference();
 	m_sprites.push_back(sprite);
 }
 
 ScaleSpriteAOP::~ScaleSpriteAOP()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->Release();
+		m_sprites[i]->RemoveReference();
 	}
 }
 

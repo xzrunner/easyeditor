@@ -87,7 +87,7 @@ StagePanel::~StagePanel()
 	if (m_pathfinding) {
 		delete m_pathfinding;
 	}
-	m_arrange_op->Release();
+	m_arrange_op->RemoveReference();
 
 	for_each(m_layers.begin(), m_layers.end(), ee::DeletePointerFunctor<Layer>());
 }
@@ -99,7 +99,7 @@ StagePanel::~StagePanel()
 // 	ClearShape();
 // 
 // 	for (int i = 0, n = m_layers.size(); i < n; ++i) {
-// 		m_layers[i]->Release();
+// 		m_layers[i]->RemoveReference();
 // 	}
 // }
 
@@ -207,15 +207,15 @@ void StagePanel::PointQuery(const sm::vec2& pos)
 void StagePanel::SetLayers(const std::vector<Layer*>& layers)
 {
 	if (m_layers.empty()) {
-		for_each(layers.begin(), layers.end(), ee::RetainObjectFunctor<Layer>());
+		for_each(layers.begin(), layers.end(), ee::cu::AddRefFonctor<Layer>());
 		m_layers = layers;
 		return;
 	}
 
 	assert(m_layers.size() >= layers.size());
 	for (int i = 0, n = layers.size(); i < n; ++i) {
-		m_layers[i]->Release();
-		layers[i]->Retain();
+		m_layers[i]->RemoveReference();
+		layers[i]->AddReference();
 		m_layers[i] = layers[i];
 	}
 }
@@ -252,14 +252,14 @@ void StagePanel::ChangeEditOP()
 // 		return;
 // 	}
 // 
-// 	m_editop->Release();
+// 	m_editop->RemoveReference();
 // 	if (m_editop == m_arrange_op) {
 // 		ee::LibraryPage* curr_page = m_library->GetCurrPage();
 // 		m_editop = static_cast<LibraryPage*>(curr_page)->GetEditOP();
 // 	} else {
 // 		m_editop = m_arrange_op;
 // 	}
-// 	m_editop->Retain();
+// 	m_editop->AddReference();
 }
 
 void StagePanel::OnKeyHook(int key_code)
@@ -282,11 +282,11 @@ void StagePanel::OnKeyHook(int key_code)
 	SetEditOP(static_cast<LibraryPage*>(curr_page)->GetNextEditOP());
 	GetEditOP()->OnActive();
 
-// 	m_edit_op->Release();
+// 	m_edit_op->RemoveReference();
 // 	ee::LibraryPage* curr_page = m_library->GetCurrPage();
 // 	m_edit_op = static_cast<LibraryPage*>(curr_page)->GetNextEditOP();
 // 	m_edit_op->OnActive();
-// 	m_edit_op->Retain();	
+// 	m_edit_op->AddReference();	
 }
 
 void StagePanel::OnNotify(int sj_id, void* ud)

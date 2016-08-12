@@ -47,7 +47,7 @@ bool PasteSymbolPhysicsRandomOP::OnMouseLeftDown(int x, int y)
 
 		InsertSpriteSJ::Instance()->Insert(sprite);
 
-		sprite->Release();
+		sprite->RemoveReference();
 	}
 
 	changeRandomValue();

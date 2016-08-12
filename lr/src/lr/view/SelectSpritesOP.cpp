@@ -118,15 +118,15 @@ void SelectSpritesOP::BuildGroup()
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		ee::Sprite* spr = sprites[i];
 		ee::RemoveSpriteSJ::Instance()->Remove(spr);
-		spr->Retain();
+		spr->AddReference();
 		removed.push_back(spr);
-		spr->Release();
+		spr->RemoveReference();
 	}
 	ee::AtomicOP* del_op = new ee::DeleteSpriteAOP(removed);
 
 	ee::InsertSpriteSJ::Instance()->Insert(spr);
 	ee::AtomicOP* add_op = new ee::InsertSpriteAOP(spr);
-	spr->Release();
+	spr->RemoveReference();
 
 	ee::CombineAOP* combine = new ee::CombineAOP;
 	combine->Insert(move_op);
@@ -157,11 +157,11 @@ void SelectSpritesOP::BreakUpGroup()
  		for (int j = 0, m = children.size(); j < m; ++j) {
 			ee::Sprite* spr = children[j];
  			ee::InsertSpriteSJ::Instance()->Insert(spr);
-			spr->Release();
+			spr->RemoveReference();
  		}
 
 		ee::RemoveSpriteSJ::Instance()->Remove(spr);
-		spr->Release();
+		spr->RemoveReference();
 	}
 }
 
@@ -213,11 +213,11 @@ void SelectSpritesOP::BreakUpComplex()
 		for (int j = 0, m = children.size(); j < m; ++j) {
 			ee::Sprite* spr = children[j];
 			ee::InsertSpriteSJ::Instance()->Insert(spr);
-			spr->Release();
+			spr->RemoveReference();
 		}
 
 		ee::RemoveSpriteSJ::Instance()->Remove(spr);
-		spr->Release();
+		spr->RemoveReference();
 	}
 }
 

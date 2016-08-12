@@ -5,7 +5,7 @@
 
 #include <json/json.h>
 
-namespace ee { class Sprite; class Visitor; }
+namespace ee { class Sprite; }
 
 namespace eui
 {

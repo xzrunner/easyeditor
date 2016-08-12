@@ -349,7 +349,7 @@ void Network::LoadFromTriangulation(const std::vector<sm::vec2>& tris)
 			if (itr->second == &null) {
 				itr->second = new Node(itr->first, m_width, m_height);
 			} else {
-				itr->second->Retain();
+				itr->second->AddReference();
 			}
 			tri->nodes[j] = itr->second;
 		}

@@ -67,7 +67,7 @@ ee::Sprite* FileIO::LoadSprite(const Json::Value& value)
 	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(
 		value["filepath"].asString());
 	sprite = ee::SpriteFactory::Instance()->Create(symbol);
-	symbol->Release();
+	symbol->RemoveReference();
 
 	sprite->Load(value);
 

@@ -18,13 +18,13 @@ inline ObjectVector<T>::~ObjectVector()
 }
 
 template<class T>
-void ObjectVector<T>::Traverse(Visitor& visitor, bool order) const
+void ObjectVector<T>::Traverse(Visitor<T>& visitor, bool order) const
 {
 	Traverse(m_objs, visitor, order);
 }
 
 template<class T>
-void ObjectVector<T>::Traverse(Visitor& visitor, DataTraverseType type, bool order) const
+void ObjectVector<T>::Traverse(Visitor<T>& visitor, DataTraverseType type, bool order) const
 {
 	Traverse(m_objs, visitor, type, order);
 }
@@ -89,7 +89,7 @@ int ObjectVector<T>::Size() const
 }
 
 template<class T>
-inline void ObjectVector<T>::Traverse(const std::vector<T*>& objs, Visitor& visitor, bool order/* = true*/)
+inline void ObjectVector<T>::Traverse(const std::vector<T*>& objs, Visitor<T>& visitor, bool order/* = true*/)
 {
 	if (order)
 	{
@@ -115,7 +115,7 @@ inline void ObjectVector<T>::Traverse(const std::vector<T*>& objs, Visitor& visi
 
 template<class T>
 inline void ObjectVector<T>::Traverse(const std::vector<T*>& objs,
-									  Visitor& visitor, 
+									  Visitor<T>& visitor, 
 									  DataTraverseType type, 
 									  bool order)
 {
@@ -154,7 +154,7 @@ inline bool ObjectVector<T>::Remove(std::vector<T*>& objs,
 	{
 		if (objs[i] == obj)
 		{
-			obj->Release();
+			obj->RemoveReference();
 			objs.erase(objs.begin() + i);
 			return true;
 		}
@@ -166,7 +166,7 @@ template<class T>
 inline bool ObjectVector<T>::Insert(std::vector<T*>& objs, 
 									T* obj)
 {
-	obj->Retain();
+	obj->AddReference();
 	objs.push_back(obj);
 	return true;
 }
@@ -174,7 +174,7 @@ inline bool ObjectVector<T>::Insert(std::vector<T*>& objs,
 template<class T>
 inline bool ObjectVector<T>::Insert(std::vector<T*>& objs, T* obj, int idx)
 {
-	obj->Retain();
+	obj->AddReference();
 	if (objs.empty() || idx >= (int)objs.size()) {
 		objs.push_back(obj);
 	} else if (idx < 0) {
@@ -190,7 +190,7 @@ inline bool ObjectVector<T>::Clear(std::vector<T*>& objs)
 {
 	bool ret = !objs.empty();
 	for (size_t i = 0, n = objs.size(); i < n; ++i)
-		objs[i]->Release();
+		objs[i]->RemoveReference();
 	objs.clear();
 	return ret;
 }

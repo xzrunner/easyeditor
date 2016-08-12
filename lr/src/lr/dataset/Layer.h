@@ -1,7 +1,6 @@
 #ifndef _LR_LAYER_H_
 #define _LR_LAYER_H_
 
-#include <ee/Object.h>
 #include <ee/Visitor.h>
 #include <ee/DataTraverseType.h>
 #include <ee/ObjectVector.h>

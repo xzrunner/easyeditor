@@ -38,7 +38,7 @@ inline T* ResourcesMgr<T>::GetItem(const std::string& filename)
 	}
 	else
 	{
-		itr->second->Retain();
+		itr->second->AddReference();
 		return itr->second;
 	}
 }
@@ -49,9 +49,9 @@ inline void ResourcesMgr<T>::GetItem(const std::string& filename, T** old)
 {
 	T* _new = GetItem(filename);
 	// todo: ×ªÒÆµ½getItemÖÐ
-//		_new->Retain();
+//		_new->AddReference();
 	if (_new != *old && *old != NULL)
-		(*old)->Release();
+		(*old)->RemoveReference();
 	*old = _new;
 }
 
@@ -80,7 +80,7 @@ inline void ResourcesMgr<T>::Clear()
 }
 
 template<class T>
-inline void ResourcesMgr<T>::Traverse(Visitor& visitor) const
+inline void ResourcesMgr<T>::Traverse(Visitor<T>& visitor) const
 {
 	std::map<std::string, T*>::const_iterator itr = m_items.begin();
 	for ( ; itr != m_items.end(); ++itr)

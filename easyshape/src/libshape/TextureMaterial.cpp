@@ -15,7 +15,7 @@ namespace eshape
 
 TextureMaterial::TextureMaterial(const std::vector<sm::vec2>& vertices, ee::ImageSymbol* image)
 {
-	image->Retain();
+	image->AddReference();
 	m_image = image;
 
 	BuildBegin(vertices);
@@ -24,7 +24,7 @@ TextureMaterial::TextureMaterial(const std::vector<sm::vec2>& vertices, ee::Imag
 
 TextureMaterial::~TextureMaterial()
 {
-	m_image->Release();
+	m_image->RemoveReference();
 }
 
 Json::Value TextureMaterial::Store(const std::string& dirpath) const

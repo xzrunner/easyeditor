@@ -15,7 +15,7 @@ Group::~Group()
 	Clear();
 }
 
-void Group::TraverseSprite(Visitor& visitor, DataTraverseType type, bool order) const
+void Group::TraverseSprite(Visitor<Sprite>& visitor, DataTraverseType type, bool order) const
 {
 	if (type == DT_EDITABLE && m_editable ||
 		type == DT_VISIBLE && m_visible ||

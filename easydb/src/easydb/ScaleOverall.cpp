@@ -98,7 +98,7 @@ void ScaleOverall::ScaleImage(const std::string& filepath, float scale, ee::Snap
 	mapImg2Center.insert(std::make_pair(filepath, img_offset));
 
 	ss.OutputToImageFile(symbol, filepath, scale);
-	symbol->Release();
+	symbol->RemoveReference();
 }
 
 void ScaleOverall::ScaleComplex(const std::string& path, float scale,

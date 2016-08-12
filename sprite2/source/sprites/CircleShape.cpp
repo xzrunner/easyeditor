@@ -20,6 +20,11 @@ bool CircleShape::IsContain(const sm::vec2& pos) const
 	return sm::dis_pos_to_pos(m_center, pos) < SHAPE_NODE_RADIUS;
 }
 
+CircleShape* CircleShape::Clone() const
+{
+	return new CircleShape(*this);
+}
+
 bool CircleShape::IsIntersect(const sm::rect& rect) const
 {
 	sm::vec2 r_center = rect.Center();

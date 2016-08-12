@@ -108,7 +108,7 @@ void BodyData::loadFromShapeFile(const std::string& filename)
 // 			m_fixtures.push_back(fd);
 // 		}
 // 
-// 		shapes[i]->Release();
+// 		shapes[i]->RemoveReference();
 // 	}
 }
 

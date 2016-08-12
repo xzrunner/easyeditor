@@ -98,7 +98,7 @@ namespace ecomplex
 //		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 //		sprite->load(spriteValue);
 //
-//		symbol->Release();
+//		symbol->RemoveReference();
 //
 //		m_sprites.push_back(sprite);
 //		spriteValue = value["sprite"][i++];

@@ -10,12 +10,12 @@ namespace etexture
 SymbolContainer::SymbolContainer(Symbol* symbol)
 {
 	m_symbol = symbol;
-	m_symbol->Retain();
+	m_symbol->AddReference();
 }
 
 SymbolContainer::~SymbolContainer()
 {
-	m_symbol->Release();
+	m_symbol->RemoveReference();
 }
 
 void SymbolContainer::Traverse(ee::Visitor& visitor, bool order/* = true*/) const

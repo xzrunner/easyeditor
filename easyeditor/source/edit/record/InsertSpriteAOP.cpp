@@ -12,19 +12,19 @@ namespace ee
 
 InsertSpriteAOP::InsertSpriteAOP(Sprite* spr)
 {
-	spr->Retain();
+	spr->AddReference();
 	m_sprites.push_back(spr);
 }
 
 InsertSpriteAOP::InsertSpriteAOP(const std::vector<Sprite*>& sprites)
 {	
-	for_each(sprites.begin(), sprites.end(), RetainObjectFunctor<Sprite>());
+	for_each(sprites.begin(), sprites.end(), cu::AddRefFonctor<Sprite>());
 	m_sprites = sprites;
 }
 
 InsertSpriteAOP::~InsertSpriteAOP()
 {
-	for_each(m_sprites.begin(), m_sprites.end(), ReleaseObjectFunctor<Sprite>());
+	for_each(m_sprites.begin(), m_sprites.end(), cu::RemoveRefFonctor<Sprite>());
 }
 
 void InsertSpriteAOP::Undo()

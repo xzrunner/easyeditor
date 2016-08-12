@@ -75,7 +75,7 @@ void LibraryPanel::LoadFromFile(const Json::Value& value, const std::string& dir
 				ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 				symbol->RefreshThumbnail(symbol->GetFilepath());
 				list->Insert(symbol);
-				symbol->Release();
+				symbol->RemoveReference();
 			} catch (ee::Exception& e) {
 				throw ee::Exception("Create symbol %s fail!", item_path.c_str());
 			}
@@ -214,14 +214,14 @@ void LibraryPanel::InitPages(StagePanel* stage, ee::PropertySettingPanel* proper
 		m_level_page = page;
 	}
 
-	paste_op->Release();
-	draw_line_op->Release();
-	draw_poly_op->Release();
+	paste_op->RemoveReference();
+	draw_line_op->RemoveReference();
+	draw_poly_op->RemoveReference();
 
 	std::vector<Layer*> layers;
 	for (int i = 0, n = m_pages.size(); i < n; ++i) {
 		Layer* layer = static_cast<LibraryPage*>(m_pages[i])->GetLayer();
-		layer->Retain();
+		layer->AddReference();
 		layers.push_back(layer);
 	}
 	stage->SetLayers(layers);

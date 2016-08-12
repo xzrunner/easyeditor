@@ -24,7 +24,7 @@ MultiSpritesImpl::MultiSpritesImpl(EditPanelImpl* stage)
 
 MultiSpritesImpl::~MultiSpritesImpl()
 {
-	m_sprite_selection->Release();
+	m_sprite_selection->RemoveReference();
 }
 
 Sprite* MultiSpritesImpl::QuerySpriteByPos(const sm::vec2& pos) const

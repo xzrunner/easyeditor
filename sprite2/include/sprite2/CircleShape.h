@@ -6,23 +6,26 @@
 namespace s2
 {
 
-class CircleShape : public Shape
+class CircleShape : public VIRTUAL_INHERITANCE Shape
 {
 public:
 	CircleShape() : m_radius(0) {}
 	CircleShape(const sm::vec2& center, float radius);
 
+	/**
+	 *  @interface
+	 *    Cloneable
+	 */
+	virtual CircleShape* Clone() const;
+
+	/**
+	 *  @interface
+	 *    Shape
+	 */
 	virtual bool IsContain(const sm::vec2& pos) const;
 	virtual bool IsIntersect(const sm::rect& rect) const;
-
 	virtual void Draw(const sm::mat4& mt, 
 		const RenderColor& color = RenderColor()) const;
-
-// 	const sm::vec2& GetCenter() const { return m_center; }
-// 	void SetCenter(const sm::vec2& center);
-// 
-// 	float GetRadius() const { return m_radius; }
-// 	void SetRaidius(float radius);
 
 protected:
 	virtual void UpdateBounding();

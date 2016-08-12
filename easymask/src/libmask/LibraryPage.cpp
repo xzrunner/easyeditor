@@ -40,7 +40,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 				ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 				symbol->RefreshThumbnail(filepath);
 				AddItem(symbol);
-				symbol->Release();
+				symbol->RemoveReference();
 			} catch (ee::Exception& e) {
 				ee::ExceptionDlg dlg(m_parent, e);
 				dlg.ShowModal();

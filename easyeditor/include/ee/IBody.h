@@ -1,11 +1,10 @@
 #ifndef _EASYEDITOR_INTERFACE_BODY_H_
 #define _EASYEDITOR_INTERFACE_BODY_H_
 
-#include "Cloneable.h"
-#include "Object.h"
-
 #include <SM_Vector.h>
 #include <SM_Rect.h>
+#include <CU_Cloneable.h>
+#include <CU_RefCountObj.h>
 
 #include <Box2D/Box2D.h>
 
@@ -14,7 +13,7 @@
 namespace ee
 {
 
-class IBody : public Cloneable, public Object
+	class IBody : public cu::Cloneable, public cu::RefCountObj
 {
 public:
 	virtual ~IBody();

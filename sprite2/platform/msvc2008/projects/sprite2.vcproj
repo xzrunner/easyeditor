@@ -41,8 +41,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\..\ejoy2d\src;..\..\..\include\sprite2;..\..\..\..\gtxt\src\gtxt;..\..\..\..\particle\src;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\dtex\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;S2_EXTEND;USED_IN_EDITOR"
+				AdditionalIncludeDirectories="..\..\..\..\ejoy2d\src;..\..\..\include\sprite2;..\..\..\..\gtxt\src\gtxt;..\..\..\..\particle\src;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\dtex\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include"
+				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;S2_EXTEND;USED_IN_EDITOR;S2_VIRTUAL_INHERITANCE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -105,8 +105,8 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\..\ejoy2d\src;..\..\..\include\sprite2;..\..\..\..\gtxt\src\gtxt;..\..\..\..\particle\src;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\dtex\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;S2_EXTEND;USED_IN_EDITOR"
+				AdditionalIncludeDirectories="..\..\..\..\ejoy2d\src;..\..\..\include\sprite2;..\..\..\..\gtxt\src\gtxt;..\..\..\..\particle\src;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\dtex\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;S2_EXTEND;USED_IN_EDITOR;S2_VIRTUAL_INHERITANCE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
@@ -403,6 +403,10 @@
 					RelativePath="..\..\..\include\sprite2\DummySprite.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\DummySymbol.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="anim"
@@ -668,6 +672,10 @@
 				Name="mask"
 				>
 			</Filter>
+			<Filter
+				Name="trail"
+				>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="utility"
@@ -677,7 +685,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\include\sprite2\Object.h"
+				RelativePath="..\..\..\include\sprite2\pre_defined.h"
 				>
 			</File>
 			<File
@@ -730,6 +738,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\include\sprite2\S2_RVG.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\source\render\SpriteRenderer.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\sprite2\SpriteRenderer.h"
 				>
 			</File>
 		</Filter>

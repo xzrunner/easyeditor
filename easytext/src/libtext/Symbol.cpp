@@ -24,31 +24,31 @@ Symbol::~Symbol()
 {
 }
 
-void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
+void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	s2::RenderParams p = params;
 	if (spr) {
-		p.mt = spr->GetTransMatrix() * params.mt;
-		p.color = spr->GetColor() * params.color;
+		p.mt = dynamic_cast<const ee::Sprite*>(spr)->GetTransMatrix() * params.mt;
+		p.color = spr->Color() * params.color;
 	}
 	const ee::SettingData& setting = ee::Config::Instance()->GetSettings();
 	if (setting.visible_label_bg) {
-		DrawBackground(spr, p.mt);
+		DrawBackground(dynamic_cast<const Sprite*>(spr), p.mt);
 	} 
  	if (setting.visible_label_text) {
- 		DrawText(spr, p);
+ 		DrawText(dynamic_cast<const Sprite*>(spr), p);
  	}
 }
 
-sm::rect Symbol::GetSize(const ee::Sprite* sprite) const
+sm::rect Symbol::GetBounding(const s2::Sprite* spr) const
 {
-	if (sprite) {
-		const Sprite* font = static_cast<const Sprite*>(sprite);
+	if (spr) {
+		const Sprite* font = dynamic_cast<const Sprite*>(spr);
 		int w, h;
 		font->GetSize(w, h);
-		return sm::rect(sm::vec2(0, 0), static_cast<float>(w), static_cast<float>(h));
+		return sm::rect(static_cast<float>(w), static_cast<float>(h));
 	} else {
-		return sm::rect(sm::vec2(0, 0), static_cast<float>(m_width), static_cast<float>(m_height));
+		return sm::rect(static_cast<float>(m_width), static_cast<float>(m_height));
 	}
 }
 
@@ -90,58 +90,53 @@ void Symbol::LoadResources()
 	}
 }
 
-void Symbol::DrawBackground(const ee::Sprite* sprite, const sm::mat4& mt) const
+void Symbol::DrawBackground(const Sprite* sprite, const sm::mat4& mt) const
 {
 	if (!sprite) {
 		return;
 	}
 
-	if (const Sprite* font = dynamic_cast<const Sprite*>(sprite)) {
-		s2::RVG::SetColor(s2::Color(179, 179, 179, 179));
+	s2::RVG::SetColor(s2::Color(179, 179, 179, 179));
 
-		int w, h;
-		font->GetSize(w, h);
-		float hw = w * 0.5f,
-			hh = h * 0.5f;
+	int w, h;
+	sprite->GetSize(w, h);
+	float hw = w * 0.5f,
+		  hh = h * 0.5f;
 
-		sm::vec2 min(-hw, -hh), max(hw, hh);
-		min = ee::Math2D::TransVector(min, mt);
-		max = ee::Math2D::TransVector(max, mt);
+	sm::vec2 min(-hw, -hh), max(hw, hh);
+	min = ee::Math2D::TransVector(min, mt);
+	max = ee::Math2D::TransVector(max, mt);
 
-		s2::RVG::Rect(min, max, true);
-	}
+	s2::RVG::Rect(min, max, true);
 }
 
-void Symbol::DrawText(const ee::Sprite* sprite, const s2::RenderParams& params) const
+void Symbol::DrawText(const Sprite* sprite, const s2::RenderParams& params) const
 {
 	if (!sprite) {
 		return;
 	}
-
-	if (const Sprite* font = dynamic_cast<const Sprite*>(sprite)) {
-		if (font->GetText().empty()) {
-			return;
-		}
-
-		gtxt_label_style style;
-
-		font->GetSize(style.width, style.height);
-		font->GetAlign(style.align_h, style.align_v);
-		font->GetSpace(style.space_h, style.space_v);
-
-		style.overflow = font->GetOverflow();
-
-		style.gs.font = font->GetFont();
-		style.gs.font_size = font->GetFontSize();
-		style.gs.font_color.integer = font->GetFontColor().ToRGBA();
-
-		style.gs.edge = font->GetEdge();
-		style.gs.edge_size = font->GetEdgeSize();
-		style.gs.edge_color.integer = font->GetEdgeColor().ToRGBA();
-
-		ee::GTxt::Instance()->Draw(style, params.mt, params.color.mul, params.color.add, font->GetText(), font->GetTime(), font->GetRichtext());
-		font->UpdateTime();
+	if (sprite->GetText().empty()) {
+		return;
 	}
+
+	gtxt_label_style style;
+
+	sprite->GetSize(style.width, style.height);
+	sprite->GetAlign(style.align_h, style.align_v);
+	sprite->GetSpace(style.space_h, style.space_v);
+
+	style.overflow = sprite->GetOverflow();
+
+	style.gs.font = sprite->GetFont();
+	style.gs.font_size = sprite->GetFontSize();
+	style.gs.font_color.integer = sprite->GetFontColor().ToRGBA();
+
+	style.gs.edge = sprite->GetEdge();
+	style.gs.edge_size = sprite->GetEdgeSize();
+	style.gs.edge_color.integer = sprite->GetEdgeColor().ToRGBA();
+
+	ee::GTxt::Instance()->Draw(style, params.mt, params.color.mul, params.color.add, sprite->GetText(), sprite->GetTime(), sprite->GetRichtext());
+	sprite->UpdateTime();
 }
 
 }

@@ -193,8 +193,8 @@ void LRJsonPacker::ParserShapeFromSprite(const Json::Value& src_val, const lr::G
 		int sz = out_val[name].size();
 		out_val[name][sz] = dst_val;
 
-		sprite->Release();
-		symbol->Release();
+		sprite->RemoveReference();
+		symbol->RemoveReference();
 
 		spr_val = src_val["sprite"][idx++];
 	}
@@ -215,7 +215,7 @@ void LRJsonPacker::ParserShapeFromShape(const Json::Value& src_val, const lr::Gr
 		int sz = out_val[name].size();
 		out_val[name][sz] = dst_val;
 
-		shape->Release();
+		shape->RemoveReference();
 
 		shape_val = src_val["shape"][idx++];
 	}
@@ -304,8 +304,8 @@ void LRJsonPacker::ParserPointFromSprite(const Json::Value& src_val, const char*
 		int sz = out_val[name].size();
 		out_val[name][sz] = shape_val;
 
-		sprite->Release();
-		symbol->Release();
+		sprite->RemoveReference();
+		symbol->RemoveReference();
 
 		spr_val = src_val["sprite"][idx++];
 	}
@@ -472,8 +472,8 @@ void LRJsonPacker::ParserLevelFromSprite(const Json::Value& src_val, const char*
 		int sz = out_val[name].size();
 		out_val[name][sz] = level_val;
 
-		sprite->Release();
-		symbol->Release();
+		sprite->RemoveReference();
+		symbol->RemoveReference();
 
 		spr_val = src_val["sprite"][idx++];
 	}

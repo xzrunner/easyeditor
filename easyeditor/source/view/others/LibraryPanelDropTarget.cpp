@@ -15,7 +15,7 @@ bool LibraryPanelDropTarget::OnDropFiles(wxCoord x, wxCoord y,
 		Symbol* symbol = SymbolMgr::Instance()->FetchSymbol(filename);
 		symbol->RefreshThumbnail(filename);
 		m_panel->AddSymbol(symbol);
-		symbol->Release();
+		symbol->RemoveReference();
 	}
 	return true;
 }

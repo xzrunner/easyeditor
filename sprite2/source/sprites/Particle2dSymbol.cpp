@@ -3,8 +3,7 @@
 namespace s2
 {
 
-Particle2dSymbol::Particle2dSymbol(void* ud)
-	: Symbol(ud)
+Particle2dSymbol::Particle2dSymbol()
 {
 }
 

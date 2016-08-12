@@ -25,7 +25,7 @@ void LibraryPage::Clear()
 	m_list->Clear();
 }
 
-void LibraryPage::Traverse(Visitor& visitor) const
+void LibraryPage::Traverse(Visitor<ListItem>& visitor) const
 {
 	m_list->Traverse(visitor);
 }
@@ -112,7 +112,7 @@ bool LibraryPage::LoadFromConfig(const std::string& key)
 		std::string filename = filenames[i];
 		Symbol* symbol = SymbolMgr::Instance()->FetchSymbol(filename);
 		m_list->Insert(symbol);
-		symbol->Release();
+		symbol->RemoveReference();
 		ret = true;
 	}
 	return ret;
@@ -132,7 +132,7 @@ void LibraryPage::OnAddPress(const std::string& type)
 			try {
 				Symbol* symbol = SymbolMgr::Instance()->FetchSymbol(filenames[i].ToStdString());
 				m_list->Insert(symbol);
-				symbol->Release();
+				symbol->RemoveReference();
 			} catch (Exception& e) {
 				ExceptionDlg dlg(m_parent, e);
 				dlg.ShowModal();

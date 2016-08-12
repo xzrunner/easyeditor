@@ -3,8 +3,6 @@
 
 #include "SpriteObserver.h"
 
-#include <ee/Object.h>
-
 namespace ee { class AtomicOP; }
 
 namespace eanim

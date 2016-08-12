@@ -49,7 +49,7 @@ Icon* FileIO::LoadFromFile(const char* filename)
 	Icon* icon = IconFactory::CreateIconFromFile(value);
 	icon->SetImage(img);
 	icon->LoadFromFile(value);
-	img->Release();
+	img->RemoveReference();
 
 	return icon;
 }

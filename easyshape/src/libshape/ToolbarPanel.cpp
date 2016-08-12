@@ -128,7 +128,7 @@ void ToolbarPanel::OnCreateBounding(wxCommandEvent& event)
 	}
 	eshape::PolygonShape* poly = new eshape::PolygonShape(bounding);
 	ee::InsertShapeSJ::Instance()->Insert(poly);
-	poly->Release();
+	poly->RemoveReference();
 
 	SetChoice(3);
 }

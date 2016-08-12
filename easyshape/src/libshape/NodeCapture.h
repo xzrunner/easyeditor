@@ -41,12 +41,12 @@ public:
 	void captureSelectable(const sm::vec2& pos, NodeAddr& result);
 
 private:
-	class RectQueryVisitor : public ee::Visitor
+	class RectQueryVisitor : public ee::Visitor<ee::Shape>
 	{
 	public:
 		RectQueryVisitor(const sm::vec2& pos, float tolerance, NodeAddr& result);
 
-		virtual void Visit(ee::Object* object, bool& next);
+		virtual void Visit(ee::Shape* shape, bool& next);
 
 	private:
 		bool Visit(PointShape* point);

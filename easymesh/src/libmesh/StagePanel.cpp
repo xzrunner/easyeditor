@@ -24,11 +24,11 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, wxGLContext* g
 
 	ee::EditOP* editop = new ee::ZoomViewOP(this, GetStageImpl(), true);
 	SetEditOP(editop);
-	editop->Release();
+	editop->RemoveReference();
 
 	ee::StageCanvas* canvas = new StageCanvas(this, glctx);
 	SetCanvas(canvas);
-	canvas->Release();
+	canvas->RemoveReference();
 
 	if (library) {
 		SetDropTarget(new StageDropTarget(this, library));
@@ -39,9 +39,9 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, wxGLContext* g
 
 StagePanel::~StagePanel()
 {
-	m_symbol->Release();
+	m_symbol->RemoveReference();
 	if (m_background) {
-		m_background->Release();
+		m_background->RemoveReference();
 	}
 }
 
@@ -86,7 +86,7 @@ void StagePanel::RecreateMesh()
 {
 	const ee::Symbol* base_sym = m_symbol->GetMesh()->GetBaseSymbol();
 	Symbol* mesh_sym = new Symbol(const_cast<ee::Symbol*>(base_sym));
-	m_symbol->Release();
+	m_symbol->RemoveReference();
 	m_symbol = mesh_sym;
 	GetEditOP()->Clear();
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -134,7 +134,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 		}
 		break;
 	case ee::MSG_CLEAR_PANEL:
-		m_symbol->Release();
+		m_symbol->RemoveReference();
 		m_symbol = new Symbol;
 		break;
 	}
@@ -155,7 +155,7 @@ bool StagePanel::StageDropTarget::
 OnDropSymbol(ee::Symbol* symbol, const sm::vec2& pos)
 {
 	Symbol* mesh_sym = new Symbol(symbol);
-	m_stage->m_symbol->Release();
+	m_stage->m_symbol->RemoveReference();
 	m_stage->m_symbol = mesh_sym;
 	m_stage->GetEditOP()->Clear();
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();

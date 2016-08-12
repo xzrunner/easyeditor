@@ -346,9 +346,9 @@ InterruptChainVisitor(const sm::vec2& pos, int tol)
 }
 
 void EditPolylineImpl::InterruptChainVisitor::
-Visit(ee::Object* object, bool& next) 
+Visit(ee::Shape* shape, bool& next) 
 {
-	PolylineShape* polyline = dynamic_cast<PolylineShape*>(object);
+	PolylineShape* polyline = dynamic_cast<PolylineShape*>(shape);
 	if (!polyline) {
 		next = true;
 		return;
@@ -400,9 +400,9 @@ NearestNodeVisitor(const sm::vec2& pos, int tol)
 }
 
 void EditPolylineImpl::NearestNodeVisitor::
-Visit(ee::Object* object, bool& next)
+Visit(ee::Shape* shape, bool& next)
 {
-	PolylineShape* polyline = dynamic_cast<PolylineShape*>(object);
+	PolylineShape* polyline = dynamic_cast<PolylineShape*>(shape);
 	if (!polyline) 
 	{
 		next = true;

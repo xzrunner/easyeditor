@@ -2,7 +2,8 @@
 #define _EASYEDITOR_IMAGE_DATA_H_
 
 #include "ResourcesMgr.h"
-#include "Object.h"
+
+#include <CU_RefCountObj.h>
 
 #include <stdint.h>
 
@@ -12,7 +13,7 @@ namespace ee
 class ImageData;
 typedef ResourcesMgr<ImageData> ImageDataMgr;
 
-class ImageData : public Object
+class ImageData : public cu::RefCountObj
 {
 public:
 	ImageData();

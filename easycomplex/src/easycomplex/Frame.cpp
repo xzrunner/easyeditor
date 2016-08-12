@@ -133,7 +133,7 @@ void Frame::onSetBackground(wxCommandEvent& event)
  		std::string filename = dlg.GetPath().ToStdString();
 		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filename);
   		static_cast<StageCanvas*>(canvas)->SetBackground(symbol);
-		symbol->Release();
+		symbol->RemoveReference();
 	}
 	else
 	{

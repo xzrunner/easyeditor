@@ -6,12 +6,17 @@
 namespace s2
 {
 
-class Scale9Symbol : public Symbol
+class Scale9Symbol : public VIRTUAL_INHERITANCE Symbol
 {
 public:
-	Scale9Symbol(void* ud);
+	Scale9Symbol();
 
-	virtual void Draw(const RenderParams& params, const Sprite* spr) const;
+	/**
+	 *  @interface
+	 *    Symbol
+	 */
+	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const;
+	virtual sm::rect GetBounding(const Sprite* spr = NULL) const;
 
 public:
 	enum Scale9Type

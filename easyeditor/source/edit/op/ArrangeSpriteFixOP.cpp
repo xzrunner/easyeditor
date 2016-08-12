@@ -50,10 +50,10 @@ void ArrangeSpriteFixOP::fixSpritesLocation(const std::vector<Sprite*>& sprites)
 {
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
 		Sprite* spr = sprites[i];
-		spr->Retain();
+		spr->AddReference();
 		RemoveSpriteSJ::Instance()->Remove(spr);
 		InsertSpriteSJ::Instance()->Insert(spr);
-		spr->Release();
+		spr->RemoveReference();
 	}
 }
 

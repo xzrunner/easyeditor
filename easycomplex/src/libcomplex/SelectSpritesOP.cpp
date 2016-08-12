@@ -143,11 +143,11 @@ void SelectSpritesOP::BreakUpSelection()
 		for (int j = 0, m = children.size(); j < m; ++j) {
 			ee::Sprite* spr = children[j];
 			ee::InsertSpriteSJ::Instance()->Insert(spr);
-			spr->Release();
+			spr->RemoveReference();
 		}
 		
 		ee::RemoveSpriteSJ::Instance()->Remove(spr);
-		spr->Release();
+		spr->RemoveReference();
 	}
 }
 

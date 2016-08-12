@@ -1,19 +1,18 @@
 #ifndef _EASYEDITOR_SELECTION_SET_H_
 #define _EASYEDITOR_SELECTION_SET_H_
 
-#include "Object.h"
+#include "Visitor.h"
 
 #include <SM_Vector.h>
+#include <CU_RefCountObj.h>
 
 #include <vector>
 
 namespace ee
 {
 
-class Visitor;
-
 template<class T>
-class SelectionSet : public Object
+class SelectionSet : public cu::RefCountObj
 {
 public:
 	virtual ~SelectionSet() {}
@@ -28,7 +27,7 @@ public:
 
 	bool IsExist(T* item) const;
 
-	void Traverse(Visitor& visitor) const;
+	void Traverse(Visitor<T>& visitor) const;
 
 protected:
 	std::vector<T*> m_items;

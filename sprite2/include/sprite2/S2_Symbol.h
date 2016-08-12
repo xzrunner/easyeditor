@@ -1,9 +1,11 @@
 #ifndef _SPRITE2_SYMBOL_H_
 #define _SPRITE2_SYMBOL_H_
 
-#include "RefCountObj.h"
+#include "pre_defined.h"
 
 #include <SM_Rect.h>
+#include <CU_RefCountObj.h>
+#include <CU_Uncopyable.h>
 
 #include <stddef.h>
 
@@ -13,24 +15,13 @@ namespace s2
 class RenderParams;
 class Sprite;
 
-class Symbol : public RefCountObj
+class Symbol : public cu::RefCountObj, public cu::Uncopyable
 {
 public:
-	Symbol(void* ud) : m_ud(ud) {}
-
-	virtual void Draw(const RenderParams& params, const Sprite* spr) const = 0;
-
-	const sm::rect& GetSize(const Sprite* sprite = NULL) const {
-		return m_size;
-	}
-
-	void* GetUD() const { return m_ud; }
-
-protected:
-	sm::rect m_size;
-
-private:
-	void* m_ud;
+	Symbol() {}
+	virtual ~Symbol() {}
+	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const = 0;
+	virtual sm::rect GetBounding(const Sprite* spr = NULL) const = 0;
 	
 }; // Symbol
 

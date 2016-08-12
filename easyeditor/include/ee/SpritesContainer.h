@@ -17,14 +17,14 @@ public:
 	//
 	// DataContainer interface
 	//
-	virtual void Traverse(Visitor& visitor, bool order = true) const;
-	virtual void Traverse(Visitor& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
-	virtual bool Remove(Object* obj);
-	virtual bool Insert(Object* obj);
-	virtual bool Insert(Object* obj, int idx);
+	virtual void Traverse(Visitor<Sprite>& visitor, bool order = true) const;
+	virtual void Traverse(Visitor<Sprite>& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
+	virtual bool Remove(Sprite* spr);
+	virtual bool Insert(Sprite* spr);
+	virtual bool Insert(Sprite* spr, int idx);
 	virtual bool Clear();
-	virtual bool ResetOrder(const Object* obj, bool up);
-	virtual bool ResetOrderMost(const Object* obj, bool up);
+	virtual bool ResetOrder(const Sprite* spr, bool up);
+	virtual bool ResetOrderMost(const Sprite* spr, bool up);
 	//
 	// SprDataContainer interface
 	//

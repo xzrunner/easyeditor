@@ -55,7 +55,7 @@ void LibraryPage::LoadDefaultSymbol()
 // 		{
 //  			ee::Symbol* symbol = ee::SymbolMgr::Instance()->fetchSymbol(filenames[i]);
 //  			m_list->insert(symbol);
-//  			symbol->Release();
+//  			symbol->RemoveReference();
 // 		}
 // 	}
 // }

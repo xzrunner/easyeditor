@@ -6,17 +6,17 @@
 namespace s2
 {
 
-class TextureSprite : public Sprite
+class TextureSprite : public VIRTUAL_INHERITANCE Sprite
 {
 public:
-	TextureSprite(void* ud);
-	TextureSprite(const TextureSprite& spr, void* ud);
+	TextureSprite();
+	TextureSprite(const TextureSprite& spr);
 
-	virtual bool Update(float dt) { return false; }
-	
-private:
-	TextureSprite() {}
-	const TextureSprite& operator = (const TextureSprite& spr) { return *this; }
+	/**
+	 *  @interface
+	 *    Cloneable
+	 */
+	virtual TextureSprite* Clone() const;
 
 }; // TextureSprite
 

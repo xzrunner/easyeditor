@@ -3,31 +3,31 @@
 
 #include "Symbol.h"
 
-namespace s2 { class ImageSymbol; }
+#include <sprite2/ImageSymbol.h>
 
 namespace ee
 {
 
 class Image;
 
-class ImageSymbol : public Symbol
+class ImageSymbol : public Symbol, public s2::ImageSymbol
 {
 public:
 	ImageSymbol();
 	ImageSymbol(Image* image, const std::string& filename);
 	virtual ~ImageSymbol();
 
-	//
-	// Cloneable interface
-	//	
-	virtual ImageSymbol* Clone() const;
-
-	//
-	// Symbol interface
-	//
+	/**
+	 *  @interface
+	 *    s2::Symbol
+	 */
 	virtual void Draw(const s2::RenderParams& params, const Sprite* spr = NULL) const;
+
+	/**
+	 *  @interface
+	 *    ee::Symbol
+	 */
 	virtual void ReloadTexture() const;
-	virtual sm::rect GetSize(const Sprite* sprite = NULL) const;
 	virtual void InvalidRect(const sm::mat4& mt) const;
 
 	unsigned int GetTexID() const;
@@ -35,6 +35,13 @@ public:
 	Image* GetImage() const { return m_image; }
 
 protected:
+	virtual void QueryTexcoords(float* texcoords, int& texid) const;
+	virtual void Proj2Screen(float px, float py, int w, int h, float& sx, float& sy) const;
+	virtual bool IsOrthoCam() const;
+	virtual void GetScreenSize(int& w, int& h) const;
+	virtual float GetP3dCamAngle() const;
+	virtual int GetScreenCacheTexid() const;
+
 	virtual void LoadResources();
 
 private:
@@ -42,9 +49,6 @@ private:
 
 protected:
 	Image* m_image;
-
-private:
-	s2::ImageSymbol* m_core;
 
 }; // ImageSymbol
 

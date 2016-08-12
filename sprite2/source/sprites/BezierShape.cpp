@@ -20,6 +20,11 @@ BezierShape::BezierShape(const sm::vec2& start, const sm::vec2& end)
 	UpdatePolyline();
 }
 
+BezierShape* BezierShape::Clone() const
+{
+	return new BezierShape(*this);
+}
+
 bool BezierShape::IsContain(const sm::vec2& pos) const
 {
 	bool ret = false;

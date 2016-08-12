@@ -34,14 +34,14 @@ SelectSpritesOP::SelectSpritesOP(wxWindow* wnd, EditPanelImpl* stage,
 	m_left_first_pos.MakeInvalid();
 
 	m_selection = sprites_impl->GetSpriteSelection();
-	m_selection->Retain();
+	m_selection->AddReference();
 }
 
 SelectSpritesOP::~SelectSpritesOP()
 {
 	m_selection->Clear();
 	ClearSpriteSelectionSJ::Instance()->Clear();
-	m_selection->Release();
+	m_selection->RemoveReference();
 }
 
 bool SelectSpritesOP::OnKeyDown(int keyCode)
@@ -351,7 +351,7 @@ void SelectSpritesOP::CopyFromSelection()
 			symbol->RefreshThumbnail(filepath);
 			Sprite* sprite = SpriteFactory::Instance()->Create(symbol);
 			sprites.push_back(sprite);
-			symbol->Release();
+			symbol->RemoveReference();
 			CopySprFromClipboard(sprite, sval);
 			InsertSpriteSJ::Instance()->Insert(sprite);
 			last_spr = sprite;

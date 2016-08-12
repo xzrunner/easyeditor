@@ -32,7 +32,7 @@ bool PasteSymbolCaptureOP::OnMouseLeftDown(int x, int y)
 		Sprite* sprite = SpriteFactory::Instance()->Create(symbol);
 		sprite->Translate(m_pos);
 		InsertSpriteSJ::Instance()->Insert(sprite);
-		sprite->Release();
+		sprite->RemoveReference();
 	}
 
 	return false;

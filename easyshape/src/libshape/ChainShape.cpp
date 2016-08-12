@@ -22,19 +22,6 @@ ChainShape::ChainShape(const std::vector<sm::vec2>& vertices, bool closed)
 {
 }
 
-ChainShape* ChainShape::Clone() const
-{
-	return new ChainShape(*this);
-}
-
-void ChainShape::Translate(const sm::vec2& offset)
-{
-	for (int i = 0, n = m_vertices.size(); i < n; ++i) {
-		m_vertices[i] += offset;
-	}
-	m_bounding.Translate(offset);
-}
-
 void ChainShape::Draw(const sm::mat4& mt, const s2::RenderColor& color) const
 {
 	s2::PolylineShape::Draw(mt, color);
@@ -53,6 +40,14 @@ void ChainShape::Draw(const sm::mat4& mt, const s2::RenderColor& color) const
 		s2::RVG::Line(e, left); 
 		s2::RVG::Line(e, right);
 	}
+}
+
+void ChainShape::Translate(const sm::vec2& offset)
+{
+	for (int i = 0, n = m_vertices.size(); i < n; ++i) {
+		m_vertices[i] += offset;
+	}
+	m_bounding.Translate(offset);
 }
 
 ee::PropertySetting* ChainShape::CreatePropertySetting(ee::EditPanelImpl* stage)

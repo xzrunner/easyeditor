@@ -303,7 +303,7 @@ void CocoPacker::ResolveSymbols()
 						}
 					}
 				}
-				for_each(sprites.begin(), sprites.end(), ee::ReleaseObjectFunctor<ee::Sprite>());
+				for_each(sprites.begin(), sprites.end(), ee::cu::RemoveRefFonctor<ee::Sprite>());
 			}
 
 			m_mapSymbolID.insert(std::make_pair(symbol, m_id++));
@@ -955,7 +955,7 @@ void CocoPacker::ParserAnimation(const eanim::Symbol* symbol)
 					}
 				}
 			}
-			for_each(sprites.begin(), sprites.end(), ee::ReleaseObjectFunctor<ee::Sprite>());
+			for_each(sprites.begin(), sprites.end(), ee::cu::RemoveRefFonctor<ee::Sprite>());
 		}
 	}	
  	// children
@@ -971,7 +971,7 @@ void CocoPacker::ParserAnimation(const eanim::Symbol* symbol)
 			eanim::Utility::GetCurrSprites(symbol, i, sprites);
 			for (size_t j = 0, m = sprites.size(); j < m; ++j)
 				ParserSpriteForFrame(sprites[j], order, map_id2idx);
-			for_each(sprites.begin(), sprites.end(), ee::ReleaseObjectFunctor<ee::Sprite>());
+			for_each(sprites.begin(), sprites.end(), ee::cu::RemoveRefFonctor<ee::Sprite>());
  		}
  	}
 }

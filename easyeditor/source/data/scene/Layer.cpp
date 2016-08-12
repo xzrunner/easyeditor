@@ -24,7 +24,7 @@ Layer::~Layer()
 	Clear();
 }
 
-void Layer::TraverseSprite(Visitor& visitor, DataTraverseType type, bool order) const
+void Layer::TraverseSprite(Visitor<Sprite>& visitor, DataTraverseType type, bool order) const
 {
 	if (type == DT_EDITABLE && editable ||
 		type == DT_VISIBLE && visible ||
@@ -48,7 +48,7 @@ bool Layer::Remove(Sprite* sprite)
 	return m_sprites.Remove(sprite);
 }
 
-void Layer::TraverseShape(Visitor& visitor, bool order) const
+void Layer::TraverseShape(Visitor<Shape>& visitor, bool order) const
 {
 	m_shapes.Traverse(visitor, order);
 }
@@ -88,7 +88,7 @@ void Layer::LoadFromFile(const Json::Value& val, const std::string& dir)
 		sprite->Load(spr_val);
 		m_sprites.Insert(sprite);
 
-		symbol->Release();
+		symbol->RemoveReference();
 
 		spr_val = val["sprite"][i++];
 	}
@@ -98,7 +98,7 @@ void Layer::LoadFromFile(const Json::Value& val, const std::string& dir)
 // 	while (!shape_val.isNull()) {
 // 		Shape* shape = eshape::ShapeFactory::CreateShapeFromFile(shape_val, dir);
 // 		m_shapes.Insert(shape);
-// 		shape->Release();
+// 		shape->RemoveReference();
 // 
 // 		shape_val = val["shape"][i++];
 // 	}

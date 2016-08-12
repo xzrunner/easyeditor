@@ -56,7 +56,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 StagePanel::~StagePanel()
 {	
 	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
-		m_oceans[i]->Release();
+		m_oceans[i]->RemoveReference();
 	}
 }
 
@@ -92,7 +92,7 @@ void StagePanel::Load(const std::string& dir, const Json::Value& value,
 		ee::Sprite* bg = ee::SpriteFactory::Instance()->Create(symbol);
 		bg->Load(bg_val);
 		ee::InsertSpriteSJ::Instance()->Insert(bg);
-		symbol->Release();
+		symbol->RemoveReference();
 
 		bg_val = value["bg"][i++];
 	}

@@ -10,12 +10,17 @@ namespace s2
 
 class Shape;
 
-class ShapeSymbol : public Symbol
+class ShapeSymbol : public VIRTUAL_INHERITANCE Symbol
 {
 public:
-	ShapeSymbol(void* ud);
+	ShapeSymbol();
 
-	virtual void Draw(const RenderParams& params, const Sprite* spr) const;
+	/**
+	 *  @interface
+	 *    Symbol
+	 */
+	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const;
+	virtual sm::rect GetBounding(const Sprite* spr = NULL) const;
 
 	void SetShape(Shape* shape);
 

@@ -1,7 +1,6 @@
 #ifndef _EASYEDITOR_LAYER_H_
 #define _EASYEDITOR_LAYER_H_
 
-#include "Object.h"
 #include "ObjectVector.h"
 #include "Sprite.h"
 #include "Shape.h"
@@ -11,17 +10,17 @@
 namespace ee
 {	
 
-class Layer : public Object
+class Layer : public cu::RefCountObj
 {
 public:
 	Layer();
 	~Layer();
 
-	void TraverseSprite(Visitor& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
+	void TraverseSprite(Visitor<Sprite>& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
 	bool Insert(Sprite* sprite);
 	bool Remove(Sprite* sprite);
 
-	void TraverseShape(Visitor& visitor, bool order = true) const;
+	void TraverseShape(Visitor<Shape>& visitor, bool order = true) const;
 	bool Insert(Shape* shape);
 	bool Remove(Shape* shape);
 

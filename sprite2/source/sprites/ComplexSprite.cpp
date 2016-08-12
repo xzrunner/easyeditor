@@ -4,26 +4,30 @@
 namespace s2
 {
 
-ComplexSprite::ComplexSprite(void* ud)
-	: Sprite(ud)
+ComplexSprite::ComplexSprite()
 {
 }
 
-ComplexSprite::ComplexSprite(const ComplexSprite& spr, void* ud)
-	: Sprite(spr, ud)
+ComplexSprite::ComplexSprite(const ComplexSprite& spr)
+	: Sprite(spr)
 {
 }
 
-bool ComplexSprite::Update(float dt)
+ComplexSprite* ComplexSprite::Clone() const
+{
+	return new ComplexSprite(*this);
+}
+
+bool ComplexSprite::Update(const RenderParams& params, float dt)
 {
 	if (!m_sym) {
 		return false;
 	}
 
 	bool dirty = false;
-	const std::vector<Sprite*>& children = static_cast<ComplexSymbol*>(m_sym)->GetChildren();
+	const std::vector<Sprite*>& children = VI_DOWNCASTING<ComplexSymbol*>(m_sym)->GetChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
-		if (children[i]->Update(dt)) {
+		if (children[i]->Update(params, dt)) {
 			dirty = true;
 		}
 	}

@@ -16,7 +16,6 @@ namespace ee
 class StageCanvas;
 class ShapeSelection;
 class Shape;
-class Visitor;
 
 class MultiShapesImpl : public Observer
 {
@@ -24,7 +23,7 @@ public:
 	MultiShapesImpl();
 	virtual ~MultiShapesImpl();
 
-	virtual void TraverseShapes(Visitor& visitor, 
+	virtual void TraverseShapes(Visitor<Shape>& visitor, 
 		DataTraverseType type = DT_ALL) const = 0;
 
 	Shape* QueryShapeByPos(const sm::vec2& pos) const;
@@ -40,11 +39,11 @@ protected:
 	virtual void OnNotify(int sj_id, void* ud);
 
 private:
-	class PointQueryVisitor : public Visitor
+	class PointQueryVisitor : public Visitor<Shape>
 	{
 	public:
 		PointQueryVisitor(const sm::vec2& pos, Shape** pResult);
-		virtual void Visit(Object* object, bool& next);
+		virtual void Visit(Shape* shape, bool& next);
 
 	private:
 		const sm::vec2& m_pos;
@@ -52,11 +51,11 @@ private:
 
 	}; // PointQueryVisitor
 
-	class RectQueryVisitor : public Visitor
+	class RectQueryVisitor : public Visitor<Shape>
 	{
 	public:
 		RectQueryVisitor(const sm::rect& rect, std::vector<Shape*>& result);
-		virtual void Visit(Object* object, bool& next);
+		virtual void Visit(Shape* shape, bool& next);
 
 	private:
 		const sm::rect& m_rect;

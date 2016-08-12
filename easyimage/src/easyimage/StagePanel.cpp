@@ -28,20 +28,20 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 StagePanel::~StagePanel()
 {
 	if (m_image) {
-		m_image->Release();
+		m_image->RemoveReference();
 	}
 }
 
 void StagePanel::SetImage(const std::string& filepath)
 {
 	if (m_image) {
-		m_image->Release();
+		m_image->RemoveReference();
 	}
 
 	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	if (symbol) {
 		SetImage(symbol);
-		symbol->Release();
+		symbol->RemoveReference();
 	}
 }
 
@@ -110,7 +110,7 @@ OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames)
 	std::string filename = filenames[0];
 	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filename);
 	m_stage->SetImage(symbol);
-	symbol->Release();
+	symbol->RemoveReference();
 }
 
 }

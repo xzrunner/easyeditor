@@ -4,12 +4,11 @@
 namespace ee
 {
 
-class Object;
-
+template<class T>
 class Visitor
 {
 public:
-	virtual void Visit(Object* object, bool& next) = 0;
+	virtual void Visit(T* obj, bool& next) = 0;
 	virtual ~Visitor() {}
 }; // Visitor
 

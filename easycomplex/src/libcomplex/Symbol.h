@@ -3,51 +3,32 @@
 
 #include <ee/Symbol.h>
 
-#include <vector>
+#include <sprite2/ComplexSymbol.h>
 
-namespace s2 { class Sprite; class ComplexSymbol; }
+#include <vector>
 
 namespace ecomplex
 {
 
-class Symbol : public ee::Symbol
+class Symbol : public ee::Symbol, public s2::ComplexSymbol
 {
 public:
 	Symbol();
 	Symbol(const Symbol& sym);
 	virtual ~Symbol();
 
-	//
-	// Object interface
-	//
-	virtual void Retain() const;
-	virtual void Release() const;
+	/**
+	 *  @interface
+	 *    s2::Symbol
+	 */
+	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
 
-	//
-	// Cloneable interface
-	//
-	virtual Symbol* Clone() const { return NULL; }
-
-	//
-	// Symbol interfaces
-	//
-	virtual void Draw(const s2::RenderParams& params, const ee::Sprite* spr = NULL) const;
+	/**
+	 *  @interface
+	 *    ee::Symbol
+	 */
 	virtual void ReloadTexture() const;
-	virtual sm::rect GetSize(const ee::Sprite* sprite = NULL) const;
-	virtual void Traverse(ee::Visitor& visitor);
-
-	bool IsOneLayer() const;
-
-	void InitBounding();
-
-	bool Add(ee::Sprite* spr, int idx = -1);
-	bool Remove(ee::Sprite* spr);
-	bool Clear();
-	bool ResetOrder(const ee::Sprite* spr, bool up);
-	bool ResetOrderMost(const ee::Sprite* spr, bool up);
-	bool Sort(std::vector<ee::Sprite*>& sprites);
-
-	const std::vector<s2::Sprite*>& GetChildren() const;
+	virtual void Traverse(ee::Visitor<ee::Sprite>& visitor);
 
 	static ee::Symbol* Create() { return new Symbol(); }
 
@@ -68,14 +49,9 @@ public:
 public:
 	std::vector<Group> m_groups;
 
-	sm::rect m_rect;
-
 	sm::rect m_clipbox;
 
 	bool m_use_render_cache;
-
-private:
-	s2::ComplexSymbol* m_core;
 
 	mutable int m_render_version;
 	mutable bool m_render_cache_open;

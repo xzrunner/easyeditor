@@ -5,14 +5,18 @@
 namespace s2
 {
 
-TextureSprite::TextureSprite(void* ud)
-	: Sprite(ud)
+TextureSprite::TextureSprite()
 {
 }
 
-TextureSprite::TextureSprite(const TextureSprite& spr, void* ud)
-	: Sprite(spr, ud)
+TextureSprite::TextureSprite(const TextureSprite& spr)
+	: Sprite(spr)
 {
+}
+
+TextureSprite* TextureSprite::Clone() const
+{
+	return new TextureSprite(*this);
 }
 
 }

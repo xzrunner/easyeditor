@@ -97,7 +97,7 @@ void LibraryPanel::LoadSymbol(Symbol* symbol)
 	}
 }
 
-void LibraryPanel::Traverse(Visitor& visitor) const
+void LibraryPanel::Traverse(Visitor<ListItem>& visitor) const
 {
 	if (m_selected)
 		m_selected->Traverse(visitor);

@@ -15,12 +15,12 @@ MirrorSpriteAOP::MirrorSpriteAOP(Sprite* sprite,
 	, m_new_mirror_x(new_mirror_x)
 	, m_new_mirror_y(new_mirror_y)
 {
-	m_sprite->Retain();
+	m_sprite->AddReference();
 }
 
 MirrorSpriteAOP::~MirrorSpriteAOP()
 {
-	m_sprite->Release();
+	m_sprite->RemoveReference();
 }
 
 void MirrorSpriteAOP::Undo()

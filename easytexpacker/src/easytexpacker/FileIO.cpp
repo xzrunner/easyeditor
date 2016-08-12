@@ -66,7 +66,7 @@ void FileIO::LoadFromEasypackerFile(const char* filename)
 		ee::TexPackerAdapter::Texture tex = adapter.textures[i];
 		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(tex.filepath);
 		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-		symbol->Release();
+		symbol->RemoveReference();
 
 		sm::vec2 pos;
 		pos.x = tex.region.left + tex.region.width * 0.5f;
@@ -110,7 +110,7 @@ void FileIO::LoadFromTexPackerFile(const char* filename)
 
 		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-		symbol->Release();
+		symbol->RemoveReference();
 
 		int width = frame_val["sourceSize"]["w"].asInt();
 		int height = frame_val["sourceSize"]["h"].asInt();

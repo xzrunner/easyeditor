@@ -41,7 +41,7 @@ OceanMesh::~OceanMesh()
 {
 	Clear();
 
-	m_shape->Release();
+	m_shape->RemoveReference();
 }
 
 void OceanMesh::Build()
@@ -207,7 +207,7 @@ void OceanMesh::Rotate(float angle)
 void OceanMesh::Clear()
 {
 	for (int i = 0, n = m_grids.size(); i < n; ++i) {
-		m_grids[i]->Release();
+		m_grids[i]->RemoveReference();
 	}
 	m_grids.clear();
 }

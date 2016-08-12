@@ -22,7 +22,7 @@ OpenSymbolProperty::OpenSymbolProperty(const wxString& label, const wxString& na
 OpenSymbolProperty::~OpenSymbolProperty() 
 {
 	if (m_lsn) {
-		m_lsn->Release();
+		m_lsn->RemoveReference();
 	}
 }
 
@@ -61,7 +61,7 @@ bool OpenSymbolProperty::OnButtonClick( wxPropertyGrid* propGrid, wxString& valu
 		try {
 			Symbol* symbol = SymbolMgr::Instance()->FetchSymbol(sym_path);
 			m_lsn->OnOpenSymbol(symbol);
-			symbol->Release();
+			symbol->RemoveReference();
 		} catch (Exception& e) {
 			ExceptionDlg dlg(m_parent, e);
 			dlg.ShowModal();

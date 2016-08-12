@@ -27,7 +27,7 @@ Sprite::Sprite(const Sprite& sprite)
 	m_core = new s2::Particle2dSprite(*static_cast<s2::Particle2dSprite*>(sprite.m_core), this);
 
 	if (m_symbol) {
-		m_symbol->Retain();
+		m_symbol->AddReference();
 	}
 
 	if (sprite.m_ps) {
@@ -44,7 +44,7 @@ Sprite::Sprite(Symbol* symbol)
 	m_core = new s2::Particle2dSprite(this);
 
 	if (m_symbol) {
-		m_symbol->Retain();
+		m_symbol->AddReference();
 	}
 	BuildBounding();
 
@@ -59,7 +59,7 @@ Sprite::~Sprite()
 	m_core->RemoveReference();
 
 	if (m_symbol) {
-		m_symbol->Release();
+		m_symbol->RemoveReference();
 	}
 
 	delete m_ps;

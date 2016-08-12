@@ -19,10 +19,4 @@ void ScriptsSymbol::LoadResources()
 	std::string str = m_data;
 }
 
-sm::rect ScriptsSymbol::GetSize(const Sprite* sprite) const 
-{ 
-//	return sm::rect(sm::vec2(FLT_MAX, FLT_MAX), 0, 0);
-	return sm::rect();
-}
-
 }

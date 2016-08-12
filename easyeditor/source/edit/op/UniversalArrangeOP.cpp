@@ -15,11 +15,11 @@ UniversalArrangeOP::UniversalArrangeOP(wxWindow* wnd, EditPanelImpl* stage, Mult
 
 UniversalArrangeOP::~UniversalArrangeOP()
 {
-	m_noPhysics->Release();
+	m_noPhysics->RemoveReference();
 	m_noPhysics = NULL;
 
 	for (size_t i = 0, n = m_physics.size(); i < n; ++i)
-		m_physics[i].editOP->Release();
+		m_physics[i].editOP->RemoveReference();
 	m_physics.clear();
 
 	m_editop = NULL;

@@ -32,7 +32,7 @@ FontBlankSprite::FontBlankSprite(const FontBlankSprite& sprite)
 {
 	m_core = new s2::DummySprite(*static_cast<s2::DummySprite*>(sprite.m_core), this);
 
-	m_symbol->Retain();
+	m_symbol->AddReference();
 	font = sprite.font;
 	has_edge = sprite.has_edge;
 	font_color = sprite.GetColor().mul;
@@ -49,7 +49,7 @@ FontBlankSprite::FontBlankSprite(FontBlankSymbol* symbol)
 {
 	m_core = new s2::DummySprite(this);
 
-	m_symbol->Retain();
+	m_symbol->AddReference();
 	font = m_symbol->font;
 	font_color = str2color(m_symbol->color, PT_ARGB);
 
@@ -86,7 +86,7 @@ FontBlankSprite::~FontBlankSprite()
 	m_core->RemoveReference();
 
 	if (m_symbol) {
-		m_symbol->Release();
+		m_symbol->RemoveReference();
 	}
 }
 

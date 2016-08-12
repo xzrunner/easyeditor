@@ -6,17 +6,17 @@
 namespace s2
 {
 
-class Particle2dSprite : public Sprite
+class Particle2dSprite : public VIRTUAL_INHERITANCE Sprite
 {
 public:
-	Particle2dSprite(void* ud);
-	Particle2dSprite(const Particle2dSprite& spr, void* ud);
+	Particle2dSprite();
+	Particle2dSprite(const Particle2dSprite& spr);
 
-	virtual bool Update(float dt) { return false; }
-	
-private:
-	Particle2dSprite() {}
-	const Particle2dSprite& operator = (const Particle2dSprite& spr) { return *this; }
+	/**
+	 *  @interface
+	 *    Cloneable
+	 */
+	virtual Particle2dSprite* Clone() const;
 
 }; // Particle2dSprite
 

@@ -11,6 +11,11 @@ RectShape::RectShape(const sm::rect& r)
 	m_bounding = r;
 }
 
+RectShape* RectShape::Clone() const
+{
+	return new RectShape(*this);
+}
+
 bool RectShape::IsContain(const sm::vec2& pos) const
 {
 	return sm::is_point_in_rect(pos, m_bounding);

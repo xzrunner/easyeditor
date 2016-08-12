@@ -31,7 +31,7 @@ const wxChar* MultiSpritesPropertyImpl::CENTER_LABELS[]
 MultiSpritesPropertyImpl::MultiSpritesPropertyImpl(const std::vector<Sprite*>& sprites)
 {
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		sprites[i]->Retain();
+		sprites[i]->AddReference();
 	}
 	m_sprites = sprites;
 }
@@ -39,7 +39,7 @@ MultiSpritesPropertyImpl::MultiSpritesPropertyImpl(const std::vector<Sprite*>& s
 MultiSpritesPropertyImpl::~MultiSpritesPropertyImpl()
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->Release();
+		m_sprites[i]->RemoveReference();
 	}
 }
 

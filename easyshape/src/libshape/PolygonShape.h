@@ -12,7 +12,7 @@ namespace eshape
 
 class Material;
 
-class PolygonShape : public PolylineShape, private s2::PolylineShape
+class PolygonShape : public PolylineShape, public s2::PolylineShape
 {
 public:
 	PolygonShape();
@@ -21,20 +21,20 @@ public:
 	PolygonShape& operator = (const PolygonShape& polygon);
 	virtual ~PolygonShape();
 	
-	//
-	// IObject interface
-	//
-	virtual PolygonShape* Clone() const;
+	/**
+	 *  @interface
+	 *    s2::Shape
+	 */
+	virtual void Draw(const sm::mat4& mt, 
+		const s2::RenderColor& color = s2::RenderColor()) const;
 
-	//
-	// Shape interface
-	//
+	/**
+	 *  @interface
+	 *    ee::Shape
+	 */
+	virtual PolygonShape* Clone() const { return new PolygonShape(*this); }
 	virtual const char* GetShapeDesc() const { return "polygon"; }
-	virtual bool IsContain(const sm::vec2& pos) const { return s2::PolylineShape::IsContain(pos); }
-	virtual bool IsIntersect(const sm::rect& rect) const { return s2::PolylineShape::IsIntersect(rect); }
 	virtual void Translate(const sm::vec2& offset);
-	virtual const sm::rect& GetRect() const { return s2::PolylineShape::GetBounding(); }
-	virtual void Draw(const sm::mat4& mt, const s2::RenderColor& color = s2::RenderColor()) const;
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
 	virtual void LoadFromFile(const Json::Value& value, const std::string& dir);
 	virtual void StoreToFile(Json::Value& value, const std::string& dir) const;

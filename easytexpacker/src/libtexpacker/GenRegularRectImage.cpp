@@ -55,7 +55,7 @@ void GenRegularRectImage::CreateSingle(const std::string& filepath)
 			|| img->GetOriginWidth() == h && img->GetOriginHeight() == w);
 		bool rot = img->GetOriginWidth() != w && img->GetOriginHeight() != h;
 		pack.AddImage(img, x ,y, w, h, rot, true);
-		img->Release();
+		img->RemoveReference();
 
 		spr_val = value["parts"][i++];
 	}

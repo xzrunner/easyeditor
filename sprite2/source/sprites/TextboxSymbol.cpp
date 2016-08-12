@@ -3,14 +3,9 @@
 namespace s2
 {
 
-TextboxSymbol::TextboxSymbol(void* ud, Textbox tb)
-	: Symbol(ud)
-	, m_tb(tb)
+TextboxSymbol::TextboxSymbol(Textbox tb)
+	: m_tb(tb)
 {
-	float hw = m_tb.width * 0.5f,
-		  hh = m_tb.height * 0.5f;
-	m_size.xmin = -hw; m_size.xmax = hw; 
-	m_size.ymin = -hh; m_size.ymax = hh; 
 }
 
 void TextboxSymbol::Draw(const RenderParams& params, const Sprite* spr) const
@@ -49,6 +44,16 @@ void TextboxSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 // 
 // 	ee::GTxt::Instance()->Draw(s, params.mt, params.color.mul, params.color.add, font->GetText(), font->GetTime());
 // 	font->UpdateTime();
+}
+
+sm::rect TextboxSymbol::GetBounding(const Sprite* spr) const
+{
+	sm::rect b;
+	float hw = m_tb.width * 0.5f,
+		  hh = m_tb.height * 0.5f;
+	b.xmin = -hw; b.xmax = hw; 
+	b.ymin = -hh; b.ymax = hh;
+	return b;
 }
 
 }

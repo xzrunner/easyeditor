@@ -1,8 +1,6 @@
 #ifndef _EASYMODELING_BODY_H_
 #define _EASYMODELING_BODY_H_
 
-#include <ee/Object.h>
-
 #include <SM_Matrix.h>
 
 #include <vector>

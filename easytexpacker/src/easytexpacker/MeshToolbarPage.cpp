@@ -132,8 +132,8 @@ void MeshToolbarPage::OnSaveImage(wxCommandEvent& event)
 			sprite->SetTransform(pos, angle);
 			ss.DrawSprite(sprite);
 
-			sprite->Release();
-			symbol->Release();
+			sprite->RemoveReference();
+			symbol->RemoveReference();
 
 			item_val = value[i++];
 		}

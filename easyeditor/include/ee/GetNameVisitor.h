@@ -7,7 +7,7 @@ namespace ee
 {
 
 template <typename T>
-class GetNameVisitor : public Visitor
+class GetNameVisitor : public Visitor<T>
 {
 public:
 	GetNameVisitor(std::vector<std::string>& names)

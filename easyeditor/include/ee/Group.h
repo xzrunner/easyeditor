@@ -1,15 +1,15 @@
 #ifndef _EASYEDITOR_GROUP_H_
 #define _EASYEDITOR_GROUP_H_
 
-#include "Object.h"
 #include "ObjectVector.h"
 #include "Sprite.h"
 #include "Shape.h"
+#include "Visitor.h"
 
 namespace ee
 {
 
-class Group : public Object
+class Group : public cu::RefCountObj
 {
 public:
 	Group(const std::string& name, bool visible = true, bool editable = true);
@@ -18,7 +18,7 @@ public:
 	void SetName(const std::string& name) { m_name = name; }
 	const std::string& GetName() const { return m_name; }
 
-	void TraverseSprite(Visitor& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
+	void TraverseSprite(Visitor<Sprite>& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
 
 	bool Insert(Sprite* sprite);
 	bool Remove(Sprite* sprite);

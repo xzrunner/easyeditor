@@ -47,7 +47,7 @@ void PropertySetting::InitProperties(wxPropertyGrid* pg)
 	ee::OpenSymbolProperty* prop = new ee::OpenSymbolProperty("MeshSymbol", "zz-name", spr->GetBaseSym()->GetFilepath());
 	OpenSymbolMonitor* lsn = new OpenSymbolMonitor(spr);
 	prop->SetListener(lsn);
-	lsn->Release();
+	lsn->RemoveReference();
 	pg->Append(prop);
 
 	pg->Append(new wxBoolProperty("OnlyDrawBound", wxPG_LABEL, spr->OnlyDrawBound()));

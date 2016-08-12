@@ -12,7 +12,7 @@ DeleteSpriteAOP::DeleteSpriteAOP(const std::vector<Sprite*>& sprites)
 {
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) 
 	{
-		sprites[i]->Retain();
+		sprites[i]->AddReference();
 		m_sprites.push_back(sprites[i]);
 	}
 }
@@ -20,7 +20,7 @@ DeleteSpriteAOP::DeleteSpriteAOP(const std::vector<Sprite*>& sprites)
 DeleteSpriteAOP::~DeleteSpriteAOP()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->Release();
+		m_sprites[i]->RemoveReference();
 	}
 }
 

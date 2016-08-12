@@ -3,8 +3,7 @@
 namespace s2
 {
 
-IconSymbol::IconSymbol(void* ud)
-	: Symbol(ud)
+IconSymbol::IconSymbol()
 {
 }
 

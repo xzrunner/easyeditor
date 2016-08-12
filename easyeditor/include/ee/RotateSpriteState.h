@@ -3,6 +3,7 @@
 
 #include "ArrangeSpriteState.h"
 #include "Visitor.h"
+#include "Sprite.h"
 
 namespace ee
 {
@@ -27,12 +28,12 @@ protected:
 	sm::vec2 GetLastPos() const { return m_last_pos; }
 
 private:
-	class RotateVisitor : public Visitor
+	class RotateVisitor : public Visitor<Sprite>
 	{
 	public:
 		RotateVisitor(const sm::vec2& start, const sm::vec2& end, float& angle) 
 			: m_start(start), m_end(end), m_angle(angle) {}
-		virtual void Visit(Object* object, bool& next);
+		virtual void Visit(Sprite* spr, bool& next);
 	private:
 		sm::vec2 m_start, m_end;
 		float& m_angle;

@@ -48,7 +48,7 @@ void LayerList::Insert()
 	Layer* layer = new Layer;
 	m_layer_mgr->Insert(layer);
 	Insert(layer);
-	layer->Release();
+	layer->RemoveReference();
 }
 
 void LayerList::Remove()
@@ -131,14 +131,14 @@ void LayerList::ClearLayer(Layer* layer)
 
 	std::vector<Sprite*> sprites;
 	layer->TraverseSprite(FetchAllVisitor<Sprite>(sprites));
-	for_each(sprites.begin(), sprites.end(), RetainObjectFunctor<Sprite>());
+	for_each(sprites.begin(), sprites.end(), cu::AddRefFonctor<Sprite>());
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		RemoveSpriteSJ::Instance()->Remove(sprites[i]);
 	}
 
 	std::vector<Shape*> shapes;
 	layer->TraverseSprite(FetchAllVisitor<Shape>(shapes));
-	for_each(shapes.begin(), shapes.end(), RetainObjectFunctor<Shape>());
+	for_each(shapes.begin(), shapes.end(), cu::AddRefFonctor<Shape>());
 	for (int i = 0, n = shapes.size(); i < n; ++i) {
 		RemoveShapeSJ::Instance()->Remove(shapes[i]);
 	}

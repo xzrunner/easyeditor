@@ -99,7 +99,7 @@ void SymbolsCfg::ResetLibraryList(LibraryPage* library, const std::vector<Symbol
 		ee::Symbol* dst = ee::SymbolMgr::Instance()->FetchSymbol(src->filepath);
 		dst->RefreshThumbnail(dst->GetFilepath());
 		library->GetList()->Insert(dst);
-		dst->Release();
+		dst->RemoveReference();
 	}
 }
 

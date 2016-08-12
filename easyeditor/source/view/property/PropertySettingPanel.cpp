@@ -97,7 +97,7 @@ void PropertySettingPanel::OnSpriteSelected(Sprite* spr, bool clear)
 		ClearSelection();
 	}
 	if (spr) {
-		spr->Retain();
+		spr->AddReference();
 		m_selection.insert(spr);
 	}
 
@@ -214,7 +214,7 @@ void PropertySettingPanel::SelectShapeSet(ShapeSelection* selection)
 
 void PropertySettingPanel::ClearSelection()
 {
-	for_each(m_selection.begin(), m_selection.end(), ReleaseObjectFunctor<Sprite>());
+	for_each(m_selection.begin(), m_selection.end(), cu::RemoveRefFonctor<Sprite>());
 	m_selection.clear();
 }
 

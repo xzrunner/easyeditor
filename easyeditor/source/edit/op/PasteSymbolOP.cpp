@@ -35,7 +35,7 @@ bool PasteSymbolOP::OnMouseLeftDown(int x, int y)
 			sprite->SetScale(sm::vec2(*m_scale, *m_scale));
 		}
 		InsertSpriteSJ::Instance()->Insert(sprite);
-		sprite->Release();
+		sprite->RemoveReference();
 	}
 
 	return false;

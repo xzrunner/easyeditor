@@ -2,11 +2,11 @@
 #define _EASYEDITOR_EDIT_PANEL_IMPL_H_
 
 #include "KeysState.h"
-#include "Object.h"
 #include "Observer.h"
 #include "HistoryList.h"
 
 #include <SM_Vector.h>
+#include <CU_RefCountObj.h>
 
 #include <wx/wx.h>
 
@@ -19,7 +19,7 @@ class EditOP;
 class StageCanvas;
 class Sprite;
 
-class EditPanelImpl : public Object, public Observer
+class EditPanelImpl : public Observer, public cu::RefCountObj
 {
 public:
 	EditPanelImpl(wxTopLevelWindow* frame, EditPanel* stage);

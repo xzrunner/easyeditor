@@ -3,11 +3,10 @@
 
 #include <json/json.h>
 
-#include <ee/Object.h>
-#include <ee/Cloneable.h>
-
 #include <SM_Vector.h>
 #include <SM_Rect.h>
+#include <CU_RefCountObj.h>
+#include <CU_Cloneable.h>
 
 namespace ee { class Symbol; class Rect; class RenderParams; }
 
@@ -17,7 +16,7 @@ namespace emesh
 class Node;
 class Triangle;
 
-class Mesh : public ee::Object, public ee::Cloneable
+class Mesh : public cu::RefCountObj, public cu::Cloneable
 {
 public:
 	Mesh();
@@ -25,10 +24,11 @@ public:
 	Mesh(const ee::Symbol* base);
 	virtual ~Mesh();
 
- 	//
- 	// Cloneable interface
- 	//
- 	virtual Mesh* Clone() const { return NULL; }
+	/**
+	 *  @interface
+	 *    Cloneable
+	 */
+	virtual Mesh* Clone() const { return NULL; }
 
 	virtual void Load(const Json::Value& value) {}
 	virtual void Store(Json::Value& value) const {}

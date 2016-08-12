@@ -3,6 +3,7 @@
 
 #include "ArrangeSpriteState.h"
 #include "Visitor.h"
+#include "Sprite.h"
 
 namespace ee
 {
@@ -28,11 +29,11 @@ protected:
 	SpriteSelection* GetSelection() { return m_selection; } 
 
 private:
-	class TranslateVisitor : public Visitor
+	class TranslateVisitor : public Visitor<Sprite>
 	{
 	public:
 		TranslateVisitor(const sm::vec2& offset) : m_offset(offset) {}
-		virtual void Visit(Object* object, bool& next);
+		virtual void Visit(Sprite* spr, bool& next);
 	private:
 		sm::vec2 m_offset;
 	}; // TranslateVisitor

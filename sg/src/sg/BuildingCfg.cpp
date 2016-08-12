@@ -92,7 +92,7 @@ void BuildingCfg::InitBackground(const Json::Value& value)
 	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	ee::StageCanvas* canvas = m_stage->GetCanvas();
 	static_cast<StageCanvas*>(canvas)->SetBackground(symbol);
-	symbol->Release();
+	symbol->RemoveReference();
 }
 
 void BuildingCfg::InitGrid(const Json::Value& value)
@@ -106,7 +106,7 @@ void BuildingCfg::InitGrid(const Json::Value& value)
 	sprite->SetTransform(sm::vec2(0, 0), angle * SM_DEG_TO_RAD);
 	sprite->SetScale(sm::vec2(scale, scale));
 	SymbolRender::Instance()->SetGrid(sprite);
-	symbol->Release();
+	symbol->RemoveReference();
 }
 
 void BuildingCfg::InitArrow(const Json::Value& value)
@@ -256,7 +256,7 @@ void BuildingCfg::ResetLibraryList(LibraryPage* library, const std::vector<Build
 			s->RefreshThumbnail(filepath);
 			s->SetInfo(ee::StringHelper::ToString(info->remain));
 			library->GetList()->Insert(s);
-			s->Release();
+			s->RemoveReference();
 		}
 	}
 }

@@ -21,7 +21,7 @@ bool DrawPolygonOP::OnMouseLeftDClick(int x, int y)
 	{
 		PolygonShape* poly = new PolygonShape(m_polyline);
 		ee::InsertShapeSJ::Instance()->Insert(poly);
-		poly->Release();
+		poly->RemoveReference();
 		m_polyline.clear();
 		m_curr_pos.MakeInvalid();
 	}

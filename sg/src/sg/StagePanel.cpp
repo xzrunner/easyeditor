@@ -180,7 +180,7 @@ void StagePanel::ChangeSelectedSpritesLevel(bool up)
 // 			}
 // 			sprite->setSymbol(symbol);
 // 		}
-// 		symbol->Release();
+// 		symbol->RemoveReference();
 	}
 }
 

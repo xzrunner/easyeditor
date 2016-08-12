@@ -1,13 +1,14 @@
 #ifndef _SPRITE2_RENDER_FILTER_H_
 #define _SPRITE2_RENDER_FILTER_H_
 
-#include "Uncopyable.h"
 #include "FilterMode.h"
+
+#include <CU_Uncopyable.h>
 
 namespace s2
 {
 
-class RenderFilter : public Uncopyable
+class RenderFilter : public cu::Uncopyable
 {
 public:
 	RenderFilter(FilterMode mode) 

@@ -41,12 +41,12 @@ private:
 	void checkActiveShape(const NodeAddr& captured);
 
 private:
-	class InterruptChainVisitor : public ee::Visitor
+	class InterruptChainVisitor : public ee::Visitor<ee::Shape>
 	{
 	public:
 		InterruptChainVisitor(const sm::vec2& pos, int tol);
 
-		virtual void Visit(ee::Object* object, bool& next);
+		virtual void Visit(ee::Shape* shape, bool& next);
 
 		PolylineShape* GetInterruptedPolyline() { return m_polyline; }
 
@@ -57,12 +57,12 @@ private:
 
 	}; // InterruptChainVisitor
 
-	class NearestNodeVisitor : public ee::Visitor
+	class NearestNodeVisitor : public ee::Visitor<ee::Shape>
 	{
 	public:
 		NearestNodeVisitor(const sm::vec2& pos, int tol);
 
-		virtual void Visit(ee::Object* object, bool& next);
+		virtual void Visit(ee::Shape* shape, bool& next);
 
 		const sm::vec2& GetNearestNode() const {
 			return m_nearest;

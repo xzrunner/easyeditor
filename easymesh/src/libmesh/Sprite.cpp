@@ -31,11 +31,11 @@ Sprite::Sprite(const Sprite& s)
 {
 	m_core = new s2::DummySprite(this);
 	if (m_base = s.m_base) {
-		m_base->Retain();
+		m_base->AddReference();
 	}
 
 	m_symbol = s.m_symbol;
-	m_symbol->Retain();
+	m_symbol->AddReference();
 }
 
 Sprite::Sprite(Symbol* symbol)
@@ -44,14 +44,14 @@ Sprite::Sprite(Symbol* symbol)
 {
 	m_core = new s2::DummySprite(this);
 	if (m_base = symbol->GetMesh()->GetBaseSymbol()) {
-		m_base->Retain();
+		m_base->AddReference();
 	}
 
 //	m_speed.set(0, -0.01f);
 
 	m_trans.LoadFromMesh(symbol->GetMesh());
 
-	m_symbol->Retain();
+	m_symbol->AddReference();
 	BuildBounding();
 }
 
@@ -59,10 +59,10 @@ Sprite::~Sprite()
 {
 	m_core->RemoveReference();
 	if (m_base) {
-		m_base->Release();
+		m_base->RemoveReference();
 	}
 	if (m_symbol) {
-		m_symbol->Release();
+		m_symbol->RemoveReference();
 	}
 }
 
@@ -90,7 +90,7 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 	m_trans.StoreToMesh(m_symbol->GetMesh());
 
 	if (!mesh_val["base_symbol"].isNull()) {
-		m_base->Release();
+		m_base->RemoveReference();
 		std::string path = ee::FileHelper::GetAbsolutePath(dir, mesh_val["base_symbol"].asString());
 		m_base = ee::SymbolMgr::Instance()->FetchSymbol(path);
 	}
@@ -118,6 +118,11 @@ ee::PropertySetting* Sprite::CreatePropertySetting(ee::EditPanelImpl* stage)
 void Sprite::SetTween(Sprite* begin, Sprite* end, float process)
 {
 	GetMeshTrans().SetTween(begin->GetMeshTrans(), end->GetMeshTrans(), process);
+}
+
+void Sprite::SetBaseSym(const ee::Symbol* sym) 
+{ 
+	cu::RefCountObjAssign(m_base, sym); 
 }
 
 }

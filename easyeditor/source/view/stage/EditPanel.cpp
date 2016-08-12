@@ -18,7 +18,7 @@ EditPanel::EditPanel(wxWindow* parent, wxTopLevelWindow* frame)
 
 EditPanel::~EditPanel()
 {
-	m_impl->Release();
+	m_impl->RemoveReference();
 }
 
 sm::vec2 EditPanel::TransPosScrToProj(int x, int y) const

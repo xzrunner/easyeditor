@@ -35,7 +35,7 @@ bool PasteSymbolRandomOP::OnMouseLeftDown(int x, int y)
 		if (m_random_val.angle != 0.0f) 
 			sprite->SetTransform(m_pos, m_random_val.angle);
 		InsertSpriteSJ::Instance()->Insert(sprite);
-		sprite->Release();
+		sprite->RemoveReference();
 	}
 
 	ChangeRandomValue();

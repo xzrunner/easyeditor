@@ -1,14 +1,14 @@
 #ifndef _EASYEDITOR_OPEN_SYMBOL_MONITOR_H_
 #define _EASYEDITOR_OPEN_SYMBOL_MONITOR_H_
 
-#include "Object.h"
+#include <CU_RefCountObj.h>
 
 namespace ee
 {
 
 class Symbol;
 
-class OpenSymbolMonitor : public Object
+class OpenSymbolMonitor : public cu::RefCountObj
 {
 public:
 	virtual void OnOpenSymbol(Symbol* sym) = 0;

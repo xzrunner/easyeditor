@@ -1,9 +1,9 @@
-#ifndef _SPRITE2_SINGLETON_H_
-#define _SPRITE2_SINGLETON_H_
+#ifndef _CLASS_UTILITY_SINGLETON_H_
+#define _CLASS_UTILITY_SINGLETON_H_
 
 #include <stddef.h>
 
-namespace s2
+namespace cu
 {
 
 #define SINGLETON_DECLARATION(name) \
@@ -27,4 +27,4 @@ namespace s2
 
 }
 
-#endif // _SPRITE2_SINGLETON_H_
+#endif // _CLASS_UTILITY_SINGLETON_H_

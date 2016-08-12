@@ -2,12 +2,12 @@
 #define _EASYEDITOR_COUNT_VERIFY_VISITOR_H_
 
 #include "Visitor.h"
+#include "Shape.h"
 
 namespace ee
 {
 
-//	template <typename T>
-class CountVerifyVisitor : public Visitor
+class CountVerifyVisitor : public Visitor<Shape>
 {
 public:
 	CountVerifyVisitor(bool& valid, int num)
@@ -17,7 +17,7 @@ public:
 		m_valid = m_count == m_num;
 	}
 
-	void Visit(Object* object, bool& next) {
+	void Visit(Shape* shape, bool& next) {
 		++m_count;
 		next = m_count <= m_num;
 	}

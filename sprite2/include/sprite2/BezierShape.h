@@ -12,8 +12,17 @@ public:
 	BezierShape() {}
 	BezierShape(const sm::vec2& start, const sm::vec2& end);
 	
-	virtual bool IsContain(const sm::vec2& pos) const;
+	/**
+	 *  @interface
+	 *    Cloneable
+	 */
+	virtual BezierShape* Clone() const;	
 
+	/**
+	 *  @interface
+	 *    Shape
+	 */
+	virtual bool IsContain(const sm::vec2& pos) const;
 	virtual void Draw(const sm::mat4& mt, 
 		const RenderColor& color = RenderColor()) const;
 
@@ -24,7 +33,7 @@ public:
 //}
 
 protected:
-	void UpdatePolyline();
+	virtual void UpdatePolyline();
 
 private:
 	sm::vec2 PointOnCubicBezier(float t);

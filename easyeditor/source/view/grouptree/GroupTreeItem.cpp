@@ -13,7 +13,7 @@ GroupTreeSpriteItem::GroupTreeSpriteItem(Sprite* sprite)
 	: m_sprite(sprite)
 {
 	if (m_sprite) {
-		m_sprite->Retain();
+		m_sprite->AddReference();
 	}
 }
 
@@ -21,14 +21,14 @@ GroupTreeSpriteItem::GroupTreeSpriteItem(const GroupTreeSpriteItem& item)
 {
 	m_sprite = item.m_sprite;
 	if (m_sprite) {
-		m_sprite->Retain();
+		m_sprite->AddReference();
 	}
 }
 
 GroupTreeSpriteItem::~GroupTreeSpriteItem()
 {
 	if (m_sprite) {
-		m_sprite->Release();
+		m_sprite->RemoveReference();
 	}
 }
 
@@ -40,7 +40,7 @@ GroupTreeGroupItem::GroupTreeGroupItem(Group* group)
 	: m_group(group)
 {
 	if (m_group) {
-		m_group->Retain();
+		m_group->AddReference();
 	}
 }
 
@@ -48,14 +48,14 @@ GroupTreeGroupItem::GroupTreeGroupItem(const GroupTreeGroupItem& item)
 {
 	m_group = item.m_group;
 	if (m_group) {
-		m_group->Retain();
+		m_group->AddReference();
 	}
 }
 
 GroupTreeGroupItem::~GroupTreeGroupItem()
 {
 	if (m_group) {
-		m_group->Release();
+		m_group->RemoveReference();
 	}
 }
 

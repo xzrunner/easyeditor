@@ -14,6 +14,11 @@ PointShape::PointShape(const sm::vec2& pos)
 	UpdateBounding();
 }
 
+PointShape* PointShape::Clone() const
+{
+	return new PointShape(*this);
+}
+
 bool PointShape::IsContain(const sm::vec2& pos) const
 {
 	return sm::is_point_in_rect(pos, m_bounding);	

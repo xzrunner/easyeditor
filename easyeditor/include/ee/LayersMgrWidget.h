@@ -9,7 +9,6 @@ namespace ee
 {
 
 class Layer;
-class Visitor;
 
 class LayersMgrWidget : public wxPanel
 {

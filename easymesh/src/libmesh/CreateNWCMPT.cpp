@@ -23,8 +23,8 @@ CreateNWCMPT::CreateNWCMPT(wxWindow* parent, const std::string& name,
 
 CreateNWCMPT::~CreateNWCMPT()
 {
-	m_mesh_op->Release();
-	m_strip_op->Release();
+	m_mesh_op->RemoveReference();
+	m_strip_op->RemoveReference();
 }
 
 wxSizer* CreateNWCMPT::InitLayout()

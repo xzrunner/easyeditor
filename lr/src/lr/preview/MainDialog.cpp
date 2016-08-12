@@ -40,7 +40,7 @@ void MainDialog::InitLayout(wxGLContext* glctx)
 
 	StageCanvas* canvas = new StageCanvas(stage, stage->GetStageImpl(), m_control, m_sprites, glctx);
 	stage->SetCanvas(canvas);
-	canvas->Release();
+	canvas->RemoveReference();
 
 	ee::EditOP* op = new CtrlCamOP(stage, stage->GetStageImpl());
 	stage->SetEditOP(op);

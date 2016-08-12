@@ -14,14 +14,14 @@ namespace ee
 OffsetSpriteState::OffsetSpriteState(Sprite* sprite)
 {
 	m_sprite = sprite;
-	m_sprite->Retain();
+	m_sprite->AddReference();
 
 	m_old_offset = m_sprite->GetOffset();
 }
 
 OffsetSpriteState::~OffsetSpriteState()
 {
-	m_sprite->Release();
+	m_sprite->RemoveReference();
 }
 
 void OffsetSpriteState::OnMouseRelease(const sm::vec2& pos)

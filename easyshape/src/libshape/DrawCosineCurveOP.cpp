@@ -17,7 +17,7 @@ bool DrawCosineCurveOP::OnMouseLeftDClick(int x, int y)
 
 	CosineShape* curve = new CosineShape(m_polyline);
 	ee::InsertShapeSJ::Instance()->Insert(curve);
-	curve->Release();
+	curve->RemoveReference();
 
 	m_polyline.clear();
 	m_curr_pos.MakeInvalid();

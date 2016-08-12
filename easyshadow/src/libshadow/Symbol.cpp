@@ -24,7 +24,7 @@ Symbol::Symbol(const Symbol& s)
 Symbol::~Symbol()
 {
 	if (m_shadow) {
-		m_shadow->Release();
+		m_shadow->RemoveReference();
 	}
 }
 

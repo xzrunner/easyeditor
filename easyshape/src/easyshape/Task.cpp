@@ -37,7 +37,7 @@ void Task::Load(const char* filepath)
 		|| type == ee::FileType::e_texture) {
 		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 		m_stage->SetSymbolBG(symbol);
-		symbol->Release();
+		symbol->RemoveReference();
 	}
 }
 

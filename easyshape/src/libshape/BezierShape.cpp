@@ -11,11 +11,6 @@ BezierShape::BezierShape(const sm::vec2& start, const sm::vec2& end)
 {
 }
 
-BezierShape* BezierShape::Clone() const
-{
-	return new BezierShape(*this);
-}
-
 void BezierShape::Translate(const sm::vec2& offset)
 {
 	for (int i = 0; i < CTRL_NODE_COUNT; ++i) {
@@ -57,7 +52,7 @@ void BezierShape::StoreToFile(Json::Value& value, const std::string& dir) const
 
 void BezierShape::Mirror(bool x, bool y)
 {
-	sm::vec2 center = GetRect().Center();
+	sm::vec2 center = GetBounding().Center();
 	for (int i = 0; i < CTRL_NODE_COUNT; ++i) 
 	{
 		if (x) {

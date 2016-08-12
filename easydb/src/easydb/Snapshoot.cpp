@@ -74,7 +74,7 @@ void Snapshoot::Run(ee::Snapshoot& ss, const std::string& srcdir, const std::str
 			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			std::string filename = dstdir + "//" + name + ".png";
 			ss.OutputToImageFile(symbol, filename);
-			symbol->Release();
+			symbol->RemoveReference();
 		}
 	}
 }

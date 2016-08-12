@@ -10,11 +10,11 @@
 namespace ee
 {
 
-class RectQueryVisitor : public Visitor
+class RectQueryVisitor : public Visitor<Sprite>
 {
 public:
 	RectQueryVisitor(const sm::rect& rect, bool contain, std::vector<Sprite*>& result);
-	virtual void Visit(Object* object, bool& next);
+	virtual void Visit(Sprite* spr, bool& next);
 
 private:
 	const sm::rect& m_rect;
@@ -32,21 +32,20 @@ RectQueryVisitor::RectQueryVisitor(const sm::rect& rect, bool contain, std::vect
 }
 
 inline
-void RectQueryVisitor::Visit(Object* object, bool& next)
+void RectQueryVisitor::Visit(Sprite* spr, bool& next)
 {
-	Sprite* sprite = static_cast<Sprite*>(object);
-// 	if (sprite->editable && sprite->isIntersect(m_rect))
-// 		m_result.push_back(sprite);
-	if (sprite->IsEditable())
+// 	if (spr->editable && spr->isIntersect(m_rect))
+// 		m_result.push_back(spr);
+	if (spr->IsEditable())
 	{
-		BoundingBox* bv = sprite->GetBounding();
+		BoundingBox* bv = spr->GetBounding();
 // 		if (!m_contain && bv->isIntersect(m_rect))
-// 			m_result.push_back(sprite);
+// 			m_result.push_back(spr);
 
 		if (m_contain && bv && bv->IsContain(m_rect)) {
-			m_result.push_back(sprite);
+			m_result.push_back(spr);
 		} else if (!m_contain && bv && bv->IsIntersect(m_rect)) {
-			m_result.push_back(sprite);
+			m_result.push_back(spr);
 		}
 	}
 	next = true;

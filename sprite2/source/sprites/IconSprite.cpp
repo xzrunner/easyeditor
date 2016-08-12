@@ -5,14 +5,18 @@
 namespace s2
 {
 
-IconSprite::IconSprite(void* ud)
-	: Sprite(ud)
+IconSprite::IconSprite()
 {
 }
 
-IconSprite::IconSprite(const IconSprite& spr, void* ud)
-	: Sprite(spr, ud)
+IconSprite::IconSprite(const IconSprite& spr)
+	: Sprite(spr)
 {
+}
+
+IconSprite* IconSprite::Clone() const
+{
+	return new IconSprite(*this);
 }
 
 }

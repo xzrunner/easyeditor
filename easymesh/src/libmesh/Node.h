@@ -1,13 +1,14 @@
 #ifndef _EASYMESH_NODE_H_
 #define _EASYMESH_NODE_H_
 
-#include <ee/Object.h>
+#include <CU_RefCountObj.h>
+
 #include <ee/SelectionSet.h>
 
 namespace emesh
 {
 
-class Node : public ee::Object
+class Node : public cu::RefCountObj
 {
 public:
 	Node() : ud(NULL) {}

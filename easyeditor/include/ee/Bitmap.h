@@ -2,7 +2,8 @@
 #define _EASYEDITOR_BITMAP_H_
 
 #include "ResourcesMgr.h"
-#include "Object.h"
+
+#include <CU_RefCountObj.h>
 
 #include <wx/bitmap.h>
 
@@ -12,7 +13,7 @@ namespace ee
 class Bitmap;
 typedef ResourcesMgr<Bitmap> BitmapMgr;
 
-class Bitmap : public Object
+class Bitmap : public cu::RefCountObj
 {
 public:
 	Bitmap();

@@ -39,7 +39,7 @@ void Task::Load(const char* filepath)
 		m_stage->SetMeshSymbol(msymbol);
 		
 		m_library->LoadFromSymbolMgr(*ee::SymbolMgr::Instance());
-		symbol->Release();
+		symbol->RemoveReference();
 	}
 }
 

@@ -34,7 +34,7 @@ bool SpriteDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& data)
 		sprite->Translate(pos);
 		InsertSpriteSJ::Instance()->Insert(sprite);
 		EditAddRecordSJ::Instance()->Add(new InsertSpriteAOP(sprite));
-		sprite->Release();
+		sprite->RemoveReference();
 	}
 
 	return true;

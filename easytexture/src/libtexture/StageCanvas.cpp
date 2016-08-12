@@ -42,7 +42,7 @@ StageCanvas::StageCanvas(StagePanel* panel, wxGLContext* glctx,
 StageCanvas::~StageCanvas()
 {
 	if (m_bg) {
-		m_bg->Release();
+		m_bg->RemoveReference();
 	}
 }
 

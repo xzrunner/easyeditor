@@ -3,7 +3,6 @@
 
 #include "TrailNode.h"
 
-#include <ee/Object.h>
 #include <ee/UICallback.h>
 
 #include <SM_Matrix.h>

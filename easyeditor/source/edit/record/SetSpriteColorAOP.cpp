@@ -15,7 +15,7 @@ namespace ee
 	SetSprite##name##ColorAOP::SetSprite##name##ColorAOP(Sprite* sprite, const s2::Color& color) \
 		: m_new_color(color) \
 	{ \
-		sprite->Retain(); \
+		sprite->AddReference(); \
 		m_sprites.push_back(sprite); \
 		m_old_color.push_back(sprite->GetColor().##var##); \
 	} \
@@ -23,7 +23,7 @@ namespace ee
 	SetSprite##name##ColorAOP::SetSprite##name##ColorAOP(const std::vector<Sprite*>& sprites, const s2::Color& color) \
 		: m_new_color(color) \
 	{ \
-		for_each(sprites.begin(), sprites.end(), RetainObjectFunctor<Sprite>()); \
+		for_each(sprites.begin(), sprites.end(), cu::AddRefFonctor<Sprite>()); \
 		m_sprites = sprites; \
 	\
 		for (int i = 0, n = sprites.size(); i < n; ++i) { \
@@ -33,7 +33,7 @@ namespace ee
 	\
 	SetSprite##name##ColorAOP::~SetSprite##name##ColorAOP() \
 	{ \
-		for_each(m_sprites.begin(), m_sprites.end(), ReleaseObjectFunctor<Sprite>()); \
+		for_each(m_sprites.begin(), m_sprites.end(), cu::RemoveRefFonctor<Sprite>()); \
 	} \
 	\
 	void SetSprite##name##ColorAOP::Undo() \

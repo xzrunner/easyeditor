@@ -1,9 +1,6 @@
 #ifndef _EASYEDITOR_LIST_ITEM_H_
 #define _EASYEDITOR_LIST_ITEM_H_
 
-#include "Object.h"
-#include "Cloneable.h"
-
 #include <string>
 
 namespace ee
@@ -11,7 +8,7 @@ namespace ee
 
 class Bitmap;
 
-class ListItem : public Object, public Cloneable
+class ListItem
 {
 public:
 	ListItem() {

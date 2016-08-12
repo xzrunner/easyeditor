@@ -17,7 +17,7 @@ static const wxString VERT_ALIGN_LABELS[] = {
 ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage, Sprite* spr)
 	: ee::ToolbarPanel(parent, stage->GetStageImpl())
 {
-	spr->Retain();
+	spr->AddReference();
 	m_spr = spr;
 
 	SetSizer(InitLayout());	
@@ -25,7 +25,7 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage, Sprite* spr)
 
 ToolbarPanel::~ToolbarPanel()
 {
-	m_spr->Release();
+	m_spr->RemoveReference();
 }
 
 wxSizer* ToolbarPanel::InitLayout()

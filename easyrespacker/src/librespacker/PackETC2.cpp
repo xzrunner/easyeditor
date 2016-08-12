@@ -152,7 +152,7 @@ void PackETC2::StoreScaled(std::ofstream& fout, float scale) const
 		h = static_cast<int>(m_height * scale);
 	ee::Snapshoot ss;
 	uint8_t* png_buf = ss.OutputToMemory(sym, false, scale);
-	sym->Release();
+	sym->RemoveReference();
 
 	ee::ImageVerticalFlip revert(png_buf, w, h);
 	uint8_t* buf_revert = revert.Revert();		

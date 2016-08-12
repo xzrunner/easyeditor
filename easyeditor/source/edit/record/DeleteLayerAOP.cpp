@@ -14,20 +14,20 @@ DeleteLayerAOP::DeleteLayerAOP(LayerList* list, Layer* layer)
 	: m_list(list)
 {
 	layer->TraverseSprite(FetchAllVisitor<Sprite>(m_sprites));
-	for_each(m_sprites.begin(), m_sprites.end(), RetainObjectFunctor<Sprite>());
+	for_each(m_sprites.begin(), m_sprites.end(), cu::AddRefFonctor<Sprite>());
 
 	layer->TraverseSprite(FetchAllVisitor<Shape>(m_shapes));
-	for_each(m_shapes.begin(), m_shapes.end(), RetainObjectFunctor<Shape>());
+	for_each(m_shapes.begin(), m_shapes.end(), cu::AddRefFonctor<Shape>());
 
-	layer->Retain();
+	layer->AddReference();
 	m_layer = layer;
 }
 
 DeleteLayerAOP::~DeleteLayerAOP()
 {
-	for_each(m_sprites.begin(), m_sprites.end(), ReleaseObjectFunctor<Sprite>());
-	for_each(m_shapes.begin(), m_shapes.end(), ReleaseObjectFunctor<Shape>());
-	m_layer->Release();
+	for_each(m_sprites.begin(), m_sprites.end(), cu::RemoveRefFonctor<Sprite>());
+	for_each(m_shapes.begin(), m_shapes.end(), cu::RemoveRefFonctor<Shape>());
+	m_layer->RemoveReference();
 }
 
 void DeleteLayerAOP::Undo()

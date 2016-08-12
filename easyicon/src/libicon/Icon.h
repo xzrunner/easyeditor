@@ -1,8 +1,6 @@
 #ifndef _EASYICON_ICON_H_
 #define _EASYICON_ICON_H_
 
-#include <ee/Object.h>
-
 #include <SM_Matrix.h>
 #include <SM_Rect.h>
 

@@ -105,11 +105,11 @@ void ViewlistList::Clear()
 	VerticalImageList::Clear();
 
 	if (m_selected_spr) {
-		m_selected_spr->Release();
+		m_selected_spr->RemoveReference();
 		m_selected_spr = NULL;
 	}
 
-	for_each(m_sprites.begin(), m_sprites.end(), ReleaseObjectFunctor<Sprite>());
+	for_each(m_sprites.begin(), m_sprites.end(), cu::RemoveRefFonctor<Sprite>());
 	m_sprites.clear();
 }
 
@@ -118,7 +118,7 @@ void ViewlistList::Insert(Sprite* sprite, int idx)
 	if (!sprite) {
 		return;
 	}
-	sprite->Retain();
+	sprite->AddReference();
 
 	ListItem* item = const_cast<Symbol*>(&sprite->GetSymbol());
 	if (idx < 0 || idx >= static_cast<int>(m_sprites.size())) {
@@ -285,7 +285,7 @@ int ViewlistList::GetSelectedIndex() const
 void ViewlistList::OnSelected(Sprite* spr, bool clear)
 {
 	m_selected_spr = spr;
-	m_selected_spr->Retain();
+	m_selected_spr->AddReference();
 	SelectSpriteSJ::Instance()->Select(spr, clear);
 }
 
@@ -407,7 +407,7 @@ void ViewlistList::Remove(Sprite* sprite)
 	}
 	VerticalImageList::Remove(idx);
 
-	sprite->Release();
+	sprite->RemoveReference();
 	m_sprites.erase(m_sprites.begin() + idx);
 }
 
@@ -425,7 +425,7 @@ void ViewlistList::RemoveSelected()
 
 	RemoveSpriteSJ::Instance()->Remove(m_sprites[selected], this);
 
-	m_sprites[selected]->Release();
+	m_sprites[selected]->RemoveReference();
 	m_sprites.erase(m_sprites.begin() + selected);
 }
 

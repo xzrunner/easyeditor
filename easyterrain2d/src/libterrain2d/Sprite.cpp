@@ -25,7 +25,7 @@ Sprite::Sprite(Symbol* symbol)
 	m_core = new s2::DummySprite(this);
 
 //	rotate(-m_symbol->GetOceanAngle());
-	m_symbol->Retain();
+	m_symbol->AddReference();
 	BuildBounding();
 }
 
@@ -34,7 +34,7 @@ Sprite::~Sprite()
 	m_core->RemoveReference();
 
 	if (m_symbol) {
-		m_symbol->Release();
+		m_symbol->RemoveReference();
 	}
 }
 

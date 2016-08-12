@@ -5,14 +5,18 @@
 namespace s2
 {
 
-TextboxSprite::TextboxSprite(void* ud)
-	: Sprite(ud)
+TextboxSprite::TextboxSprite()
 {
 }
 
-TextboxSprite::TextboxSprite(const TextboxSprite& spr, void* ud)
-	: Sprite(spr, ud)
+TextboxSprite::TextboxSprite(const TextboxSprite& spr)
+	: Sprite(spr)
 {
+}
+
+TextboxSprite* TextboxSprite::Clone() const
+{
+	return new TextboxSprite(*this);
 }
 
 }

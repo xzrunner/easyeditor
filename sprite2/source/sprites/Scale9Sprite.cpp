@@ -5,16 +5,21 @@
 namespace s2
 {
 
-Scale9Sprite::Scale9Sprite(void* ud)
-	: Sprite(ud)
+Scale9Sprite::Scale9Sprite()
+	: Sprite()
 {
 	// todo
 }
 
-Scale9Sprite::Scale9Sprite(const Scale9Sprite& spr, void* ud)
-	: Sprite(spr, ud)
+Scale9Sprite::Scale9Sprite(const Scale9Sprite& spr)
+	: Sprite(spr)
 {
 	// todo
+}
+
+Scale9Sprite* Scale9Sprite::Clone() const
+{
+	return new Scale9Sprite(*this);
 }
 
 void Scale9Sprite::Draw(const RenderParams& params) const

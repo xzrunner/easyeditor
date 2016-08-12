@@ -8,19 +8,19 @@ namespace s2
 
 class RenderParams;
 
-class Scale9Sprite : public Sprite
+class Scale9Sprite : public VIRTUAL_INHERITANCE Sprite
 {
 public:
-	Scale9Sprite(void* ud);
-	Scale9Sprite(const Scale9Sprite& spr, void* ud);
+	Scale9Sprite();
+	Scale9Sprite(const Scale9Sprite& spr);
 
-	virtual bool Update(float dt) { return false; }
-	
+	/**
+	 *  @interface
+	 *    Cloneable
+	 */
+	virtual Scale9Sprite* Clone() const;
+
 	void Draw(const RenderParams& params) const;
-
-private:
-	Scale9Sprite() {}
-	const Scale9Sprite& operator = (const Scale9Sprite& spr) { return *this; }
 
 private:
 	float m_width, m_height;

@@ -1,8 +1,9 @@
 #ifndef _SPRITE2_FILTER_FACTORY_H_
 #define _SPRITE2_FILTER_FACTORY_H_
 
-#include "Singleton.h"
 #include "FilterMode.h"
+
+#include <CU_Singleton.h>
 
 namespace s2
 {

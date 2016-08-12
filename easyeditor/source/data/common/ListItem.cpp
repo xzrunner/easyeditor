@@ -8,7 +8,7 @@ void ListItem::RefreshThumbnail(const std::string& filepath, bool force)
 {
 	if (m_bitmap) {
 		if (force) {
-			m_bitmap->Release();
+			m_bitmap->RemoveReference();
 		} else {
 			return;
 		}

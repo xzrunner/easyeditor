@@ -60,7 +60,7 @@ Symbol* SymbolMgr::FetchSymbol(const std::string& filepath)
 	}
 	else
 	{
-		itr->second->Retain();
+		itr->second->AddReference();
 		return itr->second;
 	}
 }
@@ -85,11 +85,11 @@ void SymbolMgr::Clear()
 	for ( ; itr != m_symbols.end(); ++itr) {
 		symbols.push_back(itr->second);
 	}
-	for_each(symbols.begin(), symbols.end(), ReleaseObjectFunctor<Symbol>());
+	for_each(symbols.begin(), symbols.end(), cu::RemoveRefFonctor<Symbol>());
 	m_symbols.clear();
 }
 
-void SymbolMgr::Traverse(Visitor& visitor) const
+void SymbolMgr::Traverse(Visitor<Symbol>& visitor) const
 {
 	std::map<std::string, Symbol*>::const_iterator itr = m_symbols.begin();
 	for ( ; itr != m_symbols.end(); ++itr)

@@ -15,10 +15,10 @@
 //StageData::~StageData()
 //{
 //	if (m_ps) {
-//		m_ps->Release();
+//		m_ps->RemoveReference();
 //	}
 //	if (m_selected) {
-//		m_selected->Release();
+//		m_selected->RemoveReference();
 //	}
 //}
 //
@@ -51,11 +51,11 @@
 //{
 //	if (m_selected != selected) {
 //		if (m_selected) {
-//			m_selected->Release();
+//			m_selected->RemoveReference();
 //		}
 //		m_selected = selected;
 //		if (m_selected) {
-//			m_selected->Retain();
+//			m_selected->AddReference();
 //		}
 //		m_toolbar->ResetUIFromPS();
 //	}

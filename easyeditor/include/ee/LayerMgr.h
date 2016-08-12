@@ -11,7 +11,6 @@ namespace ee
 {	
 
 class Layer;
-class Visitor;
 
 class LayerMgr
 {

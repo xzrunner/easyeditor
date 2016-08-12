@@ -60,9 +60,9 @@ Sprite* draw_all_to_one_spr(const std::vector<Sprite*>& sprites)
 
 	Image* img = new Image(ss.GetFBO());
 	ImageSymbol* sym = new ImageSymbol(img, "ss");
-	img->Release();
+	img->RemoveReference();
 	ImageSprite* spr = new ImageSprite(sym);
-	sym->Release();
+	sym->RemoveReference();
 
 	spr->SetMirror(false, true);
 	spr->SetTransform(r.Center(), 0);

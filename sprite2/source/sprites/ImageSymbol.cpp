@@ -11,20 +11,7 @@
 namespace s2
 {
 
-ImageSymbol::ImageSymbol(void* ud,
-						 void (*query_texcoords)(void* ud, float* texcoords, int* texid),
-						 void (*proj2screen)(float px, float py, int w, int h, float* sx, float* sy), 
-						 bool (*is_ortho_cam)(),
-						 void (*get_screen_size)(int* w, int* h),
-						 float (*get_p3d_cam_angle)(),
-						 int (*get_screen_cache_texid)())
-	: Symbol(ud)
-	, m_query_texcoords(query_texcoords)
-	, m_proj2screen(proj2screen)
-	, m_is_ortho_cam(is_ortho_cam)
-	, m_get_screen_size(get_screen_size)
-	, m_get_p3d_cam_angle(get_p3d_cam_angle)
-	, m_get_screen_cache_texid(get_screen_cache_texid)
+ImageSymbol::ImageSymbol()
 {
 }
 
@@ -41,18 +28,23 @@ void ImageSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 
 	float texcoords[8];
 	int texid;
-	m_query_texcoords(GetUD(), texcoords, &texid);
+	QueryTexcoords(texcoords, texid);
 	
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	if (mgr->GetShaderType() == sl::BLEND) {
 		DrawBlend(params, vertices, texcoords, texid);
 	} else {
-		if (m_is_ortho_cam()) {
+		if (IsOrthoCam()) {
 			DrawOrtho(params, vertices, texcoords, texid);
 		} else {
 			DrawPseudo3D(params, vertices, texcoords, texid);
 		}
 	}
+}
+
+sm::rect ImageSymbol::GetBounding(const Sprite* spr) const
+{
+	return m_size;
 }
 
 void ImageSymbol::InitTex(Texture* tex, const Quad& quad, const sm::vec2& offset)
@@ -91,14 +83,14 @@ void ImageSymbol::DrawBlend(const RenderParams& params, sm::vec2* vertices, floa
 
 	sm::vec2 tex_coords_base[4];
 	int w, h;
-	m_get_screen_size(&w, &h);
+	GetScreenSize(w, h);
 	for (int i = 0; i < 4; ++i) {
-		m_proj2screen(vertices_scr[i].x, vertices_scr[i].y, w, h, &tex_coords_base[i].x, &tex_coords_base[i].y);
+		Proj2Screen(vertices_scr[i].x, vertices_scr[i].y, w, h, tex_coords_base[i].x, tex_coords_base[i].y);
 		tex_coords_base[i].y = h - 1 - tex_coords_base[i].y;
 		tex_coords_base[i].x /= w;
 		tex_coords_base[i].y /= h;
 	}
-	shader->Draw(&vertices[0].x, texcoords, &tex_coords_base[0].x, texid, m_get_screen_cache_texid());
+	shader->Draw(&vertices[0].x, texcoords, &tex_coords_base[0].x, texid, GetScreenCacheTexid());
 }
 
 void ImageSymbol::DrawOrtho(const RenderParams& params, sm::vec2* vertices, float* texcoords, int texid) const
@@ -122,7 +114,7 @@ void ImageSymbol::DrawPseudo3D(const RenderParams& params, sm::vec2* vertices, f
 {
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 
-	float angle = m_get_p3d_cam_angle();
+	float angle = GetP3dCamAngle();
 	float z[4];
 	params.camera.CalculateZ(angle, vertices, z);
 

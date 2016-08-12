@@ -5,6 +5,8 @@
 
 #include <ee/Symbol.h>
 
+#include <sprite2/ShapeSymbol.h>
+
 #include <vector>
 
 namespace ee { class Shape; }
@@ -12,26 +14,27 @@ namespace ee { class Shape; }
 namespace eshape
 {
 
-class Symbol : public ee::Symbol
+class Symbol : public ee::Symbol, public s2::ShapeSymbol
 {
 public:
 	Symbol();
 	Symbol(const Symbol& symbol);
 	virtual ~Symbol();
 
-	//
-	// IObject interface
-	//	
-	virtual Symbol* Clone() const;
+	/**
+	 *  @interface
+	 *    s2::Symbol
+	 */
+	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
+	virtual sm::rect GetBounding(const s2::Sprite* spr = NULL) const;
 
-	//
-	// Symbol interface
-	//
-	virtual void Draw(const s2::RenderParams& params, const ee::Sprite* spr = NULL) const;
+	/**
+	 *  @interface
+	 *    ee::Symbol
+	 */
 	virtual void ReloadTexture() const;
-	virtual sm::rect GetSize(const ee::Sprite* sprite = NULL) const;
 
-	void Traverse(ee::Visitor& visitor) const;
+	void Traverse(ee::Visitor<ee::Shape>& visitor) const;
 	bool Add(ee::Shape* shape);
 	bool Remove(ee::Shape* shape);
 	bool Clear();

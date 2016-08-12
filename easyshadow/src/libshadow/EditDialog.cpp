@@ -28,7 +28,7 @@ EditDialog::EditDialog(wxWindow* parent, wxGLContext* glctx,
 	assert(edited);
 
 	Symbol* symbol = const_cast<Symbol*>(&edited->GetSymbol());
-	symbol->Retain();
+	symbol->AddReference();
 	m_symbol = symbol;
 	m_symbol->ReloadTexture();
 	SetTitle(symbol->GetFilepath());
@@ -41,7 +41,7 @@ EditDialog::EditDialog(wxWindow* parent, wxGLContext* glctx,
 EditDialog::~EditDialog()
 {
 	if (m_symbol) {
-		m_symbol->Release();
+		m_symbol->RemoveReference();
 	}
 }
 

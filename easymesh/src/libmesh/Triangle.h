@@ -1,25 +1,25 @@
 #ifndef _EASYMESH_TRIANGLE_H_
 #define _EASYMESH_TRIANGLE_H_
 
-#include "Node.h"
+#include <CU_RefCountObj.h>
 
-#include <ee/Object.h>
+#include "Node.h"
 
 namespace emesh
 {
 
-class Triangle : public ee::Object
+class Triangle : public cu::RefCountObj
 {
 public:
 	Triangle() {}
 	~Triangle() {
 		for (int i = 0; i < 3; ++i) {
-			nodes[i]->Release();
+			nodes[i]->RemoveReference();
 		}
 	}
 // 	Triangle(const Triangle& tri) {
 // 		for (int i = 0; i < 3; ++i) {
-// 			tri.nodes[0]->Retain();
+// 			tri.nodes[0]->AddReference();
 // 			nodes[0] = tri.nodes[0];
 // 		}
 // 	}

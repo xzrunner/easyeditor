@@ -251,7 +251,7 @@ void Strip::RefreshTriangles()
 		tri->nodes[1] = last_right;
 		tri->nodes[2] = next_right;
 		for (int i = 0; i < 3; ++i) {
-			tri->nodes[i]->Retain();
+			tri->nodes[i]->AddReference();
 		}
 		m_tris.push_back(tri);
 
@@ -260,7 +260,7 @@ void Strip::RefreshTriangles()
 		tri->nodes[1] = next_right;
 		tri->nodes[2] = next_left;
 		for (int i = 0; i < 3; ++i) {
-			tri->nodes[i]->Retain();
+			tri->nodes[i]->AddReference();
 		}
 		m_tris.push_back(tri);
 

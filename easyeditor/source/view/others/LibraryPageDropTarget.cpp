@@ -17,7 +17,7 @@ bool LibraryPageDropTarget::OnDropFiles(wxCoord x, wxCoord y,
 		if (m_page->IsHandleSymbol(symbol)) {
 			m_page->AddItem(symbol);
 		}
-		symbol->Release();
+		symbol->RemoveReference();
 	}
 	return true;
 }
