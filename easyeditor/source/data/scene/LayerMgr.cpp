@@ -18,14 +18,14 @@ LayerMgr::~LayerMgr()
 	Clear();
 }
 
-void LayerMgr::TraverseSprite(Visitor& visitor, DataTraverseType type, bool order) const
+void LayerMgr::TraverseSprite(Visitor<ee::Sprite>& visitor, DataTraverseType type, bool order) const
 {
 	for (int i = 0, n = m_layers.size(); i < n; ++i) {
 		m_layers[i]->TraverseSprite(visitor, type, order);
 	}
 }
 
-void LayerMgr::TraverseShape(Visitor& visitor, bool order) const
+void LayerMgr::TraverseShape(Visitor<ee::Shape>& visitor, bool order) const
 {
 	for (int i = 0, n = m_layers.size(); i < n; ++i) {
 		m_layers[i]->TraverseShape(visitor, order);

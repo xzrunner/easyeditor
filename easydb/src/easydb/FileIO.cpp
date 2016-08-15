@@ -6,7 +6,6 @@
 #include <ee/FetchAllVisitor.h>
 #include <ee/Sprite.h>
 #include <ee/SpriteFactory.h>
-#include <ee/BoundingBox.h>
 #include <ee/SymbolMgr.h>
 
 #include <fstream>

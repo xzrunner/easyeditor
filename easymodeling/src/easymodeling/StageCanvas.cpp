@@ -107,9 +107,8 @@ void StageCanvas::DrawLines() const
 	}
 }
 
-void StageCanvas::DrawJointVisitor::Visit(ee::Object* object, bool& next)
+void StageCanvas::DrawJointVisitor::Visit(Joint* joint, bool& next)
 {
-	Joint* joint = static_cast<Joint*>(object);
 	joint->Draw(Joint::e_default);
 	next = true;
 }

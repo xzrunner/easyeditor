@@ -4,6 +4,7 @@
 #include <ee/UICallback.h>
 
 #include <SM_Matrix.h>
+#include <CU_RefCountObj.h>
 
 struct p2d_emitter_cfg;
 struct p2d_emitter;
@@ -14,7 +15,7 @@ namespace ee { class Symbol; }
 namespace eparticle2d
 {
 
-class ParticleSystem : public ee::Object, public ee::UICallback
+	class ParticleSystem : public cu::RefCountObj, public ee::UICallback
 {
 public:
 	ParticleSystem(p2d_emitter_cfg* cfg);
@@ -22,9 +23,10 @@ public:
 
 	virtual ~ParticleSystem();
 
-	//
-	// UICallback interface
-	//
+	/**
+	 *  @interface
+	 *    UICallback
+	 */
 	virtual void SetValue(int key, const ee::UICallback::Data& data);
 	virtual void GetValue(int key, ee::UICallback::Data& data);
 

@@ -13,7 +13,7 @@ namespace eterrain2d
 
 OceanMesh::OceanMesh(const eshape::PolygonShape* shape, 
 					 const ee::ImageSymbol* image)
-	 : m_shape(shape->Clone())
+	 : m_shape(shape->EEClone())
 	 , m_image0(image)
 	 , m_image1(NULL)
 	 , m_lock_bound(false)
@@ -163,8 +163,8 @@ void OceanMesh::OpenBlend(bool open)
 
 void OceanMesh::SetImage1(const ee::ImageSymbol* image)
 {
-	sm::vec2 sz0 = m_image1->GetSize().Size(),
-		     sz = image->GetSize().Size();
+	sm::vec2 sz0 = m_image1->GetBounding().Size(),
+		     sz = image->GetBounding().Size();
 	if (sz0.x != sz.x || sz0.y != sz.y) {
 		return;
 	}
@@ -224,7 +224,7 @@ sm::rect OceanMesh::CalBoundRegion(const std::vector<sm::vec2>& bound) const
 
 void OceanMesh::CalSegments(const sm::rect& r, std::vector<sm::vec2>& segs) const
 {
-	sm::vec2 sz = m_image0->GetSize().Size();
+	sm::vec2 sz = m_image0->GetBounding().Size();
 	float dw = sz.x / m_col,
 		  dh = sz.y / m_row;
 	for (float x = r.xmin; x < r.xmax; x += dw) {
@@ -260,7 +260,7 @@ void OceanMesh::CalTrisTexcords(const sm::rect& r,
 								const std::vector<sm::vec2>& tris_vertices,
 								std::vector<sm::vec2>& texcoords) const
 {
-	sm::vec2 sz = m_image0->GetSize().Size();
+	sm::vec2 sz = m_image0->GetBounding().Size();
 
 	sm::vec2 left_low;
 	left_low.x = r.xmin - (1 - m_texcoords_base.x) * sz.x;
@@ -290,7 +290,7 @@ void OceanMesh::BuildGrids(const sm::rect& region,
 						   const std::vector<sm::vec2>& texcoords,
 						   const std::vector<sm::vec2>& bound)
 {
-	sm::vec2 sz = m_image0->GetSize().Size();
+	sm::vec2 sz = m_image0->GetBounding().Size();
 	sm::vec2 r_sz = region.Size();
 	int cx = std::ceil(r_sz.x / sz.x),
 		cy = std::ceil(r_sz.y / sz.y);
@@ -319,7 +319,7 @@ void OceanMesh::BuildGrids(const sm::rect& region,
 
 void OceanMesh::UpdateWave(float during)
 {
-	sm::vec2 sz = m_image0->GetSize().Size();
+	sm::vec2 sz = m_image0->GetBounding().Size();
 	for (int i = 0, n = m_grids.size(); i < n; ++i) {
 		MeshShape* grid = m_grids[i];
 		const std::vector<emesh::Triangle*>& tris = grid->GetTriangles();

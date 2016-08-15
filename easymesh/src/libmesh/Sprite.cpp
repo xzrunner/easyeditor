@@ -1,25 +1,19 @@
 #include "Sprite.h"
+#include "Symbol.h"
 #include "FileIO.h"
 #include "Mesh.h"
 #include "PropertySetting.h"
 
-#include <ee/BBFactory.h>
-#include <ee/BoundingBox.h>
 #include <ee/FileHelper.h>
 #include <ee/SymbolMgr.h>
-
-#include <sprite2/DummySprite.h>
 
 namespace emesh
 {
 
 Sprite::Sprite()
-	: m_symbol(NULL)
-	, m_base(NULL)
+	: m_base(NULL)
 	, m_only_draw_bound(false)
 {
-	m_core = new s2::DummySprite(this);
-
 //	m_speed.set(0, -0.01f);
 }
 
@@ -29,56 +23,29 @@ Sprite::Sprite(const Sprite& s)
 	, m_trans(s.m_trans)
 	, m_only_draw_bound(s.m_only_draw_bound)
 {
-	m_core = new s2::DummySprite(this);
 	if (m_base = s.m_base) {
 		m_base->AddReference();
 	}
-
-	m_symbol = s.m_symbol;
-	m_symbol->AddReference();
 }
 
-Sprite::Sprite(Symbol* symbol)
-	: m_symbol(symbol)
+Sprite::Sprite(Symbol* sym)
+	: ee::Sprite(sym)
 	, m_only_draw_bound(false)
 {
-	m_core = new s2::DummySprite(this);
-	if (m_base = symbol->GetMesh()->GetBaseSymbol()) {
+	if (m_base = sym->GetMesh()->GetBaseSymbol()) {
 		m_base->AddReference();
 	}
 
 //	m_speed.set(0, -0.01f);
 
-	m_trans.LoadFromMesh(symbol->GetMesh());
-
-	m_symbol->AddReference();
-	BuildBounding();
+	m_trans.LoadFromMesh(sym->GetMesh());
 }
 
 Sprite::~Sprite()
 {
-	m_core->RemoveReference();
 	if (m_base) {
 		m_base->RemoveReference();
 	}
-	if (m_symbol) {
-		m_symbol->RemoveReference();
-	}
-}
-
-Sprite* Sprite::Clone() const
-{
-	return new Sprite(*this);
-}
-
-const Symbol& Sprite::GetSymbol() const
-{
-	return *m_symbol;
-}
-
-void Sprite::SetSymbol(ee::Symbol* symbol)
-{
-	ee::Sprite::SetSymbol(&m_symbol, symbol);
 }
 
 void Sprite::Load(const Json::Value& val, const std::string& dir)
@@ -87,7 +54,7 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 	
 	const Json::Value& mesh_val = val["mesh"];
 	m_trans.Load(mesh_val);
-	m_trans.StoreToMesh(m_symbol->GetMesh());
+	m_trans.StoreToMesh(dynamic_cast<Symbol*>(m_sym)->GetMesh());
 
 	if (!mesh_val["base_symbol"].isNull()) {
 		m_base->RemoveReference();
@@ -123,6 +90,11 @@ void Sprite::SetTween(Sprite* begin, Sprite* end, float process)
 void Sprite::SetBaseSym(const ee::Symbol* sym) 
 { 
 	cu::RefCountObjAssign(m_base, sym); 
+}
+
+ee::Sprite* Sprite::Create(ee::Symbol* sym) 
+{
+	return new Sprite(static_cast<Symbol*>(sym));
 }
 
 }

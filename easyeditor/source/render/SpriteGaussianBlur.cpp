@@ -4,7 +4,6 @@
 #include "GL.h"
 #include "Sprite.h"
 #include "SpriteRenderer.h"
-#include "BoundingBox.h"
 
 #include <shaderlab.h>
 #include <sprite2/RenderParams.h>

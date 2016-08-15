@@ -1,14 +1,14 @@
 #ifndef _EASYSKETCH_SPRITE_H_
 #define _EASYSKETCH_SPRITE_H_
 
-#include "Symbol.h"
-
 #include <ee/Sprite.h>
+
+#include <ee/DummySprite.h>
 
 namespace esketch
 {
 
-class Sprite : public ee::Sprite
+class Sprite : public s2::DummySprite, public ee::Sprite
 {
 public:
 	Sprite();
@@ -16,17 +16,17 @@ public:
 	Sprite(const Sprite& sprite);
 	virtual ~Sprite();
 
-	//
-	// IObject interface
-	//
-	virtual Sprite* Clone() const;
+	/**
+	 *  @interface
+	 *    s2::Sprite
+	 */
+	virtual bool Update(const s2::RenderParams& params, float dt);
 
-	//
-	// ee::Sprite interface
-	//
-	virtual const Symbol& GetSymbol() const;
-	virtual void SetSymbol(ee::Symbol* symbol);
-	virtual void loadBodyFromFile();
+	/**
+	 *  @interface
+	 *    ee::Sprite
+	 */
+	virtual Sprite* EEClone() const { return new Sprite(*this); }
 
 	const sm::vec3& GetPos3() const { return m_pos3; }
 	void SetPos3(const sm::vec3& pos) { m_pos3 = pos; }
@@ -39,13 +39,9 @@ public:
 		m_ori3 = delta.Rotated(m_ori3);
 	}
 
-	static ee::Sprite* Create(ee::Symbol* symbol) {
-		return new Sprite(static_cast<Symbol*>(symbol));
-	}
+	static ee::Sprite* Create(ee::Symbol* symbol);
 
 private:
-	Symbol* m_symbol;
-
 	sm::vec3 m_pos3;
 	sm::Quaternion m_ori3;
 

@@ -28,8 +28,8 @@ public:
 	}
 	void removeJoint(Joint* joint);
 
-	void traverseBodies(ee::Visitor& visitor) const;
-	void traverseJoints(ee::Visitor& visitor) const;
+	void traverseBodies(ee::Visitor<ee::Sprite>& visitor) const;
+	void traverseJoints(ee::Visitor<ee::Sprite>& visitor) const;
 
 protected:
 	//
@@ -46,11 +46,11 @@ private:
 	void Clear();
 
 private:
-	class PointQueryVisitor : public ee::Visitor
+	class PointQueryVisitor : public ee::Visitor<ee::Sprite>
 	{
 	public:
 		PointQueryVisitor(const sm::vec2& pos, ee::Sprite** pResult);
-		virtual void Visit(ee::Object* object, bool& next);
+		virtual void Visit(ee::Sprite* spr, bool& next);
 
 	private:
 		const sm::vec2& m_pos;
@@ -58,11 +58,11 @@ private:
 
 	}; // PointQueryVisitor
 
-	class RectQueryVisitor : public ee::Visitor
+	class RectQueryVisitor : public ee::Visitor<ee::Sprite>
 	{
 	public:
 		RectQueryVisitor(const sm::rect& rect, std::vector<ee::Sprite*>& result);
-		virtual void Visit(ee::Object* object, bool& next);
+		virtual void Visit(ee::Sprite* spr, bool& next);
 
 	private:
 		const sm::rect& m_rect;

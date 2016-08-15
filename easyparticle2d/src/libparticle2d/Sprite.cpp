@@ -1,35 +1,25 @@
 #include "Sprite.h"
+#include "Symbol.h"
 #include "PSNode.h"
 #include "ParticleSystem.h"
 #include "PropertySetting.h"
 
 #include <ee/Sprite.h>
-#include <ee/SpriteFactory.h>
 
 #include <ps_2d.h>
-#include <sprite2/Particle2dSprite.h>
 
 namespace eparticle2d
 {
 
 Sprite::Sprite()
-	: m_symbol(NULL)
-	, m_ps(NULL)
+	: m_ps(NULL)
 {
-	m_core = new s2::Particle2dSprite(this);
 }
 
 Sprite::Sprite(const Sprite& sprite)
 	: ee::Sprite(sprite)
-	, m_symbol(sprite.m_symbol)
 	, m_ps(NULL)
 {
-	m_core = new s2::Particle2dSprite(*static_cast<s2::Particle2dSprite*>(sprite.m_core), this);
-
-	if (m_symbol) {
-		m_symbol->AddReference();
-	}
-
 	if (sprite.m_ps) {
 		p2d_emitter_cfg* cfg = (p2d_emitter_cfg*)(sprite.m_ps->GetConfig());
 		m_ps = new ParticleSystem(cfg);
@@ -38,16 +28,9 @@ Sprite::Sprite(const Sprite& sprite)
 }
 
 Sprite::Sprite(Symbol* symbol)
-	: m_symbol(symbol)
+	: ee::Sprite(symbol)
 	, m_ps(NULL)
 {
-	m_core = new s2::Particle2dSprite(this);
-
-	if (m_symbol) {
-		m_symbol->AddReference();
-	}
-	BuildBounding();
-
 	if (const p2d_emitter_cfg* cfg = symbol->GetEmitterCfg()) {
 		m_ps = new ParticleSystem(const_cast<p2d_emitter_cfg*>(cfg));
 		m_ps->Start();
@@ -56,36 +39,13 @@ Sprite::Sprite(Symbol* symbol)
 
 Sprite::~Sprite()
 {
-	m_core->RemoveReference();
-
-	if (m_symbol) {
-		m_symbol->RemoveReference();
-	}
-
 	delete m_ps;
-}
-
-Sprite* Sprite::Clone() const
-{
-	Sprite* sprite = new Sprite(*this);
-	ee::SpriteFactory::Instance()->Insert(sprite);
-	return sprite;
 }
 
 bool Sprite::Update(const s2::RenderParams& params, float dt)
 {
 	PSNode::Instance()->UpdateTime();
 	return m_ps->Update(m_mat);
-}
-
-const Symbol& Sprite::GetSymbol() const
-{
-	return *m_symbol;
-}
-
-void Sprite::SetSymbol(ee::Symbol* symbol)
-{
-	ee::Sprite::SetSymbol(&m_symbol, symbol);
 }
 
 void Sprite::Load(const Json::Value& val, const std::string& dir)
@@ -137,6 +97,11 @@ bool Sprite::GetLocalModeDraw() const
 void Sprite::SetLocalModeDraw(bool local)
 {
 	m_ps->SetLocalModeDraw(local);
+}
+
+ee::Sprite* Sprite::Create(ee::Symbol* symbol) 
+{
+	return new Sprite(static_cast<Symbol*>(symbol));
 }
 
 }

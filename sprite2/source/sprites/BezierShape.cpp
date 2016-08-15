@@ -7,6 +7,12 @@
 namespace s2
 {
 
+BezierShape::BezierShape(const BezierShape& bezier)
+{
+	memcpy(m_control_nodes, bezier.m_control_nodes, sizeof(m_control_nodes));
+	UpdatePolyline();
+}
+
 BezierShape::BezierShape(const sm::vec2& start, const sm::vec2& end)
 {
 	m_control_nodes[0] = start;
@@ -42,7 +48,7 @@ void BezierShape::Draw(const sm::mat4& mt, const RenderColor& color) const
 	PolylineShape::Draw(mt, color);
 	for (int i = 0; i < CTRL_NODE_COUNT; ++i) {
 		sm::vec2 pos = mt * m_control_nodes[i];
-		RVG::Rect(pos, SHAPE_NODE_RADIUS, SHAPE_NODE_RADIUS, false);
+		s2::RVG::Rect(pos, SHAPE_NODE_RADIUS, SHAPE_NODE_RADIUS, false);
 	}
 }
 

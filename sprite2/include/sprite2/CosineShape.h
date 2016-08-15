@@ -10,6 +10,7 @@ class CosineShape : public PolylineShape
 {
 public:
 	CosineShape();
+	CosineShape(const CosineShape& cosine);
 	CosineShape(const std::vector<sm::vec2>& vertices);
 
 	/**

@@ -25,7 +25,7 @@ public:
 	//
 	// ee::MultiSpritesImpl interface
 	//
-	virtual void TraverseSprites(ee::Visitor& visitor, 
+	virtual void TraverseSprites(ee::Visitor<ee::Sprite>& visitor, 
 		ee::DataTraverseType type = ee::DT_ALL,
 		bool order = true) const;
 
@@ -57,12 +57,12 @@ public:
 	};
 
 private:
-	class CheckUpdateVisitor : public ee::Visitor
+	class CheckUpdateVisitor : public ee::Visitor<ee::Sprite>
 	{
 	public:
 		CheckUpdateVisitor(float dt);
 
-		virtual void Visit(ee::Object* object, bool& next);
+		virtual void Visit(ee::Sprite* spr, bool& next);
 
 		bool NeedUpdate() const { return m_update; }
 

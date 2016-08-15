@@ -4,7 +4,7 @@
 #include <ee/EditPanel.h>
 #include <ee/MultiShapesImpl.h>
 #include <ee/CombinedDropTarget.h>
-
+ 
 namespace ee { class LibraryPanel; class Sprite; class MultiSpritesImpl; class Symbol; }
 
 class wxGLContext;
@@ -30,7 +30,7 @@ public:
 	//
 	// ee::MultiShapesImpl interface
 	//
-	virtual void TraverseShapes(ee::Visitor& visitor, 
+	virtual void TraverseShapes(ee::Visitor<ee::Shape>& visitor, 
 		ee::DataTraverseType type = ee::DT_ALL) const;
 
 	void LoadFromFile(const char* filename);

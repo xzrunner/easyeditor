@@ -22,7 +22,7 @@ ShapeBuilder::~ShapeBuilder()
 	}
 }
 
-void ShapeBuilder::Traverse(ee::Visitor& visitor) const
+void ShapeBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 {
 	std::map<const etexture::Symbol*, const PackShape*>::const_iterator 
 		itr = m_map_data.begin();

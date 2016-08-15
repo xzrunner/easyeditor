@@ -8,29 +8,25 @@
 namespace eanim3d
 {
 
-class Symbol : public ee::Symbol
+class Symbol : public ee::Symbol, public s2::DummySymbol
 {
 public:
 	Symbol();
 	virtual ~Symbol();
 
-	//
-	// Cloneable interface
-	//
-	virtual Symbol* Clone() const { return NULL; }
-
-	//
-	// Symbol interfaces
-	//
-	virtual void Draw(const s2::RenderParams& params, const ee::Sprite* spr = NULL) const;
-	virtual sm::rect GetSize(const ee::Sprite* sprite = NULL) const;
-
-	static ee::Symbol* Create() { return new Symbol(); }
+	/**
+	 *  @interface
+	 *    s2::Symbol
+	 */
+	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
+	virtual sm::rect GetBounding(const s2::Sprite* sprite = NULL) const;
 
 	void SetModel(e3d::IModel* model);
 
 	void SetAABB(const e3d::AABB& aabb) { m_aabb = aabb; }
 	const e3d::AABB& GetAABB() const { return m_aabb; }
+
+	static ee::Symbol* Create() { return new Symbol(); }
 
 protected:
 	virtual void LoadResources();

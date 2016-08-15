@@ -3,28 +3,26 @@
 
 #include <ee/Symbol.h>
 
+#include <sprite2/DummySymbol.h>
+
 namespace eshadow
 {
 
 class Shadow;
 
-class Symbol : public ee::Symbol
+class Symbol : public ee::Symbol, public s2::DummySymbol
 {
 public:
 	Symbol();
 	Symbol(const Symbol& s);
 	virtual ~Symbol();
 
-	//
-	// Cloneable interface
-	//
-	virtual Symbol* Clone() const;
-
-	//
-	// Symbol interfaces
-	//
-	virtual void Draw(const s2::RenderParams& params, const ee::Sprite* spr = NULL) const;
-	virtual sm::rect GetSize(const ee::Sprite* sprite = NULL) const;
+	/**
+	 *  @interface
+	 *    s2::Symbol
+	 */
+	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
+	virtual sm::rect GetBounding(const s2::Sprite* sprite = NULL) const;
 
 	Shadow* GetShadow() { return m_shadow; }
 	const Shadow* GetShadow() const { return m_shadow; }

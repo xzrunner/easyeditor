@@ -328,7 +328,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\include\sprite2\Bounding.h"
+					RelativePath="..\..\..\include\sprite2\BoundingBox.h"
 					>
 				</File>
 				<File

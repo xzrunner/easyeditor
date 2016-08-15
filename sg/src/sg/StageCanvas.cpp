@@ -6,7 +6,6 @@
 #include "tools.h"
 
 #include <ee/SpriteFactory.h>
-#include <ee/BoundingBox.h>
 #include <ee/Math2D.h>
 #include <ee/SpriteRenderer.h>
 #include <ee/color_config.h>
@@ -166,16 +165,16 @@ void StageCanvas::DrawSprites() const
 			{
 				if (info->wall_type == 0) {
 					sm::vec2 pos = sprite->GetPosition() + sm::vec2(0, 4);
-					ee::SpriteRenderer::Draw(&sprite->GetSymbol(), sm::mat4(), pos);
+					ee::SpriteRenderer::Draw(sprite->GetSymbol(), sm::mat4(), pos);
 				} else if (info->wall_type == 1) {
 					sm::vec2 pos = sprite->GetPosition() + sm::vec2(-10, 8);
-					ee::SpriteRenderer::Draw(&sprite->GetSymbol(), sm::mat4(), pos);
+					ee::SpriteRenderer::Draw(sprite->GetSymbol(), sm::mat4(), pos);
 				} else if (info->wall_type == 2) {
 					sm::vec2 pos = sprite->GetPosition() + sm::vec2(10, 8);
-					ee::SpriteRenderer::Draw(&sprite->GetSymbol(), sm::mat4(), pos);
+					ee::SpriteRenderer::Draw(sprite->GetSymbol(), sm::mat4(), pos);
 				} else if (info->wall_type == 3) {
 					sm::vec2 pos = sprite->GetPosition() + sm::vec2(0, 6);
-					ee::SpriteRenderer::Draw(&sprite->GetSymbol(), sm::mat4(), pos);
+					ee::SpriteRenderer::Draw(sprite->GetSymbol(), sm::mat4(), pos);
 				}
 			}
 		} else {

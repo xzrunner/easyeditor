@@ -1,6 +1,5 @@
 #include "MultiSpritesImpl.h"
 #include "SpriteSelection.h"
-#include "BoundingBox.h"
 #include "Visitor.h"
 #include "subject_id.h"
 #include "sprite_msg.h"

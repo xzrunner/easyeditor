@@ -19,7 +19,7 @@ CheckerBoard::CheckerBoard(StagePanel* stage)
 	Clear();
 }
 
-void CheckerBoard::Traverse(ee::Visitor& visitor) const
+void CheckerBoard::Traverse(ee::Visitor<ee::Sprite>& visitor) const
 {
 	bool next;
 	std::map<ee::Sprite*, sm::vec2>::const_iterator itr 

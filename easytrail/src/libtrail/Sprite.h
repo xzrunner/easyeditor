@@ -1,15 +1,18 @@
 #ifndef _EASYTRAIL_SPRITE_H_
 #define _EASYTRAIL_SPRITE_H_
 
-#include "Symbol.h"
 #include "TrailNode.h"
 
 #include <ee/Sprite.h>
 
+#include <sprite2/DummySprite.h>
+
 namespace etrail
 {
 
-class Sprite : public ee::Sprite
+class Symbol;
+
+class Sprite : public s2::DummySprite, public ee::Sprite
 {
 public:
 	Sprite();
@@ -17,26 +20,21 @@ public:
 	Sprite(Symbol* symbol);
 	virtual ~Sprite();
 
-	//
-	// Cloneable interface
-	//
-	virtual Sprite* Clone() const;
-
-	//
-	// Sprite interface
-	//
+	/**
+	 *  @interface
+	 *    s2::Sprite
+	 */
 	virtual bool Update(const s2::RenderParams& params, float dt);
-	virtual const Symbol& GetSymbol() const;
-	virtual void SetSymbol(ee::Symbol* symbol);
+
+	/**
+	 *  @interface
+	 *    ee::Sprite
+	 */
+	virtual Sprite* EEClone() const { return new Sprite(*this); }
 
 	void Draw(const s2::RenderParams& params) const;
 
-	static ee::Sprite* Create(ee::Symbol* symbol) {
-		return new Sprite(static_cast<Symbol*>(symbol));
-	}
-
-protected:
-	Symbol* m_symbol;
+	static ee::Sprite* Create(ee::Symbol* symbol);
 
 private:
 	t2d_emitter* m_et;

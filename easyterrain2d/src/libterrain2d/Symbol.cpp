@@ -32,12 +32,12 @@ Symbol::~Symbol()
 	Clear();
 }
 
-void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
+void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	s2::RenderParams p = params;
 	if (spr) {
-		p.mt = spr->GetTransMatrix() * params.mt;
-		p.color = spr->GetColor() * params.color;
+		p.mt = dynamic_cast<const ee::Sprite*>(spr)->GetTransMatrix() * params.mt;
+		p.color = spr->Color() * params.color;
 	}
 
 	clock_t curr = clock();
@@ -63,6 +63,15 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 	m_time = curr;
 }
 
+sm::rect Symbol::GetBounding(const s2::Sprite* sprite) const
+{
+	sm::rect ret;
+	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
+		ret.Combine(m_oceans[i]->GetRegion());
+	}
+	return ret; 
+}
+
 void Symbol::ReloadTexture() const
 {
 	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
@@ -76,15 +85,6 @@ void Symbol::ReloadTexture() const
 			img1->ReloadTexture();
 		}
 	}	
-}
-
-sm::rect Symbol::GetSize(const ee::Sprite* sprite) const
-{
-	sm::rect ret;
-	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
-		ret.Combine(m_oceans[i]->GetRegion());
-	}
-	return ret; 
 }
 
 void Symbol::LoadResources()
@@ -122,7 +122,7 @@ void Symbol::LoadResources()
 
 void Symbol::Clear()
 {
-	for_each(m_oceans.begin(), m_oceans.end(), ee::cu::RemoveRefFonctor<OceanMesh>());
+	for_each(m_oceans.begin(), m_oceans.end(), cu::RemoveRefFonctor<OceanMesh>());
 	m_oceans.clear();
 }
 

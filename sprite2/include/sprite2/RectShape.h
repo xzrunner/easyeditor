@@ -10,6 +10,7 @@ class RectShape : public VIRTUAL_INHERITANCE Shape
 {
 public:
 	RectShape() {}
+	RectShape(const RectShape& rect);
 	RectShape(const sm::rect& r);
 	
 	/**

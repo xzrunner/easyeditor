@@ -3,6 +3,8 @@
 
 #include "SpriteObserver.h"
 
+#include <CU_RefCountObj.h>
+
 namespace ee { class AtomicOP; }
 
 namespace eanim
@@ -10,7 +12,7 @@ namespace eanim
 
 class KeyFrame;
 
-class Layer : public ee::Object
+class Layer : public cu::RefCountObj
 {
 public:
 	Layer();

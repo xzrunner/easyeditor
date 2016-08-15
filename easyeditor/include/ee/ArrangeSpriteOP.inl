@@ -5,7 +5,6 @@
 #include "ArrangeSpriteImpl.h"
 #include "Sprite.h"
 #include "Symbol.h"
-#include "BoundingBox.h"
 #include "Math.h"
 #include "EditPanelImpl.h"
 #include "MultiSpritesImpl.h"

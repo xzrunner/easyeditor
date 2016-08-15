@@ -1,41 +1,35 @@
 #ifndef _EASYTERRAIN2D_SPRITE_H_
 #define _EASYTERRAIN2D_SPRITE_H_
 
-#include "Symbol.h"
-
 #include <ee/Sprite.h>
+
+#include <sprite2/DummySprite.h>
 
 namespace eterrain2d
 {
 
-class Sprite : public ee::Sprite
+class Symbol;
+
+class Sprite : public s2::DummySprite, public ee::Sprite
 {
 public:
-	Sprite();
-	Sprite(const Sprite& s);
 	Sprite(Symbol* symbol);
-	virtual ~Sprite();
 
-	//
-	// IObject interface
-	//
-	virtual Sprite* Clone() const;
+	/**
+	 *  @interface
+	 *    s2::Sprite
+	 */
+	virtual bool Update(const s2::RenderParams& params, float dt);
 
-	//
-	// Sprite interface
-	//
-	virtual bool Update(const s2::RenderParams& params, float dt) { return true; }
-	virtual const Symbol& GetSymbol() const;
-	virtual void SetSymbol(ee::Symbol* symbol);
+	/**
+	 *  @interface
+	 *    ee::Sprite
+	 */
+	virtual Sprite* EEClone() const { return new Sprite(*this); }
 
 	virtual void Load(const Json::Value& val, const std::string& dir = "");
 
-	static ee::Sprite* Create(ee::Symbol* symbol) {
-		return new Sprite(static_cast<Symbol*>(symbol));
-	}
-
-private:
-	Symbol* m_symbol;
+	static ee::Sprite* Create(ee::Symbol* symbol);
 
 }; // Sprite
 

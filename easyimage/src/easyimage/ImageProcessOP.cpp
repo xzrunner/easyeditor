@@ -23,7 +23,7 @@ bool ImageProcessOP::OnActive()
 
 	if (const ee::Sprite* sprite = m_stage->GetImage())
 	{
-		sm::rect r = sprite->GetSymbol().GetSize();
+		sm::rect r = sprite->GetSymbol().GetBounding();
 
 //		ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
 //		LanczosResamplingShader* shader = new LanczosResamplingShader;

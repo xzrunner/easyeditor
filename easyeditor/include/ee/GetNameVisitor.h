@@ -13,11 +13,10 @@ public:
 	GetNameVisitor(std::vector<std::string>& names)
 		: m_names(names) {}
 
-	virtual void Visit(Object* object, bool& next)
+	virtual void Visit(T* obj, bool& next)
 	{
-		T* item = dynamic_cast<T*>(object);
-		if (item)
-			m_names.push_back(item->getName());
+		if (obj)
+			m_names.push_back(obj->getName());
 		next = true;
 	}
 

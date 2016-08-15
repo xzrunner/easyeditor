@@ -16,12 +16,11 @@ ShapeLayer::ShapeLayer(int id, LibraryPanel* library)
 {
 }
 
-bool ShapeLayer::InsertSprite(Object* obj)
+bool ShapeLayer::InsertSprite(ee::Sprite* spr)
 {
-	ee::Sprite* spr = static_cast<ee::Sprite*>(obj);
 	etexture::Sprite* tex = dynamic_cast<etexture::Sprite*>(spr);
 	if (!tex) {
-		return Layer::InsertSprite(obj, -1);
+		return Layer::InsertSprite(spr, -1);
 	}
 
 	std::vector<ee::Shape*> shapes;

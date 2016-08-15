@@ -8,16 +8,19 @@
 namespace eshape
 {
 
-class ChainShape : public PolylineShape, private s2::PolylineShape
+class ChainShape : public PolylineShape, public s2::PolylineShape
 {
 public:
 	ChainShape();
+	ChainShape(const ChainShape& chain) : m_draw_dir(chain.m_draw_dir) {}
 	ChainShape(const std::vector<sm::vec2>& vertices, bool closed);
 
 	/**
 	 *  @interface
 	 *    s2::Shape
 	 */
+	virtual bool IsContain(const sm::vec2& pos) const { return s2::PolylineShape::IsContain(pos); }
+	virtual bool IsIntersect(const sm::rect& rect) const { return s2::PolylineShape::IsIntersect(rect); }
 	virtual void Draw(const sm::mat4& mt, 
 		const s2::RenderColor& color = s2::RenderColor()) const;
 
@@ -44,6 +47,9 @@ public:
 	virtual bool IsClosed() const { return m_closed; }
 
 	void SetClosed(bool Close) { m_closed = Close; }
+
+protected:
+	virtual void UpdateBounding() { s2::PolylineShape::UpdateBounding(); }
 
 private:
 	bool m_draw_dir;

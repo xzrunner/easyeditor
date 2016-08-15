@@ -1,6 +1,5 @@
 #include "DrawSelectedSpriteVisitor.h"
 #include "Sprite.h"
-#include "BoundingBox.h"
 #include "Config.h"
 #include "SettingData.h"
 #include "ImageSprite.h"
@@ -19,11 +18,10 @@ DrawSelectedSpriteVisitor::DrawSelectedSpriteVisitor(const s2::Color& color)
 	: m_color(color)
 {}
 
-void DrawSelectedSpriteVisitor::Visit(Object* object, bool& next) 
+void DrawSelectedSpriteVisitor::Visit(Sprite* spr, bool& next) 
 {
 	std::vector<sm::vec2> bound;
-	Sprite* sprite = static_cast<Sprite*>(object);
-	sprite->GetBounding()->GetBoundPos(bound);
+	spr->GetBounding()->GetBoundPos(bound);
 
 	s2::RVG::SetColor(m_color);
 	s2::RVG::Polyline(bound, true);
@@ -31,7 +29,7 @@ void DrawSelectedSpriteVisitor::Visit(Object* object, bool& next)
 	// todo: bad
 	if (Config::Instance()->GetSettings().visible_image_edge)
 	{
-		if (ImageSprite* s = dynamic_cast<ImageSprite*>(sprite))
+		if (ImageSprite* s = dynamic_cast<ImageSprite*>(spr))
 		{
 			s2::RVG::SetColor(LIGHT_GREY);
 			s2::RVG::LineWidth(1);

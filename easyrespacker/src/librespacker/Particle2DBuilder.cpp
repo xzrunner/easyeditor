@@ -26,7 +26,7 @@ Particle2DBuilder::~Particle2DBuilder()
 	}
 }
 
-void Particle2DBuilder::Traverse(ee::Visitor& visitor) const
+void Particle2DBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 {
 	std::map<const eparticle2d::Symbol*, const PackParticle2D*>::const_iterator 
 		itr = m_map_data.begin();

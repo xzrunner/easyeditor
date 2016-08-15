@@ -19,21 +19,19 @@ PolygonShape::PolygonShape()
 {
 }
 
+PolygonShape::PolygonShape(const PolygonShape& polygon)
+{
+	if (polygon.m_material) {
+		polygon.m_material->AddReference();
+		m_material = polygon.m_material;
+	}
+}
+
 PolygonShape::PolygonShape(const std::vector<sm::vec2>& vertices)
 	: s2::PolylineShape(vertices, true)
 	, m_material(NULL)
 {
 	SetMaterialColor(ee::LIGHT_GREEN);
-}
-
-PolygonShape::PolygonShape(const PolygonShape& polygon)
-	: s2::PolylineShape(polygon)
-	, m_material(NULL)
-{
-	if (polygon.m_material) {
-		m_material = polygon.m_material;
-		polygon.m_material->AddReference();
-	}
 }
 
 PolygonShape& PolygonShape::operator = (const PolygonShape& polygon)

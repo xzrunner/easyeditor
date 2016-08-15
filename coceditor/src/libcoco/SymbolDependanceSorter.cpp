@@ -62,7 +62,7 @@ void SymbolDependanceSorter::fetch(const std::vector<const ee::Symbol*>& symbols
 					s2::AnimSymbol::Frame* frame = layer->frames[j];
 					for (size_t k = 0, l = frame->sprites.size(); k < l; ++k) {
 						ee::Sprite* spr = static_cast<ee::Sprite*>(frame->sprites[k]->GetUD());
-						buffer.push(&spr->GetSymbol());
+						buffer.push(spr->GetSymbol());
 					}
 				}
 			}
@@ -347,7 +347,7 @@ void SymbolDependanceSorter::sort()
 
 bool SymbolDependanceSorter::IsSymbolPrepared(const ee::Sprite* sprite) const
 {
-	return IsSymbolPrepared(&sprite->GetSymbol());
+	return IsSymbolPrepared(sprite->GetSymbol());
 }
 
 bool SymbolDependanceSorter::IsSymbolPrepared(const ee::Symbol* symbol) const

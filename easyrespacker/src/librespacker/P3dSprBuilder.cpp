@@ -22,7 +22,7 @@ P3dSprBuilder::~P3dSprBuilder()
 	for_each(m_nodes.begin(), m_nodes.end(), ee::DeletePointerFunctor<IPackNode>());	
 }
 
-void P3dSprBuilder::Traverse(ee::Visitor& visitor) const
+void P3dSprBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 {
 	for (int i = 0, n = m_nodes.size(); i < n; ++i) {
 		bool has_next;
@@ -36,7 +36,7 @@ void P3dSprBuilder::Traverse(ee::Visitor& visitor) const
 const IPackNode* P3dSprBuilder::Create(const eparticle3d::Sprite* spr)
 {
 	PackP3dSpr* node = new PackP3dSpr;
-	node->p3d = PackNodeFactory::Instance()->Create(&spr->GetSymbol());
+	node->p3d = PackNodeFactory::Instance()->Create(spr->GetSymbol());
 	node->loop = spr->IsLoop();
 	node->local = spr->IsLocalModeDraw();
 	node->alone = spr->IsAlone();

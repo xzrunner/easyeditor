@@ -20,7 +20,7 @@ public:
 	Particle2DBuilder(ExportNameSet& export_set);
 	virtual ~Particle2DBuilder();
 
-	virtual void Traverse(ee::Visitor& visitor) const;
+	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
 
 	const IPackNode* Create(const eparticle2d::Symbol* symbol);
 

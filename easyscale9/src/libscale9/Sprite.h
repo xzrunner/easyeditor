@@ -1,31 +1,27 @@
 #ifndef _EASYSCALE9_SPRITE_H_
 #define _EASYSCALE9_SPRITE_H_
 
-#include "Symbol.h"
+#include "Scale9Data.h"
 
 #include <ee/Sprite.h>
+
+#include <sprite2/Scale9Sprite.h>
 
 namespace escale9
 {
 
-class Sprite : public ee::Sprite
+class Symbol;
+
+class Sprite : public s2::Scale9Sprite, public ee::Sprite
 {
 public:
-	Sprite();
-	Sprite(const Sprite& sprite);
-	Sprite(Symbol* symbol);
-	virtual ~Sprite();
+	Sprite(Symbol* sym);
 
-	//
-	// IObject interface
-	//
-	virtual Sprite* Clone() const;
-
-	//
-	// ee::Sprite interface
-	//
-	virtual const Symbol& GetSymbol() const;
-	virtual void SetSymbol(ee::Symbol* symbol);
+	/**
+	 *  @interface
+	 *    ee::Sprite
+	 */
+	virtual Sprite* EEClone() const { return new Sprite(*this); }
 
 	virtual void Load(const Json::Value& val, const std::string& dir = "");
 	virtual void Store(Json::Value& val, const std::string& dir = "") const;
@@ -41,13 +37,9 @@ public:
 
 	const Scale9Data& GetScale9Data() const { return m_data; }
 
-	static ee::Sprite* Create(ee::Symbol* symbol) {
-		return new Sprite(static_cast<Symbol*>(symbol));
-	}
+	static ee::Sprite* Create(ee::Symbol* sym);
 	
 private:
-	Symbol* m_symbol;
-
 	Scale9Data m_data;
 
 }; // Sprite

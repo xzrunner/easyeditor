@@ -12,11 +12,10 @@
 namespace ee
 {
 
-void DrawSpritesVisitor::Visit(Object* object, bool& next)
+void DrawSpritesVisitor::Visit(Sprite* spr, bool& next)
 {
 	next = true;
 
-	Sprite* spr = static_cast<Sprite*>(object);
 	if (!spr) {
 		return;
 	}

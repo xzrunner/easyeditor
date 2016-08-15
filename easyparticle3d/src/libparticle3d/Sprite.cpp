@@ -1,70 +1,50 @@
 #include "Sprite.h"
+#include "Symbol.h"
 #include "ParticleSystem.h"
 #include "PSNode.h"
 #include "SpritePropertySetting.h"
 
-#include <ee/SpriteFactory.h>
-
 #include <ps_3d.h>
 #include <ps_3d_sprite.h>
 #include <ps_3d_buffer.h>
-#include <sprite2/Particle3dSprite.h>
 #include <sprite2/RenderParams.h>
 
 namespace eparticle3d
 {
 
 Sprite::Sprite()
-	: m_symbol(NULL)
-	, m_spr(NULL)
+	: m_spr(NULL)
 	, m_alone(false)
 	, m_reuse(false)
 	, m_spr_ref(false)
 {
-	m_core = new s2::Particle3dSprite(this);
 }
 
-Sprite::Sprite(const Sprite& sprite)
-	: ee::Sprite(sprite)
-	, m_symbol(sprite.m_symbol)
-	, m_alone(sprite.m_alone)
-	, m_reuse(sprite.m_reuse)
+Sprite::Sprite(const Sprite& spr)
+	: ee::Sprite(spr)
+	, m_alone(spr.m_alone)
+	, m_reuse(spr.m_reuse)
 	, m_spr_ref(true)
 {
-	m_core = new s2::Particle3dSprite(*static_cast<s2::Particle3dSprite*>(sprite.m_core), this);
-
-	m_symbol->AddReference();
-
 //	CreatePS();
 
-	m_spr = sprite.m_spr;
+	m_spr = spr.m_spr;
 
 	if (m_alone) {
 		p3d_buffer_insert(m_spr);
 	}
 }
 
-Sprite::Sprite(Symbol* symbol)
-	: m_symbol(symbol)
+Sprite::Sprite(Symbol* sym)
+	: ee::Sprite(sym)
 	, m_alone(false)
 	, m_reuse(false)
 {
-	m_core = new s2::Particle3dSprite(this);
-
-	m_symbol->AddReference();
-	BuildBounding();
-
 	CreatePS();
 }
 
 Sprite::~Sprite()
 {
-	m_core->RemoveReference();
-
-	if (m_symbol) {
-		m_symbol->RemoveReference();
-	}
-
 	if (!m_spr_ref && m_spr) 
 	{
 		if (!m_alone) {
@@ -76,13 +56,6 @@ Sprite::~Sprite()
 			}
 		}
 	}
-}
-
-Sprite* Sprite::Clone() const
-{
-	Sprite* sprite = new Sprite(*this);
-	ee::SpriteFactory::Instance()->Insert(sprite);
-	return sprite;
 }
 
 bool Sprite::Update(const s2::RenderParams& params, float dt)
@@ -119,16 +92,6 @@ bool Sprite::Update(const s2::RenderParams& params, float dt)
 	}
 }
 
-const Symbol& Sprite::GetSymbol() const
-{
-	return *m_symbol;
-}
-
-void Sprite::SetSymbol(ee::Symbol* symbol)
-{
-	ee::Sprite::SetSymbol(&m_symbol, symbol);
-}
-
 void Sprite::Load(const Json::Value& val, const std::string& dir)
 {
 	ee::Sprite::Load(val);
@@ -158,10 +121,11 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 		p3d_buffer_insert(m_spr);
 	}
 	if (m_spr) {
+		Symbol* sym = dynamic_cast<Symbol*>(m_sym);
 		if (m_reuse) {
-			m_spr->et = m_symbol->GetEmitter();
+			m_spr->et = sym->GetEmitter();
 		} else {
-			m_spr->et = p3d_emitter_create(m_symbol->GetEmitterCfg());
+			m_spr->et = p3d_emitter_create(sym->GetEmitterCfg());
 		}
 		p3d_emitter_start(m_spr->et);
 		m_spr->ptr_self = &m_spr;
@@ -310,7 +274,7 @@ void Sprite::SetReuse(bool reuse)
 		m_spr->et = p3d_emitter_create(m_spr->et->cfg);
 	} else {
 		p3d_emitter_release(m_spr->et);
-		m_spr->et = m_symbol->GetEmitter();
+		m_spr->et = dynamic_cast<Symbol*>(m_sym)->GetEmitter();
 	}
 	p3d_emitter_start(m_spr->et);
 
@@ -329,17 +293,23 @@ void Sprite::OnActive()
 	}
 }
 
+ee::Sprite* Sprite::Create(ee::Symbol* sym) 
+{
+	return new Sprite(static_cast<Symbol*>(sym));
+}
+
 void Sprite::CreatePS()
 {
-	const p3d_emitter_cfg* cfg = m_symbol->GetEmitterCfg();
+	Symbol* sym = dynamic_cast<Symbol*>(m_sym);
+	const p3d_emitter_cfg* cfg = sym->GetEmitterCfg();
 	if (!cfg) {
 		return;
 	}
 
 	m_spr = p3d_sprite_create();
-	m_spr->local_mode_draw = m_symbol->IsLocal();
+	m_spr->local_mode_draw = sym->IsLocal();
 	m_spr->et = p3d_emitter_create(cfg);
-	m_spr->et->loop = m_symbol->IsLoop();
+	m_spr->et->loop = sym->IsLoop();
 	p3d_emitter_start(m_spr->et);
 	m_spr->ptr_self = &m_spr;
 }

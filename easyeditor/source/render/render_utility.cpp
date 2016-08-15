@@ -1,6 +1,5 @@
 #include "render_utility.h"
 #include "Snapshoot.h"
-#include "BoundingBox.h"
 #include "Image.h"
 #include "ImageSprite.h"
 

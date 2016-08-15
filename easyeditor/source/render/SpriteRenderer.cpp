@@ -3,7 +3,6 @@
 #include "Sprite.h"
 #include "Symbol.h"
 #include "Math2D.h"
-#include "BoundingBox.h"
 #include "color_config.h"
 #include "CameraMgr.h"
 #include "Camera.h"

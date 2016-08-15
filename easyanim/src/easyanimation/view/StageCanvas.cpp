@@ -32,7 +32,7 @@ StageCanvas::~StageCanvas()
 
 void StageCanvas::SetBackground(ee::Symbol* symbol)
 {
-	ee::obj_assign<ee::Symbol>(m_background, symbol);
+	cu::RefCountObjAssign<ee::Symbol>(m_background, symbol);
 }
 
 void StageCanvas::OnDrawSprites() const

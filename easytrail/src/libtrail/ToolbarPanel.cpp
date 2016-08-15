@@ -98,7 +98,7 @@ void ToolbarPanel::InitTrail()
 	t2d_emitter_cfg* cfg = MTConfigMgr::Instance()->GetDefaultConfig();
 	MotionTrail* mt = new MotionTrail(cfg);
 	//	mt->Start();
-	ee::obj_assign<MotionTrail>(m_stage->m_trail, mt);
+	cu::RefCountObjAssign<MotionTrail>(m_stage->m_trail, mt);
 	for (int i = 0, n = m_sliders.size(); i < n; ++i) {
 		m_sliders[i]->Update();
 	}

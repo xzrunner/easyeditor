@@ -28,24 +28,19 @@ Symbol::~Symbol()
 	}
 }
 
-Symbol* Symbol::Clone() const
-{
-	return new Symbol(*this);
-}
-
-void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
+void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	s2::RenderParams p = params;
 	if (spr) {
-		p.mt = spr->GetTransMatrix() * params.mt;
-		p.color = spr->GetColor() * params.color;
+		p.mt = dynamic_cast<const ee::Sprite*>(spr)->GetTransMatrix() * params.mt;
+		p.color = spr->Color() * params.color;
 	}
 	if (m_shadow) {
 		m_shadow->Draw(p.mt, p.color.mul.a);
 	}
 }
 
-sm::rect Symbol::GetSize(const ee::Sprite* sprite) const
+sm::rect Symbol::GetBounding(const s2::Sprite* sprite) const
 {
 	if (m_shadow) {
 		return m_shadow->GetRegion();

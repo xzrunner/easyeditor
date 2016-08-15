@@ -28,12 +28,12 @@ private:
 	void Rotate(const e3d::Camera& cam, const sm::ivec2& start, const sm::ivec2& end);
 
 private:
-	class Visitor : public ee::Visitor
+	class Visitor : public ee::Visitor<ee::Sprite>
 	{
 	public:
 		Visitor(StagePanel* stage, const e3d::Camera& cam, const sm::ivec2& start, const sm::ivec2& end) 
 			: m_stage(stage), m_cam(cam), m_start(start), m_end(end) {}
-		virtual void Visit(ee::Object* object, bool& next);
+		virtual void Visit(ee::Sprite* spr, bool& next);
 
 	private:
 		StagePanel* m_stage;

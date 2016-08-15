@@ -69,7 +69,7 @@ StagePanel::~StagePanel()
 	}
 }
 
-void StagePanel::TraverseShapes(ee::Visitor& visitor, ee::DataTraverseType type/* = ee::DT_ALL*/) const
+void StagePanel::TraverseShapes(ee::Visitor<ee::Shape>& visitor, ee::DataTraverseType type/* = ee::DT_ALL*/) const
 {
 	if (m_symbol) {
 		m_symbol->Traverse(visitor);

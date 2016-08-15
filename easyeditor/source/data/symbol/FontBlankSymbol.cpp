@@ -31,7 +31,7 @@ FontBlankSymbol::~FontBlankSymbol()
 {
 }
 
-void FontBlankSymbol::Draw(const s2::RenderParams& params, const Sprite* spr) const
+void FontBlankSymbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	s2::RenderParams p = params;
 	if (spr) {

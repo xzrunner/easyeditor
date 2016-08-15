@@ -45,7 +45,7 @@ StagePanel::~StagePanel()
 	}
 }
 
-void StagePanel::TraverseShapes(ee::Visitor& visitor, 
+void StagePanel::TraverseShapes(ee::Visitor<ee::Shape>& visitor, 
 								ee::DataTraverseType type/* = ee::DT_ALL*/) const
 {
 	Mesh* mesh = m_symbol->GetMesh();
@@ -56,7 +56,7 @@ void StagePanel::TraverseShapes(ee::Visitor& visitor,
 
 void StagePanel::SetMeshSymbol(Symbol* symbol)
 {	
-	ee::obj_assign(m_symbol, symbol);
+	cu::RefCountObjAssign(m_symbol, symbol);
 }
 
 const Symbol* StagePanel::GetMeshSymbol() const
@@ -76,8 +76,8 @@ void StagePanel::LoadFromSymbol(const ee::Symbol* symbol)
 void StagePanel::UpdateSymbol()
 {
 	if (Mesh* mesh = m_symbol->GetMesh()) {
-		std::vector<const eshape::ChainShape*> polylines;
-		TraverseShapes(ee::FetchAllVisitor<const eshape::ChainShape>(polylines));
+		std::vector<ee::Shape*> polylines;
+		TraverseShapes(ee::FetchAllVisitor<ee::Shape>(polylines));
 		mesh->Refresh();
 	}
 }

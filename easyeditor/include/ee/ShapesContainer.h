@@ -9,7 +9,7 @@ namespace ee
 
 class Shape;
 
-class ShapesContainer : public DataContainer
+class ShapesContainer : public DataContainer<ee::Shape>
 {
 public:
 	virtual ~ShapesContainer();
@@ -17,14 +17,14 @@ public:
 	//
 	// DataContainer interface
 	//
-	virtual void Traverse(Visitor& visitor, bool order = true) const;
-	virtual void Traverse(Visitor& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
-	virtual bool Remove(Object* obj);
-	virtual bool Insert(Object* obj);
-	virtual bool Insert(Object* obj, int idx);
+	virtual void Traverse(Visitor<ee::Shape>& visitor, bool order = true) const;
+	virtual void Traverse(Visitor<ee::Shape>& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
+	virtual bool Remove(ee::Shape* shape);
+	virtual bool Insert(ee::Shape* shape);
+	virtual bool Insert(ee::Shape* shape, int idx);
 	virtual bool Clear();
-	virtual bool ResetOrder(const Object* obj, bool up);
-	virtual bool ResetOrderMost(const Object* obj, bool up);
+	virtual bool ResetOrder(const ee::Shape* shape, bool up);
+	virtual bool ResetOrderMost(const ee::Shape* shape, bool up);
 
 private:
 	ObjectVector<Shape> m_shapes;

@@ -6,7 +6,6 @@
 #include <ee/Math2D.h>
 #include <ee/RenderContextStack.h>
 #include <ee/GL.h>
-#include <ee/BoundingBox.h>
 #include <ee/ImageSprite.h>
 #include <ee/Image.h>
 #include <ee/EE_DTex.h>
@@ -35,12 +34,12 @@ Symbol::~Symbol()
 	}
 }
 
-void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
+void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	s2::RenderParams p = params;
 	if (spr) {
-		p.mt = spr->GetTransMatrix() * params.mt;
-		p.color = spr->GetColor() * params.color;
+		p.mt = dynamic_cast<const ee::Sprite*>(spr)->GetTransMatrix() * params.mt;
+		p.color = spr->Color() * params.color;
 	}
 	if (m_base && m_mask) {
 		DrawImpl(p);
@@ -53,10 +52,10 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 	}
 }
 
-sm::rect Symbol::GetSize(const ee::Sprite* sprite) const
+sm::rect Symbol::GetBounding(const s2::Sprite* sprite) const
 {
 	if (m_mask) {
-		return m_mask->GetSize();
+		return m_mask->GetBounding();
 	} else {
 		return sm::rect(sm::vec2(0, 0), 100, 100);
 	}
@@ -64,7 +63,7 @@ sm::rect Symbol::GetSize(const ee::Sprite* sprite) const
 
 void Symbol::SetSymbol(const ee::Symbol* sym, bool is_base)
 {
-	ee::obj_assign(is_base ? m_base: m_mask, sym);
+	cu::RefCountObjAssign(is_base ? m_base: m_mask, sym);
 }
 
 void Symbol::LoadResources()
@@ -140,7 +139,7 @@ void Symbol::DrawMaskToFbo1() const
 void Symbol::DrawMashFromFbo(const sm::mat4& mt) const
 {
 	sm::vec2 vertices[4];
-	sm::rect r = m_mask->GetSize();
+	sm::rect r = m_mask->GetBounding();
 	vertices[0] = sm::vec2(r.xmin, r.ymin);
 	vertices[1] = sm::vec2(r.xmin, r.ymax);
 	vertices[2] = sm::vec2(r.xmax, r.ymax);

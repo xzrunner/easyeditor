@@ -7,7 +7,6 @@
 #include <ee/TPNode.h>
 #include <ee/Config.h>
 #include <ee/SpriteRenderer.h>
-#include <ee/BoundingBox.h>
 #include <ee/Math2D.h>
 #include <ee/Visitor.h>
 

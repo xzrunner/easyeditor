@@ -32,11 +32,6 @@ Symbol::Symbol(const Symbol& s)
 	PSNode::Instance();
 }
 
-Symbol* Symbol::Clone() const
-{
-	return new Symbol(*this);
-}
-
 void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	if (!spr) {
@@ -44,9 +39,9 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 	}
 
 	s2::RenderParams p = params;
-	p.color = spr->GetColor() * params.color;
+	p.color = spr->Color() * params.color;
 
-	Sprite* p3d_spr = const_cast<Sprite*>(static_cast<const Sprite*>(spr));
+	Sprite* p3d_spr = const_cast<Sprite*>(dynamic_cast<const Sprite*>(spr));
 	p3d_spr->SetOuterMatrix(p.mt);
 	if (p3d_spr->IsAlone()) {
 		p3d_sprite* p3d = p3d_spr->GetP3D();
@@ -56,7 +51,7 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 		RenderParams* rp = static_cast<RenderParams*>(p3d->draw_params);
 		rp->mat = p.mt;
 		rp->ct = p.color;
-		sm::mat4 mt = spr->GetTransMatrix() * p.mt;
+		sm::mat4 mt = p3d_spr->GetTransMatrix() * p.mt;
 		p3d->mat[0] = mt.x[0];
 		p3d->mat[1] = mt.x[1];
 		p3d->mat[2] = mt.x[4];
@@ -72,7 +67,7 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 	shader->SetColorMap(p.color.rmap.ToABGR(), p.color.gmap.ToABGR(), p.color.bmap.ToABGR());
 
 	if (p3d_spr->IsLocalModeDraw()) {
-		p.mt = spr->GetTransMatrix() * p.mt;
+		p.mt = p3d_spr->GetTransMatrix() * p.mt;
 	}
 	p3d_spr->Draw(p);
 }

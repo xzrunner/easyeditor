@@ -25,7 +25,7 @@ Scale9Builder::~Scale9Builder()
 	}
 }
 
-void Scale9Builder::Traverse(ee::Visitor& visitor) const
+void Scale9Builder::Traverse(ee::Visitor<IPackNode>& visitor) const
 {
 	std::multimap<const escale9::Symbol*, Value>::const_iterator 
 		itr = m_map_data.begin();
@@ -53,7 +53,7 @@ const IPackNode* Scale9Builder::Create(const escale9::Sprite* spr)
 	val.w = w;
 	val.h = h;
 	val.node = node;
-	m_map_data.insert(std::make_pair(&spr->GetSymbol(), val));
+	m_map_data.insert(std::make_pair(spr->GetSymbol(), val));
 	return node;
 }
 
@@ -62,7 +62,7 @@ const IPackNode* Scale9Builder::Query(const escale9::Sprite* spr) const
 	float w, h;
 	spr->GetSize(w, h);
 
-	const escale9::Symbol* key = &spr->GetSymbol();
+	const escale9::Symbol* key = spr->GetSymbol();
 	std::multimap<const escale9::Symbol*, Value>::const_iterator 
 		itr_s = m_map_data.lower_bound(key),
 		itr_e = m_map_data.upper_bound(key),

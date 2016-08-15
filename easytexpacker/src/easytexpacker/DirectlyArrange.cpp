@@ -18,8 +18,8 @@ void DirectlyArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites)
 	for (size_t i = 0, n = sorted.size(); i < n; ++i)
 	{
 		ee::ImageSprite* sprite = sorted[i];
-		const float width = sprite->GetSymbol().GetSize().Width() * s + p,
-			height = sprite->GetSymbol().GetSize().Height() * s + p;
+		const float width = sprite->GetSymbol().GetBounding().Width() * s + p,
+			height = sprite->GetSymbol().GetBounding().Height() * s + p;
 
 		if (sx + width <= Context::Instance()->width)
 		{

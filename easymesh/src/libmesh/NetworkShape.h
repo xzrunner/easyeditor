@@ -16,7 +16,7 @@ public:
 	//
 	// IObject interface
 	//
-	virtual NetworkShape* Clone() const;
+	virtual NetworkShape* EEClone() const;
 
 	//
 	// Mesh interface

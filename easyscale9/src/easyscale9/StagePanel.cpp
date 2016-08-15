@@ -34,7 +34,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	RegistSubject(ee::ClearSpriteSJ::Instance());
 }
 
-void StagePanel::TraverseSprites(ee::Visitor& visitor, ee::DataTraverseType type/* = ee::e_allExisting*/, 
+void StagePanel::TraverseSprites(ee::Visitor<ee::Sprite>& visitor, ee::DataTraverseType type/* = ee::e_allExisting*/, 
 								 bool order/* = true*/) const
 {
 	for (size_t i = 0; i < 3; ++i) 
@@ -63,7 +63,7 @@ void StagePanel::rebuildPatchSymbol()
 	float width = m_toolbar->getWidth(),
 		  height = m_toolbar->getHeight();
 
-	sm::vec2 sz = m_sprites[1][1]->GetSymbol().GetSize().Size();
+	sm::vec2 sz = m_sprites[1][1]->GetSymbol().GetBounding().Size();
 	if (type == e_3GridHor) {
 		height = sz.y;
 	} else if (type == e_3GridVer) {

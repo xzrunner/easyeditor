@@ -3,12 +3,14 @@
 
 #include "Mesh.h"
 
+#include <CU_RefCountObj.h>
+
 #include <vector>
 
 namespace e3d 
 {
 
-class IModel : public ee::Object
+	class IModel : public cu::RefCountObj
 {
 public:
 	virtual const std::vector<Mesh>& GetAllMeshes() const = 0;

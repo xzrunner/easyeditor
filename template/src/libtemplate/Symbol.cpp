@@ -12,11 +12,11 @@ Symbol::~Symbol()
 {
 }
 
-void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
+void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 }
 
-sm::rect Symbol::GetSize(const ee::Sprite* sprite) const
+sm::rect Symbol::GetBounding(const s2::Sprite* sprite) const
 {
 	return sm::rect(sm::vec2(0, 0), 200, 200);
 }

@@ -101,7 +101,7 @@ void CocoPacker::ResolveSymbols()
 				if (ee::ImageSprite* image = dynamic_cast<ee::ImageSprite*>(sprite))
 				{
 					m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
-					sm::vec2 sz = image->GetSymbol().GetSize().Size();
+					sm::vec2 sz = image->GetSymbol().GetBounding().Size();
 					if (sz.x == 4 && sz.y == 4)
 						ParserPicture(image, e_bothfix);
 					else
@@ -303,7 +303,7 @@ void CocoPacker::ResolveSymbols()
 						}
 					}
 				}
-				for_each(sprites.begin(), sprites.end(), ee::cu::RemoveRefFonctor<ee::Sprite>());
+				for_each(sprites.begin(), sprites.end(), cu::RemoveRefFonctor<ee::Sprite>());
 			}
 
 			m_mapSymbolID.insert(std::make_pair(symbol, m_id++));
@@ -429,7 +429,7 @@ void CocoPacker::ParserPicture(const ee::ImageSprite* sprite, PicFixType tsrc, P
 {
 	tsrc = tscreen = e_null;
 
-	TPParser::Picture* picture = m_parser.FindPicture(&sprite->GetSymbol());
+	TPParser::Picture* picture = m_parser.FindPicture(sprite->GetSymbol());
 	if (!picture) {
 		std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the texpacker file 0!";
 		throw ee::Exception(str);
@@ -722,7 +722,7 @@ int CocoPacker::ParserIcon(const eicon::Sprite* sprite)
 {
 	int id = -1;
 
-	const eicon::Symbol* symbol = &sprite->GetSymbol();
+	const eicon::Symbol* symbol = sprite->GetSymbol();
 	float proc = sprite->GetProcess();
 
 	std::map<const eicon::Symbol*, std::map<float, int> >::iterator itr_symbol
@@ -955,7 +955,7 @@ void CocoPacker::ParserAnimation(const eanim::Symbol* symbol)
 					}
 				}
 			}
-			for_each(sprites.begin(), sprites.end(), ee::cu::RemoveRefFonctor<ee::Sprite>());
+			for_each(sprites.begin(), sprites.end(), cu::RemoveRefFonctor<ee::Sprite>());
 		}
 	}	
  	// children
@@ -971,7 +971,7 @@ void CocoPacker::ParserAnimation(const eanim::Symbol* symbol)
 			eanim::Utility::GetCurrSprites(symbol, i, sprites);
 			for (size_t j = 0, m = sprites.size(); j < m; ++j)
 				ParserSpriteForFrame(sprites[j], order, map_id2idx);
-			for_each(sprites.begin(), sprites.end(), ee::cu::RemoveRefFonctor<ee::Sprite>());
+			for_each(sprites.begin(), sprites.end(), cu::RemoveRefFonctor<ee::Sprite>());
  		}
  	}
 }
@@ -1252,7 +1252,7 @@ int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 	//////////////////////////////////////////////////////////////////////////
 	lua::TableAssign ta(*m_gen, "animation", false, false);
 	// export
-	const ee::Symbol* symbol = &sprite->GetSymbol();
+	const ee::Symbol* symbol = sprite->GetSymbol();
 	if (!symbol->name.empty())
 		m_gen->line(lua::assign("export", "\""+symbol->name+"\"")+",");
  	// id
@@ -1296,7 +1296,7 @@ int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 
 int CocoPacker::ParserTerrain2D(const eterrain2d::Sprite* sprite)
 {
-	const ee::Symbol* symbol = &sprite->GetSymbol();
+	const ee::Symbol* symbol = sprite->GetSymbol();
 	std::map<const ee::Symbol*, int>::iterator itr_mesh_symbol = m_mapSymbolID.find(symbol);
 	if (itr_mesh_symbol == m_mapSymbolID.end()) {
 		std::string str = "\""+symbol->GetFilepath()+"\""+" not in m_mapSymbolID 2!";
@@ -1541,7 +1541,7 @@ int CocoPacker::ParserTexture(const etexture::Sprite* sprite)
 	//////////////////////////////////////////////////////////////////////////
 	lua::TableAssign ta(*m_gen, "animation", false, false);
 	// export
-	const ee::Symbol* symbol = &sprite->GetSymbol();
+	const ee::Symbol* symbol = sprite->GetSymbol();
 	if (!symbol->name.empty())
 		m_gen->line(lua::assign("export", "\""+symbol->name+"\"")+",");
 	// id
@@ -1615,7 +1615,7 @@ void CocoPacker::ParserSpriteForComponent(const ee::Sprite* sprite, std::vector<
 		{
 			// eanim::Symbol's sprites store unique
 
-			std::map<const ee::Symbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->GetSymbol());
+			std::map<const ee::Symbol*, int>::iterator itr = m_mapSymbolID.find(sprite->GetSymbol());
 			if (itr == m_mapSymbolID.end()) {
 				std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in m_mapSymbolID 5!";
 				throw ee::Exception(str);
@@ -1644,7 +1644,7 @@ void CocoPacker::ParserSpriteForComponent(const ee::Sprite* sprite, std::vector<
 	}
 	else
 	{
-		std::map<const ee::Symbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->GetSymbol());
+		std::map<const ee::Symbol*, int>::iterator itr = m_mapSymbolID.find(sprite->GetSymbol());
 		if (itr == m_mapSymbolID.end()) {
  			std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in m_mapSymbolID 6!";
  			throw ee::Exception(str);
@@ -1798,7 +1798,7 @@ void CocoPacker::ParserSpriteForFrame(const ee::Sprite* sprite,
 	} 
 	else 
 	{
-		std::map<const ee::Symbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->GetSymbol());
+		std::map<const ee::Symbol*, int>::iterator itr = m_mapSymbolID.find(sprite->GetSymbol());
 		if (itr == m_mapSymbolID.end()) {
 			std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in m_mapSymbolID 7!";
 			throw ee::Exception(str);
@@ -1932,7 +1932,7 @@ void CocoPacker::TransToMat(const ee::Sprite* sprite, float mat[6], bool force /
 		sm::vec2 center = sprite->GetCenter();
 		if (dynamic_cast<const ee::ImageSprite*>(sprite))
 		{
-			TPParser::Picture* picture = m_parser.FindPicture(&sprite->GetSymbol());
+			TPParser::Picture* picture = m_parser.FindPicture(sprite->GetSymbol());
 			if (!picture) {
 				std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the texpacker file 6!";
 				throw ee::Exception(str);

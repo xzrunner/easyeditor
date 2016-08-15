@@ -73,7 +73,7 @@ bool OpenSymbolProperty::OnButtonClick( wxPropertyGrid* propGrid, wxString& valu
 
 void OpenSymbolProperty::SetListener(OpenSymbolMonitor* lsn) 
 { 
-	obj_assign(m_lsn, lsn);
+	cu::RefCountObjAssign(m_lsn, lsn);
 }
 
 }

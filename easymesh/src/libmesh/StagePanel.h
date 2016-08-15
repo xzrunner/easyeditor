@@ -24,7 +24,7 @@ public:
 	//
 	// ee::MultiShapesImpl interface
 	//
-	virtual void TraverseShapes(ee::Visitor& visitor, 
+	virtual void TraverseShapes(ee::Visitor<ee::Shape>& visitor, 
 		ee::DataTraverseType type = ee::DT_ALL) const;
 
 	void SetMeshSymbol(Symbol* symbol);

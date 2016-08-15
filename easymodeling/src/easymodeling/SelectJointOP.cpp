@@ -271,11 +271,10 @@ bool SelectJointOP::Clear()
 }
 
 void SelectJointOP::DrawSelectedVisitor::
-Visit(ee::Object* object, bool& next) 
+Visit(ee::Sprite* spr, bool& next) 
 {
 	std::vector<sm::vec2> bound;
-	ee::Sprite* sprite = static_cast<ee::Sprite*>(object);
-	Body* body = static_cast<Body*>(sprite->GetUserData());
+	Body* body = static_cast<Body*>(spr->GetUserData());
 	DrawUtils::DrawBody(body, DrawUtils::e_selected);
 	next = true;
 }

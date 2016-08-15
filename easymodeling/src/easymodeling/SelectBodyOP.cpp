@@ -94,7 +94,7 @@ bool SelectBodyOP::Clear()
 //////////////////////////////////////////////////////////////////////////
 
 void SelectBodyOP::DrawSelectedVisitor::
-Visit(ee::Object* object, bool& next) 
+Visit(ee::Sprite* spr, bool& next) 
 {
 	std::vector<sm::vec2> bound;
 	ee::Sprite* sprite = static_cast<ee::Sprite*>(object);

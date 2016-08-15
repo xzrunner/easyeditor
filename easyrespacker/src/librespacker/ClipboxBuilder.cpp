@@ -23,7 +23,7 @@ ClipboxBuilder::~ClipboxBuilder()
 	}
 }
 
-void ClipboxBuilder::Traverse(ee::Visitor& visitor) const
+void ClipboxBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 {
 	std::map<const ecomplex::Symbol*, const PackClipbox*>::const_iterator itr 
 		= m_map_clipbox.begin();

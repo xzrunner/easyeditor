@@ -42,7 +42,7 @@ void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 		}
 
 		Sprite* sprite = SpriteFactory::Instance()->Create(symbol);
-		if (sprite->GetSymbol().GetSize().IsValid()) {
+		if (sprite->GetSymbol().GetBounding().IsValid()) {
 			sprite->Translate(pos);
 			InsertSpriteSJ::Instance()->Insert(sprite);
 		}

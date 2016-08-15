@@ -22,7 +22,7 @@ TextBuilder::~TextBuilder()
 	for_each(m_labels.begin(), m_labels.end(), ee::DeletePointerFunctor<const PackLabel>());
 }
 
-void TextBuilder::Traverse(ee::Visitor& visitor) const
+void TextBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 {
  	for (int i = 0, n = m_labels.size(); i < n; ++i) {
 		bool has_next;

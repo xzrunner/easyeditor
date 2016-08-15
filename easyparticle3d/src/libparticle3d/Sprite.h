@@ -1,35 +1,37 @@
 #ifndef _EASYPARTICLE3D_SPRITE_H_
 #define _EASYPARTICLE3D_SPRITE_H_
 
-#include "Symbol.h"
 #include "PSNode.h"
 
 #include <ee/Sprite.h>
 
 #include <SM_Quaternion.h>
+#include <sprite2/Particle3dSprite.h>
 
 namespace eparticle3d
 {
 
-class Sprite : public ee::Sprite
+class Symbol;
+
+class Sprite : public s2::Particle3dSprite, public ee::Sprite
 {
 public:
 	Sprite();
-	Sprite(const Sprite& sprite);
-	Sprite(Symbol* symbol);
+	Sprite(const Sprite& spr);
+	Sprite(Symbol* sym);
 	virtual ~Sprite();
 
-	//
-	// Cloneable interface
-	//
-	virtual Sprite* Clone() const;
-
-	//
-	// Sprite interface
-	//
+	/**
+	 *  @interface
+	 *    s2::Sprite
+	 */
 	virtual bool Update(const s2::RenderParams& params, float dt);
-	virtual const Symbol& GetSymbol() const;
-	virtual void SetSymbol(ee::Symbol* symbol);
+
+	/**
+	 *  @interface
+	 *    ee::Sprite
+	 */
+	virtual Sprite* EEClone() const { return new Sprite(*this); }
 
 	virtual void Load(const Json::Value& val, const std::string& dir = "");
 	virtual void Store(Json::Value& val, const std::string& dir = "") const;
@@ -61,15 +63,10 @@ public:
 
 	void OnActive();
 
-	static ee::Sprite* Create(ee::Symbol* symbol) {
-		return new Sprite(static_cast<Symbol*>(symbol));
-	}
+	static ee::Sprite* Create(ee::Symbol* sym);
 
 private:
 	void CreatePS();
-
-protected:
-	Symbol* m_symbol;
 
 private:
 	p3d_sprite* m_spr;

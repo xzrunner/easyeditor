@@ -29,7 +29,7 @@ KeyFrame::~KeyFrame()
 
 void KeyFrame::SetLayer(Layer* layer) 
 {
-	ee::obj_assign(m_layer, layer);
+	cu::RefCountObjAssign(m_layer, layer);
 }
 
 

@@ -26,7 +26,7 @@ Particle3DBuilder::~Particle3DBuilder()
 	}
 }
 
-void Particle3DBuilder::Traverse(ee::Visitor& visitor) const
+void Particle3DBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 {
 	std::map<const eparticle3d::Symbol*, const PackParticle3D*>::const_iterator 
 		itr = m_map_data.begin();

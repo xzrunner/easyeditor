@@ -2,13 +2,14 @@
 #define _EASYTEXTURE_SYMBOL_CONTAINER_H_
 
 #include <ee/DataContainer.h>
+#include <ee/Shape.h>
 
 namespace etexture
 {
 
 class Symbol;
 
-class SymbolContainer : public ee::DataContainer
+class SymbolContainer : public ee::DataContainer<ee::Shape>
 {
 public:
 	SymbolContainer(Symbol* symbol);
@@ -17,14 +18,14 @@ public:
 	//
 	// DataContainer interface
 	//
-	virtual void Traverse(ee::Visitor& visitor, bool order = true) const;
-	virtual void Traverse(ee::Visitor& visitor, ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
-	virtual bool Remove(Object* obj);
-	virtual bool Insert(Object* obj);
-	virtual bool Insert(Object* obj, int idx);
+	virtual void Traverse(ee::Visitor<ee::Shape>& visitor, bool order = true) const;
+	virtual void Traverse(ee::Visitor<ee::Shape>& visitor, ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
+	virtual bool Remove(ee::Shape* shape);
+	virtual bool Insert(ee::Shape* shape);
+	virtual bool Insert(ee::Shape* shape, int idx);
 	virtual bool Clear();
-	virtual bool ResetOrder(const Object* obj, bool up);
-	virtual bool ResetOrderMost(const Object* obj, bool up);
+	virtual bool ResetOrder(const ee::Shape* shape, bool up);
+	virtual bool ResetOrderMost(const ee::Shape* shape, bool up);
 
 private:
 	Symbol* m_symbol;

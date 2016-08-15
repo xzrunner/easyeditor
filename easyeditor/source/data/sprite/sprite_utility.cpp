@@ -1,6 +1,5 @@
 #include "sprite_utility.h"
 #include "Sprite.h"
-#include "BoundingBox.h"
 
 #include <float.h>
 

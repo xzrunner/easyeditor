@@ -2,6 +2,9 @@
 #define _EASYEDITOR_LAYER_MGR_H_
 
 #include "DataTraverseType.h"
+#include "Sprite.h"
+#include "Shape.h"
+#include "Visitor.h"
 
 #include <json/json.h>
 
@@ -18,8 +21,8 @@ public:
 	LayerMgr();
 	~LayerMgr();
 
-	void TraverseSprite(Visitor& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
-	void TraverseShape(Visitor& visitor, bool order = true) const;
+	void TraverseSprite(Visitor<ee::Sprite>& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
+	void TraverseShape(Visitor<ee::Shape>& visitor, bool order = true) const;
 
 	const std::vector<Layer*>& GetAllLayers() const { return m_layers; }
 

@@ -51,7 +51,7 @@ void StagePanel::SetImage(ee::Symbol* symbol)
 	sm::vec2 offset = - img_sym->GetImage()->GetOffset();
 
 	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-	offset += sprite->GetSymbol().GetSize().Size() * 0.5f;
+	offset += sprite->GetSymbol().GetBounding().Size() * 0.5f;
 	sprite->Translate(offset);
 	m_image = sprite;
 

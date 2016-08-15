@@ -163,7 +163,7 @@ void FileIO::StoreRefs(Json::Value& val, const Symbol* sym, const std::string& d
 		spr->Store(spr_val);
 		val["ref_spr"][i] = spr_val;
 
-		FileIO::Store(spr->GetSymbol().GetFilepath().c_str(), &spr->GetSymbol());
+		FileIO::Store(spr->GetSymbol().GetFilepath().c_str(), spr->GetSymbol());
 	}
 }
 

@@ -26,7 +26,7 @@ IconBuilder::~IconBuilder()
 	}
 }
 
-void IconBuilder::Traverse(ee::Visitor& visitor) const
+void IconBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 {
 	std::multimap<const eicon::Symbol*, Value>::const_iterator
 		itr = m_map_data.begin();
@@ -52,14 +52,14 @@ const IPackNode* IconBuilder::Create(const eicon::Sprite* spr)
 	Value val;
 	val.proc = spr->GetProcess();
 	val.node = node;
-	m_map_data.insert(std::make_pair(&spr->GetSymbol(), val));
+	m_map_data.insert(std::make_pair(spr->GetSymbol(), val));
 	return node;
 }
 
 const IPackNode* IconBuilder::Query(const eicon::Sprite* spr) const
 {
 	float proc = spr->GetProcess();
-	const eicon::Symbol* key = &spr->GetSymbol();
+	const eicon::Symbol* key = spr->GetSymbol();
 	std::multimap<const eicon::Symbol*, Value>::const_iterator 
 		itr_s = m_map_data.lower_bound(key),
 		itr_e = m_map_data.upper_bound(key),

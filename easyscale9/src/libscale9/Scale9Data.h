@@ -33,7 +33,7 @@ public:
 
 	void ReloadTexture() const;
 
-	void Draw(const s2::RenderParams& params, const ee::Sprite* spr = NULL) const;
+	void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
 
 	void GetSize(float& width, float& height) const;
 

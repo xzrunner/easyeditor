@@ -31,17 +31,12 @@ Symbol::~Symbol()
 	Clear();
 }
 
-Symbol* Symbol::Clone() const
-{
-	return new Symbol(*this);
-}
-
-void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
+void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	s2::RenderParams p = params;
 	if (spr) {
-		p.mt = spr->GetTransMatrix() * params.mt;
-		p.color = spr->GetColor() * params.color;
+		p.mt = dynamic_cast<const ee::Sprite*>(spr)->GetTransMatrix() * params.mt;
+		p.color = spr->Color() * params.color;
 	}
 
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
@@ -54,20 +49,20 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 	}
 }
 
+sm::rect Symbol::GetBounding(const s2::Sprite* sprite) const
+{
+	sm::rect rect;
+	for (size_t i = 0, n = m_shapes.size(); i < n; ++i) {
+		rect.Combine(m_shapes[i]->GetBounding());
+	}
+	return rect;
+}
+
 void Symbol::ReloadTexture() const
 {
 	for (int i = 0, n = m_shapes.size(); i < n; ++i) {
 		m_shapes[i]->ReloadTexture();
 	}
-}
-
-sm::rect Symbol::GetSize(const ee::Sprite* sprite) const
-{
-	sm::rect rect;
-	for (size_t i = 0, n = m_shapes.size(); i < n; ++i) {
-		rect.Combine(m_shapes[i]->GetRect());
-	}
-	return rect;
 }
 
 void Symbol::LoadResources()

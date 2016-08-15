@@ -6,6 +6,7 @@
 #include <ee/UICallback.h>
 
 #include <SM_Matrix.h>
+#include <CU_RefCountObj.h>
 
 struct t2d_emitter_cfg;
 struct t2d_emitter;
@@ -16,7 +17,7 @@ namespace ee { class Symbol; }
 namespace etrail
 {
 
-class MotionTrail : public ee::Object, public ee::UICallback
+class MotionTrail : public cu::RefCountObj, public ee::UICallback
 {
 public:
 	MotionTrail(t2d_emitter_cfg* cfg);

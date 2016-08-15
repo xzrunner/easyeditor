@@ -26,7 +26,7 @@ TrailBuilder::~TrailBuilder()
 	}
 }
 
-void TrailBuilder::Traverse(ee::Visitor& visitor) const
+void TrailBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 {
 	std::map<const etrail::Symbol*, const PackTrail*>::const_iterator 
 		itr = m_map_data.begin();

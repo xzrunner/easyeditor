@@ -77,8 +77,8 @@ void RectBinArrange::BeforePacking(const std::vector<ee::ImageSprite*>& sorted, 
 	for (size_t i = 0, n = sorted.size(); i < n; ++i)
 	{
 		RectSize rect;
-		rect.width = sorted[i]->GetSymbol().GetSize().Width() * s + p;
-		rect.height = sorted[i]->GetSymbol().GetSize().Height() * s + p;
+		rect.width = sorted[i]->GetSymbol().GetBounding().Width() * s + p;
+		rect.height = sorted[i]->GetSymbol().GetBounding().Height() * s + p;
 		input.push_back(rect);
 	}
 }
@@ -97,7 +97,7 @@ void RectBinArrange::AfterPacking(float xoffset,
 		ee::ImageSprite* sprite = sprites[i];
 		if (rect.height != 0)
 		{
-			sm::rect r = sprite->GetSymbol().GetSize();
+			sm::rect r = sprite->GetSymbol().GetBounding();
 			sm::vec2 pos;
 			float angle = 0;
 			if (r.Width() == rect.width && r.Height() == rect.height)

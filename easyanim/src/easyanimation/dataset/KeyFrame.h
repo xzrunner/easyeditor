@@ -3,12 +3,14 @@
 
 #include "SkeletonData.h"
 
+#include <CU_RefCountObj.h>
+
 namespace eanim
 {
 
 class Layer;
 
-class KeyFrame : public ee::Object
+class KeyFrame : public cu::RefCountObj
 {
 public:
 	KeyFrame(int time);

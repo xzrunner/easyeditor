@@ -1,6 +1,8 @@
 #ifndef _EASYEJOY2D_EJSPRITE_H_
 #define _EASYEJOY2D_EJSPRITE_H_
 
+#include <CU_RefCountObj.h>
+
 #include <stdint.h>
 
 struct dtex_package;
@@ -8,7 +10,7 @@ struct dtex_package;
 namespace eejoy2d
 {
 
-class EJSprite : public ee::Object
+	class EJSprite : public cu::RefCountObj
 {
 public:
 	EJSprite(dtex_package* pkg, const char* name);

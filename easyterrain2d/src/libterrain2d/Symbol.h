@@ -3,6 +3,8 @@
 
 #include <ee/Symbol.h>
 
+#include <sprite2/DummySymbol.h>
+
 #include <vector>
 
 #include <time.h>
@@ -12,24 +14,25 @@ namespace eterrain2d
 
 class OceanMesh;
 
-class Symbol : public ee::Symbol
+class Symbol : public ee::Symbol, public s2::DummySymbol
 {
 public:
 	Symbol();
 	Symbol(const Symbol& s);
 	virtual ~Symbol();
 
-	//
-	// Cloneable interface
-	//
-	virtual Symbol* Clone() const { return NULL; }
+	/**
+	 *  @interface
+	 *    s2::Symbol
+	 */
+	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
+	virtual sm::rect GetBounding(const s2::Sprite* sprite = NULL) const;
 
-	//
-	// Symbol interfaces
-	//
-	virtual void Draw(const s2::RenderParams& params, const ee::Sprite* spr = NULL) const;
+	/**
+	 *  @interface
+	 *    ee::Symbol
+	 */
 	virtual void ReloadTexture() const;
-	virtual sm::rect GetSize(const ee::Sprite* sprite = NULL) const;
 
 	std::vector<OceanMesh*>& GetOceans() { return m_oceans; }
 	const std::vector<OceanMesh*>& GetOceans() const { return m_oceans; }

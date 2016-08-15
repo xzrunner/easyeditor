@@ -22,10 +22,10 @@ public:
 	virtual void OnDraw() const;
 
 private:
-	class FixCoordsVisitor : public ee::Visitor
+	class FixCoordsVisitor : public ee::Visitor<ee::Sprite>
 	{
 	public:
-		virtual void Visit(ee::Object* object, bool& next);
+		virtual void Visit(ee::Sprite* spr, bool& next);
 	}; // FixCoordsVisitor
 
 private:

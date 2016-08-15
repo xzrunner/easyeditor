@@ -36,7 +36,7 @@ bool UIList::InsertSprite(ee::Sprite* sprite, int idx)
 		return false;
 	}
 	assert(m_items.size() == m_hori_count * m_vert_count);
-	if (m_item_spr && &sprite->GetSymbol() != &m_item_spr->GetSymbol()) {
+	if (m_item_spr && sprite->GetSymbol() != &m_item_spr->GetSymbol()) {
 		return false;
 	}
 	if (m_hori_count > 1 && m_vert_count > 1) {
@@ -93,13 +93,13 @@ bool UIList::ClearAllSprite()
 		m_item_spr = NULL;
 	}
 
-	for_each(m_items.begin(), m_items.end(), ee::cu::RemoveRefFonctor<ee::Sprite>());
+	for_each(m_items.begin(), m_items.end(), cu::RemoveRefFonctor<ee::Sprite>());
 	m_items.clear();
 
 	return ret;
 }
 
-void UIList::TraverseSprites(ee::Visitor& visitor) const
+void UIList::TraverseSprites(ee::Visitor<ee::Sprite>& visitor) const
 {
 	if (m_reverse_order) {
 		for (int i = m_items.size() - 1; i >= 0; --i) {
@@ -247,7 +247,7 @@ bool UIList::ReFilling()
 		return false;
 	}
 
-	for_each(m_items.begin(), m_items.end(), ee::cu::RemoveRefFonctor<ee::Sprite>());
+	for_each(m_items.begin(), m_items.end(), cu::RemoveRefFonctor<ee::Sprite>());
 	m_items.clear();
 
 	m_items.push_back(m_item_spr->Clone());
@@ -318,7 +318,7 @@ bool UIList::Filling()
 		((m_hori_count == 1 || m_vert_count == 1) &&
 		(m_hori_count > 1 || m_vert_count > 1)));
 
-	for_each(m_items.begin(), m_items.end(), ee::cu::RemoveRefFonctor<ee::Sprite>());
+	for_each(m_items.begin(), m_items.end(), cu::RemoveRefFonctor<ee::Sprite>());
 	m_items.clear();
 
 	sm::vec2 base = m_item_spr->GetPosition();

@@ -42,7 +42,7 @@ void StageCanvas2D::OnMousePressed(const sm::vec2& pos)
 		ee::ShaderMgr::Instance()->SetShader(ee::ShaderMgr::SPRITE);
 
 		sm::vec2 center = sprite->GetCenter();
-		sm::rect r = sprite->GetSymbol().GetSize();
+		sm::rect r = sprite->GetSymbol().GetBounding();
 		float x = (pos.x - center.x) / r.Width() + 0.5f,
 			  y = (pos.y - center.y) / r.Width() + 0.5f;
 		static_cast<Shader2D*>(shader)->SetInputUniform(x, y);

@@ -8,6 +8,13 @@
 namespace s2
 {
 
+PolylineShape::PolylineShape(const PolylineShape& polyline)
+	: m_vertices(polyline.m_vertices)
+	, m_closed(polyline.m_closed)
+{
+	UpdateBounding();
+}
+
 PolylineShape::PolylineShape(const std::vector<sm::vec2>& vertices, bool closed)
 	: m_vertices(vertices)
 	, m_closed(closed)

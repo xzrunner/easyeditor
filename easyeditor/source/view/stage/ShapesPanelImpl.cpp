@@ -18,7 +18,7 @@ ShapesPanelImpl::ShapesPanelImpl()
 	InitSubjects();
 }
 
-ShapesPanelImpl::ShapesPanelImpl(DataContainer* container)
+ShapesPanelImpl::ShapesPanelImpl(DataContainer<Shape>* container)
 	: MultiShapesImpl()
 {
 	m_container = container;
@@ -32,7 +32,7 @@ ShapesPanelImpl::~ShapesPanelImpl()
 	m_container->RemoveReference();
 }
 
-void ShapesPanelImpl::TraverseShapes(Visitor& visitor, DataTraverseType type/* = e_allExisting*/) const
+void ShapesPanelImpl::TraverseShapes(Visitor<ee::Shape>& visitor, DataTraverseType type/* = e_allExisting*/) const
 {
 	m_container->Traverse(visitor, true);
 }

@@ -17,7 +17,7 @@ MaskBuilder::~MaskBuilder()
 	for_each(m_nodes.begin(), m_nodes.end(), ee::DeletePointerFunctor<IPackNode>());
 }
 
-void MaskBuilder::Traverse(ee::Visitor& visitor) const
+void MaskBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 {
 	for (int i = 0, n = m_nodes.size(); i < n; ++i) {
 		bool has_next;

@@ -23,7 +23,7 @@ Terrain2DBuilder::~Terrain2DBuilder()
 	}
 }
 
-void Terrain2DBuilder::Traverse(ee::Visitor& visitor) const
+void Terrain2DBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 {
 	std::map<const eterrain2d::Symbol*, const PackAnimation*>::const_iterator 
 		itr = m_map_data.begin();

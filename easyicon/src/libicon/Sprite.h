@@ -1,48 +1,45 @@
 #ifndef _EASYICON_SPRITE_H_
 #define _EASYICON_SPRITE_H_
 
-#include "Symbol.h"
-
 #include <ee/Sprite.h>
+
+#include <sprite2/IconSprite.h>
 
 namespace eicon
 {
 
-class Sprite : public ee::Sprite
+class Symbol;
+
+class Sprite : public s2::IconSprite, public ee::Sprite
 {
 public:
 	Sprite();
 	Sprite(const Sprite& sprite);
 	Sprite(Symbol* symbol);
-	virtual ~Sprite();
 
-	//
-	// Cloneable interface
-	//
-	virtual Sprite* Clone() const;
+	/**
+	 *  @interface
+	 *    s2::Sprite
+	 */
+	virtual bool Update(const s2::RenderParams& params, float dt);
 
-	//
-	// Sprite interface
-	//
-	virtual bool Update(const s2::RenderParams& params, float dt) { return true; }
-	virtual const Symbol& GetSymbol() const;
-	virtual void SetSymbol(ee::Symbol* symbol);
+	/**
+	 *  @interface
+	 *    ee::Sprite
+	 */
+	virtual Sprite* EEClone() const { return new Sprite(*this); }
 
 	virtual void Load(const Json::Value& val, const std::string& dir = "");
 	virtual void Store(Json::Value& val, const std::string& dir = "") const;
 
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
 
-	static ee::Sprite* Create(ee::Symbol* symbol) {
-		return new Sprite(static_cast<Symbol*>(symbol));
-	}
-
 	void SetProcess(float process);
 	float GetProcess() const { return m_process; }
 
-private:
-	Symbol* m_symbol;
+	static ee::Sprite* Create(ee::Symbol* symbol);
 
+private:
 	float m_process;
 
 }; // Sprite

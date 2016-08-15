@@ -5,7 +5,7 @@
 //namespace ee
 //{
 //
-//class RenderTarget : public Object
+//class RenderTarget : public cu::ObjectRefCount
 //{
 //public:
 //	RenderTarget();

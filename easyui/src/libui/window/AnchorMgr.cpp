@@ -118,7 +118,7 @@ void AnchorMgr::DrawNodes(const s2::RenderParams& params) const
 	}
 }
 
-void AnchorMgr::Traverse(ee::Visitor& visitor)
+void AnchorMgr::Traverse(ee::Visitor<ee::Sprite>& visitor)
 {
 	ee::ObjectVector<ee::Sprite>::Traverse(m_sprites, visitor, ee::DT_ALL);
 }
@@ -169,12 +169,12 @@ void AnchorMgr::Clear()
 	for (int i = 0; i < ANCHOR_COUNT; ++i) {
 		Anchor& anchor = m_anchors[i];
 		for_each(anchor.sprites.begin(), anchor.sprites.end(), 
-			ee::cu::RemoveRefFonctor<ee::Sprite>());
+			cu::RemoveRefFonctor<ee::Sprite>());
 		anchor.sprites.clear();
 	}
 
 	for_each(m_sprites.begin(), m_sprites.end(), 
-		ee::cu::RemoveRefFonctor<ee::Sprite>());
+		cu::RemoveRefFonctor<ee::Sprite>());
 	m_sprites.clear();
 }
 

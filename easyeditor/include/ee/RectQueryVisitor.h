@@ -3,7 +3,6 @@
 
 #include "Visitor.h"
 #include "Sprite.h"
-#include "BoundingBox.h"
 
 #include <vector>
 

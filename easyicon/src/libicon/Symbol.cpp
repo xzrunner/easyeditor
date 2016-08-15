@@ -21,7 +21,7 @@ Symbol::~Symbol()
 	}
 }
 
-void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
+void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	if (!m_icon) {
 		return;
@@ -29,8 +29,8 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 
 	s2::RenderParams p = params;
 	if (spr) {
-		p.mt = spr->GetTransMatrix() * params.mt;
-		p.color = spr->GetColor() * params.color;
+		p.mt = dynamic_cast<const ee::Sprite*>(spr)->GetTransMatrix() * params.mt;
+		p.color = spr->Color() * params.color;
 	}
 
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
@@ -40,9 +40,23 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 
 	float process = 1;
 	if (spr) {
-		process = static_cast<const Sprite*>(spr)->GetProcess();
+		process = dynamic_cast<const Sprite*>(spr)->GetProcess();
 	}
 	m_icon->Draw(p.mt, process);
+}
+
+sm::rect Symbol::GetBounding(const s2::Sprite* sprite) const
+{
+	sm::rect r;
+	if (!m_icon) {
+		return r;
+	}
+
+	float process = 1;
+	if (sprite) {
+		process = dynamic_cast<const Sprite*>(sprite)->GetProcess();
+	}
+	return m_icon->GetRegion(process);
 }
 
 void Symbol::ReloadTexture() const
@@ -52,23 +66,9 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-sm::rect Symbol::GetSize(const ee::Sprite* sprite) const
-{
-	sm::rect r;
-	if (!m_icon) {
-		return r;
-	}
-
-	float process = 1;
-	if (sprite) {
-		process = static_cast<const Sprite*>(sprite)->GetProcess();
-	}
-	return m_icon->GetRegion(process);
-}
-
 void Symbol::SetIcon(Icon* icon)
 {
-	ee::obj_assign<Icon>(m_icon, icon);
+	cu::RefCountObjAssign(m_icon, icon);
 }
 
 void Symbol::SetImage(ee::Image* img)

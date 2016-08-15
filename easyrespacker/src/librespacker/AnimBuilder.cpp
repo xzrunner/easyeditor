@@ -23,7 +23,7 @@ AnimBuilder::~AnimBuilder()
 	}
 }
 
-void AnimBuilder::Traverse(ee::Visitor& visitor) const
+void AnimBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 {
  	std::map<const eanim::Symbol*, const PackAnimation*>::const_iterator 
  		itr = m_map_data.begin();

@@ -46,7 +46,7 @@ void BinaryTreeNewArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites)
 			ee::ImageSprite* s = sorted[i];
 			bool success = Insert(*s);
 			if (!success) {
-				sm::rect r = s->GetSymbol().GetSize();
+				sm::rect r = s->GetSymbol().GetBounding();
 				float w = r.Width() * scale + PADDING*2;
 				float h = r.Height() * scale + PADDING*2;
 				if ((w > tot_w || h > tot_h) &&

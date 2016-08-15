@@ -124,7 +124,7 @@ bool StagePanel::Update(float dt)
 	return ret;
 }
 
-void StagePanel::TraverseSprites(ee::Visitor& visitor, ee::DataTraverseType type/* = e_allExisting*/,
+void StagePanel::TraverseSprites(ee::Visitor<ee::Sprite>& visitor, ee::DataTraverseType type/* = e_allExisting*/,
 								 bool order/* = true*/) const
 {
 	if (SettingCfg::Instance()->m_all_layers_visible_editable ||
@@ -149,7 +149,7 @@ void StagePanel::TraverseSprites(ee::Visitor& visitor, ee::DataTraverseType type
 	}
 }
 
-void StagePanel::TraverseShapes(ee::Visitor& visitor, ee::DataTraverseType type) const
+void StagePanel::TraverseShapes(ee::Visitor<ee::Shape>& visitor, ee::DataTraverseType type) const
 {
 	if (SettingCfg::Instance()->m_all_layers_visible_editable ||
 		type == ee::DT_ALL ||
@@ -207,7 +207,7 @@ void StagePanel::PointQuery(const sm::vec2& pos)
 void StagePanel::SetLayers(const std::vector<Layer*>& layers)
 {
 	if (m_layers.empty()) {
-		for_each(layers.begin(), layers.end(), ee::cu::AddRefFonctor<Layer>());
+		for_each(layers.begin(), layers.end(), cu::AddRefFonctor<Layer>());
 		m_layers = layers;
 		return;
 	}
@@ -377,7 +377,7 @@ void StagePanel::SortSprites(std::vector<ee::Sprite*>& sprites)
 void StagePanel::InsertSprite(ee::Sprite* spr, int idx)
 {
 	// tag
-	std::string tag = TagCfg::Instance()->Query(&spr->GetSymbol());
+	std::string tag = TagCfg::Instance()->Query(spr->GetSymbol());
 	if (spr->GetTag().find(tag) == std::string::npos) {
 		spr->SetTag(tag + spr->GetTag());
 	}

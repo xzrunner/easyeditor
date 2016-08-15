@@ -1,33 +1,36 @@
 #ifndef _EASYMESH_SPRITE_H_
 #define _EASYMESH_SPRITE_H_
 
-#include "Symbol.h"
 #include "MeshTrans.h"
 
 #include <ee/Sprite.h>
 
+#include <sprite2/MeshSprite.h>
+
 namespace emesh
 {
 
-class Sprite : public ee::Sprite
+class Symbol;
+
+class Sprite : public s2::MeshSprite, public ee::Sprite
 {
 public:
 	Sprite();
 	Sprite(const Sprite& s);
-	Sprite(Symbol* symbol);
+	Sprite(Symbol* sym);
 	virtual ~Sprite();
 
-	//
-	// IObject interface
-	//
-	virtual Sprite* Clone() const;
-
-	//
-	// Sprite interface
-	//
+	/**
+	 *  @interface
+	 *    s2::Sprite
+	 */
 	virtual bool Update(const s2::RenderParams& params, float dt) { return true; }
-	virtual const Symbol& GetSymbol() const;
-	virtual void SetSymbol(ee::Symbol* symbol);
+
+	/**
+	 *  @interface
+	 *    ee::Sprite
+	 */
+	virtual Sprite* EEClone() const { return new Sprite(*this); }
 
 	virtual void Load(const Json::Value& val, const std::string& dir = "");
 	virtual void Store(Json::Value& val, const std::string& dir = "") const;
@@ -48,13 +51,9 @@ public:
 	bool OnlyDrawBound() const { return m_only_draw_bound; }
 	void SetOnlyDrawBound(bool only_draw_bound) { m_only_draw_bound = only_draw_bound; }
 
-	static ee::Sprite* Create(ee::Symbol* symbol) {
-		return new Sprite(static_cast<Symbol*>(symbol));
-	}
+	static ee::Sprite* Create(ee::Symbol* sym);
 
 private:
-	Symbol* m_symbol;
-
 	sm::vec2 m_speed;
 
 	mutable MeshTrans m_trans;

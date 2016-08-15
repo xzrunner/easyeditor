@@ -1,38 +1,33 @@
 #ifndef _EASYTEXTURE_SPRITE_H_
 #define _EASYTEXTURE_SPRITE_H_
 
-#include "Symbol.h"
-
 #include <ee/Sprite.h>
+
+#include <sprite2/TextureSprite.h>
 
 namespace etexture
 {
 
-class Sprite : public ee::Sprite
+class Symbol;
+
+class Sprite : public s2::TextureSprite, public ee::Sprite
 {
 public:
-	Sprite();
-	Sprite(const Sprite& sprite);
 	Sprite(Symbol* symbol);
-	virtual ~Sprite();
 
-	//
-	// Cloneable interface
-	//
-	virtual Sprite* Clone() const;
+	/**
+	 *  @interface
+	 *    s2::Sprite
+	 */
+	virtual bool Update(const s2::RenderParams& params, float dt);
 
-	//
-	// Sprite interface
-	//
-	virtual const Symbol& GetSymbol() const;
-	virtual void SetSymbol(ee::Symbol* symbol);
+	/**
+	 *  @interface
+	 *    ee::Sprite
+	 */
+	virtual Sprite* EEClone() const { return new Sprite(*this); }
 
-	static ee::Sprite* Create(ee::Symbol* symbol) {
-		return new Sprite(static_cast<Symbol*>(symbol));
-	}
-
-protected:
-	Symbol* m_symbol;	
+	static ee::Sprite* Create(ee::Symbol* symbol);
 
 }; // Sprite
 

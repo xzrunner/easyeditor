@@ -3,7 +3,6 @@
 #include "Utility.h"
 #include "LayersLoader.h"
 
-#include <ee/BoundingBox.h>
 #include <ee/FileHelper.h>
 #include <ee/SymbolSearcher.h>
 #include <ee/Visitor.h>
@@ -120,8 +119,6 @@ void Symbol::LoadFromFile(const LayersLoader& loader)
 	for (int i = 0, n = layers.size(); i < n; ++i) {
 		AddLayer(layers[i]);
 	}
-
-	UpdateSize();
 }
 
 int Symbol::GetCurrFrame() const

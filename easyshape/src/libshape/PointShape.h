@@ -8,13 +8,22 @@
 namespace eshape
 {
 
-class PointShape : public ee::Shape, public s2::PointShape, public virtual s2::Shape
+class PointShape : public ee::Shape, public s2::PointShape
 {
 public:
 	PointShape() {}
+	PointShape(const PointShape& point) {}
 	PointShape(const sm::vec2& pos) 
 		: s2::PointShape(pos) 
 	{}
+
+	/**
+	 *  @interface
+	 *    s2::Shape
+	 */
+	virtual bool IsContain(const sm::vec2& pos) const { return s2::PointShape::IsContain(pos); }
+	virtual bool IsIntersect(const sm::rect& rect) const { return s2::PointShape::IsIntersect(rect); }
+	virtual void Draw(const sm::mat4& mt, const s2::RenderColor& color = s2::RenderColor()) const { s2::PointShape::Draw(mt, color); }
 
 	/**
 	 *  @interface
@@ -34,6 +43,9 @@ public:
 		m_pos = pos;
 		UpdateBounding();
 	}
+
+protected:
+	virtual void UpdateBounding() { s2::PointShape::UpdateBounding(); }
 
 }; // PointShape
 

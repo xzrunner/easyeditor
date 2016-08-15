@@ -107,7 +107,7 @@ void Icon::ReloadTexture() const
 
 void Icon::SetImage(ee::Image* img)
 {
-	ee::obj_assign<ee::Image>(m_img, img);
+	cu::RefCountObjAssign(m_img, img);
 	AfterSetImage();
 }
 

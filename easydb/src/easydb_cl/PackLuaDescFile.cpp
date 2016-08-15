@@ -12,7 +12,7 @@ namespace edb
 
 PackLuaDescFile::~PackLuaDescFile()
 {
-	for_each(m_symbols.begin(), m_symbols.end(), ee::cu::RemoveRefFonctor<ee::Symbol>());
+	for_each(m_symbols.begin(), m_symbols.end(), cu::RemoveRefFonctor<ee::Symbol>());
 }
 
 std::string PackLuaDescFile::Command() const

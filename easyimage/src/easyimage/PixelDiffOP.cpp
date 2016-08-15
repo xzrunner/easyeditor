@@ -28,7 +28,7 @@ bool PixelDiffOP::OnMouseLeftDown(int x, int y)
 	ee::Image* right = static_cast<const ee::ImageSymbol&>(static_cast<const ee::ImageSprite*>(s_right)->GetSymbol()).GetImage();
 	sm::vec2 p = m_stage->TransPosScrToProj(x, y);
 
-	m_stage->GetLeft()->GetSymbol().GetSize();
+	m_stage->GetLeft()->GetSymbol().GetBounding();
 
 	int row, col;
 	row = (p.y - left->GetOriginHeight() * 0.5f) / left->GetOriginHeight();

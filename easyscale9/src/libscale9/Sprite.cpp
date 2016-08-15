@@ -1,63 +1,14 @@
 #include "Sprite.h"
+#include "Symbol.h"
 #include "SpritePropertySetting.h"
-
-#include <ee/SpriteFactory.h>
-
-#include <sprite2/Scale9Sprite.h>
 
 namespace escale9
 {
 
-Sprite::Sprite()
-	: m_symbol(NULL)
+Sprite::Sprite(Symbol* sym)
+	: ee::Sprite(sym)
+	, m_data(sym->GetScale9Data())
 {
-	m_core = new s2::Scale9Sprite(this);
-}
-
-Sprite::Sprite(const Sprite& sprite)
-	: ee::Sprite(sprite)
-	, m_symbol(sprite.m_symbol)
-	, m_data(sprite.m_data)
-{
-	m_core = new s2::Scale9Sprite(*static_cast<s2::Scale9Sprite*>(sprite.m_core), this);
-
-	m_symbol->AddReference();
-}
-
-Sprite::Sprite(Symbol* symbol)
-	: m_symbol(symbol)
-	, m_data(symbol->GetScale9Data())
-{
-	m_core = new s2::Scale9Sprite(this);
-
-	m_symbol->AddReference();
-	BuildBounding();
-}
-
-Sprite::~Sprite()
-{
-	m_core->RemoveReference();
-
-	if (m_symbol) {
-		m_symbol->RemoveReference();
-	}
-}
-
-Sprite* Sprite::Clone() const
-{
-	Sprite* sprite = new Sprite(*this);
-	ee::SpriteFactory::Instance()->Insert(sprite);
-	return sprite;
-}
-
-const Symbol& Sprite::GetSymbol() const
-{
-	return *m_symbol;
-}
-
-void Sprite::SetSymbol(ee::Symbol* symbol)
-{
-	ee::Sprite::SetSymbol(&m_symbol, symbol);
 }
 
 void Sprite::Load(const Json::Value& val, const std::string& dir)
@@ -71,10 +22,12 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 	float w = val["scale9"]["width"].asDouble();
 	float h = val["scale9"]["height"].asDouble();
 
+	Symbol* sym = dynamic_cast<Symbol*>(m_sym);
+
 	float sw, sh;
-	m_symbol->GetScale9Data().GetSize(sw, sh);
+	sym->GetScale9Data().GetSize(sw, sh);
 	if (sw != w || sh != h) {
-		m_symbol->ResizeScale9(w, h);
+		sym->ResizeScale9(w, h);
 	}
 
 	SetSize(w, h);
@@ -103,12 +56,16 @@ void Sprite::GetSize(float& w, float& h) const
 void Sprite::SetSize(float w, float h)
 {
 	m_data.Resize(w, h);
-	BuildBounding();
 }
 
 void Sprite::Draw(const s2::RenderParams& params) const
 {
 	m_data.Draw(params);
+}
+
+ee::Sprite* Sprite::Create(ee::Symbol* sym) 
+{
+	return new Sprite(static_cast<Symbol*>(sym));
 }
 
 }

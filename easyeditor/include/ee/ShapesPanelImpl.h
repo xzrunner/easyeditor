@@ -2,24 +2,24 @@
 #define _EASYEDITOR_SHAPES_PANEL_IMPL_H_
 
 #include "MultiShapesImpl.h"
+#include "DataContainer.h"
 
 namespace ee
 {
 
 class Shape;
-class DataContainer;
 
 class ShapesPanelImpl : public MultiShapesImpl
 {
 public:
 	ShapesPanelImpl();
-	ShapesPanelImpl(DataContainer* container);
+	ShapesPanelImpl(DataContainer<Shape>* container);
 	virtual ~ShapesPanelImpl();
 
 	//
 	// MultiShapesImpl interface
 	//
-	virtual void TraverseShapes(Visitor& visitor, 
+	virtual void TraverseShapes(Visitor<ee::Shape>& visitor, 
 		DataTraverseType type = DT_ALL) const;
 
 protected:
@@ -32,7 +32,7 @@ private:
 	void InitSubjects();
 
 private:
-	DataContainer* m_container;
+	DataContainer<Shape>* m_container;
 
 }; // ShapesPanelImpl
 

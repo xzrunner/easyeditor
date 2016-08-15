@@ -16,8 +16,8 @@ class PolygonShape : public PolylineShape, public s2::PolylineShape
 {
 public:
 	PolygonShape();
-	PolygonShape(const std::vector<sm::vec2>& vertices);
 	PolygonShape(const PolygonShape& polygon);
+	PolygonShape(const std::vector<sm::vec2>& vertices);
 	PolygonShape& operator = (const PolygonShape& polygon);
 	virtual ~PolygonShape();
 	
@@ -25,6 +25,8 @@ public:
 	 *  @interface
 	 *    s2::Shape
 	 */
+	virtual bool IsContain(const sm::vec2& pos) const { return s2::PolylineShape::IsContain(pos); }
+	virtual bool IsIntersect(const sm::rect& rect) const { return s2::PolylineShape::IsIntersect(rect); }
 	virtual void Draw(const sm::mat4& mt, 
 		const s2::RenderColor& color = s2::RenderColor()) const;
 
@@ -32,7 +34,7 @@ public:
 	 *  @interface
 	 *    ee::Shape
 	 */
-	virtual PolygonShape* Clone() const { return new PolygonShape(*this); }
+	virtual PolygonShape* EEClone() const { return new PolygonShape(*this); }
 	virtual const char* GetShapeDesc() const { return "polygon"; }
 	virtual void Translate(const sm::vec2& offset);
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
@@ -60,6 +62,9 @@ public:
 	const Material* GetMaterial() const { return m_material; }
 
 //	const std::vector<sm::vec2>& GetVertices() const { return m_vertices; }
+
+protected:
+	virtual void UpdateBounding() { s2::PolylineShape::UpdateBounding(); }
 
 protected:
 	Material* m_material;

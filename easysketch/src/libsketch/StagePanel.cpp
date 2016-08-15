@@ -29,7 +29,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	RegistSubject(ee::ClearSpriteSJ::Instance());
 }
 
-void StagePanel::TraverseSprites(ee::Visitor& visitor, ee::DataTraverseType type, 
+void StagePanel::TraverseSprites(ee::Visitor<ee::Sprite>& visitor, ee::DataTraverseType type, 
 								 bool order) const
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {

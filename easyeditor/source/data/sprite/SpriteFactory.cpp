@@ -73,12 +73,12 @@ Sprite* SpriteFactory::Create(Symbol* symbol)
 void SpriteFactory::Insert(Sprite* sprite)
 {
 	std::map<const Symbol*, SpriteList>::iterator 
-		itr = m_map_symbol2sprites.find(&sprite->GetSymbol());
+		itr = m_map_symbol2sprites.find(sprite->GetSymbol());
 	if (itr == m_map_symbol2sprites.end())
 	{
 		SpriteList list;
 		list.push_back(sprite);
-		m_map_symbol2sprites.insert(std::make_pair(&sprite->GetSymbol(), list));
+		m_map_symbol2sprites.insert(std::make_pair(sprite->GetSymbol(), list));
 	}
 	else 
 	{

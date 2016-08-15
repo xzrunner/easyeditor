@@ -17,7 +17,7 @@ MeshSprBuilder::~MeshSprBuilder()
 	for_each(m_nodes.begin(), m_nodes.end(), ee::DeletePointerFunctor<IPackNode>());
 }
 
-void MeshSprBuilder::Traverse(ee::Visitor& visitor) const
+void MeshSprBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 {
 	for (int i = 0, n = m_nodes.size(); i < n; ++i) {
 		bool has_next;
@@ -32,7 +32,7 @@ const IPackNode* MeshSprBuilder::Create(const emesh::Sprite* spr)
 {
 	PackMeshSpr* node = new PackMeshSpr;
 
-	node->mesh = PackNodeFactory::Instance()->Create(&spr->GetSymbol());
+	node->mesh = PackNodeFactory::Instance()->Create(spr->GetSymbol());
 
 	node->base = PackNodeFactory::Instance()->Create(spr->GetBaseSym());
 	

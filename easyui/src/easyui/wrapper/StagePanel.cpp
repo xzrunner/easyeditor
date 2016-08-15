@@ -100,7 +100,7 @@ void StagePanel::StoreToFile(const char* filename) const
 	ecomplex::Symbol items_complex;
 	std::vector<ee::Sprite*> sprites;
 	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	for_each(sprites.begin(), sprites.end(), ee::cu::AddRefFonctor<ee::Sprite>());
+	for_each(sprites.begin(), sprites.end(), cu::AddRefFonctor<ee::Sprite>());
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		items_complex.Add(sprites[i]);
 	}

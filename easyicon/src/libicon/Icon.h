@@ -3,6 +3,7 @@
 
 #include <SM_Matrix.h>
 #include <SM_Rect.h>
+#include <CU_RefCountObj.h>
 
 #include <json/json.h>
 
@@ -11,7 +12,7 @@ namespace ee { class Image; }
 namespace eicon
 {
 
-class Icon : public ee::Object
+class Icon : public cu::RefCountObj
 {
 public:
 	Icon();

@@ -187,13 +187,13 @@ void FileIO::StoreImage(const char* filename)
 		float sw, sh;
 		if (sprite->GetAngle() == 0)
 		{
-			sw = sprite->GetSymbol().GetSize().Width();
-			sh = sprite->GetSymbol().GetSize().Height();
+			sw = sprite->GetSymbol().GetBounding().Width();
+			sh = sprite->GetSymbol().GetBounding().Height();
 		}
 		else
 		{
-			sw = sprite->GetSymbol().GetSize().Height();
-			sh = sprite->GetSymbol().GetSize().Width();
+			sw = sprite->GetSymbol().GetBounding().Height();
+			sh = sprite->GetSymbol().GetBounding().Width();
 		}
 
 		//if (sprite->getPosition().x - sw * 0.5f < 0 || sprite->getPosition().x + sw * 0.5f > width ||

@@ -17,7 +17,7 @@ AnchorBuilder::~AnchorBuilder()
 	for_each(m_anchors.begin(), m_anchors.end(), ee::DeletePointerFunctor<const PackAnchor>());
 }
 
-void AnchorBuilder::Traverse(ee::Visitor& visitor) const
+void AnchorBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 {
 }
 

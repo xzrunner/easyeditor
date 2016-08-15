@@ -23,7 +23,7 @@ TextureBuilder::~TextureBuilder()
 	}
 }
 
-void TextureBuilder::Traverse(ee::Visitor& visitor) const
+void TextureBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 {
 	std::map<const etexture::Symbol*, const PackPicture*>::const_iterator 
 		itr = m_map_data.begin();

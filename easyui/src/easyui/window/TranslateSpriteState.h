@@ -20,11 +20,11 @@ public:
 	virtual void OnMouseRelease(const sm::vec2& pos);
 
 private:
-	class Visitor : public ee::Visitor
+	class Visitor : public ee::Visitor<ee::Sprite>
 	{
 	public:
 		Visitor(AnchorMgr* anchor_mgr) : m_anchor_mgr(anchor_mgr) {}
-		virtual void Visit(ee::Object* object, bool& next);
+		virtual void Visit(ee::Sprite* spr, bool& next);
 	private:
 		AnchorMgr* m_anchor_mgr;
 	}; // Visitor

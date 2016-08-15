@@ -3,28 +3,31 @@
 
 #include <ee/Symbol.h>
 
+#include <sprite2/Scale9Symbol.h>
+
 #include "Scale9Data.h"
 
 namespace escale9
 {
 
-class Symbol : public ee::Symbol
+class Symbol : public ee::Symbol, public s2::Scale9Symbol
 {
 public:
 	Symbol();
 	Symbol(const Symbol& symbol);
 
-	//
-	// Cloneable interface
-	//
-	virtual Symbol* Clone() const { return new Symbol(*this); }
+	/**
+	 *  @interface
+	 *    s2::Symbol
+	 */
+	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
+	virtual sm::rect GetBounding(const s2::Sprite* sprite = NULL) const;
 
-	//
-	// Symbol interfaces
-	//
-	virtual void Draw(const s2::RenderParams& params, const ee::Sprite* spr = NULL) const;
+	/**
+	 *  @interface
+	 *    ee::Symbol
+	 */
 	virtual void ReloadTexture() const;
-	virtual sm::rect GetSize(const ee::Sprite* sprite = NULL) const;
 
 	void ResizeScale9(float width, float height);
 	void ComposeFromSprites(ee::Sprite* sprites[3][3], float width, float height);

@@ -1,5 +1,4 @@
 #include "AutoAlign.h"
-#include "BoundingBox.h"
 #include "Symbol.h"
 #include "Sprite.h"
 #include "sprite_utility.h"

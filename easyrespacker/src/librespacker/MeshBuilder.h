@@ -17,7 +17,7 @@ public:
 	MeshBuilder() {}
 	virtual ~MeshBuilder();
 
-	virtual void Traverse(ee::Visitor& visitor) const;
+	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
 
 	const IPackNode* Create(const emesh::Symbol* sym);
 

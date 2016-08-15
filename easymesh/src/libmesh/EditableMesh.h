@@ -3,6 +3,8 @@
 
 #include "Mesh.h"
 
+#include <ee/Visitor.h>
+
 namespace ee { class Shape; }
 
 namespace emesh
@@ -18,7 +20,7 @@ public:
 		: Mesh(base) {}
 	virtual ~EditableMesh() {}
 
-	virtual void TraverseMesh(ee::Visitor& visitor) const = 0;
+	virtual void TraverseMesh(ee::Visitor<ee::Shape>& visitor) const = 0;
 	virtual bool RemoveMesh(ee::Shape* mesh) = 0;
 	virtual bool InsertMesh(ee::Shape* mesh) = 0;
 	virtual bool ClearMesh() = 0;	

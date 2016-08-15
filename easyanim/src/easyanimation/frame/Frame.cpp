@@ -15,7 +15,6 @@
 #include <ee/SymbolMgr.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/Snapshoot.h>
-#include <ee/BoundingBox.h>
 #include <ee/FileHelper.h>
 
 #include <easybuilder.h>

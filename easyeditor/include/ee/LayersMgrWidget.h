@@ -18,10 +18,10 @@ public:
 	LayersMgrWidget(wxWindow* parent);
 	virtual ~LayersMgrWidget();
 
-	void TraverseEditableLayers(Visitor& visitor);
-	void TraverseVisibleLayers(Visitor& visitor);
-	void TraverseSelectableLayers(Visitor& visitor);
-	void TraverseAllLayers(Visitor& visitor);
+	void TraverseEditableLayers(Visitor<ee::Layer>& visitor);
+	void TraverseVisibleLayers(Visitor<ee::Layer>& visitor);
+	void TraverseSelectableLayers(Visitor<ee::Layer>& visitor);
+	void TraverseAllLayers(Visitor<ee::Layer>& visitor);
 
 	void SetEditable(LayerWidget* layer);
 

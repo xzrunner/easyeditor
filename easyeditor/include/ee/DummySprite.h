@@ -2,33 +2,24 @@
 #define _EASYEDITOR_DUMMY_SPRITE_H_
 
 #include "Sprite.h"
-#include "Symbol.h"
+
+#include <sprite2/DummySprite.h>
 
 namespace ee
 {
 
-class Symbol;
+class DummySymbol;
 
-class DummySprite : public Sprite
+class DummySprite : public s2::DummySprite, public Sprite
 {
 public:
-	DummySprite();
-	DummySprite(Symbol* symbol);
-	~DummySprite();
+	DummySprite(DummySymbol* sym);
 
-	//
-	// IObject interface
-	//
-	virtual DummySprite* Clone() const { return NULL; }
-
-	//
-	// Sprite interface
-	//
-	virtual const Symbol& GetSymbol() const { return *m_symbol; }
-	virtual void SetSymbol(Symbol* symbol) { m_symbol = symbol; }
-
-private:
-	Symbol* m_symbol;
+	/**
+	 *  @interface
+	 *    ee::Sprite
+	 */
+	virtual DummySprite* EEClone() const { return new DummySprite(*this); }
 
 }; // DummySprite
 

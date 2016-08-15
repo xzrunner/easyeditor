@@ -6,6 +6,10 @@
 namespace s2
 {
 
+RectShape::RectShape(const RectShape& rect)
+{
+}
+
 RectShape::RectShape(const sm::rect& r)
 {
 	m_bounding = r;
@@ -30,7 +34,7 @@ void RectShape::Draw(const sm::mat4& mt, const RenderColor& color) const
 {
 	sm::vec2 min(m_bounding.xmin, m_bounding.ymin),
 		     max(m_bounding.xmax, m_bounding.ymax);
-	RVG::Rect(min, max, false);
+	s2::RVG::Rect(min, max, false);
 }
 
 }

@@ -16,6 +16,8 @@
 
 #include <easyparticle3d.h>
 
+#include <sprite2/RenderParams.h>
+
 namespace eanim
 {
 
@@ -64,7 +66,7 @@ bool StagePanel::Update(float dt)
 	return dirty;
 }
 
-void StagePanel::TraverseSprites(ee::Visitor& visitor, 
+void StagePanel::TraverseSprites(ee::Visitor<ee::Sprite>& visitor, 
 								 ee::DataTraverseType type/* = ee::e_allExisting*/,
 								 bool order/* = true*/) const
 {
@@ -270,10 +272,9 @@ CheckUpdateVisitor(float dt)
 {}
 
 void StagePanel::CheckUpdateVisitor::
-Visit(ee::Object* object, bool& next)
+Visit(ee::Sprite* spr, bool& next)
 {
-	ee::Sprite* spr = static_cast<ee::Sprite*>(object);
-	if (spr->Update(m_dt)) {
+	if (spr->Update(s2::RenderParams(), m_dt)) {
 		m_update = true;
 		next = false;
 	} else {

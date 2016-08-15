@@ -1,7 +1,7 @@
 #ifndef _EASYEDITOR_SYMBOL_MGR_H_
 #define _EASYEDITOR_SYMBOL_MGR_H_
 
-#include <Visitor.h>
+#include "Visitor.h"
 
 #include <map>
 

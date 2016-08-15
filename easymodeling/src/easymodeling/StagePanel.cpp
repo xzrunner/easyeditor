@@ -75,7 +75,7 @@ void StagePanel::removeJoint(Joint* joint)
 	}
 }
 
-void StagePanel::traverseBodies(ee::Visitor& visitor) const
+void StagePanel::traverseBodies(ee::Visitor<ee::Sprite>& visitor) const
 {
 	std::vector<Body*>::const_iterator itr = m_bodies.begin();
 	for ( ; itr != m_bodies.end(); ++itr)
@@ -86,7 +86,7 @@ void StagePanel::traverseBodies(ee::Visitor& visitor) const
 	}
 }
 
-void StagePanel::traverseJoints(ee::Visitor& visitor) const
+void StagePanel::traverseJoints(ee::Visitor<ee::Sprite>& visitor) const
 {
 	std::vector<Joint*>::const_iterator itr = m_joints.begin();
 	for ( ; itr != m_joints.end(); ++itr)
@@ -159,8 +159,8 @@ void StagePanel::loadBody(ee::Sprite* sprite, Body& body)
 	Fixture* fixture = new Fixture;
 	fixture->m_body = &body;
 
-	const float width = sprite->GetSymbol().GetSize().Width(),
-		height = sprite->GetSymbol().GetSize().Height();
+	const float width = sprite->GetSymbol().GetBounding().Width(),
+		height = sprite->GetSymbol().GetBounding().Height();
 	fixture->m_shape = new eshape::RectShape(sm::vec2(0, 0), width * 0.5f, height * 0.5f);
 
 	body.m_fixtures.push_back(fixture);
@@ -226,13 +226,12 @@ StagePanel::PointQueryVisitor::
 }
 
 void StagePanel::PointQueryVisitor::
-	Visit(ee::Object* object, bool& next)
+	Visit(ee::Sprite* spr, bool& next)
 {
-	ee::Sprite* sprite = static_cast<ee::Sprite*>(object);
-	Body* data = static_cast<Body*>(sprite->GetUserData());
+	Body* data = static_cast<Body*>(spr->GetUserData());
 	if (data->IsContain(m_pos))
 	{
-		*m_pResult = sprite;
+		*m_pResult = spr;
 		next = false;
 	}
 	else
@@ -252,12 +251,11 @@ StagePanel::RectQueryVisitor::
 }
 
 void StagePanel::RectQueryVisitor::
-	Visit(ee::Object* object, bool& next)
+	Visit(ee::Sprite* spr, bool& next)
 {
-	ee::Sprite* sprite = static_cast<ee::Sprite*>(object);
-	Body* data = static_cast<Body*>(sprite->GetUserData());
+	Body* data = static_cast<Body*>(spr->GetUserData());
 	if (data->IsIntersect(m_rect))
-		m_result.push_back(sprite);
+		m_result.push_back(spr);
 	next = true;
 }
 

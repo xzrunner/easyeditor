@@ -17,7 +17,7 @@ class CheckerBoard
 public:
 	CheckerBoard(StagePanel* stage);
 
-	void Traverse(ee::Visitor& visitor) const;
+	void Traverse(ee::Visitor<ee::Sprite>& visitor) const;
 
 	void AddSprite(ee::Sprite* sprite);
 	void RemoveSprite(ee::Sprite* sprite);

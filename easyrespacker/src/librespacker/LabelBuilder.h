@@ -17,7 +17,7 @@
 //	LabelBuilder();
 //	virtual ~LabelBuilder();
 //
-//	virtual void Traverse(ee::Visitor& visitor) const;
+//	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
 //
 //	const IPackNode* Create(const ee::FontBlankSprite* spr);
 //

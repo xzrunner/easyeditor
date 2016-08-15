@@ -24,7 +24,7 @@ public:
 	ComplexBuilder(ExportNameSet& export_set, ClipboxBuilder* cb_builder);
 	virtual ~ComplexBuilder();
 
-	virtual void Traverse(ee::Visitor& visitor) const;
+	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
 
 	const IPackNode* Create(const ecomplex::Symbol* symbol);
 

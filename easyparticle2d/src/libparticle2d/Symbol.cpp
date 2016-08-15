@@ -22,22 +22,18 @@ Symbol::Symbol(const Symbol& s)
 {
 }
 
-Symbol* Symbol::Clone() const
-{
-	return new Symbol(*this);
-}
-
-void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
+void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	if (!spr) {
 		return;
 	}
 
-	s2::RenderParams p = params;
-	p.mt = spr->GetTransMatrix() * params.mt;
-	p.color = spr->GetColor() * params.color;
+	Sprite* p2d_spr = const_cast<Sprite*>(dynamic_cast<const Sprite*>(spr));
 
-	Sprite* p2d_spr = const_cast<Sprite*>(static_cast<const Sprite*>(spr));
+	s2::RenderParams p = params;
+	p.mt = p2d_spr->GetTransMatrix() * params.mt;
+	p.color = spr->Color() * params.color;
+
 	p2d_spr->SetMatrix(p.mt);
 
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
@@ -48,17 +44,17 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 	p2d_spr->Draw(p.mt);		
 }
 
+sm::rect Symbol::GetBounding(const s2::Sprite* sprite) const
+{
+	return sm::rect(sm::vec2(0, 0), 200, 200);
+}
+
 void Symbol::ReloadTexture() const
 {
 	for (int i = 0; i < m_et_cfg->symbol_count; ++i) {
 		ee::Symbol* symbol = static_cast<ee::Symbol*>(m_et_cfg->symbols[i].ud);
 		symbol->ReloadTexture();
 	}
-}
-
-sm::rect Symbol::GetSize(const ee::Sprite* sprite) const
-{
-	return sm::rect(sm::vec2(0, 0), 200, 200);
 }
 
 void Symbol::LoadResources()

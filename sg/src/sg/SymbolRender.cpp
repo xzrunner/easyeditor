@@ -65,7 +65,7 @@ void SymbolRender::DrawGrass(const ee::Symbol& symbol,
 	ee::Sprite* grass = m_grass[info->size - 1];
 	if (is_flat)
 	{
-		sm::rect r = grass->GetSymbol().GetSize();
+		sm::rect r = grass->GetSymbol().GetBounding();
 
 		float half_edge = info->size * EDGE * 0.5f;
 		s2::RVG::SetColor(ee::LIGHT_GREEN);

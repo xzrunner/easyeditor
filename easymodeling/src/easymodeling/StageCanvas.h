@@ -26,10 +26,10 @@ private:
 	void DrawLines() const;
 
 private:
-	class DrawJointVisitor : public ee::Visitor
+	class DrawJointVisitor : public ee::Visitor<Joint>
 	{
 	public:
-		virtual void Visit(ee::Object* object, bool& next);
+		virtual void Visit(Joint* joint, bool& next);
 	};
 
 private:

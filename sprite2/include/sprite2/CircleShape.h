@@ -10,6 +10,7 @@ class CircleShape : public VIRTUAL_INHERITANCE Shape
 {
 public:
 	CircleShape() : m_radius(0) {}
+	CircleShape(const CircleShape& circle);
 	CircleShape(const sm::vec2& center, float radius);
 
 	/**

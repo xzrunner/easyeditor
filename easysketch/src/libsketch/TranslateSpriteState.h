@@ -27,12 +27,12 @@ private:
 	void Translate(const sm::ivec2& first, const sm::ivec2& curr);
 
 private:
-	class Visitor : public ee::Visitor
+	class Visitor : public ee::Visitor<ee::Sprite>
 	{
 	public:
 		Visitor(StagePanel* stage, const sm::ivec2& last, const sm::ivec2& curr) 
 			: m_stage(stage), m_last(last), m_curr(curr) {}
-		virtual void Visit(ee::Object* object, bool& next);
+		virtual void Visit(ee::Sprite* spr, bool& next);
 	private:
 		StagePanel* m_stage;
 		sm::ivec2 m_last, m_curr;

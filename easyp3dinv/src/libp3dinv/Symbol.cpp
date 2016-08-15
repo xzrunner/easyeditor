@@ -19,12 +19,12 @@ Symbol::~Symbol()
 	}
 }
 
-void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
+void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	s2::RenderParams p = params;
 	if (spr) {
-		p.mt = spr->GetTransMatrix() * params.mt;
-		p.color = spr->GetColor() * params.color;
+		p.mt = dynamic_cast<const ee::Sprite*>(spr)->GetTransMatrix() * params.mt;
+		p.color = spr->Color() * params.color;
 	}
 	if (m_ps) {
 		m_ps->Update(1.0f / 30);
@@ -32,7 +32,7 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 	}
 }
 
-sm::rect Symbol::GetSize(const ee::Sprite* sprite) const
+sm::rect Symbol::GetBounding(const s2::Sprite* sprite) const
 {
 	return sm::rect(200, 200);
 }

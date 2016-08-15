@@ -14,7 +14,7 @@
 //	for_each(m_labels.begin(), m_labels.end(), DeletePointerFunctor<const PackLabel>());
 //}
 //
-//void LabelBuilder::Traverse(ee::Visitor& visitor) const
+//void LabelBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 //{
 // 	for (int i = 0, n = m_labels.size(); i < n; ++i) {
 //		bool has_next;

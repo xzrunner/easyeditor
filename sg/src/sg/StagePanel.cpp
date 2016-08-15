@@ -36,7 +36,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	RegistSubject(ee::ClearSpriteSJ::Instance());
 }
 
-void StagePanel::TraverseSprites(ee::Visitor& visitor, ee::DataTraverseType type/* = e_allExisting*/,
+void StagePanel::TraverseSprites(ee::Visitor<ee::Sprite>& visitor, ee::DataTraverseType type/* = e_allExisting*/,
 								 bool order/* = true*/) const
 {
 	m_checkboard.Traverse(visitor);
@@ -144,7 +144,7 @@ void StagePanel::ChangeSelectedSpritesLevel(bool up)
 		spr_info->level = up ? spr_info->level + 1 : spr_info->level - 1;
 		std::string new_filepath = symbol_info->building->levels[spr_info->level - 1].res_snapshoot_path;
 		ee::Symbol* new_symbol = ee::SymbolMgr::Instance()->FetchSymbol(new_filepath);
-		if (new_symbol != &sprite->GetSymbol()) {
+		if (new_symbol != sprite->GetSymbol()) {
 			SymbolExt* new_symbol_info = static_cast<SymbolExt*>(new_symbol->GetUserData());
 			new_symbol_info->remain--;
 			symbol_info->remain++;

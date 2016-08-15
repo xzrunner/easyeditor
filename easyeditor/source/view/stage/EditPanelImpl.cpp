@@ -108,7 +108,7 @@ void EditPanelImpl::SetEditOP(EditOP* editOP)
 
 void EditPanelImpl::SetCanvas(StageCanvas* canvas) 
 { 
-	obj_assign<StageCanvas>(m_canvas, canvas);
+	cu::RefCountObjAssign(m_canvas, canvas);
 }
 
 void EditPanelImpl::OnMouse(wxMouseEvent& event)

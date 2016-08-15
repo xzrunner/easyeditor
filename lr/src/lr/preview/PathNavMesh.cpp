@@ -1,6 +1,5 @@
 #include "PathNavMesh.h"
 
-#include <ee/BoundingBox.h>
 #include <ee/Math2D.h>
 #include <ee/color_config.h>
 #include <ee/Triangulation.h>

@@ -70,9 +70,9 @@ LoadBodyVisitor(b2World* world, std::map<Body*, b2Body*>& mapBody)
 {}
 
 void PreviewPanel::LoadBodyVisitor::
-Visit(ee::Object* object, bool& next)
+Visit(ee::Sprite* spr, bool& next)
 {
-	Body* data = static_cast<Body*>(object);
+	Body* data = static_cast<Body*>(spr);
 
 	b2Body* body = ResolveToB2::CreateBody(*data, m_world, m_mapBody);
 
@@ -92,13 +92,11 @@ LoadJointVisitor(b2World* world, const std::map<Body*, b2Body*>& mapBody,
 {}
 
 void PreviewPanel::LoadJointVisitor::
-Visit(ee::Object* object, bool& next)
+Visit(Joint* joint, bool& next)
 {
-	Joint* data = static_cast<Joint*>(object);
-
-	b2Joint* joint = ResolveToB2::CreateJoint(*data, m_world, m_mapBody);
-	if (joint)
-		m_mapJoint.insert(std::make_pair(data, joint));
+	b2Joint* b2_joint = ResolveToB2::CreateJoint(*joint, m_world, m_mapBody);
+	if (b2_joint)
+		m_mapJoint.insert(std::make_pair(joint, b2_joint));
 
 	next = true;
 }
@@ -116,11 +114,9 @@ LoadGearJointVisitor(b2World* world, const std::map<Body*, b2Body*>& mapBody,
 {}
 
 void PreviewPanel::LoadGearJointVisitor::
-Visit(ee::Object* object, bool& next)
+Visit(Joint* joint, bool& next)
 {
-	Joint* data = static_cast<Joint*>(object);
-
-	ResolveToB2::CreateJoint(*data, m_world, m_mapBody, m_mapJoint);
+	ResolveToB2::CreateJoint(*joint, m_world, m_mapBody, m_mapJoint);
 
 	next = true;
 }

@@ -7,6 +7,8 @@ extern "C" {
 	#include <lauxlib.h>
 };
 
+#include <CU_RefCountObj.h>
+
 #include <vector>
 
 #include <stdint.h>
@@ -17,7 +19,7 @@ namespace ee { class TexturePacker; class Image; }
 namespace erespacker
 {
 
-class IPackNode : public ee::Object
+	class IPackNode : public cu::RefCountObj
 {
 public:
 	IPackNode();

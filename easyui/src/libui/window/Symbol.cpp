@@ -20,7 +20,7 @@ Symbol::~Symbol()
 
 }
 
-void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
+void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	m_anchors.DrawSprites(params);
 	for (int i = 0, n = m_ext_refs.size(); i < n; ++i) {
@@ -29,19 +29,18 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 	m_anchors.DrawNodes(params);
 }
 
-void Symbol::ReloadTexture() const
-{
-}
-
-sm::rect Symbol::GetSize(const ee::Sprite* sprite) const
+sm::rect Symbol::GetBounding(const s2::Sprite* sprite) const
 {
 	return sm::rect(sm::vec2(0, 0), m_width, m_height);
 }
 
-void Symbol::Traverse(ee::Visitor& visitor)
+void Symbol::Traverse(ee::Visitor<ee::Sprite>& visitor)
 {
 	m_anchors.Traverse(visitor);
-	ee::ObjectVector<Sprite>::Traverse(m_ext_refs, visitor, ee::DT_ALL);
+
+	std::vector<ee::Sprite*> ext_refs;
+	copy(m_ext_refs.begin(), m_ext_refs.end(), back_inserter(ext_refs));
+	ee::ObjectVector<ee::Sprite>::Traverse(ext_refs, visitor, ee::DT_ALL);
 }
 
 void Symbol::InsertExtRef(Sprite* spr)
@@ -66,7 +65,7 @@ void Symbol::RemoveExtRef(Sprite* spr)
 void Symbol::ClearExtRef()
 {
 	for_each(m_ext_refs.begin(), m_ext_refs.end(), 
-		ee::cu::RemoveRefFonctor<Sprite>());
+		cu::RemoveRefFonctor<Sprite>());
 	m_ext_refs.clear();
 }
 

@@ -54,6 +54,12 @@ void AABB::Build(const sm::rect& r, const sm::vec2& pos, float angle,
 	}
 }
 
+inline
+void AABB::SetTransform(const sm::vec2& position, const sm::vec2& offset, float angle)
+{
+	m_position = position + (sm::rotate_vector(-offset, angle) + offset);
+}
+
 }
 
 #endif // _SPRITE2_AABB_INL_

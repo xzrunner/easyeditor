@@ -1,51 +1,14 @@
 #include "Sprite.h"
+#include "Symbol.h"
 
-#include <ee/SpriteFactory.h>
-
-#include <sprite2/ComplexSprite.h>
 #include <sprite2/RenderParams.h>
 
 namespace ecomplex
 {
 
-Sprite::Sprite()
-	: m_symbol(NULL)
+Sprite::Sprite(Symbol* sym)
+	: ee::Sprite(sym)
 {
-	m_core = new s2::ComplexSprite(this);
-}
-
-Sprite::Sprite(const Sprite& sprite)
-	: ee::Sprite(sprite)
-	, m_symbol(sprite.m_symbol)
-{
-	m_core = new s2::ComplexSprite(*static_cast<s2::ComplexSprite*>(sprite.m_core), this);
-
-	m_symbol->AddReference();
-}
-
-Sprite::Sprite(Symbol* symbol)
-	: m_symbol(symbol)
-{
-	m_core = new s2::ComplexSprite(this);
-
-	m_symbol->AddReference();
-	BuildBounding();	
-}
-
-Sprite::~Sprite()
-{
-	m_core->RemoveReference();
-
-	if (m_symbol) {
-		m_symbol->RemoveReference();
-	}
-}
-
-Sprite* Sprite::Clone() const
-{
-	Sprite* sprite = new Sprite(*this);
-	ee::SpriteFactory::Instance()->Insert(sprite);
-	return sprite;
 }
 
 bool Sprite::Update(const s2::RenderParams& params, float dt) 
@@ -53,26 +16,21 @@ bool Sprite::Update(const s2::RenderParams& params, float dt)
 	s2::RenderParams p = params;
 	p.mt = GetTransMatrix() * params.mt;
 
+	const Symbol* sym = dynamic_cast<const Symbol*>(m_sym);
+
 	bool ret = false;
-	const std::vector<s2::Sprite*>& children = m_symbol->GetChildren();
+	const std::vector<s2::Sprite*>& children = sym->GetChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
-		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
-		if (child->Update(p, dt)) {
+		if (children[i]->Update(p, dt)) {
 			ret = true;
 		}
-
 	}
 	return ret; 
 }
 
-const Symbol& Sprite::GetSymbol() const
+ee::Sprite* Sprite::Create(ee::Symbol* sym) 
 {
-	return *m_symbol;
-}
-
-void Sprite::SetSymbol(ee::Symbol* symbol)
-{
-	ee::Sprite::SetSymbol(&m_symbol, symbol);
+	return new Sprite(static_cast<Symbol*>(sym));
 }
 
 }

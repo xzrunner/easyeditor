@@ -19,7 +19,7 @@ public:
 	IconBuilder();
 	virtual ~IconBuilder();
 
-	virtual void Traverse(ee::Visitor& visitor) const;
+	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
 
 	const IPackNode* Create(const eicon::Sprite* spr);
 

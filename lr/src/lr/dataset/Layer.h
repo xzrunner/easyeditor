@@ -9,6 +9,8 @@
 #include <ee/Shape.h>
 #include <ee/CameraModes.h>
 
+#include <CU_RefCountObj.h>
+
 #include <json/json.h>
 
 #include <string>
@@ -21,23 +23,23 @@ namespace lr
 
 class LibraryPanel;
 
-class Layer : public ee::Object
+class Layer : public cu::RefCountObj
 {
 public:
 	Layer(int id, LibraryPanel* library, s2::CameraMode cam);
 	
-	virtual void TraverseSprite(ee::Visitor& visitor, bool order = true) const;
-	virtual void TraverseSprite(ee::Visitor& visitor, ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
-	virtual bool RemoveSprite(Object* obj);
-	virtual bool InsertSprite(Object* obj, int idx);
+	virtual void TraverseSprite(ee::Visitor<ee::Sprite>& visitor, bool order = true) const;
+	virtual void TraverseSprite(ee::Visitor<ee::Sprite>& visitor, ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
+	virtual bool RemoveSprite(ee::Sprite* spr);
+	virtual bool InsertSprite(ee::Sprite* spr, int idx);
 	virtual bool ClearSprite();
-	virtual bool ResetOrderSprite(const Object* obj, bool up);
-	virtual bool ResetOrderSpriteMost(const Object* obj, bool up);
+	virtual bool ResetOrderSprite(const ee::Sprite* spr, bool up);
+	virtual bool ResetOrderSpriteMost(const ee::Sprite* spr, bool up);
 	virtual bool SortSrites(std::vector<ee::Sprite*>& sprites);
 
-	virtual void TraverseShape(ee::Visitor& visitor, bool order = true) const;
-	virtual bool RemoveShape(Object* obj);
-	virtual bool InsertShape(Object* obj);
+	virtual void TraverseShape(ee::Visitor<ee::Shape>& visitor, bool order = true) const;
+	virtual bool RemoveShape(ee::Shape* shape);
+	virtual bool InsertShape(ee::Shape* shape);
 	virtual bool ClearShape();
 
 	void SetName(const std::string& name) { m_name = name; }
@@ -86,11 +88,11 @@ private:
 	
 private:
 	template<typename T>
-	class QueryNameVisitor : public ee::Visitor
+	class QueryNameVisitor : public ee::Visitor<T>
 	{
 	public:
 		QueryNameVisitor(const std::string& name);
-		virtual void Visit(Object* object, bool& next);
+		virtual void Visit(T* obj, bool& next);
 		T* GetResult() { return m_result; }
 	private:
 		std::string m_name;

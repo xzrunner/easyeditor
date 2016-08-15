@@ -1,6 +1,5 @@
 #include "EE_SP.h"
 #include "Sprite.h"
-#include "BoundingBox.h"
 #include "color_config.h"
 
 #include <sprite2/S2_RVG.h>

@@ -1,34 +1,36 @@
 #ifndef _EASYTEXT_SPRITE_H_
 #define _EASYTEXT_SPRITE_H_
 
-#include "Symbol.h"
+#include "typedef.h"
 
 #include <ee/Sprite.h>
 
 #include <sprite2/Color.h>
+#include <sprite2/TextboxSprite.h>
 
 namespace etext
 {
 
-class Sprite : public ee::Sprite
+class Symbol;
+
+class Sprite : public s2::TextboxSprite, public ee::Sprite
 {
 public:
 	Sprite();
 	Sprite(const Sprite& sprite);
 	Sprite(Symbol* symbol);
-	virtual ~Sprite();
 
-	//
-	// Cloneable interface
-	//
-	virtual Sprite* Clone() const;
-
-	//
-	// Sprite interface
-	//
+	/**
+	 *  @interface
+	 *    s2::Sprite
+	 */
 	virtual bool Update(const s2::RenderParams& params, float dt);
-	virtual const Symbol& GetSymbol() const;
-	virtual void SetSymbol(ee::Symbol* symbol);
+
+	/**
+	 *  @interface
+	 *    ee::Sprite
+	 */
+	virtual Sprite* EEClone() const { return new Sprite(*this); }
 
 	virtual void Load(const Json::Value& val, const std::string& dir = "");
 	virtual void Store(Json::Value& val, const std::string& dir = "") const;
@@ -78,9 +80,7 @@ public:
 	int GetTime() const { return m_time; }
 	void UpdateTime() const { ++m_time; }
 
-	static ee::Sprite* Create(ee::Symbol* symbol) {
-		return new Sprite(static_cast<Symbol*>(symbol));
-	}
+	static ee::Sprite* Create(ee::Symbol* symbol);
 
 private:
 	int m_width;
@@ -110,9 +110,6 @@ private:
 
 private:
 	mutable int m_time;	 // for gtxt dynamic draw
-
-private:
-	Symbol* m_symbol;
 
 }; // Sprite
 

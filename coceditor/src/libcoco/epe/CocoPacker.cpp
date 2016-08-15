@@ -587,7 +587,7 @@ void CocoPacker::resolveSpriteForComponent(const ee::Sprite* sprite, std::vector
 		else
 		{
 			// eanim::Symbol's sprites store unique
-			std::map<const ee::Symbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->GetSymbol());
+			std::map<const ee::Symbol*, int>::iterator itr = m_mapSymbolID.find(sprite->GetSymbol());
 			assert(itr != m_mapSymbolID.end());
 			id = itr->second;
 		}
@@ -601,7 +601,7 @@ void CocoPacker::resolveSpriteForComponent(const ee::Sprite* sprite, std::vector
 	}
 	else
 	{
-		std::map<const ee::Symbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->GetSymbol());
+		std::map<const ee::Symbol*, int>::iterator itr = m_mapSymbolID.find(sprite->GetSymbol());
 		assert(itr != m_mapSymbolID.end());
 		id = itr->second;
 	}
@@ -675,7 +675,7 @@ void CocoPacker::resolveSpriteForFrame(const ee::Sprite* sprite, int index,
 
 void CocoPacker::resolveSpriteForFrame(const ee::Sprite* sprite, const std::vector<std::pair<int, std::string> >& order)
 {
-	std::map<const ee::Symbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->GetSymbol());
+	std::map<const ee::Symbol*, int>::iterator itr = m_mapSymbolID.find(sprite->GetSymbol());
 	assert(itr != m_mapSymbolID.end());
 	if (itr == m_mapSymbolID.end())
 		throw ee::Exception("Error! COCCode::resolveSpriteForFrame L822");

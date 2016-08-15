@@ -30,7 +30,7 @@ LayersMgrWidget::~LayersMgrWidget()
 	m_edited_layer = NULL;
 }
 
-void LayersMgrWidget::TraverseEditableLayers(Visitor& visitor)
+void LayersMgrWidget::TraverseEditableLayers(Visitor<ee::Layer>& visitor)
 {
 	if (m_edited_layer)
 	{
@@ -39,7 +39,7 @@ void LayersMgrWidget::TraverseEditableLayers(Visitor& visitor)
 	}
 }
 
-void LayersMgrWidget::TraverseVisibleLayers(Visitor& visitor)
+void LayersMgrWidget::TraverseVisibleLayers(Visitor<ee::Layer>& visitor)
 {
 	std::vector<LayerWidget*>::const_iterator itr = m_layers.begin();
 	for ( ; itr != m_layers.end(); ++itr)
@@ -53,7 +53,7 @@ void LayersMgrWidget::TraverseVisibleLayers(Visitor& visitor)
 	}
 }
 
-void LayersMgrWidget::TraverseSelectableLayers(Visitor& visitor)
+void LayersMgrWidget::TraverseSelectableLayers(Visitor<ee::Layer>& visitor)
 {
 	std::vector<LayerWidget*>::const_iterator itr = m_layers.begin();
 	for ( ; itr != m_layers.end(); ++itr)
@@ -67,7 +67,7 @@ void LayersMgrWidget::TraverseSelectableLayers(Visitor& visitor)
 	}
 }
 
-void LayersMgrWidget::TraverseAllLayers(Visitor& visitor)
+void LayersMgrWidget::TraverseAllLayers(Visitor<ee::Layer>& visitor)
 {
 	std::vector<LayerWidget*>::const_iterator itr = m_layers.begin();
 	for ( ; itr != m_layers.end(); ++itr)

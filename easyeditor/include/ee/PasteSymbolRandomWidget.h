@@ -2,6 +2,7 @@
 #define _EASYEDITOR_PASTE_SYMBOL_RANDOM_WIDGET_H_
 
 #include "Visitor.h"
+#include "ListItem.h"
 
 #include <wx/wx.h>
 
@@ -32,12 +33,12 @@ private:
 	void InitLayout();
 
 private:
-	class FilterSymbolVisitor : public Visitor
+	class FilterSymbolVisitor : public Visitor<ListItem>
 	{
 	public:
 		FilterSymbolVisitor(const std::string& filter, std::vector<Symbol*>& result);
 
-		virtual void Visit(Object* object, bool& next);
+		virtual void Visit(ListItem* item, bool& next);
 
 	private:
 		std::string m_filter;

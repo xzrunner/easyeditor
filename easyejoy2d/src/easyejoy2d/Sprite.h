@@ -1,16 +1,16 @@
 #ifndef _EASYEJOY2D_SPRITE_H_
 #define _EASYEJOY2D_SPRITE_H_
 
-#include "Symbol.h"
-
 #include <ee/Sprite.h>
+
+#include <sprite2/DummySprite.h>
 
 namespace eejoy2d
 {
 
 class Symbol;
 
-class Sprite : public ee::Sprite
+class Sprite : public s2::DummySprite, public ee::Sprite
 {
 public:
 	Sprite();
@@ -18,24 +18,19 @@ public:
 	Sprite(Symbol* symbol);
 	virtual ~Sprite();
 
-	//
-	// Cloneable interface
-	//
-	virtual Sprite* Clone() const;
+	/**
+	 *  @interface
+	 *    s2::Sprite
+	 */
+	virtual bool Update(const s2::RenderParams& params, float dt);
 
-	//
-	// Sprite interface
-	//
-	virtual bool Update(const s2::RenderParams& params, float dt) { return true; }
-	virtual const Symbol& GetSymbol() const;
-	virtual void SetSymbol(ee::Symbol* symbol);
+	/**
+	 *  @interface
+	 *    ee::Sprite
+	 */
+	virtual Sprite* EEClone() const { return new Sprite(*this); }
 
-	static ee::Sprite* Create(ee::Symbol* symbol) {
-		return new Sprite(static_cast<Symbol*>(symbol));
-	}
-
-protected:
-	Symbol* m_symbol;
+	static ee::Sprite* Create(ee::Symbol* symbol);
 
 }; // Sprite
 

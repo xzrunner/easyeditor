@@ -95,7 +95,7 @@ p3d_emitter_cfg* Particle3DToSpr::LoadConfig(const erespacker::PackParticle3D* p
 		// todo bind ps
 
 		ee::Sprite* spr = NodeToSprite::Trans(src.node);
-		dst.ud = const_cast<ee::Symbol*>(&spr->GetSymbol());
+		dst.ud = const_cast<ee::Symbol*>(spr->GetSymbol());
 	}
 
 	return cfg;

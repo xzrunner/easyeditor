@@ -63,7 +63,7 @@ void StagePanel::Refresh(bool eraseBackground, const wxRect* rect)
 	}	
 }
 
-void StagePanel::TraverseShapes(ee::Visitor& visitor, ee::DataTraverseType type) const
+void StagePanel::TraverseShapes(ee::Visitor<ee::Shape>& visitor, ee::DataTraverseType type) const
 {
 	if (m_loop) {
 		bool next;

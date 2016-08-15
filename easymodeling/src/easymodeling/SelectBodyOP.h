@@ -25,10 +25,10 @@ public:
 	virtual bool Clear();
 
 private:
-	class DrawSelectedVisitor : public ee::Visitor
+	class DrawSelectedVisitor : public ee::Visitor<ee::Sprite>
 	{
 	public:
-		virtual void Visit(ee::Object* object, bool& next);
+		virtual void Visit(ee::Sprite* spr, bool& next);
 	}; // DrawSelectedVisitor
 
 private:

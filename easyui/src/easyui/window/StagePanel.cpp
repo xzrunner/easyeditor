@@ -157,7 +157,7 @@ void StagePanel::OnCode() const
 	dlg.ShowModal();
 }
 
-void StagePanel::TraverseSprites(ee::Visitor& visitor, ee::DataTraverseType type, bool order) const
+void StagePanel::TraverseSprites(ee::Visitor<ee::Sprite>& visitor, ee::DataTraverseType type, bool order) const
 {
 	m_sym->Traverse(visitor);
 }
@@ -203,7 +203,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 				m_sym->InsertExtRef(spr_ui);
 			} else {
 				std::string type = "";
-				SymbolCfg::Instance()->QueryType(&spr->GetSymbol(), type);
+				SymbolCfg::Instance()->QueryType(spr->GetSymbol(), type);
 				if (type.empty() && spr->GetTag().find("type=unknown") == std::string::npos) {
 					spr->SetTag("type=unknown;" + spr->GetTag());
 				}

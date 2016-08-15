@@ -8,6 +8,13 @@
 namespace s2
 {
 
+CircleShape::CircleShape(const CircleShape& circle)
+	: m_center(circle.m_center)
+	, m_radius(circle.m_radius)
+{
+	UpdateBounding();
+}
+
 CircleShape::CircleShape(const sm::vec2& center, float radius)
 	: m_center(center)
 	, m_radius(radius)
@@ -58,8 +65,8 @@ void CircleShape::Draw(const sm::mat4& mt, const RenderColor& color) const
 {
 	sm::vec2 c = mt * m_center;
 	float r = sm::mat_trans_len(m_radius, mt);
-	RVG::SetColor(color.mul);
-	RVG::Circle(c, r, false, 32);
+	s2::RVG::SetColor(color.mul);
+	s2::RVG::Circle(c, r, false, 32);
 }
 
 void CircleShape::UpdateBounding()

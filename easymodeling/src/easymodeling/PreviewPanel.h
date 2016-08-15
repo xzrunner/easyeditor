@@ -24,11 +24,11 @@ private:
 	void createGround();
 
 private:
-	class LoadBodyVisitor : public ee::Visitor
+	class LoadBodyVisitor : public ee::Visitor<ee::Sprite>
 	{
 	public:
 		LoadBodyVisitor(b2World* world, std::map<Body*, b2Body*>& mapBody);
-		virtual void Visit(ee::Object* object, bool& next);
+		virtual void Visit(ee::Sprite* spr, bool& next);
 
 	private:
 		b2World* m_world;
@@ -37,13 +37,13 @@ private:
 
 	}; // LoadBodyVisitor
 
-	class LoadJointVisitor : public ee::Visitor
+	class LoadJointVisitor : public ee::Visitor<Joint>
 	{
 	public:
 		LoadJointVisitor(b2World* world, const std::map<Body*, b2Body*>& mapBody,
 			std::map<Joint*, b2Joint*>& mapJoint);
 
-		virtual void Visit(ee::Object* object, bool& next);
+		virtual void Visit(Joint* joint, bool& next);
 
 	private:
 		b2World* m_world;
@@ -54,13 +54,13 @@ private:
 
 	}; // LoadJointVisitor
 
-	class LoadGearJointVisitor : public ee::Visitor
+	class LoadGearJointVisitor : public ee::Visitor<Joint>
 	{
 	public:
 		LoadGearJointVisitor(b2World* world, const std::map<Body*, b2Body*>& mapBody,
 			const std::map<Joint*, b2Joint*>& mapJoint);
 
-		virtual void Visit(ee::Object* object, bool& next);
+		virtual void Visit(Joint* joint, bool& next);
 
 	private:
 		b2World* m_world;

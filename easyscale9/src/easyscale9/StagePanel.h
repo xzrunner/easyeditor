@@ -20,7 +20,7 @@ public:
 	//
 	// ee::MultiSpritesImpl interface
 	//
-	virtual void TraverseSprites(ee::Visitor& visitor, 
+	virtual void TraverseSprites(ee::Visitor<ee::Sprite>& visitor, 
 		ee::DataTraverseType type = ee::DT_ALL,
 		bool order = true) const;
 

@@ -29,7 +29,7 @@ public:
 
 	virtual void OffsetUV(float dx, float dy);
 
-	virtual void TraverseMesh(ee::Visitor& visitor) const {}
+	virtual void TraverseMesh(ee::Visitor<ee::Shape>& visitor) const {}
 	virtual bool RemoveMesh(ee::Shape* shape) { return false; }
 	virtual bool InsertMesh(ee::Shape* shape) { return false; }
 	virtual bool ClearMesh() { return false; }

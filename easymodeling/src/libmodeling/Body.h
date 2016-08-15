@@ -2,6 +2,8 @@
 #define _EASYMODELING_BODY_H_
 
 #include <SM_Matrix.h>
+#include <SM_Rect.h>
+#include <CU_RefCountObj.h>
 
 #include <vector>
 
@@ -13,7 +15,7 @@ namespace emodeling
 
 class Fixture;
 
-class Body : public ee::Object
+class Body : public cu::RefCountObj
 {
 public:
 	enum Type

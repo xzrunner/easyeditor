@@ -1,5 +1,5 @@
 #include "ScriptsSprite.h"
-#include "SpriteFactory.h"
+#include "ScriptsSymbol.h"
 #include "scripts.h"
 
 #include <sprite2/DummySprite.h>
@@ -7,45 +7,10 @@
 namespace ee
 {
 
-ScriptsSprite::ScriptsSprite()
-	: m_symbol(NULL)
+ScriptsSprite::ScriptsSprite(ScriptsSymbol* sym)
+	: Sprite(sym)
 {
-	m_core = new s2::DummySprite(this);
-}
-
-ScriptsSprite::ScriptsSprite(ScriptsSymbol* symbol)
-	: m_symbol(symbol)
-{
-	m_core = new s2::DummySprite(this);
-
-	m_symbol->AddReference();
-	scripts_do_string(symbol->GetContent().c_str());
-}
-
-ScriptsSprite::~ScriptsSprite()
-{
-	m_core->RemoveReference();
-
-	if (m_symbol) {
-		m_symbol->RemoveReference();
-	}
-}
-
-ScriptsSprite* ScriptsSprite::Clone() const
-{
-	ScriptsSprite* sprite = new ScriptsSprite(*this);
-	SpriteFactory::Instance()->Insert(sprite);
-	return sprite;
-}
-
-const ScriptsSymbol& ScriptsSprite::GetSymbol() const
-{
-	return *m_symbol;
-}
-
-void ScriptsSprite::SetSymbol(Symbol* symbol)
-{
-	Sprite::SetSymbol(&m_symbol, symbol);
+	scripts_do_string(sym->GetContent().c_str());
 }
 
 }

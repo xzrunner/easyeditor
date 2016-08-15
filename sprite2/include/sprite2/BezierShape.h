@@ -10,6 +10,7 @@ class BezierShape : public PolylineShape
 {
 public:
 	BezierShape() {}
+	BezierShape(const BezierShape& bezier);
 	BezierShape(const sm::vec2& start, const sm::vec2& end);
 	
 	/**

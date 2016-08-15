@@ -24,7 +24,7 @@ Symbol::Symbol(const Symbol& s)
 	: ee::Symbol(s)
 {
 	EJSprite* spr = s.m_spr;
-	ee::obj_assign<EJSprite>(m_spr, spr);
+	cu::RefCountObjAssign<EJSprite>(m_spr, spr);
 }
 
 Symbol::~Symbol()
@@ -41,7 +41,7 @@ Symbol* Symbol::Clone() const
 	return new Symbol(*this);
 }
 
-void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
+void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	if (!m_spr) {
 		return;
@@ -51,7 +51,7 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 	DrawFromEJScreen();
 }
 
-sm::rect Symbol::GetSize(const ee::Sprite* sprite) const
+sm::rect Symbol::GetBounding(const s2::Sprite* sprite) const
 {
 	return sm::rect(sm::vec2(0, 0), 200, 200);
 }

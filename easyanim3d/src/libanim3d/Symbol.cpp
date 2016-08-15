@@ -17,12 +17,12 @@ Symbol::~Symbol()
 {
 }
 
-void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
+void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	if (!spr) {
 		return;
 	}
-	const Sprite* s = static_cast<const Sprite*>(spr);
+	const Sprite* s = dynamic_cast<const Sprite*>(spr);
 
 	e3d::ShaderMgr* mgr = e3d::ShaderMgr::Instance();
 
@@ -35,7 +35,7 @@ void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
 	mgr->DrawModel(m_model, mat);
 }
 
-sm::rect Symbol::GetSize(const ee::Sprite* sprite) const
+sm::rect Symbol::GetBounding(const s2::Sprite* sprite) const
 {
 	return sm::rect(100, 100);
 }

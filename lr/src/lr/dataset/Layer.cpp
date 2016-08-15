@@ -33,21 +33,20 @@ Layer::Layer(int id, LibraryPanel* library, s2::CameraMode cam)
 {
 }
 
-void Layer::TraverseSprite(ee::Visitor& visitor, bool order/* = true*/) const
+void Layer::TraverseSprite(ee::Visitor<ee::Sprite>& visitor, bool order/* = true*/) const
 {
 	m_sprites.Traverse(visitor, order);
 	m_layer_mgr.TraverseSprite(visitor, ee::DT_ALL, order);
 }
 
-void Layer::TraverseSprite(ee::Visitor& visitor, ee::DataTraverseType type, bool order) const
+void Layer::TraverseSprite(ee::Visitor<ee::Sprite>& visitor, ee::DataTraverseType type, bool order) const
 {
 	m_sprites.Traverse(visitor, type, order);
 	m_layer_mgr.TraverseSprite(visitor, type, order);
 }
 
-bool Layer::RemoveSprite(Object* obj)
+bool Layer::RemoveSprite(ee::Sprite* spr)
 {
-	ee::Sprite* spr = static_cast<ee::Sprite*>(obj);
 	m_name_set.erase(spr->GetName());
 
 	const std::vector<ee::Layer*>& layers = m_layer_mgr.GetAllLayers();
@@ -59,9 +58,8 @@ bool Layer::RemoveSprite(Object* obj)
 	return m_sprites.Remove(spr);
 }
 
-bool Layer::InsertSprite(Object* obj, int idx)
+bool Layer::InsertSprite(ee::Sprite* spr, int idx)
 {
-	ee::Sprite* spr = static_cast<ee::Sprite*>(obj);
 	CheckSpriteName(spr);
 
 	spr->GetCamera().mode = m_cam_mode;
@@ -83,14 +81,14 @@ bool Layer::ClearSprite()
 	return m_sprites.Clear();
 }
 
-bool Layer::ResetOrderSprite(const Object* obj, bool up)
+bool Layer::ResetOrderSprite(const ee::Sprite* spr, bool up)
 {
-	return m_sprites.ResetOrder(static_cast<const ee::Sprite*>(obj), up);
+	return m_sprites.ResetOrder(spr, up);
 }
 
-bool Layer::ResetOrderSpriteMost(const Object* obj, bool up)
+bool Layer::ResetOrderSpriteMost(const ee::Sprite* spr, bool up)
 {
-	return m_sprites.ResetOrderMost(static_cast<const ee::Sprite*>(obj), up);
+	return m_sprites.ResetOrderMost(spr, up);
 }
 
 bool Layer::SortSrites(std::vector<ee::Sprite*>& sprites)
@@ -98,15 +96,14 @@ bool Layer::SortSrites(std::vector<ee::Sprite*>& sprites)
 	return m_sprites.Sort(sprites);
 }
 
-void Layer::TraverseShape(ee::Visitor& visitor, bool order) const
+void Layer::TraverseShape(ee::Visitor<ee::Shape>& visitor, bool order) const
 {
 	m_shapes.Traverse(visitor, order);
 	m_layer_mgr.TraverseShape(visitor, order);
 }
 
-bool Layer::RemoveShape(Object* obj)
+bool Layer::RemoveShape(ee::Shape* shape)
 {
-	ee::Shape* shape = static_cast<ee::Shape*>(obj);
 	if (m_layer_mgr.selected) {
 		return m_layer_mgr.selected->Remove(shape);
 	} else {
@@ -114,9 +111,8 @@ bool Layer::RemoveShape(Object* obj)
 	}
 }
 
-bool Layer::InsertShape(Object* obj)
+bool Layer::InsertShape(ee::Shape* shape)
 {
-	ee::Shape* shape = static_cast<ee::Shape*>(obj);
 	if (m_layer_mgr.selected) {
 		return m_layer_mgr.selected->Insert(shape);
 	} else {
@@ -189,7 +185,7 @@ void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
 		if (spr->GetUserData()) {
 			UserData* ud = static_cast<UserData*>(spr->GetUserData());
 			if (ud->type == UT_NEW_COMPLEX) {
-				const ee::Symbol* sym = &spr->GetSymbol();
+				const ee::Symbol* sym = spr->GetSymbol();
 				ecomplex::FileStorer::Store(sym->GetFilepath().c_str(), 
 					static_cast<const ecomplex::Symbol*>(sym));
 			}
@@ -394,7 +390,7 @@ ee::Sprite* Layer::LoadGroup(const Json::Value& val, const std::string& dir, con
 
 	ee::SpriteFactory::Instance()->Insert(spr);
 	spr->Load(val);
-	for_each(sprites.begin(), sprites.end(), ee::cu::RemoveRefFonctor<ee::Sprite>());
+	for_each(sprites.begin(), sprites.end(), cu::RemoveRefFonctor<ee::Sprite>());
 	return spr;
 }
 
@@ -513,9 +509,9 @@ QueryNameVisitor(const std::string& name)
 
 template<typename T>
 void Layer::QueryNameVisitor<T>::
-Visit(Object* object, bool& next)
+Visit(T* obj, bool& next)
 {
-	T* t = static_cast<T*>(object);
+	T* t = static_cast<T*>(obj);
 	if (t->GetName() == m_name) {
 		m_result = t;
 		next = false;

@@ -3,6 +3,8 @@
 
 #include <ee/Symbol.h>
 
+#include <sprite2/Particle2dSymbol.h>
+
 struct p2d_emitter_cfg;
 
 namespace eparticle2d
@@ -10,23 +12,24 @@ namespace eparticle2d
 
 class ParticleSystem;
 
-class Symbol : public ee::Symbol
+class Symbol : public ee::Symbol, public s2::Particle2dSymbol
 {
 public:
 	Symbol();
 	Symbol(const Symbol& s);
 
-	//
-	// Cloneable interface
-	//
-	virtual Symbol* Clone() const;
+	/**
+	 *  @interface
+	 *    s2::Symbol
+	 */
+	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
+	virtual sm::rect GetBounding(const s2::Sprite* sprite = NULL) const;
 
-	//
-	// Symbol interfaces
-	//
-	virtual void Draw(const s2::RenderParams& params, const ee::Sprite* spr = NULL) const;
+	/**
+	 *  @interface
+	 *    ee::Symbol
+	 */
 	virtual void ReloadTexture() const;
-	virtual sm::rect GetSize(const ee::Sprite* sprite = NULL) const;
 
 	void SetEmitterCfg(p2d_emitter_cfg* cfg) { m_et_cfg = cfg; }
 	const p2d_emitter_cfg* GetEmitterCfg() const { return m_et_cfg; }

@@ -64,24 +64,22 @@ void ArrangeSpriteImpl::OnDraw() const
 //////////////////////////////////////////////////////////////////////////
 
 void ArrangeSpriteImpl::FixCoordsVisitor::
-Visit(ee::Object* object, bool& next)
+Visit(ee::Sprite* spr, bool& next)
 {
-	ee::Sprite* sprite = static_cast<ee::Sprite*>(object);
-
-	const sm::vec2& pos = sprite->GetPosition();
+	const sm::vec2& pos = spr->GetPosition();
 
 	const float s = Context::Instance()->scale,
 		p = Context::Instance()->padding;
 	float width, height;
-	if (sprite->GetAngle() == 0)
+	if (spr->GetAngle() == 0)
 	{
-		width = sprite->GetSymbol().GetSize().Width() * s + p;
-		height = sprite->GetSymbol().GetSize().Height() * s + p;
+		width = spr->GetSymbol().GetBounding().Width() * s + p;
+		height = spr->GetSymbol().GetBounding().Height() * s + p;
 	}
 	else
 	{
-		width = sprite->GetSymbol().GetSize().Height() * s + p;
-		height = sprite->GetSymbol().GetSize().Width() * s + p;
+		width = spr->GetSymbol().GetBounding().Height() * s + p;
+		height = spr->GetSymbol().GetBounding().Width() * s + p;
 	}
 
 	sm::vec2 leftTop;
@@ -101,7 +99,7 @@ Visit(ee::Object* object, bool& next)
 	fixedCenter.x = int(fixedCenter.x) + width * 0.5f;
 	fixedCenter.y = int(fixedCenter.y) + height * 0.5f;
 
-	sprite->SetTransform(fixedCenter, sprite->GetAngle());
+	spr->SetTransform(fixedCenter, spr->GetAngle());
 	next = true;
 }
 

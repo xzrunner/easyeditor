@@ -47,14 +47,12 @@ void TranslateSpriteState::Translate(const sm::ivec2& first, const sm::ivec2& cu
 //////////////////////////////////////////////////////////////////////////
 
 void TranslateSpriteState::Visitor::
-Visit(ee::Object* object, bool& next)
+Visit(ee::Sprite* spr, bool& next)
 {
-	Sprite* sprite = static_cast<Sprite*>(object);
-
-	const sm::vec3& old = sprite->GetPos3();
+	const sm::vec3& old = spr->GetPos3();
 	sm::vec3 last = m_stage->TransPos3ScreenToProject(m_last, old.z);
 	sm::vec3 curr = m_stage->TransPos3ScreenToProject(m_curr, old.z);
-	sprite->Translate3(curr - last);
+	spr->Translate3(curr - last);
 
 	next = true;
 }

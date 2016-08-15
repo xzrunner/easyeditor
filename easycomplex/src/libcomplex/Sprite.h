@@ -3,37 +3,31 @@
 
 #include <ee/Sprite.h>
 
-#include "Symbol.h"
+#include <sprite2/ComplexSprite.h>
 
 namespace ecomplex
 {
 
-class Sprite : public ee::Sprite
+class Symbol;
+
+class Sprite : public s2::ComplexSprite, public ee::Sprite
 {
 public:
-	Sprite();
-	Sprite(const Sprite& sprite);
-	Sprite(Symbol* symbol);
-	virtual ~Sprite();
+	Sprite(Symbol* sym);
 
-	//
-	// Cloneable interface
-	//
-	virtual Sprite* Clone() const;
-
-	//
-	// Sprite interface
-	//
+	/**
+	 *  @interface
+	 *    s2::Sprite
+	 */
 	virtual bool Update(const s2::RenderParams& params, float dt);
-	virtual const Symbol& GetSymbol() const;
-	virtual void SetSymbol(ee::Symbol* symbol);
 
-	static ee::Sprite* Create(ee::Symbol* symbol) {
-		return new Sprite(static_cast<Symbol*>(symbol));
-	}
+	/**
+	 *  @interface
+	 *    ee::Sprite
+	 */
+	virtual Sprite* EEClone() const { return new Sprite(*this); }
 
-protected:
-	Symbol* m_symbol;
+	static ee::Sprite* Create(ee::Symbol* sym);
 
 }; // Sprite
 

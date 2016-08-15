@@ -41,7 +41,7 @@ ComplexBuilder::~ComplexBuilder()
 	for_each(m_gen_nodes.begin(), m_gen_nodes.end(), ee::DeletePointerFunctor<PackAnimation>());
 }
 
-void ComplexBuilder::Traverse(ee::Visitor& visitor) const
+void ComplexBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 {
 	std::map<const ecomplex::Symbol*, const PackAnimation*>::const_iterator 
 		itr = m_map_data.begin();

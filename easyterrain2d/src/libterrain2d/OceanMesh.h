@@ -3,12 +3,14 @@
 
 #include <easyshape.h>
 
+#include <CU_RefCountObj.h>
+
 namespace eterrain2d
 {
 
 class MeshShape;
 
-class OceanMesh : public ee::Object
+class OceanMesh : public cu::RefCountObj
 {
 public:
 	OceanMesh(const eshape::PolygonShape* shape, const ee::ImageSymbol* image);

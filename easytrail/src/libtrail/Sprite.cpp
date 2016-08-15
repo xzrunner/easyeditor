@@ -1,10 +1,8 @@
 #include "Sprite.h"
+#include "Symbol.h"
 #include "TrailNode.h"
 
-#include <ee/SpriteFactory.h>
-
 #include <mt_2d.h>
-#include <sprite2/DummySprite.h>
 #include <sprite2/RenderParams.h>
 
 #include <assert.h>
@@ -13,52 +11,24 @@ namespace etrail
 {
 
 Sprite::Sprite()
-	: m_symbol(NULL)
-	, m_et(NULL)
+	: m_et(NULL)
 {
-	m_core = new s2::DummySprite(this);
 }
 
 Sprite::Sprite(const Sprite& sprite)
-	: ee::Sprite(sprite)
-	, m_symbol(sprite.m_symbol)
-	, m_et(NULL)
+	: m_et(NULL)
 {
-	m_core = new s2::DummySprite(*static_cast<s2::DummySprite*>(sprite.m_core), this);
-
-	m_symbol->AddReference();
 }
 
 Sprite::Sprite(Symbol* symbol)
-	: m_symbol(symbol)
+	: ee::Sprite(symbol)
 	, m_et(NULL)
 {
-	m_core = new s2::DummySprite(this);
-
-	m_symbol->AddReference();
-	BuildBounding();
-
-	const t2d_emitter_cfg* cfg = m_symbol->GetEmitterCfg();
+	const t2d_emitter_cfg* cfg = symbol->GetEmitterCfg();
 	if (cfg) {
 		m_et = t2d_emitter_create(cfg);
 		t2d_emitter_start(m_et);
 	}
-}
-
-Sprite::~Sprite()
-{
-	m_core->RemoveReference();
-
-	if (m_symbol) {
-		m_symbol->RemoveReference();
-	}
-}
-
-Sprite* Sprite::Clone() const
-{
-	Sprite* sprite = new Sprite(*this);
-	ee::SpriteFactory::Instance()->Insert(sprite);
-	return sprite;
 }
 
 bool Sprite::Update(const s2::RenderParams& params, float dt)
@@ -79,16 +49,6 @@ bool Sprite::Update(const s2::RenderParams& params, float dt)
 	return true;
 }
 
-const Symbol& Sprite::GetSymbol() const
-{
-	return *m_symbol;
-}
-
-void Sprite::SetSymbol(ee::Symbol* symbol)
-{
-	ee::Sprite::SetSymbol(&m_symbol, symbol);
-}
-
 void Sprite::Draw(const s2::RenderParams& params) const
 {
 	if (m_et) {
@@ -96,6 +56,11 @@ void Sprite::Draw(const s2::RenderParams& params) const
 		m_rp.ct = params.color;
 		t2d_emitter_draw(m_et, &m_rp);
 	}
+}
+
+ee::Sprite* Sprite::Create(ee::Symbol* symbol) 
+{
+	return new Sprite(static_cast<Symbol*>(symbol));
 }
 
 }

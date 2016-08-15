@@ -4,13 +4,14 @@
 #include <SM_Matrix.h>
 #include <SM_Rect.h>
 #include <sprite2/Color.h>
+#include <CU_RefCountObj.h>
 
 #include <json/json.h>
 
 namespace eshadow
 {
 
-class Shadow : public ee::Object
+class Shadow : public cu::RefCountObj
 {
 public:
 	Shadow(float radius);

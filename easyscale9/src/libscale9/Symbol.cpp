@@ -21,22 +21,17 @@ Symbol::Symbol(const Symbol& symbol)
 {
 }
 
-void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
+void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	s2::RenderParams p = params;
 	if (spr) {
-		p.mt = spr->GetTransMatrix() * params.mt;
-		p.color = spr->GetColor() * params.color;
+		p.mt = dynamic_cast<const ee::Sprite*>(spr)->GetTransMatrix() * params.mt;
+		p.color = spr->Color() * params.color;
 	}
 	m_data.Draw(p, spr);
 }
 
-void Symbol::ReloadTexture() const
-{
-	m_data.ReloadTexture();
-}
-
-sm::rect Symbol::GetSize(const ee::Sprite* sprite/* = NULL*/) const
+sm::rect Symbol::GetBounding(const ee::Sprite* sprite/* = NULL*/) const
 {
 	float w, h;
 	if (sprite) {
@@ -46,6 +41,11 @@ sm::rect Symbol::GetSize(const ee::Sprite* sprite/* = NULL*/) const
 		m_data.GetSize(w, h);
 	}
 	return sm::rect(sm::vec2(0, 0), w, h);
+}
+
+void Symbol::ReloadTexture() const
+{
+	m_data.ReloadTexture();
 }
 
 void Symbol::ResizeScale9(float width, float height)

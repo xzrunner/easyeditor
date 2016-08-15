@@ -16,17 +16,13 @@ public:
 	Symbol();
 	virtual ~Symbol();
 
-	//
-	// IObject interface
-	//	
-	virtual Symbol* Clone() const;
-
-	//
-	// Symbol interface
-	//
-	virtual void Draw(const s2::RenderParams& params, const ee::Sprite* spr = NULL, 
-		const ee::Sprite* root = NULL) const;
-	virtual sm::rect GetSize(const ee::Sprite* sprite = NULL) const;
+	/**
+	 *  @interface
+	 *    s2::Symbol
+	 */
+	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL, 
+		const s2::Sprite* root = NULL) const;
+	virtual sm::rect GetBounding(const s2::Sprite* sprite = NULL) const;
 
 	static ee::Symbol* Create() { return new Symbol(); }
 

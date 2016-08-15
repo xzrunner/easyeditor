@@ -23,7 +23,7 @@ Network::Network(const Network& nw)
 	: EditableMesh(nw)
 {
 	if (nw.m_nw) {
-		m_nw = nw.m_nw->Clone();
+		m_nw = nw.m_nw->EEClone();
 	} else {
 		m_nw = NULL;
 	}
@@ -237,7 +237,7 @@ void Network::Refresh()
 	RefreshTriangles();
 }
 
-void Network::TraverseMesh(ee::Visitor& visitor) const
+void Network::TraverseMesh(ee::Visitor<ee::Shape>& visitor) const
 {
 	if (m_nw) {
 		bool has_next;

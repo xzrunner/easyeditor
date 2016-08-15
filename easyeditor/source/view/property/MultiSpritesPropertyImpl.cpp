@@ -1,5 +1,4 @@
 #include "MultiSpritesPropertyImpl.h"
-#include "BoundingBox.h"
 #include "Sprite.h"
 #include "sprite_utility.h"
 #include "Symbol.h"

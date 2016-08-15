@@ -21,7 +21,7 @@ ImageBuilder::~ImageBuilder()
 	for_each(m_nodes.begin(), m_nodes.end(), ee::DeletePointerFunctor<IPackNode>());	
 }
 
-void ImageBuilder::Traverse(ee::Visitor& visitor) const
+void ImageBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 {
 	for (int i = 0, n = m_nodes.size(); i < n; ++i) {
 		bool has_next;
@@ -51,7 +51,7 @@ void ImageBuilder::LoadPictureQuad(const ee::ImageSprite* img, PackPicture::Quad
 	quad.texture_coord[2].Set(1, 1);
 	quad.texture_coord[3].Set(1, 0);
 
-	sm::rect r = img->GetSymbol().GetSize();
+	sm::rect r = img->GetSymbol().GetBounding();
  	quad.screen_coord[0].Set(r.xmin, r.ymin);
  	quad.screen_coord[1].Set(r.xmin, r.ymax);
  	quad.screen_coord[2].Set(r.xmax, r.ymax);

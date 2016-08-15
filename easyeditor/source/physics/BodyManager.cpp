@@ -26,7 +26,7 @@ IBody* BodyManager::LoadBody(Sprite* sprite)
 			m_map_body.insert(std::make_pair(sprite, body));
 		}
 	} else {
-		obj_assign<IBody>(itr->second, body);
+		cu::RefCountObjAssign(itr->second, body);
 	}
 	return body;
 }

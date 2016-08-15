@@ -1,19 +1,15 @@
 #include "Sprite.h"
+#include "Symbol.h"
 #include "PropertySetting.h"
 
 #include <ee/SpriteFactory.h>
 #include <ee/trans_color.h>
 
-#include <sprite2/TextboxSprite.h>
-
 namespace etext
 {
 
 Sprite::Sprite()
-	: m_symbol(NULL)
 {
-	m_core = new s2::TextboxSprite(this);
-
 	m_width = 100;
 	m_height = 20;
 
@@ -40,12 +36,7 @@ Sprite::Sprite()
 
 Sprite::Sprite(const Sprite& sprite)
 	: ee::Sprite(sprite)
-	, m_symbol(sprite.m_symbol)
 {
-	m_core = new s2::TextboxSprite(*static_cast<s2::TextboxSprite*>(sprite.m_core), this);
-
-	m_symbol->AddReference();
-
 	m_width = sprite.m_width;
 	m_height = sprite.m_height;
 
@@ -74,12 +65,8 @@ Sprite::Sprite(const Sprite& sprite)
 }
 
 Sprite::Sprite(Symbol* symbol)
-	: m_symbol(symbol)
+	: ee::Sprite(symbol)
 {
-	m_core = new s2::TextboxSprite(this);
-
-	m_symbol->AddReference();
-
 	m_width = symbol->m_width;
 	m_height = symbol->m_height;
 
@@ -102,39 +89,11 @@ Sprite::Sprite(Symbol* symbol)
 	m_richtext = symbol->m_richtext;
 
 	m_time = 0;
-
-	BuildBounding();	
-}
-
-Sprite::~Sprite()
-{
-	m_core->RemoveReference();
-
-	if (m_symbol) {
-		m_symbol->RemoveReference();
-	}
-}
-
-Sprite* Sprite::Clone() const
-{
-	Sprite* sprite = new Sprite(*this);
-	ee::SpriteFactory::Instance()->Insert(sprite);
-	return sprite;
 }
 
 bool Sprite::Update(const s2::RenderParams& params, float dt) 
 { 
 	return m_text.find("dynamic") != std::string::npos;
-}
-
-const Symbol& Sprite::GetSymbol() const
-{
-	return *m_symbol;
-}
-
-void Sprite::SetSymbol(ee::Symbol* symbol)
-{
-	ee::Sprite::SetSymbol(&m_symbol, symbol);
 }
 
 void Sprite::Load(const Json::Value& val, const std::string& dir)
@@ -172,8 +131,6 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 	if (!text_val["richtext"].isNull()) {
 		m_richtext = text_val["richtext"].asBool();
 	}
-
-	BuildBounding();
 }
 
 void Sprite::Store(Json::Value& val, const std::string& dir) const
@@ -248,6 +205,11 @@ void Sprite::SetSpace(float hori, float vert)
 {
 	m_space_hori = hori;
 	m_space_vert = vert;
+}
+
+ee::Sprite* Sprite::Create(ee::Symbol* symbol) 
+{
+	return new Sprite(static_cast<Symbol*>(symbol));
 }
 
 }

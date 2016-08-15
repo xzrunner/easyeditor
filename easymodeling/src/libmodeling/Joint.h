@@ -1,6 +1,10 @@
 #ifndef _EASYMODELING_JOINT_H_
 #define _EASYMODELING_JOINT_H_
 
+#include <SM_Rect.h>
+#include <SM_Vector.h>
+#include <CU_RefCountObj.h>
+
 #include <string>
 
 namespace ee { class Rect; class Sprite; }
@@ -10,7 +14,7 @@ namespace emodeling
 
 class Body;
 
-class Joint : public ee::Object
+class Joint : public cu::RefCountObj
 {
 public:
 	enum Type

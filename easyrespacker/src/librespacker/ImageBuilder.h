@@ -17,7 +17,7 @@ public:
 	ImageBuilder();
 	virtual ~ImageBuilder();
 
-	virtual void Traverse(ee::Visitor& visitor) const;
+	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
 
 	const IPackNode* Create(const ee::ImageSprite* spr);
 

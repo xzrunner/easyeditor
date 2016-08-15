@@ -2,14 +2,16 @@
 #define _EASYEDITOR_FONT_BLANK_SPRITE_H_
 
 #include "Sprite.h"
-#include "FontBlankSymbol.h"
 
 #include <sprite2/Color.h>
+#include <sprite2/DummySprite.h>
 
 namespace ee
 {
 
-class FontBlankSprite : public Sprite
+class FontBlankSymbol;
+
+class FontBlankSprite : public s2::DummySprite, public Sprite
 {
 public:
 	enum HoriAlignType
@@ -30,20 +32,14 @@ public:
 
 public:
 	FontBlankSprite();
-	FontBlankSprite(const FontBlankSprite& sprite);
-	FontBlankSprite(FontBlankSymbol* symbol);
-	virtual ~FontBlankSprite();
+	FontBlankSprite(const FontBlankSprite& spr);
+	FontBlankSprite(FontBlankSymbol* sym);
 
-	//
-	// Cloneable interface
-	//
-	virtual FontBlankSprite* Clone() const;
-
-	//
-	// Sprite interface
-	//
-	virtual const FontBlankSymbol& GetSymbol() const;
-	virtual void SetSymbol(Symbol* symbol);
+	/**
+	 *  @interface
+	 *    ee::Sprite
+	 */
+	virtual FontBlankSprite* EEClone() const { return new FontBlankSprite(*this); }
 
 	virtual void Load(const Json::Value& val, const std::string& dir = "");
 	virtual void Store(Json::Value& val, const std::string& dir = "") const;
@@ -58,10 +54,7 @@ public:
 	void SetTextID(const std::string& tid) { m_tid = tid; }
 	const std::string& GetTextID() const { return m_tid; }
 
-	const std::string& GetSymbolName() const { return m_symbol->name; }
-
-protected:
-	FontBlankSymbol* m_symbol;
+	const std::string& GetSymbolName() const;
 
 public:
 	std::string font;

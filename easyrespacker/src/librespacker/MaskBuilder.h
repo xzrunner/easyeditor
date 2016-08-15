@@ -17,7 +17,7 @@ public:
 	MaskBuilder() {}
 	virtual ~MaskBuilder();
 
-	virtual void Traverse(ee::Visitor& visitor) const;
+	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
 
 	const IPackNode* Create(const emask::Symbol* sym);
 

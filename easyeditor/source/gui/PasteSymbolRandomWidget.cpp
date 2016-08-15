@@ -83,11 +83,11 @@ FilterSymbolVisitor(const std::string& filter, std::vector<Symbol*>& result)
 }
 
 void PasteSymbolRandomWidget::FilterSymbolVisitor::
-Visit(Object* object, bool& next)
+Visit(ListItem* item, bool& next)
 {
-	Symbol* symbol = static_cast<Symbol*>(object);
-	if (!m_filter.empty() && symbol->GetFilepath().find(m_filter) != wxNOT_FOUND)
-		m_result.push_back(symbol);
+	ee::Symbol* sym = static_cast<ee::Symbol*>(item);
+	if (!m_filter.empty() && sym->GetFilepath().find(m_filter) != wxNOT_FOUND)
+		m_result.push_back(sym);
 	next = true;
 }
 

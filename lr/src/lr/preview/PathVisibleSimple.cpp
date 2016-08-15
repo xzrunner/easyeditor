@@ -1,7 +1,6 @@
 #include "PathVisibleSimple.h"
 
 #include <ee/color_config.h>
-#include <ee/BoundingBox.h>
 #include <ee/Math2D.h>
 
 #include <easyshape.h>

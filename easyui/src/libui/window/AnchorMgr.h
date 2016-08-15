@@ -1,6 +1,8 @@
 #ifndef _EASYUI_WINDOW_ANCHOR_MGR_H_
 #define _EASYUI_WINDOW_ANCHOR_MGR_H_
 
+#include <ee/Visitor.h>
+
 #include <SM_Vector.h>
 
 #include <json/json.h>
@@ -29,7 +31,7 @@ public:
 	void DrawSprites(const s2::RenderParams& params) const;
 	void DrawNodes(const s2::RenderParams& params) const;
 
-	void Traverse(ee::Visitor& visitor);
+	void Traverse(ee::Visitor<ee::Sprite>& visitor);
 	void Remove(ee::Sprite* spr);
 	void Insert(ee::Sprite* spr);
 	void Clear();

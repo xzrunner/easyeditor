@@ -5,6 +5,7 @@
 
 #include <ee/UICallback.h>
 #include <SM_Quaternion.h>
+#include <CU_RefCountObj.h>
 
 struct p3d_emitter;
 struct p3d_emitter_cfg;
@@ -19,7 +20,7 @@ namespace eparticle3d
 class AnimRecorder;
 class InvertRecord;
 
-class ParticleSystem : public ee::Object, public ee::Cloneable, public ee::UICallback
+class ParticleSystem : public cu::RefCountObj, public ee::UICallback
 {
 public:
 	ParticleSystem(p3d_emitter_cfg* cfg, bool record);
@@ -27,14 +28,10 @@ public:
 
 	virtual ~ParticleSystem();
 
-	//
-	// Cloneable interface
-	//
-	virtual ParticleSystem* Clone() const { return new ParticleSystem(*this); }
-
-	//
-	// UICallback interface
-	//
+	/**
+	 *  @interface
+	 *    UICallback
+	 */
 	virtual void SetValue(int key, const ee::UICallback::Data& data);
 	virtual void GetValue(int key, ee::UICallback::Data& data);
 

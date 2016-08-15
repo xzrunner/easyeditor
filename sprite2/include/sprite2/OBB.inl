@@ -71,6 +71,13 @@ void OBB::Build(const sm::rect& r, const sm::vec2& pos, float angle,
 	m_angle = angle;
 }
 
+inline 
+void OBB::SetTransform(const sm::vec2& position, const sm::vec2& offset, float angle) 
+{
+	m_position = position + (sm::rotate_vector(-offset, angle) + offset);
+	m_angle = angle;
+}
+
 }
 
 #endif // _SPRITE2_OBB_INL_

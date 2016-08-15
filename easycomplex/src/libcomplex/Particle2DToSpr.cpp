@@ -102,7 +102,7 @@ p2d_emitter_cfg* Particle2DToSpr::LoadConfig(const erespacker::PackParticle2D* p
 		memcpy(&dst.add_col_end.r, &add_col_end.r, sizeof(add_col_end));
 		
 		ee::Sprite* spr = NodeToSprite::Trans(src.node);
-		dst.ud = const_cast<ee::Symbol*>(&spr->GetSymbol());
+		dst.ud = const_cast<ee::Symbol*>(spr->GetSymbol());
 	}
 
 	return cfg;

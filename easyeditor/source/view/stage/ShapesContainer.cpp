@@ -10,29 +10,29 @@ ShapesContainer::~ShapesContainer()
 	Clear();
 }
 
-void ShapesContainer::Traverse(Visitor& visitor, bool order/* = true*/) const
+void ShapesContainer::Traverse(Visitor<ee::Shape>& visitor, bool order/* = true*/) const
 {
 	m_shapes.Traverse(visitor, order);
 }
 
-void ShapesContainer::Traverse(Visitor& visitor, DataTraverseType type, bool order) const
+void ShapesContainer::Traverse(Visitor<ee::Shape>& visitor, DataTraverseType type, bool order) const
 {
 	Traverse(visitor, order);
 }
 
-bool ShapesContainer::Remove(Object* obj)
+bool ShapesContainer::Remove(ee::Shape* shape)
 {
-	return m_shapes.Remove(static_cast<Shape*>(obj));
+	return m_shapes.Remove(shape);
 }
 
-bool ShapesContainer::Insert(Object* obj)
+bool ShapesContainer::Insert(ee::Shape* shape)
 {
-	return m_shapes.Insert(static_cast<Shape*>(obj));
+	return m_shapes.Insert(shape);
 }
 
-bool ShapesContainer::Insert(Object* obj, int idx)
+bool ShapesContainer::Insert(ee::Shape* shape, int idx)
 {
-	return m_shapes.Insert(static_cast<Shape*>(obj), idx);	
+	return m_shapes.Insert(shape, idx);	
 }
 
 bool ShapesContainer::Clear()
@@ -40,14 +40,14 @@ bool ShapesContainer::Clear()
 	return m_shapes.Clear();
 }
 
-bool ShapesContainer::ResetOrder(const Object* obj, bool up)
+bool ShapesContainer::ResetOrder(const ee::Shape* shape, bool up)
 {
-	return m_shapes.ResetOrder(static_cast<const Shape*>(obj), up);
+	return m_shapes.ResetOrder(shape, up);
 }
 
-bool ShapesContainer::ResetOrderMost(const Object* obj, bool up)
+bool ShapesContainer::ResetOrderMost(const ee::Shape* shape, bool up)
 {
-	return m_shapes.ResetOrderMost(static_cast<const Shape*>(obj), up);
+	return m_shapes.ResetOrderMost(shape, up);
 }
 
 }

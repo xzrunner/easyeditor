@@ -20,7 +20,7 @@ public:
 	TrailBuilder(ExportNameSet& export_set);
 	virtual ~TrailBuilder();
 
-	virtual void Traverse(ee::Visitor& visitor) const;
+	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
 
 	const IPackNode* Create(const etrail::Symbol* sym);
 

@@ -20,9 +20,14 @@ Symbol::~Symbol()
 	Clear();
 }
 
-void Symbol::Draw(const s2::RenderParams& params, const ee::Sprite* spr) const
+void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 
+}
+
+sm::rect Symbol::GetBounding(const s2::Sprite* sprite/* = NULL*/) const
+{
+	return m_rect;
 }
 
 void Symbol::ReloadTexture() const
@@ -30,11 +35,6 @@ void Symbol::ReloadTexture() const
 	for (int i = 0, n = m_symbols.size(); i < n; ++i) {
 		m_symbols[i]->ReloadTexture();
 	}
-}
-
-sm::rect Symbol::GetSize(const ee::Sprite* sprite/* = NULL*/) const
-{
-	return m_rect;
 }
 
 void Symbol::LoadResources()
@@ -65,13 +65,13 @@ void Symbol::LoadResources()
 	}
 
 	for (int i = 0, n = m_symbols.size(); i < n; ++i) {
-		m_rect.Combine(m_symbols[i]->GetSize());
+		m_rect.Combine(m_symbols[i]->GetBounding());
 	}
 }
 
 void Symbol::Clear()
 {
-	for_each(m_symbols.begin(), m_symbols.end(), ee::cu::RemoveRefFonctor<eanim::Symbol>());
+	for_each(m_symbols.begin(), m_symbols.end(), cu::RemoveRefFonctor<eanim::Symbol>());
 	m_symbols.clear();
 }
 

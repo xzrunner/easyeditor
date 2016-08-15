@@ -411,7 +411,7 @@ void ToolbarPanel::InitParticle()
 	p3d_emitter_cfg* cfg = PSConfigMgr::Instance()->GetDefaultConfig();
 	ParticleSystem* ps = new ParticleSystem(cfg, false);
 //	ps->Start();
-	ee::obj_assign<ParticleSystem>(m_stage->m_ps, ps);
+	cu::RefCountObjAssign<ParticleSystem>(m_stage->m_ps, ps);
 	for (int i = 0, n = m_sliders.size(); i < n; ++i) {
 		m_sliders[i]->Update();
 	}

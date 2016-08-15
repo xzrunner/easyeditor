@@ -16,7 +16,7 @@ class MeshSprBuilder : public INodeBuilder
 public:
 	virtual ~MeshSprBuilder();
 
-	virtual void Traverse(ee::Visitor& visitor) const;
+	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
 
 	const IPackNode* Create(const emesh::Sprite* spr);
 

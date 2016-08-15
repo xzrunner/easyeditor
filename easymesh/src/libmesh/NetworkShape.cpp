@@ -26,7 +26,7 @@ NetworkShape::NetworkShape(eshape::ChainShape* loop,
 {
 }
 
-NetworkShape* NetworkShape::Clone() const
+NetworkShape* NetworkShape::EEClone() const
 {
 	return new NetworkShape(*this);
 }

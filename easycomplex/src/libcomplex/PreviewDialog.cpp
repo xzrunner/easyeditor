@@ -12,11 +12,11 @@
 namespace ecomplex
 {
 
-class InitVisitor : public ee::Visitor
+class InitVisitor : public ee::Visitor<ee::Sprite>
 {
 public:
-	virtual void Visit(ee::Object* object, bool& next) {
-		if (const eanim::Sprite* anim = dynamic_cast<const eanim::Sprite*>(object)) {
+	virtual void Visit(ee::Sprite* spr, bool& next) {
+		if (const eanim::Sprite* anim = dynamic_cast<const eanim::Sprite*>(spr)) {
 			const_cast<eanim::Symbol&>(anim->GetSymbol()).SetLoop(false);
 		}
 	}

@@ -1,38 +1,27 @@
 #ifndef _EASYSHAPE_SPRITE_H_
 #define _EASYSHAPE_SPRITE_H_
 
-#include "Symbol.h"
-
 #include <ee/Sprite.h>
+
+#include <sprite2/ShapeSprite.h>
 
 namespace eshape
 {
 
-class Sprite : public ee::Sprite
+class Symbol;
+
+class Sprite : public s2::ShapeSprite, public ee::Sprite
 {
 public:
-	Sprite();
-	Sprite(const Sprite& sprite);
-	Sprite(Symbol* symbol);
-	virtual ~Sprite();
+	Sprite(Symbol* sym);
 
-	//
-	// IObject interface
-	//
-	virtual Sprite* Clone() const;
+	/**
+	 *  @interface
+	 *    ee::Sprite
+	 */
+	virtual Sprite* EEClone() const { return new Sprite(*this); }
 
-	//
-	// ee::Sprite interface
-	//
-	virtual const Symbol& GetSymbol() const;
-	virtual void SetSymbol(ee::Symbol* symbol);
-
-	static ee::Sprite* Create(ee::Symbol* symbol) {
-		return new Sprite(static_cast<Symbol*>(symbol));
-	}
-
-private:
-	Symbol* m_symbol;
+	static ee::Sprite* Create(ee::Symbol* sym);
 
 }; // Sprite
 

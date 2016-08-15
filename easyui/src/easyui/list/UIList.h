@@ -19,7 +19,7 @@ public:
 
 	bool InsertSprite(ee::Sprite* sprite, int idx = -1);
 	bool ClearAllSprite();
-	void TraverseSprites(ee::Visitor& visitor) const;
+	void TraverseSprites(ee::Visitor<ee::Sprite>& visitor) const;
 
 	void StoreToFile(const char* filename) const;
 	void LoadFromFile(const char* filename);

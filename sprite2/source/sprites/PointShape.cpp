@@ -8,6 +8,12 @@
 namespace s2
 {
 
+PointShape::PointShape(const PointShape& point)
+	: m_pos(point.m_pos)
+{
+	UpdateBounding();
+}
+
 PointShape::PointShape(const sm::vec2& pos)
 	: m_pos(pos)
 {
@@ -33,8 +39,8 @@ void PointShape::Draw(const sm::mat4& mt, const RenderColor& color) const
 {
 	sm::vec2 center = mt * m_pos;
 	float r = sm::mat_trans_len(SHAPE_NODE_RADIUS, mt);
-	RVG::SetColor(color.mul);
-	RVG::Circle(center, r, true);
+	s2::RVG::SetColor(color.mul);
+	s2::RVG::Circle(center, r, true);
 }
 
 void PointShape::UpdateBounding()
