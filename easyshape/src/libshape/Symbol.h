@@ -18,7 +18,6 @@ class Symbol : public ee::Symbol, public s2::ShapeSymbol
 {
 public:
 	Symbol();
-	Symbol(const Symbol& symbol);
 	virtual ~Symbol();
 
 	/**

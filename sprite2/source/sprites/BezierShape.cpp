@@ -48,7 +48,7 @@ void BezierShape::Draw(const sm::mat4& mt, const RenderColor& color) const
 	PolylineShape::Draw(mt, color);
 	for (int i = 0; i < CTRL_NODE_COUNT; ++i) {
 		sm::vec2 pos = mt * m_control_nodes[i];
-		s2::RVG::Rect(pos, SHAPE_NODE_RADIUS, SHAPE_NODE_RADIUS, false);
+		RVG::Rect(pos, SHAPE_NODE_RADIUS, SHAPE_NODE_RADIUS, false);
 	}
 }
 

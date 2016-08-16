@@ -14,7 +14,9 @@ namespace ee
 {
 
 ImageSprite::ImageSprite(ImageSymbol* sym)
-	: Sprite(sym)
+	: s2::Sprite(sym)
+	, s2::ImageSprite(sym)
+	, Sprite(sym)
 {
 }
 

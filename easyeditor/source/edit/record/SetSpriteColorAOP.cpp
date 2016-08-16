@@ -17,7 +17,7 @@ namespace ee
 	{ \
 		sprite->AddReference(); \
 		m_sprites.push_back(sprite); \
-		m_old_color.push_back(sprite->GetColor().##var##); \
+		m_old_color.push_back(sprite->Color().##var##); \
 	} \
 	\
 	SetSprite##name##ColorAOP::SetSprite##name##ColorAOP(const std::vector<Sprite*>& sprites, const s2::Color& color) \
@@ -27,7 +27,7 @@ namespace ee
 		m_sprites = sprites; \
 	\
 		for (int i = 0, n = sprites.size(); i < n; ++i) { \
-			m_old_color.push_back(m_sprites[i]->GetColor().##var##); \
+			m_old_color.push_back(m_sprites[i]->Color().##var##); \
 		} \
 	} \
 	\
@@ -40,14 +40,14 @@ namespace ee
 	{ \
 		assert(m_sprites.size() == m_old_color.size()); \
 		for (int i = 0, n = m_sprites.size(); i < n; ++i) { \
-			m_sprites[i]->GetColor().##var## = m_old_color[i]; \
+			m_sprites[i]->Color().##var## = m_old_color[i]; \
 		} \
 	} \
 	\
 	void SetSprite##name##ColorAOP::Redo() \
 	{ \
 		for (int i = 0, n = m_sprites.size(); i < n; ++i) { \
-			m_sprites[i]->GetColor().##var## = m_new_color; \
+			m_sprites[i]->Color().##var## = m_new_color; \
 		} \
 	} \
 	\

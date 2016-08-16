@@ -37,7 +37,7 @@ void SetSpriteAngleAOP::Undo()
 	assert(m_sprites.size() == m_old_angle.size());
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		Sprite* spr = m_sprites[i];
-		spr->SetTransform(spr->GetPosition(), m_old_angle[i]);
+		spr->SetAngle(m_old_angle[i]);
 	}
 }
 
@@ -45,7 +45,7 @@ void SetSpriteAngleAOP::Redo()
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		Sprite* spr = m_sprites[i];
-		spr->SetTransform(spr->GetPosition(), m_new_angle);
+		spr->SetAngle(m_new_angle);
 	}
 }
 

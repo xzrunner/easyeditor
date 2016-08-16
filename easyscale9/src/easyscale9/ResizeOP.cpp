@@ -56,11 +56,11 @@ bool ResizeOP::OnMouseDrag(int x, int y)
 		else if (type == e_3GridHor)
 		{
 			width = fabs(pos.x)*2;
-			height = symbol->GetSize().Size().y;
+			height = symbol->GetBounding().Size().y;
 		}
 		else if (type == e_3GridVer)
 		{
-			width = symbol->GetSize().Size().x;
+			width = symbol->GetBounding().Size().x;
 			height = fabs(pos.y)*2;
 		}
 		else

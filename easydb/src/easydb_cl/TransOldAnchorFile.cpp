@@ -64,7 +64,7 @@ void TransOldAnchorFile::TransComplex(const std::string& filepath) const
 	bool dirty = false;
 	const std::vector<s2::Sprite*>& children = complex->GetChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
-		ee::Sprite* spr = static_cast<ee::Sprite*>(children[i]->GetUD());
+		ee::Sprite* spr = dynamic_cast<ee::Sprite*>(children[i]);
 		if (IsAnchor(spr)) {
 			spr->SetAnchor(true);
 			dirty = true;
@@ -87,7 +87,7 @@ void TransOldAnchorFile::TransAnimation(const std::string& filepath) const
 		for (int j = 0, m = layer->frames.size(); j < m; ++j) {
 			s2::AnimSymbol::Frame* frame = layer->frames[j];
 			for (int k = 0, l = frame->sprites.size(); k < l; ++k) {
-				ee::Sprite* spr = static_cast<ee::Sprite*>(frame->sprites[k]->GetUD());
+				ee::Sprite* spr = dynamic_cast<ee::Sprite*>(frame->sprites[k]);
 				if (IsAnchor(spr)) {
 					spr->SetAnchor(true);
 					dirty = true;
@@ -106,9 +106,9 @@ bool TransOldAnchorFile::IsAnchor(const ee::Sprite* spr) const
 	if (const ee::FontBlankSprite* font = dynamic_cast<const ee::FontBlankSprite*>(spr)) {
 		return font->font.empty() && font->font_color == s2::Color(0, 0, 0, 0);
 	} else if (const ecomplex::Sprite* complex = dynamic_cast<const ecomplex::Sprite*>(spr)) {
-		const std::vector<s2::Sprite*>& children = complex->GetSymbol().GetChildren();
+		const std::vector<s2::Sprite*>& children = dynamic_cast<const s2::ComplexSymbol*>(complex->GetSymbol())->GetChildren();
 		if (children.size() == 1) {
-			ee::Sprite* child = static_cast<ee::Sprite*>(children[0]->GetUD());
+			ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[0]);
 			return IsAnchor(child);
 		} else {
 			return false;

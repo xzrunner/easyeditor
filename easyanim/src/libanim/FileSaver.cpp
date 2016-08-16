@@ -46,16 +46,15 @@ void FileSaver::Store(Json::Value& value, s2::AnimSymbol::Frame* frame, const st
 		Store(value["actor"][i], frame->sprites[i], dir);
 }
 
-void FileSaver::Store(Json::Value& value, s2::Sprite* sprite, const std::string& dir)
+void FileSaver::Store(Json::Value& value, s2::Sprite* spr, const std::string& dir)
 {
-	ee::Sprite* ee_spr = static_cast<ee::Sprite*>(sprite->GetUD());
-
-	const ee::Symbol& symbol = ee_spr->GetSymbol();
+	ee::Sprite* ee_spr = dynamic_cast<ee::Sprite*>(spr);
+	const ee::Symbol* ee_sym = dynamic_cast<const ee::Symbol*>(ee_spr->GetSymbol());
 
 	// filepath
-	value["filepath"] = ee::FileHelper::GetRelativePath(dir, symbol.GetFilepath());
+	value["filepath"] = ee::FileHelper::GetRelativePath(dir, ee_sym->GetFilepath());
 	// filepaths
-	const std::set<std::string>& filepaths = symbol.GetFilepaths();
+	const std::set<std::string>& filepaths = ee_sym->GetFilepaths();
 	std::set<std::string>::const_iterator itr = filepaths.begin();
 	for (int i = 0; itr != filepaths.end(); ++itr, ++i) {
 		value["filepaths"][i] = *itr;

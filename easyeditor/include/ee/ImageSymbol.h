@@ -14,6 +14,7 @@ class ImageSymbol : public Symbol, public s2::ImageSymbol
 {
 public:
 	ImageSymbol();
+	ImageSymbol(const ImageSymbol& img) {}
 	ImageSymbol(Image* image, const std::string& filename);
 	virtual ~ImageSymbol();
 

@@ -2,6 +2,9 @@
 #include "Snapshoot.h"
 #include "Image.h"
 #include "ImageSprite.h"
+#include "ImageSymbol.h"
+
+#include <sprite2/BoundingBox.h>
 
 #include <gl/glew.h>
 
@@ -39,11 +42,7 @@ Sprite* draw_all_to_one_spr(const std::vector<Sprite*>& sprites)
 
 	sm::rect r;
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		std::vector<sm::vec2> bound;
-		sprites[i]->GetBounding()->GetBoundPos(bound);
-		for (int j = 0, m = bound.size(); j < m; ++j) {
-			r.Combine(bound[j]);
-		}
+		sprites[i]->GetBounding()->CombineTo(r);
 	}
 
 	sm::vec2 sz = r.Size();
@@ -63,8 +62,9 @@ Sprite* draw_all_to_one_spr(const std::vector<Sprite*>& sprites)
 	ImageSprite* spr = new ImageSprite(sym);
 	sym->RemoveReference();
 
-	spr->SetMirror(false, true);
-	spr->SetTransform(r.Center(), 0);
+	spr->SetMirror(sm::bvec2(false, true));
+	spr->SetPosition(r.Center());
+	spr->SetAngle(0);
 	spr->SetScale(sm::vec2(1.0f / scale, 1.0f / scale));
 
 	return spr;

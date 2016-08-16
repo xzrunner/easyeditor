@@ -76,7 +76,7 @@ void ArrangeSpriteOP::onDirectionKeyDown(int type)
 
 		sm::vec2 pos;
 		stage->TransGridPosToCoords(row, col, pos);
-		s->SetTransform(pos, s->GetAngle());
+		s->SetPosition(pos);
 	}
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();

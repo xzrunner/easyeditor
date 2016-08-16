@@ -40,7 +40,7 @@ bool MoveSpriteState::OnMouseMove(const sm::vec2& pos)
 	assert(m_sprites.size() == m_offset.size());
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		Sprite* spr = m_sprites[i];
-		spr->SetTransform(pos + m_offset[i], spr->GetAngle());
+		spr->SetPosition(pos + m_offset[i]);
 	}
 
 	return true;

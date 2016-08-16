@@ -8,6 +8,8 @@
 #include <ee/SpriteFactory.h>
 #include <ee/SymbolMgr.h>
 
+#include <sprite2/BoundingBox.h>
+
 #include <fstream>
 
 namespace edb
@@ -40,14 +42,10 @@ void FileIO::Store(const char* filename)
 	Context::Instance()->stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
  
  	sm::rect rect;
- 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
- 	{
- 		std::vector<sm::vec2> vertices;
- 		sprites[i]->GetBounding()->GetBoundPos(vertices);
- 		for (size_t j = 0, m = vertices.size(); j < m; ++j)
- 			rect.Combine(vertices[j]);
+ 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
+		sprites[i]->GetBounding()->CombineTo(rect);
  	}
- 	sm::vec2 offset(-rect.CenterX(), -rect.CenterY());
+ 	sm::vec2 offset = -rect.Center();
  
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		value["sprite"][i] = Store(sprites[i], offset);
@@ -82,7 +80,7 @@ ee::Shape* FileIO::LoadShape(const Json::Value& value)
 Json::Value FileIO::Store(ee::Sprite* sprite, const sm::vec2& offset)
 {
 	Json::Value value;
-	value["filepath"] = sprite->GetSymbol().GetFilepath();
+	value["filepath"] = dynamic_cast<const ee::Symbol*>(sprite->GetSymbol())->GetFilepath();
 	sprite->Store(value);
 	return value;
 }

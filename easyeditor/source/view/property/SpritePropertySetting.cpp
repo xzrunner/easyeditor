@@ -49,21 +49,22 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 		return;
 
 	Sprite* spr = m_impl->GetSprite();
+	Symbol* sym = dynamic_cast<Symbol*>(spr);
 
 	bool dirty = true;
 
 	// res
 	if (name == "FileDir")
 	{
-		std::string file = ee::FileHelper::GetFilenameWithExtension(spr->GetSymbol().GetFilepath());
+		std::string file = ee::FileHelper::GetFilenameWithExtension(sym->GetFilepath());
 		std::string filepath = wxANY_AS(value, wxString).ToStdString() + "\\" + file;
-		const_cast<Symbol&>(spr->GetSymbol()).SetFilepath(filepath);
+		dynamic_cast<Symbol*>(sym)->SetFilepath(filepath);
 	}
 	else if (name == "FileName")
 	{
-		std::string dir = ee::FileHelper::GetFileDir(spr->GetSymbol().GetFilepath());
+		std::string dir = ee::FileHelper::GetFileDir(sym->GetFilepath());
 		std::string filepath = dir + "\\" + wxANY_AS(value, wxString).ToStdString();
-		const_cast<Symbol&>(spr->GetSymbol()).SetFilepath(filepath);
+		sym->SetFilepath(filepath);
 	}
 	// base
 	else if (name == wxT("Name"))
@@ -79,27 +80,27 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 	else if (name == "Color.Multi" && Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_DEFAULT)
 	{
 		wxColour wx_col = wxANY_AS(value, wxColour);
-		s2::Color col(wx_col.Red(), wx_col.Green(), wx_col.Blue(), spr->GetColor().mul.a);
+		s2::Color col(wx_col.Red(), wx_col.Green(), wx_col.Blue(), spr->Color().mul.a);
 		EditAddRecordSJ::Instance()->Add(new SetSpriteMulColorAOP(spr, col));
-		spr->GetColor().mul = col;
+		spr->Color().mul = col;
 	}
 	else if (name == "Color.Add" && Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_DEFAULT)
 	{
 		wxColour wx_col = wxANY_AS(value, wxColour);
-		s2::Color col(wx_col.Red(), wx_col.Green(), wx_col.Blue(), spr->GetColor().add.a);
+		s2::Color col(wx_col.Red(), wx_col.Green(), wx_col.Blue(), spr->Color().add.a);
 		EditAddRecordSJ::Instance()->Add(new SetSpriteAddColorAOP(spr, col));
-		spr->GetColor().add = col;
+		spr->Color().add = col;
 	}
 	else if (name == "Color.Alpha")
 	{
 		int alpha = wxANY_AS(value, int);
 		alpha = std::max(0, std::min(255, alpha));
 
-		s2::Color col = spr->GetColor().mul;
+		s2::Color col = spr->Color().mul;
 		col.a = alpha;
 		EditAddRecordSJ::Instance()->Add(new SetSpriteMulColorAOP(spr, col));
 
-		spr->GetColor().mul = col;
+		spr->Color().mul = col;
 	}
 // 	else if (name == "Color.R")
 // 	{
@@ -119,12 +120,12 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 	else if (name == "Blend")
 	{
 		int idx = wxANY_AS(value, int);
-		spr->GetShader().blend = BlendModes::Instance()->GetIDFromIdx(idx);
+		spr->Shader().blend = BlendModes::Instance()->GetIDFromIdx(idx);
 	}
 	else if (name == "FastBlend") 
 	{
 		int idx = wxANY_AS(value, int);
-		spr->GetShader().fast_blend = FastBlendModes::Instance()->GetIDFromIdx(idx);
+		spr->Shader().fast_blend = FastBlendModes::Instance()->GetIDFromIdx(idx);
 	}
 	else if (name == wxT("Clip"))
 	{
@@ -158,7 +159,7 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 	{
 		double w, h;
 		SplitString2Double(value, &w, &h);
-		sm::vec2 sz = spr->GetSymbol().GetSize(spr).Size();
+		sm::vec2 sz = sym->GetBounding(spr).Size();
 		m_impl->Scale(w / sz.x, h / sz.y);
 	}
 	// shear
@@ -227,20 +228,21 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	m_pg = pg;
 
 	Sprite* spr = m_impl->GetSprite();
+	Symbol* sym = dynamic_cast<Symbol*>(spr->GetSymbol());
 
-	std::string filename = FileHelper::GetFilenameWithExtension(spr->GetSymbol().GetFilepath());
+	std::string filename = FileHelper::GetFilenameWithExtension(sym->GetFilepath());
 	pg->GetProperty(wxT("FileName"))->SetValue(filename);
 
 	pg->GetProperty(wxT("Name"))->SetValue(spr->GetName());
 	pg->GetProperty(wxT("Tag"))->SetValue(spr->GetTag());
 
 	if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_DEFAULT) {
-		wxColour mul_col = wxColour(spr->GetColor().mul.r, spr->GetColor().mul.g, spr->GetColor().mul.b, spr->GetColor().mul.a);
-		wxColour add_col = wxColour(spr->GetColor().add.r, spr->GetColor().add.g, spr->GetColor().add.b, spr->GetColor().add.a);
+		wxColour mul_col = wxColour(spr->Color().mul.r, spr->Color().mul.g, spr->Color().mul.b, spr->Color().mul.a);
+		wxColour add_col = wxColour(spr->Color().add.r, spr->Color().add.g, spr->Color().add.b, spr->Color().add.a);
 		pg->SetPropertyValueString(wxT("Color.Multi"), mul_col.GetAsString());
 		pg->SetPropertyValueString(wxT("Color.Add"), add_col.GetAsString());
 	}
-	pg->GetProperty(wxT("Color.Alpha"))->SetValue(spr->GetColor().mul.a);
+	pg->GetProperty(wxT("Color.Alpha"))->SetValue(spr->Color().mul.a);
 
 // 	wxColour r_trans = wxColour(spr->rp->r_trans.r, spr->rp->r_trans.g, spr->rp->r_trans.b, spr->rp->r_trans.a);
 // 	wxColour g_trans = wxColour(spr->rp->g_trans.r, spr->rp->g_trans.g, spr->rp->g_trans.b, spr->rp->g_trans.a);
@@ -249,20 +251,20 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 // 	pg->SetPropertyValueString(wxT("Color.G"), g_trans.GetAsString());
 // 	pg->SetPropertyValueString(wxT("Color.B"), b_trans.GetAsString());
 
-	pg->GetProperty(wxT("Blend"))->SetValue(BlendModes::Instance()->GetIdxFromID(spr->GetShader().blend));
+	pg->GetProperty(wxT("Blend"))->SetValue(BlendModes::Instance()->GetIdxFromID(spr->Shader().blend));
 
-	pg->GetProperty(wxT("FastBlend"))->SetValue(FastBlendModes::Instance()->GetIdxFromID(spr->GetShader().fast_blend));
+	pg->GetProperty(wxT("FastBlend"))->SetValue(FastBlendModes::Instance()->GetIdxFromID(spr->Shader().fast_blend));
 
 	SpriteFilterPSHelper::ToPS(spr, pg);
 
 	MyColorProperty* rp = static_cast<MyColorProperty*>(pg->GetProperty("Color Conversion.R"));
-	rp->SetListener(new PropertyColorListener(&spr->GetColor().rmap));
+	rp->SetListener(new PropertyColorListener(&spr->Color().rmap));
 
 	MyColorProperty* gp = static_cast<MyColorProperty*>(pg->GetProperty("Color Conversion.G"));
-	gp->SetListener(new PropertyColorListener(&spr->GetColor().gmap));
+	gp->SetListener(new PropertyColorListener(&spr->Color().gmap));
 
 	MyColorProperty* bp = static_cast<MyColorProperty*>(pg->GetProperty("Color Conversion.B"));
-	bp->SetListener(new PropertyColorListener(&spr->GetColor().bmap));
+	bp->SetListener(new PropertyColorListener(&spr->Color().bmap));
 
 	pg->GetProperty(wxT("Clip"))->SetValue(spr->IsClip());
 
@@ -275,7 +277,7 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	pg->GetProperty(wxT("Scale.X"))->SetValue(spr->GetScale().x);
 	pg->GetProperty(wxT("Scale.Y"))->SetValue(spr->GetScale().y);
 	pg->GetProperty(wxT("Scale"))->SetValue(pg->GetProperty(wxT("Scale"))->GenerateComposedValue());
-	sm::vec2 sz = spr->GetSymbol().GetSize(spr).Size();
+	sm::vec2 sz = spr->GetSymbol()->GetBounding(spr).Size();
 	pg->GetProperty(wxT("Size.Width"))->SetValue(sz.x * spr->GetScale().x);
 	pg->GetProperty(wxT("Size.Height"))->SetValue(sz.y * spr->GetScale().y);
 	pg->GetProperty(wxT("Size"))->SetValue(pg->GetProperty(wxT("Size"))->GenerateComposedValue());
@@ -302,15 +304,16 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 {
 	Sprite* spr = m_impl->GetSprite();
+	Symbol* sym = dynamic_cast<Symbol*>(spr->GetSymbol());
 
 	pg->Clear();
 
 	pg->Append(new wxPropertyCategory("RES", wxPG_LABEL));
 
-	std::string filedir = FileHelper::GetFileDir(spr->GetSymbol().GetFilepath());
+	std::string filedir = FileHelper::GetFileDir(sym->GetFilepath());
 	pg->Append(new FileDirProperty("FileDir", wxPG_LABEL, filedir));
 
-	std::string filename = FileHelper::GetFilenameWithExtension(spr->GetSymbol().GetFilepath());
+	std::string filename = FileHelper::GetFilenameWithExtension(sym->GetFilepath());
 	pg->Append(new wxStringProperty("FileName", wxPG_LABEL, filename));
 
 	pg->Append(new wxPropertyCategory("BASE", wxPG_LABEL));
@@ -330,21 +333,21 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 	col_prop->SetExpanded(false);
 
 	if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_DEFAULT) {
-		wxColour mul_col = wxColour(spr->GetColor().mul.r, spr->GetColor().mul.g, spr->GetColor().mul.b, spr->GetColor().mul.a);
-		wxColour add_col = wxColour(spr->GetColor().add.r, spr->GetColor().add.g, spr->GetColor().add.b, spr->GetColor().add.a);
+		wxColour mul_col = wxColour(spr->Color().mul.r, spr->Color().mul.g, spr->Color().mul.b, spr->Color().mul.a);
+		wxColour add_col = wxColour(spr->Color().add.r, spr->Color().add.g, spr->Color().add.b, spr->Color().add.a);
 		pg->AppendIn(col_prop, new wxColourProperty(wxT("Multi"), wxPG_LABEL, mul_col));
 		pg->AppendIn(col_prop, new wxColourProperty(wxT("Add"), wxPG_LABEL, add_col));
 	} else {
 		MyColorProperty* multi_prop = new MyColorProperty("Multi");
-		multi_prop->SetListener(new PropertyColorListener(&spr->GetColor().mul));
+		multi_prop->SetListener(new PropertyColorListener(&spr->Color().mul));
 		pg->AppendIn(col_prop, multi_prop);
 
 		MyColorProperty* add_prop = new MyColorProperty("Add");
-		add_prop->SetListener(new PropertyColorListener(&spr->GetColor().add));
+		add_prop->SetListener(new PropertyColorListener(&spr->Color().add));
 		pg->AppendIn(col_prop, add_prop);
 	}
 
-	pg->AppendIn(col_prop, new wxIntProperty(wxT("Alpha"), wxPG_LABEL, spr->GetColor().mul.a));
+	pg->AppendIn(col_prop, new wxIntProperty(wxT("Alpha"), wxPG_LABEL, spr->Color().mul.a));
 	pg->SetPropertyAttribute(wxT("Color.Alpha"), "Min", 0);
 	pg->SetPropertyAttribute(wxT("Color.Alpha"), "Max", 255);
 
@@ -352,15 +355,15 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 	col_conv_prop->SetExpanded(false);
 
 	MyColorProperty* col_r_prop = new MyColorProperty("R");
-	col_r_prop->SetListener(new PropertyColorListener(&spr->GetColor().rmap));
+	col_r_prop->SetListener(new PropertyColorListener(&spr->Color().rmap));
 	pg->AppendIn(col_conv_prop, col_r_prop);
 
 	MyColorProperty* col_g_prop = new MyColorProperty("G");
-	col_g_prop->SetListener(new PropertyColorListener(&spr->GetColor().gmap));
+	col_g_prop->SetListener(new PropertyColorListener(&spr->Color().gmap));
 	pg->AppendIn(col_conv_prop, col_g_prop);
 
 	MyColorProperty* col_b_prop = new MyColorProperty("B");
-	col_b_prop->SetListener(new PropertyColorListener(&spr->GetColor().bmap));
+	col_b_prop->SetListener(new PropertyColorListener(&spr->Color().bmap));
 	pg->AppendIn(col_conv_prop, col_b_prop);
 
 // 	wxColour r_trans = wxColour(spr->rp->r_trans.r, spr->rp->r_trans.g, spr->rp->r_trans.b, spr->rp->r_trans.a);
@@ -373,14 +376,14 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 	std::vector<std::string> blend_names;
 	BlendModes::Instance()->GetAllNameCN(blend_names);
 	wxEnumProperty* blend_prop = new wxEnumProperty(wxT("Blend"), wxPG_LABEL, WXHelper::ToWXStringArray(blend_names));
-	int blend_idx = BlendModes::Instance()->GetIdxFromID(spr->GetShader().blend);
+	int blend_idx = BlendModes::Instance()->GetIdxFromID(spr->Shader().blend);
 	blend_prop->SetValue(blend_idx);
 	pg->Append(blend_prop);
 
 	std::vector<std::string> fast_blend_names;
 	FastBlendModes::Instance()->GetAllNameCN(fast_blend_names);
 	wxEnumProperty* fast_blend_prop = new wxEnumProperty(wxT("FastBlend"), wxPG_LABEL, WXHelper::ToWXStringArray(fast_blend_names));
-	int fast_blend_idx = FastBlendModes::Instance()->GetIdxFromID(spr->GetShader().fast_blend);
+	int fast_blend_idx = FastBlendModes::Instance()->GetIdxFromID(spr->Shader().fast_blend);
 	fast_blend_prop->SetValue(fast_blend_idx);
 	pg->Append(fast_blend_prop);
 
@@ -412,7 +415,7 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	wxPGProperty* sizeProp = pg->Append(new wxStringProperty(wxT("Size"), wxPG_LABEL, wxT("<composed>")));
 	sizeProp->SetExpanded(false);
-	sm::vec2 sz = spr->GetSymbol().GetBounding().Size();
+	sm::vec2 sz = sym->GetBounding().Size();
 	pg->AppendIn(sizeProp, new wxFloatProperty(wxT("Width"), wxPG_LABEL, sz.x * spr->GetScale().x));
 	pg->SetPropertyAttribute(wxT("Size.Width"), wxPG_ATTR_UNITS, wxT("pixels"));
 	pg->SetPropertyAttribute(wxT("Size.Width"), "Precision", 2);

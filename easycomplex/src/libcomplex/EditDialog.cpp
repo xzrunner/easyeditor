@@ -97,8 +97,8 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 			FileStorer::Store(filepath.c_str(), m_symbol);
 			m_symbol->RefreshThumbnail(filepath, true);
 		}
-		m_symbol->InitBounding();
-		ee::SpriteFactory::Instance()->UpdateBoundings(*m_symbol);
+// 		m_symbol->InitBounding();
+// 		ee::SpriteFactory::Instance()->UpdateBoundings(*m_symbol);
 		Destroy();
 	} 
 	else if (val == wxID_NO) 
@@ -112,8 +112,8 @@ void EditDialog::LoadSymbolInfo()
 {
 	const std::vector<s2::Sprite*>& children = m_symbol->GetChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
-		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
-		m_library->AddSymbol(const_cast<ee::Symbol*>(&child->GetSymbol()));
+		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
+		m_library->AddSymbol(dynamic_cast<ee::Symbol*>(child->GetSymbol()));
 		m_viewlist->Insert(child);
 	}	
 }

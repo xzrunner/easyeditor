@@ -112,7 +112,7 @@ Rotate(const sm::vec2& dst)
 	for (int i = 0, n = sprs.size(); i < n; ++i)
 	{
 		ee::Sprite* spr = sprs[i];
-		std::string filepath = spr->GetSymbol().GetFilepath();
+		std::string filepath = spr->GetSymbol()->GetFilepath();
 		if (!CharacterFileName::IsValidFilepath(filepath)) {
 			sm::vec2 center = spr->GetPosition() + spr->GetOffset();
 			float angle = ee::Math2D::GetAngleInDirection(center, m_last_pos, dst);

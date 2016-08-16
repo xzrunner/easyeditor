@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\sprite2\include;..\..\..\..\sm\src\sm;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\pvrtextool\include&quot;;&quot;..\..\..\..\editor-external\rg_etc1&quot;;&quot;..\..\..\..\editor-external\etcpack&quot;"
+				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\sprite2\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\pvrtextool\include&quot;;&quot;..\..\..\..\editor-external\rg_etc1&quot;;&quot;..\..\..\..\editor-external\etcpack&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;USED_IN_EDITOR;S2_VIRTUAL_INHERITANCE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -105,7 +105,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\sprite2\include;..\..\..\..\sm\src\sm;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\pvrtextool\include&quot;;&quot;..\..\..\..\editor-external\rg_etc1&quot;;&quot;..\..\..\..\editor-external\etcpack&quot;"
+				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\sprite2\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\pvrtextool\include&quot;;&quot;..\..\..\..\editor-external\rg_etc1&quot;;&quot;..\..\..\..\editor-external\etcpack&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;USED_IN_EDITOR;S2_VIRTUAL_INHERITANCE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"

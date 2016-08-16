@@ -3,6 +3,8 @@
 
 #include "Visitor.h"
 
+#include <sprite2/BoundingBox.h>
+
 namespace ee
 {
 
@@ -29,7 +31,7 @@ PointQueryVisitor::PointQueryVisitor(const sm::vec2& pos, Sprite** result)
 inline
 void PointQueryVisitor::Visit(Sprite* spr, bool& next)
 {
-	if (spr->IsContain(m_pos))
+	if (spr->GetBounding()->IsContain(m_pos))
 	{
 		cu::RefCountObjAssign(*m_result, spr);
 		next = false;

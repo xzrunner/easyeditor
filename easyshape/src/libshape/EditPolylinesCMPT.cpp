@@ -140,8 +140,8 @@ void EditPolylinesCMPT::OnTranslate(wxCommandEvent& event)
 		if (polyline) 
 		{
 			polylines.push_back(polyline);
-			if (polyline->GetRect().xmin < leftmost)
-				leftmost = polyline->GetRect().xmin;
+			if (polyline->GetBounding().xmin < leftmost)
+				leftmost = polyline->GetBounding().xmin;
 		}
 	}
 

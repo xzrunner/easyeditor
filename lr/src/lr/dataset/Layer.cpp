@@ -18,6 +18,7 @@
 #include <easycomplex.h>
 
 #include <sprite2/RenderCamera.h>
+#include <sprite2/RenderParams.h>
 #include <sprite2/S2_Sprite.h>
 
 namespace lr
@@ -62,7 +63,7 @@ bool Layer::InsertSprite(ee::Sprite* spr, int idx)
 {
 	CheckSpriteName(spr);
 
-	spr->GetCamera().mode = m_cam_mode;
+	spr->Camera().mode = m_cam_mode;
 
 	if (m_layer_mgr.selected) {
 		return m_layer_mgr.selected->Insert(spr);
@@ -185,7 +186,7 @@ void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
 		if (spr->GetUserData()) {
 			UserData* ud = static_cast<UserData*>(spr->GetUserData());
 			if (ud->type == UT_NEW_COMPLEX) {
-				const ee::Symbol* sym = spr->GetSymbol();
+				const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());
 				ecomplex::FileStorer::Store(sym->GetFilepath().c_str(), 
 					static_cast<const ecomplex::Symbol*>(sym));
 			}
@@ -219,7 +220,7 @@ bool Layer::Update(float dt)
 	std::vector<ee::Sprite*> sprites;
 	TraverseSprite(ee::FetchAllVisitor<ee::Sprite>(sprites), true);
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		bool dirty = sprites[i]->Update(dt);
+		bool dirty = sprites[i]->Update(s2::RenderParams(), dt);
 		if (dirty) {
 			ret = true;
 		}
@@ -257,7 +258,7 @@ void Layer::LoadSprites(const Json::Value& val, const std::string& dir,
 	Json::Value spr_val = val[idx++];
 	while (!spr_val.isNull()) {
 		ee::Sprite* spr = LoadSprite(spr_val, dir, base_path);
-		spr->GetCamera().mode = m_cam_mode;
+		spr->Camera().mode = m_cam_mode;
 		m_sprites.Insert(spr);
 		spr->RemoveReference();
 		spr_val = val[idx++];
@@ -382,10 +383,10 @@ ee::Sprite* Layer::LoadGroup(const Json::Value& val, const std::string& dir, con
 	std::string name = val["group_name"].asString();
 
 	ecomplex::Sprite* spr = ecomplex::GroupHelper::Group(sprites);
-	ecomplex::Symbol& sym = const_cast<ecomplex::Symbol&>(spr->GetSymbol());
-	sym.SetFilepath(GROUP_TAG);
-	sym.name = name;
-	sym.SetName(name);
+	ecomplex::Symbol* sym = dynamic_cast<ecomplex::Symbol*>(spr->GetSymbol());
+	sym->SetFilepath(GROUP_TAG);
+	sym->name = name;
+	sym->SetName(name);
 	spr->SetName(name);
 
 	ee::SpriteFactory::Instance()->Insert(spr);
@@ -399,13 +400,13 @@ void Layer::StoreGroup(ee::Sprite* spr, Json::Value& val, const std::string& dir
 	val["filepath"] = GROUP_TAG;
 	spr->Store(val);
 
-	ecomplex::Symbol* comp = &dynamic_cast<ecomplex::Symbol&>(const_cast<ee::Symbol&>(spr->GetSymbol()));
+	ecomplex::Symbol* comp = dynamic_cast<ecomplex::Symbol*>(spr->GetSymbol());
 	assert(comp);
 	const std::vector<s2::Sprite*>& children = comp->GetChildren();
 	int count = 0;
 	for (int i = 0, n = children.size(); i < n; ++i) {
 		Json::Value cval;
-		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 		if (StoreSprite(child, cval, dir)) {
 			val["group"][count++] = cval;
 		}
@@ -482,10 +483,11 @@ bool Layer::StoreSprite(ee::Sprite* spr, Json::Value& val, const std::string& di
 		return false;
 	}
 
-	if (spr->GetSymbol().GetFilepath() == GROUP_TAG) {
+	ee::Symbol* sym = dynamic_cast<ee::Symbol*>(spr->GetSymbol());
+	if (sym->GetFilepath() == GROUP_TAG) {
 		StoreGroup(spr, val, dir);
 	} else {
-		std::string filepath = spr->GetSymbol().GetFilepath();
+		std::string filepath = sym->GetFilepath();
 		assert(!filepath.empty());
 		val["filepath"] = ee::FileHelper::GetRelativePath(dir, filepath);
 		spr->Store(val);

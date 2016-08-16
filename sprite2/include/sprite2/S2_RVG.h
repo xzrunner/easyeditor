@@ -2,6 +2,7 @@
 #define _SPRITE2_RVG_H_
 
 #include <SM_Vector.h>
+#include <SM_Rect.h>
 
 #include <vector>
 
@@ -40,6 +41,7 @@ public:
 
 	static void Rect(const sm::vec2& center, float hw, float hh, bool filling);
 	static void Rect(const sm::vec2& p0, const sm::vec2& p1, bool filling);
+	static void Rect(const sm::rect& r, bool filling);
 
 	static void Circle(const sm::vec2& center, float radius, bool filling, int segments = 16);
 	static void Circles(const std::vector<sm::vec2>& circles, float radius, bool filling, int segments = 16);

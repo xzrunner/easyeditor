@@ -27,13 +27,13 @@ void Task::Load(const char* filename)
 {
 	Icon* icon = FileIO::LoadFromFile(filename);
 	m_toolbar->ChangeIconType(get_icon_type(icon->GetIconDesc()));
-	m_stage->GetSymbol().SetIcon(icon);
+	m_stage->GetSymbol()->SetIcon(icon);
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void Task::Store(const char* filename) const
 {
-	const Icon* icon = m_stage->GetSymbol().GetIcon();
+	const Icon* icon = m_stage->GetSymbol()->GetIcon();
 	FileIO::StoreToFile(filename, icon);
 }
 

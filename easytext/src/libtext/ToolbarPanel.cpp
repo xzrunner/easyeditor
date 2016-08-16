@@ -208,7 +208,7 @@ void ToolbarPanel::OnChangeSize(wxCommandEvent& event)
 	int w = ee::StringHelper::FromString<int>(m_width->GetValue().ToStdString());
 	int h = ee::StringHelper::FromString<int>(m_height->GetValue().ToStdString());
 	m_spr->SetSize(w, h);
-	m_spr->BuildBounding();
+	m_spr->UpdateBounding();
 }
 
 void ToolbarPanel::OnChangeFont(wxCommandEvent& event)

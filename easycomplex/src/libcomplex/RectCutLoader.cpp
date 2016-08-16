@@ -38,7 +38,7 @@ void RectCutLoader::LoadOnlyJson(const std::string& pack_file, const std::string
 		pos.y = s.src.y + s.src.h * 0.5f;
 		pos.x += 400;
 		pos.y += 400;
-		sprite->SetTransform(pos, sprite->GetAngle());
+		sprite->SetPosition(pos);
 
 		ee::InsertSpriteSJ::Instance()->Insert(sprite);
 
@@ -71,14 +71,15 @@ void RectCutLoader::LoadJsonAndImg(const std::string& pack_file, const std::stri
 			assert(pic.src.h == pic.dst.w);
 			angle = -SM_PI * 0.5f;
 		}
+		spr_sprite->SetAngle(angle);
 
 		sm::vec2 pos;
 		pos.x = pic.src.x + pic.src.w * 0.5f;
 		pos.y = pic.src.y + pic.src.h * 0.5f;
 		pos.x += 400;
 		pos.y += 400;
-		spr_sprite->SetTransform(pos, angle);
-
+		spr_sprite->SetPosition(pos);
+		
 		ee::InsertSpriteSJ::Instance()->Insert(spr_sprite);
 
 		img_data->RemoveReference();

@@ -75,8 +75,7 @@ bool StagePanel::Update(float dt)
 	bool dirty = ee::SceneNodeMgr::Instance()->Update(1 / 30.0f);
 	const std::vector<s2::Sprite*>& children = m_symbol->GetChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
-		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
-		if (child->Update(s2::RenderParams(), dt)) {
+		if (children[i]->Update(s2::RenderParams(), dt)) {
 			dirty = true;
 		}
 	}

@@ -27,13 +27,13 @@ void PreviewUtility::GetCurrSprites(const ee::PlayControl& ctrl, std::vector<ee:
 		if (!curr_f) 
 		{
 			for (int i = 0, n = curr_f->Size(); i < n; ++i) {
-				sprites.push_back(curr_f->GetSprite(i)->Clone());
+				sprites.push_back(curr_f->GetSprite(i)->EEClone());
 			}
 		}
 		else if (!curr_f->HasClassicTween() || !next_f)
 		{
 			for (int i = 0, n = curr_f->Size(); i < n; ++i) {
-				sprites.push_back(curr_f->GetSprite(i)->Clone());
+				sprites.push_back(curr_f->GetSprite(i)->EEClone());
 			}
 		}
 		else

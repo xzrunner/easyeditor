@@ -65,8 +65,8 @@ void CircleShape::Draw(const sm::mat4& mt, const RenderColor& color) const
 {
 	sm::vec2 c = mt * m_center;
 	float r = sm::mat_trans_len(m_radius, mt);
-	s2::RVG::SetColor(color.mul);
-	s2::RVG::Circle(c, r, false, 32);
+	RVG::SetColor(color.mul);
+	RVG::Circle(c, r, false, 32);
 }
 
 void CircleShape::UpdateBounding()

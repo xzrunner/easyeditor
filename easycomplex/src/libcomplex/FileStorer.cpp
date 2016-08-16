@@ -31,7 +31,7 @@ void FileStorer::Store(const char* filepath, const Symbol* symbol)
 	std::string dir = ee::FileHelper::GetFileDir(filepath) + "\\";
 	const std::vector<s2::Sprite*>& children = symbol->GetChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
-		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 		value["sprite"][i] = Store(child, dir);
 	}
 
@@ -61,7 +61,7 @@ void FileStorer::StoreWithHistory(const char* filepath, const Symbol* symbol)
 
 	const std::vector<s2::Sprite*>& children = symbol->GetChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
-		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 		value["sprite"][i] = Store(child, dir);
 	}
 
@@ -80,30 +80,30 @@ void FileStorer::StoreWithHistory(const char* filepath, const Symbol* symbol)
 
 void FileStorer::CenterSymbol(Symbol* symbol)
 {
-	sm::vec2 offset = symbol->m_rect.Center();
+	sm::vec2 offset = symbol->GetBounding().Center();
 	const std::vector<s2::Sprite*>& children = symbol->GetChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
-		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 		child->Translate(-offset);
 	}
-	symbol->m_rect.Translate(-offset);
+	symbol->GetBounding().Translate(-offset);
 }
 
-Json::Value FileStorer::Store(ee::Sprite* sprite, const std::string& dir)
+Json::Value FileStorer::Store(ee::Sprite* spr, const std::string& dir)
 {
 	Json::Value value;
-	const ee::Symbol& symbol = sprite->GetSymbol();
+	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());
 
 	// filepath
-	value["filepath"] = ee::FileHelper::GetRelativePath(dir, symbol.GetFilepath());
+	value["filepath"] = ee::FileHelper::GetRelativePath(dir, sym->GetFilepath());
 	// filepaths
-	const std::set<std::string>& filepaths = symbol.GetFilepaths();
+	const std::set<std::string>& filepaths = sym->GetFilepaths();
 	std::set<std::string>::const_iterator itr = filepaths.begin();
 	for (int i = 0; itr != filepaths.end(); ++itr, ++i) {
 		value["filepaths"][i] = *itr;
 	}
 	// other
-	sprite->Store(value, dir);
+	spr->Store(value, dir);
 
 	return value;
 }

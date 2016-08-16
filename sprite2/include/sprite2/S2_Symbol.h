@@ -15,7 +15,7 @@ namespace s2
 class RenderParams;
 class Sprite;
 
-class Symbol : public cu::RefCountObj, public cu::Uncopyable
+class Symbol : public VIRTUAL_INHERITANCE cu::RefCountObj, public cu::Uncopyable
 {
 public:
 	Symbol() {}

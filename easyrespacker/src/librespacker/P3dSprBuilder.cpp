@@ -36,7 +36,7 @@ void P3dSprBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 const IPackNode* P3dSprBuilder::Create(const eparticle3d::Sprite* spr)
 {
 	PackP3dSpr* node = new PackP3dSpr;
-	node->p3d = PackNodeFactory::Instance()->Create(spr->GetSymbol());
+	node->p3d = PackNodeFactory::Instance()->Create(dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
 	node->loop = spr->IsLoop();
 	node->local = spr->IsLocalModeDraw();
 	node->alone = spr->IsAlone();

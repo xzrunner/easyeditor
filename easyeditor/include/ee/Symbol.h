@@ -19,8 +19,6 @@ class Sprite;
 class Symbol : public virtual s2::Symbol, public ListItem, public UserDataImpl
 {
 public:
-	Symbol();
-	Symbol(const Symbol& sym);
 	virtual ~Symbol();
 
 	/**

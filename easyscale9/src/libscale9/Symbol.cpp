@@ -15,12 +15,6 @@ Symbol::Symbol()
 	m_name = FILE_TAG + ee::StringHelper::ToString(id++);
 }
 
-Symbol::Symbol(const Symbol& symbol)
-	: ee::Symbol(symbol)
-	, m_data(symbol.m_data)
-{
-}
-
 void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	s2::RenderParams p = params;
@@ -31,11 +25,11 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 	m_data.Draw(p, spr);
 }
 
-sm::rect Symbol::GetBounding(const ee::Sprite* sprite/* = NULL*/) const
+sm::rect Symbol::GetBounding(const s2::Sprite* sprite/* = NULL*/) const
 {
 	float w, h;
 	if (sprite) {
-		const Sprite* spr = static_cast<const Sprite*>(sprite);
+		const Sprite* spr = dynamic_cast<const Sprite*>(sprite);
 		spr->GetSize(w, h);
 	} else {
 		m_data.GetSize(w, h);

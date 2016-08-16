@@ -353,7 +353,7 @@ void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames
 		ecomplex::FileStorer::Store(filename.c_str(), symbol);
 
 		pic->filename = filename;
-		sm::vec2 sz = symbol->GetSize().Size();
+		sm::vec2 sz = symbol->GetBounding().Size();
 		pic->width = sz.x;
 		pic->height = sz.y;
 
@@ -411,7 +411,7 @@ void ParserLuaFile::transAniToAnimationFile(const std::string& outfloder, int id
 				sprite = new ee::DummySprite(new ee::DummySymbol(ani->filename));
 			}
 			item->transform(sprite);
-			frame->sprites.push_back(sprite->GetCore());
+			frame->sprites.push_back(sprite);
 		}
 		layer->frames.push_back(frame);
 	}
@@ -565,7 +565,7 @@ void ParserLuaFile::transAniToAnimationMemory(int id, Animation* ani)
 				sprite = ee::SpriteFactory::Instance()->Create(itr->second);
 			}
 			item->transform(sprite);
-			frame->sprites.push_back(sprite->GetCore());
+			frame->sprites.push_back(sprite);
 		}
 		layer->frames.push_back(frame);
 	}
@@ -728,9 +728,10 @@ void ParserLuaFile::Picture::Part::transform(ee::Sprite* sprite) const
 	}
 	sprite->SetScale(sm::vec2(sx, sy));
 
-	sprite->SetMirror(xMirror, yMirror);
+	sprite->SetMirror(sm::bvec2(xMirror, yMirror));
 	angle = -angle;
-	sprite->SetTransform(sm::vec2(dcenter.x / 16, - dcenter.y / 16), pre_rotate + angle);
+	sprite->SetPosition(sm::vec2(dcenter.x / 16, - dcenter.y / 16));
+	sprite->SetAngle(pre_rotate + angle);
 }
 
 std::string ParserLuaFile::Picture::Part::dstMode(const sm::vec2 _dst[4]) const
@@ -790,8 +791,8 @@ void ParserLuaFile::Animation::Item::transform(ee::Sprite* spr) const
 
 	if (is_full && valid)
 	{
-		spr->GetColor().mul = ee::int2color(color, ee::PT_BGRA);
-		spr->GetColor().add = ee::int2color(add, ee::PT_ABGR);
+		spr->Color().mul = ee::int2color(color, ee::PT_BGRA);
+		spr->Color().add = ee::int2color(add, ee::PT_ABGR);
 
 		float x = mat[4] / 16.0f,
 			y = mat[5] / 16.0f;

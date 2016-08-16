@@ -11,6 +11,7 @@ class ComplexSprite : public VIRTUAL_INHERITANCE Sprite
 public:
 	ComplexSprite();
 	ComplexSprite(const ComplexSprite& spr);
+	ComplexSprite(Symbol* sym) : Sprite(sym) {}
 
 	/**
 	 *  @interface

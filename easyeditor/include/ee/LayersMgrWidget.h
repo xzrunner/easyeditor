@@ -1,6 +1,8 @@
 #ifndef _EASYEDITOR_LAYERS_MGR_WIDGET_H_
 #define _EASYEDITOR_LAYERS_MGR_WIDGET_H_
 
+#include "Visitor.h"
+
 #include <wx/wx.h>
 
 #include <vector>

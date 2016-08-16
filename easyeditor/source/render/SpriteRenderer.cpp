@@ -16,6 +16,7 @@
 #include <sprite2/RFGaussianBlur.h>
 #include <sprite2/RFOuterGlow.h>
 #include <sprite2/S2_RVG.h>
+#include <sprite2/BoundingBox.h>
 
 #include <shaderlab.h>
 
@@ -29,8 +30,8 @@ void SpriteRenderer::Draw(const Sprite* spr,
 		return;
 	}
 
-	s2::RenderShader rs = spr->GetShader() * params.shader;
-	s2::RenderCamera rc = spr->GetCamera() * params.camera;
+	s2::RenderShader rs = spr->Shader() * params.shader;
+	s2::RenderCamera rc = spr->Camera() * params.camera;
 
 	sl::RenderContext* ctx = sl::ShaderMgr::Instance()->GetContext();
 	switch (rs.fast_blend)
@@ -99,7 +100,7 @@ void SpriteRenderer::InvalidRect(const Sprite* sprite, const sm::mat4& mt)
 		return;
 	}
 
-	sprite->GetSymbol().InvalidRect(sprite->GetTransMatrix() * mt);
+//	sprite->GetSymbol()->InvalidRect(sprite->GetTransMatrix() * mt);
 }
 
 void SpriteRenderer::Draw(const Symbol* symbol, 
@@ -134,12 +135,16 @@ void SpriteRenderer::Draw(const Symbol* symbol,
 void SpriteRenderer::DrawImpl(const Sprite* spr, 
 							  const s2::RenderParams& params)
 {
-	spr->GetSymbol().Draw(params, spr);
+	spr->GetSymbol()->Draw(params, spr);
 
 	if (spr->IsAnchor() && Config::Instance()->GetSettings().draw_anchor) 
 	{
 		std::vector<sm::vec2> bound;
-		spr->GetBounding()->GetBoundPos(bound);
+		sm::rect rect = spr->GetBounding()->GetSize();
+		bound.push_back(sm::vec2(rect.xmin, rect.ymin));
+		bound.push_back(sm::vec2(rect.xmax, rect.ymin));
+		bound.push_back(sm::vec2(rect.xmax, rect.ymax));
+		bound.push_back(sm::vec2(rect.xmin, rect.ymax));		
 		for (int i = 0, n = bound.size(); i < n; ++i) {
 			bound[i] = Math2D::TransVector(bound[i], params.mt);
 		}

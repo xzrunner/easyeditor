@@ -161,7 +161,7 @@ void StageCanvas::DrawSprites() const
 	{
 		ee::Sprite* sprite = sprites[i];
 		if (IsSymbolWall(*sprite)) {
-			SymbolExt* info = static_cast<SymbolExt*>(sprite->GetSymbol().GetUserData());
+			SymbolExt* info = static_cast<SymbolExt*>(sprite->GetSymbol()->GetUserData());
 			{
 				if (info->wall_type == 0) {
 					sm::vec2 pos = sprite->GetPosition() + sm::vec2(0, 4);

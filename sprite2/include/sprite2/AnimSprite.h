@@ -11,7 +11,8 @@ class AnimSprite : public VIRTUAL_INHERITANCE Sprite
 public:
 	AnimSprite();
 	AnimSprite(const AnimSprite& spr);
-	
+	AnimSprite(Symbol* sym) : Sprite(sym) {}
+
 	/**
 	 *  @interface
 	 *    Cloneable

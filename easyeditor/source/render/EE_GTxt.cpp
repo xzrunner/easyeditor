@@ -59,7 +59,7 @@ void GTxt::LoadUserFont(const std::string& name, const std::string& filepath)
 		std::string utf8 = StringHelper::ToUtf8(str);
 		std::string filepath = c_val["filepath"].asString();
 		Symbol* sym = SymbolMgr::Instance()->FetchSymbol(filepath);
-		sm::vec2 sz = sym->GetSize().Size();
+		sm::vec2 sz = sym->GetBounding().Size();
 		gtxt_uf_add_char(font, utf8.c_str(), (int)sz.x, (int)sz.y, sym);
 		c_val = value["chars"][idx++];
 	}
@@ -205,7 +205,7 @@ ext_sym_get_size(void* ext_sym, int* width, int* height) {
 	}
 
 	Symbol* sym = (Symbol*)ext_sym;
-	sm::vec2 sz = sym->GetSize().Size();
+	sm::vec2 sz = sym->GetBounding().Size();
 	*width  = static_cast<int>(sz.x);
 	*height = static_cast<int>(sz.y);
 }

@@ -6,6 +6,7 @@
 #include <easyshape.h>
 
 #include <sprite2/S2_RVG.h>
+#include <sprite2/BoundingBox.h>
 
 namespace lr
 {
@@ -87,13 +88,20 @@ void PathVisibleSimple::InsertBoundary(const ee::Sprite* spr)
 {
 	// get bound
 	std::vector<sm::vec2> bound;
-	const eshape::Sprite* shape = dynamic_cast<const eshape::Sprite*>(spr);
-	if (shape && shape->GetSymbol().GetShapeType() == eshape::ST_POLYGON) {
-		const std::vector<ee::Shape*>& shapes = shape->GetSymbol().GetShapes();
-		const eshape::PolygonShape* poly = static_cast<const eshape::PolygonShape*>(shapes[0]);
-		bound = poly->GetVertices();
+	const eshape::Sprite* shape_spr = dynamic_cast<const eshape::Sprite*>(spr);
+	if (shape_spr) {
+		const eshape::Symbol* shape_sym = dynamic_cast<const eshape::Symbol*>(shape_spr->GetSymbol());
+		if (shape_sym->GetShapeType() == eshape::ST_POLYGON) {
+			const std::vector<ee::Shape*>& shapes = shape_sym->GetShapes();
+			const eshape::PolygonShape* poly = static_cast<const eshape::PolygonShape*>(shapes[0]);
+			bound = poly->GetVertices();
+		}
 	} else {
-		spr->GetBounding()->GetBoundPos(bound);
+		sm::rect rect = spr->GetBounding()->GetSize();
+		bound.push_back(sm::vec2(rect.xmin, rect.ymin));
+		bound.push_back(sm::vec2(rect.xmax, rect.ymin));
+		bound.push_back(sm::vec2(rect.xmax, rect.ymax));
+		bound.push_back(sm::vec2(rect.xmin, rect.ymax));
 	}
 
 	// fix

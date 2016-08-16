@@ -15,12 +15,6 @@ Symbol::Symbol()
 	m_shadow = new Shadow(SOFT_SHADOW_RADIUS);
 }
 
-Symbol::Symbol(const Symbol& s)
-	: ee::Symbol(s)
-{
-	m_shadow = new Shadow(SOFT_SHADOW_RADIUS);
-}
-
 Symbol::~Symbol()
 {
 	if (m_shadow) {

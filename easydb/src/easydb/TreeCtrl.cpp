@@ -85,7 +85,7 @@ void TreeCtrl::addNode(const Graphics& graph, const Node& node, wxTreeItemId par
 
 std::string TreeCtrl::getItemName(const ee::Sprite& sprite) const
 {
-	std::string name = sprite.GetSymbol().GetFilepath();
+	std::string name = dynamic_cast<const ee::Symbol*>(sprite.GetSymbol())->GetFilepath();
 	name = ee::FileHelper::GetFilename(name);
 	return name;
 }
@@ -111,8 +111,8 @@ void TreeCtrl::onItemClick(wxTreeEvent& event)
 		{
 			StagePanel* stage = Context::Instance()->stage;
 
-			ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->GetSymbol());
-			ecomplex::EditDialog dlg(stage, &symbol, NULL);
+			ecomplex::Symbol* sym = dynamic_cast<ecomplex::Symbol*>(complex->GetSymbol());
+			ecomplex::EditDialog dlg(stage, sym, NULL);
 			dlg.ShowModal();
 		}
 	}

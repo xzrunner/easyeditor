@@ -23,25 +23,6 @@ Symbol::Symbol()
 {
 }
 
-Symbol::Symbol(const Symbol& symbol)
-{
-	m_filepath = symbol.m_filepath;
-
-	m_bg = symbol.m_bg;
-	if (m_bg) {
-		m_bg->AddReference();
-	}
-	m_bg_outline.reserve(symbol.m_bg_outline.size());
-	for (size_t i = 0, n = symbol.m_bg_outline.size(); i < n; ++i) {
-		m_bg_outline.push_back(symbol.m_bg_outline[i]->EEClone());
-	}
-	
-	m_shapes.reserve(symbol.m_shapes.size());
-	for (size_t i = 0, n = symbol.m_shapes.size(); i < n; ++i) {
-		m_shapes.push_back(symbol.m_shapes[i]->EEClone());
-	}
-}
-
 Symbol::~Symbol()
 {
 	Clear();

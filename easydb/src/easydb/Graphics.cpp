@@ -25,7 +25,7 @@ void Graphics::Connect(ee::Sprite* from, ee::Sprite* to)
 
 void Graphics::Move(ee::Sprite* sprite, const sm::vec2& offset) 
 {
-	sprite->SetTransform(sprite->GetPosition() + offset, 0);
+	sprite->Translate(offset);
 	Node* node = Query(sprite);
 	if (node && !node->out.empty())
 		for (size_t i = 0, n = node->out.size(); i < n; ++i)

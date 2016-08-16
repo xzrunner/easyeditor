@@ -18,7 +18,6 @@ class Symbol : public ee::Symbol, public s2::DummySymbol
 {
 public:
 	Symbol();
-	Symbol(const Symbol& s);
 	virtual ~Symbol();
 
 	/**

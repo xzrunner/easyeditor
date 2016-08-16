@@ -94,7 +94,7 @@ static void _cs_draw(struct dtex_cs_rect* r, void* ud)
 
 		s2::RenderParams params;
 		params.mt = spr->GetTransMatrix();
-		spr->GetSymbol().Draw(params);
+		spr->GetSymbol()->Draw(params);
 	}
 
 	sl::ShaderMgr::Instance()->GetShader()->Commit();

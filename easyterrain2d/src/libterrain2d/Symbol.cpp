@@ -20,13 +20,6 @@ Symbol::Symbol()
 {	
 }
 
-Symbol::Symbol(const Symbol& s)
-	: m_time(s.m_time)
-	, m_update(s.m_update)
-	, m_angle(0)
-{
-}
-
 Symbol::~Symbol()
 {
 	Clear();

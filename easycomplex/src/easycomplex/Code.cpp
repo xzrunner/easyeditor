@@ -50,7 +50,7 @@ void Code::ResolveUI(const Symbol& symbol)
 			const std::vector<s2::Sprite*>& children = parent_symbol.GetChildren();
 			for (int i = 0, n = children.size(); i < n; ++i)
 			{
-				ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+				ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 
 				const std::string& cname = child->GetName();
 				if (cname.empty() || cname[0] == '_') {
@@ -70,7 +70,7 @@ void Code::ResolveUI(const Symbol& symbol)
 
 				if (Sprite* s = dynamic_cast<Sprite*>(child)) 
 				{
-					Node next(s->GetSymbol(), path);
+					Node next(*dynamic_cast<Symbol*>(s->GetSymbol()), path);
 					next.name = name;
 					buffer.push(next);
 				} 
@@ -110,7 +110,7 @@ void Code::ResolveText(const Symbol& symbol)
 		const std::vector<s2::Sprite*>& children = parent->GetChildren();
  		for (int i = 0, n = children.size(); i < n; ++i)
  		{
-			ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+			ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 
 			const std::string& name = child->GetName();
  			if (name.empty() || name[0] == '_') {

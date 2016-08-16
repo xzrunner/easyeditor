@@ -20,7 +20,7 @@ namespace ee
 
 void SpriteBlend::Draw(const Sprite* spr, const sm::mat4& mt)
 {
-	assert(spr->GetShader().blend != s2::BM_NULL);
+	assert(spr->Shader().blend != s2::BM_NULL);
 
 	sl::ShaderMgr::Instance()->GetShader()->Commit();
 
@@ -56,16 +56,16 @@ void SpriteBlend::DrawSprToTmp(const Sprite* spr, const sm::mat4& mt)
 	dtexf_t0_clear(0, -2, 2, 0);
 
 	mgr->SetShader(sl::BLEND);
-	s2::BlendMode mode = spr->GetShader().blend;
+	s2::BlendMode mode = spr->Shader().blend;
 	shader->SetMode(mode);
 
-	const_cast<Sprite*>(spr)->GetShader().blend = s2::BM_NULL;
+	const_cast<Sprite*>(spr)->Shader().blend = s2::BM_NULL;
 	s2::RenderParams params;
 	params.mt = mt;
 	params.set_shader = false;
 	params.vertex_offset = - (mt * spr->GetPosition());
 	SpriteRenderer::Draw(spr, params);
-	const_cast<Sprite*>(spr)->GetShader().blend = mode;
+	const_cast<Sprite*>(spr)->Shader().blend = mode;
 
 	shader->Commit();
 
@@ -75,7 +75,7 @@ void SpriteBlend::DrawSprToTmp(const Sprite* spr, const sm::mat4& mt)
 void SpriteBlend::DrawTmpToScreen(const Sprite* sprite, const sm::mat4& mt)
 {
 	sm::mat4 t = sprite->GetTransMatrix() * mt;
-	sm::rect r = sprite->GetSymbol().GetBounding();
+	sm::rect r = sprite->GetSymbol()->GetBounding();
 
 	sm::vec2 vertices[4];
 	vertices[0] = sm::vec2(r.xmin, r.ymin);

@@ -60,7 +60,11 @@ bool Task::IsDirty() const
 
 void Task::GetAllSprite(std::vector<const ee::Sprite*>& sprites) const
 {
-	m_stage->TraverseSprites(ee::FetchAllVisitor<const ee::Sprite>(sprites));
+	std::vector<ee::Sprite*> tmp;
+	m_stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(tmp));
+	for (int i = 0, n = tmp.size(); i < n; ++i) {
+		sprites.push_back(tmp[i]);
+	}
 }
 
 const ee::EditPanel* Task::GetEditPanel() const

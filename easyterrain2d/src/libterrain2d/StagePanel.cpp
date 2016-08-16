@@ -4,6 +4,7 @@
 #include "FileIO.h"
 #include "ToolBarPanel.h"
 #include "Sprite.h"
+#include "Symbol.h"
 
 #include <ee/shape_msg.h>
 #include <ee/FetchAllVisitor.h>
@@ -43,7 +44,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	SetEditOP(new ee::ZoomViewOP(this, GetStageImpl(), true));
 	SetCanvas(new StageCanvas(this, glctx, edited, bg_sprites));
 
-	m_oceans = static_cast<Sprite*>(edited)->GetSymbol().GetOceans();
+	m_oceans = dynamic_cast<Symbol*>(edited->GetSymbol())->GetOceans();
 	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
  		OceanMesh* ocean = m_oceans[i];
 		ee::InsertShapeSJ::Instance()->Insert(
@@ -72,7 +73,7 @@ void StagePanel::Store(const std::string& dir, Json::Value& value) const
 	for (int i = 0, n = bg_sprites.size(); i < n; ++i) {
 		ee::Sprite* bg = bg_sprites[i];
 		value["bg"][i]["filepath"] = ee::FileHelper::GetRelativePath(
-			dir, bg->GetSymbol().GetFilepath());
+			dir, dynamic_cast<ee::Symbol*>(bg->GetSymbol())->GetFilepath());
 		bg->Store(value["bg"][i]);
 	}
 

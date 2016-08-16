@@ -8,7 +8,7 @@ namespace ee
 
 void SpriteCtrlNode::GetSpriteCtrlNodes(const Sprite* sprite, sm::vec2 nodes[8])
 {
-	sm::rect r = sprite->GetSymbol().GetSize(sprite);
+	sm::rect r = sprite->GetSymbol()->GetBounding(sprite);
 	if (sprite->GetMirror().x) { 
 		r.xmin = -r.xmin;
 		r.xmax = -r.xmax;
@@ -44,7 +44,7 @@ void SpriteCtrlNode::GetSpriteCtrlNodes(const Sprite* sprite, sm::vec2 nodes[8])
 
 void SpriteCtrlNode::GetSpriteCtrlNodesExt(const Sprite* sprite, sm::vec2 nodes[4])
 {
-	sm::rect r = sprite->GetSymbol().GetSize(sprite);
+	sm::rect r = sprite->GetSymbol()->GetBounding(sprite);
 	if (sprite->GetMirror().x) { 
 		r.xmin = -r.xmin;
 		r.xmax = -r.xmax;

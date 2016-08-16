@@ -36,7 +36,7 @@ void Love2dCode::Resolve()
 		if (frame->Size() != 0)
 		{
 			const ee::Sprite* sprite = frame->GetSprite(0);
-			int index = Query(sprite->GetSymbol().GetFilepath());
+			int index = Query(sprite->GetSymbol()->GetFilepath());
 			if (index != -1)
 			{
 				std::string time = ee::StringHelper::ToString(frame->GetTime());

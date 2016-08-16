@@ -18,6 +18,7 @@
 #include <easycomplex.h>
 
 #include <sprite2/S2_Sprite.h>
+#include <sprite2/BoundingBox.h>
 
 #include <fstream>
 #include <algorithm>
@@ -84,7 +85,7 @@ void StagePanel::LoadFromFile(const char* filename)
 	items_complex.LoadFromFile(items_filepath);
 	const std::vector<s2::Sprite*>& children = items_complex.GetChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
-		ee::Sprite* spr = static_cast<ee::Sprite*>(children[i]->GetUD());
+		ee::Sprite* spr = dynamic_cast<ee::Sprite*>(children[i]);
 		ee::InsertSpriteSJ::Instance()->Insert(spr);
 	}
 }
@@ -107,7 +108,7 @@ void StagePanel::StoreToFile(const char* filename) const
 	std::string items_path = name + "_items_complex[gen].json";
 	items_complex.SetFilepath(items_path);
 	ecomplex::FileStorer::Store(items_path.c_str(), &items_complex);
-	items_complex.InitBounding();
+//	items_complex.InitBounding();
 
 	// wrapper complex
 	ecomplex::Sprite items_sprite(&items_complex);
@@ -133,7 +134,7 @@ void StagePanel::StoreToFile(const char* filename) const
 	value["clipbox"]["h"] = cb_sz.y;
 	value["clipbox"]["x"] = m_clipbox.xmin;
 	value["clipbox"]["y"] = m_clipbox.ymax;
-	sm::vec2 c_sz = items_sprite.GetRect().Size();
+	sm::vec2 c_sz = items_sprite.GetBounding()->GetSize().Size();
 	value["children"]["w"] = c_sz.x;
 	value["children"]["h"] = c_sz.y;
 	Json::StyledStreamWriter writer;

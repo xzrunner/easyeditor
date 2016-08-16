@@ -26,7 +26,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   ee::LibraryPanel* library)
 	: ee::EditPanel(parent, frame)
 	, ee::SpritesPanelImpl(GetStageImpl(), library)
-	, ee::ShapesPanelImpl(new SymbolContainer((Symbol*)(&edited->GetSymbol())))
+	, ee::ShapesPanelImpl(new SymbolContainer(dynamic_cast<Symbol*>(edited->GetSymbol())))
 {
 	ee::EditOP* op = new eshape::EditPolylineOP<eshape::DrawPolygonOP, ee::SelectShapesOP>(this, 
 		GetStageImpl(), this, NULL, new ee::OneFloatValueStatic(5), NULL);
@@ -36,7 +36,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	StageCanvas* canvas = new StageCanvas(this, glctx, edited, bg_sprites);
 	SetCanvas(canvas);
 
-	m_symbol = (Symbol*)(&edited->GetSymbol());
+	m_symbol = dynamic_cast<Symbol*>(edited->GetSymbol());
 	if (m_symbol) {
 		m_symbol->AddReference();
 	}

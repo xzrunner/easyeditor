@@ -13,7 +13,7 @@ void MaxRectsBinaryArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites
 	std::vector<etexpacker::RectSize> rects;
 	rects.reserve(sz);
 	for (int i = 0; i < sz; ++i) {
-		sm::rect r = sprites[i]->GetSymbol().GetBounding();
+		sm::rect r = sprites[i]->GetSymbol()->GetBounding();
 		rects.push_back(etexpacker::RectSize(r.Width(), r.Height()));
 	}
 	std::vector<etexpacker::Rect> output;
@@ -28,7 +28,7 @@ void MaxRectsBinaryArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites
 		sm::vec2 pos;
 		pos.x = r.x + r.width * 0.5f;
 		pos.y = r.y + r.height * 0.5f;
-		sprite->SetTransform(pos, sprite->GetAngle());
+		sprite->SetPosition(pos);
 	}
 }
 

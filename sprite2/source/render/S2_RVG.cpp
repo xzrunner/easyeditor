@@ -8,12 +8,12 @@
 namespace s2
 {
 
-void s2::RVG::Init()
+void RVG::Init()
 {
 	rvg_style_init();
 }
 
-void s2::RVG::SetColor(const Color& color)
+void RVG::SetColor(const Color& color)
 {
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	if (CameraMgr::Instance()->IsType(CameraMgr::ORTHO)) {
@@ -25,17 +25,17 @@ void s2::RVG::SetColor(const Color& color)
 	}
 }
 
-void s2::RVG::PointSize(float size)
+void RVG::PointSize(float size)
 {
 	rvg_point_size(size);
 }
 
-void s2::RVG::LineWidth(float width)
+void RVG::LineWidth(float width)
 {
 	rvg_line_width(width);
 }
 
-void s2::RVG::Point(const sm::vec2& vertex)
+void RVG::Point(const sm::vec2& vertex)
 {
 	if (CameraMgr::Instance()->IsType(CameraMgr::ORTHO)) {
 		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE2);
@@ -46,7 +46,7 @@ void s2::RVG::Point(const sm::vec2& vertex)
 	}
 }
 
-void s2::RVG::Points(const std::vector<sm::vec2>& vertices)
+void RVG::Points(const std::vector<sm::vec2>& vertices)
 {
 	if (CameraMgr::Instance()->IsType(CameraMgr::ORTHO)) {
 		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE2);
@@ -61,7 +61,7 @@ void s2::RVG::Points(const std::vector<sm::vec2>& vertices)
 	}
 }
 
-void s2::RVG::Line(const sm::vec2& p0, const sm::vec2& p1)
+void RVG::Line(const sm::vec2& p0, const sm::vec2& p1)
 {
 	rvg_line_style(LS_DEFAULT);
 
@@ -74,7 +74,7 @@ void s2::RVG::Line(const sm::vec2& p0, const sm::vec2& p1)
 	}
 }
 
-void s2::RVG::DotLine(const sm::vec2& p0, const sm::vec2& p1)
+void RVG::DotLine(const sm::vec2& p0, const sm::vec2& p1)
 {
 	rvg_line_style(LS_DOT);
 	if (CameraMgr::Instance()->IsType(CameraMgr::ORTHO)) {
@@ -86,7 +86,7 @@ void s2::RVG::DotLine(const sm::vec2& p0, const sm::vec2& p1)
 	}
 }
 
-void s2::RVG::DashLine(const sm::vec2& p0, const sm::vec2& p1)
+void RVG::DashLine(const sm::vec2& p0, const sm::vec2& p1)
 {
 	rvg_line_style(LS_DASH);
 	if (CameraMgr::Instance()->IsType(CameraMgr::ORTHO)) {
@@ -98,7 +98,7 @@ void s2::RVG::DashLine(const sm::vec2& p0, const sm::vec2& p1)
 	}
 }
 
-void s2::RVG::DotDashLine(const sm::vec2& p0, const sm::vec2& p1)
+void RVG::DotDashLine(const sm::vec2& p0, const sm::vec2& p1)
 {
 	rvg_line_style(LS_DOT_DASH);
 	if (CameraMgr::Instance()->IsType(CameraMgr::ORTHO)) {
@@ -110,7 +110,7 @@ void s2::RVG::DotDashLine(const sm::vec2& p0, const sm::vec2& p1)
 	}
 }
 
-void s2::RVG::Lines(const std::vector<sm::vec2>& vertices)
+void RVG::Lines(const std::vector<sm::vec2>& vertices)
 {
 	if (vertices.size() < 2) {
 		return;
@@ -130,7 +130,7 @@ void s2::RVG::Lines(const std::vector<sm::vec2>& vertices)
 	}
 }
 
-void s2::RVG::Polyline(const std::vector<sm::vec2>& vertices, bool loop)
+void RVG::Polyline(const std::vector<sm::vec2>& vertices, bool loop)
 {
 	if (vertices.size() < 2) {
 		return;
@@ -150,7 +150,7 @@ void s2::RVG::Polyline(const std::vector<sm::vec2>& vertices, bool loop)
 	}
 }
 
-void s2::RVG::Triangles(const std::vector<sm::vec2>& triangles)
+void RVG::Triangles(const std::vector<sm::vec2>& triangles)
 {
 	if (triangles.size() < 3) return;
 
@@ -167,12 +167,12 @@ void s2::RVG::Triangles(const std::vector<sm::vec2>& triangles)
 	}
 }
 
-void s2::RVG::Triangles(const std::vector<sm::vec2>& triangles, const std::vector<Color>& colors)
+void RVG::Triangles(const std::vector<sm::vec2>& triangles, const std::vector<Color>& colors)
 {
 	// todo
 }
 
-void s2::RVG::TriangleStrip(const std::vector<sm::vec2>& triangles)
+void RVG::TriangleStrip(const std::vector<sm::vec2>& triangles)
 {
 	if (triangles.size() < 3) return;
 
@@ -189,12 +189,12 @@ void s2::RVG::TriangleStrip(const std::vector<sm::vec2>& triangles)
 	}
 }
 
-void s2::RVG::Rect(const sm::vec2& center, float hw, float hh, bool filling)
+void RVG::Rect(const sm::vec2& center, float hw, float hh, bool filling)
 {
 	Rect(center - sm::vec2(hw, hh), center + sm::vec2(hw, hh), filling);
 }
 
-void s2::RVG::Rect(const sm::vec2& p0, const sm::vec2& p1, bool filling)
+void RVG::Rect(const sm::vec2& p0, const sm::vec2& p1, bool filling)
 {
 	if (CameraMgr::Instance()->IsType(CameraMgr::ORTHO)) {
 		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE2);
@@ -205,7 +205,12 @@ void s2::RVG::Rect(const sm::vec2& p0, const sm::vec2& p1, bool filling)
 	}
 }
 
-void s2::RVG::Circle(const sm::vec2& center, float radius, bool filling, int segments)
+void RVG::Rect(const sm::rect& r, bool filling)
+{
+	Rect(sm::vec2(r.xmin, r.ymin), sm::vec2(r.xmax, r.ymax), filling);
+}
+
+void RVG::Circle(const sm::vec2& center, float radius, bool filling, int segments)
 {
 	if (CameraMgr::Instance()->IsType(CameraMgr::ORTHO)) {
 		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE2);
@@ -216,19 +221,19 @@ void s2::RVG::Circle(const sm::vec2& center, float radius, bool filling, int seg
 	}
 }
 
-void s2::RVG::Circles(const std::vector<sm::vec2>& circles, float radius, bool filling, int segments)
+void RVG::Circles(const std::vector<sm::vec2>& circles, float radius, bool filling, int segments)
 {
 	for (int i = 0, n = circles.size(); i < n; ++i) {
 		Circle(circles[i], radius, filling, segments);
 	}
 }
 
-void s2::RVG::Cross(const sm::vec2& center, float edge)
+void RVG::Cross(const sm::vec2& center, float edge)
 {
 	Cross(center, edge, edge);
 }
 
-void s2::RVG::Cross(const sm::vec2& center, float xedge, float yedge)
+void RVG::Cross(const sm::vec2& center, float xedge, float yedge)
 {
 	sm::vec2 s = center, e = center;
 	s.x -= xedge;

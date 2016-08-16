@@ -95,7 +95,7 @@ bool Bitmap::LoadFromFile(const std::string& filepath)
 	else
 	{
 		Symbol* symbol = SymbolMgr::Instance()->FetchSymbol(filepath);
-		sm::rect rect = symbol->GetSize();
+		sm::rect rect = symbol->GetBounding();
 		float w = std::max(1.0f, rect.Size().x),
 			  h = std::max(1.0f, rect.Size().y);
 		float scale = w > (MAX_WIDTH / SCALE) ? (MAX_WIDTH / w) : SCALE; 

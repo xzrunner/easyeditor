@@ -71,8 +71,7 @@ void StageCanvas::OnDrawSprites() const
 	eshape::StageCanvas::DrawGuideLines();
 
 	if (!m_edited) {
-		const ee::Symbol& symbol = m_stage->GetSymbol();
-		symbol.Draw(s2::RenderParams());
+		m_stage->GetSymbol().Draw(s2::RenderParams());
 	}
 
 	m_stage->DrawEditOP();

@@ -91,7 +91,7 @@ void AutoTriCutCMPT::OutputOutline(wxCommandEvent& event)
 	const ee::ImageSprite* img_sprite 
 		= dynamic_cast<const ee::ImageSprite*>(sprite);
 	assert(img_sprite);
-	const ee::Image* img = img_sprite->GetSymbol().GetImage();
+	const ee::Image* img = img_sprite->GetSymbol()->GetImage();
 
 	Json::Value value;
 	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editop);
@@ -122,7 +122,7 @@ void AutoTriCutCMPT::CreateOutline(wxCommandEvent& event)
 	const ee::ImageSprite* img_sprite 
 		= dynamic_cast<const ee::ImageSprite*>(sprite);
 	assert(img_sprite);
-	const ee::Image* img = img_sprite->GetSymbol().GetImage();
+	const ee::Image* img = img_sprite->GetSymbol()->GetImage();
 
 	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editop);
 	m_raw = new ExtractOutlineRaw(*img);
@@ -158,7 +158,7 @@ void AutoTriCutCMPT::Trigger()
 	const ee::ImageSprite* img_sprite 
 		= dynamic_cast<const ee::ImageSprite*>(sprite);
 	assert(img_sprite);
-	const ee::Image* img = img_sprite->GetSymbol().GetImage();
+	const ee::Image* img = img_sprite->GetSymbol()->GetImage();
 
 	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editop);
 	ExtractOutlineRaw raw(*img);
@@ -184,7 +184,7 @@ void AutoTriCutCMPT::OnDebug(wxCommandEvent& event)
 	const ee::ImageSprite* img_sprite 
 		= dynamic_cast<const ee::ImageSprite*>(sprite);
 	assert(img_sprite);
-	const ee::Image* img = img_sprite->GetSymbol().GetImage();
+	const ee::Image* img = img_sprite->GetSymbol()->GetImage();
 
 	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editop);
 	ExtractOutlineRaw raw(*img);

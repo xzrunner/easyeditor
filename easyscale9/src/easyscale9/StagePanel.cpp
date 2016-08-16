@@ -63,7 +63,7 @@ void StagePanel::rebuildPatchSymbol()
 	float width = m_toolbar->getWidth(),
 		  height = m_toolbar->getHeight();
 
-	sm::vec2 sz = m_sprites[1][1]->GetSymbol().GetBounding().Size();
+	sm::vec2 sz = m_sprites[1][1]->GetSymbol()->GetBounding().Size();
 	if (type == e_3GridHor) {
 		height = sz.y;
 	} else if (type == e_3GridVer) {
@@ -117,7 +117,7 @@ void StagePanel::Insert(ee::Sprite* spr)
 	spr->AddReference();
 	m_sprites[row][col] = spr;
 
-	spr->SetTransform(ComposeGrids::GetGridCenter(col, row), spr->GetAngle());
+	spr->SetPosition(ComposeGrids::GetGridCenter(col, row));
 
 	rebuildPatchSymbol();
 

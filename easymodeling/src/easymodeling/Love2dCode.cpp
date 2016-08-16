@@ -83,7 +83,7 @@ void Love2dCode::ResolveLoadImages()
 	for (size_t i = 0, n = bodies.size(); i < n; ++i)
 	{
 		Body* body = bodies[i];
-		std::string path = body->m_sprite->GetSymbol().GetFilepath();
+		std::string path = body->m_sprite->GetSymbol()->GetFilepath();
 		std::string name = ee::FileHelper::GetFilename(path);
 		mapNamePath.insert(std::make_pair(name, path));
 	}
@@ -137,7 +137,7 @@ void Love2dCode::ResolveLoadBodies()
 
 		gen.line();
 
-		std::string name = ee::FileHelper::GetFilename(body->m_sprite->GetSymbol().GetFilepath());
+		std::string name = ee::FileHelper::GetFilename(body->m_sprite->GetSymbol()->GetFilepath());
 
 		// local actor = {}
 		lua::assign(gen, "local", name, "{}");
@@ -289,7 +289,7 @@ void Love2dCode::ResolveLoadFixtures(Body* body)
 		// local shape = newShape
 		lua::assign(gen, "", "shape", newShape);
 		// local fixture = love.physics.newFixture(body, shape)
-		std::string sBody = ee::FileHelper::GetFilename(body->m_sprite->GetSymbol().GetFilepath())+".body";
+		std::string sBody = ee::FileHelper::GetFilename(body->m_sprite->GetSymbol()->GetFilepath())+".body";
 		lua::assign(gen, "", "fixture", lua::call("", "love.physics.newFixture", 2, sBody, "shape"));
 
 		if (fData->m_density != 1)

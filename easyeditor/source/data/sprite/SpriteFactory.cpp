@@ -2,8 +2,11 @@
 #include "FileHelper.h"
 #include "FileType.h"
 #include "ImageSprite.h"
+#include "ImageSymbol.h"
 #include "FontBlankSprite.h"
+#include "FontBlankSymbol.h"
 #include "ScriptsSprite.h"
+#include "ScriptsSymbol.h"
 #include "StringHelper.h"
 
 namespace ee
@@ -38,7 +41,7 @@ Sprite* SpriteFactory::Create(Symbol* symbol)
 
 		if (ext == "png" || ext == "jpg" || ext == "bmp" || ext == "pvr" || ext == "pkm")
 		{
-			sprite = new ImageSprite(static_cast<ImageSymbol*>(symbol));
+			sprite = new ImageSprite(dynamic_cast<ImageSymbol*>(symbol));
 		}
 		else if (ext == "json")
 		{
@@ -47,13 +50,13 @@ Sprite* SpriteFactory::Create(Symbol* symbol)
 			if (itr != m_creators.end()) {
 				sprite = (itr->second)(symbol);
 			} else if (FileType::IsType(filepath, FileType::e_fontblank)) {
-				sprite = new FontBlankSprite(static_cast<FontBlankSymbol*>(symbol));
+				sprite = new FontBlankSprite(dynamic_cast<FontBlankSymbol*>(symbol));
 			}
 		}
 		else if (ext == "lua")
 		{
 			if (FileType::IsType(filepath, FileType::e_scripts)) {
-				sprite = new ScriptsSprite(static_cast<ScriptsSymbol*>(symbol));
+				sprite = new ScriptsSprite(dynamic_cast<ScriptsSymbol*>(symbol));
 			}
 		}
 	}
@@ -73,12 +76,12 @@ Sprite* SpriteFactory::Create(Symbol* symbol)
 void SpriteFactory::Insert(Sprite* sprite)
 {
 	std::map<const Symbol*, SpriteList>::iterator 
-		itr = m_map_symbol2sprites.find(sprite->GetSymbol());
+		itr = m_map_symbol2sprites.find(dynamic_cast<const Symbol*>(sprite->GetSymbol()));
 	if (itr == m_map_symbol2sprites.end())
 	{
 		SpriteList list;
 		list.push_back(sprite);
-		m_map_symbol2sprites.insert(std::make_pair(sprite->GetSymbol(), list));
+		m_map_symbol2sprites.insert(std::make_pair(dynamic_cast<const ee::Symbol*>(sprite->GetSymbol()), list));
 	}
 	else 
 	{
@@ -110,7 +113,7 @@ void SpriteFactory::UpdateBoundings(const Symbol& symbol)
 	if (itr != m_map_symbol2sprites.end())
 	{
 		for (size_t i = 0, n = itr->second.size(); i < n; ++i)
-			itr->second[i]->BuildBounding();
+			itr->second[i]->UpdateBounding();
 	}
 }
 

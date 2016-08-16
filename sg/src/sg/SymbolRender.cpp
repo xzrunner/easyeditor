@@ -65,7 +65,7 @@ void SymbolRender::DrawGrass(const ee::Symbol& symbol,
 	ee::Sprite* grass = m_grass[info->size - 1];
 	if (is_flat)
 	{
-		sm::rect r = grass->GetSymbol().GetBounding();
+		sm::rect r = grass->GetSymbol()->GetBounding();
 
 		float half_edge = info->size * EDGE * 0.5f;
 		s2::RVG::SetColor(ee::LIGHT_GREEN);
@@ -73,7 +73,8 @@ void SymbolRender::DrawGrass(const ee::Symbol& symbol,
 	}
 	else
 	{
-		grass->SetTransform(p, 0);
+		grass->SetPosition(p);
+		grass->SetAngle(0);
 		ee::SpriteRenderer::Draw(grass);
 	}
 }
@@ -109,7 +110,7 @@ void SymbolRender::DrawGrids(const ee::Symbol& symbol,
 			for (int j = 0; j < info->size; ++j) {
 				sm::vec2 pos;
 				m_stage->TransGridPosToCoords(row + i - center, col + j - center, pos);
-				m_grid->SetTransform(pos, m_grid->GetAngle());
+				m_grid->SetPosition(pos);
 				s2::RenderColor ct;
 				ct.mul = color;
 				ee::SpriteRenderer::Draw(m_grid, NULL, s2::RenderParams(sm::mat4(), ct));

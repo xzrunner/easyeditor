@@ -22,12 +22,6 @@ Symbol::Symbol()
 {
 }
 
-Symbol::Symbol(const Symbol& s)
-	: ee::Symbol(s)
-{
-	m_mesh = s.m_mesh->Clone();
-}
-
 Symbol::Symbol(ee::Symbol* base)
 {
 	m_mesh = MeshFactory::Instance()->CreateMesh(base);

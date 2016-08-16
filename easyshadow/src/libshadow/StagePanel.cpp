@@ -34,7 +34,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 {
 	SetCanvas(new StageCanvas(this, glctx, edited, bg_sprites));
 
-	m_symbol = (Symbol*)(&edited->GetSymbol());
+	m_symbol = dynamic_cast<Symbol*>(edited->GetSymbol());
 	if (m_symbol) {
 		m_symbol->AddReference();
 	}

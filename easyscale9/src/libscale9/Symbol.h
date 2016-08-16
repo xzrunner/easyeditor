@@ -14,7 +14,6 @@ class Symbol : public ee::Symbol, public s2::Scale9Symbol
 {
 public:
 	Symbol();
-	Symbol(const Symbol& symbol);
 
 	/**
 	 *  @interface

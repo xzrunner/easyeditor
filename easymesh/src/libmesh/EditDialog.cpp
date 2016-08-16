@@ -23,17 +23,17 @@ EditDialog::EditDialog(wxWindow* parent, Sprite* sprite, wxGLContext* glctx)
 	wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 	, m_sprite(sprite)
 {
-	Symbol& symbol = const_cast<Symbol&>(m_sprite->GetSymbol());
-	SetTitle(symbol.GetFilepath());
+	Symbol* symbol = dynamic_cast<Symbol*>(m_sprite->GetSymbol());
+	SetTitle(symbol->GetFilepath());
 	InitLayout(glctx);
 
-	symbol.SetPause(true);
+	symbol->SetPause(true);
 }
 
 EditDialog::~EditDialog()
 {
-	Symbol& symbol = const_cast<Symbol&>(m_sprite->GetSymbol());
-	symbol.SetPause(false);
+	Symbol* symbol = dynamic_cast<Symbol*>(m_sprite->GetSymbol());
+	symbol->SetPause(false);
 }
 
 void EditDialog::InitLayout(wxGLContext* glctx)
@@ -41,8 +41,8 @@ void EditDialog::InitLayout(wxGLContext* glctx)
  	wxSplitterWindow* splitter = new wxSplitterWindow(this);
  
  	StagePanel* stage = new StagePanel(splitter, this, glctx);
-	Symbol& symbol = const_cast<Symbol&>(m_sprite->GetSymbol());
-	stage->SetMeshSymbol(&symbol);
+	Symbol* symbol = dynamic_cast<Symbol*>(m_sprite->GetSymbol());
+	stage->SetMeshSymbol(symbol);
  	m_stage = stage;
  	ee::ToolbarPanel* toolbar = new ToolbarPanel(splitter, stage, false, m_sprite);
  
@@ -52,26 +52,26 @@ void EditDialog::InitLayout(wxGLContext* glctx)
 
 void EditDialog::OnCloseEvent(wxCloseEvent& event)
 {
-	m_sprite->BuildBounding();
+//	m_sprite->UpdateBounding();
 
 	if (!m_stage->IsEditDirty()) {
 		Destroy();
 		return;
 	}
 
-	Symbol& symbol = const_cast<Symbol&>(m_sprite->GetSymbol());
+	Symbol* symbol = dynamic_cast<Symbol*>(m_sprite->GetSymbol());
 
 	ee::ConfirmDialog dlg(this);
 	int val = dlg.ShowModal();
 	if (val == wxID_YES)
 	{
-		m_sprite->GetMeshTrans().LoadFromMesh(symbol.GetMesh());
+		m_sprite->GetMeshTrans().LoadFromMesh(symbol->GetMesh());
 
 // 		const std::string& filepath = symbol.GetFilepath();
 // 		FileIO::Store(symbol.GetFilepath().c_str(), &symbol);
 // 		symbol.RefreshThumbnail(filepath);
 
-		ee::SpriteFactory::Instance()->UpdateBoundings(symbol);
+		ee::SpriteFactory::Instance()->UpdateBoundings(*symbol);
 		Destroy();
 	}
 	else if (val == wxID_NO)

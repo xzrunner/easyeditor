@@ -23,7 +23,7 @@ public:
 		if (const eparticle3d::Sprite* particle = dynamic_cast<const eparticle3d::Sprite*>(spr)) {
 			const_cast<eparticle3d::Sprite*>(particle)->Start();
 		} else if (const eanim::Sprite* anim = dynamic_cast<const eanim::Sprite*>(spr)) {
-			const_cast<eanim::Symbol&>(anim->GetSymbol()).ResetTime();
+			const_cast<eanim::Symbol*>(dynamic_cast<const eanim::Symbol*>(anim->GetSymbol()))->ResetTime();
 		}
 	}
 }; // RestartVisitor
@@ -39,7 +39,7 @@ bool PreviewEditOP::OnMouseLeftDown(int x, int y)
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		ee::Sprite* spr = const_cast<ee::Sprite*>(m_sprites[i]);
 		restart.Visit(spr, next);
-		const_cast<ee::Symbol&>(spr->GetSymbol()).Traverse(restart);
+		dynamic_cast<ee::Symbol*>(spr->GetSymbol())->Traverse(restart);
 	}
 
 	return false;

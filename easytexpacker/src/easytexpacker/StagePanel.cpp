@@ -96,13 +96,13 @@ void StagePanel::FixCoords(ee::Sprite* sprite)
 	float width, height;
 	if (sprite->GetAngle() == 0)
 	{
-		width = sprite->GetSymbol().GetBounding().Width() * s;
-		height = sprite->GetSymbol().GetBounding().Height() * s;
+		width = sprite->GetSymbol()->GetBounding().Width() * s;
+		height = sprite->GetSymbol()->GetBounding().Height() * s;
 	}
 	else
 	{
-		width = sprite->GetSymbol().GetBounding().Height() * s;
-		height = sprite->GetSymbol().GetBounding().Width() * s;
+		width = sprite->GetSymbol()->GetBounding().Height() * s;
+		height = sprite->GetSymbol()->GetBounding().Width() * s;
 	}
 
 	sm::vec2 leftTop;
@@ -118,7 +118,7 @@ void StagePanel::FixCoords(ee::Sprite* sprite)
 		fixedCenter.x = int(fixedCenter.x) + width * 0.5f;
 		fixedCenter.y = int(fixedCenter.y) + height * 0.5f;
 
-		sprite->SetTransform(fixedCenter, sprite->GetAngle());
+		sprite->SetPosition(fixedCenter);
 	}
 }
 

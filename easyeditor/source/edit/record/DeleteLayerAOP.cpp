@@ -16,7 +16,7 @@ DeleteLayerAOP::DeleteLayerAOP(LayerList* list, Layer* layer)
 	layer->TraverseSprite(FetchAllVisitor<Sprite>(m_sprites));
 	for_each(m_sprites.begin(), m_sprites.end(), cu::AddRefFonctor<Sprite>());
 
-	layer->TraverseSprite(FetchAllVisitor<Shape>(m_shapes));
+	layer->TraverseShape(FetchAllVisitor<Shape>(m_shapes));
 	for_each(m_shapes.begin(), m_shapes.end(), cu::AddRefFonctor<Shape>());
 
 	layer->AddReference();

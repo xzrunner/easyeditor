@@ -54,7 +54,7 @@ void EditDialogSimple::InitEditOP(ee::Sprite* edited)
 {
 	ee::EditOP* op = NULL;
 
-	ShapeType type = static_cast<Sprite*>(edited)->GetSymbol().GetShapeType();
+	ShapeType type = dynamic_cast<const Symbol*>(edited->GetSymbol())->GetShapeType();
 	switch (type)
 	{
 	case ST_RECT:

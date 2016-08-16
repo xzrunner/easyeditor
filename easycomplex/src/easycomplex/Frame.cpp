@@ -198,7 +198,6 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 {
 	ee::Snapshoot ss;
 	Symbol* symbol = ((StagePanel*)(m_task->GetEditPanel()))->GetSymbol();
-	symbol->InitBounding();
 	ss.OutputToImageFile(symbol, filepath);
 }
 

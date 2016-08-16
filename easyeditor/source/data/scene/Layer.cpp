@@ -117,7 +117,7 @@ void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
 
 		Json::Value spr_val;
 		spr_val["filepath"] = FileHelper::GetRelativePath(dir,
-			spr->GetSymbol().GetFilepath());
+			dynamic_cast<ee::Symbol*>(spr->GetSymbol())->GetFilepath());
 		spr->Store(spr_val);
 
 		val["sprite"][i] = spr_val;

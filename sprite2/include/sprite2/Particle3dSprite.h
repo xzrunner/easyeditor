@@ -11,6 +11,7 @@ class Particle3dSprite : public VIRTUAL_INHERITANCE Sprite
 public:
 	Particle3dSprite();
 	Particle3dSprite(const Particle3dSprite& spr);
+	Particle3dSprite(Symbol* sym) : Sprite(sym) {}
 
 	/**
 	 *  @interface

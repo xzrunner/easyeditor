@@ -57,8 +57,8 @@ ee::Sprite* LoadFromPSD::LoadGroup(const Json::Value& value, const std::string& 
 		}
 	}
 
-	sym->InitBounding();
-	spr->BuildBounding();
+//	sym->InitBounding();
+	spr->UpdateBounding();
 
 	spr->AddReference();
 	spr->SetVisible(visible);
@@ -88,7 +88,7 @@ ee::Sprite* LoadFromPSD::LoadLayer(const Json::Value& value, const std::string& 
 	ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
 	spr->AddReference();
 
-	spr->SetTransform(sm::vec2(left + width * 0.5f - tw * 0.5f, th * 0.5f - top - height * 0.5f), 0);
+	spr->SetPosition(sm::vec2(left + width * 0.5f - tw * 0.5f, th * 0.5f - top - height * 0.5f));
 	spr->SetVisible(visible);
 
 	sym->RemoveReference();

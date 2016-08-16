@@ -66,7 +66,8 @@ void BodyManager::Update()
 		b2Body* b2body = body->GetBody();
 		if (body->IsAlive() && b2body->GetType() != b2_staticBody) {
 			sm::vec2 pos(b2body->GetPosition().x, b2body->GetPosition().y);
-			sprite->SetTransform(pos * BOX2D_SCALE_FACTOR, b2body->GetAngle());
+			sprite->SetPosition(pos * BOX2D_SCALE_FACTOR);
+			sprite->SetAngle(b2body->GetAngle());
 		} else {
 			sm::vec2 pos = sprite->GetPosition() / BOX2D_SCALE_FACTOR;
 			b2body->SetTransform(b2Vec2(pos.x, pos.y), sprite->GetAngle());
@@ -77,7 +78,7 @@ void BodyManager::Update()
 IBody* BodyManager::CreateBody(Sprite* sprite)
 {
 	std::string filepath = FileHelper::GetFilenameAddTag(
-		sprite->GetSymbol().GetFilepath(), "shape", "json");
+		sprite->GetSymbol()->GetFilepath(), "shape", "json");
 	if (FileHelper::IsFileExist(filepath)) {
 		IBody* body = BodyFactory::createBody(filepath, sprite->GetScale().x);
 		sm::vec2 pos = sprite->GetPosition() / BOX2D_SCALE_FACTOR;

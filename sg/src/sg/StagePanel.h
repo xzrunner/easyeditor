@@ -7,8 +7,6 @@
 #include <ee/EditPanel.h>
 #include <ee/SpritesPanelImpl.h>
 
-namespace ee { Visitor; }
-
 namespace sg
 {
 

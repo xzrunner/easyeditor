@@ -94,7 +94,7 @@ void StagePanel::UpdateAllSpritesLocation()
 	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
 		ee::Sprite* s = sprites[i];
-		s->SetTransform(FixSpriteLocation(s->GetPosition()), s->GetAngle());
+		s->SetPosition(FixSpriteLocation(s->GetPosition()));
 	}
 }
 
@@ -118,7 +118,7 @@ void StagePanel::SetPerspective(bool is_flat)
 		TransGridPosToCoords(row, col, pos);
 		m_is_flat = !m_is_flat;
 
-		sprite->SetTransform(pos, sprite->GetAngle());
+		sprite->SetPosition(pos);
 	}
 
  	m_is_flat = is_flat; 
@@ -133,7 +133,7 @@ void StagePanel::ChangeSelectedSpritesLevel(bool up)
 		ee::Sprite* sprite = sprites[i];
 
 		SpriteExt* spr_info = static_cast<SpriteExt*>(sprite->GetUserData());
-		SymbolExt* symbol_info = static_cast<SymbolExt*>(sprite->GetSymbol().GetUserData());
+		SymbolExt* symbol_info = static_cast<SymbolExt*>(sprite->GetSymbol()->GetUserData());
 		assert(spr_info && symbol_info);
 
 		if (spr_info->level == 1 && !up ||
@@ -217,7 +217,7 @@ sm::vec2 StagePanel::FixSpriteLocation(const sm::vec2& pos) const
 
 void StagePanel::ChangeSymbolRemain(ee::Sprite* sprite, bool increase) const
 {
-	SymbolExt* info = static_cast<SymbolExt*>(sprite->GetSymbol().GetUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(sprite->GetSymbol()->GetUserData());
 	if (!info) {
 		return;
 	}
@@ -234,9 +234,9 @@ void StagePanel::ChangeSymbolRemain(ee::Sprite* sprite, bool increase) const
 
 void StagePanel::Insert(ee::Sprite* spr)
 {
-	spr->SetTransform(FixSpriteLocation(spr->GetPosition()), spr->GetAngle());
+	spr->SetPosition(FixSpriteLocation(spr->GetPosition()));
 
-	if (!spr->GetSymbol().GetUserData()) {
+	if (!spr->GetSymbol()->GetUserData()) {
 //		ee::SpritesPanelImpl::InsertSprite(spr);
 		return;
 	}
@@ -254,7 +254,7 @@ void StagePanel::Insert(ee::Sprite* spr)
 
 	if (!spr->GetUserData()) {
 		SpriteExt* ext = new SpriteExt;
-		ext->level = ((SymbolExt*)(spr->GetSymbol().GetUserData()))->level;
+		ext->level = ((SymbolExt*)(spr->GetSymbol()->GetUserData()))->level;
 		spr->SetUserData(ext);
 	}
 

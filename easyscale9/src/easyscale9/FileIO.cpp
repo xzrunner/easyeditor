@@ -122,13 +122,13 @@ ee::Sprite* FileIO::Load(const Json::Value& value, const std::string& dir)
 Json::Value FileIO::Store(ee::Sprite* sprite, const std::string& dir)
 {
 	Json::Value value;
-	const ee::Symbol& symbol = sprite->GetSymbol();
+	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(sprite->GetSymbol());
 
 	// filepath
 	value["filepath"] = ee::FileHelper::GetRelativePath(dir,
-		symbol.GetFilepath());
+		sym->GetFilepath());
 	// filepaths
-	const std::set<std::string>& filepaths = symbol.GetFilepaths();
+	const std::set<std::string>& filepaths = sym->GetFilepaths();
 	std::set<std::string>::const_iterator itr = filepaths.begin();
 	for (int i = 0; itr != filepaths.end(); ++itr, ++i) {
 		value["filepaths"][i] = *itr;
@@ -142,13 +142,13 @@ Json::Value FileIO::Store(ee::Sprite* sprite, const std::string& dir)
 Json::Value FileIO::StoreNew(ee::Sprite* sprite, const std::string& dir)
 {
 	Json::Value value;
-	const ee::Symbol& symbol = sprite->GetSymbol();
+	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(sprite->GetSymbol());
 
 	// filepath
 	value["filepath"] = ee::FileHelper::GetRelativePath(dir,
-		symbol.GetFilepath());
+		sym->GetFilepath());
 	// filepaths
-	const std::set<std::string>& filepaths = symbol.GetFilepaths();
+	const std::set<std::string>& filepaths = sym->GetFilepaths();
 	std::set<std::string>::const_iterator itr = filepaths.begin();
 	for (int i = 0; itr != filepaths.end(); ++itr, ++i) {
 		value["filepaths"][i] = *itr;

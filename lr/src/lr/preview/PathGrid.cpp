@@ -5,6 +5,7 @@
 #include <ee/Math2D.h>
 
 #include <sprite2/S2_RVG.h>
+#include <sprite2/BoundingBox.h>
 
 namespace lr
 {
@@ -18,7 +19,7 @@ PathGrid::PathGrid(const sm::rect& region, int row, int col)
 
 void PathGrid::DisableRegion(const ee::Sprite* spr, bool disable)
 {
-	m_nw.SetStatus(spr->GetRect(), !disable);
+	m_nw.SetStatus(spr->GetBounding()->GetSize(), !disable);
 }
 
 void PathGrid::QueryRoute(const sm::vec2& start, const sm::vec2& end)

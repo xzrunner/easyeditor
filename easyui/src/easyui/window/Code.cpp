@@ -75,9 +75,9 @@ void Code::ResolveUI(const std::vector<ee::Sprite*>& sprites)
 			}
 			else if (const ecomplex::Sprite* e_spr = dynamic_cast<const ecomplex::Sprite*>(spr)) 
 			{
-				const std::vector<s2::Sprite*>& children = e_spr->GetSymbol().GetChildren();
+				const std::vector<s2::Sprite*>& children = dynamic_cast<const s2::ComplexSymbol*>(e_spr->GetSymbol())->GetChildren();
 				for (int i = 0, n = children.size(); i < n; ++i) {
-					ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+					ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 					Node node(child, "");
 					buffer.push(node);
 				}
@@ -133,9 +133,9 @@ void Code::ResolveText(const std::vector<ee::Sprite*>& sprites)
 		}
 		else if (ecomplex::Sprite* e_spr = dynamic_cast<ecomplex::Sprite*>(spr)) 
 		{
-			const std::vector<s2::Sprite*>& children = e_spr->GetSymbol().GetChildren();
+			const std::vector<s2::Sprite*>& children = dynamic_cast<const s2::ComplexSymbol*>(e_spr->GetSymbol())->GetChildren();
 			for (int i = 0, n = children.size(); i < n; ++i) {
-				ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+				ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 				buffer.push(child);
 			}
 		}

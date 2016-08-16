@@ -42,19 +42,19 @@ void PropertySetting::OnPropertyGridChange(const std::string& name, const wxAny&
 		double w, h;
 		SplitString2Double(value, &w, &h);
 		spr->SetSize(w, h);
-		spr->BuildBounding();
+		spr->UpdateBounding();
 	} else if (name == "LabelSize.Width") {
 		int w, h;
 		spr->GetSize(w, h);
 		w = wxANY_AS(value, int);
 		spr->SetSize(w, h);
-		spr->BuildBounding();
+		spr->UpdateBounding();
 	} else if (name == "LabelSize.Height") {
 		int w, h;
 		spr->GetSize(w, h);
 		h = wxANY_AS(value, int);
 		spr->SetSize(w, h);
-		spr->BuildBounding();
+		spr->UpdateBounding();
 	} else if (name == "Font") {
 		spr->SetFont(wxANY_AS(value, int));
 	} else if (name == "FontSize") {

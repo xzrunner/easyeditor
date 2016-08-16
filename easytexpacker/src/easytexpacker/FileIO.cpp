@@ -71,10 +71,12 @@ void FileIO::LoadFromEasypackerFile(const char* filename)
 		sm::vec2 pos;
 		pos.x = tex.region.left + tex.region.width * 0.5f;
 		pos.y = tex.region.low + tex.region.height * 0.5f;
-		if (tex.bRotate)
-			sprite->SetTransform(pos, SM_PI * 0.5f);
-		else
-			sprite->SetTransform(pos, 0);
+		sprite->SetPosition(pos);
+		if (tex.bRotate) {
+			sprite->SetAngle(SM_PI * 0.5f);
+		} else {
+			sprite->SetAngle(0);
+		}
 
 		context->stage->InsertSpriteNoArrange(sprite);
 	}
@@ -131,7 +133,8 @@ void FileIO::LoadFromTexPackerFile(const char* filename)
 			pos.x = left + width * 0.5f;
 			pos.y = context->height - (top + height * 0.5f);
 		}
-		sprite->SetTransform(pos, angle);
+		sprite->SetPosition(pos);
+		sprite->SetAngle(angle);
 
 		sprite->SetEditable(false);
 
@@ -181,19 +184,21 @@ void FileIO::StoreImage(const char* filename)
 	stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
-		ee::Sprite* sprite = sprites[i];
-		const sm::vec2& center = sprite->GetPosition();
+		ee::Sprite* spr = sprites[i];
+		const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());
+		const sm::vec2& center = spr->GetPosition();
+		sm::vec2 sz = sym->GetBounding().Size();
 
 		float sw, sh;
-		if (sprite->GetAngle() == 0)
+		if (spr->GetAngle() == 0)
 		{
-			sw = sprite->GetSymbol().GetBounding().Width();
-			sh = sprite->GetSymbol().GetBounding().Height();
+			sw = sz.x;
+			sh = sz.y;
 		}
 		else
 		{
-			sw = sprite->GetSymbol().GetBounding().Height();
-			sh = sprite->GetSymbol().GetBounding().Width();
+			sw = sz.x;
+			sh = sz.y;
 		}
 
 		//if (sprite->getPosition().x - sw * 0.5f < 0 || sprite->getPosition().x + sw * 0.5f > width ||
@@ -203,9 +208,9 @@ void FileIO::StoreImage(const char* filename)
 		bool use_premultiplied_alpha = Context::Instance()->premultiplied_alpha && channel == 4;
 
 		int w, h, c, f;
-		uint8_t* src_data = ee::ImageLoader::FileToPixels(sprite->GetSymbol().GetFilepath(), w, h, c, f);
+		uint8_t* src_data = ee::ImageLoader::FileToPixels(sym->GetFilepath(), w, h, c, f);
 
-		if (sprite->GetAngle() != 0)
+		if (spr->GetAngle() != 0)
 		{
 			for (size_t iRow = 0; iRow < w; ++iRow) {
 				for (size_t iCol = 0; iCol < h; ++iCol) {
@@ -360,9 +365,9 @@ Json::Value FileIO::Store(const ee::Sprite* sprite)
 {
 	Json::Value value;
 
-	const ee::Symbol& symbol = sprite->GetSymbol();
-	const float w = symbol.GetSize().Width(),
-		h = symbol.GetSize().Height();
+	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(sprite->GetSymbol());
+	sm::vec2 sz = sym->GetBounding().Size();
+	const float w = sz.x, h = sz.y;
 	const sm::vec2& pos = sprite->GetPosition();
 
 	bool bRotate = sprite->GetAngle() != 0;
@@ -382,7 +387,7 @@ Json::Value FileIO::Store(const ee::Sprite* sprite)
 		height = h;
 	}
 
-	value["filepath"] = symbol.GetFilepath();
+	value["filepath"] = sym->GetFilepath();
 	value["left"] = left;
 	value["low"] = low;
 	value["width"] = width;

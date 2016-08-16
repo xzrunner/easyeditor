@@ -25,7 +25,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	: ee::EditPanel(parent, frame)
 {
 	SetCanvas(new StageCanvas(this, glctx, edited, bg_sprites));
-	m_symbol = (Symbol*)(&edited->GetSymbol());
+	m_symbol = dynamic_cast<eicon::Symbol*>(edited->GetSymbol());
 	if (m_symbol) {
 		m_symbol->AddReference();
 	}

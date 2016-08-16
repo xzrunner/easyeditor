@@ -78,7 +78,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 	int val = dlg.ShowModal();
 	if (val == wxID_YES)
 	{
-		static_cast<Symbol&>(symbol).StoreToFile(filepath.c_str());
+		dynamic_cast<Symbol&>(symbol).StoreToFile(filepath.c_str());
 		symbol.RefreshThumbnail(filepath);
 		ee::SpriteFactory::Instance()->UpdateBoundings(symbol);
 		Destroy();

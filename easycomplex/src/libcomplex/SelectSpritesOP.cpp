@@ -112,7 +112,7 @@ void SelectSpritesOP::GroupSelection()
 	filepath += "\\_tmp_";
 	filepath += ee::StringHelper::ToString(wxDateTime::Now().GetTicks());
 	filepath += "_" + ee::FileType::GetTag(ee::FileType::e_complex) + ".json";
-	const_cast<Symbol&>(spr->GetSymbol()).SetFilepath(filepath);
+	dynamic_cast<Symbol*>(spr->GetSymbol())->SetFilepath(filepath);
 
 	ee::InsertSpriteSJ::Instance()->Insert(spr);
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
@@ -132,7 +132,7 @@ void SelectSpritesOP::BreakUpSelection()
 	for (int i = 0, n = sprites.size(); i < n; ++i) 
 	{
 		ee::Sprite* spr = sprites[i];
-		if (spr->GetSymbol().GetFilepath().find(tag) == std::string::npos) {
+		if (dynamic_cast<ee::Symbol*>(spr->GetSymbol())->GetFilepath().find(tag) == std::string::npos) {
 			continue;
 		}
 		

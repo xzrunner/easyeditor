@@ -24,7 +24,7 @@ void SkeletonData::CopyFrom(const SkeletonData& skeleton)
 	std::map<ee::Sprite*, std::vector<Joint*> >::const_iterator itr 
 		= skeleton.m_map_joints.begin();
 	for ( ; itr != skeleton.m_map_joints.end(); ++itr)
-		sprites.push_back(itr->first->Clone());
+		sprites.push_back(itr->first->EEClone());
 	CopyFrom(sprites, skeleton);
 }
 

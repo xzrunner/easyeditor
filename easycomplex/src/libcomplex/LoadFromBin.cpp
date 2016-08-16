@@ -6,6 +6,7 @@
 #include <ee/StringHelper.h>
 #include <ee/ImageData.h>
 #include <ee/Image.h>
+#include <ee/Sprite.h>
 
 #include <easyrespacker.h>
 

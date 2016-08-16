@@ -147,12 +147,12 @@ void DrawPolygonCMPT::OnChangeFillingType(wxCommandEvent& event)
 
 void DrawPolygonCMPT::OnTriggerFillingColor(wxCommandEvent& event)
 {
-	std::vector<PolygonShape*> polys;
-	m_shapes_impl->GetShapeSelection()->Traverse(ee::FetchAllVisitor<PolygonShape>(polys));
+	std::vector<ee::Shape*> shapes;
+	m_shapes_impl->GetShapeSelection()->Traverse(ee::FetchAllVisitor<ee::Shape>(shapes));
 
-	for (size_t i = 0, n = polys.size(); i < n; ++i)
+	for (size_t i = 0, n = shapes.size(); i < n; ++i)
 	{
-		PolygonShape* poly = polys[i];
+		PolygonShape* poly = dynamic_cast<PolygonShape*>(shapes[i]);
 		switch (m_filling_type_choice->GetSelection()) 
 		{
 		case 0:

@@ -80,7 +80,7 @@ ee::Sprite* FileIO::load(const Json::Value& value, StagePanel* stage, const std:
 	//// old
 	//stage->TransGridPosToCoords(row, col, pos);
  	// new
- 	SymbolExt* symbol_info = static_cast<SymbolExt*>(sprite->GetSymbol().GetUserData());
+ 	SymbolExt* symbol_info = static_cast<SymbolExt*>(sprite->GetSymbol()->GetUserData());
  	int size = symbol_info->building->size;
  	if (size % 2) {
  		int offset = (size - 1) / 2;
@@ -113,12 +113,12 @@ Json::Value FileIO::store(const ee::Sprite* sprite, StagePanel* stage,
 	Json::Value value;
 
 	value["filepath"] = ee::FileHelper::GetRelativePath(dir,
-		sprite->GetSymbol().GetFilepath());
+		sprite->GetSymbol()->GetFilepath());
 
 	int row, col;
 	stage->TransCoordsToGridPosNew(sprite->GetPosition(), row, col);
 
-	SymbolExt* symbol_info = static_cast<SymbolExt*>(sprite->GetSymbol().GetUserData());
+	SymbolExt* symbol_info = static_cast<SymbolExt*>(sprite->GetSymbol()->GetUserData());
 	int size = symbol_info->building->size;
 	if (size % 2) {
 		int offset = (size - 1) / 2;

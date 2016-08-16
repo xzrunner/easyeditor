@@ -34,9 +34,9 @@ ee::Sprite* AnimationToSpr::TransComplex(const erespacker::PackAnimation* anim)
 		TransSprite(spr, part.t);
 		dst->Add(spr);
 	}
-	dst->InitBounding();
+//	dst->InitBounding();
 	complex->Add(new Sprite(dst));
-	complex->InitBounding();
+//	complex->InitBounding();
 	return new Sprite(complex);
 }
 
@@ -55,13 +55,13 @@ ee::Sprite* AnimationToSpr::TransAnim(const erespacker::PackAnimation* anim)
 			const erespacker::PackAnimation::Part& part = src.parts[j];
 			ee::Sprite* spr = NodeToSprite::Trans(anim->components[part.comp_idx].node);
 			TransSprite(spr, part.t);
-			frame->sprites.push_back(spr->GetCore());
+			frame->sprites.push_back(spr);
 		}
 		layer->frames.push_back(frame);
 	}
 	anim_symbol->setFPS(30);
 	anim_symbol->AddLayer(layer);
-	anim_symbol->InitBounding();
+//	anim_symbol->InitBounding();
 	return new eanim::Sprite(anim_symbol);
 }
 
@@ -71,7 +71,7 @@ void AnimationToSpr::TransSprite(ee::Sprite* spr, const erespacker::PackAnimatio
 		TransSpriteMat(spr, t);
 	}
 	TransSpriteCol(spr, t);
-	spr->GetShader().blend = (ee::BlendModes::Instance()->GetIDFromIdx(t.blend));
+	spr->Shader().blend = (ee::BlendModes::Instance()->GetIDFromIdx(t.blend));
 }
 
 void AnimationToSpr::TransSpriteMat(ee::Sprite* spr, const erespacker::PackAnimation::SpriteTrans& t)
@@ -117,29 +117,31 @@ void AnimationToSpr::TransSpriteMat(ee::Sprite* spr, const erespacker::PackAnima
 	// 	mat[2] = kx*c - s;
 	// 	mat[3] = kx*s + c;
 
-	bool xmirror = false, ymirror = false;
+	sm::bvec2 mirror;
+	mirror.x = mirror.y = false;
 	if (sx < 0) {
-		xmirror = true;
+		mirror.x = true;
 		sx = -sx;
 	}
 	if (sy < 0) {
-		ymirror = true;
+		mirror.y = true;
 		sy = -sy;
 	}
-	spr->SetMirror(xmirror, ymirror);
+	spr->SetMirror(mirror);
 
 	spr->SetScale(sm::vec2(sx, sy));
-	spr->SetTransform(sm::vec2(dx, dy), angle);
+	spr->SetPosition(sm::vec2(dx, dy));
+	spr->SetAngle(angle);
 }
 
 void AnimationToSpr::TransSpriteCol(ee::Sprite* spr, const erespacker::PackAnimation::SpriteTrans& t)
 {
-	spr->GetColor().mul = int2color(t.color, ee::PT_ARGB);
-	spr->GetColor().add = int2color(t.additive, ee::PT_ARGB);
+	spr->Color().mul = int2color(t.color, ee::PT_ARGB);
+	spr->Color().add = int2color(t.additive, ee::PT_ARGB);
 
-	spr->GetColor().rmap = int2color(t.rmap, ee::PT_RGBA);
-	spr->GetColor().gmap = int2color(t.gmap, ee::PT_RGBA);
-	spr->GetColor().bmap = int2color(t.bmap, ee::PT_RGBA);
+	spr->Color().rmap = int2color(t.rmap, ee::PT_RGBA);
+	spr->Color().gmap = int2color(t.gmap, ee::PT_RGBA);
+	spr->Color().bmap = int2color(t.bmap, ee::PT_RGBA);
 }
 
 

@@ -18,7 +18,6 @@ public:
 	Sprite();
 	Sprite(const Sprite& sprite);
 	Sprite(Symbol* symbol);
-	virtual ~Sprite();
 
 	/**
 	 *  @interface

@@ -24,7 +24,7 @@ void ToolbarPanel::InitLayout()
 	wxBoxSizer* wSizer = new wxBoxSizer(wxHORIZONTAL);
 	wSizer->Add(new wxStaticText(this, wxID_ANY, wxT("width: ")));
 	m_wSpin = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, 
-		wxDefaultSize, wxSP_ARROW_KEYS | wxALIGN_RIGHT, 10, 10000, m_symbol->GetSize().Size().x);
+		wxDefaultSize, wxSP_ARROW_KEYS | wxALIGN_RIGHT, 10, 10000, m_symbol->GetBounding().Size().x);
 	Connect(m_wSpin->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onChangeSize));
 	wSizer->Add(m_wSpin);
 	sizer->Add(wSizer);
@@ -32,7 +32,7 @@ void ToolbarPanel::InitLayout()
 	wxBoxSizer* hSizer = new wxBoxSizer(wxHORIZONTAL);
 	hSizer->Add(new wxStaticText(this, wxID_ANY, wxT("height: ")));
 	m_hSpin = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, 
-		wxDefaultSize, wxSP_ARROW_KEYS | wxALIGN_RIGHT, 10, 10000, m_symbol->GetSize().Size().y);
+		wxDefaultSize, wxSP_ARROW_KEYS | wxALIGN_RIGHT, 10, 10000, m_symbol->GetBounding().Size().y);
 	Connect(m_hSpin->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onChangeSize));
 	hSizer->Add(m_hSpin);
 	sizer->Add(hSizer);

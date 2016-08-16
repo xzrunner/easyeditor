@@ -6,9 +6,10 @@
 #include "SpriteRenderer.h"
 
 #include <shaderlab.h>
+#include <dtex_facade.h>
 #include <sprite2/RenderParams.h>
 #include <sprite2/FilterFactory.h>
-#include <dtex_facade.h>
+#include <sprite2/BoundingBox.h>
 
 #include <assert.h>
 
@@ -46,11 +47,10 @@ void SpriteGaussianBlur::DrawToFbo0(const Sprite* spr, const s2::RenderParams& p
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	mgr->SetShader(sl::FILTER);
 
-	float tex_width = spr->GetBounding()->Width(),
-		  tex_height = spr->GetBounding()->Height();
+	sm::vec2 sz = spr->GetBounding()->GetSize().Size();
 	for (int i = 0; i < iterations; ++i) {
-		DrawBetweenFBO(true, true, params.color, tex_width);
-		DrawBetweenFBO(false, false, params.color, tex_height);
+		DrawBetweenFBO(true, true, params.color, sz.x);
+		DrawBetweenFBO(false, false, params.color, sz.y);
 	}
 
 	rc->SetModelView(ori_offset, ori_scale);
@@ -106,12 +106,12 @@ void SpriteGaussianBlur::DrawInit(const Sprite* spr, const s2::RenderParams& par
 	_params.set_shader = false;
 	_params.shader.filter = s2::FilterFactory::Instance()->GetTemp(s2::FM_NULL);
 
-	s2::RenderFilter* ori_filter = spr->GetShader().filter;
-	const_cast<Sprite*>(spr)->GetShader().filter = s2::FilterFactory::Instance()->GetTemp(s2::FM_NULL);
+	s2::RenderFilter* ori_filter = spr->Shader().filter;
+	const_cast<Sprite*>(spr)->Shader().filter = s2::FilterFactory::Instance()->GetTemp(s2::FM_NULL);
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	mgr->SetShader(sl::SPRITE2);
 	SpriteRenderer::Draw(spr, _params);
-	const_cast<Sprite*>(spr)->GetShader().filter = ori_filter;
+	const_cast<Sprite*>(spr)->Shader().filter = ori_filter;
 
 	if (is_target0) {
 		dtexf_t0_unbind();

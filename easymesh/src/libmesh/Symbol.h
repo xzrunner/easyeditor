@@ -15,7 +15,6 @@ class Symbol : public ee::Symbol, public s2::MeshSymbol
 {
 public:
 	Symbol();
-	Symbol(const Symbol& s);
 	Symbol(ee::Symbol* base);
 	virtual ~Symbol();
 

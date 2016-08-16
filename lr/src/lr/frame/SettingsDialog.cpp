@@ -232,11 +232,11 @@ void SettingDialog::OnChangeScreenAddColor(wxCommandEvent& event)
 void SettingDialog::SetTerrain2dUpdate(ee::Sprite* spr, bool open)
 {
 	if (eterrain2d::Sprite* terr = dynamic_cast<eterrain2d::Sprite*>(spr)) {
-		const_cast<eterrain2d::Symbol&>(terr->GetSymbol()).SetUpdateOpen(open);
+		dynamic_cast<eterrain2d::Symbol*>(terr->GetSymbol())->SetUpdateOpen(open);
 	} else if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(spr)) {
-		const std::vector<s2::Sprite*>& children = complex->GetSymbol().GetChildren();
+		const std::vector<s2::Sprite*>& children = dynamic_cast<s2::ComplexSymbol*>(complex->GetSymbol())->GetChildren();
 		for (int i = 0, n = children.size(); i < n; ++i) {
-			ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+			ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 			SetTerrain2dUpdate(child, open);
 		}
 	}

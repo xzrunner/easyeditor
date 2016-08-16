@@ -264,7 +264,7 @@ Sprite* SelectSpritesOP::SelectByPos(const sm::vec2& pos) const
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
 		Sprite* spr = sprites[i];
-		if (spr->IsEditable() && spr->IsContain(pos)) {
+		if (spr->IsEditable() && spr->GetBounding()->IsContain(pos)) {
 			selected = spr;
 			break;
 		}
@@ -280,7 +280,7 @@ Sprite* SelectSpritesOP::SelectByPos(const sm::vec2& pos) const
 
 void SelectSpritesOP::PasteSprToClipboard(const Sprite* spr, Json::Value& value) const
 {
-	value["filename"] = spr->GetSymbol().GetFilepath();
+	value["filename"] = dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath();
 	spr->Store(value);	
 }
 

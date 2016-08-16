@@ -16,7 +16,6 @@ class Symbol : public ee::Symbol, public s2::TextureSymbol
 {
 public:
 	Symbol();
-	Symbol(const Symbol& s);
 	virtual ~Symbol();
 
 	/**

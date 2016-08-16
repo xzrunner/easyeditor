@@ -126,13 +126,13 @@ void DrawPencilPolygonOP::XorPolygon(const std::vector<sm::vec2>& poly)
 
 void DrawPencilPolygonOP::PrepareSubjectPaths(std::vector<std::vector<sm::vec2> >& paths) const
 {
-	std::vector<PolygonShape*> shapes;
-	m_shapes_impl->TraverseShapes(ee::FetchAllVisitor<PolygonShape>(shapes));
+	std::vector<ee::Shape*> shapes;
+	m_shapes_impl->TraverseShapes(ee::FetchAllVisitor<ee::Shape>(shapes));
 
 	paths.clear();
 	paths.resize(shapes.size());
 	for (int i = 0, n = shapes.size(); i < n; ++i) {
-		paths[i] = shapes[i]->GetVertices();
+		paths[i] = dynamic_cast<PolygonShape*>(shapes[i])->GetVertices();
 	}
 }
 

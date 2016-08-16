@@ -3,6 +3,7 @@
 #include "color_config.h"
 
 #include <sprite2/S2_RVG.h>
+#include <sprite2/BoundingBox.h>
 
 #include <sp_null.h>
 #include <sp_region.h>
@@ -25,21 +26,14 @@ void SpatialPartition::Insert(const Sprite* spr/*, const sm::mat4& mt*/)
 // 	spr->GetTransMatrix(t);
 //	t = t * mt;
 
-	std::vector<sm::vec2> bound;
-	spr->GetBounding()->GetBoundPos(bound);
+	sm::rect src = spr->GetBounding()->GetSize();
+	sp_region dst;
+	dst.xmin = src.xmin;
+	dst.xmax = src.xmax;
+	dst.ymin = src.ymin;
+	dst.ymax = src.ymax;
 
-	sp_region r;
-	REGION_INIT(r);
-	for (int i = 0, n = bound.size(); i < n; ++i) {
-//		sm::vec2 p = Math::transVector(bound[i], t);
-		const sm::vec2& p = bound[i];
-		if (p.x < r.xmin) r.xmin = p.x;
-		if (p.x > r.xmax) r.xmax = p.x;
-		if (p.y < r.ymin) r.ymin = p.y;
-		if (p.y > r.ymax) r.ymax = p.y;
-	}
-
-	sp_null_insert(SIDX, &r, (Sprite*)spr);
+	sp_null_insert(SIDX, &dst, (Sprite*)spr);
 }
 
 bool SpatialPartition::Remove(const Sprite* spr)

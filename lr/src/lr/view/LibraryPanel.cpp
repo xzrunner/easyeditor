@@ -123,7 +123,7 @@ void LibraryPanel::LoadSymbolFromLayer()
  		page->GetLayer()->TraverseSprite(ee::FetchAllVisitor<ee::Sprite>(sprites), true);
  		std::set<ee::Symbol*> symbol_set;
  		for (int i = 0, n = sprites.size(); i < n; ++i) {
- 			ee::Symbol* symbol = const_cast<ee::Symbol*>(&sprites[i]->GetSymbol());
+ 			ee::Symbol* symbol = dynamic_cast<ee::Symbol*>(sprites[i]->GetSymbol());
  			symbol_set.insert(symbol);
  		}
  

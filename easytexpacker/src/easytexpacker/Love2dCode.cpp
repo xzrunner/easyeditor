@@ -32,30 +32,31 @@ void Love2dCode::Resolve()
 	{
 		ee::Sprite* sprite = sprites[i];
 
-		const ee::Symbol& symbol = sprite->GetSymbol();
+		const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(sprite->GetSymbol());
 		const sm::vec2& pos = sprite->GetPosition();
 
-		std::string name = ee::FileHelper::GetFilename(symbol.GetFilepath());
+		std::string name = ee::FileHelper::GetFilename(sym->GetFilepath());
 
 		std::string x, y, w, h, px, py, a;
+		sm::vec2 sz = sym->GetBounding().Size();
 		if (sprite->GetAngle() != 0)
 		{
-			x = ee::StringHelper::ToString(pos.x - symbol.GetSize().Height() * 0.5f);
-			y = ee::StringHelper::ToString(pos.y - symbol.GetSize().Width() * 0.5f);
-			w = ee::StringHelper::ToString(symbol.GetSize().Height());
-			h = ee::StringHelper::ToString(symbol.GetSize().Width());
+			x = ee::StringHelper::ToString(pos.x - sz.y * 0.5f);
+			y = ee::StringHelper::ToString(pos.y - sz.x * 0.5f);
+			w = ee::StringHelper::ToString(sz.y);
+			h = ee::StringHelper::ToString(sz.x);
 			a = "1.57";
 		}
 		else
 		{
-			x = ee::StringHelper::ToString(pos.x - symbol.GetSize().Width() * 0.5f);
-			y = ee::StringHelper::ToString(pos.y - symbol.GetSize().Height() * 0.5f);
-			w = ee::StringHelper::ToString(symbol.GetSize().Width());
-			h = ee::StringHelper::ToString(symbol.GetSize().Height());
+			x = ee::StringHelper::ToString(pos.x - sz.x * 0.5f);
+			y = ee::StringHelper::ToString(pos.y - sz.y * 0.5f);
+			w = ee::StringHelper::ToString(sz.x);
+			h = ee::StringHelper::ToString(sz.y);
 			a = "0";
 		}
-		px = ee::StringHelper::ToString(symbol.GetSize().Width() * 0.5f);
-		py = ee::StringHelper::ToString(480 - symbol.GetSize().Height() * 0.5f);
+		px = ee::StringHelper::ToString(sz.x * 0.5f);
+		py = ee::StringHelper::ToString(480 - sz.y * 0.5f);
 
 		// q = love.graphics.newQuad(x, y, w, h, sw, sh)
 		std::string aq = lua::assign("q", lua::call("", "love.graphics.newQuad", 6, x, y, w, h, sw, sh));

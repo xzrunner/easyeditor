@@ -3,12 +3,14 @@
 
 #include "Symbol.h"
 
+#include <sprite2/DummySymbol.h>
+
 namespace ee
 {
 
 class FontBlankSprite;
 
-class FontBlankSymbol : public Symbol
+class FontBlankSymbol : public s2::DummySymbol, public Symbol
 {
 public:
 	FontBlankSymbol();

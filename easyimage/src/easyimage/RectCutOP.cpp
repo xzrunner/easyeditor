@@ -253,7 +253,7 @@ bool RectCutOP::Clear()
 std::string RectCutOP::GetImageFilepath() const
 {
 	if (const ee::Sprite* s = m_stage->GetImage()) {
-		return s->GetSymbol().GetFilepath();
+		return s->GetSymbol()->GetFilepath();
 	} else {
 		return "";
 	}
@@ -293,7 +293,7 @@ void RectCutOP::FixedPos(sm::vec2& pos) const
 	pos.y = std::floor(pos.y + 0.5f);
 
 	// to image
-	sm::vec2 sz = m_stage->GetImage()->GetSymbol().GetBounding().Size();
+	sm::vec2 sz = m_stage->GetImage()->GetSymbol()->GetBounding().Size();
 	if (pos.x < 0) {
 		pos.x = 0;
 	}

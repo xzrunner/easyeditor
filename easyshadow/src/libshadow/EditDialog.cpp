@@ -10,6 +10,8 @@
 #include <ee/OrthoCamera.h>
 #include <ee/CameraMgr.h>
 
+#include <sprite2/BoundingBox.h>
+
 #include <wx/splitter.h>
 
 namespace eshadow
@@ -27,7 +29,7 @@ EditDialog::EditDialog(wxWindow* parent, wxGLContext* glctx,
 {
 	assert(edited);
 
-	Symbol* symbol = const_cast<Symbol*>(&edited->GetSymbol());
+	Symbol* symbol = dynamic_cast<Symbol*>(edited->GetSymbol());
 	symbol->AddReference();
 	m_symbol = symbol;
 	m_symbol->ReloadTexture();
@@ -92,7 +94,7 @@ void EditDialog::InitCamera(ee::Sprite* spr) const
 	}
 
 	wxSize sz = GetSize();
-	sm::vec2 r_sz = spr->GetRect().Size();
+	sm::vec2 r_sz = spr->GetBounding()->GetSize().Size();
 	float scale = std::min(sz.GetWidth() / r_sz.x, sz.GetHeight() / r_sz.y);
 
 	ee::OrthoCamera* cam = static_cast<ee::OrthoCamera*>(ee::CameraMgr::Instance()->GetCamera());

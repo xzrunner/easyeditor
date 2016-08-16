@@ -63,7 +63,7 @@ bool SelectSpriteOP::OnDraw() const
 		const Sprite* s = static_cast<const Sprite*>(sprites[i]);
 		sm::mat4 mat = sm::mat4(s->GetOri3().ToMatrix()) * 
 			sm::mat4::Translate(s->GetPos3().x, s->GetPos3().y, s->GetPos3().z);
-		e3d::DrawCube(mat, s->GetSymbol().GetAABB(), ee::MID_RED);
+		e3d::DrawCube(mat, s->GetSymbol()->GetAABB(), ee::MID_RED);
 	}
 
 	return false;
@@ -86,9 +86,9 @@ ee::Sprite* SelectSpriteOP::SelectByPos(const sm::ivec2& pos) const
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
 		ee::Sprite* sprite = sprites[i];
-		const Symbol& symbol = static_cast<const Symbol&>(sprite->GetSymbol());
+		const Symbol* sym = dynamic_cast<const Symbol*>(sprite->GetSymbol());
 		
-		const e3d::AABB& aabb = symbol.GetAABB();
+		const e3d::AABB& aabb = sym->GetAABB();
 		Sprite* s = static_cast<Sprite*>(sprite);
 		
 		sm::vec3 offset = cam_mat * s->GetPos3();

@@ -57,7 +57,7 @@ ResPacker::ResPacker(const std::string& json_dir, const std::string& tp_name,
 ResPacker::~ResPacker()
 {
 	for_each(m_symbols.begin(), m_symbols.end(), cu::RemoveRefFonctor<const ee::Symbol>());
-	PackNodeFactory::Instance()->RemoveReference();
+	PackNodeFactory::Instance()->Release();
 }
 
 void ResPacker::OutputLua(const std::string& outfile, float scale) const

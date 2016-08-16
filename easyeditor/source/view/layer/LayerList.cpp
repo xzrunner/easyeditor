@@ -137,7 +137,7 @@ void LayerList::ClearLayer(Layer* layer)
 	}
 
 	std::vector<Shape*> shapes;
-	layer->TraverseSprite(FetchAllVisitor<Shape>(shapes));
+	layer->TraverseShape(FetchAllVisitor<Shape>(shapes));
 	for_each(shapes.begin(), shapes.end(), cu::AddRefFonctor<Shape>());
 	for (int i = 0, n = shapes.size(); i < n; ++i) {
 		RemoveShapeSJ::Instance()->Remove(shapes[i]);

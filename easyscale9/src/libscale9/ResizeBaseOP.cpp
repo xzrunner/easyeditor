@@ -29,7 +29,7 @@ bool ResizeBaseOP::OnMouseLeftDown(int x, int y)
 
 	m_firstPos = m_stage->TransPosScrToProj(x, y);
 
-	sm::vec2 sz = m_symbol->GetSize().Size();
+	sm::vec2 sz = m_symbol->GetBounding().Size();
 	const float hw = sz.x * 0.5f, hh = sz.y * 0.5f;
 	if (ee::Math2D::IsPointInRect(m_firstPos, sm::vec2(-hw, -hh), REGION, REGION))
 		m_status = e_leftlow;
@@ -81,7 +81,7 @@ bool ResizeBaseOP::OnDraw() const
 
 	ee::SpriteRenderer::Draw(m_symbol);
 	
-	sm::vec2 sz = m_symbol->GetSize().Size();
+	sm::vec2 sz = m_symbol->GetBounding().Size();
 	const float hw = sz.x * 0.5f, hh = sz.y * 0.5f;
 	const float r = REGION;
 	s2::RVG::Rect(sm::vec2(-hw, -hh), r, r, false);

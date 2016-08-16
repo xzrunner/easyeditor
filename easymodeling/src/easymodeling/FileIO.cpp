@@ -138,7 +138,7 @@ Json::Value FileIO::B2J(const Body* body, const std::string& dlg)
 	value["name"] = body->m_name;
 
 	value["filepath"] = ee::FileHelper::GetRelativePath(dlg, 
-		body->m_sprite->GetSymbol().GetFilepath());
+		body->m_sprite->GetSymbol()->GetFilepath());
 
 	value["type"] = body->m_type;
 	switch (body->m_type)

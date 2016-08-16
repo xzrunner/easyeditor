@@ -1,6 +1,8 @@
 #ifndef _EASYDB_FILE_IO_H_
 #define _EASYDB_FILE_IO_H_
 
+#include <SM_Vector.h>
+
 #include <json/json.h>
 
 namespace ee { class Sprite; class Shape; }

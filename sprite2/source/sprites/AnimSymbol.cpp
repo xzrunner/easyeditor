@@ -1,5 +1,6 @@
 #include "AnimSymbol.h"
 #include "S2_Sprite.h"
+#include "BoundingBox.h"
 
 namespace s2
 {

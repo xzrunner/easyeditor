@@ -5,6 +5,7 @@
 #include "Visitor.h"
 
 #include <set>
+#include <algorithm>
 
 namespace ee
 {
@@ -50,9 +51,7 @@ VerticalImageList::~VerticalImageList()
 
 void VerticalImageList::Clear()
 {
-// 	for (int i = 0, n = m_items.size(); i < n; ++i) {
-// 		m_items[i]->RemoveReference();
-// 	}
+	for_each(m_items.begin(), m_items.end(), cu::RemoveRefFonctor<ListItem>());
 	m_items.clear();
 	SetItemCount(0);
 	Refresh(true);
@@ -60,7 +59,7 @@ void VerticalImageList::Clear()
 
 void VerticalImageList::Insert(ListItem* item, int idx)
 {
-//	item->AddReference();
+	item->AddReference();
 	if (idx < 0 || idx >= static_cast<int>(m_items.size())) {
 		m_items.push_back(item);
 		SetItemCount(m_items.size());
@@ -92,7 +91,7 @@ void VerticalImageList::Remove(int index)
 	if (index < 0 || index >= static_cast<int>(m_items.size()))
 		return;
 
-//	m_items[index]->RemoveReference();
+	m_items[index]->RemoveReference();
 	m_items.erase(m_items.begin() + index);
  	SetItemCount(m_items.size());
 	Refresh(true);

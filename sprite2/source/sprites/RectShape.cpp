@@ -34,7 +34,7 @@ void RectShape::Draw(const sm::mat4& mt, const RenderColor& color) const
 {
 	sm::vec2 min(m_bounding.xmin, m_bounding.ymin),
 		     max(m_bounding.xmax, m_bounding.ymax);
-	s2::RVG::Rect(min, max, false);
+	RVG::Rect(min, max, false);
 }
 
 }

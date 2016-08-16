@@ -3,6 +3,8 @@
 
 #include "S2_Sprite.h"
 
+#include <string>
+
 namespace s2
 {
 
@@ -13,6 +15,7 @@ class TextboxSprite : public VIRTUAL_INHERITANCE Sprite
 public:
 	TextboxSprite();
 	TextboxSprite(const TextboxSprite& spr);
+	TextboxSprite(Symbol* sym) : Sprite(sym) {}
 
 	/**
 	 *  @interface

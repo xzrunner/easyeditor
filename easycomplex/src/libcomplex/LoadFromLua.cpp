@@ -7,6 +7,7 @@
 #include <ee/SettingData.h>
 #include <ee/Config.h>
 #include <ee/Image.h>
+#include <ee/Sprite.h>
 
 namespace ecomplex
 {

@@ -42,7 +42,7 @@ void SpritePropertyImpl::Translate(float x, float y)
 	sprites.push_back(m_sprite);
 	EditAddRecordSJ::Instance()->Add(new TranslateSpriteAOP(sprites, new_pos - m_sprite->GetPosition()));
 
-	m_sprite->SetTransform(new_pos, m_sprite->GetAngle());
+	m_sprite->SetPosition(new_pos);
 }
 
 void SpritePropertyImpl::Rotate(float angle)
@@ -57,7 +57,7 @@ void SpritePropertyImpl::Rotate(float angle)
 	sprites.push_back(m_sprite);
 	EditAddRecordSJ::Instance()->Add(new RotateSpriteAOP(sprites, offset_angle));
 
-	m_sprite->SetTransform(m_sprite->GetPosition(), angle);	
+	m_sprite->SetAngle(angle);
 }
 
 void SpritePropertyImpl::Scale(float sx, float sy)
@@ -96,7 +96,7 @@ void SpritePropertyImpl::Mirror(bool mx, bool my)
 
 	EditAddRecordSJ::Instance()->Add(new MirrorSpriteAOP(m_sprite, 
 		m_sprite->GetMirror().x, m_sprite->GetMirror().y, mx, my));
-	m_sprite->SetMirror(mx, my);
+	m_sprite->SetMirror(sm::bvec2(mx, my));
 }
 
 void SpritePropertyImpl::Perspective(float px, float py)

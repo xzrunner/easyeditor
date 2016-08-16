@@ -11,6 +11,7 @@ class DummySprite : public VIRTUAL_INHERITANCE Sprite
 public:
 	DummySprite() {}
 	DummySprite(const DummySprite& spr) : Sprite(spr) {}
+	DummySprite(Symbol* sym) : Sprite(sym) {}
 
 	/**
 	 *  @interface

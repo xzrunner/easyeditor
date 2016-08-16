@@ -106,10 +106,10 @@ void SelectSpritesOP::BuildGroup()
 	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
 
 	ecomplex::Sprite* spr = ecomplex::GroupHelper::Group(sprites);
-	ecomplex::Symbol& sym = const_cast<ecomplex::Symbol&>(spr->GetSymbol());
-	sym.SetFilepath(GROUP_TAG);
-	sym.name = "_group";
-	sym.SetName("_group");
+	ee::Symbol* sym = dynamic_cast<ee::Symbol*>(spr->GetSymbol());
+	sym->SetFilepath(GROUP_TAG);
+	sym->name = "_group";
+	sym->SetName("_group");
 	spr->SetName("_group");
 
 	ee::AtomicOP* move_op = new ee::TranslateSpriteAOP(sprites, -spr->GetPosition());
@@ -146,7 +146,7 @@ void SelectSpritesOP::BreakUpGroup()
 	for (int i = 0, n = sprites.size(); i < n; ++i) 
 	{
 		ee::Sprite* spr = sprites[i];
-		if (spr->GetSymbol().GetFilepath() != GROUP_TAG) {
+		if (dynamic_cast<ee::Symbol*>(spr->GetSymbol())->GetFilepath() != GROUP_TAG) {
 			continue;
 		}
 
@@ -177,12 +177,12 @@ void SelectSpritesOP::BuildComplex()
 	ecomplex::Sprite* spr = ecomplex::GroupHelper::Group(sprites);
 	spr->SetUserData(new NewComplexUD());
 
-	ecomplex::Symbol& sym = const_cast<ecomplex::Symbol&>(spr->GetSymbol());
+	ecomplex::Symbol* sym = dynamic_cast<ecomplex::Symbol*>(spr->GetSymbol());
 	std::string filepath = static_cast<StagePanel*>(m_wnd)->GetResDir();
 	filepath += "\\_tmp_";
 	filepath += ee::StringHelper::ToString(wxDateTime::Now().GetTicks());
 	filepath += "_" + ee::FileType::GetTag(ee::FileType::e_complex) + ".json";
-	sym.SetFilepath(filepath);
+	sym->SetFilepath(filepath);
 
 	ee::InsertSpriteSJ::Instance()->Insert(spr);
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
@@ -202,7 +202,7 @@ void SelectSpritesOP::BreakUpComplex()
 	for (int i = 0, n = sprites.size(); i < n; ++i) 
 	{
 		ee::Sprite* spr = sprites[i];
-		if (spr->GetSymbol().GetFilepath().find(tag) == std::string::npos) {
+		if (dynamic_cast<ee::Symbol*>(spr->GetSymbol())->GetFilepath().find(tag) == std::string::npos) {
 			continue;
 		}
 

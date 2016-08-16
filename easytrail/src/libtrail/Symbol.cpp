@@ -19,14 +19,6 @@ Symbol::Symbol()
 	TrailNode::Instance();
 }
 
-Symbol::Symbol(const Symbol& s)
-	: ee::Symbol(s)
-	, m_et_cfg(s.m_et_cfg)
-	, m_et(NULL)
-{
-	TrailNode::Instance();
-}
-
 void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	if (!spr) {

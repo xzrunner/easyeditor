@@ -54,7 +54,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 	case ee::MSG_INSERT_SPRITE:
 		{
 			ee::InsertSpriteSJ::Params* p = (ee::InsertSpriteSJ::Params*)ud;
-			m_sym->SetSymbol(&p->spr->GetSymbol(), m_library->IsCurrBase());
+			m_sym->SetSymbol(dynamic_cast<const ee::Symbol*>(p->spr->GetSymbol()), m_library->IsCurrBase());
 		}
 		break;
 	}

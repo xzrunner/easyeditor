@@ -86,20 +86,20 @@ void StagePanel::InitConnection()
 		ee::Sprite* from = sprites[i];
 		if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(from))
 		{
-			const ecomplex::Symbol& symbol = complex->GetSymbol();
-			const std::vector<s2::Sprite*>& children = symbol.GetChildren();
+			const s2::ComplexSymbol* symbol = dynamic_cast<const s2::ComplexSymbol*>(complex->GetSymbol());
+			const std::vector<s2::Sprite*>& children = symbol->GetChildren();
 			for (size_t i = 0, n = children.size(); i < n; ++i)
 			{
-				ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+				ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 				for (size_t i = 0, n = sprites.size(); i < n; ++i)
-					if (&child->GetSymbol() == &sprites[i]->GetSymbol())
+					if (child->GetSymbol() == sprites[i]->GetSymbol())
 						m_graphics.Connect(from, sprites[i]);
 			}
 		}
 		else if (eanim::Sprite* anim = dynamic_cast<eanim::Sprite*>(from))
 		{
-			const eanim::Symbol& symbol = anim->GetSymbol();
-			const std::vector<s2::AnimSymbol::Layer*>& layers = symbol.GetLayers();
+			const s2::AnimSymbol* symbol = dynamic_cast<const s2::AnimSymbol*>(anim->GetSymbol());
+			const std::vector<s2::AnimSymbol::Layer*>& layers = symbol->GetLayers();
 			for (size_t i = 0, n = layers.size(); i < n; ++i)
 			{
 				s2::AnimSymbol::Layer* layer = layers[i];
@@ -108,9 +108,9 @@ void StagePanel::InitConnection()
 					s2::AnimSymbol::Frame* frame = layer->frames[i];
 					for (size_t i = 0, n = frame->sprites.size(); i < n; ++i)
 					{
-						ee::Sprite* child = static_cast<ee::Sprite*>(frame->sprites[i]->GetUD());
+						ee::Sprite* child = dynamic_cast<ee::Sprite*>(frame->sprites[i]);
 						for (size_t i = 0, n = sprites.size(); i < n; ++i)
-							if (&child->GetSymbol() == &sprites[i]->GetSymbol())
+							if (child->GetSymbol() == sprites[i]->GetSymbol())
 								m_graphics.Connect(from, sprites[i]);
 					}
 				}
@@ -137,7 +137,8 @@ void StagePanel::InitPosition()
 			float angle = ee::Random::GetNum(0, SM_PI*2);
 			pos.x = cos(angle)*radius;
 			pos.y = sin(angle)*radius;
-			sprite->SetTransform(pos, 0);
+			sprite->SetPosition(pos);
+			sprite->SetAngle(0);
 		}
 	}
 

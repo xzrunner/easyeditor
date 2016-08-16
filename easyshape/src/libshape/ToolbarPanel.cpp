@@ -107,7 +107,7 @@ void ToolbarPanel::OnClearShapes(wxCommandEvent& event)
 
 void ToolbarPanel::OnCreateBounding(wxCommandEvent& event)
 {
-	const ee::Symbol* bg = static_cast<const eshape::Symbol&>(m_stage_panel->GetSymbol()).GetBG();
+	const ee::Symbol* bg = dynamic_cast<const eshape::Symbol&>(m_stage_panel->GetSymbol()).GetBG();
 	const ee::ImageSymbol* img_symbol = dynamic_cast<const ee::ImageSymbol*>(bg);
 	if (!img_symbol) {
 		return;

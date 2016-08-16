@@ -19,11 +19,6 @@ Symbol::~Symbol()
 {
 }
 
-Symbol* Symbol::Clone() const
-{
-	return new Symbol(*this); 
-}
-
 void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr, 
 				  const s2::Sprite* root) const
 {

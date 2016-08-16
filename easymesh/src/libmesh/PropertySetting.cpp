@@ -3,6 +3,7 @@
 
 #include <ee/OpenSymbolProperty.h>
 #include <ee/panel_msg.h>
+#include <ee/Symbol.h>
 
 namespace emesh
 {
@@ -32,7 +33,7 @@ void PropertySetting::UpdateProperties(wxPropertyGrid* pg)
  	Sprite* spr = static_cast<Sprite*>(GetSprite());
 // 	m_lsn->ChangeSpr(spr);
 
-//	pg->GetProperty("MeshSymbol")->SetValue(spr->GetSymbol().GetFilepath());
+//	pg->GetProperty("MeshSymbol")->SetValue(spr->GetSymbol()->GetFilepath());
 
 	pg->GetProperty(wxT("OnlyDrawBound"))->SetValue(spr->OnlyDrawBound());
 }

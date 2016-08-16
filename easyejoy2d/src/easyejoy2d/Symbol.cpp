@@ -20,13 +20,6 @@ Symbol::Symbol()
 {
 }
 
-Symbol::Symbol(const Symbol& s)
-	: ee::Symbol(s)
-{
-	EJSprite* spr = s.m_spr;
-	cu::RefCountObjAssign<EJSprite>(m_spr, spr);
-}
-
 Symbol::~Symbol()
 {
 	PackageMgr::Instance()->Remove(m_filepath);
@@ -34,11 +27,6 @@ Symbol::~Symbol()
 	if (m_spr) {
 		m_spr->RemoveReference();
 	}
-}
-
-Symbol* Symbol::Clone() const
-{
-	return new Symbol(*this);
 }
 
 void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const

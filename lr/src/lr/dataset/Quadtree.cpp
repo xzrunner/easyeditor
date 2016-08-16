@@ -8,6 +8,7 @@
 #include <easyshape.h>
 
 #include <sprite2/S2_RVG.h>
+#include <sprite2/BoundingBox.h>
 
 #include <queue>
 
@@ -157,7 +158,7 @@ Insert(const ee::Sprite* spr)
 	} 
 	else 
 	{
-		sm::rect rect = spr->GetRect();
+		sm::rect rect = spr->GetBounding()->GetSize();
 		for (int i = 0; i < 4; ++i) {
 			Node* child = m_children[i];
 			if (child->IsIntersect(rect)) {
@@ -188,10 +189,10 @@ IsContain(const sm::vec2& pos) const
 bool Quadtree::Node::
 IsContain(const ee::Sprite* spr) const
 {
-	const eshape::Symbol& shape = static_cast<const eshape::Sprite*>(spr)->GetSymbol();
-	assert(shape.GetShapeType() == eshape::ST_POLYGON);
+	const eshape::Symbol* sym = dynamic_cast<const eshape::Symbol*>(spr->GetSymbol());
+	assert(sym->GetShapeType() == eshape::ST_POLYGON);
 
-	const std::vector<ee::Shape*>& shapes = shape.GetShapes();
+	const std::vector<ee::Shape*>& shapes = sym->GetShapes();
 	assert(!shapes.empty());
 
 	eshape::PolygonShape* poly = static_cast<eshape::PolygonShape*>(shapes[0]);
@@ -241,7 +242,7 @@ Split()
 		const ee::Sprite* spr = m_sprites[i];
 		for (int j = 0; j < 4; ++j) {
 			Node* node = m_children[j];
-			sm::rect rect = spr->GetRect();
+			sm::rect rect = spr->GetBounding()->GetSize();
 			if (node->IsIntersect(rect)) {
 				node->Insert(spr);
 			}
@@ -254,10 +255,10 @@ Split()
 float Quadtree::Node::
 GetContainArea(const ee::Sprite* spr) const
 {
-	const eshape::Symbol& shape = static_cast<const eshape::Sprite*>(spr)->GetSymbol();
-	assert(shape.GetShapeType() == eshape::ST_POLYGON);
+	const eshape::Symbol* sym = dynamic_cast<const eshape::Symbol*>(spr->GetSymbol());
+	assert(sym->GetShapeType() == eshape::ST_POLYGON);
 
-	const std::vector<ee::Shape*>& shapes = shape.GetShapes();
+	const std::vector<ee::Shape*>& shapes = sym->GetShapes();
 	assert(!shapes.empty());
 
 	eshape::PolygonShape* poly = static_cast<eshape::PolygonShape*>(shapes[0]);

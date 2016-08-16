@@ -61,8 +61,7 @@ int w_stage_move(lua_State* L)
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
 		Sprite* s = sprites[i];
-		sm::vec2 pos = s->GetPosition() + sm::vec2(x, y);
-		s->SetTransform(pos, s->GetAngle());
+		s->Translate(sm::vec2(x, y));
 	}
 	return 0;		
 }

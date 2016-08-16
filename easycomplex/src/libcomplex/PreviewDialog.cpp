@@ -16,8 +16,8 @@ class InitVisitor : public ee::Visitor<ee::Sprite>
 {
 public:
 	virtual void Visit(ee::Sprite* spr, bool& next) {
-		if (const eanim::Sprite* anim = dynamic_cast<const eanim::Sprite*>(spr)) {
-			const_cast<eanim::Symbol&>(anim->GetSymbol()).SetLoop(false);
+		if (eanim::Sprite* anim = dynamic_cast<eanim::Sprite*>(spr)) {
+			dynamic_cast<eanim::Symbol*>(anim->GetSymbol())->SetLoop(false);
 		}
 	}
 }; // InitVisitor
@@ -38,7 +38,7 @@ PreviewDialog::PreviewDialog(wxWindow* parent, wxGLContext* glctx,
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		ee::Sprite* spr = const_cast<ee::Sprite*>(m_sprites[i]);
 		init.Visit(spr, next);
-		const_cast<ee::Symbol&>(spr->GetSymbol()).Traverse(init);
+		dynamic_cast<ee::Symbol*>(spr->GetSymbol())->Traverse(init);
 	}
 }
 
@@ -49,7 +49,7 @@ PreviewDialog::~PreviewDialog()
 
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		if (const eanim::Sprite* anim = dynamic_cast<const eanim::Sprite*>(m_sprites[i])) {
-			const_cast<eanim::Symbol&>(anim->GetSymbol()).SetLoop(true);
+			const_cast<eanim::Symbol*>(dynamic_cast<const eanim::Symbol*>(anim->GetSymbol()))->SetLoop(true);
 		}
 	}
 }

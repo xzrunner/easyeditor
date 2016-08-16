@@ -1,5 +1,5 @@
 #ifndef _SPRITE2_SCALE9_SPRITE_H_
-#define _SPRITE2_IMAGE_SPRITE_H_
+#define _SPRITE2_SCALE9_SPRITE_H_
 
 #include "S2_Sprite.h"
 
@@ -13,6 +13,7 @@ class Scale9Sprite : public VIRTUAL_INHERITANCE Sprite
 public:
 	Scale9Sprite();
 	Scale9Sprite(const Scale9Sprite& spr);
+	Scale9Sprite(Symbol* sym) : Sprite(sym) {}
 
 	/**
 	 *  @interface

@@ -101,7 +101,7 @@ IPackNode* ComplexBuilder::LoadComplex(const ecomplex::Symbol* symbol)
 		}
 		const std::vector<s2::Sprite*>& children = symbol->GetChildren();
 		for (int i = 0, n = children.size(); i < n; ++i) {
-			ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+			ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 			node->CreateFramePart(child, frame);
 		}
 		node->frames.push_back(frame);
@@ -141,7 +141,7 @@ IPackNode* ComplexBuilder::LoadAnchor(const ecomplex::Symbol* symbol)
 	const std::vector<s2::Sprite*>& children = symbol->GetChildren();
 	assert(children.size() == 1);
 
-	ee::Sprite* child = static_cast<ee::Sprite*>(children[0]->GetUD());
+	ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[0]);
 	if (!Utility::IsNameValid(child->GetName())) {
 		return NULL;
 	}
@@ -169,7 +169,7 @@ void ComplexBuilder::GroupFromTag(const std::vector<s2::Sprite*>& src,
 {
 	for (int i = 0, n = src.size(); i < n; ++i)
 	{
-		ee::Sprite* sprite = static_cast<ee::Sprite*>(src[i]->GetUD());
+		ee::Sprite* sprite = dynamic_cast<ee::Sprite*>(src[i]);
 		if (sprite->GetTag().empty())
 		{
 			others.push_back(sprite);

@@ -29,7 +29,7 @@ void TranslateSpriteState::Translate(const sm::vec2& offset)
 	GetSelection()->Traverse(ee::FetchAllVisitor<ee::Sprite>(selected));
 	assert(selected.size() == 1);
 	ee::Sprite* spr = selected[0];
-	spr->SetTransform(spr->GetPosition() + offset, spr->GetAngle());
+	spr->Translate(offset);
 
 	m_list->Arrange(spr);
 }

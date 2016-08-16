@@ -10,7 +10,7 @@ void create_shapes_from_etxture(etexture::Sprite* spr,
 								std::vector<ee::Shape*>& output)
 {
 	output.clear();
-	const std::vector<ee::Shape*>& shapes = spr->GetSymbol().GetAllShapes();
+	const std::vector<ee::Shape*>& shapes = dynamic_cast<const etexture::Symbol*>(spr->GetSymbol())->GetAllShapes();
 	for (int i = 0, n = shapes.size(); i < n; ++i) {
 		if (eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(shapes[i])) {
 			std::vector<sm::vec2> bound = poly->GetVertices();

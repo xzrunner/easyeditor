@@ -17,7 +17,6 @@ class Symbol : public ee::Symbol, public s2::Particle3dSymbol
 {
 public:
 	Symbol();
-	Symbol(const Symbol& s);
 
 	/**
 	 *  @interface

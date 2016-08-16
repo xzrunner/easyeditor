@@ -4,6 +4,7 @@
 #include "../Utility.h"
 
 #include <ee/ImageSprite.h>
+#include <ee/ImageSymbol.h>
 #include <ee/FontBlankSprite.h>
 #include <ee/Exception.h>
 #include <ee/Math2D.h>
@@ -39,7 +40,7 @@ void CocoPacker::pack(const std::vector<const ee::Symbol*>& symbols)
 		{
 			const std::vector<s2::Sprite*>& children = complex->GetChildren();
 			for (int i = 0, n = children.size(); i < n; ++i) {
-				ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+				ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 				if (ee::ImageSprite* image = dynamic_cast<ee::ImageSprite*>(child))
 				{
 					m_mapSpriteID.insert(std::make_pair(child, m_id++));
@@ -66,9 +67,9 @@ void CocoPacker::pack(const std::vector<const ee::Symbol*>& symbols)
 					s2::AnimSymbol::Frame* frame = layer->frames[j];
 					for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
 					{
-						ee::Sprite* sprite = static_cast<ee::Sprite*>(frame->sprites[k]->GetUD());
+						ee::Sprite* sprite = dynamic_cast<ee::Sprite*>(frame->sprites[k]);
 						if (ee::ImageSprite* image = dynamic_cast<ee::ImageSprite*>(sprite))
-							unique.insert(&image->GetSymbol());
+							unique.insert(dynamic_cast<const ee::ImageSymbol*>(image->GetSymbol()));
 						else if (ee::FontBlankSprite* font = dynamic_cast<ee::FontBlankSprite*>(sprite))
 							m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
 					}
@@ -172,7 +173,7 @@ void CocoPacker::resolvePicture(const ee::ImageSprite* sprite)
 	// tex
 	// todo: specify only 1 texture
 	std::string assignTex = lua::assign("tex", ee::StringHelper::ToString(1));
-	const sm::rect* pr = m_tex.Query(sprite->GetSymbol().GetImage());
+	const sm::rect* pr = m_tex.Query(dynamic_cast<const ee::ImageSymbol*>(sprite->GetSymbol())->GetImage());
 
 	// src
 	int x0 = pr->xmin, y0 = pr->ymax;
@@ -378,7 +379,7 @@ void CocoPacker::resolveAnimation(const ecomplex::Symbol* symbol)
 		lua::TableAssign ta(m_gen, "component", true);
 		const std::vector<s2::Sprite*>& children = symbol->GetChildren();
 		for (int i = 0, n = children.size(); i < n; ++i) {
-			ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+			ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 			resolveSpriteForComponent(child, ids, unique, order);
 		}
 	}
@@ -402,7 +403,7 @@ void CocoPacker::resolveAnimation(const ecomplex::Symbol* symbol)
 				{
 					int idx = -1;
 					for (idx = 0; idx < children.size(); ++idx) {
-						ee::Sprite* child = static_cast<ee::Sprite*>(children[idx]->GetUD());
+						ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[idx]);
 						if (child == itr->second[i])
 							break;
 					}
@@ -421,7 +422,7 @@ void CocoPacker::resolveAnimation(const ecomplex::Symbol* symbol)
 			{
 				int idx = -1;
 				for (idx = 0; idx < children.size(); ++idx) {
-					ee::Sprite* child = static_cast<ee::Sprite*>(children[idx]->GetUD());
+					ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[idx]);
 					if (child == others[i])
 						break;
 				}
@@ -464,7 +465,7 @@ void CocoPacker::resolveAnimation(const eanim::Symbol* symbol)
 				{
 					s2::AnimSymbol::Frame* frame = layer->frames[i];
 					for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
-						resolveSpriteForComponent(static_cast<ee::Sprite*>(frame->sprites[k]->GetUD()), ids, unique, order);
+						resolveSpriteForComponent(dynamic_cast<ee::Sprite*>(frame->sprites[k]), ids, unique, order);
 				}
 			}
 		}
@@ -587,7 +588,7 @@ void CocoPacker::resolveSpriteForComponent(const ee::Sprite* sprite, std::vector
 		else
 		{
 			// eanim::Symbol's sprites store unique
-			std::map<const ee::Symbol*, int>::iterator itr = m_mapSymbolID.find(sprite->GetSymbol());
+			std::map<const ee::Symbol*, int>::iterator itr = m_mapSymbolID.find(dynamic_cast<const ee::Symbol*>(sprite->GetSymbol()));
 			assert(itr != m_mapSymbolID.end());
 			id = itr->second;
 		}
@@ -601,7 +602,7 @@ void CocoPacker::resolveSpriteForComponent(const ee::Sprite* sprite, std::vector
 	}
 	else
 	{
-		std::map<const ee::Symbol*, int>::iterator itr = m_mapSymbolID.find(sprite->GetSymbol());
+		std::map<const ee::Symbol*, int>::iterator itr = m_mapSymbolID.find(dynamic_cast<const ee::Symbol*>(sprite->GetSymbol()));
 		assert(itr != m_mapSymbolID.end());
 		id = itr->second;
 	}
@@ -675,7 +676,7 @@ void CocoPacker::resolveSpriteForFrame(const ee::Sprite* sprite, int index,
 
 void CocoPacker::resolveSpriteForFrame(const ee::Sprite* sprite, const std::vector<std::pair<int, std::string> >& order)
 {
-	std::map<const ee::Symbol*, int>::iterator itr = m_mapSymbolID.find(sprite->GetSymbol());
+	std::map<const ee::Symbol*, int>::iterator itr = m_mapSymbolID.find(dynamic_cast<const ee::Symbol*>(sprite->GetSymbol()));
 	assert(itr != m_mapSymbolID.end());
 	if (itr == m_mapSymbolID.end())
 		throw ee::Exception("Error! COCCode::resolveSpriteForFrame L822");
@@ -720,10 +721,10 @@ void CocoPacker::resolveSpriteForFrame(const ee::Sprite* spr, int id, bool force
 		m[3], m[4], m[5]);
 	std::string assignMat = lua::assign("mat", smat);
 
-	if (spr->GetColor().mul != s2::Color(255, 255, 255, 255) || spr->GetColor().add != s2::Color(0,0,0,0))
+	if (spr->Color().mul != s2::Color(255, 255, 255, 255) || spr->Color().add != s2::Color(0,0,0,0))
 	{
-		std::string assignColor = lua::assign("color", ee::color2str(spr->GetColor().mul, ee::PT_BGRA));
-		std::string assignAdd = lua::assign("add", ee::color2str(spr->GetColor().add, ee::PT_ABGR));
+		std::string assignColor = lua::assign("color", ee::color2str(spr->Color().mul, ee::PT_BGRA));
+		std::string assignAdd = lua::assign("add", ee::color2str(spr->Color().add, ee::PT_ABGR));
 		lua::tableassign(m_gen, "", 4, assignIndex, assignColor, assignAdd, assignMat);
 	}
 	else
@@ -744,10 +745,10 @@ void CocoPacker::resolveSpriteForFrameImage(const ee::Sprite* spr, int id)
 		m[3], m[4], m[5]);
 	std::string assignMat = lua::assign("mat", smat);
 
-	if (spr->GetColor().mul != s2::Color(1,1,1,1) || spr->GetColor().add != s2::Color(0,0,0,0))
+	if (spr->Color().mul != s2::Color(1,1,1,1) || spr->Color().add != s2::Color(0,0,0,0))
 	{
-		std::string assignColor = lua::assign("color", ee::color2str(spr->GetColor().mul, ee::PT_BGRA));
-		std::string assignAdd = lua::assign("add", ee::color2str(spr->GetColor().add, ee::PT_ABGR));
+		std::string assignColor = lua::assign("color", ee::color2str(spr->Color().mul, ee::PT_BGRA));
+		std::string assignAdd = lua::assign("add", ee::color2str(spr->Color().add, ee::PT_ABGR));
 		if (spr->IsClip())
 			lua::tableassign(m_gen, "", 5, assignIndex, assignColor, assignAdd, assignMat, "clip=true");
 		else

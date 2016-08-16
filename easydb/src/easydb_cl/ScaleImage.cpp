@@ -81,7 +81,7 @@ void ScaleImage::Scale(ee::Snapshoot& ss, const std::string& src, const std::str
 	if (ee::FileType::IsType(filepath, ee::FileType::e_image))
 	{
 		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-		sm::rect r = symbol->GetSize();
+		sm::rect r = symbol->GetBounding();
 
 		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 		sprite->SetScale(sm::vec2(scale, scale));

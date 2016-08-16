@@ -167,7 +167,7 @@ bool EditRectOP::OnMouseDrag(int x, int y)
 	{
 		if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape))
 		{
-			sm::vec2 center = rect->GetRect().Center();
+			sm::vec2 center = rect->GetBounding().Center();
 
 			sm::rect r = rect->GetRect();
 			// move

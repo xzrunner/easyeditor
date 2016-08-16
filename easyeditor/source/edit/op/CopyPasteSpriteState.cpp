@@ -17,7 +17,7 @@ CopyPasteSpriteState::CopyPasteSpriteState(SpriteSelection* selection)
 	m_sprites.reserve(sprites.size());
 	selection->Clear();
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		Sprite* spr = sprites[i]->Clone();
+		Sprite* spr = sprites[i]->EEClone();
 		m_sprites.push_back(spr);
 		selection->Add(spr);
 	}
@@ -41,7 +41,7 @@ bool CopyPasteSpriteState::OnMouseDrag(const sm::vec2& pos)
 	sm::vec2 offset = pos - m_last_pos;
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		Sprite* spr = m_sprites[i];
-		spr->SetTransform(spr->GetPosition() + offset, spr->GetAngle());
+		spr->Translate(offset);
 	}
 	m_last_pos = pos;
 	return true;

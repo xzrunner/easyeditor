@@ -17,12 +17,6 @@ public:
 
 	/**
 	 *  @interface
-	 *    s2::Sprite
-	 */
-	virtual bool Update(const s2::RenderParams& params, float dt);
-
-	/**
-	 *  @interface
 	 *    ee::Sprite
 	 */
 	virtual Sprite* EEClone() const { return new Sprite(*this); }

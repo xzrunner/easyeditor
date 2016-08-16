@@ -36,7 +36,8 @@ void TranslateSpriteState::Visitor::
 Visit(ee::Sprite* spr, bool& next)
 {
 	if (spr != NULL) {
-		spr->SetTransform(sm::vec2(0, 0), 0);
+		spr->SetPosition(sm::vec2(0, 0));
+		spr->SetAngle(0);
 	} else {
 		m_anchor_mgr->OnSprPosChanged(spr);
 	}

@@ -132,7 +132,7 @@ sm::rect TextureMaterial::GetBoundingRegion(const std::vector<sm::vec2>& boundin
 void TextureMaterial::GetTexBoundarySegments(const sm::rect& rect, std::vector<sm::vec2>& segments)
 {
 	static const int EXTEND = 1;
-	sm::vec2 sz = m_image->GetSize().Size();
+	sm::vec2 sz = m_image->GetBounding().Size();
 	for (float x = rect.xmin; x < rect.xmax; x += sz.x)
 	{
  		segments.push_back(sm::vec2(x, rect.ymin - EXTEND));
@@ -147,7 +147,7 @@ void TextureMaterial::GetTexBoundarySegments(const sm::rect& rect, std::vector<s
 
 void TextureMaterial::CalTexcoords(const sm::rect& rect)
 {
-	sm::vec2 sz = m_image->GetSize().Size();
+	sm::vec2 sz = m_image->GetBounding().Size();
 	int index = 0;
 	for (size_t i = 0, n = m_tris.size() / 3; i < n; ++i)
 	{

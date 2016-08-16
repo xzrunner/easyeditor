@@ -92,7 +92,7 @@ void AutoRectCutCMPT::OnCreateRects(wxCommandEvent& event)
 	const ee::ImageSprite* img_sprite 
 		= dynamic_cast<const ee::ImageSprite*>(sprite);
 	assert(img_sprite);
-	const ee::Image* img = img_sprite->GetSymbol().GetImage();
+	const ee::Image* img = img_sprite->GetSymbol()->GetImage();
 
 	RegularRectCut cut(*img);
 	cut.AutoCut();
@@ -119,7 +119,7 @@ void AutoRectCutCMPT::OnOutputRects(wxCommandEvent& event)
 	const ee::ImageSprite* img_sprite 
 		= dynamic_cast<const ee::ImageSprite*>(sprite);
 	assert(img_sprite);
-	const ee::Image* img = img_sprite->GetSymbol().GetImage();
+	const ee::Image* img = img_sprite->GetSymbol()->GetImage();
 
 	RegularRectCut cut(*img);
 	cut.AutoCut();

@@ -55,9 +55,10 @@ Body* FileApapter::ToBody(const Json::Value& bodyValue, const std::string& dlg)
 	sm::vec2 pos;
 	pos.x = bodyValue["position"]["x"].asDouble();
 	pos.y = bodyValue["position"]["y"].asDouble();
-	float angle = bodyValue["angle"].asDouble();
+	sprite->SetPosition(pos);
 
-	sprite->SetTransform(pos, angle);
+	float angle = bodyValue["angle"].asDouble();
+	sprite->SetAngle(angle);
 
 	Body* body = new Body;
 	body->m_name = bodyValue["name"].asString();

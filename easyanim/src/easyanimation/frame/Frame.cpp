@@ -19,6 +19,8 @@
 
 #include <easybuilder.h>
 
+#include <sprite2/BoundingBox.h>
+
 namespace eanim
 {
 
@@ -154,11 +156,7 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 
 	sm::rect region;
  	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
- 		std::vector<sm::vec2> vertices;
- 		sprites[i]->GetBounding()->GetBoundPos(vertices);
-		for (size_t j = 0, m = vertices.size(); j < m; ++j) {
- 			region.Combine(vertices[j]);
-		}
+		sprites[i]->GetBounding()->CombineTo(region);
  	}
 
 	sm::vec2 sz = region.Size();

@@ -44,7 +44,8 @@ void ArrangeSpriteImpl::OnMouseRightUp(int x, int y)
 			angle = SM_PI * 0.5f;
 		else
 			angle = 0;
-		sprites[0]->SetTransform(pos, angle);
+		sprites[0]->SetPosition(pos);
+		sprites[0]->SetAngle(angle);
 	}
 
 	return OnMouseLeftUp(x, y);
@@ -73,13 +74,13 @@ Visit(ee::Sprite* spr, bool& next)
 	float width, height;
 	if (spr->GetAngle() == 0)
 	{
-		width = spr->GetSymbol().GetBounding().Width() * s + p;
-		height = spr->GetSymbol().GetBounding().Height() * s + p;
+		width = spr->GetSymbol()->GetBounding().Width() * s + p;
+		height = spr->GetSymbol()->GetBounding().Height() * s + p;
 	}
 	else
 	{
-		width = spr->GetSymbol().GetBounding().Height() * s + p;
-		height = spr->GetSymbol().GetBounding().Width() * s + p;
+		width = spr->GetSymbol()->GetBounding().Height() * s + p;
+		height = spr->GetSymbol()->GetBounding().Width() * s + p;
 	}
 
 	sm::vec2 leftTop;
@@ -99,7 +100,7 @@ Visit(ee::Sprite* spr, bool& next)
 	fixedCenter.x = int(fixedCenter.x) + width * 0.5f;
 	fixedCenter.y = int(fixedCenter.y) + height * 0.5f;
 
-	spr->SetTransform(fixedCenter, spr->GetAngle());
+	spr->SetPosition(fixedCenter);
 	next = true;
 }
 

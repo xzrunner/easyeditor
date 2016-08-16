@@ -11,6 +11,7 @@ class ImageSprite : public VIRTUAL_INHERITANCE Sprite
 public:
 	ImageSprite();
 	ImageSprite(const ImageSprite& spr);
+	ImageSprite(Symbol* sym) : Sprite(sym) {}
 
 	/**
 	 *  @interface

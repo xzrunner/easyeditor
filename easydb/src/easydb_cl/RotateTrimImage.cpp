@@ -106,7 +106,8 @@ void RotateTrimImage::RotateTrim(ee::Snapshoot& ss, const std::string& dir)
 			}
 
 			ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-			sprite->SetTransform(center, angle);
+			sprite->SetPosition(center);
+			sprite->SetAngle(angle);
 			ss.DrawSprite(sprite, true, width, height);
 
 			sprite->RemoveReference();

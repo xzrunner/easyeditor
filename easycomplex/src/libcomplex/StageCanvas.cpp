@@ -104,7 +104,7 @@ void StageCanvas::OnDrawSprites() const
 	float scale = ee::CameraMgr::Instance()->GetCamera()->GetScale();
 	m_stage->TraverseSprites(ee::DrawSpritesVisitor(m_screen.GetRegion(), scale), ee::DT_VISIBLE);
 
-	const sm::rect& clipbox = m_stage->GetSymbol()->m_clipbox;
+	const sm::rect& clipbox = dynamic_cast<const Symbol*>(m_stage->GetSymbol())->m_clipbox;
 	sm::vec2 sz = clipbox.Size();
 	if (sz.x != 0 && sz.y != 0) {
 		s2::RVG::SetColor(s2::Color(0, 204, 0));

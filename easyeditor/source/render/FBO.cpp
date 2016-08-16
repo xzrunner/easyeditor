@@ -182,7 +182,7 @@ void FBO::DrawFBO(const Symbol* symbol, bool whitebg, float scale)
 		has_context = false;
 	}
 
-	sm::rect rect = symbol->GetSize();
+	sm::rect rect = symbol->GetBounding();
 	sm::vec2 sz = rect.Size();
 	int w = static_cast<int>(sz.x * scale),
 		h = static_cast<int>(sz.y * scale);

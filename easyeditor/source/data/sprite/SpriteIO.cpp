@@ -88,10 +88,11 @@ void SpriteIO::LoadGeometry(const Data& data, Sprite* spr)
 {
 	spr->SetScale(data.scale);
 	spr->SetShear(data.shear);
-	spr->SetMirror(data.mirror.x, data.mirror.y);
+	spr->SetMirror(data.mirror);
 	spr->SetPerspective(data.perspective);
 	spr->SetOffset(data.offset);
-	spr->SetTransform(data.position, data.angle);
+	spr->SetPosition(data.position);
+	spr->SetAngle(data.angle);
 }
 
 void SpriteIO::StoreGeometry(Data& data, const Sprite* spr)
@@ -216,16 +217,16 @@ void SpriteIO::StoreGeometry(Json::Value& val, const Data& data)
 
 void SpriteIO::LoadRender(const Data& data, Sprite* spr)
 {
-	LoadColor(data, spr->GetColor());
-	LoadShader(data, spr->GetShader());
-	LoadCamera(data, spr->GetCamera());	
+	LoadColor(data, spr->Color());
+	LoadShader(data, spr->Shader());
+	LoadCamera(data, spr->Camera());	
 }
 
 void SpriteIO::StoreRender(Data& data, const Sprite* spr)
 {
-	StoreColor(data, spr->GetColor());
-	StoreShader(data, spr->GetShader());
-	StoreCamera(data, spr->GetCamera());	
+	StoreColor(data, spr->Color());
+	StoreShader(data, spr->Shader());
+	StoreCamera(data, spr->Camera());	
 }
 
 void SpriteIO::LoadRender(const Json::Value& val, Data& data)

@@ -36,7 +36,7 @@ OpenSymbolDialog::OpenSymbolDialog(wxWindow* wnd, ee::EditPanelImpl* stage,
 
 void OpenSymbolDialog::Open(ee::Sprite* spr)
 {
-	if (spr->GetSymbol().GetFilepath().find("[gen].json") != std::string::npos) {
+	if (dynamic_cast<ee::Symbol*>(spr->GetSymbol())->GetFilepath().find("[gen].json") != std::string::npos) {
 		wxMessageBox("禁止编辑自动生成的文件", "warning", wxOK | wxICON_INFORMATION, m_wnd);
 		return;
 	}
@@ -70,8 +70,8 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 	}
 	else if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(spr))
 	{
-		ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->GetSymbol());
-		ecomplex::EditDialog dlg(m_wnd, &symbol, m_stage->GetCanvas()->GetGLContext());
+		ecomplex::Symbol* sym = dynamic_cast<ecomplex::Symbol*>(complex->GetSymbol());
+		ecomplex::EditDialog dlg(m_wnd, sym, m_stage->GetCanvas()->GetGLContext());
 		dlg.ShowModal();
 
 		//////////////////////////////////////////////////////////////////////////
@@ -81,13 +81,14 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 	}
 	else if (eanim::Sprite* anim = dynamic_cast<eanim::Sprite*>(spr))
 	{
-		eanim::PreviewDialog dlg(m_wnd, &anim->GetSymbol(), m_stage->GetCanvas()->GetGLContext());
+		eanim::Symbol* sym = dynamic_cast<eanim::Symbol*>(anim->GetSymbol());
+		eanim::PreviewDialog dlg(m_wnd, sym, m_stage->GetCanvas()->GetGLContext());
 		dlg.ShowModal();
 	}
 	else if (escale9::Sprite* patch9 = dynamic_cast<escale9::Sprite*>(spr))
 	{
-		escale9::Symbol& symbol = const_cast<escale9::Symbol&>(patch9->GetSymbol());
-		escale9::EditDialog dlg(m_wnd, &symbol, m_stage->GetCanvas()->GetGLContext());
+		escale9::Symbol* sym = dynamic_cast<escale9::Symbol*>(patch9->GetSymbol());
+		escale9::EditDialog dlg(m_wnd, sym, m_stage->GetCanvas()->GetGLContext());
 		dlg.ShowModal();
 	}
 	else if (emesh::Sprite* sprite = dynamic_cast<emesh::Sprite*>(spr))

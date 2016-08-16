@@ -75,7 +75,7 @@ void ShearSpriteState::Shear(const sm::vec2& curr)
 	float kx = m_sprite->GetShear().x,
 		ky = m_sprite->GetShear().y;
 
-	sm::rect r = m_sprite->GetSymbol().GetBounding();
+	sm::rect r = m_sprite->GetSymbol()->GetBounding();
 //  	pos.x -= px;
 //  	pos.y -= py;
 
@@ -127,7 +127,7 @@ void ShearSpriteState::Shear(const sm::vec2& curr)
 
 void ShearSpriteState::Shear2(const sm::vec2& curr)
 {
-	sm::rect region = m_sprite->GetSymbol().GetBounding();
+	sm::rect region = m_sprite->GetSymbol()->GetBounding();
 
 	sm::vec2 sz = region.Size();
 	float hw = sz.x * 0.5f, 

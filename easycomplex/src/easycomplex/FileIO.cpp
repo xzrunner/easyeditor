@@ -21,7 +21,7 @@ void FileIO::load(const Task* task, const char* filename)
 	task->m_library->LoadFromSymbolMgr(*ee::SymbolMgr::Instance());
 	const std::vector<s2::Sprite*>& children = symbol->GetChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
-		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 		task->m_viewlist->Insert(child);
 	}
 
@@ -40,9 +40,9 @@ void FileIO::store(const Task* task, const char* filename)
 	std::queue<const ecomplex::Symbol*> buffer;
 	const std::vector<s2::Sprite*>& children = root->GetChildren();
 	for (size_t i = 0, n = children.size(); i < n ;++i) {
-		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 		if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(child))
-			buffer.push(&complex->GetSymbol());
+			buffer.push(dynamic_cast<const ecomplex::Symbol*>(complex->GetSymbol()));
 	}
 	while (!buffer.empty())
 	{
@@ -50,9 +50,9 @@ void FileIO::store(const Task* task, const char* filename)
 		ecomplex::FileStorer::Store(symbol->GetFilepath().c_str(), symbol);
 		const std::vector<s2::Sprite*>& children = symbol->GetChildren();
 		for (size_t i = 0, n = children.size(); i < n ;++i) {
-			ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+			ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 			if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(child))
-				buffer.push(&complex->GetSymbol());
+				buffer.push(dynamic_cast<const ecomplex::Symbol*>(complex->GetSymbol()));
 		}
 	}
 }

@@ -39,8 +39,8 @@ void PointShape::Draw(const sm::mat4& mt, const RenderColor& color) const
 {
 	sm::vec2 center = mt * m_pos;
 	float r = sm::mat_trans_len(SHAPE_NODE_RADIUS, mt);
-	s2::RVG::SetColor(color.mul);
-	s2::RVG::Circle(center, r, true);
+	RVG::SetColor(color.mul);
+	RVG::Circle(center, r, true);
 }
 
 void PointShape::UpdateBounding()

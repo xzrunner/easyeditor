@@ -54,7 +54,7 @@ void TransNewTextFile::Run(const std::string& folder)
 				bool dirty = false;
 				const std::vector<s2::Sprite*>& children = complex->GetChildren();
 				for (int i = 0, n = children.size(); i < n; ++i) {
-					ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+					s2::Sprite* child = children[i];
 					if (etext::Sprite* text = dynamic_cast<etext::Sprite*>(child)) {
 						dirty = true;
 						text->SetFontSize(text->GetFontSize() + 8);

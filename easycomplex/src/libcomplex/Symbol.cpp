@@ -34,14 +34,6 @@ Symbol::Symbol()
 	m_clipbox.xmin = m_clipbox.xmax = m_clipbox.ymin = m_clipbox.ymax = 0;
 }
 
-Symbol::Symbol(const Symbol& sym)
-	: m_clipbox(sym.m_clipbox)
-	, m_use_render_cache(sym.m_use_render_cache)
-	, m_render_version(sym.m_render_version)
-	, m_render_cache_open(sym.m_render_cache_open)
-{
-}
-
 Symbol::~Symbol()
 {
 	Clear();
@@ -142,8 +134,7 @@ void Symbol::ReloadTexture() const
 	}
 	std::set<const ee::Symbol*> symbols;
 	for (int i = 0, n = m_children.size(); i < n; ++i) {
-		ee::Sprite* child = dynamic_cast<ee::Sprite*>(m_children[i]);
-		symbols.insert(&child->GetSymbol());
+		symbols.insert(dynamic_cast<const ee::Symbol*>(m_children[i]->GetSymbol()));
 	}
 	std::set<const ee::Symbol*>::iterator itr = symbols.begin();
 	for ( ; itr != symbols.end(); ++itr) {
@@ -158,7 +149,7 @@ void Symbol::Traverse(ee::Visitor<ee::Sprite>& visitor)
 		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 		bool next;
 		visitor.Visit(child, next);
-		const_cast<ee::Symbol&>(child->GetSymbol()).Traverse(visitor);
+		dynamic_cast<ee::Symbol*>(child->GetSymbol())->Traverse(visitor);
 	}
 }
 

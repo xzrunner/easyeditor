@@ -57,7 +57,7 @@ void AnchorMgr::StoreToFile(Json::Value& value, const std::string& dir) const
 			ee::Sprite* spr = m_anchors[i].sprites[j];
 
 			std::string filepath = ee::FileHelper::GetRelativePath(dir,
-				spr->GetSymbol().GetFilepath());
+				spr->GetSymbol()->GetFilepath());
 
 			Json::Value spr_val_anchor;
 			spr_val_anchor["name"] = spr->GetName();
@@ -70,7 +70,7 @@ void AnchorMgr::StoreToFile(Json::Value& value, const std::string& dir) const
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		ee::Sprite* spr = m_sprites[i];
 		std::string filepath = ee::FileHelper::GetRelativePath(dir,
-			spr->GetSymbol().GetFilepath());
+			spr->GetSymbol()->GetFilepath());
 
 		Json::Value spr_val;
 		spr_val["filepath"] = filepath;
@@ -155,7 +155,8 @@ void AnchorMgr::Insert(ee::Sprite* spr)
 {
 	Anchor* anchor = GetNearestAnchor(spr->GetPosition());
 
-	spr->SetTransform(anchor->pos, 0);
+	spr->SetPosition(anchor->pos);
+	spr->SetAngle(0);
 
 	spr->AddReference();
 	anchor->sprites.push_back(spr);
@@ -208,14 +209,14 @@ AnchorMgr::Anchor* AnchorMgr::GetNearestAnchor(const sm::vec2& pos)
 void AnchorMgr::Move(ee::Sprite* spr)
 {
 	Anchor* anchor = GetNearestAnchor(spr->GetPosition());
-	spr->SetTransform(anchor->pos, 0);
+	spr->SetPosition(anchor->pos);
 }
 
 void AnchorMgr::ChangeAnchorPos(Anchor& anchor, const sm::vec2& pos)
 {
 	anchor.pos = pos;
 	for (int i = 0, n = anchor.sprites.size(); i < n; ++i) {
-		anchor.sprites[i]->SetTransform(pos, 0);
+		anchor.sprites[i]->SetPosition(pos);
 	}
 }
 
@@ -235,7 +236,8 @@ void AnchorMgr::LoadAnchorData(const std::vector<ee::Sprite*>& sprites,
 		}
 		if (spr) {
 			anchor.sprites.push_back(spr);
-			spr->SetTransform(anchor.pos, 0);
+			spr->SetPosition(anchor.pos);
+			spr->SetAngle(0);
 		}
 
 		val = value[idx++];

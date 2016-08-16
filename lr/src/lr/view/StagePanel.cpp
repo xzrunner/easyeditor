@@ -394,7 +394,7 @@ void StagePanel::InsertSprite(ee::Sprite* spr, int idx)
 		m_pathfinding->DisableRegion(spr, false);
 	}
 
-	std::string filepath = spr->GetSymbol().GetFilepath();
+	std::string filepath = spr->GetSymbol()->GetFilepath();
 	if (CharacterFileName::IsValidFilepath(filepath)) {
 		CharacterFileName name(filepath);
 		m_chara_dirs.BuildSymbolDirections(name);

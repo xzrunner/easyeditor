@@ -120,7 +120,7 @@ void ViewlistList::Insert(Sprite* sprite, int idx)
 	}
 	sprite->AddReference();
 
-	ListItem* item = const_cast<Symbol*>(sprite->GetSymbol());
+	ListItem* item = dynamic_cast<ListItem*>(sprite->GetSymbol());
 	if (idx < 0 || idx >= static_cast<int>(m_sprites.size())) {
 		VerticalImageList::Insert(item, 0);
 		m_sprites.insert(m_sprites.begin(), sprite);
@@ -373,7 +373,7 @@ void ViewlistList::ReorderMost(const Sprite* sprite, bool up)
 		return;
 	}
 
-	ListItem* item = const_cast<Symbol*>(sprite->GetSymbol());
+	ListItem* item = const_cast<ListItem*>(dynamic_cast<const ListItem*>(sprite->GetSymbol()));
 	if (up) {
 		if (i != 0) {
 			m_sprites.erase(m_sprites.begin() + i);

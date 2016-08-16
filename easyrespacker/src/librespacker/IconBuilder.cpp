@@ -52,14 +52,14 @@ const IPackNode* IconBuilder::Create(const eicon::Sprite* spr)
 	Value val;
 	val.proc = spr->GetProcess();
 	val.node = node;
-	m_map_data.insert(std::make_pair(spr->GetSymbol(), val));
+	m_map_data.insert(std::make_pair(dynamic_cast<const eicon::Symbol*>(spr->GetSymbol()), val));
 	return node;
 }
 
 const IPackNode* IconBuilder::Query(const eicon::Sprite* spr) const
 {
 	float proc = spr->GetProcess();
-	const eicon::Symbol* key = spr->GetSymbol();
+	const eicon::Symbol* key = dynamic_cast<const eicon::Symbol*>(spr->GetSymbol());
 	std::multimap<const eicon::Symbol*, Value>::const_iterator 
 		itr_s = m_map_data.lower_bound(key),
 		itr_e = m_map_data.upper_bound(key),
@@ -80,7 +80,7 @@ void IconBuilder::Load(const eicon::Sprite* spr, PackPicture* pic)
 
 	PackPicture::Quad quad;
 
-	const eicon::Icon* icon = spr->GetSymbol().GetIcon();
+	const eicon::Icon* icon = dynamic_cast<const eicon::Symbol*>(spr->GetSymbol())->GetIcon();
 	quad.img = icon->GetImage();
 	icon->GetTexCoords(proc, quad.texture_coord);
 	icon->GetScreenCoords(proc, quad.texture_coord, quad.screen_coord);

@@ -8,6 +8,7 @@
 #include "FilterModes.h"
 
 #include <sprite2/RenderFilter.h>
+#include <sprite2/BoundingBox.h>
 
 namespace ee
 {
@@ -21,11 +22,11 @@ void DrawSpritesVisitor::Visit(Sprite* spr, bool& next)
 	}
 
 	if (m_screen_region.IsValid() &&
-		!Math2D::IsRectIntersectRect(spr->GetRect(), m_screen_region)) {
+		!Math2D::IsRectIntersectRect(spr->GetBounding()->GetSize(), m_screen_region)) {
 		return;
 	}
 
-	int filter_mode_idx = FilterModes::Instance()->QueryShaderIdx(spr->GetShader().filter->GetMode());
+	int filter_mode_idx = FilterModes::Instance()->QueryShaderIdx(spr->Shader().filter->GetMode());
 //	ShaderMgr::Instance()->SetSpriteShader(filter_mode_idx);
 
 	DrawSprite(spr);

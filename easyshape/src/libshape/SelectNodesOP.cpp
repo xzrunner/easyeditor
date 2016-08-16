@@ -261,7 +261,7 @@ Visit(ee::Shape* shape, bool& next)
 		return;
 	}
 
-	if (ee::Math2D::IsRectIntersectRect(polyline->GetRect(), m_rect))
+	if (ee::Math2D::IsRectIntersectRect(polyline->GetBounding(), m_rect))
 	{
 		const std::vector<sm::vec2>& vertices = polyline->GetVertices();
 		for (size_t i = 0, n = vertices.size(); i < n; ++i)
@@ -302,7 +302,7 @@ Visit(ee::Shape* shape, bool& next)
 		return;
 	}
 
-	if (ee::Math2D::IsRectIntersectRect(polyline->GetRect(), m_rect))
+	if (ee::Math2D::IsRectIntersectRect(polyline->GetBounding(), m_rect))
 	{
 		ChainSelectedNodes* result = new ChainSelectedNodes;
 		result->polyline = polyline;

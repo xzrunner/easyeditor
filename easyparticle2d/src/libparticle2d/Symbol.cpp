@@ -16,12 +16,6 @@ Symbol::Symbol()
 {
 }
 
-Symbol::Symbol(const Symbol& s)
-	: ee::Symbol(s)
-	, m_et_cfg(s.m_et_cfg)
-{
-}
-
 void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	if (!spr) {

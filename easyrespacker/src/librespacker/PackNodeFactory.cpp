@@ -2,6 +2,7 @@
 #include "PackUI.h"
 
 #include <ee/ImageSprite.h>
+#include <ee/ImageSymbol.h>
 #include <ee/Exception.h>
 #include <ee/FileHelper.h>
 #include <ee/FetchAllVisitor.h>
@@ -133,7 +134,7 @@ const IPackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 	} else if (const eicon::Sprite* icon = dynamic_cast<const eicon::Sprite*>(spr)) {
 		node = m_icon_builder->Create(icon);
 	} else if (const etexture::Sprite* tex = dynamic_cast<const etexture::Sprite*>(spr)) {
-		const etexture::Symbol* sym = &tex->GetSymbol();
+		const etexture::Symbol* sym = dynamic_cast<const etexture::Symbol*>(tex->GetSymbol());
 		if (m_tex_builder->CanHandle(sym)) {
 			node = m_tex_builder->Create(sym);
 		} else if (m_shape_builder->CanHandle(sym)) {
@@ -150,11 +151,11 @@ const IPackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 
 	// animation
 	else if (const ecomplex::Sprite* complex = dynamic_cast<const ecomplex::Sprite*>(spr)) {
-		node = m_complex_builder->Create(&complex->GetSymbol());
+		node = m_complex_builder->Create(dynamic_cast<const ecomplex::Symbol*>(complex->GetSymbol()));
 	} else if (const eanim::Sprite* anim = dynamic_cast<const eanim::Sprite*>(spr)) {
-		node = m_anim_builder->Create(&anim->GetSymbol());
+		node = m_anim_builder->Create(dynamic_cast<const eanim::Symbol*>(anim->GetSymbol()));
 	} else if (const eterrain2d::Sprite* terr2d = dynamic_cast<const eterrain2d::Sprite*>(spr)) {
-		node = m_terrain2d_builder->Create(&terr2d->GetSymbol());
+		node = m_terrain2d_builder->Create(dynamic_cast<const eterrain2d::Symbol*>(terr2d->GetSymbol()));
 	}
 
 	// p3d spr
@@ -164,7 +165,7 @@ const IPackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 
 	// particle2d
 	else if (const eparticle2d::Sprite* p2d = dynamic_cast<const eparticle2d::Sprite*>(spr)) {
-		node = m_particle2d_builder->Create(&p2d->GetSymbol());
+		node = m_particle2d_builder->Create(dynamic_cast<const eparticle2d::Symbol*>(p2d->GetSymbol()));
 	}
 
 	// mesh spr
@@ -174,19 +175,19 @@ const IPackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 
 	// mask
 	else if (const emask::Sprite* mask = dynamic_cast<const emask::Sprite*>(spr)) {
-		node = m_mask_builder->Create(&mask->GetSymbol());
+		node = m_mask_builder->Create(dynamic_cast<const emask::Symbol*>(mask->GetSymbol()));
 	}
 
 	// trail
 	else if (const etrail::Sprite* trail = dynamic_cast<const etrail::Sprite*>(spr)) {
-		node = m_trail_builder->Create(&trail->GetSymbol());
+		node = m_trail_builder->Create(dynamic_cast<const etrail::Symbol*>(trail->GetSymbol()));
 	}
 
 	else {
 		throw ee::Exception("PackNodeFactory::Create unknown sprite type.");
 	}
 	
-	node->SetFilepath(ee::FileHelper::GetRelativePath(m_files_dir, spr->GetSymbol().GetFilepath()));
+	node->SetFilepath(ee::FileHelper::GetRelativePath(m_files_dir, dynamic_cast<const  ee::Symbol*>(spr->GetSymbol())->GetFilepath()));
 
 	if (node->GetSprID() > ANCHOR_ID) {
 		throw ee::Exception("PackNodeFactory::Create node id over ANCHOR_ID.");

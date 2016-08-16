@@ -41,8 +41,8 @@ void Utility::GetCurrSprites(const Symbol* symbol, int index, std::vector<ee::Sp
 		if (!curr_f->tween || !next_f)
 		{
 			for (size_t i = 0, n = curr_f->sprites.size(); i < n; ++i) {
-				ee::Sprite* spr = static_cast<ee::Sprite*>(curr_f->sprites[i]->GetUD());
-				sprites.push_back(spr->Clone());	
+				ee::Sprite* spr = dynamic_cast<ee::Sprite*>(curr_f->sprites[i]);
+				sprites.push_back(spr->EEClone());	
 			}
 		}
 		else

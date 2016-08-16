@@ -30,10 +30,13 @@ bool PasteSymbolRandomOP::OnMouseLeftDown(int x, int y)
 		m_pos = m_stage->TransPosScrToProj(x, y);
 		Sprite* sprite = SpriteFactory::Instance()->Create(symbol);
 		sprite->Translate(m_pos);
-		if (m_random_val.scale != 1.0f) 
+		if (m_random_val.scale != 1.0f) {
 			sprite->SetScale(sm::vec2(m_random_val.scale, m_random_val.scale));
-		if (m_random_val.angle != 0.0f) 
-			sprite->SetTransform(m_pos, m_random_val.angle);
+		}
+		if (m_random_val.angle != 0.0f) {
+			sprite->SetPosition(m_pos);
+			sprite->SetAngle(m_random_val.angle);
+		}
 		InsertSpriteSJ::Instance()->Insert(sprite);
 		sprite->RemoveReference();
 	}

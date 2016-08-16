@@ -33,7 +33,7 @@ unsigned char* Snapshoot::OutputToMemory(const Symbol* symbol, bool whitebg,
 {
 	m_fbo->DrawSymbol(symbol, whitebg, scale);
 
-	sm::vec2 sz = symbol->GetSize().Size();
+	sm::vec2 sz = symbol->GetBounding().Size();
 	sz *= scale;
 
 	int w = static_cast<int>(sz.x),
@@ -57,7 +57,7 @@ unsigned char* Snapshoot::OutputToMemory(const Symbol* symbol, bool whitebg,
 void Snapshoot::OutputToImageFile(const Symbol* symbol, const std::string& filename,
 								  float scale) const
 {
-	sm::vec2 sz = symbol->GetSize().Size() * scale;
+	sm::vec2 sz = symbol->GetBounding().Size() * scale;
 	int w = static_cast<int>(sz.x),
 		h = static_cast<int>(sz.y);
 	unsigned char* pixels = OutputToMemory(symbol, false, scale);

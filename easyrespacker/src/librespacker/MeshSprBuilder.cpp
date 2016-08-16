@@ -32,7 +32,7 @@ const IPackNode* MeshSprBuilder::Create(const emesh::Sprite* spr)
 {
 	PackMeshSpr* node = new PackMeshSpr;
 
-	node->mesh = PackNodeFactory::Instance()->Create(spr->GetSymbol());
+	node->mesh = PackNodeFactory::Instance()->Create(dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
 
 	node->base = PackNodeFactory::Instance()->Create(spr->GetBaseSym());
 	

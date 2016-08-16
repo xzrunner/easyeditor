@@ -37,7 +37,7 @@ void SetSpritePosAOP::Undo()
 	assert(m_sprites.size() == m_old_pos.size());
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		Sprite* spr = m_sprites[i];
-		spr->SetTransform(m_old_pos[i], spr->GetAngle());
+		spr->SetPosition(m_old_pos[i]);
 	}
 }
 
@@ -45,7 +45,7 @@ void SetSpritePosAOP::Redo()
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		Sprite* spr = m_sprites[i];
-		spr->SetTransform(m_new_pos, spr->GetAngle());
+		spr->SetPosition(m_new_pos);
 	}
 }
 

@@ -264,7 +264,7 @@ bool EditPolylineImpl::OnMouseDrag(int x, int y)
 			}
 			else
 			{
-				sm::vec2 old = polyline->GetRect().Center();
+				sm::vec2 old = polyline->GetBounding().Center();
 				polyline->Translate(pos - old);
 			}
 
@@ -318,7 +318,7 @@ void EditPolylineImpl::drawCaptured(const NodeAddr& captured) const
 			s2::RVG::Circle(captured.pos, m_node_capture->GetValue(), true);
 		}
 
-		sm::vec2 center = polyline->GetRect().Center();
+		sm::vec2 center = polyline->GetBounding().Center();
 		s2::RVG::SetColor(s2::Color(102, 255, 102));
 		s2::RVG::Circle(center, m_node_capture->GetValue(), true);
 	}

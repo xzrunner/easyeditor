@@ -34,9 +34,9 @@ void MoveSpriteCenterState::OnMouseRelease(const sm::vec2& pos)
 	// todo edit history
 
 	if (m_dirty && m_spr) {
-		ecomplex::Symbol& complex = const_cast<ecomplex::Symbol&>(m_spr->GetSymbol());
-		complex.InitBounding();
-		m_spr->BuildBounding();
+// 		ecomplex::Symbol& complex = const_cast<ecomplex::Symbol&>(m_spr->GetSymbol());
+// 		complex.InitBounding();
+//		m_spr->UpdateBounding();
 	}
 
 	m_dirty = false;
@@ -53,14 +53,13 @@ bool MoveSpriteCenterState::OnMouseDrag(const sm::vec2& pos)
 
 	m_dirty = true;
 
-	ecomplex::Symbol& sym = const_cast<ecomplex::Symbol&>(m_spr->GetSymbol());
-	const std::vector<s2::Sprite*>& children = sym.GetChildren();
+	const ecomplex::Symbol* sym = dynamic_cast<const ecomplex::Symbol*>(m_spr->GetSymbol());
+	const std::vector<s2::Sprite*>& children = sym->GetChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
-		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
-		child->Translate(offset);
+		children[i]->Translate(offset);
 	}
 
-	ecomplex::FileStorer::Store(sym.GetFilepath().c_str(), &sym);
+	ecomplex::FileStorer::Store(sym->GetFilepath().c_str(), sym);
 
 	return true;
 }

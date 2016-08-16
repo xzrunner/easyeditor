@@ -267,7 +267,7 @@ void RectCutCMPT::OnOutputData(wxCommandEvent& event)
 		return;
 	}
 
-	ee::Image* image = img_spr->GetSymbol().GetImage();
+	ee::Image* image = img_spr->GetSymbol()->GetImage();
 
 	std::string img_dir = m_imagePath->GetValue();
 	std::string json_dir = m_jsonPath->GetValue();
@@ -343,7 +343,7 @@ void RectCutCMPT::OnAutoCreateRects(wxCommandEvent& event)
 	const ee::ImageSprite* img_sprite 
 		= dynamic_cast<const ee::ImageSprite*>(sprite);
 	assert(img_sprite);
-	const ee::Image* img = img_sprite->GetSymbol().GetImage();
+	const ee::Image* img = img_sprite->GetSymbol()->GetImage();
 
 	RectMgr& rects = static_cast<RectCutOP*>(m_editop)->GetRectMgr();
 

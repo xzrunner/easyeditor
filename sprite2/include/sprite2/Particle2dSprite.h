@@ -1,5 +1,5 @@
-#ifndef _SPRITE2_PARTICLE3D_SPRITE_H_
-#define _SPRITE2_PARTICLE3D_SPRITE_H_
+#ifndef _SPRITE2_PARTICLE2D_SPRITE_H_
+#define _SPRITE2_PARTICLE2D_SPRITE_H_
 
 #include "S2_Sprite.h"
 
@@ -11,6 +11,7 @@ class Particle2dSprite : public VIRTUAL_INHERITANCE Sprite
 public:
 	Particle2dSprite();
 	Particle2dSprite(const Particle2dSprite& spr);
+	Particle2dSprite(Symbol* sym) : Sprite(sym) {}
 
 	/**
 	 *  @interface
@@ -22,4 +23,4 @@ public:
 
 }
 
-#endif // _SPRITE2_PARTICLE3D_SPRITE_H_
+#endif // _SPRITE2_PARTICLE2D_SPRITE_H_

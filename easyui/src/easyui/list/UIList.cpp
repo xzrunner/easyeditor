@@ -9,6 +9,7 @@
 #include <easycomplex.h>
 
 #include <sprite2/S2_Sprite.h>
+#include <sprite2/BoundingBox.h>
 
 #include <algorithm>
 
@@ -36,7 +37,7 @@ bool UIList::InsertSprite(ee::Sprite* sprite, int idx)
 		return false;
 	}
 	assert(m_items.size() == m_hori_count * m_vert_count);
-	if (m_item_spr && sprite->GetSymbol() != &m_item_spr->GetSymbol()) {
+	if (m_item_spr && sprite->GetSymbol() != m_item_spr->GetSymbol()) {
 		return false;
 	}
 	if (m_hori_count > 1 && m_vert_count > 1) {
@@ -46,7 +47,7 @@ bool UIList::InsertSprite(ee::Sprite* sprite, int idx)
 	if (m_hori_count ==  0 && m_vert_count == 0) {
 		sprite->AddReference();
 		m_item_spr = sprite;
-		m_items.push_back(m_item_spr->Clone());
+		m_items.push_back(m_item_spr->EEClone());
 		m_hori_count = m_vert_count = 1;
 		return true;
 	}
@@ -222,21 +223,21 @@ void UIList::LoadFromFile(const char* filename)
 	const std::vector<s2::Sprite*>& children = items_complex.GetChildren();
 	if (!m_reverse_order) {
 		for (int i = 0, n = children.size(); i < n; ++i) {
-			ee::Sprite* spr = static_cast<ee::Sprite*>(children[i]->GetUD());
+			ee::Sprite* spr = dynamic_cast<ee::Sprite*>(children[i]);
 			spr->AddReference();
 			m_items.push_back(spr);
 		}
 		if (!children.empty()) {
-			m_item_spr = static_cast<ee::Sprite*>(children[0]->GetUD())->Clone();
+			m_item_spr = dynamic_cast<ee::Sprite*>(children[0])->EEClone();
 		}
 	} else {
 		for (int i = 0, n = children.size(); i < n; ++i) {
-			ee::Sprite* spr = static_cast<ee::Sprite*>(children[i]->GetUD());
+			ee::Sprite* spr = dynamic_cast<ee::Sprite*>(children[i]);
 			spr->AddReference();
 			m_items.insert(m_items.begin(), spr);
 		}
 		if (!children.empty()) {
-			m_item_spr = static_cast<ee::Sprite*>(children.back()->GetUD())->Clone();
+			m_item_spr = dynamic_cast<ee::Sprite*>(children.back())->EEClone();
 		}
 	}
 }
@@ -250,7 +251,7 @@ bool UIList::ReFilling()
 	for_each(m_items.begin(), m_items.end(), cu::RemoveRefFonctor<ee::Sprite>());
 	m_items.clear();
 
-	m_items.push_back(m_item_spr->Clone());
+	m_items.push_back(m_item_spr->EEClone());
 
 	m_hori_count = m_vert_count = 1;
 
@@ -276,7 +277,7 @@ bool UIList::Arrange(const ee::Sprite* spr)
 	int row = idx / m_hori_count,
 		col = idx % m_hori_count;
 	if (idx == 0) {
-		m_item_spr->SetTransform(m_items[0]->GetPosition(), m_item_spr->GetAngle());
+		m_item_spr->SetPosition(m_items[0]->GetPosition());
 	}
 	if (row > 0) {
 		float space = fabs(spr->GetPosition().y - m_item_spr->GetPosition().y) / row;
@@ -322,7 +323,7 @@ bool UIList::Filling()
 	m_items.clear();
 
 	sm::vec2 base = m_item_spr->GetPosition();
-	sm::vec2 item_sz = m_item_spr->GetRect().Size();
+	sm::vec2 item_sz = m_item_spr->GetBounding()->GetSize().Size();
 	float hw = item_sz.x * 0.5f;
 	float hh = item_sz.y * 0.5f;
 
@@ -349,8 +350,8 @@ bool UIList::Filling()
 				break;
 			} else {
 				new_line = true;
-				ee::Sprite* spr = m_item_spr->Clone();
-				spr->SetTransform(pos, spr->GetAngle());
+				ee::Sprite* spr = m_item_spr->EEClone();
+				spr->SetPosition(pos);
 				m_items.push_back(spr);
 				ret = true;
 				pos.x += m_hori_space;
@@ -388,7 +389,7 @@ bool UIList::Arrange(float hori_space, float vert_space)
 	int count = 0;
 	for (int i = 0, n = m_items.size(); i < n; ++i) {
 		ee::Sprite* spr = m_items[i];
-		spr->SetTransform(pos, spr->GetAngle());
+		spr->SetPosition(pos);
 		pos.x += m_hori_space;
 
 		++count;

@@ -33,8 +33,8 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 			ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(sprites[i]);
 			if (!complex) continue;
 
-			ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->GetSymbol());
-			ecomplex::EditDialog dlg(m_stage->GetEditPanel(), &symbol, NULL);
+			ecomplex::Symbol* sym = dynamic_cast<ecomplex::Symbol*>(complex->GetSymbol());
+			ecomplex::EditDialog dlg(m_stage->GetEditPanel(), sym, NULL);
 			dlg.ShowModal();
 		}
 	}
@@ -50,8 +50,8 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	ee::Sprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
 	if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(selected))
 	{
-		ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->GetSymbol());
-		ecomplex::EditDialog dlg(m_stage->GetEditPanel(), &symbol, NULL);
+		ecomplex::Symbol* sym = dynamic_cast<ecomplex::Symbol*>(complex->GetSymbol());
+		ecomplex::EditDialog dlg(m_stage->GetEditPanel(), sym, NULL);
 		dlg.ShowModal();
 	}
 	//else if (eanim::Sprite* anim = dynamic_cast<eanim::Sprite*>(selected))

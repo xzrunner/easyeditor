@@ -1,6 +1,7 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
 #include "Sprite.h"
+#include "Symbol.h"
 
 #include <ee/MultiSpritesImpl.h>
 #include <ee/FetchAllVisitor.h>

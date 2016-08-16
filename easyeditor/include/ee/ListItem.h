@@ -1,6 +1,8 @@
 #ifndef _EASYEDITOR_LIST_ITEM_H_
 #define _EASYEDITOR_LIST_ITEM_H_
 
+#include <CU_RefCountObj.h>
+
 #include <string>
 
 namespace ee
@@ -8,7 +10,7 @@ namespace ee
 
 class Bitmap;
 
-class ListItem
+class ListItem : public virtual cu::RefCountObj
 {
 public:
 	ListItem() {

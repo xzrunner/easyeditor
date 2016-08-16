@@ -85,11 +85,12 @@ void AnimRecorder::StoreToFile(const std::string& filepath) const
 			ee::Sprite* spr = new ee::DummySprite(
 				new ee::DummySymbol(item->filepath));
 
-			spr->SetTransform(sm::vec2(item->x, item->y), item->angle);
+			spr->SetPosition(sm::vec2(item->x, item->y));
+			spr->SetAngle(item->angle);
 			spr->SetScale(sm::vec2(item->scale, item->scale));
-			spr->GetColor().mul = item->mul_col;
+			spr->Color().mul = item->mul_col;
 
-			frame->sprites.push_back(spr->GetCore());
+			frame->sprites.push_back(spr);
 		}
 		layer->frames.push_back(frame);
 	}

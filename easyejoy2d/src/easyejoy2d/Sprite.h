@@ -13,16 +13,9 @@ class Symbol;
 class Sprite : public s2::DummySprite, public ee::Sprite
 {
 public:
-	Sprite();
-	Sprite(const Sprite& sprite);
+	Sprite() {}
+	Sprite(const Sprite& sprite) {}
 	Sprite(Symbol* symbol);
-	virtual ~Sprite();
-
-	/**
-	 *  @interface
-	 *    s2::Sprite
-	 */
-	virtual bool Update(const s2::RenderParams& params, float dt);
 
 	/**
 	 *  @interface

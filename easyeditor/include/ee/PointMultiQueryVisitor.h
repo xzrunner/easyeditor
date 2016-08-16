@@ -4,6 +4,8 @@
 #include "Visitor.h"
 #include "Sprite.h"
 
+#include <sprite2/BoundingBox.h>
+
 namespace ee
 {
 
@@ -32,7 +34,7 @@ PointMultiQueryVisitor::PointMultiQueryVisitor(const sm::vec2& pos)
 inline
 void PointMultiQueryVisitor::Visit(Sprite* spr, bool& next)
 {
-	if (spr->IsContain(m_pos))
+	if (spr->GetBounding()->IsContain(m_pos))
 	{
 		m_sprites.push_back(spr);
 		next = false;

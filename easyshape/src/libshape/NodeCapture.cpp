@@ -90,7 +90,7 @@ bool NodeCapture::RectQueryVisitor::
 Visit(BezierShape* bezier)
 {
 	// capture center
-	const sm::rect& rect = bezier->GetRect();
+	const sm::rect& rect = bezier->GetBounding( );
 	if (ee::Math2D::GetDistance(rect.Center(), m_pos) < m_tolerance)
 	{
 		m_result.shape = bezier;
@@ -115,7 +115,7 @@ bool NodeCapture::RectQueryVisitor::
 Visit(PolylineShape* polyline)
 {
 	// capture center
-	const sm::rect& rect = polyline->GetRect();
+	const sm::rect& rect = polyline->GetBounding();
 	if (ee::Math2D::GetDistance(rect.Center(), m_pos) < m_tolerance)
 	{
 		m_result.shape = polyline;
@@ -124,7 +124,7 @@ Visit(PolylineShape* polyline)
 	}
 
 	// capture control points
-	if (!ee::Math2D::IsRectIntersectRect(m_rect, polyline->GetRect()))
+	if (!ee::Math2D::IsRectIntersectRect(m_rect, polyline->GetBounding()))
 		return false;
 
 	if (!polyline->IsIntersect(m_rect)) 

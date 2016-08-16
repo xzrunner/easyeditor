@@ -76,7 +76,7 @@ void TransToGif::Run(ee::Snapshoot& ss, const std::string& srcdir, const std::st
 			eanim::Symbol* anim = static_cast<eanim::Symbol*>(symbol);
 
 			int max_frame = anim->getMaxFrameIndex();
-			const sm::vec2& sz = symbol->GetSize().Size();
+			const sm::vec2& sz = symbol->GetBounding().Size();
 			int width = sz.x, height = sz.y;
 			AnimatedGifSaver saver(width, height);
 			for (int i = 0; i < max_frame; ++i)

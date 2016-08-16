@@ -19,11 +19,8 @@ int w_SpriteSelection_move(lua_State* L)
 	if (!t) return 0;
 	std::vector<Sprite*> sprites;
 	t->Traverse(FetchAllVisitor<Sprite>(sprites));
-	for (int i = 0, n = sprites.size(); i < n; ++i)
-	{
-		Sprite* s = sprites[i];
-		sm::vec2 pos = s->GetPosition() + sm::vec2(x, y);
-		s->SetTransform(pos, s->GetAngle());
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		sprites[i]->Translate(sm::vec2(x, y));
 	}
 	return 0;		
 }

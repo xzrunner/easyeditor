@@ -59,8 +59,8 @@ void Symbol::ReloadTexture() const
 		{
 			s2::AnimSymbol::Frame* frame = layer->frames[j];
 			for (int k = 0, l = frame->sprites.size(); k < l; ++k) {
-				ee::Sprite* spr = dynamic_cast<ee::Sprite*>(frame->sprites[k]);
-				spr->GetSymbol().ReloadTexture();
+				s2::Symbol* sym = frame->sprites[k]->GetSymbol();
+				dynamic_cast<ee::Symbol*>(sym)->ReloadTexture();
 			}
 		}
 	}
@@ -78,7 +78,7 @@ void Symbol::Traverse(ee::Visitor<ee::Sprite>& visitor)
 				ee::Sprite* spr = dynamic_cast<ee::Sprite*>(frame->sprites[k]);
 				bool next;
 				visitor.Visit(spr, next);
-				const_cast<ee::Symbol&>(spr->GetSymbol()).Traverse(visitor);
+				dynamic_cast<ee::Symbol*>(spr->GetSymbol())->Traverse(visitor);
 			}
 		}
 	}

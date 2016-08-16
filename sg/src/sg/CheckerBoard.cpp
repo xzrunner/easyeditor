@@ -34,7 +34,7 @@ void CheckerBoard::AddSprite(ee::Sprite* sprite)
 	int row, col;
 	m_stage->TransCoordsToGridPos(sprite->GetPosition(), row, col);
 
-	SymbolExt* info = static_cast<SymbolExt*>(sprite->GetSymbol().GetUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(sprite->GetSymbol()->GetUserData());
 	if (!info) {
 		return;
 	}
@@ -51,7 +51,7 @@ void CheckerBoard::AddSprite(ee::Sprite* sprite)
 
 void CheckerBoard::RemoveSprite(ee::Sprite* sprite)
 {
-	if (!sprite->GetSymbol().GetUserData()) {
+	if (!sprite->GetSymbol()->GetUserData()) {
 		return;
 	}
 
@@ -62,7 +62,7 @@ void CheckerBoard::RemoveSprite(ee::Sprite* sprite)
 	int row, col;
 	m_stage->TransCoordsToGridPos(itr->second, row, col);
 
-	SymbolExt* info = static_cast<SymbolExt*>(sprite->GetSymbol().GetUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(sprite->GetSymbol()->GetUserData());
 	if (!info) {
 		return;
 	}
@@ -88,7 +88,7 @@ bool CheckerBoard::IsValid(ee::Sprite* sprite) const
 	int row, col;
 	m_stage->TransCoordsToGridPos(sprite->GetPosition(), row, col);
 
-	SymbolExt* info = static_cast<SymbolExt*>(sprite->GetSymbol().GetUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(sprite->GetSymbol()->GetUserData());
 	if (!info) {
 		return false;
 	}
@@ -148,7 +148,7 @@ bool CheckerBoard::SetCachedPos(ee::Sprite* sprite) const
 	std::map<ee::Sprite*, sm::vec2>::const_iterator itr 
 		= m_map_removed.find(sprite);
 	if (itr != m_map_removed.end()) {
-		sprite->SetTransform(itr->second, sprite->GetAngle());
+		sprite->SetPosition(itr->second);
 		return true;
 	} else {
 		return false;
@@ -168,8 +168,8 @@ void CheckerBoard::ResetWall()
 			}
 
 			ee::Sprite* sprite = m_grid[i][j];
-			const ee::Symbol& symbol = sprite->GetSymbol();
-			std::string filepath = symbol.GetFilepath();
+			const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(sprite->GetSymbol());
+			std::string filepath = sym->GetFilepath();
 			int s = filepath.find("lv") + 2;
 			int e = filepath.find('_', s-1);
 			if (e != -1) {
@@ -191,11 +191,11 @@ void CheckerBoard::ResetWall()
 				filepath = filepath.insert(dot, "_1");
 			}
 
-			if (filepath == symbol.GetFilepath()) {
+			if (filepath == sym->GetFilepath()) {
 				continue;
 			}
 
-			SymbolExt* old = static_cast<SymbolExt*>(symbol.GetUserData());
+			SymbolExt* old = static_cast<SymbolExt*>(sym->GetUserData());
 			SymbolExt* info = new SymbolExt;
 			*info = *old;
 			info->wall_type = wall_type;

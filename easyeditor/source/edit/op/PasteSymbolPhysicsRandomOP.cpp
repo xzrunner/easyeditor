@@ -38,7 +38,8 @@ bool PasteSymbolPhysicsRandomOP::OnMouseLeftDown(int x, int y)
 			sprite->SetScale(sm::vec2(m_random_value.scale, m_random_value.scale));
 		}
 		if (m_random_value.angle != 0.0f) {
-			sprite->SetTransform(m_pos, m_random_value.angle);
+			sprite->SetPosition(m_pos);
+			sprite->SetAngle(m_random_value.angle);
 		}
 		IBody* body = BodyManager::Instance()->LoadBody(sprite);
 		if (body) {

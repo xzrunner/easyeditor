@@ -33,7 +33,7 @@ Scale9Data::Scale9Data(const Scale9Data& data)
 		for (int j = 0; j < 3; ++j) {
 			ee::Sprite* src = data.m_sprites[i][j];
 			if (src) {
-				m_sprites[i][j] = src->Clone();
+				m_sprites[i][j] = src->EEClone();
 			} else {
 				m_sprites[i][j] = NULL;
 			}
@@ -59,7 +59,7 @@ void Scale9Data::ReloadTexture() const
 	for (size_t i = 0; i < 3; ++i) {
 		for (size_t j = 0; j < 3; ++j) {
 			if (m_sprites[i][j]) {
-				m_sprites[i][j]->GetSymbol().ReloadTexture();
+				dynamic_cast<ee::Symbol*>(m_sprites[i][j]->GetSymbol())->ReloadTexture();
 			}
 		}
 	}
@@ -104,7 +104,7 @@ void Scale9Data::Compose(ee::Sprite* sprites[3][3], float width, float height)
 
 			ee::Sprite* src = sprites[i][j];
 			if (src) {
-				m_sprites[i][j] = src->Clone();
+				m_sprites[i][j] = src->EEClone();
 			} else {
 				m_sprites[i][j] = NULL;
 			}
@@ -227,11 +227,11 @@ void Scale9Data::ResizeScale9(Scale9Type type, ee::Sprite* const sprites[3][3],
 {
 	if (type == e_9Grid) 
 	{
-		const float w0 = sprites[0][0]->GetSymbol().GetBounding().Size().x,
-			        w2 = sprites[0][2]->GetSymbol().GetBounding().Size().x,
+		const float w0 = sprites[0][0]->GetSymbol()->GetBounding().Size().x,
+			        w2 = sprites[0][2]->GetSymbol()->GetBounding().Size().x,
 			        w1 = width - w0 - w2;
-		const float h0 = sprites[0][0]->GetSymbol().GetBounding().Size().y,
-			        h2 = sprites[0][2]->GetSymbol().GetBounding().Size().y,
+		const float h0 = sprites[0][0]->GetSymbol()->GetBounding().Size().y,
+			        h2 = sprites[0][2]->GetSymbol()->GetBounding().Size().y,
 			        h1 = height - h0 - h2;
 
 		ResizeSprite(sprites[0][0], sm::vec2(-w0*0.5f-w1*0.5f, -h0*0.5f-h1*0.5f), w0, h0);
@@ -248,11 +248,11 @@ void Scale9Data::ResizeScale9(Scale9Type type, ee::Sprite* const sprites[3][3],
 	}
 	else if (type == e_9GridHollow)
 	{
-		const float w0 = sprites[0][0]->GetSymbol().GetBounding().Size().x,
-			        w2 = sprites[0][2]->GetSymbol().GetBounding().Size().x,
+		const float w0 = sprites[0][0]->GetSymbol()->GetBounding().Size().x,
+			        w2 = sprites[0][2]->GetSymbol()->GetBounding().Size().x,
 			        w1 = width - w0 - w2;
-		const float h0 = sprites[0][0]->GetSymbol().GetBounding().Size().y,
-			        h2 = sprites[0][2]->GetSymbol().GetBounding().Size().y,
+		const float h0 = sprites[0][0]->GetSymbol()->GetBounding().Size().y,
+			        h2 = sprites[0][2]->GetSymbol()->GetBounding().Size().y,
 			        h1 = height - h0 - h2;
 
 		ResizeSprite(sprites[0][0], sm::vec2(-w0*0.5f-w1*0.5f, -h0*0.5f-h1*0.5f), w0, h0);
@@ -268,10 +268,10 @@ void Scale9Data::ResizeScale9(Scale9Type type, ee::Sprite* const sprites[3][3],
 	}
 	else if (type == e_6GridUpper)
 	{
-		const float w0 = sprites[2][0]->GetSymbol().GetBounding().Size().x,
-			        w2 = sprites[2][2]->GetSymbol().GetBounding().Size().x,
+		const float w0 = sprites[2][0]->GetSymbol()->GetBounding().Size().x,
+			        w2 = sprites[2][2]->GetSymbol()->GetBounding().Size().x,
 			        w1 = width - w0 - w2;
-		const float h2 = sprites[2][0]->GetSymbol().GetBounding().Size().y,
+		const float h2 = sprites[2][0]->GetSymbol()->GetBounding().Size().y,
 			        h1 = height - h2;
 
 		ResizeSprite(sprites[1][0], sm::vec2(-w0*0.5f-w1*0.5f, 0.0f), w0, h1);
@@ -284,8 +284,8 @@ void Scale9Data::ResizeScale9(Scale9Type type, ee::Sprite* const sprites[3][3],
 	}
 	else if (type == e_3GridHor)
 	{
-		const float w0 = sprites[1][0]->GetSymbol().GetBounding().Size().x,
-			        w2 = sprites[1][2]->GetSymbol().GetBounding().Size().x,
+		const float w0 = sprites[1][0]->GetSymbol()->GetBounding().Size().x,
+			        w2 = sprites[1][2]->GetSymbol()->GetBounding().Size().x,
 			        w1 = width - w0 - w2; 
 
 		ResizeSprite(sprites[1][0], sm::vec2(-w0*0.5f-w1*0.5f, 0.0f), w0, height);
@@ -294,8 +294,8 @@ void Scale9Data::ResizeScale9(Scale9Type type, ee::Sprite* const sprites[3][3],
 	}
 	else if (type == e_3GridVer)
 	{
-		const float h0 = sprites[0][1]->GetSymbol().GetBounding().Size().y,
-			        h2 = sprites[2][1]->GetSymbol().GetBounding().Size().y,
+		const float h0 = sprites[0][1]->GetSymbol()->GetBounding().Size().y,
+			        h2 = sprites[2][1]->GetSymbol()->GetBounding().Size().y,
 			        h1 = height - h0 - h2;
 
 		ResizeSprite(sprites[0][1], sm::vec2(0.0f, -h0*0.5f-h1*0.5f), width, h0);
@@ -314,12 +314,12 @@ void Scale9Data::ResizeSprite(ee::Sprite* sprite, const sm::vec2& center,
 		height = 1;
 	}
 
-	const ee::ImageSymbol& symbol = dynamic_cast<const ee::ImageSymbol&>(sprite->GetSymbol());
-	int w = symbol.GetImage()->GetOriginWidth(),
-		h = symbol.GetImage()->GetOriginHeight();
+	const ee::ImageSymbol* symbol = dynamic_cast<const ee::ImageSymbol*>(sprite->GetSymbol());
+	int w = symbol->GetImage()->GetOriginWidth(),
+		h = symbol->GetImage()->GetOriginHeight();
 	assert(w != 0 && h != 0);
 
-	sprite->SetTransform(center, sprite->GetAngle());
+	sprite->SetPosition(center);
 	const float times = sprite->GetAngle() / SM_PI;
 	if (times - (int)(times + 0.01f) < 0.3f)
 		sprite->SetScale(sm::vec2(width / w, height / h));

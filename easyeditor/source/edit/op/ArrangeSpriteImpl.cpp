@@ -31,6 +31,7 @@
 
 #include <sprite2/RenderColor.h>
 #include <sprite2/S2_RVG.h>
+#include <sprite2/BoundingBox.h>
 
 namespace ee
 {
@@ -385,7 +386,7 @@ void ArrangeSpriteImpl::OnDraw(const Camera& cam) const
 		m_selection->Traverse(FetchAllVisitor<Sprite>(sprites));
 		selected = sprites[0];
 
-		sm::vec2 sz = selected->GetRect().Size();
+		sm::vec2 sz = selected->GetBounding()->GetSize().Size();
 		float max_e = std::max(sz.x, sz.y);
 		if (max_e / cam.GetScale() < 100) {
 			m_ctrl_node_radius = 0;
@@ -512,7 +513,8 @@ void ArrangeSpriteImpl::OnSpaceKeyDown()
 		comb->Insert(new ShearSpriteAOP(sprite, sm::vec2(0, 0), sprite->GetShear()));
 		//comb->Insert(new OffsetSpriteAOP(sprite, sm::vec2(0, 0), sprite->getOffset()));
 
-		sprite->SetTransform(sm::vec2(0, 0), 0);
+		sprite->SetPosition(sm::vec2(0, 0));
+		sprite->SetAngle(0);
 		sprite->SetScale(sm::vec2(1, 1));
 		sprite->SetShear(sm::vec2(0, 0));
 		//sprite->setOffset(sm::vec2(0, 0));
@@ -654,7 +656,7 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	{
 		for (int i = 0, n = sprites.size(); i < n; ++i) {
 			Sprite* spr = sprites[i];
-			spr->SetMirror(!spr->GetMirror().x, spr->GetMirror().y);
+			spr->SetMirror(sm::bvec2(!spr->GetMirror().x, spr->GetMirror().y));
 		}
 		SetCanvasDirtySJ::Instance()->SetDirty();
 		return true;
@@ -664,7 +666,7 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	{
 		for (int i = 0, n = sprites.size(); i < n; ++i) {
 			Sprite* spr = sprites[i];
-			spr->SetMirror(spr->GetMirror().x, !spr->GetMirror().y);
+			spr->SetMirror(sm::bvec2(spr->GetMirror().x, !spr->GetMirror().y));
 		}
 		SetCanvasDirtySJ::Instance()->SetDirty();
 		return true;
@@ -673,20 +675,20 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	else if (keycode == 'M') 
 	{
 		if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_RGB) {
-			RGBColorSettingDlg dlg(m_wnd, NULL, sprites[0]->GetColor().mul, pos);
+			RGBColorSettingDlg dlg(m_wnd, NULL, sprites[0]->Color().mul, pos);
 			if (dlg.ShowModal() == wxID_OK) {
 				s2::Color col = dlg.GetColor();
 				for (int i = 0, n = sprites.size(); i < n; ++i) {
-					sprites[i]->GetColor().mul = col;
+					sprites[i]->Color().mul = col;
 				}
 				SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		} else {
-			HSLColorSettingDlg dlg(m_wnd, NULL, sprites[0]->GetColor().mul, pos);
+			HSLColorSettingDlg dlg(m_wnd, NULL, sprites[0]->Color().mul, pos);
 			if (dlg.ShowModal() == wxID_OK) {
 				s2::Color col = dlg.GetColor();
 				for (int i = 0, n = sprites.size(); i < n; ++i) {
-					sprites[i]->GetColor().mul = col;
+					sprites[i]->Color().mul = col;
 				}
 				SetCanvasDirtySJ::Instance()->SetDirty();
 			}
@@ -697,20 +699,20 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	else if (keycode == 'A') 
 	{
 		if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_RGB) {
-			RGBColorSettingDlg dlg(m_wnd, NULL, sprites[0]->GetColor().add, pos);
+			RGBColorSettingDlg dlg(m_wnd, NULL, sprites[0]->Color().add, pos);
 			if (dlg.ShowModal() == wxID_OK) {
 				s2::Color col = dlg.GetColor();
 				for (int i = 0, n = sprites.size(); i < n; ++i) {
-					sprites[i]->GetColor().add = col;
+					sprites[i]->Color().add = col;
 				}
 				SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		} else {
-			HSLColorSettingDlg dlg(m_wnd, NULL, sprites[0]->GetColor().add, pos);
+			HSLColorSettingDlg dlg(m_wnd, NULL, sprites[0]->Color().add, pos);
 			if (dlg.ShowModal() == wxID_OK) {
 				s2::Color col = dlg.GetColor();
 				for (int i = 0, n = sprites.size(); i < n; ++i) {
-					sprites[i]->GetColor().add = col;
+					sprites[i]->Color().add = col;
 				}
 				SetCanvasDirtySJ::Instance()->SetDirty();
 			}
@@ -720,17 +722,17 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	// alpha
 	else if (keycode == 'T') 
 	{
-		AlphaSettingDlg dlg(m_wnd, sprites[0]->GetColor().mul, pos);
-		float old_alpha = sprites[0]->GetColor().mul.a;
+		AlphaSettingDlg dlg(m_wnd, sprites[0]->Color().mul, pos);
+		float old_alpha = sprites[0]->Color().mul.a;
 		int state = dlg.ShowModal();
 		if (state == wxID_OK) {
 			float alpha = dlg.GetColor().a;
 			for (int i = 0, n = sprites.size(); i < n; ++i) {
-				sprites[i]->GetColor().mul.a = alpha;
+				sprites[i]->Color().mul.a = alpha;
 			}
 			SetCanvasDirtySJ::Instance()->SetDirty();
 		} else if (state == wxID_CANCEL) {
-			sprites[0]->GetColor().mul.a = old_alpha;
+			sprites[0]->Color().mul.a = old_alpha;
 			SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		return true;

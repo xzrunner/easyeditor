@@ -2,7 +2,7 @@
 #include "Symbol.h"
 
 #include <ee/ObjectVector.h>
-#include <ee/ee::Sprite.h>
+#include <ee/Sprite.h>
 
 #include <sprite2/S2_Sprite.h>
 
@@ -71,15 +71,25 @@ bool SymbolContainer::ResetOrderMost(const ee::Sprite* obj, bool up)
 
 bool SymbolContainer::Sort(std::vector<ee::Sprite*>& sprites)
 {
-	return m_symbol->Sort(sprites);
+	std::vector<s2::Sprite*> s2_sprites;
+	s2_sprites.reserve(sprites.size());
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		s2_sprites.push_back(sprites[i]);
+	}
+	bool ret = m_symbol->Sort(s2_sprites);
+	sprites.clear();
+	for (int i = 0, n = s2_sprites.size(); i < n; ++i) {
+		sprites.push_back(dynamic_cast<ee::Sprite*>(s2_sprites[i]));
+	}
+	return ret;
 }
 
 void SymbolContainer::GetSprites(std::vector<ee::Sprite*>& sprites) const
 {
-	const std::vector<s2::ee::Sprite*>& children = m_symbol->GetChildren();
+	const std::vector<s2::Sprite*>& children = m_symbol->GetChildren();
 	sprites.reserve(children.size());
 	for (int i = 0, n = children.size(); i < n; ++i) {
-		ee::Sprite* child = static_cast<ee::Sprite*>(children[i]->GetUD());
+		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 		sprites.push_back(child);
 	}
 }

@@ -18,12 +18,12 @@ void DirectlyArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites)
 	for (size_t i = 0, n = sorted.size(); i < n; ++i)
 	{
 		ee::ImageSprite* sprite = sorted[i];
-		const float width = sprite->GetSymbol().GetBounding().Width() * s + p,
-			height = sprite->GetSymbol().GetBounding().Height() * s + p;
+		const float width = sprite->GetSymbol()->GetBounding().Width() * s + p,
+			height = sprite->GetSymbol()->GetBounding().Height() * s + p;
 
 		if (sx + width <= Context::Instance()->width)
 		{
-			sprite->SetTransform(sm::vec2(sx + width * 0.5f, sy + height * 0.5f), sprite->GetAngle());
+			sprite->SetPosition(sm::vec2(sx + width * 0.5f, sy + height * 0.5f));
 
 			sx += width;
 			if (height > hMax)
@@ -34,7 +34,7 @@ void DirectlyArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites)
 			sx = 0;
 			sy += hMax;
 			hMax = height;
-			sprite->SetTransform(sm::vec2(sx + width * 0.5f, sy + height * 0.5f), sprite->GetAngle());
+			sprite->SetPosition(sm::vec2(sx + width * 0.5f, sy + height * 0.5f));
 			sx = width;
 		}
 	}

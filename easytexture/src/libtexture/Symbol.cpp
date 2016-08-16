@@ -15,17 +15,6 @@ Symbol::Symbol()
 {
 }
 
-Symbol::Symbol(const Symbol& s)
-	: ee::Symbol(s)
-{
-	m_shapes.reserve(s.m_shapes.size());
-	for (int i = 0, n = s.m_shapes.size(); i < n; ++i) {
-		ee::Shape* shape = s.m_shapes[i];
-		m_shapes.push_back(shape);
-		shape->AddReference();
-	}
-}
-
 Symbol::~Symbol()
 {
 	Clear();

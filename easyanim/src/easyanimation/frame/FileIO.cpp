@@ -190,7 +190,7 @@ void FileIO::StoreAsGif(const std::string& src, const std::string& dst)
 	eanim::Symbol* anim = static_cast<eanim::Symbol*>(symbol);
 
 	int max_frame = anim->getMaxFrameIndex();
-	sm::vec2 sz = symbol->GetSize().Size();
+	sm::vec2 sz = symbol->GetBounding().Size();
 	AnimatedGifSaver saver(sz.x, sz.y);
 	for (int i = 0; i < max_frame; ++i)
 	{
@@ -456,7 +456,7 @@ ee::Sprite* FileIO::LoadActor(rapidxml::xml_node<>* actorNode,
 	ee::StringHelper::FromString(sx, x);
 	ee::StringHelper::FromString(sy, y);
 
-	sprite->SetTransform(sm::vec2(float(tx+x), float(ty+y)), 0);
+	sprite->SetPosition(sm::vec2(float(tx+x), float(ty+y)));
 
 	return sprite;
 }
@@ -504,22 +504,22 @@ Json::Value FileIO::StoreActor(const ee::Sprite* sprite, const std::string& dir,
 {
 	Json::Value value;
 
-	const ee::Symbol& symbol = sprite->GetSymbol();
+	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(sprite->GetSymbol());
 	// filepath
 	std::string relative_path = ee::FileHelper::GetRelativePath(dir, 
-		symbol.GetFilepath());
+		sym->GetFilepath());
 	if (single) {
 		value["filepath"] = relative_path;
 	} else {
 		if (DataMgr::Instance()->GetTemplate().ContainPath(relative_path)) {
 			value["filepath"] = ee::FileHelper::GetFilenameWithExtension(
-				symbol.GetFilepath());
+				sym->GetFilepath());
 		} else {
 			value["filepath"] = relative_path;
 		}
 	}
 	// filepaths
-	const std::set<std::string>& filepaths = symbol.GetFilepaths();
+	const std::set<std::string>& filepaths = sym->GetFilepaths();
 	std::set<std::string>::const_iterator itr = filepaths.begin();
 	for (int i = 0; itr != filepaths.end(); ++itr, ++i) {
 		value["filepaths"][i] = *itr;

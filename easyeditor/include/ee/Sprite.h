@@ -83,9 +83,6 @@ public:
 		m_observer = observer;
 	}
 
-protected:
-	virtual void UpdateBounding() const;
-
 private:
 	/************************************************************************/
 	/* geometry                                                             */

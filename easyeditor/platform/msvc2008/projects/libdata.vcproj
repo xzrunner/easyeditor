@@ -205,6 +205,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\source\data\primitive\RectQueryVisitor.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\include\ee\RectQueryVisitor.h"
 					>
 				</File>
@@ -646,14 +650,6 @@
 				</File>
 				<File
 					RelativePath="..\..\..\include\ee\Sprite.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\source\data\sprite\sprite_utility.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\ee\sprite_utility.h"
 					>
 				</File>
 				<File

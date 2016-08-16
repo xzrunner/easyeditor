@@ -48,7 +48,7 @@ void EditDialog::InitEditOP(ee::Sprite* edited)
 {
 	ee::EditOP* op = NULL;
 
-	const Icon* icon = static_cast<Sprite*>(edited)->GetSymbol().GetIcon();
+	const Icon* icon = dynamic_cast<Symbol*>(edited->GetSymbol())->GetIcon();
 	IconType type = get_icon_type(icon->GetIconDesc());
 	switch (type)
 	{

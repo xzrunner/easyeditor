@@ -1,6 +1,7 @@
 #include "OpenSymbolDialog.h"
 #include "EditDialog.h"
 #include "Sprite.h"
+#include "Symbol.h"
 #include "OpenSymbolLsn.h"
 
 #include <easyscale9.h>
@@ -36,7 +37,7 @@ void OpenSymbolDialog::Open(ee::Sprite* spr, ee::CrossGuides* guides)
 		return;
 	}
 
-	if (spr->GetSymbol().GetFilepath().find("[gen].json") != std::string::npos) {
+	if (dynamic_cast<ee::Symbol*>(spr->GetSymbol())->GetFilepath().find("[gen].json") != std::string::npos) {
 		wxMessageBox("禁止编辑自动生成的文件", "warning", wxOK | wxICON_INFORMATION, m_wnd);
 		return;
 	}
@@ -54,9 +55,8 @@ void OpenSymbolDialog::Open(ee::Sprite* spr, ee::CrossGuides* guides)
 
 	if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(spr))
 	{
- 		Symbol& symbol = const_cast<Symbol&>(complex->GetSymbol());
-
- 		EditDialog dlg(m_wnd, &symbol, m_stage->GetCanvas()->GetGLContext(), guides);
+		ecomplex::Symbol* symbol = dynamic_cast<ecomplex::Symbol*>(complex->GetSymbol());
+ 		EditDialog dlg(m_wnd, symbol, m_stage->GetCanvas()->GetGLContext(), guides);
  		dlg.ShowModal();
 
 		//////////////////////////////////////////////////////////////////////////
@@ -66,13 +66,14 @@ void OpenSymbolDialog::Open(ee::Sprite* spr, ee::CrossGuides* guides)
 	}
 	else if (eanim::Sprite* anim = dynamic_cast<eanim::Sprite*>(spr))
 	{
- 		eanim::PreviewDialog dlg(m_wnd, &anim->GetSymbol(), m_stage->GetCanvas()->GetGLContext());
+		const eanim::Symbol* symbol = dynamic_cast<const eanim::Symbol*>(anim->GetSymbol());
+		eanim::PreviewDialog dlg(m_wnd, symbol, m_stage->GetCanvas()->GetGLContext());
  		dlg.ShowModal();
 	}
 	else if (escale9::Sprite* patch9 = dynamic_cast<escale9::Sprite*>(spr))
  	{
-		escale9::Symbol& symbol = const_cast<escale9::Symbol&>(patch9->GetSymbol());
-  		escale9::EditDialog dlg(m_wnd, &symbol, m_stage->GetCanvas()->GetGLContext());
+		escale9::Symbol* symbol = dynamic_cast<escale9::Symbol*>(patch9->GetSymbol());
+  		escale9::EditDialog dlg(m_wnd, symbol, m_stage->GetCanvas()->GetGLContext());
   		dlg.ShowModal();
  	}
 	else if (emesh::Sprite* sprite = dynamic_cast<emesh::Sprite*>(spr))

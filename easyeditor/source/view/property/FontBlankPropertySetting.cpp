@@ -50,13 +50,13 @@ void FontBlankPropertySetting::OnPropertyGridChange(const std::string& name, con
 		SplitString2Double(value, &w, &h);
 		sprite->width = w;
 		sprite->height = h;
-		sprite->BuildBounding();
+		sprite->UpdateBounding();
 	} else if (name == wxT("LabelSize.Width")) {
 		sprite->width = wxANY_AS(value, float);
-		sprite->BuildBounding();
+		sprite->UpdateBounding();
 	} else if (name == wxT("LabelSize.Height")) {
 		sprite->height = wxANY_AS(value, float);
-		sprite->BuildBounding();
+		sprite->UpdateBounding();
 	} else if (name == wxT("Filename")) {
 		std::string str = wxANY_AS(value, wxString);
 		sprite->LoadFont(str);
@@ -103,7 +103,7 @@ void FontBlankPropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->Append(new wxBoolProperty(wxT("Edge"), wxPG_LABEL, spr->has_edge));
 	pg->SetPropertyAttribute("Edge", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
-	wxColour col = wxColour(spr->GetColor().add.r, spr->GetColor().add.g, spr->GetColor().add.b, spr->GetColor().add.a);
+	wxColour col = wxColour(spr->Color().add.r, spr->Color().add.g, spr->Color().add.b, spr->Color().add.a);
 	pg->Append(new wxColourProperty(wxT("FontColor"), wxPG_LABEL, col));
 	pg->SetPropertyAttribute("FontColor", "HasAlpha", true);
 

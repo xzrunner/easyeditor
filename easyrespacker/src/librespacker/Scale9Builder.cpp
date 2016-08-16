@@ -53,7 +53,7 @@ const IPackNode* Scale9Builder::Create(const escale9::Sprite* spr)
 	val.w = w;
 	val.h = h;
 	val.node = node;
-	m_map_data.insert(std::make_pair(spr->GetSymbol(), val));
+	m_map_data.insert(std::make_pair(dynamic_cast<const escale9::Symbol*>(spr->GetSymbol()), val));
 	return node;
 }
 
@@ -62,7 +62,7 @@ const IPackNode* Scale9Builder::Query(const escale9::Sprite* spr) const
 	float w, h;
 	spr->GetSize(w, h);
 
-	const escale9::Symbol* key = spr->GetSymbol();
+	const escale9::Symbol* key = dynamic_cast<const escale9::Symbol*>(spr->GetSymbol());
 	std::multimap<const escale9::Symbol*, Value>::const_iterator 
 		itr_s = m_map_data.lower_bound(key),
 		itr_e = m_map_data.upper_bound(key),
@@ -119,7 +119,8 @@ void Scale9Builder::Load(const escale9::Sprite* spr, PackPicture* pic)
 			ImageBuilder::LoadPictureQuad(image, quad);
 			pic->quads.push_back(quad);
 		} else {
-			throw ee::Exception("PackPicture::LoadScale9 unknown spr type, filepath: %s", image->GetSymbol().GetFilepath().c_str());
+			throw ee::Exception("PackPicture::LoadScale9 unknown spr type, filepath: %s", 
+				dynamic_cast<ee::Symbol*>(image->GetSymbol())->GetFilepath().c_str());
 		}
 	}
 }

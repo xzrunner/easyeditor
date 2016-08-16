@@ -42,7 +42,7 @@ void KeyFrame::CopyFromOther(const KeyFrame* src)
 	// sprites
 	for (size_t i = 0, n = src->m_sprites.size(); i < n; ++i)
 	{
-		ee::Sprite* s = src->m_sprites[i]->Clone();
+		ee::Sprite* s = src->m_sprites[i]->EEClone();
 		set_sprite_user_data(s, m_layer, this);
 		m_sprites.push_back(s);
 

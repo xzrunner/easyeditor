@@ -18,7 +18,7 @@ ee::Sprite* PictureToSpr::Trans(const erespacker::PackPicture* pic)
 		for (int i = 0, n = pic->quads.size(); i < n; ++i) {
 			complex->Add(TransQuad(&pic->quads[i]));
 		}
-		complex->InitBounding();
+//		complex->InitBounding();
 		return new Sprite(complex);
 	} else {
 		return NULL;
@@ -43,7 +43,7 @@ ee::Sprite* PictureToSpr::TransQuad(const erespacker::PackPicture::Quad* quad)
 	eicon::Symbol* symbol = new eicon::Symbol;
 	symbol->SetIcon(icon);
 	ee::Sprite* ret = new eicon::Sprite(symbol);
-	ret->BuildBounding();
+	ret->UpdateBounding();
 	return ret;
 }
 

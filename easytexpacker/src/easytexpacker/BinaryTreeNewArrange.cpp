@@ -46,7 +46,7 @@ void BinaryTreeNewArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites)
 			ee::ImageSprite* s = sorted[i];
 			bool success = Insert(*s);
 			if (!success) {
-				sm::rect r = s->GetSymbol().GetBounding();
+				sm::rect r = s->GetSymbol()->GetBounding();
 				float w = r.Width() * scale + PADDING*2;
 				float h = r.Height() * scale + PADDING*2;
 				if ((w > tot_w || h > tot_h) &&
@@ -54,7 +54,8 @@ void BinaryTreeNewArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites)
 					sm::vec2 pos;
 					pos.x = tot_w * INVALID_SPRITE_OFFSET_FACTOR;
 					pos.y = tot_h * INVALID_SPRITE_OFFSET_FACTOR;
-					s->SetTransform(pos, 0);
+					s->SetPosition(pos);
+					s->SetAngle(0);
 				} else {
 					remain.push_back(s);
 				}
@@ -86,13 +87,13 @@ bool BinaryTreeNewArrange::
 Insert(ee::ImageSprite& img) const
 {
 	std::map<std::string, ee::TPNode*>::const_iterator itr 
-		= m_map_images.find(img.GetSymbol().GetFilepath());
+		= m_map_images.find(img.GetSymbol()->GetFilepath());
 	if (itr != m_map_images.end()) {
 		return false;
 	}
 
 	ee::TPNode* n = NULL;
-	ee::Image* image = img.GetSymbol().GetImage();
+	ee::Image* image = img.GetSymbol()->GetImage();
 	int w = image->GetClippedWidth(),
 		h = image->GetClippedHeight();
 	float scale = 1.0f;
@@ -108,8 +109,9 @@ Insert(ee::ImageSprite& img) const
 		sm::vec2 pos;
 		pos.x = n->GetCenterX();
 		pos.y = n->GetCenterY();
+		img.SetPosition(pos);
 		float angle = n->IsRotated() ? SM_PI*0.5f : 0;
-		img.SetTransform(pos, angle);
+		img.SetAngle(angle);
 		return true;
 	}
 

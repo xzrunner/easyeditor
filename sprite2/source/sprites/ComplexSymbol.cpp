@@ -1,5 +1,6 @@
 #include "ComplexSymbol.h"
 #include "S2_Sprite.h"
+#include "BoundingBox.h"
 
 #include <map>
 

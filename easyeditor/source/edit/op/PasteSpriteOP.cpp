@@ -188,8 +188,8 @@ InsertToSpritesImpl(const sm::vec2& pos, bool isHorMirror, bool isVerMirror)
 
 //		sprites_impl->insertSprite(sprite->getSymbol(), fixed + pos);
 
-		Sprite* newOne = sprite->Clone();
-		newOne->SetTransform(fixed + pos, newOne->GetAngle());
+		Sprite* newOne = sprite->EEClone();
+		newOne->SetPosition(fixed + pos);
 		InsertSpriteSJ::Instance()->Insert(newOne);
 		newOne->RemoveReference();
 	}

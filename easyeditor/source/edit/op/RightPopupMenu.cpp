@@ -92,7 +92,7 @@ void RightPopupMenu::CreateSelectMenu(wxMenu& menu)
 	for (int i = 0; i < sz; ++i) {
 		Sprite* spr = m_selected_sprs[i];
 		m_parent->Bind(wxEVT_COMMAND_MENU_SELECTED, &EditPanelImpl::OnRightPopupMenu, m_stage, MENU_MULTI_SELECTED + i);
-		std::string name = FileHelper::GetFilename(spr->GetSymbol().GetFilepath());
+		std::string name = FileHelper::GetFilename(dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath());
 		menu.Append(MENU_MULTI_SELECTED + i, name);
 	}
 
@@ -216,7 +216,7 @@ void RightPopupMenu::HoriMirror()
 	bool dirty = false;
 	for (size_t i = 0, n = m_edited_sprs.size(); i < n; ++i) {
 		Sprite* spr = m_edited_sprs[i];
-		spr->SetMirror(!spr->GetMirror().x, spr->GetMirror().y);
+		spr->SetMirror(sm::bvec2(!spr->GetMirror().x, spr->GetMirror().y));
 		dirty = true;
 	}
 	if (dirty) {
@@ -229,7 +229,7 @@ void RightPopupMenu::VertMirror()
 	bool dirty = false;
 	for (size_t i = 0, n = m_edited_sprs.size(); i < n; ++i) {
 		Sprite* spr = m_edited_sprs[i];
-		spr->SetMirror(spr->GetMirror().x, !spr->GetMirror().y);
+		spr->SetMirror(sm::bvec2(spr->GetMirror().x, !spr->GetMirror().y));
 		dirty = true;
 	}
 	if (dirty) {
@@ -250,14 +250,14 @@ void RightPopupMenu::SelectSame()
 	std::vector<Sprite*> selected;
 	m_selection->Traverse(FetchAllVisitor<Sprite>(selected));
 	assert(selected.size() == 1);
- 	std::string filepath = selected[0]->GetSymbol().GetFilepath();
+	std::string filepath = dynamic_cast<const ee::Symbol*>(selected[0]->GetSymbol())->GetFilepath();
 
 	m_selection->Clear();
 	std::vector<Sprite*> sprites;
 	m_sprites_impl->TraverseSprites(FetchAllVisitor<Sprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		Sprite* spr = sprites[i];
-		if (spr->GetSymbol().GetFilepath() == filepath) {
+		if (dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath() == filepath) {
 			m_selection->Add(spr);
 		}
 	}

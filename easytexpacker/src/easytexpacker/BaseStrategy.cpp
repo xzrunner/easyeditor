@@ -55,8 +55,8 @@ bool BaseStrategy::SpriteCmp::IsAreaLess(const ee::ImageSprite* s0, const ee::Im
 	const float s = Context::Instance()->scale,
 		p = Context::Instance()->padding;
 
-	return (s0->GetSymbol().GetBounding().Width() * s + p) * (s0->GetSymbol().GetBounding().Height() * s + p)
-		<= (s1->GetSymbol().GetBounding().Width() * s + p) * (s1->GetSymbol().GetBounding().Height() * s + p);
+	return (s0->GetSymbol()->GetBounding().Width() * s + p) * (s0->GetSymbol()->GetBounding().Height() * s + p)
+		<= (s1->GetSymbol()->GetBounding().Width() * s + p) * (s1->GetSymbol()->GetBounding().Height() * s + p);
 }
 
 bool BaseStrategy::SpriteCmp::IsEdgeLess(const ee::ImageSprite* s0, const ee::ImageSprite* s1) const
@@ -64,8 +64,8 @@ bool BaseStrategy::SpriteCmp::IsEdgeLess(const ee::ImageSprite* s0, const ee::Im
 	const float s = Context::Instance()->scale,
 		p = Context::Instance()->padding;
 
-	return std::max((s0->GetSymbol().GetBounding().Width() * s + p), (s0->GetSymbol().GetBounding().Height() * s + p))
-		<= std::max((s1->GetSymbol().GetBounding().Width() * s + p), (s1->GetSymbol().GetBounding().Height() * s + p));
+	return std::max((s0->GetSymbol()->GetBounding().Width() * s + p), (s0->GetSymbol()->GetBounding().Height() * s + p))
+		<= std::max((s1->GetSymbol()->GetBounding().Width() * s + p), (s1->GetSymbol()->GetBounding().Height() * s + p));
 }
 
 bool BaseStrategy::SpriteCmp::IsTotEdgesLess(const ee::ImageSprite* s0, const ee::ImageSprite* s1) const
@@ -73,8 +73,8 @@ bool BaseStrategy::SpriteCmp::IsTotEdgesLess(const ee::ImageSprite* s0, const ee
 	const float s = Context::Instance()->scale,
 		p = Context::Instance()->padding;
 
-	return (s0->GetSymbol().GetBounding().Width() * s + p) + (s0->GetSymbol().GetBounding().Height() * s + p)
-		<= (s1->GetSymbol().GetBounding().Width() * s + p) + (s1->GetSymbol().GetBounding().Height() * s + p);
+	return (s0->GetSymbol()->GetBounding().Width() * s + p) + (s0->GetSymbol()->GetBounding().Height() * s + p)
+		<= (s1->GetSymbol()->GetBounding().Width() * s + p) + (s1->GetSymbol()->GetBounding().Height() * s + p);
 }
 
 }

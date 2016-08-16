@@ -15,7 +15,7 @@ Sprite* luax_checksprite(lua_State* L, int idx)
 int w_Sprite_clone(lua_State* L)
 {
 	Sprite* t = luax_checksprite(L, 1);
-	Sprite* clone = t->Clone();
+	Sprite* clone = t->EEClone();
 	luax_newtype(L, "Sprite", SPRITE_DATA_T, (void*)clone);
 	return 1;
 }
@@ -34,7 +34,7 @@ int w_Sprite_setPosition(lua_State* L)
 	Sprite* t = luax_checksprite(L, 1);
 	float x = (float)luaL_checknumber(L, 2);
 	float y = (float)luaL_checknumber(L, 3);
-	t->SetTransform(sm::vec2(x, y), t->GetAngle());
+	t->SetPosition(sm::vec2(x, y));
 	return 0;
 }
 
@@ -43,21 +43,21 @@ int w_Sprite_move(lua_State* L)
 	Sprite* t = luax_checksprite(L, 1);
 	float x = (float)luaL_checknumber(L, 2);
 	float y = (float)luaL_checknumber(L, 3);
-	t->SetTransform(t->GetPosition() + sm::vec2(x, y), t->GetAngle());
+	t->Translate(sm::vec2(x, y));
 	return 0;
 }
 
 int w_Sprite_width(lua_State* L)
 {
 	Sprite* t = luax_checksprite(L, 1);
-	lua_pushnumber(L, t->GetSymbol().GetBounding().Size().x);
+	lua_pushnumber(L, t->GetSymbol()->GetBounding().Size().x);
 	return 1;
 }
 
 int w_Sprite_height(lua_State* L)
 {
 	Sprite* t = luax_checksprite(L, 1);
-	lua_pushnumber(L, t->GetSymbol().GetBounding().Size().y);
+	lua_pushnumber(L, t->GetSymbol()->GetBounding().Size().y);
 	return 1;
 }
 

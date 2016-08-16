@@ -159,8 +159,8 @@ void StagePanel::loadBody(ee::Sprite* sprite, Body& body)
 	Fixture* fixture = new Fixture;
 	fixture->m_body = &body;
 
-	const float width = sprite->GetSymbol().GetBounding().Width(),
-		height = sprite->GetSymbol().GetBounding().Height();
+	const float width = sprite->GetSymbol()->GetBounding().Width(),
+		height = sprite->GetSymbol()->GetBounding().Height();
 	fixture->m_shape = new eshape::RectShape(sm::vec2(0, 0), width * 0.5f, height * 0.5f);
 
 	body.m_fixtures.push_back(fixture);
@@ -169,7 +169,7 @@ void StagePanel::loadBody(ee::Sprite* sprite, Body& body)
 void StagePanel::Insert(ee::Sprite* spr)
 {
 	std::string filepath = ee::FileHelper::GetFilenameAddTag(
-		spr->GetSymbol().GetFilepath(), eshape::FILE_TAG, "json");
+		spr->GetSymbol()->GetFilepath(), eshape::FILE_TAG, "json");
 	if (!ee::FileHelper::IsFileExist(filepath)) {
 		return;
 	}

@@ -61,11 +61,12 @@ void BinaryTreeArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites)
 			{
 				for (size_t j = i; j < n; ++j)
 				{
-					sm::rect r = sorted[j]->GetSymbol().GetBounding();
+					sm::rect r = sorted[j]->GetSymbol()->GetBounding();
 					sm::vec2 pos;
 					pos.x = -SPACING - r.Width() * 0.5f - r.CenterX();
 					pos.y = -SPACING - r.Height() * 0.5f - r.CenterY();
-					sorted[j]->SetTransform(pos, 0);
+					sorted[j]->SetPosition(pos);
+					sorted[j]->SetAngle(0);
 				}
 				break;
 			}
@@ -109,8 +110,8 @@ BinaryTreeArrange::Node::Insert(ee::ImageSprite* sprite, int flag)
 
 		const float s = Context::Instance()->scale,
 			p = Context::Instance()->padding * 2;
-		float width = sprite->GetSymbol().GetBounding().Width() * s + p,
-			height = sprite->GetSymbol().GetBounding().Height() * s + p;
+		float width = sprite->GetSymbol()->GetBounding().Width() * s + p,
+			height = sprite->GetSymbol()->GetBounding().Height() * s + p;
 		if (sprite->GetAngle() != 0)
 		{
 			float tmp = width;
@@ -138,7 +139,7 @@ BinaryTreeArrange::Node::Insert(ee::ImageSprite* sprite, int flag)
 		sm::vec2 center;
 		center.x = child[0]->rc.xmin + width * 0.5f;
 		center.y = child[0]->rc.ymin + height * 0.5f;
-		sprite->SetTransform(center, sprite->GetAngle());
+		sprite->SetPosition(center);
 
 		if (child[0]->rc.Width() > width)
 		{

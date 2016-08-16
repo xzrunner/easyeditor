@@ -19,12 +19,10 @@ Sprite* GroupHelper::Group(const std::vector<ee::Sprite*>& sprites)
 		sym->Add(sprites[i]);
 	}
 
-	sym->InitBounding();
-	sm::vec2 c = sym->GetSize().Center();
+	sm::vec2 c = sym->GetBounding().Center();
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		sprites[i]->Translate(-c);
 	}
-	sym->InitBounding();
 
 	Sprite* spr = new Sprite(sym);
 	spr->Translate(c);
@@ -35,7 +33,7 @@ Sprite* GroupHelper::Group(const std::vector<ee::Sprite*>& sprites)
 
 void GroupHelper::BreakUp(ee::Sprite* group, std::vector<ee::Sprite*>& sprites)
 {
-	Symbol* comp = &dynamic_cast<Symbol&>(const_cast<ee::Symbol&>(group->GetSymbol()));
+	Symbol* comp = dynamic_cast<Symbol*>(group->GetSymbol());
 	assert(comp);
 
 	const sm::vec2& pos = group->GetPosition();
@@ -44,7 +42,7 @@ void GroupHelper::BreakUp(ee::Sprite* group, std::vector<ee::Sprite*>& sprites)
 	const std::vector<s2::Sprite*>& children = comp->GetChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) 
 	{
-		ee::Sprite* spr = static_cast<ee::Sprite*>(children[i]->GetUD())->Clone();
+		ee::Sprite* spr = dynamic_cast<ee::Sprite*>(children[i])->EEClone();
 
 		sm::vec2 _scale = spr->GetScale();
 		_scale.x *= scale.x;
@@ -74,8 +72,9 @@ void GroupHelper::BreakUp(ee::Sprite* group, std::vector<ee::Sprite*>& sprites)
 		}
 
 		spr->SetScale(_scale);
-		spr->SetTransform(_pos, _angle);
-		spr->SetMirror(mirror.x, mirror.y);
+		spr->SetAngle(_angle);
+		spr->SetPosition(_pos);
+		spr->SetMirror(mirror);
 
 		sprites.push_back(spr);
 	}

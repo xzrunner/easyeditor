@@ -3,6 +3,10 @@
 
 #include "config.h"
 
+#include <ee/Visitor.h>
+
+#include <SM_Vector.h>
+
 #include <map>
 
 namespace ee { class Sprite; class Symbol; }

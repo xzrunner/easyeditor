@@ -128,8 +128,9 @@ void MeshToolbarPage::OnSaveImage(wxCommandEvent& event)
 			sm::vec2 pos;
 			pos.x = item_val["pos"]["x"].asDouble() - width * 0.5f;
 			pos.y = item_val["pos"]["y"].asDouble() - height * 0.5f;
+			sprite->SetPosition(pos);
 			float angle = item_val["angle"].asDouble();
-			sprite->SetTransform(pos, angle);
+			sprite->SetAngle(angle);
 			ss.DrawSprite(sprite);
 
 			sprite->RemoveReference();

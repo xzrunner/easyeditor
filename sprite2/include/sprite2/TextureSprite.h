@@ -11,6 +11,7 @@ class TextureSprite : public VIRTUAL_INHERITANCE Sprite
 public:
 	TextureSprite();
 	TextureSprite(const TextureSprite& spr);
+	TextureSprite(Symbol* sym) : Sprite(sym) {}
 
 	/**
 	 *  @interface

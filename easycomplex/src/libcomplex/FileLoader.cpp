@@ -141,7 +141,7 @@ void FileLoader::Load(const std::string& filepath, Symbol* complex)
 		LoadFromPSD::Load(value, dir, complex);
 	}
 
-	complex->InitBounding();
+//	complex->InitBounding();
 
 	if (ee::Config::Instance()->IsUseDTex()) {
 		ee::DTex::Instance()->LoadEnd();

@@ -14,15 +14,15 @@ void Utility::GroupSpritesFromTag(const std::vector<s2::Sprite*>& src,
 {
 	for (int i = 0, n = src.size(); i < n; ++i)
 	{
-		ee::Sprite* sprite = static_cast<ee::Sprite*>(src[i]->GetUD());
-		if (sprite->GetTag().empty())
+		ee::Sprite* spr = dynamic_cast<ee::Sprite*>(src[i]);
+		if (spr->GetTag().empty())
 		{
-			others.push_back(sprite);
+			others.push_back(spr);
 		}
 		else
 		{
 			std::vector<std::string> tags;
-			ee::StringHelper::Split(sprite->GetTag(), ";", tags);
+			ee::StringHelper::Split(spr->GetTag(), ";", tags);
 			bool is_action = false;
 			for (int i = 0, n = tags.size(); i < n; ++i)
 			{
@@ -37,17 +37,17 @@ void Utility::GroupSpritesFromTag(const std::vector<s2::Sprite*>& src,
 				if (itr == dst.end())
 				{
 					std::vector<ee::Sprite*> sprites;
-					sprites.push_back(sprite);
+					sprites.push_back(spr);
 					dst.insert(std::make_pair(tags[i], sprites));
 				}
 				else
 				{
-					itr->second.push_back(sprite);
+					itr->second.push_back(spr);
 				}
 			}
 
 			if (!is_action) {
-				others.push_back(sprite);
+				others.push_back(spr);
 			}
 		}
 	}

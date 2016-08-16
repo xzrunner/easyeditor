@@ -185,7 +185,7 @@ void LRJsonPacker::ParserShapeFromSprite(const Json::Value& src_val, const lr::G
 
 		eshape::Sprite* shape_spr = dynamic_cast<eshape::Sprite*>(sprite);
 		assert(shape_spr);
-		const std::vector<ee::Shape*>& shapes = shape_spr->GetSymbol().GetShapes();
+		const std::vector<ee::Shape*>& shapes = dynamic_cast<const eshape::Symbol*>(shape_spr->GetSymbol())->GetShapes();
 		for (int i = 0, n = shapes.size(); i < n; ++i) {
 			ParserShape(shapes[i], sprite->GetPosition(), sprite->GetAngle(), grids, force_grids, dst_val);
 		}

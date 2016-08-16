@@ -18,12 +18,12 @@ void TweenUtility::GetTweenSprites(const std::vector<s2::Sprite*>& start,
 {
 	for (int i = 0, n = start.size(); i < n; ++i)
 	{
-		ee::Sprite *start_spr = static_cast<ee::Sprite*>(start[i]->GetUD()), 
+		ee::Sprite *start_spr = dynamic_cast<ee::Sprite*>(start[i]), 
 			       *end_spr = NULL;
 //		s2::Sprite* s2_start_spr = static_cast<ee::Sprite*>(start_spr->GetUD());
 		for (int j = 0, m = end.size(); j < m; ++j)
 		{
-			ee::Sprite* spr = static_cast<ee::Sprite*>(end[j]->GetUD());
+			ee::Sprite* spr = dynamic_cast<ee::Sprite*>(end[j]);
 			if (IsTweenMatched(start_spr, spr))
 			{
 				end_spr = spr;
@@ -33,13 +33,13 @@ void TweenUtility::GetTweenSprites(const std::vector<s2::Sprite*>& start,
 
 		if (end_spr)
 		{
-			ee::Sprite* tween_spr = start_spr->Clone();
+			ee::Sprite* tween_spr = start_spr->EEClone();
 			GetTweenSprite(start_spr, end_spr, tween_spr, process);
 			tween.push_back(tween_spr);
 		}
 		else
 		{
-			tween.push_back(start_spr->Clone());
+			tween.push_back(start_spr->EEClone());
 		}
 	}
 }
@@ -65,13 +65,13 @@ void TweenUtility::GetTweenSprites(const std::vector<ee::Sprite*>& start,
 
 		if (end_spr)
 		{
-			ee::Sprite* tween_spr = start_spr->Clone();
+			ee::Sprite* tween_spr = start_spr->EEClone();
 			GetTweenSprite(start_spr, end_spr, tween_spr, process);
 			tween.push_back(tween_spr);
 		}
 		else
 		{
-			tween.push_back(start_spr->Clone());
+			tween.push_back(start_spr->EEClone());
 		}
 	}
 }
@@ -120,21 +120,21 @@ void TweenUtility::GetTweenSprite(ee::Sprite* start, ee::Sprite* end, ee::Sprite
 
 	sm::vec2 offset = (end->GetOffset() - start->GetOffset()) * process + start->GetOffset();
 	tween->SetOffset(offset);
-
-	tween->SetTransform(sm::vec2(0, 0), 0);
+	tween->SetPosition(sm::vec2(0, 0));
+	tween->SetAngle(0);
 
 	sm::vec2 center_s = start->GetCenter(), center_e = end->GetCenter();
 
 	float angle = (end->GetAngle() - start->GetAngle()) * process + start->GetAngle();
+	tween->SetAngle(angle);
+
 	sm::vec2 base_s = start->GetPosition() + start->GetOffset(),
 		base_e = end->GetPosition() + end->GetOffset();
 	sm::vec2 base_t = (base_e - base_s) * process + base_s;
+	tween->SetPosition(base_t -  offset);
 
-	sm::vec2 pos_t = base_t -  offset;
-	tween->SetTransform(pos_t, angle);
-
-	tween->GetColor().add = color_interpolate(start->GetColor().add, end->GetColor().add, process);
-	tween->GetColor().mul = color_interpolate(start->GetColor().mul, end->GetColor().mul, process);
+	tween->Color().add = color_interpolate(start->Color().add, end->Color().add, process);
+	tween->Color().mul = color_interpolate(start->Color().mul, end->Color().mul, process);
 
 	if (escale9::Sprite* s9_s = dynamic_cast<escale9::Sprite*>(start))
 	{

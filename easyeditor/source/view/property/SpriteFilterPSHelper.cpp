@@ -22,13 +22,13 @@ void SpriteFilterPSHelper::InitPS(const Sprite* spr, wxPropertyGrid* pg)
 	std::vector<std::string> names;
 	FilterModes::Instance()->GetAllNameCN(names);
 	wxEnumProperty* filter_prop = new wxEnumProperty("Filter", wxPG_LABEL, WXHelper::ToWXStringArray(names));
-	s2::FilterMode filter = spr->GetShader().filter->GetMode();
+	s2::FilterMode filter = spr->Shader().filter->GetMode();
 	int idx = FilterModes::Instance()->GetIdxFromMode(filter);
 	filter_prop->SetValue(idx);
 	pg->Append(filter_prop);
 
 	filter_prop->SetExpanded(true);
-	CreateSubPS(pg, filter_prop, spr->GetShader().filter);
+	CreateSubPS(pg, filter_prop, spr->Shader().filter);
 }
 
 bool SpriteFilterPSHelper::FromPS(const std::string& name, const wxAny& value, Sprite* spr)
@@ -38,19 +38,19 @@ bool SpriteFilterPSHelper::FromPS(const std::string& name, const wxAny& value, S
 	{
 		int idx = wxANY_AS(value, int);
 		s2::FilterMode filter = FilterModes::Instance()->GetModeFromIdx(idx);
-		delete spr->GetShader().filter;
-		spr->GetShader().filter = s2::FilterFactory::Instance()->Create(filter);
+		delete spr->Shader().filter;
+		spr->Shader().filter = s2::FilterFactory::Instance()->Create(filter);
 		ret = true;
 	}
 	else
 	{
-		switch (spr->GetShader().filter->GetMode())
+		switch (spr->Shader().filter->GetMode())
 		{
 		case s2::FM_EDGE_DETECTION:
 			if (name == "Filter.Blend")
 			{
 				float blend = wxANY_AS(value, float);
-				s2::RFEdgeDetection* filter = static_cast<s2::RFEdgeDetection*>(spr->GetShader().filter);
+				s2::RFEdgeDetection* filter = static_cast<s2::RFEdgeDetection*>(spr->Shader().filter);
 				filter->SetBlend(blend);
 				ret = true;
 			}
@@ -59,7 +59,7 @@ bool SpriteFilterPSHelper::FromPS(const std::string& name, const wxAny& value, S
 			if (name == "Filter.Iterations")
 			{
 				int iterations = wxANY_AS(value, int);
-				s2::RFGaussianBlur* filter = static_cast<s2::RFGaussianBlur*>(spr->GetShader().filter);
+				s2::RFGaussianBlur* filter = static_cast<s2::RFGaussianBlur*>(spr->Shader().filter);
 				filter->SetIterations(iterations);
 				ret = true;
 			}
@@ -68,7 +68,7 @@ bool SpriteFilterPSHelper::FromPS(const std::string& name, const wxAny& value, S
 			if (name == "Filter.Iterations")
 			{
 				int iterations = wxANY_AS(value, int);
-				s2::RFOuterGlow* filter = static_cast<s2::RFOuterGlow*>(spr->GetShader().filter);
+				s2::RFOuterGlow* filter = static_cast<s2::RFOuterGlow*>(spr->Shader().filter);
 				filter->SetIterations(iterations);
 				ret = true;
 			}
@@ -82,7 +82,7 @@ void SpriteFilterPSHelper::ToPS(const Sprite* spr, wxPropertyGrid* pg)
 {
 	wxPGProperty* filter_prop = pg->GetProperty("Filter");
 
-	const s2::RenderFilter* filter = spr->GetShader().filter;
+	const s2::RenderFilter* filter = spr->Shader().filter;
 	filter_prop->SetValue(FilterModes::Instance()->GetIdxFromMode(filter->GetMode()));
 
 	filter_prop->DeleteChildren();
