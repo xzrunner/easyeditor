@@ -34,11 +34,11 @@ bool ArrangeSpriteOP::OnMouseLeftDClick(int x, int y)
 		return false;
 	}
 
-	std::vector<ee::Sprite*> sprites;
-	stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	for (int i = 0, n = sprites.size(); i < n; ++i)
+	std::vector<ee::Sprite*> sprs;
+	stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	for (int i = 0, n = sprs.size(); i < n; ++i)
 	{
-		ee::Sprite* s = sprites[i];
+		ee::Sprite* s = sprs[i];
 		if (&s->GetSymbol() == &selected->GetSymbol()) {
 			stage->GetSpriteSelection()->Add(s);
 		}
@@ -51,11 +51,11 @@ void ArrangeSpriteOP::onDirectionKeyDown(int type)
 {
 	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
 
-	std::vector<ee::Sprite*> sprites;
-	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	for (int i = 0, n = sprites.size(); i < n; ++i)
+	std::vector<ee::Sprite*> sprs;
+	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	for (int i = 0, n = sprs.size(); i < n; ++i)
 	{
-		ee::Sprite* s = sprites[i];
+		ee::Sprite* s = sprs[i];
 		int row, col;
 		stage->TransCoordsToGridPos(s->GetPosition(), row, col);
 		switch (type)

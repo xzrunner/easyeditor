@@ -54,12 +54,12 @@ void PasteSymbolRandomWidget::InitLayout()
 
 void PasteSymbolRandomWidget::GetRandomValue(RandomValue& val) const
 {
-	std::vector<Symbol*> symbols;
-	m_library->Traverse(FilterSymbolVisitor(m_sym_filter_ctrl->GetValue().ToStdString(), symbols));
-	if (symbols.empty()) {
-		val.symbol = NULL;
+	std::vector<Symbol*> syms;
+	m_library->Traverse(FilterSymbolVisitor(m_sym_filter_ctrl->GetValue().ToStdString(), syms));
+	if (syms.empty()) {
+		val.sym = NULL;
 	} else {
-		val.symbol = symbols[static_cast<int>(symbols.size() * Random::GetNum0To1())];
+		val.sym = syms[static_cast<int>(syms.size() * Random::GetNum0To1())];
 	}
 
 	const float scaleMin = m_scale_min_ctrl->GetValue() * 0.01f,

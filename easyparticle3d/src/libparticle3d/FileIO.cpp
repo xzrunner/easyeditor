@@ -60,9 +60,9 @@ void FileIO::Store(const std::string& filepath, ParticleSystem* ps,
 
 		value["components"][i]["count"] = pc->count;
 
-		ee::Symbol* symbol = static_cast<ee::Symbol*>(pc->ud);
+		ee::Symbol* sym = static_cast<ee::Symbol*>(pc->ud);
 		value["components"][i]["filepath"] = 
-			ee::FileHelper::GetRelativePath(dir, symbol->GetFilepath());
+			ee::FileHelper::GetRelativePath(dir, sym->GetFilepath());
 
 		if (pc->bind_ps_cfg) {
 			std::string filepath = PSConfigMgr::Instance()->GetFilepath(pc->bind_ps_cfg);
@@ -214,11 +214,11 @@ p3d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
 	cfg->dir.y = 0;
 	cfg->dir.z = 1;
 
-	cfg->symbol_count = adapter.components.size();
-	cfg->symbols = (p3d_symbol*)(cfg+1);
+	cfg->sym_count = adapter.components.size();
+	cfg->syms = (p3d_symbol*)(cfg+1);
 	for (int i = 0, n = adapter.components.size(); i < n; ++i) {
 		const LoadAdapter::Component& src = adapter.components[i];
-		p3d_symbol& dst = cfg->symbols[i];
+		p3d_symbol& dst = cfg->syms[i];
 
 		dst.count = src.count;
 

@@ -26,20 +26,20 @@ void Love2dCode::Resolve()
 
 	lua::TableAssign ta(m_gen, "quads");
 
-	std::vector<ee::Sprite*> sprites;
-	Context::Instance()->stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	for (size_t i = 0, n = sprites.size(); i < n; ++i)
+	std::vector<ee::Sprite*> sprs;
+	Context::Instance()->stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	for (size_t i = 0, n = sprs.size(); i < n; ++i)
 	{
-		ee::Sprite* sprite = sprites[i];
+		ee::Sprite* spr = sprs[i];
 
-		const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(sprite->GetSymbol());
-		const sm::vec2& pos = sprite->GetPosition();
+		const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());
+		const sm::vec2& pos = spr->GetPosition();
 
 		std::string name = ee::FileHelper::GetFilename(sym->GetFilepath());
 
 		std::string x, y, w, h, px, py, a;
 		sm::vec2 sz = sym->GetBounding().Size();
-		if (sprite->GetAngle() != 0)
+		if (spr->GetAngle() != 0)
 		{
 			x = ee::StringHelper::ToString(pos.x - sz.y * 0.5f);
 			y = ee::StringHelper::ToString(pos.y - sz.x * 0.5f);

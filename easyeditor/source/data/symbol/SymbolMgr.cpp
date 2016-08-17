@@ -34,25 +34,25 @@ Symbol* SymbolMgr::FetchSymbol(const std::string& filepath)
 	std::string fixed_path = FileHelper::GetAbsolutePath(filepath);
 	StringHelper::ToLower(fixed_path);
 
-	std::map<std::string, Symbol*>::iterator itr = m_symbols.find(fixed_path);
-	if (itr == m_symbols.end())
+	std::map<std::string, Symbol*>::iterator itr = m_syms.find(fixed_path);
+	if (itr == m_syms.end())
 	{
-		Symbol* symbol = SymbolFactory::create(fixed_path);
-		if (!symbol) 
+		Symbol* sym = SymbolFactory::create(fixed_path);
+		if (!sym) 
 		{
 			const char* path = filepath.c_str();
 			throw Exception("Create symbol fail: %s", path);
 //			return NULL;
 		}
-		bool isLoaded = symbol->LoadFromFile(fixed_path);
+		bool isLoaded = sym->LoadFromFile(fixed_path);
 		if (isLoaded)
 		{
-			m_symbols.insert(std::make_pair(fixed_path, symbol));
-			return symbol;
+			m_syms.insert(std::make_pair(fixed_path, sym));
+			return sym;
 		}
 		else
 		{
-			delete symbol;
+			delete sym;
 // 			const char* path = filepath.c_str();
 // 			throw Exception("Load symbol %s fail!", path);
 			return NULL;
@@ -65,34 +65,34 @@ Symbol* SymbolMgr::FetchSymbol(const std::string& filepath)
 	}
 }
 
-void SymbolMgr::Remove(const Symbol* symbol)
+void SymbolMgr::Remove(const Symbol* sym)
 {
-	std::string lowerpath = symbol->GetFilepath();
+	std::string lowerpath = sym->GetFilepath();
 	StringHelper::ToLower(lowerpath);
-	std::map<std::string, Symbol*>::iterator itr = m_symbols.find(lowerpath);
+	std::map<std::string, Symbol*>::iterator itr = m_syms.find(lowerpath);
 	// todo: new DummySymbol()
-//	assert(itr != m_symbols.end());
-	if (itr != m_symbols.end()) {
-		m_symbols.erase(itr);
+//	assert(itr != m_syms.end());
+	if (itr != m_syms.end()) {
+		m_syms.erase(itr);
 	}
 }
 
 void SymbolMgr::Clear()
 {
-	std::vector<Symbol*> symbols;
-	symbols.reserve(m_symbols.size());
-	std::map<std::string, Symbol*>::iterator itr = m_symbols.begin();
-	for ( ; itr != m_symbols.end(); ++itr) {
-		symbols.push_back(itr->second);
+	std::vector<Symbol*> syms;
+	syms.reserve(m_syms.size());
+	std::map<std::string, Symbol*>::iterator itr = m_syms.begin();
+	for ( ; itr != m_syms.end(); ++itr) {
+		syms.push_back(itr->second);
 	}
-	for_each(symbols.begin(), symbols.end(), cu::RemoveRefFonctor<Symbol>());
-	m_symbols.clear();
+	for_each(syms.begin(), syms.end(), cu::RemoveRefFonctor<Symbol>());
+	m_syms.clear();
 }
 
 void SymbolMgr::Traverse(Visitor<Symbol>& visitor) const
 {
-	std::map<std::string, Symbol*>::const_iterator itr = m_symbols.begin();
-	for ( ; itr != m_symbols.end(); ++itr)
+	std::map<std::string, Symbol*>::const_iterator itr = m_syms.begin();
+	for ( ; itr != m_syms.end(); ++itr)
 	{
 		bool next;
 		visitor.Visit(itr->second, next);

@@ -12,7 +12,7 @@ class Symbol;
 class SymbolContainer : public ee::DataContainer<ee::Shape>
 {
 public:
-	SymbolContainer(Symbol* symbol);
+	SymbolContainer(Symbol* sym);
 	virtual ~SymbolContainer();
 
 	//
@@ -28,7 +28,7 @@ public:
 	virtual bool ResetOrderMost(const ee::Shape* shape, bool up);
 
 private:
-	Symbol* m_symbol;
+	Symbol* m_sym;
 
 }; // SymbolContainer
 

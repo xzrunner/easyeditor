@@ -10,7 +10,7 @@ namespace ee
 class PerspectiveSpriteState : public ArrangeSpriteState
 {
 public:
-	PerspectiveSpriteState(Sprite* sprite, const SpriteCtrlNode::Node& ctrl_node);
+	PerspectiveSpriteState(Sprite* spr, const SpriteCtrlNode::Node& ctrl_node);
 	virtual ~PerspectiveSpriteState();
 
 	virtual void OnMouseRelease(const sm::vec2& pos);
@@ -20,7 +20,7 @@ private:
 	void Perspective(const sm::vec2& curr);
 
 private:
-	Sprite* m_sprite;
+	Sprite* m_spr;
 
 	SpriteCtrlNode::Node m_ctrl_node;
 

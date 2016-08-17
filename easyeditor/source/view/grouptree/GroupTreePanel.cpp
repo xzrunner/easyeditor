@@ -74,9 +74,9 @@ void GroupTreePanel::Clear()
 	m_grouptree->Clear();
 }
 
-void GroupTreePanel::Insert(Sprite* sprite)
+void GroupTreePanel::Insert(Sprite* spr)
 {
-	m_grouptree->AddSprite(sprite);
+	m_grouptree->AddSprite(spr);
 }
 
 void GroupTreePanel::InitLayout()

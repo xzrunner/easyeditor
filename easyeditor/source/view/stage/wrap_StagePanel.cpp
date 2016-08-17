@@ -24,11 +24,11 @@ StageModule MODULE_STAGE;
 //		SpriteSelection* sel = MODULE_STAGE.impl->getSpriteSelection();
 //		if (sel) 
 //		{
-//			std::vector<Sprite*> sprites;
-//			sel->traverse(FetchAllVisitor<Sprite>(sprites));
-//			if (!sprites.empty())
+//			std::vector<Sprite*> sprs;
+//			sel->traverse(FetchAllVisitor<Sprite>(sprs));
+//			if (!sprs.empty())
 //			{
-//				luax_newtype(L, "Sprite", SPRITE_DATA_T, (void*)sprites[0]);
+//				luax_newtype(L, "Sprite", SPRITE_DATA_T, (void*)sprs[0]);
 //				return 1;
 //			}
 //		}
@@ -56,11 +56,11 @@ int w_stage_move(lua_State* L)
 
 	float x = (float)luaL_checknumber(L, 1);
 	float y = (float)luaL_checknumber(L, 2);
-	std::vector<Sprite*> sprites;
-	MODULE_STAGE.impl->TraverseSprites(FetchAllVisitor<Sprite>(sprites));
-	for (int i = 0, n = sprites.size(); i < n; ++i)
+	std::vector<Sprite*> sprs;
+	MODULE_STAGE.impl->TraverseSprites(FetchAllVisitor<Sprite>(sprs));
+	for (int i = 0, n = sprs.size(); i < n; ++i)
 	{
-		Sprite* s = sprites[i];
+		Sprite* s = sprs[i];
 		s->Translate(sm::vec2(x, y));
 	}
 	return 0;		

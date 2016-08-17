@@ -7,9 +7,9 @@
 namespace erespacker
 {
 
-void ExportNameSet::LoadExport(const ee::Symbol* symbol, IPackNode* node)
+void ExportNameSet::LoadExport(const ee::Symbol* sym, IPackNode* node)
 {
-	std::string export_name = symbol->name;
+	std::string export_name = sym->name;
 	if (!Utility::IsNameValid(export_name)) {
 		return;
 	}
@@ -17,7 +17,7 @@ void ExportNameSet::LoadExport(const ee::Symbol* symbol, IPackNode* node)
 	std::map<std::string, int>::iterator itr = m_map.find(export_name);
 	if (itr != m_map.end()) {
 		throw ee::Exception("Duplicate export name %s, file %s", 
-			export_name.c_str(), symbol->GetFilepath().c_str());
+			export_name.c_str(), sym->GetFilepath().c_str());
 	}
 
 	node->export_name = export_name;

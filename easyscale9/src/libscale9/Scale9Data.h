@@ -38,23 +38,23 @@ public:
 	void GetSize(float& width, float& height) const;
 
 	void Resize(float width, float height);
-	void Compose(ee::Sprite* sprites[3][3], float width, float height);
+	void Compose(ee::Sprite* sprs[3][3], float width, float height);
 
 	void LoadFromFile(const std::string& filepath);
 
 	Scale9Type GetType() const { return m_type; }
 	
-	ee::Sprite* GetSprite(int i, int j) const { return m_sprites[i][j]; }
+	ee::Sprite* GetSprite(int i, int j) const { return m_sprs[i][j]; }
 
-	static void DrawScale9(Scale9Type type, ee::Sprite* const sprites[3][3], 
+	static void DrawScale9(Scale9Type type, ee::Sprite* const sprs[3][3], 
 		const s2::RenderParams& params);
 
-	static void ResizeScale9(Scale9Type type, ee::Sprite* const sprites[3][3],
+	static void ResizeScale9(Scale9Type type, ee::Sprite* const sprs[3][3],
 		float width, float height);
-	static void ResizeSprite(ee::Sprite* sprite, const sm::vec2& center, 
+	static void ResizeSprite(ee::Sprite* spr, const sm::vec2& center, 
 		float width, float height);
 
-	static Scale9Type CheckType(ee::Sprite* sprites[3][3]);
+	static Scale9Type CheckType(ee::Sprite* sprs[3][3]);
 
 private:
 	static void InitSprite(const Json::Value& spr_val,
@@ -66,7 +66,7 @@ private:
 	// 2
 	// 1
 	// 0 1 2
-	ee::Sprite* m_sprites[3][3];
+	ee::Sprite* m_sprs[3][3];
 
 	float m_width, m_height;
 

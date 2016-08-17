@@ -63,9 +63,9 @@ void Sprite::Draw(const s2::RenderParams& params) const
 	}
 }
 
-ee::Sprite* Sprite::Create(ee::Symbol* symbol) 
+ee::Sprite* Sprite::Create(ee::Symbol* sym) 
 {
-	return new Sprite(static_cast<Symbol*>(symbol));
+	return new Sprite(static_cast<Symbol*>(sym));
 }
 
 }

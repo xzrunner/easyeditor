@@ -82,8 +82,8 @@ void ToolbarPanel::Store(Json::Value& val) const
 void ToolbarPanel::Add(const LoadAdapter::Component& comp)
 {
 	// todo Release symbol
-	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(comp.filepath);
-	p2d_symbol* p_symbol = m_stage->m_ps->AddSymbol(symbol);
+	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(comp.filepath);
+	p2d_symbol* p_symbol = m_stage->m_ps->AddSymbol(sym);
 	ComponentPanel* cp = new ComponentPanel(this, p_symbol, this);
 
 	cp->SetValue(PS_ANGLE, ee::UICallback::Data(comp.angle_start, comp.angle_end));
@@ -413,9 +413,9 @@ void ToolbarPanel::Clear()
 	OnDelAllChild(wxCommandEvent());
 }
 
-void ToolbarPanel::OnAddChild(wxCommandEvent& event, ee::Symbol* symbol)
+void ToolbarPanel::OnAddChild(wxCommandEvent& event, ee::Symbol* sym)
 {
-	p2d_symbol* p_symbol = m_stage->m_ps->AddSymbol(symbol);
+	p2d_symbol* p_symbol = m_stage->m_ps->AddSymbol(sym);
 	ComponentPanel* cp = new ComponentPanel(this, p_symbol, this);
 	m_comp_sizer->Insert(m_children.size(), cp);
 	m_comp_sizer->AddSpacer(10);
@@ -466,10 +466,10 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
 	long index;
 	sIndex.ToLong(&index);
 
-	ee::Symbol* symbol = m_library->GetSymbol(index);
-	if (symbol)
+	ee::Symbol* sym = m_library->GetSymbol(index);
+	if (sym)
 	{
-		m_toolbar->OnAddChild(wxCommandEvent(), symbol);
+		m_toolbar->OnAddChild(wxCommandEvent(), sym);
 		m_stage->m_ps->Start();
 	}
 

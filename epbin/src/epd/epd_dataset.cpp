@@ -445,25 +445,25 @@ Matrix()
 
 Frame::~Frame()
 {
-	for_each(sprites.begin(), sprites.end(), DeletePointerFunctor<Sprite>());
+	for_each(sprs.begin(), sprs.end(), DeletePointerFunctor<Sprite>());
 }
 
 size_t Frame::Size() const
 {
 	size_t sz = 0;
 	sz += sizeof(uint16_t);
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		sz += sprites[i]->Size();
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		sz += sprs[i]->Size();
 	}
 	return sz;
 }
 
 void Frame::Store(uint8_t** ptr)
 {
-	uint16_t sz = sprites.size();
+	uint16_t sz = sprs.size();
 	pack2mem(sz, ptr);
 	for (int i = 0; i < sz; ++i) {
-		sprites[i]->Store(ptr);
+		sprs[i]->Store(ptr);
 	}
 }
 
@@ -589,14 +589,14 @@ Animation::Animation(lua_State* L, int id)
 			lua_gettable(L, -2);
 			assert(lua_istable(L, -1));
 			int len = lua_rawlen(L, -1);
-			frame->sprites.reserve(len);
+			frame->sprs.reserve(len);
 			for (int i = 1; i <= len; ++i)
 			{
 				lua_pushinteger(L, i);
 				lua_gettable(L, -2);
 
 	 			Sprite* spr = new Sprite(L, m_components.size());
-	 			frame->sprites.push_back(spr);
+	 			frame->sprs.push_back(spr);
 
 				lua_pop(L, 1);
 			}

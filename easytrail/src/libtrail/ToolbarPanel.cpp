@@ -232,12 +232,12 @@ void ToolbarPanel::OnChangeMode(wxCommandEvent& event)
 	}
 }
 
-ComponentPanel* ToolbarPanel::OnAddChild(ee::Symbol* symbol)
+ComponentPanel* ToolbarPanel::OnAddChild(ee::Symbol* sym)
 {
-	if (symbol) {
-		symbol->AddReference();
+	if (sym) {
+		sym->AddReference();
 	}
-	t2d_symbol* mt = m_stage->m_trail->AddSymbol(symbol);
+	t2d_symbol* mt = m_stage->m_trail->AddSymbol(sym);
 	ComponentPanel* cp = NULL;
 	t2d_emitter_cfg* cfg = m_stage->m_trail->GetConfig();
 	if (cfg->mode_type == T2D_MODE_IMAGE) {
@@ -298,10 +298,10 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
 	long index;
 	sIndex.ToLong(&index);
 
-	ee::Symbol* symbol = m_library->GetSymbol(index);
-	if (symbol)
+	ee::Symbol* sym = m_library->GetSymbol(index);
+	if (sym)
 	{
-		m_toolbar->OnAddChild(symbol);
+		m_toolbar->OnAddChild(sym);
 //		m_stage->m_ps->Start();
 	}
 

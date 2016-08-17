@@ -36,7 +36,7 @@ public:
 
 	void Clear();
 
-	t2d_symbol* AddSymbol(ee::Symbol* symbol);
+	t2d_symbol* AddSymbol(ee::Symbol* sym);
 	void DelSymbol(int idx);
 	void DelAllSymbol();
 	t2d_symbol* GetSymbol(int idx);

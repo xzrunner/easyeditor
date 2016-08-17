@@ -4,8 +4,8 @@ namespace emodeling
 {
 
 BodyEditStage::BodyEditStage(wxWindow* parent, wxTopLevelWindow* frame, 
-							 eshape::Symbol* symbol)
-	: eshape::StagePanel(parent, frame, symbol)
+							 eshape::Symbol* sym)
+	: eshape::StagePanel(parent, frame, sym)
 {
 }
 
@@ -13,9 +13,9 @@ BodyEditStage::BodyEditStage(wxWindow* parent, wxTopLevelWindow* frame,
 //{
 //	return eshape::StagePanel::InsertShape(shape);
 //
-// 	if (m_sprite && m_sprite->GetUserData())
+// 	if (m_spr && m_spr->GetUserData())
 // 	{
-// 		Body* bd = static_cast<Body*>(m_sprite->GetUserData());
+// 		Body* bd = static_cast<Body*>(m_spr->GetUserData());
 // 		Fixture* fixture = new Fixture;
 // 		fixture->body = bd;
 // 		shape->AddReference();
@@ -28,9 +28,9 @@ BodyEditStage::BodyEditStage(wxWindow* parent, wxTopLevelWindow* frame,
 //{
 //	return eshape::StagePanel::RemoveShape(shape);
 //
-//	 	if (m_sprite && m_sprite->GetUserData())
+//	 	if (m_spr && m_spr->GetUserData())
 //	 	{
-//	 		Body* bd = static_cast<Body*>(m_sprite->GetUserData());
+//	 		Body* bd = static_cast<Body*>(m_spr->GetUserData());
 //	 		for (size_t i = 0, n = bd->fixtures.size(); i < n; ++i)
 //	 		{
 //	 			if (bd->fixtures[i]->shape == shape)
@@ -47,9 +47,9 @@ void BodyEditStage::loadShapes()
 {
 // 	eshape::StagePanel::loadShapes();
 // 
-// 	if (m_sprite && m_sprite->GetUserData())
+// 	if (m_spr && m_spr->GetUserData())
 // 	{
-// 		Body* bd = static_cast<Body*>(m_sprite->GetUserData());
+// 		Body* bd = static_cast<Body*>(m_spr->GetUserData());
 // 		m_shapes.reserve(bd->fixtures.size());
 // 		for (size_t i = 0, n = bd->fixtures.size(); i < n; ++i)
 // 		{

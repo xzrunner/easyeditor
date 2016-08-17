@@ -39,25 +39,25 @@ void Particle2DBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 	}
 }
 
-const IPackNode* Particle2DBuilder::Create(const eparticle2d::Symbol* symbol)
+const IPackNode* Particle2DBuilder::Create(const eparticle2d::Symbol* sym)
 {
 	std::map<const eparticle2d::Symbol*, const PackParticle2D*>::iterator 
-		itr = m_map_data.find(symbol);
+		itr = m_map_data.find(sym);
 	if (itr != m_map_data.end()) {
 		return itr->second;
 	}
 
 	PackParticle2D* node = new PackParticle2D;
-	Load(symbol, node);
-	m_map_data.insert(std::make_pair(symbol, node));
+	Load(sym, node);
+	m_map_data.insert(std::make_pair(sym, node));
 	return node;
 }
 
-void Particle2DBuilder::Load(const eparticle2d::Symbol* symbol, PackParticle2D* ps)
+void Particle2DBuilder::Load(const eparticle2d::Symbol* sym, PackParticle2D* ps)
 {
-	m_export_set.LoadExport(symbol, ps);
+	m_export_set.LoadExport(sym, ps);
 
-	const p2d_emitter_cfg* cfg = symbol->GetEmitterCfg();
+	const p2d_emitter_cfg* cfg = sym->GetEmitterCfg();
 
 	ps->emission_time = cfg->emission_time;
 	ps->count = cfg->count;
@@ -111,13 +111,13 @@ void Particle2DBuilder::Load(const eparticle2d::Symbol* symbol, PackParticle2D* 
 	}
 	else
 	{
-		throw ee::Exception("Particle2DBuilder::Load unknown mode type, filepath: %s", symbol->GetFilepath().c_str());
+		throw ee::Exception("Particle2DBuilder::Load unknown mode type, filepath: %s", sym->GetFilepath().c_str());
 	}
 
 
-	ps->components.reserve(cfg->symbol_count);
-	for (int i = 0; i < cfg->symbol_count; ++i) {
-		const p2d_symbol& p_symbol = cfg->symbols[i];
+	ps->components.reserve(cfg->sym_count);
+	for (int i = 0; i < cfg->sym_count; ++i) {
+		const p2d_symbol& p_symbol = cfg->syms[i];
 
 		PackParticle2D::Component comp;
 
@@ -137,8 +137,8 @@ void Particle2DBuilder::Load(const eparticle2d::Symbol* symbol, PackParticle2D* 
 		comp.add_col_end = s2::Color((int)(p_symbol.add_col_end.r * 255), (int)(p_symbol.add_col_end.g * 255), 
 			(int)(p_symbol.add_col_end.b * 255), (int)(p_symbol.add_col_end.a * 255)).ToABGR();
 
-		ee::Symbol* symbol = static_cast<ee::Symbol*>(p_symbol.ud);
-		comp.node = PackNodeFactory::Instance()->Create(symbol);
+		ee::Symbol* sym = static_cast<ee::Symbol*>(p_symbol.ud);
+		comp.node = PackNodeFactory::Instance()->Create(sym);
 
 		ps->components.push_back(comp);
 	}

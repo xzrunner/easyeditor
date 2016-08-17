@@ -20,7 +20,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 {
 	SetCanvas(new StageCanvas(this));
 
-	m_symbol = new Symbol;
+	m_sym = new Symbol;
 
 	RegistSubject(ee::InsertShapeSJ::Instance());
 }
@@ -34,9 +34,9 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 {
 	SetCanvas(new StageCanvas(this, glctx, edited, bg_sprites));
 
-	m_symbol = dynamic_cast<Symbol*>(edited->GetSymbol());
-	if (m_symbol) {
-		m_symbol->AddReference();
+	m_sym = dynamic_cast<Symbol*>(edited->GetSymbol());
+	if (m_sym) {
+		m_sym->AddReference();
 	}
 	LoadFromShadow();
 
@@ -45,8 +45,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 StagePanel::~StagePanel()
 {
-	if (m_symbol) {
-		m_symbol->RemoveReference();
+	if (m_sym) {
+		m_sym->RemoveReference();
 	}
 	if (m_loop) {
 		m_loop->RemoveReference();
@@ -59,7 +59,7 @@ void StagePanel::Refresh(bool eraseBackground, const wxRect* rect)
 
 	if (m_loop) {
 		eshape::PolygonShape* poly = static_cast<eshape::PolygonShape*>(m_loop);
-		m_symbol->GetShadow()->BuildInnerLine(poly->GetVertices());
+		m_sym->GetShadow()->BuildInnerLine(poly->GetVertices());
 	}	
 }
 
@@ -73,7 +73,7 @@ void StagePanel::TraverseShapes(ee::Visitor<ee::Shape>& visitor, ee::DataTravers
 
 void StagePanel::LoadFromShadow()
 {
-	const Shadow* shadow = m_symbol->GetShadow();
+	const Shadow* shadow = m_sym->GetShadow();
 	const std::vector<sm::vec2>& loop = shadow->GetInnerLoop();
 	if (m_loop) {
 		m_loop->RemoveReference();
@@ -100,7 +100,7 @@ void StagePanel::InsertShape(ee::Shape* shape)
 	m_loop->AddReference();
 
 	eshape::PolygonShape* poly = static_cast<eshape::PolygonShape*>(shape);
-	m_symbol->GetShadow()->BuildInnerLine(poly->GetVertices());
+	m_sym->GetShadow()->BuildInnerLine(poly->GetVertices());
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }

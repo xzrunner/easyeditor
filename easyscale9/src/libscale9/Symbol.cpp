@@ -28,8 +28,8 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 sm::rect Symbol::GetBounding(const s2::Sprite* sprite/* = NULL*/) const
 {
 	float w, h;
-	if (sprite) {
-		const Sprite* spr = dynamic_cast<const Sprite*>(sprite);
+	if (spr) {
+		const Sprite* spr = dynamic_cast<const Sprite*>(spr);
 		spr->GetSize(w, h);
 	} else {
 		m_data.GetSize(w, h);
@@ -47,9 +47,9 @@ void Symbol::ResizeScale9(float width, float height)
 	m_data.Resize(width, height);
 }
 
-void Symbol::ComposeFromSprites(ee::Sprite* sprites[3][3], float width, float height)
+void Symbol::ComposeFromSprites(ee::Sprite* sprs[3][3], float width, float height)
 {
-	m_data.Compose(sprites, width, height);
+	m_data.Compose(sprs, width, height);
 }
 
 void Symbol::LoadResources()

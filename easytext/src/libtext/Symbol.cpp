@@ -90,16 +90,16 @@ void Symbol::LoadResources()
 	}
 }
 
-void Symbol::DrawBackground(const Sprite* sprite, const sm::mat4& mt) const
+void Symbol::DrawBackground(const Sprite* spr, const sm::mat4& mt) const
 {
-	if (!sprite) {
+	if (!spr) {
 		return;
 	}
 
 	s2::RVG::SetColor(s2::Color(179, 179, 179, 179));
 
 	int w, h;
-	sprite->GetSize(w, h);
+	spr->GetSize(w, h);
 	float hw = w * 0.5f,
 		  hh = h * 0.5f;
 
@@ -110,33 +110,33 @@ void Symbol::DrawBackground(const Sprite* sprite, const sm::mat4& mt) const
 	s2::RVG::Rect(min, max, true);
 }
 
-void Symbol::DrawText(const Sprite* sprite, const s2::RenderParams& params) const
+void Symbol::DrawText(const Sprite* spr, const s2::RenderParams& params) const
 {
-	if (!sprite) {
+	if (!spr) {
 		return;
 	}
-	if (sprite->GetText().empty()) {
+	if (spr->GetText().empty()) {
 		return;
 	}
 
 	gtxt_label_style style;
 
-	sprite->GetSize(style.width, style.height);
-	sprite->GetAlign(style.align_h, style.align_v);
-	sprite->GetSpace(style.space_h, style.space_v);
+	spr->GetSize(style.width, style.height);
+	spr->GetAlign(style.align_h, style.align_v);
+	spr->GetSpace(style.space_h, style.space_v);
 
-	style.overflow = sprite->GetOverflow();
+	style.overflow = spr->GetOverflow();
 
-	style.gs.font = sprite->GetFont();
-	style.gs.font_size = sprite->GetFontSize();
-	style.gs.font_color.integer = sprite->GetFontColor().ToRGBA();
+	style.gs.font = spr->GetFont();
+	style.gs.font_size = spr->GetFontSize();
+	style.gs.font_color.integer = spr->GetFontColor().ToRGBA();
 
-	style.gs.edge = sprite->GetEdge();
-	style.gs.edge_size = sprite->GetEdgeSize();
-	style.gs.edge_color.integer = sprite->GetEdgeColor().ToRGBA();
+	style.gs.edge = spr->GetEdge();
+	style.gs.edge_size = spr->GetEdgeSize();
+	style.gs.edge_color.integer = spr->GetEdgeColor().ToRGBA();
 
-	ee::GTxt::Instance()->Draw(style, params.mt, params.color.mul, params.color.add, sprite->GetText(), sprite->GetTime(), sprite->GetRichtext());
-	sprite->UpdateTime();
+	ee::GTxt::Instance()->Draw(style, params.mt, params.color.mul, params.color.add, spr->GetText(), spr->GetTime(), spr->GetRichtext());
+	spr->UpdateTime();
 }
 
 }

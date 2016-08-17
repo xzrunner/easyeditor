@@ -40,9 +40,9 @@ ee::Sprite* PictureToSpr::TransQuad(const erespacker::PackPicture::Quad* quad)
 	eicon::QuadIcon* icon = new eicon::QuadIcon(
 		const_cast<ee::Image*>(quad->img), src, screen);
 
-	eicon::Symbol* symbol = new eicon::Symbol;
-	symbol->SetIcon(icon);
-	ee::Sprite* ret = new eicon::Sprite(symbol);
+	eicon::Symbol* sym = new eicon::Symbol;
+	sym->SetIcon(icon);
+	ee::Sprite* ret = new eicon::Sprite(sym);
 	ret->UpdateBounding();
 	return ret;
 }

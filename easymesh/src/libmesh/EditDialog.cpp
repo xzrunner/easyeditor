@@ -18,22 +18,22 @@ BEGIN_EVENT_TABLE(EditDialog, wxDialog)
 	EVT_CLOSE(EditDialog::OnCloseEvent)
 END_EVENT_TABLE()
 
-EditDialog::EditDialog(wxWindow* parent, Sprite* sprite, wxGLContext* glctx)
+EditDialog::EditDialog(wxWindow* parent, Sprite* spr, wxGLContext* glctx)
 	: wxDialog(parent, wxID_ANY, "Edit Mesh", wxDefaultPosition, 
 	wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
-	, m_sprite(sprite)
+	, m_spr(spr)
 {
-	Symbol* symbol = dynamic_cast<Symbol*>(m_sprite->GetSymbol());
-	SetTitle(symbol->GetFilepath());
+	Symbol* sym = dynamic_cast<Symbol*>(m_spr->GetSymbol());
+	SetTitle(sym->GetFilepath());
 	InitLayout(glctx);
 
-	symbol->SetPause(true);
+	sym->SetPause(true);
 }
 
 EditDialog::~EditDialog()
 {
-	Symbol* symbol = dynamic_cast<Symbol*>(m_sprite->GetSymbol());
-	symbol->SetPause(false);
+	Symbol* sym = dynamic_cast<Symbol*>(m_spr->GetSymbol());
+	sym->SetPause(false);
 }
 
 void EditDialog::InitLayout(wxGLContext* glctx)
@@ -41,10 +41,10 @@ void EditDialog::InitLayout(wxGLContext* glctx)
  	wxSplitterWindow* splitter = new wxSplitterWindow(this);
  
  	StagePanel* stage = new StagePanel(splitter, this, glctx);
-	Symbol* symbol = dynamic_cast<Symbol*>(m_sprite->GetSymbol());
-	stage->SetMeshSymbol(symbol);
+	Symbol* sym = dynamic_cast<Symbol*>(m_spr->GetSymbol());
+	stage->SetMeshSymbol(sym);
  	m_stage = stage;
- 	ee::ToolbarPanel* toolbar = new ToolbarPanel(splitter, stage, false, m_sprite);
+ 	ee::ToolbarPanel* toolbar = new ToolbarPanel(splitter, stage, false, m_spr);
  
  	splitter->SetSashGravity(0.85f);
  	splitter->SplitVertically(stage, toolbar);
@@ -52,31 +52,31 @@ void EditDialog::InitLayout(wxGLContext* glctx)
 
 void EditDialog::OnCloseEvent(wxCloseEvent& event)
 {
-//	m_sprite->UpdateBounding();
+//	m_spr->UpdateBounding();
 
 	if (!m_stage->IsEditDirty()) {
 		Destroy();
 		return;
 	}
 
-	Symbol* symbol = dynamic_cast<Symbol*>(m_sprite->GetSymbol());
+	Symbol* sym = dynamic_cast<Symbol*>(m_spr->GetSymbol());
 
 	ee::ConfirmDialog dlg(this);
 	int val = dlg.ShowModal();
 	if (val == wxID_YES)
 	{
-		m_sprite->GetMeshTrans().LoadFromMesh(symbol->GetMesh());
+		m_spr->GetMeshTrans().LoadFromMesh(sym->GetMesh());
 
-// 		const std::string& filepath = symbol.GetFilepath();
-// 		FileIO::Store(symbol.GetFilepath().c_str(), &symbol);
-// 		symbol.RefreshThumbnail(filepath);
+// 		const std::string& filepath = sym.GetFilepath();
+// 		FileIO::Store(sym.GetFilepath().c_str(), &sym);
+// 		sym.RefreshThumbnail(filepath);
 
-		ee::SpriteFactory::Instance()->UpdateBoundings(*symbol);
+		ee::SpriteFactory::Instance()->UpdateBoundings(*sym);
 		Destroy();
 	}
 	else if (val == wxID_NO)
 	{
-//		symbol.LoadFromFile(symbol.GetFilepath());
+//		sym.LoadFromFile(sym.GetFilepath());
 		Destroy();
 	}
 }

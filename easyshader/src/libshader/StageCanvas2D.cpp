@@ -37,12 +37,12 @@ void StageCanvas2D::OnMousePressed(const sm::vec2& pos)
 	m_start_time = clock();
 
 	Shader* shader = m_stage->GetShader();
-	ee::Sprite* sprite = m_stage->QuerySpriteByPos(pos);
-	if (shader && sprite) {
+	ee::Sprite* spr = m_stage->QuerySpriteByPos(pos);
+	if (shader && spr) {
 		ee::ShaderMgr::Instance()->SetShader(ee::ShaderMgr::SPRITE);
 
-		sm::vec2 center = sprite->GetCenter();
-		sm::rect r = sprite->GetSymbol()->GetBounding();
+		sm::vec2 center = spr->GetCenter();
+		sm::rect r = spr->GetSymbol()->GetBounding();
 		float x = (pos.x - center.x) / r.Width() + 0.5f,
 			  y = (pos.y - center.y) / r.Width() + 0.5f;
 		static_cast<Shader2D*>(shader)->SetInputUniform(x, y);
@@ -64,14 +64,14 @@ void StageCanvas2D::DrawBackground() const
 
 void StageCanvas2D::DrawSprites() const
 {
-	std::vector<ee::Sprite*> sprites;
-	static_cast<StagePanel2D*>(m_stage)->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	for (size_t i = 0, n = sprites.size(); i < n; ++i)
+	std::vector<ee::Sprite*> sprs;
+	static_cast<StagePanel2D*>(m_stage)->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	for (size_t i = 0, n = sprs.size(); i < n; ++i)
 	{
-		ee::Sprite* sprite = sprites[i];
-		if (!sprite->IsVisible())
+		ee::Sprite* spr = sprs[i];
+		if (!spr->IsVisible())
 			continue;
-		ee::SpriteRenderer::Draw(sprites[i]);
+		ee::SpriteRenderer::Draw(sprs[i]);
 	}
 }
 

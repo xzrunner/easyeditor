@@ -23,7 +23,7 @@ public:
 	void SetImpl(ViewlistListImpl* impl);
 
 	void Clear();
-	void Insert(Sprite* sprite, int idx = -1);
+	void Insert(Sprite* spr, int idx = -1);
 
 	void OnSelected(int idx, bool clear);
 
@@ -51,15 +51,15 @@ private:
 
 	void Select(Sprite* spr, bool clear);
 	void SelectSet(SpriteSelection* set);
-	void Reorder(const Sprite* sprite, bool up);
-	void ReorderMost(const Sprite* sprite, bool up);
-	void Remove(Sprite* sprite);
+	void Reorder(const Sprite* spr, bool up);
+	void ReorderMost(const Sprite* spr, bool up);
+	void Remove(Sprite* spr);
 	void RemoveSelected();
 
 private:
 	ViewlistListImpl* m_impl;
 
-	std::vector<Sprite*> m_sprites;
+	std::vector<Sprite*> m_sprs;
 
 	Sprite* m_selected_spr;
 

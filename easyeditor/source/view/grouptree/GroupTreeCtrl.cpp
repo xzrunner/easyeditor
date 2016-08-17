@@ -149,10 +149,10 @@ void GroupTreeCtrl::DelNode()
 		return;
 	}
 
-	std::vector<Sprite*> sprites;
-	Traverse(id, GroupTreeImpl::GetSpritesVisitor(this, sprites));
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		RemoveSpriteSJ::Instance()->Remove(sprites[i], this);
+	std::vector<Sprite*> sprs;
+	Traverse(id, GroupTreeImpl::GetSpritesVisitor(this, sprs));
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		RemoveSpriteSJ::Instance()->Remove(sprs[i], this);
 	}
 
 	Delete(id);
@@ -450,11 +450,11 @@ void GroupTreeCtrl::OnMenuAddSprites(wxCommandEvent& event)
 	}
 
 	SpriteSelection* selection = m_sprite_impl->GetSpriteSelection();
-	std::vector<Sprite*> sprites;
-	selection->Traverse(FetchAllVisitor<Sprite>(sprites));
+	std::vector<Sprite*> sprs;
+	selection->Traverse(FetchAllVisitor<Sprite>(sprs));
 	Group* group = static_cast<GroupTreeGroupItem*>(data)->GetGroup();
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		Sprite* spr = sprites[i];
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		Sprite* spr = sprs[i];
 		bool ok = group->Insert(spr);
 		if (ok) {
 			GroupTreeItem* data = new GroupTreeSpriteItem(spr);
@@ -550,10 +550,10 @@ void GroupTreeCtrl::SelectRight()
 
 void GroupTreeCtrl::ReorderSprites()
 {
-	std::vector<Sprite*> sprites;
-	Traverse(m_root, GroupTreeImpl::GetSpritesVisitor(this, sprites));
-	for (int i = sprites.size() - 1; i >= 0; --i) {
-		Sprite* spr = sprites[i];
+	std::vector<Sprite*> sprs;
+	Traverse(m_root, GroupTreeImpl::GetSpritesVisitor(this, sprs));
+	for (int i = sprs.size() - 1; i >= 0; --i) {
+		Sprite* spr = sprs[i];
 		m_add_del_open = false;
 		RemoveSpriteSJ::Instance()->Remove(spr);
 		InsertSpriteSJ::Instance()->Insert(spr);
@@ -606,10 +606,10 @@ void GroupTreeCtrl::Select(Sprite* spr, bool clear)
 
 void GroupTreeCtrl::SelectSet(SpriteSelection* selection)
 {
-	std::vector<Sprite*> sprites;
-	selection->Traverse(FetchAllVisitor<Sprite>(sprites));
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		Select(sprites[i], false);
+	std::vector<Sprite*> sprs;
+	selection->Traverse(FetchAllVisitor<Sprite>(sprs));
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		Select(sprs[i], false);
 	}
 }
 
@@ -623,10 +623,10 @@ void GroupTreeCtrl::Reorder(Sprite* spr, bool up)
 	}
 }
 
-bool GroupTreeCtrl::Remove(Sprite* sprite)
+bool GroupTreeCtrl::Remove(Sprite* spr)
 {
 	if (m_add_del_open) {
-		GroupTreeImpl::RemoveVisitor visitor(this, sprite);
+		GroupTreeImpl::RemoveVisitor visitor(this, spr);
 		Traverse(visitor);
 		return visitor.IsFinish();
 	} else {

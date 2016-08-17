@@ -13,17 +13,17 @@ class Sprite;
 class SetSpritePosAOP : public AtomicOP
 {
 public:
-	SetSpritePosAOP(Sprite* sprite, const sm::vec2& pos);
-	SetSpritePosAOP(const std::vector<Sprite*>& sprites, const sm::vec2& pos);
+	SetSpritePosAOP(Sprite* spr, const sm::vec2& pos);
+	SetSpritePosAOP(const std::vector<Sprite*>& sprs, const sm::vec2& pos);
 	virtual ~SetSpritePosAOP();
 
 	virtual void Undo();
 	virtual void Redo();
 
-	virtual Json::Value Store(const std::vector<Sprite*>& sprites) const;
+	virtual Json::Value Store(const std::vector<Sprite*>& sprs) const;
 
 private:
-	std::vector<Sprite*> m_sprites;
+	std::vector<Sprite*> m_sprs;
 	std::vector<sm::vec2> m_old_pos;
 
 	sm::vec2 m_new_pos;

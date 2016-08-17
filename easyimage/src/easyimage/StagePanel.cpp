@@ -38,22 +38,22 @@ void StagePanel::SetImage(const std::string& filepath)
 		m_image->RemoveReference();
 	}
 
-	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-	if (symbol) {
-		SetImage(symbol);
-		symbol->RemoveReference();
+	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+	if (sym) {
+		SetImage(sym);
+		sym->RemoveReference();
 	}
 }
 
-void StagePanel::SetImage(ee::Symbol* symbol)
+void StagePanel::SetImage(ee::Symbol* sym)
 {
-	ee::ImageSymbol* img_sym = static_cast<ee::ImageSymbol*>(symbol);
+	ee::ImageSymbol* img_sym = static_cast<ee::ImageSymbol*>(sym);
 	sm::vec2 offset = - img_sym->GetImage()->GetOffset();
 
-	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-	offset += sprite->GetSymbol()->GetBounding().Size() * 0.5f;
-	sprite->Translate(offset);
-	m_image = sprite;
+	ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+	offset += spr->GetSymbol()->GetBounding().Size() * 0.5f;
+	spr->Translate(offset);
+	m_image = spr;
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
@@ -81,22 +81,22 @@ OnDropText(wxCoord x, wxCoord y, const wxString& text)
 	long index;
 	sIndex.ToLong(&index);
 
-	ee::Symbol* symbol = m_library->GetSymbol(index);
-	if (symbol) {
-		m_stage->SetImage(symbol);
+	ee::Symbol* sym = m_library->GetSymbol(index);
+	if (sym) {
+		m_stage->SetImage(sym);
 	}
 
 // 	// todo for diff
 // 	// fixme
 // 	sm::vec2 pos = m_stage->transPosScreenToProject(x, y);
-// 	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-// 	sm::rect r = sprite->getSymbol().getSize();
+// 	ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+// 	sm::rect r = spr->getSymbol().getSize();
 // 	if (pos.x < 0) {
-// 		sprite->setTransform(sm::vec2(-r.Width() * 0.5f - 10, 0.0f), 0);
-// 		m_stage->m_left = sprite;
+// 		spr->setTransform(sm::vec2(-r.Width() * 0.5f - 10, 0.0f), 0);
+// 		m_stage->m_left = spr;
 // 	} else {
-// 		sprite->setTransform(sm::vec2(r.Width() * 0.5f + 10, 0.0f), 0);
-// 		m_stage->m_right = sprite;
+// 		spr->setTransform(sm::vec2(r.Width() * 0.5f + 10, 0.0f), 0);
+// 		m_stage->m_right = spr;
 // 	}
 }
 
@@ -108,9 +108,9 @@ OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames)
 	}
 
 	std::string filename = filenames[0];
-	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filename);
-	m_stage->SetImage(symbol);
-	symbol->RemoveReference();
+	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filename);
+	m_stage->SetImage(sym);
+	sym->RemoveReference();
 }
 
 }

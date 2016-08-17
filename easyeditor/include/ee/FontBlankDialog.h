@@ -11,7 +11,7 @@ class FontBlankSymbol;
 class FontBlankDialog : public wxDialog
 {
 public:
-	FontBlankDialog(wxWindow* parent, FontBlankSymbol* symbol);
+	FontBlankDialog(wxWindow* parent, FontBlankSymbol* sym);
 
 	~FontBlankDialog();
 
@@ -21,7 +21,7 @@ private:
 	void StoreSymbol();
 
 private:
-	FontBlankSymbol* m_symbol;
+	FontBlankSymbol* m_sym;
 
 	wxTextCtrl* m_name;
 

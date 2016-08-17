@@ -31,8 +31,8 @@ protected:
 	virtual void LoadResources();
 
 private:
-	void DrawBackground(const Sprite* sprite, const sm::mat4& mt) const;
-	void DrawText(const Sprite* sprite, const s2::RenderParams& params) const;
+	void DrawBackground(const Sprite* spr, const sm::mat4& mt) const;
+	void DrawText(const Sprite* spr, const s2::RenderParams& params) const;
 
 private:
 	int m_width;

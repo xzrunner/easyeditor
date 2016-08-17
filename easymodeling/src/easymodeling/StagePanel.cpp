@@ -154,13 +154,13 @@ void StagePanel::loadBody(const std::string& filepath, Body& body)
 	}
 }
 
-void StagePanel::loadBody(ee::Sprite* sprite, Body& body)
+void StagePanel::loadBody(ee::Sprite* spr, Body& body)
 {
 	Fixture* fixture = new Fixture;
 	fixture->m_body = &body;
 
-	const float width = sprite->GetSymbol()->GetBounding().Width(),
-		height = sprite->GetSymbol()->GetBounding().Height();
+	const float width = spr->GetSymbol()->GetBounding().Width(),
+		height = spr->GetSymbol()->GetBounding().Height();
 	fixture->m_shape = new eshape::RectShape(sm::vec2(0, 0), width * 0.5f, height * 0.5f);
 
 	body.m_fixtures.push_back(fixture);
@@ -187,7 +187,7 @@ void StagePanel::Insert(ee::Sprite* spr)
 		body->m_fixtures.push_back(fixture);
 	}
 
-	body->m_sprite = spr;
+	body->m_spr = spr;
 	spr->SetUserData(body);
 	m_bodies.push_back(body);
 }
@@ -196,7 +196,7 @@ void StagePanel::Remove(ee::Sprite* spr)
 {
 	for (size_t i = 0, n = m_bodies.size(); i < n; ++i)
 	{
-		if (m_bodies[i]->m_sprite == spr)
+		if (m_bodies[i]->m_spr == spr)
 		{
 			delete m_bodies[i];
 			m_bodies.erase(m_bodies.begin() + i);

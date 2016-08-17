@@ -60,21 +60,21 @@ void PreviewCanvas::DrawStageData() const
 {
 	eparticle3d::PSNode::Instance()->BufferClear();
 
-	std::vector<ee::Sprite*> sprites;
-	PreviewUtility::GetCurrSprites(m_control, sprites);
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		if (eparticle3d::Sprite* p3d = dynamic_cast<eparticle3d::Sprite*>(sprites[i])) {
+	std::vector<ee::Sprite*> sprs;
+	PreviewUtility::GetCurrSprites(m_control, sprs);
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		if (eparticle3d::Sprite* p3d = dynamic_cast<eparticle3d::Sprite*>(sprs[i])) {
 			p3d->OnActive();
 		}
 	}
 
-	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-		ee::Sprite* spr = sprites[i];
+	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
+		ee::Sprite* spr = sprs[i];
 		ee::SpriteRenderer::Draw(spr);
 	}
 
-	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-		sprites[i]->RemoveReference();
+	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
+		sprs[i]->RemoveReference();
 	}
 
 	ee::SceneNodeMgr::Instance()->Draw();

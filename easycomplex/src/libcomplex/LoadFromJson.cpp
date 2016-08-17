@@ -27,24 +27,24 @@ void LoadFromJson::Load(const Json::Value& value, const std::string& dir, Symbol
 	Json::Value spriteValue = value["sprite"][i++];
 	while (!spriteValue.isNull()) {
 		std::string filepath = ee::SymbolSearcher::GetSymbolPath(dir, spriteValue);
-		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-		if (!symbol) {
+		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		if (!sym) {
 			std::string filepath = spriteValue["filepath"].asString();
 			throw ee::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", dir.c_str(), filepath.c_str());
 		}
-		ee::SymbolSearcher::SetSymbolFilepaths(dir, symbol, spriteValue);
+		ee::SymbolSearcher::SetSymbolFilepaths(dir, sym, spriteValue);
 
-		//		symbol->refresh();
-		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-		sprite->Load(spriteValue, dir);
+		//		sym->refresh();
+		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+		spr->Load(spriteValue, dir);
 
-		symbol->RemoveReference();
+		sym->RemoveReference();
 
-		static_cast<Symbol*>(complex)->Add(sprite);
-		sprite->RemoveReference();
+		static_cast<Symbol*>(complex)->Add(spr);
+		spr->RemoveReference();
 #ifdef OPEN_SCREEN_CACHE
-		ee::SpatialPartition::Instance()->Insert(sprite);
-		ee::SpriteRenderer::InvalidRect(sprite);
+		ee::SpatialPartition::Instance()->Insert(spr);
+		ee::SpriteRenderer::InvalidRect(spr);
 #endif // OPEN_SCREEN_CACHE
 
 		spriteValue = value["sprite"][i++];

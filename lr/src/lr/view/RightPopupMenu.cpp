@@ -22,7 +22,7 @@ namespace lr
 RightPopupMenu::RightPopupMenu(ee::LibraryPanel* library, StagePanel* stage)
 	: m_library(library)
 	, m_stage(stage)
-	, m_sprite(NULL)
+	, m_spr(NULL)
 {
 }
 
@@ -31,7 +31,7 @@ void RightPopupMenu::SetRightPopupMenu(wxMenu& menu, int x, int y)
 	ee::SpriteSelection* selection = m_stage->GetSpriteSelection();
 	if (selection->Size() == 1) {
 		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-		selection->Traverse(ee::PointQueryVisitor(pos, &m_sprite));
+		selection->Traverse(ee::PointQueryVisitor(pos, &m_spr));
 		CreateShapeMenu(menu);
 		CreateAnimMenu(menu);
 	}
@@ -61,7 +61,7 @@ void RightPopupMenu::CreateShapeMenu(wxMenu& menu)
 
 void RightPopupMenu::CreateAnimMenu(wxMenu& menu)
 {
-	std::string filepath = m_sprite->GetSymbol()->GetFilepath();
+	std::string filepath = m_spr->GetSymbol()->GetFilepath();
 	if (!CharacterFileName::IsValidFilepath(filepath)) {
 		return;
 	}
@@ -98,9 +98,9 @@ void RightPopupMenu::CreateLayerTagMenu(wxMenu& menu)
 {
 	menu.AppendSeparator();
 
-	if (m_sprite && m_stage->GetSpriteSelection()->Size() == 1) 
+	if (m_spr && m_stage->GetSpriteSelection()->Size() == 1) 
 	{
-		const std::string& tag = m_sprite->GetTag();
+		const std::string& tag = m_spr->GetTag();
 		if (tag.find(std::string(COVER_LAYER_TAG)) == std::string::npos) {
 			m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnRightPopupMenu, m_stage, MENU_COVER_LAYER_TAG_ID);
 			menu.Append(MENU_COVER_LAYER_TAG_ID, "ÕÚµ²²ã");		
@@ -154,11 +154,11 @@ void RightPopupMenu::HandleAnimMenu(int id)
 {
 	if (id == MENU_ROTATE_LEFT_ID || id == MENU_ROTATE_RIGHT_ID)
 	{
-		std::string filepath = m_sprite->GetSymbol()->GetFilepath();
+		std::string filepath = m_spr->GetSymbol()->GetFilepath();
 		assert(CharacterFileName::IsValidFilepath(filepath));
 		CharacterFileName name(filepath);
 		int dir = 1 + (name.GetField(CharacterFileName::FT_DIRECTION)[0] - '1');
-		if (m_sprite->GetMirror().x) {
+		if (m_spr->GetMirror().x) {
 			dir = 10 - dir;
 		}
 
@@ -168,33 +168,33 @@ void RightPopupMenu::HandleAnimMenu(int id)
 		if (dir == 0) { dir = 8; }
 		else if (dir == 9) { dir = 1; }
 
-		ee::Symbol* symbol = m_stage->GetCharaDirs()->GetSymbolByDir(filepath, dir);
-		static_cast<ecomplex::Sprite*>(m_sprite)->SetSymbol(symbol);
+		ee::Symbol* sym = m_stage->GetCharaDirs()->GetSymbolByDir(filepath, dir);
+		static_cast<ecomplex::Sprite*>(m_spr)->SetSymbol(sym);
 
 
 		if (dir >= 1 && dir <= 5) {
-			m_sprite->SetMirror(false, false);
+			m_spr->SetMirror(false, false);
 		} else {
-			m_sprite->SetMirror(true, false);
+			m_spr->SetMirror(true, false);
 		}
 	}
 	else if (id - MENU_COLOR_START_ID < m_anim_files.size())
 	{
 		const CharacterFileName& item = m_anim_files[id - MENU_COLOR_START_ID];
 
-		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(item.GetFilepath());
-		static_cast<ecomplex::Sprite*>(m_sprite)->SetSymbol(symbol);
+		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(item.GetFilepath());
+		static_cast<ecomplex::Sprite*>(m_spr)->SetSymbol(sym);
 	}
 }
 
 void RightPopupMenu::HandleLayerTagMenu(int id)
 {
 	ee::SpriteSelection* selection = m_stage->GetSpriteSelection();
-	std::vector<ee::Sprite*> sprites;
-	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	for (int i = 0, n = sprites.size(); i < n; ++i) 
+	std::vector<ee::Sprite*> sprs;
+	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	for (int i = 0, n = sprs.size(); i < n; ++i) 
 	{
-		ee::Sprite* spr = sprites[i];
+		ee::Sprite* spr = sprs[i];
 
 		std::string tag = spr->GetTag();
 		size_t p_begin = tag.find("layer=");
@@ -222,10 +222,10 @@ void RightPopupMenu::HandleMoveToLayerMenu(int id)
 	ee::Layer* to = from->GetLayerMgr()->GetLayer(idx);
 	
 	ee::SpriteSelection* selection = m_stage->GetSpriteSelection();
-	std::vector<ee::Sprite*> sprites;
-	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		ee::Sprite* spr = sprites[i];
+	std::vector<ee::Sprite*> sprs;
+	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		ee::Sprite* spr = sprs[i];
 		from->RemoveSprite(spr);
 		to->Insert(spr);
 	}

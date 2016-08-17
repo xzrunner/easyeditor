@@ -140,12 +140,12 @@ bool ArrangeSpriteOP<TBase>::IsEmpty() const
 template <typename TBase>
 Sprite* ArrangeSpriteOP<TBase>::SelectByPos(const sm::vec2& pos) const
 {
-	Sprite* sprite = NULL;
-	sprite = m_impl->QueryEditedSprite(pos);
-	if (!sprite) {
-		sprite = TBase::SelectByPos(pos);
+	Sprite* spr = NULL;
+	spr = m_impl->QueryEditedSprite(pos);
+	if (!spr) {
+		spr = TBase::SelectByPos(pos);
 	}
-	return sprite;
+	return spr;
 }
 
 }

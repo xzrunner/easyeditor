@@ -90,12 +90,12 @@ void PackPNG::StoreScaled(std::ofstream& fout, float scale) const
 
 	ee::ImageData img_data(buf, m_width, m_height, 4);
 	ee::Image img(&img_data);
-	ee::ImageSymbol symbol(&img, "");
+	ee::ImageSymbol sym(&img, "");
 
 	int width = static_cast<int>(m_width * scale),
 		height= static_cast<int>(m_height * scale);
 	ee::Snapshoot ss;
-	uint8_t* buffer = ss.OutputToMemory(&symbol, false, scale);
+	uint8_t* buffer = ss.OutputToMemory(&sym, false, scale);
 	ee::ImageVerticalFlip revert(buffer, width, height);
 	uint8_t* buf_revert = revert.Revert();		
 	Store(fout, buf_revert, width, height);

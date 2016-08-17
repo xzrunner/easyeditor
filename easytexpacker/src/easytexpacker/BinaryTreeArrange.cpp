@@ -16,9 +16,9 @@ BinaryTreeArrange::~BinaryTreeArrange()
 	delete m_root;
 }
 
-void BinaryTreeArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites)
+void BinaryTreeArrange::Arrange(const std::vector<ee::ImageSprite*>& sprs)
 {
-	std::vector<ee::ImageSprite*> sorted(sprites);
+	std::vector<ee::ImageSprite*> sorted(sprs);
 	SortByMaxEdge(sorted);
 
 	int maxArranged = -1, maxFlag = 0;
@@ -96,13 +96,13 @@ BinaryTreeArrange::Node::~Node()
 }
 
 BinaryTreeArrange::Node* 
-BinaryTreeArrange::Node::Insert(ee::ImageSprite* sprite, int flag)
+BinaryTreeArrange::Node::Insert(ee::ImageSprite* spr, int flag)
 {
 	if (child[0])
 	{
-		Node* newNode = child[0]->Insert(sprite, flag / 2);
+		Node* newNode = child[0]->Insert(spr, flag / 2);
 		if (newNode) return newNode;
-		return child[1]->Insert(sprite, flag / 4);
+		return child[1]->Insert(spr, flag / 4);
 	}
 	else
 	{
@@ -110,9 +110,9 @@ BinaryTreeArrange::Node::Insert(ee::ImageSprite* sprite, int flag)
 
 		const float s = Context::Instance()->scale,
 			p = Context::Instance()->padding * 2;
-		float width = sprite->GetSymbol()->GetBounding().Width() * s + p,
-			height = sprite->GetSymbol()->GetBounding().Height() * s + p;
-		if (sprite->GetAngle() != 0)
+		float width = spr->GetSymbol()->GetBounding().Width() * s + p,
+			height = spr->GetSymbol()->GetBounding().Height() * s + p;
+		if (spr->GetAngle() != 0)
 		{
 			float tmp = width;
 			width = height;
@@ -139,7 +139,7 @@ BinaryTreeArrange::Node::Insert(ee::ImageSprite* sprite, int flag)
 		sm::vec2 center;
 		center.x = child[0]->rc.xmin + width * 0.5f;
 		center.y = child[0]->rc.ymin + height * 0.5f;
-		sprite->SetPosition(center);
+		spr->SetPosition(center);
 
 		if (child[0]->rc.Width() > width)
 		{
@@ -150,7 +150,7 @@ BinaryTreeArrange::Node::Insert(ee::ImageSprite* sprite, int flag)
 			child[0]->child[0]->rc.xmax = child[0]->rc.xmin + width;
 			child[0]->child[1]->rc.xmin = child[0]->rc.xmin + width;
 
-			child[0]->child[0]->texture = sprite;
+			child[0]->child[0]->texture = spr;
 
 			return child[0]->child[0];
 		}
@@ -163,13 +163,13 @@ BinaryTreeArrange::Node::Insert(ee::ImageSprite* sprite, int flag)
 			child[0]->child[0]->rc.ymax = child[0]->rc.ymin + height;
 			child[0]->child[1]->rc.ymin = child[0]->rc.ymin + height;
 
-			child[0]->child[0]->texture = sprite;
+			child[0]->child[0]->texture = spr;
 
 			return child[0]->child[0];
 		}
 		else
 		{
-			child[0]->texture = sprite;
+			child[0]->texture = spr;
 			return child[0];
 		}
 	}

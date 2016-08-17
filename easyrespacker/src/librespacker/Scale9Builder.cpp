@@ -79,42 +79,42 @@ const IPackNode* Scale9Builder::Query(const escale9::Sprite* spr) const
 
 void Scale9Builder::Load(const escale9::Sprite* spr, PackPicture* pic)
 {
-	std::vector<ee::Sprite*> sprites;
+	std::vector<ee::Sprite*> sprs;
 	const escale9::Scale9Data& data = spr->GetScale9Data();
 	switch (data.GetType())
 	{
 	case escale9::e_9Grid:
 		for (size_t i = 0; i < 3; ++i)
 			for (size_t j = 0; j < 3; ++j)
-				sprites.push_back(data.GetSprite(i, j));
+				sprs.push_back(data.GetSprite(i, j));
 		break;
 	case escale9::e_9GridHollow:
 		for (size_t i = 0; i < 3; ++i) {
 			for (size_t j = 0; j < 3; ++j) {
 				if (i == 1 && j == 1) continue;
-				sprites.push_back(data.GetSprite(i, j));
+				sprs.push_back(data.GetSprite(i, j));
 			}
 		}
 		break;
 	case escale9::e_3GridHor:
 		for (size_t i = 0; i < 3; ++i)
-			sprites.push_back(data.GetSprite(1, i));
+			sprs.push_back(data.GetSprite(1, i));
 		break;
 	case escale9::e_3GridVer:
 		for (size_t i = 0; i < 3; ++i)
-			sprites.push_back(data.GetSprite(i, 1));
+			sprs.push_back(data.GetSprite(i, 1));
 		break;
 	case escale9::e_6GridUpper:
 		for (size_t i = 1; i < 3; ++i)
 			for (size_t j = 0; j < 3; ++j)
-				sprites.push_back(data.GetSprite(i, j));
+				sprs.push_back(data.GetSprite(i, j));
 		break;
 	}
 
-	for (size_t i = 0, n = sprites.size(); i < n; ++i)
+	for (size_t i = 0, n = sprs.size(); i < n; ++i)
 	{
-		ee::Sprite* sprite = sprites[i];
-		if (ee::ImageSprite* image = dynamic_cast<ee::ImageSprite*>(sprite)) {
+		ee::Sprite* spr = sprs[i];
+		if (ee::ImageSprite* image = dynamic_cast<ee::ImageSprite*>(spr)) {
 			PackPicture::Quad quad;
 			ImageBuilder::LoadPictureQuad(image, quad);
 			pic->quads.push_back(quad);

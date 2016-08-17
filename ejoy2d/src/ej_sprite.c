@@ -22,15 +22,15 @@ sprite_size(struct dtex_package* pkg, int id) {
 	int type = ej_pkg->type[id];
 	if (type == TYPE_ANIMATION) {
 		struct pack_animation * ani = (struct pack_animation *)ej_pkg->data[id];
-		return sizeof(struct sprite) + (ani->component_number - 1) * sizeof(struct sprite *);
+		return sizeof(struct spr) + (ani->component_number - 1) * sizeof(struct sprite *);
 	} else if (type == TYPE_PARTICLE3D) {
 		struct p3d_emitter_cfg* p3d_cfg = (struct p3d_emitter_cfg*)ej_pkg->data[id];
-		return sizeof(struct sprite) + (p3d_cfg->symbol_count - 1) * sizeof(struct sprite*);
+		return sizeof(struct spr) + (p3d_cfg->sym_count - 1) * sizeof(struct sprite*);
 	} else if (type == TYPE_PARTICLE2D) {
 		struct p2d_emitter_cfg* p2d_cfg = (struct p2d_emitter_cfg*)ej_pkg->data[id];
-		return sizeof(struct sprite) + (p2d_cfg->symbol_count - 1) * sizeof(struct sprite*);
+		return sizeof(struct spr) + (p2d_cfg->sym_count - 1) * sizeof(struct sprite*);
 	} else {
-		return sizeof(struct sprite);
+		return sizeof(struct spr);
 	}
 	return 0;
 }
@@ -97,15 +97,15 @@ sprite_init(struct sprite * s, struct dtex_package* pkg, int id, int sz) {
 		sprite_action(s, NULL);
 		int i;
 		int n = ani->component_number;
-		assert(sz >= sizeof(struct sprite) + (n - 1) * sizeof(struct sprite *));
+		assert(sz >= sizeof(struct spr) + (n - 1) * sizeof(struct sprite *));
 		for (i=0; i<n ;i++) {
 			s->data.children[i] = NULL;
 		}
 	} else if (s->type == TYPE_PARTICLE3D) {
 		struct p3d_emitter_cfg* cfg = (struct p3d_emitter_cfg*)ej_pkg->data[id];
 		s->s.p3d_cfg = cfg;
-		int n = cfg->symbol_count;
-		assert(sz >= sizeof(struct sprite) + (n - 1) * sizeof(struct sprite *));
+		int n = cfg->sym_count;
+		assert(sz >= sizeof(struct spr) + (n - 1) * sizeof(struct sprite *));
 		for (int i = 0; i < n ; ++i) {
 			s->data.children[i] = NULL;
 		}
@@ -115,8 +115,8 @@ sprite_init(struct sprite * s, struct dtex_package* pkg, int id, int sz) {
 	} else if (s->type == TYPE_PARTICLE2D) {
 		struct p2d_emitter_cfg* cfg = (struct p2d_emitter_cfg*)ej_pkg->data[id];
 		s->s.p2d_cfg = cfg;
-		int n = cfg->symbol_count;
-		assert(sz >= sizeof(struct sprite) + (n - 1) * sizeof(struct sprite *));
+		int n = cfg->sym_count;
+		assert(sz >= sizeof(struct spr) + (n - 1) * sizeof(struct sprite *));
 		for (int i = 0; i < n ; ++i) {
 			s->data.children[i] = NULL;
 		}
@@ -126,7 +126,7 @@ sprite_init(struct sprite * s, struct dtex_package* pkg, int id, int sz) {
 	} else {
 		s->s.pic = (struct pack_picture *)ej_pkg->data[id];
 		memset(&s->data, 0, sizeof(s->data));
-		assert(sz >= sizeof(struct sprite) - sizeof(struct sprite *));
+		assert(sz >= sizeof(struct spr) - sizeof(struct sprite *));
 		if (s->type == TYPE_PANNEL) {
 			struct pack_pannel * pp = (struct pack_pannel *)ej_pkg->data[id];
 			s->data.scissor = pp->scissor;
@@ -269,17 +269,17 @@ sprite_component(struct sprite *s, int index) {
 		return ani->component[index].id;
 	} else if (s->type == TYPE_PARTICLE3D) {
 		struct p3d_emitter_cfg* p3d_cfg = s->s.p3d_cfg;
-		if (index < 0 || index >= p3d_cfg->symbol_count) {
+		if (index < 0 || index >= p3d_cfg->sym_count) {
 			return -1;
 		}
-		uint32_t id = (uint32_t)p3d_cfg->symbols[index].ud;
+		uint32_t id = (uint32_t)p3d_cfg->syms[index].ud;
 		return (id >> 16) & 0xffff;
 	} else if (s->type == TYPE_PARTICLE2D) {
 		struct p2d_emitter_cfg* p2d_cfg = (struct p2d_emitter_cfg*)s->s.p2d_cfg;
-		if (index < 0 || index >= p2d_cfg->symbol_count) {
+		if (index < 0 || index >= p2d_cfg->sym_count) {
 			return -1;
 		}
-		uint32_t id = (uint32_t)p2d_cfg->symbols[index].ud;
+		uint32_t id = (uint32_t)p2d_cfg->syms[index].ud;
 		return (id >> 16) & 0xffff;
 	} else {
 		return -1;
@@ -314,9 +314,9 @@ sprite_mount(struct sprite *parent, int index, struct sprite *child) {
 		struct pack_animation *ani = parent->s.ani;
 		num = ani->component_number;
 	} else if (parent->type == TYPE_PARTICLE3D) {
-		num = parent->s.p3d_cfg->symbol_count;
+		num = parent->s.p3d_cfg->sym_count;
 	} else if (parent->type == TYPE_PARTICLE2D) {
-		num = parent->s.p2d_cfg->symbol_count;
+		num = parent->s.p2d_cfg->sym_count;
 	}
 
 	assert(index >= 0 && index < num);

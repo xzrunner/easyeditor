@@ -69,19 +69,19 @@ void HistoryList::OnSave()
 		m_saved_op = m_undo_stack.top();
 }
 
-void HistoryList::Store(Json::Value& value, const std::vector<Sprite*>& sprites)
+void HistoryList::Store(Json::Value& value, const std::vector<Sprite*>& sprs)
 {
-	Store(m_undo_stack, value["undo"], sprites);
-	Store(m_redo_stack, value["redo"], sprites);
+	Store(m_undo_stack, value["undo"], sprs);
+	Store(m_redo_stack, value["redo"], sprs);
 }
 
-void HistoryList::Load(const Json::Value& value, const std::vector<Sprite*>& sprites)
+void HistoryList::Load(const Json::Value& value, const std::vector<Sprite*>& sprs)
 {
 	if (!value["undo"].isNull()) {
-		Load(m_undo_stack, value["undo"], sprites);
+		Load(m_undo_stack, value["undo"], sprs);
 	}
 	if (!value["redo"].isNull()) {
-		Load(m_redo_stack, value["redo"], sprites);
+		Load(m_redo_stack, value["redo"], sprs);
 	}
 }
 
@@ -95,7 +95,7 @@ void HistoryList::Clear(std::stack<AtomicOP*>& stack)
 }
 
 void HistoryList::Store(std::stack<AtomicOP*>& stack, Json::Value& val,
-						const std::vector<Sprite*>& sprites)
+						const std::vector<Sprite*>& sprs)
 {
 	std::vector<AtomicOP*> tmp;
 	while (!stack.empty()) {
@@ -105,13 +105,13 @@ void HistoryList::Store(std::stack<AtomicOP*>& stack, Json::Value& val,
 
 	for (int i = tmp.size() - 1; i >= 0; --i) {
 		AtomicOP* op = tmp[i];
-		val[tmp.size() - 1 - i] = op->Store(sprites);
+		val[tmp.size() - 1 - i] = op->Store(sprs);
 		stack.push(op);
 	}
 }
 
 void HistoryList::Load(std::stack<AtomicOP*>& stack, const Json::Value& val,
-					   const std::vector<Sprite*>& sprites)
+					   const std::vector<Sprite*>& sprs)
 {
 	int i = 0;
 	Json::Value opValue = val[i++];
@@ -124,7 +124,7 @@ void HistoryList::Load(std::stack<AtomicOP*>& stack, const Json::Value& val,
 			int index = spriteValue.asInt();
 
 			// error version
-			if (index < 0 || index >= static_cast<int>(sprites.size()))
+			if (index < 0 || index >= static_cast<int>(sprs.size()))
 			{
 				while (!stack.empty())
 				{
@@ -134,8 +134,8 @@ void HistoryList::Load(std::stack<AtomicOP*>& stack, const Json::Value& val,
 				return;
 			}
 
-			assert(index >= 0 && static_cast<int>(index < sprites.size()));
-			selected.push_back(sprites[index]);
+			assert(index >= 0 && static_cast<int>(index < sprs.size()));
+			selected.push_back(sprs[index]);
 			spriteValue = opValue["sprites"][j++];
 		}
 		

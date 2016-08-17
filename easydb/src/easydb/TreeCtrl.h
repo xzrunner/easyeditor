@@ -34,7 +34,7 @@ private:
 private:
 	void addNode(const Graphics& graph, const Node& node, wxTreeItemId parent);
 
-	std::string getItemName(const ee::Sprite& sprite) const;
+	std::string getItemName(const ee::Sprite& spr) const;
 
 	void onSelChanged(wxTreeEvent& event);
 	void onItemClick(wxTreeEvent& event);

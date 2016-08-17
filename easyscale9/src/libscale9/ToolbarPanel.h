@@ -14,7 +14,7 @@ class ToolbarPanel : public wxPanel
 {
 public:
 	ToolbarPanel(wxWindow* parent, ee::EditPanel* stage,
-		Symbol* symbol);
+		Symbol* sym);
 
 private:
 	void InitLayout();
@@ -24,7 +24,7 @@ private:
 private:
 	ee::EditPanel* m_stage;
 
-	Symbol* m_symbol;
+	Symbol* m_sym;
 
 	wxSpinCtrl *m_wSpin, *m_hSpin;
 

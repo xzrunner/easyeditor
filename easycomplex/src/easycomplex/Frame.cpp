@@ -84,24 +84,24 @@ std::string Frame::GetFileFilter() const
 
 void Frame::onPreview(wxCommandEvent& event)
 {
-// 	ee::Symbol* symbol = ee::SymbolMgr::Instance()->fetchSymbol("default.ttf");
-// 	symbol->ReloadTexture();
+// 	ee::Symbol* sym = ee::SymbolMgr::Instance()->fetchSymbol("default.ttf");
+// 	sym->ReloadTexture();
 
-	std::vector<const ee::Sprite*> sprites;
-	m_task->GetAllSprite(sprites);
+	std::vector<const ee::Sprite*> sprs;
+	m_task->GetAllSprite(sprs);
 	ee::StageCanvas* canvas = const_cast<ee::EditPanel*>(m_task->GetEditPanel())->GetCanvas();
- 	PreviewDialog dlg(this, canvas->GetGLContext(), sprites);
+ 	PreviewDialog dlg(this, canvas->GetGLContext(), sprs);
  	dlg.ShowModal();
 }
 
 void Frame::OnEJPreview(wxCommandEvent& event)
 {
-	std::vector<const ee::Sprite*> sprites;
-	m_task->GetAllSprite(sprites);
+	std::vector<const ee::Sprite*> sprs;
+	m_task->GetAllSprite(sprs);
 
 	//////////////////////////////////////////////////////////////////////////
 
-	// 		EJPreviewDialog dlg(this, sprites);
+	// 		EJPreviewDialog dlg(this, sprs);
 	// 		dlg.ShowModal();
 
 	//////////////////////////////////////////////////////////////////////////
@@ -110,7 +110,7 @@ void Frame::OnEJPreview(wxCommandEvent& event)
 	ee::FileHelper::MkDir(folder);
 
 	ecoco::epe::PackLuaFile pack;
-	pack.pack(sprites, folder);
+	pack.pack(sprs, folder);
 
 #ifdef _DEBUG
 	std::string cwd = wxFileName::GetCwd();
@@ -131,9 +131,9 @@ void Frame::onSetBackground(wxCommandEvent& event)
 	if (dlg.ShowModal() == wxID_OK)
 	{
  		std::string filename = dlg.GetPath().ToStdString();
-		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filename);
-  		static_cast<StageCanvas*>(canvas)->SetBackground(symbol);
-		symbol->RemoveReference();
+		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filename);
+  		static_cast<StageCanvas*>(canvas)->SetBackground(sym);
+		sym->RemoveReference();
 	}
 	else
 	{
@@ -197,8 +197,8 @@ void Frame::onCode(wxCommandEvent& event)
 void Frame::SaveAsPNG(const std::string& filepath) const
 {
 	ee::Snapshoot ss;
-	Symbol* symbol = ((StagePanel*)(m_task->GetEditPanel()))->GetSymbol();
-	ss.OutputToImageFile(symbol, filepath);
+	Symbol* sym = ((StagePanel*)(m_task->GetEditPanel()))->GetSymbol();
+	ss.OutputToImageFile(sym, filepath);
 }
 
 void Frame::SaveAsJson(const std::string& filepath) const

@@ -21,7 +21,7 @@ private:
 		std::string name;
 		std::string path;
 		int id;
-		std::map<std::string, int> sprites;
+		std::map<std::string, int> sprs;
 	};
 
 private:

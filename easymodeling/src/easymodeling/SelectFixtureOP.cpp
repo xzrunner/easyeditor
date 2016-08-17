@@ -30,13 +30,13 @@ SelectFixtureOP::~SelectFixtureOP()
 bool SelectFixtureOP::OnMouseLeftDown(int x, int y)
 {
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-	ee::Sprite* sprite = m_stagePanel->QuerySpriteByPos(pos);
+	ee::Sprite* spr = m_stagePanel->QuerySpriteByPos(pos);
 
 	ee::PropertySetting* setting = NULL;
-	if (sprite)
+	if (spr)
 	{
 		m_selected = NULL;
-		Body* body = static_cast<Body*>(sprite->GetUserData());
+		Body* body = static_cast<Body*>(spr->GetUserData());
 		for (size_t i = 0, n = body->m_fixtures.size(); i < n; ++i)
 		{
 			if (body->m_fixtures[i]->IsContain(pos))
@@ -71,13 +71,13 @@ bool SelectFixtureOP::OnMouseLeftUp(int x, int y)
 	if (m_first_pos.IsValid())
 	{
 		sm::rect rect(m_first_pos, m_stage->TransPosScrToProj(x, y));
-		std::vector<ee::Sprite*> sprites;
-		m_stagePanel->QuerySpritesByRect(rect, sprites);
+		std::vector<ee::Sprite*> sprs;
+		m_stagePanel->QuerySpritesByRect(rect, sprs);
 
 		m_selected = NULL;
-		for (size_t i = 0, n = sprites.size(); i < n; ++i)
+		for (size_t i = 0, n = sprs.size(); i < n; ++i)
 		{
-			Body* body = static_cast<Body*>(sprites[i]->GetUserData());
+			Body* body = static_cast<Body*>(sprs[i]->GetUserData());
 			for (size_t j = 0, m = body->m_fixtures.size(); j < m; ++j)
 			{
 				if (body->m_fixtures[j]->IsIntersect(rect))
@@ -106,10 +106,10 @@ bool SelectFixtureOP::OnMouseMove(int x, int y)
 	m_mouseOn = NULL;
 
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-	ee::Sprite* sprite = static_cast<StagePanel*>(m_wnd)->QuerySpriteByPos(pos);
-	if (sprite)
+	ee::Sprite* spr = static_cast<StagePanel*>(m_wnd)->QuerySpriteByPos(pos);
+	if (spr)
 	{
-		Body* body = static_cast<Body*>(sprite->GetUserData());
+		Body* body = static_cast<Body*>(spr->GetUserData());
 		if (body)
 		{
 			for (size_t i = 0, n = body->m_fixtures.size(); i < n; ++i)

@@ -52,8 +52,8 @@ sm::rect FontBlankSymbol::GetSize(const Sprite* sprite/* = NULL*/) const
 {
 	sm::rect b;
 	float w = width, h = height;
-	if (sprite) {
-		const FontBlankSprite* font = dynamic_cast<const FontBlankSprite*>(sprite);
+	if (spr) {
+		const FontBlankSprite* font = dynamic_cast<const FontBlankSprite*>(spr);
 		if (font) {
 			w = font->width;
 			h = font->height;
@@ -127,8 +127,8 @@ void FontBlankSymbol::DrawBackground(const FontBlankSprite* fb, const sm::mat4& 
 
 void FontBlankSymbol::DrawText(const FontBlankSprite* fb, const sm::mat4& mt) const
 {
-// 	if (sprite) {
-// 		if (const FontBlankSprite* font = dynamic_cast<const FontBlankSprite*>(sprite)) {
+// 	if (spr) {
+// 		if (const FontBlankSprite* font = dynamic_cast<const FontBlankSprite*>(spr)) {
 // 			const std::string& str = font->GetTextContext();
 // 			if (!str.empty()) {
 // 				sm::vec2 pos = Math2D::TransVector(sm::vec2(0, 0), mt);
@@ -147,8 +147,8 @@ void FontBlankSymbol::DrawText(const FontBlankSprite* fb, const sm::mat4& mt) co
 // 		}
 // 	}
 
-// 	if (sprite) {
-// 		if (const FontBlankSprite* font = dynamic_cast<const FontBlankSprite*>(sprite)) {
+// 	if (spr) {
+// 		if (const FontBlankSprite* font = dynamic_cast<const FontBlankSprite*>(spr)) {
 // 			const std::string& str = font->GetTextContext();
 // 			if (!str.empty()) {
 // 				PrimitiveDraw::text(str.c_str());
@@ -159,7 +159,7 @@ void FontBlankSymbol::DrawText(const FontBlankSprite* fb, const sm::mat4& mt) co
 // 	if (m_font) 
 // 	{
 // 		float w = width;
-// 		if (const FontBlankSprite* s = dynamic_cast<const FontBlankSprite*>(sprite)) {
+// 		if (const FontBlankSprite* s = dynamic_cast<const FontBlankSprite*>(spr)) {
 // 			w = s->width;
 // 		}
 // 		Shader::Instance()->null();

@@ -44,11 +44,11 @@ bool SpriteDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& data)
 	}
 
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(sym);
-	sprite->Translate(pos);
-	ee::InsertSpriteSJ::Instance()->Insert(sprite);
-	ee::EditAddRecordSJ::Instance()->Add(new ee::InsertSpriteAOP(sprite));
-	sprite->RemoveReference();
+	ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+	spr->Translate(pos);
+	ee::InsertSpriteSJ::Instance()->Insert(spr);
+	ee::EditAddRecordSJ::Instance()->Add(new ee::InsertSpriteAOP(spr));
+	spr->RemoveReference();
 
 	return true;
 }

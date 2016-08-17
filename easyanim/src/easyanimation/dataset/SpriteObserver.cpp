@@ -13,13 +13,13 @@ SpriteObserver::SpriteObserver(const Layer& layer)
 {
 }
 
-void SpriteObserver::Translate(ee::Sprite* sprite, const sm::vec2& offset)
+void SpriteObserver::Translate(ee::Sprite* spr, const sm::vec2& offset)
 {
 	if (!m_enable) {
 		return;
 	}
 
-	std::map<ee::Sprite*, int>::iterator itr_sprite = m_map2frame.find(sprite);
+	std::map<ee::Sprite*, int>::iterator itr_sprite = m_map2frame.find(spr);
 	if (itr_sprite == m_map2frame.end())
 		return;
 
@@ -30,24 +30,24 @@ void SpriteObserver::Translate(ee::Sprite* sprite, const sm::vec2& offset)
 	for ( ; itr_frame != frames.end(); ++itr_frame)
 	{
 		KeyFrame* frame = itr_frame->second;
-		const std::vector<ee::Sprite*>& sprites = frame->GetAllSprites();
-		for (int i = 0, n = sprites.size(); i < n; ++i)
+		const std::vector<ee::Sprite*>& sprs = frame->GetAllSprites();
+		for (int i = 0, n = sprs.size(); i < n; ++i)
 		{
-			if (sprites[i]->GetName() == sprite->GetName())
-				sprites[i]->Translate(offset);
+			if (sprs[i]->GetName() == spr->GetName())
+				sprs[i]->Translate(offset);
 		}
 	}
 
 	m_enable = true;
 }
 
-void SpriteObserver::Rotate(ee::Sprite* sprite, float delta)
+void SpriteObserver::Rotate(ee::Sprite* spr, float delta)
 {
 	if (!m_enable) {
 		return;
 	}
 
-	std::map<ee::Sprite*, int>::iterator itr_sprite = m_map2frame.find(sprite);
+	std::map<ee::Sprite*, int>::iterator itr_sprite = m_map2frame.find(spr);
 	if (itr_sprite == m_map2frame.end())
 		return;
 
@@ -58,26 +58,26 @@ void SpriteObserver::Rotate(ee::Sprite* sprite, float delta)
 	for ( ; itr_frame != frames.end(); ++itr_frame)
 	{
 		KeyFrame* frame = itr_frame->second;
-		const std::vector<ee::Sprite*>& sprites = frame->GetAllSprites();
-		for (int i = 0, n = sprites.size(); i < n; ++i)
+		const std::vector<ee::Sprite*>& sprs = frame->GetAllSprites();
+		for (int i = 0, n = sprs.size(); i < n; ++i)
 		{
-			if (sprites[i]->GetName() == sprite->GetName())
-				sprites[i]->Rotate(delta);
+			if (sprs[i]->GetName() == spr->GetName())
+				sprs[i]->Rotate(delta);
 		}
 	}
 
 	m_enable = true;
 }
 
-void SpriteObserver::Insert(const ee::Sprite* sprite, int frame)
+void SpriteObserver::Insert(const ee::Sprite* spr, int frame)
 {
-	m_map2frame.insert(std::make_pair(const_cast<ee::Sprite*>(sprite), frame));
+	m_map2frame.insert(std::make_pair(const_cast<ee::Sprite*>(spr), frame));
 }
 
-void SpriteObserver::Remove(const ee::Sprite* sprite)
+void SpriteObserver::Remove(const ee::Sprite* spr)
 {
 	std::map<ee::Sprite*, int>::iterator itr 
-		= m_map2frame.find(const_cast<ee::Sprite*>(sprite));
+		= m_map2frame.find(const_cast<ee::Sprite*>(spr));
 	if (itr != m_map2frame.end())
 		m_map2frame.erase(itr);
 }

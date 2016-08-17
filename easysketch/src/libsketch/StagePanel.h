@@ -38,7 +38,7 @@ private:
 	void Clear();
 
 private:
-	std::vector<ee::Sprite*> m_sprites;
+	std::vector<ee::Sprite*> m_sprs;
 
 }; // StagePanel
 

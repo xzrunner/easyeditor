@@ -21,9 +21,9 @@ class Graphics
 public:
 	void Connect(ee::Sprite* from, ee::Sprite* to);
 
-	void Move(ee::Sprite* sprite, const sm::vec2& offset);
+	void Move(ee::Sprite* spr, const sm::vec2& offset);
 
-	Node* Query(ee::Sprite* sprite) const;
+	Node* Query(ee::Sprite* spr) const;
 
 	void Clear();
 

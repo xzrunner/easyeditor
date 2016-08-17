@@ -14,10 +14,10 @@ class SymbolSet
 {
 public:
 
-	void Insert(const ee::Symbol* symbol);
+	void Insert(const ee::Symbol* sym);
 
 	const ee::Symbol* Query(const std::string& filepath) const;
-	bool Query(const ee::Symbol* symbol) const;
+	bool Query(const ee::Symbol* sym) const;
 
 	const std::vector<const ee::Symbol*>& GetOrdered() const { return m_symbol_ordered; }
 

@@ -18,14 +18,14 @@ public:
 	Snapshoot(int width, int height);
 	~Snapshoot();
 
-	unsigned char* OutputToMemory(const Symbol* symbol, bool whitebg = false,
+	unsigned char* OutputToMemory(const Symbol* sym, bool whitebg = false,
 		float scale = 1.0f) const;
-	void OutputToImageFile(const Symbol* symbol, const std::string& filename, 
+	void OutputToImageFile(const Symbol* sym, const std::string& filename, 
 		float scale = 1.0f) const;
 
-	void DrawSprite(const Sprite* sprite, bool clear = false,
+	void DrawSprite(const Sprite* spr, bool clear = false,
 		float dx = 0, float dy = 0) const;
-	void DrawSprite(const Sprite* sprite, bool clear, int width, int height,
+	void DrawSprite(const Sprite* spr, bool clear, int width, int height,
 		float dx = 0, float dy = 0, float scale = 1) const;
 
 	void DrawShape(const Shape* shape, bool clear = false) const;

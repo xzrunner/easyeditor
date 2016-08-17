@@ -12,13 +12,13 @@ class DialogStageCanvas : public CameraCanvas
 {
 public:
 	DialogStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage, 
-		Symbol* symbol, wxGLContext* glctx);
+		Symbol* sym, wxGLContext* glctx);
 
 protected:
 	virtual void OnDrawSprites() const;
 
 private:
-	Symbol* m_symbol;
+	Symbol* m_sym;
 
 }; // DialogStageCanvas
 

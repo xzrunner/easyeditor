@@ -10,7 +10,7 @@ class Sprite;
 class SpritePropertyImpl
 {
 public:
-	SpritePropertyImpl(EditPanelImpl* stage, Sprite* sprite);
+	SpritePropertyImpl(EditPanelImpl* stage, Sprite* spr);
 	~SpritePropertyImpl();
 
 	void Translate(float x, float y);
@@ -21,12 +21,12 @@ public:
 	void Mirror(bool mx, bool my);
 	void Perspective(float px, float py);
 
-	Sprite* GetSprite() { return m_sprite; }
+	Sprite* GetSprite() { return m_spr; }
 
 private:
 	EditPanelImpl* m_stage;
 
-	Sprite* m_sprite;
+	Sprite* m_spr;
 
 }; // SpritePropertyImpl
 

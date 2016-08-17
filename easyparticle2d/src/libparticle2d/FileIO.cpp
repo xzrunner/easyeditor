@@ -41,8 +41,8 @@ void FileIO::Store(const std::string& filepath, ToolbarPanel* toolbar)
 
 		Json::Value cval;
 
-		ee::Symbol* symbol = static_cast<ee::Symbol*>(p_symbol->ud);
-		cval["filepath"] = ee::FileHelper::GetRelativePath(dir, symbol->GetFilepath());
+		ee::Symbol* sym = static_cast<ee::Symbol*>(p_symbol->ud);
+		cval["filepath"] = ee::FileHelper::GetRelativePath(dir, sym->GetFilepath());
 
 		for (int j = 0, m = cp->m_sliders.size(); j < m; ++j) {
 			cp->m_sliders[j]->Store(cval);
@@ -175,12 +175,12 @@ p2d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
 	cfg->direction = adapter.direction;
 	cfg->direction_var = adapter.direction_var;
 
-	cfg->symbol_count = adapter.components.size();
-	cfg->symbols = (p2d_symbol*)(cfg+1);
+	cfg->sym_count = adapter.components.size();
+	cfg->syms = (p2d_symbol*)(cfg+1);
 	for (int i = 0, n = adapter.components.size(); i < n; ++i) 
 	{
 		const LoadAdapter::Component& src = adapter.components[i];
-		p2d_symbol& dst = cfg->symbols[i];
+		p2d_symbol& dst = cfg->syms[i];
 
 		dst.angle_start = src.angle_start * SM_DEG_TO_RAD;
 		dst.angle_end = src.angle_end * SM_DEG_TO_RAD;

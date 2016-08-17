@@ -16,7 +16,7 @@ class Sprite;
 class MultiSpritesPropertyImpl
 {
 public:
-	MultiSpritesPropertyImpl(const std::vector<Sprite*>& sprites);
+	MultiSpritesPropertyImpl(const std::vector<Sprite*>& sprs);
 	~MultiSpritesPropertyImpl();
 
 public:
@@ -90,7 +90,7 @@ private:
 	};
 
 private:
-	std::vector<Sprite*> m_sprites;
+	std::vector<Sprite*> m_sprs;
 
 }; // MultiSpritesPropertyImpl
 

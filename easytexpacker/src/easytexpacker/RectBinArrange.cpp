@@ -16,9 +16,9 @@
 namespace etexpacker
 {
 
-void RectBinArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites)
+void RectBinArrange::Arrange(const std::vector<ee::ImageSprite*>& sprs)
 {
-// 	std::vector<ee::ImageSprite*> sorted(sprites);
+// 	std::vector<ee::ImageSprite*> sorted(sprs);
 // 	sortByMaxEdge(sorted);
 // 
 // 	std::vector<RectSize> input;
@@ -36,7 +36,7 @@ void RectBinArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites)
 
 	m_tex_account = 0;
 
-	std::vector<ee::ImageSprite*> sorted(sprites);
+	std::vector<ee::ImageSprite*> sorted(sprs);
 	SortByMaxEdge(sorted);
 
 	int count = 0;
@@ -84,7 +84,7 @@ void RectBinArrange::BeforePacking(const std::vector<ee::ImageSprite*>& sorted, 
 }
 
 void RectBinArrange::AfterPacking(float xoffset,
-								  std::vector<ee::ImageSprite*>& sprites, 
+								  std::vector<ee::ImageSprite*>& sprs, 
 								  const std::vector<Rect>& output,
 								  std::vector<ee::ImageSprite*>& remains) const
 {
@@ -94,10 +94,10 @@ void RectBinArrange::AfterPacking(float xoffset,
 	for (size_t i = 0, n = output.size(); i < n; ++i)
 	{
 		const Rect& rect = output[i];
-		ee::ImageSprite* sprite = sprites[i];
+		ee::ImageSprite* spr = sprs[i];
 		if (rect.height != 0)
 		{
-			sm::rect r = sprite->GetSymbol()->GetBounding();
+			sm::rect r = spr->GetSymbol()->GetBounding();
 			sm::vec2 pos;
 			float angle = 0;
 			if (r.Width() == rect.width && r.Height() == rect.height)
@@ -119,12 +119,12 @@ void RectBinArrange::AfterPacking(float xoffset,
 				assert(0);
 			}
 			pos.x += xoffset;
-			sprite->SetPosition(pos);
-			sprite->SetAngle(angle);
+			spr->SetPosition(pos);
+			spr->SetAngle(angle);
 		}
 		else
 		{
-			remains.push_back(sprite);
+			remains.push_back(spr);
 		}
 	}
 }

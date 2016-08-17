@@ -283,9 +283,9 @@ bool ParticleSystem::IsEmpty() const
 
 void ParticleSystem::ReloadTexture() const
 {
-	for (int i = 0; i < m_spr->et->cfg->symbol_count; ++i) {
-		ee::Symbol* symbol = static_cast<ee::Symbol*>(m_spr->et->cfg->symbols[i].ud);
-		symbol->ReloadTexture();
+	for (int i = 0; i < m_spr->et->cfg->sym_count; ++i) {
+		ee::Symbol* sym = static_cast<ee::Symbol*>(m_spr->et->cfg->syms[i].ud);
+		sym->ReloadTexture();
 	}
 }
 
@@ -339,12 +339,12 @@ void ParticleSystem::SetBlend(int blend)
 	const_cast<p3d_emitter_cfg*>(m_spr->et->cfg)->blend = blend;	
 }
 
-p3d_symbol* ParticleSystem::AddSymbol(ee::Symbol* symbol)
+p3d_symbol* ParticleSystem::AddSymbol(ee::Symbol* sym)
 {
-	assert(m_spr->et->cfg->symbol_count < MAX_COMPONENTS);
+	assert(m_spr->et->cfg->sym_count < MAX_COMPONENTS);
 
 	p3d_emitter_cfg* cfg = const_cast<p3d_emitter_cfg*>(m_spr->et->cfg);
-	p3d_symbol& comp = m_spr->et->cfg->symbols[cfg->symbol_count++];
+	p3d_symbol& comp = m_spr->et->cfg->syms[cfg->sym_count++];
 	memset(&comp, 0, SIZEOF_P3D_SYMBOL);
 
 	comp.scale_start = comp.scale_end = 1;
@@ -354,41 +354,41 @@ p3d_symbol* ParticleSystem::AddSymbol(ee::Symbol* symbol)
 	comp.add_col_begin.r = comp.add_col_begin.g = comp.add_col_begin.b = comp.add_col_begin.a = 0;
 	comp.add_col_end.r = comp.add_col_end.g = comp.add_col_end.b = comp.add_col_end.a = 0;
 
-	comp.ud = symbol;
+	comp.ud = sym;
 
 	return &comp;
 }
 
 void ParticleSystem::DelSymbol(int idx)
 {
-	if (idx < 0 || idx >= m_spr->et->cfg->symbol_count) {
+	if (idx < 0 || idx >= m_spr->et->cfg->sym_count) {
 		return;
 	}
 
 	p3d_emitter_cfg* cfg = const_cast<p3d_emitter_cfg*>(m_spr->et->cfg);
-	if (cfg->symbol_count == 1) {
-		cfg->symbol_count = 0;
+	if (cfg->sym_count == 1) {
+		cfg->sym_count = 0;
 	} else {
-		for (int i = idx; i < cfg->symbol_count - 1; ++i) {
-			const p3d_symbol* src = &cfg->symbols[i+1];
-			p3d_symbol* dst = &cfg->symbols[i];
+		for (int i = idx; i < cfg->sym_count - 1; ++i) {
+			const p3d_symbol* src = &cfg->syms[i+1];
+			p3d_symbol* dst = &cfg->syms[i];
 			memcpy(dst, src, sizeof(p3d_symbol));
 		}
-		--cfg->symbol_count;
+		--cfg->sym_count;
 	}
 }
 
 void ParticleSystem::DelAllSymbol()
 {
-	const_cast<p3d_emitter_cfg*>(m_spr->et->cfg)->symbol_count = 0;
+	const_cast<p3d_emitter_cfg*>(m_spr->et->cfg)->sym_count = 0;
 }
 
 p3d_symbol* ParticleSystem::GetSymbol(int idx)
 {
-	if (idx < 0 || idx >= m_spr->et->cfg->symbol_count) {
+	if (idx < 0 || idx >= m_spr->et->cfg->sym_count) {
 		return NULL;
 	} else {
-		return &m_spr->et->cfg->symbols[idx];
+		return &m_spr->et->cfg->syms[idx];
 	}
 }
 

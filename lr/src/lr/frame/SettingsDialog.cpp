@@ -189,10 +189,10 @@ void SettingDialog::OnChangeTerrain2DAnim(wxCommandEvent& event)
 	SettingCfg* cfg = SettingCfg::Instance();
 	cfg->m_terrain2d_anim = event.IsChecked();
 
-	std::vector<ee::Sprite*> sprites;
-	m_stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		SetTerrain2dUpdate(sprites[i], cfg->m_terrain2d_anim);
+	std::vector<ee::Sprite*> sprs;
+	m_stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		SetTerrain2dUpdate(sprs[i], cfg->m_terrain2d_anim);
 	}
 }
 

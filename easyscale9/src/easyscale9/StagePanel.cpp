@@ -19,13 +19,13 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   ee::LibraryPanel* library)
 	: ee::EditPanel(parent, frame)
 	, ee::MultiSpritesImpl(GetStageImpl())
-	, m_symbol(NULL)
+	, m_sym(NULL)
 	, m_library(library)
 	, m_toolbar(NULL)
 {
 	SetCanvas(new StageCanvas(this));
 
-	memset(m_sprites, 0, sizeof(int) * 9);
+	memset(m_sprs, 0, sizeof(int) * 9);
 
 	SetDropTarget(new ee::StageDropTarget(this, GetStageImpl(), library));
 
@@ -41,10 +41,10 @@ void StagePanel::TraverseSprites(ee::Visitor<ee::Sprite>& visitor, ee::DataTrave
 	{
 		for (size_t j = 0; j < 3; ++j)
 		{
-			if (!m_sprites[i][j]) continue;
+			if (!m_sprs[i][j]) continue;
 
 			bool next;
-			visitor.Visit(m_sprites[i][j], next);
+			visitor.Visit(m_sprs[i][j], next);
 			if (!next) return;
 		}
 	}
@@ -52,25 +52,25 @@ void StagePanel::TraverseSprites(ee::Visitor<ee::Sprite>& visitor, ee::DataTrave
 
 void StagePanel::rebuildPatchSymbol()
 {
-	Scale9Type type = Scale9Data::CheckType(m_sprites);
+	Scale9Type type = Scale9Data::CheckType(m_sprs);
 	if (type == e_null) {
 		return;
 	}
 
-	if (m_symbol) delete m_symbol;
-	m_symbol = new Symbol;
+	if (m_sym) delete m_sym;
+	m_sym = new Symbol;
 
 	float width = m_toolbar->getWidth(),
 		  height = m_toolbar->getHeight();
 
-	sm::vec2 sz = m_sprites[1][1]->GetSymbol()->GetBounding().Size();
+	sm::vec2 sz = m_sprs[1][1]->GetSymbol()->GetBounding().Size();
 	if (type == e_3GridHor) {
 		height = sz.y;
 	} else if (type == e_3GridVer) {
 		width = sz.x;
 	}
 
-	m_symbol->ComposeFromSprites(m_sprites, width, height);
+	m_sym->ComposeFromSprites(m_sprs, width, height);
 
 	m_toolbar->setSize(width, height);
 }
@@ -111,11 +111,11 @@ void StagePanel::Insert(ee::Sprite* spr)
 		return;
 	}
 
-	if (m_sprites[row][col] && m_sprites[row][col] != spr) {
-		m_sprites[row][col]->RemoveReference();
+	if (m_sprs[row][col] && m_sprs[row][col] != spr) {
+		m_sprs[row][col]->RemoveReference();
 	}
 	spr->AddReference();
-	m_sprites[row][col] = spr;
+	m_sprs[row][col] = spr;
 
 	spr->SetPosition(ComposeGrids::GetGridCenter(col, row));
 
@@ -130,9 +130,9 @@ void StagePanel::Remove(ee::Sprite* spr)
 	{
 		for (size_t j = 0; j < 3; ++j) 
 		{
-			if (m_sprites[i][j] == spr)
+			if (m_sprs[i][j] == spr)
 			{
-				m_sprites[i][j] = NULL;
+				m_sprs[i][j] = NULL;
 				spr->RemoveReference();
 				ee::SetCanvasDirtySJ::Instance()->SetDirty();
 				return;
@@ -146,13 +146,13 @@ void StagePanel::Clear()
 	for (size_t i = 0; i < 3; ++i) {
 		for (size_t j = 0; j < 3; ++j)
 		{
-			if (!m_sprites[i][j]) continue;
-			m_sprites[i][j]->RemoveReference();
+			if (!m_sprs[i][j]) continue;
+			m_sprs[i][j]->RemoveReference();
 		}
 	}
-	memset(m_sprites, 0, sizeof(int) * 9);
+	memset(m_sprs, 0, sizeof(int) * 9);
 
-	delete m_symbol, m_symbol = NULL;
+	delete m_sym, m_sym = NULL;
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 

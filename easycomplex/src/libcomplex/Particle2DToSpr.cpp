@@ -11,9 +11,9 @@ namespace ecomplex
 
 ee::Sprite* Particle2DToSpr::Trans(const erespacker::PackParticle2D* p2d)
 {
-	eparticle2d::Symbol* symbol = new eparticle2d::Symbol;
-	symbol->SetEmitterCfg(LoadConfig(p2d));
-	return new eparticle2d::Sprite(symbol);
+	eparticle2d::Symbol* sym = new eparticle2d::Symbol;
+	sym->SetEmitterCfg(LoadConfig(p2d));
+	return new eparticle2d::Sprite(sym);
 }
 
 p2d_emitter_cfg* Particle2DToSpr::LoadConfig(const erespacker::PackParticle2D* p2d)
@@ -78,12 +78,12 @@ p2d_emitter_cfg* Particle2DToSpr::LoadConfig(const erespacker::PackParticle2D* p
 	cfg->direction = p2d->direction;
 	cfg->direction_var = p2d->direction_var;
 
-	cfg->symbol_count = p2d->components.size();
-	cfg->symbols = (p2d_symbol*)(cfg+1);
+	cfg->sym_count = p2d->components.size();
+	cfg->syms = (p2d_symbol*)(cfg+1);
 	for (int i = 0, n = p2d->components.size(); i < n; ++i)
 	{
 		const erespacker::PackParticle2D::Component& src = p2d->components[i];
-		p2d_symbol& dst = cfg->symbols[i];
+		p2d_symbol& dst = cfg->syms[i];
 
 		dst.angle_start = src.angle_start;
 		dst.angle_end = src.angle_end;

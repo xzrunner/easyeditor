@@ -25,7 +25,7 @@ public:
 	const ee::Sprite* GetRight() const { return m_right; }
 
 private:
-	void SetImage(ee::Symbol* symbol);
+	void SetImage(ee::Symbol* sym);
 
 private:
 	class StageDropTarget : public ee::CombinedDropTarget

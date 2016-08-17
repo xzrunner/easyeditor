@@ -32,9 +32,9 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 void StagePanel::TraverseSprites(ee::Visitor<ee::Sprite>& visitor, ee::DataTraverseType type, 
 								 bool order) const
 {
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
+	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
 		bool fetch_next;
-		visitor.Visit(m_sprites[i], fetch_next);
+		visitor.Visit(m_sprs[i], fetch_next);
 		if (!fetch_next) {
 			break;
 		}
@@ -74,16 +74,16 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 void StagePanel::Insert(ee::Sprite* spr)
 {
 	spr->AddReference();
-	m_sprites.push_back(spr);
+	m_sprs.push_back(spr);
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void StagePanel::Remove(ee::Sprite* spr)
 {
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		if (m_sprites[i] == spr) {
+	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+		if (m_sprs[i] == spr) {
 			spr->RemoveReference();
-			m_sprites.erase(m_sprites.begin() + i);
+			m_sprs.erase(m_sprs.begin() + i);
 			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 			return;
 		}
@@ -92,10 +92,10 @@ void StagePanel::Remove(ee::Sprite* spr)
 
 void StagePanel::Clear()
 {
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->RemoveReference();
+	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+		m_sprs[i]->RemoveReference();
 	}
-	m_sprites.clear();
+	m_sprs.clear();
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 

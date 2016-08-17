@@ -11,11 +11,11 @@ namespace eanim
 class Utility
 {
 public:
-	static void DrawAnimSymbol(const Symbol* symbol, 
+	static void DrawAnimSymbol(const Symbol* sym, 
 		const s2::RenderParams& params = s2::RenderParams(),
 		int index = 1);
 
-	static void GetCurrSprites(const Symbol* symbol, int index, std::vector<ee::Sprite*>& sprites);
+	static void GetCurrSprites(const Symbol* sym, int index, std::vector<ee::Sprite*>& sprs);
 
 private:
 	static s2::AnimSymbol::Frame* GetCurrFrame(s2::AnimSymbol::Layer* layer, int index);

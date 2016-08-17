@@ -22,11 +22,11 @@ public:
 	void Traverse(Visitor<Symbol>& visitor) const;
 
 	int Size() const {
-		return m_symbols.size();
+		return m_syms.size();
 	}
 
 protected:
-	void Remove(const Symbol* symbol);
+	void Remove(const Symbol* sym);
 
 private:
 	SymbolMgr();
@@ -35,7 +35,7 @@ private:
 private:
 	static SymbolMgr* m_instance;
 
-	std::map<std::string, Symbol*> m_symbols;
+	std::map<std::string, Symbol*> m_syms;
 
 	friend class Symbol;
 

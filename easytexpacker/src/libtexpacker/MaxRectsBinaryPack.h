@@ -30,7 +30,7 @@ private:
 		Node(int width, int height);
 		~Node();
 
-		Node* insert(Sprite* sprite, int flag);
+		Node* insert(Sprite* spr, int flag);
 
 		int Width() const { return m_rc.width; }
 		int Height() const { return m_rc.height; }
@@ -38,7 +38,7 @@ private:
 	private:
 		Node* m_child[2];
 
-		Sprite* m_sprite;
+		Sprite* m_spr;
 
 		Rect m_rc;
 

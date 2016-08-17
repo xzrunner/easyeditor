@@ -182,9 +182,9 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 	Sprite* selected = NULL;
 	if (m_selection->Size() == 1)
 	{
-		std::vector<Sprite*> sprites;
-		m_selection->Traverse(FetchAllVisitor<Sprite>(sprites));
-		selected = sprites[0];
+		std::vector<Sprite*> sprs;
+		m_selection->Traverse(FetchAllVisitor<Sprite>(sprs));
+		selected = sprs[0];
 	}
 	if (!selected) {
 		if (m_op_state) {
@@ -263,9 +263,9 @@ void ArrangeSpriteImpl::OnMouseLeftUp(int x, int y)
 		&& !m_selection->IsEmpty()
 		&& m_left_down_pos != pos)
 	{
-		std::vector<Sprite*> sprites;
-		m_selection->Traverse(FetchAllVisitor<Sprite>(sprites));
-		m_align.Align(sprites);
+		std::vector<Sprite*> sprs;
+		m_selection->Traverse(FetchAllVisitor<Sprite>(sprs));
+		m_align.Align(sprs);
 		SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
@@ -286,9 +286,9 @@ void ArrangeSpriteImpl::OnMouseRightDown(int x, int y)
 	Sprite* selected = NULL;
 	if (m_selection->Size() == 1)
 	{
-		std::vector<Sprite*> sprites;
-		m_selection->Traverse(FetchAllVisitor<Sprite>(sprites));
-		selected = sprites[0];
+		std::vector<Sprite*> sprs;
+		m_selection->Traverse(FetchAllVisitor<Sprite>(sprs));
+		selected = sprs[0];
 	}
 	if (!selected) return;
 
@@ -382,9 +382,9 @@ void ArrangeSpriteImpl::OnDraw(const Camera& cam) const
 	if (m_cfg.is_deform_open && m_selection->Size() == 1)
 	{
 		Sprite* selected = NULL;
-		std::vector<Sprite*> sprites;
-		m_selection->Traverse(FetchAllVisitor<Sprite>(sprites));
-		selected = sprites[0];
+		std::vector<Sprite*> sprs;
+		m_selection->Traverse(FetchAllVisitor<Sprite>(sprs));
+		selected = sprs[0];
 
 		sm::vec2 sz = selected->GetBounding()->GetSize().Size();
 		float max_e = std::max(sz.x, sz.y);
@@ -437,9 +437,9 @@ Sprite* ArrangeSpriteImpl::QueryEditedSprite(const sm::vec2& pos) const
 	Sprite* selected = NULL;
 	if (m_cfg.is_deform_open && m_selection->Size() == 1)
 	{
-		std::vector<Sprite*> sprites;
-		m_selection->Traverse(FetchAllVisitor<Sprite>(sprites));
-		selected = sprites[0];
+		std::vector<Sprite*> sprs;
+		m_selection->Traverse(FetchAllVisitor<Sprite>(sprs));
+		selected = sprs[0];
 	}
 	if (!selected) return NULL;
 
@@ -497,27 +497,27 @@ void ArrangeSpriteImpl::OnDirectionKeyDown(int type)
 
 void ArrangeSpriteImpl::OnSpaceKeyDown()
 {
-	std::vector<Sprite*> sprites;
-	m_selection->Traverse(FetchAllVisitor<Sprite>(sprites));
-	if (sprites.empty()) {
+	std::vector<Sprite*> sprs;
+	m_selection->Traverse(FetchAllVisitor<Sprite>(sprs));
+	if (sprs.empty()) {
 		return;
 	}
 
 	CombineAOP* comb = new CombineAOP();
-	for (int i = 0, n = sprites.size(); i < n; ++i) 
+	for (int i = 0, n = sprs.size(); i < n; ++i) 
 	{
-		Sprite* sprite = sprites[i];
+		Sprite* spr = sprs[i];
 
-		comb->Insert(new TranslateSpriteAOP(sprite, -sprite->GetPosition()));
-		comb->Insert(new ScaleSpriteAOP(sprite, sm::vec2(1, 1), sprite->GetScale()));
-		comb->Insert(new ShearSpriteAOP(sprite, sm::vec2(0, 0), sprite->GetShear()));
-		//comb->Insert(new OffsetSpriteAOP(sprite, sm::vec2(0, 0), sprite->getOffset()));
+		comb->Insert(new TranslateSpriteAOP(spr, -spr->GetPosition()));
+		comb->Insert(new ScaleSpriteAOP(spr, sm::vec2(1, 1), spr->GetScale()));
+		comb->Insert(new ShearSpriteAOP(spr, sm::vec2(0, 0), spr->GetShear()));
+		//comb->Insert(new OffsetSpriteAOP(spr, sm::vec2(0, 0), spr->getOffset()));
 
-		sprite->SetPosition(sm::vec2(0, 0));
-		sprite->SetAngle(0);
-		sprite->SetScale(sm::vec2(1, 1));
-		sprite->SetShear(sm::vec2(0, 0));
-		//sprite->setOffset(sm::vec2(0, 0));
+		spr->SetPosition(sm::vec2(0, 0));
+		spr->SetAngle(0);
+		spr->SetScale(sm::vec2(1, 1));
+		spr->SetShear(sm::vec2(0, 0));
+		//spr->setOffset(sm::vec2(0, 0));
 	}
 	EditAddRecordSJ::Instance()->Add(comb);
 	SetCanvasDirtySJ::Instance()->SetDirty();
@@ -538,24 +538,24 @@ ArrangeSpriteState* ArrangeSpriteImpl::CreateRotateState(SpriteSelection* select
 	return new RotateSpriteState(selection, first_pos);
 }
 
-ArrangeSpriteState* ArrangeSpriteImpl::CreateScaleState(Sprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const
+ArrangeSpriteState* ArrangeSpriteImpl::CreateScaleState(Sprite* spr, const SpriteCtrlNode::Node& ctrl_node) const
 {
-	return new ScaleSpriteState(sprite, ctrl_node);
+	return new ScaleSpriteState(spr, ctrl_node);
 }
 
-ArrangeSpriteState* ArrangeSpriteImpl::CreateShearState(Sprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const
+ArrangeSpriteState* ArrangeSpriteImpl::CreateShearState(Sprite* spr, const SpriteCtrlNode::Node& ctrl_node) const
 {
-	return new ShearSpriteState(sprite, ctrl_node);
+	return new ShearSpriteState(spr, ctrl_node);
 }
 
-ArrangeSpriteState* ArrangeSpriteImpl::CreateOffsetState(Sprite* sprite) const
+ArrangeSpriteState* ArrangeSpriteImpl::CreateOffsetState(Sprite* spr) const
 {
-	return new OffsetSpriteState(sprite);
+	return new OffsetSpriteState(spr);
 }
 
-ArrangeSpriteState* ArrangeSpriteImpl::CreatePerspectiveState(Sprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const
+ArrangeSpriteState* ArrangeSpriteImpl::CreatePerspectiveState(Sprite* spr, const SpriteCtrlNode::Node& ctrl_node) const
 {
-	return new PerspectiveSpriteState(sprite, ctrl_node);
+	return new PerspectiveSpriteState(spr, ctrl_node);
 }
 
 void ArrangeSpriteImpl::ChangeOPState(ArrangeSpriteState* state)
@@ -569,9 +569,9 @@ void ArrangeSpriteImpl::ChangeOPState(ArrangeSpriteState* state)
 void ArrangeSpriteImpl::OnDeleteKeyDown()
 {
 	// add to history
-	std::vector<Sprite*> sprites;
-	m_selection->Traverse(FetchAllVisitor<Sprite>(sprites));
-	EditAddRecordSJ::Instance()->Add(new DeleteSpriteAOP(sprites));
+	std::vector<Sprite*> sprs;
+	m_selection->Traverse(FetchAllVisitor<Sprite>(sprs));
+	EditAddRecordSJ::Instance()->Add(new DeleteSpriteAOP(sprs));
 
 	m_sprites_impl->ClearSelectedSprite();
 
@@ -618,22 +618,22 @@ sm::vec2 ArrangeSpriteImpl::GetSprOffset(const Sprite* spr) const
 
 bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 {
-	std::vector<Sprite*> sprites;
-	m_selection->Traverse(FetchAllVisitor<Sprite>(sprites));
-	if (sprites.empty()) {
+	std::vector<Sprite*> sprs;
+	m_selection->Traverse(FetchAllVisitor<Sprite>(sprs));
+	if (sprs.empty()) {
 		return false;
 	}
 
-	sm::vec2 proj_pos = sprites[0]->GetPosition();
+	sm::vec2 proj_pos = sprs[0]->GetPosition();
 	sm::vec2 screen_pos = m_stage->TransPosProjToScr(proj_pos);
 	wxPoint pos(screen_pos.x, screen_pos.y);
 
 	// editable
 	if (keycode == 'E')
 	{
-		bool editable = !sprites[0]->IsEditable();
-		for (int i = 0, n = sprites.size(); i < n; ++i) {
-			ee::Sprite* spr = sprites[i];
+		bool editable = !sprs[0]->IsEditable();
+		for (int i = 0, n = sprs.size(); i < n; ++i) {
+			ee::Sprite* spr = sprs[i];
 			spr->SetEditable(editable);
 		}
 		RefreshPanelSJ::Instance()->Refresh();
@@ -642,9 +642,9 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	// visible
 	else if (keycode == 'S')
 	{
-		bool visible = !sprites[0]->IsVisible();
-		for (int i = 0, n = sprites.size(); i < n; ++i) {
-			ee::Sprite* spr = sprites[i];
+		bool visible = !sprs[0]->IsVisible();
+		for (int i = 0, n = sprs.size(); i < n; ++i) {
+			ee::Sprite* spr = sprs[i];
 			spr->SetVisible(visible);
 		}
 		SetCanvasDirtySJ::Instance()->SetDirty();
@@ -654,8 +654,8 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	// hori mirror
 	else if (keycode == 'H') 
 	{
-		for (int i = 0, n = sprites.size(); i < n; ++i) {
-			Sprite* spr = sprites[i];
+		for (int i = 0, n = sprs.size(); i < n; ++i) {
+			Sprite* spr = sprs[i];
 			spr->SetMirror(sm::bvec2(!spr->GetMirror().x, spr->GetMirror().y));
 		}
 		SetCanvasDirtySJ::Instance()->SetDirty();
@@ -664,8 +664,8 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	// vert mirror
 	else if (keycode == 'V') 
 	{
-		for (int i = 0, n = sprites.size(); i < n; ++i) {
-			Sprite* spr = sprites[i];
+		for (int i = 0, n = sprs.size(); i < n; ++i) {
+			Sprite* spr = sprs[i];
 			spr->SetMirror(sm::bvec2(spr->GetMirror().x, !spr->GetMirror().y));
 		}
 		SetCanvasDirtySJ::Instance()->SetDirty();
@@ -675,20 +675,20 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	else if (keycode == 'M') 
 	{
 		if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_RGB) {
-			RGBColorSettingDlg dlg(m_wnd, NULL, sprites[0]->Color().mul, pos);
+			RGBColorSettingDlg dlg(m_wnd, NULL, sprs[0]->Color().mul, pos);
 			if (dlg.ShowModal() == wxID_OK) {
 				s2::Color col = dlg.GetColor();
-				for (int i = 0, n = sprites.size(); i < n; ++i) {
-					sprites[i]->Color().mul = col;
+				for (int i = 0, n = sprs.size(); i < n; ++i) {
+					sprs[i]->Color().mul = col;
 				}
 				SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		} else {
-			HSLColorSettingDlg dlg(m_wnd, NULL, sprites[0]->Color().mul, pos);
+			HSLColorSettingDlg dlg(m_wnd, NULL, sprs[0]->Color().mul, pos);
 			if (dlg.ShowModal() == wxID_OK) {
 				s2::Color col = dlg.GetColor();
-				for (int i = 0, n = sprites.size(); i < n; ++i) {
-					sprites[i]->Color().mul = col;
+				for (int i = 0, n = sprs.size(); i < n; ++i) {
+					sprs[i]->Color().mul = col;
 				}
 				SetCanvasDirtySJ::Instance()->SetDirty();
 			}
@@ -699,20 +699,20 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	else if (keycode == 'A') 
 	{
 		if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_RGB) {
-			RGBColorSettingDlg dlg(m_wnd, NULL, sprites[0]->Color().add, pos);
+			RGBColorSettingDlg dlg(m_wnd, NULL, sprs[0]->Color().add, pos);
 			if (dlg.ShowModal() == wxID_OK) {
 				s2::Color col = dlg.GetColor();
-				for (int i = 0, n = sprites.size(); i < n; ++i) {
-					sprites[i]->Color().add = col;
+				for (int i = 0, n = sprs.size(); i < n; ++i) {
+					sprs[i]->Color().add = col;
 				}
 				SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		} else {
-			HSLColorSettingDlg dlg(m_wnd, NULL, sprites[0]->Color().add, pos);
+			HSLColorSettingDlg dlg(m_wnd, NULL, sprs[0]->Color().add, pos);
 			if (dlg.ShowModal() == wxID_OK) {
 				s2::Color col = dlg.GetColor();
-				for (int i = 0, n = sprites.size(); i < n; ++i) {
-					sprites[i]->Color().add = col;
+				for (int i = 0, n = sprs.size(); i < n; ++i) {
+					sprs[i]->Color().add = col;
 				}
 				SetCanvasDirtySJ::Instance()->SetDirty();
 			}
@@ -722,17 +722,17 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	// alpha
 	else if (keycode == 'T') 
 	{
-		AlphaSettingDlg dlg(m_wnd, sprites[0]->Color().mul, pos);
-		float old_alpha = sprites[0]->Color().mul.a;
+		AlphaSettingDlg dlg(m_wnd, sprs[0]->Color().mul, pos);
+		float old_alpha = sprs[0]->Color().mul.a;
 		int state = dlg.ShowModal();
 		if (state == wxID_OK) {
 			float alpha = dlg.GetColor().a;
-			for (int i = 0, n = sprites.size(); i < n; ++i) {
-				sprites[i]->Color().mul.a = alpha;
+			for (int i = 0, n = sprs.size(); i < n; ++i) {
+				sprs[i]->Color().mul.a = alpha;
 			}
 			SetCanvasDirtySJ::Instance()->SetDirty();
 		} else if (state == wxID_CANCEL) {
-			sprites[0]->Color().mul.a = old_alpha;
+			sprs[0]->Color().mul.a = old_alpha;
 			SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		return true;

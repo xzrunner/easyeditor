@@ -24,7 +24,7 @@ public:
 
 	virtual void Load(const Json::Value& val, const std::string& dir = "");
 
-	static ee::Sprite* Create(ee::Symbol* symbol);
+	static ee::Sprite* Create(ee::Symbol* sym);
 
 }; // Sprite
 

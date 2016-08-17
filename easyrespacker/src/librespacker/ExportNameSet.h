@@ -12,7 +12,7 @@ class ExportNameSet
 {
 public:
 	
-	void LoadExport(const ee::Symbol* symbol, IPackNode* node);
+	void LoadExport(const ee::Symbol* sym, IPackNode* node);
 
 	const std::map<std::string, int>& GetData() const { return m_map; }
 

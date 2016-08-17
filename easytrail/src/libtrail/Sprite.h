@@ -33,7 +33,7 @@ public:
 
 	void Draw(const s2::RenderParams& params) const;
 
-	static ee::Sprite* Create(ee::Symbol* symbol);
+	static ee::Sprite* Create(ee::Symbol* sym);
 
 private:
 	t2d_emitter* m_et;

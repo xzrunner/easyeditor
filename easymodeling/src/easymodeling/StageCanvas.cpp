@@ -39,12 +39,12 @@ void StageCanvas::DrawGuideLines() const
 
 void StageCanvas::DrawSprites() const
 {
-	std::vector<ee::Sprite*> sprites;
-	m_stage_panel->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	for (size_t i = 0, n = sprites.size(); i < n; ++i)
+	std::vector<ee::Sprite*> sprs;
+	m_stage_panel->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	for (size_t i = 0, n = sprs.size(); i < n; ++i)
 	{
-		ee::SpriteRenderer::Draw(sprites[i]);
-		DrawUtils::DrawBody(static_cast<Body*>(sprites[i]->GetUserData()), DrawUtils::e_default);
+		ee::SpriteRenderer::Draw(sprs[i]);
+		DrawUtils::DrawBody(static_cast<Body*>(sprs[i]->GetUserData()), DrawUtils::e_default);
 	}
 }
 

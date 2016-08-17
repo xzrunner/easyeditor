@@ -48,17 +48,17 @@ Body* FileApapter::ToBody(const Json::Value& bodyValue, const std::string& dlg)
 	std::string filepath = bodyValue["filepath"].asString();
 	filepath = ee::FileHelper::GetAbsolutePath(dlg, filepath);
 
-	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-	symbol->RemoveReference();
+	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+	ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+	sym->RemoveReference();
 
 	sm::vec2 pos;
 	pos.x = bodyValue["position"]["x"].asDouble();
 	pos.y = bodyValue["position"]["y"].asDouble();
-	sprite->SetPosition(pos);
+	spr->SetPosition(pos);
 
 	float angle = bodyValue["angle"].asDouble();
-	sprite->SetAngle(angle);
+	spr->SetAngle(angle);
 
 	Body* body = new Body;
 	body->m_name = bodyValue["name"].asString();
@@ -69,9 +69,9 @@ Body* FileApapter::ToBody(const Json::Value& bodyValue, const std::string& dlg)
 	body->m_bullet = bodyValue["bullet"].asBool();
 	body->m_active = bodyValue["active"].asBool();
 	body->m_gravity_scale = bodyValue["gravityScale"].asDouble();
-	body->m_sprite = sprite;
+	body->m_spr = spr;
 
-	sprite->SetUserData(body);
+	spr->SetUserData(body);
 
 	int i = 0;
 	Json::Value fixtureValue = bodyValue["fixture"][i++];

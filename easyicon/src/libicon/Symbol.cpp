@@ -45,7 +45,7 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 	m_icon->Draw(p.mt, process);
 }
 
-sm::rect Symbol::GetBounding(const s2::Sprite* sprite) const
+sm::rect Symbol::GetBounding(const s2::Sprite* spr) const
 {
 	sm::rect r;
 	if (!m_icon) {
@@ -53,8 +53,8 @@ sm::rect Symbol::GetBounding(const s2::Sprite* sprite) const
 	}
 
 	float process = 1;
-	if (sprite) {
-		process = dynamic_cast<const Sprite*>(sprite)->GetProcess();
+	if (spr) {
+		process = dynamic_cast<const Sprite*>(spr)->GetProcess();
 	}
 	return m_icon->GetRegion(process);
 }

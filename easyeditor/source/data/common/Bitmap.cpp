@@ -94,8 +94,8 @@ bool Bitmap::LoadFromFile(const std::string& filepath)
 	}
 	else
 	{
-		Symbol* symbol = SymbolMgr::Instance()->FetchSymbol(filepath);
-		sm::rect rect = symbol->GetBounding();
+		Symbol* sym = SymbolMgr::Instance()->FetchSymbol(filepath);
+		sm::rect rect = sym->GetBounding();
 		float w = std::max(1.0f, rect.Size().x),
 			  h = std::max(1.0f, rect.Size().y);
 		float scale = w > (MAX_WIDTH / SCALE) ? (MAX_WIDTH / w) : SCALE; 
@@ -105,14 +105,14 @@ bool Bitmap::LoadFromFile(const std::string& filepath)
 		h = std::max(1.0f, h);
 
 		Snapshoot ss(w, h);
-		unsigned char* rgba = ss.OutputToMemory(symbol, true, scale);
+		unsigned char* rgba = ss.OutputToMemory(sym, true, scale);
 		unsigned char* rgb = TransRGBA2RGB(rgba, w, h);
 		delete[] rgba;
 
 		wxImage image(w, h, rgb, true);
 		InitBmp(image, false);
 		delete[] rgb;
-		symbol->RemoveReference();
+		sym->RemoveReference();
 	}
 
 	return true;

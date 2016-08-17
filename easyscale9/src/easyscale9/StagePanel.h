@@ -24,12 +24,12 @@ public:
 		ee::DataTraverseType type = ee::DT_ALL,
 		bool order = true) const;
 
-	Symbol* getPatchSymbol() { return m_symbol; }
+	Symbol* getPatchSymbol() { return m_sym; }
 
 	ee::Sprite* getSprite(int row, int col) {
 		if (row < 0 || row >= 3 || col < 0 || col >= 3)
 			return NULL;
-		return m_sprites[row][col];
+		return m_sprs[row][col];
 	}
 
 	void rebuildPatchSymbol();
@@ -51,9 +51,9 @@ private:
 	// [2][0]
 	// [1][0]
 	// [0][0] [0][1] [0][2]
-	ee::Sprite* m_sprites[3][3];
+	ee::Sprite* m_sprs[3][3];
 
-	Symbol* m_symbol;
+	Symbol* m_sym;
 
 	ee::LibraryPanel* m_library;
 

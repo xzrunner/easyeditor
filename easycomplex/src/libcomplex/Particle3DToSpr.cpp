@@ -11,9 +11,9 @@ namespace ecomplex
 
 ee::Sprite* Particle3DToSpr::Trans(const erespacker::PackParticle3D* p3d)
 {
-	eparticle3d::Symbol* symbol = new eparticle3d::Symbol;
-	symbol->SetEmitterCfg(LoadConfig(p3d));
-	return new eparticle3d::Sprite(symbol);
+	eparticle3d::Symbol* sym = new eparticle3d::Symbol;
+	sym->SetEmitterCfg(LoadConfig(p3d));
+	return new eparticle3d::Sprite(sym);
 }
 
 p3d_emitter_cfg* Particle3DToSpr::LoadConfig(const erespacker::PackParticle3D* p3d)
@@ -68,12 +68,12 @@ p3d_emitter_cfg* Particle3DToSpr::LoadConfig(const erespacker::PackParticle3D* p
 	cfg->dir.y = 0;
 	cfg->dir.z = 1;
 
-	cfg->symbol_count = p3d->components.size();
-	cfg->symbols = (p3d_symbol*)(cfg+1);
+	cfg->sym_count = p3d->components.size();
+	cfg->syms = (p3d_symbol*)(cfg+1);
 	for (int i = 0, n = p3d->components.size(); i < n; ++i)
 	{
 		const erespacker::PackParticle3D::Component& src = p3d->components[i];
-		p3d_symbol& dst = cfg->symbols[i];
+		p3d_symbol& dst = cfg->syms[i];
 
 		dst.count = cfg->count;
 

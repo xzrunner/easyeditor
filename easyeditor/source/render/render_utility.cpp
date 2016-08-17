@@ -11,12 +11,12 @@
 namespace ee
 {
 
-Sprite* draw_all_to_one_spr(const std::vector<Sprite*>& sprites, Sprite* except)
+Sprite* draw_all_to_one_spr(const std::vector<Sprite*>& sprs, Sprite* except)
 {
 	std::vector<Sprite*> _sprites;
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		if (sprites[i] != except) {
-			_sprites.push_back(sprites[i]);
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		if (sprs[i] != except) {
+			_sprites.push_back(sprs[i]);
 		}
 	}
 	return draw_all_to_one_spr(_sprites);
@@ -34,15 +34,15 @@ float cal_texture_size(float w, float h)
 	}
 }
 
-Sprite* draw_all_to_one_spr(const std::vector<Sprite*>& sprites)
+Sprite* draw_all_to_one_spr(const std::vector<Sprite*>& sprs)
 {
-	if (sprites.empty()) {
+	if (sprs.empty()) {
 		return NULL;
 	}
 
 	sm::rect r;
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		sprites[i]->GetBounding()->CombineTo(r);
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		sprs[i]->GetBounding()->CombineTo(r);
 	}
 
 	sm::vec2 sz = r.Size();
@@ -51,8 +51,8 @@ Sprite* draw_all_to_one_spr(const std::vector<Sprite*>& sprites)
 	sm::vec2 center = r.Center() * scale;
 
 	Snapshoot ss(static_cast<int>(sz.x), static_cast<int>(sz.y));
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		ee::Sprite* spr = sprites[i];
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		ee::Sprite* spr = sprs[i];
 		ss.DrawSprite(spr, false, static_cast<int>(sz.x + 0.5f), static_cast<int>(sz.y + 0.5f), center.x, center.y, scale);
 	}
 

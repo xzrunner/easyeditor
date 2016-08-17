@@ -15,7 +15,7 @@ class Symbol;
 class EditDialog : public wxDialog
 {
 public:
-	EditDialog(wxWindow* parent, Symbol* symbol, wxGLContext* glctx);
+	EditDialog(wxWindow* parent, Symbol* sym, wxGLContext* glctx);
 
 private:
 	void InitLayout(wxGLContext* glctx);
@@ -25,7 +25,7 @@ private:
 	void OnCloseEvent(wxCloseEvent& event);
 
 private:
-	Symbol* m_symbol;
+	Symbol* m_sym;
 
 	ee::EditPanel* m_stage;
 

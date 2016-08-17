@@ -68,8 +68,8 @@ void ImageCompPanel::Store(Json::Value& val, const std::string& dir) const
 	ee::JsonSerializer::Store(m_pc->mode.A.add_col_begin.rgba, val["add_col_begin"]);
 	ee::JsonSerializer::Store(m_pc->mode.A.add_col_end.rgba, val["add_col_end"]);
 
-	ee::Symbol* symbol = static_cast<ee::Symbol*>(m_pc->mode.A.ud);
-	val["filepath"] = ee::FileHelper::GetRelativePath(dir, symbol->GetFilepath());
+	ee::Symbol* sym = static_cast<ee::Symbol*>(m_pc->mode.A.ud);
+	val["filepath"] = ee::FileHelper::GetRelativePath(dir, sym->GetFilepath());
 }
 
 void ImageCompPanel::InitLayout(wxSizer* top_sizer)

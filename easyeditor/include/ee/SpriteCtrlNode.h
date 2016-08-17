@@ -11,9 +11,9 @@ class Sprite;
 class SpriteCtrlNode
 {
 public:
-	static void GetSpriteCtrlNodes(const Sprite* sprite, sm::vec2 nodes[8]);
+	static void GetSpriteCtrlNodes(const Sprite* spr, sm::vec2 nodes[8]);
 
-	static void GetSpriteCtrlNodesExt(const Sprite* sprite, sm::vec2 nodes[4]);
+	static void GetSpriteCtrlNodesExt(const Sprite* spr, sm::vec2 nodes[4]);
 
 public:
  	// 0 4 1

@@ -14,21 +14,21 @@
 namespace eanim
 {
 
-void Utility::DrawAnimSymbol(const Symbol* symbol, 
+void Utility::DrawAnimSymbol(const Symbol* sym, 
 							 const s2::RenderParams& params,
 							 int index)
 {
-	std::vector<ee::Sprite*> sprites;
-	GetCurrSprites(symbol, index, sprites);
-	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-		ee::SpriteRenderer::Draw(sprites[i], params);
+	std::vector<ee::Sprite*> sprs;
+	GetCurrSprites(sym, index, sprs);
+	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
+		ee::SpriteRenderer::Draw(sprs[i], params);
 	}
-	for_each(sprites.begin(), sprites.end(), ee::DeletePointerFunctor<ee::Sprite>());
+	for_each(sprs.begin(), sprs.end(), ee::DeletePointerFunctor<ee::Sprite>());
 }
 
-void Utility::GetCurrSprites(const Symbol* symbol, int index, std::vector<ee::Sprite*>& sprites)
+void Utility::GetCurrSprites(const Symbol* sym, int index, std::vector<ee::Sprite*>& sprs)
 {
-	const std::vector<s2::AnimSymbol::Layer*>& layers = symbol->GetLayers();
+	const std::vector<s2::AnimSymbol::Layer*>& layers = sym->GetLayers();
 	for (size_t i = 0, n = layers.size(); i < n; ++i)
 	{
 		s2::AnimSymbol::Layer* layer = layers[i];
@@ -40,16 +40,16 @@ void Utility::GetCurrSprites(const Symbol* symbol, int index, std::vector<ee::Sp
 
 		if (!curr_f->tween || !next_f)
 		{
-			for (size_t i = 0, n = curr_f->sprites.size(); i < n; ++i) {
-				ee::Sprite* spr = dynamic_cast<ee::Sprite*>(curr_f->sprites[i]);
-				sprites.push_back(spr->EEClone());	
+			for (size_t i = 0, n = curr_f->sprs.size(); i < n; ++i) {
+				ee::Sprite* spr = dynamic_cast<ee::Sprite*>(curr_f->sprs[i]);
+				sprs.push_back(spr->EEClone());	
 			}
 		}
 		else
 		{
 			assert(index >= curr_f->index && index < next_f->index);
 			float process = (float) (index - curr_f->index) / (next_f->index - curr_f->index);
-			TweenUtility::GetTweenSprites(curr_f->sprites, next_f->sprites, sprites, process);
+			TweenUtility::GetTweenSprites(curr_f->sprs, next_f->sprs, sprs, process);
 		}
 	}
 }

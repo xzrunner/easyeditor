@@ -89,11 +89,11 @@ void StagePanel::Load(const std::string& dir, const Json::Value& value,
 	Json::Value bg_val = value["bg"][i++];
 	while (!bg_val.isNull()) {
 		std::string filepath = dir + "\\" + bg_val["filepath"].asString();
-		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-		ee::Sprite* bg = ee::SpriteFactory::Instance()->Create(symbol);
+		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		ee::Sprite* bg = ee::SpriteFactory::Instance()->Create(sym);
 		bg->Load(bg_val);
 		ee::InsertSpriteSJ::Instance()->Insert(bg);
-		symbol->RemoveReference();
+		sym->RemoveReference();
 
 		bg_val = value["bg"][i++];
 	}
@@ -118,12 +118,12 @@ void StagePanel::Load(const std::string& dir, const Json::Value& value,
 
 // const std::vector<OceanMesh*>& StagePanel::GetOceans() const 
 // {
-// 	return m_symbol->GetOceans();
+// 	return m_sym->GetOceans();
 // }
 // 
 // std::vector<OceanMesh*>& StagePanel::GetOceans() 
 // {
-// 	return m_symbol->GetOceans();
+// 	return m_sym->GetOceans();
 // }
 
 void StagePanel::AddOcean(const eshape::PolygonShape* shape, const ee::ImageSymbol* image)
@@ -163,9 +163,9 @@ StageDropTarget(StagePanel* stage, ee::LibraryPanel* library)
 }
 
 bool StagePanel::StageDropTarget::
-OnDropSymbol(ee::Symbol* symbol, const sm::vec2& pos)
+OnDropSymbol(ee::Symbol* sym, const sm::vec2& pos)
 {
-	if (ee::ImageSymbol* image = dynamic_cast<ee::ImageSymbol*>(symbol))
+	if (ee::ImageSymbol* image = dynamic_cast<ee::ImageSymbol*>(sym))
 	{
 		ee::Shape* shape = m_stage->QueryShapeByPos(pos);
 		if (eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(shape)) {
@@ -173,9 +173,9 @@ OnDropSymbol(ee::Symbol* symbol, const sm::vec2& pos)
 			m_stage->AddOcean(poly, image);
 			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		} else {
-			ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-			sprite->Translate(pos);
-			ee::InsertSpriteSJ::Instance()->Insert(sprite);
+			ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+			spr->Translate(pos);
+			ee::InsertSpriteSJ::Instance()->Insert(spr);
 		}
 		return true;
 	}

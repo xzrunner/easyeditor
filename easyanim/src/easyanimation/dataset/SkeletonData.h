@@ -19,22 +19,22 @@ public:
 	~SkeletonData();
 
 	void CopyFrom(const SkeletonData& skeleton);
-	void CopyFrom(const std::vector<ee::Sprite*>& sprites,
+	void CopyFrom(const std::vector<ee::Sprite*>& sprs,
 		const SkeletonData& skeleton);
 
-	void RemoveSprite(ee::Sprite* sprite);
-	bool IsContainSprite(ee::Sprite* sprite) const;
+	void RemoveSprite(ee::Sprite* spr);
+	bool IsContainSprite(ee::Sprite* spr) const;
 
-	void InsertJoint(ee::Sprite* sprite, const sm::vec2& pos);
+	void InsertJoint(ee::Sprite* spr, const sm::vec2& pos);
 	void RemoveJoint(sm::vec2& pos);
 
 	Joint* QueryJointByPos(const sm::vec2& pos);
 
 	void Draw() const;
 
-	void Absorb(ee::Sprite* sprite);
-	void FixJoint(ee::Sprite* sprite);
-	void UpdateJoint(ee::Sprite* sprite, float dAngle = 0);
+	void Absorb(ee::Sprite* spr);
+	void FixJoint(ee::Sprite* spr);
+	void UpdateJoint(ee::Sprite* spr, float dAngle = 0);
 
 	bool Empty() const { return m_map_joints.empty(); }
 
@@ -44,9 +44,9 @@ public:
 private:
 	void Clean();
 
-	void Translate(ee::Sprite* sprite, const sm::vec2& offset);
+	void Translate(ee::Sprite* spr, const sm::vec2& offset);
 
-	static ee::Sprite* GetSpriteByName(const std::vector<ee::Sprite*>& sprites, const std::string& name);
+	static ee::Sprite* GetSpriteByName(const std::vector<ee::Sprite*>& sprs, const std::string& name);
 
 private:
 	std::map<ee::Sprite*, std::vector<Joint*> > m_map_joints;

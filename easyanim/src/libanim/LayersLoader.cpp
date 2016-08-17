@@ -26,23 +26,23 @@ void LayersLoader::LoadLayers(const Json::Value& value,
 			//dstFrame->id = frameValue["id"].asInt();
 			dst_frame->index = frame_val["time"].asInt();
 			dst_frame->tween = frame_val["tween"].asBool();
-			// sprites
+			// sprs
 			int k = 0;
 			Json::Value spr_val = frame_val["actor"][k++];
 			while (!spr_val.isNull()) {
 				std::string filepath = ee::SymbolSearcher::GetSymbolPath(dir, spr_val);
-				ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-				if (!symbol) {
+				ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+				if (!sym) {
 					std::string filepath = spr_val["filepath"].asString();
 					throw ee::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", 
 						dir.c_str(), filepath.c_str());
 				}
-				ee::SymbolSearcher::SetSymbolFilepaths(dir, symbol, spr_val);
+				ee::SymbolSearcher::SetSymbolFilepaths(dir, sym, spr_val);
 
-				ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-				symbol->RemoveReference();
-				sprite->Load(spr_val, dir);
-				dst_frame->sprites.push_back(sprite);
+				ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+				sym->RemoveReference();
+				spr->Load(spr_val, dir);
+				dst_frame->sprs.push_back(spr);
 				spr_val = frame_val["actor"][k++];
 			}
 			dst_layer->frames.push_back(dst_frame);

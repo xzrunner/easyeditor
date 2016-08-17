@@ -23,19 +23,19 @@ void Graphics::Connect(ee::Sprite* from, ee::Sprite* to)
 	t->in.push_back(from);
 }
 
-void Graphics::Move(ee::Sprite* sprite, const sm::vec2& offset) 
+void Graphics::Move(ee::Sprite* spr, const sm::vec2& offset) 
 {
-	sprite->Translate(offset);
-	Node* node = Query(sprite);
+	spr->Translate(offset);
+	Node* node = Query(spr);
 	if (node && !node->out.empty())
 		for (size_t i = 0, n = node->out.size(); i < n; ++i)
 			Move(node->out[i], offset);
 }
 
-Node* Graphics::Query(ee::Sprite* sprite) const 
+Node* Graphics::Query(ee::Sprite* spr) const 
 {
 	std::map<ee::Sprite*, Node*>::const_iterator itr
-		= connection.find(sprite);
+		= connection.find(spr);
 	if (itr == connection.end())
 		return NULL;
 	else

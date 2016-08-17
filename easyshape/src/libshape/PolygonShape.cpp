@@ -202,10 +202,10 @@ void PolygonShape::LoadMaterial(const std::string& dirpath, const Json::Value& v
 		m_material = new ColorMaterial(m_vertices, col);
 	} else if (type == "texture") {
 		std::string path = val["texture path"].asString();
-		ee::ImageSymbol* symbol = static_cast<ee::ImageSymbol*>(
+		ee::ImageSymbol* sym = static_cast<ee::ImageSymbol*>(
 			ee::SymbolMgr::Instance()->FetchSymbol(dirpath + "\\" + path));
-		m_material = new TextureMaterial(m_vertices, symbol);
-		symbol->RemoveReference();
+		m_material = new TextureMaterial(m_vertices, sym);
+		sym->RemoveReference();
 	}
 }
 

@@ -22,7 +22,7 @@ std::string LRSeparateComplex::Command() const
 
 std::string LRSeparateComplex::Description() const
 {
-	return "separate lr's sprites to easycompex file";
+	return "separate lr's sprs to easycompex file";
 }
 
 std::string LRSeparateComplex::Usage() const
@@ -206,8 +206,8 @@ void LRSeparateComplex::FixPosWithShape(sm::vec2& pos, const std::string& filepa
 		return;
 	}
 
-	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(shape_path);
-	eshape::Symbol* shape_symbol = dynamic_cast<eshape::Symbol*>(symbol);
+	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(shape_path);
+	eshape::Symbol* shape_symbol = dynamic_cast<eshape::Symbol*>(sym);
 	if (!shape_symbol) {
 		throw ee::Exception("shape file err:%s", filepath);
 	}
@@ -223,7 +223,7 @@ void LRSeparateComplex::FixPosWithShape(sm::vec2& pos, const std::string& filepa
 		throw ee::Exception("shape file is not point:%s", filepath);
 	}
 
-	symbol->RemoveReference();
+	sym->RemoveReference();
 }
 
 }

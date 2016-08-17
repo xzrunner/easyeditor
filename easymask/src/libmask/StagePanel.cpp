@@ -40,9 +40,9 @@ bool StagePanel::Update(float dt)
 	return true;
 }
 
-void StagePanel::SetSymbol(Symbol* symbol) 
+void StagePanel::SetSymbol(Symbol* sym) 
 { 
-	cu::RefCountObjAssign(m_sym, symbol); 
+	cu::RefCountObjAssign(m_sym, sym); 
 }
 
 void StagePanel::OnNotify(int sj_id, void* ud)

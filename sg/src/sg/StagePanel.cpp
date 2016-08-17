@@ -90,10 +90,10 @@ void StagePanel::TransGridPosToCoordsNew(int row, int col, sm::vec2& pos) const
 
 void StagePanel::UpdateAllSpritesLocation()
 {
-	std::vector<ee::Sprite*> sprites;
-	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-		ee::Sprite* s = sprites[i];
+	std::vector<ee::Sprite*> sprs;
+	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
+		ee::Sprite* s = sprs[i];
 		s->SetPosition(FixSpriteLocation(s->GetPosition()));
 	}
 }
@@ -104,21 +104,21 @@ void StagePanel::SetPerspective(bool is_flat)
 		return;
 	}
 
-	std::vector<ee::Sprite*> sprites;
-	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	for (size_t i = 0, n = sprites.size(); i < n; ++i)
+	std::vector<ee::Sprite*> sprs;
+	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	for (size_t i = 0, n = sprs.size(); i < n; ++i)
 	{
-		ee::Sprite* sprite = sprites[i];
+		ee::Sprite* spr = sprs[i];
 
 		int row, col;
-		TransCoordsToGridPos(sprite->GetPosition(), row, col);
+		TransCoordsToGridPos(spr->GetPosition(), row, col);
 		m_is_flat = !m_is_flat;
 
 		sm::vec2 pos;
 		TransGridPosToCoords(row, col, pos);
 		m_is_flat = !m_is_flat;
 
-		sprite->SetPosition(pos);
+		spr->SetPosition(pos);
 	}
 
  	m_is_flat = is_flat; 
@@ -126,14 +126,14 @@ void StagePanel::SetPerspective(bool is_flat)
 
 void StagePanel::ChangeSelectedSpritesLevel(bool up)
 {
-	std::vector<ee::Sprite*> sprites;
-	GetSpriteSelection()->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	for (int i = 0, n = sprites.size(); i < n; ++i)
+	std::vector<ee::Sprite*> sprs;
+	GetSpriteSelection()->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	for (int i = 0, n = sprs.size(); i < n; ++i)
 	{
-		ee::Sprite* sprite = sprites[i];
+		ee::Sprite* spr = sprs[i];
 
-		SpriteExt* spr_info = static_cast<SpriteExt*>(sprite->GetUserData());
-		SymbolExt* symbol_info = static_cast<SymbolExt*>(sprite->GetSymbol()->GetUserData());
+		SpriteExt* spr_info = static_cast<SpriteExt*>(spr->GetUserData());
+		SymbolExt* symbol_info = static_cast<SymbolExt*>(spr->GetSymbol()->GetUserData());
 		assert(spr_info && symbol_info);
 
 		if (spr_info->level == 1 && !up ||
@@ -144,11 +144,11 @@ void StagePanel::ChangeSelectedSpritesLevel(bool up)
 		spr_info->level = up ? spr_info->level + 1 : spr_info->level - 1;
 		std::string new_filepath = symbol_info->building->levels[spr_info->level - 1].res_snapshoot_path;
 		ee::Symbol* new_symbol = ee::SymbolMgr::Instance()->FetchSymbol(new_filepath);
-		if (new_symbol != sprite->GetSymbol()) {
+		if (new_symbol != spr->GetSymbol()) {
 			SymbolExt* new_symbol_info = static_cast<SymbolExt*>(new_symbol->GetUserData());
 			new_symbol_info->remain--;
 			symbol_info->remain++;
-			sprite->SetSymbol(new_symbol);
+			spr->SetSymbol(new_symbol);
 		}
 
 // 		//////////////////////////////////////////////////////////////////////////
@@ -166,9 +166,9 @@ void StagePanel::ChangeSelectedSpritesLevel(bool up)
 // 			return;
 // 		}
 // 
-// 		ee::Symbol* symbol = ee::SymbolMgr::Instance()->fetchSymbol(pItem->res_snapshoot_path);
-// 		if (symbol) {
-// 			if (symbol->GetUserData() == NULL) 
+// 		ee::Symbol* sym = ee::SymbolMgr::Instance()->fetchSymbol(pItem->res_snapshoot_path);
+// 		if (sym) {
+// 			if (sym->GetUserData() == NULL) 
 // 			{
 // 				SymbolExt* new_info = new SymbolExt;
 // 				new_info->size = symbol_info->size;
@@ -176,11 +176,11 @@ void StagePanel::ChangeSelectedSpritesLevel(bool up)
 // 				new_info->wall_type = symbol_info->wall_type;
 // 				new_info->level = pItem->level;
 // 				new_info->building = pItem->building;
-// 				symbol->SetUserData(new_info);
+// 				sym->SetUserData(new_info);
 // 			}
-// 			sprite->setSymbol(symbol);
+// 			spr->setSymbol(sym);
 // 		}
-// 		symbol->RemoveReference();
+// 		sym->RemoveReference();
 	}
 }
 
@@ -215,9 +215,9 @@ sm::vec2 StagePanel::FixSpriteLocation(const sm::vec2& pos) const
 	return ret;
 }
 
-void StagePanel::ChangeSymbolRemain(ee::Sprite* sprite, bool increase) const
+void StagePanel::ChangeSymbolRemain(ee::Sprite* spr, bool increase) const
 {
-	SymbolExt* info = static_cast<SymbolExt*>(sprite->GetSymbol()->GetUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(spr->GetSymbol()->GetUserData());
 	if (!info) {
 		return;
 	}
@@ -227,8 +227,8 @@ void StagePanel::ChangeSymbolRemain(ee::Sprite* sprite, bool increase) const
 	} else {
 		--info->remain;
 	}
-	ee::Symbol& symbol = const_cast<ee::Symbol&>(sprite->GetSymbol());
-	symbol.SetInfo(ee::StringHelper::ToString(info->remain));
+	ee::Symbol& sym = const_cast<ee::Symbol&>(spr->GetSymbol());
+	sym.SetInfo(ee::StringHelper::ToString(info->remain));
 	m_library->Refresh(true);
 }
 
@@ -282,11 +282,11 @@ void StagePanel::Remove(ee::Sprite* spr)
 
 void StagePanel::Clear()
 {
-	std::vector<ee::Sprite*> sprites;
-	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	bool ret = !sprites.empty();
-	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-		ChangeSymbolRemain(sprites[i], true);
+	std::vector<ee::Sprite*> sprs;
+	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	bool ret = !sprs.empty();
+	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
+		ChangeSymbolRemain(sprs[i], true);
 	}
 	m_checkboard.Clear();
 

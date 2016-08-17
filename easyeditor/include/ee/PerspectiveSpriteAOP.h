@@ -13,13 +13,13 @@ class Sprite;
 class PerspectiveSpriteAOP : public AtomicOP
 {
 public:
-	PerspectiveSpriteAOP(Sprite* sprite, const sm::vec2& new_persp,
+	PerspectiveSpriteAOP(Sprite* spr, const sm::vec2& new_persp,
 		const sm::vec2& old_persp);
 
 	virtual void Undo();
 	virtual void Redo();
 
-	virtual Json::Value Store(const std::vector<Sprite*>& sprites) const;
+	virtual Json::Value Store(const std::vector<Sprite*>& sprs) const;
 
 private:
 	Sprite* m_spr;

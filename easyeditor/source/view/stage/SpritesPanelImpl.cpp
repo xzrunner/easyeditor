@@ -67,8 +67,8 @@ void SpritesPanelImpl::OnNotify(int sj_id, void* ud)
 		break;
 	case MSG_SORT_SPRITES:
 		{
-			std::vector<ee::Sprite*>& sprites = *(std::vector<ee::Sprite*>*)ud;
-			static_cast<SprDataContainer*>(m_container)->Sort(sprites);
+			std::vector<ee::Sprite*>& sprs = *(std::vector<ee::Sprite*>*)ud;
+			static_cast<SprDataContainer*>(m_container)->Sort(sprs);
 		}
 		break;
 	case MSG_INSERT_SPRITE:

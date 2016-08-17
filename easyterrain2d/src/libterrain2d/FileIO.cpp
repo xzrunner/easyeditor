@@ -77,7 +77,7 @@ OceanMesh* FileIO::LoadOceanMesh(const std::string& dir, const Json::Value& valu
 	return ocean;
 }
 
-void FileIO::StoreSymbol(const char* filepath, const Symbol* symbol)
+void FileIO::StoreSymbol(const char* filepath, const Symbol* sym)
 {
 	Json::Value src_value;
 	Json::Reader reader;
@@ -90,7 +90,7 @@ void FileIO::StoreSymbol(const char* filepath, const Symbol* symbol)
 	dst_value["bg"] = src_value["bg"];
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
-	std::vector<OceanMesh*> meshes = symbol->GetOceans();
+	std::vector<OceanMesh*> meshes = sym->GetOceans();
 	for (int i = 0, n = meshes.size(); i < n; ++i) {
 		FileIO::StoreOceanMesh(meshes[i], dir, dst_value["ocean"][i]);
 	}

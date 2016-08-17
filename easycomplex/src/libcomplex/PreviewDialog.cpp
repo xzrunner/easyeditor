@@ -23,9 +23,9 @@ public:
 }; // InitVisitor
 
 PreviewDialog::PreviewDialog(wxWindow* parent, wxGLContext* glctx,
-							 const std::vector<const ee::Sprite*>& sprites)
+							 const std::vector<const ee::Sprite*>& sprs)
 	: wxDialog(parent, wxID_ANY, "Preview", wxDefaultPosition, wxSize(800, 600), wxCLOSE_BOX | wxCAPTION)
-	, m_sprites(sprites)
+	, m_sprs(sprs)
 	, m_control(0.033f)
 {
 	InitLayout(glctx);
@@ -35,8 +35,8 @@ PreviewDialog::PreviewDialog(wxWindow* parent, wxGLContext* glctx,
 
 	InitVisitor init;
 	bool next;
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		ee::Sprite* spr = const_cast<ee::Sprite*>(m_sprites[i]);
+	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+		ee::Sprite* spr = const_cast<ee::Sprite*>(m_sprs[i]);
 		init.Visit(spr, next);
 		dynamic_cast<ee::Symbol*>(spr->GetSymbol())->Traverse(init);
 	}
@@ -47,8 +47,8 @@ PreviewDialog::~PreviewDialog()
 	ee::SettingData& data = ee::Config::Instance()->GetSettings();
 	data.particle3d_loop = true;
 
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		if (const eanim::Sprite* anim = dynamic_cast<const eanim::Sprite*>(m_sprites[i])) {
+	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+		if (const eanim::Sprite* anim = dynamic_cast<const eanim::Sprite*>(m_sprs[i])) {
 			const_cast<eanim::Symbol*>(dynamic_cast<const eanim::Symbol*>(anim->GetSymbol()))->SetLoop(true);
 		}
 	}
@@ -64,8 +64,8 @@ void PreviewDialog::InitLayout(wxGLContext* glctx)
 void PreviewDialog::BuildEditPanel(wxSizer* sizer, wxGLContext* glctx)
 {
 	PreviewStage* stage = new PreviewStage(this, this, m_control);
-	stage->SetEditOP(new PreviewEditOP(stage, stage->GetStageImpl(), m_sprites));
-	stage->SetCanvas(new PreviewCanvas(stage, stage->GetStageImpl(), m_sprites, glctx));
+	stage->SetEditOP(new PreviewEditOP(stage, stage->GetStageImpl(), m_sprs));
+	stage->SetCanvas(new PreviewCanvas(stage, stage->GetStageImpl(), m_sprs, glctx));
 	sizer->Add(stage, 1, wxEXPAND);
 }
 

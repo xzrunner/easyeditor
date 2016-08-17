@@ -69,7 +69,7 @@ public:
 class SortSpriteSJ : public Subject
 {
 public:
-	void Sort(std::vector<Sprite*>& sprites, Observer* except = NULL);
+	void Sort(std::vector<Sprite*>& sprs, Observer* except = NULL);
 	SUBJECT_DECLARATION(SortSpriteSJ)
 }; // SortSpriteSJ
 

@@ -7,13 +7,13 @@
 namespace etexpacker
 {
 
-void MaxRectsBinaryArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites)
+void MaxRectsBinaryArrange::Arrange(const std::vector<ee::ImageSprite*>& sprs)
 {
-	int sz = sprites.size();
+	int sz = sprs.size();
 	std::vector<etexpacker::RectSize> rects;
 	rects.reserve(sz);
 	for (int i = 0; i < sz; ++i) {
-		sm::rect r = sprites[i]->GetSymbol()->GetBounding();
+		sm::rect r = sprs[i]->GetSymbol()->GetBounding();
 		rects.push_back(etexpacker::RectSize(r.Width(), r.Height()));
 	}
 	std::vector<etexpacker::Rect> output;
@@ -21,14 +21,14 @@ void MaxRectsBinaryArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites
 	etexpacker::MaxRectsBinaryPack2 pack;
 	pack.Pack(etexpacker::PACK_AUTO, 2048, 2048, 2048, rects, output);
 
-	assert(sprites.size() == output.size());
+	assert(sprs.size() == output.size());
 	for (int i = 0; i < sz; ++i) {
-		ee::Sprite* sprite = sprites[i];
+		ee::Sprite* spr = sprs[i];
 		const etexpacker::Rect& r = output[i];
 		sm::vec2 pos;
 		pos.x = r.x + r.width * 0.5f;
 		pos.y = r.y + r.height * 0.5f;
-		sprite->SetPosition(pos);
+		spr->SetPosition(pos);
 	}
 }
 

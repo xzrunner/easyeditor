@@ -48,7 +48,7 @@ void PackPkgMgr::LoadPackage(const Json::Value& val, const std::string& dir)
 		filepath = ee::FileHelper::GetAbsolutePath(pkg->path, filepath);
 		ee::FileHelper::FormatFilepath(filepath);
 		int id = spr_val["id"].asInt();
-		pkg->sprites.insert(std::make_pair(filepath, id));
+		pkg->sprs.insert(std::make_pair(filepath, id));
 	}
 
 	m_pkgs.push_back(pkg);

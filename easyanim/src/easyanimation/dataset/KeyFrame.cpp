@@ -39,12 +39,12 @@ void KeyFrame::CopyFromOther(const KeyFrame* src)
 		return;
 	}
 
-	// sprites
-	for (size_t i = 0, n = src->m_sprites.size(); i < n; ++i)
+	// sprs
+	for (size_t i = 0, n = src->m_sprs.size(); i < n; ++i)
 	{
-		ee::Sprite* s = src->m_sprites[i]->EEClone();
+		ee::Sprite* s = src->m_sprs[i]->EEClone();
 		set_sprite_user_data(s, m_layer, this);
-		m_sprites.push_back(s);
+		m_sprs.push_back(s);
 
 		if (m_layer) {
 			s->SetObserver(&m_layer->GetSpriteObserver());
@@ -53,61 +53,61 @@ void KeyFrame::CopyFromOther(const KeyFrame* src)
 	}
 
 	// skeleton
-	m_skeleton.CopyFrom(m_sprites, src->m_skeleton);
+	m_skeleton.CopyFrom(m_sprs, src->m_skeleton);
 	// todo spr's ud
 }
 
-void KeyFrame::Insert(ee::Sprite* sprite, int idx)
+void KeyFrame::Insert(ee::Sprite* spr, int idx)
 {
-	sprite->AddReference();
+	spr->AddReference();
 
-	set_sprite_user_data(sprite, m_layer, this);
-	ee::ObjectVector<ee::Sprite>::Insert(m_sprites, sprite, idx);
+	set_sprite_user_data(spr, m_layer, this);
+	ee::ObjectVector<ee::Sprite>::Insert(m_sprs, spr, idx);
 	if (m_layer) {
-		sprite->SetObserver(&m_layer->GetSpriteObserver());
-		m_layer->GetSpriteObserver().Insert(sprite, m_time);
+		spr->SetObserver(&m_layer->GetSpriteObserver());
+		m_layer->GetSpriteObserver().Insert(spr, m_time);
 	}
 }
 
-bool KeyFrame::Remove(ee::Sprite* sprite) 
+bool KeyFrame::Remove(ee::Sprite* spr) 
 {
-	m_skeleton.RemoveSprite(sprite);
+	m_skeleton.RemoveSprite(spr);
 	if (m_layer) {
-		m_layer->GetSpriteObserver().Remove(sprite);
+		m_layer->GetSpriteObserver().Remove(spr);
 	}
 
-	return ee::ObjectVector<ee::Sprite>::Remove(m_sprites, sprite);
+	return ee::ObjectVector<ee::Sprite>::Remove(m_sprs, spr);
 }
 
-bool KeyFrame::Reorder(const ee::Sprite* sprite, bool up)
+bool KeyFrame::Reorder(const ee::Sprite* spr, bool up)
 {
-	return ee::ObjectVector<ee::Sprite>::ResetOrder(m_sprites, sprite, up);
+	return ee::ObjectVector<ee::Sprite>::ResetOrder(m_sprs, spr, up);
 }
 
-bool KeyFrame::ReorderMost(const ee::Sprite* sprite, bool up)
+bool KeyFrame::ReorderMost(const ee::Sprite* spr, bool up)
 {
-	return ee::ObjectVector<ee::Sprite>::ResetOrderMost(m_sprites, sprite, up);
+	return ee::ObjectVector<ee::Sprite>::ResetOrderMost(m_sprs, spr, up);
 }
 
-bool KeyFrame::Sort(std::vector<ee::Sprite*>& sprites)
+bool KeyFrame::Sort(std::vector<ee::Sprite*>& sprs)
 {
-	return ee::ObjectVector<ee::Sprite>::Sort(m_sprites, sprites);
+	return ee::ObjectVector<ee::Sprite>::Sort(m_sprs, sprs);
 }
 
 void KeyFrame::Clear()
 {
 	if (m_layer) {
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-			m_layer->GetSpriteObserver().Remove(m_sprites[i]);
+		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
+			m_layer->GetSpriteObserver().Remove(m_sprs[i]);
 	}
 
-	ee::ObjectVector<ee::Sprite>::Clear(m_sprites);
+	ee::ObjectVector<ee::Sprite>::Clear(m_sprs);
 }
 
 void KeyFrame::OnActive()
 {
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		if (eparticle3d::Sprite* p3d = dynamic_cast<eparticle3d::Sprite*>(m_sprites[i])) {
+	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+		if (eparticle3d::Sprite* p3d = dynamic_cast<eparticle3d::Sprite*>(m_sprs[i])) {
 			if (p3d->IsAlone()) {
 				p3d->OnActive();
 			}
@@ -121,9 +121,9 @@ void KeyFrame::GetTweenSprite(const KeyFrame* start, const KeyFrame* end,
 	// 	// old
 	// 	for (int i = 0, n = start->Size(); i < n; ++i)
 	// 	{
-	// 		ee::Sprite* s = start->m_sprites[i];
+	// 		ee::Sprite* s = start->m_sprs[i];
 	// 		for (int j = 0, m = end->Size(); j < m; ++j) {
-	// 			ee::Sprite* e = end->m_sprites[j];
+	// 			ee::Sprite* e = end->m_sprs[j];
 	// 			if (IsTweenMatched(s, e))
 	// 			{
 	// 				ee::Sprite* mid = s->clone();
@@ -139,7 +139,7 @@ void KeyFrame::GetTweenSprite(const KeyFrame* start, const KeyFrame* end,
 		SkeletonData::GetTweenSprites(s_skeleton, e_skeleton, tween, process);
 	} else {
 		// new
-		eanim::TweenUtility::GetTweenSprites(start->m_sprites, end->m_sprites, tween, process);
+		eanim::TweenUtility::GetTweenSprites(start->m_sprs, end->m_sprs, tween, process);
 	}
 }
 

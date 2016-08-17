@@ -34,12 +34,12 @@
 //	m_id = Create(width, height);
 //}
 //
-//void RenderTarget::DrawSprite(const Sprite* sprite, bool clear = false, float dx = 0, float dy = 0)
+//void RenderTarget::DrawSprite(const Sprite* spr, bool clear = false, float dx = 0, float dy = 0)
 //{
 //
 //}
 //
-//void RenderTarget::DrawSprite(const Sprite* sprite, bool clear, int width, int height, float dx = 0, float dy = 0)
+//void RenderTarget::DrawSprite(const Sprite* spr, bool clear, int width, int height, float dx = 0, float dy = 0)
 //{
 //
 //}
@@ -49,7 +49,7 @@
 //
 //}
 //
-//void RenderTarget::DrawSymbol(const Symbol* symbol, bool whitebg = false, float scale = 1.0f)
+//void RenderTarget::DrawSymbol(const Symbol* sym, bool whitebg = false, float scale = 1.0f)
 //{
 //
 //}
@@ -73,12 +73,12 @@
 //	}
 //}
 //
-//void RenderTarget::DrawFBO(const Symbol* symbol, bool whitebg, float scale)
+//void RenderTarget::DrawFBO(const Symbol* sym, bool whitebg, float scale)
 //{
 //
 //}
 //
-//void RenderTarget::DrawFBO(const Sprite* sprite, bool clear, int width, int height, float dx, float dy)
+//void RenderTarget::DrawFBO(const Sprite* spr, bool clear, int width, int height, float dx, float dy)
 //{
 //
 //}

@@ -11,15 +11,15 @@
 namespace eanim
 {
 
-void FileSaver::Store(const std::string& filepath, const Symbol& symbol)
+void FileSaver::Store(const std::string& filepath, const Symbol& sym)
 {
 	Json::Value value;
 
-	value["name"] = symbol.name;
+	value["name"] = sym.name;
 
-	value["fps"] = symbol.getFPS();
+	value["fps"] = sym.getFPS();
 
-	const std::vector<s2::AnimSymbol::Layer*>& layers = symbol.GetLayers();
+	const std::vector<s2::AnimSymbol::Layer*>& layers = sym.GetLayers();
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	for (size_t i = 0, n = layers.size(); i < n; ++i)
 		Store(value["layer"][i], layers[i], dir);
@@ -42,8 +42,8 @@ void FileSaver::Store(Json::Value& value, s2::AnimSymbol::Layer* layer, const st
 void FileSaver::Store(Json::Value& value, s2::AnimSymbol::Frame* frame, const std::string& dir)
 {
 	value["time"] = frame->index;
-	for (size_t i = 0, n = frame->sprites.size(); i < n; ++i)
-		Store(value["actor"][i], frame->sprites[i], dir);
+	for (size_t i = 0, n = frame->sprs.size(); i < n; ++i)
+		Store(value["actor"][i], frame->sprs[i], dir);
 }
 
 void FileSaver::Store(Json::Value& value, s2::Sprite* spr, const std::string& dir)

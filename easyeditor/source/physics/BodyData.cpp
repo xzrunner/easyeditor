@@ -56,10 +56,10 @@ void BodyData::loadFromMeshFile(const std::string& filename)
 {
 	//m_type = e_mesh;
 
-	//MeshSymbol symbol;
-	//symbol.LoadFromFile(filename);
+	//MeshSymbol sym;
+	//sym.LoadFromFile(filename);
 
-	//const std::vector<sm::vec2>& triangles = symbol.getVertices();
+	//const std::vector<sm::vec2>& triangles = sym.getVertices();
 
 	//size_t size = triangles.size() / 3;
 	//m_fixtures.reserve(size);

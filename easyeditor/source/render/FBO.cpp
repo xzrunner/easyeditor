@@ -44,15 +44,15 @@ void FBO::ChangeSize(int width, int height)
 	CreateFBO(width, height);
 }
 
-void FBO::DrawSprite(const Sprite* sprite, bool clear, float dx, float dy)
+void FBO::DrawSprite(const Sprite* spr, bool clear, float dx, float dy)
 {
-	DrawFBO(sprite, clear, m_width, m_height, dx, dy, 1);
+	DrawFBO(spr, clear, m_width, m_height, dx, dy, 1);
 }
 
-void FBO::DrawSprite(const Sprite* sprite, bool clear, int width, int height, 
+void FBO::DrawSprite(const Sprite* spr, bool clear, int width, int height, 
 					 float dx, float dy, float scale)
 {
-	DrawFBO(sprite, clear, width, height, dx, dy, scale);
+	DrawFBO(spr, clear, width, height, dx, dy, scale);
 }
 
 void FBO::DrawShape(const Shape* shape, bool clear, int width, int height)
@@ -60,9 +60,9 @@ void FBO::DrawShape(const Shape* shape, bool clear, int width, int height)
 	DrawFBO(shape, clear, width, height);
 }
 
-void FBO::DrawSymbol(const Symbol* symbol, bool whitebg, float scale)
+void FBO::DrawSymbol(const Symbol* sym, bool whitebg, float scale)
 {
-	DrawFBO(symbol, whitebg, scale);
+	DrawFBO(sym, whitebg, scale);
 }
 
 void FBO::ReadPixels(unsigned char* pixels, int width, int height) const
@@ -153,7 +153,7 @@ int FBO::CheckFramebufferStatus(std::string& msg) const
 	}	
 }
 
-void FBO::DrawFBO(const Symbol* symbol, bool whitebg, float scale)
+void FBO::DrawFBO(const Symbol* sym, bool whitebg, float scale)
 {
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	glBindFramebufferEXT(GL_FRAMEBUFFER, m_fbo);
@@ -182,7 +182,7 @@ void FBO::DrawFBO(const Symbol* symbol, bool whitebg, float scale)
 		has_context = false;
 	}
 
-	sm::rect rect = symbol->GetBounding();
+	sm::rect rect = sym->GetBounding();
 	sm::vec2 sz = rect.Size();
 	int w = static_cast<int>(sz.x * scale),
 		h = static_cast<int>(sz.y * scale);
@@ -195,7 +195,7 @@ void FBO::DrawFBO(const Symbol* symbol, bool whitebg, float scale)
 	float dx = -center.x;
 	float dy = center.y;
 	params.mt.Translate(dx * scale, dy * scale, 0);
-	SpriteRenderer::Draw(symbol, params, sm::vec2(0, 0), 0.0f, scale, -scale);
+	SpriteRenderer::Draw(sym, params, sm::vec2(0, 0), 0.0f, scale, -scale);
 
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
 	mgr->GetShader()->Commit();
@@ -211,7 +211,7 @@ void FBO::DrawFBO(const Symbol* symbol, bool whitebg, float scale)
 	}
 }
 
-void FBO::DrawFBO(const Sprite* sprite, bool clear, int width, int height, 
+void FBO::DrawFBO(const Sprite* spr, bool clear, int width, int height, 
 				  float dx, float dy, float scale)
 {
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
@@ -247,7 +247,7 @@ void FBO::DrawFBO(const Sprite* sprite, bool clear, int width, int height,
 	params.mt.Scale(scale, -scale, 1);
 	params.mt.Translate(-dx, dy, 0);
 	params.set_shader = false;
-	SpriteRenderer::Draw(sprite, params);
+	SpriteRenderer::Draw(spr, params);
 
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
 	mgr->GetShader()->Commit();

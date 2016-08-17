@@ -19,7 +19,7 @@ public:
 	 *    s2::Symbol
 	 */
 	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
-	virtual sm::rect GetBounding(const s2::Sprite* sprite = NULL) const;
+	virtual sm::rect GetBounding(const s2::Sprite* spr = NULL) const;
 
 	const ee::Symbol* GetSymbol(bool is_base) const { return is_base ? m_base : m_mask; }
 	void SetSymbol(const ee::Symbol* sym, bool is_base);

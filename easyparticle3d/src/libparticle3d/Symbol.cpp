@@ -71,9 +71,9 @@ sm::rect Symbol::GetBounding(const s2::Sprite* spr) const
 
 void Symbol::ReloadTexture() const
 {
-	for (int i = 0; i < m_et_cfg->symbol_count; ++i) {
-		ee::Symbol* symbol = static_cast<ee::Symbol*>(m_et_cfg->symbols[i].ud);
-		symbol->ReloadTexture();
+	for (int i = 0; i < m_et_cfg->sym_count; ++i) {
+		ee::Symbol* sym = static_cast<ee::Symbol*>(m_et_cfg->syms[i].ud);
+		sym->ReloadTexture();
 	}
 }
 
@@ -82,11 +82,11 @@ void Symbol::Traverse(ee::Visitor<ee::Sprite>& visitor)
 	if (!m_et_cfg) {
 		return;
 	}
-	for (int i = 0; i < m_et_cfg->symbol_count; ++i)
+	for (int i = 0; i < m_et_cfg->sym_count; ++i)
 	{
-		const p3d_symbol& p_symbol = m_et_cfg->symbols[i];
-		ee::Symbol* symbol = static_cast<ee::Symbol*>(p_symbol.ud);
-		symbol->Traverse(visitor);
+		const p3d_symbol& p_symbol = m_et_cfg->syms[i];
+		ee::Symbol* sym = static_cast<ee::Symbol*>(p_symbol.ud);
+		sym->Traverse(visitor);
 	}
 }
 

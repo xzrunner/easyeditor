@@ -6,7 +6,7 @@
 namespace escale9
 {
 
-void FileSaver::Store(const char* filepath, const Symbol& symbol)
+void FileSaver::Store(const char* filepath, const Symbol& sym)
 {
 	Json::Value value;
 	Json::Reader reader;
@@ -16,7 +16,7 @@ void FileSaver::Store(const char* filepath, const Symbol& symbol)
 	reader.parse(fin, value);
 	fin.close();
 
-	sm::vec2 sz = symbol.GetBounding().Size();
+	sm::vec2 sz = sym.GetBounding().Size();
 	value["width"] = sz.x;
 	value["height"] = sz.y;
 

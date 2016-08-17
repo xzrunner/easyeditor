@@ -19,8 +19,8 @@ const wxChar* HORI_ALIGN_LABELS[] = {
 const wxChar* VERT_ALIGN_LABELS[] = { 
 	wxT("top"), wxT("bottom"), wxT("center"), wxT("auto"), wxT("tile"), NULL };
 
-PropertySetting::PropertySetting(ee::EditPanelImpl* edit_impl, Sprite* sprite)
-	: ee::SpritePropertySetting(edit_impl, sprite)
+PropertySetting::PropertySetting(ee::EditPanelImpl* edit_impl, Sprite* spr)
+	: ee::SpritePropertySetting(edit_impl, spr)
 	, m_parent(edit_impl->GetEditPanel())
 {
 	m_type = "Text";

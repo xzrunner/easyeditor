@@ -21,30 +21,30 @@ void Group::TraverseSprite(Visitor<Sprite>& visitor, DataTraverseType type, bool
 		type == DT_VISIBLE && m_visible ||
 		type == DT_ALL || type == DT_SELECTABLE)
 	{
-		m_sprites.Traverse(visitor, type, order);
+		m_sprs.Traverse(visitor, type, order);
 	}
 }
 
-bool Group::Insert(Sprite* sprite)
+bool Group::Insert(Sprite* spr)
 {
-	if (m_sprites.IsExist(sprite)) {
+	if (m_sprs.IsExist(spr)) {
 		return false;
 	} else {
-// 		sprite->visiable = m_visible;
-// 		sprite->editable = m_editable;
-		m_sprites.Insert(sprite);
+// 		spr->visiable = m_visible;
+// 		spr->editable = m_editable;
+		m_sprs.Insert(spr);
 		return true;
 	}
 }
 
-bool Group::Remove(Sprite* sprite)
+bool Group::Remove(Sprite* spr)
 {
-	return m_sprites.Remove(sprite);
+	return m_sprs.Remove(spr);
 }
 
 void Group::Clear()
 {
-	m_sprites.Clear();
+	m_sprs.Clear();
 	m_shapes.Clear();
 }
 

@@ -257,12 +257,12 @@ void RectCutCMPT::OnOutputData(wxCommandEvent& event)
 		return;
 	}
 
-	const ee::Sprite* sprite = m_stage->GetImage();
-	if (!sprite) {
+	const ee::Sprite* spr = m_stage->GetImage();
+	if (!spr) {
 		return;
 	}
 
-	const ee::ImageSprite* img_spr = dynamic_cast<const ee::ImageSprite*>(sprite);
+	const ee::ImageSprite* img_spr = dynamic_cast<const ee::ImageSprite*>(spr);
 	if (!img_spr) {
 		return;
 	}
@@ -293,15 +293,15 @@ void RectCutCMPT::OnOutputData(wxCommandEvent& event)
 		std::string img_filename = img_dir + "\\" + img_name + "_" + ee::StringHelper::ToString(i) + ".png";
 		ee::ImageSaver::StoreToFile(pixels, sz.x, sz.y, 4, img_filename, ee::ImageSaver::e_png);
 
-		ee::Sprite* sprite = new ee::DummySprite(new ee::DummySymbol(img_filename, sz.x, sz.y));
+		ee::Sprite* spr = new ee::DummySprite(new ee::DummySymbol(img_filename, sz.x, sz.y));
 		sm::vec2 offset = r.Center() - center;
-		sprite->Translate(offset);
-		complex_all->Add(sprite);
+		spr->Translate(offset);
+		complex_all->Add(spr);
 
 		for (int j = 0, m = m_part_rects.size(); j < m; ++j) {
 			if (m_part_rects[j] == r) {
-				sprite->AddReference();
-				complex_part->Add(sprite);
+				spr->AddReference();
+				complex_part->Add(spr);
 				break;
 			}
 		}
@@ -339,9 +339,9 @@ void RectCutCMPT::OnAddRect(wxCommandEvent& event)
 
 void RectCutCMPT::OnAutoCreateRects(wxCommandEvent& event)
 {
-	const ee::Sprite* sprite = m_stage->GetImage();
+	const ee::Sprite* spr = m_stage->GetImage();
 	const ee::ImageSprite* img_sprite 
-		= dynamic_cast<const ee::ImageSprite*>(sprite);
+		= dynamic_cast<const ee::ImageSprite*>(spr);
 	assert(img_sprite);
 	const ee::Image* img = img_sprite->GetSymbol()->GetImage();
 

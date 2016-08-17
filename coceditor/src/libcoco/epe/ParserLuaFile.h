@@ -25,7 +25,7 @@ public:
 	void transToEasyFiles(const std::vector<std::string>& texfilenames, const std::string& outfloder);
 	void transToMemory(const std::vector<std::string>& texfilenames);
 
-	void getAllSymbols(std::vector<ee::Symbol*>& symbols) const;
+	void getAllSymbols(std::vector<ee::Symbol*>& syms) const;
 
 private:
 	struct Picture
@@ -41,7 +41,7 @@ private:
 
 			void init();
 
-			void transform(ee::Sprite* sprite) const;
+			void transform(ee::Sprite* spr) const;
 
 		private:
 			std::string dstMode(const sm::vec2 dst[4]) const;
@@ -71,7 +71,7 @@ private:
 			int mat[6];
 			bool is_full;
 
-			void transform(ee::Sprite* sprite) const;
+			void transform(ee::Sprite* spr) const;
 
 			Item() {
 				color = 0xffffffff;

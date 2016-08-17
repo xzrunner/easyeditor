@@ -55,7 +55,7 @@ ee::Sprite* AnimationToSpr::TransAnim(const erespacker::PackAnimation* anim)
 			const erespacker::PackAnimation::Part& part = src.parts[j];
 			ee::Sprite* spr = NodeToSprite::Trans(anim->components[part.comp_idx].node);
 			TransSprite(spr, part.t);
-			frame->sprites.push_back(spr);
+			frame->sprs.push_back(spr);
 		}
 		layer->frames.push_back(frame);
 	}

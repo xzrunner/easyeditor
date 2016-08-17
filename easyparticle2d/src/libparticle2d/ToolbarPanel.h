@@ -60,7 +60,7 @@ private:
 private:
 	void Clear();
 
-	void OnAddChild(wxCommandEvent& event, ee::Symbol* symbol);
+	void OnAddChild(wxCommandEvent& event, ee::Symbol* sym);
 	void OnDelAllChild(wxCommandEvent& event);
 
 private:

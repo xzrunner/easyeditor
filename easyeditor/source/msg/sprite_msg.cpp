@@ -61,9 +61,9 @@ void ReorderSpriteSJ::Reorder(Sprite* spr, bool up, Observer* except)
 }
 
 SUBJECT_DEFINITION(SortSpriteSJ, MSG_SORT_SPRITES)
-void SortSpriteSJ::Sort(std::vector<Sprite*>& sprites, Observer* except)
+void SortSpriteSJ::Sort(std::vector<Sprite*>& sprs, Observer* except)
 {
-	Notify(&sprites, except);
+	Notify(&sprs, except);
 }
 
 SUBJECT_DEFINITION(SelectSpriteSetSJ, MSG_SELECT_SPRITE_SET)

@@ -23,7 +23,7 @@ Code::Code(ebuilder::CodeGenerator& gen)
 
 struct Node
 {
-	const ee::Sprite* sprite;
+	const ee::Sprite* spr;
 	std::string path;
 	std::string name;
 
@@ -32,7 +32,7 @@ struct Node
 
 }; // Node
 
-void Code::ResolveUI(const std::vector<ee::Sprite*>& sprites)
+void Code::ResolveUI(const std::vector<ee::Sprite*>& sprs)
 {
 	ebuilder::CodeGenerator *gen_init = new ebuilder::CodeGenerator(), 
 		*gen_path = new ebuilder::CodeGenerator();
@@ -43,15 +43,15 @@ void Code::ResolveUI(const std::vector<ee::Sprite*>& sprites)
 		gen_path->line("local path = {}");
 
 		std::queue<Node> buffer;
-		for (int i = 0, n = sprites.size(); i < n; ++i) {
-			Node node(sprites[i], "");
+		for (int i = 0, n = sprs.size(); i < n; ++i) {
+			Node node(sprs[i], "");
 			buffer.push(node);
 		}
 
 		while (!buffer.empty()) 
 		{
 			Node parent = buffer.front(); buffer.pop();
-			const ee::Sprite* spr = parent.sprite;
+			const ee::Sprite* spr = parent.spr;
 	
 			const std::string& spr_name = spr->GetName();
 			if (spr_name.empty() || spr_name[0] == '_') {
@@ -103,11 +103,11 @@ void Code::ResolveUI(const std::vector<ee::Sprite*>& sprites)
 	m_gen.block(*gen_path);
 }
 
-void Code::ResolveText(const std::vector<ee::Sprite*>& sprites)
+void Code::ResolveText(const std::vector<ee::Sprite*>& sprs)
 {
 	std::queue<ee::Sprite*> buffer;
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		buffer.push(sprites[i]);
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		buffer.push(sprs[i]);
 	}
 
  	while (!buffer.empty()) 

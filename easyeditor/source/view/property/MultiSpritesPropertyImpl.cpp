@@ -27,30 +27,30 @@ const wxChar* MultiSpritesPropertyImpl::ALIGN_LABELS[]
 const wxChar* MultiSpritesPropertyImpl::CENTER_LABELS[] 
 	= { wxT("无"), wxT("水平"), wxT("竖直"), wxT("相对"), NULL };
 
-MultiSpritesPropertyImpl::MultiSpritesPropertyImpl(const std::vector<Sprite*>& sprites)
+MultiSpritesPropertyImpl::MultiSpritesPropertyImpl(const std::vector<Sprite*>& sprs)
 {
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		sprites[i]->AddReference();
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		sprs[i]->AddReference();
 	}
-	m_sprites = sprites;
+	m_sprs = sprs;
 }
 
 MultiSpritesPropertyImpl::~MultiSpritesPropertyImpl()
 {
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->RemoveReference();
+	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+		m_sprs[i]->RemoveReference();
 	}
 }
 
 std::string MultiSpritesPropertyImpl::GetTag() const
 {
-	if (m_sprites.empty()) {
+	if (m_sprs.empty()) {
 		return "";
 	}
 
-	std::string tag = m_sprites[0]->GetTag();
-	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
-		if (tag != m_sprites[i]->GetTag()) {
+	std::string tag = m_sprs[0]->GetTag();
+	for (int i = 1, n = m_sprs.size(); i < n; ++i) {
+		if (tag != m_sprs[i]->GetTag()) {
 			return "[different]";
 		}
 	}
@@ -59,13 +59,13 @@ std::string MultiSpritesPropertyImpl::GetTag() const
 
 const wxChar* MultiSpritesPropertyImpl::GetClip() const
 {
-	if (m_sprites.empty()) {
+	if (m_sprs.empty()) {
 		return BOOL_3TYPE_LABELS[e_bool_different];
 	}
 
-	bool clip = m_sprites[0]->IsClip();
-	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
-		if (clip != m_sprites[i]->IsClip()) {
+	bool clip = m_sprs[0]->IsClip();
+	for (int i = 1, n = m_sprs.size(); i < n; ++i) {
+		if (clip != m_sprs[i]->IsClip()) {
 			return BOOL_3TYPE_LABELS[e_bool_different];
 		}
 	}
@@ -74,14 +74,14 @@ const wxChar* MultiSpritesPropertyImpl::GetClip() const
 
 sm::vec2 MultiSpritesPropertyImpl::GetPosition() const
 {
-	if (m_sprites.empty()) {
+	if (m_sprs.empty()) {
 		return sm::vec2();
 	}
 
-	sm::vec2 p = m_sprites[0]->GetPosition();
-	for (size_t i = 1, n = m_sprites.size(); i < n; ++i)
+	sm::vec2 p = m_sprs[0]->GetPosition();
+	for (size_t i = 1, n = m_sprs.size(); i < n; ++i)
 	{
-		if (p != m_sprites[i]->GetPosition())
+		if (p != m_sprs[i]->GetPosition())
 		{
 			p.Set(0, 0);
 			break;
@@ -92,13 +92,13 @@ sm::vec2 MultiSpritesPropertyImpl::GetPosition() const
 
 s2::Color MultiSpritesPropertyImpl::GetMultiColor() const
 {
-	if (m_sprites.empty()) {
+	if (m_sprs.empty()) {
 		return WHITE;
 	}
 
-	s2::Color col = m_sprites[0]->Color().mul;
-	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
-		if (col != m_sprites[i]->Color().mul) {
+	s2::Color col = m_sprs[0]->Color().mul;
+	for (int i = 1, n = m_sprs.size(); i < n; ++i) {
+		if (col != m_sprs[i]->Color().mul) {
 			return WHITE;
 		}
 	}
@@ -107,13 +107,13 @@ s2::Color MultiSpritesPropertyImpl::GetMultiColor() const
 
 s2::Color MultiSpritesPropertyImpl::GetAddColor() const
 {
-	if (m_sprites.empty()) {
+	if (m_sprs.empty()) {
 		return BLACK;
 	}
 	
-	s2::Color col = m_sprites[0]->Color().add;
-	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
-		if (col != m_sprites[i]->Color().add) {
+	s2::Color col = m_sprs[0]->Color().add;
+	for (int i = 1, n = m_sprs.size(); i < n; ++i) {
+		if (col != m_sprs[i]->Color().add) {
 			return BLACK;
 		}
 	}
@@ -122,13 +122,13 @@ s2::Color MultiSpritesPropertyImpl::GetAddColor() const
 
 s2::Color MultiSpritesPropertyImpl::GetTransColorR() const
 {
-	if (m_sprites.empty()) {
+	if (m_sprs.empty()) {
 		return RED;
 	}
 
-	s2::Color col = m_sprites[0]->Color().rmap;
-	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
-		if (col != m_sprites[i]->Color().rmap) {
+	s2::Color col = m_sprs[0]->Color().rmap;
+	for (int i = 1, n = m_sprs.size(); i < n; ++i) {
+		if (col != m_sprs[i]->Color().rmap) {
 			return RED;
 		}
 	}
@@ -137,13 +137,13 @@ s2::Color MultiSpritesPropertyImpl::GetTransColorR() const
 
 s2::Color MultiSpritesPropertyImpl::GetTransColorG() const
 {
-	if (m_sprites.empty()) {
+	if (m_sprs.empty()) {
 		return GREEN;
 	}
 
-	s2::Color col = m_sprites[0]->Color().gmap;
-	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
-		if (col != m_sprites[i]->Color().gmap) {
+	s2::Color col = m_sprs[0]->Color().gmap;
+	for (int i = 1, n = m_sprs.size(); i < n; ++i) {
+		if (col != m_sprs[i]->Color().gmap) {
 			return GREEN;
 		}
 	}
@@ -152,13 +152,13 @@ s2::Color MultiSpritesPropertyImpl::GetTransColorG() const
 
 s2::Color MultiSpritesPropertyImpl::GetTransColorB() const
 {
-	if (m_sprites.empty()) {
+	if (m_sprs.empty()) {
 		return BLUE;
 	}
 
-	s2::Color col = m_sprites[0]->Color().bmap;
-	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
-		if (col != m_sprites[i]->Color().bmap) {
+	s2::Color col = m_sprs[0]->Color().bmap;
+	for (int i = 1, n = m_sprs.size(); i < n; ++i) {
+		if (col != m_sprs[i]->Color().bmap) {
 			return BLUE;
 		}
 	}
@@ -167,13 +167,13 @@ s2::Color MultiSpritesPropertyImpl::GetTransColorB() const
 
 float MultiSpritesPropertyImpl::GetAngle() const
 {
-	if (m_sprites.empty()) {
+	if (m_sprs.empty()) {
 		return 0;
 	}
 
-	float angle = m_sprites[0]->GetAngle();
-	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
-		if (angle != m_sprites[i]->GetAngle()) {
+	float angle = m_sprs[0]->GetAngle();
+	for (int i = 1, n = m_sprs.size(); i < n; ++i) {
+		if (angle != m_sprs[i]->GetAngle()) {
 			return 0;
 		}
 	}
@@ -182,13 +182,13 @@ float MultiSpritesPropertyImpl::GetAngle() const
 
 sm::vec2 MultiSpritesPropertyImpl::GetScale() const
 {
-	if (m_sprites.empty()) {
+	if (m_sprs.empty()) {
 		return sm::vec2(1, 1);
 	}
 
-	sm::vec2 scale = m_sprites[0]->GetScale();
-	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
-		if (scale != m_sprites[i]->GetScale()) {
+	sm::vec2 scale = m_sprs[0]->GetScale();
+	for (int i = 1, n = m_sprs.size(); i < n; ++i) {
+		if (scale != m_sprs[i]->GetScale()) {
 			return sm::vec2(1, 1);
 		}
 	}
@@ -199,21 +199,21 @@ sm::bvec2 MultiSpritesPropertyImpl::GetMirror() const
 {
 	sm::bvec2 mirror(false, false);
 
-	if (m_sprites.empty()) {
+	if (m_sprs.empty()) {
 		return mirror;
 	}
 
-	mirror.x = m_sprites[0]->GetMirror().x;
-	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
-		if (mirror.x != m_sprites[i]->GetMirror().x) {
+	mirror.x = m_sprs[0]->GetMirror().x;
+	for (int i = 1, n = m_sprs.size(); i < n; ++i) {
+		if (mirror.x != m_sprs[i]->GetMirror().x) {
 			mirror.x = false;
 			break;
 		}
 	}
 
-	mirror.y = m_sprites[0]->GetMirror().y;
-	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
-		if (mirror.y != m_sprites[i]->GetMirror().y) {
+	mirror.y = m_sprs[0]->GetMirror().y;
+	for (int i = 1, n = m_sprs.size(); i < n; ++i) {
+		if (mirror.y != m_sprs[i]->GetMirror().y) {
 			mirror.y = false;
 			break;
 		}
@@ -224,13 +224,13 @@ sm::bvec2 MultiSpritesPropertyImpl::GetMirror() const
 
 bool MultiSpritesPropertyImpl::GetVisible() const
 {
-	if (m_sprites.empty()) {
+	if (m_sprs.empty()) {
 		return true;
 	}
 
-	bool ret = m_sprites[0]->IsVisible();
-	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
-		if (ret != m_sprites[i]->IsVisible()) {
+	bool ret = m_sprs[0]->IsVisible();
+	for (int i = 1, n = m_sprs.size(); i < n; ++i) {
+		if (ret != m_sprs[i]->IsVisible()) {
 			return true;
 		}
 	}
@@ -239,13 +239,13 @@ bool MultiSpritesPropertyImpl::GetVisible() const
 
 bool MultiSpritesPropertyImpl::GetEditable() const
 {
-	if (m_sprites.empty()) {
+	if (m_sprs.empty()) {
 		return true;
 	}
 
-	bool ret = m_sprites[0]->IsEditable();
-	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
-		if (ret != m_sprites[i]->IsEditable()) {
+	bool ret = m_sprs[0]->IsEditable();
+	for (int i = 1, n = m_sprs.size(); i < n; ++i) {
+		if (ret != m_sprs[i]->IsEditable()) {
 			return true;
 		}
 	}
@@ -256,8 +256,8 @@ void MultiSpritesPropertyImpl::SetTag(const std::string& tag)
 {
 	SetWndDirtySJ::Instance()->SetDirty();
 
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->SetTag(tag);
+	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+		m_sprs[i]->SetTag(tag);
 	}
 }
 
@@ -267,12 +267,12 @@ void MultiSpritesPropertyImpl::SetClip(int clip)
 
 	Bool3Type type = (Bool3Type)clip;
 	if (type == e_bool_true) {
-		for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-			m_sprites[i]->SetClip(true);
+		for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+			m_sprs[i]->SetClip(true);
 		}
 	} else if (type == e_bool_false) {
-		for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-			m_sprites[i]->SetClip(false);
+		for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+			m_sprs[i]->SetClip(false);
 		}
 	}
 }
@@ -280,9 +280,9 @@ void MultiSpritesPropertyImpl::SetClip(int clip)
 void MultiSpritesPropertyImpl::SetPos(float x, float y)
 {
 	sm::vec2 pos(x, y);
-	EditAddRecordSJ::Instance()->Add(new SetSpritePosAOP(m_sprites, pos));
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		Sprite* spr = m_sprites[i];
+	EditAddRecordSJ::Instance()->Add(new SetSpritePosAOP(m_sprs, pos));
+	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+		Sprite* spr = m_sprs[i];
 		spr->SetPosition(pos);
 	}
 }
@@ -291,10 +291,10 @@ void MultiSpritesPropertyImpl::SetColorMul(const s2::Color& col)
 {
 	SetWndDirtySJ::Instance()->SetDirty();
 
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		float alpha = m_sprites[i]->Color().mul.a;
-		m_sprites[i]->Color().mul = col;
-		m_sprites[i]->Color().mul.a = alpha;
+	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+		float alpha = m_sprs[i]->Color().mul.a;
+		m_sprs[i]->Color().mul = col;
+		m_sprs[i]->Color().mul.a = alpha;
 	}
 }
 
@@ -302,10 +302,10 @@ void MultiSpritesPropertyImpl::SetColorAdd(const s2::Color& col)
 {
 	SetWndDirtySJ::Instance()->SetDirty();
 
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		float alpha = m_sprites[i]->Color().add.a;
-		m_sprites[i]->Color().add = col;
-		m_sprites[i]->Color().add.a = alpha;
+	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+		float alpha = m_sprs[i]->Color().add.a;
+		m_sprs[i]->Color().add = col;
+		m_sprs[i]->Color().add.a = alpha;
 	}
 }
 
@@ -313,8 +313,8 @@ void MultiSpritesPropertyImpl::SetColorAlpha(int alpha)
 {
 	SetWndDirtySJ::Instance()->SetDirty();
 
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->Color().mul.a = alpha;
+	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+		m_sprs[i]->Color().mul.a = alpha;
 	}
 }
 
@@ -325,8 +325,8 @@ void MultiSpritesPropertyImpl::SetAngle(bool overall, float angle)
 	if (overall) 
 	{
 		sm::vec2 center = GetOverallCenter();
-		for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-			Sprite* spr = m_sprites[i];
+		for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+			Sprite* spr = m_sprs[i];
 			sm::vec2 pos = Math2D::RotateVector(spr->GetPosition() - center, angle);
 			spr->SetPosition(pos);
 			spr->SetAngle(angle);
@@ -334,8 +334,8 @@ void MultiSpritesPropertyImpl::SetAngle(bool overall, float angle)
 	} 
 	else 
 	{
-		for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-			Sprite* spr = m_sprites[i];
+		for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+			Sprite* spr = m_sprs[i];
 			spr->SetAngle(angle);
 		}
 	}
@@ -348,8 +348,8 @@ void MultiSpritesPropertyImpl::SetScale(bool overall, float sx, float sy)
 	if (overall)
 	{
 		sm::vec2 center = GetOverallCenter();
-		for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-			Sprite* spr = m_sprites[i];
+		for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+			Sprite* spr = m_sprs[i];
 			sm::vec2 pos = spr->GetPosition() - center;
 			pos.x *= sx;
 			pos.y *= sy;
@@ -357,8 +357,8 @@ void MultiSpritesPropertyImpl::SetScale(bool overall, float sx, float sy)
 		}
 	}
 
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->SetScale(sm::vec2(sx, sy));
+	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+		m_sprs[i]->SetScale(sm::vec2(sx, sy));
 	}
 }
 
@@ -369,8 +369,8 @@ void MultiSpritesPropertyImpl::SetMirrorX(bool overall, bool mirror)
 	if (overall)
 	{
 		sm::vec2 center = GetOverallCenter();
-		for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-			Sprite* spr = m_sprites[i];
+		for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+			Sprite* spr = m_sprs[i];
 			sm::vec2 pos = spr->GetPosition() - center;
 			pos.x = -pos.x;
 			spr->SetPosition(pos + center);
@@ -378,8 +378,8 @@ void MultiSpritesPropertyImpl::SetMirrorX(bool overall, bool mirror)
 		}
 	}
 
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		Sprite* spr = m_sprites[i];
+	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+		Sprite* spr = m_sprs[i];
 		spr->SetMirror(sm::bvec2(mirror, spr->GetMirror().y));
 	}
 }
@@ -391,8 +391,8 @@ void MultiSpritesPropertyImpl::SetMirrorY(bool overall, bool mirror)
 	if (overall)
 	{
 		sm::vec2 center = GetOverallCenter();
-		for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-			Sprite* spr = m_sprites[i];
+		for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+			Sprite* spr = m_sprs[i];
 			sm::vec2 pos = spr->GetPosition() - center;
 			pos.y = -pos.y;
 			spr->SetPosition(pos + center);
@@ -400,8 +400,8 @@ void MultiSpritesPropertyImpl::SetMirrorY(bool overall, bool mirror)
 		}
 	}
 
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		Sprite* spr = m_sprites[i];
+	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+		Sprite* spr = m_sprs[i];
 		spr->SetMirror(sm::bvec2(spr->GetMirror().x, mirror));
 	}
 }
@@ -409,16 +409,16 @@ void MultiSpritesPropertyImpl::SetMirrorY(bool overall, bool mirror)
 void MultiSpritesPropertyImpl::SetVisible(bool visible)
 {
 	SetWndDirtySJ::Instance()->SetDirty();
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->SetVisible(visible);
+	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+		m_sprs[i]->SetVisible(visible);
 	}
 }
 
 void MultiSpritesPropertyImpl::SetEditable(bool editable)
 {
 	SetWndDirtySJ::Instance()->SetDirty();
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->SetEditable(editable);
+	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+		m_sprs[i]->SetEditable(editable);
 	}
 }
 
@@ -431,129 +431,129 @@ void MultiSpritesPropertyImpl::OnAlign(int align)
 	if (type == e_align_left)
 	{
 		float left = FLT_MAX;
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
-			Sprite* spr = m_sprites[i];
+			Sprite* spr = m_sprs[i];
 			float l = spr->GetBounding()->GetSize().xmin;
 			if (l < left)
 				left = l;
 		}
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
-			Sprite* spr = m_sprites[i];
+			Sprite* spr = m_sprs[i];
 			float x = spr->GetPosition().x + left - spr->GetBounding()->GetSize().xmin;
-			m_sprites[i]->SetPosition(sm::vec2(x, spr->GetPosition().y));
+			m_sprs[i]->SetPosition(sm::vec2(x, spr->GetPosition().y));
 		}
 	}
 	else if (type == e_align_right)
 	{
 		float right = -FLT_MAX;
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
-			Sprite* spr = m_sprites[i];
+			Sprite* spr = m_sprs[i];
 			float r = spr->GetBounding()->GetSize().xmax;
 			if (r > right)
 				right = r;
 		}
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
-			Sprite* spr = m_sprites[i];
+			Sprite* spr = m_sprs[i];
 			float x = spr->GetPosition().x + right - spr->GetBounding()->GetSize().xmax;
-			m_sprites[i]->SetPosition(sm::vec2(x, spr->GetPosition().y));
+			m_sprs[i]->SetPosition(sm::vec2(x, spr->GetPosition().y));
 		}
 	}
 	else if (type == e_align_up)
 	{
 		float up = -FLT_MAX;
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
-			Sprite* spr = m_sprites[i];
+			Sprite* spr = m_sprs[i];
 			float u = spr->GetBounding()->GetSize().ymax;
 			if (u > up)
 				up = u;
 		}
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
-			Sprite* spr = m_sprites[i];
+			Sprite* spr = m_sprs[i];
 			float y = spr->GetPosition().y + up - spr->GetBounding()->GetSize().ymax;
-			m_sprites[i]->SetPosition(sm::vec2(spr->GetPosition().x, y));
+			m_sprs[i]->SetPosition(sm::vec2(spr->GetPosition().x, y));
 		}
 	}
 	else if (type == e_align_down)
 	{
 		float down = FLT_MAX;
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
-			Sprite* spr = m_sprites[i];
+			Sprite* spr = m_sprs[i];
 			float d = spr->GetBounding()->GetSize().ymin;
 			if (d < down)
 				down = d;
 		}
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
-			Sprite* spr = m_sprites[i];
+			Sprite* spr = m_sprs[i];
 			float y = spr->GetPosition().y + down - spr->GetBounding()->GetSize().ymin;
-			m_sprites[i]->SetPosition(sm::vec2(spr->GetPosition().x, y));
+			m_sprs[i]->SetPosition(sm::vec2(spr->GetPosition().x, y));
 		}
 	}
 	else if (type == e_align_center_left)
 	{
 		float left = FLT_MAX;
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
-			float x = m_sprites[i]->GetPosition().x;
+			float x = m_sprs[i]->GetPosition().x;
 			if (x < left)
 				left = x;
 		}
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
-			Sprite* sprite = m_sprites[i];
-			m_sprites[i]->SetPosition(sm::vec2(left, sprite->GetPosition().y));
+			Sprite* spr = m_sprs[i];
+			m_sprs[i]->SetPosition(sm::vec2(left, spr->GetPosition().y));
 		}
 	}
 	else if (type == e_align_center_right)
 	{
 		float right = -FLT_MAX;
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
-			float x = m_sprites[i]->GetPosition().x;
+			float x = m_sprs[i]->GetPosition().x;
 			if (x > right)
 				right = x;
 		}
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
-			Sprite* sprite = m_sprites[i];
-			m_sprites[i]->SetPosition(sm::vec2(right, sprite->GetPosition().y));
+			Sprite* spr = m_sprs[i];
+			m_sprs[i]->SetPosition(sm::vec2(right, spr->GetPosition().y));
 		}
 	}
 	else if (type == e_align_center_up)
 	{
 		float up = -FLT_MAX;
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
-			float y = m_sprites[i]->GetPosition().y;
+			float y = m_sprs[i]->GetPosition().y;
 			if (y > up)
 				up = y;
 		}
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
-			Sprite* sprite = m_sprites[i];
-			m_sprites[i]->SetPosition(sm::vec2(sprite->GetPosition().x, up));
+			Sprite* spr = m_sprs[i];
+			m_sprs[i]->SetPosition(sm::vec2(spr->GetPosition().x, up));
 		}
 	}
 	else if (type == e_align_center_down)
 	{
 		float down = FLT_MAX;
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
-			float y = m_sprites[i]->GetPosition().y;
+			float y = m_sprs[i]->GetPosition().y;
 			if (y < down)
 				down = y;
 		}
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
-			Sprite* sprite = m_sprites[i];
-			m_sprites[i]->SetPosition(sm::vec2(sprite->GetPosition().x, down));
+			Sprite* spr = m_sprs[i];
+			m_sprs[i]->SetPosition(sm::vec2(spr->GetPosition().x, down));
 		}
 	}
 }
@@ -567,63 +567,63 @@ void MultiSpritesPropertyImpl::OnCenter(int center)
 	if (type == e_center_horizontal)
 	{
 		float left = FLT_MAX, right = -FLT_MAX;
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
-			Sprite* sprite = m_sprites[i];
-			float x = sprite->GetPosition().x;
+			Sprite* spr = m_sprs[i];
+			float x = spr->GetPosition().x;
 			if (x < left) left = x;
 			if (x > right) right = x;
 		}
 
-		std::vector<Sprite*> sorted(m_sprites);
+		std::vector<Sprite*> sorted(m_sprs);
 		std::sort(sorted.begin(), sorted.end(), SpriteCmp(SpriteCmp::e_x));
 		const float space = (right - left) / (sorted.size() - 1);
 		for (size_t i = 0, n = sorted.size(); i < n; ++i)
 		{
-			Sprite* sprite = sorted[i];
-			sprite->SetPosition(sm::vec2(left + space * i, sprite->GetPosition().y));
+			Sprite* spr = sorted[i];
+			spr->SetPosition(sm::vec2(left + space * i, spr->GetPosition().y));
 		}
 	}
 	else if (type == e_center_vertical)
 	{
 		float down = FLT_MAX, up = -FLT_MAX;
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
-			Sprite* sprite = m_sprites[i];
-			float y = sprite->GetPosition().y;
+			Sprite* spr = m_sprs[i];
+			float y = spr->GetPosition().y;
 			if (y < down) down = y;
 			if (y > up) up = y;
 		}
 
-		std::vector<Sprite*> sorted(m_sprites);
+		std::vector<Sprite*> sorted(m_sprs);
 		std::sort(sorted.begin(), sorted.end(), SpriteCmp(SpriteCmp::e_y));
 		const float space = (up - down) / (sorted.size() - 1);
 		for (size_t i = 0, n = sorted.size(); i < n; ++i)
 		{
-			Sprite* sprite = sorted[i];
-			sprite->SetPosition(sm::vec2(sprite->GetPosition().x, down + space * i));
+			Sprite* spr = sorted[i];
+			spr->SetPosition(sm::vec2(spr->GetPosition().x, down + space * i));
 		}
 	}
 	else if (type == e_center_relative)
 	{
 		Sprite* base = NULL;
 		float maxArea = 0;
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
-			sm::vec2 sz = m_sprites[i]->GetBounding()->GetSize().Size();
+			sm::vec2 sz = m_sprs[i]->GetBounding()->GetSize().Size();
 			float area = sz.x * sz.y;
 			if (area > maxArea)
 			{
 				maxArea = area;
-				base = m_sprites[i];
+				base = m_sprs[i];
 			}
 		}
 
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
-			Sprite* sprite = m_sprites[i];
+			Sprite* spr = m_sprs[i];
 			if (sprite != base) {
-				sprite->SetPosition(base->GetPosition());
+				spr->SetPosition(base->GetPosition());
 			}
 		}
 	}
@@ -633,10 +633,10 @@ void MultiSpritesPropertyImpl::OnPosChange(float dx, float dy)
 {
 	SetWndDirtySJ::Instance()->SetDirty();
 
-	EditAddRecordSJ::Instance()->Add(new TranslateSpriteAOP(m_sprites, sm::vec2(dx, dy)));
-	for (int i = 0, n = m_sprites.size(); i < n; ++i)
+	EditAddRecordSJ::Instance()->Add(new TranslateSpriteAOP(m_sprs, sm::vec2(dx, dy)));
+	for (int i = 0, n = m_sprs.size(); i < n; ++i)
 	{
-		Sprite* spr = m_sprites[i];
+		Sprite* spr = m_sprs[i];
 		spr->Translate(sm::vec2(dx, dy));
 	}
 }
@@ -645,9 +645,9 @@ void MultiSpritesPropertyImpl::OnAngleChange(float angle)
 {
 	SetWndDirtySJ::Instance()->SetDirty();
 
-	for (int i = 0, n = m_sprites.size(); i < n; ++i)
+	for (int i = 0, n = m_sprs.size(); i < n; ++i)
 	{
-		Sprite* spr = m_sprites[i];
+		Sprite* spr = m_sprs[i];
 		spr->Rotate(angle);
 	}
 }
@@ -656,9 +656,9 @@ void MultiSpritesPropertyImpl::OnScaleChange(float dx, float dy)
 {
 	SetWndDirtySJ::Instance()->SetDirty();
 
-	for (int i = 0, n = m_sprites.size(); i < n; ++i)
+	for (int i = 0, n = m_sprs.size(); i < n; ++i)
 	{
-		Sprite* s = m_sprites[i];
+		Sprite* s = m_sprs[i];
 		sm::vec2 scale = s->GetScale();
 		scale.x *= dx;
 		scale.y *= dy;
@@ -668,17 +668,17 @@ void MultiSpritesPropertyImpl::OnScaleChange(float dx, float dy)
 
 sm::vec2 MultiSpritesPropertyImpl::GetOverallCenter() const
 {
-	if (m_sprites.empty()) {
+	if (m_sprs.empty()) {
 		return sm::vec2(0, 0);
 	}
 
 	SetWndDirtySJ::Instance()->SetDirty();
 
 	sm::vec2 center(0, 0);
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		center += m_sprites[i]->GetPosition();
+	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+		center += m_sprs[i]->GetPosition();
 	}
-	center /= m_sprites.size();
+	center /= m_sprs.size();
 	return center;
 }
 

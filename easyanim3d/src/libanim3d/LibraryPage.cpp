@@ -16,9 +16,9 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	m_list->SetFileter(FILE_TAG);
 }
 
-bool LibraryPage::IsHandleSymbol(ee::Symbol* symbol) const
+bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
 {
-	return dynamic_cast<Symbol*>(symbol) != NULL;
+	return dynamic_cast<Symbol*>(sym) != NULL;
 }
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
@@ -34,15 +34,15 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 			e3d::AssimpHelper loader;
 			e3d::AABB aabb;
 			loader.LoadFile(filenames[i], *model, aabb);
-			Symbol* symbol = new Symbol();
-			symbol->SetModel(model);
+			Symbol* sym = new Symbol();
+			sym->SetModel(model);
 
 			std::string filepath = FILE_TAG;
 			filepath += ".json";
-			symbol->SetFilepath(filepath);
-			symbol->SetAABB(aabb);
+			sym->SetFilepath(filepath);
+			sym->SetAABB(aabb);
 
-			AddItem(symbol);
+			AddItem(sym);
 		}
 	}
 }

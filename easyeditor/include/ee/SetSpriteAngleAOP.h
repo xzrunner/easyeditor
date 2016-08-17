@@ -11,17 +11,17 @@ class Sprite;
 class SetSpriteAngleAOP : public AtomicOP
 {
 public:
-	SetSpriteAngleAOP(Sprite* sprite, float angle);
-	SetSpriteAngleAOP(const std::vector<Sprite*>& sprites, float angle);
+	SetSpriteAngleAOP(Sprite* spr, float angle);
+	SetSpriteAngleAOP(const std::vector<Sprite*>& sprs, float angle);
 	virtual ~SetSpriteAngleAOP();
 
 	virtual void Undo();
 	virtual void Redo();
 
-	virtual Json::Value Store(const std::vector<Sprite*>& sprites) const;
+	virtual Json::Value Store(const std::vector<Sprite*>& sprs) const;
 
 private:
-	std::vector<Sprite*> m_sprites;
+	std::vector<Sprite*> m_sprs;
 	std::vector<float> m_old_angle;
 
 	float m_new_angle;

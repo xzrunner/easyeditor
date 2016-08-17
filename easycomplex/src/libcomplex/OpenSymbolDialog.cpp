@@ -55,8 +55,8 @@ void OpenSymbolDialog::Open(ee::Sprite* spr, ee::CrossGuides* guides)
 
 	if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(spr))
 	{
-		ecomplex::Symbol* symbol = dynamic_cast<ecomplex::Symbol*>(complex->GetSymbol());
- 		EditDialog dlg(m_wnd, symbol, m_stage->GetCanvas()->GetGLContext(), guides);
+		ecomplex::Symbol* sym = dynamic_cast<ecomplex::Symbol*>(complex->GetSymbol());
+ 		EditDialog dlg(m_wnd, sym, m_stage->GetCanvas()->GetGLContext(), guides);
  		dlg.ShowModal();
 
 		//////////////////////////////////////////////////////////////////////////
@@ -66,19 +66,19 @@ void OpenSymbolDialog::Open(ee::Sprite* spr, ee::CrossGuides* guides)
 	}
 	else if (eanim::Sprite* anim = dynamic_cast<eanim::Sprite*>(spr))
 	{
-		const eanim::Symbol* symbol = dynamic_cast<const eanim::Symbol*>(anim->GetSymbol());
-		eanim::PreviewDialog dlg(m_wnd, symbol, m_stage->GetCanvas()->GetGLContext());
+		const eanim::Symbol* sym = dynamic_cast<const eanim::Symbol*>(anim->GetSymbol());
+		eanim::PreviewDialog dlg(m_wnd, sym, m_stage->GetCanvas()->GetGLContext());
  		dlg.ShowModal();
 	}
 	else if (escale9::Sprite* patch9 = dynamic_cast<escale9::Sprite*>(spr))
  	{
-		escale9::Symbol* symbol = dynamic_cast<escale9::Symbol*>(patch9->GetSymbol());
-  		escale9::EditDialog dlg(m_wnd, symbol, m_stage->GetCanvas()->GetGLContext());
+		escale9::Symbol* sym = dynamic_cast<escale9::Symbol*>(patch9->GetSymbol());
+  		escale9::EditDialog dlg(m_wnd, sym, m_stage->GetCanvas()->GetGLContext());
   		dlg.ShowModal();
  	}
-	else if (emesh::Sprite* sprite = dynamic_cast<emesh::Sprite*>(spr))
+	else if (emesh::Sprite* spr = dynamic_cast<emesh::Sprite*>(spr))
 	{
-		emesh::EditDialog dlg(m_wnd, sprite, m_stage->GetCanvas()->GetGLContext());
+		emesh::EditDialog dlg(m_wnd, spr, m_stage->GetCanvas()->GetGLContext());
 		dlg.ShowModal();
 	}
 	else if (ee::FontBlankSprite* font = dynamic_cast<ee::FontBlankSprite*>(spr))

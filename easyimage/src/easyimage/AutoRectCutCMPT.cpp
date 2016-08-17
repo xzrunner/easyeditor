@@ -88,9 +88,9 @@ wxSizer* AutoRectCutCMPT::InitLayout()
 
 void AutoRectCutCMPT::OnCreateRects(wxCommandEvent& event)
 {
-	const ee::Sprite* sprite = m_stage->GetImage();
+	const ee::Sprite* spr = m_stage->GetImage();
 	const ee::ImageSprite* img_sprite 
-		= dynamic_cast<const ee::ImageSprite*>(sprite);
+		= dynamic_cast<const ee::ImageSprite*>(spr);
 	assert(img_sprite);
 	const ee::Image* img = img_sprite->GetSymbol()->GetImage();
 
@@ -115,9 +115,9 @@ void AutoRectCutCMPT::OnCreateRects(wxCommandEvent& event)
 
 void AutoRectCutCMPT::OnOutputRects(wxCommandEvent& event)
 {
-	const ee::Sprite* sprite = m_stage->GetImage();
+	const ee::Sprite* spr = m_stage->GetImage();
 	const ee::ImageSprite* img_sprite 
-		= dynamic_cast<const ee::ImageSprite*>(sprite);
+		= dynamic_cast<const ee::ImageSprite*>(spr);
 	assert(img_sprite);
 	const ee::Image* img = img_sprite->GetSymbol()->GetImage();
 

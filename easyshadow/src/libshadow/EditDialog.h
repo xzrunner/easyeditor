@@ -29,7 +29,7 @@ private:
 	void InitCamera(ee::Sprite* spr) const;
 
 private:
-	Symbol* m_symbol;
+	Symbol* m_sym;
 
 	ee::EditPanel* m_stage;
 

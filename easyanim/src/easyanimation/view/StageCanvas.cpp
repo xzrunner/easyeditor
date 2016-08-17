@@ -30,19 +30,19 @@ StageCanvas::~StageCanvas()
 	}
 }
 
-void StageCanvas::SetBackground(ee::Symbol* symbol)
+void StageCanvas::SetBackground(ee::Symbol* sym)
 {
-	cu::RefCountObjAssign<ee::Symbol>(m_background, symbol);
+	cu::RefCountObjAssign<ee::Symbol>(m_background, sym);
 }
 
 void StageCanvas::OnDrawSprites() const
 {
 	DrawBackground();
 
-	std::vector<ee::Sprite*> sprites;
-	static_cast<StagePanel*>(m_stage_panel)->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites), ee::DT_VISIBLE);
-	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-		ee::SpriteRenderer::Draw(sprites[i]);
+	std::vector<ee::Sprite*> sprs;
+	static_cast<StagePanel*>(m_stage_panel)->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs), ee::DT_VISIBLE);
+	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
+		ee::SpriteRenderer::Draw(sprs[i]);
 	}
 
 	ee::SceneNodeMgr::Instance()->Draw();

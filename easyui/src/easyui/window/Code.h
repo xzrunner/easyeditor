@@ -16,8 +16,8 @@ class Code
 public:
 	Code(ebuilder::CodeGenerator& gen);
 
-	void ResolveUI(const std::vector<ee::Sprite*>& sprites);
-	void ResolveText(const std::vector<ee::Sprite*>& sprites);
+	void ResolveUI(const std::vector<ee::Sprite*>& sprs);
+	void ResolveText(const std::vector<ee::Sprite*>& sprs);
 
 private:
 	ebuilder::CodeGenerator& m_gen;

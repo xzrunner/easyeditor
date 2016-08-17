@@ -35,14 +35,14 @@ void Love2dCode::Resolve()
 		KeyFrame* frame = itr->second;			
 		if (frame->Size() != 0)
 		{
-			const ee::Sprite* sprite = frame->GetSprite(0);
-			int index = Query(sprite->GetSymbol()->GetFilepath());
+			const ee::Sprite* spr = frame->GetSprite(0);
+			int index = Query(spr->GetSymbol()->GetFilepath());
 			if (index != -1)
 			{
 				std::string time = ee::StringHelper::ToString(frame->GetTime());
 
-				std::string x = ee::StringHelper::ToString(sprite->GetPosition().x),
-					y = ee::StringHelper::ToString(sprite->GetPosition().y);
+				std::string x = ee::StringHelper::ToString(spr->GetPosition().x),
+					y = ee::StringHelper::ToString(spr->GetPosition().y);
 
 				std::string left = ee::StringHelper::ToString(m_tp_adapter.textures[index].region.left),
 					low = ee::StringHelper::ToString(m_tp_adapter.textures[index].region.low),

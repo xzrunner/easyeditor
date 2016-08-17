@@ -26,7 +26,7 @@ public:
 
 public:
 	PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
-		const Symbol* symbol, wxGLContext* glctx);
+		const Symbol* sym, wxGLContext* glctx);
 
 	PlaySetting& getPlaySetting();
 
@@ -39,7 +39,7 @@ protected:
 private:
 	PlaySetting m_setting;
 
-	const Symbol* m_symbol;
+	const Symbol* m_sym;
 
 	ee::PlayControl m_control;
 

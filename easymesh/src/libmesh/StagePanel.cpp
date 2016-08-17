@@ -20,7 +20,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, wxGLContext* g
 	, ee::MultiShapesImpl()
 	, m_background(NULL)
 {
-	m_symbol = new Symbol;
+	m_sym = new Symbol;
 
 	ee::EditOP* editop = new ee::ZoomViewOP(this, GetStageImpl(), true);
 	SetEditOP(editop);
@@ -39,7 +39,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, wxGLContext* g
 
 StagePanel::~StagePanel()
 {
-	m_symbol->RemoveReference();
+	m_sym->RemoveReference();
 	if (m_background) {
 		m_background->RemoveReference();
 	}
@@ -48,34 +48,34 @@ StagePanel::~StagePanel()
 void StagePanel::TraverseShapes(ee::Visitor<ee::Shape>& visitor, 
 								ee::DataTraverseType type/* = ee::DT_ALL*/) const
 {
-	Mesh* mesh = m_symbol->GetMesh();
+	Mesh* mesh = m_sym->GetMesh();
 	if (mesh) {
 		static_cast<EditableMesh*>(mesh)->TraverseMesh(visitor);
 	}
 }
 
-void StagePanel::SetMeshSymbol(Symbol* symbol)
+void StagePanel::SetMeshSymbol(Symbol* sym)
 {	
-	cu::RefCountObjAssign(m_symbol, symbol);
+	cu::RefCountObjAssign(m_sym, sym);
 }
 
 const Symbol* StagePanel::GetMeshSymbol() const
 {
-	return m_symbol;
+	return m_sym;
 }
 
 Mesh* StagePanel::GetMesh()
 {
-	return m_symbol->GetMesh();
+	return m_sym->GetMesh();
 }
 
-void StagePanel::LoadFromSymbol(const ee::Symbol* symbol)
+void StagePanel::LoadFromSymbol(const ee::Symbol* sym)
 {
 }
 
 void StagePanel::UpdateSymbol()
 {
-	if (Mesh* mesh = m_symbol->GetMesh()) {
+	if (Mesh* mesh = m_sym->GetMesh()) {
 		std::vector<ee::Shape*> polylines;
 		TraverseShapes(ee::FetchAllVisitor<ee::Shape>(polylines));
 		mesh->Refresh();
@@ -84,10 +84,10 @@ void StagePanel::UpdateSymbol()
 
 void StagePanel::RecreateMesh()
 {
-	const ee::Symbol* base_sym = m_symbol->GetMesh()->GetBaseSymbol();
+	const ee::Symbol* base_sym = m_sym->GetMesh()->GetBaseSymbol();
 	Symbol* mesh_sym = new Symbol(const_cast<ee::Symbol*>(base_sym));
-	m_symbol->RemoveReference();
-	m_symbol = mesh_sym;
+	m_sym->RemoveReference();
+	m_sym = mesh_sym;
 	GetEditOP()->Clear();
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
@@ -112,14 +112,14 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 	switch (sj_id) 
 	{
 	case ee::MSG_REMOVE_SHAPE:
-		if (Mesh* mesh = m_symbol->GetMesh()) {
+		if (Mesh* mesh = m_sym->GetMesh()) {
 			if (static_cast<EditableMesh*>(mesh)->RemoveMesh((ee::Shape*)ud)) {
 				ee::SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		}
 		break;
 	case ee::MSG_INSERT_SHAPE:
-		if (Mesh* mesh = m_symbol->GetMesh()) {
+		if (Mesh* mesh = m_sym->GetMesh()) {
 			if (static_cast<EditableMesh*>(mesh)->InsertMesh((ee::Shape*)ud)) {
 				UpdateSymbol();
 				ee::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -127,15 +127,15 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 		}
 		break;
 	case ee::MSG_CLEAR_SHAPE:
-		if (Mesh* mesh = m_symbol->GetMesh()) {
+		if (Mesh* mesh = m_sym->GetMesh()) {
 			if (static_cast<EditableMesh*>(mesh)->ClearMesh()) {
 				ee::SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		}
 		break;
 	case ee::MSG_CLEAR_PANEL:
-		m_symbol->RemoveReference();
-		m_symbol = new Symbol;
+		m_sym->RemoveReference();
+		m_sym = new Symbol;
 		break;
 	}
 }
@@ -152,11 +152,11 @@ StageDropTarget(StagePanel* stage, ee::LibraryPanel* library)
 }
 
 bool StagePanel::StageDropTarget::
-OnDropSymbol(ee::Symbol* symbol, const sm::vec2& pos)
+OnDropSymbol(ee::Symbol* sym, const sm::vec2& pos)
 {
-	Symbol* mesh_sym = new Symbol(symbol);
-	m_stage->m_symbol->RemoveReference();
-	m_stage->m_symbol = mesh_sym;
+	Symbol* mesh_sym = new Symbol(sym);
+	m_stage->m_sym->RemoveReference();
+	m_stage->m_sym = mesh_sym;
 	m_stage->GetEditOP()->Clear();
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	return true;

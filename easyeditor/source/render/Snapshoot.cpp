@@ -28,12 +28,12 @@ Snapshoot::~Snapshoot()
 	m_fbo->RemoveReference();	
 }
 
-unsigned char* Snapshoot::OutputToMemory(const Symbol* symbol, bool whitebg,
+unsigned char* Snapshoot::OutputToMemory(const Symbol* sym, bool whitebg,
 										 float scale) const
 {
-	m_fbo->DrawSymbol(symbol, whitebg, scale);
+	m_fbo->DrawSymbol(sym, whitebg, scale);
 
-	sm::vec2 sz = symbol->GetBounding().Size();
+	sm::vec2 sz = sym->GetBounding().Size();
 	sz *= scale;
 
 	int w = static_cast<int>(sz.x),
@@ -54,29 +54,29 @@ unsigned char* Snapshoot::OutputToMemory(const Symbol* symbol, bool whitebg,
 	return pixels;
 }
 
-void Snapshoot::OutputToImageFile(const Symbol* symbol, const std::string& filename,
+void Snapshoot::OutputToImageFile(const Symbol* sym, const std::string& filename,
 								  float scale) const
 {
-	sm::vec2 sz = symbol->GetBounding().Size() * scale;
+	sm::vec2 sz = sym->GetBounding().Size() * scale;
 	int w = static_cast<int>(sz.x),
 		h = static_cast<int>(sz.y);
-	unsigned char* pixels = OutputToMemory(symbol, false, scale);
+	unsigned char* pixels = OutputToMemory(sym, false, scale);
 	if (pixels) {
 		ImageSaver::StoreToFile(pixels, w, h, 4, filename, ImageSaver::e_png, false);
 		delete[] pixels;
 	}
 }
 
-void Snapshoot::DrawSprite(const Sprite* sprite, bool clear,
+void Snapshoot::DrawSprite(const Sprite* spr, bool clear,
 						   float dx, float dy) const
 {
-	m_fbo->DrawSprite(sprite, clear, m_width, m_height, dx, dy);
+	m_fbo->DrawSprite(spr, clear, m_width, m_height, dx, dy);
 }
 
-void Snapshoot::DrawSprite(const Sprite* sprite, bool clear, int width, int height,
+void Snapshoot::DrawSprite(const Sprite* spr, bool clear, int width, int height,
 						   float dx, float dy, float scale) const
 {
-	m_fbo->DrawSprite(sprite, clear, width, height, dx, dy, scale);
+	m_fbo->DrawSprite(spr, clear, width, height, dx, dy, scale);
 }
 
 void Snapshoot::DrawShape(const Shape* shape, bool clear) const

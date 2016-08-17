@@ -52,7 +52,7 @@ public:
 
 	float m_gravity_scale;
 
-	ee::Sprite* m_sprite;
+	ee::Sprite* m_spr;
 
 	std::vector<Fixture*> m_fixtures;
 

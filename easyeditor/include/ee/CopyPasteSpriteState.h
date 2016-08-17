@@ -23,7 +23,7 @@ public:
 private:
 	sm::vec2 m_last_pos;
 
-	std::vector<Sprite*> m_sprites;
+	std::vector<Sprite*> m_sprs;
 	
 }; // CopyPasteSpriteState
 

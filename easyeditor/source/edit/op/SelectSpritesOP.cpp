@@ -161,24 +161,24 @@ bool SelectSpritesOP::OnMouseLeftUp(int x, int y)
 
 	sm::vec2 end = m_stage->TransPosScrToProj(x, y);
 	sm::rect rect(m_left_first_pos, end);
-	std::vector<Sprite*> sprites;
-	m_spritesImpl->QuerySpritesByRect(rect, m_left_first_pos.x < end.x, sprites);
+	std::vector<Sprite*> sprs;
+	m_spritesImpl->QuerySpritesByRect(rect, m_left_first_pos.x < end.x, sprs);
 	if (m_stage->GetKeyState(WXK_CONTROL))
 	{
-		for (size_t i = 0, n = sprites.size(); i < n; ++i) 
+		for (size_t i = 0, n = sprs.size(); i < n; ++i) 
 		{
-			Sprite* sprite = sprites[i];
-			if (m_selection->IsExist(sprite)) {
-				m_selection->Remove(sprites[i]);
+			Sprite* spr = sprs[i];
+			if (m_selection->IsExist(spr)) {
+				m_selection->Remove(sprs[i]);
 			} else {
-				m_selection->Add(sprites[i]);
+				m_selection->Add(sprs[i]);
 			}
 		}
 	}
 	else
 	{
-		for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-			m_selection->Add(sprites[i]);
+		for (size_t i = 0, n = sprs.size(); i < n; ++i) {
+			m_selection->Add(sprs[i]);
 		}
 	}
 
@@ -213,8 +213,8 @@ bool SelectSpritesOP::OnMouseRightUp(int x, int y)
 		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 		PointMultiQueryVisitor visitor(pos);
 		m_spritesImpl->TraverseSprites(visitor, DT_EDITABLE);
-		const std::vector<Sprite*>& sprites = visitor.GetResult();
-		SetRightPan(sprites.empty());
+		const std::vector<Sprite*>& sprs = visitor.GetResult();
+		SetRightPan(sprs.empty());
 	}
 
 	if (DrawSelectRectOP::OnMouseRightUp(x, y)) return true;
@@ -259,11 +259,11 @@ Sprite* SelectSpritesOP::SelectByPos(const sm::vec2& pos) const
 	}
 
 	Sprite* selected = NULL;
-	std::vector<Sprite*> sprites;
-	m_spritesImpl->GetSpriteSelection()->Traverse(FetchAllVisitor<Sprite>(sprites));
-	for (int i = 0, n = sprites.size(); i < n; ++i)
+	std::vector<Sprite*> sprs;
+	m_spritesImpl->GetSpriteSelection()->Traverse(FetchAllVisitor<Sprite>(sprs));
+	for (int i = 0, n = sprs.size(); i < n; ++i)
 	{
-		Sprite* spr = sprites[i];
+		Sprite* spr = sprs[i];
 		if (spr->IsEditable() && spr->GetBounding()->IsContain(pos)) {
 			selected = spr;
 			break;
@@ -291,13 +291,13 @@ void SelectSpritesOP::CopySprFromClipboard(Sprite* spr, const Json::Value& value
 
 void SelectSpritesOP::PasteToSelection() const
 {
-	std::vector<Sprite*> sprites;
-	m_selection->Traverse(FetchAllVisitor<Sprite>(sprites));
+	std::vector<Sprite*> sprs;
+	m_selection->Traverse(FetchAllVisitor<Sprite>(sprs));
 	Json::Value value;
-	for (int i = 0, n = sprites.size(); i < n; ++i)
+	for (int i = 0, n = sprs.size(); i < n; ++i)
 	{
 		Json::Value& sval = value["sprite"][i];
-		Sprite* s = sprites[i];
+		Sprite* s = sprs[i];
 		if (wxTheClipboard->Open()) {
 			PasteSprToClipboard(s, sval);
 		}
@@ -338,7 +338,7 @@ void SelectSpritesOP::CopyFromSelection()
 
 	Sprite* last_spr = NULL;
 
-	std::vector<Sprite*> sprites;
+	std::vector<Sprite*> sprs;
 
 	int i = 0;
 	Json::Value sval = value["sprite"][i++];
@@ -346,21 +346,21 @@ void SelectSpritesOP::CopyFromSelection()
 		std::string filepath = sval["filename"].asString();
 		// fixme
 		if (filepath != "group") {
-			Symbol* symbol = SymbolMgr::Instance()->FetchSymbol(filepath);
+			Symbol* sym = SymbolMgr::Instance()->FetchSymbol(filepath);
 			// for snapshoot
-			symbol->RefreshThumbnail(filepath);
-			Sprite* sprite = SpriteFactory::Instance()->Create(symbol);
-			sprites.push_back(sprite);
-			symbol->RemoveReference();
-			CopySprFromClipboard(sprite, sval);
-			InsertSpriteSJ::Instance()->Insert(sprite);
-			last_spr = sprite;
+			sym->RefreshThumbnail(filepath);
+			Sprite* spr = SpriteFactory::Instance()->Create(sym);
+			sprs.push_back(spr);
+			sym->RemoveReference();
+			CopySprFromClipboard(spr, sval);
+			InsertSpriteSJ::Instance()->Insert(spr);
+			last_spr = spr;
 		}
 		sval = value["sprite"][i++];
 	}
 
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		m_selection->Add(sprites[i]);
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		m_selection->Add(sprs[i]);
 	}
 
 	bool add = m_stage->GetKeyState(WXK_CONTROL);

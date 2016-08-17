@@ -99,11 +99,11 @@ void StagePanel::StoreToFile(const char* filename) const
 
 	// items complex
 	ecomplex::Symbol items_complex;
-	std::vector<ee::Sprite*> sprites;
-	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	for_each(sprites.begin(), sprites.end(), cu::AddRefFonctor<ee::Sprite>());
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		items_complex.Add(sprites[i]);
+	std::vector<ee::Sprite*> sprs;
+	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	for_each(sprs.begin(), sprs.end(), cu::AddRefFonctor<ee::Sprite>());
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		items_complex.Add(sprs[i]);
 	}
 	std::string items_path = name + "_items_complex[gen].json";
 	items_complex.SetFilepath(items_path);

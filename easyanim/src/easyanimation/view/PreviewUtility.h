@@ -11,7 +11,7 @@ namespace eanim
 class PreviewUtility
 {
 public:
-	static void GetCurrSprites(const ee::PlayControl& ctrl, std::vector<ee::Sprite*>& sprites);
+	static void GetCurrSprites(const ee::PlayControl& ctrl, std::vector<ee::Sprite*>& sprs);
 
 }; // PreviewUtility
 

@@ -14,17 +14,17 @@ class Sprite;
 	class SetSprite##name##ColorAOP : public AtomicOP \
 	{ \
 	public: \
-		SetSprite##name##ColorAOP(Sprite* sprite, const s2::Color& color); \
-		SetSprite##name##ColorAOP(const std::vector<Sprite*>& sprites, const s2::Color& color); \
+		SetSprite##name##ColorAOP(Sprite* spr, const s2::Color& color); \
+		SetSprite##name##ColorAOP(const std::vector<Sprite*>& sprs, const s2::Color& color); \
 		virtual ~SetSprite##name##ColorAOP(); \
 	\
 		virtual void Undo(); \
 		virtual void Redo(); \
 	\
-		virtual Json::Value Store(const std::vector<Sprite*>& sprites) const; \
+		virtual Json::Value Store(const std::vector<Sprite*>& sprs) const; \
 	\
 	private: \
-		std::vector<Sprite*> m_sprites; \
+		std::vector<Sprite*> m_sprs; \
 		std::vector<s2::Color> m_old_color; \
 	\
 		s2::Color m_new_color; \

@@ -35,7 +35,7 @@ public:
 	virtual bool ClearSprite();
 	virtual bool ResetOrderSprite(const ee::Sprite* spr, bool up);
 	virtual bool ResetOrderSpriteMost(const ee::Sprite* spr, bool up);
-	virtual bool SortSrites(std::vector<ee::Sprite*>& sprites);
+	virtual bool SortSrites(std::vector<ee::Sprite*>& sprs);
 
 	virtual void TraverseShape(ee::Visitor<ee::Shape>& visitor, bool order = true) const;
 	virtual bool RemoveShape(ee::Shape* shape);
@@ -111,7 +111,7 @@ private:
 
 	bool m_editable, m_visible;
 
-	ee::ObjectVector<ee::Sprite> m_sprites;
+	ee::ObjectVector<ee::Sprite> m_sprs;
 	ee::ObjectVector<ee::Shape> m_shapes;
 
 	std::string m_base_filepath;

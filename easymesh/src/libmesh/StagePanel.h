@@ -27,11 +27,11 @@ public:
 	virtual void TraverseShapes(ee::Visitor<ee::Shape>& visitor, 
 		ee::DataTraverseType type = ee::DT_ALL) const;
 
-	void SetMeshSymbol(Symbol* symbol);
+	void SetMeshSymbol(Symbol* sym);
 	const Symbol* GetMeshSymbol() const;
 
  	Mesh* GetMesh();
-// 	Sprite* getSprite() { return m_sprite; }
+// 	Sprite* getSprite() { return m_spr; }
 
 	// for background
 	void SetBackground(ee::Sprite* bg) { 
@@ -45,7 +45,7 @@ public:
 		}
 	}
 
-	void LoadFromSymbol(const ee::Symbol* symbol);
+	void LoadFromSymbol(const ee::Symbol* sym);
 
 	void UpdateSymbol();
 
@@ -68,7 +68,7 @@ private:
 	public:
 		StageDropTarget(StagePanel* stage, ee::LibraryPanel* library);
 
-		virtual bool OnDropSymbol(ee::Symbol* symbol, const sm::vec2& pos);
+		virtual bool OnDropSymbol(ee::Symbol* sym, const sm::vec2& pos);
 
 	private:
 		StagePanel* m_stage;
@@ -78,7 +78,7 @@ private:
 private:
 	ee::Sprite* m_background;
 
-	Symbol* m_symbol;
+	Symbol* m_sym;
 
 }; // StagePanel
 

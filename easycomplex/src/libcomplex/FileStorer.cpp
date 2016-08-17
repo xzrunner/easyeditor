@@ -12,24 +12,24 @@
 namespace ecomplex
 {
 
-void FileStorer::Store(const char* filepath, const Symbol* symbol)
+void FileStorer::Store(const char* filepath, const Symbol* sym)
 {
 	Json::Value value;
 
-//	centerSymbol(symbol);
+//	centerSymbol(sym);
 
-	value["name"] = symbol->name;
-	value["tag"] = symbol->tag;
+	value["name"] = sym->name;
+	value["tag"] = sym->tag;
 
-	value["xmin"] = symbol->m_clipbox.xmin;
-	value["xmax"] = symbol->m_clipbox.xmax;
-	value["ymin"] = symbol->m_clipbox.ymin;
-	value["ymax"] = symbol->m_clipbox.ymax;
+	value["xmin"] = sym->m_clipbox.xmin;
+	value["xmax"] = sym->m_clipbox.xmax;
+	value["ymin"] = sym->m_clipbox.ymin;
+	value["ymax"] = sym->m_clipbox.ymax;
 
-	value["use_render_cache"] = symbol->m_use_render_cache;
+	value["use_render_cache"] = sym->m_use_render_cache;
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath) + "\\";
-	const std::vector<s2::Sprite*>& children = symbol->GetChildren();
+	const std::vector<s2::Sprite*>& children = sym->GetChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
 		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 		value["sprite"][i] = Store(child, dir);
@@ -43,23 +43,23 @@ void FileStorer::Store(const char* filepath, const Symbol* symbol)
 	fout.close();
 }
 
-void FileStorer::StoreWithHistory(const char* filepath, const Symbol* symbol)
+void FileStorer::StoreWithHistory(const char* filepath, const Symbol* sym)
 {
 	Json::Value value;
 
-	value["name"] = symbol->name;
-	value["tag"] = symbol->tag;
+	value["name"] = sym->name;
+	value["tag"] = sym->tag;
 
-	value["xmin"] = symbol->m_clipbox.xmin;
-	value["xmax"] = symbol->m_clipbox.xmax;
-	value["ymin"] = symbol->m_clipbox.ymin;
-	value["ymax"] = symbol->m_clipbox.ymax;
+	value["xmin"] = sym->m_clipbox.xmin;
+	value["xmax"] = sym->m_clipbox.xmax;
+	value["ymin"] = sym->m_clipbox.ymin;
+	value["ymax"] = sym->m_clipbox.ymax;
 
-	value["use_render_cache"] = symbol->m_use_render_cache;
+	value["use_render_cache"] = sym->m_use_render_cache;
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath) + "\\";
 
-	const std::vector<s2::Sprite*>& children = symbol->GetChildren();
+	const std::vector<s2::Sprite*>& children = sym->GetChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
 		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 		value["sprite"][i] = Store(child, dir);
@@ -75,18 +75,18 @@ void FileStorer::StoreWithHistory(const char* filepath, const Symbol* symbol)
 	writer.write(fout, value);
 	fout.close();
 
-//	editpanel->saveHistoryList(filepath, symbol->m_sprites);
+//	editpanel->saveHistoryList(filepath, sym->m_sprs);
 }
 
-void FileStorer::CenterSymbol(Symbol* symbol)
+void FileStorer::CenterSymbol(Symbol* sym)
 {
-	sm::vec2 offset = symbol->GetBounding().Center();
-	const std::vector<s2::Sprite*>& children = symbol->GetChildren();
+	sm::vec2 offset = sym->GetBounding().Center();
+	const std::vector<s2::Sprite*>& children = sym->GetChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
 		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 		child->Translate(-offset);
 	}
-	symbol->GetBounding().Translate(-offset);
+	sym->GetBounding().Translate(-offset);
 }
 
 Json::Value FileStorer::Store(ee::Sprite* spr, const std::string& dir)

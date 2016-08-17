@@ -22,7 +22,7 @@ private:
 		bool is_leaf;
 		std::string name;
 		std::string parent;
-		std::string sprite;
+		std::string spr;
 		bool visible, editable;
 	}; 
 

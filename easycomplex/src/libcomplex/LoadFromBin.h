@@ -16,7 +16,7 @@ class LoadFromBin
 {
 public:
 	static void Load(const Json::Value& value, const std::string& dir, 
-		Symbol* symbol);
+		Symbol* sym);
 
 private:
 	static void LoadImages(const std::string& filename, std::vector<ee::Image*>& images);

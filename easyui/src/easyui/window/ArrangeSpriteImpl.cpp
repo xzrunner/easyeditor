@@ -58,10 +58,10 @@ void ArrangeSpriteImpl::OnDraw(const ee::Camera& cam) const
 	ee::ArrangeSpriteImpl::OnDraw(cam);
 
 	if (!m_move_center) {
-		std::vector<ee::Sprite*> sprites;
-		m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
-		if (sprites.size() == 1) {
-			m_selected = sprites[0];
+		std::vector<ee::Sprite*> sprs;
+		m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+		if (sprs.size() == 1) {
+			m_selected = sprs[0];
 		}
 	}
 

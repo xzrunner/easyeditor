@@ -13,7 +13,7 @@ class SymbolSearcher
 public:
 	static std::string GetSymbolPath(const std::string& dir, const Json::Value& sprite_val);
 
-	static void SetSymbolFilepaths(const std::string& dir, Symbol* symbol, 
+	static void SetSymbolFilepaths(const std::string& dir, Symbol* sym, 
 		const Json::Value& sprite_val);
 
 }; // SymbolSearcher

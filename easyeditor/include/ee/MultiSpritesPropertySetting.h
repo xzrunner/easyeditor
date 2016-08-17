@@ -15,7 +15,7 @@ class MultiSpritesPropertyImpl;
 class MultiSpritesPropertySetting : public PropertySetting
 {
 public:
-	MultiSpritesPropertySetting(const std::vector<Sprite*>& sprites);
+	MultiSpritesPropertySetting(const std::vector<Sprite*>& sprs);
 	virtual ~MultiSpritesPropertySetting();
 
 	virtual void OnPropertyGridChange(const std::string& name, const wxAny& value);

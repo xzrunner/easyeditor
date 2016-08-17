@@ -38,7 +38,7 @@ void FileIO::Load(const char* filename)
 	Json::Value bodyValue = value["body"][i++];
 	while (!bodyValue.isNull()) {
 		Body* body = FileApapter::ToBody(bodyValue, dir);
-		ee::InsertSpriteSJ::Instance()->Insert(body->m_sprite);
+		ee::InsertSpriteSJ::Instance()->Insert(body->m_spr);
 		bodies.push_back(body);
 
 		bodyValue = value["body"][i++];
@@ -138,7 +138,7 @@ Json::Value FileIO::B2J(const Body* body, const std::string& dlg)
 	value["name"] = body->m_name;
 
 	value["filepath"] = ee::FileHelper::GetRelativePath(dlg, 
-		body->m_sprite->GetSymbol()->GetFilepath());
+		body->m_spr->GetSymbol()->GetFilepath());
 
 	value["type"] = body->m_type;
 	switch (body->m_type)
@@ -166,10 +166,10 @@ Json::Value FileIO::B2J(const Body* body, const std::string& dlg)
 
 	value["gravityScale"] = body->m_gravity_scale;
 
-	value["position"]["x"] = body->m_sprite->GetPosition().x;
-	value["position"]["y"] = body->m_sprite->GetPosition().y;
+	value["position"]["x"] = body->m_spr->GetPosition().x;
+	value["position"]["y"] = body->m_spr->GetPosition().y;
 
-	value["angle"] = body->m_sprite->GetAngle();
+	value["angle"] = body->m_spr->GetAngle();
 
 	for (size_t i = 0, n = body->m_fixtures.size(); i < n; ++i)
 		value["fixture"][i] = B2J(body->m_fixtures[i]);

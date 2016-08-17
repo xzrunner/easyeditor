@@ -253,10 +253,10 @@ void RightPopupMenu::SelectSame()
 	std::string filepath = dynamic_cast<const ee::Symbol*>(selected[0]->GetSymbol())->GetFilepath();
 
 	m_selection->Clear();
-	std::vector<Sprite*> sprites;
-	m_sprites_impl->TraverseSprites(FetchAllVisitor<Sprite>(sprites));
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		Sprite* spr = sprites[i];
+	std::vector<Sprite*> sprs;
+	m_sprites_impl->TraverseSprites(FetchAllVisitor<Sprite>(sprs));
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		Sprite* spr = sprs[i];
 		if (dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath() == filepath) {
 			m_selection->Add(spr);
 		}

@@ -46,7 +46,7 @@ bool Task::IsDirty() const
 	return m_stage->IsEditDirty();
 }
 
-void Task::GetAllSprite(std::vector<const ee::Sprite*>& sprites) const
+void Task::GetAllSprite(std::vector<const ee::Sprite*>& sprs) const
 {
 
 }

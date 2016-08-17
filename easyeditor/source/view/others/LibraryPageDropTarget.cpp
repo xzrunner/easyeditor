@@ -12,12 +12,12 @@ bool LibraryPageDropTarget::OnDropFiles(wxCoord x, wxCoord y,
 	for (int i = 0, n = filenames.size(); i < n; ++i)
 	{
 		std::string filename = filenames[i].ToStdString();
-		Symbol* symbol = SymbolMgr::Instance()->FetchSymbol(filename);
-		symbol->RefreshThumbnail(filename);
-		if (m_page->IsHandleSymbol(symbol)) {
-			m_page->AddItem(symbol);
+		Symbol* sym = SymbolMgr::Instance()->FetchSymbol(filename);
+		sym->RefreshThumbnail(filename);
+		if (m_page->IsHandleSymbol(sym)) {
+			m_page->AddItem(sym);
 		}
-		symbol->RemoveReference();
+		sym->RemoveReference();
 	}
 	return true;
 }

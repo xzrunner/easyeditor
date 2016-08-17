@@ -43,7 +43,7 @@ private:
 		float rotate;
 		float angle;
 
-		std::string symbol;
+		std::string sym;
 		float scale_start, scale_end; 
 		s2::Color mul_col_begin, mul_col_end, 
 			      add_col_begin, add_col_end;

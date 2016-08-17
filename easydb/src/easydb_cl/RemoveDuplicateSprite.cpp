@@ -17,13 +17,13 @@ std::string RemoveDuplicateSprite::Command() const
 
 std::string RemoveDuplicateSprite::Description() const
 {
-	return "remove duplicate sprites";
+	return "remove duplicate sprs";
 }
 
 std::string RemoveDuplicateSprite::Usage() const
 {
 	// rm-dup-spr e:/test2/trans.txt spr-key
-	std::string usage = Command() + " [filepath] [sprites' key]";
+	std::string usage = Command() + " [filepath] [sprs' key]";
 	return usage;
 }
 
@@ -70,14 +70,14 @@ void RemoveDuplicateSprite::RemoveDuplicate(const Json::Value& old_val, Json::Va
 		std::map<std::string, std::vector<Sprite*> >::iterator itr
 			= map_spr.find(spr->filepath);
 		if (itr == map_spr.end()) {
-			std::vector<Sprite*> sprites;
-			sprites.push_back(spr);
-			map_spr.insert(std::make_pair(spr->filepath, sprites));
+			std::vector<Sprite*> sprs;
+			sprs.push_back(spr);
+			map_spr.insert(std::make_pair(spr->filepath, sprs));
 		} else {
-			std::vector<Sprite*>& sprites = itr->second;
+			std::vector<Sprite*>& sprs = itr->second;
 			bool find = false;
-			for (int i = 0, n = sprites.size(); i < n; ++i) {
-				if (*spr == *sprites[i]) {
+			for (int i = 0, n = sprs.size(); i < n; ++i) {
+				if (*spr == *sprs[i]) {
 					find = true;
 					break;
 				}
@@ -85,7 +85,7 @@ void RemoveDuplicateSprite::RemoveDuplicate(const Json::Value& old_val, Json::Va
 			if (find) {
 				delete spr;
 			} else {
-				sprites.push_back(spr);
+				sprs.push_back(spr);
 			}
 		}
 		

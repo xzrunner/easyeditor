@@ -7,10 +7,10 @@ namespace eanim
 {
 
 PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage,
-							 const Symbol* symbol, wxGLContext* glctx)
+							 const Symbol* sym, wxGLContext* glctx)
 	: ee::CameraCanvas(stage_wnd, stage, glctx)
-	, m_symbol(symbol)
-	, m_control(1.0f / symbol->getFPS())
+	, m_sym(sym)
+	, m_control(1.0f / sym->getFPS())
 {
 }
 
@@ -21,12 +21,12 @@ PreviewCanvas::PlaySetting& PreviewCanvas::getPlaySetting()
 
 void PreviewCanvas::OnDrawSprites() const
 {
-	ee::SpriteRenderer::Draw(m_symbol);
+	ee::SpriteRenderer::Draw(m_sym);
 }
 
 void PreviewCanvas::OnTimer()
 {
-// 	if (m_control.frame() < m_symbol->getMaxFrameIndex()) {
+// 	if (m_control.frame() < m_sym->getMaxFrameIndex()) {
 // 		return;
 // 	}
 

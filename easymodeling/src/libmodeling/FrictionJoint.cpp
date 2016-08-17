@@ -14,7 +14,7 @@ FrictionJoint::FrictionJoint(Body* b0, Body* b1)
 	, m_max_force(0.0f)
 	, m_max_torque(0.0f)
 {
-	sm::vec2 center = (b0->m_sprite->GetPosition() + b1->m_sprite->GetPosition()) * 0.5f;
+	sm::vec2 center = (b0->m_spr->GetPosition() + b1->m_spr->GetPosition()) * 0.5f;
 	SetLocalAnchorA(center);
 	SetLocalAnchorB(center);
 }
@@ -41,9 +41,9 @@ void FrictionJoint::Draw(DrawType type) const
 		s2::RVG::SetColor(s2::Color(255, 0, 0));
 		s2::RVG::DashLine(anchorA, anchorB);
 		s2::RVG::SetColor(s2::Color(102, 204, 102));
-		s2::RVG::DashLine(anchorA, m_body_a->m_sprite->GetPosition());
+		s2::RVG::DashLine(anchorA, m_body_a->m_spr->GetPosition());
 		s2::RVG::SetColor(s2::Color(102, 102, 204));
-		s2::RVG::DashLine(anchorB, m_body_b->m_sprite->GetPosition());
+		s2::RVG::DashLine(anchorB, m_body_b->m_spr->GetPosition());
 
 		DrawBodyFlag();
 	}
@@ -54,22 +54,22 @@ void FrictionJoint::Draw(DrawType type) const
 
 sm::vec2 FrictionJoint::GetWorldAnchorA() const
 {
-	return TransLocalToWorld(m_local_anchor_a, m_body_a->m_sprite);
+	return TransLocalToWorld(m_local_anchor_a, m_body_a->m_spr);
 }
 
 sm::vec2 FrictionJoint::GetWorldAnchorB() const
 {
-	return TransLocalToWorld(m_local_anchor_b, m_body_b->m_sprite);
+	return TransLocalToWorld(m_local_anchor_b, m_body_b->m_spr);
 }
 
 void FrictionJoint::SetLocalAnchorA(const sm::vec2& world)
 {
-	m_local_anchor_a = TransWorldToLocal(world, m_body_a->m_sprite);
+	m_local_anchor_a = TransWorldToLocal(world, m_body_a->m_spr);
 }
 
 void FrictionJoint::SetLocalAnchorB(const sm::vec2& world)
 {
-	m_local_anchor_b = TransWorldToLocal(world, m_body_b->m_sprite);
+	m_local_anchor_b = TransWorldToLocal(world, m_body_b->m_spr);
 }
 
 void FrictionJoint::DrawAnchor(const sm::vec2& pos, DrawType type) const

@@ -388,9 +388,9 @@ void PackRes::PackLuaFile(const Json::Value& pkg_val, const std::string& config_
 {
 	std::vector<std::string> files;
 	GetAllDataFiles(pkg_val, config_dir, files);
-	std::vector<const ee::Symbol*> symbols;
+	std::vector<const ee::Symbol*> syms;
  	for (int i = 0, n = files.size(); i < n; ++i) {
- 		symbols.push_back(ee::SymbolMgr::Instance()->FetchSymbol(files[i]));
+ 		syms.push_back(ee::SymbolMgr::Instance()->FetchSymbol(files[i]));
  	}
 
 	std::string name = pkg_val["name"].asString();
@@ -413,9 +413,9 @@ void PackRes::PackLuaFile(const Json::Value& pkg_val, const std::string& config_
 	ecoco::epd::CocoPacker* data_packer = NULL;
 	if (!pkg_val["rrp"].isNull() || !pkg_val["rrr"].isNull() || !pkg_val["b4r"].isNull()) {
 		std::string id_filepath = ConnectCfgDir(config_dir, pkg_val["id file"].asString());
-		data_packer = new ecoco::epd::CocoPacker(symbols, tex_mgr, id_filepath);	
+		data_packer = new ecoco::epd::CocoPacker(syms, tex_mgr, id_filepath);	
 	} else {
-		data_packer = new ecoco::epd::CocoPacker(symbols, tex_mgr);
+		data_packer = new ecoco::epd::CocoPacker(syms, tex_mgr);
 	}
 
 	data_packer->Parser();

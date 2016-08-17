@@ -54,10 +54,10 @@ void StagePanel::LoadFromDir(const std::string& dirpath)
 		if (ee::FileType::IsType(filepath, ee::FileType::e_complex) || 
 			ee::FileType::IsType(filepath, ee::FileType::e_anim))
 		{
-			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-			ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-			symbol->RemoveReference();
-			ee::InsertSpriteSJ::Instance()->Insert(sprite);
+			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+			ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+			sym->RemoveReference();
+			ee::InsertSpriteSJ::Instance()->Insert(spr);
 		}
 	}
 
@@ -79,39 +79,39 @@ void StagePanel::InitConnection()
 {
 	m_graphics.Clear();
 
-	std::vector<ee::Sprite*> sprites;
-	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	for (size_t i = 0, n = sprites.size(); i < n; ++i)
+	std::vector<ee::Sprite*> sprs;
+	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	for (size_t i = 0, n = sprs.size(); i < n; ++i)
 	{
-		ee::Sprite* from = sprites[i];
+		ee::Sprite* from = sprs[i];
 		if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(from))
 		{
-			const s2::ComplexSymbol* symbol = dynamic_cast<const s2::ComplexSymbol*>(complex->GetSymbol());
-			const std::vector<s2::Sprite*>& children = symbol->GetChildren();
+			const s2::ComplexSymbol* sym = dynamic_cast<const s2::ComplexSymbol*>(complex->GetSymbol());
+			const std::vector<s2::Sprite*>& children = sym->GetChildren();
 			for (size_t i = 0, n = children.size(); i < n; ++i)
 			{
 				ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
-				for (size_t i = 0, n = sprites.size(); i < n; ++i)
-					if (child->GetSymbol() == sprites[i]->GetSymbol())
-						m_graphics.Connect(from, sprites[i]);
+				for (size_t i = 0, n = sprs.size(); i < n; ++i)
+					if (child->GetSymbol() == sprs[i]->GetSymbol())
+						m_graphics.Connect(from, sprs[i]);
 			}
 		}
 		else if (eanim::Sprite* anim = dynamic_cast<eanim::Sprite*>(from))
 		{
-			const s2::AnimSymbol* symbol = dynamic_cast<const s2::AnimSymbol*>(anim->GetSymbol());
-			const std::vector<s2::AnimSymbol::Layer*>& layers = symbol->GetLayers();
+			const s2::AnimSymbol* sym = dynamic_cast<const s2::AnimSymbol*>(anim->GetSymbol());
+			const std::vector<s2::AnimSymbol::Layer*>& layers = sym->GetLayers();
 			for (size_t i = 0, n = layers.size(); i < n; ++i)
 			{
 				s2::AnimSymbol::Layer* layer = layers[i];
 				for (size_t i = 0, n = layer->frames.size(); i < n; ++i)
 				{
 					s2::AnimSymbol::Frame* frame = layer->frames[i];
-					for (size_t i = 0, n = frame->sprites.size(); i < n; ++i)
+					for (size_t i = 0, n = frame->sprs.size(); i < n; ++i)
 					{
-						ee::Sprite* child = dynamic_cast<ee::Sprite*>(frame->sprites[i]);
-						for (size_t i = 0, n = sprites.size(); i < n; ++i)
-							if (child->GetSymbol() == sprites[i]->GetSymbol())
-								m_graphics.Connect(from, sprites[i]);
+						ee::Sprite* child = dynamic_cast<ee::Sprite*>(frame->sprs[i]);
+						for (size_t i = 0, n = sprs.size(); i < n; ++i)
+							if (child->GetSymbol() == sprs[i]->GetSymbol())
+								m_graphics.Connect(from, sprs[i]);
 					}
 				}
 			}
@@ -121,15 +121,15 @@ void StagePanel::InitConnection()
 
 void StagePanel::InitPosition()
 {
-	std::vector<ee::Sprite*> sprites;
-	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
+	std::vector<ee::Sprite*> sprs;
+	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
 
 	// 1 single random
-	for (size_t i = 0, n = sprites.size(); i < n; ++i)
+	for (size_t i = 0, n = sprs.size(); i < n; ++i)
 	{
-		ee::Sprite* sprite = sprites[i];
+		ee::Sprite* spr = sprs[i];
 
-		Node* node = m_graphics.Query(sprite);
+		Node* node = m_graphics.Query(spr);
 		if (!node || node->in.empty())
 		{
 			sm::vec2 pos;
@@ -137,17 +137,17 @@ void StagePanel::InitPosition()
 			float angle = ee::Random::GetNum(0, SM_PI*2);
 			pos.x = cos(angle)*radius;
 			pos.y = sin(angle)*radius;
-			sprite->SetPosition(pos);
-			sprite->SetAngle(0);
+			spr->SetPosition(pos);
+			spr->SetAngle(0);
 		}
 	}
 
 	// 2 to
-	for (size_t i = 0, n = sprites.size(); i < n; ++i)
+	for (size_t i = 0, n = sprs.size(); i < n; ++i)
 	{
-		ee::Sprite* sprite = sprites[i];
+		ee::Sprite* spr = sprs[i];
 
-		Node* node = m_graphics.Query(sprite);
+		Node* node = m_graphics.Query(spr);
 //		if (node && node->in.empty())
 		if (node)
 		{
@@ -157,7 +157,7 @@ void StagePanel::InitPosition()
 			{
 				ee::Sprite* to = node->out[i];
 
-				sm::vec2 pos = sprite->GetPosition();
+				sm::vec2 pos = spr->GetPosition();
 				pos.x += cos(angle*i)*radius;
 				pos.y += sin(angle*i)*radius;
 // 				if (to->getPosition().x != 0 || to->getPosition().y != 0)

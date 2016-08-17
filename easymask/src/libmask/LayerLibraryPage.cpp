@@ -27,10 +27,10 @@ void LayerLibraryPage::OnAddPress(wxCommandEvent& event)
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
 			std::string filepath = filenames[i].ToStdString();
-			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-			symbol->RefreshThumbnail(filepath);
-			m_list->Insert(symbol);
-			symbol->RemoveReference();
+			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+			sym->RefreshThumbnail(filepath);
+			m_list->Insert(sym);
+			sym->RemoveReference();
 		}
 	}
 }

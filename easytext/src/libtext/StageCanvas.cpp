@@ -32,9 +32,9 @@ StageCanvas::StageCanvas(StagePanel* stage, wxGLContext* glctx,
 	, m_sprite_impl(bg_sprites)
 	, m_bg(NULL)
 {
-	std::vector<ee::Sprite*> sprites;
-	m_sprite_impl->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	m_bg = ee::draw_all_to_one_spr(sprites, m_edited);
+	std::vector<ee::Sprite*> sprs;
+	m_sprite_impl->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	m_bg = ee::draw_all_to_one_spr(sprs, m_edited);
 }
 
 StageCanvas::~StageCanvas()

@@ -31,7 +31,7 @@ public:
 		ee::DataTraverseType type = ee::DT_ALL, bool order = true) const {}
 
 	Symbol* GetSymbol() { return m_sym; }
-	void SetSymbol(Symbol* symbol);
+	void SetSymbol(Symbol* sym);
 
 protected:
 	//

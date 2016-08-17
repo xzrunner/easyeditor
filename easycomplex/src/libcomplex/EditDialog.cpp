@@ -22,13 +22,13 @@ BEGIN_EVENT_TABLE(EditDialog, wxDialog)
 	EVT_CLOSE(EditDialog::OnCloseEvent)
 END_EVENT_TABLE()
 
-EditDialog::EditDialog(wxWindow* parent, Symbol* symbol,
+EditDialog::EditDialog(wxWindow* parent, Symbol* sym,
 					   wxGLContext* glctx, ee::CrossGuides* guides)
 	: wxDialog(parent, wxID_ANY, "Edit Complex", wxDefaultPosition, 
 	wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
-	, m_symbol(symbol)
+	, m_sym(sym)
 {
-	SetTitle(symbol->GetFilepath());
+	SetTitle(sym->GetFilepath());
 	InitLayout(glctx, guides);
 	LoadSymbolInfo();
 
@@ -68,7 +68,7 @@ wxWindow* EditDialog::InitLayoutLeft(wxWindow* parent)
 wxWindow* EditDialog::InitLayoutCenter(wxWindow* parent, wxGLContext* glctx,
 									   ee::CrossGuides* guides)
 {
-	m_stage = new StagePanel(parent, this, m_symbol, m_property, 
+	m_stage = new StagePanel(parent, this, m_sym, m_property, 
 		static_cast<ecomplex::LibraryPanel*>(m_library), glctx, guides);
 	m_property->SetEditPanel(m_stage->GetStageImpl());
 	return m_stage;
@@ -92,25 +92,25 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 	int val = dlg.ShowModal();
 	if (val == wxID_YES) 
 	{
-		const std::string& filepath = m_symbol->GetFilepath();
+		const std::string& filepath = m_sym->GetFilepath();
 		if (filepath != "group") {
-			FileStorer::Store(filepath.c_str(), m_symbol);
-			m_symbol->RefreshThumbnail(filepath, true);
+			FileStorer::Store(filepath.c_str(), m_sym);
+			m_sym->RefreshThumbnail(filepath, true);
 		}
-// 		m_symbol->InitBounding();
-// 		ee::SpriteFactory::Instance()->UpdateBoundings(*m_symbol);
+// 		m_sym->InitBounding();
+// 		ee::SpriteFactory::Instance()->UpdateBoundings(*m_sym);
 		Destroy();
 	} 
 	else if (val == wxID_NO) 
 	{
-		m_symbol->LoadFromFile(m_symbol->GetFilepath());
+		m_sym->LoadFromFile(m_sym->GetFilepath());
 		Destroy();
 	}
 }
 
 void EditDialog::LoadSymbolInfo()
 {
-	const std::vector<s2::Sprite*>& children = m_symbol->GetChildren();
+	const std::vector<s2::Sprite*>& children = m_sym->GetChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
 		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 		m_library->AddSymbol(dynamic_cast<ee::Symbol*>(child->GetSymbol()));

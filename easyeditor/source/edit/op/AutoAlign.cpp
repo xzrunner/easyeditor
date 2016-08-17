@@ -17,7 +17,7 @@ AutoAlign::AutoAlign(MultiSpritesImpl* sprites_impl)
 {
 }
 
-void AutoAlign::Align(const std::vector<Sprite*>& sprites)
+void AutoAlign::Align(const std::vector<Sprite*>& sprs)
 {
 	m_hor[0].Set(0, 0);
 	m_hor[1].Set(0, 0);
@@ -28,7 +28,7 @@ void AutoAlign::Align(const std::vector<Sprite*>& sprites)
 	m_sprites_impl->TraverseSprites(FetchAllVisitor<Sprite>(sources));
 
 	// not support mul src now
-	if (sprites.size() > 1)
+	if (sprs.size() > 1)
 		return;
 
 	const float DIS = 5;
@@ -38,7 +38,7 @@ void AutoAlign::Align(const std::vector<Sprite*>& sprites)
 	// hor
 	for (size_t i = 0, n = sources.size(); i < n; ++i)
 	{
-		Sprite *dst = sprites[0], *src = sources[i];
+		Sprite *dst = sprs[0], *src = sources[i];
 		if (src == dst) continue;
 
 		sm::rect src_rect = src->GetBounding()->GetSize(),
@@ -78,7 +78,7 @@ void AutoAlign::Align(const std::vector<Sprite*>& sprites)
 	// ver
 	for (size_t i = 0, n = sources.size(); i < n; ++i)
 	{
-		Sprite *dst = sprites[0], *src = sources[i];
+		Sprite *dst = sprs[0], *src = sources[i];
 		if (src == dst) continue;
 
 		sm::rect src_rect = src->GetBounding()->GetSize(),
@@ -117,9 +117,9 @@ void AutoAlign::Align(const std::vector<Sprite*>& sprites)
 	}
 
 	if (hor_nearest)
-		Align(hor_nearest, sprites[0]);
+		Align(hor_nearest, sprs[0]);
 	if (ver_nearest && ver_nearest != hor_nearest)
-		Align(ver_nearest, sprites[0]);
+		Align(ver_nearest, sprs[0]);
 }
 
 void AutoAlign::Align(const Sprite* src, Sprite* dst)

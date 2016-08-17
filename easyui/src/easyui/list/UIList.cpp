@@ -31,13 +31,13 @@ UIList::UIList()
 	m_item_spr = NULL;
 }
 
-bool UIList::InsertSprite(ee::Sprite* sprite, int idx)
+bool UIList::InsertSprite(ee::Sprite* spr, int idx)
 {
-	if (!sprite) {
+	if (!spr) {
 		return false;
 	}
 	assert(m_items.size() == m_hori_count * m_vert_count);
-	if (m_item_spr && sprite->GetSymbol() != m_item_spr->GetSymbol()) {
+	if (m_item_spr && spr->GetSymbol() != m_item_spr->GetSymbol()) {
 		return false;
 	}
 	if (m_hori_count > 1 && m_vert_count > 1) {
@@ -45,15 +45,15 @@ bool UIList::InsertSprite(ee::Sprite* sprite, int idx)
 	}
 
 	if (m_hori_count ==  0 && m_vert_count == 0) {
-		sprite->AddReference();
-		m_item_spr = sprite;
+		spr->AddReference();
+		m_item_spr = spr;
 		m_items.push_back(m_item_spr->EEClone());
 		m_hori_count = m_vert_count = 1;
 		return true;
 	}
 
 	sm::vec2 base_pos = m_items[0]->GetPosition();
-	sm::vec2 new_pos = sprite->GetPosition();
+	sm::vec2 new_pos = spr->GetPosition();
 	if (m_vert_count == 1 && m_hori_count == 1) {
 		if (base_pos == new_pos) {
 			return false;

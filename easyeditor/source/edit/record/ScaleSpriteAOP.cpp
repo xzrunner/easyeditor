@@ -6,41 +6,41 @@
 namespace ee
 {
 
-ScaleSpriteAOP::ScaleSpriteAOP(Sprite* sprite, 
+ScaleSpriteAOP::ScaleSpriteAOP(Sprite* spr, 
 							   const sm::vec2& new_scale, 
 							   const sm::vec2& old_scale)
 	: m_new_scale(new_scale)
 	, m_old_scale(old_scale)
 {
-	sprite->AddReference();
-	m_sprites.push_back(sprite);
+	spr->AddReference();
+	m_sprs.push_back(spr);
 }
 
 ScaleSpriteAOP::~ScaleSpriteAOP()
 {
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->RemoveReference();
+	for (size_t i = 0, n = m_sprs.size(); i < n; ++i) {
+		m_sprs[i]->RemoveReference();
 	}
 }
 
 void ScaleSpriteAOP::Undo()
 {
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->SetScale(m_old_scale);
+	for (size_t i = 0, n = m_sprs.size(); i < n; ++i) {
+		m_sprs[i]->SetScale(m_old_scale);
 	} 
 }
 
 void ScaleSpriteAOP::Redo()
 {
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->SetScale(m_new_scale);
+	for (size_t i = 0, n = m_sprs.size(); i < n; ++i) {
+		m_sprs[i]->SetScale(m_new_scale);
 	} 
 }
 
-Json::Value ScaleSpriteAOP::Store(const std::vector<Sprite*>& sprites) const
+Json::Value ScaleSpriteAOP::Store(const std::vector<Sprite*>& sprs) const
 {
 	Json::Value val;
-	val["idx"] = HistoryUtil::StoreSpritesIndex(m_sprites, sprites);
+	val["idx"] = HistoryUtil::StoreSpritesIndex(m_sprs, sprs);
 	val["type"] = AT_SCALE;
 	val["new_scale_x"] = m_new_scale.x;
 	val["new_scale_y"] = m_new_scale.y;

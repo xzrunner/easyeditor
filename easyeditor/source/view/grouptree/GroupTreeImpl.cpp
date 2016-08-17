@@ -152,9 +152,9 @@ VisitLeaf(wxTreeItemId id)
 //////////////////////////////////////////////////////////////////////////
 
 GroupTreeImpl::GetSpritesVisitor::
-GetSpritesVisitor(wxTreeCtrl* treectrl, std::vector<Sprite*>& sprites)
+GetSpritesVisitor(wxTreeCtrl* treectrl, std::vector<Sprite*>& sprs)
 	: m_treectrl(treectrl)
-	, m_sprites(sprites)
+	, m_sprs(sprs)
 {
 }
 
@@ -168,7 +168,7 @@ VisitLeaf(wxTreeItemId id)
 	}
 
 	Sprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
-	m_sprites.push_back(spr);
+	m_sprs.push_back(spr);
 
 	return false;
 }

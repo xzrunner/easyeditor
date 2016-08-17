@@ -83,7 +83,7 @@ private:
 	void Select(Sprite* spr, bool clear);
 	void SelectSet(SpriteSelection* selection);
 	void Reorder(Sprite* spr, bool up);
-	bool Remove(Sprite* sprite);
+	bool Remove(Sprite* spr);
 
 private:
 	enum

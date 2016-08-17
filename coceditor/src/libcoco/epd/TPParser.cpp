@@ -9,12 +9,12 @@ namespace ecoco
 namespace epd
 {
 
-TPParser::TPParser(const std::vector<const ee::Symbol*>& symbols,
+TPParser::TPParser(const std::vector<const ee::Symbol*>& syms,
 				   const TextureMgr& tex_mgr)
 	: m_tex_mgr(tex_mgr)
 	, m_tex_size(0)
 {
-	m_symbol_sorter.prepare(symbols);	
+	m_symbol_sorter.prepare(syms);	
 }
 
 void TPParser::Parser()
@@ -27,10 +27,10 @@ void TPParser::Parser()
 	m_tex_size = idx;
 }
 
-TPParser::Picture* TPParser::FindPicture(const ee::Symbol* symbol) const
+TPParser::Picture* TPParser::FindPicture(const ee::Symbol* sym) const
 {
 	std::map<const ee::Symbol*, TPParser::Picture*>::const_iterator itr 
-		= m_map_symbol2picture.find(symbol);
+		= m_map_symbol2picture.find(sym);
 	if (itr == m_map_symbol2picture.end()) {
 		return NULL;
 	} else {
@@ -62,8 +62,8 @@ void TPParser::ParserTexture(const TextureMgr::Entry* tex, int idx)
 		const TPAdapter::Entry& entry = frames[i];
 
 		// find symbol
-		const ee::Symbol* symbol = m_symbol_sorter.GetSymbolSet().Query(entry.filename);
-		if (!symbol) {
+		const ee::Symbol* sym = m_symbol_sorter.GetSymbolSet().Query(entry.filename);
+		if (!sym) {
 			continue;
 		}
 
@@ -115,7 +115,7 @@ void TPParser::ParserTexture(const TextureMgr::Entry* tex, int idx)
 		picture->offset.x = (entry.sprite_source_size.x + entry.sprite_source_size.w * 0.5f) - entry.src_width * 0.5f;
 		picture->offset.y = entry.src_height * 0.5f - (entry.sprite_source_size.y + entry.sprite_source_size.h * 0.5f);
 
-		m_map_symbol2picture.insert(std::make_pair(symbol, picture));
+		m_map_symbol2picture.insert(std::make_pair(sym, picture));
 	}
 }
 

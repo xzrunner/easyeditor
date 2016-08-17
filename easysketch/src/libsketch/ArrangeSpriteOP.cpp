@@ -45,12 +45,12 @@ bool ArrangeSpriteOP::OnKeyDown(int keyCode)
 	{
 	case WXK_SPACE:
 		{
-			std::vector<Sprite*> sprites;
-			GetSelection().Traverse(ee::FetchAllVisitor<Sprite>(sprites));
-			for (int i = 0, n = sprites.size(); i < n; ++i) {
-				Sprite* sprite = sprites[i];
-				sprite->SetPos3(sm::vec3(0, 0, 0));
-				sprite->SetOri3(sm::Quaternion());
+			std::vector<Sprite*> sprs;
+			GetSelection().Traverse(ee::FetchAllVisitor<Sprite>(sprs));
+			for (int i = 0, n = sprs.size(); i < n; ++i) {
+				Sprite* spr = sprs[i];
+				spr->SetPos3(sm::vec3(0, 0, 0));
+				spr->SetOri3(sm::Quaternion());
 			}
 
 			e3d::StageCanvas* canvas 

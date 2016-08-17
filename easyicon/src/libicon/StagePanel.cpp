@@ -14,7 +14,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	: ee::EditPanel(parent, frame)
 {
 	SetCanvas(new StageCanvas(this));
-	m_symbol = new Symbol;
+	m_sym = new Symbol;
 
 	SetDropTarget(new StageDropTarget(this, library));
 }
@@ -25,30 +25,30 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	: ee::EditPanel(parent, frame)
 {
 	SetCanvas(new StageCanvas(this, glctx, edited, bg_sprites));
-	m_symbol = dynamic_cast<eicon::Symbol*>(edited->GetSymbol());
-	if (m_symbol) {
-		m_symbol->AddReference();
+	m_sym = dynamic_cast<eicon::Symbol*>(edited->GetSymbol());
+	if (m_sym) {
+		m_sym->AddReference();
 	}
 }
 
 StagePanel::~StagePanel()
 {
-	if (m_symbol) {
-		m_symbol->RemoveReference();
+	if (m_sym) {
+		m_sym->RemoveReference();
 	}
 }
 
 void StagePanel::SetIcon(Icon* icon)
 {
-	if (m_symbol) {
-		m_symbol->SetIcon(icon);	
+	if (m_sym) {
+		m_sym->SetIcon(icon);	
 	}
 }
 
 Icon* StagePanel::GetIcon()
 {
-	if (m_symbol) {
-		return m_symbol->GetIcon();
+	if (m_sym) {
+		return m_sym->GetIcon();
 	} else {
 		return NULL;
 	}
@@ -56,8 +56,8 @@ Icon* StagePanel::GetIcon()
 
 void StagePanel::SetImage(ee::Image* img)
 {
-	if (m_symbol) {
-		m_symbol->SetImage(img);
+	if (m_sym) {
+		m_sym->SetImage(img);
 	}
 }
 
@@ -73,9 +73,9 @@ StageDropTarget(StagePanel* stage, ee::LibraryPanel* library)
 }
 
 bool StagePanel::StageDropTarget::
-OnDropSymbol(ee::Symbol* symbol, const sm::vec2& pos)
+OnDropSymbol(ee::Symbol* sym, const sm::vec2& pos)
 {
-	if (ee::ImageSymbol* image = dynamic_cast<ee::ImageSymbol*>(symbol))
+	if (ee::ImageSymbol* image = dynamic_cast<ee::ImageSymbol*>(sym))
 	{
 		m_stage->SetImage(image->GetImage());
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();

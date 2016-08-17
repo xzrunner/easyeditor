@@ -9,16 +9,16 @@ namespace ee
 class DeleteSpriteAOP : public AtomicOP
 {
 public:
-	DeleteSpriteAOP(const std::vector<Sprite*>& sprites);
+	DeleteSpriteAOP(const std::vector<Sprite*>& sprs);
 	virtual ~DeleteSpriteAOP();
 
 	virtual void Undo();
 	virtual void Redo();
 
-	virtual Json::Value Store(const std::vector<Sprite*>& sprites) const;
+	virtual Json::Value Store(const std::vector<Sprite*>& sprs) const;
 
 private:
-	std::vector<Sprite*> m_sprites;
+	std::vector<Sprite*> m_sprs;
 
 }; // DeleteSpriteAOP
 

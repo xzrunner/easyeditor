@@ -53,8 +53,8 @@ public:
 	void OnKeyUp(wxKeyEvent& event);
 	void OnMouseWheelRotation(int x, int y, int direction);
 
-	void SaveOpRecordList(const std::string& filepath, const std::vector<Sprite*>& sprites);
-	void LoadOpRecordList(const std::string& filepath, const std::vector<Sprite*>& sprites);
+	void SaveOpRecordList(const std::string& filepath, const std::vector<Sprite*>& sprs);
+	void LoadOpRecordList(const std::string& filepath, const std::vector<Sprite*>& sprs);
 
 	void OnSave();
 	bool IsEditDirty() const;

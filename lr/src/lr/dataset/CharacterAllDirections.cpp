@@ -23,7 +23,7 @@ void CharacterAllDirections::BuildSymbolDirections(const CharacterFileName& name
 		if (!ee::FileHelper::IsFileExist(filepath)) {
 			return;
 		}
-		dirs.symbols[i] = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		dirs.syms[i] = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	}
 	m_map2symbols.insert(std::make_pair(key, dirs));
 }
@@ -43,7 +43,7 @@ ee::Symbol* CharacterAllDirections::GetSymbolByDir(const std::string& filepath, 
 		} else {
 			idx = 9 - dir_pos;
 		}
-		return itr->second.symbols[idx];
+		return itr->second.syms[idx];
 	}
 }
 

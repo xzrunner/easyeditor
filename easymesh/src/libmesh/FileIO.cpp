@@ -12,13 +12,13 @@
 namespace emesh
 {
 
-void FileIO::Store(const char* filepath, const Symbol* symbol)
+void FileIO::Store(const char* filepath, const Symbol* sym)
 {
 	Json::Value value;
 
-	value["name"] = symbol->name;
+	value["name"] = sym->name;
 
-	const Mesh* mesh = symbol->GetMesh();
+	const Mesh* mesh = sym->GetMesh();
 	if (mesh) {
 		mesh->Store(value);
 	} else {
@@ -26,7 +26,7 @@ void FileIO::Store(const char* filepath, const Symbol* symbol)
 	}
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath) + "\\";
-	value["base_symbol"] = ee::FileHelper::GetRelativePath(dir, symbol->GetMesh()->GetBaseSymbol()->GetFilepath());
+	value["base_symbol"] = ee::FileHelper::GetRelativePath(dir, sym->GetMesh()->GetBaseSymbol()->GetFilepath());
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -36,7 +36,7 @@ void FileIO::Store(const char* filepath, const Symbol* symbol)
 	fout.close();
 }
 
-void FileIO::Load(const char* filepath, Symbol* symbol)
+void FileIO::Load(const char* filepath, Symbol* sym)
 {
 	Json::Value value;
 	Json::Reader reader;
@@ -68,7 +68,7 @@ void FileIO::Load(const char* filepath, Symbol* symbol)
 	if (mesh)
 	{
 		mesh->Load(value);
-		symbol->SetMesh(mesh);
+		sym->SetMesh(mesh);
 		mesh->RemoveReference();
 	}
 

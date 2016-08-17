@@ -14,9 +14,9 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	m_list->SetFileter(FILE_TAG);
 }
 
-bool LibraryPage::IsHandleSymbol(ee::Symbol* symbol) const
+bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
 {
-	return dynamic_cast<Symbol*>(symbol) != NULL;
+	return dynamic_cast<Symbol*>(sym) != NULL;
 }
 
 void LibraryPage::LoadDefaultSymbol()
@@ -53,9 +53,9 @@ void LibraryPage::LoadDefaultSymbol()
 // 		dlg.GetPaths(filenames);
 // 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 // 		{
-//  			ee::Symbol* symbol = ee::SymbolMgr::Instance()->fetchSymbol(filenames[i]);
-//  			m_list->insert(symbol);
-//  			symbol->RemoveReference();
+//  			ee::Symbol* sym = ee::SymbolMgr::Instance()->fetchSymbol(filenames[i]);
+//  			m_list->insert(sym);
+//  			sym->RemoveReference();
 // 		}
 // 	}
 // }
@@ -74,15 +74,15 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 			e3d::AssimpHelper loader;
 			e3d::AABB aabb;
 			loader.LoadFile(filenames[i], *model, aabb);
-			Symbol* symbol = new Symbol();
-			symbol->SetModel(model);
+			Symbol* sym = new Symbol();
+			sym->SetModel(model);
 
 			std::string filepath = FILE_TAG;
 			filepath += ".json";
-			symbol->SetFilepath(filepath);
-			symbol->SetAABB(aabb);
+			sym->SetFilepath(filepath);
+			sym->SetAABB(aabb);
 
-			AddItem(symbol);
+			AddItem(sym);
 		}
 	}
 }
@@ -92,17 +92,17 @@ void LibraryPage::LoadSymbol(e3d::ISurface* surface, const char* name)
 	e3d::AABB aabb;
 	e3d::ModelParametric* model = new e3d::ModelParametric(surface, aabb);
 
-	Symbol* symbol = new Symbol();
-	symbol->SetAABB(aabb);
-	symbol->SetName(name);
-	symbol->SetModel(model);
+	Symbol* sym = new Symbol();
+	sym->SetAABB(aabb);
+	sym->SetName(name);
+	sym->SetModel(model);
 
 	std::string filepath = FILE_TAG;
 	filepath += ".json";
-	symbol->SetFilepath(filepath);
+	sym->SetFilepath(filepath);
 
-//	symbol->RefreshThumbnail(symbol->GetFilepath());
-	m_list->Insert(symbol);
+//	sym->RefreshThumbnail(sym->GetFilepath());
+	m_list->Insert(sym);
 }
 
 }

@@ -18,19 +18,19 @@ ResizeOP::ResizeOP(StagePanel* stage, ToolbarPanel* toolbar, ResizeCMPT* resizeC
 
 bool ResizeOP::OnMouseLeftDown(int x, int y)
 {
-	Symbol* symbol = m_stage->getPatchSymbol();
-	if (!symbol) return false;
+	Symbol* sym = m_stage->getPatchSymbol();
+	if (!sym) return false;
 
-	escale9::ResizeBaseOP::setSymbol(symbol);
+	escale9::ResizeBaseOP::setSymbol(sym);
 	return escale9::ResizeBaseOP::OnMouseLeftDown(x, y);
 }
 
 bool ResizeOP::OnMouseLeftUp(int x, int y)
 {
-	Symbol* symbol = m_stage->getPatchSymbol();
-	if (!symbol) return false;
+	Symbol* sym = m_stage->getPatchSymbol();
+	if (!sym) return false;
 
-	escale9::ResizeBaseOP::setSymbol(symbol);
+	escale9::ResizeBaseOP::setSymbol(sym);
 	return escale9::ResizeBaseOP::OnMouseLeftUp(x, y);
 }
 
@@ -38,14 +38,14 @@ bool ResizeOP::OnMouseDrag(int x, int y)
 {
 	if (ee::ZoomViewOP::OnMouseDrag(x, y)) return true;
 
-	Symbol* symbol = dynamic_cast<Symbol*>(m_stage->getPatchSymbol());
-	if (m_status != e_null && symbol)
+	Symbol* sym = dynamic_cast<Symbol*>(m_stage->getPatchSymbol());
+	if (m_status != e_null && sym)
 	{
 		float width, height;
 
 		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 
-		Scale9Type type = symbol->GetScale9Data().GetType();
+		Scale9Type type = sym->GetScale9Data().GetType();
 		if (type == e_9Grid || 
 			type == e_9GridHollow ||
 			type == e_6GridUpper)
@@ -56,11 +56,11 @@ bool ResizeOP::OnMouseDrag(int x, int y)
 		else if (type == e_3GridHor)
 		{
 			width = fabs(pos.x)*2;
-			height = symbol->GetBounding().Size().y;
+			height = sym->GetBounding().Size().y;
 		}
 		else if (type == e_3GridVer)
 		{
-			width = symbol->GetBounding().Size().x;
+			width = sym->GetBounding().Size().x;
 			height = fabs(pos.y)*2;
 		}
 		else
@@ -69,7 +69,7 @@ bool ResizeOP::OnMouseDrag(int x, int y)
 		}
 
 		m_resizeCmpt->setSize(width, height);
-		symbol->ResizeScale9(width, height);
+		sym->ResizeScale9(width, height);
 
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
@@ -89,10 +89,10 @@ bool ResizeOP::OnActive()
 
 bool ResizeOP::OnDraw() const
 {
-	Symbol* symbol = m_stage->getPatchSymbol();
-	if (!symbol) return false;
+	Symbol* sym = m_stage->getPatchSymbol();
+	if (!sym) return false;
 
-	escale9::ResizeBaseOP::setSymbol(symbol);
+	escale9::ResizeBaseOP::setSymbol(sym);
 	return escale9::ResizeBaseOP::OnDraw();
 }
 

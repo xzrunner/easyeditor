@@ -6,18 +6,18 @@
 namespace ecoco
 {
 
-void SymbolSet::Insert(const ee::Symbol* symbol)
+void SymbolSet::Insert(const ee::Symbol* sym)
 {
-	std::string filepath = ee::FileHelper::FormatFilepath(symbol->GetFilepath());
+	std::string filepath = ee::FileHelper::FormatFilepath(sym->GetFilepath());
 
 	if (filepath.find("img_guide_scale9") != std::string::npos) 
 	{
 		int zz  =0;
 	}
 
-	if (!Query(symbol) || ee::FileType::IsType(symbol->GetFilepath(), ee::FileType::e_scale9)) {
-		m_symbol_map.insert(std::make_pair(filepath, symbol));
-		m_symbol_ordered.push_back(symbol);
+	if (!Query(sym) || ee::FileType::IsType(sym->GetFilepath(), ee::FileType::e_scale9)) {
+		m_symbol_map.insert(std::make_pair(filepath, sym));
+		m_symbol_ordered.push_back(sym);
 	}
 }
 
@@ -33,15 +33,15 @@ const ee::Symbol* SymbolSet::Query(const std::string& filepath) const
 	}
 }
 
-bool SymbolSet::Query(const ee::Symbol* symbol) const
+bool SymbolSet::Query(const ee::Symbol* sym) const
 {
-	std::string filepath = ee::FileHelper::FormatFilepath(symbol->GetFilepath());
+	std::string filepath = ee::FileHelper::FormatFilepath(sym->GetFilepath());
 	std::multimap<std::string, const ee::Symbol*>::const_iterator 
 		itr_begin = m_symbol_map.lower_bound(filepath),
 		itr_end = m_symbol_map.upper_bound(filepath);
 	std::multimap<std::string, const ee::Symbol*>::const_iterator itr = itr_begin;
 	for ( ; itr != itr_end; ++itr) {
-		if (itr->second == symbol) {
+		if (itr->second == sym) {
 			return true;
 		}
 	}

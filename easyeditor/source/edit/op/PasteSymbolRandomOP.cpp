@@ -22,23 +22,23 @@ bool PasteSymbolRandomOP::OnMouseLeftDown(int x, int y)
 {
 	if (ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
-	Symbol* symbol = m_random_val.symbol;
-	if (!symbol) 
-		symbol = m_library->GetSymbol();
-	if (symbol) 
+	Symbol* sym = m_random_val.sym;
+	if (!sym) 
+		sym = m_library->GetSymbol();
+	if (sym) 
 	{
 		m_pos = m_stage->TransPosScrToProj(x, y);
-		Sprite* sprite = SpriteFactory::Instance()->Create(symbol);
-		sprite->Translate(m_pos);
+		Sprite* spr = SpriteFactory::Instance()->Create(sym);
+		spr->Translate(m_pos);
 		if (m_random_val.scale != 1.0f) {
-			sprite->SetScale(sm::vec2(m_random_val.scale, m_random_val.scale));
+			spr->SetScale(sm::vec2(m_random_val.scale, m_random_val.scale));
 		}
 		if (m_random_val.angle != 0.0f) {
-			sprite->SetPosition(m_pos);
-			sprite->SetAngle(m_random_val.angle);
+			spr->SetPosition(m_pos);
+			spr->SetAngle(m_random_val.angle);
 		}
-		InsertSpriteSJ::Instance()->Insert(sprite);
-		sprite->RemoveReference();
+		InsertSpriteSJ::Instance()->Insert(spr);
+		spr->RemoveReference();
 	}
 
 	ChangeRandomValue();
@@ -59,12 +59,12 @@ bool PasteSymbolRandomOP::OnDraw() const
 {
 	if (ZoomViewOP::OnDraw()) return true;
 
-	Symbol* symbol = m_random_val.symbol;
-	if (!symbol) {
-		symbol = m_library->GetSymbol();
+	Symbol* sym = m_random_val.sym;
+	if (!sym) {
+		sym = m_library->GetSymbol();
 	}
-	if (symbol && m_pos.IsValid()) {
-		SpriteRenderer::Draw(symbol, s2::RenderParams(), m_pos, m_random_val.angle, m_random_val.scale);
+	if (sym && m_pos.IsValid()) {
+		SpriteRenderer::Draw(sym, s2::RenderParams(), m_pos, m_random_val.angle, m_random_val.scale);
 	}
 
 	return false;

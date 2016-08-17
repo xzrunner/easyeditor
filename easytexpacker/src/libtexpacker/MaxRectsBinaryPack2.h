@@ -28,16 +28,16 @@ private:
 
 	ee::TPNode* NewRoot(int w, int h);
 
-	bool Insert(ee::TPNode* root, const Sprite* sprite, int tex_id = 0) const;
+	bool Insert(ee::TPNode* root, const Sprite* spr, int tex_id = 0) const;
 
-	void PackAuto(const std::vector<Sprite>& sprites, int area);
-	void PackSquare(const std::vector<Sprite>& sprites, int area);
+	void PackAuto(const std::vector<Sprite>& sprs, int area);
+	void PackSquare(const std::vector<Sprite>& sprs, int area);
 
-	void PackSquareMulti(std::vector<Sprite>& sprites, int static_size);
+	void PackSquareMulti(std::vector<Sprite>& sprs, int static_size);
 
-	void PackSquareMultiAuto(std::vector<Sprite>& sprites, int area, int max_size, int min_size);
-	bool MergeSquareMultiAuto(std::vector<Sprite>& sprites, int max_size);
-	void SortRoots(const std::vector<Sprite>& sprites);
+	void PackSquareMultiAuto(std::vector<Sprite>& sprs, int area, int max_size, int min_size);
+	bool MergeSquareMultiAuto(std::vector<Sprite>& sprs, int max_size);
+	void SortRoots(const std::vector<Sprite>& sprs);
 
 private:
 	class NodeCmp

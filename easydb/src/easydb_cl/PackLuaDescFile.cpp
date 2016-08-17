@@ -12,7 +12,7 @@ namespace edb
 
 PackLuaDescFile::~PackLuaDescFile()
 {
-	for_each(m_symbols.begin(), m_symbols.end(), cu::RemoveRefFonctor<ee::Symbol>());
+	for_each(m_syms.begin(), m_syms.end(), cu::RemoveRefFonctor<ee::Symbol>());
 }
 
 std::string PackLuaDescFile::Command() const
@@ -47,7 +47,7 @@ void PackLuaDescFile::Trigger(const std::string& json_dir, const std::string& tp
 	LoadJsonFiles(json_dir);
 	LoadTexPacker(tp_json, tp_dir);
 	
-	ecoco::epd::CocoPacker packer(m_symbols, m_tex_mgr);
+	ecoco::epd::CocoPacker packer(m_syms, m_tex_mgr);
 	packer.Parser();
 	packer.Output(out_file.c_str());
 }
@@ -63,8 +63,8 @@ void PackLuaDescFile::LoadJsonFiles(const std::string& dir)
 		if (ee::FileType::IsType(filepath, ee::FileType::e_complex) || 
 			ee::FileType::IsType(filepath, ee::FileType::e_anim))
 		{
-			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-			m_symbols.push_back(symbol);
+			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+			m_syms.push_back(sym);
 		}
 	}
 }

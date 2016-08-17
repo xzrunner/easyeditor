@@ -9,15 +9,15 @@ namespace ep3dinv
 {
 
 Particle::Particle()
-	: m_symbol(NULL)
+	: m_sym(NULL)
 	, m_during(0)
 {
 }
 
 Particle::~Particle()
 {
-	if (m_symbol) {
-		m_symbol->RemoveReference();
+	if (m_sym) {
+		m_sym->RemoveReference();
 	}
 }
 
@@ -59,7 +59,7 @@ void Particle::Draw(const sm::mat4& mt) const
 	float scale = m_during / m_life * (m_start_scale - m_end_scale) + m_end_scale;
 
 	sm::vec2 pos = eparticle3d::TransCoords3To2(m_position);
-	ee::SpriteRenderer::Draw(m_symbol, _mt, pos, m_angle, 
+	ee::SpriteRenderer::Draw(m_sym, _mt, pos, m_angle, 
 		scale, scale/*, 0, 0, mul*/);
 }
 
@@ -81,7 +81,7 @@ void Particle::LoadFromFile(const Json::Value& val)
 	m_rotate = val["rotate"].asDouble();
 	m_angle_old = m_angle = val["angle"].asDouble();
 
-	m_symbol = ee::SymbolMgr::Instance()->FetchSymbol(val["symbol"].asString());
+	m_sym = ee::SymbolMgr::Instance()->FetchSymbol(val["symbol"].asString());
 	m_start_scale = val["start_scale"].asDouble();
 	m_end_scale = val["end_scale"].asDouble();
 }

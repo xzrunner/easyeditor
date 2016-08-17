@@ -12,7 +12,7 @@ namespace etexpacker
 class RectBinArrange : public BaseStrategy
 {
 public:
-	virtual void Arrange(const std::vector<ee::ImageSprite*>& sprites);
+	virtual void Arrange(const std::vector<ee::ImageSprite*>& sprs);
 	virtual int GetTextureAccount() const {
 		return m_tex_account;
 	}
@@ -21,7 +21,7 @@ private:
 	void BeforePacking(const std::vector<ee::ImageSprite*>& sorted, 
 		std::vector<RectSize>& input) const;
 	void AfterPacking(float xoffset,
-		std::vector<ee::ImageSprite*>& sprites, 
+		std::vector<ee::ImageSprite*>& sprs, 
 		const std::vector<Rect>& output, 
 		std::vector<ee::ImageSprite*>& remains) const;
 

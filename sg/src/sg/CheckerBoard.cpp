@@ -29,12 +29,12 @@ void CheckerBoard::Traverse(ee::Visitor<ee::Sprite>& visitor) const
 	}
 }
 
-void CheckerBoard::AddSprite(ee::Sprite* sprite)
+void CheckerBoard::AddSprite(ee::Sprite* spr)
 {
 	int row, col;
-	m_stage->TransCoordsToGridPos(sprite->GetPosition(), row, col);
+	m_stage->TransCoordsToGridPos(spr->GetPosition(), row, col);
 
-	SymbolExt* info = static_cast<SymbolExt*>(sprite->GetSymbol()->GetUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(spr->GetSymbol()->GetUserData());
 	if (!info) {
 		return;
 	}
@@ -42,27 +42,27 @@ void CheckerBoard::AddSprite(ee::Sprite* sprite)
 	int center = (info->size >> 1);
 	for (int i = 0; i < info->size; ++i) {
 		for (int j = 0; j < info->size; ++j) {
-			m_grid[row + i - center][col + j - center] = sprite;
+			m_grid[row + i - center][col + j - center] = spr;
 		}
 	}
 
-	m_map_sprite2pos.insert(std::make_pair(sprite, sprite->GetPosition()));
+	m_map_sprite2pos.insert(std::make_pair(spr, spr->GetPosition()));
 }
 
-void CheckerBoard::RemoveSprite(ee::Sprite* sprite)
+void CheckerBoard::RemoveSprite(ee::Sprite* spr)
 {
-	if (!sprite->GetSymbol()->GetUserData()) {
+	if (!spr->GetSymbol()->GetUserData()) {
 		return;
 	}
 
 	std::map<ee::Sprite*, sm::vec2>::iterator itr 
-		= m_map_sprite2pos.find(sprite);
+		= m_map_sprite2pos.find(spr);
 	assert(itr != m_map_sprite2pos.end());
 
 	int row, col;
 	m_stage->TransCoordsToGridPos(itr->second, row, col);
 
-	SymbolExt* info = static_cast<SymbolExt*>(sprite->GetSymbol()->GetUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(spr->GetSymbol()->GetUserData());
 	if (!info) {
 		return;
 	}
@@ -83,12 +83,12 @@ void CheckerBoard::Clear()
 	memset(&m_grid[0][0], 0, sizeof(m_grid));
 }
 
-bool CheckerBoard::IsValid(ee::Sprite* sprite) const
+bool CheckerBoard::IsValid(ee::Sprite* spr) const
 {
 	int row, col;
-	m_stage->TransCoordsToGridPos(sprite->GetPosition(), row, col);
+	m_stage->TransCoordsToGridPos(spr->GetPosition(), row, col);
 
-	SymbolExt* info = static_cast<SymbolExt*>(sprite->GetSymbol()->GetUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(spr->GetSymbol()->GetUserData());
 	if (!info) {
 		return false;
 	}
@@ -98,7 +98,7 @@ bool CheckerBoard::IsValid(ee::Sprite* sprite) const
 		for (int j = 0; j < info->size; ++j) {
 			int y = row + i - center;
 			int x = col + j - center;
-			if (m_grid[y][x] && m_grid[y][x] != sprite) {
+			if (m_grid[y][x] && m_grid[y][x] != spr) {
 				return false;
 			}
 		}
@@ -107,12 +107,12 @@ bool CheckerBoard::IsValid(ee::Sprite* sprite) const
 	return true;
 }
 
-bool CheckerBoard::IsValid(const ee::Symbol& symbol, const sm::vec2& pos) const
+bool CheckerBoard::IsValid(const ee::Symbol& sym, const sm::vec2& pos) const
 {
 	int row, col;
 	m_stage->TransCoordsToGridPos(pos, row, col);
 
-	SymbolExt* info = static_cast<SymbolExt*>(symbol.GetUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(sym.GetUserData());
 	if (!info) {
 		return false;
 	}
@@ -143,12 +143,12 @@ void CheckerBoard::DebugDraw() const
 	}
 }
 
-bool CheckerBoard::SetCachedPos(ee::Sprite* sprite) const
+bool CheckerBoard::SetCachedPos(ee::Sprite* spr) const
 {
 	std::map<ee::Sprite*, sm::vec2>::const_iterator itr 
-		= m_map_removed.find(sprite);
+		= m_map_removed.find(spr);
 	if (itr != m_map_removed.end()) {
-		sprite->SetPosition(itr->second);
+		spr->SetPosition(itr->second);
 		return true;
 	} else {
 		return false;
@@ -167,8 +167,8 @@ void CheckerBoard::ResetWall()
 				continue;
 			}
 
-			ee::Sprite* sprite = m_grid[i][j];
-			const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(sprite->GetSymbol());
+			ee::Sprite* spr = m_grid[i][j];
+			const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());
 			std::string filepath = sym->GetFilepath();
 			int s = filepath.find("lv") + 2;
 			int e = filepath.find('_', s-1);

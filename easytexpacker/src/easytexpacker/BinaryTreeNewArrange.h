@@ -16,7 +16,7 @@ public:
 	BinaryTreeNewArrange();
 	virtual ~BinaryTreeNewArrange();
 
-	virtual void Arrange(const std::vector<ee::ImageSprite*>& sprites);
+	virtual void Arrange(const std::vector<ee::ImageSprite*>& sprs);
 	virtual int GetTextureAccount() const {
 		return m_tex_account;
 	}

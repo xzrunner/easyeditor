@@ -60,9 +60,9 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 		std::cout << i << " / " << n << " : " << filepath << "\n";
 		if (ee::FileType::IsType(filepath, ee::FileType::e_image))
 		{
-			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 
-			ee::Image* image = static_cast<ee::ImageSymbol*>(symbol)->GetImage();
+			ee::Image* image = static_cast<ee::ImageSymbol*>(sym)->GetImage();
 			eimage::RegularRectCut cut(*image);
 			cut.AutoCut();
 
@@ -84,7 +84,7 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 				delete[] pixels;
 			}
 
-			symbol->RemoveReference();
+			sym->RemoveReference();
 		}
 	}
 }

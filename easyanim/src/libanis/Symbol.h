@@ -21,7 +21,7 @@ public:
 	 *    s2::Symbol
 	 */
 	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
-	virtual sm::rect GetBounding(const s2::Sprite* sprite = NULL) const;
+	virtual sm::rect GetBounding(const s2::Sprite* spr = NULL) const;
 
 	/**
 	 *  @interface
@@ -53,7 +53,7 @@ private:
 private:
 	sm::rect m_rect;
 
-	std::vector<eanim::Symbol*> m_symbols;	
+	std::vector<eanim::Symbol*> m_syms;	
 
 }; // Symbol
 

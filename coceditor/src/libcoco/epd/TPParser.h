@@ -35,7 +35,7 @@ public:
 	};
 
 public:
-	TPParser(const std::vector<const ee::Symbol*>& symbols,
+	TPParser(const std::vector<const ee::Symbol*>& syms,
 		const TextureMgr& tex_mgr);
 
 	void Parser();
@@ -46,7 +46,7 @@ public:
 		return m_symbol_sorter.GetSymbolSet();
 	}
 
-	TPParser::Picture* FindPicture(const ee::Symbol* symbol) const;
+	TPParser::Picture* FindPicture(const ee::Symbol* sym) const;
 
 	void DebugInfo() const;
 

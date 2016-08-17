@@ -23,7 +23,7 @@ void CombineAOP::Redo()
 }
 
 // todo
-Json::Value CombineAOP::Store(const std::vector<Sprite*>& sprites) const
+Json::Value CombineAOP::Store(const std::vector<Sprite*>& sprs) const
 {
 	Json::Value ret;
 	return ret;

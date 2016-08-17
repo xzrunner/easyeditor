@@ -26,7 +26,7 @@ p2d_emitter_cfg* PSConfigMgr::GetDefaultConfig()
 		cfg = itr->second;
 	}
 	memset(cfg, 0, sz);
-	cfg->symbols = (p2d_symbol*)(cfg+1);
+	cfg->syms = (p2d_symbol*)(cfg+1);
 	return cfg;
 }
 

@@ -42,10 +42,10 @@ StagePanel::StagePanel(wxWindow* parent,
 	RegistSubject(ee::RemoveSpriteSJ::Instance());
 }
 
-void StagePanel::InsertSpriteNoArrange(ee::Sprite* sprite)
+void StagePanel::InsertSpriteNoArrange(ee::Sprite* spr)
 {
-//	fixCoords(sprite);
-	ee::InsertSpriteSJ::Instance()->Insert(sprite);
+//	fixCoords(spr);
+	ee::InsertSpriteSJ::Instance()->Insert(spr);
 }
 
 void StagePanel::ArrangeAllSprites(bool bClearSelection)
@@ -58,24 +58,24 @@ void StagePanel::ArrangeAllSprites(bool bClearSelection)
 		m_sprite_selection->Clear();
 	}
 
-	std::vector<ee::ImageSprite*> sprites;
-	TraverseSprites(ee::FetchAllVisitor<ee::ImageSprite>(sprites), ee::DT_EDITABLE);
-	m_strategy->Arrange(sprites);
+	std::vector<ee::ImageSprite*> sprs;
+	TraverseSprites(ee::FetchAllVisitor<ee::ImageSprite>(sprs), ee::DT_EDITABLE);
+	m_strategy->Arrange(sprs);
 }
 
 void StagePanel::LoadFromLibrary()
 {
-	ee::Symbol* symbol = NULL;
+	ee::Symbol* sym = NULL;
 	int index = 0;
 	while (true)
 	{
-		symbol = Context::Instance()->library->GetSymbol(index++);
-		if (!symbol) 
+		sym = Context::Instance()->library->GetSymbol(index++);
+		if (!sym) 
 			break;
 		else 
 		{
-			ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-			ee::InsertSpriteSJ::Instance()->Insert(sprite);
+			ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+			ee::InsertSpriteSJ::Instance()->Insert(spr);
 		}
 	}
 
@@ -87,22 +87,22 @@ int StagePanel::GetTextureAccount() const
 	return m_strategy->GetTextureAccount();
 }
 
-void StagePanel::FixCoords(ee::Sprite* sprite)
+void StagePanel::FixCoords(ee::Sprite* spr)
 {
-	const sm::vec2& pos = sprite->GetPosition();
+	const sm::vec2& pos = spr->GetPosition();
 
 	const float s = Context::Instance()->scale;
 
 	float width, height;
-	if (sprite->GetAngle() == 0)
+	if (spr->GetAngle() == 0)
 	{
-		width = sprite->GetSymbol()->GetBounding().Width() * s;
-		height = sprite->GetSymbol()->GetBounding().Height() * s;
+		width = spr->GetSymbol()->GetBounding().Width() * s;
+		height = spr->GetSymbol()->GetBounding().Height() * s;
 	}
 	else
 	{
-		width = sprite->GetSymbol()->GetBounding().Height() * s;
-		height = sprite->GetSymbol()->GetBounding().Width() * s;
+		width = spr->GetSymbol()->GetBounding().Height() * s;
+		height = spr->GetSymbol()->GetBounding().Width() * s;
 	}
 
 	sm::vec2 leftTop;
@@ -118,7 +118,7 @@ void StagePanel::FixCoords(ee::Sprite* sprite)
 		fixedCenter.x = int(fixedCenter.x) + width * 0.5f;
 		fixedCenter.y = int(fixedCenter.y) + height * 0.5f;
 
-		sprite->SetPosition(fixedCenter);
+		spr->SetPosition(fixedCenter);
 	}
 }
 

@@ -75,7 +75,7 @@ Item(p3d_particle* p)
 	rotate = p->cfg.angular_spd;
 	angle = p->angle;
 
-	symbol = static_cast<ee::Symbol*>(p->cfg.sym->ud)->GetFilepath();
+	sym = static_cast<ee::Symbol*>(p->cfg.sym->ud)->GetFilepath();
 
 	scale_start = p->cfg.sym->scale_start;
 	scale_end = p->cfg.sym->scale_end;
@@ -105,7 +105,7 @@ StoreToFile(Json::Value& val) const
 	val["rotate"] = rotate;
 	val["angle"] = angle;
 
-	val["symbol"] = symbol;
+	val["symbol"] = sym;
 	val["start_scale"] = scale_start;
 	val["end_scale"] = scale_end;
 

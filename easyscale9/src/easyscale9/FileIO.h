@@ -21,8 +21,8 @@ public:
 
 private:
 	static ee::Sprite* Load(const Json::Value& value, const std::string& dir);
-	static Json::Value Store(ee::Sprite* sprite, const std::string& dir);
-	static Json::Value StoreNew(ee::Sprite* sprite, const std::string& dir);
+	static Json::Value Store(ee::Sprite* spr, const std::string& dir);
+	static Json::Value StoreNew(ee::Sprite* spr, const std::string& dir);
 
 }; // FileIO
 

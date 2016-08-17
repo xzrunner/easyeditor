@@ -132,12 +132,12 @@ void Symbol::ReloadTexture() const
 			//			ee::GTxt::Instance()->Reload(text);
 		}
 	}
-	std::set<const ee::Symbol*> symbols;
+	std::set<const ee::Symbol*> syms;
 	for (int i = 0, n = m_children.size(); i < n; ++i) {
-		symbols.insert(dynamic_cast<const ee::Symbol*>(m_children[i]->GetSymbol()));
+		syms.insert(dynamic_cast<const ee::Symbol*>(m_children[i]->GetSymbol()));
 	}
-	std::set<const ee::Symbol*>::iterator itr = symbols.begin();
-	for ( ; itr != symbols.end(); ++itr) {
+	std::set<const ee::Symbol*>::iterator itr = syms.begin();
+	for ( ; itr != syms.end(); ++itr) {
 		(*itr)->ReloadTexture();
 	}
 }

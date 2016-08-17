@@ -15,7 +15,7 @@ public:
 	static void StoreOceanMesh(const OceanMesh* ocean, const std::string& dir, Json::Value& value);
 	static OceanMesh* LoadOceanMesh(const std::string& dir, const Json::Value& value);
 
-	static void StoreSymbol(const char* filepath, const Symbol* symbol);
+	static void StoreSymbol(const char* filepath, const Symbol* sym);
 
 }; // FileIO
 

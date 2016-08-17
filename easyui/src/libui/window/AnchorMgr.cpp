@@ -35,16 +35,16 @@ AnchorMgr::~AnchorMgr()
 }
 
 void AnchorMgr::LoadFromFile(const Json::Value& value,
-							 const std::vector<ee::Sprite*>& sprites)
+							 const std::vector<ee::Sprite*>& sprs)
 {
 	if (value["anchor"].size() == 6) {
 		for (int i = 0; i < 6; ++i) {
 			int dst = i < 3 ? i : i + 3;
-			LoadAnchorData(sprites, value["anchor"][i], m_anchors[dst]);
+			LoadAnchorData(sprs, value["anchor"][i], m_anchors[dst]);
 		}
 	} else {
 		for (int i = 0; i < ANCHOR_COUNT; ++i) {
-			LoadAnchorData(sprites, value["anchor"][i], m_anchors[i]);
+			LoadAnchorData(sprs, value["anchor"][i], m_anchors[i]);
 		}
 	}
 }
@@ -53,8 +53,8 @@ void AnchorMgr::StoreToFile(Json::Value& value, const std::string& dir) const
 {
 	for (int i = 0; i < ANCHOR_COUNT; ++i) {
 		Json::Value a_val;
-		for (int j = 0; j < m_anchors[i].sprites.size(); ++j) {
-			ee::Sprite* spr = m_anchors[i].sprites[j];
+		for (int j = 0; j < m_anchors[i].sprs.size(); ++j) {
+			ee::Sprite* spr = m_anchors[i].sprs[j];
 
 			std::string filepath = ee::FileHelper::GetRelativePath(dir,
 				spr->GetSymbol()->GetFilepath());
@@ -67,8 +67,8 @@ void AnchorMgr::StoreToFile(Json::Value& value, const std::string& dir) const
 		value["anchor"][i] = a_val;
 	}
 
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		ee::Sprite* spr = m_sprites[i];
+	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+		ee::Sprite* spr = m_sprs[i];
 		std::string filepath = ee::FileHelper::GetRelativePath(dir,
 			spr->GetSymbol()->GetFilepath());
 
@@ -104,8 +104,8 @@ void AnchorMgr::OnSprPosChanged(ee::Sprite* spr)
 
 void AnchorMgr::DrawSprites(const s2::RenderParams& params) const
 {
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		ee::SpriteRenderer::Draw(m_sprites[i], params);
+	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+		ee::SpriteRenderer::Draw(m_sprs[i], params);
 	}
 }
 
@@ -120,7 +120,7 @@ void AnchorMgr::DrawNodes(const s2::RenderParams& params) const
 
 void AnchorMgr::Traverse(ee::Visitor<ee::Sprite>& visitor)
 {
-	ee::ObjectVector<ee::Sprite>::Traverse(m_sprites, visitor, ee::DT_ALL);
+	ee::ObjectVector<ee::Sprite>::Traverse(m_sprs, visitor, ee::DT_ALL);
 }
 
 void AnchorMgr::Remove(ee::Sprite* spr)
@@ -128,24 +128,24 @@ void AnchorMgr::Remove(ee::Sprite* spr)
 	for (int i = 0; i < ANCHOR_COUNT; ++i) 
 	{
 		Anchor& anchor = m_anchors[i];
-		if (anchor.sprites.empty()) {
+		if (anchor.sprs.empty()) {
 			continue;
 		}
 
-		std::vector<ee::Sprite*>::iterator itr = anchor.sprites.begin();
-		for ( ; itr != anchor.sprites.end(); ++itr) {
+		std::vector<ee::Sprite*>::iterator itr = anchor.sprs.begin();
+		for ( ; itr != anchor.sprs.end(); ++itr) {
 			if (*itr == spr) {
 				spr->RemoveReference();
-				anchor.sprites.erase(itr);
+				anchor.sprs.erase(itr);
 				break;
 			}
 		}
 	}
 
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		if (spr == m_sprites[i]) {
+	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+		if (spr == m_sprs[i]) {
 			spr->RemoveReference();
-			m_sprites.erase(m_sprites.begin() + i);
+			m_sprs.erase(m_sprs.begin() + i);
 			break;
 		}
 	}
@@ -159,34 +159,34 @@ void AnchorMgr::Insert(ee::Sprite* spr)
 	spr->SetAngle(0);
 
 	spr->AddReference();
-	anchor->sprites.push_back(spr);
+	anchor->sprs.push_back(spr);
 
 	spr->AddReference();
-	m_sprites.push_back(spr);
+	m_sprs.push_back(spr);
 }
 
 void AnchorMgr::Clear()
 {
 	for (int i = 0; i < ANCHOR_COUNT; ++i) {
 		Anchor& anchor = m_anchors[i];
-		for_each(anchor.sprites.begin(), anchor.sprites.end(), 
+		for_each(anchor.sprs.begin(), anchor.sprs.end(), 
 			cu::RemoveRefFonctor<ee::Sprite>());
-		anchor.sprites.clear();
+		anchor.sprs.clear();
 	}
 
-	for_each(m_sprites.begin(), m_sprites.end(), 
+	for_each(m_sprs.begin(), m_sprs.end(), 
 		cu::RemoveRefFonctor<ee::Sprite>());
-	m_sprites.clear();
+	m_sprs.clear();
 }
 
 void AnchorMgr::ResetOrder(ee::Sprite* spr, bool up)
 {
-	ee::ObjectVector<ee::Sprite>::ResetOrder(m_sprites, spr, up);
+	ee::ObjectVector<ee::Sprite>::ResetOrder(m_sprs, spr, up);
 }
 
 void AnchorMgr::ResetOrderMost(ee::Sprite* spr, bool up)
 {
-	ee::ObjectVector<ee::Sprite>::ResetOrderMost(m_sprites, spr, up);
+	ee::ObjectVector<ee::Sprite>::ResetOrderMost(m_sprs, spr, up);
 }
 
 AnchorMgr::Anchor* AnchorMgr::GetNearestAnchor(const sm::vec2& pos)
@@ -215,12 +215,12 @@ void AnchorMgr::Move(ee::Sprite* spr)
 void AnchorMgr::ChangeAnchorPos(Anchor& anchor, const sm::vec2& pos)
 {
 	anchor.pos = pos;
-	for (int i = 0, n = anchor.sprites.size(); i < n; ++i) {
-		anchor.sprites[i]->SetPosition(pos);
+	for (int i = 0, n = anchor.sprs.size(); i < n; ++i) {
+		anchor.sprs[i]->SetPosition(pos);
 	}
 }
 
-void AnchorMgr::LoadAnchorData(const std::vector<ee::Sprite*>& sprites,
+void AnchorMgr::LoadAnchorData(const std::vector<ee::Sprite*>& sprs,
 							   const Json::Value& value, Anchor& anchor)
 {
 	int idx = 0;
@@ -228,14 +228,14 @@ void AnchorMgr::LoadAnchorData(const std::vector<ee::Sprite*>& sprites,
 	while (!val.isNull()) {
 		std::string name = val.asString();
 		ee::Sprite* spr = NULL;
-		for (int j = 0, m = sprites.size(); j < m; ++j) {
-			if (sprites[j]->GetName() == name) {
-				spr = sprites[j];
+		for (int j = 0, m = sprs.size(); j < m; ++j) {
+			if (sprs[j]->GetName() == name) {
+				spr = sprs[j];
 				break;
 			}
 		}
 		if (spr) {
-			anchor.sprites.push_back(spr);
+			anchor.sprs.push_back(spr);
 			spr->SetPosition(anchor.pos);
 			spr->SetAngle(0);
 		}

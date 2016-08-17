@@ -41,11 +41,11 @@ void SymbolRender::Init(StagePanel* stage)
 	m_stage = stage;
 }
 
-void SymbolRender::DrawGrass(const ee::Symbol& symbol, 
+void SymbolRender::DrawGrass(const ee::Symbol& sym, 
 							 const sm::vec2& pos, 
 							 bool is_flat) const
 {
-	SymbolExt* info = static_cast<SymbolExt*>(symbol.GetUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(sym.GetUserData());
 	if (info == NULL) {
 		return;
 	}
@@ -79,12 +79,12 @@ void SymbolRender::DrawGrass(const ee::Symbol& symbol,
 	}
 }
 
-void SymbolRender::DrawGrids(const ee::Symbol& symbol, 
+void SymbolRender::DrawGrids(const ee::Symbol& sym, 
 							 const sm::vec2& pos, 
 							 bool valid,
 							 bool is_flat) const
 {
-	if (!symbol.GetUserData()) {
+	if (!sym.GetUserData()) {
 		return;
 	}
 
@@ -93,7 +93,7 @@ void SymbolRender::DrawGrids(const ee::Symbol& symbol,
 
 	s2::Color color = valid ? s2::Color(0, 255, 0, 204) : s2::Color(255, 0, 0, 204);
 
-	SymbolExt* info = static_cast<SymbolExt*>(symbol.GetUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(sym.GetUserData());
 	int center = (info->size >> 1);
 	if (is_flat)
 	{
@@ -119,10 +119,10 @@ void SymbolRender::DrawGrids(const ee::Symbol& symbol,
 	}
 }
 
-void SymbolRender::DrawArrow(const ee::Symbol& symbol, 
+void SymbolRender::DrawArrow(const ee::Symbol& sym, 
 							 const sm::vec2& pos) const
 {
-	SymbolExt* info = static_cast<SymbolExt*>(symbol.GetUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(sym.GetUserData());
 	if (info == NULL) {
 		return;
 	}
@@ -156,9 +156,9 @@ void SymbolRender::DrawArrow(const ee::Symbol& symbol,
 	}
 }
 
-void SymbolRender::DrawRegion(const ee::Symbol& symbol, const sm::vec2& pos)
+void SymbolRender::DrawRegion(const ee::Symbol& sym, const sm::vec2& pos)
 {
-	SymbolExt* info = static_cast<SymbolExt*>(symbol.GetUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(sym.GetUserData());
 	if (info == NULL) {
 		return;
 	}

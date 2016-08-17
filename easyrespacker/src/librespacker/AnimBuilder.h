@@ -22,10 +22,10 @@ public:
 
 	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
 
-	const IPackNode* Create(const eanim::Symbol* symbol);
+	const IPackNode* Create(const eanim::Symbol* sym);
 
 private:
-	void Load(const eanim::Symbol* symbol, PackAnimation* anim);
+	void Load(const eanim::Symbol* sym, PackAnimation* anim);
 
 private:
 	ExportNameSet& m_export_set;

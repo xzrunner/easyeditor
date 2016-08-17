@@ -51,7 +51,7 @@ public:
 
 	void ReloadTexture() const;
 
-	p2d_symbol* AddSymbol(ee::Symbol* symbol);
+	p2d_symbol* AddSymbol(ee::Symbol* sym);
 	void DelSymbol(int idx);
 	void DelAllSymbol();
 

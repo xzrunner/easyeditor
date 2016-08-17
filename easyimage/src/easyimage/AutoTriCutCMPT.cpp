@@ -87,9 +87,9 @@ void AutoTriCutCMPT::OutputOutline(wxCommandEvent& event)
 {
 	Trigger();
 
-	const ee::Sprite* sprite = m_stage->GetImage();
+	const ee::Sprite* spr = m_stage->GetImage();
 	const ee::ImageSprite* img_sprite 
-		= dynamic_cast<const ee::ImageSprite*>(sprite);
+		= dynamic_cast<const ee::ImageSprite*>(spr);
 	assert(img_sprite);
 	const ee::Image* img = img_sprite->GetSymbol()->GetImage();
 
@@ -118,9 +118,9 @@ void AutoTriCutCMPT::CreateOutline(wxCommandEvent& event)
 	// step by step
 	static int max_step = 5;
 
-	const ee::Sprite* sprite = m_stage->GetImage();
+	const ee::Sprite* spr = m_stage->GetImage();
 	const ee::ImageSprite* img_sprite 
-		= dynamic_cast<const ee::ImageSprite*>(sprite);
+		= dynamic_cast<const ee::ImageSprite*>(spr);
 	assert(img_sprite);
 	const ee::Image* img = img_sprite->GetSymbol()->GetImage();
 
@@ -154,9 +154,9 @@ void AutoTriCutCMPT::Trigger()
 #ifdef TRIGGER_STEP
 	static int max_step = 5;
 #endif
-	const ee::Sprite* sprite = m_stage->GetImage();
+	const ee::Sprite* spr = m_stage->GetImage();
 	const ee::ImageSprite* img_sprite 
-		= dynamic_cast<const ee::ImageSprite*>(sprite);
+		= dynamic_cast<const ee::ImageSprite*>(spr);
 	assert(img_sprite);
 	const ee::Image* img = img_sprite->GetSymbol()->GetImage();
 
@@ -180,9 +180,9 @@ void AutoTriCutCMPT::Trigger()
 
 void AutoTriCutCMPT::OnDebug(wxCommandEvent& event)
 {
-	const ee::Sprite* sprite = m_stage->GetImage();
+	const ee::Sprite* spr = m_stage->GetImage();
 	const ee::ImageSprite* img_sprite 
-		= dynamic_cast<const ee::ImageSprite*>(sprite);
+		= dynamic_cast<const ee::ImageSprite*>(spr);
 	assert(img_sprite);
 	const ee::Image* img = img_sprite->GetSymbol()->GetImage();
 

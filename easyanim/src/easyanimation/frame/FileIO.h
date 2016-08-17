@@ -36,7 +36,7 @@ private:
 	static ee::Sprite* LoadActor(const Json::Value& actorValue,
 		const std::string& dir);
 	static void LoadSkeleton(const Json::Value& skeletonValue, 
-		const std::vector<ee::Sprite*>& sprites, SkeletonData& skeleton);
+		const std::vector<ee::Sprite*>& sprs, SkeletonData& skeleton);
 
 	static Layer* LoadLayer(rapidxml::xml_node<>* layerNode, 
 		const std::map<std::string, std::string>& mapNamePath);
@@ -47,7 +47,7 @@ private:
 
 	static Json::Value StoreLayer(Layer* layer, const std::string& dir, bool single);
 	static Json::Value StoreFrame(KeyFrame* frame, const std::string& dir, bool single);
-	static Json::Value StoreActor(const ee::Sprite* sprite, const std::string& dir, bool single);
+	static Json::Value StoreActor(const ee::Sprite* spr, const std::string& dir, bool single);
 	static Json::Value StoreSkeleton(const SkeletonData& skeleton);
 
 private:

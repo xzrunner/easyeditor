@@ -36,9 +36,9 @@ void Utility::GroupSpritesFromTag(const std::vector<s2::Sprite*>& src,
 					dst.find(tags[i]);
 				if (itr == dst.end())
 				{
-					std::vector<ee::Sprite*> sprites;
-					sprites.push_back(spr);
-					dst.insert(std::make_pair(tags[i], sprites));
+					std::vector<ee::Sprite*> sprs;
+					sprs.push_back(spr);
+					dst.insert(std::make_pair(tags[i], sprs));
 				}
 				else
 				{

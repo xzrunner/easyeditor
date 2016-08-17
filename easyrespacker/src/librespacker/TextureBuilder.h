@@ -21,12 +21,12 @@ public:
 
 	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
 
-	bool CanHandle(const etexture::Symbol* symbol) const;
+	bool CanHandle(const etexture::Symbol* sym) const;
 
-	const IPackNode* Create(const etexture::Symbol* symbol);
+	const IPackNode* Create(const etexture::Symbol* sym);
 	
 private:
-	void Load(const etexture::Symbol* symbol, PackPicture* pic);
+	void Load(const etexture::Symbol* sym, PackPicture* pic);
 
 private:
 	std::map<const etexture::Symbol*, const PackPicture*> m_map_data;

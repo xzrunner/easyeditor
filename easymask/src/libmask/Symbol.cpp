@@ -52,7 +52,7 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 	}
 }
 
-sm::rect Symbol::GetBounding(const s2::Sprite* sprite) const
+sm::rect Symbol::GetBounding(const s2::Sprite* spr) const
 {
 	if (m_mask) {
 		return m_mask->GetBounding();

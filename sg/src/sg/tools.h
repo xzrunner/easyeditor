@@ -7,9 +7,9 @@
 namespace sg
 {
 
-static bool IsSymbolWall(const ee::Symbol& symbol)
+static bool IsSymbolWall(const ee::Symbol& sym)
 {
-	SymbolExt* info = static_cast<SymbolExt*>(symbol.GetUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(sym.GetUserData());
 	if (info == NULL) {
 		return false;
 	}
@@ -17,9 +17,9 @@ static bool IsSymbolWall(const ee::Symbol& symbol)
 	return info->wall_type != -1;
 }
 
-static bool IsSymbolWall(const ee::Sprite& sprite)
+static bool IsSymbolWall(const ee::Sprite& spr)
 {
-	return IsSymbolWall(sprite.GetSymbol());
+	return IsSymbolWall(spr.GetSymbol());
 }
 
 }

@@ -101,12 +101,12 @@ void MotionTrail::Clear()
 	t2d_emitter_clear(m_spr);
 }
 
-t2d_symbol* MotionTrail::AddSymbol(ee::Symbol* symbol)
+t2d_symbol* MotionTrail::AddSymbol(ee::Symbol* sym)
 {
-	assert(m_spr->cfg->symbol_count < MAX_COMPONENTS);
+	assert(m_spr->cfg->sym_count < MAX_COMPONENTS);
 
 	t2d_emitter_cfg* cfg = const_cast<t2d_emitter_cfg*>(m_spr->cfg);
-	t2d_symbol& comp = m_spr->cfg->symbols[cfg->symbol_count++];
+	t2d_symbol& comp = m_spr->cfg->syms[cfg->sym_count++];
 	memset(&comp, 0, SIZEOF_T2D_SYMBOL);
 
 	comp.col_begin.r = comp.col_begin.g = comp.col_begin.b = comp.col_begin.a = 255;
@@ -115,7 +115,7 @@ t2d_symbol* MotionTrail::AddSymbol(ee::Symbol* symbol)
 		memset(&comp.mode.A.add_col_begin, 0, sizeof(comp.mode.A.add_col_begin));
 		memset(&comp.mode.A.add_col_end, 0, sizeof(comp.mode.A.add_col_end));
 		comp.mode.A.scale_begin = comp.mode.A.scale_end = 1;
-		comp.mode.A.ud = symbol;
+		comp.mode.A.ud = sym;
 	} else {
 		comp.mode.B.size = 1;
 		comp.mode.B.acuity = 0;
@@ -126,34 +126,34 @@ t2d_symbol* MotionTrail::AddSymbol(ee::Symbol* symbol)
 
 void MotionTrail::DelSymbol(int idx)
 {
-	if (idx < 0 || idx >= m_spr->cfg->symbol_count) {
+	if (idx < 0 || idx >= m_spr->cfg->sym_count) {
 		return;
 	}
 
 	t2d_emitter_cfg* cfg = const_cast<t2d_emitter_cfg*>(m_spr->cfg);
-	if (cfg->symbol_count == 1) {
-		cfg->symbol_count = 0;
+	if (cfg->sym_count == 1) {
+		cfg->sym_count = 0;
 	} else {
-		for (int i = idx; i < cfg->symbol_count - 1; ++i) {
-			const t2d_symbol* src = &cfg->symbols[i+1];
-			t2d_symbol* dst = &cfg->symbols[i];
+		for (int i = idx; i < cfg->sym_count - 1; ++i) {
+			const t2d_symbol* src = &cfg->syms[i+1];
+			t2d_symbol* dst = &cfg->syms[i];
 			memcpy(dst, src, sizeof(t2d_symbol));
 		}
-		--cfg->symbol_count;
+		--cfg->sym_count;
 	}
 }
 
 void MotionTrail::DelAllSymbol()
 {
-	const_cast<t2d_emitter_cfg*>(m_spr->cfg)->symbol_count = 0;
+	const_cast<t2d_emitter_cfg*>(m_spr->cfg)->sym_count = 0;
 }
 
 t2d_symbol* MotionTrail::GetSymbol(int idx)
 {
-	if (idx < 0 || idx >= m_spr->cfg->symbol_count) {
+	if (idx < 0 || idx >= m_spr->cfg->sym_count) {
 		return NULL;
 	} else {
-		return &m_spr->cfg->symbols[idx];
+		return &m_spr->cfg->syms[idx];
 	}
 }
 

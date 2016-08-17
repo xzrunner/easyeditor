@@ -83,7 +83,7 @@ void Love2dCode::ResolveLoadImages()
 	for (size_t i = 0, n = bodies.size(); i < n; ++i)
 	{
 		Body* body = bodies[i];
-		std::string path = body->m_sprite->GetSymbol()->GetFilepath();
+		std::string path = body->m_spr->GetSymbol()->GetFilepath();
 		std::string name = ee::FileHelper::GetFilename(path);
 		mapNamePath.insert(std::make_pair(name, path));
 	}
@@ -137,14 +137,14 @@ void Love2dCode::ResolveLoadBodies()
 
 		gen.line();
 
-		std::string name = ee::FileHelper::GetFilename(body->m_sprite->GetSymbol()->GetFilepath());
+		std::string name = ee::FileHelper::GetFilename(body->m_spr->GetSymbol()->GetFilepath());
 
 		// local actor = {}
 		lua::assign(gen, "local", name, "{}");
 
 		// actor.body = love.physics.newBody(world, x, y, "dynamic")
-		std::string x = ee::StringHelper::ToString(body->m_sprite->GetPosition().x);
-		std::string y = ee::StringHelper::ToString(-body->m_sprite->GetPosition().y);
+		std::string x = ee::StringHelper::ToString(body->m_spr->GetPosition().x);
+		std::string y = ee::StringHelper::ToString(-body->m_spr->GetPosition().y);
 		std::string type;
 		switch (body->m_type)
 		{
@@ -161,10 +161,10 @@ void Love2dCode::ResolveLoadBodies()
 		std::string newBody = lua::call("", "love.physics.newBody", 4, "world", x, y, type);
 		lua::assign(gen, "", name+".body", newBody);
 
-		if (body->m_sprite->GetAngle() != 0)
+		if (body->m_spr->GetAngle() != 0)
 		{
 			// actor.body:setAngle(angle)
-			std::string angle = ee::StringHelper::ToString(body->m_sprite->GetAngle());
+			std::string angle = ee::StringHelper::ToString(body->m_spr->GetAngle());
 			lua::call(gen, name+".body", "setAngle", 1, angle);
 		}
 
@@ -289,7 +289,7 @@ void Love2dCode::ResolveLoadFixtures(Body* body)
 		// local shape = newShape
 		lua::assign(gen, "", "shape", newShape);
 		// local fixture = love.physics.newFixture(body, shape)
-		std::string sBody = ee::FileHelper::GetFilename(body->m_sprite->GetSymbol()->GetFilepath())+".body";
+		std::string sBody = ee::FileHelper::GetFilename(body->m_spr->GetSymbol()->GetFilepath())+".body";
 		lua::assign(gen, "", "fixture", lua::call("", "love.physics.newFixture", 2, sBody, "shape"));
 
 		if (fData->m_density != 1)

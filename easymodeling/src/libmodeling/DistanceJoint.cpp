@@ -36,9 +36,9 @@ void DistanceJoint::Draw(DrawType type) const
 	if (type == e_selected || type == e_mouseOn)
 	{
 		s2::RVG::SetColor(s2::Color(102, 204, 102));
-		s2::RVG::DashLine(anchorA, m_body_a->m_sprite->GetPosition());
+		s2::RVG::DashLine(anchorA, m_body_a->m_spr->GetPosition());
 		s2::RVG::SetColor(s2::Color(102, 102, 204));
-		s2::RVG::DashLine(anchorB, m_body_b->m_sprite->GetPosition());
+		s2::RVG::DashLine(anchorB, m_body_b->m_spr->GetPosition());
 
 		DrawBodyFlag();
 	}
@@ -51,22 +51,22 @@ void DistanceJoint::Draw(DrawType type) const
 
 sm::vec2 DistanceJoint::GetWorldAnchorA() const
 {
-	return TransLocalToWorld(m_local_anchor_a, m_body_a->m_sprite);
+	return TransLocalToWorld(m_local_anchor_a, m_body_a->m_spr);
 }
 
 sm::vec2 DistanceJoint::GetWorldAnchorB() const
 {
-	return TransLocalToWorld(m_local_anchor_b, m_body_b->m_sprite);
+	return TransLocalToWorld(m_local_anchor_b, m_body_b->m_spr);
 }
 
 void DistanceJoint::SetLocalAnchorA(const sm::vec2& world)
 {
-	m_local_anchor_a = TransWorldToLocal(world, m_body_a->m_sprite);
+	m_local_anchor_a = TransWorldToLocal(world, m_body_a->m_spr);
 }
 
 void DistanceJoint::SetLocalAnchorB(const sm::vec2& world)
 {
-	m_local_anchor_b = TransWorldToLocal(world, m_body_b->m_sprite);
+	m_local_anchor_b = TransWorldToLocal(world, m_body_b->m_spr);
 }
 
 void DistanceJoint::DrawAnchor(const sm::vec2& pos, DrawType type) const

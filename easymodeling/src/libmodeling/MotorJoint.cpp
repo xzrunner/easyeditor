@@ -15,32 +15,32 @@ MotorJoint::MotorJoint(Body* b0, Body* b1)
 	, m_max_torque(1.0f)
 	, m_correction_factor(0.3f)
 {
-	m_linear_offset = b1->m_sprite->GetPosition() - b0->m_sprite->GetPosition();
-	m_angular_offset = b1->m_sprite->GetAngle() - b0->m_sprite->GetAngle();
+	m_linear_offset = b1->m_spr->GetPosition() - b0->m_spr->GetPosition();
+	m_angular_offset = b1->m_spr->GetAngle() - b0->m_spr->GetAngle();
 }
 
 bool MotorJoint::IsContain(const sm::vec2& pos) const
 {
-	const sm::vec2 center = (m_body_a->m_sprite->GetPosition() + m_body_b->m_sprite->GetPosition()) * 0.5f;
+	const sm::vec2 center = (m_body_a->m_spr->GetPosition() + m_body_b->m_spr->GetPosition()) * 0.5f;
 	return ee::Math2D::GetDistance(center, pos) < JOINT_RADIUS_OUT;
 }
 
 bool MotorJoint::IsIntersect(const sm::rect& rect) const
 {
-	const sm::vec2 center = (m_body_a->m_sprite->GetPosition() + m_body_b->m_sprite->GetPosition()) * 0.5f;
+	const sm::vec2 center = (m_body_a->m_spr->GetPosition() + m_body_b->m_spr->GetPosition()) * 0.5f;
 	return ee::Math2D::IsPointInRect(center, rect);
 }
 
 void MotorJoint::Draw(DrawType type) const
 {
-	const sm::vec2 center = (m_body_a->m_sprite->GetPosition() + m_body_b->m_sprite->GetPosition()) * 0.5f;
+	const sm::vec2 center = (m_body_a->m_spr->GetPosition() + m_body_b->m_spr->GetPosition()) * 0.5f;
 
 	if (type == e_selected || type == e_mouseOn)
 	{
 		s2::RVG::SetColor(s2::Color(102, 204, 102));
-		s2::RVG::DashLine(center, m_body_a->m_sprite->GetPosition());
+		s2::RVG::DashLine(center, m_body_a->m_spr->GetPosition());
 		s2::RVG::SetColor(s2::Color(102, 102, 204));
-		s2::RVG::DashLine(center, m_body_b->m_sprite->GetPosition());
+		s2::RVG::DashLine(center, m_body_b->m_spr->GetPosition());
 
 		DrawBodyFlag();
 	}

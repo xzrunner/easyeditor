@@ -20,13 +20,13 @@ class MainDialog : public wxDialog
 {
 public:
 	MainDialog(wxWindow* parent, wxGLContext* glctx, int width, 
-		int height, const std::vector<const ee::Sprite*>& sprites);
+		int height, const std::vector<const ee::Sprite*>& sprs);
 
 private:
 	void InitLayout(wxGLContext* glctx);
 
 private:
-	std::vector<const ee::Sprite*> m_sprites;
+	std::vector<const ee::Sprite*> m_sprs;
 
 	ee::PlayControl m_control;
 

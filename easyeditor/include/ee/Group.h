@@ -20,8 +20,8 @@ public:
 
 	void TraverseSprite(Visitor<Sprite>& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
 
-	bool Insert(Sprite* sprite);
-	bool Remove(Sprite* sprite);
+	bool Insert(Sprite* spr);
+	bool Remove(Sprite* spr);
 
 	void Clear();
 
@@ -37,7 +37,7 @@ private:
 	bool m_visible;
 	bool m_editable;
 
-	ObjectVector<Sprite> m_sprites;
+	ObjectVector<Sprite> m_sprs;
 	ObjectVector<Shape> m_shapes;
 
 }; // Group

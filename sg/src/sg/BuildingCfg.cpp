@@ -89,24 +89,24 @@ bool BuildingCfg::QueryAttackRegion(const std::string& name, int& max_region, in
 void BuildingCfg::InitBackground(const Json::Value& value)
 {
 	std::string filepath = value["background"].asString();
-	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	ee::StageCanvas* canvas = m_stage->GetCanvas();
-	static_cast<StageCanvas*>(canvas)->SetBackground(symbol);
-	symbol->RemoveReference();
+	static_cast<StageCanvas*>(canvas)->SetBackground(sym);
+	sym->RemoveReference();
 }
 
 void BuildingCfg::InitGrid(const Json::Value& value)
 {
 	std::string filepath = value["grid"]["filepath"].asString();
-	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
+	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+	ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
 	float angle = value["grid"]["angle"].asInt();
 	float scale = value["grid"]["scale"].asDouble();
 	float alpha = value["grid"]["alpha"].asInt();
-	sprite->SetAngle(angle * SM_DEG_TO_RAD);
-	sprite->SetScale(sm::vec2(scale, scale));
-	SymbolRender::Instance()->SetGrid(sprite);
-	symbol->RemoveReference();
+	spr->SetAngle(angle * SM_DEG_TO_RAD);
+	spr->SetScale(sm::vec2(scale, scale));
+	SymbolRender::Instance()->SetGrid(spr);
+	sym->RemoveReference();
 }
 
 void BuildingCfg::InitArrow(const Json::Value& value)
@@ -127,10 +127,10 @@ void BuildingCfg::InitGrass(const Json::Value& value)
 	while (!grassVal.isNull()) {
 		std::string filepath = grassVal["filepath"].asString();
 		float scale = grassVal["scale"].asDouble();
-		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-		sprite->SetScale(sm::vec2(scale, scale));
-		SymbolRender::Instance()->SetGrass(i-1, sprite);
+		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+		spr->SetScale(sm::vec2(scale, scale));
+		SymbolRender::Instance()->SetGrass(i-1, spr);
 
 		grassVal = value["grass"]["levels"][i++];
 	}
@@ -162,9 +162,9 @@ void BuildingCfg::InitRegion(const Json::Value& value)
 	}
 
 	std::string filepath = value["region"]["filepath"].asString();
-	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	
-	SymbolRender::Instance()->SetRegion(symbol, value["region"]["size"].asInt());
+	SymbolRender::Instance()->SetRegion(sym, value["region"]["size"].asInt());
 
 	int idx = 0;
 	Json::Value reg_val = value["attack_region"][idx++];

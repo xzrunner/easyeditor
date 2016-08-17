@@ -11,7 +11,7 @@ class Sprite;
 class SpritePropertySetting : public ee::SpritePropertySetting
 {
 public:
-	SpritePropertySetting(ee::EditPanelImpl* stage, Sprite* sprite);
+	SpritePropertySetting(ee::EditPanelImpl* stage, Sprite* spr);
 
 	virtual void OnPropertyGridChange(const std::string& name, const wxAny& value);
 

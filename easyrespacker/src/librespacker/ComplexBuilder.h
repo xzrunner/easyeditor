@@ -26,12 +26,12 @@ public:
 
 	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
 
-	const IPackNode* Create(const ecomplex::Symbol* symbol);
+	const IPackNode* Create(const ecomplex::Symbol* sym);
 
 private:
-	IPackNode* LoadComplex(const ecomplex::Symbol* symbol);
+	IPackNode* LoadComplex(const ecomplex::Symbol* sym);
 
-	IPackNode* LoadAnchor(const ecomplex::Symbol* symbol);
+	IPackNode* LoadAnchor(const ecomplex::Symbol* sym);
 
 	static void GroupFromTag(const std::vector<s2::Sprite*>& src, 
 		std::map<std::string, std::vector<ee::Sprite*> >& dst,

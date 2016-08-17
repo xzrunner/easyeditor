@@ -10,16 +10,16 @@ class InsertSpriteAOP : public AtomicOP
 {
 public:
 	InsertSpriteAOP(Sprite* spr);
-	InsertSpriteAOP(const std::vector<Sprite*>& sprites);
+	InsertSpriteAOP(const std::vector<Sprite*>& sprs);
 	virtual ~InsertSpriteAOP();
 
 	virtual void Undo();
 	virtual void Redo();
 
-	virtual Json::Value Store(const std::vector<Sprite*>& sprites) const;
+	virtual Json::Value Store(const std::vector<Sprite*>& sprs) const;
 
 private:
-	std::vector<Sprite*> m_sprites;
+	std::vector<Sprite*> m_sprs;
 
 }; // InsertSpriteAOP
 

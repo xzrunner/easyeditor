@@ -86,11 +86,11 @@ static void _cs_draw(struct dtex_cs_rect* r, void* ud)
 	rq.xmax = r->xmax;
 	rq.ymax = r->ymax;
 
-	std::vector<const Sprite*> sprites;
-	SpatialPartition::Instance()->Query(rq, sprites);
+	std::vector<const Sprite*> sprs;
+	SpatialPartition::Instance()->Query(rq, sprs);
 
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		const Sprite* spr = sprites[i];
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		const Sprite* spr = sprs[i];
 
 		s2::RenderParams params;
 		params.mt = spr->GetTransMatrix();

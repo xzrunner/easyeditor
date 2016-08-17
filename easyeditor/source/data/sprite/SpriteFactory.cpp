@@ -21,18 +21,18 @@ SpriteFactory::SpriteFactory()
 {
 }
 
-Sprite* SpriteFactory::Create(Symbol* symbol)
+Sprite* SpriteFactory::Create(Symbol* sym)
 {
-	Sprite* sprite = NULL;
+	Sprite* spr = NULL;
 
-	const std::string& filepath = symbol->GetFilepath();
+	const std::string& filepath = sym->GetFilepath();
 	if (filepath.empty())
 	{
 		// todo
-// 		if (ecomplex::Symbol* s = dynamic_cast<ecomplex::Symbol*>(symbol))
-// 			sprite = new ecomplex::Sprite(s);
-// 		else if (eanim::Symbol* s = dynamic_cast<eanim::Symbol*>(symbol))
-// 			sprite = new eanim::Sprite(s);
+// 		if (ecomplex::Symbol* s = dynamic_cast<ecomplex::Symbol*>(sym))
+// 			spr = new ecomplex::Sprite(s);
+// 		else if (eanim::Symbol* s = dynamic_cast<eanim::Symbol*>(sym))
+// 			spr = new eanim::Sprite(s);
 	}
 	else
 	{
@@ -41,55 +41,55 @@ Sprite* SpriteFactory::Create(Symbol* symbol)
 
 		if (ext == "png" || ext == "jpg" || ext == "bmp" || ext == "pvr" || ext == "pkm")
 		{
-			sprite = new ImageSprite(dynamic_cast<ImageSymbol*>(symbol));
+			spr = new ImageSprite(dynamic_cast<ImageSymbol*>(sym));
 		}
 		else if (ext == "json")
 		{
 			std::string type = FileType::GetTag(FileType::GetType(filepath));
 			CallbackMap::iterator itr = m_creators.find(type);
 			if (itr != m_creators.end()) {
-				sprite = (itr->second)(symbol);
+				spr = (itr->second)(sym);
 			} else if (FileType::IsType(filepath, FileType::e_fontblank)) {
-				sprite = new FontBlankSprite(dynamic_cast<FontBlankSymbol*>(symbol));
+				spr = new FontBlankSprite(dynamic_cast<FontBlankSymbol*>(sym));
 			}
 		}
 		else if (ext == "lua")
 		{
 			if (FileType::IsType(filepath, FileType::e_scripts)) {
-				sprite = new ScriptsSprite(dynamic_cast<ScriptsSymbol*>(symbol));
+				spr = new ScriptsSprite(dynamic_cast<ScriptsSymbol*>(sym));
 			}
 		}
 	}
 
-	if (sprite) {
-		Insert(sprite);
-		sprite->SetName(std::string("_sprite") + StringHelper::ToString(m_id++));
+	if (spr) {
+		Insert(spr);
+		spr->SetName(std::string("_sprite") + StringHelper::ToString(m_id++));
 	}
 
-	if (!symbol->tag.empty()) {
-		sprite->SetTag("[symbol]");
+	if (!sym->tag.empty()) {
+		spr->SetTag("[symbol]");
 	}
 
-	return sprite;
+	return spr;
 }
 
-void SpriteFactory::Insert(Sprite* sprite)
+void SpriteFactory::Insert(Sprite* spr)
 {
 	std::map<const Symbol*, SpriteList>::iterator 
-		itr = m_map_symbol2sprites.find(dynamic_cast<const Symbol*>(sprite->GetSymbol()));
+		itr = m_map_symbol2sprites.find(dynamic_cast<const Symbol*>(spr->GetSymbol()));
 	if (itr == m_map_symbol2sprites.end())
 	{
 		SpriteList list;
-		list.push_back(sprite);
-		m_map_symbol2sprites.insert(std::make_pair(dynamic_cast<const ee::Symbol*>(sprite->GetSymbol()), list));
+		list.push_back(spr);
+		m_map_symbol2sprites.insert(std::make_pair(dynamic_cast<const ee::Symbol*>(spr->GetSymbol()), list));
 	}
 	else 
 	{
-		itr->second.push_back(sprite);
+		itr->second.push_back(spr);
 	}
 }
 
-void SpriteFactory::Remove(Sprite* sprite)
+void SpriteFactory::Remove(Sprite* spr)
 {
 	std::map<const Symbol*, SpriteList>::iterator 
 		itr = m_map_symbol2sprites.begin();
@@ -98,7 +98,7 @@ void SpriteFactory::Remove(Sprite* sprite)
 		SpriteList::iterator itr_sprite = itr->second.begin();
 		for ( ; itr_sprite != itr->second.end(); )
 		{
-			if (*itr_sprite == sprite)
+			if (*itr_sprite == spr)
 				itr_sprite = itr->second.erase(itr_sprite);
 			else
 				++itr_sprite;
@@ -106,10 +106,10 @@ void SpriteFactory::Remove(Sprite* sprite)
 	}
 }
 
-void SpriteFactory::UpdateBoundings(const Symbol& symbol)
+void SpriteFactory::UpdateBoundings(const Symbol& sym)
 {
 	std::map<const Symbol*, SpriteList>::iterator 
-		itr = m_map_symbol2sprites.find(&symbol);
+		itr = m_map_symbol2sprites.find(&sym);
 	if (itr != m_map_symbol2sprites.end())
 	{
 		for (size_t i = 0, n = itr->second.size(); i < n; ++i)

@@ -17,7 +17,7 @@ class StagePanel;
 class EditDialog : public wxDialog
 {
 public:
-	EditDialog(wxWindow* parent, Symbol* symbol, 
+	EditDialog(wxWindow* parent, Symbol* sym, 
 		wxGLContext* glctx, ee::CrossGuides* guides = NULL);
 
 private:
@@ -36,7 +36,7 @@ private:
 	StagePanel* m_stage;
 	ee::ViewlistPanel* m_viewlist;
 
-	Symbol* m_symbol;
+	Symbol* m_sym;
 
 	DECLARE_EVENT_TABLE()
 

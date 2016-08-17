@@ -58,12 +58,12 @@ bool Task::IsDirty() const
 	return m_stage->IsEditDirty();
 }
 
-void Task::GetAllSprite(std::vector<const ee::Sprite*>& sprites) const
+void Task::GetAllSprite(std::vector<const ee::Sprite*>& sprs) const
 {
 	std::vector<ee::Sprite*> tmp;
 	m_stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(tmp));
 	for (int i = 0, n = tmp.size(); i < n; ++i) {
-		sprites.push_back(tmp[i]);
+		sprs.push_back(tmp[i]);
 	}
 }
 

@@ -38,16 +38,16 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 	p2d_spr->Draw(p.mt);		
 }
 
-sm::rect Symbol::GetBounding(const s2::Sprite* sprite) const
+sm::rect Symbol::GetBounding(const s2::Sprite* spr) const
 {
 	return sm::rect(sm::vec2(0, 0), 200, 200);
 }
 
 void Symbol::ReloadTexture() const
 {
-	for (int i = 0; i < m_et_cfg->symbol_count; ++i) {
-		ee::Symbol* symbol = static_cast<ee::Symbol*>(m_et_cfg->symbols[i].ud);
-		symbol->ReloadTexture();
+	for (int i = 0; i < m_et_cfg->sym_count; ++i) {
+		ee::Symbol* sym = static_cast<ee::Symbol*>(m_et_cfg->syms[i].ud);
+		sym->ReloadTexture();
 	}
 }
 

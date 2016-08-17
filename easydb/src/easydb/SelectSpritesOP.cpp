@@ -25,12 +25,12 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 	if (keyCode == WXK_SPACE)
 	{
 		ee::SpriteSelection* selection = Context::Instance()->stage->GetSpriteSelection();
-		std::vector<ee::Sprite*> sprites;
-		selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
+		std::vector<ee::Sprite*> sprs;
+		selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
 
-		for (size_t i = 0, n = sprites.size(); i < n; ++i)
+		for (size_t i = 0, n = sprs.size(); i < n; ++i)
 		{
-			ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(sprites[i]);
+			ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(sprs[i]);
 			if (!complex) continue;
 
 			ecomplex::Symbol* sym = dynamic_cast<ecomplex::Symbol*>(complex->GetSymbol());
@@ -62,17 +62,17 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	//}
 	// 	else if (ee::Scale9Sprite* patch9 = dynamic_cast<ee::Scale9Sprite*>(selected))
 	// 	{
-	//  		ee::Scale9Symbol& symbol = const_cast<ee::Scale9Symbol&>(patch9->getSymbol());
-	//  		escale9::EditDialog dlg(m_stage, NULL, &symbol);
+	//  		ee::Scale9Symbol& sym = const_cast<ee::Scale9Symbol&>(patch9->getSymbol());
+	//  		escale9::EditDialog dlg(m_stage, NULL, &sym);
 	//  		dlg.ShowModal();
 	//  
-	////   		std::vector<ee::Scale9Sprite*> sprites;
-	////   		m_stage->traverseSprites(ee::FetchAllVisitor<ee::Scale9Sprite>(sprites));
-	////   		for (size_t i = 0, n = sprites.size(); i < n; ++i)
+	////   		std::vector<ee::Scale9Sprite*> sprs;
+	////   		m_stage->traverseSprites(ee::FetchAllVisitor<ee::Scale9Sprite>(sprs));
+	////   		for (size_t i = 0, n = sprs.size(); i < n; ++i)
 	////   		{
-	////   			ee::Sprite* sprite = sprites[i];
-	////   			if (&sprite->getSymbol() == &symbol)
-	////   				sprite->buildBounding();
+	////   			ee::Sprite* spr = sprs[i];
+	////   			if (&spr->getSymbol() == &sym)
+	////   				spr->buildBounding();
 	////   		}
 	//  
 	// 		m_stage->resetCanvas();

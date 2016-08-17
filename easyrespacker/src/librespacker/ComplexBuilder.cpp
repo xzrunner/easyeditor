@@ -62,32 +62,32 @@ void ComplexBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 	}
 }
 
-const IPackNode* ComplexBuilder::Create(const ecomplex::Symbol* symbol)
+const IPackNode* ComplexBuilder::Create(const ecomplex::Symbol* sym)
 {
 	std::map<const ecomplex::Symbol*, const PackAnimation*>::iterator 
-		itr = m_map_data.find(symbol);
+		itr = m_map_data.find(sym);
 	if (itr != m_map_data.end()) {
 		return itr->second;
 	}
 
 	PackNodeFactory::Instance()->GetTextBuilder()->CacheBegin();
-	IPackNode* node = LoadComplex(symbol);
+	IPackNode* node = LoadComplex(sym);
 	PackNodeFactory::Instance()->GetTextBuilder()->CacheEnd();
 	return node;
 }
 
-IPackNode* ComplexBuilder::LoadComplex(const ecomplex::Symbol* symbol)
+IPackNode* ComplexBuilder::LoadComplex(const ecomplex::Symbol* sym)
 {
 	PackAnimation* node = new PackAnimation;
 
-	m_export_set.LoadExport(symbol, node);
+	m_export_set.LoadExport(sym, node);
 
 	// clipbox
-	const PackClipbox* cb = static_cast<const PackClipbox*>(m_cb_builder->Create(symbol));
+	const PackClipbox* cb = static_cast<const PackClipbox*>(m_cb_builder->Create(sym));
 
 	std::map<std::string, std::vector<ee::Sprite*> > map_actions;
 	std::vector<ee::Sprite*> others;
-	GroupFromTag(symbol->GetChildren(), map_actions, others);
+	GroupFromTag(sym->GetChildren(), map_actions, others);
 	
 	if (map_actions.empty()) 
 	{
@@ -99,7 +99,7 @@ IPackNode* ComplexBuilder::LoadComplex(const ecomplex::Symbol* symbol)
 		if (cb) {
 			node->CreateClipboxFramePart(cb, frame);
 		}
-		const std::vector<s2::Sprite*>& children = symbol->GetChildren();
+		const std::vector<s2::Sprite*>& children = sym->GetChildren();
 		for (int i = 0, n = children.size(); i < n; ++i) {
 			ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 			node->CreateFramePart(child, frame);
@@ -131,14 +131,14 @@ IPackNode* ComplexBuilder::LoadComplex(const ecomplex::Symbol* symbol)
 		}
 	}
 
-	m_map_data.insert(std::make_pair(symbol, node));
+	m_map_data.insert(std::make_pair(sym, node));
 
 	return node;
 }
 
-IPackNode* ComplexBuilder::LoadAnchor(const ecomplex::Symbol* symbol)
+IPackNode* ComplexBuilder::LoadAnchor(const ecomplex::Symbol* sym)
 {
-	const std::vector<s2::Sprite*>& children = symbol->GetChildren();
+	const std::vector<s2::Sprite*>& children = sym->GetChildren();
 	assert(children.size() == 1);
 
 	ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[0]);
@@ -148,7 +148,7 @@ IPackNode* ComplexBuilder::LoadAnchor(const ecomplex::Symbol* symbol)
 
 	PackAnimation* node = new PackAnimation;		
 
-	m_export_set.LoadExport(symbol, node);
+	m_export_set.LoadExport(sym, node);
 
 	PackAnimation::Action action;
 	action.size = 1;
@@ -158,7 +158,7 @@ IPackNode* ComplexBuilder::LoadAnchor(const ecomplex::Symbol* symbol)
 	node->CreateFramePart(child, frame);
 	node->frames.push_back(frame);
 
-	m_map_data.insert(std::make_pair(symbol, node));
+	m_map_data.insert(std::make_pair(sym, node));
 
 	return node;
 }
@@ -169,15 +169,15 @@ void ComplexBuilder::GroupFromTag(const std::vector<s2::Sprite*>& src,
 {
 	for (int i = 0, n = src.size(); i < n; ++i)
 	{
-		ee::Sprite* sprite = dynamic_cast<ee::Sprite*>(src[i]);
-		if (sprite->GetTag().empty())
+		ee::Sprite* spr = dynamic_cast<ee::Sprite*>(src[i]);
+		if (spr->GetTag().empty())
 		{
-			others.push_back(sprite);
+			others.push_back(spr);
 		}
 		else
 		{
 			std::vector<std::string> tags;
-			ee::StringHelper::Split(sprite->GetTag(), ";", tags);
+			ee::StringHelper::Split(spr->GetTag(), ";", tags);
 			bool is_action = false;
 			for (int i = 0, n = tags.size(); i < n; ++i)
 			{
@@ -191,18 +191,18 @@ void ComplexBuilder::GroupFromTag(const std::vector<s2::Sprite*>& src,
 					itr = dst.find(tags[i]);
 				if (itr == dst.end())
 				{
-					std::vector<ee::Sprite*> sprites;
-					sprites.push_back(sprite);
-					dst.insert(std::make_pair(tags[i], sprites));
+					std::vector<ee::Sprite*> sprs;
+					sprs.push_back(spr);
+					dst.insert(std::make_pair(tags[i], sprs));
 				}
 				else
 				{
-					itr->second.push_back(sprite);
+					itr->second.push_back(spr);
 				}
 			}
 
 			if (!is_action) {
-				others.push_back(sprite);
+				others.push_back(spr);
 			}
 		}
 	}

@@ -24,16 +24,16 @@ END_EVENT_TABLE()
 EditDialog::EditDialog(wxWindow* parent, wxGLContext* glctx,
 					   Sprite* edited, const ee::MultiSpritesImpl* sprite_impl)
 	: wxDialog(parent, wxID_ANY, "Edit Shadow", wxDefaultPosition, wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
-	, m_symbol(NULL)
+	, m_sym(NULL)
 	, m_stage(NULL)
 {
 	assert(edited);
 
-	Symbol* symbol = dynamic_cast<Symbol*>(edited->GetSymbol());
-	symbol->AddReference();
-	m_symbol = symbol;
-	m_symbol->ReloadTexture();
-	SetTitle(symbol->GetFilepath());
+	Symbol* sym = dynamic_cast<Symbol*>(edited->GetSymbol());
+	sym->AddReference();
+	m_sym = sym;
+	m_sym->ReloadTexture();
+	SetTitle(sym->GetFilepath());
 
 	InitLayout(glctx, edited, sprite_impl);
 
@@ -42,8 +42,8 @@ EditDialog::EditDialog(wxWindow* parent, wxGLContext* glctx,
 
 EditDialog::~EditDialog()
 {
-	if (m_symbol) {
-		m_symbol->RemoveReference();
+	if (m_sym) {
+		m_sym->RemoveReference();
 	}
 }
 
@@ -74,15 +74,15 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 	int val = dlg.ShowModal();
 	if (val == wxID_YES)
 	{
-		const std::string& filepath = m_symbol->GetFilepath();
-//			FileSaver::Store(filepath, m_symbol);
-		m_symbol->RefreshThumbnail(filepath);
-		ee::SpriteFactory::Instance()->UpdateBoundings(*m_symbol);
+		const std::string& filepath = m_sym->GetFilepath();
+//			FileSaver::Store(filepath, m_sym);
+		m_sym->RefreshThumbnail(filepath);
+		ee::SpriteFactory::Instance()->UpdateBoundings(*m_sym);
 		Destroy();
 	}
 	else if (val == wxID_NO)
 	{
-		m_symbol->LoadFromFile(m_symbol->GetFilepath());
+		m_sym->LoadFromFile(m_sym->GetFilepath());
 		Destroy();
 	}
 }

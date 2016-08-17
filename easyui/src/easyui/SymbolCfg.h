@@ -26,7 +26,7 @@ private:
 	struct Widget
 	{
 		std::string type;
-		std::set<std::string> symbols;
+		std::set<std::string> syms;
 	};
 
 private:

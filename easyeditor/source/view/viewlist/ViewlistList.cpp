@@ -94,8 +94,8 @@ void ViewlistList::OnSelected(int idx, bool clear)
 Sprite* ViewlistList::QuerySprite(int idx)
 {
 	Sprite* spr = NULL;
-	if (idx >= 0 && idx < static_cast<int>(m_sprites.size())) {
-		spr = m_sprites[idx];
+	if (idx >= 0 && idx < static_cast<int>(m_sprs.size())) {
+		spr = m_sprs[idx];
 	}
 	return spr;
 }
@@ -109,25 +109,25 @@ void ViewlistList::Clear()
 		m_selected_spr = NULL;
 	}
 
-	for_each(m_sprites.begin(), m_sprites.end(), cu::RemoveRefFonctor<Sprite>());
-	m_sprites.clear();
+	for_each(m_sprs.begin(), m_sprs.end(), cu::RemoveRefFonctor<Sprite>());
+	m_sprs.clear();
 }
 
-void ViewlistList::Insert(Sprite* sprite, int idx)
+void ViewlistList::Insert(Sprite* spr, int idx)
 {
-	if (!sprite) {
+	if (!spr) {
 		return;
 	}
-	sprite->AddReference();
+	spr->AddReference();
 
-	ListItem* item = dynamic_cast<ListItem*>(sprite->GetSymbol());
-	if (idx < 0 || idx >= static_cast<int>(m_sprites.size())) {
+	ListItem* item = dynamic_cast<ListItem*>(spr->GetSymbol());
+	if (idx < 0 || idx >= static_cast<int>(m_sprs.size())) {
 		VerticalImageList::Insert(item, 0);
-		m_sprites.insert(m_sprites.begin(), sprite);
+		m_sprs.insert(m_sprs.begin(), spr);
 	} else {
-		int order = m_sprites.size() - idx;
+		int order = m_sprs.size() - idx;
 		VerticalImageList::Insert(item, order);
-		m_sprites.insert(m_sprites.begin() + order, sprite);
+		m_sprs.insert(m_sprs.begin() + order, spr);
 	}
 }
 
@@ -192,7 +192,7 @@ void ViewlistList::OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const
 {
 	VerticalImageList::OnDrawItem(dc, rect, n);
 
-	Sprite* spr = m_sprites[n];
+	Sprite* spr = m_sprs[n];
 
 	dc.SetBrush(spr->IsVisible() ? *wxBLACK_BRUSH : *wxWHITE_BRUSH);
 	dc.DrawRectangle(rect.x + BTN_SPACE, rect.y + BTN_SPACE, BTN_EDGE, BTN_EDGE);
@@ -261,7 +261,7 @@ void ViewlistList::OnMouse(wxMouseEvent& event)
 		}
 	}
 
-	Sprite* spr = m_sprites[curr_pos];
+	Sprite* spr = m_sprs[curr_pos];
 	if (pos.x <= BTN_SPACE + BTN_EDGE) {
 		spr->SetVisible(!spr->IsVisible());
 	} else {
@@ -291,8 +291,8 @@ void ViewlistList::OnSelected(Sprite* spr, bool clear)
 
 int ViewlistList::QuerySprIdx(const Sprite* spr) const
 {
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		if (m_sprites[i] == spr) {
+	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+		if (m_sprs[i] == spr) {
 			return i;
 		}
 	}
@@ -324,30 +324,30 @@ void ViewlistList::Select(Sprite* spr, bool clear)
 void ViewlistList::SelectSet(SpriteSelection* set)
 {
 	SetSelection(-1);
-	std::vector<Sprite*> sprites;
-	set->Traverse(FetchAllVisitor<Sprite>(sprites));
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		int idx = QuerySprIdx(sprites[i]);
+	std::vector<Sprite*> sprs;
+	set->Traverse(FetchAllVisitor<Sprite>(sprs));
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		int idx = QuerySprIdx(sprs[i]);
 		if (idx >= 0) {
 			VerticalImageList::Select(idx, true);
 		}
 	}
 }
 
-void ViewlistList::Reorder(const Sprite* sprite, bool up)
+void ViewlistList::Reorder(const Sprite* spr, bool up)
 {
-	int i = QuerySprIdx(sprite);
+	int i = QuerySprIdx(spr);
 	if (i < 0) {
 		return;
 	}
 
-	int n = m_sprites.size();
+	int n = m_sprs.size();
 	if (up)
 	{
 		int pos = i - 1;
 		if (pos >= 0)
 		{
-			std::swap(m_sprites[i], m_sprites[pos]);
+			std::swap(m_sprs[i], m_sprs[pos]);
 			Swap(i, pos);
 			SetSelection(-1);
 			SetSelection(pos);
@@ -358,7 +358,7 @@ void ViewlistList::Reorder(const Sprite* sprite, bool up)
 		int pos = i + 1;
 		if (pos < n)
 		{
-			std::swap(m_sprites[i], m_sprites[pos]);
+			std::swap(m_sprs[i], m_sprs[pos]);
 			Swap(i, pos);
 			SetSelection(-1);
 			SetSelection(pos);
@@ -366,18 +366,18 @@ void ViewlistList::Reorder(const Sprite* sprite, bool up)
 	}
 }
 
-void ViewlistList::ReorderMost(const Sprite* sprite, bool up)
+void ViewlistList::ReorderMost(const Sprite* spr, bool up)
 {
-	int i = QuerySprIdx(sprite);
+	int i = QuerySprIdx(spr);
 	if (i < 0) {
 		return;
 	}
 
-	ListItem* item = const_cast<ListItem*>(dynamic_cast<const ListItem*>(sprite->GetSymbol()));
+	ListItem* item = const_cast<ListItem*>(dynamic_cast<const ListItem*>(spr->GetSymbol()));
 	if (up) {
 		if (i != 0) {
-			m_sprites.erase(m_sprites.begin() + i);
-			m_sprites.insert(m_sprites.begin(), const_cast<Sprite*>(sprite));
+			m_sprs.erase(m_sprs.begin() + i);
+			m_sprs.insert(m_sprs.begin(), const_cast<Sprite*>(spr));
 
 			VerticalImageList::Insert(item, 0);
 			VerticalImageList::Remove(i + 1);
@@ -386,29 +386,29 @@ void ViewlistList::ReorderMost(const Sprite* sprite, bool up)
 			SetSelection(0);
 		}
 	} else {
-		if (i != m_sprites.size() - 1) {
-			m_sprites.erase(m_sprites.begin() + i);
-			m_sprites.push_back(const_cast<Sprite*>(sprite));
+		if (i != m_sprs.size() - 1) {
+			m_sprs.erase(m_sprs.begin() + i);
+			m_sprs.push_back(const_cast<Sprite*>(spr));
 
 			VerticalImageList::Remove(i);
 			VerticalImageList::Insert(item);
 
 			SetSelection(-1);
-			SetSelection(m_sprites.size() - 1);
+			SetSelection(m_sprs.size() - 1);
 		}
 	}
 }
 
-void ViewlistList::Remove(Sprite* sprite)
+void ViewlistList::Remove(Sprite* spr)
 {
-	int idx = QuerySprIdx(sprite);
+	int idx = QuerySprIdx(spr);
 	if (idx < 0) {
 		return;
 	}
 	VerticalImageList::Remove(idx);
 
-	sprite->RemoveReference();
-	m_sprites.erase(m_sprites.begin() + idx);
+	spr->RemoveReference();
+	m_sprs.erase(m_sprs.begin() + idx);
 }
 
 void ViewlistList::RemoveSelected()
@@ -423,10 +423,10 @@ void ViewlistList::RemoveSelected()
 
 	VerticalImageList::Remove(selected);
 
-	RemoveSpriteSJ::Instance()->Remove(m_sprites[selected], this);
+	RemoveSpriteSJ::Instance()->Remove(m_sprs[selected], this);
 
-	m_sprites[selected]->RemoveReference();
-	m_sprites.erase(m_sprites.begin() + selected);
+	m_sprs[selected]->RemoveReference();
+	m_sprs.erase(m_sprs.begin() + selected);
 }
 
 }

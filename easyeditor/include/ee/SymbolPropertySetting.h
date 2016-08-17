@@ -11,7 +11,7 @@ class Symbol;
 class SymbolPropertySetting : public PropertySetting
 {
 public:
-	SymbolPropertySetting(Symbol* symbol);
+	SymbolPropertySetting(Symbol* sym);
 	SymbolPropertySetting(std::string* name, std::string* tag);
 
 	virtual void OnPropertyGridChange(const std::string& name, const wxAny& value);
@@ -21,7 +21,7 @@ protected:
 	virtual void InitProperties(wxPropertyGrid* pg);
 
 protected:
-	Symbol* m_symbol;
+	Symbol* m_sym;
 
 	std::string* m_name;
 	std::string* m_tag;

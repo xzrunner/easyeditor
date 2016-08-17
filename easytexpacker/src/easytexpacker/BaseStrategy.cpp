@@ -8,19 +8,19 @@
 namespace etexpacker
 {
 
-void BaseStrategy::SortByArea(std::vector<ee::ImageSprite*>& sprites, bool isDescend/* = true*/) const
+void BaseStrategy::SortByArea(std::vector<ee::ImageSprite*>& sprs, bool isDescend/* = true*/) const
 {
-	std::sort(sprites.begin(), sprites.end(), SpriteCmp(e_area, isDescend));
+	std::sort(sprs.begin(), sprs.end(), SpriteCmp(e_area, isDescend));
 }
 
-void BaseStrategy::SortByMaxEdge(std::vector<ee::ImageSprite*>& sprites, bool isDescend/* = true*/) const
+void BaseStrategy::SortByMaxEdge(std::vector<ee::ImageSprite*>& sprs, bool isDescend/* = true*/) const
 {
-	std::sort(sprites.begin(), sprites.end(), SpriteCmp(e_maxEdge, isDescend));
+	std::sort(sprs.begin(), sprs.end(), SpriteCmp(e_maxEdge, isDescend));
 }
 
-void BaseStrategy::SortByTotEdges(std::vector<ee::ImageSprite*>& sprites, bool isDescend/* = true*/) const
+void BaseStrategy::SortByTotEdges(std::vector<ee::ImageSprite*>& sprs, bool isDescend/* = true*/) const
 {
-	std::sort(sprites.begin(), sprites.end(), SpriteCmp(e_totEdges, isDescend));
+	std::sort(sprs.begin(), sprs.end(), SpriteCmp(e_totEdges, isDescend));
 }
 
 BaseStrategy::SpriteCmp::SpriteCmp(SortStrategy strategy, bool isDescend)

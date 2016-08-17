@@ -9,8 +9,8 @@ class Symbol;
 class FileIO
 {
 public:
-	static void StoreToFile(const char* filepath, const Symbol* symbol);
-	static void LoadFromFile(const char* filepath, Symbol* symbol);
+	static void StoreToFile(const char* filepath, const Symbol* sym);
+	static void LoadFromFile(const char* filepath, Symbol* sym);
 
 }; // FileIO
 

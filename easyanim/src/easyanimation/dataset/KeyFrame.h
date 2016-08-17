@@ -21,21 +21,21 @@ public:
 	void CopyFromOther(const KeyFrame* src);
 
 	bool IsEmpty() const {
-		return m_sprites.empty();
+		return m_sprs.empty();
 	}
 
-	void Insert(ee::Sprite* sprite, int idx);
-	bool Remove(ee::Sprite* sprite);
-	bool Reorder(const ee::Sprite* sprite, bool up);
-	bool ReorderMost(const ee::Sprite* sprite, bool up);
-	bool Sort(std::vector<ee::Sprite*>& sprites);
+	void Insert(ee::Sprite* spr, int idx);
+	bool Remove(ee::Sprite* spr);
+	bool Reorder(const ee::Sprite* spr, bool up);
+	bool ReorderMost(const ee::Sprite* spr, bool up);
+	bool Sort(std::vector<ee::Sprite*>& sprs);
 
-	int Size() const { return m_sprites.size(); }
+	int Size() const { return m_sprs.size(); }
 	const ee::Sprite* GetSprite(int index) {
-		return index >= 0 && index < m_sprites.size() ? m_sprites[index] : NULL;
+		return index >= 0 && index < m_sprs.size() ? m_sprs[index] : NULL;
 	}
 
-	const std::vector<ee::Sprite*>& GetAllSprites() const { return m_sprites; }
+	const std::vector<ee::Sprite*>& GetAllSprites() const { return m_sprs; }
 
 	bool HasClassicTween() const { return m_classic_tween; }
 	void SetClassicTween(bool tween = true) { m_classic_tween = tween; }
@@ -61,7 +61,7 @@ public:
 private:
 	int m_time;
 
-	std::vector<ee::Sprite*> m_sprites;
+	std::vector<ee::Sprite*> m_sprs;
 
 	bool m_classic_tween;
 

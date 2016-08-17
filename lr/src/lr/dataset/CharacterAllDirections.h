@@ -23,7 +23,7 @@ private:
 
 	struct Directions
 	{
-		ee::Symbol* symbols[DIR_COUNT];
+		ee::Symbol* syms[DIR_COUNT];
 	}; // Directions
 
 private:

@@ -35,7 +35,7 @@ bool Fixture::IsContain(const sm::vec2& pos) const
 {
 	if (eshape::CircleShape* circle = dynamic_cast<eshape::CircleShape*>(m_shape))
 	{
-		return ee::Math2D::GetDistance(circle->center + m_body->m_sprite->GetPosition(), pos) 
+		return ee::Math2D::GetDistance(circle->center + m_body->m_spr->GetPosition(), pos) 
 			< circle->radius;
 	}
 	else if (eshape::RectShape* rect = dynamic_cast<eshape::RectShape*>(m_shape))
@@ -70,7 +70,7 @@ bool Fixture::IsIntersect(const sm::rect& rect) const
 {
 	if (eshape::CircleShape* circle = dynamic_cast<eshape::CircleShape*>(m_shape))
 	{
-		return ee::Math2D::IsCircleIntersectRect(circle->center + m_body->m_sprite->GetPosition(), 
+		return ee::Math2D::IsCircleIntersectRect(circle->center + m_body->m_spr->GetPosition(), 
 			circle->radius, rect);
 	}
 	else if (eshape::RectShape* r = dynamic_cast<eshape::RectShape*>(m_shape))
@@ -145,7 +145,7 @@ void Fixture::TransLocalToWorld(const std::vector<sm::vec2>& local,
 {
 	world.resize(local.size());
 	for (size_t i = 0, n = local.size(); i < n ; ++i)
-		world[i] = ee::Math2D::RotateVector(local[i], m_body->m_sprite->GetAngle()) + m_body->m_sprite->GetPosition();
+		world[i] = ee::Math2D::RotateVector(local[i], m_body->m_spr->GetAngle()) + m_body->m_spr->GetPosition();
 }
 
 }

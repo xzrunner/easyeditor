@@ -13,12 +13,12 @@ class Symbol;
 class FileStorer
 {
 public:
-	static void Store(const char* filepath, const Symbol* symbol);
-	static void StoreWithHistory(const char* filepath, const Symbol* symbol);
+	static void Store(const char* filepath, const Symbol* sym);
+	static void StoreWithHistory(const char* filepath, const Symbol* sym);
 
 private:
-	static void CenterSymbol(Symbol* symbol);
-	static Json::Value Store(ee::Sprite* sprite, const std::string& dir);
+	static void CenterSymbol(Symbol* sym);
+	static Json::Value Store(ee::Sprite* spr, const std::string& dir);
 
 }; // FileStorer
 

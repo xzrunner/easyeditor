@@ -21,9 +21,9 @@ bool ImageProcessOP::OnActive()
 		return true;
 	}
 
-	if (const ee::Sprite* sprite = m_stage->GetImage())
+	if (const ee::Sprite* spr = m_stage->GetImage())
 	{
-		sm::rect r = sprite->GetSymbol()->GetBounding();
+		sm::rect r = spr->GetSymbol()->GetBounding();
 
 //		ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
 //		LanczosResamplingShader* shader = new LanczosResamplingShader;

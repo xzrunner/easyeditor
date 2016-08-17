@@ -16,9 +16,9 @@ void ViewlistPanel::Clear()
 	m_list->Clear();
 }
 
-void ViewlistPanel::Insert(Sprite* sprite, int idx)
+void ViewlistPanel::Insert(Sprite* spr, int idx)
 {
-	m_list->Insert(sprite, idx);
+	m_list->Insert(spr, idx);
 }
 
 void ViewlistPanel::SetListImpl(ViewlistListImpl* impl)

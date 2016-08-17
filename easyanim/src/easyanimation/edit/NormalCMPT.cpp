@@ -172,12 +172,12 @@ void NormalCMPT::OnLoadFromFolder(wxCommandEvent& event)
 		KeyFrame* frame = new KeyFrame(itr->first);
 		for (int i = 0, n = itr->second.size(); i < n; ++i)
 		{
-			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(itr->second[i]);
-//			symbol->refresh();
-			ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-			frame->Insert(sprite, INT_MAX);
-			sprite->RemoveReference();
-			symbol->RemoveReference();
+			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(itr->second[i]);
+//			sym->refresh();
+			ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+			frame->Insert(spr, INT_MAX);
+			spr->RemoveReference();
+			sym->RemoveReference();
 		}
 		layer->InsertKeyFrame(frame);
 		frame->RemoveReference();
@@ -190,10 +190,10 @@ void NormalCMPT::OnLoadFromFolder(wxCommandEvent& event)
 
 void NormalCMPT::OnLoadFromList(wxCommandEvent& event)
 {
-	std::vector<ee::Symbol*> symbols;
+	std::vector<ee::Symbol*> syms;
 	ViewMgr::Instance()->img_page->GetList()->
-		Traverse(ee::FetchAllVisitor<ee::Symbol>(symbols));
-	if (symbols.empty()) {
+		Traverse(ee::FetchAllVisitor<ee::Symbol>(syms));
+	if (syms.empty()) {
 		return;
 	}
 
@@ -204,17 +204,17 @@ void NormalCMPT::OnLoadFromList(wxCommandEvent& event)
 	SetSelectedSJ::Instance()->Set(0, 0);
 
 	int tot = m_filling->GetValue() - 1;
-	int space = tot / (symbols.size() - 1);
+	int space = tot / (syms.size() - 1);
 	int frame_idx = 1;
-	for (size_t i = 0, n = symbols.size(); i < n; ++i)
+	for (size_t i = 0, n = syms.size(); i < n; ++i)
 	{
 		KeyFrame* frame = new KeyFrame(frame_idx);
-		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbols[i]);
+		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(syms[i]);
 
-		frame->Insert(sprite, INT_MAX);
+		frame->Insert(spr, INT_MAX);
 		layer->InsertKeyFrame(frame);
 
-		sprite->RemoveReference();
+		spr->RemoveReference();
 		frame->RemoveReference();
 
 		frame_idx += space;

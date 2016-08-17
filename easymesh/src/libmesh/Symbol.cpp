@@ -87,7 +87,7 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-// sm::rect Symbol::getSize(const ee::Sprite* sprite) const
+// sm::rect Symbol::getSize(const ee::Sprite* spr) const
 // {
 // //	return m_image->getRegion();
 // }

@@ -66,10 +66,10 @@ void AnimRecorder::Clear()
 
 void AnimRecorder::StoreToFile(const std::string& filepath) const
 {
-	eanim::Symbol* symbol = new eanim::Symbol;
+	eanim::Symbol* sym = new eanim::Symbol;
 	s2::AnimSymbol::Layer* layer = new s2::AnimSymbol::Layer;
-	// symbol->name = ani->export_name;
-	symbol->setFPS(30);
+	// sym->name = ani->export_name;
+	sym->setFPS(30);
 	// particle 60fps, while anim 30fps
 	for (int i = 0, n = m_frames.size(); i*2 < n; ++i)
 //	for (int i = 0, n = m_frames.size(); i < n; ++i)
@@ -90,14 +90,14 @@ void AnimRecorder::StoreToFile(const std::string& filepath) const
 			spr->SetScale(sm::vec2(item->scale, item->scale));
 			spr->Color().mul = item->mul_col;
 
-			frame->sprites.push_back(spr);
+			frame->sprs.push_back(spr);
 		}
 		layer->frames.push_back(frame);
 	}
-	symbol->AddLayer(layer);
+	sym->AddLayer(layer);
 
-	eanim::FileSaver::Store(filepath.c_str(), *symbol);
-	delete symbol;
+	eanim::FileSaver::Store(filepath.c_str(), *sym);
+	delete sym;
 }
 
 //////////////////////////////////////////////////////////////////////////

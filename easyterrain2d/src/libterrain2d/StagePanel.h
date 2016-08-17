@@ -46,7 +46,7 @@ private:
  	public:
  		StageDropTarget(StagePanel* stage, ee::LibraryPanel* library);
  
- 		virtual bool OnDropSymbol(ee::Symbol* symbol, const sm::vec2& pos);
+ 		virtual bool OnDropSymbol(ee::Symbol* sym, const sm::vec2& pos);
  
  	private:
  		StagePanel* m_stage;
@@ -56,7 +56,7 @@ private:
 private:
 	std::vector<OceanMesh*> m_oceans;
 
-//	Symbol* m_symbol;
+//	Symbol* m_sym;
 
 }; // StagePanel
 

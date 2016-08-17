@@ -12,7 +12,7 @@ class Sprite;
 class PropertySetting : public ee::SpritePropertySetting
 {
 public:
-	PropertySetting(ee::EditPanelImpl* edit_impl, Sprite* sprite);
+	PropertySetting(ee::EditPanelImpl* edit_impl, Sprite* spr);
 
 	virtual void OnPropertyGridChange(const std::string& name, const wxAny& value);
 

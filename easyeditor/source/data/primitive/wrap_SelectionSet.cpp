@@ -17,10 +17,10 @@ int w_SpriteSelection_move(lua_State* L)
 	float x = (float)luaL_checknumber(L, 2);
 	float y = (float)luaL_checknumber(L, 3);
 	if (!t) return 0;
-	std::vector<Sprite*> sprites;
-	t->Traverse(FetchAllVisitor<Sprite>(sprites));
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		sprites[i]->Translate(sm::vec2(x, y));
+	std::vector<Sprite*> sprs;
+	t->Traverse(FetchAllVisitor<Sprite>(sprs));
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		sprs[i]->Translate(sm::vec2(x, y));
 	}
 	return 0;		
 }
@@ -29,11 +29,11 @@ int w_SpriteSelection_get(lua_State* L)
 {
 	SpriteSelection* t = luax_checkSpriteSelection(L, 1);
 	if (!t) return 0;
-	std::vector<Sprite*> sprites;
-	t->Traverse(FetchAllVisitor<Sprite>(sprites));
-	if (sprites.empty())
+	std::vector<Sprite*> sprs;
+	t->Traverse(FetchAllVisitor<Sprite>(sprs));
+	if (sprs.empty())
 		return 0;
-	luax_newtype(L, "Sprite", SPRITE_DATA_T, (void*)sprites[0]);
+	luax_newtype(L, "Sprite", SPRITE_DATA_T, (void*)sprs[0]);
 	return 1;
 }
 

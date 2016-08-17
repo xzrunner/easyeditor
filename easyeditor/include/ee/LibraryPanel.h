@@ -37,13 +37,13 @@ public:
 	Symbol* GetSymbol(int index = -1) const;
 
 	void LoadFromSymbolMgr(const SymbolMgr& mgr);
-	void LoadSymbol(Symbol* symbol);
+	void LoadSymbol(Symbol* sym);
 
 	void Traverse(Visitor<ListItem>& visitor) const;
 
 	wxWindow* GetNotebook() { return m_notebook; }
 
-	bool AddSymbol(Symbol* symbol);
+	bool AddSymbol(Symbol* sym);
 
 	void LoadFromConfig();
 	void LoadDefaultSymbol();

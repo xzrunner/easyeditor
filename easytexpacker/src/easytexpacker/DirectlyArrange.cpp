@@ -6,9 +6,9 @@
 namespace etexpacker
 {
 
-void DirectlyArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites)
+void DirectlyArrange::Arrange(const std::vector<ee::ImageSprite*>& sprs)
 {
-	std::vector<ee::ImageSprite*> sorted(sprites);
+	std::vector<ee::ImageSprite*> sorted(sprs);
 	SortByArea(sorted);
 
 	int sx = 0, sy = 0;
@@ -17,13 +17,13 @@ void DirectlyArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites)
 		p = Context::Instance()->padding;
 	for (size_t i = 0, n = sorted.size(); i < n; ++i)
 	{
-		ee::ImageSprite* sprite = sorted[i];
-		const float width = sprite->GetSymbol()->GetBounding().Width() * s + p,
-			height = sprite->GetSymbol()->GetBounding().Height() * s + p;
+		ee::ImageSprite* spr = sorted[i];
+		const float width = spr->GetSymbol()->GetBounding().Width() * s + p,
+			height = spr->GetSymbol()->GetBounding().Height() * s + p;
 
 		if (sx + width <= Context::Instance()->width)
 		{
-			sprite->SetPosition(sm::vec2(sx + width * 0.5f, sy + height * 0.5f));
+			spr->SetPosition(sm::vec2(sx + width * 0.5f, sy + height * 0.5f));
 
 			sx += width;
 			if (height > hMax)
@@ -34,7 +34,7 @@ void DirectlyArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites)
 			sx = 0;
 			sy += hMax;
 			hMax = height;
-			sprite->SetPosition(sm::vec2(sx + width * 0.5f, sy + height * 0.5f));
+			spr->SetPosition(sm::vec2(sx + width * 0.5f, sy + height * 0.5f));
 			sx = width;
 		}
 	}

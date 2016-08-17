@@ -76,22 +76,22 @@ Symbol* LibraryPanel::GetSymbol(int index/* = -1*/) const
 
 void LibraryPanel::LoadFromSymbolMgr(const SymbolMgr& mgr)
 {
-	std::vector<Symbol*> symbols;
-	mgr.Traverse(FetchAllVisitor<Symbol>(symbols));
-	for (size_t i = 0, n = symbols.size(); i < n; ++i) {
-		LoadSymbol(symbols[i]);
+	std::vector<Symbol*> syms;
+	mgr.Traverse(FetchAllVisitor<Symbol>(syms));
+	for (size_t i = 0, n = syms.size(); i < n; ++i) {
+		LoadSymbol(syms[i]);
 	}
 }
 
-void LibraryPanel::LoadSymbol(Symbol* symbol)
+void LibraryPanel::LoadSymbol(Symbol* sym)
 {
 	for (size_t j = 0, m = m_pages.size(); j < m; ++j)
 	{
 		LibraryPage* page = m_pages[j];
-		if (page->IsHandleSymbol(symbol))
+		if (page->IsHandleSymbol(sym))
 		{
-			symbol->RefreshThumbnail(symbol->GetFilepath());
-			page->GetList()->Insert(symbol);
+			sym->RefreshThumbnail(sym->GetFilepath());
+			page->GetList()->Insert(sym);
 			break;
 		}
 	}
@@ -103,13 +103,13 @@ void LibraryPanel::Traverse(Visitor<ListItem>& visitor) const
 		m_selected->Traverse(visitor);
 }
 
-bool LibraryPanel::AddSymbol(Symbol* symbol)
+bool LibraryPanel::AddSymbol(Symbol* sym)
 {
 	for (int i = 0, n = m_pages.size(); i < n; ++i) 
 	{
 		LibraryPage* page = m_pages[i];
-		if (page->IsHandleSymbol(symbol)) {
-			page->AddItem(symbol);
+		if (page->IsHandleSymbol(sym)) {
+			page->AddItem(sym);
 			return true;
 		}
 	}

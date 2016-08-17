@@ -42,9 +42,9 @@ void StageCanvas::OnDrawSprites() const
 		s2::RVG::SetColor(ee::LIGHT_GREY);
 		s2::RVG::Rect(sm::vec2(0, 0), ee::HALF_SCREEN_WIDTH, ee::HALF_SCREEN_HEIGHT, false);
 
-		ee::Symbol* symbol = m_stage_panel->getPatchSymbol();
-		if (symbol)
-			symbol->Draw(s2::RenderParams());
+		ee::Symbol* sym = m_stage_panel->getPatchSymbol();
+		if (sym)
+			sym->Draw(s2::RenderParams());
 	}
 	m_stage_panel->DrawEditOP();
 }

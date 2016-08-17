@@ -16,8 +16,8 @@ class SymbolDependanceSorter
 {
 public:
 
-	void prepare(const std::vector<const ee::Symbol*>& symbols);
-	void prepare(const std::vector<const ee::Sprite*>& sprites);
+	void prepare(const std::vector<const ee::Symbol*>& syms);
+	void prepare(const std::vector<const ee::Sprite*>& sprs);
 
 // 	const std::vector<const ee::Symbol*>& GetSymbolOrdered() const {
 // 		return m_symbol_set.GetOrdered();
@@ -25,11 +25,11 @@ public:
 	const SymbolSet& GetSymbolSet() const { return m_symbol_set; }
 
 private:
-	void fetch(const std::vector<const ee::Symbol*>& symbols);
+	void fetch(const std::vector<const ee::Symbol*>& syms);
 	void sort();
 
-	bool IsSymbolPrepared(const ee::Sprite* sprite) const;
-	bool IsSymbolPrepared(const ee::Symbol* symbol) const;
+	bool IsSymbolPrepared(const ee::Sprite* spr) const;
+	bool IsSymbolPrepared(const ee::Symbol* sym) const;
 
 	void PrepareScale9(std::queue<const ee::Symbol*>& buffer, const escale9::Symbol* scale9);
 

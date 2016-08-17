@@ -42,7 +42,7 @@ void PSNode::UpdateTime()
 }
 
 static void 
-render_func(void* symbol, float* mat, float x, float y, float angle, float scale, 
+render_func(void* sym, float* mat, float x, float y, float angle, float scale, 
             struct ps_color* mul_col, struct ps_color* add_col, const void* ud)
 {
 	sm::mat4 mt;
@@ -57,7 +57,7 @@ render_func(void* symbol, float* mat, float x, float y, float angle, float scale
 		mt.x[13] = mat[5];		
 	}
 
-	ee::Symbol* sym = static_cast<ee::Symbol*>(symbol);
+	ee::Symbol* sym = static_cast<ee::Symbol*>(sym);
 
 	s2::RenderParams params;
 	params.mt = mt;

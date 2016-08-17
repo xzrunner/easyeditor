@@ -85,14 +85,14 @@ blend_func(int blend)
 }
 
 static void 
-render_func(void* symbol, float* mat, float x, float y, float angle, float scale, 
+render_func(void* sym, float* mat, float x, float y, float angle, float scale, 
             struct ps_color* mul_col, struct ps_color* add_col, const void* ud)
 {
 	assert(ud);
 	const RenderParams* rp = (static_cast<const RenderParams*>(ud));
 	assert(rp->p3d);
 
-	ee::Symbol* sym = static_cast<ee::Symbol*>(symbol);
+	ee::Symbol* sym = static_cast<ee::Symbol*>(sym);
 
 	s2::RenderParams params;
 
@@ -137,7 +137,7 @@ render_func(void* symbol, float* mat, float x, float y, float angle, float scale
 	// 	AnimRecorder* curr_record = m_anim_recorder ? m_anim_recorder : recorder;
 	// 	if (curr_record) {
 	// 		sm::vec2 fixed = ee::Math2D::TransVector(pos, _mt);
-	// 		curr_record->AddItem(symbol->GetFilepath(), fixed.x, fixed.y, p->angle, s, mul_col, add_col);
+	// 		curr_record->AddItem(sym->GetFilepath(), fixed.x, fixed.y, p->angle, s, mul_col, add_col);
 	// 	}
 }
 

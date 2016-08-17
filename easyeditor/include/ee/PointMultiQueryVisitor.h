@@ -17,11 +17,11 @@ public:
 	PointMultiQueryVisitor(const sm::vec2& pos);
 	virtual void Visit(Sprite* spr, bool& next);
 
-	const std::vector<Sprite*>& GetResult() const { return m_sprites; }
+	const std::vector<Sprite*>& GetResult() const { return m_sprs; }
 
 private:
 	const sm::vec2& m_pos;
-	std::vector<Sprite*> m_sprites;
+	std::vector<Sprite*> m_sprs;
 
 }; // PointMultiQueryVisitor
 
@@ -36,7 +36,7 @@ void PointMultiQueryVisitor::Visit(Sprite* spr, bool& next)
 {
 	if (spr->GetBounding()->IsContain(m_pos))
 	{
-		m_sprites.push_back(spr);
+		m_sprs.push_back(spr);
 		next = false;
 	}
 

@@ -11,7 +11,7 @@ class LibraryPage : public ee::LibraryPage
 public:
 	LibraryPage(wxWindow* parent, const char* name);
 
-	virtual bool IsHandleSymbol(ee::Symbol* symbol) const;
+	virtual bool IsHandleSymbol(ee::Symbol* sym) const;
 
 }; // LibraryPage 
 

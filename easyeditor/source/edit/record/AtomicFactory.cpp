@@ -9,7 +9,7 @@ namespace ee
 {
 
 AtomicOP* AtomicFactory::Create(const Json::Value& val,
-								const std::vector<Sprite*>& sprites)
+								const std::vector<Sprite*>& sprs)
 {
 	AtomicType type = AtomicType(val["type"].asInt());
 
@@ -21,7 +21,7 @@ AtomicOP* AtomicFactory::Create(const Json::Value& val,
 			{
 				float dx = static_cast<float>(val["dx"].asDouble()),
 					  dy = static_cast<float>(val["dy"].asDouble());
-				ret = new TranslateSpriteAOP(sprites, sm::vec2(dx, dy));
+				ret = new TranslateSpriteAOP(sprs, sm::vec2(dx, dy));
 			}
 			break;
 		case AT_ROTATE:
@@ -36,9 +36,9 @@ AtomicOP* AtomicFactory::Create(const Json::Value& val,
 				float angle = static_cast<float>(val["angle"].asDouble());
 
 				if (valid) {
-					ret = new RotateSpriteAOP(sprites, start, end);
+					ret = new RotateSpriteAOP(sprs, start, end);
 				} else {
-					ret = new RotateSpriteAOP(sprites, angle);
+					ret = new RotateSpriteAOP(sprs, angle);
 				}
 			}
 			break;
@@ -62,7 +62,7 @@ AtomicOP* AtomicFactory::Create(const Json::Value& val,
 					pair_val = val["old"][i++];
 				}
 
-//				ret = new arrange_sprite::ScaleSpritesAOP(sprites, sm::vec2(xscale, yscale), oldScales);
+//				ret = new arrange_sprite::ScaleSpritesAOP(sprs, sm::vec2(xscale, yscale), oldScales);
 			}
 			break;
 		case AT_SHEAR:
@@ -80,7 +80,7 @@ AtomicOP* AtomicFactory::Create(const Json::Value& val,
 					pair_val = val["old"][i++];
 				}
 
-//				ret = new arrange_sprite::ShearSpritesAOP(sprites, sm::vec2(xshear, yshear), oldShears);
+//				ret = new arrange_sprite::ShearSpritesAOP(sprs, sm::vec2(xshear, yshear), oldShears);
 			}
 			break;
 		case AT_MIRROR:
@@ -98,7 +98,7 @@ AtomicOP* AtomicFactory::Create(const Json::Value& val,
 					pair_val = val["old"][i++];
 				}
 
-//				ret = new arrange_sprite::MirrorSpritesAOP(sprites, xscale, yscale, oldMirrors);
+//				ret = new arrange_sprite::MirrorSpritesAOP(sprs, xscale, yscale, oldMirrors);
 			}
 			break;
 	}

@@ -123,9 +123,9 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 		break;
 	case ee::MSG_SORT_SPRITES:
 		{
-			std::vector<ee::Sprite*>& sprites = *(std::vector<ee::Sprite*>*)ud;
+			std::vector<ee::Sprite*>& sprs = *(std::vector<ee::Sprite*>*)ud;
 			if (m_frame) {
-				m_frame->Sort(sprites);
+				m_frame->Sort(sprs);
 			}
 		}
 		break;

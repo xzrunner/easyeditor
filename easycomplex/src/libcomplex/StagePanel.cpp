@@ -26,7 +26,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   ee::PropertySettingPanel* property,
 					   LibraryPanel* library)
 	: EditPanel(parent, frame)
-	, ee::SpritesPanelImpl(GetStageImpl(), new SymbolContainer(m_symbol = new Symbol))
+	, ee::SpritesPanelImpl(GetStageImpl(), new SymbolContainer(m_sym = new Symbol))
 	, m_library(library)
 {
 	ee::EditOP* editop = new ee::ArrangeSpriteOP<SelectSpritesOP>(this, GetStageImpl(), this, property, 
@@ -46,13 +46,13 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
-					   Symbol* symbol,
+					   Symbol* sym,
 					   ee::PropertySettingPanel* property,
 					   LibraryPanel* library,
 					   wxGLContext* glctx,
 					   ee::CrossGuides* guides)
 	: EditPanel(parent, frame)
-	, ee::SpritesPanelImpl(GetStageImpl(), new SymbolContainer(m_symbol = symbol))
+	, ee::SpritesPanelImpl(GetStageImpl(), new SymbolContainer(m_sym = sym))
 	, m_library(library)
 {
 	ee::ArrangeSpriteOP<SelectSpritesOP>* editop = new ee::ArrangeSpriteOP<SelectSpritesOP>(
@@ -73,7 +73,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 bool StagePanel::Update(float dt)
 {
 	bool dirty = ee::SceneNodeMgr::Instance()->Update(1 / 30.0f);
-	const std::vector<s2::Sprite*>& children = m_symbol->GetChildren();
+	const std::vector<s2::Sprite*>& children = m_sym->GetChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
 		if (children[i]->Update(s2::RenderParams(), dt)) {
 			dirty = true;
@@ -93,8 +93,8 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 
 void StagePanel::Clear()
 {
-	m_symbol->m_clipbox = sm::rect(sm::vec2(0, 0), 0, 0);
-	m_symbol->Clear();
+	m_sym->m_clipbox = sm::rect(sm::vec2(0, 0), 0, 0);
+	m_sym->Clear();
 }
 
 } // complex

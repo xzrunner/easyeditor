@@ -34,7 +34,7 @@ public:
 	virtual void TraverseShapes(ee::Visitor<ee::Shape>& visitor, 
 		ee::DataTraverseType type = ee::DT_ALL) const;
 
-	Symbol* GetSymbol() { return m_symbol; }
+	Symbol* GetSymbol() { return m_sym; }
 
 	void LoadFromShadow();
 
@@ -48,7 +48,7 @@ private:
 	void InsertShape(ee::Shape* shape);
 
 private:
-	Symbol* m_symbol;
+	Symbol* m_sym;
 
 	ee::Shape* m_loop;
 

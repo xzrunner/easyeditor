@@ -11,14 +11,14 @@ class Sprite;
 class OffsetSpriteState : public ArrangeSpriteState
 {
 public:
-	OffsetSpriteState(Sprite* sprite);
+	OffsetSpriteState(Sprite* spr);
 	virtual ~OffsetSpriteState();
 
 	virtual void OnMouseRelease(const sm::vec2& pos);
 	virtual	bool OnMouseDrag(const sm::vec2& pos);
 
 private:
-	Sprite* m_sprite;
+	Sprite* m_spr;
 
 	sm::vec2 m_old_offset;
 

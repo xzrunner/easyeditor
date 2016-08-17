@@ -17,9 +17,9 @@ namespace preview
 {
 
 MainDialog::MainDialog(wxWindow* parent, wxGLContext* glctx, int width, 
-					   int height, const std::vector<const ee::Sprite*>& sprites)
+					   int height, const std::vector<const ee::Sprite*>& sprs)
 	: wxDialog(parent, wxID_ANY, "Preview", wxDefaultPosition, wxSize(width, height), wxCLOSE_BOX | wxCAPTION)
-	, m_sprites(sprites)
+	, m_sprs(sprs)
 	, m_control(0.033f)
 {
 	InitLayout(glctx);
@@ -38,7 +38,7 @@ void MainDialog::InitLayout(wxGLContext* glctx)
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
-	StageCanvas* canvas = new StageCanvas(stage, stage->GetStageImpl(), m_control, m_sprites, glctx);
+	StageCanvas* canvas = new StageCanvas(stage, stage->GetStageImpl(), m_control, m_sprs, glctx);
 	stage->SetCanvas(canvas);
 	canvas->RemoveReference();
 

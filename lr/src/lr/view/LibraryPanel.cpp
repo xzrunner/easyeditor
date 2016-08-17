@@ -72,10 +72,10 @@ void LibraryPanel::LoadFromFile(const Json::Value& value, const std::string& dir
 			std::string item_path = item_val.asString();
 			std::string filepath = ee::FileHelper::GetAbsolutePath(dir, item_path);
 			try {
-				ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-				symbol->RefreshThumbnail(symbol->GetFilepath());
-				list->Insert(symbol);
-				symbol->RemoveReference();
+				ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+				sym->RefreshThumbnail(sym->GetFilepath());
+				list->Insert(sym);
+				sym->RemoveReference();
 			} catch (ee::Exception& e) {
 				throw ee::Exception("Create symbol %s fail!", item_path.c_str());
 			}
@@ -90,10 +90,10 @@ void LibraryPanel::StoreToFile(Json::Value& value, const std::string& dir) const
 	{
 		ee::LibraryList* list = m_pages[i]->GetList();
 		int j = 0;
-		ee::Symbol* symbol = static_cast<ee::Symbol*>(list->GetItem(j++));
-		while (symbol) {
-			value[i][j-1] = ee::FileHelper::GetRelativePath(dir, symbol->GetFilepath());
-			symbol = static_cast<ee::Symbol*>(list->GetItem(j++));
+		ee::Symbol* sym = static_cast<ee::Symbol*>(list->GetItem(j++));
+		while (sym) {
+			value[i][j-1] = ee::FileHelper::GetRelativePath(dir, sym->GetFilepath());
+			sym = static_cast<ee::Symbol*>(list->GetItem(j++));
 		}
 	}
 }
@@ -119,19 +119,19 @@ void LibraryPanel::LoadSymbolFromLayer()
 	{
 		LibraryPage* page = static_cast<LibraryPage*>(m_pages[i]);
 
- 		std::vector<ee::Sprite*> sprites;
- 		page->GetLayer()->TraverseSprite(ee::FetchAllVisitor<ee::Sprite>(sprites), true);
+ 		std::vector<ee::Sprite*> sprs;
+ 		page->GetLayer()->TraverseSprite(ee::FetchAllVisitor<ee::Sprite>(sprs), true);
  		std::set<ee::Symbol*> symbol_set;
- 		for (int i = 0, n = sprites.size(); i < n; ++i) {
- 			ee::Symbol* symbol = dynamic_cast<ee::Symbol*>(sprites[i]->GetSymbol());
- 			symbol_set.insert(symbol);
+ 		for (int i = 0, n = sprs.size(); i < n; ++i) {
+ 			ee::Symbol* sym = dynamic_cast<ee::Symbol*>(sprs[i]->GetSymbol());
+ 			symbol_set.insert(sym);
  		}
  
  		std::set<ee::Symbol*>::iterator itr = symbol_set.begin();
  		for ( ; itr != symbol_set.end(); ++itr) {
- 			ee::Symbol* symbol = *itr;
- 			symbol->RefreshThumbnail(symbol->GetFilepath());
- 			page->GetList()->Insert(symbol);
+ 			ee::Symbol* sym = *itr;
+ 			sym->RefreshThumbnail(sym->GetFilepath());
+ 			page->GetList()->Insert(sym);
  		}
 	}
 }
@@ -231,8 +231,8 @@ void LibraryPanel::Refresh()
 {
 	Layer* layer = static_cast<LibraryPage*>(m_selected)->GetLayer();
 
-	std::vector<ee::Sprite*> sprites;
-	layer->TraverseSprite(ee::FetchAllVisitor<ee::Sprite>(sprites), true);
+	std::vector<ee::Sprite*> sprs;
+	layer->TraverseSprite(ee::FetchAllVisitor<ee::Sprite>(sprs), true);
 
 	// stage
 	m_stage->GetSpriteSelection()->Clear();
@@ -240,15 +240,15 @@ void LibraryPanel::Refresh()
 
 	// view list
 	m_viewlist->Clear();
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		m_viewlist->Insert(sprites[i]);
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		m_viewlist->Insert(sprs[i]);
 	}
 
 	// group tree
 	m_grouptree->EnableExpand(false);
 	m_grouptree->Clear();
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		m_grouptree->Insert(sprites[i]);
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		m_grouptree->Insert(sprs[i]);
 	}
 	m_grouptree->EnableExpand(true);
 }

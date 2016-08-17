@@ -13,8 +13,8 @@ class Sprite;
 class GroupHelper
 {
 public:
-	static Sprite* Group(const std::vector<ee::Sprite*>& sprites);
-	static void BreakUp(ee::Sprite* group, std::vector<ee::Sprite*>& sprites);
+	static Sprite* Group(const std::vector<ee::Sprite*>& sprs);
+	static void BreakUp(ee::Sprite* group, std::vector<ee::Sprite*>& sprs);
 
 }; // GroupHelper
 

@@ -41,12 +41,12 @@ void MaxRectsBinaryPack2::Pack(PACK_STRATEGY strategy, int static_size, int max_
 	output.clear();
 	output.resize(sz);
 
-	std::vector<Sprite> sprites;
-	sprites.reserve(sz);
+	std::vector<Sprite> sprs;
+	sprs.reserve(sz);
 	for (int i = 0; i < sz; ++i) {
-		sprites.push_back(Sprite(&rects[i], &output[i]));
+		sprs.push_back(Sprite(&rects[i], &output[i]));
 	}
-	std::sort(sprites.begin(), sprites.end(), SpriteCmp(e_max_edge));
+	std::sort(sprs.begin(), sprs.end(), SpriteCmp(e_max_edge));
 
 	// compute area
 	int area = 0;
@@ -57,16 +57,16 @@ void MaxRectsBinaryPack2::Pack(PACK_STRATEGY strategy, int static_size, int max_
 	switch(strategy)
 	{
 	case PACK_AUTO:
-		PackAuto(sprites, area);
+		PackAuto(sprs, area);
 		break;
 	case PACK_SQUARE:
-		PackSquare(sprites, area);
+		PackSquare(sprs, area);
 		break;
 	case PACK_SQUARE_MULTI:
-		PackSquareMulti(sprites, static_size);
+		PackSquareMulti(sprs, static_size);
 		break;
 	case PACK_SQUARE_MULTI_AUTO:
-		PackSquareMultiAuto(sprites, area, max_size, min_size);
+		PackSquareMultiAuto(sprs, area, max_size, min_size);
 		break;
 	default:
 		output.clear();
@@ -81,11 +81,11 @@ ee::TPNode* MaxRectsBinaryPack2::NewRoot(int w, int h)
 	return root;
 }
 
-bool MaxRectsBinaryPack2::Insert(ee::TPNode* root, const Sprite* sprite, int tex_id) const
+bool MaxRectsBinaryPack2::Insert(ee::TPNode* root, const Sprite* spr, int tex_id) const
 {
 	ee::TPNode* n = NULL;
-	int w = static_cast<int>(sprite->size->width * SCALE + PADDING * 2),
-		h = static_cast<int>(sprite->size->height * SCALE + PADDING * 2);
+	int w = static_cast<int>(spr->size->width * SCALE + PADDING * 2),
+		h = static_cast<int>(spr->size->height * SCALE + PADDING * 2);
 	float scale = 1.0f;
 
 	bool rot = false;
@@ -115,21 +115,21 @@ bool MaxRectsBinaryPack2::Insert(ee::TPNode* root, const Sprite* sprite, int tex
 	if (!n) {
 		return false;
 	} else {
-		sprite->pos->tex_id = tex_id;
-		sprite->pos->x = n->GetMinX() + PADDING;
-		sprite->pos->y = n->GetMinY() + PADDING;
+		spr->pos->tex_id = tex_id;
+		spr->pos->x = n->GetMinX() + PADDING;
+		spr->pos->y = n->GetMinY() + PADDING;
 		if (n->IsRotated() && !rot || !n->IsRotated() && rot) {
-			sprite->pos->width = h - PADDING * 2;
-			sprite->pos->height = w - PADDING * 2;
+			spr->pos->width = h - PADDING * 2;
+			spr->pos->height = w - PADDING * 2;
 		} else {
-			sprite->pos->width = w - PADDING * 2;
-			sprite->pos->height = h - PADDING * 2;
+			spr->pos->width = w - PADDING * 2;
+			spr->pos->height = h - PADDING * 2;
 		}
 		return true;
 	}
 }
 
-void MaxRectsBinaryPack2::PackAuto(const std::vector<Sprite>& sprites, int area)
+void MaxRectsBinaryPack2::PackAuto(const std::vector<Sprite>& sprs, int area)
 {
 	int edge = ee::next_p2((int)ceil(sqrt((float)area)));
 	int w = edge, h = (edge >> 1);
@@ -138,8 +138,8 @@ void MaxRectsBinaryPack2::PackAuto(const std::vector<Sprite>& sprites, int area)
 	while (!success)
 	{
 		ee::TPNode* root = NewRoot(w, h);
-		for (int i = 0, n = sprites.size(); i < n; ++i) {
-			success = Insert(root, &sprites[i]);
+		for (int i = 0, n = sprs.size(); i < n; ++i) {
+			success = Insert(root, &sprs[i]);
 			if (!success) {
 				break;
 			}
@@ -163,15 +163,15 @@ void MaxRectsBinaryPack2::PackAuto(const std::vector<Sprite>& sprites, int area)
 	}
 }
 
-void MaxRectsBinaryPack2::PackSquare(const std::vector<Sprite>& sprites, int area)
+void MaxRectsBinaryPack2::PackSquare(const std::vector<Sprite>& sprs, int area)
 {
 	int edge = ee::next_p2((int)ceil(sqrt((float)area)));
 	bool success = false;
 	while (!success)
 	{
 		ee::TPNode* root = NewRoot(edge, edge);
-		for (int i = 0, n = sprites.size(); i < n; ++i) {
-			success = Insert(root, &sprites[i]);
+		for (int i = 0, n = sprs.size(); i < n; ++i) {
+			success = Insert(root, &sprs[i]);
 			if (!success) {
 				break;
 			}
@@ -196,9 +196,9 @@ int CalArea(const std::vector<Sprite>& list) {
 	return area;
 }
 
-void MaxRectsBinaryPack2::PackSquareMulti(std::vector<Sprite>& sprites, int static_size)
+void MaxRectsBinaryPack2::PackSquareMulti(std::vector<Sprite>& sprs, int static_size)
 {
-	std::vector<Sprite> curr_list = sprites;
+	std::vector<Sprite> curr_list = sprs;
 
 	int curr_tex = 0;
 	while (!curr_list.empty()) 
@@ -224,7 +224,7 @@ void MaxRectsBinaryPack2::PackSquareMulti(std::vector<Sprite>& sprites, int stat
 	}
 }
 
-void MaxRectsBinaryPack2::PackSquareMultiAuto(std::vector<Sprite>& sprites, int area,
+void MaxRectsBinaryPack2::PackSquareMultiAuto(std::vector<Sprite>& sprs, int area,
 											  int max_size, int min_size)
 {
 	static const float AREA_SCALE_LIMIT = 0.8f;
@@ -238,7 +238,7 @@ void MaxRectsBinaryPack2::PackSquareMultiAuto(std::vector<Sprite>& sprites, int 
 
 	int edge = std::max(std::min(ee::next_p2((int)ceil(sqrt((float)area))), max_size), min_size);
 
-	std::vector<Sprite> curr_list = sprites;
+	std::vector<Sprite> curr_list = sprs;
 
 	float fail_scale = -1;
 	
@@ -291,10 +291,10 @@ void MaxRectsBinaryPack2::PackSquareMultiAuto(std::vector<Sprite>& sprites, int 
 		}
 	}
 
-	MergeSquareMultiAuto(sprites, max_size);
+	MergeSquareMultiAuto(sprs, max_size);
 }
 
-bool MaxRectsBinaryPack2::MergeSquareMultiAuto(std::vector<Sprite>& sprites, int max_size)
+bool MaxRectsBinaryPack2::MergeSquareMultiAuto(std::vector<Sprite>& sprs, int max_size)
 {
 	std::vector<int> ids;
 	int count = 0;
@@ -340,9 +340,9 @@ bool MaxRectsBinaryPack2::MergeSquareMultiAuto(std::vector<Sprite>& sprites, int
 	new_roots.push_back(new_root);
 
 	std::vector<Rect> tmp_rects;
-	tmp_rects.reserve(sprites.size());
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		const Sprite& spr = sprites[i];
+	tmp_rects.reserve(sprs.size());
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		const Sprite& spr = sprs[i];
 		tmp_rects.push_back(*spr.pos);
 		if (spr.pos->tex_id == ids[0] || spr.pos->tex_id == ids[1] ||
 			spr.pos->tex_id == ids[2] || spr.pos->tex_id == ids[3]) {
@@ -350,7 +350,7 @@ bool MaxRectsBinaryPack2::MergeSquareMultiAuto(std::vector<Sprite>& sprites, int
 			if (!success) {
 				// todo
 				for (int i = 0, n = tmp_rects.size(); i < n; ++i) {
-					*sprites[i].pos = tmp_rects[i];
+					*sprs[i].pos = tmp_rects[i];
 				}
 				delete new_root;
 				return false;
@@ -365,11 +365,11 @@ bool MaxRectsBinaryPack2::MergeSquareMultiAuto(std::vector<Sprite>& sprites, int
 		delete remove_nodes[i];
 	}
 	
-	MergeSquareMultiAuto(sprites, max_size);
+	MergeSquareMultiAuto(sprs, max_size);
 	return true;
 }
 
-void MaxRectsBinaryPack2::SortRoots(const std::vector<Sprite>& sprites)
+void MaxRectsBinaryPack2::SortRoots(const std::vector<Sprite>& sprs)
 {
 	std::vector<ee::TPNode*> sorted(m_roots);
 	std::sort(sorted.begin(), sorted.end(), NodeCmp());
@@ -385,8 +385,8 @@ void MaxRectsBinaryPack2::SortRoots(const std::vector<Sprite>& sprites)
 	assert(map_id.size() == m_roots.size());
 
 	m_roots = sorted;
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		sprites[i].pos->tex_id = map_id[sprites[i].pos->tex_id];
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		sprs[i].pos->tex_id = map_id[sprs[i].pos->tex_id];
 	}
 }
 

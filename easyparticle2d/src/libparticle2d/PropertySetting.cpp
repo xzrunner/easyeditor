@@ -8,8 +8,8 @@
 namespace eparticle2d
 {
 
-PropertySetting::PropertySetting(ee::EditPanelImpl* edit_impl, Sprite* sprite)
-	: ee::SpritePropertySetting(edit_impl, sprite)
+PropertySetting::PropertySetting(ee::EditPanelImpl* edit_impl, Sprite* spr)
+	: ee::SpritePropertySetting(edit_impl, spr)
 	, m_parent(edit_impl->GetEditPanel())
 {
 	m_type = "P2D";

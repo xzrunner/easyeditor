@@ -15,7 +15,7 @@ class Sprite;
 class EditDialog : public wxDialog
 {
 public:
-	EditDialog(wxWindow* parent, Sprite* sprite, wxGLContext* glctx);
+	EditDialog(wxWindow* parent, Sprite* spr, wxGLContext* glctx);
 	virtual ~EditDialog();
 
 private:
@@ -26,7 +26,7 @@ private:
 private:
 	ee::EditPanel* m_stage;
 
-	Sprite* m_sprite;
+	Sprite* m_spr;
 
 	DECLARE_EVENT_TABLE()
 

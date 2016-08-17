@@ -36,9 +36,9 @@ void TextureBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 	}
 }
 
-bool TextureBuilder::CanHandle(const etexture::Symbol* symbol) const
+bool TextureBuilder::CanHandle(const etexture::Symbol* sym) const
 {
-	const std::vector<ee::Shape*>& shapes = symbol->GetAllShapes();
+	const std::vector<ee::Shape*>& shapes = sym->GetAllShapes();
 	if (shapes.size() != 1) {
 		return false;
 	}
@@ -53,39 +53,39 @@ bool TextureBuilder::CanHandle(const etexture::Symbol* symbol) const
 	return true;
 }
 
-const IPackNode* TextureBuilder::Create(const etexture::Symbol* symbol)
+const IPackNode* TextureBuilder::Create(const etexture::Symbol* sym)
 {
 	std::map<const etexture::Symbol*, const PackPicture*>::iterator 
-		itr = m_map_data.find(symbol);
+		itr = m_map_data.find(sym);
 	if (itr != m_map_data.end()) {
 		return itr->second;
 	}
 
 	PackPicture* node = new PackPicture;
-	Load(symbol, node);
-	m_map_data.insert(std::make_pair(symbol, node));
+	Load(sym, node);
+	m_map_data.insert(std::make_pair(sym, node));
 	return node;
 }
 
-void TextureBuilder::Load(const etexture::Symbol* symbol, PackPicture* pic)
+void TextureBuilder::Load(const etexture::Symbol* sym, PackPicture* pic)
 {
-	const std::vector<ee::Shape*>& shapes = symbol->GetAllShapes();
+	const std::vector<ee::Shape*>& shapes = sym->GetAllShapes();
 	if (shapes.size() != 1) {
-		throw ee::Exception("TextureBuilder::Load shapes.size(): %d filepath: %s", shapes.size(), symbol->GetFilepath().c_str());
+		throw ee::Exception("TextureBuilder::Load shapes.size(): %d filepath: %s", shapes.size(), sym->GetFilepath().c_str());
 	}
 	eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(shapes[0]);
 	if (!poly) {
-		throw ee::Exception("TextureBuilder::Load !poly, filepath: %s", symbol->GetFilepath().c_str());
+		throw ee::Exception("TextureBuilder::Load !poly, filepath: %s", sym->GetFilepath().c_str());
 	}
 	const eshape::TextureMaterial* material = dynamic_cast<const eshape::TextureMaterial*>(poly->GetMaterial());
 	if (!material) {
-		throw ee::Exception("TextureBuilder::Load !material, filepath: %s", symbol->GetFilepath().c_str());
+		throw ee::Exception("TextureBuilder::Load !material, filepath: %s", sym->GetFilepath().c_str());
 	}
 
 	const std::vector<sm::vec2>& vertices = material->GetTriangles();
 	const std::vector<sm::vec2>& texcoords = material->GetTexcoords();
 	if ((vertices.size() != texcoords.size()) || (vertices.size() % 3 != 0)) {
-		throw ee::Exception("TextureBuilder::Load err meaterial, filepath: %s", symbol->GetFilepath().c_str());
+		throw ee::Exception("TextureBuilder::Load err meaterial, filepath: %s", sym->GetFilepath().c_str());
 	}
 	for (int i = 0, n = vertices.size(); i < n; i += 3)
 	{

@@ -32,8 +32,8 @@ sm::rect Symbol::GetBounding(const s2::Sprite* sprite/* = NULL*/) const
 
 void Symbol::ReloadTexture() const
 {
-	for (int i = 0, n = m_symbols.size(); i < n; ++i) {
-		m_symbols[i]->ReloadTexture();
+	for (int i = 0, n = m_syms.size(); i < n; ++i) {
+		m_syms[i]->ReloadTexture();
 	}
 }
 
@@ -56,23 +56,23 @@ void Symbol::LoadResources()
 	while (!temp_val.isNull()) {
 		std::string dirpath = temp_val["path"].asString();
 
-		eanim::Symbol* symbol = new eanim::Symbol();
-		symbol->SetFilepath(m_filepath);
+		eanim::Symbol* sym = new eanim::Symbol();
+		sym->SetFilepath(m_filepath);
 		Loader loader(dirpath);
-		symbol->LoadFromFile(loader);
+		sym->LoadFromFile(loader);
 
 		temp_val = value["template"][idx++];
 	}
 
-	for (int i = 0, n = m_symbols.size(); i < n; ++i) {
-		m_rect.Combine(m_symbols[i]->GetBounding());
+	for (int i = 0, n = m_syms.size(); i < n; ++i) {
+		m_rect.Combine(m_syms[i]->GetBounding());
 	}
 }
 
 void Symbol::Clear()
 {
-	for_each(m_symbols.begin(), m_symbols.end(), cu::RemoveRefFonctor<eanim::Symbol>());
-	m_symbols.clear();
+	for_each(m_syms.begin(), m_syms.end(), cu::RemoveRefFonctor<eanim::Symbol>());
+	m_syms.clear();
 }
 
 //////////////////////////////////////////////////////////////////////////

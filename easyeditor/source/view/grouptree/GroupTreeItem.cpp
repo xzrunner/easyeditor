@@ -9,26 +9,26 @@ namespace ee
 // class GroupTreeSpriteItem
 //////////////////////////////////////////////////////////////////////////
 
-GroupTreeSpriteItem::GroupTreeSpriteItem(Sprite* sprite)
-	: m_sprite(sprite)
+GroupTreeSpriteItem::GroupTreeSpriteItem(Sprite* spr)
+	: m_spr(spr)
 {
-	if (m_sprite) {
-		m_sprite->AddReference();
+	if (m_spr) {
+		m_spr->AddReference();
 	}
 }
 
 GroupTreeSpriteItem::GroupTreeSpriteItem(const GroupTreeSpriteItem& item)
 {
-	m_sprite = item.m_sprite;
-	if (m_sprite) {
-		m_sprite->AddReference();
+	m_spr = item.m_spr;
+	if (m_spr) {
+		m_spr->AddReference();
 	}
 }
 
 GroupTreeSpriteItem::~GroupTreeSpriteItem()
 {
-	if (m_sprite) {
-		m_sprite->RemoveReference();
+	if (m_spr) {
+		m_spr->RemoveReference();
 	}
 }
 

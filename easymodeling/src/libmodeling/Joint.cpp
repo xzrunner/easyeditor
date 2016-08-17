@@ -26,20 +26,20 @@ Joint::Joint(Body* b0, Body* b1, Type type)
 
 void Joint::DrawBodyFlag() const
 {
-	DrawBodyFlag(m_body_a->m_sprite->GetPosition());
-	DrawBodyFlag(m_body_b->m_sprite->GetPosition());
+	DrawBodyFlag(m_body_a->m_spr->GetPosition());
+	DrawBodyFlag(m_body_b->m_spr->GetPosition());
 }
 
 sm::vec2 Joint::TransWorldToLocal(const sm::vec2& world, 
-									const ee::Sprite* sprite)
+									const ee::Sprite* spr)
 {
-	return ee::Math2D::RotateVector(world - sprite->GetPosition(), -sprite->GetAngle());
+	return ee::Math2D::RotateVector(world - spr->GetPosition(), -spr->GetAngle());
 }
 
 sm::vec2 Joint::TransLocalToWorld(const sm::vec2& local, 
-									const ee::Sprite* sprite)
+									const ee::Sprite* spr)
 {
-	return ee::Math2D::RotateVector(local, sprite->GetAngle()) + sprite->GetPosition();
+	return ee::Math2D::RotateVector(local, spr->GetAngle()) + spr->GetPosition();
 }
 
 void Joint::DrawBodyFlag(const sm::vec2& pos) const

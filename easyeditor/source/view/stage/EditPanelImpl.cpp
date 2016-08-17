@@ -246,10 +246,10 @@ void EditPanelImpl::Redo()
 	}
 }
 
-void EditPanelImpl::SaveOpRecordList(const std::string& filepath, const std::vector<Sprite*>& sprites)
+void EditPanelImpl::SaveOpRecordList(const std::string& filepath, const std::vector<Sprite*>& sprs)
 {
 	Json::Value value;
-	m_history_list.Store(value, sprites);
+	m_history_list.Store(value, sprs);
 
 	std::string path = filepath.substr(0, filepath.find_last_of('.')) + "_history.json";
 	Json::StyledStreamWriter writer;
@@ -260,7 +260,7 @@ void EditPanelImpl::SaveOpRecordList(const std::string& filepath, const std::vec
 	fout.close();
 }
 
-void EditPanelImpl::LoadOpRecordList(const std::string& filepath, const std::vector<Sprite*>& sprites)
+void EditPanelImpl::LoadOpRecordList(const std::string& filepath, const std::vector<Sprite*>& sprs)
 {
 	std::string path = filepath.substr(0, filepath.find_last_of('.')) + "_history.json";
 
@@ -275,7 +275,7 @@ void EditPanelImpl::LoadOpRecordList(const std::string& filepath, const std::vec
 	reader.parse(fin, value);
 	fin.close();
 
-	m_history_list.Load(value, sprites);
+	m_history_list.Load(value, sprs);
 }
 
 void EditPanelImpl::OnSave()

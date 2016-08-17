@@ -18,15 +18,15 @@ bool PreviewPanel::Update(float dt)
 {
 	ee::SceneNodeMgr::Instance()->Update(1 / 30.0f);
 
-	std::vector<ee::Sprite*> sprites;
-	PreviewUtility::GetCurrSprites(m_ctrl, sprites);
+	std::vector<ee::Sprite*> sprs;
+	PreviewUtility::GetCurrSprites(m_ctrl, sprs);
 
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		sprites[i]->Update(dt);
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		sprs[i]->Update(dt);
 	}
 
-	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-		sprites[i]->RemoveReference();
+	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
+		sprs[i]->RemoveReference();
 	}
 
 	return true;

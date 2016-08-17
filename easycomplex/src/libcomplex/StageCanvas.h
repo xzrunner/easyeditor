@@ -20,7 +20,7 @@ public:
 	
 	virtual ~StageCanvas();
 
-	void SetBackground(ee::Symbol* symbol);
+	void SetBackground(ee::Symbol* sym);
 
 protected:
 	virtual void OnSize(int w, int h);

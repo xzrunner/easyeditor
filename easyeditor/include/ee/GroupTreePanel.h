@@ -27,7 +27,7 @@ public:
 	void EnableExpand(bool enable);
 
 	void Clear();
-	void Insert(Sprite* sprite);
+	void Insert(Sprite* spr);
 
 private:
 	void InitLayout();

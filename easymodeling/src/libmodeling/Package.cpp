@@ -23,9 +23,9 @@ void Paskage::PackBody(const Body& data, std::ofstream& fout)
 {
 	fout.write(reinterpret_cast<const char*>(&data.m_type), sizeof(int));
 
-	fout.write(reinterpret_cast<const char*>(&data.m_sprite->GetPosition().x), sizeof(float));
-	fout.write(reinterpret_cast<const char*>(&data.m_sprite->GetPosition().y), sizeof(float));
-	float angle = data.m_sprite->GetAngle();
+	fout.write(reinterpret_cast<const char*>(&data.m_spr->GetPosition().x), sizeof(float));
+	fout.write(reinterpret_cast<const char*>(&data.m_spr->GetPosition().y), sizeof(float));
+	float angle = data.m_spr->GetAngle();
 	fout.write(reinterpret_cast<const char*>(&angle), sizeof(float));
 
 	size_t size = data.m_fixtures.size();

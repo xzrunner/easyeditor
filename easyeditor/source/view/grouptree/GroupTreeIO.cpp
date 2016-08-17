@@ -17,8 +17,8 @@ GroupTreeIO::GroupTreeIO(GroupTreeCtrl* tree, MultiSpritesImpl* sprites_impl)
 
 void GroupTreeIO::Load(const Json::Value& value)
 {
-	std::vector<Sprite*> sprites;
-	m_sprites_impl->TraverseSprites(FetchAllVisitor<Sprite>(sprites));
+	std::vector<Sprite*> sprs;
+	m_sprites_impl->TraverseSprites(FetchAllVisitor<Sprite>(sprs));
 
 	std::vector<Node> nodes;
 	LoadToNodes(value, nodes);
@@ -39,12 +39,12 @@ void GroupTreeIO::Load(const Json::Value& value)
  		for ( ; itr != nodes.end(); ) {
  			const Node& node = *itr;
  			if (node.parent == candidate.first) {
-				if (!node.sprite.empty()) {
+				if (!node.spr.empty()) {
 					Sprite* spr = NULL;
 
-					for (int i = 0, n = sprites.size(); i < n; ++i) {
-						if (node.name == sprites[i]->GetName()) {
-							spr = sprites[i];
+					for (int i = 0, n = sprs.size(); i < n; ++i) {
+						if (node.name == sprs[i]->GetName()) {
+							spr = sprs[i];
 							break;
 						}
 					}
@@ -81,7 +81,7 @@ void GroupTreeIO::LoadToNodes(const Json::Value& value, std::vector<Node>& nodes
 		node.is_leaf = node_val["leaf"].asBool();
 		node.name = node_val["name"].asString();
 		node.parent = node_val["parent"].asString();
-		node.sprite = node_val["sprite"].asString();
+		node.spr = node_val["sprite"].asString();
 		if (!node_val["visible"].isNull()) {
 			node.visible = node_val["visible"].asBool();
 		} else {

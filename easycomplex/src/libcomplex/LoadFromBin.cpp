@@ -14,7 +14,7 @@ namespace ecomplex
 {
 
 void LoadFromBin::Load(const Json::Value& value, const std::string& dir, 
-					   Symbol* symbol)
+					   Symbol* sym)
 {
 	std::string filename = ee::FileHelper::GetAbsolutePath(dir, value["bin file"].asString());
 
@@ -29,7 +29,7 @@ void LoadFromBin::Load(const Json::Value& value, const std::string& dir,
 	std::string export_name = value["export name"].asString();
 
 	erespacker::IPackNode* node = erespacker::UnpackNodeFactory::Instance()->Query(export_name);
-	symbol->Add(NodeToSprite::Trans(node));
+	sym->Add(NodeToSprite::Trans(node));
 }
 
 #define LZMA_PROPS_SIZE 5

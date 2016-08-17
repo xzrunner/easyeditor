@@ -30,7 +30,7 @@ public:
 	bool Clear();
 	bool ResetOrder(const Sprite* spr, bool up);
 	bool ResetOrderMost(const Sprite* spr, bool up);
-	bool Sort(std::vector<Sprite*>& sprites);
+	bool Sort(std::vector<Sprite*>& sprs);
 
 protected:
 	std::vector<Sprite*> m_children;

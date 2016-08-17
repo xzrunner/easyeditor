@@ -15,7 +15,7 @@ class Symbol;
 class PreviewDialog : public wxDialog
 {
 public:
-	PreviewDialog(wxWindow* parent, const Symbol* symbol,
+	PreviewDialog(wxWindow* parent, const Symbol* sym,
 		wxGLContext* glctx);
 	~PreviewDialog();
 
@@ -31,7 +31,7 @@ private:
 private:
 	ee::EditPanel* m_stage;
 
-	const Symbol* m_symbol;
+	const Symbol* m_sym;
 
 }; // PreviewDialog
 

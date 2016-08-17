@@ -30,12 +30,12 @@ void RotateSpriteState::Rotate(const sm::vec2& dst)
 		return;
 	}
 
-	std::vector<ee::Sprite*> sprites;
-	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
+	std::vector<ee::Sprite*> sprs;
+	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
 
-	skeleton->FixJoint(sprites[0]);
-	float dAngle = ee::Math2D::GetAngleInDirection(sprites[0]->GetPosition(), GetLastPos(), dst);
-	skeleton->UpdateJoint(sprites[0], dAngle);
+	skeleton->FixJoint(sprs[0]);
+	float dAngle = ee::Math2D::GetAngleInDirection(sprs[0]->GetPosition(), GetLastPos(), dst);
+	skeleton->UpdateJoint(sprs[0], dAngle);
 }
 
 }

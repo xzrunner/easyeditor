@@ -53,7 +53,7 @@ std::string SymbolSearcher::GetSymbolPath(const std::string& dir,
 	return real_path;
 }
 
-void SymbolSearcher::SetSymbolFilepaths(const std::string& dir, Symbol* symbol, 
+void SymbolSearcher::SetSymbolFilepaths(const std::string& dir, Symbol* sym, 
 										const Json::Value& sprite_val)
 {
 	// todo same!
@@ -70,7 +70,7 @@ void SymbolSearcher::SetSymbolFilepaths(const std::string& dir, Symbol* symbol,
 		}
 		filepaths.insert(sprite_val["filepath"].asString());
 
-		symbol->SetFilepaths(filepaths);
+		sym->SetFilepaths(filepaths);
 	}
 }
 

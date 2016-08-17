@@ -39,7 +39,7 @@ public:
 		m_ori3 = delta.Rotated(m_ori3);
 	}
 
-	static ee::Sprite* Create(ee::Symbol* symbol);
+	static ee::Sprite* Create(ee::Symbol* sym);
 
 private:
 	sm::vec3 m_pos3;

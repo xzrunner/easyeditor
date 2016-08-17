@@ -309,8 +309,8 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 		break;
 	case ee::MSG_SORT_SPRITES:
 		{
-			std::vector<ee::Sprite*>& sprites = *(std::vector<ee::Sprite*>*)ud;
-			SortSprites(sprites);
+			std::vector<ee::Sprite*>& sprs = *(std::vector<ee::Sprite*>*)ud;
+			SortSprites(sprs);
 		}
 		break;
 	case ee::MSG_INSERT_SPRITE:
@@ -362,12 +362,12 @@ void StagePanel::ReorderSpriteMost(ee::Sprite* spr, bool up)
 	}
 }
 
-void StagePanel::SortSprites(std::vector<ee::Sprite*>& sprites)
+void StagePanel::SortSprites(std::vector<ee::Sprite*>& sprs)
 {
 	for (int i = 0, n = m_layers.size(); i < n; ++i)
 	{
 		Layer* layer = m_layers[i];
-		if (layer->SortSrites(sprites)) {
+		if (layer->SortSrites(sprs)) {
 			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 			break;
 		}

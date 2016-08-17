@@ -20,7 +20,7 @@ public:
 
 private:
 	// todo cost!
-	void fixSpritesLocation(const std::vector<Sprite*>& sprites);
+	void fixSpritesLocation(const std::vector<Sprite*>& sprs);
 
 	void FixSpritesLocation();
 

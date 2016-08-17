@@ -60,7 +60,7 @@ class PackNodeFactory
 {
 public:
 	const IPackNode* Create(const ee::Sprite* spr);	
-	const IPackNode* Create(const ee::Symbol* symbol);	
+	const IPackNode* Create(const ee::Symbol* sym);	
 
 	void GetAllNodes(std::vector<IPackNode*>& nodes) const;
 

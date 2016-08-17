@@ -13,7 +13,7 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	m_list->SetFileter(FILE_TAG);
 }
 
-bool LibraryPage::IsHandleSymbol(ee::Symbol* symbol) const
+bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
 {
 	return true;
 }

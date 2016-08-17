@@ -40,15 +40,15 @@ void StageCanvas::DrawBackground() const
 
 void StageCanvas::DrawSprites() const
 {
-	std::vector<ee::Sprite*> sprites;
-	m_sprites_impl->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
+	std::vector<ee::Sprite*> sprs;
+	m_sprites_impl->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
 
-	for (size_t i = 0, n = sprites.size(); i < n; ++i)
+	for (size_t i = 0, n = sprs.size(); i < n; ++i)
 	{
-		ee::Sprite* sprite = sprites[i];
-		if (!sprite->IsVisible())
+		ee::Sprite* spr = sprs[i];
+		if (!spr->IsVisible())
 			continue;
-		ee::SpriteRenderer::Draw(sprite);
+		ee::SpriteRenderer::Draw(spr);
 	}
 }
 

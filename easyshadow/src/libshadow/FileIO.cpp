@@ -7,11 +7,11 @@
 namespace eshadow
 {
 
-void FileIO::StoreToFile(const char* filepath, const Symbol* symbol)
+void FileIO::StoreToFile(const char* filepath, const Symbol* sym)
 {
 	Json::Value value;
 	
-	symbol->GetShadow()->StoreToFile(value);
+	sym->GetShadow()->StoreToFile(value);
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -21,7 +21,7 @@ void FileIO::StoreToFile(const char* filepath, const Symbol* symbol)
 	fout.close();
 }
 
-void FileIO::LoadFromFile(const char* filepath, Symbol* symbol)
+void FileIO::LoadFromFile(const char* filepath, Symbol* sym)
 {
 	Json::Value value;
 	Json::Reader reader;
@@ -31,7 +31,7 @@ void FileIO::LoadFromFile(const char* filepath, Symbol* symbol)
 	reader.parse(fin, value);
 	fin.close();
 
-	symbol->GetShadow()->LoadFromFile(value);
+	sym->GetShadow()->LoadFromFile(value);
 }
 
 }

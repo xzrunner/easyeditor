@@ -13,12 +13,12 @@ class Sprite;
 class SpriteFactory
 {
 public:
-	Sprite* Create(Symbol* symbol);
+	Sprite* Create(Symbol* sym);
 
-	void Insert(Sprite* sprite);
-	void Remove(Sprite* sprite);
+	void Insert(Sprite* spr);
+	void Remove(Sprite* spr);
 
-	void UpdateBoundings(const Symbol& symbol);
+	void UpdateBoundings(const Symbol& sym);
 
 	typedef Sprite* (*CreateCallback)(Symbol*);
 	static void RegisterCreator(const std::string& type, CreateCallback cb);

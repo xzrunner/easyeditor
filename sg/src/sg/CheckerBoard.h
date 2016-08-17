@@ -23,19 +23,19 @@ public:
 
 	void Traverse(ee::Visitor<ee::Sprite>& visitor) const;
 
-	void AddSprite(ee::Sprite* sprite);
-	void RemoveSprite(ee::Sprite* sprite);
+	void AddSprite(ee::Sprite* spr);
+	void RemoveSprite(ee::Sprite* spr);
 	void Clear();
 
-	bool IsValid(ee::Sprite* sprite) const;
-	bool IsValid(const ee::Symbol& symbol, const sm::vec2& pos) const;
+	bool IsValid(ee::Sprite* spr) const;
+	bool IsValid(const ee::Symbol& sym, const sm::vec2& pos) const;
 
 	void DebugDraw() const;
 
 	void ClearRemovedCache() {
 		m_map_removed.clear();
 	}
-	bool SetCachedPos(ee::Sprite* sprite) const;
+	bool SetCachedPos(ee::Sprite* spr) const;
 
 	void ResetWall();
 

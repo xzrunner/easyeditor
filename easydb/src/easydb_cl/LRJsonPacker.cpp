@@ -171,8 +171,8 @@ void LRJsonPacker::ParserShapeFromSprite(const Json::Value& src_val, const lr::G
 	Json::Value spr_val = src_val["sprite"][idx++];
 	while (!spr_val.isNull()) {
 		std::string spr_path = ee::SymbolSearcher::GetSymbolPath(m_dir, spr_val);
-		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(spr_path);
-		if (!symbol) {
+		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(spr_path);
+		if (!sym) {
 			throw ee::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", 
 				m_dir.c_str(), spr_path.c_str());
 		}
@@ -180,21 +180,21 @@ void LRJsonPacker::ParserShapeFromSprite(const Json::Value& src_val, const lr::G
 		Json::Value dst_val;
 		dst_val["name"] = spr_val["name"];
 
-		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-		sprite->Load(spr_val);
+		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+		spr->Load(spr_val);
 
-		eshape::Sprite* shape_spr = dynamic_cast<eshape::Sprite*>(sprite);
+		eshape::Sprite* shape_spr = dynamic_cast<eshape::Sprite*>(spr);
 		assert(shape_spr);
 		const std::vector<ee::Shape*>& shapes = dynamic_cast<const eshape::Symbol*>(shape_spr->GetSymbol())->GetShapes();
 		for (int i = 0, n = shapes.size(); i < n; ++i) {
-			ParserShape(shapes[i], sprite->GetPosition(), sprite->GetAngle(), grids, force_grids, dst_val);
+			ParserShape(shapes[i], spr->GetPosition(), spr->GetAngle(), grids, force_grids, dst_val);
 		}
 
 		int sz = out_val[name].size();
 		out_val[name][sz] = dst_val;
 
-		sprite->RemoveReference();
-		symbol->RemoveReference();
+		spr->RemoveReference();
+		sym->RemoveReference();
 
 		spr_val = src_val["sprite"][idx++];
 	}
@@ -285,8 +285,8 @@ void LRJsonPacker::ParserPointFromSprite(const Json::Value& src_val, const char*
 	while (!spr_val.isNull()) 
 	{
 		std::string spr_path = ee::SymbolSearcher::GetSymbolPath(m_dir, spr_val);
-		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(spr_path);
-		if (!symbol) {
+		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(spr_path);
+		if (!sym) {
 			std::string filepath = spr_val["filepath"].asString();
 			throw ee::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", 
 				m_dir.c_str(), filepath.c_str());
@@ -295,17 +295,17 @@ void LRJsonPacker::ParserPointFromSprite(const Json::Value& src_val, const char*
 		Json::Value shape_val;
 		shape_val["name"] = spr_val["name"];
 
-		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-		sprite->Load(spr_val);
+		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+		spr->Load(spr_val);
 
-		shape_val["x"] = sprite->GetPosition().x;
-		shape_val["y"] = sprite->GetPosition().y;
+		shape_val["x"] = spr->GetPosition().x;
+		shape_val["y"] = spr->GetPosition().y;
 
 		int sz = out_val[name].size();
 		out_val[name][sz] = shape_val;
 
-		sprite->RemoveReference();
-		symbol->RemoveReference();
+		spr->RemoveReference();
+		sym->RemoveReference();
 
 		spr_val = src_val["sprite"][idx++];
 	}
@@ -390,8 +390,8 @@ void LRJsonPacker::ParserCharacterFromSprite(const Json::Value& src_val, const l
 		std::string shape_filepath = ee::FileHelper::GetFilenameAddTag(filepath, shape_tag, "json");
 		std::string tag_ext;
 		if (ee::FileHelper::IsFileExist(shape_filepath)) {
-			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(shape_filepath);
-			const std::vector<ee::Shape*>& shapes = static_cast<eshape::Symbol*>(symbol)->GetShapes();
+			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(shape_filepath);
+			const std::vector<ee::Shape*>& shapes = static_cast<eshape::Symbol*>(sym)->GetShapes();
 			if (!shapes.empty()) {
 				tag_ext = shapes[0]->GetName();
 
@@ -450,8 +450,8 @@ void LRJsonPacker::ParserLevelFromSprite(const Json::Value& src_val, const char*
 	while (!spr_val.isNull()) 
 	{
 		std::string spr_path = ee::SymbolSearcher::GetSymbolPath(m_dir, spr_val);
-		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(spr_path);
-		if (!symbol) {
+		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(spr_path);
+		if (!sym) {
 			std::string filepath = spr_val["filepath"].asString();
 			throw ee::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", 
 				m_dir.c_str(), filepath.c_str());
@@ -461,10 +461,10 @@ void LRJsonPacker::ParserLevelFromSprite(const Json::Value& src_val, const char*
 
 		level_val["name"] = spr_val["name"];
 
-		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-		sprite->Load(spr_val);
-		level_val["x"] = sprite->GetPosition().x;
-		level_val["y"] = sprite->GetPosition().y;
+		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+		spr->Load(spr_val);
+		level_val["x"] = spr->GetPosition().x;
+		level_val["y"] = spr->GetPosition().y;
 
 		std::string tag = spr_val["tag"].asString();
 		ParserSprTag(tag, spr_path, level_val);
@@ -472,8 +472,8 @@ void LRJsonPacker::ParserLevelFromSprite(const Json::Value& src_val, const char*
 		int sz = out_val[name].size();
 		out_val[name][sz] = level_val;
 
-		sprite->RemoveReference();
-		symbol->RemoveReference();
+		spr->RemoveReference();
+		sym->RemoveReference();
 
 		spr_val = src_val["sprite"][idx++];
 	}

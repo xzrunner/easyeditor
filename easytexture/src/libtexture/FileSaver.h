@@ -9,7 +9,7 @@ class Symbol;
 class FileSaver
 {
 public:
-	static void Store(const char* filepath, const Symbol* symbol);
+	static void Store(const char* filepath, const Symbol* sym);
 
 }; // FileSaver
 

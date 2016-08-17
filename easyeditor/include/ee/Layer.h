@@ -17,8 +17,8 @@ public:
 	~Layer();
 
 	void TraverseSprite(Visitor<Sprite>& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
-	bool Insert(Sprite* sprite);
-	bool Remove(Sprite* sprite);
+	bool Insert(Sprite* spr);
+	bool Remove(Sprite* spr);
 
 	void TraverseShape(Visitor<Shape>& visitor, bool order = true) const;
 	bool Insert(Shape* shape);
@@ -36,7 +36,7 @@ public:
 	bool editable;
 
 private:
-	ObjectVector<Sprite> m_sprites;
+	ObjectVector<Sprite> m_sprs;
 	ObjectVector<Shape> m_shapes;
 
 }; // Layer

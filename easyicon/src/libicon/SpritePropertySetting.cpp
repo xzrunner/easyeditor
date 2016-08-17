@@ -4,8 +4,8 @@
 namespace eicon
 {
 
-SpritePropertySetting::SpritePropertySetting(ee::EditPanelImpl* stage, Sprite* sprite)
-	: ee::SpritePropertySetting(stage, sprite)
+SpritePropertySetting::SpritePropertySetting(ee::EditPanelImpl* stage, Sprite* spr)
+	: ee::SpritePropertySetting(stage, spr)
 {
 	m_type = "IconSprite";
 }
@@ -14,9 +14,9 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 {
 	ee::SpritePropertySetting::OnPropertyGridChange(name, value);
 	
-	Sprite* sprite = static_cast<Sprite*>(GetSprite());
+	Sprite* spr = static_cast<Sprite*>(GetSprite());
 	if (name == wxT("Process")) {
-		sprite->SetProcess(wxANY_AS(value, float));
+		spr->SetProcess(wxANY_AS(value, float));
 	}
 }
 
@@ -24,8 +24,8 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
 	ee::SpritePropertySetting::UpdateProperties(pg);
 
-	Sprite* sprite = static_cast<Sprite*>(GetSprite());
-	pg->GetProperty(wxT("Process"))->SetValue(sprite->GetProcess());
+	Sprite* spr = static_cast<Sprite*>(GetSprite());
+	pg->GetProperty(wxT("Process"))->SetValue(spr->GetProcess());
 }
 
 void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
@@ -34,8 +34,8 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	pg->Append(new wxPropertyCategory("ICON", wxPG_LABEL));
 
-	Sprite* sprite = static_cast<Sprite*>(GetSprite());
-	pg->Append(new wxFloatProperty(wxT("Process"), wxPG_LABEL, sprite->GetProcess()));
+	Sprite* spr = static_cast<Sprite*>(GetSprite());
+	pg->Append(new wxFloatProperty(wxT("Process"), wxPG_LABEL, spr->GetProcess()));
 }
 
 }

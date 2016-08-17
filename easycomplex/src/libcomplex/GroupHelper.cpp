@@ -12,16 +12,16 @@
 namespace ecomplex
 {
 
-Sprite* GroupHelper::Group(const std::vector<ee::Sprite*>& sprites)
+Sprite* GroupHelper::Group(const std::vector<ee::Sprite*>& sprs)
 {
 	Symbol* sym = new Symbol();
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		sym->Add(sprites[i]);
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		sym->Add(sprs[i]);
 	}
 
 	sm::vec2 c = sym->GetBounding().Center();
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		sprites[i]->Translate(-c);
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		sprs[i]->Translate(-c);
 	}
 
 	Sprite* spr = new Sprite(sym);
@@ -31,7 +31,7 @@ Sprite* GroupHelper::Group(const std::vector<ee::Sprite*>& sprites)
 	return spr;
 }
 
-void GroupHelper::BreakUp(ee::Sprite* group, std::vector<ee::Sprite*>& sprites)
+void GroupHelper::BreakUp(ee::Sprite* group, std::vector<ee::Sprite*>& sprs)
 {
 	Symbol* comp = dynamic_cast<Symbol*>(group->GetSymbol());
 	assert(comp);
@@ -76,7 +76,7 @@ void GroupHelper::BreakUp(ee::Sprite* group, std::vector<ee::Sprite*>& sprites)
 		spr->SetPosition(_pos);
 		spr->SetMirror(mirror);
 
-		sprites.push_back(spr);
+		sprs.push_back(spr);
 	}
 }
 

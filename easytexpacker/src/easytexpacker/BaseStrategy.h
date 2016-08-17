@@ -13,13 +13,13 @@ class BaseStrategy
 public:
 	virtual ~BaseStrategy() {}
 
-	virtual void Arrange(const std::vector<ee::ImageSprite*>& sprites) = 0;
+	virtual void Arrange(const std::vector<ee::ImageSprite*>& sprs) = 0;
 	virtual int GetTextureAccount() const = 0;
 
 protected:
-	void SortByArea(std::vector<ee::ImageSprite*>& sprites, bool isDescend = true) const;
-	void SortByMaxEdge(std::vector<ee::ImageSprite*>& sprites, bool isDescend = true) const;
-	void SortByTotEdges(std::vector<ee::ImageSprite*>& sprites, bool isDescend = true) const;
+	void SortByArea(std::vector<ee::ImageSprite*>& sprs, bool isDescend = true) const;
+	void SortByMaxEdge(std::vector<ee::ImageSprite*>& sprs, bool isDescend = true) const;
+	void SortByTotEdges(std::vector<ee::ImageSprite*>& sprs, bool isDescend = true) const;
 
 protected:
 	enum SortStrategy

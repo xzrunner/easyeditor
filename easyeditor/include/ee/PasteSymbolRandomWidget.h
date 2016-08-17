@@ -19,7 +19,7 @@ class PasteSymbolRandomWidget : public wxPanel
 public:
 	struct RandomValue
 	{
-		Symbol* symbol;
+		Symbol* sym;
 		float scale;
 		float angle;	// in radian
 	};

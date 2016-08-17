@@ -11,11 +11,11 @@ class Sprite;
 class SpriteBlend
 {
 public:
-	static void Draw(const Sprite* sprite, const sm::mat4& mt);
+	static void Draw(const Sprite* spr, const sm::mat4& mt);
 	
 private:
-	static void DrawSprToTmp(const Sprite* sprite, const sm::mat4& mt);
-	static void DrawTmpToScreen(const Sprite* sprite, const sm::mat4& mt);
+	static void DrawSprToTmp(const Sprite* spr, const sm::mat4& mt);
+	static void DrawTmpToScreen(const Sprite* spr, const sm::mat4& mt);
 
 }; // SpriteBlend
 

@@ -83,31 +83,31 @@ void TreeCtrl::addNode(const Graphics& graph, const Node& node, wxTreeItemId par
 	}
 }
 
-std::string TreeCtrl::getItemName(const ee::Sprite& sprite) const
+std::string TreeCtrl::getItemName(const ee::Sprite& spr) const
 {
-	std::string name = dynamic_cast<const ee::Symbol*>(sprite.GetSymbol())->GetFilepath();
+	std::string name = dynamic_cast<const ee::Symbol*>(spr.GetSymbol())->GetFilepath();
 	name = ee::FileHelper::GetFilename(name);
 	return name;
 }
 
 void TreeCtrl::onSelChanged(wxTreeEvent& event)
 {
-	ee::Sprite* sprite = querySpriteByID(event.GetItem());
-	if (!sprite) return;
+	ee::Sprite* spr = querySpriteByID(event.GetItem());
+	if (!spr) return;
 	
 	ee::SpriteSelection* selection = Context::Instance()->stage->GetSpriteSelection();
 	selection->Clear();
-	selection->Add(sprite);
+	selection->Add(spr);
 
 	m_parent->Refresh(true);
 }
 
 void TreeCtrl::onItemClick(wxTreeEvent& event)
 {
-	ee::Sprite* sprite = querySpriteByID(event.GetItem());
-	if (sprite) 
+	ee::Sprite* spr = querySpriteByID(event.GetItem());
+	if (spr) 
 	{
-		if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(sprite))
+		if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(spr))
 		{
 			StagePanel* stage = Context::Instance()->stage;
 
@@ -133,15 +133,15 @@ void TreeCtrl::onItemClick(wxTreeEvent& event)
 				WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);
 			}
 
-// 				ee::Symbol* symbol = ee::SymbolMgr::Instance()->getSymbol(itr->second);
-// 				if (ecomplex::Symbol* complex = dynamic_cast<ecomplex::Symbol*>(symbol))
+// 				ee::Symbol* sym = ee::SymbolMgr::Instance()->getSymbol(itr->second);
+// 				if (ecomplex::Symbol* complex = dynamic_cast<ecomplex::Symbol*>(sym))
 // 				{
 //  					StagePanel* stage = Context::Instance()->stage;
 //  					ecomplex::EditDialog dlg(stage, complex);
 //  					dlg.ShowModal();
 //  					stage->resetCanvas();
 // 				}
-// 				else if (eanim::Symbol* anim = dynamic_cast<eanim::Symbol*>(symbol))
+// 				else if (eanim::Symbol* anim = dynamic_cast<eanim::Symbol*>(sym))
 // 				{
 // 
 // 				}

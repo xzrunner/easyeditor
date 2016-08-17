@@ -8,8 +8,8 @@ namespace ee
 
 class Sprite;
 
-Sprite* draw_all_to_one_spr(const std::vector<Sprite*>& sprites, Sprite* except);
-Sprite* draw_all_to_one_spr(const std::vector<Sprite*>& sprites);
+Sprite* draw_all_to_one_spr(const std::vector<Sprite*>& sprs, Sprite* except);
+Sprite* draw_all_to_one_spr(const std::vector<Sprite*>& sprs);
 
 void gl_debug();
 

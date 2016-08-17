@@ -15,11 +15,11 @@ class SpriteObserver : public ee::SpriteObserver
 public:
 	SpriteObserver(const Layer& layer);
 
-	virtual void Translate(ee::Sprite* sprite, const sm::vec2& offset);
-	virtual void Rotate(ee::Sprite* sprite, float delta);
+	virtual void Translate(ee::Sprite* spr, const sm::vec2& offset);
+	virtual void Rotate(ee::Sprite* spr, float delta);
 
-	void Insert(const ee::Sprite* sprite, int frame);
-	void Remove(const ee::Sprite* sprite);
+	void Insert(const ee::Sprite* spr, int frame);
+	void Remove(const ee::Sprite* spr);
 
 	void Enable(bool enable) { m_enable = enable; }
 

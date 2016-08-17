@@ -35,17 +35,17 @@ void ArrangeSpriteImpl::OnMouseRightUp(int x, int y)
 {
 	if (m_selection->Size() == 1)
 	{
-		std::vector<ee::Sprite*> sprites;
-		m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
+		std::vector<ee::Sprite*> sprs;
+		m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
 
-		const sm::vec2& pos = sprites[0]->GetPosition();
-		float angle = sprites[0]->GetAngle();
+		const sm::vec2& pos = sprs[0]->GetPosition();
+		float angle = sprs[0]->GetAngle();
 		if (angle == 0)
 			angle = SM_PI * 0.5f;
 		else
 			angle = 0;
-		sprites[0]->SetPosition(pos);
-		sprites[0]->SetAngle(angle);
+		sprs[0]->SetPosition(pos);
+		sprs[0]->SetAngle(angle);
 	}
 
 	return OnMouseLeftUp(x, y);

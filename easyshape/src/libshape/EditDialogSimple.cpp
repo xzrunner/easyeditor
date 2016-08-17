@@ -82,21 +82,21 @@ void EditDialogSimple::OnCloseEvent(wxCloseEvent& event)
 		return;
 	}
 
-	ee::Symbol& symbol = const_cast<ee::Symbol&>(m_stage->GetSymbol());
-	const std::string& filepath = symbol.GetFilepath();
+	ee::Symbol& sym = const_cast<ee::Symbol&>(m_stage->GetSymbol());
+	const std::string& filepath = sym.GetFilepath();
 
 	ee::ConfirmDialog dlg(this);
 	int val = dlg.ShowModal();
 	if (val == wxID_YES)
 	{
-		static_cast<Symbol&>(symbol).StoreToFile(filepath.c_str());
-		symbol.RefreshThumbnail(filepath);
-		ee::SpriteFactory::Instance()->UpdateBoundings(symbol);
+		static_cast<Symbol&>(sym).StoreToFile(filepath.c_str());
+		sym.RefreshThumbnail(filepath);
+		ee::SpriteFactory::Instance()->UpdateBoundings(sym);
 		Destroy();
 	}
 	else if (val == wxID_NO)
 	{
-		symbol.LoadFromFile(filepath);
+		sym.LoadFromFile(filepath);
 		Destroy();
 	}
 }

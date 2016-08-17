@@ -13,12 +13,12 @@ PulleyJoint::PulleyJoint(Body* b0, Body* b1)
 	: Joint(b0, b1, e_pulleyJoint)
 	, m_ratio(1.0f)
 {
-	m_ground_anchor_a = b0->m_sprite->GetPosition();
-	m_ground_anchor_b = b1->m_sprite->GetPosition();
+	m_ground_anchor_a = b0->m_spr->GetPosition();
+	m_ground_anchor_b = b1->m_spr->GetPosition();
 	m_ground_anchor_a.y += 10;
 	m_ground_anchor_b.y += 10;
 
-	sm::vec2 center = (b0->m_sprite->GetPosition() + b1->m_sprite->GetPosition()) * 0.5f;
+	sm::vec2 center = (b0->m_spr->GetPosition() + b1->m_spr->GetPosition()) * 0.5f;
 	SetLocalAnchorA(center);
 	SetLocalAnchorB(center);
 }
@@ -49,9 +49,9 @@ void PulleyJoint::Draw(DrawType type) const
 		s2::RVG::SetColor(s2::Color(255, 0, 0));
 		s2::RVG::DashLine(anchorA, anchorB);
 		s2::RVG::SetColor(s2::Color(102, 204, 102));
-		s2::RVG::DashLine(anchorA, m_body_a->m_sprite->GetPosition());
+		s2::RVG::DashLine(anchorA, m_body_a->m_spr->GetPosition());
 		s2::RVG::SetColor(s2::Color(102, 102, 204));
-		s2::RVG::DashLine(anchorB, m_body_b->m_sprite->GetPosition());
+		s2::RVG::DashLine(anchorB, m_body_b->m_spr->GetPosition());
 
 		s2::RVG::SetColor(s2::Color(204, 204, 102));
 		s2::RVG::Line(anchorA, m_ground_anchor_a);
@@ -70,22 +70,22 @@ void PulleyJoint::Draw(DrawType type) const
 
 sm::vec2 PulleyJoint::GetWorldAnchorA() const
 {
-	return TransLocalToWorld(m_local_anchor_a, m_body_a->m_sprite);
+	return TransLocalToWorld(m_local_anchor_a, m_body_a->m_spr);
 }
 
 sm::vec2 PulleyJoint::GetWorldAnchorB() const
 {
-	return TransLocalToWorld(m_local_anchor_b, m_body_b->m_sprite);
+	return TransLocalToWorld(m_local_anchor_b, m_body_b->m_spr);
 }
 
 void PulleyJoint::SetLocalAnchorA(const sm::vec2& world)
 {
-	m_local_anchor_a = TransWorldToLocal(world, m_body_a->m_sprite);
+	m_local_anchor_a = TransWorldToLocal(world, m_body_a->m_spr);
 }
 
 void PulleyJoint::SetLocalAnchorB(const sm::vec2& world)
 {
-	m_local_anchor_b = TransWorldToLocal(world, m_body_b->m_sprite);
+	m_local_anchor_b = TransWorldToLocal(world, m_body_b->m_spr);
 }
 
 void PulleyJoint::DrawAnchor(const sm::vec2& pos, DrawType type) const

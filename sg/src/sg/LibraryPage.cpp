@@ -13,10 +13,10 @@ LibraryPage::LibraryPage(wxWindow* parent, const char* name)
 	InitLayout();
 }
 
-bool LibraryPage::IsHandleSymbol(ee::Symbol* symbol) const
+bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
 {
-	return dynamic_cast<ee::ImageSymbol*>(symbol) != NULL
-		|| dynamic_cast<ecomplex::Symbol*>(symbol) != NULL;
+	return dynamic_cast<ee::ImageSymbol*>(sym) != NULL
+		|| dynamic_cast<ecomplex::Symbol*>(sym) != NULL;
 }
 
 }

@@ -11,7 +11,7 @@ class LibraryFontBlankPage : public LibraryPage
 public:
 	LibraryFontBlankPage(wxWindow* parent);
 
-	virtual bool IsHandleSymbol(Symbol* symbol) const;
+	virtual bool IsHandleSymbol(Symbol* sym) const;
 
 	virtual bool LoadFromConfig();
 

@@ -21,15 +21,15 @@ Code::Code(ebuilder::CodeGenerator& gen)
 
 struct Node
 {
-	const Symbol& symbol;
+	const Symbol& sym;
 	std::string path;
 	std::string name;
 
 	Node(const Symbol& _symbol, const std::string& _path) 
-		: symbol(_symbol), path(_path) {}
+		: sym(_symbol), path(_path) {}
 }; // Node
 
-void Code::ResolveUI(const Symbol& symbol)
+void Code::ResolveUI(const Symbol& sym)
 {
 	ebuilder::CodeGenerator *gen_init = new ebuilder::CodeGenerator(), 
 		*gen_path = new ebuilder::CodeGenerator();
@@ -40,13 +40,13 @@ void Code::ResolveUI(const Symbol& symbol)
 		gen_path->line("local path = {}");
 
 		std::queue<Node> buffer;
-		Node root(symbol, "");
+		Node root(sym, "");
 
 		buffer.push(root);
 		while (!buffer.empty()) 
 		{
 			Node parent = buffer.front(); buffer.pop();
-			const Symbol& parent_symbol = parent.symbol;
+			const Symbol& parent_symbol = parent.sym;
 			const std::vector<s2::Sprite*>& children = parent_symbol.GetChildren();
 			for (int i = 0, n = children.size(); i < n; ++i)
 			{
@@ -100,10 +100,10 @@ void Code::ResolveUI(const Symbol& symbol)
 	m_gen.block(*gen_path);
 }
 
-void Code::ResolveText(const Symbol& symbol)
+void Code::ResolveText(const Symbol& sym)
 {
 	std::queue<const Symbol*> buffer;
-	buffer.push(&symbol);
+	buffer.push(&sym);
  	while (!buffer.empty()) 
  	{
  		const Symbol* parent = buffer.front(); buffer.pop();

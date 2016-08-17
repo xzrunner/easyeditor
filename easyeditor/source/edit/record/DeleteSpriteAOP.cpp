@@ -8,40 +8,40 @@
 namespace ee
 {
 
-DeleteSpriteAOP::DeleteSpriteAOP(const std::vector<Sprite*>& sprites)
+DeleteSpriteAOP::DeleteSpriteAOP(const std::vector<Sprite*>& sprs)
 {
-	for (size_t i = 0, n = sprites.size(); i < n; ++i) 
+	for (size_t i = 0, n = sprs.size(); i < n; ++i) 
 	{
-		sprites[i]->AddReference();
-		m_sprites.push_back(sprites[i]);
+		sprs[i]->AddReference();
+		m_sprs.push_back(sprs[i]);
 	}
 }
 
 DeleteSpriteAOP::~DeleteSpriteAOP()
 {
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->RemoveReference();
+	for (size_t i = 0, n = m_sprs.size(); i < n; ++i) {
+		m_sprs[i]->RemoveReference();
 	}
 }
 
 void DeleteSpriteAOP::Undo()
 {
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-		InsertSpriteSJ::Instance()->Insert(m_sprites[i]);
+	for (size_t i = 0, n = m_sprs.size(); i < n; ++i) {
+		InsertSpriteSJ::Instance()->Insert(m_sprs[i]);
 	}
 }
 
 void DeleteSpriteAOP::Redo()
 {
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-		RemoveSpriteSJ::Instance()->Remove(m_sprites[i]);
+	for (size_t i = 0, n = m_sprs.size(); i < n; ++i) {
+		RemoveSpriteSJ::Instance()->Remove(m_sprs[i]);
 	}
 }
 
-Json::Value DeleteSpriteAOP::Store(const std::vector<Sprite*>& sprites) const
+Json::Value DeleteSpriteAOP::Store(const std::vector<Sprite*>& sprs) const
 {
 	Json::Value val;
-	val["idx"] = HistoryUtil::StoreSpritesIndex(m_sprites, sprites);
+	val["idx"] = HistoryUtil::StoreSpritesIndex(m_sprs, sprs);
 	val["type"] = AT_DELETE;
 	return val;
 }

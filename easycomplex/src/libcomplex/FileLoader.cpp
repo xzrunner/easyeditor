@@ -49,30 +49,30 @@ namespace ecomplex
 //	Json::Value spriteValue = value["sprite"][i++];
 //	while (!spriteValue.isNull()) {
 //		std::string path = ee::FileHelper::GetAbsolutePath(dir, spriteValue["filepath"].asString());
-//		Symbol* symbol = NULL;
+//		Symbol* sym = NULL;
 //		std::string real_filepath = path;
 //		try {
-//			symbol = ee::SymbolMgr::Instance()->fetchSymbol(path);
+//			sym = ee::SymbolMgr::Instance()->fetchSymbol(path);
 //		} catch (ee::Exception& e) {
-// 			symbol = NULL;
+// 			sym = NULL;
 // 			Json::Value filepaths_val = spriteValue["filepaths"];
 // 			if (!filepaths_val.isNull()) 
 // 			{
 // 				int j = 0;
 // 				Json::Value filepath_val = filepaths_val[j++];
-// 				while (!filepath_val.isNull() && !symbol) {
+// 				while (!filepath_val.isNull() && !sym) {
 //					real_filepath = filepath_val.asString();
 // 					std::string filepath = ee::FileHelper::GetAbsolutePath(dir, real_filepath);
 //					filepath_val = filepaths_val[j++];
 // 					try {
-// 						symbol = ee::SymbolMgr::Instance()->fetchSymbol(filepath);
+// 						sym = ee::SymbolMgr::Instance()->fetchSymbol(filepath);
 // 					} catch (ee::Exception& e) {
-// 						symbol = NULL;
+// 						sym = NULL;
 // 					}
 // 				}
 // 			}
 //
-//			if (!symbol) {
+//			if (!sym) {
 //				throw e;
 //			}
 //		}
@@ -91,16 +91,16 @@ namespace ecomplex
 // 				filepath_val = filepaths_val[i++];
 // 			}
 //			filepaths.push_back(spriteValue["filepath"].asString());
-// 			symbol->SetFilepaths(filepaths);
+// 			sym->SetFilepaths(filepaths);
 // 		}
 //
-////		symbol->refresh();
-//		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-//		sprite->load(spriteValue);
+////		sym->refresh();
+//		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+//		spr->load(spriteValue);
 //
-//		symbol->RemoveReference();
+//		sym->RemoveReference();
 //
-//		m_sprites.push_back(sprite);
+//		m_sprs.push_back(spr);
 //		spriteValue = value["sprite"][i++];
 //	}	
 //

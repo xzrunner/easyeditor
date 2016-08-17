@@ -11,7 +11,7 @@ class LibraryScriptsPage : public LibraryPage
 public:
 	LibraryScriptsPage(wxWindow* parent);
 
-	virtual bool IsHandleSymbol(Symbol* symbol) const;
+	virtual bool IsHandleSymbol(Symbol* sym) const;
 
 	virtual bool LoadFromConfig();
 

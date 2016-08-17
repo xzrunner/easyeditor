@@ -25,17 +25,17 @@ PasteSymbolTileOP::PasteSymbolTileOP(wxWindow* wnd, EditPanelImpl* stage, MultiS
 
 bool PasteSymbolTileOP::OnMouseLeftDown(int x, int y)
 {
-	Symbol* symbol = m_library->GetSymbol();
-	if (symbol) 
+	Symbol* sym = m_library->GetSymbol();
+	if (sym) 
 	{
 		if (!m_bCaptured)
 			m_pos = m_stage->TransPosScrToProj(x, y);
 
-		Sprite* sprite = SpriteFactory::Instance()->Create(symbol);
-		sprite->Translate(m_pos);
-		sprite->Rotate(m_rotate);
-		InsertSpriteSJ::Instance()->Insert(sprite);
-		sprite->RemoveReference();
+		Sprite* spr = SpriteFactory::Instance()->Create(sym);
+		spr->Translate(m_pos);
+		spr->Rotate(m_rotate);
+		InsertSpriteSJ::Instance()->Insert(spr);
+		spr->RemoveReference();
 	}
 
 	return false;
@@ -57,11 +57,11 @@ bool PasteSymbolTileOP::OnMouseMove(int x, int y)
 	m_bCaptured = false;
 	m_pos = m_stage->TransPosScrToProj(x, y);
 
-	Sprite* sprite = NULL;
-	m_spritesImpl->TraverseSprites(NearestQueryVisitor(m_pos, &sprite), DT_EDITABLE);
-	if (!sprite) return false;
+	Sprite* spr = NULL;
+	m_spritesImpl->TraverseSprites(NearestQueryVisitor(m_pos, &spr), DT_EDITABLE);
+	if (!spr) return false;
 
-	const sm::vec2& capture = sprite->GetPosition();
+	const sm::vec2& capture = spr->GetPosition();
 	sm::vec2 offset = m_cmpt->GetOffset();
 	const float dis = offset.Length() * 0.5f;
 	do
@@ -140,13 +140,13 @@ bool PasteSymbolTileOP::OnDraw() const
 {
 	if (ZoomViewOP::OnDraw()) return true;
 
-	Symbol* symbol = m_library->GetSymbol();
-	if (symbol && m_pos.IsValid())
+	Symbol* sym = m_library->GetSymbol();
+	if (sym && m_pos.IsValid())
 	{
 		if (m_scale) {
-			SpriteRenderer::Draw(symbol, s2::RenderParams(), m_pos, m_rotate, *m_scale);
+			SpriteRenderer::Draw(sym, s2::RenderParams(), m_pos, m_rotate, *m_scale);
 		} else {
-			SpriteRenderer::Draw(symbol, s2::RenderParams(), m_pos, m_rotate);
+			SpriteRenderer::Draw(sym, s2::RenderParams(), m_pos, m_rotate);
 		}
 	}
 

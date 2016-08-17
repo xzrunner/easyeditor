@@ -15,7 +15,7 @@ class StagePanel : public ee::EditPanel, public ee::SpritesPanelImpl, public ee:
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame);
 
-	void InsertSpriteNoArrange(ee::Sprite* sprite);
+	void InsertSpriteNoArrange(ee::Sprite* spr);
 
 	void ArrangeAllSprites(bool bClearSelection);
 	void LoadFromLibrary();
@@ -23,7 +23,7 @@ public:
 	int GetTextureAccount() const;
 
 public:
-	static void FixCoords(ee::Sprite* sprite);
+	static void FixCoords(ee::Sprite* spr);
 
 protected:
 	//

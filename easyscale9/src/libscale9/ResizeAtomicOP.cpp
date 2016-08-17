@@ -4,9 +4,9 @@
 namespace escale9
 {
 
-ResizeAtomicOP::ResizeAtomicOP(Symbol* symbol,
+ResizeAtomicOP::ResizeAtomicOP(Symbol* sym,
 	const sm::vec2& src, const sm::vec2& dst)
-	: m_symbol(symbol)
+	: m_sym(sym)
 	, m_src(src)
 	, m_dst(dst)
 {
@@ -14,12 +14,12 @@ ResizeAtomicOP::ResizeAtomicOP(Symbol* symbol,
 
 void ResizeAtomicOP::Undo()
 {
-	m_symbol->ResizeScale9(m_src.x, m_src.y);
+	m_sym->ResizeScale9(m_src.x, m_src.y);
 }
 
 void ResizeAtomicOP::Redo()
 {
-	m_symbol->ResizeScale9(m_dst.x, m_dst.y);
+	m_sym->ResizeScale9(m_dst.x, m_dst.y);
 }
 
 }

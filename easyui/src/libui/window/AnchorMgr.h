@@ -22,7 +22,7 @@ public:
 	~AnchorMgr();
 
 	void LoadFromFile(const Json::Value& value, 
-		const std::vector<ee::Sprite*>& sprites);
+		const std::vector<ee::Sprite*>& sprs);
 	void StoreToFile(Json::Value& value, const std::string& dir) const;
 
 	void OnViewChanged(int width, int height);
@@ -49,7 +49,7 @@ private:
 	struct Anchor
 	{
 		sm::vec2 pos;
-		std::vector<ee::Sprite*> sprites;
+		std::vector<ee::Sprite*> sprs;
 	}; // Anchor
 
 private:
@@ -58,7 +58,7 @@ private:
 
 	static void ChangeAnchorPos(Anchor& anchor, const sm::vec2& pos);
 
-	static void LoadAnchorData(const std::vector<ee::Sprite*>& sprites,
+	static void LoadAnchorData(const std::vector<ee::Sprite*>& sprs,
 		const Json::Value& value, Anchor& anchor);
 
 private:
@@ -67,7 +67,7 @@ private:
 	// 6 7 8
 	Anchor m_anchors[ANCHOR_COUNT];
 
-	std::vector<ee::Sprite*> m_sprites;
+	std::vector<ee::Sprite*> m_sprs;
 
 }; // AnchorMgr
 

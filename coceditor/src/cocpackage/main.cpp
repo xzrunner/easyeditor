@@ -76,8 +76,8 @@ void LoadFromDir(const std::string& dir)
 			|| ee::FileType::IsType(*itr, ee::FileType::e_anim))
 		{
 			// todo release symbol
-			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(*itr);
-			SYMBOLS.push_back(symbol);
+			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(*itr);
+			SYMBOLS.push_back(sym);
 		}
 	}
 }
@@ -137,12 +137,12 @@ void LoadFromList(const std::string& list)
 			ee::FileType::IsType(*itr, ee::FileType::e_anim))
 		{
 			// todo release symbol
-			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(*itr);
-			std::set<std::string>::iterator itr = names.find(symbol->name);
+			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(*itr);
+			std::set<std::string>::iterator itr = names.find(sym->name);
 			if (itr == names.end()) {
-//					symbol->release();
+//					sym->release();
 			} else {
-				SYMBOLS.push_back(symbol);
+				SYMBOLS.push_back(sym);
 			}
 		}
 	}

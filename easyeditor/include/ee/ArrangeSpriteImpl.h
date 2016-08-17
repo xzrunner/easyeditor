@@ -42,7 +42,7 @@ public:
 	virtual void OnDraw(const Camera& cam) const;
 	virtual void Clear();
 
-	// query edited sprite, include its extra edit region
+	// query edited spr, include its extra edit region
 	Sprite* QueryEditedSprite(const sm::vec2& pos) const;
 
 	bool IsSelectionEmpty() const;
@@ -55,10 +55,10 @@ protected:
 
 	virtual ArrangeSpriteState* CreateTranslateState(SpriteSelection* selection, const sm::vec2& first_pos) const;
 	virtual ArrangeSpriteState* CreateRotateState(SpriteSelection* selection, const sm::vec2& first_pos) const;
-	virtual ArrangeSpriteState* CreateScaleState(Sprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const;
-	virtual ArrangeSpriteState* CreateShearState(Sprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const;
-	virtual ArrangeSpriteState* CreateOffsetState(Sprite* sprite) const;
-	virtual ArrangeSpriteState* CreatePerspectiveState(Sprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const;
+	virtual ArrangeSpriteState* CreateScaleState(Sprite* spr, const SpriteCtrlNode::Node& ctrl_node) const;
+	virtual ArrangeSpriteState* CreateShearState(Sprite* spr, const SpriteCtrlNode::Node& ctrl_node) const;
+	virtual ArrangeSpriteState* CreateOffsetState(Sprite* spr) const;
+	virtual ArrangeSpriteState* CreatePerspectiveState(Sprite* spr, const SpriteCtrlNode::Node& ctrl_node) const;
 
 protected:
 	void ChangeOPState(ArrangeSpriteState* state);

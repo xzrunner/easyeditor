@@ -73,11 +73,11 @@ void Frame::OnPreview(wxCommandEvent& event)
 {
 	SettingCfg* cfg = SettingCfg::Instance();
 
-	std::vector<const ee::Sprite*> sprites;
-	m_task->GetAllSprite(sprites);
+	std::vector<const ee::Sprite*> sprs;
+	m_task->GetAllSprite(sprs);
 
 	wxGLContext* ctx = m_task->GetEditPanel()->GetCanvas()->GetGLContext();
-	preview::MainDialog dlg(this, ctx, cfg->m_view_width * PREVIEW_SCALE, cfg->m_view_height * PREVIEW_SCALE, sprites);
+	preview::MainDialog dlg(this, ctx, cfg->m_view_width * PREVIEW_SCALE, cfg->m_view_height * PREVIEW_SCALE, sprs);
 	dlg.ShowModal();
 }
 
@@ -93,10 +93,10 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 	ee::Snapshoot ss(cfg->m_map_width, cfg->m_map_height);
 	StagePanel* stage = (StagePanel*)(m_task->GetEditPanel());
 
-	std::vector<ee::Sprite*> sprites;
-	stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites), ee::DT_VISIBLE);
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		ss.DrawSprite(sprites[i]);
+	std::vector<ee::Sprite*> sprs;
+	stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs), ee::DT_VISIBLE);
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		ss.DrawSprite(sprs[i]);
 	}
 
 	std::vector<ee::Shape*> shapes;

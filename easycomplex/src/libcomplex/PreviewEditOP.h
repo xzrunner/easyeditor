@@ -14,12 +14,12 @@ class PreviewEditOP : public ee::ZoomViewOP
 {
 public:
 	PreviewEditOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
-		const std::vector<const ee::Sprite*>& sprites);
+		const std::vector<const ee::Sprite*>& sprs);
 
 	virtual bool OnMouseLeftDown(int x, int y);
 
 private:
-	const std::vector<const ee::Sprite*>& m_sprites;
+	const std::vector<const ee::Sprite*>& m_sprs;
 
 }; // PreviewEditOP
 

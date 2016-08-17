@@ -54,7 +54,7 @@ private:
 
 	StagePanel* m_stage;
 
-	ee::Sprite* m_sprite;
+	ee::Sprite* m_spr;
 
 	std::vector<CharacterFileName> m_anim_files;
 

@@ -5,9 +5,9 @@ namespace ee
 {
 
 DialogStageCanvas::DialogStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage, 
-									 Symbol* symbol, wxGLContext* glctx)
+									 Symbol* sym, wxGLContext* glctx)
 	: CameraCanvas(stage_wnd, stage, glctx)
-	, m_symbol(symbol)
+	, m_sym(sym)
 {
 }
 

@@ -61,13 +61,13 @@
 //	}
 //}
 //
-//void StageData::ChangePSSymbol(ee::Symbol* symbol)
+//void StageData::ChangePSSymbol(ee::Symbol* sym)
 //{
 //	if (!m_ps) {
 //		m_ps = new ParticleSystem(1000);
 //	}
 //
-//	m_ps->SetSymbol(symbol);
+//	m_ps->SetSymbol(sym);
 //	m_toolbar->InitPSFromUI();
 //	m_ps->Start();
 //	m_ps->Reset();

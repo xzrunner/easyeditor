@@ -45,12 +45,12 @@ void MaxRectsBinaryPack::Pack(const std::vector<RectSize>& rects, std::vector<Re
 	output.clear();
 	output.resize(sz);
 
-	std::vector<Sprite> sprites;
-	sprites.reserve(sz);
+	std::vector<Sprite> sprs;
+	sprs.reserve(sz);
 	for (int i = 0; i < sz; ++i) {
-		sprites.push_back(Sprite(&rects[i], &output[i]));
+		sprs.push_back(Sprite(&rects[i], &output[i]));
 	}
-	std::sort(sprites.begin(), sprites.end(), SpriteCmp(e_area));
+	std::sort(sprs.begin(), sprs.end(), SpriteCmp(e_area));
 
 	// compute base size
 	float area = 0;
@@ -70,9 +70,9 @@ void MaxRectsBinaryPack::Pack(const std::vector<RectSize>& rects, std::vector<Re
 		{
 			ResetRoot(edge, edge);
 
-			int i = 0, n = sprites.size();
+			int i = 0, n = sprs.size();
 			for ( ; i < n; ++i) {
-				Node* result = m_root->insert(&sprites[i], flag);
+				Node* result = m_root->insert(&sprs[i], flag);
 				if (!result) {
 					++flag;
 					break;
@@ -104,14 +104,14 @@ void MaxRectsBinaryPack::ResetRoot(int width, int height)
 
 MaxRectsBinaryPack::Node::
 Node()
-	: m_sprite(NULL)
+	: m_spr(NULL)
 {
 	m_child[0] = m_child[1] = NULL;	
 }
 
 MaxRectsBinaryPack::Node::
 Node(int width, int height)
-	: m_sprite(NULL)
+	: m_spr(NULL)
 {
 	m_child[0] = m_child[1] = NULL;
 	m_rc.x = m_rc.y = 0;
@@ -127,27 +127,27 @@ MaxRectsBinaryPack::Node::
 }
 
 MaxRectsBinaryPack::Node* MaxRectsBinaryPack::Node::
-insert(Sprite* sprite, int flag)
+insert(Sprite* spr, int flag)
 {
 	if (m_child[0])
 	{
-		Node* new_node = m_child[0]->insert(sprite, flag / 2);
+		Node* new_node = m_child[0]->insert(spr, flag / 2);
 		if (new_node) {
 			return new_node;
 		} else {
-			return m_child[1]->insert(sprite, flag / 4);
+			return m_child[1]->insert(spr, flag / 4);
 		}
 	}
 	else
 	{
-		if (m_sprite) {
+		if (m_spr) {
 			return NULL;
 		}
 
 		const float s = SCALE,
 			p = PADDING * 2;
-		int width = (int)(sprite->size->width * s + p + 0.5f),
-			height = (int)(sprite->size->height * s + p + 0.5f);
+		int width = (int)(spr->size->width * s + p + 0.5f),
+			height = (int)(spr->size->height * s + p + 0.5f);
 		if (width > m_rc.width || height > m_rc.height) {
 			return NULL;
 		}
@@ -172,10 +172,10 @@ insert(Sprite* sprite, int flag)
 		}
 
 		// set sprite
-		sprite->pos->width = width;
-		sprite->pos->height = height;
-		sprite->pos->x = m_child[0]->m_rc.x;
-		sprite->pos->y = m_child[0]->m_rc.y;
+		spr->pos->width = width;
+		spr->pos->height = height;
+		spr->pos->x = m_child[0]->m_rc.x;
+		spr->pos->y = m_child[0]->m_rc.y;
 
 		if (m_child[0]->m_rc.width > width)
 		{
@@ -187,7 +187,7 @@ insert(Sprite* sprite, int flag)
 			m_child[0]->m_child[1]->m_rc.x = m_child[0]->m_rc.x + width;
 			m_child[0]->m_child[1]->m_rc.width -= width;
 
-			m_child[0]->m_child[0]->m_sprite = sprite;
+			m_child[0]->m_child[0]->m_spr = spr;
 
 			return m_child[0]->m_child[0];
 		}
@@ -201,13 +201,13 @@ insert(Sprite* sprite, int flag)
 			m_child[0]->m_child[1]->m_rc.y = m_child[0]->m_rc.y + height;
 			m_child[0]->m_child[1]->m_rc.height -= height;
 
-			m_child[0]->m_child[0]->m_sprite = sprite;
+			m_child[0]->m_child[0]->m_spr = spr;
 
 			return m_child[0]->m_child[0];
 		}
 		else
 		{
-			m_child[0]->m_sprite = sprite;
+			m_child[0]->m_spr = spr;
 			return m_child[0];
 		}
 	}

@@ -94,16 +94,16 @@ void SpriteRenderer::Draw(const Sprite* spr,
 	}
 }
 
-void SpriteRenderer::InvalidRect(const Sprite* sprite, const sm::mat4& mt)
+void SpriteRenderer::InvalidRect(const Sprite* spr, const sm::mat4& mt)
 {
-	if (!sprite->IsVisible()) {
+	if (!spr->IsVisible()) {
 		return;
 	}
 
-//	sprite->GetSymbol()->InvalidRect(sprite->GetTransMatrix() * mt);
+//	spr->GetSymbol()->InvalidRect(spr->GetTransMatrix() * mt);
 }
 
-void SpriteRenderer::Draw(const Symbol* symbol, 
+void SpriteRenderer::Draw(const Symbol* sym, 
 						  const s2::RenderParams& params /*= s2::RenderParams()*/,
 						  const sm::vec2& pos, 
 						  float angle/* = 0.0f*/, 
@@ -129,7 +129,7 @@ void SpriteRenderer::Draw(const Symbol* symbol,
 		}
 	}
 
-	symbol->Draw(t);
+	sym->Draw(t);
 }
 
 void SpriteRenderer::DrawImpl(const Sprite* spr, 

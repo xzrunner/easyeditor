@@ -13,7 +13,7 @@ namespace epe
 class PackLuaFile
 {
 public:
-	void pack(const std::vector<const ee::Sprite*>& sprites, 
+	void pack(const std::vector<const ee::Sprite*>& sprs, 
 		const std::string& outfloder);
 
 private:

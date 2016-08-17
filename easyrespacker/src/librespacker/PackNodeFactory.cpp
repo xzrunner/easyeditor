@@ -196,45 +196,45 @@ const IPackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 	return node;
 }
 
-const IPackNode* PackNodeFactory::Create(const ee::Symbol* symbol)
+const IPackNode* PackNodeFactory::Create(const ee::Symbol* sym)
 {
 	const IPackNode* node = NULL;
 
 	// picture
-	if (const ee::ImageSymbol* img_symbol = dynamic_cast<const ee::ImageSymbol*>(symbol)) {
+	if (const ee::ImageSymbol* img_symbol = dynamic_cast<const ee::ImageSymbol*>(sym)) {
 		ee::ImageSprite* img_spr = new ee::ImageSprite(const_cast<ee::ImageSymbol*>(img_symbol));
 		node = m_img_builder->Create(img_spr);
 		img_spr->RemoveReference();
-	} else if (const etexture::Symbol* tex = dynamic_cast<const etexture::Symbol*>(symbol)) {
+	} else if (const etexture::Symbol* tex = dynamic_cast<const etexture::Symbol*>(sym)) {
 		node = m_tex_builder->Create(tex);
 	}
 
 	// animation
-	else if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(symbol)) {
+	else if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(sym)) {
 		node = m_complex_builder->Create(complex);
-	} else if (const eanim::Symbol* anim = dynamic_cast<const eanim::Symbol*>(symbol)) {
+	} else if (const eanim::Symbol* anim = dynamic_cast<const eanim::Symbol*>(sym)) {
 		node = m_anim_builder->Create(anim);
-	} else if (const eterrain2d::Symbol* terr2d = dynamic_cast<const eterrain2d::Symbol*>(symbol)) {
+	} else if (const eterrain2d::Symbol* terr2d = dynamic_cast<const eterrain2d::Symbol*>(sym)) {
 		node = m_terrain2d_builder->Create(terr2d);
 	}
 
 	// particle3d
-	else if (const eparticle3d::Symbol* p3d = dynamic_cast<const eparticle3d::Symbol*>(symbol)) {
+	else if (const eparticle3d::Symbol* p3d = dynamic_cast<const eparticle3d::Symbol*>(sym)) {
 		node = m_particle3d_builder->Create(p3d, m_p3d_spr_builder);
 	}
 
 	// particle2d
-	else if (const eparticle2d::Symbol* p2d = dynamic_cast<const eparticle2d::Symbol*>(symbol)) {
+	else if (const eparticle2d::Symbol* p2d = dynamic_cast<const eparticle2d::Symbol*>(sym)) {
 		node = m_particle2d_builder->Create(p2d);
 	}
 
 	// mesh
-	else if (const emesh::Symbol* mesh = dynamic_cast<const emesh::Symbol*>(symbol)) {
+	else if (const emesh::Symbol* mesh = dynamic_cast<const emesh::Symbol*>(sym)) {
 		node = m_mesh_builder->Create(mesh);
 	}
 
 	// trail
-	else if (const etrail::Symbol* trail = dynamic_cast<const etrail::Symbol*>(symbol)) {
+	else if (const etrail::Symbol* trail = dynamic_cast<const etrail::Symbol*>(sym)) {
 		node = m_trail_builder->Create(trail);
 	}
 
@@ -242,13 +242,13 @@ const IPackNode* PackNodeFactory::Create(const ee::Symbol* symbol)
 		throw ee::Exception("PackNodeFactory::Create unknown symbol type.");
 	}
 
-	node->SetFilepath(ee::FileHelper::GetRelativePath(m_files_dir, symbol->GetFilepath()));
+	node->SetFilepath(ee::FileHelper::GetRelativePath(m_files_dir, sym->GetFilepath()));
 
 	if (node->GetSprID() > ANCHOR_ID) {
 		throw ee::Exception("PackNodeFactory::Create node id over ANCHOR_ID.");
 	}
 
-	PackUI::Instance()->OnKnownPackID(symbol->GetFilepath(), node->GetSprID());
+	PackUI::Instance()->OnKnownPackID(sym->GetFilepath(), node->GetSprID());
 
 	return node;
 }

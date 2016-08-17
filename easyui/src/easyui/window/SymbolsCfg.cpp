@@ -27,7 +27,7 @@ SymbolsCfg::SymbolsCfg(StagePanel* stage, ee::LibraryPanel* library)
 
 SymbolsCfg::~SymbolsCfg()
 {
-	for_each(m_symbols.begin(), m_symbols.end(), ee::DeletePointerFunctor<Symbol>());
+	for_each(m_syms.begin(), m_syms.end(), ee::DeletePointerFunctor<Symbol>());
 }
 
 void SymbolsCfg::LoadConfig()
@@ -62,39 +62,39 @@ void SymbolsCfg::InitLibrarySymbols(const Json::Value& value)
 
 void SymbolsCfg::InitLibrarySymbols(const Json::Value& value, const std::string& name, const std::string& filter)
 {
-	std::vector<Symbol*> symbols;
+	std::vector<Symbol*> syms;
 
-	InitLibrarySymbols(value, symbols);
+	InitLibrarySymbols(value, syms);
 
 	wxWindow* nb = m_library->GetNotebook();
 	LibraryPage* page = new LibraryPage(nb, name.c_str(), filter);
 	m_library->AddPage(page);
 
-	ResetLibraryList(page, symbols);
+	ResetLibraryList(page, syms);
 
-	copy(symbols.begin(), symbols.end(), back_inserter(m_symbols));
+	copy(syms.begin(), syms.end(), back_inserter(m_syms));
 }
 
-void SymbolsCfg::InitLibrarySymbols(const Json::Value& value, std::vector<Symbol*>& symbols)
+void SymbolsCfg::InitLibrarySymbols(const Json::Value& value, std::vector<Symbol*>& syms)
 {
 	int i = 0;
 	Json::Value symbol_val = value[i++];
 	while (!symbol_val.isNull()) {
 		Symbol* s = new Symbol;
 		s->filepath = symbol_val["filepath"].asString();
-		symbols.push_back(s);
+		syms.push_back(s);
 
 		symbol_val = value[i++];
 	}
 }
 
-void SymbolsCfg::ResetLibraryList(LibraryPage* library, const std::vector<Symbol*>& symbols)
+void SymbolsCfg::ResetLibraryList(LibraryPage* library, const std::vector<Symbol*>& syms)
 {
 	library->GetList()->Clear();
 
-	for (int i = 0, n = symbols.size(); i < n; ++i)
+	for (int i = 0, n = syms.size(); i < n; ++i)
 	{
-		const Symbol* src = symbols[i];
+		const Symbol* src = syms[i];
 
 		ee::Symbol* dst = ee::SymbolMgr::Instance()->FetchSymbol(src->filepath);
 		dst->RefreshThumbnail(dst->GetFilepath());

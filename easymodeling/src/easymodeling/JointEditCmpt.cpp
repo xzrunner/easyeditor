@@ -99,12 +99,12 @@ wxSizer* JointEditCmpt::InitLayout()
 
 void JointEditCmpt::onCreateJoint(wxCommandEvent& event)
 {
-	std::vector<ee::Sprite*> sprites;
+	std::vector<ee::Sprite*> sprs;
 	ee::SpriteSelection* selection = m_stage_panel->GetSpriteSelection();
-	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	assert(sprites.size() == 2);
-	Body *body0 = static_cast<Body*>(sprites[0]->GetUserData()),
-		*body1 = static_cast<Body*>(sprites[1]->GetUserData());
+	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	assert(sprs.size() == 2);
+	Body *body0 = static_cast<Body*>(sprs[0]->GetUserData()),
+		*body1 = static_cast<Body*>(sprs[1]->GetUserData());
 
 	Joint* joint = NULL;
 	std::string type = m_typeChoice->GetString(m_typeChoice->GetSelection());

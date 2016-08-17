@@ -12,53 +12,53 @@ namespace ee
 TranslateSpriteAOP::TranslateSpriteAOP(const SpriteSelection& selection, const sm::vec2& offset)
 	: m_offset(offset)
 {
-	selection.Traverse(FetchAllVisitor<Sprite>(m_sprites));
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->AddReference();
+	selection.Traverse(FetchAllVisitor<Sprite>(m_sprs));
+	for (size_t i = 0, n = m_sprs.size(); i < n; ++i) {
+		m_sprs[i]->AddReference();
 	}
 }
 
-TranslateSpriteAOP::TranslateSpriteAOP(Sprite* sprite, const sm::vec2& offset)
+TranslateSpriteAOP::TranslateSpriteAOP(Sprite* spr, const sm::vec2& offset)
 	: m_offset(offset)
 {
-	sprite->AddReference();
-	m_sprites.push_back(sprite);
+	spr->AddReference();
+	m_sprs.push_back(spr);
 }
 
-TranslateSpriteAOP::TranslateSpriteAOP(const std::vector<Sprite*>& sprites, const sm::vec2& offset)
+TranslateSpriteAOP::TranslateSpriteAOP(const std::vector<Sprite*>& sprs, const sm::vec2& offset)
 	: m_offset(offset)
 {
-	for_each(sprites.begin(), sprites.end(), cu::AddRefFonctor<Sprite>());
-	m_sprites = sprites;
+	for_each(sprs.begin(), sprs.end(), cu::AddRefFonctor<Sprite>());
+	m_sprs = sprs;
 }
 
 TranslateSpriteAOP::~TranslateSpriteAOP()
 {
-	for_each(m_sprites.begin(), m_sprites.end(), cu::RemoveRefFonctor<Sprite>());
+	for_each(m_sprs.begin(), m_sprs.end(), cu::RemoveRefFonctor<Sprite>());
 }
 
 void TranslateSpriteAOP::Undo()
 {
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+	for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 	{
-		Sprite* sprite = m_sprites[i];
-		sprite->Translate(-m_offset);
+		Sprite* spr = m_sprs[i];
+		spr->Translate(-m_offset);
 	}
 }
 
 void TranslateSpriteAOP::Redo()
 {
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+	for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 	{
-		Sprite* sprite = m_sprites[i];
-		sprite->Translate(m_offset);
+		Sprite* spr = m_sprs[i];
+		spr->Translate(m_offset);
 	}
 }
 
-Json::Value TranslateSpriteAOP::Store(const std::vector<Sprite*>& sprites) const
+Json::Value TranslateSpriteAOP::Store(const std::vector<Sprite*>& sprs) const
 {
 	Json::Value val;
-	val["idx"] = HistoryUtil::StoreSpritesIndex(m_sprites, sprites);
+	val["idx"] = HistoryUtil::StoreSpritesIndex(m_sprs, sprs);
 	val["type"] = AT_MOVE;
 	val["dx"] = m_offset.x;
 	val["dy"] = m_offset.y;

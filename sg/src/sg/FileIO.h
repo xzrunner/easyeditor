@@ -18,9 +18,9 @@ public:
 
 private:
 	static ee::Sprite* load(const Json::Value& value, StagePanel* stage, const std::string& dir);
-	static Json::Value store(const ee::Sprite* sprite, StagePanel* stage, const std::string& dir);
+	static Json::Value store(const ee::Sprite* spr, StagePanel* stage, const std::string& dir);
 
-	static void SetSymbolUserData(ee::Symbol* symbol);
+	static void SetSymbolUserData(ee::Symbol* sym);
 
 }; // FileIO
 

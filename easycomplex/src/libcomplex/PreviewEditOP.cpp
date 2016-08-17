@@ -10,9 +10,9 @@ namespace ecomplex
 {
 
 PreviewEditOP::PreviewEditOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
-							 const std::vector<const ee::Sprite*>& sprites)
+							 const std::vector<const ee::Sprite*>& sprs)
 	: ee::ZoomViewOP(wnd, stage, true)
-	, m_sprites(sprites)
+	, m_sprs(sprs)
 {
 }
 
@@ -36,8 +36,8 @@ bool PreviewEditOP::OnMouseLeftDown(int x, int y)
 
 	RestartVisitor restart;
 	bool next;
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		ee::Sprite* spr = const_cast<ee::Sprite*>(m_sprites[i]);
+	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+		ee::Sprite* spr = const_cast<ee::Sprite*>(m_sprs[i]);
 		restart.Visit(spr, next);
 		dynamic_cast<ee::Symbol*>(spr->GetSymbol())->Traverse(restart);
 	}

@@ -23,8 +23,8 @@ sm::rect AnimSymbol::GetBounding(const Sprite* spr) const
 		Layer* layer = m_layers[i];
 		for (int j = 0, m = layer->frames.size(); j < m; ++j) {
 			Frame* frame = layer->frames[j];
-			for (int k = 0, l = frame->sprites.size(); k < l; ++k) {
-				frame->sprites[k]->GetBounding()->CombineTo(b);
+			for (int k = 0, l = frame->sprs.size(); k < l; ++k) {
+				frame->sprs[k]->GetBounding()->CombineTo(b);
 			}
 		}
 	}
@@ -43,8 +43,8 @@ bool AnimSymbol::Clear()
  		Layer* layer = m_layers[i];
  		for (int j = 0, m = layer->frames.size(); j < m; ++j) {
  			Frame* frame = layer->frames[j];
- 			for (int k = 0, l = frame->sprites.size(); k < l; ++k) {
- 				frame->sprites[k]->RemoveReference();
+ 			for (int k = 0, l = frame->sprs.size(); k < l; ++k) {
+ 				frame->sprs[k]->RemoveReference();
 				dirty = true;
  			}
 			delete frame;

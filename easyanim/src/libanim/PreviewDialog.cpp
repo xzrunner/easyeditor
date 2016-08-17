@@ -10,10 +10,10 @@
 namespace eanim
 {
 
-PreviewDialog::PreviewDialog(wxWindow* parent, const Symbol* symbol,
+PreviewDialog::PreviewDialog(wxWindow* parent, const Symbol* sym,
 							 wxGLContext* glctx)
  	: wxDialog(parent, wxID_ANY, "Preview", wxDefaultPosition, wxSize(800, 600), wxCLOSE_BOX | wxCAPTION)
-	, m_symbol(symbol)
+	, m_sym(sym)
 {
 	InitLayout(glctx);
 }
@@ -52,7 +52,7 @@ void PreviewDialog::BuildEditPanel(wxSizer* topSizer, wxGLContext* glctx)
 {
 	m_stage = new ee::EditPanel(this, this);
 	m_stage->SetEditOP(new ee::ZoomViewOP(m_stage, m_stage->GetStageImpl(), false));
-	m_stage->SetCanvas(new PreviewCanvas(m_stage, m_stage->GetStageImpl(), m_symbol, glctx));
+	m_stage->SetCanvas(new PreviewCanvas(m_stage, m_stage->GetStageImpl(), m_sym, glctx));
 	topSizer->Add(m_stage, 1, wxEXPAND);
 }
 

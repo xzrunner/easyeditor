@@ -30,22 +30,22 @@ void Layer::TraverseSprite(Visitor<Sprite>& visitor, DataTraverseType type, bool
 		type == DT_VISIBLE && visible ||
 		type == DT_ALL || type == DT_SELECTABLE)
 	{
-		m_sprites.Traverse(visitor, type, order);
+		m_sprs.Traverse(visitor, type, order);
 	}
 }
 
-bool Layer::Insert(Sprite* sprite)
+bool Layer::Insert(Sprite* spr)
 {
-	if (m_sprites.IsExist(sprite)) {
+	if (m_sprs.IsExist(spr)) {
 		return false;
 	} else {
-		return m_sprites.Insert(sprite);
+		return m_sprs.Insert(spr);
 	}
 }
 
-bool Layer::Remove(Sprite* sprite)
+bool Layer::Remove(Sprite* spr)
 {
-	return m_sprites.Remove(sprite);
+	return m_sprs.Remove(spr);
 }
 
 void Layer::TraverseShape(Visitor<Shape>& visitor, bool order) const
@@ -77,18 +77,18 @@ void Layer::LoadFromFile(const Json::Value& val, const std::string& dir)
 	Json::Value spr_val = val["sprite"][i++];
 	while (!spr_val.isNull()) {
 		std::string filepath = SymbolSearcher::GetSymbolPath(dir, spr_val);
-		Symbol* symbol = SymbolMgr::Instance()->FetchSymbol(filepath);
-		if (!symbol) {
+		Symbol* sym = SymbolMgr::Instance()->FetchSymbol(filepath);
+		if (!sym) {
 			std::string filepath = spr_val["filepath"].asString();
 			throw Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", dir.c_str(), filepath.c_str());
 		}
-		SymbolSearcher::SetSymbolFilepaths(dir, symbol, spr_val);
+		SymbolSearcher::SetSymbolFilepaths(dir, sym, spr_val);
 
-		Sprite* sprite = SpriteFactory::Instance()->Create(symbol);
-		sprite->Load(spr_val);
-		m_sprites.Insert(sprite);
+		Sprite* spr = SpriteFactory::Instance()->Create(sym);
+		spr->Load(spr_val);
+		m_sprs.Insert(spr);
 
-		symbol->RemoveReference();
+		sym->RemoveReference();
 
 		spr_val = val["sprite"][i++];
 	}
@@ -110,10 +110,10 @@ void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
 	val["visible"] = visible;
 	val["editable"] = editable;
 
-	std::vector<Sprite*> sprites;
-	m_sprites.Traverse(FetchAllVisitor<Sprite>(sprites), true);
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		Sprite* spr = sprites[i];
+	std::vector<Sprite*> sprs;
+	m_sprs.Traverse(FetchAllVisitor<Sprite>(sprs), true);
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		Sprite* spr = sprs[i];
 
 		Json::Value spr_val;
 		spr_val["filepath"] = FileHelper::GetRelativePath(dir,
@@ -135,7 +135,7 @@ void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
 
 void Layer::Clear()
 {
-	m_sprites.Clear();
+	m_sprs.Clear();
 	m_shapes.Clear();
 }
 

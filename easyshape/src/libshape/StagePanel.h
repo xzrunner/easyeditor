@@ -24,7 +24,7 @@ public:
 		wxGLContext* glctx, ee::Sprite* edited, 
 		const ee::MultiSpritesImpl* bg_sprites);
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		Symbol* symbol/*, ee::LibraryPanel* library*/);
+		Symbol* sym/*, ee::LibraryPanel* library*/);
 	virtual ~StagePanel();
 
 	//
@@ -45,7 +45,7 @@ public:
 		m_toolbar = toolbar;
 	}
 
-	void SetSymbolBG(ee::Symbol* symbol);
+	void SetSymbolBG(ee::Symbol* sym);
 
 protected:
 	//
@@ -72,7 +72,7 @@ private:
 	}; // DragSymbolTarget
 
 private:
-	eshape::Symbol* m_symbol;
+	eshape::Symbol* m_sym;
 
 	ToolbarPanel* m_toolbar;
 

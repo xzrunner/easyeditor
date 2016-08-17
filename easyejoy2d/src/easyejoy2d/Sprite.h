@@ -23,7 +23,7 @@ public:
 	 */
 	virtual Sprite* EEClone() const { return new Sprite(*this); }
 
-	static ee::Sprite* Create(ee::Symbol* symbol);
+	static ee::Sprite* Create(ee::Symbol* sym);
 
 }; // Sprite
 

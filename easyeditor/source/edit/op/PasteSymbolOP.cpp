@@ -25,17 +25,17 @@ bool PasteSymbolOP::OnMouseLeftDown(int x, int y)
 {
 	if (ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
-	Symbol* symbol = m_library->GetSymbol();
-	if (symbol)
+	Symbol* sym = m_library->GetSymbol();
+	if (sym)
 	{
 		m_pos = m_stage->TransPosScrToProj(x, y);
-		Sprite* sprite = SpriteFactory::Instance()->Create(symbol);
-		sprite->Translate(m_pos);
+		Sprite* spr = SpriteFactory::Instance()->Create(sym);
+		spr->Translate(m_pos);
 		if (m_scale) {
-			sprite->SetScale(sm::vec2(*m_scale, *m_scale));
+			spr->SetScale(sm::vec2(*m_scale, *m_scale));
 		}
-		InsertSpriteSJ::Instance()->Insert(sprite);
-		sprite->RemoveReference();
+		InsertSpriteSJ::Instance()->Insert(spr);
+		spr->RemoveReference();
 	}
 
 	return false;
@@ -55,13 +55,13 @@ bool PasteSymbolOP::OnDraw() const
 {
 	if (ZoomViewOP::OnDraw()) return true;
 
-	Symbol* symbol = m_library->GetSymbol();
-	if (symbol && m_pos.IsValid())
+	Symbol* sym = m_library->GetSymbol();
+	if (sym && m_pos.IsValid())
 	{
 		if (m_scale) {
-			SpriteRenderer::Draw(symbol, s2::RenderParams(), m_pos, 0.0f, *m_scale);
+			SpriteRenderer::Draw(sym, s2::RenderParams(), m_pos, 0.0f, *m_scale);
 		} else {
-			SpriteRenderer::Draw(symbol, s2::RenderParams(), m_pos);
+			SpriteRenderer::Draw(sym, s2::RenderParams(), m_pos);
 		}
 	}
 

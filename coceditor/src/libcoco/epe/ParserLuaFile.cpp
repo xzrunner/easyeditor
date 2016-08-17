@@ -134,12 +134,12 @@ void ParserLuaFile::transToMemory(const std::vector<std::string>& texfilenames)
 	transAniToMemory();
 }
 
-void ParserLuaFile::getAllSymbols(std::vector<ee::Symbol*>& symbols) const
+void ParserLuaFile::getAllSymbols(std::vector<ee::Symbol*>& syms) const
 {
-	symbols.reserve(m_mapSymbols.size());
+	syms.reserve(m_mapSymbols.size());
 	std::map<int, ee::Symbol*>::const_iterator itr = m_mapSymbols.begin();
 	for ( ; itr != m_mapSymbols.end(); ++itr)
-		symbols.push_back(itr->second);
+		syms.push_back(itr->second);
 }
 
 void ParserLuaFile::parserPic(lua_State* L, int id)
@@ -318,7 +318,7 @@ void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames
 
 		Picture* pic = itr->second;
 
-		ecomplex::Symbol* symbol = new ecomplex::Symbol;
+		ecomplex::Symbol* sym = new ecomplex::Symbol;
 		for (int i = 0, n = pic->parts.size(); i < n; ++i)
 		{
 			Picture::Part* part = pic->parts[i];
@@ -336,28 +336,28 @@ void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames
 					ee::ImageSaver::StoreToFile(pixels, width, height, 4, outfile, ee::ImageSaver::e_png);
 
 				std::string outpath = outfile + ".png";
-				ee::Sprite* sprite = new ee::DummySprite(new ee::DummySymbol(outpath, width, height));
-				part->transform(sprite);
-				symbol->Add(sprite);
+				ee::Sprite* spr = new ee::DummySprite(new ee::DummySymbol(outpath, width, height));
+				part->transform(spr);
+				sym->Add(spr);
 			}
 		}
 
 		std::stringstream ss;
-		if (symbol->name.empty()) {
+		if (sym->name.empty()) {
 			ss << itr->first;
 		} else {
-			ss << symbol->name;
+			ss << sym->name;
 		}
 		std::string filename = outfloder + "\\" + ss.str() 
 			+ "_" + ee::FileType::GetTag(ee::FileType::e_complex) + ".json";
-		ecomplex::FileStorer::Store(filename.c_str(), symbol);
+		ecomplex::FileStorer::Store(filename.c_str(), sym);
 
 		pic->filename = filename;
-		sm::vec2 sz = symbol->GetBounding().Size();
+		sm::vec2 sz = sym->GetBounding().Size();
 		pic->width = sz.x;
 		pic->height = sz.y;
 
-		delete symbol;
+		delete sym;
 	}
 }
 
@@ -380,10 +380,10 @@ void ParserLuaFile::transAniToFiles(const std::string& outfloder)
 
 void ParserLuaFile::transAniToAnimationFile(const std::string& outfloder, int id, Animation* ani)
 {
-	eanim::Symbol* symbol = new eanim::Symbol;
+	eanim::Symbol* sym = new eanim::Symbol;
 	s2::AnimSymbol::Layer* layer = new s2::AnimSymbol::Layer;
-	symbol->name = ani->export_name;
-	symbol->setFPS(30);
+	sym->name = ani->export_name;
+	sym->setFPS(30);
 	for (int i = 0, n = ani->frames.size(); i < n; ++i)
 	{
 		//				std::cout << "frame: [" << i << "/" << ani->frames.size() << "]" << std::endl;
@@ -396,82 +396,82 @@ void ParserLuaFile::transAniToAnimationFile(const std::string& outfloder, int id
 			//					std::cout << "item: [" << j << "/" << ani->frames[i].size() << "]" << std::endl;
 
 			Animation::Item* item = ani->frames[i][j];
-			ee::Sprite* sprite = NULL;
+			ee::Sprite* spr = NULL;
 			std::map<int, Picture*>::iterator itr = m_mapPictures.find(ani->component[item->index]);
 			if (itr != m_mapPictures.end())
 			{
 				Picture* pic = itr->second;
-				sprite = new ee::DummySprite(new ee::DummySymbol(pic->filename, pic->width, pic->height));
+				spr = new ee::DummySprite(new ee::DummySymbol(pic->filename, pic->width, pic->height));
 			}
 			else
 			{
 				std::map<int, Animation*>::iterator itr = m_mapAnims.find(ani->component[item->index]);
 				assert(itr != m_mapAnims.end());
 				Animation* ani = itr->second;
-				sprite = new ee::DummySprite(new ee::DummySymbol(ani->filename));
+				spr = new ee::DummySprite(new ee::DummySymbol(ani->filename));
 			}
-			item->transform(sprite);
-			frame->sprites.push_back(sprite);
+			item->transform(spr);
+			frame->sprs.push_back(spr);
 		}
 		layer->frames.push_back(frame);
 	}
-	symbol->AddLayer(layer);
+	sym->AddLayer(layer);
 
 	std::stringstream ss;
-	if (symbol->name.empty()) {
+	if (sym->name.empty()) {
 		ss << id;
 	} else {
-		ss << symbol->name;
+		ss << sym->name;
 	}
 	std::string filename = outfloder + "\\" + ss.str() 
 		+ "_" + ee::FileType::GetTag(ee::FileType::e_anim) + ".json";
-	eanim::FileSaver::Store(filename.c_str(), *symbol);
+	eanim::FileSaver::Store(filename.c_str(), *sym);
 
 	ani->filename = filename;
 
-	delete symbol;
+	delete sym;
 }
 
 void ParserLuaFile::transAniToComplexFile(const std::string& outfloder, int id, Animation* ani)
 {
 	assert(ani->frames.size() == 1);
 
-	ecomplex::Symbol* symbol = new ecomplex::Symbol;
-	symbol->name = ani->export_name;
+	ecomplex::Symbol* sym = new ecomplex::Symbol;
+	sym->name = ani->export_name;
 	for (int i = 0, n = ani->frames[0].size(); i < n; ++i)
 	{
 		Animation::Item* item = ani->frames[0][i];
-		ee::Sprite* sprite = NULL;
+		ee::Sprite* spr = NULL;
 		std::map<int, Picture*>::iterator itr = m_mapPictures.find(ani->component[item->index]);
 		if (itr != m_mapPictures.end())
 		{
 			Picture* pic = itr->second;
-			sprite = new ee::DummySprite(new ee::DummySymbol(pic->filename, pic->width, pic->height));
+			spr = new ee::DummySprite(new ee::DummySymbol(pic->filename, pic->width, pic->height));
 		}
 		else
 		{
 			std::map<int, Animation*>::iterator itr = m_mapAnims.find(ani->component[item->index]);
 			assert(itr != m_mapAnims.end());
 			Animation* ani = itr->second;
-			sprite = new ee::DummySprite(new ee::DummySymbol(ani->filename));
+			spr = new ee::DummySprite(new ee::DummySymbol(ani->filename));
 		}
-		item->transform(sprite);
-		symbol->Add(sprite);
+		item->transform(spr);
+		sym->Add(spr);
 	}
 
 	std::stringstream ss;
-	if (symbol->name.empty()) {
+	if (sym->name.empty()) {
 		ss << id;
 	} else {
-		ss << symbol->name;
+		ss << sym->name;
 	}
 	std::string filename = outfloder + "\\" + ss.str() 
 		+ "_" + ee::FileType::GetTag(ee::FileType::e_complex) + ".json";
-	ecomplex::FileStorer::Store(filename.c_str(), symbol);
+	ecomplex::FileStorer::Store(filename.c_str(), sym);
 
 	ani->filename = filename;
 
-	delete symbol;
+	delete sym;
 }
 
 void ParserLuaFile::transPicToMemory(const std::vector<std::string>& texfilenames)
@@ -490,7 +490,7 @@ void ParserLuaFile::transPicToMemory(const std::vector<std::string>& texfilename
 
 		Picture* pic = itr->second;
 
-		ecomplex::Symbol* symbol = new ecomplex::Symbol;
+		ecomplex::Symbol* sym = new ecomplex::Symbol;
 		for (int i = 0, n = pic->parts.size(); i < n; ++i)
 		{
 			Picture::Part* part = pic->parts[i];
@@ -503,14 +503,14 @@ void ParserLuaFile::transPicToMemory(const std::vector<std::string>& texfilename
 // 			r.ymax = part->ymax;
 // 			image->SetRegion(r);
 
-			ee::Sprite* sprite = new ee::ImageSprite(image);
-			part->transform(sprite);
-			symbol->Add(sprite);
+			ee::Sprite* spr = new ee::ImageSprite(image);
+			part->transform(spr);
+			sym->Add(spr);
 		}
 
 		// todo filepath
-//		symbol->InitThumbnail();
-		m_mapSymbols.insert(std::make_pair(itr->first, symbol));
+//		sym->InitThumbnail();
+		m_mapSymbols.insert(std::make_pair(itr->first, sym));
 	}
 }
 
@@ -532,10 +532,10 @@ void ParserLuaFile::transAniToMemory()
 
 void ParserLuaFile::transAniToAnimationMemory(int id, Animation* ani)
 {
-	eanim::Symbol* symbol = new eanim::Symbol;
+	eanim::Symbol* sym = new eanim::Symbol;
 	s2::AnimSymbol::Layer* layer = new s2::AnimSymbol::Layer;
-	symbol->name = ani->export_name;
-	symbol->setFPS(30);
+	sym->name = ani->export_name;
+	sym->setFPS(30);
 	for (int i = 0, n = ani->frames.size(); i < n; ++i)
 	{
 		// std::cout << "frame: [" << i << "/" << ani->frames.size() << "]" << std::endl;
@@ -548,68 +548,68 @@ void ParserLuaFile::transAniToAnimationMemory(int id, Animation* ani)
 			// std::cout << "item: [" << j << "/" << ani->frames[i].size() << "]" << std::endl;
 
 			Animation::Item* item = ani->frames[i][j];
-			ee::Sprite* sprite = NULL;
+			ee::Sprite* spr = NULL;
 			std::map<int, Picture*>::iterator itr = m_mapPictures.find(ani->component[item->index]);
 			if (itr != m_mapPictures.end())
 			{
 				std::map<int, ee::Symbol*>::iterator itr 
 					= m_mapSymbols.find(ani->component[item->index]);
 				assert(itr != m_mapSymbols.end());
-				sprite = ee::SpriteFactory::Instance()->Create(itr->second);
+				spr = ee::SpriteFactory::Instance()->Create(itr->second);
 			}
 			else
 			{
 				std::map<int, ee::Symbol*>::iterator itr 
 					= m_mapSymbols.find(ani->component[item->index]);
 				assert(itr != m_mapSymbols.end());
-				sprite = ee::SpriteFactory::Instance()->Create(itr->second);
+				spr = ee::SpriteFactory::Instance()->Create(itr->second);
 			}
-			item->transform(sprite);
-			frame->sprites.push_back(sprite);
+			item->transform(spr);
+			frame->sprs.push_back(spr);
 		}
 		layer->frames.push_back(frame);
 	}
-	symbol->AddLayer(layer);
+	sym->AddLayer(layer);
 
 	// todo filepath
-	//symbol->InitThumbnail();
-	m_mapSymbols.insert(std::make_pair(id, symbol));
+	//sym->InitThumbnail();
+	m_mapSymbols.insert(std::make_pair(id, sym));
 }
 
 void ParserLuaFile::transAniToComplexMemory(int id, Animation* ani)
 {
 	assert(ani->frames.size() == 1);
 
-	ecomplex::Symbol* symbol = new ecomplex::Symbol;
-	symbol->name = ani->export_name;
+	ecomplex::Symbol* sym = new ecomplex::Symbol;
+	sym->name = ani->export_name;
 	for (int i = 0, n = ani->frames[0].size(); i < n; ++i)
 	{
 		// std::cout << "item: [" << j << "/" << ani->frames[i].size() << "]" << std::endl;
 
 		Animation::Item* item = ani->frames[0][i];
-		ee::Sprite* sprite = NULL;
+		ee::Sprite* spr = NULL;
 		std::map<int, Picture*>::iterator itr = m_mapPictures.find(ani->component[item->index]);
 		if (itr != m_mapPictures.end())
 		{
 			std::map<int, ee::Symbol*>::iterator itr 
 				= m_mapSymbols.find(ani->component[item->index]);
 			assert(itr != m_mapSymbols.end());
-			sprite = ee::SpriteFactory::Instance()->Create(itr->second);
+			spr = ee::SpriteFactory::Instance()->Create(itr->second);
 		}
 		else
 		{
 			std::map<int, ee::Symbol*>::iterator itr 
 				= m_mapSymbols.find(ani->component[item->index]);
 			assert(itr != m_mapSymbols.end());
-			sprite = ee::SpriteFactory::Instance()->Create(itr->second);
+			spr = ee::SpriteFactory::Instance()->Create(itr->second);
 		}
-		item->transform(sprite);
-		symbol->Add(sprite);
+		item->transform(spr);
+		sym->Add(spr);
 	}
 
 	// todo filepath
-	//symbol->InitThumbnail();
-	m_mapSymbols.insert(std::make_pair(id, symbol));
+	//sym->InitThumbnail();
+	m_mapSymbols.insert(std::make_pair(id, sym));
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -637,7 +637,7 @@ void ParserLuaFile::Picture::Part::init()
 	filename = ss.str();
 }
 
-void ParserLuaFile::Picture::Part::transform(ee::Sprite* sprite) const
+void ParserLuaFile::Picture::Part::transform(ee::Sprite* spr) const
 {
 	bool xMirror = false, yMirror = false;
 	float angle = 0;
@@ -726,12 +726,12 @@ void ParserLuaFile::Picture::Part::transform(ee::Sprite* sprite) const
 		sx = dw / 16.0f / sw;
 		sy = dh / 16.0f / sh;
 	}
-	sprite->SetScale(sm::vec2(sx, sy));
+	spr->SetScale(sm::vec2(sx, sy));
 
-	sprite->SetMirror(sm::bvec2(xMirror, yMirror));
+	spr->SetMirror(sm::bvec2(xMirror, yMirror));
 	angle = -angle;
-	sprite->SetPosition(sm::vec2(dcenter.x / 16, - dcenter.y / 16));
-	sprite->SetAngle(pre_rotate + angle);
+	spr->SetPosition(sm::vec2(dcenter.x / 16, - dcenter.y / 16));
+	spr->SetAngle(pre_rotate + angle);
 }
 
 std::string ParserLuaFile::Picture::Part::dstMode(const sm::vec2 _dst[4]) const

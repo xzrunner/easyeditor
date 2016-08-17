@@ -23,10 +23,10 @@ public:
 		const ee::MultiSpritesImpl* bg_sprites, ee::LibraryPanel* library);
 	virtual ~StagePanel();
 
-	Symbol* GetSymbol() { return m_symbol; }
+	Symbol* GetSymbol() { return m_sym; }
 
 private:
-	Symbol* m_symbol;
+	Symbol* m_sym;
 
 }; // StagePanel
 

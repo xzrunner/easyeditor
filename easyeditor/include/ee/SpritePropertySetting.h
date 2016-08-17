@@ -14,7 +14,7 @@ class SpritePropertyImpl;
 class SpritePropertySetting : public PropertySetting, public Observer
 {
 public:
-	SpritePropertySetting(EditPanelImpl* stage, Sprite* sprite);
+	SpritePropertySetting(EditPanelImpl* stage, Sprite* spr);
 	virtual ~SpritePropertySetting();
 
 	//

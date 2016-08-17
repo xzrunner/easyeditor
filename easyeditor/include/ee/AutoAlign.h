@@ -16,7 +16,7 @@ class AutoAlign
 public:
 	AutoAlign(MultiSpritesImpl* sprites_impl);
 
-	void Align(const std::vector<Sprite*>& sprites);
+	void Align(const std::vector<Sprite*>& sprs);
 	void Align(const Sprite* src, Sprite* dst);
 
 	void Draw() const;

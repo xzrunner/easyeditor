@@ -39,7 +39,7 @@ protected:
 
 private:
 	static void loadBody(const std::string& filepath, Body& body);
-	static void loadBody(ee::Sprite* sprite, Body& body);
+	static void loadBody(ee::Sprite* spr, Body& body);
 
 	void Insert(ee::Sprite* spr);
 	void Remove(ee::Sprite* spr);

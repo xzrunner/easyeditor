@@ -104,10 +104,10 @@ void SelectSpritesOP::GroupSelection()
 		return;
 	}
 
-	std::vector<ee::Sprite*> sprites;
-	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
+	std::vector<ee::Sprite*> sprs;
+	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
 
-	Sprite* spr = GroupHelper::Group(sprites);
+	Sprite* spr = GroupHelper::Group(sprs);
 	std::string filepath = ee::FileHelper::GetFileDir(parent->GetFilepath());
 	filepath += "\\_tmp_";
 	filepath += ee::StringHelper::ToString(wxDateTime::Now().GetTicks());
@@ -115,8 +115,8 @@ void SelectSpritesOP::GroupSelection()
 	dynamic_cast<Symbol*>(spr->GetSymbol())->SetFilepath(filepath);
 
 	ee::InsertSpriteSJ::Instance()->Insert(spr);
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		ee::RemoveSpriteSJ::Instance()->Remove(sprites[i]);
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		ee::RemoveSpriteSJ::Instance()->Remove(sprs[i]);
 	}
 }
 
@@ -127,11 +127,11 @@ void SelectSpritesOP::BreakUpSelection()
 	}
 
 	std::string tag = "_" + ee::FileType::GetTag(ee::FileType::e_complex) + ".json";
-	std::vector<ee::Sprite*> sprites;
-	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	for (int i = 0, n = sprites.size(); i < n; ++i) 
+	std::vector<ee::Sprite*> sprs;
+	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	for (int i = 0, n = sprs.size(); i < n; ++i) 
 	{
-		ee::Sprite* spr = sprites[i];
+		ee::Sprite* spr = sprs[i];
 		if (dynamic_cast<ee::Symbol*>(spr->GetSymbol())->GetFilepath().find(tag) == std::string::npos) {
 			continue;
 		}

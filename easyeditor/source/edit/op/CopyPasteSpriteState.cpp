@@ -11,24 +11,24 @@ namespace ee
 
 CopyPasteSpriteState::CopyPasteSpriteState(SpriteSelection* selection)
 {
-	std::vector<Sprite*> sprites;
-	selection->Traverse(FetchAllVisitor<Sprite>(sprites));
+	std::vector<Sprite*> sprs;
+	selection->Traverse(FetchAllVisitor<Sprite>(sprs));
 
-	m_sprites.reserve(sprites.size());
+	m_sprs.reserve(sprs.size());
 	selection->Clear();
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		Sprite* spr = sprites[i]->EEClone();
-		m_sprites.push_back(spr);
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		Sprite* spr = sprs[i]->EEClone();
+		m_sprs.push_back(spr);
 		selection->Add(spr);
 	}
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		InsertSpriteSJ::Instance()->Insert(m_sprites[i]);
+	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+		InsertSpriteSJ::Instance()->Insert(m_sprs[i]);
 	}
 }
 
 CopyPasteSpriteState::~CopyPasteSpriteState()
 {
-	for_each(m_sprites.begin(), m_sprites.end(), cu::RemoveRefFonctor<Sprite>());
+	for_each(m_sprs.begin(), m_sprs.end(), cu::RemoveRefFonctor<Sprite>());
 }
 
 void CopyPasteSpriteState::OnMousePress(const sm::vec2& pos)
@@ -39,8 +39,8 @@ void CopyPasteSpriteState::OnMousePress(const sm::vec2& pos)
 bool CopyPasteSpriteState::OnMouseDrag(const sm::vec2& pos)
 {
 	sm::vec2 offset = pos - m_last_pos;
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		Sprite* spr = m_sprites[i];
+	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+		Sprite* spr = m_sprs[i];
 		spr->Translate(offset);
 	}
 	m_last_pos = pos;

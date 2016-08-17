@@ -9,9 +9,9 @@
 namespace etexture
 {
 
-void FileSaver::Store(const char* filepath, const Symbol* symbol)
+void FileSaver::Store(const char* filepath, const Symbol* sym)
 {
-	const std::vector<ee::Shape*>& shapes = symbol->GetAllShapes();
+	const std::vector<ee::Shape*>& shapes = sym->GetAllShapes();
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
 
 	Json::Value value;

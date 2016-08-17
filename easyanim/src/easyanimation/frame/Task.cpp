@@ -88,9 +88,9 @@ bool Task::IsDirty() const
 	return ViewMgr::Instance()->stage->IsEditDirty();
 }
 
-void Task::GetAllSprite(std::vector<const ee::Sprite*>& sprites) const
+void Task::GetAllSprite(std::vector<const ee::Sprite*>& sprs) const
 {
-	ViewMgr::Instance()->stage->TraverseSprites(ee::FetchAllVisitor<const ee::Sprite>(sprites));
+	ViewMgr::Instance()->stage->TraverseSprites(ee::FetchAllVisitor<const ee::Sprite>(sprs));
 }
 
 const ee::EditPanel* Task::GetEditPanel() const

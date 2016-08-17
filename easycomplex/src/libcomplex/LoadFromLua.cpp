@@ -13,7 +13,7 @@ namespace ecomplex
 {
 
 void LoadFromLua::Load(const Json::Value& value, const std::string& dir, 
-					   Symbol* symbol)
+					   Symbol* sym)
 {
 	std::vector<ee::Image*> images;
 	std::string img_name = ee::FileHelper::GetAbsolutePath(dir, value["image name"].asString());
@@ -26,7 +26,7 @@ void LoadFromLua::Load(const Json::Value& value, const std::string& dir,
 	std::string export_name = value["export name"].asString();
 
 	erespacker::IPackNode* node = erespacker::UnpackNodeFactory::Instance()->Query(export_name);
-	symbol->Add(NodeToSprite::Trans(node));
+	sym->Add(NodeToSprite::Trans(node));
 }
 
 void LoadFromLua::LoadImages(const std::string& name, std::vector<ee::Image*>& images)

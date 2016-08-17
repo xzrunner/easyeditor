@@ -13,13 +13,13 @@ class Symbol;
 class EditDialog : public wxDialog
 {
 public:
-	EditDialog(wxWindow* parent, Symbol* symbol);
+	EditDialog(wxWindow* parent, Symbol* sym);
 	virtual ~EditDialog();
 
 private:
 	void onSize(wxSizeEvent& event);
 
-	void InitLayout(Symbol* symbol);
+	void InitLayout(Symbol* sym);
 
 	void OnCloseEvent(wxCloseEvent& event);
 

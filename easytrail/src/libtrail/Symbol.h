@@ -21,7 +21,7 @@ public:
 	 *    s2::Symbol
 	 */
 	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
-	virtual sm::rect GetBounding(const s2::Sprite* sprite = NULL) const;
+	virtual sm::rect GetBounding(const s2::Sprite* spr = NULL) const;
 
 	const t2d_emitter_cfg* GetEmitterCfg() const { return m_et_cfg; }
 	t2d_emitter* GetEmitter() { return m_et; }

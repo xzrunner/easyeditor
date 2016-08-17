@@ -10,7 +10,7 @@ class BodyEditStage : public eshape::StagePanel
 {
 public:
 	BodyEditStage(wxWindow* parent, wxTopLevelWindow* frame, 
-		eshape::Symbol* symbol);
+		eshape::Symbol* sym);
 
 	//
 	// eshape::StagePanel interface

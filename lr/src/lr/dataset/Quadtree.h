@@ -57,7 +57,7 @@ private:
 		// 2 3
 		Node* m_children[4];
 
-		std::vector<const ee::Sprite*> m_sprites;
+		std::vector<const ee::Sprite*> m_sprs;
 
 		friend class Quadtree;
 

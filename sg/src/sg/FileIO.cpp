@@ -35,8 +35,8 @@ void FileIO::load(const char* filename, StagePanel* stage)
 	int i = 0;
 	Json::Value imgValue = value["image"][i++];
 	while (!imgValue.isNull()) {
-		ee::Sprite* sprite = load(imgValue, stage, dir);
-		ee::InsertSpriteSJ::Instance()->Insert(sprite);
+		ee::Sprite* spr = load(imgValue, stage, dir);
+		ee::InsertSpriteSJ::Instance()->Insert(spr);
 		imgValue = value["image"][i++];
 	}
 
@@ -49,10 +49,10 @@ void FileIO::store(const char* filename, StagePanel* stage)
 
 	std::string dir = ee::FileHelper::GetFileDir(filename) + "\\";
 
-	std::vector<ee::Sprite*> sprites;
-	stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-		value["image"][i] = store(sprites[i], stage, dir);
+	std::vector<ee::Sprite*> sprs;
+	stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
+		value["image"][i] = store(sprs[i], stage, dir);
 	}
 
 	Json::StyledStreamWriter writer;
@@ -69,18 +69,18 @@ ee::Sprite* FileIO::load(const Json::Value& value, StagePanel* stage, const std:
 		col = value["col"].asInt();
 
 	std::string filepath = ee::SymbolSearcher::GetSymbolPath(dir, value);
-	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-	SetSymbolUserData(symbol);
+	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+	SetSymbolUserData(sym);
 
 	sm::vec2 pos;
-	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-	sprite->SetTag(value["tag"].asString());
-	symbol->RemoveReference();
+	ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+	spr->SetTag(value["tag"].asString());
+	sym->RemoveReference();
 
 	//// old
 	//stage->TransGridPosToCoords(row, col, pos);
  	// new
- 	SymbolExt* symbol_info = static_cast<SymbolExt*>(sprite->GetSymbol()->GetUserData());
+ 	SymbolExt* symbol_info = static_cast<SymbolExt*>(spr->GetSymbol()->GetUserData());
  	int size = symbol_info->building->size;
  	if (size % 2) {
  		int offset = (size - 1) / 2;
@@ -96,29 +96,29 @@ ee::Sprite* FileIO::load(const Json::Value& value, StagePanel* stage, const std:
 	if (!value["level"].isNull()) {
 		SpriteExt* spr_info = new SpriteExt;
 		spr_info->level = value["level"].asInt();
-		sprite->SetUserData(spr_info);
+		spr->SetUserData(spr_info);
 	}
 	int level = value["row"].asInt();
 
  	//////////////////////////////////////////////////////////////////////////
 
-	sprite->Translate(pos);
+	spr->Translate(pos);
 
-	return sprite;
+	return spr;
 }
 
-Json::Value FileIO::store(const ee::Sprite* sprite, StagePanel* stage, 
+Json::Value FileIO::store(const ee::Sprite* spr, StagePanel* stage, 
 						  const std::string& dir)
 {
 	Json::Value value;
 
 	value["filepath"] = ee::FileHelper::GetRelativePath(dir,
-		sprite->GetSymbol()->GetFilepath());
+		spr->GetSymbol()->GetFilepath());
 
 	int row, col;
-	stage->TransCoordsToGridPosNew(sprite->GetPosition(), row, col);
+	stage->TransCoordsToGridPosNew(spr->GetPosition(), row, col);
 
-	SymbolExt* symbol_info = static_cast<SymbolExt*>(sprite->GetSymbol()->GetUserData());
+	SymbolExt* symbol_info = static_cast<SymbolExt*>(spr->GetSymbol()->GetUserData());
 	int size = symbol_info->building->size;
 	if (size % 2) {
 		int offset = (size - 1) / 2;
@@ -132,23 +132,23 @@ Json::Value FileIO::store(const ee::Sprite* sprite, StagePanel* stage,
 
 	value["row"] = row;
 	value["col"] = col;
-	value["tag"] = sprite->GetTag();
+	value["tag"] = spr->GetTag();
 
 	value["name"] = symbol_info->building->name;
 	
-	SpriteExt* spr_info = static_cast<SpriteExt*>(sprite->GetUserData());	
+	SpriteExt* spr_info = static_cast<SpriteExt*>(spr->GetUserData());	
 	value["level"] = spr_info->level;
 
 	return value;
 }
 
-void FileIO::SetSymbolUserData(ee::Symbol* symbol)
+void FileIO::SetSymbolUserData(ee::Symbol* sym)
 {
-	if (symbol->GetUserData()) {
+	if (sym->GetUserData()) {
 		return;
 	}
 
-	std::string filepath = symbol->GetFilepath();
+	std::string filepath = sym->GetFilepath();
 	if (!filepath.find("wall") != std::string::npos) {
 		return;
 	}
@@ -172,7 +172,7 @@ void FileIO::SetSymbolUserData(ee::Symbol* symbol)
 		new_info->level = info->level;
 		new_info->building = info->building;
 
-		symbol->SetUserData(new_info);
+		sym->SetUserData(new_info);
 	} catch (ee::Exception& e) {
 		;
 	}

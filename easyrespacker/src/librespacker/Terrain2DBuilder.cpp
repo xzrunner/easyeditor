@@ -44,26 +44,26 @@ void Terrain2DBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 	}
 }
 
-const IPackNode* Terrain2DBuilder::Create(const eterrain2d::Symbol* symbol)
+const IPackNode* Terrain2DBuilder::Create(const eterrain2d::Symbol* sym)
 {
 	std::map<const eterrain2d::Symbol*, const PackAnimation*>::iterator 
-		itr = m_map_data.find(symbol);
+		itr = m_map_data.find(sym);
 	if (itr != m_map_data.end()) {
 		return itr->second;
 	}
 
 	PackAnimation* node = new PackAnimation;
-	Load(symbol, node);
-	m_map_data.insert(std::make_pair(symbol, node));
+	Load(sym, node);
+	m_map_data.insert(std::make_pair(sym, node));
 	return node;
 }
 
-void Terrain2DBuilder::Load(const eterrain2d::Symbol* symbol, PackAnimation* anim)
+void Terrain2DBuilder::Load(const eterrain2d::Symbol* sym, PackAnimation* anim)
 {
-	const std::vector<eterrain2d::OceanMesh*> oceans = symbol->GetOceans();
+	const std::vector<eterrain2d::OceanMesh*> oceans = sym->GetOceans();
 	// todo
 	if (oceans.size() != 1) {
-		throw ee::Exception("Terrain2DBuilder::Load oceans.size() != 1, filepath: %s", symbol->GetFilepath().c_str());
+		throw ee::Exception("Terrain2DBuilder::Load oceans.size() != 1, filepath: %s", sym->GetFilepath().c_str());
 	}
 
 	eterrain2d::OceanMesh* ocean = oceans[0];
@@ -74,7 +74,7 @@ void Terrain2DBuilder::Load(const eterrain2d::Symbol* symbol, PackAnimation* ani
 
 	static const float FPS = 30;
 	if (ocean->GetUVMoveSpeed().y == 0) {
-		throw ee::Exception("Terrain2DBuilder::Load ocean speed 0, filepath: %s", symbol->GetFilepath().c_str());
+		throw ee::Exception("Terrain2DBuilder::Load ocean speed 0, filepath: %s", sym->GetFilepath().c_str());
 	}
 	int frame = (int)(fabs(FPS / ocean->GetUVMoveSpeed().y));
 

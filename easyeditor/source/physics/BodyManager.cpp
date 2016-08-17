@@ -15,15 +15,15 @@ BodyManager::BodyManager()
 {
 }
 
-IBody* BodyManager::LoadBody(Sprite* sprite)
+IBody* BodyManager::LoadBody(Sprite* spr)
 {
 	std::map<Sprite*, IBody*>::iterator itr = 
-		m_map_body.find(sprite);
-	IBody* body = CreateBody(sprite);
+		m_map_body.find(spr);
+	IBody* body = CreateBody(spr);
 	if (itr == m_map_body.end()) {
 		if (body) {
-			sprite->AddReference();
-			m_map_body.insert(std::make_pair(sprite, body));
+			spr->AddReference();
+			m_map_body.insert(std::make_pair(spr, body));
 		}
 	} else {
 		cu::RefCountObjAssign(itr->second, body);
@@ -31,10 +31,10 @@ IBody* BodyManager::LoadBody(Sprite* sprite)
 	return body;
 }
 
-void BodyManager::UnloadBody(Sprite* sprite)
+void BodyManager::UnloadBody(Sprite* spr)
 {
 	std::map<Sprite*, IBody*>::iterator itr = 
-		m_map_body.find(sprite);
+		m_map_body.find(spr);
 	if (itr != m_map_body.end()) {
 		itr->first->RemoveReference();
 		itr->second->RemoveReference();
@@ -42,10 +42,10 @@ void BodyManager::UnloadBody(Sprite* sprite)
 	}
 }
 
-const IBody* BodyManager::QueryBody(Sprite* sprite) const
+const IBody* BodyManager::QueryBody(Sprite* spr) const
 {
 	std::map<Sprite*, IBody*>::const_iterator itr = 
-		m_map_body.find(sprite);
+		m_map_body.find(spr);
 	if (itr != m_map_body.end()) {
 		return itr->second;
 	} else {
@@ -62,27 +62,27 @@ void BodyManager::Update()
 		if (!body || !(body->GetBody())) {
 			continue;
 		}
-		Sprite* sprite = itr->first;
+		Sprite* spr = itr->first;
 		b2Body* b2body = body->GetBody();
 		if (body->IsAlive() && b2body->GetType() != b2_staticBody) {
 			sm::vec2 pos(b2body->GetPosition().x, b2body->GetPosition().y);
-			sprite->SetPosition(pos * BOX2D_SCALE_FACTOR);
-			sprite->SetAngle(b2body->GetAngle());
+			spr->SetPosition(pos * BOX2D_SCALE_FACTOR);
+			spr->SetAngle(b2body->GetAngle());
 		} else {
-			sm::vec2 pos = sprite->GetPosition() / BOX2D_SCALE_FACTOR;
-			b2body->SetTransform(b2Vec2(pos.x, pos.y), sprite->GetAngle());
+			sm::vec2 pos = spr->GetPosition() / BOX2D_SCALE_FACTOR;
+			b2body->SetTransform(b2Vec2(pos.x, pos.y), spr->GetAngle());
 		}
 	}
 }
 
-IBody* BodyManager::CreateBody(Sprite* sprite)
+IBody* BodyManager::CreateBody(Sprite* spr)
 {
 	std::string filepath = FileHelper::GetFilenameAddTag(
-		sprite->GetSymbol()->GetFilepath(), "shape", "json");
+		spr->GetSymbol()->GetFilepath(), "shape", "json");
 	if (FileHelper::IsFileExist(filepath)) {
-		IBody* body = BodyFactory::createBody(filepath, sprite->GetScale().x);
-		sm::vec2 pos = sprite->GetPosition() / BOX2D_SCALE_FACTOR;
-		body->GetBody()->SetTransform(b2Vec2(pos.x, pos.y), sprite->GetAngle());
+		IBody* body = BodyFactory::createBody(filepath, spr->GetScale().x);
+		sm::vec2 pos = spr->GetPosition() / BOX2D_SCALE_FACTOR;
+		body->GetBody()->SetTransform(b2Vec2(pos.x, pos.y), spr->GetAngle());
 		return body;
 	} else {
 		return NULL;

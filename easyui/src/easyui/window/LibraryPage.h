@@ -14,7 +14,7 @@ public:
 	LibraryPage(wxWindow* parent, const char* name, 
 		const std::string& filter);
 
-	virtual bool IsHandleSymbol(ee::Symbol* symbol) const;
+	virtual bool IsHandleSymbol(ee::Symbol* sym) const;
 
 protected:
 	virtual void OnAddPress(wxCommandEvent& event);

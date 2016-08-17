@@ -18,9 +18,9 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	m_list->SetFileter(FILE_TAG);
 }
 
-bool LibraryPage::IsHandleSymbol(ee::Symbol* symbol) const
+bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
 {
-	return dynamic_cast<Symbol*>(symbol) != NULL;
+	return dynamic_cast<Symbol*>(sym) != NULL;
 }
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
@@ -35,10 +35,10 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 		{
 			std::string filename = filenames[i].ToStdString();
 			try {
-				ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filename);
-				symbol->RefreshThumbnail(filename);
-				m_list->Insert(symbol);
-				symbol->RemoveReference();
+				ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filename);
+				sym->RefreshThumbnail(filename);
+				m_list->Insert(sym);
+				sym->RemoveReference();
 			} catch (ee::Exception& e) {
 				ee::ExceptionDlg dlg(m_parent, e);
 				dlg.ShowModal();

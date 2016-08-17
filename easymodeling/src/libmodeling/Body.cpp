@@ -15,7 +15,7 @@ Body::Body()
 	, m_bullet(false)
 	, m_active(true)
 	, m_gravity_scale(1.0f)
-	, m_sprite(NULL)
+	, m_spr(NULL)
 {
 	static int count = 0;
 	m_name = std::string("body") + ee::StringHelper::ToString(count++);

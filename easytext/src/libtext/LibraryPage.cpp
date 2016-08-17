@@ -15,9 +15,9 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	m_list->SetFileter(FILE_TAG);
 }
 
-bool LibraryPage::IsHandleSymbol(ee::Symbol* symbol) const
+bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
 {
-	return dynamic_cast<Symbol*>(symbol) != NULL;
+	return dynamic_cast<Symbol*>(sym) != NULL;
 }
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)

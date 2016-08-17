@@ -9,9 +9,9 @@ namespace emesh
 {
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage, 
-						   bool full, Sprite* sprite)
+						   bool full, Sprite* spr)
 	: ee::ToolbarPanel(parent, stage->GetStageImpl())
-	, m_sprite(sprite)
+	, m_spr(spr)
 {
 	if (full)
 	{
@@ -33,8 +33,8 @@ wxSizer* ToolbarPanel::InitLayout()
 // 
 // 		m_ctrl_xspeed = new wxTextCtrl(this, wxID_ANY);
 // 		Connect(m_ctrl_xspeed->GetId(), wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler(ToolbarPanel::OnSetSpeed));
-// 		if (m_sprite) {
-// 			m_ctrl_xspeed->SetValue(wxString::FromDouble(m_sprite->GetSpeed().x));
+// 		if (m_spr) {
+// 			m_ctrl_xspeed->SetValue(wxString::FromDouble(m_spr->GetSpeed().x));
 // 		}
 // 		speed_sizer->Add(m_ctrl_xspeed, 0, wxLEFT | wxRIGHT, 5);
 // 		sizer->Add(speed_sizer);
@@ -45,8 +45,8 @@ wxSizer* ToolbarPanel::InitLayout()
 // 
 // 		m_ctrl_yspeed = new wxTextCtrl(this, wxID_ANY);
 // 		Connect(m_ctrl_yspeed->GetId(), wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler(ToolbarPanel::OnSetSpeed));
-// 		if (m_sprite) {
-// 			m_ctrl_yspeed->SetValue(wxString::FromDouble(m_sprite->GetSpeed().y));
+// 		if (m_spr) {
+// 			m_ctrl_yspeed->SetValue(wxString::FromDouble(m_spr->GetSpeed().y));
 // 		}
 // 		speed_sizer->Add(m_ctrl_yspeed, 0, wxLEFT | wxRIGHT, 5);
 // 		sizer->Add(speed_sizer);
@@ -59,7 +59,7 @@ void ToolbarPanel::OnSetSpeed(wxCommandEvent& event)
 	double x, y;
 	m_ctrl_xspeed->GetValue().ToDouble(&x);
 	m_ctrl_yspeed->GetValue().ToDouble(&y);
-	m_sprite->SetSpeed(sm::vec2(x, y));
+	m_spr->SetSpeed(sm::vec2(x, y));
 }
 
 }

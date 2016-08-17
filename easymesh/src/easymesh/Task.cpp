@@ -34,12 +34,12 @@ void Task::Load(const char* filepath)
 {
 	if (ee::FileType::IsType(filepath, ee::FileType::e_mesh)) 
 	{
-		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-		Symbol* msymbol = static_cast<Symbol*>(symbol);
+		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		Symbol* msymbol = static_cast<Symbol*>(sym);
 		m_stage->SetMeshSymbol(msymbol);
 		
 		m_library->LoadFromSymbolMgr(*ee::SymbolMgr::Instance());
-		symbol->RemoveReference();
+		sym->RemoveReference();
 	}
 }
 

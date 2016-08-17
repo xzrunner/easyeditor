@@ -43,7 +43,7 @@ private:
 	void AddUIWndSymbol(const std::string& filepath);
 
 private:
-	std::vector<const ee::Symbol*> m_symbols;
+	std::vector<const ee::Symbol*> m_syms;
 
 	ee::TexturePacker m_tp;
 

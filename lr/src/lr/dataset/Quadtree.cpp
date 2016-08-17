@@ -41,8 +41,8 @@ std::vector<const ee::Sprite*> Quadtree::Query(const sm::rect& rect) const
 	{
 		Node* node = buffer.front(); buffer.pop();
 		if (node->IsLeaf()) {
-			for (int i = 0, n = node->m_sprites.size(); i < n; ++i) {
-				set_sprites.insert(node->m_sprites[i]);
+			for (int i = 0, n = node->m_sprs.size(); i < n; ++i) {
+				set_sprites.insert(node->m_sprs[i]);
 			}
 		} else {
 			for (int i = 0; i < 4; ++i) {
@@ -54,9 +54,9 @@ std::vector<const ee::Sprite*> Quadtree::Query(const sm::rect& rect) const
 		}
 	}
 
-	std::vector<const ee::Sprite*> sprites;
-	copy(set_sprites.begin(), set_sprites.end(), back_inserter(sprites));
-	return sprites;
+	std::vector<const ee::Sprite*> sprs;
+	copy(set_sprites.begin(), set_sprites.end(), back_inserter(sprs));
+	return sprs;
 }
 
 void Quadtree::DebugDraw() const
@@ -90,8 +90,8 @@ void Quadtree::DebugDraw() const
 		color.mul = ee::LIGHT_BLUE;
 		s2::RenderParams params;
 		params.color = color;
-		for (int i = 0, n = m_selected->m_sprites.size(); i < n; ++i) {
-			ee::SpriteRenderer::Draw(m_selected->m_sprites[i], params);
+		for (int i = 0, n = m_selected->m_sprs.size(); i < n; ++i) {
+			ee::SpriteRenderer::Draw(m_selected->m_sprs[i], params);
 		}
 	}
 }
@@ -134,8 +134,8 @@ Node(const sm::rect& rect)
 Quadtree::Node::
 ~Node()
 {
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->RemoveReference();
+	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+		m_sprs[i]->RemoveReference();
 	}
 	for (int i = 0; i < 4; ++i) {
 		delete m_children[i];
@@ -150,7 +150,7 @@ Insert(const ee::Sprite* spr)
 	if (IsLeaf()) 
 	{
 		if (IsContain(spr)) {
-			m_sprites.push_back(spr);
+			m_sprs.push_back(spr);
 		}
 	 	if (NeedSplit()) {
 	 		Split();
@@ -206,12 +206,12 @@ IsContain(const ee::Sprite* spr) const
 bool Quadtree::Node::
 NeedSplit() const
 {
-	if (m_sprites.empty()) {
+	if (m_sprs.empty()) {
 		return false;
 	}
 	float a_shape = 0;
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		a_shape += GetContainArea(m_sprites[i]);
+	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+		a_shape += GetContainArea(m_sprs[i]);
 	}
 
 	sm::vec2 sz = m_rect.Size();
@@ -238,8 +238,8 @@ Split()
 	m_children[2]->m_rect.ymax = m_children[3]->m_rect.ymax = 
 		m_children[0]->m_rect.ymin = m_children[1]->m_rect.ymin = center.y;
 
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		const ee::Sprite* spr = m_sprites[i];
+	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+		const ee::Sprite* spr = m_sprs[i];
 		for (int j = 0; j < 4; ++j) {
 			Node* node = m_children[j];
 			sm::rect rect = spr->GetBounding()->GetSize();
@@ -249,7 +249,7 @@ Split()
 		}
 	}
 
-	m_sprites.clear();
+	m_sprs.clear();
 }
 
 float Quadtree::Node::

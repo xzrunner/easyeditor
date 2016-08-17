@@ -33,9 +33,9 @@ StageCanvas::StageCanvas(StagePanel* stage,
 	, m_bg(NULL)
 {
 	if (m_sprite_impl) {
-		std::vector<ee::Sprite*> sprites;
-		m_sprite_impl->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
-		m_bg = ee::draw_all_to_one_spr(sprites, m_edited);
+		std::vector<ee::Sprite*> sprs;
+		m_sprite_impl->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+		m_bg = ee::draw_all_to_one_spr(sprs, m_edited);
 	}
 }
 
@@ -55,11 +55,11 @@ void StageCanvas::OnDrawSprites() const
 		ee::SpriteRenderer::Draw(m_bg, params);
 	}
 
-	Sprite sprite;
-	sprite.SetSymbol(&m_stage->GetSymbol());
-	sprite.SetProcess(0.5f);
+	Sprite spr;
+	spr.SetSymbol(&m_stage->GetSymbol());
+	spr.SetProcess(0.5f);
 
-	m_stage->GetSymbol().Draw(s2::RenderParams(), &sprite);
+	m_stage->GetSymbol().Draw(s2::RenderParams(), &spr);
 
 	s2::RVG::SetColor(s2::Color(255, 0, 0));
 	s2::RVG::Cross(sm::vec2(0, 0), 100, 100);

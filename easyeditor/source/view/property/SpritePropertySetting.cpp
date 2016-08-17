@@ -30,9 +30,9 @@
 namespace ee
 {
 
-SpritePropertySetting::SpritePropertySetting(EditPanelImpl* stage, Sprite* sprite)
+SpritePropertySetting::SpritePropertySetting(EditPanelImpl* stage, Sprite* spr)
 	: PropertySetting("Sprite")
-	, m_impl(new SpritePropertyImpl(stage, sprite))
+	, m_impl(new SpritePropertyImpl(stage, spr))
 	, m_pg(NULL)
 {
 	RegistSubject(SpriteNameChangeSJ::Instance());

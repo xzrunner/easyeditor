@@ -24,7 +24,7 @@ BinaryTreeNewArrange::~BinaryTreeNewArrange()
 	m_map_images.clear();
 }
 
-void BinaryTreeNewArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites)
+void BinaryTreeNewArrange::Arrange(const std::vector<ee::ImageSprite*>& sprs)
 {
 	m_tex_account = 0;
 
@@ -32,7 +32,7 @@ void BinaryTreeNewArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites)
 		tot_h = Context::Instance()->height;
 	float scale = 1;
 
-	std::vector<ee::ImageSprite*> sorted(sprites);
+	std::vector<ee::ImageSprite*> sorted(sprs);
 	SortByMaxEdge(sorted);
 
 	float x_offset = 0;

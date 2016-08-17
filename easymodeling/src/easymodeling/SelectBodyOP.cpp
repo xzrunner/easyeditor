@@ -58,9 +58,9 @@ bool SelectBodyOP::OnMouseLeftDClick(int x, int y)
 // 	ee::Sprite* selected = m_spritesImpl->querySpriteByPos(pos);
 // 	if (selected)
 // 	{
-// 		eshape::Symbol symbol;
-// 		symbol.SetBG(&const_cast<ee::Symbol&>(selected->getSymbol()));
-// 		eshape::EditDialog<BodyEditStage> dlg(Context::Instance()->stage, &symbol);
+// 		eshape::Symbol sym;
+// 		sym.SetBG(&const_cast<ee::Symbol&>(selected->getSymbol()));
+// 		eshape::EditDialog<BodyEditStage> dlg(Context::Instance()->stage, &sym);
 // 		dlg.ShowModal();
 // 		Context::Instance()->stage->resetCanvas();
 // 	}
@@ -97,8 +97,8 @@ void SelectBodyOP::DrawSelectedVisitor::
 Visit(ee::Sprite* spr, bool& next) 
 {
 	std::vector<sm::vec2> bound;
-	ee::Sprite* sprite = static_cast<ee::Sprite*>(object);
-	Body* body = static_cast<Body*>(sprite->GetUserData());
+	ee::Sprite* spr = static_cast<ee::Sprite*>(object);
+	Body* body = static_cast<Body*>(spr->GetUserData());
 	DrawUtils::DrawBody(body, DrawUtils::e_selected);
 	next = true;
 }

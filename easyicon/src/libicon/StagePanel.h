@@ -29,21 +29,21 @@ public:
 
 	void SetImage(ee::Image* img);
 
-	const Symbol& GetSymbol() const { return *m_symbol; }
-	Symbol& GetSymbol() { return *m_symbol; }
+	const Symbol& GetSymbol() const { return *m_sym; }
+	Symbol& GetSymbol() { return *m_sym; }
 
 private:
 	class StageDropTarget : public ee::StageDropTarget
 	{
 	public:
 		StageDropTarget(StagePanel* stage, ee::LibraryPanel* library);
-		virtual bool OnDropSymbol(ee::Symbol* symbol, const sm::vec2& pos);
+		virtual bool OnDropSymbol(ee::Symbol* sym, const sm::vec2& pos);
 	private:
 		StagePanel* m_stage;
 	}; // StageDropTarget 
 
 private:
-	Symbol* m_symbol;
+	Symbol* m_sym;
 
 }; // StagePanel
 

@@ -51,7 +51,7 @@ private:
 
 	void OnChangeMode(wxCommandEvent& event);
 
-	ComponentPanel* OnAddChild(ee::Symbol* symbol);
+	ComponentPanel* OnAddChild(ee::Symbol* sym);
 	void OnDelAllChild(wxCommandEvent& event);
 
 private:

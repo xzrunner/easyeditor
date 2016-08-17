@@ -22,8 +22,8 @@ void SymbolCfg::QueryType(const ee::Symbol* sym, std::string& type) const
 	filepath = ee::FileHelper::FormatFilepathAbsolute(filepath);
 	for (int i = 0, n = m_widgets.size(); i < n; ++i) {
 		const Widget& w = m_widgets[i];
-		std::set<std::string>::const_iterator itr = w.symbols.find(filepath);
-		if (itr != w.symbols.end()) {
+		std::set<std::string>::const_iterator itr = w.syms.find(filepath);
+		if (itr != w.syms.end()) {
 			type = w.type;
 			return;
 		}
@@ -53,7 +53,7 @@ void SymbolCfg::LoadFromFile(const char* filename)
 			std::string filepath = s_val[i].asString();
 			filepath = ee::FileHelper::GetAbsolutePath(dir, filepath);
 			filepath = ee::FileHelper::FormatFilepath(filepath);
-			w.symbols.insert(filepath);
+			w.syms.insert(filepath);
 		}
 		m_widgets.push_back(w);
 		w_val = val["widget"][idx++];

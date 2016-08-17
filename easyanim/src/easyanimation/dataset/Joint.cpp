@@ -13,20 +13,20 @@ namespace eanim
 
 static const int REGION = 5;
 
-Joint::Joint(ee::Sprite* sprite)
-	: m_sprite(sprite)
+Joint::Joint(ee::Sprite* spr)
+	: m_spr(spr)
 	, m_parent(NULL)
 {
 	m_relative_angle = 0;
 	CreateId();
 }
 
-Joint::Joint(ee::Sprite* sprite, const sm::vec2& pos)
-	: m_sprite(sprite)
+Joint::Joint(ee::Sprite* spr, const sm::vec2& pos)
+	: m_spr(spr)
 	, m_parent(NULL)
 {
 	SetPosition(pos);
-	m_relative_angle = sprite->GetAngle();
+	m_relative_angle = spr->GetAngle();
 	CreateId();
 }
 
@@ -53,7 +53,7 @@ void Joint::Draw() const
 	if (m_parent)
 	{
 		sm::vec2 s = GetWorldPos();
-		sm::vec2 e = m_sprite->GetPosition() * 2 - s;
+		sm::vec2 e = m_spr->GetPosition() * 2 - s;
 
 		const float w = 0.1f;
 		sm::vec2 mid = s + (e-s)*w;
@@ -85,12 +85,12 @@ void Joint::SetPosition(const sm::vec2& pos)
 
 sm::vec2 Joint::GetWorldPos() const
 {
-	return m_sprite->GetPosition() + ee::Math2D::RotateVector(GetRelativePos(), m_sprite->GetAngle());
+	return m_spr->GetPosition() + ee::Math2D::RotateVector(GetRelativePos(), m_spr->GetAngle());
 }
 
 sm::vec2 Joint::GetRelativePos(const sm::vec2& pos) const
 {
-	return ee::Math2D::RotateVector(pos - m_sprite->GetPosition(), -m_sprite->GetAngle());
+	return ee::Math2D::RotateVector(pos - m_spr->GetPosition(), -m_spr->GetAngle());
 }
 
 bool Joint::Connect(Joint* joint)
@@ -126,8 +126,8 @@ void Joint::CreateId()
 sm::vec2 Joint::GetRelativePos() const
 {
 	sm::vec2 pos = m_relative_pos;
-	pos.x *= m_sprite->GetScale().x;
-	pos.y *= m_sprite->GetScale().y;
+	pos.x *= m_spr->GetScale().x;
+	pos.y *= m_spr->GetScale().y;
 	return pos;
 }
 

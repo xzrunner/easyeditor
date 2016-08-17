@@ -39,9 +39,9 @@ StageCanvas::~StageCanvas()
 	}
 }
 
-void StageCanvas::SetBackground(ee::Symbol* symbol)
+void StageCanvas::SetBackground(ee::Symbol* sym)
 {
-	cu::RefCountObjAssign<ee::Symbol>(m_background, symbol);
+	cu::RefCountObjAssign<ee::Symbol>(m_background, sym);
 }
 
 void StageCanvas::OnSize(int w, int h)

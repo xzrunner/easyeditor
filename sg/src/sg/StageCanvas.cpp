@@ -133,20 +133,20 @@ void StageCanvas::DrawGuideLines() const
 
 void StageCanvas::DrawGrass() const
 {
-	std::vector<ee::Sprite*> sprites;
-	m_stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		ee::Sprite* s = sprites[i];
+	std::vector<ee::Sprite*> sprs;
+	m_stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		ee::Sprite* s = sprs[i];
 		SymbolRender::Instance()->DrawGrass(s->GetSymbol(), s->GetPosition(), m_stage->GetPerspective());
 	}
 }
 
 void StageCanvas::DrawGrids() const
 {
-	std::vector<ee::Sprite*> sprites;
-	m_stage->GetSpriteSelection()->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		ee::Sprite* s = sprites[i];
+	std::vector<ee::Sprite*> sprs;
+	m_stage->GetSpriteSelection()->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		ee::Sprite* s = sprs[i];
 		bool valid = m_stage->GetCheckBoard().IsValid(s);
 		SymbolRender::Instance()->DrawGrids(s->GetSymbol(), s->GetPosition(), valid, m_stage->GetPerspective());
 	}
@@ -154,51 +154,51 @@ void StageCanvas::DrawGrids() const
 
 void StageCanvas::DrawSprites() const
 {
-	std::vector<ee::Sprite*> sprites;
-	m_stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites), ee::DT_VISIBLE);
-	std::sort(sprites.begin(), sprites.end(), ee::SpriteCmp(ee::SpriteCmp::e_y_invert));
-	for (int i = 0, n = sprites.size(); i < n; ++i)
+	std::vector<ee::Sprite*> sprs;
+	m_stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs), ee::DT_VISIBLE);
+	std::sort(sprs.begin(), sprs.end(), ee::SpriteCmp(ee::SpriteCmp::e_y_invert));
+	for (int i = 0, n = sprs.size(); i < n; ++i)
 	{
-		ee::Sprite* sprite = sprites[i];
-		if (IsSymbolWall(*sprite)) {
-			SymbolExt* info = static_cast<SymbolExt*>(sprite->GetSymbol()->GetUserData());
+		ee::Sprite* spr = sprs[i];
+		if (IsSymbolWall(*spr)) {
+			SymbolExt* info = static_cast<SymbolExt*>(spr->GetSymbol()->GetUserData());
 			{
 				if (info->wall_type == 0) {
-					sm::vec2 pos = sprite->GetPosition() + sm::vec2(0, 4);
-					ee::SpriteRenderer::Draw(sprite->GetSymbol(), sm::mat4(), pos);
+					sm::vec2 pos = spr->GetPosition() + sm::vec2(0, 4);
+					ee::SpriteRenderer::Draw(spr->GetSymbol(), sm::mat4(), pos);
 				} else if (info->wall_type == 1) {
-					sm::vec2 pos = sprite->GetPosition() + sm::vec2(-10, 8);
-					ee::SpriteRenderer::Draw(sprite->GetSymbol(), sm::mat4(), pos);
+					sm::vec2 pos = spr->GetPosition() + sm::vec2(-10, 8);
+					ee::SpriteRenderer::Draw(spr->GetSymbol(), sm::mat4(), pos);
 				} else if (info->wall_type == 2) {
-					sm::vec2 pos = sprite->GetPosition() + sm::vec2(10, 8);
-					ee::SpriteRenderer::Draw(sprite->GetSymbol(), sm::mat4(), pos);
+					sm::vec2 pos = spr->GetPosition() + sm::vec2(10, 8);
+					ee::SpriteRenderer::Draw(spr->GetSymbol(), sm::mat4(), pos);
 				} else if (info->wall_type == 3) {
-					sm::vec2 pos = sprite->GetPosition() + sm::vec2(0, 6);
-					ee::SpriteRenderer::Draw(sprite->GetSymbol(), sm::mat4(), pos);
+					sm::vec2 pos = spr->GetPosition() + sm::vec2(0, 6);
+					ee::SpriteRenderer::Draw(spr->GetSymbol(), sm::mat4(), pos);
 				}
 			}
 		} else {
-			ee::SpriteRenderer::Draw(sprite);
+			ee::SpriteRenderer::Draw(spr);
 		}
 	}
 }
 
 void StageCanvas::DrawArrow() const
 {
-	std::vector<ee::Sprite*> sprites;
-	m_stage->GetSpriteSelection()->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	if (sprites.size() == 1) {
-		ee::Sprite* s = sprites[0];
+	std::vector<ee::Sprite*> sprs;
+	m_stage->GetSpriteSelection()->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	if (sprs.size() == 1) {
+		ee::Sprite* s = sprs[0];
 		SymbolRender::Instance()->DrawArrow(s->GetSymbol(), s->GetPosition());
 	}
 }
 
 void StageCanvas::DrawAttackRegion() const
 {
-	std::vector<ee::Sprite*> sprites;
-	m_stage->GetSpriteSelection()->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		ee::Sprite* s = sprites[i];
+	std::vector<ee::Sprite*> sprs;
+	m_stage->GetSpriteSelection()->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		ee::Sprite* s = sprs[i];
 		SymbolRender::Instance()->DrawRegion(s->GetSymbol(), s->GetPosition());
 	}
 }

@@ -27,7 +27,7 @@ private:
 	static void StoreEasypackerPosition(const char* filename);
 	static void StoreTexpackerPosition(const char* filename);
 
-	static Json::Value Store(const ee::Sprite* sprite);
+	static Json::Value Store(const ee::Sprite* spr);
 
 }; // FileIO
 

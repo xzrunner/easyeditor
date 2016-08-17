@@ -19,9 +19,9 @@ LibraryFontBlankPage::LibraryFontBlankPage(wxWindow* parent)
 	InitLayout();
 }
 
-bool LibraryFontBlankPage::IsHandleSymbol(Symbol* symbol) const
+bool LibraryFontBlankPage::IsHandleSymbol(Symbol* sym) const
 {
-	return dynamic_cast<FontBlankSymbol*>(symbol) != NULL;
+	return dynamic_cast<FontBlankSymbol*>(sym) != NULL;
 }
 
 bool LibraryFontBlankPage::LoadFromConfig()
@@ -62,9 +62,9 @@ void LibraryFontBlankPage::OnAddPress(wxCommandEvent& event)
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
 			try {
-				Symbol* symbol = SymbolMgr::Instance()->FetchSymbol(filenames[i].ToStdString());
-				m_list->Insert(symbol);
-				symbol->RemoveReference();
+				Symbol* sym = SymbolMgr::Instance()->FetchSymbol(filenames[i].ToStdString());
+				m_list->Insert(sym);
+				sym->RemoveReference();
 			} catch (Exception& e) {
 				ExceptionDlg dlg(m_parent, e);
 				dlg.ShowModal();

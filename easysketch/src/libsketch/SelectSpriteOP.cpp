@@ -57,10 +57,10 @@ bool SelectSpriteOP::OnDraw() const
 {
 	if (ee::EditOP::OnDraw()) return true;
 
-	std::vector<ee::Sprite*> sprites;
-	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		const Sprite* s = static_cast<const Sprite*>(sprites[i]);
+	std::vector<ee::Sprite*> sprs;
+	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		const Sprite* s = static_cast<const Sprite*>(sprs[i]);
 		sm::mat4 mat = sm::mat4(s->GetOri3().ToMatrix()) * 
 			sm::mat4::Translate(s->GetPos3().x, s->GetPos3().y, s->GetPos3().z);
 		e3d::DrawCube(mat, s->GetSymbol()->GetAABB(), ee::MID_RED);
@@ -75,28 +75,28 @@ ee::Sprite* SelectSpriteOP::SelectByPos(const sm::ivec2& pos) const
 {
 	ee::Sprite* selected = NULL;
 
-	std::vector<ee::Sprite*> sprites;
-	m_stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
+	std::vector<ee::Sprite*> sprs;
+	m_stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
 
 	StageCanvas* canvas = static_cast<StageCanvas*>(m_stage->GetCanvas());
 	sm::vec3 ray_dir = canvas->TransPos3ScreenToDir(pos);
 	e3d::Ray ray(sm::vec3(0, 0, 0), ray_dir);
 
 	sm::mat4 cam_mat = canvas->GetCamera3().GetModelViewMat();
-	for (int i = 0, n = sprites.size(); i < n; ++i)
+	for (int i = 0, n = sprs.size(); i < n; ++i)
 	{
-		ee::Sprite* sprite = sprites[i];
-		const Symbol* sym = dynamic_cast<const Symbol*>(sprite->GetSymbol());
+		ee::Sprite* spr = sprs[i];
+		const Symbol* sym = dynamic_cast<const Symbol*>(spr->GetSymbol());
 		
 		const e3d::AABB& aabb = sym->GetAABB();
-		Sprite* s = static_cast<Sprite*>(sprite);
+		Sprite* s = static_cast<Sprite*>(spr);
 		
 		sm::vec3 offset = cam_mat * s->GetPos3();
 
 		sm::vec3 cross;
 		bool intersect = e3d::Math3::RayOBBIntersection(aabb, offset, s->GetOri3(), ray, &cross);
 		if (intersect) {
-			return sprite;
+			return spr;
 		}
 	}
 

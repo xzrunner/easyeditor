@@ -29,7 +29,7 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 	m_anchors.DrawNodes(params);
 }
 
-sm::rect Symbol::GetBounding(const s2::Sprite* sprite) const
+sm::rect Symbol::GetBounding(const s2::Sprite* spr) const
 {
 	return sm::rect(sm::vec2(0, 0), m_width, m_height);
 }

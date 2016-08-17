@@ -80,19 +80,19 @@ void ScaleImage::Scale(ee::Snapshoot& ss, const std::string& src, const std::str
 	std::string filepath = ee::FileHelper::GetAbsolutePath(src);
 	if (ee::FileType::IsType(filepath, ee::FileType::e_image))
 	{
-		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-		sm::rect r = symbol->GetBounding();
+		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		sm::rect r = sym->GetBounding();
 
-		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-		sprite->SetScale(sm::vec2(scale, scale));
+		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+		spr->SetScale(sm::vec2(scale, scale));
 
 		const sm::vec2& sz = r.Size();
 		int width = sz.x * scale,
 			height = sz.y * scale;
-		ss.DrawSprite(sprite, true, width, height);
+		ss.DrawSprite(spr, true, width, height);
 
-		sprite->RemoveReference();
-		symbol->RemoveReference();
+		spr->RemoveReference();
+		sym->RemoveReference();
 
 		ss.SaveToFile(dst, width, height);
 	}

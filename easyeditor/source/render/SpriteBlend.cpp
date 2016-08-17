@@ -72,10 +72,10 @@ void SpriteBlend::DrawSprToTmp(const Sprite* spr, const sm::mat4& mt)
 	dtexf_t0_unbind();
 }
 
-void SpriteBlend::DrawTmpToScreen(const Sprite* sprite, const sm::mat4& mt)
+void SpriteBlend::DrawTmpToScreen(const Sprite* spr, const sm::mat4& mt)
 {
-	sm::mat4 t = sprite->GetTransMatrix() * mt;
-	sm::rect r = sprite->GetSymbol()->GetBounding();
+	sm::mat4 t = spr->GetTransMatrix() * mt;
+	sm::rect r = spr->GetSymbol()->GetBounding();
 
 	sm::vec2 vertices[4];
 	vertices[0] = sm::vec2(r.xmin, r.ymin);
@@ -86,7 +86,7 @@ void SpriteBlend::DrawTmpToScreen(const Sprite* sprite, const sm::mat4& mt)
 		vertices[i] = Math2D::TransVector(vertices[i], t);
 	}
 
-	sm::vec2 vertex_offset = - (mt * sprite->GetPosition());
+	sm::vec2 vertex_offset = - (mt * spr->GetPosition());
 
 	sm::vec2 texcoords[4];
 	int edge = dtexf_t0_get_texture_size();

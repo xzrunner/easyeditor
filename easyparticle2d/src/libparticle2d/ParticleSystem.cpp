@@ -262,17 +262,17 @@ bool ParticleSystem::IsEmpty() const
 
 void ParticleSystem::ReloadTexture() const
 {
-	for (int i = 0; i < m_et->cfg->symbol_count; ++i) {
-		ee::Symbol* symbol = static_cast<ee::Symbol*>(m_et->cfg->symbols[i].ud);
-		symbol->ReloadTexture();
+	for (int i = 0; i < m_et->cfg->sym_count; ++i) {
+		ee::Symbol* sym = static_cast<ee::Symbol*>(m_et->cfg->syms[i].ud);
+		sym->ReloadTexture();
 	}
 }
 
-p2d_symbol* ParticleSystem::AddSymbol(ee::Symbol* symbol)
+p2d_symbol* ParticleSystem::AddSymbol(ee::Symbol* sym)
 {
-	assert(m_et->cfg->symbol_count < MAX_COMPONENTS);
+	assert(m_et->cfg->sym_count < MAX_COMPONENTS);
 
-	p2d_symbol& comp = m_et->cfg->symbols[m_et->cfg->symbol_count++];
+	p2d_symbol& comp = m_et->cfg->syms[m_et->cfg->sym_count++];
 	memset(&comp, 0, SIZEOF_P2D_SYMBOL);
 
 	comp.angle_start = comp.angle_end = 0;
@@ -284,29 +284,29 @@ p2d_symbol* ParticleSystem::AddSymbol(ee::Symbol* symbol)
 	memset(&comp.add_col_begin, 0, sizeof(comp.add_col_begin));
 	memset(&comp.add_col_end, 0, sizeof(comp.add_col_end));
 
-	comp.ud = symbol;
+	comp.ud = sym;
 
 	return &comp;
 }
 
 void ParticleSystem::DelSymbol(int idx)
 {
-	if (idx < 0 || idx >= m_et->cfg->symbol_count) {
+	if (idx < 0 || idx >= m_et->cfg->sym_count) {
 		return;
 	}
 
-	if (m_et->cfg->symbol_count == 1) {
-		m_et->cfg->symbol_count = 0;
+	if (m_et->cfg->sym_count == 1) {
+		m_et->cfg->sym_count = 0;
 	} else {
-		const p2d_symbol& src = m_et->cfg->symbols[--m_et->cfg->symbol_count];
-		p2d_symbol& dst = m_et->cfg->symbols[idx];
+		const p2d_symbol& src = m_et->cfg->syms[--m_et->cfg->sym_count];
+		p2d_symbol& dst = m_et->cfg->syms[idx];
 		memcpy(&dst, &src, SIZEOF_P2D_SYMBOL);
 	}
 }
 
 void ParticleSystem::DelAllSymbol()
 {
-	m_et->cfg->symbol_count = 0;
+	m_et->cfg->sym_count = 0;
 }
 
 const p2d_emitter_cfg* ParticleSystem::GetConfig() const

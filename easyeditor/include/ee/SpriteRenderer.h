@@ -15,13 +15,13 @@ class FBO;
 class SpriteRenderer
 {
 public:
-	static void Draw(const Sprite* sprite, 
+	static void Draw(const Sprite* spr, 
 			         const s2::RenderParams& params = s2::RenderParams());
 
-	static void InvalidRect(const Sprite* sprite, 
+	static void InvalidRect(const Sprite* spr, 
 		                    const sm::mat4& mt = sm::mat4());
 
-	static void Draw(const Symbol* symbol, 
+	static void Draw(const Symbol* sym, 
 		             const s2::RenderParams& params = s2::RenderParams(),
 			         const sm::vec2& pos = sm::vec2(0, 0),
 			         float angle = 0.0f, 
@@ -31,7 +31,7 @@ public:
 			         float yShear = 0.0f);
 
 private:
-	static void DrawImpl(const Sprite* sprite, 
+	static void DrawImpl(const Sprite* spr, 
   				         const s2::RenderParams& params);
 	
 }; // SpriteRenderer

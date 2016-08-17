@@ -20,7 +20,7 @@ public:
 	 *    s2::Symbol
 	 */
 	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
-	virtual sm::rect GetBounding(const s2::Sprite* sprite = NULL) const;
+	virtual sm::rect GetBounding(const s2::Sprite* spr = NULL) const;
 
 	/**
 	 *  @interface
@@ -29,7 +29,7 @@ public:
 	virtual void ReloadTexture() const;
 
 	void ResizeScale9(float width, float height);
-	void ComposeFromSprites(ee::Sprite* sprites[3][3], float width, float height);
+	void ComposeFromSprites(ee::Sprite* sprs[3][3], float width, float height);
 
 	const Scale9Data& GetScale9Data() const { return m_data; }
 

@@ -13,38 +13,38 @@ namespace ee
 InsertSpriteAOP::InsertSpriteAOP(Sprite* spr)
 {
 	spr->AddReference();
-	m_sprites.push_back(spr);
+	m_sprs.push_back(spr);
 }
 
-InsertSpriteAOP::InsertSpriteAOP(const std::vector<Sprite*>& sprites)
+InsertSpriteAOP::InsertSpriteAOP(const std::vector<Sprite*>& sprs)
 {	
-	for_each(sprites.begin(), sprites.end(), cu::AddRefFonctor<Sprite>());
-	m_sprites = sprites;
+	for_each(sprs.begin(), sprs.end(), cu::AddRefFonctor<Sprite>());
+	m_sprs = sprs;
 }
 
 InsertSpriteAOP::~InsertSpriteAOP()
 {
-	for_each(m_sprites.begin(), m_sprites.end(), cu::RemoveRefFonctor<Sprite>());
+	for_each(m_sprs.begin(), m_sprs.end(), cu::RemoveRefFonctor<Sprite>());
 }
 
 void InsertSpriteAOP::Undo()
 {
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-		RemoveSpriteSJ::Instance()->Remove(m_sprites[i]);
+	for (size_t i = 0, n = m_sprs.size(); i < n; ++i) {
+		RemoveSpriteSJ::Instance()->Remove(m_sprs[i]);
 	}
 }
 
 void InsertSpriteAOP::Redo()
 {
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-		InsertSpriteSJ::Instance()->Insert(m_sprites[i]);
+	for (size_t i = 0, n = m_sprs.size(); i < n; ++i) {
+		InsertSpriteSJ::Instance()->Insert(m_sprs[i]);
 	}
 }
 
-Json::Value InsertSpriteAOP::Store(const std::vector<Sprite*>& sprites) const
+Json::Value InsertSpriteAOP::Store(const std::vector<Sprite*>& sprs) const
 {
 	Json::Value val;
-	val["idx"] = HistoryUtil::StoreSpritesIndex(m_sprites, sprites);
+	val["idx"] = HistoryUtil::StoreSpritesIndex(m_sprs, sprs);
 	val["type"] = AT_INSERT;
 	return val;
 }

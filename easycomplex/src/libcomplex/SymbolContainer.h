@@ -13,7 +13,7 @@ class Symbol;
 class SymbolContainer : public ee::SprDataContainer
 {
 public:
-	SymbolContainer(Symbol* symbol);
+	SymbolContainer(Symbol* sym);
 	virtual ~SymbolContainer();
 
 	//
@@ -27,13 +27,13 @@ public:
 	virtual bool Clear();
 	virtual bool ResetOrder(const ee::Sprite* obj, bool up);
 	virtual bool ResetOrderMost(const ee::Sprite* obj, bool up);
-	virtual bool Sort(std::vector<ee::Sprite*>& sprites);
+	virtual bool Sort(std::vector<ee::Sprite*>& sprs);
 
 private:
-	void GetSprites(std::vector<ee::Sprite*>& sprites) const;
+	void GetSprites(std::vector<ee::Sprite*>& sprs) const;
 
 private:
-	Symbol* m_symbol;
+	Symbol* m_sym;
 
 }; // SymbolContainer
 

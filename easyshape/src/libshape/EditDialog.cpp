@@ -19,15 +19,15 @@ BEGIN_EVENT_TABLE(EditDialog, wxDialog)
 	EVT_CLOSE(EditDialog::OnCloseEvent)
 END_EVENT_TABLE()
 
-EditDialog::EditDialog(wxWindow* parent, Symbol* symbol)
+EditDialog::EditDialog(wxWindow* parent, Symbol* sym)
  	: wxDialog(parent, wxID_ANY, "Edit Shape", wxDefaultPosition, 
 	wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 	, m_stage(NULL)
 {
-	InitLayout(symbol);
+	InitLayout(sym);
 
 	std::string filepath = ee::FileHelper::GetFilenameAddTag(
-		symbol->GetFilepath(), eshape::FILE_TAG, "json");
+		sym->GetFilepath(), eshape::FILE_TAG, "json");
 	if (ee::FileHelper::IsFileExist(filepath)) {
 		m_stage->LoadFromFile(filepath.c_str());
 		m_toolbar->SelectSuitableEditOP();
@@ -47,13 +47,13 @@ void EditDialog::onSize(wxSizeEvent& event)
 	Refresh(true);
 }
 
-void EditDialog::InitLayout(Symbol* symbol)
+void EditDialog::InitLayout(Symbol* sym)
 {
 	wxSplitterWindow* vertical = new wxSplitterWindow(this);
 	wxSplitterWindow* horizontal = new wxSplitterWindow(vertical);
 
 	ee::PropertySettingPanel* property = new ee::PropertySettingPanel(horizontal);
-	m_stage = new StagePanel(vertical, this, symbol);
+	m_stage = new StagePanel(vertical, this, sym);
 	property->SetEditPanel(m_stage->GetStageImpl());
 	m_toolbar = new ToolbarPanel(horizontal, property, m_stage);
 
@@ -71,21 +71,21 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 		return;
 	}
 
-	ee::Symbol& symbol = const_cast<ee::Symbol&>(m_stage->GetSymbol());
-	const std::string& filepath = symbol.GetFilepath();
+	ee::Symbol& sym = const_cast<ee::Symbol&>(m_stage->GetSymbol());
+	const std::string& filepath = sym.GetFilepath();
 
 	ee::ConfirmDialog dlg(this);
 	int val = dlg.ShowModal();
 	if (val == wxID_YES)
 	{
-		dynamic_cast<Symbol&>(symbol).StoreToFile(filepath.c_str());
-		symbol.RefreshThumbnail(filepath);
-		ee::SpriteFactory::Instance()->UpdateBoundings(symbol);
+		dynamic_cast<Symbol&>(sym).StoreToFile(filepath.c_str());
+		sym.RefreshThumbnail(filepath);
+		ee::SpriteFactory::Instance()->UpdateBoundings(sym);
 		Destroy();
 	}
 	else if (val == wxID_NO)
 	{
-		symbol.LoadFromFile(filepath);
+		sym.LoadFromFile(filepath);
 		Destroy();
 	}
 }

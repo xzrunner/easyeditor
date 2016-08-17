@@ -115,9 +115,9 @@ void CocoPacker::pack(const Json::Value& val, ebuilder::CodeGenerator& gen, cons
 
 	//// scale
 	//std::string path = ee::FileHelper::GetAbsolutePath(dir, val["symbol_path"].asString());
-	//ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(path);
-	//float width = symbol->GetBounding().Width();
-	//symbol->RemoveReference();
+	//ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(path);
+	//float width = sym->GetBounding().Width();
+	//sym->RemoveReference();
 	//float size_start = width * val[ITEM_SCALE][ITEM_ATTR_START].asInt() * 0.01f;
 	//float size_finish = width * val[ITEM_SCALE][ITEM_ATTR_END].asInt() * 0.01f;
 	//lua::assign_with_end(gen, "size", width);

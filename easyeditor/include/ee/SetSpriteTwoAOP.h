@@ -14,16 +14,16 @@ class Sprite;
 	class SetSprite##name##AOP : public AtomicOP \
 	{ \
 	public: \
-		SetSprite##name##AOP(const std::vector<Sprite*>& sprites, const sm::vec2& val); \
+		SetSprite##name##AOP(const std::vector<Sprite*>& sprs, const sm::vec2& val); \
 		virtual ~SetSprite##name##AOP(); \
 	\
 		virtual void Undo(); \
 		virtual void Redo(); \
 	\
-		virtual Json::Value Store(const std::vector<Sprite*>& sprites) const; \
+		virtual Json::Value Store(const std::vector<Sprite*>& sprs) const; \
 	\
 	private: \
-		std::vector<Sprite*> m_sprites; \
+		std::vector<Sprite*> m_sprs; \
 		std::vector<sm::vec2> m_old; \
 	\
 		sm::vec2 m_new; \

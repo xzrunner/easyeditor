@@ -14,10 +14,10 @@ class BodyManager
 public:
 	static BodyManager* Instance();
 
-	IBody* LoadBody(Sprite* sprite);
-	void UnloadBody(Sprite* sprite);
+	IBody* LoadBody(Sprite* spr);
+	void UnloadBody(Sprite* spr);
 
-	const IBody* QueryBody(Sprite* sprite) const;
+	const IBody* QueryBody(Sprite* spr) const;
 
 	void Update();
 
@@ -25,7 +25,7 @@ private:
 	BodyManager();
 
 private:
-	static IBody* CreateBody(Sprite* sprite);
+	static IBody* CreateBody(Sprite* spr);
 
 private:
 	std::map<Sprite*, IBody*> m_map_body;

@@ -64,21 +64,21 @@ void FileIO::LoadFromEasypackerFile(const char* filename)
 	for (size_t i = 0, n = adapter.textures.size(); i < n; ++i)
 	{
 		ee::TexPackerAdapter::Texture tex = adapter.textures[i];
-		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(tex.filepath);
-		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-		symbol->RemoveReference();
+		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(tex.filepath);
+		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+		sym->RemoveReference();
 
 		sm::vec2 pos;
 		pos.x = tex.region.left + tex.region.width * 0.5f;
 		pos.y = tex.region.low + tex.region.height * 0.5f;
-		sprite->SetPosition(pos);
+		spr->SetPosition(pos);
 		if (tex.bRotate) {
-			sprite->SetAngle(SM_PI * 0.5f);
+			spr->SetAngle(SM_PI * 0.5f);
 		} else {
-			sprite->SetAngle(0);
+			spr->SetAngle(0);
 		}
 
-		context->stage->InsertSpriteNoArrange(sprite);
+		context->stage->InsertSpriteNoArrange(spr);
 	}
 }
 
@@ -110,9 +110,9 @@ void FileIO::LoadFromTexPackerFile(const char* filename)
 		if (!ee::FileHelper::IsFileExist(filepath))
 			filepath = ee::FileHelper::GetAbsolutePath(dir, filepath);
 
-		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-		symbol->RemoveReference();
+		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+		sym->RemoveReference();
 
 		int width = frame_val["sourceSize"]["w"].asInt();
 		int height = frame_val["sourceSize"]["h"].asInt();
@@ -133,16 +133,16 @@ void FileIO::LoadFromTexPackerFile(const char* filename)
 			pos.x = left + width * 0.5f;
 			pos.y = context->height - (top + height * 0.5f);
 		}
-		sprite->SetPosition(pos);
-		sprite->SetAngle(angle);
+		spr->SetPosition(pos);
+		spr->SetAngle(angle);
 
-		sprite->SetEditable(false);
+		spr->SetEditable(false);
 
 		Json::Value* val = new Json::Value;
 		*val = frame_val;
-		sprite->SetUserData(val);
+		spr->SetUserData(val);
 
-		context->stage->InsertSpriteNoArrange(sprite);
+		context->stage->InsertSpriteNoArrange(spr);
 
 		frame_val = value["frames"][i++];
 	}
@@ -180,11 +180,11 @@ void FileIO::StoreImage(const char* filename)
 	unsigned char* dst_data = (unsigned char*) malloc(channel * width * height);
 	memset(dst_data, 0, channel * width * height);
 
-	std::vector<ee::Sprite*> sprites;
-	stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	for (size_t i = 0, n = sprites.size(); i < n; ++i)
+	std::vector<ee::Sprite*> sprs;
+	stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	for (size_t i = 0, n = sprs.size(); i < n; ++i)
 	{
-		ee::Sprite* spr = sprites[i];
+		ee::Sprite* spr = sprs[i];
 		const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());
 		const sm::vec2& center = spr->GetPosition();
 		sm::vec2 sz = sym->GetBounding().Size();
@@ -201,8 +201,8 @@ void FileIO::StoreImage(const char* filename)
 			sh = sz.y;
 		}
 
-		//if (sprite->getPosition().x - sw * 0.5f < 0 || sprite->getPosition().x + sw * 0.5f > width ||
-		//	sprite->getPosition().y - sh * 0.5f < 0 || sprite->getPosition().y + sh * 0.5f > width)
+		//if (spr->getPosition().x - sw * 0.5f < 0 || spr->getPosition().x + sw * 0.5f > width ||
+		//	spr->getPosition().y - sh * 0.5f < 0 || spr->getPosition().y + sh * 0.5f > width)
 		//	continue;
 
 		bool use_premultiplied_alpha = Context::Instance()->premultiplied_alpha && channel == 4;
@@ -300,10 +300,10 @@ void FileIO::StoreEasypackerPosition(const char* filename)
 	value["width"] = Context::Instance()->width;
 	value["height"] = Context::Instance()->height;
 
-	std::vector<ee::Sprite*> sprites;
-	Context::Instance()->stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-		value["image"][i] = Store(sprites[i]);
+	std::vector<ee::Sprite*> sprs;
+	Context::Instance()->stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	for (size_t i = 0, n = sprs.size(); i < n; ++i)
+		value["image"][i] = Store(sprs[i]);
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -319,22 +319,22 @@ void FileIO::StoreTexpackerPosition(const char* filename)
 
 	value["meta"] = Context::Instance()->tp_meta;
 
-	std::vector<ee::Sprite*> sprites;
-	Context::Instance()->stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-		ee::Sprite* sprite = sprites[i];
-		if (sprite->GetUserData()) 
+	std::vector<ee::Sprite*> sprs;
+	Context::Instance()->stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
+		ee::Sprite* spr = sprs[i];
+		if (spr->GetUserData()) 
 		{
-			Json::Value* val = static_cast<Json::Value*>(sprite->GetUserData());
+			Json::Value* val = static_cast<Json::Value*>(spr->GetUserData());
 			value["frames"][i] = *val;
 		} 
 		else 
 		{
 			// todo
-// 			ee::Image* img = static_cast<const ee::ImageSymbol&>(sprite->GetSymbol()).getImage();
+// 			ee::Image* img = static_cast<const ee::ImageSymbol&>(spr->GetSymbol()).getImage();
 // 			Json::Value val;
 // 			val["filename"] = ee::FileHelper::getFilenameWithExtension(img->GetFilepath());
-// 			val["rotated"] = sprite->GetAngle() == 0 ? false : true;
+// 			val["rotated"] = spr->GetAngle() == 0 ? false : true;
 // 			val["trimmed"] = true;
 // 			val["sourceSize"]["w"] = img->GetOriginWidth();
 // 			val["sourceSize"]["h"] = img->GetOriginHeight();
@@ -345,7 +345,7 @@ void FileIO::StoreTexpackerPosition(const char* filename)
 // 			val["spriteSourceSize"]["x"] = r.xmin + 0.5f * img->GetOriginWidth();
 // 			val["spriteSourceSize"]["y"] = img->GetOriginHeight() - (r.ymax + 0.5f * img->GetOriginHeight());
 // 			
-// 			const sm::vec2& pos = sprite->GetPosition();
+// 			const sm::vec2& pos = spr->GetPosition();
 // 			val["frame"]["x"] = pos.x + r.xmin;
 // 			val["frame"]["y"] = Context::Instance()->height - (pos.y + r.ymax);
 // 
@@ -361,16 +361,16 @@ void FileIO::StoreTexpackerPosition(const char* filename)
 	fout.close();
 }
 
-Json::Value FileIO::Store(const ee::Sprite* sprite)
+Json::Value FileIO::Store(const ee::Sprite* spr)
 {
 	Json::Value value;
 
-	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(sprite->GetSymbol());
+	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());
 	sm::vec2 sz = sym->GetBounding().Size();
 	const float w = sz.x, h = sz.y;
-	const sm::vec2& pos = sprite->GetPosition();
+	const sm::vec2& pos = spr->GetPosition();
 
-	bool bRotate = sprite->GetAngle() != 0;
+	bool bRotate = spr->GetAngle() != 0;
 	float left, low, width, height;
 	if (bRotate)
 	{

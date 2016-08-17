@@ -10,7 +10,7 @@ class FontBlankSprite;
 class FontBlankPropertySetting : public SpritePropertySetting
 {
 public:
-	FontBlankPropertySetting(EditPanelImpl* stage, FontBlankSprite* sprite);
+	FontBlankPropertySetting(EditPanelImpl* stage, FontBlankSprite* spr);
 
 	virtual void OnPropertyGridChange(const std::string& name, const wxAny& value);
 

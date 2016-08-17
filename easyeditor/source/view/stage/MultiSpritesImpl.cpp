@@ -31,10 +31,10 @@ Sprite* MultiSpritesImpl::QuerySpriteByPos(const sm::vec2& pos) const
 	Sprite* selected = NULL;
 	TraverseSprites(PointQueryVisitor(pos, &selected), DT_EDITABLE, false);
 	if (selected && !selected->IsEditable()) {
-		std::vector<Sprite*> sprites;
-		QuerySpritesByRect(sm::rect(pos, 1, 1), false, sprites);
-		if (!sprites.empty()) {
-			selected = sprites.back();
+		std::vector<Sprite*> sprs;
+		QuerySpritesByRect(sm::rect(pos, 1, 1), false, sprs);
+		if (!sprs.empty()) {
+			selected = sprs.back();
 		} else {
 			selected = NULL;
 		}
@@ -53,10 +53,10 @@ void MultiSpritesImpl::ClearSelectedSprite()
 		return;
 	}
 
-	std::vector<Sprite*> sprites;
-	m_sprite_selection->Traverse(FetchAllVisitor<Sprite>(sprites));
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		RemoveSpriteSJ::Instance()->Remove(sprites[i]);
+	std::vector<Sprite*> sprs;
+	m_sprite_selection->Traverse(FetchAllVisitor<Sprite>(sprs));
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		RemoveSpriteSJ::Instance()->Remove(sprs[i]);
 	}
 
 	m_sprite_selection->Clear();

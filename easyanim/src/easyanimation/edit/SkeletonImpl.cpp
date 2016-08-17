@@ -68,13 +68,13 @@ void SkeletonImpl::OnMouseLeftUp(int x, int y)
 
 		if (m_selection->Size() == 1)
 		{
-			std::vector<ee::Sprite*> sprites;
-			m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
+			std::vector<ee::Sprite*> sprs;
+			m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
 
 			SkeletonData* skeleton = get_curr_skeleton();
 			if (skeleton) {
-				skeleton->Absorb(sprites[0]);
-				skeleton->UpdateJoint(sprites[0]);
+				skeleton->Absorb(sprs[0]);
+				skeleton->UpdateJoint(sprs[0]);
 				ee::SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		}
@@ -111,8 +111,8 @@ void SkeletonImpl::OnPopMenuSelected(int type)
 		{
 			SkeletonData* skeleton = get_curr_skeleton();
 			if (skeleton) {
-				ee::Sprite* sprite = ViewMgr::Instance()->stage->QuerySpriteByPos(m_first_pos);
-				skeleton->InsertJoint(sprite, m_first_pos);
+				ee::Sprite* spr = ViewMgr::Instance()->stage->QuerySpriteByPos(m_first_pos);
+				skeleton->InsertJoint(spr, m_first_pos);
 			}
 		}
 		break;

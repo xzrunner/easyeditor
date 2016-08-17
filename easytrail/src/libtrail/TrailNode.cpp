@@ -56,12 +56,12 @@ void TrailNode::UpdateTime()
 }
 
 static void 
-render_symbol_func(void* symbol, float x, float y, float angle, float scale, uint8_t* mul_col, uint8_t* add_col, const void* ud)
+render_symbol_func(void* sym, float x, float y, float angle, float scale, uint8_t* mul_col, uint8_t* add_col, const void* ud)
 {
 	assert(ud);
 	const RenderParams* rp = (static_cast<const RenderParams*>(ud));
 
-	ee::Symbol* sym = static_cast<ee::Symbol*>(symbol);
+	ee::Symbol* sym = static_cast<ee::Symbol*>(sym);
 
 	s2::RenderParams params;
 

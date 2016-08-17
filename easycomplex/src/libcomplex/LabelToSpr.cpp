@@ -7,9 +7,9 @@ namespace ecomplex
 
 ee::Sprite* LabelToSpr::Trans(const erespacker::PackLabel* label)
 {
-	etext::Symbol* symbol = new etext::Symbol();
+	etext::Symbol* sym = new etext::Symbol();
 
-	etext::Sprite* spr = new etext::Sprite(symbol);
+	etext::Sprite* spr = new etext::Sprite(sym);
 
 	spr->SetSize(label->width, label->height);
 

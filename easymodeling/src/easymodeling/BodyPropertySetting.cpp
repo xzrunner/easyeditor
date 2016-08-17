@@ -8,11 +8,11 @@
 namespace emodeling
 {
 
-BodyPropertySetting::BodyPropertySetting(ee::EditPanelImpl* stage, ee::Sprite* sprite)
+BodyPropertySetting::BodyPropertySetting(ee::EditPanelImpl* stage, ee::Sprite* spr)
 	: ee::PropertySetting("Body")
 	, m_stage(stage)
 {
-	m_body = static_cast<Body*>(sprite->GetUserData());
+	m_body = static_cast<Body*>(spr->GetUserData());
 	assert(m_body);
 }
 

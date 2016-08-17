@@ -27,14 +27,14 @@ void StageCanvas::OnDrawSprites() const
 {
 	DrawBackground();
 
-	std::vector<ee::Sprite*> sprites;
-	static_cast<StagePanel*>(m_stage)->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	for (size_t i = 0, n = sprites.size(); i < n; ++i)
+	std::vector<ee::Sprite*> sprs;
+	static_cast<StagePanel*>(m_stage)->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	for (size_t i = 0, n = sprs.size(); i < n; ++i)
 	{
-		ee::Sprite* sprite = sprites[i];
-		if (!sprite->IsVisible())
+		ee::Sprite* spr = sprs[i];
+		if (!spr->IsVisible())
 			continue;
-		ee::SpriteRenderer::Draw(sprites[i]);
+		ee::SpriteRenderer::Draw(sprs[i]);
 	}
 
 	if (m_stage->m_ps) {

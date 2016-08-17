@@ -102,21 +102,21 @@ void SelectSpritesOP::BuildGroup()
 		return;
 	}
 
-	std::vector<ee::Sprite*> sprites;
-	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
+	std::vector<ee::Sprite*> sprs;
+	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
 
-	ecomplex::Sprite* spr = ecomplex::GroupHelper::Group(sprites);
+	ecomplex::Sprite* spr = ecomplex::GroupHelper::Group(sprs);
 	ee::Symbol* sym = dynamic_cast<ee::Symbol*>(spr->GetSymbol());
 	sym->SetFilepath(GROUP_TAG);
 	sym->name = "_group";
 	sym->SetName("_group");
 	spr->SetName("_group");
 
-	ee::AtomicOP* move_op = new ee::TranslateSpriteAOP(sprites, -spr->GetPosition());
+	ee::AtomicOP* move_op = new ee::TranslateSpriteAOP(sprs, -spr->GetPosition());
 
 	std::vector<ee::Sprite*> removed;
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		ee::Sprite* spr = sprites[i];
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		ee::Sprite* spr = sprs[i];
 		ee::RemoveSpriteSJ::Instance()->Remove(spr);
 		spr->AddReference();
 		removed.push_back(spr);
@@ -141,11 +141,11 @@ void SelectSpritesOP::BreakUpGroup()
 		return;
 	}
 
-	std::vector<ee::Sprite*> sprites;
-	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	for (int i = 0, n = sprites.size(); i < n; ++i) 
+	std::vector<ee::Sprite*> sprs;
+	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	for (int i = 0, n = sprs.size(); i < n; ++i) 
 	{
-		ee::Sprite* spr = sprites[i];
+		ee::Sprite* spr = sprs[i];
 		if (dynamic_cast<ee::Symbol*>(spr->GetSymbol())->GetFilepath() != GROUP_TAG) {
 			continue;
 		}
@@ -171,10 +171,10 @@ void SelectSpritesOP::BuildComplex()
 		return;
 	}
 
-	std::vector<ee::Sprite*> sprites;
-	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
+	std::vector<ee::Sprite*> sprs;
+	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
 
-	ecomplex::Sprite* spr = ecomplex::GroupHelper::Group(sprites);
+	ecomplex::Sprite* spr = ecomplex::GroupHelper::Group(sprs);
 	spr->SetUserData(new NewComplexUD());
 
 	ecomplex::Symbol* sym = dynamic_cast<ecomplex::Symbol*>(spr->GetSymbol());
@@ -185,8 +185,8 @@ void SelectSpritesOP::BuildComplex()
 	sym->SetFilepath(filepath);
 
 	ee::InsertSpriteSJ::Instance()->Insert(spr);
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		ee::RemoveSpriteSJ::Instance()->Remove(sprites[i]);
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		ee::RemoveSpriteSJ::Instance()->Remove(sprs[i]);
 	}
 }
 
@@ -197,11 +197,11 @@ void SelectSpritesOP::BreakUpComplex()
 	}
 
 	std::string tag = "_" + ee::FileType::GetTag(ee::FileType::e_complex) + ".json";
-	std::vector<ee::Sprite*> sprites;
-	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
-	for (int i = 0, n = sprites.size(); i < n; ++i) 
+	std::vector<ee::Sprite*> sprs;
+	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	for (int i = 0, n = sprs.size(); i < n; ++i) 
 	{
-		ee::Sprite* spr = sprites[i];
+		ee::Sprite* spr = sprs[i];
 		if (dynamic_cast<ee::Symbol*>(spr->GetSymbol())->GetFilepath().find(tag) == std::string::npos) {
 			continue;
 		}

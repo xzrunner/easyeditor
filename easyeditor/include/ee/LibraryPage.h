@@ -17,7 +17,7 @@ class LibraryPage : public wxWindow
 public:
 	LibraryPage(wxWindow* parent, const std::string& name, bool isStatic = false);
 
-	virtual bool IsHandleSymbol(Symbol* symbol) const = 0;
+	virtual bool IsHandleSymbol(Symbol* sym) const = 0;
 
 	virtual void Clear();
 

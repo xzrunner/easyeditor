@@ -20,7 +20,7 @@ private:
 	static ee::Sprite* LoadSprite(const Json::Value& value);
 	static ee::Shape* LoadShape(const Json::Value& value);
 
-	static Json::Value Store(ee::Sprite* sprite, const sm::vec2& offset);
+	static Json::Value Store(ee::Sprite* spr, const sm::vec2& offset);
 	static Json::Value Store(ee::Shape* shape, const sm::vec2& offset);
 
 }; // FileIO

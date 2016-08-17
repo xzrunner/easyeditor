@@ -75,11 +75,11 @@ t2d_emitter_cfg* FileIO::LoadMTConfig(const std::string& filepath)
 	cfg->mode_type = adapter.mode;
 
 	if (adapter.mode == T2D_MODE_IMAGE) {
-		cfg->symbol_count = adapter.comp_images.size();
-		cfg->symbols = (t2d_symbol*)(cfg+1);
-		for (int i = 0; i < cfg->symbol_count; ++i) {
+		cfg->sym_count = adapter.comp_images.size();
+		cfg->syms = (t2d_symbol*)(cfg+1);
+		for (int i = 0; i < cfg->sym_count; ++i) {
 			const LoadAdapter::CompImage& src = adapter.comp_images[i];
-			t2d_symbol& dst = cfg->symbols[i];
+			t2d_symbol& dst = cfg->syms[i];
 
 			memcpy(&dst.col_begin.r, &src.mul_col_begin.r, sizeof(dst.col_begin));
 			memcpy(&dst.col_end.r, &src.mul_col_end.r, sizeof(dst.col_end));
@@ -97,11 +97,11 @@ t2d_emitter_cfg* FileIO::LoadMTConfig(const std::string& filepath)
 		}
 	} else {
 		assert(adapter.mode == T2D_MODE_SHAPE);
-		cfg->symbol_count = adapter.comp_shapes.size();
-		cfg->symbols = (t2d_symbol*)(cfg+1);
-		for (int i = 0; i < cfg->symbol_count; ++i) {
+		cfg->sym_count = adapter.comp_shapes.size();
+		cfg->syms = (t2d_symbol*)(cfg+1);
+		for (int i = 0; i < cfg->sym_count; ++i) {
 			const LoadAdapter::CompShape& src = adapter.comp_shapes[i];
-			t2d_symbol& dst = cfg->symbols[i];
+			t2d_symbol& dst = cfg->syms[i];
 
 			memcpy(&dst.col_begin.r, &src.col_begin.r, sizeof(dst.col_begin));
 			memcpy(&dst.col_end.r, &src.col_end.r, sizeof(dst.col_end));

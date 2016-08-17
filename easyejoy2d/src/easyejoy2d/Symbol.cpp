@@ -39,7 +39,7 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 	DrawFromEJScreen();
 }
 
-sm::rect Symbol::GetBounding(const s2::Sprite* sprite) const
+sm::rect Symbol::GetBounding(const s2::Sprite* spr) const
 {
 	return sm::rect(sm::vec2(0, 0), 200, 200);
 }

@@ -73,7 +73,7 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 
 	Json::Value mesh_val;
 
-//	m_trans.LoadFromMesh(m_symbol->GetMesh());
+//	m_trans.LoadFromMesh(m_sym->GetMesh());
 	m_trans.Store(mesh_val);
 	
 	mesh_val["base_symbol"] = ee::FileHelper::GetRelativePath(dir, m_base->GetFilepath());

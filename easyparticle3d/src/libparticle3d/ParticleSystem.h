@@ -72,7 +72,7 @@ public:
 
 	void SetBlend(int blend);
 
-	p3d_symbol* AddSymbol(ee::Symbol* symbol);
+	p3d_symbol* AddSymbol(ee::Symbol* sym);
 	void DelSymbol(int idx);
 	void DelAllSymbol();
 	p3d_symbol* GetSymbol(int idx);

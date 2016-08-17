@@ -26,7 +26,7 @@ public:
 	//
 	//	interface ee::LibraryPage
 	//
-	virtual bool IsHandleSymbol(ee::Symbol* symbol) const;
+	virtual bool IsHandleSymbol(ee::Symbol* sym) const;
 
 	void UpdateStatusFromLayer();
 

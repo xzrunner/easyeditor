@@ -8,24 +8,24 @@
 namespace ee
 {
 
-ShearSpriteState::ShearSpriteState(Sprite* sprite, 
+ShearSpriteState::ShearSpriteState(Sprite* spr, 
 								   const SpriteCtrlNode::Node& ctrl_node)
 	: m_ctrl_node(ctrl_node)
 {
-	m_sprite = sprite;
-	m_sprite->AddReference();
+	m_spr = spr;
+	m_spr->AddReference();
 
-	m_first_shear = m_sprite->GetShear();
+	m_first_shear = m_spr->GetShear();
 }
 
 ShearSpriteState::~ShearSpriteState()
 {
-	m_sprite->RemoveReference();
+	m_spr->RemoveReference();
 }
 
 void ShearSpriteState::OnMouseRelease(const sm::vec2& pos)
 {
-	AtomicOP* aop = new ShearSpriteAOP(m_sprite, m_sprite->GetShear(), m_first_shear);
+	AtomicOP* aop = new ShearSpriteAOP(m_spr, m_spr->GetShear(), m_first_shear);
 	EditAddRecordSJ::Instance()->Add(aop);
 }
 
@@ -40,7 +40,7 @@ void ShearSpriteState::Shear(const sm::vec2& curr)
 	// fix pos
 	sm::vec2 pos;
 	sm::vec2 ctrls[8];
-	SpriteCtrlNode::GetSpriteCtrlNodes(m_sprite, ctrls);
+	SpriteCtrlNode::GetSpriteCtrlNodes(m_spr, ctrls);
 	if (m_ctrl_node.type == SpriteCtrlNode::UP) {
 		Math2D::GetFootOfPerpendicular(ctrls[SpriteCtrlNode::LEFT_UP], ctrls[SpriteCtrlNode::RIGHT_UP], curr, &pos);
 	} else if (m_ctrl_node.type == SpriteCtrlNode::DOWN) {
@@ -69,17 +69,17 @@ void ShearSpriteState::Shear(const sm::vec2& curr)
 	// kx = (pos.y - s*sx*x - ky*c*sy*x - c*sy*y - py) / (s*sx*y)
 	// ky = (pos.x - c*sx*x - kx*c*sx*y + s*sy*y - px) / (-s*sy*x)
 	// ky = (pos.y - s*sx*x - kx*s*sx*y - c*sy*y - py) / (c*sy*x)
-	float c = cos(m_sprite->GetAngle()), s = sin(m_sprite->GetAngle());
-	float sx = m_sprite->GetScale().x, sy = m_sprite->GetScale().y;
-	float px = m_sprite->GetPosition().x, py = m_sprite->GetPosition().y;
-	float kx = m_sprite->GetShear().x,
-		ky = m_sprite->GetShear().y;
+	float c = cos(m_spr->GetAngle()), s = sin(m_spr->GetAngle());
+	float sx = m_spr->GetScale().x, sy = m_spr->GetScale().y;
+	float px = m_spr->GetPosition().x, py = m_spr->GetPosition().y;
+	float kx = m_spr->GetShear().x,
+		ky = m_spr->GetShear().y;
 
-	sm::rect r = m_sprite->GetSymbol()->GetBounding();
+	sm::rect r = m_spr->GetSymbol()->GetBounding();
 //  	pos.x -= px;
 //  	pos.y -= py;
 
-	sm::vec2 offset = m_sprite->GetOffset();
+	sm::vec2 offset = m_spr->GetOffset();
 // 	offset.x += px - r.CenterX();
 // 	offset.y += py - r.CenterY();
 
@@ -122,22 +122,22 @@ void ShearSpriteState::Shear(const sm::vec2& curr)
 			ky = (pos.y - s*sx*x - kx*s*sx*y - c*sy*y - py) / (c*sy*x);
 	}
 
-	m_sprite->SetShear(sm::vec2(kx, ky));
+	m_spr->SetShear(sm::vec2(kx, ky));
 }
 
 void ShearSpriteState::Shear2(const sm::vec2& curr)
 {
-	sm::rect region = m_sprite->GetSymbol()->GetBounding();
+	sm::rect region = m_spr->GetSymbol()->GetBounding();
 
 	sm::vec2 sz = region.Size();
 	float hw = sz.x * 0.5f, 
 		  hh = sz.y * 0.5f;
-	float kx = m_sprite->GetShear().x,
-		  ky = m_sprite->GetShear().y;
-	float sx = m_sprite->GetScale().x,
-		  sy = m_sprite->GetScale().y;
+	float kx = m_spr->GetShear().x,
+		  ky = m_spr->GetShear().y;
+	float sx = m_spr->GetScale().x,
+		  sy = m_spr->GetScale().y;
 	sm::vec2 ctrls[8];
-	SpriteCtrlNode::GetSpriteCtrlNodes(m_sprite, ctrls);
+	SpriteCtrlNode::GetSpriteCtrlNodes(m_spr, ctrls);
 
 	sm::vec2 center = (ctrls[SpriteCtrlNode::LEFT] + ctrls[SpriteCtrlNode::RIGHT]) * 0.5f;
 
@@ -160,7 +160,7 @@ void ShearSpriteState::Shear2(const sm::vec2& curr)
 				kx = -kx;
 			}
 			kx /= sx;
-			m_sprite->SetShear(sm::vec2(kx, ky));
+			m_spr->SetShear(sm::vec2(kx, ky));
 		}
 		break;
 	case SpriteCtrlNode::LEFT: case SpriteCtrlNode::RIGHT:
@@ -180,7 +180,7 @@ void ShearSpriteState::Shear2(const sm::vec2& curr)
 				ky = -ky;
 			}
 			ky /= sy;
-			m_sprite->SetShear(sm::vec2(kx, ky));
+			m_spr->SetShear(sm::vec2(kx, ky));
 		}
 		break;
 	}

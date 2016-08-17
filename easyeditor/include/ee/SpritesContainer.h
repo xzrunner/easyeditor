@@ -28,12 +28,12 @@ public:
 	//
 	// SprDataContainer interface
 	//
-	virtual bool Sort(std::vector<Sprite*>& sprites);
+	virtual bool Sort(std::vector<Sprite*>& sprs);
 
 	int Size() const;
 
 private:
-	ObjectVector<Sprite> m_sprites;
+	ObjectVector<Sprite> m_sprs;
 
 }; // SpritesContainer
 

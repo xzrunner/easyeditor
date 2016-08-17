@@ -20,7 +20,7 @@ public:
 class GroupTreeSpriteItem : public GroupTreeItem
 {
 public:
-	GroupTreeSpriteItem(Sprite* sprite);
+	GroupTreeSpriteItem(Sprite* spr);
 	GroupTreeSpriteItem(const GroupTreeSpriteItem& item);
 	virtual ~GroupTreeSpriteItem();
 
@@ -28,10 +28,10 @@ public:
 
 	virtual bool IsGroup() const { return false; }
 
-	Sprite* GetSprite() { return m_sprite; }
+	Sprite* GetSprite() { return m_spr; }
 
 private:
-	Sprite* m_sprite;
+	Sprite* m_spr;
 
 }; // GroupTreeSpriteItem
 

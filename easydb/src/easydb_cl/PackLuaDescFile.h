@@ -34,7 +34,7 @@ private:
 		const std::string& tp_dir);
 
 private:
-	std::vector<const ee::Symbol*> m_symbols;
+	std::vector<const ee::Symbol*> m_syms;
 
 	ecoco::epd::TextureMgr m_tex_mgr;
 

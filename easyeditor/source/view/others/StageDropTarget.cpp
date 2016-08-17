@@ -30,23 +30,23 @@ void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 	for (int i = 1, n = keys.size(); i < n; ++i)
 	{
 		int idx = StringHelper::FromString<int>(keys[i]);
-		Symbol* symbol = m_library->GetSymbol(idx);
-		if (!symbol) {
+		Symbol* sym = m_library->GetSymbol(idx);
+		if (!sym) {
 			continue;
 		}
 
 		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-		bool handled = OnDropSymbol(symbol, pos);
+		bool handled = OnDropSymbol(sym, pos);
 		if (handled) {
 			continue;
 		}
 
-		Sprite* sprite = SpriteFactory::Instance()->Create(symbol);
-		if (sprite->GetSymbol()->GetBounding().IsValid()) {
-			sprite->Translate(pos);
-			InsertSpriteSJ::Instance()->Insert(sprite);
+		Sprite* spr = SpriteFactory::Instance()->Create(sym);
+		if (spr->GetSymbol()->GetBounding().IsValid()) {
+			spr->Translate(pos);
+			InsertSpriteSJ::Instance()->Insert(spr);
 		}
-		sprite->RemoveReference();
+		spr->RemoveReference();
 	}
 }
 
@@ -55,22 +55,22 @@ void StageDropTarget::OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& fil
 	for (int i = 0, n = filenames.size(); i < n; ++i)
 	{
 		std::string filename = filenames[i].ToStdString();
-		Symbol* symbol = SymbolMgr::Instance()->FetchSymbol(filename);
-		symbol->RefreshThumbnail(filename);
-		bool success = m_library->AddSymbol(symbol);
+		Symbol* sym = SymbolMgr::Instance()->FetchSymbol(filename);
+		sym->RefreshThumbnail(filename);
+		bool success = m_library->AddSymbol(sym);
 		if (success) {
 			sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-			bool handled = OnDropSymbol(symbol, pos);
+			bool handled = OnDropSymbol(sym, pos);
 			if (handled) {
 				continue;
 			}
 
-			Sprite* sprite = SpriteFactory::Instance()->Create(symbol);
-			sprite->Translate(pos);
-			InsertSpriteSJ::Instance()->Insert(sprite);
-			sprite->RemoveReference();
+			Sprite* spr = SpriteFactory::Instance()->Create(sym);
+			spr->Translate(pos);
+			InsertSpriteSJ::Instance()->Insert(spr);
+			spr->RemoveReference();
 		}
-		symbol->RemoveReference();
+		sym->RemoveReference();
 	}
 }
 

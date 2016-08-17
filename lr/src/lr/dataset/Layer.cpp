@@ -36,13 +36,13 @@ Layer::Layer(int id, LibraryPanel* library, s2::CameraMode cam)
 
 void Layer::TraverseSprite(ee::Visitor<ee::Sprite>& visitor, bool order/* = true*/) const
 {
-	m_sprites.Traverse(visitor, order);
+	m_sprs.Traverse(visitor, order);
 	m_layer_mgr.TraverseSprite(visitor, ee::DT_ALL, order);
 }
 
 void Layer::TraverseSprite(ee::Visitor<ee::Sprite>& visitor, ee::DataTraverseType type, bool order) const
 {
-	m_sprites.Traverse(visitor, type, order);
+	m_sprs.Traverse(visitor, type, order);
 	m_layer_mgr.TraverseSprite(visitor, type, order);
 }
 
@@ -56,7 +56,7 @@ bool Layer::RemoveSprite(ee::Sprite* spr)
 			return true;
 		}
 	}
-	return m_sprites.Remove(spr);
+	return m_sprs.Remove(spr);
 }
 
 bool Layer::InsertSprite(ee::Sprite* spr, int idx)
@@ -68,7 +68,7 @@ bool Layer::InsertSprite(ee::Sprite* spr, int idx)
 	if (m_layer_mgr.selected) {
 		return m_layer_mgr.selected->Insert(spr);
 	} else {
-		return m_sprites.Insert(spr, idx);
+		return m_sprs.Insert(spr, idx);
 	}
 }
 
@@ -79,22 +79,22 @@ bool Layer::ClearSprite()
 
 	m_layer_mgr.Clear();
 
-	return m_sprites.Clear();
+	return m_sprs.Clear();
 }
 
 bool Layer::ResetOrderSprite(const ee::Sprite* spr, bool up)
 {
-	return m_sprites.ResetOrder(spr, up);
+	return m_sprs.ResetOrder(spr, up);
 }
 
 bool Layer::ResetOrderSpriteMost(const ee::Sprite* spr, bool up)
 {
-	return m_sprites.ResetOrderMost(spr, up);
+	return m_sprs.ResetOrderMost(spr, up);
 }
 
-bool Layer::SortSrites(std::vector<ee::Sprite*>& sprites)
+bool Layer::SortSrites(std::vector<ee::Sprite*>& sprs)
 {
-	return m_sprites.Sort(sprites);
+	return m_sprs.Sort(sprs);
 }
 
 void Layer::TraverseShape(ee::Visitor<ee::Shape>& visitor, bool order) const
@@ -138,10 +138,10 @@ bool Layer::IsEditable() const
 
 void Layer::ResetSpritesVisibleEditable()
 {
-	std::vector<ee::Sprite*> sprites;
-	m_sprites.Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites), ee::DT_ALL);
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		ee::Sprite* spr = sprites[i];
+	std::vector<ee::Sprite*> sprs;
+	m_sprs.Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs), ee::DT_ALL);
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		ee::Sprite* spr = sprs[i];
 		spr->SetVisible(true);
 		spr->SetEditable(true);
 	}
@@ -177,12 +177,12 @@ void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
 
 	m_layer_mgr.StoreToFile(val["layers"], dir);
 
-	std::vector<ee::Sprite*> sprites;
-	m_sprites.Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites), ee::DT_ALL);
+	std::vector<ee::Sprite*> sprs;
+	m_sprs.Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs), ee::DT_ALL);
 	int count = 0;
-	for (int i = 0, n = sprites.size(); i < n; ++i) 
+	for (int i = 0, n = sprs.size(); i < n; ++i) 
 	{
-		ee::Sprite* spr = sprites[i];
+		ee::Sprite* spr = sprs[i];
 		if (spr->GetUserData()) {
 			UserData* ud = static_cast<UserData*>(spr->GetUserData());
 			if (ud->type == UT_NEW_COMPLEX) {
@@ -217,10 +217,10 @@ bool Layer::Update(float dt)
 {
 	bool ret = false;
 
-	std::vector<ee::Sprite*> sprites;
-	TraverseSprite(ee::FetchAllVisitor<ee::Sprite>(sprites), true);
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		bool dirty = sprites[i]->Update(s2::RenderParams(), dt);
+	std::vector<ee::Sprite*> sprs;
+	TraverseSprite(ee::FetchAllVisitor<ee::Sprite>(sprs), true);
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		bool dirty = sprs[i]->Update(s2::RenderParams(), dt);
 		if (dirty) {
 			ret = true;
 		}
@@ -235,7 +235,7 @@ bool Layer::Update(float dt)
 ee::Sprite* Layer::QuerySprite(const std::string& name) const
 {
 	QueryNameVisitor<ee::Sprite> visitor(name);
-	m_sprites.Traverse(visitor, true);
+	m_sprs.Traverse(visitor, true);
 	return visitor.GetResult();
 }
 
@@ -259,7 +259,7 @@ void Layer::LoadSprites(const Json::Value& val, const std::string& dir,
 	while (!spr_val.isNull()) {
 		ee::Sprite* spr = LoadSprite(spr_val, dir, base_path);
 		spr->Camera().mode = m_cam_mode;
-		m_sprites.Insert(spr);
+		m_sprs.Insert(spr);
 		spr->RemoveReference();
 		spr_val = val[idx++];
 	}
@@ -371,18 +371,18 @@ void Layer::StoreShapesUD(ee::Sprite* spr, Json::Value& spr_val) const
 
 ee::Sprite* Layer::LoadGroup(const Json::Value& val, const std::string& dir, const std::string& base_path)
 {
-	std::vector<ee::Sprite*> sprites;
+	std::vector<ee::Sprite*> sprs;
 	int idx = 0;
 	Json::Value cval = val["group"][idx++];
 	while (!cval.isNull()) {
 		ee::Sprite* spr = LoadSprite(cval, dir, base_path);
-		sprites.push_back(spr);
+		sprs.push_back(spr);
 		cval = val["group"][idx++];
 	}
 
 	std::string name = val["group_name"].asString();
 
-	ecomplex::Sprite* spr = ecomplex::GroupHelper::Group(sprites);
+	ecomplex::Sprite* spr = ecomplex::GroupHelper::Group(sprs);
 	ecomplex::Symbol* sym = dynamic_cast<ecomplex::Symbol*>(spr->GetSymbol());
 	sym->SetFilepath(GROUP_TAG);
 	sym->name = name;
@@ -391,7 +391,7 @@ ee::Sprite* Layer::LoadGroup(const Json::Value& val, const std::string& dir, con
 
 	ee::SpriteFactory::Instance()->Insert(spr);
 	spr->Load(val);
-	for_each(sprites.begin(), sprites.end(), cu::RemoveRefFonctor<ee::Sprite>());
+	for_each(sprs.begin(), sprs.end(), cu::RemoveRefFonctor<ee::Sprite>());
 	return spr;
 }
 
@@ -426,47 +426,47 @@ ee::Sprite* Layer::LoadSprite(const Json::Value& val, const std::string& dir, co
 		std::string filepath = val["filepath"].asString();
 		throw ee::Exception("filepath err: %s", filepath.c_str());
 	}
-	ee::Symbol* symbol = NULL;
+	ee::Symbol* sym = NULL;
 
 	std::string shape_tag = ee::FileType::GetTag(ee::FileType::e_shape);
 	std::string shape_filepath = ee::FileHelper::GetFilenameAddTag(filepath, shape_tag, "json");
 	std::string spr_tag;
 	if (ee::FileHelper::IsFileExist(shape_filepath)) {
-		symbol = ee::SymbolMgr::Instance()->FetchSymbol(shape_filepath);
-		const std::vector<ee::Shape*>& shapes = static_cast<eshape::Symbol*>(symbol)->GetShapes();
+		sym = ee::SymbolMgr::Instance()->FetchSymbol(shape_filepath);
+		const std::vector<ee::Shape*>& shapes = static_cast<eshape::Symbol*>(sym)->GetShapes();
 		if (!shapes.empty()) {
 			spr_tag = shapes[0]->GetName();
 		}
 	} else {
-		symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	}
 
-	if (!symbol) {
+	if (!sym) {
 		throw ee::Exception("create symbol err: %s", filepath.c_str()); 
 	}
 
-	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-	sprite->Load(val);
+	ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+	spr->Load(val);
 
-	std::string tag = sprite->GetTag();
+	std::string tag = spr->GetTag();
 	if (!tag.empty() && tag[tag.size()-1] != ';') {
 		tag += ";";
 	}
 	tag += spr_tag;
-	sprite->SetTag(tag);
+	spr->SetTag(tag);
 
 	if (!base_path.empty()) {
 		BaseFileUD* ud = new BaseFileUD(base_path);
-		sprite->SetUserData(ud);
-		sprite->SetEditable(false);
+		spr->SetUserData(ud);
+		spr->SetEditable(false);
 	}
-	CheckSpriteName(sprite);
+	CheckSpriteName(spr);
 
-	LoadShapesUD(val, sprite);
+	LoadShapesUD(val, spr);
 
-	symbol->RemoveReference();
+	sym->RemoveReference();
 
-	return sprite;
+	return spr;
 }
 
 bool Layer::StoreSprite(ee::Sprite* spr, Json::Value& val, const std::string& dir) const

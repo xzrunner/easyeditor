@@ -16,18 +16,18 @@ Sprite::Sprite(Symbol* sym)
 	, s2::DummySprite(sym)
 	, ee::Sprite(sym)
 {
-//	rotate(-m_symbol->GetOceanAngle());
+//	rotate(-m_sym->GetOceanAngle());
 }
 
 void Sprite::Load(const Json::Value& val, const std::string& dir)
 {
 	ee::Sprite::Load(val);
-//	rotate(-m_symbol->GetOceanAngle());
+//	rotate(-m_sym->GetOceanAngle());
 }
 
-ee::Sprite* Sprite::Create(ee::Symbol* symbol) 
+ee::Sprite* Sprite::Create(ee::Symbol* sym) 
 {
-	return new Sprite(static_cast<Symbol*>(symbol));
+	return new Sprite(static_cast<Symbol*>(sym));
 }
 
 }

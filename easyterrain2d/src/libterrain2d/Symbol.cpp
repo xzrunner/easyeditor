@@ -56,7 +56,7 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 	m_time = curr;
 }
 
-sm::rect Symbol::GetBounding(const s2::Sprite* sprite) const
+sm::rect Symbol::GetBounding(const s2::Sprite* spr) const
 {
 	sm::rect ret;
 	for (int i = 0, n = m_oceans.size(); i < n; ++i) {

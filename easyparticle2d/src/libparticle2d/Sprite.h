@@ -46,7 +46,7 @@ public:
 	bool GetLocalModeDraw() const;
 	void SetLocalModeDraw(bool local);
 
-	static ee::Sprite* Create(ee::Symbol* symbol);
+	static ee::Sprite* Create(ee::Symbol* sym);
 
 private:
 	ParticleSystem* m_ps;

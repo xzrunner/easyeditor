@@ -13,16 +13,16 @@ class Sprite;
 class OffsetSpriteAOP : public AtomicOP
 {
 public:
-	OffsetSpriteAOP(Sprite* sprite, const sm::vec2& new_offset, 
+	OffsetSpriteAOP(Sprite* spr, const sm::vec2& new_offset, 
 		const sm::vec2& old_offset);
 
 	virtual void Undo();
 	virtual void Redo();
 
-	virtual Json::Value Store(const std::vector<Sprite*>& sprites) const;
+	virtual Json::Value Store(const std::vector<Sprite*>& sprs) const;
 
 private:
-	Sprite* m_sprite;
+	Sprite* m_spr;
 
 	sm::vec2 m_new_offset, m_old_offset;
 

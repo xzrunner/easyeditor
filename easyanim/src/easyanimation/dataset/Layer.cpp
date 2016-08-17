@@ -175,12 +175,12 @@ void Layer::InsertKeyFrame(int time)
 			     *next = GetNextKeyFrame(time);
 		if (prev->HasClassicTween() && next) {
 			float process = (float) (time - prev->GetTime()) / (next->GetTime() - prev->GetTime());
-			std::vector<ee::Sprite*> sprites;
-			KeyFrame::GetTweenSprite(prev, next, sprites, process);
-			for (int i = 0, n = sprites.size(); i < n; ++i) {
-				frame->Insert(sprites[i], INT_MAX);
+			std::vector<ee::Sprite*> sprs;
+			KeyFrame::GetTweenSprite(prev, next, sprs, process);
+			for (int i = 0, n = sprs.size(); i < n; ++i) {
+				frame->Insert(sprs[i], INT_MAX);
 			}
-			for_each(sprites.begin(), sprites.end(), cu::RemoveRefFonctor<ee::Sprite>());
+			for_each(sprs.begin(), sprs.end(), cu::RemoveRefFonctor<ee::Sprite>());
 			frame->SetClassicTween(true);
 		} else {
 			frame->CopyFromOther(prev);

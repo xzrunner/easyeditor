@@ -4,8 +4,8 @@
 namespace escale9
 {
 
-SpritePropertySetting::SpritePropertySetting(ee::EditPanelImpl* stage, Sprite* sprite)
-	: ee::SpritePropertySetting(stage, sprite)
+SpritePropertySetting::SpritePropertySetting(ee::EditPanelImpl* stage, Sprite* spr)
+	: ee::SpritePropertySetting(stage, spr)
 {
 	m_type = "Scale9Sprite";
 }

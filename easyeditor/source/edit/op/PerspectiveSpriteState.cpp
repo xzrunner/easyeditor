@@ -8,24 +8,24 @@
 namespace ee
 {
 
-PerspectiveSpriteState::PerspectiveSpriteState(Sprite* sprite, 
+PerspectiveSpriteState::PerspectiveSpriteState(Sprite* spr, 
 											   const SpriteCtrlNode::Node& ctrl_node)
 	: m_ctrl_node(ctrl_node)
 {
-	m_sprite = sprite;
-	m_sprite->AddReference();
+	m_spr = spr;
+	m_spr->AddReference();
 
-	m_first_persp = m_sprite->GetPerspective();
+	m_first_persp = m_spr->GetPerspective();
 }
 
 PerspectiveSpriteState::~PerspectiveSpriteState()
 {
-	m_sprite->RemoveReference();
+	m_spr->RemoveReference();
 }
 
 void PerspectiveSpriteState::OnMouseRelease(const sm::vec2& pos)
 {
-	AtomicOP* aop = new PerspectiveSpriteAOP(m_sprite, m_sprite->GetPerspective(), m_first_persp);
+	AtomicOP* aop = new PerspectiveSpriteAOP(m_spr, m_spr->GetPerspective(), m_first_persp);
 	EditAddRecordSJ::Instance()->Add(aop);
 }
 
@@ -37,10 +37,10 @@ bool PerspectiveSpriteState::OnMouseDrag(const sm::vec2& pos)
 
 void PerspectiveSpriteState::Perspective(const sm::vec2& curr)
 {
-	sm::rect r = m_sprite->GetSymbol()->GetBounding(m_sprite);
+	sm::rect r = m_spr->GetSymbol()->GetBounding(m_spr);
 	sm::mat4 t;
-	t.SetTransformation(m_sprite->GetPosition().x, m_sprite->GetPosition().y, m_sprite->GetAngle(),
-		m_sprite->GetScale().x, m_sprite->GetScale().y, 0, 0, m_sprite->GetShear().x, m_sprite->GetShear().y);
+	t.SetTransformation(m_spr->GetPosition().x, m_spr->GetPosition().y, m_spr->GetAngle(),
+		m_spr->GetScale().x, m_spr->GetScale().y, 0, 0, m_spr->GetShear().x, m_spr->GetShear().y);
 
 	sm::vec2 old = Math2D::TransVector(curr, t.Inverted());
 	sm::vec2 persp;
@@ -58,7 +58,7 @@ void PerspectiveSpriteState::Perspective(const sm::vec2& curr)
 		persp.y = old.y - r.ymax;
 	}
 
-	m_sprite->SetPerspective(persp);
+	m_spr->SetPerspective(persp);
 }
 
 }

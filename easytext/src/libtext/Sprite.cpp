@@ -211,9 +211,9 @@ void Sprite::SetSpace(float hori, float vert)
 	m_space_vert = vert;
 }
 
-ee::Sprite* Sprite::Create(ee::Symbol* symbol) 
+ee::Sprite* Sprite::Create(ee::Symbol* sym) 
 {
-	return new Sprite(static_cast<Symbol*>(symbol));
+	return new Sprite(static_cast<Symbol*>(sym));
 }
 
 }

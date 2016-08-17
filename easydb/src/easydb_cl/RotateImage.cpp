@@ -71,23 +71,23 @@ void RotateImage::Rotate(ee::Snapshoot& ss, const std::string& src_dir, const st
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 		if (ee::FileType::IsType(filepath, ee::FileType::e_image))
 		{
-			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-			ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-			sm::rect r = symbol->GetBounding();
+			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+			ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+			sm::rect r = sym->GetBounding();
 			for (int deg = 10; deg <= 90; deg += 10) {
 				float rad = deg * SM_DEG_TO_RAD;
-				sprite->SetAngle(rad);
+				spr->SetAngle(rad);
 				int width = ee::Math2D::RotateVector(sm::vec2(r.xmax, r.ymax), -rad).x * 2;
 				int height = ee::Math2D::RotateVector(sm::vec2(r.xmin, r.ymax), -rad).y * 2;
-				ss.DrawSprite(sprite, true, width, height);
+				ss.DrawSprite(spr, true, width, height);
 
 				std::string name = ee::FileHelper::GetFilename(filepath);
 				std::string outpath = ee::StringHelper::Format("%s\\%s_%d.png", dst_dir.c_str(), name.c_str(), deg);
 				ss.SaveToFile(outpath, width, height);
 			}
 
-			sprite->RemoveReference();
-			symbol->RemoveReference();
+			spr->RemoveReference();
+			sym->RemoveReference();
 		}
 	}
 }

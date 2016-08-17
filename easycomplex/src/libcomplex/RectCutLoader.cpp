@@ -30,20 +30,20 @@ void RectCutLoader::LoadOnlyJson(const std::string& pack_file, const std::string
 	for (int i = 0, n = pictures.size(); i < n; ++i)
 	{
 		const Picture& s = pictures[i];
-		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(s.filepath);
-		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
+		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(s.filepath);
+		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
 
 		sm::vec2 pos;
 		pos.x = s.src.x + s.src.w * 0.5f;
 		pos.y = s.src.y + s.src.h * 0.5f;
 		pos.x += 400;
 		pos.y += 400;
-		sprite->SetPosition(pos);
+		spr->SetPosition(pos);
 
-		ee::InsertSpriteSJ::Instance()->Insert(sprite);
+		ee::InsertSpriteSJ::Instance()->Insert(spr);
 
-		sprite->RemoveReference();
-		symbol->RemoveReference();
+		spr->RemoveReference();
+		sym->RemoveReference();
 	}
 }
 

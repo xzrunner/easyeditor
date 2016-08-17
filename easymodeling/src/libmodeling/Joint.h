@@ -52,9 +52,9 @@ protected:
 	void DrawBodyFlag() const;
 
 	static sm::vec2 TransWorldToLocal(const sm::vec2& world, 
-		const ee::Sprite* sprite);
+		const ee::Sprite* spr);
 	static sm::vec2 TransLocalToWorld(const sm::vec2& local, 
-		const ee::Sprite* sprite);
+		const ee::Sprite* spr);
 
 private:
 	void DrawBodyFlag(const sm::vec2& pos) const;

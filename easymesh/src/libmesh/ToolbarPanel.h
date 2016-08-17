@@ -13,7 +13,7 @@ class ToolbarPanel : public ee::ToolbarPanel
 {
 public:
 	ToolbarPanel(wxWindow* parent, StagePanel* stage, bool full,
-		Sprite* sprite);
+		Sprite* spr);
 
 protected:
 	virtual wxSizer* InitLayout();
@@ -21,7 +21,7 @@ protected:
 	void OnSetSpeed(wxCommandEvent& event);
 
 private:
-	Sprite* m_sprite;
+	Sprite* m_spr;
 
 	wxTextCtrl *m_ctrl_xspeed, *m_ctrl_yspeed;
 

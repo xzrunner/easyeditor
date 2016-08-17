@@ -20,7 +20,7 @@ class StagePanel : public ee::EditPanel, public ee::SpritesPanelImpl
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 		ee::PropertySettingPanel* property, LibraryPanel* library);
-	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, Symbol* symbol, 
+	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, Symbol* sym, 
 		ee::PropertySettingPanel* property, LibraryPanel* library, 
 		wxGLContext* glctx, ee::CrossGuides* guides = NULL);
 
@@ -29,8 +29,8 @@ public:
 	//
 	virtual bool Update(float dt);
 
-	const Symbol* GetSymbol() const { return m_symbol; }
-	Symbol* GetSymbol() { return m_symbol; }
+	const Symbol* GetSymbol() const { return m_sym; }
+	Symbol* GetSymbol() { return m_sym; }
 
 protected:
 	//
@@ -42,7 +42,7 @@ private:
 	void Clear();
 
 private:
-	Symbol* m_symbol;
+	Symbol* m_sym;
 
 	LibraryPanel* m_library;
 

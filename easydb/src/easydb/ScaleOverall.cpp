@@ -90,15 +90,15 @@ void ScaleOverall::Scale(ee::Snapshoot& ss, const std::string& dir, float scale)
 void ScaleOverall::ScaleImage(const std::string& filepath, float scale, ee::Snapshoot& ss,
 							  std::map<std::string, sm::vec2>& mapImg2Center) const
 {
-	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	
-	ee::ImageSymbol* img = static_cast<ee::ImageSymbol*>(symbol);
+	ee::ImageSymbol* img = static_cast<ee::ImageSymbol*>(sym);
 
 	sm::vec2 img_offset = img->GetSize().Center();
 	mapImg2Center.insert(std::make_pair(filepath, img_offset));
 
-	ss.OutputToImageFile(symbol, filepath, scale);
-	symbol->RemoveReference();
+	ss.OutputToImageFile(sym, filepath, scale);
+	sym->RemoveReference();
 }
 
 void ScaleOverall::ScaleComplex(const std::string& path, float scale,

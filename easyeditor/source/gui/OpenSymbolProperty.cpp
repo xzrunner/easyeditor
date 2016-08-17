@@ -59,9 +59,9 @@ bool OpenSymbolProperty::OnButtonClick( wxPropertyGrid* propGrid, wxString& valu
 	{
 		std::string sym_path = dlg.GetPath();
 		try {
-			Symbol* symbol = SymbolMgr::Instance()->FetchSymbol(sym_path);
-			m_lsn->OnOpenSymbol(symbol);
-			symbol->RemoveReference();
+			Symbol* sym = SymbolMgr::Instance()->FetchSymbol(sym_path);
+			m_lsn->OnOpenSymbol(sym);
+			sym->RemoveReference();
 		} catch (Exception& e) {
 			ExceptionDlg dlg(m_parent, e);
 			dlg.ShowModal();

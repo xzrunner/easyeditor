@@ -7,8 +7,8 @@
 namespace ecomplex
 {
 
-SymbolPropertySetting::SymbolPropertySetting(Symbol* symbol)
-	: ee::SymbolPropertySetting(symbol)
+SymbolPropertySetting::SymbolPropertySetting(Symbol* sym)
+	: ee::SymbolPropertySetting(sym)
 {
 	m_type = "ComplexSymbol";
 }
@@ -23,45 +23,45 @@ void SymbolPropertySetting::OnPropertyGridChange(const std::string& name, const 
 	bool dirty = true;
 	if (name == wxT("Groups"))
 	{
-		if (m_symbol) {
+		if (m_sym) {
 			SetGroupByNames(wxANY_AS(value, wxString).ToStdString());
 		}
 	}
-	else if (name == wxT("Clipbox") && m_symbol) 
+	else if (name == wxT("Clipbox") && m_sym) 
 	{
 		std::vector<std::string> str;
 		ee::StringHelper::Split(wxANY_AS(value, wxString).ToStdString(), ";", str);
 		if (str.size() == 4) {
-			Symbol* c = static_cast<Symbol*>(m_symbol);
+			Symbol* c = static_cast<Symbol*>(m_sym);
 			ee::StringHelper::FromString(str[0], c->m_clipbox.xmin);
 			ee::StringHelper::FromString(str[1], c->m_clipbox.xmax);
 			ee::StringHelper::FromString(str[2], c->m_clipbox.ymin);
 			ee::StringHelper::FromString(str[3], c->m_clipbox.ymax);
 		}
 	}
-	else if (name == wxT("Clipbox.xmin") && m_symbol)
+	else if (name == wxT("Clipbox.xmin") && m_sym)
 	{
-		Symbol* c = static_cast<Symbol*>(m_symbol);
+		Symbol* c = static_cast<Symbol*>(m_sym);
 		c->m_clipbox.xmin = wxANY_AS(value, int);
 	}
-	else if (name == wxT("Clipbox.xmax") && m_symbol)
+	else if (name == wxT("Clipbox.xmax") && m_sym)
 	{
-		Symbol* c = static_cast<Symbol*>(m_symbol);
+		Symbol* c = static_cast<Symbol*>(m_sym);
 		c->m_clipbox.xmax = wxANY_AS(value, int);
 	}
-	else if (name == wxT("Clipbox.ymin") && m_symbol)
+	else if (name == wxT("Clipbox.ymin") && m_sym)
 	{
-		Symbol* c = static_cast<Symbol*>(m_symbol);
+		Symbol* c = static_cast<Symbol*>(m_sym);
 		c->m_clipbox.ymin = wxANY_AS(value, int);
 	}
-	else if (name == wxT("Clipbox.ymax") && m_symbol)
+	else if (name == wxT("Clipbox.ymax") && m_sym)
 	{
-		Symbol* c = static_cast<Symbol*>(m_symbol);
+		Symbol* c = static_cast<Symbol*>(m_sym);
 		c->m_clipbox.ymax = wxANY_AS(value, int);
 	}
-	else if (name == wxT("Cache") && m_symbol)
+	else if (name == wxT("Cache") && m_sym)
 	{
-		Symbol* c = static_cast<Symbol*>(m_symbol);
+		Symbol* c = static_cast<Symbol*>(m_sym);
 		c->m_use_render_cache = wxANY_AS(value, bool);
 // 		if (ee::Config::Instance()->IsUseDTex()) {
 // 			ee::DynamicTexAndFont* dtex = ee::DynamicTexAndFont::Instance();
@@ -84,7 +84,7 @@ void SymbolPropertySetting::OnPropertyGridChange(const std::string& name, const 
 
 std::string SymbolPropertySetting::GetGroupNames() const
 {
-	Symbol* complex = static_cast<Symbol*>(m_symbol);
+	Symbol* complex = static_cast<Symbol*>(m_sym);
 	std::string ret;
 	for (int i = 0, n = complex->m_groups.size(); i < n; ++i)
 	{
@@ -113,7 +113,7 @@ void SymbolPropertySetting::SetGroupByNames(const std::string& names)
 		set_names.insert(name);
 
 	// 
-	Symbol* complex = static_cast<Symbol*>(m_symbol);
+	Symbol* complex = static_cast<Symbol*>(m_sym);
 	std::vector<Symbol::Group>& groups = complex->m_groups;
 	// rm symbol's groups
 	std::vector<Symbol::Group>::iterator itr 
@@ -149,15 +149,15 @@ void SymbolPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
 	ee::SymbolPropertySetting::UpdateProperties(pg);
 
-	if (m_symbol) {
+	if (m_sym) {
 		pg->GetProperty(wxT("Groups"))->SetValue(GetGroupNames());
 	} else {
 		pg->GetProperty(wxT("Groups"))->SetValue(wxEmptyString);
 	}
 
-	if (m_symbol)
+	if (m_sym)
 	{
-		Symbol* c = static_cast<Symbol*>(m_symbol);
+		Symbol* c = static_cast<Symbol*>(m_sym);
 		pg->SetPropertyValue(wxT("Clipbox.xmin"), (int)c->m_clipbox.xmin);
 		pg->SetPropertyValue(wxT("Clipbox.xmax"), (int)c->m_clipbox.xmax);
 		pg->SetPropertyValue(wxT("Clipbox.ymin"), (int)c->m_clipbox.ymin);
@@ -178,7 +178,7 @@ void SymbolPropertySetting::InitProperties(wxPropertyGrid* pg)
 {
 	ee::SymbolPropertySetting::InitProperties(pg);
 
-	if (m_symbol) {
+	if (m_sym) {
 		pg->Append(new wxStringProperty(wxT("Groups"), wxPG_LABEL, GetGroupNames()));
 	} else {
 		pg->Append(new wxStringProperty(wxT("Groups"), wxPG_LABEL, wxEmptyString));
@@ -196,9 +196,9 @@ void SymbolPropertySetting::InitProperties(wxPropertyGrid* pg)
 
 void SymbolPropertySetting::InitEachGroup(wxPropertyGrid* pg)
 {
-	if (!m_symbol) return;
+	if (!m_sym) return;
 
-	Symbol* complex = static_cast<Symbol*>(m_symbol);
+	Symbol* complex = static_cast<Symbol*>(m_sym);
 	std::vector<Symbol::Group>& groups = complex->m_groups;
 	for (int i = 0, n = groups.size(); i < n; ++i)
 	{

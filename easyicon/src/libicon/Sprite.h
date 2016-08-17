@@ -31,7 +31,7 @@ public:
 	void SetProcess(float process);
 	float GetProcess() const { return m_process; }
 
-	static ee::Sprite* Create(ee::Symbol* symbol);
+	static ee::Sprite* Create(ee::Symbol* sym);
 
 private:
 	float m_process;

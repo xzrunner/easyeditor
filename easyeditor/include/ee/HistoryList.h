@@ -30,16 +30,16 @@ public:
 
 	void OnSave();
 
-	void Store(Json::Value& value, const std::vector<Sprite*>& sprites);
-	void Load(const Json::Value& value, const std::vector<Sprite*>& sprites);
+	void Store(Json::Value& value, const std::vector<Sprite*>& sprs);
+	void Load(const Json::Value& value, const std::vector<Sprite*>& sprs);
 
 private:
 	void Clear(std::stack<AtomicOP*>& stack);
 
 	void Store(std::stack<AtomicOP*>& stack, Json::Value& val, 
-		const std::vector<Sprite*>& sprites);
+		const std::vector<Sprite*>& sprs);
 	void Load(std::stack<AtomicOP*>& stack, const Json::Value& val, 
-		const std::vector<Sprite*>& sprites);
+		const std::vector<Sprite*>& sprs);
 
 private:
 	std::stack<AtomicOP*> m_undo_stack, m_redo_stack;

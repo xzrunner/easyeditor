@@ -152,7 +152,7 @@ public:
 	void Store(uint8_t** ptr);
 
 public:
-	std::vector<Sprite*> sprites;
+	std::vector<Sprite*> sprs;
 
 }; // Frame
 

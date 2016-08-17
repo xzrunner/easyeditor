@@ -26,10 +26,10 @@ public:
 		m_region_size = size;
 	}
 
-	void DrawGrass(const ee::Symbol& symbol, const sm::vec2& pos, bool is_flat) const;
-	void DrawGrids(const ee::Symbol& symbol, const sm::vec2& pos, bool valid, bool is_flat) const;
-	void DrawArrow(const ee::Symbol& symbol, const sm::vec2& pos) const;
-	void DrawRegion(const ee::Symbol& symbol, const sm::vec2& pos);
+	void DrawGrass(const ee::Symbol& sym, const sm::vec2& pos, bool is_flat) const;
+	void DrawGrids(const ee::Symbol& sym, const sm::vec2& pos, bool valid, bool is_flat) const;
+	void DrawArrow(const ee::Symbol& sym, const sm::vec2& pos) const;
+	void DrawRegion(const ee::Symbol& sym, const sm::vec2& pos);
 
 public:
 	static SymbolRender* Instance();

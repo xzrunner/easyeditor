@@ -26,7 +26,7 @@ p3d_emitter_cfg* PSConfigMgr::GetDefaultConfig()
 		cfg = itr->second;
 	}
 	memset(cfg, 0, sz);
-	cfg->symbols = (p3d_symbol*)(cfg+1);
+	cfg->syms = (p3d_symbol*)(cfg+1);
 	return cfg;
 }
 

@@ -7,20 +7,20 @@
 namespace etexture
 {
 
-SymbolContainer::SymbolContainer(Symbol* symbol)
+SymbolContainer::SymbolContainer(Symbol* sym)
 {
-	m_symbol = symbol;
-	m_symbol->AddReference();
+	m_sym = sym;
+	m_sym->AddReference();
 }
 
 SymbolContainer::~SymbolContainer()
 {
-	m_symbol->RemoveReference();
+	m_sym->RemoveReference();
 }
 
 void SymbolContainer::Traverse(ee::Visitor<ee::Shape>& visitor, bool order/* = true*/) const
 {
-	ee::ObjectVector<ee::Shape>::Traverse(m_symbol->m_shapes, visitor, order);
+	ee::ObjectVector<ee::Shape>::Traverse(m_sym->m_shapes, visitor, order);
 }
 
 void SymbolContainer::Traverse(ee::Visitor<ee::Shape>& visitor, ee::DataTraverseType type, bool order) const
@@ -30,32 +30,32 @@ void SymbolContainer::Traverse(ee::Visitor<ee::Shape>& visitor, ee::DataTraverse
 
 bool SymbolContainer::Remove(ee::Shape* shape)
 {
-	return ee::ObjectVector<ee::Shape>::Remove(m_symbol->m_shapes, shape);
+	return ee::ObjectVector<ee::Shape>::Remove(m_sym->m_shapes, shape);
 }
 
 bool SymbolContainer::Insert(ee::Shape* shape)
 {
-	return ee::ObjectVector<ee::Shape>::Insert(m_symbol->m_shapes, shape);
+	return ee::ObjectVector<ee::Shape>::Insert(m_sym->m_shapes, shape);
 }
 
 bool SymbolContainer::Insert(ee::Shape* shape, int idx)
 {
-	return ee::ObjectVector<ee::Shape>::Insert(m_symbol->m_shapes, shape, idx);
+	return ee::ObjectVector<ee::Shape>::Insert(m_sym->m_shapes, shape, idx);
 }
 
 bool SymbolContainer::Clear()
 {
-	return ee::ObjectVector<ee::Shape>::Clear(m_symbol->m_shapes);
+	return ee::ObjectVector<ee::Shape>::Clear(m_sym->m_shapes);
 }
 
 bool SymbolContainer::ResetOrder(const ee::Shape* shape, bool up)
 {
-	return ee::ObjectVector<ee::Shape>::ResetOrder(m_symbol->m_shapes, shape, up);
+	return ee::ObjectVector<ee::Shape>::ResetOrder(m_sym->m_shapes, shape, up);
 }
 
 bool SymbolContainer::ResetOrderMost(const ee::Shape* shape, bool up)
 {
-	return ee::ObjectVector<ee::Shape>::ResetOrderMost(m_symbol->m_shapes, shape, up);
+	return ee::ObjectVector<ee::Shape>::ResetOrderMost(m_sym->m_shapes, shape, up);
 }
 
 }

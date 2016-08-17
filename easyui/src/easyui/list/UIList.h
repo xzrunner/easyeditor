@@ -18,7 +18,7 @@ class UIList
 public:
 	UIList();
 
-	bool InsertSprite(ee::Sprite* sprite, int idx = -1);
+	bool InsertSprite(ee::Sprite* spr, int idx = -1);
 	bool ClearAllSprite();
 	void TraverseSprites(ee::Visitor<ee::Sprite>& visitor) const;
 

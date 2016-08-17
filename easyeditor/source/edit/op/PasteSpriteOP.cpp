@@ -179,16 +179,16 @@ InsertToSpritesImpl(const sm::vec2& pos, bool isHorMirror, bool isVerMirror)
 {
 	for (size_t i = 0, n = m_selected.size(); i < n; ++i)
 	{
-		Sprite* sprite = m_selected[i];
-		sm::vec2 fixed = sprite->GetPosition() - m_center;
+		Sprite* spr = m_selected[i];
+		sm::vec2 fixed = spr->GetPosition() - m_center;
 		if (isHorMirror)
-			fixed.x += (m_center.x - sprite->GetPosition().x) * 2;
+			fixed.x += (m_center.x - spr->GetPosition().x) * 2;
 		if (isVerMirror)
-			fixed.y += (m_center.y - sprite->GetPosition().y) * 2;
+			fixed.y += (m_center.y - spr->GetPosition().y) * 2;
 
-//		sprites_impl->insertSprite(sprite->getSymbol(), fixed + pos);
+//		sprites_impl->insertSprite(spr->getSymbol(), fixed + pos);
 
-		Sprite* newOne = sprite->EEClone();
+		Sprite* newOne = spr->EEClone();
 		newOne->SetPosition(fixed + pos);
 		InsertSpriteSJ::Instance()->Insert(newOne);
 		newOne->RemoveReference();

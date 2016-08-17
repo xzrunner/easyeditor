@@ -11,17 +11,17 @@ namespace ee
 class ScaleSpriteAOP : public AtomicOP
 {
 public:
-	ScaleSpriteAOP(Sprite* sprite, const sm::vec2& new_scale, 
+	ScaleSpriteAOP(Sprite* spr, const sm::vec2& new_scale, 
 		const sm::vec2& old_scale);
 	virtual ~ScaleSpriteAOP();
 
 	virtual void Undo();
 	virtual void Redo();
 
-	virtual Json::Value Store(const std::vector<Sprite*>& sprites) const;
+	virtual Json::Value Store(const std::vector<Sprite*>& sprs) const;
 
 private:
-	std::vector<Sprite*> m_sprites;
+	std::vector<Sprite*> m_sprs;
 
 	sm::vec2 m_old_scale, m_new_scale;
 

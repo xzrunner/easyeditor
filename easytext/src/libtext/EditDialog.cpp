@@ -77,16 +77,16 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 // 	int val = dlg.ShowModal();
 // 	if (val == wxID_YES) 
 // 	{
-// 		m_symbol->InitBounding();
-// 		const std::string& filepath = m_symbol->GetFilepath();
-// 		FileStorer::Store(filepath.c_str(), m_symbol);
-// 		m_symbol->RefreshThumbnail(filepath, true);
-// 		ee::SpriteFactory::Instance()->UpdateBoundings(*m_symbol);
+// 		m_sym->InitBounding();
+// 		const std::string& filepath = m_sym->GetFilepath();
+// 		FileStorer::Store(filepath.c_str(), m_sym);
+// 		m_sym->RefreshThumbnail(filepath, true);
+// 		ee::SpriteFactory::Instance()->UpdateBoundings(*m_sym);
 // 		Destroy();
 // 	} 
 // 	else if (val == wxID_NO) 
 // 	{
-// 		m_symbol->LoadFromFile(m_symbol->GetFilepath());
+// 		m_sym->LoadFromFile(m_sym->GetFilepath());
 // 		Destroy();
 // 	}
 }

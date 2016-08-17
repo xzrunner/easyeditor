@@ -113,10 +113,10 @@ void Frame::OnSetBackground(wxCommandEvent& event)
 	if (dlg.ShowModal() == wxID_OK)
 	{
 		std::string filename = dlg.GetPath().ToStdString();
-		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filename);
+		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filename);
 		ee::StageCanvas* canvas = const_cast<ee::EditPanel*>(m_task->GetEditPanel())->GetCanvas();
-		static_cast<StageCanvas*>(canvas)->SetBackground(symbol);
-		symbol->RemoveReference();
+		static_cast<StageCanvas*>(canvas)->SetBackground(sym);
+		sym->RemoveReference();
 	}
 	else
 	{
@@ -151,19 +151,19 @@ void Frame::OnCodeLove2d(wxCommandEvent& event)
 
 void Frame::SaveAsPNG(const std::string& filepath) const
 {
-	std::vector<ee::Sprite*> sprites;
-	((StagePanel*)(m_task->GetEditPanel()))->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites), ee::DT_VISIBLE);
+	std::vector<ee::Sprite*> sprs;
+	((StagePanel*)(m_task->GetEditPanel()))->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs), ee::DT_VISIBLE);
 
 	sm::rect region;
- 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-		sprites[i]->GetBounding()->CombineTo(region);
+ 	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
+		sprs[i]->GetBounding()->CombineTo(region);
  	}
 
 	sm::vec2 sz = region.Size();
 	sm::vec2 c = region.Center();
 	ee::Snapshoot ss(sz.x, sz.y);
-	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-		ss.DrawSprite(sprites[i], false, c.x, c.y);
+	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
+		ss.DrawSprite(sprs[i], false, c.x, c.y);
 	}
 
 	ss.SaveToFile(filepath);

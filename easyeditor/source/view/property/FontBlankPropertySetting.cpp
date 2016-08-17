@@ -16,8 +16,8 @@ const wxChar* FontBlankPropertySetting::HORI_ALIGN_LABELS[] = {
 const wxChar* FontBlankPropertySetting::VERT_ALIGN_LABELS[] = { 
 	wxT("top"), wxT("bottom"), wxT("center"), wxT("auto"), NULL };
 
-FontBlankPropertySetting::FontBlankPropertySetting(EditPanelImpl* stage, FontBlankSprite* sprite)
-	: SpritePropertySetting(stage, sprite)
+FontBlankPropertySetting::FontBlankPropertySetting(EditPanelImpl* stage, FontBlankSprite* spr)
+	: SpritePropertySetting(stage, spr)
 {
 	m_type = "Font";
 }
@@ -26,46 +26,46 @@ void FontBlankPropertySetting::OnPropertyGridChange(const std::string& name, con
 {
 	SpritePropertySetting::OnPropertyGridChange(name, value);
 
-	FontBlankSprite* sprite = static_cast<FontBlankSprite*>(GetSprite());
+	FontBlankSprite* spr = static_cast<FontBlankSprite*>(GetSprite());
 	if (name == wxT("Font")) {
-		sprite->font = wxANY_AS(value, wxString);
+		spr->font = wxANY_AS(value, wxString);
 	} else if (name == wxT("Edge")) {
-		sprite->has_edge = wxANY_AS(value, bool);
-		if (sprite->has_edge) {
-			sprite->font = "E";
+		spr->has_edge = wxANY_AS(value, bool);
+		if (spr->has_edge) {
+			spr->font = "E";
 		} else {
-			sprite->font = "e";
+			spr->font = "e";
 		}
 	} else if (name == wxT("FontColor")) {
 		wxColour col = wxANY_AS(value, wxColour);
-		sprite->font_color.FromFloat(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, col.Alpha() / 255.0f);
+		spr->font_color.FromFloat(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, col.Alpha() / 255.0f);
 	} else if (name == wxT("Align.Hori")) {
-		sprite->align_hori = FontBlankSprite::HoriAlignType(wxANY_AS(value, int));
+		spr->align_hori = FontBlankSprite::HoriAlignType(wxANY_AS(value, int));
 	} else if (name == wxT("Align.Vert")) {
-		sprite->align_vert = FontBlankSprite::VertAlignType(wxANY_AS(value, int));
+		spr->align_vert = FontBlankSprite::VertAlignType(wxANY_AS(value, int));
 	} else if (name == wxT("FontSize")) {
-		sprite->size = wxANY_AS(value, float);
+		spr->size = wxANY_AS(value, float);
 	} else if (name == "LabelSize") {
 		double w, h;
 		SplitString2Double(value, &w, &h);
-		sprite->width = w;
-		sprite->height = h;
-		sprite->UpdateBounding();
+		spr->width = w;
+		spr->height = h;
+		spr->UpdateBounding();
 	} else if (name == wxT("LabelSize.Width")) {
-		sprite->width = wxANY_AS(value, float);
-		sprite->UpdateBounding();
+		spr->width = wxANY_AS(value, float);
+		spr->UpdateBounding();
 	} else if (name == wxT("LabelSize.Height")) {
-		sprite->height = wxANY_AS(value, float);
-		sprite->UpdateBounding();
+		spr->height = wxANY_AS(value, float);
+		spr->UpdateBounding();
 	} else if (name == wxT("Filename")) {
 		std::string str = wxANY_AS(value, wxString);
-		sprite->LoadFont(str);
+		spr->LoadFont(str);
 	} else if (name == wxT("TextContent")) {
-		sprite->SetTextContent(wxANY_AS(value, wxString).ToStdString());
+		spr->SetTextContent(wxANY_AS(value, wxString).ToStdString());
 		SetCanvasDirtySJ::Instance()->SetDirty();
 	} else if (name == wxT("TextID")) {
 		std::string tid = wxANY_AS(value, wxString);
-		sprite->SetTextID(tid);
+		spr->SetTextID(tid);
 	}
 }
 
@@ -73,22 +73,22 @@ void FontBlankPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
 	SpritePropertySetting::UpdateProperties(pg);
 
-	FontBlankSprite* sprite = static_cast<FontBlankSprite*>(GetSprite());
-	pg->GetProperty(wxT("Font"))->SetValue(sprite->font);
+	FontBlankSprite* spr = static_cast<FontBlankSprite*>(GetSprite());
+	pg->GetProperty(wxT("Font"))->SetValue(spr->font);
 
-	pg->GetProperty(wxT("Edge"))->SetValue(sprite->has_edge);
+	pg->GetProperty(wxT("Edge"))->SetValue(spr->has_edge);
 
-	wxColour col = wxColour(sprite->font_color.r, sprite->font_color.g, sprite->font_color.b, sprite->font_color.a);
+	wxColour col = wxColour(spr->font_color.r, spr->font_color.g, spr->font_color.b, spr->font_color.a);
 	pg->SetPropertyValueString(wxT("FontColor"), col.GetAsString());
 
-	pg->GetProperty(wxT("Align.Hori"))->SetValue(HORI_ALIGN_LABELS[sprite->align_hori]);
-	pg->GetProperty(wxT("Align.Vert"))->SetValue(VERT_ALIGN_LABELS[sprite->align_vert]);
-	pg->GetProperty(wxT("FontSize"))->SetValue(sprite->size);
-	pg->GetProperty(wxT("LabelSize.Width"))->SetValue(sprite->width);
-	pg->GetProperty(wxT("LabelSize.Height"))->SetValue(sprite->height);
-	pg->GetProperty(wxT("Filename"))->SetValue(sprite->filename);
-	pg->GetProperty(wxT("TextContent"))->SetValue(sprite->GetTextContext());
-	pg->GetProperty(wxT("TextID"))->SetValue(sprite->GetTextID());
+	pg->GetProperty(wxT("Align.Hori"))->SetValue(HORI_ALIGN_LABELS[spr->align_hori]);
+	pg->GetProperty(wxT("Align.Vert"))->SetValue(VERT_ALIGN_LABELS[spr->align_vert]);
+	pg->GetProperty(wxT("FontSize"))->SetValue(spr->size);
+	pg->GetProperty(wxT("LabelSize.Width"))->SetValue(spr->width);
+	pg->GetProperty(wxT("LabelSize.Height"))->SetValue(spr->height);
+	pg->GetProperty(wxT("Filename"))->SetValue(spr->filename);
+	pg->GetProperty(wxT("TextContent"))->SetValue(spr->GetTextContext());
+	pg->GetProperty(wxT("TextID"))->SetValue(spr->GetTextID());
 }
 
 void FontBlankPropertySetting::InitProperties(wxPropertyGrid* pg)

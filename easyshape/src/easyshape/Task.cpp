@@ -35,9 +35,9 @@ void Task::Load(const char* filepath)
 	} else if (type == ee::FileType::e_image 
 		|| type == ee::FileType::e_complex
 		|| type == ee::FileType::e_texture) {
-		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-		m_stage->SetSymbolBG(symbol);
-		symbol->RemoveReference();
+		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		m_stage->SetSymbolBG(sym);
+		sym->RemoveReference();
 	}
 }
 
@@ -57,7 +57,7 @@ bool Task::IsDirty() const
 	return true;
 }
 
-void Task::GetAllSprite(std::vector<const ee::Sprite*>& sprites) const
+void Task::GetAllSprite(std::vector<const ee::Sprite*>& sprs) const
 {
 
 }

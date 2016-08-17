@@ -35,7 +35,7 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 	mgr->DrawModel(m_model, mat);
 }
 
-sm::rect Symbol::GetBounding(const s2::Sprite* sprite) const
+sm::rect Symbol::GetBounding(const s2::Sprite* spr) const
 {
 	return sm::rect(100, 100);
 }

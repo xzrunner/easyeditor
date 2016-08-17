@@ -15,8 +15,8 @@ class Code
 public:
 	Code(ebuilder::CodeGenerator& gen);
 
-	void ResolveUI(const Symbol& symbol);
-	void ResolveText(const Symbol& symbol);
+	void ResolveUI(const Symbol& sym);
+	void ResolveText(const Symbol& sym);
 
 private:
 	ebuilder::CodeGenerator& m_gen;

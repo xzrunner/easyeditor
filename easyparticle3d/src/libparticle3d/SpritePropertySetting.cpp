@@ -8,8 +8,8 @@
 namespace eparticle3d
 {
 
-SpritePropertySetting::SpritePropertySetting(ee::EditPanelImpl* edit_impl, Sprite* sprite)
-	: ee::SpritePropertySetting(edit_impl, sprite)
+SpritePropertySetting::SpritePropertySetting(ee::EditPanelImpl* edit_impl, Sprite* spr)
+	: ee::SpritePropertySetting(edit_impl, spr)
 	, m_parent(edit_impl->GetEditPanel())
 {
 	m_type = "P3D";

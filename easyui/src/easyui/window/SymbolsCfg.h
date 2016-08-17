@@ -30,16 +30,16 @@ private:
 private:
 	void InitLibrarySymbols(const Json::Value& value);
 	void InitLibrarySymbols(const Json::Value& value, const std::string& name, const std::string& filter = "");
-	void InitLibrarySymbols(const Json::Value& value, std::vector<Symbol*>& symbols);
+	void InitLibrarySymbols(const Json::Value& value, std::vector<Symbol*>& syms);
 
-	void ResetLibraryList(LibraryPage* library, const std::vector<Symbol*>& symbols);
+	void ResetLibraryList(LibraryPage* library, const std::vector<Symbol*>& syms);
 
 private:
 	StagePanel* m_stage;
 
 	ee::LibraryPanel* m_library;
 
-	std::vector<Symbol*> m_symbols;
+	std::vector<Symbol*> m_syms;
 
 }; // SymbolsCfg
 

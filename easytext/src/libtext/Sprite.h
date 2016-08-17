@@ -80,7 +80,7 @@ public:
 	int GetTime() const { return m_time; }
 	void UpdateTime() const { ++m_time; }
 
-	static ee::Sprite* Create(ee::Symbol* symbol);
+	static ee::Sprite* Create(ee::Symbol* sym);
 
 private:
 	int m_width;

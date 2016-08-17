@@ -40,21 +40,21 @@ bool PasteSymbolOP::OnDraw() const
 
 	bool ret;
 
-	ee::Symbol* symbol = m_library->GetSymbol();
+	ee::Symbol* sym = m_library->GetSymbol();
 
 	SymbolRender* render = SymbolRender::Instance();
 	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
 	bool is_flat = stage->GetPerspective();
 
-	render->DrawGrass(*symbol, m_pos, is_flat);
+	render->DrawGrass(*sym, m_pos, is_flat);
 
-	bool valid = stage->GetCheckBoard().IsValid(*symbol, m_pos);
-	render->DrawGrids(*symbol, m_pos, valid, is_flat);
+	bool valid = stage->GetCheckBoard().IsValid(*sym, m_pos);
+	render->DrawGrids(*sym, m_pos, valid, is_flat);
 
 	ret = ee::PasteSymbolOP::OnDraw();
 
 	if (!is_flat) {
-		render->DrawArrow(*symbol, m_pos);
+		render->DrawArrow(*sym, m_pos);
 	}
 
 	return ret;
@@ -62,12 +62,12 @@ bool PasteSymbolOP::OnDraw() const
 
 bool PasteSymbolOP::isCurrSymbolValid() const
 {
-// 	ee::Symbol* symbol = m_library->getSymbol();
-// 	if (!symbol) {
+// 	ee::Symbol* sym = m_library->getSymbol();
+// 	if (!sym) {
 // 		return false;
 // 	}
 // 
-// 	SymbolExt* info = static_cast<SymbolExt*>(symbol->GetUserData());
+// 	SymbolExt* info = static_cast<SymbolExt*>(sym->GetUserData());
 // 	if (info == NULL) {
 // 		return false;
 // 	}
@@ -81,8 +81,8 @@ bool PasteSymbolOP::isCurrSymbolValid() const
 
 bool PasteSymbolOP::isCurrSymbolIsWall() const
 {
-	ee::Symbol* symbol = m_library->GetSymbol();
-	return IsSymbolWall(*symbol);
+	ee::Symbol* sym = m_library->GetSymbol();
+	return IsSymbolWall(*sym);
 }
 
 }

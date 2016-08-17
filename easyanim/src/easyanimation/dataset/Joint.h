@@ -13,8 +13,8 @@ namespace eanim
 class Joint
 {
 public:
-	Joint(ee::Sprite* sprite);
-	Joint(ee::Sprite* sprite, const sm::vec2& pos);
+	Joint(ee::Sprite* spr);
+	Joint(ee::Sprite* spr, const sm::vec2& pos);
 	~Joint();
 
 	void Draw() const;
@@ -38,7 +38,7 @@ private:
 private:
 	int m_id;
 
-	ee::Sprite* m_sprite;
+	ee::Sprite* m_spr;
 
 	sm::vec2 m_relative_pos;
 	float m_relative_angle;

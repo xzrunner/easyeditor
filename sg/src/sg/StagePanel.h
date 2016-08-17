@@ -65,7 +65,7 @@ protected:
 private:
 	sm::vec2 FixSpriteLocation(const sm::vec2& pos) const;
 
-	void ChangeSymbolRemain(ee::Sprite* sprite, bool increase) const;
+	void ChangeSymbolRemain(ee::Sprite* spr, bool increase) const;
 
 	void Insert(ee::Sprite* spr);
 	void Remove(ee::Sprite* spr);

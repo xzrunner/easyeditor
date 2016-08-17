@@ -73,9 +73,9 @@ void KeysContentEdit::CopySelection()
 		Json::Value k_val;
 		k_val["distance"] = itr->first - last_frame;
 
-		const std::vector<ee::Sprite*>& sprites = itr->second->GetAllSprites();
-		for (int i = 0, n = sprites.size(); i < n; ++i) {
-			ee::Sprite* spr = sprites[i];
+		const std::vector<ee::Sprite*>& sprs = itr->second->GetAllSprites();
+		for (int i = 0, n = sprs.size(); i < n; ++i) {
+			ee::Sprite* spr = sprs[i];
 			Json::Value s_val;
 			s_val["filename"] = spr->GetSymbol()->GetFilepath();
 			spr->Store(s_val);	
@@ -149,13 +149,13 @@ void KeysContentEdit::PasteSelection()
 			const Json::Value& s_val = k_val["sprite"][i_spr];
 			
 			std::string filepath = s_val["filename"].asString();
-			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-			symbol->RefreshThumbnail(filepath);
-			ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(symbol);
+			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+			sym->RefreshThumbnail(filepath);
+			ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
 			spr->Load(s_val);
 			frame->Insert(spr, INT_MAX);
 			spr->RemoveReference();
-			symbol->RemoveReference();
+			sym->RemoveReference();
 		}
 
 		layer->InsertKeyFrame(frame);

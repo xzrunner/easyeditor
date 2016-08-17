@@ -20,7 +20,7 @@ public:
 	virtual	bool OnMouseMove(const sm::vec2& pos);
 
 private:
-	std::vector<Sprite*> m_sprites;
+	std::vector<Sprite*> m_sprs;
 
 	sm::vec2 m_center;
 	std::vector<sm::vec2> m_offset;

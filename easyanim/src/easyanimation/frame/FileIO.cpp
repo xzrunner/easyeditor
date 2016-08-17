@@ -186,16 +186,16 @@ void FileIO::StoreAsGif(const std::string& src, const std::string& dst)
 	}
 
 	ee::Snapshoot ss;
-	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(src);
-	eanim::Symbol* anim = static_cast<eanim::Symbol*>(symbol);
+	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(src);
+	eanim::Symbol* anim = static_cast<eanim::Symbol*>(sym);
 
 	int max_frame = anim->getMaxFrameIndex();
-	sm::vec2 sz = symbol->GetBounding().Size();
+	sm::vec2 sz = sym->GetBounding().Size();
 	AnimatedGifSaver saver(sz.x, sz.y);
 	for (int i = 0; i < max_frame; ++i)
 	{
 		anim->setFrameIndex(i + 1);
-		uint8_t* rgba = ss.OutputToMemory(symbol, true);
+		uint8_t* rgba = ss.OutputToMemory(sym, true);
 
 		uint8_t* rgb = eimage::RGBA2RGB(rgba, sz.x, sz.y, true);
 		saver.AddFrame(rgb, 1.0f / anim->getFPS());
@@ -205,7 +205,7 @@ void FileIO::StoreAsGif(const std::string& src, const std::string& dst)
 	anim->setFrameIndex(0);
 	saver.Save(dst.c_str());
 
-	symbol->RemoveReference();
+	sym->RemoveReference();
 }
 
 void FileIO::StoreAsPng(const std::string& src, const std::string& dst)
@@ -215,9 +215,9 @@ void FileIO::StoreAsPng(const std::string& src, const std::string& dst)
 	}
 
 	ee::Snapshoot ss;
-	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(src);
-	ss.OutputToImageFile(symbol, dst);
-	symbol->RemoveReference();
+	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(src);
+	ss.OutputToImageFile(sym, dst);
+	sym->RemoveReference();
 }
 
 Layer* FileIO::LoadLayer(const Json::Value& layerValue, const std::string& dir)
@@ -300,17 +300,17 @@ ee::Sprite* FileIO::LoadActor(const Json::Value& actorValue, const std::string& 
 		break;
 	}
 
-	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-	ee::SymbolSearcher::SetSymbolFilepaths(dir, symbol, actorValue);
-//	symbol->refresh();
-	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-	sprite->Load(actorValue, dir);
-	symbol->RemoveReference();
+	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+	ee::SymbolSearcher::SetSymbolFilepaths(dir, sym, actorValue);
+//	sym->refresh();
+	ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+	spr->Load(actorValue, dir);
+	sym->RemoveReference();
 
-	return sprite;
+	return spr;
 }
 
-void FileIO::LoadSkeleton(const Json::Value& skeletonValue, const std::vector<ee::Sprite*>& sprites,
+void FileIO::LoadSkeleton(const Json::Value& skeletonValue, const std::vector<ee::Sprite*>& sprs,
 						  SkeletonData& skeleton)
 {
 	// prepare joints
@@ -320,21 +320,21 @@ void FileIO::LoadSkeleton(const Json::Value& skeletonValue, const std::vector<ee
 	Json::Value jointsVal = skeletonValue[i++];
 	while (!jointsVal.isNull()) {
 		std::string spriteName = jointsVal["sprite"].asString();
-		ee::Sprite* sprite = NULL;
-		for (int i = 0, n = sprites.size(); i < n; ++i)
+		ee::Sprite* spr = NULL;
+		for (int i = 0, n = sprs.size(); i < n; ++i)
 		{
-			if (sprites[i]->GetName() == spriteName) 
+			if (sprs[i]->GetName() == spriteName) 
 			{
-				sprite = sprites[i];
+				spr = sprs[i];
 				break;
 			}
 		}
-		assert(sprite);
+		assert(spr);
 		
 		int j = 0;
 		Json::Value jointVal = jointsVal["joints"][j++];
 		while (!jointVal.isNull()) {
-			Joint* joint = new Joint(sprite);			
+			Joint* joint = new Joint(spr);			
 			joint->m_id = jointVal["id"].asInt();
 			joint->m_relative_pos.x = jointVal["rx"].asDouble();
 			joint->m_relative_pos.y = jointVal["ry"].asDouble();
@@ -350,16 +350,16 @@ void FileIO::LoadSkeleton(const Json::Value& skeletonValue, const std::vector<ee
 	jointsVal = skeletonValue[i++];
 	while (!jointsVal.isNull()) {
 		std::string spriteName = jointsVal["sprite"].asString();
-		ee::Sprite* sprite = NULL;
-		for (int i = 0, n = sprites.size(); i < n; ++i)
+		ee::Sprite* spr = NULL;
+		for (int i = 0, n = sprs.size(); i < n; ++i)
 		{
-			if (sprites[i]->GetName() == spriteName) 
+			if (sprs[i]->GetName() == spriteName) 
 			{
-				sprite = sprites[i];
+				spr = sprs[i];
 				break;
 			}
 		}
-		assert(sprite);
+		assert(spr);
 
 		std::vector<Joint*> joints;
 
@@ -388,7 +388,7 @@ void FileIO::LoadSkeleton(const Json::Value& skeletonValue, const std::vector<ee
 			joints.push_back(joint);
 			jointVal = jointsVal["joints"][j++];
 		}
-		skeleton.m_map_joints.insert(std::make_pair(sprite, joints));
+		skeleton.m_map_joints.insert(std::make_pair(spr, joints));
 		jointsVal = skeletonValue[i++];
 	}
 }
@@ -437,10 +437,10 @@ ee::Sprite* FileIO::LoadActor(rapidxml::xml_node<>* actorNode,
 {
 	std::string name = actorNode->first_attribute("libraryItemName")->value();
 	std::string filepath = mapNamePath.find(name)->second;
-	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-//	symbol->refresh();
-	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
-	symbol->RemoveReference();
+	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+//	sym->refresh();
+	ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+	sym->RemoveReference();
 
 	rapidxml::xml_node<>* matrixNode = actorNode->first_node("matrix")->first_node("Matrix");
 	std::string stx = matrixNode->first_attribute("tx")->value();
@@ -456,9 +456,9 @@ ee::Sprite* FileIO::LoadActor(rapidxml::xml_node<>* actorNode,
 	ee::StringHelper::FromString(sx, x);
 	ee::StringHelper::FromString(sy, y);
 
-	sprite->SetPosition(sm::vec2(float(tx+x), float(ty+y)));
+	spr->SetPosition(sm::vec2(float(tx+x), float(ty+y)));
 
-	return sprite;
+	return spr;
 }
 
 Json::Value FileIO::StoreLayer(Layer* layer, const std::string& dir, 
@@ -499,12 +499,12 @@ Json::Value FileIO::StoreFrame(KeyFrame* frame, const std::string& dir,
 	return value;
 }
 
-Json::Value FileIO::StoreActor(const ee::Sprite* sprite, const std::string& dir,
+Json::Value FileIO::StoreActor(const ee::Sprite* spr, const std::string& dir,
 							   bool single)
 {
 	Json::Value value;
 
-	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(sprite->GetSymbol());
+	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());
 	// filepath
 	std::string relative_path = ee::FileHelper::GetRelativePath(dir, 
 		sym->GetFilepath());
@@ -525,7 +525,7 @@ Json::Value FileIO::StoreActor(const ee::Sprite* sprite, const std::string& dir,
 		value["filepaths"][i] = *itr;
 	}
 	// other
-	sprite->Store(value, dir);
+	spr->Store(value, dir);
 
 	return value;
 }

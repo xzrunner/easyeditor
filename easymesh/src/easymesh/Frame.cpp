@@ -38,9 +38,9 @@ void Frame::OnSaveAs(wxCommandEvent& event)
 			if (ext == "png")
 			{
 				ee::Snapshoot ss;
-				ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(m_curr_filename);
-				ss.OutputToImageFile(symbol, filename);
-				symbol->RemoveReference();
+				ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(m_curr_filename);
+				ss.OutputToImageFile(sym, filename);
+				sym->RemoveReference();
 			}
 			else
 			{
@@ -64,12 +64,12 @@ void Frame::OnSetBackground(wxCommandEvent& event)
 	{
 		std::string filename = dlg.GetPath().ToStdString();
 
-		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filename);
-		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
+		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filename);
+		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
 		StagePanel* stage = static_cast<Task*>(m_task)->getStagePanel();
-		stage->SetBackground(sprite);
-		sprite->RemoveReference();
-		symbol->RemoveReference();
+		stage->SetBackground(spr);
+		spr->RemoveReference();
+		sym->RemoveReference();
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }

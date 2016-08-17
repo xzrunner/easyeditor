@@ -12,46 +12,46 @@ namespace ee
 
 #define SET_SPRITE_COLOR_AOP_DEF(name, var) \
 	\
-	SetSprite##name##ColorAOP::SetSprite##name##ColorAOP(Sprite* sprite, const s2::Color& color) \
+	SetSprite##name##ColorAOP::SetSprite##name##ColorAOP(Sprite* spr, const s2::Color& color) \
 		: m_new_color(color) \
 	{ \
-		sprite->AddReference(); \
-		m_sprites.push_back(sprite); \
-		m_old_color.push_back(sprite->Color().##var##); \
+		spr->AddReference(); \
+		m_sprs.push_back(spr); \
+		m_old_color.push_back(spr->Color().##var##); \
 	} \
 	\
-	SetSprite##name##ColorAOP::SetSprite##name##ColorAOP(const std::vector<Sprite*>& sprites, const s2::Color& color) \
+	SetSprite##name##ColorAOP::SetSprite##name##ColorAOP(const std::vector<Sprite*>& sprs, const s2::Color& color) \
 		: m_new_color(color) \
 	{ \
-		for_each(sprites.begin(), sprites.end(), cu::AddRefFonctor<Sprite>()); \
-		m_sprites = sprites; \
+		for_each(sprs.begin(), sprs.end(), cu::AddRefFonctor<Sprite>()); \
+		m_sprs = sprs; \
 	\
-		for (int i = 0, n = sprites.size(); i < n; ++i) { \
-			m_old_color.push_back(m_sprites[i]->Color().##var##); \
+		for (int i = 0, n = sprs.size(); i < n; ++i) { \
+			m_old_color.push_back(m_sprs[i]->Color().##var##); \
 		} \
 	} \
 	\
 	SetSprite##name##ColorAOP::~SetSprite##name##ColorAOP() \
 	{ \
-		for_each(m_sprites.begin(), m_sprites.end(), cu::RemoveRefFonctor<Sprite>()); \
+		for_each(m_sprs.begin(), m_sprs.end(), cu::RemoveRefFonctor<Sprite>()); \
 	} \
 	\
 	void SetSprite##name##ColorAOP::Undo() \
 	{ \
-		assert(m_sprites.size() == m_old_color.size()); \
-		for (int i = 0, n = m_sprites.size(); i < n; ++i) { \
-			m_sprites[i]->Color().##var## = m_old_color[i]; \
+		assert(m_sprs.size() == m_old_color.size()); \
+		for (int i = 0, n = m_sprs.size(); i < n; ++i) { \
+			m_sprs[i]->Color().##var## = m_old_color[i]; \
 		} \
 	} \
 	\
 	void SetSprite##name##ColorAOP::Redo() \
 	{ \
-		for (int i = 0, n = m_sprites.size(); i < n; ++i) { \
-			m_sprites[i]->Color().##var## = m_new_color; \
+		for (int i = 0, n = m_sprs.size(); i < n; ++i) { \
+			m_sprs[i]->Color().##var## = m_new_color; \
 		} \
 	} \
 	\
-	Json::Value SetSprite##name##ColorAOP::Store(const std::vector<Sprite*>& sprites) const \
+	Json::Value SetSprite##name##ColorAOP::Store(const std::vector<Sprite*>& sprs) const \
 	{ \
 		Json::Value ret; \
 		return ret; \

@@ -56,7 +56,7 @@ ResPacker::ResPacker(const std::string& json_dir, const std::string& tp_name,
 
 ResPacker::~ResPacker()
 {
-	for_each(m_symbols.begin(), m_symbols.end(), cu::RemoveRefFonctor<const ee::Symbol>());
+	for_each(m_syms.begin(), m_syms.end(), cu::RemoveRefFonctor<const ee::Symbol>());
 	PackNodeFactory::Instance()->Release();
 }
 
@@ -207,8 +207,8 @@ void ResPacker::LoadJsonData(const std::string& dir)
 
 	std::sort(filepaths.begin(), filepaths.end());
 	for (int i = 0, n = filepaths.size(); i < n; ++i) {
-		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepaths[i]);
-		m_symbols.push_back(symbol);
+		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepaths[i]);
+		m_syms.push_back(sym);
 	}
 }
 
@@ -230,16 +230,16 @@ void ResPacker::LoadTPData(const std::string& tp_name)
 void ResPacker::Pack() const
 {
 	PackNodeFactory* factory = PackNodeFactory::Instance();
-	for (int i = 0, n = m_symbols.size(); i < n; ++i) 
+	for (int i = 0, n = m_syms.size(); i < n; ++i) 
 	{
-		const ee::Symbol* symbol = m_symbols[i];
-		if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(symbol)) {
+		const ee::Symbol* sym = m_syms[i];
+		if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(sym)) {
 			factory->Create(complex);
-		} else if (const eanim::Symbol* anim = dynamic_cast<const eanim::Symbol*>(symbol)) {
+		} else if (const eanim::Symbol* anim = dynamic_cast<const eanim::Symbol*>(sym)) {
 			factory->Create(anim);
-		} else if (const eparticle3d::Symbol* p3d = dynamic_cast<const eparticle3d::Symbol*>(symbol)) {
+		} else if (const eparticle3d::Symbol* p3d = dynamic_cast<const eparticle3d::Symbol*>(sym)) {
 			factory->Create(p3d);
-		} else if (const etrail::Symbol* trail = dynamic_cast<const etrail::Symbol*>(symbol)) {
+		} else if (const etrail::Symbol* trail = dynamic_cast<const etrail::Symbol*>(sym)) {
 			factory->Create(trail);
 		} else {
 			throw ee::Exception("ResPacker::Pack unhandled type.");
@@ -257,20 +257,20 @@ void ResPacker::AddUIWndSymbol(const std::string& filepath)
 	reader.parse(fin, val);
 	fin.close();
 
-	std::vector<ee::Sprite*> sprites;
-	eui::window::FileIO::FetchSprites(filepath, sprites);
+	std::vector<ee::Sprite*> sprs;
+	eui::window::FileIO::FetchSprites(filepath, sprs);
 
 	ecomplex::Symbol* sym = new ecomplex::Symbol();	
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		sym->Add(sprites[i]);
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		sym->Add(sprs[i]);
 	}
-	for_each(sprites.begin(), sprites.end(), cu::RemoveRefFonctor<ee::Sprite>());
+	for_each(sprs.begin(), sprs.end(), cu::RemoveRefFonctor<ee::Sprite>());
 
 	std::string wrapper_path = PackUIWindowTask::GetWrapperFilepath(filepath);
 	sym->SetFilepath(wrapper_path);
 	sym->name = val["name"].asString();
 
-	m_symbols.push_back(sym);
+	m_syms.push_back(sym);
 }
 
 }

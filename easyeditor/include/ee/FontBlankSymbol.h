@@ -21,7 +21,7 @@ public:
 	 *    s2::Symbol
 	 */
 	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
-	virtual sm::rect GetSize(const Sprite* sprite = NULL) const;
+	virtual sm::rect GetSize(const Sprite* spr = NULL) const;
 
 	bool LoadFont(const std::string& filename);
 

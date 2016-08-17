@@ -70,11 +70,11 @@ void StagePanel::LoadFromFile(const char* filename)
 	FileIO::Load(filename, m_sym);
 	m_toolbar->SetWindowName(m_sym->name);
 
-	std::vector<ee::Sprite*> sprites;
-	m_sym->GetAnchorMgr().Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
+	std::vector<ee::Sprite*> sprs;
+	m_sym->GetAnchorMgr().Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
 	const std::vector<Sprite*>& ref_sprites = m_sym->GetExtRefs();
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		m_top_pannels->viewlist->Insert(sprites[i]);
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		m_top_pannels->viewlist->Insert(sprs[i]);
 	}
 	for (int i = 0, n = ref_sprites.size(); i < n; ++i) {
 		m_top_pannels->viewlist->Insert(ref_sprites[i]);
@@ -107,14 +107,14 @@ void StagePanel::OnPreview()
 	int width, height;
 	QueryWindowViewSizeSJ::Instance()->Query(width, height);
 
-	std::vector<const ee::Sprite*> sprites;
-	TraverseSprites(ee::FetchAllVisitor<const ee::Sprite>(sprites));
+	std::vector<const ee::Sprite*> sprs;
+	TraverseSprites(ee::FetchAllVisitor<const ee::Sprite>(sprs));
 
 	EnableObserve(false);
 	GetCanvas()->EnableObserve(false);
 	GetStageImpl()->EnableObserve(false);
 
-	PreviewDialog dlg(const_cast<StagePanel*>(this), GetCanvas()->GetGLContext(), width, height, sprites);
+	PreviewDialog dlg(const_cast<StagePanel*>(this), GetCanvas()->GetGLContext(), width, height, sprs);
 	dlg.ShowModal();
 
 	EnableObserve(true);
@@ -125,8 +125,8 @@ void StagePanel::OnPreview()
 void StagePanel::OnCode() const
 {
 	ebuilder::CodeDialog dlg(const_cast<StagePanel*>(this));
-	std::vector<ee::Sprite*> sprites;
-	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
+	std::vector<ee::Sprite*> sprs;
+	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
 
 	// ui
 	{
@@ -134,7 +134,7 @@ void StagePanel::OnCode() const
 
 		ebuilder::CodeGenerator gen;
 		Code code(gen);
-		code.ResolveUI(sprites);
+		code.ResolveUI(sprs);
 		page->SetReadOnly(false);
 		page->SetText(gen.toText());
 		page->SetReadOnly(true);
@@ -147,7 +147,7 @@ void StagePanel::OnCode() const
 
 		ebuilder::CodeGenerator gen;
 		Code code(gen);
-		code.ResolveText(sprites);
+		code.ResolveText(sprs);
 		page->SetReadOnly(false);
 		page->SetText(gen.toText());
 		page->SetReadOnly(true);

@@ -21,9 +21,9 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	m_list->SetFileter(FILE_TAG);
 }
 
-bool LibraryPage::IsHandleSymbol(ee::Symbol* symbol) const
+bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
 {
-	return dynamic_cast<Symbol*>(symbol) != NULL;
+	return dynamic_cast<Symbol*>(sym) != NULL;
 }
 
 bool LibraryPage::LoadFromConfig()
@@ -64,10 +64,10 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 
 void LibraryPage::loadFromJsonFile(const std::string& filename)
 {
-	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filename);
-	symbol->RefreshThumbnail(filename);
-	m_list->Insert(symbol);
-	symbol->RemoveReference();
+	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filename);
+	sym->RefreshThumbnail(filename);
+	m_list->Insert(sym);
+	sym->RemoveReference();
 }
 
 void LibraryPage::loadFromLuaFile(const std::string& filename)
@@ -80,11 +80,11 @@ void LibraryPage::loadFromLuaFile(const std::string& filename)
 // 	parser.parser(filename);
 // 	parser.transToMemory(texfilenames);
 // 
-// 	std::vector<ee::Symbol*> symbols;
-// 	parser.getAllSymbols(symbols);
-// 	for (int i = 0, n = symbols.size(); i < n; ++i)
-// 		if (IsHandleSymbol(symbols[i]))
-// 			m_list->Insert(symbols[i]);
+// 	std::vector<ee::Symbol*> syms;
+// 	parser.getAllSymbols(syms);
+// 	for (int i = 0, n = syms.size(); i < n; ++i)
+// 		if (IsHandleSymbol(syms[i]))
+// 			m_list->Insert(syms[i]);
 }
 
 }

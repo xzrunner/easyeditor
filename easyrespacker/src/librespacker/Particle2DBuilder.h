@@ -22,10 +22,10 @@ public:
 
 	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
 
-	const IPackNode* Create(const eparticle2d::Symbol* symbol);
+	const IPackNode* Create(const eparticle2d::Symbol* sym);
 
 private:
-	void Load(const eparticle2d::Symbol* symbol, PackParticle2D* ps);
+	void Load(const eparticle2d::Symbol* sym, PackParticle2D* ps);
 
 private:
 	ExportNameSet& m_export_set;

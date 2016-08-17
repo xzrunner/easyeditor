@@ -74,14 +74,14 @@ public:
 	class GetSpritesVisitor : public IGroupTreeVisitor
 	{
 	public:
-		GetSpritesVisitor(wxTreeCtrl* treectrl, std::vector<Sprite*>& sprites);
+		GetSpritesVisitor(wxTreeCtrl* treectrl, std::vector<Sprite*>& sprs);
 
 		virtual bool VisitLeaf(wxTreeItemId id);
 
 	private:
 		wxTreeCtrl* m_treectrl;
 
-		std::vector<Sprite*>& m_sprites;
+		std::vector<Sprite*>& m_sprs;
 
 	}; // GetSpritesVisitor
 
