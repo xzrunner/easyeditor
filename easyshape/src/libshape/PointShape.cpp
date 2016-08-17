@@ -3,6 +3,14 @@
 namespace eshape
 {
 
+PointShape::PointShape(const sm::vec2& pos) 
+	: s2::Shape()
+	, ee::Shape()
+	, s2::PointShape(pos) 
+{
+	int zz = 0;
+}
+
 void PointShape::LoadFromFile(const Json::Value& value, const std::string& dir)
 {
 	ee::Shape::LoadFromFile(value, dir);

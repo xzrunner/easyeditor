@@ -24,7 +24,7 @@ public:
 
 	virtual bool IsDirty() const { return false; }
 
-	virtual void GetAllSprite(std::vector<const ee::Sprite*>& sprs) const {}
+	virtual void GetAllSprite(std::vector<ee::Sprite*>& sprs) const {}
 
 	virtual const ee::EditPanel* GetEditPanel() const;
 

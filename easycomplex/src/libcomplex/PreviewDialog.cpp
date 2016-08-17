@@ -23,7 +23,7 @@ public:
 }; // InitVisitor
 
 PreviewDialog::PreviewDialog(wxWindow* parent, wxGLContext* glctx,
-							 const std::vector<const ee::Sprite*>& sprs)
+							 const std::vector<ee::Sprite*>& sprs)
 	: wxDialog(parent, wxID_ANY, "Preview", wxDefaultPosition, wxSize(800, 600), wxCLOSE_BOX | wxCAPTION)
 	, m_sprs(sprs)
 	, m_control(0.033f)
@@ -36,7 +36,7 @@ PreviewDialog::PreviewDialog(wxWindow* parent, wxGLContext* glctx,
 	InitVisitor init;
 	bool next;
 	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
-		ee::Sprite* spr = const_cast<ee::Sprite*>(m_sprs[i]);
+		ee::Sprite* spr = m_sprs[i];
 		init.Visit(spr, next);
 		dynamic_cast<ee::Symbol*>(spr->GetSymbol())->Traverse(init);
 	}

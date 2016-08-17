@@ -157,13 +157,14 @@ void FileIO::StoreRefs(Json::Value& val, const Symbol* sym, const std::string& d
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
 		Sprite* spr = sprs[i];
 
+		std::string filepath = dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath();
+
 		Json::Value spr_val;
-		spr_val["filepath"] = ee::FileHelper::GetRelativePath(dir,
-			spr->GetSymbol()->GetFilepath());
+		spr_val["filepath"] = ee::FileHelper::GetRelativePath(dir, filepath);
 		spr->Store(spr_val);
 		val["ref_spr"][i] = spr_val;
 
-		FileIO::Store(spr->GetSymbol()->GetFilepath().c_str(), spr->GetSymbol());
+		FileIO::Store(filepath.c_str(), dynamic_cast<const Symbol*>(spr->GetSymbol()));
 	}
 }
 
@@ -177,7 +178,7 @@ void FileIO::LoadRefs(const Json::Value& val, Symbol* sym, const std::string& di
 
 		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
 		spr->Load(spr_val);
-		sym->InsertExtRef(static_cast<Sprite*>(spr));
+		dynamic_cast<Symbol*>(sym)->InsertExtRef(static_cast<Sprite*>(spr));
 		spr->RemoveReference();
 		sym->RemoveReference();
 

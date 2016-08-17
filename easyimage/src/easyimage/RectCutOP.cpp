@@ -253,7 +253,7 @@ bool RectCutOP::Clear()
 std::string RectCutOP::GetImageFilepath() const
 {
 	if (const ee::Sprite* s = m_stage->GetImage()) {
-		return s->GetSymbol()->GetFilepath();
+		return dynamic_cast<const ee::Symbol*>(s->GetSymbol())->GetFilepath();
 	} else {
 		return "";
 	}

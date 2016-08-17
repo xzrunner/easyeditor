@@ -52,7 +52,7 @@ void AddFrameSprite::Trigger(const std::string& dir, const std::string& sprite_p
 		std::string json_file = filename;
 
 		ee::DummySymbol sym("");
-		ee::DummySprite sprite(&sym);
+		ee::DummySprite spr(&sym);
 		Json::Value actor_val;
 		spr.Store(actor_val);
 		std::string dir = ee::FileHelper::GetFileDir(json_file);

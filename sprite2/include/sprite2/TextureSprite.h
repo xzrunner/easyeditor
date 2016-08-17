@@ -9,7 +9,7 @@ namespace s2
 class TextureSprite : public VIRTUAL_INHERITANCE Sprite
 {
 public:
-	TextureSprite();
+	TextureSprite() {}
 	TextureSprite(Symbol* sym) : Sprite(sym) {}
 
 	/**

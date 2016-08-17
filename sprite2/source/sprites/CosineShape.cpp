@@ -19,12 +19,6 @@ CosineShape::CosineShape(const CosineShape& cosine)
 	UpdatePolyline();
 }
 
-CosineShape::CosineShape(const std::vector<sm::vec2>& vertices)
-	: PolylineShape(vertices)
-{
-	UpdatePolyline();
-}
-
 CosineShape* CosineShape::Clone() const
 {
 	return new CosineShape(*this);

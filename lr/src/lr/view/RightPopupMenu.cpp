@@ -61,7 +61,7 @@ void RightPopupMenu::CreateShapeMenu(wxMenu& menu)
 
 void RightPopupMenu::CreateAnimMenu(wxMenu& menu)
 {
-	std::string filepath = m_spr->GetSymbol()->GetFilepath();
+	std::string filepath = dynamic_cast<const ee::Symbol*>(m_spr->GetSymbol())->GetFilepath();
 	if (!CharacterFileName::IsValidFilepath(filepath)) {
 		return;
 	}
@@ -145,7 +145,7 @@ void RightPopupMenu::HandleShapeMenu(int id)
 	std::vector<ee::Sprite*> selected;
 	m_stage->GetSpriteSelection()->Traverse(ee::FetchAllVisitor<ee::Sprite>(selected));
 	if (!selected.empty()) {
-		std::string cmd = "easyshape_new.exe " + selected[0]->GetSymbol()->GetFilepath();
+		std::string cmd = "easyshape_new.exe " + dynamic_cast<const ee::Symbol*>(selected[0]->GetSymbol())->GetFilepath();
 		WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);		
 	}
 }
@@ -154,7 +154,7 @@ void RightPopupMenu::HandleAnimMenu(int id)
 {
 	if (id == MENU_ROTATE_LEFT_ID || id == MENU_ROTATE_RIGHT_ID)
 	{
-		std::string filepath = m_spr->GetSymbol()->GetFilepath();
+		std::string filepath = dynamic_cast<const ee::Symbol*>(m_spr->GetSymbol())->GetFilepath();
 		assert(CharacterFileName::IsValidFilepath(filepath));
 		CharacterFileName name(filepath);
 		int dir = 1 + (name.GetField(CharacterFileName::FT_DIRECTION)[0] - '1');
@@ -173,9 +173,9 @@ void RightPopupMenu::HandleAnimMenu(int id)
 
 
 		if (dir >= 1 && dir <= 5) {
-			m_spr->SetMirror(false, false);
+			m_spr->SetMirror(sm::bvec2(false, false));
 		} else {
-			m_spr->SetMirror(true, false);
+			m_spr->SetMirror(sm::bvec2(true, false));
 		}
 	}
 	else if (id - MENU_COLOR_START_ID < m_anim_files.size())

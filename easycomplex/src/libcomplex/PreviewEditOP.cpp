@@ -10,7 +10,7 @@ namespace ecomplex
 {
 
 PreviewEditOP::PreviewEditOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
-							 const std::vector<const ee::Sprite*>& sprs)
+							 const std::vector<ee::Sprite*>& sprs)
 	: ee::ZoomViewOP(wnd, stage, true)
 	, m_sprs(sprs)
 {

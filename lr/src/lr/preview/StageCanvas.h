@@ -14,7 +14,7 @@ class StageCanvas : public ee::CameraCanvas
 {
 public:
 	StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, ee::PlayControl& control,
-		const std::vector<const ee::Sprite*>& sprs, wxGLContext* glctx);
+		const std::vector<ee::Sprite*>& sprs, wxGLContext* glctx);
 
 protected:
 	virtual void OnDrawSprites() const;
@@ -24,7 +24,7 @@ protected:
 private:
 	ee::PlayControl& m_control;
 
-	std::vector<const ee::Sprite*> m_sprs;
+	std::vector<ee::Sprite*> m_sprs;
 
 }; // StageCanvas
 

@@ -5,6 +5,7 @@
 #include <easyimage.h>
 
 #include <ee/ImageSprite.h>
+#include <ee/ImageSymbol.h>
 #include <ee/JsonSerializer.h>
 #include <ee/Image.h>
 #include <ee/FileHelper.h>
@@ -88,10 +89,9 @@ void AutoTriCutCMPT::OutputOutline(wxCommandEvent& event)
 	Trigger();
 
 	const ee::Sprite* spr = m_stage->GetImage();
-	const ee::ImageSprite* img_sprite 
-		= dynamic_cast<const ee::ImageSprite*>(spr);
-	assert(img_sprite);
-	const ee::Image* img = img_sprite->GetSymbol()->GetImage();
+	const ee::ImageSymbol* sym = dynamic_cast<const ee::ImageSymbol*>(spr->GetSymbol());
+	assert(sym);
+	const ee::Image* img = sym->GetImage();
 
 	Json::Value value;
 	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editop);
@@ -119,10 +119,9 @@ void AutoTriCutCMPT::CreateOutline(wxCommandEvent& event)
 	static int max_step = 5;
 
 	const ee::Sprite* spr = m_stage->GetImage();
-	const ee::ImageSprite* img_sprite 
-		= dynamic_cast<const ee::ImageSprite*>(spr);
-	assert(img_sprite);
-	const ee::Image* img = img_sprite->GetSymbol()->GetImage();
+	const ee::ImageSymbol* sym = dynamic_cast<const ee::ImageSymbol*>(spr->GetSymbol());
+	assert(sym);
+	const ee::Image* img = sym->GetImage();
 
 	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editop);
 	m_raw = new ExtractOutlineRaw(*img);
@@ -155,10 +154,9 @@ void AutoTriCutCMPT::Trigger()
 	static int max_step = 5;
 #endif
 	const ee::Sprite* spr = m_stage->GetImage();
-	const ee::ImageSprite* img_sprite 
-		= dynamic_cast<const ee::ImageSprite*>(spr);
-	assert(img_sprite);
-	const ee::Image* img = img_sprite->GetSymbol()->GetImage();
+	const ee::ImageSymbol* sym = dynamic_cast<const ee::ImageSymbol*>(spr->GetSymbol());
+	assert(sym);
+	const ee::Image* img = sym->GetImage();
 
 	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editop);
 	ExtractOutlineRaw raw(*img);
@@ -181,10 +179,9 @@ void AutoTriCutCMPT::Trigger()
 void AutoTriCutCMPT::OnDebug(wxCommandEvent& event)
 {
 	const ee::Sprite* spr = m_stage->GetImage();
-	const ee::ImageSprite* img_sprite 
-		= dynamic_cast<const ee::ImageSprite*>(spr);
-	assert(img_sprite);
-	const ee::Image* img = img_sprite->GetSymbol()->GetImage();
+	const ee::ImageSymbol* sym = dynamic_cast<const ee::ImageSymbol*>(spr->GetSymbol());
+	assert(sym);
+	const ee::Image* img = sym->GetImage();
 
 	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editop);
 	ExtractOutlineRaw raw(*img);

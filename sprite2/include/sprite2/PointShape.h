@@ -11,7 +11,11 @@ class PointShape : public VIRTUAL_INHERITANCE Shape
 public:
 	PointShape() {}
 	PointShape(const PointShape& point);
-	PointShape(const sm::vec2& pos);
+	PointShape(const sm::vec2& pos) 
+		: m_pos(pos) 
+	{
+		UpdateBounding();
+	}
 
 	/**
 	 *  @interface

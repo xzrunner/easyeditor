@@ -4,10 +4,6 @@
 namespace s2
 {
 
-ComplexSprite::ComplexSprite()
-{
-}
-
 ComplexSprite* ComplexSprite::Clone() const
 {
 	return new ComplexSprite(*this);

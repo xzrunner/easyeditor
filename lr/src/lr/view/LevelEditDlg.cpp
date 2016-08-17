@@ -37,7 +37,7 @@ std::string LevelEditDlg::ToString()
 void LevelEditDlg::InitData(ee::Sprite* spr)
 {
 	if (spr->GetTag().find("[symbol]") != std::string::npos) {
-		m_info.LoadFromString(spr->GetSymbol()->tag, "symbol");
+		m_info.LoadFromString(dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->tag, "symbol");
 	}
 	m_info.LoadFromString(spr->GetTag(), "sprite");
 

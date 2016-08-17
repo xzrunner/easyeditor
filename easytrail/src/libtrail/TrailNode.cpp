@@ -61,7 +61,7 @@ render_symbol_func(void* sym, float x, float y, float angle, float scale, uint8_
 	assert(ud);
 	const RenderParams* rp = (static_cast<const RenderParams*>(ud));
 
-	ee::Symbol* sym = static_cast<ee::Symbol*>(sym);
+	ee::Symbol* ee_sym = static_cast<ee::Symbol*>(sym);
 
 	s2::RenderParams params;
 
@@ -70,7 +70,7 @@ render_symbol_func(void* sym, float x, float y, float angle, float scale, uint8_
 	params.color.mul = params.color.mul * rp->ct.mul;
 	params.color.add = params.color.add + rp->ct.add;
 
-	ee::SpriteRenderer::Draw(sym, params, sm::vec2(x, y), angle - SM_PI * 0.5f, scale, scale);
+	ee::SpriteRenderer::Draw(ee_sym, params, sm::vec2(x, y), angle - SM_PI * 0.5f, scale, scale);
 }
 
 static void 

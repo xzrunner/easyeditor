@@ -4,6 +4,7 @@
 
 #include <ee/FileHelper.h>
 #include <ee/ImageSprite.h>
+#include <ee/ImageSymbol.h>
 #include <ee/Image.h>
 #include <ee/StringHelper.h>
 #include <ee/panel_msg.h>
@@ -262,12 +263,12 @@ void RectCutCMPT::OnOutputData(wxCommandEvent& event)
 		return;
 	}
 
-	const ee::ImageSprite* img_spr = dynamic_cast<const ee::ImageSprite*>(spr);
-	if (!img_spr) {
+	const ee::ImageSymbol* sym = dynamic_cast<const ee::ImageSymbol*>(spr->GetSymbol());
+	if (!sym) {
 		return;
 	}
 
-	ee::Image* image = img_spr->GetSymbol()->GetImage();
+	ee::Image* image = sym->GetImage();
 
 	std::string img_dir = m_imagePath->GetValue();
 	std::string json_dir = m_jsonPath->GetValue();
@@ -340,10 +341,9 @@ void RectCutCMPT::OnAddRect(wxCommandEvent& event)
 void RectCutCMPT::OnAutoCreateRects(wxCommandEvent& event)
 {
 	const ee::Sprite* spr = m_stage->GetImage();
-	const ee::ImageSprite* img_sprite 
-		= dynamic_cast<const ee::ImageSprite*>(spr);
-	assert(img_sprite);
-	const ee::Image* img = img_sprite->GetSymbol()->GetImage();
+	const ee::ImageSymbol* sym = dynamic_cast<const ee::ImageSymbol*>(spr->GetSymbol());
+	assert(sym);
+	const ee::Image* img = sym->GetImage();
 
 	RectMgr& rects = static_cast<RectCutOP*>(m_editop)->GetRectMgr();
 

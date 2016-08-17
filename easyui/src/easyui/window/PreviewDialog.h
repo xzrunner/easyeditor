@@ -20,13 +20,13 @@ class PreviewDialog : public wxDialog
 {
 public:
 	PreviewDialog(wxWindow* parent, wxGLContext* glctx, int width, 
-		int height, const std::vector<const ee::Sprite*>& sprs);
+		int height, const std::vector<ee::Sprite*>& sprs);
 
 private:
 	void InitLayout(wxGLContext* glctx);
 
 private:
-	std::vector<const ee::Sprite*> m_sprs;
+	std::vector<ee::Sprite*> m_sprs;
 
 	ee::PlayControl m_control;
 

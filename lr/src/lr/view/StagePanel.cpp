@@ -377,7 +377,7 @@ void StagePanel::SortSprites(std::vector<ee::Sprite*>& sprs)
 void StagePanel::InsertSprite(ee::Sprite* spr, int idx)
 {
 	// tag
-	std::string tag = TagCfg::Instance()->Query(spr->GetSymbol());
+	std::string tag = TagCfg::Instance()->Query(dynamic_cast<ee::Symbol*>(spr->GetSymbol()));
 	if (spr->GetTag().find(tag) == std::string::npos) {
 		spr->SetTag(tag + spr->GetTag());
 	}
@@ -394,7 +394,7 @@ void StagePanel::InsertSprite(ee::Sprite* spr, int idx)
 		m_pathfinding->DisableRegion(spr, false);
 	}
 
-	std::string filepath = spr->GetSymbol()->GetFilepath();
+	std::string filepath = dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath();
 	if (CharacterFileName::IsValidFilepath(filepath)) {
 		CharacterFileName name(filepath);
 		m_chara_dirs.BuildSymbolDirections(name);

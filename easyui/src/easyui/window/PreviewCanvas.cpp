@@ -12,7 +12,7 @@ namespace window
 {
 
 PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, ee::PlayControl& control,
-							 const std::vector<const ee::Sprite*>& sprs, wxGLContext* glctx)
+							 const std::vector<ee::Sprite*>& sprs, wxGLContext* glctx)
 	: ee::CameraCanvas(stage_wnd, stage, glctx)
 	, m_control(control)
 	, m_sprs(sprs)

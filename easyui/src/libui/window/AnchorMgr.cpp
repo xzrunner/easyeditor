@@ -57,7 +57,7 @@ void AnchorMgr::StoreToFile(Json::Value& value, const std::string& dir) const
 			ee::Sprite* spr = m_anchors[i].sprs[j];
 
 			std::string filepath = ee::FileHelper::GetRelativePath(dir,
-				spr->GetSymbol()->GetFilepath());
+				dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath());
 
 			Json::Value spr_val_anchor;
 			spr_val_anchor["name"] = spr->GetName();
@@ -70,7 +70,7 @@ void AnchorMgr::StoreToFile(Json::Value& value, const std::string& dir) const
 	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
 		ee::Sprite* spr = m_sprs[i];
 		std::string filepath = ee::FileHelper::GetRelativePath(dir,
-			spr->GetSymbol()->GetFilepath());
+			dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath());
 
 		Json::Value spr_val;
 		spr_val["filepath"] = filepath;

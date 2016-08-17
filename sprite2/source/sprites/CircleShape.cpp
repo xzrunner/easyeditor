@@ -15,13 +15,6 @@ CircleShape::CircleShape(const CircleShape& circle)
 	UpdateBounding();
 }
 
-CircleShape::CircleShape(const sm::vec2& center, float radius)
-	: m_center(center)
-	, m_radius(radius)
-{
-	UpdateBounding();
-}
-
 bool CircleShape::IsContain(const sm::vec2& pos) const
 {
 	return sm::dis_pos_to_pos(m_center, pos) < SHAPE_NODE_RADIUS;

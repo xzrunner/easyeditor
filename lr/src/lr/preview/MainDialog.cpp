@@ -17,7 +17,7 @@ namespace preview
 {
 
 MainDialog::MainDialog(wxWindow* parent, wxGLContext* glctx, int width, 
-					   int height, const std::vector<const ee::Sprite*>& sprs)
+					   int height, const std::vector<ee::Sprite*>& sprs)
 	: wxDialog(parent, wxID_ANY, "Preview", wxDefaultPosition, wxSize(width, height), wxCLOSE_BOX | wxCAPTION)
 	, m_sprs(sprs)
 	, m_control(0.033f)

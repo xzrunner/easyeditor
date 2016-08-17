@@ -107,8 +107,8 @@ void StagePanel::OnPreview()
 	int width, height;
 	QueryWindowViewSizeSJ::Instance()->Query(width, height);
 
-	std::vector<const ee::Sprite*> sprs;
-	TraverseSprites(ee::FetchAllVisitor<const ee::Sprite>(sprs));
+	std::vector<ee::Sprite*> sprs;
+	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
 
 	EnableObserve(false);
 	GetCanvas()->EnableObserve(false);
@@ -203,7 +203,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 				m_sym->InsertExtRef(spr_ui);
 			} else {
 				std::string type = "";
-				SymbolCfg::Instance()->QueryType(spr->GetSymbol(), type);
+				SymbolCfg::Instance()->QueryType(dynamic_cast<const ee::Symbol*>(spr->GetSymbol()), type);
 				if (type.empty() && spr->GetTag().find("type=unknown") == std::string::npos) {
 					spr->SetTag("type=unknown;" + spr->GetTag());
 				}

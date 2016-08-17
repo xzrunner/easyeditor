@@ -14,12 +14,6 @@ PointShape::PointShape(const PointShape& point)
 	UpdateBounding();
 }
 
-PointShape::PointShape(const sm::vec2& pos)
-	: m_pos(pos)
-{
-	UpdateBounding();
-}
-
 PointShape* PointShape::Clone() const
 {
 	return new PointShape(*this);

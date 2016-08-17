@@ -26,6 +26,7 @@
 #include <easytext.h>
 
 #include <sprite2/S2_RVG.h>
+#include <sprite2/BoundingBox.h>
 
 #include <algorithm>
 
@@ -107,7 +108,7 @@ void StageCanvas::DrawSprite(ee::Sprite* spr, bool draw_edge) const
 	if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) {
 		sm::rect screen_region = m_screen.GetRegion();
 		if (screen_region.IsValid() &&
-			!ee::Math2D::IsRectIntersectRect(spr->GetBounding(), screen_region)) {
+			!ee::Math2D::IsRectIntersectRect(spr->GetBounding()->GetSize(), screen_region)) {
 			return;
 		}
 	}

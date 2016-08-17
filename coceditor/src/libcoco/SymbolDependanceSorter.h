@@ -17,7 +17,7 @@ class SymbolDependanceSorter
 public:
 
 	void prepare(const std::vector<const ee::Symbol*>& syms);
-	void prepare(const std::vector<const ee::Sprite*>& sprs);
+	void prepare(const std::vector<ee::Sprite*>& sprs);
 
 // 	const std::vector<const ee::Symbol*>& GetSymbolOrdered() const {
 // 		return m_symbol_set.GetOrdered();

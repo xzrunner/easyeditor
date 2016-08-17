@@ -9,7 +9,7 @@ namespace s2
 class ComplexSprite : public VIRTUAL_INHERITANCE Sprite
 {
 public:
-	ComplexSprite();
+	ComplexSprite() {}
 	ComplexSprite(Symbol* sym) : Sprite(sym) {}
 
 	/**

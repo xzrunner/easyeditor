@@ -77,8 +77,8 @@ void BodyManager::Update()
 
 IBody* BodyManager::CreateBody(Sprite* spr)
 {
-	std::string filepath = FileHelper::GetFilenameAddTag(
-		spr->GetSymbol()->GetFilepath(), "shape", "json");
+	std::string filepath = dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath();
+	filepath = FileHelper::GetFilenameAddTag(filepath, "shape", "json");
 	if (FileHelper::IsFileExist(filepath)) {
 		IBody* body = BodyFactory::createBody(filepath, spr->GetScale().x);
 		sm::vec2 pos = spr->GetPosition() / BOX2D_SCALE_FACTOR;

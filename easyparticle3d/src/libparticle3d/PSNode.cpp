@@ -92,7 +92,7 @@ render_func(void* sym, float* mat, float x, float y, float angle, float scale,
 	const RenderParams* rp = (static_cast<const RenderParams*>(ud));
 	assert(rp->p3d);
 
-	ee::Symbol* sym = static_cast<ee::Symbol*>(sym);
+	ee::Symbol* ee_sym = static_cast<ee::Symbol*>(sym);
 
 	s2::RenderParams params;
 
@@ -124,7 +124,7 @@ render_func(void* sym, float* mat, float x, float y, float angle, float scale,
 		params.mt = _mat * rp->mat;
 	}
 
-	ee::SpriteRenderer::Draw(sym, params, sm::vec2(x, y), angle, scale, scale, 0, 0);
+	ee::SpriteRenderer::Draw(ee_sym, params, sm::vec2(x, y), angle, scale, scale, 0, 0);
 
 	// todo bind
 	// 	if (p->bind_ps) {

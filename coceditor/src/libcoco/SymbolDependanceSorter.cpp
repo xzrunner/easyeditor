@@ -24,7 +24,7 @@ void SymbolDependanceSorter::prepare(const std::vector<const ee::Symbol*>& syms)
 	sort();
 }
 
-void SymbolDependanceSorter::prepare(const std::vector<const ee::Sprite*>& sprs)
+void SymbolDependanceSorter::prepare(const std::vector<ee::Sprite*>& sprs)
 {
 	std::vector<const ee::Symbol*> syms;
 	syms.reserve(sprs.size());

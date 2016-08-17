@@ -13,8 +13,7 @@ namespace ecoco
 namespace epe
 {
 
-void PackLuaFile::pack(const std::vector<const ee::Sprite*>& sprs, 
-	const std::string& outfloder)
+void PackLuaFile::pack(const std::vector<ee::Sprite*>& sprs, const std::string& outfloder)
 {
 	// root symbol
 	ecomplex::Symbol root;

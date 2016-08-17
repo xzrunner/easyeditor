@@ -27,8 +27,8 @@ struct Node
 	std::string path;
 	std::string name;
 
-	Node(const ee::Sprite* s, const std::string& p) 
-		: sprite(s), path(p) {}
+	Node(const ee::Sprite* spr, const std::string& p) 
+		: spr(spr), path(path) {}
 
 }; // Node
 

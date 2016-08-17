@@ -57,14 +57,14 @@ render_func(void* sym, float* mat, float x, float y, float angle, float scale,
 		mt.x[13] = mat[5];		
 	}
 
-	ee::Symbol* sym = static_cast<ee::Symbol*>(sym);
+	ee::Symbol* ee_sym = static_cast<ee::Symbol*>(sym);
 
 	s2::RenderParams params;
 	params.mt = mt;
 	memcpy(&params.color.mul, mul_col, sizeof(*mul_col));
 	memcpy(&params.color.add, add_col, sizeof(*add_col));
 
-	ee::SpriteRenderer::Draw(sym, params, sm::vec2(x, y), angle, scale, scale, 0, 0);
+	ee::SpriteRenderer::Draw(ee_sym, params, sm::vec2(x, y), angle, scale, scale, 0, 0);
 }
 
 void PSNode::Init()

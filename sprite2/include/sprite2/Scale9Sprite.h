@@ -11,7 +11,7 @@ class RenderParams;
 class Scale9Sprite : public VIRTUAL_INHERITANCE Sprite
 {
 public:
-	Scale9Sprite();
+	Scale9Sprite() {}
 	Scale9Sprite(Symbol* sym) : Sprite(sym) {}
 
 	/**

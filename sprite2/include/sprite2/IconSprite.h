@@ -9,7 +9,7 @@ namespace s2
 class IconSprite : public VIRTUAL_INHERITANCE Sprite
 {
 public:
-	IconSprite();
+	IconSprite() {}
 	IconSprite(Symbol* sym) : Sprite(sym) {}
 
 	/**

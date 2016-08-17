@@ -57,9 +57,8 @@ bool Task::IsDirty() const
 	return true;
 }
 
-void Task::GetAllSprite(std::vector<const ee::Sprite*>& sprs) const
+void Task::GetAllSprite(std::vector<ee::Sprite*>& sprs) const
 {
-
 }
 
 const ee::EditPanel* Task::GetEditPanel() const

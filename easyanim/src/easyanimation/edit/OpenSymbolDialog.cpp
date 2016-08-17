@@ -27,7 +27,8 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 		return;
 	}
 
-	if (spr->GetSymbol()->GetFilepath().find("[gen].json") != std::string::npos) {
+	std::string filepath = dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath();
+	if (filepath.find("[gen].json") != std::string::npos) {
 		wxMessageBox("禁止编辑自动生成的文件", "warning", wxOK | wxICON_INFORMATION, m_wnd);
 		return;
 	}

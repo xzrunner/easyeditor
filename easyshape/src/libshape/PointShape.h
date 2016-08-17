@@ -13,9 +13,7 @@ class PointShape : public ee::Shape, public s2::PointShape
 public:
 	PointShape() {}
 	PointShape(const PointShape& point) {}
-	PointShape(const sm::vec2& pos) 
-		: s2::PointShape(pos) 
-	{}
+	PointShape(const sm::vec2& pos);
 
 	/**
 	 *  @interface

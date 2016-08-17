@@ -48,7 +48,7 @@ void FontBlankSymbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr
 	}
 }
 
-sm::rect FontBlankSymbol::GetSize(const Sprite* sprite/* = NULL*/) const
+sm::rect FontBlankSymbol::GetSize(const Sprite* spr/* = NULL*/) const
 {
 	sm::rect b;
 	float w = width, h = height;

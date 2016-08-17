@@ -9,7 +9,7 @@ namespace s2
 class AnimSprite : public VIRTUAL_INHERITANCE Sprite
 {
 public:
-	AnimSprite();
+	AnimSprite() {}
 	AnimSprite(Symbol* sym) : Sprite(sym) {}
 
 	/**

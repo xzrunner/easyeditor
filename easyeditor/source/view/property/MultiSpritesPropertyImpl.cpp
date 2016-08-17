@@ -622,7 +622,7 @@ void MultiSpritesPropertyImpl::OnCenter(int center)
 		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
 			Sprite* spr = m_sprs[i];
-			if (sprite != base) {
+			if (spr != base) {
 				spr->SetPosition(base->GetPosition());
 			}
 		}

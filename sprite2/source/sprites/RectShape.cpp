@@ -10,11 +10,6 @@ RectShape::RectShape(const RectShape& rect)
 {
 }
 
-RectShape::RectShape(const sm::rect& r)
-{
-	m_bounding = r;
-}
-
 RectShape* RectShape::Clone() const
 {
 	return new RectShape(*this);

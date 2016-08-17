@@ -4,7 +4,8 @@
 
 #include <easyimage.h>
 
-#include <ee/ImageSprite.h>
+#include <ee/Sprite.h>
+#include <ee/ImageSymbol.h>
 #include <ee/panel_msg.h>
 #include <ee/FileHelper.h>
 #include <ee/Image.h>
@@ -89,10 +90,9 @@ wxSizer* AutoRectCutCMPT::InitLayout()
 void AutoRectCutCMPT::OnCreateRects(wxCommandEvent& event)
 {
 	const ee::Sprite* spr = m_stage->GetImage();
-	const ee::ImageSprite* img_sprite 
-		= dynamic_cast<const ee::ImageSprite*>(spr);
-	assert(img_sprite);
-	const ee::Image* img = img_sprite->GetSymbol()->GetImage();
+	const ee::ImageSymbol* sym = dynamic_cast<const ee::ImageSymbol*>(spr->GetSymbol());
+	assert(sym);
+	const ee::Image* img = sym->GetImage();
 
 	RegularRectCut cut(*img);
 	cut.AutoCut();
@@ -116,10 +116,9 @@ void AutoRectCutCMPT::OnCreateRects(wxCommandEvent& event)
 void AutoRectCutCMPT::OnOutputRects(wxCommandEvent& event)
 {
 	const ee::Sprite* spr = m_stage->GetImage();
-	const ee::ImageSprite* img_sprite 
-		= dynamic_cast<const ee::ImageSprite*>(spr);
-	assert(img_sprite);
-	const ee::Image* img = img_sprite->GetSymbol()->GetImage();
+	const ee::ImageSymbol* sym = dynamic_cast<const ee::ImageSymbol*>(spr->GetSymbol());
+	assert(sym);
+	const ee::Image* img = sym->GetImage();
 
 	RegularRectCut cut(*img);
 	cut.AutoCut();

@@ -9,7 +9,7 @@ namespace s2
 class Particle2dSprite : public VIRTUAL_INHERITANCE Sprite
 {
 public:
-	Particle2dSprite();
+	Particle2dSprite() {}
 	Particle2dSprite(Symbol* sym) : Sprite(sym) {}
 
 	/**

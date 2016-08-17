@@ -15,13 +15,6 @@ PolylineShape::PolylineShape(const PolylineShape& polyline)
 	UpdateBounding();
 }
 
-PolylineShape::PolylineShape(const std::vector<sm::vec2>& vertices, bool closed)
-	: m_vertices(vertices)
-	, m_closed(closed)
-{
-	UpdateBounding();
-}
-
 PolylineShape* PolylineShape::Clone() const
 {
 	return new PolylineShape(*this);

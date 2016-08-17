@@ -4,6 +4,8 @@
 #include <ee/SceneNode.h>
 #include <ee/Sprite.h>
 
+#include <sprite2/RenderParams.h>
+
 namespace eanim
 {
 
@@ -21,8 +23,9 @@ bool PreviewPanel::Update(float dt)
 	std::vector<ee::Sprite*> sprs;
 	PreviewUtility::GetCurrSprites(m_ctrl, sprs);
 
+	s2::RenderParams params;
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
-		sprs[i]->Update(dt);
+		sprs[i]->Update(params, dt);
 	}
 
 	for (size_t i = 0, n = sprs.size(); i < n; ++i) {

@@ -190,10 +190,10 @@ void NormalCMPT::OnLoadFromFolder(wxCommandEvent& event)
 
 void NormalCMPT::OnLoadFromList(wxCommandEvent& event)
 {
-	std::vector<ee::Symbol*> syms;
+	std::vector<ee::ListItem*> items;
 	ViewMgr::Instance()->img_page->GetList()->
-		Traverse(ee::FetchAllVisitor<ee::Symbol>(syms));
-	if (syms.empty()) {
+		Traverse(ee::FetchAllVisitor<ee::ListItem>(items));
+	if (items.empty()) {
 		return;
 	}
 
@@ -204,12 +204,13 @@ void NormalCMPT::OnLoadFromList(wxCommandEvent& event)
 	SetSelectedSJ::Instance()->Set(0, 0);
 
 	int tot = m_filling->GetValue() - 1;
-	int space = tot / (syms.size() - 1);
+	int space = tot / (items.size() - 1);
 	int frame_idx = 1;
-	for (size_t i = 0, n = syms.size(); i < n; ++i)
+	for (size_t i = 0, n = items.size(); i < n; ++i)
 	{
+		ee::Symbol* sym = static_cast<ee::Symbol*>(items[i]);
 		KeyFrame* frame = new KeyFrame(frame_idx);
-		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(syms[i]);
+		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
 
 		frame->Insert(spr, INT_MAX);
 		layer->InsertKeyFrame(frame);

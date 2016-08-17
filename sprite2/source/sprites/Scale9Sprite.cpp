@@ -5,12 +5,6 @@
 namespace s2
 {
 
-Scale9Sprite::Scale9Sprite()
-	: Sprite()
-{
-	// todo
-}
-
 Scale9Sprite* Scale9Sprite::Clone() const
 {
 	return new Scale9Sprite(*this);

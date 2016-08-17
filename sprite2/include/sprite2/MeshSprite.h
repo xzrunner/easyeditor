@@ -9,7 +9,7 @@ namespace s2
 class MeshSprite : public VIRTUAL_INHERITANCE Sprite
 {
 public:
-	MeshSprite();
+	MeshSprite() {}
 	MeshSprite(Symbol* sym) : Sprite(sym) {}
 
 	/**

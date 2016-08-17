@@ -13,7 +13,7 @@ class Textbox;
 class TextboxSprite : public VIRTUAL_INHERITANCE Sprite
 {
 public:
-	TextboxSprite();
+	TextboxSprite() {}
 	TextboxSprite(Symbol* sym) : Sprite(sym) {}
 
 	/**

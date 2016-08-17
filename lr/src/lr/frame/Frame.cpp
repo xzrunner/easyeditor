@@ -73,7 +73,7 @@ void Frame::OnPreview(wxCommandEvent& event)
 {
 	SettingCfg* cfg = SettingCfg::Instance();
 
-	std::vector<const ee::Sprite*> sprs;
+	std::vector<ee::Sprite*> sprs;
 	m_task->GetAllSprite(sprs);
 
 	wxGLContext* ctx = m_task->GetEditPanel()->GetCanvas()->GetGLContext();

@@ -87,7 +87,7 @@ void Frame::onPreview(wxCommandEvent& event)
 // 	ee::Symbol* sym = ee::SymbolMgr::Instance()->fetchSymbol("default.ttf");
 // 	sym->ReloadTexture();
 
-	std::vector<const ee::Sprite*> sprs;
+	std::vector<ee::Sprite*> sprs;
 	m_task->GetAllSprite(sprs);
 	ee::StageCanvas* canvas = const_cast<ee::EditPanel*>(m_task->GetEditPanel())->GetCanvas();
  	PreviewDialog dlg(this, canvas->GetGLContext(), sprs);
@@ -96,7 +96,7 @@ void Frame::onPreview(wxCommandEvent& event)
 
 void Frame::OnEJPreview(wxCommandEvent& event)
 {
-	std::vector<const ee::Sprite*> sprs;
+	std::vector<ee::Sprite*> sprs;
 	m_task->GetAllSprite(sprs);
 
 	//////////////////////////////////////////////////////////////////////////
