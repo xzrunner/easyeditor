@@ -34,59 +34,63 @@ Sprite::Sprite()
 	m_time = 0;
 }
 
-Sprite::Sprite(const Sprite& sprite)
-	: ee::Sprite(sprite)
+Sprite::Sprite(const Sprite& spr)
+	: s2::Sprite(spr)
+	, s2::TextboxSprite(spr)
+	, ee::Sprite(spr)
 {
-	m_width = sprite.m_width;
-	m_height = sprite.m_height;
+	m_width = spr.m_width;
+	m_height = spr.m_height;
 
-	m_font = sprite.m_font;
-	m_font_size = sprite.m_font_size;
-	m_font_color = sprite.m_font_color;
+	m_font = spr.m_font;
+	m_font_size = spr.m_font_size;
+	m_font_color = spr.m_font_color;
 
-	m_edge = sprite.m_edge;
-	m_edge_size = sprite.m_edge_size;
-	m_edge_color = sprite.m_edge_color;
+	m_edge = spr.m_edge;
+	m_edge_size = spr.m_edge_size;
+	m_edge_color = spr.m_edge_color;
 
-	m_align_hori = sprite.m_align_hori;
-	m_align_vert = sprite.m_align_vert;
+	m_align_hori = spr.m_align_hori;
+	m_align_vert = spr.m_align_vert;
 
-	m_space_hori = sprite.m_space_hori;
-	m_space_vert = sprite.m_space_vert;
+	m_space_hori = spr.m_space_hori;
+	m_space_vert = spr.m_space_vert;
 
-	m_overflow = sprite.m_overflow;
+	m_overflow = spr.m_overflow;
 
-	m_richtext = sprite.m_richtext;
+	m_richtext = spr.m_richtext;
 
-	m_time = sprite.m_time;
+	m_time = spr.m_time;
 
-	m_text = sprite.m_text;
-	m_tid = sprite.m_tid;
+	m_text = spr.m_text;
+	m_tid = spr.m_tid;
 }
 
-Sprite::Sprite(Symbol* symbol)
-	: ee::Sprite(symbol)
+Sprite::Sprite(Symbol* sym)
+	: s2::Sprite(sym)
+	, s2::TextboxSprite(sym)
+	, ee::Sprite(sym)
 {
-	m_width = symbol->m_width;
-	m_height = symbol->m_height;
+	m_width = sym->m_width;
+	m_height = sym->m_height;
 
-	m_font = symbol->m_font;
-	m_font_size = symbol->m_font_size;
-	m_font_color = str2color(symbol->m_font_color, ee::PT_RGBA);
+	m_font = sym->m_font;
+	m_font_size = sym->m_font_size;
+	m_font_color = str2color(sym->m_font_color, ee::PT_RGBA);
 
-	m_edge = symbol->m_edge;
-	m_edge_size = symbol->m_edge_size;
-	m_edge_color = str2color(symbol->m_edge_color, ee::PT_RGBA);
+	m_edge = sym->m_edge;
+	m_edge_size = sym->m_edge_size;
+	m_edge_color = str2color(sym->m_edge_color, ee::PT_RGBA);
 
-	m_align_hori = symbol->m_align_hori;
-	m_align_vert = symbol->m_align_vert;
+	m_align_hori = sym->m_align_hori;
+	m_align_vert = sym->m_align_vert;
 
-	m_space_hori = symbol->m_space_hori;
-	m_space_vert = symbol->m_space_vert;
+	m_space_hori = sym->m_space_hori;
+	m_space_vert = sym->m_space_vert;
 
-	m_overflow = symbol->m_overflow;
+	m_overflow = sym->m_overflow;
 
-	m_richtext = symbol->m_richtext;
+	m_richtext = sym->m_richtext;
 
 	m_time = 0;
 }

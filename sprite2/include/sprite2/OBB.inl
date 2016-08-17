@@ -61,7 +61,7 @@ void OBB::Build(const sm::rect& r, const sm::vec2& pos, float angle,
 	if (scale != sm::vec2(1, 1)) {
 		m_rect.Scale(scale.x, scale.y);
 	}
-	if (shear != sm::vec2(1, 1)) {
+	if (shear != sm::vec2(0, 0)) {
 		m_rect.Shear(shear.x, shear.y);
 	}
 	m_position = pos;
@@ -76,6 +76,16 @@ void OBB::SetTransform(const sm::vec2& position, const sm::vec2& offset, float a
 {
 	m_position = position + (sm::rotate_vector(-offset, angle) + offset);
 	m_angle = angle;
+}
+
+inline
+void OBB::GetBoundPos(std::vector<sm::vec2>& bound) const
+{
+	bound.resize(4);
+	bound[0] = sm::rotate_vector(sm::vec2(m_rect.xmin, m_rect.ymin), m_angle) + m_position;
+	bound[1] = sm::rotate_vector(sm::vec2(m_rect.xmax, m_rect.ymin), m_angle) + m_position;
+	bound[2] = sm::rotate_vector(sm::vec2(m_rect.xmax, m_rect.ymax), m_angle) + m_position;
+	bound[3] = sm::rotate_vector(sm::vec2(m_rect.xmin, m_rect.ymax), m_angle) + m_position;
 }
 
 }

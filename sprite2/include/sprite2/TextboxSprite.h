@@ -14,7 +14,6 @@ class TextboxSprite : public VIRTUAL_INHERITANCE Sprite
 {
 public:
 	TextboxSprite();
-	TextboxSprite(const TextboxSprite& spr);
 	TextboxSprite(Symbol* sym) : Sprite(sym) {}
 
 	/**

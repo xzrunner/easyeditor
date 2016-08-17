@@ -16,22 +16,26 @@ Sprite::Sprite()
 {
 }
 
-Sprite::Sprite(const Sprite& sprite)
-	: ee::Sprite(sprite)
+Sprite::Sprite(const Sprite& spr)
+	: s2::Sprite(spr)
+	, s2::Particle2dSprite(spr)
+	, ee::Sprite(spr)
 	, m_ps(NULL)
 {
-	if (sprite.m_ps) {
-		p2d_emitter_cfg* cfg = (p2d_emitter_cfg*)(sprite.m_ps->GetConfig());
+	if (spr.m_ps) {
+		p2d_emitter_cfg* cfg = (p2d_emitter_cfg*)(spr.m_ps->GetConfig());
 		m_ps = new ParticleSystem(cfg);
 		m_ps->Start();
 	}
 }
 
-Sprite::Sprite(Symbol* symbol)
-	: ee::Sprite(symbol)
+Sprite::Sprite(Symbol* sym)
+	: s2::Sprite(sym)
+	, s2::Particle2dSprite(sym)
+	, ee::Sprite(sym)
 	, m_ps(NULL)
 {
-	if (const p2d_emitter_cfg* cfg = symbol->GetEmitterCfg()) {
+	if (const p2d_emitter_cfg* cfg = sym->GetEmitterCfg()) {
 		m_ps = new ParticleSystem(const_cast<p2d_emitter_cfg*>(cfg));
 		m_ps->Start();
 	}

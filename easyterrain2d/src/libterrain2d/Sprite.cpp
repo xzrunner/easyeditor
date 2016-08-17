@@ -4,8 +4,17 @@
 namespace eterrain2d
 {
 
-Sprite::Sprite(Symbol* symbol)
-	: ee::Sprite(symbol)
+Sprite::Sprite(const Sprite& spr)
+	: s2::Sprite(spr)
+	, s2::DummySprite(spr)
+	, ee::Sprite(spr)
+{
+}
+
+Sprite::Sprite(Symbol* sym)
+	: s2::Sprite(sym)
+	, s2::DummySprite(sym)
+	, ee::Sprite(sym)
 {
 //	rotate(-m_symbol->GetOceanAngle());
 }

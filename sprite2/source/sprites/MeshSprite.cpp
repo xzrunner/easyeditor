@@ -9,11 +9,6 @@ MeshSprite::MeshSprite()
 {
 }
 
-MeshSprite::MeshSprite(const MeshSprite& spr)
-	: Sprite(spr)
-{
-}
-
 MeshSprite* MeshSprite::Clone() const
 {
 	return new MeshSprite(*this);

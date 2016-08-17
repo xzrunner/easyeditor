@@ -12,6 +12,7 @@ class PointQueryVisitor : public Visitor<Sprite>
 {
 public:
 	PointQueryVisitor(const sm::vec2& pos, Sprite** result);
+	virtual ~PointQueryVisitor();
 	virtual void Visit(Sprite* spr, bool& next);
 
 private:
@@ -26,6 +27,14 @@ PointQueryVisitor::PointQueryVisitor(const sm::vec2& pos, Sprite** result)
 {
 	m_result = result;
 	*m_result = NULL;
+}
+
+inline 
+PointQueryVisitor::~PointQueryVisitor()
+{
+	if (*m_result) {
+		(*m_result)->RemoveReference();
+	}
 }
 
 inline

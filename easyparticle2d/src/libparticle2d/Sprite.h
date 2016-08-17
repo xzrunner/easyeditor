@@ -15,8 +15,8 @@ class Sprite : public s2::Particle2dSprite, public ee::Sprite
 {
 public:
 	Sprite();
-	Sprite(const Sprite& sprite);
-	Sprite(Symbol* symbol);
+	Sprite(const Sprite& spr);
+	Sprite(Symbol* sym);
 	virtual ~Sprite();
 
 	/**

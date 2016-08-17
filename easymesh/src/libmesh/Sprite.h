@@ -16,7 +16,7 @@ class Sprite : public s2::MeshSprite, public ee::Sprite
 {
 public:
 	Sprite();
-	Sprite(const Sprite& s);
+	Sprite(const Sprite& spr);
 	Sprite(Symbol* sym);
 	virtual ~Sprite();
 

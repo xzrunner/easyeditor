@@ -5,8 +5,17 @@
 namespace escale9
 {
 
+Sprite::Sprite(const Sprite& spr)
+	: s2::Sprite(spr)
+	, s2::Scale9Sprite(spr)
+	, ee::Sprite(spr)
+{
+}
+
 Sprite::Sprite(Symbol* sym)
-	: ee::Sprite(sym)
+	: s2::Sprite(sym)
+	, s2::Scale9Sprite(sym)
+	, ee::Sprite(sym)
 	, m_data(sym->GetScale9Data())
 {
 }

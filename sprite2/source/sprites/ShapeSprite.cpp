@@ -10,11 +10,6 @@ ShapeSprite::ShapeSprite()
 {
 }
 
-ShapeSprite::ShapeSprite(const ShapeSprite& spr)
-	: Sprite(spr)
-{
-}
-
 ShapeSprite* ShapeSprite::Clone() const
 {
 	return new ShapeSprite(*this);

@@ -7,8 +7,17 @@
 namespace eanim
 {
 
+Sprite::Sprite(const Sprite& spr)
+	: s2::Sprite(spr)
+	, s2::AnimSprite(spr)
+	, ee::Sprite(spr)
+{
+}
+
 Sprite::Sprite(Symbol* sym)
-	: ee::Sprite(sym)
+	: s2::Sprite(sym)
+	, s2::AnimSprite(sym)
+	, ee::Sprite(sym)
 {
 }
 

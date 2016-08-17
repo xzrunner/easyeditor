@@ -22,6 +22,9 @@ FontBlankSprite::FontBlankSprite()
 }
 
 FontBlankSprite::FontBlankSprite(const FontBlankSprite& spr)
+	: s2::Sprite(spr)
+	, s2::DummySprite(spr)
+	, Sprite(spr)
 {
 	font = spr.font;
 	has_edge = spr.has_edge;
@@ -35,7 +38,9 @@ FontBlankSprite::FontBlankSprite(const FontBlankSprite& spr)
 }
 
 FontBlankSprite::FontBlankSprite(FontBlankSymbol* sym)
-	: Sprite(sym)
+	: s2::Sprite(sym)
+	, s2::DummySprite(sym)
+	, Sprite(sym)
 {
 	font = sym->font;
 	font_color = str2color(sym->color, PT_ARGB);

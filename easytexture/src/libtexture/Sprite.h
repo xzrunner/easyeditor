@@ -13,7 +13,8 @@ class Symbol;
 class Sprite : public s2::TextureSprite, public ee::Sprite
 {
 public:
-	Sprite(Symbol* symbol);
+	Sprite(const Sprite& spr);
+	Sprite(Symbol* sym);
 
 	/**
 	 *  @interface

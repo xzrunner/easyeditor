@@ -13,6 +13,7 @@ class ImageSymbol;
 class ImageSprite : public s2::ImageSprite, public Sprite
 {
 public:
+	ImageSprite(const ImageSprite& spr);
 	ImageSprite(ImageSymbol* sym);
 
 	/**

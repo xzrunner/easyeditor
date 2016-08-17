@@ -22,11 +22,11 @@ DrawSelectedSpriteVisitor::DrawSelectedSpriteVisitor(const s2::Color& color)
 
 void DrawSelectedSpriteVisitor::Visit(Sprite* spr, bool& next) 
 {
-	sm::rect bound = spr->GetBounding()->GetSize();
-
+	std::vector<sm::vec2> bound;
+	spr->GetBounding()->GetBoundPos(bound);
 	s2::RVG::SetColor(m_color);
-	s2::RVG::Rect(bound, false);
-
+	s2::RVG::Polyline(bound, true);
+	
 	// todo: bad
 	if (Config::Instance()->GetSettings().visible_image_edge)
 	{

@@ -45,7 +45,7 @@ void AABB::Build(const sm::rect& r, const sm::vec2& pos, float angle,
 	if (scale != sm::vec2(1, 1)) {
 		m_rect.Scale(scale.x, scale.y);
 	}
-	if (shear != sm::vec2(1, 1)) {
+	if (shear != sm::vec2(0, 0)) {
 		m_rect.Shear(shear.x, shear.y);
 	}
 	m_position = pos;
@@ -58,6 +58,16 @@ inline
 void AABB::SetTransform(const sm::vec2& position, const sm::vec2& offset, float angle)
 {
 	m_position = position + (sm::rotate_vector(-offset, angle) + offset);
+}
+
+inline
+void AABB::GetBoundPos(std::vector<sm::vec2>& bound) const
+{
+	bound.resize(4);
+	bound[0] = sm::vec2(m_rect.xmin, m_rect.ymin) + m_position;
+	bound[1] = sm::vec2(m_rect.xmax, m_rect.ymin) + m_position;
+	bound[2] = sm::vec2(m_rect.xmax, m_rect.ymax) + m_position;
+	bound[3] = sm::vec2(m_rect.xmin, m_rect.ymax) + m_position;
 }
 
 }

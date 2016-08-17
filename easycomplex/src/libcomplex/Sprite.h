@@ -13,6 +13,7 @@ class Symbol;
 class Sprite : public s2::ComplexSprite, public ee::Sprite
 {
 public:
+	Sprite(const Sprite& spr);
 	Sprite(Symbol* sym);
 
 	/**

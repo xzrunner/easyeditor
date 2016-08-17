@@ -13,6 +13,7 @@ class ScriptsSymbol;
 class ScriptsSprite : public s2::DummySprite, public Sprite
 {
 public:
+	ScriptsSprite(const ScriptsSprite& spr);
 	ScriptsSprite(ScriptsSymbol* sym);
 
 	/**

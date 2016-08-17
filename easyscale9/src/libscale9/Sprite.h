@@ -15,6 +15,7 @@ class Symbol;
 class Sprite : public s2::Scale9Sprite, public ee::Sprite
 {
 public:
+	Sprite(const Sprite& spr);
 	Sprite(Symbol* sym);
 
 	/**

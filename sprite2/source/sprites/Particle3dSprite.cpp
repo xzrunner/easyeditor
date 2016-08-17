@@ -10,11 +10,6 @@ Particle3dSprite::Particle3dSprite()
 {
 }
 
-Particle3dSprite::Particle3dSprite(const Particle3dSprite& spr)
-	: Sprite(spr)
-{
-}
-
 Particle3dSprite* Particle3dSprite::Clone() const
 {
 	return new Particle3dSprite(*this);

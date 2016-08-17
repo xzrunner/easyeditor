@@ -6,8 +6,17 @@
 namespace ecomplex
 {
 
+Sprite::Sprite(const Sprite& spr)
+	: s2::Sprite(spr)
+	, s2::ComplexSprite(spr)
+	, ee::Sprite(spr)
+{
+}
+
 Sprite::Sprite(Symbol* sym)
-	: ee::Sprite(sym)
+	: s2::Sprite(sym)
+	, s2::ComplexSprite(sym)
+	, ee::Sprite(sym)
 {
 }
 

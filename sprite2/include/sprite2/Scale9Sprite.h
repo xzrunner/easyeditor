@@ -12,7 +12,6 @@ class Scale9Sprite : public VIRTUAL_INHERITANCE Sprite
 {
 public:
 	Scale9Sprite();
-	Scale9Sprite(const Scale9Sprite& spr);
 	Scale9Sprite(Symbol* sym) : Sprite(sym) {}
 
 	/**

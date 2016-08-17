@@ -15,7 +15,8 @@ class Symbol;
 class Sprite : s2::DummySprite, public ee::Sprite
 {
 public:
-	Sprite(Symbol* symbol);
+	Sprite(const Sprite& spr);
+	Sprite(Symbol* sym);
 
 	/**
 	 *  @interface

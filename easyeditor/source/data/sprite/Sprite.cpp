@@ -19,7 +19,8 @@ namespace ee
 {
 
 Sprite::Sprite()
-	: m_mirror(false, false)
+	: s2::Sprite()
+	, m_mirror(false, false)
 	, m_perspective(0, 0)
 	, m_clip(false)
 	, m_anchor(false)
@@ -41,7 +42,8 @@ Sprite::Sprite(Symbol* sym)
 }
 
 Sprite::Sprite(const Sprite& spr)
-	: m_mirror(spr.m_mirror)
+	: s2::Sprite(spr)
+	, m_mirror(spr.m_mirror)
 	, m_perspective(spr.m_perspective)
 	, m_name(spr.m_name)
 	, m_tag(spr.m_tag)

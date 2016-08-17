@@ -8,11 +8,6 @@ ComplexSprite::ComplexSprite()
 {
 }
 
-ComplexSprite::ComplexSprite(const ComplexSprite& spr)
-	: Sprite(spr)
-{
-}
-
 ComplexSprite* ComplexSprite::Clone() const
 {
 	return new ComplexSprite(*this);

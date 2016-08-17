@@ -21,7 +21,9 @@ Sprite::Sprite()
 }
 
 Sprite::Sprite(const Sprite& spr)
-	: ee::Sprite(spr)
+	: s2::Sprite(spr)
+	, s2::Particle3dSprite(spr)
+	, ee::Sprite(spr)
 	, m_alone(spr.m_alone)
 	, m_reuse(spr.m_reuse)
 	, m_spr_ref(true)
@@ -36,7 +38,9 @@ Sprite::Sprite(const Sprite& spr)
 }
 
 Sprite::Sprite(Symbol* sym)
-	: ee::Sprite(sym)
+	: s2::Sprite(sym)
+	, s2::Particle3dSprite(sym)
+	, ee::Sprite(sym)
 	, m_alone(false)
 	, m_reuse(false)
 {

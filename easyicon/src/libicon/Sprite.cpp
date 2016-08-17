@@ -10,14 +10,18 @@ Sprite::Sprite()
 {
 }
 
-Sprite::Sprite(const Sprite& sprite)
-	: ee::Sprite(sprite)
-	, m_process(sprite.m_process)
+Sprite::Sprite(const Sprite& spr)
+	: s2::Sprite(spr)
+	, s2::IconSprite(spr)
+	, ee::Sprite(spr)
+	, m_process(spr.m_process)
 {
 }
 
-Sprite::Sprite(Symbol* symbol)
-	: ee::Sprite(symbol)
+Sprite::Sprite(Symbol* sym)
+	: s2::Sprite(sym)
+	, s2::IconSprite(sym)
+	, ee::Sprite(sym)
 	, m_process(1)
 {
 }

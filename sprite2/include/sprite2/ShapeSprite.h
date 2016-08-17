@@ -10,7 +10,6 @@ class ShapeSprite : public VIRTUAL_INHERITANCE Sprite
 {
 public:
 	ShapeSprite();
-	ShapeSprite(const ShapeSprite& spr);
 	ShapeSprite(Symbol* sym) : Sprite(sym) {}
 
 	/**

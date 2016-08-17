@@ -10,7 +10,6 @@ class MeshSprite : public VIRTUAL_INHERITANCE Sprite
 {
 public:
 	MeshSprite();
-	MeshSprite(const MeshSprite& spr);
 	MeshSprite(Symbol* sym) : Sprite(sym) {}
 
 	/**

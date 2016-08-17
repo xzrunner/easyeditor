@@ -17,8 +17,8 @@ class Sprite : public s2::TextboxSprite, public ee::Sprite
 {
 public:
 	Sprite();
-	Sprite(const Sprite& sprite);
-	Sprite(Symbol* symbol);
+	Sprite(const Sprite& spr);
+	Sprite(Symbol* sym);
 
 	/**
 	 *  @interface

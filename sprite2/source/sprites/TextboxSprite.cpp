@@ -9,11 +9,6 @@ TextboxSprite::TextboxSprite()
 {
 }
 
-TextboxSprite::TextboxSprite(const TextboxSprite& spr)
-	: Sprite(spr)
-{
-}
-
 TextboxSprite* TextboxSprite::Clone() const
 {
 	return new TextboxSprite(*this);

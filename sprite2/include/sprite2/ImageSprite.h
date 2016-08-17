@@ -9,8 +9,7 @@ namespace s2
 class ImageSprite : public VIRTUAL_INHERITANCE Sprite
 {
 public:
-	ImageSprite();
-	ImageSprite(const ImageSprite& spr);
+	ImageSprite() {}
 	ImageSprite(Symbol* sym) : Sprite(sym) {}
 
 	/**

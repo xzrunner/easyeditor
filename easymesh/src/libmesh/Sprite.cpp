@@ -17,19 +17,23 @@ Sprite::Sprite()
 //	m_speed.set(0, -0.01f);
 }
 
-Sprite::Sprite(const Sprite& s)
-	: ee::Sprite(s)
-	, m_speed(s.m_speed)
-	, m_trans(s.m_trans)
-	, m_only_draw_bound(s.m_only_draw_bound)
+Sprite::Sprite(const Sprite& spr)
+	: s2::Sprite(spr)
+	, s2::MeshSprite(spr)
+	, ee::Sprite(spr)
+	, m_speed(spr.m_speed)
+	, m_trans(spr.m_trans)
+	, m_only_draw_bound(spr.m_only_draw_bound)
 {
-	if (m_base = s.m_base) {
+	if (m_base = spr.m_base) {
 		m_base->AddReference();
 	}
 }
 
 Sprite::Sprite(Symbol* sym)
-	: ee::Sprite(sym)
+	: s2::Sprite(sym)
+	, s2::MeshSprite(sym)
+	, ee::Sprite(sym)
 	, m_only_draw_bound(false)
 {
 	if (m_base = sym->GetMesh()->GetBaseSymbol()) {

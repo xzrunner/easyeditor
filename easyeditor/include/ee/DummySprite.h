@@ -13,6 +13,7 @@ class DummySymbol;
 class DummySprite : public s2::DummySprite, public Sprite
 {
 public:
+	DummySprite(const DummySprite& spr);
 	DummySprite(DummySymbol* sym);
 
 	/**

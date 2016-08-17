@@ -12,7 +12,7 @@ Sprite::Sprite()
 	, m_position(0, 0)
 	, m_angle(0)
 	, m_scale(1, 1)
-	, m_shear(1, 1)
+	, m_shear(0, 0)
 	, m_visible(true)
 {
 	m_offset.MakeInvalid();
@@ -55,7 +55,7 @@ Sprite::Sprite(Symbol* sym)
 	, m_position(0, 0)
 	, m_angle(0)
 	, m_scale(1, 1)
-	, m_shear(1, 1)
+	, m_shear(0, 0)
 	, m_visible(true)
 {
 	m_offset.MakeInvalid();

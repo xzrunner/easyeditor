@@ -11,12 +11,6 @@ Scale9Sprite::Scale9Sprite()
 	// todo
 }
 
-Scale9Sprite::Scale9Sprite(const Scale9Sprite& spr)
-	: Sprite(spr)
-{
-	// todo
-}
-
 Scale9Sprite* Scale9Sprite::Clone() const
 {
 	return new Scale9Sprite(*this);

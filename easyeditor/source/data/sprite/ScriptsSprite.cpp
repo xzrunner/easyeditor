@@ -7,8 +7,17 @@
 namespace ee
 {
 
+ScriptsSprite::ScriptsSprite(const ScriptsSprite& spr)
+	: s2::Sprite(spr)
+	, s2::DummySprite(spr)
+	, Sprite(spr)
+{
+}
+
 ScriptsSprite::ScriptsSprite(ScriptsSymbol* sym)
-	: Sprite(sym)
+	: s2::Sprite(sym)
+	, s2::DummySprite(sym)
+	, Sprite(sym)
 {
 	scripts_do_string(sym->GetContent().c_str());
 }

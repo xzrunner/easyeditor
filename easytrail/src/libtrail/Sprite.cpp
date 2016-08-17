@@ -15,16 +15,21 @@ Sprite::Sprite()
 {
 }
 
-Sprite::Sprite(const Sprite& sprite)
-	: m_et(NULL)
+Sprite::Sprite(const Sprite& spr)
+	: s2::Sprite(spr)
+	, s2::DummySprite(spr)
+	, ee::Sprite(spr)
+	, m_et(NULL)
 {
 }
 
-Sprite::Sprite(Symbol* symbol)
-	: ee::Sprite(symbol)
+Sprite::Sprite(Symbol* sym)
+	: s2::Sprite(sym)
+	, s2::DummySprite(sym)
+	, ee::Sprite(sym)
 	, m_et(NULL)
 {
-	const t2d_emitter_cfg* cfg = symbol->GetEmitterCfg();
+	const t2d_emitter_cfg* cfg = sym->GetEmitterCfg();
 	if (cfg) {
 		m_et = t2d_emitter_create(cfg);
 		t2d_emitter_start(m_et);

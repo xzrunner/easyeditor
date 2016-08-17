@@ -13,6 +13,13 @@
 namespace ee
 {
 
+ImageSprite::ImageSprite(const ImageSprite& spr)
+	: s2::Sprite(spr)
+	, s2::ImageSprite(spr)
+	, Sprite(spr)
+{
+}
+
 ImageSprite::ImageSprite(ImageSymbol* sym)
 	: s2::Sprite(sym)
 	, s2::ImageSprite(sym)
