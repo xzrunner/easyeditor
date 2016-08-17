@@ -43,7 +43,7 @@ void Icon::Draw(const sm::mat4& mt, float process) const
 	sm::vec2 scr_coords[4];
 	GetScreenCoords(process, tex_coords, scr_coords);
 	for (int i = 0; i < 4; ++i) {
-		scr_coords[i] = ee::Math2D::TransVector(scr_coords[i], mt);
+		scr_coords[i] = mt * scr_coords[i];
 	}
 
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();

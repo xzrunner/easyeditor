@@ -20,14 +20,14 @@ RopeJoint::RopeJoint(Body* b0, Body* b1)
 
 bool RopeJoint::IsContain(const sm::vec2& pos) const
 {
-	return ee::Math2D::GetDistance(GetWorldAnchorA(), pos) < JOINT_RADIUS_OUT
-		|| ee::Math2D::GetDistance(GetWorldAnchorB(), pos) < JOINT_RADIUS_OUT;
+	return sm::dis_pos_to_pos(GetWorldAnchorA(), pos) < JOINT_RADIUS_OUT
+		|| sm::dis_pos_to_pos(GetWorldAnchorB(), pos) < JOINT_RADIUS_OUT;
 }
 
 bool RopeJoint::IsIntersect(const sm::rect& rect) const
 {
-	return ee::Math2D::IsPointInRect(GetWorldAnchorA(), rect) 
-		|| ee::Math2D::IsPointInRect(GetWorldAnchorB(), rect);
+	return sm::is_point_in_rect(GetWorldAnchorA(), rect) 
+		|| sm::is_point_in_rect(GetWorldAnchorB(), rect);
 }
 
 void RopeJoint::Draw(DrawType type) const

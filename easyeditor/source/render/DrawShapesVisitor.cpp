@@ -1,6 +1,7 @@
 #include "DrawShapesVisitor.h"
 #include "Shape.h"
-#include "Math2D.h"
+
+#include <SM_Test.h>
 
 namespace ee
 {
@@ -19,7 +20,7 @@ void DrawShapesVisitor::Visit(Shape* shape, bool& next)
 	}
 
 	if (!m_screen_region.IsValid() || 
-		Math2D::IsRectIntersectRect(shape->GetBounding(), m_screen_region)) {
+		sm::is_rect_intersect_rect(shape->GetBounding(), m_screen_region)) {
 		shape->Draw(sm::mat4(), m_ct);
 	}
 }

@@ -97,7 +97,7 @@ bool RectCutOP::OnMouseRightUp(int x, int y)
 	const float RADIUS = 5;
 	// remove rect
 	m_curr_pos = m_stage->TransPosScrToProj(x, y);
-	if (ee::Math2D::GetDistance(m_curr_pos, m_first_pos) < RADIUS)
+	if (sm::dis_pos_to_pos(m_curr_pos, m_first_pos) < RADIUS)
 	{
 		bool removed = m_rects.Remove(m_curr_pos);
 		if (removed) {
@@ -340,7 +340,7 @@ void RectCutOP::Cross::Draw() const
 
 bool RectCutOP::Cross::Contain(const sm::vec2& p) const
 {
-	return ee::Math2D::GetDistance(pos, p) < RADIUS;
+	return sm::dis_pos_to_pos(pos, p) < RADIUS;
 }
 
 }

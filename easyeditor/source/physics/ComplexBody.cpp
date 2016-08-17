@@ -1,9 +1,9 @@
 #include "ComplexBody.h"
 #include "BodyData.h"
 #include "physics_const.h"
-#include "Math2D.h"
 
 #include <Box2D/Box2D.h>
+#include <SM_Calc.h>
 
 namespace ee
 {
@@ -82,7 +82,7 @@ void ComplexBody::GetRect(sm::rect& rect, const sm::vec2& position, float angle)
 			for (int i = 0; i < poly->GetVertexCount(); ++i)
 			{
 				const b2Vec2& p = poly->m_vertices[i];
-				sm::vec2 transform = Math2D::RotateVector(sm::vec2(p.x, p.y), angle) + position;
+				sm::vec2 transform = sm::rotate_vector(sm::vec2(p.x, p.y), angle) + position;
 				rect.Combine(transform);
 			}
 		}

@@ -4,12 +4,13 @@
 
 #include <ee/EditPanelImpl.h>
 #include <ee/MultiShapesImpl.h>
-#include <ee/Math2D.h>
 #include <ee/SettingData.h>
 #include <ee/std_functor.h>
 #include <ee/panel_msg.h>
 
 #include <sprite2/S2_RVG.h>
+#include <SM_Calc.h>
+#include <SM_Test.h>
 
 #include <algorithm>
 
@@ -72,7 +73,7 @@ bool SelectNodesOP::OnMouseLeftDown(int x, int y)
 				if (chainNodes->polyline != selected->polyline) continue;
 				for (size_t j = 0, m = chainNodes->selectedNodes.size(); j < m && !isExist; ++j)
 				{
-					if (ee::Math2D::GetDistance(pos, chainNodes->selectedNodes[j]) < GetThreshold())
+					if (sm::dis_pos_to_pos(pos, chainNodes->selectedNodes[j]) < GetThreshold())
 					{
 						chainNodes->selectedNodes.erase(chainNodes->selectedNodes.begin() + j);
 						if (chainNodes->selectedNodes.empty())
@@ -96,7 +97,7 @@ bool SelectNodesOP::OnMouseLeftDown(int x, int y)
 				if (chainNodes->polyline != selected->polyline) continue;
 				for (size_t j = 0, m = chainNodes->selectedNodes.size(); j < m && !isExist; ++j)
 				{
-					if (ee::Math2D::GetDistance(pos, chainNodes->selectedNodes[j]) < GetThreshold())
+					if (sm::dis_pos_to_pos(pos, chainNodes->selectedNodes[j]) < GetThreshold())
 						isExist = true;
 				}
 			}
@@ -261,12 +262,12 @@ Visit(ee::Shape* shape, bool& next)
 		return;
 	}
 
-	if (ee::Math2D::IsRectIntersectRect(polyline->GetBounding(), m_rect))
+	if (sm::is_rect_intersect_rect(polyline->GetBounding(), m_rect))
 	{
 		const std::vector<sm::vec2>& vertices = polyline->GetVertices();
 		for (size_t i = 0, n = vertices.size(); i < n; ++i)
 		{
-			if (ee::Math2D::GetDistance(m_pos, vertices[i]) < SelectNodesOP::GetThreshold())
+			if (sm::dis_pos_to_pos(m_pos, vertices[i]) < SelectNodesOP::GetThreshold())
 			{
 				ChainSelectedNodes* result = new ChainSelectedNodes;
 				result->polyline = polyline;
@@ -302,7 +303,7 @@ Visit(ee::Shape* shape, bool& next)
 		return;
 	}
 
-	if (ee::Math2D::IsRectIntersectRect(polyline->GetBounding(), m_rect))
+	if (sm::is_rect_intersect_rect(polyline->GetBounding(), m_rect))
 	{
 		ChainSelectedNodes* result = new ChainSelectedNodes;
 		result->polyline = polyline;
@@ -310,7 +311,7 @@ Visit(ee::Shape* shape, bool& next)
 		const std::vector<sm::vec2>& vertices = polyline->GetVertices();
 		for (size_t i = 0, n = vertices.size(); i < n; ++i)
 		{
-			if (ee::Math2D::IsPointInRect(vertices[i], m_rect))
+			if (sm::is_point_in_rect(vertices[i], m_rect))
 				result->selectedNodes.push_back(vertices[i]);
 		}
 

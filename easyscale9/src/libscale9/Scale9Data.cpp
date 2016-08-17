@@ -5,11 +5,12 @@
 #include <ee/SpriteRenderer.h>
 #include <ee/ImageSymbol.h>
 #include <ee/Image.h>
-#include <ee/Math2D.h>
 #include <ee/SymbolSearcher.h>
 #include <ee/SymbolMgr.h>
 #include <ee/Exception.h>
 #include <ee/SpriteFactory.h>
+
+#include <SM_Calc.h>
 
 #include <fstream>
 
@@ -326,7 +327,7 @@ void Scale9Data::ResizeSprite(ee::Sprite* spr, const sm::vec2& center,
 	else
 		spr->SetScale(sm::vec2(height / w, width / h));
 
-	spr->Translate(ee::Math2D::RotateVector(spr->GetOffset(), spr->GetAngle()) - spr->GetOffset());
+	spr->Translate(sm::rotate_vector(spr->GetOffset(), spr->GetAngle()) - spr->GetOffset());
 }
 
 Scale9Type Scale9Data::CheckType(ee::Sprite* sprs[3][3])

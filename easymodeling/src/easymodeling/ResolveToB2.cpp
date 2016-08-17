@@ -213,7 +213,7 @@ b2Joint* ResolveToB2::CreateJoint(const Joint& data, b2World* world,
 			jd.collideConnected = joint->m_collide_connected;
 			jd.localAnchorA.Set(joint->m_local_anchor_a.x / ee::BOX2D_SCALE_FACTOR, joint->m_local_anchor_a.y / ee::BOX2D_SCALE_FACTOR);
 			jd.localAnchorB.Set(joint->m_local_anchor_b.x / ee::BOX2D_SCALE_FACTOR, joint->m_local_anchor_b.y / ee::BOX2D_SCALE_FACTOR);
-			jd.length = ee::Math2D::GetDistance(joint->GetWorldAnchorA(), joint->GetWorldAnchorB()) / ee::BOX2D_SCALE_FACTOR;
+			jd.length = sm::dis_pos_to_pos(joint->GetWorldAnchorA(), joint->GetWorldAnchorB()) / ee::BOX2D_SCALE_FACTOR;
 			jd.frequencyHz = joint->m_frequency_hz;
 			jd.dampingRatio = joint->m_damping_ratio;
 

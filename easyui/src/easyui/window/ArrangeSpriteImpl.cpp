@@ -37,7 +37,7 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 {
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(m_selected);
-	if (complex && ee::Math2D::GetDistance(pos, m_selected->GetPosition()) < m_center_node_radius) {
+	if (complex && sm::dis_pos_to_pos(pos, m_selected->GetPosition()) < m_center_node_radius) {
 		m_move_center = true;
 		ChangeOPState(new MoveSpriteCenterState(complex, pos));		
 	} else {

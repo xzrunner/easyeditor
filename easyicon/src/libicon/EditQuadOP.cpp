@@ -4,12 +4,12 @@
 #include "IconType.h"
 
 #include <ee/EditPanelImpl.h>
-#include <ee/Math2D.h>
 #include <ee/panel_msg.h>
 #include <ee/color_config.h>
 #include <ee/Image.h>
 
 #include <sprite2/S2_RVG.h>
+#include <SM_Calc.h>
 
 namespace eicon
 {
@@ -39,7 +39,7 @@ bool EditQuadOP::OnMouseLeftDown(int x, int y)
 
 	const sm::vec2* screen = static_cast<QuadIcon*>(icon)->GetScreen();
 	for (int i = 0; i < 4; ++i) {
-		if (ee::Math2D::GetDistance(screen[i], pos) < CTRL_NODE_RADIUS) {
+		if (sm::dis_pos_to_pos(screen[i], pos) < CTRL_NODE_RADIUS) {
 			m_selected = i;
 		}
 	}

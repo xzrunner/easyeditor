@@ -167,7 +167,7 @@ void Image::InvalidRect(const sm::mat4& mt) const
 
 	float xmin = FLT_MAX, ymin = FLT_MAX, xmax = -FLT_MAX, ymax = -FLT_MAX;
 	for (int i = 0; i < 4; ++i) {
-		sm::vec2 pos = Math2D::TransVector(vertices[i] + m_offset, mt);
+		sm::vec2 pos = mt * (vertices[i] + m_offset);
 		if (pos.x < xmin) xmin = pos.x;
 		if (pos.x > xmax) xmax = pos.x;
 		if (pos.y < ymin) ymin = pos.y;

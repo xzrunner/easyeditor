@@ -2,12 +2,13 @@
 #include "DrawPencilPolygonCMPT.h"
 #include "PolygonShape.h"
 
-#include <ee/DouglasPeucker.h>
 #include <ee/panel_msg.h>
 #include <ee/shape_msg.h>
 #include <ee/MultiShapesImpl.h>
 #include <ee/PolygonClipper.h>
 #include <ee/FetchAllVisitor.h>
+
+#include <SM_DouglasPeucker.h>
 
 namespace eshape
 {
@@ -52,7 +53,7 @@ bool DrawPencilPolygonOP::OnMouseLeftUp(int x, int y)
 	if (!m_curve.empty())
 	{
 		std::vector<sm::vec2> simplified;
-		ee::DouglasPeucker::Do(m_curve, m_simplify->GetValue(), simplified);
+		sm::douglas_peucker(m_curve, m_simplify->GetValue(), simplified);
 		NewPolygon(simplified);
 		Clear();
 

@@ -78,7 +78,7 @@ render_glyph(int id, float* _texcoords, float x, float y, float w, float h, stru
 	vertices[2] = sm::vec2(x + hw, y + hh);
 	vertices[3] = sm::vec2(x + hw, y - hh);
 	for (int i = 0; i < 4; ++i) {
-		vertices[i] = Math2D::TransVector(vertices[i], *rp->mt);
+		vertices[i] = *rp->mt * vertices[i];
 	}
 
 	sm::vec2 texcoords[4];
@@ -134,12 +134,12 @@ render_decoration(const sm::mat4& mat, float x, float y, float w, float h, struc
 			left.y = right.y = ds->row_y + ds->row_h * 0.5f;
 			break;
 		}
-		s2::RVG::Line(Math2D::TransVector(left, mat), Math2D::TransVector(right, mat));
+		s2::RVG::Line(mat * left, mat * right);
 	} else if (d->type == GRDT_BORDER || d->type == GRDT_BG) {
 		sm::vec2 min(x - hw, ds->row_y), 
 			   max(x + hw, ds->row_y + ds->row_h);
-		min = Math2D::TransVector(min, mat);
-		max = Math2D::TransVector(max, mat);
+		min = mat * min;
+		max = mat * max;
 		if (d->type == GRDT_BG) {
 			s2::RVG::Rect(min, max, true);
 		} else if (ds->pos_type != GRPT_NULL) {

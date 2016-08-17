@@ -230,7 +230,7 @@ void LRJsonPacker::ParserShape(ee::Shape* shape, const sm::vec2& offset, float a
 
 		std::vector<sm::vec2> bound = poly->GetVertices();
 		for (int i = 0, n = bound.size(); i < n; ++i) {
-			bound[i] = ee::Math2D::RotateVector(bound[i], angle) + offset;
+			bound[i] = sm::rotate_vector(bound[i], angle) + offset;
 		}
 		grid_idx = grids.IntersectPolygon(bound);
 
@@ -243,7 +243,7 @@ void LRJsonPacker::ParserShape(ee::Shape* shape, const sm::vec2& offset, float a
 	{
 		std::vector<sm::vec2> bound = chain->GetVertices();
 		for (int i = 0, n = bound.size(); i < n; ++i) {
-			bound[i] = ee::Math2D::RotateVector(bound[i], angle) + offset;
+			bound[i] = sm::rotate_vector(bound[i], angle) + offset;
 		}
 
 		if (force_grids) {

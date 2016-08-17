@@ -3,13 +3,13 @@
 #include "color_config.h"
 
 #include <ee/Symbol.h>
-#include <ee/Math2D.h>
 #include <ee/std_functor.h>
 #include <ee/JsonSerializer.h>
 
 #include <shaderlab.h>
-
 #include <sprite2/S2_RVG.h>
+#include <SM_Test.h>
+#include <SM_Calc.h>
 
 #include <set>
 #include <algorithm>
@@ -64,7 +64,7 @@ Node* Mesh::PointQueryNode(const sm::vec2& p)
 	for (int i = 0, n = m_tris.size(); i < n; ++i) {
 		Triangle* tri = m_tris[i];
 		for (int j = 0; j < 3; ++j) {
-			float dis = ee::Math2D::GetDistance(tri->nodes[j]->xy, p);
+			float dis = sm::dis_pos_to_pos(tri->nodes[j]->xy, p);
 			if (dis < m_node_radius && dis < nearest) {
 				nearest = dis;
 				node = tri->nodes[j];
@@ -83,7 +83,7 @@ void Mesh::RectQueryNodes(const sm::rect& r, std::vector<Node*>& nodes)
 		Triangle* tri = m_tris[i];
 		for (int j = 0; j < 3; ++j) {
 			Node* node = tri->nodes[j];
-			if (ee::Math2D::IsPointInRect(node->xy, r) &&
+			if (sm::is_point_in_rect(node->xy, r) &&
 				unique.find(node) == unique.end()) {
 				nodes.push_back(node);
 				unique.insert(node);

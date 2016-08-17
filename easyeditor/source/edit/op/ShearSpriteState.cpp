@@ -5,6 +5,8 @@
 #include "ShearSpriteAOP.h"
 #include "panel_msg.h"
 
+#include <SM_Calc.h>
+
 namespace ee
 {
 
@@ -154,7 +156,7 @@ void ShearSpriteState::Shear2(const sm::vec2& curr)
 				Math2D::GetFootOfPerpendicular(ctrls[SpriteCtrlNode::LEFT_DOWN], ctrls[SpriteCtrlNode::RIGHT_DOWN], curr, &now);
 			}
 
-			float dis = Math2D::GetDistance(ori, now);
+			float dis = sm::dis_pos_to_pos(ori, now);
 			kx = dis / hh;
 			if ((center - ori).Cross(now - ori) < 0) {
 				kx = -kx;
@@ -174,7 +176,7 @@ void ShearSpriteState::Shear2(const sm::vec2& curr)
 				Math2D::GetFootOfPerpendicular(ctrls[SpriteCtrlNode::RIGHT_DOWN], ctrls[SpriteCtrlNode::RIGHT_UP], curr, &now);
 			}
 
-			float dis = Math2D::GetDistance(ori, now);
+			float dis = sm::dis_pos_to_pos(ori, now);
 			ky = dis / hw;
 			if ((center - ori).Cross(now - ori) > 0) {
 				ky = -ky;

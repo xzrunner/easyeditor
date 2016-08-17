@@ -136,8 +136,8 @@ bool SelectJointOP::OnMouseDrag(int x, int y)
 		case Joint::e_revoluteJoint:
 			{
 				RevoluteJoint* joint = static_cast<RevoluteJoint*>(m_selected);
-				const float disA = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorA()),
-					disB = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorB());
+				const float disA = sm::dis_pos_to_pos(pos, joint->GetWorldAnchorA()),
+					disB = sm::dis_pos_to_pos(pos, joint->GetWorldAnchorB());
 				if (disA < disB)
 					joint->SetLocalAnchorA(pos);
 				else
@@ -147,8 +147,8 @@ bool SelectJointOP::OnMouseDrag(int x, int y)
 		case Joint::e_prismaticJoint:
 			{
 				PrismaticJoint* joint = static_cast<PrismaticJoint*>(m_selected);
-				const float disA = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorA()),
-					disB = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorB());
+				const float disA = sm::dis_pos_to_pos(pos, joint->GetWorldAnchorA()),
+					disB = sm::dis_pos_to_pos(pos, joint->GetWorldAnchorB());
 				if (disA < disB)
 					joint->SetLocalAnchorA(pos);
 				else
@@ -158,8 +158,8 @@ bool SelectJointOP::OnMouseDrag(int x, int y)
 		case Joint::e_distanceJoint:
 			{
 				DistanceJoint* joint = static_cast<DistanceJoint*>(m_selected);
-				const float disA = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorA()),
-					disB = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorB());
+				const float disA = sm::dis_pos_to_pos(pos, joint->GetWorldAnchorA()),
+					disB = sm::dis_pos_to_pos(pos, joint->GetWorldAnchorB());
 				if (disA < disB)
 					joint->SetLocalAnchorA(pos);
 				else
@@ -169,10 +169,10 @@ bool SelectJointOP::OnMouseDrag(int x, int y)
 		case Joint::e_pulleyJoint:
 			{
 				PulleyJoint* joint = static_cast<PulleyJoint*>(m_selected);
-				const float disA = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorA()),
-					disB = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorB());
-				const float disGA = ee::Math2D::GetDistance(pos, joint->m_ground_anchor_a),
-					disGB = ee::Math2D::GetDistance(pos, joint->m_ground_anchor_b);
+				const float disA = sm::dis_pos_to_pos(pos, joint->GetWorldAnchorA()),
+					disB = sm::dis_pos_to_pos(pos, joint->GetWorldAnchorB());
+				const float disGA = sm::dis_pos_to_pos(pos, joint->m_ground_anchor_a),
+					disGB = sm::dis_pos_to_pos(pos, joint->m_ground_anchor_b);
 
 				float dis = std::min(std::min(disA, disB), std::min(disGA, disGB));
 				if (dis == disA)
@@ -192,8 +192,8 @@ bool SelectJointOP::OnMouseDrag(int x, int y)
 		case Joint::e_wheelJoint:
 			{
 				WheelJoint* joint = static_cast<WheelJoint*>(m_selected);
-				const float disA = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorA()),
-					disB = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorB());
+				const float disA = sm::dis_pos_to_pos(pos, joint->GetWorldAnchorA()),
+					disB = sm::dis_pos_to_pos(pos, joint->GetWorldAnchorB());
 				if (disA < disB)
 					joint->SetLocalAnchorA(pos);
 				else
@@ -203,8 +203,8 @@ bool SelectJointOP::OnMouseDrag(int x, int y)
 		case Joint::e_weldJoint:
 			{
 				WeldJoint* joint = static_cast<WeldJoint*>(m_selected);
-				const float disA = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorA()),
-					disB = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorB());
+				const float disA = sm::dis_pos_to_pos(pos, joint->GetWorldAnchorA()),
+					disB = sm::dis_pos_to_pos(pos, joint->GetWorldAnchorB());
 				if (disA < disB)
 					joint->SetLocalAnchorA(pos);
 				else
@@ -214,8 +214,8 @@ bool SelectJointOP::OnMouseDrag(int x, int y)
 		case Joint::e_frictionJoint:
 			{
 				FrictionJoint* joint = static_cast<FrictionJoint*>(m_selected);
-				const float disA = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorA()),
-					disB = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorB());
+				const float disA = sm::dis_pos_to_pos(pos, joint->GetWorldAnchorA()),
+					disB = sm::dis_pos_to_pos(pos, joint->GetWorldAnchorB());
 				if (disA < disB)
 					joint->SetLocalAnchorA(pos);
 				else
@@ -225,8 +225,8 @@ bool SelectJointOP::OnMouseDrag(int x, int y)
 		case Joint::e_ropeJoint:
 			{
 				RopeJoint* joint = static_cast<RopeJoint*>(m_selected);
-				const float disA = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorA()),
-					disB = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorB());
+				const float disA = sm::dis_pos_to_pos(pos, joint->GetWorldAnchorA()),
+					disB = sm::dis_pos_to_pos(pos, joint->GetWorldAnchorB());
 				if (disA < disB)
 					joint->SetLocalAnchorA(pos);
 				else

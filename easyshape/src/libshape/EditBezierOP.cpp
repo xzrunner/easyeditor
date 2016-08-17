@@ -83,7 +83,7 @@ bool EditBezierOP::OnMouseLeftUp(int x, int y)
 		{
 			m_curr_pos = m_stage->TransPosScrToProj(x, y);
 
-			const float dis = ee::Math2D::GetDistance(m_first_pos, m_curr_pos);
+			const float dis = sm::dis_pos_to_pos(m_first_pos, m_curr_pos);
 			if (dis > 1)
 			{
 				BezierShape* bezier = new BezierShape(m_first_pos, m_curr_pos);

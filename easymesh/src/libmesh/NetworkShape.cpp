@@ -68,7 +68,7 @@ bool NetworkShape::RemoveInner(const sm::vec2& pos)
 {
 	for (int i = 0, n = m_inner_vertices.size(); i < n; ++i) {
 		const sm::vec2& p = m_inner_vertices[i];
-		if (ee::Math2D::GetDistance(p, pos) < NODE_RADIUS) {
+		if (sm::dis_pos_to_pos(p, pos) < NODE_RADIUS) {
 			m_inner_vertices.erase(m_inner_vertices.begin() + i);
 			return true;
 		}
@@ -80,7 +80,7 @@ sm::vec2* NetworkShape::QueryInner(const sm::vec2& pos)
 {
 	for (int i = 0, n = m_inner_vertices.size(); i < n; ++i) {
 		const sm::vec2& p = m_inner_vertices[i];
-		if (ee::Math2D::GetDistance(p, pos) < NODE_RADIUS) {
+		if (sm::dis_pos_to_pos(p, pos) < NODE_RADIUS) {
 			return &m_inner_vertices[i];
 		}
 	}

@@ -4,6 +4,7 @@
 #include <ee/Math2D.h>
 
 #include <sprite2/S2_RVG.h>
+#include <SM_Calc.h>
 
 namespace lr
 {
@@ -115,7 +116,7 @@ std::vector<int> Grids::IntersectPolyline(const std::vector<sm::vec2>& path) con
 
 sm::vec2 Grids::TransToBirdView(float x, float y)
 {
-	sm::vec2 ret = ee::Math2D::RotateVector(sm::vec2(x, y), SM_PI / 4);
+	sm::vec2 ret = sm::rotate_vector(sm::vec2(x, y), SM_PI / 4);
 	ret.y *= PROJ_TRANS;
 	return ret;
 }
@@ -124,7 +125,7 @@ sm::vec2 Grids::TransToFlatView(float x, float y)
 {
 	sm::vec2 ret = sm::vec2(x, y);
 	ret.y /= PROJ_TRANS;
-	ret = ee::Math2D::RotateVector(ret, - SM_PI / 4);
+	ret = sm::rotate_vector(ret, - SM_PI / 4);
 	return ret;
 }
 

@@ -22,13 +22,13 @@ MotorJoint::MotorJoint(Body* b0, Body* b1)
 bool MotorJoint::IsContain(const sm::vec2& pos) const
 {
 	const sm::vec2 center = (m_body_a->m_spr->GetPosition() + m_body_b->m_spr->GetPosition()) * 0.5f;
-	return ee::Math2D::GetDistance(center, pos) < JOINT_RADIUS_OUT;
+	return sm::dis_pos_to_pos(center, pos) < JOINT_RADIUS_OUT;
 }
 
 bool MotorJoint::IsIntersect(const sm::rect& rect) const
 {
 	const sm::vec2 center = (m_body_a->m_spr->GetPosition() + m_body_b->m_spr->GetPosition()) * 0.5f;
-	return ee::Math2D::IsPointInRect(center, rect);
+	return sm::is_point_in_rect(center, rect);
 }
 
 void MotorJoint::Draw(DrawType type) const

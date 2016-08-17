@@ -10,7 +10,8 @@
 #include "RectShape.h"
 
 #include <ee/MultiShapesImpl.h>
-#include <ee/Math2D.h>
+
+#include <SM_Test.h>
 
 namespace eshape
 {
@@ -77,7 +78,7 @@ Visit(ee::Shape* shape, bool& next)
 bool NodeCapture::RectQueryVisitor::
 Visit(PointShape* point)
 {
-	if (ee::Math2D::GetDistance(point->GetPos(), m_pos) < m_tolerance) {
+	if (sm::dis_pos_to_pos(point->GetPos(), m_pos) < m_tolerance) {
 		m_result.shape = point;
 		m_result.pos.MakeInvalid();
 		return true;
@@ -91,7 +92,7 @@ Visit(BezierShape* bezier)
 {
 	// capture center
 	const sm::rect& rect = bezier->GetBounding( );
-	if (ee::Math2D::GetDistance(rect.Center(), m_pos) < m_tolerance)
+	if (sm::dis_pos_to_pos(rect.Center(), m_pos) < m_tolerance)
 	{
 		m_result.shape = bezier;
 		m_result.pos.MakeInvalid();
@@ -101,7 +102,7 @@ Visit(BezierShape* bezier)
 	// capture control points
 	const sm::vec2* ctrl_nodes = bezier->GetCtrlNodes();
 	for (int i = 0; i < s2::BezierShape::CTRL_NODE_COUNT; ++i) {
-		if (ee::Math2D::GetDistance(ctrl_nodes[i], m_pos) < m_tolerance) {
+		if (sm::dis_pos_to_pos(ctrl_nodes[i], m_pos) < m_tolerance) {
 			m_result.shape = bezier;
 			m_result.pos = ctrl_nodes[i];
 			return true;
@@ -116,7 +117,7 @@ Visit(PolylineShape* polyline)
 {
 	// capture center
 	const sm::rect& rect = polyline->GetBounding();
-	if (ee::Math2D::GetDistance(rect.Center(), m_pos) < m_tolerance)
+	if (sm::dis_pos_to_pos(rect.Center(), m_pos) < m_tolerance)
 	{
 		m_result.shape = polyline;
 		m_result.pos.MakeInvalid();
@@ -124,7 +125,7 @@ Visit(PolylineShape* polyline)
 	}
 
 	// capture control points
-	if (!ee::Math2D::IsRectIntersectRect(m_rect, polyline->GetBounding()))
+	if (!sm::is_rect_intersect_rect(m_rect, polyline->GetBounding()))
 		return false;
 
 	if (!polyline->IsIntersect(m_rect)) 
@@ -133,7 +134,7 @@ Visit(PolylineShape* polyline)
 	const std::vector<sm::vec2>& vertices = polyline->GetVertices();
 	for (size_t i = 0, n = vertices.size(); i < n; ++i)
 	{
-		if (ee::Math2D::GetDistance(vertices[i], m_pos) < m_tolerance)
+		if (sm::dis_pos_to_pos(vertices[i], m_pos) < m_tolerance)
 		{
 			m_result.shape = polyline;
 			m_result.pos = vertices[i];
@@ -147,7 +148,7 @@ Visit(PolylineShape* polyline)
 bool NodeCapture::RectQueryVisitor::
 Visit(CircleShape* circle)
 {
-	const float dis = ee::Math2D::GetDistance(circle->GetCenter(), m_pos);
+	const float dis = sm::dis_pos_to_pos(circle->GetCenter(), m_pos);
 
 	// capture center
 	if (dis < m_tolerance)
@@ -172,32 +173,32 @@ bool NodeCapture::RectQueryVisitor::
 Visit(RectShape* rect)
 {
 	// capture center
-	if (ee::Math2D::GetDistance(m_pos, rect->GetRect().Center()) < m_tolerance)
+	if (sm::dis_pos_to_pos(m_pos, rect->GetRect().Center()) < m_tolerance)
 	{
 		m_result.shape = rect;
 		m_result.pos.MakeInvalid();
 		return true;
 	}
 	// capture edge
-	else if (ee::Math2D::GetDistance(m_pos, sm::vec2(rect->GetRect().xmin, rect->GetRect().ymin)) < m_tolerance)
+	else if (sm::dis_pos_to_pos(m_pos, sm::vec2(rect->GetRect().xmin, rect->GetRect().ymin)) < m_tolerance)
 	{
 		m_result.shape = rect;
 		m_result.pos = sm::vec2(rect->GetRect().xmin, rect->GetRect().ymin);
 		return true;
 	}
-	else if (ee::Math2D::GetDistance(m_pos, sm::vec2(rect->GetRect().xmin, rect->GetRect().ymax)) < m_tolerance)
+	else if (sm::dis_pos_to_pos(m_pos, sm::vec2(rect->GetRect().xmin, rect->GetRect().ymax)) < m_tolerance)
 	{
 		m_result.shape = rect;
 		m_result.pos = sm::vec2(rect->GetRect().xmin, rect->GetRect().ymax);
 		return true;
 	}
-	else if (ee::Math2D::GetDistance(m_pos, sm::vec2(rect->GetRect().xmax, rect->GetRect().ymax)) < m_tolerance)
+	else if (sm::dis_pos_to_pos(m_pos, sm::vec2(rect->GetRect().xmax, rect->GetRect().ymax)) < m_tolerance)
 	{
 		m_result.shape = rect;
 		m_result.pos = sm::vec2(rect->GetRect().xmax, rect->GetRect().ymax);
 		return true;
 	}
-	else if (ee::Math2D::GetDistance(m_pos, sm::vec2(rect->GetRect().xmax, rect->GetRect().ymin)) < m_tolerance)
+	else if (sm::dis_pos_to_pos(m_pos, sm::vec2(rect->GetRect().xmax, rect->GetRect().ymin)) < m_tolerance)
 	{
 		m_result.shape = rect;
 		m_result.pos = sm::vec2(rect->GetRect().xmax, rect->GetRect().ymin);

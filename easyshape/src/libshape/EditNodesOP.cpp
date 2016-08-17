@@ -4,11 +4,11 @@
 
 #include <ee/panel_msg.h>
 #include <ee/EditPanelImpl.h>
-#include <ee/CosineSmooth.h>
 #include <ee/SettingData.h>
-#include <ee/DouglasPeucker.h>
 
 #include <sprite2/S2_RVG.h>
+#include <SM_CosineSmooth.h>
+#include <SM_DouglasPeucker.h>
 
 namespace eshape
 {
@@ -113,7 +113,7 @@ void EditNodesOP::Simplify(float threshold)
 	{
 		Modified modified;
 		modified.src = m_node_selection[i];
-		ee::DouglasPeucker::Do(modified.src->selectedNodes, threshold, modified.dst);
+		sm::douglas_peucker(modified.src->selectedNodes, threshold, modified.dst);
 		m_buffer.push_back(modified);
 	}
 }
@@ -125,7 +125,7 @@ void EditNodesOP::Smooth(float samplingWidth)
 	{
 		Modified modified;
 		modified.src = m_node_selection[i];
-		ee::CosineSmooth::Do(modified.src->selectedNodes, samplingWidth, modified.dst);
+		sm::cosine_smooth(modified.src->selectedNodes, samplingWidth, modified.dst);
 		m_buffer.push_back(modified);
 	}
 }

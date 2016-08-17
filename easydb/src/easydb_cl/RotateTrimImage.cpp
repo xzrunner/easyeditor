@@ -15,8 +15,11 @@
 #include <ee/MinBoundingBox.h>
 #include <ee/EE_ShaderLab.h>
 
-#include <wx/arrstr.h>
+#include <SM_Calc.h>
+
 #include <easyimage.h>
+
+#include <wx/arrstr.h>
 
 #include <fstream>
 
@@ -163,10 +166,10 @@ bool RotateTrimImage::GetRotateTrimInfo(const ee::Image* image, int& width, int&
 		sm::vec2 right = s;
 		right.x += 1;
 		angle = -ee::Math2D::GetAngle(s, e, right);
-		center = ee::Math2D::RotateVector(center, angle);
+		center = sm::rotate_vector(center, angle);
 
-		width = std::ceil(ee::Math2D::GetDistance(s, e));
-		height = std::ceil(ee::Math2D::GetDistance(e, bound[(left_idx+2)%4]));
+		width = std::ceil(sm::dis_pos_to_pos(s, e));
+		height = std::ceil(sm::dis_pos_to_pos(e, bound[(left_idx+2)%4]));
 	} else {
 		angle = 0;
 	}

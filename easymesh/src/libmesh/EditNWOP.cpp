@@ -11,6 +11,7 @@
 
 #include <sprite2/RenderParams.h>
 #include <sprite2/S2_RVG.h>
+#include <SM_Calc.h>
 
 namespace emesh
 {
@@ -32,7 +33,7 @@ bool EditNWOP::OnMouseLeftDown(int x, int y)
 	m_dragable = true;
 
 	m_last_pos = m_stage->TransPosScrToProj(x, y);
-	if (ee::Math2D::GetDistance(m_last_pos, m_center) < CENTER_RADIUS)
+	if (sm::dis_pos_to_pos(m_last_pos, m_center) < CENTER_RADIUS)
 	{
 		m_select_center = true;
 		return false;
@@ -155,7 +156,7 @@ void EditNWOP::RotateNode(const sm::vec2& dst)
 	{
 		Node* node = nodes[i];
 		sm::vec2 v = node->xy - m_center;
-		v = ee::Math2D::RotateVector(v, angle);
+		v = sm::rotate_vector(v, angle);
 		node->xy = m_center + v;
 	}
 }

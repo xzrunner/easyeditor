@@ -119,7 +119,7 @@ void MeshRenderer::DrawMesh(const Mesh* mesh, const s2::RenderParams& params, in
 		sm::vec2 vertices[4], texcoords[4];
 		for (int i = 0; i < 3; ++i)
 		{
-			vertices[i] = ee::Math2D::TransVector(tri->nodes[i]->xy, params.mt);
+			vertices[i] = params.mt * tri->nodes[i]->xy;
 			texcoords[i].x = (tri->nodes[i]->uv.x * ori_w - ori_w * 0.5f + dst_edge * 0.5f) / dst_edge;
 			texcoords[i].y = (tri->nodes[i]->uv.y * ori_h - ori_h * 0.5f + dst_edge * 0.5f) / dst_edge;
 		}

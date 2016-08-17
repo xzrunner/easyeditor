@@ -24,13 +24,13 @@ bool EditClipboxOP::OnMouseLeftDown(int x, int y)
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 
 	m_clipbox_selected = -1;
-	if (ee::Math2D::GetDistance(sm::vec2(m_rect.xmin, m_rect.ymin), pos) < NODE_RADIUS) {
+	if (sm::dis_pos_to_pos(sm::vec2(m_rect.xmin, m_rect.ymin), pos) < NODE_RADIUS) {
 		m_clipbox_selected = 0;
-	} else if (ee::Math2D::GetDistance(sm::vec2(m_rect.xmin, m_rect.ymax), pos) < NODE_RADIUS) {
+	} else if (sm::dis_pos_to_pos(sm::vec2(m_rect.xmin, m_rect.ymax), pos) < NODE_RADIUS) {
 		m_clipbox_selected = 1;
-	} else if (ee::Math2D::GetDistance(sm::vec2(m_rect.xmax, m_rect.ymax), pos) < NODE_RADIUS) {
+	} else if (sm::dis_pos_to_pos(sm::vec2(m_rect.xmax, m_rect.ymax), pos) < NODE_RADIUS) {
 		m_clipbox_selected = 2;
-	} else if (ee::Math2D::GetDistance(sm::vec2(m_rect.xmax, m_rect.ymin), pos) < NODE_RADIUS) {
+	} else if (sm::dis_pos_to_pos(sm::vec2(m_rect.xmax, m_rect.ymin), pos) < NODE_RADIUS) {
 		m_clipbox_selected = 3;
 	}
 

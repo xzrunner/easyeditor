@@ -42,7 +42,7 @@ void PerspectiveSpriteState::Perspective(const sm::vec2& curr)
 	t.SetTransformation(m_spr->GetPosition().x, m_spr->GetPosition().y, m_spr->GetAngle(),
 		m_spr->GetScale().x, m_spr->GetScale().y, 0, 0, m_spr->GetShear().x, m_spr->GetShear().y);
 
-	sm::vec2 old = Math2D::TransVector(curr, t.Inverted());
+	sm::vec2 old = t.Inverted() * curr;
 	sm::vec2 persp;
 	if (m_ctrl_node.type == SpriteCtrlNode::LEFT_DOWN) {
 		persp.x = r.xmin - old.x;

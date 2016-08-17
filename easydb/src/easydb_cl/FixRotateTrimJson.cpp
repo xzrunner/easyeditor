@@ -3,8 +3,9 @@
 #include "check_params.h"
 
 #include <ee/FileHelper.h>
-#include <ee/Math2D.h>
 #include <ee/SpriteIO.h>
+
+#include <SM_Calc.h>
 
 #include <fstream>
 #include <sstream>
@@ -78,14 +79,14 @@ bool FixRotateTrimJson::FixSprite(const std::string& filepath, Json::Value& spri
 	ee::SpriteIO::Data data;
 	ee::SpriteIO::Load(sprite_val, data);
 
-	sm::vec2 new_offset = ee::Math2D::RotateVector(data.offset, data.angle);
+	sm::vec2 new_offset = sm::rotate_vector(data.offset, data.angle);
 
-	sm::vec2 trim_offset = ee::Math2D::RotateVector(sm::vec2(trim.x, trim.y), -trim.angle);
+	sm::vec2 trim_offset = sm::rotate_vector(sm::vec2(trim.x, trim.y), -trim.angle);
 
 	float new_angle = data.angle - trim.angle;
 
-	sm::vec2 new_pos = ee::Math2D::RotateVector(-data.offset, data.angle) + data.offset + data.position 
-		- ee::Math2D::RotateVector(-new_offset, new_angle) - new_offset - trim_offset;
+	sm::vec2 new_pos = sm::rotate_vector(-data.offset, data.angle) + data.offset + data.position 
+		- sm::rotate_vector(-new_offset, new_angle) - new_offset - trim_offset;
 
 	data.position = new_pos;
 	data.angle = new_angle;

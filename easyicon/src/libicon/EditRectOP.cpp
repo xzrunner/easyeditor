@@ -4,12 +4,12 @@
 #include "IconType.h"
 
 #include <ee/EditPanelImpl.h>
-#include <ee/Math2D.h>
 #include <ee/panel_msg.h>
 #include <ee/Image.h>
 #include <ee/color_config.h>
 
 #include <sprite2/S2_RVG.h>
+#include <SM_Calc.h>
 
 namespace eicon
 {
@@ -38,13 +38,13 @@ bool EditRectOP::OnMouseLeftDown(int x, int y)
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 
 	sm::rect r = icon->GetRegion(1);
-	if (ee::Math2D::GetDistance(sm::vec2(r.xmin, r.ymin), pos) < CTRL_NODE_RADIUS) {
+	if (sm::dis_pos_to_pos(sm::vec2(r.xmin, r.ymin), pos) < CTRL_NODE_RADIUS) {
 		m_selected = PT_LEFT_LOW;
-	} else if (ee::Math2D::GetDistance(sm::vec2(r.xmin, r.ymax), pos) < CTRL_NODE_RADIUS) {
+	} else if (sm::dis_pos_to_pos(sm::vec2(r.xmin, r.ymax), pos) < CTRL_NODE_RADIUS) {
 		m_selected = PT_LEFT_TOP;
-	} else if (ee::Math2D::GetDistance(sm::vec2(r.xmax, r.ymax), pos) < CTRL_NODE_RADIUS) {
+	} else if (sm::dis_pos_to_pos(sm::vec2(r.xmax, r.ymax), pos) < CTRL_NODE_RADIUS) {
 		m_selected = PT_RIGHT_TOP;
-	} else if (ee::Math2D::GetDistance(sm::vec2(r.xmax, r.ymin), pos) < CTRL_NODE_RADIUS) {
+	} else if (sm::dis_pos_to_pos(sm::vec2(r.xmax, r.ymin), pos) < CTRL_NODE_RADIUS) {
 		m_selected = PT_RIGHT_LOW;
 	}
 

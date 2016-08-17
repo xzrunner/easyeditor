@@ -3,11 +3,11 @@
 #include "Symbol.h"
 
 #include <ee/EditPanelImpl.h>
-#include <ee/Math2D.h>
 #include <ee/panel_msg.h>
 #include <ee/SpriteRenderer.h>
 
 #include <sprite2/S2_RVG.h>
+#include <SM_Test.h>
 
 namespace escale9
 {
@@ -31,13 +31,13 @@ bool ResizeBaseOP::OnMouseLeftDown(int x, int y)
 
 	sm::vec2 sz = m_sym->GetBounding().Size();
 	const float hw = sz.x * 0.5f, hh = sz.y * 0.5f;
-	if (ee::Math2D::IsPointInRect(m_firstPos, sm::vec2(-hw, -hh), REGION, REGION))
+	if (sm::is_point_in_rect(m_firstPos, sm::rect(sm::vec2(-hw, -hh), REGION, REGION)))
 		m_status = e_leftlow;
-	else if (ee::Math2D::IsPointInRect(m_firstPos, sm::vec2(hw, -hh), REGION, REGION))
+	else if (sm::is_point_in_rect(m_firstPos, sm::rect(sm::vec2(hw, -hh), REGION, REGION)))
 		m_status = e_rightlow;
-	else if (ee::Math2D::IsPointInRect(m_firstPos, sm::vec2(hw, hh), REGION, REGION))
+	else if (sm::is_point_in_rect(m_firstPos, sm::rect(sm::vec2(hw, hh), REGION, REGION)))
 		m_status = e_rightup;
-	else if (ee::Math2D::IsPointInRect(m_firstPos, sm::vec2(-hw, hh), REGION, REGION))
+	else if (sm::is_point_in_rect(m_firstPos, sm::rect(sm::vec2(-hw, hh), REGION, REGION)))
 		m_status = e_leftup;
 
 	return false;

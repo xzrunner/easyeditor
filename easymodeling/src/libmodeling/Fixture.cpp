@@ -35,7 +35,7 @@ bool Fixture::IsContain(const sm::vec2& pos) const
 {
 	if (eshape::CircleShape* circle = dynamic_cast<eshape::CircleShape*>(m_shape))
 	{
-		return ee::Math2D::GetDistance(circle->center + m_body->m_spr->GetPosition(), pos) 
+		return sm::dis_pos_to_pos(circle->center + m_body->m_spr->GetPosition(), pos) 
 			< circle->radius;
 	}
 	else if (eshape::RectShape* rect = dynamic_cast<eshape::RectShape*>(m_shape))
@@ -48,13 +48,13 @@ bool Fixture::IsContain(const sm::vec2& pos) const
 
 		std::vector<sm::vec2> fixed;
 		TransLocalToWorld(boundary, fixed);
-		return ee::Math2D::IsPointInArea(pos, fixed);
+		return sm::is_point_in_area(pos, fixed);
 	}
 	else if (eshape::PolygonShape* polygon = dynamic_cast<eshape::PolygonShape*>(m_shape))
 	{
 		std::vector<sm::vec2> fixed;
 		TransLocalToWorld(polygon->GetVertices(), fixed);
-		return ee::Math2D::IsPointInArea(pos, fixed);
+		return sm::is_point_in_area(pos, fixed);
 	}
 	else if (eshape::ChainShape* chain = dynamic_cast<eshape::ChainShape*>(m_shape))
 	{
@@ -105,8 +105,8 @@ void Fixture::Draw(const sm::mat4& mt, const s2::Color& cFace, const s2::Color& 
 {
 	if (eshape::CircleShape* circle = dynamic_cast<eshape::CircleShape*>(m_shape))
 	{
-		sm::vec2 c = ee::Math2D::TransVector(circle->center, mt);
-		float r = ee::Math2D::TransLen(circle->radius, mt);
+		sm::vec2 c = mt * circle->center;
+		float r = sm::mat_trans_len(circle->radius, mt);
 		s2::RVG::SetColor(cFace);
 		s2::RVG::Circle(c, r, true);
 		s2::RVG::SetColor(cEdge);
@@ -116,8 +116,8 @@ void Fixture::Draw(const sm::mat4& mt, const s2::Color& cFace, const s2::Color& 
 	{
 		sm::vec2 min(rect->m_rect.xmin, rect->m_rect.ymin),
 			max(rect->m_rect.xmax, rect->m_rect.ymax);
-		min = ee::Math2D::TransVector(min, mt);
-		max = ee::Math2D::TransVector(max, mt);
+		min = mt * min;
+		max = mt * max;
 		s2::RVG::SetColor(cFace);
 		s2::RVG::Rect(min, max, true);
 		s2::RVG::Rect(min, max, false);
@@ -145,7 +145,7 @@ void Fixture::TransLocalToWorld(const std::vector<sm::vec2>& local,
 {
 	world.resize(local.size());
 	for (size_t i = 0, n = local.size(); i < n ; ++i)
-		world[i] = ee::Math2D::RotateVector(local[i], m_body->m_spr->GetAngle()) + m_body->m_spr->GetPosition();
+		world[i] = sm::rotate_vector(local[i], m_body->m_spr->GetAngle()) + m_body->m_spr->GetPosition();
 }
 
 }

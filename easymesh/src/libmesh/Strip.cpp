@@ -4,6 +4,8 @@
 #include <ee/JsonSerializer.h>
 #include <ee/Math2D.h>
 
+#include <SM_Calc.h>
+
 #include <set>
 #include <algorithm>
 
@@ -325,7 +327,7 @@ void Strip::TranslateNode(Node* node, const std::vector<std::pair<sm::vec2, sm::
 {
 	for (int i = 0, m = trans_list.size(); i < m; ++i)
 	{
-		float dis = ee::Math2D::GetDistanceSquare(node->ori_xy, trans_list[i].first);
+		float dis = sm::dis_square_pos_to_pos(node->ori_xy, trans_list[i].first);
 		if (dis < 0.01) {
 			node->xy = trans_list[i].second;
 			break;
@@ -337,7 +339,7 @@ void Strip::TranslateNode(sm::vec2& node, const std::vector<std::pair<sm::vec2, 
 {
 	for (int i = 0, m = trans_list.size(); i < m; ++i)
 	{
-		float dis = ee::Math2D::GetDistanceSquare(node, trans_list[i].first);
+		float dis = sm::dis_square_pos_to_pos(node, trans_list[i].first);
 		if (dis < 0.01) {
 			node = trans_list[i].second;
 			break;
@@ -358,7 +360,7 @@ void Strip::MapUV2XY(const std::vector<sm::vec2>& nodes, int index, const sm::ve
 	sm::vec2 foot;
 	int st = ee::Math2D::GetFootOfPerpendicular(s, e, pos, &foot);
 	
-	float p = ee::Math2D::GetDistance(s, foot) / ee::Math2D::GetDistance(s, e);
+	float p = sm::dis_pos_to_pos(s, foot) / sm::dis_pos_to_pos(s, e);
  	sm::vec2 xy_p = xy_s + (xy_e - xy_s) * p;
  	trans_list.push_back(std::make_pair(foot, xy_p));
 }
@@ -405,7 +407,7 @@ GetNodeInsertPos(const sm::vec2& p, sm::vec2& nearest)
 		if (st == -1) {
 			continue;
 		}
-		float dis = ee::Math2D::GetDistanceSquare(foot, p);
+		float dis = sm::dis_square_pos_to_pos(foot, p);
 		if (dis < dis_nearest) {
 			idx_nearest = i;
 			dis_nearest = dis;
@@ -425,7 +427,7 @@ QueryIndex(const sm::vec2& p, float radius) const
 {
 	// front and back are bound
 	for (int i = 1, n = m_ori.size() - 1; i < n; ++i) {
-		if (ee::Math2D::GetDistance(m_ori[i], p) < radius) {
+		if (sm::dis_pos_to_pos(m_ori[i], p) < radius) {
 			return i;
 		}
 	}
@@ -470,7 +472,7 @@ Insert(std::vector<sm::vec2>& nodes, const sm::vec2& p)
 		if (st == -1) {
 			continue;
 		}
-		float dis = ee::Math2D::GetDistanceSquare(foot, p);
+		float dis = sm::dis_square_pos_to_pos(foot, p);
 		if (dis < dis_nearest) {
 			idx_nearest = i;
 			dis_nearest = dis;

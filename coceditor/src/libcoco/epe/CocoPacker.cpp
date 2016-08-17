@@ -7,7 +7,6 @@
 #include <ee/ImageSymbol.h>
 #include <ee/FontBlankSprite.h>
 #include <ee/Exception.h>
-#include <ee/Math2D.h>
 #include <ee/trans_color.h>
 
 #include <easycomplex.h>
@@ -15,6 +14,7 @@
 #include <easyscale9.h>
 
 #include <sprite2/S2_Sprite.h>
+#include <SM_Calc.h>
 
 namespace ecoco
 {
@@ -205,7 +205,7 @@ void CocoPacker::resolvePicture(const ee::ImageSprite* spr)
 	// 2. rotate
 	for (size_t i = 0; i < 4; ++i)
 	{
-		sm::vec2 rot = ee::Math2D::RotateVector(screen[i], spr->GetAngle());
+		sm::vec2 rot = sm::rotate_vector(screen[i], spr->GetAngle());
 		screen[i] = rot;
 	}
 	// 3. translate

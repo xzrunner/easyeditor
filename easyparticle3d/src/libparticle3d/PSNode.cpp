@@ -136,7 +136,7 @@ render_func(void* sym, float* mat, float x, float y, float angle, float scale,
 	// todo record
 	// 	AnimRecorder* curr_record = m_anim_recorder ? m_anim_recorder : recorder;
 	// 	if (curr_record) {
-	// 		sm::vec2 fixed = ee::Math2D::TransVector(pos, _mt);
+	// 		sm::vec2 fixed = _mt * pos;
 	// 		curr_record->AddItem(sym->GetFilepath(), fixed.x, fixed.y, p->angle, s, mul_col, add_col);
 	// 	}
 }

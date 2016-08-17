@@ -6,10 +6,10 @@
 #include "ImageSymbol.h"
 #include "Image.h"
 #include "color_config.h"
-#include "Math2D.h"
 
 #include <sprite2/S2_RVG.h>
 #include <sprite2/BoundingBox.h>
+#include <SM_Calc.h>
 
 #include <vector>
 
@@ -41,8 +41,8 @@ void DrawSelectedSpriteVisitor::Visit(Sprite* spr, bool& next)
 
 			sm::mat4 mt = s->GetTransMatrix();
 			sm::vec2 min(-hw, -hh), max(hw, hh);
-			min = ee::Math2D::TransVector(min, mt);
-			max = ee::Math2D::TransVector(max, mt);
+			min = mt * min;
+			max = mt * max;
 
 			s2::RVG::Rect(min, max, false);
 

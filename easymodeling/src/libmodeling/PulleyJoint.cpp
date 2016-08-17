@@ -25,18 +25,18 @@ PulleyJoint::PulleyJoint(Body* b0, Body* b1)
 
 bool PulleyJoint::IsContain(const sm::vec2& pos) const
 {
-	return ee::Math2D::GetDistance(GetWorldAnchorA(), pos) < JOINT_RADIUS_OUT
-		|| ee::Math2D::GetDistance(GetWorldAnchorB(), pos) < JOINT_RADIUS_OUT
-		|| ee::Math2D::GetDistance(m_ground_anchor_a, pos) < JOINT_RADIUS_OUT
-		|| ee::Math2D::GetDistance(m_ground_anchor_b, pos) < JOINT_RADIUS_OUT;
+	return sm::dis_pos_to_pos(GetWorldAnchorA(), pos) < JOINT_RADIUS_OUT
+		|| sm::dis_pos_to_pos(GetWorldAnchorB(), pos) < JOINT_RADIUS_OUT
+		|| sm::dis_pos_to_pos(m_ground_anchor_a, pos) < JOINT_RADIUS_OUT
+		|| sm::dis_pos_to_pos(m_ground_anchor_b, pos) < JOINT_RADIUS_OUT;
 }
 
 bool PulleyJoint::IsIntersect(const sm::rect& rect) const
 {
-	return ee::Math2D::IsPointInRect(GetWorldAnchorA(), rect) 
-		|| ee::Math2D::IsPointInRect(GetWorldAnchorB(), rect)
-		|| ee::Math2D::IsPointInRect(m_ground_anchor_a, rect) 
-		|| ee::Math2D::IsPointInRect(m_ground_anchor_b, rect);
+	return sm::is_point_in_rect(GetWorldAnchorA(), rect) 
+		|| sm::is_point_in_rect(GetWorldAnchorB(), rect)
+		|| sm::is_point_in_rect(m_ground_anchor_a, rect) 
+		|| sm::is_point_in_rect(m_ground_anchor_b, rect);
 }
 
 void PulleyJoint::Draw(DrawType type) const

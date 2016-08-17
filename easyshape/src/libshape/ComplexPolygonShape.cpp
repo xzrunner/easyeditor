@@ -31,7 +31,7 @@
 //{
 //	if (PolygonShape::IsContain(pos)) {
 //		for (int i = 0, n = m_holes.size(); i < n; ++i) {
-//			if (ee::Math2D::IsPointInArea(pos, m_holes[i])) {
+//			if (sm::is_point_in_area(pos, m_holes[i])) {
 //				return false;
 //			}
 //		}
@@ -61,7 +61,7 @@
 //	PolygonShape::Draw(mt, color);
 //
 //	if (ee::SettingData::draw_poly_bound) {
-//		float len = ee::Math2D::TransLen(ee::SettingData::ctl_pos_sz, mt);
+//		float len = sm::mat_trans_len(ee::SettingData::ctl_pos_sz, mt);
 //		for (int i = 0, n = m_holes.size(); i < n; ++i) {
 //			std::vector<sm::vec2> vertices;
 //			ee::Math2D::TransVertices(mt, m_holes[i], vertices);

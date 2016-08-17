@@ -159,7 +159,7 @@ void Paskage::PackJoint(const Joint& data, std::ofstream& fout,
 			fout.write(reinterpret_cast<const char*>(&joint->m_local_anchor_b.x), sizeof(float));
 			fout.write(reinterpret_cast<const char*>(&joint->m_local_anchor_b.y), sizeof(float));
 
-			float length = ee::Math2D::GetDistance(joint->GetWorldAnchorA(), joint->GetWorldAnchorB());
+			float length = sm::dis_pos_to_pos(joint->GetWorldAnchorA(), joint->GetWorldAnchorB());
 			fout.write(reinterpret_cast<const char*>(&length), sizeof(float));
 
 			fout.write(reinterpret_cast<const char*>(&joint->m_frequency_hz), sizeof(float));

@@ -83,7 +83,7 @@ void SpriteBlend::DrawTmpToScreen(const Sprite* spr, const sm::mat4& mt)
 	vertices[2] = sm::vec2(r.xmax, r.ymax);
 	vertices[3] = sm::vec2(r.xmax, r.ymin);
 	for (int i = 0; i < 4; ++i) {
-		vertices[i] = Math2D::TransVector(vertices[i], t);
+		vertices[i] = t * vertices[i];
 	}
 
 	sm::vec2 vertex_offset = - (mt * spr->GetPosition());

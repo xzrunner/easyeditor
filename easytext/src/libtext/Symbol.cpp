@@ -104,8 +104,8 @@ void Symbol::DrawBackground(const Sprite* spr, const sm::mat4& mt) const
 		  hh = h * 0.5f;
 
 	sm::vec2 min(-hw, -hh), max(hw, hh);
-	min = ee::Math2D::TransVector(min, mt);
-	max = ee::Math2D::TransVector(max, mt);
+	min = mt * min;
+	max = mt * max;
 
 	s2::RVG::Rect(min, max, true);
 }

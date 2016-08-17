@@ -54,7 +54,7 @@
 //		{
 //			const std::vector<std::vector<sm::vec2> >& holes = cpoly->GetHoles();
 //			for (int i = 0, n = holes.size(); i < n; ++i) {
-//				if (ee::Math2D::isPolylineIntersectPolylinI(holes[i], polyline)) {
+//				if (sm::is_convex_intersect_convex(holes[i], polyline)) {
 //					return NULL;
 //				}
 //			}

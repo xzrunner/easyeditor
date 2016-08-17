@@ -3,6 +3,9 @@
 #include <ee/MinBoundingBox.h>
 #include <ee/Math2D.h>
 
+#include <SM_Test.h>
+#include <SM_Calc.h>
+
 #include <assert.h>
 
 namespace eimage
@@ -105,9 +108,9 @@ void ExtractOutlineFine::OutlineByAddNode(float area_tol, float perimeter_tol,
 				const sm::vec2& start_prev = m_fine_border[(a_idx+m_fine_border.size()-1)%m_fine_border.size()];
 				sm::vec2 cross_start;
 				int new_node_pos;
-				ee::Math2D::GetTwoLineCross(a_new_node, a_new_start, start_prev, start, &cross_start);
-				if (ee::Math2D::GetDistanceSquare(cross_start, a_new_start) < ee::Math2D::GetDistanceSquare(cross_start, a_new_node) &&
-					ee::Math2D::GetDistanceSquare(cross_start, a_new_node) >= ee::Math2D::GetDistanceSquare(a_new_start, a_new_node)) {
+				sm::intersect_line_line(a_new_node, a_new_start, start_prev, start, &cross_start);
+				if (sm::dis_square_pos_to_pos(cross_start, a_new_start) < sm::dis_square_pos_to_pos(cross_start, a_new_node) &&
+					sm::dis_square_pos_to_pos(cross_start, a_new_node) >= sm::dis_square_pos_to_pos(a_new_start, a_new_node)) {
 					new_node_pos = (a_idx+1)%m_fine_border.size();
 					m_fine_border[a_idx] = cross_start;
 				} else {					
@@ -124,9 +127,9 @@ void ExtractOutlineFine::OutlineByAddNode(float area_tol, float perimeter_tol,
 				const sm::vec2& end = m_fine_border[(new_node_pos+1)%m_fine_border.size()];
 				const sm::vec2& end_next = m_fine_border[(new_node_pos+2)%m_fine_border.size()];
 				sm::vec2 cross_end;
-				ee::Math2D::GetTwoLineCross(a_new_node, a_new_end, end_next, end, &cross_end);
-				if (ee::Math2D::GetDistanceSquare(cross_end, a_new_end) < ee::Math2D::GetDistanceSquare(cross_end, a_new_node) &&
-					ee::Math2D::GetDistanceSquare(cross_end, a_new_node) >= ee::Math2D::GetDistanceSquare(a_new_end, a_new_node)) {
+				sm::intersect_line_line(a_new_node, a_new_end, end_next, end, &cross_end);
+				if (sm::dis_square_pos_to_pos(cross_end, a_new_end) < sm::dis_square_pos_to_pos(cross_end, a_new_node) &&
+					sm::dis_square_pos_to_pos(cross_end, a_new_node) >= sm::dis_square_pos_to_pos(a_new_end, a_new_node)) {
 					m_fine_border[(new_node_pos+1)%m_fine_border.size()] = cross_end;
 				} else {
 					m_fine_border.insert(m_fine_border.begin()+((new_node_pos+1)%m_fine_border.size()), a_new_end);
@@ -181,8 +184,8 @@ void ExtractOutlineFine::RemoveOneNode(int idx, sm::vec2& new0, sm::vec2& new1, 
 		return;
 	}
 
-	float len_prev = ee::Math2D::GetDistance(curr, prev),
-		len_next = ee::Math2D::GetDistance(curr, next);
+	float len_prev = sm::dis_pos_to_pos(curr, prev),
+		len_next = sm::dis_pos_to_pos(curr, next);
 	float area_max = 0;
 	float idx_e = 0;
 	for (float i = 0; i < len_prev; i+=1) {
@@ -440,7 +443,7 @@ void ExtractOutlineFine::MidPosExplore(const sm::vec2& start, const sm::vec2& en
 				sm::vec2 curr_mid = mid + offset;
 				float area = ee::Math2D::GetTriangleArea(start, curr_mid, end);
 				if (area > score &&
-					ee::Math2D::IsPointInArea(curr_mid, m_fine_border)) {
+					sm::is_point_in_area(curr_mid, m_fine_border)) {
 
 						// !ee::Math2D::isPointInArea(curr_mid, m_raw_border_merged)
 
@@ -526,7 +529,7 @@ void ExtractOutlineFine::ReduceEdge(float area_tol, float perimeter_tol)
 			}
 			
 			sm::vec2 intersect;
-			bool cross = ee::Math2D::GetTwoLineCross(start_prev, start, end, end_next, &intersect);
+			bool cross = sm::intersect_line_line(start_prev, start, end, end_next, &intersect);
 			if (!cross) {
 				continue;
 			}
@@ -539,9 +542,9 @@ void ExtractOutlineFine::ReduceEdge(float area_tol, float perimeter_tol)
 			if (!inside_s && !inside_e) 
 			{
 				float a = ee::Math2D::GetTriangleArea(intersect, start, end);
-				float len = ee::Math2D::GetDistance(intersect, start) 
-					+ ee::Math2D::GetDistance(intersect, end)
-					- ee::Math2D::GetDistance(start, end);
+				float len = sm::dis_pos_to_pos(intersect, start) 
+					+ sm::dis_pos_to_pos(intersect, end)
+					- sm::dis_pos_to_pos(start, end);
 				if (a < area_limit && len < perimeter_limit && 
 					IsAddTriLeagal(start, end, intersect))
 				{
@@ -561,9 +564,9 @@ void ExtractOutlineFine::ReduceEdge(float area_tol, float perimeter_tol)
 
 				bool is_inside;
 				if (inside_s) {
-					is_inside = ee::Math2D::IsTurnRight(start, intersect, end_next);
+					is_inside = sm::is_turn_right(start, intersect, end_next);
 				} else {
-					is_inside = ee::Math2D::IsTurnLeft(end, intersect, start_prev);
+					is_inside = sm::is_turn_left(end, intersect, start_prev);
 				}
 				if (is_inside || ee::Math2D::GetTriangleArea(intersect, start, end) < area_limit) {
 					if (IsCutTriLegal(intersect, start, end)) {

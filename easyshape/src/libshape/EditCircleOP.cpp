@@ -8,11 +8,11 @@
 #include <ee/OneFloatValue.h>
 #include <ee/EditPanelImpl.h>
 #include <ee/ShapeSelection.h>
-#include <ee/Math2D.h>
 #include <ee/PropertySettingPanel.h>
 #include <ee/panel_msg.h>
 
 #include <sprite2/S2_RVG.h>
+#include <SM_Calc.h>
 
 namespace eshape
 {
@@ -86,7 +86,7 @@ bool EditCircleOP::OnMouseLeftUp(int x, int y)
 		{
 			m_curr_pos = m_stage->TransPosScrToProj(x, y);
 
-			const float radius = ee::Math2D::GetDistance(m_first_pos, m_curr_pos);
+			const float radius = sm::dis_pos_to_pos(m_first_pos, m_curr_pos);
 			if (radius > 0)
 			{
 				CircleShape* circle = new CircleShape(m_first_pos, radius);
@@ -173,7 +173,7 @@ bool EditCircleOP::OnMouseDrag(int x, int y)
 				circle->SetCenter(m_curr_pos);
 			// change size
 			else
-				circle->SetRadius(ee::Math2D::GetDistance(m_curr_pos, circle->GetCenter()));
+				circle->SetRadius(sm::dis_pos_to_pos(m_curr_pos, circle->GetCenter()));
 
 			if (m_property) {
 				m_property->EnablePropertyGrid(false);
@@ -210,7 +210,7 @@ bool EditCircleOP::OnDraw() const
 	{
 		if (m_first_pos.IsValid() && m_curr_pos.IsValid()) {
 			s2::RVG::SetColor(s2::Color(0, 0, 0));
-			s2::RVG::Circle(m_first_pos, ee::Math2D::GetDistance(m_first_pos, m_curr_pos), false, 32);
+			s2::RVG::Circle(m_first_pos, sm::dis_pos_to_pos(m_first_pos, m_curr_pos), false, 32);
 		}
 	}
 

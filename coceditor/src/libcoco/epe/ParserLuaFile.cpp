@@ -9,8 +9,9 @@
 #include <ee/ImageSymbol.h>
 #include <ee/ImageSprite.h>
 #include <ee/SpriteFactory.h>
-#include <ee/Math2D.h>
 #include <ee/trans_color.h>
+
+#include <SM_Calc.h>
 
 #include <easycomplex.h>
 #include <easyanim.h>
@@ -660,9 +661,9 @@ void ParserLuaFile::Picture::Part::transform(ee::Sprite* spr) const
 		center /= 4;
 
 		sm::vec2 other = (dst[0] + dst[1]) * 0.5f;
-		float angle = ee::Math2D::GetLineAngle(center, other);
+		float angle = sm::get_line_angle(center, other);
 		for (int i = 0; i < 4; ++i) {
-			_dst[i] = center + ee::Math2D::RotateVector(dst[i] - center, -angle);
+			_dst[i] = center + sm::rotate_vector(dst[i] - center, -angle);
 		}
 		pre_rotate = -angle;
 	}

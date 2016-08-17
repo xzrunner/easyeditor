@@ -3,6 +3,7 @@
 #include "Math2D.h"
 
 #include <triangle.cpp>
+#include <SM_Test.h>
 
 #include <assert.h>
 
@@ -80,7 +81,7 @@ static void finish(struct triangulateio& in,
 		}
 
 		sm::vec2 center = Math2D::GetTriGravityCenter(tri[0], tri[1], tri[2]);
-		if (Math2D::IsPointInArea(center, bound))
+		if (sm::is_point_in_area(center, bound))
 			copy(tri.begin(), tri.end(), back_inserter(result));
 	}
 

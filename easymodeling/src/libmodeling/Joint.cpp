@@ -33,13 +33,13 @@ void Joint::DrawBodyFlag() const
 sm::vec2 Joint::TransWorldToLocal(const sm::vec2& world, 
 									const ee::Sprite* spr)
 {
-	return ee::Math2D::RotateVector(world - spr->GetPosition(), -spr->GetAngle());
+	return sm::rotate_vector(world - spr->GetPosition(), -spr->GetAngle());
 }
 
 sm::vec2 Joint::TransLocalToWorld(const sm::vec2& local, 
 									const ee::Sprite* spr)
 {
-	return ee::Math2D::RotateVector(local, spr->GetAngle()) + spr->GetPosition();
+	return sm::rotate_vector(local, spr->GetAngle()) + spr->GetPosition();
 }
 
 void Joint::DrawBodyFlag(const sm::vec2& pos) const

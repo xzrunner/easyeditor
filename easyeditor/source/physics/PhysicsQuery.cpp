@@ -1,6 +1,7 @@
 #include "PhysicsQuery.h"
 #include "physics_const.h"
-#include "Math2D.h"
+
+#include <SM_Calc.h>
 
 namespace ee
 {
@@ -40,7 +41,7 @@ b2Body* PhysicsQuery::QueryNear(b2World* world, const sm::vec2& pos)
 		for (b2Body* b = world->GetBodyList(); b; b = b->GetNext())
 		{
 			b2Vec2 bPos = b->GetPosition();
-			const float dis = Math2D::GetDistance(pos, sm::vec2(bPos.x, bPos.y));
+			const float dis = sm::dis_pos_to_pos(pos, sm::vec2(bPos.x, bPos.y));
 			if (dis < nearDis)
 			{
 				nearDis = dis;

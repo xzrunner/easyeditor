@@ -1,5 +1,4 @@
 #include "ArrangeSpriteImpl.h"
-#include "Math2D.h"
 #include "Config.h"
 #include "SettingData.h"
 #include "EditPanelImpl.h"
@@ -32,6 +31,7 @@
 #include <sprite2/RenderColor.h>
 #include <sprite2/S2_RVG.h>
 #include <sprite2/BoundingBox.h>
+#include <SM_Calc.h>
 
 namespace ee
 {
@@ -197,7 +197,7 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 	if (m_cfg.is_offset_open)
 	{
 		sm::vec2 offset = GetSprOffset(selected);
-		if (Math2D::GetDistance(offset, pos) < m_ctrl_node_radius) {
+		if (sm::dis_pos_to_pos(offset, pos) < m_ctrl_node_radius) {
 			ChangeOPState(CreateOffsetState(selected));
 			return;
 		}
@@ -210,7 +210,7 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 		SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrlNodes);
 		for (int i = 0; i < 8; ++i)
 		{
-			if (Math2D::GetDistance(ctrlNodes[i], pos) < m_ctrl_node_radius)
+			if (sm::dis_pos_to_pos(ctrlNodes[i], pos) < m_ctrl_node_radius)
 			{
 				SpriteCtrlNode::Node cn;
 				cn.pos = ctrlNodes[i];
@@ -227,7 +227,7 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 		sm::vec2 ctrl_node[4];
 		SpriteCtrlNode::GetSpriteCtrlNodesExt(selected, ctrl_node);
 		for (int i = 0; i < 4; ++i) {
-			if (Math2D::GetDistance(ctrl_node[i], pos) < m_ctrl_node_radius) {
+			if (sm::dis_pos_to_pos(ctrl_node[i], pos) < m_ctrl_node_radius) {
 				SpriteCtrlNode::Node cn;
 				cn.pos = ctrl_node[i];
 				cn.type = SpriteCtrlNode::Type(i);
@@ -299,7 +299,7 @@ void ArrangeSpriteImpl::OnMouseRightDown(int x, int y)
 		SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrlNodes);
 		for (int i = 0; i < 8; ++i)
 		{
-			if (Math2D::GetDistance(ctrlNodes[i], pos) < m_ctrl_node_radius)
+			if (sm::dis_pos_to_pos(ctrlNodes[i], pos) < m_ctrl_node_radius)
 			{
 				SpriteCtrlNode::Node cn;
 				cn.pos = ctrlNodes[i];
@@ -446,7 +446,7 @@ Sprite* ArrangeSpriteImpl::QueryEditedSprite(const sm::vec2& pos) const
 	if (m_cfg.is_offset_open)
 	{
 		sm::vec2 offset = GetSprOffset(selected);
-		if (Math2D::GetDistance(offset, pos) < m_ctrl_node_radius) {
+		if (sm::dis_pos_to_pos(offset, pos) < m_ctrl_node_radius) {
 			return selected;
 		}
 	}
@@ -456,7 +456,7 @@ Sprite* ArrangeSpriteImpl::QueryEditedSprite(const sm::vec2& pos) const
 		sm::vec2 ctrl_nodes[8];
 		SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrl_nodes);
 		for (int i = 0; i < 8; ++i) {
-			if (Math2D::GetDistance(ctrl_nodes[i], pos) < m_ctrl_node_radius) {
+			if (sm::dis_pos_to_pos(ctrl_nodes[i], pos) < m_ctrl_node_radius) {
 				return selected;
 			}
 		}
@@ -467,7 +467,7 @@ Sprite* ArrangeSpriteImpl::QueryEditedSprite(const sm::vec2& pos) const
 		sm::vec2 ctrl_nodes[4];
 		SpriteCtrlNode::GetSpriteCtrlNodesExt(selected, ctrl_nodes);
 		for (int i = 0; i < 4; ++i) {
-			if (Math2D::GetDistance(ctrl_nodes[i], pos) < m_ctrl_node_radius) {
+			if (sm::dis_pos_to_pos(ctrl_nodes[i], pos) < m_ctrl_node_radius) {
 				return selected;
 			}
 		}

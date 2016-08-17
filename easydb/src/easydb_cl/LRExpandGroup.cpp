@@ -2,8 +2,9 @@
 #include "check_params.h"
 
 #include <ee/FileHelper.h>
-#include <ee/Math2D.h>
 #include <ee/SpriteIO.h>
+
+#include <SM_Calc.h>
 
 #include <fstream>
 
@@ -116,7 +117,7 @@ void LRExpandGroup::LoadSprites(const Json::Value& src_spr_val, const Trans& tra
 
 		float new_x = data.position.x * trans.scale.x,
 			  new_y = data.position.y * trans.scale.y;
-		t.translation = ee::Math2D::RotateVector(sm::vec2(new_x, new_y), trans.angle);
+		t.translation = sm::rotate_vector(sm::vec2(new_x, new_y), trans.angle);
 		t.translation += trans.translation;
 
 		assert(!gval.isNull());
@@ -144,7 +145,7 @@ void LRExpandGroup::LoadSprites(const Json::Value& src_spr_val, const Trans& tra
 		nd.mirror.y = (nd.mirror.y && !trans.ymirror) || (!nd.mirror.y && trans.ymirror);
 		float new_x = data.position.x * trans.scale.x,
 			  new_y = data.position.y * trans.scale.y;
-		nd.position = ee::Math2D::RotateVector(sm::vec2(new_x, new_y), trans.angle) + trans.translation;
+		nd.position = sm::rotate_vector(sm::vec2(new_x, new_y), trans.angle) + trans.translation;
 
 		int sz = dst_sprs_val.size();
 		dst_sprs_val[sz] = src_spr_val;

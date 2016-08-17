@@ -540,7 +540,7 @@ void CocoPacker::ParserPicture(const ee::ImageSprite* spr, PicFixType tsrc, PicF
  	// 4. rotate
  	for (size_t i = 0; i < 4; ++i)
  	{
- 		sm::vec2 rot = ee::Math2D::RotateVector(screen[i], spr->GetAngle());
+ 		sm::vec2 rot = sm::rotate_vector(screen[i], spr->GetAngle());
  		screen[i] = rot;
  	}
  	// 5. translate
@@ -554,7 +554,7 @@ void CocoPacker::ParserPicture(const ee::ImageSprite* spr, PicFixType tsrc, PicF
 		offset.y = -offset.y;
 	}
  	sm::vec2 center = spr->GetCenter();
- 	center += ee::Math2D::RotateVector(offset, spr->GetAngle());
+ 	center += sm::rotate_vector(offset, spr->GetAngle());
  	for (size_t i = 0; i < 4; ++i)
  		screen[i] += center;
 
@@ -1957,7 +1957,7 @@ void CocoPacker::TransToMat(const ee::Sprite* spr, float mat[6], bool force /*= 
 			}
 			offset.x *= spr->GetScale().x / picture->invscale;
 			offset.y *= spr->GetScale().y / picture->invscale;
-			center += ee::Math2D::RotateVector(offset, spr->GetAngle());
+			center += sm::rotate_vector(offset, spr->GetAngle());
 		}
 		float sx = spr->GetScale().x,
 			  sy = spr->GetScale().y;

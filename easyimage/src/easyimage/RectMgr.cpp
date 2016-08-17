@@ -72,7 +72,7 @@ bool RectMgr::Remove(const sm::vec2& pos)
 	std::vector<sm::rect*>::iterator itr = m_rects.begin();
 	for ( ; itr != m_rects.end(); ++itr)
 	{
-		if (ee::Math2D::IsPointInRect(pos, **itr)) {
+		if (sm::is_point_in_rect(pos, **itr)) {
 			m_rects.erase(itr);
 			return true;
 		}
@@ -170,7 +170,7 @@ sm::rect* RectMgr::QueryRect(const sm::vec2& pos) const
 {
 	for (int i = 0, n = m_rects.size(); i < n; ++i)
 	{
-		if (ee::Math2D::IsPointInRect(pos, *m_rects[i])) {
+		if (sm::is_point_in_rect(pos, *m_rects[i])) {
 			return m_rects[i];
 		}
 	}

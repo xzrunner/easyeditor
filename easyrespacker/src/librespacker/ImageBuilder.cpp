@@ -6,9 +6,9 @@
 #include <ee/ImageSprite.h>
 #include <ee/ImageSymbol.h>
 #include <ee/Image.h>
-#include <ee/Math2D.h>
 
 #include <sprite2/S2_Symbol.h>
+#include <SM_Calc.h>
 
 #include <algorithm>
 
@@ -98,7 +98,7 @@ void ImageBuilder::TransScreen(PackPicture::Quad& quad, const ee::Sprite* spr)
 
 	// 4. rotate
 	for (size_t i = 0; i < 4; ++i) {
-		sm::vec2 rot = ee::Math2D::RotateVector(quad.screen_coord[i], spr->GetAngle());
+		sm::vec2 rot = sm::rotate_vector(quad.screen_coord[i], spr->GetAngle());
 		quad.screen_coord[i] = rot;
 	}
 

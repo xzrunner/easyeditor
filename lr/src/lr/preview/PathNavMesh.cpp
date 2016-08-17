@@ -51,7 +51,7 @@ void PathNavMesh::DisableRegion(const ee::Sprite* spr, bool disable)
 		ee::Math2D::RemoveDuplicatePoints(bound, fixed);
 		sm::mat4 mat = spr->GetTransMatrix();
 		for (int i = 0; i < fixed.size(); ++i) {
-			fixed[i] = ee::Math2D::TransVector(fixed[i], mat);
+			fixed[i] = mat * fixed[i];
 		}
 		m_bounds.insert(std::make_pair(spr, fixed));
 	} else if (itr != m_bounds.end() && disable) {

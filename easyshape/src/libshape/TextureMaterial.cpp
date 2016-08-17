@@ -60,7 +60,7 @@ void TextureMaterial::Draw(const sm::mat4& mt, const s2::RenderColor& color) con
 		for (int i = 0, n = m_tris.size(); i < n; i += 3) {
 			sm::vec2 vertices[4], texcoords[4];
 			for (int j = 0; j < 3; ++j) {
-				vertices[j] = ee::Math2D::TransVector(m_tris[i+j], mt);
+				vertices[j] = mt * m_tris[i+j];
 				texcoords[j] = m_tris_texcoord[i+j];
 			}
 			vertices[3] = vertices[2];
@@ -85,7 +85,7 @@ void TextureMaterial::Draw(const sm::mat4& mt, const s2::RenderColor& color) con
 			std::vector<sm::vec2> texcoords;
 			texcoords.resize(3);
 			for (int j = 0; j < 3; ++j) {
-				sm::vec2 v = ee::Math2D::TransVector(m_tris[i+j], mt);
+				sm::vec2 v = mt * m_tris[i+j];
 				vertices[j] = sm::vec3(v.x, v.y, 0);
 				texcoords[j] = m_tris_texcoord[i+j];
 			}

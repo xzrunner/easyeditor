@@ -146,7 +146,7 @@ void SpriteRenderer::DrawImpl(const Sprite* spr,
 		bound.push_back(sm::vec2(rect.xmax, rect.ymax));
 		bound.push_back(sm::vec2(rect.xmin, rect.ymax));		
 		for (int i = 0, n = bound.size(); i < n; ++i) {
-			bound[i] = Math2D::TransVector(bound[i], params.mt);
+			bound[i] = params.mt * bound[i];
 		}
 		s2::RVG::SetColor(BLACK);
 		s2::RVG::LineWidth(4);

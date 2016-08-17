@@ -1,7 +1,7 @@
 #include "Math.h"
 #include "ChainShape.h"
 
-#include <ee/Math2D.h>
+#include <SM_Calc.h>
 
 #include <assert.h>
 
@@ -18,10 +18,10 @@ void Math::mergeTwoChains(const ChainShape& src0, const ChainShape& src1,
 	dst.reserve(s0.size() + s1.size());
 
 	float d[4];
-	d[0] = ee::Math2D::GetDistanceSquare(s0.back(), s1.front());
-	d[1] = ee::Math2D::GetDistanceSquare(s0.back(), s1.back());
-	d[2] = ee::Math2D::GetDistanceSquare(s0.front(), s1.front());
-	d[3] = ee::Math2D::GetDistanceSquare(s0.front(), s1.back());
+	d[0] = sm::dis_square_pos_to_pos(s0.back(), s1.front());
+	d[1] = sm::dis_square_pos_to_pos(s0.back(), s1.back());
+	d[2] = sm::dis_square_pos_to_pos(s0.front(), s1.front());
+	d[3] = sm::dis_square_pos_to_pos(s0.front(), s1.back());
 	float nearest = FLT_MAX;
 	for (size_t i = 0; i < 4; ++i)
 		if (d[i] < nearest)
@@ -142,10 +142,10 @@ float Math::getDistanceOfChains(const ChainShape& chain0, const ChainShape& chai
 	const std::vector<sm::vec2>& s1 = chain1.GetVertices();
 
 	float d[4];
-	d[0] = ee::Math2D::GetDistanceSquare(s0.back(), s1.front());
-	d[1] = ee::Math2D::GetDistanceSquare(s0.back(), s1.back());
-	d[2] = ee::Math2D::GetDistanceSquare(s0.front(), s1.front());
-	d[3] = ee::Math2D::GetDistanceSquare(s0.front(), s1.back());
+	d[0] = sm::dis_square_pos_to_pos(s0.back(), s1.front());
+	d[1] = sm::dis_square_pos_to_pos(s0.back(), s1.back());
+	d[2] = sm::dis_square_pos_to_pos(s0.front(), s1.front());
+	d[3] = sm::dis_square_pos_to_pos(s0.front(), s1.back());
 	float nearest = FLT_MAX;
 	for (size_t i = 0; i < 4; ++i)
 		if (d[i] < nearest)

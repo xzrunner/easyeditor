@@ -1,7 +1,6 @@
 #include "DrawSpritesVisitor.h"
 #include "SpriteRenderer.h"
 #include "Sprite.h"
-#include "Math2D.h"
 #include "SettingData.h"
 #include "Config.h"
 #include "EE_GTxt.h"
@@ -9,6 +8,7 @@
 
 #include <sprite2/RenderFilter.h>
 #include <sprite2/BoundingBox.h>
+#include <SM_Test.h>
 
 namespace ee
 {
@@ -22,7 +22,7 @@ void DrawSpritesVisitor::Visit(Sprite* spr, bool& next)
 	}
 
 	if (m_screen_region.IsValid() &&
-		!Math2D::IsRectIntersectRect(spr->GetBounding()->GetSize(), m_screen_region)) {
+		!sm::is_rect_intersect_rect(spr->GetBounding()->GetSize(), m_screen_region)) {
 		return;
 	}
 

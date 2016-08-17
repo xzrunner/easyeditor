@@ -44,7 +44,7 @@ void StageCanvas::SetBackground(ee::Symbol* background)
 
 sm::vec2 StageCanvas::TransToBirdView(const sm::vec2& pos)
 {
-	sm::vec2 ret = ee::Math2D::RotateVector(pos, SM_PI / 4);
+	sm::vec2 ret = sm::rotate_vector(pos, SM_PI / 4);
 	ret.y *= VIEW_TRANS;
 	return ret;
 }
@@ -53,7 +53,7 @@ sm::vec2 StageCanvas::TransToFlatView(const sm::vec2& pos)
 {
 	sm::vec2 ret = pos;
 	ret.y /= VIEW_TRANS;
-	ret = ee::Math2D::RotateVector(ret, - SM_PI / 4);
+	ret = sm::rotate_vector(ret, - SM_PI / 4);
 	return ret;
 }
 

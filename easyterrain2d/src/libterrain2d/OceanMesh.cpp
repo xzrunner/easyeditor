@@ -195,7 +195,7 @@ void OceanMesh::Rotate(float angle)
 {
 	std::vector<sm::vec2> vertices = m_shape->GetVertices();
 	for (int i = 0, n = vertices.size(); i < n; ++i) {
-		vertices[i] = ee::Math2D::RotateVector(vertices[i], angle);
+		vertices[i] = sm::rotate_vector(vertices[i], angle);
 	}
 	m_shape->SetVertices(vertices);
 

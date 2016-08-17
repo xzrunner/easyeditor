@@ -2,7 +2,6 @@
 #include "Sprite.h"
 #include "Symbol.h"
 #include "color_config.h"
-#include "Math2D.h"
 #include "panel_msg.h"
 #include "SetSpriteColorAOP.h"
 #include "SetSpritePosAOP.h"
@@ -10,6 +9,7 @@
 
 #include <sprite2/RenderColor.h>
 #include <sprite2/BoundingBox.h>
+#include <SM_Calc.h>
 
 #include <wx/string.h>
 
@@ -327,7 +327,7 @@ void MultiSpritesPropertyImpl::SetAngle(bool overall, float angle)
 		sm::vec2 center = GetOverallCenter();
 		for (int i = 0, n = m_sprs.size(); i < n; ++i) {
 			Sprite* spr = m_sprs[i];
-			sm::vec2 pos = Math2D::RotateVector(spr->GetPosition() - center, angle);
+			sm::vec2 pos = sm::rotate_vector(spr->GetPosition() - center, angle);
 			spr->SetPosition(pos);
 			spr->SetAngle(angle);
 		}

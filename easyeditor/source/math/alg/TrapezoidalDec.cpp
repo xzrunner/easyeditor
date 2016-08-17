@@ -1,5 +1,6 @@
 #include "TrapezoidalDec.h"
-#include "Math2D.h"
+
+#include <SM_Test.h>
 
 #include <assert.h>
 
@@ -100,7 +101,7 @@ TrapezoidalDec::INode* TrapezoidalDec::Seg::
 Query(const sm::vec2& pos)
 {
 	assert(m_child0 && m_child1);
-	if (Math2D::IsPointAtSegmentLeft(pos, m_left->m_pos, m_right->m_pos)) {
+	if (sm::is_point_at_line_left(pos, m_left->m_pos, m_right->m_pos)) {
 		return m_child0->Query(pos);
 	} else {
 		return m_child1->Query(pos);

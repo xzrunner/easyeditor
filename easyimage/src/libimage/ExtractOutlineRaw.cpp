@@ -1,9 +1,10 @@
 #include "ExtractOutlineRaw.h"
 
 #include <ee/Image.h>
-#include <ee/ConvexHull.h>
-#include <ee/DouglasPeucker.h>
 #include <ee/Math2D.h>
+
+#include <SM_ConvexHull.h>
+#include <SM_DouglasPeucker.h>
 
 #include <queue>
 
@@ -91,7 +92,7 @@ void ExtractOutlineRaw::CreateBorderLineAndMerge()
 
 void ExtractOutlineRaw::CreateBorderConvexHull()
 {
-	ee::ConvexHull::Do(m_border_line, m_convex_hull);
+	sm::convex_hull(m_border_line, m_convex_hull);
 }
 
 void ExtractOutlineRaw::CreateBorderLine()
@@ -186,7 +187,7 @@ void ExtractOutlineRaw::MergeBorderLine()
 {
 	m_border_line_merged.clear();
 	//	MergeRawBorder(border, border_merged);
-	ee::DouglasPeucker::Do(m_border_line, 1.5f, m_border_line_merged);
+	sm::douglas_peucker(m_border_line, 1.5f, m_border_line_merged);
 }
 
 bool ExtractOutlineRaw::IsPixelBorder(int x, int y) const

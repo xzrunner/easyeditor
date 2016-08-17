@@ -9,9 +9,10 @@
 #include <ee/Config.h>
 #include <ee/SymbolMgr.h>
 #include <ee/ImageSymbol.h>
-#include <ee/Math2D.h>
 #include <ee/EE_ShaderLab.h>
 #include <ee/SpriteIO.h>
+
+#include <SM_Calc.h>
 
 #include <fstream>
 
@@ -205,10 +206,10 @@ sm::vec2 ScaleOverall::GetScaledPos(Json::Value& sprite_val, float scale,
 	ee::SpriteIO::Data data;
 	ee::SpriteIO::Load(sprite_val, data);
 
-// 	sm::vec2 center = pos + ee::Math2D::RotateVector(-offset, angle);
-// 	center = center + ee::Math2D::RotateVector(img_offset, angle);
+// 	sm::vec2 center = pos + sm::rotate_vector(-offset, angle);
+// 	center = center + sm::rotate_vector(img_offset, angle);
 
-	sm::vec2 center = data.position + ee::Math2D::RotateVector(img_offset, data.angle);
+	sm::vec2 center = data.position + sm::rotate_vector(img_offset, data.angle);
 
 	center *= scale;
 

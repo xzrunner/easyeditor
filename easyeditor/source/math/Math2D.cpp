@@ -1,83 +1,12 @@
 #include "Math2D.h"
 
 #include <SM_Calc.h>
+#include <SM_Test.h>
 
 #include <assert.h>
 
 namespace ee
 {
-
-bool Math2D::IsAcuteAngle(const sm::vec2& a, const sm::vec2& center, const sm::vec2& b)
-{
-	const float squareLenAC = GetDistanceSquare(a, center),
-		squareLenBC = GetDistanceSquare(b, center),
-		squareLenAB = GetDistanceSquare(a, b);
-	return squareLenAC + squareLenBC - squareLenAB > 0;
-}
-
-bool Math2D::IsSegmentIntersectRect(float lx1, float ly1, float lx2, float ly2,
-									float ax1, float ay1, float ax2, float ay2)
-{
-	unsigned char typeS, typeE;
-	typeS = typeE = 0;
-	if ( lx1 < ax1 )      // left:  1000
-		typeS |= 0x8; 
-	else if ( lx1 > ax2 ) // right: 0100
-		typeS |= 0x4; 
-	if ( ly1 < ay1 )      // down:  0001
-		typeS |= 0x1; 
-	else if ( ly1 > ay2 ) // up:    0010
-		typeS |= 0x2; 
-
-	if ( lx2 < ax1 )      // left:  1000
-		typeE |= 0x8; 
-	else if ( lx2 > ax2 ) // right: 0100
-		typeE |= 0x4; 
-	if ( ly2 < ay1 )      // down:  0001
-		typeE |= 0x1; 
-	else if ( ly2 > ay2 ) // up:    0010
-		typeE |= 0x2; 
-
-	unsigned char comp;
-	comp = typeS & typeE;
-	if ( comp != 0 )		// must be outside, so must intersect
-		return false;
-	comp = typeS | typeE;
-	if ( comp == 0 )		// must be inside, so must not intersect
-		return true;
-
-	// test each edge
-	if ( comp & 0x8 )		// 1000, left edge
-	{
-		float cross_y;
-		cross_y = FindYOnSeg( lx1, ly1, lx2, ly2, ax1 );
-		if ( cross_y >= ay1 && cross_y <= ay2 )
-			return true;
-	}
-	if ( comp & 0x4 )		// 0100, right edge
-	{
-		float cross_y;
-		cross_y = FindYOnSeg( lx1, ly1, lx2, ly2, ax2 );
-		if ( cross_y >= ay1 && cross_y <= ay2 )
-			return true;
-	}
-	if ( comp & 0x1 )		// 0001, down edge
-	{
-		float cross_x;
-		cross_x = FindXOnSeg( lx1, ly1, lx2, ly2, ay1 );
-		if ( cross_x >= ax1 && cross_x <= ax2 )
-			return true;
-	}
-	if ( comp & 0x2 )		// 0010, up edge
-	{
-		float cross_x;
-		cross_x = FindXOnSeg( lx1, ly1, lx2, ly2, ay2 );
-		if ( cross_x >= ax1 && cross_x <= ax2 )
-			return true;
-	}
-
-	return false;
-}
 
 bool Math2D::IsPolygonIntersectPolygon(const std::vector<sm::vec2>& poly0, const std::vector<sm::vec2>& poly1)
 {
@@ -141,12 +70,12 @@ bool Math2D::IsPolygonIntersectPolygon(const std::vector<sm::vec2>& poly0, const
 					// 					}
 				} else if (is_cross0) {
 					const sm::vec2& end_next0 = poly0[GetNextIdxInRing(sz0, next_idx0, step0)];
-					if (IsTurnLeft(end_next0, end0, end1)) { 
+					if (sm::is_turn_left(end_next0, end0, end1)) { 
 						return true; 
 					}
 				} else if (is_cross1) {
 					const sm::vec2& end_next1 = poly0[GetNextIdxInRing(sz1, next_idx1, step1)];
-					if (IsTurnLeft(end_next1, end1, end0)) { 
+					if (sm::is_turn_left(end_next1, end1, end0)) { 
 						return true; 
 					}
 				} else if (!IsTwoPointsSame(cross, start0) 
@@ -161,11 +90,11 @@ bool Math2D::IsPolygonIntersectPolygon(const std::vector<sm::vec2>& poly0, const
 
 	for (int i = 0; i < sz0; ++i) {
 		if (IsPointOnPolyline(poly0[i], poly1)) { continue; }
-		return IsPointInArea(poly0[i], poly1);
+		return sm::is_point_in_area(poly0[i], poly1);
 	}
 	for (int i = 0; i < sz1; ++i) {
 		if (IsPointOnPolyline(poly1[i], poly0)) { continue; }
-		return IsPointInArea(poly1[i], poly0);
+		return sm::is_point_in_area(poly1[i], poly0);
 	}
 	return false;
 }
@@ -180,7 +109,7 @@ bool Math2D::IsPolygonInPolygon(const std::vector<sm::vec2>& in, const std::vect
 		sz1 = out.size();
 	for (int i = 0; i < sz0; ++i) {
 		if (IsPointOnPolyline(in[i], out)) { continue; }
-		if (!IsPointInArea(in[i], out)) {
+		if (!sm::is_point_in_area(in[i], out)) {
 			return false;
 		} else {
 			break;
@@ -218,12 +147,12 @@ bool Math2D::IsPolygonInPolygon(const std::vector<sm::vec2>& in, const std::vect
 					}
 				} else if (is_cross0) {
 					const sm::vec2& end_next0 = in[GetNextIdxInRing(sz0, next_idx0, step0)];
-					if (IsTurnLeft(end_next0, end0, end1)) { 
+					if (sm::is_turn_left(end_next0, end0, end1)) { 
 						return false; 
 					}
 				} else if (is_cross1) {
 					const sm::vec2& end_next1 = in[GetNextIdxInRing(sz1, next_idx1, step1)];
-					if (IsTurnLeft(end_next1, end1, end0)) { 
+					if (sm::is_turn_left(end_next1, end1, end0)) { 
 						return false; 
 					}
 				} else if (!IsTwoPointsSame(cross, start0) 
@@ -245,7 +174,7 @@ bool Math2D::IsPolygonIntersectRect(const std::vector<sm::vec2>& poly, const sm:
 		return false;
 	}
 
-	if (IsPointInArea(rect.Center(), poly) || IsPointInRect(poly[0], rect)) {
+	if (sm::is_point_in_area(rect.Center(), poly) || sm::is_point_in_rect(poly[0], rect)) {
 		return true;
 	}
 
@@ -315,102 +244,19 @@ bool Math2D::IsPolylineIntersectRect(const std::vector<sm::vec2>& polyline, bool
 
 	for (size_t i = 0, n = polyline.size() - 1; i < n; ++i)
 	{
-		if (IsSegmentIntersectRect(polyline[i], polyline[i+1], aabb))
+		if (sm::is_rect_intersect_segment(aabb, polyline[i], polyline[i+1]))
 			return true;
 	}
 
-	if (isLoop && IsSegmentIntersectRect(polyline[polyline.size() - 1], polyline[0], aabb))
+	if (isLoop && sm::is_rect_intersect_segment(aabb, polyline[polyline.size() - 1], polyline[0]))
 		return true;
 
 	return false;
 }
 
-bool Math2D::isPolylineIntersectPolylinI(const std::vector<sm::vec2>& poly0, const std::vector<sm::vec2>& poly1)
-{
-	if (poly0.size() < 3 || poly1.size() < 3) {
-		return false;
-	}
-
-	int sz0 = poly0.size(),
-		sz1 = poly1.size();
-
-	int step0 = IsPolygonColckwise(poly0) ? 1 : -1,
-		step1 = IsPolygonColckwise(poly1) ? 1 : -1;
-	int idx0 = 0;
-	for (int i = 0; i < sz0; ++i) {
-		int idx1 = 0;
-		const sm::vec2& start0 = poly0[idx0];
-		int next_idx0 = GetNextIdxInRing(sz0, idx0, step0);
-		const sm::vec2& end0 = poly0[next_idx0];
-		for (int i = 0; i < sz1; ++i) {
-			const sm::vec2& start1 = poly1[idx1];
-			int next_idx1 = GetNextIdxInRing(sz1, idx1, step1);
-			const sm::vec2& end1 = poly1[next_idx1];
-
-			sm::vec2 cross;
-			if (GetTwoSegmentCross(start0, end0, start1, end1, &cross)) {
-				// test if cross is end
-				bool is_cross0 = IsTwoPointsSame(cross, end0),
-					is_cross1 = IsTwoPointsSame(cross, end1);
-				if (is_cross0 && is_cross1) {
-					const sm::vec2& end_next0 = poly0[GetNextIdxInRing(sz0, next_idx0, step0)];
-					const sm::vec2& end_next1 = poly1[GetNextIdxInRing(sz1, next_idx1, step1)];
-					float angle0 = GetAngle(end0, end_next0, start0);
-					if (angle0 > GetAngle(end0, end_next0, start1) ||
-						angle0 > GetAngle(end0, end_next0, end_next1)) {
-							return true;
-					}
-					float angle1 = GetAngle(end1, end_next1, start1);
-					if (angle1 > GetAngle(end1, end_next1, start0) ||
-						angle1 > GetAngle(end1, end_next1, end_next0)) {
-							return true;
-					}
-
-					//////////////////////////////////////////////////////////////////////////
-
-					// 					sm::vec2 seg00 = start0 - end0;
-					// 					seg00.normalize();
-					// 					const sm::vec2& end_next0 = poly0[GetNextIdxInRing(sz0, next_idx0, step0)];
-					// 					sm::vec2 seg01 = end_next0 - end0;
-					// 					seg01.normalize();
-					// 
-					// 					sm::vec2 seg10 = start1 - end1;
-					// 					seg10.normalize();
-					// 					const sm::vec2& end_next1 = poly0[GetNextIdxInRing(sz1, next_idx1, step1)];
-					// 					sm::vec2 seg11 = end_next1 - end1;
-					// 					seg11.normalize();
-					// 
-					// 					if (IsTwoSegmentIntersect(seg00, seg01, seg10, seg11) &&
-					// 						!IsTwoPointsSame(seg00, seg10) && !IsTwoPointsSame(seg00, seg11) && 
-					// 						!IsTwoPointsSame(seg01, seg10) && !IsTwoPointsSame(seg01, seg11)) {
-					// 							return true;
-					// 					}
-				} else if (is_cross0) {
-					const sm::vec2& end_next0 = poly0[GetNextIdxInRing(sz0, next_idx0, step0)];
-					if (IsTurnLeft(end_next0, end0, end1)) { 
-						return true; 
-					}
-				} else if (is_cross1) {
-					const sm::vec2& end_next1 = poly0[GetNextIdxInRing(sz1, next_idx1, step1)];
-					if (IsTurnLeft(end_next1, end1, end0)) { 
-						return true; 
-					}
-				} else if (!IsTwoPointsSame(cross, start0) 
-					&& !IsTwoPointsSame(cross, start1)) {
-						return true;
-				}
-			}
-			idx1 = next_idx1;
-		}
-		idx0 = next_idx0;
-	}
-
-	return false;	
-}
-
 bool Math2D::IsCircleIntersectRect(const sm::vec2& center, float radius, const sm::rect& aabb)
 {
-	if (IsPointInRect(center, aabb))
+	if (sm::is_point_in_rect(center, aabb))
 		return true;
 
 	std::vector<sm::vec2> bounding;
@@ -426,51 +272,16 @@ bool Math2D::IsCircleIntersectRect(const sm::vec2& center, float radius, const s
 
 bool Math2D::IsPointInTriangle(const sm::vec2& p, const sm::vec2& a, const sm::vec2& b, const sm::vec2& c)
 {
-	const bool test0 = IsPointAtSegmentLeft(p, a, b),
-		test1 = IsPointAtSegmentLeft(p, b, c),
-		test2 = IsPointAtSegmentLeft(p, c, a);
+	const bool test0 = sm::is_point_at_line_left(p, a, b),
+		test1 = sm::is_point_at_line_left(p, b, c),
+		test2 = sm::is_point_at_line_left(p, c, a);
 	return test0 == test1 && test1 == test2;
-}
-
-bool Math2D::IsPointInArea(const sm::vec2& pos, const std::vector<sm::vec2>& area)
-{
-	bool oddNodes = false;
-	for (size_t i = 0, n = area.size(), j = n - 1; i < n; ++i)
-	{
-		if ((area[i].y < pos.y && area[j].y >= pos.y ||
-			area[j].y < pos.y && area[i].y >= pos.y) &&
-			(area[i].x <= pos.x || area[j].x <= pos.x))
-		{
-			oddNodes ^= (area[i].x + (pos.y - area[i].y) / (area[j].y - area[i].y) * (area[j].x - area[i].x) < pos.x);
-		}
-		j = i;
-	}
-	return oddNodes;
 }
 
 bool Math2D::IsPointOnPolyline(const sm::vec2& pos, const std::vector<sm::vec2>& poly)
 {
 	sm::rect r(pos, SM_RAD_TO_DEG, SM_RAD_TO_DEG);
 	return IsPolylineIntersectRect(poly, true, r);
-}
-
-bool Math2D::IsPointInConvexHull(const sm::vec2& pos, const std::vector<sm::vec2>& hull)
-{
-	if (hull.size() < 3) return false;
-
-	size_t count = 0;
-	for (size_t i = 0, n = hull.size(); i < n; ++i)
-	{
-		const sm::vec2 s = hull[i], 
-			e = i == hull.size() - 1 ? hull[0] : hull[i + 1];
-		if (IsPointAtSegmentLeft(pos, s, e)) ++count;
-	}
-	return count == hull.size() || count == 0;
-}
-
-bool Math2D::IsPointInCircle(const sm::vec2& pos, const sm::vec2& center, float radius)
-{
-	return GetDistance(pos, center) < radius;
 }
 
 bool Math2D::IsTwoLineParallel(const sm::vec2& s0, const sm::vec2& e0, const sm::vec2& s1, const sm::vec2& e1)
@@ -482,8 +293,8 @@ bool Math2D::IsTwoLineParallel(const sm::vec2& s0, const sm::vec2& e0, const sm:
 
 bool Math2D::IsTwoSegmentIntersect(const sm::vec2& s0, const sm::vec2& e0, const sm::vec2& s1, const sm::vec2& e1)
 {
-	return IsPointAtSegmentLeft(s0, s1, e1) != IsPointAtSegmentLeft(e0, s1, e1)
-		&& IsPointAtSegmentLeft(s1, s0, e0) != IsPointAtSegmentLeft(e1, s0, e0);
+	return sm::is_point_at_line_left(s0, s1, e1) != sm::is_point_at_line_left(e0, s1, e1)
+		&& sm::is_point_at_line_left(s1, s0, e0) != sm::is_point_at_line_left(e1, s0, e0);
 }
 
 int Math2D::CheckPosInTriangle(const sm::vec2& p, const sm::vec2& t0, const sm::vec2& t1, const sm::vec2& t2)
@@ -497,39 +308,19 @@ int Math2D::CheckPosInTriangle(const sm::vec2& p, const sm::vec2& t0, const sm::
 	if (TestPointOnSection(t2, t0, p) == 0)
 		return 2;
 
-	if (IsPointAtSegmentLeft(p, t0, t1) != IsPointAtSegmentLeft(p, t0, t2)
-		&& IsPointAtSegmentLeft(p, t1, t2) != IsPointAtSegmentLeft(p, t1, t0)
-		&& IsPointAtSegmentLeft(p, t2, t1) != IsPointAtSegmentLeft(p, t2, t0))
+	if (sm::is_point_at_line_left(p, t0, t1) != sm::is_point_at_line_left(p, t0, t2)
+		&& sm::is_point_at_line_left(p, t1, t2) != sm::is_point_at_line_left(p, t1, t0)
+		&& sm::is_point_at_line_left(p, t2, t1) != sm::is_point_at_line_left(p, t2, t0))
 		return 4;
 	else 
 		return -1;
 }
 
-bool Math2D::IsTurnLeft(const sm::vec2& a, const sm::vec2& center, const sm::vec2& b)
-{
-	return (center.x - a.x) * (b.y - center.y) - (b.x - center.x) * (center.y - a.y) > 0;
-}
-
-bool Math2D::IsTurnRight(const sm::vec2& a, const sm::vec2& center, const sm::vec2& b)
-{
-	return (center.x - a.x) * (b.y - center.y) - (b.x - center.x) * (center.y - a.y) < 0;
-}
-
 float Math2D::GetDisPointToStraightLine(const sm::vec2& p, const sm::vec2& s, const sm::vec2& e)
 {
-	float divider = GetDistance(s, e);
-	if (fabs(divider) < FLT_EPSILON) return GetDistance(p, s);
+	float divider = sm::dis_pos_to_pos(s, e);
+	if (fabs(divider) < FLT_EPSILON) return sm::dis_pos_to_pos(p, s);
 	else return fabs((s.x - p.x) * (e.y - p.y) - (s.y - p.y) * (e.x - p.x)) / divider;
-}
-
-float Math2D::GetDisPointToSegment(const sm::vec2& p, const sm::vec2& s, const sm::vec2& e)
-{
-	if (!IsAcuteAngle(p, s, e))
-		return GetDistance(p, s);
-	else if (!IsAcuteAngle(p, e, s))
-		return GetDistance(p, e);
-	else
-		return fabs((s.x - p.x) * (e.y - p.y) - (s.y - p.y) * (e.x - p.x)) / GetDistance(s, e);
 }
 
 float Math2D::GetDisPointToPolyline(const sm::vec2& p, const std::vector<sm::vec2>& polyline, size_t* iPos/* = NULL*/)
@@ -540,7 +331,7 @@ float Math2D::GetDisPointToPolyline(const sm::vec2& p, const std::vector<sm::vec
 	size_t iNearest = -1;
 	for (size_t i = 0, n = polyline.size() - 1; i < n; ++i)
 	{
-		const float dis = GetDisPointToSegment(p, polyline[i], polyline[i + 1]);
+		const float dis = sm::dis_pos_to_seg(p, polyline[i], polyline[i + 1]);
 		if (dis < nearest) 
 		{
 			nearest = dis;
@@ -574,31 +365,14 @@ float Math2D::GetDisPointToMultiLines(const sm::vec2& p, const std::vector<std::
 	return nearest;
 }
 
-float Math2D::GetDisPointToMultiPos(const sm::vec2& p, const std::vector<sm::vec2>& pos, size_t* index/* = NULL*/)
-{
-	float nearest = FLT_MAX;
-	size_t iNearest = -1;
-	for (size_t i = 0, n = pos.size(); i < n; ++i)
-	{
-		const float dis = Math2D::GetDistance(p, pos[i]);
-		if (dis < nearest)
-		{
-			nearest = dis;
-			iNearest = i;
-		}
-	}
-	if (index) *index = iNearest;
-	return nearest;
-}
-
 float Math2D::GetDisPointToMultiPos(const sm::vec2& p, const std::vector<std::vector<sm::vec2> >& pos, size_t* index0/* = NULL*/, size_t* index1/* = NULL*/)
 {
 	float nearest = FLT_MAX;
 	size_t iNearest0 = -1, iNearest1 = -1;
 	for (size_t i = 0, n = pos.size(); i < n; ++i)
 	{
-		size_t index;
-		const float dis = GetDisPointToMultiPos(p, pos[i], &index);
+		int index;
+		const float dis = sm::dis_pos_to_multi_pos(p, pos[i], &index);
 		if (dis < nearest)
 		{
 			nearest = dis;
@@ -616,9 +390,9 @@ float Math2D::GetDisPointToMultiPos(const sm::vec2& p, const std::vector<std::ve
 
 float Math2D::GetAngle(const sm::vec2& center, const sm::vec2& pa, const sm::vec2& pb)
 {
-	const float a = GetDistance(center, pa),
-		b = GetDistance(center, pb),
-		c = GetDistance(pa, pb);
+	const float a = sm::dis_pos_to_pos(center, pa),
+		b = sm::dis_pos_to_pos(center, pb),
+		c = sm::dis_pos_to_pos(pa, pb);
 
 	float cosVal = (a * a + b * b - c * c) / (2 * a * b);
 	cosVal = std::max(std::min(cosVal, 1.0f), -1.0f);
@@ -626,7 +400,7 @@ float Math2D::GetAngle(const sm::vec2& center, const sm::vec2& pa, const sm::vec
 	return acos(cosVal);
 
 // 	float angle = acos(cosVal);
-// 	return IsTurnRight(pa, center, pb) ? angle : -angle;
+// 	return sm::is_turn_right(pa, center, pb) ? angle : -angle;
 }
 
 float Math2D::GetAngleInDirection(const sm::vec2& center, const sm::vec2& start, const sm::vec2& end)
@@ -635,14 +409,6 @@ float Math2D::GetAngleInDirection(const sm::vec2& center, const sm::vec2& start,
 	const float cross = (start - center).Cross(end - start);
 	if (cross < 0) angle = -angle;
 	return angle;
-}
-
-float Math2D::GetLineAngle(const sm::vec2& s, const sm::vec2& e)
-{
-	const sm::vec2 other(s.x + 1.0f, s.y);
-	const float ang = GetAngle(s, e, other);
-	if ((other - s).Cross(e - s) > 0) return ang;
-	else return -ang;
 }
 
 float Math2D::GetPolygonArea(const std::vector<sm::vec2>& polygon)
@@ -667,9 +433,9 @@ float Math2D::GetPolygonPerimeter(const std::vector<sm::vec2>& poly)
 
 	float perimeter = 0.0f;
 	for (int i = 0, n = poly.size()-1; i < n; ++i) {
-		perimeter += GetDistance(poly[i], poly[i+1]);
+		perimeter += sm::dis_pos_to_pos(poly[i], poly[i+1]);
 	}
-	perimeter += GetDistance(poly[0], poly[poly.size()-1]);
+	perimeter += sm::dis_pos_to_pos(poly[0], poly[poly.size()-1]);
 
 	return perimeter;
 }
@@ -683,14 +449,9 @@ float Math2D::GetTriangleArea(const sm::vec2& p0, const sm::vec2& p1, const sm::
 	return fabs(s/2.0f);
 }
 
-bool Math2D::GetTwoLineCross(const sm::vec2& s0, const sm::vec2& e0, const sm::vec2& s1, const sm::vec2& e1, sm::vec2* cross)
-{
-	return sm::intersect_line_line(s0, e0, s1, e1, cross);
-}
-
 bool Math2D::GetTwoSegmentCross(const sm::vec2& s0, const sm::vec2& e0, const sm::vec2& s1, const sm::vec2& e1, sm::vec2* cross)
 {
-	bool line_intersect = GetTwoLineCross(s0, e0, s1, e1, cross);
+	bool line_intersect = sm::intersect_line_line(s0, e0, s1, e1, cross);
 	if (line_intersect) {
 		return IsTwoSegmentIntersect(s0, e0, s1, e1);
 	} else {
@@ -707,12 +468,12 @@ int Math2D::TestPointOnSection(const sm::vec2& startPos, const sm::vec2& endPos,
 	aabb.ymin = thdPos.y - tolerance / 2.0f;
 	aabb.ymax = thdPos.y + tolerance / 2.0f;
 
-	if (!IsSegmentIntersectRect(startPos, endPos, aabb)) return -1;
+	if (!sm::is_rect_intersect_segment(aabb, startPos, endPos)) return -1;
 
 	int resultA = 0;
 	int resultB = 0;
-	if (IsPointInRect(startPos, aabb)) resultA = 1;
-	if (IsPointInRect(endPos, aabb)) resultB = 2;
+	if (sm::is_point_in_rect(startPos, aabb)) resultA = 1;
+	if (sm::is_point_in_rect(endPos, aabb)) resultB = 2;
 
 	return resultA + resultB;
 }
@@ -761,7 +522,7 @@ int Math2D::GetFootOfPerpendicular(const sm::vec2& s, const sm::vec2& e, const s
 		}
 		else
 		{
-			foot->y = FindYOnSeg(s, e, foot->x);
+			foot->y = sm::find_y_on_seg(s, e, foot->x);
 		}
 	}
 	else
@@ -773,7 +534,7 @@ int Math2D::GetFootOfPerpendicular(const sm::vec2& s, const sm::vec2& e, const s
 		}
 		else
 		{
-			foot->x = FindXOnSeg(s, e, foot->y);
+			foot->x = sm::find_x_on_seg(s, e, foot->y);
 		}
 	}
 
@@ -786,10 +547,10 @@ int Math2D::GetFootOfPerpendicular(const sm::vec2& s, const sm::vec2& e, const s
 void Math2D::GetNearestPosOnLineToPoint(const sm::vec2& p, const std::vector<sm::vec2>& l, sm::vec2* nearest, size_t* index)
 {
 	size_t iNearestPos = 0;
-	float nearestDis = GetDistance(p, l.at(iNearestPos));
+	float nearestDis = sm::dis_pos_to_pos(p, l.at(iNearestPos));
 	for (size_t i = 1; i < l.size(); ++i)
 	{
-		float dis = GetDistance(p, l.at(i));
+		float dis = sm::dis_pos_to_pos(p, l.at(i));
 		if (dis < nearestDis)
 		{
 			nearestDis = dis;
@@ -804,7 +565,7 @@ void Math2D::GetNearestPosOnLineToPoint(const sm::vec2& p, const std::vector<sm:
 		sm::vec2 foot;
 		if (GetFootOfPerpendicular(l.at(iNearestPos), l.at(iNearestPos + 1), p, &foot) == 0)
 		{
-			float dis = GetDistance(foot, p);
+			float dis = sm::dis_pos_to_pos(foot, p);
 			if (dis < nearestDis)
 			{
 				nearestDis = dis;
@@ -819,7 +580,7 @@ void Math2D::GetNearestPosOnLineToPoint(const sm::vec2& p, const std::vector<sm:
 		sm::vec2 foot;
 		if (GetFootOfPerpendicular(l.at(iNearestPos), l.at(iNearestPos - 1), p, &foot) == 0)
 		{
-			float dis = GetDistance(foot, p);
+			float dis = sm::dis_pos_to_pos(foot, p);
 			if (dis < nearestDis)
 			{
 				*nearest = foot;
@@ -829,55 +590,12 @@ void Math2D::GetNearestPosOnLineToPoint(const sm::vec2& p, const std::vector<sm:
 	}
 }
 
-sm::vec2 Math2D::RotateVector(const sm::vec2& v, float rad)
-{
-	sm::vec2 ret;
-	ret.x = v.x * cos(rad) - v.y * sin(rad);
-	ret.y = v.x * sin(rad) + v.y * cos(rad);
-	return ret;
-}
-
-sm::vec2 Math2D::RotateVectorRightAngle(const sm::vec2& v, bool isTurnLeft)
-{
-	sm::vec2 ret = v;
-	if (isTurnLeft)
-	{
-		ret.x = -v.y;
-		ret.y = v.x;
-	}
-	else
-	{
-		ret.x = v.y;
-		ret.y = -v.x;
-	}
-	return ret;
-}
-
-float Math2D::TransLen(float len, const sm::mat4& m)
-{
-	sm::vec2 pos0(0, 0);
-	pos0 = TransVector(pos0, m);
-
-	sm::vec2 pos1(len, 0.0f);
-	pos1 = TransVector(pos1, m);
-
-	return GetDistance(pos0, pos1);
-}
-
-sm::vec2 Math2D::TransVector(const sm::vec2& v, const sm::mat4& m)
-{
-	sm::vec2 ret;
-	ret.x = m.x[0] * v.x + m.x[4] * v.y + m.x[12];
-	ret.y = m.x[1] * v.x + m.x[5] * v.y + m.x[13];
-	return ret;
-}
-
 void Math2D::TransVertices(const sm::mat4& mt, const std::vector<sm::vec2>& src, std::vector<sm::vec2>& dst)
 {
 	dst.clear();
 	dst.reserve(src.size());
 	for (int i = 0, n = src.size(); i < n; ++i) {
-		dst.push_back(TransVector(src[i], mt));
+		dst.push_back(mt * src[i]);
 	}
 }
 
@@ -885,7 +603,7 @@ sm::vec2 Math2D::TransCoordsLocalToWorld(const sm::vec2& origin, const sm::vec2&
 {
 	sm::vec2 nx(xDir);
 	nx.Normalize();
-	sm::vec2 ny = RotateVectorRightAngle(nx, true);
+	sm::vec2 ny = sm::rotate_vector_right_angle(nx, true);
 	return origin + (nx * local.x + ny * local.y);
 }
 
@@ -928,7 +646,7 @@ void Math2D::RemoveDuplicatePoints(const std::vector<sm::vec2>& src, std::vector
 		dst.push_back(last);
 		for (size_t i = 1; i < src.size(); ++i)
 		{
-			if (Math2D::GetDistance(src[i], last) > 1.0f)
+			if (sm::dis_pos_to_pos(src[i], last) > 1.0f)
 			{
  				last = src[i];
  				dst.push_back(last);			
@@ -977,15 +695,15 @@ void Math2D::SideOffsetSegment(const sm::vec2& s, const sm::vec2& e, bool toleft
 		return;
 	}
 
-	float len = GetDistance(s, e);
+	float len = sm::dis_pos_to_pos(s, e);
 	float t = dis / len;
 	
 	if (toleft) {
-		ds = RotateVectorRightAngle(e - s, true) * t + s;
-		de = RotateVectorRightAngle(s - e, false) * t + e;
+		ds = sm::rotate_vector_right_angle(e - s, true) * t + s;
+		de = sm::rotate_vector_right_angle(s - e, false) * t + e;
 	} else {
-		ds = RotateVectorRightAngle(e - s, false) * t + s;
-		de = RotateVectorRightAngle(s - e, true) * t + e;
+		ds = sm::rotate_vector_right_angle(e - s, false) * t + s;
+		de = sm::rotate_vector_right_angle(s - e, true) * t + e;
 	}
 }
 

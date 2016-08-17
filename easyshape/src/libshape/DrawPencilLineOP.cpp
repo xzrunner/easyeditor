@@ -1,10 +1,11 @@
 #include "DrawPencilLineOP.h"
 #include "ChainShape.h"
 
-#include <ee/DouglasPeucker.h>
 #include <ee/OneFloatValue.h>
 #include <ee/shape_msg.h>
 #include <ee/panel_msg.h>
+
+#include <SM_DouglasPeucker.h>
 
 namespace eshape
 {
@@ -23,7 +24,7 @@ bool DrawPencilLineOP::OnMouseLeftUp(int x, int y)
 	if (!m_curve.empty())
 	{
 		std::vector<sm::vec2> simplified;
-		ee::DouglasPeucker::Do(m_curve, m_simplify->GetValue(), simplified);
+		sm::douglas_peucker(m_curve, m_simplify->GetValue(), simplified);
 		ChainShape* chain = new ChainShape(simplified, false);
 		ee::InsertShapeSJ::Instance()->Insert(chain);
 		chain->RemoveReference();

@@ -177,13 +177,13 @@ IsLeaf() const
 bool Quadtree::Node::
 IsIntersect(const sm::rect& rect) const
 {
-	return ee::Math2D::IsRectIntersectRect(m_rect, rect);
+	return sm::is_rect_intersect_rect(m_rect, rect);
 }
 
 bool Quadtree::Node::
 IsContain(const sm::vec2& pos) const
 {
-	return ee::Math2D::IsPointInRect(pos, m_rect);
+	return sm::is_point_in_rect(pos, m_rect);
 }
 
 bool Quadtree::Node::
@@ -282,7 +282,7 @@ GetContainArea(const ee::Sprite* spr) const
 	for (int i = 0, n = tris.size() / 3; i < n; ++i)
 	{
 		sm::vec2 center = (tris[i*3] + tris[i*3+1] + tris[i*3+2]) / 3;
-		if (ee::Math2D::IsPointInRect(center, m_rect)) {
+		if (sm::is_point_in_rect(center, m_rect)) {
 			area += ee::Math2D::GetTriangleArea(tris[i*3], tris[i*3+1], tris[i*3+2]);
 		}
 	}

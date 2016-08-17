@@ -71,10 +71,10 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 		//sm::vec2 vertices[4];
 		//float hw = m_rect.Width() * 0.5f,
 		//	hh = m_rect.Height() * 0.5f;
-		//vertices[0] = ee::Math2D::TransVector(sm::vec2(m_rect.xmin, m_rect.ymin), mt);
-		//vertices[1] = ee::Math2D::TransVector(sm::vec2(m_rect.xmax, m_rect.ymin), mt);
-		//vertices[2] = ee::Math2D::TransVector(sm::vec2(m_rect.xmax, m_rect.ymax), mt);
-		//vertices[3] = ee::Math2D::TransVector(sm::vec2(m_rect.xmin, m_rect.ymax), mt);
+		//vertices[0] = mt * sm::vec2(m_rect.xmin, m_rect.ymin);
+		//vertices[1] = mt * sm::vec2(m_rect.xmax, m_rect.ymin);
+		//vertices[2] = mt * sm::vec2(m_rect.xmax, m_rect.ymax);
+		//vertices[3] = mt * sm::vec2(m_rect.xmin, m_rect.ymax);
 		//if (n->IsRotated())
 		//{
 		//	sm::vec2 tmp = vertices[3];
@@ -118,7 +118,7 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 			sm::vec2 min(m_clipbox.xmin, m_clipbox.ymin), 
 				max(m_clipbox.xmax, m_clipbox.ymax);
 			s2::RVG::SetColor(s2::Color(0, 204, 0));
-			s2::RVG::Rect(ee::Math2D::TransVector(min, p.mt), ee::Math2D::TransVector(max, p.mt), false);
+			s2::RVG::Rect(p.mt * min, p.mt * max, false);
 		}
 	}
 }

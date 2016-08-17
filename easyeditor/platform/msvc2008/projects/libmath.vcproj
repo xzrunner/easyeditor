@@ -154,35 +154,11 @@
 			Name="alg"
 			>
 			<File
-				RelativePath="..\..\..\source\math\alg\ConvexHull.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\ConvexHull.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\source\math\alg\CosineSmooth.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\CosineSmooth.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\source\math\alg\DelaunayTriangulation.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\include\ee\DelaunayTriangulation.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\source\math\alg\DouglasPeucker.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\DouglasPeucker.h"
 				>
 			</File>
 			<File

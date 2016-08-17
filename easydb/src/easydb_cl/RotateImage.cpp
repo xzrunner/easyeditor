@@ -8,10 +8,11 @@
 #include <ee/Config.h>
 #include <ee/SymbolMgr.h>
 #include <ee/SpriteFactory.h>
-#include <ee/Math2D.h>
 #include <ee/Sprite.h>
 #include <ee/StringHelper.h>
 #include <ee/EE_ShaderLab.h>
+
+#include <SM_Calc.h>
 
 #include <easyimage.h>
 
@@ -77,8 +78,8 @@ void RotateImage::Rotate(ee::Snapshoot& ss, const std::string& src_dir, const st
 			for (int deg = 10; deg <= 90; deg += 10) {
 				float rad = deg * SM_DEG_TO_RAD;
 				spr->SetAngle(rad);
-				int width = ee::Math2D::RotateVector(sm::vec2(r.xmax, r.ymax), -rad).x * 2;
-				int height = ee::Math2D::RotateVector(sm::vec2(r.xmin, r.ymax), -rad).y * 2;
+				int width = sm::rotate_vector(sm::vec2(r.xmax, r.ymax), -rad).x * 2;
+				int height = sm::rotate_vector(sm::vec2(r.xmin, r.ymax), -rad).y * 2;
 				ss.DrawSprite(spr, true, width, height);
 
 				std::string name = ee::FileHelper::GetFilename(filepath);

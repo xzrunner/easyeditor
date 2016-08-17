@@ -119,8 +119,8 @@ void FontBlankSymbol::DrawBackground(const FontBlankSprite* fb, const sm::mat4& 
 	}
 
 	sm::vec2 min(-hw, -hh), max(hw, hh);
-	min = ee::Math2D::TransVector(min, mt);
-	max = ee::Math2D::TransVector(max, mt);
+	min = mt * min;
+	max = mt * max;
 
 	s2::RVG::Rect(min, max, true);
 }
@@ -131,7 +131,7 @@ void FontBlankSymbol::DrawText(const FontBlankSprite* fb, const sm::mat4& mt) co
 // 		if (const FontBlankSprite* font = dynamic_cast<const FontBlankSprite*>(spr)) {
 // 			const std::string& str = font->GetTextContext();
 // 			if (!str.empty()) {
-// 				sm::vec2 pos = Math2D::TransVector(sm::vec2(0, 0), mt);
+// 				sm::vec2 pos = mt * sm::vec2(0, 0);
 // 
 // 				LabelStyle style;
 // 				style.has_edge = font->has_edge;

@@ -1,6 +1,7 @@
 #include "MinBoundingBox.h"
-#include "ConvexHull.h"
-#include "Math2D.h"
+
+#include <SM_Calc.h>
+#include <SM_ConvexHull.h>
 
 #include <assert.h>
 
@@ -15,7 +16,7 @@ bool MinBoundingBox::Do(const std::vector<sm::vec2>& points,
 {
 	// convex hull
 	std::vector<sm::vec2> convex_hull;
-	ConvexHull::Do(points, convex_hull);
+	sm::convex_hull(points, convex_hull);
 
 	// normal
 	float xmin = FLT_MAX, xmax = -FLT_MAX,
@@ -47,7 +48,7 @@ bool MinBoundingBox::Do(const std::vector<sm::vec2>& points,
 		is_other_dir = b;
 	}
 
-	assert(Math2D::IsTurnRight(bounding[0], bounding[1], bounding[2]));
+	assert(sm::is_turn_right(bounding[0], bounding[1], bounding[2]));
 
 	return b;
 }

@@ -55,7 +55,7 @@ void QuadIcon::Draw(const sm::mat4& mt, float process) const
 
 	sm::vec2 vertices[4];
 	for (int i = 0; i < 4; ++i) {
-		vertices[i] = ee::Math2D::TransVector(m_screen[i], mt);
+		vertices[i] = mt * m_screen[i];
 	}
 
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();

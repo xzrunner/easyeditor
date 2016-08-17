@@ -3,6 +3,9 @@
 #include "Random.h"
 #include "std_functor.h"
 
+#include <SM_Test.h>
+#include <SM_Calc.h>
+
 #include <queue>
 
 #include <assert.h>
@@ -65,7 +68,7 @@ void DelaunayTriangulation::GetAllTrisInRegion(std::vector<std::vector<sm::vec2>
 		src->GetNodesPos(bound);
 
 		sm::vec2 p = Math2D::GetTriGravityCenter(bound[0], bound[1], bound[2]);
-		if (Math2D::IsPointInArea(p, region))
+		if (sm::is_point_in_area(p, region))
 			triBounds.push_back(bound);
 	}
 }
@@ -80,7 +83,7 @@ void DelaunayTriangulation::GetAllTrisInRegion(std::vector<sm::vec2>& triBounds,
 		src->GetNodesPos(bound);
 
 		sm::vec2 p = Math2D::GetTriGravityCenter(bound[0], bound[1], bound[2]);
-		if (Math2D::IsPointInArea(p, region))
+		if (sm::is_point_in_area(p, region))
 			copy(bound.begin(), bound.end(), back_inserter(triBounds));
 	}
 }
@@ -172,7 +175,7 @@ void DelaunayTriangulation::GetBoundLinePos(std::vector<std::vector<sm::vec2> >&
 
 					float angle;
 					if (bound.size() < 2)
-						angle = Math2D::GetLineAngle(bound[bound.size() - 1], otherPos);
+						angle = sm::get_line_angle(bound[bound.size() - 1], otherPos);
 					else
 						angle = Math2D::GetAngle(bound[bound.size() - 1], bound[bound.size() - 2], otherPos);
 					if (angle < minAngle)
@@ -295,7 +298,7 @@ void DelaunayTriangulation::Edge::
 
 	sm::vec2 center;
 	Math2D::GetCircumcenter(m_start->m_pos, m_end->m_pos, fixPos, &center);
-	if (Math2D::GetDistance(checkPos, center) < Math2D::GetDistance(fixPos, center))
+	if (sm::dis_pos_to_pos(checkPos, center) < sm::dis_pos_to_pos(fixPos, center))
 	{
 		assert(LeftTri()->m_leaf && RightTri()->m_leaf);
 
@@ -372,7 +375,7 @@ void DelaunayTriangulation::Edge::
 
 float DelaunayTriangulation::Edge::Length() const
 {
-	return Math2D::GetDistance(m_start->m_pos, m_end->m_pos);
+	return sm::dis_pos_to_pos(m_start->m_pos, m_end->m_pos);
 }
 
 //
@@ -789,8 +792,8 @@ void DelaunayTriangulation::CheckSingleNode()
 				{
 					sm::vec2 other = e->LeftNode()->m_pos;
 					float maxLenEdge = std::max(
-						Math2D::GetDistance(e->m_start->m_pos, other),
-						Math2D::GetDistance(e->m_end->m_pos, other)
+						sm::dis_pos_to_pos(e->m_start->m_pos, other),
+						sm::dis_pos_to_pos(e->m_end->m_pos, other)
 						);
 					if (maxLenEdge < minLen)
 					{
@@ -804,8 +807,8 @@ void DelaunayTriangulation::CheckSingleNode()
 				{
 					sm::vec2 other = e->RightNode()->m_pos;
 					float maxLenEdge = std::max(
-						Math2D::GetDistance(e->m_start->m_pos, other),
-						Math2D::GetDistance(e->m_end->m_pos, other)
+						sm::dis_pos_to_pos(e->m_start->m_pos, other),
+						sm::dis_pos_to_pos(e->m_end->m_pos, other)
 						);
 					if (maxLenEdge < minLen)
 					{

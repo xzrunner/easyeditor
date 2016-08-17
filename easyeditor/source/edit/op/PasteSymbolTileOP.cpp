@@ -1,5 +1,4 @@
 #include "PasteSymbolTileOP.h"
-#include "Math2D.h"
 #include "SpriteFactory.h"
 #include "Sprite.h"
 #include "MultiSpritesImpl.h"
@@ -9,6 +8,8 @@
 #include "SpriteRenderer.h"
 #include "sprite_msg.h"
 #include "panel_msg.h"
+
+#include <SM_Calc.h>
 
 namespace ee
 {
@@ -67,7 +68,7 @@ bool PasteSymbolTileOP::OnMouseMove(int x, int y)
 	do
 	{
 		sm::vec2 newPos = sm::vec2(capture.x + offset.x, capture.y + offset.y);
-		if (Math2D::GetDistance(m_pos, newPos) < dis)
+		if (sm::dis_pos_to_pos(m_pos, newPos) < dis)
 		{
 			m_bCaptured = true;
 			m_pos = newPos;
@@ -75,7 +76,7 @@ bool PasteSymbolTileOP::OnMouseMove(int x, int y)
 		}
 
 		newPos = sm::vec2(capture.x + offset.x, capture.y - offset.y);
-		if (Math2D::GetDistance(m_pos, newPos) < dis)
+		if (sm::dis_pos_to_pos(m_pos, newPos) < dis)
 		{
 			m_bCaptured = true;
 			m_pos = newPos;
@@ -83,7 +84,7 @@ bool PasteSymbolTileOP::OnMouseMove(int x, int y)
 		}
 
 		newPos = sm::vec2(capture.x - offset.x, capture.y + offset.y);
-		if (Math2D::GetDistance(m_pos, newPos) < dis)
+		if (sm::dis_pos_to_pos(m_pos, newPos) < dis)
 		{
 			m_bCaptured = true;
 			m_pos = newPos;
@@ -91,7 +92,7 @@ bool PasteSymbolTileOP::OnMouseMove(int x, int y)
 		}
 
 		newPos = sm::vec2(capture.x - offset.x, capture.y - offset.y);
-		if (Math2D::GetDistance(m_pos, newPos) < dis)
+		if (sm::dis_pos_to_pos(m_pos, newPos) < dis)
 		{
 			m_bCaptured = true;
 			m_pos = newPos;
@@ -99,7 +100,7 @@ bool PasteSymbolTileOP::OnMouseMove(int x, int y)
 		}
 
 		newPos = sm::vec2(capture.x, capture.y - offset.y);
-		if (Math2D::GetDistance(m_pos, newPos) < dis)
+		if (sm::dis_pos_to_pos(m_pos, newPos) < dis)
 		{
 			m_bCaptured = true;
 			m_pos = newPos;
@@ -107,7 +108,7 @@ bool PasteSymbolTileOP::OnMouseMove(int x, int y)
 		}
 
 		newPos = sm::vec2(capture.x, capture.y + offset.y);
-		if (Math2D::GetDistance(m_pos, newPos) < dis)
+		if (sm::dis_pos_to_pos(m_pos, newPos) < dis)
 		{
 			m_bCaptured = true;
 			m_pos = newPos;
@@ -115,7 +116,7 @@ bool PasteSymbolTileOP::OnMouseMove(int x, int y)
 		}
 
 		newPos = sm::vec2(capture.x - offset.x, capture.y);
-		if (Math2D::GetDistance(m_pos, newPos) < dis)
+		if (sm::dis_pos_to_pos(m_pos, newPos) < dis)
 		{
 			m_bCaptured = true;
 			m_pos = newPos;
@@ -123,7 +124,7 @@ bool PasteSymbolTileOP::OnMouseMove(int x, int y)
 		}
 
 		newPos = sm::vec2(capture.x + offset.x, capture.y);
-		if (Math2D::GetDistance(m_pos, newPos) < dis)
+		if (sm::dis_pos_to_pos(m_pos, newPos) < dis)
 		{
 			m_bCaptured = true;
 			m_pos = newPos;
@@ -168,7 +169,7 @@ NearestQueryVisitor(const sm::vec2& pos, Sprite** ret)
 void PasteSymbolTileOP::NearestQueryVisitor::
 Visit(Sprite* spr, bool& next)
 {
-	const float dis = Math2D::GetDistance(spr->GetPosition(), m_pos);
+	const float dis = sm::dis_pos_to_pos(spr->GetPosition(), m_pos);
 	if (dis < m_dis)
 	{
 		*m_result = spr;

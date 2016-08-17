@@ -57,8 +57,8 @@ void Joint::Draw() const
 
 		const float w = 0.1f;
 		sm::vec2 mid = s + (e-s)*w;
-		sm::vec2 left = mid + ee::Math2D::RotateVectorRightAngle(s - mid, false);
-		sm::vec2 right = mid + ee::Math2D::RotateVectorRightAngle(s - mid, true);
+		sm::vec2 left = mid + sm::rotate_vector_right_angle(s - mid, false);
+		sm::vec2 right = mid + sm::rotate_vector_right_angle(s - mid, true);
 
 		s2::RVG::SetColor(s2::Color(204, 51, 51, 128));
 		s2::RVG::Line(s, left);
@@ -70,12 +70,12 @@ void Joint::Draw() const
 
 bool Joint::Contain(const sm::vec2& pos) const
 {
-	return ee::Math2D::GetDistance(pos, GetWorldPos()) < REGION;
+	return sm::dis_pos_to_pos(pos, GetWorldPos()) < REGION;
 }
 
 bool Joint::Intersect(const sm::vec2& pos) const
 {
-	return ee::Math2D::GetDistance(pos, GetWorldPos()) < REGION * 2;
+	return sm::dis_pos_to_pos(pos, GetWorldPos()) < REGION * 2;
 }
 
 void Joint::SetPosition(const sm::vec2& pos) 
@@ -85,12 +85,12 @@ void Joint::SetPosition(const sm::vec2& pos)
 
 sm::vec2 Joint::GetWorldPos() const
 {
-	return m_spr->GetPosition() + ee::Math2D::RotateVector(GetRelativePos(), m_spr->GetAngle());
+	return m_spr->GetPosition() + sm::rotate_vector(GetRelativePos(), m_spr->GetAngle());
 }
 
 sm::vec2 Joint::GetRelativePos(const sm::vec2& pos) const
 {
-	return ee::Math2D::RotateVector(pos - m_spr->GetPosition(), -m_spr->GetAngle());
+	return sm::rotate_vector(pos - m_spr->GetPosition(), -m_spr->GetAngle());
 }
 
 bool Joint::Connect(Joint* joint)

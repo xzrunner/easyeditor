@@ -6,8 +6,8 @@
 #include <ee/Math2D.h>
 
 #include <shaderlab.h>
-
 #include <sprite2/S2_RVG.h>
+#include <SM_Calc.h>
 
 #include <assert.h>
 
@@ -163,7 +163,7 @@ void Shadow::BuildInnerLoop(const std::vector<sm::vec2>& loop)
 
 	const sm::vec2& prev = loop[(leftmost - 1 + sz) % sz];
 	const sm::vec2& next = loop[(leftmost + 1) % sz];
-	if (ee::Math2D::IsTurnLeft(prev, loop[leftmost], next)) {
+	if (sm::is_turn_left(prev, loop[leftmost], next)) {
 		copy(loop.rbegin(), loop.rend(), back_inserter(m_inner_loop));
 	} else {
 		m_inner_loop = loop;
@@ -189,7 +189,7 @@ void Shadow::BuildOuterLoop()
 		ee::Math2D::SideOffsetSegment(curr, next, true, m_radius, nb, ne);
 
  		sm::vec2 cross;
-		ee::Math2D::GetTwoLineCross(cb, ce, nb, ne, &cross);
+		sm::intersect_line_line(cb, ce, nb, ne, &cross);
 		m_outer_loop.push_back(cross);
 
 		m_region.Combine(cross);

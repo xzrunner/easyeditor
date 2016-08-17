@@ -5,7 +5,6 @@
 #include <ee/color_config.h>
 #include <ee/Sprite.h>
 #include <ee/subject_id.h>
-#include <ee/Math2D.h>
 #include <ee/Symbol.h>
 #include <ee/FileHelper.h>
 #include <ee/Visitor.h>
@@ -14,6 +13,7 @@
 
 #include <sprite2/RenderParams.h>
 #include <sprite2/S2_RVG.h>
+#include <SM_Calc.h>
 
 #include <algorithm>
 
@@ -196,7 +196,7 @@ AnchorMgr::Anchor* AnchorMgr::GetNearestAnchor(const sm::vec2& pos)
 	for (int i = 0; i < ANCHOR_COUNT; ++i)
 	{
 		Anchor& anchor = m_anchors[i];
-		float dis = ee::Math2D::GetDistance(anchor.pos, pos);
+		float dis = sm::dis_pos_to_pos(anchor.pos, pos);
 		if (dis < nearest) 
 		{
 			nearest = dis;

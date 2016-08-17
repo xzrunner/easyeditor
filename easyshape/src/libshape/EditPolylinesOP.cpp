@@ -6,9 +6,9 @@
 #include <ee/ShapeSelection.h>
 #include <ee/panel_msg.h>
 #include <ee/SettingData.h>
-#include <ee/DouglasPeucker.h>
 
 #include <sprite2/S2_RVG.h>
+#include <SM_DouglasPeucker.h>
 
 namespace eshape
 {
@@ -98,7 +98,7 @@ void EditPolylinesOP::simplify()
 	for ( ; itr != m_simplify_buffer.end(); ++itr)
 	{
 		std::vector<sm::vec2> simplified;
-		ee::DouglasPeucker::Do(itr->first->GetVertices(), m_cmpt->GetSimplifyThreshold(), simplified);
+		sm::douglas_peucker(itr->first->GetVertices(), m_cmpt->GetSimplifyThreshold(), simplified);
 		itr->second->SetVertices(simplified);
 	}
 

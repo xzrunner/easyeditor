@@ -18,6 +18,7 @@
 #include <ee/shape_msg.h>
 
 #include <sprite2/S2_RVG.h>
+#include <SM_Calc.h>
 
 namespace eshape
 {
@@ -141,7 +142,7 @@ bool EditPolylineImpl::OnMouseLeftUp(int x, int y)
 		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 		NearestNodeVisitor nearest(pos, tolerance);
 		m_shapes_impl->TraverseShapes(nearest, ee::DT_VISIBLE);
-		float dis = ee::Math2D::GetDistance(nearest.GetNearestNode(), pos);
+		float dis = sm::dis_pos_to_pos(nearest.GetNearestNode(), pos);
 		if (dis < tolerance)
 		{
 			if (m_captured_editable.shape)
@@ -277,7 +278,7 @@ bool EditPolylineImpl::OnMouseDrag(int x, int y)
 		}
 	}
 	else if (m_last_left_down_pos.IsValid()
-		&& ee::Math2D::GetDistance(m_last_left_down_pos, sm::vec2(x, y)) < DRAG_SELECT_TOL)
+		&& sm::dis_pos_to_pos(m_last_left_down_pos, sm::vec2(x, y)) < DRAG_SELECT_TOL)
 		//		&& (m_lastLeftDownPos.x != x || m_lastLeftDownPos.y != y))
 	{
 		if (m_draw_op->m_polyline.size() == 1)
@@ -373,7 +374,7 @@ Visit(ee::Shape* shape, bool& next)
 	}
 	else if (polyline->IsClosed() && vertices.size() > 1)
 	{
-		float dis = ee::Math2D::GetDisPointToSegment(m_pos, vertices.front(), vertices.back());
+		float dis = sm::dis_pos_to_seg(m_pos, vertices.front(), vertices.back());
 		if (dis < m_tol)
 		{
 			polyline->AddVertex(vertices.size(), m_pos);
@@ -420,7 +421,7 @@ Visit(ee::Shape* shape, bool& next)
 	const std::vector<sm::vec2>& vertices = polyline->GetVertices();
 	for (size_t i = 0, n = vertices.size(); i < n; ++i)
 	{
-		float dis = ee::Math2D::GetDistance(m_pos, vertices[i]);
+		float dis = sm::dis_pos_to_pos(m_pos, vertices[i]);
 		if (dis < m_dis && dis != 0)
 		{
 			m_dis = dis;

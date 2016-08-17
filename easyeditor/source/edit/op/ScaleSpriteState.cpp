@@ -7,6 +7,8 @@
 #include "panel_msg.h"
 #include "Math2D.h"
 
+#include <SM_Calc.h>
+
 namespace ee
 {
 
@@ -51,7 +53,7 @@ void ScaleSpriteState::Scale(const sm::vec2& curr)
 	sm::vec2 fix;
 	Math2D::GetFootOfPerpendicular(center, ori, curr, &fix);
 
-	float scale_times = Math2D::GetDistance(center, fix) / Math2D::GetDistance(center, ori);
+	float scale_times = sm::dis_pos_to_pos(center, fix) / sm::dis_pos_to_pos(center, ori);
 	if (fabs(scale_times - 1) < FLT_EPSILON) {
 		return;
 	}

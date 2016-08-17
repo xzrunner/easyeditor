@@ -109,7 +109,7 @@ void PathVisibleSimple::InsertBoundary(const ee::Sprite* spr)
 	ee::Math2D::RemoveDuplicatePoints(bound, fixed);
 	sm::mat4 mat = spr->GetTransMatrix();
 	for (int i = 0; i < fixed.size(); ++i) {
-		fixed[i] = ee::Math2D::TransVector(fixed[i], mat);
+		fixed[i] = mat * fixed[i];
 	}
 
 	// create nodes
@@ -150,7 +150,7 @@ void PathVisibleSimple::BuildConnection(const std::vector<Node*>& nodes) const
 				Node* n1 = itr->second[i];
 				if (!IsSegIntersectAllBound(n0->pos, n1->pos))
 				{
-					float dis = ee::Math2D::GetDistance(n0->pos, n1->pos);
+					float dis = sm::dis_pos_to_pos(n0->pos, n1->pos);
 					n0->connections.push_back(Connection(dis, n1));
 					n1->connections.push_back(Connection(dis, n0));
 				}
@@ -178,7 +178,7 @@ bool PathVisibleSimple::IsSegIntersectBound(const sm::vec2& p0, const sm::vec2& 
 	for (int i = 0, n = bound.size(); i < n; ++i) {
 		points.push_back(bound[i]->pos);
 	}
-	if (ee::Math2D::IsPointInArea((p0+p1)*0.5f, points)) {
+	if (sm::is_point_in_area((p0+p1)*0.5f, points)) {
 		return true;
 	}
 	return ee::Math2D::IsSegmentIntersectPolyline(p0, p1, points);	
@@ -198,7 +198,7 @@ PathVisibleSimple::Node* PathVisibleSimple::CreateNode(const sm::vec2& pos)
 			Node* n1 = itr->second[i];
 			if (!IsSegIntersectAllBound(n0->pos, n1->pos))
 			{
-				float dis = ee::Math2D::GetDistance(n0->pos, n1->pos);
+				float dis = sm::dis_pos_to_pos(n0->pos, n1->pos);
 				n0->connections.push_back(Connection(dis, n1));
 				n1->connections.push_back(Connection(dis, n0));
 			}
@@ -235,7 +235,7 @@ void PathVisibleSimple::RemoveNode(const Node* node)
 
 VisitedNode* PathVisibleSimple::QueryRouteImpl(const sm::vec2& start, const sm::vec2& end)
 {
-	if (!ee::Math2D::IsPointInRect(start, m_region) || !ee::Math2D::IsPointInRect(end, m_region)) {
+	if (!sm::is_point_in_rect(start, m_region) || !sm::is_point_in_rect(end, m_region)) {
 		return NULL;
 	}
 
@@ -288,7 +288,7 @@ void PathVisibleSimple::Expand(VisitedNode* node, const sm::vec2& end)
 		}
 		else
 		{
-			float to = ee::Math2D::GetDistance(end, TransIDToPos(ct.n->id));
+			float to = sm::dis_pos_to_pos(end, TransIDToPos(ct.n->id));
 			VisitedNode* new_node = new VisitedNode(ct.n->id, node, node->m_from + ct.len, to);
 			m_visited.Push(new_node);
 			m_candidate.Push(new_node);
