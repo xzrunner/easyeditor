@@ -58,10 +58,12 @@ Sprite::Sprite(Symbol* sym)
 	, m_shear(0, 0)
 	, m_visible(true)
 {
+	cu::RefCountObjAssign(m_sym, sym);
+
 	m_offset.MakeInvalid();
 
 	m_bounding = new OBB();
-	SetSymbol(sym);
+	m_bounding_dirty = true;
 
 	m_shader.filter = FilterFactory::Instance()->Create(FM_NULL);
 }
