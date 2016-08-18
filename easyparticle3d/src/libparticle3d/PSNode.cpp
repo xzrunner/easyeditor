@@ -64,7 +64,7 @@ void PSNode::UpdateTime()
 }
 
 static void
-blend_func(int blend)
+blend_begin_func(int blend)
 {
 	sl::RenderContext* ctx = sl::ShaderMgr::Instance()->GetContext();
 	switch (blend)
@@ -82,6 +82,14 @@ blend_func(int blend)
 		ctx->SetBlendEquation(1);	// BLEND_FUNC_SUBTRACT
 		break;
 	}
+}
+
+static void
+blend_end_func()
+{
+	sl::RenderContext* ctx = sl::ShaderMgr::Instance()->GetContext();
+	ctx->SetBlend(2, 6);		// BLEND_GL_ONE, BLEND_GL_ONE_MINUS_SRC_ALPHA
+	ctx->SetBlendEquation(0);	// BLEND_FUNC_ADD
 }
 
 static void 
@@ -186,7 +194,7 @@ release_draw_params_func(struct p3d_sprite* spr) {
 void PSNode::Init()
 {
 	p3d_init();
-	p3d_regist_cb(blend_func, render_func, add_func, remove_func);	
+	p3d_regist_cb(blend_begin_func, blend_end_func, render_func, add_func, remove_func);	
 	p3d_buffer_init(update_srt_func, buf_remove_func);
 	p3d_sprite_init(create_draw_params_func, release_draw_params_func);
 }
