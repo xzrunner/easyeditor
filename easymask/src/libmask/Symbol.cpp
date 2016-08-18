@@ -14,6 +14,7 @@
 #include <shaderlab.h>
 
 #include <easyparticle3d.h>
+#include <easycomplex.h>
 
 #include <assert.h>
 
@@ -65,12 +66,8 @@ sm::rect Symbol::GetBounding(const s2::Sprite* spr) const
 
 void Symbol::Update(const s2::RenderParams& params, float dt)
 {
-	if (const eparticle3d::Symbol* p3d_base = dynamic_cast<const eparticle3d::Symbol*>(m_base)) {
-		const_cast<eparticle3d::Symbol*>(p3d_base)->Update(params, dt);
-	}
-	if (const eparticle3d::Symbol* p3d_mask = dynamic_cast<const eparticle3d::Symbol*>(m_mask)) {
-		const_cast<eparticle3d::Symbol*>(p3d_mask)->Update(params, dt);
-	}
+	UpdateP3DSymbol(const_cast<ee::Symbol*>(m_base), params, dt);
+	UpdateP3DSymbol(const_cast<ee::Symbol*>(m_mask), params, dt);
 }
 
 void Symbol::SetSymbol(const ee::Symbol* sym, bool is_base)
@@ -181,6 +178,20 @@ void Symbol::DrawMashFromFbo(const sm::mat4& mt) const
 	mgr->SetShader(sl::MASK);
 	sl::MaskShader* shader = static_cast<sl::MaskShader*>(mgr->GetShader());
 	shader->Draw(&vertices[0].x, &texcoords[0].x, &texcoords_mask[0].x, dtexf_t0_get_texture_id(), dtexf_t1_get_texture_id());
+}
+
+void Symbol::UpdateP3DSymbol(ee::Symbol* sym, const s2::RenderParams& params, float dt)
+{
+	if (eparticle3d::Symbol* p3d = dynamic_cast<eparticle3d::Symbol*>(sym)) {
+		p3d->Update(params, dt);
+	} else if (ecomplex::Symbol* comp = dynamic_cast<ecomplex::Symbol*>(sym)) {
+		const std::vector<s2::Sprite*>& children = comp->GetChildren();
+		for (int i = 0, n = children.size(); i < n; ++i) {
+			if (eparticle3d::Sprite* p3d = dynamic_cast<eparticle3d::Sprite*>(children[i])) {
+				p3d->Update(params, dt);
+			}
+		}
+	}
 }
 
 }

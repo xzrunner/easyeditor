@@ -21,8 +21,6 @@
 namespace ecomplex
 {
 
-const float Symbol::SCALE = 0.15f;
-
 Symbol::Symbol()
 	: m_use_render_cache(false)
 	, m_render_version(0)

@@ -39,6 +39,8 @@ private:
 	void DrawMaskToFbo1() const;
 	void DrawMashFromFbo(const sm::mat4& mt) const;
 
+	void UpdateP3DSymbol(ee::Symbol* sym, const s2::RenderParams& params, float dt);	
+
 private:
 	const ee::Symbol *m_base, *m_mask;
 

@@ -35,9 +35,6 @@ public:
 protected:
 	virtual void LoadResources();
 
-private:
-	static const float SCALE;
-
 public:
 	struct Group
 	{
