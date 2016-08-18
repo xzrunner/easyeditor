@@ -1,3 +1,0 @@
-# cu
-
-class utility
