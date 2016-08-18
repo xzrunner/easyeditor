@@ -29,8 +29,8 @@ sm::rect Symbol::GetBounding(const s2::Sprite* spr/* = NULL*/) const
 {
 	float w, h;
 	if (spr) {
-		const Sprite* spr = dynamic_cast<const Sprite*>(spr);
-		spr->GetSize(w, h);
+		const Sprite* scale9_spr = dynamic_cast<const Sprite*>(spr);
+		scale9_spr->GetSize(w, h);
 	} else {
 		m_data.GetSize(w, h);
 	}

@@ -69,8 +69,8 @@ void Scale9Data::ReloadTexture() const
 void Scale9Data::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	if (spr) {
-		const Sprite* _spr = dynamic_cast<const Sprite*>(spr);
-		_spr->Draw(params);
+		const Sprite* scale9_spr = dynamic_cast<const Sprite*>(spr);
+		scale9_spr->Draw(params);
 	} else {
 		DrawScale9(m_type, m_sprs, params);
 	}

@@ -38,9 +38,9 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 	m_stage->GetCanvas()->EnableObserve(false);
 	m_stage->GetCanvas()->SetDrawable(false);
 
-	if (emesh::Sprite* spr = dynamic_cast<emesh::Sprite*>(spr))
+	if (emesh::Sprite* mesh = dynamic_cast<emesh::Sprite*>(spr))
 	{
-		emesh::EditDialog dlg(m_wnd, spr, m_stage->GetCanvas()->GetGLContext());
+		emesh::EditDialog dlg(m_wnd, mesh, m_stage->GetCanvas()->GetGLContext());
 		dlg.ShowModal();
 	}
 

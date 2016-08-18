@@ -91,7 +91,7 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 		escale9::EditDialog dlg(m_wnd, sym, m_stage->GetCanvas()->GetGLContext());
 		dlg.ShowModal();
 	}
-	else if (emesh::Sprite* spr = dynamic_cast<emesh::Sprite*>(spr))
+	else if (emesh::Sprite* mesh = dynamic_cast<emesh::Sprite*>(spr))
 	{
 		emesh::EditDialog dlg(m_wnd, spr, m_stage->GetCanvas()->GetGLContext());
 		dlg.ShowModal();
