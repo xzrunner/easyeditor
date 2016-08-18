@@ -137,6 +137,8 @@ void Sprite::SetMirror(const sm::bvec2& mirror)
 		return;
 	}
 
+	m_mirror = mirror;
+
 	sm::vec2 offset = m_offset,
 		     scale = m_scale;
 	if (x_dirty) {

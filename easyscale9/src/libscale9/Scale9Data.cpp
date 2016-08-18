@@ -321,11 +321,22 @@ void Scale9Data::ResizeSprite(ee::Sprite* spr, const sm::vec2& center,
 	assert(w != 0 && h != 0);
 
 	spr->SetPosition(center);
+
+	const sm::vec2& old_scale = spr->GetScale();
+	sm::vec2 new_scale;
 	const float times = spr->GetAngle() / SM_PI;
-	if (times - (int)(times + 0.01f) < 0.3f)
-		spr->SetScale(sm::vec2(width / w, height / h));
-	else
-		spr->SetScale(sm::vec2(height / w, width / h));
+	if (times - (int)(times + 0.01f) < 0.3f) {
+		new_scale.Set(width / w, height / h);
+	} else {
+		new_scale.Set(height / w, width / h);
+	}
+	if (old_scale.x < 0) {
+		new_scale.x = -new_scale.x;
+	}
+	if (old_scale.y < 0) {
+		new_scale.y = -new_scale.y;
+	}
+	spr->SetScale(new_scale);
 
 	spr->Translate(sm::rotate_vector(spr->GetOffset(), spr->GetAngle()) - spr->GetOffset());
 }
