@@ -102,6 +102,10 @@ render_shape_func(const float* positions, const uint32_t* colors, int count, con
 	mgr->SetShader(sl::SHAPE2);
 	sl::Shape2Shader* shader = static_cast<sl::Shape2Shader*>(mgr->GetShader());
 
+	sl::RenderContext* ctx = sl::ShaderMgr::Instance()->GetContext();
+	ctx->SetBlend(5, 6);		// BLEND_SRC_COLOR, BLEND_ONE_MINUS_SRC_ALPHA
+	ctx->SetBlendEquation(0);	// BLEND_FUNC_ADD
+
 //	shader->Commit();
 
 	shader->SetType(0x0005);	// todo from rvg_render.c

@@ -163,7 +163,7 @@ void ParticleSystem::Draw(const sm::mat4& mt, AnimRecorder* recorder) const
 	m_rp.mat = const_cast<sm::mat4&>(mt);
 	p3d_emitter_draw(m_spr->et, &m_rp);
 
-	sl::ShaderMgr::Instance()->GetContext()->SetDefaultBlend();
+//	sl::ShaderMgr::Instance()->GetContext()->SetDefaultBlend();
 }
 
 bool ParticleSystem::Update(const sm::mat4& mat)
