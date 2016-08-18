@@ -2,10 +2,11 @@
 
 #include <ee/Sprite.h>
 #include <ee/color_config.h>
-#include <ee/Math2D.h>
 
 #include <sprite2/S2_RVG.h>
 #include <sprite2/BoundingBox.h>
+#include <SM_Test.h>
+#include <SM_Calc.h>
 
 namespace lr
 {
