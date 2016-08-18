@@ -13,6 +13,8 @@
 #include <dtex_facade.h>
 #include <shaderlab.h>
 
+#include <easyparticle3d.h>
+
 #include <assert.h>
 
 namespace emask
@@ -58,6 +60,16 @@ sm::rect Symbol::GetBounding(const s2::Sprite* spr) const
 		return m_mask->GetBounding();
 	} else {
 		return sm::rect(sm::vec2(0, 0), 100, 100);
+	}
+}
+
+void Symbol::Update(const s2::RenderParams& params, float dt)
+{
+	if (const eparticle3d::Symbol* p3d_base = dynamic_cast<const eparticle3d::Symbol*>(m_base)) {
+		const_cast<eparticle3d::Symbol*>(p3d_base)->Update(params, dt);
+	}
+	if (const eparticle3d::Symbol* p3d_mask = dynamic_cast<const eparticle3d::Symbol*>(m_mask)) {
+		const_cast<eparticle3d::Symbol*>(p3d_mask)->Update(params, dt);
 	}
 }
 

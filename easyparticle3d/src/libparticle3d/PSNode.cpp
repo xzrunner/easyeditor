@@ -90,7 +90,6 @@ render_func(void* sym, float* mat, float x, float y, float angle, float scale,
 {
 	assert(ud);
 	const RenderParams* rp = (static_cast<const RenderParams*>(ud));
-	assert(rp->p3d);
 
 	ee::Symbol* ee_sym = static_cast<ee::Symbol*>(sym);
 
@@ -111,7 +110,7 @@ render_func(void* sym, float* mat, float x, float y, float angle, float scale,
 
 	// todo color trans
 
-	if (rp->p3d->local_mode_draw) {
+	if (rp->p3d && rp->p3d->local_mode_draw) {
 		params.mt = rp->mat;
 	} else {
 		sm::mat4 _mat;

@@ -10,6 +10,8 @@
 #include <shaderlab.h>
 #include <sprite2/RenderParams.h>
 
+#include <assert.h>
+
 #include <fstream>
 
 namespace eparticle3d
@@ -27,6 +29,15 @@ Symbol::Symbol()
 void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	if (!spr) {
+		sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
+		sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
+		shader->SetColor(params.color.mul.ToABGR(), params.color.add.ToABGR());
+		shader->SetColorMap(params.color.rmap.ToABGR(), params.color.gmap.ToABGR(), params.color.bmap.ToABGR());
+		RenderParams rp;
+		rp.mat = params.mt;
+		rp.ct = params.color;
+		rp.p3d = NULL;
+		p3d_emitter_draw(m_et, &rp);
 		return;
 	}
 
@@ -90,10 +101,35 @@ void Symbol::Traverse(ee::Visitor<ee::Sprite>& visitor)
 	}
 }
 
+void Symbol::Update(const s2::RenderParams& params, float _dt)
+{
+	PSNode::Instance()->UpdateTime();
+
+	float time = PSNode::Instance()->GetTime();
+	assert(m_et->time <= time);
+	if (m_et->time == time) {
+		return;
+	}
+
+	float mt[6];
+	sm::mat4 inner_mat;
+	mt[0] = inner_mat.x[0];
+	mt[1] = inner_mat.x[1];
+	mt[2] = inner_mat.x[4];
+	mt[3] = inner_mat.x[5];
+	mt[4] = inner_mat.x[12];
+	mt[5] = inner_mat.x[13];	
+
+	float dt = time - m_et->time;
+	p3d_emitter_update(m_et, dt, mt);
+	m_et->time = time;
+}
+
 void Symbol::LoadResources()
 {
 	m_et_cfg = PSConfigMgr::Instance()->GetConfig(m_filepath);
 	m_et = p3d_emitter_create(m_et_cfg);
+	p3d_emitter_start(m_et);
 
 	Json::Value value;
 	Json::Reader reader;

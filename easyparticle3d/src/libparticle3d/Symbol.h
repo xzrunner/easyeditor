@@ -32,6 +32,8 @@ public:
 	virtual void ReloadTexture() const;
 	virtual void Traverse(ee::Visitor<ee::Sprite>& visitor);
 
+	void Update(const s2::RenderParams& params, float dt);
+
 	void SetEmitterCfg(p3d_emitter_cfg* cfg) { m_et_cfg = cfg; }
 	const p3d_emitter_cfg* GetEmitterCfg() const { return m_et_cfg; }
 

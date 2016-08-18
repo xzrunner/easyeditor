@@ -10,6 +10,8 @@
 #include <ee/Visitor.h>
 #include <ee/Sprite.h>
 
+#include <sprite2/RenderParams.h>
+
 namespace emask
 {
 
@@ -37,6 +39,7 @@ StagePanel::~StagePanel()
 
 bool StagePanel::Update(float dt)
 {
+	m_sym->Update(s2::RenderParams(), dt);
 	return true;
 }
 
