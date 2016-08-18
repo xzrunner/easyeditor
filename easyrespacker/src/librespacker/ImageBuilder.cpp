@@ -79,16 +79,16 @@ void ImageBuilder::TransScreen(PackPicture::Quad& quad, const ee::Sprite* spr)
 	quad.screen_coord[1].y -= sy * hw;
 	quad.screen_coord[0].y -= sy * hw;
 
-	// 2. mirror
-	sm::bvec2 mirror = spr->GetMirror();
-	if (mirror.x) {
-		for (size_t i = 0; i < 4; ++i)
-			quad.screen_coord[i].x = -quad.screen_coord[i].x;
-	}
-	if (mirror.y) {
-		for (size_t i = 0; i < 4; ++i)
-			quad.screen_coord[i].y = -quad.screen_coord[i].y;
-	}
+	//// 2. mirror
+	//sm::bvec2 mirror = spr->GetMirror();
+	//if (mirror.x) {
+	//	for (size_t i = 0; i < 4; ++i)
+	//		quad.screen_coord[i].x = -quad.screen_coord[i].x;
+	//}
+	//if (mirror.y) {
+	//	for (size_t i = 0; i < 4; ++i)
+	//		quad.screen_coord[i].y = -quad.screen_coord[i].y;
+	//}
 
 	// 3. scale
 	for (size_t i = 0; i < 4; ++i)
