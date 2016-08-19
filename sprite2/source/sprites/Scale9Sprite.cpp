@@ -5,6 +5,16 @@
 namespace s2
 {
 
+Scale9Sprite::Scale9Sprite() 
+{
+
+}
+
+Scale9Sprite::Scale9Sprite(Symbol* sym) 
+	: Sprite(sym) 
+{
+}
+
 Scale9Sprite* Scale9Sprite::Clone() const
 {
 	return new Scale9Sprite(*this);

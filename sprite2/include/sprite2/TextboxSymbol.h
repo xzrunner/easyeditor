@@ -22,7 +22,10 @@ public:
 	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const;
 	virtual sm::rect GetBounding(const Sprite* spr = NULL) const;
 
-private:
+	const Textbox& GetTextbox() const { return m_tb; }
+	Textbox& GetTextbox() { return m_tb; }
+
+protected:
 	Textbox m_tb;
 
 }; // TextboxSymbol

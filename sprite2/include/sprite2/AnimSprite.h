@@ -9,14 +9,16 @@ namespace s2
 class AnimSprite : public VIRTUAL_INHERITANCE Sprite
 {
 public:
-	AnimSprite() {}
-	AnimSprite(Symbol* sym) : Sprite(sym) {}
+	AnimSprite();
+	AnimSprite(Symbol* sym);
 
 	/**
 	 *  @interface
 	 *    Cloneable
 	 */
 	virtual AnimSprite* Clone() const;
+
+	VI_DUMMY_FUNC
 
 }; // AnimSprite
 

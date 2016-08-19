@@ -4,6 +4,15 @@
 namespace s2
 {
 
+ComplexSprite::ComplexSprite() 
+{
+}
+
+ComplexSprite::ComplexSprite(Symbol* sym) 
+	: Sprite(sym) 
+{
+}
+
 ComplexSprite* ComplexSprite::Clone() const
 {
 	return new ComplexSprite(*this);

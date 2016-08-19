@@ -71,10 +71,9 @@ void StageCanvas::DrawSprBound() const
 	s2::RVG::SetColor(s2::Color(204, 102, 102));
 
 	const Sprite* font = static_cast<const Sprite*>(m_edited);
-	int w, h;
-	font->GetSize(w, h);
-	float hw = w * 0.5f,
-		hh = h * 0.5f;
+	const s2::Textbox& tb = font->GetTextbox();
+	float hw = tb.width * 0.5f,
+		  hh = tb.height * 0.5f;
 
 	sm::mat4 mt = m_edited->GetTransMatrix();
 	sm::vec2 min(-hw, -hh), max(hw, hh);

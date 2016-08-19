@@ -42,40 +42,33 @@ const IPackNode* TextBuilder::Create(const etext::Sprite* spr)
 		}
 	}
 
-	int w, h;
-	spr->GetSize(w, h);
-
-	int align_h, align_v;
-	spr->GetAlign(align_h, align_v);
-
-	float space_h, space_v;
-	spr->GetSpace(space_h, space_v);
-
 	PackLabel* node = new PackLabel;
 
-	node->width	= w;
-	node->height = h;
+	const s2::Textbox& tb = spr->GetTextbox();
 
-	node->font = spr->GetFont();
-	node->font_size = spr->GetFontSize();
-	node->font_color = spr->GetFontColor();
+	node->width			= tb.width;
+	node->height		= tb.height;
 
-	node->edge = spr->GetEdge();
-	node->edge_size = spr->GetEdgeSize();
-	node->edge_color = spr->GetEdgeColor();
+	node->font			= tb.font_type;
+	node->font_size		= tb.font_size;
+	node->font_color	= tb.font_color;
 
-	node->align_hori = align_h;
-	node->align_vert = align_v;
+	node->edge			= tb.has_edge;
+	node->edge_size		= tb.edge_size;
+	node->edge_color	= tb.edge_color;
 
-	node->space_hori = space_h;
-	node->space_vert = space_v;
+	node->align_hori	= tb.align_hori;
+	node->align_vert	= tb.align_vert;
 
-	node->overflow = spr->GetOverflow();
+	node->space_hori	= tb.space_hori;
+	node->space_vert	= tb.space_vert;
 
-	node->richtext = spr->GetRichtext();
+	node->overflow		= tb.overflow;
 
-	node->text = spr->GetText();
-	node->tid = spr->GetTID();
+	node->richtext		= tb.richtext;
+
+	node->text			= spr->GetText();
+	node->tid			= spr->GetTID();
 
 	m_labels.push_back(node);
 
@@ -120,37 +113,29 @@ void TextBuilder::CacheEnd()
 
 const IPackNode* TextBuilder::QueryCache(const etext::Sprite* spr) const
 {
-	int w, h;
-	spr->GetSize(w, h);
-
-	int align_h, align_v;
-	spr->GetAlign(align_h, align_v);
-
-	float space_h, space_v;
-	spr->GetSpace(space_h, space_v);
-
+	const s2::Textbox& tb = spr->GetTextbox();
 	for (int i = 0, n = m_cache_labels.size(); i < n; ++i) {
  		const PackLabel* label = m_cache_labels[i];
- 		if (label->width		== w &&
- 			label->height		== h &&
+ 		if (label->width		== tb.width &&
+ 			label->height		== tb.height &&
  
- 			label->font			== spr->GetFont() &&
- 			label->font_size	== spr->GetFontSize() &&
- 			label->font_color	== spr->GetFontColor() &&
+ 			label->font			== tb.font_type &&
+ 			label->font_size	== tb.font_size &&
+ 			label->font_color	== tb.font_color &&
  
- 			label->edge			== spr->GetEdge() &&
- 			label->edge_size	== spr->GetEdgeSize() &&
- 			label->edge_color	== spr->GetEdgeColor() &&
+ 			label->edge			== tb.has_edge &&
+ 			label->edge_size	== tb.edge_size &&
+ 			label->edge_color	== tb.edge_color &&
  
- 			label->align_hori	== align_h &&
- 			label->align_vert	== align_v &&
+ 			label->align_hori	== tb.align_hori &&
+ 			label->align_vert	== tb.align_vert &&
  
- 			label->space_hori	== space_h &&
- 			label->space_vert	== space_v &&
+ 			label->space_hori	== tb.space_hori &&
+ 			label->space_vert	== tb.space_vert &&
 
-			label->overflow	    == spr->GetOverflow() &&
+			label->overflow	    == tb.overflow &&
 			
-			label->richtext		== spr->GetRichtext() &&
+			label->richtext		== tb.richtext&&
 
  			label->text			== spr->GetText() &&
  			label->tid			== spr->GetTID()) {

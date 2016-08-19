@@ -9,8 +9,8 @@ namespace s2
 class ComplexSprite : public VIRTUAL_INHERITANCE Sprite
 {
 public:
-	ComplexSprite() {}
-	ComplexSprite(Symbol* sym) : Sprite(sym) {}
+	ComplexSprite();
+	ComplexSprite(Symbol* sym);
 
 	/**
 	 *  @interface
@@ -24,6 +24,8 @@ public:
 	 */
 	virtual bool Update(const RenderParams& params, float dt);
 	
+	VI_DUMMY_FUNC
+
 }; // ComplexSprite
 
 }

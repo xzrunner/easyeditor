@@ -9,14 +9,16 @@ namespace s2
 class TextureSprite : public VIRTUAL_INHERITANCE Sprite
 {
 public:
-	TextureSprite() {}
-	TextureSprite(Symbol* sym) : Sprite(sym) {}
+	TextureSprite();
+	TextureSprite(Symbol* sym);
 
 	/**
 	 *  @interface
 	 *    Cloneable
 	 */
 	virtual TextureSprite* Clone() const;
+
+	VI_DUMMY_FUNC
 
 }; // TextureSprite
 

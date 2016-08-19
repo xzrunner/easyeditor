@@ -42,8 +42,7 @@ wxSizer* ToolbarPanel::InitLayout()
 
 void ToolbarPanel::InitSizeLayout(wxSizer* top_sizer)
 {
-	int w, h;
-	m_spr->GetSize(w, h);
+	const s2::Textbox& tb = m_spr->GetTextbox();
 
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, "Size");
 	wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
@@ -51,7 +50,7 @@ void ToolbarPanel::InitSizeLayout(wxSizer* top_sizer)
 		wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
 		csizer->Add(new wxStaticText(this, wxID_ANY, "¿í"), 0, wxLEFT | wxRIGHT, 5);
 
-		m_width = new wxTextCtrl(this, wxID_ANY, ee::StringHelper::ToString(w),
+		m_width = new wxTextCtrl(this, wxID_ANY, ee::StringHelper::ToString(tb.width),
 			wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
 		Connect(m_width->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeSize));
 		csizer->Add(m_width);
@@ -63,7 +62,7 @@ void ToolbarPanel::InitSizeLayout(wxSizer* top_sizer)
 		wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
 		csizer->Add(new wxStaticText(this, wxID_ANY, "¸ß"), 0, wxLEFT | wxRIGHT, 5);
 
-		m_height = new wxTextCtrl(this, wxID_ANY, ee::StringHelper::ToString(h),
+		m_height = new wxTextCtrl(this, wxID_ANY, ee::StringHelper::ToString(tb.height),
 			wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
 		Connect(m_height->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeSize));
 		csizer->Add(m_height);
@@ -75,6 +74,8 @@ void ToolbarPanel::InitSizeLayout(wxSizer* top_sizer)
 
 void ToolbarPanel::InitFontLayout(wxSizer* top_sizer)
 {
+	const s2::Textbox& tb = m_spr->GetTextbox();
+
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, "Font");
 	wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 	{
@@ -94,8 +95,7 @@ void ToolbarPanel::InitFontLayout(wxSizer* top_sizer)
 		wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
 		csizer->Add(new wxStaticText(this, wxID_ANY, "×ÖºÅ"), 0, wxLEFT | wxRIGHT, 5);
 
-		int size = m_spr->GetFontSize();
-		m_font_size = new wxTextCtrl(this, wxID_ANY, ee::StringHelper::ToString(size),
+		m_font_size = new wxTextCtrl(this, wxID_ANY, ee::StringHelper::ToString(tb.font_size),
 			wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
 		Connect(m_font_size->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeFontSize));
 		csizer->Add(m_font_size);
@@ -112,7 +112,7 @@ void ToolbarPanel::InitFontLayout(wxSizer* top_sizer)
 	sizer->AddSpacer(10);
 	{
 		m_edge = new wxCheckBox(this, wxID_ANY, "Ãè±ß");
-		m_edge->SetValue(m_spr->GetEdge());
+		m_edge->SetValue(tb.has_edge);
 		Connect(m_edge->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
 			wxCommandEventHandler(ToolbarPanel::OnChangeEdge));
 		sizer->Add(m_edge);
@@ -124,8 +124,7 @@ void ToolbarPanel::InitFontLayout(wxSizer* top_sizer)
 			wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
 			csizer->Add(new wxStaticText(this, wxID_ANY, "¿í¶È"), 0, wxLEFT | wxRIGHT, 5);
 
-			float size = m_spr->GetEdgeSize();
-			m_edge_size = new wxTextCtrl(this, wxID_ANY, ee::StringHelper::ToString(size),
+			m_edge_size = new wxTextCtrl(this, wxID_ANY, ee::StringHelper::ToString(tb.edge_size),
 				wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
 			Connect(m_edge_size->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeEdgeSize));
 			csizer->Add(m_edge_size);
@@ -146,6 +145,8 @@ void ToolbarPanel::InitFontLayout(wxSizer* top_sizer)
 
 void ToolbarPanel::InitLayoutLayout(wxSizer* top_sizer)
 {
+	const s2::Textbox& tb = m_spr->GetTextbox();
+
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, "Layout");
 	wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 	{
@@ -175,13 +176,11 @@ void ToolbarPanel::InitLayoutLayout(wxSizer* top_sizer)
 	}
 	sizer->AddSpacer(10);
 
-	float space_h, space_v;
-	m_spr->GetSpace(space_h, space_v);		
 	{
 		wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
 		csizer->Add(new wxStaticText(this, wxID_ANY, "×Ö¼ä¾à"), 0, wxLEFT | wxRIGHT, 5);
 
-		m_space_h = new wxTextCtrl(this, wxID_ANY, ee::StringHelper::ToString(space_h),
+		m_space_h = new wxTextCtrl(this, wxID_ANY, ee::StringHelper::ToString(tb.space_hori),
 			wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
 		Connect(m_space_h->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeSpace));
 		csizer->Add(m_space_h);
@@ -193,7 +192,7 @@ void ToolbarPanel::InitLayoutLayout(wxSizer* top_sizer)
 		wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
 		csizer->Add(new wxStaticText(this, wxID_ANY, "ÐÐ¼ä¾à"), 0, wxLEFT | wxRIGHT, 5);
 
-		m_space_v = new wxTextCtrl(this, wxID_ANY, ee::StringHelper::ToString(space_v),
+		m_space_v = new wxTextCtrl(this, wxID_ANY, ee::StringHelper::ToString(tb.space_vert),
 			wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
 		Connect(m_space_v->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeSpace));
 		csizer->Add(m_space_v);
@@ -205,63 +204,66 @@ void ToolbarPanel::InitLayoutLayout(wxSizer* top_sizer)
 
 void ToolbarPanel::OnChangeSize(wxCommandEvent& event)
 {	
-	int w = ee::StringHelper::FromString<int>(m_width->GetValue().ToStdString());
-	int h = ee::StringHelper::FromString<int>(m_height->GetValue().ToStdString());
-	m_spr->SetSize(w, h);
+	s2::Textbox& tb = m_spr->GetTextbox();
+	tb.width = ee::StringHelper::FromString<int>(m_width->GetValue().ToStdString());
+	tb.height = ee::StringHelper::FromString<int>(m_height->GetValue().ToStdString());
 	m_spr->UpdateBounding();
 }
 
 void ToolbarPanel::OnChangeFont(wxCommandEvent& event)
 {
-	int font = m_font->GetSelection();
-	m_spr->SetFont(font);
+	s2::Textbox& tb = m_spr->GetTextbox();
+	tb.font_type = m_font->GetSelection();
 }
 
 void ToolbarPanel::OnChangeFontSize(wxCommandEvent& event)
 {
-	int sz = ee::StringHelper::FromString<int>(m_font_size->GetValue().ToStdString());
-	m_spr->SetFontSize(sz);
+	s2::Textbox& tb = m_spr->GetTextbox();
+	tb.font_size = ee::StringHelper::FromString<int>(m_font_size->GetValue().ToStdString());
 }
 
 void ToolbarPanel::OnChangeFontColor(wxCommandEvent& event)
 {
-	ee::RGBColorSettingDlg dlg(this, NULL, m_spr->GetFontColor());
+	s2::Textbox& tb = m_spr->GetTextbox();
+	ee::RGBColorSettingDlg dlg(this, NULL, tb.font_color);
 	if (dlg.ShowModal() == wxID_OK) {
-		m_spr->SetFontColor(dlg.GetColor());
+		tb.font_color = dlg.GetColor();
 	}
 }
 
 void ToolbarPanel::OnChangeEdge(wxCommandEvent& event)
 {
-	m_spr->SetEdge(event.IsChecked());
+	s2::Textbox& tb = m_spr->GetTextbox();
+	tb.has_edge = event.IsChecked();
 }
 
 void ToolbarPanel::OnChangeEdgeSize(wxCommandEvent& event)
 {
-	int sz = ee::StringHelper::FromString<float>(m_edge_size->GetValue().ToStdString());
-	m_spr->SetEdgeSize(sz);
+	s2::Textbox& tb = m_spr->GetTextbox();
+	tb.edge_size = ee::StringHelper::FromString<float>(m_edge_size->GetValue().ToStdString());
 }
 
 void ToolbarPanel::OnChangeEdgeColor(wxCommandEvent& event)
 {
-	ee::RGBColorSettingDlg dlg(this, NULL, m_spr->GetEdgeColor());
+	s2::Textbox& tb = m_spr->GetTextbox();
+	ee::RGBColorSettingDlg dlg(this, NULL, tb.edge_color);
 	if (dlg.ShowModal() == wxID_OK) {
-		m_spr->SetEdgeColor(dlg.GetColor());
+		tb.edge_color = dlg.GetColor();
 	}
 }
 
 void ToolbarPanel::OnChangeAlign(wxCommandEvent& event)
 {
-	int halign = m_align_hori->GetSelection();
-	int valign = m_align_vert->GetSelection();
-	m_spr->SetAlign(halign, valign);
+	s2::Textbox& tb = m_spr->GetTextbox();
+	tb.align_hori = s2::Textbox::HoriAlign(m_align_hori->GetSelection());
+	tb.align_vert = s2::Textbox::VertAlign(m_align_vert->GetSelection());
 }
 
 void ToolbarPanel::OnChangeSpace(wxCommandEvent& event)
 {
-	float hspace = ee::StringHelper::FromString<float>(m_space_h->GetValue().ToStdString());
-	float vspace = ee::StringHelper::FromString<float>(m_space_v->GetValue().ToStdString());
-	m_spr->SetSpace(hspace, vspace);
+	s2::Textbox& tb = m_spr->GetTextbox();
+	tb.space_hori = ee::StringHelper::FromString<float>(m_space_h->GetValue().ToStdString());
+	tb.space_vert = ee::StringHelper::FromString<float>(m_space_v->GetValue().ToStdString());
 }
 
 }

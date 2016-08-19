@@ -11,8 +11,8 @@ class RenderParams;
 class Scale9Sprite : public VIRTUAL_INHERITANCE Sprite
 {
 public:
-	Scale9Sprite() {}
-	Scale9Sprite(Symbol* sym) : Sprite(sym) {}
+	Scale9Sprite();
+	Scale9Sprite(Symbol* sym);
 
 	/**
 	 *  @interface
@@ -21,6 +21,8 @@ public:
 	virtual Scale9Sprite* Clone() const;
 
 	void Draw(const RenderParams& params) const;
+
+	VI_DUMMY_FUNC
 
 private:
 	float m_width, m_height;

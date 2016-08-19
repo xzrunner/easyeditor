@@ -1,4 +1,9 @@
 #include "TextboxSymbol.h"
+#include "TextboxSprite.h"
+#include "S2_GTxt.h"
+#include "RenderParams.h"
+
+#include <gtxt_label.h>
 
 namespace s2
 {
@@ -10,50 +15,54 @@ TextboxSymbol::TextboxSymbol(Textbox tb)
 
 void TextboxSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 {
-// 	assert(spr);
-// 	TextboxSprite* tb_spr = static_cast<TextboxSprite*>(spr);
-// 	
-// 	const std::string& text = tb_spr->GetText();
-// 	if (text.empty()) {
-// 		return;
-// 	}
-// 
-// 	Textbox* tb = tb_spr->GetTextbox();
-// 	if (!tb) {
-// 		tb = &m_tb;
-// 	}
-// 
-// 	gtxt_label_style s;
-// 
-// 	s.width		= tb->width;
-// 	s.height	= tb->height;
-// 
-// 	s.gs.font	= font->GetFont();
-// 	s.gs.font_size = font->GetFontSize();
-// 	s.gs.font_color.integer = font->GetFontColor().ToRGBA();
-// 
-// 	s.gs.edge = font->GetEdge();
-// 	s.gs.edge_size = font->GetEdgeSize();
-// 	s.gs.edge_color.integer = font->GetEdgeColor().ToRGBA();
-// 
-// 	s.align_h	= tb->align_hori;
-// 	s.align_v	= tb->align_vert;
-// 
-// 	s.space_h	= tb->space_hori;
-// 	s.space_v	= tb->space_vert;
-// 
-// 	ee::GTxt::Instance()->Draw(s, params.mt, params.color.mul, params.color.add, font->GetText(), font->GetTime());
-// 	font->UpdateTime();
+	if (!spr) {
+		return;
+	}
+
+ 	const TextboxSprite* tb_spr = dynamic_cast<const TextboxSprite*>(spr); 	
+ 	const std::string& text = tb_spr->GetText();
+ 	if (text.empty()) {
+ 		return;
+ 	}
+ 
+	const Textbox& tb = tb_spr->GetTextbox();
+ 
+ 	gtxt_label_style s;
+ 
+ 	s.width			= tb.width;
+ 	s.height		= tb.height;
+ 
+ 	s.gs.font		= tb.font_type;
+ 	s.gs.font_size	= tb.font_size;
+ 	s.gs.font_color.integer = tb.font_color.ToRGBA();
+ 
+ 	s.gs.edge		= tb.has_edge;
+ 	s.gs.edge_size	= tb.edge_size;
+ 	s.gs.edge_color.integer = tb.edge_color.ToRGBA();
+ 
+ 	s.align_h		= tb.align_hori;
+ 	s.align_v		= tb.align_vert;
+ 
+ 	s.space_h		= tb.space_hori;
+ 	s.space_v		= tb.space_vert;
+ 
+	GTxt::Instance()->Draw(s, params.mt, params.color.mul, params.color.add, tb_spr->GetText(), tb_spr->GetTime(), tb.richtext);
+
+	tb_spr->UpdateTime();
 }
 
 sm::rect TextboxSymbol::GetBounding(const Sprite* spr) const
 {
-	sm::rect b;
-	float hw = m_tb.width * 0.5f,
-		  hh = m_tb.height * 0.5f;
-	b.xmin = -hw; b.xmax = hw; 
-	b.ymin = -hh; b.ymax = hh;
-	return b;
+	int w, h;
+	if (spr) {
+		const Textbox& tb = VI_DOWNCASTING<const TextboxSprite*>(spr)->GetTextbox();
+		w = tb.width;
+		h = tb.height;
+	} else {
+		w = m_tb.width;
+		h = m_tb.height;
+	}
+	return sm::rect(w, h);
 }
 
 }

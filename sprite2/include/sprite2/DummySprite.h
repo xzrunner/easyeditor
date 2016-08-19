@@ -18,6 +18,8 @@ public:
 	 */
 	virtual DummySprite* Clone() const { return new DummySprite(*this); }
 
+	VI_DUMMY_FUNC
+
 }; // DummySprite
 
 }

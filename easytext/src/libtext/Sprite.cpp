@@ -10,28 +10,6 @@ namespace etext
 
 Sprite::Sprite()
 {
-	m_width = 100;
-	m_height = 20;
-
-	m_font = 0;
-	m_font_size = 16;
-	m_font_color.FromFloat(1, 1, 1);
-
-	m_edge = false;
-	m_edge_size = 1;
-	m_edge_color.FromFloat(0, 0, 0);
-
-	m_align_hori = HAT_LEFT;
-	m_align_vert = VAT_TOP;
-
-	m_space_hori = 1;
-	m_space_vert = 1;
-
-	m_overflow = true;
-
-	m_richtext = true;
-
-	m_time = 0;
 }
 
 Sprite::Sprite(const Sprite& spr)
@@ -39,30 +17,6 @@ Sprite::Sprite(const Sprite& spr)
 	, s2::TextboxSprite(spr)
 	, ee::Sprite(spr)
 {
-	m_width = spr.m_width;
-	m_height = spr.m_height;
-
-	m_font = spr.m_font;
-	m_font_size = spr.m_font_size;
-	m_font_color = spr.m_font_color;
-
-	m_edge = spr.m_edge;
-	m_edge_size = spr.m_edge_size;
-	m_edge_color = spr.m_edge_color;
-
-	m_align_hori = spr.m_align_hori;
-	m_align_vert = spr.m_align_vert;
-
-	m_space_hori = spr.m_space_hori;
-	m_space_vert = spr.m_space_vert;
-
-	m_overflow = spr.m_overflow;
-
-	m_richtext = spr.m_richtext;
-
-	m_time = spr.m_time;
-
-	m_text = spr.m_text;
 	m_tid = spr.m_tid;
 }
 
@@ -71,28 +25,6 @@ Sprite::Sprite(Symbol* sym)
 	, s2::TextboxSprite(sym)
 	, ee::Sprite(sym)
 {
-	m_width = sym->m_width;
-	m_height = sym->m_height;
-
-	m_font = sym->m_font;
-	m_font_size = sym->m_font_size;
-	m_font_color = str2color(sym->m_font_color, ee::PT_RGBA);
-
-	m_edge = sym->m_edge;
-	m_edge_size = sym->m_edge_size;
-	m_edge_color = str2color(sym->m_edge_color, ee::PT_RGBA);
-
-	m_align_hori = sym->m_align_hori;
-	m_align_vert = sym->m_align_vert;
-
-	m_space_hori = sym->m_space_hori;
-	m_space_vert = sym->m_space_vert;
-
-	m_overflow = sym->m_overflow;
-
-	m_richtext = sym->m_richtext;
-
-	m_time = 0;
 }
 
 bool Sprite::Update(const s2::RenderParams& params, float dt) 
@@ -106,34 +38,34 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 
 	const Json::Value& text_val = val["text"];
 
-	m_width = text_val["width"].asInt();
-	m_height = text_val["height"].asInt();
+	m_tb.width			= text_val["width"].asInt();
+	m_tb.height			= text_val["height"].asInt();
 
-	m_font = text_val["font"].asInt();
-	m_font_size = text_val["font_size"].asInt();
-	m_font_color = str2color(text_val["font_color"].asString(), ee::PT_RGBA);
+	m_tb.font_type		= text_val["font"].asInt();
+	m_tb.font_size		= text_val["font_size"].asInt();
+	m_tb.font_color		= str2color(text_val["font_color"].asString(), ee::PT_RGBA);
 
-	m_edge = text_val["edge"].asBool();
-	m_edge_size = text_val["edge_size"].asInt();
-	m_edge_color = str2color(text_val["edge_color"].asString(), ee::PT_RGBA);
+	m_tb.has_edge		= text_val["edge"].asBool();
+	m_tb.edge_size		= text_val["edge_size"].asInt();
+	m_tb.edge_color		= str2color(text_val["edge_color"].asString(), ee::PT_RGBA);
 
-	m_align_hori = HoriAlignType(text_val["align_hori"].asInt());
-	m_align_vert = VertAlignType(text_val["align_vert"].asInt());
+	m_tb.align_hori		= s2::Textbox::HoriAlign(text_val["align_hori"].asInt());
+	m_tb.align_vert		= s2::Textbox::VertAlign(text_val["align_vert"].asInt());
 
-	m_space_hori = text_val["space_hori"].asDouble();
-	m_space_vert = text_val["space_vert"].asDouble();
+	m_tb.space_hori		= text_val["space_hori"].asDouble();
+	m_tb.space_vert		= text_val["space_vert"].asDouble();
 
-	m_text = text_val["text"].asString();
-	m_tid = text_val["tid"].asString();
+	m_text				= text_val["text"].asString();
+	m_tid				= text_val["tid"].asString();
 
-	m_overflow = true;
+	m_tb.overflow = true;
 	if (!text_val["overflow"].isNull()) {
-		m_overflow = text_val["overflow"].asBool();
+		m_tb.overflow	= text_val["overflow"].asBool();
 	}
 
-	m_richtext = true;
+	m_tb.richtext = true;
 	if (!text_val["richtext"].isNull()) {
-		m_richtext = text_val["richtext"].asBool();
+		m_tb.richtext	= text_val["richtext"].asBool();
 	}
 }
 
@@ -143,72 +75,36 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 
 	Json::Value text_val;
 
-	text_val["width"] = m_width;
-	text_val["height"] = m_height;
+	text_val["width"]			= m_tb.width;
+	text_val["height"]			= m_tb.height;
 
-	text_val["font"] = m_font;
-	text_val["font_size"] = m_font_size;
-	text_val["font_color"] = color2str(m_font_color, ee::PT_RGBA);
+	text_val["font"]			= m_tb.font_type;
+	text_val["font_size"]		= m_tb.font_size;
+	text_val["font_color"]		= color2str(m_tb.font_color, ee::PT_RGBA);
 
-	text_val["edge"] = m_edge;
-	text_val["edge_size"] = m_edge_size;
-	text_val["edge_color"] = color2str(m_edge_color, ee::PT_RGBA);
+	text_val["edge"]			= m_tb.has_edge;
+	text_val["edge_size"]		= m_tb.edge_size;
+	text_val["edge_color"]		= color2str(m_tb.edge_color, ee::PT_RGBA);
 
-	text_val["align_hori"] = m_align_hori;
-	text_val["align_vert"] = m_align_vert;
+	text_val["align_hori"]		= m_tb.align_hori;
+	text_val["align_vert"]		= m_tb.align_vert;
 
-	text_val["space_hori"] = m_space_hori;
-	text_val["space_vert"] = m_space_vert;	
+	text_val["space_hori"]		= m_tb.space_hori;
+	text_val["space_vert"]		= m_tb.space_vert;	
 
-	text_val["text"] = m_text;
-	text_val["tid"] = m_tid;
+	text_val["text"]			= m_text;
+	text_val["tid"]				= m_tid;
 
-	text_val["overflow"] = m_overflow;
+	text_val["overflow"]		= m_tb.overflow;
 
-	text_val["richtext"] = m_richtext;
+	text_val["richtext"]		= m_tb.richtext;
 
-	val["text"] = text_val;
+	val["text"]					= text_val;
 }
 
 ee::PropertySetting* Sprite::CreatePropertySetting(ee::EditPanelImpl* stage)
 {
 	return new PropertySetting(stage, this);
-}
-
-void Sprite::GetSize(int& width, int& height) const
-{
-	width = m_width;
-	height = m_height;
-}
-
-void Sprite::SetSize(int width, int height)
-{
-	m_width = width;
-	m_height = height;
-}
-
-void Sprite::GetAlign(int& halign, int& valign) const
-{
-	halign = m_align_hori;
-	valign = m_align_vert;
-}
-
-void Sprite::SetAlign(int halign, int valign)
-{
-	m_align_hori = HoriAlignType(halign);
-	m_align_vert = VertAlignType(valign);
-}
-
-void Sprite::GetSpace(float& hori, float& vert) const
-{
-	hori = m_space_hori;
-	vert = m_space_vert;
-}
-
-void Sprite::SetSpace(float hori, float vert)
-{
-	m_space_hori = hori;
-	m_space_vert = vert;
 }
 
 ee::Sprite* Sprite::Create(ee::Symbol* sym) 

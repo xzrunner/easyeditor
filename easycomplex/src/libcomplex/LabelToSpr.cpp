@@ -10,21 +10,25 @@ ee::Sprite* LabelToSpr::Trans(const erespacker::PackLabel* label)
 	etext::Symbol* sym = new etext::Symbol();
 
 	etext::Sprite* spr = new etext::Sprite(sym);
+	s2::Textbox& tb = spr->GetTextbox();
 
-	spr->SetSize(label->width, label->height);
+	tb.width		= label->width;
+	tb.height		= label->height;
 
-	spr->SetFont(label->font);
-	spr->SetFontSize(label->font_size);
-	spr->SetFontColor(label->font_color);
+	tb.font_type	= label->font;
+	tb.font_size	= label->font_size;
+	tb.font_color	= label->font_color;
+
+	tb.has_edge		= label->edge;
+	tb.edge_size	= label->edge_size;
+	tb.edge_color	= label->edge_color;
+
+	tb.align_hori	= s2::Textbox::HoriAlign(label->align_hori);
+	tb.align_vert	= s2::Textbox::VertAlign(label->align_vert);
+
+	tb.space_hori	= label->space_hori;
+	tb.space_vert	= label->space_vert;
 	
-	spr->SetEdge(label->edge);
-	spr->SetEdgeSize(label->edge_size);
-	spr->SetEdgeColor(label->edge_color);
-
-	spr->SetAlign(label->align_hori, label->align_vert);
-	
-	spr->SetSpace(label->space_hori, label->space_vert);
-
 	spr->SetText(label->text);
 	spr->SetTID(label->tid);
 

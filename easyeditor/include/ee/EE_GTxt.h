@@ -17,11 +17,9 @@ public:
 	void LoadFont(const std::string& name, const std::string& filepath);
 	void LoadUserFont(const std::string& name, const std::string& filepath);
 
- 	void Draw(const gtxt_label_style& style, const sm::mat4& mt, const s2::Color& mul, 
+	void Draw(const gtxt_label_style& style, const sm::mat4& mt, const s2::Color& mul, 
 		const s2::Color& add, const std::string& text, int time, bool richtext) const;
 	void Draw(const sm::mat4& mt, const std::string& str) const;
-
-//	void Reload(const Sprite* spr);
 
 	static GTxt* Instance();
 
