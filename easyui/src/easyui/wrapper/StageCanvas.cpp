@@ -22,9 +22,8 @@ void StageCanvas::OnDrawSprites() const
 {
 	DrawGuideLines();
 
-	sm::rect sr = m_screen.GetRegion();
 	float scale = ee::CameraMgr::Instance()->GetCamera()->GetScale();
-	m_stage->TraverseSprites(ee::DrawSpritesVisitor(sr, scale), ee::DT_VISIBLE);
+	m_stage->TraverseSprites(ee::DrawSpritesVisitor(GetVisibleRegion(), scale), ee::DT_VISIBLE);
 
 	m_stage->DrawEditOP();
 }

@@ -10,7 +10,7 @@
 #include <ee/SpriteRenderer.h>
 
 #include <sprite2/RenderParams.h>
-#include <sprite2/NodeRenderer.h>
+#include <sprite2/DrawNode.h>
 
 namespace emask
 {
@@ -31,10 +31,10 @@ void StageCanvas::OnDrawSprites() const
 		const ee::Symbol *base = sym->GetSymbol(true),
 			*mask = sym->GetSymbol(false);
 		if (base) {
-			s2::NodeRenderer::Draw(base);
+			s2::DrawNode::Draw(base);
 		}
 		if (mask) {
-			s2::NodeRenderer::Draw(mask);
+			s2::DrawNode::Draw(mask);
 		}
 	}
 

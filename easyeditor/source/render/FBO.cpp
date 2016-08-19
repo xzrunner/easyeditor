@@ -4,11 +4,10 @@
 #include "Exception.h"
 #include "SpriteRenderer.h"
 #include "RenderContextStack.h"
-#include "GL.h"
 #include "EE_ShaderLab.h"
 
 #include <shaderlab.h>
-#include <sprite2/NodeRenderer.h>
+#include <sprite2/DrawNode.h>
 
 #include <gl/glew.h>
 
@@ -189,14 +188,14 @@ void FBO::DrawFBO(const Symbol* sym, bool whitebg, float scale)
 		h = static_cast<int>(sz.y * scale);
 	ctx_stack->SetModelView(sm::vec2(0, 0), 1);
 	ctx_stack->SetProjection(w, h);
-	GL::Viewport(0, 0, w, h);
+	sl::ShaderMgr::Instance()->GetContext()->SetViewport(0, 0, w, h);
 
 	s2::RenderParams params;
 	sm::vec2 center = rect.Center();
 	float dx = -center.x;
 	float dy = center.y;
 	params.mt.Translate(dx * scale, dy * scale, 0);
-	s2::NodeRenderer::Draw(sym, params, sm::vec2(0, 0), 0.0f, sm::vec2(scale, -scale));
+	s2::DrawNode::Draw(sym, params, sm::vec2(0, 0), 0.0f, sm::vec2(scale, -scale));
 
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
 	mgr->GetShader()->Commit();
@@ -208,7 +207,7 @@ void FBO::DrawFBO(const Symbol* sym, bool whitebg, float scale)
 	if (has_context) {
 		ctx_stack->SetModelView(last_offset, last_scale);
 		ctx_stack->SetProjection(last_w, last_h);
-		GL::Viewport(0, 0, last_w, last_h);
+		sl::ShaderMgr::Instance()->GetContext()->SetViewport(0, 0, last_w, last_h);
 	}
 }
 
@@ -242,7 +241,7 @@ void FBO::DrawFBO(const Sprite* spr, bool clear, int width, int height,
 
 	ctx_stack->SetModelView(sm::vec2(0, 0), 1);
 	ctx_stack->SetProjection(width, height);
-	GL::Viewport(0, 0, width, height);
+	sl::ShaderMgr::Instance()->GetContext()->SetViewport(0, 0, width, height);
 
 	s2::RenderParams params;
 	params.mt.Scale(scale, -scale, 1);
@@ -261,7 +260,7 @@ void FBO::DrawFBO(const Sprite* spr, bool clear, int width, int height,
 	if (has_context) {
 		ctx_stack->SetModelView(last_offset, last_scale);
 		ctx_stack->SetProjection(last_w, last_h);	
-		GL::Viewport(0, 0, last_w, last_h);
+		sl::ShaderMgr::Instance()->GetContext()->SetViewport(0, 0, last_w, last_h);
 	}
 }
 
@@ -291,7 +290,7 @@ void FBO::DrawFBO(const Shape* shape, bool clear, int width, int height)
 
 	ctx_stack->SetModelView(sm::vec2(0, 0), 1);
 	ctx_stack->SetProjection(width, height);
-	GL::Viewport(0, 0, width, height);
+	sl::ShaderMgr::Instance()->GetContext()->SetViewport(0, 0, width, height);
 
 	shape->Draw(sm::mat4::Scaled(1, -1, 1));
 

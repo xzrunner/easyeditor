@@ -709,11 +709,15 @@
 			Name="render"
 			>
 			<File
-				RelativePath="..\..\..\source\render\NodeRenderer.cpp"
+				RelativePath="..\..\..\include\sprite2\RenderCtx.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\include\sprite2\NodeRenderer.h"
+				RelativePath="..\..\..\source\render\RenderCtxStack.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\sprite2\RenderCtxStack.h"
 				>
 			</File>
 			<File
@@ -724,30 +728,54 @@
 				RelativePath="..\..\..\include\sprite2\S2_CameraMgr.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\source\render\S2_DTex.cpp"
+			<Filter
+				Name="draw"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\sprite2\S2_DTex.h"
+				<File
+					RelativePath="..\..\..\include\sprite2\DrawBlend.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\DrawBlend.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\render\DrawNode.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\DrawNode.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="adapter"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\source\render\S2_GTxt.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\sprite2\S2_GTxt.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\source\render\S2_RVG.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\sprite2\S2_RVG.h"
-				>
-			</File>
+				<File
+					RelativePath="..\..\..\source\render\S2_DTex.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\S2_DTex.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\render\S2_GTxt.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\S2_GTxt.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\render\S2_RVG.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\S2_RVG.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>

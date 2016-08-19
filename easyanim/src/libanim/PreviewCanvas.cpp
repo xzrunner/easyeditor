@@ -3,7 +3,7 @@
 #include <ee/SpriteRenderer.h>
 #include <ee/panel_msg.h>
 
-#include <sprite2/NodeRenderer.h>
+#include <sprite2/DrawNode.h>
 
 namespace eanim
 {
@@ -23,7 +23,7 @@ PreviewCanvas::PlaySetting& PreviewCanvas::getPlaySetting()
 
 void PreviewCanvas::OnDrawSprites() const
 {
-	s2::NodeRenderer::Draw(m_sym);
+	s2::DrawNode::Draw(m_sym);
 }
 
 void PreviewCanvas::OnTimer()

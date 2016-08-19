@@ -17,7 +17,7 @@
 #include <easytext.h>
 
 #include <sprite2/S2_RVG.h>
-#include <sprite2/NodeRenderer.h>
+#include <sprite2/DrawNode.h>
 
 namespace ecomplex
 {
@@ -89,7 +89,7 @@ void StageCanvas::OnDrawSprites() const
 	}
 #endif
 
-	m_fps.DrawTime(m_screen);
+	m_fps.DrawTime();
 
 	wxLogDebug("++++++++ StageCanvas::OnDrawSprites end");
 }
@@ -103,7 +103,7 @@ void StageCanvas::OnDrawSprites() const
 	DrawBackground();
 
 	float scale = ee::CameraMgr::Instance()->GetCamera()->GetScale();
-	m_stage->TraverseSprites(ee::DrawSpritesVisitor(m_screen.GetRegion(), scale), ee::DT_VISIBLE);
+	m_stage->TraverseSprites(ee::DrawSpritesVisitor(GetVisibleRegion(), scale), ee::DT_VISIBLE);
 
 	const sm::rect& clipbox = dynamic_cast<const Symbol*>(m_stage->GetSymbol())->m_clipbox;
 	sm::vec2 sz = clipbox.Size();
@@ -132,7 +132,7 @@ void StageCanvas::OnDrawSprites() const
 	}
 #endif
 
-	m_fps.DrawTime(m_screen);
+	m_fps.DrawTime();
 }
 
 #endif // OPEN_SCREEN_CACHE
@@ -140,7 +140,7 @@ void StageCanvas::OnDrawSprites() const
 void StageCanvas::DrawBackground() const
 {
 	if (m_background) {
-		s2::NodeRenderer::Draw(m_background);
+		s2::DrawNode::Draw(m_background);
 	}
 
 	if (Settings::bVisibleBGRect) {

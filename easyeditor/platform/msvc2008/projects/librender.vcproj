@@ -187,18 +187,6 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="opengl"
-			>
-			<File
-				RelativePath="..\..\..\source\render\GL.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\GL.h"
-				>
-			</File>
-		</Filter>
-		<Filter
 			Name="shape"
 			>
 			<File
@@ -412,14 +400,6 @@
 		</File>
 		<File
 			RelativePath="..\..\..\include\ee\RenderContextStack.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\source\render\Screen.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\include\ee\Screen.h"
 			>
 		</File>
 		<File

@@ -1,5 +1,4 @@
 #include "SpriteRenderer.h"
-#include "SpriteBlend.h"
 #include "Sprite.h"
 #include "Symbol.h"
 #include "Math2D.h"
@@ -17,6 +16,7 @@
 #include <sprite2/RFOuterGlow.h>
 #include <sprite2/S2_RVG.h>
 #include <sprite2/BoundingBox.h>
+#include <sprite2/DrawBlend.h>
 
 #include <shaderlab.h>
 
@@ -54,7 +54,7 @@ void SpriteRenderer::Draw(const Sprite* spr,
 	if (rs.blend != s2::BM_NULL) {
 		const Camera* cam = CameraMgr::Instance()->GetCamera();
 		if (cam->Type() == "ortho") {
-			SpriteBlend::Draw(spr, params.mt);
+			s2::DrawBlend::Draw(spr, params.mt);
 		}
 	} else if (rs.filter && rs.filter->GetMode() != s2::FM_NULL) {
 		s2::RenderParams t = params;

@@ -1,4 +1,4 @@
-#include "NodeRenderer.h"
+#include "DrawNode.h"
 #include "S2_Sprite.h"
 #include "S2_Symbol.h"
 #include "RenderFilter.h"
@@ -8,7 +8,7 @@
 namespace s2
 {
 
-void NodeRenderer::Draw(const Sprite* spr, const RenderParams& params)
+void DrawNode::Draw(const Sprite* spr, const RenderParams& params)
 {
 	if (spr->IsVisible()) {
 		return;
@@ -20,9 +20,9 @@ void NodeRenderer::Draw(const Sprite* spr, const RenderParams& params)
 	
 }
 
-void NodeRenderer::Draw(const Symbol* sym, const RenderParams& params, 
-						const sm::vec2& pos, float angle, 
-						const sm::vec2& scale, const sm::vec2& shear)
+void DrawNode::Draw(const Symbol* sym, const RenderParams& params, 
+					const sm::vec2& pos, float angle, 
+					const sm::vec2& scale, const sm::vec2& shear)
 {
 	sm::mat4 mt;
 	mt.SetTransformation(pos.x, pos.y, angle, scale.x, scale.y, 0, 0, shear.x, shear.y);

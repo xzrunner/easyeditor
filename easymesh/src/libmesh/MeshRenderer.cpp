@@ -5,14 +5,13 @@
 
 #include <ee/SpriteRenderer.h>
 #include <ee/RenderContextStack.h>
-#include <ee/GL.h>
 #include <ee/Math2D.h>
 #include <ee/Symbol.h>
 
 #include <shaderlab.h>
 #include <dtex_facade.h>
 #include <sprite2/S2_RVG.h>
-#include <sprite2/NodeRenderer.h>
+#include <sprite2/DrawNode.h>
 
 #include <set>
 #include <vector>
@@ -90,13 +89,13 @@ void MeshRenderer::DrawTexture(const Mesh* mesh, const s2::RenderParams& params,
 	rc->SetModelView(sm::vec2(0, 0), 1);
 	int edge = dtexf_t0_get_texture_size();
 	rc->SetProjection(edge, edge);
-	ee::GL::Viewport(0, 0, edge, edge);
+	sl::ShaderMgr::Instance()->GetContext()->SetViewport(0, 0, edge, edge);
 
 	DrawMeshToTmp(mesh, params, base_sym);
 
 	rc->SetModelView(ori_offset, ori_scale);
 	rc->SetProjection(ori_width, ori_height);
-	ee::GL::Viewport(0, 0, ori_width, ori_height);
+	sl::ShaderMgr::Instance()->GetContext()->SetViewport(0, 0, ori_width, ori_height);
 
 	DrawTmpToScreen(mesh, params);
 }
@@ -140,9 +139,9 @@ void MeshRenderer::DrawMeshToTmp(const Mesh* mesh, const s2::RenderParams& param
 	s2::RenderParams _params = params;
 	_params.mt.Identity();
 	if (base_sym) {
-		s2::NodeRenderer::Draw(base_sym, _params);
+		s2::DrawNode::Draw(base_sym, _params);
 	} else {
-		s2::NodeRenderer::Draw(mesh->GetBaseSymbol(), _params);
+		s2::DrawNode::Draw(mesh->GetBaseSymbol(), _params);
 	}
 
 	sl::ShaderMgr::Instance()->GetShader()->Commit();

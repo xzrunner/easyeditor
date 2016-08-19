@@ -42,11 +42,9 @@ StageCanvas::StageCanvas(StagePanel* stage)
 
 void StageCanvas::OnDrawSprites() const
 {
-	sm::rect sr = m_screen.GetRegion();
-
 	DrawSprites();
 
-	m_stage->TraverseShapes(ee::DrawShapesVisitor(sr), ee::DT_VISIBLE);
+	m_stage->TraverseShapes(ee::DrawShapesVisitor(GetVisibleRegion()), ee::DT_VISIBLE);
 
 	DrawRegion();
 
@@ -107,7 +105,7 @@ void StageCanvas::DrawSprites() const
 void StageCanvas::DrawSprite(ee::Sprite* spr, bool draw_edge) const
 {
 	if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) {
-		sm::rect screen_region = m_screen.GetRegion();
+		sm::rect screen_region = GetVisibleRegion();
 		if (screen_region.IsValid() &&
 			!sm::is_rect_intersect_rect(spr->GetBounding()->GetSize(), screen_region)) {
 			return;

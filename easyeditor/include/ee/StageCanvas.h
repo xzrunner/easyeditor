@@ -1,7 +1,6 @@
 #ifndef _EASYEDITOR_STAGE_CANVAS_H_
 #define _EASYEDITOR_STAGE_CANVAS_H_
 
-#include "Screen.h"
 #include "Observer.h"
 
 #include <sprite2/Color.h>
@@ -72,8 +71,6 @@ protected:
 	s2::Color m_bg_color;
 
 	int m_width, m_height;
-
-	Screen m_screen;
 
 private:
 	enum

@@ -9,7 +9,7 @@
 #include <ee/Camera.h>
 #include <ee/panel_msg.h>
 
-#include <sprite2/NodeRenderer.h>
+#include <sprite2/DrawNode.h>
 
 namespace epseudo3d
 {
@@ -62,7 +62,7 @@ void Projection2DScene::Draw() const
 		float scale;
 		CalProjInfo(m_positions[i], &pos, &scale);
 
-		s2::NodeRenderer::Draw(sym, sm::mat4(), pos, 0, scale, scale);
+		s2::DrawNode::Draw(sym, sm::mat4(), pos, 0, scale, scale);
 	}
 }
 

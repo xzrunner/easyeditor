@@ -5,7 +5,7 @@
 
 #include <easyparticle3d.h>
 
-#include <sprite2/NodeRenderer.h>
+#include <sprite2/DrawNode.h>
 
 namespace ep3dinv
 {
@@ -61,7 +61,7 @@ void Particle::Draw(const sm::mat4& mt) const
 	float scale = m_during / m_life * (m_start_scale - m_end_scale) + m_end_scale;
 
 	sm::vec2 pos = eparticle3d::TransCoords3To2(m_position);
-	s2::NodeRenderer::Draw(m_sym, _mt, pos, m_angle, 
+	s2::DrawNode::Draw(m_sym, _mt, pos, m_angle, 
 		scale, scale/*, 0, 0, mul*/);
 }
 

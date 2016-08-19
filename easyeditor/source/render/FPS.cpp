@@ -43,17 +43,17 @@ void FPS::End()
 	++m_count;
 }
 
-void FPS::DrawTime(const Screen& scr) const
+void FPS::DrawTime() const
 {
-	Draw(scr, m_time);
+	Draw(m_time);
 }
 
-void FPS::DrawFPS(const Screen& scr) const
+void FPS::DrawFPS() const
 {
-	Draw(scr, m_fps);
+	Draw(m_fps);
 }
 
-void FPS::Draw(const Screen& scr, const std::string& str) const
+void FPS::Draw(const std::string& str) const
 {
  //	const sm::vec2& size = scr.GetSize();
 	//sm::mat4 t;

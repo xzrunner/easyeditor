@@ -8,11 +8,11 @@
 #include "RenderContext.h"
 #include "RenderContextStack.h"
 #include "subject_id.h"
-#include "GL.h"
 #include "panel_msg.h"
 #include "EE_ShaderLab.h"
 
 #include <shaderlab.h>
+#include <sprite2/RenderCtxStack.h>
 
 namespace ee
 {
@@ -66,6 +66,7 @@ StageCanvas::StageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage,
 	if (m_use_context_stack) {
 		RenderContextStack::Instance()->Push(this, m_render_context);
 	}
+	s2::RenderCtxStack::Instance()->Push(s2::RenderCtx());
 }
 
 StageCanvas::~StageCanvas()
@@ -78,6 +79,7 @@ StageCanvas::~StageCanvas()
 
 	if (m_use_context_stack) {
 		RenderContextStack::Instance()->Pop();
+		s2::RenderCtxStack::Instance()->Pop();
 	}
 }
 
@@ -101,7 +103,7 @@ void StageCanvas::SetCurrentCanvas()
 	int width, height;
 	if (m_render_context->GetProjection(width, height)) {
 		m_render_context->SetProjection(width, height);
-		GL::Viewport(0, 0, width, height);
+		sl::ShaderMgr::Instance()->GetContext()->SetViewport(0, 0, width, height);
 	}
 }
 

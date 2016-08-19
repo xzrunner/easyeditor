@@ -1,8 +1,10 @@
 #include "CameraCanvas.h"
 #include "Camera.h"
-#include "GL.h"
 #include "RenderContextStack.h"
 #include "CameraMgr.h"
+
+#include <shaderlab.h>
+#include <sprite2/RenderCtxStack.h>
 
 namespace ee
 {
@@ -15,44 +17,29 @@ CameraCanvas::CameraCanvas(wxWindow* stage_wnd, EditPanelImpl* stage,
 
 void CameraCanvas::OnSize(int w, int h)
 {
-//  	glViewport(0, 0, w, h);
-//  
-//  	glMatrixMode(GL_PROJECTION);
-//  	glLoadIdentity();
-//  
-//  	const float hWidth = w * m_camera->getScale() * 0.5f,
-//  		hHeight = h * m_camera->getScale() * 0.5f;
-//  	glOrtho(
-//  		m_camera->getCenter().x - hWidth, 
-//  		m_camera->getCenter().x + hWidth, 
-//  		m_camera->getCenter().y - hHeight,
-//  		m_camera->getCenter().y + hHeight,
-//  		0,
-//  		1
-//  		);
-//  
-//  	glMatrixMode(GL_MODELVIEW);
-//  	glLoadIdentity();
-
-	//////////////////////////////////////////////////////////////////////////
-
-// 	glViewport(0, 0, w, h);
-// 	sm::vec2 scale;
-// 	scale.x = scale.y = 1.0f / m_camera->getScale();
-// 	m_screen.SetSize(w, h);
-// 	m_screen.SetCamera(-m_camera->getCenter(), scale);
-
-	//////////////////////////////////////////////////////////////////////////
-
 	TwoPassCanvas::OnSize(w, h);
-
- 	m_screen.SetSize(w, h);
- 	m_screen.SetCamera();
 
 	CameraMgr::Instance()->GetCamera()->UpdateModelView();
 
 	RenderContextStack::Instance()->SetProjection(w, h);
-	GL::Viewport(0, 0, w, h);
+
+	s2::RenderCtxStack* s2_stack = s2::RenderCtxStack::Instance();
+	s2_stack->Pop();
+	s2_stack->Push(s2::RenderCtx(w, h));
+}
+
+sm::rect CameraCanvas::GetVisibleRegion() const
+{
+	const s2::RenderCtx* ctx = s2::RenderCtxStack::Instance()->Top();
+	if (!ctx) {
+		return sm::rect();
+	}
+
+	Camera* cam = CameraMgr::Instance()->GetCamera();
+	float s = cam->GetScale();
+	sm::rect r(sm::vec2(0, 0), ctx->proj_width * s, ctx->proj_height * s);
+	r.Translate(cam->GetPosition());
+	return r;
 }
 
 }

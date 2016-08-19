@@ -33,9 +33,8 @@ void StageCanvas::OnDrawSprites() const
 	if (m_toolbar->isComposeOP())
 	{
 		ComposeGrids::Draw();
-		sm::rect sr = m_screen.GetRegion();
 		float scale = ee::CameraMgr::Instance()->GetCamera()->GetScale();
-		m_stage_panel->TraverseSprites(ee::DrawSpritesVisitor(sr, scale), ee::DT_VISIBLE);
+		m_stage_panel->TraverseSprites(ee::DrawSpritesVisitor(GetVisibleRegion(), scale), ee::DT_VISIBLE);
 	}
 	else
 	{

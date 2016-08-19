@@ -5,7 +5,7 @@
 #include <ee/Symbol.h>
 
 #include <ps_2d.h>
-#include <sprite2/NodeRenderer.h>
+#include <sprite2/DrawNode.h>
 
 #include <time.h>
 
@@ -66,7 +66,7 @@ render_func(void* sym, float* mat, float x, float y, float angle, float scale,
 	memcpy(&params.color.mul, mul_col, sizeof(*mul_col));
 	memcpy(&params.color.add, add_col, sizeof(*add_col));
 
-	s2::NodeRenderer::Draw(ee_sym, params, sm::vec2(x, y), angle, 
+	s2::DrawNode::Draw(ee_sym, params, sm::vec2(x, y), angle, 
 		sm::vec2(scale, scale), sm::vec2(0, 0));
 }
 

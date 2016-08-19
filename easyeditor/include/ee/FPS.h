@@ -8,8 +8,6 @@
 namespace ee
 {
 
-class Screen;
-
 class FPS
 {
 public:
@@ -18,11 +16,11 @@ public:
 	void Begin();
 	void End();
 
-	void DrawTime(const Screen& scr) const; 
-	void DrawFPS(const Screen& scr) const;
+	void DrawTime() const; 
+	void DrawFPS() const;
 
 private:
-	void Draw(const Screen& scr, const std::string& str) const;
+	void Draw(const std::string& str) const;
 
 private:
 	int m_interval;

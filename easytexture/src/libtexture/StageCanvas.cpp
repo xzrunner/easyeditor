@@ -55,10 +55,10 @@ void StageCanvas::OnDrawSprites() const
 		ee::SpriteRenderer::Draw(m_bg, params);
 	}
 
-	sm::rect sr = m_screen.GetRegion();
 	float scale = ee::CameraMgr::Instance()->GetCamera()->GetScale();
-	m_panel->TraverseSprites(ee::DrawSpritesVisitor(sr, scale), ee::DT_VISIBLE);
-	m_panel->TraverseShapes(ee::DrawShapesVisitor(sr), ee::DT_VISIBLE);
+	sm::rect reg = GetVisibleRegion();
+	m_panel->TraverseSprites(ee::DrawSpritesVisitor(reg, scale), ee::DT_VISIBLE);
+	m_panel->TraverseShapes(ee::DrawShapesVisitor(reg), ee::DT_VISIBLE);
 
 	s2::RVG::SetColor(s2::Color(255, 0, 0));
 	s2::RVG::Cross(sm::vec2(0, 0), 100, 100);

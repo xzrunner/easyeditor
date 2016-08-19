@@ -10,7 +10,7 @@
 #include "panel_msg.h"
 
 #include <SM_Calc.h>
-#include <sprite2/NodeRenderer.h>
+#include <sprite2/DrawNode.h>
 
 namespace ee
 {
@@ -146,9 +146,9 @@ bool PasteSymbolTileOP::OnDraw() const
 	if (sym && m_pos.IsValid())
 	{
 		if (m_scale) {
-			s2::NodeRenderer::Draw(sym, s2::RenderParams(), m_pos, m_rotate, sm::vec2(*m_scale, *m_scale));
+			s2::DrawNode::Draw(sym, s2::RenderParams(), m_pos, m_rotate, sm::vec2(*m_scale, *m_scale));
 		} else {
-			s2::NodeRenderer::Draw(sym, s2::RenderParams(), m_pos, m_rotate);
+			s2::DrawNode::Draw(sym, s2::RenderParams(), m_pos, m_rotate);
 		}
 	}
 

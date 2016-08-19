@@ -1,7 +1,6 @@
 #include "SpriteGaussianBlur.h"
 #include "EE_DTex.h"
 #include "RenderContextStack.h"
-#include "GL.h"
 #include "Sprite.h"
 #include "SpriteRenderer.h"
 
@@ -40,7 +39,7 @@ void SpriteGaussianBlur::DrawToFbo0(const Sprite* spr, const s2::RenderParams& p
 	rc->SetModelView(sm::vec2(0, 0), 1);
 	int edge = dtexf_t0_get_texture_size();
 	rc->SetProjection(edge, edge);
-	GL::Viewport(0, 0, edge, edge);
+	sl::ShaderMgr::Instance()->GetContext()->SetViewport(0, 0, edge, edge);
 
 	DrawInit(spr, params, true);
 
@@ -55,7 +54,7 @@ void SpriteGaussianBlur::DrawToFbo0(const Sprite* spr, const s2::RenderParams& p
 
 	rc->SetModelView(ori_offset, ori_scale);
 	rc->SetProjection(ori_width, ori_height);
-	GL::Viewport(0, 0, ori_width, ori_height);
+	sl::ShaderMgr::Instance()->GetContext()->SetViewport(0, 0, ori_width, ori_height);
 }
 
 void SpriteGaussianBlur::DrawToScreen(bool is_target0, const sm::vec2& offset)

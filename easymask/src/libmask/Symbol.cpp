@@ -5,7 +5,6 @@
 #include <ee/Sprite.h>
 #include <ee/Math2D.h>
 #include <ee/RenderContextStack.h>
-#include <ee/GL.h>
 #include <ee/ImageSprite.h>
 #include <ee/Image.h>
 #include <ee/EE_DTex.h>
@@ -15,7 +14,7 @@
 
 #include <dtex_facade.h>
 #include <shaderlab.h>
-#include <sprite2/NodeRenderer.h>
+#include <sprite2/DrawNode.h>
 
 #include <assert.h>
 
@@ -49,9 +48,9 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 		DrawImpl(p);
 	} else {
 		if (m_base) {
-			s2::NodeRenderer::Draw(m_base, p);
+			s2::DrawNode::Draw(m_base, p);
 		} else if (m_mask) {
-			s2::NodeRenderer::Draw(m_mask, p);
+			s2::DrawNode::Draw(m_mask, p);
 		}
 	}
 }
@@ -97,14 +96,14 @@ void Symbol::DrawImpl(const s2::RenderParams& params) const
 	rc->SetModelView(sm::vec2(0, 0), 1);
 	int edge = dtexf_t0_get_texture_size();
 	rc->SetProjection(edge, edge);
-	ee::GL::Viewport(0, 0, edge, edge);
+	sl::ShaderMgr::Instance()->GetContext()->SetViewport(0, 0, edge, edge);
 
 	DrawBaseToFbo0(params.color);
 	DrawMaskToFbo1();
 
 	rc->SetModelView(ori_offset, ori_scale);
 	rc->SetProjection(ori_width, ori_height);
-	ee::GL::Viewport(0, 0, ori_width, ori_height);
+	sl::ShaderMgr::Instance()->GetContext()->SetViewport(0, 0, ori_width, ori_height);
 
 	DrawMashFromFbo(params.mt);
 }
@@ -121,7 +120,7 @@ void Symbol::DrawBaseToFbo0(const s2::RenderColor& rc) const
 	s2::RenderParams params;
 	params.set_shader = false;
 	params.color = rc;
-	s2::NodeRenderer::Draw(m_base, params);
+	s2::DrawNode::Draw(m_base, params);
 
 	shader->Commit();
 
@@ -139,7 +138,7 @@ void Symbol::DrawMaskToFbo1() const
 
 	s2::RenderParams params;
 	params.set_shader = false;
-	s2::NodeRenderer::Draw(m_mask, params);
+	s2::DrawNode::Draw(m_mask, params);
 
 	shader->Commit();
 

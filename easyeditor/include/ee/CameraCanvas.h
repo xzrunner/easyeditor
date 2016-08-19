@@ -3,6 +3,8 @@
 
 #include "TwoPassCanvas.h"
 
+#include <SM_Rect.h>
+
 namespace ee
 {
 
@@ -14,6 +16,9 @@ public:
 
 protected:
 	virtual void OnSize(int w, int h);
+
+protected:
+	sm::rect GetVisibleRegion() const;
 
 }; // CameraCanvas
 
