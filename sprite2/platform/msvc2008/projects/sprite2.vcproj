@@ -709,6 +709,14 @@
 			Name="render"
 			>
 			<File
+				RelativePath="..\..\..\source\render\NodeRenderer.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\sprite2\NodeRenderer.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\source\render\S2_CameraMgr.cpp"
 				>
 			</File>
@@ -738,14 +746,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\include\sprite2\S2_RVG.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\source\render\SpriteRenderer.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\sprite2\SpriteRenderer.h"
 				>
 			</File>
 		</Filter>

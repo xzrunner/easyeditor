@@ -10,11 +10,12 @@
 #include <ee/Image.h>
 #include <ee/EE_DTex.h>
 
-#include <dtex_facade.h>
-#include <shaderlab.h>
-
 #include <easyparticle3d.h>
 #include <easycomplex.h>
+
+#include <dtex_facade.h>
+#include <shaderlab.h>
+#include <sprite2/NodeRenderer.h>
 
 #include <assert.h>
 
@@ -48,10 +49,10 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 		DrawImpl(p);
 	} else {
 		if (m_base) {
-			ee::SpriteRenderer::Draw(m_base, p);
+			s2::NodeRenderer::Draw(m_base, p);
 		} else if (m_mask) {
-			ee::SpriteRenderer::Draw(m_mask, p);
-		}		
+			s2::NodeRenderer::Draw(m_mask, p);
+		}
 	}
 }
 
@@ -120,7 +121,7 @@ void Symbol::DrawBaseToFbo0(const s2::RenderColor& rc) const
 	s2::RenderParams params;
 	params.set_shader = false;
 	params.color = rc;
-	ee::SpriteRenderer::Draw(m_base, params);
+	s2::NodeRenderer::Draw(m_base, params);
 
 	shader->Commit();
 
@@ -138,7 +139,7 @@ void Symbol::DrawMaskToFbo1() const
 
 	s2::RenderParams params;
 	params.set_shader = false;
-	ee::SpriteRenderer::Draw(m_mask, params);
+	s2::NodeRenderer::Draw(m_mask, params);
 
 	shader->Commit();
 

@@ -21,18 +21,8 @@ public:
 	static void InvalidRect(const Sprite* spr, 
 		                    const sm::mat4& mt = sm::mat4());
 
-	static void Draw(const Symbol* sym, 
-		             const s2::RenderParams& params = s2::RenderParams(),
-			         const sm::vec2& pos = sm::vec2(0, 0),
-			         float angle = 0.0f, 
-			         float xScale = 1.0f, 
-			         float yScale = 1.0f,
-			         float xShear = 0.0f, 
-			         float yShear = 0.0f);
-
 private:
-	static void DrawImpl(const Sprite* spr, 
-  				         const s2::RenderParams& params);
+	static void DrawAnchor(const Sprite* spr, const s2::RenderParams& params);
 	
 }; // SpriteRenderer
 

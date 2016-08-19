@@ -2,8 +2,10 @@
 #include "ParticleSystem.h"
 
 #include <ee/SpriteRenderer.h>
+#include <ee/Symbol.h>
 
 #include <ps_2d.h>
+#include <sprite2/NodeRenderer.h>
 
 #include <time.h>
 
@@ -64,7 +66,8 @@ render_func(void* sym, float* mat, float x, float y, float angle, float scale,
 	memcpy(&params.color.mul, mul_col, sizeof(*mul_col));
 	memcpy(&params.color.add, add_col, sizeof(*add_col));
 
-	ee::SpriteRenderer::Draw(ee_sym, params, sm::vec2(x, y), angle, scale, scale, 0, 0);
+	s2::NodeRenderer::Draw(ee_sym, params, sm::vec2(x, y), angle, 
+		sm::vec2(scale, scale), sm::vec2(0, 0));
 }
 
 void PSNode::Init()

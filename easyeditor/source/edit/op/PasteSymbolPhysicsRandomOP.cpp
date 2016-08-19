@@ -8,6 +8,8 @@
 #include "sprite_msg.h"
 #include "SpriteRenderer.h"
 
+#include <sprite2/NodeRenderer.h>
+
 namespace ee
 {
 
@@ -74,7 +76,8 @@ bool PasteSymbolPhysicsRandomOP::OnDraw() const
 		sym = m_library->GetSymbol();
 	}
 	if (sym && m_pos.IsValid()) {
-		SpriteRenderer::Draw(sym, s2::RenderParams(), m_pos, m_random_value.angle, m_random_value.scale);
+		s2::NodeRenderer::Draw(sym, s2::RenderParams(), m_pos, m_random_value.angle, 
+			sm::vec2(m_random_value.scale, m_random_value.scale));
 	}
 
 	return false;

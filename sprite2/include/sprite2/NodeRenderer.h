@@ -1,5 +1,5 @@
-#ifndef _SPRITE2_SPRITE_RENDERER_H_
-#define _SPRITE2_SPRITE_RENDERER_H_
+#ifndef _SPRITE2_NODE_RENDERER_H_
+#define _SPRITE2_NODE_RENDERER_H_
 
 #include "RenderParams.h"
 
@@ -11,7 +11,7 @@ namespace s2
 class Sprite;
 class Symbol;
 
-class SpriteRenderer
+class NodeRenderer
 {
 public:
 	static void Draw(const Sprite* spr, const RenderParams& params = RenderParams());
@@ -23,8 +23,8 @@ public:
 					 const sm::vec2& scale = sm::vec2(1, 1),
 					 const sm::vec2& shear = sm::vec2(0, 0));
 
-}; // SpriteRenderer
+}; // NodeRenderer
 
 }
 
-#endif // _SPRITE2_SPRITE_RENDERER_H_
+#endif // _SPRITE2_NODE_RENDERER_H_

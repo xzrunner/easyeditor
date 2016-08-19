@@ -7,6 +7,9 @@
 #include <shaderlab.h>
 
 #include <ee/SpriteRenderer.h>
+#include <ee/Symbol.h>
+
+#include <sprite2/NodeRenderer.h>
 
 #include <time.h>
 #include <assert.h>
@@ -131,7 +134,8 @@ render_func(void* sym, float* mat, float x, float y, float angle, float scale,
 		params.mt = _mat * rp->mat;
 	}
 
-	ee::SpriteRenderer::Draw(ee_sym, params, sm::vec2(x, y), angle, scale, scale, 0, 0);
+	s2::NodeRenderer::Draw(ee_sym, params, sm::vec2(x, y), angle, 
+		sm::vec2(scale, scale), sm::vec2(0, 0));
 
 	// todo bind
 	// 	if (p->bind_ps) {

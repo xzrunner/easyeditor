@@ -8,6 +8,7 @@
 #include "EE_ShaderLab.h"
 
 #include <shaderlab.h>
+#include <sprite2/NodeRenderer.h>
 
 #include <gl/glew.h>
 
@@ -195,7 +196,7 @@ void FBO::DrawFBO(const Symbol* sym, bool whitebg, float scale)
 	float dx = -center.x;
 	float dy = center.y;
 	params.mt.Translate(dx * scale, dy * scale, 0);
-	SpriteRenderer::Draw(sym, params, sm::vec2(0, 0), 0.0f, scale, -scale);
+	s2::NodeRenderer::Draw(sym, params, sm::vec2(0, 0), 0.0f, sm::vec2(scale, -scale));
 
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
 	mgr->GetShader()->Commit();

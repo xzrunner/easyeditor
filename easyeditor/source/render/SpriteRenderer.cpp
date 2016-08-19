@@ -82,7 +82,8 @@ void SpriteRenderer::Draw(const Sprite* spr,
 				}
 				break;
 			}
-			DrawImpl(spr, t);
+			spr->GetSymbol()->Draw(t, spr);
+			DrawAnchor(spr, t);
 		}
 	} else {
 		if (params.set_shader) {
@@ -90,7 +91,8 @@ void SpriteRenderer::Draw(const Sprite* spr,
 		}
 		s2::RenderParams t = params;
 		t.camera = rc;
-		DrawImpl(spr, t);
+		spr->GetSymbol()->Draw(t, spr);
+		DrawAnchor(spr, t);
 	}
 }
 
@@ -103,57 +105,26 @@ void SpriteRenderer::InvalidRect(const Sprite* spr, const sm::mat4& mt)
 //	spr->GetSymbol()->InvalidRect(spr->GetTransMatrix() * mt);
 }
 
-void SpriteRenderer::Draw(const Symbol* sym, 
-						  const s2::RenderParams& params /*= s2::RenderParams()*/,
-						  const sm::vec2& pos, 
-						  float angle/* = 0.0f*/, 
-						  float xScale/* = 1.0f*/, 
-						  float yScale/* = 1.0f*/, 
-						  float xShear/* = 0.0f*/, 
-						  float yShear/* = 0.0f*/)
+void SpriteRenderer::DrawAnchor(const Sprite* spr, const s2::RenderParams& params)
 {
-	sm::mat4 mt;
-	mt.SetTransformation(pos.x, pos.y, angle, xScale, yScale, 0, 0, xShear, yShear);
-	mt = mt * params.mt;
-
-	s2::RenderParams t = params;
-	t.mt = mt;
-
-	if (t.shader.blend != s2::BM_NULL) {
-		;
-	} else if (t.shader.filter && t.shader.filter->GetMode() != s2::FM_NULL) {
-		;
-	} else {
-		if (t.set_shader) {
-			sl::ShaderMgr::Instance()->SetShader(sl::SPRITE2);
-		}
+	if (!spr->IsAnchor() || !Config::Instance()->GetSettings().draw_anchor) {
+		return;
 	}
 
-	sym->Draw(t);
-}
-
-void SpriteRenderer::DrawImpl(const Sprite* spr, 
-							  const s2::RenderParams& params)
-{
-	spr->GetSymbol()->Draw(params, spr);
-
-	if (spr->IsAnchor() && Config::Instance()->GetSettings().draw_anchor) 
-	{
-		std::vector<sm::vec2> bound;
-		sm::rect rect = spr->GetBounding()->GetSize();
-		bound.push_back(sm::vec2(rect.xmin, rect.ymin));
-		bound.push_back(sm::vec2(rect.xmax, rect.ymin));
-		bound.push_back(sm::vec2(rect.xmax, rect.ymax));
-		bound.push_back(sm::vec2(rect.xmin, rect.ymax));		
-		for (int i = 0, n = bound.size(); i < n; ++i) {
-			bound[i] = params.mt * bound[i];
-		}
-		s2::RVG::SetColor(BLACK);
-		s2::RVG::LineWidth(4);
-		s2::RVG::Polyline(bound, true);
-		s2::RVG::Line(bound[0], bound[2]);
-		s2::RVG::Line(bound[1], bound[3]);
+	std::vector<sm::vec2> bound;
+	sm::rect rect = spr->GetBounding()->GetSize();
+	bound.push_back(sm::vec2(rect.xmin, rect.ymin));
+	bound.push_back(sm::vec2(rect.xmax, rect.ymin));
+	bound.push_back(sm::vec2(rect.xmax, rect.ymax));
+	bound.push_back(sm::vec2(rect.xmin, rect.ymax));		
+	for (int i = 0, n = bound.size(); i < n; ++i) {
+		bound[i] = params.mt * bound[i];
 	}
+	s2::RVG::SetColor(BLACK);
+	s2::RVG::LineWidth(4);
+	s2::RVG::Polyline(bound, true);
+	s2::RVG::Line(bound[0], bound[2]);
+	s2::RVG::Line(bound[1], bound[3]);
 }
 
 }

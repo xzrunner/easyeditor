@@ -8,6 +8,8 @@
 #include <ee/Image.h>
 #include <ee/SpriteRenderer.h>
 
+#include <sprite2/NodeRenderer.h>
+
 namespace emesh
 {
 
@@ -110,7 +112,7 @@ bool CreateStripOP::OnMouseDrag(int x, int y)
 bool CreateStripOP::OnDraw() const
 {
 	if (Mesh* mesh = m_stage->GetMesh()) {
-		ee::SpriteRenderer::Draw(mesh->GetBaseSymbol());
+		s2::NodeRenderer::Draw(mesh->GetBaseSymbol());
 		MeshRenderer::DrawInfoUV(mesh);
 	}
 
