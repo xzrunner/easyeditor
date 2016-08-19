@@ -18,6 +18,13 @@ Sprite::Sprite(Symbol* sym)
 {
 }
 
+bool Sprite::Update(const s2::RenderParams& params, float dt) 
+{
+	Symbol* sym = dynamic_cast<Symbol*>(m_sym);
+	sym->Update(params, dt);
+	return true; 
+}
+
 ee::Sprite* Sprite::Create(ee::Symbol* sym) 
 {
 	return new Sprite(static_cast<Symbol*>(sym));

@@ -187,9 +187,17 @@ void SpriteIO::StoreGeometry(Json::Value& val, const Data& data)
 		val["angle"] = data.angle;
 	}
 
-	if (!compress || data.scale != sm::vec2(1, 1)) {
-		val["x scale"] = data.scale.x;
-		val["y scale"] = data.scale.y;
+	sm::vec2 scale = data.scale;
+	sm::bvec2 mirror = data.mirror;
+	if (mirror.x) {
+		scale.x = -scale.x;
+	}
+	if (mirror.y) {
+		scale.y = -scale.y;
+	}
+	if (!compress || scale != sm::vec2(1, 1)) {
+		val["x scale"] = scale.x;
+		val["y scale"] = scale.y;
 	}
 
 	if (!compress || data.shear != sm::vec2(0, 0)) {
