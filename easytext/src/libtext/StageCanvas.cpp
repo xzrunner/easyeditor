@@ -50,10 +50,10 @@ void StageCanvas::OnDrawSprites() const
 	{
 		s2::RenderParams params;
 		params.mt = m_edited->GetTransInvMatrix();
-		ee::SpriteRenderer::Draw(m_bg, params);
+		ee::SpriteRenderer::Instance()->Draw(m_bg, params);
 	}
 
-	ee::SpriteRenderer::Draw(m_edited);
+	ee::SpriteRenderer::Instance()->Draw(m_edited);
 
 	DrawSprBound();
 

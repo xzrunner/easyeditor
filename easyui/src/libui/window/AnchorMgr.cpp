@@ -105,7 +105,7 @@ void AnchorMgr::OnSprPosChanged(ee::Sprite* spr)
 void AnchorMgr::DrawSprites(const s2::RenderParams& params) const
 {
 	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
-		ee::SpriteRenderer::Draw(m_sprs[i], params);
+		ee::SpriteRenderer::Instance()->Draw(m_sprs[i], params);
 	}
 }
 

@@ -1,45 +1,31 @@
-#include "SpriteGaussianBlur.h"
-#include "EE_DTex.h"
-#include "RenderContextStack.h"
-#include "Sprite.h"
-#include "SpriteRenderer.h"
+#include "DrawGaussianBlur.h"
+#include "S2_Sprite.h"
+#include "RenderCtxStack.h"
+#include "BoundingBox.h"
+#include "RenderParams.h"
+#include "FilterFactory.h"
+#include "DrawNode.h"
 
 #include <shaderlab.h>
 #include <dtex_facade.h>
-#include <sprite2/RenderParams.h>
-#include <sprite2/FilterFactory.h>
-#include <sprite2/BoundingBox.h>
 
-#include <assert.h>
-
-namespace ee
+namespace s2
 {
 
-void SpriteGaussianBlur::Draw(const Sprite* spr, const s2::RenderParams& params, int iterations)
+void DrawGaussianBlur::Draw(const Sprite* spr, const RenderParams& params, int iterations)
 {
 	DrawToFbo0(spr, params, iterations);
 	DrawToScreen(true, spr->GetPosition());
 }
 
-void SpriteGaussianBlur::DrawToFbo0(const Sprite* spr, const s2::RenderParams& params, int iterations)
+void DrawGaussianBlur::DrawToFbo0(const Sprite* spr, const RenderParams& params, int iterations)
 {
 	sl::ShaderMgr::Instance()->GetShader()->Commit();
 
 	DrawInit(spr, params, true);
 
-	RenderContextStack* rc = RenderContextStack::Instance();
-
-	sm::vec2 ori_offset;
-	float ori_scale;
-	rc->GetModelView(ori_offset, ori_scale);
-
-	int ori_width, ori_height;
-	rc->GetProjection(ori_width, ori_height);
-
-	rc->SetModelView(sm::vec2(0, 0), 1);
 	int edge = dtexf_t0_get_texture_size();
-	rc->SetProjection(edge, edge);
-	sl::ShaderMgr::Instance()->GetContext()->SetViewport(0, 0, edge, edge);
+	RenderCtxStack::Instance()->Push(RenderCtx(edge, edge));
 
 	DrawInit(spr, params, true);
 
@@ -52,12 +38,10 @@ void SpriteGaussianBlur::DrawToFbo0(const Sprite* spr, const s2::RenderParams& p
 		DrawBetweenFBO(false, false, params.color, sz.y);
 	}
 
-	rc->SetModelView(ori_offset, ori_scale);
-	rc->SetProjection(ori_width, ori_height);
-	sl::ShaderMgr::Instance()->GetContext()->SetViewport(0, 0, ori_width, ori_height);
+	RenderCtxStack::Instance()->Pop();
 }
 
-void SpriteGaussianBlur::DrawToScreen(bool is_target0, const sm::vec2& offset)
+void DrawGaussianBlur::DrawToScreen(bool is_target0, const sm::vec2& offset)
 {
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	mgr->SetShader(sl::SPRITE2);
@@ -89,7 +73,7 @@ void SpriteGaussianBlur::DrawToScreen(bool is_target0, const sm::vec2& offset)
 	shader->Commit();
 }
 
-void SpriteGaussianBlur::DrawInit(const Sprite* spr, const s2::RenderParams& params, bool is_target0)
+void DrawGaussianBlur::DrawInit(const Sprite* spr, const RenderParams& params, bool is_target0)
 {
 	if (is_target0) {
 		dtexf_t0_bind();
@@ -99,17 +83,17 @@ void SpriteGaussianBlur::DrawInit(const Sprite* spr, const s2::RenderParams& par
 		dtexf_t1_clear(0, -2, 2, 0);
 	}
 
-	s2::RenderParams _params = params;
+	RenderParams _params = params;
 	const sm::vec2& offset = spr->GetPosition();
 	_params.mt.Translate(-offset.x, -offset.y, 0);
 	_params.set_shader = false;
-	_params.shader.filter = s2::FilterFactory::Instance()->GetTemp(s2::FM_NULL);
+	_params.shader.filter = FilterFactory::Instance()->GetTemp(FM_NULL);
 
-	s2::RenderFilter* ori_filter = spr->Shader().filter;
-	const_cast<Sprite*>(spr)->Shader().filter = s2::FilterFactory::Instance()->GetTemp(s2::FM_NULL);
+	RenderFilter* ori_filter = spr->Shader().filter;
+	const_cast<Sprite*>(spr)->Shader().filter = FilterFactory::Instance()->GetTemp(FM_NULL);
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	mgr->SetShader(sl::SPRITE2);
-	SpriteRenderer::Draw(spr, _params);
+	DrawNode::Draw(spr, _params);
 	const_cast<Sprite*>(spr)->Shader().filter = ori_filter;
 
 	if (is_target0) {
@@ -119,7 +103,7 @@ void SpriteGaussianBlur::DrawInit(const Sprite* spr, const s2::RenderParams& par
 	}
 }
 
-void SpriteGaussianBlur::DrawBetweenFBO(bool is_t0_to_t1, bool hori, const s2::RenderColor& col, float tex_size)
+void DrawGaussianBlur::DrawBetweenFBO(bool is_t0_to_t1, bool hori, const RenderColor& col, float tex_size)
 {
 	int from_tex_sz;
 	int from_tex_id;

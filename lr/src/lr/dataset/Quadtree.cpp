@@ -92,7 +92,7 @@ void Quadtree::DebugDraw() const
 		s2::RenderParams params;
 		params.color = color;
 		for (int i = 0, n = m_selected->m_sprs.size(); i < n; ++i) {
-			ee::SpriteRenderer::Draw(m_selected->m_sprs[i], params);
+			ee::SpriteRenderer::Instance()->Draw(m_selected->m_sprs[i], params);
 		}
 	}
 }

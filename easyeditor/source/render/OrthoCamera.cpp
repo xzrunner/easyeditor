@@ -1,6 +1,8 @@
 #include "OrthoCamera.h"
 #include "RenderContextStack.h"
 
+#include <sprite2/RenderCtxStack.h>
+
 namespace ee
 {
 
@@ -41,6 +43,12 @@ sm::vec2 OrthoCamera::TransPosProjectToScreen(const sm::vec2& proj, int width, i
 void OrthoCamera::UpdateModelView() const
 {
 	RenderContextStack::Instance()->SetModelView(-m_center, 1/m_scale);
+
+	s2::RenderCtx* ctx = const_cast<s2::RenderCtx*>(s2::RenderCtxStack::Instance()->Top());
+	if (ctx) {
+		ctx->mv_offset = - m_center;
+		ctx->mv_scale = 1 / m_scale;
+	}
 }
 
 void OrthoCamera::Translate(const sm::vec2& offset)

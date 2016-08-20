@@ -42,7 +42,7 @@ void StageCanvas::OnDrawSprites() const
 	std::vector<ee::Sprite*> sprs;
 	static_cast<StagePanel*>(m_stage_panel)->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs), ee::DT_VISIBLE);
 	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
-		ee::SpriteRenderer::Draw(sprs[i]);
+		ee::SpriteRenderer::Instance()->Draw(sprs[i]);
 	}
 
 	ee::SceneNodeMgr::Instance()->Draw();
@@ -59,7 +59,7 @@ void StageCanvas::OnDrawSprites() const
 void StageCanvas::DrawBackground() const
 {
 	if (m_background) {
-		ee::SpriteRenderer::Draw(m_background);
+		ee::SpriteRenderer::Instance()->Draw(m_background);
 	}
 
 	float xedge = GetSize().GetWidth() * 0.5f;

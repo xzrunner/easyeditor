@@ -5,7 +5,6 @@
 
 #include <mt_2d.h>
 #include <shaderlab.h>
-#include <sprite2/DrawNode.h>
 
 #include <time.h>
 #include <assert.h>
@@ -71,7 +70,7 @@ render_symbol_func(void* sym, float x, float y, float angle, float scale, uint8_
 	params.color.mul = params.color.mul * rp->ct.mul;
 	params.color.add = params.color.add + rp->ct.add;
 
-	s2::DrawNode::Draw(ee_sym, params, sm::vec2(x, y), angle - SM_PI * 0.5f, sm::vec2(scale, scale));
+	ee::SpriteRenderer::Instance()->Draw(ee_sym, params, sm::vec2(x, y), angle - SM_PI * 0.5f, sm::vec2(scale, scale));
 }
 
 static void 

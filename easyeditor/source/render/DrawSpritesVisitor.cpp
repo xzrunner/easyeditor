@@ -44,7 +44,7 @@ void DrawSpritesVisitor::Visit(Sprite* spr, bool& next)
 
 void DrawSpritesVisitor::DrawSprite(Sprite* spr) const
 {
-	SpriteRenderer::Draw(spr);
+	SpriteRenderer::Instance()->Draw(spr);
 }
 
 }

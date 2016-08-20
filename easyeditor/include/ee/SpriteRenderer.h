@@ -1,29 +1,35 @@
 #ifndef _EASYEDITOR_SPRITE_RENDERER_H_
 #define _EASYEDITOR_SPRITE_RENDERER_H_
 
-#include <SM_Matrix.h>
+#include <CU_Singleton.h>
+#include <SM_Vector.h>
 #include <sprite2/RenderParams.h>
+
+namespace s2 { class Sprite; class Symbol; }
 
 namespace ee
 {
 
-class Sprite;
-class Symbol;
-class SpriteBatch;
-class FBO;
-
 class SpriteRenderer
 {
 public:
-	static void Draw(const Sprite* spr, 
-			         const s2::RenderParams& params = s2::RenderParams());
+	void Draw(const s2::Sprite* spr,
+		      const s2::RenderParams& params = s2::RenderParams());
 
-	static void InvalidRect(const Sprite* spr, 
-		                    const sm::mat4& mt = sm::mat4());
+	void Draw(const s2::Symbol* sym, 
+		      const s2::RenderParams& params = s2::RenderParams(),
+			  const sm::vec2& pos = sm::vec2(0, 0),
+			  float angle = 0,
+			  const sm::vec2& scale = sm::vec2(1, 1),
+			  const sm::vec2& shear = sm::vec2(0, 0));
+
+	//static void InvalidRect(const Sprite* spr, 
+	//	                    const sm::mat4& mt = sm::mat4());
 
 private:
-	static void DrawAnchor(const Sprite* spr, const s2::RenderParams& params);
 	
+	SINGLETON_DECLARATION(SpriteRenderer)
+
 }; // SpriteRenderer
 
 }

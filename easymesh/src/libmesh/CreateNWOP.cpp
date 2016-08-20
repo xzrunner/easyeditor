@@ -9,8 +9,6 @@
 #include <ee/panel_msg.h>
 #include <ee/SpriteRenderer.h>
 
-#include <sprite2/DrawNode.h>
-
 namespace emesh
 {
 
@@ -143,7 +141,7 @@ bool CreateNWOP::OnDraw() const
 		return true;
 
 	if (Mesh* mesh = m_stage->GetMesh()) {
-		s2::DrawNode::Draw(mesh->GetBaseSymbol());
+		ee::SpriteRenderer::Instance()->Draw(mesh->GetBaseSymbol());
 		MeshRenderer::DrawInfoUV(mesh);
 	}
 

@@ -17,7 +17,6 @@
 #include <easytext.h>
 
 #include <sprite2/S2_RVG.h>
-#include <sprite2/DrawNode.h>
 
 namespace ecomplex
 {
@@ -140,7 +139,7 @@ void StageCanvas::OnDrawSprites() const
 void StageCanvas::DrawBackground() const
 {
 	if (m_background) {
-		s2::DrawNode::Draw(m_background);
+		ee::SpriteRenderer::Instance()->Draw(m_background);
 	}
 
 	if (Settings::bVisibleBGRect) {

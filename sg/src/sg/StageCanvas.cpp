@@ -92,7 +92,7 @@ void StageCanvas::OnDrawSprites() const
 void StageCanvas::DrawBackground() const
 {
 	if (m_background) {
-		ee::SpriteRenderer::Draw(m_background);
+		ee::SpriteRenderer::Instance()->Draw(m_background);
 	}
 }
 
@@ -165,20 +165,20 @@ void StageCanvas::DrawSprites() const
 			{
 				if (info->wall_type == 0) {
 					sm::vec2 pos = spr->GetPosition() + sm::vec2(0, 4);
-					ee::SpriteRenderer::Draw(spr->GetSymbol(), sm::mat4(), pos);
+					ee::SpriteRenderer::Instance()->Draw(spr->GetSymbol(), sm::mat4(), pos);
 				} else if (info->wall_type == 1) {
 					sm::vec2 pos = spr->GetPosition() + sm::vec2(-10, 8);
-					ee::SpriteRenderer::Draw(spr->GetSymbol(), sm::mat4(), pos);
+					ee::SpriteRenderer::Instance()->Draw(spr->GetSymbol(), sm::mat4(), pos);
 				} else if (info->wall_type == 2) {
 					sm::vec2 pos = spr->GetPosition() + sm::vec2(10, 8);
-					ee::SpriteRenderer::Draw(spr->GetSymbol(), sm::mat4(), pos);
+					ee::SpriteRenderer::Instance()->Draw(spr->GetSymbol(), sm::mat4(), pos);
 				} else if (info->wall_type == 3) {
 					sm::vec2 pos = spr->GetPosition() + sm::vec2(0, 6);
-					ee::SpriteRenderer::Draw(spr->GetSymbol(), sm::mat4(), pos);
+					ee::SpriteRenderer::Instance()->Draw(spr->GetSymbol(), sm::mat4(), pos);
 				}
 			}
 		} else {
-			ee::SpriteRenderer::Draw(spr);
+			ee::SpriteRenderer::Instance()->Draw(spr);
 		}
 	}
 }

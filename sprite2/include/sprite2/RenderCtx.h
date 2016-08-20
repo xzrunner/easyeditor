@@ -18,8 +18,8 @@ public:
 public:
 	RenderCtx() 
 		: mv_scale(0), proj_width(0), proj_height(0) {}
-	RenderCtx(int w, int h) 
-		: mv_scale(1), proj_width(w), proj_height(h) {}
+	RenderCtx(int width, int height)
+		: mv_offset(0, 0), mv_scale(1), proj_width(width), proj_height(height) {}
 
 }; // RenderCtx
 

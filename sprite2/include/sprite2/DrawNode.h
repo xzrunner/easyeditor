@@ -14,6 +14,8 @@ class Symbol;
 class DrawNode
 {
 public:
+	static void InitCB(void (*after_spr)(const Sprite*, const RenderParams&));
+
 	static void Draw(const Sprite* spr, const RenderParams& params = RenderParams());
 
 	static void Draw(const Symbol* sym, 
@@ -21,7 +23,10 @@ public:
 					 const sm::vec2& pos = sm::vec2(0, 0),
 					 float angle = 0,
 					 const sm::vec2& scale = sm::vec2(1, 1),
-					 const sm::vec2& shear = sm::vec2(0, 0));
+					 const sm::vec2& shear = sm::vec2(0, 0));	
+
+private:
+	static void DrawSpr(const Sprite* spr, const RenderParams& params);
 
 }; // DrawNode
 

@@ -9,8 +9,6 @@
 #include <ee/SpriteRenderer.h>
 #include <ee/Symbol.h>
 
-#include <sprite2/DrawNode.h>
-
 #include <time.h>
 #include <assert.h>
 
@@ -134,7 +132,7 @@ render_func(void* sym, float* mat, float x, float y, float angle, float scale,
 		params.mt = _mat * rp->mat;
 	}
 
-	s2::DrawNode::Draw(ee_sym, params, sm::vec2(x, y), angle, 
+	ee::SpriteRenderer::Instance()->Draw(ee_sym, params, sm::vec2(x, y), angle, 
 		sm::vec2(scale, scale), sm::vec2(0, 0));
 
 	// todo bind

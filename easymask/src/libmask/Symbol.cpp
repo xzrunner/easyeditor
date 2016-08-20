@@ -14,7 +14,6 @@
 
 #include <dtex_facade.h>
 #include <shaderlab.h>
-#include <sprite2/DrawNode.h>
 
 #include <assert.h>
 
@@ -48,9 +47,9 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 		DrawImpl(p);
 	} else {
 		if (m_base) {
-			s2::DrawNode::Draw(m_base, p);
+			ee::SpriteRenderer::Instance()->Draw(m_base, p);
 		} else if (m_mask) {
-			s2::DrawNode::Draw(m_mask, p);
+			ee::SpriteRenderer::Instance()->Draw(m_mask, p);
 		}
 	}
 }
@@ -120,7 +119,7 @@ void Symbol::DrawBaseToFbo0(const s2::RenderColor& rc) const
 	s2::RenderParams params;
 	params.set_shader = false;
 	params.color = rc;
-	s2::DrawNode::Draw(m_base, params);
+	ee::SpriteRenderer::Instance()->Draw(m_base, params);
 
 	shader->Commit();
 
@@ -138,7 +137,7 @@ void Symbol::DrawMaskToFbo1() const
 
 	s2::RenderParams params;
 	params.set_shader = false;
-	s2::DrawNode::Draw(m_mask, params);
+	ee::SpriteRenderer::Instance()->Draw(m_mask, params);
 
 	shader->Commit();
 

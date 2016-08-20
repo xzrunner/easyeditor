@@ -740,11 +740,27 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\source\render\DrawGaussianBlur.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\DrawGaussianBlur.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\source\render\DrawNode.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\..\..\include\sprite2\DrawNode.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\render\DrawOuterGlow.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\DrawOuterGlow.h"
 					>
 				</File>
 			</Filter>

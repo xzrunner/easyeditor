@@ -118,7 +118,7 @@ void StageCanvas::DrawSprite(ee::Sprite* spr, bool draw_edge) const
 	}
 //	ee::ShaderMgr::Instance()->SetSpriteShader(filter_mode_idx);
 
-	ee::SpriteRenderer::Draw(spr);
+	ee::SpriteRenderer::Instance()->Draw(spr);
 
 	ee::SettingData& cfg = ee::Config::Instance()->GetSettings();
 	const std::string& name = spr->GetName();

@@ -10,7 +10,6 @@
 #include <gtxt.h>
 #include <sprite2/S2_GTxt.h>
 #include <sprite2/RenderParams.h>
-#include <sprite2/DrawNode.h>
 
 #include <json/json.h>
 
@@ -110,7 +109,7 @@ ext_sym_render(void* ext_sym, float x, float y, void* ud) {
 	}
 	s2::RenderParams params;
 	params.mt = *((sm::mat4*)ud);
-	s2::DrawNode::Draw((Symbol*)ext_sym, params, sm::vec2(x, y));
+	ee::SpriteRenderer::Instance()->Draw((Symbol*)ext_sym, params, sm::vec2(x, y));
 }
 
 float* 

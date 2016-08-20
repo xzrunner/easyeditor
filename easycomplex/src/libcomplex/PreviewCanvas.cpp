@@ -24,7 +24,7 @@ void PreviewCanvas::OnDrawSprites() const
 // 			continue;
 		s2::RenderParams params;
 		params.color = spr->Color();
-		ee::SpriteRenderer::Draw(spr, params);
+		ee::SpriteRenderer::Instance()->Draw(spr, params);
 	}
 
 	ee::SceneNodeMgr::Instance()->Draw();

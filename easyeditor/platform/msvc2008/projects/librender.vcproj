@@ -226,30 +226,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\source\render\SpriteBlend.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\SpriteBlend.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\source\render\SpriteGaussianBlur.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\SpriteGaussianBlur.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\source\render\SpriteOuterGlow.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\SpriteOuterGlow.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\source\render\SpriteRenderer.cpp"
 				>
 			</File>

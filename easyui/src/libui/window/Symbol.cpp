@@ -24,7 +24,7 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	m_anchors.DrawSprites(params);
 	for (int i = 0, n = m_ext_refs.size(); i < n; ++i) {
-		ee::SpriteRenderer::Draw(m_ext_refs[i], params);
+		ee::SpriteRenderer::Instance()->Draw(m_ext_refs[i], params);
 	}
 	m_anchors.DrawNodes(params);
 }

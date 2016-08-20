@@ -8,8 +8,6 @@
 #include "sprite_msg.h"
 #include "panel_msg.h"
 
-#include <sprite2/DrawNode.h>
-
 namespace ee
 {
 
@@ -61,9 +59,9 @@ bool PasteSymbolOP::OnDraw() const
 	if (sym && m_pos.IsValid())
 	{
 		if (m_scale) {
-			s2::DrawNode::Draw(sym, s2::RenderParams(), m_pos, 0.0f, sm::vec2(*m_scale, *m_scale));
+			ee::SpriteRenderer::Instance()->Draw(sym, s2::RenderParams(), m_pos, 0.0f, sm::vec2(*m_scale, *m_scale));
 		} else {
-			s2::DrawNode::Draw(sym, s2::RenderParams(), m_pos);
+			ee::SpriteRenderer::Instance()->Draw(sym, s2::RenderParams(), m_pos);
 		}
 	}
 

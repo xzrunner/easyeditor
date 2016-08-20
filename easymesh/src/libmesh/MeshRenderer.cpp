@@ -11,7 +11,6 @@
 #include <shaderlab.h>
 #include <dtex_facade.h>
 #include <sprite2/S2_RVG.h>
-#include <sprite2/DrawNode.h>
 
 #include <set>
 #include <vector>
@@ -139,9 +138,9 @@ void MeshRenderer::DrawMeshToTmp(const Mesh* mesh, const s2::RenderParams& param
 	s2::RenderParams _params = params;
 	_params.mt.Identity();
 	if (base_sym) {
-		s2::DrawNode::Draw(base_sym, _params);
+		ee::SpriteRenderer::Instance()->Draw(base_sym, _params);
 	} else {
-		s2::DrawNode::Draw(mesh->GetBaseSymbol(), _params);
+		ee::SpriteRenderer::Instance()->Draw(mesh->GetBaseSymbol(), _params);
 	}
 
 	sl::ShaderMgr::Instance()->GetShader()->Commit();

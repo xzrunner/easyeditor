@@ -7,7 +7,6 @@
 #include <ee/SpriteRenderer.h>
 
 #include <sprite2/S2_RVG.h>
-#include <sprite2/DrawNode.h>
 #include <SM_Test.h>
 
 namespace escale9
@@ -80,7 +79,7 @@ bool ResizeBaseOP::OnDraw() const
 {
 	if (ee::ZoomViewOP::OnDraw()) return true;
 
-	s2::DrawNode::Draw(m_sym);
+	ee::SpriteRenderer::Instance()->Draw(m_sym);
 	
 	sm::vec2 sz = m_sym->GetBounding().Size();
 	const float hw = sz.x * 0.5f, hh = sz.y * 0.5f;

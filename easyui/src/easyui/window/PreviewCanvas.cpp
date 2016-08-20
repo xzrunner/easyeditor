@@ -42,7 +42,7 @@ void PreviewCanvas::OnDrawSprites() const
 		s2::RenderParams params;
 		params.mt = mt;
 		params.color = spr->Color();
-		ee::SpriteRenderer::Draw(spr, params);
+		ee::SpriteRenderer::Instance()->Draw(spr, params);
 	}
 }
 

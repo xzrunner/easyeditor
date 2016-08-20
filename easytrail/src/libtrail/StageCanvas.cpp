@@ -32,7 +32,7 @@ void StageCanvas::OnDrawSprites() const
 		ee::Sprite* spr = sprs[i];
 		if (!spr->IsVisible())
 			continue;
-		ee::SpriteRenderer::Draw(sprs[i]);
+		ee::SpriteRenderer::Instance()->Draw(sprs[i]);
 	}
 
 	MotionTrail* trail = m_stage->m_trail;

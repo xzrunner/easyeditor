@@ -21,11 +21,7 @@ void DrawBlend::Draw(const Sprite* spr, const sm::mat4& mt)
 	sl::ShaderMgr::Instance()->GetShader()->Commit();
 
 	int edge = dtexf_t0_get_texture_size();
-	RenderCtx ctx;
-	ctx.mv_offset.Set(0, 0);
-	ctx.mv_scale = 1;
-	ctx.proj_width = ctx.proj_height = edge;
-	RenderCtxStack::Instance()->Push(ctx);
+	RenderCtxStack::Instance()->Push(RenderCtx(edge, edge));
 
 	DrawSprToTmp(spr, mt);
 

@@ -108,7 +108,7 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 	{
 		for (int i = 0, n = m_children.size(); i < n; ++i) {
 			ee::Sprite* child = dynamic_cast<ee::Sprite*>(m_children[i]);
-			ee::SpriteRenderer::Draw(child, p);
+			ee::SpriteRenderer::Instance()->Draw(child, p);
 		}
 		sm::vec2 sz = m_clipbox.Size();
 		if (sz.x > 0 && sz.y > 0) 

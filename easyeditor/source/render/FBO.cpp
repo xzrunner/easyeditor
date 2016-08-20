@@ -1,4 +1,5 @@
 #include "FBO.h"
+#include "Sprite.h"
 #include "Symbol.h"
 #include "Shape.h"
 #include "Exception.h"
@@ -7,7 +8,6 @@
 #include "EE_ShaderLab.h"
 
 #include <shaderlab.h>
-#include <sprite2/DrawNode.h>
 
 #include <gl/glew.h>
 
@@ -195,7 +195,7 @@ void FBO::DrawFBO(const Symbol* sym, bool whitebg, float scale)
 	float dx = -center.x;
 	float dy = center.y;
 	params.mt.Translate(dx * scale, dy * scale, 0);
-	s2::DrawNode::Draw(sym, params, sm::vec2(0, 0), 0.0f, sm::vec2(scale, -scale));
+	ee::SpriteRenderer::Instance()->Draw(sym, params, sm::vec2(0, 0), 0.0f, sm::vec2(scale, -scale));
 
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
 	mgr->GetShader()->Commit();
@@ -247,7 +247,7 @@ void FBO::DrawFBO(const Sprite* spr, bool clear, int width, int height,
 	params.mt.Scale(scale, -scale, 1);
 	params.mt.Translate(-dx, dy, 0);
 	params.set_shader = false;
-	SpriteRenderer::Draw(spr, params);
+	SpriteRenderer::Instance()->Draw(spr, params);
 
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
 	mgr->GetShader()->Commit();

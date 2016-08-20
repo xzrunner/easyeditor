@@ -71,7 +71,7 @@ void StageCanvas2D::DrawSprites() const
 		ee::Sprite* spr = sprs[i];
 		if (!spr->IsVisible())
 			continue;
-		ee::SpriteRenderer::Draw(sprs[i]);
+		ee::SpriteRenderer::Instance()->Draw(sprs[i]);
 	}
 }
 
