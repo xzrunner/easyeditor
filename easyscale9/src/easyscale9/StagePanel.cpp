@@ -52,25 +52,26 @@ void StagePanel::TraverseSprites(ee::Visitor<ee::Sprite>& visitor, ee::DataTrave
 
 void StagePanel::rebuildPatchSymbol()
 {
-	Scale9Type type = Scale9Data::CheckType(m_sprs);
-	if (type == e_null) {
+	s2::SCALE9_TYPE type = s2::Scale9::CheckType(m_sprs);
+	if (type == s2::S9_NULL) {
 		return;
 	}
 
-	if (m_sym) delete m_sym;
-	m_sym = new Symbol;
+	if (!m_sym) {
+		m_sym = new Symbol;
+	}
 
 	float width = m_toolbar->getWidth(),
 		  height = m_toolbar->getHeight();
 
 	sm::vec2 sz = m_sprs[1][1]->GetSymbol()->GetBounding().Size();
-	if (type == e_3GridHor) {
+	if (type == s2::S9_3GRID_HORI) {
 		height = sz.y;
-	} else if (type == e_3GridVer) {
+	} else if (type == s2::S9_3GRID_VERT) {
 		width = sz.x;
 	}
 
-	m_sym->ComposeFromSprites(m_sprs, width, height);
+	dynamic_cast<s2::Scale9Symbol*>(m_sym)->GetScale9().Build(type, width, height, m_sprs);
 
 	m_toolbar->setSize(width, height);
 }

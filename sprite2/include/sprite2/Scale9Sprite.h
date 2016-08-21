@@ -2,6 +2,7 @@
 #define _SPRITE2_SCALE9_SPRITE_H_
 
 #include "S2_Sprite.h"
+#include "Scale9.h"
 
 namespace s2
 {
@@ -20,17 +21,12 @@ public:
 	 */
 	virtual Scale9Sprite* Clone() const;
 
-	void Draw(const RenderParams& params) const;
+	const Scale9& GetScale9() const { return m_s9; }
 
 	VI_DUMMY_FUNC
 
-private:
-	float m_width, m_height;
-
-	// 0 1 2
-	// 3 4 5
-	// 6 7 9
-	Sprite* m_grids[9];
+protected:
+	Scale9 m_s9;
 
 }; // Scale9Sprite
 

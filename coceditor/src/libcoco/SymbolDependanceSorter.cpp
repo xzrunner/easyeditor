@@ -68,38 +68,11 @@ void SymbolDependanceSorter::fetch(const std::vector<const ee::Symbol*>& syms)
 		}
 		else if (const escale9::Symbol* patch = dynamic_cast<const escale9::Symbol*>(sym))
 		{
-			const escale9::Scale9Data& data = patch->GetScale9Data();
- 			switch (data.GetType())
- 			{
- 			case escale9::e_9Grid:
-				for (size_t i = 0; i < 3; ++i) {
-					for (size_t j = 0; j < 3; ++j) {
- 						buffer.push(dynamic_cast<const ee::Symbol*>(data.GetSprite(i, j)->GetSymbol()));
-					}
-				}
- 				break;
- 			case escale9::e_9GridHollow:
- 				for (size_t i = 0; i < 3; ++i) {
- 					for (size_t j = 0; j < 3; ++j) {
- 						if (i == 1 && j == 1) continue;
- 						buffer.push(dynamic_cast<const ee::Symbol*>(data.GetSprite(i, j)->GetSymbol()));
- 					}
- 				}
- 				break;
- 			case escale9::e_3GridHor:
- 				for (size_t i = 0; i < 3; ++i)
- 					buffer.push(dynamic_cast<const ee::Symbol*>(data.GetSprite(1, i)->GetSymbol()));
- 				break;
- 			case escale9::e_3GridVer:
- 				for (size_t i = 0; i < 3; ++i)
- 					buffer.push(dynamic_cast<const ee::Symbol*>(data.GetSprite(i, 1)->GetSymbol()));
- 				break;
- 			case escale9::e_6GridUpper:
- 				for (size_t i = 1; i < 3; ++i)
- 					for (size_t j = 0; j < 3; ++j)
- 						buffer.push(dynamic_cast<const ee::Symbol*>(data.GetSprite(i, j)->GetSymbol()));
- 				break;
- 			}
+			std::vector<s2::Sprite*> grids;
+			patch->GetScale9().GetGrids(grids);
+			for (int i = 0, n = grids.size(); i < n; ++i) {
+				buffer.push(dynamic_cast<const ee::Symbol*>(grids[i]->GetSymbol()));				
+			}
 		}
 	}
 
@@ -250,41 +223,12 @@ void SymbolDependanceSorter::sort()
 			else if (escale9::Symbol* patch9 = dynamic_cast<escale9::Symbol*>(sym))
 			{
  				bool prepared = true;
-				const escale9::Scale9Data& data = patch9->GetScale9Data();
- 				switch (data.GetType())
- 				{
- 				case escale9::e_9Grid:
- 					for (size_t i = 0; i < 3 && prepared; ++i)
- 						for (size_t j = 0; j < 3 && prepared; ++j)
- 							if (!IsSymbolPrepared(data.GetSprite(i, j)))
- 								prepared = false;
- 					break;
- 				case escale9::e_9GridHollow:
- 					for (size_t i = 0; i < 3 && prepared; ++i) {
- 						for (size_t j = 0; j < 3 && prepared; ++j) {
- 							if (i == 1 && j == 1) continue;
- 							if (!IsSymbolPrepared(data.GetSprite(i, j)))
- 								prepared = false;
- 						}
- 					}
- 					break;
- 				case escale9::e_3GridHor:
- 					for (size_t i = 0; i < 3 && prepared; ++i)
- 						if (!IsSymbolPrepared(data.GetSprite(1, i)))
- 							prepared = false;
- 					break;
- 				case escale9::e_3GridVer:
- 					for (size_t i = 0; i < 3 && prepared; ++i)
- 						if (!IsSymbolPrepared(data.GetSprite(i, 1)))
- 							prepared = false;
- 					break;
- 				case escale9::e_6GridUpper:
- 					for (size_t i = 1; i < 3 && prepared; ++i)
- 						for (size_t j = 0; j < 3 && prepared; ++j)
- 							if (!IsSymbolPrepared(data.GetSprite(i, j)))
- 								prepared = false;
- 					break;
- 				}
+				std::vector<s2::Sprite*> grids;
+				patch9->GetScale9().GetGrids(grids);
+				for (int i = 0, n = grids.size(); i < n; ++i) {
+					if (!IsSymbolPrepared(dynamic_cast<const ee::Sprite*>(grids[i])))
+						prepared = false;
+				}
  				if (prepared)
  				{
  					m_symbol_set.Insert(patch9);
@@ -361,36 +305,11 @@ void SymbolDependanceSorter::PrepareScale9(std::queue<const ee::Symbol*>& buffer
 {
 	if (m_unique.find(scale9) == m_unique.end())
 	{
-		m_unique.insert(scale9);
-		const escale9::Scale9Data& data = scale9->GetScale9Data();
-		switch (data.GetType())
-		{
-		case escale9::e_9Grid:
-			for (size_t i = 0; i < 3; ++i)
-				for (size_t j = 0; j < 3; ++j)
-					buffer.push(dynamic_cast<const ee::Symbol*>(data.GetSprite(i, j)->GetSymbol()));
-			break;
-		case escale9::e_9GridHollow:
-			for (size_t i = 0; i < 3; ++i) {
-				for (size_t j = 0; j < 3; ++j) {
-					if (i == 1 && j == 1) continue;
-					buffer.push(dynamic_cast<const ee::Symbol*>(data.GetSprite(i, j)->GetSymbol()));
-				}
-			}
-			break;
-		case escale9::e_3GridHor:
-			for (size_t i = 0; i < 3; ++i)
-				buffer.push(dynamic_cast<const ee::Symbol*>(data.GetSprite(1, i)->GetSymbol()));
-			break;
-		case escale9::e_3GridVer:
-			for (size_t i = 0; i < 3; ++i)
-				buffer.push(dynamic_cast<const ee::Symbol*>(data.GetSprite(i, 1)->GetSymbol()));
-			break;
-		case escale9::e_6GridUpper:
-			for (size_t i = 1; i < 3; ++i)
-				for (size_t j = 0; j < 3; ++j)
-					buffer.push(dynamic_cast<const ee::Symbol*>(data.GetSprite(i, j)->GetSymbol()));
-			break;
+		m_unique.insert(scale9);		
+		std::vector<s2::Sprite*> grids;
+		scale9->GetScale9().GetGrids(grids);
+		for (int i = 0, n = grids.size(); i < n; ++i) {
+			buffer.push(dynamic_cast<const ee::Symbol*>(grids[i]->GetSymbol()));
 		}
 	}
 }

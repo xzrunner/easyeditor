@@ -452,6 +452,14 @@
 				Name="scale9"
 				>
 				<File
+					RelativePath="..\..\..\source\sprites\Scale9.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\Scale9.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\source\sprites\Scale9Sprite.cpp"
 					>
 				</File>

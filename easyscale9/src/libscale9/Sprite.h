@@ -1,8 +1,6 @@
 #ifndef _EASYSCALE9_SPRITE_H_
 #define _EASYSCALE9_SPRITE_H_
 
-#include "Scale9Data.h"
-
 #include <ee/Sprite.h>
 
 #include <sprite2/Scale9Sprite.h>
@@ -29,20 +27,15 @@ public:
 
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);	
 
-	void GetSize(float& w, float& h) const;
-	void SetSize(float w, float h);
+// 	void GetSize(float& w, float& h) const;
+// 	void SetSize(float w, float h);
 
-	void Draw(const s2::RenderParams& params) const;
+	//Scale9Type GetScale9Type() const { return m_data.GetType(); }
 
-	Scale9Type GetScale9Type() const { return m_data.GetType(); }
-
-	const Scale9Data& GetScale9Data() const { return m_data; }
+	//const Scale9Data& GetScale9Data() const { return m_data; }
 
 	static ee::Sprite* Create(ee::Symbol* sym);
 	
-private:
-	Scale9Data m_data;
-
 }; // Sprite
 
 }

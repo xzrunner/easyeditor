@@ -2,7 +2,6 @@
 #include "FilterModes.h"
 #include "WXHelper.h"
 #include "Sprite.h"
-#include "SpriteGaussianBlur.h"
 #include "StringHelper.h"
 
 #include <sprite2/RenderShader.h>

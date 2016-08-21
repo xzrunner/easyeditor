@@ -2,6 +2,7 @@
 #define _SPRITE2_SCALE9_SYMBOL_H_
 
 #include "S2_Symbol.h"
+#include "Scale9.h"
 
 namespace s2
 {
@@ -18,24 +19,12 @@ public:
 	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const;
 	virtual sm::rect GetBounding(const Sprite* spr = NULL) const;
 
-public:
-	enum Scale9Type
-	{
-		S9T_NULL = 0,
-		S9T_9FULL,
-		S9T_9HOLLOW,
-		S9T_6UPPER,
-		S9T_3HORI,
-		S9T_3VERT,
-	};
+	const Scale9& GetScale9() const { return m_s9; }
 
-private:
-	Scale9Type m_type;
+	void Resize(float width, float height);
 
-	// 0 1 2
-	// 3 4 5
-	// 6 7 9
-	Symbol* m_grids[9];
+protected:
+	Scale9 m_s9;
 
 }; // Scale9Symbol
 
