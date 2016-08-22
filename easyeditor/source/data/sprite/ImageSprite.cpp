@@ -27,15 +27,6 @@ ImageSprite::ImageSprite(ImageSymbol* sym)
 {
 }
 
-bool ImageSprite::Update(const s2::RenderParams& params, float dt)
-{
-	s2::FilterMode filter = m_shader.filter->GetMode();
-	return filter == s2::FM_HEAT_HAZE 
-		|| filter == s2::FM_SHOCK_WAVE 
-		|| filter == s2::FM_SWIRL
-		|| filter == s2::FM_BURNING_MAP;
-}
-
 void ImageSprite::BuildBoundingFromTexCoords(float* texCoords)
 {
 	if (!m_sym) return;

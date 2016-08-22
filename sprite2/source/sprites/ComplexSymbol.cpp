@@ -1,6 +1,8 @@
 #include "ComplexSymbol.h"
 #include "S2_Sprite.h"
 #include "BoundingBox.h"
+#include "RenderParams.h"
+#include "DrawNode.h"
 
 #include <map>
 
@@ -13,7 +15,14 @@ ComplexSymbol::ComplexSymbol()
 
 void ComplexSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 {
-	
+	RenderParams p = params;
+	if (spr) {
+		p.mt = spr->GetTransMatrix() * params.mt;
+		p.color = spr->Color() * params.color;			
+	}
+	for (int i = 0, n = m_children.size(); i < n; ++i) {
+		DrawNode::Draw(m_children[i], p);
+	}
 }
 
 sm::rect ComplexSymbol::GetBounding(const Sprite* spr) const

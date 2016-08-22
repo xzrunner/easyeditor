@@ -14,6 +14,12 @@ public:
 
 	/**
 	 *  @interface
+	 *    Sprite
+	 */
+	virtual bool Update(const RenderParams& params, float dt);	
+
+	/**
+	 *  @interface
 	 *    Cloneable
 	 */
 	virtual ImageSprite* Clone() const;

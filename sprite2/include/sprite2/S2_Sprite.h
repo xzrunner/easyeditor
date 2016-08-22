@@ -26,18 +26,20 @@ public:
 	Sprite(Symbol* sym);
 	virtual ~Sprite();
 
-	/**
-	 *  @interface
-	 *    cu::Cloneable
-	 */
-	virtual Sprite* Clone() const { return NULL; }
-
 	virtual void Translate(const sm::vec2& offset);
 	virtual void Rotate(float delta);
 	
-	virtual bool Update(const RenderParams& params, float dt) { return false; }
+ 	virtual bool Update(const RenderParams& params, float dt) { return false; }
 
 	virtual void SetSymbol(Symbol* sym);
+
+	/**
+	 *  @interface
+	 *    cu::Cloneable
+	 *  @note
+	 *    should after other virtual
+	 */
+	virtual Sprite* Clone() const { return NULL; }
 
 	Symbol* GetSymbol() { return m_sym; }
 	const Symbol* GetSymbol() const { return m_sym; }

@@ -20,7 +20,6 @@ public:
 
 	bool set_shader;
 
-//	Matrix mt;
 	sm::mat4 mt;
 
 	RenderColor	color;

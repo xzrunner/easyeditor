@@ -21,7 +21,6 @@ public:
 	 *    s2::Sprite
 	 */
 	virtual ImageSprite* Clone() const { return new ImageSprite(*this); }
-	virtual bool Update(const s2::RenderParams& params, float dt);	
 
 	// todo: should auto resize through its symbol and shapes
 	void BuildBoundingFromTexCoords(float* texCoords);
