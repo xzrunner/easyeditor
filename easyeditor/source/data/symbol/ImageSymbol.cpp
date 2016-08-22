@@ -43,7 +43,7 @@ void ImageSymbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) co
 {
 	s2::RenderParams p = params;
 	if (spr) {
-		p.mt = dynamic_cast<const ee::Sprite*>(spr)->GetTransMatrix() * params.mt;
+		p.mt = spr->GetTransMatrix() * params.mt;
 		p.color = spr->Color() * params.color;
 	}
 	s2::ImageSymbol::Draw(p, spr);

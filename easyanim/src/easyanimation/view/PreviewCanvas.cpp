@@ -69,8 +69,7 @@ void PreviewCanvas::DrawStageData() const
 	}
 
 	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
-		ee::Sprite* spr = sprs[i];
-		ee::SpriteRenderer::Instance()->Draw(spr);
+		ee::SpriteRenderer::Instance()->Draw(sprs[i]);
 	}
 
 	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
