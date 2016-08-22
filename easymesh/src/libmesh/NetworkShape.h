@@ -13,10 +13,11 @@ public:
 	NetworkShape(const NetworkShape& nw);
 	NetworkShape(eshape::ChainShape* loop, float node_radius);
 
-	//
-	// IObject interface
-	//
-	virtual NetworkShape* EEClone() const;
+	/**
+	 *  @interface
+	 *    s2::Shape
+	 */
+	virtual NetworkShape* Clone() const { return new NetworkShape(*this); }
 
 	//
 	// Mesh interface

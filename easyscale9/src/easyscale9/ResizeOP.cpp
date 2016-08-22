@@ -5,6 +5,8 @@
 
 #include <ee/panel_msg.h>
 
+#include <sprite2/Scale9.h>
+
 namespace escale9
 {
 
@@ -45,20 +47,20 @@ bool ResizeOP::OnMouseDrag(int x, int y)
 
 		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 
-		Scale9Type type = sym->GetScale9Data().GetType();
-		if (type == e_9Grid || 
-			type == e_9GridHollow ||
-			type == e_6GridUpper)
+		s2::SCALE9_TYPE type = sym->GetScale9().GetType();
+		if (type == s2::S9_9GRID || 
+			type == s2::S9_9GRID_HOLLOW ||
+			type == s2::S9_6GRID_UPPER)
 		{
 			width = fabs(pos.x)*2;
 			height = fabs(pos.y)*2;
 		}
-		else if (type == e_3GridHor)
+		else if (type == s2::S9_3GRID_HORI)
 		{
 			width = fabs(pos.x)*2;
 			height = sym->GetBounding().Size().y;
 		}
-		else if (type == e_3GridVer)
+		else if (type == s2::S9_3GRID_VERT)
 		{
 			width = sym->GetBounding().Size().x;
 			height = fabs(pos.y)*2;
@@ -69,7 +71,7 @@ bool ResizeOP::OnMouseDrag(int x, int y)
 		}
 
 		m_resizeCmpt->setSize(width, height);
-		sym->ResizeScale9(width, height);
+		sym->Resize(width, height);
 
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}

@@ -40,8 +40,6 @@ public:
 	virtual void Translate(const sm::vec2& offset);
 	virtual void Rotate(float delta);
 
-	virtual Sprite* EEClone() const { return NULL; }
-
 	virtual void Load(const Json::Value& val, const std::string& dir = "");
 	virtual void Store(Json::Value& val, const std::string& dir = "") const;
 

@@ -52,15 +52,17 @@ bool SelectShapesOP::OnKeyDown(int keyCode)
 
 		std::vector<Shape*> shapes;
 		m_selection->Traverse(FetchAllVisitor<Shape>(shapes));
-		for (size_t i = 0, n = shapes.size(); i < n; ++i)
-			m_clipboard.push_back(shapes[i]->EEClone());
+		for (size_t i = 0, n = shapes.size(); i < n; ++i) {
+			Shape* cp = dynamic_cast<Shape*>(((cu::Cloneable*)shapes[i])->Clone());
+			m_clipboard.push_back(cp);
+		}
 	}
 	else if (m_stage->GetKeyState(WXK_CONTROL) && keyCode == 'V')
 	{
 		for (size_t i = 0, n = m_clipboard.size(); i < n; ++i) {
-			Shape* shape = m_clipboard[i]->EEClone();
-			InsertShapeSJ::Instance()->Insert(shape);
-			shape->RemoveReference();
+			Shape* cp = dynamic_cast<Shape*>(((cu::Cloneable*)m_clipboard[i])->Clone());
+			InsertShapeSJ::Instance()->Insert(cp);
+			cp->RemoveReference();
 		}
 	}
 
@@ -190,16 +192,17 @@ void SelectShapesOP::PasteToSelection() const
 	std::vector<Shape*> shapes;
 	m_selection->Traverse(FetchAllVisitor<Shape>(shapes));
 	for (size_t i = 0, n = shapes.size(); i < n; ++i) {
-		m_clipboard.push_back(shapes[i]->EEClone());
+		Shape* cp = dynamic_cast<Shape*>(((cu::Cloneable*)shapes[i])->Clone());
+		m_clipboard.push_back(cp);
 	}
 }
 
 void SelectShapesOP::CopyFromSelection()
 {
 	for (size_t i = 0, n = m_clipboard.size(); i < n; ++i) {
-		Shape* shape = m_clipboard[i]->EEClone();
-		InsertShapeSJ::Instance()->Insert(shape);
-		shape->RemoveReference();
+		Shape* cp = dynamic_cast<Shape*>(((cu::Cloneable*)m_clipboard[i])->Clone());
+		InsertShapeSJ::Instance()->Insert(cp);
+		cp->RemoveReference();
 	}
 }
 

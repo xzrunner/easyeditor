@@ -138,7 +138,8 @@ void EditPolylinesOP::UpdateBufferVisitor::
 Visit(ee::Shape* shape, bool& next)
 {
 	ChainShape* chain = static_cast<ChainShape*>(shape);
-	m_simplify_buffer.insert(std::make_pair(chain, chain->EEClone()));
+	ChainShape* cp = dynamic_cast<ChainShape*>(((cu::Cloneable*)chain)->Clone());
+	m_simplify_buffer.insert(std::make_pair(chain, cp));
 	next = true;
 }
 

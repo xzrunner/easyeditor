@@ -19,6 +19,7 @@ public:
 	 *  @interface
 	 *    s2::Shape
 	 */
+	virtual CircleShape* Clone() const { return new CircleShape(*this); }
 	virtual bool IsContain(const sm::vec2& pos) const { return s2::CircleShape::IsContain(pos); }
 	virtual bool IsIntersect(const sm::rect& rect) const { return s2::CircleShape::IsIntersect(rect); }
 	virtual void Draw(const sm::mat4& mt, const s2::RenderColor& color = s2::RenderColor()) const { s2::CircleShape::Draw(mt, color); }
@@ -27,7 +28,6 @@ public:
 	 *  @interface
 	 *    ee::Shape
 	 */
-	virtual CircleShape* EEClone() const { return new CircleShape(*this); }
 	virtual const char* GetShapeDesc() const { return "circle"; }
 	virtual void Translate(const sm::vec2& offset);
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);

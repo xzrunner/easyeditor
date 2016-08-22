@@ -18,9 +18,9 @@ public:
 
 	/**
 	 *  @interface
-	 *    ee::Sprite
+	 *    s2::Sprite
 	 */
-	virtual Sprite* EEClone() const { return new Sprite(*this); }
+	virtual Sprite* Clone() const { return new Sprite(*this); }
 
 	static ee::Sprite* Create(ee::Symbol* sym);
 

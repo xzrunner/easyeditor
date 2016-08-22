@@ -23,6 +23,8 @@ public:
 
 	const Scale9& GetScale9() const { return m_s9; }
 
+	void Resize(float width, float height);
+
 	VI_DUMMY_FUNC
 
 protected:

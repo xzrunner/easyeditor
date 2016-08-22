@@ -18,21 +18,18 @@ public:
 
 	/**
 	 *  @interface
+	 *    s2::Sprite
+	 */
+	virtual Sprite* Clone() const { return new Sprite(*this); }
+
+	/**
+	 *  @interface
 	 *    ee::Sprite
 	 */
-	virtual Sprite* EEClone() const { return new Sprite(*this); }
-
 	virtual void Load(const Json::Value& val, const std::string& dir = "");
 	virtual void Store(Json::Value& val, const std::string& dir = "") const;
 
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);	
-
-// 	void GetSize(float& w, float& h) const;
-// 	void SetSize(float w, float h);
-
-	//Scale9Type GetScale9Type() const { return m_data.GetType(); }
-
-	//const Scale9Data& GetScale9Data() const { return m_data; }
 
 	static ee::Sprite* Create(ee::Symbol* sym);
 	

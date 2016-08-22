@@ -47,7 +47,8 @@ bool UIList::InsertSprite(ee::Sprite* spr, int idx)
 	if (m_hori_count ==  0 && m_vert_count == 0) {
 		spr->AddReference();
 		m_item_spr = spr;
-		m_items.push_back(m_item_spr->EEClone());
+		ee::Sprite* cp = dynamic_cast<ee::Sprite*>(((cu::Cloneable*)m_item_spr)->Clone());
+		m_items.push_back(cp);
 		m_hori_count = m_vert_count = 1;
 		return true;
 	}
@@ -228,7 +229,7 @@ void UIList::LoadFromFile(const char* filename)
 			m_items.push_back(spr);
 		}
 		if (!children.empty()) {
-			m_item_spr = dynamic_cast<ee::Sprite*>(children[0])->EEClone();
+			m_item_spr = dynamic_cast<ee::Sprite*>(((cu::Cloneable*)children[0])->Clone());
 		}
 	} else {
 		for (int i = 0, n = children.size(); i < n; ++i) {
@@ -237,7 +238,7 @@ void UIList::LoadFromFile(const char* filename)
 			m_items.insert(m_items.begin(), spr);
 		}
 		if (!children.empty()) {
-			m_item_spr = dynamic_cast<ee::Sprite*>(children.back())->EEClone();
+			m_item_spr = dynamic_cast<ee::Sprite*>(((cu::Cloneable*)children.back())->Clone());
 		}
 	}
 }
@@ -251,7 +252,8 @@ bool UIList::ReFilling()
 	for_each(m_items.begin(), m_items.end(), cu::RemoveRefFonctor<ee::Sprite>());
 	m_items.clear();
 
-	m_items.push_back(m_item_spr->EEClone());
+	ee::Sprite* cp = dynamic_cast<ee::Sprite*>(((cu::Cloneable*)m_item_spr)->Clone());
+	m_items.push_back(cp);
 
 	m_hori_count = m_vert_count = 1;
 
@@ -350,7 +352,7 @@ bool UIList::Filling()
 				break;
 			} else {
 				new_line = true;
-				ee::Sprite* spr = m_item_spr->EEClone();
+				ee::Sprite* spr = dynamic_cast<ee::Sprite*>(((cu::Cloneable*)m_item_spr)->Clone());
 				spr->SetPosition(pos);
 				m_items.push_back(spr);
 				ret = true;

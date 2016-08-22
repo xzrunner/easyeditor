@@ -29,8 +29,6 @@ public:
 	 */
 	virtual void ClearUserData(bool deletePtr) {}
 
-	virtual Shape* EEClone() const { return NULL; }
-
 	virtual const char* GetShapeDesc() const = 0;
 
 	virtual void Translate(const sm::vec2& offset) = 0;

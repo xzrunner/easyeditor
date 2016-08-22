@@ -17,16 +17,6 @@ Symbol::Symbol()
 	m_name = FILE_TAG + ee::StringHelper::ToString(id++);
 }
 
-// void Symbol::ResizeScale9(float width, float height)
-// {
-// 	m_data.Resize(width, height);
-// }
-
-// void Symbol::ComposeFromSprites(ee::Sprite* sprs[3][3], float width, float height)
-// {
-// 	m_data.Compose(sprs, width, height);
-// }
-
 void Symbol::LoadResources()
 {
 	Json::Value value;

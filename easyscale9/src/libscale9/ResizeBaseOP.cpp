@@ -68,7 +68,7 @@ bool ResizeBaseOP::OnMouseDrag(int x, int y)
 	if (m_status != e_null)
 	{
 		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-		m_sym->ResizeScale9(fabs(pos.x)*2, fabs(pos.y)*2);
+		m_sym->Resize(fabs(pos.x)*2, fabs(pos.y)*2);
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 

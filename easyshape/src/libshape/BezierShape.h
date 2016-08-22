@@ -19,6 +19,7 @@ public:
 	 *  @interface
 	 *    s2::Shape
 	 */
+	virtual BezierShape* Clone() const { return new BezierShape(*this); }
 	virtual bool IsContain(const sm::vec2& pos) const { return s2::BezierShape::IsContain(pos); }
 	virtual bool IsIntersect(const sm::rect& rect) const { return s2::BezierShape::IsIntersect(rect); }
 	virtual void Draw(const sm::mat4& mt, const s2::RenderColor& color = s2::RenderColor()) const { s2::BezierShape::Draw(mt, color); }
@@ -27,7 +28,6 @@ public:
 	 *  @interface
 	 *    ee::Shape
 	 */
-	virtual BezierShape* EEClone() const { return new BezierShape(*this); }
 	virtual const char* GetShapeDesc() const { return "bezier"; }
 	virtual void Translate(const sm::vec2& offset);
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);

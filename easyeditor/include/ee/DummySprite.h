@@ -18,9 +18,9 @@ public:
 
 	/**
 	 *  @interface
-	 *    ee::Sprite
+	 *    s2::Sprite
 	 */
-	virtual DummySprite* EEClone() const { return new DummySprite(*this); }
+	virtual DummySprite* Clone() const { return new DummySprite(*this); }
 
 }; // DummySprite
 

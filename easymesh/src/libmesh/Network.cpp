@@ -23,7 +23,7 @@ Network::Network(const Network& nw)
 	: EditableMesh(nw)
 {
 	if (nw.m_nw) {
-		m_nw = nw.m_nw->EEClone();
+		m_nw = dynamic_cast<NetworkShape*>(((cu::Cloneable*)nw.m_nw)->Clone());
 	} else {
 		m_nw = NULL;
 	}

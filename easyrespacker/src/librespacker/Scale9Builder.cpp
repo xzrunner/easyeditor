@@ -48,10 +48,9 @@ const IPackNode* Scale9Builder::Create(const escale9::Sprite* spr)
 	Load(spr, node);
 
 	Value val;
-	float w, h;
-	spr->GetSize(w, h);
-	val.w = w;
-	val.h = h;
+	sm::vec2 sz = spr->GetScale9().GetSize();
+	val.w = sz.x;
+	val.h = sz.y;
 	val.node = node;
 	m_map_data.insert(std::make_pair(dynamic_cast<const escale9::Symbol*>(spr->GetSymbol()), val));
 	return node;
@@ -59,9 +58,7 @@ const IPackNode* Scale9Builder::Create(const escale9::Sprite* spr)
 
 const IPackNode* Scale9Builder::Query(const escale9::Sprite* spr) const
 {
-	float w, h;
-	spr->GetSize(w, h);
-
+	sm::vec2 sz = spr->GetScale9().GetSize();
 	const escale9::Symbol* key = dynamic_cast<const escale9::Symbol*>(spr->GetSymbol());
 	std::multimap<const escale9::Symbol*, Value>::const_iterator 
 		itr_s = m_map_data.lower_bound(key),
@@ -69,7 +66,7 @@ const IPackNode* Scale9Builder::Query(const escale9::Sprite* spr) const
 		itr;
 	for (itr = itr_s; itr != itr_e; ++itr) {
 		const Value& val = itr->second;
-		if (val.w == w && val.h == h) {
+		if (val.w == sz.x && val.h == sz.y) {
 			return val.node;
 		}
 	}
@@ -79,42 +76,12 @@ const IPackNode* Scale9Builder::Query(const escale9::Sprite* spr) const
 
 void Scale9Builder::Load(const escale9::Sprite* spr, PackPicture* pic)
 {
-	std::vector<ee::Sprite*> sprs;
-	const escale9::Scale9Data& data = spr->GetScale9Data();
-	switch (data.GetType())
+	std::vector<s2::Sprite*> grids;
+	spr->GetScale9().GetGrids(grids);
+	for (int i = 0, n = grids.size(); i < n; ++i)
 	{
-	case escale9::e_9Grid:
-		for (size_t i = 0; i < 3; ++i)
-			for (size_t j = 0; j < 3; ++j)
-				sprs.push_back(data.GetSprite(i, j));
-		break;
-	case escale9::e_9GridHollow:
-		for (size_t i = 0; i < 3; ++i) {
-			for (size_t j = 0; j < 3; ++j) {
-				if (i == 1 && j == 1) continue;
-				sprs.push_back(data.GetSprite(i, j));
-			}
-		}
-		break;
-	case escale9::e_3GridHor:
-		for (size_t i = 0; i < 3; ++i)
-			sprs.push_back(data.GetSprite(1, i));
-		break;
-	case escale9::e_3GridVer:
-		for (size_t i = 0; i < 3; ++i)
-			sprs.push_back(data.GetSprite(i, 1));
-		break;
-	case escale9::e_6GridUpper:
-		for (size_t i = 1; i < 3; ++i)
-			for (size_t j = 0; j < 3; ++j)
-				sprs.push_back(data.GetSprite(i, j));
-		break;
-	}
-
-	for (size_t i = 0, n = sprs.size(); i < n; ++i)
-	{
-		ee::Sprite* spr = sprs[i];
-		if (ee::ImageSprite* image = dynamic_cast<ee::ImageSprite*>(spr)) {
+		s2::Sprite* grid = grids[i];
+		if (ee::ImageSprite* image = dynamic_cast<ee::ImageSprite*>(grid)) {
 			PackPicture::Quad quad;
 			ImageBuilder::LoadPictureQuad(image, quad);
 			pic->quads.push_back(quad);

@@ -17,7 +17,7 @@ CopyPasteSpriteState::CopyPasteSpriteState(SpriteSelection* selection)
 	m_sprs.reserve(sprs.size());
 	selection->Clear();
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
-		Sprite* spr = sprs[i]->EEClone();
+		Sprite* spr = dynamic_cast<Sprite*>(((cu::Cloneable*)sprs[i])->Clone());
 		m_sprs.push_back(spr);
 		selection->Add(spr);
 	}

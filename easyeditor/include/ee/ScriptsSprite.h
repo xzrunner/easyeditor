@@ -18,9 +18,9 @@ public:
 
 	/**
 	 *  @interface
-	 *    ee::Sprite
+	 *    s2::Sprite
 	 */
-	virtual ScriptsSprite* EEClone() const { return new ScriptsSprite(*this); }
+	virtual ScriptsSprite* Clone() const { return new ScriptsSprite(*this); }
 
 }; // ScriptsSprite 
 

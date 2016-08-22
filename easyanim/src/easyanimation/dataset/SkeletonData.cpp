@@ -23,8 +23,10 @@ void SkeletonData::CopyFrom(const SkeletonData& skeleton)
 	sprs.reserve(skeleton.m_map_joints.size());
 	std::map<ee::Sprite*, std::vector<Joint*> >::const_iterator itr 
 		= skeleton.m_map_joints.begin();
-	for ( ; itr != skeleton.m_map_joints.end(); ++itr)
-		sprs.push_back(itr->first->EEClone());
+	for ( ; itr != skeleton.m_map_joints.end(); ++itr) {
+		ee::Sprite* spr = dynamic_cast<ee::Sprite*>(((cu::Cloneable*)itr->first)->Clone());
+		sprs.push_back(spr);
+	}
 	CopyFrom(sprs, skeleton);
 }
 

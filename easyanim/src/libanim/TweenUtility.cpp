@@ -31,16 +31,11 @@ void TweenUtility::GetTweenSprites(const std::vector<s2::Sprite*>& start,
 			}
 		}
 
-		if (end_spr)
-		{
-			ee::Sprite* tween_spr = start_spr->EEClone();
+		ee::Sprite* tween_spr = dynamic_cast<ee::Sprite*>(((cu::Cloneable*)start_spr)->Clone());			
+		if (end_spr) {
 			GetTweenSprite(start_spr, end_spr, tween_spr, process);
-			tween.push_back(tween_spr);
 		}
-		else
-		{
-			tween.push_back(start_spr->EEClone());
-		}
+		tween.push_back(tween_spr);
 	}
 }
 
@@ -63,16 +58,11 @@ void TweenUtility::GetTweenSprites(const std::vector<ee::Sprite*>& start,
 			}
 		}
 
-		if (end_spr)
-		{
-			ee::Sprite* tween_spr = start_spr->EEClone();
+		ee::Sprite* tween_spr = dynamic_cast<ee::Sprite*>(((cu::Cloneable*)start_spr)->Clone());
+		if (end_spr) {
 			GetTweenSprite(start_spr, end_spr, tween_spr, process);
-			tween.push_back(tween_spr);
 		}
-		else
-		{
-			tween.push_back(start_spr->EEClone());
-		}
+		tween.push_back(tween_spr);
 	}
 }
 
@@ -141,12 +131,11 @@ void TweenUtility::GetTweenSprite(ee::Sprite* start, ee::Sprite* end, ee::Sprite
 		escale9::Sprite* s9_e = dynamic_cast<escale9::Sprite*>(end);
 		escale9::Sprite* s9_t = dynamic_cast<escale9::Sprite*>(tween);
 		assert(s9_e && s9_t);
-		float s_w, s_h, e_w, e_h;
-		s9_s->GetSize(s_w, s_h);
-		s9_e->GetSize(e_w, e_h);
-		float t_w = (e_w - s_w) * process + s_w,
-			t_h = (e_h - s_h) * process + s_h;
-		s9_t->SetSize(t_w, t_h);
+		sm::vec2 s_sz = s9_s->GetScale9().GetSize(),
+			     e_sz = s9_e->GetScale9().GetSize();
+		float t_w = (e_sz.x - s_sz.x) * process + s_sz.x,
+			  t_h = (e_sz.y - s_sz.y) * process + s_sz.y;
+		s9_t->Resize(t_w, t_h);
 	}
 	else if (eicon::Sprite* icon_s = dynamic_cast<eicon::Sprite*>(start))
 	{

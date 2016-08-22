@@ -23,14 +23,13 @@ public:
 	 *  @interface
 	 *    s2::Sprite
 	 */
+	virtual Sprite* Clone() const { return new Sprite(*this); }
 	virtual bool Update(const s2::RenderParams& params, float dt);
 
 	/**
 	 *  @interface
 	 *    ee::Sprite
 	 */
-	virtual Sprite* EEClone() const { return new Sprite(*this); }
-
 	virtual void Load(const Json::Value& val, const std::string& dir = "");
 	virtual void Store(Json::Value& val, const std::string& dir = "") const;
 

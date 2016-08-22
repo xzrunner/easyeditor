@@ -26,11 +26,7 @@ public:
 
 	Symbol* getPatchSymbol() { return m_sym; }
 
-	ee::Sprite* getSprite(int row, int col) {
-		if (row < 0 || row >= 3 || col < 0 || col >= 3)
-			return NULL;
-		return m_sprs[row][col];
-	}
+ 	ee::Sprite* getSprite(int row, int col);
 
 	void rebuildPatchSymbol();
 
@@ -48,10 +44,10 @@ private:
 	void Clear();
 
 private:
-	// [2][0]
-	// [1][0]
-	// [0][0] [0][1] [0][2]
-	ee::Sprite* m_sprs[3][3];
+	// 6 7 8
+	// 3 4 5
+	// 0 1 2
+	s2::Sprite* m_sprs[9];
 
 	Symbol* m_sym;
 

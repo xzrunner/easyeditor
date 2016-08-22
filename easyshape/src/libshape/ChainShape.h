@@ -19,6 +19,7 @@ public:
 	 *  @interface
 	 *    s2::Shape
 	 */
+	virtual ChainShape* Clone() const { return new ChainShape(*this); }
 	virtual bool IsContain(const sm::vec2& pos) const { return s2::PolylineShape::IsContain(pos); }
 	virtual bool IsIntersect(const sm::rect& rect) const { return s2::PolylineShape::IsIntersect(rect); }
 	virtual void Draw(const sm::mat4& mt, 
@@ -28,7 +29,6 @@ public:
 	 *  @interface
 	 *    ee::Shape
 	 */
-	virtual ChainShape* EEClone() const { return new ChainShape(*this); }
 	virtual const char* GetShapeDesc() const { return "chain"; }
 	virtual void Translate(const sm::vec2& offset);
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);

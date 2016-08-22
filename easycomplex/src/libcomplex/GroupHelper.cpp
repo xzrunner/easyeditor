@@ -42,7 +42,7 @@ void GroupHelper::BreakUp(ee::Sprite* group, std::vector<ee::Sprite*>& sprs)
 	const std::vector<s2::Sprite*>& children = comp->GetChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) 
 	{
-		ee::Sprite* spr = dynamic_cast<ee::Sprite*>(children[i])->EEClone();
+		ee::Sprite* spr = dynamic_cast<ee::Sprite*>(((cu::Cloneable*)children[i])->Clone());
 
 		sm::vec2 _scale = spr->GetScale();
 		_scale.x *= scale.x;

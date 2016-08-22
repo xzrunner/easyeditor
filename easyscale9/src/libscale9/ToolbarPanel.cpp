@@ -45,7 +45,7 @@ void ToolbarPanel::onChangeSize(wxSpinEvent& event)
 	ee::SetWndDirtySJ::Instance()->SetDirty();
 	const float w = m_wSpin->GetValue(),
 		h = m_hSpin->GetValue();
-	m_sym->ResizeScale9(w, h);
+	m_sym->Resize(w, h);
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 

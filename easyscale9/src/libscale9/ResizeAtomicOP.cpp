@@ -14,12 +14,12 @@ ResizeAtomicOP::ResizeAtomicOP(Symbol* sym,
 
 void ResizeAtomicOP::Undo()
 {
-	m_sym->ResizeScale9(m_src.x, m_src.y);
+	m_sym->Resize(m_src.x, m_src.y);
 }
 
 void ResizeAtomicOP::Redo()
 {
-	m_sym->ResizeScale9(m_dst.x, m_dst.y);
+	m_sym->Resize(m_dst.x, m_dst.y);
 }
 
 }

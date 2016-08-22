@@ -37,10 +37,14 @@ public:
 
 	/**
 	 *  @interface
+	 *    s2::Sprite
+	 */
+	virtual FontBlankSprite* Clone() const { return new FontBlankSprite(*this); }
+
+	/**
+	 *  @interface
 	 *    ee::Sprite
 	 */
-	virtual FontBlankSprite* EEClone() const { return new FontBlankSprite(*this); }
-
 	virtual void Load(const Json::Value& val, const std::string& dir = "");
 	virtual void Store(Json::Value& val, const std::string& dir = "") const;
 

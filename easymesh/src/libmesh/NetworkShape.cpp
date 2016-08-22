@@ -26,11 +26,6 @@ NetworkShape::NetworkShape(eshape::ChainShape* loop,
 {
 }
 
-NetworkShape* NetworkShape::EEClone() const
-{
-	return new NetworkShape(*this);
-}
-
 void NetworkShape::Draw(const sm::mat4& mt, const s2::RenderColor& color) const
 {
 	eshape::ChainShape::Draw(mt, color);

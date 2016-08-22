@@ -65,7 +65,7 @@ void FileIO::Store(const char* filename, StagePanel* stage,
 
 	value["version"] = VERSION;
 
-	value["type"] = stage->getPatchSymbol()->GetScale9Data().GetType();
+	value["type"] = stage->getPatchSymbol()->GetScale9().GetType();
 
 	value["width"] = toolbar->getWidth();
 	value["height"] = toolbar->getHeight();

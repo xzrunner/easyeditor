@@ -92,50 +92,19 @@ void CocoPacker::pack(const std::vector<const ee::Symbol*>& syms)
 		}
 		else if (const escale9::Symbol* patch9 = dynamic_cast<const escale9::Symbol*>(sym))
 		{
-			const escale9::Scale9Data& data = patch9->GetScale9Data();
-
- 			std::vector<ee::Sprite*> sprs;
- 			switch (data.GetType())
+			std::vector<s2::Sprite*> grids;
+			patch9->GetScale9().GetGrids(grids);
+ 			for (int i = 0, n = grids.size(); i < n; ++i)
  			{
- 			case escale9::e_9Grid:
- 				for (size_t i = 0; i < 3; ++i)
- 					for (size_t j = 0; j < 3; ++j)
- 						sprs.push_back(data.GetSprite(i, j));
- 				break;
- 			case escale9::e_9GridHollow:
- 				for (size_t i = 0; i < 3; ++i) {
- 					for (size_t j = 0; j < 3; ++j) {
- 						if (i == 1 && j == 1) continue;
- 						sprs.push_back(data.GetSprite(i, j));
- 					}
- 				}
- 				break;
- 			case escale9::e_3GridHor:
- 				for (size_t i = 0; i < 3; ++i)
- 					sprs.push_back(data.GetSprite(1, i));
- 				break;
- 			case escale9::e_3GridVer:
- 				for (size_t i = 0; i < 3; ++i)
- 					sprs.push_back(data.GetSprite(i, 1));
- 				break;
- 			case escale9::e_6GridUpper:
- 				for (size_t i = 1; i < 3; ++i)
- 					for (size_t j = 0; j < 3; ++j)
- 						sprs.push_back(data.GetSprite(i, j));
- 				break;
- 			}
- 
- 			for (size_t i = 0, n = sprs.size(); i < n; ++i)
- 			{
- 				ee::Sprite* spr = sprs[i];
- 				if (ee::ImageSprite* image = dynamic_cast<ee::ImageSprite*>(spr))
+ 				s2::Sprite* grid = grids[i];
+ 				if (ee::ImageSprite* image = dynamic_cast<ee::ImageSprite*>(grid))
  				{
- 					m_mapSpriteID.insert(std::make_pair(spr, m_id++));
+ 					m_mapSpriteID.insert(std::make_pair(image, m_id++));
  					resolvePicture(image);
  				}
- 				else if (ee::FontBlankSprite* font = dynamic_cast<ee::FontBlankSprite*>(spr))
+ 				else if (ee::FontBlankSprite* font = dynamic_cast<ee::FontBlankSprite*>(grid))
  				{
- 					m_mapSpriteID.insert(std::make_pair(spr, m_id++));
+ 					m_mapSpriteID.insert(std::make_pair(font, m_id++));
  				}
  			}
  
@@ -491,8 +460,7 @@ void CocoPacker::resolveAnimation(const escale9::Symbol* sym)
 {
  	lua::TableAssign ta(m_gen, "", true, false);
  
-	const escale9::Scale9Data& data = sym->GetScale9Data();
-	escale9::Scale9Type type = data.GetType();
+	s2::SCALE9_TYPE type = sym->GetScale9().GetType();
 
  	// type
  	m_gen.line(lua::assign("type", "\"animation\"") + ",");
@@ -507,33 +475,18 @@ void CocoPacker::resolveAnimation(const escale9::Symbol* sym)
  	std::string sid = ee::StringHelper::ToString(itr->second);
  	m_gen.line(lua::assign("id", sid) + ",");
  
+	std::vector<s2::Sprite*> grids;
+	sym->GetScale9().GetGrids(grids);
+
  	// component
  	std::vector<int> ids;
  	std::map<int, std::vector<std::string> > unique;
  	std::vector<std::pair<int, std::string> > order;
  	{
  		lua::TableAssign ta(m_gen, "component", true);
- 		if (type == escale9::e_9Grid)
- 			for (size_t i = 0; i < 3; ++i)
- 				for (size_t j = 0; j < 3; ++j)
- 					resolveSpriteForComponent(data.GetSprite(i, j), ids, unique, order);
- 		else if (type == escale9::e_9GridHollow)
- 			for (size_t i = 0; i < 3; ++i) {
- 				for (size_t j = 0; j < 3; ++j) {
- 					if (i == 1 && j == 1) continue;
- 					resolveSpriteForComponent(data.GetSprite(i, j), ids, unique, order);
- 				}
- 			}
- 		else if (type == escale9::e_3GridHor)
- 			for (size_t i = 0; i < 3; ++i)
- 				resolveSpriteForComponent(data.GetSprite(1, i), ids, unique, order);
- 		else if (type == escale9::e_3GridVer)
- 			for (size_t i = 0; i < 3; ++i)
- 				resolveSpriteForComponent(data.GetSprite(i, 1), ids, unique, order);
- 		else if (type == escale9::e_6GridUpper)
- 			for (size_t i = 1; i < 3; ++i)
- 				for (size_t j = 0; j < 3; ++j)
- 					resolveSpriteForComponent(data.GetSprite(i, j), ids, unique, order);
+		for (int i = 0, n = grids.size(); i < n; ++i) {
+			resolveSpriteForComponent(dynamic_cast<const ee::Sprite*>(grids[i]), ids, unique, order);			
+		}
  	}
  	// children
  	{
@@ -542,30 +495,9 @@ void CocoPacker::resolveAnimation(const escale9::Symbol* sym)
  		{
  			lua::TableAssign ta(m_gen, "", true);
  			int index = 0;
- 			if (type == escale9::e_9Grid)
- 				for (size_t i = 0; i < 3; ++i)
- 					for (size_t j = 0; j < 3; ++j, ++index)
- 						resolveSpriteForFrame(data.GetSprite(i, j), index, ids, order);
- 			else if (type == escale9::e_9GridHollow)
- 				for (size_t i = 0; i < 3; ++i) {
- 					for (size_t j = 0; j < 3; ++j, ++index) {
- 						if (i == 1 && j == 1) { 
- 							--index;
- 							continue;
- 						}
- 						resolveSpriteForFrame(data.GetSprite(i, j), index, ids, order);
- 					}
- 				}
- 			else if (type == escale9::e_3GridHor)
- 				for (size_t i = 0; i < 3; ++i)
- 					resolveSpriteForFrame(data.GetSprite(1, i), i, ids, order);
- 			else if (type == escale9::e_3GridVer)
- 				for (size_t i = 0; i < 3; ++i)
- 					resolveSpriteForFrame(data.GetSprite(i, 1), i, ids, order);
- 			else if (type == escale9::e_6GridUpper)
- 				for (size_t i = 1; i < 3; ++i)
- 					for (size_t j = 0; j < 3; ++j, ++index)
- 						resolveSpriteForFrame(data.GetSprite(i, j), index, ids, order);
+			for (int i = 0, n = grids.size(); i < n; ++i) {
+				resolveSpriteForFrame(dynamic_cast<const ee::Sprite*>(grids[i]), index, ids, order);			
+			}
  		}
  	}
 }

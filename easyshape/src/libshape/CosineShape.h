@@ -19,6 +19,7 @@ public:
 	 *  @interface
 	 *    s2::Shape
 	 */
+	virtual CosineShape* Clone() const { return new CosineShape(*this); }
 	virtual bool IsContain(const sm::vec2& pos) const { return s2::CosineShape::IsContain(pos); }
 	virtual bool IsIntersect(const sm::rect& rect) const { return s2::CosineShape::IsIntersect(rect); }
 	virtual void Draw(const sm::mat4& mt, const s2::RenderColor& color = s2::RenderColor()) const { s2::CosineShape::Draw(mt, color); }
@@ -27,7 +28,6 @@ public:
 	 *  @interface
 	 *    ee::Shape
 	 */
-	virtual CosineShape* EEClone() const { return new CosineShape(*this); }
 	virtual const char* GetShapeDesc() const { return "cosine-curve"; }
 	virtual void Translate(const sm::vec2& offset);
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage) { return NULL; }
