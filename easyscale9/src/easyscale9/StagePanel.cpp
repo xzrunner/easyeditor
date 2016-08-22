@@ -68,14 +68,6 @@ void StagePanel::rebuildPatchSymbol()
 
 	float width = m_toolbar->getWidth(),
 		  height = m_toolbar->getHeight();
-
-	sm::vec2 sz = m_sprs[4]->GetSymbol()->GetBounding().Size();
-	if (type == s2::S9_3GRID_HORI) {
-		height = sz.y;
-	} else if (type == s2::S9_3GRID_VERT) {
-		width = sz.x;
-	}
-
 	s2::Scale9& s9 = const_cast<s2::Scale9&>(dynamic_cast<s2::Scale9Symbol*>(m_sym)->GetScale9());
 	s9.Build(type, width, height, m_sprs);
 

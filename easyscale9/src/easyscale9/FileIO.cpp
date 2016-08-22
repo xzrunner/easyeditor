@@ -15,6 +15,8 @@
 #include <ee/SymbolSearcher.h>
 #include <ee/Exception.h>
 #include <ee/SpriteFactory.h>
+#include <ee/SettingData.h>
+#include <ee/Config.h>
 
 namespace escale9
 {
@@ -33,6 +35,10 @@ void FileIO::Load(const char* filename, ee::LibraryPanel* library,
 	reader.parse(fin, value);
 	fin.close();
 
+	ee::SettingData& data = ee::Config::Instance()->GetSettings();
+	bool ori_clip_cfg = data.open_image_edge_clip;
+	data.open_image_edge_clip = false; 
+
 	std::string dir = ee::FileHelper::GetFileDir(filename);
 
 	bool need_offset = true;
@@ -50,6 +56,8 @@ void FileIO::Load(const char* filename, ee::LibraryPanel* library,
 		ee::InsertSpriteSJ::Instance()->Insert(spr);
  		spriteValue = value["sprite"][i++];
  	}
+
+	data.open_image_edge_clip = ori_clip_cfg;
 
 	float width = value["width"].asInt(),
 		  height = value["height"].asInt();

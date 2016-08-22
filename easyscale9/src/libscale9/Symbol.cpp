@@ -7,6 +7,8 @@
 #include <ee/SymbolSearcher.h>
 #include <ee/SymbolMgr.h>
 #include <ee/SpriteFactory.h>
+#include <ee/Config.h>
+#include <ee/SettingData.h>
 
 namespace escale9
 {
@@ -26,6 +28,10 @@ void Symbol::LoadResources()
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();
+
+	ee::SettingData& data = ee::Config::Instance()->GetSettings();
+	bool ori_clip_cfg = data.open_image_edge_clip;
+	data.open_image_edge_clip = false; 
 
 	Json::Value spr_val = value["sprite"];
 
@@ -82,7 +88,9 @@ void Symbol::LoadResources()
 		grids[s2::S9_TOP_RIGHT]		= LoadSprite(spr_val[5], dir);
 		break;
 	}
-	
+
+	data.open_image_edge_clip = ori_clip_cfg;
+
 	m_s9.Build(type, width, height, grids);
 }
 
