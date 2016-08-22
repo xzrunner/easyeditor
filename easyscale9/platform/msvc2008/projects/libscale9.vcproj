@@ -205,14 +205,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libscale9\Scale9Data.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libscale9\Scale9Data.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\libscale9\Sprite.cpp"
 				>
 			</File>
