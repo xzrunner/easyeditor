@@ -168,7 +168,7 @@ void FileIO::StoreRefs(Json::Value& val, const Symbol* sym, const std::string& d
 	}
 }
 
-void FileIO::LoadRefs(const Json::Value& val, Symbol* sym, const std::string& dir)
+void FileIO::LoadRefs(const Json::Value& val, Symbol* top_sym, const std::string& dir)
 {
 	int idx = 0;
 	Json::Value spr_val = val["ref_spr"][idx++];
@@ -178,7 +178,7 @@ void FileIO::LoadRefs(const Json::Value& val, Symbol* sym, const std::string& di
 
 		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
 		spr->Load(spr_val);
-		dynamic_cast<Symbol*>(sym)->InsertExtRef(static_cast<Sprite*>(spr));
+		top_sym->InsertExtRef(static_cast<Sprite*>(spr));
 		spr->RemoveReference();
 		sym->RemoveReference();
 
