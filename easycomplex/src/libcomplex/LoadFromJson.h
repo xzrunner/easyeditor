@@ -11,8 +11,8 @@ class Symbol;
 class LoadFromJson
 {
 public:
-	static void Load(const Json::Value& value, const std::string& dir, 
-		Symbol* complex);
+	static void Load(const std::string& filepath, const Json::Value& value, 
+		const std::string& dir, Symbol* complex);
 
 }; // LoadFromJson
 

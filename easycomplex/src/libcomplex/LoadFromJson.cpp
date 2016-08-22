@@ -11,7 +11,8 @@
 namespace ecomplex
 {
 
-void LoadFromJson::Load(const Json::Value& value, const std::string& dir, Symbol* complex)
+void LoadFromJson::Load(const std::string& _filepath, const Json::Value& value, 
+						const std::string& dir, Symbol* complex)
 {
 	complex->name = value["name"].asString();
 	complex->tag = value["tag"].asString();
@@ -30,7 +31,7 @@ void LoadFromJson::Load(const Json::Value& value, const std::string& dir, Symbol
 		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 		if (!sym) {
 			std::string filepath = spriteValue["filepath"].asString();
-			throw ee::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", dir.c_str(), filepath.c_str());
+			throw ee::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s, [src]:%s", dir.c_str(), filepath.c_str(), _filepath.c_str());
 		}
 		ee::SymbolSearcher::SetSymbolFilepaths(dir, sym, spriteValue);
 

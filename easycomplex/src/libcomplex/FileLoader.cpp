@@ -136,7 +136,7 @@ void FileLoader::Load(const std::string& filepath, Symbol* complex)
 	} else if (!value["bin file"].isNull()) {
 		LoadFromBin::Load(value, dir, complex);
 	} else if (ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
-		LoadFromJson::Load(value, dir, complex);
+		LoadFromJson::Load(filepath, value, dir, complex);
 	} else if (ee::FileType::IsType(filepath, ee::FileType::e_psd)) {
 		LoadFromPSD::Load(value, dir, complex);
 	}
