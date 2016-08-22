@@ -161,6 +161,7 @@ void Scale9::SetSize(float width, float height)
 void Scale9::Build(SCALE9_TYPE type, int w, int h, Sprite* grids[9])
 {
 	m_type = type;
+	m_width = m_height = 0;
 	for (int i = 0; i < 9; ++i) 
 	{
 		Sprite* dst = m_grids[i];
