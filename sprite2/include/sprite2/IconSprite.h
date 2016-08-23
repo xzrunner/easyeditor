@@ -10,6 +10,7 @@ class IconSprite : public VIRTUAL_INHERITANCE Sprite
 {
 public:
 	IconSprite();
+	IconSprite(const IconSprite& spr);
 	IconSprite(Symbol* sym);
 
 	/**
@@ -18,7 +19,13 @@ public:
 	 */
 	virtual IconSprite* Clone() const;
 
+	void SetProcess(float process) { m_process = process; }
+	float GetProcess() const { return m_process; }
+
 	VI_DUMMY_FUNC
+
+protected:
+	float m_process;
 
 }; // IconSprite
 

@@ -80,10 +80,11 @@ void IconBuilder::Load(const eicon::Sprite* spr, PackPicture* pic)
 
 	PackPicture::Quad quad;
 
-	const eicon::Icon* icon = dynamic_cast<const eicon::Symbol*>(spr->GetSymbol())->GetIcon();
+	const eicon::Symbol* sym = dynamic_cast<const eicon::Symbol*>(spr->GetSymbol());
+	const eicon::Icon* icon = dynamic_cast<const eicon::Icon*>(sym->GetIcon());
 	quad.img = icon->GetImage();
-	icon->GetTexCoords(proc, quad.texture_coord);
-	icon->GetScreenCoords(proc, quad.texture_coord, quad.screen_coord);
+	icon->GenTexcoords(proc, quad.texture_coord);
+	icon->GenVertices(proc, quad.texture_coord, quad.screen_coord);
 
 	pic->quads.push_back(quad);
 }

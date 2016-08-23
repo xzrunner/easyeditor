@@ -1,6 +1,8 @@
 #ifndef _SPRITE2_TEXTURE_H_
 #define _SPRITE2_TEXTURE_H_
 
+#include <SM_Vector.h>
+
 #include <stdint.h>
 
 namespace s2
@@ -19,9 +21,8 @@ public:
 		m_tex_id = id;
 	}
 	
-	void GetSize(uint16_t& w, uint16_t& h) const {
-		w = m_width;
-		h = m_height;
+	sm::vec2 GetSize() const {
+		return sm::vec2(m_width, m_height);
 	}
 
 	uint32_t GetTexID() const { return m_tex_id; }

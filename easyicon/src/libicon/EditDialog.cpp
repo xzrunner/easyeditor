@@ -48,7 +48,8 @@ void EditDialog::InitEditOP(ee::Sprite* edited)
 {
 	ee::EditOP* op = NULL;
 
-	const Icon* icon = dynamic_cast<Symbol*>(edited->GetSymbol())->GetIcon();
+	Symbol* sym = dynamic_cast<Symbol*>(edited->GetSymbol());
+	const Icon* icon = dynamic_cast<const Icon*>(sym->GetIcon());
 	IconType type = get_icon_type(icon->GetIconDesc());
 	switch (type)
 	{
@@ -83,7 +84,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 	int val = dlg.ShowModal();
 	if (val == wxID_YES)
 	{
-		FileIO::StoreToFile(filepath.c_str(), sym.GetIcon());
+		FileIO::StoreToFile(filepath.c_str(), dynamic_cast<Icon*>(sym.GetIcon()));
 		sym.RefreshThumbnail(filepath);
 		ee::SpriteFactory::Instance()->UpdateBoundings(sym);
 		Destroy();

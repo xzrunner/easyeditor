@@ -13,7 +13,7 @@ class Symbol;
 class Sprite : public s2::IconSprite, public ee::Sprite
 {
 public:
-	Sprite();
+	Sprite() {}
 	Sprite(const Sprite& spr);
 	Sprite(Symbol* sym);
 
@@ -32,13 +32,7 @@ public:
 
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
 
-	void SetProcess(float process);
-	float GetProcess() const { return m_process; }
-
 	static ee::Sprite* Create(ee::Symbol* sym);
-
-private:
-	float m_process;
 
 }; // Sprite
 

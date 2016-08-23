@@ -1,6 +1,7 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
 #include "Symbol.h"
+#include "Icon.h"
 
 #include <ee/Sprite.h>
 #include <ee/ImageSymbol.h>
@@ -48,7 +49,7 @@ void StagePanel::SetIcon(Icon* icon)
 Icon* StagePanel::GetIcon()
 {
 	if (m_sym) {
-		return m_sym->GetIcon();
+		return dynamic_cast<Icon*>(m_sym->GetIcon());
 	} else {
 		return NULL;
 	}

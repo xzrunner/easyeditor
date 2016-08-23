@@ -3,25 +3,24 @@
 
 #include "Icon.h"
 
+#include <sprite2/StaticRectIcon.h>
+
+#include <json/json.h>
+
 namespace eicon
 {
 
-class RectIcon : public Icon
+class RectIcon : public Icon, public s2::StaticRectIcon
 {
 public:
-	RectIcon();
-
+	/**
+	 *  @interface
+	 *    Icon
+	 */
 	virtual const char* GetIconDesc() const { return "rect"; }
 
 	virtual void LoadFromFile(const Json::Value& value);
 	virtual void StoreToFile(Json::Value& value) const;
-
-	virtual void GetBound(float process, sm::vec2 bound[4]) const;
-
-	void SetRegion(const sm::rect& r);
-
-private:
-	sm::vec2 m_min, m_max;
 
 }; // RectIcon
 

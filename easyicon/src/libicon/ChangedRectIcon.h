@@ -3,23 +3,22 @@
 
 #include "Icon.h"
 
+#include <sprite2/DynamicRectIcon.h>
+
 namespace eicon
 {
 
-class ChangedRectIcon : public Icon
+class ChangedRectIcon : public Icon, public s2::DynamicRectIcon
 {
 public:
-	ChangedRectIcon();
-
+	/**
+	 *  @interface
+	 *    Icon
+	 */
 	virtual const char* GetIconDesc() const { return "changed-rect"; }
 
 	virtual void LoadFromFile(const Json::Value& value);
 	virtual void StoreToFile(Json::Value& value) const;
-
-	virtual void GetBound(float process, sm::vec2 bound[4]) const;
-
-private:
-	sm::rect m_begin, m_end;
 
 }; // ChangedRectIcon
 

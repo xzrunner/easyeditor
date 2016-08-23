@@ -5,16 +5,10 @@
 namespace eicon
 {
 
-Sprite::Sprite()
-	: m_process(1)
-{
-}
-
 Sprite::Sprite(const Sprite& spr)
 	: s2::Sprite(spr)
 	, s2::IconSprite(spr)
 	, ee::Sprite(spr)
-	, m_process(spr.m_process)
 {
 }
 
@@ -22,7 +16,6 @@ Sprite::Sprite(Symbol* sym)
 	: s2::Sprite(sym)
 	, s2::IconSprite(sym)
 	, ee::Sprite(sym)
-	, m_process(1)
 {
 }
 
@@ -41,11 +34,6 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 ee::PropertySetting* Sprite::CreatePropertySetting(ee::EditPanelImpl* stage)
 {
 	return new SpritePropertySetting(stage, this);
-}
-
-void Sprite::SetProcess(float process)
-{
-	m_process = process;
 }
 
 ee::Sprite* Sprite::Create(ee::Symbol* sym) 

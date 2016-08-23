@@ -53,12 +53,11 @@ void ImageSymbol::InitTex(Texture* tex, const Quad& quad, const sm::vec2& offset
 	m_quad = quad;
 	m_offset = offset;
 
-	uint16_t tex_w, tex_h;
-	m_tex->GetSize(tex_w, tex_h);
-	m_size.xmin = m_quad.xmin - tex_w * 0.5f + m_offset.x;
-	m_size.ymin = m_quad.ymin - tex_h * 0.5f + m_offset.y;
-	m_size.xmax = m_quad.xmax - tex_w * 0.5f + m_offset.x;
-	m_size.ymax = m_quad.ymax - tex_h * 0.5f + m_offset.y;
+	sm::vec2 sz = m_tex->GetSize();
+	m_size.xmin = m_quad.xmin - sz.x * 0.5f + m_offset.x;
+	m_size.ymin = m_quad.ymin - sz.y * 0.5f + m_offset.y;
+	m_size.xmax = m_quad.xmax - sz.x * 0.5f + m_offset.x;
+	m_size.ymax = m_quad.ymax - sz.y * 0.5f + m_offset.y;
 }
 
 void ImageSymbol::DrawBlend(const RenderParams& params, sm::vec2* vertices, float* texcoords, int texid) const
@@ -72,10 +71,9 @@ void ImageSymbol::DrawBlend(const RenderParams& params, sm::vec2* vertices, floa
 	}
 
 	sm::vec2 vertices_scr[4];
-	uint16_t tex_w, tex_h;
-	m_tex->GetSize(tex_w, tex_h);
-	float img_hw = tex_w * 0.5f,
-		  img_hh = tex_h * 0.5f;
+	sm::vec2 sz = m_tex->GetSize();
+	float img_hw = sz.x * 0.5f,
+		  img_hh = sz.y * 0.5f;
 	vertices_scr[0] = params.mt * sm::vec2(-img_hw, -img_hh);
 	vertices_scr[1] = params.mt * sm::vec2(-img_hw,  img_hh);
 	vertices_scr[2] = params.mt * sm::vec2( img_hw,  img_hh);

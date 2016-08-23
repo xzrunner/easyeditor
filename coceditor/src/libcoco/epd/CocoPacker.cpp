@@ -749,7 +749,7 @@ void CocoPacker::ParserIcon(const eicon::Symbol* sym, float process, int id)
 
 	// src
 	sm::vec2 node[4];
-	sym->GetIcon()->GetTexCoords(process, node);
+	sym->GetIcon()->GenTexcoords(process, node);
 	int left = picture->scr[1].x, bottom = picture->scr[1].y;
 	int width = picture->scr[2].x - left,
 		height = picture->scr[0].y - bottom;

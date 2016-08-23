@@ -412,6 +412,14 @@
 				Name="anim"
 				>
 				<File
+					RelativePath="..\..\..\source\sprites\AnimLerp.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\AnimLerp.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\source\sprites\AnimSprite.cpp"
 					>
 				</File>
@@ -675,6 +683,54 @@
 					RelativePath="..\..\..\include\sprite2\IconSymbol.h"
 					>
 				</File>
+				<Filter
+					Name="icon"
+					>
+					<File
+						RelativePath="..\..\..\source\sprites\DynamicRectIcon.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\include\sprite2\DynamicRectIcon.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\source\sprites\DynamicSectorIcon.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\include\sprite2\DynamicSectorIcon.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\source\sprites\StaticQuadIcon.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\include\sprite2\StaticQuadIcon.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\source\sprites\StaticRectIcon.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\include\sprite2\StaticRectIcon.h"
+						>
+					</File>
+					<Filter
+						Name="base"
+						>
+						<File
+							RelativePath="..\..\..\source\sprites\Icon.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\include\sprite2\Icon.h"
+							>
+						</File>
+					</Filter>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="mask"

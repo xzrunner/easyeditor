@@ -3,23 +3,18 @@
 
 #include "Icon.h"
 
+#include <sprite2/DynamicSectorIcon.h>
+
 namespace eicon
 {
 
-class ChangedSectorIcon : public Icon
+class ChangedSectorIcon : public Icon, public s2::DynamicSectorIcon
 {
 public:
-	ChangedSectorIcon();
-
 	virtual const char* GetIconDesc() const { return "changed-sector"; }
 
 	virtual void LoadFromFile(const Json::Value& value);
 	virtual void StoreToFile(Json::Value& value) const;
-
-	virtual void GetBound(float process, sm::vec2 bound[4]) const;
-
-private:
-	float m_min, m_max;
 
 }; // ChangedSectorIcon 
 
