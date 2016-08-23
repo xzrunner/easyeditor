@@ -20,6 +20,7 @@ namespace list
 
 UIList::UIList()
 	: m_reverse_order(false)
+	, m_column_order(false)
 {
 	m_clipbox.xmin = m_clipbox.ymin = -200;
 	m_clipbox.xmax = m_clipbox.ymax =  200;
@@ -127,7 +128,17 @@ void UIList::StoreToFile(const char* filename) const
 
 	// items complex
 	ecomplex::Symbol items_complex;
-	if (m_reverse_order) {
+	if (m_column_order) {
+		assert(m_items.size() == m_hori_count * m_vert_count);
+		for (int i = 0, n = m_items.size(); i < n; ++i) {
+			ee::Sprite* spr = m_items[i];
+			int row = i / m_hori_count,
+				col = i % m_hori_count;
+			int idx = col * m_vert_count + row;
+			spr->SetName("item" + ee::StringHelper::ToString(idx));
+			items_complex.Add(spr);
+		}
+	} else if (m_reverse_order) {
 		for (int i = m_items.size() - 1; i >= 0; --i) {
 			ee::Sprite* spr = m_items[i];
 			spr->SetName("item" + ee::StringHelper::ToString(i + 1));
@@ -164,6 +175,7 @@ void UIList::StoreToFile(const char* filename) const
 	value["horizontal"] = m_horizontal;
 	value["vertical"] = m_vertical;
 	value["reverse_order"] = m_reverse_order;
+	value["column_order"] = m_column_order;
 	sm::vec2 cb_sz = m_clipbox.Size();
 	value["clipbox"]["w"] = cb_sz.x;
 	value["clipbox"]["h"] = cb_sz.y;
@@ -209,6 +221,11 @@ void UIList::LoadFromFile(const char* filename)
 		m_reverse_order = value["reverse_order"].asBool();
 	} else {
 		m_reverse_order = false;
+	}
+	if (!value["column_order"].isNull()) {
+		m_column_order = value["column_order"].asBool();
+	} else {
+		m_column_order = false;
 	}
 
 	m_hori_count = value["hori count"].asInt();

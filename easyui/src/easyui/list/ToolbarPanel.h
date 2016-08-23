@@ -19,6 +19,7 @@ public:
 	void EnableVert(bool enable);
 
 	void EnableReverseOrder(bool enable);
+	void EnableColumnOrder(bool enable);
 
 	void SetSizeText(int width, int height);
 
@@ -34,6 +35,7 @@ private:
 	void OnChangeVert(wxCommandEvent& event);
 
 	void OnReverseOrder(wxCommandEvent& event);
+	void OnColumnOrder(wxCommandEvent& event);
 
 private:
 	StagePanel* m_stage_panel;
@@ -45,6 +47,7 @@ private:
 	wxCheckBox* m_vert_check;
 
 	wxCheckBox* m_reverse_check;
+	wxCheckBox* m_column_check; // column major order
 
 }; // ToolbarPanel
 

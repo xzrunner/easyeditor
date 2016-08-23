@@ -38,6 +38,9 @@ public:
 	bool IsReverseOrderEnable() const { return m_reverse_order; }
 	void EnableReverseOrder(bool enable) { m_reverse_order = enable; }
 
+	bool IsColumnOrderEnable() const { return m_column_order; }
+	void EnableColumnOrder(bool enable) { m_column_order = enable; }
+
 private:
 	bool Filling();
 	bool Arrange(float hori_space, float vert_space);
@@ -59,6 +62,7 @@ private:
 	float m_vert_space;	
 
 	bool m_reverse_order;
+	bool m_column_order;
 
 }; // UIList
 
