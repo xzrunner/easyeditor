@@ -1,6 +1,8 @@
 #include "OutlineToTriStrip.h"
 
-#include <ee/Triangulation.h>
+#include <ee/SGI.h>
+
+#include <SM_Triangulation.h>
 
 namespace eimage
 {
@@ -13,8 +15,8 @@ OutlineToTriStrip::OutlineToTriStrip(const std::vector<sm::vec2>& outline)
 void OutlineToTriStrip::TransToStrip()
 {
 	std::vector<sm::vec2> tris;
-	ee::Triangulation::Normal(m_outline, tris);
-	ee::Triangulation::Strips(tris, m_strips);
+	triangulate_normal(m_outline, tris);
+	ee::SGI::Do(tris, m_strips);
 }
 
 }

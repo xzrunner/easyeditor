@@ -2,6 +2,8 @@
 
 #include <ee/Math2D.h>
 
+#include <sprite2/MeshTriangle.h>
+
 namespace eterrain2d
 {
 
@@ -14,9 +16,9 @@ void MeshShape::InsertTriangle(const sm::vec2* vertices,
 							   const sm::vec2* texcoords,
 							   const std::vector<sm::vec2>& bound)
 {
-	emesh::Triangle* tri = new emesh::Triangle;
+	s2::MeshTriangle* tri = new s2::MeshTriangle;
 	for (int i = 0; i < 3; ++i) {
-		emesh::Node* n = new emesh::Node(vertices[i], texcoords[i]);
+		s2::MeshNode* n = new s2::MeshNode(vertices[i], texcoords[i]);
 		
 		for (int j = 0, m = bound.size(); j < m; ++j) {
 			if (ee::Math2D::IsPointOnPolyline(n->ori_xy, bound)) {

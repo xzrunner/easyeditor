@@ -1,7 +1,5 @@
 #include "Mesh.h"
 
-#include <ee/Triangulation.h>
-
 #include <sprite2/S2_RVG.h>
 
 namespace enav
@@ -28,7 +26,7 @@ void Mesh::Build()
 	for (int i = 0, n = m_holes.size(); i < n; ++i) {
 		holes.push_back(m_holes[i].edge);
 	}
-	ee::Triangulation::Holes(m_bound, holes, m_triangles);
+	sm::triangulate_holes(m_bound, holes, m_triangles);
 }
 
 void Mesh::Draw() const

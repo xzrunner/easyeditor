@@ -2,12 +2,12 @@
 
 #include <ee/Math2D.h>
 #include <ee/color_config.h>
-#include <ee/Triangulation.h>
 
 #include <easyshape.h>
 
 #include <sprite2/S2_RVG.h>
 #include <sprite2/BoundingBox.h>
+#include <SM_Triangulation.h>
 
 namespace lr
 {
@@ -70,7 +70,7 @@ void PathNavMesh::DisableRegion(const ee::Sprite* spr, bool disable)
 	for (itr = m_bounds.begin(); itr != m_bounds.end(); ++itr) {
 		loops.push_back(itr->second);
 	}
-	ee::Triangulation::LinesAndLoops(all_bound, lines, loops, m_tris);
+	sm::triangulate_lines_and_loops(all_bound, lines, loops, m_tris);
 }
 
 void PathNavMesh::QueryRoute(const sm::vec2& start, const sm::vec2& end)

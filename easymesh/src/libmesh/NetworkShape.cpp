@@ -5,6 +5,8 @@
 #include <ee/SettingData.h>
 #include <ee/JsonSerializer.h>
 
+#include <easyshape.h>
+
 #include <sprite2/S2_RVG.h>
 
 namespace emesh
@@ -13,22 +15,24 @@ namespace emesh
 static const int NODE_RADIUS = 5;
 
 NetworkShape::NetworkShape(const NetworkShape& nw)
-	: eshape::ChainShape(nw)
+	: ee::Shape(nw)
+	, s2::NetworkShape(nw)
 	, m_node_radius(nw.m_node_radius)
 {
-	m_inner_vertices = nw.m_inner_vertices;
 }
 
-NetworkShape::NetworkShape(eshape::ChainShape* loop,
+NetworkShape::NetworkShape(const std::vector<sm::vec2>& vertices,
 						   float node_radius)
-	: eshape::ChainShape(*loop)
+	: s2::Shape()
+	, ee::Shape()
+	, s2::NetworkShape(vertices)
 	, m_node_radius(node_radius)
 {
 }
 
 void NetworkShape::Draw(const sm::mat4& mt, const s2::RenderColor& color) const
 {
-	eshape::ChainShape::Draw(mt, color);
+	s2::NetworkShape::Draw(mt, color);
 
 	s2::RVG::SetColor(BLUE);
 	s2::RVG::Circles(m_inner_vertices, m_node_radius, true);
@@ -39,14 +43,15 @@ void NetworkShape::LoadFromFile(const Json::Value& value, const std::string& dir
 	const Json::Value& shape_val = value["shape"];
 	std::vector<sm::vec2> vertices;
 	ee::JsonSerializer::Load(shape_val["outline"], vertices);
-	SetVertices(vertices);
+	m_vertices = vertices;
+	UpdateBounding();
 	ee::JsonSerializer::Load(shape_val["inner"], m_inner_vertices);
 }
 
 void NetworkShape::StoreToFile(Json::Value& value, const std::string& dir) const
 {
 	Json::Value& shape_val = value["shape"];
-	ee::JsonSerializer::Store(GetVertices(), shape_val["outline"]);
+	ee::JsonSerializer::Store(m_vertices, shape_val["outline"]);
 	ee::JsonSerializer::Store(m_inner_vertices, shape_val["inner"]);
 }
 

@@ -2,12 +2,12 @@
 #include "ShadowShader.h"
 
 #include <ee/JsonSerializer.h>
-#include <ee/Triangulation.h>
 #include <ee/Math2D.h>
 
 #include <shaderlab.h>
 #include <sprite2/S2_RVG.h>
 #include <SM_Calc.h>
+#include <SM_Triangulation.h>
 
 #include <assert.h>
 
@@ -78,7 +78,7 @@ void Shadow::BuildFace()
 	m_tris.clear();
 	m_colors.clear();
 
-	ee::Triangulation::Normal(m_inner_loop, m_tris);
+	triangulate_normal(m_inner_loop, m_tris);
 	m_colors.reserve(m_tris.size() + m_inner_loop.size() * 6);
 	for (int i = 0, n = m_tris.size(); i < n; ++i) {
 		m_colors.push_back(m_inner_color);

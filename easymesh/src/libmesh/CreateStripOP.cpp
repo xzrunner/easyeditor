@@ -2,11 +2,12 @@
 #include "StagePanel.h"
 #include "Strip.h"
 #include "Symbol.h"
-#include "MeshRenderer.h"
 
 #include <ee/panel_msg.h>
 #include <ee/Image.h>
 #include <ee/SpriteRenderer.h>
+
+#include <sprite2/DrawMesh.h>
 
 namespace emesh
 {
@@ -111,7 +112,7 @@ bool CreateStripOP::OnDraw() const
 {
 	if (Mesh* mesh = m_stage->GetMesh()) {
 		ee::SpriteRenderer::Instance()->Draw(mesh->GetBaseSymbol());
-		MeshRenderer::DrawInfoUV(mesh);
+		s2::DrawMesh::DrawInfoUV(mesh);
 	}
 
 	ee::ZoomViewOP::OnDraw();

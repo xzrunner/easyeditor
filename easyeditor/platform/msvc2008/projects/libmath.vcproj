@@ -193,14 +193,6 @@
 				RelativePath="..\..\..\include\ee\TrapezoidalDec.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\source\math\alg\Triangulation.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\Triangulation.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="external"

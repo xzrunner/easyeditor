@@ -643,6 +643,62 @@
 					RelativePath="..\..\..\include\sprite2\MeshSymbol.h"
 					>
 				</File>
+				<Filter
+					Name="mesh"
+					>
+					<File
+						RelativePath="..\..\..\source\sprites\NetworkMesh.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\include\sprite2\NetworkMesh.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\source\sprites\NetworkShape.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\include\sprite2\NetworkShape.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\source\sprites\StripMesh.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\include\sprite2\StripMesh.h"
+						>
+					</File>
+					<Filter
+						Name="base"
+						>
+						<File
+							RelativePath="..\..\..\source\sprites\Mesh.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\include\sprite2\Mesh.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\include\sprite2\MeshNode.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\source\sprites\MeshTransform.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\include\sprite2\MeshTransform.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\include\sprite2\MeshTriangle.h"
+							>
+						</File>
+					</Filter>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="texture"
@@ -809,6 +865,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\include\sprite2\DrawGaussianBlur.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\render\DrawMesh.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\DrawMesh.h"
 					>
 				</File>
 				<File

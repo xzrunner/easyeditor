@@ -1,9 +1,10 @@
 #ifndef _EASYMESH_SELECT_NODE_OP_H_
 #define _EASYMESH_SELECT_NODE_OP_H_
 
-#include "Node.h"
-
 #include <ee/DrawRectangleOP.h>
+#include <ee/SelectionSet.h>
+
+#include <sprite2/MeshNode.h>
 
 namespace emesh
 {
@@ -25,7 +26,7 @@ public:
 	virtual bool Clear();
 
 protected:
-	NodeSelection m_selection;
+	ee::SelectionSet<s2::MeshNode> m_selection;
 
 private:
 	sm::vec2 m_first_pos;

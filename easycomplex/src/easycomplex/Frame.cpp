@@ -189,7 +189,7 @@ void Frame::onCode(wxCommandEvent& event)
 // 	ee::JsonIO::Load(value["segments"], segments);
 // 
 // 	std::vector<sm::vec2> tris;
-// 	ee::Triangulation::lines(outline, segments, tris);
+// 	sm::triangulate_lines(outline, segments, tris);
 // 	
 // 	int zz = 0;
 }

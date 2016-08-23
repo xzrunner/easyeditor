@@ -1,10 +1,11 @@
 #include "Strip.h"
-#include "Triangle.h"
 
 #include <ee/JsonSerializer.h>
 #include <ee/Math2D.h>
+#include <ee/Symbol.h>
 
 #include <SM_Calc.h>
+#include <sprite2/MeshTriangle.h>
 
 #include <set>
 #include <algorithm>
@@ -21,24 +22,23 @@ Strip::Strip()
 }
 
 Strip::Strip(const Strip& strip)
-	: EditableMesh(strip)
-	, m_left_nodes(strip.m_left_nodes)
-	, m_right_nodes(strip.m_right_nodes)
+	: s2::Mesh(strip)
+	, Mesh(strip)
+	, s2::StripMesh(strip)
 {
-	RefreshTriangles();
-	CopyTriangles(strip);
 }
 
 Strip::Strip(const ee::Symbol* base)
-	: EditableMesh(base)
+	: s2::Mesh(base)
+	, Mesh(base)
+	, s2::StripMesh(base)
 {
-	InitBound();
 }
 
-Strip* Strip::Clone() const
-{
-	return new Strip(*this);
-}
+//Strip* Strip::Clone() const
+//{
+//	return new Strip(*this);
+//}
 
 void Strip::Load(const Json::Value& value)
 {
@@ -107,16 +107,16 @@ void Strip::OffsetUV(float dx, float dy)
 			continue;
 		}
 
-		Triangle* tri = new Triangle;
-		tri->nodes[0] = new Node(left[i], static_cast<int>(m_width), static_cast<int>(m_height));
-		tri->nodes[1] = new Node(right[i], static_cast<int>(m_width), static_cast<int>(m_height));
-		tri->nodes[2] = new Node(right[i+1], static_cast<int>(m_width), static_cast<int>(m_height));
+		s2::MeshTriangle* tri = new s2::MeshTriangle;
+		tri->nodes[0] = new s2::MeshNode(left[i], static_cast<int>(m_width), static_cast<int>(m_height));
+		tri->nodes[1] = new s2::MeshNode(right[i], static_cast<int>(m_width), static_cast<int>(m_height));
+		tri->nodes[2] = new s2::MeshNode(right[i+1], static_cast<int>(m_width), static_cast<int>(m_height));
 		m_tris.push_back(tri);
 
-		tri = new Triangle;
-		tri->nodes[0] = new Node(left[i], static_cast<int>(m_width), static_cast<int>(m_height));
-		tri->nodes[1] = new Node(right[i+1], static_cast<int>(m_width), static_cast<int>(m_height));
-		tri->nodes[2] = new Node(left[i+1], static_cast<int>(m_width), static_cast<int>(m_height));
+		tri = new s2::MeshTriangle;
+		tri->nodes[0] = new s2::MeshNode(left[i], static_cast<int>(m_width), static_cast<int>(m_height));
+		tri->nodes[1] = new s2::MeshNode(right[i+1], static_cast<int>(m_width), static_cast<int>(m_height));
+		tri->nodes[2] = new s2::MeshNode(left[i+1], static_cast<int>(m_width), static_cast<int>(m_height));
 		m_tris.push_back(tri);
 	}
 	for (int i = 0, n = m_tris.size(); i < n; ++i) {
@@ -128,7 +128,7 @@ void Strip::OffsetUV(float dx, float dy)
 	// set uv between textures
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
 	{
-		Triangle* tri = m_tris[i];
+		s2::MeshTriangle* tri = m_tris[i];
 		sm::rect r;
 		r.MakeEmpty();
 		for (int i = 0; i < 3; ++i) {
@@ -137,7 +137,7 @@ void Strip::OffsetUV(float dx, float dy)
 
 		for (int i = 0; i < 3; ++i) 
 		{
-			Node* n = tri->nodes[i];
+			s2::MeshNode* n = tri->nodes[i];
 			float y = n->uv.y - m_uv_offset;
 			y = y - floor(y);
 			if (fabs(y - 0) < 0.0001f && n->uv.y == r.ymax) {
@@ -226,65 +226,6 @@ void Strip::MoveNode(sm::vec2* src, const sm::vec2& dst)
 	RefreshTriangles();
 }
 
-void Strip::InitBound()
-{
-	float hw = m_width * 0.5f;
-	float hh = m_height * 0.5f;
-	m_left_nodes.Reset(sm::vec2(-hw, -hh), sm::vec2(-hw,  hh));
-	m_right_nodes.Reset(sm::vec2(hw, -hh), sm::vec2( hw,  hh));
-}
-
-void Strip::RefreshTriangles()
-{
-	ClearTriangles();
-
-	assert(m_left_nodes.Size() == m_right_nodes.Size());
-	const std::vector<sm::vec2>& left = m_left_nodes.m_ext;
-	const std::vector<sm::vec2>& right = m_right_nodes.m_ext;
-	Node* last_left = new Node(left[0], static_cast<int>(m_width), static_cast<int>(m_height));
-	Node* last_right = new Node(right[0], static_cast<int>(m_width), static_cast<int>(m_height));
-	for (int i = 0, n = left.size() - 1; i < n; ++i)
-	{
-		Node* next_left = new Node(left[i+1], static_cast<int>(m_width), static_cast<int>(m_height));
-		Node* next_right = new Node(right[i+1], static_cast<int>(m_width), static_cast<int>(m_height));
-
-		Triangle* tri = new Triangle;
-		tri->nodes[0] = last_left;
-		tri->nodes[1] = last_right;
-		tri->nodes[2] = next_right;
-		for (int i = 0; i < 3; ++i) {
-			tri->nodes[i]->AddReference();
-		}
-		m_tris.push_back(tri);
-
-		tri = new Triangle;
-		tri->nodes[0] = last_left;
-		tri->nodes[1] = next_right;
-		tri->nodes[2] = next_left;
-		for (int i = 0; i < 3; ++i) {
-			tri->nodes[i]->AddReference();
-		}
-		m_tris.push_back(tri);
-
-		last_left = next_left;
-		last_right = next_right;
-	}
-}
-
-void Strip::CopyTriangles(const Strip& strip)
-{
-	assert(m_tris.size() == strip.m_tris.size());
-	for (int i = 0, n = m_tris.size(); i < n; ++i)
-	{
-		Triangle* src = strip.m_tris[i];
-		Triangle* dst = m_tris[i];
-		for (int j = 0; j < 3; ++j)
-		{
-			dst->nodes[j]->xy = src->nodes[j]->xy;
-		}
-	}
-}
-
 void Strip::AbsorbNodeToRegion(sm::vec2& node)
 {
 	float hw = m_width * 0.5f;
@@ -305,25 +246,25 @@ void Strip::AbsorbNodeToRegion(sm::vec2& node)
 
 void Strip::GetTransList(std::vector<std::pair<sm::vec2, sm::vec2> >& trans_list) const
 {
-	std::set<Node*> nodes;
+	std::set<s2::MeshNode*> nodes;
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
 	{
-		Triangle* tri = m_tris[i];
+		s2::MeshTriangle* tri = m_tris[i];
 		for (int i = 0; i < 3; ++i) {
 			nodes.insert(tri->nodes[i]);
 		}
 	}
-	std::set<Node*>::iterator itr = nodes.begin();
+	std::set<s2::MeshNode*>::iterator itr = nodes.begin();
 	for ( ; itr != nodes.end(); ++itr)
 	{
-		Node* n = *itr;
+		s2::MeshNode* n = *itr;
 		if (n->xy != n->ori_xy) {
 			trans_list.push_back(std::make_pair(n->ori_xy, n->xy));
 		}
 	}
 }
 
-void Strip::TranslateNode(Node* node, const std::vector<std::pair<sm::vec2, sm::vec2> >& trans_list)
+void Strip::TranslateNode(s2::MeshNode* node, const std::vector<std::pair<sm::vec2, sm::vec2> >& trans_list)
 {
 	for (int i = 0, m = trans_list.size(); i < m; ++i)
 	{
@@ -358,129 +299,11 @@ void Strip::MapUV2XY(const std::vector<sm::vec2>& nodes, int index, const sm::ve
 	TranslateNode(xy_e, trans_list);
 
 	sm::vec2 foot;
-	int st = ee::Math2D::GetFootOfPerpendicular(s, e, pos, &foot);
+	int st = sm::get_foot_of_perpendicular(s, e, pos, &foot);
 	
 	float p = sm::dis_pos_to_pos(s, foot) / sm::dis_pos_to_pos(s, e);
  	sm::vec2 xy_p = xy_s + (xy_e - xy_s) * p;
  	trans_list.push_back(std::make_pair(foot, xy_p));
-}
-
-//////////////////////////////////////////////////////////////////////////
-// class Strip::NodeList
-//////////////////////////////////////////////////////////////////////////
-
-void Strip::NodeList::
-Reset(const sm::vec2& begin, const sm::vec2& end)
-{
-	m_ori.clear();
-	m_ori.push_back(begin);
-	m_ori.push_back(end);
-	m_ext = m_ori;
-}
-
-void Strip::NodeList::
-Insert(const sm::vec2& p)
-{
-	Insert(m_ori, p);
-	m_ext = m_ori;
-}
-
-void Strip::NodeList::
-Remove(int idx)
-{
-	m_ori.erase(m_ori.begin() + idx);
-	m_ext.erase(m_ext.begin() + idx);
-}
-
-int Strip::NodeList::
-GetNodeInsertPos(const sm::vec2& p, sm::vec2& nearest)
-{
-	m_ext = m_ori;
-
-	int idx_nearest = -1;
-	float dis_nearest = FLT_MAX;
-	sm::vec2 foot_nearest;
-	for (int i = 0, n = m_ext.size() - 1; i < n; ++i)
-	{
-		sm::vec2 foot;
-		int st = ee::Math2D::GetFootOfPerpendicular(m_ext[i], m_ext[i+1], p, &foot);
-		if (st == -1) {
-			continue;
-		}
-		float dis = sm::dis_square_pos_to_pos(foot, p);
-		if (dis < dis_nearest) {
-			idx_nearest = i;
-			dis_nearest = dis;
-			foot_nearest = foot;
-		}
-	}
-
-	if (idx_nearest != -1) {
-		nearest = foot_nearest;
-	}
-
-	return idx_nearest;
-}
-
-int Strip::NodeList::
-QueryIndex(const sm::vec2& p, float radius) const
-{
-	// front and back are bound
-	for (int i = 1, n = m_ori.size() - 1; i < n; ++i) {
-		if (sm::dis_pos_to_pos(m_ori[i], p) < radius) {
-			return i;
-		}
-	}
-	return -1;
-}
-
-sm::vec2* Strip::NodeList::
-QueryPointer(const sm::vec2& p, float radius)
-{
-	int idx = QueryIndex(p, radius);
-	if (idx != -1) {
-		return &m_ori[idx];
-	} else {
-		return NULL;
-	}
-}
-
-bool Strip::NodeList::
-IsRegionContain(const sm::vec2& p) const
-{
-	sm::vec2 foot;
-	return ee::Math2D::GetFootOfPerpendicular(m_ori.front(), m_ori.back(), p, &foot) != -1;
-}
-
-void Strip::NodeList::
-Sort()
-{
-	std::sort(m_ori.begin(), m_ori.end(), sm::Vector2CmpY());
-	std::sort(m_ext.begin(), m_ext.end(), sm::Vector2CmpY());
-}
-
-void Strip::NodeList::
-Insert(std::vector<sm::vec2>& nodes, const sm::vec2& p)
-{
-	int idx_nearest = -1;
-	float dis_nearest = FLT_MAX;
-	sm::vec2 foot_nearest;
-	for (int i = 0, n = nodes.size() - 1; i < n; ++i)
-	{
-		sm::vec2 foot;
-		int st = ee::Math2D::GetFootOfPerpendicular(nodes[i], nodes[i+1], p, &foot);
-		if (st == -1) {
-			continue;
-		}
-		float dis = sm::dis_square_pos_to_pos(foot, p);
-		if (dis < dis_nearest) {
-			idx_nearest = i;
-			dis_nearest = dis;
-			foot_nearest = foot;
-		}
-	}
-	assert(idx_nearest != -1);
-	nodes.insert(nodes.begin() + idx_nearest + 1, foot_nearest);
 }
 
 }

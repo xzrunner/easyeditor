@@ -26,7 +26,8 @@ void FileIO::Store(const char* filepath, const Symbol* sym)
 	}
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath) + "\\";
-	value["base_symbol"] = ee::FileHelper::GetRelativePath(dir, sym->GetMesh()->GetBaseSymbol()->GetFilepath());
+	const s2::Symbol* base = sym->GetMesh()->GetBaseSymbol();
+	value["base_symbol"] = ee::FileHelper::GetRelativePath(dir, dynamic_cast<const ee::Symbol*>(base)->GetFilepath());
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));

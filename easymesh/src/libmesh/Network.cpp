@@ -1,13 +1,14 @@
 #include "Network.h"
-#include "Triangle.h"
 #include "config.h"
 #include "NetworkShape.h"
 #include "MeshTrans.h"
 
 #include <ee/JsonSerializer.h>
-#include <ee/Triangulation.h>
 
 #include <easyshape.h>
+
+#include <sprite2/MeshTriangle.h>
+#include <sprite2/NetworkShape.h>
 
 #include <assert.h>
 
@@ -15,51 +16,27 @@ namespace emesh
 {
 
 Network::Network()
-	: m_nw(NULL)
 {
 }
 
 Network::Network(const Network& nw)
-	: EditableMesh(nw)
+	: s2::Mesh(nw)
+	, Mesh(nw)
+	, s2::NetworkMesh(nw)
 {
-	if (nw.m_nw) {
-		m_nw = dynamic_cast<NetworkShape*>(((cu::Cloneable*)nw.m_nw)->Clone());
-	} else {
-		m_nw = NULL;
-	}
-
-	RefreshTriangles();
-
-	// copy triangles
-	assert(m_tris.size() == nw.m_tris.size());
-	for (int i = 0, n = m_tris.size(); i < n; ++i)
-	{
-		Triangle* src = nw.m_tris[i];
-		Triangle* dst = m_tris[i];
-		for (int j = 0; j < 3; ++j)
-		{
-			dst->nodes[j]->xy = src->nodes[j]->xy;
-		}
-	}
 }
 
 Network::Network(const ee::Symbol* base)
-	: EditableMesh(base)
-	, m_nw(NULL)
+	: s2::Mesh(base)
+	, Mesh(base)
+	, s2::NetworkMesh(base)
 {
 }
 
-Network::~Network()
-{
-	if (m_nw) {
-		delete m_nw;
-	}
-}
-
-Network* Network::Clone() const
-{
-	return new Network(*this);
-}
+//Network* Network::Clone() const
+//{
+//	return new Network(*this);
+//}
 
 void Network::Load(const Json::Value& value)
 {
@@ -69,7 +46,7 @@ void Network::Load(const Json::Value& value)
 
 	std::vector<sm::vec2> outline;
 	ee::JsonSerializer::Load(value["shape"]["outline"], outline);
-	m_nw = new NetworkShape(new eshape::ChainShape(outline, true), m_node_radius);
+	m_nw = new NetworkShape(outline, m_node_radius);
 
 	std::vector<sm::vec2> inner;
 	ee::JsonSerializer::Load(value["shape"]["inner"], inner);
@@ -90,7 +67,7 @@ void Network::Store(Json::Value& value) const
 		return;
 	}
 
-	m_nw->StoreToFile(value, "");
+	dynamic_cast<NetworkShape*>(m_nw)->StoreToFile(value, "");
 
 	MeshTrans trans;
 	trans.LoadFromMesh(this);
@@ -133,7 +110,7 @@ void Network::OffsetUV(float dx, float dy)
 	//	std::set<Node*> nodes;
 	//	for (int i = 0, n = m_tris.size(); i < n; ++i)
 	//	{
-	//		Triangle* tri = m_tris[i];
+	//		s2::MeshTriangle* tri = m_tris[i];
 	//		for (int i = 0; i < 3; ++i) {
 	//			nodes.insert(tri->nodes[i]);
 	//		}
@@ -152,7 +129,7 @@ void Network::OffsetUV(float dx, float dy)
 	//	{
 	//		float y = -height*0.5f + height*m_uv_offset.y;
 	//		for (int i = 0, n = m_tris.size(); i < n; ++i) {
-	//			Triangle* tri = m_tris[i];
+	//			s2::MeshTriangle* tri = m_tris[i];
 	//			for (int i = 0; i < 3; ++i) {
 	//				Node* curr = tri->nodes[i];
 	//				Node* next = tri->nodes[(i+1)%3];
@@ -181,7 +158,7 @@ void Network::OffsetUV(float dx, float dy)
 	//	ClearTriangles();
 	//	for (int i = 0, n = tris.size() / 3, ptr = 0; i < n; ++i)
 	//	{
-	//		Triangle* tri = new Triangle;
+	//		s2::MeshTriangle* tri = new s2::MeshTriangle;
 	//		for (int j = 0; j < 3; ++j) {
 	//			Node* n = new Node(tris[ptr++], m_width, m_height);
 	//			for (int i = 0, m = trans_list.size(); i < m; ++i)
@@ -200,7 +177,7 @@ void Network::OffsetUV(float dx, float dy)
 	//	// set uv between textures
 	//	for (int i = 0, n = m_tris.size(); i < n; ++i)
 	//	{
-	//		Triangle* tri = m_tris[i];
+	//		s2::MeshTriangle* tri = m_tris[i];
 	//		sm::rect r;
 	//		r.makeInfinite();
 	//		for (int i = 0; i < 3; ++i) {
@@ -241,13 +218,13 @@ void Network::TraverseMesh(ee::Visitor<ee::Shape>& visitor) const
 {
 	if (m_nw) {
 		bool has_next;
-		visitor.Visit(m_nw, has_next);
+		visitor.Visit(dynamic_cast<NetworkShape*>(m_nw), has_next);
 	}
 }
 
 bool Network::RemoveMesh(ee::Shape* mesh)
 {
-	if (mesh == m_nw) {
+	if (mesh == dynamic_cast<NetworkShape*>(m_nw)) {
 		delete m_nw, m_nw = NULL;		
 		return true;
 	} else {
@@ -261,7 +238,7 @@ bool Network::InsertMesh(ee::Shape* mesh)
 	if (m_nw) {
 		delete m_nw;
 	}
-	m_nw = new NetworkShape(loop, m_node_radius);
+	m_nw = new NetworkShape(loop->GetVertices(), m_node_radius);
 	return true;
 }
 
@@ -292,7 +269,7 @@ bool Network::InsertInner(const sm::vec2& pos)
 	if (!m_nw) {
 		return false;
 	} else {
-		return m_nw->InsertInner(pos);
+		return dynamic_cast<NetworkShape*>(m_nw)->InsertInner(pos);
 	}
 }
 
@@ -301,7 +278,7 @@ bool Network::RemoveInner(const sm::vec2& pos)
 	if (!m_nw) {
 		return false;
 	} else {
-		return m_nw->RemoveInner(pos);
+		return dynamic_cast<NetworkShape*>(m_nw)->RemoveInner(pos);
 	}
 }
 
@@ -310,66 +287,10 @@ sm::vec2* Network::QueryInner(const sm::vec2& pos)
 	if (!m_nw) {
 		return NULL;
 	} else {
-		return m_nw->QueryInner(pos);
+		return dynamic_cast<NetworkShape*>(m_nw)->QueryInner(pos);
 	}
-}
-
-void Network::RefreshTriangles()
-{
-	ClearTriangles();
-
-	std::vector<sm::vec2> tris;
-	GetTriangulation(tris);
-	
-	LoadFromTriangulation(tris);
 }
  
-void Network::GetTriangulation(std::vector<sm::vec2>& tris)
-{
-	if (m_nw) {
-		ee::Triangulation::Points(m_nw->GetVertices(), m_nw->GetInnerVertices(), tris);
-	}
-}
-
-void Network::LoadFromTriangulation(const std::vector<sm::vec2>& tris)
-{
-	std::map<sm::vec2, Node*, sm::Vector2Cmp> map2Node;
-	Node null;
-	for (int i = 0, n = tris.size(); i < n; ++i)
-		map2Node.insert(std::make_pair(tris[i], &null));
-
-	for (int i = 0, n = tris.size() / 3, ptr = 0; i < n; ++i)
-	{
-		Triangle* tri = new Triangle;
-		for (int j = 0; j < 3; ++j)
-		{
-			std::map<sm::vec2, Node*, sm::Vector2Cmp>::iterator itr 
-				= map2Node.find(tris[ptr++]);
-			assert(itr != map2Node.end());
-			if (itr->second == &null) {
-				itr->second = new Node(itr->first, m_width, m_height);
-			} else {
-				itr->second->AddReference();
-			}
-			tri->nodes[j] = itr->second;
-		}
-		m_tris.push_back(tri);
-	}
-}
-
-void Network::GetRegionBound(std::vector<sm::vec2>& bound) const
-{
-// 	if (m_use_region) {
-// 		const sm::rect& r = m_region.rect;
-// 		bound.push_back(sm::vec2(r.xmin, r.ymin));
-// 		bound.push_back(sm::vec2(r.xmin, r.ymax));
-// 		bound.push_back(sm::vec2(r.xmax, r.ymax));
-// 		bound.push_back(sm::vec2(r.xmax, r.ymin));
-// 	} else {
-// 		std::copy(m_region.nodes.begin(), m_region.nodes.end(), back_inserter(bound));
-// 	}
-}
-
 //void Network::getLinesCutByUVBounds(std::vector<sm::vec2>& lines)
 //{
 //	// hori
@@ -380,7 +301,7 @@ void Network::GetRegionBound(std::vector<sm::vec2>& bound) const
 //		float y = -height*0.5f + height*m_uv_offset.y;
 //		for (int i = 0, n = m_tris.size(); i < n; ++i)
 //		{
-//			Triangle* tri = m_tris[i];
+//			s2::MeshTriangle* tri = m_tris[i];
 //			for (int i = 0; i < 3; ++i) {
 //				Node* sn = tri->nodes[i];
 //				Node* en = tri->nodes[(i+1) % 3];
@@ -404,7 +325,7 @@ void Network::GetRegionBound(std::vector<sm::vec2>& bound) const
 //		float x = -width*0.5f + width*m_uv_offset.x;
 //		for (int i = 0, n = m_tris.size(); i < n; ++i)
 //		{
-//			Triangle* tri = m_tris[i];
+//			s2::MeshTriangle* tri = m_tris[i];
 //			for (int i = 0; i < 3; ++i) {
 //				Node* sn = tri->nodes[i];
 //				Node* en = tri->nodes[(i+1) % 3];

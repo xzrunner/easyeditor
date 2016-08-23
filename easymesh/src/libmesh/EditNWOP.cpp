@@ -1,8 +1,6 @@
 #include "EditNWOP.h"
 #include "StagePanel.h"
-#include "Triangle.h"
 #include "Mesh.h"
-#include "MeshRenderer.h"
 
 #include <ee/Math2D.h>
 #include <ee/panel_msg.h>
@@ -11,6 +9,8 @@
 
 #include <sprite2/RenderParams.h>
 #include <sprite2/S2_RVG.h>
+#include <sprite2/MeshNode.h>
+#include <sprite2/DrawMesh.h>
 #include <SM_Calc.h>
 
 namespace emesh
@@ -122,8 +122,8 @@ bool EditNWOP::OnDraw() const
 {
 	if (Mesh* mesh = static_cast<StagePanel*>(m_wnd)->GetMesh())
 	{
-		MeshRenderer::DrawTexture(mesh, s2::RenderParams());
-		MeshRenderer::DrawInfoXY(mesh);
+		s2::DrawMesh::DrawTexture(mesh, s2::RenderParams());
+		s2::DrawMesh::DrawInfoXY(mesh);
 	}
 
 	s2::RVG::SetColor(s2::Color(51, 204, 51));
@@ -139,8 +139,8 @@ bool EditNWOP::OnDraw() const
 
 void EditNWOP::TranslasteNode(const sm::vec2& offset)
 {
-	std::vector<Node*> nodes;
-	m_selection.Traverse(ee::FetchAllVisitor<Node>(nodes));
+	std::vector<s2::MeshNode*> nodes;
+	m_selection.Traverse(ee::FetchAllVisitor<s2::MeshNode>(nodes));
 	for (int i = 0, n = nodes.size(); i < n; ++i)
 	{
 		nodes[i]->xy += offset;
@@ -150,11 +150,11 @@ void EditNWOP::TranslasteNode(const sm::vec2& offset)
 void EditNWOP::RotateNode(const sm::vec2& dst)
 {
 	float angle = ee::Math2D::GetAngleInDirection(m_center, m_last_pos, dst);
-	std::vector<Node*> nodes;
-	m_selection.Traverse(ee::FetchAllVisitor<Node>(nodes));
+	std::vector<s2::MeshNode*> nodes;
+	m_selection.Traverse(ee::FetchAllVisitor<s2::MeshNode>(nodes));
 	for (int i = 0, n = nodes.size(); i < n; ++i)
 	{
-		Node* node = nodes[i];
+		s2::MeshNode* node = nodes[i];
 		sm::vec2 v = node->xy - m_center;
 		v = sm::rotate_vector(v, angle);
 		node->xy = m_center + v;

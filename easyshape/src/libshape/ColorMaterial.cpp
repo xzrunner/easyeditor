@@ -1,10 +1,10 @@
 #include "ColorMaterial.h"
 
 #include <ee/Math2D.h>
-#include <ee/Triangulation.h>
 
 #include <sprite2/RenderColor.h>
 #include <sprite2/S2_RVG.h>
+#include <SM_Triangulation.h>
 
 namespace eshape
 {
@@ -46,11 +46,11 @@ void ColorMaterial::BuildEnd()
 	ee::Math2D::RemoveDuplicatePoints(m_outline, outline);
 
 	if (!m_segments.empty()) {
-		ee::Triangulation::Lines(m_outline, m_segments, m_tris);
+		sm::triangulate_lines(m_outline, m_segments, m_tris);
 	} else if (!m_holes.empty()) {
-		ee::Triangulation::Holes(m_outline, m_holes, m_tris);
+		sm::triangulate_holes(m_outline, m_holes, m_tris);
 	} else {
-		ee::Triangulation::Normal(m_outline, m_tris);
+		triangulate_normal(m_outline, m_tris);
 	}
 }
 

@@ -1,33 +1,35 @@
-#include "MeshRenderer.h"
+#include "DrawMesh.h"
+#include "MeshTriangle.h"
 #include "Mesh.h"
-#include "Triangle.h"
-#include "color_config.h"
-
-#include <ee/SpriteRenderer.h>
-#include <ee/RenderContextStack.h>
-#include <ee/Math2D.h>
-#include <ee/Symbol.h>
+#include "S2_RVG.h"
+#include "Color.h"
+#include "RenderCtxStack.h"
+#include "RenderParams.h"
+#include "DrawNode.h"
 
 #include <shaderlab.h>
 #include <dtex_facade.h>
-#include <sprite2/S2_RVG.h>
 
 #include <set>
 #include <vector>
 
-namespace emesh
+namespace s2
 {
 
-void MeshRenderer::DrawInfoUV(const Mesh* mesh, const sm::mat4* mt)
+static Color RED	(204, 51, 102, 128);
+static Color GREEN	(102, 204, 51, 128);
+static Color BLUE	(102, 51, 204, 128);
+
+void DrawMesh::DrawInfoUV(const Mesh* mesh, const sm::mat4* mt)
 {
 	std::set<sm::vec2, sm::Vector2Cmp> unique;
 	std::vector<sm::vec2> tmp(3);
-	const std::vector<Triangle*>& tris = mesh->GetTriangles();
+	const std::vector<MeshTriangle*>& tris = mesh->GetTriangles();
 	float w = mesh->GetWidth(),
 		  h = mesh->GetHeight();
 	for (int i = 0, n = tris.size(); i < n; ++i)
 	{
-		Triangle* tri = tris[i];
+		MeshTriangle* tri = tris[i];
 		for (int i = 0; i < 3; ++i)
 		{
 			tmp[i].x = (tri->nodes[i]->uv.x - 0.5f) * w;
@@ -37,23 +39,23 @@ void MeshRenderer::DrawInfoUV(const Mesh* mesh, const sm::mat4* mt)
 			}
 			unique.insert(tmp[i]);
 		}
-		s2::RVG::SetColor(RED);
-		s2::RVG::Polyline(tmp, true);
+		RVG::SetColor(RED);
+		RVG::Polyline(tmp, true);
 	}
 	std::vector<sm::vec2> nodes;
 	copy(unique.begin(), unique.end(), back_inserter(nodes));
-	s2::RVG::SetColor(BLUE);
-	s2::RVG::Circles(nodes, mesh->GetNodeRegion(), true);
+	RVG::SetColor(BLUE);
+	RVG::Circles(nodes, mesh->GetNodeRegion(), true);
 }
 
-void MeshRenderer::DrawInfoXY(const Mesh* mesh, const sm::mat4* mt)
+void DrawMesh::DrawInfoXY(const Mesh* mesh, const sm::mat4* mt)
 {
 	std::set<sm::vec2, sm::Vector2Cmp> unique;
 	std::vector<sm::vec2> tmp(3);
-	const std::vector<Triangle*>& tris = mesh->GetTriangles();
+	const std::vector<MeshTriangle*>& tris = mesh->GetTriangles();
 	for (int i = 0, n = tris.size(); i < n; ++i)
 	{
-		Triangle* tri = tris[i];
+		MeshTriangle* tri = tris[i];
 		for (int i = 0; i < 3; ++i)
 		{
 			tmp[i] = tri->nodes[i]->xy;
@@ -62,44 +64,31 @@ void MeshRenderer::DrawInfoXY(const Mesh* mesh, const sm::mat4* mt)
 			}
 			unique.insert(tmp[i]);
 		}
-		s2::RVG::SetColor(RED);
-		s2::RVG::Polyline(tmp, true);
+		RVG::SetColor(RED);
+		RVG::Polyline(tmp, true);
 	}
 	std::vector<sm::vec2> nodes;
 	copy(unique.begin(), unique.end(), back_inserter(nodes));
-	s2::RVG::SetColor(BLUE);
-	s2::RVG::Circles(nodes, mesh->GetNodeRegion(), true);
+	RVG::SetColor(BLUE);
+	RVG::Circles(nodes, mesh->GetNodeRegion(), true);
 }
 
-void MeshRenderer::DrawTexture(const Mesh* mesh, const s2::RenderParams& params,
-							   const ee::Symbol* base_sym)
+void DrawMesh::DrawTexture(const Mesh* mesh, const RenderParams& params,
+							   const Symbol* base_sym)
 {
 	sl::ShaderMgr::Instance()->GetShader()->Commit();
 
-	ee::RenderContextStack* rc = ee::RenderContextStack::Instance();
-
-	sm::vec2 ori_offset;
-	float ori_scale;
-	rc->GetModelView(ori_offset, ori_scale);
-
-	int ori_width, ori_height;
-	rc->GetProjection(ori_width, ori_height);
-
-	rc->SetModelView(sm::vec2(0, 0), 1);
 	int edge = dtexf_t0_get_texture_size();
-	rc->SetProjection(edge, edge);
-	sl::ShaderMgr::Instance()->GetContext()->SetViewport(0, 0, edge, edge);
+	RenderCtxStack::Instance()->Push(RenderCtx(edge, edge));
 
 	DrawMeshToTmp(mesh, params, base_sym);
 
-	rc->SetModelView(ori_offset, ori_scale);
-	rc->SetProjection(ori_width, ori_height);
-	sl::ShaderMgr::Instance()->GetContext()->SetViewport(0, 0, ori_width, ori_height);
+	RenderCtxStack::Instance()->Pop();
 
 	DrawTmpToScreen(mesh, params);
 }
 
-void MeshRenderer::DrawMesh(const Mesh* mesh, const s2::RenderParams& params, int texid)
+void DrawMesh::DrawOnlyMesh(const Mesh* mesh, const RenderParams& params, int texid)
 {
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	mgr->SetShader(sl::SPRITE2);
@@ -111,10 +100,10 @@ void MeshRenderer::DrawMesh(const Mesh* mesh, const s2::RenderParams& params, in
 	float ori_w = mesh->GetWidth(),
 		  ori_h = mesh->GetHeight();
 
-	const std::vector<Triangle*>& tris = mesh->GetTriangles();
+	const std::vector<MeshTriangle*>& tris = mesh->GetTriangles();
 	for (int i = 0, n = tris.size(); i < n; ++i)
 	{
-		Triangle* tri = tris[i];
+		MeshTriangle* tri = tris[i];
 		sm::vec2 vertices[4], texcoords[4];
 		for (int i = 0; i < 3; ++i)
 		{
@@ -129,18 +118,18 @@ void MeshRenderer::DrawMesh(const Mesh* mesh, const s2::RenderParams& params, in
 	}
 }
 
-void MeshRenderer::DrawMeshToTmp(const Mesh* mesh, const s2::RenderParams& params,
-								 const ee::Symbol* base_sym)
+void DrawMesh::DrawMeshToTmp(const Mesh* mesh, const RenderParams& params,
+								 const Symbol* base_sym)
 {
 	dtexf_t0_bind();
 	dtexf_t0_clear(0, -2, 2, 0);
 
-	s2::RenderParams _params = params;
+	RenderParams _params = params;
 	_params.mt.Identity();
 	if (base_sym) {
-		ee::SpriteRenderer::Instance()->Draw(base_sym, _params);
+		DrawNode::Draw(base_sym, _params);
 	} else {
-		ee::SpriteRenderer::Instance()->Draw(mesh->GetBaseSymbol(), _params);
+		DrawNode::Draw(mesh->GetBaseSymbol(), _params);
 	}
 
 	sl::ShaderMgr::Instance()->GetShader()->Commit();
@@ -148,9 +137,9 @@ void MeshRenderer::DrawMeshToTmp(const Mesh* mesh, const s2::RenderParams& param
 	dtexf_t0_unbind();
 }
 
-void MeshRenderer::DrawTmpToScreen(const Mesh* mesh, const s2::RenderParams& params)
+void DrawMesh::DrawTmpToScreen(const Mesh* mesh, const RenderParams& params)
 {
-	DrawMesh(mesh, params, dtexf_t0_get_texture_id());
+	DrawOnlyMesh(mesh, params, dtexf_t0_get_texture_id());
 }
 
 }

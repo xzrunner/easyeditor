@@ -92,7 +92,7 @@ void WheelJoint::DrawFootBLine(const sm::vec2& worldAnchorA, const sm::vec2& wor
 	sm::vec2 otherA = worldAnchorA + m_local_axis_a;
 
 	sm::vec2 foot;
-	ee::Math2D::GetFootOfPerpendicular(worldAnchorA, otherA, worldAnchorB, &foot);
+	sm::get_foot_of_perpendicular(worldAnchorA, otherA, worldAnchorB, &foot);
 
 	s2::RVG::SetColor(s2::Color(255, 0, 0));
 	s2::RVG::LineWidth(1);

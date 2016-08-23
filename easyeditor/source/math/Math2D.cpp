@@ -502,48 +502,6 @@ int Math2D::GetCircumcenter(const sm::vec2& pos1, const sm::vec2& pos2, const sm
 	return 0;
 }
 
-int Math2D::GetFootOfPerpendicular(const sm::vec2& s, const sm::vec2& e, const sm::vec2& out, sm::vec2* foot)
-{
-	const float dx = e.x - s.x, dy = e.y - s.y;
-	const float dxSquare = dx * dx, dySquare = dy * dy;
-
-	if (dxSquare + dySquare < FLT_EPSILON)
-	{
-		*foot = s;
-		return -1;
-	}
-
-	if (fabs(s.x - e.x) > fabs(s.y - e.y))
-	{
-		foot->x = (dxSquare * out.x + dySquare * s.x + dx * dy * (out.y - s.y)) / (dxSquare + dySquare);
-		if (s.x == e.x)
-		{
-			foot->y = out.y;
-		}
-		else
-		{
-			foot->y = sm::find_y_on_seg(s, e, foot->x);
-		}
-	}
-	else
-	{
-		foot->y = (dySquare * out.y + dxSquare * s.y + dx * dy * (out.x - s.x)) / (dxSquare + dySquare);
-		if (s.y == e.y)
-		{
-			foot->x = out.x;
-		}
-		else
-		{
-			foot->x = sm::find_x_on_seg(s, e, foot->y);
-		}
-	}
-
-	if (IsBetween(s.x, e.x, foot->x) && IsBetween(s.y, e.y, foot->y))
-		return 0;
-	else
-		return -1;
-}
-
 void Math2D::GetNearestPosOnLineToPoint(const sm::vec2& p, const std::vector<sm::vec2>& l, sm::vec2* nearest, size_t* index)
 {
 	size_t iNearestPos = 0;
@@ -563,7 +521,7 @@ void Math2D::GetNearestPosOnLineToPoint(const sm::vec2& p, const std::vector<sm:
 	if (iNearestPos != l.size() - 1)
 	{
 		sm::vec2 foot;
-		if (GetFootOfPerpendicular(l.at(iNearestPos), l.at(iNearestPos + 1), p, &foot) == 0)
+		if (sm::get_foot_of_perpendicular(l.at(iNearestPos), l.at(iNearestPos + 1), p, &foot) == 0)
 		{
 			float dis = sm::dis_pos_to_pos(foot, p);
 			if (dis < nearestDis)
@@ -578,7 +536,7 @@ void Math2D::GetNearestPosOnLineToPoint(const sm::vec2& p, const std::vector<sm:
 	if (iNearestPos != 0)
 	{
 		sm::vec2 foot;
-		if (GetFootOfPerpendicular(l.at(iNearestPos), l.at(iNearestPos - 1), p, &foot) == 0)
+		if (sm::get_foot_of_perpendicular(l.at(iNearestPos), l.at(iNearestPos - 1), p, &foot) == 0)
 		{
 			float dis = sm::dis_pos_to_pos(foot, p);
 			if (dis < nearestDis)

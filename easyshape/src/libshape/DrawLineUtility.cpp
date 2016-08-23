@@ -2,6 +2,8 @@
 
 #include <ee/Math2D.h>
 
+#include <SM_Calc.h>
+
 #include <wx/defs.h>
 
 namespace eshape
@@ -35,7 +37,7 @@ sm::vec2 DrawLineUtility::FixPosTo8DirStraight(const sm::vec2& last,
 	if (dxyDown < nearest)
 	{
 		nearest = dxyDown;
-		ee::Math2D::GetFootOfPerpendicular(last, other, curr, &fixed);
+		sm::get_foot_of_perpendicular(last, other, curr, &fixed);
 	}
 
 	other.Set(last.x + 1, last.y + 1);
@@ -43,7 +45,7 @@ sm::vec2 DrawLineUtility::FixPosTo8DirStraight(const sm::vec2& last,
 	if (dxyUp < nearest)
 	{
 		nearest = dxyUp;
-		ee::Math2D::GetFootOfPerpendicular(last, other, curr, &fixed);
+		sm::get_foot_of_perpendicular(last, other, curr, &fixed);
 	}
 
 	return fixed;

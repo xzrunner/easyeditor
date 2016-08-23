@@ -1,72 +1,61 @@
 #ifndef _EASYMESH_MESH_H_
 #define _EASYMESH_MESH_H_
 
-#include <json/json.h>
+#include <ee/Visitor.h>
+
+#include <sprite2/Mesh.h>
 
 #include <SM_Vector.h>
 #include <SM_Rect.h>
-#include <CU_RefCountObj.h>
-#include <CU_Cloneable.h>
 
-namespace ee { class Symbol; class Rect; class RenderParams; }
+#include <json/json.h>
+
+namespace ee { class Symbol; class Rect; class RenderParams; class Shape; }
+
+namespace s2 { class MeshNode; class MeshTriangle; }
 
 namespace emesh
 {
 
-class Node;
-class Triangle;
-
-class Mesh : public cu::RefCountObj, public cu::Cloneable
+class Mesh : public virtual s2::Mesh
 {
 public:
 	Mesh();
 	Mesh(const Mesh& mesh);
 	Mesh(const ee::Symbol* base);
-	virtual ~Mesh();
+
+// 	/**
+// 	 *  @interface
+// 	 *    Cloneable
+// 	 */
+// 	virtual Mesh* Clone() const { return NULL; }
 
 	/**
 	 *  @interface
-	 *    Cloneable
+	 *    Mesh
 	 */
-	virtual Mesh* Clone() const { return NULL; }
-
 	virtual void Load(const Json::Value& value) {}
 	virtual void Store(Json::Value& value) const {}
-
-	virtual void OffsetUV(float dx, float dy) {}
 	virtual void Update() {}
 	virtual void Refresh() {}
 
-	Node* PointQueryNode(const sm::vec2& p);
-	void RectQueryNodes(const sm::rect& r, std::vector<Node*>& nodes);
+	/**
+	 *  @interface
+	 *    Editable
+	 */
+	virtual void TraverseMesh(ee::Visitor<ee::Shape>& visitor) const {}
+	virtual bool RemoveMesh(ee::Shape* mesh) { return false; }
+	virtual bool InsertMesh(ee::Shape* mesh) { return false; }
+	virtual bool ClearMesh() { return false; }
+	virtual void Reset() {}
+	virtual void Clear() {}
 
-	const ee::Symbol* GetBaseSymbol() const { return m_base; }
-
-	const std::vector<Triangle*>& GetTriangles() const { return m_tris; }
-
-	float GetNodeRegion() const { return m_node_radius; }
-
-	float GetWidth() const { return m_width; }
-	float GetHeight() const { return m_height; }
-
-	sm::rect GetRegion() const;
+	s2::MeshNode* PointQueryNode(const sm::vec2& p);
+	void RectQueryNodes(const sm::rect& r, std::vector<s2::MeshNode*>& nodes);
 
 protected:
-	void ClearTriangles();
-
 	void StoreTriangles(Json::Value& value) const;
 	void LoadTriangles(const Json::Value& value);
-
-protected:
-	//int m_texid;
-	//std::string m_tex_filepath;		// for dtex
-
-	const ee::Symbol* m_base;
-	float m_width, m_height;	
-
-	std::vector<Triangle*> m_tris;
-
-	float m_node_radius;
 
 }; // Mesh
 

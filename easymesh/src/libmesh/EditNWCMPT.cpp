@@ -1,7 +1,7 @@
 #include "EditNWCMPT.h"
 #include "EditNWOP.h"
 #include "StagePanel.h"
-#include "EditableMesh.h"
+#include "Mesh.h"
 
 #include <ee/DrawRectangleOP.h>
 #include <ee/panel_msg.h>
@@ -30,7 +30,7 @@ wxSizer* EditNWCMPT::InitLayout()
 
 void EditNWCMPT::OnReset(wxCommandEvent& event)
 {
-	if (EditableMesh* mesh = static_cast<EditableMesh*>(m_stage->GetMesh())) {
+	if (Mesh* mesh = m_stage->GetMesh()) {
 		mesh->Reset();
 	}
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();

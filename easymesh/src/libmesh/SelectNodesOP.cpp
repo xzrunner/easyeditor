@@ -8,6 +8,7 @@
 #include <ee/EditPanelImpl.h>
 
 #include <sprite2/S2_RVG.h>
+#include <sprite2/MeshNode.h>
 
 namespace emesh
 {
@@ -33,7 +34,7 @@ bool SelectNodesOP::OnMouseLeftDown(int x, int y)
 	if (!mesh) return false;
 
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-	Node* selected = mesh->PointQueryNode(pos);
+	s2::MeshNode* selected = mesh->PointQueryNode(pos);
 	if (selected)
 	{
 		if (m_stage->GetKeyState(WXK_CONTROL))
@@ -80,7 +81,7 @@ bool SelectNodesOP::OnMouseLeftUp(int x, int y)
 	{
 		sm::vec2 end = m_stage->TransPosScrToProj(x, y);
 		sm::rect rect(m_first_pos, end);
-		std::vector<Node*> nodes;
+		std::vector<s2::MeshNode*> nodes;
 		mesh->RectQueryNodes(rect, nodes);
 		for (size_t i = 0, n = nodes.size(); i < n; ++i) {
 			m_selection.Add(nodes[i]);
@@ -111,8 +112,8 @@ bool SelectNodesOP::OnDraw() const
 			return true;
 	}
 
-	std::vector<Node*> nodes;
-	m_selection.Traverse(ee::FetchAllVisitor<Node>(nodes));
+	std::vector<s2::MeshNode*> nodes;
+	m_selection.Traverse(ee::FetchAllVisitor<s2::MeshNode>(nodes));
 	std::vector<sm::vec2> points;
 	points.reserve(nodes.size());
 	for (int i = 0, n = nodes.size(); i < n; ++i)

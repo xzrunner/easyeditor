@@ -1070,15 +1070,15 @@ int CocoPacker::ParserMesh(const emesh::Sprite* spr)
 		for (int i = 0; i < frame; ++i)
 		{
 			// todo 只是具体strip的情况，不支持mesh的旋转
-			const std::vector<emesh::Triangle*>& tris = shape->GetTriangles();
+			const std::vector<s2::MeshTriangle*>& tris = shape->GetTriangles();
 
 			int quad_size = tris.size() / 2;
 			frame_size.push_back(quad_size);
 
 			for (int j = 0; j < quad_size; ++j)
 			{
-				emesh::Triangle* right_down = tris[j*2];
-				emesh::Triangle* left_up = tris[j*2+1];
+				s2::MeshTriangle* right_down = tris[j*2];
+				s2::MeshTriangle* left_up = tris[j*2+1];
 
 				// id
 				lua::TableAssign ta(*m_gen, "picture", false, false);
@@ -1129,11 +1129,11 @@ int CocoPacker::ParserMesh(const emesh::Sprite* spr)
 	// 打包普通emesh::Mesh
 	else if (dynamic_cast<emesh::Network*>(shape))
 	{
-		const std::vector<emesh::Triangle*>& tris = shape->GetTriangles();
+		const std::vector<s2::MeshTriangle*>& tris = shape->GetTriangles();
 		frame_size.push_back(tris.size());
 		for (int i = 0, n = tris.size(); i < n; ++i)
 		{
-			emesh::Triangle* tri = tris[i];
+			s2::MeshTriangle* tri = tris[i];
 
 			// id
 			lua::TableAssign ta(*m_gen, "picture", false, false);
@@ -1297,11 +1297,11 @@ int CocoPacker::ParserTerrain2D(const eterrain2d::Sprite* spr)
 
 			for (int j = 0; j < meshes.size(); ++j) {
 				const eterrain2d::MeshShape* mesh = meshes[j];
-				const std::vector<emesh::Triangle*>& tris = mesh->GetTriangles();
+				const std::vector<s2::MeshTriangle*>& tris = mesh->GetTriangles();
 				for (int k = 0; k < tris.size(); ++k) {
 					// same with 打包普通emesh::Mesh
 
-					emesh::Triangle* tri = tris[k];
+					s2::MeshTriangle* tri = tris[k];
 
 					// src
 					sm::vec2 src[4];

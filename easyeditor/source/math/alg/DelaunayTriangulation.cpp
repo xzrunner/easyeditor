@@ -67,7 +67,7 @@ void DelaunayTriangulation::GetAllTrisInRegion(std::vector<std::vector<sm::vec2>
 		std::vector<sm::vec2> bound;
 		src->GetNodesPos(bound);
 
-		sm::vec2 p = Math2D::GetTriGravityCenter(bound[0], bound[1], bound[2]);
+		sm::vec2 p = sm::get_tri_gravity_center(bound[0], bound[1], bound[2]);
 		if (sm::is_point_in_area(p, region))
 			triBounds.push_back(bound);
 	}
@@ -82,7 +82,7 @@ void DelaunayTriangulation::GetAllTrisInRegion(std::vector<sm::vec2>& triBounds,
 		std::vector<sm::vec2> bound;
 		src->GetNodesPos(bound);
 
-		sm::vec2 p = Math2D::GetTriGravityCenter(bound[0], bound[1], bound[2]);
+		sm::vec2 p = sm::get_tri_gravity_center(bound[0], bound[1], bound[2]);
 		if (sm::is_point_in_area(p, region))
 			copy(bound.begin(), bound.end(), back_inserter(triBounds));
 	}

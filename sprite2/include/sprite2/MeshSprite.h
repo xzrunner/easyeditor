@@ -20,6 +20,9 @@ public:
 
 	VI_DUMMY_FUNC
 
+private:
+	
+
 }; // MeshSprite
 
 }

@@ -51,7 +51,7 @@ void ScaleSpriteState::Scale(const sm::vec2& curr)
 	sm::vec2 ori = ctrls[m_ctrl_node.type];
 	sm::vec2 center = m_spr->GetPosition() + m_spr->GetOffset();
 	sm::vec2 fix;
-	Math2D::GetFootOfPerpendicular(center, ori, curr, &fix);
+	sm::get_foot_of_perpendicular(center, ori, curr, &fix);
 
 	float scale_times = sm::dis_pos_to_pos(center, fix) / sm::dis_pos_to_pos(center, ori);
 	if (fabs(scale_times - 1) < FLT_EPSILON) {

@@ -44,13 +44,13 @@ void ShearSpriteState::Shear(const sm::vec2& curr)
 	sm::vec2 ctrls[8];
 	SpriteCtrlNode::GetSpriteCtrlNodes(m_spr, ctrls);
 	if (m_ctrl_node.type == SpriteCtrlNode::UP) {
-		Math2D::GetFootOfPerpendicular(ctrls[SpriteCtrlNode::LEFT_UP], ctrls[SpriteCtrlNode::RIGHT_UP], curr, &pos);
+		sm::get_foot_of_perpendicular(ctrls[SpriteCtrlNode::LEFT_UP], ctrls[SpriteCtrlNode::RIGHT_UP], curr, &pos);
 	} else if (m_ctrl_node.type == SpriteCtrlNode::DOWN) {
-		Math2D::GetFootOfPerpendicular(ctrls[SpriteCtrlNode::LEFT_DOWN], ctrls[SpriteCtrlNode::RIGHT_DOWN], curr, &pos);
+		sm::get_foot_of_perpendicular(ctrls[SpriteCtrlNode::LEFT_DOWN], ctrls[SpriteCtrlNode::RIGHT_DOWN], curr, &pos);
 	} else if (m_ctrl_node.type == SpriteCtrlNode::LEFT) {
-		Math2D::GetFootOfPerpendicular(ctrls[SpriteCtrlNode::LEFT_UP], ctrls[SpriteCtrlNode::LEFT_DOWN], curr, &pos);
+		sm::get_foot_of_perpendicular(ctrls[SpriteCtrlNode::LEFT_UP], ctrls[SpriteCtrlNode::LEFT_DOWN], curr, &pos);
 	} else if (m_ctrl_node.type == SpriteCtrlNode::RIGHT) {
-		Math2D::GetFootOfPerpendicular(ctrls[SpriteCtrlNode::RIGHT_UP], ctrls[SpriteCtrlNode::RIGHT_DOWN], curr, &pos);
+		sm::get_foot_of_perpendicular(ctrls[SpriteCtrlNode::RIGHT_UP], ctrls[SpriteCtrlNode::RIGHT_DOWN], curr, &pos);
 	}
 
 	// M * p = p'
@@ -149,11 +149,11 @@ void ShearSpriteState::Shear2(const sm::vec2& curr)
 		{
 			sm::vec2 ori, now;
 			if (m_ctrl_node.type == SpriteCtrlNode::UP) {
-				Math2D::GetFootOfPerpendicular(ctrls[SpriteCtrlNode::LEFT_UP], ctrls[SpriteCtrlNode::RIGHT_UP], center, &ori);
-				Math2D::GetFootOfPerpendicular(ctrls[SpriteCtrlNode::LEFT_UP], ctrls[SpriteCtrlNode::RIGHT_UP], curr, &now);
+				sm::get_foot_of_perpendicular(ctrls[SpriteCtrlNode::LEFT_UP], ctrls[SpriteCtrlNode::RIGHT_UP], center, &ori);
+				sm::get_foot_of_perpendicular(ctrls[SpriteCtrlNode::LEFT_UP], ctrls[SpriteCtrlNode::RIGHT_UP], curr, &now);
 			} else {
-				Math2D::GetFootOfPerpendicular(ctrls[SpriteCtrlNode::LEFT_DOWN], ctrls[SpriteCtrlNode::RIGHT_DOWN], center, &ori);
-				Math2D::GetFootOfPerpendicular(ctrls[SpriteCtrlNode::LEFT_DOWN], ctrls[SpriteCtrlNode::RIGHT_DOWN], curr, &now);
+				sm::get_foot_of_perpendicular(ctrls[SpriteCtrlNode::LEFT_DOWN], ctrls[SpriteCtrlNode::RIGHT_DOWN], center, &ori);
+				sm::get_foot_of_perpendicular(ctrls[SpriteCtrlNode::LEFT_DOWN], ctrls[SpriteCtrlNode::RIGHT_DOWN], curr, &now);
 			}
 
 			float dis = sm::dis_pos_to_pos(ori, now);
@@ -169,11 +169,11 @@ void ShearSpriteState::Shear2(const sm::vec2& curr)
 		{
 			sm::vec2 ori, now;
 			if (m_ctrl_node.type == SpriteCtrlNode::LEFT) {
-				Math2D::GetFootOfPerpendicular(ctrls[SpriteCtrlNode::LEFT_DOWN], ctrls[SpriteCtrlNode::LEFT_UP], center, &ori);
-				Math2D::GetFootOfPerpendicular(ctrls[SpriteCtrlNode::LEFT_DOWN], ctrls[SpriteCtrlNode::LEFT_UP], curr, &now);
+				sm::get_foot_of_perpendicular(ctrls[SpriteCtrlNode::LEFT_DOWN], ctrls[SpriteCtrlNode::LEFT_UP], center, &ori);
+				sm::get_foot_of_perpendicular(ctrls[SpriteCtrlNode::LEFT_DOWN], ctrls[SpriteCtrlNode::LEFT_UP], curr, &now);
 			} else {
-				Math2D::GetFootOfPerpendicular(ctrls[SpriteCtrlNode::RIGHT_DOWN], ctrls[SpriteCtrlNode::RIGHT_UP], center, &ori);
-				Math2D::GetFootOfPerpendicular(ctrls[SpriteCtrlNode::RIGHT_DOWN], ctrls[SpriteCtrlNode::RIGHT_UP], curr, &now);
+				sm::get_foot_of_perpendicular(ctrls[SpriteCtrlNode::RIGHT_DOWN], ctrls[SpriteCtrlNode::RIGHT_UP], center, &ori);
+				sm::get_foot_of_perpendicular(ctrls[SpriteCtrlNode::RIGHT_DOWN], ctrls[SpriteCtrlNode::RIGHT_UP], curr, &now);
 			}
 
 			float dis = sm::dis_pos_to_pos(ori, now);

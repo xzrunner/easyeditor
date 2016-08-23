@@ -6,7 +6,6 @@
 namespace emesh
 {
 
-class Node;
 class StagePanel;
 class EditNWOP : public SelectNodesOP
 {

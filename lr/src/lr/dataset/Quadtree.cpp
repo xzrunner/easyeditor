@@ -3,13 +3,13 @@
 #include <ee/SpriteRenderer.h>
 #include <ee/Math2D.h>
 #include <ee/color_config.h>
-#include <ee/Triangulation.h>
 
 #include <easyshape.h>
 
 #include <sprite2/S2_RVG.h>
 #include <sprite2/BoundingBox.h>
 #include <SM_Test.h>
+#include <SM_Triangulation.h>
 
 #include <queue>
 
@@ -279,7 +279,7 @@ GetContainArea(const ee::Sprite* spr) const
 
 	std::vector<sm::vec2> lines;
 	std::vector<sm::vec2> tris;
-	ee::Triangulation::LinesAndLoops(bound, lines, loops, tris);
+	sm::triangulate_lines_and_loops(bound, lines, loops, tris);
 	for (int i = 0, n = tris.size() / 3; i < n; ++i)
 	{
 		sm::vec2 center = (tris[i*3] + tris[i*3+1] + tris[i*3+2]) / 3;

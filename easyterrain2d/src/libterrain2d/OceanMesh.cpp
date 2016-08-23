@@ -3,10 +3,11 @@
 #include "config.h"
 
 #include <ee/Math2D.h>
-#include <ee/Triangulation.h>
 #include <ee/ImageSymbol.h>
 
+#include <sprite2/MeshTriangle.h>
 #include <shaderlab.h>
+#include <SM_Triangulation.h>
 
 namespace eterrain2d
 {
@@ -57,7 +58,7 @@ void OceanMesh::Build()
 	CalSegments(r, segs);
 
 	std::vector<sm::vec2> tris_vertices;
-	ee::Triangulation::Lines(bound, segs, tris_vertices);
+	sm::triangulate_lines(bound, segs, tris_vertices);
 	if (tris_vertices.empty()) {
 		return;
 	}
@@ -120,22 +121,22 @@ void OceanMesh::Draw(const s2::RenderParams& params, bool draw_tris) const
 	if (m_blend_open && m_image1) {
 		shader->SetColor(s2::Color(255, 255, 255, (int)(m_blend_base * 255 + 0.5f)).ToABGR(), 0);
 		for (int i = 0, n = m_grids.size(); i < n; ++i) {
-			emesh::MeshRenderer::DrawMesh(m_grids[i], params, m_image0->GetTexID());
+			s2::DrawMesh::DrawOnlyMesh(m_grids[i], params, m_image0->GetTexID());
 		}
 		shader->SetColor(s2::Color(255, 255, 255, (int)((1 - m_blend_base) * 255 + 0.5f)).ToABGR(), 0);
 		for (int i = 0, n = m_grids.size(); i < n; ++i) {
-			emesh::MeshRenderer::DrawMesh(m_grids[i], params, m_image1->GetTexID());
+			s2::DrawMesh::DrawOnlyMesh(m_grids[i], params, m_image1->GetTexID());
 		}
 	} else {
 		shader->SetColor(0xffffffff, 0);
 		for (int i = 0, n = m_grids.size(); i < n; ++i) {
-			emesh::MeshRenderer::DrawTexture(m_grids[i], params);
+			s2::DrawMesh::DrawTexture(m_grids[i], params);
 		}
 	}
 
 	if (draw_tris) {
 		for (int i = 0, n = m_grids.size(); i < n; ++i) {
-			emesh::MeshRenderer::DrawInfoXY(m_grids[i]);
+			s2::DrawMesh::DrawInfoXY(m_grids[i]);
 		}
 	}
 }
@@ -322,11 +323,11 @@ void OceanMesh::UpdateWave(float during)
 	sm::vec2 sz = m_image0->GetBounding().Size();
 	for (int i = 0, n = m_grids.size(); i < n; ++i) {
 		MeshShape* grid = m_grids[i];
-		const std::vector<emesh::Triangle*>& tris = grid->GetTriangles();
+		const std::vector<s2::MeshTriangle*>& tris = grid->GetTriangles();
 		for (int j = 0, m = tris.size(); j < m; ++j) {
-			emesh::Triangle* tri = tris[j];
+			s2::MeshTriangle* tri = tris[j];
 			for (int k = 0; k < 3; ++k) {
-				emesh::Node* n = tri->nodes[k];
+				s2::MeshNode* n = tri->nodes[k];
 				if (m_lock_bound && *((bool*)n->ud)) {
 					continue;
 				}

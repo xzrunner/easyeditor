@@ -40,7 +40,7 @@
 //	std::vector<sm::vec2> bounding;
 //	ee::Math2D::removeDuplicatePoints(vertices, bounding);
 //
-//	ee::Triangulation::lines(bounding, segments, m_tris);
+//	sm::triangulate_lines(bounding, segments, m_tris);
 //}
 //
 //}

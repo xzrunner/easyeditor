@@ -1,6 +1,8 @@
 #ifndef _EASYNAVMESH_MESH_H_
 #define _EASYNAVMESH_MESH_H_
 
+#include <SM_Vector.h>
+
 #include <vector>
 
 namespace ee { class Rect; }

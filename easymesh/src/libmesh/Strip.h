@@ -1,39 +1,42 @@
 #ifndef _EASYMESH_STRIP_H_
 #define _EASYMESH_STRIP_H_
 
-#include "EditableMesh.h"
+#include "Mesh.h"
+
+#include <sprite2/StripMesh.h>
 
 namespace emesh
 {
 
-class Node;
-class Triangle;
-
-class Strip : public EditableMesh
+class Strip : public Mesh, public s2::StripMesh
 {
 public:
 	Strip();
 	Strip(const Strip& strip);
 	Strip(const ee::Symbol* base);
 
-	//
-	// Cloneable interface
-	//
-	virtual Strip* Clone() const;
+// 	/**
+// 	 *  @interface
+// 	 *    Cloneable
+// 	 */
+// 	virtual Strip* Clone() const;
 
-	//
-	// Mesh interface
-	//
+	/**
+	 *  @interface
+	 *    Mesh
+	 */
 	virtual void Load(const Json::Value& value);
 	virtual void Store(Json::Value& value) const;
-
 	virtual void OffsetUV(float dx, float dy);
 
+	/**
+	 *  @interface
+	 *    Editable
+	 */
 	virtual void TraverseMesh(ee::Visitor<ee::Shape>& visitor) const {}
 	virtual bool RemoveMesh(ee::Shape* shape) { return false; }
 	virtual bool InsertMesh(ee::Shape* shape) { return false; }
 	virtual bool ClearMesh() { return false; }
-
 	virtual void Reset();
 	virtual void Clear();
 
@@ -45,54 +48,23 @@ public:
 	static const char* GetType() { return "strip"; }
 
 private:
-	void InitBound();
+//	void InitBound();
 	
-	void RefreshTriangles();
-	void CopyTriangles(const Strip& strip);
+// 	void RefreshTriangles();
+// 	void CopyTriangles(const Strip& strip);
 
 	void AbsorbNodeToRegion(sm::vec2& node);
 	void RemoveCornerFromNodes();
 
 	void GetTransList(std::vector<std::pair<sm::vec2, sm::vec2> >& trans_list) const;
 
-	static void TranslateNode(Node* node, const std::vector<std::pair<sm::vec2, sm::vec2> >& trans_list);
+	static void TranslateNode(s2::MeshNode* node, const std::vector<std::pair<sm::vec2, sm::vec2> >& trans_list);
 	static void TranslateNode(sm::vec2& node, const std::vector<std::pair<sm::vec2, sm::vec2> >& trans_list);
 
 	static void MapUV2XY(const std::vector<sm::vec2>& nodes, int index, const sm::vec2& pos, 
 		std::vector<std::pair<sm::vec2, sm::vec2> >& trans_list);
 
 private:
-	class NodeList
-	{
-	public:
-		void Reset(const sm::vec2& begin,
-			const sm::vec2& end);
-
-		void Insert(const sm::vec2& p);
-		void Remove(int idx);
-
-		int GetNodeInsertPos(const sm::vec2& p, sm::vec2& nearest);
-
-		int QueryIndex(const sm::vec2& p, float radius) const;
-		sm::vec2* QueryPointer(const sm::vec2& p, float radius);
-
-		bool IsRegionContain(const sm::vec2& p) const;
-
-		int Size() const { return m_ori.size(); }
-
-		void Sort();
-
-	private:
-		static void Insert(std::vector<sm::vec2>& nodes, const sm::vec2& p);
-
-	public:
-		std::vector<sm::vec2> m_ori, m_ext;
-
-	}; // NodeList
-
-private:
-	NodeList m_left_nodes, m_right_nodes;
-
 	float m_uv_offset;
 
 }; // Strip 

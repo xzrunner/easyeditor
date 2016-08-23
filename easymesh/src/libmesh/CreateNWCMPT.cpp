@@ -4,7 +4,7 @@
 #include "StagePanel.h"
 #include "FileIO.h"
 #include "MeshFactory.h"
-#include "EditableMesh.h"
+#include "Mesh.h"
 
 #include <ee/shape_msg.h>
 
@@ -94,7 +94,7 @@ void CreateNWCMPT::onCopy(wxCommandEvent& event)
 
 void CreateNWCMPT::onClear(wxCommandEvent& event)
 {
-	if (EditableMesh* mesh = static_cast<EditableMesh*>(m_stage->GetMesh())) {
+	if (Mesh* mesh = m_stage->GetMesh()) {
 		mesh->Clear();
 	}
 	ee::ClearShapeSJ::Instance()->Clear();

@@ -4,11 +4,12 @@
 #include <ee/FileHelper.h>
 #include <ee/FileType.h>
 #include <ee/JsonSerializer.h>
-#include <ee/Triangulation.h>
-
-#include <wx/arrstr.h>
 
 #include <easyimage.h>
+
+#include <SM_Triangulation.h>
+
+#include <wx/arrstr.h>
 
 #include <fstream>
 
@@ -74,9 +75,9 @@ void OutlineToTriStrip::Trigger(const std::string& dir) const
 		}
 
 		std::vector<sm::vec2> tris;
-		ee::Triangulation::Normal(vertices, tris);
+		triangulate_normal(vertices, tris);
 		std::vector<std::vector<sm::vec2> > strips;
-//		ee::Triangulation::strips(tris, strips);
+//		ee::SGI::Do(tris, strips);
 		strips.push_back(tris);
 
 		Json::Value value_out;

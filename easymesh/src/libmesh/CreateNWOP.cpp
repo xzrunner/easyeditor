@@ -3,11 +3,12 @@
 #include "Symbol.h"
 #include "Mesh.h"
 #include "Network.h"
-#include "MeshRenderer.h"
 
 #include <ee/Image.h>
 #include <ee/panel_msg.h>
 #include <ee/SpriteRenderer.h>
+
+#include <sprite2/DrawMesh.h>
 
 namespace emesh
 {
@@ -142,7 +143,7 @@ bool CreateNWOP::OnDraw() const
 
 	if (Mesh* mesh = m_stage->GetMesh()) {
 		ee::SpriteRenderer::Instance()->Draw(mesh->GetBaseSymbol());
-		MeshRenderer::DrawInfoUV(mesh);
+		s2::DrawMesh::DrawInfoUV(mesh);
 	}
 
 	eshape::EditPolylineOP<eshape::DrawLoopOP, eshape::SelectNodesOP>::OnDraw();

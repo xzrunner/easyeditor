@@ -7,6 +7,8 @@
 
 #include <easyterrain2d.h>
 
+#include <sprite2/MeshTriangle.h>
+
 namespace erespacker
 {
 
@@ -89,10 +91,10 @@ void Terrain2DBuilder::Load(const eterrain2d::Symbol* sym, PackAnimation* anim)
 		for (int j = 0, m = meshes.size(); j < m; ++j)
 		{
 			const eterrain2d::MeshShape* mesh = meshes[j];
-			const std::vector<emesh::Triangle*>& tris = mesh->GetTriangles();
+			const std::vector<s2::MeshTriangle*>& tris = mesh->GetTriangles();
 			for (int k = 0, l = tris.size(); k < l; ++k)
 			{
-				emesh::Triangle* tri = tris[k];
+				s2::MeshTriangle* tri = tris[k];
 
 				PackPicture::Quad quad;
 

@@ -534,10 +534,10 @@ void ExtractOutlineFine::ReduceEdge(float area_tol, float perimeter_tol)
 				continue;
 			}
 
-			bool inside_s = ee::Math2D::IsBetween(start_prev.x, start.x, intersect.x) 
-				&& ee::Math2D::IsBetween(start_prev.y, start.y, intersect.y);
-			bool inside_e = ee::Math2D::IsBetween(end.x, end_next.x, intersect.x) 
-				&& ee::Math2D::IsBetween(end.y, end_next.y, intersect.y);
+			bool inside_s = sm::is_between(start_prev.x, start.x, intersect.x) 
+				&& sm::is_between(start_prev.y, start.y, intersect.y);
+			bool inside_e = sm::is_between(end.x, end_next.x, intersect.x) 
+				&& sm::is_between(end.y, end_next.y, intersect.y);
 			// add new triangle, area increase & perimeter increase
 			if (!inside_s && !inside_e) 
 			{

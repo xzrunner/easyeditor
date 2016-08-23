@@ -20,9 +20,6 @@ public:
 	//
 	//////////////////////////////////////////////////////////////////////////
 
-	// To check if test at middle of bound0 and bound1
-	static bool IsBetween(float bound0, float bound1, float test);
-
 	// To check if the 2 point overlapped with each other.
 	static bool IsTheSamePos(const sm::vec2& p0, const sm::vec2& p1, const float tolerance = FLT_EPSILON);
 
@@ -97,10 +94,6 @@ public:
 	//
 	//////////////////////////////////////////////////////////////////////////
 
-	// Get the foot of out at line(s, e).
-	// Is return -1 the foot is outside the line(s, e), return 0 the foot on the line(s, e).
-	static int GetFootOfPerpendicular(const sm::vec2& s, const sm::vec2& e, const sm::vec2& out, sm::vec2* foot);
-
 	// Get the nearest position of Line to Point.
 	static void GetNearestPosOnLineToPoint(const sm::vec2& p, const std::vector<sm::vec2>& l, sm::vec2* nearest, size_t* index);
 
@@ -112,8 +105,6 @@ public:
 	static sm::vec2 TransCoordsWorldToLocal(const sm::vec2& origin, const sm::vec2& xDir, const sm::vec2& world);
 
 	static void GetMBR(const std::vector<sm::vec2>& pos, sm::rect* mbr);
-
-	static sm::vec2 GetTriGravityCenter(const sm::vec2& p0, const sm::vec2& p1, const sm::vec2& p2);
 
 	//////////////////////////////////////////////////////////////////////////
 

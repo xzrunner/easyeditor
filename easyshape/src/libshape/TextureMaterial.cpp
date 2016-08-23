@@ -3,12 +3,12 @@
 #include <ee/ImageSymbol.h>
 #include <ee/FileHelper.h>
 #include <ee/Math2D.h>
-#include <ee/Triangulation.h>
 #include <ee/Camera.h>
 #include <ee/CameraMgr.h>
 #include <ee/Pseudo3DCamera.h>
 
 #include <shaderlab.h>
+#include <SM_Triangulation.h>
 
 namespace eshape
 {
@@ -115,7 +115,7 @@ void TextureMaterial::BuildEnd()
 		copy(m_segments.begin(), m_segments.end(), back_inserter(segments));
 	}
 
-	ee::Triangulation::Lines(outline, segments, m_tris);
+	sm::triangulate_lines(outline, segments, m_tris);
 
 	CalTexcoords(r);
 }

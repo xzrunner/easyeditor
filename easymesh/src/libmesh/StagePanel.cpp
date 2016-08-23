@@ -1,7 +1,7 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
 #include "Symbol.h"
-#include "EditableMesh.h"
+#include "Mesh.h"
 
 #include <easyshape.h>
 
@@ -50,7 +50,7 @@ void StagePanel::TraverseShapes(ee::Visitor<ee::Shape>& visitor,
 {
 	Mesh* mesh = m_sym->GetMesh();
 	if (mesh) {
-		static_cast<EditableMesh*>(mesh)->TraverseMesh(visitor);
+		mesh->TraverseMesh(visitor);
 	}
 }
 
@@ -84,8 +84,8 @@ void StagePanel::UpdateSymbol()
 
 void StagePanel::RecreateMesh()
 {
-	const ee::Symbol* base_sym = m_sym->GetMesh()->GetBaseSymbol();
-	Symbol* mesh_sym = new Symbol(const_cast<ee::Symbol*>(base_sym));
+	const s2::Symbol* base_sym = m_sym->GetMesh()->GetBaseSymbol();
+	Symbol* mesh_sym = new Symbol(const_cast<ee::Symbol*>(dynamic_cast<const ee::Symbol*>(base_sym)));
 	m_sym->RemoveReference();
 	m_sym = mesh_sym;
 	GetEditOP()->Clear();
@@ -113,14 +113,14 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 	{
 	case ee::MSG_REMOVE_SHAPE:
 		if (Mesh* mesh = m_sym->GetMesh()) {
-			if (static_cast<EditableMesh*>(mesh)->RemoveMesh((ee::Shape*)ud)) {
+			if (mesh->RemoveMesh((ee::Shape*)ud)) {
 				ee::SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		}
 		break;
 	case ee::MSG_INSERT_SHAPE:
 		if (Mesh* mesh = m_sym->GetMesh()) {
-			if (static_cast<EditableMesh*>(mesh)->InsertMesh((ee::Shape*)ud)) {
+			if (mesh->InsertMesh((ee::Shape*)ud)) {
 				UpdateSymbol();
 				ee::SetCanvasDirtySJ::Instance()->SetDirty();
 			}
@@ -128,7 +128,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 		break;
 	case ee::MSG_CLEAR_SHAPE:
 		if (Mesh* mesh = m_sym->GetMesh()) {
-			if (static_cast<EditableMesh*>(mesh)->ClearMesh()) {
+			if (mesh->ClearMesh()) {
 				ee::SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		}

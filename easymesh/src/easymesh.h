@@ -6,7 +6,6 @@
 #include "libmesh/LibraryPage.h"
 #include "libmesh/Sprite.h"
 #include "libmesh/Symbol.h"
-#include "libmesh/Triangle.h"
 #include "libmesh/FileIO.h"
 #include "libmesh/MeshRenderer.h"
 

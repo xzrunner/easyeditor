@@ -24,7 +24,6 @@ public:
 	 *    s2::Symbol
 	 */
 	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
-	virtual sm::rect GetBounding(const s2::Sprite* spr = NULL) const { return s2::AnimSymbol::GetBounding(spr); }
 
 	/**
 	 *  @interface

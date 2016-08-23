@@ -1,5 +1,7 @@
 #include "MeshSprite.h"
 
+#include "MeshTriangle.h"
+
 #include <stddef.h>
 
 namespace s2

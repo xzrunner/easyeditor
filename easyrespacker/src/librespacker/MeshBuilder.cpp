@@ -7,6 +7,8 @@
 
 #include <easymesh.h>
 
+#include <sprite2/MeshTriangle.h>
+
 #include <algorithm>
 
 namespace erespacker
@@ -32,14 +34,15 @@ const IPackNode* MeshBuilder::Create(const emesh::Symbol* sym)
 {
 	PackMesh* node = new PackMesh;
 
-	node->base = PackNodeFactory::Instance()->Create(sym->GetMesh()->GetBaseSymbol());
+	const s2::Symbol* base = sym->GetMesh()->GetBaseSymbol();
+	node->base = PackNodeFactory::Instance()->Create(dynamic_cast<const ee::Symbol*>(base));
 
-	const std::vector<emesh::Triangle*>& tris = sym->GetMesh()->GetTriangles();
+	const std::vector<s2::MeshTriangle*>& tris = sym->GetMesh()->GetTriangles();
 	int sz = tris.size() * 3;
 	node->tri_vertices.reserve(sz);
 	node->tri_vertices.reserve(sz);
 	for (int i = 0, n = tris.size(); i < n; ++i) {
-		emesh::Triangle* tri = tris[i];
+		s2::MeshTriangle* tri = tris[i];
 		for (int j = 0; j < 3; ++j) {
 			node->tri_texcoords.push_back(tri->nodes[j]->uv);
 			node->tri_vertices.push_back(tri->nodes[j]->ori_xy);

@@ -264,10 +264,6 @@
 				Name="mesh"
 				>
 				<File
-					RelativePath="..\..\..\src\libmesh\EditableMesh.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\libmesh\Mesh.cpp"
 					>
 				</File>
@@ -284,14 +280,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libmesh\MeshRenderer.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libmesh\MeshRenderer.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\libmesh\MeshTrans.cpp"
 					>
 				</File>
@@ -299,18 +287,6 @@
 					RelativePath="..\..\..\src\libmesh\MeshTrans.h"
 					>
 				</File>
-				<Filter
-					Name="base"
-					>
-					<File
-						RelativePath="..\..\..\src\libmesh\Node.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libmesh\Triangle.h"
-						>
-					</File>
-				</Filter>
 			</Filter>
 		</Filter>
 		<Filter

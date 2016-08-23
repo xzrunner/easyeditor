@@ -36,7 +36,7 @@ Sprite::Sprite(Symbol* sym)
 	, ee::Sprite(sym)
 	, m_only_draw_bound(false)
 {
-	if (m_base = sym->GetMesh()->GetBaseSymbol()) {
+	if (m_base = dynamic_cast<const ee::Symbol*>(sym->GetMesh()->GetBaseSymbol())) {
 		m_base->AddReference();
 	}
 

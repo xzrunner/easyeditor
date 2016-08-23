@@ -33,7 +33,7 @@ void Task::Load(const char* filename)
 
 void Task::Store(const char* filename) const
 {
-	const Icon* icon = m_stage->GetSymbol().GetIcon();
+	const Icon* icon = dynamic_cast<const Icon*>(m_stage->GetSymbol().GetIcon());
 	FileIO::StoreToFile(filename, icon);
 }
 

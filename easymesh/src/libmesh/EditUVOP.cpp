@@ -1,9 +1,9 @@
 #include "EditUVOP.h"
 #include "StagePanel.h"
 #include "Mesh.h"
-#include "MeshRenderer.h"
 
 #include <sprite2/RenderParams.h>
+#include <sprite2/DrawMesh.h>
 
 namespace emesh
 {
@@ -18,8 +18,8 @@ bool EditUVOP::OnDraw() const
 {
 	if (Mesh* mesh = m_stage->GetMesh())
 	{
-		MeshRenderer::DrawTexture(mesh, s2::RenderParams());
-		MeshRenderer::DrawInfoXY(mesh);
+		s2::DrawMesh::DrawTexture(mesh, s2::RenderParams());
+		s2::DrawMesh::DrawInfoXY(mesh);
 	}
 
 	return false;

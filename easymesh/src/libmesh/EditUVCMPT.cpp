@@ -1,7 +1,7 @@
 #include "EditUVCMPT.h"
 #include "StagePanel.h"
 #include "EditUVOP.h"
-#include "EditableMesh.h"
+#include "Mesh.h"
 
 #include <ee/panel_msg.h>
 
@@ -49,7 +49,7 @@ void EditUVCMPT::onMove(wxCommandEvent& event)
 
 void EditUVCMPT::onReset(wxCommandEvent& event)
 {
-	if (EditableMesh* mesh = static_cast<EditableMesh*>(m_stage->GetMesh())) {
+	if (Mesh* mesh = m_stage->GetMesh()) {
 		mesh->Reset();
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		m_editop->Clear();

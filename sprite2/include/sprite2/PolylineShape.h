@@ -35,6 +35,8 @@ public:
 	virtual void Draw(const sm::mat4& mt, 
 		const RenderColor& color = RenderColor()) const;
 
+	const std::vector<sm::vec2>& GetVertices() const { return m_vertices; }
+
 protected:
 	virtual void UpdateBounding();
 
