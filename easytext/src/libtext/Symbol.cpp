@@ -9,7 +9,8 @@
 
 #include <sprite2/RenderParams.h>
 #include <sprite2/S2_RVG.h>
-
+#include <sprite2/RenderFilter.h>
+#include <shaderlab.h>
 #include <gtxt.h>
 
 #include <fstream>
@@ -37,6 +38,14 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 		DrawBackground(dynamic_cast<const Sprite*>(spr), p.mt);
 	} 
  	if (setting.visible_label_text) {
+		sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
+		if (p.shader.filter && p.shader.filter->GetMode() == sl::FM_GRAY) {
+			mgr->SetShader(sl::FILTER);
+			sl::FilterShader* shader = static_cast<sl::FilterShader*>(mgr->GetShader());
+			shader->SetMode(sl::FM_GRAY);
+		} else {
+			mgr->SetShader(sl::SPRITE2);
+		}
  		DrawText(dynamic_cast<const Sprite*>(spr), p);
  	}
 }
