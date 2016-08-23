@@ -1,54 +1,99 @@
 {
+
 	// settings
+
 	"font" :
+
 	[
+
 		{
+
 			"name" : "思源黑体M",
+
 			"filepath" : "SourceHanSansCN-Medium.otf"
+
 		},
+
 		{
+
 			"name" : "华康俪金黑W8(P)",
+
 			"filepath" : "hkljhw8.ttf"
+
 		},
+
 		{
+
 			"name" : "FZCY_GBK",
+
 			"filepath" : "FZCY_GBK.ttf"
+
 		}
-	],
-	"user_font" : 
-	[
-		{
-			"name" : "zztest",
-			"filepath" : "user_font.json"
-		}
+
 	],
 
+	"user_font" : 
+
+	[
+
+	],
+
+
+
 	"sprite_capture" : false,			// 编辑对象捕捉
+
 	"image_edge_clip" : true,			// 图片边缘裁剪
+
 	"visible_image_edge" : false,		// 显示图片原始边框
+
 	"visible_label_bg" : true,			// 显示文本框
+
 	"visible_label_text" : true,		// 显示文本
+
 	"visible_node_name" : false,		// 显示节点名称
+
 	"node_name_scale" : 2.5,			// 节点名称显示大小
+
 	"auto_get_focus" : true,			// 鼠标move时自动捕获stage的焦点
+
 	"linear_filter" : true,
+
+
 
 	"img_list_compact" : false,
 
+
+
 	// 不设置则使用系统的颜色对话框
+
 //	"color_setting_dlg" : "rgb",		// 滑块rgb
+
 	// "color_setting_dlg" : "hsl",		// 滑块hsl
 
+
+
 	// library list default
+
 	// "library_label" :
+
 	// [
+
 	// 	"../sg_ui/data/json/center_write_14_fontblank.json"
-	// ],
-	// "library_complex" :
-	// [
-	// 	"../sg_ui/data/json/313_complex.json"
+
 	// ],
 
+	// "library_complex" :
+
+	// [
+
+	// 	"../sg_ui/data/json/313_complex.json"
+
+	// ],
+
+
+
 	// render
+
 	"use_dtex" : true
+
 }
