@@ -5,6 +5,12 @@
 namespace eshape
 {
 
+CosineShape::CosineShape(const CosineShape& cosine)
+	: ee::Shape(cosine)
+	, s2::CosineShape(cosine)
+{
+}
+
 CosineShape::CosineShape(const std::vector<sm::vec2>& vertices)
 	: s2::CosineShape(vertices)
 {

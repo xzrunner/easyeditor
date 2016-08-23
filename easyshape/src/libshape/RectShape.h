@@ -12,7 +12,7 @@ class RectShape : public ee::Shape, public s2::RectShape
 {
 public:
 	RectShape();
-	RectShape(const RectShape& rect) {}
+	RectShape(const RectShape& rect);
 	RectShape(const sm::rect& r);
 	RectShape(const sm::vec2& center, float hwidth, float hheight);
 

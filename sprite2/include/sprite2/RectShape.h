@@ -36,6 +36,8 @@ public:
 protected:
 	virtual void UpdateBounding() {}
 
+	VI_DUMMY_FUNC
+
 }; // RectShape
 
 }

@@ -12,6 +12,12 @@ RectShape::RectShape()
 {
 }
 
+RectShape::RectShape(const RectShape& rect)
+	: ee::Shape(rect)
+	, s2::RectShape(rect)
+{
+}
+
 RectShape::RectShape(const sm::rect& r)
 	: s2::RectShape(r)
 {

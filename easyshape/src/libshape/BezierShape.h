@@ -12,7 +12,7 @@ class BezierShape : public ee::Shape, public s2::BezierShape
 {
 public:
 	BezierShape() {}
-	BezierShape(const BezierShape& bezier) {}
+	BezierShape(const BezierShape& bezier);
 	BezierShape(const sm::vec2& start, const sm::vec2& end);
 
 	/**

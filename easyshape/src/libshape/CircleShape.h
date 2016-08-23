@@ -12,7 +12,7 @@ class CircleShape : public ee::Shape, public s2::CircleShape
 {
 public:
 	CircleShape() {}
-	CircleShape(const CircleShape& circle) {}
+	CircleShape(const CircleShape& circle);
 	CircleShape(const sm::vec2& center, float radius);
 
 	/**

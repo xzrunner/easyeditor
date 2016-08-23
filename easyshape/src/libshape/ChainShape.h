@@ -12,7 +12,7 @@ class ChainShape : public PolylineShape, public s2::PolylineShape
 {
 public:
 	ChainShape();
-	ChainShape(const ChainShape& chain) : m_draw_dir(chain.m_draw_dir) {}
+	ChainShape(const ChainShape& chain);
 	ChainShape(const std::vector<sm::vec2>& vertices, bool closed);
 
 	/**

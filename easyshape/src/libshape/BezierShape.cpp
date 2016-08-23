@@ -6,6 +6,12 @@
 namespace eshape
 {
 
+BezierShape::BezierShape(const BezierShape& bezier)
+	: ee::Shape(bezier)
+	, s2::BezierShape(bezier)
+{
+}
+
 BezierShape::BezierShape(const sm::vec2& start, const sm::vec2& end)
 	: s2::BezierShape(start, end)
 {

@@ -16,6 +16,13 @@ ChainShape::ChainShape()
 	m_draw_dir = true;
 }
 
+ChainShape::ChainShape(const ChainShape& chain) 
+	: eshape::PolylineShape(chain)
+	, s2::PolylineShape(chain)
+	, m_draw_dir(chain.m_draw_dir)
+{
+}
+
 ChainShape::ChainShape(const std::vector<sm::vec2>& vertices, bool closed)
 	: s2::PolylineShape(vertices, closed)
 	, m_draw_dir(!closed)

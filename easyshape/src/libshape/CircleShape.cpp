@@ -8,6 +8,12 @@
 namespace eshape
 {
 
+CircleShape::CircleShape(const CircleShape& circle)
+	: ee::Shape(circle)
+	, s2::CircleShape(circle)
+{
+}
+
 CircleShape::CircleShape(const sm::vec2& center, float radius)
 	: s2::CircleShape(center, radius)
 {

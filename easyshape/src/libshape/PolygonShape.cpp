@@ -20,6 +20,8 @@ PolygonShape::PolygonShape()
 }
 
 PolygonShape::PolygonShape(const PolygonShape& polygon)
+	: eshape::PolylineShape(polygon)
+	, s2::PolylineShape(polygon)
 {
 	if (polygon.m_material) {
 		polygon.m_material->AddReference();
