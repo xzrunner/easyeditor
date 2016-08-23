@@ -16,7 +16,7 @@ TextboxSprite::TextboxSprite(Symbol* sym)
 	: Sprite(sym) 
 	, m_time(0)
 {
-	TextboxSymbol* tb_sym = dynamic_cast<TextboxSymbol*>(sym);
+	TextboxSymbol* tb_sym = VI_DOWNCASTING<TextboxSymbol*>(sym);
 	assert(tb_sym);
 	m_tb = tb_sym->GetTextbox();
 }

@@ -19,7 +19,7 @@ void TextboxSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 		return;
 	}
 
- 	const TextboxSprite* tb_spr = dynamic_cast<const TextboxSprite*>(spr); 	
+ 	const TextboxSprite* tb_spr = VI_DOWNCASTING<const TextboxSprite*>(spr); 	
  	const std::string& text = tb_spr->GetText();
  	if (text.empty()) {
  		return;
