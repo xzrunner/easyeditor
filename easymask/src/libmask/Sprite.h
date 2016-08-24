@@ -3,14 +3,14 @@
 
 #include <ee/Sprite.h>
 
-#include <sprite2/DummySprite.h>
+#include <sprite2/MaskSprite.h>
 
 namespace emask
 {
 
 class Symbol;
 
-class Sprite : public s2::DummySprite, public ee::Sprite
+class Sprite : public s2::MaskSprite, public ee::Sprite
 {
 public:
 	Sprite(const Sprite& spr);

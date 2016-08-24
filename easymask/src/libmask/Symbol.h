@@ -3,29 +3,17 @@
 
 #include <ee/Symbol.h>
 
-namespace s2 { class RenderColor; }
+#include <sprite2/MaskSymbol.h>
 
 namespace emask
 {
 
-class Symbol : public ee::Symbol
+class Symbol : public ee::Symbol, public s2::MaskSymbol
 {
 public:
-	Symbol();
-	virtual ~Symbol();
-
-	/**
-	 *  @interface
-	 *    s2::Symbol
-	 */
-	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
-	virtual sm::rect GetBounding(const s2::Sprite* spr = NULL) const;
 
 	// for p3d
 	void Update(const s2::RenderParams& params, float dt);
-
-	const ee::Symbol* GetSymbol(bool is_base) const { return is_base ? m_base : m_mask; }
-	void SetSymbol(const ee::Symbol* sym, bool is_base);
 
 	static ee::Symbol* Create() { return new Symbol(); }
 
@@ -33,18 +21,7 @@ protected:
 	virtual void LoadResources();
 
 private:
-	void DrawImpl(const s2::RenderParams& params) const;
-
-	void DrawBaseToFbo0(const s2::RenderColor& rc) const;
-	void DrawMaskToFbo1() const;
-	void DrawMashFromFbo(const sm::mat4& mt) const;
-
-	void UpdateP3DSymbol(ee::Symbol* sym, const s2::RenderParams& params, float dt);	
-
-private:
-	const ee::Symbol *m_base, *m_mask;
-
-	sm::rect m_bounding;
+	void UpdateP3DSymbol(s2::Symbol* sym, const s2::RenderParams& params, float dt);	
 
 }; // Symbol
 

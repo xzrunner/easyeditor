@@ -20,13 +20,15 @@ void FileIO::Store(const char* filepath, const Symbol* sym)
 
 	value["name"] = sym->name;
 
-	const ee::Symbol *base = sym->GetSymbol(true),
+	const s2::Symbol *base = sym->GetSymbol(true),
 		             *mask = sym->GetSymbol(false);
 	if (base) {
-		value["base"]["filepath"] = ee::FileHelper::GetRelativePath(dir, base->GetFilepath());
+		value["base"]["filepath"] = ee::FileHelper::GetRelativePath(dir, 
+			dynamic_cast<const ee::Symbol*>(base)->GetFilepath());
 	}
 	if (mask) {
-		value["mask"]["filepath"] = ee::FileHelper::GetRelativePath(dir, mask->GetFilepath());
+		value["mask"]["filepath"] = ee::FileHelper::GetRelativePath(dir, 
+			dynamic_cast<const ee::Symbol*>(mask)->GetFilepath());
 	}
 
 	Json::StyledStreamWriter writer;

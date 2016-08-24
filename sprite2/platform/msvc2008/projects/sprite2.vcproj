@@ -791,6 +791,22 @@
 			<Filter
 				Name="mask"
 				>
+				<File
+					RelativePath="..\..\..\source\sprites\MaskSprite.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\MaskSprite.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\sprites\MaskSymbol.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\MaskSymbol.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="trail"
@@ -865,6 +881,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\include\sprite2\DrawGaussianBlur.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\render\DrawMask.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\DrawMask.h"
 					>
 				</File>
 				<File

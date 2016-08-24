@@ -21,7 +21,7 @@ void AnimSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 		return;
 	}
 
-	s2::RenderParams p = params;
+	RenderParams p = params;
 	p.mt = spr->GetTransMatrix() * params.mt;
 	p.color = spr->Color() * params.color;
 	VI_DOWNCASTING<const AnimSprite*>(spr)->Draw(p);

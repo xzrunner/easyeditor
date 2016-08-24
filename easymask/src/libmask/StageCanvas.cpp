@@ -27,8 +27,8 @@ void StageCanvas::OnDrawSprites() const
 	if (m_mask_render) {
 		sym->Draw(s2::RenderParams(), NULL);
 	} else {
-		const ee::Symbol *base = sym->GetSymbol(true),
-			*mask = sym->GetSymbol(false);
+		const s2::Symbol *base = sym->GetSymbol(true),
+						 *mask = sym->GetSymbol(false);
 		if (base) {
 			ee::SpriteRenderer::Instance()->Draw(base);
 		}
