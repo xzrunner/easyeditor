@@ -189,20 +189,20 @@ void FileIO::StoreAsGif(const std::string& src, const std::string& dst)
 	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(src);
 	eanim::Symbol* anim = static_cast<eanim::Symbol*>(sym);
 
-	int max_frame = anim->getMaxFrameIndex();
+	int max_frame = anim->GetMaxFrameIdx();
 	sm::vec2 sz = sym->GetBounding().Size();
 	AnimatedGifSaver saver(sz.x, sz.y);
 	for (int i = 0; i < max_frame; ++i)
 	{
-		anim->setFrameIndex(i + 1);
+//		anim->setFrameIndex(i + 1);
 		uint8_t* rgba = ss.OutputToMemory(sym, true);
 
 		uint8_t* rgb = eimage::RGBA2RGB(rgba, sz.x, sz.y, true);
-		saver.AddFrame(rgb, 1.0f / anim->getFPS());
+		saver.AddFrame(rgb, 1.0f / anim->GetFPS());
 		delete[] rgba;
 		delete[] rgb;
 	}
-	anim->setFrameIndex(0);
+//	anim->setFrameIndex(0);
 	saver.Save(dst.c_str());
 
 	sym->RemoveReference();

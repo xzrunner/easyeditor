@@ -54,15 +54,16 @@ void AnimBuilder::Load(const eanim::Symbol* sym, PackAnimation* anim)
 {
 	m_export_set.LoadExport(sym, anim);
 
-	for (int i = 1, n = sym->getMaxFrameIndex(); i <= n; ++i)
+	for (int i = 1, n = sym->GetMaxFrameIdx(); i <= n; ++i)
 	{
 		PackAnimation::Frame frame;
 
-		std::vector<ee::Sprite*> sprs;
-		eanim::Utility::GetCurrSprites(sym, i, sprs);
+		std::vector<s2::Sprite*> sprs;
+		sym->CreateFrameSprites(i, sprs);
 		for (int i = 0, n = sprs.size(); i < n; ++i) {
-			anim->CreateFramePart(sprs[i], frame);
+			anim->CreateFramePart(dynamic_cast<ee::Sprite*>(sprs[i]), frame);
 		}
+		for_each(sprs.begin(), sprs.end(), cu::RemoveRefFonctor<s2::Sprite>());
 
 		anim->frames.push_back(frame);
 	}

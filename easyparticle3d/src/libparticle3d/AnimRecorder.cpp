@@ -69,7 +69,7 @@ void AnimRecorder::StoreToFile(const std::string& filepath) const
 	eanim::Symbol* sym = new eanim::Symbol;
 	s2::AnimSymbol::Layer* layer = new s2::AnimSymbol::Layer;
 	// sym->name = ani->export_name;
-	sym->setFPS(30);
+	sym->SetFPS(30);
 	// particle 60fps, while anim 30fps
 	for (int i = 0, n = m_frames.size(); i*2 < n; ++i)
 //	for (int i = 0, n = m_frames.size(); i < n; ++i)

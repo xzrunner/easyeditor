@@ -75,7 +75,7 @@ void TransToGif::Run(ee::Snapshoot& ss, const std::string& srcdir, const std::st
 			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			eanim::Symbol* anim = static_cast<eanim::Symbol*>(sym);
 
-			int max_frame = anim->getMaxFrameIndex();
+			int max_frame = anim->GetMaxFrameIdx();
 			const sm::vec2& sz = sym->GetBounding().Size();
 			int width = sz.x, height = sz.y;
 			AnimatedGifSaver saver(width, height);
@@ -85,7 +85,7 @@ void TransToGif::Run(ee::Snapshoot& ss, const std::string& srcdir, const std::st
 				uint8_t* rgba = ss.OutputToMemory(sym, true);
 
 				uint8_t* rgb = eimage::RGBA2RGB(rgba, width, height, true);
-				saver.AddFrame(rgb, 1.0f / anim->getFPS());
+				saver.AddFrame(rgb, 1.0f / anim->GetFPS());
 				delete[] rgba;
 				delete[] rgb;
 			}

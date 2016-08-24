@@ -22,7 +22,7 @@ public:
 	 *    Cloneable
 	 */
 	virtual MeshSprite* Clone() const;
-	virtual bool Update(const s2::RenderParams& params, float dt) { return true; }
+	virtual bool Update(const RenderParams& params, float dt) { return true; }
 
 	void SetTween(MeshSprite* begin, MeshSprite* end, float process);
 

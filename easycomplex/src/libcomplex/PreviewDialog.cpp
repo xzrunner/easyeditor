@@ -17,7 +17,7 @@ class InitVisitor : public ee::Visitor<ee::Sprite>
 public:
 	virtual void Visit(ee::Sprite* spr, bool& next) {
 		if (eanim::Sprite* anim = dynamic_cast<eanim::Sprite*>(spr)) {
-			dynamic_cast<eanim::Symbol*>(anim->GetSymbol())->SetLoop(false);
+			anim->SetLoop(false);
 		}
 	}
 }; // InitVisitor
@@ -49,7 +49,7 @@ PreviewDialog::~PreviewDialog()
 
 	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
 		if (const eanim::Sprite* anim = dynamic_cast<const eanim::Sprite*>(m_sprs[i])) {
-			const_cast<eanim::Symbol*>(dynamic_cast<const eanim::Symbol*>(anim->GetSymbol()))->SetLoop(true);
+			const_cast<eanim::Sprite*>(anim)->SetLoop(true);
 		}
 	}
 }

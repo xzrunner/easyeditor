@@ -46,7 +46,6 @@ StageCanvas::StageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage,
 	, m_cam_dirty(false)
 	, m_render_context(new RenderContext)
 	, m_timer(this, TIMER_ID)
-	, m_version(0)
 	, m_draw(true)
 {
 	if (glctx) {
@@ -211,8 +210,15 @@ void StageCanvas::OnTimer(wxTimerEvent& event)
 {
 	OnTimer();
 
-	++m_version;
-	bool dirty = m_stage->Update(m_version);
+	float dt = 0.166f;
+	clock_t curr_time = clock();
+	static clock_t last_time = 0;
+	if (last_time != 0) {
+		dt = (float)(curr_time - last_time) / CLOCKS_PER_SEC;
+	}
+	last_time = curr_time;
+
+	bool dirty = m_stage->Update(dt);
 	if (dirty) {
 		m_dirty = dirty;
 	}

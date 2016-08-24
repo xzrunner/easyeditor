@@ -42,7 +42,7 @@ void BezierShape::UpdatePolyline()
 	const int num = std::max(20, (int)(sm::dis_pos_to_pos(m_control_nodes[0], m_control_nodes[3]) / 10));
 	float dt = 1.0f / (num - 1);
 	std::vector<sm::vec2> vertices(num);
-	for (size_t i = 0; i < num; ++i) {
+	for (int i = 0; i < num; ++i) {
 		vertices[i] = PointOnCubicBezier(i * dt);
 	}
 

@@ -17,7 +17,7 @@ void FileSaver::Store(const std::string& filepath, const Symbol& sym)
 
 	value["name"] = sym.name;
 
-	value["fps"] = sym.getFPS();
+	value["fps"] = sym.GetFPS();
 
 	const std::vector<s2::AnimSymbol::Layer*>& layers = sym.GetLayers();
 	std::string dir = ee::FileHelper::GetFileDir(filepath);

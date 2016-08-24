@@ -11,6 +11,8 @@
 #include <CU_RefCountObj.h>
 #include <CU_Cloneable.h>
 
+#include <string>
+
 namespace s2
 {
 
@@ -44,8 +46,8 @@ public:
 	Symbol* GetSymbol() { return m_sym; }
 	const Symbol* GetSymbol() const { return m_sym; }
 
-	bool IsVisible() const { return m_visible; }
-	void SetVisible(bool visible) { m_visible = visible; }
+	const std::string& GetName() const { return m_name; }
+	void SetName(const std::string& name) { m_name = name; }
 
 	const BoundingBox* GetBounding() const;
 	void UpdateBounding() const;
@@ -70,6 +72,9 @@ public:
 	const RenderCamera& Camera() const		{ return m_camera; }
 	RenderCamera&		Camera()			{ return m_camera; }
 
+	bool IsVisible() const { return m_visible; }
+	void SetVisible(bool visible) { m_visible = visible; }
+
 	sm::mat4 GetTransMatrix() const;
 	sm::mat4 GetTransInvMatrix() const;
 
@@ -78,6 +83,11 @@ protected:
 
 protected:
 	Symbol*					m_sym;
+
+	/************************************************************************/
+	/* info                                                                 */
+	/************************************************************************/
+	std::string				m_name;
 
 	/************************************************************************/
 	/* geometry                                                             */

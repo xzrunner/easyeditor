@@ -57,8 +57,6 @@ public:
 	/************************************************************************/
 	/* info                                                                 */
 	/************************************************************************/
-	const std::string& GetName() const { return m_name; }
-	void SetName(const std::string& name) { m_name = name; }
 	const std::string& GetTag() const { return m_tag; }
 	void SetTag(const std::string& tag) { m_tag = tag; }
 
@@ -91,7 +89,6 @@ private:
 	/************************************************************************/
 	/* info                                                                 */
 	/************************************************************************/
-	std::string			m_name;
 	std::string			m_tag;
 	bool				m_clip;
 	bool				m_anchor;

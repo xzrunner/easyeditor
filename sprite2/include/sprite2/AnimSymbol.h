@@ -46,6 +46,12 @@ public:
 	virtual sm::rect GetBounding(const Sprite* spr = NULL) const;
 
 	const std::vector<Layer*>& GetLayers() const { return m_layers; }
+	int GetMaxFrameIdx() const;
+
+	void CreateFrameSprites(int frame, std::vector<Sprite*>& sprs) const;
+
+	int GetFPS() const { return m_fps; }
+	void SetFPS(int fps) { m_fps = fps; }
 
 	/************************************************************************/
 	/* api for dynamic change                                               */
@@ -53,8 +59,13 @@ public:
 	void AddLayer(Layer* layer);
 	bool Clear();
 
+private:
+	void Draw(const RenderParams& params, int idx = 1);
+
 protected:
 	std::vector<Layer*> m_layers;
+
+	int m_fps;
 
 }; // AnimSymbol
 

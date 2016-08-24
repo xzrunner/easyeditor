@@ -25,6 +25,7 @@ Sprite::Sprite()
 
 Sprite::Sprite(const Sprite& spr)
 	: m_sym(NULL)
+	, m_name(spr.m_name)
 	, m_position(spr.m_position)
 	, m_angle(spr.m_angle)
 	, m_scale(spr.m_scale)

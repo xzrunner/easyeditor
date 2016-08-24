@@ -9,6 +9,3 @@
 #include "libanim/LibraryPage.h"
 #include "libanim/Symbol.h"
 #include "libanim/Sprite.h"
-
-#include "libanim/Utility.h"
-#include "libanim/TweenUtility.h"

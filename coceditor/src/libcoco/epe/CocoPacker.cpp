@@ -425,7 +425,7 @@ void CocoPacker::resolveAnimation(const eanim::Symbol* sym)
 	{
 		lua::TableAssign ta(m_gen, "component", true);
 		const std::vector<s2::AnimSymbol::Layer*>& layers = sym->GetLayers();
-		for (size_t i = 0, n = sym->getMaxFrameIndex(); i < n; ++i)
+		for (size_t i = 0, n = sym->GetMaxFrameIdx(); i < n; ++i)
 		{
 			for (size_t j = 0, m = layers.size(); j < m; ++j)
 			{
@@ -444,14 +444,15 @@ void CocoPacker::resolveAnimation(const eanim::Symbol* sym)
 		lua::TableAssign ta(m_gen, "", true);
 		// frames
 		int index = 0;
-		for (size_t i = 1, n = sym->getMaxFrameIndex(); i <= n; ++i)
+		for (size_t i = 1, n = sym->GetMaxFrameIdx(); i <= n; ++i)
 		{
 			lua::TableAssign ta(m_gen, "", true);
 
-			std::vector<ee::Sprite*> sprs;
-			eanim::Utility::GetCurrSprites(sym, i, sprs);
+			std::vector<s2::Sprite*> sprs;
+			sym->CreateFrameSprites(i, sprs);
 			for (size_t j = 0, m = sprs.size(); j < m; ++j)
-				resolveSpriteForFrame(sprs[j], order);
+				resolveSpriteForFrame(dynamic_cast<ee::Sprite*>(sprs[j]), order);
+			for_each(sprs.begin(), sprs.end(), cu::RemoveRefFonctor<s2::Sprite>());
 		}
 	}
 }

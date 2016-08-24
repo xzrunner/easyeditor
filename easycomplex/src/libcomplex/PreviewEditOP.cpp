@@ -23,7 +23,7 @@ public:
 		if (const eparticle3d::Sprite* particle = dynamic_cast<const eparticle3d::Sprite*>(spr)) {
 			const_cast<eparticle3d::Sprite*>(particle)->Start();
 		} else if (const eanim::Sprite* anim = dynamic_cast<const eanim::Sprite*>(spr)) {
-			const_cast<eanim::Symbol*>(dynamic_cast<const eanim::Symbol*>(anim->GetSymbol()))->ResetTime();
+			const_cast<eanim::Sprite*>(anim)->Start();
 		}
 	}
 }; // RestartVisitor

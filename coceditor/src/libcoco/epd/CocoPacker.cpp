@@ -288,10 +288,10 @@ void CocoPacker::ResolveSymbols()
 				}
 			}
 
-			for (int i = 0, n = anim->getMaxFrameIndex(); i < n; ++i)
+			for (int i = 0, n = anim->GetMaxFrameIdx(); i < n; ++i)
 			{
-				std::vector<ee::Sprite*> sprs;
-				eanim::Utility::GetCurrSprites(anim, i + 1, sprs);
+				std::vector<s2::Sprite*> sprs;
+				anim->CreateFrameSprites(i + 1, sprs);
 				if (sprs.empty()) {
 					continue;
 				}
@@ -304,7 +304,7 @@ void CocoPacker::ResolveSymbols()
 						}
 					}
 				}
-				for_each(sprs.begin(), sprs.end(), cu::RemoveRefFonctor<ee::Sprite>());
+				for_each(sprs.begin(), sprs.end(), cu::RemoveRefFonctor<s2::Sprite>());
 			}
 
 			m_mapSymbolID.insert(std::make_pair(sym, m_id++));
@@ -890,7 +890,7 @@ void CocoPacker::ParserAnimation(const eanim::Symbol* sym)
 	{
 		lua::TableAssign ta(*m_gen, "component", true);
 		const std::vector<s2::AnimSymbol::Layer*>& layers = sym->GetLayers();
-		for (size_t i = 0, n = sym->getMaxFrameIndex(); i < n; ++i)
+		for (size_t i = 0, n = sym->GetMaxFrameIdx(); i < n; ++i)
 		{			
 			for (size_t j = 0, m = layers.size(); j < m; ++j)
 			{
@@ -908,10 +908,10 @@ void CocoPacker::ParserAnimation(const eanim::Symbol* sym)
 
 		// component for icon's tween
 		comp_idx = order.size();
-		for (int i = 0, n = sym->getMaxFrameIndex(); i < n; ++i)
+		for (int i = 0, n = sym->GetMaxFrameIdx(); i < n; ++i)
 		{
-			std::vector<ee::Sprite*> sprs;
-			eanim::Utility::GetCurrSprites(sym, i + 1, sprs);
+			std::vector<s2::Sprite*> sprs;
+			sym->CreateFrameSprites(i + 1, sprs);
 			if (sprs.empty()) {
 				continue;
 			}
@@ -928,7 +928,7 @@ void CocoPacker::ParserAnimation(const eanim::Symbol* sym)
 					}
 				}
 			}
-			for_each(sprs.begin(), sprs.end(), cu::RemoveRefFonctor<ee::Sprite>());
+			for_each(sprs.begin(), sprs.end(), cu::RemoveRefFonctor<s2::Sprite>());
 		}
 	}	
  	// children
@@ -936,15 +936,15 @@ void CocoPacker::ParserAnimation(const eanim::Symbol* sym)
  		lua::TableAssign ta(*m_gen, "", true);
  		// frames
  		int index = 0;
- 		for (size_t i = 1, n = sym->getMaxFrameIndex(); i <= n; ++i)
+ 		for (size_t i = 1, n = sym->GetMaxFrameIdx(); i <= n; ++i)
  		{
  			lua::TableAssign ta(*m_gen, "", true);
 
-			std::vector<ee::Sprite*> sprs;
-			eanim::Utility::GetCurrSprites(sym, i, sprs);
+			std::vector<s2::Sprite*> sprs;
+			sym->CreateFrameSprites(i, sprs);
 			for (size_t j = 0, m = sprs.size(); j < m; ++j)
-				ParserSpriteForFrame(sprs[j], order, map_id2idx);
-			for_each(sprs.begin(), sprs.end(), cu::RemoveRefFonctor<ee::Sprite>());
+				ParserSpriteForFrame(dynamic_cast<ee::Sprite*>(sprs[j]), order, map_id2idx);
+			for_each(sprs.begin(), sprs.end(), cu::RemoveRefFonctor<s2::Sprite>());
  		}
  	}
 }

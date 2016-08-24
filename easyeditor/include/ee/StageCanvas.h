@@ -90,8 +90,6 @@ private:
 
 	wxTimer m_timer;
 
-	int m_version;
-
 	bool m_draw;
 
 	DECLARE_EVENT_TABLE()

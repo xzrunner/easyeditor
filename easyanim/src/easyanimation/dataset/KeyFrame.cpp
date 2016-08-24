@@ -9,6 +9,8 @@
 #include <easyanim.h>
 #include <easyparticle3d.h>
 
+#include <sprite2/AnimLerp.h>
+
 #include <algorithm>
 
 namespace eanim
@@ -134,12 +136,22 @@ void KeyFrame::GetTweenSprite(const KeyFrame* start, const KeyFrame* end,
 	// 	}
 
 	SkeletonData &s_skeleton = const_cast<KeyFrame*>(start)->GetSkeletonData(),
-		&e_skeleton = const_cast<KeyFrame*>(end)->GetSkeletonData();
+		         &e_skeleton = const_cast<KeyFrame*>(end)->GetSkeletonData();
 	if (!s_skeleton.Empty() && !e_skeleton.Empty()) {
 		SkeletonData::GetTweenSprites(s_skeleton, e_skeleton, tween, process);
 	} else {
-		// new
-		eanim::TweenUtility::GetTweenSprites(start->m_sprs, end->m_sprs, tween, process);
+		std::vector<s2::Sprite*> begins, ends, tweens;
+		begins.reserve(start->m_sprs.size());
+		copy(start->m_sprs.begin(), start->m_sprs.end(), back_inserter(begins));
+		ends.reserve(start->m_sprs.size());
+		copy(end->m_sprs.begin(), end->m_sprs.end(), back_inserter(ends));
+
+		s2::AnimLerp::Lerp(begins, ends, tweens, process);
+
+		tween.reserve(tweens.size());
+		for (int i = 0, n = tweens.size(); i < n; ++i) {
+			tween.push_back(dynamic_cast<ee::Sprite*>(tweens[i]));
+		}
 	}
 }
 

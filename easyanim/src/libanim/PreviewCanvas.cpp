@@ -10,7 +10,7 @@ PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage,
 							 const Symbol* sym, wxGLContext* glctx)
 	: ee::CameraCanvas(stage_wnd, stage, glctx)
 	, m_sym(sym)
-	, m_control(1.0f / sym->getFPS())
+	, m_control(1.0f / sym->GetFPS())
 {
 }
 

@@ -182,26 +182,6 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="utility"
-			>
-			<File
-				RelativePath="..\..\..\src\libanim\TweenUtility.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libanim\TweenUtility.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libanim\Utility.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libanim\Utility.h"
-				>
-			</File>
-		</Filter>
-		<Filter
 			Name="dataset"
 			>
 			<File

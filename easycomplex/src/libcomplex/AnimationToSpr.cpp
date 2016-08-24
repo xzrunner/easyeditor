@@ -59,7 +59,7 @@ ee::Sprite* AnimationToSpr::TransAnim(const erespacker::PackAnimation* anim)
 		}
 		layer->frames.push_back(frame);
 	}
-	anim_symbol->setFPS(30);
+	anim_symbol->SetFPS(30);
 	anim_symbol->AddLayer(layer);
 //	anim_symbol->InitBounding();
 	return new eanim::Sprite(anim_symbol);

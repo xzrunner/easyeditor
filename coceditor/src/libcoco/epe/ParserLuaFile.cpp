@@ -384,7 +384,7 @@ void ParserLuaFile::transAniToAnimationFile(const std::string& outfloder, int id
 	eanim::Symbol* sym = new eanim::Symbol;
 	s2::AnimSymbol::Layer* layer = new s2::AnimSymbol::Layer;
 	sym->name = ani->export_name;
-	sym->setFPS(30);
+	sym->SetFPS(30);
 	for (int i = 0, n = ani->frames.size(); i < n; ++i)
 	{
 		//				std::cout << "frame: [" << i << "/" << ani->frames.size() << "]" << std::endl;
@@ -536,7 +536,7 @@ void ParserLuaFile::transAniToAnimationMemory(int id, Animation* ani)
 	eanim::Symbol* sym = new eanim::Symbol;
 	s2::AnimSymbol::Layer* layer = new s2::AnimSymbol::Layer;
 	sym->name = ani->export_name;
-	sym->setFPS(30);
+	sym->SetFPS(30);
 	for (int i = 0, n = ani->frames.size(); i < n; ++i)
 	{
 		// std::cout << "frame: [" << i << "/" << ani->frames.size() << "]" << std::endl;
