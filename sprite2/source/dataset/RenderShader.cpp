@@ -10,6 +10,28 @@ RenderShader::RenderShader()
 	, fast_blend(FBM_NULL)
 {}
 
+RenderShader::RenderShader(const RenderShader& rs)
+	: filter(NULL)
+	, blend(rs.blend)
+	, fast_blend(rs.fast_blend)
+{
+	if (rs.filter) {
+		filter = new RenderFilter(rs.filter->GetMode());
+	}
+}
+
+RenderShader& RenderShader::operator = (const RenderShader& rs)
+{
+	if (rs.filter) {
+		filter = new RenderFilter(rs.filter->GetMode());
+	} else {
+		filter = NULL;
+	}
+	blend = rs.blend;
+	fast_blend = rs.fast_blend;
+	return *this;
+}
+
 RenderShader::~RenderShader()
 {
 	// todo 

@@ -33,6 +33,7 @@ public:
 public:
 	FontBlankSprite();
 	FontBlankSprite(const FontBlankSprite& spr);
+	FontBlankSprite& operator = (const FontBlankSprite& spr);
 	FontBlankSprite(FontBlankSymbol* sym);
 
 	/**

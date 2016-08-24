@@ -14,6 +14,14 @@ ScriptsSprite::ScriptsSprite(const ScriptsSprite& spr)
 {
 }
 
+ScriptsSprite& ScriptsSprite::operator = (const ScriptsSprite& spr)
+{
+	s2::Sprite::operator = (spr);
+	s2::DummySprite::operator = (spr);
+	Sprite::operator = (spr);
+	return *this;
+}
+
 ScriptsSprite::ScriptsSprite(ScriptsSymbol* sym)
 	: s2::Sprite(sym)
 	, s2::DummySprite(sym)

@@ -11,15 +11,19 @@
 namespace emesh
 {
 
-Sprite::Sprite()
-{
-}
-
 Sprite::Sprite(const Sprite& spr)
 	: s2::Sprite(spr)
 	, s2::MeshSprite(spr)
 	, ee::Sprite(spr)
 {
+}
+
+Sprite& Sprite::operator = (const Sprite& spr)
+{
+	s2::Sprite::operator = (spr);
+	s2::MeshSprite::operator = (spr);
+	ee::Sprite::operator = (spr);
+	return *this;
 }
 
 Sprite::Sprite(Symbol* sym)

@@ -10,12 +10,6 @@ IconSprite::IconSprite()
 {
 }
 
-IconSprite::IconSprite(const IconSprite& spr)
-	: Sprite(spr)
-	, m_process(spr.m_process)
-{
-}
-
 IconSprite::IconSprite(Symbol* sym) 
 	: Sprite(sym) 
 	, m_process(1)

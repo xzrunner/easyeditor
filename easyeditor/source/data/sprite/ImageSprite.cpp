@@ -20,6 +20,14 @@ ImageSprite::ImageSprite(const ImageSprite& spr)
 {
 }
 
+ImageSprite& ImageSprite::operator = (const ImageSprite& spr)
+{
+	s2::Sprite::operator = (spr);
+	s2::ImageSprite::operator = (spr);
+	Sprite::operator = (spr);
+	return *this;
+}
+
 ImageSprite::ImageSprite(ImageSymbol* sym)
 	: s2::Sprite(sym)
 	, s2::ImageSprite(sym)

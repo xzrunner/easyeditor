@@ -8,16 +8,21 @@
 namespace etext
 {
 
-Sprite::Sprite()
-{
-}
-
 Sprite::Sprite(const Sprite& spr)
 	: s2::Sprite(spr)
 	, s2::TextboxSprite(spr)
 	, ee::Sprite(spr)
 {
 	m_tid = spr.m_tid;
+}
+
+Sprite& Sprite::operator = (const Sprite& spr)
+{
+	s2::Sprite::operator = (spr);
+	s2::TextboxSprite::operator = (spr);
+	ee::Sprite::operator = (spr);
+	m_tid = spr.m_tid;
+	return *this;
 }
 
 Sprite::Sprite(Symbol* sym)

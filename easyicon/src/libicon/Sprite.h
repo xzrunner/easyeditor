@@ -15,6 +15,7 @@ class Sprite : public s2::IconSprite, public ee::Sprite
 public:
 	Sprite() {}
 	Sprite(const Sprite& spr);
+	Sprite& operator = (const Sprite& spr);
 	Sprite(Symbol* sym);
 
 	/**

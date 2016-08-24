@@ -14,6 +14,7 @@ class DummySprite : public s2::DummySprite, public Sprite
 {
 public:
 	DummySprite(const DummySprite& spr);
+	DummySprite& operator = (const DummySprite& spr);
 	DummySprite(DummySymbol* sym);
 
 	/**

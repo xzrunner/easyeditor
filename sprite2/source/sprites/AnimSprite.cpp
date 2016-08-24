@@ -129,6 +129,7 @@ void AnimSprite::UpdateCurrFrame()
 					Sprite* dst = old_frame.Query(src);
 					if (dst) {
 						dst->AddReference();
+						*dst = *src;
 					} else {
 						dst = dynamic_cast<Sprite*>(((cu::Cloneable*)src)->Clone());
 					}

@@ -12,13 +12,13 @@ namespace ee
 FontBlankSprite::FontBlankSprite()
 	: font_color(0xffffffff)
 {
-	font = "";
-	has_edge = false;
-	align_hori = HAT_LEFT;
-	align_vert = VAT_TOP;
-	size = 16;
-	width = 100;
-	height = 20;
+	font		= "";
+	has_edge	= false;
+	align_hori	= HAT_LEFT;
+	align_vert	= VAT_TOP;
+	size		= 16;
+	width		= 100;
+	height		= 20;
 }
 
 FontBlankSprite::FontBlankSprite(const FontBlankSprite& spr)
@@ -26,15 +26,38 @@ FontBlankSprite::FontBlankSprite(const FontBlankSprite& spr)
 	, s2::DummySprite(spr)
 	, Sprite(spr)
 {
-	font = spr.font;
-	has_edge = spr.has_edge;
-	font_color = spr.Color().mul;
-	align_hori = spr.align_hori;
-	align_vert = spr.align_vert;
-	size = spr.size;
-	width = spr.width;
-	height = spr.height;
-	filename = spr.filename;
+	font		= spr.font;
+	has_edge	= spr.has_edge;
+	font_color	= spr.font_color;
+	align_hori	= spr.align_hori;
+	align_vert	= spr.align_vert;
+	size		= spr.size;
+	width		= spr.width;
+	height		= spr.height;
+	filename	= spr.filename;
+	m_text		= spr.m_text;
+	m_tid		= spr.m_tid;
+}
+
+FontBlankSprite& FontBlankSprite::operator = (const FontBlankSprite& spr)
+{
+	s2::Sprite::operator = (spr);
+	s2::DummySprite::operator = (spr);
+	Sprite::operator = (spr);
+
+	font		= spr.font;
+	has_edge	= spr.has_edge;
+	font_color	= spr.font_color;
+	align_hori	= spr.align_hori;
+	align_vert	= spr.align_vert;
+	size		= spr.size;
+	width		= spr.width;
+	height		= spr.height;
+	filename	= spr.filename;
+	m_text		= spr.m_text;
+	m_tid		= spr.m_tid;
+
+	return *this;
 }
 
 FontBlankSprite::FontBlankSprite(FontBlankSymbol* sym)

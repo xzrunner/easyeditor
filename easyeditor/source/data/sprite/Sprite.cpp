@@ -27,17 +27,6 @@ Sprite::Sprite()
 	, m_editable(true)
 	, m_observer(NULL)
 {
-}
-
-Sprite::Sprite(Symbol* sym)
-	: s2::Sprite(sym)
-	, m_mirror(false, false)
-	, m_perspective(0, 0)
-	, m_clip(false)
-	, m_anchor(false)
-	, m_editable(true)
-	, m_observer(NULL)
-{
 	SpriteFactory::Instance()->Insert(this);
 }
 
@@ -49,6 +38,38 @@ Sprite::Sprite(const Sprite& spr)
 	, m_clip(spr.m_clip)
 	, m_anchor(spr.m_anchor)
 	, m_editable(spr.m_editable)
+	, m_observer(NULL)
+{
+	SpriteFactory::Instance()->Insert(this);
+}
+
+Sprite& Sprite::operator = (const Sprite& spr)
+{
+	s2::Sprite::operator = (spr);
+	
+	m_mirror = spr.m_mirror;
+	m_perspective = spr.m_perspective;
+
+	m_tag = spr.m_tag;
+	m_clip = spr.m_clip;
+	m_anchor = spr.m_anchor;
+
+	m_editable = spr.m_editable;
+
+	m_observer = NULL;
+
+	SpriteFactory::Instance()->Insert(this);
+
+	return *this;
+}
+
+Sprite::Sprite(Symbol* sym)
+	: s2::Sprite(sym)
+	, m_mirror(false, false)
+	, m_perspective(0, 0)
+	, m_clip(false)
+	, m_anchor(false)
+	, m_editable(true)
 	, m_observer(NULL)
 {
 	SpriteFactory::Instance()->Insert(this);

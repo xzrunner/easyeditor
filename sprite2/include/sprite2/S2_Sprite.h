@@ -25,6 +25,7 @@ class Sprite : public cu::RefCountObj, public cu::Cloneable
 public:
 	Sprite();
 	Sprite(const Sprite& spr);
+	Sprite& operator = (const Sprite& spr);
 	Sprite(Symbol* sym);
 	virtual ~Sprite();
 
@@ -77,9 +78,6 @@ public:
 
 	sm::mat4 GetTransMatrix() const;
 	sm::mat4 GetTransInvMatrix() const;
-
-protected:
-	const Sprite& operator = (const Sprite& spr);
 
 protected:
 	Symbol*					m_sym;

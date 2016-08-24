@@ -14,6 +14,7 @@ class MeshSprite : public VIRTUAL_INHERITANCE Sprite
 public:
 	MeshSprite();
 	MeshSprite(const MeshSprite& mesh);
+	MeshSprite& operator = (const MeshSprite& mesh);
 	MeshSprite(MeshSymbol* sym);
 	virtual ~MeshSprite();
 

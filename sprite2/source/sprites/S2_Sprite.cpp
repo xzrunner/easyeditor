@@ -42,13 +42,42 @@ Sprite::Sprite(const Sprite& spr)
 	}
 
 	m_bounding = spr.m_bounding->Clone();
-	m_bounding_dirty = true;
+	m_bounding_dirty = spr.m_bounding_dirty;
 
 	FilterMode fm = FM_NULL;
 	if (spr.Shader().filter) {
 		fm = spr.Shader().filter->GetMode();
 	}
 	m_shader.filter = FilterFactory::Instance()->Create(fm);
+}
+
+Sprite& Sprite::operator = (const Sprite& spr)
+{
+	cu::RefCountObjAssign(m_sym, const_cast<Symbol*>(spr.m_sym));
+
+	m_name			= spr.m_name;
+
+	m_position		= spr.m_position;
+	m_angle			= spr.m_angle;
+	m_scale			= spr.m_scale;
+	m_shear			= spr.m_shear;
+
+	m_offset		= spr.m_offset;
+
+	if (m_bounding) {
+		*m_bounding		= *spr.m_bounding;
+	} else {
+		m_bounding	= spr.m_bounding->Clone();
+	}
+	m_bounding_dirty= spr.m_bounding_dirty;
+
+	m_color			= spr.m_color;
+	m_shader		= spr.m_shader;
+	m_camera		= spr.m_camera;
+
+	m_visible		= spr.m_visible;
+
+	return *this;
 }
 
 Sprite::Sprite(Symbol* sym)

@@ -21,8 +21,9 @@ class Sprite : public virtual s2::Sprite, public UserDataImpl
 {
 public:
 	Sprite();
-	Sprite(Symbol* sym);
 	Sprite(const Sprite& spr);
+	Sprite& operator = (const Sprite& spr);
+	Sprite(Symbol* sym);
 	virtual ~Sprite();
 
 	/**

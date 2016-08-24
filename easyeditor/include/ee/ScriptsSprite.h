@@ -13,6 +13,7 @@ class ScriptsSymbol;
 class ScriptsSprite : public s2::DummySprite, public Sprite
 {
 public:
+	ScriptsSprite& operator = (const ScriptsSprite& spr);
 	ScriptsSprite(const ScriptsSprite& spr);
 	ScriptsSprite(ScriptsSymbol* sym);
 

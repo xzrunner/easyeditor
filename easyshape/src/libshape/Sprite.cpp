@@ -11,6 +11,14 @@ Sprite::Sprite(const Sprite& spr)
 {
 }
 
+Sprite& Sprite::operator = (const Sprite& spr)
+{
+	s2::Sprite::operator = (spr);
+	s2::ShapeSprite::operator = (spr);
+	ee::Sprite::operator = (spr);
+	return *this;
+}
+
 Sprite::Sprite(Symbol* sym)
 	: s2::Sprite(sym)
 	, s2::ShapeSprite(sym)

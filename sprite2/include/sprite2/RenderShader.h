@@ -20,6 +20,8 @@ public:
 
 public:
 	RenderShader();
+	RenderShader(const RenderShader& rs);
+	RenderShader& operator = (const RenderShader& rs);
 	~RenderShader();
 
 	RenderShader operator * (const RenderShader& rs) const;
