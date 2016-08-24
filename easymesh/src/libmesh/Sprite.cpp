@@ -3,6 +3,7 @@
 #include "FileIO.h"
 #include "Mesh.h"
 #include "PropertySetting.h"
+#include "MeshSerialization.h"
 
 #include <ee/FileHelper.h>
 #include <ee/SymbolMgr.h>
@@ -11,45 +12,21 @@ namespace emesh
 {
 
 Sprite::Sprite()
-	: m_base(NULL)
-	, m_only_draw_bound(false)
 {
-//	m_speed.set(0, -0.01f);
 }
 
 Sprite::Sprite(const Sprite& spr)
 	: s2::Sprite(spr)
 	, s2::MeshSprite(spr)
 	, ee::Sprite(spr)
-	, m_speed(spr.m_speed)
-	, m_trans(spr.m_trans)
-	, m_only_draw_bound(spr.m_only_draw_bound)
 {
-	if (m_base = spr.m_base) {
-		m_base->AddReference();
-	}
 }
 
 Sprite::Sprite(Symbol* sym)
 	: s2::Sprite(sym)
 	, s2::MeshSprite(sym)
 	, ee::Sprite(sym)
-	, m_only_draw_bound(false)
 {
-	if (m_base = dynamic_cast<const ee::Symbol*>(sym->GetMesh()->GetBaseSymbol())) {
-		m_base->AddReference();
-	}
-
-//	m_speed.set(0, -0.01f);
-
-	m_trans.LoadFromMesh(sym->GetMesh());
-}
-
-Sprite::~Sprite()
-{
-	if (m_base) {
-		m_base->RemoveReference();
-	}
 }
 
 void Sprite::Load(const Json::Value& val, const std::string& dir)
@@ -57,7 +34,7 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 	ee::Sprite::Load(val);
 	
 	const Json::Value& mesh_val = val["mesh"];
-	m_trans.Load(mesh_val);
+	MeshSerialization::Load(m_trans, mesh_val);
 	m_trans.StoreToMesh(dynamic_cast<Symbol*>(m_sym)->GetMesh());
 
 	if (!mesh_val["base_symbol"].isNull()) {
@@ -74,9 +51,10 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 	Json::Value mesh_val;
 
 //	m_trans.LoadFromMesh(m_sym->GetMesh());
-	m_trans.Store(mesh_val);
-	
-	mesh_val["base_symbol"] = ee::FileHelper::GetRelativePath(dir, m_base->GetFilepath());
+	MeshSerialization::Store(m_trans, mesh_val);
+
+	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(m_base);
+	mesh_val["base_symbol"] = ee::FileHelper::GetRelativePath(dir, sym->GetFilepath());
 
 	val["mesh"] = mesh_val;
 }
@@ -84,16 +62,6 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 ee::PropertySetting* Sprite::CreatePropertySetting(ee::EditPanelImpl* stage)
 {
 	return new PropertySetting(stage, this);
-}
-
-void Sprite::SetTween(Sprite* begin, Sprite* end, float process)
-{
-	GetMeshTrans().SetTween(begin->GetMeshTrans(), end->GetMeshTrans(), process);
-}
-
-void Sprite::SetBaseSym(const ee::Symbol* sym) 
-{ 
-	cu::RefCountObjAssign(m_base, sym); 
 }
 
 ee::Sprite* Sprite::Create(ee::Symbol* sym) 

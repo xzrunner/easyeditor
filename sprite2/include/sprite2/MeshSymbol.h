@@ -28,8 +28,13 @@ public:
 	Mesh* GetMesh() { return m_mesh; }
 	void SetMesh(Mesh* mesh);
 
+	void SetPause(bool pause) { m_pause = pause; }
+
 protected:
 	Mesh* m_mesh;
+
+private:
+	bool m_pause;
 
 }; // MeshSymbol
 

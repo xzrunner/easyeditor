@@ -48,7 +48,7 @@ StagePanel::~StagePanel()
 void StagePanel::TraverseShapes(ee::Visitor<ee::Shape>& visitor, 
 								ee::DataTraverseType type/* = ee::DT_ALL*/) const
 {
-	Mesh* mesh = m_sym->GetMesh();
+	Mesh* mesh = dynamic_cast<Mesh*>(m_sym->GetMesh());
 	if (mesh) {
 		mesh->TraverseMesh(visitor);
 	}
@@ -66,7 +66,7 @@ const Symbol* StagePanel::GetMeshSymbol() const
 
 Mesh* StagePanel::GetMesh()
 {
-	return m_sym->GetMesh();
+	return dynamic_cast<Mesh*>(m_sym->GetMesh());
 }
 
 void StagePanel::LoadFromSymbol(const ee::Symbol* sym)
@@ -75,7 +75,7 @@ void StagePanel::LoadFromSymbol(const ee::Symbol* sym)
 
 void StagePanel::UpdateSymbol()
 {
-	if (Mesh* mesh = m_sym->GetMesh()) {
+	if (Mesh* mesh = dynamic_cast<Mesh*>(m_sym->GetMesh())) {
 		std::vector<ee::Shape*> polylines;
 		TraverseShapes(ee::FetchAllVisitor<ee::Shape>(polylines));
 		mesh->Refresh();
@@ -112,14 +112,14 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 	switch (sj_id) 
 	{
 	case ee::MSG_REMOVE_SHAPE:
-		if (Mesh* mesh = m_sym->GetMesh()) {
+		if (Mesh* mesh = dynamic_cast<Mesh*>(m_sym->GetMesh())) {
 			if (mesh->RemoveMesh((ee::Shape*)ud)) {
 				ee::SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		}
 		break;
 	case ee::MSG_INSERT_SHAPE:
-		if (Mesh* mesh = m_sym->GetMesh()) {
+		if (Mesh* mesh = dynamic_cast<Mesh*>(m_sym->GetMesh())) {
 			if (mesh->InsertMesh((ee::Shape*)ud)) {
 				UpdateSymbol();
 				ee::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -127,7 +127,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 		}
 		break;
 	case ee::MSG_CLEAR_SHAPE:
-		if (Mesh* mesh = m_sym->GetMesh()) {
+		if (Mesh* mesh = dynamic_cast<Mesh*>(m_sym->GetMesh())) {
 			if (mesh->ClearMesh()) {
 				ee::SetCanvasDirtySJ::Instance()->SetDirty();
 			}

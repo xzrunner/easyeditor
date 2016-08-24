@@ -45,7 +45,8 @@ void PropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->Append(new wxPropertyCategory("MESH", wxPG_LABEL));
 
 	Sprite* spr = static_cast<Sprite*>(GetSprite());
-	ee::OpenSymbolProperty* prop = new ee::OpenSymbolProperty("MeshSymbol", "zz-name", spr->GetBaseSym()->GetFilepath());
+	ee::OpenSymbolProperty* prop = new ee::OpenSymbolProperty("MeshSymbol", "", 
+		dynamic_cast<const ee::Symbol*>(spr->GetBaseSym())->GetFilepath());
 	OpenSymbolMonitor* lsn = new OpenSymbolMonitor(spr);
 	prop->SetListener(lsn);
 	lsn->RemoveReference();

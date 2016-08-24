@@ -1,7 +1,7 @@
 #include "Network.h"
 #include "config.h"
 #include "NetworkShape.h"
-#include "MeshTrans.h"
+#include "MeshSerialization.h"
 
 #include <ee/JsonSerializer.h>
 
@@ -9,6 +9,7 @@
 
 #include <sprite2/MeshTriangle.h>
 #include <sprite2/NetworkShape.h>
+#include <sprite2/MeshTransform.h>
 
 #include <assert.h>
 
@@ -54,8 +55,8 @@ void Network::Load(const Json::Value& value)
 
 	RefreshTriangles();
 
-	MeshTrans trans;
-	trans.Load(value);
+	s2::MeshTransform trans;
+	MeshSerialization::Load(trans, value);
 	trans.StoreToMesh(this);
 }
 
@@ -69,9 +70,9 @@ void Network::Store(Json::Value& value) const
 
 	dynamic_cast<NetworkShape*>(m_nw)->StoreToFile(value, "");
 
-	MeshTrans trans;
-	trans.LoadFromMesh(this);
-	trans.Store(value);
+	s2::MeshTransform trans;
+	MeshSerialization::Load(trans, value);
+	trans.StoreToMesh(this);
 }
 
 void Network::OffsetUV(float dx, float dy)

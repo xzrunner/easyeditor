@@ -34,7 +34,7 @@ const IPackNode* MeshSprBuilder::Create(const emesh::Sprite* spr)
 
 	node->mesh = PackNodeFactory::Instance()->Create(dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
 
-	node->base = PackNodeFactory::Instance()->Create(spr->GetBaseSym());
+	node->base = PackNodeFactory::Instance()->Create(dynamic_cast<const ee::Symbol*>(spr->GetBaseSym()));
 	
 	const std::map<sm::vec2, sm::vec2, sm::Vector2Cmp>& map = spr->GetMeshTrans().GetMap();
 	node->trans_pairs.reserve(map.size() * 2);

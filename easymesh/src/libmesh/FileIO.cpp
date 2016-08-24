@@ -18,7 +18,7 @@ void FileIO::Store(const char* filepath, const Symbol* sym)
 
 	value["name"] = sym->name;
 
-	const Mesh* mesh = sym->GetMesh();
+	const Mesh* mesh = dynamic_cast<const Mesh*>(sym->GetMesh());
 	if (mesh) {
 		mesh->Store(value);
 	} else {

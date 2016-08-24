@@ -7,7 +7,6 @@
 #include "libmesh/Sprite.h"
 #include "libmesh/Symbol.h"
 #include "libmesh/FileIO.h"
-#include "libmesh/MeshRenderer.h"
 
 // todo
 #include "libmesh/Strip.h"

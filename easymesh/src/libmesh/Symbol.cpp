@@ -7,7 +7,6 @@ namespace emesh
 {
 
 Symbol::Symbol()
-	: m_pause(false)
 {
 }
 

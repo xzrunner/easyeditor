@@ -54,7 +54,8 @@ bool OpenSymbolProperty::OnButtonClick( wxPropertyGrid* propGrid, wxString& valu
 
 	std::string filepath = GetValue();
 	std::string dirpath = FileHelper::GetFileDir(filepath);
-	wxFileDialog dlg(m_parent, wxT("Open Symbol"), dirpath, filepath, "*.json", wxFD_OPEN);
+	std::string filter = "*.png;*.jpg;*.json";
+	wxFileDialog dlg(m_parent, wxT("Open Symbol"), dirpath, filepath, filter, wxFD_OPEN);
 	if (dlg.ShowModal() == wxID_OK)
 	{
 		std::string sym_path = dlg.GetPath();

@@ -29,7 +29,7 @@ void MeshTransform::LoadFromMesh(const Mesh* mesh)
 	}
 }
 
-void MeshTransform::StoreToMesh(Mesh* mesh) const
+void MeshTransform::StoreToMesh(const Mesh* mesh) const
 {
 	const std::vector<MeshTriangle*>& tris = mesh->GetTriangles();
 

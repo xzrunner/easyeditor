@@ -149,7 +149,7 @@ void SymbolDependanceSorter::fetch(const std::vector<const ee::Symbol*>& syms)
 		}
 		else if (const eicon::Symbol* icon = dynamic_cast<const eicon::Symbol*>(sym))
 		{
-			const std::string& filepath = icon->GetIcon()->GetImage()->GetFilepath();
+			const std::string& filepath = dynamic_cast<const eicon::Icon*>(icon->GetIcon())->GetImage()->GetFilepath();
 			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			m_unique.insert(sym);
 			m_unique.insert(icon);
@@ -279,7 +279,7 @@ void SymbolDependanceSorter::sort()
 			}
 			else if (eicon::Symbol* icon = dynamic_cast<eicon::Symbol*>(sym)) 
 			{
-				const std::string& filepath = icon->GetIcon()->GetImage()->GetFilepath();
+				const std::string& filepath = dynamic_cast<const eicon::Icon*>(icon->GetIcon())->GetImage()->GetFilepath();
 				ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 				if (IsSymbolPrepared(sym)) {
  					m_symbol_set.Insert(icon);

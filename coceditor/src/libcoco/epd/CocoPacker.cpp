@@ -22,6 +22,7 @@
 #include <epbin.h>
 
 #include <sprite2/S2_Sprite.h>
+#include <sprite2/MeshTriangle.h>
 
 #include <queue>
 
@@ -728,7 +729,7 @@ int CocoPacker::ParserIcon(const eicon::Sprite* spr)
 
 void CocoPacker::ParserIcon(const eicon::Symbol* sym, float process, int id)
 {
-	const ee::Image* img = sym->GetIcon()->GetImage();
+	const ee::Image* img = dynamic_cast<const eicon::Icon*>(sym->GetIcon())->GetImage();
 	ee::Symbol* img_symbol = ee::SymbolMgr::Instance()->FetchSymbol(img->GetFilepath());
 	TPParser::Picture* picture = m_parser.FindPicture(img_symbol);
 	if (!picture) {
@@ -1063,7 +1064,7 @@ int CocoPacker::ParserMesh(const emesh::Sprite* spr)
 	}
 	std::vector<int> frame_size;
 	sm::vec2 speed = spr->GetSpeed();
-	emesh::Mesh* shape = const_cast<emesh::Mesh*>(static_cast<const emesh::Symbol*>(sym)->GetMesh());
+	emesh::Mesh* shape = const_cast<emesh::Mesh*>(dynamic_cast<const emesh::Mesh*>(dynamic_cast<const emesh::Symbol*>(sym)->GetMesh()));
 	// 打包emesh::Strip做的流水
 	if (dynamic_cast<emesh::Strip*>(shape))
 	{

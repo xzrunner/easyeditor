@@ -1,8 +1,10 @@
 #include "MeshSymbol.h"
+#include "MeshSprite.h"
 #include "Mesh.h"
 #include "S2_Sprite.h"
 #include "RenderParams.h"
 #include "MeshTransform.h"
+#include "DrawMesh.h"
 
 #include <shaderlab.h>
 
@@ -10,6 +12,8 @@ namespace s2
 {
 
 MeshSymbol::MeshSymbol()
+	: m_mesh(NULL)
+	, m_pause(false)
 {
 }
 
@@ -38,7 +42,7 @@ void MeshSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 	shader->SetColor(p.color.mul.ToABGR(), p.color.add.ToABGR());
 	shader->SetColorMap(p.color.rmap.ToABGR(), p.color.gmap.ToABGR(), p.color.bmap.ToABGR());
 
-	const Sprite* mesh_spr = dynamic_cast<const Sprite*>(spr);
+	const MeshSprite* mesh_spr = dynamic_cast<const MeshSprite*>(spr);
 	if (mesh_spr) {
 		const MeshTransform& mtrans = mesh_spr->GetMeshTrans();
 		mtrans.StoreToMesh(m_mesh);

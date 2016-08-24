@@ -17,15 +17,10 @@ public:
 	Symbol();
 	Symbol(ee::Symbol* base);
 
-	void SetPause(bool pause) { m_pause = pause; }
-
 	static ee::Symbol* Create() { return new Symbol(); }
 
 protected:
 	virtual void LoadResources();
-
-private:
-	bool m_pause;
 
 }; // Symbol
 

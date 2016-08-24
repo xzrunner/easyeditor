@@ -14,13 +14,14 @@ class MeshTransform
 {
 public:
 	void LoadFromMesh(const Mesh* mesh);
-	void StoreToMesh(Mesh* mesh) const;
+	void StoreToMesh(const Mesh* mesh) const;
 
 	void SetTween(const MeshTransform& s, const MeshTransform& e, float process);
 
 	const std::map<sm::vec2, sm::vec2, sm::Vector2Cmp>& GetMap() const { return m_map; }
+	std::map<sm::vec2, sm::vec2, sm::Vector2Cmp>& GetMap() { return m_map; }
 
-protected:
+private:
 	std::map<sm::vec2, sm::vec2, sm::Vector2Cmp> m_map;
 
 }; // MeshTransform

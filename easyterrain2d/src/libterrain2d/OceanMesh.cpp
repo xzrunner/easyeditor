@@ -6,6 +6,7 @@
 #include <ee/ImageSymbol.h>
 
 #include <sprite2/MeshTriangle.h>
+#include <sprite2/DrawMesh.h>
 #include <shaderlab.h>
 #include <SM_Triangulation.h>
 
