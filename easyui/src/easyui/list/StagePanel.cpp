@@ -51,6 +51,7 @@ void StagePanel::LoadFromFile(const char* filename)
 	m_toolbar->EnableVert(m_list.IsVertEnable());
 
 	m_toolbar->EnableReverseOrder(m_list.IsReverseOrderEnable());
+	m_toolbar->EnableColumnOrder(m_list.IsColumnOrderEnable());
 
 	sm::vec2 sz = m_list.GetClipbox().Size();
 	m_toolbar->SetSizeText(sz.x, sz.y);

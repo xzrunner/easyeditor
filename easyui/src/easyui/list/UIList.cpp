@@ -135,7 +135,7 @@ void UIList::StoreToFile(const char* filename) const
 			int row = i / m_hori_count,
 				col = i % m_hori_count;
 			int idx = col * m_vert_count + row;
-			spr->SetName("item" + ee::StringHelper::ToString(idx));
+			spr->SetName("item" + ee::StringHelper::ToString(idx + 1));
 			items_complex.Add(spr);
 		}
 	} else if (m_reverse_order) {
