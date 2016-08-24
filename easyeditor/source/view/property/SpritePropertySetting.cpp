@@ -49,7 +49,7 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 		return;
 
 	Sprite* spr = m_impl->GetSprite();
-	Symbol* sym = dynamic_cast<Symbol*>(spr);
+	Symbol* sym = dynamic_cast<Symbol*>(spr->GetSymbol());
 
 	bool dirty = true;
 
