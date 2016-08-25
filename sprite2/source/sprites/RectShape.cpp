@@ -7,7 +7,13 @@ namespace s2
 {
 
 RectShape::RectShape(const RectShape& rect)
+	: Shape(rect)
 {
+}
+
+RectShape::RectShape(const sm::rect& r) 
+{
+	m_bounding = r;
 }
 
 RectShape* RectShape::Clone() const

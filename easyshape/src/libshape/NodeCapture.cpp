@@ -12,6 +12,7 @@
 #include <ee/MultiShapesImpl.h>
 
 #include <SM_Test.h>
+#include <SM_Calc.h>
 
 namespace eshape
 {

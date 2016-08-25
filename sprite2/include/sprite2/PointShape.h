@@ -9,13 +9,9 @@ namespace s2
 class PointShape : public VIRTUAL_INHERITANCE Shape
 {
 public:
-	PointShape() {}
+	PointShape();
 	PointShape(const PointShape& point);
-	PointShape(const sm::vec2& pos) 
-		: m_pos(pos) 
-	{
-		UpdateBounding();
-	}
+	PointShape(const sm::vec2& pos);
 
 	/**
 	 *  @interface

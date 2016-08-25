@@ -9,6 +9,7 @@
 #include <sprite2/DrawMesh.h>
 #include <shaderlab.h>
 #include <SM_Triangulation.h>
+#include <SM_Process.h>
 
 namespace eterrain2d
 {

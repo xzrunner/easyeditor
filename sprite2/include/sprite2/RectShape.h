@@ -11,9 +11,7 @@ class RectShape : public VIRTUAL_INHERITANCE Shape
 public:
 	RectShape() {}
 	RectShape(const RectShape& rect);
-	RectShape(const sm::rect& r) {
-		m_bounding = r;
-	}
+	RectShape(const sm::rect& r);
 	
 	/**
 	 *  @interface

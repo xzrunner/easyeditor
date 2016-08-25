@@ -8,8 +8,19 @@
 namespace s2
 {
 
+PointShape::PointShape() 
+{
+}
+
 PointShape::PointShape(const PointShape& point)
-	: m_pos(point.m_pos)
+	: Shape(point)
+	, m_pos(point.m_pos)
+{
+	UpdateBounding();
+}
+
+PointShape::PointShape(const sm::vec2& pos) 
+	: m_pos(pos) 
 {
 	UpdateBounding();
 }

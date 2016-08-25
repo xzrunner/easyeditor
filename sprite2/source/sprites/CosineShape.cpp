@@ -14,7 +14,14 @@ CosineShape::CosineShape()
 }
 
 CosineShape::CosineShape(const CosineShape& cosine)
-	: m_mid_points(cosine.m_mid_points)
+	: PolylineShape(cosine)
+	, m_mid_points(cosine.m_mid_points)
+{
+	UpdatePolyline();
+}
+
+CosineShape::CosineShape(const std::vector<sm::vec2>& vertices)
+	: PolylineShape(vertices) 
 {
 	UpdatePolyline();
 }

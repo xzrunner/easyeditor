@@ -9,14 +9,9 @@ namespace s2
 class CircleShape : public VIRTUAL_INHERITANCE Shape
 {
 public:
-	CircleShape() : m_radius(0) {}
+	CircleShape();
 	CircleShape(const CircleShape& circle);
-	CircleShape(const sm::vec2& center, float radius)
-		: m_center(center)
-		, m_radius(radius)
-	{
-		UpdateBounding();
-	}
+	CircleShape(const sm::vec2& center, float radius);
 
 	/**
 	 *  @interface

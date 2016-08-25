@@ -3,27 +3,16 @@
 
 #include "PolylineShape.h"
 
-#include <SM_Calc.h>
-
 namespace s2
 {
 
 class BezierShape : public PolylineShape
 {
 public:
-	BezierShape() {}
+	BezierShape();
 	BezierShape(const BezierShape& bezier);
-	BezierShape(const sm::vec2& start, const sm::vec2& end) {
-		m_control_nodes[0] = start;
-		m_control_nodes[3] = end;
-
-		sm::vec2 mid = (start + end) * 0.5f;
-		sm::vec2 offset = (end - start) * 0.5f;
-		m_control_nodes[1] = mid + sm::rotate_vector_right_angle(offset, true);
-		m_control_nodes[2] = mid + sm::rotate_vector_right_angle(offset, false);
-
-		UpdatePolyline();
-	}
+	BezierShape& operator = (const BezierShape& bezier);
+	BezierShape(const sm::vec2& start, const sm::vec2& end);
 	
 	/**
 	 *  @interface

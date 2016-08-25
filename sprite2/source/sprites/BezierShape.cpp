@@ -2,12 +2,41 @@
 #include "ShapeConfig.h"
 #include "S2_RVG.h"
 
+#include <SM_Calc.h>
+
 namespace s2
 {
 
+BezierShape::BezierShape()
+{
+	memset(m_control_nodes, 0, sizeof(m_control_nodes));
+}
+
 BezierShape::BezierShape(const BezierShape& bezier)
+	: PolylineShape(bezier)
 {
 	memcpy(m_control_nodes, bezier.m_control_nodes, sizeof(m_control_nodes));
+	UpdatePolyline();
+}
+
+BezierShape& BezierShape::operator = (const BezierShape& bezier)
+{
+	PolylineShape::operator = (bezier);
+	memcpy(m_control_nodes, bezier.m_control_nodes, sizeof(m_control_nodes));
+	UpdatePolyline();
+	return *this;
+}
+
+BezierShape::BezierShape(const sm::vec2& start, const sm::vec2& end) 
+{
+	m_control_nodes[0] = start;
+	m_control_nodes[3] = end;
+
+	sm::vec2 mid = (start + end) * 0.5f;
+	sm::vec2 offset = (end - start) * 0.5f;
+	m_control_nodes[1] = mid + sm::rotate_vector_right_angle(offset, true);
+	m_control_nodes[2] = mid + sm::rotate_vector_right_angle(offset, false);
+
 	UpdatePolyline();
 }
 

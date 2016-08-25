@@ -11,14 +11,9 @@ namespace s2
 class PolylineShape : public VIRTUAL_INHERITANCE Shape
 {
 public:
-	PolylineShape() : m_closed(false) {}
+	PolylineShape();
 	PolylineShape(const PolylineShape& polyline);
-	PolylineShape(const std::vector<sm::vec2>& vertices, bool closed = false)
-		: m_vertices(vertices)
-		, m_closed(closed)
-	{
-		UpdateBounding();
-	}
+	PolylineShape(const std::vector<sm::vec2>& vertices, bool closed = false);
 	
 	/**
 	 *  @interface

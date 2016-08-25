@@ -8,6 +8,7 @@
 #include <easyshape.h>
 
 #include <sprite2/S2_RVG.h>
+#include <SM_Calc.h>
 
 namespace emesh
 {

@@ -8,9 +8,22 @@
 namespace s2
 {
 
+CircleShape::CircleShape() 
+	: m_radius(0) 
+{
+}
+
 CircleShape::CircleShape(const CircleShape& circle)
-	: m_center(circle.m_center)
+	: Shape(circle)
+	, m_center(circle.m_center)
 	, m_radius(circle.m_radius)
+{
+	UpdateBounding();
+}
+
+CircleShape::CircleShape(const sm::vec2& center, float radius)
+	: m_center(center)
+	, m_radius(radius)
 {
 	UpdateBounding();
 }

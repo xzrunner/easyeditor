@@ -23,6 +23,7 @@
 
 #include <sprite2/S2_Sprite.h>
 #include <sprite2/MeshTriangle.h>
+#include <SM_Process.h>
 
 #include <queue>
 

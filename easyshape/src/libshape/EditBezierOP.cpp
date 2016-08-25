@@ -12,6 +12,7 @@
 #include <ee/panel_msg.h>
 
 #include <sprite2/S2_RVG.h>
+#include <SM_Calc.h>
 
 namespace eshape
 {
