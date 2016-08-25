@@ -183,7 +183,7 @@ bool PathVisibleSimple::IsSegIntersectBound(const sm::vec2& p0, const sm::vec2& 
 	if (sm::is_point_in_area((p0+p1)*0.5f, points)) {
 		return true;
 	}
-	return ee::Math2D::IsSegmentIntersectPolyline(p0, p1, points);	
+	return sm::is_segment_intersect_polyline(p0, p1, points);	
 }
 
 PathVisibleSimple::Node* PathVisibleSimple::CreateNode(const sm::vec2& pos)

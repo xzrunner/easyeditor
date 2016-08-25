@@ -15,55 +15,33 @@ namespace eshape
 {
 
 PolygonShape::PolygonShape()
-	: m_material(NULL)
 {
 }
 
 PolygonShape::PolygonShape(const PolygonShape& polygon)
-	: eshape::PolylineShape(polygon)
-	, s2::PolylineShape(polygon)
+	: s2::Shape(polygon)
+	, eshape::PolylineShape(polygon)
+	, s2::PolygonShape(polygon)
 {
-	if (polygon.m_material) {
-		polygon.m_material->AddReference();
-		m_material = polygon.m_material;
-	}
 }
 
 PolygonShape::PolygonShape(const std::vector<sm::vec2>& vertices)
-	: s2::PolylineShape(vertices, true)
-	, m_material(NULL)
+	: s2::PolygonShape(vertices)
 {
 	SetMaterialColor(ee::LIGHT_GREEN);
 }
 
-PolygonShape& PolygonShape::operator = (const PolygonShape& polygon)
-{
-	m_vertices = polygon.m_vertices;
-	m_closed = true;
-
-	if (polygon.m_material) {
-		m_material = polygon.m_material;
-		polygon.m_material->AddReference();
-	} else {
-		m_material = NULL;
-	}
-	return *this;
-}
-
 PolygonShape::~PolygonShape()
 {
-	if (m_material) {
-		m_material->RemoveReference();
-	}
 	ClearUserData(true);
 }
 
 void PolygonShape::Draw(const sm::mat4& mt, const s2::RenderColor& color) const
 {
-	if (m_material) {
-		m_material->Draw(mt, color);
+	if (m_poly) {
+		m_poly->Draw(mt, color);
 		if (ee::SettingData::draw_tris_edge) {
-			m_material->DebugDraw(mt);
+			m_poly->DebugDraw(mt);
 		}
 	}
 
@@ -79,8 +57,8 @@ void PolygonShape::Translate(const sm::vec2& offset)
 	}
 	m_bounding.Translate(offset);
 
-	if (m_material) {
-		m_material->Translate(offset);
+	if (m_poly) {
+		dynamic_cast<Material*>(m_poly)->Translate(offset);
 	}
 }
 
@@ -126,30 +104,33 @@ void PolygonShape::ReloadTexture()
 void PolygonShape::AddVertex(int index, const sm::vec2& pos)
 {
 	PolylineEditor::AddVertex(m_vertices, m_bounding, index, pos);
-	if (m_material) {
-		m_material->Clear();
-		m_material->SetOutline(m_vertices);
-		m_material->Build();
+	if (m_poly) {
+		Material* mat = dynamic_cast<Material*>(m_poly);
+		mat->Clear();
+		mat->SetOutline(m_vertices);
+		mat->Build();
 	}
 }
 
 void PolygonShape::RemoveVertex(const sm::vec2& pos)
 {
 	PolylineEditor::RemoveVertex(m_vertices, m_bounding, pos);
-	if (m_material) {
-		m_material->Clear();
-		m_material->SetOutline(m_vertices);
-		m_material->Build();
+	if (m_poly) {
+		Material* mat = dynamic_cast<Material*>(m_poly);
+		mat->Clear();
+		mat->SetOutline(m_vertices);
+		mat->Build();
 	}
 }
 
 void PolygonShape::ChangeVertex(const sm::vec2& from, const sm::vec2& to)
 {
 	PolylineEditor::ChangeVertex(m_vertices, m_bounding, from, to);
-	if (m_material) {
-		m_material->Clear();
-		m_material->SetOutline(m_vertices);
-		m_material->Build();
+	if (m_poly) {
+		Material* mat = dynamic_cast<Material*>(m_poly);
+		mat->Clear();
+		mat->SetOutline(m_vertices);
+		mat->Build();
 	}
 }
 
@@ -157,37 +138,38 @@ void PolygonShape::SetVertices(const std::vector<sm::vec2>& vertices)
 {
 	m_vertices = vertices;
 	UpdateBounding();
-	if (m_material) {
-		m_material->Clear();
-		m_material->SetOutline(m_vertices);
-		m_material->Build();
+	if (m_poly) {
+		Material* mat = dynamic_cast<Material*>(m_poly);
+		mat->Clear();
+		mat->SetOutline(m_vertices);
+		mat->Build();
 	}
 }
 
 void PolygonShape::SetMaterialColor(const s2::Color& color)
 {
-	if (m_material) {
-		m_material->RemoveReference();
+	if (m_poly) {
+		m_poly->RemoveReference();
 	}
-	m_material = new ColorMaterial(color);
-	m_material->SetOutline(m_vertices);
-	m_material->Build();
+	m_poly = new ColorMaterial(color);
+	m_poly->SetOutline(m_vertices);
+	m_poly->Build();
 }
 
 void PolygonShape::SetMaterialTexture(ee::ImageSymbol* image)
 {
-	if (m_material) {
-		m_material->RemoveReference();
+	if (m_poly) {
+		m_poly->RemoveReference();
 	}
-	m_material = new TextureMaterial(image);
-	m_material->SetOutline(m_vertices);
-	m_material->Build();
+	m_poly = new TextureMaterial(image);
+	m_poly->SetOutline(m_vertices);
+	m_poly->Build();
 }
 
 Json::Value PolygonShape::StoreMaterial(const std::string& dirpath) const
 {
-	if (m_material) {
-		return m_material->Store(dirpath);
+	if (m_poly) {
+		return dynamic_cast<Material*>(m_poly)->Store(dirpath);
 	} else {
 		return NULL;
 	}
@@ -195,35 +177,40 @@ Json::Value PolygonShape::StoreMaterial(const std::string& dirpath) const
 
 void PolygonShape::LoadMaterial(const std::string& dirpath, const Json::Value& val)
 {
-	if (m_material) {
-		delete m_material;
-		m_material = NULL;
+	if (m_poly) {
+		delete m_poly;
+		m_poly = NULL;
 	}
 
 	if (val["type"].isNull()) {
 		return;
 	}
 
-	if (m_material) {
-		m_material->RemoveReference();
+	if (m_poly) {
+		m_poly->RemoveReference();
 	}
 
 	std::string type = val["type"].asString();
 	if (type == "color") {
 		s2::Color col;
 		col.FromRGBA(val["color"].asUInt());
-		m_material = new ColorMaterial(col);
-		m_material->SetOutline(m_vertices);
-		m_material->Build();
+		m_poly = new ColorMaterial(col);
+		m_poly->SetOutline(m_vertices);
+		m_poly->Build();
 	} else if (type == "texture") {
 		std::string path = val["texture path"].asString();
 		ee::ImageSymbol* sym = static_cast<ee::ImageSymbol*>(
 			ee::SymbolMgr::Instance()->FetchSymbol(dirpath + "\\" + path));
-		m_material = new TextureMaterial(sym);
-		m_material->SetOutline(m_vertices);
-		m_material->Build();
+		m_poly = new TextureMaterial(sym);
+		m_poly->SetOutline(m_vertices);
+		m_poly->Build();
 		sym->RemoveReference();
 	}
+}
+
+const Material* PolygonShape::GetMaterial() const 
+{ 
+	return dynamic_cast<const Material*>(m_poly); 
 }
 
 }

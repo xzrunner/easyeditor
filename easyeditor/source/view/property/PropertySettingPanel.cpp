@@ -50,7 +50,9 @@ void PropertySettingPanel::SetDefaultPropertySetting()
 
 void PropertySettingPanel::SetPropertySetting(PropertySetting* setting)
 {
-	delete m_setting;
+	if (m_setting != setting) {
+		delete m_setting;
+	}
 	m_setting = setting;
 
 	if (m_setting) {

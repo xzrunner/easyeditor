@@ -83,19 +83,19 @@ bool Fixture::IsIntersect(const sm::rect& rect) const
 		
 		std::vector<sm::vec2> fixed;
 		TransLocalToWorld(boundary, fixed);
-		return ee::Math2D::IsPolylineIntersectRect(fixed, true, rect);
+		return sm::is_rect_intersect_polyline(rect, fixed, true);
 	}
 	else if (eshape::PolygonShape* polygon = dynamic_cast<eshape::PolygonShape*>(m_shape))
 	{
 		std::vector<sm::vec2> fixed;
 		TransLocalToWorld(polygon->GetVertices(), fixed);
-		return ee::Math2D::IsPolylineIntersectRect(fixed, true, rect);
+		return sm::is_rect_intersect_polyline(rect, fixed, true);
 	}
 	else if (eshape::ChainShape* chain = dynamic_cast<eshape::ChainShape*>(m_shape))
 	{
 		std::vector<sm::vec2> fixed;
 		TransLocalToWorld(chain->GetVertices(), fixed);
-		return ee::Math2D::IsPolylineIntersectRect(fixed, false, rect);
+		return sm::is_rect_intersect_polyline(rect, fixed, false);
 	}
 	else
 		return false;

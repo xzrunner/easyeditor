@@ -158,7 +158,7 @@ void ExtractOutlineFine::OutlineByAddNode(float area_tol, float perimeter_tol,
 			}
 		}
 
-		assert(ee::Math2D::IsPolygonInPolygon(m_raw_border_merged, m_fine_border));
+		assert(sm::is_polygon_in_polygon(m_raw_border_merged, m_fine_border));
 
 // 		// test legal
 // 		if (!IsOutlineLegal()) {
@@ -248,14 +248,14 @@ bool ExtractOutlineFine::IsCutTriLegal(const sm::vec2& center,
 									   const sm::vec2& p0, 
 									   const sm::vec2& p1) const
 {
-	if (ee::Math2D::IsSegmentIntersectPolyline(p0, p1, m_fine_border)) {
+	if (sm::is_segment_intersect_polyline(p0, p1, m_fine_border)) {
 		return false;
 	}
 
 	sm::vec2 tri_v[3] = {center, p0, p1};
 	std::vector<sm::vec2> tri;
 	tri.assign(tri_v, tri_v+3);
-	if (ee::Math2D::IsPolygonIntersectPolygon(m_raw_border_merged, tri)) {
+	if (sm::is_polygon_intersect_polygon(m_raw_border_merged, tri)) {
 		return false;
 	}
 
@@ -267,8 +267,8 @@ bool ExtractOutlineFine::IsAddTriLeagal(const sm::vec2& p0, const sm::vec2& p1, 
 	sm::vec2 tri_v[3] = {p0, p1, p2};
 	std::vector<sm::vec2> tri;
 	tri.assign(tri_v, tri_v+3);
-	return !ee::Math2D::IsPolygonIntersectPolygon(m_raw_border_merged, tri)
-		&& !ee::Math2D::IsPolygonIntersectPolygon(m_fine_border, tri);
+	return !sm::is_polygon_intersect_polygon(m_raw_border_merged, tri)
+		&& !sm::is_polygon_intersect_polygon(m_fine_border, tri);
 }
 
 // 已经是算出来的

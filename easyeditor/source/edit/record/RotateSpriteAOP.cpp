@@ -6,6 +6,8 @@
 #include "SpriteSelection.h"
 #include "FetchAllVisitor.h"
 
+#include <SM_Calc.h>
+
 namespace ee
 {
 
@@ -54,7 +56,7 @@ void RotateSpriteAOP::Undo()
 		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
 			Sprite* spr = m_sprs[i];
-			float angle = Math2D::GetAngleInDirection(spr->GetPosition(), m_start, m_end);
+			float angle = sm::get_angle_in_direction(spr->GetPosition(), m_start, m_end);
 			spr->Rotate(-angle);
 		}
 	} 
@@ -75,7 +77,7 @@ void RotateSpriteAOP::Redo()
 		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
 			Sprite* spr = m_sprs[i];
-			float angle = Math2D::GetAngleInDirection(spr->GetPosition(), m_start, m_end);
+			float angle = sm::get_angle_in_direction(spr->GetPosition(), m_start, m_end);
 			spr->Rotate(angle);
 		}
 	} 

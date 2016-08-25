@@ -177,7 +177,7 @@ void DelaunayTriangulation::GetBoundLinePos(std::vector<std::vector<sm::vec2> >&
 					if (bound.size() < 2)
 						angle = sm::get_line_angle(bound[bound.size() - 1], otherPos);
 					else
-						angle = Math2D::GetAngle(bound[bound.size() - 1], bound[bound.size() - 2], otherPos);
+						angle = sm::get_angle(bound[bound.size() - 1], bound[bound.size() - 2], otherPos);
 					if (angle < minAngle)
 					{
 						minAngle = angle;

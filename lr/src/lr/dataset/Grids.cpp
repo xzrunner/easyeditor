@@ -82,7 +82,7 @@ std::vector<int> Grids::IntersectPolygon(const std::vector<sm::vec2>& poly) cons
 		for (int x = xmin; x < xmax; ++x) {
 			int idx = y * m_col + x;
 			const Grid& g = m_grids[idx];
-			if (ee::Math2D::IsPolygonIntersectRect(poly_flat, g.m_flat_bound)) {
+			if (sm::is_rect_intersect_polygon(g.m_flat_bound, poly_flat)) {
 				ret.push_back(idx);
 			}
 		}
@@ -105,7 +105,7 @@ std::vector<int> Grids::IntersectPolyline(const std::vector<sm::vec2>& path) con
 		for (int x = xmin; x < xmax; ++x) {
 			int idx = y * m_col + x;
 			const Grid& g = m_grids[idx];
-			if (ee::Math2D::IsPolylineIntersectRect(poly_flat, false, g.m_flat_bound)) {
+			if (sm::is_rect_intersect_polyline(g.m_flat_bound, poly_flat, false)) {
 				ret.push_back(idx);
 			}
 		}

@@ -149,7 +149,7 @@ void EditNWOP::TranslasteNode(const sm::vec2& offset)
 
 void EditNWOP::RotateNode(const sm::vec2& dst)
 {
-	float angle = ee::Math2D::GetAngleInDirection(m_center, m_last_pos, dst);
+	float angle = sm::get_angle_in_direction(m_center, m_last_pos, dst);
 	std::vector<s2::MeshNode*> nodes;
 	m_selection.Traverse(ee::FetchAllVisitor<s2::MeshNode>(nodes));
 	for (int i = 0, n = nodes.size(); i < n; ++i)

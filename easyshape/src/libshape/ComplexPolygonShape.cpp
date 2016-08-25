@@ -42,7 +42,7 @@
 //
 //bool ComplexPolygonShape::IsIntersect(const sm::rect& rect) const
 //{
-//	return ee::Math2D::IsPolygonIntersectRect(m_vertices, rect);
+//	return sm::is_rect_intersect_polygon(rect, m_vertices);
 //}
 //
 //void ComplexPolygonShape::Translate(const sm::vec2& offset)

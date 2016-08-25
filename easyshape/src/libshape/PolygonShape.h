@@ -3,7 +3,7 @@
 
 #include "PolylineShape.h"
 
-#include <sprite2/PolylineShape.h>
+#include <sprite2/PolygonShape.h>
 
 namespace ee { class ImageSymbol; }
 
@@ -12,13 +12,12 @@ namespace eshape
 
 class Material;
 
-class PolygonShape : public PolylineShape, public s2::PolylineShape
+class PolygonShape : public PolylineShape, public s2::PolygonShape
 {
 public:
 	PolygonShape();
 	PolygonShape(const PolygonShape& polygon);
 	PolygonShape(const std::vector<sm::vec2>& vertices);
-	PolygonShape& operator = (const PolygonShape& polygon);
 	virtual ~PolygonShape();
 	
 	/**
@@ -59,15 +58,7 @@ public:
 	Json::Value StoreMaterial(const std::string& dirpath) const;
 	void LoadMaterial(const std::string& dirpath, const Json::Value& val);
 
-	const Material* GetMaterial() const { return m_material; }
-
-//	const std::vector<sm::vec2>& GetVertices() const { return m_vertices; }
-
-protected:
-	virtual void UpdateBounding() { s2::PolylineShape::UpdateBounding(); }
-
-protected:
-	Material* m_material;
+	const Material* GetMaterial() const;
 
 }; // PolygonShape
 

@@ -201,7 +201,7 @@ IsContain(const ee::Sprite* spr) const
 	std::vector<sm::vec2> bound;
 	sm::trans_vertices(spr->GetTransMatrix(), poly->GetVertices(), bound);
 
-	return ee::Math2D::IsPolylineIntersectRect(bound, true, m_rect);
+	return sm::is_rect_intersect_polyline(m_rect, bound, true);
 }
 
 bool Quadtree::Node::

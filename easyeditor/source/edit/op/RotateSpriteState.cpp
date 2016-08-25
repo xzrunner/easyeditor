@@ -4,6 +4,8 @@
 #include "SpriteSelection.h"
 #include "panel_msg.h"
 
+#include <SM_Calc.h>
+
 namespace ee
 {
 
@@ -53,7 +55,7 @@ void RotateSpriteState::RotateVisitor::
 Visit(Sprite* spr, bool& next)
 {
 	sm::vec2 center = spr->GetPosition() + spr->GetOffset();
-	float angle = Math2D::GetAngleInDirection(center, m_start, m_end);
+	float angle = sm::get_angle_in_direction(center, m_start, m_end);
 	spr->Rotate(angle);
 
 	m_angle += angle;

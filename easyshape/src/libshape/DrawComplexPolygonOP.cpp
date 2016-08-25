@@ -45,7 +45,7 @@
 //	{
 //		PolygonShape* poly = polygon_shapes[i];
 //		const std::vector<sm::vec2>& outline = poly->GetVertices();
-//		if (!ee::Math2D::IsPolygonInPolygon(polyline, outline)) {
+//		if (!sm::is_polygon_in_polygon(polyline, outline)) {
 //			continue;
 //		}
 //

@@ -3,6 +3,7 @@
 #include <ee/Math2D.h>
 
 #include <sprite2/MeshTriangle.h>
+#include <SM_Test.h>
 
 namespace eterrain2d
 {
@@ -21,7 +22,7 @@ void MeshShape::InsertTriangle(const sm::vec2* vertices,
 		s2::MeshNode* n = new s2::MeshNode(vertices[i], texcoords[i]);
 		
 		for (int j = 0, m = bound.size(); j < m; ++j) {
-			if (ee::Math2D::IsPointOnPolyline(n->ori_xy, bound)) {
+			if (sm::is_point_intersect_polyline(n->ori_xy, bound)) {
 				n->ud = (void*)&MeshShape::IS_BOUND;
 			} else {
 				n->ud = (void*)&MeshShape::NOT_BOUND;

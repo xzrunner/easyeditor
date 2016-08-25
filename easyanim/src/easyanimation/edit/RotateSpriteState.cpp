@@ -34,7 +34,7 @@ void RotateSpriteState::Rotate(const sm::vec2& dst)
 	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
 
 	skeleton->FixJoint(sprs[0]);
-	float dAngle = ee::Math2D::GetAngleInDirection(sprs[0]->GetPosition(), GetLastPos(), dst);
+	float dAngle = sm::get_angle_in_direction(sprs[0]->GetPosition(), GetLastPos(), dst);
 	skeleton->UpdateJoint(sprs[0], dAngle);
 }
 

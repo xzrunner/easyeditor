@@ -165,7 +165,7 @@ bool RotateTrimImage::GetRotateTrimInfo(const ee::Image* image, int& width, int&
 		const sm::vec2& e = bound[left_idx == 3 ? 0 : left_idx + 1];
 		sm::vec2 right = s;
 		right.x += 1;
-		angle = -ee::Math2D::GetAngle(s, e, right);
+		angle = -sm::get_angle(s, e, right);
 		center = sm::rotate_vector(center, angle);
 
 		width = std::ceil(sm::dis_pos_to_pos(s, e));

@@ -115,7 +115,7 @@ Rotate(const sm::vec2& dst)
 		std::string filepath = dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath();
 		if (!CharacterFileName::IsValidFilepath(filepath)) {
 			sm::vec2 center = spr->GetPosition() + spr->GetOffset();
-			float angle = ee::Math2D::GetAngleInDirection(center, m_last_pos, dst);
+			float angle = sm::get_angle_in_direction(center, m_last_pos, dst);
 			spr->Rotate(angle);
 		}
 	}

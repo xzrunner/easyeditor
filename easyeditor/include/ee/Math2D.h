@@ -20,26 +20,11 @@ public:
 	//
 	//////////////////////////////////////////////////////////////////////////
 
-	// To check if the 2 point overlapped with each other.
-	static bool IsTheSamePos(const sm::vec2& p0, const sm::vec2& p1, const float tolerance = FLT_EPSILON);
-
-	static bool IsPolygonIntersectPolygon(const std::vector<sm::vec2>& poly0, const std::vector<sm::vec2>& poly1);
-	static bool IsPolygonInPolygon(const std::vector<sm::vec2>& in, const std::vector<sm::vec2>& out);
-
-	static bool IsPolygonIntersectRect(const std::vector<sm::vec2>& poly, const sm::rect& rect);
-
-	static bool IsSegmentIntersectPolyline(const sm::vec2& s, const sm::vec2& e, const std::vector<sm::vec2>& poly);
-
-	static bool IsPolylineIntersectRect(const std::vector<sm::vec2>& polyline, bool isLoop, const sm::rect& aabb);
-
 	static bool IsCircleIntersectRect(const sm::vec2& center, float radius, const sm::rect& aabb);
 
 	static bool IsPointInTriangle(const sm::vec2& p, const sm::vec2& a, const sm::vec2& b, const sm::vec2& c);
 
-	static bool IsPointOnPolyline(const sm::vec2& pos, const std::vector<sm::vec2>& poly);
-
 	static bool IsTwoLineParallel(const sm::vec2& s0, const sm::vec2& e0, const sm::vec2& s1, const sm::vec2& e1);
-	static bool IsTwoSegmentIntersect(const sm::vec2& s0, const sm::vec2& e0, const sm::vec2& s1, const sm::vec2& e1);
 
 	// To check if the point in the triangle.
 	// return: [0] p is on the edge t0-t1		[1] p is on the edge t1-t2
@@ -61,16 +46,10 @@ public:
 
 	static float GetDisPointToMultiPos(const sm::vec2& p, const std::vector<std::vector<sm::vec2> >& pos, size_t* index0 = NULL, size_t* index1 = NULL);
 
-	static float GetAngle(const sm::vec2& center, const sm::vec2& pa, const sm::vec2& pb);
-
-	static float GetAngleInDirection(const sm::vec2& center, const sm::vec2& start, const sm::vec2& end);
-
 	static float GetPolygonArea(const std::vector<sm::vec2>& polygon);
 	static float GetTriangleArea(const sm::vec2& p0, const sm::vec2& p1, const sm::vec2& p2);
 
 	static float GetPolygonPerimeter(const std::vector<sm::vec2>& poly);
-
-	static bool GetTwoSegmentCross(const sm::vec2& s0, const sm::vec2& e0, const sm::vec2& s1, const sm::vec2& e1, sm::vec2* cross);
 
 	//////////////////////////////////////////////////////////////////////////
 	//
@@ -114,9 +93,6 @@ public:
 		sm::vec2& ds, sm::vec2& de);
 
 private:
-	// if clockwise return true
-	static bool IsPolygonColckwise(const std::vector<sm::vec2>& poly);
-
 	static int GetNextIdxInRing(int sz, int curr, int step);
 
 	static bool IsTwoPointsSame(const sm::vec2& p0, const sm::vec2& p1);
@@ -124,7 +100,5 @@ private:
 }; // Math2D
 
 }
-
-#include "Math2D.inl"
 
 #endif // _EASYEDITOR_MATH2D_H_
