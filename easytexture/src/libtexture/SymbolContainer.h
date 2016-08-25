@@ -28,6 +28,10 @@ public:
 	virtual bool ResetOrderMost(const ee::Shape* shape, bool up);
 
 private:
+	void LoadShapes(std::vector<ee::Shape*>& shapes) const;
+	void StorePolygons(const std::vector<ee::Shape*>& shapes);
+
+private:
 	Symbol* m_sym;
 
 }; // SymbolContainer

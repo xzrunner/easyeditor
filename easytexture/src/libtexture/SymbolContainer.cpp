@@ -4,6 +4,10 @@
 #include <ee/ObjectVector.h>
 #include <ee/Shape.h>
 
+#include <easyshape.h>
+
+#include <sprite2/PolygonShape.h>
+
 namespace etexture
 {
 
@@ -20,7 +24,9 @@ SymbolContainer::~SymbolContainer()
 
 void SymbolContainer::Traverse(ee::Visitor<ee::Shape>& visitor, bool order/* = true*/) const
 {
-	ee::ObjectVector<ee::Shape>::Traverse(m_sym->m_shapes, visitor, order);
+	std::vector<ee::Shape*> shapes;
+	LoadShapes(shapes);
+	ee::ObjectVector<ee::Shape>::Traverse(shapes, visitor, order);
 }
 
 void SymbolContainer::Traverse(ee::Visitor<ee::Shape>& visitor, ee::DataTraverseType type, bool order) const
@@ -30,32 +36,75 @@ void SymbolContainer::Traverse(ee::Visitor<ee::Shape>& visitor, ee::DataTraverse
 
 bool SymbolContainer::Remove(ee::Shape* shape)
 {
-	return ee::ObjectVector<ee::Shape>::Remove(m_sym->m_shapes, shape);
+	std::vector<ee::Shape*> shapes;
+	LoadShapes(shapes);
+	bool ret = ee::ObjectVector<ee::Shape>::Remove(shapes, shape);
+	StorePolygons(shapes);
+	return ret;
 }
 
 bool SymbolContainer::Insert(ee::Shape* shape)
 {
-	return ee::ObjectVector<ee::Shape>::Insert(m_sym->m_shapes, shape);
+	std::vector<ee::Shape*> shapes;
+	LoadShapes(shapes);
+	bool ret = ee::ObjectVector<ee::Shape>::Insert(shapes, shape);
+	StorePolygons(shapes);
+	return ret;
 }
 
 bool SymbolContainer::Insert(ee::Shape* shape, int idx)
 {
-	return ee::ObjectVector<ee::Shape>::Insert(m_sym->m_shapes, shape, idx);
+	std::vector<ee::Shape*> shapes;
+	LoadShapes(shapes);
+	bool ret = ee::ObjectVector<ee::Shape>::Insert(shapes, shape, idx);
+	StorePolygons(shapes);
+	return ret;
 }
 
 bool SymbolContainer::Clear()
 {
-	return ee::ObjectVector<ee::Shape>::Clear(m_sym->m_shapes);
+	std::vector<ee::Shape*> shapes;
+	LoadShapes(shapes);
+	bool ret = ee::ObjectVector<ee::Shape>::Clear(shapes);
+	m_sym->GetPolygons().clear();
+	return ret;
 }
 
 bool SymbolContainer::ResetOrder(const ee::Shape* shape, bool up)
 {
-	return ee::ObjectVector<ee::Shape>::ResetOrder(m_sym->m_shapes, shape, up);
+	std::vector<ee::Shape*> shapes;
+	LoadShapes(shapes);
+	bool ret = ee::ObjectVector<ee::Shape>::ResetOrder(shapes, shape, up);
+	StorePolygons(shapes);
+	return ret;
 }
 
 bool SymbolContainer::ResetOrderMost(const ee::Shape* shape, bool up)
 {
-	return ee::ObjectVector<ee::Shape>::ResetOrderMost(m_sym->m_shapes, shape, up);
+	std::vector<ee::Shape*> shapes;
+	LoadShapes(shapes);
+	bool ret = ee::ObjectVector<ee::Shape>::ResetOrderMost(shapes, shape, up);
+	StorePolygons(shapes);
+	return ret;
+}
+
+void SymbolContainer::LoadShapes(std::vector<ee::Shape*>& shapes) const
+{
+	std::vector<s2::PolygonShape*>& polygons = m_sym->GetPolygons();
+	shapes.reserve(polygons.size());
+	for (int i = 0, n = polygons.size(); i < n; ++i) {
+		shapes.push_back(dynamic_cast<ee::Shape*>(static_cast<s2::Shape*>(polygons[i])));
+	}
+}
+
+void SymbolContainer::StorePolygons(const std::vector<ee::Shape*>& shapes)
+{
+	std::vector<s2::PolygonShape*>& polygons = m_sym->GetPolygons();
+	polygons.clear();
+	polygons.reserve(shapes.size());
+	for (int i = 0, n = shapes.size(); i < n; ++i) {
+		polygons.push_back(static_cast<eshape::PolygonShape*>(shapes[i]));
+	}
 }
 
 }

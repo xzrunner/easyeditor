@@ -11,12 +11,12 @@ namespace etexture
 
 void FileSaver::Store(const char* filepath, const Symbol* sym)
 {
-	const std::vector<ee::Shape*>& shapes = sym->GetAllShapes();
+	const std::vector<s2::PolygonShape*>& shapes = sym->GetPolygons();
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
 
 	Json::Value value;
 	for (size_t i = 0; i < shapes.size(); ++i) {
-		ee::Shape* shape = shapes[i];
+		ee::Shape* shape = dynamic_cast<ee::Shape*>(static_cast<s2::Shape*>(shapes[i]));
 		value["shapes"][i] = eshape::FileIO::StoreShape(dir, shape);
 	}
 

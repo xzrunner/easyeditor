@@ -38,7 +38,7 @@ void TextureBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 
 bool TextureBuilder::CanHandle(const etexture::Symbol* sym) const
 {
-	const std::vector<ee::Shape*>& shapes = sym->GetAllShapes();
+	const std::vector<ee::Shape*>& shapes = sym->GetPolygons();
 	if (shapes.size() != 1) {
 		return false;
 	}
@@ -69,7 +69,7 @@ const IPackNode* TextureBuilder::Create(const etexture::Symbol* sym)
 
 void TextureBuilder::Load(const etexture::Symbol* sym, PackPicture* pic)
 {
-	const std::vector<ee::Shape*>& shapes = sym->GetAllShapes();
+	const std::vector<ee::Shape*>& shapes = sym->GetPolygons();
 	if (shapes.size() != 1) {
 		throw ee::Exception("TextureBuilder::Load shapes.size(): %d filepath: %s", shapes.size(), sym->GetFilepath().c_str());
 	}

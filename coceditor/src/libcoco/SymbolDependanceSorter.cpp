@@ -261,7 +261,7 @@ void SymbolDependanceSorter::sort()
 			}
 			else if (etexture::Symbol* tex = dynamic_cast<etexture::Symbol*>(sym))
 			{
-				const std::vector<ee::Shape*>& shapes = tex->GetAllShapes();
+				const std::vector<ee::Shape*>& shapes = tex->GetPolygons();
 				assert(shapes.size() == 1);
 				for (int i = 0, n = shapes.size(); i < n; ++i)
 				{

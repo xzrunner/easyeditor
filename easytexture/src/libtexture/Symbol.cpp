@@ -1,57 +1,21 @@
 #include "Symbol.h"
 
 #include <ee/FileHelper.h>
+#include <ee/Shape.h>
 
 #include <easyshape.h>
 
-#include <shaderlab.h>
-#include <sprite2/RenderParams.h>
+#include <sprite2/PolygonShape.h>
 
+#include <json/json.h>
+
+#include <fstream>
 
 namespace etexture
 {
 
 Symbol::Symbol()
 {
-}
-
-Symbol::~Symbol()
-{
-	Clear();
-}
-
-void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
-{
-	s2::RenderParams p = params;
-	if (spr) {
-		p.mt = spr->GetTransMatrix() * params.mt;
-		p.color = spr->Color() * params.color;
-	}
-
-	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
-	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
-	shader->SetColor(p.color.mul.ToABGR(), p.color.add.ToABGR());
-	shader->SetColorMap(p.color.rmap.ToABGR(), p.color.gmap.ToABGR(), p.color.bmap.ToABGR());
-
-	for (int i = 0, n = m_shapes.size(); i < n; ++i) {
-		m_shapes[i]->Draw(p.mt, p.color);
-	}
-}
-
-sm::rect Symbol::GetBounding(const s2::Sprite* spr) const
-{
-	sm::rect rect;
-	for (size_t i = 0, n = m_shapes.size(); i < n; ++i) {
-		rect.Combine(m_shapes[i]->GetBounding());
-	}
-	return rect;
-}
-
-void Symbol::ReloadTexture() const
-{
-	for (int i = 0, n = m_shapes.size(); i < n; ++i) {
-		m_shapes[i]->ReloadTexture();
-	}
 }
 
 void Symbol::LoadResources()
@@ -72,17 +36,9 @@ void Symbol::LoadResources()
 	Json::Value shape_val = value["shapes"][i++];
 	while (!shape_val.isNull()) {
 		ee::Shape* shape = eshape::FileIO::LoadShape(dir, shape_val);
-		m_shapes.push_back(shape);
+		m_polygons.push_back(dynamic_cast<s2::PolygonShape*>(shape));
 		shape_val = value["shapes"][i++];
 	}
-}
-
-void Symbol::Clear()
-{
-	for (int i = 0, n = m_shapes.size(); i < n; ++i) {
-		m_shapes[i]->RemoveReference();
-	}
-	m_shapes.clear();
 }
 
 }

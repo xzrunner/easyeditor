@@ -37,7 +37,7 @@ void ShapeBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 
 bool ShapeBuilder::CanHandle(const etexture::Symbol* sym) const
 {
-	const std::vector<ee::Shape*>& shapes = sym->GetAllShapes();
+	const std::vector<ee::Shape*>& shapes = sym->GetPolygons();
 	if (shapes.size() != 1) {
 		return false;
 	}
@@ -68,7 +68,7 @@ const IPackNode* ShapeBuilder::Create(const etexture::Symbol* sym)
 
 void ShapeBuilder::Load(const etexture::Symbol* sym, PackShape* shape)
 {
-	const std::vector<ee::Shape*>& shapes = sym->GetAllShapes();
+	const std::vector<ee::Shape*>& shapes = sym->GetPolygons();
 	if (shapes.size() != 1) {
 		throw ee::Exception("ShapeBuilder::Load shapes.size(): %d filepath: %s", shapes.size(), sym->GetFilepath().c_str());
 	}
