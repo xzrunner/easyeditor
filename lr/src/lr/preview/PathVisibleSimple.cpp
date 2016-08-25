@@ -8,6 +8,7 @@
 #include <sprite2/S2_RVG.h>
 #include <sprite2/BoundingBox.h>
 #include <SM_Test.h>
+#include <SM_Process.h>
 
 namespace lr
 {
@@ -107,7 +108,7 @@ void PathVisibleSimple::InsertBoundary(const ee::Sprite* spr)
 
 	// fix
 	std::vector<sm::vec2> fixed;
-	ee::Math2D::RemoveDuplicatePoints(bound, fixed);
+	sm::rm_duplicate_nodes(bound, fixed);
 	sm::mat4 mat = spr->GetTransMatrix();
 	for (int i = 0; i < fixed.size(); ++i) {
 		fixed[i] = mat * fixed[i];

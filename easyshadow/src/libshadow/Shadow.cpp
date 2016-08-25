@@ -59,7 +59,7 @@ void Shadow::Draw(const sm::mat4& mt, float alpha) const
 //	shader->SetAlpha(alpha);
 
 	std::vector<sm::vec2> tris;
-	ee::Math2D::TransVertices(mt, m_tris, tris);
+	sm::trans_vertices(mt, m_tris, tris);
 	s2::RVG::Triangles(tris, m_colors);
 
 // 	s2::RVG::Polyline(mt, m_inner_loop, ee::LIGHT_RED, true);

@@ -64,7 +64,7 @@
 //		float len = sm::mat_trans_len(ee::SettingData::ctl_pos_sz, mt);
 //		for (int i = 0, n = m_holes.size(); i < n; ++i) {
 //			std::vector<sm::vec2> vertices;
-//			ee::Math2D::TransVertices(mt, m_holes[i], vertices);
+//			sm::trans_vertices(mt, m_holes[i], vertices);
 //			s2::RVG::SetColor(color.mul);
 //			s2::RVG::Polyline(vertices, m_loop);
 //			if (len != 0) {

@@ -125,7 +125,7 @@ void Fixture::Draw(const sm::mat4& mt, const s2::Color& cFace, const s2::Color& 
 	else if (eshape::PolygonShape* polygon = dynamic_cast<eshape::PolygonShape*>(m_shape))
 	{
 		std::vector<sm::vec2> vertices;
-		ee::Math2D::TransVertices(mt, polygon->GetVertices(), vertices);
+		sm::trans_vertices(mt, polygon->GetVertices(), vertices);
 		// todo draw with triangles
 //		ee::PrimitiveDraw::DrawPolygon(vertices, cFace);
 		s2::RVG::SetColor(cEdge);
@@ -134,7 +134,7 @@ void Fixture::Draw(const sm::mat4& mt, const s2::Color& cFace, const s2::Color& 
 	else if (eshape::ChainShape* chain = dynamic_cast<eshape::ChainShape*>(m_shape))
 	{
 		std::vector<sm::vec2> vertices;
-		ee::Math2D::TransVertices(mt, chain->GetVertices(), vertices);
+		sm::trans_vertices(mt, chain->GetVertices(), vertices);
 		s2::RVG::SetColor(cEdge);
 		s2::RVG::Polyline(vertices, chain->IsClosed());
 	}

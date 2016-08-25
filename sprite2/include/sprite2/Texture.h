@@ -2,13 +2,14 @@
 #define _SPRITE2_TEXTURE_H_
 
 #include <SM_Vector.h>
+#include <CU_RefCountObj.h>
 
 #include <stdint.h>
 
 namespace s2
 {
 
-class Texture
+class Texture : public cu::RefCountObj
 {
 public:
 	Texture(uint16_t w, uint16_t h, uint32_t id) {

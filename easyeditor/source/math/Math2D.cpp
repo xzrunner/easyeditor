@@ -548,15 +548,6 @@ void Math2D::GetNearestPosOnLineToPoint(const sm::vec2& p, const std::vector<sm:
 	}
 }
 
-void Math2D::TransVertices(const sm::mat4& mt, const std::vector<sm::vec2>& src, std::vector<sm::vec2>& dst)
-{
-	dst.clear();
-	dst.reserve(src.size());
-	for (int i = 0, n = src.size(); i < n; ++i) {
-		dst.push_back(mt * src[i]);
-	}
-}
-
 sm::vec2 Math2D::TransCoordsLocalToWorld(const sm::vec2& origin, const sm::vec2& xDir, const sm::vec2& local)
 {
 	sm::vec2 nx(xDir);
@@ -591,29 +582,6 @@ void Math2D::GetMBR(const std::vector<sm::vec2>& pos, sm::rect* mbr)
 		if (pos[i].x > mbr->xmax) mbr->xmax = pos[i].x;
 		if (pos[i].y < mbr->ymin) mbr->ymin = pos[i].y;
 		if (pos[i].y > mbr->ymax) mbr->ymax = pos[i].y;
-	}
-}
-
-void Math2D::RemoveDuplicatePoints(const std::vector<sm::vec2>& src, std::vector<sm::vec2>& dst)
-{
-	if (src.size() > 1)
-	{
-		dst.reserve(src.size());
-
-		sm::vec2 last = src[0];
-		dst.push_back(last);
-		for (size_t i = 1; i < src.size(); ++i)
-		{
-			if (sm::dis_pos_to_pos(src[i], last) > 1.0f)
-			{
- 				last = src[i];
- 				dst.push_back(last);			
-			}
-		}
-	}
-	else
-	{
-		dst = src;
 	}
 }
 

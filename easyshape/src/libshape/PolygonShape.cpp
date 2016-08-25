@@ -63,7 +63,7 @@ void PolygonShape::Draw(const sm::mat4& mt, const s2::RenderColor& color) const
 	if (m_material) {
 		m_material->Draw(mt, color);
 		if (ee::SettingData::draw_tris_edge) {
-			m_material->DebugDrawTris(mt);
+			m_material->DebugDraw(mt);
 		}
 	}
 
@@ -121,14 +121,15 @@ void PolygonShape::StoreToFile(Json::Value& value, const std::string& dir) const
 
 void PolygonShape::ReloadTexture()
 {
-	m_material->ReloadTexture();
 }
 
 void PolygonShape::AddVertex(int index, const sm::vec2& pos)
 {
 	PolylineEditor::AddVertex(m_vertices, m_bounding, index, pos);
 	if (m_material) {
-		m_material->Refresh(m_vertices);
+		m_material->Clear();
+		m_material->SetOutline(m_vertices);
+		m_material->Build();
 	}
 }
 
@@ -136,7 +137,9 @@ void PolygonShape::RemoveVertex(const sm::vec2& pos)
 {
 	PolylineEditor::RemoveVertex(m_vertices, m_bounding, pos);
 	if (m_material) {
-		m_material->Refresh(m_vertices);
+		m_material->Clear();
+		m_material->SetOutline(m_vertices);
+		m_material->Build();
 	}
 }
 
@@ -144,7 +147,9 @@ void PolygonShape::ChangeVertex(const sm::vec2& from, const sm::vec2& to)
 {
 	PolylineEditor::ChangeVertex(m_vertices, m_bounding, from, to);
 	if (m_material) {
-		m_material->Refresh(m_vertices);
+		m_material->Clear();
+		m_material->SetOutline(m_vertices);
+		m_material->Build();
 	}
 }
 
@@ -153,7 +158,9 @@ void PolygonShape::SetVertices(const std::vector<sm::vec2>& vertices)
 	m_vertices = vertices;
 	UpdateBounding();
 	if (m_material) {
-		m_material->Refresh(m_vertices);
+		m_material->Clear();
+		m_material->SetOutline(m_vertices);
+		m_material->Build();
 	}
 }
 
@@ -162,7 +169,9 @@ void PolygonShape::SetMaterialColor(const s2::Color& color)
 	if (m_material) {
 		m_material->RemoveReference();
 	}
-	m_material = new ColorMaterial(m_vertices, color);
+	m_material = new ColorMaterial(color);
+	m_material->SetOutline(m_vertices);
+	m_material->Build();
 }
 
 void PolygonShape::SetMaterialTexture(ee::ImageSymbol* image)
@@ -170,7 +179,9 @@ void PolygonShape::SetMaterialTexture(ee::ImageSymbol* image)
 	if (m_material) {
 		m_material->RemoveReference();
 	}
-	m_material = new TextureMaterial(m_vertices, image);
+	m_material = new TextureMaterial(image);
+	m_material->SetOutline(m_vertices);
+	m_material->Build();
 }
 
 Json::Value PolygonShape::StoreMaterial(const std::string& dirpath) const
@@ -201,12 +212,16 @@ void PolygonShape::LoadMaterial(const std::string& dirpath, const Json::Value& v
 	if (type == "color") {
 		s2::Color col;
 		col.FromRGBA(val["color"].asUInt());
-		m_material = new ColorMaterial(m_vertices, col);
+		m_material = new ColorMaterial(col);
+		m_material->SetOutline(m_vertices);
+		m_material->Build();
 	} else if (type == "texture") {
 		std::string path = val["texture path"].asString();
 		ee::ImageSymbol* sym = static_cast<ee::ImageSymbol*>(
 			ee::SymbolMgr::Instance()->FetchSymbol(dirpath + "\\" + path));
-		m_material = new TextureMaterial(m_vertices, sym);
+		m_material = new TextureMaterial(sym);
+		m_material->SetOutline(m_vertices);
+		m_material->Build();
 		sym->RemoveReference();
 	}
 }

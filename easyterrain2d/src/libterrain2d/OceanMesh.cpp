@@ -51,7 +51,7 @@ void OceanMesh::Build()
 	Clear();
 
 	std::vector<sm::vec2> bound;
-	ee::Math2D::RemoveDuplicatePoints(m_shape->GetVertices(), bound);
+	sm::rm_duplicate_nodes(m_shape->GetVertices(), bound);
 
 	sm::rect r = CalBoundRegion(bound);
 

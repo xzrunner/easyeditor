@@ -3,44 +3,27 @@
 
 #include "Material.h"
 
-#include <SM_Rect.h>
+#include <sprite2/TexturePolygon.h>
 
 namespace ee { class ImageSymbol; }
 
 namespace eshape
 {
 
-class TextureMaterial : public Material
+class TextureMaterial : public Material, public s2::TexturePolygon
 {
 public:
-	TextureMaterial(const std::vector<sm::vec2>& vertices, ee::ImageSymbol* image);
+	TextureMaterial();
+	TextureMaterial(ee::ImageSymbol* image);
 	virtual ~TextureMaterial();
 
 	virtual Json::Value Store(const std::string& dirpath) const;
-
 	virtual void Translate(const sm::vec2& offset);
-	virtual void Draw(const sm::mat4& mt, const s2::RenderColor& color) const;	
-
-	virtual void ReloadTexture();
-
-	const std::vector<sm::vec2>& GetTexcoords() const { return m_tris_texcoord; }
 
 	const ee::ImageSymbol* GetImage() const { return m_image; }
 
-protected:
-	virtual void BuildEnd();
-
-private:
-	sm::rect GetBoundingRegion(const std::vector<sm::vec2>& bounding) const;
-
-	void GetTexBoundarySegments(const sm::rect& rect, std::vector<sm::vec2>& segments);
-
-	void CalTexcoords(const sm::rect& rect);
-
 private:
 	ee::ImageSymbol* m_image;
-
-	std::vector<sm::vec2> m_tris_texcoord;
 
 }; // TextureMaterial
 

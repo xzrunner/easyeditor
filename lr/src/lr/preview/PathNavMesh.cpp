@@ -48,7 +48,7 @@ void PathNavMesh::DisableRegion(const ee::Sprite* spr, bool disable)
 	std::map<const ee::Sprite*, std::vector<sm::vec2> >::iterator itr = m_bounds.find(spr);
 	if (itr == m_bounds.end() && !disable) {
 		std::vector<sm::vec2> fixed;
-		ee::Math2D::RemoveDuplicatePoints(bound, fixed);
+		sm::rm_duplicate_nodes(bound, fixed);
 		sm::mat4 mat = spr->GetTransMatrix();
 		for (int i = 0; i < fixed.size(); ++i) {
 			fixed[i] = mat * fixed[i];

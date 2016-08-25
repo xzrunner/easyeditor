@@ -583,6 +583,14 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\..\source\sprites\PolygonShape.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\include\sprite2\PolygonShape.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\source\sprites\PolylineShape.cpp"
 						>
 					</File>
@@ -619,6 +627,34 @@
 						</File>
 						<File
 							RelativePath="..\..\..\include\sprite2\ShapeVertices.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="polygon"
+						>
+						<File
+							RelativePath="..\..\..\source\sprites\ColorPolygon.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\include\sprite2\ColorPolygon.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\source\sprites\Polygon.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\include\sprite2\Polygon.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\source\sprites\TexturePolygon.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\include\sprite2\TexturePolygon.h"
 							>
 						</File>
 					</Filter>

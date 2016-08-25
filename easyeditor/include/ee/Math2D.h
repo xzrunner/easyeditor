@@ -97,9 +97,6 @@ public:
 	// Get the nearest position of Line to Point.
 	static void GetNearestPosOnLineToPoint(const sm::vec2& p, const std::vector<sm::vec2>& l, sm::vec2* nearest, size_t* index);
 
-	static void TransVertices(const sm::mat4& mt, const std::vector<sm::vec2>& src,
-		std::vector<sm::vec2>& dst);
-
 	static sm::vec2 TransCoordsLocalToWorld(const sm::vec2& origin, const sm::vec2& xDir, const sm::vec2& local);
 
 	static sm::vec2 TransCoordsWorldToLocal(const sm::vec2& origin, const sm::vec2& xDir, const sm::vec2& world);
@@ -107,8 +104,6 @@ public:
 	static void GetMBR(const std::vector<sm::vec2>& pos, sm::rect* mbr);
 
 	//////////////////////////////////////////////////////////////////////////
-
-	static void RemoveDuplicatePoints(const std::vector<sm::vec2>& src, std::vector<sm::vec2>& dst);
 
 	// 1 2
 	// 0 3
