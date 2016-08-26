@@ -56,10 +56,10 @@ private:
 
 	}; // NodeList
 
-	VI_DUMMY_FUNC
-
 protected:
 	NodeList m_left_nodes, m_right_nodes;
+
+	VI_DUMMY_FUNC
 
 }; // StripMesh
 

@@ -35,11 +35,11 @@ public:
 protected:
 	virtual void UpdateBounding();
 
-	VI_DUMMY_FUNC
-
 protected:
 	std::vector<sm::vec2> m_vertices;
 	bool m_closed;
+
+	VI_DUMMY_FUNC
 
 }; // PolylineShape
 

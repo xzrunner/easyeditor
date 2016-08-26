@@ -49,14 +49,14 @@ private:
 		int frame;
 	};
 
-	VI_DUMMY_FUNC
-
 private:
 	float m_time;
 
 	CurrFrame m_curr_frame;
 
 	bool m_loop;
+
+	VI_DUMMY_FUNC
 
 }; // AnimSprite
 

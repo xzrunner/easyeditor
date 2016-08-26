@@ -31,10 +31,10 @@ public:
 protected:
 	virtual void UpdateBounding();
 
-	VI_DUMMY_FUNC
-
 protected:
 	sm::vec2 m_pos;
+
+	VI_DUMMY_FUNC
 
 }; // PointShape
 

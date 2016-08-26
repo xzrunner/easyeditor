@@ -29,8 +29,6 @@ public:
 	int GetTime() const { return m_time; }
 	void UpdateTime() const { ++m_time; }
 
-	VI_DUMMY_FUNC
-
 protected:
 	Textbox m_tb;
 
@@ -39,6 +37,8 @@ protected:
 private:
 	// for dynamic draw
 	mutable int m_time;	
+
+	VI_DUMMY_FUNC
 
 }; // TextboxSprite
 

@@ -25,10 +25,10 @@ public:
 
 	void Resize(float width, float height);
 
-	VI_DUMMY_FUNC
-
 protected:
 	Scale9 m_s9;
+
+	VI_DUMMY_FUNC
 
 }; // Scale9Sprite
 

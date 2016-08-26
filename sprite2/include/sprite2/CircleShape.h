@@ -31,11 +31,11 @@ public:
 protected:
 	virtual void UpdateBounding();
 
-	VI_DUMMY_FUNC
-
 protected:
 	sm::vec2 m_center;
 	float m_radius;
+
+	VI_DUMMY_FUNC
 
 }; // CircleShape
 

@@ -35,10 +35,10 @@ protected:
 
 	//void GetRegionBound(std::vector<sm::vec2>& bound) const;
 
-	VI_DUMMY_FUNC
-
 protected:
 	NetworkShape* m_nw;
+
+	VI_DUMMY_FUNC
 
 }; // NetworkMesh
 

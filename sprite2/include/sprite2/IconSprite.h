@@ -21,10 +21,10 @@ public:
 	void SetProcess(float process) { m_process = process; }
 	float GetProcess() const { return m_process; }
 
-	VI_DUMMY_FUNC
-
 protected:
 	float m_process;
+
+	VI_DUMMY_FUNC
 
 }; // IconSprite
 

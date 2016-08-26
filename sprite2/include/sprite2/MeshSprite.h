@@ -39,8 +39,6 @@ public:
 	bool OnlyDrawBound() const { return m_only_draw_bound; }
 	void SetOnlyDrawBound(bool only_draw_bound) { m_only_draw_bound = only_draw_bound; }
 
-	VI_DUMMY_FUNC
-
 protected:
 	sm::vec2 m_speed;
 
@@ -49,6 +47,8 @@ protected:
 	const Symbol* m_base;
 
 	bool m_only_draw_bound;
+
+	VI_DUMMY_FUNC
 
 }; // MeshSprite
 
