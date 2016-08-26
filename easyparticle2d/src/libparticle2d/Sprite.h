@@ -9,7 +9,6 @@ namespace eparticle2d
 {
 
 class Symbol;
-class ParticleSystem;
 
 class Sprite : public s2::Particle2dSprite, public ee::Sprite
 {
@@ -18,14 +17,12 @@ public:
 	Sprite(const Sprite& spr);
 	Sprite& operator = (const Sprite& spr);
 	Sprite(Symbol* sym);
-	virtual ~Sprite();
 
 	/**
 	 *  @interface
 	 *    s2::Sprite
 	 */
 	virtual Sprite* Clone() const { return new Sprite(*this); }
-	virtual bool Update(const s2::RenderParams& params, float dt);
 
 	/**
 	 *  @interface
@@ -36,22 +33,7 @@ public:
 
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
 
-	void Draw(const sm::mat4& mt) const;
-
-	void SetMatrix(const sm::mat4& mat) { m_mat = mat; }
-
-	bool GetLoop() const;
-	void SetLoop(bool loop);
-
-	bool GetLocalModeDraw() const;
-	void SetLocalModeDraw(bool local);
-
 	static ee::Sprite* Create(ee::Symbol* sym);
-
-private:
-	ParticleSystem* m_ps;
-
-	sm::mat4 m_mat;
 
 }; // Sprite
 

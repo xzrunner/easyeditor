@@ -193,7 +193,7 @@ p2d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
 		memcpy(&dst.add_col_begin.r, &src.add_col_begin.r, sizeof(src.add_col_begin));
 		memcpy(&dst.add_col_end.r, &src.add_col_end.r, sizeof(src.add_col_end));
 
-		dst.ud = ee::SymbolMgr::Instance()->FetchSymbol(src.filepath);
+		dst.ud = static_cast<s2::Symbol*>(ee::SymbolMgr::Instance()->FetchSymbol(src.filepath));
 	}
 
 	return cfg;

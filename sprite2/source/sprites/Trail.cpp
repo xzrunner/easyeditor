@@ -21,6 +21,11 @@ Trail::Trail()
 	Init();
 }
 
+void Trail::Update(float dt)
+{
+	m_time += dt;
+}
+
 static void 
 render_symbol_func(void* sym, float x, float y, float angle, float scale, uint8_t* mul_col, uint8_t* add_col, const void* ud)
 {
@@ -82,11 +87,6 @@ void Trail::Init()
 {
 	t2d_init();
 	t2d_regist_cb(render_symbol_func, render_shape_func);	
-}
-
-void Trail::Update(float dt)
-{
-	m_time += dt;
 }
 
 }

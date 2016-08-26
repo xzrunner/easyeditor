@@ -1,11 +1,11 @@
 #include "ParticleSystem.h"
 #include "ps_config.h"
-#include "PSNode.h"
 
 #include <ee/Math2D.h>
 #include <ee/Symbol.h>
 
 #include <ps_2d.h>
+#include <sprite2/Particle2d.h>
 
 #include <assert.h>
 
@@ -14,14 +14,14 @@ namespace eparticle2d
 
 ParticleSystem::ParticleSystem(p2d_emitter_cfg* cfg)
 {
-	PSNode::Instance();
+	s2::Particle2d::Instance();
 
 	m_et = p2d_emitter_create(cfg);
 }
 
 ParticleSystem::ParticleSystem(const ParticleSystem& ps)
 {
-	PSNode::Instance();
+	s2::Particle2d::Instance();
 
 	m_pos = ps.m_pos;
 	m_et = p2d_emitter_create(ps.m_et->cfg);
@@ -34,68 +34,69 @@ ParticleSystem::~ParticleSystem()
 
 void ParticleSystem::SetValue(int key, const ee::UICallback::Data& data)
 {
+	p2d_emitter_cfg* cfg = const_cast<p2d_emitter_cfg*>(m_et->cfg);
 	switch (key)
 	{
 	case PS_COUNT:
-		m_et->cfg->count = static_cast<int>(data.val0);
+		cfg->count = static_cast<int>(data.val0);
 		break;
 	case PS_EMISSION_TIME:
-		m_et->cfg->emission_time = data.val0 * 0.001f;
+		cfg->emission_time = data.val0 * 0.001f;
 		break;
 	case PS_LIFE_TIME:
-		m_et->cfg->life = data.val0 * 0.001f;
-		m_et->cfg->life_var = data.val1 * 0.001f;
+		cfg->life = data.val0 * 0.001f;
+		cfg->life_var = data.val1 * 0.001f;
 		break;
 	case PS_POSITION_X:
-		m_et->cfg->position.x = data.val0;
-		m_et->cfg->position_var.x = data.val1;
+		cfg->position.x = data.val0;
+		cfg->position_var.x = data.val1;
 		break;
 	case PS_POSITION_Y:
-		m_et->cfg->position.y = data.val0;
-		m_et->cfg->position_var.y = data.val1;
+		cfg->position.y = data.val0;
+		cfg->position_var.y = data.val1;
 		break;
 	case PS_DIRECTION:
-		m_et->cfg->direction = data.val0 * SM_DEG_TO_RAD;
-		m_et->cfg->direction_var = data.val1 * SM_DEG_TO_RAD;
+		cfg->direction = data.val0 * SM_DEG_TO_RAD;
+		cfg->direction_var = data.val1 * SM_DEG_TO_RAD;
 		break;
 
 	case PS_GRAVITY:
-		m_et->cfg->mode.A.gravity.x = data.val0;
-		m_et->cfg->mode.A.gravity.y = data.val1;
+		cfg->mode.A.gravity.x = data.val0;
+		cfg->mode.A.gravity.y = data.val1;
 		break;
 	case PS_SPEED:
-		m_et->cfg->mode.A.speed = data.val0;
-		m_et->cfg->mode.A.speed_var = data.val1;
+		cfg->mode.A.speed = data.val0;
+		cfg->mode.A.speed_var = data.val1;
 		break;
 	case PS_TANGENTIAL_ACCEL:
-		m_et->cfg->mode.A.tangential_accel = data.val0;
-		m_et->cfg->mode.A.tangential_accel_var = data.val1;
+		cfg->mode.A.tangential_accel = data.val0;
+		cfg->mode.A.tangential_accel_var = data.val1;
 		break;
 	case PS_RADIAL_ACCEL:
-		m_et->cfg->mode.A.radial_accel = data.val0;
-		m_et->cfg->mode.A.radial_accel_var = data.val1;
+		cfg->mode.A.radial_accel = data.val0;
+		cfg->mode.A.radial_accel_var = data.val1;
 		break;
 
 	case PS_START_RADIUS:
-		m_et->cfg->mode.B.start_radius = data.val0;
-		m_et->cfg->mode.B.start_radius_var = data.val1;
+		cfg->mode.B.start_radius = data.val0;
+		cfg->mode.B.start_radius_var = data.val1;
 		break;
 	case PS_END_RADIUS:
-		m_et->cfg->mode.B.end_radius = data.val0;
-		m_et->cfg->mode.B.end_radius_var = data.val1;
+		cfg->mode.B.end_radius = data.val0;
+		cfg->mode.B.end_radius_var = data.val1;
 		break;
 	case PS_DIRECTION_SPEED:
-		m_et->cfg->mode.B.direction_delta = data.val0;
-		m_et->cfg->mode.B.direction_delta_var = data.val1;
+		cfg->mode.B.direction_delta = data.val0;
+		cfg->mode.B.direction_delta_var = data.val1;
 		break;
 
 	case PS_COS_AMPLITUDE:
-		m_et->cfg->mode.C.cos_amplitude = data.val0;
-		m_et->cfg->mode.C.cos_amplitude_var = data.val1;
+		cfg->mode.C.cos_amplitude = data.val0;
+		cfg->mode.C.cos_amplitude_var = data.val1;
 		break;
 	case PS_COS_FREQUENCY:
-		m_et->cfg->mode.C.cos_frequency = data.val0;
-		m_et->cfg->mode.C.cos_frequency_var = data.val1;
+		cfg->mode.C.cos_frequency = data.val0;
+		cfg->mode.C.cos_frequency_var = data.val1;
 		break;	
 	}
 }
@@ -119,8 +120,8 @@ void ParticleSystem::GetValue(int key, ee::UICallback::Data& data)
 		data.val1 = m_et->cfg->position_var.x;
 		break;
 	case PS_POSITION_Y:
-		m_et->cfg->position.y = data.val0;
-		m_et->cfg->position_var.y = data.val1;
+		const_cast<p2d_emitter_cfg*>(m_et->cfg)->position.y = data.val0;
+		const_cast<p2d_emitter_cfg*>(m_et->cfg)->position_var.y = data.val1;
 		break;
 	case PS_DIRECTION:
 		data.val0 = m_et->cfg->direction * SM_RAD_TO_DEG;
@@ -179,7 +180,7 @@ void ParticleSystem::Draw(const sm::mat4& mt) const
 
 bool ParticleSystem::Update(const sm::mat4& mat)
 {
-	float time = PSNode::Instance()->GetTime();
+	float time = s2::Particle2d::Instance()->GetTime();
 	assert(m_et->time <= time);
 	if (m_et->time == time) {
 		return false;
@@ -242,12 +243,12 @@ void ParticleSystem::SetLocalModeDraw(bool local)
 
 void ParticleSystem::SetMode(int mode)
 {
-	m_et->cfg->mode_type = mode;
+	const_cast<p2d_emitter_cfg*>(m_et->cfg)->mode_type = mode;
 }
 
 void ParticleSystem::SetRotationIsDir(bool is_dir)
 {
-	m_et->cfg->mode.A.rotation_is_dir = is_dir;
+	const_cast<p2d_emitter_cfg*>(m_et->cfg)->mode.A.rotation_is_dir = is_dir;
 }
 
 void ParticleSystem::Clear()
@@ -268,11 +269,11 @@ void ParticleSystem::ReloadTexture() const
 	}
 }
 
-p2d_symbol* ParticleSystem::AddSymbol(ee::Symbol* sym)
+p2d_symbol* ParticleSystem::AddSymbol(s2::Symbol* sym)
 {
 	assert(m_et->cfg->sym_count < MAX_COMPONENTS);
 
-	p2d_symbol& comp = m_et->cfg->syms[m_et->cfg->sym_count++];
+	p2d_symbol& comp = m_et->cfg->syms[const_cast<p2d_emitter_cfg*>(m_et->cfg)->sym_count++];
 	memset(&comp, 0, SIZEOF_P2D_SYMBOL);
 
 	comp.angle_start = comp.angle_end = 0;
@@ -296,9 +297,9 @@ void ParticleSystem::DelSymbol(int idx)
 	}
 
 	if (m_et->cfg->sym_count == 1) {
-		m_et->cfg->sym_count = 0;
+		const_cast<p2d_emitter_cfg*>(m_et->cfg)->sym_count = 0;
 	} else {
-		const p2d_symbol& src = m_et->cfg->syms[--m_et->cfg->sym_count];
+		const p2d_symbol& src = m_et->cfg->syms[--const_cast<p2d_emitter_cfg*>(m_et->cfg)->sym_count];
 		p2d_symbol& dst = m_et->cfg->syms[idx];
 		memcpy(&dst, &src, SIZEOF_P2D_SYMBOL);
 	}
@@ -306,7 +307,7 @@ void ParticleSystem::DelSymbol(int idx)
 
 void ParticleSystem::DelAllSymbol()
 {
-	m_et->cfg->sym_count = 0;
+	const_cast<p2d_emitter_cfg*>(m_et->cfg)->sym_count = 0;
 }
 
 const p2d_emitter_cfg* ParticleSystem::GetConfig() const

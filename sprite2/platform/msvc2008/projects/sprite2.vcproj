@@ -496,6 +496,14 @@
 				Name="particle2d"
 				>
 				<File
+					RelativePath="..\..\..\source\sprites\Particle2d.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\Particle2d.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\source\sprites\Particle2dSprite.cpp"
 					>
 				</File>

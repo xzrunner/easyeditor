@@ -10,7 +10,7 @@ struct p2d_emitter_cfg;
 struct p2d_emitter;
 struct p2d_symbol;
 
-namespace ee { class Symbol; }
+namespace s2 { class Symbol; }
 
 namespace eparticle2d
 {
@@ -51,7 +51,7 @@ public:
 
 	void ReloadTexture() const;
 
-	p2d_symbol* AddSymbol(ee::Symbol* sym);
+	p2d_symbol* AddSymbol(s2::Symbol* sym);
 	void DelSymbol(int idx);
 	void DelAllSymbol();
 

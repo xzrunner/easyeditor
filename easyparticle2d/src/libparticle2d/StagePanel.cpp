@@ -3,7 +3,8 @@
 #include "EditOP.h"
 #include "LibraryPanel.h"
 #include "ParticleSystem.h"
-#include "PSNode.h"
+
+#include <sprite2/Particle2d.h>
 
 namespace eparticle2d
 {
@@ -20,7 +21,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 bool StagePanel::Update(float dt)
 {
-	PSNode::Instance()->UpdateTime();
+	s2::Particle2d::Instance()->Update(dt);
 	if (m_ps) {
 		return m_ps->Update(m_ps_mat);
 	} else {

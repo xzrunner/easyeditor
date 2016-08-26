@@ -11,6 +11,7 @@
 #include <ee/SliderCtrlOne.h>
 #include <ee/SliderCtrlTwo.h>
 #include <ee/LibraryPanel.h>
+#include <ee/Symbol.h>
 
 #include <ps_2d.h>
 
@@ -93,7 +94,7 @@ void ToolbarPanel::Add(const LoadAdapter::Component& comp)
 {
 	// todo Release symbol
 	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(comp.filepath);
-	p2d_symbol* pc = m_stage->m_ps->AddSymbol(sym);
+	p2d_symbol* pc = m_stage->m_ps->AddSymbol(static_cast<s2::Symbol*>(sym));
 	ComponentPanel* cp = new ComponentPanel(this, pc, this);
 
 	cp->SetValue(PS_ANGLE, ee::UICallback::Data(comp.angle_start, comp.angle_end));
@@ -431,7 +432,7 @@ void ToolbarPanel::Clear()
 	OnDelAllChild(wxCommandEvent());
 }
 
-void ToolbarPanel::OnAddChild(wxCommandEvent& event, ee::Symbol* sym)
+void ToolbarPanel::OnAddChild(wxCommandEvent& event, s2::Symbol* sym)
 {
 	p2d_symbol* p_symbol = m_stage->m_ps->AddSymbol(sym);
 	ComponentPanel* cp = new ComponentPanel(this, p_symbol, this);
@@ -487,7 +488,7 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
 	ee::Symbol* sym = m_library->GetSymbol(index);
 	if (sym)
 	{
-		m_toolbar->OnAddChild(wxCommandEvent(), sym);
+		m_toolbar->OnAddChild(wxCommandEvent(), static_cast<s2::Symbol*>(sym));
 		m_stage->m_ps->Start();
 	}
 
