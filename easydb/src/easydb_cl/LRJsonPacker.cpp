@@ -18,6 +18,8 @@
 
 #include <easyshape.h>
 
+#include <SM_Calc.h>
+
 namespace edb
 {
 
