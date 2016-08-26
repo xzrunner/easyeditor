@@ -28,8 +28,7 @@ void AnimLerp::Lerp(const std::vector<Sprite*>& begin, const std::vector<Sprite*
 				break;
 			}
 		}
-
-		Sprite* tween_spr = VI_DOWNCASTING<Sprite*>(((cu::Cloneable*)start_spr)->Clone());			
+		Sprite* tween_spr = VI_CLONE(Sprite, start_spr);
 		if (end_spr) {
 			Lerp(start_spr, end_spr, tween_spr, process);
 		}

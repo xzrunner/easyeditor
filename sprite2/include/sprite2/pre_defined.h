@@ -22,6 +22,14 @@ namespace s2
 	#define VI_DUMMY_FUNC
 #endif // S2_VIRTUAL_INHERITANCE
 
+#ifdef S2_VIRTUAL_INHERITANCE
+	#define VI_CLONE(type, src) \
+		dynamic_cast<type*>(static_cast<cu::Cloneable*>(src)->Clone());
+#else
+	#define VI_CLONE(type, src) \
+		src->Clone();
+#endif // S2_VIRTUAL_INHERITANCE
+
 }
 
 #endif // _SPRITE2_PRE_DEFINED_H_

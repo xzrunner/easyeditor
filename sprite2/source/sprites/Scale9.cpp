@@ -34,11 +34,7 @@ Scale9& Scale9::operator = (const Scale9& s9)
 	for (int i = 0; i < 9; ++i) {
 		Sprite* spr = s9.m_grids[i];
 		if (spr) {
-#ifdef S2_VIRTUAL_INHERITANCE
-			m_grids[i] = dynamic_cast<Sprite*>(((cu::Cloneable*)spr)->Clone());
-#else
-			m_grids[i] = spr->Clone();
-#endif // S2_VIRTUAL_INHERITANCE
+			m_grids[i] = VI_CLONE(Sprite, spr);
 		} else {
 			m_grids[i] = NULL;
 		}
@@ -172,11 +168,7 @@ void Scale9::Build(SCALE9_TYPE type, int w, int h, Sprite* grids[9])
 		}	
 		Sprite* src = grids[i];
 		if (src) {
-#ifdef S2_VIRTUAL_INHERITANCE
-			m_grids[i] = dynamic_cast<Sprite*>(((cu::Cloneable*)src)->Clone());
-#else
-			m_grids[i] = src->Clone();
-#endif // S2_VIRTUAL_INHERITANCE
+			m_grids[i] = VI_CLONE(Sprite, src);
 		} else {
 			m_grids[i] = NULL;
 		}

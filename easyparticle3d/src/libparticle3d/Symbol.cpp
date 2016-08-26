@@ -26,6 +26,32 @@ Symbol::Symbol()
 	PSNode::Instance();
 }
 
+bool Symbol::Update(const s2::RenderParams& params, float _dt)
+{
+	PSNode::Instance()->UpdateTime();
+
+	float time = PSNode::Instance()->GetTime();
+	assert(m_et->time <= time);
+	if (m_et->time == time) {
+		return false;
+	}
+
+	float mt[6];
+	sm::mat4 inner_mat;
+	mt[0] = inner_mat.x[0];
+	mt[1] = inner_mat.x[1];
+	mt[2] = inner_mat.x[4];
+	mt[3] = inner_mat.x[5];
+	mt[4] = inner_mat.x[12];
+	mt[5] = inner_mat.x[13];	
+
+	float dt = time - m_et->time;
+	p3d_emitter_update(m_et, dt, mt);
+	m_et->time = time;
+
+	return true;
+}
+
 void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	if (!spr) {
@@ -99,30 +125,6 @@ void Symbol::Traverse(ee::Visitor<ee::Sprite>& visitor)
 		ee::Symbol* sym = static_cast<ee::Symbol*>(p_symbol.ud);
 		sym->Traverse(visitor);
 	}
-}
-
-void Symbol::Update(const s2::RenderParams& params, float _dt)
-{
-	PSNode::Instance()->UpdateTime();
-
-	float time = PSNode::Instance()->GetTime();
-	assert(m_et->time <= time);
-	if (m_et->time == time) {
-		return;
-	}
-
-	float mt[6];
-	sm::mat4 inner_mat;
-	mt[0] = inner_mat.x[0];
-	mt[1] = inner_mat.x[1];
-	mt[2] = inner_mat.x[4];
-	mt[3] = inner_mat.x[5];
-	mt[4] = inner_mat.x[12];
-	mt[5] = inner_mat.x[13];	
-
-	float dt = time - m_et->time;
-	p3d_emitter_update(m_et, dt, mt);
-	m_et->time = time;
 }
 
 void Symbol::LoadResources()

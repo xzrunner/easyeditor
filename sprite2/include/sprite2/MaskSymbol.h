@@ -16,6 +16,7 @@ public:
 	 *  @interface
 	 *    Symbol
 	 */
+	virtual bool Update(const RenderParams& params, float dt);
 	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const;
 	virtual sm::rect GetBounding(const Sprite* spr = NULL) const;
 
@@ -23,8 +24,8 @@ public:
 	void SetSymbol(const Symbol* sym, bool is_base);
 
 protected:
-	const Symbol* m_base;
-	const Symbol* m_mask;
+	Symbol* m_base;
+	Symbol* m_mask;
 
 }; // MaskSymbol
 

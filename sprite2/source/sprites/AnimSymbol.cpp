@@ -12,19 +12,25 @@ namespace s2
 
 AnimSymbol::AnimSymbol()
 	: m_fps(30)
+	, m_curr(this)
 {
+}
+
+bool AnimSymbol::Update(const RenderParams& params, float dt)
+{
+	return m_curr.Update(params, dt);
 }
 
 void AnimSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 {	
-	if (!spr) {
-		return;
+	if (spr) {
+		RenderParams p = params;
+		p.mt = spr->GetTransMatrix() * params.mt;
+		p.color = spr->Color() * params.color;
+		VI_DOWNCASTING<const AnimSprite*>(spr)->GetAnimCurr().Draw(p);
+	} else {
+		m_curr.Draw(params);
 	}
-
-	RenderParams p = params;
-	p.mt = spr->GetTransMatrix() * params.mt;
-	p.color = spr->Color() * params.color;
-	VI_DOWNCASTING<const AnimSprite*>(spr)->Draw(p);
 }
 
 sm::rect AnimSymbol::GetBounding(const Sprite* spr) const
@@ -68,7 +74,7 @@ void AnimSymbol::CreateFrameSprites(int frame, std::vector<Sprite*>& sprs) const
 		if (!curr_f->tween || !next_f)
 		{
 			for (int i = 0, n = curr_f->sprs.size(); i < n; ++i) {
-				Sprite* spr = dynamic_cast<Sprite*>(((cu::Cloneable*)curr_f->sprs[i])->Clone());
+				Sprite* spr = VI_CLONE(Sprite, curr_f->sprs[i]);
 				sprs.push_back(spr);	
 			}
 		}

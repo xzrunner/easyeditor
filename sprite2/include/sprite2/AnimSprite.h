@@ -1,6 +1,7 @@
 #ifndef _SPRITE2_ANIM_SPRITE_H_
 #define _SPRITE2_ANIM_SPRITE_H_
 
+#include "AnimCurr.h"
 #include "S2_Sprite.h"
 
 #include <vector>
@@ -23,36 +24,12 @@ public:
 
 	void Start();
 
-	void Draw(const RenderParams& params) const;
+	const AnimCurr& GetAnimCurr() const { return m_curr; }
 
 	void SetLoop(bool loop) { m_loop = loop; }
 
 private:
-	void UpdateCurrFrame();
-
-private:
-	struct Frame
-	{
-		std::vector<Sprite*> sprs;
-
-		Sprite* Query(const Sprite* spr);
-	};
-
-	struct Layer
-	{
-		Frame frame;
-	};
-
-	struct CurrFrame
-	{
-		std::vector<Layer> layers;
-		int frame;
-	};
-
-private:
-	float m_time;
-
-	CurrFrame m_curr_frame;
+	AnimCurr m_curr;
 
 	bool m_loop;
 

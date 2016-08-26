@@ -22,6 +22,7 @@ public:
 	 *  @interface
 	 *    s2::Symbol
 	 */
+	virtual bool Update(const s2::RenderParams& params, float dt);
 	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
 	virtual sm::rect GetBounding(const s2::Sprite* spr = NULL) const;
 
@@ -31,8 +32,6 @@ public:
 	 */
 	virtual void ReloadTexture() const;
 	virtual void Traverse(ee::Visitor<ee::Sprite>& visitor);
-
-	void Update(const s2::RenderParams& params, float dt);
 
 	void SetEmitterCfg(p3d_emitter_cfg* cfg) { m_et_cfg = cfg; }
 	const p3d_emitter_cfg* GetEmitterCfg() const { return m_et_cfg; }

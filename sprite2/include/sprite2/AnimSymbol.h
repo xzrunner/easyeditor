@@ -1,6 +1,7 @@
 #ifndef _SPRITE2_ANIM_SYMBOL_H_
 #define _SPRITE2_ANIM_SYMBOL_H_
 
+#include "AnimCurr.h"
 #include "S2_Symbol.h"
 
 #include <vector>
@@ -42,6 +43,7 @@ public:
 	 *  @interface
 	 *    Symbol
 	 */
+	virtual bool Update(const RenderParams& params, float dt);
 	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const;
 	virtual sm::rect GetBounding(const Sprite* spr = NULL) const;
 
@@ -66,6 +68,8 @@ protected:
 	std::vector<Layer*> m_layers;
 
 	int m_fps;
+
+	AnimCurr m_curr;
 
 }; // AnimSymbol
 

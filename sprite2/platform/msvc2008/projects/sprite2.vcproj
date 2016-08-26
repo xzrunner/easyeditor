@@ -412,6 +412,14 @@
 				Name="anim"
 				>
 				<File
+					RelativePath="..\..\..\source\sprites\AnimCurr.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\AnimCurr.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\source\sprites\AnimLerp.cpp"
 					>
 				</File>

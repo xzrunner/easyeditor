@@ -23,6 +23,18 @@ MaskSymbol::~MaskSymbol()
 	}
 }
 
+bool MaskSymbol::Update(const RenderParams& params, float dt)
+{
+	bool dirty = false;
+	if (m_base && m_base->Update(params, dt)) {
+		dirty = true;
+	}
+	if (m_mask && m_mask->Update(params, dt)) {
+		dirty = true;
+	}
+	return dirty;
+}
+
 void MaskSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 {
 	RenderParams p = params;
