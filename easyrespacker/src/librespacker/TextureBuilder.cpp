@@ -38,11 +38,11 @@ void TextureBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 
 bool TextureBuilder::CanHandle(const etexture::Symbol* sym) const
 {
-	const std::vector<ee::Shape*>& shapes = sym->GetPolygons();
-	if (shapes.size() != 1) {
+	const std::vector<s2::PolygonShape*>& polys = sym->GetPolygons();
+	if (polys.size() != 1) {
 		return false;
 	}
-	eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(shapes[0]);
+	eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(polys[0]);
 	if (!poly) {
 		return false;
 	}
@@ -69,11 +69,11 @@ const IPackNode* TextureBuilder::Create(const etexture::Symbol* sym)
 
 void TextureBuilder::Load(const etexture::Symbol* sym, PackPicture* pic)
 {
-	const std::vector<ee::Shape*>& shapes = sym->GetPolygons();
-	if (shapes.size() != 1) {
-		throw ee::Exception("TextureBuilder::Load shapes.size(): %d filepath: %s", shapes.size(), sym->GetFilepath().c_str());
+	const std::vector<s2::PolygonShape*>& polys = sym->GetPolygons();
+	if (polys.size() != 1) {
+		throw ee::Exception("TextureBuilder::Load shapes.size(): %d filepath: %s", polys.size(), sym->GetFilepath().c_str());
 	}
-	eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(shapes[0]);
+	eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(polys[0]);
 	if (!poly) {
 		throw ee::Exception("TextureBuilder::Load !poly, filepath: %s", sym->GetFilepath().c_str());
 	}

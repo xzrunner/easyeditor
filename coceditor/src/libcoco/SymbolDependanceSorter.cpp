@@ -261,12 +261,11 @@ void SymbolDependanceSorter::sort()
 			}
 			else if (etexture::Symbol* tex = dynamic_cast<etexture::Symbol*>(sym))
 			{
-				const std::vector<ee::Shape*>& shapes = tex->GetPolygons();
-				assert(shapes.size() == 1);
-				for (int i = 0, n = shapes.size(); i < n; ++i)
+				const std::vector<s2::PolygonShape*>& polys = tex->GetPolygons();
+				assert(polys.size() == 1);
+				for (int i = 0, n = polys.size(); i < n; ++i)
 				{
-					ee::Shape* shape = shapes[i];
-					eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(shape);
+					eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(polys[i]);
 					assert(poly);
 					const eshape::TextureMaterial* material = dynamic_cast<const eshape::TextureMaterial*>(poly->GetMaterial());
 					assert(material);

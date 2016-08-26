@@ -1399,9 +1399,9 @@ int CocoPacker::ParserTerrain2D(const eterrain2d::Sprite* spr)
 int CocoPacker::ParserTexture(const etexture::Sprite* spr)
 {
 	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());
-	const std::vector<ee::Shape*>& shapes = static_cast<const etexture::Symbol*>(sym)->GetPolygons();
-	assert(shapes.size() == 1);
-	eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(shapes[0]);
+	const std::vector<s2::PolygonShape*>& polys = static_cast<const etexture::Symbol*>(sym)->GetPolygons();
+	assert(polys.size() == 1);
+	eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(polys[0]);
 	assert(poly);
 	const eshape::TextureMaterial* material = dynamic_cast<const eshape::TextureMaterial*>(poly->GetMaterial());
 	assert(material);
