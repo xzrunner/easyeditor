@@ -2,6 +2,8 @@
 #include "S2_Sprite.h"
 #include "S2_Symbol.h"
 #include "DrawNode.h"
+#include "ImageSymbol.h"
+#include "Texture.h"
 
 #include <SM_Calc.h>
 
@@ -248,7 +250,12 @@ void Scale9::ResizeSprite(Sprite* spr, const sm::vec2& center,
 	if (height < 0) { height = 1; }
 
 	Symbol* sym = spr->GetSymbol();
-	sm::vec2 sz = sym->GetBounding(spr).Size();
+	ImageSymbol* img_sym = VI_DOWNCASTING<ImageSymbol*>(sym);
+	if (!img_sym) {
+		return;
+	}
+
+	sm::vec2 sz = img_sym->GetTexture()->GetOriSize();
 	assert(sz.x != 0 && sz.y != 0);
 
 	spr->SetPosition(center);
