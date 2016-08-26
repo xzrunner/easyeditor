@@ -8,7 +8,6 @@ namespace eparticle2d
 
 Symbol::Symbol()
 {
-	s2::Particle2d::Instance();
 }
 
 void Symbol::LoadResources()

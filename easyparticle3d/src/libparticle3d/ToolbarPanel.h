@@ -9,7 +9,8 @@
 
 #include <wx/dnd.h>
 
-namespace ee { class LibraryPanel; class Symbol; class Image; class SliderCtrl; }
+namespace ee { class LibraryPanel; class Image; class SliderCtrl; }
+namespace s2 { class Symbol; }
 
 namespace eparticle3d
 {
@@ -54,7 +55,7 @@ private:
 
 	void Clear();
 
-	void OnAddChild(wxCommandEvent& event, ee::Symbol* sym);
+	void OnAddChild(wxCommandEvent& event, s2::Symbol* sym);
 	void OnDelAllChild(wxCommandEvent& event);
 
 	void OnSetStaticMode(wxCommandEvent& event);

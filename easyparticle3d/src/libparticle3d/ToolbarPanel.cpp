@@ -108,7 +108,7 @@ void ToolbarPanel::Add(const LoadAdapter::Component& comp, ee::LibraryPanel* lib
 	// todo Release symbol
 	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(comp.filepath);
 	library->AddSymbol(sym);
-	p3d_symbol* pc = m_stage->m_ps->AddSymbol(sym);
+	p3d_symbol* pc = m_stage->m_ps->AddSymbol(static_cast<s2::Symbol*>(sym));
 	ComponentPanel* cp = new ComponentPanel(this, pc, this);
 
 	cp->SetCount(comp.count);
@@ -464,7 +464,7 @@ void ToolbarPanel::Clear()
 	OnDelAllChild(wxCommandEvent());
 }
 
-void ToolbarPanel::OnAddChild(wxCommandEvent& event, ee::Symbol* sym)
+void ToolbarPanel::OnAddChild(wxCommandEvent& event, s2::Symbol* sym)
 {
 	p3d_symbol* ps = m_stage->m_ps->AddSymbol(sym);
 	ComponentPanel* cp = new ComponentPanel(this, ps, this);
@@ -563,7 +563,7 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
 	ee::Symbol* sym = m_library->GetSymbol(index);
 	if (sym)
 	{
-		m_toolbar->OnAddChild(wxCommandEvent(), sym);
+		m_toolbar->OnAddChild(wxCommandEvent(), static_cast<s2::Symbol*>(sym));
 		m_stage->m_ps->Start();
 	}
 

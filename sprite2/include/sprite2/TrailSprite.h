@@ -13,6 +13,8 @@ class TrailSprite : public VIRTUAL_INHERITANCE Sprite
 {
 public:
 	TrailSprite();
+	TrailSprite(const TrailSprite& spr);
+	TrailSprite& operator = (const TrailSprite& spr);
 	TrailSprite(Symbol* sym);
 	virtual ~TrailSprite();
 

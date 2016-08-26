@@ -237,7 +237,7 @@ p3d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
 			dst.bind_ps_cfg = PSConfigMgr::Instance()->GetConfig(src.bind_filepath);
 		}
 
-		dst.ud = ee::SymbolMgr::Instance()->FetchSymbol(src.filepath);
+		dst.ud = static_cast<s2::Symbol*>(ee::SymbolMgr::Instance()->FetchSymbol(src.filepath));
 		if (!dst.ud) {
 			throw ee::Exception("Symbol doesn't exist, [parent]:%s, [child]:%s !", filepath.c_str(), src.filepath.c_str());
 		}

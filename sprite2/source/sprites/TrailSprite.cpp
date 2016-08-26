@@ -14,6 +14,23 @@ TrailSprite::TrailSprite()
 {
 }
 
+TrailSprite::TrailSprite(const TrailSprite& spr)
+	: m_et(NULL)
+{
+	if (spr.m_et) {
+		m_et = t2d_emitter_create(spr.m_et->cfg);
+	}
+}
+
+TrailSprite& TrailSprite::operator = (const TrailSprite& spr)
+{
+	m_et = NULL;
+	if (spr.m_et) {
+		m_et = t2d_emitter_create(spr.m_et->cfg);
+	}
+	return *this;
+}
+
 TrailSprite::TrailSprite(Symbol* sym)
 	: Sprite(sym)
 	, m_et(NULL)

@@ -13,6 +13,8 @@ class Particle2dSprite : public VIRTUAL_INHERITANCE Sprite
 {
 public:
 	Particle2dSprite();
+	Particle2dSprite(const Particle2dSprite& spr);
+	Particle2dSprite& operator = (const Particle2dSprite& spr);
 	Particle2dSprite(Symbol* sym);
 	virtual ~Particle2dSprite();
 

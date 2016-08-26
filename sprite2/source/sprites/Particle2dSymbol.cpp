@@ -11,6 +11,7 @@ namespace s2
 Particle2dSymbol::Particle2dSymbol()
 	: m_et_cfg(NULL)
 {
+	Particle2d::Instance();
 }
 
 Particle2dSymbol::~Particle2dSymbol()

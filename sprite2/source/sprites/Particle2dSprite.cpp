@@ -16,6 +16,23 @@ Particle2dSprite::Particle2dSprite()
 {
 }
 
+Particle2dSprite::Particle2dSprite(const Particle2dSprite& spr)
+	: m_et(NULL)
+{
+	if (spr.m_et) {
+		m_et = p2d_emitter_create(spr.m_et->cfg);
+	}
+}
+
+Particle2dSprite& Particle2dSprite::operator = (const Particle2dSprite& spr)
+{
+	m_et = NULL;
+	if (spr.m_et) {
+		m_et = p2d_emitter_create(spr.m_et->cfg);
+	}
+	return *this;
+}
+
 Particle2dSprite::Particle2dSprite(Symbol* sym) 
 	: Sprite(sym) 
 	, m_et(NULL)

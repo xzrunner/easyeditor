@@ -1,18 +1,21 @@
 #ifndef _EASYPARTICLE3D_PARTICLE_SYSTEM_H_
 #define _EASYPARTICLE3D_PARTICLE_SYSTEM_H_
 
-#include "PSNode.h"
-
 #include <ee/UICallback.h>
+
 #include <SM_Quaternion.h>
 #include <CU_RefCountObj.h>
+#include <SM_Matrix.h>
+#include <sprite2/Particle3d.h>
+
+#include <string>
 
 struct p3d_emitter;
 struct p3d_emitter_cfg;
 struct p3d_symbol;
 struct p3d_particle;
 
-namespace ee { class Symbol; }
+namespace s2 { class Symbol; }
 
 namespace eparticle3d
 {
@@ -72,7 +75,7 @@ public:
 
 	void SetBlend(int blend);
 
-	p3d_symbol* AddSymbol(ee::Symbol* sym);
+	p3d_symbol* AddSymbol(s2::Symbol* sym);
 	void DelSymbol(int idx);
 	void DelAllSymbol();
 	p3d_symbol* GetSymbol(int idx);
@@ -87,7 +90,7 @@ public:
 	std::string name;
 
 private:
-	mutable RenderParams m_rp;
+	mutable s2::P3dRenderParams m_rp;
 
 	AnimRecorder* m_anim_recorder;
 	InvertRecord* m_inv_record;

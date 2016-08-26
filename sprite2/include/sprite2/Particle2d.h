@@ -1,5 +1,5 @@
-#ifndef _SPRITE2_PARTICLE_2D_H_
-#define _SPRITE2_PARTICLE_2D_H_
+#ifndef _SPRITE2_PARTICLE2D_H_
+#define _SPRITE2_PARTICLE2D_H_
 
 #include <CU_Singleton.h>
 
@@ -25,4 +25,4 @@ private:
 
 }
 
-#endif // _SPRITE2_PARTICLE_2D_H_
+#endif // _SPRITE2_PARTICLE2D_H_

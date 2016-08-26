@@ -2,7 +2,6 @@
 #include "AnimRecorder.h"
 #include "InvertRecord.h"
 #include "ps_config.h"
-#include "PSNode.h"
 
 #include <ps_3d.h>
 #include <ps_3d_sprite.h>
@@ -20,7 +19,7 @@ ParticleSystem::ParticleSystem(p3d_emitter_cfg* cfg, bool record)
 	: m_anim_recorder(NULL)
 	, m_inv_record(NULL)
 {
-	PSNode::Instance();
+	s2::Particle3d::Instance();
 
 	if (record) {
 		m_anim_recorder = new AnimRecorder(4096);
@@ -34,7 +33,7 @@ ParticleSystem::ParticleSystem(const ParticleSystem& ps)
 	: m_anim_recorder(NULL)
 	, m_inv_record(NULL)
 {
-	PSNode::Instance();
+	s2::Particle3d::Instance();
 
 	Init(ps.m_spr->et->cfg);
 }
@@ -168,7 +167,7 @@ void ParticleSystem::Draw(const sm::mat4& mt, AnimRecorder* recorder) const
 
 bool ParticleSystem::Update(const sm::mat4& mat)
 {
-	float time = PSNode::Instance()->GetTime();
+	float time = s2::Particle3d::Instance()->GetTime();
 	assert(m_spr->et->time <= time);
 	if (m_spr->et->time == time) {
 		return false;
@@ -339,7 +338,7 @@ void ParticleSystem::SetBlend(int blend)
 	const_cast<p3d_emitter_cfg*>(m_spr->et->cfg)->blend = blend;	
 }
 
-p3d_symbol* ParticleSystem::AddSymbol(ee::Symbol* sym)
+p3d_symbol* ParticleSystem::AddSymbol(s2::Symbol* sym)
 {
 	assert(m_spr->et->cfg->sym_count < MAX_COMPONENTS);
 
