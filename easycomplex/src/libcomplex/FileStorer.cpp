@@ -7,6 +7,8 @@
 
 #include <sprite2/S2_Sprite.h>
 
+#include <wx/msgdlg.h>
+
 #include <fstream>
 
 namespace ecomplex
@@ -14,6 +16,8 @@ namespace ecomplex
 
 void FileStorer::Store(const char* filepath, const Symbol* sym)
 {
+	CheckDuplicateName(sym);
+
 	Json::Value value;
 
 //	centerSymbol(sym);
@@ -45,6 +49,8 @@ void FileStorer::Store(const char* filepath, const Symbol* sym)
 
 void FileStorer::StoreWithHistory(const char* filepath, const Symbol* sym)
 {
+	CheckDuplicateName(sym);
+
 	Json::Value value;
 
 	value["name"] = sym->name;
@@ -106,6 +112,27 @@ Json::Value FileStorer::Store(ee::Sprite* spr, const std::string& dir)
 	spr->Store(value, dir);
 
 	return value;
+}
+
+void FileStorer::CheckDuplicateName(const Symbol* sym)
+{
+	std::set<std::string> names_set;
+	const std::vector<s2::Sprite*>& children = sym->GetChildren();
+	for (int i = 0, n = children.size(); i < n; ++i) 
+	{
+		ee::Sprite* spr = dynamic_cast<ee::Sprite*>(children[i]);
+		std::string name = spr->GetName();
+		if (name.empty() || name[0] == '_') {
+			continue;
+		}
+
+		std::set<std::string>::iterator itr = names_set.find(name);
+		if (itr == names_set.end()) {
+			names_set.insert(name);
+		} else {
+			wxMessageBox(name, "ÖØÃû");
+		}
+	}
 }
 
 } // complex
