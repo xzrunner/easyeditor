@@ -232,7 +232,7 @@ void ToolbarPanel::OnChangeMode(wxCommandEvent& event)
 	}
 }
 
-ComponentPanel* ToolbarPanel::OnAddChild(ee::Symbol* sym)
+ComponentPanel* ToolbarPanel::OnAddChild(s2::Symbol* sym)
 {
 	if (sym) {
 		sym->AddReference();

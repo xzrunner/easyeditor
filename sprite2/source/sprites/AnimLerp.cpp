@@ -29,7 +29,7 @@ void AnimLerp::Lerp(const std::vector<Sprite*>& begin, const std::vector<Sprite*
 			}
 		}
 
-		Sprite* tween_spr = dynamic_cast<Sprite*>(((cu::Cloneable*)start_spr)->Clone());			
+		Sprite* tween_spr = VI_DOWNCASTING<Sprite*>(((cu::Cloneable*)start_spr)->Clone());			
 		if (end_spr) {
 			Lerp(start_spr, end_spr, tween_spr, process);
 		}

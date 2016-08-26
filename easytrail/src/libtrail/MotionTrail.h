@@ -1,18 +1,19 @@
 #ifndef _EASYTRAIL_MOTION_TRAIL_H_
 #define _EASYTRAIL_MOTION_TRAIL_H_
 
-#include "TrailNode.h"
-
 #include <ee/UICallback.h>
 
 #include <SM_Matrix.h>
 #include <CU_RefCountObj.h>
+#include <sprite2/Trail.h>
+
+#include <string>
 
 struct t2d_emitter_cfg;
 struct t2d_emitter;
 struct t2d_symbol;
 
-namespace ee { class Symbol; }
+namespace s2 { class Symbol; }
 
 namespace etrail
 {
@@ -36,7 +37,7 @@ public:
 
 	void Clear();
 
-	t2d_symbol* AddSymbol(ee::Symbol* sym);
+	t2d_symbol* AddSymbol(s2::Symbol* sym);
 	void DelSymbol(int idx);
 	void DelAllSymbol();
 	t2d_symbol* GetSymbol(int idx);
@@ -50,7 +51,7 @@ public:
 	std::string name;
 
 private:
-	mutable RenderParams m_rp;
+	mutable s2::TrailRenderParams m_rp;
 
 	t2d_emitter* m_spr;
 

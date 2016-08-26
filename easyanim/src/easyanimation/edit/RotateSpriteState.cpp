@@ -7,6 +7,8 @@
 #include <ee/FetchAllVisitor.h>
 #include <ee/Math2D.h>
 
+#include <SM_Calc.h>
+
 namespace eanim
 {
 

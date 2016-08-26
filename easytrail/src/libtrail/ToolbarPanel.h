@@ -9,6 +9,7 @@
 #include <wx/dnd.h>
 
 namespace ee { class LibraryPanel; class SliderCtrl; class Symbol; }
+namespace s2 { class Symbol; }
 
 namespace etrail
 {
@@ -51,7 +52,7 @@ private:
 
 	void OnChangeMode(wxCommandEvent& event);
 
-	ComponentPanel* OnAddChild(ee::Symbol* sym);
+	ComponentPanel* OnAddChild(s2::Symbol* sym);
 	void OnDelAllChild(wxCommandEvent& event);
 
 private:

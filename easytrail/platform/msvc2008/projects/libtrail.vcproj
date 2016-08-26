@@ -264,14 +264,6 @@
 				RelativePath="..\..\..\src\libtrail\Symbol.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\src\libtrail\TrailNode.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libtrail\TrailNode.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="mt"

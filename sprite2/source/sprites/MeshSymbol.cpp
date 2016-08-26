@@ -42,7 +42,7 @@ void MeshSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 	shader->SetColor(p.color.mul.ToABGR(), p.color.add.ToABGR());
 	shader->SetColorMap(p.color.rmap.ToABGR(), p.color.gmap.ToABGR(), p.color.bmap.ToABGR());
 
-	const MeshSprite* mesh_spr = dynamic_cast<const MeshSprite*>(spr);
+	const MeshSprite* mesh_spr = VI_DOWNCASTING<const MeshSprite*>(spr);
 	if (mesh_spr) {
 		const MeshTransform& mtrans = mesh_spr->GetMeshTrans();
 		mtrans.StoreToMesh(m_mesh);

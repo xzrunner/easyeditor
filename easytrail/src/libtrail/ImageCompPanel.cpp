@@ -68,8 +68,8 @@ void ImageCompPanel::Store(Json::Value& val, const std::string& dir) const
 	ee::JsonSerializer::Store(m_pc->mode.A.add_col_begin.rgba, val["add_col_begin"]);
 	ee::JsonSerializer::Store(m_pc->mode.A.add_col_end.rgba, val["add_col_end"]);
 
-	ee::Symbol* sym = static_cast<ee::Symbol*>(m_pc->mode.A.ud);
-	val["filepath"] = ee::FileHelper::GetRelativePath(dir, sym->GetFilepath());
+	s2::Symbol* sym = static_cast<ee::Symbol*>(m_pc->mode.A.ud);
+	val["filepath"] = ee::FileHelper::GetRelativePath(dir, dynamic_cast<ee::Symbol*>(sym)->GetFilepath());
 }
 
 void ImageCompPanel::InitLayout(wxSizer* top_sizer)
@@ -91,7 +91,7 @@ void ImageCompPanel::InitLayout(wxSizer* top_sizer)
 		hori_sizer->AddSpacer(20);
 		// right
 		{
-			std::string filepath = static_cast<ee::Symbol*>(m_pc->mode.A.ud)->GetFilepath();
+			std::string filepath = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(m_pc->mode.A.ud))->GetFilepath();
 			if (ee::FileType::IsType(filepath, ee::FileType::e_image)) {
 				ee::ImagePanel* panel = new ee::ImagePanel(this, filepath, 100);
 				hori_sizer->Add(panel);
@@ -151,7 +151,7 @@ void ImageCompPanel::InitLayout(wxSizer* top_sizer)
 
 std::string ImageCompPanel::GetTitle() const
 {
-	std::string name = static_cast<ee::Symbol*>(m_pc->mode.A.ud)->GetFilepath();
+	std::string name = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(m_pc->mode.A.ud))->GetFilepath();
 	name = ee::FileHelper::GetFilename(name);
 	return name;
 }

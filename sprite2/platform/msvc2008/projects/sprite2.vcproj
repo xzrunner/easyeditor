@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\..\ejoy2d\src;..\..\..\include\sprite2;..\..\..\..\gtxt\src\gtxt;..\..\..\..\particle\src;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\dtex\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include"
+				AdditionalIncludeDirectories="..\..\..\..\ejoy2d\src;..\..\..\include\sprite2;..\..\..\..\gtxt\src\gtxt;..\..\..\..\particle\src;..\..\..\..\mtrail\src\mtrail;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\dtex\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -105,7 +105,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\..\ejoy2d\src;..\..\..\include\sprite2;..\..\..\..\gtxt\src\gtxt;..\..\..\..\particle\src;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\dtex\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include"
+				AdditionalIncludeDirectories="..\..\..\..\ejoy2d\src;..\..\..\include\sprite2;..\..\..\..\gtxt\src\gtxt;..\..\..\..\particle\src;..\..\..\..\mtrail\src\mtrail;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\dtex\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -847,33 +847,37 @@
 			<Filter
 				Name="trail"
 				>
+				<File
+					RelativePath="..\..\..\source\sprites\Trail.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\Trail.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\sprites\TrailSprite.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\TrailSprite.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\sprites\TrailSymbol.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\TrailSymbol.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter
 			Name="utility"
 			>
 			<File
-				RelativePath="..\..\..\include\sprite2\Cloneable.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\include\sprite2\pre_defined.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\sprite2\RefCountObj.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\sprite2\RefCountObj.inl"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\sprite2\Singleton.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\sprite2\Uncopyable.h"
 				>
 			</File>
 		</Filter>

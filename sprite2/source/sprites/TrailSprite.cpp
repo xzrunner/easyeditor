@@ -1,0 +1,67 @@
+#include "TrailSprite.h"
+#include "TrailSymbol.h"
+#include "RenderParams.h"
+
+#include <mt_2d.h>
+
+#include <assert.h>
+
+namespace s2
+{
+
+TrailSprite::TrailSprite()
+	: m_et(NULL)
+{
+}
+
+TrailSprite::TrailSprite(Symbol* sym)
+	: Sprite(sym)
+	, m_et(NULL)
+{
+	const t2d_emitter_cfg* cfg = VI_DOWNCASTING<TrailSymbol*>(sym)->GetEmitterCfg();
+	if (cfg) {
+		m_et = t2d_emitter_create(cfg);
+		t2d_emitter_start(m_et);
+	}
+}
+
+TrailSprite::~TrailSprite()
+{
+	if (m_et) {
+		t2d_emitter_release(m_et);
+	}
+}
+
+TrailSprite* TrailSprite::Clone() const
+{
+	return new TrailSprite(*this);
+}
+
+bool TrailSprite::Update(const RenderParams& params, float dt)
+{
+	Trail::Instance()->Update(dt);
+
+	float time = Trail::Instance()->GetTime();
+	assert(m_et->time <= time);
+	if (m_et->time == time) {
+		return false;
+	}
+
+	dt = time - m_et->time;
+	sm::vec2 pos = params.mt * GetPosition();
+	t2d_emitter_update(m_et, dt, (sm_vec2*)(&pos));
+	m_et->time = time;
+
+	return true;
+}
+
+void TrailSprite::Draw(const RenderParams& params) const
+{
+	if (m_et) {
+		m_rp.mat = params.mt;
+		m_rp.ct = params.color;
+		t2d_emitter_draw(m_et, &m_rp);
+	}
+}
+
+}

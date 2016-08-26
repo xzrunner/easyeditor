@@ -158,7 +158,7 @@ void AnimSprite::UpdateCurrFrame()
 					if (tween_spr) {
 						tween_spr->AddReference();
 					} else {
-						tween_spr = dynamic_cast<Sprite*>(((cu::Cloneable*)start_spr)->Clone());
+						tween_spr = VI_DOWNCASTING<Sprite*>(((cu::Cloneable*)start_spr)->Clone());
 					}
 					if (end_spr) {
 						AnimLerp::Lerp(start_spr, end_spr, tween_spr, process);

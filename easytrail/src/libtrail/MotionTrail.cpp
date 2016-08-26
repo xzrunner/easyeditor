@@ -1,18 +1,16 @@
 #include "MotionTrail.h"
 #include "mt_config.h"
-#include "TrailNode.h"
 
 #include <mt_2d.h>
 
 #include <assert.h>
-#include <string>
 
 namespace etrail
 {
 
 MotionTrail::MotionTrail(t2d_emitter_cfg* cfg)
 {
-	TrailNode::Instance();
+	s2::Trail::Instance();
 
 	Init(cfg);
 }
@@ -73,7 +71,7 @@ void MotionTrail::Draw(const sm::mat4& mt) const
 
 bool MotionTrail::Update(const sm::vec2& pos)
 {
-	float time = TrailNode::Instance()->GetTime();
+	float time = s2::Trail::Instance()->GetTime();
 	assert(m_spr->time <= time);
 	if (m_spr->time == time) {
 		return false;
@@ -101,7 +99,7 @@ void MotionTrail::Clear()
 	t2d_emitter_clear(m_spr);
 }
 
-t2d_symbol* MotionTrail::AddSymbol(ee::Symbol* sym)
+t2d_symbol* MotionTrail::AddSymbol(s2::Symbol* sym)
 {
 	assert(m_spr->cfg->sym_count < MAX_COMPONENTS);
 

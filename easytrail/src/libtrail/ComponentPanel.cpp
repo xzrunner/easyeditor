@@ -21,7 +21,7 @@ ComponentPanel::ComponentPanel(wxWindow* parent, t2d_symbol* pc, ToolbarPanel* t
 
 ComponentPanel::~ComponentPanel()
 {
-	ee::Symbol* sym = static_cast<ee::Symbol*>(m_pc->mode.A.ud);
+	s2::Symbol* sym = static_cast<s2::Symbol*>(m_pc->mode.A.ud);
 	if (sym) {
 		sym->RemoveReference();
 	}
