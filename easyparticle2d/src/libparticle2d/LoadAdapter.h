@@ -27,6 +27,8 @@ public:
 		s2::Color mul_col_begin, mul_col_end;
 		s2::Color add_col_begin, add_col_end;
 
+		float alpha_start, alpha_end;
+
 		std::string filepath;
 	}; // Component
 

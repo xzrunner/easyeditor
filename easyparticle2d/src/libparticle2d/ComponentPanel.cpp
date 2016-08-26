@@ -10,19 +10,23 @@
 #include <ee/SliderCtrlTwo.h>
 #include <ee/RGBColorSettingDlg.h>
 
+#include <wx/colourdata.h>
+#include <wx/colordlg.h>
+
 namespace eparticle2d
 {
 
 ComponentPanel::ComponentPanel(wxWindow* parent, p2d_symbol* component, 
 	ToolbarPanel* toolbar)
 	: wxPanel(parent)
-	, m_component(component)
+	, m_pc(component)
 	, m_toolbar(toolbar)
 {
 	InitLayout();
 	for (int i = 0, n = m_sliders.size(); i < n; ++i) {
 		m_sliders[i]->Update();
 	}
+	UpdateBtnColor();
 }
 
 void ComponentPanel::SetValue(int key, const ee::UICallback::Data& data)
@@ -30,16 +34,16 @@ void ComponentPanel::SetValue(int key, const ee::UICallback::Data& data)
 	switch (key)
 	{
 	case PS_ANGLE:
-		m_component->angle_start = data.val0 * SM_DEG_TO_RAD;
-		m_component->angle_end = data.val1 * SM_DEG_TO_RAD;
+		m_pc->angle_start = data.val0 * SM_DEG_TO_RAD;
+		m_pc->angle_end = data.val1 * SM_DEG_TO_RAD;
 		break;
 	case PS_SCALE:
-		m_component->scale_start = data.val0 * 0.01f;
-		m_component->scale_end = data.val1 * 0.01f;
+		m_pc->scale_start = data.val0 * 0.01f;
+		m_pc->scale_end = data.val1 * 0.01f;
 		break;
 	case PS_ALPHA:
-		m_component->mul_col_begin.a = data.val0 / 100;
-		m_component->mul_col_end.a = data.val1 / 100;
+		m_pc->mul_col_begin.a = data.val0;
+		m_pc->mul_col_end.a = data.val1;
 		break;
 	}
 }
@@ -49,25 +53,37 @@ void ComponentPanel::GetValue(int key, ee::UICallback::Data& data)
 	switch (key)
 	{
 	case PS_ANGLE:
-		data.val0 = m_component->angle_start * SM_RAD_TO_DEG;
-		data.val1 = m_component->angle_end * SM_RAD_TO_DEG;
+		data.val0 = m_pc->angle_start * SM_RAD_TO_DEG;
+		data.val1 = m_pc->angle_end * SM_RAD_TO_DEG;
 		break;
 	case PS_SCALE:
-		data.val0 = m_component->scale_start * 100;
-		data.val1 = m_component->scale_end * 100;
+		data.val0 = m_pc->scale_start * 100;
+		data.val1 = m_pc->scale_end * 100;
 		break;
 	case PS_ALPHA:
-		data.val0 = m_component->mul_col_begin.a * 100;
-		data.val1 = m_component->mul_col_end.a * 100;
+		data.val0 = m_pc->mul_col_begin.a;
+		data.val1 = m_pc->mul_col_end.a;
 		break;
 	}
+}
+
+void ComponentPanel::UpdateBtnColor()
+{
+	m_begin_mul_col_btn->SetBackgroundColour(
+		wxColour(m_pc->mul_col_begin.r, m_pc->mul_col_begin.g, m_pc->mul_col_begin.b));
+	m_end_mul_col_btn->SetBackgroundColour(
+		wxColour(m_pc->mul_col_end.r, m_pc->mul_col_end.g, m_pc->mul_col_end.b));
+	m_begin_add_col_btn->SetBackgroundColour(
+		wxColour(m_pc->add_col_begin.r, m_pc->add_col_begin.g, m_pc->add_col_begin.b));
+	m_end_add_col_btn->SetBackgroundColour(
+		wxColour(m_pc->add_col_end.r, m_pc->add_col_end.g, m_pc->add_col_end.b));
 }
 
 void ComponentPanel::InitLayout()
 {
 	wxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
 
-	std::string name = static_cast<ee::Symbol*>(m_component->ud)->GetFilepath();
+	std::string name = static_cast<ee::Symbol*>(m_pc->ud)->GetFilepath();
 	name = ee::FileHelper::GetFilename(name);
 
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, name); 
@@ -94,7 +110,7 @@ void ComponentPanel::InitLayout(wxSizer* top_sizer)
 		sizer->AddSpacer(50);
 		// Icon
 		{
-			std::string filepath = static_cast<ee::Symbol*>(m_component->ud)->GetFilepath();
+			std::string filepath = static_cast<ee::Symbol*>(m_pc->ud)->GetFilepath();
 			if (ee::FileType::IsType(filepath, ee::FileType::e_image)) {
 				ee::ImagePanel* panel = new ee::ImagePanel(this, filepath, 100);
 				sizer->Add(panel);
@@ -119,38 +135,52 @@ void ComponentPanel::InitLayout(wxSizer* top_sizer)
 		top_sizer->AddSpacer(10);
 		m_sliders.push_back(s_scale);	
 	}
-	// Multi Color
+	// Mul Color
 	{
-		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, "乘色"); 
+		wxSizer* hori_sizer = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
 
-		wxButton* start_btn = new wxButton(this, wxID_ANY, LANG[LK_COL_MUL_START]);
-		Connect(start_btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ComponentPanel::OnSetMultiColStart));
-		sizer->Add(start_btn);
+		hori_sizer->Add(new wxStaticText(this, wxID_ANY, "起始"));
+		hori_sizer->AddSpacer(5);
+		m_begin_mul_col_btn = new wxButton(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(60, 20));
+		Connect(m_begin_mul_col_btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ComponentPanel::OnSetBeginMulCol));
+		hori_sizer->Add(m_begin_mul_col_btn);
 
-		wxButton* end_btn = new wxButton(this, wxID_ANY, LANG[LK_COL_MUL_END]);
-		Connect(end_btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ComponentPanel::OnSetMultiColEnd));
-		sizer->Add(end_btn);
+		hori_sizer->AddSpacer(20);
 
-		top_sizer->Add(sizer);
+		hori_sizer->Add(new wxStaticText(this, wxID_ANY, "结束"));
+		hori_sizer->AddSpacer(5);
+		m_end_mul_col_btn = new wxButton(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(60, 20));
+		Connect(m_end_mul_col_btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ComponentPanel::OnSetEndMulCol));
+		hori_sizer->Add(m_end_mul_col_btn);
+
+		top_sizer->Add(hori_sizer);
 	}
 	// Add Color
 	{
-		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, "加色"); 
+		wxSizer* hori_sizer = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
 
-		wxButton* start_btn = new wxButton(this, wxID_ANY, LANG[LK_COL_ADD_START]);
-		Connect(start_btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ComponentPanel::OnSetAddColStart));
-		sizer->Add(start_btn);
+		hori_sizer->Add(new wxStaticText(this, wxID_ANY, "起始"));
+		hori_sizer->AddSpacer(5);
+		m_begin_add_col_btn = new wxButton(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(60, 20));
+		Connect(m_begin_add_col_btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ComponentPanel::OnSetBeginAddCol));
+		hori_sizer->Add(m_begin_add_col_btn);
 
-		wxButton* end_btn = new wxButton(this, wxID_ANY, LANG[LK_COL_MUL_END]);
-		Connect(end_btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ComponentPanel::OnSetAddColEnd));
-		sizer->Add(end_btn);
+		hori_sizer->AddSpacer(20);
 
-		top_sizer->Add(sizer);
+		hori_sizer->Add(new wxStaticText(this, wxID_ANY, "结束"));
+		hori_sizer->AddSpacer(5);
+		m_end_add_col_btn = new wxButton(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(60, 20));
+		Connect(m_end_add_col_btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ComponentPanel::OnSetEndAddCol));
+		hori_sizer->Add(m_end_add_col_btn);
+
+		top_sizer->Add(hori_sizer);
 	}
 	// Alpha
 	{
 		ee::SliderCtrlTwo* s_alpha = new ee::SliderCtrlTwo(this, LANG[LK_ALPHA], "alpha", this, PS_ALPHA, 
-			ee::SliderItem(LANG[LK_START], "start", 100, 0, 100), ee::SliderItem(LANG[LK_END], "end", 100, 0, 100));
+			ee::SliderItem(LANG[LK_START], "start", 255, 0, 255), ee::SliderItem(LANG[LK_END], "end", 255, 0, 255));
 		top_sizer->Add(s_alpha);
 		top_sizer->AddSpacer(10);
 		m_sliders.push_back(s_alpha);
@@ -162,35 +192,45 @@ void ComponentPanel::OnDelete(wxCommandEvent& event)
 	m_toolbar->OnDelChild(this);
 }
 
-void ComponentPanel::OnSetMultiColStart(wxCommandEvent& event)
+void ComponentPanel::OnSetBeginMulCol(wxCommandEvent& event)
 {
-	UpdateColor(m_component->mul_col_begin);
+	ChangeColor(m_pc->mul_col_begin.rgba);
 }
 
-void ComponentPanel::OnSetMultiColEnd(wxCommandEvent& event)
+void ComponentPanel::OnSetEndMulCol(wxCommandEvent& event)
 {
-	UpdateColor(m_component->mul_col_end);
+	ChangeColor(m_pc->mul_col_end.rgba);
 }
 
-void ComponentPanel::OnSetAddColStart(wxCommandEvent& event)
+void ComponentPanel::OnSetBeginAddCol(wxCommandEvent& event)
 {
-	UpdateColor(m_component->add_col_begin);
+	ChangeColor(m_pc->add_col_begin.rgba);
 }
 
-void ComponentPanel::OnSetAddColEnd(wxCommandEvent& event)
+void ComponentPanel::OnSetEndAddCol(wxCommandEvent& event)
 {
-	UpdateColor(m_component->add_col_end);
+	ChangeColor(m_pc->add_col_end.rgba);
 }
 
-void ComponentPanel::UpdateColor(ps_color& color)
+void ComponentPanel::ChangeColor(uint8_t rgba[4])
 {
-	s2::Color tmp;
-	memcpy(&tmp.r, &color.r, sizeof(color));
+	wxColourData data;
+	data.SetColour(wxColour(rgba[0], rgba[1], rgba[2]));
+	wxColourDialog dlg(m_parent, &data);
 
-	ee::RGBColorSettingDlg dlg(this, NULL, tmp);
-	if (dlg.ShowModal() == wxID_OK) {
-		tmp = dlg.GetColor();
-		memcpy(&color.r, &tmp.r, sizeof(color));
+	dlg.SetTitle(wxT("Set Color"));
+
+	wxPoint pos = wxGetMousePosition();
+	pos.x -= 400;
+	dlg.SetPosition(pos);
+
+	if (dlg.ShowModal() == wxID_OK)
+	{
+		const wxColor& col = dlg.GetColourData().GetColour();
+		rgba[0] = col.Red();
+		rgba[1] = col.Green();
+		rgba[2] = col.Blue();
+		UpdateBtnColor();
 	}
 }
 

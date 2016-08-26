@@ -79,21 +79,39 @@ void ToolbarPanel::Store(Json::Value& val) const
 	}
 }
 
+inline ps_color ColorFromS2(const s2::Color& col)
+{
+	ps_color ret;
+	ret.r = col.r;
+	ret.g = col.g;
+	ret.b = col.b;
+	ret.a = col.a;
+	return ret;
+}
+
 void ToolbarPanel::Add(const LoadAdapter::Component& comp)
 {
 	// todo Release symbol
 	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(comp.filepath);
-	p2d_symbol* p_symbol = m_stage->m_ps->AddSymbol(sym);
-	ComponentPanel* cp = new ComponentPanel(this, p_symbol, this);
+	p2d_symbol* pc = m_stage->m_ps->AddSymbol(sym);
+	ComponentPanel* cp = new ComponentPanel(this, pc, this);
 
 	cp->SetValue(PS_ANGLE, ee::UICallback::Data(comp.angle_start, comp.angle_end));
 
 	cp->SetValue(PS_SCALE, ee::UICallback::Data(comp.scale_start, comp.scale_end));
 
-	memcpy(&p_symbol->mul_col_begin.r, &comp.mul_col_begin.r, sizeof(p_symbol->mul_col_begin));
-	memcpy(&p_symbol->mul_col_end.r, &comp.mul_col_end.r, sizeof(p_symbol->mul_col_end));
-	memcpy(&p_symbol->add_col_begin.r, &comp.add_col_begin.r, sizeof(p_symbol->add_col_begin));
-	memcpy(&p_symbol->add_col_end.r, &comp.add_col_end.r, sizeof(p_symbol->add_col_end));
+	pc->mul_col_begin = ColorFromS2(comp.mul_col_begin);
+	pc->mul_col_end = ColorFromS2(comp.mul_col_end);
+	pc->add_col_begin = ColorFromS2(comp.add_col_begin);
+	pc->add_col_end = ColorFromS2(comp.add_col_end);
+
+	cp->SetValue(PS_ALPHA, ee::UICallback::Data(comp.alpha_start, comp.alpha_end));
+
+	cp->UpdateBtnColor();
+
+	for (int i = 0, n = cp->m_sliders.size(); i < n; ++i) {
+		cp->m_sliders[i]->Load();
+	}
 
 	m_comp_sizer->Insert(m_children.size(), cp);
 	m_children.push_back(cp);

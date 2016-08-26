@@ -37,7 +37,7 @@ void FileIO::Store(const std::string& filepath, ToolbarPanel* toolbar)
 	for (int i = 0, n = toolbar->m_children.size(); i < n; ++i)
 	{
 		ComponentPanel* cp = toolbar->m_children[i];
-		p2d_symbol* p_symbol = cp->m_component;
+		p2d_symbol* p_symbol = cp->m_pc;
 
 		Json::Value cval;
 

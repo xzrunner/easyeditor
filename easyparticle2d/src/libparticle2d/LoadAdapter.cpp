@@ -108,6 +108,11 @@ void LoadAdapter::LoadComponent(const std::string& dir, const Json::Value& comp_
 	ee::JsonSerializer::Load(comp_val["add_col_begin"], comp.add_col_begin);
 	ee::JsonSerializer::Load(comp_val["add_col_end"], comp.add_col_end);
 
+	if (!comp_val["alpha"].isNull()) {
+		comp.alpha_start = comp_val["alpha"]["start"].asInt();
+		comp.alpha_end = comp_val["alpha"]["end"].asInt();
+	}
+
 	comp.filepath = comp_val["filepath"].asString();
 	comp.filepath = ee::FileHelper::GetAbsolutePath(dir, comp.filepath);
 
