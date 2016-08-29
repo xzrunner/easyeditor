@@ -18,11 +18,11 @@
 #include "TestFilter.h"
 
 //test::TestTask* task = new test::TestShape;
-//test::TestTask* task = new test::TestSprite;
+test::TestTask* task = new test::TestSprite;
 //test::TestTask* task = new test::TestMulti;
 //test::TestTask* task = new test::TestSprite25;
 //test::TestTask* task = new test::TestModel3;
-test::TestTask* task = new test::TestFilter;
+//test::TestTask* task = new test::TestFilter;
 
 void 
 display(void) {

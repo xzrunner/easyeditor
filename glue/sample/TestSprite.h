@@ -19,7 +19,7 @@ public:
 	virtual void Update();
 
 private:
-	std::vector<glue::Sprite*> m_sprites;
+	std::vector<s2::Sprite*> m_sprites;
 
 }; // TestSprite
 

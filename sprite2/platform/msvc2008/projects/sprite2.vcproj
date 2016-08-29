@@ -375,6 +375,10 @@
 					RelativePath="..\..\..\include\sprite2\ImageSymbol.h"
 					>
 				</File>
+				<Filter
+					Name="image"
+					>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="complex"
@@ -902,6 +906,10 @@
 			>
 			<File
 				RelativePath="..\..\..\include\sprite2\pre_defined.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\sprite2\s2_config.h"
 				>
 			</File>
 		</Filter>

@@ -9,6 +9,7 @@
 #include <m3_material.h>
 #include <m3_typedef.h>
 #include <ds_array.h>
+#include <SM_Vector.h>
 
 namespace glue
 {
@@ -112,7 +113,7 @@ void AssimpHelper::LoadMesh(const aiMesh* ai_mesh, const aiMaterial* ai_material
 	for (int i = 0; i < ai_mesh->mNumVertices; ++i) 
 	{
 		const aiVector3D& p = ai_mesh->mVertices[i];
-		struct sm_vec3 position;
+		sm::vec3 position;
 		position.x = p.x;
 		position.y = p.y;
 		position.z = p.z;
@@ -122,7 +123,7 @@ void AssimpHelper::LoadMesh(const aiMesh* ai_mesh, const aiMaterial* ai_material
 		if (has_normal) 
 		{
 			const aiVector3D& n = ai_mesh->mNormals[i];
-			struct sm_vec3 normal;
+			sm::vec3 normal;
 			normal.x = n.x;
 			normal.y = n.y;
 			normal.z = n.z;

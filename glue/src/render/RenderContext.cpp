@@ -36,13 +36,13 @@ void RenderContext::OnSize(int w, int h)
 	sl::SubjectMVP2::Instance()->NotifyProjection(w, h);
 
 	m_p3d_cam->OnSize(w, h);
- 	sl::SubjectMVP3::Instance()->NotifyProjection(m_p3d_cam->GetProjectMat());
+// 	sl::SubjectMVP3::Instance()->NotifyProjection(m_p3d_cam->GetProjectMat());
 }
 
 void RenderContext::SetCamera(float x, float y, float sx, float sy)
 {
 	sl::SubjectMVP2::Instance()->NotifyModelview(x, y, sx, sy);
-	sl::SubjectMVP3::Instance()->NotifyModelview(m_p3d_cam->GetModelViewMat());
+	//sl::SubjectMVP3::Instance()->NotifyModelview(m_p3d_cam->GetModelViewMat());
 }
 
 RID RenderContext::CreateTexture(const uint8_t* data, int width, int height, TEXTURE_FORMAT format)

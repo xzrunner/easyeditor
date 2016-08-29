@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\particle\src;..\..\..\..\dtex\src;..\..\..\..\ejoy2d\src;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\model3\src\model3;..\..\..\..\camera25\src\camera25;..\..\..\..\sm\src\sm;..\..\..\..\ds\src\ds;&quot;..\..\..\..\editor-external\cjson\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\libjpeg\include&quot;;&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\assimp\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\particle\src;..\..\..\..\dtex\src;..\..\..\..\ejoy2d\src;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\model3\src\model3;..\..\..\..\camera25\src\camera25;..\..\..\..\sm\src\sm;..\..\..\..\ds\src\ds;..\..\..\..\cu\src\cu;..\..\..\..\sprite2\include;&quot;..\..\..\..\editor-external\cjson\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\libjpeg\include&quot;;&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\assimp\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -106,7 +106,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\particle\src;..\..\..\..\dtex\src;..\..\..\..\ejoy2d\src;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\model3\src\model3;..\..\..\..\camera25\src\camera25;..\..\..\..\sm\src\sm;..\..\..\..\ds\src\ds;&quot;..\..\..\..\editor-external\cjson\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\libjpeg\include&quot;;&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\assimp\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\particle\src;..\..\..\..\dtex\src;..\..\..\..\ejoy2d\src;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\model3\src\model3;..\..\..\..\camera25\src\camera25;..\..\..\..\sm\src\sm;..\..\..\..\ds\src\ds;..\..\..\..\cu\src\cu;..\..\..\..\sprite2\include;&quot;..\..\..\..\editor-external\cjson\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\libjpeg\include&quot;;&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\assimp\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -193,53 +193,17 @@
 			</Filter>
 		</Filter>
 		<Filter
-			Name="math"
-			>
-			<File
-				RelativePath="..\..\..\src\math\Vector.h"
-				>
-			</File>
-		</Filter>
-		<Filter
 			Name="dataset"
 			>
-			<File
-				RelativePath="..\..\..\src\dataset\Sprite.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\dataset\Sprite.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\dataset\Symbol.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\dataset\Symbol.h"
-				>
-			</File>
-			<Filter
-				Name="model3"
-				>
-				<File
-					RelativePath="..\..\..\src\dataset\Model3Symbol.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\dataset\Model3Symbol.h"
-					>
-				</File>
-			</Filter>
 			<Filter
 				Name="image"
 				>
 				<File
-					RelativePath="..\..\..\src\dataset\ImageSymbol.cpp"
+					RelativePath="..\..\..\src\dataset\ImageSymbolOld.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\dataset\ImageSymbol.h"
+					RelativePath="..\..\..\src\dataset\ImageSymbolOld.h"
 					>
 				</File>
 				<File
@@ -267,6 +231,50 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="res_mgr"
+				>
+				<File
+					RelativePath="..\..\..\src\dataset\Resource.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\dataset\ResourceManager.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\dataset\ResourceManager.inl"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\dataset\SymbolFactory.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\dataset\SymbolFactory.h"
+					>
+				</File>
+				<Filter
+					Name="res"
+					>
+					<File
+						RelativePath="..\..\..\src\dataset\Image.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\dataset\Image.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\dataset\ImageSymbol.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\dataset\ImageSymbol.h"
+						>
+					</File>
+				</Filter>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="utility"
@@ -280,23 +288,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\utility\color_trans.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\utility\color_trans.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\utility\Exception.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\src\utility\Exception.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\utility\macro.h"
 				>
 			</File>
 			<File

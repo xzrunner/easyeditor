@@ -2,6 +2,8 @@
 
 #include <rvg.h>
 #include <shaderlab.h>
+#include <sprite2/ImageSprite.h>
+#include <sprite2/DrawNode.h>
 
 namespace test
 {
@@ -14,20 +16,20 @@ void TestSprite25::Init()
 	sl_mgr->CreateShader(sl::SPRITE3, new sl::Sprite3Shader(sl_rc));
 //	sl_mgr->CreateShader(sl::SHAPE, new sl::Shape2Shader(sl_rc));
 
-	glue::Symbol* sym = new glue::ImageSymbol("coin_00.png");
+	s2::Symbol* sym = new glue::ImageSymbol("coin_00.png");
 	{
-		glue::Sprite* spr = new glue::Sprite(sym);
-		spr->SetPositioin(glue::vec2(0, 0));
+		s2::Sprite* spr = new s2::ImageSprite(sym);
+		spr->SetPosition(sm::vec2(0, 0));
 		m_sprites.push_back(spr);
 	}
 	{
-		glue::Sprite* spr = new glue::Sprite(sym);
-		spr->SetPositioin(glue::vec2(100, 100));
+		s2::Sprite* spr = new s2::ImageSprite(sym);
+		spr->SetPosition(sm::vec2(100, 100));
 		m_sprites.push_back(spr);
 	}
 	{
-		glue::Sprite* spr = new glue::Sprite(sym);
-		spr->SetPositioin(glue::vec2(-100, -100));
+		s2::Sprite* spr = new s2::ImageSprite(sym);
+		spr->SetPosition(sm::vec2(-100, -100));
 		m_sprites.push_back(spr);
 	}
 }
@@ -43,21 +45,20 @@ void TestSprite25::Draw() const
 	//////////////////////////////////////////////////////////////////////////
 	
 // 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-// 		glue::Sprite* spr = m_sprites[i];
-// 		sm_mat4 mt = spr->GetTransMatrix();
+// 		s2::Sprite* spr = m_sprites[i];
+// 		sm::mat4 mt = spr->GetTransMatrix();
 // 		spr->GetSymbol().Draw(mt);	
 // 	}
 
 	{
-		sm_mat4 mt = m_sprites[0]->GetTransMatrix();
-		static_cast<const glue::ImageSymbol*>(&m_sprites[0]->GetSymbol())->Draw25(mt);	
+		s2::DrawNode::Draw(m_sprites[0]);
 	}
 // 	{
-// 		sm_mat4 mt = m_sprites[1]->GetTransMatrix();
+// 		sm::mat4 mt = m_sprites[1]->GetTransMatrix();
 // 		m_sprites[1]->GetSymbol().ModelDraw(mt);	
 // 	}
 // 	{
-// 		sm_mat4 mt = m_sprites[2]->GetTransMatrix();
+// 		sm::mat4 mt = m_sprites[2]->GetTransMatrix();
 // 		m_sprites[2]->GetSymbol().Draw(mt);	
 // 	}
 //	//////////////////////////////////////////////////////////////////////////

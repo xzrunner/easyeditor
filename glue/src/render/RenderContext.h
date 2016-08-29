@@ -1,9 +1,9 @@
 #ifndef _GLUE_RENDER_CONTEXT_H_
 #define _GLUE_RENDER_CONTEXT_H_
 
-#include "utility/macro.h"
-
 #include <render/render.h>
+
+#include <CU_Singleton.h>
 
 namespace glue
 {
