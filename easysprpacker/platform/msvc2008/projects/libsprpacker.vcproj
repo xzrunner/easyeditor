@@ -197,7 +197,7 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="03.label"
+				Name="05.label"
 				>
 				<File
 					RelativePath="..\..\..\src\libsprpacker\PackLabel.cpp"
@@ -205,6 +205,38 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\libsprpacker\PackLabel.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="03.icon"
+				>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackIcon.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackIcon.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackIconSpr.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackIconSpr.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="04.texture"
+				>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackTexture.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackTexture.h"
 					>
 				</File>
 			</Filter>
@@ -261,6 +293,50 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\libsprpacker\Scale9SprBuilder.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="05.label"
+				>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\LabelBuilder.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\LabelBuilder.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="03.icon"
+				>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\IconBuilder.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\IconBuilder.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\IconSprBuilder.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\IconSprBuilder.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="04.texture"
+				>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\TextureBuilder.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\TextureBuilder.h"
 					>
 				</File>
 			</Filter>

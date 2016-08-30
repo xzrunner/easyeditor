@@ -5,9 +5,9 @@
 
 #include <CU_Singleton.h>
 
-#include <vector>
+#include <map>
 
-namespace escale9 { class Sprite; }
+namespace escale9 { class Symbol; class Sprite; }
 
 namespace esprpacker
 {
@@ -24,7 +24,7 @@ public:
 	const PackNode* Create(const escale9::Sprite* spr);
 
 private:
-	std::vector<const PackScale9Spr*> m_data;
+	std::multimap<const escale9::Symbol*, const PackScale9Spr*> m_map_data;
 
 	SINGLETON_DECLARATION(Scale9SprBuilder);
 

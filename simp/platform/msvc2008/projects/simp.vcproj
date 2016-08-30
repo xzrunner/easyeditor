@@ -146,6 +146,18 @@
 	</References>
 	<Files>
 		<Filter
+			Name="03.icon"
+			>
+			<File
+				RelativePath="..\..\..\src\simp\simp_icon.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\simp\simp_icon.h"
+				>
+			</File>
+		</Filter>
+		<Filter
 			Name="01.picture"
 			>
 			<File
@@ -170,7 +182,7 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="03.label"
+			Name="05.label"
 			>
 			<File
 				RelativePath="..\..\..\src\simp\simp_label.c"
@@ -178,6 +190,18 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\simp\simp_label.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="04.texture"
+			>
+			<File
+				RelativePath="..\..\..\src\simp\simp_texture.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\simp\simp_texture.h"
 				>
 			</File>
 		</Filter>

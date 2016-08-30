@@ -32,6 +32,11 @@ public:
 	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, 
 		float scale) const;	
 
+	const s2::Textbox& GetTextBox() const { return m_tb; }
+
+	const std::string& GetText() const { return m_text; }
+	const std::string& GetTid() const { return m_tid; }
+
 private:
 	void Init(const etext::Sprite* spr);
 

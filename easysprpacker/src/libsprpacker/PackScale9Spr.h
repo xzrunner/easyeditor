@@ -3,6 +3,8 @@
 
 #include "PackNode.h"
 
+#include <SM_Vector.h>
+
 namespace escale9 { class Sprite; }
 
 namespace esprpacker
@@ -28,6 +30,8 @@ public:
 	virtual int SizeOfPackToBin() const;
 	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, 
 		float scale) const;
+
+	sm::vec2 GetSize() const { return sm::vec2(m_width, m_height); }
 
 private:
 	void Init(const escale9::Sprite* spr);

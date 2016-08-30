@@ -13,7 +13,10 @@ extern "C"
 #define TYPE_IMAGE			1
 #define TYPE_SCALE9			3
 #define TYPE_SCALE9_SPR		4
-#define TYPE_LABEL			5
+#define TYPE_ICON			5
+#define TYPE_ICON_SPR		6
+#define TYPE_TEXTURE		7
+#define TYPE_LABEL			9
 
 #define ANCHOR_ID 0xffffffff
 #define SCREEN_SCALE 16
