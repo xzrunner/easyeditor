@@ -50,6 +50,55 @@ uint32_t simp_import_uint32(struct simp_import_stream* is) {
 	return b[0] | (uint32_t)b[1] << 8 | (uint32_t)b[2] << 16 | (uint32_t)b[3] << 24;
 }
 
+const char* simp_import_string(struct simp_import_stream* is) {
+	int n = simp_import_uint8(is);
+	if (n == 255) {
+		return NULL;
+	}
+	if (is->size < n) {
+		fault("Invalid stream (%d): read string failed", is->current_id);
+	}
+	char* buf = simp_import_alloc(is, (n + 3) & ~3);
+	memcpy(buf, is->stream, n);
+	buf[n] = 0;
+	is->stream += n;
+	is->size -= n;
+
+	return buf;
+}
+
+uint32_t simp_import_rgba(struct simp_import_stream* is) {
+	if (is->size < 4) {
+		fault("Invalid import stream (%d)", is->current_id);
+	}
+
+	uint8_t b[4];
+	b[0] = (uint8_t)*(is->stream);
+	b[1] = (uint8_t)*(is->stream + 1);
+	b[2] = (uint8_t)*(is->stream + 2);
+	b[3] = (uint8_t)*(is->stream + 3);
+	is->stream += 4;
+	is->size -= 4;
+
+	return b[0] | (uint32_t)b[1] << 8 | (uint32_t)b[2] << 16 | (uint32_t)b[3] << 24;
+}
+
+uint32_t simp_import_abgr(struct simp_import_stream* is) {
+	if (is->size < 4) {
+		fault("Invalid import stream (%d)", is->current_id);
+	}
+
+	uint8_t b[4];
+	b[0] = (uint8_t)*(is->stream);
+	b[1] = (uint8_t)*(is->stream + 1);
+	b[2] = (uint8_t)*(is->stream + 2);
+	b[3] = (uint8_t)*(is->stream + 3);
+	is->stream += 4;
+	is->size -= 4;
+
+	return b[3] | (uint32_t)b[2] << 8 | (uint32_t)b[1] << 16 | (uint32_t)b[0] << 24;
+}
+
 void* 
 simp_import_alloc(struct simp_import_stream* is, int sz) {
 	void* ret = simp_alloc(is->alloc, sz);

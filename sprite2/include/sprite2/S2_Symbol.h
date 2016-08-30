@@ -18,7 +18,6 @@ class Sprite;
 class Symbol : public VIRTUAL_INHERITANCE cu::RefCountObj, private cu::Uncopyable
 {
 public:
-	Symbol() {}
 	virtual ~Symbol() {}
 	virtual bool Update(const RenderParams& params, float dt) { return false; }
 	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const = 0;

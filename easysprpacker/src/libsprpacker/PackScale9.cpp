@@ -3,7 +3,6 @@
 #include "binary_io.h"
 
 #include <easyscale9.h>
-
 #include <easybuilder.h>
 namespace lua = ebuilder::lua;
 

@@ -6,7 +6,10 @@
 namespace esprpacker
 {
 
-bool is_name_valid(const std::string& name);
+inline
+bool is_name_valid(const std::string& name) {
+	return !name.empty() && name[0] != '_';	
+}
 
 }
 

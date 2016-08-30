@@ -12,24 +12,33 @@
 namespace esprpacker
 {
 
-template<typename T>
-inline void pack(const T& d, uint8_t** ptr) {
+/************************************************************************/
+/* common                                                               */
+/************************************************************************/
+
+template<typename T> inline 
+void pack(const T& d, uint8_t** ptr) {
 	memcpy(*ptr, &d, sizeof(d));
 	*ptr += sizeof(d);
 }
 
-template<typename T>
-inline void unpack(T& d, uint8_t** ptr) {
+template<typename T> inline 
+void unpack(T& d, uint8_t** ptr) {
 	memcpy(&d, *ptr, sizeof(d));
 	*ptr += sizeof(d);
 }
 
-template<typename T>
-inline void unpack(T& d, std::ifstream& fin) {
+template<typename T> inline 
+void unpack(T& d, std::ifstream& fin) {
 	fin.read(reinterpret_cast<char*>(&d), sizeof(d));
 }
 
-inline int sizeof_pack_str(const std::string& str) {
+/************************************************************************/
+/* string                                                               */
+/************************************************************************/
+
+inline 
+int sizeof_pack_str(const std::string& str) {
 	if (str.empty()) {
 		return sizeof(uint8_t);
 	} else {
@@ -40,7 +49,8 @@ inline int sizeof_pack_str(const std::string& str) {
 	}
 }
 
-inline int sizeof_unpack_str(const std::string& str) {
+inline 
+int sizeof_unpack_str(const std::string& str) {
 	if (str.empty()) {
 		return 0;
 	} else {
@@ -52,7 +62,8 @@ inline int sizeof_unpack_str(const std::string& str) {
 	}
 }
 
-inline void pack_str(const std::string& str, uint8_t** ptr) {
+inline 
+void pack_str(const std::string& str, uint8_t** ptr) {
 	if (str.empty()) {
 		uint8_t c = 255;
 		pack(c, ptr);
@@ -67,7 +78,8 @@ inline void pack_str(const std::string& str, uint8_t** ptr) {
 	}
 }
 
-inline void unpack_str(std::string& str, uint8_t** ptr) {
+inline 
+void unpack_str(std::string& str, uint8_t** ptr) {
 	uint8_t sz;
 	unpack(sz, ptr);
 	if (sz == 255) {
@@ -80,7 +92,6 @@ inline void unpack_str(std::string& str, uint8_t** ptr) {
 		}
 	}
 }
-
 
 }
 

@@ -19,7 +19,7 @@ namespace ee { class TexturePacker; class Image; }
 namespace erespacker
 {
 
-	class IPackNode : public cu::RefCountObj
+class IPackNode : public cu::RefCountObj, private cu::Uncopyable
 {
 public:
 	IPackNode();

@@ -33,5 +33,8 @@ simp_import_scale9(struct simp_import_stream* is) {
 
 void 
 simp_import_scale9_spr(struct simp_import_stream* is) {
-	
+	struct simp_scale9_spr* s9 = simp_import_alloc(is, SIZEOF_SCALE9_SPR);
+	s9->sym = simp_import_uint32(is);
+	s9->width = simp_import_uint16(is);
+	s9->height = simp_import_uint16(is);
 }

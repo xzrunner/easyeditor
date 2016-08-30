@@ -1,17 +1,20 @@
-#ifndef _EASYSPRPACKER_PACK_SCALE9_SPR_H_
-#define _EASYSPRPACKER_PACK_SCALE9_SPR_H_
+#ifndef _EASYSPRPACKER_PACK_LABEL_H_
+#define _EASYSPRPACKER_PACK_LABEL_H_
 
 #include "PackNode.h"
 
-namespace escale9 { class Sprite; }
+#include <sprite2/Textbox.h>
+
+namespace etext { class Sprite; }
 
 namespace esprpacker
 {
 
-class PackScale9Spr : public PackNode
+class PackLabel : public PackNode
 {
 public:
-	PackScale9Spr(const escale9::Sprite* spr);
+	PackLabel(const etext::Sprite* spr);
+	virtual ~PackLabel();
 
 	/**
 	 *  @interface
@@ -27,18 +30,19 @@ public:
 	virtual int SizeOfUnpackFromBin() const;
 	virtual int SizeOfPackToBin() const;
 	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, 
-		float scale) const;
+		float scale) const;	
 
 private:
-	void Init(const escale9::Sprite* spr);
+	void Init(const etext::Sprite* spr);
 
 private:
-	const PackNode* m_sym;
+	s2::Textbox m_tb;
 
-	float m_width, m_height;
+	std::string m_text;
+	std::string m_tid;
 
-}; // PackScale9Spr
+}; // PackLabel
 
 }
 
-#endif // _EASYSPRPACKER_PACK_SCALE9_SPR_H_
+#endif // _EASYSPRPACKER_PACK_LABEL_H_

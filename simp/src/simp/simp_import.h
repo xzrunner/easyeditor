@@ -13,6 +13,10 @@ struct simp_import_stream;
 uint8_t simp_import_uint8(struct simp_import_stream*);
 uint16_t simp_import_uint16(struct simp_import_stream*);
 uint32_t simp_import_uint32(struct simp_import_stream*);
+const char* simp_import_string(struct simp_import_stream*);
+
+uint32_t simp_import_rgba(struct simp_import_stream*);
+uint32_t simp_import_abgr(struct simp_import_stream*);
 
 void* simp_import_alloc(struct simp_import_stream*, int sz);
 
