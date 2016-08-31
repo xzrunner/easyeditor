@@ -17,7 +17,6 @@ class Symbol : public ee::Symbol, public s2::AnimSymbol
 {
 public:
 	Symbol();
-	virtual ~Symbol();
 
 	/**
 	 *  @interface

@@ -62,7 +62,7 @@ Image::~Image()
 {
 	ImageMgr::Instance()->RemoveItem(m_tex->GetFilepath());
 	delete m_tex;
-	delete m_s2_tex;
+	m_s2_tex->RemoveReference();
 }
 
 bool Image::LoadFromFile(const std::string& filepath)

@@ -21,11 +21,6 @@ Symbol::Symbol()
 	m_name = eanim::FILE_TAG + wxVariant(id++);
 }
 
-Symbol::~Symbol()
-{
-	Clear();
-}
-
 void Symbol::ReloadTexture() const
 {
 	for (int i = 0, n = m_layers.size(); i < n; ++i)

@@ -24,6 +24,8 @@ public:
 
 	void Start();
 
+	void Clear();
+
 private:
 	void LoadFromSym();
 

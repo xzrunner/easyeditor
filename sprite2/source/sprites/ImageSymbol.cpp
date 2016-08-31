@@ -12,7 +12,15 @@ namespace s2
 {
 
 ImageSymbol::ImageSymbol()
+	: m_tex(NULL)
 {
+}
+
+ImageSymbol::~ImageSymbol()
+{
+	if (m_tex) {
+		m_tex->RemoveReference();
+	}
 }
 
 void ImageSymbol::Draw(const RenderParams& params, const Sprite* spr) const
@@ -49,6 +57,7 @@ sm::rect ImageSymbol::GetBounding(const Sprite* spr) const
 
 void ImageSymbol::InitTex(Texture* tex, const Quad& quad, const sm::vec2& offset)
 {
+	tex->AddReference();
 	m_tex = tex;
 	m_quad = quad;
 	m_offset = offset;

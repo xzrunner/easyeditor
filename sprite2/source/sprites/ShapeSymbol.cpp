@@ -10,6 +10,13 @@ ShapeSymbol::ShapeSymbol()
 {
 }
 
+ShapeSymbol::~ShapeSymbol()
+{
+	if (m_shape) {
+		m_shape->RemoveReference();
+	}
+}
+
 void ShapeSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 {
 	if (m_shape) {

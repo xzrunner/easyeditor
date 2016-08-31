@@ -11,6 +11,12 @@ namespace s2
 
 ComplexSymbol::ComplexSymbol()
 {
+	m_scissor.xmin = m_scissor.ymin = m_scissor.xmax = m_scissor.ymax = 0;
+}
+
+ComplexSymbol::~ComplexSymbol()
+{
+	for_each(m_children.begin(), m_children.end(), cu::RemoveRefFonctor<Sprite>());
 }
 
 void ComplexSymbol::Draw(const RenderParams& params, const Sprite* spr) const
@@ -65,9 +71,7 @@ bool ComplexSymbol::Clear()
 		return false;
 	}
 
-	for (int i = 0, n = m_children.size(); i < n; ++i) {
-		m_children[i]->RemoveReference();
-	}
+	for_each(m_children.begin(), m_children.end(), cu::RemoveRefFonctor<Sprite>());
 	m_children.clear();
 	return true;
 }

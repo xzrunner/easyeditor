@@ -32,11 +32,6 @@ Symbol::Symbol()
 	m_clipbox.xmin = m_clipbox.xmax = m_clipbox.ymin = m_clipbox.ymax = 0;
 }
 
-Symbol::~Symbol()
-{
-	Clear();
-}
-
 void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	s2::RenderParams p = params;

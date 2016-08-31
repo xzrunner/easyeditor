@@ -38,6 +38,7 @@ public:
 
 public:
 	AnimSymbol();
+	virtual ~AnimSymbol();
 
 	/**
 	 *  @interface

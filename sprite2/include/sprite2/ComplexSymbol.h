@@ -12,6 +12,7 @@ class ComplexSymbol : public VIRTUAL_INHERITANCE Symbol
 {
 public:
 	ComplexSymbol();
+	virtual ~ComplexSymbol();
 
 	/**
 	 *  @interface
@@ -34,6 +35,8 @@ public:
 
 protected:
 	std::vector<Sprite*> m_children;
+
+	sm::rect m_scissor;
 
 }; // ComplexSymbol
 

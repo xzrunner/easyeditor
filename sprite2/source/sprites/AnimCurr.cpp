@@ -101,6 +101,13 @@ void AnimCurr::Start()
 	LoadFromSym();
 }
 
+void AnimCurr::Clear()
+{
+	m_frame = 0;
+	m_time = 0;
+	m_layers.clear();
+}
+
 void AnimCurr::LoadFromSym()
 {
 	if (!m_sym) {

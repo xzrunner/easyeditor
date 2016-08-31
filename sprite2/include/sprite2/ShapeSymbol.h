@@ -14,6 +14,7 @@ class ShapeSymbol : public VIRTUAL_INHERITANCE Symbol
 {
 public:
 	ShapeSymbol();
+	virtual ~ShapeSymbol();
 
 	/**
 	 *  @interface

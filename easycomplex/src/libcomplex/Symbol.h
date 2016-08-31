@@ -14,7 +14,6 @@ class Symbol : public ee::Symbol, public s2::ComplexSymbol
 {
 public:
 	Symbol();
-	virtual ~Symbol();
 
 	/**
 	 *  @interface

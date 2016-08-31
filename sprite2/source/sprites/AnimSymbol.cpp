@@ -16,6 +16,19 @@ AnimSymbol::AnimSymbol()
 {
 }
 
+AnimSymbol::~AnimSymbol()
+{
+	for (int i = 0, n = m_layers.size(); i < n; ++i) {
+		Layer* layer = m_layers[i];
+		for (int j = 0, m = layer->frames.size(); j < m; ++j) {
+			Frame* frame = layer->frames[j];
+			for_each(frame->sprs.begin(), frame->sprs.end(), cu::RemoveRefFonctor<Sprite>());
+			delete frame;
+		}
+		delete layer;
+	}
+}
+
 bool AnimSymbol::Update(const RenderParams& params, float dt)
 {
 	return m_curr.Update(params, dt);
@@ -99,14 +112,13 @@ bool AnimSymbol::Clear()
  		Layer* layer = m_layers[i];
  		for (int j = 0, m = layer->frames.size(); j < m; ++j) {
  			Frame* frame = layer->frames[j];
- 			for (int k = 0, l = frame->sprs.size(); k < l; ++k) {
- 				frame->sprs[k]->RemoveReference();
-				dirty = true;
- 			}
+			for_each(frame->sprs.begin(), frame->sprs.end(), cu::RemoveRefFonctor<Sprite>());
 			delete frame;
  		}
 		delete layer;
  	}
+	m_layers.clear();
+	m_curr.Clear();
 	return dirty;	
 }
 

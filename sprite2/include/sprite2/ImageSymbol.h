@@ -21,6 +21,7 @@ public:
 
 public:
 	ImageSymbol();
+	virtual ~ImageSymbol();
 
 	/**
 	 *  @interface
