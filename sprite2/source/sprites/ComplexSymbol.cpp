@@ -1,4 +1,5 @@
 #include "ComplexSymbol.h"
+#include "ComplexSprite.h"
 #include "S2_Sprite.h"
 #include "BoundingBox.h"
 #include "RenderParams.h"
@@ -42,8 +43,13 @@ void ComplexSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 		RenderScissor::Instance()->Push(min.x, min.y, max.x-min.x, max.y-min.y);
 	}
 
-	for (int i = 0, n = m_children.size(); i < n; ++i) {
-		DrawNode::Draw(m_children[i], p);
+	int action = -1;
+	if (spr) {
+		action = VI_DOWNCASTING<const ComplexSprite*>(spr)->GetAction();
+	}
+	const std::vector<Sprite*>& sprs = GetSprs(action);
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		DrawNode::Draw(sprs[i], p);
 	}
 
 	if (scissor) {
@@ -54,10 +60,27 @@ void ComplexSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 sm::rect ComplexSymbol::GetBounding(const Sprite* spr) const
 {
 	sm::rect b;
-	for (int i = 0, n = m_children.size(); i < n; ++i) {
-		m_children[i]->GetBounding()->CombineTo(b);
+	int action = -1;
+	if (spr) {
+		action = VI_DOWNCASTING<const ComplexSprite*>(spr)->GetAction();
+	}
+	const std::vector<Sprite*>& sprs = GetSprs(action);
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		sprs[i]->GetBounding()->CombineTo(b);
 	}
 	return b;
+}
+
+int ComplexSymbol::GetActionIdx(const std::string& name) const
+{
+	int idx = -1;
+	for (int i = 0, n = m_actions.size(); i < n; ++i) {
+		if (m_actions[i].name == name) {
+			idx = i;
+			break;
+		}
+	}
+	return idx;
 }
 
 bool ComplexSymbol::Add(Sprite* spr, int idx)
@@ -93,6 +116,10 @@ bool ComplexSymbol::Clear()
 
 	for_each(m_children.begin(), m_children.end(), cu::RemoveRefFonctor<Sprite>());
 	m_children.clear();
+
+	// todo
+// 	m_actions.clear();
+
 	return true;
 }
 
@@ -163,6 +190,15 @@ bool ComplexSymbol::Sort(std::vector<Sprite*>& sprs)
 	}
 	sprs = list_dst;
 	return true;
+}
+
+const std::vector<Sprite*>& ComplexSymbol::GetSprs(int action) const
+{
+	if (action < 0 || action >= m_actions.size()) {
+		return m_children;
+	} else {
+		return m_actions[action].sprs;
+	}
 }
 
 }

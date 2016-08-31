@@ -6,11 +6,13 @@ namespace s2
 {
 
 ComplexSprite::ComplexSprite() 
+	: m_action(-1)
 {
 }
 
 ComplexSprite::ComplexSprite(Symbol* sym) 
 	: Sprite(sym) 
+	, m_action(-1)
 {
 }
 
@@ -32,6 +34,11 @@ bool ComplexSprite::Update(const RenderParams& params, float dt)
 		}
 	}
 	return dirty;
+}
+
+void ComplexSprite::SetAction(const std::string& name)
+{
+	m_action = VI_DOWNCASTING<ComplexSymbol*>(m_sym)->GetActionIdx(name);
 }
 
 }

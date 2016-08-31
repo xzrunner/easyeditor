@@ -1,5 +1,6 @@
 #include "Sprite.h"
 #include "Symbol.h"
+#include "SpritePropertySetting.h"
 
 #include <sprite2/RenderParams.h>
 
@@ -26,6 +27,44 @@ Sprite::Sprite(Symbol* sym)
 	, s2::ComplexSprite(sym)
 	, ee::Sprite(sym)
 {
+	if (sym->HasActions()) {
+		m_action = 0;
+	}
+}
+
+void Sprite::Load(const Json::Value& val, const std::string& dir)
+{
+	ee::Sprite::Load(val);
+
+	if (val["complex"].isNull()) {
+		return;
+	}	
+
+	const Json::Value& comp_val = val["complex"];
+	
+	m_action = comp_val["action"].asInt();
+}
+
+void Sprite::Store(Json::Value& val, const std::string& dir) const
+{
+	ee::Sprite::Store(val);
+
+	Json::Value comp_val;
+
+	comp_val["action"] = m_action;
+
+	val["complex"] = comp_val;
+}
+
+ee::PropertySetting* Sprite::CreatePropertySetting(ee::EditPanelImpl* stage)
+{
+	return new SpritePropertySetting(stage, this);
+}
+
+void Sprite::SetAction(int idx)
+{
+	m_action = idx;
+	UpdateBounding();
 }
 
 ee::Sprite* Sprite::Create(ee::Symbol* sym) 

@@ -23,7 +23,13 @@ public:
 	 *    Sprite
 	 */
 	virtual bool Update(const RenderParams& params, float dt);
+
+	void SetAction(const std::string& name);
+	int GetAction() const { return m_action; }
 	
+protected:
+	int m_action;
+
 	VI_DUMMY_FUNC
 
 }; // ComplexSprite

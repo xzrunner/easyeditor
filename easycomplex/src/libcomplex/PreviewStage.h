@@ -1,5 +1,5 @@
-#ifndef _EASY_EASYCOMPLEX_PREVIEW_STAGE_H_
-#define _EASY_EASYCOMPLEX_PREVIEW_STAGE_H_
+#ifndef _EASYCOMPLEX_PREVIEW_STAGE_H_
+#define _EASYCOMPLEX_PREVIEW_STAGE_H_
 
 #include <ee/EditPanel.h>
 #include <ee/PlayControl.h>
@@ -22,4 +22,4 @@ private:
 
 }
 
-#endif // _EASY_EASYCOMPLEX_PREVIEW_STAGE_H_
+#endif // _EASYCOMPLEX_PREVIEW_STAGE_H_

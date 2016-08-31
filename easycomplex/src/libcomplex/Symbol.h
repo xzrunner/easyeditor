@@ -28,10 +28,16 @@ public:
 	virtual void ReloadTexture() const;
 	virtual void Traverse(ee::Visitor<ee::Sprite>& visitor);
 
+	bool HasActions() const;
+	void GetActionNames(std::vector<std::string>& actions) const;
+
 	static ee::Symbol* Create() { return new Symbol(); }
 
 protected:
 	virtual void LoadResources();
+
+private:
+	void InitActions();
 
 public:
 	struct Group

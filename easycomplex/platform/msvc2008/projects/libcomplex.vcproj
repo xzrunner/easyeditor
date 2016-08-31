@@ -364,6 +364,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\libcomplex\SpritePropertySetting.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\SpritePropertySetting.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libcomplex\SymbolPropertySetting.cpp"
 					>
 				</File>

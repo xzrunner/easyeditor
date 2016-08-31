@@ -9,6 +9,7 @@
 #include <ee/SpriteRenderer.h>
 #include <ee/Math2D.h>
 #include <ee/Visitor.h>
+#include <ee/StringHelper.h>
 
 #include <easytext.h>
 
@@ -114,8 +115,13 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
  	}
  	else
 	{
-		for (int i = 0, n = m_children.size(); i < n; ++i) {
-			ee::SpriteRenderer::Instance()->Draw(m_children[i], p);
+		int action = -1;
+		if (spr) {
+			action = dynamic_cast<const s2::ComplexSprite*>(spr)->GetAction();
+		}
+		const std::vector<s2::Sprite*>& sprs = GetSprs(action);
+		for (int i = 0, n = sprs.size(); i < n; ++i) {
+			ee::SpriteRenderer::Instance()->Draw(sprs[i], p);
 		}
 	}
 
@@ -154,9 +160,60 @@ void Symbol::Traverse(ee::Visitor<ee::Sprite>& visitor)
 	}
 }
 
+bool Symbol::HasActions() const
+{
+	return !m_actions.empty();
+}
+
+void Symbol::GetActionNames(std::vector<std::string>& actions) const
+{
+	actions.reserve(m_actions.size());
+	for (int i = 0, n = m_actions.size(); i < n; ++i) {
+		actions.push_back(m_actions[i].name);
+	}
+}
+
 void Symbol::LoadResources()
 {
 	FileLoader::Load(m_filepath, this);
+	InitActions();
+}
+
+void Symbol::InitActions()
+{
+	m_actions.clear();
+	for (int i = 0, n = m_children.size(); i < n; ++i) 
+	{
+		ee::Sprite* spr = dynamic_cast<ee::Sprite*>(m_children[i]);
+		if (spr->GetTag().empty()) {
+			continue;			
+		}
+
+		std::vector<std::string> tags;
+		ee::StringHelper::Split(spr->GetTag(), ";", tags);
+		for (int j = 0, m = tags.size(); j < m; ++j)
+		{
+			const std::string& tag = tags[j];
+			if (tag.find("=") != std::string::npos) {
+				continue;
+			}
+
+			bool find = false;
+			for (int k = 0; k < m_actions.size(); ++k) {
+				if (m_actions[k].name == tag) {
+					find = true;
+					m_actions[k].sprs.push_back(spr);
+				}
+			}
+
+			if (!find) {
+				Action a;
+				a.name = tag;
+				a.sprs.push_back(spr);
+				m_actions.push_back(a);
+			}
+		}
+	}
 }
 
 }

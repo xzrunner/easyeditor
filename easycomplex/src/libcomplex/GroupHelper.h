@@ -1,5 +1,5 @@
-#ifndef _EASY_EASYCOMPLEX_GROUP_HELPER_H_
-#define _EASY_EASYCOMPLEX_GROUP_HELPER_H_
+#ifndef _EASYCOMPLEX_GROUP_HELPER_H_
+#define _EASYCOMPLEX_GROUP_HELPER_H_
 
 #include <ee/Sprite.h>
 
@@ -20,4 +20,4 @@ public:
 
 }
 
-#endif // _EASY_EASYCOMPLEX_GROUP_HELPER_H_
+#endif // _EASYCOMPLEX_GROUP_HELPER_H_

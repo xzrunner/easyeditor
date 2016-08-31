@@ -26,9 +26,12 @@ public:
 	const sm::rect& GetScissor() const { return m_scissor; }
 	void SetScissor(const sm::rect& scissor) { m_scissor = scissor; }
 
+	int GetActionIdx(const std::string& name) const;
+
 	/************************************************************************/
 	/* api for dynamic change                                               */
 	/************************************************************************/
+	// todo up action
 	bool Add(Sprite* spr, int idx = -1);
 	bool Remove(Sprite* spr);
 	bool Clear();
@@ -37,7 +40,19 @@ public:
 	bool Sort(std::vector<Sprite*>& sprs);
 
 protected:
+	const std::vector<Sprite*>& GetSprs(int action) const;
+
+protected:
+	struct Action
+	{
+		std::string name;
+		std::vector<Sprite*> sprs;
+	};
+
+protected:
 	std::vector<Sprite*> m_children;
+
+	std::vector<Action> m_actions;
 
 	sm::rect m_scissor;
 
