@@ -929,6 +929,22 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\source\render\RenderScissorStack.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\sprite2\RenderScissorStack.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\source\render\RenderScreen.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\sprite2\RenderScreen.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\source\render\S2_CameraMgr.cpp"
 				>
 			</File>

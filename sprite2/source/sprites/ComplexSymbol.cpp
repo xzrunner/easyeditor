@@ -3,6 +3,7 @@
 #include "BoundingBox.h"
 #include "RenderParams.h"
 #include "DrawNode.h"
+#include "RenderScissorStack.h"
 
 #include <map>
 
@@ -21,13 +22,32 @@ ComplexSymbol::~ComplexSymbol()
 
 void ComplexSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 {
+	bool scissor = m_scissor.xmin != 0 || m_scissor.ymin != 0 || m_scissor.xmax != 0 || m_scissor.ymax != 0;
+
 	RenderParams p = params;
 	if (spr) {
 		p.mt = spr->GetTransMatrix() * params.mt;
 		p.color = spr->Color() * params.color;			
 	}
+
+	if (scissor) {
+		sm::vec2 min = p.mt * sm::vec2(m_scissor.xmin, m_scissor.ymin),
+			     max = p.mt * sm::vec2(m_scissor.xmax, m_scissor.ymax);
+		if (min.x > max.x) {
+			std::swap(min.x, max.x);
+		}
+		if (min.y > max.y) {
+			std::swap(min.y, max.y);
+		}
+		RenderScissorStack::Instance()->Push(min.x, min.y, max.x-min.x, max.y-min.y);
+	}
+
 	for (int i = 0, n = m_children.size(); i < n; ++i) {
 		DrawNode::Draw(m_children[i], p);
+	}
+
+	if (scissor) {
+		RenderScissorStack::Instance()->Pop();
 	}
 }
 

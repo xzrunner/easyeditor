@@ -17,10 +17,12 @@ void LoadFromJson::Load(const std::string& _filepath, const Json::Value& value,
 	complex->name = value["name"].asString();
 	complex->tag = value["tag"].asString();
 
-	complex->m_clipbox.xmin = static_cast<float>(value["xmin"].asInt());
-	complex->m_clipbox.xmax = static_cast<float>(value["xmax"].asInt());
-	complex->m_clipbox.ymin = static_cast<float>(value["ymin"].asInt());
-	complex->m_clipbox.ymax = static_cast<float>(value["ymax"].asInt());
+	sm::rect scissor;
+	scissor.xmin = static_cast<float>(value["xmin"].asInt());
+	scissor.xmax = static_cast<float>(value["xmax"].asInt());
+	scissor.ymin = static_cast<float>(value["ymin"].asInt());
+	scissor.ymax = static_cast<float>(value["ymax"].asInt());
+	complex->SetScissor(scissor);
 
 	complex->m_use_render_cache = value["use_render_cache"].asBool();
 

@@ -44,8 +44,6 @@ public:
 public:
 	std::vector<Group> m_groups;
 
-	sm::rect m_clipbox;
-
 	bool m_use_render_cache;
 
 	mutable int m_render_version;

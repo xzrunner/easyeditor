@@ -93,7 +93,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 
 void StagePanel::Clear()
 {
-	m_sym->m_clipbox = sm::rect(sm::vec2(0, 0), 0, 0);
+	m_sym->SetScissor(sm::rect(sm::vec2(0, 0), 0, 0));
 	m_sym->Clear();
 }
 

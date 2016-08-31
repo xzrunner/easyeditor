@@ -15,6 +15,7 @@
 #include <sprite2/ComplexSymbol.h>
 #include <sprite2/S2_Sprite.h>
 #include <sprite2/S2_RVG.h>
+#include <sprite2/RenderScissorStack.h>
 
 #include <queue>
 
@@ -28,16 +29,28 @@ Symbol::Symbol()
 {
 	static int id = 0;
 	m_name = FILE_TAG + wxVariant(id++);
-
-	m_clipbox.xmin = m_clipbox.xmax = m_clipbox.ymin = m_clipbox.ymax = 0;
 }
 
 void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
+	bool scissor = m_scissor.xmin != 0 || m_scissor.ymin != 0 || m_scissor.xmax != 0 || m_scissor.ymax != 0;
+
 	s2::RenderParams p = params;
 	if (spr) {
 		p.mt = spr->GetTransMatrix() * params.mt;
 		p.color = spr->Color() * params.color;
+	}
+
+	if (scissor) {
+		sm::vec2 min = p.mt * sm::vec2(m_scissor.xmin, m_scissor.ymin),
+			     max = p.mt * sm::vec2(m_scissor.xmax, m_scissor.ymax);
+		if (min.x > max.x) {
+			std::swap(min.x, max.x);
+		}
+		if (min.y > max.y) {
+			std::swap(min.y, max.y);
+		}
+		s2::RenderScissorStack::Instance()->Push(min.x, min.y, max.x-min.x, max.y-min.y);
 	}
 
  	const ee::TPNode* n = NULL;
@@ -104,14 +117,10 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 		for (int i = 0, n = m_children.size(); i < n; ++i) {
 			ee::SpriteRenderer::Instance()->Draw(m_children[i], p);
 		}
-		sm::vec2 sz = m_clipbox.Size();
-		if (sz.x > 0 && sz.y > 0)
-		{
-			sm::vec2 min(m_clipbox.xmin, m_clipbox.ymin), 
-				max(m_clipbox.xmax, m_clipbox.ymax);
-			s2::RVG::SetColor(s2::Color(0, 204, 0));
-			s2::RVG::Rect(p.mt * min, p.mt * max, false);
-		}
+	}
+
+	if (scissor) {
+		s2::RenderScissorStack::Instance()->Pop();
 	}
 }
 

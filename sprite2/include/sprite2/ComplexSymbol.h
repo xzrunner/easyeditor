@@ -22,6 +22,9 @@ public:
 	virtual sm::rect GetBounding(const Sprite* spr = NULL) const;
 
 	const std::vector<Sprite*>& GetChildren() const { return m_children; }
+	
+	const sm::rect& GetScissor() const { return m_scissor; }
+	void SetScissor(const sm::rect& scissor) { m_scissor = scissor; }
 
 	/************************************************************************/
 	/* api for dynamic change                                               */

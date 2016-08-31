@@ -801,7 +801,7 @@ void CocoPacker::ParserComplex(const ecomplex::Symbol* sym)
 	ParserSymbolBase(sym);
 
 	// clipbox
-	const sm::rect& cb = sym->m_clipbox;
+	const sm::rect& cb = sym->GetScissor();
 	if (cb.xmin != 0 || cb.xmax != 0 || cb.ymin != 0 || cb.ymax != 0)
 	{
 		std::string width = ee::StringHelper::ToString(cb.xmax - cb.xmin);

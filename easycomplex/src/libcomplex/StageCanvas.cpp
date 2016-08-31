@@ -68,7 +68,7 @@ void StageCanvas::OnDrawSprites() const
 	ee::ScreenCache::Instance()->Draw(ee::CameraMgr::Instance()->GetCamera());
 
 	s2::RVG::SetColor(s2::Color(0, 0.8f, 0));
-	const sm::rect& r = m_stage->GetSymbol()->m_clipbox;
+	const sm::rect& r = m_stage->GetSymbol()->GetScissor();
 	s2::RVG::Rect(sm::vec2(r.xmin, r.ymin), sm::vec2(r.xmax, r.ymax), m_clipboxStyle.filling);
 
 	if (Settings::bVisibleBGCross)
@@ -104,7 +104,7 @@ void StageCanvas::OnDrawSprites() const
 	float scale = ee::CameraMgr::Instance()->GetCamera()->GetScale();
 	m_stage->TraverseSprites(ee::DrawSpritesVisitor(GetVisibleRegion(), scale), ee::DT_VISIBLE);
 
-	const sm::rect& clipbox = dynamic_cast<const Symbol*>(m_stage->GetSymbol())->m_clipbox;
+	const sm::rect& clipbox = dynamic_cast<const Symbol*>(m_stage->GetSymbol())->GetScissor();
 	sm::vec2 sz = clipbox.Size();
 	if (sz.x != 0 && sz.y != 0) {
 		s2::RVG::SetColor(s2::Color(0, 204, 0));

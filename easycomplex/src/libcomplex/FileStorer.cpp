@@ -25,10 +25,11 @@ void FileStorer::Store(const char* filepath, const Symbol* sym)
 	value["name"] = sym->name;
 	value["tag"] = sym->tag;
 
-	value["xmin"] = sym->m_clipbox.xmin;
-	value["xmax"] = sym->m_clipbox.xmax;
-	value["ymin"] = sym->m_clipbox.ymin;
-	value["ymax"] = sym->m_clipbox.ymax;
+	const sm::rect& scissor = sym->GetScissor();
+	value["xmin"] = scissor.xmin;
+	value["xmax"] = scissor.xmax;
+	value["ymin"] = scissor.ymin;
+	value["ymax"] = scissor.ymax;
 
 	value["use_render_cache"] = sym->m_use_render_cache;
 
@@ -56,10 +57,11 @@ void FileStorer::StoreWithHistory(const char* filepath, const Symbol* sym)
 	value["name"] = sym->name;
 	value["tag"] = sym->tag;
 
-	value["xmin"] = sym->m_clipbox.xmin;
-	value["xmax"] = sym->m_clipbox.xmax;
-	value["ymin"] = sym->m_clipbox.ymin;
-	value["ymax"] = sym->m_clipbox.ymax;
+	const sm::rect& scissor = sym->GetScissor();
+	value["xmin"] = scissor.xmin;
+	value["xmax"] = scissor.xmax;
+	value["ymin"] = scissor.ymin;
+	value["ymax"] = scissor.ymax;
 
 	value["use_render_cache"] = sym->m_use_render_cache;
 

@@ -7,7 +7,6 @@ namespace s2
 {
 
 #ifdef S2_VIRTUAL_INHERITANCE
-#error
 	#define VIRTUAL_INHERITANCE virtual
 	#define VI_DOWNCASTING dynamic_cast
 	#define VI_DUMMY_FUNC \
@@ -15,6 +14,7 @@ namespace s2
 			virtual void __DUMMY__() {}
 #pragma warning(disable:4250)
 #else
+#error
 	#define VIRTUAL_INHERITANCE
 	#define VI_DOWNCASTING static_cast
 	#define VI_DUMMY_FUNC

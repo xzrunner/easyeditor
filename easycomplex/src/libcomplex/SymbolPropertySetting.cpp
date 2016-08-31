@@ -33,31 +33,41 @@ void SymbolPropertySetting::OnPropertyGridChange(const std::string& name, const 
 		ee::StringHelper::Split(wxANY_AS(value, wxString).ToStdString(), ";", str);
 		if (str.size() == 4) {
 			Symbol* c = static_cast<Symbol*>(m_sym);
-			ee::StringHelper::FromString(str[0], c->m_clipbox.xmin);
-			ee::StringHelper::FromString(str[1], c->m_clipbox.xmax);
-			ee::StringHelper::FromString(str[2], c->m_clipbox.ymin);
-			ee::StringHelper::FromString(str[3], c->m_clipbox.ymax);
+			sm::rect scissor = c->GetScissor();
+			ee::StringHelper::FromString(str[0], scissor.xmin);
+			ee::StringHelper::FromString(str[1], scissor.xmax);
+			ee::StringHelper::FromString(str[2], scissor.ymin);
+			ee::StringHelper::FromString(str[3], scissor.ymax);
+			c->SetScissor(scissor);
 		}
 	}
 	else if (name == wxT("Clipbox.xmin") && m_sym)
 	{
 		Symbol* c = static_cast<Symbol*>(m_sym);
-		c->m_clipbox.xmin = wxANY_AS(value, int);
+		sm::rect scissor = c->GetScissor();
+		scissor.xmin = wxANY_AS(value, int);
+		c->SetScissor(scissor);
 	}
 	else if (name == wxT("Clipbox.xmax") && m_sym)
 	{
 		Symbol* c = static_cast<Symbol*>(m_sym);
-		c->m_clipbox.xmax = wxANY_AS(value, int);
+		sm::rect scissor = c->GetScissor();
+		scissor.xmax = wxANY_AS(value, int);
+		c->SetScissor(scissor);
 	}
 	else if (name == wxT("Clipbox.ymin") && m_sym)
 	{
 		Symbol* c = static_cast<Symbol*>(m_sym);
-		c->m_clipbox.ymin = wxANY_AS(value, int);
+		sm::rect scissor = c->GetScissor();
+		scissor.ymin = wxANY_AS(value, int);
+		c->SetScissor(scissor);
 	}
 	else if (name == wxT("Clipbox.ymax") && m_sym)
 	{
 		Symbol* c = static_cast<Symbol*>(m_sym);
-		c->m_clipbox.ymax = wxANY_AS(value, int);
+		sm::rect scissor = c->GetScissor();
+		scissor.ymax = wxANY_AS(value, int);
+		c->SetScissor(scissor);
 	}
 	else if (name == wxT("Cache") && m_sym)
 	{
@@ -158,10 +168,11 @@ void SymbolPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	if (m_sym)
 	{
 		Symbol* c = static_cast<Symbol*>(m_sym);
-		pg->SetPropertyValue(wxT("Clipbox.xmin"), (int)c->m_clipbox.xmin);
-		pg->SetPropertyValue(wxT("Clipbox.xmax"), (int)c->m_clipbox.xmax);
-		pg->SetPropertyValue(wxT("Clipbox.ymin"), (int)c->m_clipbox.ymin);
-		pg->SetPropertyValue(wxT("Clipbox.ymax"), (int)c->m_clipbox.ymax);
+		const sm::rect& scissor = c->GetScissor();
+		pg->SetPropertyValue(wxT("Clipbox.xmin"), (int)scissor.xmin);
+		pg->SetPropertyValue(wxT("Clipbox.xmax"), (int)scissor.xmax);
+		pg->SetPropertyValue(wxT("Clipbox.ymin"), (int)scissor.ymin);
+		pg->SetPropertyValue(wxT("Clipbox.ymax"), (int)scissor.ymax);
 		pg->SetPropertyValue(wxT("Cache"), c->m_use_render_cache);
 	}
 	else

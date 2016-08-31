@@ -44,19 +44,18 @@ const IPackNode* ClipboxBuilder::Create(const ecomplex::Symbol* complex)
 		return itr->second;
 	}
 
-	if (complex->m_clipbox.xmin == 0 &&
-		complex->m_clipbox.ymin == 0 &&
-		complex->m_clipbox.xmax == 0 &&
-		complex->m_clipbox.ymax == 0) {
+	const sm::rect& scissor = complex->GetScissor();
+	if (scissor.xmin == 0 &&
+		scissor.ymin == 0 &&
+		scissor.xmax == 0 &&
+		scissor.ymax == 0) {
 		return NULL;
 	}
 
-	const sm::rect& r = complex->m_clipbox;
-
 	PackClipbox* cb = new PackClipbox;
-	cb->x = r.xmin;
-	cb->y = r.ymax;
-	sm::vec2 sz = r.Size();
+	cb->x = scissor.xmin;
+	cb->y = scissor.ymax;
+	sm::vec2 sz = scissor.Size();
 	cb->w = sz.x;
 	cb->h = sz.y;
 	m_map_clipbox.insert(std::make_pair(complex, cb));
