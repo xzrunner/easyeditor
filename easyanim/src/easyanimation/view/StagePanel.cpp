@@ -51,7 +51,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 
 bool StagePanel::Update(float dt)
 {
-	bool dirty = ee::SceneNodeMgr::Instance()->Update(1 / 30.0f);
+	bool dirty = s2::Particle3d::Instance()->Update(dt);
 
 	if (m_refresh) {
 		m_refresh = false;
@@ -179,7 +179,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 				}
 			}
 
-			eparticle3d::PSNode::Instance()->BufferClear();
+			s2::Particle3d::Instance()->BufferClear();
 			if (m_frame) {
 				m_frame->OnActive();
 			}

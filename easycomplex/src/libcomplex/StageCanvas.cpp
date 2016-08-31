@@ -5,7 +5,6 @@
 
 #include <ee/dev_config.h>
 #include <ee/DrawSpritesVisitor.h>
-#include <ee/SceneNode.h>
 #include <ee/Config.h>
 #include <ee/EE_DTex.h>
 #include <ee/SpriteRenderer.h>
@@ -17,6 +16,7 @@
 #include <easytext.h>
 
 #include <sprite2/S2_RVG.h>
+#include <sprite2/Particle3d.h>
 
 namespace ecomplex
 {
@@ -119,7 +119,7 @@ void StageCanvas::OnDrawSprites() const
 		s2::RVG::Cross(sm::vec2(0,0), EDGE, EDGE);
 	}
 
-	ee::SceneNodeMgr::Instance()->Draw();
+	s2::Particle3d::Instance()->Draw();
 
 	m_stage->DrawEditOP();
 

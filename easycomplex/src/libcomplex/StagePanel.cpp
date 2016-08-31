@@ -10,12 +10,12 @@
 #include <ee/ArrangeSpriteOP.h>
 #include <ee/StageDropTarget.h>
 #include <ee/panel_msg.h>
-#include <ee/SceneNode.h>
 #include <ee/sprite_msg.h>
 #include <ee/subject_id.h>
 
 #include <sprite2/S2_Sprite.h>
 #include <sprite2/RenderParams.h>
+#include <sprite2/Particle3d.h>
 
 namespace ee { extern StageModule MODULE_STAGE; }
 
@@ -72,7 +72,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 bool StagePanel::Update(float dt)
 {
-	bool dirty = ee::SceneNodeMgr::Instance()->Update(1 / 30.0f);
+	bool dirty = s2::Particle3d::Instance()->Update(dt);
 	const std::vector<s2::Sprite*>& children = m_sym->GetChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
 		if (children[i]->Update(s2::RenderParams(), dt)) {

@@ -15,6 +15,7 @@
 #include <easyparticle3d.h>
 
 #include <sprite2/S2_RVG.h>
+#include <sprite2/Particle3d.h>
 
 namespace eanim
 {
@@ -58,7 +59,7 @@ void PreviewCanvas::OnTimer()
 // todo: waste time!
 void PreviewCanvas::DrawStageData() const
 {
-	eparticle3d::PSNode::Instance()->BufferClear();
+	s2::Particle3d::Instance()->BufferClear();
 
 	std::vector<ee::Sprite*> sprs;
 	PreviewUtility::GetCurrSprites(m_control, sprs);
@@ -76,7 +77,7 @@ void PreviewCanvas::DrawStageData() const
 		sprs[i]->RemoveReference();
 	}
 
-	ee::SceneNodeMgr::Instance()->Draw();
+	s2::Particle3d::Instance()->Draw();
 }
 
 } // eanim

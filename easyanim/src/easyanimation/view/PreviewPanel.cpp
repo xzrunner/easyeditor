@@ -1,10 +1,10 @@
 #include "PreviewPanel.h"
 #include "PreviewUtility.h"
 
-#include <ee/SceneNode.h>
 #include <ee/Sprite.h>
 
 #include <sprite2/RenderParams.h>
+#include <sprite2/Particle3d.h>
 
 namespace eanim
 {
@@ -18,7 +18,7 @@ PreviewPanel::PreviewPanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 bool PreviewPanel::Update(float dt)
 {
-	ee::SceneNodeMgr::Instance()->Update(1 / 30.0f);
+	s2::Particle3d::Instance()->Update(dt);
 
 	std::vector<ee::Sprite*> sprs;
 	PreviewUtility::GetCurrSprites(m_ctrl, sprs);

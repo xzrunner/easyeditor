@@ -2,7 +2,8 @@
 
 #include <ee/SpriteRenderer.h>
 #include <ee/Sprite.h>
-#include <ee/SceneNode.h>
+
+#include <sprite2/Particle3d.h>
 
 namespace ecomplex
 {
@@ -27,7 +28,7 @@ void PreviewCanvas::OnDrawSprites() const
 		ee::SpriteRenderer::Instance()->Draw(spr, params);
 	}
 
-	ee::SceneNodeMgr::Instance()->Draw();
+	s2::Particle3d::Instance()->Draw();
 }
 
 }

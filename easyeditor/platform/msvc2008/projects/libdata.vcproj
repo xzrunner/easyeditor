@@ -709,14 +709,6 @@
 				RelativePath="..\..\..\include\ee\LayerMgr.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\source\data\scene\SceneNode.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\SceneNode.h"
-				>
-			</File>
 		</Filter>
 	</Files>
 	<Globals>

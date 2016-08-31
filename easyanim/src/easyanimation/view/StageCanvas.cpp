@@ -4,7 +4,6 @@
 #include <ee/Symbol.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/SpriteRenderer.h>
-#include <ee/SceneNode.h>
 #include <ee/EditPanelImpl.h>
 #include <ee/Config.h>
 #include <ee/EE_DTex.h>
@@ -12,6 +11,7 @@
 #include <ee/Sprite.h>
 
 #include <sprite2/S2_RVG.h>
+#include <sprite2/Particle3d.h>
 
 namespace eanim
 {
@@ -45,7 +45,7 @@ void StageCanvas::OnDrawSprites() const
 		ee::SpriteRenderer::Instance()->Draw(sprs[i]);
 	}
 
-	ee::SceneNodeMgr::Instance()->Draw();
+	s2::Particle3d::Instance()->Draw();
 
 	m_stage->DrawEditOP();
 
