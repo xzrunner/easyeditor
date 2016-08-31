@@ -31,6 +31,7 @@ private:
 	void onChangeTextureEdge(wxCommandEvent& event);
 	void onSetBGColor(wxCommandEvent& event);
 	void onChangeUpdateSpr(wxCommandEvent& event);
+	void onChangeScissor(wxCommandEvent& event);
 
 private:
 	SettingData& m_settings;

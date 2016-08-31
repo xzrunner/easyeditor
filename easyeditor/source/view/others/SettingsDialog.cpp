@@ -128,6 +128,13 @@ wxSizer* SettingsDialog::initViewPanel()
 				wxCommandEventHandler(SettingsDialog::onChangeUpdateSpr));
 			sizer->Add(check, 0);
 		}
+		{
+			wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("²Ã¼ô¿ò"));
+			check->SetValue(m_settings.visible_scissor);
+			Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
+				wxCommandEventHandler(SettingsDialog::onChangeScissor));
+			sizer->Add(check, 0);
+		}
 	}
 	return sizer;
 }
@@ -195,6 +202,11 @@ void SettingsDialog::onSetBGColor(wxCommandEvent& event)
 void SettingsDialog::onChangeUpdateSpr(wxCommandEvent& event)
 {
 	m_settings.visible_spr_update = event.IsChecked();
+}
+
+void SettingsDialog::onChangeScissor(wxCommandEvent& event)
+{
+	m_settings.visible_scissor = event.IsChecked();
 }
 
 }

@@ -10,6 +10,7 @@
 #include <ee/Math2D.h>
 #include <ee/Visitor.h>
 #include <ee/StringHelper.h>
+#include <ee/SettingData.h>
 
 #include <easytext.h>
 
@@ -17,6 +18,7 @@
 #include <sprite2/S2_Sprite.h>
 #include <sprite2/S2_RVG.h>
 #include <sprite2/RenderScissor.h>
+#include <sprite2/BoundingBox.h>
 
 #include <queue>
 
@@ -34,7 +36,8 @@ Symbol::Symbol()
 
 void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
-	bool scissor = m_scissor.xmin != 0 || m_scissor.ymin != 0 || m_scissor.xmax != 0 || m_scissor.ymax != 0;
+	sm::vec2 scissor_sz = m_scissor.Size();
+	bool scissor = scissor_sz.x > 0 && scissor_sz.y > 0 && !ee::Config::Instance()->GetSettings().visible_scissor;
 
 	s2::RenderParams p = params;
 	if (spr) {
@@ -128,6 +131,32 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 	if (scissor) {
 		s2::RenderScissor::Instance()->Pop();
 	}
+
+	if (ee::Config::Instance()->GetSettings().visible_scissor && scissor_sz.x > 0 && scissor_sz.y > 0) {
+		sm::vec2 min(m_scissor.xmin, m_scissor.ymin), 
+				 max(m_scissor.xmax, m_scissor.ymax);
+		s2::RVG::SetColor(s2::Color(0, 204, 0));
+		s2::RVG::Rect(p.mt * min, p.mt * max, false);
+	}
+}
+
+sm::rect Symbol::GetBounding(const s2::Sprite* spr) const
+{
+	sm::vec2 scissor_sz = m_scissor.Size();
+	if (scissor_sz.x > 0 && scissor_sz.y > 0 && !ee::Config::Instance()->GetSettings().visible_scissor) {
+		return m_scissor;
+	}
+
+	sm::rect b;
+	int action = -1;
+	if (spr) {
+		action = dynamic_cast<const s2::ComplexSprite*>(spr)->GetAction();
+	}
+	const std::vector<s2::Sprite*>& sprs = GetSprs(action);
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		sprs[i]->GetBounding()->CombineTo(b);
+	}
+	return b;
 }
 
 void Symbol::ReloadTexture() const

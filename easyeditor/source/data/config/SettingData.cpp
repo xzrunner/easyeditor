@@ -27,6 +27,7 @@ SettingData::SettingData()
 	particle3d_loop = true;
 	bg_color.FromFloat(0.5f, 0.5f, 0.5f);
 	visible_spr_update = true;
+	visible_scissor = true;
 
 	img_list_compact = false;
 
@@ -81,6 +82,9 @@ void SettingData::LoadFromFile(const Json::Value& value)
 	}
 	if (!value["visible_spr_update"].isNull()) {
 		visible_spr_update = value["visible_spr_update"].asBool();
+	}
+	if (!value["visible_scissor"].isNull()) {
+		visible_scissor = value["visible_scissor"].asBool();
 	}
 
 	if (!value["img_list_compact"].isNull()) {

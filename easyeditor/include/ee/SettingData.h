@@ -46,6 +46,7 @@ public:
 	bool particle3d_loop;
 	s2::Color bg_color;
 	bool visible_spr_update;
+	bool visible_scissor;
 
 	// widgets
 	bool img_list_compact;
