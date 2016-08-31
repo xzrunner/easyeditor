@@ -19,7 +19,8 @@ public:
 	AnimCurr(AnimSymbol* sym);
 	~AnimCurr();
 
-	bool Update(const RenderParams& params, float dt, bool loop = true);
+	bool Update(const RenderParams& params, float dt, bool loop = true, 
+		float interval = 0, int fps = 30);
 	void Draw(const RenderParams& params) const;
 
 	void Start();

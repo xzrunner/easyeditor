@@ -27,11 +27,17 @@ public:
 	const AnimCurr& GetAnimCurr() const { return m_curr; }
 
 	void SetLoop(bool loop) { m_loop = loop; }
+	void SetInterval(float dt) { m_interval = dt; }
+
+	void SetFPS(int fps) { m_fps = fps; }
 
 private:
 	AnimCurr m_curr;
 
 	bool m_loop;
+	float m_interval;
+
+	int m_fps;
 
 	VI_DUMMY_FUNC
 

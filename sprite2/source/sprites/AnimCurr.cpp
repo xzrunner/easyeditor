@@ -50,15 +50,26 @@ AnimCurr::~AnimCurr()
 	}
 }
 
-bool AnimCurr::Update(const RenderParams& params, float dt, bool loop)
+bool AnimCurr::Update(const RenderParams& params, float dt, bool loop,
+					  float interval, int fps)
 {
 	bool dirty = false;
 
 	// update frame
 	m_time += dt;
-	int curr_frame = m_time * m_sym->GetFPS();
+	int curr_frame = m_time * fps;
 	int max_frame = m_sym->GetMaxFrameIdx();
-	if (!loop && curr_frame > max_frame) {
+	int loop_max_frame = max_frame + interval * fps;
+	
+	if (loop) {
+		
+	} else {
+		if (curr_frame > max_frame) {
+			curr_frame = max_frame;
+		}
+	}
+
+	if (!loop && curr_frame > loop_max_frame) {
 		curr_frame = 1;
 	} else {
 		curr_frame = (curr_frame % max_frame) + 1;

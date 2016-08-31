@@ -33,6 +33,7 @@ public:
 	virtual void Rotate(float delta);
 	
  	virtual bool Update(const RenderParams& params, float dt) { return false; }
+	virtual Sprite* FetchChild(const std::string& name) const { return NULL; }
 
 	virtual void SetSymbol(Symbol* sym);
 
