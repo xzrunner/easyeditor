@@ -23,7 +23,8 @@ ComplexSymbol::~ComplexSymbol()
 
 void ComplexSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 {
-	bool scissor = m_scissor.xmin != 0 || m_scissor.ymin != 0 || m_scissor.xmax != 0 || m_scissor.ymax != 0;
+	sm::vec2 scissor_sz = m_scissor.Size();
+	bool scissor = scissor_sz.x > 0 && scissor_sz.y > 0;
 
 	RenderParams p = params;
 	if (spr) {
@@ -59,6 +60,11 @@ void ComplexSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 
 sm::rect ComplexSymbol::GetBounding(const Sprite* spr) const
 {
+	sm::vec2 scissor_sz = m_scissor.Size();
+	if (scissor_sz.x > 0 && scissor_sz.y > 0) {
+		return m_scissor;
+	}
+
 	sm::rect b;
 	int action = -1;
 	if (spr) {
