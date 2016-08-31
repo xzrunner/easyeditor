@@ -3,7 +3,7 @@
 #include "BoundingBox.h"
 #include "RenderParams.h"
 #include "DrawNode.h"
-#include "RenderScissorStack.h"
+#include "RenderScissor.h"
 
 #include <map>
 
@@ -39,7 +39,7 @@ void ComplexSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 		if (min.y > max.y) {
 			std::swap(min.y, max.y);
 		}
-		RenderScissorStack::Instance()->Push(min.x, min.y, max.x-min.x, max.y-min.y);
+		RenderScissor::Instance()->Push(min.x, min.y, max.x-min.x, max.y-min.y);
 	}
 
 	for (int i = 0, n = m_children.size(); i < n; ++i) {
@@ -47,7 +47,7 @@ void ComplexSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 	}
 
 	if (scissor) {
-		RenderScissorStack::Instance()->Pop();
+		RenderScissor::Instance()->Pop();
 	}
 }
 

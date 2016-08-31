@@ -1,4 +1,4 @@
-#include "RenderScissorStack.h"
+#include "RenderScissor.h"
 #include "RenderScreen.h"
 
 #include <shaderlab.h>
@@ -8,17 +8,17 @@
 namespace s2
 {
 
-SINGLETON_DEFINITION(RenderScissorStack)
+SINGLETON_DEFINITION(RenderScissor)
 
-RenderScissorStack::RenderScissorStack() 
+RenderScissor::RenderScissor() 
 {
 }
 
-RenderScissorStack::~RenderScissorStack() 
+RenderScissor::~RenderScissor() 
 {
 }
 
-void RenderScissorStack::Push(float x, float y, float w, float h)
+void RenderScissor::Push(float x, float y, float w, float h)
 {
 	sl::ShaderMgr* sl_mgr = sl::ShaderMgr::Instance();
 	sl_mgr->GetShader()->Commit();
@@ -36,7 +36,7 @@ void RenderScissorStack::Push(float x, float y, float w, float h)
 	RenderScreen::Scissor(x, y, w, h);
 }
 
-void RenderScissorStack::Pop()
+void RenderScissor::Pop()
 {
 	assert(!m_stack.empty());
 
@@ -48,6 +48,26 @@ void RenderScissorStack::Pop()
 		return;
 	}
 
+	const Rect& r = m_stack.back();
+	RenderScreen::Scissor(r.x, r.y, r.w, r.h);
+}
+
+void RenderScissor::Close()
+{
+	if (m_stack.empty()) {
+		return;
+	}
+
+	sl::ShaderMgr::Instance()->GetContext()->EnableScissor(false);
+}
+
+void RenderScissor::Open()
+{
+	if (m_stack.empty()) {
+		return;
+	}
+
+	sl::ShaderMgr::Instance()->GetContext()->EnableScissor(true);
 	const Rect& r = m_stack.back();
 	RenderScreen::Scissor(r.x, r.y, r.w, r.h);
 }

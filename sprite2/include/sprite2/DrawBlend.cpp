@@ -4,6 +4,7 @@
 #include "S2_Symbol.h"
 #include "RenderParams.h"
 #include "DrawNode.h"
+#include "RenderScissor.h"
 
 #include <shaderlab.h>
 #include <dtex_facade.h>
@@ -20,12 +21,16 @@ void DrawBlend::Draw(const Sprite* spr, const sm::mat4& mt)
 
 	sl::ShaderMgr::Instance()->GetShader()->Commit();
 
+	RenderScissor::Instance()->Close();
+
 	int edge = dtexf_t0_get_texture_size();
 	RenderCtxStack::Instance()->Push(RenderCtx(edge, edge));
 
 	DrawSprToTmp(spr, mt);
 
 	RenderCtxStack::Instance()->Pop();
+
+	RenderScissor::Instance()->Open();
 
 	DrawTmpToScreen(spr, mt);
 }

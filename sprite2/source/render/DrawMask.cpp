@@ -3,6 +3,7 @@
 #include "RenderParams.h"
 #include "DrawNode.h"
 #include "S2_Symbol.h"
+#include "RenderScissor.h"
 
 #include <shaderlab.h>
 #include <dtex_facade.h>
@@ -15,6 +16,8 @@ void DrawMask::Draw(const Symbol* base, const Symbol* mask, const RenderParams& 
 {
 	sl::ShaderMgr::Instance()->GetShader()->Commit();
 
+	RenderScissor::Instance()->Close();
+
 	int edge = dtexf_t0_get_texture_size();
 	RenderCtxStack::Instance()->Push(RenderCtx(edge, edge));
 
@@ -22,6 +25,8 @@ void DrawMask::Draw(const Symbol* base, const Symbol* mask, const RenderParams& 
 	DrawMaskToFbo1(mask);
 
 	RenderCtxStack::Instance()->Pop();
+
+	RenderScissor::Instance()->Open();
 
 	DrawMashFromFbo(mask, params.mt);
 }

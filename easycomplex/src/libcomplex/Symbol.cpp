@@ -15,7 +15,7 @@
 #include <sprite2/ComplexSymbol.h>
 #include <sprite2/S2_Sprite.h>
 #include <sprite2/S2_RVG.h>
-#include <sprite2/RenderScissorStack.h>
+#include <sprite2/RenderScissor.h>
 
 #include <queue>
 
@@ -50,7 +50,7 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 		if (min.y > max.y) {
 			std::swap(min.y, max.y);
 		}
-		s2::RenderScissorStack::Instance()->Push(min.x, min.y, max.x-min.x, max.y-min.y);
+		s2::RenderScissor::Instance()->Push(min.x, min.y, max.x-min.x, max.y-min.y);
 	}
 
  	const ee::TPNode* n = NULL;
@@ -120,7 +120,7 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 	}
 
 	if (scissor) {
-		s2::RenderScissorStack::Instance()->Pop();
+		s2::RenderScissor::Instance()->Pop();
 	}
 }
 

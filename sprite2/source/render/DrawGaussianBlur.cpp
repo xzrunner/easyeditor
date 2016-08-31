@@ -5,6 +5,7 @@
 #include "RenderParams.h"
 #include "FilterFactory.h"
 #include "DrawNode.h"
+#include "RenderScissor.h"
 
 #include <shaderlab.h>
 #include <dtex_facade.h>
@@ -21,6 +22,8 @@ void DrawGaussianBlur::Draw(const Sprite* spr, const RenderParams& params, int i
 void DrawGaussianBlur::DrawToFbo0(const Sprite* spr, const RenderParams& params, int iterations)
 {
 	sl::ShaderMgr::Instance()->GetShader()->Commit();
+
+	RenderScissor::Instance()->Close();
 
 	DrawInit(spr, params, true);
 
@@ -39,6 +42,8 @@ void DrawGaussianBlur::DrawToFbo0(const Sprite* spr, const RenderParams& params,
 	}
 
 	RenderCtxStack::Instance()->Pop();
+
+	RenderScissor::Instance()->Open();
 }
 
 void DrawGaussianBlur::DrawToScreen(bool is_target0, const sm::vec2& offset)

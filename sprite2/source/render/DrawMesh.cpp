@@ -6,6 +6,7 @@
 #include "RenderCtxStack.h"
 #include "RenderParams.h"
 #include "DrawNode.h"
+#include "RenderScissor.h"
 
 #include <shaderlab.h>
 #include <dtex_facade.h>
@@ -78,12 +79,16 @@ void DrawMesh::DrawTexture(const Mesh* mesh, const RenderParams& params,
 {
 	sl::ShaderMgr::Instance()->GetShader()->Commit();
 
+	RenderScissor::Instance()->Close();
+
 	int edge = dtexf_t0_get_texture_size();
 	RenderCtxStack::Instance()->Push(RenderCtx(edge, edge));
 
 	DrawMeshToTmp(mesh, params, base_sym);
 
 	RenderCtxStack::Instance()->Pop();
+
+	RenderScissor::Instance()->Open();
 
 	DrawTmpToScreen(mesh, params);
 }

@@ -929,11 +929,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\source\render\RenderScissorStack.cpp"
+				RelativePath="..\..\..\source\render\RenderScissor.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\include\sprite2\RenderScissorStack.h"
+				RelativePath="..\..\..\include\sprite2\RenderScissor.h"
 				>
 			</File>
 			<File

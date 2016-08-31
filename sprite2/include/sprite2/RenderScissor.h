@@ -1,5 +1,5 @@
-#ifndef _SPRITE2_RENDER_SCISSOR_STACK_H_
-#define _SPRITE2_RENDER_SCISSOR_STACK_H_
+#ifndef _SPRITE2_RENDER_SCISSOR_H_
+#define _SPRITE2_RENDER_SCISSOR_H_
 
 #include <CU_Singleton.h>
 
@@ -8,11 +8,14 @@
 namespace s2
 {
 
-class RenderScissorStack
+class RenderScissor
 {
 public:
 	void Push(float x, float y, float w, float h);
 	void Pop();
+
+	void Close();
+	void Open();
 
 public:
 	struct Rect
@@ -23,10 +26,10 @@ public:
 private:
 	std::vector<Rect> m_stack;
 	
-	SINGLETON_DECLARATION(RenderScissorStack)
+	SINGLETON_DECLARATION(RenderScissor)
 
-}; // RenderScissorStack
+}; // RenderScissor
 
 }
 
-#endif // _SPRITE2_RENDER_SCISSOR_STACK_H_
+#endif // _SPRITE2_RENDER_SCISSOR_H_

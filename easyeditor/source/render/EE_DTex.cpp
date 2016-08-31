@@ -8,6 +8,7 @@
 #include <render/render.h>
 
 #include <sprite2/S2_RVG.h>
+#include <sprite2/RenderScissor.h>
 
 #include <gl/glew.h>
 
@@ -118,8 +119,15 @@ static void _draw_flush()
 	}
 }
 
-static void _scissor_enable() {}
-static void _scissor_disable() {}
+static void _scissor_enable() 
+{
+	s2::RenderScissor::Instance()->Open();
+}
+
+static void _scissor_disable() 
+{
+	s2::RenderScissor::Instance()->Close();
+}
 
 #define IS_POT(x) ((x) > 0 && ((x) & ((x) -1)) == 0)
 
