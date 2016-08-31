@@ -139,67 +139,79 @@ void AutoAlign::Align(const Sprite* src, Sprite* dst)
 
 	// up
 	float nearest = DIS;
-	float dst_up = dst_rect.ymax;
-	if (float dis = fabs(dst_up - src_up) < nearest)
+	if (float dis = fabs(dst_rect.ymax - src_up) < nearest)
 	{
+		float dy = src_up - dst_rect.ymax;
 		nearest = dis;
-		dst->SetPosition(sm::vec2(dst->GetPosition().x, dst->GetPosition().y + src_up - dst_up));
+		dst->SetPosition(sm::vec2(dst->GetPosition().x, dst->GetPosition().y + dy));
+		dst_rect.Translate(sm::vec2(0, dy));
 		m_hor[0].Set(src_cx - LEN, src_up);
 		m_hor[1].Set(src_cx + LEN, src_up);
 	}
-	else if (float dis = fabs(dst_up - src_down) < nearest)
+	else if (float dis = fabs(dst_rect.ymax - src_down) < nearest)
 	{
+		float dy = src_down - dst_rect.ymax;
 		nearest = dis;
-		dst->SetPosition(sm::vec2(dst->GetPosition().x, dst->GetPosition().y + src_down - dst_up));
+		dst->SetPosition(sm::vec2(dst->GetPosition().x, dst->GetPosition().y + dy));
+		dst_rect.Translate(sm::vec2(0, dy));
 		m_hor[0].Set(src_cx - LEN, src_down);
 		m_hor[1].Set(src_cx + LEN, src_down);
 	}		
 	// down
-	float dst_down = dst_rect.ymin;
-	if (float dis = fabs(dst_down - src_up) < nearest)
+	if (float dis = fabs(dst_rect.ymin - src_up) < nearest)
 	{
+		float dy = src_up - dst_rect.ymin;
 		nearest = dis;
-		dst->SetPosition(sm::vec2(dst->GetPosition().x, dst->GetPosition().y + src_up - dst_down));
+		dst->SetPosition(sm::vec2(dst->GetPosition().x, dst->GetPosition().y + dy));
+		dst_rect.Translate(sm::vec2(0, dy));
 		m_hor[0].Set(src_cx - LEN, src_up);
 		m_hor[1].Set(src_cx + LEN, src_up);
 	}
-	else if (float dis = fabs(dst_down - src_down) < nearest)
+	else if (float dis = fabs(dst_rect.ymin - src_down) < nearest)
 	{
+		float dy = src_down - dst_rect.ymin;
 		nearest = dis;
-		dst->SetPosition(sm::vec2(dst->GetPosition().x, dst->GetPosition().y + src_down - dst_down));
+		dst->SetPosition(sm::vec2(dst->GetPosition().x, dst->GetPosition().y + dy));
+		dst_rect.Translate(sm::vec2(0, dy));
 		m_hor[0].Set(src_cx - LEN, src_down);
 		m_hor[1].Set(src_cx + LEN, src_down);
 	}	
 	// left
 	nearest = DIS;
-	float dst_left = dst_rect.xmin;
-	if (float dis = fabs(dst_left - src_left) < nearest)
+	if (float dis = fabs(dst_rect.xmin - src_left) < nearest)
 	{
+		float dx = src_left - dst_rect.xmin;
 		nearest = dis;
-		dst->SetPosition(sm::vec2(dst->GetPosition().x + src_left - dst_left, dst->GetPosition().y));
+		dst->SetPosition(sm::vec2(dst->GetPosition().x + dx, dst->GetPosition().y));
+		dst_rect.Translate(sm::vec2(dx, 0));
 		m_ver[0].Set(src_left, src_cy - LEN);
 		m_ver[1].Set(src_left, src_cy + LEN);
 	}
-	else if (float dis = fabs(dst_left - src_right) < nearest)
+	else if (float dis = fabs(dst_rect.xmin - src_right) < nearest)
 	{
+		float dx = src_right - dst_rect.xmin;
 		nearest = dis;
-		dst->SetPosition(sm::vec2(dst->GetPosition().x + src_right - dst_left, dst->GetPosition().y));
+		dst->SetPosition(sm::vec2(dst->GetPosition().x + dx, dst->GetPosition().y));
+		dst_rect.Translate(sm::vec2(dx, 0));
 		m_ver[0].Set(src_right, src_cy - LEN);
 		m_ver[1].Set(src_right, src_cy + LEN);
 	}
 	// right
-	float dst_right = dst_rect.xmax;
-	if (float dis = fabs(dst_right - src_left) < nearest)
+	if (float dis = fabs(dst_rect.xmax - src_left) < nearest)
 	{
+		float dx = src_left - dst_rect.xmax;
 		nearest = dis;
-		dst->SetPosition(sm::vec2(dst->GetPosition().x + src_left - dst_right, dst->GetPosition().y));
+		dst->SetPosition(sm::vec2(dst->GetPosition().x + dx, dst->GetPosition().y));
+		dst_rect.Translate(sm::vec2(dx, 0));
 		m_ver[0].Set(src_left, src_cy - LEN);
 		m_ver[1].Set(src_left, src_cy + LEN);
 	}
-	else if (float dis = fabs(dst_right - src_right) < nearest)
+	else if (float dis = fabs(dst_rect.xmax - src_right) < nearest)
 	{
+		float dx = src_right - dst_rect.xmax;
 		nearest = dis;
-		dst->SetPosition(sm::vec2(dst->GetPosition().x + src_right - dst_right, dst->GetPosition().y));
+		dst->SetPosition(sm::vec2(dst->GetPosition().x + dx, dst->GetPosition().y));
+		dst_rect.Translate(sm::vec2(dx, 0));
 		m_ver[0].Set(src_right, src_cy - LEN);
 		m_ver[1].Set(src_right, src_cy + LEN);
 	}
