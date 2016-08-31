@@ -60,19 +60,21 @@ bool AnimCurr::Update(const RenderParams& params, float dt, bool loop,
 	int curr_frame = m_time * fps;
 	int max_frame = m_sym->GetMaxFrameIdx();
 	int loop_max_frame = max_frame + interval * fps;
-	
 	if (loop) {
-		
+		if (curr_frame <= max_frame) {
+			++curr_frame;
+		} else if (curr_frame > max_frame && curr_frame <= loop_max_frame) {
+			curr_frame = 1;
+		} else {
+			curr_frame = 1;
+			m_time = 0;
+		}
 	} else {
 		if (curr_frame > max_frame) {
 			curr_frame = max_frame;
+		} else {
+			++curr_frame;
 		}
-	}
-
-	if (!loop && curr_frame > loop_max_frame) {
-		curr_frame = 1;
-	} else {
-		curr_frame = (curr_frame % max_frame) + 1;
 	}
 
 	// update children

@@ -23,6 +23,20 @@ public:
 	 */
 	virtual Sprite* Clone() const { return new Sprite(*this); }
 
+	/**
+	 *  @interface
+	 *    ee::Sprite
+	 */
+	virtual void Load(const Json::Value& val, const std::string& dir = "");
+	virtual void Store(Json::Value& val, const std::string& dir = "") const;
+
+	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
+
+	bool IsLoop() const { return m_loop; }
+	float GetInterval() const { return m_interval; }
+
+	int GetFPS() const { return m_fps; }
+
 	static ee::Sprite* Create(ee::Symbol* sym);
 
 }; // Sprite

@@ -31,13 +31,14 @@ public:
 
 	void SetFPS(int fps) { m_fps = fps; }
 
-private:
-	AnimCurr m_curr;
-
+protected:
 	bool m_loop;
 	float m_interval;
 
 	int m_fps;
+
+private:
+	AnimCurr m_curr;
 
 	VI_DUMMY_FUNC
 
