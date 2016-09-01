@@ -22,7 +22,7 @@ public:
 	//
 	// ee::EditPanel interface
 	//
-	virtual bool Update(float dt);
+	virtual bool UpdateStage();
 
 	//
 	// ee::MultiSpritesImpl interface

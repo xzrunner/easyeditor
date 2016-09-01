@@ -61,7 +61,7 @@ StagePanel::~StagePanel()
 	}
 }
 
-bool StagePanel::Update(float dt)
+bool StagePanel::UpdateStage()
 {
 	return true;
 }

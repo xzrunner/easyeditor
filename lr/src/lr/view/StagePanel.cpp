@@ -103,7 +103,7 @@ StagePanel::~StagePanel()
 // 	}
 // }
 
-bool StagePanel::Update(float dt)
+bool StagePanel::UpdateStage()
 {
 	if (!m_enable_update) {
 		return false;
@@ -112,7 +112,7 @@ bool StagePanel::Update(float dt)
 	bool ret = false;
 
 	for (int i = 0, n = m_layers.size(); i < n; ++i) {
-		if (m_layers[i]->Update(dt)) {
+		if (m_layers[i]->Update()) {
 			ret = true;
 		}
 	}

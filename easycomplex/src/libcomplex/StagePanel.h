@@ -27,7 +27,7 @@ public:
 	//
 	// ee::EditPanel interface
 	//
-	virtual bool Update(float dt);
+	virtual bool UpdateStage();
 
 	const Symbol* GetSymbol() const { return m_sym; }
 	Symbol* GetSymbol() { return m_sym; }

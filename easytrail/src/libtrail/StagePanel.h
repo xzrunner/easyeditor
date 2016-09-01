@@ -21,7 +21,7 @@ public:
 		ee::LibraryPanel* library, ee::PropertySettingPanel* property);
 	virtual ~StagePanel();
 
-	virtual bool Update(float dt);
+	virtual bool UpdateStage();
 
 	void SetPos(const sm::vec2& pos) { m_pos = pos; }
 

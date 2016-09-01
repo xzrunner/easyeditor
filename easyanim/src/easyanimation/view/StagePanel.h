@@ -20,7 +20,7 @@ public:
 	//
 	// ee::EditPanel interface
 	//
-	virtual bool Update(float dt);
+	virtual bool UpdateStage();
 
 	//
 	// ee::MultiSpritesImpl interface
@@ -60,14 +60,13 @@ private:
 	class CheckUpdateVisitor : public ee::Visitor<ee::Sprite>
 	{
 	public:
-		CheckUpdateVisitor(float dt);
+		CheckUpdateVisitor();
 
 		virtual void Visit(ee::Sprite* spr, bool& next);
 
 		bool NeedUpdate() const { return m_update; }
 
 	private:
-		float m_dt;
 		bool m_update;
 
 	}; // CheckUpdateVisitor

@@ -16,7 +16,7 @@ PreviewPanel::PreviewPanel(wxWindow* parent, wxTopLevelWindow* frame,
 {
 }
 
-bool PreviewPanel::Update(float dt)
+bool PreviewPanel::UpdateStage()
 {
 	std::vector<ee::Sprite*> sprs;
 	PreviewUtility::GetCurrSprites(m_ctrl, sprs);

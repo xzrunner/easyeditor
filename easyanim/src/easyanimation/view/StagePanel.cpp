@@ -49,7 +49,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 	RegistSubject(RemoveLayerSJ::Instance());
 }
 
-bool StagePanel::Update(float dt)
+bool StagePanel::UpdateStage()
 {
 	bool dirty = false;
 
@@ -58,7 +58,7 @@ bool StagePanel::Update(float dt)
 		return true;
 	}
 
-	CheckUpdateVisitor visitor(dt);
+	CheckUpdateVisitor visitor();
 	TraverseSprites(visitor, ee::DT_ALL, true);
 	if (visitor.NeedUpdate()) {
 		dirty = true;
@@ -266,9 +266,8 @@ void StagePanel::InsertWithoutUD(ee::Sprite* spr, int idx)
 //////////////////////////////////////////////////////////////////////////
 
 StagePanel::CheckUpdateVisitor::
-CheckUpdateVisitor(float dt) 
-	: m_dt(dt)
-	, m_update(false) 
+CheckUpdateVisitor() 
+	: m_update(false) 
 {}
 
 void StagePanel::CheckUpdateVisitor::

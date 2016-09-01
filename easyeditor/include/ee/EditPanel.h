@@ -24,7 +24,7 @@ public:
 	EditPanel(wxWindow* parent, wxTopLevelWindow* frame);
 	virtual ~EditPanel();
 
-	virtual bool Update(float dt) { return false; }
+	virtual bool UpdateStage() { return false; }
 
  	virtual void OnSizeDebug(wxSizeEvent& event) {}
  	virtual void OnMouseHook(wxMouseEvent& event) {}

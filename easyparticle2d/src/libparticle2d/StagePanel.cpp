@@ -19,7 +19,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	SetEditOP(new EditOP(this));
 }
 
-bool StagePanel::Update(float dt)
+bool StagePanel::UpdateStage()
 {
 	if (m_ps) {
 		return m_ps->Update(m_ps_mat);

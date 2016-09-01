@@ -10,7 +10,7 @@ PreviewStage::PreviewStage(wxWindow* parent, wxTopLevelWindow* frame,
 {
 }
 
-bool PreviewStage::Update(float dt)
+bool PreviewStage::UpdateStage()
 {
 	m_control.Update();
 	return true;

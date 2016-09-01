@@ -213,14 +213,14 @@ void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
 	}
 }
 
-bool Layer::Update(float dt)
+bool Layer::Update()
 {
 	bool ret = false;
 
 	std::vector<ee::Sprite*> sprs;
 	TraverseSprite(ee::FetchAllVisitor<ee::Sprite>(sprs), true);
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
-		bool dirty = sprs[i]->Update(s2::RenderParams(), dt);
+		bool dirty = sprs[i]->Update(s2::RenderParams());
 		if (dirty) {
 			ret = true;
 		}

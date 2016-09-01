@@ -26,7 +26,7 @@ StagePanel::~StagePanel()
 {	
 }
 
-bool StagePanel::Update(float dt)
+bool StagePanel::UpdateStage()
 {
 	if (m_trail) {
 		return m_trail->Update(m_pos);

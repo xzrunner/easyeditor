@@ -70,7 +70,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	RegistSubject(ee::ClearSpriteSJ::Instance());
 }
 
-bool StagePanel::Update(float dt)
+bool StagePanel::UpdateStage()
 {
 	bool dirty = false;
 	const std::vector<s2::Sprite*>& children = m_sym->GetChildren();

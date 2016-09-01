@@ -24,7 +24,7 @@ StagePanel::~StagePanel()
 {
 }
 
-bool StagePanel::Update(float dt)
+bool StagePanel::UpdateStage()
 {
 	if (m_ps) {
 		return m_ps->Update(m_ps_mat);

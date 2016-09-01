@@ -47,10 +47,10 @@ void EditPanelImpl::SetEditPanelNull()
 	m_stage = NULL;
 }
 
-bool EditPanelImpl::Update(float dt)
+bool EditPanelImpl::Update()
 {
 	if (m_stage) {
-		return m_stage->Update(dt);
+		return m_stage->UpdateStage();
 	} else {
 		return false;
 	}

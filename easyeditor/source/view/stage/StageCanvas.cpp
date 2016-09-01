@@ -221,7 +221,7 @@ void StageCanvas::OnTimer(wxTimerEvent& event)
 
 	s2::SprTimer::Instance()->Update(dt);
 
-	bool dirty = m_stage->Update(dt);
+	bool dirty = m_stage->Update();
 	if (dirty) {
 		m_dirty = dirty;
 	}

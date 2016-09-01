@@ -37,7 +37,7 @@ StagePanel::~StagePanel()
 	m_sym->RemoveReference();
 }
 
-bool StagePanel::Update(float dt)
+bool StagePanel::UpdateStage()
 {
 	m_sym->Update(s2::RenderParams());
 	return true;

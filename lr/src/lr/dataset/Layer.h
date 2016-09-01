@@ -56,7 +56,7 @@ public:
 	void LoadFromFile(const Json::Value& val, const std::string& dir, int layer_idx);
 	void StoreToFile(Json::Value& val, const std::string& dir) const;
 
-	bool Update(float dt);
+	bool Update();
 
 	ee::Sprite* QuerySprite(const std::string& name) const;
 	ee::Shape* QueryShape(const std::string& name) const;
