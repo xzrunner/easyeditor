@@ -28,7 +28,7 @@ void Symbol::Traverse(ee::Visitor<ee::Sprite>& visitor)
 	for (int i = 0; i < m_et_cfg->sym_count; ++i)
 	{
 		const p3d_symbol& p_symbol = m_et_cfg->syms[i];
-		ee::Symbol* sym = static_cast<ee::Symbol*>(p_symbol.ud);
+		ee::Symbol* sym = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(p_symbol.ud));
 		sym->Traverse(visitor);
 	}
 }

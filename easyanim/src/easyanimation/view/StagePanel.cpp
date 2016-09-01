@@ -58,7 +58,7 @@ bool StagePanel::UpdateStage()
 		return true;
 	}
 
-	CheckUpdateVisitor visitor();
+	CheckUpdateVisitor visitor;
 	TraverseSprites(visitor, ee::DT_ALL, true);
 	if (visitor.NeedUpdate()) {
 		dirty = true;
