@@ -26,6 +26,11 @@ public:
 	virtual ~StagePanel();
 
 	//
+	// ee::EditPanel interface
+	//
+	virtual bool UpdateStage();
+
+	//
 	// UIStagePage interface
 	//
 	virtual void LoadFromFile(const char* filename);

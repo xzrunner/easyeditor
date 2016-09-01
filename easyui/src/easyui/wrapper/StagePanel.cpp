@@ -114,7 +114,7 @@ void StagePanel::StoreToFile(const char* filename) const
 	ecomplex::Sprite items_sprite(&items_complex);
 	items_sprite.SetName("anchor");
 	ecomplex::Symbol wrapper_complex;
-	wrapper_complex.m_clipbox = m_clipbox;
+	wrapper_complex.SetScissor(m_clipbox);
 	wrapper_complex.Add(&items_sprite);
 	items_sprite.AddReference();
 	std::string top_path = name + "_wrapper_complex[gen].json";

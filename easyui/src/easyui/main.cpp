@@ -15,6 +15,7 @@
 #include <easyterrain2d.h>
 #include <easytext.h>
 #include <easytexture.h>
+#include <easyicon.h>
 
 #include <ee/SymbolFactory.h>
 #include <ee/SpriteFactory.h>
@@ -56,6 +57,9 @@ static void InitSymbolCreators()
 
 	ee::SymbolFactory::RegisterCreator(etexture::FILE_TAG, &etexture::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(etexture::FILE_TAG, &etexture::Sprite::Create);
+
+	ee::SymbolFactory::RegisterCreator(eicon::FILE_TAG, &eicon::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(eicon::FILE_TAG, &eicon::Sprite::Create);
 
 	std::string type = ee::FileType::GetTag(ee::FileType::e_uiwnd);
 	ee::SymbolFactory::RegisterCreator(type, &eui::window::Symbol::Create);

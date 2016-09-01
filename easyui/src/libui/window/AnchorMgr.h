@@ -21,6 +21,8 @@ public:
 	AnchorMgr();
 	~AnchorMgr();
 
+	virtual bool Update(const s2::RenderParams& params);
+
 	void LoadFromFile(const Json::Value& value, 
 		const std::vector<ee::Sprite*>& sprs);
 	void StoreToFile(Json::Value& value, const std::string& dir) const;

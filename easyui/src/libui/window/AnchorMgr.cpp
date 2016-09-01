@@ -34,6 +34,17 @@ AnchorMgr::~AnchorMgr()
 	Clear();
 }
 
+bool AnchorMgr::Update(const s2::RenderParams& params)
+{
+	bool dirty = false;
+	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
+		if (m_sprs[i]->Update(params)) {
+			dirty = true;
+		}
+	}
+	return dirty;
+}
+
 void AnchorMgr::LoadFromFile(const Json::Value& value,
 							 const std::vector<ee::Sprite*>& sprs)
 {

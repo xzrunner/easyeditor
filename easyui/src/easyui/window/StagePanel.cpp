@@ -23,6 +23,8 @@
 #include <easycomplex.h>
 #include <easybuilder.h>
 
+#include <sprite2/RenderParams.h>
+
 namespace eui
 {
 namespace window
@@ -63,6 +65,24 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* to
 StagePanel::~StagePanel()
 {
 	m_sym->RemoveReference();
+}
+
+bool StagePanel::UpdateStage()
+{
+	bool dirty = false;
+
+	if (m_sym->GetAnchorMgr().Update(s2::RenderParams())) {
+		dirty = true;
+	}
+	
+	const std::vector<Sprite*>& sprs = m_sym->GetExtRefs();
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		if (sprs[i]->Update(s2::RenderParams())) {
+			dirty = true;
+		}
+	}
+
+	return dirty;
 }
 
 void StagePanel::LoadFromFile(const char* filename)
