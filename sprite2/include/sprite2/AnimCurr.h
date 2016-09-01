@@ -41,6 +41,8 @@ private:
 
 		Sprite* Query(const Sprite* spr);
 
+		void Clear();
+
 	private:
 		void CopyFrom(const std::vector<Sprite*>& src);
 
@@ -61,8 +63,6 @@ private:
 	int m_frame;
 
 	std::vector<Layer> m_layers;
-
-//	float m_time;
 
 	float m_start_time, m_curr_time;
 
