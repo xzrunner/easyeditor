@@ -175,8 +175,10 @@ void AnimCurr::LoadFromSym()
 			AnimSymbol::Layer* sym_layer = sym_layers[i];
 			AnimSymbol::Frame *curr_f = sym_layer->GetCurrFrame(m_frame),
 				              *next_f = sym_layer->GetNextFrame(m_frame);
-			if (!curr_f)
+			if (!curr_f) {
+				m_layers[i].frame.Clear();
 				continue;
+			}
 
 			Layer& curr_layer = m_layers[i];
 			Frame& old_frame = curr_layer.frame;
@@ -269,6 +271,13 @@ Query(const Sprite* spr)
 		}
 	}
 	return NULL;
+}
+
+void AnimCurr::Frame::
+Clear() 
+{
+	for_each(sprs.begin(), sprs.end(), cu::RemoveRefFonctor<Sprite>());
+	sprs.clear();
 }
 
 void AnimCurr::Frame::
