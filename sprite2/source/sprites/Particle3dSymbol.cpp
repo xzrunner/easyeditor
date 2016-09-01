@@ -27,10 +27,8 @@ Particle3dSymbol::~Particle3dSymbol()
 	}
 }
 
-bool Particle3dSymbol::Update(const RenderParams& params, float dt)
+bool Particle3dSymbol::Update(const RenderParams& params)
 {
-	Particle3d::Instance()->Update(dt);
-
 	float time = Particle3d::Instance()->GetTime();
 	assert(m_et->time <= time);
 	if (m_et->time == time) {
@@ -46,7 +44,7 @@ bool Particle3dSymbol::Update(const RenderParams& params, float dt)
 	mt[4] = inner_mat.x[12];
 	mt[5] = inner_mat.x[13];	
 
-	dt = time - m_et->time;
+	float dt = time - m_et->time;
 	p3d_emitter_update(m_et, dt, mt);
 	m_et->time = time;
 

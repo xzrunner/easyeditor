@@ -16,7 +16,7 @@ public:
 	 *  @interface
 	 *    Sprite
 	 */
-	virtual bool Update(const RenderParams& params, float dt);	
+	virtual bool Update(const RenderParams& params);	
 
 	/**
 	 *  @interface

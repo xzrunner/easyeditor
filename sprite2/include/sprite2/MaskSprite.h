@@ -17,7 +17,7 @@ public:
 	 *    Cloneable
 	 */
 	virtual MaskSprite* Clone() const;
-	virtual bool Update(const RenderParams& params, float dt);
+	virtual bool Update(const RenderParams& params);
 
 	VI_DUMMY_FUNC
 

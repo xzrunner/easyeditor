@@ -20,7 +20,7 @@ public:
 	 *  @interface
 	 *    Symbol
 	 */
-	virtual bool Update(const RenderParams& params, float dt);
+	virtual bool Update(const RenderParams& params);
 	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const;
 	virtual sm::rect GetBounding(const Sprite* spr = NULL) const;
 

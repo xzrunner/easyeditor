@@ -19,7 +19,7 @@ public:
 	AnimCurr(AnimSymbol* sym);
 	~AnimCurr();
 
-	bool Update(const RenderParams& params, float dt, bool loop = true, 
+	bool Update(const RenderParams& params, bool loop = true, 
 		float interval = 0, int fps = 30);
 	void Draw(const RenderParams& params) const;
 
@@ -62,7 +62,9 @@ private:
 
 	std::vector<Layer> m_layers;
 
-	float m_time;
+//	float m_time;
+
+	float m_start_time, m_curr_time;
 
 }; // AnimCurr
 

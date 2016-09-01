@@ -17,7 +17,7 @@ MaskSprite* MaskSprite::Clone() const
 	return new MaskSprite(*this);
 }
 
-bool MaskSprite::Update(const RenderParams& params, float dt)
+bool MaskSprite::Update(const RenderParams& params)
 {
 	// todo
 	return false;

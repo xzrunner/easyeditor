@@ -56,10 +56,8 @@ Particle2dSprite* Particle2dSprite::Clone() const
 	return new Particle2dSprite(*this);
 }
 
-bool Particle2dSprite::Update(const RenderParams& params, float dt)
+bool Particle2dSprite::Update(const RenderParams& params)
 {
-	Particle2d::Instance()->Update(dt);
-
 	if (!m_et) {
 		return false;
 	}
@@ -78,7 +76,7 @@ bool Particle2dSprite::Update(const RenderParams& params, float dt)
 	mt[4] = m_mat.x[12];
 	mt[5] = m_mat.x[13];	
 
-	dt = time - m_et->time;
+	float dt = time - m_et->time;
 	p2d_emitter_update(m_et, dt, mt);
 	m_et->time = time;
 

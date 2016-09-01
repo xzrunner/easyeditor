@@ -18,14 +18,12 @@ PreviewPanel::PreviewPanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 bool PreviewPanel::Update(float dt)
 {
-	s2::Particle3d::Instance()->Update(dt);
-
 	std::vector<ee::Sprite*> sprs;
 	PreviewUtility::GetCurrSprites(m_ctrl, sprs);
 
 	s2::RenderParams params;
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
-		sprs[i]->Update(params, dt);
+		sprs[i]->Update(params);
 	}
 
 	for (size_t i = 0, n = sprs.size(); i < n; ++i) {

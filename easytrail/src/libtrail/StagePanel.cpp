@@ -28,7 +28,6 @@ StagePanel::~StagePanel()
 
 bool StagePanel::Update(float dt)
 {
-	s2::Trail::Instance()->Update(dt);
 	if (m_trail) {
 		return m_trail->Update(m_pos);
 	} else {

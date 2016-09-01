@@ -32,7 +32,7 @@ public:
 	virtual void Translate(const sm::vec2& offset);
 	virtual void Rotate(float delta);
 	
- 	virtual bool Update(const RenderParams& params, float dt) { return false; }
+ 	virtual bool Update(const RenderParams& params) { return false; }
 	virtual Sprite* FetchChild(const std::string& name) const { return NULL; }
 
 	virtual void SetSymbol(Symbol* sym);

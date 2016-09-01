@@ -26,9 +26,9 @@ AnimSprite* AnimSprite::Clone() const
 	return new AnimSprite(*this);
 }
 
-bool AnimSprite::Update(const RenderParams& params, float dt)
+bool AnimSprite::Update(const RenderParams& params)
 {
-	return m_curr.Update(params, dt, m_loop, m_interval, m_fps);
+	return m_curr.Update(params, m_loop, m_interval, m_fps);
 }
 
 void AnimSprite::Start()

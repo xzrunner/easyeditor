@@ -51,7 +51,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 
 bool StagePanel::Update(float dt)
 {
-	bool dirty = s2::Particle3d::Instance()->Update(dt);
+	bool dirty = false;
 
 	if (m_refresh) {
 		m_refresh = false;
@@ -274,7 +274,7 @@ CheckUpdateVisitor(float dt)
 void StagePanel::CheckUpdateVisitor::
 Visit(ee::Sprite* spr, bool& next)
 {
-	if (spr->Update(s2::RenderParams(), m_dt)) {
+	if (spr->Update(s2::RenderParams())) {
 		m_update = true;
 		next = false;
 	} else {

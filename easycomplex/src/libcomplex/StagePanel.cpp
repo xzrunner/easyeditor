@@ -72,10 +72,10 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 bool StagePanel::Update(float dt)
 {
-	bool dirty = s2::Particle3d::Instance()->Update(dt);
+	bool dirty = false;
 	const std::vector<s2::Sprite*>& children = m_sym->GetChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
-		if (children[i]->Update(s2::RenderParams(), dt)) {
+		if (children[i]->Update(s2::RenderParams())) {
 			dirty = true;
 		}
 	}

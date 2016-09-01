@@ -22,7 +22,7 @@ ImageSprite* ImageSprite::Clone() const
 	return new ImageSprite(*this);
 }
 
-bool ImageSprite::Update(const RenderParams& params, float dt)
+bool ImageSprite::Update(const RenderParams& params)
 {
 	FilterMode filter = m_shader.filter->GetMode();
 	return filter == FM_HEAT_HAZE 

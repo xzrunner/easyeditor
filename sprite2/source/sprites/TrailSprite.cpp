@@ -54,17 +54,15 @@ TrailSprite* TrailSprite::Clone() const
 	return new TrailSprite(*this);
 }
 
-bool TrailSprite::Update(const RenderParams& params, float dt)
+bool TrailSprite::Update(const RenderParams& params)
 {
-	Trail::Instance()->Update(dt);
-
 	float time = Trail::Instance()->GetTime();
 	assert(m_et->time <= time);
 	if (m_et->time == time) {
 		return false;
 	}
 
-	dt = time - m_et->time;
+	float dt = time - m_et->time;
 	sm::vec2 pos = params.mt * GetPosition();
 	t2d_emitter_update(m_et, dt, (sm_vec2*)(&pos));
 	m_et->time = time;

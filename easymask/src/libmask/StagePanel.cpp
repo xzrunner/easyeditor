@@ -39,7 +39,7 @@ StagePanel::~StagePanel()
 
 bool StagePanel::Update(float dt)
 {
-	m_sym->Update(s2::RenderParams(), dt);
+	m_sym->Update(s2::RenderParams());
 	return true;
 }
 

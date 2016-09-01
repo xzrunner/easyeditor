@@ -13,6 +13,7 @@
 
 #include <shaderlab.h>
 #include <sprite2/RenderCtxStack.h>
+#include <sprite2/SprTimer.h>
 
 namespace ee
 {
@@ -217,6 +218,8 @@ void StageCanvas::OnTimer(wxTimerEvent& event)
 		dt = (float)(curr_time - last_time) / CLOCKS_PER_SEC;
 	}
 	last_time = curr_time;
+
+	s2::SprTimer::Instance()->Update(dt);
 
 	bool dirty = m_stage->Update(dt);
 	if (dirty) {

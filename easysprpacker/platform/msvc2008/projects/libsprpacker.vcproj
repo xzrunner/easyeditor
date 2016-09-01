@@ -240,6 +240,30 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="06.complex"
+				>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackComplex.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackComplex.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="07.animation"
+				>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackAnimation.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackAnimation.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="tools"
@@ -339,6 +363,14 @@
 					RelativePath="..\..\..\src\libsprpacker\TextureBuilder.h"
 					>
 				</File>
+			</Filter>
+			<Filter
+				Name="06.complex"
+				>
+			</Filter>
+			<Filter
+				Name="07.animation"
+				>
 			</Filter>
 		</Filter>
 		<Filter

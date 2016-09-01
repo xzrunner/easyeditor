@@ -21,7 +21,6 @@ public:
 	 *    s2::Sprite
 	 */
 	virtual Sprite* Clone() const { return new Sprite(*this); }
-	virtual bool Update(const s2::RenderParams& params, float dt);
 
 	const sm::vec3& GetPos3() const { return m_pos3; }
 	void SetPos3(const sm::vec3& pos) { m_pos3 = pos; }

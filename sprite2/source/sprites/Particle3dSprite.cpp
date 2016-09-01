@@ -66,10 +66,8 @@ Particle3dSprite* Particle3dSprite::Clone() const
 	return new Particle3dSprite(*this);
 }
 
-bool Particle3dSprite::Update(const RenderParams& params, float dt)
+bool Particle3dSprite::Update(const RenderParams& params)
 {
-	s2::Particle3d::Instance()->Update(dt);
-
 	if (!m_spr) {
 		return true;
 	} else if (m_alone) {

@@ -22,7 +22,7 @@ public:
 	 *  @interface
 	 *    Sprite
 	 */
-	virtual bool Update(const RenderParams& params, float dt);
+	virtual bool Update(const RenderParams& params);
 
 	void SetAction(const std::string& name);
 	int GetAction() const { return m_action; }

@@ -29,9 +29,9 @@ AnimSymbol::~AnimSymbol()
 	}
 }
 
-bool AnimSymbol::Update(const RenderParams& params, float dt)
+bool AnimSymbol::Update(const RenderParams& params)
 {
-	return m_curr.Update(params, dt);
+	return m_curr.Update(params);
 }
 
 void AnimSymbol::Draw(const RenderParams& params, const Sprite* spr) const

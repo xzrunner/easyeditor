@@ -23,7 +23,7 @@ public:
 	 *    Cloneable
 	 */
 	virtual Particle2dSprite* Clone() const;
-	virtual bool Update(const RenderParams& params, float dt);
+	virtual bool Update(const RenderParams& params);
 
 	void Draw(const RenderParams& params) const;
 

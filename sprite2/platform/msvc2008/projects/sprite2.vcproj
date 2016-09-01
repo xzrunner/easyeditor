@@ -356,6 +356,14 @@
 				RelativePath="..\..\..\include\sprite2\S2_Symbol.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\source\sprites\SprTimer.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\sprite2\SprTimer.h"
+				>
+			</File>
 			<Filter
 				Name="image"
 				>
@@ -415,6 +423,14 @@
 			<Filter
 				Name="anim"
 				>
+				<File
+					RelativePath="..\..\..\source\sprites\Animation.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\Animation.h"
+					>
+				</File>
 				<File
 					RelativePath="..\..\..\source\sprites\AnimCurr.cpp"
 					>

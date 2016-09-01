@@ -21,7 +21,6 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 bool StagePanel::Update(float dt)
 {
-	s2::Particle2d::Instance()->Update(dt);
 	if (m_ps) {
 		return m_ps->Update(m_ps_mat);
 	} else {

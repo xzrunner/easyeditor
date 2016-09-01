@@ -23,13 +23,13 @@ MaskSymbol::~MaskSymbol()
 	}
 }
 
-bool MaskSymbol::Update(const RenderParams& params, float dt)
+bool MaskSymbol::Update(const RenderParams& params)
 {
 	bool dirty = false;
-	if (m_base && m_base->Update(params, dt)) {
+	if (m_base && m_base->Update(params)) {
 		dirty = true;
 	}
-	if (m_mask && m_mask->Update(params, dt)) {
+	if (m_mask && m_mask->Update(params)) {
 		dirty = true;
 	}
 	return dirty;

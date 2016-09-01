@@ -1,6 +1,7 @@
 #include "AnimCurr.h"
 #include "AnimSymbol.h"
 #include "AnimLerp.h"
+#include "Animation.h"
 #include "S2_Sprite.h"
 #include "DrawNode.h"
 
@@ -11,16 +12,17 @@ namespace s2
 
 AnimCurr::AnimCurr()
 	: m_sym(NULL)
-	, m_frame(0)
-	, m_time(0)
+	, m_frame(1)
 {
+	m_start_time = m_curr_time = Animation::Instance()->GetTime();
 }
 
 AnimCurr::AnimCurr(const AnimCurr& curr)
 	: m_sym(NULL)
-	, m_frame(0)
+	, m_frame(curr.m_frame)
 	, m_layers(curr.m_layers)
-	, m_time(curr.m_time)
+	, m_start_time(curr.m_start_time)
+	, m_curr_time(curr.m_curr_time)
 {
 	cu::RefCountObjAssign(m_sym, const_cast<AnimSymbol*>(curr.m_sym));
 }
@@ -31,15 +33,16 @@ AnimCurr& AnimCurr::operator = (const AnimCurr& curr)
 	cu::RefCountObjAssign(m_sym, const_cast<AnimSymbol*>(curr.m_sym));
 	m_frame = curr.m_frame;
 	m_layers = curr.m_layers;
-	m_time = curr.m_time;
+	m_start_time = curr.m_start_time;
+	m_curr_time = curr.m_curr_time;
 	return *this;
 }
 
 AnimCurr::AnimCurr(AnimSymbol* sym)
 	: m_sym(NULL)
-	, m_frame(0)
-	, m_time(0)
+	, m_frame(1)
 {
+	m_start_time = m_curr_time = Animation::Instance()->GetTime();
 	cu::RefCountObjAssign(m_sym, sym);
 }
 
@@ -50,14 +53,23 @@ AnimCurr::~AnimCurr()
 	}
 }
 
-bool AnimCurr::Update(const RenderParams& params, float dt, bool loop,
+bool AnimCurr::Update(const RenderParams& params, bool loop,
 					  float interval, int fps)
 {
 	bool dirty = false;
 
+	// update time
+	float curr_time = Animation::Instance()->GetTime();
+	assert(m_curr_time <= curr_time);
+	if (curr_time == m_curr_time) {
+		m_curr_time = curr_time;
+		return dirty;
+	} else {
+		m_curr_time = curr_time;
+	}
+
 	// update frame
-	m_time += dt;
-	int curr_frame = m_time * fps;
+	int curr_frame = (m_curr_time - m_start_time) * fps;
 	int max_frame = m_sym->GetMaxFrameIdx();
 	int loop_max_frame = max_frame + interval * fps;
 	if (loop) {
@@ -67,7 +79,7 @@ bool AnimCurr::Update(const RenderParams& params, float dt, bool loop,
 			curr_frame = 1;
 		} else {
 			curr_frame = 1;
-			m_time = 0;
+			m_start_time = m_curr_time;
 		}
 	} else {
 		if (curr_frame > max_frame) {
@@ -81,7 +93,7 @@ bool AnimCurr::Update(const RenderParams& params, float dt, bool loop,
 	for (int i = 0, n = m_layers.size(); i < n; ++i) {
 		Frame& frame = m_layers[i].frame;
 		for (int j = 0, m = frame.sprs.size(); j < m; ++j) {
-			if (frame.sprs[j]->Update(params, dt)) {
+			if (frame.sprs[j]->Update(params)) {
 				dirty = true;
 			}
 		}
@@ -109,15 +121,15 @@ void AnimCurr::Draw(const RenderParams& params) const
 
 void AnimCurr::Start()
 {
-	m_time = 0;
+	m_start_time = m_curr_time = Animation::Instance()->GetTime();
 	m_frame = 1;
 	LoadFromSym();
 }
 
 void AnimCurr::Clear()
 {
-	m_frame = 0;
-	m_time = 0;
+	m_start_time = m_curr_time = Animation::Instance()->GetTime();
+	m_frame = 1;
 	m_layers.clear();
 }
 
