@@ -916,6 +916,26 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="proxy"
+				>
+				<File
+					RelativePath="..\..\..\source\sprites\ProxySprite.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\ProxySprite.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\sprites\ProxySymbol.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\sprite2\ProxySymbol.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="utility"

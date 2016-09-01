@@ -3,6 +3,7 @@
 #include "S2_Sprite.h"
 #include "DrawMask.h"
 #include "DrawNode.h"
+#include "BoundingBox.h"
 
 namespace s2
 {
@@ -23,18 +24,6 @@ MaskSymbol::~MaskSymbol()
 	}
 }
 
-bool MaskSymbol::Update(const RenderParams& params)
-{
-	bool dirty = false;
-	if (m_base && m_base->Update(params)) {
-		dirty = true;
-	}
-	if (m_mask && m_mask->Update(params)) {
-		dirty = true;
-	}
-	return dirty;
-}
-
 void MaskSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 {
 	RenderParams p = params;
@@ -43,7 +32,7 @@ void MaskSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 		p.color = spr->Color() * params.color;
 	}
 	if (m_base && m_mask) {
-		DrawMask::Draw(m_base, m_mask, p);
+		DrawMask::Draw(m_base->GetSymbol(), m_mask->GetSymbol(), p);
 	} else {
 		if (m_base) {
 			DrawNode::Draw(m_base, p);
@@ -56,15 +45,12 @@ void MaskSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 sm::rect MaskSymbol::GetBounding(const Sprite* spr) const
 {
 	if (m_mask) {
-		return m_mask->GetBounding();
+		sm::rect b;
+		m_mask->GetBounding()->CombineTo(b);
+		return b;
 	} else {
 		return sm::rect(sm::vec2(0, 0), 100, 100);
 	}
-}
-
-void MaskSymbol::SetSymbol(const Symbol* sym, bool is_base)
-{
-	cu::RefCountObjAssign(is_base ? m_base: m_mask, sym);
 }
 
 }

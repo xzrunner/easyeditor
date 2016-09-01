@@ -19,7 +19,6 @@ class Symbol : public VIRTUAL_INHERITANCE cu::RefCountObj, private cu::Uncopyabl
 {
 public:
 	virtual ~Symbol() {}
-	virtual bool Update(const RenderParams& params) { return false; }
 	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const = 0;
 	virtual sm::rect GetBounding(const Sprite* spr = NULL) const = 0;
 	

@@ -1,4 +1,5 @@
 #include "MaskSprite.h"
+#include "MaskSymbol.h"
 
 namespace s2
 {
@@ -19,8 +20,19 @@ MaskSprite* MaskSprite::Clone() const
 
 bool MaskSprite::Update(const RenderParams& params)
 {
-	// todo
-	return false;
+	bool dirty = false;
+	MaskSymbol* sym = VI_DOWNCASTING<MaskSymbol*>(m_sym);
+	if (const Sprite* base = sym->GetBase()) {
+		if (const_cast<Sprite*>(base)->Update(params)) {
+			dirty = true;
+		}
+	}
+	if (const Sprite* mask = sym->GetMask()) {
+		if (const_cast<Sprite*>(mask)->Update(params)) {
+			dirty = true;
+		}
+	}
+	return dirty;
 }
 
 }

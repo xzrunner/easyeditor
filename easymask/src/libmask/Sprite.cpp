@@ -29,7 +29,8 @@ Sprite::Sprite(Symbol* sym)
 bool Sprite::Update(const s2::RenderParams& params) 
 {
 	Symbol* sym = dynamic_cast<Symbol*>(m_sym);
-	sym->Update(params);
+	const_cast<s2::Sprite*>(sym->GetBase())->Update(params);
+	const_cast<s2::Sprite*>(sym->GetMask())->Update(params);
 	return true; 
 }
 

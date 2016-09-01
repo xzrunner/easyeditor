@@ -16,16 +16,15 @@ public:
 	 *  @interface
 	 *    Symbol
 	 */
-	virtual bool Update(const RenderParams& params);
 	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const;
 	virtual sm::rect GetBounding(const Sprite* spr = NULL) const;
 
-	const Symbol* GetSymbol(bool is_base) const { return is_base ? m_base : m_mask; }
-	void SetSymbol(const Symbol* sym, bool is_base);
+	const Sprite* GetBase() const { return m_base; }
+	const Sprite* GetMask() const { return m_mask; }
 
 protected:
-	Symbol* m_base;
-	Symbol* m_mask;
+	Sprite* m_base;
+	Sprite* m_mask;
 
 }; // MaskSymbol
 

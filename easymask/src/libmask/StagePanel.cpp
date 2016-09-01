@@ -39,7 +39,12 @@ StagePanel::~StagePanel()
 
 bool StagePanel::UpdateStage()
 {
-	m_sym->Update(s2::RenderParams());
+	if (const s2::Sprite* base = m_sym->GetBase()) {
+		const_cast<s2::Sprite*>(base)->Update(s2::RenderParams());
+	}
+	if (const s2::Sprite* mask = m_sym->GetMask()) {
+		const_cast<s2::Sprite*>(mask)->Update(s2::RenderParams());
+	}
 	return true;
 }
 
@@ -57,7 +62,12 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 	case ee::MSG_INSERT_SPRITE:
 		{
 			ee::InsertSpriteSJ::Params* p = (ee::InsertSpriteSJ::Params*)ud;
-			m_sym->SetSymbol(dynamic_cast<const ee::Symbol*>(p->spr->GetSymbol()), m_library->IsCurrBase());
+			p->spr->SetPosition(sm::vec2(0, 0));
+			if (m_library->IsCurrBase()) {
+				m_sym->SetBase(p->spr);
+			} else {
+				m_sym->SetMask(p->spr);
+			}
 		}
 		break;
 	}

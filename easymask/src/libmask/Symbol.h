@@ -14,6 +14,9 @@ public:
 
 	static ee::Symbol* Create() { return new Symbol(); }
 
+	void SetBase(s2::Sprite* base);
+	void SetMask(s2::Sprite* mask);
+
 protected:
 	virtual void LoadResources();
 
