@@ -161,7 +161,6 @@ void SelectSpritesOP::BreakUpGroup()
  		}
 
 		ee::RemoveSpriteSJ::Instance()->Remove(spr);
-		spr->RemoveReference();
 	}
 }
 
