@@ -188,7 +188,7 @@ void AnimCurr::LoadFromSym()
 				for (int i = 0, n = curr_f->sprs.size(); i < n; ++i) 
 				{
 					Sprite* src = curr_f->sprs[i];
-					Sprite* dst = old_frame.Query(src);
+					Sprite* dst = old_frame.Query(src, i);
 					if (dst) {
 						dst->AddReference();
 						*dst = *src;
@@ -216,7 +216,7 @@ void AnimCurr::LoadFromSym()
 							break;
 						}
 					}
-					Sprite* tween_spr = old_frame.Query(start_spr);
+					Sprite* tween_spr = old_frame.Query(start_spr, curr_idx);
 					if (tween_spr) {
 						tween_spr->AddReference();
 					} else {
@@ -262,8 +262,14 @@ AnimCurr::Frame::~Frame()
 }
 
 Sprite* AnimCurr::Frame::
-Query(const Sprite* spr)
+Query(const Sprite* spr, int idx)
 {
+	if (idx >= 0 && idx < sprs.size()) {
+		if (sprs[idx]->GetSymbol() == spr->GetSymbol() &&
+			sprs[idx]->GetName() == spr->GetName()) {
+			return sprs[idx];
+		}
+	}
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
 		if (sprs[i]->GetSymbol() == spr->GetSymbol() &&
 			sprs[i]->GetName() == spr->GetName()) {

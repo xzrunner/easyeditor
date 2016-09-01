@@ -39,7 +39,7 @@ private:
  		Frame& operator = (const Frame& f);
 		~Frame();
 
-		Sprite* Query(const Sprite* spr);
+		Sprite* Query(const Sprite* spr, int idx);
 
 		void Clear();
 
