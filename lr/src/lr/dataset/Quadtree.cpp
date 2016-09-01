@@ -10,6 +10,7 @@
 #include <sprite2/BoundingBox.h>
 #include <SM_Test.h>
 #include <SM_Triangulation.h>
+#include <SM_Process.h>
 
 #include <queue>
 

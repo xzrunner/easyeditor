@@ -18,6 +18,8 @@
 #include <easycomplex.h>
 #include <easyparticle3d.h>
 
+#include <SM_Calc.h>
+
 namespace lr
 {
 

@@ -8,6 +8,7 @@
 #include <sprite2/S2_RVG.h>
 #include <sprite2/BoundingBox.h>
 #include <SM_Triangulation.h>
+#include <SM_Process.h>
 
 namespace lr
 {
