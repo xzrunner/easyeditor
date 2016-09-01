@@ -55,19 +55,19 @@ void FileIO::Load(const char* filepath, Symbol* sym)
 
 	if (!value["base"].isNull()) {
 		std::string filepath = ee::FileHelper::GetAbsolutePath(dir, value["base"]["filepath"].asString());
-		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
-		static_cast<Symbol*>(sym)->SetBase(spr);
-		spr->RemoveReference();
-		sym->RemoveReference();
+		ee::Symbol* base_sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		ee::Sprite* base_spr = ee::SpriteFactory::Instance()->Create(base_sym);
+		sym->SetBase(base_spr);
+		base_spr->RemoveReference();
+		base_sym->RemoveReference();
 	}
 	if (!value["mask"].isNull()) {
 		std::string filepath = ee::FileHelper::GetAbsolutePath(dir, value["mask"]["filepath"].asString());
-		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
-		static_cast<Symbol*>(sym)->SetMask(spr);
-		spr->RemoveReference();
-		sym->RemoveReference();
+		ee::Symbol* mask_sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		ee::Sprite* mask_spr = ee::SpriteFactory::Instance()->Create(mask_sym);
+		sym->SetMask(mask_spr);
+		mask_spr->RemoveReference();
+		mask_sym->RemoveReference();
 	}
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
