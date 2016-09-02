@@ -119,9 +119,7 @@ void SelectSpritesOP::BuildGroup()
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
 		ee::Sprite* spr = sprs[i];
 		ee::RemoveSpriteSJ::Instance()->Remove(spr);
-		spr->AddReference();
 		removed.push_back(spr);
-		spr->RemoveReference();
 	}
 	ee::AtomicOP* del_op = new ee::DeleteSpriteAOP(removed);
 
@@ -223,7 +221,6 @@ void SelectSpritesOP::BreakUpComplex()
 		}
 
 		ee::RemoveSpriteSJ::Instance()->Remove(spr);
-		spr->RemoveReference();
 	}
 }
 

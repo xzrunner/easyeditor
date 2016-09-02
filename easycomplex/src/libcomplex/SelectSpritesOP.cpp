@@ -123,9 +123,6 @@ void SelectSpritesOP::GroupSelection()
 	}
 
 	ee::InsertSpriteSJ::Instance()->Insert(spr);
-	for (int i = 0, n = sprs.size(); i < n; ++i) {
-		ee::RemoveSpriteSJ::Instance()->Remove(sprs[i]);
-	}
 }
 
 void SelectSpritesOP::BreakUpSelection()
@@ -155,7 +152,6 @@ void SelectSpritesOP::BreakUpSelection()
 		}
 		
 		ee::RemoveSpriteSJ::Instance()->Remove(spr);
-		spr->RemoveReference();
 	}
 }
 
