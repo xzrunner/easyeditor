@@ -74,7 +74,7 @@ void TrailBuilder::Load(const etrail::Symbol* sym, PackTrail* trail)
 
 			PackTrail::CompImage comp;
 
-			ee::Symbol* sym = static_cast<ee::Symbol*>(t_sym.mode.A.ud);
+			ee::Symbol* sym = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(t_sym.mode.A.ud));
 			comp.node = PackNodeFactory::Instance()->Create(sym);
 
 			comp.scale_begin = t_sym.mode.A.scale_begin;

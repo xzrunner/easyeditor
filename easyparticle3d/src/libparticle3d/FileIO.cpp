@@ -60,7 +60,7 @@ void FileIO::Store(const std::string& filepath, ParticleSystem* ps,
 
 		value["components"][i]["count"] = pc->count;
 
-		ee::Symbol* sym = static_cast<ee::Symbol*>(pc->ud);
+		ee::Symbol* sym = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(pc->ud));
 		value["components"][i]["filepath"] = 
 			ee::FileHelper::GetRelativePath(dir, sym->GetFilepath());
 

@@ -75,7 +75,7 @@ Item(p3d_particle* p)
 	rotate = p->cfg.angular_spd;
 	angle = p->angle;
 
-	sym = static_cast<ee::Symbol*>(p->cfg.sym->ud)->GetFilepath();
+	sym = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(p->cfg.sym->ud))->GetFilepath();
 
 	scale_start = p->cfg.sym->scale_start;
 	scale_end = p->cfg.sym->scale_end;

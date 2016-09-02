@@ -83,7 +83,7 @@ void ComponentPanel::InitLayout()
 {
 	wxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
 
-	std::string name = static_cast<ee::Symbol*>(m_pc->ud)->GetFilepath();
+	std::string name = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(m_pc->ud))->GetFilepath();
 	name = ee::FileHelper::GetFilename(name);
 
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, name); 
@@ -110,7 +110,7 @@ void ComponentPanel::InitLayout(wxSizer* top_sizer)
 		sizer->AddSpacer(50);
 		// Icon
 		{
-			std::string filepath = static_cast<ee::Symbol*>(m_pc->ud)->GetFilepath();
+			std::string filepath = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(m_pc->ud))->GetFilepath();
 			if (ee::FileType::IsType(filepath, ee::FileType::e_image)) {
 				ee::ImagePanel* panel = new ee::ImagePanel(this, filepath, 100);
 				sizer->Add(panel);

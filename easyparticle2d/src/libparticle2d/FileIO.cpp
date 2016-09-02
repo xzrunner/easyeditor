@@ -41,7 +41,7 @@ void FileIO::Store(const std::string& filepath, ToolbarPanel* toolbar)
 
 		Json::Value cval;
 
-		ee::Symbol* sym = static_cast<ee::Symbol*>(p_symbol->ud);
+		ee::Symbol* sym = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(p_symbol->ud));
 		cval["filepath"] = ee::FileHelper::GetRelativePath(dir, sym->GetFilepath());
 
 		for (int j = 0, m = cp->m_sliders.size(); j < m; ++j) {

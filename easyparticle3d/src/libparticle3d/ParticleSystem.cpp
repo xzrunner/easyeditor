@@ -283,7 +283,7 @@ bool ParticleSystem::IsEmpty() const
 void ParticleSystem::ReloadTexture() const
 {
 	for (int i = 0; i < m_spr->et->cfg->sym_count; ++i) {
-		ee::Symbol* sym = static_cast<ee::Symbol*>(m_spr->et->cfg->syms[i].ud);
+		ee::Symbol* sym = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(m_spr->et->cfg->syms[i].ud));
 		sym->ReloadTexture();
 	}
 }

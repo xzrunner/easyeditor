@@ -137,7 +137,7 @@ void Particle2DBuilder::Load(const eparticle2d::Symbol* sym, PackParticle2D* ps)
 		comp.add_col_end = s2::Color((int)(p_symbol.add_col_end.r * 255), (int)(p_symbol.add_col_end.g * 255), 
 			(int)(p_symbol.add_col_end.b * 255), (int)(p_symbol.add_col_end.a * 255)).ToABGR();
 
-		ee::Symbol* sym = static_cast<ee::Symbol*>(p_symbol.ud);
+		ee::Symbol* sym = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(p_symbol.ud));
 		comp.node = PackNodeFactory::Instance()->Create(sym);
 
 		ps->components.push_back(comp);

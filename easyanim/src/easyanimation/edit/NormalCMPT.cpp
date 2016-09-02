@@ -208,7 +208,7 @@ void NormalCMPT::OnLoadFromList(wxCommandEvent& event)
 	int frame_idx = 1;
 	for (size_t i = 0, n = items.size(); i < n; ++i)
 	{
-		ee::Symbol* sym = static_cast<ee::Symbol*>(items[i]);
+		ee::Symbol* sym = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(items[i]));
 		KeyFrame* frame = new KeyFrame(frame_idx);
 		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
 
