@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\..\editor-external\c99;..\..\..\..\logger\src\logger"
+				AdditionalIncludeDirectories="..\..\..\..\editor-external\c99;..\..\..\..\logger\src\logger;..\..\..\..\cu\src\cu"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -105,7 +105,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\..\editor-external\c99;..\..\..\..\logger\src\logger"
+				AdditionalIncludeDirectories="..\..\..\..\editor-external\c99;..\..\..\..\logger\src\logger;..\..\..\..\cu\src\cu"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -146,87 +146,175 @@
 	</References>
 	<Files>
 		<Filter
-			Name="03.icon"
+			Name="storage"
 			>
 			<File
-				RelativePath="..\..\..\src\simp\simp_icon.c"
+				RelativePath="..\..\..\src\simp\Package.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\simp\simp_icon.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="01.picture"
-			>
-			<File
-				RelativePath="..\..\..\src\simp\simp_picture.c"
+				RelativePath="..\..\..\src\simp\Package.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\simp\simp_picture.h"
+				RelativePath="..\..\..\src\simp\Page.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\simp\Page.h"
 				>
 			</File>
 		</Filter>
 		<Filter
-			Name="02.scale9"
+			Name="alloc"
 			>
 			<File
-				RelativePath="..\..\..\src\simp\simp_scale9.c"
+				RelativePath="..\..\..\src\simp\Allocator.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\simp\simp_scale9.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="05.label"
-			>
-			<File
-				RelativePath="..\..\..\src\simp\simp_label.c"
+				RelativePath="..\..\..\src\simp\Allocator.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\simp\simp_label.h"
+				RelativePath="..\..\..\src\simp\StaticAlloc.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\simp\StaticAlloc.h"
 				>
 			</File>
 		</Filter>
 		<Filter
-			Name="04.texture"
+			Name="import"
 			>
 			<File
-				RelativePath="..\..\..\src\simp\simp_texture.c"
+				RelativePath="..\..\..\src\simp\ImportStream.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\simp\simp_texture.h"
+				RelativePath="..\..\..\src\simp\ImportStream.h"
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="node"
+			>
+			<File
+				RelativePath="..\..\..\src\simp\NodeTrans.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\simp\NodeTrans.h"
+				>
+			</File>
+			<Filter
+				Name="01.picture"
+				>
+				<File
+					RelativePath="..\..\..\src\simp\NodePicture.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\simp\NodePicture.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="07.animation"
+				>
+			</Filter>
+			<Filter
+				Name="02.scale9"
+				>
+				<File
+					RelativePath="..\..\..\src\simp\NodeScale9.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\simp\NodeScale9.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\simp\NodeScale9Spr.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\simp\NodeScale9Spr.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="03.icon"
+				>
+				<File
+					RelativePath="..\..\..\src\simp\NodeIcon.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\simp\NodeIcon.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\simp\NodeIconSpr.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\simp\NodeIconSpr.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="04.texture"
+				>
+				<File
+					RelativePath="..\..\..\src\simp\NodeTexture.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\simp\NodeTexture.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="05.label"
+				>
+				<File
+					RelativePath="..\..\..\src\simp\NodeLabel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\simp\NodeLabel.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="06.complex"
+				>
+				<File
+					RelativePath="..\..\..\src\simp\NodeComplex.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\simp\NodeComplex.h"
+					>
+				</File>
+			</Filter>
+		</Filter>
 		<File
-			RelativePath="..\..\..\src\simp\simp_alloc.c"
+			RelativePath="..\..\..\src\simp\NodeFactory.cpp"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\simp\simp_alloc.h"
+			RelativePath="..\..\..\src\simp\NodeFactory.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\simp\simp_import.c"
+			RelativePath="..\..\..\src\simp\simp_define.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\simp\simp_import.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\simp\simp_pack.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\simp\simp_pack.h"
+			RelativePath="..\..\..\src\simp\simp_types.h"
 			>
 		</File>
 	</Files>
