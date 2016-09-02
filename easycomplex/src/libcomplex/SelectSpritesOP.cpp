@@ -13,6 +13,7 @@
 #include <ee/sprite_msg.h>
 #include <ee/CrossGuides.h>
 #include <ee/panel_msg.h>
+#include <ee/FilepathDialog.h>
 
 namespace ecomplex
 {
@@ -112,7 +113,14 @@ void SelectSpritesOP::GroupSelection()
 	filepath += "\\_tmp_";
 	filepath += ee::StringHelper::ToString(wxDateTime::Now().GetTicks());
 	filepath += "_" + ee::FileType::GetTag(ee::FileType::e_complex) + ".json";
-	dynamic_cast<Symbol*>(spr->GetSymbol())->SetFilepath(filepath);
+	Symbol* sym = dynamic_cast<Symbol*>(spr->GetSymbol());
+	sym->SetFilepath(filepath);
+
+	ee::FilepathDialog dlg(m_wnd, sym->GetFilepath());
+	if (dlg.ShowModal() == wxID_OK) {
+		sym->SetFilepath(dlg.GetFilepath());
+		dlg.SaveLastDir();
+	}
 
 	ee::InsertSpriteSJ::Instance()->Insert(spr);
 	for (int i = 0, n = sprs.size(); i < n; ++i) {

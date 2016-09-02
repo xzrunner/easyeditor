@@ -18,6 +18,7 @@
 #include <ee/TranslateSpriteAOP.h>
 #include <ee/StringHelper.h>
 #include <ee/FileType.h>
+#include <ee/FilepathDialog.h>
 
 #include <easycomplex.h>
 
@@ -182,6 +183,12 @@ void SelectSpritesOP::BuildComplex()
 	filepath += ee::StringHelper::ToString(wxDateTime::Now().GetTicks());
 	filepath += "_" + ee::FileType::GetTag(ee::FileType::e_complex) + ".json";
 	sym->SetFilepath(filepath);
+
+	ee::FilepathDialog dlg(m_wnd, sym->GetFilepath());
+	if (dlg.ShowModal() == wxID_OK) {
+		sym->SetFilepath(dlg.GetFilepath());
+		dlg.SaveLastDir();
+	}
 
 	ee::InsertSpriteSJ::Instance()->Insert(spr);
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
