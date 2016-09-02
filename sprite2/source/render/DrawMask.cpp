@@ -2,6 +2,7 @@
 #include "RenderCtxStack.h"
 #include "RenderParams.h"
 #include "DrawNode.h"
+#include "S2_Sprite.h"
 #include "S2_Symbol.h"
 #include "RenderScissor.h"
 
@@ -12,7 +13,7 @@
 namespace s2
 {
 
-void DrawMask::Draw(const Symbol* base, const Symbol* mask, const RenderParams& params)
+void DrawMask::Draw(const Sprite* base, const Sprite* mask, const RenderParams& params)
 {
 	sl::ShaderMgr::Instance()->GetShader()->Commit();
 
@@ -31,7 +32,7 @@ void DrawMask::Draw(const Symbol* base, const Symbol* mask, const RenderParams& 
 	DrawMashFromFbo(mask, params.mt);
 }
 
-void DrawMask::DrawBaseToFbo0(const Symbol* base, const RenderColor& rc)
+void DrawMask::DrawBaseToFbo0(const Sprite* base, const RenderColor& rc)
 {
 	dtexf_t0_bind();
 	dtexf_t0_clear(0, -2, 2, 0);
@@ -50,7 +51,7 @@ void DrawMask::DrawBaseToFbo0(const Symbol* base, const RenderColor& rc)
 	dtexf_t0_unbind();
 }
 
-void DrawMask::DrawMaskToFbo1(const Symbol* mask)
+void DrawMask::DrawMaskToFbo1(const Sprite* mask)
 {
 	dtexf_t1_bind();
 	dtexf_t1_clear(0, -2, 2, 0);
@@ -68,10 +69,10 @@ void DrawMask::DrawMaskToFbo1(const Symbol* mask)
 	dtexf_t1_unbind();
 }
 
-void DrawMask::DrawMashFromFbo(const Symbol* mask, const sm::mat4& mt)
+void DrawMask::DrawMashFromFbo(const Sprite* mask, const sm::mat4& mt)
 {
 	sm::vec2 vertices[4];
-	sm::rect r = mask->GetBounding();
+	sm::rect r = mask->GetSymbol()->GetBounding();
 	vertices[0] = sm::vec2(r.xmin, r.ymin);
 	vertices[1] = sm::vec2(r.xmin, r.ymax);
 	vertices[2] = sm::vec2(r.xmax, r.ymax);

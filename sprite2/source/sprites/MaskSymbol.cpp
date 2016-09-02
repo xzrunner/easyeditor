@@ -32,7 +32,7 @@ void MaskSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 		p.color = spr->Color() * params.color;
 	}
 	if (m_base && m_mask) {
-		DrawMask::Draw(m_base->GetSymbol(), m_mask->GetSymbol(), p);
+		DrawMask::Draw(m_base, m_mask, p);
 	} else {
 		if (m_base) {
 			DrawNode::Draw(m_base, p);
