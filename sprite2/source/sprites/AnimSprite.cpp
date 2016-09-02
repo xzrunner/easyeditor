@@ -31,6 +31,11 @@ bool AnimSprite::Update(const RenderParams& params)
 	return m_curr.Update(params, m_loop, m_interval, m_fps);
 }
 
+Sprite* AnimSprite::FetchChild(const std::string& name) const
+{
+	return m_curr.FetchChild(name);
+}
+
 void AnimSprite::Start()
 {
 	m_curr.Start();

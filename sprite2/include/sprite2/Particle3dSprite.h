@@ -23,6 +23,11 @@ public:
 	 *    Cloneable
 	 */
 	virtual Particle3dSprite* Clone() const;
+
+	/**
+	 *  @interface
+	 *    Sprite
+	 */
 	virtual bool Update(const RenderParams& params);
 
 	void Draw(const s2::RenderParams& params) const;

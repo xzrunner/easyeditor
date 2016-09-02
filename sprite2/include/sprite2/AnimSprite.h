@@ -20,7 +20,13 @@ public:
 	 *    Cloneable
 	 */
 	virtual AnimSprite* Clone() const;
+
+	/**
+	 *  @interface
+	 *    Sprite
+	 */
 	virtual bool Update(const RenderParams& params);
+	virtual Sprite* FetchChild(const std::string& name) const;
 
 	void Start();
 

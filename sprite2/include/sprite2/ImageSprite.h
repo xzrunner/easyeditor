@@ -14,15 +14,15 @@ public:
 
 	/**
 	 *  @interface
-	 *    Sprite
-	 */
-	virtual bool Update(const RenderParams& params);	
-
-	/**
-	 *  @interface
 	 *    Cloneable
 	 */
 	virtual ImageSprite* Clone() const;
+
+	/**
+	 *  @interface
+	 *    Sprite
+	 */
+	virtual bool Update(const RenderParams& params);	
 
 	VI_DUMMY_FUNC
 

@@ -23,6 +23,11 @@ public:
 	 *    Cloneable
 	 */
 	virtual TrailSprite* Clone() const;
+
+	/**
+	 *  @interface
+	 *    Sprite
+	 */
 	virtual bool Update(const RenderParams& params);
 
 	void Draw(const RenderParams& params) const;

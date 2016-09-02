@@ -35,4 +35,15 @@ bool MaskSprite::Update(const RenderParams& params)
 	return dirty;
 }
 
+Sprite* MaskSprite::FetchChild(const std::string& name) const
+{
+	if (name == "base") {
+		return const_cast<Sprite*>(VI_DOWNCASTING<MaskSymbol*>(m_sym)->GetBase());
+	} else if (name == "mask") {
+		return const_cast<Sprite*>(VI_DOWNCASTING<MaskSymbol*>(m_sym)->GetMask());
+	} else {
+		return NULL;
+	}
+}
+
 }

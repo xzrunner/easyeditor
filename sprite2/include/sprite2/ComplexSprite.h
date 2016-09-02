@@ -23,6 +23,7 @@ public:
 	 *    Sprite
 	 */
 	virtual bool Update(const RenderParams& params);
+	virtual Sprite* FetchChild(const std::string& name) const;
 
 	void SetAction(const std::string& name);
 	int GetAction() const { return m_action; }

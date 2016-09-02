@@ -117,6 +117,19 @@ void AnimCurr::Draw(const RenderParams& params) const
 	}
 }
 
+Sprite* AnimCurr::FetchChild(const std::string& name) const
+{
+	for (int i = 0, n = m_layers.size(); i < n; ++i) {
+		const Layer& layer = m_layers[i];
+		for (int j = 0, m = layer.frame.sprs.size(); j < m; ++j) {
+			if (layer.frame.sprs[j]->GetName() == name) {
+				return layer.frame.sprs[j];
+			}
+		}
+	}
+	return NULL;
+}
+
 void AnimCurr::Start()
 {
 	m_start_time = m_curr_time = Animation::Instance()->GetTime();

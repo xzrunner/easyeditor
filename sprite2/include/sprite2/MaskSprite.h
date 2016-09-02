@@ -17,7 +17,13 @@ public:
 	 *    Cloneable
 	 */
 	virtual MaskSprite* Clone() const;
+
+	/**
+	 *  @interface
+	 *    Sprite
+	 */
 	virtual bool Update(const RenderParams& params);
+	virtual Sprite* FetchChild(const std::string& name) const;
 
 	VI_DUMMY_FUNC
 

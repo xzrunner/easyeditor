@@ -23,6 +23,11 @@ public:
 	 *    Cloneable
 	 */
 	virtual MeshSprite* Clone() const;
+
+	/**
+	 *  @interface
+	 *    Sprite
+	 */
 	virtual bool Update(const RenderParams& params) { return true; }
 
 	void SetTween(MeshSprite* begin, MeshSprite* end, float process);

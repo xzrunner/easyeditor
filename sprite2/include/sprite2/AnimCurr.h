@@ -23,6 +23,8 @@ public:
 		float interval = 0, int fps = 30);
 	void Draw(const RenderParams& params) const;
 
+	Sprite* FetchChild(const std::string& name) const;
+
 	void Start();
 
 	void Clear();
