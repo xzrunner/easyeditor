@@ -73,6 +73,9 @@ void LibraryPanel::LoadFromFile(const Json::Value& value, const std::string& dir
 			std::string filepath = ee::FileHelper::GetAbsolutePath(dir, item_path);
 			try {
 				ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+				if (!sym) {
+					throw ee::Exception("Create symbol %s fail!", item_path.c_str());					
+				}
 				sym->RefreshThumbnail(sym->GetFilepath());
 				list->Insert(sym);
 				sym->RemoveReference();
