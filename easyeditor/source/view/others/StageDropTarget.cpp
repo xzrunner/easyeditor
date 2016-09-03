@@ -6,6 +6,8 @@
 #include "Sprite.h"
 #include "EditPanelImpl.h"
 #include "sprite_msg.h"
+#include "panel_msg.h"
+#include "InsertSpriteAOP.h"
 
 namespace ee
 {
@@ -46,6 +48,7 @@ void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 			spr->Translate(pos);
 			InsertSpriteSJ::Instance()->Insert(spr);
 		}
+		EditAddRecordSJ::Instance()->Add(new InsertSpriteAOP(spr));
 		spr->RemoveReference();
 	}
 }
@@ -68,6 +71,7 @@ void StageDropTarget::OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& fil
 			Sprite* spr = SpriteFactory::Instance()->Create(sym);
 			spr->Translate(pos);
 			InsertSpriteSJ::Instance()->Insert(spr);
+			EditAddRecordSJ::Instance()->Add(new InsertSpriteAOP(spr));
 			spr->RemoveReference();
 		}
 		sym->RemoveReference();

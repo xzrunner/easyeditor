@@ -9,6 +9,7 @@
 #include "panel_msg.h"
 #include "SpriteSelection.h"
 #include "FetchAllVisitor.h"
+#include "DeleteSpriteAOP.h"
 
 #include <algorithm>
 
@@ -420,6 +421,11 @@ void ViewlistList::RemoveSelected()
 	} else {
 		selected = GetSelection();
 	}
+
+	// add to history
+	std::vector<Sprite*> sprs;
+	sprs.push_back(m_sprs[selected]);
+	EditAddRecordSJ::Instance()->Add(new DeleteSpriteAOP(sprs));
 
 	VerticalImageList::Remove(selected);
 

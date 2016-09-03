@@ -11,6 +11,7 @@
 #include "TranslateSpriteAOP.h"
 #include "ScaleSpriteAOP.h"
 #include "ShearSpriteAOP.h"
+#include "ReorderSpriteAOP.h"
 #include "panel_msg.h"
 #include "RGBColorSettingDlg.h"
 #include "HSLColorSettingDlg.h"
@@ -588,6 +589,8 @@ void ArrangeSpriteImpl::UpOneLayer()
 		ReorderSpriteSJ::Instance()->Reorder(selected[i], true);
 	}
 
+	EditAddRecordSJ::Instance()->Add(new ReorderSpriteAOP(selected, true));
+
 	ClearSpriteSelectionSJ::Instance()->Clear();
 	for (int i = selected.size() - 1; i >= 0; --i) {
 		SelectSpriteSJ::Instance()->Select(selected[i], false);
@@ -603,6 +606,8 @@ void ArrangeSpriteImpl::DownOneLayer()
 	for (int i = 0, n = selected.size(); i < n; ++i) {
 		ReorderSpriteSJ::Instance()->Reorder(selected[i], false);
 	}
+
+	EditAddRecordSJ::Instance()->Add(new ReorderSpriteAOP(selected, false));
 
 	ClearSpriteSelectionSJ::Instance()->Clear();
 	for (int i = 0, n = selected.size(); i < n; ++i) {

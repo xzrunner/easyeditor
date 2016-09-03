@@ -269,6 +269,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\source\edit\record\ReorderSpriteAOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\ReorderSpriteAOP.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\source\edit\record\RotateSpriteAOP.cpp"
 					>
 				</File>

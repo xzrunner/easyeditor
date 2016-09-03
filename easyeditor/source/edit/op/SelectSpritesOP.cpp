@@ -12,6 +12,7 @@
 #include "panel_msg.h"
 #include "FetchAllVisitor.h"
 #include "PointMultiQueryVisitor.h"
+#include "InsertSpriteAOP.h"
 
 #include <sprite2/S2_RVG.h>
 
@@ -354,7 +355,8 @@ void SelectSpritesOP::CopyFromSelection()
 			sym->RemoveReference();
 			CopySprFromClipboard(spr, sval);
 			InsertSpriteSJ::Instance()->Insert(spr);
-			last_spr = spr;
+			EditAddRecordSJ::Instance()->Add(new InsertSpriteAOP(spr));
+			cu::RefCountObjAssign(last_spr, spr);
 		}
 		sval = value["sprite"][i++];
 	}
@@ -365,6 +367,10 @@ void SelectSpritesOP::CopyFromSelection()
 
 	bool add = m_stage->GetKeyState(WXK_CONTROL);
 	SelectSpriteSJ::Instance()->Select(last_spr, !add);
+
+	if (last_spr) {
+		last_spr->RemoveReference();
+	}
 
 	wxTheClipboard->Close();
 }
