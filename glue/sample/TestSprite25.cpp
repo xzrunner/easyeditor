@@ -6,6 +6,7 @@
 #include <sprite2/DrawNode.h>
 #include <glue/ImageSymbol.h>
 #include <glue/RenderContext.h>
+#include <glue/SymbolFactory.h>
 
 namespace test
 {
@@ -18,7 +19,7 @@ void TestSprite25::Init()
 	sl_mgr->CreateShader(sl::SPRITE3, new sl::Sprite3Shader(sl_rc));
 //	sl_mgr->CreateShader(sl::SHAPE, new sl::Shape2Shader(sl_rc));
 
-	s2::Symbol* sym = new glue::ImageSymbol("coin_00.png");
+	s2::Symbol* sym = glue::SymbolFactory::Instance()->Create("coin_00.png");
 	{
 		s2::Sprite* spr = new s2::ImageSprite(sym);
 		spr->SetPosition(sm::vec2(0, 0));

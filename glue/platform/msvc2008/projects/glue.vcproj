@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\include\glue;..\..\..\..\particle\src;..\..\..\..\dtex\src;..\..\..\..\ejoy2d\src;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\model3\src\model3;..\..\..\..\camera25\src\camera25;..\..\..\..\sm\src\sm;..\..\..\..\ds\src\ds;..\..\..\..\cu\src\cu;..\..\..\..\sprite2\include;&quot;..\..\..\..\editor-external\cjson\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\libjpeg\include&quot;;&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\assimp\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\include\glue;..\..\..\..\particle\src;..\..\..\..\dtex\src;..\..\..\..\ejoy2d\src;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\model3\src\model3;..\..\..\..\camera25\src\camera25;..\..\..\..\sm\src\sm;..\..\..\..\ds\src\ds;..\..\..\..\cu\src\cu;..\..\..\..\sprite2\include;&quot;..\..\..\..\editor-external\cjson\include&quot;;..\..\..\..\editor-external\json\include;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\libjpeg\include&quot;;&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\assimp\include&quot;;&quot;..\..\..\..\editor-external\boost\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -106,7 +106,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\include\glue;..\..\..\..\particle\src;..\..\..\..\dtex\src;..\..\..\..\ejoy2d\src;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\model3\src\model3;..\..\..\..\camera25\src\camera25;..\..\..\..\sm\src\sm;..\..\..\..\ds\src\ds;..\..\..\..\cu\src\cu;..\..\..\..\sprite2\include;&quot;..\..\..\..\editor-external\cjson\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\libjpeg\include&quot;;&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\assimp\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\include\glue;..\..\..\..\particle\src;..\..\..\..\dtex\src;..\..\..\..\ejoy2d\src;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\model3\src\model3;..\..\..\..\camera25\src\camera25;..\..\..\..\sm\src\sm;..\..\..\..\ds\src\ds;..\..\..\..\cu\src\cu;..\..\..\..\sprite2\include;&quot;..\..\..\..\editor-external\cjson\include&quot;;..\..\..\..\editor-external\json\include;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\libjpeg\include&quot;;&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\assimp\include&quot;;&quot;..\..\..\..\editor-external\boost\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -156,7 +156,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\include\RenderContext.h"
+				RelativePath="..\..\..\include\glue\RenderContext.h"
 				>
 			</File>
 			<File
@@ -164,14 +164,14 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\include\ScreenCache.h"
+				RelativePath="..\..\..\include\glue\ScreenCache.h"
 				>
 			</File>
 			<Filter
 				Name="camera"
 				>
 				<File
-					RelativePath="..\..\..\include\Camera.h"
+					RelativePath="..\..\..\include\glue\Camera.h"
 					>
 				</File>
 				<File
@@ -179,7 +179,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\include\OrthoCamera.h"
+					RelativePath="..\..\..\include\glue\OrthoCamera.h"
 					>
 				</File>
 				<File
@@ -187,7 +187,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\include\Pseudo3DCamera.h"
+					RelativePath="..\..\..\include\glue\Pseudo3DCamera.h"
 					>
 				</File>
 			</Filter>
@@ -196,15 +196,15 @@
 			Name="dataset"
 			>
 			<File
-				RelativePath="..\..\..\include\Resource.h"
+				RelativePath="..\..\..\include\glue\Resource.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\include\ResourceManager.h"
+				RelativePath="..\..\..\include\glue\ResourceManager.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\include\ResourceManager.inl"
+				RelativePath="..\..\..\include\glue\ResourceManager.inl"
 				>
 			</File>
 			<Filter
@@ -215,7 +215,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\include\Image.h"
+					RelativePath="..\..\..\include\glue\Image.h"
 					>
 				</File>
 				<File
@@ -223,7 +223,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\include\JpegLoader.h"
+					RelativePath="..\..\..\include\glue\JpegLoader.h"
 					>
 				</File>
 				<File
@@ -231,7 +231,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\include\PngLoader.h"
+					RelativePath="..\..\..\include\glue\PngLoader.h"
 					>
 				</File>
 				<File
@@ -239,7 +239,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\include\Texture.h"
+					RelativePath="..\..\..\include\glue\Texture.h"
 					>
 				</File>
 			</Filter>
@@ -252,7 +252,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\include\AssimpHelper.h"
+				RelativePath="..\..\..\include\glue\AssimpHelper.h"
 				>
 			</File>
 			<File
@@ -260,7 +260,15 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\include\Exception.h"
+				RelativePath="..\..\..\include\glue\Exception.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\source\utility\FilepathHelper.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\glue\FilepathHelper.h"
 				>
 			</File>
 			<File
@@ -268,7 +276,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\include\StringHelper.h"
+				RelativePath="..\..\..\include\glue\StringHelper.h"
 				>
 			</File>
 		</Filter>
@@ -280,7 +288,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\include\SymbolFactory.h"
+				RelativePath="..\..\..\include\glue\SymbolFactory.h"
 				>
 			</File>
 			<Filter
@@ -291,7 +299,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\include\ImageSymbol.h"
+					RelativePath="..\..\..\include\glue\ImageSymbol.h"
 					>
 				</File>
 				<File
@@ -299,7 +307,27 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\include\ImageSymbolOld.h"
+					RelativePath="..\..\..\include\glue\ImageSymbolOld.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="02.scale9"
+				>
+				<File
+					RelativePath="..\..\..\source\sprite\Scale9Sprite.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\glue\Scale9Sprite.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\glue\Scale9Symbol.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\glue\Scale9Symbol.h"
 					>
 				</File>
 			</Filter>

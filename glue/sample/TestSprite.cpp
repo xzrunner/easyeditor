@@ -4,6 +4,7 @@
 #include <sprite2/DrawNode.h>
 #include <glue/RenderContext.h>
 #include <glue/ImageSymbol.h>
+#include <glue/SymbolFactory.h>
 #include <shaderlab.h>
 
 namespace test
@@ -17,7 +18,7 @@ void TestSprite::Init()
 	sl_mgr->CreateShader(sl::SPRITE2, new sl::Sprite2Shader(sl_rc));
 	glue::RenderContext::Instance()->SetCamera(0, 0, 1, 1);
 
-	s2::Symbol* sym = new glue::ImageSymbol("coin_00.png");
+	s2::Symbol* sym = glue::SymbolFactory::Instance()->Create("coin_00.png");
 	{
 		s2::Sprite* spr = new s2::ImageSprite(sym);
 		spr->SetPosition(sm::vec2(0, 0));

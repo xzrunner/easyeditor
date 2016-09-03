@@ -1,5 +1,5 @@
-#ifndef _GLUS_STRING_HELPER_H_
-#define _GLUS_STRING_HELPER_H_
+#ifndef _GLUE_STRING_HELPER_H_
+#define _GLUE_STRING_HELPER_H_
 
 #include <vector>
 #include <sstream>
@@ -63,4 +63,4 @@ public:
 
 }
 
-#endif // _GLUS_STRING_HELPER_H_
+#endif // _GLUE_STRING_HELPER_H_
