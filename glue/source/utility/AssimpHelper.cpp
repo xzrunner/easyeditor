@@ -1,5 +1,5 @@
 #include "AssimpHelper.h"
-#include "dataset/Texture.h"
+#include "Texture.h"
 
 #include <assimp/Importer.hpp>      // C++ importer interface
 #include <assimp/scene.h>           // Output data structure

@@ -1,6 +1,5 @@
 #include "PngLoader.h"
-
-#include "utility/Exception.h"
+#include "Exception.h"
 
 #include <libpng/png.h>
 #include <assert.h>

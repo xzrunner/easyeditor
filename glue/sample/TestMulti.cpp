@@ -4,6 +4,8 @@
 #include <shaderlab.h>
 #include <sprite2/ImageSprite.h>
 #include <sprite2/DrawNode.h>
+#include <glue/RenderContext.h>
+#include <glue/ImageSymbol.h>
 
 namespace test
 {

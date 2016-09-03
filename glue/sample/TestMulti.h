@@ -5,7 +5,7 @@
 
 #include <vector>
 
-#include <glue.h>
+namespace s2 { class Sprite; }
 
 namespace test
 {

@@ -1,21 +1,20 @@
 #ifndef _TEST_MAIN_
 #define _TEST_MAIN_
 
-#include <shaderlab.h>
-
-#include <gl/glew.h>
-#include <gl/freeglut.h>
-
-#include <glue.h>
-
-#include <iostream>
-
 #include "TestShape.h"
 #include "TestSprite.h"
 #include "TestMulti.h"
 #include "TestSprite25.h"
 #include "TestModel3.h"
 #include "TestFilter.h"
+
+#include <shaderlab.h>
+#include <glue/RenderContext.h>
+
+#include <gl/glew.h>
+#include <gl/freeglut.h>
+
+#include <iostream>
 
 //test::TestTask* task = new test::TestShape;
 test::TestTask* task = new test::TestSprite;

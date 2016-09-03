@@ -3,9 +3,9 @@
 
 #include "TestTask.h"
 
-#include <glue.h>
-
 #include <vector>
+
+namespace s2 { class Sprite; }
 
 namespace test
 {

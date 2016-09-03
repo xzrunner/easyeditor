@@ -1,10 +1,9 @@
 #include "Image.h"
 #include "PngLoader.h"
 #include "JpegLoader.h"
-
-#include "render/RenderContext.h"
-#include "utility/StringHelper.h"
-#include "utility/Exception.h"
+#include "RenderContext.h"
+#include "StringHelper.h"
+#include "Exception.h"
 
 namespace glue
 {

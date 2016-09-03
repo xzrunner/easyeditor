@@ -1,8 +1,9 @@
 #include "TestShape.h"
 
-#include <glue.h>
-#include <rvg.h>
 #include <shaderlab.h>
+#include <rvg.h>
+
+#include <glue/RenderContext.h>
 
 namespace test
 {
