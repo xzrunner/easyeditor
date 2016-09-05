@@ -66,24 +66,22 @@ void SpriteIO::StoreGeometry(Json::Value& val)
 {
 	glue::SpriteIO::StoreGeometry(val);
 
-	sm::vec2 scale = scale;
-	sm::bvec2 mirror = mirror;
-	if (mirror.x) {
-		scale.x = -scale.x;
+	if (m_mirror.x) {
+		m_scale.x = -m_scale.x;
 	}
-	if (mirror.y) {
-		scale.y = -scale.y;
+	if (m_mirror.y) {
+		m_scale.y = -m_scale.y;
 	}
-	if (!m_compress || scale != sm::vec2(1, 1)) {
-		val["x scale"] = scale.x;
-		val["y scale"] = scale.y;
+	if (!m_compress || m_scale != sm::vec2(1, 1)) {
+		val["x scale"] = m_scale.x;
+		val["y scale"] = m_scale.y;
 	}
 
-	if (!m_compress || mirror.x) {
-		val["x mirror"] = mirror.x;
+	if (!m_compress || m_mirror.x) {
+		val["x mirror"] = m_mirror.x;
 	}
-	if (!m_compress || mirror.y) {
-		val["y mirror"] = mirror.y;
+	if (!m_compress || m_mirror.y) {
+		val["y mirror"] = m_mirror.y;
 	}
 
 	if (!m_compress || m_perspective != sm::vec2(0, 0)) {

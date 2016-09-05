@@ -150,10 +150,9 @@ void SpriteIO::StoreGeometry(Json::Value& val)
 		val["angle"] = m_angle;
 	}
 
-	sm::vec2 scale = scale;
-	if (!m_compress || scale != sm::vec2(1, 1)) {
-		val["x scale"] = scale.x;
-		val["y scale"] = scale.y;
+	if (!m_compress || m_scale != sm::vec2(1, 1)) {
+		val["x scale"] = m_scale.x;
+		val["y scale"] = m_scale.y;
 	}
 
 	if (!m_compress || m_shear != sm::vec2(0, 0)) {
