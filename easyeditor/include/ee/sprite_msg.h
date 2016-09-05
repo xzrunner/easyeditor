@@ -35,6 +35,13 @@ public:
 	SUBJECT_DECLARATION(QuerySelectedSpriteLayerSJ)
 }; // QuerySelectedSpriteLayerSJ
 
+class QuerySelectedSprsSJ : public Subject
+{
+public:
+	void Query(std::vector<ee::Sprite*>& sprs);
+	SUBJECT_DECLARATION(QuerySelectedSprsSJ)
+}; // QuerySelectedSprsSJ
+
 class RemoveSpriteSJ : public Subject
 {
 public:

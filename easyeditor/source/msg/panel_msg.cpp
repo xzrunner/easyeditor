@@ -58,6 +58,12 @@ void EditUndoSJ::Undo()
 	Notify(NULL);
 }
 
+SUBJECT_DEFINITION(EditRedoTopSJ, MSG_EDIT_REDO_TOP)
+void EditRedoTopSJ::RedoTop()
+{
+	Notify(NULL);
+}
+
 SUBJECT_DEFINITION(GetKeyStateSJ, MSG_GET_KEY_STATE)
 bool GetKeyStateSJ::Query(int key)
 {

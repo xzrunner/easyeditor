@@ -26,6 +26,7 @@ public:
 
 	Type Undo();
 	Type Redo();
+	Type RedoTop();
 	void Insert(AtomicOP* op);
 
 	void OnSave();

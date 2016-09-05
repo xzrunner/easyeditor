@@ -153,6 +153,8 @@ void EditPanelImpl::OnKeyDown(wxKeyEvent& event)
 		Undo();
 	} else if (GetKeyState(WXK_CONTROL) && key_code == 'Y') {
 		Redo();
+	} else if (!GetKeyState(WXK_CONTROL) && !GetKeyState(WXK_SHIFT) && !GetKeyState(WXK_ALT) && key_code == 'G') {
+		RedoTop();
 	}
 
 	switch (key_code) {
@@ -225,25 +227,19 @@ void EditPanelImpl::OnMouseWheelRotation(int x, int y, int direction)
 void EditPanelImpl::Undo()
 {
 	HistoryList::Type type = m_history_list.Undo();
-	if (type != HistoryList::NO_CHANGE) {
-		SetCanvasDirtySJ::Instance()->SetDirty();
-		if (type == HistoryList::DIRTY)
-			SetWndDirty(true);
-		else
-			SetWndDirty(false);
-	}
+	UpdateWndState(type);
 }
 
 void EditPanelImpl::Redo()
 {
 	HistoryList::Type type = m_history_list.Redo();
-	if (type != HistoryList::NO_CHANGE) {
-		SetCanvasDirtySJ::Instance()->SetDirty();
-		if (type == HistoryList::DIRTY)
-			SetWndDirty(true);
-		else
-			SetWndDirty(false);
-	}
+	UpdateWndState(type);
+}
+
+void EditPanelImpl::RedoTop()
+{
+	HistoryList::Type type = m_history_list.RedoTop();
+	UpdateWndState(type);	
 }
 
 void EditPanelImpl::SaveOpRecordList(const std::string& filepath, const std::vector<Sprite*>& sprs)
@@ -368,6 +364,9 @@ void EditPanelImpl::OnNotify(int sj_id, void* ud)
 	case MSG_EDIT_REDO:
 		Redo();
 		break;
+	case MSG_EDIT_REDO_TOP:
+		RedoTop();
+		break;
 	case MSG_EDIT_ADD_RECORD:
 		AddOpRecord((AtomicOP*)ud);
 		break;
@@ -401,6 +400,7 @@ void EditPanelImpl::InitSubjects()
 
 	RegistSubject(EditUndoSJ::Instance());
 	RegistSubject(EditRedoSJ::Instance());
+	RegistSubject(EditRedoTopSJ::Instance());
 	RegistSubject(EditAddRecordSJ::Instance());
 	RegistSubject(GetKeyStateSJ::Instance());	
 	RegistSubject(SetWndDirtySJ::Instance());
@@ -428,6 +428,19 @@ void EditPanelImpl::SetWndDirty(bool dirty)
 		title = title.substr(0, title.size() - 2);
 		m_frame->SetTitle(title);
 	}
+}
+
+void EditPanelImpl::UpdateWndState(HistoryList::Type type)
+{
+	if (type == HistoryList::NO_CHANGE) {
+		return;
+	}
+
+	SetCanvasDirtySJ::Instance()->SetDirty();
+	if (type == HistoryList::DIRTY)
+		SetWndDirty(true);
+	else
+		SetWndDirty(false);
 }
 
 }

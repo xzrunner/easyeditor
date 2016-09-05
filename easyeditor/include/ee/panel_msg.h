@@ -69,6 +69,13 @@ public:
 	SUBJECT_DECLARATION(EditUndoSJ)
 }; // EditUndoSJ
 
+class EditRedoTopSJ : public Subject
+{
+public:
+	void RedoTop();
+	SUBJECT_DECLARATION(EditRedoTopSJ)
+}; // EditRedoTopSJ
+
 class GetKeyStateSJ : public Subject
 {
 public:

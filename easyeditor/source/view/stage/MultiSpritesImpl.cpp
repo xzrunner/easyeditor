@@ -19,6 +19,7 @@ MultiSpritesImpl::MultiSpritesImpl(EditPanelImpl* stage)
 	RegistSubject(RemoveSpriteSJ::Instance());
 	RegistSubject(ClearSpriteSJ::Instance());
 	RegistSubject(ClearSpriteSelectionSJ::Instance());
+	RegistSubject(QuerySelectedSprsSJ::Instance());
 }
 
 MultiSpritesImpl::~MultiSpritesImpl()
@@ -83,6 +84,12 @@ void MultiSpritesImpl::OnNotify(int sj_id, void* ud)
 		break;
 	case MSG_CLEAR_SPRITE_SELECTION:
 		m_sprite_selection->Clear();
+		break;
+	case MSG_QUERY_SELECTED_SPRS:
+		{
+			std::vector<Sprite*>& sprs = *(std::vector<Sprite*>*)ud;
+			m_sprite_selection->Traverse(FetchAllVisitor<Sprite>(sprs));
+		}
 		break;
 	}
 }

@@ -36,6 +36,14 @@ int QuerySelectedSpriteLayerSJ::Query()
 	return layer;
 }
 
+SUBJECT_DEFINITION(QuerySelectedSprsSJ, MSG_QUERY_SELECTED_SPRS)
+void QuerySelectedSprsSJ::Query(std::vector<ee::Sprite*>& sprs)
+{
+	std::vector<ee::Sprite*> sprs_;
+	Notify(&sprs_);
+	copy(sprs_.begin(), sprs_.end(), back_inserter(sprs));
+}
+
 SUBJECT_DEFINITION(RemoveSpriteSJ, MSG_REMOVE_SPRITE)
 void RemoveSpriteSJ::Remove(Sprite* spr, Observer* except)
 {

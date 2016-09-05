@@ -124,6 +124,8 @@ void KeysContentWidget::OnKeyDown(wxKeyEvent& event)
 		ee::EditUndoSJ::Instance()->Undo();
 	} else if (m_keys_state.GetKeyState(WXK_CONTROL) && key_code == 'Y') {
 		ee::EditRedoSJ::Instance()->Redo();
+	} else if (key_code == 'G') {
+		ee::EditRedoTopSJ::Instance()->RedoTop();
 	}
 }
 

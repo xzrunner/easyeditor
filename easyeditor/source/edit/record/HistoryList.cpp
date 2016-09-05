@@ -1,6 +1,7 @@
 #include "HistoryList.h"
 #include "AtomicOP.h"
 #include "AtomicFactory.h"
+#include "sprite_msg.h"
 
 #include <fstream>
 
@@ -18,6 +19,7 @@ void HistoryList::Clear()
 {
 	Clear(m_undo_stack);
 	Clear(m_redo_stack);
+	m_saved_op = NULL;
 }
 
 HistoryList::Type HistoryList::Undo()
@@ -54,6 +56,20 @@ HistoryList::Type HistoryList::Redo()
 		return NOT_DIRTY;
 	else
 		return DIRTY;
+}
+
+HistoryList::Type HistoryList::RedoTop()
+{
+	if (m_undo_stack.empty()) {
+		return NO_CHANGE;
+	} 
+
+	std::vector<Sprite*> sprs;
+	QuerySelectedSprsSJ::Instance()->Query(sprs);
+
+	AtomicOP* op = m_undo_stack.top();
+	op->Redo(sprs);
+	return DIRTY;
 }
 
 void HistoryList::Insert(AtomicOP* op)

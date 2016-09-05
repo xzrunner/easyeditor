@@ -50,6 +50,7 @@ public:
 
 	void Undo();
 	void Redo();
+	void RedoTop();
 
 	void SaveOpRecordList(const std::string& filepath, const std::vector<Sprite*>& sprs);
 	void LoadOpRecordList(const std::string& filepath, const std::vector<Sprite*>& sprs);
@@ -90,6 +91,8 @@ private:
 	void AddOpRecord(AtomicOP* op);
 
 	void SetWndDirty(bool dirty);
+
+	void UpdateWndState(HistoryList::Type type);
 
 protected:
 	EditOP* m_edit_op;

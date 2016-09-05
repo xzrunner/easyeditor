@@ -237,6 +237,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\source\edit\record\EditableSpriteAOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\EditableSpriteAOP.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\source\edit\record\InsertSpriteAOP.cpp"
 					>
 				</File>
@@ -306,6 +314,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\include\ee\TranslateSpriteAOP.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\edit\record\VisibleSpriteAOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\VisibleSpriteAOP.h"
 					>
 				</File>
 			</Filter>

@@ -20,6 +20,9 @@
 #include "sprite_msg.h"
 #include "EditOP.h"
 
+#include "EditableSpriteAOP.h"
+#include "VisibleSpriteAOP.h"
+
 #include "TranslateSpriteState.h"
 #include "RotateSpriteState.h"
 #include "ScaleSpriteState.h"
@@ -28,6 +31,7 @@
 #include "MoveSpriteState.h"
 #include "CopyPasteSpriteState.h"
 #include "PerspectiveSpriteState.h"
+
 
 #include <sprite2/RenderColor.h>
 #include <sprite2/S2_RVG.h>
@@ -641,6 +645,7 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 			ee::Sprite* spr = sprs[i];
 			spr->SetEditable(editable);
 		}
+		EditAddRecordSJ::Instance()->Add(new EditableSpriteAOP(sprs));
 		RefreshPanelSJ::Instance()->Refresh();
 		return true;
 	}
@@ -652,6 +657,7 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 			ee::Sprite* spr = sprs[i];
 			spr->SetVisible(visible);
 		}
+		EditAddRecordSJ::Instance()->Add(new VisibleSpriteAOP(sprs));
 		SetCanvasDirtySJ::Instance()->SetDirty();
 		RefreshPanelSJ::Instance()->Refresh();
 		return true;
