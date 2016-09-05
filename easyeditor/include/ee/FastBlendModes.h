@@ -1,6 +1,8 @@
 #ifndef _EASYEDITOR_FAST_BLEND_MODES_H_
 #define _EASYEDITOR_FAST_BLEND_MODES_H_
 
+#include <CU_Singleton.h>
+
 #include <sprite2/FastBlendMode.h>
 
 #include <vector>
@@ -11,35 +13,25 @@ namespace ee
 class FastBlendModes
 {
 public:
-	s2::FastBlendMode GetModeFromNameEN(const std::string& name) const;
-	std::string GetNameENFromMode(s2::FastBlendMode mode) const;
-
-	s2::FastBlendMode GetIDFromIdx(int idx) const;
-	int GetIdxFromID(s2::FastBlendMode mode) const;
+	s2::FastBlendMode ID2Mode(int id) const;
+	int Mode2ID(s2::FastBlendMode mode) const;
 
 	void GetAllNameCN(std::vector<std::string>& names) const;
-
-	static FastBlendModes* Instance();
-
-private:
-	FastBlendModes();
 
 private:
 	 struct Item
 	 {
-		Item(s2::FastBlendMode mode, const std::string& name_en, const std::string& name_cn)
-			: mode(mode), name_en(name_en), name_cn(name_cn) {}
+		Item(s2::FastBlendMode mode, const std::string& name)
+			: mode(mode), name(name) {}
 
 	 	s2::FastBlendMode mode;
-	 	std::string name_en;
-	 	std::string name_cn;
+	 	std::string name;
 	 };
 
 private:
 	std::vector<Item> m_modes;
 
-private:
-	static FastBlendModes* m_instance;
+	SINGLETON_DECLARATION(FastBlendModes);
 
 }; // FastBlendModes
 

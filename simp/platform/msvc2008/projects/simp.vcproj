@@ -149,6 +149,14 @@
 			Name="storage"
 			>
 			<File
+				RelativePath="..\..\..\src\simp\NodeFactory.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\simp\NodeFactory.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\simp\Package.cpp"
 				>
 			</File>
@@ -301,14 +309,6 @@
 				</File>
 			</Filter>
 		</Filter>
-		<File
-			RelativePath="..\..\..\src\simp\NodeFactory.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\simp\NodeFactory.h"
-			>
-		</File>
 		<File
 			RelativePath="..\..\..\src\simp\simp_define.h"
 			>

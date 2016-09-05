@@ -4,12 +4,13 @@
 #include <ee/SettingData.h>
 #include <ee/Config.h>
 #include <ee/EE_GTxt.h>
-#include <ee/trans_color.h>
 #include <ee/StringHelper.h>
 
 #include <sprite2/RenderParams.h>
 #include <sprite2/S2_RVG.h>
 #include <sprite2/RenderFilter.h>
+#include <glue/trans_color.h>
+
 #include <shaderlab.h>
 #include <gtxt.h>
 
@@ -65,11 +66,11 @@ void Symbol::LoadResources()
 
 	m_tb.font_type		= value["font"].asInt();
 	m_tb.font_size		= value["font_size"].asInt();
-	m_tb.font_color		= str2color(value["font_color"].asString(), ee::PT_RGBA);
+	m_tb.font_color		= glue::str2color(value["font_color"].asString(), glue::PT_RGBA);
 
 	m_tb.has_edge		= value["edge"].asBool();
 	m_tb.edge_size		= static_cast<float>(value["edge_size"].asDouble());
-	m_tb.edge_color		= str2color(value["edge_color"].asString(), ee::PT_RGBA);
+	m_tb.edge_color		= glue::str2color(value["edge_color"].asString(), glue::PT_RGBA);
 
 	m_tb.space_hori		= static_cast<float>(value["space_hori"].asDouble());
 	m_tb.space_vert		= static_cast<float>(value["space_vert"].asDouble());

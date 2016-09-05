@@ -152,6 +152,9 @@ void Sprite::UpdateBounding() const
 
 sm::vec2 Sprite::GetCenter() const
 {
+	if (!m_offset.IsValid()) {
+		m_offset = m_sym->GetBounding(this).Center();
+	}
 	sm::vec2 center_offset = sm::rotate_vector(-m_offset, m_angle) + m_offset;
 	sm::vec2 center = m_position + center_offset;
 	return center;
@@ -187,6 +190,9 @@ void Sprite::SetScale(const sm::vec2& scale)
 		dscale.x = scale.x / m_scale.x;
 		dscale.y = scale.y / m_scale.y;
 
+		if (!m_offset.IsValid()) {
+			m_offset = m_sym->GetBounding(this).Center();
+		}
 		sm::vec2 old_offset = m_offset;
 		sm::vec2 new_offset(m_offset.x * dscale.x, m_offset.y * dscale.y);
 		m_offset = new_offset;
@@ -206,6 +212,9 @@ void Sprite::SetShear(const sm::vec2& shear)
 	mat_old.Shear(m_shear.x, m_shear.y);
 	mat_new.Shear(shear.x, shear.y);
 
+	if (!m_offset.IsValid()) {
+		m_offset = m_sym->GetBounding(this).Center();
+	}
 	sm::vec2 offset = mat_new * m_offset - mat_old * m_offset;
 	m_offset += offset;
 	Translate(-offset);	
@@ -221,6 +230,10 @@ void Sprite::SetShear(const sm::vec2& shear)
 
 void Sprite::SetOffset(const sm::vec2& offset)
 {
+	if (!m_offset.IsValid()) {
+		m_offset = m_sym->GetBounding(this).Center();
+	}
+
 	// rotate + offset -> offset + rotate	
 	sm::vec2 old_center = GetCenter();
 	m_offset = offset;

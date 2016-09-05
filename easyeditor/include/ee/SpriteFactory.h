@@ -3,6 +3,8 @@
 
 #include "Symbol.h"
 
+#include <json/json.h>
+
 #include <vector>
 
 namespace ee
@@ -14,6 +16,7 @@ class SpriteFactory
 {
 public:
 	Sprite* Create(Symbol* sym);
+	Sprite* Create(const Json::Value& val, const std::string& dir);
 
 	void Insert(Sprite* spr);
 	void Remove(Sprite* spr);

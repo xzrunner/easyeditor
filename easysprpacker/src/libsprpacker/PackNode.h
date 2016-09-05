@@ -2,6 +2,7 @@
 #define _EASYSPRPACKER_PACK_NODE_H_
 
 #include <CU_RefCountObj.h>
+#include <CU_Uncopyable.h>
 
 #include <string>
 
@@ -13,7 +14,7 @@ namespace ee { class TexturePacker; class Image; }
 namespace esprpacker
 {
 
-class PackNode : public cu::RefCountObj
+class PackNode : public cu::RefCountObj, private cu::Uncopyable
 {
 public:
 	PackNode();

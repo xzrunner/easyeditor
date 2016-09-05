@@ -22,7 +22,7 @@ public:
 private:
 	void Init(Allocator& alloc, ImportStream& is);
 
-	static void* CreateNode(uint16_t type, Allocator& alloc, ImportStream& is);
+	static void* CreateNode(uint8_t type, Allocator& alloc, ImportStream& is);
 
 private:
 	int m_begin_id, m_end_id;	

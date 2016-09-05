@@ -120,12 +120,12 @@ Sprite(const Json::Value& json_val)
 
 	filepath = json_val["filepath"].asString();
 
-	ee::SpriteIO::Data data;
-	ee::SpriteIO::Load(json_val, data);
-	pos = data.position;
-	angle = data.angle;
-	scale = data.scale;
-	shear = data.shear;
+	ee::SpriteIO spr_io;
+	spr_io.Load(json_val);
+	pos = spr_io.m_position;
+	angle = spr_io.m_angle;
+	scale = spr_io.m_scale;
+	shear = spr_io.m_shear;
 }
 
 bool RemoveDuplicateSprite::Sprite::

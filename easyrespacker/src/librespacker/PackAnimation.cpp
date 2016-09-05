@@ -14,12 +14,12 @@
 #include <ee/Sprite.h>
 #include <ee/FileType.h>
 #include <ee/ImageSprite.h>
-#include <ee/trans_color.h>
 
 #include <sprite2/RenderColor.h>
 #include <sprite2/RenderShader.h>
 #include <sprite2/RenderCamera.h>
 #include <sprite2/RenderFilter.h>
+#include <glue/trans_color.h>
 
 namespace erespacker
 {
@@ -215,8 +215,8 @@ void PackAnimation::LoadSprMat(const ee::Sprite* spr, SpriteTrans& trans, bool f
 
 void PackAnimation::LoadSprColor(const ee::Sprite* spr, SpriteTrans& trans)
 {
-	trans.color = ee::color2int(spr->Color().mul, ee::PT_ARGB);
-	trans.additive = ee::color2int(spr->Color().add, ee::PT_ARGB);
+	trans.color = glue::color2int(spr->Color().mul, glue::PT_ARGB);
+	trans.additive = glue::color2int(spr->Color().add, glue::PT_ARGB);
 
 	trans.rmap = spr->Color().rmap.ToRGBA();
 	trans.gmap = spr->Color().gmap.ToRGBA();

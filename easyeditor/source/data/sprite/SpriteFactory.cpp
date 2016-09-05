@@ -8,6 +8,8 @@
 #include "ScriptsSprite.h"
 #include "ScriptsSymbol.h"
 #include "StringHelper.h"
+#include "SymbolSearcher.h"
+#include "SymbolMgr.h"
 
 namespace ee
 {
@@ -73,6 +75,17 @@ Sprite* SpriteFactory::Create(Symbol* sym)
 	return spr;
 }
 
+Sprite* SpriteFactory::Create(const Json::Value& val, const std::string& dir)
+{
+	std::string filepath = SymbolSearcher::GetSymbolPath(dir, val);
+	Symbol* sym = SymbolMgr::Instance()->FetchSymbol(filepath);
+	SymbolSearcher::SetSymbolFilepaths(dir, sym, val);
+	Sprite* spr = SpriteFactory::Instance()->Create(sym);
+	spr->Load(val);
+	sym->RemoveReference();
+	return spr;
+}
+
 void SpriteFactory::Insert(Sprite* spr)
 {
 	std::map<const Symbol*, SpriteList>::iterator 
@@ -81,7 +94,7 @@ void SpriteFactory::Insert(Sprite* spr)
 	{
 		SpriteList list;
 		list.push_back(spr);
-		m_map_symbol2sprites.insert(std::make_pair(dynamic_cast<const ee::Symbol*>(spr->GetSymbol()), list));
+		m_map_symbol2sprites.insert(std::make_pair(dynamic_cast<const Symbol*>(spr->GetSymbol()), list));
 	}
 	else 
 	{

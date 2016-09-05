@@ -13,7 +13,8 @@
 #include <ee/FileHelper.h>
 #include <ee/Sprite.h>
 #include <ee/Shape.h>
-#include <ee/trans_color.h>
+
+#include <glue/trans_color.h>
 
 #include <fstream>
 
@@ -70,11 +71,11 @@ void FileIO::Load(const char* filename, LibraryPanel* library,
 	// screen
 	if (!value["screen"]["multi_col"].isNull()) {
 		std::string str = value["screen"]["multi_col"].asString();
-		stage->GetScreenMultiColor() = str2color(str, ee::PT_RGBA);
+		stage->GetScreenMultiColor() = glue::str2color(str, glue::PT_RGBA);
 	}
 	if (!value["screen"]["add_col"].isNull()) {
 		std::string str = value["screen"]["add_col"].asString();
-		stage->GetScreenAddColor() = str2color(str, ee::PT_RGBA);
+		stage->GetScreenAddColor() = glue::str2color(str, glue::PT_RGBA);
 	}
 
 	// layers
@@ -123,8 +124,8 @@ void FileIO::Store(const char* filename, LibraryPanel* library,
 	value["camera"]["y"] = cam->GetPosition().y;
 
 	// screen
-	value["screen"]["multi_col"] = ee::color2str(stage->GetScreenMultiColor(), ee::PT_RGBA);
-	value["screen"]["add_col"]   = ee::color2str(stage->GetScreenAddColor(), ee::PT_RGBA);
+	value["screen"]["multi_col"] = glue::color2str(stage->GetScreenMultiColor(), glue::PT_RGBA);
+	value["screen"]["add_col"]   = glue::color2str(stage->GetScreenAddColor(), glue::PT_RGBA);
 
 	// layers
 	std::string dir = ee::FileHelper::GetFileDir(filename) + "\\";

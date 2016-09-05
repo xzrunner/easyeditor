@@ -42,7 +42,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\freeglut\include&quot;;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\model3\src\model3;..\..\..\..\ds\src\ds;..\..\..\..\ejoy2d\src;..\..\..\..\sprite2\include;..\..\..\..\glue\include;..\..\..\..\editor-external\etcpack"
+				AdditionalIncludeDirectories="..\..\..\src;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\freeglut\include&quot;;..\..\..\..\editor-external\json\include;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\model3\src\model3;..\..\..\..\ds\src\ds;..\..\..\..\ejoy2d\src;..\..\..\..\sprite2\include;..\..\..\..\glue\include;..\..\..\..\editor-external\etcpack"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;FREEGLUT_STATIC;GLEW_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -65,10 +65,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="glew32sd.lib libjpegd.lib libpngd.lib zlibd.lib assimpd.lib cjsond.lib pthreadVC2.lib lzmad.lib libboost_filesystem-vc90-mt-gd-1_61.lib"
+				AdditionalDependencies="glew32sd.lib libjpegd.lib libpngd.lib zlibd.lib assimpd.lib cjsond.lib jsond.lib pthreadVC2.lib lzmad.lib libboost_filesystem-vc90-mt-gd-1_61.lib"
 				OutputFile="..\test\x86\Debug\test.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\freeglut\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;;&quot;..\..\..\..\editor-external\gl\lib&quot;;&quot;..\..\..\..\editor-external\libjpeg\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\zlib\lib&quot;;&quot;..\..\..\..\editor-external\assimp\lib&quot;;&quot;..\..\..\..\editor-external\cjson\lib&quot;;&quot;..\..\..\..\editor-external\pthread\lib\x86&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\boost\lib&quot;"
+				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\freeglut\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;;&quot;..\..\..\..\editor-external\gl\lib&quot;;&quot;..\..\..\..\editor-external\libjpeg\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\zlib\lib&quot;;&quot;..\..\..\..\editor-external\assimp\lib&quot;;&quot;..\..\..\..\editor-external\cjson\lib&quot;;&quot;..\..\..\..\editor-external\json\lib&quot;;&quot;..\..\..\..\editor-external\pthread\lib\x86&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\boost\lib&quot;"
 				IgnoreDefaultLibraryNames=""
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="..\test\x86\Debug\test.pdb"
@@ -124,7 +124,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\freeglut\include&quot;;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\model3\src\model3;..\..\..\..\ds\src\ds;..\..\..\..\ejoy2d\src;..\..\..\..\sprite2\include;..\..\..\..\glue\include;..\..\..\..\editor-external\etcpack"
+				AdditionalIncludeDirectories="..\..\..\src;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\freeglut\include&quot;;..\..\..\..\editor-external\json\include;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\model3\src\model3;..\..\..\..\ds\src\ds;..\..\..\..\ejoy2d\src;..\..\..\..\sprite2\include;..\..\..\..\glue\include;..\..\..\..\editor-external\etcpack"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;FREEGLUT_STATIC;GLEW_STATIC"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -145,10 +145,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="glew32s.lib libjpeg.lib libpng.lib zlib.lib cjson.lib pthreadVC2.lib lzma.lib libboost_filesystem-vc90-mt-1_61.lib"
+				AdditionalDependencies="glew32s.lib libjpeg.lib libpng.lib zlib.lib cjson.lib json.lib pthreadVC2.lib lzma.lib libboost_filesystem-vc90-mt-1_61.lib"
 				OutputFile="..\test\x86\Debug\test.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\freeglut\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;;&quot;..\..\..\..\editor-external\gl\lib&quot;;&quot;..\..\..\..\editor-external\libjpeg\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\zlib\lib&quot;;&quot;..\..\..\..\editor-external\assimp\lib&quot;;&quot;..\..\..\..\editor-external\cjson\lib&quot;;&quot;..\..\..\..\editor-external\pthread\lib\x86&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\boost\lib&quot;"
+				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\freeglut\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;;&quot;..\..\..\..\editor-external\gl\lib&quot;;&quot;..\..\..\..\editor-external\libjpeg\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\zlib\lib&quot;;&quot;..\..\..\..\editor-external\assimp\lib&quot;;&quot;..\..\..\..\editor-external\cjson\lib&quot;;&quot;..\..\..\..\editor-external\json\lib&quot;;&quot;..\..\..\..\editor-external\pthread\lib\x86&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\boost\lib&quot;"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="..\test\x86\Debug\test.pdb"
 				SubSystem="1"
@@ -217,6 +217,18 @@
 					>
 				</File>
 			</Filter>
+		</Filter>
+		<Filter
+			Name="node"
+			>
+			<File
+				RelativePath="..\..\..\sample\TestScale9.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\sample\TestScale9.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath="..\..\..\sample\main.cpp"

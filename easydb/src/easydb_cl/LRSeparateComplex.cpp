@@ -166,12 +166,12 @@ std::string LRSeparateComplex::CreateNewComplexFile(const Json::Value& value) co
 		m_dir + "\\" + spr_val["filepath"].asString());
 	spr_val["filepath"] = relative_path;
 
-	ee::SpriteIO::Data data;
-	ee::SpriteIO::Load(spr_val, data);
-	FixPosWithShape(data.position, value["filepath"].asString());
+	ee::SpriteIO spr_io;
+	spr_io.Load(spr_val);
+	FixPosWithShape(spr_io.m_position, value["filepath"].asString());
 	int idx = 0;
 	out_val["sprite"][idx] = spr_val;
-	ee::SpriteIO::Store(out_val["sprite"][idx], data);
+	spr_io.Store(out_val["sprite"][idx]);
 
 	std::string outpath = m_output_dir + "\\" + name + "_complex.json";
 	Json::StyledStreamWriter writer;
@@ -190,10 +190,10 @@ void LRSeparateComplex::ResetOldSpriteVal(Json::Value& val, const std::string& e
 	Json::Value _val;
 	_val["filepath"] = export_name + "_complex.json";
 	_val["export"] = export_name;
-	
-	ee::SpriteIO::Data data;
-	data.tag = tag;
-	ee::SpriteIO::Store(_val, data);
+
+	ee::SpriteIO spr_io;
+	spr_io.m_tag = tag;
+	spr_io.Store(_val);
 
 	val = _val;
 }

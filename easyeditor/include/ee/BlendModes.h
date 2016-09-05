@@ -1,6 +1,8 @@
 #ifndef _EASYEDITOR_BLEND_MODES_H_
 #define _EASYEDITOR_BLEND_MODES_H_
 
+#include <CU_Singleton.h>
+
 #include <sprite2/BlendMode.h>
 
 #include <vector>
@@ -11,35 +13,25 @@ namespace ee
 class BlendModes
 {
 public:
-	s2::BlendMode GetModeFromNameEN(const std::string& name) const;
-	std::string GetNameENFromMode(s2::BlendMode mode) const;
-
-	s2::BlendMode GetIDFromIdx(int idx) const;
-	int GetIdxFromID(s2::BlendMode mode) const;
+	s2::BlendMode ID2Mode(int id) const;
+	int Mode2ID(s2::BlendMode mode) const;
 
 	void GetAllNameCN(std::vector<std::string>& names) const;
-
-	static BlendModes* Instance();
-
-private:
-	BlendModes();
 
 private:
 	 struct Item
 	 {
-		Item(s2::BlendMode mode, const std::string& name_en, const std::string& name_cn)
-			: mode(mode), name_en(name_en), name_cn(name_cn) {}
+		Item(s2::BlendMode mode, const std::string& name)
+			: mode(mode), name(name) {}
 
 	 	s2::BlendMode mode;
-	 	std::string name_en;
-	 	std::string name_cn;
+	 	std::string name;
 	 };
 
 private:
 	std::vector<Item> m_modes;
 
-private:
-	static BlendModes* m_instance;
+	SINGLETON_DECLARATION(BlendModes);
 
 }; // BlendModes
 

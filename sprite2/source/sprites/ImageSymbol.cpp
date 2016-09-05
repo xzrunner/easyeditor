@@ -25,13 +25,19 @@ ImageSymbol::~ImageSymbol()
 
 void ImageSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 {
+	s2::RenderParams p = params;
+	if (spr) {
+		p.mt = spr->GetTransMatrix() * params.mt;
+		p.color = spr->Color() * params.color;
+	}
+
 	sm::vec2 vertices[4];
 	vertices[0] = sm::vec2(m_size.xmin, m_size.ymin);
 	vertices[1] = sm::vec2(m_size.xmin, m_size.ymax);
 	vertices[2] = sm::vec2(m_size.xmax, m_size.ymax);
 	vertices[3] = sm::vec2(m_size.xmax, m_size.ymin);
 	for (int i = 0; i < 4; ++i) {
-		vertices[i] = params.mt * vertices[i];
+		vertices[i] = p.mt * vertices[i];
 	}
 
 	float texcoords[8];
@@ -40,12 +46,12 @@ void ImageSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 	
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	if (mgr->GetShaderType() == sl::BLEND) {
-		DrawBlend(params, vertices, texcoords, texid);
+		DrawBlend(p, vertices, texcoords, texid);
 	} else {
 		if (IsOrthoCam()) {
-			DrawOrtho(params, vertices, texcoords, texid);
+			DrawOrtho(p, vertices, texcoords, texid);
 		} else {
-			DrawPseudo3D(params, vertices, texcoords, texid);
+			DrawPseudo3D(p, vertices, texcoords, texid);
 		}
 	}
 }

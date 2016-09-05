@@ -8,6 +8,7 @@
 
 #include <sprite2/RenderFilter.h>
 #include <sprite2/BoundingBox.h>
+#include <glue/FilterModes.h>
 #include <SM_Test.h>
 
 namespace ee
@@ -26,7 +27,7 @@ void DrawSpritesVisitor::Visit(Sprite* spr, bool& next)
 		return;
 	}
 
-	int filter_mode_idx = FilterModes::Instance()->QueryShaderIdx(spr->Shader().filter->GetMode());
+	int filter_mode_idx = glue::FilterModes::Instance()->QueryShaderIdx(spr->Shader().filter->GetMode());
 //	ShaderMgr::Instance()->SetSpriteShader(filter_mode_idx);
 
 	DrawSprite(spr);

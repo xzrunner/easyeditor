@@ -12,6 +12,8 @@ public:
 	static std::string Relative(const std::string& base, const std::string& path);
 	static std::string Absolute(const std::string& base, const std::string& path);
 
+	static std::string Dir(const std::string& path);
+
 	static std::string Format(const std::string& path);
 
 }; // FilepathHelper

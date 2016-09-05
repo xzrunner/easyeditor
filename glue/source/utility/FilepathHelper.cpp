@@ -16,6 +16,11 @@ std::string FilepathHelper::Absolute(const std::string& base, const std::string&
 	return boost::filesystem::absolute(path, base).string();
 }
 
+std::string FilepathHelper::Dir(const std::string& path)
+{
+	return boost::filesystem::path(path).parent_path().string();
+}
+
 std::string FilepathHelper::Format(const std::string& path)
 {	
 	std::string ret = path;

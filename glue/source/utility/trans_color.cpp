@@ -2,7 +2,7 @@
 
 #include <assert.h>
 
-namespace ee
+namespace glue
 {
 
 static inline 

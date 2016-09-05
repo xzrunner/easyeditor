@@ -120,12 +120,12 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 	else if (name == "Blend")
 	{
 		int idx = wxANY_AS(value, int);
-		spr->Shader().blend = BlendModes::Instance()->GetIDFromIdx(idx);
+		spr->Shader().blend = BlendModes::Instance()->ID2Mode(idx);
 	}
 	else if (name == "FastBlend") 
 	{
 		int idx = wxANY_AS(value, int);
-		spr->Shader().fast_blend = FastBlendModes::Instance()->GetIDFromIdx(idx);
+		spr->Shader().fast_blend = FastBlendModes::Instance()->ID2Mode(idx);
 	}
 	else if (name == wxT("Clip"))
 	{
@@ -251,9 +251,9 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 // 	pg->SetPropertyValueString(wxT("Color.G"), g_trans.GetAsString());
 // 	pg->SetPropertyValueString(wxT("Color.B"), b_trans.GetAsString());
 
-	pg->GetProperty(wxT("Blend"))->SetValue(BlendModes::Instance()->GetIdxFromID(spr->Shader().blend));
+	pg->GetProperty(wxT("Blend"))->SetValue(BlendModes::Instance()->Mode2ID(spr->Shader().blend));
 
-	pg->GetProperty(wxT("FastBlend"))->SetValue(FastBlendModes::Instance()->GetIdxFromID(spr->Shader().fast_blend));
+	pg->GetProperty(wxT("FastBlend"))->SetValue(FastBlendModes::Instance()->Mode2ID(spr->Shader().fast_blend));
 
 	SpriteFilterPSHelper::ToPS(spr, pg);
 
@@ -376,14 +376,14 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 	std::vector<std::string> blend_names;
 	BlendModes::Instance()->GetAllNameCN(blend_names);
 	wxEnumProperty* blend_prop = new wxEnumProperty(wxT("Blend"), wxPG_LABEL, WXHelper::ToWXStringArray(blend_names));
-	int blend_idx = BlendModes::Instance()->GetIdxFromID(spr->Shader().blend);
+	int blend_idx = BlendModes::Instance()->Mode2ID(spr->Shader().blend);
 	blend_prop->SetValue(blend_idx);
 	pg->Append(blend_prop);
 
 	std::vector<std::string> fast_blend_names;
 	FastBlendModes::Instance()->GetAllNameCN(fast_blend_names);
 	wxEnumProperty* fast_blend_prop = new wxEnumProperty(wxT("FastBlend"), wxPG_LABEL, WXHelper::ToWXStringArray(fast_blend_names));
-	int fast_blend_idx = FastBlendModes::Instance()->GetIdxFromID(spr->Shader().fast_blend);
+	int fast_blend_idx = FastBlendModes::Instance()->Mode2ID(spr->Shader().fast_blend);
 	fast_blend_prop->SetValue(fast_blend_idx);
 	pg->Append(fast_blend_prop);
 

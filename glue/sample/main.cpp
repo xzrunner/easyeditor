@@ -8,6 +8,8 @@
 #include "TestModel3.h"
 #include "TestFilter.h"
 
+#include "TestScale9.h"
+
 #include <shaderlab.h>
 #include <glue/RenderContext.h>
 
@@ -17,16 +19,18 @@
 #include <iostream>
 
 //test::TestTask* task = new test::TestShape;
-test::TestTask* task = new test::TestSprite;
+//test::TestTask* task = new test::TestSprite;
 //test::TestTask* task = new test::TestMulti;
 //test::TestTask* task = new test::TestSprite25;
 //test::TestTask* task = new test::TestModel3;
 //test::TestTask* task = new test::TestFilter;
 
+test::TestTask* task = new test::TestScale9;
+
 void 
 display(void) {
 	sl::ShaderMgr* sl_mgr = sl::ShaderMgr::Instance();
-	sl_mgr->GetContext()->Clear(0);
+	sl_mgr->GetContext()->Clear(0xff888888);
 	task->Draw();
 	sl_mgr->GetShader()->Commit();
 
@@ -41,7 +45,7 @@ update(void) {
 
 void 
 init(void) {
-	glClearColor(0.0, 0.0, 0.0, 0.0);
+	glClearColor(0.5, 0.5, 0.5, 1);
 
 	glue::RenderContext::Instance()->Init();
 

@@ -132,12 +132,14 @@ void Sprite::Rotate(float delta)
 
 void Sprite::Load(const Json::Value& val, const std::string& dir)
 {
-	SpriteIO::Load(val, this);
+	ee::SpriteIO spr_io;
+	spr_io.Load(val, this);
 }
 
 void Sprite::Store(Json::Value& val, const std::string& dir) const
 {
-	SpriteIO::Store(val, this);
+	ee::SpriteIO spr_io;
+	spr_io.Store(val, this);
 }
 
 PropertySetting* Sprite::CreatePropertySetting(EditPanelImpl* stage)

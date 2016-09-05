@@ -3,7 +3,8 @@
 #include "PropertySetting.h"
 
 #include <ee/SpriteFactory.h>
-#include <ee/trans_color.h>
+
+#include <glue/trans_color.h>
 
 namespace etext
 {
@@ -48,11 +49,11 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 
 	m_tb.font_type		= text_val["font"].asInt();
 	m_tb.font_size		= text_val["font_size"].asInt();
-	m_tb.font_color		= str2color(text_val["font_color"].asString(), ee::PT_RGBA);
+	m_tb.font_color		= glue::str2color(text_val["font_color"].asString(), glue::PT_RGBA);
 
 	m_tb.has_edge		= text_val["edge"].asBool();
 	m_tb.edge_size		= text_val["edge_size"].asInt();
-	m_tb.edge_color		= str2color(text_val["edge_color"].asString(), ee::PT_RGBA);
+	m_tb.edge_color		= glue::str2color(text_val["edge_color"].asString(), glue::PT_RGBA);
 
 	m_tb.align_hori		= s2::Textbox::HoriAlign(text_val["align_hori"].asInt());
 	m_tb.align_vert		= s2::Textbox::VertAlign(text_val["align_vert"].asInt());
@@ -85,11 +86,11 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 
 	text_val["font"]			= m_tb.font_type;
 	text_val["font_size"]		= m_tb.font_size;
-	text_val["font_color"]		= color2str(m_tb.font_color, ee::PT_RGBA);
+	text_val["font_color"]		= color2str(m_tb.font_color, glue::PT_RGBA);
 
 	text_val["edge"]			= m_tb.has_edge;
 	text_val["edge_size"]		= m_tb.edge_size;
-	text_val["edge_color"]		= color2str(m_tb.edge_color, ee::PT_RGBA);
+	text_val["edge_color"]		= color2str(m_tb.edge_color, glue::PT_RGBA);
 
 	text_val["align_hori"]		= m_tb.align_hori;
 	text_val["align_vert"]		= m_tb.align_vert;

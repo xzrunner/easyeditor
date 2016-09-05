@@ -15,10 +15,10 @@ class Scale9Symbol : public s2::Scale9Symbol
 public:
 //	Scale9Symbol();
 
-	void LoadJson(const Json::Value& val, const std::string& dir);
+	void LoadJson(const std::string& filepath);
 
 protected:
-	s2::Sprite* LoadSprite(const Json::Value& spr_val, const std::string& dir);
+	virtual s2::Sprite* LoadSprite(const Json::Value& val, const std::string& dir);
 
 }; // Scale9Symbol
 

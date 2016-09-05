@@ -2,9 +2,9 @@
 #include "check_params.h"
 
 #include <ee/FileHelper.h>
-#include <ee/trans_color.h>
 
 #include <sprite2/Color.h>
+#include <glue/trans_color.h>
 
 #include <fstream>
 
@@ -48,8 +48,8 @@ bool FixSpriteColor::FixSprite(const std::string& filepath, Json::Value& sprite_
 		return false;
 	}
 
-	s2::Color col = ee::str2color(str, ee::PT_ARGB);
-	sprite_val["add color"] = ee::color2str(col, ee::PT_ABGR);
+	s2::Color col = ee::glue::str2color(str, glue::PT_ARGB);
+	sprite_val["add color"] = glue::color2str(col, glue::PT_ABGR);
 
 	return true;
 }

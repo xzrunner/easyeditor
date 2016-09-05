@@ -1,6 +1,8 @@
 #ifndef _EASYEDITOR_CAMERA_MODES_H_
 #define _EASYEDITOR_CAMERA_MODES_H_
 
+#include <CU_Singleton.h>
+
 #include <sprite2/CameraMode.h>
 
 #include <string>
@@ -12,35 +14,25 @@ namespace ee
 class CameraModes
 {
 public:
-	s2::CameraMode GetModeFromNameEN(const std::string& name) const;
-	std::string GetNameENFromMode(s2::CameraMode mode) const;
-
-	s2::CameraMode GetIDFromIdx(int idx) const;
-	int GetIdxFromID(s2::CameraMode mode) const;
+	s2::CameraMode ID2Mode(int idx) const;
+	int Mode2ID(s2::CameraMode mode) const;
 
 	void GetAllNameCN(std::vector<std::string>& names) const;
-
-	static CameraModes* Instance();
-
-private:
-	CameraModes();
 
 private:
 	struct Item
 	{
-		Item(s2::CameraMode mode, const std::string& name_en, const std::string& name_cn)
-			: mode(mode), name_en(name_en), name_cn(name_cn) {}
+		Item(s2::CameraMode mode, const std::string& name)
+			: mode(mode), name(name) {}
 
 		s2::CameraMode mode;
-		std::string name_en;
-		std::string name_cn;
+		std::string name;
 	};
 
 private:
 	std::vector<Item> m_modes;
 
-private:
-	static CameraModes* m_instance;
+	SINGLETON_DECLARATION(CameraModes);
 
 }; // CameraModes
 

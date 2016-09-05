@@ -76,23 +76,23 @@ bool FixRotateTrimJson::FixSprite(const std::string& filepath, Json::Value& spri
 
 	TrimInfo trim = itr->second;
 
-	ee::SpriteIO::Data data;
-	ee::SpriteIO::Load(sprite_val, data);
+	ee::SpriteIO spr_io;
+	spr_io.Load(sprite_val);
 
-	sm::vec2 new_offset = sm::rotate_vector(data.offset, data.angle);
+	sm::vec2 new_offset = sm::rotate_vector(spr_io.m_offset, spr_io.m_angle);
 
 	sm::vec2 trim_offset = sm::rotate_vector(sm::vec2(trim.x, trim.y), -trim.angle);
 
-	float new_angle = data.angle - trim.angle;
+	float new_angle = spr_io.m_angle - trim.angle;
 
-	sm::vec2 new_pos = sm::rotate_vector(-data.offset, data.angle) + data.offset + data.position 
+	sm::vec2 new_pos = sm::rotate_vector(-spr_io.m_offset, spr_io.m_angle) + spr_io.m_offset + spr_io.m_position 
 		- sm::rotate_vector(-new_offset, new_angle) - new_offset - trim_offset;
 
-	data.position = new_pos;
-	data.angle = new_angle;
-	data.offset = new_offset;
+	spr_io.m_position = new_pos;
+	spr_io.m_angle = new_angle;
+	spr_io.m_offset = new_offset;
 
-	ee::SpriteIO::Store(sprite_val, data);
+	spr_io.Store(sprite_val);
 
 	return true;
 }

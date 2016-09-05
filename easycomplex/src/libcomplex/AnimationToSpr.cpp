@@ -4,7 +4,8 @@
 #include "Sprite.h"
 
 #include <ee/BlendModes.h>
-#include <ee/trans_color.h>
+
+#include <glue/trans_color.h>
 
 #include <easyanim.h>
 
@@ -71,7 +72,7 @@ void AnimationToSpr::TransSprite(ee::Sprite* spr, const erespacker::PackAnimatio
 		TransSpriteMat(spr, t);
 	}
 	TransSpriteCol(spr, t);
-	spr->Shader().blend = (ee::BlendModes::Instance()->GetIDFromIdx(t.blend));
+	spr->Shader().blend = (ee::BlendModes::Instance()->ID2Mode(t.blend));
 }
 
 void AnimationToSpr::TransSpriteMat(ee::Sprite* spr, const erespacker::PackAnimation::SpriteTrans& t)
@@ -136,12 +137,12 @@ void AnimationToSpr::TransSpriteMat(ee::Sprite* spr, const erespacker::PackAnima
 
 void AnimationToSpr::TransSpriteCol(ee::Sprite* spr, const erespacker::PackAnimation::SpriteTrans& t)
 {
-	spr->Color().mul = int2color(t.color, ee::PT_ARGB);
-	spr->Color().add = int2color(t.additive, ee::PT_ARGB);
+	spr->Color().mul = int2color(t.color, glue::PT_ARGB);
+	spr->Color().add = int2color(t.additive, glue::PT_ARGB);
 
-	spr->Color().rmap = int2color(t.rmap, ee::PT_RGBA);
-	spr->Color().gmap = int2color(t.gmap, ee::PT_RGBA);
-	spr->Color().bmap = int2color(t.bmap, ee::PT_RGBA);
+	spr->Color().rmap = int2color(t.rmap, glue::PT_RGBA);
+	spr->Color().gmap = int2color(t.gmap, glue::PT_RGBA);
+	spr->Color().bmap = int2color(t.bmap, glue::PT_RGBA);
 }
 
 

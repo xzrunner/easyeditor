@@ -9,13 +9,13 @@
 #include <ee/ImageSymbol.h>
 #include <ee/ImageSprite.h>
 #include <ee/SpriteFactory.h>
-#include <ee/trans_color.h>
-
-#include <SM_Calc.h>
 
 #include <easycomplex.h>
 #include <easyanim.h>
 #include <easyimage.h>
+
+#include <glue/trans_color.h>
+#include <SM_Calc.h>
 
 extern "C" {
 	#include <lua.h>
@@ -792,8 +792,8 @@ void ParserLuaFile::Animation::Item::transform(ee::Sprite* spr) const
 
 	if (is_full && valid)
 	{
-		spr->Color().mul = ee::int2color(color, ee::PT_BGRA);
-		spr->Color().add = ee::int2color(add, ee::PT_ABGR);
+		spr->Color().mul = glue::int2color(color, glue::PT_BGRA);
+		spr->Color().add = glue::int2color(add, glue::PT_ABGR);
 
 		float x = mat[4] / 16.0f,
 			y = mat[5] / 16.0f;

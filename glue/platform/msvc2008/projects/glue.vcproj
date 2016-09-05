@@ -191,6 +191,42 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="modes"
+				>
+				<File
+					RelativePath="..\..\..\source\render\BlendModes.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\glue\BlendModes.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\render\CameraModes.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\glue\CameraModes.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\render\FastBlendModes.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\glue\FastBlendModes.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\render\FilterModes.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\glue\FilterModes.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="dataset"
@@ -279,16 +315,48 @@
 				RelativePath="..\..\..\include\glue\StringHelper.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\source\utility\trans_color.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\glue\trans_color.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="sprite"
 			>
+			<File
+				RelativePath="..\..\..\source\sprite\SpriteFactory.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\glue\SpriteFactory.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\source\sprite\SpriteIO.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\glue\SpriteIO.h"
+				>
+			</File>
 			<File
 				RelativePath="..\..\..\source\sprite\SymbolFactory.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\include\glue\SymbolFactory.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\source\sprite\SymbolFileType.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\glue\SymbolFileType.h"
 				>
 			</File>
 			<Filter
@@ -315,15 +383,7 @@
 				Name="02.scale9"
 				>
 				<File
-					RelativePath="..\..\..\source\sprite\Scale9Sprite.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\glue\Scale9Sprite.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\glue\Scale9Symbol.cpp"
+					RelativePath="..\..\..\source\sprite\Scale9Symbol.cpp"
 					>
 				</File>
 				<File

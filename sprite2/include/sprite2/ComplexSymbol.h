@@ -42,12 +42,14 @@ public:
 protected:
 	const std::vector<Sprite*>& GetSprs(int action) const;
 
-protected:
+public:
 	struct Action
 	{
 		std::string name;
 		std::vector<Sprite*> sprs;
 	};
+
+	const std::vector<Action>& GetActions() const { return m_actions; }
 
 protected:
 	std::vector<Sprite*> m_children;

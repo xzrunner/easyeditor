@@ -335,13 +335,13 @@ void LRJsonPacker::ParserCameraFromSprite(const Json::Value& src_val, const char
 	{
 		Json::Value cam_val;
 
-		ee::SpriteIO::Data data;
-		ee::SpriteIO::Load(spr_val, data);
+		ee::SpriteIO spr_io;
+		spr_io.Load(spr_val);
 
-		cam_val["name"] = data.name;
-		cam_val["x"] = data.position.x;
-		cam_val["y"] = data.position.y;
-		cam_val["scale"] = data.scale.x;
+		cam_val["name"] = spr_io.m_name;
+		cam_val["x"] = spr_io.m_position.x;
+		cam_val["y"] = spr_io.m_position.y;
+		cam_val["scale"] = spr_io.m_scale.x;
 
 		int sz = out_val[name].size();
 		out_val[name][sz] = cam_val;
@@ -379,13 +379,13 @@ void LRJsonPacker::ParserCharacterFromSprite(const Json::Value& src_val, const l
 			continue;
 		}				
 
-		ee::SpriteIO::Data data;
-		ee::SpriteIO::Load(spr_val, data);
+		ee::SpriteIO spr_io;
+		spr_io.Load(spr_val);
 
 		Json::Value char_val;
-		char_val["name"] = data.name;
-		char_val["x"] = data.position.x;
-		char_val["y"] = data.position.y;
+		char_val["name"] = spr_io.m_name;
+		char_val["x"] = spr_io.m_position.x;
+		char_val["y"] = spr_io.m_position.y;
 
 		// region
 		std::string shape_tag = ee::FileType::GetTag(ee::FileType::e_shape);
@@ -398,13 +398,13 @@ void LRJsonPacker::ParserCharacterFromSprite(const Json::Value& src_val, const l
 				tag_ext = shapes[0]->GetName();
 
 				if (eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(shapes[0])) {
-					ParserShape(poly, data.position, data.angle, grids, true, char_val["grids"]);
+					ParserShape(poly, spr_io.m_position, spr_io.m_angle, grids, true, char_val["grids"]);
 				}
 			}
 		}
 
 		// tags
-		std::string tag = data.tag;
+		std::string tag = spr_io.m_tag;
 		if (!tag.empty() && tag[tag.size()-1] != ';') {
 			tag += ";";
 		}
@@ -418,7 +418,7 @@ void LRJsonPacker::ParserCharacterFromSprite(const Json::Value& src_val, const l
 
 		// angle
 		int dir = 1 + (out_name.GetField(lr::CharacterFileName::FT_DIRECTION)[0] - '1');
-		if (data.mirror.x) {
+		if (spr_io.m_mirror.x) {
 			dir = 10 - dir;
 		}
 		dir = (dir + 7) % 8;
@@ -530,12 +530,12 @@ void LRJsonPacker::ParserSpecialFromSprite(const Json::Value& src_val, const std
 
 void LRJsonPacker::ParserSpecialLayer(const Json::Value& spr_val, const std::string& name, Json::Value& out_val)
 {
-	ee::SpriteIO::Data src_data;
-	ee::SpriteIO::Load(spr_val, src_data);
+	ee::SpriteIO spr_io;
+	spr_io.Load(spr_val);
 
 	Json::Value dec_val;
 
-	sm::vec2 pos = src_data.position;
+	sm::vec2 pos = spr_io.m_position;
 
 	std::string s_name;
 	std::string export_name;
@@ -557,9 +557,9 @@ void LRJsonPacker::ParserSpecialLayer(const Json::Value& spr_val, const std::str
 
 		int idx = 0;
 
-		ee::SpriteIO::Data data;
-		ee::SpriteIO::Load(val["sprite"][idx], data);
-		pos += data.position;
+		ee::SpriteIO spr_io;
+		spr_io.Load(val["sprite"][idx]);
+		pos += spr_io.m_position;
 	}
 
 	if (!s_name.empty() && s_name[0] != '_') {
@@ -580,13 +580,13 @@ void LRJsonPacker::ParserParticleLayer(const Json::Value& spr_val, Json::Value& 
 {
 	Json::Value dec_val;
 
-	ee::SpriteIO::Data data;
-	ee::SpriteIO::Load(spr_val, data);
+	ee::SpriteIO spr_io;
+	spr_io.Load(spr_val);
 
-	dec_val["x"] = data.position.x;
-	dec_val["y"] = data.position.y;
+	dec_val["x"] = spr_io.m_position.x;
+	dec_val["y"] = spr_io.m_position.y;
 
-	dec_val["scale"] = std::max(data.scale.x, data.scale.y);
+	dec_val["scale"] = std::max(spr_io.m_scale.x, spr_io.m_scale.y);
 
 	std::string sym_path = spr_val["filepath"].asString();
 	std::string name = ee::FileHelper::GetFilename(sym_path);

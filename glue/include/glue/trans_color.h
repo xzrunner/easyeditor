@@ -1,11 +1,11 @@
-#ifndef	_EASYEDITOR_TRANS_COLOR_H_
-#define _EASYEDITOR_TRANS_COLOR_H_
+#ifndef	_GLUE_TRANS_COLOR_H_
+#define _GLUE_TRANS_COLOR_H_
 
 #include <sprite2/Color.h>
 
 #include <string>
 
-namespace ee
+namespace glue
 {
 
 // text		RGBA	old
@@ -29,4 +29,4 @@ uint32_t color2int(const s2::Color& col, PixelType type);
 
 }
 
-#endif // _EASYEDITOR_TRANS_COLOR_H_
+#endif // _GLUE_TRANS_COLOR_H_

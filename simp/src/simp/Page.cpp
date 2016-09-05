@@ -15,6 +15,8 @@
 
 #include <new>
 
+#include <string.h>
+
 namespace simp
 {
 
@@ -38,21 +40,22 @@ void Page::Init(Allocator& alloc, ImportStream& is)
 {
 	int n = m_end_id - m_begin_id + 1;
 	int align_n = (n + 3) & ~3;
-	m_types = alloc.Alloc(sizeof(uint8_t) * align_n);
+	m_types = static_cast<uint8_t*>(alloc.Alloc(sizeof(uint8_t) * align_n));
 	memset(m_types, 0, sizeof(uint8_t) * align_n);
-	m_nodes = alloc.Alloc(SIZEOF_POINTER * n);
+	m_nodes =  static_cast<void**>(alloc.Alloc(SIZEOF_POINTER * n));
 	memset(m_nodes, 0, SIZEOF_POINTER * n);
 
 	while (!is.Empty())
 	{
 		uint32_t id = is.UInt32();
 		int idx = id - m_begin_id;
-		m_types[idx] = is.UInt8();
+		uint8_t type = is.UInt8();
+		m_types[idx] = type;
 		m_nodes[idx] = CreateNode(type, alloc, is);
 	}
 }
 
-void* Page::CreateNode(uint16_t type, Allocator& alloc, ImportStream& is)
+void* Page::CreateNode(uint8_t type, Allocator& alloc, ImportStream& is)
 {
 	void* ret = NULL;
 	switch (type)

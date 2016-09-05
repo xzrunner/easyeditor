@@ -93,30 +93,30 @@ void LRExpandGroup::LoadSprites(const Json::Value& src_spr_val, const Trans& tra
 {
 	std::string filepath = src_spr_val["filepath"].asString();
 
-	ee::SpriteIO::Data data;
-	ee::SpriteIO::Load(src_spr_val, data);
+	ee::SpriteIO spr_io;
+	spr_io.Load(src_spr_val);
 	if (filepath == "group") 
 	{
 		const Json::Value& gval = src_spr_val["group"];
 
 		if (trans.xmirror) {
-			data.position.x = -data.position.x;
-			data.angle = -data.angle;
+			spr_io.m_position.x = -spr_io.m_position.x;
+			spr_io.m_angle = -spr_io.m_angle;
 		}
 		if (trans.ymirror) {
-			data.position.y = -data.position.y;
-			data.angle = -data.angle;
+			spr_io.m_position.y = -spr_io.m_position.y;
+			spr_io.m_angle = -spr_io.m_angle;
 		}
 
 		Trans t;
-		t.angle = data.angle + trans.angle;
-		t.scale.x = data.scale.x * trans.scale.x;
-		t.scale.y = data.scale.y * trans.scale.y;
-		t.xmirror = (data.mirror.x && !trans.xmirror) || (!data.mirror.x && trans.xmirror);
-		t.ymirror = (data.mirror.y && !trans.ymirror) || (!data.mirror.y && trans.ymirror);
+		t.angle = spr_io.m_angle + trans.angle;
+		t.scale.x = spr_io.m_scale.x * trans.scale.x;
+		t.scale.y = spr_io.m_scale.y * trans.scale.y;
+		t.xmirror = (spr_io.m_mirror.x && !trans.xmirror) || (!spr_io.m_mirror.x && trans.xmirror);
+		t.ymirror = (spr_io.m_mirror.y && !trans.ymirror) || (!spr_io.m_mirror.y && trans.ymirror);
 
-		float new_x = data.position.x * trans.scale.x,
-			  new_y = data.position.y * trans.scale.y;
+		float new_x = spr_io.m_position.x * trans.scale.x,
+			  new_y = spr_io.m_position.y * trans.scale.y;
 		t.translation = sm::rotate_vector(sm::vec2(new_x, new_y), trans.angle);
 		t.translation += trans.translation;
 
@@ -127,29 +127,27 @@ void LRExpandGroup::LoadSprites(const Json::Value& src_spr_val, const Trans& tra
 	} 
 	else 
 	{
-		ee::SpriteIO::Data nd = data;
-
 		if (trans.xmirror) {
-			nd.position.x = -data.position.x;
-			nd.angle = -data.angle;
+			spr_io.m_position.x = -spr_io.m_position.x;
+			spr_io.m_angle = -spr_io.m_angle;
 		}
 		if (trans.ymirror) {
-			nd.position.y = -data.position.y;
-			nd.angle = -data.angle;
+			spr_io.m_position.y = -spr_io.m_position.y;
+			spr_io.m_angle = -spr_io.m_angle;
 		}
 
-		nd.angle = nd.angle + trans.angle;
-		nd.scale.x = nd.scale.x * trans.scale.x;
-		nd.scale.y = nd.scale.y * trans.scale.y;
-		nd.mirror.x = (nd.mirror.x && !trans.xmirror) || (!nd.mirror.x && trans.xmirror);
-		nd.mirror.y = (nd.mirror.y && !trans.ymirror) || (!nd.mirror.y && trans.ymirror);
-		float new_x = data.position.x * trans.scale.x,
-			  new_y = data.position.y * trans.scale.y;
-		nd.position = sm::rotate_vector(sm::vec2(new_x, new_y), trans.angle) + trans.translation;
+		spr_io.m_angle = spr_io.m_angle + trans.angle;
+		spr_io.m_scale.x = spr_io.m_scale.x * trans.scale.x;
+		spr_io.m_scale.y = spr_io.m_scale.y * trans.scale.y;
+		spr_io.m_mirror.x = (spr_io.m_mirror.x && !trans.xmirror) || (!spr_io.m_mirror.x && trans.xmirror);
+		spr_io.m_mirror.y = (spr_io.m_mirror.y && !trans.ymirror) || (!spr_io.m_mirror.y && trans.ymirror);
+		float new_x = spr_io.m_position.x * trans.scale.x,
+			  new_y = spr_io.m_position.y * trans.scale.y;
+		spr_io.m_position = sm::rotate_vector(sm::vec2(new_x, new_y), trans.angle) + trans.translation;
 
 		int sz = dst_sprs_val.size();
 		dst_sprs_val[sz] = src_spr_val;
-		ee::SpriteIO::Store(dst_sprs_val[sz], nd);
+		spr_io.Store(dst_sprs_val[sz]);
 	}
 }
 

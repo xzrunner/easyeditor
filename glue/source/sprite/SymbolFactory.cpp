@@ -1,6 +1,9 @@
 #include "SymbolFactory.h"
 #include "StringHelper.h"
+#include "SymbolFileType.h"
+
 #include "ImageSymbol.h"
+#include "Scale9Symbol.h"
 
 namespace glue
 {
@@ -37,9 +40,20 @@ s2::Symbol* SymbolFactory::Create(const std::string& filepath) const
 	}
 
 	s2::Symbol* ret = NULL;
-	std::string ext = filepath.substr(fixed_path.find_last_of('.') + 1);
-	if (ext == "png" || ext == "jpg") {
+	
+	SymbolFileType type = get_sym_file_type(filepath);
+	switch (type)
+	{
+	case IMAGE:
 		ret = new ImageSymbol(filepath);
+		break;
+	case SCALE9:
+		{
+			Scale9Symbol* sym = new Scale9Symbol();
+			sym->LoadJson(filepath);
+			ret = sym;
+		}
+		break;
 	}
 
 	if (ret) {

@@ -39,16 +39,6 @@ ImageSymbol::~ImageSymbol()
 	}
 }
 
-void ImageSymbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
-{
-	s2::RenderParams p = params;
-	if (spr) {
-		p.mt = spr->GetTransMatrix() * params.mt;
-		p.color = spr->Color() * params.color;
-	}
-	s2::ImageSymbol::Draw(p, spr);
-}
-
 void ImageSymbol::ReloadTexture() const
 {
 	m_image->ReloadTexture();

@@ -22,7 +22,7 @@ void SpriteFilterPSHelper::InitPS(const Sprite* spr, wxPropertyGrid* pg)
 	FilterModes::Instance()->GetAllNameCN(names);
 	wxEnumProperty* filter_prop = new wxEnumProperty("Filter", wxPG_LABEL, WXHelper::ToWXStringArray(names));
 	s2::FilterMode filter = spr->Shader().filter->GetMode();
-	int idx = FilterModes::Instance()->GetIdxFromMode(filter);
+	int idx = FilterModes::Instance()->Mode2ID(filter);
 	filter_prop->SetValue(idx);
 	pg->Append(filter_prop);
 
@@ -36,7 +36,7 @@ bool SpriteFilterPSHelper::FromPS(const std::string& name, const wxAny& value, S
 	if (name == "Filter")
 	{
 		int idx = wxANY_AS(value, int);
-		s2::FilterMode filter = FilterModes::Instance()->GetModeFromIdx(idx);
+		s2::FilterMode filter = FilterModes::Instance()->ID2Mode(idx);
 		delete spr->Shader().filter;
 		spr->Shader().filter = s2::FilterFactory::Instance()->Create(filter);
 		ret = true;
@@ -82,7 +82,7 @@ void SpriteFilterPSHelper::ToPS(const Sprite* spr, wxPropertyGrid* pg)
 	wxPGProperty* filter_prop = pg->GetProperty("Filter");
 
 	const s2::RenderFilter* filter = spr->Shader().filter;
-	filter_prop->SetValue(FilterModes::Instance()->GetIdxFromMode(filter->GetMode()));
+	filter_prop->SetValue(FilterModes::Instance()->Mode2ID(filter->GetMode()));
 
 	filter_prop->DeleteChildren();
 	CreateSubPS(pg, filter_prop, filter);

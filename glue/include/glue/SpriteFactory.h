@@ -3,7 +3,11 @@
 
 #include <CU_Singleton.h>
 
-namespace s2 { class Symbol; }
+#include <json/json.h>
+
+#include <string>
+
+namespace s2 { class Sprite; class Symbol; }
 
 namespace glue
 {
@@ -11,7 +15,10 @@ namespace glue
 class SpriteFactory
 {
 public:
-	s2::Sprite* Create() const;
+	s2::Sprite* Create(const std::string& filepath) const;
+	s2::Sprite* Create(const Json::Value& val, const std::string& dir) const;
+
+//	s2::Sprite* Create(s2::Symbol* sym) const;
 
 private:
 

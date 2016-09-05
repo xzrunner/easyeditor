@@ -203,13 +203,13 @@ void ScaleOverall::ScaleAnim(const std::string& path, float scale,
 sm::vec2 ScaleOverall::GetScaledPos(Json::Value& sprite_val, float scale, 
 									   const sm::vec2& img_offset) const
 {
-	ee::SpriteIO::Data data;
-	ee::SpriteIO::Load(sprite_val, data);
+	ee::SpriteIO spr_io;
+	spr_io.Load(sprite_val);
 
 // 	sm::vec2 center = pos + sm::rotate_vector(-offset, angle);
 // 	center = center + sm::rotate_vector(img_offset, angle);
 
-	sm::vec2 center = data.position + sm::rotate_vector(img_offset, data.angle);
+	sm::vec2 center = spr_io.m_position + sm::rotate_vector(img_offset, spr_io.m_angle);
 
 	center *= scale;
 
