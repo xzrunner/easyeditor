@@ -355,7 +355,7 @@ void Layer::StoreShapesUD(ee::Sprite* spr, Json::Value& spr_val) const
 	}
 
 	UserData* ud = static_cast<UserData*>(spr->GetUserData());
-	if (ud->type == UT_BASE_FILE) {
+	if (ud->type != UT_SHAPES) {
 		return;
 	}
 
