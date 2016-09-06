@@ -275,10 +275,8 @@ Visit(ee::Sprite* spr, bool& next)
 {
 	if (spr->Update(s2::RenderParams())) {
 		m_update = true;
-		next = false;
-	} else {
-		next = true;
 	}
+	next = true;
 }
 
 //////////////////////////////////////////////////////////////////////////
