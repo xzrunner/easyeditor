@@ -324,16 +324,21 @@ void SelectSpritesOP::CopyFromSelection()
 	wxTextDataObject data;
 	wxTheClipboard->GetData( data );
 
-	Json::Value value;
-	Json::Reader reader;
-	std::string test = data.GetText().ToStdString();
-	reader.parse(data.GetText().ToStdString(), value);
-
-	if (value.isNull()) {
+	std::string str = data.GetText().ToStdString();
+	if (str.find("{") == std::string::npos) {
 		wxTheClipboard->Close();
 		return;
 	}
- 
+
+	Json::Value value;
+	Json::Reader reader;
+	std::string test = data.GetText().ToStdString();
+	bool succ = reader.parse(str, value);
+	if (!succ || value["sprite"].isNull()) {
+ 		wxTheClipboard->Close();
+ 		return;
+ 	}
+  
 	m_selection->Clear();
 	ClearSpriteSelectionSJ::Instance()->Clear();
 
