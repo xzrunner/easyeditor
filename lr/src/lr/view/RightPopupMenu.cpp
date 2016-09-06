@@ -1,6 +1,7 @@
 #include "RightPopupMenu.h"
 #include "StagePanel.h"
 #include "typedef.h"
+#include "SetLayerTagAOP.h"
 
 #include "dataset/Layer.h"
 #include "view/LibraryPage.h"
@@ -192,27 +193,18 @@ void RightPopupMenu::HandleLayerTagMenu(int id)
 	ee::SpriteSelection* selection = m_stage->GetSpriteSelection();
 	std::vector<ee::Sprite*> sprs;
 	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
-	for (int i = 0, n = sprs.size(); i < n; ++i) 
-	{
-		ee::Sprite* spr = sprs[i];
 
-		std::string tag = spr->GetTag();
-		size_t p_begin = tag.find("layer=");
-		if (p_begin != std::string::npos) {
-			size_t p_end = tag.find(";", p_begin) + 1;
-			tag.erase(tag.begin() + p_begin, tag.begin() + p_end);
-		}
-
-		if (id == MENU_COVER_LAYER_TAG_ID) {
-			tag += std::string(COVER_LAYER_TAG) + ";";
-			ee::SetCanvasDirtySJ::Instance()->SetDirty();
-		} else if (id == MENU_TOP_LAYER_TAG_ID) {
-			tag += std::string(TOP_LAYER_TAG) + ";";
-			ee::SetCanvasDirtySJ::Instance()->SetDirty();
-		}
-
-		spr->SetTag(tag);
+	SetLayerTagAOP::Type type;
+	if (id == MENU_COVER_LAYER_TAG_ID) {
+		type = SetLayerTagAOP::COVER;
+	} else if (id == MENU_TOP_LAYER_TAG_ID) {
+		type = SetLayerTagAOP::TOP;
+	} else {
+		type = SetLayerTagAOP::CLEAR;
 	}
+	SetLayerTagAOP::Set(sprs, type);
+
+	ee::EditAddRecordSJ::Instance()->Add(new SetLayerTagAOP(type));
 }
 
 void RightPopupMenu::HandleMoveToLayerMenu(int id)

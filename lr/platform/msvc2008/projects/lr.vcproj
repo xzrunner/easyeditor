@@ -381,6 +381,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="aop"
+				>
+				<File
+					RelativePath="..\..\..\src\lr\view\SetLayerTagAOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\view\SetLayerTagAOP.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="dataset"

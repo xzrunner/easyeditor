@@ -151,7 +151,7 @@
 	</References>
 	<Files>
 		<Filter
-			Name="record"
+			Name="aop"
 			>
 			<File
 				RelativePath="..\..\..\source\edit\record\AtomicFactory.cpp"
