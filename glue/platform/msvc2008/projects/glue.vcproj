@@ -439,6 +439,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="06.complex"
+				>
+				<File
+					RelativePath="..\..\..\source\sprite\ComplexSymbol.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\glue\ComplexSymbol.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="adapter"

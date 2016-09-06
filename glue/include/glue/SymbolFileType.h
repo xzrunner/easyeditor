@@ -12,6 +12,7 @@ enum SymbolFileType
 	IMAGE,
 	SCALE9,
 	TEXTBOX,
+	COMPLEX,
 };
 
 SymbolFileType get_sym_file_type(const std::string& filepath);

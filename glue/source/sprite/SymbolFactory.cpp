@@ -5,6 +5,7 @@
 #include "ImageSymbol.h"
 #include "Scale9Symbol.h"
 #include "TextboxSymbol.h"
+#include "ComplexSymbol.h"
 
 namespace glue
 {
@@ -58,6 +59,13 @@ s2::Symbol* SymbolFactory::Create(const std::string& filepath) const
 	case TEXTBOX:
 		{
 			TextboxSymbol* sym = new TextboxSymbol();
+			sym->LoadJson(filepath);
+			ret = sym;
+		}
+		break;
+	case COMPLEX:
+		{
+			ComplexSymbol* sym = new ComplexSymbol();
 			sym->LoadJson(filepath);
 			ret = sym;
 		}

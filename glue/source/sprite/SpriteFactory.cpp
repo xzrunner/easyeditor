@@ -7,6 +7,8 @@
 #include <sprite2/ImageSprite.h>
 #include "Scale9Symbol.h"
 #include <sprite2/Scale9Sprite.h>
+#include "ComplexSymbol.h"
+#include <sprite2/ComplexSprite.h>
 
 namespace glue
 {
@@ -35,6 +37,14 @@ s2::Sprite* SpriteFactory::Create(const std::string& filepath) const
 			Scale9Symbol* sym = new Scale9Symbol();
 			sym->LoadJson(filepath);
 			spr = new s2::Scale9Sprite(sym);
+			sym->RemoveReference();
+		}
+		break;
+	case COMPLEX:
+		{
+			ComplexSymbol* sym = new ComplexSymbol();
+			sym->LoadJson(filepath);
+			spr = new s2::ComplexSprite(sym);
 			sym->RemoveReference();
 		}
 		break;
