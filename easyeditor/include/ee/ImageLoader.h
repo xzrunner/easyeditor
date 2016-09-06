@@ -17,13 +17,6 @@ public:
 
 	static void PixelsToTexture(unsigned int& texture, const uint8_t* pixel, int width, int height, int channels, int format);
 
-private:
-	static void FormatPixelsAlpha(uint8_t* pixels, int width, int height, int val);
-
-	static void PreMuiltiAlpha(uint8_t* pixels, int width, int height);
-
-	static void RemoveGhostPixel(uint8_t* pixels, int width, int height);
-
 }; // ImageLoader
 
 }

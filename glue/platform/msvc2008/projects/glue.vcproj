@@ -255,6 +255,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\include\glue\ImageLoader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\glue\ImageLoader.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\source\dataset\JpegLoader.cpp"
 					>
 				</File>

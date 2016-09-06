@@ -4,6 +4,7 @@
 #include "RenderContext.h"
 #include "StringHelper.h"
 #include "Exception.h"
+#include "ImageLoader.h"
 
 namespace glue
 {
@@ -31,7 +32,9 @@ bool Image::LoadFromFile(const std::string& filepath)
 	if (lower_path.find(".png") != std::string::npos) 
 	{
 		TEXTURE_FORMAT tf;
-		const uint8_t* data = PngLoader::Read(filepath, m_width, m_height, tf);
+		uint8_t* data = PngLoader::Read(filepath, m_width, m_height, tf);
+		glue::ImageLoader::RemoveGhostPixel(data, m_width, m_height);
+		glue::ImageLoader::FormatPixelsAlpha(data, m_width, m_height, 0);
 		m_format = tf;
 		m_id = RenderContext::Instance()->CreateTexture(data, m_width, m_height, tf);
 		delete[] data;
