@@ -1,6 +1,8 @@
 #include "utility.h"
 
 #include <ee/EE_ShaderLab.h>
+#include <ee/EE_DTex.h>
+#include <ee/EE_GTxt.h>
 
 #include <shaderlab.h>
 
@@ -24,6 +26,9 @@ int init_gl()
 	}
 
 	ee::ShaderLab::Instance()->Init();
+	ee::DTex::Init();
+	ee::GTxt::Init();
+
 // 	sl::SubjectMVP2::Instance()->NotifyModelview(0, 0, 1, 1);
 // 	sl::SubjectMVP2::Instance()->NotifyProjection(100, 100);
 

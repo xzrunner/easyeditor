@@ -1,10 +1,10 @@
 #include "RenderContextStack.h"
 #include "RenderContext.h"
 #include "ScreenCache.h"
-#include "EE_DTex.h"
 #include "StageCanvas.h"
 
 #include <shaderlab.h>
+#include <glue/GLUE_DTex.h>
 
 #include <assert.h>
 
@@ -52,7 +52,7 @@ void RenderContextStack::Pop()
 
 	int width, height;
 	ctx.render->GetProjection(width, height);
-	DTex::Instance()->OnSize(width, height);
+	glue::DTex::Instance()->OnSize(width, height);
 	ScreenCache::Instance()->SetSize(width, height);
 }
 

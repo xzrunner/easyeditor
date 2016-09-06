@@ -11,6 +11,7 @@ enum SymbolFileType
 	UNKNOWN		= 0,
 	IMAGE,
 	SCALE9,
+	TEXTBOX,
 };
 
 SymbolFileType get_sym_file_type(const std::string& filepath);

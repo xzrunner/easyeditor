@@ -34,9 +34,6 @@ public:
 
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
 
-	const std::string& GetText() const { return m_text; }
-	void SetText(const std::string& text) { m_text = text; }
-
 	const std::string& GetTID() const { return m_tid; }
 	void SetTID(const std::string& tid) { m_tid = tid; }	
 

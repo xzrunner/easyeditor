@@ -9,6 +9,7 @@
 #include "TestFilter.h"
 
 #include "TestScale9.h"
+#include "TestLabel.h"
 
 #include <shaderlab.h>
 #include <glue/RenderContext.h>
@@ -25,7 +26,8 @@
 //test::TestTask* task = new test::TestModel3;
 //test::TestTask* task = new test::TestFilter;
 
-test::TestTask* task = new test::TestScale9;
+//test::TestTask* task = new test::TestScale9;
+test::TestLabel* task = new test::TestLabel;
 
 void 
 display(void) {

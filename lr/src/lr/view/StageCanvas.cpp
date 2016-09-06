@@ -8,11 +8,9 @@
 #include "frame/SettingCfg.h"
 
 #include <ee/DrawShapesVisitor.h>
-#include <ee/EE_DTex.h>
 #include <ee/Config.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/SpriteRenderer.h>
-#include <ee/EE_GTxt.h>
 #include <ee/SettingData.h>
 #include <ee/Camera.h>
 #include <ee/CameraMgr.h>
@@ -25,10 +23,12 @@
 #include <easyparticle3d.h>
 #include <easytext.h>
 
+#include <SM_Test.h>
 #include <sprite2/S2_RVG.h>
 #include <sprite2/BoundingBox.h>
 #include <glue/FilterModes.h>
-#include <SM_Test.h>
+#include <glue/GLUE_DTex.h>
+#include <glue/GLUE_GTxt.h>
 
 #include <algorithm>
 
@@ -57,7 +57,7 @@ void StageCanvas::OnDrawSprites() const
 
 #ifdef _DEBUG 
 	if (ee::Config::Instance()->IsUseDTex()) {
-		ee::DTex::Instance()->DebugDraw();
+		glue::DTex::Instance()->DebugDraw();
 	}
 #endif
 }
@@ -127,7 +127,7 @@ void StageCanvas::DrawSprite(ee::Sprite* spr, bool draw_edge) const
 		sm::mat4 t = spr->GetTransMatrix();
 		float s = std::max(1.0f, ee::CameraMgr::Instance()->GetCamera()->GetScale()) * cfg.node_name_scale;
 		t.x[0] = t.x[5] = s;
-		ee::GTxt::Instance()->Draw(t, name);
+		glue::GTxt::Instance()->Draw(t, name);
 	}
 }
 

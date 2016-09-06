@@ -3,7 +3,6 @@
 #include "config.h"
 #include "FileLoader.h"
 
-#include <ee/EE_GTxt.h>
 #include <ee/TPNode.h>
 #include <ee/Config.h>
 #include <ee/SpriteRenderer.h>

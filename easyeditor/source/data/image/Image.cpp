@@ -9,7 +9,6 @@
 #include "render/ScreenCache.h"
 #endif // OPEN_SCREEN_CACHE
 //#include "BlendShader.h"
-#include "EE_DTex.h"
 #include "SettingData.h"
 #include "ImageData.h"
 #include "TextureFactory.h"
@@ -27,6 +26,7 @@
 #include <shaderlab.h>
 #include <sprite2/S2_Sprite.h>
 #include <sprite2/Texture.h>
+#include <glue/GLUE_DTex.h>
 
 namespace ee
 {
@@ -98,9 +98,9 @@ bool Image::LoadFromFile(const std::string& filepath)
 	}
 
 	if (Config::Instance()->IsUseDTex() && CanUseDTex()) {
-		DTex* dcb = DTex::Instance();
+		glue::DTex* dcb = glue::DTex::Instance();
 		dcb->LoadBegin();
-		dcb->Load(this);
+		dcb->Load(GetFilepath(), GetS2Tex());
 		dcb->LoadEnd();
 	}
 
@@ -112,7 +112,7 @@ void Image::ReloadTexture()
 	m_tex->Reload();
 
 	if (Config::Instance()->IsUseDTex() && CanUseDTex()) {
-		DTex::Instance()->Reload(this);
+//		glue::DTex::Instance()->Reload(this);
 	}
 }
 
@@ -188,7 +188,7 @@ void Image::QueryTexcoords(float* texcoords, int* texid) const
 {
 	float* c2_texcoords = NULL;
 	if (Config::Instance()->IsUseDTex() && CanUseDTex()) {
-		c2_texcoords = DTex::Instance()->Query(this, texid);
+		c2_texcoords = glue::DTex::Instance()->Query(GetFilepath(), GetS2Tex(), texid);
 	}
 	if (c2_texcoords)
 	{

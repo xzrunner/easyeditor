@@ -65,10 +65,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="glew32sd.lib libjpegd.lib libpngd.lib zlibd.lib assimpd.lib cjsond.lib jsond.lib pthreadVC2.lib lzmad.lib libboost_filesystem-vc90-mt-gd-1_61.lib"
+				AdditionalDependencies="glew32sd.lib libjpegd.lib libpngd.lib zlibd.lib assimpd.lib cjsond.lib jsond.lib pthreadVC2.lib lzmad.lib libboost_filesystem-vc90-mt-gd-1_61.lib freetype250_D.lib"
 				OutputFile="..\test\x86\Debug\test.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\freeglut\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;;&quot;..\..\..\..\editor-external\gl\lib&quot;;&quot;..\..\..\..\editor-external\libjpeg\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\zlib\lib&quot;;&quot;..\..\..\..\editor-external\assimp\lib&quot;;&quot;..\..\..\..\editor-external\cjson\lib&quot;;&quot;..\..\..\..\editor-external\json\lib&quot;;&quot;..\..\..\..\editor-external\pthread\lib\x86&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\boost\lib&quot;"
+				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\freeglut\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;;&quot;..\..\..\..\editor-external\gl\lib&quot;;&quot;..\..\..\..\editor-external\libjpeg\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\zlib\lib&quot;;&quot;..\..\..\..\editor-external\assimp\lib&quot;;&quot;..\..\..\..\editor-external\cjson\lib&quot;;&quot;..\..\..\..\editor-external\json\lib&quot;;&quot;..\..\..\..\editor-external\pthread\lib\x86&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\boost\lib&quot;;&quot;..\..\..\..\editor-external\freetype\lib&quot;"
 				IgnoreDefaultLibraryNames=""
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="..\test\x86\Debug\test.pdb"
@@ -145,10 +145,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="glew32s.lib libjpeg.lib libpng.lib zlib.lib cjson.lib json.lib pthreadVC2.lib lzma.lib libboost_filesystem-vc90-mt-1_61.lib"
+				AdditionalDependencies="glew32s.lib libjpeg.lib libpng.lib zlib.lib cjson.lib json.lib pthreadVC2.lib lzma.lib libboost_filesystem-vc90-mt-1_61.lib freetype250.lib"
 				OutputFile="..\test\x86\Debug\test.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\freeglut\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;;&quot;..\..\..\..\editor-external\gl\lib&quot;;&quot;..\..\..\..\editor-external\libjpeg\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\zlib\lib&quot;;&quot;..\..\..\..\editor-external\assimp\lib&quot;;&quot;..\..\..\..\editor-external\cjson\lib&quot;;&quot;..\..\..\..\editor-external\json\lib&quot;;&quot;..\..\..\..\editor-external\pthread\lib\x86&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\boost\lib&quot;"
+				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\freeglut\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;;&quot;..\..\..\..\editor-external\gl\lib&quot;;&quot;..\..\..\..\editor-external\libjpeg\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\zlib\lib&quot;;&quot;..\..\..\..\editor-external\assimp\lib&quot;;&quot;..\..\..\..\editor-external\cjson\lib&quot;;&quot;..\..\..\..\editor-external\json\lib&quot;;&quot;..\..\..\..\editor-external\pthread\lib\x86&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\boost\lib&quot;;&quot;..\..\..\..\editor-external\freetype\lib&quot;"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="..\test\x86\Debug\test.pdb"
 				SubSystem="1"
@@ -221,6 +221,14 @@
 		<Filter
 			Name="node"
 			>
+			<File
+				RelativePath="..\..\..\sample\TestLabel.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\sample\TestLabel.h"
+				>
+			</File>
 			<File
 				RelativePath="..\..\..\sample\TestScale9.cpp"
 				>

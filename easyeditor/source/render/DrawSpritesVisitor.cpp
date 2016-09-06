@@ -3,12 +3,12 @@
 #include "Sprite.h"
 #include "SettingData.h"
 #include "Config.h"
-#include "EE_GTxt.h"
 #include "FilterModes.h"
 
 #include <sprite2/RenderFilter.h>
 #include <sprite2/BoundingBox.h>
 #include <glue/FilterModes.h>
+#include <glue/GLUE_GTxt.h>
 #include <SM_Test.h>
 
 namespace ee
@@ -39,7 +39,7 @@ void DrawSpritesVisitor::Visit(Sprite* spr, bool& next)
 		sm::mat4 t = spr->GetTransMatrix();
 		float s = std::max(1.0f, m_cam_scale) * cfg.node_name_scale;
 		t.Scale(s, s, 1);
-		GTxt::Instance()->Draw(t, name);
+		glue::GTxt::Instance()->Draw(t, name);
 	}
 }
 

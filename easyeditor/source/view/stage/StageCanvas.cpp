@@ -10,6 +10,8 @@
 #include "subject_id.h"
 #include "panel_msg.h"
 #include "EE_ShaderLab.h"
+#include "EE_DTex.h"
+#include "EE_GTxt.h"
 
 #include <shaderlab.h>
 #include <sprite2/RenderCtxStack.h>
@@ -128,6 +130,8 @@ void StageCanvas::Init()
 	// prepare 2d
 	// todo: move to child, for defferent init (such as 3d ?)
 	ShaderLab::Instance()->Init();
+	DTex::Init();
+	GTxt::Init();
 
 	try {
 // 		ShaderContext::Reload();

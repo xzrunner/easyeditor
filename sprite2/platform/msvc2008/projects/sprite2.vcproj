@@ -1052,14 +1052,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\source\render\S2_GTxt.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\sprite2\S2_GTxt.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\source\render\S2_RVG.cpp"
 					>
 				</File>

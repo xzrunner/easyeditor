@@ -16,6 +16,8 @@ public:
 	ImageSymbol(const std::string& filepath);
 	virtual ~ImageSymbol();
 
+	const Image* GetImage() const { return m_img; }
+
 protected:
 	virtual void QueryTexcoords(float* texcoords, int& texid) const;
 	virtual void Proj2Screen(float px, float py, int w, int h, float& sx, float& sy) const;

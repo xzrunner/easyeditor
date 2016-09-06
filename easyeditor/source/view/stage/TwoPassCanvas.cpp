@@ -4,12 +4,12 @@
 #include "Config.h"
 #include "color_config.h"
 #include "SpriteRenderer.h"
-#include "EE_DTex.h"
 #include "EE_SP.h"
 #include "ScreenCache.h"
 #include "Camera.h"
 
 #include <shaderlab.h>
+#include <glue/GLUE_DTex.h>
 
 namespace ee
 {
@@ -25,10 +25,10 @@ TwoPassCanvas::TwoPassCanvas(wxWindow* stage_wnd, EditPanelImpl* stage,
 void TwoPassCanvas::OnSize(int w, int h)
 {
 	if (Config::Instance()->IsUseDTex()) {
-		DTex::Instance()->OnSize(w, h);
+		glue::DTex::Instance()->OnSize(w, h);
 	} else {
-		// fix me: ScreenCache depend on DTex
-		DTex::Instance();
+		// fix me: ScreenCache depend on glue::DTex
+		glue::DTex::Instance();
 	}
 	ScreenCache::Instance()->SetSize(w, h);
 }

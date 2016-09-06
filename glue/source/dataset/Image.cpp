@@ -25,6 +25,8 @@ Image::~Image()
 
 bool Image::LoadFromFile(const std::string& filepath)
 {
+	m_filepath = filepath;
+
 	bool ret = false;
 
 	std::string lower_path = filepath;
@@ -33,8 +35,8 @@ bool Image::LoadFromFile(const std::string& filepath)
 	{
 		TEXTURE_FORMAT tf;
 		uint8_t* data = PngLoader::Read(filepath, m_width, m_height, tf);
-		glue::ImageLoader::RemoveGhostPixel(data, m_width, m_height);
-		glue::ImageLoader::FormatPixelsAlpha(data, m_width, m_height, 0);
+		ImageLoader::RemoveGhostPixel(data, m_width, m_height);
+		ImageLoader::FormatPixelsAlpha(data, m_width, m_height, 0);
 		m_format = tf;
 		m_id = RenderContext::Instance()->CreateTexture(data, m_width, m_height, tf);
 		delete[] data;

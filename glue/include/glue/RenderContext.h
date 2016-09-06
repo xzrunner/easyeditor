@@ -24,6 +24,7 @@ public:
 
 	RID CreateTexture(const uint8_t* data, int width, int height, TEXTURE_FORMAT format);
 	void ReleaseTexture(RID id);
+	void UpdateTexture(const uint8_t* data, int x, int y, int w, int h, int id);
 
 //	const Camera* GetCamera() const { return m_cam; }
 

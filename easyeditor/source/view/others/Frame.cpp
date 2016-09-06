@@ -10,13 +10,14 @@
 #include "FrameDropTarget.h"
 #include "EditPanel.h"
 #include "StageCanvas.h"
-#include "EE_DTex.h"
 #include "Task.h"
 #include "Config.h"
 #include "sprite_msg.h"
 #include "shape_msg.h"
 #include "panel_msg.h"
 #include "StringHelper.h"
+
+#include <glue/GLUE_DTex.h>
 
 #include <fstream>
 
@@ -98,7 +99,7 @@ void Frame::OpenFile(const std::string& filename)
 	}
 
 	if (Config::Instance()->IsUseDTex()) {
-		DTex::Instance()->Clear();
+		glue::DTex::Instance()->Clear();
 	}
 
 	Clear();
@@ -172,7 +173,7 @@ void Frame::OnNew(wxCommandEvent& event)
 	Clear();
 
 	if (Config::Instance()->IsUseDTex()) {
-		DTex::Instance()->Clear();
+		glue::DTex::Instance()->Clear();
 	}
 }
 

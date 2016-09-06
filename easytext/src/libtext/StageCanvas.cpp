@@ -7,10 +7,10 @@
 #include <ee/render_utility.h>
 #include <ee/SpriteRenderer.h>
 #include <ee/Config.h>
-#include <ee/EE_DTex.h>
 #include <ee/Math2D.h>
 
 #include <sprite2/S2_RVG.h>
+#include <glue/GLUE_DTex.h>
 
 namespace etext
 {
@@ -61,7 +61,7 @@ void StageCanvas::OnDrawSprites() const
 
 #ifdef _DEBUG 
 	if (ee::Config::Instance()->IsUseDTex()) {
-		ee::DTex::Instance()->DebugDraw();
+		glue::DTex::Instance()->DebugDraw();
 	}
 #endif
 }

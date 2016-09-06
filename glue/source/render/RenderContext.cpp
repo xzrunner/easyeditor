@@ -59,4 +59,10 @@ void RenderContext::ReleaseTexture(RID id)
 	render_release(r, TEXTURE, id);
 }
 
+void RenderContext::UpdateTexture(const uint8_t* data, int x, int y, int w, int h, int id)
+{
+	render* r = sl::ShaderMgr::Instance()->GetContext()->GetEJRender();
+	render_texture_subupdate(r, id, data, x, y, w, h);
+}
+
 }

@@ -6,7 +6,8 @@
 #include <ee/EditPanelImpl.h>
 #include <ee/DrawShapesVisitor.h>
 #include <ee/Config.h>
-#include <ee/EE_DTex.h>
+
+#include <glue/GLUE_DTex.h>
 
 namespace emesh
 {
@@ -31,7 +32,7 @@ void StageCanvas::OnDrawSprites() const
 
 #ifdef _DEBUG 
 	if (ee::Config::Instance()->IsUseDTex()) {
-		ee::DTex::Instance()->DebugDraw();
+		glue::DTex::Instance()->DebugDraw();
 	}
 #endif
 }

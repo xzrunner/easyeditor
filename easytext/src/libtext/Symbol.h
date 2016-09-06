@@ -3,14 +3,14 @@
 
 #include <ee/Symbol.h>
 
-#include <sprite2/TextboxSymbol.h>
+#include <glue/TextboxSymbol.h>
 
 namespace etext
 {
 
 class Sprite;
 
-class Symbol : public ee::Symbol, public s2::TextboxSymbol
+class Symbol : public ee::Symbol, public glue::TextboxSymbol
 {
 public:
 	Symbol();
@@ -25,11 +25,21 @@ public:
 	static ee::Symbol* Create() { return new Symbol(); }
 
 protected:
+	/**
+	 *  @interface
+	 *    ee::Symbol
+	 */
 	virtual void LoadResources();
+
+	/**
+	 *  @interface
+	 *    s2::TextboxSymbol
+	 */
+	virtual void DrawText(const gtxt_label_style& style, const sm::mat4& mt, const s2::Color& mul, 
+		const s2::Color& add, const std::string& text, int time, bool richtext) const;
 
 private:
 	void DrawBackground(const Sprite* spr, const sm::mat4& mt) const;
-	void DrawText(const Sprite* spr, const s2::RenderParams& params) const;
 
 }; // Symbol
 

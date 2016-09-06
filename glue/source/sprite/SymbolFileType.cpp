@@ -4,6 +4,7 @@ namespace glue
 {
 
 static const std::string TAG_SCALE9		= "scale9";
+static const std::string TAG_TEXTBOX	= "text";
 
 SymbolFileType get_sym_file_type(const std::string& filepath)
 {
@@ -33,6 +34,8 @@ SymbolFileType get_sym_file_type(const std::string& filepath)
 		std::string tag = filename.substr(pos + 1);
 		if (tag == TAG_SCALE9) {
 			return SCALE9;
+		} else if (tag == TAG_TEXTBOX) {
+			return TEXTBOX;
 		}
 	}
 
@@ -45,6 +48,8 @@ std::string get_sym_tag_str(SymbolFileType type)
 	{
 	case SCALE9:
 		return TAG_SCALE9;
+	case TEXTBOX:
+		return TAG_TEXTBOX;
 	}
 
 	return "";

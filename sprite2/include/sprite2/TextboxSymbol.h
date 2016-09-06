@@ -4,7 +4,13 @@
 #include "S2_Symbol.h"
 #include "Textbox.h"
 
+#include <SM_Matrix.h>
+
+#include <string>
+
 #include <stdint.h>
+
+struct gtxt_label_style;
 
 namespace s2
 {
@@ -24,6 +30,10 @@ public:
 
 	const Textbox& GetTextbox() const { return m_tb; }
 	Textbox& GetTextbox() { return m_tb; }
+
+protected:
+	virtual void DrawText(const gtxt_label_style& style, const sm::mat4& mt, const Color& mul, 
+		const Color& add, const std::string& text, int time, bool richtext) const = 0;
 
 protected:
 	Textbox m_tb;

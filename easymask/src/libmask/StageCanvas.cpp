@@ -6,10 +6,10 @@
 #include <ee/CameraMgr.h>
 #include <ee/DrawSpritesVisitor.h>
 #include <ee/Config.h>
-#include <ee/EE_DTex.h>
 #include <ee/SpriteRenderer.h>
 
 #include <sprite2/RenderParams.h>
+#include <glue/GLUE_DTex.h>
 
 namespace emask
 {
@@ -41,7 +41,7 @@ void StageCanvas::OnDrawSprites() const
 
 #ifdef _DEBUG 
 	if (ee::Config::Instance()->IsUseDTex()) {
-		ee::DTex::Instance()->DebugDraw();
+		glue::DTex::Instance()->DebugDraw();
 	}
 #endif
 }

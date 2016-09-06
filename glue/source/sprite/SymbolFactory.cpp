@@ -4,6 +4,7 @@
 
 #include "ImageSymbol.h"
 #include "Scale9Symbol.h"
+#include "TextboxSymbol.h"
 
 namespace glue
 {
@@ -50,6 +51,13 @@ s2::Symbol* SymbolFactory::Create(const std::string& filepath) const
 	case SCALE9:
 		{
 			Scale9Symbol* sym = new Scale9Symbol();
+			sym->LoadJson(filepath);
+			ret = sym;
+		}
+		break;
+	case TEXTBOX:
+		{
+			TextboxSymbol* sym = new TextboxSymbol();
 			sym->LoadJson(filepath);
 			ret = sym;
 		}

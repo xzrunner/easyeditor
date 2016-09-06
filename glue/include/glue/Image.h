@@ -30,12 +30,16 @@ public:
 
 	uint32_t GetTexID() const { return m_id; }
 
-	s2::Texture* GetS2Tex() { return m_s2_tex; }
+	s2::Texture* GetS2Tex() const { return m_s2_tex; }
+
+	const std::string& GetFilepath() const { return m_filepath; }
 
 private:
 	void Load();
 
 private:
+	std::string m_filepath;
+
 	int m_width, m_height;
 	int m_format;
 

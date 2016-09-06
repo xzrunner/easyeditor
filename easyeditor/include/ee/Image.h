@@ -46,7 +46,7 @@ public:
 
 	void QueryTexcoords(float* texcoords, int* texid) const;
 
-	s2::Texture* GetS2Tex() { return m_s2_tex; }
+	s2::Texture* GetS2Tex() const { return m_s2_tex; }
 
 private:
 	void LoadWithClip(const std::string& filepath);

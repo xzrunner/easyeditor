@@ -8,8 +8,9 @@
 #include "LoadFromPSD.h"
 
 #include <ee/Config.h>
-#include <ee/EE_DTex.h>
 #include <ee/FileHelper.h>
+
+#include <glue/GLUE_DTex.h>
 
 #include <fstream>
 
@@ -117,7 +118,7 @@ namespace ecomplex
 void FileLoader::Load(const std::string& filepath, Symbol* complex)
 {
 	if (ee::Config::Instance()->IsUseDTex()) {
-		ee::DTex::Instance()->LoadBegin();
+		glue::DTex::Instance()->LoadBegin();
 	}
 
 	complex->Clear();
@@ -144,7 +145,7 @@ void FileLoader::Load(const std::string& filepath, Symbol* complex)
 //	complex->InitBounding();
 
 	if (ee::Config::Instance()->IsUseDTex()) {
-		ee::DTex::Instance()->LoadEnd();
+		glue::DTex::Instance()->LoadEnd();
 
 // 		if (complex->m_use_render_cache) {
 // 			dtex->InsertSymbol(*complex);
