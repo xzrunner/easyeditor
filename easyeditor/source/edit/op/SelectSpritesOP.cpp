@@ -342,8 +342,6 @@ void SelectSpritesOP::CopyFromSelection()
 	m_selection->Clear();
 	ClearSpriteSelectionSJ::Instance()->Clear();
 
-	Sprite* last_spr = NULL;
-
 	std::vector<Sprite*> sprs;
 
 	int i = 0;
@@ -361,7 +359,6 @@ void SelectSpritesOP::CopyFromSelection()
 			CopySprFromClipboard(spr, sval);
 			InsertSpriteSJ::Instance()->Insert(spr);
 			EditAddRecordSJ::Instance()->Add(new InsertSpriteAOP(spr));
-			cu::RefCountObjAssign(last_spr, spr);
 		}
 		sval = value["sprite"][i++];
 	}
@@ -369,13 +366,8 @@ void SelectSpritesOP::CopyFromSelection()
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
 		m_selection->Add(sprs[i]);
 	}
-
-	bool add = m_stage->GetKeyState(WXK_CONTROL);
-	SelectSpriteSJ::Instance()->Select(last_spr, !add);
-
-	if (last_spr) {
-		last_spr->RemoveReference();
-	}
+	SelectSpriteSetSJ::Instance()->Select(m_selection);
+	for_each(sprs.begin(), sprs.end(), cu::RemoveRefFonctor<Sprite>());
 
 	wxTheClipboard->Close();
 }
