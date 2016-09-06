@@ -39,7 +39,7 @@ bool SelectBodyOP::OnMouseMove(int x, int y)
 	m_mouseOn = NULL;
 
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-	ee::Sprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
+	ee::Sprite* selected = m_sprs_impl->QuerySpriteByPos(pos);
 	if (selected)
 		m_mouseOn = static_cast<Body*>(selected->GetUserData());
 

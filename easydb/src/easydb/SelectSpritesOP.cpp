@@ -47,7 +47,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	if (ee::SelectSpritesOP::OnMouseLeftDClick(x, y)) return true;
 
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-	ee::Sprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
+	ee::Sprite* selected = m_sprs_impl->QuerySpriteByPos(pos);
 	if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(selected))
 	{
 		ecomplex::Symbol* sym = dynamic_cast<ecomplex::Symbol*>(complex->GetSymbol());

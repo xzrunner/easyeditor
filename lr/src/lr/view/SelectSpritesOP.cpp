@@ -88,7 +88,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	ee::Sprite* selected = NULL;
 	m_selection->Traverse(ee::PointQueryVisitor(pos, &selected));
 	if (!selected) {
-		selected = m_spritesImpl->QuerySpriteByPos(pos);
+		selected = m_sprs_impl->QuerySpriteByPos(pos);
 	}
 	if (selected) {
 		m_open_symbol.Open(selected);

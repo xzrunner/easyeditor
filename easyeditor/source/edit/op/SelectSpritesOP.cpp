@@ -28,7 +28,7 @@ SelectSpritesOP::SelectSpritesOP(wxWindow* wnd, EditPanelImpl* stage,
 								 EditCMPT* callback)
 	: DrawSelectRectOP(wnd, stage)
 	, m_callback(callback)
-	, m_spritesImpl(sprites_impl)
+	, m_sprs_impl(sprites_impl)
 	, m_draggable(true)
 	, m_rect_select(false)
 {
@@ -52,7 +52,7 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 	if (m_stage->GetKeyState(WXK_CONTROL) && m_stage->GetKeyState(WXK_CONTROL_X))
 	{
 		PasteToSelection();
-		m_spritesImpl->ClearSelectedSprite();
+		m_sprs_impl->ClearSelectedSprite();
 		return true;
 	}
 	else if (m_stage->GetKeyState(WXK_CONTROL) && keyCode == 'C')
@@ -112,7 +112,7 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 			} else {
 				m_selection->Add(selected);
 			}
-			SelectSpriteSetSJ::Instance()->Select(m_selection, m_spritesImpl);
+			SelectSpriteSetSJ::Instance()->Select(m_selection, m_sprs_impl);
 		}
 		else
 		{
@@ -163,7 +163,7 @@ bool SelectSpritesOP::OnMouseLeftUp(int x, int y)
 	sm::vec2 end = m_stage->TransPosScrToProj(x, y);
 	sm::rect rect(m_left_first_pos, end);
 	std::vector<Sprite*> sprs;
-	m_spritesImpl->QuerySpritesByRect(rect, m_left_first_pos.x < end.x, sprs);
+	m_sprs_impl->QuerySpritesByRect(rect, m_left_first_pos.x < end.x, sprs);
 	if (m_stage->GetKeyState(WXK_CONTROL))
 	{
 		for (size_t i = 0, n = sprs.size(); i < n; ++i) 
@@ -183,7 +183,7 @@ bool SelectSpritesOP::OnMouseLeftUp(int x, int y)
 		}
 	}
 
-	SelectSpriteSetSJ::Instance()->Select(m_selection, m_spritesImpl);
+	SelectSpriteSetSJ::Instance()->Select(m_selection, m_sprs_impl);
 
 	m_left_first_pos.MakeInvalid();
 
@@ -213,7 +213,7 @@ bool SelectSpritesOP::OnMouseRightUp(int x, int y)
 	{
 		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 		PointMultiQueryVisitor visitor(pos);
-		m_spritesImpl->TraverseSprites(visitor, DT_EDITABLE);
+		m_sprs_impl->TraverseSprites(visitor, DT_EDITABLE);
 		const std::vector<Sprite*>& sprs = visitor.GetResult();
 		SetRightPan(sprs.empty());
 	}
@@ -261,7 +261,7 @@ Sprite* SelectSpritesOP::SelectByPos(const sm::vec2& pos) const
 
 	Sprite* selected = NULL;
 	std::vector<Sprite*> sprs;
-	m_spritesImpl->GetSpriteSelection()->Traverse(FetchAllVisitor<Sprite>(sprs));
+	m_sprs_impl->GetSpriteSelection()->Traverse(FetchAllVisitor<Sprite>(sprs));
 	for (int i = 0, n = sprs.size(); i < n; ++i)
 	{
 		Sprite* spr = sprs[i];
@@ -271,7 +271,7 @@ Sprite* SelectSpritesOP::SelectByPos(const sm::vec2& pos) const
 		}
 	}
 	if (!selected) {
-		Sprite* spr = m_spritesImpl->QuerySpriteByPos(pos);
+		Sprite* spr = m_sprs_impl->QuerySpriteByPos(pos);
 		if (spr) {
 			selected = spr;
 		}
@@ -293,7 +293,7 @@ void SelectSpritesOP::CopySprFromClipboard(Sprite* spr, const Json::Value& value
 void SelectSpritesOP::PasteToSelection() const
 {
 	std::vector<Sprite*> sprs;
-	m_selection->Traverse(FetchAllVisitor<Sprite>(sprs));
+	GetOrderedSelection(sprs);
 	Json::Value value;
 	for (int i = 0, n = sprs.size(); i < n; ++i)
 	{
@@ -378,6 +378,30 @@ void SelectSpritesOP::CopyFromSelection()
 	}
 
 	wxTheClipboard->Close();
+}
+
+void SelectSpritesOP::GetOrderedSelection(std::vector<Sprite*>& sprs) const
+{
+	std::vector<Sprite*> selection;
+	m_selection->Traverse(FetchAllVisitor<Sprite>(selection));
+	if (selection.size() <= 1) {
+		sprs = selection;
+		return;
+	}
+
+	std::vector<Sprite*> all;
+	m_sprs_impl->TraverseSprites(FetchAllVisitor<Sprite>(all));
+
+	sprs.clear();
+	for (int i = 0, n = all.size(); i < n; ++i) {
+		for (int j = 0, m = selection.size(); j < m; ++j) {
+			if (all[i] == selection[j]) {
+				sprs.push_back(selection[j]);
+				selection.erase(selection.begin() + j);
+				break;
+			}			
+		}
+	}
 }
 
 }

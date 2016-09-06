@@ -44,10 +44,12 @@ private:
 	void PasteToSelection() const;
 	void CopyFromSelection();
 
+	void GetOrderedSelection(std::vector<Sprite*>& sprs) const;
+
 protected:
 	SpriteSelection* m_selection;
 
-	MultiSpritesImpl* m_spritesImpl;
+	MultiSpritesImpl* m_sprs_impl;
 
 	EditCMPT* m_callback;
 
