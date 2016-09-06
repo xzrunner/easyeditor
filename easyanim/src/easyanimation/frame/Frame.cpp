@@ -7,6 +7,9 @@
 #include "view/PreviewDialog.h"
 #include "view/StageCanvas.h"
 #include "view/StagePanel.h"
+#include "dataset/DataMgr.h"
+#include "dataset/Layer.h"
+#include "dataset/KeyFrame.h"
 
 #include <ee/FileType.h>
 #include <ee/Exception.h>
@@ -95,8 +98,10 @@ void Frame::OnPreview(wxCommandEvent& event)
 	stage->EnableObserve(false);
 	stage->GetCanvas()->SetDrawable(false);
 	{
-		PreviewDialog dlg(this, stage->GetCanvas()->GetGLContext());
+		s2::AnimSymbol* sym = BuildSym();
+		PreviewDialog dlg(this, stage->GetCanvas()->GetGLContext(), sym);
 		dlg.ShowModal();
+		sym->RemoveReference();
 	}
 	stage->EnableObserve(true);
 	stage->GetCanvas()->EnableObserve(true);
@@ -187,6 +192,33 @@ void Frame::SaveAsTemplate(const std::string& filepath) const
 
 	FileIO::StoreTemplate(full_path);
 	ViewMgr::Instance()->stage->OnSave();
+}
+
+s2::AnimSymbol* Frame::BuildSym() const
+{
+	s2::AnimSymbol* dst = new s2::AnimSymbol();
+	const std::vector<Layer*>& src = DataMgr::Instance()->GetLayers().GetAllLayers();
+	for (int i = 0, n = src.size(); i < n; ++i)
+	{
+		const std::map<int, KeyFrame*>& src_layer = src[i]->GetAllFrames();
+		s2::AnimSymbol::Layer* dst_layer = new s2::AnimSymbol::Layer;
+		std::map<int, KeyFrame*>::const_iterator itr = src_layer.begin();
+		for ( ; itr != src_layer.end(); ++itr)
+		{
+			const std::vector<ee::Sprite*>& src_frame = itr->second->GetAllSprites();
+			s2::AnimSymbol::Frame* dst_frame = new s2::AnimSymbol::Frame();
+			dst_frame->index = itr->second->GetTime();
+			dst_frame->tween = itr->second->HasClassicTween();
+			for (int j = 0, m = src_frame.size(); j < m; ++j) 
+			{
+				src_frame[j]->AddReference();
+				dst_frame->sprs.push_back(src_frame[j]);
+			}
+			dst_layer->frames.push_back(dst_frame);
+		}
+		dst->AddLayer(dst_layer);
+	}
+	return dst;
 }
 
 }

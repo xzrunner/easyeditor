@@ -12,7 +12,7 @@ namespace s2
 
 AnimCurr::AnimCurr()
 	: m_sym(NULL)
-	, m_frame(1)
+	, m_frame(0)
 {
 	m_start_time = m_curr_time = Animation::Instance()->GetTime();
 }
@@ -40,7 +40,7 @@ AnimCurr& AnimCurr::operator = (const AnimCurr& curr)
 
 AnimCurr::AnimCurr(AnimSymbol* sym)
 	: m_sym(NULL)
-	, m_frame(1)
+	, m_frame(0)
 {
 	m_start_time = m_curr_time = Animation::Instance()->GetTime();
 	cu::RefCountObjAssign(m_sym, sym);

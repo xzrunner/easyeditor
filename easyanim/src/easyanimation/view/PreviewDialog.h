@@ -7,8 +7,6 @@
 
 #include <wx/wx.h>
 
-#include "PreviewSettings.h"
-
 namespace ee { class EditPanel; }
 
 class wxGLContext;
@@ -16,10 +14,12 @@ class wxGLContext;
 namespace eanim
 {
 
+class PreviewPanel;
+
 class PreviewDialog : public wxDialog
 {
 public:
-	PreviewDialog(wxWindow* parent, wxGLContext* glctx);
+	PreviewDialog(wxWindow* parent, wxGLContext* glctx, s2::AnimSymbol* sym);
 	~PreviewDialog();
 
 private:
@@ -28,15 +28,12 @@ private:
 	void BuildToolBar(wxSizer* top_sizer);
 	void BuildEditPanel(wxSizer* top_sizer, wxGLContext* glctx);
 
-	void OnSetCirculate(wxCommandEvent& event);
-	void OnSetStop(wxCommandEvent& event);
+	void OnSetLoop(wxCommandEvent& event);
 
 private:
-	ee::EditPanel* m_stage;
+	PreviewPanel* m_stage;
 
-	PlaySettings m_settings;
-
-	ee::PlayControl m_control;
+	s2::AnimCurr m_curr;
 
 }; // PreviewDialog
 

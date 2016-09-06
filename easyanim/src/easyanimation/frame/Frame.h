@@ -3,6 +3,8 @@
 
 #include <ee/Frame.h>
 
+namespace s2 { class AnimSymbol; }
+
 namespace eanim
 {
 
@@ -24,6 +26,9 @@ private:
 	void SaveAsPNG(const std::string& filepath) const;
 	void SaveAsSingle(const std::string& filepath) const;
 	void SaveAsTemplate(const std::string& filepath) const;
+
+private:
+	s2::AnimSymbol* BuildSym() const;
 
 private:
 	enum

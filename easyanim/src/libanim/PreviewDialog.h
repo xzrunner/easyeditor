@@ -25,7 +25,7 @@ private:
 	void BuildToolBar(wxSizer* topSizer);
 	void BuildEditPanel(wxSizer* topSizer, wxGLContext* glctx);
 
-	void OnSetCirculate(wxCommandEvent& event);
+	void OnSetLoop(wxCommandEvent& event);
 	void OnSetStop(wxCommandEvent& event);
 
 private:

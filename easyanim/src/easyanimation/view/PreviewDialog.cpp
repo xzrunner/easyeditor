@@ -3,20 +3,18 @@
 #include "PreviewCanvas.h"
 #include "PreviewOP.h"
 
-#include "message/messages.h"
-
 #include <ee/Config.h>
 #include <ee/SettingData.h>
+
+#include <sprite2/AnimCurr.h>
 
 namespace eanim
 {
 
-PreviewDialog::PreviewDialog(wxWindow* parent, wxGLContext* glctx)
+PreviewDialog::PreviewDialog(wxWindow* parent, wxGLContext* glctx, s2::AnimSymbol* sym)
  	: wxDialog(parent, wxID_ANY, "Preview", wxDefaultPosition, wxSize(800, 600), wxCLOSE_BOX | wxCAPTION)
-	, m_control(0.033f)
+	, m_curr(sym)
 {
-	int fps = GetFpsSJ::Instance()->Get();
-	m_control.SetDt(1.0f / fps);
 	InitLayout(glctx);
 
 	const s2::Color& col = ee::Config::Instance()->GetSettings().bg_color;
@@ -38,38 +36,27 @@ void PreviewDialog::InitLayout(wxGLContext* glctx)
 
 void PreviewDialog::BuildToolBar(wxSizer* top_sizer)
 {
-	wxBoxSizer* toolSizer = new wxBoxSizer(wxVERTICAL);
+	wxBoxSizer* tool_sizer = new wxBoxSizer(wxVERTICAL);
 
-	wxCheckBox* circulateCheck = new wxCheckBox(this, wxID_ANY, wxT("Ñ­»·"));
-	circulateCheck->SetValue(true);
-	Connect(circulateCheck->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(PreviewDialog::OnSetCirculate));
-	toolSizer->Add(circulateCheck, 0);
+	wxCheckBox* loop_check = new wxCheckBox(this, wxID_ANY, wxT("Ñ­»·"));
+	loop_check->SetValue(true);
+	Connect(loop_check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(PreviewDialog::OnSetLoop));
+	tool_sizer->Add(loop_check, 0);
 
-	wxCheckBox* stopCheck = new wxCheckBox(this, wxID_ANY, wxT("ÔÝÍ£"));
-	stopCheck->SetValue(false);
-	Connect(stopCheck->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(PreviewDialog::OnSetStop));
-	toolSizer->Add(stopCheck, 0);
-
-	top_sizer->Add(toolSizer, 0);
+	top_sizer->Add(tool_sizer, 0);
 }
 
 void PreviewDialog::BuildEditPanel(wxSizer* top_sizer, wxGLContext* glctx)
 {
-	m_stage = new PreviewPanel(this, this, m_control);
-	m_stage->SetEditOP(new PreviewOP(m_stage, m_stage->GetStageImpl(), m_settings, m_control));
-	m_stage->SetCanvas(new PreviewCanvas(m_stage, m_stage->GetStageImpl(), m_settings, m_control, glctx));
+	m_stage = new PreviewPanel(this, this, m_curr);
+	m_stage->SetEditOP(new PreviewOP(m_stage, m_stage->GetStageImpl(), m_curr));
+	m_stage->SetCanvas(new PreviewCanvas(m_stage, m_stage->GetStageImpl(), glctx, m_curr));
 	top_sizer->Add(m_stage, 1, wxEXPAND);
 }
 
-void PreviewDialog::OnSetCirculate(wxCommandEvent& event)
+void PreviewDialog::OnSetLoop(wxCommandEvent& event)
 {
-	m_settings.isCirculate = event.IsChecked();
-	m_stage->SetFocus();
-}
-
-void PreviewDialog::OnSetStop(wxCommandEvent& event)
-{
-	m_settings.isStop = event.IsChecked();
+	m_stage->SetLoop(event.IsChecked());
 	m_stage->SetFocus();
 }
 

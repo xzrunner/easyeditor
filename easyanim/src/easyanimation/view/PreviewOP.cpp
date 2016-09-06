@@ -1,7 +1,4 @@
 #include "PreviewOP.h"
-#include "PreviewSettings.h"
-
-#include <ee/PlayControl.h>
 
 #include <easyanim.h>
 
@@ -9,23 +6,19 @@ namespace eanim
 {
 
 PreviewOP::PreviewOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
-					 PlaySettings& settings, ee::PlayControl& control)
+					 s2::AnimCurr& curr)
 	: ee::ZoomViewOP(wnd, stage, true, true, false)
-	, m_settings(settings)
-	, m_control(control)
+	, m_curr(curr)
 {
 }
 
-bool PreviewOP::OnKeyDown(int keyCode)
+bool PreviewOP::OnMouseLeftDown(int x, int y)
 {
-	if (ee::ZoomViewOP::OnKeyDown(keyCode))
+	if (ee::ZoomViewOP::OnMouseLeftDown(x, y)) {
 		return true;
-
-	if (keyCode == WXK_SPACE)
-	{
-		m_settings.isStop = !m_settings.isStop;
-		m_control.Reset();
 	}
+
+	m_curr.Start();
 
 	return false;
 }

@@ -37,7 +37,7 @@ void PreviewDialog::BuildToolBar(wxSizer* topSizer)
 
 	wxCheckBox* circulateCheck = new wxCheckBox(this, wxID_ANY, wxT("Ñ­»·"));
 	circulateCheck->SetValue(true);
-	Connect(circulateCheck->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(PreviewDialog::OnSetCirculate));
+	Connect(circulateCheck->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(PreviewDialog::OnSetLoop));
 	toolSizer->Add(circulateCheck, 0);
 
 	wxCheckBox* stopCheck = new wxCheckBox(this, wxID_ANY, wxT("ÔÝÍ£"));
@@ -56,7 +56,7 @@ void PreviewDialog::BuildEditPanel(wxSizer* topSizer, wxGLContext* glctx)
 	topSizer->Add(m_stage, 1, wxEXPAND);
 }
 
-void PreviewDialog::OnSetCirculate(wxCommandEvent& event)
+void PreviewDialog::OnSetLoop(wxCommandEvent& event)
 {
 	PreviewCanvas* canvas = static_cast<PreviewCanvas*>(m_stage->GetCanvas());
 	assert(canvas);

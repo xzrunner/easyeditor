@@ -1,6 +1,4 @@
 #include "PreviewCanvas.h"
-#include "PreviewSettings.h"
-#include "PreviewUtility.h"
 
 #include "dataset/DataMgr.h"
 #include "dataset/LayersMgr.h"
@@ -21,11 +19,9 @@ namespace eanim
 {
 
 PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
-							 const PlaySettings& settings, ee::PlayControl& control,
-							 wxGLContext* glctx)
+							 wxGLContext* glctx, s2::AnimCurr& curr)
 	: ee::CameraCanvas(stage_wnd, stage, glctx)
-	, m_control(control)
-	, m_settings(settings)
+	, m_curr(curr)
 {
 }
 
@@ -39,44 +35,10 @@ void PreviewCanvas::OnDrawSprites() const
 	DrawStageData();
 }
 
-void PreviewCanvas::OnTimer()
-{
-	m_control.Update();
-	ee::SetCanvasDirtySJ::Instance()->SetDirty();
-
-	int frame_idx = m_control.Frame();
-	if (frame_idx <= DataMgr::Instance()->GetLayers().GetFrameCount()) {
-		return;
-	}
-
-	if (m_settings.isCirculate) {
-		m_control.Reset();
-	} else {
-		m_control.Decrease();
-	}
-}
-
-// todo: waste time!
 void PreviewCanvas::DrawStageData() const
 {
 	s2::Particle3d::Instance()->BufferClear();
-
-	std::vector<ee::Sprite*> sprs;
-	PreviewUtility::GetCurrSprites(m_control, sprs);
-	for (int i = 0, n = sprs.size(); i < n; ++i) {
-		if (eparticle3d::Sprite* p3d = dynamic_cast<eparticle3d::Sprite*>(sprs[i])) {
-			p3d->OnActive();
-		}
-	}
-
-	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
-		ee::SpriteRenderer::Instance()->Draw(sprs[i]);
-	}
-
-	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
-		sprs[i]->RemoveReference();
-	}
-
+	m_curr.Draw(s2::RenderParams());
 	s2::Particle3d::Instance()->Draw();
 }
 

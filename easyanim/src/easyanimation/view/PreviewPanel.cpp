@@ -1,36 +1,28 @@
 #include "PreviewPanel.h"
-#include "PreviewUtility.h"
+
+#include "message/messages.h"
 
 #include <ee/Sprite.h>
 
 #include <sprite2/RenderParams.h>
 #include <sprite2/Particle3d.h>
+#include <sprite2/AnimCurr.h>
 
 namespace eanim
 {
 
 PreviewPanel::PreviewPanel(wxWindow* parent, wxTopLevelWindow* frame,
-						   ee::PlayControl& ctrl)
+						   s2::AnimCurr& curr)
 	: ee::EditPanel(parent, frame)
-	, m_ctrl(ctrl)
+	, m_curr(curr)
+	, m_loop(true)
 {
+	m_fps = GetFpsSJ::Instance()->Get();
 }
 
 bool PreviewPanel::UpdateStage()
 {
-	std::vector<ee::Sprite*> sprs;
-	PreviewUtility::GetCurrSprites(m_ctrl, sprs);
-
-	s2::RenderParams params;
-	for (int i = 0, n = sprs.size(); i < n; ++i) {
-		sprs[i]->Update(params);
-	}
-
-	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
-		sprs[i]->RemoveReference();
-	}
-
-	return true;
+	return m_curr.Update(s2::RenderParams(), m_loop, 0, m_fps);
 }
 
 }

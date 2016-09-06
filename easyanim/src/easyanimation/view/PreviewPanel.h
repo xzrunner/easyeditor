@@ -3,7 +3,7 @@
 
 #include <ee/EditPanel.h>
 
-namespace ee { class PlayControl; }
+namespace s2 { class AnimCurr; }
 
 namespace eanim
 {
@@ -12,15 +12,21 @@ class PreviewPanel : public ee::EditPanel
 {
 public:
 	PreviewPanel(wxWindow* parent, wxTopLevelWindow* frame,
-		ee::PlayControl& ctrl);
+		s2::AnimCurr& curr);
 
 	//
 	// ee::EditPanel interface
 	//
 	virtual bool UpdateStage();
 
+	void SetLoop(bool loop) { m_loop = loop; }
+
 private:
-	ee::PlayControl& m_ctrl;
+	s2::AnimCurr& m_curr;
+
+	bool m_loop;
+
+	int m_fps;
 
 }; // PreviewPanel
 

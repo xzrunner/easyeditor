@@ -3,25 +3,21 @@
 
 #include <ee/ZoomViewOP.h>
 
-namespace ee { class PlayControl; }
+namespace s2 { class AnimCurr; }
 
 namespace eanim
 {
-
-struct PlaySettings;
 
 class PreviewOP : public ee::ZoomViewOP
 {
 public:
 	PreviewOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
-		PlaySettings& settings, ee::PlayControl& control);
+		s2::AnimCurr& curr);
 
-	virtual bool OnKeyDown(int keyCode);
+	virtual bool OnMouseLeftDown(int x, int y);
 
 private:
-	PlaySettings& m_settings;
-
-	ee::PlayControl& m_control;
+	s2::AnimCurr& m_curr;
 
 }; // PreviewOP
 
