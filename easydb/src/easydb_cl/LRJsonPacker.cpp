@@ -418,7 +418,7 @@ void LRJsonPacker::ParserCharacterFromSprite(const Json::Value& src_val, const l
 
 		// angle
 		int dir = 1 + (out_name.GetField(lr::CharacterFileName::FT_DIRECTION)[0] - '1');
-		if (spr_io.m_mirror.x) {
+		if (spr_io.m_scale.x < 0) {
 			dir = 10 - dir;
 		}
 		dir = (dir + 7) % 8;

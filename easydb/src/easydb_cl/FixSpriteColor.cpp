@@ -48,7 +48,7 @@ bool FixSpriteColor::FixSprite(const std::string& filepath, Json::Value& sprite_
 		return false;
 	}
 
-	s2::Color col = ee::glue::str2color(str, glue::PT_ARGB);
+	s2::Color col = glue::str2color(str, glue::PT_ARGB);
 	sprite_val["add color"] = glue::color2str(col, glue::PT_ABGR);
 
 	return true;

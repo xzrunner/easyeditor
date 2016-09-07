@@ -63,6 +63,7 @@
 #include "PackEPT.h"
 #include "LRExpandGroup.h"
 #include "PackImageEPT.h"
+#include "FixOldScale9.h"
 
 namespace edb
 {
@@ -131,6 +132,7 @@ void CommandLoader::Init()
 	fc->Register(PackEPT::Create());
 	fc->Register(LRExpandGroup::Create());
 	fc->Register(PackImageEPT::Create());
+	fc->Register(FixOldScale9::Create());
 }
 
 }

@@ -112,8 +112,8 @@ void LRExpandGroup::LoadSprites(const Json::Value& src_spr_val, const Trans& tra
 		t.angle = spr_io.m_angle + trans.angle;
 		t.scale.x = spr_io.m_scale.x * trans.scale.x;
 		t.scale.y = spr_io.m_scale.y * trans.scale.y;
-		t.xmirror = (spr_io.m_mirror.x && !trans.xmirror) || (!spr_io.m_mirror.x && trans.xmirror);
-		t.ymirror = (spr_io.m_mirror.y && !trans.ymirror) || (!spr_io.m_mirror.y && trans.ymirror);
+		t.xmirror = (spr_io.m_scale.x < 0 && !trans.xmirror) || (spr_io.m_scale.x >= 0 && trans.xmirror);
+		t.ymirror = (spr_io.m_scale.y < 0 && !trans.ymirror) || (spr_io.m_scale.y >= 0 && trans.ymirror);
 
 		float new_x = spr_io.m_position.x * trans.scale.x,
 			  new_y = spr_io.m_position.y * trans.scale.y;
@@ -139,8 +139,8 @@ void LRExpandGroup::LoadSprites(const Json::Value& src_spr_val, const Trans& tra
 		spr_io.m_angle = spr_io.m_angle + trans.angle;
 		spr_io.m_scale.x = spr_io.m_scale.x * trans.scale.x;
 		spr_io.m_scale.y = spr_io.m_scale.y * trans.scale.y;
-		spr_io.m_mirror.x = (spr_io.m_mirror.x && !trans.xmirror) || (!spr_io.m_mirror.x && trans.xmirror);
-		spr_io.m_mirror.y = (spr_io.m_mirror.y && !trans.ymirror) || (!spr_io.m_mirror.y && trans.ymirror);
+// 		spr_io.m_mirror.x = (spr_io.m_mirror.x && !trans.xmirror) || (!spr_io.m_mirror.x && trans.xmirror);
+// 		spr_io.m_mirror.y = (spr_io.m_mirror.y && !trans.ymirror) || (!spr_io.m_mirror.y && trans.ymirror);
 		float new_x = spr_io.m_position.x * trans.scale.x,
 			  new_y = spr_io.m_position.y * trans.scale.y;
 		spr_io.m_position = sm::rotate_vector(sm::vec2(new_x, new_y), trans.angle) + trans.translation;
