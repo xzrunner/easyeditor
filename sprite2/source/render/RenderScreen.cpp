@@ -37,6 +37,11 @@ void RenderScreen::Scissor(float x, float y, float w, float h)
 	} else if (y > ctx->proj_height) {
 		w = h = 0;
 	}
+
+	if (w < 0 || h < 0) { 
+		w = h = 0;
+	}
+
 	sl::ShaderMgr::Instance()->GetContext()->SetScissor(x, y, w, h);
 }
 
