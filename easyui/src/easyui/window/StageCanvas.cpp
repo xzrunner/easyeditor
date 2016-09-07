@@ -11,6 +11,7 @@
 
 #include <sprite2/RenderParams.h>
 #include <sprite2/S2_RVG.h>
+#include <glue/GLUE_DTex.h>
 
 #include <easyui.h>
 
@@ -45,7 +46,7 @@ void StageCanvas::OnDrawSprites() const
 
 #ifdef _DEBUG 
 	if (ee::Config::Instance()->IsUseDTex()) {
-		ee::DTex::Instance()->DebugDraw();
+		glue::DTex::Instance()->DebugDraw();
 	}
 #endif
 }

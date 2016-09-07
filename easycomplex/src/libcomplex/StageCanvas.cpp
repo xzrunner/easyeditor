@@ -84,7 +84,7 @@ void StageCanvas::OnDrawSprites() const
 
 #ifdef _DEBUG 
 	if (ee::Config::Instance()->IsUseDTex()) {
-		ee::DTex::Instance()->DebugDraw();
+		glue::DTex::Instance()->DebugDraw();
 	}
 #endif
 
