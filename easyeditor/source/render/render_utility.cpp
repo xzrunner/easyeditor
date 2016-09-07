@@ -62,10 +62,9 @@ Sprite* draw_all_to_one_spr(const std::vector<Sprite*>& sprs)
 	ImageSprite* spr = new ImageSprite(sym);
 	sym->RemoveReference();
 
-	spr->SetMirror(sm::bvec2(false, true));
 	spr->SetPosition(r.Center());
 	spr->SetAngle(0);
-	spr->SetScale(sm::vec2(1.0f / scale, 1.0f / scale));
+	spr->SetScale(sm::vec2(1.0f / scale, - 1.0f / scale));
 
 	return spr;
 }

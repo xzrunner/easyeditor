@@ -162,6 +162,10 @@ sm::vec2 Sprite::GetCenter() const
 
 void Sprite::SetPosition(const sm::vec2& pos)
 {
+	if (m_position == pos) {
+		return;
+	}
+
 	m_position = pos;
 
 // 	// immediately
@@ -173,6 +177,10 @@ void Sprite::SetPosition(const sm::vec2& pos)
 
 void Sprite::SetAngle(float angle)
 {
+	if (m_angle == angle) {
+		return;
+	}
+
 	m_angle = angle;
 
 // 	// immediately
@@ -184,6 +192,10 @@ void Sprite::SetAngle(float angle)
 
 void Sprite::SetScale(const sm::vec2& scale)
 {
+	if (m_scale == scale) {
+		return;
+	}
+
 	const sm::vec2& old_scale = m_scale;
 	if (old_scale.x != 0 && old_scale.y != 0) {
 		sm::vec2 dscale;
@@ -208,6 +220,10 @@ void Sprite::SetScale(const sm::vec2& scale)
 
 void Sprite::SetShear(const sm::vec2& shear)
 {
+	if (m_shear == shear) {
+		return;
+	}
+
 	sm::mat4 mat_old, mat_new;
 	mat_old.Shear(m_shear.x, m_shear.y);
 	mat_new.Shear(shear.x, shear.y);
@@ -230,6 +246,10 @@ void Sprite::SetShear(const sm::vec2& shear)
 
 void Sprite::SetOffset(const sm::vec2& offset)
 {
+	if (m_offset == offset) {
+		return;
+	}
+
 	if (!m_offset.IsValid()) {
 		m_offset = m_sym->GetBounding(this).Center();
 	}

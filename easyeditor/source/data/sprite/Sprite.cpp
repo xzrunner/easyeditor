@@ -161,6 +161,9 @@ void Sprite::SetMirror(const sm::bvec2& mirror)
 
 	m_mirror = mirror;
 
+	if (!m_offset.IsValid()) {
+		m_offset = m_sym->GetBounding(this).Center();
+	}
 	sm::vec2 offset = m_offset,
 		     scale = m_scale;
 	if (x_dirty) {
