@@ -20,14 +20,6 @@
 
 			"filepath" : "hkljhw8.ttf"
 
-		},
-
-		{
-
-			"name" : "FZCY_GBK",
-
-			"filepath" : "FZCY_GBK.ttf"
-
 		}
 
 	],
@@ -36,9 +28,17 @@
 
 	[
 
+		{
+
+			"name" : "图片字",
+
+			"filepath" : "user_font_library.json"
+
+		}
+
 	],
 
-
+	"auto_get_focus" : false,			// 主界面自动获得焦点		
 
 	"sprite_capture" : false,			// 编辑对象捕捉
 
@@ -52,23 +52,17 @@
 
 	"visible_node_name" : false,		// 显示节点名称
 
-	"node_name_scale" : 2.5,			// 节点名称显示大小
+	"node_name_scale" : 1.0,			// 节点名称显示大小
+
+	"visible_shape" : true,				// 显示shape图形
+
+	"visible_tex_edge" : false,			// 显示texture边界线	
 
 	"auto_get_focus" : true,			// 鼠标move时自动捕获stage的焦点
 
-	"linear_filter" : true,
+	"draw_anchor" : false,				// 锚点标识
 
-
-
-	"img_list_compact" : false,
-
-
-
-	// 不设置则使用系统的颜色对话框
-
-//	"color_setting_dlg" : "rgb",		// 滑块rgb
-
-	// "color_setting_dlg" : "hsl",		// 滑块hsl
+	"spr_output_compress" : true,		// mmzb要设为false
 
 
 
