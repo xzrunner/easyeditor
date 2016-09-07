@@ -16,10 +16,20 @@ Symbol::Symbol()
 
 void Symbol::LoadResources()
 {
-	glue::Scale9Symbol::LoadJson(m_filepath);
+	Loader loader(this);
+	loader.LoadJson(m_filepath);
 }
 
-s2::Sprite* Symbol::LoadSprite(const Json::Value& val, const std::string& dir)
+/************************************************************************/
+/* class Symbol::Loader                                                 */
+/************************************************************************/
+
+Symbol::Loader::Loader(Symbol* sym)
+	: glue::Scale9SymLoader(sym)
+{
+}
+
+s2::Sprite* Symbol::Loader::LoadSprite(const Json::Value& val, const std::string& dir)
 {
 	return ee::SpriteFactory::Instance()->Create(val, dir);
 }

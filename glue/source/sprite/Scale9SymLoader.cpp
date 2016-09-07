@@ -1,7 +1,8 @@
-#include "Scale9Symbol.h"
-#include "SpriteFactory.h"
+#include "Scale9SymLoader.h"
 #include "FilepathHelper.h"
+#include "SpriteFactory.h"
 
+#include <sprite2/Scale9Symbol.h>
 #include <sprite2/S2_Sprite.h>
 
 #include <fstream>
@@ -9,12 +10,27 @@
 namespace glue
 {
 
-// Scale9Symbol::Scale9Symbol()
-// {
-// }
-
-void Scale9Symbol::LoadJson(const std::string& filepath)
+Scale9SymLoader::Scale9SymLoader(s2::Scale9Symbol* sym)
+	: m_sym(sym)
 {
+	if (m_sym) {
+		m_sym->AddReference();
+	}
+}
+
+Scale9SymLoader::~Scale9SymLoader()
+{
+	if (m_sym) {
+		m_sym->RemoveReference();
+	}
+}
+
+void Scale9SymLoader::LoadJson(const std::string& filepath)
+{
+	if (!m_sym) {
+		return;
+	}
+
 	Json::Value val;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
@@ -26,7 +42,7 @@ void Scale9Symbol::LoadJson(const std::string& filepath)
 	std::string dir = FilepathHelper::Dir(filepath);
 
 	const Json::Value& spr_val = val["sprite"];
-	
+
 	s2::Sprite* grids[9];
 	memset(grids, 0, sizeof(grids));
 
@@ -77,10 +93,16 @@ void Scale9Symbol::LoadJson(const std::string& filepath)
 
 	int w = val["width"].asInt(),
 		h = val["height"].asInt();
-	m_s9.Build(type, w, h, grids);
+	m_sym->GetScale9().Build(type, w, h, grids);
+
+	for (int i = 0; i < 9; ++i) {
+		if (grids[i]) {
+			grids[i]->RemoveReference();
+		}
+	}
 }
 
-s2::Sprite* Scale9Symbol::LoadSprite(const Json::Value& val, const std::string& dir)
+s2::Sprite* Scale9SymLoader::LoadSprite(const Json::Value& val, const std::string& dir)
 {
 	return SpriteFactory::Instance()->Create(val, dir);
 }

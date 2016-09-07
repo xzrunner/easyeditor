@@ -1,12 +1,16 @@
 #include "SpriteFactory.h"
 #include "FilepathHelper.h"
-#include "SymbolFileType.h"
+#include "SymFileType.h"
 #include "SpriteIO.h"
 
 #include "ImageSymbol.h"
 #include <sprite2/ImageSprite.h>
-#include "Scale9Symbol.h"
+
+#include <sprite2/Scale9Symbol.h>
 #include <sprite2/Scale9Sprite.h>
+#include "Scale9SymLoader.h"
+#include "Scale9SprLoader.h"
+
 #include "ComplexSymbol.h"
 #include <sprite2/ComplexSprite.h>
 
@@ -22,7 +26,7 @@ SpriteFactory::SpriteFactory()
 s2::Sprite* SpriteFactory::Create(const std::string& filepath) const
 {
 	s2::Sprite* spr = NULL;
-	SymbolFileType type = get_sym_file_type(filepath);
+	SymFileType type = get_sym_file_type(filepath);
 	switch (type)
 	{
 	case IMAGE:
@@ -34,8 +38,9 @@ s2::Sprite* SpriteFactory::Create(const std::string& filepath) const
 		break;
 	case SCALE9:
 		{
-			Scale9Symbol* sym = new Scale9Symbol();
-			sym->LoadJson(filepath);
+			s2::Scale9Symbol* sym = new s2::Scale9Symbol();
+			Scale9SymLoader loader(sym);
+			loader.LoadJson(filepath);
 			spr = new s2::Scale9Sprite(sym);
 			sym->RemoveReference();
 		}
@@ -60,18 +65,25 @@ s2::Sprite* SpriteFactory::Create(const Json::Value& val, const std::string& dir
 	filepath = FilepathHelper::Absolute(dir, filepath);
 
 	spr = Create(filepath);
+	if (!spr) {
+		return NULL;
+	}
 
-	if (spr) {
-		SpriteIO io(true, true);
-		io.Load(val, spr);
+	SpriteIO io(true, true);
+	io.Load(val, spr);
+
+	SymFileType type = get_sym_file_type(filepath);
+	switch (type)
+	{
+	case SCALE9:
+		{
+			Scale9SprLoader loader(VI_DOWNCASTING<s2::Scale9Sprite*>(spr));
+			loader.LoadJson(val, dir);
+		}
+		break;
 	}
 
 	return spr;
 }
-
-//s2::Sprite* SpriteFactory::Create(s2::Symbol* sym) const
-//{
-//	return NULL;
-//}
 
 }

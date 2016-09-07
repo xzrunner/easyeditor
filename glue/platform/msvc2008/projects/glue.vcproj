@@ -360,11 +360,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\source\sprite\SymbolFileType.cpp"
+				RelativePath="..\..\..\source\sprite\SymFileType.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\include\glue\SymbolFileType.h"
+				RelativePath="..\..\..\include\glue\SymFileType.h"
 				>
 			</File>
 			<Filter
@@ -391,11 +391,19 @@
 				Name="02.scale9"
 				>
 				<File
-					RelativePath="..\..\..\source\sprite\Scale9Symbol.cpp"
+					RelativePath="..\..\..\source\sprite\Scale9SprLoader.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\include\glue\Scale9Symbol.h"
+					RelativePath="..\..\..\include\glue\Scale9SprLoader.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\sprite\Scale9SymLoader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\glue\Scale9SymLoader.h"
 					>
 				</File>
 			</Filter>
@@ -431,11 +439,27 @@
 				Name="05.label"
 				>
 				<File
+					RelativePath="..\..\..\source\sprite\TextboxSprLoader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\glue\TextboxSprLoader.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\source\sprite\TextboxSymbol.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\..\..\include\glue\TextboxSymbol.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\sprite\TextboxSymLoader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\glue\TextboxSymLoader.h"
 					>
 				</File>
 			</Filter>

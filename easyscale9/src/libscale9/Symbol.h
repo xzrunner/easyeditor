@@ -2,14 +2,16 @@
 #define _EASYSCALE9_SYMBOL_H_
 
 #include <ee/Symbol.h>
-#include <glue/Scale9Symbol.h>
+
+#include <sprite2/Scale9Symbol.h>
+#include <glue/Scale9SymLoader.h>
 
 #include <json/json.h>
 
 namespace escale9
 {
 
-class Symbol : public ee::Symbol, public glue::Scale9Symbol
+class Symbol : public ee::Symbol, public s2::Scale9Symbol
 {
 public:
 	Symbol();
@@ -23,11 +25,14 @@ protected:
 	 */
 	virtual void LoadResources();
 
-	/**
-	 *  @interface
-	 *    glue::Scale9Symbol
-	 */
-	virtual s2::Sprite* LoadSprite(const Json::Value& val, const std::string& dir);
+private:
+	class Loader : public glue::Scale9SymLoader
+	{
+	public:
+		Loader(Symbol* sym);
+	protected:
+		virtual s2::Sprite* LoadSprite(const Json::Value& val, const std::string& dir);
+	}; // Loader
 
 }; // Symbol
 

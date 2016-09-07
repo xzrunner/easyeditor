@@ -1,9 +1,10 @@
 #include "SymbolFactory.h"
 #include "StringHelper.h"
-#include "SymbolFileType.h"
+#include "SymFileType.h"
 
 #include "ImageSymbol.h"
-#include "Scale9Symbol.h"
+#include <sprite2/Scale9Symbol.h>
+#include "Scale9SymLoader.h"
 #include "TextboxSymbol.h"
 #include "ComplexSymbol.h"
 
@@ -43,7 +44,7 @@ s2::Symbol* SymbolFactory::Create(const std::string& filepath) const
 
 	s2::Symbol* ret = NULL;
 	
-	SymbolFileType type = get_sym_file_type(filepath);
+	SymFileType type = get_sym_file_type(filepath);
 	switch (type)
 	{
 	case IMAGE:
@@ -51,8 +52,9 @@ s2::Symbol* SymbolFactory::Create(const std::string& filepath) const
 		break;
 	case SCALE9:
 		{
-			Scale9Symbol* sym = new Scale9Symbol();
-			sym->LoadJson(filepath);
+			s2::Scale9Symbol* sym = new s2::Scale9Symbol();
+			Scale9SymLoader loader(sym);
+			loader.LoadJson(filepath);
 			ret = sym;
 		}
 		break;

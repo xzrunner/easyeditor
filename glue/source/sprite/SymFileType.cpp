@@ -1,4 +1,4 @@
-#include "SymbolFileType.h"
+#include "SymFileType.h"
 
 namespace glue
 {
@@ -7,7 +7,7 @@ static const std::string TAG_SCALE9		= "scale9";
 static const std::string TAG_TEXTBOX	= "text";
 static const std::string TAG_COMPLEX	= "complex";
 
-SymbolFileType get_sym_file_type(const std::string& filepath)
+SymFileType get_sym_file_type(const std::string& filepath)
 {
 	if (filepath.empty()) {
 		return UNKNOWN;
@@ -45,7 +45,7 @@ SymbolFileType get_sym_file_type(const std::string& filepath)
 	return UNKNOWN;
 }
 
-std::string get_sym_tag_str(SymbolFileType type)
+std::string get_sym_tag_str(SymFileType type)
 {
 	switch (type)
 	{

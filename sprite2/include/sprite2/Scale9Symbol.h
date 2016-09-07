@@ -20,6 +20,7 @@ public:
 	virtual sm::rect GetBounding(const Sprite* spr = NULL) const;
 
 	const Scale9& GetScale9() const { return m_s9; }
+	Scale9& GetScale9() { return m_s9; }
 
 	void Resize(float width, float height);
 
