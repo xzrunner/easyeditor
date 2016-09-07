@@ -49,9 +49,6 @@ public:
 	/************************************************************************/
 	/* geometry                                                             */
 	/************************************************************************/
-	const sm::bvec2& GetMirror() const { return m_mirror; }
-	void SetMirror(const sm::bvec2& mirror);
-
 	const sm::vec2& GetPerspective() const { return m_perspective; }
 	void SetPerspective(const sm::vec2& perspective) { m_perspective = perspective; }
 
@@ -84,7 +81,6 @@ private:
 	/************************************************************************/
 	/* geometry                                                             */
 	/************************************************************************/
-	sm::bvec2			m_mirror;
 	sm::vec2			m_perspective;
 
 	/************************************************************************/

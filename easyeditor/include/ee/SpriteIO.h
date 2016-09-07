@@ -32,7 +32,6 @@ protected:
 	
 public:
 	// geometry
-	sm::bvec2		m_mirror;
 	sm::vec2		m_perspective;
 
 	// info

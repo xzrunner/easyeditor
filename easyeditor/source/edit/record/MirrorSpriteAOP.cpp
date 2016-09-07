@@ -25,12 +25,34 @@ MirrorSpriteAOP::~MirrorSpriteAOP()
 
 void MirrorSpriteAOP::Undo()
 {
-	m_spr->SetMirror(sm::bvec2(m_old_mirror_x, m_old_mirror_y));
+	sm::vec2 scale = m_spr->GetScale();
+	if (m_old_mirror_x) {
+		scale.x = -fabs(scale.x);
+	} else {
+		scale.x = fabs(scale.x);
+	}
+	if (m_old_mirror_y) {
+		scale.y = -fabs(scale.y);
+	} else {
+		scale.y = fabs(scale.y);
+	}
+	m_spr->SetScale(scale);
 }
 
 void MirrorSpriteAOP::Redo()
 {
-	m_spr->SetMirror(sm::bvec2(m_new_mirror_x, m_new_mirror_y));
+	sm::vec2 scale = m_spr->GetScale();
+	if (m_new_mirror_x) {
+		scale.x = -fabs(scale.x);
+	} else {
+		scale.x = fabs(scale.x);
+	}
+	if (m_new_mirror_y) {
+		scale.y = -fabs(scale.y);
+	} else {
+		scale.y = fabs(scale.y);
+	}
+	m_spr->SetScale(scale);
 }
 
 Json::Value MirrorSpriteAOP::Store(const std::vector<Sprite*>& sprs) const

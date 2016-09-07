@@ -95,8 +95,19 @@ void SpritePropertyImpl::Mirror(bool mx, bool my)
 	}
 
 	EditAddRecordSJ::Instance()->Add(new MirrorSpriteAOP(m_spr, 
-		m_spr->GetMirror().x, m_spr->GetMirror().y, mx, my));
-	m_spr->SetMirror(sm::bvec2(mx, my));
+		m_spr->GetScale().x < 0, m_spr->GetScale().y < 0, mx, my));
+	sm::vec2 scale = m_spr->GetScale();
+	if (mx) {
+		scale.x = -fabs(scale.x);
+	} else {
+		scale.x = fabs(scale.x);
+	}
+	if (my) {
+		scale.y = -fabs(scale.y);
+	} else {
+		scale.y = fabs(scale.y);
+	}
+	m_spr->SetScale(scale);
 }
 
 void SpritePropertyImpl::Perspective(float px, float py)

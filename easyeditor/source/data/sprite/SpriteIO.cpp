@@ -11,7 +11,6 @@ namespace ee
 SpriteIO::SpriteIO()
 	: glue::SpriteIO(Config::Instance()->GetSettings().spr_output_compress, Config::Instance()->IsRenderOpen())
 {
-	m_mirror		= sm::bvec2(false, false);
 	m_perspective	= sm::vec2(0, 0);
 
 	m_clip			= false;
@@ -25,7 +24,6 @@ void SpriteIO::LoadGeometry(s2::Sprite* spr)
 	glue::SpriteIO::LoadGeometry(spr);
 
 	Sprite* ee_spr = dynamic_cast<Sprite*>(spr);
-	ee_spr->SetMirror(m_mirror);
 	ee_spr->SetPerspective(m_perspective);
 }
 
@@ -34,23 +32,12 @@ void SpriteIO::StoreGeometry(const s2::Sprite* spr)
 	glue::SpriteIO::StoreGeometry(spr);
 
 	const Sprite* ee_spr = dynamic_cast<const Sprite*>(spr);
-	m_mirror = ee_spr->GetMirror();
 	m_perspective = ee_spr->GetPerspective();
 }
 
 void SpriteIO::LoadGeometry(const Json::Value& val)
 {
 	glue::SpriteIO::LoadGeometry(val);
-
-	// mirror
-	sm::bvec2 mirror(false, false);
-	if (!val["x mirror"].isNull()) {
-		mirror.x = val["x mirror"].asBool();
-	}
-	if (!val["y mirror"].isNull()) {
-		mirror.y = val["y mirror"].asBool();
-	}
-	m_mirror = mirror;
 
 	// perspective
 	sm::vec2 perspective(0, 0);
@@ -65,24 +52,6 @@ void SpriteIO::LoadGeometry(const Json::Value& val)
 void SpriteIO::StoreGeometry(Json::Value& val)
 {
 	glue::SpriteIO::StoreGeometry(val);
-
-	if (m_mirror.x) {
-		m_scale.x = -m_scale.x;
-	}
-	if (m_mirror.y) {
-		m_scale.y = -m_scale.y;
-	}
-	if (!m_compress || m_scale != sm::vec2(1, 1)) {
-		val["x scale"] = m_scale.x;
-		val["y scale"] = m_scale.y;
-	}
-
-	if (!m_compress || m_mirror.x) {
-		val["x mirror"] = m_mirror.x;
-	}
-	if (!m_compress || m_mirror.y) {
-		val["y mirror"] = m_mirror.y;
-	}
 
 	if (!m_compress || m_perspective != sm::vec2(0, 0)) {
 		val["x perspective"] = m_perspective.x;

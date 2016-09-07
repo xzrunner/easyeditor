@@ -183,19 +183,10 @@ void PackAnimation::LoadSprMat(const ee::Sprite* spr, SpriteTrans& trans, bool f
 
 	float sx = spr->GetScale().x,
 		  sy = spr->GetScale().y;
-
-	//sm::bvec2 mirror = spr->GetMirror();
-	//if (mirror.x) {
-	//	sx = -sx;
-	//}
-	//if (mirror.y) {
-	//	sy = -sy;
-	//}
-
-	float c = cos(-spr->GetAngle()),
-		s = sin(-spr->GetAngle());
+	float c  = cos(-spr->GetAngle()),
+		  s  = sin(-spr->GetAngle());
 	float kx = -spr->GetShear().x,
-		ky = -spr->GetShear().y;
+		  ky = -spr->GetShear().y;
 	mat[0] = sx*c - ky*sy*s;
 	mat[1] = sx*s + ky*sy*c;
 	mat[2] = kx*sx*c - sy*s;

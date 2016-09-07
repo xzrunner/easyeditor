@@ -20,7 +20,6 @@ namespace ee
 
 Sprite::Sprite()
 	: s2::Sprite()
-	, m_mirror(false, false)
 	, m_perspective(0, 0)
 	, m_clip(false)
 	, m_anchor(false)
@@ -32,7 +31,6 @@ Sprite::Sprite()
 
 Sprite::Sprite(const Sprite& spr)
 	: s2::Sprite(spr)
-	, m_mirror(spr.m_mirror)
 	, m_perspective(spr.m_perspective)
 	, m_tag(spr.m_tag)
 	, m_clip(spr.m_clip)
@@ -47,7 +45,6 @@ Sprite& Sprite::operator = (const Sprite& spr)
 {
 	s2::Sprite::operator = (spr);
 	
-	m_mirror = spr.m_mirror;
 	m_perspective = spr.m_perspective;
 
 	m_tag = spr.m_tag;
@@ -65,7 +62,6 @@ Sprite& Sprite::operator = (const Sprite& spr)
 
 Sprite::Sprite(Symbol* sym)
 	: s2::Sprite(sym)
-	, m_mirror(false, false)
 	, m_perspective(0, 0)
 	, m_clip(false)
 	, m_anchor(false)
@@ -145,38 +141,6 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 PropertySetting* Sprite::CreatePropertySetting(EditPanelImpl* stage)
 {
 	return new SpritePropertySetting(stage, this);
-}
-
-/************************************************************************/
-/* geometry                                                             */
-/************************************************************************/
-
-void Sprite::SetMirror(const sm::bvec2& mirror) 
-{ 
-	bool x_dirty = (mirror.x != m_mirror.x),
-		 y_dirty = (mirror.y != m_mirror.y);
-	if (!x_dirty && !y_dirty) {
-		return;
-	}
-
-	m_mirror = mirror;
-
-	if (!m_offset.IsValid()) {
-		m_offset = m_sym->GetBounding(this).Center();
-	}
-	sm::vec2 offset = m_offset,
-		     scale = m_scale;
-	if (x_dirty) {
-		m_offset.x = -m_offset.x;
-		m_scale.x = -m_scale.x;
-	}
-	if (y_dirty) {
-		m_offset.y = -m_offset.y;
-		m_scale.y = -m_scale.y;
-	}
-
-	SetOffset(m_offset);
-	SetScale(m_scale);
 }
 
 //////////////////////////////////////////////////////////////////////////

@@ -727,9 +727,14 @@ void ParserLuaFile::Picture::Part::transform(ee::Sprite* spr) const
 		sx = dw / 16.0f / sw;
 		sy = dh / 16.0f / sh;
 	}
+	if (xMirror) {
+		sx = -sx;
+	}
+	if (yMirror) {
+		sy = -sy;
+	}
 	spr->SetScale(sm::vec2(sx, sy));
 
-	spr->SetMirror(sm::bvec2(xMirror, yMirror));
 	angle = -angle;
 	spr->SetPosition(sm::vec2(dcenter.x / 16, - dcenter.y / 16));
 	spr->SetAngle(pre_rotate + angle);

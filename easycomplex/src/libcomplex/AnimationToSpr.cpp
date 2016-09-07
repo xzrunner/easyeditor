@@ -118,18 +118,6 @@ void AnimationToSpr::TransSpriteMat(ee::Sprite* spr, const erespacker::PackAnima
 	// 	mat[2] = kx*c - s;
 	// 	mat[3] = kx*s + c;
 
-	sm::bvec2 mirror;
-	mirror.x = mirror.y = false;
-	if (sx < 0) {
-		mirror.x = true;
-		sx = -sx;
-	}
-	if (sy < 0) {
-		mirror.y = true;
-		sy = -sy;
-	}
-	spr->SetMirror(mirror);
-
 	spr->SetScale(sm::vec2(sx, sy));
 	spr->SetPosition(sm::vec2(dx, dy));
 	spr->SetAngle(angle);

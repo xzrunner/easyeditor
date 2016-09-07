@@ -10,16 +10,6 @@ namespace ee
 void SpriteCtrlNode::GetSpriteCtrlNodes(const Sprite* spr, sm::vec2 nodes[8])
 {
 	sm::rect r = spr->GetSymbol()->GetBounding(spr);
-	if (spr->GetMirror().x) { 
-		r.xmin = -r.xmin;
-		r.xmax = -r.xmax;
-		std::swap(r.xmin, r.xmax);
-	}
-	if (spr->GetMirror().y) {
-		r.ymin = -r.ymin;
-		r.ymax = -r.ymax;
-		std::swap(r.ymin, r.ymax);
-	}
 
 	sm::mat4 t;
 	t.SetTransformation(spr->GetPosition().x, spr->GetPosition().y, spr->GetAngle(),
@@ -46,16 +36,6 @@ void SpriteCtrlNode::GetSpriteCtrlNodes(const Sprite* spr, sm::vec2 nodes[8])
 void SpriteCtrlNode::GetSpriteCtrlNodesExt(const Sprite* spr, sm::vec2 nodes[4])
 {
 	sm::rect r = spr->GetSymbol()->GetBounding(spr);
-	if (spr->GetMirror().x) { 
-		r.xmin = -r.xmin;
-		r.xmax = -r.xmax;
-		std::swap(r.xmin, r.xmax);
-	}
-	if (spr->GetMirror().y) {
-		r.ymin = -r.ymin;
-		r.ymax = -r.ymax;
-		std::swap(r.ymin, r.ymax);
-	}
 
 	sm::mat4 t;
 	t.SetTransformation(spr->GetPosition().x, spr->GetPosition().y, spr->GetAngle(),

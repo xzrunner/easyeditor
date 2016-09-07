@@ -53,19 +53,9 @@ void GroupHelper::BreakUp(ee::Sprite* group, std::vector<ee::Sprite*>& sprs)
 
 		sm::vec2 _pos = group->GetTransMatrix() * spr->GetPosition();
 
-		sm::bvec2 pmirror = group->GetMirror(),
-			mirror = spr->GetMirror();
-
-		if (pmirror.x) {
-			mirror.x = !mirror.x;
-		}
-		if (pmirror.y) {
-			mirror.y = !mirror.y;
-		}
-
-		if (pmirror.x && !pmirror.y ||
-			!pmirror.x && pmirror.y) {
-			_angle -= spr->GetAngle();
+		const sm::vec2& gs = group->GetScale();
+		if (gs.x < 0 && gs.x >= 0 ||
+			gs.y >= 0 && gs.y < 0) {
 		} else {
 			_angle += spr->GetAngle();
 		}
@@ -73,7 +63,6 @@ void GroupHelper::BreakUp(ee::Sprite* group, std::vector<ee::Sprite*>& sprs)
 		spr->SetScale(_scale);
 		spr->SetAngle(_angle);
 		spr->SetPosition(_pos);
-		spr->SetMirror(mirror);
 
 		sprs.push_back(spr);
 	}

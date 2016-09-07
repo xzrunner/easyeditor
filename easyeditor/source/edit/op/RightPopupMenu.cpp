@@ -216,7 +216,8 @@ void RightPopupMenu::HoriMirror()
 	bool dirty = false;
 	for (size_t i = 0, n = m_edited_sprs.size(); i < n; ++i) {
 		Sprite* spr = m_edited_sprs[i];
-		spr->SetMirror(sm::bvec2(!spr->GetMirror().x, spr->GetMirror().y));
+		const sm::vec2& scale = spr->GetScale();
+		spr->SetScale(sm::vec2(-scale.x, scale.y));
 		dirty = true;
 	}
 	if (dirty) {
@@ -229,7 +230,8 @@ void RightPopupMenu::VertMirror()
 	bool dirty = false;
 	for (size_t i = 0, n = m_edited_sprs.size(); i < n; ++i) {
 		Sprite* spr = m_edited_sprs[i];
-		spr->SetMirror(sm::bvec2(spr->GetMirror().x, !spr->GetMirror().y));
+		const sm::vec2& scale = spr->GetScale();
+		spr->SetScale(sm::vec2(scale.x, -scale.y));
 		dirty = true;
 	}
 	if (dirty) {

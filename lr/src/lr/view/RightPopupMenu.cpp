@@ -159,7 +159,7 @@ void RightPopupMenu::HandleAnimMenu(int id)
 		assert(CharacterFileName::IsValidFilepath(filepath));
 		CharacterFileName name(filepath);
 		int dir = 1 + (name.GetField(CharacterFileName::FT_DIRECTION)[0] - '1');
-		if (m_spr->GetMirror().x) {
+		if (m_spr->GetScale().x < 0) {
 			dir = 10 - dir;
 		}
 
@@ -172,11 +172,13 @@ void RightPopupMenu::HandleAnimMenu(int id)
 		ee::Symbol* sym = m_stage->GetCharaDirs()->GetSymbolByDir(filepath, dir);
 		static_cast<ecomplex::Sprite*>(m_spr)->SetSymbol(sym);
 
-
+		sm::vec2 scale = m_spr->GetScale();
+		scale.x = fabs(scale.x);
+		scale.y = fabs(scale.y);
 		if (dir >= 1 && dir <= 5) {
-			m_spr->SetMirror(sm::bvec2(false, false));
+			m_spr->SetScale(scale);
 		} else {
-			m_spr->SetMirror(sm::bvec2(true, false));
+			m_spr->SetScale(sm::vec2(-scale.x, scale.y));
 		}
 	}
 	else if (id - MENU_COLOR_START_ID < m_anim_files.size())

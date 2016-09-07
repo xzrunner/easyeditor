@@ -667,7 +667,8 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	{
 		for (int i = 0, n = sprs.size(); i < n; ++i) {
 			Sprite* spr = sprs[i];
-			spr->SetMirror(sm::bvec2(!spr->GetMirror().x, spr->GetMirror().y));
+			const sm::vec2& scale = spr->GetScale();
+			spr->SetScale(sm::vec2(-scale.x, scale.y));
 		}
 		SetCanvasDirtySJ::Instance()->SetDirty();
 		return true;
@@ -677,7 +678,8 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	{
 		for (int i = 0, n = sprs.size(); i < n; ++i) {
 			Sprite* spr = sprs[i];
-			spr->SetMirror(sm::bvec2(spr->GetMirror().x, !spr->GetMirror().y));
+			const sm::vec2& scale = spr->GetScale();
+			spr->SetScale(sm::vec2(scale.x, -scale.y));
 		}
 		SetCanvasDirtySJ::Instance()->SetDirty();
 		return true;

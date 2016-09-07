@@ -203,17 +203,17 @@ sm::bvec2 MultiSpritesPropertyImpl::GetMirror() const
 		return mirror;
 	}
 
-	mirror.x = m_sprs[0]->GetMirror().x;
+	mirror.x = m_sprs[0]->GetScale().x < 0;
 	for (int i = 1, n = m_sprs.size(); i < n; ++i) {
-		if (mirror.x != m_sprs[i]->GetMirror().x) {
+		if (mirror.x != m_sprs[i]->GetScale().x < 0) {
 			mirror.x = false;
 			break;
 		}
 	}
 
-	mirror.y = m_sprs[0]->GetMirror().y;
+	mirror.y = m_sprs[0]->GetScale().y < 0;
 	for (int i = 1, n = m_sprs.size(); i < n; ++i) {
-		if (mirror.y != m_sprs[i]->GetMirror().y) {
+		if (mirror.y != m_sprs[i]->GetScale().y < 0) {
 			mirror.y = false;
 			break;
 		}
@@ -380,7 +380,13 @@ void MultiSpritesPropertyImpl::SetMirrorX(bool overall, bool mirror)
 
 	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
 		Sprite* spr = m_sprs[i];
-		spr->SetMirror(sm::bvec2(mirror, spr->GetMirror().y));
+		sm::vec2 scale = spr->GetScale();
+		if (mirror) {
+			scale.x = -fabs(scale.x);
+		} else {
+			scale.x = fabs(scale.x);
+		}
+		spr->SetScale(scale);
 	}
 }
 
@@ -402,7 +408,13 @@ void MultiSpritesPropertyImpl::SetMirrorY(bool overall, bool mirror)
 
 	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
 		Sprite* spr = m_sprs[i];
-		spr->SetMirror(sm::bvec2(spr->GetMirror().x, mirror));
+		sm::vec2 scale = spr->GetScale();
+		if (mirror) {
+			scale.y = -fabs(scale.y);
+		} else {
+			scale.y = fabs(scale.y);
+		}
+		spr->SetScale(scale);
 	}
 }
 
