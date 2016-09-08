@@ -21,14 +21,10 @@ void FixJsonBase::FixComplex(const std::string& path) const
 
 	bool dirty = false;
 
-	int i = 0;
-	Json::Value spriteVal = value["sprite"][i++];
-	while (!spriteVal.isNull()) {
-		Json::Value& val = value["sprite"][i-1];
-		if (FixSprite(path, val)) {
+	for (int i = 0, n = value["sprite"].size(); i < n; ++i) {
+		if (FixSprite(path, value["sprite"][i])) {
 			dirty = true;
 		}
-		spriteVal = value["sprite"][i++];
 	}
 
 	if (dirty) {
@@ -55,26 +51,16 @@ void FixJsonBase::FixAnim(const std::string& path) const
 
 	bool dirty = false;
 
-	int i = 0;
-	Json::Value layerVal = value["layer"][i++];
-	while (!layerVal.isNull()) {
-		int j = 0;
-		Json::Value frameVal = layerVal["frame"][j++];
-		while (!frameVal.isNull()) {
-			int k = 0;
-			Json::Value entryVal = frameVal["actor"][k++];
-			while (!entryVal.isNull()) {
-				Json::Value& val = value["layer"][i-1]["frame"][j-1]["actor"][k-1];
-				if (FixSprite(path, val)) {
+	for (int layer = 0, layer_n = value["layer"].size(); layer < layer_n; ++layer) {
+		Json::Value& layer_val = value["layer"][layer];
+		for (int frame = 0, frame_n = layer_val["frame"].size(); frame < frame_n; ++frame) {
+			Json::Value& frame_val = layer_val["frame"][frame];
+			for (int actor = 0, actor_n = frame_val["actor"].size(); actor < actor_n; ++actor) {
+				if (FixSprite(path, frame_val["actor"][actor])) {
 					dirty = true;
 				}
-				entryVal = frameVal["actor"][k++];
 			}
-
-			frameVal = layerVal["frame"][j++];
 		}
-
-		layerVal = value["layer"][i++];
 	}
 
 	if (dirty) {
@@ -87,5 +73,34 @@ void FixJsonBase::FixAnim(const std::string& path) const
 	}
 }
 
+void FixJsonBase::FixScale9(const std::string& path) const
+{
+	std::string filepath = ee::FileHelper::GetAbsolutePath(path);
+
+	Json::Value value;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filepath.c_str());
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, value);
+	fin.close();
+
+	bool dirty = false;
+
+	for (int i = 0, n = value["sprite"].size(); i < n; ++i) {
+		if (FixSprite(path, value["sprite"][i])) {
+			dirty = true;
+		}
+	}
+
+	if (dirty) {
+		Json::StyledStreamWriter writer;
+		std::locale::global(std::locale(""));
+		std::ofstream fout(filepath.c_str());
+		std::locale::global(std::locale("C"));	
+		writer.write(fout, value);
+		fout.close();
+	}
+}
 
 }

@@ -622,11 +622,11 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb_cl\FixOldScale9.cpp"
+					RelativePath="..\..\..\src\easydb_cl\FixMirror.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb_cl\FixOldScale9.h"
+					RelativePath="..\..\..\src\easydb_cl\FixMirror.h"
 					>
 				</File>
 				<File

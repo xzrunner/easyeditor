@@ -2,6 +2,7 @@
 #define _EASYDB_FIX_OLD_SCALE9_H_
 
 #include "ICommand.h"
+#include "FixJsonBase.h"
 
 #include <wx/wx.h>
 #include <json/json.h>
@@ -9,10 +10,10 @@
 namespace edb
 {
 
-class FixOldScale9 : public ICommand
+class FixMirror : public ICommand, private FixJsonBase
 {
 public:
-	FixOldScale9() {}
+	FixMirror() {}
 
 	//
 	// interface ICommand
@@ -22,15 +23,15 @@ public:
 	virtual std::string Usage() const;
 	virtual int Run(int argc, char *argv[]);
 
-	static ICommand* Create() { return new FixOldScale9(); }
+	static ICommand* Create() { return new FixMirror(); }
+
+protected:
+	virtual bool FixSprite(const std::string& filepath, Json::Value& sprite_val) const;
 
 private:
 	void Trigger(const std::string& dir) const;
 
-	void FixScale9(const std::string& filepath) const;
-	bool FixScale9Spr(Json::Value& val) const;
-
-}; // FixOldScale9 
+}; // FixMirror 
 
 
 }
