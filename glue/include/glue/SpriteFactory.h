@@ -18,8 +18,6 @@ public:
 	s2::Sprite* Create(const std::string& filepath) const;
 	s2::Sprite* Create(const Json::Value& val, const std::string& dir) const;
 
-private:
-
 	SINGLETON_DECLARATION(SpriteFactory);
 
 }; // SpriteFactory

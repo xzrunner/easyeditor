@@ -23,7 +23,13 @@ void TextboxSymbol::Draw(const RenderParams& params, const Sprite* spr) const
  	if (text.empty()) {
  		return;
  	}
- 
+
+	s2::RenderParams p = params;
+	if (spr) {
+		p.mt = spr->GetTransMatrix() * p.mt;
+		p.color = spr->Color() * p.color;
+	}
+
 	const Textbox& tb = tb_spr->GetTextbox();
  
  	gtxt_label_style s;
@@ -45,7 +51,7 @@ void TextboxSymbol::Draw(const RenderParams& params, const Sprite* spr) const
  	s.space_h				= tb.space_hori;
  	s.space_v				= tb.space_vert;
 
-	DrawText(s, params.mt, params.color.mul, params.color.add, tb_spr->GetText(), tb_spr->GetTime(), tb.richtext);
+	DrawText(s, p.mt, p.color.mul, p.color.add, tb_spr->GetText(), tb_spr->GetTime(), tb.richtext);
 
 	tb_spr->UpdateTime();
 }

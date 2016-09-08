@@ -467,11 +467,19 @@
 				Name="06.complex"
 				>
 				<File
-					RelativePath="..\..\..\source\sprite\ComplexSymbol.cpp"
+					RelativePath="..\..\..\source\sprite\ComplexSprLoader.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\include\glue\ComplexSymbol.h"
+					RelativePath="..\..\..\include\glue\ComplexSprLoader.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\sprite\ComplexSymLoader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\glue\ComplexSymLoader.h"
 					>
 				</File>
 			</Filter>

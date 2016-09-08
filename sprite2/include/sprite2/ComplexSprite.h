@@ -26,6 +26,7 @@ public:
 	virtual Sprite* FetchChild(const std::string& name) const;
 
 	void SetAction(const std::string& name);
+	void SetAction(int idx) { m_action = idx; }
 	int GetAction() const { return m_action; }
 	
 protected:

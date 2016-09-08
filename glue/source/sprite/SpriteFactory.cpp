@@ -6,6 +6,7 @@
 
 #include "Scale9SprLoader.h"
 #include "TextboxLoader.h"
+#include "ComplexSprLoader.h"
 
 #include <sprite2/S2_Symbol.h>
 #include <sprite2/ImageSprite.h>
@@ -81,6 +82,12 @@ s2::Sprite* SpriteFactory::Create(const Json::Value& val, const std::string& dir
 			text->SetText(val["text"]["text"].asString());
 			TextboxLoader loader(text->GetTextbox());
 			loader.LoadJson(val["text"]);
+		}
+		break;
+	case COMPLEX:
+		{
+			ComplexSprLoader loader(VI_DOWNCASTING<s2::ComplexSprite*>(spr));
+			loader.LoadJson(val, dir);
 		}
 		break;
 	}

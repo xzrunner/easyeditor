@@ -22,7 +22,7 @@ Scale9SprLoader::~Scale9SprLoader()
 
 void Scale9SprLoader::LoadJson(const Json::Value& val, const std::string& dir)
 {
-	if (val["scale9"].isNull()) {
+	if (!m_spr || val["scale9"].isNull()) {
 		return;
 	}
 

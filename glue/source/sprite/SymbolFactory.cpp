@@ -5,9 +5,10 @@
 #include "ImageSymbol.h"
 #include "Scale9SymLoader.h"
 #include "TextboxSymbol.h"
-#include "ComplexSymbol.h"
+#include "ComplexSymLoader.h"
 
 #include <sprite2/Scale9Symbol.h>
+#include <sprite2/ComplexSymbol.h>
 
 namespace glue
 {
@@ -68,8 +69,9 @@ s2::Symbol* SymbolFactory::Create(const std::string& filepath) const
 		break;
 	case COMPLEX:
 		{
-			ComplexSymbol* sym = new ComplexSymbol();
-			sym->LoadJson(filepath);
+			s2::ComplexSymbol* sym = new s2::ComplexSymbol();
+			ComplexSymLoader loader(sym);
+			loader.LoadJson(filepath);
 			ret = sym;
 		}
 		break;
