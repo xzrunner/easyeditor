@@ -82,9 +82,9 @@ void AnimLerp::Lerp(Sprite* begin, Sprite* end, Sprite* tween, float process)
 		Scale9Sprite* s9_t = dynamic_cast<Scale9Sprite*>(tween);
 		assert(s9_e && s9_t);
 		sm::vec2 s_sz = s9_b->GetScale9().GetSize(),
-			e_sz = s9_e->GetScale9().GetSize();
+			     e_sz = s9_e->GetScale9().GetSize();
 		float t_w = (e_sz.x - s_sz.x) * process + s_sz.x,
-			t_h = (e_sz.y - s_sz.y) * process + s_sz.y;
+			  t_h = (e_sz.y - s_sz.y) * process + s_sz.y;
 		s9_t->Resize(t_w, t_h);
 	}
 	else if (IconSprite* icon_b = dynamic_cast<IconSprite*>(begin))

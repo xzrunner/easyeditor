@@ -24,6 +24,7 @@ Particle3dSprite::Particle3dSprite(const Particle3dSprite& spr)
 	, m_rp(spr.m_rp)
 	, m_spr_ref(spr.m_spr_ref)
 {
+	CreateSpr();
 }
 
 Particle3dSprite& Particle3dSprite::operator = (const Particle3dSprite& spr)
