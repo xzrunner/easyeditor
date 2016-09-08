@@ -439,6 +439,14 @@
 				Name="05.label"
 				>
 				<File
+					RelativePath="..\..\..\source\sprite\TextboxLoader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\glue\TextboxLoader.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\source\sprite\TextboxSprLoader.cpp"
 					>
 				</File>
@@ -452,14 +460,6 @@
 				</File>
 				<File
 					RelativePath="..\..\..\include\glue\TextboxSymbol.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\source\sprite\TextboxSymLoader.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\glue\TextboxSymLoader.h"
 					>
 				</File>
 			</Filter>

@@ -10,6 +10,7 @@
 #include <sprite2/RenderFilter.h>
 #include <glue/trans_color.h>
 #include <glue/GLUE_GTxt.h>
+#include <glue/TextboxLoader.h>
 
 #include <shaderlab.h>
 #include <gtxt.h>
@@ -53,7 +54,16 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 
 void Symbol::LoadResources()
 {
-	LoadJson(m_filepath);
+	Json::Value value;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(m_filepath.c_str());
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, value);
+	fin.close();
+
+	glue::TextboxLoader loader(GetTextbox());
+	loader.LoadJson(value);
 }
 
 void Symbol::DrawText(const gtxt_label_style& style, const sm::mat4& mt, const s2::Color& mul, 

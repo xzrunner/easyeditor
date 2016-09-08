@@ -5,6 +5,7 @@
 #include <ee/SpriteFactory.h>
 
 #include <glue/trans_color.h>
+#include <glue/TextboxLoader.h>
 
 namespace etext
 {
@@ -44,35 +45,11 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 
 	const Json::Value& text_val = val["text"];
 
-	m_tb.width			= text_val["width"].asInt();
-	m_tb.height			= text_val["height"].asInt();
+	m_text	= text_val["text"].asString();
+	m_tid	= text_val["tid"].asString();
 
-	m_tb.font_type		= text_val["font"].asInt();
-	m_tb.font_size		= text_val["font_size"].asInt();
-	m_tb.font_color		= glue::str2color(text_val["font_color"].asString(), glue::PT_RGBA);
-
-	m_tb.has_edge		= text_val["edge"].asBool();
-	m_tb.edge_size		= text_val["edge_size"].asInt();
-	m_tb.edge_color		= glue::str2color(text_val["edge_color"].asString(), glue::PT_RGBA);
-
-	m_tb.align_hori		= s2::Textbox::HoriAlign(text_val["align_hori"].asInt());
-	m_tb.align_vert		= s2::Textbox::VertAlign(text_val["align_vert"].asInt());
-
-	m_tb.space_hori		= text_val["space_hori"].asDouble();
-	m_tb.space_vert		= text_val["space_vert"].asDouble();
-
-	m_text				= text_val["text"].asString();
-	m_tid				= text_val["tid"].asString();
-
-	m_tb.overflow = true;
-	if (!text_val["overflow"].isNull()) {
-		m_tb.overflow	= text_val["overflow"].asBool();
-	}
-
-	m_tb.richtext = true;
-	if (!text_val["richtext"].isNull()) {
-		m_tb.richtext	= text_val["richtext"].asBool();
-	}
+	glue::TextboxLoader loader(m_tb);
+	loader.LoadJson(text_val);
 }
 
 void Sprite::Store(Json::Value& val, const std::string& dir) const

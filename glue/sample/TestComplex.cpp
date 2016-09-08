@@ -31,10 +31,10 @@ void TestComplex::Resize(int width, int height)
 {
 	glue::RenderContext::Instance()->OnSize(width, height);
 
-// 	static bool inited = false;
-// 	if (!inited) {
-// 		InitGTxt();
-// 	}
+	static bool inited = false;
+	if (!inited) {
+		InitGTxt();
+	}
 }
 
 void TestComplex::Draw() const

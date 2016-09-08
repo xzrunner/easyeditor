@@ -3,14 +3,14 @@
 
 #include <ee/Symbol.h>
 
-#include <glue/TextboxSymbol.h>
+#include <sprite2/TextboxSymbol.h>
 
 namespace etext
 {
 
 class Sprite;
 
-class Symbol : public ee::Symbol, public glue::TextboxSymbol
+class Symbol : public ee::Symbol, public s2::TextboxSymbol
 {
 public:
 	Symbol();

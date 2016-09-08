@@ -3,10 +3,11 @@
 #include "SymFileType.h"
 
 #include "ImageSymbol.h"
-#include <sprite2/Scale9Symbol.h>
 #include "Scale9SymLoader.h"
 #include "TextboxSymbol.h"
 #include "ComplexSymbol.h"
+
+#include <sprite2/Scale9Symbol.h>
 
 namespace glue
 {
