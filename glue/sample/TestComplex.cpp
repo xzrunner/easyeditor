@@ -23,6 +23,10 @@ void TestComplex::Init()
 	{
 		s2::ComplexSprite* spr = new s2::ComplexSprite(sym);
 		spr->SetPosition(sm::vec2(0, 0));
+
+		s2::Sprite* c = spr->FetchChild("action");
+		dynamic_cast<s2::ComplexSprite*>(c)->SetAction("c");
+
 		m_sprites.push_back(spr);
 	}
 }

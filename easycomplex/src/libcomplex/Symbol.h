@@ -37,9 +37,6 @@ public:
 protected:
 	virtual void LoadResources();
 
-private:
-	void InitActions();
-
 public:
 	struct Group
 	{

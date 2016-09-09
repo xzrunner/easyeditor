@@ -14,6 +14,10 @@ public:
 	static void Load(const std::string& filepath, const Json::Value& value, 
 		const std::string& dir, Symbol* complex);
 
+private:
+	static void InitActions(Symbol* sym, const Json::Value& val);
+	static void CreateActionsFromTag(Symbol* sym);
+
 }; // LoadFromJson
 
 }

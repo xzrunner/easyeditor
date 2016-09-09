@@ -40,6 +40,8 @@ void FileStorer::Store(const char* filepath, const Symbol* sym)
 		value["sprite"][i] = Store(child, dir);
 	}
 
+	StoreAction(sym, value);
+
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
 	std::ofstream fout(filepath);
@@ -72,6 +74,8 @@ void FileStorer::StoreWithHistory(const char* filepath, const Symbol* sym)
 		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 		value["sprite"][i] = Store(child, dir);
 	}
+
+	StoreAction(sym, value);
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -136,5 +140,35 @@ void FileStorer::CheckDuplicateName(const Symbol* sym)
 		}
 	}
 }
+
+void FileStorer::StoreAction(const Symbol* sym, Json::Value& val)
+{
+	const std::vector<s2::ComplexSymbol::Action>& actions = sym->GetActions();
+	if (actions.empty()) {
+		return;
+	}
+
+	Json::Value action_val;
+
+	const std::vector<s2::Sprite*>& children = sym->GetChildren();
+	for (int i = 0, n = actions.size(); i < n; ++i) {
+		const s2::ComplexSymbol::Action& action = actions[i];
+		action_val[i]["name"] = action.name;
+		for (int j = 0, m = action.sprs.size(); j < m; ++j) {
+			int idx = -1;
+			for (int k = 0; k < children.size(); ++k) {
+				if (children[k] == action.sprs[j]) {
+					idx = k;
+					break;
+				}
+			}
+			assert(idx != -1);
+			action_val[i]["sprite"][j] = idx;
+		}
+	}
+
+	val["action"] = action_val;
+}
+
 
 } // complex

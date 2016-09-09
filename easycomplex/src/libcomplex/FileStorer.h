@@ -22,6 +22,8 @@ private:
 
 	static void CheckDuplicateName(const Symbol* sym);
 
+	static void StoreAction(const Symbol* sym, Json::Value& val);
+
 }; // FileStorer
 
 }

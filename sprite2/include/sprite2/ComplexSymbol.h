@@ -50,6 +50,7 @@ public:
 	};
 
 	const std::vector<Action>& GetActions() const { return m_actions; }
+	void SetActions(const std::vector<Action>& actions) { m_actions = actions; }
 
 protected:
 	std::vector<Sprite*> m_children;

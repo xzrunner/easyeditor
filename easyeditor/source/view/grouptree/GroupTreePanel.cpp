@@ -56,12 +56,12 @@ void GroupTreePanel::InitGroups(const std::map<std::string, std::vector<Sprite*>
 		}
 	}
 
-	for (int i = 0, n = groups_id.size(); i < n; ++i) {
-		m_grouptree->Traverse(groups_id[i], GroupTreeImpl::SetVisibleVisitor(m_grouptree, false));
-		m_grouptree->Traverse(groups_id[i], GroupTreeImpl::SetEditableVisitor(m_grouptree, false));
-	}
-	m_grouptree->Traverse(groups_id[0], GroupTreeImpl::SetVisibleVisitor(m_grouptree, true));
-	m_grouptree->Traverse(groups_id[0], GroupTreeImpl::SetEditableVisitor(m_grouptree, true));
+// 	for (int i = 0, n = groups_id.size(); i < n; ++i) {
+// 		m_grouptree->Traverse(groups_id[i], GroupTreeImpl::SetVisibleVisitor(m_grouptree, false));
+// 		m_grouptree->Traverse(groups_id[i], GroupTreeImpl::SetEditableVisitor(m_grouptree, false));
+// 	}
+// 	m_grouptree->Traverse(groups_id[0], GroupTreeImpl::SetVisibleVisitor(m_grouptree, true));
+// 	m_grouptree->Traverse(groups_id[0], GroupTreeImpl::SetEditableVisitor(m_grouptree, true));
 }
 
 void GroupTreePanel::EnableExpand(bool enable)

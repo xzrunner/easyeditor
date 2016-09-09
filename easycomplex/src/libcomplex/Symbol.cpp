@@ -204,44 +204,6 @@ void Symbol::GetActionNames(std::vector<std::string>& actions) const
 void Symbol::LoadResources()
 {
 	FileLoader::Load(m_filepath, this);
-	InitActions();
-}
-
-void Symbol::InitActions()
-{
-	m_actions.clear();
-	for (int i = 0, n = m_children.size(); i < n; ++i) 
-	{
-		ee::Sprite* spr = dynamic_cast<ee::Sprite*>(m_children[i]);
-		if (spr->GetTag().empty()) {
-			continue;			
-		}
-
-		std::vector<std::string> tags;
-		ee::StringHelper::Split(spr->GetTag(), ";", tags);
-		for (int j = 0, m = tags.size(); j < m; ++j)
-		{
-			const std::string& tag = tags[j];
-			if (tag.find("=") != std::string::npos) {
-				continue;
-			}
-
-			bool find = false;
-			for (int k = 0; k < m_actions.size(); ++k) {
-				if (m_actions[k].name == tag) {
-					find = true;
-					m_actions[k].sprs.push_back(spr);
-				}
-			}
-
-			if (!find) {
-				Action a;
-				a.name = tag;
-				a.sprs.push_back(spr);
-				m_actions.push_back(a);
-			}
-		}
-	}
 }
 
 }
