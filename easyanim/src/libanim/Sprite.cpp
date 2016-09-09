@@ -4,6 +4,8 @@
 
 #include <ee/std_functor.h>
 
+#include <glue/AnimSprLoader.h>
+
 namespace eanim
 {
 
@@ -33,18 +35,8 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 {
 	ee::Sprite::Load(val);
 
-	if (val["animation"].isNull()) {
-		return;
-	}	
-
-	const Json::Value& anim_val = val["animation"];
-
-	m_loop = anim_val["loop"].asBool();
-	m_interval = anim_val["interval"].asDouble();
-
-	m_fps = anim_val["fps"].asInt();
-
-	m_curr.SetActive(anim_val["active"].asBool());
+	glue::AnimSprLoader loader(this);
+	loader.LoadJson(val, dir);
 }
 
 void Sprite::Store(Json::Value& val, const std::string& dir) const

@@ -6,6 +6,7 @@ namespace glue
 static const std::string TAG_SCALE9		= "scale9";
 static const std::string TAG_TEXTBOX	= "text";
 static const std::string TAG_COMPLEX	= "complex";
+static const std::string TAG_ANIM		= "anim";
 
 SymFileType get_sym_file_type(const std::string& filepath)
 {
@@ -39,6 +40,8 @@ SymFileType get_sym_file_type(const std::string& filepath)
 			return TEXTBOX;
 		} else if (tag == TAG_COMPLEX) {
 			return COMPLEX;
+		} else if (tag == TAG_ANIM) {
+			return ANIMATION;
 		}
 	}
 
@@ -55,6 +58,8 @@ std::string get_sym_tag_str(SymFileType type)
 		return TAG_TEXTBOX;
 	case COMPLEX:
 		return TAG_COMPLEX;
+	case ANIMATION:
+		return TAG_ANIM;
 	}
 
 	return "";

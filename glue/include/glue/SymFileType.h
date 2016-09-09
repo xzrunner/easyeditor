@@ -13,6 +13,7 @@ enum SymFileType
 	SCALE9,
 	TEXTBOX,
 	COMPLEX,
+	ANIMATION,
 };
 
 SymFileType get_sym_file_type(const std::string& filepath);

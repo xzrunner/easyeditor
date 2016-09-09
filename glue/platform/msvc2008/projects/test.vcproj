@@ -222,6 +222,14 @@
 			Name="node"
 			>
 			<File
+				RelativePath="..\..\..\sample\TestAnim.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\sample\TestAnim.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\sample\TestComplex.cpp"
 				>
 			</File>

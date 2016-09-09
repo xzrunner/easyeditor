@@ -483,6 +483,26 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="07.animation"
+				>
+				<File
+					RelativePath="..\..\..\source\sprite\AnimSprLoader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\glue\AnimSprLoader.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\sprite\AnimSymLoader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\glue\AnimSymLoader.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="adapter"

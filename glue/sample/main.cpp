@@ -11,14 +11,17 @@
 #include "TestScale9.h"
 #include "TestLabel.h"
 #include "TestComplex.h"
+#include "TestAnim.h"
 
 #include <shaderlab.h>
+#include <sprite2/SprTimer.h>
 #include <glue/RenderContext.h>
 
 #include <gl/glew.h>
 #include <gl/freeglut.h>
 
 #include <iostream>
+#include <time.h>
 
 //test::TestTask* task = new test::TestShape;
 //test::TestTask* task = new test::TestSprite;
@@ -30,6 +33,7 @@
 //test::TestTask* task = new test::TestScale9;
 //test::TestLabel* task = new test::TestLabel;
 test::TestComplex* task = new test::TestComplex;
+//test::TestAnim* task = new test::TestAnim;
 
 void 
 display(void) {
@@ -43,6 +47,16 @@ display(void) {
 
 void
 update(void) {
+
+	float dt = 0.166f;
+	clock_t curr_time = clock();
+	static clock_t last_time = 0;
+	if (last_time != 0) {
+		dt = (float)(curr_time - last_time) / CLOCKS_PER_SEC;
+	}
+	last_time = curr_time;
+	s2::SprTimer::Instance()->Update(dt);
+
 	task->Update();
 	glutPostRedisplay();
 }

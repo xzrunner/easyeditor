@@ -3,6 +3,8 @@
 
 #include "../libanim/LayersLoader.h"
 
+#include <ee/Symbol.h>
+
 #include <sprite2/DummySymbol.h>
 
 namespace eanim { class Symbol; }
@@ -36,11 +38,12 @@ private:
 	class Loader : public eanim::LayersLoader
 	{
 	public:
-		Loader(const std::string& dirpath) : m_dirpath(dirpath) {}
+		Loader(eanim::Symbol* sym, const std::string& dirpath) 
+			: eanim::LayersLoader(sym)
+			, m_dirpath(dirpath) {}
 
 	protected:
-		virtual std::string GetSymbolPath(const std::string& dir, 
-			const Json::Value& json_val) const;
+		virtual std::string GetSymbolPath(const std::string& dir, const Json::Value& val) const;
 
 	private:
 		std::string m_dirpath;

@@ -58,7 +58,7 @@ void Symbol::LoadResources()
 
 		eanim::Symbol* sym = new eanim::Symbol();
 		sym->SetFilepath(m_filepath);
-		Loader loader(dirpath);
+		Loader loader(sym, dirpath);
 		sym->LoadFromFile(loader);
 
 		temp_val = value["template"][idx++];
@@ -80,9 +80,9 @@ void Symbol::Clear()
 //////////////////////////////////////////////////////////////////////////
 
 std::string Symbol::Loader::
-GetSymbolPath(const std::string& dir, const Json::Value& json_val) const
+GetSymbolPath(const std::string& dir, const Json::Value& val) const
 {
-	std::string filepath = json_val["filepath"].asString();
+	std::string filepath = val["filepath"].asString();
 	while (true)
 	{
 		if (ee::FileHelper::IsFileExist(filepath))

@@ -55,7 +55,7 @@ void Symbol::Traverse(ee::Visitor<ee::Sprite>& visitor)
 	}
 }
 
-void Symbol::LoadFromFile(const LayersLoader& loader)
+void Symbol::LoadFromFile(LayersLoader& loader)
 {
 	Clear();
 
@@ -72,26 +72,23 @@ void Symbol::LoadFromFile(const LayersLoader& loader)
 
 	std::string dir = ee::FileHelper::GetFileDir(m_filepath);
 
-	std::vector<s2::AnimSymbol::Layer*> layers;
-	loader.LoadLayers(value, dir, layers);
-	for (int i = 0, n = layers.size(); i < n; ++i) {
-		AddLayer(layers[i]);
-	}
+	loader.LoadLayers(value, dir);
 }
 
 void Symbol::LoadResources()
 {
 	class Loader : public LayersLoader
 	{
+	public:
+		Loader(Symbol* sym) : LayersLoader(sym) {}
+
 	protected:
-		virtual std::string GetSymbolPath(const std::string& dir, 
-			const Json::Value& json_val) const
-		{
-			return ee::SymbolSearcher::GetSymbolPath(dir, json_val);
+		virtual std::string GetSymbolPath(const std::string& dir, const Json::Value& val) const {
+			return ee::SymbolSearcher::GetSymbolPath(dir, val);
 		}
 	};
 
-	Loader loader;
+	Loader loader(this);
 	LoadFromFile(loader);
 }
 

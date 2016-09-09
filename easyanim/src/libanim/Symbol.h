@@ -25,7 +25,7 @@ public:
 	virtual void ReloadTexture() const;
 	virtual void Traverse(ee::Visitor<ee::Sprite>& visitor);
 
-	void LoadFromFile(const LayersLoader& loader);
+	void LoadFromFile(LayersLoader& loader);
 
 	static ee::Symbol* Create() { return new Symbol(); }
 

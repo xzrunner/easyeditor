@@ -7,12 +7,14 @@
 #include "Scale9SprLoader.h"
 #include "TextboxLoader.h"
 #include "ComplexSprLoader.h"
+#include "AnimSprLoader.h"
 
 #include <sprite2/S2_Symbol.h>
 #include <sprite2/ImageSprite.h>
 #include <sprite2/Scale9Sprite.h>
 #include <sprite2/TextboxSprite.h>
 #include <sprite2/ComplexSprite.h>
+#include <sprite2/AnimSprite.h>
 
 namespace glue
 {
@@ -45,6 +47,9 @@ s2::Sprite* SpriteFactory::Create(const std::string& filepath) const
 		break;
 	case COMPLEX:
 		spr = new s2::ComplexSprite(sym);
+		break;
+	case ANIMATION:
+		spr = new s2::AnimSprite(sym);
 		break;
 	}
 
@@ -87,6 +92,12 @@ s2::Sprite* SpriteFactory::Create(const Json::Value& val, const std::string& dir
 	case COMPLEX:
 		{
 			ComplexSprLoader loader(VI_DOWNCASTING<s2::ComplexSprite*>(spr));
+			loader.LoadJson(val, dir);
+		}
+		break;
+	case ANIMATION:
+		{
+			AnimSprLoader loader(VI_DOWNCASTING<s2::AnimSprite*>(spr));
 			loader.LoadJson(val, dir);
 		}
 		break;

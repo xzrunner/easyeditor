@@ -6,9 +6,11 @@
 #include "Scale9SymLoader.h"
 #include "TextboxSymbol.h"
 #include "ComplexSymLoader.h"
+#include "AnimSymLoader.h"
 
 #include <sprite2/Scale9Symbol.h>
 #include <sprite2/ComplexSymbol.h>
+#include <sprite2/AnimSymbol.h>
 
 namespace glue
 {
@@ -71,6 +73,14 @@ s2::Symbol* SymbolFactory::Create(const std::string& filepath) const
 		{
 			s2::ComplexSymbol* sym = new s2::ComplexSymbol();
 			ComplexSymLoader loader(sym);
+			loader.LoadJson(filepath);
+			ret = sym;
+		}
+		break;
+	case ANIMATION:
+		{
+			s2::AnimSymbol* sym = new s2::AnimSymbol();
+			AnimSymLoader loader(sym);
 			loader.LoadJson(filepath);
 			ret = sym;
 		}

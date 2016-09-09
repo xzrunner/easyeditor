@@ -10,6 +10,7 @@
 #include "StringHelper.h"
 #include "SymbolSearcher.h"
 #include "SymbolMgr.h"
+#include "Exception.h"
 
 namespace ee
 {
@@ -79,9 +80,14 @@ Sprite* SpriteFactory::Create(const Json::Value& val, const std::string& dir)
 {
 	std::string filepath = SymbolSearcher::GetSymbolPath(dir, val);
 	Symbol* sym = SymbolMgr::Instance()->FetchSymbol(filepath);
+	if (!sym) {
+		std::string filepath = val["filepath"].asString();
+		throw Exception("Symbol doesn't exist, \n[dir]:%s, \n[file]:%s !", 
+			dir.c_str(), filepath.c_str());
+	}
 	SymbolSearcher::SetSymbolFilepaths(dir, sym, val);
 	Sprite* spr = SpriteFactory::Instance()->Create(sym);
-	spr->Load(val);
+	spr->Load(val, dir);
 	sym->RemoveReference();
 	return spr;
 }

@@ -1,24 +1,26 @@
 #ifndef _EASYANIM_LAYERS_LOADER_H_
 #define _EASYANIM_LAYERS_LOADER_H_
 
-#include "Symbol.h"
-
-#include <sprite2/AnimSymbol.h>
-
-#include <json/json.h>
+#include <glue/AnimSymLoader.h>
 
 namespace eanim
 {
 
-class LayersLoader
+class Symbol;
+
+class LayersLoader : public glue::AnimSymLoader
 {
 public:
-	void LoadLayers(const Json::Value& value, const std::string& dir,
-		std::vector<s2::AnimSymbol::Layer*>& layers) const;
+	LayersLoader(Symbol* sym);
 
 protected:
-	virtual std::string GetSymbolPath(const std::string& dir, 
-		const Json::Value& json_val) const = 0;
+	/**
+	 *  @interface
+	 *    glue::AnimSymLoader
+	 */	
+	virtual s2::Sprite* LoadSprite(const Json::Value& val, const std::string& dir);
+
+	virtual std::string GetSymbolPath(const std::string& dir, const Json::Value& val) const = 0;
 
 }; // LayersLoader
 
