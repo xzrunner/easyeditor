@@ -1,8 +1,10 @@
 #include "TextboxSymbol.h"
 #include "TextboxSprite.h"
 #include "RenderParams.h"
+#include "RenderFilter.h"
 
 #include <gtxt_label.h>
+#include <shaderlab.h>
 
 namespace s2
 {
@@ -28,6 +30,15 @@ void TextboxSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 	if (spr) {
 		p.mt = spr->GetTransMatrix() * p.mt;
 		p.color = spr->Color() * p.color;
+	}
+
+	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
+	if (p.shader.filter && p.shader.filter->GetMode() == sl::FM_GRAY) {
+		mgr->SetShader(sl::FILTER);
+		sl::FilterShader* shader = static_cast<sl::FilterShader*>(mgr->GetShader());
+		shader->SetMode(sl::FM_GRAY);
+	} else {
+		mgr->SetShader(sl::SPRITE2);
 	}
 
 	const Textbox& tb = tb_spr->GetTextbox();
