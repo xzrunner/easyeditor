@@ -2,6 +2,7 @@
 #include "EditPolylineWithCopyNodeOP.h"
 #include "PolygonShape.h"
 #include "DrawPencilPolygonCMPT.h"
+#include "ColorMaterial.h"
 
 #include <ee/SelectShapesOP.h>
 #include <ee/MultiShapesImpl.h>
@@ -47,6 +48,18 @@ void DrawPolygonCMPT::UpdateControlValue()
 	bool empty;
 	m_shapes_impl->GetShapeSelection()->Traverse(ee::EmptyVerifyVisitor(empty));
 	m_btn_trigger->Enable(!empty);
+
+	if (!empty) {
+		std::vector<ee::Shape*> shapes;
+		m_shapes_impl->GetShapeSelection()->Traverse(ee::FetchAllVisitor<ee::Shape>(shapes));
+		PolygonShape* poly = dynamic_cast<PolygonShape*>(shapes[0]);
+		if (poly) {
+			const ColorMaterial* cm = dynamic_cast<const ColorMaterial*>(poly->GetMaterial());
+			const s2::Color& col = cm->GetColor();
+			m_color.Set(col.r, col.g, col.b);
+			FillingButton();
+		}
+	}
 }
 
 wxSizer* DrawPolygonCMPT::InitLayout()

@@ -7,6 +7,8 @@
 #include <ee/OneFloatValueCMPT.h>
 #include <ee/Bitmap.h>
 
+namespace s2 { class Color; }
+
 namespace eshape
 {
 

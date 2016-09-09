@@ -72,7 +72,7 @@ private:
 	}; // DragSymbolTarget
 
 private:
-	eshape::Symbol* m_sym;
+	Symbol* m_sym;
 
 	ToolbarPanel* m_toolbar;
 

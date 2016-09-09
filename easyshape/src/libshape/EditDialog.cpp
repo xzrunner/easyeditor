@@ -27,7 +27,7 @@ EditDialog::EditDialog(wxWindow* parent, Symbol* sym)
 	InitLayout(sym);
 
 	std::string filepath = ee::FileHelper::GetFilenameAddTag(
-		sym->GetFilepath(), eshape::FILE_TAG, "json");
+		sym->GetFilepath(), FILE_TAG, "json");
 	if (ee::FileHelper::IsFileExist(filepath)) {
 		m_stage->LoadFromFile(filepath.c_str());
 		m_toolbar->SelectSuitableEditOP();

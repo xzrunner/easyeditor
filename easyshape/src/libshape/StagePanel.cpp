@@ -119,7 +119,7 @@ void StagePanel::SetSymbolBG(ee::Symbol* sym)
 // 
 // 		if (ee::FileHelper::isExist(filepath))
 // 		{
-// 			eshape::FileAdapter adapter(m_shapes);
+// 			FileAdapter adapter(m_shapes);
 // 			adapter.load(filepath.c_str());
 // 		}
 // 	}
@@ -156,7 +156,7 @@ void StagePanel::SetSymbolBG(ee::Symbol* sym)
 //
 ////		if (ee::FileHelper::isExist(filepath))
 //		{
-//			eshape::FileAdapter adapter(m_shapes);
+//			FileAdapter adapter(m_shapes);
 //			adapter.store(filepath.c_str());
 //		}
 //	}

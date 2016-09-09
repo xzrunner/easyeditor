@@ -107,7 +107,7 @@ void ToolbarPanel::OnClearShapes(wxCommandEvent& event)
 
 void ToolbarPanel::OnCreateBounding(wxCommandEvent& event)
 {
-	const ee::Symbol* bg = dynamic_cast<const eshape::Symbol&>(m_stage_panel->GetSymbol()).GetBG();
+	const ee::Symbol* bg = dynamic_cast<const Symbol&>(m_stage_panel->GetSymbol()).GetBG();
 	const ee::ImageSymbol* img_symbol = dynamic_cast<const ee::ImageSymbol*>(bg);
 	if (!img_symbol) {
 		return;
@@ -126,7 +126,7 @@ void ToolbarPanel::OnCreateBounding(wxCommandEvent& event)
 	for (int i = 0, n = bounding.size(); i < n; ++i) {
 		bounding[i] += offset;
 	}
-	eshape::PolygonShape* poly = new eshape::PolygonShape(bounding);
+	PolygonShape* poly = new PolygonShape(bounding);
 	ee::InsertShapeSJ::Instance()->Insert(poly);
 	poly->RemoveReference();
 

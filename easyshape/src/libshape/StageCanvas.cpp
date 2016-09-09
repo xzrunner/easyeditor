@@ -68,7 +68,7 @@ void StageCanvas::OnDrawSprites() const
 
 	m_shape_impl->TraverseShapes(ee::DrawShapesVisitor(sm::rect()), ee::DT_VISIBLE);
 
-	eshape::StageCanvas::DrawGuideLines();
+	StageCanvas::DrawGuideLines();
 
 	if (!m_edited) {
 		m_stage->GetSymbol().Draw(s2::RenderParams());
