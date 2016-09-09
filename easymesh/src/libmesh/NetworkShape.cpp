@@ -3,12 +3,12 @@
 
 #include <ee/Math2D.h>
 #include <ee/SettingData.h>
-#include <ee/JsonSerializer.h>
 
 #include <easyshape.h>
 
-#include <sprite2/S2_RVG.h>
 #include <SM_Calc.h>
+#include <sprite2/S2_RVG.h>
+#include <glue/JsonSerializer.h>
 
 namespace emesh
 {
@@ -43,17 +43,17 @@ void NetworkShape::LoadFromFile(const Json::Value& value, const std::string& dir
 {
 	const Json::Value& shape_val = value["shape"];
 	std::vector<sm::vec2> vertices;
-	ee::JsonSerializer::Load(shape_val["outline"], vertices);
+	glue::JsonSerializer::Load(shape_val["outline"], vertices);
 	m_vertices = vertices;
 	UpdateBounding();
-	ee::JsonSerializer::Load(shape_val["inner"], m_inner_vertices);
+	glue::JsonSerializer::Load(shape_val["inner"], m_inner_vertices);
 }
 
 void NetworkShape::StoreToFile(Json::Value& value, const std::string& dir) const
 {
 	Json::Value& shape_val = value["shape"];
-	ee::JsonSerializer::Store(m_vertices, shape_val["outline"]);
-	ee::JsonSerializer::Store(m_inner_vertices, shape_val["inner"]);
+	glue::JsonSerializer::Store(m_vertices, shape_val["outline"]);
+	glue::JsonSerializer::Store(m_inner_vertices, shape_val["inner"]);
 }
 
 bool NetworkShape::InsertInner(const sm::vec2& pos)

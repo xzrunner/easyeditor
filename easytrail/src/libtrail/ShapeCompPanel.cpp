@@ -3,9 +3,9 @@
 
 #include <ee/SliderCtrlOne.h>
 #include <ee/SliderCtrlTwo.h>
-#include <ee/JsonSerializer.h>
 
 #include <mt_2d.h>
+#include <glue/JsonSerializer.h>
 
 namespace etrail
 {
@@ -51,8 +51,8 @@ void ShapeCompPanel::Load(const Json::Value& val, const std::string& dir)
 {
 	ComponentPanel::Load(val, dir);
 
-	ee::JsonSerializer::Load(val["color_begin"], m_pc->col_begin.rgba);
-	ee::JsonSerializer::Load(val["color_end"], m_pc->col_end.rgba);
+	glue::JsonSerializer::Load(val["color_begin"], m_pc->col_begin.rgba);
+	glue::JsonSerializer::Load(val["color_end"], m_pc->col_end.rgba);
 
 	UpdateBtnColor();
 }
@@ -61,8 +61,8 @@ void ShapeCompPanel::Store(Json::Value& val, const std::string& dir) const
 {
 	ComponentPanel::Store(val, dir);
 
-	ee::JsonSerializer::Store(m_pc->col_begin.rgba, val["color_begin"]);
-	ee::JsonSerializer::Store(m_pc->col_end.rgba, val["color_end"]);
+	glue::JsonSerializer::Store(m_pc->col_begin.rgba, val["color_begin"]);
+	glue::JsonSerializer::Store(m_pc->col_end.rgba, val["color_end"]);
 }
 
 void ShapeCompPanel::InitLayout(wxSizer* top_sizer)

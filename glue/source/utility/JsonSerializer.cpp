@@ -1,6 +1,6 @@
 #include "JsonSerializer.h"
 
-namespace ee
+namespace glue
 {
 
 void JsonSerializer::Store(const std::vector<sm::vec2>& points, Json::Value& value)

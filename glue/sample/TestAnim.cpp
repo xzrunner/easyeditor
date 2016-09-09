@@ -54,7 +54,10 @@ void TestAnim::Update()
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) 
 	{
 		s2::Sprite* spr = m_sprites[i];
-		spr->Update(s2::RenderParams());
+		s2::RenderParams params;
+		params.mt = spr->GetTransMatrix();
+		params.color = spr->Color();
+		spr->Update(params);
 	}
 }
 

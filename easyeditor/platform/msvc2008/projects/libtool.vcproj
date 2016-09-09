@@ -263,14 +263,6 @@
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\source\tool\JsonSerializer.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\include\ee\JsonSerializer.h"
-			>
-		</File>
-		<File
 			RelativePath="..\..\..\source\tool\Logger.cpp"
 			>
 		</File>

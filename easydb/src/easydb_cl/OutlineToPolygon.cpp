@@ -3,11 +3,12 @@
 
 #include <ee/FileHelper.h>
 #include <ee/FileType.h>
-#include <ee/JsonSerializer.h>
 #include <ee/DummySymbol.h>
 
 #include <easyimage.h>
 #include <easyshape.h>
+
+#include <glue/JsonSerializer.h>
 
 namespace edb
 {
@@ -65,7 +66,7 @@ void OutlineToPolygon::Trigger(const std::string& dir) const
 		fin.close();
 
 		std::vector<sm::vec2> vertices;
-		ee::JsonSerializer::Load(value["normal"], vertices);
+		glue::JsonSerializer::Load(value["normal"], vertices);
 		if (vertices.empty()) {
 			continue;
 		}

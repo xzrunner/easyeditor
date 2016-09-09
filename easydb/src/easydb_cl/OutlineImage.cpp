@@ -3,10 +3,10 @@
 
 #include <ee/FileHelper.h>
 #include <ee/Image.h>
-#include <ee/JsonSerializer.h>
 #include <ee/Math2D.h>
 
 #include <easyimage.h>
+#include <glue/JsonSerializer.h>
 
 #include <wx/arrstr.h>
 
@@ -73,7 +73,7 @@ void OutlineImage::Trigger(const std::string& dir) const
 			for (int i = 0, n = vertices.size(); i < n; ++i) {
 				vertices[i] += offset;
 			}
-			ee::JsonSerializer::Store(vertices, value["normal"]);
+			glue::JsonSerializer::Store(vertices, value["normal"]);
 
 			std::string out_file = ee::FileHelper::GetFilenameAddTag(filepath, 
 				eimage::OUTLINE_FILE_TAG, "json");

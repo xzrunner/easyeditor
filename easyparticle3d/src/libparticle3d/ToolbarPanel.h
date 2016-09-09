@@ -1,11 +1,11 @@
 #ifndef _EASYPARTICLE3D_TOOLBAR_PANEL_H_
 #define _EASYPARTICLE3D_TOOLBAR_PANEL_H_
 
-#include "LoadAdapter.h"
-
 #include <ee/ToolbarPanel.h>
 #include <ee/UICallback.h>
 #include <ee/Observer.h>
+
+#include <glue/P3dSymLoader.h>
 
 #include <wx/dnd.h>
 
@@ -33,7 +33,7 @@ public:
 	void Load(const Json::Value& val, int version);
 	void Store(Json::Value& val) const;
 
-	void Add(const LoadAdapter::Component& comp, ee::LibraryPanel* library);
+	void Add(const glue::P3dSymLoader::Component& comp, ee::LibraryPanel* library);
 
 	void InitParticle();
 

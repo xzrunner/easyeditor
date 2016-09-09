@@ -3,9 +3,9 @@
 
 #include <ee/std_functor.h>
 #include <ee/Symbol.h>
-#include <ee/JsonSerializer.h>
 
 #include <ps_3d.h>
+#include <glue/JsonSerializer.h>
 
 #include <fstream>
 #include <algorithm>
@@ -109,10 +109,10 @@ StoreToFile(Json::Value& val) const
 	val["start_scale"] = scale_start;
 	val["end_scale"] = scale_end;
 
-	ee::JsonSerializer::Store(mul_col_begin, val["mul_col_begin"]);
-	ee::JsonSerializer::Store(mul_col_end, val["mul_col_end"]);
-	ee::JsonSerializer::Store(add_col_begin, val["add_col_begin"]);
-	ee::JsonSerializer::Store(add_col_end, val["add_col_end"]);
+	glue::JsonSerializer::Store(mul_col_begin, val["mul_col_begin"]);
+	glue::JsonSerializer::Store(mul_col_end, val["mul_col_end"]);
+	glue::JsonSerializer::Store(add_col_begin, val["add_col_begin"]);
+	glue::JsonSerializer::Store(add_col_end, val["add_col_end"]);
 }
 
 }

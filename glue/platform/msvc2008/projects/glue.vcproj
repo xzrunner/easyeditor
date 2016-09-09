@@ -316,6 +316,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\source\utility\JsonSerializer.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\glue\JsonSerializer.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\source\utility\StringHelper.cpp"
 				>
 			</File>
@@ -502,6 +510,30 @@
 					RelativePath="..\..\..\include\glue\AnimSymLoader.h"
 					>
 				</File>
+			</Filter>
+			<Filter
+				Name="08.particle3d"
+				>
+				<File
+					RelativePath="..\..\..\source\sprite\P3dSprLoader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\glue\P3dSprLoader.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\sprite\P3dSymLoader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\glue\P3dSymLoader.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="09.particle2d"
+				>
 			</Filter>
 		</Filter>
 		<Filter

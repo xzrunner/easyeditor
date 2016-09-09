@@ -8,10 +8,10 @@
 #include <ee/FileHelper.h>
 #include <ee/SettingData.h>
 #include <ee/Visitor.h>
-#include <ee/JsonSerializer.h>
 #include <ee/Sprite.h>
 
 #include <sprite2/RenderParams.h>
+#include <glue/JsonSerializer.h>
 
 #include <fstream>
 
@@ -178,7 +178,7 @@ void Symbol::LoadBGOutline(ee::Symbol* bg)
 	fin.close();
 
 	std::vector<sm::vec2> vertices;
-	ee::JsonSerializer::Load(value["normal"], vertices);
+	glue::JsonSerializer::Load(value["normal"], vertices);
 	if (!vertices.empty()) {
 		ee::Shape* shape = new PolygonShape(vertices);
 		m_bg_outline.push_back(shape);
@@ -207,7 +207,7 @@ void Symbol::LoadBGTriStrip(ee::Symbol* bg)
 	Json::Value strip_val = value["strips"][i++];
 	while (!strip_val.isNull()) {
 		std::vector<sm::vec2> strip;
-		ee::JsonSerializer::Load(strip_val, strip);
+		glue::JsonSerializer::Load(strip_val, strip);
 		m_bg_tri_strips.push_back(strip);
 		strip_val = value["strip"][i++];
 	}

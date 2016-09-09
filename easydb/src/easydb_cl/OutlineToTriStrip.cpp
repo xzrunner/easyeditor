@@ -3,11 +3,11 @@
 
 #include <ee/FileHelper.h>
 #include <ee/FileType.h>
-#include <ee/JsonSerializer.h>
 
 #include <easyimage.h>
 
 #include <SM_Triangulation.h>
+#include <glue/JsonSerializer.h>
 
 #include <wx/arrstr.h>
 
@@ -69,7 +69,7 @@ void OutlineToTriStrip::Trigger(const std::string& dir) const
 		fin.close();
 
 		std::vector<sm::vec2> vertices;
-		ee::JsonSerializer::Load(value["normal"], vertices);
+		glue::JsonSerializer::Load(value["normal"], vertices);
 		if (vertices.empty()) {
 			continue;
 		}
@@ -82,7 +82,7 @@ void OutlineToTriStrip::Trigger(const std::string& dir) const
 
 		Json::Value value_out;
 		for (int i = 0, n = strips.size(); i < n; ++i) {
-			ee::JsonSerializer::Store(strips[i], value_out["strips"][i]);
+			glue::JsonSerializer::Store(strips[i], value_out["strips"][i]);
 		}
 
 		std::string out_file = ee::FileHelper::GetFilenameAddTag(filepath, 

@@ -3,14 +3,14 @@
 
 #include <ee/Symbol.h>
 #include <ee/std_functor.h>
-#include <ee/JsonSerializer.h>
 
+#include <SM_Test.h>
+#include <SM_Calc.h>
 #include <shaderlab.h>
 #include <sprite2/S2_RVG.h>
 #include <sprite2/MeshNode.h>
 #include <sprite2/MeshTriangle.h>
-#include <SM_Test.h>
-#include <SM_Calc.h>
+#include <glue/JsonSerializer.h>
 
 #include <set>
 #include <algorithm>
@@ -79,13 +79,13 @@ void Mesh::StoreTriangles(Json::Value& value) const
 		for (int i = 0; i < 3; ++i)
 			transform.push_back(tri->nodes[i]->xy);
 	}
-	ee::JsonSerializer::Store(transform, value);
+	glue::JsonSerializer::Store(transform, value);
 }
 
 void Mesh::LoadTriangles(const Json::Value& value)
 {
 	std::vector<sm::vec2> transform;
-	ee::JsonSerializer::Load(value, transform);
+	glue::JsonSerializer::Load(value, transform);
 	int itr = 0;
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
 	{

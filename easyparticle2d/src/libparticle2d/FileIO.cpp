@@ -5,13 +5,13 @@
 #include "PSConfigMgr.h"
 #include "ps_config.h"
 
-#include <ps_2d.h>
-
 #include <ee/FileHelper.h>
 #include <ee/Symbol.h>
 #include <ee/Math2D.h>
 #include <ee/SymbolMgr.h>
-#include <ee/JsonSerializer.h>
+
+#include <ps_2d.h>
+#include <glue/JsonSerializer.h>
 
 #include <json/json.h>
 
@@ -48,10 +48,10 @@ void FileIO::Store(const std::string& filepath, ToolbarPanel* toolbar)
 			cp->m_sliders[j]->Store(cval);
 		}
 
-		ee::JsonSerializer::Store(p_symbol->mul_col_begin.rgba, cval["mul_col_begin"]);
-		ee::JsonSerializer::Store(p_symbol->mul_col_end.rgba, cval["mul_col_end"]);
-		ee::JsonSerializer::Store(p_symbol->add_col_begin.rgba, cval["add_col_begin"]);
-		ee::JsonSerializer::Store(p_symbol->add_col_end.rgba, cval["add_col_end"]);
+		glue::JsonSerializer::Store(p_symbol->mul_col_begin.rgba, cval["mul_col_begin"]);
+		glue::JsonSerializer::Store(p_symbol->mul_col_end.rgba, cval["mul_col_end"]);
+		glue::JsonSerializer::Store(p_symbol->add_col_begin.rgba, cval["add_col_begin"]);
+		glue::JsonSerializer::Store(p_symbol->add_col_end.rgba, cval["add_col_end"]);
 
 		value["components"][i] = cval;
 	}

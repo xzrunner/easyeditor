@@ -105,4 +105,19 @@ sm::rect Particle3dSymbol::GetBounding(const Sprite* spr) const
 	return sm::rect(sm::vec2(0, 0), 200, 200);
 }
 
+void Particle3dSymbol::SetEmitterCfg(p3d_emitter_cfg* cfg) 
+{ 
+	if (m_et_cfg == cfg) {
+		return;
+	}
+
+	m_et_cfg = cfg;
+
+	if (m_et) {
+		p3d_emitter_release(m_et);
+	}
+	m_et = p3d_emitter_create(m_et_cfg);
+	p3d_emitter_start(m_et);
+}
+
 }

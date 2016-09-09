@@ -14,6 +14,7 @@ enum SymFileType
 	TEXTBOX,
 	COMPLEX,
 	ANIMATION,
+	PARTICLE3D,
 };
 
 SymFileType get_sym_file_type(const std::string& filepath);

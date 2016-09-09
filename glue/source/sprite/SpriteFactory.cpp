@@ -8,6 +8,7 @@
 #include "TextboxLoader.h"
 #include "ComplexSprLoader.h"
 #include "AnimSprLoader.h"
+#include "P3dSprLoader.h"
 
 #include <sprite2/S2_Symbol.h>
 #include <sprite2/ImageSprite.h>
@@ -15,6 +16,7 @@
 #include <sprite2/TextboxSprite.h>
 #include <sprite2/ComplexSprite.h>
 #include <sprite2/AnimSprite.h>
+#include <sprite2/Particle3dSprite.h>
 
 namespace glue
 {
@@ -50,6 +52,9 @@ s2::Sprite* SpriteFactory::Create(const std::string& filepath) const
 		break;
 	case ANIMATION:
 		spr = new s2::AnimSprite(sym);
+		break;
+	case PARTICLE3D:
+		spr = new s2::Particle3dSprite(sym);
 		break;
 	}
 
@@ -98,6 +103,12 @@ s2::Sprite* SpriteFactory::Create(const Json::Value& val, const std::string& dir
 	case ANIMATION:
 		{
 			AnimSprLoader loader(VI_DOWNCASTING<s2::AnimSprite*>(spr));
+			loader.LoadJson(val, dir);
+		}
+		break;
+	case PARTICLE3D:
+		{
+			P3dSprLoader loader(VI_DOWNCASTING<s2::Particle3dSprite*>(spr));
 			loader.LoadJson(val, dir);
 		}
 		break;

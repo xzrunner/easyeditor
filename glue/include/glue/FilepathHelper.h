@@ -16,6 +16,10 @@ public:
 
 	static std::string Format(const std::string& path);
 
+	//////////////////////////////////////////////////////////////////////////
+
+	static bool Exists(const std::string& path);
+
 }; // FilepathHelper
 
 }

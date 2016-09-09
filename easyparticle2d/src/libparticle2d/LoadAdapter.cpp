@@ -3,9 +3,9 @@
 #include <ee/Exception.h>
 #include <ee/Math2D.h>
 #include <ee/FileHelper.h>
-#include <ee/JsonSerializer.h>
 
 #include <ps_2d.h>
+#include <glue/JsonSerializer.h>
 
 #include <fstream>
 
@@ -103,10 +103,10 @@ void LoadAdapter::LoadComponent(const std::string& dir, const Json::Value& comp_
 	comp.scale_start		= comp_val["scale"]["start"].asDouble();
 	comp.scale_end			= comp_val["scale"]["end"].asDouble();
 
-	ee::JsonSerializer::Load(comp_val["mul_col_begin"], comp.mul_col_begin);
-	ee::JsonSerializer::Load(comp_val["mul_col_end"], comp.mul_col_end);
-	ee::JsonSerializer::Load(comp_val["add_col_begin"], comp.add_col_begin);
-	ee::JsonSerializer::Load(comp_val["add_col_end"], comp.add_col_end);
+	glue::JsonSerializer::Load(comp_val["mul_col_begin"], comp.mul_col_begin);
+	glue::JsonSerializer::Load(comp_val["mul_col_end"], comp.mul_col_end);
+	glue::JsonSerializer::Load(comp_val["add_col_begin"], comp.add_col_begin);
+	glue::JsonSerializer::Load(comp_val["add_col_end"], comp.add_col_end);
 
 	if (!comp_val["alpha"].isNull()) {
 		comp.alpha_start = comp_val["alpha"]["start"].asInt();

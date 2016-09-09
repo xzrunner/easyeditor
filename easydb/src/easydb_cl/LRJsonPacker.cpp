@@ -6,7 +6,6 @@
 #include <ee/FileHelper.h>
 #include <ee/SymbolSearcher.h>
 #include <ee/SpriteFactory.h>
-#include <ee/JsonSerializer.h>
 #include <ee/SymbolMgr.h>
 #include <ee/Exception.h>
 #include <ee/StringHelper.h>
@@ -19,6 +18,7 @@
 #include <easyshape.h>
 
 #include <SM_Calc.h>
+#include <glue/JsonSerializer.h>
 
 namespace edb
 {
@@ -257,7 +257,7 @@ void LRJsonPacker::ParserShape(ee::Shape* shape, const sm::vec2& offset, float a
 				out_val["grid"][sz] = grid_idx[i];
 			}
 		} else {
-			ee::JsonSerializer::Store(bound, out_val["pos"]);
+			glue::JsonSerializer::Store(bound, out_val["pos"]);
 		}
 	}
 	else

@@ -1,5 +1,5 @@
-#ifndef _EASYEDITOR_JSON_SERIALIZER_H_
-#define _EASYEDITOR_JSON_SERIALIZER_H_
+#ifndef _GLUE_JSON_SERIALIZER_H_
+#define _GLUE_JSON_SERIALIZER_H_
 
 #include <SM_Vector.h>
 #include <SM_Rect.h>
@@ -9,7 +9,7 @@
 
 #include <vector>
 
-namespace ee
+namespace glue
 {
 
 class JsonSerializer
@@ -34,4 +34,4 @@ public:
 
 }
 
-#endif // _EASYEDITOR_JSON_SERIALIZER_H_
+#endif // _GLUE_JSON_SERIALIZER_H_

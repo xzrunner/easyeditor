@@ -6,10 +6,11 @@
 
 #include <ee/ImageSprite.h>
 #include <ee/ImageSymbol.h>
-#include <ee/JsonSerializer.h>
 #include <ee/Image.h>
 #include <ee/FileHelper.h>
 #include <ee/panel_msg.h>
+
+#include <glue/JsonSerializer.h>
 
 #include <fstream>
 
@@ -101,7 +102,7 @@ void AutoTriCutCMPT::OutputOutline(wxCommandEvent& event)
 	for (int i = 0, n = vertices.size(); i < n; ++i) {
 		vertices[i] += offset;
 	}
-	ee::JsonSerializer::Store(vertices, value["normal"]);
+	glue::JsonSerializer::Store(vertices, value["normal"]);
 
 	std::string filepath = ee::FileHelper::GetFilenameAddTag(img->GetFilepath(), 
 		OUTLINE_FILE_TAG, "json");

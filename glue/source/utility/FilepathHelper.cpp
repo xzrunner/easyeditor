@@ -33,4 +33,9 @@ std::string FilepathHelper::Format(const std::string& path)
 	return ret;
 }
 
+bool FilepathHelper::Exists(const std::string& path)
+{
+	return boost::filesystem::exists(path);
+}
+
 }

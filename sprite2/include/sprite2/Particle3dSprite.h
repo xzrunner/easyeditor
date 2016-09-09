@@ -37,6 +37,10 @@ public:
 	bool IsAlone() const { return m_alone; }
 	void SetAlone(bool alone);
 
+	void SetReuse(bool reuse);
+
+	void SetLoop(bool loop);
+
 	bool IsLocalModeDraw() const;
 	void SetLocalModeDraw(bool local);
 
@@ -47,8 +51,6 @@ protected:
 
 protected:
 	p3d_sprite* m_spr;
-
-	sm::Quaternion m_dir;
 
 	bool m_alone;
 	bool m_reuse;

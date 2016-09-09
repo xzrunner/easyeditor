@@ -1,5 +1,4 @@
 #include "FileIO.h"
-#include "LoadAdapter.h"
 #include "ParticleSystem.h"
 #include "PSConfigMgr.h"
 #include "ToolBarPanel.h"
@@ -13,9 +12,10 @@
 #include <ee/Math2D.h>
 #include <ee/SymbolMgr.h>
 #include <ee/Exception.h>
-#include <ee/JsonSerializer.h>
 
 #include <ps_3d.h>
+#include <glue/JsonSerializer.h>
+#include <glue/P3dSymLoader.h>
 
 #include <wx/spinctrl.h>
 
@@ -75,10 +75,10 @@ void FileIO::Store(const std::string& filepath, ParticleSystem* ps,
 			cp->m_sliders[j]->Store(value["components"][i]);
 		}
 
-		ee::JsonSerializer::Store(pc->mul_col_begin.rgba, value["components"][i]["mul_col_begin"]);
-		ee::JsonSerializer::Store(pc->mul_col_end.rgba, value["components"][i]["mul_col_end"]);
-		ee::JsonSerializer::Store(pc->add_col_begin.rgba, value["components"][i]["add_col_begin"]);
-		ee::JsonSerializer::Store(pc->add_col_end.rgba, value["components"][i]["add_col_end"]);
+		glue::JsonSerializer::Store(pc->mul_col_begin.rgba, value["components"][i]["mul_col_begin"]);
+		glue::JsonSerializer::Store(pc->mul_col_end.rgba, value["components"][i]["mul_col_end"]);
+		glue::JsonSerializer::Store(pc->add_col_begin.rgba, value["components"][i]["add_col_begin"]);
+		glue::JsonSerializer::Store(pc->add_col_end.rgba, value["components"][i]["add_col_end"]);
 	}
 
 	Json::StyledStreamWriter writer;
@@ -100,8 +100,8 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 	reader.parse(fin, value);
 	fin.close();
 
-	LoadAdapter adapter;
-	adapter.Load(filepath);
+	glue::P3dSymLoader adapter;
+	adapter.LoadJson(filepath);
 	
 	int version = value["version"].asInt();
 	if (version == 0) {
@@ -159,89 +159,21 @@ ParticleSystem* FileIO::LoadPS(const std::string& filepath)
 
 p3d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
 {
-	LoadAdapter adapter;
-	adapter.Load(filepath);
-	
-	int sz = SIZEOF_P3D_EMITTER_CFG + SIZEOF_P3D_SYMBOL * MAX_COMPONENTS;
-	p3d_emitter_cfg* cfg = (p3d_emitter_cfg*) operator new(sz);
-	memset(cfg, 0, sz);
-	
-	cfg->blend = adapter.blend;
-
-	cfg->static_mode = adapter.static_mode;
-
-	cfg->emission_time = adapter.emission_time;
-	cfg->count = adapter.count;
-
-	cfg->life = adapter.life * 0.001f;
-	cfg->life_var = adapter.life_var * 0.001f;
-
-	cfg->hori = adapter.hori;
-	cfg->hori_var = adapter.hori_var;
-	cfg->vert = adapter.vert;
-	cfg->vert_var = adapter.vert_var;
-
-	cfg->radial_spd = adapter.radial_spd;
-	cfg->radial_spd_var = adapter.radial_spd_var;
-	cfg->tangential_spd = adapter.tangential_spd;
-	cfg->tangential_spd_var = adapter.tangential_spd_var;
-	cfg->angular_spd = adapter.angular_spd;
-	cfg->angular_spd_var = adapter.angular_spd_var;
-
-	cfg->dis_region = adapter.dis_region;
-	cfg->dis_region_var = adapter.dis_region_var;
-	cfg->dis_spd = adapter.dis_spd;
-	cfg->dis_spd_var = adapter.dis_spd_var;
-
-	cfg->gravity = adapter.gravity;
-
-	cfg->linear_acc = adapter.linear_acc;
-	cfg->linear_acc_var = adapter.linear_acc_var;
-
-	cfg->fadeout_time = adapter.fadeout_time;
-
-	cfg->ground = adapter.ground;
-
-	cfg->start_radius = adapter.start_radius;
-	cfg->start_height = adapter.start_height;
-
-	cfg->orient_to_movement = adapter.orient_to_movement;
-
-	cfg->blend = adapter.blend;
-
-	// todo dir
-	cfg->dir.x = 0;
-	cfg->dir.y = 0;
-	cfg->dir.z = 1;
-
-	cfg->sym_count = adapter.components.size();
-	cfg->syms = (p3d_symbol*)(cfg+1);
-	for (int i = 0, n = adapter.components.size(); i < n; ++i) {
-		const LoadAdapter::Component& src = adapter.components[i];
-		p3d_symbol& dst = cfg->syms[i];
-
-		dst.count = src.count;
-
-		dst.scale_start = src.scale_start * 0.01f;
-		dst.scale_end = src.scale_end * 0.01f;
-
-		dst.angle = src.angle;
-		dst.angle_var = src.angle_var;
-
-		memcpy(&dst.mul_col_begin.r, &src.mul_col_begin.r, sizeof(dst.mul_col_begin));
-		memcpy(&dst.mul_col_end.r, &src.mul_col_end.r, sizeof(dst.mul_col_end));
-		memcpy(&dst.add_col_begin.r, &src.add_col_begin.r, sizeof(dst.add_col_begin));
-		memcpy(&dst.add_col_end.r, &src.add_col_end.r, sizeof(dst.add_col_end));
-
-		if (ee::FileHelper::IsFileExist(src.bind_filepath)) {
-			dst.bind_ps_cfg = PSConfigMgr::Instance()->GetConfig(src.bind_filepath);
+	class Loader : public glue::P3dSymLoader
+	{
+	protected:
+		virtual s2::Symbol* LoadSymbol(const std::string& filepath) const {
+			return ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 		}
+	}; // Loader
 
-		dst.ud = static_cast<s2::Symbol*>(ee::SymbolMgr::Instance()->FetchSymbol(src.filepath));
-		if (!dst.ud) {
-			throw ee::Exception("Symbol doesn't exist, [parent]:%s, [child]:%s !", filepath.c_str(), src.filepath.c_str());
-		}
-	}
+	Loader adapter;
+	adapter.LoadJson(filepath);
+
+ 	int sz = SIZEOF_P3D_EMITTER_CFG + SIZEOF_P3D_SYMBOL * MAX_COMPONENTS;
+ 	p3d_emitter_cfg* cfg = (p3d_emitter_cfg*) operator new(sz);
+ 	memset(cfg, 0, sz);
+	adapter.Store(cfg);
 
 	return cfg;
 }

@@ -18,7 +18,6 @@ Particle3dSprite::Particle3dSprite()
 
 Particle3dSprite::Particle3dSprite(const Particle3dSprite& spr)
 	: m_spr(NULL)
-	, m_dir(spr.m_dir)
 	, m_alone(spr.m_alone)
 	, m_reuse(spr.m_reuse)
 	, m_rp(spr.m_rp)
@@ -30,7 +29,6 @@ Particle3dSprite::Particle3dSprite(const Particle3dSprite& spr)
 Particle3dSprite& Particle3dSprite::operator = (const Particle3dSprite& spr)
 {
 	m_spr = NULL;
-	m_dir = spr.m_dir;
 	m_alone = spr.m_alone;
 	m_reuse = spr.m_reuse;
 	m_rp = spr.m_rp;
@@ -149,7 +147,10 @@ void Particle3dSprite::SetAlone(bool alone)
 		return;
 	}
 
-	p3d_emitter_clear(m_spr->et);
+	if (m_spr->et) {
+		p3d_emitter_clear(m_spr->et);
+	}
+
 	const p3d_emitter_cfg* cfg = m_spr->et->cfg;
 	p3d_emitter* et = p3d_emitter_create(cfg);
 	if (m_alone) {
@@ -157,12 +158,44 @@ void Particle3dSprite::SetAlone(bool alone)
 	} else {
 		p3d_buffer_insert(m_spr);
 	}
-	if (m_spr) {
-		m_spr->et = et;
-		p3d_emitter_start(m_spr->et);
-		m_spr->ptr_self = &m_spr;
-	}
+	m_spr->et = et;
+	p3d_emitter_start(m_spr->et);
+
 	m_alone = alone;
+}
+
+void Particle3dSprite::SetReuse(bool reuse)
+{
+	if (m_reuse == reuse || !m_spr) {
+		return;
+	}
+
+	if (m_spr->et) {
+		p3d_emitter_release(m_spr->et);
+	}
+
+	Particle3dSymbol* sym = VI_DOWNCASTING<Particle3dSymbol*>(m_sym);
+	if (m_reuse) {
+		m_spr->et = sym->GetEmitter();
+	} else {
+		m_spr->et = p3d_emitter_create(sym->GetEmitterCfg());
+	}
+	p3d_emitter_start(m_spr->et);
+
+	m_reuse = reuse;
+}
+
+void Particle3dSprite::SetLoop(bool loop)
+{
+// 	// removed from buffer
+// 	if (!m_spr) {
+// 		CreateSpr();
+// 		p3d_buffer_insert(m_spr);
+// 	}
+
+	if (m_spr && m_spr->et) {
+		m_spr->et->loop = loop;
+	}
 }
 
 bool Particle3dSprite::IsLocalModeDraw() const

@@ -7,10 +7,12 @@
 #include "TextboxSymbol.h"
 #include "ComplexSymLoader.h"
 #include "AnimSymLoader.h"
+#include "P3dSymLoader.h"
 
 #include <sprite2/Scale9Symbol.h>
 #include <sprite2/ComplexSymbol.h>
 #include <sprite2/AnimSymbol.h>
+#include <sprite2/Particle3dSymbol.h>
 
 namespace glue
 {
@@ -82,6 +84,15 @@ s2::Symbol* SymbolFactory::Create(const std::string& filepath) const
 			s2::AnimSymbol* sym = new s2::AnimSymbol();
 			AnimSymLoader loader(sym);
 			loader.LoadJson(filepath);
+			ret = sym;
+		}
+		break;
+	case PARTICLE3D:
+		{
+			s2::Particle3dSymbol* sym = new s2::Particle3dSymbol;
+			P3dSymLoader loader;
+			loader.LoadJson(filepath);
+			loader.Store(sym);
 			ret = sym;
 		}
 		break;

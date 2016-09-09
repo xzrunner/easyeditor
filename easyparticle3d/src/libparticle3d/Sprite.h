@@ -41,14 +41,14 @@ public:
 	const sm::Quaternion& GetDir() const { return m_dir; }
 
 	bool IsLoop() const;
-	void SetLoop(bool loop);
-
 	bool IsReuse() const { return m_reuse; }
-	void SetReuse(bool reuse);
 
 	void OnActive();
 
 	static ee::Sprite* Create(ee::Symbol* sym);
+
+private:
+	sm::Quaternion m_dir;
 
 }; // Sprite
 

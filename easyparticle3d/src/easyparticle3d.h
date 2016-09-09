@@ -12,7 +12,6 @@
 #include "libparticle3d/SymbolPropertySetting.h"
 #include "libparticle3d/StagePanel.h"
 #include "libparticle3d/ToolbarPanel.h"
-#include "libparticle3d/LoadAdapter.h"
 #include "libparticle3d/FileIO.h"
 #include "libparticle3d/CocoPacker.h"
 #include "libparticle3d/utility.h"
