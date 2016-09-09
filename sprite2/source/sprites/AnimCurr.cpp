@@ -13,8 +13,9 @@ namespace s2
 AnimCurr::AnimCurr()
 	: m_sym(NULL)
 	, m_frame(0)
+	, m_active(true)
 {
-	m_start_time = m_curr_time = Animation::Instance()->GetTime();
+	ResetTime();
 }
 
 AnimCurr::AnimCurr(const AnimCurr& curr)
@@ -23,6 +24,9 @@ AnimCurr::AnimCurr(const AnimCurr& curr)
 	, m_layers(curr.m_layers)
 	, m_start_time(curr.m_start_time)
 	, m_curr_time(curr.m_curr_time)
+	, m_stop_time(0)
+	, m_stop_during(0)
+	, m_active(curr.m_active)
 {
 	cu::RefCountObjAssign(m_sym, const_cast<AnimSymbol*>(curr.m_sym));
 }
@@ -35,14 +39,18 @@ AnimCurr& AnimCurr::operator = (const AnimCurr& curr)
 	m_layers = curr.m_layers;
 	m_start_time = curr.m_start_time;
 	m_curr_time = curr.m_curr_time;
+	m_stop_time = curr.m_stop_time;
+	m_stop_during = curr.m_stop_during;
+	m_active = curr.m_active;
 	return *this;
 }
 
 AnimCurr::AnimCurr(AnimSymbol* sym)
 	: m_sym(NULL)
 	, m_frame(0)
+	, m_active(true)
 {
-	m_start_time = m_curr_time = Animation::Instance()->GetTime();
+	ResetTime();
 	cu::RefCountObjAssign(m_sym, sym);
 }
 
@@ -58,8 +66,12 @@ bool AnimCurr::Update(const RenderParams& params, bool loop,
 {
 	bool dirty = false;
 
+	if (!m_active) {
+		return dirty;
+	}
+
 	// update time
-	float curr_time = Animation::Instance()->GetTime();
+	float curr_time = Animation::Instance()->GetTime() - m_stop_during;
 	assert(m_curr_time <= curr_time);
 	if (curr_time == m_curr_time) {
 		m_curr_time = curr_time;
@@ -132,14 +144,29 @@ Sprite* AnimCurr::FetchChild(const std::string& name) const
 
 void AnimCurr::Start()
 {
-	m_start_time = m_curr_time = Animation::Instance()->GetTime();
+	ResetTime();
 	m_frame = 1;
 	LoadFromSym();
 }
 
+void AnimCurr::SetActive(bool active) 
+{
+	if (m_active == active) {
+		return;
+	}
+
+	if (active) {
+		m_stop_during += Animation::Instance()->GetTime() - m_stop_time;
+		m_stop_time = 0;
+	} else {
+		m_stop_time = Animation::Instance()->GetTime();
+	}
+	m_active = active; 
+}
+
 void AnimCurr::Clear()
 {
-	m_start_time = m_curr_time = Animation::Instance()->GetTime();
+	ResetTime();
 	m_frame = 1;
 	m_layers.clear();
 }
@@ -196,15 +223,21 @@ void AnimCurr::LoadFromSym()
 			Frame new_frame;
 			if (!curr_f->tween || !next_f)
 			{
+				bool is_keyframe = m_frame == curr_f->index;
 				for (int i = 0, n = curr_f->sprs.size(); i < n; ++i) 
 				{
 					Sprite* src = curr_f->sprs[i];
-					Sprite* dst = old_frame.Query(src, i);
-					if (dst) {
-						dst->AddReference();
-						*dst = *src;
-					} else {
+					Sprite* dst = NULL;
+					if (is_keyframe) {
 						dst = VI_CLONE(Sprite, src);
+					} else {
+						dst = old_frame.Query(src, i);
+	 					if (dst) {
+	 						dst->AddReference();
+	 						*dst = *src;
+	 					} else {
+							dst = VI_CLONE(Sprite, src);
+						}
 					}
 					new_frame.sprs.push_back(dst);
 				}
@@ -243,6 +276,12 @@ void AnimCurr::LoadFromSym()
 			m_layers[i].frame = new_frame;
 		}
 	}
+}
+
+void AnimCurr::ResetTime()
+{
+	m_start_time = m_curr_time = Animation::Instance()->GetTime();
+	m_stop_time = m_stop_during = 0;	
 }
 
 /************************************************************************/

@@ -37,13 +37,16 @@ public:
 
 	void SetFPS(int fps) { m_fps = fps; }
 
+	void SetActive(bool active);
+
 protected:
 	bool m_loop;
 	float m_interval;
 
+	int m_curr_frame;
+	
 	int m_fps;
 
-private:
 	AnimCurr m_curr;
 
 	VI_DUMMY_FUNC

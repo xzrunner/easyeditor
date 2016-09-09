@@ -27,10 +27,15 @@ public:
 
 	void Start();
 
+	void SetActive(bool active);
+	bool IsActive() const { return m_active; }
+
 	void Clear();
 
 private:
 	void LoadFromSym();
+
+	void ResetTime();
 
 private:
 	class Frame
@@ -67,6 +72,10 @@ private:
 	std::vector<Layer> m_layers;
 
 	float m_start_time, m_curr_time;
+
+	float m_stop_time, m_stop_during;
+
+	bool m_active;
 
 }; // AnimCurr
 

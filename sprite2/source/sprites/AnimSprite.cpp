@@ -41,4 +41,9 @@ void AnimSprite::Start()
 	m_curr.Start();
 }
 
+void AnimSprite::SetActive(bool active)
+{
+	m_curr.SetActive(active);
+}
+
 }

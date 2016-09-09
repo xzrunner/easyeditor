@@ -37,6 +37,8 @@ public:
 
 	int GetFPS() const { return m_fps; }
 
+	bool IsActive() const { return m_curr.IsActive(); }
+
 	static ee::Sprite* Create(ee::Symbol* sym);
 
 }; // Sprite

@@ -43,6 +43,8 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 	m_interval = anim_val["interval"].asDouble();
 
 	m_fps = anim_val["fps"].asInt();
+
+	m_curr.SetActive(anim_val["active"].asBool());
 }
 
 void Sprite::Store(Json::Value& val, const std::string& dir) const
@@ -55,6 +57,8 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 	anim_val["interval"] = m_interval;
 
 	anim_val["fps"] = m_fps;
+
+	anim_val["active"] = m_curr.IsActive();
 
 	val["animation"] = anim_val;
 }
