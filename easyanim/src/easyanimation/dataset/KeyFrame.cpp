@@ -61,14 +61,29 @@ void KeyFrame::CopyFromOther(const KeyFrame* src)
 
 void KeyFrame::Insert(ee::Sprite* spr, int idx)
 {
+	std::ofstream fout("d:/debug_copy.txt");
+
+	fout << "KeyFrame::Insert 0\n";
+
 	spr->AddReference();
 
-	set_sprite_user_data(spr, m_layer, this);
+	fout << "KeyFrame::Insert 1\n";
+
+	set_sprite_user_data(spr, m_layer, this, fout);
+	fout << "KeyFrame::Insert 2\n";
+
 	ee::ObjectVector<ee::Sprite>::Insert(m_sprs, spr, idx);
+	fout << "KeyFrame::Insert 3\n";
+
 	if (m_layer) {
+		fout << "KeyFrame::Insert 4\n";
 		spr->SetObserver(&m_layer->GetSpriteObserver());
+		fout << "KeyFrame::Insert 5\n";
 		m_layer->GetSpriteObserver().Insert(spr, m_time);
+		fout << "KeyFrame::Insert 6\n";
 	}
+	fout << "KeyFrame::Insert 7\n";
+	fout.close();
 }
 
 bool KeyFrame::Remove(ee::Sprite* spr) 
