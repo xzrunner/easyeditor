@@ -32,8 +32,8 @@ const IPackNode* MaskBuilder::Create(const emask::Symbol* sym)
 {
 	PackMask* node = new PackMask;
 
-	node->base = PackNodeFactory::Instance()->Create(dynamic_cast<const ee::Symbol*>(sym->GetBase()->GetSymbol()));
-	node->mask = PackNodeFactory::Instance()->Create(dynamic_cast<const ee::Symbol*>(sym->GetMask()->GetSymbol()));
+	node->base = PackNodeFactory::Instance()->Create(dynamic_cast<const ee::Symbol*>(sym->GetBase()));
+	node->mask = PackNodeFactory::Instance()->Create(dynamic_cast<const ee::Symbol*>(sym->GetMask()));
 
 	m_nodes.push_back(node);
 
