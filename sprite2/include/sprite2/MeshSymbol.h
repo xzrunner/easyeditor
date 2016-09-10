@@ -14,7 +14,6 @@ class MeshSymbol : public VIRTUAL_INHERITANCE Symbol
 {
 public:
 	MeshSymbol();
-	MeshSymbol(Symbol* base);
 	virtual ~MeshSymbol();
 
 	/**

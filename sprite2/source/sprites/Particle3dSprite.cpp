@@ -17,7 +17,8 @@ Particle3dSprite::Particle3dSprite()
 }
 
 Particle3dSprite::Particle3dSprite(const Particle3dSprite& spr)
-	: m_spr(NULL)
+	: Sprite(spr)
+	, m_spr(NULL)
 	, m_alone(spr.m_alone)
 	, m_reuse(spr.m_reuse)
 	, m_rp(spr.m_rp)
@@ -28,6 +29,7 @@ Particle3dSprite::Particle3dSprite(const Particle3dSprite& spr)
 
 Particle3dSprite& Particle3dSprite::operator = (const Particle3dSprite& spr)
 {
+	Sprite::operator = (spr);
 	m_spr = NULL;
 	m_alone = spr.m_alone;
 	m_reuse = spr.m_reuse;

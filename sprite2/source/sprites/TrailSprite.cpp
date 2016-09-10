@@ -26,6 +26,7 @@ TrailSprite::TrailSprite(const TrailSprite& spr)
 
 TrailSprite& TrailSprite::operator = (const TrailSprite& spr)
 {
+	Sprite::operator = (spr);
 	m_et = NULL;
 	if (spr.m_et) {
 		m_et = t2d_emitter_create(spr.m_et->cfg);
