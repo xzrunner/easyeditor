@@ -13,6 +13,7 @@
 #include "TestComplex.h"
 #include "TestAnim.h"
 #include "TestParticle3d.h"
+#include "TestParticle2d.h"
 
 #include <shaderlab.h>
 #include <sprite2/SprTimer.h>
@@ -33,9 +34,10 @@
 
 //test::TestTask* task = new test::TestScale9;
 //test::TestLabel* task = new test::TestLabel;
-//test::TestComplex* task = new test::TestComplex;
+test::TestComplex* task = new test::TestComplex;
 //test::TestAnim* task = new test::TestAnim;
-test::TestParticle3d* task = new test::TestParticle3d;
+//test::TestParticle3d* task = new test::TestParticle3d;
+//test::TestParticle2d* task = new test::TestParticle2d;
 
 void 
 display(void) {

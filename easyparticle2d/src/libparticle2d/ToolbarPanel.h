@@ -1,11 +1,11 @@
 #ifndef _EASYPARTICLE2D_TOOLBAR_PANEL_H_
 #define _EASYPARTICLE2D_TOOLBAR_PANEL_H_
 
-#include "LoadAdapter.h"
-
 #include <ee/ToolbarPanel.h>
 #include <ee/UICallback.h>
 #include <ee/SliderCtrl.h>
+
+#include <glue/P2dSymLoader.h>
 
 #include <wx/dnd.h>
 
@@ -33,7 +33,7 @@ public:
 	void Load(const Json::Value& val);
 	void Store(Json::Value& val) const;
 
-	void Add(const LoadAdapter::Component& comp);
+	void Add(const glue::P2dSymLoader::Component& comp);
 
 	void InitParticle();
 

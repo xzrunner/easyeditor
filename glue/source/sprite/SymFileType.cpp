@@ -8,6 +8,7 @@ static const std::string TAG_TEXTBOX	= "text";
 static const std::string TAG_COMPLEX	= "complex";
 static const std::string TAG_ANIM		= "anim";
 static const std::string TAG_PARTICLE3D	= "particle";
+static const std::string TAG_PARTICLE2D	= "particle2d";
 
 SymFileType get_sym_file_type(const std::string& filepath)
 {
@@ -45,6 +46,8 @@ SymFileType get_sym_file_type(const std::string& filepath)
 			return ANIMATION;
 		} else if (tag == TAG_PARTICLE3D) {
 			return PARTICLE3D;
+		} else if (tag == TAG_PARTICLE2D) {
+			return PARTICLE2D;
 		}
 	}
 
@@ -65,6 +68,8 @@ std::string get_sym_tag_str(SymFileType type)
 		return TAG_ANIM;
 	case PARTICLE3D:
 		return TAG_PARTICLE3D;
+	case PARTICLE2D:
+		return TAG_PARTICLE2D;
 	}
 
 	return "";

@@ -534,6 +534,22 @@
 			<Filter
 				Name="09.particle2d"
 				>
+				<File
+					RelativePath="..\..\..\source\sprite\P2dSprLoader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\glue\P2dSprLoader.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\sprite\P2dSymLoader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\glue\P2dSymLoader.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter

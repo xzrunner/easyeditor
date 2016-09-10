@@ -6,6 +6,7 @@
 
 #include <ps_2d.h>
 #include <sprite2/Particle2d.h>
+#include <glue/P2dSprLoader.h>
 
 namespace eparticle2d
 {
@@ -40,9 +41,8 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 {
 	ee::Sprite::Load(val);
 
-	const Json::Value& p_val = val["particle2d"];
-	SetLoop(p_val["loop"].asBool());
-	SetLocalModeDraw(p_val["local_mode_draw"].asBool());
+	glue::P2dSprLoader loader(this);
+	loader.LoadJson(val, dir);
 }
 
 void Sprite::Store(Json::Value& val, const std::string& dir) const

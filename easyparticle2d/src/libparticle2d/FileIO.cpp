@@ -76,8 +76,8 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps, ToolbarPanel*
 
 	toolbar->Load(value);
 
-	LoadAdapter adapter;
-	adapter.Load(filepath);
+	glue::P2dSymLoader adapter;
+	adapter.LoadJson(filepath);
 
 //	toolbar->m_name->SetValue(adapter.name);
 
@@ -108,93 +108,14 @@ ParticleSystem* FileIO::LoadPS(const std::string& filepath)
 
 p2d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
 {
-	Json::Value value;
-	Json::Reader reader;
-	std::locale::global(std::locale(""));
-	std::ifstream fin(filepath.c_str());
-	std::locale::global(std::locale("C"));
-	reader.parse(fin, value);
-	fin.close();
-
-	LoadAdapter adapter;
-	adapter.Load(filepath);
+	glue::P2dSymLoader adapter;
+	adapter.LoadJson(filepath);
 
 	int sz = SIZEOF_P2D_EMITTER_CFG + SIZEOF_P2D_SYMBOL * MAX_COMPONENTS;
 	p2d_emitter_cfg* cfg = (p2d_emitter_cfg*) operator new(sz);
 	memset(cfg, 0, sz);
 
-	cfg->mode_type = adapter.mode_type;
-
-	if (cfg->mode_type == P2D_MODE_GRAVITY)
-	{
-		cfg->mode.A.gravity.x = adapter.A.gravity.x;
-		cfg->mode.A.gravity.y = adapter.A.gravity.y;
-
-		cfg->mode.A.speed = adapter.A.speed;
-		cfg->mode.A.speed_var = adapter.A.speed_var;
-
-		cfg->mode.A.tangential_accel = adapter.A.tangential_accel;
-		cfg->mode.A.tangential_accel_var = adapter.A.tangential_accel_var;
-		cfg->mode.A.radial_accel = adapter.A.radial_accel;
-		cfg->mode.A.radial_accel_var = adapter.A.radial_accel_var;
-
-		cfg->mode.A.rotation_is_dir = adapter.A.rotation_is_dir;
-	} 
-	else if (cfg->mode_type == P2D_MODE_RADIUS)
-	{
-		cfg->mode.B.start_radius = adapter.B.start_radius;
-		cfg->mode.B.start_radius_var = adapter.B.start_radius_var;
-		cfg->mode.B.end_radius = adapter.B.end_radius;
-		cfg->mode.B.end_radius_var = adapter.B.end_radius_var;
-
-		cfg->mode.B.direction_delta = adapter.B.direction_delta;
-		cfg->mode.B.direction_delta_var = adapter.B.direction_delta_var;
-	}
-	else if (cfg->mode_type == P2D_MODE_SPD_COS)
-	{
-		cfg->mode.C.speed = adapter.C.speed;
-		cfg->mode.C.speed_var = adapter.C.speed_var;
-
-		cfg->mode.C.cos_amplitude = adapter.C.cos_amplitude;
-		cfg->mode.C.cos_amplitude_var = adapter.C.cos_amplitude_var;
-		cfg->mode.C.cos_frequency = adapter.C.cos_frequency;
-		cfg->mode.C.cos_frequency_var = adapter.C.cos_frequency_var;
-	}
-
-	cfg->emission_time = adapter.emission_time;
-	cfg->count = adapter.count;
-
-	cfg->life = adapter.life;
-	cfg->life_var = adapter.life_var;
-
-	cfg->position.x = adapter.position.x;
-	cfg->position.y = adapter.position.y;
-	cfg->position_var.x = adapter.position_var.x;
-	cfg->position_var.y = adapter.position_var.y;
-
-	cfg->direction = adapter.direction;
-	cfg->direction_var = adapter.direction_var;
-
-	cfg->sym_count = adapter.components.size();
-	cfg->syms = (p2d_symbol*)(cfg+1);
-	for (int i = 0, n = adapter.components.size(); i < n; ++i) 
-	{
-		const LoadAdapter::Component& src = adapter.components[i];
-		p2d_symbol& dst = cfg->syms[i];
-
-		dst.angle_start = src.angle_start * SM_DEG_TO_RAD;
-		dst.angle_end = src.angle_end * SM_DEG_TO_RAD;
-
-		dst.scale_start = src.scale_start * 0.01f;
-		dst.scale_end = src.scale_end * 0.01f;
-
-		memcpy(&dst.mul_col_begin.r, &src.mul_col_begin.r, sizeof(src.mul_col_begin));
-		memcpy(&dst.mul_col_end.r, &src.mul_col_end.r, sizeof(src.mul_col_end));
-		memcpy(&dst.add_col_begin.r, &src.add_col_begin.r, sizeof(src.add_col_begin));
-		memcpy(&dst.add_col_end.r, &src.add_col_end.r, sizeof(src.add_col_end));
-
-		dst.ud = static_cast<s2::Symbol*>(ee::SymbolMgr::Instance()->FetchSymbol(src.filepath));
-	}
+	adapter.Store(cfg);
 
 	return cfg;
 }

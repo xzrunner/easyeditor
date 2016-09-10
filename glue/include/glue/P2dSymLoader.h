@@ -1,21 +1,35 @@
-#ifndef _EASYPARTICLE2D_LOAD_ADAPTER_H_
-#define _EASYPARTICLE2D_LOAD_ADAPTER_H_
+#ifndef _GLUE_P2D_SYM_LOADER_H_
+#define _GLUE_P2D_SYM_LOADER_H_
+
+#include <CU_Uncopyable.h>
 
 #include <SM_Vector.h>
 #include <sprite2/Color.h>
 
 #include <json/json.h>
 
-namespace eparticle2d
+#include <string>
+
+namespace s2 { class Symbol; class Particle2dSymbol; }
+
+struct p2d_emitter_cfg;
+
+namespace glue
 {
 
-class LoadAdapter
+class P2dSymLoader : private cu::Uncopyable
 {
 public:
-	void Load(const std::string& filepath);
+	void Store(s2::Particle2dSymbol* sym) const;
+	void Store(p2d_emitter_cfg* cfg) const;
+
+	void LoadJson(const std::string& filepath);	
 
 private:
 	void LoadComponent(const std::string& dir, const Json::Value& comp_val);
+
+protected:
+	virtual s2::Symbol* LoadSymbol(const std::string& filepath) const;
 
 public:
 	struct Component
@@ -89,8 +103,8 @@ public:
 
 	std::vector<Component> components;
 
-}; // LoadAdapter
+}; // P2dSymLoader
 
 }
 
-#endif // _EASYPARTICLE2D_LOAD_ADAPTER_H_
+#endif // _GLUE_P2D_SYM_LOADER_H_

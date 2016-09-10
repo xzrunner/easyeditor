@@ -15,6 +15,7 @@ enum SymFileType
 	COMPLEX,
 	ANIMATION,
 	PARTICLE3D,
+	PARTICLE2D,
 };
 
 SymFileType get_sym_file_type(const std::string& filepath);
