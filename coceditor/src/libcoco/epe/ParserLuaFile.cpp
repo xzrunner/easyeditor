@@ -14,7 +14,7 @@
 #include <easyanim.h>
 #include <easyimage.h>
 
-#include <glue/trans_color.h>
+#include <gum/trans_color.h>
 #include <SM_Calc.h>
 
 extern "C" {
@@ -797,8 +797,8 @@ void ParserLuaFile::Animation::Item::transform(ee::Sprite* spr) const
 
 	if (is_full && valid)
 	{
-		spr->Color().mul = glue::int2color(color, glue::PT_BGRA);
-		spr->Color().add = glue::int2color(add, glue::PT_ABGR);
+		spr->Color().mul = gum::int2color(color, gum::PT_BGRA);
+		spr->Color().add = gum::int2color(add, gum::PT_ABGR);
 
 		float x = mat[4] / 16.0f,
 			y = mat[5] / 16.0f;

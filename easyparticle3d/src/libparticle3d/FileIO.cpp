@@ -14,8 +14,8 @@
 #include <ee/Exception.h>
 
 #include <ps_3d.h>
-#include <glue/JsonSerializer.h>
-#include <glue/P3dSymLoader.h>
+#include <gum/JsonSerializer.h>
+#include <gum/P3dSymLoader.h>
 
 #include <wx/spinctrl.h>
 
@@ -75,10 +75,10 @@ void FileIO::Store(const std::string& filepath, ParticleSystem* ps,
 			cp->m_sliders[j]->Store(value["components"][i]);
 		}
 
-		glue::JsonSerializer::Store(pc->mul_col_begin.rgba, value["components"][i]["mul_col_begin"]);
-		glue::JsonSerializer::Store(pc->mul_col_end.rgba, value["components"][i]["mul_col_end"]);
-		glue::JsonSerializer::Store(pc->add_col_begin.rgba, value["components"][i]["add_col_begin"]);
-		glue::JsonSerializer::Store(pc->add_col_end.rgba, value["components"][i]["add_col_end"]);
+		gum::JsonSerializer::Store(pc->mul_col_begin.rgba, value["components"][i]["mul_col_begin"]);
+		gum::JsonSerializer::Store(pc->mul_col_end.rgba, value["components"][i]["mul_col_end"]);
+		gum::JsonSerializer::Store(pc->add_col_begin.rgba, value["components"][i]["add_col_begin"]);
+		gum::JsonSerializer::Store(pc->add_col_end.rgba, value["components"][i]["add_col_end"]);
 	}
 
 	Json::StyledStreamWriter writer;
@@ -100,7 +100,7 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 	reader.parse(fin, value);
 	fin.close();
 
-	glue::P3dSymLoader adapter;
+	gum::P3dSymLoader adapter;
 	adapter.LoadJson(filepath);
 	
 	int version = value["version"].asInt();
@@ -159,7 +159,7 @@ ParticleSystem* FileIO::LoadPS(const std::string& filepath)
 
 p3d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
 {
-	class Loader : public glue::P3dSymLoader
+	class Loader : public gum::P3dSymLoader
 	{
 	protected:
 		virtual s2::Symbol* LoadSymbol(const std::string& filepath) const {

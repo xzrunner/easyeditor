@@ -103,7 +103,7 @@ void ToolbarPanel::Store(Json::Value& val) const
 	}
 }
 
-void ToolbarPanel::Add(const glue::P3dSymLoader::Component& comp, ee::LibraryPanel* library)
+void ToolbarPanel::Add(const gum::P3dSymLoader::Component& comp, ee::LibraryPanel* library)
 {
 	// todo Release symbol
 	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(comp.filepath);

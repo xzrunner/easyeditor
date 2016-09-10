@@ -90,7 +90,7 @@ inline ps_color ColorFromS2(const s2::Color& col)
 	return ret;
 }
 
-void ToolbarPanel::Add(const glue::P2dSymLoader::Component& comp)
+void ToolbarPanel::Add(const gum::P2dSymLoader::Component& comp)
 {
 	// todo Release symbol
 	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(comp.filepath);

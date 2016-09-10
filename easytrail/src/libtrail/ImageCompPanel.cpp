@@ -9,7 +9,7 @@
 #include <ee/FileHelper.h>
 
 #include <mt_2d.h>
-#include <glue/JsonSerializer.h>
+#include <gum/JsonSerializer.h>
 
 namespace etrail
 {
@@ -51,10 +51,10 @@ void ImageCompPanel::Load(const Json::Value& val, const std::string& dir)
 {
 	ComponentPanel::Load(val, dir);
 
-	glue::JsonSerializer::Load(val["mul_col_begin"], m_pc->col_begin.rgba);
-	glue::JsonSerializer::Load(val["mul_col_end"], m_pc->col_end.rgba);
-	glue::JsonSerializer::Load(val["add_col_begin"], m_pc->mode.A.add_col_begin.rgba);
-	glue::JsonSerializer::Load(val["add_col_end"], m_pc->mode.A.add_col_end.rgba);
+	gum::JsonSerializer::Load(val["mul_col_begin"], m_pc->col_begin.rgba);
+	gum::JsonSerializer::Load(val["mul_col_end"], m_pc->col_end.rgba);
+	gum::JsonSerializer::Load(val["add_col_begin"], m_pc->mode.A.add_col_begin.rgba);
+	gum::JsonSerializer::Load(val["add_col_end"], m_pc->mode.A.add_col_end.rgba);
 
 	UpdateBtnColor();
 }
@@ -63,10 +63,10 @@ void ImageCompPanel::Store(Json::Value& val, const std::string& dir) const
 {
 	ComponentPanel::Store(val, dir);
 
-	glue::JsonSerializer::Store(m_pc->col_begin.rgba, val["mul_col_begin"]);
-	glue::JsonSerializer::Store(m_pc->col_end.rgba, val["mul_col_end"]);
-	glue::JsonSerializer::Store(m_pc->mode.A.add_col_begin.rgba, val["add_col_begin"]);
-	glue::JsonSerializer::Store(m_pc->mode.A.add_col_end.rgba, val["add_col_end"]);
+	gum::JsonSerializer::Store(m_pc->col_begin.rgba, val["mul_col_begin"]);
+	gum::JsonSerializer::Store(m_pc->col_end.rgba, val["mul_col_end"]);
+	gum::JsonSerializer::Store(m_pc->mode.A.add_col_begin.rgba, val["add_col_begin"]);
+	gum::JsonSerializer::Store(m_pc->mode.A.add_col_end.rgba, val["add_col_end"]);
 
 	s2::Symbol* sym = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(m_pc->mode.A.ud));
 	val["filepath"] = ee::FileHelper::GetRelativePath(dir, dynamic_cast<ee::Symbol*>(sym)->GetFilepath());

@@ -8,7 +8,7 @@
 #include <SM_Calc.h>
 #include <SM_Triangulation.h>
 #include <SM_Process.h>
-#include <glue/JsonSerializer.h>
+#include <gum/JsonSerializer.h>
 
 #include <assert.h>
 
@@ -30,20 +30,20 @@ Shadow::~Shadow()
 
 void Shadow::StoreToFile(Json::Value& value) const
 {
-	glue::JsonSerializer::Store(m_inner_loop, value["inner loop"]);
+	gum::JsonSerializer::Store(m_inner_loop, value["inner loop"]);
 	value["radius"] = m_radius;
-	glue::JsonSerializer::Store(m_inner_color, value["inner color"]);
-	glue::JsonSerializer::Store(m_outer_color, value["outer color"]);
+	gum::JsonSerializer::Store(m_inner_color, value["inner color"]);
+	gum::JsonSerializer::Store(m_outer_color, value["outer color"]);
 }
 
 void Shadow::LoadFromFile(const Json::Value& value)
 {
-	glue::JsonSerializer::Load(value["inner color"], m_inner_color);
-	glue::JsonSerializer::Load(value["outer color"], m_outer_color);
+	gum::JsonSerializer::Load(value["inner color"], m_inner_color);
+	gum::JsonSerializer::Load(value["outer color"], m_outer_color);
 	m_radius = static_cast<float>(value["radius"].asDouble());
 
 	std::vector<sm::vec2> loop;
-	glue::JsonSerializer::Load(value["inner loop"], loop);
+	gum::JsonSerializer::Load(value["inner loop"], loop);
 	BuildInnerLine(loop);
 }
 

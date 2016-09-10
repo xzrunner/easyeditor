@@ -9,7 +9,7 @@ namespace ee
 {
 
 SpriteIO::SpriteIO()
-	: glue::SpriteIO(Config::Instance()->GetSettings().spr_output_compress, Config::Instance()->IsRenderOpen())
+	: gum::SpriteIO(Config::Instance()->GetSettings().spr_output_compress, Config::Instance()->IsRenderOpen())
 {
 	m_perspective	= sm::vec2(0, 0);
 
@@ -21,7 +21,7 @@ SpriteIO::SpriteIO()
 
 void SpriteIO::LoadGeometry(s2::Sprite* spr)
 {
-	glue::SpriteIO::LoadGeometry(spr);
+	gum::SpriteIO::LoadGeometry(spr);
 
 	Sprite* ee_spr = dynamic_cast<Sprite*>(spr);
 	ee_spr->SetPerspective(m_perspective);
@@ -29,7 +29,7 @@ void SpriteIO::LoadGeometry(s2::Sprite* spr)
 
 void SpriteIO::StoreGeometry(const s2::Sprite* spr)
 {
-	glue::SpriteIO::StoreGeometry(spr);
+	gum::SpriteIO::StoreGeometry(spr);
 
 	const Sprite* ee_spr = dynamic_cast<const Sprite*>(spr);
 	m_perspective = ee_spr->GetPerspective();
@@ -37,7 +37,7 @@ void SpriteIO::StoreGeometry(const s2::Sprite* spr)
 
 void SpriteIO::LoadGeometry(const Json::Value& val)
 {
-	glue::SpriteIO::LoadGeometry(val);
+	gum::SpriteIO::LoadGeometry(val);
 
 	// perspective
 	sm::vec2 perspective(0, 0);
@@ -51,7 +51,7 @@ void SpriteIO::LoadGeometry(const Json::Value& val)
 
 void SpriteIO::StoreGeometry(Json::Value& val)
 {
-	glue::SpriteIO::StoreGeometry(val);
+	gum::SpriteIO::StoreGeometry(val);
 
 	if (!m_compress || m_perspective != sm::vec2(0, 0)) {
 		val["x perspective"] = m_perspective.x;
@@ -62,7 +62,7 @@ void SpriteIO::StoreGeometry(Json::Value& val)
 
 void SpriteIO::LoadInfo(s2::Sprite* spr)
 {
-	glue::SpriteIO::LoadInfo(spr);
+	gum::SpriteIO::LoadInfo(spr);
 
 	Sprite* ee_spr = dynamic_cast<Sprite*>(spr);
 	ee_spr->SetTag(m_tag);
@@ -72,7 +72,7 @@ void SpriteIO::LoadInfo(s2::Sprite* spr)
 
 void SpriteIO::StoreInfo(const s2::Sprite* spr)
 {
-	glue::SpriteIO::StoreInfo(spr);
+	gum::SpriteIO::StoreInfo(spr);
 
 	const Sprite* ee_spr = dynamic_cast<const Sprite*>(spr);
 	m_tag = ee_spr->GetTag();
@@ -82,7 +82,7 @@ void SpriteIO::StoreInfo(const s2::Sprite* spr)
 
 void SpriteIO::LoadInfo(const Json::Value& val)
 {
-	glue::SpriteIO::LoadInfo(val);
+	gum::SpriteIO::LoadInfo(val);
 
 	if (!val["tag"].isNull()) {
 		m_tag = val["tag"].asString();
@@ -105,7 +105,7 @@ void SpriteIO::LoadInfo(const Json::Value& val)
 
 void SpriteIO::StoreInfo(Json::Value& val)
 {
-	glue::SpriteIO::StoreInfo(val);
+	gum::SpriteIO::StoreInfo(val);
 
 	if (!m_compress || !m_tag.empty()) {
 		val["tag"] = m_tag;		
@@ -122,7 +122,7 @@ void SpriteIO::StoreInfo(Json::Value& val)
 
 void SpriteIO::LoadEdit(s2::Sprite* spr)
 {
-	glue::SpriteIO::LoadEdit(spr);
+	gum::SpriteIO::LoadEdit(spr);
 
 	Sprite* ee_spr = dynamic_cast<Sprite*>(spr);
 	ee_spr->SetEditable(m_editable);
@@ -130,7 +130,7 @@ void SpriteIO::LoadEdit(s2::Sprite* spr)
 
 void SpriteIO::StoreEdit(const s2::Sprite* spr)
 {
-	glue::SpriteIO::StoreEdit(spr);
+	gum::SpriteIO::StoreEdit(spr);
 
 	const Sprite* ee_spr = dynamic_cast<const Sprite*>(spr);
 	m_editable = ee_spr->IsEditable();
@@ -138,7 +138,7 @@ void SpriteIO::StoreEdit(const s2::Sprite* spr)
 
 void SpriteIO::LoadEdit(const Json::Value& val)
 {
-	glue::SpriteIO::LoadEdit(val);
+	gum::SpriteIO::LoadEdit(val);
 
 	if (!val["editable"].isNull()) {
 		m_editable = val["editable"].asBool();
@@ -149,7 +149,7 @@ void SpriteIO::LoadEdit(const Json::Value& val)
 
 void SpriteIO::StoreEdit(Json::Value& val)
 {
-	glue::SpriteIO::StoreEdit(val);
+	gum::SpriteIO::StoreEdit(val);
 
 	if (!m_compress || !m_editable) {
 		val["editable"] = m_editable;

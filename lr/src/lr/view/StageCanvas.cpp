@@ -26,9 +26,9 @@
 #include <SM_Test.h>
 #include <sprite2/S2_RVG.h>
 #include <sprite2/BoundingBox.h>
-#include <glue/FilterModes.h>
-#include <glue/GLUE_DTex.h>
-#include <glue/GLUE_GTxt.h>
+#include <gum/FilterModes.h>
+#include <gum/GUM_DTex.h>
+#include <gum/GUM_GTxt.h>
 
 #include <algorithm>
 
@@ -57,7 +57,7 @@ void StageCanvas::OnDrawSprites() const
 
 #ifdef _DEBUG 
 	if (ee::Config::Instance()->IsUseDTex()) {
-		glue::DTex::Instance()->DebugDraw();
+		gum::DTex::Instance()->DebugDraw();
 	}
 #endif
 }
@@ -115,7 +115,7 @@ void StageCanvas::DrawSprite(ee::Sprite* spr, bool draw_edge) const
 
 	int filter_mode_idx = 0;
 	if (draw_edge) {
-		filter_mode_idx = glue::FilterModes::Instance()->QueryShaderIdx(s2::FilterMode::FM_EDGE_DETECTION);
+		filter_mode_idx = gum::FilterModes::Instance()->QueryShaderIdx(s2::FilterMode::FM_EDGE_DETECTION);
 	}
 //	ee::ShaderMgr::Instance()->SetSpriteShader(filter_mode_idx);
 
@@ -127,7 +127,7 @@ void StageCanvas::DrawSprite(ee::Sprite* spr, bool draw_edge) const
 		sm::mat4 t = spr->GetTransMatrix();
 		float s = std::max(1.0f, ee::CameraMgr::Instance()->GetCamera()->GetScale()) * cfg.node_name_scale;
 		t.x[0] = t.x[5] = s;
-		glue::GTxt::Instance()->Draw(t, name);
+		gum::GTxt::Instance()->Draw(t, name);
 	}
 }
 

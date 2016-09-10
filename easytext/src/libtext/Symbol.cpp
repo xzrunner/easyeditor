@@ -8,9 +8,9 @@
 #include <sprite2/RenderParams.h>
 #include <sprite2/S2_RVG.h>
 #include <sprite2/RenderFilter.h>
-#include <glue/trans_color.h>
-#include <glue/GLUE_GTxt.h>
-#include <glue/TextboxLoader.h>
+#include <gum/trans_color.h>
+#include <gum/GUM_GTxt.h>
+#include <gum/TextboxLoader.h>
 
 #include <shaderlab.h>
 #include <gtxt.h>
@@ -54,7 +54,7 @@ void Symbol::LoadResources()
 	reader.parse(fin, value);
 	fin.close();
 
-	glue::TextboxLoader loader(GetTextbox());
+	gum::TextboxLoader loader(GetTextbox());
 	loader.LoadJson(value);
 }
 
@@ -62,7 +62,7 @@ void Symbol::DrawText(const gtxt_label_style& style, const sm::mat4& mt, const s
 					  const s2::Color& add, const std::string& text, int time, bool richtext) const
 {
 	std::string t_text = ee::StringHelper::ToUtf8(text);
-	glue::GTxt::Instance()->Draw(style, mt, mul, add, t_text, time, richtext);
+	gum::GTxt::Instance()->Draw(style, mt, mul, add, t_text, time, richtext);
 }
 
 void Symbol::DrawBackground(const Sprite* spr, const sm::mat4& mt) const

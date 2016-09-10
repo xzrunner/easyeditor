@@ -9,7 +9,7 @@
 #include <ee/Sprite.h>
 #include <ee/StringHelper.h>
 
-#include <glue/ComplexSymLoader.h>
+#include <gum/ComplexSymLoader.h>
 
 namespace ecomplex
 {
@@ -62,7 +62,7 @@ void LoadFromJson::Load(const std::string& _filepath, const Json::Value& value,
 void LoadFromJson::InitActions(Symbol* sym, const Json::Value& val)
 {
 	if (val.isMember("action")) {
-		glue::ComplexSymLoader::LoadJsonAction(val, sym);	
+		gum::ComplexSymLoader::LoadJsonAction(val, sym);	
 	} else {
 		CreateActionsFromTag(sym);
 	}

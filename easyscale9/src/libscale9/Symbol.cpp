@@ -25,7 +25,7 @@ void Symbol::LoadResources()
 /************************************************************************/
 
 Symbol::Loader::Loader(Symbol* sym)
-	: glue::Scale9SymLoader(sym)
+	: gum::Scale9SymLoader(sym)
 {
 }
 

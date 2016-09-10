@@ -26,7 +26,7 @@
 #include <shaderlab.h>
 #include <sprite2/S2_Sprite.h>
 #include <sprite2/Texture.h>
-#include <glue/GLUE_DTex.h>
+#include <gum/GUM_DTex.h>
 
 namespace ee
 {
@@ -98,7 +98,7 @@ bool Image::LoadFromFile(const std::string& filepath)
 	}
 
 	if (Config::Instance()->IsUseDTex() && CanUseDTex()) {
-		glue::DTex* dcb = glue::DTex::Instance();
+		gum::DTex* dcb = gum::DTex::Instance();
 		dcb->LoadBegin();
 		dcb->Load(GetFilepath(), GetS2Tex());
 		dcb->LoadEnd();
@@ -112,7 +112,7 @@ void Image::ReloadTexture()
 	m_tex->Reload();
 
 	if (Config::Instance()->IsUseDTex() && CanUseDTex()) {
-//		glue::DTex::Instance()->Reload(this);
+//		gum::DTex::Instance()->Reload(this);
 	}
 }
 
@@ -188,7 +188,7 @@ void Image::QueryTexcoords(float* texcoords, int* texid) const
 {
 	float* c2_texcoords = NULL;
 	if (Config::Instance()->IsUseDTex() && CanUseDTex()) {
-		c2_texcoords = glue::DTex::Instance()->Query(GetFilepath(), GetS2Tex(), texid);
+		c2_texcoords = gum::DTex::Instance()->Query(GetFilepath(), GetS2Tex(), texid);
 	}
 	if (c2_texcoords)
 	{

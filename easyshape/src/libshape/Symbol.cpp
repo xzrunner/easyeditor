@@ -11,7 +11,7 @@
 #include <ee/Sprite.h>
 
 #include <sprite2/RenderParams.h>
-#include <glue/JsonSerializer.h>
+#include <gum/JsonSerializer.h>
 
 #include <fstream>
 
@@ -178,7 +178,7 @@ void Symbol::LoadBGOutline(ee::Symbol* bg)
 	fin.close();
 
 	std::vector<sm::vec2> vertices;
-	glue::JsonSerializer::Load(value["normal"], vertices);
+	gum::JsonSerializer::Load(value["normal"], vertices);
 	if (!vertices.empty()) {
 		ee::Shape* shape = new PolygonShape(vertices);
 		m_bg_outline.push_back(shape);
@@ -207,7 +207,7 @@ void Symbol::LoadBGTriStrip(ee::Symbol* bg)
 	Json::Value strip_val = value["strips"][i++];
 	while (!strip_val.isNull()) {
 		std::vector<sm::vec2> strip;
-		glue::JsonSerializer::Load(strip_val, strip);
+		gum::JsonSerializer::Load(strip_val, strip);
 		m_bg_tri_strips.push_back(strip);
 		strip_val = value["strip"][i++];
 	}

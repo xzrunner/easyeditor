@@ -7,7 +7,7 @@
 #include <ps_3d_sprite.h>
 #include <ps_3d_buffer.h>
 #include <sprite2/RenderParams.h>
-#include <glue/P3dSprLoader.h>
+#include <gum/P3dSprLoader.h>
 
 namespace eparticle3d
 {
@@ -36,7 +36,7 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 		  w = d_val["w"].asDouble();
 	m_dir = sm::Quaternion(x, y, z, w);
 
-	glue::P3dSprLoader loader(this);
+	gum::P3dSprLoader loader(this);
 	loader.LoadJson(val, dir);
 }
 

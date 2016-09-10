@@ -1,7 +1,7 @@
 #include "Particle3DToSpr.h"
 #include "NodeToSprite.h"
 
-#include <glue/trans_color.h>
+#include <gum/trans_color.h>
 
 #include <easyparticle3d.h>
 #include <ps_3d.h>
@@ -83,10 +83,10 @@ p3d_emitter_cfg* Particle3DToSpr::LoadConfig(const erespacker::PackParticle3D* p
 		dst.angle = src.angle;
 		dst.angle_var = src.angle_var;
 
-		s2::Color mul_col_begin = int2color(src.mul_col_begin, glue::PT_ARGB),
-			      mul_col_end = int2color(src.mul_col_end, glue::PT_ARGB),
-				  add_col_begin = int2color(src.add_col_begin, glue::PT_ARGB),
-				  add_col_end = int2color(src.add_col_end, glue::PT_ARGB);
+		s2::Color mul_col_begin = int2color(src.mul_col_begin, gum::PT_ARGB),
+			      mul_col_end = int2color(src.mul_col_end, gum::PT_ARGB),
+				  add_col_begin = int2color(src.add_col_begin, gum::PT_ARGB),
+				  add_col_end = int2color(src.add_col_end, gum::PT_ARGB);
 		dst.mul_col_begin = eparticle3d::ColorFromS2(mul_col_begin);
 		dst.mul_col_end = eparticle3d::ColorFromS2(mul_col_end);
 		dst.add_col_begin = eparticle3d::ColorFromS2(add_col_begin);

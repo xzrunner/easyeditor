@@ -17,7 +17,7 @@
 #include "panel_msg.h"
 #include "StringHelper.h"
 
-#include <glue/GLUE_DTex.h>
+#include <gum/GUM_DTex.h>
 
 #include <fstream>
 
@@ -99,7 +99,7 @@ void Frame::OpenFile(const std::string& filename)
 	}
 
 	if (Config::Instance()->IsUseDTex()) {
-		glue::DTex::Instance()->Clear();
+		gum::DTex::Instance()->Clear();
 	}
 
 	Clear();
@@ -173,7 +173,7 @@ void Frame::OnNew(wxCommandEvent& event)
 	Clear();
 
 	if (Config::Instance()->IsUseDTex()) {
-		glue::DTex::Instance()->Clear();
+		gum::DTex::Instance()->Clear();
 	}
 }
 

@@ -1,14 +1,14 @@
 #ifndef _EASYANIM_LAYERS_LOADER_H_
 #define _EASYANIM_LAYERS_LOADER_H_
 
-#include <glue/AnimSymLoader.h>
+#include <gum/AnimSymLoader.h>
 
 namespace eanim
 {
 
 class Symbol;
 
-class LayersLoader : public glue::AnimSymLoader
+class LayersLoader : public gum::AnimSymLoader
 {
 public:
 	LayersLoader(Symbol* sym);
@@ -16,7 +16,7 @@ public:
 protected:
 	/**
 	 *  @interface
-	 *    glue::AnimSymLoader
+	 *    gum::AnimSymLoader
 	 */	
 	virtual s2::Sprite* LoadSprite(const Json::Value& val, const std::string& dir);
 

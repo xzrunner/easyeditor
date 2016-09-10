@@ -11,7 +11,7 @@
 #include <ee/SymbolMgr.h>
 
 #include <ps_2d.h>
-#include <glue/JsonSerializer.h>
+#include <gum/JsonSerializer.h>
 
 #include <json/json.h>
 
@@ -48,10 +48,10 @@ void FileIO::Store(const std::string& filepath, ToolbarPanel* toolbar)
 			cp->m_sliders[j]->Store(cval);
 		}
 
-		glue::JsonSerializer::Store(p_symbol->mul_col_begin.rgba, cval["mul_col_begin"]);
-		glue::JsonSerializer::Store(p_symbol->mul_col_end.rgba, cval["mul_col_end"]);
-		glue::JsonSerializer::Store(p_symbol->add_col_begin.rgba, cval["add_col_begin"]);
-		glue::JsonSerializer::Store(p_symbol->add_col_end.rgba, cval["add_col_end"]);
+		gum::JsonSerializer::Store(p_symbol->mul_col_begin.rgba, cval["mul_col_begin"]);
+		gum::JsonSerializer::Store(p_symbol->mul_col_end.rgba, cval["mul_col_end"]);
+		gum::JsonSerializer::Store(p_symbol->add_col_begin.rgba, cval["add_col_begin"]);
+		gum::JsonSerializer::Store(p_symbol->add_col_end.rgba, cval["add_col_end"]);
 
 		value["components"][i] = cval;
 	}
@@ -76,7 +76,7 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps, ToolbarPanel*
 
 	toolbar->Load(value);
 
-	glue::P2dSymLoader adapter;
+	gum::P2dSymLoader adapter;
 	adapter.LoadJson(filepath);
 
 //	toolbar->m_name->SetValue(adapter.name);
@@ -108,7 +108,7 @@ ParticleSystem* FileIO::LoadPS(const std::string& filepath)
 
 p2d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
 {
-	class Loader : public glue::P2dSymLoader
+	class Loader : public gum::P2dSymLoader
 	{
 	protected:
 		virtual s2::Symbol* LoadSymbol(const std::string& filepath) const {

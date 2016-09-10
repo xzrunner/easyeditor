@@ -5,7 +5,7 @@
 
 #include <SM_Vector.h>
 #include <sprite2/Color.h>
-#include <glue/trans_color.h>
+#include <gum/trans_color.h>
 
 #include <fstream>
 

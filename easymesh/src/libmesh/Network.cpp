@@ -8,7 +8,7 @@
 #include <sprite2/MeshTriangle.h>
 #include <sprite2/NetworkShape.h>
 #include <sprite2/MeshTransform.h>
-#include <glue/JsonSerializer.h>
+#include <gum/JsonSerializer.h>
 
 #include <assert.h>
 
@@ -45,11 +45,11 @@ void Network::Load(const Json::Value& value)
 	}
 
 	std::vector<sm::vec2> outline;
-	glue::JsonSerializer::Load(value["shape"]["outline"], outline);
+	gum::JsonSerializer::Load(value["shape"]["outline"], outline);
 	m_nw = new NetworkShape(outline, m_node_radius);
 
 	std::vector<sm::vec2> inner;
-	glue::JsonSerializer::Load(value["shape"]["inner"], inner);
+	gum::JsonSerializer::Load(value["shape"]["inner"], inner);
 	m_nw->SetInnerVertices(inner);
 
 	RefreshTriangles();

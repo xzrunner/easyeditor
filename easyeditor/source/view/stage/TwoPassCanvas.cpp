@@ -9,7 +9,7 @@
 #include "Camera.h"
 
 #include <shaderlab.h>
-#include <glue/GLUE_DTex.h>
+#include <gum/GUM_DTex.h>
 
 namespace ee
 {
@@ -25,10 +25,10 @@ TwoPassCanvas::TwoPassCanvas(wxWindow* stage_wnd, EditPanelImpl* stage,
 void TwoPassCanvas::OnSize(int w, int h)
 {
 	if (Config::Instance()->IsUseDTex()) {
-		glue::DTex::Instance()->OnSize(w, h);
+		gum::DTex::Instance()->OnSize(w, h);
 	} else {
-		// fix me: ScreenCache depend on glue::DTex
-		glue::DTex::Instance();
+		// fix me: ScreenCache depend on gum::DTex
+		gum::DTex::Instance();
 	}
 	ScreenCache::Instance()->SetSize(w, h);
 }

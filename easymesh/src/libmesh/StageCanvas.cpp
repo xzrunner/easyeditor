@@ -7,7 +7,7 @@
 #include <ee/DrawShapesVisitor.h>
 #include <ee/Config.h>
 
-#include <glue/GLUE_DTex.h>
+#include <gum/GUM_DTex.h>
 
 namespace emesh
 {
@@ -32,7 +32,7 @@ void StageCanvas::OnDrawSprites() const
 
 #ifdef _DEBUG 
 	if (ee::Config::Instance()->IsUseDTex()) {
-		glue::DTex::Instance()->DebugDraw();
+		gum::DTex::Instance()->DebugDraw();
 	}
 #endif
 }

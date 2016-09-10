@@ -11,7 +11,7 @@
 
 #include <sprite2/S2_RVG.h>
 #include <sprite2/Particle3d.h>
-#include <glue/GLUE_DTex.h>
+#include <gum/GUM_DTex.h>
 
 namespace eanim
 {
@@ -51,7 +51,7 @@ void StageCanvas::OnDrawSprites() const
 
 #ifdef _DEBUG 
 	if (ee::Config::Instance()->IsUseDTex()) {
-		glue::DTex::Instance()->DebugDraw();
+		gum::DTex::Instance()->DebugDraw();
 	}
 #endif
 }

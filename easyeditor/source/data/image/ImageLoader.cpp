@@ -8,7 +8,7 @@
 #include "PPMAdapter.h"
 #include "EE_ShaderLab.h"
 
-#include <glue/ImageLoader.h>
+#include <gum/ImageLoader.h>
 
 #include <dtex_pvr.h>
 #include <dtex_etc2.h>
@@ -80,10 +80,10 @@ uint8_t* ImageLoader::FileToPixels(const std::string& filepath, int& width, int&
 	}
 
 	if (channels == 4) {
-		glue::ImageLoader::RemoveGhostPixel(data, width, height);
-		glue::ImageLoader::FormatPixelsAlpha(data, width, height, 0);
+		gum::ImageLoader::RemoveGhostPixel(data, width, height);
+		gum::ImageLoader::FormatPixelsAlpha(data, width, height, 0);
 		if (Config::Instance()->GetSettings().pre_multi_alpha) {
-			glue::ImageLoader::PreMuiltiAlpha(data, width, height);
+			gum::ImageLoader::PreMuiltiAlpha(data, width, height);
 		}
 	}
 

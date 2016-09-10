@@ -5,7 +5,7 @@
 #include <ee/UICallback.h>
 #include <ee/Observer.h>
 
-#include <glue/P3dSymLoader.h>
+#include <gum/P3dSymLoader.h>
 
 #include <wx/dnd.h>
 
@@ -33,7 +33,7 @@ public:
 	void Load(const Json::Value& val, int version);
 	void Store(Json::Value& val) const;
 
-	void Add(const glue::P3dSymLoader::Component& comp, ee::LibraryPanel* library);
+	void Add(const gum::P3dSymLoader::Component& comp, ee::LibraryPanel* library);
 
 	void InitParticle();
 

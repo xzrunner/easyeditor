@@ -6,7 +6,7 @@
 #include <ee/ImageSymbol.h>
 #include <ee/SymbolMgr.h>
 
-#include <glue/JsonSerializer.h>
+#include <gum/JsonSerializer.h>
 
 namespace eterrain2d
 {
@@ -14,7 +14,7 @@ namespace eterrain2d
 void FileIO::StoreOceanMesh(const OceanMesh* ocean, const std::string& dir, Json::Value& value)
 {
 	if (const eshape::PolygonShape* shape = ocean->GetBounding()) {
-		glue::JsonSerializer::Store(shape->GetVertices(), value["bound"]);
+		gum::JsonSerializer::Store(shape->GetVertices(), value["bound"]);
 	}
 	if (const ee::ImageSymbol* img = ocean->GetImage0()) {
 		value["tex0"] = ee::FileHelper::GetRelativePath(dir, img->GetFilepath());
@@ -46,7 +46,7 @@ OceanMesh* FileIO::LoadOceanMesh(const std::string& dir, const Json::Value& valu
 	}
 
 	std::vector<sm::vec2> bounding;
-	glue::JsonSerializer::Load(value["bound"], bounding);
+	gum::JsonSerializer::Load(value["bound"], bounding);
 	eshape::PolygonShape* shape = new eshape::PolygonShape(bounding);
 
 	std::string tex0_path = dir + "\\" + value["tex0"].asString();

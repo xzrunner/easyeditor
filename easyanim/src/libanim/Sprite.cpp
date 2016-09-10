@@ -4,7 +4,7 @@
 
 #include <ee/std_functor.h>
 
-#include <glue/AnimSprLoader.h>
+#include <gum/AnimSprLoader.h>
 
 namespace eanim
 {
@@ -35,7 +35,7 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 {
 	ee::Sprite::Load(val);
 
-	glue::AnimSprLoader loader(this);
+	gum::AnimSprLoader loader(this);
 	loader.LoadJson(val, dir);
 }
 

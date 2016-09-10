@@ -2,14 +2,14 @@
 
 #include <SM_Vector.h>
 #include <sprite2/MeshTransform.h>
-#include <glue/JsonSerializer.h>
+#include <gum/JsonSerializer.h>
 
 namespace emesh
 {
 
 void MeshSerialization::Load(s2::MeshTransform& trans, const Json::Value& value)
 {
-	glue::MeshSymLoader::LoadMeshTransform(trans, value);
+	gum::MeshSymLoader::LoadMeshTransform(trans, value);
 }
 
 void MeshSerialization::Store(const s2::MeshTransform& trans, Json::Value& value)

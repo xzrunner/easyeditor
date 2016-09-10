@@ -5,7 +5,7 @@
 
 #include <ee/BlendModes.h>
 
-#include <glue/trans_color.h>
+#include <gum/trans_color.h>
 
 #include <easyanim.h>
 
@@ -125,12 +125,12 @@ void AnimationToSpr::TransSpriteMat(ee::Sprite* spr, const erespacker::PackAnima
 
 void AnimationToSpr::TransSpriteCol(ee::Sprite* spr, const erespacker::PackAnimation::SpriteTrans& t)
 {
-	spr->Color().mul = int2color(t.color, glue::PT_ARGB);
-	spr->Color().add = int2color(t.additive, glue::PT_ARGB);
+	spr->Color().mul = int2color(t.color, gum::PT_ARGB);
+	spr->Color().add = int2color(t.additive, gum::PT_ARGB);
 
-	spr->Color().rmap = int2color(t.rmap, glue::PT_RGBA);
-	spr->Color().gmap = int2color(t.gmap, glue::PT_RGBA);
-	spr->Color().bmap = int2color(t.bmap, glue::PT_RGBA);
+	spr->Color().rmap = int2color(t.rmap, gum::PT_RGBA);
+	spr->Color().gmap = int2color(t.gmap, gum::PT_RGBA);
+	spr->Color().bmap = int2color(t.bmap, gum::PT_RGBA);
 }
 
 

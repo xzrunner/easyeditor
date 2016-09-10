@@ -10,7 +10,7 @@
 #include <sprite2/S2_RVG.h>
 #include <sprite2/MeshNode.h>
 #include <sprite2/MeshTriangle.h>
-#include <glue/JsonSerializer.h>
+#include <gum/JsonSerializer.h>
 
 #include <set>
 #include <algorithm>
@@ -79,13 +79,13 @@ void Mesh::StoreTriangles(Json::Value& value) const
 		for (int i = 0; i < 3; ++i)
 			transform.push_back(tri->nodes[i]->xy);
 	}
-	glue::JsonSerializer::Store(transform, value);
+	gum::JsonSerializer::Store(transform, value);
 }
 
 void Mesh::LoadTriangles(const Json::Value& value)
 {
 	std::vector<sm::vec2> transform;
-	glue::JsonSerializer::Load(value, transform);
+	gum::JsonSerializer::Load(value, transform);
 	int itr = 0;
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
 	{

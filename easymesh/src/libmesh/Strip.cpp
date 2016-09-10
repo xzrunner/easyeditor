@@ -5,7 +5,7 @@
 
 #include <SM_Calc.h>
 #include <sprite2/MeshTriangle.h>
-#include <glue/JsonSerializer.h>
+#include <gum/JsonSerializer.h>
 
 #include <set>
 #include <algorithm>
@@ -47,8 +47,8 @@ void Strip::Load(const Json::Value& value)
 
 	m_left_nodes.m_ori.clear();
 	m_right_nodes.m_ori.clear();
-	glue::JsonSerializer::Load(value["left nodes"], m_left_nodes.m_ori);
-	glue::JsonSerializer::Load(value["right nodes"], m_right_nodes.m_ori);
+	gum::JsonSerializer::Load(value["left nodes"], m_left_nodes.m_ori);
+	gum::JsonSerializer::Load(value["right nodes"], m_right_nodes.m_ori);
 	m_left_nodes.m_ext = m_left_nodes.m_ori;
 	m_right_nodes.m_ext = m_right_nodes.m_ori;
 
@@ -64,8 +64,8 @@ void Strip::Store(Json::Value& value) const
 	value["width"] = m_width;
 	value["height"] = m_height;
 
-	glue::JsonSerializer::Store(m_left_nodes.m_ori, value["left nodes"]);
-	glue::JsonSerializer::Store(m_right_nodes.m_ori, value["right nodes"]);
+	gum::JsonSerializer::Store(m_left_nodes.m_ori, value["left nodes"]);
+	gum::JsonSerializer::Store(m_right_nodes.m_ori, value["right nodes"]);
 
 	StoreTriangles(value["triangles"]);
 }

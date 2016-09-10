@@ -4,8 +4,8 @@
 
 #include <ee/SpriteFactory.h>
 
-#include <glue/trans_color.h>
-#include <glue/TextboxLoader.h>
+#include <gum/trans_color.h>
+#include <gum/TextboxLoader.h>
 
 namespace etext
 {
@@ -48,7 +48,7 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 	m_text	= text_val["text"].asString();
 	m_tid	= text_val["tid"].asString();
 
-	glue::TextboxLoader loader(m_tb);
+	gum::TextboxLoader loader(m_tb);
 	loader.LoadJson(text_val);
 }
 
@@ -63,11 +63,11 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 
 	text_val["font"]			= m_tb.font_type;
 	text_val["font_size"]		= m_tb.font_size;
-	text_val["font_color"]		= color2str(m_tb.font_color, glue::PT_RGBA);
+	text_val["font_color"]		= color2str(m_tb.font_color, gum::PT_RGBA);
 
 	text_val["edge"]			= m_tb.has_edge;
 	text_val["edge_size"]		= m_tb.edge_size;
-	text_val["edge_color"]		= color2str(m_tb.edge_color, glue::PT_RGBA);
+	text_val["edge_color"]		= color2str(m_tb.edge_color, gum::PT_RGBA);
 
 	text_val["align_hori"]		= m_tb.align_hori;
 	text_val["align_vert"]		= m_tb.align_vert;

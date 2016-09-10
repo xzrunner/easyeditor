@@ -3,7 +3,7 @@
 
 #include <SM_Vector.h>
 
-#include <glue/GLUE_DTex.h>
+#include <gum/GUM_DTex.h>
 
 namespace ee
 {
@@ -32,7 +32,7 @@ static void _draw_end()
 
 void DTex::Init()
 {
-	glue::DTex::Instance()->InitHook(_draw_begin, _draw_end);	
+	gum::DTex::Instance()->InitHook(_draw_begin, _draw_end);	
 }
 
 }

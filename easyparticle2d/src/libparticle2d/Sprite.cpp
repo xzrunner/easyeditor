@@ -6,7 +6,7 @@
 
 #include <ps_2d.h>
 #include <sprite2/Particle2d.h>
-#include <glue/P2dSprLoader.h>
+#include <gum/P2dSprLoader.h>
 
 namespace eparticle2d
 {
@@ -41,7 +41,7 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 {
 	ee::Sprite::Load(val);
 
-	glue::P2dSprLoader loader(this);
+	gum::P2dSprLoader loader(this);
 	loader.LoadJson(val, dir);
 }
 

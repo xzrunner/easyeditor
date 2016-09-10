@@ -4,7 +4,7 @@
 #include "StageCanvas.h"
 
 #include <shaderlab.h>
-#include <glue/GLUE_DTex.h>
+#include <gum/GUM_DTex.h>
 
 #include <assert.h>
 
@@ -52,7 +52,7 @@ void RenderContextStack::Pop()
 
 	int width, height;
 	ctx.render->GetProjection(width, height);
-	glue::DTex::Instance()->OnSize(width, height);
+	gum::DTex::Instance()->OnSize(width, height);
 	ScreenCache::Instance()->SetSize(width, height);
 }
 

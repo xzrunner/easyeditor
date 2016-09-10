@@ -4,7 +4,7 @@
 #include <ee/Symbol.h>
 
 #include <sprite2/Scale9Symbol.h>
-#include <glue/Scale9SymLoader.h>
+#include <gum/Scale9SymLoader.h>
 
 #include <json/json.h>
 
@@ -26,7 +26,7 @@ protected:
 	virtual void LoadResources();
 
 private:
-	class Loader : public glue::Scale9SymLoader
+	class Loader : public gum::Scale9SymLoader
 	{
 	public:
 		Loader(Symbol* sym);

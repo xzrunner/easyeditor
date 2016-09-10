@@ -1,7 +1,7 @@
 #include "EE_GTxt.h"
 #include "Config.h"
 
-#include <glue/GLUE_GTxt.h>
+#include <gum/GUM_GTxt.h>
 
 #include <string>
 #include <vector>
@@ -15,7 +15,7 @@ void GTxt::Init()
 		fonts = Config::Instance()->GetFonts();
 	const std::vector<std::pair<std::string, std::string> >& 
 		user_fonts = Config::Instance()->GetUserFonts();
-	glue::GTxt::Instance()->Init(fonts, user_fonts);
+	gum::GTxt::Instance()->Init(fonts, user_fonts);
 }
 
 }

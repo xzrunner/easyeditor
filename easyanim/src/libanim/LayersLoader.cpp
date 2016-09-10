@@ -11,7 +11,7 @@ namespace eanim
 {
 
 LayersLoader::LayersLoader(Symbol* sym)
-	: glue::AnimSymLoader(sym)
+	: gum::AnimSymLoader(sym)
 {
 }
 

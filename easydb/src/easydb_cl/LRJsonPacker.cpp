@@ -18,7 +18,7 @@
 #include <easyshape.h>
 
 #include <SM_Calc.h>
-#include <glue/JsonSerializer.h>
+#include <gum/JsonSerializer.h>
 
 namespace edb
 {
@@ -257,7 +257,7 @@ void LRJsonPacker::ParserShape(ee::Shape* shape, const sm::vec2& offset, float a
 				out_val["grid"][sz] = grid_idx[i];
 			}
 		} else {
-			glue::JsonSerializer::Store(bound, out_val["pos"]);
+			gum::JsonSerializer::Store(bound, out_val["pos"]);
 		}
 	}
 	else

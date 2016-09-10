@@ -4,7 +4,7 @@
 #include <ee/FileHelper.h>
 
 #include <sprite2/Color.h>
-#include <glue/trans_color.h>
+#include <gum/trans_color.h>
 
 #include <fstream>
 
@@ -48,8 +48,8 @@ bool FixSpriteColor::FixSprite(const std::string& filepath, Json::Value& sprite_
 		return false;
 	}
 
-	s2::Color col = glue::str2color(str, glue::PT_ARGB);
-	sprite_val["add color"] = glue::color2str(col, glue::PT_ABGR);
+	s2::Color col = gum::str2color(str, gum::PT_ARGB);
+	sprite_val["add color"] = gum::color2str(col, gum::PT_ABGR);
 
 	return true;
 }
