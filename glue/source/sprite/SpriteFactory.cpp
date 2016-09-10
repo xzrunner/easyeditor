@@ -10,6 +10,7 @@
 #include "AnimSprLoader.h"
 #include "P3dSprLoader.h"
 #include "P2dSprLoader.h"
+#include "MeshSprLoader.h"
 
 #include <sprite2/S2_Symbol.h>
 #include <sprite2/ImageSprite.h>
@@ -19,6 +20,7 @@
 #include <sprite2/AnimSprite.h>
 #include <sprite2/Particle3dSprite.h>
 #include <sprite2/Particle2dSprite.h>
+#include <sprite2/MeshSprite.h>
 #include <sprite2/MaskSprite.h>
 #include <sprite2/TrailSprite.h>
 
@@ -62,6 +64,9 @@ s2::Sprite* SpriteFactory::Create(const std::string& filepath) const
 		break;
 	case PARTICLE2D:
 		spr = new s2::Particle2dSprite(sym);
+		break;
+	case MESH:
+		spr = new s2::MeshSprite(sym);
 		break;
 	case MASK:
 		spr = new s2::MaskSprite(sym);
@@ -128,6 +133,12 @@ s2::Sprite* SpriteFactory::Create(const Json::Value& val, const std::string& dir
 	case PARTICLE2D:
 		{
 			P2dSprLoader loader(VI_DOWNCASTING<s2::Particle2dSprite*>(spr));
+			loader.LoadJson(val, dir);
+		}
+		break;
+	case MESH:
+		{
+			MeshSprLoader loader(VI_DOWNCASTING<s2::MeshSprite*>(spr));
 			loader.LoadJson(val, dir);
 		}
 		break;

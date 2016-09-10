@@ -39,7 +39,7 @@ void TrailSymLoader::Store(t2d_emitter_cfg* cfg) const
 		cfg->sym_count = comp_images.size();
 		cfg->syms = (t2d_symbol*)(cfg+1);
 		for (int i = 0; i < cfg->sym_count; ++i) {
-			const glue::TrailSymLoader::CompImage& src = comp_images[i];
+			const TrailSymLoader::CompImage& src = comp_images[i];
 			t2d_symbol& dst = cfg->syms[i];
 
 			memcpy(&dst.col_begin.r, &src.mul_col_begin.r, sizeof(dst.col_begin));
@@ -61,7 +61,7 @@ void TrailSymLoader::Store(t2d_emitter_cfg* cfg) const
 		cfg->sym_count = comp_shapes.size();
 		cfg->syms = (t2d_symbol*)(cfg+1);
 		for (int i = 0; i < cfg->sym_count; ++i) {
-			const glue::TrailSymLoader::CompShape& src = comp_shapes[i];
+			const TrailSymLoader::CompShape& src = comp_shapes[i];
 			t2d_symbol& dst = cfg->syms[i];
 
 			memcpy(&dst.col_begin.r, &src.col_begin.r, sizeof(dst.col_begin));

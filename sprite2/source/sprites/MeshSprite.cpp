@@ -36,17 +36,18 @@ MeshSprite& MeshSprite::operator = (const MeshSprite& mesh)
 	return *this;
 }
 
-MeshSprite::MeshSprite(MeshSymbol* sym) 
+MeshSprite::MeshSprite(Symbol* sym) 
 	: Sprite(sym) 
 	, m_only_draw_bound(false)
 {
-	if (m_base = sym->GetMesh()->GetBaseSymbol()) {
+	Mesh* mesh = VI_DOWNCASTING<MeshSymbol*>(sym)->GetMesh();
+	if (m_base = mesh->GetBaseSymbol()) {
 		m_base->AddReference();
 	}
 
 //	m_speed.set(0, -0.01f);
 
-	m_trans.LoadFromMesh(sym->GetMesh());
+	m_trans.LoadFromMesh(mesh);
 }
 
 MeshSprite::~MeshSprite()

@@ -52,6 +52,12 @@ NetworkMesh::~NetworkMesh()
 	}
 }
 
+void NetworkMesh::SetShape(NetworkShape* shape)
+{
+	cu::RefCountObjAssign(m_nw, shape);
+	RefreshTriangles();
+}
+
 void NetworkMesh::RefreshTriangles()
 {
 	ClearTriangles();

@@ -9,14 +9,7 @@ namespace emesh
 
 void MeshSerialization::Load(s2::MeshTransform& trans, const Json::Value& value)
 {
-	std::map<sm::vec2, sm::vec2, sm::Vector2Cmp>& map = trans.GetMap();
-	map.clear();
-	std::vector<sm::vec2> from, to;
-	glue::JsonSerializer::Load(value["trans"]["from"], from);
-	glue::JsonSerializer::Load(value["trans"]["to"], to);
-	for (int i = 0, n = from.size(); i < n; ++i) {
-		map.insert(std::make_pair(from[i], to[i]));
-	}
+	glue::MeshSymLoader::LoadMeshTransform(trans, value);
 }
 
 void MeshSerialization::Store(const s2::MeshTransform& trans, Json::Value& value)

@@ -558,6 +558,22 @@
 			<Filter
 				Name="11.mesh"
 				>
+				<File
+					RelativePath="..\..\..\source\sprite\MeshSprLoader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\glue\MeshSprLoader.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\sprite\MeshSymLoader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\glue\MeshSymLoader.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="12.mask"

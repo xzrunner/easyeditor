@@ -26,6 +26,8 @@ public:
 	 *    Cloneable
 	 */
 	virtual NetworkMesh* Clone() const { return new NetworkMesh(*this); }
+
+	void SetShape(NetworkShape* shape);
 	
 protected:
 	void RefreshTriangles();
