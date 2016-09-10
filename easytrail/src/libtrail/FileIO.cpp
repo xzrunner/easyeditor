@@ -7,6 +7,7 @@
 #include <ee/FileHelper.h>
 #include <ee/SymbolMgr.h>
 #include <ee/Exception.h>
+#include <ee/Symbol.h>
 
 #include <mt_2d.h>
 #include <glue/TrailSymLoader.h>
@@ -58,7 +59,15 @@ MotionTrail* FileIO::LoadMT(const std::string& filepath)
 
 t2d_emitter_cfg* FileIO::LoadMTConfig(const std::string& filepath)
 {
-	glue::TrailSymLoader adapter;
+	class Loader : public glue::TrailSymLoader
+	{
+	protected:
+		virtual s2::Symbol* LoadSymbol(const std::string& filepath) const {
+			return ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		}
+	}; // Loader
+
+	Loader adapter;
 	adapter.LoadJson(filepath);
 
 	int sz = SIZEOF_T2D_EMITTER_CFG + SIZEOF_T2D_SYMBOL * MAX_COMPONENTS;

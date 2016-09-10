@@ -108,7 +108,15 @@ ParticleSystem* FileIO::LoadPS(const std::string& filepath)
 
 p2d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
 {
-	glue::P2dSymLoader adapter;
+	class Loader : public glue::P2dSymLoader
+	{
+	protected:
+		virtual s2::Symbol* LoadSymbol(const std::string& filepath) const {
+			return ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		}
+	}; // Loader
+
+	Loader adapter;
 	adapter.LoadJson(filepath);
 
 	int sz = SIZEOF_P2D_EMITTER_CFG + SIZEOF_P2D_SYMBOL * MAX_COMPONENTS;
