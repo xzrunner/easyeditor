@@ -3,6 +3,7 @@
 #include <shaderlab.h>
 #include <sprite2/ComplexSprite.h>
 #include <sprite2/DrawNode.h>
+#include <sprite2/RenderCtxStack.h>
 #include <glue/RenderContext.h>
 #include <glue/SymbolFactory.h>
 #include <glue/SpriteFactory.h>

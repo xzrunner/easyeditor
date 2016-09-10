@@ -19,6 +19,7 @@
 
 #include <shaderlab.h>
 #include <sprite2/SprTimer.h>
+#include <sprite2/RenderCtxStack.h>
 #include <glue/RenderContext.h>
 
 #include <gl/glew.h>
@@ -78,11 +79,15 @@ init(void) {
 	s2::SprTimer::Instance()->Init();
 
 	task->Init();
+
+	s2::RenderCtxStack::Instance()->Push(s2::RenderCtx());
 }
 
 void 
 resize(int width, int height) {
-	glViewport(0, 0, width, height);
+	s2::RenderCtxStack* s2_stack = s2::RenderCtxStack::Instance();
+	s2_stack->Pop();
+	s2_stack->Push(s2::RenderCtx(width, height));
 
 	task->Resize(width, height);
 }
