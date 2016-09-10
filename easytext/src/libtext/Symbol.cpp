@@ -30,6 +30,10 @@ Symbol::~Symbol()
 
 void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
+	if (!spr) {
+		return;
+	}
+
 	const ee::SettingData& setting = ee::Config::Instance()->GetSettings();
 	if (setting.visible_label_bg) {
 		sm::mat4 mt = spr->GetTransMatrix() * params.mt;
