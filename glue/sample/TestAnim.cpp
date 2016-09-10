@@ -16,10 +16,12 @@ void TestAnim::Init()
 	sl::ShaderMgr* sl_mgr = sl::ShaderMgr::Instance();
 	sl_mgr->CreateContext(4096);
 	sl::RenderContext* sl_rc = sl_mgr->GetContext();
+	sl_mgr->CreateShader(sl::SHAPE2, new sl::Shape2Shader(sl_rc));
 	sl_mgr->CreateShader(sl::SPRITE2, new sl::Sprite2Shader(sl_rc));
 	glue::RenderContext::Instance()->SetCamera(0, 0, 1, 1);
 
-	s2::Symbol* sym = glue::SymbolFactory::Instance()->Create("test_anim.json");
+//	s2::Symbol* sym = glue::SymbolFactory::Instance()->Create("test_anim.json");
+	s2::Symbol* sym = glue::SymbolFactory::Instance()->Create("trail_anim.json");
 	{
 		s2::AnimSprite* spr = new s2::AnimSprite(sym);
 		spr->SetPosition(sm::vec2(0, 0));

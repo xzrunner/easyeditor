@@ -78,7 +78,7 @@ void P3dSymLoader::Store(p3d_emitter_cfg* cfg) const
 	cfg->sym_count = components.size();
 	cfg->syms = (p3d_symbol*)(cfg+1);
 	for (int i = 0, n = components.size(); i < n; ++i) {
-		const glue::P3dSymLoader::Component& src = components[i];
+		const P3dSymLoader::Component& src = components[i];
 		p3d_symbol& dst = cfg->syms[i];
 
 		dst.count = src.count;

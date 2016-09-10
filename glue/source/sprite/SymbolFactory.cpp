@@ -9,12 +9,14 @@
 #include "AnimSymLoader.h"
 #include "P3dSymLoader.h"
 #include "P2dSymLoader.h"
+#include "TrailSymLoader.h"
 
 #include <sprite2/Scale9Symbol.h>
 #include <sprite2/ComplexSymbol.h>
 #include <sprite2/AnimSymbol.h>
 #include <sprite2/Particle3dSymbol.h>
 #include <sprite2/Particle2dSymbol.h>
+#include <sprite2/TrailSymbol.h>
 
 namespace glue
 {
@@ -102,6 +104,15 @@ s2::Symbol* SymbolFactory::Create(const std::string& filepath) const
 		{
 			s2::Particle2dSymbol* sym = new s2::Particle2dSymbol;
 			P2dSymLoader loader;
+			loader.LoadJson(filepath);
+			loader.Store(sym);
+			ret = sym;
+		}
+		break;
+	case TRAIL:
+		{
+			s2::TrailSymbol* sym = new s2::TrailSymbol;
+			TrailSymLoader loader;
 			loader.LoadJson(filepath);
 			loader.Store(sym);
 			ret = sym;

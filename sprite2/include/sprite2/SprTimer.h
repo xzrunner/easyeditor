@@ -9,6 +9,8 @@ namespace s2
 class SprTimer
 {
 public:
+	void Init();
+
 	void Update(float dt);
 
 	SINGLETON_DECLARATION(SprTimer)

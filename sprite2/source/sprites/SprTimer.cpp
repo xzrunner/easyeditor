@@ -13,6 +13,14 @@ SprTimer::SprTimer()
 {
 }
 
+void SprTimer::Init()
+{
+	Animation::Instance();
+	Particle2d::Instance();
+	Particle3d::Instance();
+	Trail::Instance();
+}
+
 void SprTimer::Update(float dt)
 {
 	Animation::Instance()->Update(dt);

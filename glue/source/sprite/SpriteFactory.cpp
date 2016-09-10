@@ -19,6 +19,7 @@
 #include <sprite2/AnimSprite.h>
 #include <sprite2/Particle3dSprite.h>
 #include <sprite2/Particle2dSprite.h>
+#include <sprite2/TrailSprite.h>
 
 namespace glue
 {
@@ -60,6 +61,9 @@ s2::Sprite* SpriteFactory::Create(const std::string& filepath) const
 		break;
 	case PARTICLE2D:
 		spr = new s2::Particle2dSprite(sym);
+		break;
+	case TRAIL:
+		spr = new s2::TrailSprite(sym);
 		break;
 	}
 
@@ -121,6 +125,11 @@ s2::Sprite* SpriteFactory::Create(const Json::Value& val, const std::string& dir
 		{
 			P2dSprLoader loader(VI_DOWNCASTING<s2::Particle2dSprite*>(spr));
 			loader.LoadJson(val, dir);
+		}
+		break;
+	case TRAIL:
+		{
+			//
 		}
 		break;
 	}

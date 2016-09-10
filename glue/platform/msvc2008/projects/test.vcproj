@@ -269,6 +269,14 @@
 				RelativePath="..\..\..\sample\TestScale9.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\sample\TestTrail.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\sample\TestTrail.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath="..\..\..\sample\main.cpp"

@@ -9,6 +9,7 @@ static const std::string TAG_COMPLEX	= "complex";
 static const std::string TAG_ANIM		= "anim";
 static const std::string TAG_PARTICLE3D	= "particle";
 static const std::string TAG_PARTICLE2D	= "particle2d";
+static const std::string TAG_TRAIL		= "trail";
 
 SymFileType get_sym_file_type(const std::string& filepath)
 {
@@ -48,6 +49,8 @@ SymFileType get_sym_file_type(const std::string& filepath)
 			return PARTICLE3D;
 		} else if (tag == TAG_PARTICLE2D) {
 			return PARTICLE2D;
+		} else if (tag == TAG_TRAIL) {
+			return TRAIL;
 		}
 	}
 
@@ -70,6 +73,8 @@ std::string get_sym_tag_str(SymFileType type)
 		return TAG_PARTICLE3D;
 	case PARTICLE2D:
 		return TAG_PARTICLE2D;
+	case TRAIL:
+		return TAG_TRAIL;
 	}
 
 	return "";

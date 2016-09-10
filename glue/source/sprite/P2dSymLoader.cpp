@@ -80,7 +80,7 @@ void P2dSymLoader::Store(p2d_emitter_cfg* cfg) const
 	cfg->syms = (p2d_symbol*)(cfg+1);
 	for (int i = 0, n = components.size(); i < n; ++i) 
 	{
-		const glue::P2dSymLoader::Component& src = components[i];
+		const P2dSymLoader::Component& src = components[i];
 		p2d_symbol& dst = cfg->syms[i];
 
 		dst.angle_start = src.angle_start * SM_DEG_TO_RAD;
@@ -189,10 +189,10 @@ void P2dSymLoader::LoadComponent(const std::string& dir, const Json::Value& comp
 	comp.scale_start		= comp_val["scale"]["start"].asDouble();
 	comp.scale_end			= comp_val["scale"]["end"].asDouble();
 
-	glue::JsonSerializer::Load(comp_val["mul_col_begin"], comp.mul_col_begin);
-	glue::JsonSerializer::Load(comp_val["mul_col_end"], comp.mul_col_end);
-	glue::JsonSerializer::Load(comp_val["add_col_begin"], comp.add_col_begin);
-	glue::JsonSerializer::Load(comp_val["add_col_end"], comp.add_col_end);
+	JsonSerializer::Load(comp_val["mul_col_begin"], comp.mul_col_begin);
+	JsonSerializer::Load(comp_val["mul_col_end"], comp.mul_col_end);
+	JsonSerializer::Load(comp_val["add_col_begin"], comp.add_col_begin);
+	JsonSerializer::Load(comp_val["add_col_end"], comp.add_col_end);
 
 	if (!comp_val["alpha"].isNull()) {
 		comp.alpha_start = comp_val["alpha"]["start"].asInt();

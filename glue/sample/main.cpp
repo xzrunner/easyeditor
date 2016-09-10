@@ -14,6 +14,7 @@
 #include "TestAnim.h"
 #include "TestParticle3d.h"
 #include "TestParticle2d.h"
+#include "TestTrail.h"
 
 #include <shaderlab.h>
 #include <sprite2/SprTimer.h>
@@ -38,6 +39,7 @@ test::TestComplex* task = new test::TestComplex;
 //test::TestAnim* task = new test::TestAnim;
 //test::TestParticle3d* task = new test::TestParticle3d;
 //test::TestParticle2d* task = new test::TestParticle2d;
+//test::TestTrail* task = new test::TestTrail;
 
 void 
 display(void) {
@@ -70,6 +72,8 @@ init(void) {
 	glClearColor(0.5, 0.5, 0.5, 1);
 
 	glue::RenderContext::Instance()->Init();
+
+	s2::SprTimer::Instance()->Init();
 
 	task->Init();
 }

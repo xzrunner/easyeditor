@@ -16,6 +16,8 @@ enum SymFileType
 	ANIMATION,
 	PARTICLE3D,
 	PARTICLE2D,
+
+	TRAIL,
 };
 
 SymFileType get_sym_file_type(const std::string& filepath);

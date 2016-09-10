@@ -45,4 +45,19 @@ sm::rect TrailSymbol::GetBounding(const Sprite* spr) const
 	return sm::rect(sm::vec2(0, 0), 200, 200);
 }
 
+void TrailSymbol::SetEmitterCfg(t2d_emitter_cfg* cfg)
+{
+	if (m_et_cfg == cfg) {
+		return;
+	}
+
+	m_et_cfg = cfg;
+
+	if (m_et) {
+		t2d_emitter_release(m_et);
+	}
+	m_et = t2d_emitter_create(m_et_cfg);
+	t2d_emitter_start(m_et);
+}
+
 }

@@ -15,10 +15,12 @@ TrailSprite::TrailSprite()
 }
 
 TrailSprite::TrailSprite(const TrailSprite& spr)
-	: m_et(NULL)
+	: Sprite(spr)
+	, m_et(NULL)
 {
 	if (spr.m_et) {
 		m_et = t2d_emitter_create(spr.m_et->cfg);
+		t2d_emitter_start(m_et);
 	}
 }
 
@@ -27,6 +29,7 @@ TrailSprite& TrailSprite::operator = (const TrailSprite& spr)
 	m_et = NULL;
 	if (spr.m_et) {
 		m_et = t2d_emitter_create(spr.m_et->cfg);
+		t2d_emitter_start(m_et);
 	}
 	return *this;
 }

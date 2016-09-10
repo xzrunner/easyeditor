@@ -1,5 +1,7 @@
-#ifndef _EASYTRAIL_LOAD_ADAPTER_H_
-#define _EASYTRAIL_LOAD_ADAPTER_H_
+#ifndef _GLUE_TRAIL_SYM_LOADER_H_
+#define _GLUE_TRAIL_SYM_LOADER_H_
+
+#include <CU_Uncopyable.h>
 
 #include <sprite2/Color.h>
 
@@ -7,17 +9,27 @@
 
 #include <string>
 
-namespace etrail
+struct t2d_emitter_cfg;
+
+namespace s2 { class Symbol; class TrailSymbol; }
+
+namespace glue
 {
 
-class LoadAdapter
+class TrailSymLoader : private cu::Uncopyable
 {
 public:
-	void Load(const std::string& filepath);
+	void Store(s2::TrailSymbol* sym) const;
+	void Store(t2d_emitter_cfg* cfg) const;
+
+	void LoadJson(const std::string& filepath);
 
 private:
 	void LoadImageComp(const std::string& dir, const Json::Value& comp_val);
 	void LoadShapeComp(const Json::Value& comp_val);
+
+protected:
+	virtual s2::Symbol* LoadSymbol(const std::string& filepath) const;
 
 public:
 	struct CompImage
@@ -48,8 +60,8 @@ public:
 	std::vector<CompImage> comp_images;
 	std::vector<CompShape> comp_shapes;
 
-}; // LoadAdapter
+}; // TrailSymLoader
 
 }
 
-#endif // _EASYTRAIL_LOAD_ADAPTER_H_
+#endif // _GLUE_TRAIL_SYM_LOADER_H_
