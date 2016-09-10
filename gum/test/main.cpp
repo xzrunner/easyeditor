@@ -9,6 +9,7 @@
 #include "TestFilter.h"
 
 #include "TestScale9.h"
+#include "TestTexture.h"
 #include "TestLabel.h"
 #include "TestComplex.h"
 #include "TestAnim.h"
@@ -37,6 +38,7 @@
 //test::TestTask* task = new test::TestFilter;
 
 //test::TestTask* task = new test::TestScale9;
+//test::TestTexture* task = new test::TestTexture;
 //test::TestLabel* task = new test::TestLabel;
 test::TestComplex* task = new test::TestComplex;
 //test::TestAnim* task = new test::TestAnim;

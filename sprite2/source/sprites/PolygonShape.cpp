@@ -63,4 +63,9 @@ void PolygonShape::Draw(const sm::mat4& mt, const RenderColor& color) const
 	}
 }
 
+void PolygonShape::SetPolygon(Polygon* poly)
+{
+	cu::RefCountObjAssign(m_poly, poly);
+}
+
 }

@@ -44,6 +44,12 @@ sm::rect TextureSymbol::GetBounding(const Sprite* spr) const
 	return rect;
 }
 
+void TextureSymbol::AddPolygon(PolygonShape* poly)
+{
+	poly->AddReference();
+	m_polygons.push_back(poly);
+}
+
 void TextureSymbol::Clear()
 {
 	for_each(m_polygons.begin(), m_polygons.end(), cu::RemoveRefFonctor<PolygonShape>());

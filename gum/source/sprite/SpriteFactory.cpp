@@ -15,6 +15,7 @@
 #include <sprite2/S2_Symbol.h>
 #include <sprite2/ImageSprite.h>
 #include <sprite2/Scale9Sprite.h>
+#include <sprite2/TextureSprite.h>
 #include <sprite2/TextboxSprite.h>
 #include <sprite2/ComplexSprite.h>
 #include <sprite2/AnimSprite.h>
@@ -49,6 +50,9 @@ s2::Sprite* SpriteFactory::Create(const std::string& filepath) const
 		break;
 	case SCALE9:
 		spr = new s2::Scale9Sprite(sym);
+		break;
+	case TEXTURE:
+		spr = new s2::TextureSprite(sym);
 		break;
 	case TEXTBOX:
 		spr = new s2::TextboxSprite(sym);

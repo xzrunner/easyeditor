@@ -106,6 +106,12 @@ void PolylineShape::Draw(const sm::mat4& mt, const RenderColor& color) const
 	ShapeVertices::Draw(m_vertices, m_closed, mt, color);
 }
 
+void PolylineShape::SetVertices(const std::vector<sm::vec2>& vertices)
+{
+	m_vertices = vertices;
+	UpdateBounding();
+}
+
 void PolylineShape::UpdateBounding()
 {
 	m_bounding.MakeEmpty();

@@ -286,6 +286,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\test\TestTexture.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\test\TestTexture.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\test\TestTrail.cpp"
 				>
 			</File>

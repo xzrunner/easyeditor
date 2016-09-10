@@ -31,6 +31,7 @@ public:
 		const RenderColor& color = RenderColor()) const;
 
 	const std::vector<sm::vec2>& GetVertices() const { return m_vertices; }
+	void SetVertices(const std::vector<sm::vec2>& vertices);
 
 protected:
 	virtual void UpdateBounding();

@@ -28,6 +28,8 @@ public:
 	const std::vector<PolygonShape*>& GetPolygons() const { return m_polygons; }
 	std::vector<PolygonShape*>& GetPolygons() { return m_polygons; }
 
+	void AddPolygon(PolygonShape* poly);
+
 protected:
 	void Clear();
 

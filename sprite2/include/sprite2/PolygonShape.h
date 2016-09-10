@@ -32,6 +32,8 @@ public:
 	virtual void Draw(const sm::mat4& mt, 
 		const RenderColor& color = RenderColor()) const;
 
+	void SetPolygon(Polygon* poly);
+
 protected:
 	Polygon* m_poly;
 

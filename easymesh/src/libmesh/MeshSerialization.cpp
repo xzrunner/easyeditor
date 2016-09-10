@@ -3,6 +3,7 @@
 #include <SM_Vector.h>
 #include <sprite2/MeshTransform.h>
 #include <gum/JsonSerializer.h>
+#include <gum/MeshSymLoader.h>
 
 namespace emesh
 {

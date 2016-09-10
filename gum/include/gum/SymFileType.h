@@ -11,6 +11,7 @@ enum SymFileType
 	UNKNOWN		= 0,
 	IMAGE,
 	SCALE9,
+	TEXTURE,
 	TEXTBOX,
 	COMPLEX,
 	ANIMATION,

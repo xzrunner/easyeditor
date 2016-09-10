@@ -4,6 +4,7 @@ namespace gum
 {
 
 static const std::string TAG_SCALE9		= "scale9";
+static const std::string TAG_TEXTURE	= "texture";
 static const std::string TAG_TEXTBOX	= "text";
 static const std::string TAG_COMPLEX	= "complex";
 static const std::string TAG_ANIM		= "anim";
@@ -42,6 +43,8 @@ SymFileType get_sym_file_type(const std::string& filepath)
 		std::string tag = filename.substr(pos + 1);
 		if (tag == TAG_SCALE9) {
 			return SCALE9;
+		} else if (tag == TAG_TEXTURE) {
+			return TEXTURE;
 		} else if (tag == TAG_TEXTBOX) {
 			return TEXTBOX;
 		} else if (tag == TAG_COMPLEX) {
@@ -70,6 +73,8 @@ std::string get_sym_tag_str(SymFileType type)
 	{
 	case SCALE9:
 		return TAG_SCALE9;
+	case TEXTURE:
+		return TAG_TEXTURE;
 	case TEXTBOX:
 		return TAG_TEXTBOX;
 	case COMPLEX:

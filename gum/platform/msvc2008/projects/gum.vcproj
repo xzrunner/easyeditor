@@ -442,6 +442,14 @@
 			<Filter
 				Name="04.texture"
 				>
+				<File
+					RelativePath="..\..\..\source\sprite\TextureSymLoader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\gum\TextureSymLoader.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="05.label"
@@ -554,6 +562,30 @@
 			<Filter
 				Name="10.shape"
 				>
+				<File
+					RelativePath="..\..\..\source\sprite\ShapeLoader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\gum\ShapeLoader.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\sprite\ShapeSymLoader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\gum\ShapeSymLoader.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\sprite\TexturePolygon.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\gum\TexturePolygon.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="11.mesh"
