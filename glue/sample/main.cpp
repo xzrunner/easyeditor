@@ -15,6 +15,7 @@
 #include "TestParticle3d.h"
 #include "TestParticle2d.h"
 #include "TestTrail.h"
+#include "TestMask.h"
 
 #include <shaderlab.h>
 #include <sprite2/SprTimer.h>
@@ -40,6 +41,7 @@ test::TestComplex* task = new test::TestComplex;
 //test::TestParticle3d* task = new test::TestParticle3d;
 //test::TestParticle2d* task = new test::TestParticle2d;
 //test::TestTrail* task = new test::TestTrail;
+//test::TestMask* task = new test::TestMask;
 
 void 
 display(void) {

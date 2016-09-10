@@ -19,6 +19,7 @@
 #include <sprite2/AnimSprite.h>
 #include <sprite2/Particle3dSprite.h>
 #include <sprite2/Particle2dSprite.h>
+#include <sprite2/MaskSprite.h>
 #include <sprite2/TrailSprite.h>
 
 namespace glue
@@ -61,6 +62,9 @@ s2::Sprite* SpriteFactory::Create(const std::string& filepath) const
 		break;
 	case PARTICLE2D:
 		spr = new s2::Particle2dSprite(sym);
+		break;
+	case MASK:
+		spr = new s2::MaskSprite(sym);
 		break;
 	case TRAIL:
 		spr = new s2::TrailSprite(sym);

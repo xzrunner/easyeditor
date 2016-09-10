@@ -246,6 +246,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\sample\TestMask.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\sample\TestMask.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\sample\TestParticle2d.cpp"
 				>
 			</File>

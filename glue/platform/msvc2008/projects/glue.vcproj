@@ -562,6 +562,14 @@
 			<Filter
 				Name="12.mask"
 				>
+				<File
+					RelativePath="..\..\..\source\sprite\MaskSymLoader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\glue\MaskSymLoader.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="13.trail"

@@ -20,7 +20,10 @@ public:
 	virtual sm::rect GetBounding(const Sprite* spr = NULL) const;
 
 	const Sprite* GetBase() const { return m_base; }
+	void SetBase(s2::Sprite* base);
+
 	const Sprite* GetMask() const { return m_mask; }
+	void SetMask(s2::Sprite* mask);
 
 protected:
 	Sprite* m_base;
