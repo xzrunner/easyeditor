@@ -22,7 +22,7 @@ AnimSprLoader::~AnimSprLoader()
 
 void AnimSprLoader::LoadJson(const Json::Value& val, const std::string& dir)
 {
-	if (!m_spr || val["animation"].isNull()) {
+	if (!m_spr || !val.isMember("animation")) {
 		return;
 	}
 

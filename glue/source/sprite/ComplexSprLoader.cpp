@@ -22,7 +22,7 @@ ComplexSprLoader::~ComplexSprLoader()
 
 void ComplexSprLoader::LoadJson(const Json::Value& val, const std::string& dir)
 {
-	if (!m_spr || val["complex"].isNull()) {
+	if (!m_spr || !val.isMember("complex")) {
 		return;
 	}
 

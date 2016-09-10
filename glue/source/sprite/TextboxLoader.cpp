@@ -33,12 +33,12 @@ void TextboxLoader::LoadJson(const Json::Value& val)
 	m_tb.align_vert			= (s2::Textbox::VertAlign)(val["align_vert"].asInt());
 
 	m_tb.overflow			= true;
-	if (!val["overflow"].isNull()) {
+	if (val.isMember("overflow")) {
 		m_tb.overflow		= val["overflow"].asBool();
 	}
 
 	m_tb.richtext			= true;
-	if (!val["richtext"].isNull()) {
+	if (val.isMember("richtext")) {
 		m_tb.richtext		= val["richtext"].asBool();
 	}
 }

@@ -270,16 +270,15 @@ void GTxt::LoadUserFont(const std::string& name, const std::string& filepath)
 
 	int font = gtxt_uf_add_font(name.c_str(), sz + 1);
 
-	int idx = 0;
-	Json::Value c_val = value["chars"][idx++];
-	while (!c_val.isNull()) {
+	for (int i = 0, n = value["chars"].size(); i < n; ++i)
+	{
+		const Json::Value& c_val = value["chars"][i];
 		std::string str = c_val["str"].asString();
 		std::string utf8 = StringHelper::ToUtf8(str);
 		std::string filepath = c_val["filepath"].asString();
 		s2::Symbol* sym = SymbolFactory::Instance()->Create(filepath);
 		sm::vec2 sz = sym->GetBounding().Size();
 		gtxt_uf_add_char(font, utf8.c_str(), (int)sz.x, (int)sz.y, sym);
-		c_val = value["chars"][idx++];
 	}
 }
 

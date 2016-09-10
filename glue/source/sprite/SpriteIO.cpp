@@ -94,12 +94,12 @@ void SpriteIO::LoadGeometry(const Json::Value& val)
 {
 	// scale
 	sm::vec2 scale(1, 1);
-	if (!val["x scale"].isNull() && !val["y scale"].isNull())
+	if (val.isMember("x scale") && val.isMember("y scale"))
 	{
 		scale.x = static_cast<float>(val["x scale"].asDouble());
 		scale.y = static_cast<float>(val["y scale"].asDouble());
 	}
-	else if (!val["scale"].isNull())
+	else if (val.isMember("scale"))
 	{
 		scale.x = scale.y = static_cast<float>(val["scale"].asDouble());
 	}
@@ -107,7 +107,7 @@ void SpriteIO::LoadGeometry(const Json::Value& val)
 
 	// shear
 	sm::vec2 shear(0, 0);
-	if (!val["x shear"].isNull() && !val["y shear"].isNull())
+	if (val.isMember("x shear") && val.isMember("y shear"))
 	{
 		shear.x = static_cast<float>(val["x shear"].asDouble());
 		shear.y = static_cast<float>(val["y shear"].asDouble());
@@ -116,7 +116,7 @@ void SpriteIO::LoadGeometry(const Json::Value& val)
 
 	// offset
 	sm::vec2 offset(0 ,0);
-	if (!val["x offset"].isNull() && !val["y offset"].isNull())
+	if (val.isMember("x offset") && val.isMember("y offset"))
 	{
 		offset.x = static_cast<float>(val["x offset"].asDouble());
 		offset.y = static_cast<float>(val["y offset"].asDouble());
@@ -125,7 +125,7 @@ void SpriteIO::LoadGeometry(const Json::Value& val)
 
 	// translate
 	sm::vec2 pos(0, 0);
-	if (!val["position"]["x"].isNull() && !val["position"]["y"].isNull()) {
+	if (val.isMember("position") && val["position"].isMember("x") && val["position"].isMember("y")) {
 		pos.x = static_cast<float>(val["position"]["x"].asDouble());
 		pos.y = static_cast<float>(val["position"]["y"].asDouble());
 	}
@@ -133,7 +133,7 @@ void SpriteIO::LoadGeometry(const Json::Value& val)
 
 	// rotate
 	float angle = 0;
-	if (!val["angle"].isNull()) {
+	if (val.isMember("angle")) {
 		angle = static_cast<float>(val["angle"].asDouble());
 	}
 	m_angle = angle;
@@ -214,7 +214,7 @@ void SpriteIO::StoreInfo(const s2::Sprite* spr)
 
 void SpriteIO::LoadInfo(const Json::Value& val)
 {
-	if (!val["name"].isNull()) {
+	if (val.isMember("name")) {
 		m_name = val["name"].asString();
 	} else {
 		m_name = "";
@@ -244,7 +244,7 @@ void SpriteIO::StoreEdit(const s2::Sprite* spr)
 
 void SpriteIO::LoadEdit(const Json::Value& val)
 {
-	if (!val["visible"].isNull()) {
+	if (val.isMember("visible")) {
 		m_visible = val["visible"].asBool();
 	} else {
 		m_visible = true;
@@ -274,31 +274,31 @@ void SpriteIO::StoreColor(const s2::RenderColor& color)
 
 void SpriteIO::LoadColor(const Json::Value& val)
 {
-	if (!val["multi color"].isNull()) {
+	if (val.isMember("multi color")) {
 		m_col.mul = str2color(val["multi color"].asString(), PT_BGRA);
 	} else {
 		m_col.mul = s2::Color(0xffffffff);
 	}
 
-	if (!val["add color"].isNull()) {
+	if (val.isMember("add color")) {
 		m_col.add = str2color(val["add color"].asString(), PT_ABGR);
 	} else {
 		m_col.add = s2::Color(0);
 	}
 
-	if (!val["r trans"].isNull()) {
+	if (val.isMember("r trans")) {
 		m_col.rmap = str2color(val["r trans"].asString(), PT_RGBA);
 	} else {
 		m_col.rmap = s2::Color(255, 0, 0, 0);
 	}
 
-	if (!val["g trans"].isNull()) {
+	if (val.isMember("g trans")) {
 		m_col.gmap = str2color(val["g trans"].asString(), PT_RGBA);
 	} else {
 		m_col.gmap = s2::Color(0, 255, 0, 0);
 	}
 
-	if (!val["b trans"].isNull()) {
+	if (val.isMember("b trans")) {
 		m_col.bmap = str2color(val["b trans"].asString(), PT_RGBA);
 	} else {
 		m_col.bmap = s2::Color(0, 0, 255, 0);
@@ -352,17 +352,17 @@ void SpriteIO::LoadShader(const Json::Value& val)
 		return;
 	}
 
-	if (!val["blend"].isNull()) {
+	if (val.isMember("blend")) {
 		std::string disc = val["blend"].asString();
 		m_blend = BlendModes::Instance()->Name2Mode(disc);
 	}
 
-	if (!val["fast_blend"].isNull()) {
+	if (val.isMember("fast_blend")) {
 		std::string disc = val["fast_blend"].asString();
 		m_fast_blend = FastBlendModes::Instance()->Name2Mode(disc);
 	}
 
-	if (!val["filter"].isNull()) 
+	if (val.isMember("filter")) 
 	{
 		if (val["filter"].isString()) 
 		{
@@ -467,7 +467,7 @@ void SpriteIO::StoreCamera(const s2::RenderCamera& rc)
 
 void SpriteIO::LoadCamera(const Json::Value& val)
 {
-	if (!val["camera"].isNull()) {
+	if (val.isMember("camera")) {
 		std::string disc = val["camera"].asString();
 		m_camera = CameraModes::Instance()->Name2Mode(disc);
 	} else {

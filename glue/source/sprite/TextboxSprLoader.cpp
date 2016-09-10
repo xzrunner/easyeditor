@@ -23,7 +23,7 @@ TextboxSprLoader::~TextboxSprLoader()
 
 void TextboxSprLoader::LoadJson(const Json::Value& val, const std::string& dir)
 {
-	if (!m_spr || val["text"].isNull()) {
+	if (!m_spr || !val.isMember("text")) {
 		return;
 	}
 

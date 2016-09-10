@@ -125,7 +125,7 @@ void P3dSymLoader::LoadJson(const std::string& filepath)
 	count = val["count"].asInt();
 	emission_time = val["emission_time"].asInt() * 0.001f;
 
-	if (!val["life"].isNull()) {
+	if (val.isMember("life")) {
 		life = static_cast<float>(val["life"]["center"].asInt());
 		life_var = static_cast<float>(val["life"]["offset"].asInt());
 	} else {
@@ -146,10 +146,10 @@ void P3dSymLoader::LoadJson(const std::string& filepath)
 	vert = (min + max) * 0.5f * SM_DEG_TO_RAD;
 	vert_var = (max - min) * 0.5f * SM_DEG_TO_RAD;
 
-	if (!val["radial_speed"].isNull()) {
+	if (val.isMember("radial_speed")) {
 		radial_spd = static_cast<float>(val["radial_speed"]["center"].asInt());
 		radial_spd_var = static_cast<float>(val["radial_speed"]["offset"].asInt());
-	} else if (!val["speed"].isNull()) {
+	} else if (val.isMember("speed")) {
 		radial_spd = static_cast<float>(val["speed"]["center"].asInt());
 		radial_spd_var = static_cast<float>(val["speed"]["offset"].asInt());
 	} else {
@@ -167,7 +167,7 @@ void P3dSymLoader::LoadJson(const std::string& filepath)
 	radial_spd *= 0.25f;
 	radial_spd_var *= 0.25f;
 
-	if (!val["angular_speed"].isNull()) {
+	if (val.isMember("angular_speed")) {
 		angular_spd = val["angular_speed"]["center"].asInt() * SM_DEG_TO_RAD;
 		angular_spd_var = val["angular_speed"]["offset"].asInt() * SM_DEG_TO_RAD;
 	} else {
@@ -195,7 +195,7 @@ void P3dSymLoader::LoadJson(const std::string& filepath)
 
 	fadeout_time = val["fadeout_time"].asInt() * 0.001f;
 
-	if (val["ground"].isNull()) {
+	if (!val.isMember("ground")) {
 		ground = P3D_GROUND_WITH_BOUNCE;
 	} else {
 		ground = val["ground"].asInt();
@@ -210,11 +210,8 @@ void P3dSymLoader::LoadJson(const std::string& filepath)
 	blend = val["blend"].asInt();
 
 	std::string dir = FilepathHelper::Dir(filepath);
-	int i = 0;
-	Json::Value comp_val = val["components"][i++];
-	while (!comp_val.isNull()) {
-		LoadComponent(dir, comp_val);
-		comp_val = val["components"][i++];
+	for (int i = 0, n = val["components"].size(); i < n; ++i) {
+		LoadComponent(dir, val["components"][i]);
 	}
 }
 
@@ -222,7 +219,7 @@ void P3dSymLoader::LoadComponent(const std::string& dir, const Json::Value& comp
 {
 	Component comp;
 
-	if (comp_val["count"].isNull()) {
+	if (!comp_val.isMember("count")) {
 		comp.count = 0;
 	} else {
 		comp.count = comp_val["count"].asInt();
@@ -231,7 +228,7 @@ void P3dSymLoader::LoadComponent(const std::string& dir, const Json::Value& comp
 	comp.filepath = comp_val["filepath"].asString();
 	comp.filepath = FilepathHelper::Absolute(dir, comp.filepath);
 
-	if (!comp_val["bind ps filepath"].isNull()) {
+	if (comp_val.isMember("bind ps filepath")) {
 		comp.bind_filepath = comp_val["bind ps filepath"].asString();
 		if (!comp.bind_filepath.empty()) {
 			comp.bind_filepath = FilepathHelper::Absolute(dir, comp.bind_filepath);
@@ -240,7 +237,7 @@ void P3dSymLoader::LoadComponent(const std::string& dir, const Json::Value& comp
 
 	comp.name = comp_val["name"].asString();
 
-	if (!comp_val["scale"].isNull()) {
+	if (comp_val.isMember("scale")) {
 		comp.scale_start = comp_val["scale"]["start"].asInt();
 		comp.scale_end = comp_val["scale"]["end"].asInt();
 	} else {
@@ -248,7 +245,7 @@ void P3dSymLoader::LoadComponent(const std::string& dir, const Json::Value& comp
 		comp.scale_end = comp_val["end_scale"].asInt();
 	}
 
-	if (!comp_val["rotate"].isNull()) {
+	if (comp_val.isMember("rotate")) {
 		int min = comp_val["rotate"]["min"].asInt(),
 			max = comp_val["rotate"]["max"].asInt();
 		comp.angle = (min + max) * 0.5f;
@@ -257,44 +254,44 @@ void P3dSymLoader::LoadComponent(const std::string& dir, const Json::Value& comp
 		comp.angle = comp.angle_var = 0;
 	}
 
-	if (!comp_val["mul_col"].isNull()) {
+	if (comp_val.isMember("mul_col")) {
 		comp.mul_col_begin.r = comp_val["mul_col"]["r"].asDouble() * 255;
 		comp.mul_col_begin.g = comp_val["mul_col"]["g"].asDouble() * 255;
 		comp.mul_col_begin.b = comp_val["mul_col"]["b"].asDouble() * 255;
 		comp.mul_col_begin.a = 255;
 		comp.mul_col_end = comp.mul_col_begin;
 	} else {
-		if (!comp_val["mul_col_begin"].isNull()) {
+		if (comp_val.isMember("mul_col_begin")) {
 			JsonSerializer::Load(comp_val["mul_col_begin"], comp.mul_col_begin);
 		} else {
 			comp.mul_col_begin.r = comp.mul_col_begin.g = comp.mul_col_begin.b = comp.mul_col_begin.a = 255;
 		}
-		if (!comp_val["mul_col_end"].isNull()) {
+		if (comp_val.isMember("mul_col_end")) {
 			JsonSerializer::Load(comp_val["mul_col_end"], comp.mul_col_end);
 		} else {
 			comp.mul_col_end.r = comp.mul_col_end.g = comp.mul_col_end.b = comp.mul_col_end.a = 255;
 		}
 	}
 
-	if (!comp_val["add_col"].isNull()) {
+	if (comp_val.isMember("add_col")) {
 		comp.add_col_begin.r = comp_val["add_col"]["r"].asDouble() * 255;
 		comp.add_col_begin.g = comp_val["add_col"]["g"].asDouble() * 255;
 		comp.add_col_begin.b = comp_val["add_col"]["b"].asDouble() * 255;
 		comp.add_col_end = comp.add_col_begin;
 	} else {
-		if (!comp_val["add_col_begin"].isNull()) {
+		if (comp_val.isMember("add_col_begin")) {
 			JsonSerializer::Load(comp_val["add_col_begin"], comp.add_col_begin);
 		} else {
 			comp.add_col_begin.r = comp.add_col_begin.g = comp.add_col_begin.b = comp.add_col_begin.a = 0;
 		}
-		if (!comp_val["add_col_end"].isNull()) {
+		if (comp_val.isMember("add_col_end")) {
 			JsonSerializer::Load(comp_val["add_col_end"], comp.add_col_end);
 		} else {
 			comp.add_col_end.r = comp.add_col_end.g = comp.add_col_end.b = comp.add_col_end.a = 0;
 		}
 	}
 
-	if (!comp_val["alpha"].isNull()) {
+	if (comp_val.isMember("alpha")) {
 		float start = comp_val["alpha"]["start"].asInt() * 0.01f;
 		float end = comp_val["alpha"]["end"].asInt() * 0.01f;
 		comp.mul_col_begin.a *= start;
@@ -303,7 +300,7 @@ void P3dSymLoader::LoadComponent(const std::string& dir, const Json::Value& comp
 		comp.alpha_end = 255 * end;
 	}
 
-	if (!comp_val["alpha2"].isNull()) {
+	if (comp_val.isMember("alpha2")) {
 		comp.alpha_start = comp_val["alpha2"]["start"].asInt();
 		comp.alpha_end = comp_val["alpha2"]["end"].asInt();
 	}

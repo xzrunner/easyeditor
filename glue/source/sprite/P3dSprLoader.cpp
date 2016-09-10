@@ -22,7 +22,7 @@ P3dSprLoader::~P3dSprLoader()
 
 void P3dSprLoader::LoadJson(const Json::Value& val, const std::string& dir)
 {
-	if (!m_spr || val["particle3d"].isNull()) {
+	if (!m_spr || !val.isMember("particle3d")) {
 		return;
 	}
 

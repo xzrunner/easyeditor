@@ -22,7 +22,7 @@ P2dSprLoader::~P2dSprLoader()
 
 void P2dSprLoader::LoadJson(const Json::Value& val, const std::string& dir)
 {
-	if (!m_spr || val["particle2d"].isNull()) {
+	if (!m_spr || !val.isMember("particle2d")) {
 		return;
 	}
 

@@ -93,16 +93,14 @@ void TrailSymLoader::LoadJson(const std::string& filepath)
 	fadeout_time = value["fadeout_time"].asDouble() * 0.001f;
 
 	std::string dir = FilepathHelper::Dir(filepath);
-	int idx = 0;
-	Json::Value comp_val = value["components"][idx++];
-	while (!comp_val.isNull()) {
+	for (int i = 0, n = value["components"].size(); i < n; ++i)
+	{
 		if (mode == T2D_MODE_IMAGE) {
-			LoadImageComp(dir, comp_val);
+			LoadImageComp(dir, value["components"][i]);
 		} else {
 			assert(mode == T2D_MODE_SHAPE);
-			LoadShapeComp(comp_val);
+			LoadShapeComp(value["components"][i]);
 		}
-		comp_val = value["components"][idx++];
 	}
 }
 

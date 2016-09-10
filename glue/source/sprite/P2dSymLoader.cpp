@@ -171,11 +171,8 @@ void P2dSymLoader::LoadJson(const std::string& filepath)
 	direction_var		= static_cast<float>(value["direction"]["offset"].asDouble() * SM_DEG_TO_RAD);
 
 	std::string dir = FilepathHelper::Dir(filepath);
-	int idx = 0;
-	Json::Value comp_val = value["components"][idx++];
-	while (!comp_val.isNull()) {
-		LoadComponent(dir, comp_val);
-		comp_val = value["components"][idx++];
+	for (int i = 0, n = value["components"].size(); i < n; ++i) {
+		LoadComponent(dir, value["components"][i]);
 	}
 }
 
@@ -194,7 +191,7 @@ void P2dSymLoader::LoadComponent(const std::string& dir, const Json::Value& comp
 	JsonSerializer::Load(comp_val["add_col_begin"], comp.add_col_begin);
 	JsonSerializer::Load(comp_val["add_col_end"], comp.add_col_end);
 
-	if (!comp_val["alpha"].isNull()) {
+	if (comp_val.isMember("alpha")) {
 		comp.alpha_start = comp_val["alpha"]["start"].asInt();
 		comp.alpha_end = comp_val["alpha"]["end"].asInt();
 	}
