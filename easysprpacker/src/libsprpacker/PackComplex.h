@@ -37,15 +37,19 @@ public:
 private:
 	void Init(const ecomplex::Symbol* sym);
 
+	int QueryIndex(const PackNode* node) const;
+
 private:
 	class Action
 	{
 	public:
+		~Action();
+
 		int SizeOfUnpackFromBin() const;
 		int SizeOfPackToBin() const;
-		void PackToBin(uint8_t** ptr, const std::vector<const PackNode*>& children) const;	
+		void PackToBin(uint8_t** ptr, const PackComplex& complex) const;	
 
-	private:
+	public:
 		std::string m_name;
 		std::vector<const PackNode*> m_sprs;
 

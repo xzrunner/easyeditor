@@ -22,7 +22,7 @@ void TestMask::Init()
 
 	gum::DTex::Instance();
 
-	s2::Symbol* sym = gum::SymbolFactory::Instance()->Create("test_mask.json");
+	s2::Symbol* sym = gum::SymbolFactory::Instance()->Create("raw\\test_mask.json");
 	{
 		s2::MaskSprite* spr = new s2::MaskSprite(sym);
 		spr->SetPosition(sm::vec2(0, -100));

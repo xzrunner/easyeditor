@@ -1,11 +1,14 @@
 #include "PackComplex.h"
 #include "PackNodeFactory.h"
+#include "binary_io.h"
 
 #include <easycomplex.h>
+#include <easybuilder.h>
+namespace lua = ebuilder::lua;
 
 #include <sprite2/S2_Sprite.h>
-
-#include <simp_pack.h>
+#include <simp/simp_types.h>
+#include <simp/NodeComplex.h>
 
 namespace esprpacker
 {
@@ -17,17 +20,61 @@ PackComplex::PackComplex(const ecomplex::Symbol* sym)
 
 PackComplex::~PackComplex()
 {
-
+	for_each(m_children.begin(), m_children.end(), cu::RemoveRefFonctor<PackNode>());
 }
 
 void PackComplex::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const
 {
+	gen.line("{");
+	gen.tab();
 
+	lua::comments(gen, "file: " + GetFilepath());
+
+	lua::assign_with_end(gen, "type", "\"complex\"");
+	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(m_id));
+	if (!m_name.empty()) {
+		lua::assign_with_end(gen, "export", "\"" + m_name + "\"");
+	}
+
+	// scissor
+	lua::connect(gen, 4, 
+		lua::assign("xmin", m_scissor.xmin), 
+		lua::assign("ymin", m_scissor.ymin),
+		lua::assign("xmax", m_scissor.xmax),
+		lua::assign("ymax", m_scissor.ymax));
+
+	// children
+	{
+		lua::TableAssign ta(gen, "children", true);
+		for (int i = 0, n = m_children.size(); i < n; ++i) {
+			std::string str = lua::assign("id", ee::StringHelper::ToString(m_children[i]->GetID()));
+			lua::tableassign(gen, "", 1, str);
+		}
+	}
+
+	// actions
+	{
+		lua::TableAssign ta(gen, "actions", true);
+		for (int i = 0, n = m_actions.size(); i < n; ++i) {
+			const Action& action = m_actions[i];
+			
+			lua::TableAssign ta(gen, "", true);
+
+			gen.line(lua::assign("action", "\"" + action.m_name + "\"") + ",");
+			for (int j = 0, m = action.m_sprs.size(); j < m; ++j) {
+				std::string str = lua::assign("idx", ee::StringHelper::ToString(QueryIndex(action.m_sprs[j])));
+				lua::tableassign(gen, "", 1, str);
+			}
+		}
+	}
+
+	gen.detab();
+	gen.line("},");
 }
 
 int PackComplex::SizeOfUnpackFromBin() const
 {
-	int sz = SIZEOF_COMPLEX;
+	int sz = simp::NodeComplex::Size();
 	sz += sizeof(uint32_t) * m_children.size();
 	for (int i = 0, n = m_actions.size(); i < n; ++i) {
 		sz += m_actions[i].SizeOfUnpackFromBin();
@@ -38,13 +85,17 @@ int PackComplex::SizeOfUnpackFromBin() const
 int PackComplex::SizeOfPackToBin() const
 {
 	int sz = 0;
-	sz += sizeof(uint16_t);			// id
+	sz += sizeof(uint32_t);			// id
 	sz += sizeof(uint8_t);			// type
-	sz += sizeof(uint16_t) + sizeof(uint32_t) * m_children.size();		// children
-	sz += sizeof(uint16_t);			// actions
+	sz += sizeof(uint16_t) * 4;		// scissor
+	// actions
+	sz += sizeof(uint16_t);			
 	for (int i = 0, n = m_actions.size(); i < n; ++i) {
 		sz += m_actions[i].SizeOfPackToBin();
 	}
+	// children
+	sz += sizeof(uint16_t);
+	sz += sizeof(uint32_t) * m_children.size();
 	return sz;
 }
 
@@ -56,19 +107,29 @@ void PackComplex::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float sc
 	uint8_t type = TYPE_COMPLEX;
 	pack(type, ptr);
 
+	// scissor
+	int16_t xmin = m_scissor.xmin,
+		    ymin = m_scissor.ymin,
+			xmax = m_scissor.xmax,
+			ymax = m_scissor.ymax;
+	pack(xmin, ptr);
+	pack(ymin, ptr);
+	pack(xmax, ptr);
+	pack(ymax, ptr);
+
+	// actions
+	uint16_t action_n = m_actions.size();
+	pack(action_n, ptr);
+	for (int i = 0; i < action_n; ++i) {
+		m_actions[i].PackToBin(ptr, *this);
+	}
+
 	// children
 	uint16_t children_n = m_children.size();
 	pack(children_n, ptr);
 	for (int i = 0; i < children_n; ++i) {
 		uint32_t id = m_children[i]->GetID();
 		pack(id, ptr);
-	}
-
-	// actions
-	uint16_t action_n = m_actions.size();
-	pack(action_n, ptr);
-	for (int i = 0; i < action_n; ++i) {
-		m_actions[i].PackToBin(ptr, m_children);
 	}
 }
 
@@ -82,14 +143,15 @@ void PackComplex::Init(const ecomplex::Symbol* sym)
 	}
 
 	const std::vector<s2::ComplexSymbol::Action>& actions = sym->GetActions();
-	for (int i = 0, n = actions.size(); i < n; ++i) {
+	for (int i = 0, n = actions.size(); i < n; ++i) 
+	{
 		const s2::ComplexSymbol::Action& src = actions[i];
 		Action dst;
 		dst.m_name = src.name;
 		dst.m_sprs.reserve(src.sprs.size());
 		for (int j = 0, m = src.sprs.size(); j < m; ++j) {
 			dst.m_sprs.push_back(PackNodeFactory::Instance()->Create(
-				dynamic_cast<ee::Sprite*>(src.sprs[i])));
+				dynamic_cast<ee::Sprite*>(src.sprs[j])));
 		}
 		m_actions.push_back(dst);
 	}
@@ -97,14 +159,30 @@ void PackComplex::Init(const ecomplex::Symbol* sym)
 	m_scissor = sym->GetScissor();
 }
 
+int PackComplex::QueryIndex(const PackNode* node) const
+{
+	for (int i = 0, n = m_children.size(); i < n; ++i) {
+		if (m_children[i] == node) {
+			return i;
+		}
+	}
+	return -1;
+}
+
 /************************************************************************/
 /* class PackComplex::Action                                                                     */
 /************************************************************************/
 
+PackComplex::Action::
+~Action()
+{
+	for_each(m_sprs.begin(), m_sprs.end(), cu::RemoveRefFonctor<PackNode>());
+}
+
 int PackComplex::Action::
 SizeOfUnpackFromBin() const 
 {
-	int sz = SIZEOF_COMPLEX_ACTION;
+	int sz = simp::NodeComplex::ActionSize();
 	sz += sizeof_unpack_str(m_name);
 	sz += sizeof(uint16_t) * m_sprs.size();
 	return sz;
@@ -114,27 +192,23 @@ int PackComplex::Action::
 SizeOfPackToBin() const
 {
 	int sz = 0;
-	sz += sizeof_unpack_str(m_name);							// name
-	sz += sizeof(uint16_t) + m_sprs.size() * sizeof(uint16_t);	// sprs
+	sz += sizeof_unpack_str(m_name); // name
+	// sprs
+	sz += sizeof(uint16_t);	
+	sz += m_sprs.size() * sizeof(uint16_t);
 	return sz;
 }
 
 void PackComplex::Action::
-PackToBin(uint8_t** ptr, const std::vector<const PackNode*>& children) const
+PackToBin(uint8_t** ptr, const PackComplex& complex) const
 {
 	pack_str(m_name, ptr);
 
 	uint16_t n = m_sprs.size();
 	pack(n, ptr);
 	for (int i = 0; i < n; ++i) {
-		uint16_t idx = 0xffff;
-		for (int j = 0, m = children.size(); j < m; ++j) {
-			if (children[j] == m_sprs[i]) {
-				idx = j;
-				break;
-			}
-		}
-		assert(idx != 0xffff);
+		int idx = complex.QueryIndex(m_sprs[i]);
+		assert(idx >= 0 && idx < 0xffff);
 		pack(idx, ptr);
 	}
 }

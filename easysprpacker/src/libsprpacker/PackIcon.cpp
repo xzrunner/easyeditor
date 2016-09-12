@@ -4,7 +4,8 @@
 #include <easybuilder.h>
 namespace lua = ebuilder::lua;
 
-#include <simp_icon.h>
+#include <simp/NodeIcon.h>
+#include <simp/simp_types.h>
 
 namespace esprpacker
 {
@@ -32,13 +33,13 @@ void PackIcon::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePa
 
 int PackIcon::SizeOfUnpackFromBin() const
 {
-	return SIZEOF_ICON;
+	return simp::NodeIcon::Size();
 }
 
 int PackIcon::SizeOfPackToBin() const
 {
 	int sz = 0;
-	sz += sizeof(uint16_t);			// id
+	sz += sizeof(uint32_t);			// id
 	sz += sizeof(uint8_t);			// type
 	sz += sizeof(uint8_t);			// icon type
 	return sz;

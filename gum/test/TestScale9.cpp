@@ -18,7 +18,7 @@ void TestScale9::Init()
 	sl_mgr->CreateShader(sl::SPRITE2, new sl::Sprite2Shader(sl_rc));
 	gum::RenderContext::Instance()->SetCamera(0, 0, 1, 1);
 
-	s2::Symbol* sym = gum::SymbolFactory::Instance()->Create("scale9_scale9.json");
+	s2::Symbol* sym = gum::SymbolFactory::Instance()->Create("raw\\scale9_scale9.json");
 	{
 		s2::Scale9Sprite* spr = new s2::Scale9Sprite(sym);
 		spr->SetPosition(sm::vec2(0, 0));
@@ -27,7 +27,7 @@ void TestScale9::Init()
 	}
 
 	{
-		s2::Sprite* spr = gum::SpriteFactory::Instance()->Create("coin_00.png");
+		s2::Sprite* spr = gum::SpriteFactory::Instance()->Create("raw\\coin_00.png");
 		spr->SetPosition(sm::vec2(-150, 0));
 		m_sprites.push_back(spr);
 	}

@@ -6,7 +6,8 @@
 #include <easybuilder.h>
 namespace lua = ebuilder::lua;
 
-#include <simp_label.h>
+#include <simp/NodeLabel.h>
+#include <simp/simp_types.h>
 
 namespace esprpacker
 {
@@ -68,7 +69,7 @@ void PackLabel::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TextureP
 
 int PackLabel::SizeOfUnpackFromBin() const
 {
-	int sz = SIZEOF_LABEL;
+	int sz = simp::NodeLabel::Size();
 	sz += sizeof_unpack_str(m_text);	
 	sz += sizeof_unpack_str(m_tid);	
 	return sz;

@@ -1,5 +1,5 @@
-#ifndef _SPRITE_IMPORT_NODE_COMPLEX_H_
-#define _SPRITE_IMPORT_NODE_COMPLEX_H_
+#ifndef _SIMP_NODE_COMPLEX_H_
+#define _SIMP_NODE_COMPLEX_H_
 
 #include <CU_Uncopyable.h>
 
@@ -8,6 +8,7 @@
 namespace simp
 {
 
+class Allocator;
 class ImportStream;
 
 class NodeComplex : private cu::Uncopyable
@@ -25,17 +26,18 @@ public:
 
 	uint16_t actions_n;
 
-	int32_t scissor[4];
+	int16_t scissor[4];
 
 	Action actions[1];
 
 public:
-	NodeComplex(ImportStream& is);
+	NodeComplex(Allocator& alloc, ImportStream& is);
 
 	static int Size();
+	static int ActionSize();
 
 }; // NodeComplex
 
 }
 
-#endif // _SPRITE_IMPORT_NODE_COMPLEX_H_
+#endif // _SIMP_NODE_COMPLEX_H_

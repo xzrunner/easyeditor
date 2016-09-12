@@ -1,5 +1,5 @@
-#ifndef _SPRITE_IMPORT_NODE_SCALE9_H_
-#define _SPRITE_IMPORT_NODE_SCALE9_H_
+#ifndef _SIMP_NODE_SCALE9_H_
+#define _SIMP_NODE_SCALE9_H_
 
 #include <CU_Uncopyable.h>
 
@@ -28,9 +28,10 @@ public:
 	NodeScale9(Allocator& alloc, ImportStream& is);
 	
 	static int Size();
+	static int GridSize();
 
 }; // NodeScale9
 
 }
 
-#endif // _SPRITE_IMPORT_NODE_SCALE9_H_	
+#endif // _SIMP_NODE_SCALE9_H_	

@@ -4,6 +4,7 @@
 #include <CU_Singleton.h>
 
 #include <string>
+#include <vector>
 
 namespace ee { class Sprite; class Symbol; }
 
@@ -11,6 +12,7 @@ namespace esprpacker
 {
 
 class PackNode;
+class NodeBuilder;
 
 class PackNodeFactory
 {
@@ -18,9 +20,14 @@ public:
 	const PackNode* Create(const ee::Sprite* spr);
 	const PackNode* Create(const ee::Symbol* sym);
 
+	void FetchAll(std::vector<PackNode*>& nodes) const;
+
 	void SetFilesDir(const std::string& files_dir) {
 		m_files_dir = files_dir;
 	}
+
+private:
+	static void FetchAllBuilder(std::vector<NodeBuilder*>& builders);
 
 private:
 	std::string m_files_dir;

@@ -21,7 +21,7 @@ void TestTexture::Init()
 
 	gum::DTex::Instance();
 
-	s2::Symbol* sym = gum::SymbolFactory::Instance()->Create("test_texture.json");
+	s2::Symbol* sym = gum::SymbolFactory::Instance()->Create("raw\\test_texture.json");
 	{
 		s2::TextureSprite* spr = new s2::TextureSprite(sym);
 		spr->SetPosition(sm::vec2(0, -100));

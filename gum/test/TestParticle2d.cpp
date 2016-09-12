@@ -18,7 +18,7 @@ void TestParticle2d::Init()
 	sl_mgr->CreateShader(sl::SPRITE2, new sl::Sprite2Shader(sl_rc));
 	gum::RenderContext::Instance()->SetCamera(0, 0, 1, 1);
 
-	s2::Symbol* sym = gum::SymbolFactory::Instance()->Create("test_particle2d.json");
+	s2::Symbol* sym = gum::SymbolFactory::Instance()->Create("raw\\test_particle2d.json");
 	{
 		s2::Particle2dSprite* spr = new s2::Particle2dSprite(sym);
 		spr->SetPosition(sm::vec2(0, -50));

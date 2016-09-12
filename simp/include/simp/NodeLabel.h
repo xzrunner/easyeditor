@@ -1,5 +1,5 @@
-#ifndef _SPRITE_IMPORT_NODE_LABEL_H_
-#define _SPRITE_IMPORT_NODE_LABEL_H_
+#ifndef _SIMP_NODE_LABEL_H_
+#define _SIMP_NODE_LABEL_H_
 
 #include <CU_Uncopyable.h>
 
@@ -46,4 +46,4 @@ public:
 
 }
 
-#endif // _SPRITE_IMPORT_NODE_LABEL_H_
+#endif // _SIMP_NODE_LABEL_H_

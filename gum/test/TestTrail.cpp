@@ -19,7 +19,7 @@ void TestTrail::Init()
 	sl_mgr->CreateShader(sl::SPRITE2, new sl::Sprite2Shader(sl_rc));
 	gum::RenderContext::Instance()->SetCamera(0, 0, 1, 1);
 
-	s2::Symbol* sym = gum::SymbolFactory::Instance()->Create("shape_trail.json");
+	s2::Symbol* sym = gum::SymbolFactory::Instance()->Create("raw\\shape_trail.json");
 	{
 		s2::TrailSprite* spr = new s2::TrailSprite(sym);
 		spr->SetPosition(sm::vec2(50, 0));

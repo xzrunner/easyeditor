@@ -1,77 +1,76 @@
-#include "PackIconSpr.h"
+#include "PackComplexSpr.h"
 #include "PackNodeFactory.h"
 #include "binary_io.h"
-#include "to_int.h"
 
-#include <easyicon.h>
+#include <easycomplex.h>
 #include <easybuilder.h>
 namespace lua = ebuilder::lua;
 
-#include <simp/NodeIconSpr.h>
+#include <simp/NodeComplexSpr.h>
 #include <simp/simp_types.h>
 
 namespace esprpacker
 {
 
-PackIconSpr::PackIconSpr(const eicon::Sprite* spr)
+PackComplexSpr::PackComplexSpr(const ecomplex::Sprite* spr)
 {
 	Init(spr);
 }
 
-void PackIconSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const
+void PackComplexSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const
 {
 	gen.line("{");
 	gen.tab();
 
 	lua::comments(gen, "file: " + GetFilepath());
 
-	lua::assign_with_end(gen, "type", "\"icon_spr\"");
+	lua::assign_with_end(gen, "type", "\"complex_spr\"");
 	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(m_id));
 
 	lua::connect(gen, 2, 
 		lua::assign("sym_id", m_sym->GetID()), 
-		lua::assign("process", m_process));
+		lua::assign("action", m_action));
 
 	gen.detab();
 	gen.line("},");
 }
 
-int PackIconSpr::SizeOfUnpackFromBin() const
+int PackComplexSpr::SizeOfUnpackFromBin() const
 {
-	return simp::NodeIconSpr::Size();
+	return simp::NodeComplexSpr::Size();
 }
 
-int PackIconSpr::SizeOfPackToBin() const
+int PackComplexSpr::SizeOfPackToBin() const
 {
 	int sz = 0;
 	sz += sizeof(uint32_t);			// id
 	sz += sizeof(uint8_t);			// type
 	sz += sizeof(uint32_t);			// sym id
-	sz += sizeof(uint16_t);			// process
+	sz += sizeof(uint16_t);			// action
 	return sz;
 }
 
-void PackIconSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scale) const
+void PackComplexSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scale) const
 {
 	uint32_t id = m_id;
 	pack(id, ptr);
 
-	uint8_t type = TYPE_ICON_SPR;
+	uint8_t type = TYPE_COMPLEX_SPR;
 	pack(type, ptr);
 
 	uint32_t sym = m_sym->GetID();
 	pack(sym, ptr);
 
-	uint16_t process = float1024x2int(m_process);
-	pack(process, ptr);
+	uint16_t action = m_action;
+	pack(action, ptr);
 }
 
-void PackIconSpr::Init(const eicon::Sprite* spr)
+void PackComplexSpr::Init(const ecomplex::Sprite* spr)
 {
 	m_sym = PackNodeFactory::Instance()->Create(
 		dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
 
-	m_process = spr->GetProcess();
+	m_action = spr->GetAction();
 }
 
 }

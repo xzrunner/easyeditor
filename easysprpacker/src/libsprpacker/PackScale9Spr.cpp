@@ -7,9 +7,8 @@
 namespace lua = ebuilder::lua;
 
 #include <SM_Vector.h>
-
-#include <simp_scale9.h>
-#include <simp_pack.h>
+#include <simp/NodeScale9Spr.h>
+#include <simp/simp_types.h>
 
 namespace esprpacker
 {
@@ -41,13 +40,13 @@ void PackScale9Spr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::Text
 
 int PackScale9Spr::SizeOfUnpackFromBin() const
 {
-	return SIZEOF_SCALE9_SPR;
+	return simp::NodeScale9Spr::Size();
 }
 
 int PackScale9Spr::SizeOfPackToBin() const
 {
 	int sz = 0;
-	sz += sizeof(uint16_t);			// id
+	sz += sizeof(uint32_t);			// id
 	sz += sizeof(uint8_t);			// type
 	sz += sizeof(uint32_t);			// sym id
 	sz += sizeof(uint16_t);			// width

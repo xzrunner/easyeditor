@@ -4,7 +4,8 @@
 #include <easybuilder.h>
 namespace lua = ebuilder::lua;
 
-#include <simp_texture.h>
+#include <simp/NodeTexture.h>
+#include <simp/simp_types.h>
 
 namespace esprpacker
 {
@@ -32,13 +33,13 @@ void PackTexture::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::Textur
 
 int PackTexture::SizeOfUnpackFromBin() const
 {
-	return SIZEOF_TEXTURE;
+	return simp::NodeTexture::Size();
 }
 
 int PackTexture::SizeOfPackToBin() const
 {
 	int sz = 0;
-	sz += sizeof(uint16_t);			// id
+	sz += sizeof(uint32_t);			// id
 	sz += sizeof(uint8_t);			// type
 	sz += sizeof(uint8_t);			// texture_type type
 	return sz;

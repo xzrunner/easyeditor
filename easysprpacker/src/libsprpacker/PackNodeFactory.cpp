@@ -7,17 +7,21 @@
 #include "IconSprBuilder.h"
 #include "TextureBuilder.h"
 #include "LabelBuilder.h"
+#include "ComplexBuilder.h"
+#include "ComplexSprBuilder.h"
 
 #include <easyscale9.h>
 #include <easyicon.h>
 #include <easytexture.h>
 #include <easytext.h>
+#include <easycomplex.h>
 
 #include <ee/Sprite.h>
 #include <ee/ImageSprite.h>
 #include <ee/ImageSymbol.h>
 #include <ee/Exception.h>
 #include <ee/FileHelper.h>
+#include <ee/FetchAllVisitor.h>
 
 namespace esprpacker
 {
@@ -59,6 +63,10 @@ const PackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 	else if (const etext::Sprite* label = dynamic_cast<const etext::Sprite*>(spr)) {
 		node = LabelBuilder::Instance()->Create(label);
 	}
+	// complex
+	else if (const ecomplex::Sprite* complex = dynamic_cast<const ecomplex::Sprite*>(spr)) {
+		node = ComplexSprBuilder::Instance()->Create(complex);
+	}
 
 	else {
 		throw ee::Exception("PackNodeFactory::Create unknown sprite type.");
@@ -81,6 +89,10 @@ const PackNode* PackNodeFactory::Create(const ee::Symbol* sym)
 	else if (const eicon::Symbol* icon = dynamic_cast<const eicon::Symbol*>(sym)) {
 		node = IconBuilder::Instance()->Create(icon);
 	}
+	// complex
+	else if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(sym)) {
+		node = ComplexBuilder::Instance()->Create(complex);
+	}
 
 	else {
 		throw ee::Exception("PackNodeFactory::Create unknown symbol type.");
@@ -89,6 +101,37 @@ const PackNode* PackNodeFactory::Create(const ee::Symbol* sym)
 	node->SetFilepath(ee::FileHelper::GetRelativePath(m_files_dir, sym->GetFilepath()));
 
 	return node;
+}
+
+void PackNodeFactory::FetchAll(std::vector<PackNode*>& nodes) const
+{
+	nodes.clear();
+
+	std::vector<NodeBuilder*> builders;
+	FetchAllBuilder(builders);
+	for (int i = 0, n = builders.size(); i < n; ++i) {
+		builders[i]->Traverse(ee::FetchAllVisitor<PackNode>(nodes));
+	}
+}
+
+void PackNodeFactory::FetchAllBuilder(std::vector<NodeBuilder*>& builders)
+{
+	builders.clear();
+
+	builders.push_back(ImageBuilder::Instance());
+
+	builders.push_back(Scale9Builder::Instance());
+	builders.push_back(Scale9SprBuilder::Instance());
+
+	builders.push_back(IconBuilder::Instance());
+	builders.push_back(IconSprBuilder::Instance());
+
+	builders.push_back(TextureBuilder::Instance());
+
+	builders.push_back(LabelBuilder::Instance());
+
+	builders.push_back(ComplexBuilder::Instance());
+	builders.push_back(ComplexSprBuilder::Instance());
 }
 
 }

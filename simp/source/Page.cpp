@@ -99,7 +99,7 @@ void* Page::CreateNode(uint8_t type, Allocator& alloc, ImportStream& is)
 	case TYPE_COMPLEX:
 		{
 			void* ptr = alloc.Alloc(NodeComplex::Size());
-			ret = new (ptr) NodeComplex(is);
+			ret = new (ptr) NodeComplex(alloc, is);
 		}
 		break;
 	}

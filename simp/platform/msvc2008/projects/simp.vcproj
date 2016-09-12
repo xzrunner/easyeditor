@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\..\editor-external\c99;..\..\..\..\logger\src\logger;..\..\..\..\cu\src\cu"
+				AdditionalIncludeDirectories="..\..\..\include\simp;..\..\..\..\logger\src\logger;..\..\..\..\cu\src\cu;..\..\..\..\editor-external\c99"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -105,7 +105,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\..\editor-external\c99;..\..\..\..\logger\src\logger;..\..\..\..\cu\src\cu"
+				AdditionalIncludeDirectories="..\..\..\include\simp;..\..\..\..\logger\src\logger;..\..\..\..\cu\src\cu;..\..\..\..\editor-external\c99"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -305,6 +305,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\include\simp\NodeComplex.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\NodeComplexSpr.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\simp\NodeComplexSpr.h"
 					>
 				</File>
 			</Filter>

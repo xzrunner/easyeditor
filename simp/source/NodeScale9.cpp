@@ -41,4 +41,9 @@ int NodeScale9::Size()
 	return sizeof(NodeScale9) - sizeof(Grid);
 }
 
+int NodeScale9::GridSize()
+{
+	return sizeof(Grid);
+}
+
 }

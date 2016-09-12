@@ -6,8 +6,8 @@
 #include <easybuilder.h>
 namespace lua = ebuilder::lua;
 
-#include <simp_scale9.h>
-#include <simp_pack.h>
+#include <simp/NodeScale9.h>
+#include <simp/simp_types.h>
 
 namespace esprpacker
 {
@@ -74,13 +74,13 @@ int PackScale9::SizeOfUnpackFromBin() const
 		n = 8;
 		break;
 	}
-	return SIZEOF_SCALE9 + SIZEOF_SCALE9_GRID * n;
+	return simp::NodeScale9::Size() + simp::NodeScale9::GridSize() * n;
 }
 
 int PackScale9::SizeOfPackToBin() const
 {
 	int sz = 0;
-	sz += sizeof(uint16_t);			// id
+	sz += sizeof(uint32_t);			// id
 	sz += sizeof(uint8_t);			// type
 	sz += sizeof(uint8_t);			// s9 type
 	for (int i = 0; i < 9; ++i) {

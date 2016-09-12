@@ -20,6 +20,8 @@ public:
 
 	void Clear() { m_map.clear(); }
 
+	const std::map<std::string, int>& GetData() const { return m_map; }
+
 private:
 	std::map<std::string, int> m_map;
 

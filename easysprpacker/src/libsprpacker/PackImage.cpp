@@ -9,8 +9,8 @@
 #include <easybuilder.h>
 namespace lua = ebuilder::lua;
 
-#include <simp_picture.h>
-#include <simp_pack.h>
+#include <simp/NodePicture.h>
+#include <simp/simp_types.h>
 
 namespace esprpacker
 {
@@ -42,7 +42,6 @@ void PackImage::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TextureP
 	if (idx == -1) {
 		idx = tp.QueryIdx(ee::ImageDataMgr::Instance()->GetDefaultSym());
 	}
-	std::string tex_str = lua::assign("tex", ee::StringHelper::ToString(idx));
 
 	char buff[256];
 
@@ -51,11 +50,13 @@ void PackImage::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TextureP
 	for (int i = 0; i < 8; ++i) {
 		src[i] *= scale;
 	}
-	sprintf(buff, "src = { %d, %d, %d, %d, %d, %d, %d, %d }", 
+	sprintf(buff, "{ %d, %d, %d, %d, %d, %d, %d, %d }", 
 		src[0], src[1], src[2], src[3], src[4], src[5], src[6], src[7]);
 	std::string src_str = buff;
 
-	lua::tableassign(gen, "", 2, tex_str, src_str);
+	lua::connect(gen, 2, 
+		lua::assign("tex", ee::StringHelper::ToString(idx)), 
+		lua::assign("src", src_str));
 
 	gen.detab();
 	gen.line("},");
@@ -63,13 +64,13 @@ void PackImage::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TextureP
 
 int PackImage::SizeOfUnpackFromBin() const
 {
-	return SIZEOF_PICTURE;
+	return simp::NodePicture::Size();
 }
 	
 int PackImage::SizeOfPackToBin() const
 {
 	int sz = 0;
-	sz += sizeof(uint16_t);			// id
+	sz += sizeof(uint32_t);			// id
 	sz += sizeof(uint8_t);			// type
 	sz += sizeof(uint8_t);			// texid
 	sz += sizeof(uint16_t) * 8;		// texcoords

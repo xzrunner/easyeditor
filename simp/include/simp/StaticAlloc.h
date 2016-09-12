@@ -1,5 +1,5 @@
-#ifndef _SPRITE_IMPORT_STATIC_ALLOC_H_
-#define _SPRITE_IMPORT_STATIC_ALLOC_H_
+#ifndef _SIMP_STATIC_ALLOC_H_
+#define _SIMP_STATIC_ALLOC_H_
 
 #include <CU_Singleton.h>
 
@@ -25,4 +25,4 @@ private:
 
 }
 
-#endif // _SPRITE_IMPORT_STATIC_ALLOC_H_
+#endif // _SIMP_STATIC_ALLOC_H_

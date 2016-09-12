@@ -21,7 +21,7 @@ void TestMesh::Init()
 
 	gum::DTex::Instance();
 
-	s2::Symbol* sym = gum::SymbolFactory::Instance()->Create("test_mesh.json");
+	s2::Symbol* sym = gum::SymbolFactory::Instance()->Create("raw\\test_mesh.json");
 	{
 		s2::MeshSprite* spr = new s2::MeshSprite(sym);
 		spr->SetPosition(sm::vec2(0, -100));

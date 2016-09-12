@@ -64,6 +64,7 @@
 #include "LRExpandGroup.h"
 #include "PackImageEPT.h"
 #include "FixMirror.h"
+#include "PackEPNew.h"
 
 namespace edb
 {
@@ -133,6 +134,7 @@ void CommandLoader::Init()
 	fc->Register(LRExpandGroup::Create());
 	fc->Register(PackImageEPT::Create());
 	fc->Register(FixMirror::Create());
+	fc->Register(PackEPNew::Create());
 }
 
 }

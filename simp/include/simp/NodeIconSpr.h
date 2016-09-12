@@ -1,5 +1,5 @@
-#ifndef _SPRITE_IMPORT_NODE_ICON_SPR_H_
-#define _SPRITE_IMPORT_NODE_ICON_SPR_H_
+#ifndef _SIMP_NODE_ICON_SPR_H_
+#define _SIMP_NODE_ICON_SPR_H_
 
 #include <CU_Uncopyable.h>
 
@@ -26,4 +26,4 @@ public:
 
 }
 
-#endif // _SPRITE_IMPORT_NODE_ICON_SPR_H_
+#endif // _SIMP_NODE_ICON_SPR_H_

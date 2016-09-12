@@ -1,5 +1,5 @@
-#ifndef _SPRITE_IMPORT_TYPES_H_
-#define _SPRITE_IMPORT_TYPES_H_
+#ifndef _SIMP_TYPES_H_
+#define _SIMP_TYPES_H_
 
 namespace simp
 {
@@ -13,8 +13,9 @@ namespace simp
 #define TYPE_TEXTURE		7
 #define TYPE_LABEL			9
 #define TYPE_COMPLEX		11
+#define TYPE_COMPLEX_SPR	12
 #define TYPE_ANIMATION		13
 
 }
 
-#endif // _SPRITE_IMPORT_TYPES_H_
+#endif // _SIMP_TYPES_H_

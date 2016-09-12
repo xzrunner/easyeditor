@@ -25,8 +25,8 @@ void TestComplex::Init()
 
 	gum::DTex::Instance();
 
-	s2::Symbol* sym = gum::SymbolFactory::Instance()->Create("test_complex.json");
-//	s2::Symbol* sym = gum::SymbolFactory::Instance()->Create("action_complex.json");
+	s2::Symbol* sym = gum::SymbolFactory::Instance()->Create("raw\\test_complex.json");
+//	s2::Symbol* sym = gum::SymbolFactory::Instance()->Create("raw\\action_complex.json");
 	{
 		s2::ComplexSprite* spr = new s2::ComplexSprite(sym);
 		spr->SetPosition(sm::vec2(0, 0));
