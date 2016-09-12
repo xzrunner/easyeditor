@@ -26,6 +26,8 @@ private:
 
 	void Pack() const;
 
+	void OutputEptDesc(const std::string& outfile) const;
+
 private:
 	std::vector<const ee::Symbol*> m_syms;
 

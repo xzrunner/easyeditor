@@ -73,17 +73,12 @@ void PackEPNew::Trigger(const std::string& json_dir, const std::string& tp_json,
 	ee::ImageDataMgr::Instance()->SetDefaultSym(ee::FileHelper::FormatFilepathAbsolute(default_sym));
 
 	esprpacker::Packer packer(json_dir, tp_json, tp_dir);
-	if (type == "ept_desc") {
-//		packer.OutputEptDesc(out_file);
-		return;
-	}
 
 	if (type == "lua") {
 		packer.OutputLua(out_file + ".lua", scale);
 	} else if (type == "ep") {
 		packer.OutputEpe(out_file, true, scale);
 		packer.OutputEpt(out_file, LOD, scale);
-// 		packer.OutputEptDesc(out_file);
 // 		packer.OutputUIExtra(out_file);
 // 		packer.OutputSprID(out_file);
 	} else if (type == "epe") {
@@ -92,7 +87,6 @@ void PackEPNew::Trigger(const std::string& json_dir, const std::string& tp_json,
 // 		packer.OutputSprID(out_file);
 	} else if (type == "ept") {
 		packer.OutputEpt(out_file, LOD, scale);
-//		packer.OutputEptDesc(out_file);
 	} else if (type == "debug") {
 		packer.OutputLua(out_file + ".lua", scale);
 		packer.OutputEpe(out_file, true, scale);
@@ -102,7 +96,6 @@ void PackEPNew::Trigger(const std::string& json_dir, const std::string& tp_json,
 		packer.OutputLua(out_file + ".lua", scale);
 		packer.OutputEpe(out_file, true, scale);
 		packer.OutputEpt(out_file, LOD, scale);
-// 		packer.OutputEptDesc(out_file);
 // 		packer.OutputUIExtra(out_file);
 // 		packer.OutputSprID(out_file);
 	}

@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Intel C++ Project"
 	Version="11.1"
-	Name="2.simp"
+	Name="1.simp"
 	ProjectGUID="{B4B3472D-AB27-49F1-8D2A-57A011EC7EA3}"
 	VCNestedProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
 	VCNestedProjectFileName="simp.vcproj">

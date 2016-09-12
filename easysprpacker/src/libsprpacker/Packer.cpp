@@ -14,6 +14,8 @@
 #include <easyrespacker.h>
 
 #include <CU_RefCountObj.h>
+#include <dtex.h>
+#include <gimg_typedef.h>
 
 #include <wx/arrstr.h>
 #include <wx/filename.h>
@@ -61,6 +63,7 @@ void Packer::OutputEpe(const std::string& outfile, bool compress, float scale) c
 
 void Packer::OutputEpt(const std::string& outfile, int LOD, float scale) const
 {
+	OutputEptDesc(outfile);
 	erespacker::PackToBin::PackEPT(outfile, m_tp, LOD, scale);
 }
 
@@ -111,6 +114,56 @@ void Packer::Pack() const
 	for (int i = 0, n = m_syms.size(); i < n; ++i) {
 		factory->Create(m_syms[i]);
 	}
+}
+
+void Packer::OutputEptDesc(const std::string& outfile) const
+{
+	std::string filepath = outfile + ".ept";
+	std::locale::global(std::locale(""));
+	std::ofstream fout(filepath.c_str(), std::ios::binary);
+	std::locale::global(std::locale("C"));	
+
+	const std::vector<const ee::TexturePacker::Texture*>& textures = m_tp.GetTextures();
+
+	int count = textures.size();
+
+	int out_sz = 0;
+	out_sz += sizeof(int);						// version
+	out_sz += sizeof(int);						// count
+	out_sz += count * sizeof(uint16_t) * 2;		// size
+	out_sz += count * sizeof(uint16_t);			// type
+
+	// file header
+	out_sz = -out_sz;
+	fout.write(reinterpret_cast<const char*>(&out_sz), sizeof(out_sz));
+
+	// count
+	fout.write(reinterpret_cast<const char*>(&count), sizeof(count));
+
+	// size & type
+	for (int i = 0; i < count; ++i) 
+	{
+		const ee::TexturePacker::Texture* tex = textures[i];
+
+		// size
+		uint16_t w = tex->width,
+			h = tex->height;
+		fout.write(reinterpret_cast<const char*>(&w), sizeof(w));
+		fout.write(reinterpret_cast<const char*>(&h), sizeof(h));
+
+		// type
+		uint16_t type = GIT_PNG;
+		if (tex->format == "pvr") {
+			type = GIT_PVR;
+		} else if (tex->format == "etc1") {
+			type = GIT_ETC1;
+		} else if (tex->format == "etc2") {
+			type = GIT_ETC2;
+		}
+		fout.write(reinterpret_cast<const char*>(&type), sizeof(type));
+	}
+
+	fout.close();
 }
 
 }

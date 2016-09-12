@@ -62,7 +62,7 @@ void PackToBin::Pack(const std::string& filepath,
 
 	// pack pages
 	for (int i = 0, n = pages.size(); i < n; ++i) {
-		std::string path = filepath + "." + ee::StringHelper::ToString(i) + ".epe";
+		std::string path = filepath + "." + ee::StringHelper::ToString(i + 1) + ".epe";
 		PackPage(path, *pages[i], tp, compress, scale);
 	}
 }

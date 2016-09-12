@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="2.simp"
+	Name="1.simp"
 	ProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
 	RootNamespace="simp"
 	Keyword="Win32Proj"

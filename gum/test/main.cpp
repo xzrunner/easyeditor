@@ -19,6 +19,8 @@
 #include "TestMask.h"
 #include "TestTrail.h"
 
+#include "TestPack.h"
+
 #include <shaderlab.h>
 #include <sprite2/SprTimer.h>
 #include <sprite2/RenderCtxStack.h>
@@ -47,6 +49,8 @@ test::TestComplex* task = new test::TestComplex;
 //test::TestMesh* task = new test::TestMesh;
 //test::TestMask* task = new test::TestMask;
 //test::TestTrail* task = new test::TestTrail;
+
+//test::TestPack* task = new test::TestPack;
 
 void 
 display(void) {

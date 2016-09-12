@@ -9,6 +9,9 @@ extern "C"
 enum GIMG_IMAGE_TYPE {
 	GIT_INVALID = 0,
 	GIT_PNG,
+	GIT_PVR,
+	GIT_ETC1,
+	GIT_ETC2,
 };
 
 enum GIMG_PIXEL_FORMAT {
