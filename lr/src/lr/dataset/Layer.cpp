@@ -189,6 +189,11 @@ void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
 				const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());
 				ecomplex::FileStorer::Store(sym->GetFilepath().c_str(), 
 					static_cast<const ecomplex::Symbol*>(sym));
+				if (ee::FileHelper::IsFileExist(sym->GetFilepath())) {
+					wxMessageBox(sym->GetFilepath(), "success");
+				} else {
+					wxMessageBox(sym->GetFilepath(), "fail !!!!!!!!!!!!!!!!!!!");
+				}
 			}
 		}
 
