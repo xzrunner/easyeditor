@@ -149,27 +149,27 @@
 			Name="storage"
 			>
 			<File
-				RelativePath="..\..\..\src\simp\NodeFactory.cpp"
+				RelativePath="..\..\..\source\NodeFactory.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\simp\NodeFactory.h"
+				RelativePath="..\..\..\include\simp\NodeFactory.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\simp\Package.cpp"
+				RelativePath="..\..\..\source\Package.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\simp\Package.h"
+				RelativePath="..\..\..\include\simp\Package.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\simp\Page.cpp"
+				RelativePath="..\..\..\source\Page.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\simp\Page.h"
+				RelativePath="..\..\..\include\simp\Page.h"
 				>
 			</File>
 		</Filter>
@@ -177,19 +177,19 @@
 			Name="alloc"
 			>
 			<File
-				RelativePath="..\..\..\src\simp\Allocator.cpp"
+				RelativePath="..\..\..\source\Allocator.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\simp\Allocator.h"
+				RelativePath="..\..\..\include\simp\Allocator.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\simp\StaticAlloc.cpp"
+				RelativePath="..\..\..\source\StaticAlloc.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\simp\StaticAlloc.h"
+				RelativePath="..\..\..\include\simp\StaticAlloc.h"
 				>
 			</File>
 		</Filter>
@@ -197,11 +197,11 @@
 			Name="import"
 			>
 			<File
-				RelativePath="..\..\..\src\simp\ImportStream.cpp"
+				RelativePath="..\..\..\source\ImportStream.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\simp\ImportStream.h"
+				RelativePath="..\..\..\include\simp\ImportStream.h"
 				>
 			</File>
 		</Filter>
@@ -209,22 +209,22 @@
 			Name="node"
 			>
 			<File
-				RelativePath="..\..\..\src\simp\NodeTrans.cpp"
+				RelativePath="..\..\..\source\NodeTrans.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\simp\NodeTrans.h"
+				RelativePath="..\..\..\include\simp\NodeTrans.h"
 				>
 			</File>
 			<Filter
 				Name="01.picture"
 				>
 				<File
-					RelativePath="..\..\..\src\simp\NodePicture.cpp"
+					RelativePath="..\..\..\source\NodePicture.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\simp\NodePicture.h"
+					RelativePath="..\..\..\include\simp\NodePicture.h"
 					>
 				</File>
 			</Filter>
@@ -236,19 +236,19 @@
 				Name="02.scale9"
 				>
 				<File
-					RelativePath="..\..\..\src\simp\NodeScale9.cpp"
+					RelativePath="..\..\..\source\NodeScale9.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\simp\NodeScale9.h"
+					RelativePath="..\..\..\include\simp\NodeScale9.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\simp\NodeScale9Spr.cpp"
+					RelativePath="..\..\..\source\NodeScale9Spr.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\simp\NodeScale9Spr.h"
+					RelativePath="..\..\..\include\simp\NodeScale9Spr.h"
 					>
 				</File>
 			</Filter>
@@ -256,19 +256,19 @@
 				Name="03.icon"
 				>
 				<File
-					RelativePath="..\..\..\src\simp\NodeIcon.cpp"
+					RelativePath="..\..\..\source\NodeIcon.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\simp\NodeIcon.h"
+					RelativePath="..\..\..\include\simp\NodeIcon.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\simp\NodeIconSpr.cpp"
+					RelativePath="..\..\..\source\NodeIconSpr.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\simp\NodeIconSpr.h"
+					RelativePath="..\..\..\include\simp\NodeIconSpr.h"
 					>
 				</File>
 			</Filter>
@@ -276,11 +276,11 @@
 				Name="04.texture"
 				>
 				<File
-					RelativePath="..\..\..\src\simp\NodeTexture.cpp"
+					RelativePath="..\..\..\source\NodeTexture.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\simp\NodeTexture.h"
+					RelativePath="..\..\..\include\simp\NodeTexture.h"
 					>
 				</File>
 			</Filter>
@@ -288,11 +288,11 @@
 				Name="05.label"
 				>
 				<File
-					RelativePath="..\..\..\src\simp\NodeLabel.cpp"
+					RelativePath="..\..\..\source\NodeLabel.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\simp\NodeLabel.h"
+					RelativePath="..\..\..\include\simp\NodeLabel.h"
 					>
 				</File>
 			</Filter>
@@ -300,21 +300,21 @@
 				Name="06.complex"
 				>
 				<File
-					RelativePath="..\..\..\src\simp\NodeComplex.cpp"
+					RelativePath="..\..\..\source\NodeComplex.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\simp\NodeComplex.h"
+					RelativePath="..\..\..\include\simp\NodeComplex.h"
 					>
 				</File>
 			</Filter>
 		</Filter>
 		<File
-			RelativePath="..\..\..\src\simp\simp_define.h"
+			RelativePath="..\..\..\include\simp\simp_define.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\simp\simp_types.h"
+			RelativePath="..\..\..\include\simp\simp_types.h"
 			>
 		</File>
 	</Files>
