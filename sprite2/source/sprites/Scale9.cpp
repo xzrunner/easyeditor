@@ -77,7 +77,7 @@ void Scale9::SetSize(float width, float height)
 				  w2 = m_grids[S9_DOWN_RIGHT]->GetSymbol()->GetBounding().Size().x,
 				  w1 = width - w0 - w2;
 			float h0 = m_grids[S9_DOWN_LEFT]->GetSymbol()->GetBounding().Size().y,
-				  h2 = m_grids[S9_DOWN_RIGHT]->GetSymbol()->GetBounding().Size().y,
+				  h2 = m_grids[S9_TOP_LEFT]->GetSymbol()->GetBounding().Size().y,
 				  h1 = height - h0 - h2;
 
 			ResizeSprite(m_grids[S9_DOWN_LEFT], sm::vec2(-w0*0.5f-w1*0.5f, -h0*0.5f-h1*0.5f), w0, h0);
@@ -99,7 +99,7 @@ void Scale9::SetSize(float width, float height)
 				  w2 = m_grids[S9_DOWN_RIGHT]->GetSymbol()->GetBounding().Size().x,
 				  w1 = width - w0 - w2;
 			float h0 = m_grids[S9_DOWN_LEFT]->GetSymbol()->GetBounding().Size().y,
-				  h2 = m_grids[S9_DOWN_RIGHT]->GetSymbol()->GetBounding().Size().y,
+				  h2 = m_grids[S9_TOP_LEFT]->GetSymbol()->GetBounding().Size().y,
 				  h1 = height - h0 - h2;
 
 			ResizeSprite(m_grids[S9_DOWN_LEFT], sm::vec2(-w0*0.5f-w1*0.5f, -h0*0.5f-h1*0.5f), w0, h0);
