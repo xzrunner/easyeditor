@@ -143,6 +143,8 @@ void FileIO::Store(const char* filename, LibraryPanel* library,
 	std::locale::global(std::locale("C"));	
 	writer.write(fout, value);
 	fout.close();
+
+	wxMessageBox("Success");
 }
 
 void FileIO::LoadLayers(const Json::Value& value, StagePanel* stage, 
