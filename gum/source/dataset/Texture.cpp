@@ -1,9 +1,10 @@
 #include "Texture.h"
-#include "PngLoader.h"
-#include "JpegLoader.h"
 #include "RenderContext.h"
 #include "StringHelper.h"
 #include "Exception.h"
+
+#include <gimg_import.h>
+#include <gimg_typedef.h>
 
 namespace gum
 {
@@ -22,33 +23,33 @@ Texture::~Texture()
 
 void Texture::Load(const std::string& filepath)
 {
-	std::string lower_path = filepath;
-	StringHelper::ToLower(lower_path);
-	if (lower_path.find(".png") != std::string::npos) 
-	{
-		const uint8_t* data = PngLoader::Read(filepath, m_width, m_height, m_format);
-		Load(data, m_width, m_height, m_format);
-		delete[] data;
-	} 
-	else if (lower_path.find(".jpg") != std::string::npos) 
-	{
-		int c;
-		const uint8_t* data = JpegLoader::Read(filepath.c_str(), m_width, m_height, c);
-		switch (c)
-		{
-		case 3:
-			m_format = TEXTURE_RGB;
-			break;
-		case 4:
-			m_format = TEXTURE_RGBA8;
-			break;
-		default:
-			throw Exception("Texture::Load: Unknown format.");
-		}
-
-		Load(data, m_width, m_height, m_format);
-		delete[] data;
+	int w, h;
+	GIMG_PIXEL_FORMAT fmt;
+	uint8_t* pixels = gimg_import(filepath.c_str(), &w, &h, &fmt);
+	if (!pixels) {
+		return;
 	}
+
+	TEXTURE_FORMAT tf = TEXTURE_INVALID;
+	switch (fmt)
+	{
+	case GPF_ALPHA: case GPF_LUMINANCE: case GPF_LUMINANCE_ALPHA:
+		tf = TEXTURE_A8;
+		break;
+	case GPF_RGB:
+		tf = TEXTURE_RGB;
+		break;
+	case GPF_RGBA:
+		tf = TEXTURE_RGBA8;
+		break;
+	}
+
+	m_width = w;
+	m_height = h;
+	m_format = tf;
+
+	Load(pixels, m_width, m_height, m_format);
+	free(pixels);
 }
 
 void Texture::Load(const uint8_t* data, int width, int height, TEXTURE_FORMAT format)

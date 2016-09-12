@@ -5,6 +5,8 @@
 
 #include <string>
 
+namespace simp { class NodePicture; }
+
 namespace gum
 {
 
@@ -14,6 +16,7 @@ class ImageSymbol : public s2::ImageSymbol
 {
 public:
 	ImageSymbol(const std::string& filepath);
+	ImageSymbol(const simp::NodePicture* node);
 	virtual ~ImageSymbol();
 
 	const Image* GetImage() const { return m_img; }

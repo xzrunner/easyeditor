@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\include\gum;..\..\..\..\particle\src;..\..\..\..\dtex\src;..\..\..\..\ejoy2d\src;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\model3\src\model3;..\..\..\..\camera25\src\camera25;..\..\..\..\sm\src\sm;..\..\..\..\ds\src\ds;..\..\..\..\cu\src\cu;..\..\..\..\mtrail\src\mtrail;..\..\..\..\sprite2\include;..\..\..\..\gtxt\src\gtxt;&quot;..\..\..\..\editor-external\cjson\include&quot;;..\..\..\..\editor-external\json\include;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\libjpeg\include&quot;;&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\assimp\include&quot;;&quot;..\..\..\..\editor-external\boost\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\include\gum;..\..\..\..\particle\src;..\..\..\..\dtex\src;..\..\..\..\ejoy2d\src;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\model3\src\model3;..\..\..\..\camera25\src\camera25;..\..\..\..\sm\src\sm;..\..\..\..\ds\src\ds;..\..\..\..\cu\src\cu;..\..\..\..\mtrail\src\mtrail;..\..\..\..\gimg\src\gimg;..\..\..\..\sprite2\include;..\..\..\..\gtxt\src\gtxt;&quot;..\..\..\..\editor-external\cjson\include&quot;;..\..\..\..\editor-external\json\include;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\libjpeg\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\assimp\include&quot;;&quot;..\..\..\..\editor-external\boost\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -106,7 +106,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\include\gum;..\..\..\..\particle\src;..\..\..\..\dtex\src;..\..\..\..\ejoy2d\src;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\model3\src\model3;..\..\..\..\camera25\src\camera25;..\..\..\..\sm\src\sm;..\..\..\..\ds\src\ds;..\..\..\..\cu\src\cu;..\..\..\..\mtrail\src\mtrail;..\..\..\..\sprite2\include;..\..\..\..\gtxt\src\gtxt;&quot;..\..\..\..\editor-external\cjson\include&quot;;..\..\..\..\editor-external\json\include;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\libjpeg\include&quot;;&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\assimp\include&quot;;&quot;..\..\..\..\editor-external\boost\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\include\gum;..\..\..\..\particle\src;..\..\..\..\dtex\src;..\..\..\..\ejoy2d\src;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\model3\src\model3;..\..\..\..\camera25\src\camera25;..\..\..\..\sm\src\sm;..\..\..\..\ds\src\ds;..\..\..\..\cu\src\cu;..\..\..\..\mtrail\src\mtrail;..\..\..\..\gimg\src\gimg;..\..\..\..\sprite2\include;..\..\..\..\gtxt\src\gtxt;&quot;..\..\..\..\editor-external\cjson\include&quot;;..\..\..\..\editor-external\json\include;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\libjpeg\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\assimp\include&quot;;&quot;..\..\..\..\editor-external\boost\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -252,30 +252,6 @@
 				</File>
 				<File
 					RelativePath="..\..\..\include\gum\Image.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\gum\ImageLoader.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\gum\ImageLoader.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\source\dataset\JpegLoader.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\gum\JpegLoader.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\source\dataset\PngLoader.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\gum\PngLoader.h"
 					>
 				</File>
 				<File

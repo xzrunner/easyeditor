@@ -1127,7 +1127,7 @@ Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "0.cu", "..\cu\platform\msvc
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libsprpacker", "..\easysprpacker\platform\msvc2008\projects\libsprpacker.vcproj", "{0ADAEF1C-2094-4A6F-84E9-3CA0684B7824}"
 EndProject
-Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "2.simp", "..\simp\platform\msvc2008\projects\simp.icproj", "{B4B3472D-AB27-49F1-8D2A-57A011EC7EA3}"
+Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "1.simp", "..\simp\platform\msvc2008\projects\simp.icproj", "{B4B3472D-AB27-49F1-8D2A-57A011EC7EA3}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.gum", "..\gum\platform\msvc2008\projects\gum.vcproj", "{70C5478D-6D53-4F75-99D4-F06373175C83}"
 EndProject
@@ -1533,8 +1533,8 @@ Global
 		{E1AF345A-7BF3-4765-B8D5-DC8C7CA600E8}.Release|Win32.ActiveCfg = Release|Win32
 		{19A86E23-A404-4225-B281-33EA2AA6B125}.Debug|Win32.ActiveCfg = Debug|Win32
 		{19A86E23-A404-4225-B281-33EA2AA6B125}.Release|Win32.ActiveCfg = Release|Win32
-		{58D28D49-E1C6-4F88-8963-BBC3869244D8}.Debug|Win32.ActiveCfg = Debug|Win32
-		{58D28D49-E1C6-4F88-8963-BBC3869244D8}.Release|Win32.ActiveCfg = Release|Win32
+		{C744C7BB-9F74-4F1E-A686-34A3352105C0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C744C7BB-9F74-4F1E-A686-34A3352105C0}.Release|Win32.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

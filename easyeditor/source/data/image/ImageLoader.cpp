@@ -8,10 +8,9 @@
 #include "PPMAdapter.h"
 #include "EE_ShaderLab.h"
 
-#include <gum/ImageLoader.h>
-
 #include <dtex_pvr.h>
 #include <dtex_etc2.h>
+#include <gimg_import.h>
 
 #include <gl/glew.h>
 
@@ -80,10 +79,10 @@ uint8_t* ImageLoader::FileToPixels(const std::string& filepath, int& width, int&
 	}
 
 	if (channels == 4) {
-		gum::ImageLoader::RemoveGhostPixel(data, width, height);
-		gum::ImageLoader::FormatPixelsAlpha(data, width, height, 0);
+		gimg_remove_ghost_pixel(data, width, height);
+		gimg_format_pixels_alpha(data, width, height, 0);		
 		if (Config::Instance()->GetSettings().pre_multi_alpha) {
-			gum::ImageLoader::PreMuiltiAlpha(data, width, height);
+			gimg_pre_muilti_alpha(data, width, height);
 		}
 	}
 

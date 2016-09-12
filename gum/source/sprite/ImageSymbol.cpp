@@ -22,6 +22,11 @@ ImageSymbol::ImageSymbol(const std::string& filepath)
 	InitTex(m_img->GetS2Tex(), q, sm::vec2(0, 0));
 }
 
+ImageSymbol::ImageSymbol(const simp::NodePicture* node)
+{
+	
+}
+
 ImageSymbol::~ImageSymbol()
 {
 	if (m_img) {
