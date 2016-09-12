@@ -200,6 +200,7 @@ void LibraryPanel::InitPages(StagePanel* stage, ee::PropertySettingPanel* proper
 		page->AddEditOP(draw_poly_op);
 		page->AddEditOP(draw_line_op);
 		AddPage(page);
+		m_collision_page = page;
 	}
 	{
 		LibraryPage* page = new LibraryPage(this, "ÉãÏñ»ú", LT_DEFAULT, id++, s2::CM_PERSPECTIVE_NO_HEIGHT);
@@ -259,6 +260,11 @@ void LibraryPanel::Refresh()
 Layer* LibraryPanel::GetTerrainLayer()
 {
 	return m_terrain_page->GetLayer();
+}
+
+Layer* LibraryPanel::GetCollisionLayer()
+{
+	return m_collision_page->GetLayer();
 }
 
 LayerType LibraryPanel::GetLayerType(int idx) const

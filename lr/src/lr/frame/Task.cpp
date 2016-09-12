@@ -2,6 +2,7 @@
 #include "FileIO.h"
 #include "Frame.h"
 #include "ToolBar.h"
+#include "CheckForStore.h"
 
 #include "view/LibraryPanel.h"
 #include "view/StagePanel.h"
@@ -56,6 +57,7 @@ void Task::Load(const char* filename)
 void Task::Store(const char* filename) const
 {
 	FileIO::Store(filename, m_library, m_stage, m_grouptree);
+	CheckForStore::CheckCollisionLayer(m_library->GetCollisionLayer());
 }
 
 bool Task::IsDirty() const

@@ -186,6 +186,14 @@
 			Name="frame"
 			>
 			<File
+				RelativePath="..\..\..\src\lr\frame\CheckForStore.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\lr\frame\CheckForStore.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\lr\frame\config.h"
 				>
 			</File>

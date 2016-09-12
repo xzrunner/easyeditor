@@ -45,6 +45,7 @@ public:
 	void Refresh();
 
 	Layer* GetTerrainLayer();
+	Layer* GetCollisionLayer();
 
 	LayerType GetLayerType(int idx) const;
 	s2::CameraMode GetLayerCameraMode(int idx) const;
@@ -69,6 +70,7 @@ private:
 	LibraryPage* m_unit_page;
 	LibraryPage* m_path_page;
 	LibraryPage* m_level_page;
+	LibraryPage* m_collision_page;
 
 	DECLARE_EVENT_TABLE()
 
