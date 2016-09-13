@@ -12,6 +12,8 @@ static const int SCREEN_SCALE		= 16;
 
 static const int PAGE_SIZE			= 4096;
 
+#define ALIGN_4BYTE(x) (((x) + 3) & ~3)
+
 }
 
 #endif // _SIMP_DEFINES_H_

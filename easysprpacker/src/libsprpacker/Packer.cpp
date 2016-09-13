@@ -128,7 +128,6 @@ void Packer::OutputEptDesc(const std::string& outfile) const
 	int count = textures.size();
 
 	int out_sz = 0;
-	out_sz += sizeof(int);						// version
 	out_sz += sizeof(int);						// count
 	out_sz += count * sizeof(uint16_t) * 2;		// size
 	out_sz += count * sizeof(uint16_t);			// type

@@ -12,6 +12,8 @@
 #include "P2dSprLoader.h"
 #include "MeshSprLoader.h"
 
+#include <simp/simp_types.h>
+
 #include <sprite2/S2_Symbol.h>
 #include <sprite2/ImageSprite.h>
 #include <sprite2/Scale9Sprite.h>
@@ -24,6 +26,8 @@
 #include <sprite2/MeshSprite.h>
 #include <sprite2/MaskSprite.h>
 #include <sprite2/TrailSprite.h>
+
+#include <assert.h>
 
 namespace gum
 {
@@ -154,6 +158,19 @@ s2::Sprite* SpriteFactory::Create(const Json::Value& val, const std::string& dir
 	}
 
 	return spr;
+}
+
+s2::Sprite* SpriteFactory::Create(const void* node, int type)
+{
+	switch (type)
+	{
+	case simp::TYPE_IMAGE:
+		break;
+	default:
+		assert(0);
+	}
+
+	return NULL;
 }
 
 }

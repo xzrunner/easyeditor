@@ -3,6 +3,8 @@
 
 #include <CU_Uncopyable.h>
 
+#include <string>
+
 #include <stdint.h>
 
 namespace simp
@@ -20,7 +22,10 @@ public:
 	uint16_t UInt16();
 	uint32_t UInt32();
 
+	const char* Block(int sz);
+
 	const char* String(Allocator& alloc);
+	std::string String();
 
 	uint32_t RGBA();
 	uint32_t ABGR();
@@ -30,8 +35,6 @@ public:
 	bool Empty() const { return m_size == 0; }
 
 private:
-//	Page* pack;
-
 	const char* m_stream;
 	int m_size;
 

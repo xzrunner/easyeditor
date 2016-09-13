@@ -5,6 +5,7 @@
 #include "ResourceManager.h"
 
 #include <sprite2/Texture.h>
+#include <simp/FileLoader.h>
 
 #include <SM_Vector.h>
 
@@ -24,6 +25,8 @@ public:
 
 	virtual bool LoadFromFile(const std::string& filepath);
 
+	void LoadBin(const std::string& filepath);
+
 	sm::ivec2 GetSize() const {
 		return sm::ivec2(m_width, m_height);
 	}
@@ -35,7 +38,15 @@ public:
 	const std::string& GetFilepath() const { return m_filepath; }
 
 private:
-	void Load();
+	class Loader : public simp::FileLoader
+	{
+	public:
+		Loader(const std::string& filepath, Image* img);
+	protected:
+		virtual void OnLoad(simp::ImportStream& is);
+	private:
+		Image* m_img;
+	}; // Loader
 
 private:
 	std::string m_filepath;

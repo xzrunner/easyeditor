@@ -109,6 +109,8 @@ void PackToBin::PageIndex(const std::string& filepath, const std::vector<Page*>&
 	}
 
 	// pages
+	uint16_t page_n = pages.size();
+	pack(page_n, &ptr);
 	for (int i = 0, n = pages.size(); i < n; ++i) {
 		uint32_t min = pages[i]->m_id_min,
 			     max = pages[i]->m_id_max;

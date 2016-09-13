@@ -15,8 +15,18 @@ namespace gum
 class SpriteFactory
 {
 public:
+	/**
+	 *  @brief
+	 *    json
+	 */	
 	s2::Sprite* Create(const std::string& filepath) const;
 	s2::Sprite* Create(const Json::Value& val, const std::string& dir) const;
+
+	/**
+	 *  @brief
+	 *    binary
+	 */	
+	s2::Sprite* Create(const void* node, int type);
 
 	SINGLETON_DECLARATION(SpriteFactory);
 

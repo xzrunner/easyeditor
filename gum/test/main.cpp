@@ -42,7 +42,7 @@
 //test::TestTask* task = new test::TestScale9;
 //test::TestTexture* task = new test::TestTexture;
 //test::TestLabel* task = new test::TestLabel;
-test::TestComplex* task = new test::TestComplex;
+//test::TestComplex* task = new test::TestComplex;
 //test::TestAnim* task = new test::TestAnim;
 //test::TestParticle3d* task = new test::TestParticle3d;
 //test::TestParticle2d* task = new test::TestParticle2d;
@@ -50,7 +50,7 @@ test::TestComplex* task = new test::TestComplex;
 //test::TestMask* task = new test::TestMask;
 //test::TestTrail* task = new test::TestTrail;
 
-//test::TestPack* task = new test::TestPack;
+test::TestPack* task = new test::TestPack;
 
 void 
 display(void) {

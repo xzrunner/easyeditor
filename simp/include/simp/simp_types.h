@@ -4,17 +4,17 @@
 namespace simp
 {
 
-#define TYPE_EMPTY			0
-#define TYPE_IMAGE			1
-#define TYPE_SCALE9			3
-#define TYPE_SCALE9_SPR		4
-#define TYPE_ICON			5
-#define TYPE_ICON_SPR		6
-#define TYPE_TEXTURE		7
-#define TYPE_LABEL			9
-#define TYPE_COMPLEX		11
-#define TYPE_COMPLEX_SPR	12
-#define TYPE_ANIMATION		13
+static const int TYPE_INVALID		= 0;
+static const int TYPE_IMAGE			= 1;
+static const int TYPE_SCALE9		= 3;
+static const int TYPE_SCALE9_SPR	= 4;
+static const int TYPE_ICON			= 5;
+static const int TYPE_ICON_SPR		= 6;
+static const int TYPE_TEXTURE		= 7;
+static const int TYPE_LABEL			= 9;
+static const int TYPE_COMPLEX		= 11;
+static const int TYPE_COMPLEX_SPR	= 12;
+static const int TYPE_ANIMATION		= 13;
 
 }
 

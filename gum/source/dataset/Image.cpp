@@ -3,8 +3,10 @@
 #include "StringHelper.h"
 #include "Exception.h"
 
+#include <fault.h>
 #include <gimg_import.h>
 #include <gimg_typedef.h>
+#include <simp/ImportStream.h>
 
 namespace gum
 {
@@ -59,6 +61,73 @@ bool Image::LoadFromFile(const std::string& filepath)
 	m_s2_tex->InitOri(w, h);
 
 	return true;
+}
+
+void Image::LoadBin(const std::string& filepath)
+{
+	if (m_filepath == filepath) {
+		return;
+	}
+
+	Loader loader(filepath, this);
+	loader.Load();
+
+	m_filepath = filepath;
+}
+
+// void Image::Load(const std::string& filepath, int w, int h, uint8_t* pixels)
+// {
+// 	m_filepath = filepath;
+// 
+// 	m_width = w;
+// 	m_height = h;
+// 
+// 	m_format = TEXTURE_RGBA8;
+// 	m_id = RenderContext::Instance()->CreateTexture(pixels, w, h, (TEXTURE_FORMAT)m_format);
+// 
+// 	m_s2_tex->Init(w, h, m_id);
+// 	m_s2_tex->InitOri(w, h);
+// }
+
+/************************************************************************/
+/* class Image::Loader                                                  */
+/************************************************************************/
+
+Image::Loader::Loader(const std::string& filepath, Image* img) 
+	: simp::FileLoader(filepath) 
+	, m_img(img)
+{
+}
+
+void Image::Loader::OnLoad(simp::ImportStream& is)
+{
+	if (m_img->m_id != 0) {
+		RenderContext::Instance()->ReleaseTexture(m_img->m_id);
+	}
+
+	uint8_t type = is.UInt8();
+	switch (type)
+	{
+	case GIT_PNG:
+		{
+			int w = is.UInt16(),
+				h = is.UInt16();
+			const char* pixels = is.Block(w * h * 4);
+
+		 	m_img->m_width = w;
+		 	m_img->m_height = h;
+		 
+		 	m_img->m_format = TEXTURE_RGBA8;
+		 	m_img->m_id = RenderContext::Instance()->CreateTexture((const uint8_t*)pixels, 
+				w, h, (TEXTURE_FORMAT)(m_img->m_format));
+		 
+		 	m_img->m_s2_tex->Init(w, h, m_img->m_id);
+		 	m_img->m_s2_tex->InitOri(w, h);
+		}
+		break;
+	default:
+		fault("unknown image type! \n");
+	}
 }
 
 }
