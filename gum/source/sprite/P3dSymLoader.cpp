@@ -86,8 +86,8 @@ void P3dSymLoader::Store(p3d_emitter_cfg* cfg) const
 		dst.scale_start = src.scale_start * 0.01f;
 		dst.scale_end = src.scale_end * 0.01f;
 
-		dst.angle = src.angle;
-		dst.angle_var = src.angle_var;
+		dst.angle = src.angle * SM_DEG_TO_RAD;
+		dst.angle_var = src.angle_var * SM_DEG_TO_RAD;
 
 		memcpy(&dst.mul_col_begin.r, &src.mul_col_begin.r, sizeof(dst.mul_col_begin));
 		memcpy(&dst.mul_col_end.r, &src.mul_col_end.r, sizeof(dst.mul_col_end));
