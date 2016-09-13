@@ -25,6 +25,9 @@ public:
 
 	Symbol* GetSymbol() { return m_sym; }
 
+protected:
+	virtual void OnKeyHook(int key_code);
+
 private:
 	Symbol* m_sym;
 

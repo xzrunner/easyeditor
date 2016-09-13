@@ -2,6 +2,7 @@
 #include "StageCanvas.h"
 #include "Symbol.h"
 #include "SymbolContainer.h"
+#include "FileSaver.h"
 
 #include <easyshape.h>
 
@@ -45,6 +46,13 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 StagePanel::~StagePanel()
 {
 	m_sym->RemoveReference();
+}
+
+void StagePanel::OnKeyHook(int key_code)
+{
+	if (GetKeyState(WXK_CONTROL) && key_code == 'S') {
+		FileSaver::Store(m_sym->GetFilepath().c_str(), m_sym);
+	}
 }
 
 }
