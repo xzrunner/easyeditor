@@ -103,4 +103,38 @@ void FixJsonBase::FixScale9(const std::string& path) const
 	}
 }
 
+void FixJsonBase::FixLR(const std::string& path) const
+{
+	std::string filepath = ee::FileHelper::GetAbsolutePath(path);
+
+	Json::Value value;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filepath.c_str());
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, value);
+	fin.close();
+
+	bool dirty = false;
+
+	Json::Value& layer_val = value["layer"];
+	for (int i = 0, n = layer_val.size(); i < n; ++i) {
+		Json::Value& spr_val = layer_val[i]["sprite"];
+		for (int j = 0, m = spr_val.size(); j < m; ++j) {
+			if (FixSprite(path, spr_val[j])) {
+				dirty = true;
+			}
+		}
+	}
+
+	if (dirty) {
+		Json::StyledStreamWriter writer;
+		std::locale::global(std::locale(""));
+		std::ofstream fout(filepath.c_str());
+		std::locale::global(std::locale("C"));	
+		writer.write(fout, value);
+		fout.close();
+	}
+}
+
 }

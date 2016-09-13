@@ -17,6 +17,7 @@ protected:
 	void FixComplex(const std::string& filepath) const;
 	void FixAnim(const std::string& filepath) const;
 	void FixScale9(const std::string& filepath) const;
+	void FixLR(const std::string& filepath) const;
 
 }; // FixJsonBase
 
