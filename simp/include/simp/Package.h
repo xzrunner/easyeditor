@@ -23,7 +23,11 @@ public:
 	Package(const std::string& filepath);
 	~Package();
 
-	const void* QueryNode(const std::string& name, int* type);
+	uint32_t QueryID(const std::string& name) const;
+
+	const void* QueryNode(uint32_t id, int* type);
+
+	std::string GetImagePath(int idx) const;
 
 private:
 	void LoadIndex();

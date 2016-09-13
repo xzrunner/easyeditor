@@ -13,6 +13,7 @@
 #include "MeshSprLoader.h"
 
 #include <simp/simp_types.h>
+#include <simp/NodePicture.h>
 
 #include <sprite2/S2_Symbol.h>
 #include <sprite2/ImageSprite.h>
@@ -165,6 +166,9 @@ s2::Sprite* SpriteFactory::Create(const void* node, int type)
 	switch (type)
 	{
 	case simp::TYPE_IMAGE:
+		{
+			simp::NodePicture* pic = (simp::NodePicture*)node;		
+		}
 		break;
 	default:
 		assert(0);

@@ -14,6 +14,9 @@
 #include <stddef.h>
 #include <assert.h>
 
+#include <boost/lexical_cast.hpp>
+
+
 namespace simp
 {
 
@@ -27,23 +30,32 @@ Package::~Package()
 {
 }
 
-const void* Package::QueryNode(const std::string& name, int* type)
+uint32_t Package::QueryID(const std::string& name) const
+{
+	std::map<std::string, uint32_t>::const_iterator itr 
+		= m_export_names.find(name);
+	if (itr != m_export_names.end()) {
+		return itr->second;
+	} else {
+		return 0xffffffff;
+	}
+}
+
+const void* Package::QueryNode(uint32_t id, int* type)
 {
 	*type = TYPE_INVALID;
-
-	std::map<std::string, uint32_t>::iterator itr 
-		= m_export_names.find(name);
-	if (itr == m_export_names.end()) {
-		return NULL;
-	}
-
-	uint32_t id = itr->second;
 	Page* page = QueryPage(id);
-	if (!page) {
+	if (page) {
+		return page->Query(id, type);
+	} else {
 		return NULL;
-	}
+	}	
+}
 
-	return page->Query(id, type);
+std::string Package::GetImagePath(int idx) const
+{
+	std::string s_idx = boost::lexical_cast<std::string>(idx + 1);
+	return m_filepath + "." + s_idx + ".ept";
 }
 
 void Package::LoadIndex()

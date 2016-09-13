@@ -232,14 +232,6 @@
 			Name="dataset"
 			>
 			<File
-				RelativePath="..\..\..\source\dataset\Package.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\gum\Package.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\include\gum\Resource.h"
 				>
 			</File>
@@ -376,6 +368,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\include\gum\ImageSymbolOld.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\sprite\ImageSymLoader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\gum\ImageSymLoader.h"
 					>
 				</File>
 			</Filter>

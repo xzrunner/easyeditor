@@ -25,8 +25,6 @@ public:
 
 	virtual bool LoadFromFile(const std::string& filepath);
 
-	void LoadBin(const std::string& filepath);
-
 	sm::ivec2 GetSize() const {
 		return sm::ivec2(m_width, m_height);
 	}
@@ -36,6 +34,10 @@ public:
 	s2::Texture* GetS2Tex() const { return m_s2_tex; }
 
 	const std::string& GetFilepath() const { return m_filepath; }
+
+private:
+	bool LoadRaw();
+	bool LoadBin();
 
 private:
 	class Loader : public simp::FileLoader

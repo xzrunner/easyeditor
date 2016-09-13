@@ -3,6 +3,7 @@
 #include "SymFileType.h"
 
 #include "ImageSymbol.h"
+#include "ImageSymLoader.h"
 #include "Scale9SymLoader.h"
 #include "TextureSymLoader.h"
 #include "TextboxSymbol.h"
@@ -64,7 +65,12 @@ s2::Symbol* SymbolFactory::Create(const std::string& filepath) const
 	switch (type)
 	{
 	case IMAGE:
-		ret = new ImageSymbol(filepath);
+		{
+			ImageSymbol* sym = new ImageSymbol;
+			ImageSymLoader loader(sym);
+			loader.Load(filepath);
+			ret = sym;
+		}
 		break;
 	case SCALE9:
 		{

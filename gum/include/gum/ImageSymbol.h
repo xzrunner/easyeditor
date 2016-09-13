@@ -15,10 +15,10 @@ class Image;
 class ImageSymbol : public s2::ImageSymbol
 {
 public:
-	ImageSymbol(const std::string& filepath);
-	ImageSymbol(const simp::NodePicture* node);
+	ImageSymbol();
 	virtual ~ImageSymbol();
 
+	void SetImage(Image* img);
 	const Image* GetImage() const { return m_img; }
 
 protected:

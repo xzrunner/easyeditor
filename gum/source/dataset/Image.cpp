@@ -8,6 +8,8 @@
 #include <gimg_typedef.h>
 #include <simp/ImportStream.h>
 
+#include <assert.h>
+
 namespace gum
 {
 
@@ -27,11 +29,25 @@ Image::~Image()
 
 bool Image::LoadFromFile(const std::string& filepath)
 {
-	m_filepath = filepath;
+	assert(m_filepath != filepath);
 
+	m_filepath = filepath;
+	
+	bool ret = false;
+	if (filepath.find(".ept") != std::string::npos) {
+		ret = LoadBin();
+	} else {
+		ret = LoadRaw();
+	}
+
+	return ret;
+}
+
+bool Image::LoadRaw()
+{
 	int w, h;
 	GIMG_PIXEL_FORMAT fmt;
-	uint8_t* pixels = gimg_import(filepath.c_str(), &w, &h, &fmt);
+	uint8_t* pixels = gimg_import(m_filepath.c_str(), &w, &h, &fmt);
 	if (!pixels) {
 		return false;
 	}
@@ -63,16 +79,11 @@ bool Image::LoadFromFile(const std::string& filepath)
 	return true;
 }
 
-void Image::LoadBin(const std::string& filepath)
+bool Image::LoadBin()
 {
-	if (m_filepath == filepath) {
-		return;
-	}
-
-	Loader loader(filepath, this);
+	Loader loader(m_filepath, this);
 	loader.Load();
-
-	m_filepath = filepath;
+	return true;
 }
 
 // void Image::Load(const std::string& filepath, int w, int h, uint8_t* pixels)
