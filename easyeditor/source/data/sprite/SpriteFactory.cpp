@@ -66,7 +66,7 @@ Sprite* SpriteFactory::Create(Symbol* sym)
 
 	if (spr) {
 		Insert(spr);
-		spr->SetName(std::string("_sprite") + StringHelper::ToString(m_id++));
+		spr->SetName(NextName());
 	}
 
 	if (!sym->tag.empty()) {
@@ -123,6 +123,11 @@ void SpriteFactory::Remove(Sprite* spr)
 				++itr_sprite;
 		}
 	}
+}
+
+std::string SpriteFactory::NextName() const
+{
+	return "_sprite" + StringHelper::ToString(m_id++);
 }
 
 void SpriteFactory::UpdateBoundings(const Symbol& sym)

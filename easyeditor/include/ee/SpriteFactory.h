@@ -21,6 +21,8 @@ public:
 	void Insert(Sprite* spr);
 	void Remove(Sprite* spr);
 
+	std::string NextName() const;
+
 	void UpdateBoundings(const Symbol& sym);
 
 	typedef Sprite* (*CreateCallback)(Symbol*);
@@ -37,7 +39,7 @@ private:
 	typedef std::vector<Sprite*> SpriteList;
 	std::map<const Symbol*, SpriteList> m_map_symbol2sprites;
 
-	int m_id;
+	mutable int m_id;
 
 private:
 	static SpriteFactory* m_instance;

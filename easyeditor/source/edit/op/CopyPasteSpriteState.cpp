@@ -3,6 +3,7 @@
 #include "SpriteSelection.h"
 #include "sprite_msg.h"
 #include "FetchAllVisitor.h"
+#include "SpriteFactory.h"
 
 #include <algorithm>
 
@@ -18,6 +19,7 @@ CopyPasteSpriteState::CopyPasteSpriteState(SpriteSelection* selection)
 	selection->Clear();
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
 		Sprite* spr = dynamic_cast<Sprite*>(((cu::Cloneable*)sprs[i])->Clone());
+		spr->SetName(SpriteFactory::Instance()->NextName());
 		m_sprs.push_back(spr);
 		selection->Add(spr);
 	}
