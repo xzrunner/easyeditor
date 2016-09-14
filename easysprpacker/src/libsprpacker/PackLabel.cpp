@@ -109,7 +109,7 @@ void PackLabel::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scal
 	uint32_t id = m_id;
 	pack(id, ptr);
 
-	uint8_t type = TYPE_LABEL;
+	uint8_t type = simp::TYPE_LABEL;
 	pack(type, ptr);
 
 	uint16_t w = m_tb.width, h = m_tb.height;

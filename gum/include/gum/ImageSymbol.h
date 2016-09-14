@@ -21,6 +21,8 @@ public:
 	void SetImage(Image* img);
 	const Image* GetImage() const { return m_img; }
 
+	void SetRegion(const sm::ivec2& min, const sm::ivec2& max);
+
 protected:
 	virtual void QueryTexcoords(float* texcoords, int& texid) const;
 	virtual void Proj2Screen(float px, float py, int w, int h, float& sx, float& sy) const;
@@ -31,6 +33,8 @@ protected:
 
 private:
 	Image* m_img;
+
+	float m_texcoords[8];
 
 }; // ImageSymbol
 

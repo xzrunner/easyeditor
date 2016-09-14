@@ -38,7 +38,7 @@ NodeComplex::NodeComplex(Allocator& alloc, ImportStream& is)
 
 int NodeComplex::Size()
 {
-	return sizeof(NodeComplex) + PTR_SIZE_DIFF - ActionSize();
+	return sizeof(NodeComplex) + PTR_SIZE_DIFF - sizeof(Action);
 }
 
 int NodeComplex::ActionSize()

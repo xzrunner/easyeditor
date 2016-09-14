@@ -86,20 +86,6 @@ bool Image::LoadBin()
 	return true;
 }
 
-// void Image::Load(const std::string& filepath, int w, int h, uint8_t* pixels)
-// {
-// 	m_filepath = filepath;
-// 
-// 	m_width = w;
-// 	m_height = h;
-// 
-// 	m_format = TEXTURE_RGBA8;
-// 	m_id = RenderContext::Instance()->CreateTexture(pixels, w, h, (TEXTURE_FORMAT)m_format);
-// 
-// 	m_s2_tex->Init(w, h, m_id);
-// 	m_s2_tex->InitOri(w, h);
-// }
-
 /************************************************************************/
 /* class Image::Loader                                                  */
 /************************************************************************/

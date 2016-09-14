@@ -45,18 +45,19 @@ void PackImage::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TextureP
 
 	char buff[256];
 
-	int src[8];
-	GetImgSrcPos(tp, m_texcoords, src);
-	for (int i = 0; i < 8; ++i) {
-		src[i] *= scale;
-	}
-	sprintf(buff, "{ %d, %d, %d, %d, %d, %d, %d, %d }", 
-		src[0], src[1], src[2], src[3], src[4], src[5], src[6], src[7]);
+	s2::ImageSymbol::Quad quad;
+	GetPackRegion(tp, quad);
+	quad.xmin *= scale;
+	quad.ymin *= scale;
+	quad.xmax *= scale;
+	quad.ymax *= scale;
+	sprintf(buff, "{ %d, %d, %d, %d }",
+		quad.xmin, quad.ymin, quad.xmax, quad.ymax);
 	std::string src_str = buff;
 
 	lua::connect(gen, 2, 
 		lua::assign("tex", ee::StringHelper::ToString(idx)), 
-		lua::assign("src", src_str));
+		lua::assign("quad", src_str));
 
 	gen.detab();
 	gen.line("},");
@@ -73,7 +74,7 @@ int PackImage::SizeOfPackToBin() const
 	sz += sizeof(uint32_t);			// id
 	sz += sizeof(uint8_t);			// type
 	sz += sizeof(uint8_t);			// texid
-	sz += sizeof(uint16_t) * 8;		// texcoords
+	sz += sizeof(uint16_t) * 4;		// texcoords
 	return sz;
 }
 
@@ -82,7 +83,7 @@ void PackImage::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scal
 	uint32_t id = m_id;
 	pack(id, ptr);
 
-	uint8_t type = TYPE_IMAGE;
+	uint8_t type = simp::TYPE_IMAGE;
 	pack(type, ptr);
 
 	uint8_t idx = tp.QueryIdx(m_img->GetFilepath());
@@ -91,12 +92,16 @@ void PackImage::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scal
 	}
 	pack(idx, ptr);
 
-	int src[8];
-	GetImgSrcPos(tp, m_texcoords, src);
-	for (int i = 0; i < 8; ++i) {
-		uint16_t p = static_cast<int>(src[i] * scale);
-		pack(p, ptr);
-	}
+	s2::ImageSymbol::Quad quad;
+	GetPackRegion(tp, quad);
+	uint16_t xmin = quad.xmin;
+	pack(xmin, ptr);
+	uint16_t ymin = quad.ymin;
+	pack(ymin, ptr);
+	uint16_t xmax = quad.xmax;
+	pack(xmax, ptr);
+	uint16_t ymax = quad.ymax;
+	pack(ymax, ptr);
 }
 
 void PackImage::Init(const ee::ImageSymbol* sym)
@@ -105,14 +110,9 @@ void PackImage::Init(const ee::ImageSymbol* sym)
 	if (m_img) {
 		m_img->AddReference();
 	}
-
-	m_texcoords[0].Set(0, 0);
-	m_texcoords[1].Set(0, 1);
-	m_texcoords[2].Set(1, 1);
-	m_texcoords[3].Set(1, 0);
 }
 
-void PackImage::GetImgSrcPos(const ee::TexturePacker& tp, const sm::vec2* texture_coord, int* src) const
+void PackImage::GetPackRegion(const ee::TexturePacker& tp, s2::ImageSymbol::Quad& quad) const
 {
 	const ee::TexturePacker::Frame* tp_frame = tp.Query(m_img->GetFilepath());
 	if (!tp_frame && ee::ImageDataMgr::Instance()->GetDefaultSym() != "") {
@@ -122,34 +122,19 @@ void PackImage::GetImgSrcPos(const ee::TexturePacker& tp, const sm::vec2* textur
 		std::string str = m_img->GetFilepath();
 		throw ee::Exception("Image can't find in tp, %s", str.c_str());
 	}
-	if (!tp_frame->src.rotated) {
-		int left   = static_cast<int>(tp_frame->dst.tex_coords[0].x), 
-			bottom = static_cast<int>(tp_frame->dst.tex_coords[0].y);
-		int width  = static_cast<int>(tp_frame->dst.tex_coords[3].x) - left,
-			height = static_cast<int>(tp_frame->dst.tex_coords[1].y) - bottom;
-		for (int i = 0; i < 4; ++i) {
-			src[i*2]   = static_cast<int>(floor(left + width * texture_coord[i].x + 0.5f));
-			src[i*2+1] = static_cast<int>(floor(bottom + height * texture_coord[i].y + 0.5f));
-		}
-	} else {
-		int left   = static_cast<int>(tp_frame->dst.tex_coords[0].y), 
-			bottom = static_cast<int>(tp_frame->dst.tex_coords[0].x);
-		int width  = static_cast<int>(tp_frame->dst.tex_coords[3].y - left),
-			height = static_cast<int>(tp_frame->dst.tex_coords[1].x - bottom);
-		for (int i = 0; i < 4; ++i) {
-			src[i*2]   = static_cast<int>(floor(bottom + height * texture_coord[i].y + 0.5f));
-			src[i*2+1] = static_cast<int>(floor(left + width * texture_coord[i].x + 0.5f));
-		}
-	}
+
+	quad.xmin = static_cast<int>(tp_frame->dst.tex_coords[0].x);
+	quad.ymin = static_cast<int>(tp_frame->dst.tex_coords[0].y);
+	quad.xmax = static_cast<int>(tp_frame->dst.tex_coords[2].x);
+	quad.ymax = static_cast<int>(tp_frame->dst.tex_coords[2].y);
 
 	int idx = tp.QueryIdx(m_img->GetFilepath());
 	if (idx == -1) {
 		idx = tp.QueryIdx(ee::ImageDataMgr::Instance()->GetDefaultSym());
 	}
 	int h = tp.GetTextureHeight(idx);
-	for (int i = 0; i < 4; ++i) {
-		src[i*2+1] = h - src[i*2+1];
-	}
+	quad.ymin = h - quad.ymin;
+	quad.ymax = h - quad.ymax;
 }
 
 }

@@ -4,6 +4,7 @@
 #include "PackNode.h"
 
 #include <SM_Vector.h>
+#include <sprite2/ImageSymbol.h>
 
 namespace ee { class ImageSymbol; }
 
@@ -35,13 +36,10 @@ public:
 private:
 	void Init(const ee::ImageSymbol* sym);
 
-	void GetImgSrcPos(const ee::TexturePacker& tp, const sm::vec2* texture_coord, 
-		int* src) const;
+	void GetPackRegion(const ee::TexturePacker& tp, s2::ImageSymbol::Quad& quad) const;
 
 private:
 	const ee::Image* m_img;
-
-	sm::vec2 m_texcoords[4];
 
 }; // PackImage
 

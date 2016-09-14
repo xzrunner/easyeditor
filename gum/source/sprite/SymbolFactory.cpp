@@ -15,6 +15,12 @@
 #include "MaskSymLoader.h"
 #include "TrailSymLoader.h"
 
+#include <simp/NodeFactory.h>
+#include <simp/Package.h>
+#include <simp/simp_types.h>
+
+#include <simp/NodePicture.h>
+
 #include <sprite2/Scale9Symbol.h>
 #include <sprite2/TextureSymbol.h>
 #include <sprite2/ComplexSymbol.h>
@@ -24,6 +30,8 @@
 #include <sprite2/MeshSymbol.h>
 #include <sprite2/MaskSymbol.h>
 #include <sprite2/TrailSymbol.h>
+
+#include <assert.h>
 
 namespace gum
 {
@@ -174,7 +182,48 @@ s2::Symbol* SymbolFactory::Create(uint32_t id) const
 
 	s2::Symbol* ret = NULL;
 
+	int type;
+	const void* data = simp::NodeFactory::Instance()->Create(id, &type);
+	assert(data);
+	switch (type)
+	{
+	case simp::TYPE_IMAGE:
+		{
+			const simp::NodePicture* pic = (const simp::NodePicture*)data;
+
+			const simp::Package* pkg = simp::NodeFactory::Instance()->GetPkg(id);
+			std::string filepath = pkg->GetImagePath(pic->texid);
+			
+			ImageSymbol* sym = new ImageSymbol;
+			ImageSymLoader loader(sym);
+			loader.Load(filepath);
+			sym->SetRegion(
+				sm::ivec2(pic->region[0], pic->region[1]), 
+				sm::ivec2(pic->region[2], pic->region[3]));
+			ret = sym;
+		}
+		break;
+	case simp::TYPE_COMPLEX:
+		{
+			s2::ComplexSymbol* sym = new s2::ComplexSymbol;
+			ComplexSymLoader loader(sym);
+			loader.LoadBin((const simp::NodeComplex*)data);
+			ret = sym;
+		}
+		break;
+	}	
+
 	return ret;
+}
+
+s2::Symbol* SymbolFactory::Create(const std::string& pkg_name, const std::string& node_name) const
+{
+	uint32_t id = simp::NodeFactory::Instance()->GetID(pkg_name, node_name);
+	if (id != 0xffffffff) {
+		return Create(id);
+	} else {
+		return NULL;
+	}
 }
 
 }

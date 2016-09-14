@@ -16,9 +16,18 @@ namespace gum
 class SymbolFactory
 {
 public:
+	/**
+	 *  @brief
+	 *    raw, json res
+	 */		
 	s2::Symbol* Create(const std::string& filepath) const;
 
+	/**
+	 *  @brief
+	 *    pack, binary res
+	 */	
 	s2::Symbol* Create(uint32_t id) const;
+	s2::Symbol* Create(const std::string& pkg_name, const std::string& node_name) const;
 
 private:
 	mutable std::map<std::string, s2::Symbol*> m_path_cache;

@@ -55,7 +55,7 @@ void PackComplexSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float
 	uint32_t id = m_id;
 	pack(id, ptr);
 
-	uint8_t type = TYPE_COMPLEX_SPR;
+	uint8_t type = simp::TYPE_COMPLEX_SPR;
 	pack(type, ptr);
 
 	uint32_t sym = m_sym->GetID();

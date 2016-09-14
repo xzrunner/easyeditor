@@ -3,6 +3,7 @@
 #include "SpriteFactory.h"
 
 #include <sprite2/ComplexSymbol.h>
+#include <simp/NodeComplex.h>
 
 #include <fstream>
 
@@ -54,6 +55,37 @@ void ComplexSymLoader::LoadJson(const std::string& filepath)
 	}
 
 	LoadJsonAction(value, m_sym);
+}
+
+void ComplexSymLoader::LoadBin(const simp::NodeComplex* node)
+{
+	sm::rect scissor;
+	scissor.xmin = node->scissor[0];
+	scissor.ymin = node->scissor[1];
+	scissor.xmax = node->scissor[2];
+	scissor.ymax = node->scissor[3];
+	m_sym->SetScissor(scissor);
+
+	m_sym->Clear();
+	for (int i = 0; i < node->sprs_n; ++i) {
+		s2::Sprite* spr = SpriteFactory::Instance()->Create(node->sprs[i]);
+		m_sym->Add(spr);
+	}
+
+	const std::vector<s2::Sprite*>& children = m_sym->GetChildren();
+	std::vector<s2::ComplexSymbol::Action> dst;
+	dst.reserve(node->actions_n);
+	for (int i = 0; i < node->actions_n; ++i) {
+		const simp::NodeComplex::Action& src_action = node->actions[i];
+		s2::ComplexSymbol::Action dst_action;
+		dst_action.name = src_action.name;
+		dst_action.sprs.reserve(src_action.n);
+		for (int j = 0; j < src_action.n; ++j) {
+			dst_action.sprs.push_back(children[src_action.idx[j]]);
+		}
+		dst.push_back(dst_action);
+	}
+	m_sym->SetActions(dst);
 }
 
 void ComplexSymLoader::LoadJsonAction(const Json::Value& val, s2::ComplexSymbol* sym)

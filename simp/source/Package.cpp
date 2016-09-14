@@ -114,6 +114,8 @@ void Package::LoadPage(int idx)
 	s << idx + 1;
  	std::string filepath = m_filepath + "." + s.str() + ".epe";
  	page->Load(filepath);
+
+	m_pages[idx].page = page;
 }
 
 /************************************************************************/

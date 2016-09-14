@@ -1,12 +1,12 @@
 #include "TestPack.h"
 
 #include <simp/NodeFactory.h>
-#include <sprite2/TrailSprite.h>
+#include <simp/Package.h>
 #include <sprite2/DrawNode.h>
+#include <sprite2/ComplexSprite.h>
 #include <gum/RenderContext.h>
 #include <gum/SymbolFactory.h>
 #include <gum/SpriteFactory.h>
-#include <gum/Package.h>
 #include <shaderlab.h>
 
 namespace test
@@ -21,23 +21,15 @@ void TestPack::Init()
 	sl_mgr->CreateShader(sl::SPRITE2, new sl::Sprite2Shader(sl_rc));
 	gum::RenderContext::Instance()->SetCamera(0, 0, 1, 1);
 
- 	gum::Package* pkg = new gum::Package("pack/test");
-// 	pkg->LoadAllImages();
-
+ 	simp::Package* pkg = new simp::Package("pack/test");
 	simp::NodeFactory::Instance()->AddPkg(pkg, "test", 0);
 
-	int type = 0;
-	const void* node = simp::NodeFactory::Instance()->Create("test", "img", &type);
-
-	int zz = 0;
-	
-
-//	s2::Symbol* sym = gum::SymbolFactory::Instance()->Create("raw\\shape_trail.json");
-// 	{
-// 		s2::TrailSprite* spr = new s2::TrailSprite(sym);
-// 		spr->SetPosition(sm::vec2(50, 0));
-// 		m_sprites.push_back(spr);
-// 	}
+	{
+		s2::Symbol* sym = gum::SymbolFactory::Instance()->Create("test", "img");
+		s2::Sprite* spr = new s2::ComplexSprite(sym);
+		spr->SetPosition(sm::vec2(0, 0));
+		m_sprites.push_back(spr);
+	}
 }
 
 void TestPack::Resize(int width, int height)
@@ -63,7 +55,7 @@ void TestPack::Update()
 	{
 		s2::Sprite* spr = m_sprites[i];
 
-		spr->Translate(sm::vec2(0.1, 0.1));
+//		spr->Translate(sm::vec2(0.1, 0.1));
 
 		s2::RenderParams params;
 		params.mt = spr->GetTransMatrix();

@@ -7,6 +7,8 @@
 
 #include <string>
 
+#include <stdint.h>
+
 namespace s2 { class Sprite; class Symbol; }
 
 namespace gum
@@ -17,16 +19,16 @@ class SpriteFactory
 public:
 	/**
 	 *  @brief
-	 *    json
+	 *    raw, json res
 	 */	
 	s2::Sprite* Create(const std::string& filepath) const;
 	s2::Sprite* Create(const Json::Value& val, const std::string& dir) const;
 
 	/**
 	 *  @brief
-	 *    binary
+	 *    pack, binary res
 	 */	
-	s2::Sprite* Create(const void* node, int type);
+	s2::Sprite* Create(uint32_t id);
 
 	SINGLETON_DECLARATION(SpriteFactory);
 

@@ -96,7 +96,7 @@ void PackScale9::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float sca
 	uint32_t id = m_id;
 	pack(id, ptr);
 
-	uint8_t type = TYPE_SCALE9;
+	uint8_t type = simp::TYPE_SCALE9;
 	pack(type, ptr);
 
 	uint8_t s9_type = m_type;

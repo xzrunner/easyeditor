@@ -8,6 +8,7 @@
 #include <string>
 
 namespace s2 { class ComplexSymbol; }
+namespace simp { class NodeComplex; }
 
 namespace gum
 {
@@ -19,6 +20,7 @@ public:
 	~ComplexSymLoader();
 
 	void LoadJson(const std::string& filepath);
+	void LoadBin(const simp::NodeComplex* node);
 
 public:
 	struct Action

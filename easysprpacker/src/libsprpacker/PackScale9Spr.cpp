@@ -60,7 +60,7 @@ void PackScale9Spr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp,
 	uint32_t id = m_id;
 	pack(id, ptr);
 
-	uint8_t type = TYPE_SCALE9_SPR;
+	uint8_t type = simp::TYPE_SCALE9_SPR;
 	pack(type, ptr);
 
 	uint32_t sym = m_sym->GetID();

@@ -14,7 +14,7 @@ class NodePicture : private cu::Uncopyable
 {
 public:
 	int texid;
-	uint16_t texcoords[8];
+	uint16_t region[4];
 
 public:
 	NodePicture(ImportStream& is);

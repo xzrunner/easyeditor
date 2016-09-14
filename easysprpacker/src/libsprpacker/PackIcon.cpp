@@ -50,7 +50,7 @@ void PackIcon::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scale
 	uint32_t id = m_id;
 	pack(id, ptr);
 
-	uint8_t type = TYPE_ICON;
+	uint8_t type = simp::TYPE_ICON;
 	pack(type, ptr);
 
 	uint8_t icon_type = m_type;

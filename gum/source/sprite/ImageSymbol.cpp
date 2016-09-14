@@ -5,10 +5,14 @@
 
 namespace gum
 {
-
+ 
 ImageSymbol::ImageSymbol()
 	: m_img(NULL)
 {
+	m_texcoords[0] = 0; m_texcoords[1] = 0;
+	m_texcoords[2] = 0; m_texcoords[3] = 1;
+	m_texcoords[4] = 1; m_texcoords[5] = 1;
+	m_texcoords[6] = 1; m_texcoords[7] = 0;
 }
 
 ImageSymbol::~ImageSymbol()
@@ -31,16 +35,56 @@ void ImageSymbol::SetImage(Image* img)
 	InitTex(m_img->GetS2Tex(), q, sm::vec2(0, 0));	
 }
 
+void ImageSymbol::SetRegion(const sm::ivec2& min, const sm::ivec2& max)
+{
+	bool rotate = false;
+	if (max.y < min.y) {
+		rotate = true;
+	}
+
+	float hw, hh;
+	sm::ivec2 sz = m_img->GetSize();
+	float txmin, tymin, txmax, tymax;
+	txmin = (float)min.x / sz.x;
+	tymin = (float)min.y / sz.y;
+	txmax = (float)max.x / sz.x;
+	tymax = (float)max.y / sz.y;
+	if (rotate) 
+	{
+		hw = (min.y - max.y) * 0.5f;
+		hh = (max.x - min.x) * 0.5f;
+
+		m_texcoords[0] = txmin; m_texcoords[1] = tymin;
+		m_texcoords[2] = txmax; m_texcoords[3] = tymin;
+		m_texcoords[4] = txmax; m_texcoords[5] = tymax;
+		m_texcoords[6] = txmin; m_texcoords[7] = tymax;
+	}
+	else
+	{
+		hw = (max.x - min.x) * 0.5f;
+		hh = (max.y - min.y) * 0.5f;
+
+		m_texcoords[0] = txmin; m_texcoords[1] = tymin;
+		m_texcoords[2] = txmin; m_texcoords[3] = tymax;
+		m_texcoords[4] = txmax; m_texcoords[5] = tymax;
+		m_texcoords[6] = txmax; m_texcoords[7] = tymin;
+	}
+
+	m_quad.xmin = min.x;
+	m_quad.ymin = min.y;
+	m_quad.xmax = max.x;
+	m_quad.ymax = max.y;
+
+	m_size.xmin = -hw;
+	m_size.ymin = -hh;
+	m_size.xmax = hw;
+	m_size.ymax = hh;
+}
+
 void ImageSymbol::QueryTexcoords(float* texcoords, int& texid) const
 {
 	texid = m_img->GetTexID();
-	float txmin, txmax, tymin, tymax;
-	txmin = tymin = 0;
-	txmax = tymax = 1;
-	texcoords[0] = txmin; texcoords[1] = tymin;
-	texcoords[2] = txmin; texcoords[3] = tymax;
-	texcoords[4] = txmax; texcoords[5] = tymax;
-	texcoords[6] = txmax; texcoords[7] = tymin;
+	memcpy(texcoords, m_texcoords, sizeof(m_texcoords));
 }
 
 void ImageSymbol::Proj2Screen(float px, float py, int w, int h, float& sx, float& sy) const

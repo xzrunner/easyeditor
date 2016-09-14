@@ -7,8 +7,8 @@ namespace simp
 NodePicture::NodePicture(ImportStream& is)
 {
 	texid = is.UInt8();
-	for (int i = 0; i < 8; ++i) {
-		texcoords[i] = is.UInt16();
+	for (int i = 0; i < 4; ++i) {
+		region[i] = is.UInt16();
 	}
 }
 

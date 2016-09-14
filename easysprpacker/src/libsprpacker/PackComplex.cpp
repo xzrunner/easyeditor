@@ -104,7 +104,7 @@ void PackComplex::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float sc
 	uint32_t id = m_id;
 	pack(id, ptr);
 
-	uint8_t type = TYPE_COMPLEX;
+	uint8_t type = simp::TYPE_COMPLEX;
 	pack(type, ptr);
 
 	// scissor

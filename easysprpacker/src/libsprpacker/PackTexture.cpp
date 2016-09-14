@@ -50,7 +50,7 @@ void PackTexture::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float sc
 	uint32_t id = m_id;
 	pack(id, ptr);
 
-	uint8_t type = TYPE_TEXTURE;
+	uint8_t type = simp::TYPE_TEXTURE;
 	pack(type, ptr);
 
 	uint8_t texture_type = m_type;

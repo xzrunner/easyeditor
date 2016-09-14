@@ -13,7 +13,7 @@
 #include "MeshSprLoader.h"
 
 #include <simp/simp_types.h>
-#include <simp/NodePicture.h>
+#include <simp/NodeFactory.h>
 
 #include <sprite2/S2_Symbol.h>
 #include <sprite2/ImageSprite.h>
@@ -161,20 +161,24 @@ s2::Sprite* SpriteFactory::Create(const Json::Value& val, const std::string& dir
 	return spr;
 }
 
-s2::Sprite* SpriteFactory::Create(const void* node, int type)
+s2::Sprite* SpriteFactory::Create(uint32_t id)
 {
+	s2::Sprite* spr = NULL;
+
+	int type;
+	const void* data = simp::NodeFactory::Instance()->Create(id, &type);
+	assert(data);
 	switch (type)
 	{
 	case simp::TYPE_IMAGE:
 		{
-			simp::NodePicture* pic = (simp::NodePicture*)node;		
+			s2::Symbol* sym = SymbolFactory::Instance()->Create(id);
+			spr = new s2::ImageSprite(sym);
 		}
 		break;
-	default:
-		assert(0);
 	}
 
-	return NULL;
+	return spr;
 }
 
 }
