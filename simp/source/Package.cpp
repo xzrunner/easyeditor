@@ -14,9 +14,6 @@
 #include <stddef.h>
 #include <assert.h>
 
-#include <boost/lexical_cast.hpp>
-
-
 namespace simp
 {
 
@@ -54,8 +51,9 @@ const void* Package::QueryNode(uint32_t id, int* type)
 
 std::string Package::GetImagePath(int idx) const
 {
-	std::string s_idx = boost::lexical_cast<std::string>(idx + 1);
-	return m_filepath + "." + s_idx + ".ept";
+	std::stringstream ss;
+	ss << (idx + 1);
+	return m_filepath + "." + ss.str() + ".ept";
 }
 
 void Package::LoadIndex()

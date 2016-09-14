@@ -18,7 +18,7 @@ public:
 
 	void AddPkg(Package* pkg, const std::string& name, int id);
 
-	const void* Create(const std::string& pkg, const std::string& node, int* type);
+	const void* Create(const std::string& pkg_name, const std::string& node_name, int* type);
 
 private:
 	struct PackageWrap
