@@ -8,36 +8,40 @@
 namespace simp
 {
 
-class NodeTrans
+class NodeTrans : private cu::Uncopyable
 {
 public:
-	struct Color
-	{
-		uint32_t type;
-		uint32_t color[1];
+	NodeTrans();
 
-		static int Size() { return sizeof(Color) - sizeof(uint32_t); }
-	};
+	static int Size();
 
-	struct Geometry
-	{
-		uint32_t type;
-		uint32_t geo[1];
+public:
+	// geometry
+	static const int SCALE_MASK			= 1 << 1;
+	static const int SHEAR_MASK			= 1 << 2;
+	static const int OFFSET_MASK		= 1 << 3;
+	static const int POSITION_MASK		= 1 << 4;
+	static const int ANGLE_MASK			= 1 << 5;
 
-		static int Size() { return sizeof(Geometry) - sizeof(uint32_t); }
-	};
+	// color
+	static const int COL_MUL_MASK		= 1 << 11;
+	static const int COL_ADD_MASK		= 1 << 12;
+	static const int COL_R_MASK			= 1 << 13;
+	static const int COL_G_MASK			= 1 << 14;
+	static const int COL_B_MASK			= 1 << 15;
 
-	struct Render
-	{
-		uint32_t type;
-		uint32_t render[1];
+	// shader
+	static const int BLEND_MASK			= 1 << 21;
+	static const int FAST_BLEND_MASK	= 1 << 22;
+	static const int FILTER_MASK		= 1 << 23;	
+	static const int CAMERA_MASK		= 1 << 24;
 
-		static int Size() { return sizeof(Render) - sizeof(uint32_t); }
-	};
+public:
+	uint32_t type;
+	
+	const char* name;
 
-	Color col;
-	Geometry geo;
-	Render render;
+	uint32_t data[1];
 
 }; // NodeTrans
 

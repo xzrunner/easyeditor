@@ -160,6 +160,14 @@
 				RelativePath="..\..\..\src\libsprpacker\PackNode.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\libsprpacker\PackTrans.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libsprpacker\PackTrans.h"
+				>
+			</File>
 			<Filter
 				Name="01.image"
 				>

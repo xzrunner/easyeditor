@@ -10,6 +10,7 @@ namespace simp
 
 class Allocator;
 class ImportStream;
+class NodeTrans;
 
 class NodeComplex : private cu::Uncopyable
 {
@@ -22,6 +23,7 @@ public:
 	};
 
 	uint32_t* sprs;
+	NodeTrans** trans;
 	uint16_t sprs_n;
 
 	uint16_t actions_n;
@@ -35,6 +37,8 @@ public:
 
 	static int Size();
 	static int ActionSize();
+
+	NodeTrans* LoadTrans(Allocator& alloc, ImportStream& is);
 
 }; // NodeComplex
 

@@ -1,6 +1,7 @@
 #include "ComplexSymLoader.h"
 #include "FilepathHelper.h"
 #include "SpriteFactory.h"
+#include "SprTransLoader.h"
 
 #include <sprite2/ComplexSymbol.h>
 #include <simp/NodeComplex.h>
@@ -69,6 +70,7 @@ void ComplexSymLoader::LoadBin(const simp::NodeComplex* node)
 	m_sym->Clear();
 	for (int i = 0; i < node->sprs_n; ++i) {
 		s2::Sprite* spr = SpriteFactory::Instance()->Create(node->sprs[i]);
+		SprTransLoader::Load(spr, node->trans[i]);
 		m_sym->Add(spr);
 	}
 

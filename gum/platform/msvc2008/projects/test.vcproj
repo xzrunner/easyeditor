@@ -219,7 +219,7 @@
 			</Filter>
 		</Filter>
 		<Filter
-			Name="node"
+			Name="s2"
 			>
 			<File
 				RelativePath="..\..\..\test\TestAnim.cpp"
@@ -262,14 +262,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\test\TestPack.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\test\TestPack.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\test\TestParticle2d.cpp"
 				>
 			</File>
@@ -309,6 +301,18 @@
 				RelativePath="..\..\..\test\TestTrail.h"
 				>
 			</File>
+			<Filter
+				Name="pack"
+				>
+				<File
+					RelativePath="..\..\..\test\TestPackTrans.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\test\TestPackTrans.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath="..\..\..\test\main.cpp"

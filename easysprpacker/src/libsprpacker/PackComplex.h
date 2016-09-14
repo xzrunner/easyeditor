@@ -2,6 +2,7 @@
 #define _EASYSPRPACKER_PACK_COMPLEX_H_
 
 #include "PackNode.h"
+#include "PackTrans.h"
 
 #include <SM_Rect.h>
 
@@ -57,6 +58,7 @@ private:
 
 private:
 	std::vector<const PackNode*> m_children;
+	std::vector<const PackTrans> m_children_trans;
 
 	std::vector<Action> m_actions;
 

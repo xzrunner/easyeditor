@@ -1,5 +1,5 @@
-#ifndef _TEST_PACK_H_
-#define _TEST_PACK_H_
+#ifndef _TEST_PACK_TRANS_H_
+#define _TEST_PACK_TRANS_H_
 
 #include "TestTask.h"
 
@@ -10,7 +10,7 @@ namespace s2 { class Sprite; }
 namespace test
 {
 
-class TestPack : public TestTask
+class TestPackTrans : public TestTask
 {
 public:
 	virtual void Init();
@@ -21,8 +21,8 @@ public:
 private:
 	std::vector<s2::Sprite*> m_sprites;
 
-}; // TestPack
+}; // TestPackTrans
 
 }
 
-#endif // _TEST_PACK_H_
+#endif // _TEST_PACK_TRANS_H_

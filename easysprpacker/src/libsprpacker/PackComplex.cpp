@@ -47,8 +47,10 @@ void PackComplex::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::Textur
 	{
 		lua::TableAssign ta(gen, "children", true);
 		for (int i = 0, n = m_children.size(); i < n; ++i) {
-			std::string str = lua::assign("id", ee::StringHelper::ToString(m_children[i]->GetID()));
-			lua::tableassign(gen, "", 1, str);
+			lua::TableAssign assign(gen, "", true);
+			std::string sid = lua::assign("id", ee::StringHelper::ToString(m_children[i]->GetID()));
+			lua::connect(gen, 1, sid);
+			m_children_trans[i].PackToLua(gen);
 		}
 	}
 
@@ -76,6 +78,9 @@ int PackComplex::SizeOfUnpackFromBin() const
 {
 	int sz = simp::NodeComplex::Size();
 	sz += sizeof(uint32_t) * m_children.size();
+	for (int i = 0, n = m_children_trans.size(); i < n; ++i) {
+		sz += m_children_trans[i].SizeOfUnpackFromBin();
+	}
 	for (int i = 0, n = m_actions.size(); i < n; ++i) {
 		sz += m_actions[i].SizeOfUnpackFromBin();
 	}
@@ -96,6 +101,9 @@ int PackComplex::SizeOfPackToBin() const
 	// children
 	sz += sizeof(uint16_t);
 	sz += sizeof(uint32_t) * m_children.size();
+	for (int i = 0, n = m_children_trans.size(); i < n; ++i) {
+		sz += m_children_trans[i].SizeOfPackToBin();
+	}
 	return sz;
 }
 
@@ -130,6 +138,7 @@ void PackComplex::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float sc
 	for (int i = 0; i < children_n; ++i) {
 		uint32_t id = m_children[i]->GetID();
 		pack(id, ptr);
+		m_children_trans[i].PackToBin(ptr);
 	}
 }
 
@@ -137,9 +146,11 @@ void PackComplex::Init(const ecomplex::Symbol* sym)
 {
 	const std::vector<s2::Sprite*>& children = sym->GetChildren();
 	m_children.reserve(children.size());
+	m_children_trans.reserve(children.size());
 	for (int i = 0, n = children.size(); i < n; ++i) {
 		m_children.push_back(PackNodeFactory::Instance()->Create(
 			dynamic_cast<ee::Sprite*>(children[i])));
+		m_children_trans.push_back(*children[i]);
 	}
 
 	const std::vector<s2::ComplexSymbol::Action>& actions = sym->GetActions();
@@ -192,7 +203,7 @@ int PackComplex::Action::
 SizeOfPackToBin() const
 {
 	int sz = 0;
-	sz += sizeof_unpack_str(m_name); // name
+	sz += sizeof_pack_str(m_name); // name
 	// sprs
 	sz += sizeof(uint16_t);	
 	sz += m_sprs.size() * sizeof(uint16_t);

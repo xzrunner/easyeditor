@@ -1,5 +1,6 @@
 #include "RenderShader.h"
 #include "RenderFilter.h"
+#include "FilterFactory.h"
 
 namespace s2
 {
@@ -61,6 +62,19 @@ RenderShader RenderShader::operator * (const RenderShader& rs) const
 	}
 
 	return ret;
+}
+
+void RenderShader::SetFilter(s2::FilterMode mode)
+{
+	if (filter && filter->GetMode() == mode) {
+		return;
+	}
+
+	RenderFilter* _filter = FilterFactory::Instance()->Create(mode);
+	if (filter) {
+		delete filter;
+	}
+	filter = _filter;
 }
 
 }

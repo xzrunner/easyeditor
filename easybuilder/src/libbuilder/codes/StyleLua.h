@@ -6,6 +6,8 @@
 
 #include <ee/StringHelper.h>
 
+#include <vector>
+
 namespace ebuilder
 {
 namespace lua
@@ -68,6 +70,18 @@ static void connect(CodeGenerator& gen, size_t n, ...)
 	std::string str;
 	PARSER_PARAMS(n, str);
 	str += ", ";
+	gen.line(str);
+}
+
+static void connect(CodeGenerator& gen, const std::vector<std::string>& strs)
+{
+	if (strs.empty()) {
+		return;
+	}
+	std::string str;
+	for (int i = 0, n = strs.size(); i < n; ++i) {
+		str += strs[i] + ", ";
+	}
 	gen.line(str);
 }
 

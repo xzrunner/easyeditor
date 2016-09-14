@@ -3,6 +3,7 @@
 
 #include "BlendMode.h"
 #include "FastBlendMode.h"
+#include "FilterMode.h"
 
 #include <stddef.h>
 
@@ -25,6 +26,8 @@ public:
 	~RenderShader();
 
 	RenderShader operator * (const RenderShader& rs) const;
+
+	void SetFilter(FilterMode mode);
 
 }; // RenderShader
 

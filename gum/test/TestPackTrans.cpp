@@ -1,4 +1,4 @@
-#include "TestPack.h"
+#include "TestPackTrans.h"
 
 #include <simp/NodeFactory.h>
 #include <simp/Package.h>
@@ -12,7 +12,7 @@
 namespace test
 {
 
-void TestPack::Init()
+void TestPackTrans::Init()
 {
 	sl::ShaderMgr* sl_mgr = sl::ShaderMgr::Instance();
 	sl_mgr->CreateContext(4096);
@@ -32,12 +32,12 @@ void TestPack::Init()
 	}
 }
 
-void TestPack::Resize(int width, int height)
+void TestPackTrans::Resize(int width, int height)
 {
 	gum::RenderContext::Instance()->OnSize(width, height);
 }
 
-void TestPack::Draw() const
+void TestPackTrans::Draw() const
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) 
 	{
@@ -49,7 +49,7 @@ void TestPack::Draw() const
 	}
 }
 
-void TestPack::Update()
+void TestPackTrans::Update()
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) 
 	{
