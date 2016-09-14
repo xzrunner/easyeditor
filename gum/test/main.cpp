@@ -20,6 +20,7 @@
 #include "TestTrail.h"
 
 #include "TestPackTrans.h"
+#include "TestPackComplex.h"
 
 #include <shaderlab.h>
 #include <sprite2/SprTimer.h>
@@ -50,7 +51,8 @@
 //test::TestMask* task = new test::TestMask;
 //test::TestTrail* task = new test::TestTrail;
 
-test::TestPackTrans* task = new test::TestPackTrans;
+//test::TestPackTrans* task = new test::TestPackTrans;
+test::TestPackComplex* task = new test::TestPackComplex;
 
 void 
 display(void) {

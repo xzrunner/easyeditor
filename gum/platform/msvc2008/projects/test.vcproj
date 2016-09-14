@@ -305,6 +305,14 @@
 				Name="pack"
 				>
 				<File
+					RelativePath="..\..\..\test\TestPackComplex.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\test\TestPackComplex.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\test\TestPackTrans.cpp"
 					>
 				</File>

@@ -18,6 +18,7 @@ void TestMulti::Init()
 	sl::RenderContext* sl_rc = sl_mgr->GetContext();
 	sl_mgr->CreateShader(sl::SPRITE2, new sl::Sprite2Shader(sl_rc));
 	sl_mgr->CreateShader(sl::SHAPE2, new sl::Shape2Shader(sl_rc));
+	sl_mgr->CreateShader(sl::FILTER, new sl::FilterShader(sl_rc));	
 	gum::RenderContext::Instance()->SetCamera(0, 0, 1, 1);
 
 	s2::Symbol* sym = gum::SymbolFactory::Instance()->Create("coin_00.png");

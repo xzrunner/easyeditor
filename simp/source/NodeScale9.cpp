@@ -30,9 +30,12 @@ NodeScale9::NodeScale9(Allocator& alloc, ImportStream& is)
 	for (int i = 0; i < n; ++i)
 	{
 		Grid& g = grids[i];
+
 		g.sym = is.UInt32();
-		g.dir = is.UInt16();
-		g.mirror = is.UInt16();
+
+		uint8_t trans = is.UInt8();
+		g.dir = (trans & 0xf0) >> 4;
+		g.mirror = trans & 0xf;
 	}
 }
 

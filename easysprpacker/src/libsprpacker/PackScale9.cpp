@@ -146,7 +146,7 @@ void PackScale9::Init(const escale9::Symbol* sym)
 			dst.mirror.y = true;
 		}
 		dst.node = PackNodeFactory::Instance()->Create(
-			dynamic_cast<const ee::Symbol*>(src->GetSymbol()));
+			dynamic_cast<const ee::Sprite*>(src));
 	}
 }
 

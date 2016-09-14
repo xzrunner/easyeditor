@@ -1,4 +1,4 @@
-#include "TestPackTrans.h"
+#include "TestPackComplex.h"
 
 #include <simp/NodeFactory.h>
 #include <simp/Package.h>
@@ -12,7 +12,7 @@
 namespace test
 {
 
-void TestPackTrans::Init()
+void TestPackComplex::Init()
 {
 	sl::ShaderMgr* sl_mgr = sl::ShaderMgr::Instance();
 	sl_mgr->CreateContext(4096);
@@ -25,19 +25,19 @@ void TestPackTrans::Init()
 	simp::NodeFactory::Instance()->AddPkg(pkg, "test", 0);
 
 	{
-		s2::Symbol* sym = gum::SymbolFactory::Instance()->Create("test", "img");
+		s2::Symbol* sym = gum::SymbolFactory::Instance()->Create("test", "node");
 		s2::Sprite* spr = new s2::ComplexSprite(sym);
 		spr->SetPosition(sm::vec2(0, 0));
 		m_sprites.push_back(spr);
 	}
 }
 
-void TestPackTrans::Resize(int width, int height)
+void TestPackComplex::Resize(int width, int height)
 {
 	gum::RenderContext::Instance()->OnSize(width, height);
 }
 
-void TestPackTrans::Draw() const
+void TestPackComplex::Draw() const
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) 
 	{
@@ -49,7 +49,7 @@ void TestPackTrans::Draw() const
 	}
 }
 
-void TestPackTrans::Update()
+void TestPackComplex::Update()
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) 
 	{
