@@ -8,6 +8,7 @@ namespace gum
  
 ImageSymbol::ImageSymbol()
 	: m_img(NULL)
+	, m_packed(false)
 {
 	m_texcoords[0] = 0; m_texcoords[1] = 0;
 	m_texcoords[2] = 0; m_texcoords[3] = 1;
@@ -19,6 +20,15 @@ ImageSymbol::~ImageSymbol()
 {
 	if (m_img) {
 		m_img->RemoveReference();
+	}
+}
+
+sm::vec2 ImageSymbol::GetNoTrimedSize() const
+{
+	if (m_packed) {
+		return sm::vec2(m_size.xmax - m_size.xmin, m_size.ymax - m_size.ymin);
+	} else {
+		return m_tex->GetOriSize();
 	}
 }
 
@@ -37,6 +47,8 @@ void ImageSymbol::SetImage(Image* img)
 
 void ImageSymbol::SetRegion(const sm::ivec2& min, const sm::ivec2& max)
 {
+	m_packed = true;
+
 	bool rotate = false;
 	if (max.y < min.y) {
 		rotate = true;

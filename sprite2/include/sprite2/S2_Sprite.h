@@ -59,7 +59,7 @@ public:
 	const float&		GetAngle() const	{ return m_angle; }
 	const sm::vec2&		GetScale() const	{ return m_scale; }
 	const sm::vec2&		GetShear() const	{ return m_shear; }
-	const sm::vec2&		GetOffset() const	{ return m_offset; }
+	const sm::vec2&		GetOffset() const;
 
 	void SetPosition(const sm::vec2& pos);
 	void SetAngle(float angle);

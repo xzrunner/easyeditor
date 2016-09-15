@@ -112,13 +112,13 @@ void PackScale9::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float sca
 		uint32_t id = g.node->GetID();
 		pack(id, ptr);
 
-		uint8_t dir = (int)((g.angle - std::floor(g.angle * 2 / SM_PI)) / (SM_PI / 2) + 0.5f);
+		uint8_t dir = ((int)(floor(g.angle * 2 / SM_PI + 0.5f)) + 4) % 4;
 		uint8_t mirror = 0;
 		if (g.mirror.x) {
 			mirror |= 0x1;
 		}
 		if (g.mirror.y) {
-			mirror |= 0x10;
+			mirror |= 0x2;
 		}
 		uint8_t dm = dir << 4 | mirror;
 		pack(dm, ptr);

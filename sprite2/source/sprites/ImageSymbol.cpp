@@ -61,6 +61,11 @@ sm::rect ImageSymbol::GetBounding(const Sprite* spr) const
 	return m_size;
 }
 
+sm::vec2 ImageSymbol::GetNoTrimedSize() const
+{
+	return m_tex->GetOriSize();
+}
+
 void ImageSymbol::InitTex(Texture* tex, const Quad& quad, const sm::vec2& offset)
 {
 	tex->AddReference();

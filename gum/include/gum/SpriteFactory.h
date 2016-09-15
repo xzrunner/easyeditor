@@ -1,6 +1,8 @@
 #ifndef _GUM_SPRITE_FACTORY_H_
 #define _GUM_SPRITE_FACTORY_H_
 
+#include "SymFileType.h"
+
 #include <CU_Singleton.h>
 
 #include <json/json.h>
@@ -17,6 +19,8 @@ namespace gum
 class SpriteFactory
 {
 public:
+	s2::Sprite* Create(s2::Symbol* sym, SymFileType type) const;
+
 	/**
 	 *  @brief
 	 *    raw, json res

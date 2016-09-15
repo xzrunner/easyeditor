@@ -30,9 +30,10 @@ public:
 	virtual void Draw(const RenderParams& params, const Sprite* spr = NULL) const;
 	virtual sm::rect GetBounding(const Sprite* spr = NULL) const;
 
-	void InitTex(Texture* tex, const Quad& quad, const sm::vec2& offset);
+	// todo: only for scale9 layout
+	virtual sm::vec2 GetNoTrimedSize() const;
 
-	const Texture* GetTexture() const { return m_tex; }
+	void InitTex(Texture* tex, const Quad& quad, const sm::vec2& offset);
 
 protected:
 	virtual void QueryTexcoords(float* texcoords, int& texid) const = 0;

@@ -18,6 +18,12 @@ public:
 	ImageSymbol();
 	virtual ~ImageSymbol();
 
+	/**
+	 *  @interface
+	 *    s2::ImageSymbol
+	 */
+	virtual sm::vec2 GetNoTrimedSize() const;
+
 	void SetImage(Image* img);
 	const Image* GetImage() const { return m_img; }
 
@@ -35,6 +41,8 @@ private:
 	Image* m_img;
 
 	float m_texcoords[8];
+
+	bool m_packed;
 
 }; // ImageSymbol
 

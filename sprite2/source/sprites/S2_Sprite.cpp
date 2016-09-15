@@ -160,6 +160,14 @@ sm::vec2 Sprite::GetCenter() const
 	return center;
 }
 
+const sm::vec2& Sprite::GetOffset() const
+{ 
+	if (!m_offset.IsValid()) {
+		m_offset = m_sym->GetBounding(this).Center();
+	}
+	return m_offset; 
+}
+
 void Sprite::SetPosition(const sm::vec2& pos)
 {
 	if (m_position == pos) {

@@ -6,6 +6,7 @@
 #include <json/json.h>
 
 namespace s2 { class Scale9Sprite; }
+namespace simp { class NodeScale9Spr; }
 
 namespace gum
 {
@@ -17,6 +18,7 @@ public:
 	~Scale9SprLoader();
 
 	void LoadJson(const Json::Value& val, const std::string& dir);
+	void LoadBin(const simp::NodeScale9Spr* node);
 
 private:
 	s2::Scale9Sprite* m_spr;

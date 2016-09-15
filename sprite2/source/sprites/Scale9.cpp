@@ -247,7 +247,7 @@ void Scale9::ResizeSprite(Sprite* spr, const sm::vec2& center,
 		return;
 	}
 
-	sm::vec2 sz = img_sym->GetTexture()->GetOriSize();
+	sm::vec2 sz = img_sym->GetNoTrimedSize();
 	assert(sz.x != 0 && sz.y != 0);
 
 	spr->SetPosition(center);

@@ -55,7 +55,7 @@ SymbolFactory::~SymbolFactory()
 	}
 }
 
-s2::Symbol* SymbolFactory::Create(const std::string& filepath) const
+s2::Symbol* SymbolFactory::Create(const std::string& filepath, SymFileType* _type) const
 {
 	std::string fixed_path = filepath;
 	StringHelper::ToLower(fixed_path);
@@ -70,6 +70,9 @@ s2::Symbol* SymbolFactory::Create(const std::string& filepath) const
 	s2::Symbol* ret = NULL;
 	
 	SymFileType type = get_sym_file_type(filepath);
+	if (_type) {
+		*_type = type;
+	}
 	switch (type)
 	{
 	case IMAGE:
@@ -162,6 +165,8 @@ s2::Symbol* SymbolFactory::Create(const std::string& filepath) const
 			ret = sym;
 		}
 		break;
+	default:
+		assert(0);
 	}
 
 	if (ret) {
@@ -172,7 +177,7 @@ s2::Symbol* SymbolFactory::Create(const std::string& filepath) const
 	return ret;
 }
 
-s2::Symbol* SymbolFactory::Create(uint32_t id) const
+s2::Symbol* SymbolFactory::Create(uint32_t id, SymFileType* _type) const
 {
 	std::map<uint32_t, s2::Symbol*>::const_iterator itr = m_id_cache.find(id);
 	if (itr != m_id_cache.end()) {
@@ -182,6 +187,8 @@ s2::Symbol* SymbolFactory::Create(uint32_t id) const
 
 	s2::Symbol* ret = NULL;
 
+	SymFileType stype = UNKNOWN;
+
 	int type;
 	const void* data = simp::NodeFactory::Instance()->Create(id, &type);
 	assert(data);
@@ -189,6 +196,8 @@ s2::Symbol* SymbolFactory::Create(uint32_t id) const
 	{
 	case simp::TYPE_IMAGE:
 		{
+			stype = IMAGE;
+
 			const simp::NodePicture* pic = (const simp::NodePicture*)data;
 
 			const simp::Package* pkg = simp::NodeFactory::Instance()->GetPkg(id);
@@ -203,24 +212,42 @@ s2::Symbol* SymbolFactory::Create(uint32_t id) const
 			ret = sym;
 		}
 		break;
+	case simp::TYPE_SCALE9:
+		{
+			stype = SCALE9;
+
+			s2::Scale9Symbol* sym = new s2::Scale9Symbol;
+			Scale9SymLoader loader(sym);
+			loader.LoadBin((const simp::NodeScale9*)data);
+			ret = sym;
+		}
+		break;
 	case simp::TYPE_COMPLEX:
 		{
+			stype = COMPLEX;
+
 			s2::ComplexSymbol* sym = new s2::ComplexSymbol;
 			ComplexSymLoader loader(sym);
 			loader.LoadBin((const simp::NodeComplex*)data);
 			ret = sym;
 		}
 		break;
+	default:
+		assert(0);
 	}	
+
+	if (_type) {
+		*_type = stype;
+	}
 
 	return ret;
 }
 
-s2::Symbol* SymbolFactory::Create(const std::string& pkg_name, const std::string& node_name) const
+s2::Symbol* SymbolFactory::Create(const std::string& pkg_name, const std::string& node_name, SymFileType* type) const
 {
 	uint32_t id = simp::NodeFactory::Instance()->GetID(pkg_name, node_name);
 	if (id != 0xffffffff) {
-		return Create(id);
+		return Create(id, type);
 	} else {
 		return NULL;
 	}

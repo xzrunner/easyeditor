@@ -14,6 +14,7 @@
 
 #include <simp/simp_types.h>
 #include <simp/NodeFactory.h>
+#include <simp/NodeScale9Spr.h>
 
 #include <sprite2/S2_Symbol.h>
 #include <sprite2/ImageSprite.h>
@@ -39,15 +40,9 @@ SpriteFactory::SpriteFactory()
 {
 }
 
-s2::Sprite* SpriteFactory::Create(const std::string& filepath) const
+s2::Sprite* SpriteFactory::Create(s2::Symbol* sym, SymFileType type) const
 {
 	s2::Sprite* spr = NULL;
-	s2::Symbol* sym = SymbolFactory::Instance()->Create(filepath);
-	if (!sym) {
-		return spr;
-	}
-
-	SymFileType type = get_sym_file_type(filepath);
 	switch (type)
 	{
 	case IMAGE:
@@ -83,8 +78,21 @@ s2::Sprite* SpriteFactory::Create(const std::string& filepath) const
 	case TRAIL:
 		spr = new s2::TrailSprite(sym);
 		break;
+	default:
+		assert(0);
+	}
+	return spr;
+}
+
+s2::Sprite* SpriteFactory::Create(const std::string& filepath) const
+{
+	s2::Symbol* sym = SymbolFactory::Instance()->Create(filepath);
+	if (!sym) {
+		return NULL;
 	}
 
+	SymFileType type = get_sym_file_type(filepath);
+	s2::Sprite* spr = Create(sym, type);
 	sym->RemoveReference();
 	return spr;
 }
@@ -156,6 +164,8 @@ s2::Sprite* SpriteFactory::Create(const Json::Value& val, const std::string& dir
 			//
 		}
 		break;
+	default:
+		assert(0);
 	}
 
 	return spr;
@@ -176,6 +186,18 @@ s2::Sprite* SpriteFactory::Create(uint32_t id)
 			spr = new s2::ImageSprite(sym);
 		}
 		break;
+	case simp::TYPE_SCALE9_SPR:
+		{
+			const simp::NodeScale9Spr* node = (const simp::NodeScale9Spr*)data;
+			s2::Symbol* sym = SymbolFactory::Instance()->Create(node->sym);
+			s2::Scale9Sprite* s9_spr = new s2::Scale9Sprite(sym);
+			Scale9SprLoader loader(s9_spr);
+			loader.LoadBin(node);
+			spr = s9_spr;
+		}
+		break;
+	default:
+		assert(0);
 	}
 
 	return spr;
