@@ -1,6 +1,7 @@
 #include "ComplexSprLoader.h"
 
 #include <sprite2/ComplexSprite.h>
+#include <simp/NodeComplexSpr.h>
 
 namespace gum
 {
@@ -28,6 +29,15 @@ void ComplexSprLoader::LoadJson(const Json::Value& val, const std::string& dir)
 
 	int action = val["complex"]["action"].asInt();
 	m_spr->SetAction(action);
+}
+
+void ComplexSprLoader::LoadBin(const simp::NodeComplexSpr* node)
+{
+	if (!m_spr) {
+		return;
+	}
+
+	m_spr->SetAction(node->action);
 }
 
 }

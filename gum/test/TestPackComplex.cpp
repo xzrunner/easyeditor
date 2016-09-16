@@ -31,6 +31,9 @@ void TestPackComplex::Init()
 		s2::Sprite* spr = gum::SpriteFactory::Instance()->Create(sym, type);
 		spr->SetPosition(sm::vec2(0, 0));
 		m_sprites.push_back(spr);
+
+		s2::ComplexSprite* cspr = VI_DOWNCASTING<s2::ComplexSprite*>(spr->FetchChild("action"));
+		cspr->SetAction("c");
 	}
 }
 

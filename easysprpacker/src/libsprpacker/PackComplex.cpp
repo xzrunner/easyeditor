@@ -220,7 +220,8 @@ PackToBin(uint8_t** ptr, const PackComplex& complex) const
 	for (int i = 0; i < n; ++i) {
 		int idx = complex.QueryIndex(m_sprs[i]);
 		assert(idx >= 0 && idx < 0xffff);
-		pack(idx, ptr);
+		uint16_t _idx = idx;
+		pack(_idx, ptr);
 	}
 }
 

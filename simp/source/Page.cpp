@@ -13,6 +13,7 @@
 #include "NodeTexture.h"
 #include "NodeLabel.h"
 #include "NodeComplex.h"
+#include "NodeComplexSpr.h"
 
 #include <new>
 #include <string.h>
@@ -79,6 +80,11 @@ OnLoad(ImportStream& is)
 	while (!is.Empty())
 	{
 		uint32_t id = is.UInt32();
+
+		if (id == 13) {
+			int zz = 0;
+		}
+
 		int idx = id - m_page->m_begin_id;
 		uint8_t type = is.UInt8();
 		m_page->m_types[idx] = type;
@@ -138,6 +144,12 @@ CreateNode(uint8_t type, Allocator& alloc, ImportStream& is)
 		{
 			void* ptr = alloc.Alloc(ALIGN_4BYTE(NodeComplex::Size()));
 			ret = new (ptr) NodeComplex(alloc, is);
+		}
+		break;
+	case TYPE_COMPLEX_SPR:
+		{
+			void* ptr = alloc.Alloc(ALIGN_4BYTE(NodeComplexSpr::Size()));
+			ret = new (ptr) NodeComplexSpr(is);
 		}
 		break;
 	}

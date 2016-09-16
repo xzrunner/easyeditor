@@ -15,6 +15,7 @@
 #include <simp/simp_types.h>
 #include <simp/NodeFactory.h>
 #include <simp/NodeScale9Spr.h>
+#include <simp/NodeComplexSpr.h>
 
 #include <sprite2/S2_Symbol.h>
 #include <sprite2/ImageSprite.h>
@@ -218,6 +219,16 @@ s2::Sprite* SpriteFactory::Create(uint32_t id)
 			TextboxSprLoader loader(tb_spr);
 			loader.LoadBin(node);
 			spr = tb_spr;
+		}
+		break;
+	case simp::TYPE_COMPLEX_SPR:
+		{
+			const simp::NodeComplexSpr* node = (const simp::NodeComplexSpr*)data;
+			s2::Symbol* sym = SymbolFactory::Instance()->Create(node->sym);
+			s2::ComplexSprite* comp_spr = VI_DOWNCASTING<s2::ComplexSprite*>(SpriteFactory::Instance()->Create(sym, COMPLEX));
+			ComplexSprLoader loader(comp_spr);
+			loader.LoadBin(node);
+			spr = comp_spr;
 		}
 		break;
 	default:

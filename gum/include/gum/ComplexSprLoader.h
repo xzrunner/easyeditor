@@ -6,6 +6,7 @@
 #include <json/json.h>
 
 namespace s2 { class ComplexSprite; }
+namespace simp { class NodeComplexSpr; }
 
 namespace gum
 {
@@ -17,6 +18,7 @@ public:
 	~ComplexSprLoader();
 
 	void LoadJson(const Json::Value& val, const std::string& dir);
+	void LoadBin(const simp::NodeComplexSpr* node);
 
 private:
 	s2::ComplexSprite* m_spr;
