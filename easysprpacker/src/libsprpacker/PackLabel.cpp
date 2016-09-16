@@ -79,7 +79,7 @@ int PackLabel::SizeOfPackToBin() const
 {
 	int sz = 0;
 
-	sz += sizeof(uint16_t);				// id
+	sz += sizeof(uint32_t);				// id
 	sz += sizeof(uint8_t);				// type
 
 	sz += sizeof(uint16_t) * 2;			// width, height

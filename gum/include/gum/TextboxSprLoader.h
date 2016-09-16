@@ -6,6 +6,7 @@
 #include <json/json.h>
 
 namespace s2 { class TextboxSprite; }
+namespace simp { class NodeLabel; }
 
 namespace gum
 {
@@ -16,7 +17,8 @@ public:
 	TextboxSprLoader(s2::TextboxSprite* spr);
 	~TextboxSprLoader();
 
-	void LoadJson(const Json::Value& val, const std::string& dir);
+	void LoadJson(const Json::Value& val);
+	void LoadBin(const simp::NodeLabel* node);
 
 private:
 	s2::TextboxSprite* m_spr;

@@ -19,6 +19,9 @@ public:
 	virtual void Update();
 
 private:
+	void InitGTxt();
+
+private:
 	std::vector<s2::Sprite*> m_sprites;
 
 }; // TestPackComplex

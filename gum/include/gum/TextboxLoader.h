@@ -8,6 +8,7 @@
 #include <string>
 
 namespace s2 { class Textbox; }
+namespace simp { class NodeLabel; }
 
 namespace gum
 {
@@ -18,6 +19,7 @@ public:
 	TextboxLoader(s2::Textbox& tb);
 
 	void LoadJson(const Json::Value& val);
+	void LoadBin(const simp::NodeLabel* node);
 
 private:
 	s2::Textbox& m_tb;

@@ -7,6 +7,7 @@
 #include "Scale9SymLoader.h"
 #include "TextureSymLoader.h"
 #include "TextboxSymbol.h"
+#include "TextboxLoader.h"
 #include "ComplexSymLoader.h"
 #include "AnimSymLoader.h"
 #include "P3dSymLoader.h"
@@ -60,6 +61,11 @@ s2::Symbol* SymbolFactory::Create(const std::string& filepath, SymFileType* _typ
 	std::string fixed_path = filepath;
 	StringHelper::ToLower(fixed_path);
 
+	SymFileType type = get_sym_file_type(fixed_path);
+	if (_type) {
+		*_type = type;
+	}
+
 	std::map<std::string, s2::Symbol*>::const_iterator itr 
 		= m_path_cache.find(fixed_path);
 	if (itr != m_path_cache.end()) {
@@ -68,11 +74,6 @@ s2::Symbol* SymbolFactory::Create(const std::string& filepath, SymFileType* _typ
 	}
 
 	s2::Symbol* ret = NULL;
-	
-	SymFileType type = get_sym_file_type(filepath);
-	if (_type) {
-		*_type = type;
-	}
 	switch (type)
 	{
 	case IMAGE:
@@ -102,7 +103,15 @@ s2::Symbol* SymbolFactory::Create(const std::string& filepath, SymFileType* _typ
 	case TEXTBOX:
 		{
 			TextboxSymbol* sym = new TextboxSymbol();
-			sym->LoadJson(filepath);
+			TextboxLoader loader(sym->GetTextbox());
+			Json::Value val;
+			Json::Reader reader;
+			std::locale::global(std::locale(""));
+			std::ifstream fin(filepath.c_str());
+			std::locale::global(std::locale("C"));
+			reader.parse(fin, val);
+			fin.close();
+			loader.LoadJson(val);
 			ret = sym;
 		}
 		break;
@@ -219,6 +228,16 @@ s2::Symbol* SymbolFactory::Create(uint32_t id, SymFileType* _type) const
 			s2::Scale9Symbol* sym = new s2::Scale9Symbol;
 			Scale9SymLoader loader(sym);
 			loader.LoadBin((const simp::NodeScale9*)data);
+			ret = sym;
+		}
+		break;
+	case simp::TYPE_LABEL:
+		{
+			stype = TEXTBOX;
+
+			TextboxSymbol* sym = new TextboxSymbol();
+			TextboxLoader loader(sym->GetTextbox());
+			loader.LoadBin((const simp::NodeLabel*)data);
 			ret = sym;
 		}
 		break;

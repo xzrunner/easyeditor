@@ -12,8 +12,6 @@ class TextboxSymbol : public s2::TextboxSymbol
 {
 public:
 
-	void LoadJson(const std::string& filepath);
-
 protected:
 	/**
 	 *  @interface

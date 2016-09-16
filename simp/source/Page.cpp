@@ -128,6 +128,12 @@ CreateNode(uint8_t type, Allocator& alloc, ImportStream& is)
 			ret = new (ptr) NodeTexture(is);
 		}
 		break;
+	case TYPE_LABEL:
+		{
+			void* ptr = alloc.Alloc(ALIGN_4BYTE(NodeLabel::Size()));
+			ret = new (ptr) NodeLabel(alloc, is);
+		}
+		break;
 	case TYPE_COMPLEX:
 		{
 			void* ptr = alloc.Alloc(ALIGN_4BYTE(NodeComplex::Size()));

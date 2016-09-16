@@ -5,7 +5,7 @@
 #include "SpriteIO.h"
 
 #include "Scale9SprLoader.h"
-#include "TextboxLoader.h"
+#include "TextboxSprLoader.h"
 #include "ComplexSprLoader.h"
 #include "AnimSprLoader.h"
 #include "P3dSprLoader.h"
@@ -84,15 +84,19 @@ s2::Sprite* SpriteFactory::Create(s2::Symbol* sym, SymFileType type) const
 	return spr;
 }
 
-s2::Sprite* SpriteFactory::Create(const std::string& filepath) const
+s2::Sprite* SpriteFactory::Create(const std::string& filepath, SymFileType* type) const
 {
-	s2::Symbol* sym = SymbolFactory::Instance()->Create(filepath);
+	SymFileType _type;
+	s2::Symbol* sym = SymbolFactory::Instance()->Create(filepath, &_type);
 	if (!sym) {
 		return NULL;
 	}
 
-	SymFileType type = get_sym_file_type(filepath);
-	s2::Sprite* spr = Create(sym, type);
+	if (type) {
+		*type = _type;
+	}
+
+	s2::Sprite* spr = Create(sym, _type);
 	sym->RemoveReference();
 	return spr;
 }
@@ -104,7 +108,8 @@ s2::Sprite* SpriteFactory::Create(const Json::Value& val, const std::string& dir
 	std::string filepath = val["filepath"].asString();
 	filepath = FilepathHelper::Absolute(dir, filepath);
 
-	spr = Create(filepath);
+	SymFileType type;
+	spr = Create(filepath, &type);
 	if (!spr) {
 		return NULL;
 	}
@@ -112,21 +117,27 @@ s2::Sprite* SpriteFactory::Create(const Json::Value& val, const std::string& dir
 	SpriteIO io(true, true);
 	io.Load(val, spr);
 
-	SymFileType type = get_sym_file_type(filepath);
 	switch (type)
 	{
+	case IMAGE:
+		{
+		}
+		break;
 	case SCALE9:
 		{
 			Scale9SprLoader loader(VI_DOWNCASTING<s2::Scale9Sprite*>(spr));
 			loader.LoadJson(val, dir);
 		}
 		break;
+	case TEXTURE:
+		{
+		}
+		break;
 	case TEXTBOX:
 		{
 			s2::TextboxSprite* text = VI_DOWNCASTING<s2::TextboxSprite*>(spr);
-			text->SetText(val["text"]["text"].asString());
-			TextboxLoader loader(text->GetTextbox());
-			loader.LoadJson(val["text"]);
+			TextboxSprLoader loader(text);
+			loader.LoadJson(val);
 		}
 		break;
 	case COMPLEX:
@@ -159,9 +170,12 @@ s2::Sprite* SpriteFactory::Create(const Json::Value& val, const std::string& dir
 			loader.LoadJson(val, dir);
 		}
 		break;
+	case MASK:
+		{
+		}
+		break;
 	case TRAIL:
 		{
-			//
 		}
 		break;
 	default:
@@ -194,6 +208,16 @@ s2::Sprite* SpriteFactory::Create(uint32_t id)
 			Scale9SprLoader loader(s9_spr);
 			loader.LoadBin(node);
 			spr = s9_spr;
+		}
+		break;
+	case simp::TYPE_LABEL:
+		{
+			const simp::NodeLabel* node = (const simp::NodeLabel*)data;
+			s2::Symbol* sym = SymbolFactory::Instance()->Create(id);
+			s2::TextboxSprite* tb_spr = VI_DOWNCASTING<s2::TextboxSprite*>(SpriteFactory::Instance()->Create(sym, TEXTBOX));
+			TextboxSprLoader loader(tb_spr);
+			loader.LoadBin(node);
+			spr = tb_spr;
 		}
 		break;
 	default:

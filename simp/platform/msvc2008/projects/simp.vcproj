@@ -221,6 +221,10 @@
 			Name="node"
 			>
 			<File
+				RelativePath="..\..\..\include\simp\from_int.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\source\NodeTrans.cpp"
 				>
 			</File>
