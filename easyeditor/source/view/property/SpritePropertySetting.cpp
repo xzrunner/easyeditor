@@ -19,8 +19,9 @@
 #include "FileHelper.h"
 #include "FilterModes.h"
 #include "WXHelper.h"
-#include "SpriteFilterPSHelper.h"
+#include "SprFilterProperty.h"
 #include "FileDirProperty.h"
+#include "EditPanel.h"
 
 #include <sprite2/RenderColor.h>
 #include <sprite2/RenderShader.h>
@@ -34,6 +35,7 @@ SpritePropertySetting::SpritePropertySetting(EditPanelImpl* stage, Sprite* spr)
 	: PropertySetting("Sprite")
 	, m_impl(new SpritePropertyImpl(stage, spr))
 	, m_pg(NULL)
+	, m_spr_filter_prop(stage->GetEditPanel())
 {
 	RegistSubject(SpriteNameChangeSJ::Instance());
 }
@@ -209,7 +211,7 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 		spr->SetEditable(wxANY_AS(value, bool));
 		RefreshPanelSJ::Instance()->Refresh();
 	}
-	else if (SpriteFilterPSHelper::FromPS(name, value, spr))
+	else if (m_spr_filter_prop.FromPS(name, value, spr))
 	{
 		dirty = true;
 	}
@@ -255,7 +257,7 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 
 	pg->GetProperty(wxT("FastBlend"))->SetValue(FastBlendModes::Instance()->Mode2ID(spr->Shader().fast_blend));
 
-	SpriteFilterPSHelper::ToPS(spr, pg);
+	m_spr_filter_prop.ToPS(spr, pg);
 
 	MyColorProperty* rp = static_cast<MyColorProperty*>(pg->GetProperty("Color Conversion.R"));
 	rp->SetListener(new PropertyColorListener(&spr->Color().rmap));
@@ -386,7 +388,7 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 	fast_blend_prop->SetValue(fast_blend_idx);
 	pg->Append(fast_blend_prop);
 
-	SpriteFilterPSHelper::InitPS(spr, pg);
+	m_spr_filter_prop.InitPS(spr, pg);
 
 	pg->Append(new wxPropertyCategory("GEOMETRY", wxPG_LABEL));
 

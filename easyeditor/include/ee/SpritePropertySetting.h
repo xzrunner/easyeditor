@@ -3,6 +3,7 @@
 
 #include "PropertySetting.h"
 #include "Observer.h"
+#include "SprFilterProperty.h"
 
 namespace ee
 {
@@ -40,6 +41,8 @@ private:
 	SpritePropertyImpl* m_impl;
 
 	wxPropertyGrid* m_pg;
+
+	SprFilterProperty m_spr_filter_prop;
 
 }; // SpritePropertySetting
 

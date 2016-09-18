@@ -368,6 +368,14 @@
 					Name="single"
 					>
 					<File
+						RelativePath="..\..\..\source\view\property\SprFilterProperty.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\include\ee\SprFilterProperty.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\source\view\property\SpritePropertyImpl.cpp"
 						>
 					</File>
@@ -383,18 +391,6 @@
 						RelativePath="..\..\..\include\ee\SpritePropertySetting.h"
 						>
 					</File>
-					<Filter
-						Name="helper"
-						>
-						<File
-							RelativePath="..\..\..\source\view\property\SpriteFilterPSHelper.cpp"
-							>
-						</File>
-						<File
-							RelativePath="..\..\..\include\ee\SpriteFilterPSHelper.h"
-							>
-						</File>
-					</Filter>
 				</Filter>
 			</Filter>
 			<Filter

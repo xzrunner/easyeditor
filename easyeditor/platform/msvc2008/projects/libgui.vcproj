@@ -294,6 +294,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\source\gui\FilepathProperty.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\FilepathProperty.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\source\gui\MyColorProperty.cpp"
 				>
 			</File>
