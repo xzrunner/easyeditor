@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\include\simp;..\..\..\..\logger\src\logger;..\..\..\..\fs\src\fs;..\..\..\..\cu\src\cu;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lzma\include"
+				AdditionalIncludeDirectories="..\..\..\include\simp;..\..\..\..\logger\src\logger;..\..\..\..\fs\src\fs;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lzma\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -105,7 +105,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\include\simp;..\..\..\..\logger\src\logger;..\..\..\..\fs\src\fs;..\..\..\..\cu\src\cu;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lzma\include"
+				AdditionalIncludeDirectories="..\..\..\include\simp;..\..\..\..\logger\src\logger;..\..\..\..\fs\src\fs;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lzma\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -247,6 +247,22 @@
 			<Filter
 				Name="07.animation"
 				>
+				<File
+					RelativePath="..\..\..\source\NodeAnimation.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\simp\NodeAnimation.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\NodeAnimationSpr.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\simp\NodeAnimationSpr.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="02.scale9"

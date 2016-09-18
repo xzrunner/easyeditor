@@ -39,11 +39,31 @@ private:
 	void Init(const eanim::Symbol* sym);
 
 private:
+	class Actor : public cu::RefCountObj
+	{
+	public:
+		Actor(const s2::Sprite* spr);
+		~Actor();
+
+		void PackToLuaString(ebuilder::CodeGenerator& gen) const;
+
+		int SizeOfUnpackFromBin() const;
+		int SizeOfPackToBin() const;
+		void PackToBin(uint8_t** ptr) const;
+
+	public:
+		const PackNode* m_node;
+		const PackTrans m_trans;
+
+	}; // Actor
+
 	class Frame : public cu::RefCountObj
 	{
 	public:
 		Frame(const s2::AnimSymbol::Frame* frame);
 		~Frame();
+
+		void PackToLuaString(ebuilder::CodeGenerator& gen) const;
 
 		int SizeOfUnpackFromBin() const;
 		int SizeOfPackToBin() const;
@@ -51,7 +71,7 @@ private:
 
 	public:
 		int m_index;
-		std::vector<const PackNode*> m_sprs;
+		std::vector<const Actor*> m_actors;
 		bool m_tween;
 
 	}; // Frame
@@ -61,6 +81,8 @@ private:
 	public:
 		Layer(const s2::AnimSymbol::Layer* layer);
 		~Layer();
+
+		void PackToLuaString(ebuilder::CodeGenerator& gen) const;
 
 		int SizeOfUnpackFromBin() const;
 		int SizeOfPackToBin() const;

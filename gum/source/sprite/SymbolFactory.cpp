@@ -251,6 +251,16 @@ s2::Symbol* SymbolFactory::Create(uint32_t id, SymFileType* _type) const
 			ret = sym;
 		}
 		break;
+	case simp::TYPE_ANIMATION:
+		{
+			stype = ANIMATION;
+
+			s2::AnimSymbol* sym = new s2::AnimSymbol;
+			AnimSymLoader loader(sym);
+			loader.LoadBin((const simp::NodeAnimation*)data);
+			ret = sym;
+		}
+		break;
 	default:
 		assert(0);
 	}	

@@ -8,12 +8,17 @@
 namespace simp
 {
 
+class Allocator;
+class ImportStream;
+
 class NodeTrans : private cu::Uncopyable
 {
 public:
 	NodeTrans();
 
 	static int Size();
+
+	static NodeTrans* LoadTrans(Allocator& alloc, ImportStream& is);
 
 public:
 	// geometry

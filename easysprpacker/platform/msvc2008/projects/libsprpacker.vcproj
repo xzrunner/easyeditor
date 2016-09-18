@@ -275,6 +275,14 @@
 					RelativePath="..\..\..\src\libsprpacker\PackAnimation.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackAnimationSpr.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackAnimationSpr.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter
@@ -399,6 +407,22 @@
 			<Filter
 				Name="07.animation"
 				>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\AnimationBuilder.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\AnimationBuilder.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\AnimationSprBuilder.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\AnimationSprBuilder.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter

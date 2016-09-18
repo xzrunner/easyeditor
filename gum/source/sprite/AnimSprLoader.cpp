@@ -1,6 +1,8 @@
 #include "AnimSprLoader.h"
 
 #include <sprite2/AnimSprite.h>
+#include <simp/from_int.h>
+#include <simp/NodeAnimationSpr.h>
 
 namespace gum
 {
@@ -36,6 +38,18 @@ void AnimSprLoader::LoadJson(const Json::Value& val, const std::string& dir)
 	if (anim_val.isMember("active")) {
 		m_spr->SetActive(anim_val["active"].asBool());
 	}
+}
+
+void AnimSprLoader::LoadBin(const simp::NodeAnimationSpr* node)
+{
+	if (!m_spr) {
+		return;
+	}
+
+	m_spr->SetLoop(simp::int2bool(node->loop));
+	m_spr->SetInterval(simp::int2float1024x(node->interval));
+
+	m_spr->SetFPS(node->fps);
 }
 
 }

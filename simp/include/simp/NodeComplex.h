@@ -38,8 +38,6 @@ public:
 	static int Size();
 	static int ActionSize();
 
-	NodeTrans* LoadTrans(Allocator& alloc, ImportStream& is);
-
 }; // NodeComplex
 
 }

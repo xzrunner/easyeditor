@@ -16,6 +16,7 @@
 #include <simp/NodeFactory.h>
 #include <simp/NodeScale9Spr.h>
 #include <simp/NodeComplexSpr.h>
+#include <simp/NodeAnimationSpr.h>
 
 #include <sprite2/S2_Symbol.h>
 #include <sprite2/ImageSprite.h>
@@ -199,36 +200,63 @@ s2::Sprite* SpriteFactory::Create(uint32_t id)
 		{
 			s2::Symbol* sym = SymbolFactory::Instance()->Create(id);
 			spr = new s2::ImageSprite(sym);
+			sym->RemoveReference();
 		}
 		break;
 	case simp::TYPE_SCALE9_SPR:
 		{
 			const simp::NodeScale9Spr* node = (const simp::NodeScale9Spr*)data;
+
 			s2::Symbol* sym = SymbolFactory::Instance()->Create(node->sym);
 			s2::Scale9Sprite* s9_spr = new s2::Scale9Sprite(sym);
+			sym->RemoveReference();
+
 			Scale9SprLoader loader(s9_spr);
 			loader.LoadBin(node);
+
 			spr = s9_spr;
 		}
 		break;
 	case simp::TYPE_LABEL:
 		{
 			const simp::NodeLabel* node = (const simp::NodeLabel*)data;
+
 			s2::Symbol* sym = SymbolFactory::Instance()->Create(id);
 			s2::TextboxSprite* tb_spr = VI_DOWNCASTING<s2::TextboxSprite*>(SpriteFactory::Instance()->Create(sym, TEXTBOX));
+			sym->RemoveReference();
+
 			TextboxSprLoader loader(tb_spr);
 			loader.LoadBin(node);
+
 			spr = tb_spr;
 		}
 		break;
 	case simp::TYPE_COMPLEX_SPR:
 		{
 			const simp::NodeComplexSpr* node = (const simp::NodeComplexSpr*)data;
+
 			s2::Symbol* sym = SymbolFactory::Instance()->Create(node->sym);
 			s2::ComplexSprite* comp_spr = VI_DOWNCASTING<s2::ComplexSprite*>(SpriteFactory::Instance()->Create(sym, COMPLEX));
+			sym->RemoveReference();
+
 			ComplexSprLoader loader(comp_spr);
 			loader.LoadBin(node);
+
 			spr = comp_spr;
+		}
+		break;
+	case simp::TYPE_ANIMATION_SPR:
+		{
+			const simp::NodeAnimationSpr* node = (const simp::NodeAnimationSpr*)data;
+
+			s2::Symbol* sym = SymbolFactory::Instance()->Create(node->sym);
+			s2::AnimSprite* anim_spr = VI_DOWNCASTING<s2::AnimSprite*>(SpriteFactory::Instance()->Create(sym, ANIMATION));
+			sym->RemoveReference();
+
+			AnimSprLoader loader(anim_spr);
+			loader.LoadBin(node);
+
+			spr = anim_spr;
 		}
 		break;
 	default:

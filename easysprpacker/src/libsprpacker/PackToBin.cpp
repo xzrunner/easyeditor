@@ -13,6 +13,8 @@
 #include <map>
 #include <algorithm>
 
+//#define DEBUG_PACK_BIN
+
 namespace esprpacker
 {
 
@@ -144,8 +146,17 @@ void PackToBin::PageIndex(const std::string& filepath, const std::vector<Page*>&
 void PackToBin::PackPage(const std::string& filepath, const Page& page, 
 						 const ee::TexturePacker& tp, bool compress, float scale)
 {
+#ifdef DEBUG_PACK_BIN
+	std::vector<int> list0, list1;
+	int tot_sz = 0;
+#endif // DEBUG_PACK_BIN
+
 	int out_sz = 0;
 	for (int i = 0, n = page.m_nodes.size(); i < n; ++i) {
+#ifdef DEBUG_PACK_BIN
+		tot_sz += page.m_nodes[i]->SizeOfPackToBin();
+		list0.push_back(tot_sz);
+#endif // DEBUG_PACK_BIN
 		out_sz += page.m_nodes[i]->SizeOfPackToBin();
 	}
 	
@@ -153,6 +164,9 @@ void PackToBin::PackPage(const std::string& filepath, const Page& page,
 	uint8_t* ptr = buf;
 	for (int i = 0, n = page.m_nodes.size(); i < n; ++i) {
 		page.m_nodes[i]->PackToBin(&ptr, tp, scale);
+#ifdef DEBUG_PACK_BIN
+		list1.push_back(ptr - buf);
+#endif // DEBUG_PACK_BIN
 	}
 
 	assert(ptr - buf == out_sz);

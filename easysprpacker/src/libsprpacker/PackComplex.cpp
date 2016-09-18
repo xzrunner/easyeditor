@@ -8,6 +8,7 @@ namespace lua = ebuilder::lua;
 
 #include <sprite2/S2_Sprite.h>
 #include <simp/simp_types.h>
+#include <simp/simp_define.h>
 #include <simp/NodeComplex.h>
 
 namespace esprpacker
@@ -77,7 +78,7 @@ void PackComplex::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::Textur
 int PackComplex::SizeOfUnpackFromBin() const
 {
 	int sz = simp::NodeComplex::Size();
-	sz += sizeof(uint32_t) * m_children.size();
+	sz += simp::SIZEOF_POINTER * m_children.size();
 	for (int i = 0, n = m_children_trans.size(); i < n; ++i) {
 		sz += m_children_trans[i].SizeOfUnpackFromBin();
 	}

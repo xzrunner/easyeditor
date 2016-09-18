@@ -17,7 +17,7 @@ NodeComplex::NodeComplex(Allocator& alloc, ImportStream& is)
 
 	// actions
 	actions_n = is.UInt16();
-	static_cast<uint8_t*>(alloc.Alloc(ActionSize() * actions_n));
+	alloc.Alloc(ActionSize() * actions_n);
 	for (int i = 0; i < actions_n; ++i) 
 	{
 		Action* dst = &actions[i];
@@ -36,7 +36,7 @@ NodeComplex::NodeComplex(Allocator& alloc, ImportStream& is)
 	memset(trans, 0, SIZEOF_POINTER * sprs_n);
 	for (int i = 0; i < sprs_n; ++i) {
 		sprs[i] = is.UInt32();
-		trans[i] = LoadTrans(alloc, is);
+		trans[i] = NodeTrans::LoadTrans(alloc, is);
 	}
 }
 
@@ -48,109 +48,6 @@ int NodeComplex::Size()
 int NodeComplex::ActionSize()
 {
 	return sizeof(Action) + PTR_SIZE_DIFF * 2;
-}
-
-NodeTrans* NodeComplex::LoadTrans(Allocator& alloc, ImportStream& is)
-{
-	uint32_t type = is.UInt32();
-	
-	int sz = NodeTrans::Size();
-	if (type & NodeTrans::SCALE_MASK) {
-		sz += sizeof(uint32_t) * 2;
-	}
-	if (type & NodeTrans::SHEAR_MASK) {
-		sz += sizeof(uint32_t) * 2;
-	}
-	if (type & NodeTrans::OFFSET_MASK) {
-		sz += sizeof(uint32_t) * 2;
-	}
-	if (type & NodeTrans::POSITION_MASK) {
-		sz += sizeof(uint32_t) * 2;
-	}
-	if (type & NodeTrans::ANGLE_MASK) {
-		sz += sizeof(uint32_t);
-	}
-	if (type & NodeTrans::COL_MUL_MASK) {
-		sz += sizeof(uint32_t);
-	}
-	if (type & NodeTrans::COL_ADD_MASK) {
-		sz += sizeof(uint32_t);
-	}
-	if (type & NodeTrans::COL_R_MASK) {
-		sz += sizeof(uint32_t);
-	}
-	if (type & NodeTrans::COL_G_MASK) {
-		sz += sizeof(uint32_t);
-	}
-	if (type & NodeTrans::COL_B_MASK) {
-		sz += sizeof(uint32_t);
-	}
-	if (type & NodeTrans::BLEND_MASK) {
-		sz += sizeof(uint32_t);
-	}
-	if (type & NodeTrans::FAST_BLEND_MASK) {
-		sz += sizeof(uint32_t);
-	}
-	if (type & NodeTrans::FILTER_MASK) {
-		sz += sizeof(uint32_t);
-	}
-	if (type & NodeTrans::CAMERA_MASK) {
-		sz += sizeof(uint32_t);
-	}
-
-	void* ptr = alloc.Alloc(ALIGN_4BYTE(sz));
-	NodeTrans* trans = new (ptr) NodeTrans();
-	trans->type = type;
-	int idx = 0;
-	if (type & NodeTrans::SCALE_MASK) {
-		trans->data[idx++] = is.UInt32();
-		trans->data[idx++] = is.UInt32();
-	}
-	if (type & NodeTrans::SHEAR_MASK) {
-		trans->data[idx++] = is.UInt32();
-		trans->data[idx++] = is.UInt32();
-	}
-	if (type & NodeTrans::OFFSET_MASK) {
-		trans->data[idx++] = is.UInt32();
-		trans->data[idx++] = is.UInt32();
-	}
-	if (type & NodeTrans::POSITION_MASK) {
-		trans->data[idx++] = is.UInt32();
-		trans->data[idx++] = is.UInt32();
-	}
-	if (type & NodeTrans::ANGLE_MASK) {
-		trans->data[idx++] = is.UInt32();
-	}
-	if (type & NodeTrans::COL_MUL_MASK) {
-		trans->data[idx++] = is.UInt32();
-	}
-	if (type & NodeTrans::COL_ADD_MASK) {
-		trans->data[idx++] = is.UInt32();
-	}
-	if (type & NodeTrans::COL_R_MASK) {
-		trans->data[idx++] = is.UInt32();
-	}
-	if (type & NodeTrans::COL_G_MASK) {
-		trans->data[idx++] = is.UInt32();
-	}
-	if (type & NodeTrans::COL_B_MASK) {
-		trans->data[idx++] = is.UInt32();
-	}
-	if (type & NodeTrans::BLEND_MASK) {
-		trans->data[idx++] = is.UInt32();
-	}
-	if (type & NodeTrans::FAST_BLEND_MASK) {
-		trans->data[idx++] = is.UInt32();
-	}
-	if (type & NodeTrans::FILTER_MASK) {
-		trans->data[idx++] = is.UInt32();
-	}
-	if (type & NodeTrans::CAMERA_MASK) {
-		trans->data[idx++] = is.UInt32();
-	}
-	trans->name = is.String(alloc);
-
-	return trans;
 }
 
 }

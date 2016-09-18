@@ -9,12 +9,15 @@
 #include "LabelBuilder.h"
 #include "ComplexBuilder.h"
 #include "ComplexSprBuilder.h"
+#include "AnimationBuilder.h"
+#include "AnimationSprBuilder.h"
 
 #include <easyscale9.h>
 #include <easyicon.h>
 #include <easytexture.h>
 #include <easytext.h>
 #include <easycomplex.h>
+#include <easyanim.h>
 
 #include <ee/Sprite.h>
 #include <ee/ImageSprite.h>
@@ -67,6 +70,10 @@ const PackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 	else if (const ecomplex::Sprite* complex = dynamic_cast<const ecomplex::Sprite*>(spr)) {
 		node = ComplexSprBuilder::Instance()->Create(complex);
 	}
+	// animation
+	else if (const eanim::Sprite* anim = dynamic_cast<const eanim::Sprite*>(spr)) {
+		node = AnimationSprBuilder::Instance()->Create(anim);
+	}
 
 	else {
 		throw ee::Exception("PackNodeFactory::Create unknown sprite type.");
@@ -92,6 +99,10 @@ const PackNode* PackNodeFactory::Create(const ee::Symbol* sym)
 	// complex
 	else if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(sym)) {
 		node = ComplexBuilder::Instance()->Create(complex);
+	}
+	// anim
+	else if (const eanim::Symbol* anim = dynamic_cast<const eanim::Symbol*>(sym)) {
+		node = AnimationBuilder::Instance()->Create(anim);
 	}
 
 	else {
@@ -132,6 +143,9 @@ void PackNodeFactory::FetchAllBuilder(std::vector<NodeBuilder*>& builders)
 
 	builders.push_back(ComplexBuilder::Instance());
 	builders.push_back(ComplexSprBuilder::Instance());
+
+	builders.push_back(AnimationBuilder::Instance());
+	builders.push_back(AnimationSprBuilder::Instance());
 }
 
 }

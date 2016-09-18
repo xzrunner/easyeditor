@@ -3,16 +3,22 @@
 
 #include <CU_Uncopyable.h>
 
+#include <stdint.h>
+
 namespace simp
 {
+
+class Allocator;
+class ImportStream;
+class NodeTrans;
 
 class NodeAnimation : private cu::Uncopyable
 {
 public:
 	struct Actor
 	{
+		NodeTrans* trans;
 		uint32_t spr;
-		const char* name;
 	};
 
 	struct Frame
@@ -30,7 +36,7 @@ public:
 	};
 
 	uint16_t n;
-	Layer layer[1];
+	Layer layers[1];
 
 public:
 	NodeAnimation(Allocator& alloc, ImportStream& is);

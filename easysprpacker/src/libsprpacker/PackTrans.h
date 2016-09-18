@@ -19,7 +19,7 @@ namespace esprpacker
 class PackTrans
 {
 public:
-	PackTrans(const s2::Sprite& spr);
+	PackTrans(const s2::Sprite& spr, bool force_name = false);
 	~PackTrans();
 
 	void PackToLua(ebuilder::CodeGenerator& gen) const;
@@ -27,7 +27,7 @@ public:
 	int SizeOfUnpackFromBin() const;
 	int SizeOfPackToBin() const;
 	void PackToBin(uint8_t** ptr) const;
-	
+
 private:
 	static int ToInt(float f) {
 		return static_cast<int>(f * 1024.0f + 0.5f);

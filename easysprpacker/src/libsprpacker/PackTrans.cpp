@@ -11,7 +11,7 @@ namespace lua = ebuilder::lua;
 namespace esprpacker
 {
 
-PackTrans::PackTrans(const s2::Sprite& spr)
+PackTrans::PackTrans(const s2::Sprite& spr, bool force_name)
 {
 	m_type = 0;
 
@@ -82,8 +82,17 @@ PackTrans::PackTrans(const s2::Sprite& spr)
 	}
 
 	std::string name = spr.GetName();
-	if (!name.empty() && name[0] != '_') {
-		m_name = name;
+	if (!name.empty()) {
+		if (name[0] == '_') {
+			if (force_name) {
+				std::string::size_type pos = name.find_first_of("_sprite");
+				if (pos != std::string::npos) {
+					m_name = "_" + name.substr(strlen("_sprite"));
+				}
+			}
+		} else {
+			m_name = name;
+		}
 	}
 
 	m_visible = spr.IsVisible();

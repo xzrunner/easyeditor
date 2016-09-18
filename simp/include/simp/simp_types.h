@@ -15,6 +15,7 @@ static const int TYPE_LABEL			= 9;
 static const int TYPE_COMPLEX		= 11;
 static const int TYPE_COMPLEX_SPR	= 12;
 static const int TYPE_ANIMATION		= 13;
+static const int TYPE_ANIMATION_SPR	= 14;
 
 }
 

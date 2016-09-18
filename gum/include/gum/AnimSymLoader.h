@@ -8,6 +8,7 @@
 #include <string>
 
 namespace s2 { class AnimSymbol; class Sprite; }
+namespace simp { class NodeAnimation; }
 
 namespace gum
 {
@@ -19,7 +20,8 @@ public:
 	~AnimSymLoader();
 
 	void LoadJson(const std::string& filepath);
- 
+	void LoadBin(const simp::NodeAnimation* node);
+
 	void LoadLayers(const Json::Value& value, const std::string& dir);
 
 protected:
