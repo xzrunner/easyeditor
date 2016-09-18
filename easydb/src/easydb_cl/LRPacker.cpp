@@ -154,7 +154,7 @@ void LRPacker::PackEP(const std::string& tmp_dir, const std::string& tmp_lr_file
 	{
 		pkg_val["dst"] = _out_dir + "\\pvr";
 		pkg_val["format"] = "pvr";
-		pkg_val["quality"] = "best";
+		pkg_val["quality"] = "fastest";
 		pkg_val["extrude"] = 4;
 		val["packages"][idx] = pkg_val;
 		PackRes pack;
@@ -164,7 +164,7 @@ void LRPacker::PackEP(const std::string& tmp_dir, const std::string& tmp_lr_file
 	{
 		pkg_val["dst"] = _out_dir + "\\etc2";
 		pkg_val["format"] = "etc2";
-		pkg_val["quality"] = "best";
+		pkg_val["quality"] = "fastest";
 		pkg_val["extrude"] = 1;
 		val["packages"][idx] = pkg_val;
 		PackRes pack;
