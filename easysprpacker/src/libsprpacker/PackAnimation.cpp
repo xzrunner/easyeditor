@@ -38,7 +38,6 @@ void PackAnimation::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::Text
 
 	lua::TableAssign ta(gen, "layers", true);
 	for (int i = 0, n = m_layers.size(); i < n; ++i) {
-		lua::TableAssign assign(gen, "", true);
 		m_layers[i]->PackToLuaString(gen);
 	}
 
@@ -114,6 +113,7 @@ void PackAnimation::Actor::
 PackToLuaString(ebuilder::CodeGenerator& gen) const
 {
 	lua::TableAssign assign(gen, "", true);
+
 	std::string sid = lua::assign("id", ee::StringHelper::ToString(m_node->GetID()));
 	lua::connect(gen, 1, sid);
 	m_trans.PackToLua(gen);
@@ -169,13 +169,14 @@ PackAnimation::Frame::
 void PackAnimation::Frame::
 PackToLuaString(ebuilder::CodeGenerator& gen) const
 {
+	lua::TableAssign assign(gen, "", true);
+
 	lua::connect(gen, 2, 
 		lua::assign("index", m_index), 
 		lua::assign("tween", m_tween));
 	
 	lua::TableAssign ta(gen, "actors", true);
 	for (int i = 0, n = m_actors.size(); i < n; ++i) {
-		lua::TableAssign assign(gen, "", true);
 		m_actors[i]->PackToLuaString(gen);
 	}
 }
@@ -247,7 +248,6 @@ PackToLuaString(ebuilder::CodeGenerator& gen) const
 {
 	lua::TableAssign ta(gen, "frames", true);
 	for (int i = 0, n = m_frames.size(); i < n; ++i) {
-		lua::TableAssign assign(gen, "", true);
 		m_frames[i]->PackToLuaString(gen);
 	}
 }
