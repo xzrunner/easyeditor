@@ -11,6 +11,8 @@
 #include "ComplexSprBuilder.h"
 #include "AnimationBuilder.h"
 #include "AnimationSprBuilder.h"
+#include "Particle3dBuilder.h"
+#include "Particle3dSprBuilder.h"
 
 #include <easyscale9.h>
 #include <easyicon.h>
@@ -18,6 +20,7 @@
 #include <easytext.h>
 #include <easycomplex.h>
 #include <easyanim.h>
+#include <easyparticle3d.h>
 
 #include <ee/Sprite.h>
 #include <ee/ImageSprite.h>
@@ -74,6 +77,10 @@ const PackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 	else if (const eanim::Sprite* anim = dynamic_cast<const eanim::Sprite*>(spr)) {
 		node = AnimationSprBuilder::Instance()->Create(anim);
 	}
+	// particle3d
+	else if (const eparticle3d::Sprite* p3d = dynamic_cast<const eparticle3d::Sprite*>(spr)) {
+		node = Particle3dSprBuilder::Instance()->Create(p3d);
+	}
 
 	else {
 		throw ee::Exception("PackNodeFactory::Create unknown sprite type.");
@@ -88,8 +95,12 @@ const PackNode* PackNodeFactory::Create(const ee::Symbol* sym)
 {
 	const PackNode* node = NULL;
 
+	// image
+	if (const ee::ImageSymbol* image = dynamic_cast<const ee::ImageSymbol*>(sym)) {
+		node = ImageBuilder::Instance()->Create(image);
+	}
 	// scale9
-	if (const escale9::Symbol* s9 = dynamic_cast<const escale9::Symbol*>(sym)) {
+	else if (const escale9::Symbol* s9 = dynamic_cast<const escale9::Symbol*>(sym)) {
 		node = Scale9Builder::Instance()->Create(s9);
 	}
 	// icon
@@ -103,6 +114,10 @@ const PackNode* PackNodeFactory::Create(const ee::Symbol* sym)
 	// anim
 	else if (const eanim::Symbol* anim = dynamic_cast<const eanim::Symbol*>(sym)) {
 		node = AnimationBuilder::Instance()->Create(anim);
+	}
+	// particle3d
+	else if (const eparticle3d::Symbol* p3d = dynamic_cast<const eparticle3d::Symbol*>(sym)) {
+		node = Particle3dBuilder::Instance()->Create(p3d);
 	}
 
 	else {
@@ -146,6 +161,9 @@ void PackNodeFactory::FetchAllBuilder(std::vector<NodeBuilder*>& builders)
 
 	builders.push_back(AnimationBuilder::Instance());
 	builders.push_back(AnimationSprBuilder::Instance());
+
+	builders.push_back(Particle3dBuilder::Instance());
+	builders.push_back(Particle3dSprBuilder::Instance());
 }
 
 }

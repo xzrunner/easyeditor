@@ -60,7 +60,7 @@ void PackAnimationSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, flo
 	uint32_t id = m_id;
 	pack(id, ptr);
 
-	uint8_t type = simp::TYPE_ANIMATION_SPR;
+	uint8_t type = simp::TYPE_ANIM_SPR;
 	pack(type, ptr);
 
 	uint32_t sym = m_sym->GetID();

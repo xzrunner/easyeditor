@@ -197,4 +197,25 @@ uint32_t color2int(const s2::Color& col, PixelType type)
 	return i;
 }
 
+uint32_t color2int(const uint8_t rgba[4], PixelType type)
+{
+	uint32_t i = 0;
+	switch (type)
+	{
+	case PT_RGBA:
+		i  = (rgba[0] << 24 ) | (rgba[1] << 16) | (rgba[2] << 8) | rgba[3];
+		break;
+	case PT_ARGB:
+		i  = (rgba[3] << 24 ) | (rgba[0] << 16) | (rgba[1] << 8) | rgba[2];
+		break;
+	case PT_ABGR:
+		i  = (rgba[3] << 24 ) | (rgba[2] << 16) | (rgba[1] << 8) | rgba[0];
+		break;
+	case PT_BGRA:
+		i  = (rgba[2] << 24 ) | (rgba[1] << 16) | (rgba[0] << 8) | rgba[3];
+		break;
+	}
+	return i;
+}
+
 }

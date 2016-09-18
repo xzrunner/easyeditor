@@ -73,7 +73,7 @@ void AnimSymLoader::LoadBin(const simp::NodeAnimation* node)
 			for (int actor = 0; actor < actor_n; ++actor)
 			{
 				const simp::NodeAnimation::Actor* src_actor = src_frame->actors[actor];
-				s2::Sprite* spr = SpriteFactory::Instance()->Create(src_actor->spr);
+				s2::Sprite* spr = SpriteFactory::Instance()->Create(src_actor->sym_id);
 				SprTransLoader::Load(spr, src_actor->trans);
 				dst_frame->sprs.push_back(spr);
 			}

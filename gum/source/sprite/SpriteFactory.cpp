@@ -17,6 +17,7 @@
 #include <simp/NodeScale9Spr.h>
 #include <simp/NodeComplexSpr.h>
 #include <simp/NodeAnimationSpr.h>
+#include <simp/NodeParticle3dSpr.h>
 
 #include <sprite2/S2_Symbol.h>
 #include <sprite2/ImageSprite.h>
@@ -245,7 +246,7 @@ s2::Sprite* SpriteFactory::Create(uint32_t id)
 			spr = comp_spr;
 		}
 		break;
-	case simp::TYPE_ANIMATION_SPR:
+	case simp::TYPE_ANIM_SPR:
 		{
 			const simp::NodeAnimationSpr* node = (const simp::NodeAnimationSpr*)data;
 
@@ -257,6 +258,20 @@ s2::Sprite* SpriteFactory::Create(uint32_t id)
 			loader.LoadBin(node);
 
 			spr = anim_spr;
+		}
+		break;
+	case simp::TYPE_P3D_SPR:
+		{
+			const simp::NodeParticle3dSpr* node = (const simp::NodeParticle3dSpr*)data;
+
+			s2::Symbol* sym = SymbolFactory::Instance()->Create(node->sym);
+			s2::Particle3dSprite* p3d_spr = VI_DOWNCASTING<s2::Particle3dSprite*>(SpriteFactory::Instance()->Create(sym, PARTICLE3D));
+			sym->RemoveReference();
+
+			P3dSprLoader loader(p3d_spr);
+			loader.LoadBin(node);
+
+			spr = p3d_spr;
 		}
 		break;
 	default:

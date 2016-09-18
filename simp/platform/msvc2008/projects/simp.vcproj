@@ -348,6 +348,26 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="08.particle3d"
+				>
+				<File
+					RelativePath="..\..\..\source\NodeParticle3d.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\simp\NodeParticle3d.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\NodeParticle3dSpr.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\simp\NodeParticle3dSpr.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath="..\..\..\include\simp\simp_define.h"

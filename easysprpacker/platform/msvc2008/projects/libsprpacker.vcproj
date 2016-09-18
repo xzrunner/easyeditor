@@ -284,6 +284,26 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="08.particle3d"
+				>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackParticle3d.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackParticle3d.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackParticle3dSpr.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackParticle3dSpr.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="tools"
@@ -421,6 +441,26 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\libsprpacker\AnimationSprBuilder.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="08.particle3d"
+				>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\Particle3dBuilder.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\Particle3dBuilder.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\Particle3dSprBuilder.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\Particle3dSprBuilder.h"
 					>
 				</File>
 			</Filter>

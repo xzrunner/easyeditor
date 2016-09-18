@@ -7,6 +7,8 @@
 #include <sm_const.h>
 #include <ps_3d.h>
 #include <sprite2/Particle3dSymbol.h>
+#include <simp/NodeParticle3d.h>
+#include <simp/from_int.h>
 
 #include <fstream>
 
@@ -98,7 +100,11 @@ void P3dSymLoader::Store(p3d_emitter_cfg* cfg) const
 // 			dst.bind_ps_cfg = PSConfigMgr::Instance()->GetConfig(src.bind_filepath);
 // 		}
 
-		dst.ud = LoadSymbol(src.filepath);
+		if (!src.filepath.empty()) {
+			dst.ud = LoadSymbol(src.filepath);
+		} else if (src.sym_id != 0) {
+			dst.ud = SymbolFactory::Instance()->Create(src.sym_id);
+		}
 		if (!dst.ud) {
 			throw Exception("Symbol doesn't exist: %s", src.filepath.c_str());
 		}
@@ -212,6 +218,77 @@ void P3dSymLoader::LoadJson(const std::string& filepath)
 	std::string dir = FilepathHelper::Dir(filepath);
 	for (int i = 0, n = val["components"].size(); i < n; ++i) {
 		LoadComponent(dir, val["components"][i]);
+	}
+}
+
+void P3dSymLoader::LoadBin(const simp::NodeParticle3d* node)
+{
+	name.clear();
+
+	loop				= true;
+	local				= true;
+
+	static_mode			= simp::int2bool(node->static_mode);
+
+	count				= node->count;
+	emission_time		= simp::int2float100x(node->emission_time);
+
+	life				= simp::int2float100x(node->life) * 1000;
+	life_var			= simp::int2float100x(node->life_var) * 1000;
+
+	hori				= simp::int2radian((int16_t)(node->hori));
+	hori_var			= simp::int2radian(node->hori_var);
+	vert				= simp::int2radian((int16_t)(node->vert));
+	vert_var			= simp::int2radian(node->vert_var);
+
+	radial_spd			= (int16_t)(node->radial_spd);
+	radial_spd_var		= node->radial_spd_var;
+	tangential_spd		= (int16_t)(node->tangential_spd);
+	tangential_spd_var	= node->tangential_spd_var;
+	angular_spd			= (int16_t)(node->angular_spd);
+	angular_spd_var		= node->angular_spd_var;
+
+	dis_region			= node->dis_region;
+	dis_region_var		= node->dis_region_var;
+	dis_spd				= node->dis_spd;
+	dis_spd_var			= node->dis_spd_var;
+
+	gravity				= (int16_t)(node->gravity);
+
+	linear_acc			= (int16_t)(node->linear_acc);
+	linear_acc_var		= node->linear_acc_var;
+
+	inertia				= 0;
+
+	fadeout_time		= simp::int2float100x(node->fadeout_time);
+
+	ground				= node->ground;
+
+	start_radius		= node->start_radius;
+	start_height		= (int16_t)(node->start_height);
+
+	orient_to_movement	= simp::int2bool(node->orient_to_movement);
+	orient_to_parent	= false;
+
+	blend				= node->blend;
+
+	components.clear();
+	components.reserve(node->n);
+	for (int i = 0; i < node->n; ++i) 
+	{
+		const simp::NodeParticle3d::Component& src = node->components[i];
+		Component dst;
+		dst.sym_id			= src.sym_id;
+		dst.count			= src.count;
+		dst.scale_start		= simp::int2float100x(src.scale_start) * 100;
+		dst.scale_end		= simp::int2float100x(src.scale_end) * 100;
+		dst.angle			= (int16_t)(src.angle);
+		dst.angle_var		= src.angle_var;
+		dst.mul_col_begin	= src.mul_col_begin;
+		dst.mul_col_end		= src.mul_col_end;
+		dst.add_col_begin	= src.add_col_begin;
+		dst.add_col_end		= src.add_col_end;
+		components.push_back(dst);
 	}
 }
 

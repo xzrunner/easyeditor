@@ -31,7 +31,7 @@ NodeAnimation::NodeAnimation(Allocator& alloc, ImportStream& is)
 			{
 				void* ptr = alloc.Alloc(ALIGN_4BYTE(ActorSize()));
 				Actor* actor = new (ptr) Actor();
-				actor->spr = is.UInt32();
+				actor->sym_id = is.UInt32();
 				actor->trans = NodeTrans::LoadTrans(alloc, is);
 				frame->actors[k] = actor;
 			}

@@ -261,6 +261,17 @@ s2::Symbol* SymbolFactory::Create(uint32_t id, SymFileType* _type) const
 			ret = sym;
 		}
 		break;
+	case simp::TYPE_PARTICLE3D:
+		{
+			stype = PARTICLE3D;
+
+			s2::Particle3dSymbol* sym = new s2::Particle3dSymbol;
+			P3dSymLoader loader;
+			loader.LoadBin((const simp::NodeParticle3d*)data);
+			loader.Store(sym);
+			ret = sym;
+		}
+		break;
 	default:
 		assert(0);
 	}	

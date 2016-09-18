@@ -16,6 +16,8 @@
 #include "NodeComplexSpr.h"
 #include "NodeAnimation.h"
 #include "NodeAnimationSpr.h"
+#include "NodeParticle3d.h"
+#include "NodeParticle3dSpr.h"
 
 #include <new>
 #include <string.h>
@@ -155,10 +157,22 @@ CreateNode(uint8_t type, Allocator& alloc, ImportStream& is)
 			ret = new (ptr) NodeAnimation(alloc, is);
 		}
 		break;
-	case TYPE_ANIMATION_SPR:
+	case TYPE_ANIM_SPR:
 		{
 			void* ptr = alloc.Alloc(ALIGN_4BYTE(NodeAnimationSpr::Size()));
 			ret = new (ptr) NodeAnimationSpr(is);
+		}
+		break;
+	case TYPE_PARTICLE3D:
+		{
+			void* ptr = alloc.Alloc(ALIGN_4BYTE(NodeParticle3d::Size()));
+			ret = new (ptr) NodeParticle3d(alloc, is);
+		}
+		break;
+	case TYPE_P3D_SPR:
+		{
+			void* ptr = alloc.Alloc(ALIGN_4BYTE(NodeParticle3dSpr::Size()));
+			ret = new (ptr) NodeParticle3dSpr(is);
 		}
 		break;
 	default:

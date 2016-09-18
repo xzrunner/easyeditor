@@ -11,6 +11,7 @@
 #include <vector>
 
 namespace s2 { class Particle3dSymbol; class Symbol; }
+namespace simp { class NodeParticle3d; }
 
 struct p3d_emitter_cfg;
 
@@ -24,6 +25,7 @@ public:
 	void Store(p3d_emitter_cfg* cfg) const;
 
 	void LoadJson(const std::string& filepath);	
+	void LoadBin(const simp::NodeParticle3d* node);
 
 private:
 	void LoadComponent(const std::string& dir, const Json::Value& comp_val);
@@ -36,6 +38,7 @@ public:
 	{
 		int count;
 
+		uint32_t sym_id;
 		std::string filepath;
 		std::string bind_filepath;
 
@@ -51,6 +54,19 @@ public:
 		float alpha_start, alpha_end;
 
 		float start_z;
+
+		Component() 
+			: count(0)
+			, sym_id(0)
+			, scale_start(0)
+			, scale_end(0)
+			, angle(0)
+			, angle_var(0)
+			, alpha_start(0)
+			, alpha_end(0)
+			, start_z(0)
+		{
+		}
 	};
 
 public:

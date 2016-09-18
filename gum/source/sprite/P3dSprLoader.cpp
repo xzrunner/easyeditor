@@ -1,6 +1,8 @@
 #include "P3dSprLoader.h"
 
 #include <sprite2/Particle3dSprite.h>
+#include <simp/NodeParticle3dSpr.h>
+#include <simp/from_int.h>
 
 namespace gum
 {
@@ -51,6 +53,18 @@ void P3dSprLoader::LoadJson(const Json::Value& val, const std::string& dir)
 		local_mode_draw = p_val["local_mode_draw"].asBool();
 	}
 	m_spr->SetLocalModeDraw(local_mode_draw);
+}
+
+void P3dSprLoader::LoadBin(const simp::NodeParticle3dSpr* node)
+{
+	if (!m_spr) {
+		return;
+	}
+
+	m_spr->SetLoop(simp::int2bool(node->loop));
+	m_spr->SetLocalModeDraw(simp::int2bool(node->local));
+	m_spr->SetAlone(simp::int2bool(node->alone));
+	m_spr->SetReuse(simp::int2bool(node->reuse));
 }
 
 }

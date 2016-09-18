@@ -18,7 +18,7 @@ public:
 	struct Actor
 	{
 		NodeTrans* trans;
-		uint32_t spr;
+		uint32_t sym_id;
 	};
 
 	struct Frame
