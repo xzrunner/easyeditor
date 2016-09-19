@@ -55,9 +55,11 @@ void DrawPolygonCMPT::UpdateControlValue()
 		PolygonShape* poly = dynamic_cast<PolygonShape*>(shapes[0]);
 		if (poly) {
 			const ColorMaterial* cm = dynamic_cast<const ColorMaterial*>(poly->GetMaterial());
-			const s2::Color& col = cm->GetColor();
-			m_color.Set(col.r, col.g, col.b);
-			FillingButton();
+			if (cm) {
+				const s2::Color& col = cm->GetColor();
+				m_color.Set(col.r, col.g, col.b);
+				FillingButton();
+			}
 		}
 	}
 }
