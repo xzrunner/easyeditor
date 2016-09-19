@@ -66,6 +66,11 @@ void PackIconSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float sc
 	pack(process, ptr);
 }
 
+bool PackIconSpr::Equal(const eicon::Sprite* spr) const
+{
+	return m_process == spr->GetProcess();
+}
+
 void PackIconSpr::Init(const eicon::Sprite* spr)
 {
 	m_sym = PackNodeFactory::Instance()->Create(

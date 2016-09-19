@@ -29,6 +29,8 @@ public:
 	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, 
 		float scale) const;
 
+	bool Equal(const etrail::Sprite* spr) const { return true; }
+
 private:
 	void Init(const etrail::Sprite* spr);
 

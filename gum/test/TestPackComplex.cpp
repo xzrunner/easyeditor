@@ -21,6 +21,7 @@ void TestPackComplex::Init()
 	sl_mgr->CreateShader(sl::SHAPE2, new sl::Shape2Shader(sl_rc));
 	sl_mgr->CreateShader(sl::SPRITE2, new sl::Sprite2Shader(sl_rc));
 	sl_mgr->CreateShader(sl::FILTER, new sl::FilterShader(sl_rc));
+	sl_mgr->CreateShader(sl::MASK, new sl::MaskShader(sl_rc));
 	gum::RenderContext::Instance()->SetCamera(0, 0, 1, 1);
 
  	simp::Package* pkg = new simp::Package("pack/test");

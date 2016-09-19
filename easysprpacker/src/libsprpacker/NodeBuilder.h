@@ -5,10 +5,12 @@
 
 #include <ee/Visitor.h>
 
+#include <CU_Uncopyable.h>
+
 namespace esprpacker
 {
 
-class NodeBuilder
+class NodeBuilder : private cu::Uncopyable
 {
 public:
 	virtual ~NodeBuilder() {}

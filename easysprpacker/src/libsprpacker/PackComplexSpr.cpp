@@ -65,6 +65,11 @@ void PackComplexSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float
 	pack(action, ptr);
 }
 
+bool PackComplexSpr::Equal(const ecomplex::Sprite* spr) const
+{
+	return m_action == spr->GetAction();
+}
+
 void PackComplexSpr::Init(const ecomplex::Sprite* spr)
 {
 	m_sym = PackNodeFactory::Instance()->Create(

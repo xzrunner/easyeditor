@@ -3,9 +3,10 @@
 
 #include <CU_Uncopyable.h>
 
-namespace s2 { class MaskSymbol; }
-
 #include <string>
+
+namespace s2 { class MaskSymbol; }
+namespace simp { class NodeMask; }
 
 namespace gum
 {
@@ -17,6 +18,7 @@ public:
 	~MaskSymLoader();
 
 	void LoadJson(const std::string& filepath);
+	void LoadBin(const simp::NodeMask* node);
 
 private:
 	s2::MaskSymbol* m_sym;

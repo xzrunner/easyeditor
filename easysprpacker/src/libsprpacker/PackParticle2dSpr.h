@@ -29,8 +29,7 @@ public:
 	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, 
 		float scale) const;
 
-	bool IsLoop() const { return m_loop; }
-	bool IsLocal() const { return m_local; }
+	bool Equal(const eparticle2d::Sprite* spr) const;
 
 private:
 	void Init(const eparticle2d::Sprite* spr);

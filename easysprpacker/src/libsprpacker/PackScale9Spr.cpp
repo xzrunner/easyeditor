@@ -72,6 +72,12 @@ void PackScale9Spr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp,
 	pack(h, ptr);
 }
 
+bool PackScale9Spr::Equal(const escale9::Sprite* spr) const
+{
+	sm::vec2 sz = spr->GetScale9().GetSize();
+	return m_width == sz.x && m_height == sz.y;
+}
+
 void PackScale9Spr::Init(const escale9::Sprite* spr)
 {
 	m_sym = PackNodeFactory::Instance()->Create(

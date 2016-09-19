@@ -29,7 +29,7 @@ public:
 	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, 
 		float scale) const;
 
-	int GetAction() const { return m_action; }
+	bool Equal(const ecomplex::Sprite* spr) const;
 
 private:
 	void Init(const ecomplex::Sprite* spr);

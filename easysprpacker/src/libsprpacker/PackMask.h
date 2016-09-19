@@ -1,17 +1,22 @@
-#ifndef _EASYSPRPACKER_PACK_ICON_SPR_H_
-#define _EASYSPRPACKER_PACK_ICON_SPR_H_
+#ifndef _EASYSPRPACKER_PACK_MASK_H_
+#define _EASYSPRPACKER_PACK_MASK_H_
 
 #include "PackNode.h"
 
-namespace eicon { class Sprite; }
+#include <sprite2/MaskSymbol.h>
+
+#include <vector>
+
+namespace emask { class Symbol; }
 
 namespace esprpacker
 {
 
-class PackIconSpr : public PackNode
+class PackMask : public PackNode
 {
 public:
-	PackIconSpr(const eicon::Sprite* spr);
+	PackMask(const emask::Symbol* sym);
+	~PackMask();
 
 	/**
 	 *  @interface
@@ -29,18 +34,11 @@ public:
 	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, 
 		float scale) const;	
 
-	bool Equal(const eicon::Sprite* spr) const;
-
 private:
-	void Init(const eicon::Sprite* spr);
+	const PackNode *m_base, *m_mask;
 
-private:	
-	const PackNode* m_sym;
-
-	float m_process;
-
-}; // PackIconSpr
+}; // PackMask
 
 }
 
-#endif // _EASYSPRPACKER_PACK_ICON_SPR_H_
+#endif // _EASYSPRPACKER_PACK_MASK_H_

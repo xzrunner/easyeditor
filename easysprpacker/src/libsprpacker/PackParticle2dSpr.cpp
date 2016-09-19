@@ -75,6 +75,12 @@ void PackParticle2dSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, fl
 	pack(local, ptr);
 }
 
+bool PackParticle2dSpr::Equal(const eparticle2d::Sprite* spr) const
+{
+	return m_loop == spr->GetLoop()
+		&& m_local == spr->GetLocalModeDraw();
+}
+
 void PackParticle2dSpr::Init(const eparticle2d::Sprite* spr)
 {
 	m_sym = PackNodeFactory::Instance()->Create(

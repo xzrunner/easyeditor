@@ -31,7 +31,7 @@ public:
 	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, 
 		float scale) const;
 
-	sm::vec2 GetSize() const { return sm::vec2(m_width, m_height); }
+	bool Equal(const escale9::Sprite* spr) const;
 
 private:
 	void Init(const escale9::Sprite* spr);

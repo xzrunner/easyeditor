@@ -408,6 +408,26 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="12.mask"
+				>
+				<File
+					RelativePath="..\..\..\source\NodeMask.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\simp\NodeMask.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\NodeMaskSpr.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\simp\NodeMaskSpr.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath="..\..\..\include\simp\simp_define.h"

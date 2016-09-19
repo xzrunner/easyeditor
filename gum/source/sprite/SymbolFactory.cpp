@@ -277,6 +277,16 @@ s2::Symbol* SymbolFactory::Create(uint32_t id, SymFileType* _type) const
 			ret = sym;
 		}
 		break;
+	case simp::TYPE_MASK:
+		{
+			stype = MASK;
+
+			s2::MaskSymbol* sym = new s2::MaskSymbol;
+			MaskSymLoader loader(sym);
+			loader.LoadBin((const simp::NodeMask*)data);
+			ret = sym;
+		}
+		break;
 	case simp::TYPE_TRAIL:
 		{
 			stype = TRAIL;

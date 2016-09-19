@@ -344,6 +344,26 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="12.mask"
+				>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackMask.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackMask.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackMaskSpr.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackMaskSpr.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="tools"
@@ -368,38 +388,22 @@
 				RelativePath="..\..\..\src\libsprpacker\NodeBuilder.h"
 				>
 			</File>
-			<Filter
-				Name="01.image"
+			<File
+				RelativePath="..\..\..\src\libsprpacker\SprBuilder.h"
 				>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\ImageBuilder.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\ImageBuilder.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="02.scale9"
+			</File>
+			<File
+				RelativePath="..\..\..\src\libsprpacker\SprBuilder.inl"
 				>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\Scale9Builder.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\Scale9Builder.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\Scale9SprBuilder.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\Scale9SprBuilder.h"
-					>
-				</File>
-			</Filter>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libsprpacker\SymBuilder.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libsprpacker\SymBuilder.inl"
+				>
+			</File>
 			<Filter
 				Name="05.label"
 				>
@@ -409,138 +413,6 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\libsprpacker\LabelBuilder.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="03.icon"
-				>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\IconBuilder.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\IconBuilder.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\IconSprBuilder.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\IconSprBuilder.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="04.texture"
-				>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\TextureBuilder.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\TextureBuilder.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="06.complex"
-				>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\ComplexBuilder.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\ComplexBuilder.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\ComplexSprBuilder.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\ComplexSprBuilder.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="07.animation"
-				>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\AnimationBuilder.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\AnimationBuilder.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\AnimationSprBuilder.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\AnimationSprBuilder.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="08.particle3d"
-				>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\Particle3dBuilder.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\Particle3dBuilder.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\Particle3dSprBuilder.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\Particle3dSprBuilder.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="09.particle2d"
-				>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\Particle2dBuilder.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\Particle2dBuilder.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\Particle2dSprBuilder.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\Particle2dSprBuilder.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="13.trail"
-				>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\TrailBuilder.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\TrailBuilder.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\TrailSprBuilder.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libsprpacker\TrailSprBuilder.h"
 					>
 				</File>
 			</Filter>

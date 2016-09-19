@@ -21,6 +21,8 @@ static const int TYPE_P3D_SPR		= 16;
 static const int TYPE_PARTICLE2D	= 17;
 static const int TYPE_P2D_SPR		= 18;
 
+static const int TYPE_MASK			= 23;
+static const int TYPE_MASK_SPR		= 24;
 static const int TYPE_TRAIL			= 25;
 static const int TYPE_TRAIL_SPR		= 26;
 

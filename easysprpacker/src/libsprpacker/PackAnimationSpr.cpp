@@ -76,6 +76,13 @@ void PackAnimationSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, flo
 	pack(fps, ptr);
 }
 
+bool PackAnimationSpr::Equal(const eanim::Sprite* spr) const
+{
+	return m_loop == spr->IsLoop()
+		&& m_interval == spr->GetInterval()
+		&& m_fps == spr->GetFPS();
+}
+
 void PackAnimationSpr::Init(const eanim::Sprite* spr)
 {
 	m_sym = PackNodeFactory::Instance()->Create(

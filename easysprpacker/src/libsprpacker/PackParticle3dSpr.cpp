@@ -83,6 +83,14 @@ void PackParticle3dSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, fl
 	pack(reuse, ptr);
 }
 
+bool PackParticle3dSpr::Equal(const eparticle3d::Sprite* spr) const
+{
+	return m_loop == spr->IsLoop()
+		&& m_local == spr->IsLocalModeDraw()
+		&& m_alone == spr->IsAlone()
+		&& m_reuse == spr->IsReuse();
+}
+
 void PackParticle3dSpr::Init(const eparticle3d::Sprite* spr)
 {
 	m_sym = PackNodeFactory::Instance()->Create(

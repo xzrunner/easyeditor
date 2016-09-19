@@ -4,6 +4,7 @@
 
 #include <sprite2/MaskSymbol.h>
 #include <sprite2/S2_Sprite.h>
+#include <simp/NodeMask.h>
 
 #include <json/json.h>
 
@@ -56,6 +57,23 @@ void MaskSymLoader::LoadJson(const std::string& filepath)
 
 	std::string mask_path = FilepathHelper::Absolute(dir, value["mask"]["filepath"].asString());
 	s2::Sprite* mask = SpriteFactory::Instance()->Create(mask_path);
+	psym->SetMask(mask);
+	mask->RemoveReference();
+}
+
+void MaskSymLoader::LoadBin(const simp::NodeMask* node)
+{
+	if (!m_sym) {
+		return;
+	}
+
+	s2::MaskSymbol* psym = VI_DOWNCASTING<s2::MaskSymbol*>(m_sym);
+
+	s2::Sprite* base = SpriteFactory::Instance()->Create(node->base_id);
+	psym->SetBase(base);
+	base->RemoveReference();
+
+	s2::Sprite* mask = SpriteFactory::Instance()->Create(node->mask_id);
 	psym->SetMask(mask);
 	mask->RemoveReference();
 }

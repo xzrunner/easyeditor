@@ -29,9 +29,7 @@ public:
 	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, 
 		float scale) const;
 
-	bool GetLoop() const { return m_loop; }
-	float GetInterval() const { return m_interval; }
-	int GetFPS() const { return m_fps; }
+	bool Equal(const eanim::Sprite* spr) const;
 
 private:
 	void Init(const eanim::Sprite* spr);
