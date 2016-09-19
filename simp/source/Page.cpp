@@ -20,6 +20,8 @@
 #include "NodeParticle3dSpr.h"
 #include "NodeParticle2d.h"
 #include "NodeParticle2dSpr.h"
+#include "NodeTrail.h"
+#include "NodeTrailSpr.h"
 
 #include <new>
 #include <string.h>
@@ -187,6 +189,18 @@ CreateNode(uint8_t type, Allocator& alloc, ImportStream& is)
 		{
 			void* ptr = alloc.Alloc(ALIGN_4BYTE(NodeParticle2dSpr::Size()));
 			ret = new (ptr) NodeParticle2dSpr(is);
+		}
+		break;
+	case TYPE_TRAIL:
+		{
+			void* ptr = alloc.Alloc(ALIGN_4BYTE(NodeTrail::Size()));
+			ret = new (ptr) NodeTrail(alloc, is);
+		}
+		break;
+	case TYPE_TRAIL_SPR:
+		{
+			void* ptr = alloc.Alloc(ALIGN_4BYTE(NodeTrailSpr::Size()));
+			ret = new (ptr) NodeTrailSpr(is);
 		}
 		break;
 	default:

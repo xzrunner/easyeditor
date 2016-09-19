@@ -19,6 +19,7 @@
 #include <simp/NodeAnimationSpr.h>
 #include <simp/NodeParticle3dSpr.h>
 #include <simp/NodeParticle2dSpr.h>
+#include <simp/NodeTrailSpr.h>
 
 #include <sprite2/S2_Symbol.h>
 #include <sprite2/ImageSprite.h>
@@ -287,6 +288,17 @@ s2::Sprite* SpriteFactory::Create(uint32_t id)
 			loader.LoadBin(node);
 
 			spr = p2d_spr;
+		}
+		break;
+	case simp::TYPE_TRAIL_SPR:
+		{
+			const simp::NodeTrailSpr* node = (const simp::NodeTrailSpr*)data;
+
+			s2::Symbol* sym = SymbolFactory::Instance()->Create(node->sym);
+			s2::TrailSprite* trail_spr = VI_DOWNCASTING<s2::TrailSprite*>(SpriteFactory::Instance()->Create(sym, TRAIL));
+			sym->RemoveReference();
+
+			spr = trail_spr;
 		}
 		break;
 	default:

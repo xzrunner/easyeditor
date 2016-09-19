@@ -6,6 +6,8 @@
 
 #include <mt_2d.h>
 #include <sprite2/TrailSymbol.h>
+#include <simp/NodeTrail.h>
+#include <simp/from_int.h>
 
 #include <fstream>
 
@@ -51,7 +53,11 @@ void TrailSymLoader::Store(t2d_emitter_cfg* cfg) const
 			dst.mode.A.scale_begin = src.scale_begin;
 			dst.mode.A.scale_end = src.scale_end;
 
-			dst.mode.A.ud = LoadSymbol(src.filepath);
+			if (!src.filepath.empty()) {
+				dst.mode.A.ud = LoadSymbol(src.filepath);
+			} else {
+				dst.mode.A.ud = SymbolFactory::Instance()->Create(src.sym_id);
+			}
 			if (!dst.mode.A.ud) {
 				throw Exception("TrailSymLoader::Store create sym fail: %s", src.filepath.c_str());
 			}
@@ -100,6 +106,52 @@ void TrailSymLoader::LoadJson(const std::string& filepath)
 		} else {
 			assert(mode == T2D_MODE_SHAPE);
 			LoadShapeComp(value["components"][i]);
+		}
+	}
+}
+
+void TrailSymLoader::LoadBin(const simp::NodeTrail* node)
+{
+	mode			= node->mode_type;
+
+	count			= node->count;
+
+	life_begin		= simp::int2float100x(node->life_begin);
+	life_offset		= simp::int2float100x(node->life_offset);
+
+	fadeout_time	= simp::int2float100x(node->fadeout_time);
+
+	int n = node->n;
+	if (mode == T2D_MODE_IMAGE)
+	{
+		comp_images.reserve(n);
+		for (int i = 0; i < n; ++i)
+		{
+			const simp::NodeTrail::Component& src = node->components[i];
+			CompImage dst;
+			dst.sym_id			= src.mode.A.sym_id;
+			dst.scale_begin		= simp::int2float100x(src.mode.A.scale_begin);
+			dst.scale_end		= simp::int2float100x(src.mode.A.scale_end);
+			dst.mul_col_begin	= src.col_begin;
+			dst.mul_col_end		= src.col_end;
+			dst.add_col_begin	= src.mode.A.add_col_begin;
+			dst.add_col_end		= src.mode.A.add_col_end;
+			comp_images.push_back(dst);
+		}
+	}
+	else
+	{
+		assert(mode == T2D_MODE_SHAPE);
+		comp_shapes.reserve(n);
+		for (int i = 0; i < n; ++i)
+		{
+			const simp::NodeTrail::Component& src = node->components[i];
+			CompShape dst;
+			dst.linewidth		= simp::int2float100x(src.mode.B.size);
+			dst.acuity			= simp::int2float100x(src.mode.B.acuity);
+			dst.col_begin		= src.col_begin;
+			dst.col_end			= src.col_end;
+			comp_shapes.push_back(dst);
 		}
 	}
 }

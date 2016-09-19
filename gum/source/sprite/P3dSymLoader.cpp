@@ -102,7 +102,7 @@ void P3dSymLoader::Store(p3d_emitter_cfg* cfg) const
 
 		if (!src.filepath.empty()) {
 			dst.ud = LoadSymbol(src.filepath);
-		} else if (src.sym_id != 0) {
+		} else {
 			dst.ud = SymbolFactory::Instance()->Create(src.sym_id);
 		}
 		if (!dst.ud) {

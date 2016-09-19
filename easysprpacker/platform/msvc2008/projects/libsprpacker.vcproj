@@ -324,6 +324,26 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="13.trail"
+				>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackTrail.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackTrail.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackTrailSpr.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackTrailSpr.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="tools"
@@ -501,6 +521,26 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\libsprpacker\Particle2dSprBuilder.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="13.trail"
+				>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\TrailBuilder.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\TrailBuilder.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\TrailSprBuilder.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\TrailSprBuilder.h"
 					>
 				</File>
 			</Filter>

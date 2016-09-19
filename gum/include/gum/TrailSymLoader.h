@@ -12,6 +12,7 @@
 struct t2d_emitter_cfg;
 
 namespace s2 { class Symbol; class TrailSymbol; }
+namespace simp { class NodeTrail; }
 
 namespace gum
 {
@@ -23,6 +24,7 @@ public:
 	void Store(t2d_emitter_cfg* cfg) const;
 
 	void LoadJson(const std::string& filepath);
+	void LoadBin(const simp::NodeTrail* node);
 
 private:
 	void LoadImageComp(const std::string& dir, const Json::Value& comp_val);
@@ -34,10 +36,17 @@ protected:
 public:
 	struct CompImage
 	{
+		uint32_t sym_id;
 		std::string filepath;
 		float scale_begin, scale_end;
 		s2::Color mul_col_begin, mul_col_end;
 		s2::Color add_col_begin, add_col_end;
+
+		CompImage()
+			: scale_begin(0)
+			, scale_end(0)
+		{}
+
 	}; // CompImage
 
 	struct CompShape
@@ -45,6 +54,12 @@ public:
 		float linewidth;
 		float acuity;
 		s2::Color col_begin, col_end;
+
+		CompShape()
+			: linewidth(1)
+			, acuity(1)
+		{}
+
 	}; // CompShape
 
 public:

@@ -283,6 +283,17 @@ s2::Symbol* SymbolFactory::Create(uint32_t id, SymFileType* _type) const
 			ret = sym;
 		}
 		break;
+	case simp::TYPE_TRAIL:
+		{
+			stype = TRAIL;
+
+			s2::TrailSymbol* sym = new s2::TrailSymbol;
+			TrailSymLoader loader;
+			loader.LoadBin((const simp::NodeTrail*)data);
+			loader.Store(sym);
+			ret = sym;
+		}
+		break;
 	default:
 		assert(0);
 	}	

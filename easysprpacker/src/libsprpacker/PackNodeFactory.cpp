@@ -15,6 +15,8 @@
 #include "Particle3dSprBuilder.h"
 #include "Particle2dBuilder.h"
 #include "Particle2dSprBuilder.h"
+#include "TrailBuilder.h"
+#include "TrailSprBuilder.h"
 
 #include <easyscale9.h>
 #include <easyicon.h>
@@ -24,6 +26,7 @@
 #include <easyanim.h>
 #include <easyparticle3d.h>
 #include <easyparticle2d.h>
+#include <easytrail.h>
 
 #include <ee/Sprite.h>
 #include <ee/ImageSprite.h>
@@ -88,6 +91,10 @@ const PackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 	else if (const eparticle2d::Sprite* p2d = dynamic_cast<const eparticle2d::Sprite*>(spr)) {
 		node = Particle2dSprBuilder::Instance()->Create(p2d);
 	}
+	// trail
+	else if (const etrail::Sprite* trail = dynamic_cast<const etrail::Sprite*>(spr)) {
+		node = TrailSprBuilder::Instance()->Create(trail);
+	}
 
 	else {
 		throw ee::Exception("PackNodeFactory::Create unknown sprite type.");
@@ -129,6 +136,10 @@ const PackNode* PackNodeFactory::Create(const ee::Symbol* sym)
 	// particle2d
 	else if (const eparticle2d::Symbol* p2d = dynamic_cast<const eparticle2d::Symbol*>(sym)) {
 		node = Particle2dBuilder::Instance()->Create(p2d);
+	}
+	// trail
+	else if (const etrail::Symbol* trail = dynamic_cast<const etrail::Symbol*>(sym)) {
+		node = TrailBuilder::Instance()->Create(trail);
 	}
 
 	else {
@@ -178,6 +189,9 @@ void PackNodeFactory::FetchAllBuilder(std::vector<NodeBuilder*>& builders)
 
 	builders.push_back(Particle2dBuilder::Instance());
 	builders.push_back(Particle2dSprBuilder::Instance());
+
+	builders.push_back(TrailBuilder::Instance());
+	builders.push_back(TrailSprBuilder::Instance());
 }
 
 }
