@@ -43,34 +43,25 @@ SymbolFactory::SymbolFactory()
 {
 }
 
-SymbolFactory::~SymbolFactory()
-{
-	std::map<std::string, s2::Symbol*>::iterator itr = m_path_cache.begin();
-	for ( ; itr != m_path_cache.end(); ++itr) {
-		itr->second->RemoveReference();
-	}
-
-	std::map<uint32_t, s2::Symbol*>::iterator itr2 = m_id_cache.begin();
-	for ( ; itr2 != m_id_cache.end(); ++itr2) {
-		itr2->second->RemoveReference();
-	}
-}
-
 s2::Symbol* SymbolFactory::Create(const std::string& filepath, SymFileType* _type) const
 {
 	std::string fixed_path = filepath;
 	StringHelper::ToLower(fixed_path);
 
+	std::map<std::string, Node>::const_iterator itr 
+		= m_path_cache.find(fixed_path);
+	if (itr != m_path_cache.end()) {
+		const Node& node = itr->second;
+		node.sym->AddReference();
+		if (_type) {
+			*_type = node.type;
+		}
+		return node.sym;
+	}
+
 	SymFileType type = get_sym_file_type(fixed_path);
 	if (_type) {
 		*_type = type;
-	}
-
-	std::map<std::string, s2::Symbol*>::const_iterator itr 
-		= m_path_cache.find(fixed_path);
-	if (itr != m_path_cache.end()) {
-		itr->second->AddReference();
-		return itr->second;
 	}
 
 	s2::Symbol* ret = NULL;
@@ -179,8 +170,7 @@ s2::Symbol* SymbolFactory::Create(const std::string& filepath, SymFileType* _typ
 	}
 
 	if (ret) {
-		m_path_cache.insert(std::make_pair(fixed_path, ret));
-		ret->AddReference();
+		m_path_cache.insert(std::make_pair(fixed_path, Node(ret, type)));
 	}
 
 	return ret;
@@ -188,10 +178,14 @@ s2::Symbol* SymbolFactory::Create(const std::string& filepath, SymFileType* _typ
 
 s2::Symbol* SymbolFactory::Create(uint32_t id, SymFileType* _type) const
 {
-	std::map<uint32_t, s2::Symbol*>::const_iterator itr = m_id_cache.find(id);
+	std::map<uint32_t, Node>::const_iterator itr = m_id_cache.find(id);
 	if (itr != m_id_cache.end()) {
-		itr->second->AddReference();
-		return itr->second;
+		const Node& node = itr->second;
+		node.sym->AddReference();
+		if (_type) {
+			*_type = node.type;
+		}
+		return node.sym;
 	}
 
 	s2::Symbol* ret = NULL;
@@ -296,10 +290,13 @@ s2::Symbol* SymbolFactory::Create(uint32_t id, SymFileType* _type) const
 		break;
 	default:
 		assert(0);
-	}	
+	}
 
 	if (_type) {
 		*_type = stype;
+	}
+	if (ret) {
+		m_id_cache.insert(std::make_pair(id, Node(ret, stype)));
 	}
 
 	return ret;
@@ -312,6 +309,40 @@ s2::Symbol* SymbolFactory::Create(const std::string& pkg_name, const std::string
 		return Create(id, type);
 	} else {
 		return NULL;
+	}
+}
+
+/************************************************************************/
+/* class SymbolFactory::Node                                            */
+/************************************************************************/
+
+SymbolFactory::Node::Node(s2::Symbol* _sym, SymFileType _type) 
+	: sym(_sym)
+	, type(_type) 
+{
+	if (sym) {
+		sym->AddReference();
+	}
+}
+
+SymbolFactory::Node::Node(const Node& node)
+	: sym(NULL)
+	, type(node.type)
+{
+	cu::RefCountObjAssign(sym, const_cast<s2::Symbol*>(node.sym));
+}
+
+SymbolFactory::Node& SymbolFactory::Node::operator = (const Node& node)
+{
+	type = node.type;
+	cu::RefCountObjAssign(sym, const_cast<s2::Symbol*>(node.sym));
+	return *this;
+}
+
+SymbolFactory::Node::~Node() 
+{
+	if (sym) {
+		sym->RemoveReference();
 	}
 }
 

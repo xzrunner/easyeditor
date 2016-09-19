@@ -32,8 +32,21 @@ public:
 	s2::Symbol* Create(const std::string& pkg_name, const std::string& node_name, SymFileType* type = NULL) const;
 
 private:
-	mutable std::map<std::string, s2::Symbol*> m_path_cache;
-	mutable std::map<uint32_t, s2::Symbol*> m_id_cache;
+	struct Node
+	{
+		s2::Symbol* sym;
+		SymFileType type;
+
+		Node() : sym(NULL) {}
+		Node(s2::Symbol* sym, SymFileType type);
+		Node(const Node& node);
+		Node& operator = (const Node& node);
+		~Node();
+	};
+
+private:
+	mutable std::map<std::string, Node> m_path_cache;
+	mutable std::map<uint32_t, Node> m_id_cache;
 
 	SINGLETON_DECLARATION(SymbolFactory);
 
