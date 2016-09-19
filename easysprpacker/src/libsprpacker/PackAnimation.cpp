@@ -35,6 +35,9 @@ void PackAnimation::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::Text
 
 	lua::assign_with_end(gen, "type", "\"animation\"");
 	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(m_id));
+	if (!m_name.empty()) {
+		lua::assign_with_end(gen, "export", "\"" + m_name + "\"");
+	}
 
 	lua::TableAssign ta(gen, "layers", true);
 	for (int i = 0, n = m_layers.size(); i < n; ++i) {
