@@ -62,7 +62,8 @@ private:
 			     m_add_col_begin, m_add_col_end;
 
 		const PackNode* m_node;
-	};
+
+	}; // Component
 
 private:
 	int m_blend;

@@ -7,6 +7,8 @@
 #include <sm_const.h>
 #include <ps_2d.h>
 #include <sprite2/Particle2dSymbol.h>
+#include <simp/NodeParticle2d.h>
+#include <simp/from_int.h>
 
 #include <fstream>
 
@@ -94,7 +96,14 @@ void P2dSymLoader::Store(p2d_emitter_cfg* cfg) const
 		memcpy(&dst.add_col_begin.r, &src.add_col_begin.r, sizeof(src.add_col_begin));
 		memcpy(&dst.add_col_end.r, &src.add_col_end.r, sizeof(src.add_col_end));
 
-		dst.ud = LoadSymbol(src.filepath);
+		if (!src.filepath.empty()) {
+			dst.ud = LoadSymbol(src.filepath);			
+		} else if (src.sym_id != 0) {
+			dst.ud = SymbolFactory::Instance()->Create(src.sym_id);
+		}
+		if (!dst.ud) {
+			throw Exception("Symbol doesn't exist: %s", src.filepath.c_str());
+		}
 	}
 }
 
@@ -173,6 +182,89 @@ void P2dSymLoader::LoadJson(const std::string& filepath)
 	std::string dir = FilepathHelper::Dir(filepath);
 	for (int i = 0, n = value["components"].size(); i < n; ++i) {
 		LoadComponent(dir, value["components"][i]);
+	}
+}
+
+void P2dSymLoader::LoadBin(const simp::NodeParticle2d* node)
+{
+	name.clear();
+
+	mode_type = node->mode_type;
+
+	if (mode_type == P2D_MODE_GRAVITY)
+	{
+		A.gravity.x				= node->mode.A.gravity[0];
+		A.gravity.y				= node->mode.A.gravity[1];
+
+		A.speed					= node->mode.A.speed;
+		A.speed_var				= node->mode.A.speed_var;
+
+		A.tangential_accel		= node->mode.A.tangential_accel;
+		A.tangential_accel_var	= node->mode.A.tangential_accel_var;
+
+		A.radial_accel			= node->mode.A.radial_accel;
+		A.radial_accel_var		= node->mode.A.radial_accel_var;
+
+		A.rotation_is_dir		= simp::int2bool(node->mode.A.rotation_is_dir);
+	}
+	else if (mode_type == P2D_MODE_RADIUS) 
+	{
+		B.start_radius			= node->mode.B.start_radius;
+		B.start_radius_var		= node->mode.B.start_radius_var;
+
+		B.end_radius			= node->mode.B.end_radius;
+		B.end_radius_var		= node->mode.B.end_radius_var;
+
+		B.direction_delta		= node->mode.B.direction_delta;
+		B.direction_delta_var	= node->mode.B.direction_delta_var;		
+	}
+	else if (mode_type == P2D_MODE_SPD_COS) 
+	{
+		C.speed					= node->mode.C.speed;
+		C.speed_var				= node->mode.C.speed_var;
+
+		C.cos_amplitude			= node->mode.C.cos_amplitude;
+		C.cos_amplitude_var		= node->mode.C.cos_amplitude_var;
+
+		C.cos_frequency			= node->mode.C.cos_frequency;
+		C.cos_frequency_var		= node->mode.C.cos_frequency_var;
+	} 
+	else 
+	{
+		throw Exception("P2dSymLoader::LoadJson unknown mode type.");
+	}
+
+	emission_time		= simp::int2float100x(node->emission_time);
+
+	count				= node->count;
+
+	life				= simp::int2float100x(node->life);
+	life_var			= simp::int2float100x(node->life_var);
+
+	position.x			= node->position[0];
+	position_var.x		= node->position_var[0];
+	position.y			= node->position[1];
+	position_var.y		= node->position_var[1];
+
+	direction			= simp::int2radian(node->direction);
+	direction_var		= simp::int2radian(node->direction_var);
+
+	components.clear();
+	components.reserve(node->n);
+	for (int i = 0; i < node->n; ++i)
+	{
+		const simp::NodeParticle2d::Component& src = node->components[i];
+		Component dst;
+		dst.angle_start		= src.angle_start;
+		dst.angle_end		= src.angle_end;
+		dst.scale_start		= src.scale_start;
+		dst.scale_end		= src.scale_end;
+		dst.mul_col_begin.FromRGBA(src.mul_col_begin);
+		dst.mul_col_end.FromRGBA(src.mul_col_end);
+		dst.add_col_begin.FromRGBA(src.add_col_begin);
+		dst.add_col_end.FromRGBA(src.add_col_end);
+		dst.sym_id			= src.sym_id;
+		components.push_back(dst);
 	}
 }
 

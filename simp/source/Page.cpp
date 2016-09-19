@@ -18,6 +18,8 @@
 #include "NodeAnimationSpr.h"
 #include "NodeParticle3d.h"
 #include "NodeParticle3dSpr.h"
+#include "NodeParticle2d.h"
+#include "NodeParticle2dSpr.h"
 
 #include <new>
 #include <string.h>
@@ -173,6 +175,18 @@ CreateNode(uint8_t type, Allocator& alloc, ImportStream& is)
 		{
 			void* ptr = alloc.Alloc(ALIGN_4BYTE(NodeParticle3dSpr::Size()));
 			ret = new (ptr) NodeParticle3dSpr(is);
+		}
+		break;
+	case TYPE_PARTICLE2D:
+		{
+			void* ptr = alloc.Alloc(ALIGN_4BYTE(NodeParticle2d::Size()));
+			ret = new (ptr) NodeParticle2d(alloc, is);
+		}
+		break;
+	case TYPE_P2D_SPR:
+		{
+			void* ptr = alloc.Alloc(ALIGN_4BYTE(NodeParticle2dSpr::Size()));
+			ret = new (ptr) NodeParticle2dSpr(is);
 		}
 		break;
 	default:

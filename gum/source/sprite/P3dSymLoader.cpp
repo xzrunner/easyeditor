@@ -284,10 +284,10 @@ void P3dSymLoader::LoadBin(const simp::NodeParticle3d* node)
 		dst.scale_end		= simp::int2float100x(src.scale_end) * 100;
 		dst.angle			= (int16_t)(src.angle);
 		dst.angle_var		= src.angle_var;
-		dst.mul_col_begin	= src.mul_col_begin;
-		dst.mul_col_end		= src.mul_col_end;
-		dst.add_col_begin	= src.add_col_begin;
-		dst.add_col_end		= src.add_col_end;
+		dst.mul_col_begin.FromRGBA(src.mul_col_begin);
+		dst.mul_col_end.FromRGBA(src.mul_col_end);
+		dst.add_col_begin.FromRGBA(src.add_col_begin);
+		dst.add_col_end.FromRGBA(src.add_col_end);
 		components.push_back(dst);
 	}
 }

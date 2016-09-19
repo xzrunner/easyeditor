@@ -6,6 +6,7 @@
 #include <json/json.h>
 
 namespace s2 { class Particle2dSprite; }
+namespace simp { class NodeParticle2dSpr; }
 
 namespace gum
 {
@@ -17,6 +18,7 @@ public:
 	~P2dSprLoader();
 
 	void LoadJson(const Json::Value& val, const std::string& dir);
+	void LoadBin(const simp::NodeParticle2dSpr* node);
 
 private:
 	s2::Particle2dSprite* m_spr;

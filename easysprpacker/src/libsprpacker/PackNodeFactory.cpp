@@ -13,6 +13,8 @@
 #include "AnimationSprBuilder.h"
 #include "Particle3dBuilder.h"
 #include "Particle3dSprBuilder.h"
+#include "Particle2dBuilder.h"
+#include "Particle2dSprBuilder.h"
 
 #include <easyscale9.h>
 #include <easyicon.h>
@@ -21,6 +23,7 @@
 #include <easycomplex.h>
 #include <easyanim.h>
 #include <easyparticle3d.h>
+#include <easyparticle2d.h>
 
 #include <ee/Sprite.h>
 #include <ee/ImageSprite.h>
@@ -81,6 +84,10 @@ const PackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 	else if (const eparticle3d::Sprite* p3d = dynamic_cast<const eparticle3d::Sprite*>(spr)) {
 		node = Particle3dSprBuilder::Instance()->Create(p3d);
 	}
+	// particle2d
+	else if (const eparticle2d::Sprite* p2d = dynamic_cast<const eparticle2d::Sprite*>(spr)) {
+		node = Particle2dSprBuilder::Instance()->Create(p2d);
+	}
 
 	else {
 		throw ee::Exception("PackNodeFactory::Create unknown sprite type.");
@@ -118,6 +125,10 @@ const PackNode* PackNodeFactory::Create(const ee::Symbol* sym)
 	// particle3d
 	else if (const eparticle3d::Symbol* p3d = dynamic_cast<const eparticle3d::Symbol*>(sym)) {
 		node = Particle3dBuilder::Instance()->Create(p3d);
+	}
+	// particle2d
+	else if (const eparticle2d::Symbol* p2d = dynamic_cast<const eparticle2d::Symbol*>(sym)) {
+		node = Particle2dBuilder::Instance()->Create(p2d);
 	}
 
 	else {
@@ -164,6 +175,9 @@ void PackNodeFactory::FetchAllBuilder(std::vector<NodeBuilder*>& builders)
 
 	builders.push_back(Particle3dBuilder::Instance());
 	builders.push_back(Particle3dSprBuilder::Instance());
+
+	builders.push_back(Particle2dBuilder::Instance());
+	builders.push_back(Particle2dSprBuilder::Instance());
 }
 
 }

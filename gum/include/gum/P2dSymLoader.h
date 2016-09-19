@@ -11,6 +11,7 @@
 #include <string>
 
 namespace s2 { class Symbol; class Particle2dSymbol; }
+namespace simp { class NodeParticle2d; }
 
 struct p2d_emitter_cfg;
 
@@ -24,6 +25,7 @@ public:
 	void Store(p2d_emitter_cfg* cfg) const;
 
 	void LoadJson(const std::string& filepath);	
+	void LoadBin(const simp::NodeParticle2d* node);
 
 private:
 	void LoadComponent(const std::string& dir, const Json::Value& comp_val);
@@ -43,7 +45,20 @@ public:
 
 		float alpha_start, alpha_end;
 
+		uint32_t sym_id;
 		std::string filepath;
+
+		Component()
+			: angle_start(0)
+			, angle_end(0)
+			, scale_start(0)
+			, scale_end(0)
+			, alpha_start(0)
+			, alpha_end(0)
+			, sym_id(0)
+		{
+		}
+
 	}; // Component
 
 public:

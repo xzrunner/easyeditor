@@ -1,6 +1,8 @@
 #include "P2dSprLoader.h"
 
 #include <sprite2/Particle2dSprite.h>
+#include <simp/from_int.h>
+#include <simp/NodeParticle2dSpr.h>
 
 namespace gum
 {
@@ -30,6 +32,16 @@ void P2dSprLoader::LoadJson(const Json::Value& val, const std::string& dir)
 
 	m_spr->SetLoop(p_val["loop"].asBool());
 	m_spr->SetLocalModeDraw(p_val["local_mode_draw"].asBool());
+}
+
+void P2dSprLoader::LoadBin(const simp::NodeParticle2dSpr* node)
+{
+	if (!m_spr) {
+		return;
+	}
+
+	m_spr->SetLoop(simp::int2bool(node->loop));
+	m_spr->SetLocalModeDraw(simp::int2bool(node->local));
 }
 
 }

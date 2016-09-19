@@ -272,6 +272,17 @@ s2::Symbol* SymbolFactory::Create(uint32_t id, SymFileType* _type) const
 			ret = sym;
 		}
 		break;
+	case simp::TYPE_PARTICLE2D:
+		{
+			stype = PARTICLE2D;
+
+			s2::Particle2dSymbol* sym = new s2::Particle2dSymbol;
+			P2dSymLoader loader;
+			loader.LoadBin((const simp::NodeParticle2d*)data);
+			loader.Store(sym);
+			ret = sym;
+		}
+		break;
 	default:
 		assert(0);
 	}	

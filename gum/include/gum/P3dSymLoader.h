@@ -67,7 +67,8 @@ public:
 			, start_z(0)
 		{
 		}
-	};
+
+	}; // Component
 
 public:
 	std::string name;

@@ -18,6 +18,8 @@ static const int TYPE_ANIMATION		= 13;
 static const int TYPE_ANIM_SPR		= 14;
 static const int TYPE_PARTICLE3D	= 15;
 static const int TYPE_P3D_SPR		= 16;
+static const int TYPE_PARTICLE2D	= 17;
+static const int TYPE_P2D_SPR		= 18;
 
 }
 
