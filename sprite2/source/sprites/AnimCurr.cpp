@@ -223,14 +223,14 @@ void AnimCurr::LoadFromSym()
 			Frame new_frame;
 			if (!curr_f->tween || !next_f)
 			{
-				bool is_keyframe = m_frame == curr_f->index;
+//				bool is_keyframe = m_frame == curr_f->index;
 				for (int i = 0, n = curr_f->sprs.size(); i < n; ++i) 
 				{
 					Sprite* src = curr_f->sprs[i];
 					Sprite* dst = NULL;
-					if (is_keyframe) {
-						dst = VI_CLONE(Sprite, src);
-					} else {
+// 					if (is_keyframe) {
+// 						dst = VI_CLONE(Sprite, src);
+// 					} else {
 						dst = old_frame.Query(src, i);
 	 					if (dst) {
 	 						dst->AddReference();
@@ -238,7 +238,7 @@ void AnimCurr::LoadFromSym()
 	 					} else {
 							dst = VI_CLONE(Sprite, src);
 						}
-					}
+//					}
 					new_frame.sprs.push_back(dst);
 				}
 			}
