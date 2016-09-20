@@ -162,8 +162,9 @@ void FileStorer::StoreAction(const Symbol* sym, Json::Value& val)
 					break;
 				}
 			}
-			assert(idx != -1);
-			action_val[i]["sprite"][j] = idx;
+			if (idx != -1) {
+				action_val[i]["sprite"][j] = idx;
+			}
 		}
 	}
 

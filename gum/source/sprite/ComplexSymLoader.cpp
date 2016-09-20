@@ -104,7 +104,10 @@ void ComplexSymLoader::LoadJsonAction(const Json::Value& val, s2::ComplexSymbol*
 		dst_action.name = src_action.name;
 		dst_action.sprs.reserve(src_action.idx.size());
 		for (int j = 0, m = src_action.idx.size(); j < m; ++j) {
-			dst_action.sprs.push_back(children[src_action.idx[j]]);
+			int idx = src_action.idx[j];
+			if (idx >= 0) {
+				dst_action.sprs.push_back(children[idx]);
+			}
 		}
 		dst.push_back(dst_action);
 	}
