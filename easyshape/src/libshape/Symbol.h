@@ -47,9 +47,6 @@ public:
 
 	static ee::Symbol* Create() { return new Symbol(); }
 
-	// todo
-	const std::vector<ee::Shape*>& GetShapes() const { return m_shapes; }
-
 protected:
 	virtual void LoadResources();
 
@@ -59,10 +56,9 @@ private:
 
 private:
 	ee::Symbol* m_bg;
+
 	std::vector<ee::Shape*> m_bg_outline;
 	std::vector<std::vector<sm::vec2> > m_bg_tri_strips;
-
-	std::vector<ee::Shape*> m_shapes;
 
 }; // Symbol
 

@@ -19,6 +19,7 @@
 #include <simp/NodeAnimationSpr.h>
 #include <simp/NodeParticle3dSpr.h>
 #include <simp/NodeParticle2dSpr.h>
+#include <simp/NodeShapeSpr.h>
 #include <simp/NodeMeshSpr.h>
 #include <simp/NodeMaskSpr.h>
 #include <simp/NodeTrailSpr.h>
@@ -32,6 +33,7 @@
 #include <sprite2/AnimSprite.h>
 #include <sprite2/Particle3dSprite.h>
 #include <sprite2/Particle2dSprite.h>
+#include <sprite2/ShapeSprite.h>
 #include <sprite2/MeshSprite.h>
 #include <sprite2/MaskSprite.h>
 #include <sprite2/TrailSprite.h>
@@ -75,6 +77,9 @@ s2::Sprite* SpriteFactory::Create(s2::Symbol* sym, SymFileType type) const
 		break;
 	case PARTICLE2D:
 		spr = new s2::Particle2dSprite(sym);
+		break;
+	case SHAPE:
+		spr = new s2::ShapeSprite(sym);
 		break;
 	case MESH:
 		spr = new s2::MeshSprite(sym);
@@ -290,6 +295,17 @@ s2::Sprite* SpriteFactory::Create(uint32_t id)
 			loader.LoadBin(node);
 
 			spr = p2d_spr;
+		}
+		break;
+	case simp::TYPE_SHAPE_SPR:
+		{
+			const simp::NodeShapeSpr* node = (const simp::NodeShapeSpr*)data;
+
+			s2::Symbol* sym = SymbolFactory::Instance()->Create(node->sym);
+			s2::ShapeSprite* shape_spr = VI_DOWNCASTING<s2::ShapeSprite*>(SpriteFactory::Instance()->Create(sym, SHAPE));
+			sym->RemoveReference();
+
+			spr = shape_spr;
 		}
 		break;
 	case simp::TYPE_MESH_SPR:

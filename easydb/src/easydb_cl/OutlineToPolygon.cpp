@@ -74,13 +74,9 @@ void OutlineToPolygon::Trigger(const std::string& dir) const
 		std::string shape_path = ee::FileHelper::GetFilenameAddTag(
 			filepath, eshape::FILE_TAG, "json");
 
-		std::vector<ee::Shape*> shapes;
 		eshape::PolygonShape poly(vertices);
-		shapes.push_back(&poly);
-
 		ee::DummySymbol bg(filepath);
-
-		eshape::FileIO::StoreToFile(shape_path.c_str(), shapes, &bg);
+		eshape::FileIO::StoreToFile(shape_path.c_str(), &poly, &bg);
 	}
 }
 

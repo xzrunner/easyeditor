@@ -48,6 +48,17 @@ void PointShape::Draw(const sm::mat4& mt, const RenderColor& color) const
 	RVG::Circle(center, r, true);
 }
 
+const sm::vec2& PointShape::GetPos() const 
+{ 
+	return m_pos; 
+}
+
+void PointShape::SetPos(const sm::vec2& pos) 
+{
+	m_pos = pos;
+	UpdateBounding();
+}
+
 void PointShape::UpdateBounding()
 {
 	m_bounding.xmin = m_bounding.ymin = -SHAPE_NODE_RADIUS;

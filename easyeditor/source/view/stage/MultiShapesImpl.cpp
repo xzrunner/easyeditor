@@ -76,7 +76,7 @@ MultiShapesImpl::PointQueryVisitor::PointQueryVisitor(const sm::vec2& pos, Shape
 
 void MultiShapesImpl::PointQueryVisitor::Visit(Shape* shape, bool& next)
 {
-	if (shape->IsContain(m_pos))
+	if (shape && shape->IsContain(m_pos))
 	{
 		*m_pResult = shape;
 		next = false;
@@ -98,7 +98,7 @@ MultiShapesImpl::RectQueryVisitor::RectQueryVisitor(const sm::rect& rect, std::v
 
 void MultiShapesImpl::RectQueryVisitor::Visit(Shape* shape, bool& next)
 {
-	if (shape->IsIntersect(m_rect))
+	if (shape && shape->IsIntersect(m_rect))
 		m_result.push_back(shape);
 	next = true;
 }

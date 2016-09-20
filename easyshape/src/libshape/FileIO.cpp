@@ -18,80 +18,63 @@
 namespace eshape
 {
 
-void FileIO::LoadFromFile(const char* filename, 
-						  std::vector<ee::Shape*>& shapes, 
-						  std::string& bg_filepath)
+ee::Shape* FileIO::LoadFromFile(const char* filename, std::string& bg_filepath)
 {
-	Json::Value value;
+	Json::Value val;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
 	std::ifstream fin(filename);
 	std::locale::global(std::locale("C"));
-	reader.parse(fin, value);
+	reader.parse(fin, val);
 	fin.close();
 
 	std::string dir = ee::FileHelper::GetFileDir(filename);
-	bg_filepath = dir + "\\" + value["bg_symbol"].asString();
+	bg_filepath = dir + "\\" + val["bg_symbol"].asString();
 
-	int i = 0;
-	Json::Value shapeValue = value["shapes"][i++];
-	while (!shapeValue.isNull()) {
-		ee::Shape* shape = LoadShape(dir, shapeValue);
-		shapes.push_back(shape);
-		shapeValue = value["shapes"][i++];
-	}
+	return LoadShape(dir, val["shape"]);
 }
 
-void FileIO::LoadFromFile(const char* filename, 
-						  std::vector<ee::Shape*>& shapes, 
-						  ee::Symbol*& bg)
+ee::Shape* FileIO::LoadFromFile(const char* filename, ee::Symbol*& bg)
 {
-	Json::Value value;
+	Json::Value val;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
 	std::ifstream fin(filename);
 	std::locale::global(std::locale("C"));
-	reader.parse(fin, value);
+	reader.parse(fin, val);
 	fin.close();
 
 	std::string dir = ee::FileHelper::GetFileDir(filename);
 
-	int i = 0;
-	Json::Value shapeValue = value["shapes"][i++];
-	while (!shapeValue.isNull()) {
-		ee::Shape* shape = LoadShape(dir, shapeValue);
-		shapes.push_back(shape);
-		shapeValue = value["shapes"][i++];
-	}
-
-	if (!value["bg_symbol"].isNull()) {
-		std::string path = ee::FileHelper::GetAbsolutePath(dir, value["bg_symbol"].asString());
+	if (!val["bg_symbol"].isNull()) {
+		std::string path = ee::FileHelper::GetAbsolutePath(dir, val["bg_symbol"].asString());
 		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(path);
 		cu::RefCountObjAssign<ee::Symbol>(bg, sym);
 		sym->RemoveReference();
 	}
+
+	return LoadShape(dir, val["shape"]);
 }
 
 void FileIO::StoreToFile(const char* filename, 
-						 const std::vector<ee::Shape*>& shapes, 
+						 const ee::Shape* shape, 
 						 const ee::Symbol* bg)
 {
 	std::string dir = ee::FileHelper::GetFileDir(filename);
-	Json::Value value;
-	for (size_t i = 0, n = shapes.size(); i < n; ++i) {
-		value["shapes"][i] = StoreShape(dir, shapes[i]);
-	}
+	Json::Value val;
+	
+	val["shape"] = StoreShape(dir, shape);
 
 	if (bg) {
 		std::string dir = ee::FileHelper::GetFileDir(filename) + "\\";
-		value["bg_symbol"] = ee::FileHelper::GetRelativePath(dir, bg->GetFilepath());
+		val["bg_symbol"] = ee::FileHelper::GetRelativePath(dir, bg->GetFilepath());
 	}
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
 	std::ofstream fout(filename);
 	std::locale::global(std::locale("C"));	
-	writer.write(fout, value);
+	writer.write(fout, val);
 	fout.close();
 }
 
@@ -119,7 +102,7 @@ ee::Shape* FileIO::LoadShape(const std::string& dir, const Json::Value& value)
 	return shape;
 }
 
-Json::Value FileIO::StoreShape(const std::string& dir, ee::Shape* shape)
+Json::Value FileIO::StoreShape(const std::string& dir, const ee::Shape* shape)
 {
 	Json::Value value;
 

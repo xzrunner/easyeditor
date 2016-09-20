@@ -114,10 +114,10 @@ void Particle3DBuilder::Load(const eparticle3d::Symbol* sym, PackParticle3D* ps)
 		comp.angle = p_symbol.angle;
 		comp.angle_var = p_symbol.angle_var;
 
-		comp.mul_col_begin = gum::color2int(s2::Color(p_symbol.mul_col_begin.r, p_symbol.mul_col_begin.g, p_symbol.mul_col_begin.b, p_symbol.mul_col_begin.a), gum::PT_ARGB);
-		comp.mul_col_end = gum::color2int(s2::Color(p_symbol.mul_col_end.r, p_symbol.mul_col_end.g, p_symbol.mul_col_end.b, p_symbol.mul_col_end.a), gum::PT_ARGB);
-		comp.add_col_begin = gum::color2int(s2::Color(p_symbol.add_col_begin.r, p_symbol.add_col_begin.g, p_symbol.add_col_begin.b, p_symbol.add_col_begin.a), gum::PT_ARGB);
-		comp.add_col_end = gum::color2int(s2::Color(p_symbol.add_col_end.r, p_symbol.add_col_end.g, p_symbol.add_col_end.b, p_symbol.add_col_end.a), gum::PT_ARGB);
+		comp.mul_col_begin = gum::color2int(s2::Color(p_symbol.mul_col_begin.r, p_symbol.mul_col_begin.g, p_symbol.mul_col_begin.b, p_symbol.mul_col_begin.a), gum::ARGB);
+		comp.mul_col_end = gum::color2int(s2::Color(p_symbol.mul_col_end.r, p_symbol.mul_col_end.g, p_symbol.mul_col_end.b, p_symbol.mul_col_end.a), gum::ARGB);
+		comp.add_col_begin = gum::color2int(s2::Color(p_symbol.add_col_begin.r, p_symbol.add_col_begin.g, p_symbol.add_col_begin.b, p_symbol.add_col_begin.a), gum::ARGB);
+		comp.add_col_end = gum::color2int(s2::Color(p_symbol.add_col_end.r, p_symbol.add_col_end.g, p_symbol.add_col_end.b, p_symbol.add_col_end.a), gum::ARGB);
 
 		ee::Symbol* sym = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(p_symbol.ud));
 		comp.node = PackNodeFactory::Instance()->Create(sym);

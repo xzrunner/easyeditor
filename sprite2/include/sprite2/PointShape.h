@@ -28,6 +28,9 @@ public:
 	virtual void Draw(const sm::mat4& mt, 
 		const RenderColor& color = RenderColor()) const;
 
+	const sm::vec2& GetPos() const;
+	void SetPos(const sm::vec2& pos);
+
 protected:
 	virtual void UpdateBounding();
 

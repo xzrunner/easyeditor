@@ -44,9 +44,7 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 		for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
 			m_bg_outline[i]->Draw(p.mt);
 		}
-		for (size_t i = 0, n = m_shapes.size(); i < n; ++i) {
-			m_shapes[i]->Draw(p.mt);
-		}
+		s2::ShapeSymbol::Draw(p, spr);
 	}
 }
 
@@ -56,9 +54,7 @@ sm::rect Symbol::GetBounding(const s2::Sprite* spr) const
 	for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
 		b.Combine(m_bg_outline[i]->GetBounding());
 	}
-	for (size_t i = 0, n = m_shapes.size(); i < n; ++i) {
-		b.Combine(m_shapes[i]->GetBounding());
-	}
+	b.Combine(s2::ShapeSymbol::GetBounding(spr));
 	return b;
 }
 
@@ -76,56 +72,40 @@ void Symbol::Traverse(ee::Visitor<ee::Shape>& visitor) const
 		visitor.Visit(m_bg_outline[i], next);
 		if (!next) return;
 	}
-	for (int i = 0, n = m_shapes.size(); i < n; ++i) {
-		bool next;
-		visitor.Visit(m_shapes[i], next);
-		if (!next) return;
-	}
+
+	bool next;
+	visitor.Visit(dynamic_cast<ee::Shape*>(const_cast<s2::Shape*>(m_shape)), next);
 }
 
 bool Symbol::Add(ee::Shape* shape)
 {
-	if (!shape) {
-		return false;
-	}
-
-	shape->AddReference();
-	m_shapes.push_back(shape);
-	return true;
+	SetShape(shape);
+	return shape != NULL;
 }
 
 bool Symbol::Remove(ee::Shape* shape)
 {
-	if (!shape) {
+	if (m_shape == shape) {
+		SetShape(NULL);
+		return true;
+	} else {
 		return false;
 	}
-
-	for (int i = 0, n = m_shapes.size(); i < n; ++i) 
-	{
-		if (m_shapes[i] == shape) 
-		{
-			m_shapes.erase(m_shapes.begin() + i);
-			shape->RemoveReference();
-			return true;
-		}
-	}
-
-	return false;
 }
 
 bool Symbol::Clear()
 {
-	bool ret = !m_bg_outline.empty() || !m_shapes.empty();
+	bool ret = !m_bg_outline.empty() || m_shape != NULL;
 
 	for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
 		m_bg_outline[i]->RemoveReference();
 	}
 	m_bg_outline.clear();
 
-	for (size_t i = 0, n = m_shapes.size(); i < n; ++i) {
-		m_shapes[i]->RemoveReference();
+	if (m_shape) {
+		m_shape->RemoveReference();
 	}
-	m_shapes.clear();
+	m_shape = NULL;
 
 	return ret;
 }
@@ -141,15 +121,13 @@ void Symbol::SetBG(ee::Symbol* bg)
 
 void Symbol::StoreToFile(const char* filename) const
 {
-	std::vector<ee::Shape*> shapes(m_shapes);
-	std::copy(m_bg_outline.begin(), m_bg_outline.end(), back_inserter(shapes));
-	FileIO::StoreToFile(filename, shapes, m_bg);
+	FileIO::StoreToFile(filename, dynamic_cast<ee::Shape*>(const_cast<s2::Shape*>(m_shape)), m_bg);
 }
 
 void Symbol::LoadResources()
 {
 	Clear();
-	FileIO::LoadFromFile(m_filepath.c_str(), m_shapes, m_bg);
+	m_shape = FileIO::LoadFromFile(m_filepath.c_str(), m_bg);
 }
 
 void Symbol::LoadBGOutline(ee::Symbol* bg)
@@ -215,12 +193,11 @@ void Symbol::LoadBGTriStrip(ee::Symbol* bg)
 
 ShapeType Symbol::GetShapeType() const
 {
-	if (m_shapes.empty()) {
+	if (!m_shape) {
 		return ST_UNKNOWN;
+	} else {
+		return get_shape_type(dynamic_cast<ee::Shape*>(m_shape)->GetShapeDesc());
 	}
-
-	ee::Shape* shape = m_shapes[0];
-	return get_shape_type(shape->GetShapeDesc());
 }
 
 }

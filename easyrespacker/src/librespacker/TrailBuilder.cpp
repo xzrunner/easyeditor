@@ -80,10 +80,10 @@ void TrailBuilder::Load(const etrail::Symbol* sym, PackTrail* trail)
 			comp.scale_begin = t_sym.mode.A.scale_begin;
 			comp.scale_end = t_sym.mode.A.scale_end;
 
-			comp.mul_col_begin = gum::color2int(s2::Color(t_sym.col_begin.r, t_sym.col_begin.g, t_sym.col_begin.b, t_sym.col_begin.a), gum::PT_ABGR);
-			comp.mul_col_end = gum::color2int(s2::Color(t_sym.col_end.r, t_sym.col_end.g, t_sym.col_end.b, t_sym.col_end.a), gum::PT_ABGR);
-			comp.add_col_begin = gum::color2int(s2::Color(t_sym.mode.A.add_col_begin.r, t_sym.mode.A.add_col_begin.g, t_sym.mode.A.add_col_begin.b, t_sym.mode.A.add_col_begin.a), gum::PT_ABGR);
-			comp.add_col_end = gum::color2int(s2::Color(t_sym.mode.A.add_col_end.r, t_sym.mode.A.add_col_end.g, t_sym.mode.A.add_col_end.b, t_sym.mode.A.add_col_end.a), gum::PT_ABGR);
+			comp.mul_col_begin = gum::color2int(s2::Color(t_sym.col_begin.r, t_sym.col_begin.g, t_sym.col_begin.b, t_sym.col_begin.a), gum::ABGR);
+			comp.mul_col_end = gum::color2int(s2::Color(t_sym.col_end.r, t_sym.col_end.g, t_sym.col_end.b, t_sym.col_end.a), gum::ABGR);
+			comp.add_col_begin = gum::color2int(s2::Color(t_sym.mode.A.add_col_begin.r, t_sym.mode.A.add_col_begin.g, t_sym.mode.A.add_col_begin.b, t_sym.mode.A.add_col_begin.a), gum::ABGR);
+			comp.add_col_end = gum::color2int(s2::Color(t_sym.mode.A.add_col_end.r, t_sym.mode.A.add_col_end.g, t_sym.mode.A.add_col_end.b, t_sym.mode.A.add_col_end.a), gum::ABGR);
 
 			trail->comp_images.push_back(comp);
 		}
@@ -98,8 +98,8 @@ void TrailBuilder::Load(const etrail::Symbol* sym, PackTrail* trail)
 			comp.linewidth = t_sym.mode.B.size;
 			comp.acuity = t_sym.mode.B.acuity;
 
-			comp.col_begin = gum::color2int(s2::Color(t_sym.col_begin.r, t_sym.col_begin.g, t_sym.col_begin.b, t_sym.col_begin.a), gum::PT_ABGR);
-			comp.col_end = gum::color2int(s2::Color(t_sym.col_end.r, t_sym.col_end.g, t_sym.col_end.b, t_sym.col_end.a), gum::PT_ABGR);
+			comp.col_begin = gum::color2int(s2::Color(t_sym.col_begin.r, t_sym.col_begin.g, t_sym.col_begin.b, t_sym.col_begin.a), gum::ABGR);
+			comp.col_end = gum::color2int(s2::Color(t_sym.col_end.r, t_sym.col_end.g, t_sym.col_end.b, t_sym.col_end.a), gum::ABGR);
 
 			trail->comp_shapes.push_back(comp);
 		}

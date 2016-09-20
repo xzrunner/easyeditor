@@ -8,6 +8,7 @@
 #include <string>
 
 namespace s2 { class ShapeSymbol; }
+namespace simp { class NodeShape; }
 
 namespace gum
 {
@@ -19,6 +20,7 @@ public:
 	~ShapeSymLoader();
 
 	void LoadJson(const std::string& filepath);	
+	void LoadBin(const simp::NodeShape* node);
 
 private:
 	s2::ShapeSymbol* m_sym;

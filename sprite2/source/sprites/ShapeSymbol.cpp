@@ -1,6 +1,7 @@
 #include "ShapeSymbol.h"
 #include "Shape.h"
 #include "RenderParams.h"
+#include "S2_Sprite.h"
 
 namespace s2
 {
@@ -19,8 +20,14 @@ ShapeSymbol::~ShapeSymbol()
 
 void ShapeSymbol::Draw(const RenderParams& params, const Sprite* spr) const
 {
-	if (m_shape) {
-		m_shape->Draw(params.mt, params.color);
+	if (!m_shape) {
+		return;
+	}
+
+	if (spr) {
+		sm::mat4 mt = spr->GetTransMatrix() * params.mt;
+		RenderColor color = spr->Color() * params.color;
+		m_shape->Draw(mt, color);
 	}
 }
 

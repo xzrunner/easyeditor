@@ -448,6 +448,26 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="10.shape"
+				>
+				<File
+					RelativePath="..\..\..\source\NodeShape.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\simp\NodeShape.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\NodeShapeSpr.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\simp\NodeShapeSpr.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath="..\..\..\include\simp\simp_define.h"

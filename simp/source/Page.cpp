@@ -20,6 +20,8 @@
 #include "NodeParticle3dSpr.h"
 #include "NodeParticle2d.h"
 #include "NodeParticle2dSpr.h"
+#include "NodeShape.h"
+#include "NodeShapeSpr.h"
 #include "NodeMesh.h"
 #include "NodeMeshSpr.h"
 #include "NodeMask.h"
@@ -193,6 +195,18 @@ CreateNode(uint8_t type, Allocator& alloc, ImportStream& is)
 		{
 			void* ptr = alloc.Alloc(ALIGN_4BYTE(NodeParticle2dSpr::Size()));
 			ret = new (ptr) NodeParticle2dSpr(is);
+		}
+		break;
+	case TYPE_SHAPE:
+		{
+			void* ptr = alloc.Alloc(ALIGN_4BYTE(NodeShape::Size()));
+			ret = new (ptr) NodeShape(alloc, is);
+		}
+		break;
+	case TYPE_SHAPE_SPR:
+		{
+			void* ptr = alloc.Alloc(ALIGN_4BYTE(NodeShapeSpr::Size()));
+			ret = new (ptr) NodeShapeSpr(is);
 		}
 		break;
 	case TYPE_MESH:

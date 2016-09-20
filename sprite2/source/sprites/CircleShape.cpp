@@ -75,6 +75,28 @@ void CircleShape::Draw(const sm::mat4& mt, const RenderColor& color) const
 	RVG::Circle(c, r, false, 32);
 }
 
+const sm::vec2& CircleShape::GetCenter() const 
+{ 
+	return m_center; 
+}
+
+void CircleShape::SetCenter(const sm::vec2& center) 
+{ 
+	m_center = center;
+	UpdateBounding();
+}
+
+float CircleShape::GetRadius() const 
+{ 
+	return m_radius; 
+}
+
+void CircleShape::SetRadius(float radius) 
+{ 
+	m_radius = radius;
+	UpdateBounding();
+}
+
 void CircleShape::UpdateBounding()
 {
 	m_bounding = sm::rect(m_center, m_radius * 2, m_radius * 2);	

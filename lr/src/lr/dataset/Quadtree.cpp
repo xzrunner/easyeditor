@@ -194,10 +194,10 @@ IsContain(const ee::Sprite* spr) const
 	const eshape::Symbol* sym = dynamic_cast<const eshape::Symbol*>(spr->GetSymbol());
 	assert(sym->GetShapeType() == eshape::ST_POLYGON);
 
-	const std::vector<ee::Shape*>& shapes = sym->GetShapes();
-	assert(!shapes.empty());
+	const s2::Shape* shape = sym->GetShape();
+	assert(shape);
 
-	eshape::PolygonShape* poly = static_cast<eshape::PolygonShape*>(shapes[0]);
+	const eshape::PolygonShape* poly = dynamic_cast<const eshape::PolygonShape*>(shape);
 
 	std::vector<sm::vec2> bound;
 	sm::trans_vertices(spr->GetTransMatrix(), poly->GetVertices(), bound);
@@ -260,10 +260,10 @@ GetContainArea(const ee::Sprite* spr) const
 	const eshape::Symbol* sym = dynamic_cast<const eshape::Symbol*>(spr->GetSymbol());
 	assert(sym->GetShapeType() == eshape::ST_POLYGON);
 
-	const std::vector<ee::Shape*>& shapes = sym->GetShapes();
-	assert(!shapes.empty());
+	const s2::Shape* shape = sym->GetShape();
+	assert(shape);
 
-	eshape::PolygonShape* poly = static_cast<eshape::PolygonShape*>(shapes[0]);
+	const eshape::PolygonShape* poly = dynamic_cast<const eshape::PolygonShape*>(shape);
 
 	std::vector<sm::vec2> bound;
 	sm::trans_vertices(spr->GetTransMatrix(), poly->GetVertices(), bound);

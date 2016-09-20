@@ -1598,7 +1598,7 @@ void CocoPacker::ParserSpriteForComponent(const ee::Sprite* spr, std::vector<int
 			{
 				std::string aName = lua::assign("name", "\""+name+"\"");
 				std::string aFont = lua::assign("font", "\""+font->font+"\"");
-				std::string aColor = lua::assign("color", gum::color2str(font->font_color, gum::PT_ARGB));
+				std::string aColor = lua::assign("color", gum::color2str(font->font_color, gum::ARGB));
 
 //				std::string aAlign = lua::assign("align", ee::StringHelper::ToString(font->align));
 				int align_hori = font->align_hori;
@@ -1908,21 +1908,21 @@ void CocoPacker::GetColorAssignParams(const ee::Sprite* spr, std::vector<std::st
 {
 	if (spr->Color().mul != s2::Color(1,1,1,1) || spr->Color().add != s2::Color(0,0,0,0)) 
 	{
-		std::string str_multi = lua::assign("color", color2int(spr->Color().mul, gum::PT_BGRA));
+		std::string str_multi = lua::assign("color", color2int(spr->Color().mul, gum::BGRA));
 		params.push_back(str_multi);
-		std::string str_add = lua::assign("add", color2int(spr->Color().add, gum::PT_ABGR));
+		std::string str_add = lua::assign("add", color2int(spr->Color().add, gum::ABGR));
 		params.push_back(str_add);
 	}
 
 	if (spr->Color().rmap != s2::Color(255, 0, 0, 255) || spr->Color().gmap != s2::Color(0, 255, 0, 255) || spr->Color().bmap != s2::Color(0, 0, 255, 255))
 	{
-		std::string str_r = lua::assign("r_map", gum::color2str(spr->Color().rmap, gum::PT_RGBA));
+		std::string str_r = lua::assign("r_map", gum::color2str(spr->Color().rmap, gum::RGBA));
 		params.push_back(str_r);
 
-		std::string str_g = lua::assign("g_map", gum::color2str(spr->Color().gmap, gum::PT_RGBA));
+		std::string str_g = lua::assign("g_map", gum::color2str(spr->Color().gmap, gum::RGBA));
 		params.push_back(str_g);
 
-		std::string str_b = lua::assign("b_map", gum::color2str(spr->Color().bmap, gum::PT_RGBA));
+		std::string str_b = lua::assign("b_map", gum::color2str(spr->Color().bmap, gum::RGBA));
 		params.push_back(str_b);
 	}
 }

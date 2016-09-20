@@ -52,31 +52,31 @@ s2::Color str2color(const std::string& str, PixelType type)
 	s2::Color ret(0, 0, 0, 1);
 	if (len == 4)
 	{
-		if (type == PT_RGBA || PT_BGRA)
+		if (type == RGBA || BGRA)
 			ret.a = char2channel(snum[2], snum[3]);
-		else if (type == PT_ARGB)
+		else if (type == ARGB)
 			ret.b = char2channel(snum[2], snum[3]);
-		else if (type == PT_ABGR)
+		else if (type == ABGR)
 			ret.r = char2channel(snum[2], snum[3]);
 	}
 	else if (len == 10)
 	{
-		if (type == PT_RGBA) {
+		if (type == RGBA) {
 			ret.r = char2channel(snum[2], snum[3]);
 			ret.g = char2channel(snum[4], snum[5]);
 			ret.b = char2channel(snum[6], snum[7]);
 			ret.a = char2channel(snum[8], snum[9]);
-		} else if (type == PT_ARGB) {
+		} else if (type == ARGB) {
 			ret.a = char2channel(snum[2], snum[3]);
 			ret.r = char2channel(snum[4], snum[5]);
 			ret.g = char2channel(snum[6], snum[7]);
 			ret.b = char2channel(snum[8], snum[9]);
-		} else if (type == PT_ABGR) {
+		} else if (type == ABGR) {
 			ret.a = char2channel(snum[2], snum[3]);
 			ret.b = char2channel(snum[4], snum[5]);
 			ret.g = char2channel(snum[6], snum[7]);
 			ret.r = char2channel(snum[8], snum[9]);
-		}  else if (type == PT_BGRA) {
+		}  else if (type == BGRA) {
 			ret.b = char2channel(snum[2], snum[3]);
 			ret.g = char2channel(snum[4], snum[5]);
 			ret.r = char2channel(snum[6], snum[7]);
@@ -119,22 +119,22 @@ std::string channel2char(int col)
 std::string color2str(const s2::Color& col, PixelType type)
 {
 	std::string ret = "0x";
-	if (type == PT_RGBA) {
+	if (type == RGBA) {
 		ret += channel2char(col.r);
 		ret += channel2char(col.g);
 		ret += channel2char(col.b);
 		ret += channel2char(col.a);
-	} else if (type == PT_ARGB) {
+	} else if (type == ARGB) {
 		ret += channel2char(col.a);
 		ret += channel2char(col.r);
 		ret += channel2char(col.g);
 		ret += channel2char(col.b);
-	} else if (type == PT_ABGR) {
+	} else if (type == ABGR) {
 		ret += channel2char(col.a);
 		ret += channel2char(col.b);
 		ret += channel2char(col.g);
 		ret += channel2char(col.r);
-	} else if (type == PT_BGRA) {
+	} else if (type == BGRA) {
 		ret += channel2char(col.b);
 		ret += channel2char(col.g);
 		ret += channel2char(col.r);
@@ -148,25 +148,25 @@ s2::Color int2color(uint32_t i, PixelType type)
 	s2::Color col;
 	switch (type)
 	{
-	case PT_RGBA:
+	case RGBA:
 		col.r = (i >> 24) & 0xff;
 		col.g = (i >> 16) & 0xff;
 		col.b = (i >> 8)  & 0xff;
 		col.a = i         & 0xff;
 		break;
-	case PT_ARGB:
+	case ARGB:
 		col.a = (i >> 24) & 0xff;
 		col.r = (i >> 16) & 0xff;
 		col.g = (i >> 8)  & 0xff;
 		col.b = i         & 0xff;
 		break;
-	case PT_ABGR:
+	case ABGR:
 		col.a = (i >> 24) & 0xff;
 		col.b = (i >> 16) & 0xff;
 		col.g = (i >> 8)  & 0xff;
 		col.r = i         & 0xff;
 		break;
-	case PT_BGRA:
+	case BGRA:
 		col.b = (i >> 24) & 0xff;
 		col.g = (i >> 16) & 0xff;
 		col.r = (i >> 8)  & 0xff;
@@ -181,16 +181,16 @@ uint32_t color2int(const s2::Color& col, PixelType type)
 	uint32_t i = 0;
 	switch (type)
 	{
-	case PT_RGBA:
+	case RGBA:
 		i  = (col.r << 24 ) | (col.g << 16) | (col.b << 8) | col.a;
 		break;
-	case PT_ARGB:
+	case ARGB:
 		i  = (col.a << 24 ) | (col.r << 16) | (col.g << 8) | col.b;
 		break;
-	case PT_ABGR:
+	case ABGR:
 		i  = (col.a << 24 ) | (col.b << 16) | (col.g << 8) | col.r;
 		break;
-	case PT_BGRA:
+	case BGRA:
 		i  = (col.b << 24 ) | (col.g << 16) | (col.r << 8) | col.a;
 		break;
 	}
@@ -202,16 +202,16 @@ uint32_t color2int(const uint8_t rgba[4], PixelType type)
 	uint32_t i = 0;
 	switch (type)
 	{
-	case PT_RGBA:
+	case RGBA:
 		i  = (rgba[0] << 24 ) | (rgba[1] << 16) | (rgba[2] << 8) | rgba[3];
 		break;
-	case PT_ARGB:
+	case ARGB:
 		i  = (rgba[3] << 24 ) | (rgba[0] << 16) | (rgba[1] << 8) | rgba[2];
 		break;
-	case PT_ABGR:
+	case ABGR:
 		i  = (rgba[3] << 24 ) | (rgba[2] << 16) | (rgba[1] << 8) | rgba[0];
 		break;
-	case PT_BGRA:
+	case BGRA:
 		i  = (rgba[2] << 24 ) | (rgba[1] << 16) | (rgba[0] << 8) | rgba[3];
 		break;
 	}

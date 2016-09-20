@@ -212,12 +212,12 @@ void LRSeparateComplex::FixPosWithShape(sm::vec2& pos, const std::string& filepa
 		throw ee::Exception("shape file err:%s", filepath);
 	}
 	
-	std::vector<ee::Shape*> shapes = shape_symbol->GetShapes();
-	if (shapes.empty()) {
+	const s2::Shape* shape = shape_symbol->GetShape();
+	if (!shape) {
 		throw ee::Exception("shape file empty:%s", filepath);
 	}
 
-	if (eshape::PointShape* point = dynamic_cast<eshape::PointShape*>(shapes[0])) {
+	if (const eshape::PointShape* point = dynamic_cast<const eshape::PointShape*>(shape)) {
 		pos += point->GetPos();
 	} else {
 		throw ee::Exception("shape file is not point:%s", filepath);

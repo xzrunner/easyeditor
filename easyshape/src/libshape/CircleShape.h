@@ -34,18 +34,6 @@ public:
 	virtual void LoadFromFile(const Json::Value& value, const std::string& dir);
 	virtual void StoreToFile(Json::Value& value, const std::string& dir) const;
 
-	const sm::vec2& GetCenter() const { return m_center; }
-	void SetCenter(const sm::vec2& center) { 
-		m_center = center;
-		UpdateBounding();
-	}
-
-	float GetRadius() const { return m_radius; }
-	void SetRadius(float radius) { 
-		m_radius = radius;
-		UpdateBounding();
-	}
-
 protected:
 	virtual void UpdateBounding() { s2::CircleShape::UpdateBounding(); }
 

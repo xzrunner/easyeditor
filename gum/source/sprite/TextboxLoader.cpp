@@ -22,11 +22,11 @@ void TextboxLoader::LoadJson(const Json::Value& val)
 
 	m_tb.font_type			= val["font"].asInt();
 	m_tb.font_size			= val["font_size"].asInt();
-	m_tb.font_color			= str2color(val["font_color"].asString(), PT_RGBA);
+	m_tb.font_color			= str2color(val["font_color"].asString(), RGBA);
 
 	m_tb.has_edge			= val["edge"].asBool();
 	m_tb.edge_size			= static_cast<float>(val["edge_size"].asDouble());
-	m_tb.edge_color			= str2color(val["edge_color"].asString(), PT_RGBA);
+	m_tb.edge_color			= str2color(val["edge_color"].asString(), RGBA);
 
 	m_tb.space_hori			= static_cast<float>(val["space_hori"].asDouble());
 	m_tb.space_vert			= static_cast<float>(val["space_vert"].asDouble());

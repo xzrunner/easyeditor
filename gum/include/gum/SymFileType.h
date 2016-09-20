@@ -17,7 +17,7 @@ enum SymFileType
 	ANIMATION,
 	PARTICLE3D,
 	PARTICLE2D,
-	
+	SHAPE,
 	MESH,
 	MASK,
 	TRAIL,

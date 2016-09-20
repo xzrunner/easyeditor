@@ -12,6 +12,7 @@
 #include "AnimSymLoader.h"
 #include "P3dSymLoader.h"
 #include "P2dSymLoader.h"
+#include "ShapeSymLoader.h"
 #include "MeshSymLoader.h"
 #include "MaskSymLoader.h"
 #include "TrailSymLoader.h"
@@ -28,6 +29,7 @@
 #include <sprite2/AnimSymbol.h>
 #include <sprite2/Particle3dSymbol.h>
 #include <sprite2/Particle2dSymbol.h>
+#include <sprite2/ShapeSymbol.h>
 #include <sprite2/MeshSymbol.h>
 #include <sprite2/MaskSymbol.h>
 #include <sprite2/TrailSymbol.h>
@@ -140,10 +142,10 @@ s2::Symbol* SymbolFactory::Create(const std::string& filepath, SymFileType* _typ
 			ret = sym;
 		}
 		break;
-	case MESH:
+	case SHAPE:
 		{
-			s2::MeshSymbol* sym = new s2::MeshSymbol;
-			MeshSymLoader loader(sym);
+			s2::ShapeSymbol* sym = new s2::ShapeSymbol;
+			ShapeSymLoader loader(sym);
 			loader.LoadJson(filepath);
 			ret = sym;
 		}
@@ -274,6 +276,16 @@ s2::Symbol* SymbolFactory::Create(uint32_t id, SymFileType* _type) const
 			P2dSymLoader loader;
 			loader.LoadBin((const simp::NodeParticle2d*)data);
 			loader.Store(sym);
+			ret = sym;
+		}
+		break;
+	case simp::TYPE_SHAPE:
+		{
+			stype = SHAPE;
+
+			s2::ShapeSymbol* sym = new s2::ShapeSymbol;
+			ShapeSymLoader loader(sym);
+			loader.LoadBin((const simp::NodeShape*)data);
 			ret = sym;
 		}
 		break;

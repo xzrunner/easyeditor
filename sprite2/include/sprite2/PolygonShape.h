@@ -33,6 +33,7 @@ public:
 		const RenderColor& color = RenderColor()) const;
 
 	void SetPolygon(Polygon* poly);
+	const Polygon* GetPolygon() const { return m_poly; }
 
 protected:
 	Polygon* m_poly;

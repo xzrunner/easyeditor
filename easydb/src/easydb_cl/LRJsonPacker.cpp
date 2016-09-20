@@ -187,10 +187,9 @@ void LRJsonPacker::ParserShapeFromSprite(const Json::Value& src_val, const lr::G
 
 		eshape::Sprite* shape_spr = dynamic_cast<eshape::Sprite*>(spr);
 		assert(shape_spr);
-		const std::vector<ee::Shape*>& shapes = dynamic_cast<const eshape::Symbol*>(shape_spr->GetSymbol())->GetShapes();
-		for (int i = 0, n = shapes.size(); i < n; ++i) {
-			ParserShape(shapes[i], spr->GetPosition(), spr->GetAngle(), grids, force_grids, dst_val);
-		}
+
+		const s2::Shape* shape = dynamic_cast<const eshape::Symbol*>(shape_spr->GetSymbol())->GetShape();
+		ParserShape(dynamic_cast<const ee::Shape*>(shape), spr->GetPosition(), spr->GetAngle(), grids, force_grids, dst_val);
 
 		int sz = out_val[name].size();
 		out_val[name][sz] = dst_val;
@@ -223,10 +222,10 @@ void LRJsonPacker::ParserShapeFromShape(const Json::Value& src_val, const lr::Gr
 	}
 }
 
-void LRJsonPacker::ParserShape(ee::Shape* shape, const sm::vec2& offset, float angle,
+void LRJsonPacker::ParserShape(const ee::Shape* shape, const sm::vec2& offset, float angle,
 							   const lr::Grids& grids, bool force_grids, Json::Value& out_val)
 {
-	if (eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(shape))
+	if (const eshape::PolygonShape* poly = dynamic_cast<const eshape::PolygonShape*>(shape))
 	{
 		std::vector<int> grid_idx;
 
@@ -241,7 +240,7 @@ void LRJsonPacker::ParserShape(ee::Shape* shape, const sm::vec2& offset, float a
 			out_val["grid"][sz] = grid_idx[i];
 		}
 	}
-	else if (eshape::ChainShape* chain = dynamic_cast<eshape::ChainShape*>(shape))
+	else if (const eshape::ChainShape* chain = dynamic_cast<const eshape::ChainShape*>(shape))
 	{
 		std::vector<sm::vec2> bound = chain->GetVertices();
 		for (int i = 0, n = bound.size(); i < n; ++i) {
@@ -393,11 +392,10 @@ void LRJsonPacker::ParserCharacterFromSprite(const Json::Value& src_val, const l
 		std::string tag_ext;
 		if (ee::FileHelper::IsFileExist(shape_filepath)) {
 			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(shape_filepath);
-			const std::vector<ee::Shape*>& shapes = static_cast<eshape::Symbol*>(sym)->GetShapes();
-			if (!shapes.empty()) {
-				tag_ext = shapes[0]->GetName();
-
-				if (eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(shapes[0])) {
+			const s2::Shape* shape = static_cast<eshape::Symbol*>(sym)->GetShape();
+			if (shape) {
+				tag_ext = dynamic_cast<const ee::Shape*>(shape)->GetName();
+				if (const eshape::PolygonShape* poly = dynamic_cast<const eshape::PolygonShape*>(shape)) {
 					ParserShape(poly, spr_io.m_position, spr_io.m_angle, grids, true, char_val["grids"]);
 				}
 			}

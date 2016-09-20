@@ -275,31 +275,31 @@ void SpriteIO::StoreColor(const s2::RenderColor& color)
 void SpriteIO::LoadColor(const Json::Value& val)
 {
 	if (val.isMember("multi color")) {
-		m_col.mul = str2color(val["multi color"].asString(), PT_BGRA);
+		m_col.mul = str2color(val["multi color"].asString(), BGRA);
 	} else {
 		m_col.mul = s2::Color(0xffffffff);
 	}
 
 	if (val.isMember("add color")) {
-		m_col.add = str2color(val["add color"].asString(), PT_ABGR);
+		m_col.add = str2color(val["add color"].asString(), ABGR);
 	} else {
 		m_col.add = s2::Color(0);
 	}
 
 	if (val.isMember("r trans")) {
-		m_col.rmap = str2color(val["r trans"].asString(), PT_RGBA);
+		m_col.rmap = str2color(val["r trans"].asString(), RGBA);
 	} else {
 		m_col.rmap = s2::Color(255, 0, 0, 0);
 	}
 
 	if (val.isMember("g trans")) {
-		m_col.gmap = str2color(val["g trans"].asString(), PT_RGBA);
+		m_col.gmap = str2color(val["g trans"].asString(), RGBA);
 	} else {
 		m_col.gmap = s2::Color(0, 255, 0, 0);
 	}
 
 	if (val.isMember("b trans")) {
-		m_col.bmap = str2color(val["b trans"].asString(), PT_RGBA);
+		m_col.bmap = str2color(val["b trans"].asString(), RGBA);
 	} else {
 		m_col.bmap = s2::Color(0, 0, 255, 0);
 	}
@@ -308,20 +308,20 @@ void SpriteIO::LoadColor(const Json::Value& val)
 void SpriteIO::StoreColor(Json::Value& val)
 {
 	if (!m_compress || m_col.mul != s2::Color(0xffffffff)) {
-		val["multi color"]	= color2str(m_col.mul, PT_BGRA);
+		val["multi color"]	= color2str(m_col.mul, BGRA);
 	}
 	if (!m_compress || m_col.add != s2::Color(0)) {
-		val["add color"]	= color2str(m_col.add, PT_ABGR);
+		val["add color"]	= color2str(m_col.add, ABGR);
 	}
 
 	if (!m_compress || m_col.rmap.r != 255 || m_col.rmap.g != 0 || m_col.rmap.b != 0) {
-		val["r trans"]		= color2str(m_col.rmap, PT_RGBA);
+		val["r trans"]		= color2str(m_col.rmap, RGBA);
 	}
 	if (!m_compress || m_col.gmap.r != 0 || m_col.gmap.g != 255 || m_col.gmap.b != 0) {
-		val["g trans"]		= color2str(m_col.gmap, PT_RGBA);
+		val["g trans"]		= color2str(m_col.gmap, RGBA);
 	}
 	if (!m_compress || m_col.bmap.r != 0 || m_col.bmap.g != 0 || m_col.bmap.b != 255) {
-		val["b trans"]		= color2str(m_col.bmap, PT_RGBA);
+		val["b trans"]		= color2str(m_col.bmap, RGBA);
 	}
 }
 

@@ -34,14 +34,6 @@ public:
 	virtual void LoadFromFile(const Json::Value& value, const std::string& dir);
 	virtual void StoreToFile(Json::Value& value, const std::string& dir) const;
 
-	const sm::vec2& GetPos() const { 
-		return m_pos; 
-	}
-	void SetPos(const sm::vec2& pos) { 
-		m_pos = pos;
-		UpdateBounding();
-	}
-
 protected:
 	virtual void UpdateBounding() { s2::PointShape::UpdateBounding(); }
 

@@ -125,12 +125,12 @@ void AnimationToSpr::TransSpriteMat(ee::Sprite* spr, const erespacker::PackAnima
 
 void AnimationToSpr::TransSpriteCol(ee::Sprite* spr, const erespacker::PackAnimation::SpriteTrans& t)
 {
-	spr->Color().mul = int2color(t.color, gum::PT_RGBA);
-	spr->Color().add = int2color(t.additive, gum::PT_RGBA);
+	spr->Color().mul = int2color(t.color, gum::RGBA);
+	spr->Color().add = int2color(t.additive, gum::RGBA);
 
-	spr->Color().rmap = int2color(t.rmap, gum::PT_RGBA);
-	spr->Color().gmap = int2color(t.gmap, gum::PT_RGBA);
-	spr->Color().bmap = int2color(t.bmap, gum::PT_RGBA);
+	spr->Color().rmap = int2color(t.rmap, gum::RGBA);
+	spr->Color().gmap = int2color(t.gmap, gum::RGBA);
+	spr->Color().bmap = int2color(t.bmap, gum::RGBA);
 }
 
 

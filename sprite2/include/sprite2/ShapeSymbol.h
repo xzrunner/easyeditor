@@ -24,8 +24,9 @@ public:
 	virtual sm::rect GetBounding(const Sprite* spr = NULL) const;
 
 	void SetShape(Shape* shape);
-
-private:
+	const Shape* GetShape() const { return m_shape; }
+	
+protected:
 	Shape* m_shape;
 
 }; // ShapeSymbol

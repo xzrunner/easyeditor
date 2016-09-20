@@ -15,10 +15,10 @@ namespace gum
 // multi	BGRA
 enum PixelType
 {
-	PT_RGBA = 0,
-	PT_ARGB,
-	PT_ABGR,
-	PT_BGRA
+	RGBA = 0,
+	ARGB,
+	ABGR,
+	BGRA
 };
 
 s2::Color str2color(const std::string& str, PixelType type);

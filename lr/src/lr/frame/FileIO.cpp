@@ -71,11 +71,11 @@ void FileIO::Load(const char* filename, LibraryPanel* library,
 	// screen
 	if (!value["screen"]["multi_col"].isNull()) {
 		std::string str = value["screen"]["multi_col"].asString();
-		stage->GetScreenMultiColor() = gum::str2color(str, gum::PT_RGBA);
+		stage->GetScreenMultiColor() = gum::str2color(str, gum::RGBA);
 	}
 	if (!value["screen"]["add_col"].isNull()) {
 		std::string str = value["screen"]["add_col"].asString();
-		stage->GetScreenAddColor() = gum::str2color(str, gum::PT_RGBA);
+		stage->GetScreenAddColor() = gum::str2color(str, gum::RGBA);
 	}
 
 	// layers
@@ -124,8 +124,8 @@ void FileIO::Store(const char* filename, LibraryPanel* library,
 	value["camera"]["y"] = cam->GetPosition().y;
 
 	// screen
-	value["screen"]["multi_col"] = gum::color2str(stage->GetScreenMultiColor(), gum::PT_RGBA);
-	value["screen"]["add_col"]   = gum::color2str(stage->GetScreenAddColor(), gum::PT_RGBA);
+	value["screen"]["multi_col"] = gum::color2str(stage->GetScreenMultiColor(), gum::RGBA);
+	value["screen"]["add_col"]   = gum::color2str(stage->GetScreenAddColor(), gum::RGBA);
 
 	// layers
 	std::string dir = ee::FileHelper::GetFileDir(filename) + "\\";

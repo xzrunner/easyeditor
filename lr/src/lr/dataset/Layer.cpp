@@ -474,9 +474,9 @@ ee::Sprite* Layer::LoadSprite(const Json::Value& val, const std::string& dir, co
 	std::string spr_tag;
 	if (ee::FileHelper::IsFileExist(shape_filepath)) {
 		sym = ee::SymbolMgr::Instance()->FetchSymbol(shape_filepath);
-		const std::vector<ee::Shape*>& shapes = static_cast<eshape::Symbol*>(sym)->GetShapes();
-		if (!shapes.empty()) {
-			spr_tag = shapes[0]->GetName();
+		const s2::Shape* shape = dynamic_cast<eshape::Symbol*>(sym)->GetShape();
+		if (shape) {
+			spr_tag = dynamic_cast<eshape::Symbol*>(sym)->GetName();
 		}
 	} else {
 		sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);

@@ -392,6 +392,26 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="10.shape"
+				>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackShape.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackShape.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackShapeSpr.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackShapeSpr.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="tools"

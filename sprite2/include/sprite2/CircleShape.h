@@ -28,6 +28,12 @@ public:
 	virtual void Draw(const sm::mat4& mt, 
 		const RenderColor& color = RenderColor()) const;
 
+	const sm::vec2& GetCenter() const;
+	void SetCenter(const sm::vec2& center);
+
+	float GetRadius() const;
+	void SetRadius(float radius);
+
 protected:
 	virtual void UpdateBounding();
 
