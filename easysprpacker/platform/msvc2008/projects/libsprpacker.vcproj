@@ -168,6 +168,14 @@
 				RelativePath="..\..\..\src\libsprpacker\PackTrans.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\libsprpacker\PackVertices.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libsprpacker\PackVertices.h"
+				>
+			</File>
 			<Filter
 				Name="01.image"
 				>
@@ -361,6 +369,26 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\libsprpacker\PackMaskSpr.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="11.mesh"
+				>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackMesh.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackMesh.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackMeshSpr.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackMeshSpr.h"
 					>
 				</File>
 			</Filter>

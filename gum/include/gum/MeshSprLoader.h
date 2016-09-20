@@ -6,6 +6,7 @@
 #include <json/json.h>
 
 namespace s2 { class MeshSprite; }
+namespace simp { class NodeMeshSpr; }
 
 namespace gum
 {
@@ -17,6 +18,7 @@ public:
 	~MeshSprLoader();
 
 	void LoadJson(const Json::Value& val, const std::string& dir);
+	void LoadBin(const simp::NodeMeshSpr* node);
 
 private:
 	s2::MeshSprite* m_spr;

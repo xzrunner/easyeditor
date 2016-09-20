@@ -24,6 +24,11 @@ int float2int(float f) {
 }
 
 inline
+int float16x2int(float f) {
+	return float2int(f * 16);
+}
+
+inline
 int float100x2int(float f) {
 	return float2int(f * 100);
 }

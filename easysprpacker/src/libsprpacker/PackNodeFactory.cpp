@@ -17,6 +17,8 @@
 #include "PackParticle3dSpr.h"
 #include "PackParticle2d.h"
 #include "PackParticle2dSpr.h"
+#include "PackMesh.h"
+#include "PackMeshSpr.h"
 #include "PackMask.h"
 #include "PackMaskSpr.h"
 #include "PackTrail.h"
@@ -30,6 +32,7 @@
 #include <easyanim.h>
 #include <easyparticle3d.h>
 #include <easyparticle2d.h>
+#include <easymesh.h>
 #include <easymask.h>
 #include <easytrail.h>
 
@@ -54,6 +57,7 @@ SymBuilder<ecomplex::Symbol, PackComplex>*									COMPLEX_BUILDER;
 SymBuilder<eanim::Symbol, PackAnimation>*									ANIM_BUILDER;
 SymBuilder<eparticle3d::Symbol, PackParticle3d>*							P3D_BUILDER;
 SymBuilder<eparticle2d::Symbol, PackParticle2d>*							P2D_BUILDER;
+SymBuilder<emesh::Symbol, PackMesh>*										MESH_BUILDER;
 SymBuilder<emask::Symbol, PackMask>*										MASK_BUILDER;
 SymBuilder<etrail::Symbol, PackTrail>*										TRAIL_BUILDER;
 
@@ -63,6 +67,7 @@ SprBuilder<ecomplex::Symbol, ecomplex::Sprite, PackComplexSpr>*				COMPLEX_SPR_B
 SprBuilder<eanim::Symbol, eanim::Sprite, PackAnimationSpr>*					ANIM_SPR_BUILDER;
 SprBuilder<eparticle3d::Symbol, eparticle3d::Sprite, PackParticle3dSpr>*	P3D_SPR_BUILDER;
 SprBuilder<eparticle2d::Symbol, eparticle2d::Sprite, PackParticle2dSpr>*	P2D_SPR_BUILDER;
+SprBuilder<emesh::Symbol, emesh::Sprite, PackMeshSpr>*						MESH_SPR_BUILDER;
 SprBuilder<emask::Symbol, emask::Sprite, PackMaskSpr>*						MASK_SPR_BUILDER;
 SprBuilder<etrail::Symbol, etrail::Sprite, PackTrailSpr>*					TRAIL_SPR_BUILDER;
 
@@ -76,6 +81,7 @@ PackNodeFactory::PackNodeFactory()
 	ANIM_BUILDER		= new SymBuilder<eanim::Symbol, PackAnimation>(true);
 	P3D_BUILDER			= new SymBuilder<eparticle3d::Symbol, PackParticle3d>(true);
 	P2D_BUILDER			= new SymBuilder<eparticle2d::Symbol, PackParticle2d>(true);
+	MESH_BUILDER		= new SymBuilder<emesh::Symbol, PackMesh>();
 	MASK_BUILDER		= new SymBuilder<emask::Symbol, PackMask>();
 	TRAIL_BUILDER		= new SymBuilder<etrail::Symbol, PackTrail>(true);
 
@@ -85,6 +91,7 @@ PackNodeFactory::PackNodeFactory()
 	ANIM_SPR_BUILDER	= new SprBuilder<eanim::Symbol, eanim::Sprite, PackAnimationSpr>();
 	P3D_SPR_BUILDER		= new SprBuilder<eparticle3d::Symbol, eparticle3d::Sprite, PackParticle3dSpr>();
 	P2D_SPR_BUILDER		= new SprBuilder<eparticle2d::Symbol, eparticle2d::Sprite, PackParticle2dSpr>();
+	MESH_SPR_BUILDER	= new SprBuilder<emesh::Symbol, emesh::Sprite, PackMeshSpr>();
 	MASK_SPR_BUILDER	= new SprBuilder<emask::Symbol, emask::Sprite, PackMaskSpr>();
 	TRAIL_SPR_BUILDER	= new SprBuilder<etrail::Symbol, etrail::Sprite, PackTrailSpr>();
 }
@@ -136,6 +143,10 @@ const PackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 	else if (const eparticle2d::Sprite* p2d = dynamic_cast<const eparticle2d::Sprite*>(spr)) {
 		node = P2D_SPR_BUILDER->Create(p2d);
 	}
+	// mesh
+	else if (const emesh::Sprite* mesh = dynamic_cast<const emesh::Sprite*>(spr)) {
+		node = MESH_SPR_BUILDER->Create(mesh);
+	}
 	// mask
 	else if (const emask::Sprite* mask = dynamic_cast<const emask::Sprite*>(spr)) {
 		node = MASK_SPR_BUILDER->Create(mask);
@@ -186,6 +197,10 @@ const PackNode* PackNodeFactory::Create(const ee::Symbol* sym)
 	else if (const eparticle2d::Symbol* p2d = dynamic_cast<const eparticle2d::Symbol*>(sym)) {
 		node = P2D_BUILDER->Create(p2d);
 	}
+	// mesh
+	else if (const emesh::Symbol* mesh = dynamic_cast<const emesh::Symbol*>(sym)) {
+		node = MESH_BUILDER->Create(mesh);
+	}
 	// mask
 	else if (const emask::Symbol* mask = dynamic_cast<const emask::Symbol*>(sym)) {
 		node = MASK_BUILDER->Create(mask);
@@ -228,6 +243,7 @@ void PackNodeFactory::FetchAllBuilder(std::vector<NodeBuilder*>& builders)
 	builders.push_back(ANIM_BUILDER);
 	builders.push_back(P3D_BUILDER);
 	builders.push_back(P2D_BUILDER);
+	builders.push_back(MESH_BUILDER);
 	builders.push_back(MASK_BUILDER);
 	builders.push_back(TRAIL_BUILDER);
 
@@ -237,6 +253,7 @@ void PackNodeFactory::FetchAllBuilder(std::vector<NodeBuilder*>& builders)
 	builders.push_back(ANIM_SPR_BUILDER);
 	builders.push_back(P3D_SPR_BUILDER);
 	builders.push_back(P2D_SPR_BUILDER);
+	builders.push_back(MESH_SPR_BUILDER);
 	builders.push_back(MASK_SPR_BUILDER);
 	builders.push_back(TRAIL_SPR_BUILDER);
 }

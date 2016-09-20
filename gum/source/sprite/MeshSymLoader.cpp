@@ -8,6 +8,8 @@
 #include <sprite2/MeshTransform.h>
 #include <sprite2/NetworkMesh.h>
 #include <sprite2/NetworkShape.h>
+#include <simp/NodeMesh.h>
+#include <simp/from_int.h>
 
 #include <json/json.h>
 
@@ -60,6 +62,42 @@ void MeshSymLoader::LoadJson(const std::string& filepath)
 	} else if (type == "network") {
 		mesh = CreateNetworkMesh(value, base_sym);
 	}
+
+	m_sym->SetMesh(mesh);
+	mesh->RemoveReference();
+}
+
+void MeshSymLoader::LoadBin(const simp::NodeMesh* node)
+{
+	if (!m_sym) {
+		return;
+	}
+
+	s2::Symbol* base_sym = SymbolFactory::Instance()->Create(node->base_id);
+	s2::NetworkMesh* mesh = new s2::NetworkMesh(base_sym);
+
+	std::vector<sm::vec2> outer;
+	outer.reserve(node->outer_n);
+	int idx = 0;
+	for (int i = 0; i < node->outer_n; ++i) {
+		float x = simp::int2float16x(int16_t(node->outer[idx++])),
+			  y = simp::int2float16x(int16_t(node->outer[idx++]));
+		outer.push_back(sm::vec2(x, y));
+	}
+	s2::NetworkShape* shape = new s2::NetworkShape(outer);
+
+	std::vector<sm::vec2> inner;
+	inner.reserve(node->inner_n);
+	idx = 0;
+	for (int i = 0; i < node->inner_n; ++i) {
+		float x = simp::int2float16x(int16_t(node->inner[idx++])),
+			  y = simp::int2float16x(int16_t(node->inner[idx++]));
+		inner.push_back(sm::vec2(x, y));
+	}
+	shape->SetInnerVertices(inner);
+
+	mesh->SetShape(shape);
+	shape->RemoveReference();
 
 	m_sym->SetMesh(mesh);
 	mesh->RemoveReference();

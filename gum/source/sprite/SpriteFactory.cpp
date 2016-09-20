@@ -19,6 +19,7 @@
 #include <simp/NodeAnimationSpr.h>
 #include <simp/NodeParticle3dSpr.h>
 #include <simp/NodeParticle2dSpr.h>
+#include <simp/NodeMeshSpr.h>
 #include <simp/NodeMaskSpr.h>
 #include <simp/NodeTrailSpr.h>
 
@@ -289,6 +290,20 @@ s2::Sprite* SpriteFactory::Create(uint32_t id)
 			loader.LoadBin(node);
 
 			spr = p2d_spr;
+		}
+		break;
+	case simp::TYPE_MESH_SPR:
+		{
+			const simp::NodeMeshSpr* node = (const simp::NodeMeshSpr*)data;
+
+			s2::Symbol* sym = SymbolFactory::Instance()->Create(node->mesh_id);
+			s2::MeshSprite* mesh_spr = VI_DOWNCASTING<s2::MeshSprite*>(SpriteFactory::Instance()->Create(sym, MESH));
+			sym->RemoveReference();
+
+			MeshSprLoader loader(mesh_spr);
+			loader.LoadBin(node);
+
+			spr = mesh_spr;
 		}
 		break;
 	case simp::TYPE_MASK_SPR:

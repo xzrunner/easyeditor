@@ -277,6 +277,16 @@ s2::Symbol* SymbolFactory::Create(uint32_t id, SymFileType* _type) const
 			ret = sym;
 		}
 		break;
+	case simp::TYPE_MESH:
+		{
+			stype = MESH;
+
+			s2::MeshSymbol* sym = new s2::MeshSymbol;
+			MeshSymLoader loader(sym);
+			loader.LoadBin((const simp::NodeMesh*)data);
+			ret = sym;
+		}
+		break;
 	case simp::TYPE_MASK:
 		{
 			stype = MASK;

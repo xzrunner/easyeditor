@@ -3,15 +3,17 @@
 
 #include <CU_Uncopyable.h>
 
-namespace s2 { class MeshSymbol; class MeshTransform; class Mesh; class Symbol; }
-
 #include <json/json.h>
 
 #include <string>
 
+namespace s2 { class MeshSymbol; class MeshTransform; class Mesh; class Symbol; }
+namespace simp { class NodeMesh; }
+
 namespace gum
 {
 
+// todo: only support network mesh
 class MeshSymLoader : private cu::Uncopyable
 {
 public:
@@ -19,6 +21,7 @@ public:
 	~MeshSymLoader();
 
 	void LoadJson(const std::string& filepath);	
+	void LoadBin(const simp::NodeMesh* node);
 
 	static void LoadMeshTransform(s2::MeshTransform& trans, const Json::Value& value);
 

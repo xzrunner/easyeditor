@@ -428,6 +428,26 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="11.mesh"
+				>
+				<File
+					RelativePath="..\..\..\source\NodeMesh.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\simp\NodeMesh.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\NodeMeshSpr.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\simp\NodeMeshSpr.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath="..\..\..\include\simp\simp_define.h"

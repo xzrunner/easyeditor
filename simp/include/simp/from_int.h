@@ -17,6 +17,11 @@ float int2radian(int deg) {
 }
 
 inline
+float int2float16x(int i) {
+	return i / 16.0f;
+}
+
+inline
 float int2float100x(int i) {
 	return i * 0.01f;
 }
