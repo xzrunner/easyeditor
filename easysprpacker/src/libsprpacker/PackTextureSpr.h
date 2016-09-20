@@ -1,20 +1,17 @@
-#ifndef _EASYSPRPACKER_PACK_TEXTURE_H_
-#define _EASYSPRPACKER_PACK_TEXTURE_H_
+#ifndef _EASYSPRPACKER_PACK_TEXTURE_SPR_H_
+#define _EASYSPRPACKER_PACK_TEXTURE_SPR_H_
 
 #include "PackNode.h"
 
-#include <vector>
-
-namespace etexture { class Symbol; }
+namespace etexture { class Sprite; }
 
 namespace esprpacker
 {
 
-class PackTexture : public PackNode
+class PackTextureSpr : public PackNode
 {
 public:
-	PackTexture(const etexture::Symbol* sym);
-	virtual ~PackTexture();
+	PackTextureSpr(const etexture::Sprite* spr);
 
 	/**
 	 *  @interface
@@ -30,13 +27,15 @@ public:
 	virtual int SizeOfUnpackFromBin() const;
 	virtual int SizeOfPackToBin() const;
 	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, 
-		float scale) const;	
+		float scale) const;
+
+	bool Equal(const etexture::Sprite* spr) const { return true; }
 
 private:
-	std::vector<const PackNode*> m_polys;
+	const PackNode* m_sym;
 
-}; // PackTexture
+}; // PackTextureSpr
 
 }
 
-#endif // _EASYSPRPACKER_PACK_TEXTURE_H_
+#endif // _EASYSPRPACKER_PACK_TEXTURE_SPR_H_

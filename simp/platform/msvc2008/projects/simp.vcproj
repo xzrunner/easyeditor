@@ -315,6 +315,14 @@
 					RelativePath="..\..\..\include\simp\NodeTexture.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\source\NodeTextureSpr.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\simp\NodeTextureSpr.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="05.label"

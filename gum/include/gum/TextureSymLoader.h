@@ -8,6 +8,7 @@
 #include <string>
 
 namespace s2 { class TextureSymbol; }
+namespace simp { class NodeTexture; }
 
 namespace gum
 {
@@ -19,6 +20,7 @@ public:
 	~TextureSymLoader();
 
 	void LoadJson(const std::string& filepath);	
+	void LoadBin(const simp::NodeTexture* node);
 
 private:
 	s2::TextureSymbol* m_sym;

@@ -15,15 +15,11 @@ class TextureMaterial : public Material, public s2::TexturePolygon
 public:
 	TextureMaterial();
 	TextureMaterial(ee::ImageSymbol* image);
-	virtual ~TextureMaterial();
 
 	virtual Json::Value Store(const std::string& dirpath) const;
 	virtual void Translate(const sm::vec2& offset);
 
-	const ee::ImageSymbol* GetImage() const { return m_image; }
-
-private:
-	ee::ImageSymbol* m_image;
+	const ee::ImageSymbol* GetImage() const;
 
 }; // TextureMaterial
 

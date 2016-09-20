@@ -10,7 +10,8 @@ enum ShapeType
 	RECT,
 	CIRCLE,
 	POLYLINE,
-	POLYGON,
+	POLYGON_COLOR,
+	POLYGON_TEXTURE,
 };
 
 }

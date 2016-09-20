@@ -30,6 +30,7 @@ void TestPackComplex::Init()
 	{
 		gum::SymFileType type;
 		s2::Symbol* sym = gum::SymbolFactory::Instance()->Create("test", "node", &type);
+//		s2::Symbol* sym = gum::SymbolFactory::Instance()->Create("test", "debug", &type);
 		s2::Sprite* spr = gum::SpriteFactory::Instance()->Create(sym, type);
 		spr->SetPosition(sm::vec2(0, 0));
 		m_sprites.push_back(spr);

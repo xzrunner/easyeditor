@@ -15,6 +15,7 @@
 #include <simp/simp_types.h>
 #include <simp/NodeFactory.h>
 #include <simp/NodeScale9Spr.h>
+#include <simp/NodeTextureSpr.h>
 #include <simp/NodeComplexSpr.h>
 #include <simp/NodeAnimationSpr.h>
 #include <simp/NodeParticle3dSpr.h>
@@ -225,6 +226,17 @@ s2::Sprite* SpriteFactory::Create(uint32_t id)
 			loader.LoadBin(node);
 
 			spr = s9_spr;
+		}
+		break;
+	case simp::TYPE_TEXTURE_SPR:
+		{
+			const simp::NodeTextureSpr* node = (const simp::NodeTextureSpr*)data;
+
+			s2::Symbol* sym = SymbolFactory::Instance()->Create(node->sym);
+			s2::TextureSprite* tex_spr = new s2::TextureSprite(sym);
+			sym->RemoveReference();
+
+			spr = tex_spr;
 		}
 		break;
 	case simp::TYPE_LABEL:

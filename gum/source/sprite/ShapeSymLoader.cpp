@@ -1,15 +1,22 @@
 #include "ShapeSymLoader.h"
 #include "FilepathHelper.h"
 #include "ShapeType.h"
+#include "SymFileType.h"
+#include "SymbolFactory.h"
+#include "ImageSymbol.h"
+#include "Image.h"
 
 #include <sprite2/ShapeSymbol.h>
 #include <sprite2/Color.h>
 #include <sprite2/PolygonShape.h>
 #include <sprite2/ColorPolygon.h>
+#include <sprite2/TexturePolygon.h>
 #include <simp/NodeShape.h>
 #include <simp/from_int.h>
 
 #include <fstream>
+
+#include <assert.h>
 
 namespace gum
 {
@@ -66,10 +73,27 @@ void ShapeSymLoader::LoadBin(const simp::NodeShape* node)
 
 	switch (node->type)
 	{
-	case gum::POLYGON:
+	case gum::POLYGON_COLOR:
 		{
 			s2::PolygonShape* polygon = new s2::PolygonShape(vertices);
 			s2::Polygon* poly = new s2::ColorPolygon(col);
+			poly->SetOutline(vertices);
+			poly->Build();
+			polygon->SetPolygon(poly);
+			m_sym->SetShape(polygon);
+		}
+		break;
+	case gum::POLYGON_TEXTURE:
+		{
+			s2::PolygonShape* polygon = new s2::PolygonShape(vertices);
+
+			SymFileType type;
+			s2::Symbol* sym = SymbolFactory::Instance()->Create(node->color, &type);
+			assert(type == IMAGE);
+			gum::ImageSymbol* tex_sym = VI_DOWNCASTING<gum::ImageSymbol*>(sym);
+			s2::Polygon* poly = new s2::TexturePolygon(tex_sym);
+			tex_sym->RemoveReference();
+
 			poly->SetOutline(vertices);
 			poly->Build();
 			polygon->SetPolygon(poly);

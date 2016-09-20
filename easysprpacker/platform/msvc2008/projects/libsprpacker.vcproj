@@ -251,6 +251,14 @@
 					RelativePath="..\..\..\src\libsprpacker\PackTexture.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackTextureSpr.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackTextureSpr.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="06.complex"

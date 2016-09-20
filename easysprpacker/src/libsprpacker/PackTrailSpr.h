@@ -32,9 +32,6 @@ public:
 	bool Equal(const etrail::Sprite* spr) const { return true; }
 
 private:
-	void Init(const etrail::Sprite* spr);
-
-private:
 	const PackNode* m_sym;
 
 }; // PackTrailSpr

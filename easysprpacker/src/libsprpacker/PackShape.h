@@ -39,6 +39,7 @@ private:
 	gum::ShapeType m_type;
 
 	s2::Color m_color;
+	const PackNode* m_texture;
 
 	std::vector<sm::vec2> m_vertices;
 

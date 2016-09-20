@@ -11,6 +11,7 @@
 #include "NodeIcon.h"
 #include "NodeIconSpr.h"
 #include "NodeTexture.h"
+#include "NodeTextureSpr.h"
 #include "NodeLabel.h"
 #include "NodeComplex.h"
 #include "NodeComplexSpr.h"
@@ -140,7 +141,13 @@ CreateNode(uint8_t type, Allocator& alloc, ImportStream& is)
 	case TYPE_TEXTURE:
 		{
 			void* ptr = alloc.Alloc(ALIGN_4BYTE(NodeTexture::Size()));
-			ret = new (ptr) NodeTexture(is);
+			ret = new (ptr) NodeTexture(alloc, is);
+		}
+		break;
+	case TYPE_TEXTURE_SPR:
+		{
+			void* ptr = alloc.Alloc(ALIGN_4BYTE(NodeTextureSpr::Size()));
+			ret = new (ptr) NodeTextureSpr(is);
 		}
 		break;
 	case TYPE_LABEL:

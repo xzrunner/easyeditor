@@ -14,10 +14,6 @@ class TexturePolygon : public s2::TexturePolygon
 {
 public:
 	TexturePolygon(const std::string& filepath);
-	virtual ~TexturePolygon();
-
-private:
-	Image* m_img;
 
 }; // TexturePolygon
 

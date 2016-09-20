@@ -9,6 +9,7 @@
 #include "PackIcon.h"
 #include "PackIconSpr.h"
 #include "PackTexture.h"
+#include "PackTextureSpr.h"
 #include "PackComplex.h"
 #include "PackComplexSpr.h"
 #include "PackAnimation.h"
@@ -67,6 +68,7 @@ SymBuilder<etrail::Symbol, PackTrail>*										TRAIL_BUILDER;
 
 SprBuilder<escale9::Symbol, escale9::Sprite, PackScale9Spr>*				SCALE9_SPR_BUILDER;
 SprBuilder<eicon::Symbol, eicon::Sprite, PackIconSpr>*						ICON_SPR_BUILDER;
+SprBuilder<etexture::Symbol, etexture::Sprite, PackTextureSpr>*			TEXTURE_SPR_BUILDER;
 SprBuilder<ecomplex::Symbol, ecomplex::Sprite, PackComplexSpr>*				COMPLEX_SPR_BUILDER;
 SprBuilder<eanim::Symbol, eanim::Sprite, PackAnimationSpr>*					ANIM_SPR_BUILDER;
 SprBuilder<eparticle3d::Symbol, eparticle3d::Sprite, PackParticle3dSpr>*	P3D_SPR_BUILDER;
@@ -93,6 +95,7 @@ PackNodeFactory::PackNodeFactory()
 
 	SCALE9_SPR_BUILDER	= new SprBuilder<escale9::Symbol, escale9::Sprite, PackScale9Spr>();
 	ICON_SPR_BUILDER	= new SprBuilder<eicon::Symbol, eicon::Sprite, PackIconSpr>();
+	TEXTURE_SPR_BUILDER	= new SprBuilder<etexture::Symbol, etexture::Sprite, PackTextureSpr>();
 	COMPLEX_SPR_BUILDER	= new SprBuilder<ecomplex::Symbol, ecomplex::Sprite, PackComplexSpr>();
 	ANIM_SPR_BUILDER	= new SprBuilder<eanim::Symbol, eanim::Sprite, PackAnimationSpr>();
 	P3D_SPR_BUILDER		= new SprBuilder<eparticle3d::Symbol, eparticle3d::Sprite, PackParticle3dSpr>();
@@ -128,7 +131,7 @@ const PackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 	}
 	// texture
 	else if (const etexture::Sprite* texture = dynamic_cast<const etexture::Sprite*>(spr)) {
-		node = TEXTURE_BUILDER->Create(dynamic_cast<const etexture::Symbol*>(texture->GetSymbol()));
+		node = TEXTURE_SPR_BUILDER->Create(texture);
 	}
 	// label
 	else if (const etext::Sprite* label = dynamic_cast<const etext::Sprite*>(spr)) {
@@ -191,6 +194,10 @@ const PackNode* PackNodeFactory::Create(const ee::Symbol* sym)
 	// icon
 	else if (const eicon::Symbol* icon = dynamic_cast<const eicon::Symbol*>(sym)) {
 		node = ICON_BUILDER->Create(icon);
+	}
+	// texture
+	else if (const etexture::Symbol* texture = dynamic_cast<const etexture::Symbol*>(sym)) {
+		node = TEXTURE_BUILDER->Create(texture);
 	}
 	// complex
 	else if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(sym)) {
@@ -265,6 +272,7 @@ void PackNodeFactory::FetchAllBuilder(std::vector<NodeBuilder*>& builders)
 
 	builders.push_back(SCALE9_SPR_BUILDER);
 	builders.push_back(ICON_SPR_BUILDER);
+	builders.push_back(TEXTURE_SPR_BUILDER);
 	builders.push_back(COMPLEX_SPR_BUILDER);
 	builders.push_back(ANIM_SPR_BUILDER);
 	builders.push_back(P3D_SPR_BUILDER);

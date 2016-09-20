@@ -1,6 +1,7 @@
 #include "TexturePolygon.h"
-#include "Texture.h"
+#include "ImageSymbol.h"
 #include "RenderParams.h"
+#include "Texture.h"
 
 #include <SM_Process.h>
 #include <SM_Triangulation.h>
@@ -14,35 +15,35 @@ namespace s2
 {
 
 TexturePolygon::TexturePolygon()
-	: m_tex(NULL)
+	: m_img(NULL)
 {
 }
 
 TexturePolygon::TexturePolygon(const TexturePolygon& poly)
-	: m_tex(NULL)
+	: m_img(NULL)
 	, m_texcoords(poly.m_texcoords)
 {
-	cu::RefCountObjAssign(m_tex, const_cast<Texture*>(poly.m_tex));
+	cu::RefCountObjAssign(m_img, const_cast<ImageSymbol*>(poly.m_img));
 }
 
 TexturePolygon& TexturePolygon::operator = (const TexturePolygon& poly)
 {
-	m_tex = NULL;
-	cu::RefCountObjAssign(m_tex, const_cast<Texture*>(poly.m_tex));
+	m_img = NULL;
+	cu::RefCountObjAssign(m_img, const_cast<ImageSymbol*>(poly.m_img));
 	m_texcoords = poly.m_texcoords;
 	return *this;
 }
 
-TexturePolygon::TexturePolygon(const Texture* tex)
-	: m_tex(NULL)
+TexturePolygon::TexturePolygon(const ImageSymbol* img)
+	: m_img(NULL)
 {
-	cu::RefCountObjAssign(m_tex, tex);	
+	cu::RefCountObjAssign(m_img, img);	
 }
 
 TexturePolygon::~TexturePolygon()
 {
-	if (m_tex) {
-		m_tex->RemoveReference();
+	if (m_img) {
+		m_img->RemoveReference();
 	}
 }
 
@@ -57,7 +58,8 @@ void TexturePolygon::Draw(const sm::mat4& mt, const RenderColor& color) const
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	mgr->SetShader(sl::SPRITE2);
 	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
-	for (int i = 0, n = m_tris.size(); i < n; i += 3) {
+	for (int i = 0, n = m_tris.size(); i < n; i += 3) 
+	{
 		sm::vec2 vertices[4], texcoords[4];
 		for (int j = 0; j < 3; ++j) {
 			vertices[j] = mt * m_tris[i+j];
@@ -66,7 +68,21 @@ void TexturePolygon::Draw(const sm::mat4& mt, const RenderColor& color) const
 		vertices[3] = vertices[2];
 		texcoords[3] = texcoords[2];
 
-		shader->Draw(&vertices[0].x, &texcoords[0].x, m_tex->GetTexID());
+		float _texcoords[8];
+		int texid;
+		m_img->QueryTexcoords(_texcoords, texid);
+
+		float minx = _texcoords[0],
+			  miny = _texcoords[1];
+		float w = _texcoords[4] - minx,
+			  h = _texcoords[5] - miny;
+		for (int i = 0; i < 4; ++i) {
+			float x = minx + w * texcoords[i].x,
+				  y = miny + h * texcoords[i].y;
+			texcoords[i].Set(x, y);
+		}
+
+		shader->Draw(&vertices[0].x, &texcoords[0].x, texid);
 	}
 
 	//sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
@@ -139,7 +155,7 @@ void TexturePolygon::Build()
 void TexturePolygon::GetTexBoundarySegments(const sm::rect& rect, std::vector<sm::vec2>& segments)
 {
 	static const int EXTEND = 1;
-	sm::vec2 sz = m_tex->GetSize();
+	sm::vec2 sz = m_img->GetNoTrimedSize();
 	for (float x = rect.xmin; x < rect.xmax; x += sz.x)
 	{
 		segments.push_back(sm::vec2(x, rect.ymin - EXTEND));
@@ -154,7 +170,7 @@ void TexturePolygon::GetTexBoundarySegments(const sm::rect& rect, std::vector<sm
 
 void TexturePolygon::CalTexcoords(const sm::rect& rect)
 {
-	sm::vec2 sz = m_tex->GetSize();
+	sm::vec2 sz = m_img->GetNoTrimedSize();
 	int index = 0;
 	for (int i = 0, n = m_tris.size() / 3; i < n; ++i)
 	{

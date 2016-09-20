@@ -11,6 +11,7 @@ static const int TYPE_SCALE9_SPR	= 4;
 static const int TYPE_ICON			= 5;
 static const int TYPE_ICON_SPR		= 6;
 static const int TYPE_TEXTURE		= 7;
+static const int TYPE_TEXTURE_SPR	= 8;
 static const int TYPE_LABEL			= 9;
 static const int TYPE_COMPLEX		= 11;
 static const int TYPE_COMPLEX_SPR	= 12;

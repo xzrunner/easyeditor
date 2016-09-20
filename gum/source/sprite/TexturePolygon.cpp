@@ -1,25 +1,21 @@
 #include "TexturePolygon.h"
-#include "Image.h"
+#include "SymFileType.h"
+#include "SymbolFactory.h"
+
+#include <sprite2/ImageSymbol.h>
+
+#include <assert.h>
 
 namespace gum
 {
 
 TexturePolygon::TexturePolygon(const std::string& filepath)
 {
-	m_img = ImageMgr::Instance()->Create(filepath);
-	if (!m_img) {
-		return;
-	}
+	SymFileType type;
+	s2::Symbol* sym = SymbolFactory::Instance()->Create(filepath, &type);
+	assert(type == IMAGE);
 
-	s2::Texture* tex = m_img->GetS2Tex();
-	cu::RefCountObjAssign(m_tex, tex);
-}
-
-TexturePolygon::~TexturePolygon()
-{
-	if (m_img) {
-		m_img->RemoveReference();
-	}
+	m_img = dynamic_cast<s2::ImageSymbol*>(sym);
 }
 
 }

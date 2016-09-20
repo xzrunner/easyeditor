@@ -8,15 +8,17 @@
 namespace simp
 {
 
+class Allocator;
 class ImportStream;
 
 class NodeTexture : private cu::Uncopyable
 {
 public:
-	uint32_t type;
+	uint32_t n;
+	uint32_t polys[1];
 
 public:
-	NodeTexture(ImportStream& is);
+	NodeTexture(Allocator& alloc, ImportStream& is);
 
 	static int Size();
 

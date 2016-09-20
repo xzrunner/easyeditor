@@ -227,6 +227,16 @@ s2::Symbol* SymbolFactory::Create(uint32_t id, SymFileType* _type) const
 			ret = sym;
 		}
 		break;
+	case simp::TYPE_TEXTURE:
+		{
+			stype = TEXTURE;
+
+			s2::TextureSymbol* sym = new s2::TextureSymbol;
+			TextureSymLoader loader(sym);
+			loader.LoadBin((const simp::NodeTexture*)data);
+			ret = sym;
+		}
+		break;
 	case simp::TYPE_LABEL:
 		{
 			stype = TEXTBOX;

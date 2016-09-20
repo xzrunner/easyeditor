@@ -9,7 +9,7 @@
 namespace s2
 {
 
-class Texture;
+class ImageSymbol;
 
 class TexturePolygon : public VIRTUAL_INHERITANCE Polygon
 {
@@ -17,7 +17,7 @@ public:
 	TexturePolygon();
 	TexturePolygon(const TexturePolygon& poly);
 	TexturePolygon& operator = (const TexturePolygon& poly);
-	TexturePolygon(const Texture* tex);
+	TexturePolygon(const ImageSymbol* img);
 	virtual ~TexturePolygon();
 
 	virtual void Draw(const sm::mat4& mt, const RenderColor& color) const;
@@ -31,7 +31,7 @@ private:
 	void CalTexcoords(const sm::rect& rect);
 
 protected:
-	Texture* m_tex;
+	ImageSymbol* m_img;
 
 	std::vector<sm::vec2> m_texcoords;
 
