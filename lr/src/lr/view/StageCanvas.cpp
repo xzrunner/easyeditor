@@ -94,13 +94,8 @@ void StageCanvas::DrawSprites() const
 		DrawSprite(spr, false);
 	}
 
-	// draw point layer again
-	Layer* point_layer = m_stage->GetLayers()[3];
-	std::vector<ee::Sprite*> redraw_sprites;
-	point_layer->TraverseSprite(ee::FetchAllVisitor<ee::Sprite>(redraw_sprites), ee::DT_VISIBLE);
-	for (int i = 0, n = redraw_sprites.size(); i < n; ++i) {
-		DrawSprite(redraw_sprites[i], false);
-	}
+	DrawLayer(m_stage->GetLayers()[3]);
+	DrawLayer(m_stage->GetLayers()[8]);
 }
 
 void StageCanvas::DrawSprite(ee::Sprite* spr, bool draw_edge) const
@@ -169,6 +164,15 @@ void StageCanvas::DrawPseudo3dBound() const
 	if (!m_bound_pseudo3d.empty()) {
 		s2::RVG::SetColor(ee::LIGHT_GREEN);
 		s2::RVG::Polyline(m_bound_pseudo3d, true);
+	}
+}
+
+void StageCanvas::DrawLayer(const Layer* layer) const
+{
+	std::vector<ee::Sprite*> sprs;
+	layer->TraverseSprite(ee::FetchAllVisitor<ee::Sprite>(sprs), ee::DT_VISIBLE);
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		DrawSprite(sprs[i], false);
 	}
 }
 

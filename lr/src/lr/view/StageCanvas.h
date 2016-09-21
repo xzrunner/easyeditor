@@ -8,6 +8,7 @@ namespace ee { class Sprite; }
 namespace lr
 {
 
+class Layer;
 class StagePanel;
 
 class StageCanvas : public ee::CameraCanvas
@@ -27,6 +28,8 @@ private:
 
 	void DrawRegion() const;
 	void DrawPseudo3dBound() const;
+
+	void DrawLayer(const Layer* layer) const;
 
 private:
 	StagePanel* m_stage;
