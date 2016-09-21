@@ -275,7 +275,7 @@ wxSizer* ToolbarPanel::CreateMainLayout()
 	top_sizer->AddSpacer(10);
 	// Radial Speed
 	ee::SliderCtrlTwo* s_r_spd = new ee::SliderCtrlTwo(this, LANG[LK_RADIAL_SPEED], "radial_speed", this, PS_RADIAL_SPEED, 
-		ee::SliderItem(LANG[LK_CENTER], ITEM_ATTR_CENTER, RADIAL_SPEED_CENTER, 0, 40000), ee::SliderItem(LANG[LK_OFFSET], ITEM_ATTR_OFFSET, RADIAL_SPEED_OFFSET, 0, 20000));
+		ee::SliderItem(LANG[LK_CENTER], ITEM_ATTR_CENTER, RADIAL_SPEED_CENTER, -40000, 40000), ee::SliderItem(LANG[LK_OFFSET], ITEM_ATTR_OFFSET, RADIAL_SPEED_OFFSET, 0, 20000));
 	top_sizer->Add(s_r_spd);
 	top_sizer->AddSpacer(10);
 	m_sliders.push_back(s_r_spd);
