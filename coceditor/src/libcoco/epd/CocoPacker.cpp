@@ -721,9 +721,8 @@ int CocoPacker::ParserIcon(const eicon::Sprite* spr)
 
 void CocoPacker::ParserIcon(const eicon::Symbol* sym, float process, int id)
 {
-	const ee::Image* img = dynamic_cast<const eicon::Icon*>(sym->GetIcon())->GetImage();
-	ee::Symbol* img_symbol = ee::SymbolMgr::Instance()->FetchSymbol(img->GetFilepath());
-	TPParser::Picture* picture = m_parser.FindPicture(img_symbol);
+	const ee::Symbol* img_sym = dynamic_cast<const ee::Symbol*>(sym->GetIcon()->GetImage());
+	TPParser::Picture* picture = m_parser.FindPicture(img_sym);
 	if (!picture) {
 		std::string str = "\""+sym->GetFilepath()+"\""+" not in the texpacker file 2!";
 		throw ee::Exception(str);

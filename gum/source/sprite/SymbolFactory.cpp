@@ -5,6 +5,7 @@
 #include "ImageSymbol.h"
 #include "ImageSymLoader.h"
 #include "Scale9SymLoader.h"
+#include "IconSymLoader.h"
 #include "TextureSymLoader.h"
 #include "TextboxSymbol.h"
 #include "TextboxLoader.h"
@@ -24,6 +25,7 @@
 #include <simp/NodePicture.h>
 
 #include <sprite2/Scale9Symbol.h>
+#include <sprite2/IconSymbol.h>
 #include <sprite2/TextureSymbol.h>
 #include <sprite2/ComplexSymbol.h>
 #include <sprite2/AnimSymbol.h>
@@ -81,6 +83,14 @@ s2::Symbol* SymbolFactory::Create(const std::string& filepath, SymFileType* _typ
 		{
 			s2::Scale9Symbol* sym = new s2::Scale9Symbol();
 			Scale9SymLoader loader(sym);
+			loader.LoadJson(filepath);
+			ret = sym;
+		}
+		break;
+	case ICON:
+		{
+			s2::IconSymbol* sym = new s2::IconSymbol();
+			IconSymLoader loader(sym);
 			loader.LoadJson(filepath);
 			ret = sym;
 		}
@@ -224,6 +234,16 @@ s2::Symbol* SymbolFactory::Create(uint32_t id, SymFileType* _type) const
 			s2::Scale9Symbol* sym = new s2::Scale9Symbol;
 			Scale9SymLoader loader(sym);
 			loader.LoadBin((const simp::NodeScale9*)data);
+			ret = sym;
+		}
+		break;
+	case simp::TYPE_ICON:
+		{
+			stype = ICON;
+
+			s2::IconSymbol* sym = new s2::IconSymbol;
+			IconSymLoader loader(sym);
+			loader.LoadBin((const simp::NodeIcon*)data);
 			ret = sym;
 		}
 		break;

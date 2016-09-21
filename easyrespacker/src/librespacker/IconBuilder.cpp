@@ -7,6 +7,7 @@
 #include "PackPicture.h"
 
 #include <ee/Visitor.h>
+#include <ee/ImageSymbol.h>
 
 #include <easyicon.h>
 
@@ -82,7 +83,7 @@ void IconBuilder::Load(const eicon::Sprite* spr, PackPicture* pic)
 
 	const eicon::Symbol* sym = dynamic_cast<const eicon::Symbol*>(spr->GetSymbol());
 	const eicon::Icon* icon = dynamic_cast<const eicon::Icon*>(sym->GetIcon());
-	quad.img = icon->GetImage();
+	quad.img = dynamic_cast<const ee::ImageSymbol*>(icon->GetImage())->GetImage();
 	icon->GenTexcoords(proc, quad.texture_coord);
 	icon->GenVertices(proc, quad.texture_coord, quad.screen_coord);
 

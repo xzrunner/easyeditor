@@ -8,15 +8,21 @@
 namespace simp
 {
 
+class Allocator;
 class ImportStream;
 
 class NodeIcon : private cu::Uncopyable
 {
 public:
-	uint32_t type;
+	uint32_t base_id;
+
+	uint16_t type;
+
+	uint16_t vertices_n;
+	uint16_t vertices[1];
 
 public:
-	NodeIcon(ImportStream& is);
+	NodeIcon(Allocator& alloc, ImportStream& is);
 
 	static int Size();
 

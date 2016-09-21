@@ -12,6 +12,7 @@ public:
 	StaticRectIcon();
 	
 	void SetRegion(const sm::rect& r);
+	void GetRegion(sm::vec2& min, sm::vec2& max) const;
 
 protected:
 	virtual void GetQuad(float process, sm::vec2 quad[4]) const;

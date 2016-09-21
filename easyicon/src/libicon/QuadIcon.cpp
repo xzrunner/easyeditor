@@ -1,16 +1,16 @@
 #include "QuadIcon.h"
 
-#include <ee/Image.h>
+#include <ee/ImageSymbol.h>
 
 namespace eicon
 {
 
-QuadIcon::QuadIcon(ee::Image* img, const sm::vec2* src, 
+QuadIcon::QuadIcon(ee::ImageSymbol* img, const sm::vec2* src, 
 				   const sm::vec2* screen)
 {
-	m_tex = img->GetS2Tex();
 	memcpy(m_src, src, sizeof(m_src));
 	memcpy(m_screen, screen, sizeof(m_screen));
+	SetImage(img);
 }
 
 void QuadIcon::LoadFromFile(const Json::Value& value)

@@ -2,13 +2,15 @@
 #include "Icon.h"
 #include "FileIO.h"
 
+#include <ee/ImageSymbol.h>
+
 namespace eicon
 {
 
-void Symbol::SetImage(ee::Image* img)
+void Symbol::SetImage(ee::ImageSymbol* img)
 {
 	if (m_icon) {
-		dynamic_cast<Icon*>(m_icon)->SetImage(img);
+		m_icon->SetImage(img);
 	}
 }
 

@@ -6,6 +6,7 @@
 #include <ee/EditPanelImpl.h>
 #include <ee/panel_msg.h>
 #include <ee/color_config.h>
+#include <ee/ImageSymbol.h>
 #include <ee/Image.h>
 
 #include <sprite2/S2_RVG.h>
@@ -112,13 +113,14 @@ bool EditQuadOP::OnDraw() const
 		return false;
 	}
 
-	const ee::Image* img = icon->GetImage();
+	const s2::ImageSymbol* img = icon->GetImage();
 	if (!img) {
 		return false;
 	}
 
-	float w = img->GetClippedWidth(),
-		h = img->GetClippedHeight();
+	const ee::Image* ee_img = dynamic_cast<const ee::ImageSymbol*>(img)->GetImage();
+	float w = ee_img->GetClippedWidth(),
+		  h = ee_img->GetClippedHeight();
 	s2::RVG::SetColor(ee::LIGHT_RED);
 	s2::RVG::LineWidth(1);
 	s2::RVG::Rect(sm::vec2(0, 0), w * 0.5f, h * 0.5f, false);

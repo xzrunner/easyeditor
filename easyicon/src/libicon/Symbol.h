@@ -5,7 +5,7 @@
 
 #include <sprite2/IconSymbol.h>
 
-namespace ee { class Image; }
+namespace ee { class ImageSymbol; }
 
 namespace eicon
 {
@@ -15,7 +15,7 @@ class Icon;
 class Symbol : public ee::Symbol, public s2::IconSymbol
 {
 public:
-	void SetImage(ee::Image* img);
+	void SetImage(ee::ImageSymbol* img);
 
 	static ee::Symbol* Create() { return new Symbol(); }
 

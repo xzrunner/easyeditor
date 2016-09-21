@@ -10,6 +10,9 @@ class DynamicRectIcon : public VIRTUAL_INHERITANCE Icon
 {
 public:
 	DynamicRectIcon();
+
+	void SetRegion(const sm::rect& begin, const sm::rect& end);
+	void GetRegion(sm::rect& begin, sm::rect& end) const;
 	
 protected:
 	virtual void GetQuad(float process, sm::vec2 quad[4]) const;

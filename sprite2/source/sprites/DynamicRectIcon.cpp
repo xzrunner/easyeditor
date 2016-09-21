@@ -24,4 +24,16 @@ void DynamicRectIcon::GetQuad(float process, sm::vec2 quad[4]) const
 	quad[3].Set(xmax, ymin);
 }
 
+void DynamicRectIcon::SetRegion(const sm::rect& begin, const sm::rect& end)
+{
+	m_begin = begin;
+	m_end = end;
+}
+
+void DynamicRectIcon::GetRegion(sm::rect& begin, sm::rect& end) const
+{
+	begin = m_begin;
+	end = m_end;
+}
+
 }

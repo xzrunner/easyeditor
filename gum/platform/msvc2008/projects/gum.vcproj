@@ -411,25 +411,25 @@
 				Name="03.icon"
 				>
 				<File
-					RelativePath="..\..\..\source\sprite\IconSymbol.cpp"
+					RelativePath="..\..\..\source\sprite\IconSprLoader.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\include\gum\IconSymbol.h"
+					RelativePath="..\..\..\include\gum\IconSprLoader.h"
 					>
 				</File>
-				<Filter
-					Name="icon"
+				<File
+					RelativePath="..\..\..\source\sprite\IconSymLoader.cpp"
 					>
-					<File
-						RelativePath="..\..\..\source\sprite\Icon.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\include\gum\Icon.h"
-						>
-					</File>
-				</Filter>
+				</File>
+				<File
+					RelativePath="..\..\..\include\gum\IconSymLoader.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\gum\IconType.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="04.texture"

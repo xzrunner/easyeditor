@@ -55,7 +55,7 @@ Icon* StagePanel::GetIcon()
 	}
 }
 
-void StagePanel::SetImage(ee::Image* img)
+void StagePanel::SetImage(ee::ImageSymbol* img)
 {
 	if (m_sym) {
 		m_sym->SetImage(img);
@@ -78,7 +78,7 @@ OnDropSymbol(ee::Symbol* sym, const sm::vec2& pos)
 {
 	if (ee::ImageSymbol* image = dynamic_cast<ee::ImageSymbol*>(sym))
 	{
-		m_stage->SetImage(image->GetImage());
+		m_stage->SetImage(image);
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		return true;
 	}

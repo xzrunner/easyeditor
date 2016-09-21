@@ -3,6 +3,7 @@
 #include "Sprite.h"
 
 #include <ee/Image.h>
+#include <ee/ImageSymbol.h>
 
 #include <easyicon.h>
 
@@ -28,7 +29,7 @@ ee::Sprite* PictureToSpr::Trans(const erespacker::PackPicture* pic)
 ee::Sprite* PictureToSpr::TransQuad(const erespacker::PackPicture::Quad* quad)
 {
 	float w = quad->img->GetOriginWidth(),
-		h = quad->img->GetOriginHeight();
+		  h = quad->img->GetOriginHeight();
 
 	sm::vec2 src[4], screen[4];
 	for (int i = 0; i < 4; ++i) {
@@ -37,8 +38,10 @@ ee::Sprite* PictureToSpr::TransQuad(const erespacker::PackPicture::Quad* quad)
 		screen[i] = quad->screen_coord[i];
 	}
 
-	eicon::QuadIcon* icon = new eicon::QuadIcon(
-		const_cast<ee::Image*>(quad->img), src, screen);
+	ee::ImageSymbol* img_sym = new ee::ImageSymbol(
+		const_cast<ee::Image*>(quad->img), "");
+	eicon::QuadIcon* icon = new eicon::QuadIcon(img_sym, src, screen);
+	img_sym->RemoveReference();
 
 	eicon::Symbol* sym = new eicon::Symbol;
 	sym->SetIcon(icon);

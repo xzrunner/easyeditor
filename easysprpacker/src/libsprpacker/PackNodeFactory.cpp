@@ -68,7 +68,7 @@ SymBuilder<etrail::Symbol, PackTrail>*										TRAIL_BUILDER;
 
 SprBuilder<escale9::Symbol, escale9::Sprite, PackScale9Spr>*				SCALE9_SPR_BUILDER;
 SprBuilder<eicon::Symbol, eicon::Sprite, PackIconSpr>*						ICON_SPR_BUILDER;
-SprBuilder<etexture::Symbol, etexture::Sprite, PackTextureSpr>*			TEXTURE_SPR_BUILDER;
+SprBuilder<etexture::Symbol, etexture::Sprite, PackTextureSpr>*				TEXTURE_SPR_BUILDER;
 SprBuilder<ecomplex::Symbol, ecomplex::Sprite, PackComplexSpr>*				COMPLEX_SPR_BUILDER;
 SprBuilder<eanim::Symbol, eanim::Sprite, PackAnimationSpr>*					ANIM_SPR_BUILDER;
 SprBuilder<eparticle3d::Symbol, eparticle3d::Sprite, PackParticle3dSpr>*	P3D_SPR_BUILDER;

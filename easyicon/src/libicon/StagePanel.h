@@ -6,7 +6,7 @@
 
 class wxGLContext;
 
-namespace ee { class LibraryPanel; class MultiSpritesImpl; class Image; }
+namespace ee { class LibraryPanel; class MultiSpritesImpl; class ImageSymbol; }
 
 namespace eicon
 {
@@ -27,7 +27,7 @@ public:
 	void SetIcon(Icon* icon);
 	Icon* GetIcon();
 
-	void SetImage(ee::Image* img);
+	void SetImage(ee::ImageSymbol* img);
 
 	const Symbol& GetSymbol() const { return *m_sym; }
 	Symbol& GetSymbol() { return *m_sym; }

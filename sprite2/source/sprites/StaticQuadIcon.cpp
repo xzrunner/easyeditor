@@ -1,5 +1,6 @@
 #include "StaticQuadIcon.h"
 #include "RenderParams.h"
+#include "ImageSymbol.h"
 #include "Texture.h"
 
 #include <shaderlab.h>
@@ -22,7 +23,7 @@ StaticQuadIcon::StaticQuadIcon(const StaticQuadIcon& icon)
 
 StaticQuadIcon& StaticQuadIcon::operator = (const StaticQuadIcon& icon)
 {
-	m_tex = icon.m_tex;
+	Icon::operator = (icon);
 	memset(m_src, 0, sizeof(m_src));
 	memset(m_screen, 0, sizeof(m_screen));
 	return *this;
@@ -30,7 +31,7 @@ StaticQuadIcon& StaticQuadIcon::operator = (const StaticQuadIcon& icon)
 
 void StaticQuadIcon::Draw(const RenderParams& params, float process) const
 {
-	if (!m_tex) {
+	if (!m_img) {
 		return;
 	}
 
@@ -42,7 +43,7 @@ void StaticQuadIcon::Draw(const RenderParams& params, float process) const
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	mgr->SetShader(sl::SPRITE2);
 	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader());
-	shader->Draw(&vertices[0].x, &m_src[0].x, m_tex->GetTexID());
+	shader->Draw(&vertices[0].x, &m_src[0].x, m_img->GetTexture()->GetTexID());
 }
 
 sm::rect StaticQuadIcon::GetRegion(float process) const
@@ -61,7 +62,7 @@ sm::rect StaticQuadIcon::GetRegion(float process) const
 
 void StaticQuadIcon::SetScreen(const sm::vec2* screen)
 {
-	sm::vec2 sz = m_tex->GetSize();
+	sm::vec2 sz = m_img->GetNoTrimedSize();
 	memcpy(m_screen, screen, sizeof(m_screen));
 	for (int i = 0; i < 4; ++i) {
 		m_src[i].x = m_screen[i].x / sz.x + 0.5f;
@@ -81,7 +82,7 @@ void StaticQuadIcon::Update()
 	m_src[2].Set(1, 1);
 	m_src[3].Set(1, 0);
 
-	sm::vec2 sz = m_tex->GetSize();
+	sm::vec2 sz = m_img->GetNoTrimedSize();
 	float hw = sz.x * 0.5f,
 		  hh = sz.y * 0.5f;
 	m_screen[0].Set(-hw, -hh);

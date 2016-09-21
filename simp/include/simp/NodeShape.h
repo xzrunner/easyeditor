@@ -19,7 +19,7 @@ public:
 
 	uint32_t color;
 
-	uint32_t vertices_n;
+	uint16_t vertices_n;
 	uint16_t vertices[1];
 
 public:

@@ -15,7 +15,10 @@ namespace esprpacker
 
 PackIconSpr::PackIconSpr(const eicon::Sprite* spr)
 {
-	Init(spr);
+	m_sym = PackNodeFactory::Instance()->Create(
+		dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
+
+	m_process = spr->GetProcess();
 }
 
 void PackIconSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const
@@ -69,14 +72,6 @@ void PackIconSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float sc
 bool PackIconSpr::Equal(const eicon::Sprite* spr) const
 {
 	return m_process == spr->GetProcess();
-}
-
-void PackIconSpr::Init(const eicon::Sprite* spr)
-{
-	m_sym = PackNodeFactory::Instance()->Create(
-		dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
-
-	m_process = spr->GetProcess();
 }
 
 }

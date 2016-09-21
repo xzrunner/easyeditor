@@ -2,6 +2,7 @@
 #include "ImageSymbol.h"
 #include "RenderParams.h"
 #include "Texture.h"
+#include "TexcoordsMap.h"
 
 #include <SM_Process.h>
 #include <SM_Triangulation.h>
@@ -72,15 +73,7 @@ void TexturePolygon::Draw(const sm::mat4& mt, const RenderColor& color) const
 		int texid;
 		m_img->QueryTexcoords(_texcoords, texid);
 
-		float minx = _texcoords[0],
-			  miny = _texcoords[1];
-		float w = _texcoords[4] - minx,
-			  h = _texcoords[5] - miny;
-		for (int i = 0; i < 4; ++i) {
-			float x = minx + w * texcoords[i].x,
-				  y = miny + h * texcoords[i].y;
-			texcoords[i].Set(x, y);
-		}
+		TexcoordsMap::Trans(_texcoords, texcoords);
 
 		shader->Draw(&vertices[0].x, &texcoords[0].x, texid);
 	}

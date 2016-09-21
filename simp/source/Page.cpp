@@ -129,7 +129,7 @@ CreateNode(uint8_t type, Allocator& alloc, ImportStream& is)
 	case TYPE_ICON:
 		{
 			void* ptr = alloc.Alloc(ALIGN_4BYTE(NodeIcon::Size()));
-			ret = new (ptr) NodeIcon(is);
+			ret = new (ptr) NodeIcon(alloc, is);
 		}
 		break;
 	case TYPE_ICON_SPR:

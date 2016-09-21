@@ -1,5 +1,6 @@
 #include "StaticRectIcon.h"
 #include "Texture.h"
+#include "ImageSymbol.h"
 
 namespace s2
 {
@@ -12,7 +13,7 @@ StaticRectIcon::StaticRectIcon()
 
 void StaticRectIcon::SetRegion(const sm::rect& r)
 {
-	sm::vec2 sz = m_tex->GetSize();
+	sm::vec2 sz = m_img->GetNoTrimedSize();
 	m_min.x = r.xmin / sz.x + 0.5f;
 	m_min.y = r.ymin / sz.y + 0.5f;
 	m_max.x = r.xmax / sz.x + 0.5f;
@@ -22,6 +23,12 @@ void StaticRectIcon::SetRegion(const sm::rect& r)
 	m_min.y = std::min(1.0f, std::max(0.0f, m_min.y));
 	m_max.x = std::max(0.0f, std::min(1.0f, m_max.x));
 	m_max.y = std::max(0.0f, std::min(1.0f, m_max.y));
+}
+
+void StaticRectIcon::GetRegion(sm::vec2& min, sm::vec2& max) const
+{
+	min = m_min;
+	max = m_max;
 }
 
 void StaticRectIcon::GetQuad(float process, sm::vec2 quad[4]) const

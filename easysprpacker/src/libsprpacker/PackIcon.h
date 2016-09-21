@@ -3,6 +3,11 @@
 
 #include "PackNode.h"
 
+#include <gum/IconType.h>
+#include <SM_Vector.h>
+
+#include <vector>
+
 namespace eicon { class Symbol; }
 
 namespace esprpacker
@@ -30,10 +35,11 @@ public:
 		float scale) const;	
 
 private:
-	void Init(const eicon::Symbol* sym);
+	const PackNode* m_base;
 
-private:
-	int m_type;
+	gum::IconType m_type;
+
+	std::vector<sm::vec2> m_vertices;
 
 }; // PackIcon
 

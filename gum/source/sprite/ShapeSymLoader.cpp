@@ -73,7 +73,7 @@ void ShapeSymLoader::LoadBin(const simp::NodeShape* node)
 
 	switch (node->type)
 	{
-	case gum::POLYGON_COLOR:
+	case gum::SHAPE_POLYGON_COLOR:
 		{
 			s2::PolygonShape* polygon = new s2::PolygonShape(vertices);
 			s2::Polygon* poly = new s2::ColorPolygon(col);
@@ -83,7 +83,7 @@ void ShapeSymLoader::LoadBin(const simp::NodeShape* node)
 			m_sym->SetShape(polygon);
 		}
 		break;
-	case gum::POLYGON_TEXTURE:
+	case gum::SHAPE_POLYGON_TEXTURE:
 		{
 			s2::PolygonShape* polygon = new s2::PolygonShape(vertices);
 

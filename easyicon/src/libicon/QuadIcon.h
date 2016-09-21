@@ -7,7 +7,7 @@
 
 #include <json/json.h>
 
-namespace ee { class Image; }
+namespace ee { class ImageSymbol; }
 
 namespace eicon
 {
@@ -16,7 +16,7 @@ class QuadIcon : public Icon, public s2::StaticQuadIcon
 {
 public:
 	QuadIcon() {}
-	QuadIcon(ee::Image* img, const sm::vec2* src, 
+	QuadIcon(ee::ImageSymbol* img, const sm::vec2* src, 
 		const sm::vec2* screen);
 
 	/**

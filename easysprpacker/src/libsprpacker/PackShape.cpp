@@ -24,19 +24,19 @@ PackShape::PackShape(const eshape::Symbol* sym)
 	const s2::Shape* shape = sym->GetShape();
 	if (const s2::PointShape* point = dynamic_cast<const s2::PointShape*>(shape))
 	{
-		m_type = gum::POINT;
+		m_type = gum::SHAPE_POINT;
 		m_vertices.push_back(point->GetPos());
 	}
 	else if (const s2::RectShape* rect = dynamic_cast<const s2::RectShape*>(shape))
 	{
-		m_type = gum::RECT;
+		m_type = gum::SHAPE_RECT;
 		const sm::rect& r = rect->GetRect();
 		m_vertices.push_back(sm::vec2(r.xmin, r.ymin));
 		m_vertices.push_back(sm::vec2(r.xmax, r.ymax));
 	}
 	else if (const s2::CircleShape* circle = dynamic_cast<const s2::CircleShape*>(shape))
 	{
-		m_type = gum::CIRCLE;
+		m_type = gum::SHAPE_CIRCLE;
 		m_vertices.push_back(circle->GetCenter());
 		m_vertices.push_back(sm::vec2(circle->GetRadius(), circle->GetRadius()));
 	}
@@ -46,17 +46,17 @@ PackShape::PackShape(const eshape::Symbol* sym)
 		m_vertices = polygon->GetVertices();
 		const s2::Polygon* p = polygon->GetPolygon();
 		if (const s2::ColorPolygon* cp = dynamic_cast<const s2::ColorPolygon*>(p)) {
-			m_type = gum::POLYGON_COLOR;
+			m_type = gum::SHAPE_POLYGON_COLOR;
 			m_color = cp->GetColor();
 		} else if (const s2::TexturePolygon* tp = dynamic_cast<const s2::TexturePolygon*>(p)) {
-			m_type = gum::POLYGON_TEXTURE;
+			m_type = gum::SHAPE_POLYGON_TEXTURE;
 			const eshape::TextureMaterial* mat = dynamic_cast<const eshape::TextureMaterial*>(tp);
 			m_texture = PackNodeFactory::Instance()->Create(mat->GetImage());
 		}
 	}
 	else if (const s2::PolylineShape* polyline = dynamic_cast<const s2::PolylineShape*>(shape))
 	{
-		m_type = gum::POLYLINE;
+		m_type = gum::SHAPE_POLYLINE;
 		m_vertices = polyline->GetVertices();
 	}
 }
@@ -72,7 +72,7 @@ void PackShape::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TextureP
 	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(m_id));
 
 	lua::assign_with_end(gen, "shape_type", m_type);
-	if (m_type == gum::POLYGON_TEXTURE) {
+	if (m_type == gum::SHAPE_POLYGON_TEXTURE) {
 		lua::assign_with_end(gen, "texture", m_texture->GetID());
 	} else {
 		lua::assign_with_end(gen, "color", m_color.ToRGBA());
@@ -113,7 +113,7 @@ void PackShape::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scal
 	uint8_t shape_type = m_type;
 	pack(shape_type, ptr);
 
-	if (m_type == gum::POLYGON_TEXTURE) {
+	if (m_type == gum::SHAPE_POLYGON_TEXTURE) {
 		uint32_t id = m_texture->GetID();
 		pack(id, ptr);
 	} else {

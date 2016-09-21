@@ -5,6 +5,7 @@
 #include "SpriteIO.h"
 
 #include "Scale9SprLoader.h"
+#include "IconSprLoader.h"
 #include "TextboxSprLoader.h"
 #include "ComplexSprLoader.h"
 #include "AnimSprLoader.h"
@@ -15,6 +16,7 @@
 #include <simp/simp_types.h>
 #include <simp/NodeFactory.h>
 #include <simp/NodeScale9Spr.h>
+#include <simp/NodeIconSpr.h>
 #include <simp/NodeTextureSpr.h>
 #include <simp/NodeComplexSpr.h>
 #include <simp/NodeAnimationSpr.h>
@@ -28,6 +30,7 @@
 #include <sprite2/S2_Symbol.h>
 #include <sprite2/ImageSprite.h>
 #include <sprite2/Scale9Sprite.h>
+#include <sprite2/IconSprite.h>
 #include <sprite2/TextureSprite.h>
 #include <sprite2/TextboxSprite.h>
 #include <sprite2/ComplexSprite.h>
@@ -60,6 +63,9 @@ s2::Sprite* SpriteFactory::Create(s2::Symbol* sym, SymFileType type) const
 		break;
 	case SCALE9:
 		spr = new s2::Scale9Sprite(sym);
+		break;
+	case ICON:
+		spr = new s2::IconSprite(sym);
 		break;
 	case TEXTURE:
 		spr = new s2::TextureSprite(sym);
@@ -139,6 +145,12 @@ s2::Sprite* SpriteFactory::Create(const Json::Value& val, const std::string& dir
 	case SCALE9:
 		{
 			Scale9SprLoader loader(VI_DOWNCASTING<s2::Scale9Sprite*>(spr));
+			loader.LoadJson(val, dir);
+		}
+		break;
+	case ICON:
+		{
+			IconSprLoader loader(VI_DOWNCASTING<s2::IconSprite*>(spr));
 			loader.LoadJson(val, dir);
 		}
 		break;
@@ -226,6 +238,20 @@ s2::Sprite* SpriteFactory::Create(uint32_t id)
 			loader.LoadBin(node);
 
 			spr = s9_spr;
+		}
+		break;
+	case simp::TYPE_ICON_SPR:
+		{
+			const simp::NodeIconSpr* node = (const simp::NodeIconSpr*)data;
+
+			s2::Symbol* sym = SymbolFactory::Instance()->Create(node->sym);
+			s2::IconSprite* icon_spr = new s2::IconSprite(sym);
+			sym->RemoveReference();
+
+			IconSprLoader loader(icon_spr);
+			loader.LoadBin(node);
+
+			spr = icon_spr;
 		}
 		break;
 	case simp::TYPE_TEXTURE_SPR:

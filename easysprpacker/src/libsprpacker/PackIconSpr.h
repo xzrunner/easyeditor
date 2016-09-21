@@ -31,9 +31,6 @@ public:
 
 	bool Equal(const eicon::Sprite* spr) const;
 
-private:
-	void Init(const eicon::Sprite* spr);
-
 private:	
 	const PackNode* m_sym;
 
