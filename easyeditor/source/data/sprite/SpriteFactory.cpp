@@ -110,9 +110,10 @@ void SpriteFactory::Insert(Sprite* spr)
 
 void SpriteFactory::Remove(Sprite* spr)
 {
+	const Symbol* sym = dynamic_cast<const Symbol*>(spr->GetSymbol());
 	std::map<const Symbol*, SpriteList>::iterator 
-		itr = m_map_symbol2sprites.begin();
-	for ( ; itr != m_map_symbol2sprites.end(); ++itr)
+		itr = m_map_symbol2sprites.find(sym);
+	if (itr != m_map_symbol2sprites.end()) 
 	{
 		SpriteList::iterator itr_sprite = itr->second.begin();
 		for ( ; itr_sprite != itr->second.end(); )
