@@ -168,9 +168,6 @@ void Layer::LoadFromFile(const Json::Value& val, const std::string& dir, int lay
 
 void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
 {
-	std::ofstream fout("d:/zztest.txt");
-	fout << "++ Layer::StoreToFile 0\n";
-
 	val["name"] = m_name;
 	val["visible"] = m_visible;
 	val["editable"] = m_editable;
@@ -180,78 +177,39 @@ void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
 
 	m_layer_mgr.StoreToFile(val["layers"], dir);
 
-	fout << "++ Layer::StoreToFile 1\n";
-
 	std::vector<ee::Sprite*> sprs;
 	m_sprs.Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs), ee::DT_ALL);
 	int count = 0;
 
-	fout << "++ Layer::StoreToFile 2\n";
-
 	for (int i = 0, n = sprs.size(); i < n; ++i) 
 	{
 		ee::Sprite* spr = sprs[i];
-		fout << "++ Layer::StoreToFile 3\n";
-
-		if (spr->GetUserData()) {
-			fout << "++ Layer::StoreToFile 4\n";
-
-			UserData* ud = static_cast<UserData*>(spr->GetUserData());
-			if (ud->type == UT_NEW_COMPLEX) {
-				fout << "++ Layer::StoreToFile 5\n";
-
-				const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());
-				ecomplex::FileStorer::Store(sym->GetFilepath().c_str(), 
-					static_cast<const ecomplex::Symbol*>(sym));
-				if (ee::FileHelper::IsFileExist(sym->GetFilepath())) {
-					wxMessageBox(sym->GetFilepath(), "success");
-				} else {
-					wxMessageBox(sym->GetFilepath(), "fail !!!!!!!!!!!!!!!!!!!");
-				}
-			}
-			fout << "++ Layer::StoreToFile 6\n";
-		}
-
-		fout << "++ Layer::StoreToFile 7\n";
 
 		Json::Value cval;
 		if (StoreSprite(spr, cval, dir)) {
 			val["sprite"][count++] = cval;
 		}
-		fout << "++ Layer::StoreToFile 8\n";
-	}
 
-	fout << "++ Layer::StoreToFile 9\n";
+		if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(spr)) {
+			const ecomplex::Symbol* sym = dynamic_cast<const ecomplex::Symbol*>(complex->GetSymbol());
+			ecomplex::FileStorer::Store(sym->GetFilepath().c_str(), sym);
+		}
+	}
 
 	std::vector<ee::Shape*> shapes;
 	m_shapes.Traverse(ee::FetchAllVisitor<ee::Shape>(shapes), true);
 	count = 0;
-	fout << "++ Layer::StoreToFile 10\n";
 
 	for (int i = 0, n = shapes.size(); i < n; ++i) {
 		ee::Shape* shape = shapes[i];
-		fout << "++ Layer::StoreToFile 11\n";
-
 		if (shape->GetUserData()) {
-			fout << "++ Layer::StoreToFile 12\n";
-
 			UserData* ud = static_cast<UserData*>(shape->GetUserData());
 			if (ud->type == UT_BASE_FILE) {
 				return;
 			}
-			fout << "++ Layer::StoreToFile 13\n";
-
 		}
-		fout << "++ Layer::StoreToFile 14\n";
-
 		shape->StoreToFile(val["shape"][count++], dir);
-		fout << "++ Layer::StoreToFile 15\n";
-
 	}
-
-	fout << "++ Layer::StoreToFile 16\n";
-
-	fout.close();
 }
 
 bool Layer::Update()
