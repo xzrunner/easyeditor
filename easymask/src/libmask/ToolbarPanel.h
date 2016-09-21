@@ -3,6 +3,8 @@
 
 #include <ee/ToolbarPanel.h>
 
+namespace s2 { class Sprite; }
+
 namespace emask
 {
 
@@ -18,6 +20,8 @@ protected:
 
 private:
 	void OnChangeMaskRender(wxCommandEvent& event);
+
+	static void Restart(const s2::Sprite* spr);
 
 private:
 	StagePanel* m_stage;
