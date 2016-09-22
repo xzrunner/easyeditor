@@ -16,30 +16,14 @@ PreviewEditOP::PreviewEditOP(wxWindow* wnd, ee::EditPanelImpl* stage,
 {
 }
 
-class RestartVisitor : public ee::Visitor<ee::Sprite>
-{
-public:
-	virtual void Visit(ee::Sprite* spr, bool& next) {
-		if (const eparticle3d::Sprite* particle = dynamic_cast<const eparticle3d::Sprite*>(spr)) {
-			const_cast<eparticle3d::Sprite*>(particle)->Start();
-		} else if (const eanim::Sprite* anim = dynamic_cast<const eanim::Sprite*>(spr)) {
-			const_cast<eanim::Sprite*>(anim)->Start();
-		}
-	}
-}; // RestartVisitor
-
 bool PreviewEditOP::OnMouseLeftDown(int x, int y)
 {
 	if (ee::ZoomViewOP::OnMouseLeftDown(x, y)) {
 		return true;
 	}
 
-	RestartVisitor restart;
-	bool next;
 	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
-		ee::Sprite* spr = const_cast<ee::Sprite*>(m_sprs[i]);
-		restart.Visit(spr, next);
-		dynamic_cast<ee::Symbol*>(spr->GetSymbol())->Traverse(restart);
+		m_sprs[i]->OnMessage(s2::MSG_START);
 	}
 
 	return false;

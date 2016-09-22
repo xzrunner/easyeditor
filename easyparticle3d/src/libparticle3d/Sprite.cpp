@@ -73,13 +73,6 @@ ee::PropertySetting* Sprite::CreatePropertySetting(ee::EditPanelImpl* stage)
 	return new SpritePropertySetting(stage, this);
 }
 
-void Sprite::Start()
-{
-	if (m_spr) {
-		p3d_emitter_start(m_spr->et);
-	}
-}
-
 bool Sprite::IsLoop() const
 {
 	if (m_spr) {

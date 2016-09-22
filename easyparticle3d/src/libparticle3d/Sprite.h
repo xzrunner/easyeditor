@@ -35,8 +35,6 @@ public:
 
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
 
-	void Start();
-
 	sm::Quaternion& GetDir() { return m_dir; }
 	const sm::Quaternion& GetDir() const { return m_dir; }
 

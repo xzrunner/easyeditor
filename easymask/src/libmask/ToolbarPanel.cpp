@@ -40,22 +40,8 @@ void ToolbarPanel::OnChangeMaskRender(wxCommandEvent& event)
 
 	if (mask_render) {
 		Symbol* sym = m_stage->GetSymbol();
-		Restart(sym->GetBase());
-		Restart(sym->GetMask());
-	}
-}
-
-void ToolbarPanel::Restart(const s2::Sprite* spr)
-{
-	if (const eparticle3d::Sprite* particle = dynamic_cast<const eparticle3d::Sprite*>(spr)) {
-		const_cast<eparticle3d::Sprite*>(particle)->Start();
-	} else if (const eanim::Sprite* anim = dynamic_cast<const eanim::Sprite*>(spr)) {
-		const_cast<eanim::Sprite*>(anim)->Start();
-	} else if (const ecomplex::Sprite* complex = dynamic_cast<const ecomplex::Sprite*>(spr)) {
-		const std::vector<s2::Sprite*>& children = dynamic_cast<const s2::ComplexSymbol*>(complex->GetSymbol())->GetChildren();
-		for (int i = 0, n = children.size(); i < n; ++i) {
-			Restart(children[i]);
-		}
+		const_cast<s2::Sprite*>(sym->GetBase())->OnMessage(s2::MSG_START);
+		const_cast<s2::Sprite*>(sym->GetMask())->OnMessage(s2::MSG_START);
 	}
 }
 
