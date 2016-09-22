@@ -1,3 +1,3 @@
 # simp
 
-sprite import
+sprite binary data import
