@@ -5,6 +5,8 @@
 #include "ToolBarPanel.h"
 #include "ParticleSystem.h"
 
+#include <ee/FetchAllVisitor.h>
+
 namespace eparticle3d
 {
 
@@ -26,6 +28,13 @@ StagePanel::~StagePanel()
 
 bool StagePanel::UpdateStage()
 {
+	std::vector<ee::Sprite*> sprs;
+	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	s2::RenderParams rp;
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		sprs[i]->Update(rp);
+	}
+
 	if (m_ps) {
 		return m_ps->Update(m_ps_mat);
 	} else {
