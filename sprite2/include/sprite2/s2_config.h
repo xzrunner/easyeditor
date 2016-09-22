@@ -1,6 +1,0 @@
-#ifndef _SPRITE2_CONFIG_H_
-#define _SPRITE2_CONFIG_H_
-
-#define S2_VIRTUAL_INHERITANCE
-
-#endif // _SPRITE2_CONFIG_H_
