@@ -1,4 +1,0 @@
-# GIMG
-
-Game Image
-

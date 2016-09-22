@@ -43,3 +43,12 @@
 [submodule "sprite2"]
 	path = sprite2
 	url = ssh://git@tea.ejoy.com:3222/LR/sprite2.git
+[submodule "simp"]
+	path = simp
+	url = ssh://git@tea.ejoy.com:3222/LR/simp.git
+[submodule "gum"]
+	path = gum
+	url = ssh://git@tea.ejoy.com:3222/LR/gum.git
+[submodule "gimg/src/gimg"]
+	path = gimg/src/gimg
+	url = ssh://git@tea.ejoy.com:3222/LR/gimg.git
