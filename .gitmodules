@@ -40,3 +40,6 @@
 [submodule "cu/src/cu"]
 	path = cu/src/cu
 	url = ssh://git@tea.ejoy.com:3222/LR/cu.git
+[submodule "sprite2"]
+	path = sprite2
+	url = ssh://git@tea.ejoy.com:3222/LR/sprite2.git
