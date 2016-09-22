@@ -1,3 +1,0 @@
-# gum
-
-game engine
