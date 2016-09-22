@@ -24,12 +24,6 @@ protected:
 	virtual void LoadInfo(const Json::Value& val);
 	virtual void StoreInfo(Json::Value& val);
 
-	// edit
-	virtual void LoadEdit(s2::Sprite* spr);
-	virtual void StoreEdit(const s2::Sprite* spr);
-	virtual void LoadEdit(const Json::Value& val);
-	virtual void StoreEdit(Json::Value& val);
-	
 public:
 	// geometry
 	sm::vec2		m_perspective;
@@ -38,9 +32,6 @@ public:
 	std::string		m_tag;
 	bool			m_clip;
 	bool			m_anchor;
-
-	// edit
-	bool			m_editable;
 
 }; // SpriteIO
 

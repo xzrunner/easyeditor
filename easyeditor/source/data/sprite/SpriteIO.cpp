@@ -15,8 +15,6 @@ SpriteIO::SpriteIO()
 
 	m_clip			= false;
 	m_anchor		= false;
-
-	m_editable		= true;
 }
 
 void SpriteIO::LoadGeometry(s2::Sprite* spr)
@@ -117,42 +115,6 @@ void SpriteIO::StoreInfo(Json::Value& val)
 
 	if (!m_compress || m_anchor) {
 		val["anchor"] = m_anchor;
-	}
-}
-
-void SpriteIO::LoadEdit(s2::Sprite* spr)
-{
-	gum::SpriteIO::LoadEdit(spr);
-
-	Sprite* ee_spr = dynamic_cast<Sprite*>(spr);
-	ee_spr->SetEditable(m_editable);
-}
-
-void SpriteIO::StoreEdit(const s2::Sprite* spr)
-{
-	gum::SpriteIO::StoreEdit(spr);
-
-	const Sprite* ee_spr = dynamic_cast<const Sprite*>(spr);
-	m_editable = ee_spr->IsEditable();
-}
-
-void SpriteIO::LoadEdit(const Json::Value& val)
-{
-	gum::SpriteIO::LoadEdit(val);
-
-	if (!val["editable"].isNull()) {
-		m_editable = val["editable"].asBool();
-	} else {
-		m_editable = true;
-	}
-}
-
-void SpriteIO::StoreEdit(Json::Value& val)
-{
-	gum::SpriteIO::StoreEdit(val);
-
-	if (!m_compress || !m_editable) {
-		val["editable"] = m_editable;
 	}
 }
 
