@@ -17,6 +17,7 @@ namespace ecomplex
 void FileStorer::Store(const char* filepath, const Symbol* sym)
 {
 	CheckDuplicateName(sym);
+	CheckNameDiff(sym);
 
 	Json::Value value;
 
@@ -53,6 +54,7 @@ void FileStorer::Store(const char* filepath, const Symbol* sym)
 void FileStorer::StoreWithHistory(const char* filepath, const Symbol* sym)
 {
 	CheckDuplicateName(sym);
+	CheckNameDiff(sym);
 
 	Json::Value value;
 
@@ -139,6 +141,37 @@ void FileStorer::CheckDuplicateName(const Symbol* sym)
 			wxMessageBox(name, "重名");
 		}
 	}
+}
+
+void FileStorer::CheckNameDiff(const Symbol* sym)
+{
+	std::set<std::string> curr_names;
+	const std::vector<s2::Sprite*>& children = sym->GetChildren();
+	for (int i = 0, n = children.size(); i < n; ++i) {
+		const std::string& name = children[i]->GetName();
+		if (!name.empty() && name[0] != '_') {
+			curr_names.insert(children[i]->GetName());
+		}
+	}
+
+	std::vector<std::string> leak_names;
+	const std::vector<std::string>& origin_names = sym->GetOriginNames();
+	for (int i = 0, n = origin_names.size(); i < n; ++i) {
+		if (curr_names.find(origin_names[i]) == curr_names.end()) {
+			leak_names.push_back(origin_names[i]);
+		}
+	}
+
+	if (leak_names.empty()) {
+		return;
+	}
+
+	std::string str;
+	for (int i = 0, n = leak_names.size(); i < n; ++i) {
+		str += leak_names[i] + ", ";
+	}
+
+	wxMessageBox(str, "删除的名字");
 }
 
 void FileStorer::StoreAction(const Symbol* sym, Json::Value& val)
