@@ -32,6 +32,8 @@ public:
 	bool HasActions() const;
 	void GetActionNames(std::vector<std::string>& actions) const;
 
+	const std::vector<std::string>& GetOriginNames() const { return m_origin_names; }
+
 	static ee::Symbol* Create() { return new Symbol(); }
 
 protected:
@@ -47,6 +49,8 @@ public:
 	// todo: 
 public:
 	std::vector<Group> m_groups;
+
+	std::vector<std::string> m_origin_names;
 
 	bool m_use_render_cache;
 

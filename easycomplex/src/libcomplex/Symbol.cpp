@@ -204,6 +204,14 @@ void Symbol::GetActionNames(std::vector<std::string>& actions) const
 void Symbol::LoadResources()
 {
 	FileLoader::Load(m_filepath, this);
+
+	const std::vector<s2::Sprite*>& children = GetChildren();
+	for (int i = 0, n = children.size(); i < n; ++i) {
+		const std::string& name = children[i]->GetName();
+		if (!name.empty() && name[0] != '_') {
+			m_origin_names.push_back(children[i]->GetName());
+		}
+	}
 }
 
 }
