@@ -26,7 +26,7 @@ void CocoPacker::pack(const std::string& srcdir, const std::string& dstfilename)
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath();
-		if (ee::FileType::IsType(filepath, ee::FileType::e_particle2d))
+		if (ee::FileType::IsType(filepath, ee::FILE_PARTICLE2D))
 		{
 			pack(filepath, gen);
 		}

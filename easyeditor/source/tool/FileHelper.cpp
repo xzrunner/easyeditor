@@ -112,12 +112,12 @@ void FileHelper::FetchAllFiles(const std::string& dirpath, const std::vector<std
 	dir.Traverse(traverser);
 }
 
-void FileHelper::FetchAllFiles(const std::string& dirpath, wxArrayString& files, FileType::Type type)
+void FileHelper::FetchAllFiles(const std::string& dirpath, wxArrayString& files, FileFormat type)
 {
 	class DirTraverser : public wxDirTraverser
 	{
 	public:
-		DirTraverser(wxArrayString& files, FileType::Type type) 
+		DirTraverser(wxArrayString& files, FileFormat type) 
 			: files(files), type(type) {}
 
 		virtual wxDirTraverseResult OnFile(const wxString& filename)
@@ -135,7 +135,7 @@ void FileHelper::FetchAllFiles(const std::string& dirpath, wxArrayString& files,
 
 	private:
 		wxArrayString& files;
-		FileType::Type type;
+		FileFormat type;
 
 	}; // DirTraverser
 

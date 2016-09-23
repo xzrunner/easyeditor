@@ -6,45 +6,45 @@
 namespace ee
 {
 
+enum FileFormat
+{
+	FILE_INVALID = 0,
+	// shape
+	FILE_SHAPE,
+	// symbol
+	FILE_IMAGE,
+	FILE_MESH,
+	FILE_COMPLEX,
+	FILE_ANIM,
+	FILE_ANIS,
+	FILE_SCALE9,
+	FILE_FONTBLANK,
+	FILE_FREETYPE,
+	FILE_SCRIPTS,
+	FILE_PARTICLE2D,
+	FILE_PARTICLE3D,
+	FILE_P3DINV,
+	FILE_EJOY2D,
+	FILE_TEXTURE,
+	FILE_TERRAIN2D,
+	FILE_ICON,
+	FILE_SHADOW,
+	FILE_UI,
+	FILE_TEXT,
+	FILE_MASK,
+	FILE_PSD,
+	FILE_UIWND,
+	FILE_TRAIL,
+	FILE_BONE,
+};
+
 class FileType
 {
 public:
-	enum Type
-	{
-		e_unknown = 0,
-		// shape
-		e_shape,
-		// symbol
-		e_image,
-		e_mesh,
-		e_combination,
-		e_complex,
-		e_anim,
-		e_anis,
-		e_scale9,
-		e_fontblank,
-		e_freetype,
-		e_scripts,
-		e_particle2d,
-		e_particle3d,
-		e_p3dinv,
-		e_ejoy2d,
-		e_texture,
-		e_terrain2d,
-		e_icon,
-		e_shadow,
-		e_ui,
-		e_text,
-		e_mask,
-		e_psd,
-		e_uiwnd,
-		e_trail,
-	};
+	static FileFormat GetType(const std::string& filename);
+	static std::string GetTag(FileFormat format);
 
-	static Type GetType(const std::string& filename);
-	static std::string GetTag(Type type);
-
-	static bool IsType(const std::string& filename, Type type);
+	static bool IsType(const std::string& filename, FileFormat format);
 
 }; // FileType
 

@@ -303,7 +303,7 @@ void RegularRectPack::LoadData(const wxArrayString& files)
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = files[i];
-		if (!ee::FileType::IsType(filepath, ee::FileType::e_image)) {
+		if (!ee::FileType::IsType(filepath, ee::FILE_IMAGE)) {
 			continue;
 		}
 

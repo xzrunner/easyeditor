@@ -51,8 +51,8 @@ void StagePanel::LoadFromDir(const std::string& dirpath)
 	for (size_t i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = files[i].ToStdString();
-		if (ee::FileType::IsType(filepath, ee::FileType::e_complex) || 
-			ee::FileType::IsType(filepath, ee::FileType::e_anim))
+		if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX) || 
+			ee::FileType::IsType(filepath, ee::FILE_ANIM))
 		{
 			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);

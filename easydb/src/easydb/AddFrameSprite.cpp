@@ -45,7 +45,7 @@ void AddFrameSprite::Trigger(const std::string& dir, const std::string& sprite_p
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filename = files[i].ToStdString();
-		if (!ee::FileType::IsType(filename, ee::FileType::e_anim)) {
+		if (!ee::FileType::IsType(filename, ee::FILE_ANIM)) {
 			continue;
 		}
 

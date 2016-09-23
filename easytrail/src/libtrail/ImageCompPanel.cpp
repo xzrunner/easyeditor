@@ -92,7 +92,7 @@ void ImageCompPanel::InitLayout(wxSizer* top_sizer)
 		// right
 		{
 			std::string filepath = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(m_pc->mode.A.ud))->GetFilepath();
-			if (ee::FileType::IsType(filepath, ee::FileType::e_image)) {
+			if (ee::FileType::IsType(filepath, ee::FILE_IMAGE)) {
 				ee::ImagePanel* panel = new ee::ImagePanel(this, filepath, 100);
 				hori_sizer->Add(panel);
 			}

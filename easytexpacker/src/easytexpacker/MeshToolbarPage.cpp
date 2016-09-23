@@ -169,7 +169,7 @@ void MeshToolbarPage::LoadBodies(const std::string& dir)
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (!ee::FileType::IsType(filepath, ee::FileType::e_shape)) {
+		if (!ee::FileType::IsType(filepath, ee::FILE_SHAPE)) {
 			continue;
 		}
 

@@ -25,7 +25,7 @@ bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
-	std::string filter = "*_" + ee::FileType::GetTag(ee::FileType::e_shape) + ".json";
+	std::string filter = "*_" + ee::FileType::GetTag(ee::FILE_SHAPE) + ".json";
 	wxFileDialog dlg(this, wxT("choose shape files"), wxEmptyString, 
 		wxEmptyString, filter, wxFD_OPEN | wxFD_MULTIPLE);
 	if (dlg.ShowModal() == wxID_OK)

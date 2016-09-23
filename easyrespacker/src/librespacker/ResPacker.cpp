@@ -192,14 +192,14 @@ void ResPacker::LoadJsonData(const std::string& dir)
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath();
-		if (ee::FileType::IsType(filepath, ee::FileType::e_complex) || 
-			ee::FileType::IsType(filepath, ee::FileType::e_anim) ||
-			ee::FileType::IsType(filepath, ee::FileType::e_particle3d) ||
-			ee::FileType::IsType(filepath, ee::FileType::e_trail)) {
+		if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX) || 
+			ee::FileType::IsType(filepath, ee::FILE_ANIM) ||
+			ee::FileType::IsType(filepath, ee::FILE_PARTICLE3D) ||
+			ee::FileType::IsType(filepath, ee::FILE_TRAIL)) {
 			filepaths.push_back(filepath);
-		} else if (ee::FileType::IsType(filepath, ee::FileType::e_ui)) {
+		} else if (ee::FileType::IsType(filepath, ee::FILE_UI)) {
 			PackUI::Instance()->AddTask(filepath);
-		} else if (ee::FileType::IsType(filepath, ee::FileType::e_uiwnd)) {
+		} else if (ee::FileType::IsType(filepath, ee::FILE_UIWND)) {
 			PackUI::Instance()->AddWindowTask(filepath);
 			AddUIWndSymbol(filepath);
 		}

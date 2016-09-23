@@ -60,8 +60,8 @@ void PackLuaDescFile::LoadJsonFiles(const std::string& dir)
 	for (int i = 0, n = files.size(); i < n; ++i) 
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (ee::FileType::IsType(filepath, ee::FileType::e_complex) || 
-			ee::FileType::IsType(filepath, ee::FileType::e_anim))
+		if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX) || 
+			ee::FileType::IsType(filepath, ee::FILE_ANIM))
 		{
 			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			m_syms.push_back(sym);

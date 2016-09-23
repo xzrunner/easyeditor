@@ -36,13 +36,13 @@ bool BodyData::LoadFromFile(const std::string& filename)
 
 	m_filename = filename;
 
-	FileType::Type type = FileType::GetType(filename);
+	FileFormat type = FileType::GetType(filename);
 	switch (type)
 	{
-	case FileType::e_mesh:
+	case FILE_MESH:
 		loadFromMeshFile(filename);
 		break;
-	case FileType::e_shape:
+	case FILE_SHAPE:
 		loadFromShapeFile(filename);
 	default:
 		return false;

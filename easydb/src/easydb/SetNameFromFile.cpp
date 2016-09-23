@@ -51,10 +51,10 @@ void SetNameFromFile::AddNameFromFile(const std::string& dir) const
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (ee::FileType::IsType(filepath, ee::FileType::e_anim)) {
+		if (ee::FileType::IsType(filepath, ee::FILE_ANIM)) {
 			AddName(filepath);
 		} else if (m_do_complex && 
-			ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
+			ee::FileType::IsType(filepath, ee::FILE_COMPLEX)) {
 			AddName(filepath);		
 		}
 	}

@@ -23,8 +23,8 @@ void Frame::OnSaveAs(wxCommandEvent& event)
 	if (!m_task) return;
 
 	try {
-		std::string anim_filter = GetJsonFileFilter(ee::FileType::GetTag(ee::FileType::e_anim));
-		std::string inv_filter = GetJsonFileFilter(ee::FileType::GetTag(ee::FileType::e_p3dinv));
+		std::string anim_filter = GetJsonFileFilter(ee::FileType::GetTag(ee::FILE_ANIM));
+		std::string inv_filter = GetJsonFileFilter(ee::FileType::GetTag(ee::FILE_P3DINV));
 		std::string filter = GetFileFilter() + "|" + anim_filter + "|" + inv_filter;
 		wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, filter, wxFD_SAVE);
 		if (dlg.ShowModal() == wxID_OK)

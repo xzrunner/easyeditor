@@ -29,12 +29,12 @@ Task::~Task()
 
 void Task::Load(const char* filepath)
 {
-	ee::FileType::Type type = ee::FileType::GetType(filepath);
-	if (type == ee::FileType::e_shape) {
+	ee::FileFormat type = ee::FileType::GetType(filepath);
+	if (type == ee::FILE_SHAPE) {
 		m_stage->LoadFromFile(filepath);		
-	} else if (type == ee::FileType::e_image 
-		|| type == ee::FileType::e_complex
-		|| type == ee::FileType::e_texture) {
+	} else if (type == ee::FILE_IMAGE 
+		|| type == ee::FILE_COMPLEX
+		|| type == ee::FILE_TEXTURE) {
 		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 		m_stage->SetSymbolBG(sym);
 		sym->RemoveReference();
@@ -44,9 +44,9 @@ void Task::Load(const char* filepath)
 void Task::Store(const char* filepath) const
 {
 	std::string fixed = filepath;
-	ee::FileType::Type type = ee::FileType::GetType(fixed);
-	if (type != ee::FileType::e_shape) {
-		std::string tag = ee::FileType::GetTag(ee::FileType::e_shape);
+	ee::FileFormat type = ee::FileType::GetType(fixed);
+	if (type != ee::FILE_SHAPE) {
+		std::string tag = ee::FileType::GetTag(ee::FILE_SHAPE);
 		fixed = ee::FileHelper::GetFilenameAddTag(fixed, tag, "json");
 	}
 	m_stage->StoreToFile(fixed.c_str());

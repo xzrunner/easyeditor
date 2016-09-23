@@ -50,7 +50,7 @@ void OutlineToTriStrip::Trigger(const std::string& dir) const
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (!ee::FileType::IsType(filepath, ee::FileType::e_image)) {
+		if (!ee::FileType::IsType(filepath, ee::FILE_IMAGE)) {
 			continue;
 		}
 

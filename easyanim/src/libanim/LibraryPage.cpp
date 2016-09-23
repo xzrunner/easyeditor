@@ -29,7 +29,7 @@ bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
-	std::string filter = ee::FileType::GetTag(ee::FileType::e_anim);
+	std::string filter = ee::FileType::GetTag(ee::FILE_ANIM);
 	filter = "*_" + filter + ".json";
 	filter += "; *.lua";
 	wxFileDialog dlg(this, wxT("导入anim文件"), wxEmptyString, 

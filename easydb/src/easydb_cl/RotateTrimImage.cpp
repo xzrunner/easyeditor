@@ -94,7 +94,7 @@ void RotateTrimImage::RotateTrim(ee::Snapshoot& ss, const std::string& dir)
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 		std::cout << i << " / " << n << " : " << filepath << "\n";
 
-		if (ee::FileType::IsType(filepath, ee::FileType::e_image))
+		if (ee::FileType::IsType(filepath, ee::FILE_IMAGE))
 		{
 			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 

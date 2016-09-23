@@ -72,15 +72,15 @@ void RectCutWithJson::Trigger(const std::string& src_dir, const std::string& dst
 		std::string filepath = filename.GetFullPath();
 
 		std::cout << i << " / " << n << " : " << filepath << "\n";
-		if (ee::FileType::IsType(filepath, ee::FileType::e_image)) {
+		if (ee::FileType::IsType(filepath, ee::FILE_IMAGE)) {
 			RectCutImage(src_dir, dst_dir, filepath);
-		} else if (ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
+		} else if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX)) {
 			FixComplex(src_dir, dst_dir, filepath);
-		} else if (ee::FileType::IsType(filepath, ee::FileType::e_anim)) {
+		} else if (ee::FileType::IsType(filepath, ee::FILE_ANIM)) {
 			FixAnim(src_dir, dst_dir, filepath);
-		} else if (ee::FileType::IsType(filepath, ee::FileType::e_scale9)) {
+		} else if (ee::FileType::IsType(filepath, ee::FILE_SCALE9)) {
 			FixScale9(src_dir, dst_dir, filepath);
-		} else if (ee::FileType::IsType(filepath, ee::FileType::e_particle3d)) {
+		} else if (ee::FileType::IsType(filepath, ee::FILE_PARTICLE3D)) {
 			FixParticle3d(src_dir, dst_dir, filepath);			
 		}
 	}
@@ -271,7 +271,7 @@ void RectCutWithJson::FixSpriteValue(const std::string& src_dir, const std::stri
 									 const std::string& file_dir, Json::Value& sprite_val) const
 {
 	std::string filepath = sprite_val["filepath"].asString();
-	if (!ee::FileType::IsType(filepath, ee::FileType::e_image)) {
+	if (!ee::FileType::IsType(filepath, ee::FILE_IMAGE)) {
 		return;
 	}
 

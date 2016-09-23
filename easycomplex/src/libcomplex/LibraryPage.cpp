@@ -33,7 +33,7 @@ bool LibraryPage::LoadFromConfig()
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
-	std::string tag = ee::FileType::GetTag(ee::FileType::e_complex);
+	std::string tag = ee::FileType::GetTag(ee::FILE_COMPLEX);
 	std::string filter = "*_" + tag + ".json";
 	filter += ";*_" + tag + "[gen].json";
 	filter += "; *.lua";

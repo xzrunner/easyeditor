@@ -72,7 +72,7 @@ void ScaleOverall::Scale(ee::Snapshoot& ss, const std::string& dir, float scale)
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (ee::FileType::IsType(filepath, ee::FileType::e_image)) {
+		if (ee::FileType::IsType(filepath, ee::FILE_IMAGE)) {
 			ScaleImage(filepath, scale, ss, mapImg2Center);
 		}
 	}
@@ -80,9 +80,9 @@ void ScaleOverall::Scale(ee::Snapshoot& ss, const std::string& dir, float scale)
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
+		if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX)) {
 			ScaleComplex(filepath, scale, mapImg2Center);
-		} else if (ee::FileType::IsType(filepath, ee::FileType::e_anim)) {
+		} else if (ee::FileType::IsType(filepath, ee::FILE_ANIM)) {
 			ScaleAnim(filepath, scale, mapImg2Center);
 		}
 	}

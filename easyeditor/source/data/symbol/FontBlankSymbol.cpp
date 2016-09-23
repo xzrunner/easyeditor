@@ -69,7 +69,7 @@ bool FontBlankSymbol::LoadFont(const std::string& _filename)
 		return false;
 
 	std::string filename = FileHelper::GetAbsolutePath(m_filepath, _filename);
-	if (!FileType::IsType(filename, FileType::e_freetype) || 
+	if (!FileType::IsType(filename, FILE_FREETYPE) || 
 		!FileHelper::IsFileExist(filename)) {
 		return false;
 	}

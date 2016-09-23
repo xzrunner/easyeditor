@@ -52,7 +52,7 @@ void SymbolsCfg::LoadConfig()
 
 void SymbolsCfg::InitLibrarySymbols(const Json::Value& value)
 {
-	InitLibrarySymbols(value["window"], "窗口", ee::FileType::GetTag(ee::FileType::e_uiwnd));
+	InitLibrarySymbols(value["window"], "窗口", ee::FileType::GetTag(ee::FILE_UIWND));
 	InitLibrarySymbols(value["button"], "按钮");
 	InitLibrarySymbols(value["list"], "列表");
 	InitLibrarySymbols(value["textbox"], "文本框");

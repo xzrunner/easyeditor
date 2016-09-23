@@ -58,7 +58,7 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 
 		std::cout << i << " / " << n << " : " << filepath << "\n";
-		if (ee::FileType::IsType(filepath, ee::FileType::e_image))
+		if (ee::FileType::IsType(filepath, ee::FILE_IMAGE))
 		{
 			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 

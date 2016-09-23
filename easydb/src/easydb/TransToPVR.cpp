@@ -45,7 +45,7 @@ void TransToPVR::Trigger(const std::string& path)
 		for (int i = 0, n = files.size(); i < n; ++i)
 		{
 			std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-			if (ee::FileType::IsType(filepath, ee::FileType::e_image))
+			if (ee::FileType::IsType(filepath, ee::FILE_IMAGE))
 			{
 				std::cout << i << " / " << n << " : " << filepath << "\n";
 				EncodeByPvrTexTool(filepath);
@@ -55,7 +55,7 @@ void TransToPVR::Trigger(const std::string& path)
 	} 
 	else if (ee::FileHelper::IsFileExist(path))
 	{
-		if (ee::FileType::IsType(path, ee::FileType::e_image)) {
+		if (ee::FileType::IsType(path, ee::FILE_IMAGE)) {
 			EncodeByPvrTexTool(path);
 		}
 	}

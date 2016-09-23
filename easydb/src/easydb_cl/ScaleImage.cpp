@@ -78,7 +78,7 @@ void ScaleImage::Scale(ee::Snapshoot& ss, const std::string& dir, float scale)
 void ScaleImage::Scale(ee::Snapshoot& ss, const std::string& src, const std::string& dst, float scale)
 {
 	std::string filepath = ee::FileHelper::GetAbsolutePath(src);
-	if (ee::FileType::IsType(filepath, ee::FileType::e_image))
+	if (ee::FileType::IsType(filepath, ee::FILE_IMAGE))
 	{
 		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 		sm::rect r = sym->GetBounding();

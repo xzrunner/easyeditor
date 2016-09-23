@@ -59,8 +59,8 @@ Task::~Task()
 
 void Task::Load(const char* filepath)
 {
-	if (!ee::FileType::IsType(filepath, ee::FileType::e_anim) &&
-		!ee::FileType::IsType(filepath, ee::FileType::e_anis)) {
+	if (!ee::FileType::IsType(filepath, ee::FILE_ANIM) &&
+		!ee::FileType::IsType(filepath, ee::FILE_ANIS)) {
 		return;
 	}
 
@@ -74,10 +74,10 @@ void Task::Load(const char* filepath)
 
 void Task::Store(const char* filepath) const
 {
-	if (ee::FileType::IsType(filepath, ee::FileType::e_anim)) {
+	if (ee::FileType::IsType(filepath, ee::FILE_ANIM)) {
 		FileIO::StoreSingle(filepath);
 		ViewMgr::Instance()->stage->OnSave();
-	} else if (ee::FileType::IsType(filepath, ee::FileType::e_anis)) {
+	} else if (ee::FileType::IsType(filepath, ee::FILE_ANIS)) {
 		FileIO::StoreTemplate(filepath);
 		ViewMgr::Instance()->stage->OnSave();
 	}

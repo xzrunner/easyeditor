@@ -233,7 +233,7 @@ void RightPopupMenu::FetchCandidateAnimFiles(const std::string& filepath)
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	wxArrayString files;
-	ee::FileHelper::FetchAllFiles(dir, files, ee::FileType::e_complex);
+	ee::FileHelper::FetchAllFiles(dir, files, ee::FILE_COMPLEX);
 
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{

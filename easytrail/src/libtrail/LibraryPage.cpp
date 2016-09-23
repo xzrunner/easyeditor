@@ -14,7 +14,7 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	: ee::LibraryPage(parent, "Trail")
 {
 	InitLayout();
-	m_list->SetFileter(ee::FileType::GetTag(ee::FileType::e_trail));
+	m_list->SetFileter(ee::FileType::GetTag(ee::FILE_TRAIL));
 }
 
 bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
@@ -24,7 +24,7 @@ bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
-	std::string filter = ee::FileType::GetTag(ee::FileType::e_trail);
+	std::string filter = ee::FileType::GetTag(ee::FILE_TRAIL);
 	filter = wxT("*_") + filter + wxT(".json");
 	wxFileDialog dlg(this, wxT("导入trail文件"), wxEmptyString, 
 		wxEmptyString, filter, wxFD_OPEN | wxFD_MULTIPLE);

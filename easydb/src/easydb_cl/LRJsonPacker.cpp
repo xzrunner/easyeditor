@@ -373,7 +373,7 @@ void LRJsonPacker::ParserCharacterFromSprite(const Json::Value& src_val, const l
 	{
 		std::string filepath = spr_val["filepath"].asString();
 		filepath = ee::FileHelper::GetAbsolutePath(m_dir, filepath);
-		if (ee::FileType::IsType(filepath, ee::FileType::e_particle3d)) {
+		if (ee::FileType::IsType(filepath, ee::FILE_PARTICLE3D)) {
 			spr_val = src_val["sprite"][idx++];
 			continue;
 		}				
@@ -387,7 +387,7 @@ void LRJsonPacker::ParserCharacterFromSprite(const Json::Value& src_val, const l
 		char_val["y"] = spr_io.m_position.y;
 
 		// region
-		std::string shape_tag = ee::FileType::GetTag(ee::FileType::e_shape);
+		std::string shape_tag = ee::FileType::GetTag(ee::FILE_SHAPE);
 		std::string shape_filepath = ee::FileHelper::GetFilenameAddTag(filepath, shape_tag, "json");
 		std::string tag_ext;
 		if (ee::FileHelper::IsFileExist(shape_filepath)) {
@@ -507,7 +507,7 @@ void LRJsonPacker::ParserSpecialFromSprite(const Json::Value& src_val, const std
 		std::string filepath = spr_val["filepath"].asString();
 
 		std::string tag = spr_val["tag"].asString();
-		if (ee::FileType::IsType(filepath, ee::FileType::e_particle3d)) {
+		if (ee::FileType::IsType(filepath, ee::FILE_PARTICLE3D)) {
 			bool top_layer = false;
 			if (is_layer2 || tag.find(TOP_LAYER_STR) != std::string::npos) {
 				top_layer = true;

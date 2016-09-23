@@ -49,9 +49,9 @@ void TransOldAnchorFile::Run(const std::string& folder)
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath();
-		if (ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
+		if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX)) {
 			TransComplex(filepath);
-		} else if (ee::FileType::IsType(filepath, ee::FileType::e_anim)) {
+		} else if (ee::FileType::IsType(filepath, ee::FILE_ANIM)) {
 			TransAnimation(filepath);
 		}
 	}

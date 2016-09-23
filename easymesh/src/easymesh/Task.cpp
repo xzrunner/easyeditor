@@ -32,7 +32,7 @@ Task::~Task()
 
 void Task::Load(const char* filepath)
 {
-	if (ee::FileType::IsType(filepath, ee::FileType::e_mesh)) 
+	if (ee::FileType::IsType(filepath, ee::FILE_MESH)) 
 	{
 		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 		Symbol* msymbol = static_cast<Symbol*>(sym);

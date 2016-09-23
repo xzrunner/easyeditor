@@ -427,7 +427,7 @@ ee::Sprite* Layer::LoadSprite(const Json::Value& val, const std::string& dir, co
 	}
 	ee::Symbol* sym = NULL;
 
-	std::string shape_tag = ee::FileType::GetTag(ee::FileType::e_shape);
+	std::string shape_tag = ee::FileType::GetTag(ee::FILE_SHAPE);
 	std::string shape_filepath = ee::FileHelper::GetFilenameAddTag(filepath, shape_tag, "json");
 	std::string spr_tag;
 	if (ee::FileHelper::IsFileExist(shape_filepath)) {

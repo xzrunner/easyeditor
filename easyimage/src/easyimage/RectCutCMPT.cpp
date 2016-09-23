@@ -310,7 +310,7 @@ void RectCutCMPT::OnOutputData(wxCommandEvent& event)
 	complex_all->name = img_name;
 	complex_part->name = img_name + "_part";
 
-	std::string tag = ee::FileType::GetTag(ee::FileType::e_complex);
+	std::string tag = ee::FileType::GetTag(ee::FILE_COMPLEX);
 
 	std::string filename_all = json_dir + "\\" + img_name + "_" + tag + ".json";
 	ecomplex::FileStorer::Store(filename_all.c_str(), complex_all);

@@ -46,7 +46,7 @@ void BinRRR::Trigger(const std::string& src_dir, const std::string& img_id_file,
 	
 	std::vector<std::string> img_files;
 	for (int i = 0, n = files.size(); i < n; ++i) {
-		if (ee::FileType::IsType(files[i].ToStdString(), ee::FileType::e_image)) {
+		if (ee::FileType::IsType(files[i].ToStdString(), ee::FILE_IMAGE)) {
 			img_files.push_back(files[i].ToStdString());
 		}
 	}

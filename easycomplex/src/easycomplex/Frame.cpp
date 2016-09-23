@@ -76,7 +76,7 @@ void Frame::OnSettings(wxCommandEvent& event)
 
 std::string Frame::GetFileFilter() const
 {
-	std::string tag = ee::FileType::GetTag(ee::FileType::e_complex);
+	std::string tag = ee::FileType::GetTag(ee::FILE_COMPLEX);
 	std::string complex_filter = GetJsonFileFilter(tag),
 		        psd_filter = GetJsonFileFilter("psd");
 	return complex_filter + "|" + psd_filter;

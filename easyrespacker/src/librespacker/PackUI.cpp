@@ -51,7 +51,7 @@ void PackUI::AddWindowTask(const std::string& filepath)
 	reader.parse(fin, value);
 	fin.close();
 
-	assert(ee::FileType::IsType(filepath, ee::FileType::e_uiwnd));
+	assert(ee::FileType::IsType(filepath, ee::FILE_UIWND));
 	m_tasks.push_back(new PackUIWindowTask(filepath, value));
 }
 

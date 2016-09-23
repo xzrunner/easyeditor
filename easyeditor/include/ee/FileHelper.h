@@ -27,7 +27,7 @@ public:
 
 	static void FetchAllFiles(const std::string& dirpath, wxArrayString& files);
 	static void FetchAllFiles(const std::string& dirpath, const std::vector<std::string>& ignore_dirs, wxArrayString& files);
-	static void FetchAllFiles(const std::string& dirpath, wxArrayString& files, FileType::Type type);
+	static void FetchAllFiles(const std::string& dirpath, wxArrayString& files, FileFormat type);
 	static void FetchCurrDirs(const std::string& dirpath, wxArrayString& dirs);
 
 	//

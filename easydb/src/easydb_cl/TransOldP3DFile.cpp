@@ -44,7 +44,7 @@ void TransOldP3DFile::Run(const std::string& folder)
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (ee::FileType::IsType(filepath, ee::FileType::e_particle3d)) {
+		if (ee::FileType::IsType(filepath, ee::FILE_PARTICLE3D)) {
 			Trans(filepath);
 		}
 	}

@@ -1,5 +1,4 @@
 #include "LibraryPage.h"
-#include "config.h"
 
 #include <ee/LibraryList.h>
 
@@ -10,7 +9,7 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	: ee::LibraryPage(parent, "Template")
 {
 	InitLayout();
-	m_list->SetFileter(FILE_TAG);
+	m_list->SetFileter(ee::FileType::GetTag(ee::FILE_FMT));
 }
 
 bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const

@@ -52,13 +52,13 @@ Sprite* SpriteFactory::Create(Symbol* sym)
 			CallbackMap::iterator itr = m_creators.find(type);
 			if (itr != m_creators.end()) {
 				spr = (itr->second)(sym);
-			} else if (FileType::IsType(filepath, FileType::e_fontblank)) {
+			} else if (FileType::IsType(filepath, FILE_FONTBLANK)) {
 				spr = new FontBlankSprite(dynamic_cast<FontBlankSymbol*>(sym));
 			}
 		}
 		else if (ext == "lua")
 		{
-			if (FileType::IsType(filepath, FileType::e_scripts)) {
+			if (FileType::IsType(filepath, FILE_SCRIPTS)) {
 				spr = new ScriptsSprite(dynamic_cast<ScriptsSymbol*>(sym));
 			}
 		}

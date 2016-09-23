@@ -56,8 +56,8 @@ void Snapshoot::Run(ee::Snapshoot& ss, const std::string& srcdir, const std::str
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (ee::FileType::IsType(filepath, ee::FileType::e_complex) || 
-			ee::FileType::IsType(filepath, ee::FileType::e_anim))
+		if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX) || 
+			ee::FileType::IsType(filepath, ee::FILE_ANIM))
 		{
 			Json::Value value;
 			Json::Reader reader;

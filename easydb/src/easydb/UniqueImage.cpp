@@ -49,7 +49,7 @@ void UniqueImage::ProcessImageFiles(const std::string& imgdir)
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (ee::FileType::IsType(filepath, ee::FileType::e_image))
+		if (ee::FileType::IsType(filepath, ee::FILE_IMAGE))
 		{
 			std::string imgpath(filepath.c_str());
 			ee::StringHelper::ToLower(imgpath);
@@ -87,7 +87,7 @@ void UniqueImage::ProcessJsonFiles(const std::string& jsondir)
 	for (size_t i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (ee::FileType::IsType(filepath, ee::FileType::e_anim)) {
+		if (ee::FileType::IsType(filepath, ee::FILE_ANIM)) {
 			std::string filename = filepath;
 			FixImagePath(filename);
 		}
@@ -129,7 +129,7 @@ void UniqueImage::FixImagePath(const std::string& animpath)
 			Json::Value entryValue = frameValue["actor"][k++];
 			while (!entryValue.isNull()) {
 				std::string filepath = entryValue["filepath"].asString();
-				if (ee::FileType::IsType(filepath, ee::FileType::e_image)) 
+				if (ee::FileType::IsType(filepath, ee::FILE_IMAGE)) 
 				{
 					filepath = ee::FileHelper::GetAbsolutePath(dir, filepath);
 					ee::StringHelper::ToLower(filepath);

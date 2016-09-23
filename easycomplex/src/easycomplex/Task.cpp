@@ -38,10 +38,10 @@ Task::~Task()
 
 void Task::Load(const char* filepath)
 {
-	if (ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
+	if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX)) {
 		FileIO::load(this, filepath);
 		LoadGroupTree(filepath);
-	} else if (ee::FileType::IsType(filepath, ee::FileType::e_psd)) {
+	} else if (ee::FileType::IsType(filepath, ee::FILE_PSD)) {
 		FileIO::load(this, filepath);
 	}
 }

@@ -94,11 +94,11 @@ void FixMirror::Trigger(const std::string& dir) const
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
- 		if (ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
+ 		if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX)) {
  			FixComplex(filepath);
- 		} else if (ee::FileType::IsType(filepath, ee::FileType::e_anim)) {
+ 		} else if (ee::FileType::IsType(filepath, ee::FILE_ANIM)) {
  			FixAnim(filepath);
- 		} else if (ee::FileType::IsType(filepath, ee::FileType::e_scale9)) {
+ 		} else if (ee::FileType::IsType(filepath, ee::FILE_SCALE9)) {
  			FixScale9(filepath);
  		} else if (filepath.find("_lr.json") != std::string::npos) {
  			FixLR(filepath);

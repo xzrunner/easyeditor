@@ -68,8 +68,8 @@ static void InitSymbolCreators()
 	ee::SymbolFactory::RegisterCreator(emask::FILE_TAG, &emask::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(emask::FILE_TAG, &emask::Sprite::Create);
 
-	ee::SymbolFactory::RegisterCreator(ee::FileType::GetTag(ee::FileType::e_trail), &etrail::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(ee::FileType::GetTag(ee::FileType::e_trail), &etrail::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(ee::FileType::GetTag(ee::FILE_TRAIL), &etrail::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(ee::FileType::GetTag(ee::FILE_TRAIL), &etrail::Sprite::Create);
 }
 
 bool MyApp::OnInit()

@@ -26,150 +26,155 @@ static const std::string TAG_MASK		= "mask";
 static const std::string TAG_PSD		= "psd";
 static const std::string TAG_UIWND		= "uiwnd";
 static const std::string TAG_TRAIL		= "trail";
+static const std::string TAG_BONE		= "bone";
 
 static const std::string TAG_GEN		= "gen";
 
-FileType::Type FileType::GetType(const std::string& filename)
+FileFormat FileType::GetType(const std::string& filename)
 {
-	if (filename.empty()) return e_unknown;
+	if (filename.empty()) return FILE_INVALID;
 
 	int pos = filename.rfind('.');
-	if (pos == -1) return e_unknown;
+	if (pos == -1) return FILE_INVALID;
 
 	std::string extension = filename.substr(pos);
 	if (extension == ".json")
 	{
 		const std::string jsonName = filename.substr(0, filename.find_last_of('.'));
-		if (jsonName.find('_') == -1) return e_unknown;
+		if (jsonName.find('_') == -1) return FILE_INVALID;
 
 		std::string ext = jsonName.substr(jsonName.find_last_of('_') + 1);
 		if (ext.find(TAG_GEN) != std::string::npos) {
 			ext = ext.substr(0, ext.find(TAG_GEN) - 1);
 		}
 
-		if (ext == TAG_SHAPE) return e_shape;
-		else if (ext == TAG_COMPLEX) return e_complex;
-		else if (ext == TAG_ANIM) return e_anim;
-		else if (ext == TAG_ANIS) return e_anis;
-		else if (ext == TAG_PATCH) return e_scale9;
-		else if (ext == TAG_FONTBLANK) return e_fontblank;
-		else if (ext == TAG_MESH) return e_mesh;
-		else if (ext == TAG_PARTICLE3D) return e_particle3d;
-		else if (ext == TAG_P3DINV) return e_p3dinv;
-		else if (ext == TAG_PARTICLE2D) return e_particle2d;
-		else if (ext == TAG_EJOY2D) return e_ejoy2d;
-		else if (ext == TAG_TEXTURE) return e_texture;
-		else if (ext == TAG_TERRAIN2D) return e_terrain2d;
-		else if (ext == TAG_ICON) return e_icon;
-		else if (ext == TAG_SHADOW) return e_shadow;
-		else if (ext == TAG_UI) return e_ui;
-		else if (ext == TAG_TEXT) return e_text;
-		else if (ext == TAG_MASK) return e_mask;
-		else if (ext == TAG_PSD) return e_psd;
-		else if (ext == TAG_UIWND) return e_uiwnd;
-		else if (ext == TAG_TRAIL) return e_trail;
-		else return e_unknown;
+		if (ext == TAG_SHAPE) return FILE_SHAPE;
+		else if (ext == TAG_COMPLEX) return FILE_COMPLEX;
+		else if (ext == TAG_ANIM) return FILE_ANIM;
+		else if (ext == TAG_ANIS) return FILE_ANIS;
+		else if (ext == TAG_PATCH) return FILE_SCALE9;
+		else if (ext == TAG_FONTBLANK) return FILE_FONTBLANK;
+		else if (ext == TAG_MESH) return FILE_MESH;
+		else if (ext == TAG_PARTICLE3D) return FILE_PARTICLE3D;
+		else if (ext == TAG_P3DINV) return FILE_P3DINV;
+		else if (ext == TAG_PARTICLE2D) return FILE_PARTICLE2D;
+		else if (ext == TAG_EJOY2D) return FILE_EJOY2D;
+		else if (ext == TAG_TEXTURE) return FILE_TEXTURE;
+		else if (ext == TAG_TERRAIN2D) return FILE_TERRAIN2D;
+		else if (ext == TAG_ICON) return FILE_ICON;
+		else if (ext == TAG_SHADOW) return FILE_SHADOW;
+		else if (ext == TAG_UI) return FILE_UI;
+		else if (ext == TAG_TEXT) return FILE_TEXT;
+		else if (ext == TAG_MASK) return FILE_MASK;
+		else if (ext == TAG_PSD) return FILE_PSD;
+		else if (ext == TAG_UIWND) return FILE_UIWND;
+		else if (ext == TAG_TRAIL) return FILE_TRAIL;
+		else if (ext == TAG_BONE) return FILE_BONE;
+		else return FILE_INVALID;
 	}
 	else if (extension == ".lua")
 	{
 		const std::string luaName = filename.substr(0, filename.find_last_of('.'));
-		if (luaName.find('_') == -1) return e_unknown;
+		if (luaName.find('_') == -1) return FILE_INVALID;
 
 		const std::string jsonExtension = luaName.substr(luaName.find_last_of('_') + 1);
-		if (jsonExtension == TAG_SCRIPTS) return e_scripts;
-		else return e_unknown;
+		if (jsonExtension == TAG_SCRIPTS) return FILE_SCRIPTS;
+		else return FILE_INVALID;
 	}
 	else if (extension == ".ttf")
 	{
-		return e_freetype;
+		return FILE_FREETYPE;
 	}
 	else
 	{
 		StringHelper::ToLower(extension);
-		if (extension == ".jpg" || extension == ".png" || extension == ".bmp") return e_image;
-		else return e_unknown;
+		if (extension == ".jpg" || extension == ".png" || extension == ".bmp") return FILE_IMAGE;
+		else return FILE_INVALID;
 	}
 }
 
-std::string FileType::GetTag(Type type)
+std::string FileType::GetTag(FileFormat format)
 {
 	std::string ext;
-	switch (type)
+	switch (format)
 	{
-	case e_shape:
+	case FILE_SHAPE:
 		ext = TAG_SHAPE;
 		break;
-	case e_mesh:
+	case FILE_MESH:
 		ext = TAG_MESH;
 		break;
-	case e_complex:
+	case FILE_COMPLEX:
 		ext = TAG_COMPLEX;
 		break;
-	case e_anim:
+	case FILE_ANIM:
 		ext = TAG_ANIM;
 		break;
-	case e_anis:
+	case FILE_ANIS:
 		ext = TAG_ANIS;
 		break;
-	case e_scale9:
+	case FILE_SCALE9:
 		ext = TAG_PATCH;
 		break;
-	case e_fontblank:
+	case FILE_FONTBLANK:
 		ext = TAG_FONTBLANK;
 		break;
-	case e_scripts:
+	case FILE_SCRIPTS:
 		ext = TAG_SCRIPTS;
 		break;
-	case e_particle2d:
+	case FILE_PARTICLE2D:
 		ext = TAG_PARTICLE2D;
 		break;
-	case e_particle3d:
+	case FILE_PARTICLE3D:
 		ext = TAG_PARTICLE3D;
 		break;
-	case e_p3dinv:
+	case FILE_P3DINV:
 		ext = TAG_P3DINV;
 		break;
-	case e_ejoy2d:
+	case FILE_EJOY2D:
 		ext = TAG_EJOY2D;
 		break;
-	case e_texture:
+	case FILE_TEXTURE:
 		ext = TAG_TEXTURE;
 		break;
-	case e_terrain2d:
+	case FILE_TERRAIN2D:
 		ext = TAG_TERRAIN2D;
 		break;
-	case e_icon:
+	case FILE_ICON:
 		ext = TAG_ICON;
 		break;
-	case e_shadow:
+	case FILE_SHADOW:
 		ext = TAG_SHADOW;
 		break;
-	case e_ui:
+	case FILE_UI:
 		ext = TAG_UI;
 		break;
-	case e_text:
+	case FILE_TEXT:
 		ext = TAG_TEXT;
 		break;
-	case e_mask:
+	case FILE_MASK:
 		ext = TAG_MASK;
 		break;
-	case e_psd:
+	case FILE_PSD:
 		ext = TAG_PSD;
 		break;
-	case e_uiwnd:
+	case FILE_UIWND:
 		ext = TAG_UIWND;
 		break;
-	case e_trail:
+	case FILE_TRAIL:
 		ext = TAG_TRAIL;
+		break;
+	case FILE_BONE:
+		ext = TAG_BONE;
 		break;
 	}
 	return ext;
 }
 
-bool FileType::IsType(const std::string& filename, Type type)
+bool FileType::IsType(const std::string& filename, FileFormat format)
 {
-	FileType::Type file_type = GetType(filename);
-	return file_type == type;
+	FileFormat file_type = GetType(filename);
+	return file_type == format;
 }
 
 }

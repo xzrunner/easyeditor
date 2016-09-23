@@ -151,7 +151,7 @@ void ComponentPanel::InitLayout(wxSizer* top_sizer)
 		// Right Icon
 		{
 			std::string filepath = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(m_pc->ud))->GetFilepath();
-			if (ee::FileType::IsType(filepath, ee::FileType::e_image)) {
+			if (ee::FileType::IsType(filepath, ee::FILE_IMAGE)) {
 				ee::ImagePanel* panel = new ee::ImagePanel(this, filepath, 100);
 				hori_sizer->Add(panel);
 			}
@@ -270,7 +270,7 @@ void ComponentPanel::OnSetCount(wxSpinEvent& event)
 
 void ComponentPanel::OnBindPS(wxCommandEvent& event)
 {
-	std::string filter = ee::FileType::GetTag(ee::FileType::e_particle3d);
+	std::string filter = ee::FileType::GetTag(ee::FILE_PARTICLE3D);
 	filter = wxT("*_") + filter + wxT(".json");
 	wxFileDialog dlg(this, wxT("导入Particle3D文件"), wxEmptyString, wxEmptyString, filter, wxFD_OPEN);
 	if (dlg.ShowModal() == wxID_OK)

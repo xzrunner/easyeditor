@@ -51,7 +51,7 @@ int ChangeJsonFile::Run(int argc, char *argv[])
 	return 0;
 }
 
-void ChangeJsonFile::Run(const std::string& dir/*, ee::FileType::Type type*/)
+void ChangeJsonFile::Run(const std::string& dir/*, ee::FileFormat type*/)
 //	: m_type(type)
 {
 	ee::FileHelper::FetchAllFiles(dir, m_files);

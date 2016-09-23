@@ -67,8 +67,8 @@ void CopyFile::CopyByExportNames(const std::set<std::string>& export_names) cons
 	for (int i = 0, n = m_files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::FormatFilepath(m_files[i].ToStdString());
-		if (ee::FileType::IsType(filepath, ee::FileType::e_complex) ||
-			ee::FileType::IsType(filepath, ee::FileType::e_anim))
+		if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX) ||
+			ee::FileType::IsType(filepath, ee::FILE_ANIM))
 		{
 			Json::Value value;
 			Json::Reader reader;
@@ -96,7 +96,7 @@ void CopyFile::GetDependFiles(const std::string& filepath, std::set<std::string>
 		return;
 	}
 
-	if (ee::FileType::IsType(filepath, ee::FileType::e_complex))
+	if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX))
 	{
 		Json::Value value;
 		Json::Reader reader;
@@ -111,8 +111,8 @@ void CopyFile::GetDependFiles(const std::string& filepath, std::set<std::string>
 		Json::Value spriteValue = value["sprite"][i++];
 		while (!spriteValue.isNull()) {
 			std::string item_path = spriteValue["filepath"].asString();
-			if (ee::FileType::IsType(item_path, ee::FileType::e_complex)
-				|| ee::FileType::IsType(item_path, ee::FileType::e_anim))
+			if (ee::FileType::IsType(item_path, ee::FILE_COMPLEX)
+				|| ee::FileType::IsType(item_path, ee::FILE_ANIM))
 			{
 				GetDependFiles(item_path, files);
 			}
@@ -120,7 +120,7 @@ void CopyFile::GetDependFiles(const std::string& filepath, std::set<std::string>
 			spriteValue = value["sprite"][i++];
 		}	
 	}
-	else if (ee::FileType::IsType(filepath, ee::FileType::e_anim))
+	else if (ee::FileType::IsType(filepath, ee::FILE_ANIM))
 	{
 		Json::Value value;
 		Json::Reader reader;
@@ -141,8 +141,8 @@ void CopyFile::GetDependFiles(const std::string& filepath, std::set<std::string>
 				Json::Value entryValue = frameValue["actor"][m++];
 				while (!entryValue.isNull()) {
 					std::string item_path = entryValue["filepath"].asString();
-					if (ee::FileType::IsType(item_path, ee::FileType::e_complex)
-						|| ee::FileType::IsType(item_path, ee::FileType::e_anim))
+					if (ee::FileType::IsType(item_path, ee::FILE_COMPLEX)
+						|| ee::FileType::IsType(item_path, ee::FILE_ANIM))
 					{
 						GetDependFiles(item_path, files);
 					}

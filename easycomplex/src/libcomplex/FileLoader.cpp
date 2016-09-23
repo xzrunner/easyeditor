@@ -136,9 +136,9 @@ void FileLoader::Load(const std::string& filepath, Symbol* complex)
 		LoadFromLua::Load(value, dir, complex);
 	} else if (!value["bin file"].isNull()) {
 		LoadFromBin::Load(value, dir, complex);
-	} else if (ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
+	} else if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX)) {
 		LoadFromJson::Load(filepath, value, dir, complex);
-	} else if (ee::FileType::IsType(filepath, ee::FileType::e_psd)) {
+	} else if (ee::FileType::IsType(filepath, ee::FILE_PSD)) {
 		LoadFromPSD::Load(value, dir, complex);
 	}
 

@@ -136,7 +136,7 @@ void NormalCMPT::OnLoadFromFolder(wxCommandEvent& event)
 	for (size_t i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = files[i];
-		if (!ee::FileType::IsType(filepath, ee::FileType::e_image))
+		if (!ee::FileType::IsType(filepath, ee::FILE_IMAGE))
 			continue;
 
 		std::string name = ee::FileHelper::GetFilename(filepath);

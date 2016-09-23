@@ -25,7 +25,7 @@ bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
-	wxString filter = wxT("*_") + ee::FileType::GetTag(ee::FileType::e_texture) + wxT(".json");
+	wxString filter = wxT("*_") + ee::FileType::GetTag(ee::FILE_TEXTURE) + wxT(".json");
 	wxFileDialog dlg(this, wxT("导入texture文件"), wxEmptyString, wxEmptyString, filter, wxFD_OPEN | wxFD_MULTIPLE);
 	if (dlg.ShowModal() == wxID_OK)
 	{

@@ -46,7 +46,7 @@ void ChangeJsonName::Trigger(const std::string& dir, const std::string& postfix)
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (!ee::FileType::IsType(filepath, ee::FileType::e_particle3d)) {
+		if (!ee::FileType::IsType(filepath, ee::FILE_PARTICLE3D)) {
 			continue;
 		}
 
@@ -59,7 +59,7 @@ void ChangeJsonName::Trigger(const std::string& dir, const std::string& postfix)
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (!ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
+		if (!ee::FileType::IsType(filepath, ee::FILE_COMPLEX)) {
 			continue;
 		}
 

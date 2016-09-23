@@ -15,7 +15,7 @@ void SymbolSet::Insert(const ee::Symbol* sym)
 		int zz  =0;
 	}
 
-	if (!Query(sym) || ee::FileType::IsType(sym->GetFilepath(), ee::FileType::e_scale9)) {
+	if (!Query(sym) || ee::FileType::IsType(sym->GetFilepath(), ee::FILE_SCALE9)) {
 		m_symbol_map.insert(std::make_pair(filepath, sym));
 		m_symbol_ordered.push_back(sym);
 	}

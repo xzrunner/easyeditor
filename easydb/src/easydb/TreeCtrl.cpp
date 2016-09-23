@@ -53,8 +53,8 @@ void TreeCtrl::init(const wxArrayString& files)
 	for (size_t i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = files[i];
-		if (ee::FileType::IsType(filepath, ee::FileType::e_complex) || 
-			ee::FileType::IsType(filepath, ee::FileType::e_anim))
+		if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX) || 
+			ee::FileType::IsType(filepath, ee::FILE_ANIM))
 		{
 			std::string name = ee::FileHelper::GetFilename(filepath);
 			wxTreeItemId id = AppendItem(m_root, name);
@@ -122,12 +122,12 @@ void TreeCtrl::onItemClick(wxTreeEvent& event)
 		if (itr != m_mapID2Path.end())
 		{
 			std::string filename = itr->second;
-			if (ee::FileType::IsType(filename, ee::FileType::e_complex))
+			if (ee::FileType::IsType(filename, ee::FILE_COMPLEX))
 			{
 				std::string cmd = "easycomplex.exe " + itr->second;
 				WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);
 			}
-			else if (ee::FileType::IsType(filename, ee::FileType::e_anim))
+			else if (ee::FileType::IsType(filename, ee::FILE_ANIM))
 			{
 				std::string cmd = "easyanimation.exe " + itr->second;
 				WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);

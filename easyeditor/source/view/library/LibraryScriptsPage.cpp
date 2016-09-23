@@ -29,7 +29,7 @@ bool LibraryScriptsPage::LoadFromConfig()
 
 void LibraryScriptsPage::OnAddPress(wxCommandEvent& event)
 {
-	std::string filter = FileType::GetTag(FileType::e_scripts);
+	std::string filter = FileType::GetTag(FILE_SCRIPTS);
 	filter = wxT("*_") + filter + wxT(".lua");
 	wxFileDialog dlg(this, wxT("导入scripts文件"), wxEmptyString, 
 		wxEmptyString, filter, wxFD_OPEN | wxFD_MULTIPLE);

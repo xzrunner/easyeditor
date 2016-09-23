@@ -75,7 +75,7 @@ std::string CharacterFileName::GetFilepathSwitchField(FieldType key, const std::
 
 bool CharacterFileName::IsValidFilepath(const std::string& filepath)
 {
-	if (!ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
+	if (!ee::FileType::IsType(filepath, ee::FILE_COMPLEX)) {
 		return false;
 	}
 

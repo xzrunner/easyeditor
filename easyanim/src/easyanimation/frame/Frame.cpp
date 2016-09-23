@@ -48,8 +48,8 @@ void Frame::OnOpen(wxCommandEvent& event)
 	if (!m_task) return;
 
 	try {
-		std::string single_filter = GetJsonFileFilter(ee::FileType::GetTag(ee::FileType::e_anim)),
-			template_filter = GetJsonFileFilter(ee::FileType::GetTag(ee::FileType::e_anis)),
+		std::string single_filter = GetJsonFileFilter(ee::FileType::GetTag(ee::FILE_ANIM)),
+			template_filter = GetJsonFileFilter(ee::FileType::GetTag(ee::FILE_ANIS)),
 			all_filter = "All | *_ani?.json";
 		std::string filter = all_filter + "|" + single_filter + "|" + template_filter;
 		wxFileDialog dlg(this, wxT("Open"), wxEmptyString, wxEmptyString, filter, wxFD_OPEN);
@@ -69,8 +69,8 @@ void Frame::OnSaveAs(wxCommandEvent& event)
  	if (!m_task) return;
  
  	try {
-		std::string single_filter = GetJsonFileFilter(ee::FileType::GetTag(ee::FileType::e_anim)),
-			template_filter = GetJsonFileFilter(ee::FileType::GetTag(ee::FileType::e_anis)),
+		std::string single_filter = GetJsonFileFilter(ee::FileType::GetTag(ee::FILE_ANIM)),
+			template_filter = GetJsonFileFilter(ee::FileType::GetTag(ee::FILE_ANIS)),
 			png_filter = "PNG files (*.png)|*.png";
 		std::string filter = single_filter + "|" + template_filter + "|" + png_filter;
  		wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, filter, wxFD_SAVE);
@@ -176,7 +176,7 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 
 void Frame::SaveAsSingle(const std::string& filepath) const
 {
-	std::string tag = ee::FileType::GetTag(ee::FileType::e_anim);
+	std::string tag = ee::FileType::GetTag(ee::FILE_ANIM);
 	std::string full_path = ee::FileHelper::GetFilenameAddTag(filepath, tag, "json");
 	m_curr_filename = full_path;
 
@@ -186,7 +186,7 @@ void Frame::SaveAsSingle(const std::string& filepath) const
 
 void Frame::SaveAsTemplate(const std::string& filepath) const
 {
-	std::string tag = ee::FileType::GetTag(ee::FileType::e_anis);
+	std::string tag = ee::FileType::GetTag(ee::FILE_ANIS);
 	std::string full_path = ee::FileHelper::GetFilenameAddTag(filepath, tag, "json");
 	m_curr_filename = full_path;
 

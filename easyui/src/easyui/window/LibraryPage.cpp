@@ -23,7 +23,7 @@ LibraryPage::LibraryPage(wxWindow* parent, const char* name,
 
 bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
 {
-	if (m_filter == ee::FileType::GetTag(ee::FileType::e_uiwnd)) {
+	if (m_filter == ee::FileType::GetTag(ee::FILE_UIWND)) {
 		return dynamic_cast<Symbol*>(sym) != NULL;	
 	} else {
 		return true;

@@ -134,7 +134,7 @@ void FontBlankDialog::StoreSymbol()
 	std::string filepath = m_sym->GetFilepath();
 	if (filepath.empty())
 	{
-		std::string ext = FileType::GetTag(FileType::e_fontblank);
+		std::string ext = FileType::GetTag(FILE_FONTBLANK);
 		ext = "_" + ext + ".json";
 
 		std::string name = m_sym->name;

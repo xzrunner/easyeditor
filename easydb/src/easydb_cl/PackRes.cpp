@@ -179,11 +179,11 @@ void PackRes::GetImagesFromJson(const std::vector<std::string>& src_dirs, const 
 {
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
 
-	if (ee::FileType::IsType(filepath, ee::FileType::e_image))
+	if (ee::FileType::IsType(filepath, ee::FILE_IMAGE))
 	{
 		img_set.insert(filepath);
 	}
-	else if (ee::FileType::IsType(filepath, ee::FileType::e_complex)) 
+	else if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX)) 
 	{
 		Json::Value value;
 		Json::Reader reader;
@@ -200,7 +200,7 @@ void PackRes::GetImagesFromJson(const std::vector<std::string>& src_dirs, const 
 			spr_val = value["sprite"][j++];
 		}	
 	} 
-	else if (ee::FileType::IsType(filepath, ee::FileType::e_anim)) 
+	else if (ee::FileType::IsType(filepath, ee::FILE_ANIM)) 
 	{
 		Json::Value value;
 		Json::Reader reader;
@@ -227,7 +227,7 @@ void PackRes::GetImagesFromJson(const std::vector<std::string>& src_dirs, const 
 			layer_val = value["layer"][j++];
 		}	
 	} 
-	else if (ee::FileType::IsType(filepath, ee::FileType::e_texture))
+	else if (ee::FileType::IsType(filepath, ee::FILE_TEXTURE))
 	{
 		Json::Value value;
 		Json::Reader reader;
@@ -250,7 +250,7 @@ void PackRes::GetImagesFromJson(const std::vector<std::string>& src_dirs, const 
 			shape_val = value["shapes"][i++];
 		}
 	}
-	else if (ee::FileType::IsType(filepath, ee::FileType::e_terrain2d))
+	else if (ee::FileType::IsType(filepath, ee::FILE_TERRAIN2D))
 	{
 		Json::Value value;
 		Json::Reader reader;
@@ -270,7 +270,7 @@ void PackRes::GetImagesFromJson(const std::vector<std::string>& src_dirs, const 
 			ocean_val = value["ocean"][i++];
 		}
 	}
-	else if (ee::FileType::IsType(filepath, ee::FileType::e_particle3d)) 
+	else if (ee::FileType::IsType(filepath, ee::FILE_PARTICLE3D)) 
 	{
 		Json::Value value;
 		Json::Reader reader;
@@ -290,7 +290,7 @@ void PackRes::GetImagesFromJson(const std::vector<std::string>& src_dirs, const 
 			comp_val = value["components"][i++];
 		}
 	}
-	else if (ee::FileType::IsType(filepath, ee::FileType::e_mesh))
+	else if (ee::FileType::IsType(filepath, ee::FILE_MESH))
 	{
 		Json::Value value;
 		Json::Reader reader;
@@ -302,7 +302,7 @@ void PackRes::GetImagesFromJson(const std::vector<std::string>& src_dirs, const 
 
 		GetImagesFromJson(src_dirs, value["base_symbol"].asString(), img_set);
 	}
-	else if (ee::FileType::IsType(filepath, ee::FileType::e_mask))
+	else if (ee::FileType::IsType(filepath, ee::FILE_MASK))
 	{
 		Json::Value value;
 		Json::Reader reader;
@@ -329,7 +329,7 @@ void PackRes::GetImagesFromSprite(const std::vector<std::string>& src_dirs, cons
 {
 	std::string filepath = ee::SymbolSearcher::GetSymbolPath(spr_dir, spr_val);
 	filepath = ee::FileHelper::FormatFilepathAbsolute(filepath);
-	if (ee::FileType::IsType(filepath, ee::FileType::e_image)) 
+	if (ee::FileType::IsType(filepath, ee::FILE_IMAGE)) 
 	{
 //		filepath = ee::FileHelper::GetRelativePath(".", filepath);
 		images.insert(filepath);
@@ -369,12 +369,12 @@ void PackRes::GetImagesFromCfg(const Json::Value& pkg_val, const std::string& co
 			wxArrayString files;
 			ee::FileHelper::FetchAllFiles(path, files);
 			for (int i = 0, n = files.size(); i < n; ++i) {
-				if (ee::FileType::IsType(files[i].ToStdString(), ee::FileType::e_image)) {
+				if (ee::FileType::IsType(files[i].ToStdString(), ee::FILE_IMAGE)) {
 					images.push_back(ee::FileHelper::FormatFilepath(files[i].ToStdString()));
 				}
 			}
 		} else if (ee::FileHelper::IsFileExist(path)) {
-			if (ee::FileType::IsType(path, ee::FileType::e_image)) {
+			if (ee::FileType::IsType(path, ee::FILE_IMAGE)) {
 				images.push_back(ee::FileHelper::FormatFilepath(path));
 			}
 		} else {
@@ -464,8 +464,8 @@ void PackRes::AddJsonFile(const std::string& filepath, const std::string& filter
 		return;
 	}
 
-	if (ee::FileType::IsType(filepath, ee::FileType::e_complex) || 
-		ee::FileType::IsType(filepath, ee::FileType::e_anim)) 
+	if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX) || 
+		ee::FileType::IsType(filepath, ee::FILE_ANIM)) 
 	{
 		json_set.insert(filepath);
 	}
@@ -566,7 +566,7 @@ void PackRes::GetAllPTSFiles(const Json::Value& pkg_val, const std::string& conf
 			wxArrayString files;
 			ee::FileHelper::FetchAllFiles(path, files);
 			for (int i = 0, n = files.size(); i < n; ++i) {
-				if (ee::FileType::IsType(files[i].ToStdString(), ee::FileType::e_image)) {
+				if (ee::FileType::IsType(files[i].ToStdString(), ee::FILE_IMAGE)) {
 					std::string pts_path = files[i].substr(0, files[i].find(".png")) + "_strip.json";
 					if (ee::FileHelper::IsFileExist(pts_path)) {
 						pts_files.push_back(pts_path);
@@ -574,7 +574,7 @@ void PackRes::GetAllPTSFiles(const Json::Value& pkg_val, const std::string& conf
 				}
 			}
 		} else if (ee::FileHelper::IsFileExist(path)) {
-			if (ee::FileType::IsType(path, ee::FileType::e_image)) {
+			if (ee::FileType::IsType(path, ee::FILE_IMAGE)) {
 				std::string pts_path = path.substr(0, path.find(".png")) + "_strip.json";
 				if (ee::FileHelper::IsFileExist(pts_path)) {
 					pts_files.push_back(pts_path);

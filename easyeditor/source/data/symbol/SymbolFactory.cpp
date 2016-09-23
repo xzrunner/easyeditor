@@ -27,7 +27,7 @@ Symbol* SymbolFactory::create(const std::string& filepath)
 		if (itr != m_creators.end()) {
 			sym = (itr->second)();
 		}
-		else if (FileType::IsType(filepath, FileType::e_fontblank)) {
+		else if (FileType::IsType(filepath, FILE_FONTBLANK)) {
 			sym = new FontBlankSymbol;
 		}
 	}

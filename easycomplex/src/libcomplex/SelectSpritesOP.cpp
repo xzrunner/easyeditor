@@ -112,7 +112,7 @@ void SelectSpritesOP::GroupSelection()
 	std::string filepath = ee::FileHelper::GetFileDir(parent->GetFilepath());
 	filepath += "\\_tmp_";
 	filepath += ee::StringHelper::ToString(wxDateTime::Now().GetTicks());
-	filepath += "_" + ee::FileType::GetTag(ee::FileType::e_complex) + ".json";
+	filepath += "_" + ee::FileType::GetTag(ee::FILE_COMPLEX) + ".json";
 	Symbol* sym = dynamic_cast<Symbol*>(spr->GetSymbol());
 	sym->SetFilepath(filepath);
 
@@ -131,7 +131,7 @@ void SelectSpritesOP::BreakUpSelection()
 		return;
 	}
 
-	std::string tag = "_" + ee::FileType::GetTag(ee::FileType::e_complex) + ".json";
+	std::string tag = "_" + ee::FileType::GetTag(ee::FILE_COMPLEX) + ".json";
 	std::vector<ee::Sprite*> sprs;
 	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
 	for (int i = 0, n = sprs.size(); i < n; ++i) 

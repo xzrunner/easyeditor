@@ -73,7 +73,7 @@ void TrimImage::Trigger(const std::string& src_dir, const std::string& dst_dir)
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath();
 
-		if (!ee::FileType::IsType(filepath, ee::FileType::e_image)) {
+		if (!ee::FileType::IsType(filepath, ee::FILE_IMAGE)) {
 			continue;
 		}
 

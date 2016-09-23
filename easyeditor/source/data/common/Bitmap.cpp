@@ -82,13 +82,13 @@ bool Bitmap::LoadFromFile(const std::string& filepath)
 
 		delete rgb_data;
 	}
-	else if (FileType::IsType(filepath, FileType::e_image))
+	else if (FileType::IsType(filepath, FILE_IMAGE))
 	{
 		wxImage image;
 		GetImage(filepath, image);
 		InitBmp(image, true);
 	}
-	else if (FileType::IsType(filepath, FileType::e_terrain2d))
+	else if (FileType::IsType(filepath, FILE_TERRAIN2D))
 	{
 		;
 	}

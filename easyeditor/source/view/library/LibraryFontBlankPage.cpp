@@ -51,7 +51,7 @@ void LibraryFontBlankPage::InitLayout(bool draggable /*= true*/)
 
 void LibraryFontBlankPage::OnAddPress(wxCommandEvent& event)
 {
-	std::string filter = FileType::GetTag(FileType::e_fontblank);
+	std::string filter = FileType::GetTag(FILE_FONTBLANK);
 	filter = wxT("*_") + filter + wxT(".json");
 	wxFileDialog dlg(this, wxT("导入font blank文件"), wxEmptyString, 
 		wxEmptyString, filter, wxFD_OPEN | wxFD_MULTIPLE);

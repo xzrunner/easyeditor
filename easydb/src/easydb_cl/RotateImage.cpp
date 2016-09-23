@@ -70,7 +70,7 @@ void RotateImage::Rotate(ee::Snapshoot& ss, const std::string& src_dir, const st
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (ee::FileType::IsType(filepath, ee::FileType::e_image))
+		if (ee::FileType::IsType(filepath, ee::FILE_IMAGE))
 		{
 			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);

@@ -181,7 +181,7 @@ void FileIO::LoadFlash(const std::string& filepath)
 
 void FileIO::StoreAsGif(const std::string& src, const std::string& dst)
 {
-	if (!ee::FileType::IsType(src, ee::FileType::e_anim)) {
+	if (!ee::FileType::IsType(src, ee::FILE_ANIM)) {
 		return;
 	}
 
@@ -210,7 +210,7 @@ void FileIO::StoreAsGif(const std::string& src, const std::string& dst)
 
 void FileIO::StoreAsPng(const std::string& src, const std::string& dst)
 {
-	if (!ee::FileType::IsType(src, ee::FileType::e_anim)) {
+	if (!ee::FileType::IsType(src, ee::FILE_ANIM)) {
 		return;
 	}
 

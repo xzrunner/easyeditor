@@ -90,9 +90,9 @@ void TopStagePanel::OnPageChanged(wxNotebookEvent& event)
 	m_top_pannels->library->Layout();
 
 	if (idx == 0) {
-		m_frame->SetFileFilter(ee::FileType::GetTag(ee::FileType::e_uiwnd));
+		m_frame->SetFileFilter(ee::FileType::GetTag(ee::FILE_UIWND));
 	} else {
-		m_frame->SetFileFilter(ee::FileType::GetTag(ee::FileType::e_ui));
+		m_frame->SetFileFilter(ee::FileType::GetTag(ee::FILE_UI));
 	}
 }
 

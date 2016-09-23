@@ -117,7 +117,7 @@ void LRSeparateComplex::SeparateFromSprites(const Json::Value& old_val, Json::Va
 
 		std::string filepath = src_val["filepath"].asString();
 		if (!is_cover &&
-			ee::FileType::IsType(filepath, ee::FileType::e_particle3d) &&
+			ee::FileType::IsType(filepath, ee::FILE_PARTICLE3D) &&
 			tag.find(TOP_LAYER_STR) == std::string::npos) {
 				src_val["tag"] = tag + ";" + COVER_LAYER_STR;
 				is_cover = true;

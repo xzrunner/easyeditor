@@ -48,7 +48,7 @@ void NumberImages::Trigger(const std::string& src_dir, const std::string& dst_fi
 	ee::FileHelper::FetchAllFiles(src_dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i) {
 		std::string filepath = files[i];
-		if (!ee::FileType::IsType(filepath, ee::FileType::e_image)) {
+		if (!ee::FileType::IsType(filepath, ee::FILE_IMAGE)) {
 			continue;
 		}
 		filepath = ee::FileHelper::GetRelativePath(src_dir, filepath);

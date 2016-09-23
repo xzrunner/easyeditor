@@ -54,13 +54,13 @@ void VerifyImage::InitFiles(const std::string& dirpath)
 	for (size_t i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
+		if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX)) {
 			ee::StringHelper::ToLower(filepath);
 			_complex_files.push_back(filepath);
-		} else if (ee::FileType::IsType(filepath, ee::FileType::e_anim)) {
+		} else if (ee::FileType::IsType(filepath, ee::FILE_ANIM)) {
 			ee::StringHelper::ToLower(filepath);
 			_anim_files.push_back(filepath);
-		} else if (ee::FileType::IsType(filepath, ee::FileType::e_image)) {
+		} else if (ee::FileType::IsType(filepath, ee::FILE_IMAGE)) {
 			ee::StringHelper::ToLower(filepath);
 			_map_images.insert(std::make_pair(filepath, false));
 		}
@@ -152,7 +152,7 @@ void VerifyImage::Report() const
 
 void VerifyImage::HandleSpritePath(const std::string& filepath)
 {
-	if (!ee::FileType::IsType(filepath, ee::FileType::e_image))
+	if (!ee::FileType::IsType(filepath, ee::FILE_IMAGE))
 		return;
 
 	std::map<std::string, bool>::iterator itr = _map_images.find(filepath);

@@ -245,7 +245,7 @@ void PackTexture::PackPackage(const Package& pkg, const std::string& src_dir,
 		}
 	}
 	for (int i = 0, n = files.size(); i < n; ++i) {
-		if (ee::FileType::IsType(files[i].ToStdString(), ee::FileType::e_image)) {
+		if (ee::FileType::IsType(files[i].ToStdString(), ee::FILE_IMAGE)) {
 			std::string filepath = ee::FileHelper::FormatFilepathAbsolute(files[i].ToStdString());
 			images.push_back(filepath);
 		}

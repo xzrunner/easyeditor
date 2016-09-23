@@ -29,7 +29,7 @@ Task::~Task()
 
 void Task::Load(const char* filepath)
 {
-	if (!ee::FileType::IsType(filepath, ee::FileType::e_mask)) {
+	if (!ee::FileType::IsType(filepath, ee::FILE_MASK)) {
 		return;
 	}
 

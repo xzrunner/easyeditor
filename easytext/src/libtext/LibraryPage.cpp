@@ -22,7 +22,7 @@ bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
-	std::string type = ee::FileType::GetTag(ee::FileType::e_text);
+	std::string type = ee::FileType::GetTag(ee::FILE_TEXT);
 	ee::LibraryPage::OnAddPress(type);
 }
 

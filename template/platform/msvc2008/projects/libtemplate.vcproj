@@ -221,10 +221,6 @@
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath="..\..\..\src\libtemplate\config.h"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>

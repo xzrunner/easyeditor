@@ -350,7 +350,7 @@ void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames
 			ss << sym->name;
 		}
 		std::string filename = outfloder + "\\" + ss.str() 
-			+ "_" + ee::FileType::GetTag(ee::FileType::e_complex) + ".json";
+			+ "_" + ee::FileType::GetTag(ee::FILE_COMPLEX) + ".json";
 		ecomplex::FileStorer::Store(filename.c_str(), sym);
 
 		pic->filename = filename;
@@ -425,7 +425,7 @@ void ParserLuaFile::transAniToAnimationFile(const std::string& outfloder, int id
 		ss << sym->name;
 	}
 	std::string filename = outfloder + "\\" + ss.str() 
-		+ "_" + ee::FileType::GetTag(ee::FileType::e_anim) + ".json";
+		+ "_" + ee::FileType::GetTag(ee::FILE_ANIM) + ".json";
 	eanim::FileSaver::Store(filename.c_str(), *sym);
 
 	ani->filename = filename;
@@ -467,7 +467,7 @@ void ParserLuaFile::transAniToComplexFile(const std::string& outfloder, int id, 
 		ss << sym->name;
 	}
 	std::string filename = outfloder + "\\" + ss.str() 
-		+ "_" + ee::FileType::GetTag(ee::FileType::e_complex) + ".json";
+		+ "_" + ee::FileType::GetTag(ee::FILE_COMPLEX) + ".json";
 	ecomplex::FileStorer::Store(filename.c_str(), sym);
 
 	ani->filename = filename;

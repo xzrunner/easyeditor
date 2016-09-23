@@ -29,7 +29,7 @@ Task::~Task()
 
 void Task::Load(const char* filepath)
 {
-	if (ee::FileType::IsType(filepath, ee::FileType::e_scale9)) {
+	if (ee::FileType::IsType(filepath, ee::FILE_SCALE9)) {
 		FileIO::Load(filepath, m_library, m_stage, m_toolbar);
 	}
 }

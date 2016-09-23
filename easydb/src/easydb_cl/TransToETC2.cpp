@@ -52,7 +52,7 @@ void TransToETC2::Trigger(const std::string& path)
 
 void TransToETC2::Format(const std::string& filepath)
 {
-	if (!ee::FileType::IsType(filepath, ee::FileType::e_image)) {
+	if (!ee::FileType::IsType(filepath, ee::FILE_IMAGE)) {
 		return;		
 	}
 

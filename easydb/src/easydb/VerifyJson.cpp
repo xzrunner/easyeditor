@@ -54,10 +54,10 @@ void VerifyJson::InitFiles(const std::string& dirpath)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 		std::string name = ee::FileHelper::GetFilenameWithExtension(filepath);
-		if (ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
+		if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX)) {
 			_complex_files.push_back(filepath);
 			_map_name2node.insert(std::make_pair(name, new Node(filepath)));
-		} else if (ee::FileType::IsType(filepath, ee::FileType::e_anim)) {
+		} else if (ee::FileType::IsType(filepath, ee::FILE_ANIM)) {
 			_anim_files.push_back(filepath);
 			_map_name2node.insert(std::make_pair(name, new Node(filepath)));
 		}
@@ -160,8 +160,8 @@ void VerifyJson::Report() const
 void VerifyJson::HandleSpritePath(const std::string& parent,
 								   const std::string& child)
 {
- 	if (!ee::FileType::IsType(child, ee::FileType::e_complex) &&
-		!ee::FileType::IsType(child, ee::FileType::e_anim)) {
+ 	if (!ee::FileType::IsType(child, ee::FILE_COMPLEX) &&
+		!ee::FileType::IsType(child, ee::FILE_ANIM)) {
  		return;
 	}
  

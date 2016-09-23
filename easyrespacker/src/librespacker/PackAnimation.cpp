@@ -125,13 +125,13 @@ bool PackAnimation::AddComponent(const IPackNode* node, const std::string& name,
 				&& components[i].name == name
 				&& !name.empty()) 
 			{
-				ee::FileType::Type type = ee::FileType::GetType(node->GetFilepath());
-				if (type == ee::FileType::e_image) {
+				ee::FileFormat type = ee::FileType::GetType(node->GetFilepath());
+				if (type == ee::FILE_IMAGE) {
 					comp_idx = i;
 					return false;
-				} else if (type == ee::FileType::e_complex ||
-					       type == ee::FileType::e_anim ||
-					       type == ee::FileType::e_text) {
+				} else if (type == ee::FILE_COMPLEX ||
+					       type == ee::FILE_ANIM ||
+					       type == ee::FILE_TEXT) {
 					comp_idx = i;
 					return true;
 				}
@@ -147,7 +147,7 @@ bool PackAnimation::AddComponent(const IPackNode* node, const std::string& name,
 
 	if (is_anchor) {
 		return true;
-	} else if (ee::FileType::IsType(node->GetFilepath(), ee::FileType::e_image)) {
+	} else if (ee::FileType::IsType(node->GetFilepath(), ee::FILE_IMAGE)) {
 		return false;
 	} else {
 		return !name.empty();

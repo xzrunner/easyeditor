@@ -589,8 +589,9 @@ void GroupTreeCtrl::ChangeName(Sprite* spr)
 	GroupTreeImpl::QuerySpriteVisitor visitor(this, spr);
 	Traverse(visitor);
 	wxTreeItemId id = visitor.GetItemID();
-
-	SetItemText(id, spr->GetName());
+	if (id.IsOk()) {
+		SetItemText(id, spr->GetName());
+	}
 }
 
 void GroupTreeCtrl::Select(Sprite* spr, bool clear)

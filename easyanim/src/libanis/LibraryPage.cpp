@@ -14,7 +14,7 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	: ee::LibraryPage(parent, "Anis")
 {
 	InitLayout();
-	m_list->SetFileter(ee::FileType::GetTag(ee::FileType::e_anis));
+	m_list->SetFileter(ee::FileType::GetTag(ee::FILE_ANIS));
 }
 
 bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
@@ -24,7 +24,7 @@ bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
-	wxString filter = ee::FileType::GetTag(ee::FileType::e_anim);
+	wxString filter = ee::FileType::GetTag(ee::FILE_ANIM);
 	wxFileDialog dlg(this, wxT("导入anis文件"), wxEmptyString, 
 		wxEmptyString, filter, wxFD_OPEN | wxFD_MULTIPLE);
 	if (dlg.ShowModal() == wxID_OK)

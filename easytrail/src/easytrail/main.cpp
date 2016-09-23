@@ -25,7 +25,7 @@ bool MyApp::OnInit()
 {
 	InitSymbolCreators();
 
-	ee::Frame* frame = new ee::Frame("EasyTrail", ee::FileType::GetTag(ee::FileType::e_trail));
+	ee::Frame* frame = new ee::Frame("EasyTrail", ee::FileType::GetTag(ee::FILE_TRAIL));
 	etrail::Task* task = new etrail::Task(frame);
 	frame->SetTask(task);
 	frame->Show(true);

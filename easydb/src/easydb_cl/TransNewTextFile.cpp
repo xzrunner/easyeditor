@@ -48,7 +48,7 @@ void TransNewTextFile::Run(const std::string& folder)
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath();
-		if (ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
+		if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX)) {
 			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			if (ecomplex::Symbol* complex = dynamic_cast<ecomplex::Symbol*>(sym)) {
 				bool dirty = false;

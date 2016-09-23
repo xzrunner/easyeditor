@@ -61,7 +61,7 @@ static void InitSymbolCreators()
 	ee::SymbolFactory::RegisterCreator(eicon::FILE_TAG, &eicon::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(eicon::FILE_TAG, &eicon::Sprite::Create);
 
-	std::string type = ee::FileType::GetTag(ee::FileType::e_uiwnd);
+	std::string type = ee::FileType::GetTag(ee::FILE_UIWND);
 	ee::SymbolFactory::RegisterCreator(type, &eui::window::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(type, &eui::window::Sprite::Create);
 }
@@ -70,7 +70,7 @@ bool MyApp::OnInit()
 {
 	InitSymbolCreators();
 
-	std::string type = ee::FileType::GetTag(ee::FileType::e_uiwnd);
+	std::string type = ee::FileType::GetTag(ee::FILE_UIWND);
 	eui::Frame* frame = new eui::Frame("EasyUI", type);
 	eui::Task* task = new eui::Task(frame);
 	frame->SetTask(task);
