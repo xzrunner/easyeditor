@@ -21,11 +21,11 @@ struct SpriteUserData
 
 	SpriteUserData();
 
-}; // SpriteUserData
+	static void SetSprData(ee::Sprite* spr, Layer* layer, KeyFrame* frame);	
+	static void SetSprData(ee::Sprite* spr, Layer* layer, KeyFrame* frame, std::ofstream& fout);
+	static void SetSprData(ee::Sprite* spr, int layer_idx, int frame_idx);	
 
-void set_sprite_user_data(ee::Sprite* spr, Layer* layer, KeyFrame* frame);
-void set_sprite_user_data(ee::Sprite* spr, Layer* layer, KeyFrame* frame, std::ofstream& fout);
-void set_sprite_user_data(ee::Sprite* spr, int layer_idx, int frame_idx);
+}; // SpriteUserData
 
 }
 

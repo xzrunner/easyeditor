@@ -45,7 +45,7 @@ void KeyFrame::CopyFromOther(const KeyFrame* src)
 	for (size_t i = 0, n = src->m_sprs.size(); i < n; ++i)
 	{
 		ee::Sprite* s = dynamic_cast<ee::Sprite*>(((cu::Cloneable*)src->m_sprs[i])->Clone());
-		set_sprite_user_data(s, m_layer, this);
+		SpriteUserData::SetSprData(s, m_layer, this);
 		m_sprs.push_back(s);
 
 		if (m_layer) {
@@ -67,9 +67,9 @@ void KeyFrame::Insert(ee::Sprite* spr, int idx)
 
 	spr->AddReference();
 
-	fout << "KeyFrame::Insert 1\n";
+	fout << "KeyFrame::Insert 1\n" << spr << " " << m_layer << " " << this << "\n";
 
-	set_sprite_user_data(spr, m_layer, this, fout);
+	SpriteUserData::SetSprData(spr, m_layer, this, fout);
 	fout << "KeyFrame::Insert 2\n";
 
 	ee::ObjectVector<ee::Sprite>::Insert(m_sprs, spr, idx);

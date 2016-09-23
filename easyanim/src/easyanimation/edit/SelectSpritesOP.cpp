@@ -48,7 +48,7 @@ void SelectSpritesOP::CopySprFromClipboard(ee::Sprite* spr, const Json::Value& v
 
 	int layer_idx = value["anim"]["layer"].asInt(),
 		frame_idx = value["anim"]["frame"].asInt();
-	set_sprite_user_data(spr, layer_idx, frame_idx);
+	SpriteUserData::SetSprData(spr, layer_idx, frame_idx);
 }
 
 }

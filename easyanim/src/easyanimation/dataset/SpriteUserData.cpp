@@ -14,7 +14,7 @@ SpriteUserData::SpriteUserData()
 	layer_idx = frame_idx = -1;
 }
 
-void set_sprite_user_data(ee::Sprite* spr, Layer* layer, KeyFrame* frame)
+void SpriteUserData::SetSprData(ee::Sprite* spr, Layer* layer, KeyFrame* frame)
 {
 	if (SpriteUserData* old_ud = (SpriteUserData*)spr->GetUserData())
 	{
@@ -30,31 +30,31 @@ void set_sprite_user_data(ee::Sprite* spr, Layer* layer, KeyFrame* frame)
 	}
 }
 
-void set_sprite_user_data(ee::Sprite* spr, Layer* layer, KeyFrame* frame, std::ofstream& fout)
+void SpriteUserData::SetSprData(ee::Sprite* spr, Layer* layer, KeyFrame* frame, std::ofstream& fout)
 {
-	printf("set_sprite_user_data 0, spr %p\n", spr);
+	printf("SpriteUserData::SetSprData 0, spr %p\n", spr);
 	if (SpriteUserData* old_ud = (SpriteUserData*)spr->GetUserData())
 	{
-		printf("set_sprite_user_data 1, old_ud %p\n", old_ud);
+		printf("SpriteUserData::SetSprData 1, old_ud %p\n", old_ud);
 		old_ud->layer = layer;
 		old_ud->frame = frame;
-		fout << "set_sprite_user_data 2\n";
+		fout << "SpriteUserData::SetSprData 2\n";
 	}
 	else
 	{
-		fout << "set_sprite_user_data 3\n";
+		fout << "SpriteUserData::SetSprData 3\n";
 		SpriteUserData* ud = new SpriteUserData;
-		fout << "set_sprite_user_data 4\n";
+		fout << "SpriteUserData::SetSprData 4\n";
 		ud->layer = layer;
 		ud->frame = frame;
-		fout << "set_sprite_user_data 5\n";
+		fout << "SpriteUserData::SetSprData 5\n";
 		spr->SetUserData(ud);
-		fout << "set_sprite_user_data 6\n";
+		fout << "SpriteUserData::SetSprData 6\n";
 	}
-	fout << "set_sprite_user_data 7\n";
+	fout << "SpriteUserData::SetSprData 7\n";
 }
 
-void set_sprite_user_data(ee::Sprite* spr, int layer_idx, int frame_idx) 
+void SpriteUserData::SetSprData(ee::Sprite* spr, int layer_idx, int frame_idx) 
 {
 	if (SpriteUserData* old_ud = (SpriteUserData*)spr->GetUserData())
 	{
