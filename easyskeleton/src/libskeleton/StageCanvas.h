@@ -1,9 +1,9 @@
-#ifndef _EASYBONE_STAGE_CANVAS_H_
-#define _EASYBONE_STAGE_CANVAS_H_
+#ifndef _EASYSKELETON_STAGE_CANVAS_H_
+#define _EASYSKELETON_STAGE_CANVAS_H_
 
 #include <ee/CameraCanvas.h>
 
-namespace ebone
+namespace eskeleton
 {
 
 class StagePanel;
@@ -17,10 +17,13 @@ protected:
 	virtual void OnDrawSprites() const;
 
 private:
+	void DrawBackground() const;
+
+private:
 	StagePanel* m_stage;
 
 }; // StageCanvas
 
 }
 
-#endif // _EASYBONE_STAGE_CANVAS_H_
+#endif // _EASYSKELETON_STAGE_CANVAS_H_

@@ -1159,7 +1159,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.gum", "..\gum\platform\ms
 EndProject
 Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "1.gimg", "..\gimg\platform\msvc2008\projects\gimg.icproj", "{C0ED2F66-F335-4D19-93D9-395C5A4655BB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easybone", "..\easybone\platform\msvc2008\projects\easybone.vcproj", "{263EF43F-42E5-4DAC-8221-108A8AF48C0B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyskeleton", "..\easyskeleton\platform\msvc2008\projects\easyskeleton.vcproj", "{263EF43F-42E5-4DAC-8221-108A8AF48C0B}"
 	ProjectSection(ProjectDependencies) = postProject
 		{D4BAA61E-9918-4F72-B772-88AFD4EE76BC} = {D4BAA61E-9918-4F72-B772-88AFD4EE76BC}
 		{7FD22229-07E7-4EB7-9BC7-F64A04F9F76D} = {7FD22229-07E7-4EB7-9BC7-F64A04F9F76D}
@@ -1189,7 +1189,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easybone", "..\easybone\p
 		{6216B0F5-5B88-4BA8-88F3-02585C4158B4} = {6216B0F5-5B88-4BA8-88F3-02585C4158B4}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libbone", "..\easybone\platform\msvc2008\projects\libbone.vcproj", "{0A0F323F-D04E-44A6-9784-C1947AC38DA8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libskeleton", "..\easyskeleton\platform\msvc2008\projects\libskeleton.vcproj", "{0A0F323F-D04E-44A6-9784-C1947AC38DA8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

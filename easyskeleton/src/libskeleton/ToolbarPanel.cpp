@@ -1,7 +1,7 @@
 #include "ToolBarPanel.h"
 #include "StagePanel.h"
 
-namespace ebone
+namespace eskeleton
 {
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage)

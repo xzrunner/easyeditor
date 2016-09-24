@@ -1,5 +1,5 @@
-#ifndef _EASYBONE_TASK_H_
-#define _EASYBONE_TASK_H_
+#ifndef _EASYSKELETON_TASK_H_
+#define _EASYSKELETON_TASK_H_
 
 #include <ee/Task.h>
 
@@ -7,7 +7,7 @@
 
 namespace ee { class LibraryPanel; class PropertySettingPanel; class ViewlistPanel; class GroupTreePanel; }
 
-namespace ebone
+namespace eskeleton
 {
 
 class StagePanel;
@@ -40,7 +40,7 @@ private:
 
  	ee::LibraryPanel* m_library;
 	ee::PropertySettingPanel* m_property;
-	ebone::StagePanel* m_stage;
+	eskeleton::StagePanel* m_stage;
 	ee::ViewlistPanel* m_viewlist;
 	ee::GroupTreePanel* m_grouptree;
 
@@ -48,4 +48,4 @@ private:
 
 }
 
-#endif // _EASYBONE_TASK_H_
+#endif // _EASYSKELETON_TASK_H_

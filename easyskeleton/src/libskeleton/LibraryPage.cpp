@@ -3,14 +3,14 @@
 #include <ee/LibraryList.h>
 #include <ee/FileType.h>
 
-namespace ebone
+namespace eskeleton
 {
 
 LibraryPage::LibraryPage(wxWindow* parent)
-	: ee::LibraryPage(parent, "Bone")
+	: ee::LibraryPage(parent, "Skeleton")
 {
 	InitLayout();
-	m_list->SetFileter(ee::FileType::GetTag(ee::FILE_BONE));
+	m_list->SetFileter(ee::FileType::GetTag(ee::FILE_SKELETON));
 }
 
 bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const

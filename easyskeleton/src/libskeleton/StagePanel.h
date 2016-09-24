@@ -1,12 +1,12 @@
-#ifndef _EASYBONE_STAGE_PANEL_H_
-#define _EASYBONE_STAGE_PANEL_H_
+#ifndef _EASYSKELETON_STAGE_PANEL_H_
+#define _EASYSKELETON_STAGE_PANEL_H_
 
 #include <ee/EditPanel.h>
 #include <ee/SpritesPanelImpl.h>
 
 namespace ee { class LibraryPanel; class PropertySettingPanel; }
 
-namespace ebone
+namespace eskeleton
 {
 
 class StageCanvas;
@@ -22,4 +22,4 @@ public:
 
 }
 
-#endif // _EASYBONE_STAGE_PANEL_H_
+#endif // _EASYSKELETON_STAGE_PANEL_H_

@@ -4,7 +4,7 @@
 #include <ee/ArrangeSpriteOP.h>
 #include <ee/SelectSpritesOP.h>
 
-namespace ebone
+namespace eskeleton
 {
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 

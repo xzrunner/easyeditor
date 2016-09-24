@@ -1,9 +1,9 @@
-#ifndef _EASYBONE_LIBRARY_PAGE_H_
-#define _EASYBONE_LIBRARY_PAGE_H_
+#ifndef _EASYSKELETON_LIBRARY_PAGE_H_
+#define _EASYSKELETON_LIBRARY_PAGE_H_
 
 #include <ee/LibraryPage.h>
 
-namespace ebone
+namespace eskeleton
 {
 
 class LibraryPage : public ee::LibraryPage
@@ -20,4 +20,4 @@ protected:
 
 }
 
-#endif // _EASYBONE_LIBRARY_PAGE_H_
+#endif // _EASYSKELETON_LIBRARY_PAGE_H_

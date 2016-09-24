@@ -6,9 +6,9 @@
 #include <ee/ViewlistPanel.h>
 #include <ee/GroupTreePanel.h>
 
-#include <easybone.h>
+#include <easyskeleton.h>
 
-namespace ebone
+namespace eskeleton
 {
 
 Task::Task(wxFrame* parent)

@@ -4,14 +4,14 @@
 #include <ee/Frame.h>
 #include <ee/FileType.h>
 
-#include <easybone.h>
+#include <easyskeleton.h>
 
 IMPLEMENT_APP(MyApp)
 
 bool MyApp::OnInit()
 {
-	ee::Frame* frame = new ee::Frame("EasyBone", ee::FileType::GetTag(ee::FILE_BONE));
-	ebone::Task* task = new ebone::Task(frame);
+	ee::Frame* frame = new ee::Frame("EasySkeleton", ee::FileType::GetTag(ee::FILE_SKELETON));
+	eskeleton::Task* task = new eskeleton::Task(frame);
 	frame->SetTask(task);
 	frame->Show(true);
 

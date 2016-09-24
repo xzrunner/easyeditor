@@ -1,11 +1,11 @@
-#ifndef _EASYBONE_SYMBOL_H_
-#define _EASYBONE_SYMBOL_H_
+#ifndef _EASYSKELETON_SYMBOL_H_
+#define _EASYSKELETON_SYMBOL_H_
 
 #include <ee/Symbol.h>
 
 #include <sprite2/DummySymbol.h>
 
-namespace ebone
+namespace eskeleton
 {
 
 class Symbol : public ee::Symbol, public s2::DummySymbol
@@ -30,4 +30,4 @@ protected:
 
 }
 
-#endif // _EASYBONE_SYMBOL_H_
+#endif // _EASYSKELETON_SYMBOL_H_

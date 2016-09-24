@@ -1,9 +1,9 @@
-#ifndef _EASYBONE_TOOLBAR_PANEL_H_
-#define _EASYBONE_TOOLBAR_PANEL_H_
+#ifndef _EASYSKELETON_TOOLBAR_PANEL_H_
+#define _EASYSKELETON_TOOLBAR_PANEL_H_
 
 #include <ee/ToolbarPanel.h>
 
-namespace ebone
+namespace eskeleton
 {
 
 class StagePanel;
@@ -20,4 +20,4 @@ protected:
 
 }
 
-#endif // _EASYBONE_TOOLBAR_PANEL_H_
+#endif // _EASYSKELETON_TOOLBAR_PANEL_H_

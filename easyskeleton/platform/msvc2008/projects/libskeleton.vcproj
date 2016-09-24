@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="5.libbone"
+	Name="5.libskeleton"
 	ProjectGUID="{0A0F323F-D04E-44A6-9784-C1947AC38DA8}"
-	RootNamespace="libbone"
+	RootNamespace="libskeleton"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -18,8 +18,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\libbone\x86\Debug"
-			IntermediateDirectory="..\libbone\x86\Debug\obj"
+			OutputDirectory="..\libskeleton\x86\Debug"
+			IntermediateDirectory="..\libskeleton\x86\Debug\obj"
 			ConfigurationType="4"
 			CharacterSet="1"
 			>
@@ -80,8 +80,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\libbone\x86\Release"
-			IntermediateDirectory="..\libbone\x86\Release\obj"
+			OutputDirectory="..\libskeleton\x86\Release"
+			IntermediateDirectory="..\libskeleton\x86\Release\obj"
 			ConfigurationType="4"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
@@ -152,19 +152,19 @@
 				Name="library"
 				>
 				<File
-					RelativePath="..\..\..\src\libbone\LibraryPage.cpp"
+					RelativePath="..\..\..\src\libskeleton\LibraryPage.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libbone\LibraryPage.h"
+					RelativePath="..\..\..\src\libskeleton\LibraryPage.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libbone\LibraryPanel.cpp"
+					RelativePath="..\..\..\src\libskeleton\LibraryPanel.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libbone\LibraryPanel.h"
+					RelativePath="..\..\..\src\libskeleton\LibraryPanel.h"
 					>
 				</File>
 			</Filter>
@@ -172,19 +172,19 @@
 				Name="stage"
 				>
 				<File
-					RelativePath="..\..\..\src\libbone\StageCanvas.cpp"
+					RelativePath="..\..\..\src\libskeleton\StageCanvas.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libbone\StageCanvas.h"
+					RelativePath="..\..\..\src\libskeleton\StageCanvas.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libbone\StagePanel.cpp"
+					RelativePath="..\..\..\src\libskeleton\StagePanel.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libbone\StagePanel.h"
+					RelativePath="..\..\..\src\libskeleton\StagePanel.h"
 					>
 				</File>
 			</Filter>
@@ -192,11 +192,11 @@
 				Name="toolbar"
 				>
 				<File
-					RelativePath="..\..\..\src\libbone\ToolbarPanel.cpp"
+					RelativePath="..\..\..\src\libskeleton\ToolbarPanel.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libbone\ToolbarPanel.h"
+					RelativePath="..\..\..\src\libskeleton\ToolbarPanel.h"
 					>
 				</File>
 			</Filter>
@@ -205,21 +205,37 @@
 			Name="dataset"
 			>
 			<File
-				RelativePath="..\..\..\src\libbone\Sprite.cpp"
+				RelativePath="..\..\..\src\libskeleton\Sprite.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libbone\Sprite.h"
+				RelativePath="..\..\..\src\libskeleton\Sprite.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libbone\Symbol.cpp"
+				RelativePath="..\..\..\src\libskeleton\Symbol.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libbone\Symbol.h"
+				RelativePath="..\..\..\src\libskeleton\Symbol.h"
 				>
 			</File>
+		</Filter>
+		<Filter
+			Name="edit"
+			>
+			<Filter
+				Name="skeleton"
+				>
+				<File
+					RelativePath="..\..\..\src\libskeleton\SkeletonSpriteImpl.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libskeleton\SkeletonSpriteImpl.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>

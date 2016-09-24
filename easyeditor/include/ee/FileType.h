@@ -35,7 +35,7 @@ enum FileFormat
 	FILE_PSD,
 	FILE_UIWND,
 	FILE_TRAIL,
-	FILE_BONE,
+	FILE_SKELETON,
 };
 
 class FileType

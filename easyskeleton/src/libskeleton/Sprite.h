@@ -1,11 +1,11 @@
-#ifndef _EASYBONE_SPRITE_H_
-#define _EASYBONE_SPRITE_H_
+#ifndef _EASYSKELETON_SPRITE_H_
+#define _EASYSKELETON_SPRITE_H_
 
 #include <ee/Sprite.h>
 
 #include <sprite2/DummySprite.h>
 
-namespace ebone
+namespace eskeleton
 {
 
 class Symbol;
@@ -30,4 +30,4 @@ public:
 
 }
 
-#endif // _EASYBONE_SPRITE_H_
+#endif // _EASYSKELETON_SPRITE_H_

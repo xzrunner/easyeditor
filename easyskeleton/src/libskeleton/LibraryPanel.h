@@ -1,9 +1,9 @@
-#ifndef _EASYBONE_LIBRARY_PANEL_H_
-#define _EASYBONE_LIBRARY_PANEL_H_
+#ifndef _EASYSKELETON_LIBRARY_PANEL_H_
+#define _EASYSKELETON_LIBRARY_PANEL_H_
 
 #include <ee/LibraryPanel.h>
 
-namespace ebone
+namespace eskeleton
 {
 
 class LibraryPanel : public ee::LibraryPanel
@@ -15,4 +15,4 @@ public:
 
 }
 
-#endif // _EASYBONE_LIBRARY_PANEL_H_
+#endif // _EASYSKELETON_LIBRARY_PANEL_H_

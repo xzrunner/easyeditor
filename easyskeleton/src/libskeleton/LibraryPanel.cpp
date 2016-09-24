@@ -4,7 +4,7 @@
 
 #include <wx/notebook.h>
 
-namespace ebone
+namespace eskeleton
 {
 
 LibraryPanel::LibraryPanel(wxWindow* parent)

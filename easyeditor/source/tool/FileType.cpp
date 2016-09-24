@@ -26,7 +26,7 @@ static const std::string TAG_MASK		= "mask";
 static const std::string TAG_PSD		= "psd";
 static const std::string TAG_UIWND		= "uiwnd";
 static const std::string TAG_TRAIL		= "trail";
-static const std::string TAG_BONE		= "bone";
+static const std::string TAG_SKELETON	= "skeleton";
 
 static const std::string TAG_GEN		= "gen";
 
@@ -69,7 +69,7 @@ FileFormat FileType::GetType(const std::string& filename)
 		else if (ext == TAG_PSD) return FILE_PSD;
 		else if (ext == TAG_UIWND) return FILE_UIWND;
 		else if (ext == TAG_TRAIL) return FILE_TRAIL;
-		else if (ext == TAG_BONE) return FILE_BONE;
+		else if (ext == TAG_SKELETON) return FILE_SKELETON;
 		else return FILE_INVALID;
 	}
 	else if (extension == ".lua")
@@ -164,8 +164,8 @@ std::string FileType::GetTag(FileFormat format)
 	case FILE_TRAIL:
 		ext = TAG_TRAIL;
 		break;
-	case FILE_BONE:
-		ext = TAG_BONE;
+	case FILE_SKELETON:
+		ext = TAG_SKELETON;
 		break;
 	}
 	return ext;
