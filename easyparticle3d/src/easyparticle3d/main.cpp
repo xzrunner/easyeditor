@@ -5,11 +5,13 @@
 
 #include <ee/SymbolFactory.h>
 #include <ee/SpriteFactory.h>
+#include <ee/FileType.h>
 
 #include <easycomplex.h>
 #include <easyanim.h>
 #include <easyscale9.h>
 #include <easyparticle3d.h>
+#include <easytrail.h>
 
 #include <wx/image.h>
 
@@ -28,6 +30,9 @@ static void InitSymbolCreators()
 
 	ee::SymbolFactory::RegisterCreator(eparticle3d::FILE_TAG, &eparticle3d::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(eparticle3d::FILE_TAG, &eparticle3d::Sprite::Create);
+
+	ee::SymbolFactory::RegisterCreator(ee::FileType::GetTag(ee::FileType::e_trail), &etrail::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(ee::FileType::GetTag(ee::FileType::e_trail), &etrail::Sprite::Create);
 }
 
 bool MyApp::OnInit()

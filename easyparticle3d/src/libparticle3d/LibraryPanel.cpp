@@ -4,6 +4,7 @@
 #include <easyanim.h>
 #include <easycomplex.h>
 #include <easyscale9.h>
+#include <easytrail.h>
 
 #include <ee/LibraryImagePage.h>
 
@@ -20,6 +21,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	AddPage(new ecomplex::LibraryPage(nb));
 	AddPage(new eanim::LibraryPage(nb));
 	AddPage(new escale9::LibraryPage(nb));
+	AddPage(new etrail::LibraryPage(nb));
 }
 
 }
