@@ -22,6 +22,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	AddPage(new eanim::LibraryPage(nb));
 	AddPage(new escale9::LibraryPage(nb));
 	AddPage(new etrail::LibraryPage(nb));
+	AddPage(new LibraryPage(nb));
 }
 
 }

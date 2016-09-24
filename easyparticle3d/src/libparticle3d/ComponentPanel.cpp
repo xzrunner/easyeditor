@@ -250,12 +250,6 @@ void ComponentPanel::InitLayout(wxSizer* top_sizer)
 // 	top_sizer->Add(s_alpha);
 // 	top_sizer->AddSpacer(10);
 // 	m_sliders.push_back(s_alpha);
-	// Bind PS
-	{
-		wxButton* btn = new wxButton(this, wxID_ANY, LANG[LK_BIND_PS]);
-		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ComponentPanel::OnBindPS));
-		top_sizer->Add(btn);
-	}
 }
 
 void ComponentPanel::OnDelete(wxCommandEvent& event)
@@ -266,17 +260,6 @@ void ComponentPanel::OnDelete(wxCommandEvent& event)
 void ComponentPanel::OnSetCount(wxSpinEvent& event)
 {
 	m_pc->count = event.GetValue();
-}
-
-void ComponentPanel::OnBindPS(wxCommandEvent& event)
-{
-	std::string filter = ee::FileType::GetTag(ee::FILE_PARTICLE3D);
-	filter = wxT("*_") + filter + wxT(".json");
-	wxFileDialog dlg(this, wxT("导入Particle3D文件"), wxEmptyString, wxEmptyString, filter, wxFD_OPEN);
-	if (dlg.ShowModal() == wxID_OK)
-	{
-		m_pc->bind_ps_cfg = PSConfigMgr::Instance()->GetConfig(dlg.GetPath().ToStdString());
-	}
 }
 
 void ComponentPanel::OnSetBeginMulCol(wxCommandEvent& event)

@@ -53,7 +53,6 @@ enum {
 	LK_COL_MUL,
 	LK_COL_ADD,
 	LK_ALPHA,
-	LK_BIND_PS,
 };
 
 static const char* EN[] = {
@@ -105,7 +104,6 @@ static const char* EN[] = {
 	"Col Mul",
 	"Col Add",
 	"Alpha",
-	"Bind PS",
 };
 
 static const char* CN[] = {
@@ -157,7 +155,6 @@ static const char* CN[] = {
 	"乘色",
 	"加色",
 	"透明度",
-	"绑定发射器",
 };
 
 static const char** LANG = CN;

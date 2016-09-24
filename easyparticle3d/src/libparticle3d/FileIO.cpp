@@ -64,12 +64,6 @@ void FileIO::Store(const std::string& filepath, ParticleSystem* ps,
 		value["components"][i]["filepath"] = 
 			ee::FileHelper::GetRelativePath(dir, sym->GetFilepath());
 
-		if (pc->bind_ps_cfg) {
-			std::string filepath = PSConfigMgr::Instance()->GetFilepath(pc->bind_ps_cfg);
-			value["components"][i]["bind ps filepath"] = 
-				ee::FileHelper::GetRelativePath(dir, filepath);
-		}
-
 		value["components"][i]["name"] = cp->m_name->GetValue().ToStdString();
 		for (int j = 0, m = cp->m_sliders.size(); j < m; ++j) {
 			cp->m_sliders[j]->Store(value["components"][i]);

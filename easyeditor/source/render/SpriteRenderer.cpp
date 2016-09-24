@@ -16,7 +16,8 @@ SINGLETON_DEFINITION(SpriteRenderer)
 static 
 void draw_anchor(const s2::Sprite* spr, const s2::RenderParams& params)
 {
-	if (!dynamic_cast<const Sprite*>(spr)->IsAnchor() || !Config::Instance()->GetSettings().draw_anchor) {
+	const Sprite* ee_spr = dynamic_cast<const Sprite*>(spr);
+	if (!ee_spr || !ee_spr->IsAnchor() || !Config::Instance()->GetSettings().draw_anchor) {
 		return;
 	}
 

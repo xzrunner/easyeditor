@@ -44,8 +44,6 @@ private:
 
 	void OnSetCount(wxSpinEvent& event);
 
-	void OnBindPS(wxCommandEvent& event);
-
 	void OnSetBeginMulCol(wxCommandEvent& event);
 	void OnSetEndMulCol(wxCommandEvent& event);
 	void OnSetBeginAddCol(wxCommandEvent& event);

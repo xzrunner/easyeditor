@@ -219,17 +219,6 @@ void ParticleSystem::Stop()
 
 void ParticleSystem::Reset()
 {
-//  	// todo clear child's ps
-//  	Particle* p = pStart;
-//  	while (p != pLast)
-//  	{
-//  		if (p->pc->m_bind_ps) {
-//  			p->pc->m_bind_ps->reset();
-// 			p->pc->m_bind_ps->stop();
-//  		}
-//  		++p;
-//  	}
-
 	Clear();
 }
 

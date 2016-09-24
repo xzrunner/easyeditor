@@ -132,10 +132,6 @@ void ToolbarPanel::Add(const gum::P3dSymLoader::Component& comp, ee::LibraryPane
 		cp->m_sliders[i]->Load();
 	}
 
-	if (!comp.bind_filepath.empty()) {
-		pc->bind_ps_cfg = PSConfigMgr::Instance()->GetConfig(comp.bind_filepath);
-	}
-
 	m_comp_sizer->Insert(m_children.size(), cp);
 	m_children.push_back(cp);
 
