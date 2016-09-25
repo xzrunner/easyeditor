@@ -1,5 +1,6 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
+#include "ComposeSkeletonOP.h"
 
 #include <ee/ArrangeSpriteOP.h>
 #include <ee/SelectSpritesOP.h>
@@ -13,7 +14,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	: ee::EditPanel(parent, frame)
 	, ee::SpritesPanelImpl(GetStageImpl(), library)
 {
-	ee::EditOP* op = new ee::ArrangeSpriteOP<ee::SelectSpritesOP>(this, GetStageImpl(), this, property);
+	ee::EditOP* op = new ComposeSkeletonOP(this, property);
 	SetEditOP(op);
 	op->RemoveReference();
 
@@ -24,6 +25,24 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 StagePanel::~StagePanel()
 {	
+}
+
+void StagePanel::OnNotify(int sj_id, void* ud)
+{
+	ee::SpritesPanelImpl::OnNotify(id, ud);
+
+	switch (sj_id)
+	{
+	case MSG_INSERT_SPRITE:
+		{
+			InsertSpriteSJ::Params* p = (InsertSpriteSJ::Params*)ud;
+			ee::Sprite* spr = p->spr;
+			if (!spr->GetUserData()) {
+				spr->SetUserData(new Joint);
+			}
+		}
+		break;
+	}
 }
 
 }

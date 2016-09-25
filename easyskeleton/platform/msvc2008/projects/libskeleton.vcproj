@@ -220,22 +220,62 @@
 				RelativePath="..\..\..\src\libskeleton\Symbol.h"
 				>
 			</File>
-		</Filter>
-		<Filter
-			Name="edit"
-			>
 			<Filter
 				Name="skeleton"
 				>
 				<File
-					RelativePath="..\..\..\src\libskeleton\SkeletonSpriteImpl.cpp"
+					RelativePath="..\..\..\src\libskeleton\Joint.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libskeleton\SkeletonSpriteImpl.h"
+					RelativePath="..\..\..\src\libskeleton\Joint.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libskeleton\Skeleton.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libskeleton\Skeleton.h"
 					>
 				</File>
 			</Filter>
+		</Filter>
+		<Filter
+			Name="edit"
+			>
+			<File
+				RelativePath="..\..\..\src\libskeleton\ComposeSkeletonImpl.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libskeleton\ComposeSkeletonImpl.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libskeleton\ComposeSkeletonOP.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libskeleton\ComposeSkeletonOP.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libskeleton\RotateSpriteState.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libskeleton\RotateSpriteState.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libskeleton\TranslateSpriteState.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libskeleton\TranslateSpriteState.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>
