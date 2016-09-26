@@ -13,6 +13,8 @@
 #include "FetchAllVisitor.h"
 #include "PointMultiQueryVisitor.h"
 #include "InsertSpriteAOP.h"
+#include "Exception.h"
+#include "ExceptionDlg.h"
 
 #include <sprite2/S2_RVG.h>
 
@@ -62,7 +64,12 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 	}
 	else if (m_stage->GetKeyState(WXK_CONTROL) && keyCode == 'V')
 	{
-		CopyFromSelection();
+		try {
+			CopyFromSelection();
+		} catch (ee::Exception& e) {
+			ee::ExceptionDlg dlg(m_wnd, e);
+			dlg.ShowModal();
+		}
 		return true;
 	}
 	else if (keyCode ==  WXK_SHIFT)

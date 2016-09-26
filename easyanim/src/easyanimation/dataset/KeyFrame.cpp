@@ -4,6 +4,7 @@
 #include "SpriteUserData.h"
 
 #include <ee/ObjectVector.h>
+#include <ee/Exception.h>
 
 #include <easymesh.h>
 #include <easyanim.h>
@@ -61,6 +62,10 @@ void KeyFrame::CopyFromOther(const KeyFrame* src)
 
 void KeyFrame::Insert(ee::Sprite* spr, int idx)
 {
+	if (!spr) {
+		throw ee::Exception("KeyFrame::Insert fail: spr null.");
+	}
+
 	std::ofstream fout("d:/debug_copy.txt");
 
 	fout << "KeyFrame::Insert 0\n";
