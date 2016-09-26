@@ -154,14 +154,9 @@ void RectCutWithJson::FixComplex(const std::string& src_dir, const std::string& 
 	fin.close();
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
-
-	int i = 0;
-	Json::Value spr_val = value["sprite"][i++];
-	while (!spr_val.isNull()) {
-		Json::Value& val = value["sprite"][i-1];
-		FixSpriteValue(src_dir, dst_dir, dir, val);
-		spr_val = value["sprite"][i++];
-	}		
+	for (int i = 0, n = value["sprite"].size(); i < n; ++i) {
+		FixSpriteValue(src_dir, dst_dir, dir, value["sprite"][i]);
+	}
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -182,26 +177,15 @@ void RectCutWithJson::FixAnim(const std::string& src_dir, const std::string& dst
 	fin.close();
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
-
-	int i = 0;
-	Json::Value layerVal = value["layer"][i++];
-	while (!layerVal.isNull()) {
-		int j = 0;
-		Json::Value frameVal = layerVal["frame"][j++];
-		while (!frameVal.isNull()) {
-			int k = 0;
-			Json::Value entryVal = frameVal["actor"][k++];
-			while (!entryVal.isNull()) {
-				Json::Value& val = value["layer"][i-1]["frame"][j-1]["actor"][k-1];
-				FixSpriteValue(src_dir, dst_dir, dir, val);
-				entryVal = frameVal["actor"][k++];
+	for (int layer_i = 0, layer_n = value["layer"].size(); layer_i < layer_n; ++layer_i) {
+		Json::Value& layer_val = value["layer"][layer_i];
+		for (int frame_i = 0, frame_n = layer_val["frame"].size(); frame_i < frame_n; ++frame_i) {
+			Json::Value& frame_val = layer_val["frame"][frame_i];
+			for (int actor_i = 0, actor_n = frame_val["actor"].size(); actor_i < actor_n; ++actor_i) {
+				FixSpriteValue(src_dir, dst_dir, dir, frame_val["actor"][actor_i]);
 			}
-
-			frameVal = layerVal["frame"][j++];
 		}
-
-		layerVal = value["layer"][i++];
-	}		
+	}	
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -222,14 +206,9 @@ void RectCutWithJson::FixScale9(const std::string& src_dir, const std::string& d
 	fin.close();
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
-
-	int i = 0;
-	Json::Value spr_val = value["sprite"][i++];
-	while (!spr_val.isNull()) {
-		Json::Value& val = value["sprite"][i-1];
-		FixSpriteValue(src_dir, dst_dir, dir, val);
-		spr_val = value["sprite"][i++];
-	}		
+	for (int i = 0, n = value["sprite"].size(); i < n; ++i) {
+		FixSpriteValue(src_dir, dst_dir, dir, value["sprite"][i]);
+	}
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -250,14 +229,9 @@ void RectCutWithJson::FixParticle3d(const std::string& src_dir, const std::strin
 	fin.close();
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
-
-	int i = 0;
-	Json::Value comp_val = value["components"][i++];
-	while (!comp_val.isNull()) {
-		Json::Value& val = value["components"][i-1];
-		FixSpriteValue(src_dir, dst_dir, dir, val);
-		comp_val = value["components"][i++];
-	}		
+	for (int i = 0, n = value["components"].size(); i < n; ++i) {
+		FixSpriteValue(src_dir, dst_dir, dir, value["components"][i]);
+	}
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
