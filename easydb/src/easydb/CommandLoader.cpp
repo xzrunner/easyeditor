@@ -65,6 +65,7 @@
 #include "PackImageEPT.h"
 #include "FixMirror.h"
 #include "PackEPNew.h"
+#include "CreateColLUT.h"
 
 namespace edb
 {
@@ -135,6 +136,7 @@ void CommandLoader::Init()
 	fc->Register(PackImageEPT::Create());
 	fc->Register(FixMirror::Create());
 	fc->Register(PackEPNew::Create());
+	fc->Register(CreateColLUT::Create());
 }
 
 }

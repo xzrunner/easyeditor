@@ -15,6 +15,7 @@
 #include <sprite2/RFGaussianBlur.h>
 #include <sprite2/RFOuterGlow.h>
 #include <sprite2/RFHeatHaze.h>
+#include <sprite2/RFColGrading.h>
 #include <shaderlab.h>
 
 #include <vector>
@@ -98,17 +99,8 @@ bool SprFilterProperty::FromPS(const std::string& name, const wxAny& value, Spri
 					std::string filepath = wxANY_AS(value, wxString);
 					filter->SetFilepath(filepath);
 					if (prog) {
-						try {
-							Image* img = ImageMgr::Instance()->GetItem(filepath);
-							if (img) {
-								prog->SetDistortionMapTex(img->GetTexID());
-							}
-						} catch (ee::Exception& e) {
-							ee::ExceptionDlg dlg(m_parent, e);
-							dlg.ShowModal();
-						}
+						prog->SetDistortionMapTex(GetTextureID(filepath));
 					}
-
 					ret = true;
 				}
 				else if (name == "Filter.Distortion")
@@ -133,6 +125,23 @@ bool SprFilterProperty::FromPS(const std::string& name, const wxAny& value, Spri
 					}
 					ret = true;
 				}
+			}
+			break;
+		case s2::FM_COL_GRADING:
+			{
+				sl::ColGradingProg* prog = NULL;
+				sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
+				sl::FilterShader* shader = static_cast<sl::FilterShader*>(mgr->GetShader(sl::FILTER));
+				if (shader) {
+					prog = static_cast<sl::ColGradingProg*>(shader->GetProgram(sl::FM_COL_GRADING));
+				}
+				s2::RFColGrading* filter = static_cast<s2::RFColGrading*>(spr->Shader().filter);
+				std::string filepath = wxANY_AS(value, wxString);
+				filter->SetFilepath(filepath);
+				if (prog) {
+					prog->SetLUTTex(GetTextureID(filepath));
+				}
+				ret = true;
 			}
 			break;
 		}
@@ -196,7 +205,29 @@ void SprFilterProperty::CreateSubPS(wxPropertyGrid* pg, wxPGProperty* parent, co
 			pg->AppendIn(parent, rise_prop);
 		}
 		break;
+	case s2::FM_COL_GRADING:
+		{
+			const s2::RFColGrading* cg = static_cast<const s2::RFColGrading*>(filter);
+			wxPGProperty* filepath_prop = new wxStringProperty("Filepath", wxPG_LABEL, cg->GetFilepath());
+			pg->AppendIn(parent, filepath_prop);
+		}
+		break;
 	}
+}
+
+int SprFilterProperty::GetTextureID(const std::string& filepath) const
+{
+	int ret = 0;
+	try {
+		Image* img = ImageMgr::Instance()->GetItem(filepath);
+		if (img) {
+			ret = img->GetTexID();
+		}
+	} catch (ee::Exception& e) {
+		ee::ExceptionDlg dlg(m_parent, e);
+		dlg.ShowModal();
+	}
+	return ret;
 }
 
 }

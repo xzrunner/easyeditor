@@ -22,6 +22,8 @@ public:
 private:
 	void CreateSubPS(wxPropertyGrid* pg, wxPGProperty* parent, const s2::RenderFilter* filter);
 
+	int GetTextureID(const std::string& filepath) const;
+
 private:
 	wxWindow* m_parent;
 

@@ -406,6 +406,18 @@
 						Name="mask"
 						>
 					</Filter>
+					<Filter
+						Name="color_grading"
+						>
+						<File
+							RelativePath="..\..\..\src\shaderlab\shader\ColGradingProg.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\shaderlab\shader\ColGradingProg.h"
+							>
+						</File>
+					</Filter>
 				</Filter>
 			</Filter>
 			<Filter
@@ -831,6 +843,18 @@
 						</File>
 						<File
 							RelativePath="..\..\..\src\shaderlab\parser\BurningMap.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="color_grading"
+						>
+						<File
+							RelativePath="..\..\..\src\shaderlab\parser\color_grading.frag"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\shaderlab\parser\ColorGrading.h"
 							>
 						</File>
 					</Filter>

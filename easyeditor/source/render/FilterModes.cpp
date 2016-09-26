@@ -22,6 +22,8 @@ FilterModes::FilterModes()
 	m_modes.push_back(Item(s2::FM_SHOCK_WAVE, "≥Âª˜≤®"));
 	m_modes.push_back(Item(s2::FM_SWIRL, "‰ˆŒ–"));
 	m_modes.push_back(Item(s2::FM_BURNING_MAP, "…’µÿÕº"));
+
+	m_modes.push_back(Item(s2::FM_COL_GRADING, "≤È’“±Ì"));	
 }
 
 s2::FilterMode FilterModes::ID2Mode(int idx) const
