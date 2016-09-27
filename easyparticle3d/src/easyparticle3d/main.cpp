@@ -12,6 +12,7 @@
 #include <easyscale9.h>
 #include <easyparticle3d.h>
 #include <easytrail.h>
+#include <easymask.h>
 
 #include <wx/image.h>
 
@@ -33,6 +34,9 @@ static void InitSymbolCreators()
 
 	ee::SymbolFactory::RegisterCreator(ee::FileType::GetTag(ee::FILE_TRAIL), &etrail::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(ee::FileType::GetTag(ee::FILE_TRAIL), &etrail::Sprite::Create);
+
+	ee::SymbolFactory::RegisterCreator(ee::FileType::GetTag(ee::FILE_MASK), &emask::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(ee::FileType::GetTag(ee::FILE_MASK), &emask::Sprite::Create);
 }
 
 bool MyApp::OnInit()
