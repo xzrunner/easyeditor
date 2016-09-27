@@ -138,7 +138,8 @@ void FileStorer::CheckDuplicateName(const Symbol* sym)
 		if (itr == names_set.end()) {
 			names_set.insert(name);
 		} else {
-			wxMessageBox(name, "重名");
+			std::string filepath = sym->GetFilepath();
+			wxMessageBox(filepath + ": " + name, "重名");
 		}
 	}
 }
@@ -171,7 +172,8 @@ void FileStorer::CheckNameDiff(const Symbol* sym)
 		str += leak_names[i] + ", ";
 	}
 
-	wxMessageBox(str, "删除的名字");
+	std::string filepath = sym->GetFilepath();
+	wxMessageBox(filepath + ": " + str, "删除的名字");
 }
 
 void FileStorer::StoreAction(const Symbol* sym, Json::Value& val)
