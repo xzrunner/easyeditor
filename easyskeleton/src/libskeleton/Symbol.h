@@ -3,12 +3,14 @@
 
 #include <ee/Symbol.h>
 
-#include <sprite2/DummySymbol.h>
+#include <sprite2/SkeletonSymbol.h>
+
+namespace s2 { class Joint; }
 
 namespace eskeleton
 {
 
-class Symbol : public ee::Symbol, public s2::DummySymbol
+class Symbol : public ee::Symbol, public s2::SkeletonSymbol
 {
 public:
 	Symbol();

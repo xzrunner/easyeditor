@@ -24,6 +24,9 @@ protected:
 	//
 	virtual void OnNotify(int sj_id, void* ud);
 
+private:
+	
+
 }; // StagePanel
 
 }

@@ -1,9 +1,12 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
+#include "Bone.h"
 
 #include <ee/Camera.h>
 #include <ee/CameraMgr.h>
 #include <ee/DrawSpritesVisitor.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/SpriteRenderer.h>
 
 #include <sprite2/S2_RVG.h>
 
@@ -20,9 +23,15 @@ void StageCanvas::OnDrawSprites() const
 {
 	DrawBackground();
 
-	float scale = ee::CameraMgr::Instance()->GetCamera()->GetScale();
-	m_stage->TraverseSprites(ee::DrawSpritesVisitor(GetVisibleRegion(), scale), ee::DT_VISIBLE);
-
+	std::vector<ee::Sprite*> sprs;
+	m_stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		ee::Sprite* spr = sprs[i];
+		ee::SpriteRenderer::Instance()->Draw(spr);
+		Bone* bone = (Bone*)(spr->GetUserData());
+		bone->Draw();
+	}
+	
 	m_stage->DrawEditOP();
 }
 

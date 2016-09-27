@@ -9,6 +9,7 @@ namespace eskeleton
 {
 
 class StagePanel;
+class Joint;
 
 class ComposeSkeletonImpl : public ee::ArrangeSpriteImpl
 {
@@ -23,18 +24,21 @@ public:
 
 	virtual void OnPopMenuSelected(int type);
 
-	virtual void OnDraw(const ee::Camera& cam) const;
-
 protected:
 	virtual void SetRightPopupMenu(wxMenu& menu, int x, int y);
 
-// 	virtual ee::ArrangeSpriteState* CreateTranslateState(ee::SpriteSelection* selection, 
-// 		const sm::vec2& first_pos) const;
-// 	virtual ee::ArrangeSpriteState* CreateRotateState(ee::SpriteSelection* selection, 
-// 		const sm::vec2& first_pos) const;
+	virtual ee::ArrangeSpriteState* CreateTranslateState(ee::SpriteSelection* selection, 
+		const sm::vec2& first_pos) const;
+	virtual ee::ArrangeSpriteState* CreateRotateState(ee::SpriteSelection* selection, 
+		const sm::vec2& first_pos) const;
 
 private:
-//	Joint* m_selected_joint;
+	Joint* QueryJoint(const sm::vec2& pos) const;
+
+	void AutoAbsorb(ee::Sprite* spr) const;
+
+private:
+	Joint* m_selected_joint;
 
 	sm::vec2 m_first_pos;
 

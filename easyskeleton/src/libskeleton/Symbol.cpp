@@ -1,6 +1,8 @@
 #include "Symbol.h"
 #include "Sprite.h"
 
+#include <sprite2/Skeleton.h>
+
 namespace eskeleton
 {
 

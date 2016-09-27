@@ -1,9 +1,13 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
 #include "ComposeSkeletonOP.h"
+#include "Joint.h"
+#include "Bone.h"
 
 #include <ee/ArrangeSpriteOP.h>
 #include <ee/SelectSpritesOP.h>
+#include <ee/subject_id.h>
+#include <ee/sprite_msg.h>
 
 namespace eskeleton
 {
@@ -29,16 +33,16 @@ StagePanel::~StagePanel()
 
 void StagePanel::OnNotify(int sj_id, void* ud)
 {
-	ee::SpritesPanelImpl::OnNotify(id, ud);
+	ee::SpritesPanelImpl::OnNotify(sj_id, ud);
 
 	switch (sj_id)
 	{
-	case MSG_INSERT_SPRITE:
+	case ee::MSG_INSERT_SPRITE:
 		{
-			InsertSpriteSJ::Params* p = (InsertSpriteSJ::Params*)ud;
+			ee::InsertSpriteSJ::Params* p = (ee::InsertSpriteSJ::Params*)ud;
 			ee::Sprite* spr = p->spr;
 			if (!spr->GetUserData()) {
-				spr->SetUserData(new Joint);
+				spr->SetUserData(new Bone(spr));
 			}
 		}
 		break;

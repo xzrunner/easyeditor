@@ -224,6 +224,14 @@
 				Name="skeleton"
 				>
 				<File
+					RelativePath="..\..\..\src\libskeleton\Bone.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libskeleton\Bone.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libskeleton\Joint.cpp"
 					>
 				</File>

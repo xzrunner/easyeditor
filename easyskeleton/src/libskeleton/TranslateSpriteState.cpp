@@ -1,4 +1,5 @@
 #include "TranslateSpriteState.h"
+#include "Bone.h"
 
 #include <ee/SpriteSelection.h>
 #include <ee/FetchAllVisitor.h>
@@ -14,21 +15,16 @@ TranslateSpriteState::TranslateSpriteState(ee::SpriteSelection* selection,
 
 void TranslateSpriteState::Translate(const sm::vec2& offset)
 {
-	ee::TranslateSpriteState::Translate(offset);
+ 	ee::SpriteSelection* selection = GetSelection();
+ 	if (selection->IsEmpty()) {
+ 		return;
+ 	}
 
-// 	SkeletonData* skeleton = get_curr_skeleton();
-// 	if (!skeleton) {
-// 		return;
-// 	}
-// 
-// 	ee::SpriteSelection* selection = GetSelection();
-// 	if (selection->IsEmpty()) {
-// 		return;
-// 	}
-// 
-// 	std::vector<ee::Sprite*> sprs;
-// 	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
-// 	skeleton->UpdateJoint(sprs[0]);
+ 	std::vector<ee::Sprite*> sprs;
+ 	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	
+	Bone* bone = (Bone*)(sprs[0]->GetUserData());
+	bone->Translate(offset);
 }
 
 }
