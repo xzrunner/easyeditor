@@ -28,8 +28,9 @@ public:
 private:
 	void Run(const std::string& filepath) const;
 
-	static void Pixel16To256(uint8_t* dst, int r, int g, int b);
-	static uint8_t Int16To256(int i16);
+	static void DrawPixel(uint8_t* pixels, int grid, int w, int h, int x, int y, int r, int g, int b);
+	static void PixelTo256(uint8_t* dst, int grid, int r, int g, int b);
+	static uint8_t Int16To256(int i16, int grid);
 
 }; // CreateColLUT
 

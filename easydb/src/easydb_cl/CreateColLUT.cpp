@@ -36,35 +36,21 @@ int CreateColLUT::Run(int argc, char *argv[])
 
 void CreateColLUT::Run(const std::string& filepath) const
 {
-	int w = 16 * 16 + 2 * 16,
-		h = 18;
+	int grid = 64;
+	int s = 1;
+	int w = (grid + 2) * 16 * s,
+		h = (grid + 2) * s;
 	uint8_t* pixels = new uint8_t[w * h * 4];
 	memset(pixels, 0xff, w * h * 4);
-	for (int r = 0; r < 16; ++r) {
-		for (int g = 0; g < 16; ++g) {
+	for (int r = 0; r < grid; ++r) {
+		for (int g = 0; g < grid; ++g) {
 			for (int b = 0; b < 16; ++b) {
-				int x = b * 16 + r + b * 2 + 1,
-					y = g + 1;
-				Pixel16To256(&pixels[(y * w + x) * 4], r, g, b);
-				// col
-				if (r == 0) {
-					Pixel16To256(&pixels[(y * w + x - 1) * 4], r, g, b);
-				} else if (r == 15) {
-					Pixel16To256(&pixels[(y * w + x + 1) * 4], r, g, b);
-				}
-				// row
-				if (g == 0) {
-					Pixel16To256(&pixels[((y - 1) * w + x) * 4], r, g, b);
-				} else if (g == 15) {
-					Pixel16To256(&pixels[((y + 1) * w + x) * 4], r, g, b);
-				}
-				// corner
-				if ((r == 0 || r == 15) && (g == 0 || g == 15)) {
-					if (r == 0) --x;
-					else ++x;
-					if (g == 0) --y;
-					else ++y;
-					Pixel16To256(&pixels[(y * w + x) * 4], r, g, b);
+				int x = (b * grid + r + b * 2 + 1) * s,
+					y = (g + 1) * s;
+				for (int ix = 0; ix < s; ++ix) {
+					for (int iy = 0; iy < s; ++iy) {
+						DrawPixel(pixels, grid, w, h, x + ix, y + iy, r, g, b);
+					}
 				}
 			}
 		}
@@ -75,17 +61,42 @@ void CreateColLUT::Run(const std::string& filepath) const
 	delete[] pixels;
 }
 
-void CreateColLUT::Pixel16To256(uint8_t* dst, int r, int g, int b)
+void CreateColLUT::DrawPixel(uint8_t* pixels, int grid, int w, int h, int x, int y, int r, int g, int b)
 {
-	dst[0] = Int16To256(r);
-	dst[1] = Int16To256(g);
-	dst[2] = Int16To256(b);
+	PixelTo256(&pixels[(y * w + x) * 4], grid, r, g, b);
+	// col
+	if (r == 0) {
+		PixelTo256(&pixels[(y * w + x - 1) * 4], grid, r, g, b);
+	} else if (r == grid - 1) {
+		PixelTo256(&pixels[(y * w + x + 1) * 4], grid, r, g, b);
+	}
+	// row
+	if (g == 0) {
+		PixelTo256(&pixels[((y - 1) * w + x) * 4], grid, r, g, b);
+	} else if (g == grid - 1) {
+		PixelTo256(&pixels[((y + 1) * w + x) * 4], grid, r, g, b);
+	}
+	// corner
+	if ((r == 0 || r == grid - 1) && (g == 0 || g == grid - 1)) {
+		if (r == 0) --x;
+		else ++x;
+		if (g == 0) --y;
+		else ++y;
+		PixelTo256(&pixels[(y * w + x) * 4], grid, r, g, b);
+	}
+}
+
+void CreateColLUT::PixelTo256(uint8_t* dst, int grid, int r, int g, int b)
+{
+	dst[0] = Int16To256(r, grid);
+	dst[1] = Int16To256(g, grid);
+	dst[2] = Int16To256(b, 16);
 	dst[3] = 255;
 }
 
-uint8_t CreateColLUT::Int16To256(int i16)
+uint8_t CreateColLUT::Int16To256(int i16, int grid)
 {
-	return static_cast<uint8_t>(i16 * 255.0f / 15.0f + 0.5f);
+	return static_cast<uint8_t>(i16 * 255.0f / (grid - 1) + 0.5f);
 
 // 	i16 = (int)(i16 / 11) * 11;
 // 	return static_cast<uint8_t>(i16 * 255.0f / 15.0f + 0.5f);
