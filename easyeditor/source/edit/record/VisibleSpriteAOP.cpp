@@ -41,7 +41,7 @@ void VisibleSpriteAOP::Redo()
 	RefreshPanelSJ::Instance()->Refresh();
 }
 
-void VisibleSpriteAOP::Redo(const std::vector<Sprite*>& sprs)
+void VisibleSpriteAOP::Copy(const std::vector<Sprite*>& sprs)
 {
 	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
 		ee::Sprite* spr = sprs[i];

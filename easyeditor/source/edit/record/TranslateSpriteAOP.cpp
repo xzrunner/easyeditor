@@ -39,19 +39,22 @@ TranslateSpriteAOP::~TranslateSpriteAOP()
 
 void TranslateSpriteAOP::Undo()
 {
-	for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
-	{
-		Sprite* spr = m_sprs[i];
-		spr->Translate(-m_offset);
+	for (size_t i = 0, n = m_sprs.size(); i < n; ++i) {
+		m_sprs[i]->Translate(-m_offset);
 	}
 }
 
 void TranslateSpriteAOP::Redo()
 {
-	for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
-	{
-		Sprite* spr = m_sprs[i];
-		spr->Translate(m_offset);
+	for (size_t i = 0, n = m_sprs.size(); i < n; ++i) {
+		m_sprs[i]->Translate(m_offset);
+	}
+}
+
+void TranslateSpriteAOP::Copy(const std::vector<ee::Sprite*>& sprs)
+{
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		sprs[i]->Translate(m_offset);
 	}
 }
 

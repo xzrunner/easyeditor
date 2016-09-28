@@ -37,6 +37,13 @@ void ShearSpriteAOP::Redo()
 	} 
 }
 
+void ShearSpriteAOP::Copy(const std::vector<ee::Sprite*>& sprs)
+{
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		sprs[i]->SetShear(m_new_shear);
+	}	
+}
+
 Json::Value ShearSpriteAOP::Store(const std::vector<Sprite*>& sprs) const
 {
 	Json::Value val;

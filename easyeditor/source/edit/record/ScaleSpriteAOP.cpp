@@ -37,6 +37,13 @@ void ScaleSpriteAOP::Redo()
 	} 
 }
 
+void ScaleSpriteAOP::Copy(const std::vector<ee::Sprite*>& sprs)
+{
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		sprs[i]->SetScale(m_new_scale);
+	}
+}
+
 Json::Value ScaleSpriteAOP::Store(const std::vector<Sprite*>& sprs) const
 {
 	Json::Value val;

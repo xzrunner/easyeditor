@@ -39,7 +39,7 @@ void EditableSpriteAOP::Redo()
 	RefreshPanelSJ::Instance()->Refresh();
 }
 
-void EditableSpriteAOP::Redo(const std::vector<Sprite*>& sprs)
+void EditableSpriteAOP::Copy(const std::vector<Sprite*>& sprs)
 {
 	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
 		ee::Sprite* spr = sprs[i];

@@ -68,7 +68,7 @@ HistoryList::Type HistoryList::RedoTop()
 	QuerySelectedSprsSJ::Instance()->Query(sprs);
 
 	AtomicOP* op = m_undo_stack.top();
-	op->Redo(sprs);
+	op->Copy(sprs);
 	return DIRTY;
 }
 

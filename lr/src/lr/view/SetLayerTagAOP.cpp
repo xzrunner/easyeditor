@@ -20,7 +20,7 @@ void SetLayerTagAOP::Redo()
 {
 }
 
-void SetLayerTagAOP::Redo(const std::vector<ee::Sprite*>& sprs)
+void SetLayerTagAOP::Copy(const std::vector<ee::Sprite*>& sprs)
 {
 	Set(sprs, m_type);
 }

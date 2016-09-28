@@ -3,6 +3,8 @@
 
 #include "AtomicOP.h"
 
+#include <SM_Vector.h>
+
 namespace ee
 {
 
@@ -15,14 +17,17 @@ public:
 
 	virtual void Undo();
 	virtual void Redo();
+	virtual void Copy(const std::vector<ee::Sprite*>& sprs);
 
 	virtual Json::Value Store(const std::vector<Sprite*>& sprs) const;
 
 private:
+	static void SetMirror(Sprite* spr, const sm::bvec2& mirror);
+
+private:
 	Sprite* m_spr;
 
-	bool m_old_mirror_x, m_old_mirror_y;
-	bool m_new_mirror_x, m_new_mirror_y;
+	sm::bvec2 m_old_mirror, m_new_mirror;
 
 }; // MirrorSpriteAOP 
 

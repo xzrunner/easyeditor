@@ -14,7 +14,7 @@ public:
 
 	virtual void Undo();
 	virtual void Redo();
-	virtual void Redo(const std::vector<Sprite*>& sprs);
+	virtual void Copy(const std::vector<Sprite*>& sprs);
 
 	virtual Json::Value Store(const std::vector<Sprite*>& sprs) const;
 

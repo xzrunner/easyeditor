@@ -23,6 +23,13 @@ void OffsetSpriteAOP::Redo()
 	m_spr->SetOffset(m_new_offset);
 }
 
+void OffsetSpriteAOP::Copy(const std::vector<ee::Sprite*>& sprs)
+{
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		sprs[i]->SetOffset(m_new_offset);
+	}
+}
+
 // todo
 Json::Value OffsetSpriteAOP::Store(const std::vector<Sprite*>& sprs) const
 {

@@ -384,7 +384,7 @@ void ArrangeSpriteImpl::OnPopMenuSelected(int type)
 void ArrangeSpriteImpl::OnDraw(const Camera& cam) const
 {
 	m_ctrl_node_radius = CTRL_NODE_RADIUS * cam.GetScale();
-	if (m_cfg.is_deform_open && m_selection->Size() == 1)
+	if ((m_cfg.is_deform_open || m_cfg.is_offset_open) && m_selection->Size() == 1)
 	{
 		Sprite* selected = NULL;
 		std::vector<Sprite*> sprs;
@@ -398,26 +398,29 @@ void ArrangeSpriteImpl::OnDraw(const Camera& cam) const
 		} else if (m_ctrl_node_radius > max_e * 0.1f) {
 			m_ctrl_node_radius = 0;
 		} else {
-			if (m_stage->GetKeyState(WXK_SHIFT)) 
+			if (m_cfg.is_deform_open)
 			{
-				sm::vec2 ctrl_nodes[4];
-				SpriteCtrlNode::GetSpriteCtrlNodesExt(selected, ctrl_nodes);
-				for (int i = 0; i < 4; ++i) {
-					s2::RVG::SetColor(s2::Color(51, 204, 51));
-					s2::RVG::Circle(ctrl_nodes[i], m_ctrl_node_radius, true);
+				if (m_stage->GetKeyState(WXK_SHIFT)) 
+				{
+					sm::vec2 ctrl_nodes[4];
+					SpriteCtrlNode::GetSpriteCtrlNodesExt(selected, ctrl_nodes);
+					for (int i = 0; i < 4; ++i) {
+						s2::RVG::SetColor(s2::Color(51, 204, 51));
+						s2::RVG::Circle(ctrl_nodes[i], m_ctrl_node_radius, true);
+					}
 				}
-			}
-			else
-			{
-				sm::vec2 ctrl_nodes[8];
-				SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrl_nodes);
-				for (int i = 0; i < 4; ++i) {
-					s2::RVG::SetColor(s2::Color(51, 204, 51));
-					s2::RVG::Circle(ctrl_nodes[i], m_ctrl_node_radius, false);
-				}
-				for (int i = 4; i < 8; ++i) {
-					s2::RVG::SetColor(s2::Color(51, 204, 51));
-					s2::RVG::Circle(ctrl_nodes[i], m_ctrl_node_radius, true);
+				else
+				{
+					sm::vec2 ctrl_nodes[8];
+					SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrl_nodes);
+					for (int i = 0; i < 4; ++i) {
+						s2::RVG::SetColor(s2::Color(51, 204, 51));
+						s2::RVG::Circle(ctrl_nodes[i], m_ctrl_node_radius, false);
+					}
+					for (int i = 4; i < 8; ++i) {
+						s2::RVG::SetColor(s2::Color(51, 204, 51));
+						s2::RVG::Circle(ctrl_nodes[i], m_ctrl_node_radius, true);
+					}
 				}
 			}
 
