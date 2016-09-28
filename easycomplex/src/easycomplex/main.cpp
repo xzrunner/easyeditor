@@ -21,6 +21,7 @@
 #include <easytext.h>
 #include <easymask.h>
 #include <easytrail.h>
+#include <easyskeleton.h>
 
 IMPLEMENT_APP(MyApp)
 
@@ -70,6 +71,9 @@ static void InitSymbolCreators()
 
 	ee::SymbolFactory::RegisterCreator(ee::FileType::GetTag(ee::FILE_TRAIL), &etrail::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(ee::FileType::GetTag(ee::FILE_TRAIL), &etrail::Sprite::Create);
+
+	ee::SymbolFactory::RegisterCreator(ee::FileType::GetTag(ee::FILE_SKELETON), &eskeleton::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(ee::FileType::GetTag(ee::FILE_SKELETON), &eskeleton::Sprite::Create);
 }
 
 bool MyApp::OnInit()

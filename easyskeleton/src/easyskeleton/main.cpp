@@ -4,8 +4,6 @@
 #include <ee/Frame.h>
 #include <ee/FileType.h>
 
-#include <easyskeleton.h>
-
 IMPLEMENT_APP(MyApp)
 
 bool MyApp::OnInit()

@@ -85,14 +85,14 @@ protected:
 
 	MultiSpritesImpl* m_sprites_impl;
 
-	AutoAlign m_align;
-
 private:
 	wxWindow* m_wnd;
 
 	const ArrangeSpriteConfig m_cfg;
 
 	PropertySettingPanel* m_property_panel;
+
+	AutoAlign m_align;
 
 	ArrangeSpriteState* m_op_state;
 

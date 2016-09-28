@@ -17,6 +17,7 @@ class Joint;
 class Bone : public cu::RefCountObj, private cu::Uncopyable
 {
 public:
+	Bone();
 	Bone(ee::Sprite* skin);
 	~Bone();
 
@@ -28,6 +29,13 @@ public:
 	bool AutoAbsorb(const Bone* bone);
 
 	void Translate(const sm::vec2& offset);
+	bool Rotate(float angle);
+
+	void SetSkin(ee::Sprite* skin);
+	void AddJoint(Joint* joint);
+	void RemoveJoint(Joint* joint);
+
+	const std::vector<Joint*>& GetAllJoints() const { return m_joints; }
 
 private:
 	ee::Sprite* m_skin;

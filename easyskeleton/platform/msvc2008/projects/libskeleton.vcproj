@@ -159,46 +159,6 @@
 					RelativePath="..\..\..\src\libskeleton\LibraryPage.h"
 					>
 				</File>
-				<File
-					RelativePath="..\..\..\src\libskeleton\LibraryPanel.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libskeleton\LibraryPanel.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="stage"
-				>
-				<File
-					RelativePath="..\..\..\src\libskeleton\StageCanvas.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libskeleton\StageCanvas.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libskeleton\StagePanel.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libskeleton\StagePanel.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="toolbar"
-				>
-				<File
-					RelativePath="..\..\..\src\libskeleton\ToolbarPanel.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libskeleton\ToolbarPanel.h"
-					>
-				</File>
 			</Filter>
 		</Filter>
 		<Filter
@@ -218,70 +178,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\libskeleton\Symbol.h"
-				>
-			</File>
-			<Filter
-				Name="skeleton"
-				>
-				<File
-					RelativePath="..\..\..\src\libskeleton\Bone.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libskeleton\Bone.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libskeleton\Joint.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libskeleton\Joint.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libskeleton\Skeleton.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libskeleton\Skeleton.h"
-					>
-				</File>
-			</Filter>
-		</Filter>
-		<Filter
-			Name="edit"
-			>
-			<File
-				RelativePath="..\..\..\src\libskeleton\ComposeSkeletonImpl.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libskeleton\ComposeSkeletonImpl.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libskeleton\ComposeSkeletonOP.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libskeleton\ComposeSkeletonOP.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libskeleton\RotateSpriteState.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libskeleton\RotateSpriteState.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libskeleton\TranslateSpriteState.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libskeleton\TranslateSpriteState.h"
 				>
 			</File>
 		</Filter>

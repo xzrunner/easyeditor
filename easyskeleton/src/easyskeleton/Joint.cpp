@@ -4,7 +4,9 @@
 #include <ee/Sprite.h>
 
 #include <SM_Calc.h>
+#include <shaderlab.h>
 #include <sprite2/S2_RVG.h>
+#include <sprite2/JointMath.h>
 
 #include <algorithm>
 
@@ -15,10 +17,11 @@ const float Joint::RADIUS = 10;
 
 Joint::Joint(ee::Sprite* spr, const sm::vec2& offset)
 	: m_parent(NULL)
-	, m_world_angle(0)
 	, m_skin(spr, -offset)
 {
-	m_world_pos = spr->GetCenter() + offset;
+	s2::JointPose src_world(m_skin.spr->GetCenter(), m_skin.spr->GetAngle()),
+		      local(-m_skin.pose.trans, -m_skin.pose.rot);
+	m_world_pose = s2::JointMath::Local2World(src_world, local);
 }
 
 Joint::~Joint()
@@ -35,9 +38,9 @@ Joint::~Joint()
 void Joint::Draw() const
 {
 	s2::RVG::SetColor(s2::Color(51, 204, 51, 128));
-	s2::RVG::Circle(m_world_pos, RADIUS, true);
+	s2::RVG::Circle(m_world_pose.trans, RADIUS, true);
 	s2::RVG::SetColor(s2::Color(204, 51, 51, 128));
-	s2::RVG::Circle(m_world_pos, RADIUS, false);
+	s2::RVG::Circle(m_world_pose.trans, RADIUS, false);
 
 	if (m_parent)
 	{
@@ -54,25 +57,40 @@ void Joint::Draw() const
 		s2::RVG::Line(left, e);
 		s2::RVG::Line(e, right);
 		s2::RVG::Line(right, s);
+
+		s2::RVG::SetColor(s2::Color(204, 204, 51, 128));
+		std::vector<sm::vec2> face;
+		face.push_back(s);
+		face.push_back(left);
+		face.push_back(right);
+		face.push_back(e);
+		s2::RVG::TriangleStrip(face);
+	}
+
+	sl::Shader* shader = sl::ShaderMgr::Instance()->GetShader();
+	if (shader) {
+		shader->Commit();
 	}
 }
 
 void Joint::UpdateToJoint()
 {
-	CalWorld(m_parent->m_world_pos, m_parent->m_world_angle, m_pose.pos, m_pose.angle, m_world_pos, m_world_angle);
+	m_world_pose = s2::JointMath::Local2World(m_parent->m_world_pose, m_local_pose);
 	m_skin.Update(this);
 	UpdateChildren();
 }
 
 void Joint::UpdateToSkin()
 {
-	CalWorld(m_skin.spr->GetCenter(), m_skin.spr->GetAngle(), -m_skin.pos, -m_skin.angle, m_world_pos, m_world_angle);
+	s2::JointPose src_world(m_skin.spr->GetCenter(), m_skin.spr->GetAngle()),
+		      local(-m_skin.pose.trans, -m_skin.pose.rot);
+	m_world_pose = s2::JointMath::Local2World(src_world, local);
 	UpdateChildren();
 }
 
 void Joint::Translate(const sm::vec2& offset)
 {
-	m_world_pos += offset;
+	m_world_pose.trans += offset;
 	for (int i = 0, n = m_children.size(); i < n; ++i) 
 	{
 		Joint* c = m_children[i];
@@ -81,14 +99,22 @@ void Joint::Translate(const sm::vec2& offset)
 	}
 }
 
+void Joint::Rotate(float angle)
+{
+	m_local_pose.rot += angle;
+}
+
 void Joint::SetWorldPos(const sm::vec2& pos, bool static_skin)
 {
 	if (static_skin) {
-		m_skin.spr->Translate(pos - m_world_pos);
-		m_world_pos = pos;
+		m_skin.spr->Translate(pos - m_world_pose.trans);
+		m_world_pose.trans = pos;
 	} else {
-		m_world_pos = pos;
-		m_skin.pos = -sm::rotate_vector(m_world_pos - m_skin.spr->GetCenter(), -m_world_angle);
+		m_world_pose.trans = pos;
+
+		s2::JointPose src_world(m_skin.spr->GetCenter(), m_skin.spr->GetAngle());
+		m_skin.pose.trans = -s2::JointMath::World2Local(src_world, pos);
+		m_skin.pose.rot = 0;
 	}
 }
 
@@ -131,6 +157,18 @@ void Joint::Deconnect()
 	m_parent = NULL;
 }
 
+void Joint::Clear()
+{
+	Deconnect();
+	while (!m_children.empty()) {
+		m_children[0]->Deconnect();
+	}
+	if (m_skin.spr) {
+		m_skin.spr->RemoveReference();
+		m_skin.spr = NULL;
+	}
+}
+
 void Joint::UpdateChildren()
 {
 	for (int i = 0, n = m_children.size(); i < n; ++i) 
@@ -142,22 +180,13 @@ void Joint::UpdateChildren()
 	}
 }
 
-void Joint::CalWorld(const sm::vec2& src_world_pos, float src_world_angle, 
-					 const sm::vec2& local_pos, float local_angle, 
-					 sm::vec2& dst_world_pos, float& dst_world_angle)
-{
-	dst_world_angle = src_world_angle + local_angle;
-	dst_world_pos = src_world_pos + sm::rotate_vector(local_pos, dst_world_angle);
-}
-
 /************************************************************************/
 /* class Joint::Skin                                                    */
 /************************************************************************/
 
 Joint::Skin::Skin(ee::Sprite* spr, const sm::vec2& pos)
 	: spr(spr)
-	, pos(pos)
-	, angle(0)
+	, pose(pos, 0)
 {
 	if (this->spr) {
 		this->spr->AddReference();
@@ -173,11 +202,9 @@ Joint::Skin::~Skin()
 
 void Joint::Skin::Update(const Joint* joint)
 {
-	sm::vec2 s_pos;
-	float s_angle;
-	Joint::CalWorld(joint->m_world_pos, joint->m_world_angle, pos, angle, s_pos, s_angle);
-	spr->SetPosition(s_pos);
-	spr->SetAngle(s_angle);
+	s2::JointPose dst = s2::JointMath::Local2World(joint->m_world_pose, pose);
+	spr->SetAngle(dst.rot);
+	spr->Translate(dst.trans - spr->GetCenter());
 }
 
 }

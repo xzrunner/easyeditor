@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\sm\src\sm;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\cu\src\cu;..\..\..\..\easyeditor\include;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\sm\src\sm;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\cu\src\cu;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\easyeditor\include;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -122,7 +122,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\sm\src\sm;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\cu\src\cu;..\..\..\..\easyeditor\include;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\sm\src\sm;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\cu\src\cu;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\easyeditor\include;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -182,22 +182,154 @@
 	<References>
 	</References>
 	<Files>
-		<File
-			RelativePath="..\..\..\src\easyskeleton\main.cpp"
+		<Filter
+			Name="frame"
 			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\easyskeleton\main.h"
+			<File
+				RelativePath="..\..\..\src\easyskeleton\FileLoader.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyskeleton\FileLoader.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyskeleton\FileStorer.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyskeleton\FileStorer.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyskeleton\main.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyskeleton\main.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyskeleton\Task.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyskeleton\Task.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="dataset"
 			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\easyskeleton\Task.cpp"
+			<File
+				RelativePath="..\..\..\src\easyskeleton\Bone.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyskeleton\Bone.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyskeleton\Joint.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyskeleton\Joint.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyskeleton\Skeleton.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyskeleton\Skeleton.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="edit"
 			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\easyskeleton\Task.h"
+			<File
+				RelativePath="..\..\..\src\easyskeleton\ComposeSkeletonImpl.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyskeleton\ComposeSkeletonImpl.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyskeleton\ComposeSkeletonOP.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyskeleton\ComposeSkeletonOP.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyskeleton\RotateSpriteState.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyskeleton\RotateSpriteState.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyskeleton\TranslateSpriteState.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyskeleton\TranslateSpriteState.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="view"
 			>
-		</File>
+			<Filter
+				Name="library"
+				>
+				<File
+					RelativePath="..\..\..\src\easyskeleton\LibraryPanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyskeleton\LibraryPanel.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="stage"
+				>
+				<File
+					RelativePath="..\..\..\src\easyskeleton\StageCanvas.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyskeleton\StageCanvas.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyskeleton\StagePanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyskeleton\StagePanel.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="toolbar"
+				>
+				<File
+					RelativePath="..\..\..\src\easyskeleton\ToolbarPanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyskeleton\ToolbarPanel.h"
+					>
+				</File>
+			</Filter>
+		</Filter>
 		<File
 			RelativePath="..\..\..\..\editor-external\wx\include\wx\msw\wx.rc"
 			>

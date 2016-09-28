@@ -10,6 +10,11 @@
 namespace eskeleton
 {
 
+Bone::Bone()
+	: m_skin(NULL)
+{
+}
+
 Bone::Bone(ee::Sprite* skin)
 	: m_skin(skin)
 {
@@ -77,7 +82,11 @@ bool Bone::AutoAbsorb(const Bone* bone)
 				return true;
 			}
 		}
-		src->Deconnect();
+		if (const Joint* parent = src->GetParent()) {
+			if (sm::dis_pos_to_pos(src->GetWorldPos(), src->GetParent()->GetWorldPos()) > Joint::RADIUS * 2) {
+				src->Deconnect();
+			}
+		}
 	}
 	return false;
 }
@@ -88,6 +97,57 @@ void Bone::Translate(const sm::vec2& offset)
 	for (int i = 0, n = m_joints.size(); i < n; ++i) {
 		m_joints[i]->Translate(offset);
 	}
+}
+
+bool Bone::Rotate(float angle)
+{
+	Joint* base = NULL;
+	for (int i = 0, n = m_joints.size(); i < n; ++i) {
+		Joint* joint = m_joints[i];
+		if (joint->GetParent()) {
+			base = joint;
+		}
+	}
+
+	if (!base) {
+		return false;
+	}
+
+	base->Rotate(angle);
+
+	m_skin->SetOffset(sm::rotate_vector(base->GetWorldPos() - m_skin->GetCenter(), -m_skin->GetAngle()));
+	m_skin->Rotate(angle);
+
+	for (int i = 0, n = m_joints.size(); i < n; ++i) {
+		if (m_joints[i] != base) {
+			m_joints[i]->UpdateToSkin();
+		}
+	}
+
+	return true;
+}
+
+void Bone::SetSkin(ee::Sprite* skin)
+{
+	cu::RefCountObjAssign(m_skin, skin);
+}
+
+void Bone::AddJoint(Joint* joint)
+{
+	joint->AddReference();
+	m_joints.push_back(joint);
+}
+
+void Bone::RemoveJoint(Joint* joint)
+{
+	for (int i = 0, n = m_joints.size(); i < n; ++i) {
+		if (m_joints[i] == joint) {
+			m_joints.erase(m_joints.begin() + i);
+			break;
+		}
+	}
+	joint->Clear();
+	joint->RemoveReference();
 }
 
 }

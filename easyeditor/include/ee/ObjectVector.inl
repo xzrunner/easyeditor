@@ -249,7 +249,7 @@ inline bool ObjectVector<T>::ResetOrderMost(std::vector<T*>& objs, const T* obj,
 template<class T>
 inline bool ObjectVector<T>::Sort(std::vector<T*>& objs, std::vector<T*>& list) {
 	std::map<int, T*> order_sorted;
-	for (int i = 0, n = list.size(); i , n; ++i) {
+	for (int i = 0, n = list.size(); i < n; ++i) {
 		T* obj = list[i];
 		for (int j = 0, m = objs.size(); j < m; ++j) {
 			if (obj == objs[j]) {

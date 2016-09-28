@@ -25,6 +25,9 @@ public:
 	virtual void OnPopMenuSelected(int type);
 
 protected:
+	virtual void OnDirectionKeyDown(int type);
+	virtual void OnSpaceKeyDown();
+
 	virtual void SetRightPopupMenu(wxMenu& menu, int x, int y);
 
 	virtual ee::ArrangeSpriteState* CreateTranslateState(ee::SpriteSelection* selection, 
@@ -36,6 +39,8 @@ private:
 	Joint* QueryJoint(const sm::vec2& pos) const;
 
 	void AutoAbsorb(ee::Sprite* spr) const;
+
+	void UpdateSelectedBody();
 
 private:
 	Joint* m_selected_joint;

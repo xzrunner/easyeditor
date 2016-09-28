@@ -18,6 +18,13 @@ public:
 		ee::LibraryPanel* library, ee::PropertySettingPanel* property);
 	virtual ~StagePanel();
 
+public:
+	enum
+	{
+		Menu_AddJointNode = 1000,
+		Menu_DelJointNode
+	};
+
 protected:
 	//
 	//	interface Observer
@@ -25,7 +32,8 @@ protected:
 	virtual void OnNotify(int sj_id, void* ud);
 
 private:
-	
+	void OnMenuAddJointNode(wxCommandEvent& event);
+	void OnMenuDelJointNode(wxCommandEvent& event);
 
 }; // StagePanel
 

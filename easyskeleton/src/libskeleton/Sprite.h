@@ -16,7 +16,6 @@ public:
 	Sprite(const Sprite& spr);
 	Sprite& operator = (const Sprite& spr);
 	Sprite(Symbol* sym);
-	virtual ~Sprite();
 
 	/**
 	 *  @interface

@@ -11,14 +11,15 @@
 #include <ee/panel_msg.h>
 #include <ee/SpriteSelection.h>
 
+#include <sprite2/JointMath.h>
+
 namespace eskeleton
 {
 
 ComposeSkeletonImpl::ComposeSkeletonImpl(StagePanel* stage, ee::PropertySettingPanel* property)
-	: ee::ArrangeSpriteImpl(stage, stage->GetStageImpl(), stage, property)
+	: ee::ArrangeSpriteImpl(stage, stage->GetStageImpl(), stage, property, ee::ArrangeSpriteConfig(false, false, true, true))
 	, m_selected_joint(NULL)
 {
-	m_align.SetOpen(false);
 }
 
 bool ComposeSkeletonImpl::OnKeyDown(int keyCode)
@@ -86,43 +87,61 @@ void ComposeSkeletonImpl::OnPopMenuSelected(int type)
 {
 	ee::ArrangeSpriteImpl::OnPopMenuSelected(type);
 
-// 	switch(type)
-// 	{
-// 	case StagePanel::Menu_AddJointNode:
-// 		{
-// 			SkeletonData* skeleton = get_curr_skeleton();
-// 			if (skeleton) {
-// 				ee::Sprite* spr = ViewMgr::Instance()->stage->QuerySpriteByPos(m_first_pos);
-// 				skeleton->InsertJoint(spr, m_first_pos);
-// 			}
-// 		}
-// 		break;
-// 	case StagePanel::Menu_DelJointNode:
-// 		{
-// 			SkeletonData* skeleton = get_curr_skeleton();
-// 			if (skeleton) {
-// 				skeleton->RemoveJoint(m_first_pos);
-// 			}
-// 		}
-// 		break;
-// 	}
+	switch(type)
+	{
+	case StagePanel::Menu_AddJointNode:
+		{
+			ee::Sprite* spr = m_sprites_impl->QuerySpriteByPos(m_first_pos);
+			if (spr) {
+				Bone* bone = (Bone*)(spr->GetUserData());
+				s2::JointPose src_world(spr->GetCenter(), spr->GetAngle());
+				sm::vec2 local = s2::JointMath::World2Local(src_world, m_first_pos);
+				bone->AddJoint(new Joint(spr, local));
+			}
+		}
+		break;
+	case StagePanel::Menu_DelJointNode:
+		{
+			ee::Sprite* spr = m_sprites_impl->QuerySpriteByPos(m_first_pos);
+			if (spr) {
+				Bone* bone = (Bone*)(spr->GetUserData());
+				Joint* joint = bone->QueryJoint(m_first_pos);
+				bone->RemoveJoint(joint);
+			}
+		}
+		break;
+	}
+}
+
+void ComposeSkeletonImpl::OnDirectionKeyDown(int type)
+{
+	ee::ArrangeSpriteImpl::OnDirectionKeyDown(type);
+	UpdateSelectedBody();
+}
+
+void ComposeSkeletonImpl::OnSpaceKeyDown()
+{
+	ee::ArrangeSpriteImpl::OnSpaceKeyDown();
+	UpdateSelectedBody();
 }
 
 void ComposeSkeletonImpl::SetRightPopupMenu(wxMenu& menu, int x, int y)
 {
 	ee::ArrangeSpriteImpl::SetRightPopupMenu(menu, x, y);
 
-// 	SkeletonData* skeleton = get_curr_skeleton();
-// 	if (!skeleton) {
-// 		return;
-// 	}
-// 
-// 	Joint* joint = skeleton->QueryJointByPos(m_first_pos);
-// 	if (joint) {
-// 		menu.Append(StagePanel::Menu_DelJointNode, "Del Joint");
-// 	} else {
-// 		menu.Append(StagePanel::Menu_AddJointNode, "Add Joint");
-// 	}
+	if (m_selection->Size() != 1) {
+		return;
+	}
+
+	std::vector<ee::Sprite*> sprs;
+	m_sprites_impl->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	Bone* bone = (Bone*)(sprs[0]->GetUserData());
+	Joint* joint = bone->QueryJoint(m_first_pos);
+	if (joint) {
+		menu.Append(StagePanel::Menu_DelJointNode, "Del Joint");
+	} else {
+		menu.Append(StagePanel::Menu_AddJointNode, "Add Joint");
+	}
 }
 
 ee::ArrangeSpriteState* 
@@ -165,6 +184,16 @@ void ComposeSkeletonImpl::AutoAbsorb(ee::Sprite* spr) const
 			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 			break;
 		}
+	}
+}
+
+void ComposeSkeletonImpl::UpdateSelectedBody()
+{
+	std::vector<ee::Sprite*> sprs;
+	m_sprites_impl->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		Bone* bone = (Bone*)(sprs[i]->GetUserData());
+		bone->Update();
 	}
 }
 

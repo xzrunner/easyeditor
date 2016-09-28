@@ -1,12 +1,18 @@
 #include "Task.h"
+#include "FileLoader.h"
+#include "FileStorer.h"
+#include "StagePanel.h"
+#include "LibraryPanel.h"
 
 #include <ee/SymbolMgr.h>
 #include <ee/Bitmap.h>
 #include <ee/PropertySettingPanel.h>
 #include <ee/ViewlistPanel.h>
 #include <ee/GroupTreePanel.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/sprite_msg.h>
 
-#include <easyskeleton.h>
+#include <algorithm>
 
 namespace eskeleton
 {
@@ -30,10 +36,19 @@ Task::~Task()
 
 void Task::Load(const char* filename)
 {
+	std::vector<ee::Sprite*> sprs;
+	FileLoader::Load(filename, sprs);
+	for (int i = 0, n = sprs.size(); i < sprs.size(); ++i) {
+		ee::InsertSpriteSJ::Instance()->Insert(sprs[i]);
+	}
+	for_each(sprs.begin(), sprs.end(), cu::RemoveRefFonctor<ee::Sprite>());
 }
 
 void Task::Store(const char* filename) const
 {
+	std::vector<ee::Sprite*> sprs;
+	m_stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	FileStorer::Store(filename, sprs);
 }
 
 bool Task::IsDirty() const
