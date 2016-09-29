@@ -205,6 +205,7 @@ void Symbol::LoadResources()
 {
 	FileLoader::Load(m_filepath, this);
 
+	m_origin_names.clear();
 	const std::vector<s2::Sprite*>& children = GetChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
 		const std::string& name = children[i]->GetName();
