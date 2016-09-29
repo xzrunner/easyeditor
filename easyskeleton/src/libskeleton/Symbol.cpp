@@ -4,7 +4,7 @@
 #include <sprite2/Skeleton.h>
 #include <gum/SkeletonSymLoader.h>
 
-namespace eskeleton
+namespace libskeleton
 {
 
 Symbol::Symbol()

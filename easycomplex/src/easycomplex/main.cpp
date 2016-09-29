@@ -72,8 +72,8 @@ static void InitSymbolCreators()
 	ee::SymbolFactory::RegisterCreator(ee::FileType::GetTag(ee::FILE_TRAIL), &etrail::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(ee::FileType::GetTag(ee::FILE_TRAIL), &etrail::Sprite::Create);
 
-	ee::SymbolFactory::RegisterCreator(ee::FileType::GetTag(ee::FILE_SKELETON), &eskeleton::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(ee::FileType::GetTag(ee::FILE_SKELETON), &eskeleton::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(ee::FileType::GetTag(ee::FILE_SKELETON), &libskeleton::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(ee::FileType::GetTag(ee::FILE_SKELETON), &libskeleton::Sprite::Create);
 }
 
 bool MyApp::OnInit()

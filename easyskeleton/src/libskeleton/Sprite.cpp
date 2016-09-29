@@ -1,7 +1,7 @@
 #include "Sprite.h"
 #include "Symbol.h"
 
-namespace eskeleton
+namespace libskeleton
 {
 
 Sprite::Sprite(const Sprite& spr)

@@ -1,9 +1,9 @@
-#ifndef _EASYSKELETON_LIBRARY_PAGE_H_
-#define _EASYSKELETON_LIBRARY_PAGE_H_
+#ifndef _LIBSKELETON_LIBRARY_PAGE_H_
+#define _LIBSKELETON_LIBRARY_PAGE_H_
 
 #include <ee/LibraryPage.h>
 
-namespace eskeleton
+namespace libskeleton
 {
 
 class LibraryPage : public ee::LibraryPage
@@ -20,4 +20,4 @@ protected:
 
 }
 
-#endif // _EASYSKELETON_LIBRARY_PAGE_H_
+#endif // _LIBSKELETON_LIBRARY_PAGE_H_

@@ -160,6 +160,26 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="stage"
+				>
+				<File
+					RelativePath="..\..\..\src\libskeleton\StageCanvas.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libskeleton\StageCanvas.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libskeleton\StagePanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libskeleton\StagePanel.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="dataset"
@@ -178,6 +198,30 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\libskeleton\Symbol.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="frame"
+			>
+			<File
+				RelativePath="..\..\..\src\libskeleton\EditDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libskeleton\EditDialog.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="editop"
+			>
+			<File
+				RelativePath="..\..\..\src\libskeleton\EditJointPoseOP.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libskeleton\EditJointPoseOP.h"
 				>
 			</File>
 		</Filter>

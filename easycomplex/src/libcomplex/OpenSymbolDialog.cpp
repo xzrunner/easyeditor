@@ -13,6 +13,7 @@
 #include <easyshadow.h>
 #include <easytext.h>
 #include <easyterrain2d.h>
+#include <easyskeleton.h>
 
 #include <ee/EditPanelImpl.h>
 #include <ee/FontBlankSprite.h>
@@ -106,6 +107,11 @@ void OpenSymbolDialog::Open(ee::Sprite* spr, ee::CrossGuides* guides)
 		eterrain2d::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), terr, m_sprites_impl);
 		dlg.ShowModal();
 	} 
+	else if (libskeleton::Sprite* skeleton = dynamic_cast<libskeleton::Sprite*>(spr)) 
+	{
+		libskeleton::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), skeleton);
+		dlg.ShowModal();
+	}
 
 	m_sprites_impl->EnableObserve(true);
 	m_stage->EnableObserve(true);

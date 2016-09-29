@@ -1,5 +1,5 @@
-#ifndef _EASYSKELETON_SYMBOL_H_
-#define _EASYSKELETON_SYMBOL_H_
+#ifndef _LIBSKELETON_SYMBOL_H_
+#define _LIBSKELETON_SYMBOL_H_
 
 #include <ee/Symbol.h>
 
@@ -7,7 +7,7 @@
 
 namespace s2 { class Joint; }
 
-namespace eskeleton
+namespace libskeleton
 {
 
 class Symbol : public ee::Symbol, public s2::SkeletonSymbol
@@ -25,4 +25,4 @@ protected:
 
 }
 
-#endif // _EASYSKELETON_SYMBOL_H_
+#endif // _LIBSKELETON_SYMBOL_H_

@@ -7,7 +7,7 @@
 #include <ee/Exception.h>
 #include <ee/ExceptionDlg.h>
 
-namespace eskeleton
+namespace libskeleton
 {
 
 LibraryPage::LibraryPage(wxWindow* parent)
