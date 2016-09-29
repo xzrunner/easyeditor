@@ -638,6 +638,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\easydb_cl\FixLRP3dLayer.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb_cl\FixLRP3dLayer.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\easydb_cl\FixMirror.cpp"
 					>
 				</File>
