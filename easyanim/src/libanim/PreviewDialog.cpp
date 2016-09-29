@@ -12,7 +12,7 @@ namespace eanim
 
 PreviewDialog::PreviewDialog(wxWindow* parent, const Symbol* sym,
 							 wxGLContext* glctx)
- 	: wxDialog(parent, wxID_ANY, "Preview", wxDefaultPosition, wxSize(800, 600), wxCLOSE_BOX | wxCAPTION)
+ 	: wxDialog(parent, wxID_ANY, "Preview", wxDefaultPosition, wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 	, m_sym(sym)
 {
 	InitLayout(glctx);

@@ -24,7 +24,7 @@ public:
 
 PreviewDialog::PreviewDialog(wxWindow* parent, wxGLContext* glctx,
 							 const std::vector<ee::Sprite*>& sprs)
-	: wxDialog(parent, wxID_ANY, "Preview", wxDefaultPosition, wxSize(800, 600), wxCLOSE_BOX | wxCAPTION)
+	: wxDialog(parent, wxID_ANY, "Preview", wxDefaultPosition, wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 	, m_sprs(sprs)
 	, m_control(0.033f)
 {

@@ -20,7 +20,7 @@ END_EVENT_TABLE()
 
 EditDialog::EditDialog(wxWindow* parent, Symbol* sym, wxGLContext* glctx)
 	: wxDialog(parent, wxID_ANY, "Edit Scale9", wxDefaultPosition,
-	wxSize(800, 600), wxCLOSE_BOX | wxCAPTION)
+	wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 	, m_sym(sym)
 {
 	SetTitle(sym->GetFilepath());

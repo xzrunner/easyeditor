@@ -7,7 +7,7 @@ namespace ebuilder
 
 CodeDialog::CodeDialog(wxWindow* parent)
 	: wxDialog(parent, wxID_ANY, wxT("Codes"), wxDefaultPosition, 
-	wxSize(800, 600), wxCLOSE_BOX | wxCAPTION)
+	wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 	, notebook(NULL)
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);

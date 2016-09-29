@@ -9,7 +9,7 @@ BEGIN_EVENT_TABLE(TextDialog, wxDialog)
 END_EVENT_TABLE()
 
 TextDialog::TextDialog(wxWindow* parent, FontBlankSprite* font)
-	: wxDialog(parent, wxID_ANY, wxT("Text"), wxDefaultPosition, wxSize(600, 400), wxCLOSE_BOX | wxCAPTION)
+	: wxDialog(parent, wxID_ANY, wxT("Text"), wxDefaultPosition, wxSize(600, 400), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 	, m_font(font)
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
