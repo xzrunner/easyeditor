@@ -106,7 +106,7 @@ void StageCanvas::OnDrawSprites() const
 
 	const sm::rect& clipbox = dynamic_cast<const Symbol*>(m_stage->GetSymbol())->GetScissor();
 	sm::vec2 sz = clipbox.Size();
-	if (sz.x != 0 && sz.y != 0) {
+	if (sz.x > 0 && sz.y > 0) {
 		s2::RVG::SetColor(s2::Color(0, 204, 0));
 		s2::RVG::LineWidth(2);
 		s2::RVG::Rect(sm::vec2(clipbox.xmin, clipbox.ymin), sm::vec2(clipbox.xmax, clipbox.ymax), false);
