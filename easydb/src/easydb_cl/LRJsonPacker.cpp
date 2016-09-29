@@ -507,16 +507,7 @@ void LRJsonPacker::ParserSpecialFromSprite(const Json::Value& src_val, const std
 		std::string filepath = spr_val["filepath"].asString();
 
 		std::string tag = spr_val["tag"].asString();
-		if (ee::FileType::IsType(filepath, ee::FILE_PARTICLE3D)) {
-			bool top_layer = false;
-			if (is_layer2 || tag.find(TOP_LAYER_STR) != std::string::npos) {
-				top_layer = true;
-			}
-			// 				ParserParticleLayer(spr_val, out_val, top_layer);
-			if (top_layer) {
-				out_val["top"] = name + "_top";
-			}
-		} else if (tag.find(COVER_LAYER_STR) != std::string::npos) {
+		if (tag.find(COVER_LAYER_STR) != std::string::npos) {
 			ParserSpecialLayer(spr_val, "cover", out_val);
 		} else if (tag.find(TOP_LAYER_STR) != std::string::npos) {
 			//				ParserSpecialLayer(spr_val, "top", out_val);

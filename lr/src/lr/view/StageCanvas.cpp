@@ -74,8 +74,7 @@ void StageCanvas::DrawSprites() const
 		const std::string& tag = spr->GetTag();
 		if (tag.find(TOP_LAYER_TAG) != std::string::npos) {
 			top_layer.push_back(spr);
-		} else if (tag.find(COVER_LAYER_TAG) != std::string::npos
-			|| dynamic_cast<eparticle3d::Sprite*>(spr)) {
+		} else if (tag.find(COVER_LAYER_TAG) != std::string::npos) {
 			cover_layer.push_back(spr);
 		} else {
 			DrawSprite(spr, false);

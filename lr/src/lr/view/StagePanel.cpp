@@ -2,6 +2,7 @@
 #include "StageCanvas.h"
 #include "SelectSpritesOP.h"
 #include "ArrangeSpriteImpl.h"
+#include "typedef.h"
 
 #include "frame/config.h"
 #include "frame/SettingCfg.h"
@@ -26,6 +27,7 @@
 #include <ee/panel_msg.h>
 
 #include <easyshape.h>
+#include <easyparticle3d.h>
 
 #include <algorithm>
 
@@ -376,6 +378,11 @@ void StagePanel::SortSprites(std::vector<ee::Sprite*>& sprs)
 
 void StagePanel::InsertSprite(ee::Sprite* spr, int idx)
 {
+	if (dynamic_cast<eparticle3d::Sprite*>(spr) && spr->GetTag().empty()) {
+		std::string tag = TOP_LAYER_TAG;
+		spr->SetTag(tag  + ";");
+	}
+
 	// tag
 	std::string tag = TagCfg::Instance()->Query(dynamic_cast<ee::Symbol*>(spr->GetSymbol()));
 	if (spr->GetTag().find(tag) == std::string::npos) {
