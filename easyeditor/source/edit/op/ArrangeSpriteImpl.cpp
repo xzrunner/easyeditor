@@ -523,8 +523,8 @@ void ArrangeSpriteImpl::OnSpaceKeyDown()
 
 		spr->SetPosition(sm::vec2(0, 0));
 		spr->SetAngle(0);
-		spr->SetScale(sm::vec2(1, 1));
 		spr->SetShear(sm::vec2(0, 0));
+		spr->SetScale(sm::vec2(1, 1));
 		//spr->setOffset(sm::vec2(0, 0));
 	}
 	EditAddRecordSJ::Instance()->Add(comb);

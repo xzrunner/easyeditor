@@ -846,8 +846,8 @@ void ParserLuaFile::Animation::Item::transform(ee::Sprite* spr) const
 		spr->Rotate(angle);
 		spr->Translate(sm::vec2(x, y));
 		const sm::vec2& scale = spr->GetScale();
-		spr->SetScale(sm::vec2(scale.x * sx, scale.y * sy));
 		spr->SetShear(sm::vec2(kx, ky));
+		spr->SetScale(sm::vec2(scale.x * sx, scale.y * sy));
 	}
 }
 
