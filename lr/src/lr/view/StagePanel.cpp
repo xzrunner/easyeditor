@@ -25,6 +25,7 @@
 #include <ee/SettingData.h>
 #include <ee/subject_id.h>
 #include <ee/panel_msg.h>
+#include <ee/SetNameDialog.h>
 
 #include <easyshape.h>
 #include <easyparticle3d.h>
@@ -451,6 +452,11 @@ void StagePanel::RemoveShape(ee::Shape* shape)
 
 void StagePanel::InsertShape(ee::Shape* shape)
 {
+	ee::SetNameDialog dlg(this, shape->GetName());
+	if (dlg.ShowModal() == wxID_OK) {
+		shape->SetName(dlg.GetShapeName());
+	}
+
 	ee::LibraryPage* curr_page = m_library->GetCurrPage();
 	bool dirty = static_cast<LibraryPage*>(curr_page)->GetLayer()->InsertShape(shape);
 

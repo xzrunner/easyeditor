@@ -669,6 +669,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\source\view\others\SetNameDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\SetNameDialog.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\source\view\others\SettingsDialog.cpp"
 					>
 				</File>
