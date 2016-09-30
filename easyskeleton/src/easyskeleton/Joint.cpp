@@ -83,25 +83,30 @@ void Joint::UpdateToJoint()
 void Joint::UpdateToSkin()
 {
 	s2::JointPose src_world(m_skin.spr->GetCenter(), m_skin.spr->GetAngle()),
-		      local(-m_skin.pose.trans, -m_skin.pose.rot);
+		          local(-m_skin.pose.trans, -m_skin.pose.rot);
 	m_world_pose = s2::JointMath::Local2World(src_world, local);
+	if (m_parent) {
+		m_local_pose = s2::JointMath::World2Local(m_parent->GetWorldPose(), m_world_pose);
+	}
 	UpdateChildren();
 }
 
-void Joint::Translate(const sm::vec2& offset)
+void Joint::Translate(const sm::vec2& trans)
 {
-	m_world_pose.trans += offset;
+	m_local_pose.trans += trans;
+	m_world_pose.trans += trans;
 	for (int i = 0, n = m_children.size(); i < n; ++i) 
 	{
 		Joint* c = m_children[i];
 		Bone* cbone = (Bone*)(c->m_skin.spr->GetUserData());
-		cbone->Translate(offset);
+		cbone->Translate(trans);
 	}
 }
 
-void Joint::Rotate(float angle)
+void Joint::Rotate(float rot)
 {
-	m_local_pose.rot += angle;
+	m_local_pose.rot += rot;
+	m_world_pose.rot += rot;
 }
 
 void Joint::SetWorldPos(const sm::vec2& pos, bool static_skin)

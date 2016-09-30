@@ -3,7 +3,7 @@
 
 #include <ee/ZoomViewOP.h>
 
-#include <SM_Matrix.h>
+#include <SM_Vector.h>
 
 namespace s2 { class Skeleton; class Joint; }
 
@@ -20,17 +20,23 @@ public:
 
 	virtual bool OnMouseLeftDown(int x, int y);
 	virtual bool OnMouseLeftUp(int x, int y);
+	virtual bool OnMouseRightDown(int x, int y);
+	virtual bool OnMouseRightUp(int x, int y);
+	virtual bool OnMouseMove(int x, int y);
 	virtual bool OnMouseDrag(int x, int y);
 
 	virtual bool OnDraw() const;
 	virtual bool Clear();
 
 private:
+	void Select(const sm::vec2& pos);
+
+private:
 	const s2::Skeleton* m_skeleton;
 
 	s2::Joint* m_selected;
 
-	sm::mat4 m_trans, m_inv_trans;
+	sm::vec2 m_last_left_pos, m_last_right_pos;
 
 }; // EditJointPoseOP
 

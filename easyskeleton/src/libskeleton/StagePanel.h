@@ -25,7 +25,13 @@ public:
 	const Sprite* GetSprite() const { return m_spr; }
 
 private:
-	Sprite* m_spr;
+	Sprite*		m_spr;
+
+	sm::vec2	m_position;
+	float		m_angle;
+	sm::vec2	m_scale;
+	sm::vec2	m_shear;
+	sm::vec2	m_offset;
 
 }; // StagePanel
 

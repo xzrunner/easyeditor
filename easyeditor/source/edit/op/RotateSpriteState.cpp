@@ -55,10 +55,10 @@ void RotateSpriteState::RotateVisitor::
 Visit(Sprite* spr, bool& next)
 {
 	sm::vec2 center = spr->GetPosition() + spr->GetOffset();
-	float angle = sm::get_angle_in_direction(center, m_start, m_end);
-	spr->Rotate(angle);
+	float rot = sm::get_angle_in_direction(center, m_start, m_end);
+	spr->Rotate(rot);
 
-	m_angle += angle;
+	m_angle += rot;
 
 	next = false;
 }

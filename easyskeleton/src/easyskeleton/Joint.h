@@ -24,8 +24,8 @@ public:
 	void UpdateToJoint();
 	void UpdateToSkin();
 
-	void Translate(const sm::vec2& offset);
-	void Rotate(float angle);
+	void Translate(const sm::vec2& trans);
+	void Rotate(float rot);
 	
 	const sm::vec2& GetWorldPos() const { return m_world_pose.trans; }
 	void SetWorldPos(const sm::vec2& pos, bool static_skin);
