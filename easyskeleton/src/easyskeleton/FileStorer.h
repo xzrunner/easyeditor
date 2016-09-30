@@ -7,7 +7,6 @@
 #include <vector>
 
 namespace ee { class Sprite; }
-namespace s2 { class JointPose; }
 
 namespace eskeleton
 {
@@ -24,7 +23,6 @@ private:
 
 	static Json::Value StoreSkeleton(const std::vector<ee::Sprite*>& sprs);
 	static Json::Value StoreJoint(const Joint* joint, const std::map<const Joint*, int>& map_joint_id);
-	static Json::Value StoreJointPose(const s2::JointPose& pose);
 	
 }; // FileStorer
 

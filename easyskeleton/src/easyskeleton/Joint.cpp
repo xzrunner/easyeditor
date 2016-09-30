@@ -6,7 +6,6 @@
 #include <SM_Calc.h>
 #include <shaderlab.h>
 #include <sprite2/S2_RVG.h>
-#include <sprite2/JointMath.h>
 
 #include <algorithm>
 
@@ -19,9 +18,8 @@ Joint::Joint(ee::Sprite* spr, const sm::vec2& offset)
 	: m_parent(NULL)
 	, m_skin(spr, -offset)
 {
-	s2::JointPose src_world(m_skin.spr->GetCenter(), m_skin.spr->GetAngle()),
-		      local(-m_skin.pose.trans, -m_skin.pose.rot);
-	m_world_pose = s2::JointMath::Local2World(src_world, local);
+	s2::WorldPose src(m_skin.spr->GetCenter(), m_skin.spr->GetAngle());
+	m_world = s2::local2world(src, -m_skin.offset);
 }
 
 Joint::~Joint()
@@ -38,9 +36,9 @@ Joint::~Joint()
 void Joint::Draw() const
 {
 	s2::RVG::SetColor(s2::Color(51, 204, 51, 128));
-	s2::RVG::Circle(m_world_pose.trans, RADIUS, true);
+	s2::RVG::Circle(m_world.pos, RADIUS, true);
 	s2::RVG::SetColor(s2::Color(204, 51, 51, 128));
-	s2::RVG::Circle(m_world_pose.trans, RADIUS, false);
+	s2::RVG::Circle(m_world.pos, RADIUS, false);
 
 	if (m_parent)
 	{
@@ -75,26 +73,27 @@ void Joint::Draw() const
 
 void Joint::UpdateToJoint()
 {
-	m_world_pose = s2::JointMath::Local2World(m_parent->m_world_pose, m_local_pose);
+	m_world = s2::local2world(m_parent->m_world, m_local);
 	m_skin.Update(this);
 	UpdateChildren();
 }
 
 void Joint::UpdateToSkin()
 {
-	s2::JointPose src_world(m_skin.spr->GetCenter(), m_skin.spr->GetAngle()),
-		          local(-m_skin.pose.trans, -m_skin.pose.rot);
-	m_world_pose = s2::JointMath::Local2World(src_world, local);
+	s2::WorldPose src(m_skin.spr->GetCenter(), m_skin.spr->GetAngle());
+	m_world = s2::local2world(src, -m_skin.offset);
 	if (m_parent) {
-		m_local_pose = s2::JointMath::World2Local(m_parent->GetWorldPose(), m_world_pose);
+		m_local = s2::world2local(m_parent->GetWorldPose(), m_world);
 	}
 	UpdateChildren();
 }
 
 void Joint::Translate(const sm::vec2& trans)
 {
-	m_local_pose.trans += trans;
-	m_world_pose.trans += trans;
+	m_world.pos += trans;
+	if (m_parent) {
+		m_local = s2::world2local(m_parent->m_world, m_world);
+	}
 	for (int i = 0, n = m_children.size(); i < n; ++i) 
 	{
 		Joint* c = m_children[i];
@@ -105,21 +104,19 @@ void Joint::Translate(const sm::vec2& trans)
 
 void Joint::Rotate(float rot)
 {
-	m_local_pose.rot += rot;
-	m_world_pose.rot += rot;
+	m_local.rot += rot;
+	m_world.angle += rot;
 }
 
 void Joint::SetWorldPos(const sm::vec2& pos, bool static_skin)
 {
 	if (static_skin) {
-		m_skin.spr->Translate(pos - m_world_pose.trans);
-		m_world_pose.trans = pos;
+		m_skin.spr->Translate(pos - m_world.pos);
+		m_world.pos = pos;
 	} else {
-		m_world_pose.trans = pos;
-
-		s2::JointPose src_world(m_skin.spr->GetCenter(), m_skin.spr->GetAngle());
-		m_skin.pose.trans = -s2::JointMath::World2Local(src_world, pos);
-		m_skin.pose.rot = 0;
+		m_world.pos = pos;
+		s2::WorldPose src(m_skin.spr->GetCenter(), m_skin.spr->GetAngle());
+		m_skin.offset = -s2::world2local(src, pos);
 	}
 }
 
@@ -132,7 +129,7 @@ bool Joint::Connect(Joint* child)
 	}
 	for (int i = 0, n = m_children.size(); i < n; ++i) {
 		if (m_children[i] == child) {
-			return false;
+			return true;
 		}
 	}
 
@@ -189,9 +186,9 @@ void Joint::UpdateChildren()
 /* class Joint::Skin                                                    */
 /************************************************************************/
 
-Joint::Skin::Skin(ee::Sprite* spr, const sm::vec2& pos)
+Joint::Skin::Skin(ee::Sprite* spr, const sm::vec2& offset)
 	: spr(spr)
-	, pose(pos, 0)
+	, offset(offset)
 {
 	if (this->spr) {
 		this->spr->AddReference();
@@ -207,9 +204,9 @@ Joint::Skin::~Skin()
 
 void Joint::Skin::Update(const Joint* joint)
 {
-	s2::JointPose dst = s2::JointMath::Local2World(joint->m_world_pose, pose);
-	spr->SetAngle(dst.rot);
-	spr->Translate(dst.trans - spr->GetCenter());
+	s2::WorldPose dst = s2::local2world(joint->m_world, offset);
+	spr->SetAngle(dst.angle);
+	spr->Translate(dst.pos - spr->GetCenter());
 }
 
 }

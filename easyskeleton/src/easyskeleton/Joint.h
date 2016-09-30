@@ -4,7 +4,7 @@
 #include <CU_RefCountObj.h>
 #include <CU_Uncopyable.h>
 #include <SM_Vector.h>
-#include <sprite2/JointPose.h>
+#include <sprite2/JointCoords.h>
 
 #include <vector>
 
@@ -27,7 +27,7 @@ public:
 	void Translate(const sm::vec2& trans);
 	void Rotate(float rot);
 	
-	const sm::vec2& GetWorldPos() const { return m_world_pose.trans; }
+	const sm::vec2& GetWorldPos() const { return m_world.pos; }
 	void SetWorldPos(const sm::vec2& pos, bool static_skin);
 
 	const Joint* GetParent() const { return m_parent; }
@@ -37,12 +37,12 @@ public:
 
 	void Clear();
 
-	const s2::JointPose& GetWorldPose() const { return m_world_pose; }
-	const s2::JointPose& GetLocalPose() const { return m_local_pose; }
-	const s2::JointPose& GetSkinPose() const { return m_skin.pose; }
+	const s2::WorldPose& GetWorldPose() const { return m_world; }
+	const s2::LocalPose& GetLocalPose() const { return m_local; }
+	const sm::vec2& GetSkinPose() const { return m_skin.offset; }
 
-	void SetWorldPose(const s2::JointPose& pose) { m_world_pose = pose; }
-	void SetLocalPose(const s2::JointPose& pose) { m_local_pose = pose; }
+	void SetWorldPose(const s2::WorldPose& pose) { m_world = pose; }
+	void SetLocalPose(const s2::LocalPose& pose) { m_local = pose; }
 
 public:
 	static const float RADIUS;
@@ -54,9 +54,9 @@ private:
 	struct Skin : private cu::Uncopyable
 	{
 		ee::Sprite* spr;
-		s2::JointPose pose;
+		sm::vec2 offset;
 
-		Skin(ee::Sprite* spr, const sm::vec2& pos);
+		Skin(ee::Sprite* spr, const sm::vec2& offset);
 		~Skin();
 
 		void Update(const Joint* joint);
@@ -66,9 +66,9 @@ private:
 private:
 	Joint* m_parent;
 	std::vector<Joint*> m_children;	
-
-	s2::JointPose m_world_pose;
-	s2::JointPose m_local_pose;
+	
+	s2::WorldPose m_world;
+	s2::LocalPose m_local;
 
 	Skin m_skin;
 	

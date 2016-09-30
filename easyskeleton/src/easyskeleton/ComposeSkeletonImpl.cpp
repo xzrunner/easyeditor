@@ -11,8 +11,6 @@
 #include <ee/panel_msg.h>
 #include <ee/SpriteSelection.h>
 
-#include <sprite2/JointMath.h>
-
 namespace eskeleton
 {
 
@@ -94,8 +92,8 @@ void ComposeSkeletonImpl::OnPopMenuSelected(int type)
 			ee::Sprite* spr = m_sprites_impl->QuerySpriteByPos(m_first_pos);
 			if (spr) {
 				Bone* bone = (Bone*)(spr->GetUserData());
-				s2::JointPose src_world(spr->GetCenter(), spr->GetAngle());
-				sm::vec2 local = s2::JointMath::World2Local(src_world, m_first_pos);
+				s2::WorldPose src(spr->GetCenter(), spr->GetAngle());
+				sm::vec2 local = s2::world2local(src, m_first_pos);
 				bone->AddJoint(new Joint(spr, local));
 			}
 		}

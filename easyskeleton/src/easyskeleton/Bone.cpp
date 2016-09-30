@@ -76,10 +76,11 @@ bool Bone::AutoAbsorb(const Bone* bone)
 			Joint* dst = bone->m_joints[j];
 			if (sm::dis_pos_to_pos(src->GetWorldPos(), dst->GetWorldPos()) < Joint::RADIUS * 2) 
 			{
-				src->SetWorldPos(dst->GetWorldPos(), true);
-				Update();
-				dst->Connect(src);
-				return true;
+				if (dst->Connect(src)) {
+					src->SetWorldPos(dst->GetWorldPos(), true);
+					Update();
+					return true;
+				}
 			}
 		}
 		if (const Joint* parent = src->GetParent()) {

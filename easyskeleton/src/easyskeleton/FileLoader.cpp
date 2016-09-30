@@ -6,7 +6,8 @@
 #include <ee/SpriteFactory.h>
 #include <ee/Sprite.h>
 
-#include <gum/SkeletonSymLoader.h>
+#include <sprite2/JointCoords.h>
+#include <gum/JointCoordsIO.h>
 
 #include <fstream>
 
@@ -38,42 +39,43 @@ void FileLoader::LoadSprite(const std::string& dir, const Json::Value& val, std:
 
 void FileLoader::LoadSkeleton(const Json::Value& val, const std::vector<ee::Sprite*>& sprs)
 {
-	assert(val.size() == sprs.size());
-
-	std::vector<Joint*> joints;
-
-	for (int i = 0, n = val.size(); i < n; ++i) {
-		Bone* bone = new Bone;
-		bone->SetSkin(sprs[i]);
-		const Json::Value& joint_val = val[i]["joint"];
-		for (int j = 0, m = joint_val.size(); j < m; ++j) {
-			s2::JointPose skin_pose;
-			gum::SkeletonSymLoader::LoadJointPose(joint_val[j]["skin_pose"], skin_pose);
-			Joint* joint = new Joint(sprs[i], -skin_pose.trans);
-			bone->AddJoint(joint);
-			joints.push_back(joint);
-		}
-		sprs[i]->SetUserData(bone);
-	}
-
-	int idx = 0;
-	for (int i = 0, n = val.size(); i < n; ++i) {
-		const Json::Value& joint_val = val[i]["joint"];
-		for (int j = 0, m = joint_val.size(); j < m; ++j) {
-			Joint* joint = joints[idx++];
-
-			s2::JointPose world_pose, local_pose;
-			gum::SkeletonSymLoader::LoadJointPose(joint_val[j]["world_pose"], world_pose);
-			gum::SkeletonSymLoader::LoadJointPose(joint_val[j]["local_pose"], local_pose);
-			joint->SetWorldPose(world_pose);
-			joint->SetLocalPose(local_pose);
-
-			if (joint_val[j].isMember("parent")) {
-				int id = joint_val[j]["parent"].asInt();
-				joints[id]->Connect(joint);
-			}
-		}
-	}
+ 	assert(val.size() == sprs.size());
+ 
+ 	std::vector<Joint*> joints;
+ 
+ 	for (int i = 0, n = val.size(); i < n; ++i) {
+ 		Bone* bone = new Bone;
+ 		bone->SetSkin(sprs[i]);
+ 		const Json::Value& joint_val = val[i]["joint"];
+ 		for (int j = 0, m = joint_val.size(); j < m; ++j) {
+			sm::vec2 offset;
+			gum::JointCoordsIO::Load(joint_val[j]["skin_pose"], offset);
+ 			Joint* joint = new Joint(sprs[i], -offset);
+ 			bone->AddJoint(joint);
+ 			joints.push_back(joint);
+ 		}
+ 		sprs[i]->SetUserData(bone);
+ 	}
+ 
+ 	int idx = 0;
+ 	for (int i = 0, n = val.size(); i < n; ++i) {
+ 		const Json::Value& joint_val = val[i]["joint"];
+ 		for (int j = 0, m = joint_val.size(); j < m; ++j) {
+ 			Joint* joint = joints[idx++];
+			
+			s2::WorldPose world;
+			s2::LocalPose local;
+			gum::JointCoordsIO::Load(joint_val[j]["world_pose"], world);
+			gum::JointCoordsIO::Load(joint_val[j]["local_pose"], local);
+ 			joint->SetWorldPose(world);
+ 			joint->SetLocalPose(local);
+ 
+ 			if (joint_val[j].isMember("parent")) {
+ 				int id = joint_val[j]["parent"].asInt();
+ 				joints[id]->Connect(joint);
+ 			}
+ 		}
+ 	}
 }
 
 }

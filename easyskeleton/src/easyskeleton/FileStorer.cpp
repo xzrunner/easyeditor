@@ -6,6 +6,8 @@
 #include <ee/Sprite.h>
 #include <ee/Symbol.h>
 
+#include <gum/JointCoordsIO.h>
+
 #include <fstream>
 
 namespace eskeleton
@@ -73,19 +75,13 @@ Json::Value FileStorer::StoreJoint(const Joint* joint, const std::map<const Join
 		assert(itr != map_joint_id.end());
 		val["parent"] = itr->second;
 	}
-	val["world_pose"] = StoreJointPose(joint->GetWorldPose());
-	val["local_pose"] = StoreJointPose(joint->GetLocalPose());
-	val["skin_pose"] = StoreJointPose(joint->GetSkinPose());
-	return val;
-}
 
-Json::Value FileStorer::StoreJointPose(const s2::JointPose& pose)
-{
-	Json::Value val;
-	val["trans_x"] = pose.trans.x;
-	val["trans_y"] = pose.trans.y;
-	val["rot"] = pose.rot;
-	val["scale"] = pose.scale;
+	const s2::WorldPose& world = joint->GetWorldPose();
+	const s2::LocalPose& local = joint->GetLocalPose();
+	const sm::vec2& skin = joint->GetSkinPose();
+	gum::JointCoordsIO::Store(val["world_pose"], joint->GetWorldPose());
+	gum::JointCoordsIO::Store(val["local_pose"], joint->GetLocalPose());
+	gum::JointCoordsIO::Store(val["skin_pose"], joint->GetSkinPose());
 	return val;
 }
 
