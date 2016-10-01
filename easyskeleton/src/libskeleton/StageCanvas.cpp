@@ -1,32 +1,33 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
-#include "Sprite.h"
 
 #include <ee/SpriteRenderer.h>
 #include <ee/EditPanelImpl.h>
+
+#include <sprite2/Skeleton.h>
 
 namespace libskeleton
 {
 
 StageCanvas::StageCanvas(StagePanel* editpanel, wxGLContext* glctx)
 	: ee::CameraCanvas(editpanel, editpanel->GetStageImpl(), glctx)
-	, m_spr(editpanel->GetSprite())
+	, m_sk(editpanel->GetSkeleton())
 {
-	if (m_spr) {
-		m_spr->AddReference();
+	if (m_sk) {
+		m_sk->AddReference();
 	}
 }
 
 StageCanvas::~StageCanvas()
 {
-	if (m_spr) {
-		m_spr->RemoveReference();
+	if (m_sk) {
+		m_sk->RemoveReference();
 	}
 }
 
 void StageCanvas::OnDrawSprites() const
 {
-	ee::SpriteRenderer::Instance()->Draw(m_spr);
+	m_sk->Draw(s2::RenderParams());
 
 	m_stage->DrawEditOP();
 }

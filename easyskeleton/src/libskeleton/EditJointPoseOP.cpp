@@ -18,19 +18,19 @@ namespace libskeleton
 
 EditJointPoseOP::EditJointPoseOP(StagePanel* stage)
 	: ee::ZoomViewOP(stage, stage->GetStageImpl(), false)
+	, m_sk(stage->GetSkeleton())
 	, m_selected(NULL)
 	, m_op_state(NULL)
 {
-	m_spr = const_cast<Sprite*>(stage->GetSprite());
-	if (m_spr) {
-		m_spr->AddReference();
+	if (m_sk) {
+		m_sk->AddReference();
 	}
 }
 
 EditJointPoseOP::~EditJointPoseOP()
 {
-	if (m_spr) {
-		m_spr->RemoveReference();
+	if (m_sk) {
+		m_sk->RemoveReference();
 	}
 	if (m_selected) {
 		m_selected->RemoveReference();
@@ -147,12 +147,15 @@ bool EditJointPoseOP::OnDraw() const
 	if (ee::ZoomViewOP::OnDraw()) {
 		return true;
 	}
+	if (!m_sk) {
+		return false;
+	}
 
-	if (m_spr) {
-		const Symbol* sym = dynamic_cast<const Symbol*>(m_spr->GetSymbol());
-		s2::RenderParams params;
-		params.mt = m_spr->GetTransMatrix();
-		sym->DrawSkeleton(params, m_spr, m_selected);
+	s2::RenderParams params;
+	const std::vector<s2::Joint*>& joints = m_sk->GetAllJoints();
+	for (int i = 0, n = joints.size(); i < n; ++i) {
+		s2::Joint* joint = joints[i];
+		dynamic_cast<Joint*>(joint)->DrawSkeleton(params, joint == m_selected);
 	}
 
 	return false;
@@ -169,13 +172,12 @@ bool EditJointPoseOP::Clear()
 
 bool EditJointPoseOP::Select(const sm::vec2& pos)
 {
-	if (!m_spr) {
+	if (!m_sk) {
 		return false;
 	}
 
 	const s2::Joint* old_selected = m_selected;
-	const Symbol* sym = dynamic_cast<const Symbol*>(m_spr->GetSymbol());
-	const s2::Joint* joint = sym->GetSkeleton()->QueryByPos(pos);
+	const s2::Joint* joint = m_sk->QueryByPos(pos);
 	m_selected = dynamic_cast<Joint*>(const_cast<s2::Joint*>(joint));
 	return old_selected != m_selected;
 }

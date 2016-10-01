@@ -5,16 +5,16 @@
 
 class wxGLContext;
 
+namespace s2 { class Skeleton; }
+
 namespace libskeleton
 {
-
-class Sprite;
 
 class StagePanel : public ee::EditPanel
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		wxGLContext* glctx, Sprite* spr);
+		wxGLContext* glctx, const s2::Skeleton* sk);
 	virtual ~StagePanel();
 
 	//
@@ -22,16 +22,10 @@ public:
 	//
 	virtual bool UpdateStage();
 
-	const Sprite* GetSprite() const { return m_spr; }
+	const s2::Skeleton* GetSkeleton() const { return m_sk; }
 
 private:
-	Sprite*		m_spr;
-
-	sm::vec2	m_position;
-	float		m_angle;
-	sm::vec2	m_scale;
-	sm::vec2	m_shear;
-	sm::vec2	m_offset;
+	const s2::Skeleton* m_sk;
 
 }; // StagePanel
 

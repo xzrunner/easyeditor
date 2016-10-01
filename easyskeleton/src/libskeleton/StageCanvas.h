@@ -5,11 +5,12 @@
 
 class wxGLContext;
 
+namespace s2 { class Skeleton; }
+
 namespace libskeleton
 {
 
 class StagePanel;
-class Sprite;
 
 class StageCanvas : public ee::CameraCanvas
 {
@@ -21,7 +22,7 @@ protected:
 	virtual void OnDrawSprites() const;
 
 private:
-	const Sprite* m_spr;
+	const s2::Skeleton* m_sk;
 
 }; // StageCanvas
 

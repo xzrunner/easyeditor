@@ -6,6 +6,7 @@
 #include <SM_Vector.h>
 
 namespace ee { class ArrangeSpriteState; }
+namespace s2 { class Skeleton; }
 
 namespace libskeleton
 {
@@ -36,7 +37,7 @@ private:
 	void ChangeOPState(ee::ArrangeSpriteState* state);
 
 private:
-	Sprite* m_spr;
+	const s2::Skeleton* m_sk;
 
 	Joint* m_selected;
 

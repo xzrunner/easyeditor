@@ -3,14 +3,14 @@
 
 #include <ee/Sprite.h>
 
-#include <sprite2/DummySprite.h>
+#include <sprite2/SkeletonSprite.h>
 
 namespace libskeleton
 {
 
 class Symbol;
 
-class Sprite : public s2::DummySprite, public ee::Sprite
+class Sprite : public s2::SkeletonSprite, public ee::Sprite
 {
 public:
 	Sprite(const Sprite& spr);
