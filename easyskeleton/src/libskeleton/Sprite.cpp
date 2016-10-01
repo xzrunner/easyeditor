@@ -1,6 +1,8 @@
 #include "Sprite.h"
 #include "Symbol.h"
 
+#include <gum/SkeletonIO.h>
+
 namespace libskeleton
 {
 
@@ -29,6 +31,18 @@ Sprite::Sprite(Symbol* sym)
 ee::Sprite* Sprite::Create(ee::Symbol* sym) 
 {
 	return new Sprite(static_cast<Symbol*>(sym));
+}
+
+void Sprite::Load(const Json::Value& val, const std::string& dir)
+{
+	ee::Sprite::Load(val);
+	gum::SkeletonIO::Load(val["skeleton"], m_pose);
+}
+
+void Sprite::Store(Json::Value& val, const std::string& dir) const
+{
+	ee::Sprite::Store(val);
+	gum::SkeletonIO::Store(val["skeleton"], m_pose);
 }
 
 }

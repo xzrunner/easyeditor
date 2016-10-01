@@ -6,7 +6,7 @@
 #include <ee/SpriteFactory.h>
 #include <ee/Sprite.h>
 
-#include <gum/JointPoseIO.h>
+#include <gum/SkeletonIO.h>
 
 #include <fstream>
 
@@ -48,7 +48,7 @@ void FileLoader::LoadSkeleton(const Json::Value& val, const std::vector<ee::Spri
  		const Json::Value& joint_val = val[i]["joint"];
  		for (int j = 0, m = joint_val.size(); j < m; ++j) {
 			s2::JointPose pose;
-			gum::JointPoseIO::Load(joint_val[j]["skin_pose"], pose);
+			gum::SkeletonIO::Load(joint_val[j]["skin_pose"], pose);
  			Joint* joint = new Joint(sprs[i], -pose);
  			bone->AddJoint(joint);
  			joints.push_back(joint);
@@ -64,8 +64,8 @@ void FileLoader::LoadSkeleton(const Json::Value& val, const std::vector<ee::Spri
 			
 			s2::JointPose world;
 			s2::JointPose local;
-			gum::JointPoseIO::Load(joint_val[j]["world_pose"], world);
-			gum::JointPoseIO::Load(joint_val[j]["local_pose"], local);
+			gum::SkeletonIO::Load(joint_val[j]["world_pose"], world);
+			gum::SkeletonIO::Load(joint_val[j]["local_pose"], local);
  			joint->SetWorldPose(world);
  			joint->SetLocalPose(local);
  

@@ -6,7 +6,7 @@
 #include <ee/Sprite.h>
 #include <ee/Symbol.h>
 
-#include <gum/JointPoseIO.h>
+#include <gum/SkeletonIO.h>
 
 #include <fstream>
 
@@ -76,9 +76,9 @@ Json::Value FileStorer::StoreJoint(const Joint* joint, const std::map<const s2::
 		val["parent"] = itr->second;
 	}
 
-	gum::JointPoseIO::Store(val["world_pose"], joint->GetWorldPose());
-	gum::JointPoseIO::Store(val["local_pose"], joint->GetLocalPose());
-	gum::JointPoseIO::Store(val["skin_pose"], joint->GetSkinPose());
+	gum::SkeletonIO::Store(val["world_pose"], joint->GetWorldPose());
+	gum::SkeletonIO::Store(val["local_pose"], joint->GetLocalPose());
+	gum::SkeletonIO::Store(val["skin_pose"], joint->GetSkinPose());
 	return val;
 }
 
