@@ -8,6 +8,7 @@ namespace ee { class LibraryPanel; class PropertySettingPanel; class LibraryPage
 namespace eanim
 {
 
+class LibraryPanel;
 class ToolbarPanel;
 class StagePanel;
 class LayersPanel;
@@ -34,7 +35,7 @@ private:
 
 public:
 	// left
-	ee::LibraryPanel* library;
+	LibraryPanel* library;
 	ee::PropertySettingPanel* property;
 
 	ee::LibraryPage* img_page;

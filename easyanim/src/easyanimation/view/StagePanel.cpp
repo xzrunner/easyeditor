@@ -8,6 +8,7 @@
 #include "dataset/SpriteUserData.h"
 #include "dataset/DataMgr.h"
 #include "view/ViewMgr.h"
+#include "view/LibraryPanel.h"
 #include "message/messages.h"
 
 #include <ee/panel_msg.h>

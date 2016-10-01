@@ -2,6 +2,7 @@
 #include "ArrangeSpriteOP.h"
 
 #include "view/ViewMgr.h"
+#include "view/LibraryPanel.h"
 #include "view/StagePanel.h"
 #include "view/KeysPanel.h"
 #include "frame/FileIO.h"

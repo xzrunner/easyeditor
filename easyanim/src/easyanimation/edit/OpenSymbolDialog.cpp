@@ -6,6 +6,7 @@
 #include <ee/EditPanelImpl.h>
 
 #include <easymesh.h>
+#include <easyskeleton.h>
 
 #include <wx/wx.h>
 
@@ -41,6 +42,9 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 	if (emesh::Sprite* mesh = dynamic_cast<emesh::Sprite*>(spr))
 	{
 		emesh::EditDialog dlg(m_wnd, mesh, m_stage->GetCanvas()->GetGLContext());
+		dlg.ShowModal();
+	} else if (libskeleton::Sprite* sk = dynamic_cast<libskeleton::Sprite*>(spr)) {
+		libskeleton::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), sk);
 		dlg.ShowModal();
 	}
 

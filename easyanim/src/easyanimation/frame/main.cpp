@@ -13,6 +13,7 @@
 #include <easytrail.h>
 #include <easyicon.h>
 #include <easytext.h>
+#include <easyskeleton.h>
 
 #include <ee/SymbolFactory.h>
 #include <ee/SpriteFactory.h>
@@ -51,6 +52,9 @@ static void InitSymbolCreators()
 
 	ee::SymbolFactory::RegisterCreator(ee::FileType::GetTag(ee::FILE_TRAIL), &etrail::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(ee::FileType::GetTag(ee::FILE_TRAIL), &etrail::Sprite::Create);
+
+	ee::SymbolFactory::RegisterCreator(ee::FileType::GetTag(ee::FILE_SKELETON), &libskeleton::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(ee::FileType::GetTag(ee::FILE_SKELETON), &libskeleton::Sprite::Create);
 }
 
 bool MyApp::OnInit()

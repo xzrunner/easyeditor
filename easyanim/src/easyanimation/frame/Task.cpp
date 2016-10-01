@@ -7,16 +7,8 @@
 #include "view/ToolbarPanel.h"
 #include "view/TimeLinePanel.h"
 #include "view/ViewMgr.h"
+#include "view/LibraryPanel.h"
 #include "message/messages.h"
-
-#include <easycomplex.h>
-#include <easyanim.h>
-#include <easymesh.h>
-#include <easymask.h>
-#include <easyscale9.h>
-#include <easyicon.h>
-#include <easyparticle3d.h>
-#include <easytrail.h>
 
 #include <ee/panel_msg.h>
 #include <ee/SymbolMgr.h>
@@ -26,7 +18,6 @@
 #include <ee/ExceptionDlg.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/subject_id.h>
-#include <ee/LibraryImagePage.h>
 #include <ee/ViewlistPanel.h>
 
 #include <wx/splitter.h>
@@ -136,18 +127,7 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 	ViewMgr* mgr = ViewMgr::Instance();
 
 	// library
-	ee::LibraryPanel* library = new ee::LibraryPanel(split);
-	wxWindow* nb = library->GetNotebook();
-	library->AddPage(ViewMgr::Instance()->img_page = new ee::LibraryImagePage(nb));
-	library->AddPage(new ecomplex::LibraryPage(nb));
-	library->AddPage(new eanim::LibraryPage(nb));
-	library->AddPage(new emesh::LibraryPage(nb));
-	library->AddPage(new emask::LibraryPage(nb));
-	library->AddPage(new escale9::LibraryPage(nb));
-	library->AddPage(new eicon::LibraryPage(nb));
-	library->AddPage(new eparticle3d::LibraryPage(nb));
-	library->AddPage(new etrail::LibraryPage(nb));
-	mgr->library = library;
+	mgr->library = new LibraryPanel(split);;
 
 	// property
 	mgr->property = new PropertySettingPanel(split);

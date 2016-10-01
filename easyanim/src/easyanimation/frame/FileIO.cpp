@@ -7,6 +7,7 @@
 #include "view/ViewMgr.h"
 #include "view/ToolbarPanel.h"
 #include "view/StagePanel.h"
+#include "view/LibraryPanel.h"
 #include "message/messages.h"
 
 #include <ee/FileHelper.h>

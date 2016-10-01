@@ -1,9 +1,9 @@
-#ifndef _EASYCOMPLEX_LIBRARY_PANEL_H_
-#define _EASYCOMPLEX_LIBRARY_PANEL_H_
+#ifndef _EASYANIM_LIBRARY_PANEL_H_
+#define _EASYANIM_LIBRARY_PANEL_H_
 
 #include <ee/LibraryPanel.h>
 
-namespace ecomplex
+namespace eanim
 {
 
 class LibraryPanel : public ee::LibraryPanel
@@ -15,4 +15,4 @@ public:
 
 }
 
-#endif // _EASYCOMPLEX_LIBRARY_PANEL_H_
+#endif // _EASYANIM_LIBRARY_PANEL_H_
