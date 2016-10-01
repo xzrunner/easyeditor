@@ -48,9 +48,9 @@ void FileLoader::LoadSkeleton(const Json::Value& val, const std::vector<ee::Spri
  		bone->SetSkin(sprs[i]);
  		const Json::Value& joint_val = val[i]["joint"];
  		for (int j = 0, m = joint_val.size(); j < m; ++j) {
-			sm::vec2 offset;
-			gum::JointCoordsIO::Load(joint_val[j]["skin_pose"], offset);
- 			Joint* joint = new Joint(sprs[i], -offset);
+			s2::LocalPose pose;
+			gum::JointCoordsIO::Load(joint_val[j]["skin_pose"], pose);
+ 			Joint* joint = new Joint(sprs[i], -pose);
  			bone->AddJoint(joint);
  			joints.push_back(joint);
  		}
@@ -72,7 +72,7 @@ void FileLoader::LoadSkeleton(const Json::Value& val, const std::vector<ee::Spri
  
  			if (joint_val[j].isMember("parent")) {
  				int id = joint_val[j]["parent"].asInt();
- 				joints[id]->Connect(joint);
+ 				joints[id]->ConnectChild(joint);
  			}
  		}
  	}

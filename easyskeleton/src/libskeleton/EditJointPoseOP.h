@@ -5,12 +5,14 @@
 
 #include <SM_Vector.h>
 
-namespace s2 { class Skeleton; class Joint; }
+namespace ee { class ArrangeSpriteState; }
 
 namespace libskeleton
 {
 
 class StagePanel;
+class Sprite;
+class Joint;
 
 class EditJointPoseOP : public ee::ZoomViewOP
 {
@@ -29,14 +31,16 @@ public:
 	virtual bool Clear();
 
 private:
-	void Select(const sm::vec2& pos);
+	bool Select(const sm::vec2& pos);
+
+	void ChangeOPState(ee::ArrangeSpriteState* state);
 
 private:
-	const s2::Skeleton* m_skeleton;
+	Sprite* m_spr;
 
-	s2::Joint* m_selected;
+	Joint* m_selected;
 
-	sm::vec2 m_last_left_pos, m_last_right_pos;
+	ee::ArrangeSpriteState* m_op_state;
 
 }; // EditJointPoseOP
 

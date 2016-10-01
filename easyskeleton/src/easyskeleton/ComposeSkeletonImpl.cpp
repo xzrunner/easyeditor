@@ -72,7 +72,7 @@ void ComposeSkeletonImpl::OnMouseDrag(int x, int y)
  	if (m_selected_joint)
  	{
  		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
- 		m_selected_joint->SetWorldPos(pos, false);
+ 		m_selected_joint->BindSkin(pos, false);
  		ee::SetCanvasDirtySJ::Instance()->SetDirty();
  	}
  	else
@@ -93,8 +93,8 @@ void ComposeSkeletonImpl::OnPopMenuSelected(int type)
 			if (spr) {
 				Bone* bone = (Bone*)(spr->GetUserData());
 				s2::WorldPose src(spr->GetCenter(), spr->GetAngle());
-				sm::vec2 local = s2::world2local(src, m_first_pos);
-				bone->AddJoint(new Joint(spr, local));
+				s2::LocalPose pose = s2::world2local(src, s2::WorldPose(m_first_pos, spr->GetAngle()));
+				bone->AddJoint(new Joint(spr, pose));
 			}
 		}
 		break;

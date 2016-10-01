@@ -1,6 +1,8 @@
 #include "EditDialog.h"
 #include "StagePanel.h"
 
+#include <ee/ConfirmDialog.h>
+
 #include <wx/sizer.h>
 
 namespace libskeleton
@@ -32,24 +34,18 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 		return;
 	}
 
-// 	ee::ConfirmDialog dlg(this);
-// 	int val = dlg.ShowModal();
-// 	if (val == wxID_YES) 
-// 	{
-// 		const std::string& filepath = m_sym->GetFilepath();
-// 		if (filepath != "group") {
-// 			FileStorer::Store(filepath.c_str(), m_sym);
-// 			m_sym->RefreshThumbnail(filepath, true);
-// 		}
-// 		// 		m_sym->InitBounding();
-// 		// 		ee::SpriteFactory::Instance()->UpdateBoundings(*m_sym);
-// 		Destroy();
-// 	} 
-// 	else if (val == wxID_NO) 
-// 	{
-// 		m_sym->LoadFromFile(m_sym->GetFilepath());
-// 		Destroy();
-// 	}
+	ee::ConfirmDialog dlg(this);
+	int val = dlg.ShowModal();
+	if (val == wxID_YES) 
+	{
+		// todo store to spr
+		Destroy();
+	} 
+	else if (val == wxID_NO) 
+	{
+//		m_sym->LoadFromFile(m_sym->GetFilepath());
+		Destroy();
+	}
 }
 
 }

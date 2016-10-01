@@ -6,6 +6,7 @@
 #include <ee/SpriteRenderer.h>
 
 #include <SM_Calc.h>
+#include <sprite2/BoundingBox.h>
 
 namespace eskeleton
 {
@@ -20,10 +21,8 @@ Bone::Bone(ee::Sprite* skin)
 {
 	if (m_skin) {
 		m_skin->AddReference();
-		sm::rect r = skin->GetSymbol()->GetBounding(m_skin);
-		m_joints.push_back(new Joint(m_skin, -sm::vec2(r.xmin, r.ymin)));
-		m_joints.push_back(new Joint(m_skin, -sm::vec2(r.xmax, r.ymax)));
 	}
+	InitJoints();
 }
 
 Bone::~Bone()
@@ -53,7 +52,7 @@ void Bone::Draw() const
 		ee::SpriteRenderer::Instance()->Draw(m_skin);
 	}
 	for (int i = 0, n = m_joints.size(); i < n; ++i) {
-		m_joints[i]->Draw();
+		m_joints[i]->DrawSkeleton(s2::RenderParams());
 	}
 }
 
@@ -61,7 +60,7 @@ Joint* Bone::QueryJoint(const sm::vec2& pos) const
 {
 	for (int i = 0, n = m_joints.size(); i < n; ++i) {
 		Joint* joint = m_joints[i];
-		if (sm::dis_pos_to_pos(pos, joint->GetWorldPos()) < Joint::RADIUS) {
+		if (sm::dis_pos_to_pos(pos, joint->GetWorldPose().pos) < Joint::RADIUS) {
 			return joint;
 		}
 	}
@@ -74,18 +73,18 @@ bool Bone::AutoAbsorb(const Bone* bone)
 		Joint* src = m_joints[i];
 		for (int j = 0, m = bone->m_joints.size(); j < m; ++j) {
 			Joint* dst = bone->m_joints[j];
-			if (sm::dis_pos_to_pos(src->GetWorldPos(), dst->GetWorldPos()) < Joint::RADIUS * 2) 
+			if (sm::dis_pos_to_pos(src->GetWorldPose().pos, dst->GetWorldPose().pos) < Joint::RADIUS * 2) 
 			{
-				if (dst->Connect(src)) {
-					src->SetWorldPos(dst->GetWorldPos(), true);
+				if (dst->ConnectChild(src)) {
+					src->BindSkin(dst->GetWorldPose().pos, true);
 					Update();
 					return true;
 				}
 			}
 		}
-		if (const Joint* parent = src->GetParent()) {
-			if (sm::dis_pos_to_pos(src->GetWorldPos(), src->GetParent()->GetWorldPos()) > Joint::RADIUS * 2) {
-				src->Deconnect();
+		if (const s2::Joint* parent = src->GetParent()) {
+			if (sm::dis_pos_to_pos(src->GetWorldPose().pos, src->GetParent()->GetWorldPose().pos) > Joint::RADIUS * 2) {
+				src->DeconnectParent();
 			}
 		}
 	}
@@ -116,7 +115,7 @@ bool Bone::Rotate(float angle)
 
 	base->Rotate(angle);
 
-	m_skin->SetOffset(sm::rotate_vector(base->GetWorldPos() - m_skin->GetCenter(), -m_skin->GetAngle()));
+	m_skin->SetOffset(sm::rotate_vector(base->GetWorldPose().pos - m_skin->GetCenter(), -m_skin->GetAngle()));
 	m_skin->Rotate(angle);
 
 	for (int i = 0, n = m_joints.size(); i < n; ++i) {
@@ -149,6 +148,25 @@ void Bone::RemoveJoint(Joint* joint)
 	}
 	joint->Clear();
 	joint->RemoveReference();
+}
+
+void Bone::InitJoints()
+{
+	if (!m_skin) {
+		return;
+	}
+
+	sm::rect r = m_skin->GetBounding()->GetSize();
+	sm::vec2 center = m_skin->GetCenter();
+	sm::vec2 min(r.xmin, r.ymin), max(r.xmax, r.ymax);
+	m_joints.push_back(new Joint(m_skin, s2::LocalPose(
+		sm::dis_pos_to_pos(center, min),
+		sm::get_line_angle(center, min)
+		)));
+	m_joints.push_back(new Joint(m_skin, s2::LocalPose(
+		sm::dis_pos_to_pos(center, max),
+		sm::get_line_angle(center, max)
+		)));
 }
 
 }

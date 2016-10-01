@@ -43,7 +43,7 @@ Json::Value FileStorer::StoreSprite(const std::vector<ee::Sprite*>& sprs, const 
 
 Json::Value FileStorer::StoreSkeleton(const std::vector<ee::Sprite*>& sprs)
 {
-	std::map<const Joint*, int> map_joint_id;
+	std::map<const s2::Joint*, int> map_joint_id;
 	int joint_id = 0;
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
 		Bone* bone = (Bone*)(sprs[i]->GetUserData());
@@ -66,19 +66,16 @@ Json::Value FileStorer::StoreSkeleton(const std::vector<ee::Sprite*>& sprs)
 	return val;
 }
 
-Json::Value FileStorer::StoreJoint(const Joint* joint, const std::map<const Joint*, int>& map_joint_id)
+Json::Value FileStorer::StoreJoint(const Joint* joint, const std::map<const s2::Joint*, int>& map_joint_id)
 {
 	Json::Value val;
-	const Joint* parent = joint->GetParent();
+	const s2::Joint* parent = joint->GetParent();
 	if (parent) {
-		std::map<const Joint*, int>::const_iterator itr = map_joint_id.find(parent);
+		std::map<const s2::Joint*, int>::const_iterator itr = map_joint_id.find(parent);
 		assert(itr != map_joint_id.end());
 		val["parent"] = itr->second;
 	}
 
-	const s2::WorldPose& world = joint->GetWorldPose();
-	const s2::LocalPose& local = joint->GetLocalPose();
-	const sm::vec2& skin = joint->GetSkinPose();
 	gum::JointCoordsIO::Store(val["world_pose"], joint->GetWorldPose());
 	gum::JointCoordsIO::Store(val["local_pose"], joint->GetLocalPose());
 	gum::JointCoordsIO::Store(val["skin_pose"], joint->GetSkinPose());

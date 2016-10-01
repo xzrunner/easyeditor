@@ -1,15 +1,17 @@
 #include "EditJointPoseOP.h"
+#include "TranslateJointState.h"
+#include "RotateJointState.h"
 #include "StagePanel.h"
 #include "Symbol.h"
 #include "Sprite.h"
+#include "Joint.h"
 
 #include <ee/EditPanelImpl.h>
 #include <ee/panel_msg.h>
 
-#include <SM_Calc.h>
-#include <sprite2/Joint.h>
 #include <sprite2/Skeleton.h>
 #include <sprite2/S2_RVG.h>
+#include <sprite2/RenderParams.h>
 
 namespace libskeleton
 {
@@ -17,25 +19,24 @@ namespace libskeleton
 EditJointPoseOP::EditJointPoseOP(StagePanel* stage)
 	: ee::ZoomViewOP(stage, stage->GetStageImpl(), false)
 	, m_selected(NULL)
+	, m_op_state(NULL)
 {
-	const Sprite* spr = stage->GetSprite();
-	const Symbol* sym = dynamic_cast<const Symbol*>(spr->GetSymbol());
-	m_skeleton = sym->GetSkeleton();
-	if (m_skeleton) {
-		m_skeleton->AddReference();
+	m_spr = const_cast<Sprite*>(stage->GetSprite());
+	if (m_spr) {
+		m_spr->AddReference();
 	}
-
-	m_last_left_pos.MakeInvalid();
-	m_last_right_pos.MakeInvalid();
 }
 
 EditJointPoseOP::~EditJointPoseOP()
 {
+	if (m_spr) {
+		m_spr->RemoveReference();
+	}
 	if (m_selected) {
 		m_selected->RemoveReference();
 	}
-	if (m_skeleton) {
-		m_skeleton->RemoveReference();
+	if (m_op_state) {
+		delete m_op_state;
 	}
 }
 
@@ -47,7 +48,11 @@ bool EditJointPoseOP::OnMouseLeftDown(int x, int y)
 
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	Select(pos);
-	m_last_left_pos = pos;
+
+	if (m_selected) {
+		ChangeOPState(new RotateJointState(m_selected, pos));
+		m_op_state->OnMousePress(pos);
+	}
 
 	return false;
 }
@@ -58,7 +63,12 @@ bool EditJointPoseOP::OnMouseLeftUp(int x, int y)
 		return true;
 	}
 
-	m_last_left_pos.MakeInvalid();
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
+	if (m_op_state) 
+	{
+		m_op_state->OnMouseRelease(pos);
+		ChangeOPState(NULL);
+	}	
 
 	return false;
 }
@@ -71,7 +81,11 @@ bool EditJointPoseOP::OnMouseRightDown(int x, int y)
 
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	Select(pos);
-	m_last_right_pos = pos;
+
+	if (m_selected) {
+		ChangeOPState(new TranslateJointState(m_selected, pos));
+		m_op_state->OnMousePress(pos);
+	}
 
 	return false;
 }
@@ -82,7 +96,12 @@ bool EditJointPoseOP::OnMouseRightUp(int x, int y)
 		return true;
 	}
 
-	m_last_right_pos.MakeInvalid();
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
+	if (m_op_state) 
+	{
+		m_op_state->OnMouseRelease(pos);
+		ChangeOPState(NULL);
+	}
 
 	return false;
 }
@@ -94,9 +113,13 @@ bool EditJointPoseOP::OnMouseMove(int x, int y)
 	}
 
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-	Select(pos);
+	if (Select(pos)) {
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
+	}
 
-	ee::SetCanvasDirtySJ::Instance()->SetDirty();
+	if (m_op_state) {
+		m_op_state->OnMouseMove(pos);
+	}
 
 	return false;
 }
@@ -112,21 +135,7 @@ bool EditJointPoseOP::OnMouseDrag(int x, int y)
 	}
 
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-	// translate
-	if (m_last_left_pos.IsValid()) 
-	{
-		m_selected->Translate(pos - m_last_left_pos);
-		m_last_left_pos = pos;
-		ee::SetCanvasDirtySJ::Instance()->SetDirty();
-	} 
-	// rotate
-	else if (m_last_right_pos.IsValid()) 
-	{
-		const s2::Sprite* spr = m_selected->GetSkinSpr();
-		sm::vec2 center = spr->GetPosition() + spr->GetOffset();
-		float rot = sm::get_angle_in_direction(center, m_last_right_pos, pos);
-		m_selected->Rotate(rot);
-		m_last_right_pos = pos;
+	if (m_op_state && m_op_state->OnMouseDrag(pos)) {
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
@@ -139,9 +148,11 @@ bool EditJointPoseOP::OnDraw() const
 		return true;
 	}
 
-	if (m_selected) {
-		s2::RVG::SetColor(s2::Color(204, 51, 51, 128));
-		s2::RVG::Circle(m_selected->GetWorldPos(), 8, true);
+	if (m_spr) {
+		const Symbol* sym = dynamic_cast<const Symbol*>(m_spr->GetSymbol());
+		s2::RenderParams params;
+		params.mt = m_spr->GetTransMatrix();
+		sym->DrawSkeleton(params, m_spr, m_selected);
 	}
 
 	return false;
@@ -156,13 +167,25 @@ bool EditJointPoseOP::Clear()
 	return false;
 }
 
-void EditJointPoseOP::Select(const sm::vec2& pos)
+bool EditJointPoseOP::Select(const sm::vec2& pos)
 {
-	const s2::Joint* old_selected = m_selected;
-	m_selected = const_cast<s2::Joint*>(m_skeleton->QueryByPos(pos));
-	if (old_selected != m_selected) {
-		ee::SetCanvasDirtySJ::Instance()->SetDirty();
+	if (!m_spr) {
+		return false;
 	}
+
+	const s2::Joint* old_selected = m_selected;
+	const Symbol* sym = dynamic_cast<const Symbol*>(m_spr->GetSymbol());
+	const s2::Joint* joint = sym->GetSkeleton()->QueryByPos(pos);
+	m_selected = dynamic_cast<Joint*>(const_cast<s2::Joint*>(joint));
+	return old_selected != m_selected;
+}
+
+void EditJointPoseOP::ChangeOPState(ee::ArrangeSpriteState* state)
+{
+	if (m_op_state) {
+		delete m_op_state;
+	}
+	m_op_state = state;
 }
 
 }

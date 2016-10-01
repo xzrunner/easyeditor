@@ -185,6 +185,14 @@
 			Name="dataset"
 			>
 			<File
+				RelativePath="..\..\..\src\libskeleton\Joint.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libskeleton\Joint.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libskeleton\Sprite.cpp"
 				>
 			</File>
@@ -224,6 +232,46 @@
 				RelativePath="..\..\..\src\libskeleton\EditJointPoseOP.h"
 				>
 			</File>
+			<Filter
+				Name="translate"
+				>
+				<File
+					RelativePath="..\..\..\src\libskeleton\TranslateJointAOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libskeleton\TranslateJointAOP.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libskeleton\TranslateJointState.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libskeleton\TranslateJointState.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="rotate"
+				>
+				<File
+					RelativePath="..\..\..\src\libskeleton\RotateJointAOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libskeleton\RotateJointAOP.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libskeleton\RotateJointState.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libskeleton\RotateJointState.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>

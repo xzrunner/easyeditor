@@ -237,14 +237,6 @@
 				RelativePath="..\..\..\src\easyskeleton\Joint.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\src\easyskeleton\Skeleton.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyskeleton\Skeleton.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="edit"

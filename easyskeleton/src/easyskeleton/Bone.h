@@ -38,6 +38,9 @@ public:
 	const std::vector<Joint*>& GetAllJoints() const { return m_joints; }
 
 private:
+	void InitJoints();
+
+private:
 	ee::Sprite* m_skin;
 
 	std::vector<Joint*> m_joints;
