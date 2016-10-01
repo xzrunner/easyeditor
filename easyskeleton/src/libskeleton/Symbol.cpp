@@ -44,7 +44,7 @@ void Symbol::LoadResources()
 	public:
 		Loader(s2::SkeletonSymbol* sym) : gum::SkeletonSymLoader(sym) {}
 	protected:
-		virtual s2::Joint* CreateJoint(s2::Sprite* spr, const s2::LocalPose& joint_pose) const {
+		virtual s2::Joint* CreateJoint(s2::Sprite* spr, const s2::JointPose& joint_pose) const {
 			return new Joint(spr, joint_pose);
 		}
 	}; // Loader

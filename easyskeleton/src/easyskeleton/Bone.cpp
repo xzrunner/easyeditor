@@ -60,7 +60,7 @@ Joint* Bone::QueryJoint(const sm::vec2& pos) const
 {
 	for (int i = 0, n = m_joints.size(); i < n; ++i) {
 		Joint* joint = m_joints[i];
-		if (sm::dis_pos_to_pos(pos, joint->GetWorldPose().pos) < Joint::RADIUS) {
+		if (sm::dis_pos_to_pos(pos, joint->GetWorldPose().trans) < Joint::RADIUS) {
 			return joint;
 		}
 	}
@@ -73,17 +73,17 @@ bool Bone::AutoAbsorb(const Bone* bone)
 		Joint* src = m_joints[i];
 		for (int j = 0, m = bone->m_joints.size(); j < m; ++j) {
 			Joint* dst = bone->m_joints[j];
-			if (sm::dis_pos_to_pos(src->GetWorldPose().pos, dst->GetWorldPose().pos) < Joint::RADIUS * 2) 
+			if (sm::dis_pos_to_pos(src->GetWorldPose().trans, dst->GetWorldPose().trans) < Joint::RADIUS * 2) 
 			{
 				if (dst->ConnectChild(src)) {
-					src->BindSkin(dst->GetWorldPose().pos, true);
+					src->BindSkin(dst->GetWorldPose().trans, true);
 					Update();
 					return true;
 				}
 			}
 		}
 		if (const s2::Joint* parent = src->GetParent()) {
-			if (sm::dis_pos_to_pos(src->GetWorldPose().pos, src->GetParent()->GetWorldPose().pos) > Joint::RADIUS * 2) {
+			if (sm::dis_pos_to_pos(src->GetWorldPose().trans, src->GetParent()->GetWorldPose().trans) > Joint::RADIUS * 2) {
 				src->DeconnectParent();
 			}
 		}
@@ -115,7 +115,7 @@ bool Bone::Rotate(float angle)
 
 	base->Rotate(angle);
 
-	m_skin->SetOffset(sm::rotate_vector(base->GetWorldPose().pos - m_skin->GetCenter(), -m_skin->GetAngle()));
+	m_skin->SetOffset(sm::rotate_vector(base->GetWorldPose().trans - m_skin->GetCenter(), -m_skin->GetAngle()));
 	m_skin->Rotate(angle);
 
 	for (int i = 0, n = m_joints.size(); i < n; ++i) {
@@ -159,14 +159,8 @@ void Bone::InitJoints()
 	sm::rect r = m_skin->GetBounding()->GetSize();
 	sm::vec2 center = m_skin->GetCenter();
 	sm::vec2 min(r.xmin, r.ymin), max(r.xmax, r.ymax);
-	m_joints.push_back(new Joint(m_skin, s2::LocalPose(
-		sm::dis_pos_to_pos(center, min),
-		sm::get_line_angle(center, min)
-		)));
-	m_joints.push_back(new Joint(m_skin, s2::LocalPose(
-		sm::dis_pos_to_pos(center, max),
-		sm::get_line_angle(center, max)
-		)));
+	m_joints.push_back(new Joint(m_skin, s2::JointPose(min - center, 0)));
+	m_joints.push_back(new Joint(m_skin, s2::JointPose(max - center, 0)));
 }
 
 }

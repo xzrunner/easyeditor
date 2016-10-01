@@ -50,7 +50,7 @@ bool EditJointPoseOP::OnMouseLeftDown(int x, int y)
 	Select(pos);
 
 	if (m_selected) {
-		ChangeOPState(new RotateJointState(m_selected, pos));
+		ChangeOPState(new TranslateJointState(m_selected, pos));
 		m_op_state->OnMousePress(pos);
 	}
 
@@ -83,7 +83,7 @@ bool EditJointPoseOP::OnMouseRightDown(int x, int y)
 	Select(pos);
 
 	if (m_selected) {
-		ChangeOPState(new TranslateJointState(m_selected, pos));
+		ChangeOPState(new RotateJointState(m_selected, pos));
 		m_op_state->OnMousePress(pos);
 	}
 

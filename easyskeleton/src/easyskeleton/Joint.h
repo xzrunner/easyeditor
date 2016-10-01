@@ -9,7 +9,7 @@ namespace eskeleton
 class Joint : public libskeleton::Joint
 {
 public:
-	Joint(ee::Sprite* spr, const s2::LocalPose& joint_pose);
+	Joint(ee::Sprite* spr, const s2::JointPose& joint_pose);
 
 	virtual void Translate(const sm::vec2& trans);
 	virtual void Rotate(float rot);

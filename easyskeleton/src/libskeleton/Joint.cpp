@@ -13,7 +13,7 @@
 namespace libskeleton
 {
 
-Joint::Joint(s2::Sprite* spr, const s2::LocalPose& joint_pose)
+Joint::Joint(s2::Sprite* spr, const s2::JointPose& joint_pose)
 	: s2::Joint(spr, joint_pose)
 {
 }
@@ -22,17 +22,17 @@ void Joint::DrawSkeleton(const s2::RenderParams& params, bool selected) const
 {
 	if (selected) {
 		s2::RVG::SetColor(s2::Color(204, 51, 51, 128));
-		s2::RVG::Circle(params.mt * m_world.pos, RADIUS, true);
+		s2::RVG::Circle(params.mt * m_world_pose.trans, RADIUS, true);
 	} else {
 		s2::RVG::SetColor(s2::Color(51, 204, 51, 128));
-		s2::RVG::Circle(params.mt * m_world.pos, RADIUS, true);
+		s2::RVG::Circle(params.mt * m_world_pose.trans, RADIUS, true);
 		s2::RVG::SetColor(s2::Color(204, 51, 51, 128));
-		s2::RVG::Circle(params.mt * m_world.pos, RADIUS, false);
+		s2::RVG::Circle(params.mt * m_world_pose.trans, RADIUS, false);
 	}
 
 	if (m_parent)
 	{
-		sm::vec2 s = params.mt * m_world.pos;
+		sm::vec2 s = params.mt * m_world_pose.trans;
 		sm::vec2 e = params.mt * m_skin.spr->GetCenter() * 2 - s;
 
 		const float w = 0.1f;
@@ -64,10 +64,6 @@ void Joint::DrawSkeleton(const s2::RenderParams& params, bool selected) const
 	{
 		s2::RVG::Cross(params.mt * m_skin.spr->GetCenter(), 50, 50);
 	}
-
-	std::vector<sm::vec2> bounding;
-	m_skin.spr->GetBounding()->GetBoundPos(bounding);
-	s2::RVG::Polyline(bounding, true);
 
 	// fix me
 	sl::Shader* shader = sl::ShaderMgr::Instance()->GetShader();

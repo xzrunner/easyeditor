@@ -6,16 +6,16 @@
 namespace eskeleton
 {
 
-Joint::Joint(ee::Sprite* spr, const s2::LocalPose& joint_pose)
+Joint::Joint(ee::Sprite* spr, const s2::JointPose& joint_pose)
 	: libskeleton::Joint(spr, joint_pose)
 {
 }
 
 void Joint::Translate(const sm::vec2& trans)
 {
-	m_world.pos += trans;
+	m_world_pose.trans += trans;
 	if (m_parent) {
-		m_local = s2::world2local(m_parent->GetWorldPose(), m_world);
+		m_local_pose = s2::world2local(m_parent->GetWorldPose(), m_world_pose);
 	}
 	for (int i = 0, n = m_children.size(); i < n; ++i) 
 	{
@@ -27,23 +27,23 @@ void Joint::Translate(const sm::vec2& trans)
 
 void Joint::Rotate(float rot)
 {
-	m_local.rot += rot;
-	m_world.angle += rot;
+	m_local_pose.rot += rot;
+	m_world_pose.rot += rot;
 }
 
 void Joint::UpdateToJoint()
 {
-	m_world = s2::local2world(m_parent->GetWorldPose(), m_local);
+	m_world_pose = s2::local2world(m_parent->GetWorldPose(), m_local_pose);
 	m_skin.Update(this);
 	UpdateChildren();
 }
 
 void Joint::UpdateToSkin()
 {
-	s2::WorldPose src(m_skin.spr->GetCenter(), m_skin.spr->GetAngle());
-	m_world = s2::local2world(src, -m_skin.pose);
+	s2::JointPose src(m_skin.spr->GetCenter(), m_skin.spr->GetAngle());
+	m_world_pose = s2::local2world(src, -m_skin.skin_local);
 	if (m_parent) {
-		m_local = s2::world2local(m_parent->GetWorldPose(), m_world);
+		m_local_pose = s2::world2local(m_parent->GetWorldPose(), m_world_pose);
 	}
 	UpdateChildren();
 }
@@ -51,12 +51,12 @@ void Joint::UpdateToSkin()
 void Joint::BindSkin(const sm::vec2& world_pos, bool static_skin)
 {
 	if (static_skin) {
-		m_skin.spr->Translate(world_pos - m_world.pos);
-		m_world.pos = world_pos;
+		m_skin.spr->Translate(world_pos - m_world_pose.trans);
+		m_world_pose.trans = world_pos;
 	} else {
-		m_world.pos = world_pos;
-		s2::WorldPose src(m_skin.spr->GetCenter(), m_skin.spr->GetAngle());
-		m_skin.pose = -s2::world2local(src, m_world);
+		m_world_pose.trans = world_pos;
+		s2::JointPose src(m_skin.spr->GetCenter(), m_skin.spr->GetAngle());
+		m_skin.skin_local = -s2::world2local(src, m_world_pose);
 	}
 }
 

@@ -48,9 +48,7 @@ bool RotateJointState::OnMouseDrag(const sm::vec2& pos)
 
 void RotateJointState::Rotate(const sm::vec2& dst)
 {
-	const s2::Sprite* spr = m_joint->GetSkinSpr();
-	sm::vec2 center = spr->GetPosition() + spr->GetOffset();
-	float rot = sm::get_angle_in_direction(center, m_last_pos, dst);
+	float rot = sm::get_angle_in_direction(m_joint->GetWorldPose().trans, m_last_pos, dst);
 	m_joint->Rotate(rot);
 	m_angle += rot;
 }
