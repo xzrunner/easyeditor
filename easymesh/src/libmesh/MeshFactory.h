@@ -1,7 +1,7 @@
 #ifndef _EASYMESH_MESH_FACTORY_H_
 #define _EASYMESH_MESH_FACTORY_H_
 
-#include "config.h"
+#include <gum/MeshType.h>
 
 namespace ee { class Symbol; }
 
@@ -15,7 +15,7 @@ class MeshFactory
 public:
 	Mesh* CreateMesh(const ee::Symbol* base) const;
 
-	void SetShapeType(MeshType type);
+	void SetShapeType(gum::MeshType type);
 
 public:
 	static MeshFactory* Instance();
@@ -24,7 +24,7 @@ private:
 	MeshFactory() {}
 
 private:
-	MeshType m_type;
+	gum::MeshType m_type;
 
 private:
 	static MeshFactory* m_instance;

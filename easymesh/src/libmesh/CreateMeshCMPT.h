@@ -3,6 +3,8 @@
 
 #include <ee/EditCMPT.h>
 
+#include <gum/MeshType.h>
+
 namespace emesh
 {
 
@@ -14,18 +16,19 @@ public:
 		StagePanel* stage);
 	virtual ~CreateMeshCMPT();
 
+	void SetEditOP(gum::MeshType type);
+
 protected:
 	virtual wxSizer* InitLayout();
 
 private:
-	void onChangeType(wxCommandEvent& event);
-	void onCopy(wxCommandEvent& event);
-	void onClear(wxCommandEvent& event);
+	void OnCopy(wxCommandEvent& event);
+	void OnClear(wxCommandEvent& event);
 
 private:
 	StagePanel* m_stage;
 
-	ee::EditOP *m_mesh_op, *m_strip_op, *m_skeleton_op;
+	ee::EditOP *m_network_op, *m_strip_op, *m_skeleton_op;
 
 }; // CreateMeshCMPT
 

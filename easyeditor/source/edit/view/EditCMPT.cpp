@@ -33,6 +33,16 @@ void EditCMPT::SetEditOP(EditOP* op)
 	LoadEditOP(op);
 }
 
+EditOP* EditCMPT::GetChildEditOP()
+{
+	int index = m_edit_choice->GetSelection();
+	if (index < static_cast<int>(m_children.size())) {
+		return m_children[index]->m_editop;
+	} else {
+		return NULL;
+	}
+}
+
 wxSizer* EditCMPT::InitChildrenLayout()
 {
 	m_child_sz = m_vertical ? new wxBoxSizer(wxVERTICAL) : new wxBoxSizer(wxHORIZONTAL);

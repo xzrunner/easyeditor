@@ -49,7 +49,7 @@ public:
 	bool RemoveInner(const sm::vec2& pos);
 	sm::vec2* QueryInner(const sm::vec2& pos);
 
-	static const char* GetType() { return "network"; }
+	static std::string GetTypeName() { return "network"; }
 
 private:
 	const Network& operator = (const Network& nw) {}

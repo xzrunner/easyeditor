@@ -11,6 +11,7 @@ namespace emesh
 {
 
 class StagePanel;
+class ToolbarPanel;
 
 class Task : public ee::Task
 {
@@ -27,14 +28,13 @@ public:
 
 	virtual const ee::EditPanel* GetEditPanel() const;
 
-	emesh::StagePanel* getStagePanel() { return m_stage; }
+	StagePanel* getStagePanel() { return m_stage; }
 
 private:
-	void initWindows(wxSplitterWindow* leftHorizontalSplitter, 
-		wxSplitterWindow* leftVerticalSplitter, wxSplitterWindow* rightVerticalSplitter,
-		wxWindow*& library, wxWindow*& property, wxWindow*& stage, wxWindow*& toolbar);
-
 	void InitLayout();
+	wxWindow* InitLayoutLeft(wxWindow* parent);
+	wxWindow* InitLayoutCenter(wxWindow* parent);
+	wxWindow* InitLayoutRight(wxWindow* parent);
 
 private:
 	wxWindow* m_root;
@@ -43,7 +43,8 @@ private:
 
 	ee::LibraryPanel* m_library;
 	ee::PropertySettingPanel* m_property;
-	emesh::StagePanel* m_stage;
+	StagePanel* m_stage;
+	ToolbarPanel* m_toolbar;
 
 }; // Task
 

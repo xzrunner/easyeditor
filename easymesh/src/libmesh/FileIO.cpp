@@ -2,10 +2,12 @@
 #include "Symbol.h"
 #include "Strip.h"
 #include "Network.h"
+#include "Skeleton.h"
 
 #include <ee/FileHelper.h>
 #include <ee/panel_msg.h>
 #include <ee/SymbolMgr.h>
+#include <ee/Exception.h>
 
 #include <fstream>
 
@@ -61,10 +63,14 @@ void FileIO::Load(const char* filepath, Symbol* sym)
 
 	std::string type = value["type"].asString();
 	Mesh* mesh = NULL;
-	if (type == Strip::GetType()) {
+	if (type == Strip::GetTypeName()) {
 		mesh = new Strip(base_symbol);
-	} else if (type == Network::GetType()) {
+	} else if (type == Network::GetTypeName()) {
 		mesh = new Network(base_symbol);
+	} else if (type == Skeleton::GetTypeName()) {
+		mesh = new Skeleton(base_symbol);
+	} else {
+		throw ee::Exception("Unknown mesh type.");
 	}
 	if (mesh)
 	{

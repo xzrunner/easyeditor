@@ -8,13 +8,6 @@ namespace emesh
 
 static const char* FILE_TAG = "mesh";
 
-enum MeshType
-{
-	ST_NETWORK = 0,
-	ST_STRIP,
-	ST_SKELETON,
-};
-
 }
 
 #endif // _EASYMESH_CONFIG_H_

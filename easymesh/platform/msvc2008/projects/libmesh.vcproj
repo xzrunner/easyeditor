@@ -279,14 +279,6 @@
 					RelativePath="..\..\..\src\libmesh\MeshFactory.h"
 					>
 				</File>
-				<File
-					RelativePath="..\..\..\src\libmesh\MeshSerialization.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libmesh\MeshSerialization.h"
-					>
-				</File>
 			</Filter>
 			<Filter
 				Name="skeleton"
@@ -321,7 +313,7 @@
 				>
 			</File>
 			<Filter
-				Name="create"
+				Name="1.create"
 				>
 				<File
 					RelativePath="..\..\..\src\libmesh\CreateMeshCMPT.cpp"
@@ -357,7 +349,7 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="edit"
+				Name="2.edit"
 				>
 				<File
 					RelativePath="..\..\..\src\libmesh\EditMeshCMPT.cpp"
@@ -376,6 +368,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\libmesh\EditSkeletonOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\EditSkeletonOP.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libmesh\SelectNodesOP.cpp"
 					>
 				</File>
@@ -385,7 +385,7 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="uv"
+				Name="3.uv"
 				>
 				<File
 					RelativePath="..\..\..\src\libmesh\EditUVCMPT.cpp"

@@ -35,7 +35,7 @@ public:
  	virtual void Reset();
  	virtual void Clear();
 
-	static const char* GetType() { return "skeleton"; }
+	static std::string GetTypeName() { return "skeleton"; }
 
 }; // Skeleton
 

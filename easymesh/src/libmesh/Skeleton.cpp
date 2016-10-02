@@ -1,5 +1,4 @@
 #include "Skeleton.h"
-#include "MeshSerialization.h"
 
 #include <ee/Symbol.h>
 #include <ee/Shape.h>
@@ -9,6 +8,7 @@
 #include <sprite2/PolylineShape.h>
 #include <sprite2/MeshTransform.h>
 #include <gum/JsonSerializer.h>
+#include <gum/MeshIO.h>
 
 namespace emesh
 {
@@ -38,19 +38,21 @@ void Skeleton::Load(const Json::Value& value)
 	}
 
 	std::vector<sm::vec2> vertices;
-	gum::JsonSerializer::Load(value["shape"]["vertices"], vertices);
+	gum::JsonSerializer::Load(value["vertices"], vertices);
 	m_shape = new eshape::ChainShape(vertices, true);
 
 	RefreshTriangles();
 
+	gum::MeshIO::Load(value, m_skeleton);
+
 	s2::MeshTransform trans;
-	MeshSerialization::Load(trans, value);
+	gum::MeshIO::Load(value, trans);
 	trans.StoreToMesh(this);
 }
 
 void Skeleton::Store(Json::Value& value) const
 {
-	value["type"] = GetType();
+	value["type"] = GetTypeName();
 
 	if (!m_shape) {
 		return;
@@ -58,8 +60,10 @@ void Skeleton::Store(Json::Value& value) const
 
 	gum::JsonSerializer::Store(m_shape->GetVertices(), value["vertices"]);
 
+	gum::MeshIO::Store(value, m_skeleton);
+
 	s2::MeshTransform trans;
-	MeshSerialization::Load(trans, value);
+	gum::MeshIO::Load(value, trans);
 	trans.StoreToMesh(this);
 }
 

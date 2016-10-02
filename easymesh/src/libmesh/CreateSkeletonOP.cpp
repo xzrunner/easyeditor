@@ -45,15 +45,17 @@ bool CreateSkeletonOP::OnMouseLeftDown(int x, int y)
 			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 			return false;
 		}
- 		s2::MeshJoint* selected = const_cast<s2::MeshJoint*>(skeleton.QueryByPos(pos));
+ 		s2::MeshJoint* selected = skeleton.QueryByPos(pos);
 		if (selected) {
 			cu::RefCountObjAssign(m_selected, selected);
+			ee::SetCanvasDirtySJ::Instance()->SetDirty();
+			return false;
 		} else if (m_selected) {
 			s2::MeshJoint* joint = new s2::MeshJoint(m_selected, pos);
 			cu::RefCountObjAssign(m_selected, joint);
+			ee::SetCanvasDirtySJ::Instance()->SetDirty();
+			return false;
 		}
-		ee::SetCanvasDirtySJ::Instance()->SetDirty();
-		return false;
 	}
 
 	if (eshape::EditPolylineOP<eshape::DrawLoopOP, eshape::SelectNodesOP>::OnMouseLeftDown(x, y)) {
@@ -92,7 +94,7 @@ bool CreateSkeletonOP::OnMouseRightDown(int x, int y)
 	{
 		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 		s2::MeshSkeleton& skeleton = mesh->GetSkeleton();
-		s2::MeshJoint* selected = const_cast<s2::MeshJoint*>(skeleton.QueryByPos(pos));
+		s2::MeshJoint* selected = skeleton.QueryByPos(pos);
 		if (selected && selected != skeleton.GetRoot()) {
 			if (m_selected) {
 				m_selected->RemoveReference();
@@ -141,10 +143,6 @@ bool CreateSkeletonOP::OnMouseDrag(int x, int y)
 
 bool CreateSkeletonOP::OnDraw() const
 {
-	if (eshape::EditPolylineOP<eshape::DrawLoopOP, eshape::SelectNodesOP>::OnDraw()) {
-		return true;
-	}
-
 	if (Mesh* mesh = m_stage->GetMesh()) 
 	{
 		ee::SpriteRenderer::Instance()->Draw(mesh->GetBaseSymbol());
@@ -154,9 +152,11 @@ bool CreateSkeletonOP::OnDraw() const
 		skeleton.Draw(s2::RenderParams());
 		if (m_selected) {
 			s2::RVG::SetColor(s2::Color(204, 51, 51, 128));
-			s2::RVG::Circle(m_selected->GetWorldPos(), s2::MeshJoint::RADIUS, true);
+			s2::RVG::Circle(m_selected->GetWorldPose().trans, s2::MeshJoint::RADIUS, true);
 		}
 	}
+
+	eshape::EditPolylineOP<eshape::DrawLoopOP, eshape::SelectNodesOP>::OnDraw();
 
 	return false;
 }

@@ -3,10 +3,11 @@
 #include "FileIO.h"
 #include "Mesh.h"
 #include "PropertySetting.h"
-#include "MeshSerialization.h"
 
 #include <ee/FileHelper.h>
 #include <ee/SymbolMgr.h>
+
+#include <gum/MeshIO.h>
 
 namespace emesh
 {
@@ -38,7 +39,7 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 	ee::Sprite::Load(val);
 	
 	const Json::Value& mesh_val = val["mesh"];
-	MeshSerialization::Load(m_trans, mesh_val);
+	gum::MeshIO::Load(mesh_val, m_trans);
 	m_trans.StoreToMesh(dynamic_cast<Symbol*>(m_sym)->GetMesh());
 
 	if (!mesh_val["base_symbol"].isNull()) {
@@ -55,7 +56,7 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 	Json::Value mesh_val;
 
 //	m_trans.LoadFromMesh(m_sym->GetMesh());
-	MeshSerialization::Store(m_trans, mesh_val);
+	gum::MeshIO::Store(mesh_val, m_trans);
 
 	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(m_base);
 	mesh_val["base_symbol"] = ee::FileHelper::GetRelativePath(dir, sym->GetFilepath());

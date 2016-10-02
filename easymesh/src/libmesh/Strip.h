@@ -45,7 +45,7 @@ public:
 	sm::vec2* FindNode(const sm::vec2& p);
 	void MoveNode(sm::vec2* src, const sm::vec2& dst);
 
-	static const char* GetType() { return "strip"; }
+	static std::string GetTypeName() { return "strip"; }
 
 private:
 //	void InitBound();

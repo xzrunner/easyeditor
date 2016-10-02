@@ -21,6 +21,7 @@ public:
 	virtual void UpdateControlValue() {}
 
 	void SetEditOP(EditOP* op);
+	EditOP* GetChildEditOP();		// todo
 
 protected:
 	virtual wxSizer* InitLayout() = 0;

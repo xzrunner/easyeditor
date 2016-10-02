@@ -59,7 +59,7 @@ void Strip::Load(const Json::Value& value)
 
 void Strip::Store(Json::Value& value) const
 {
-	value["type"] = GetType();
+	value["type"] = GetTypeName();
 
 	value["width"] = m_width;
 	value["height"] = m_height;

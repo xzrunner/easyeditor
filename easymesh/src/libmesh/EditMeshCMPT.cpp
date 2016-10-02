@@ -1,5 +1,6 @@
 #include "EditMeshCMPT.h"
 #include "EditNetworkOP.h"
+#include "EditSkeletonOP.h"
 #include "StagePanel.h"
 #include "Mesh.h"
 
@@ -14,7 +15,28 @@ EditMeshCMPT::EditMeshCMPT(wxWindow* parent, const std::string& name,
 	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage(stage)
 {
-	m_editop = new EditNetworkOP(stage);
+	m_network_op = new EditNetworkOP(stage);
+	m_skeleton_op = new EditSkeletonOP(stage);
+	LoadEditOP(m_network_op);
+}
+
+EditMeshCMPT::~EditMeshCMPT()
+{
+	m_network_op->RemoveReference();
+	m_skeleton_op->RemoveReference();
+}
+
+void EditMeshCMPT::SetEditOP(gum::MeshType type)
+{
+	switch (type)
+	{
+	case gum::MESH_NETWORK: case gum::MESH_STRIP:
+		LoadEditOP(m_network_op);
+		break;
+	case gum::MESH_SKELETON:
+		LoadEditOP(m_skeleton_op);
+		break;
+	}
 }
 
 wxSizer* EditMeshCMPT::InitLayout()

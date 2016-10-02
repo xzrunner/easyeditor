@@ -3,6 +3,8 @@
 
 #include <ee/EditCMPT.h>
 
+#include <gum/MeshType.h>
+
 namespace emesh
 {
 
@@ -12,6 +14,9 @@ class EditMeshCMPT : public ee::EditCMPT
 public:
 	EditMeshCMPT(wxWindow* parent, const std::string& name,
 		StagePanel* stage);
+	virtual ~EditMeshCMPT();
+
+	void SetEditOP(gum::MeshType type);
 
 protected:
 	virtual wxSizer* InitLayout();
@@ -21,6 +26,8 @@ private:
 
 private:
 	StagePanel* m_stage;
+
+	ee::EditOP *m_network_op, *m_skeleton_op;
 
 }; // EditMeshCMPT
 

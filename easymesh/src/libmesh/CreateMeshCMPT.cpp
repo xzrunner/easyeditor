@@ -17,17 +17,33 @@ CreateMeshCMPT::CreateMeshCMPT(wxWindow* parent, const std::string& name,
 	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage(stage)
 {
-	m_mesh_op = new CreateNetworkOP(stage);
+	m_network_op = new CreateNetworkOP(stage);
 	m_strip_op= new CreateStripOP(stage);
 	m_skeleton_op = new CreateSkeletonOP(stage);
-	LoadEditOP(m_mesh_op);
+	LoadEditOP(m_network_op);
 }
 
 CreateMeshCMPT::~CreateMeshCMPT()
 {
-	m_mesh_op->RemoveReference();
+	m_network_op->RemoveReference();
 	m_strip_op->RemoveReference();
 	m_skeleton_op->RemoveReference();
+}
+
+void CreateMeshCMPT::SetEditOP(gum::MeshType type)
+{
+	switch (type)
+	{
+	case gum::MESH_NETWORK:
+		LoadEditOP(m_network_op);
+		break;
+	case gum::MESH_STRIP:
+		LoadEditOP(m_strip_op);
+		break;
+	case gum::MESH_SKELETON:
+		LoadEditOP(m_skeleton_op);
+		break;
+	}
 }
 
 wxSizer* CreateMeshCMPT::InitLayout()
@@ -35,61 +51,22 @@ wxSizer* CreateMeshCMPT::InitLayout()
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->AddSpacer(15);
 	{
-		wxArrayString choices;
-		choices.Add(wxT("network"));
-		choices.Add(wxT("strip"));
-		choices.Add(wxT("skeleton"));
-		wxRadioBox* typeChoice = new wxRadioBox(this, wxID_ANY, wxT("Type"), 
-			wxDefaultPosition, wxDefaultSize, choices, 3, wxRA_SPECIFY_ROWS);
-// 		typeChoice->SetSelection(1);
-// 		MeshFactory::Instance()->SetShapeType(ST_STRIP);
-		typeChoice->SetSelection(0);
-		MeshFactory::Instance()->SetShapeType(ST_NETWORK);
- 		Connect(typeChoice->GetId(), wxEVT_COMMAND_RADIOBOX_SELECTED, 
- 			wxCommandEventHandler(CreateMeshCMPT::onChangeType));
-		sizer->Add(typeChoice);
-	}
-	sizer->AddSpacer(15);
-	{
 		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Copy..."));
 		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
-			wxCommandEventHandler(CreateMeshCMPT::onCopy));
+			wxCommandEventHandler(CreateMeshCMPT::OnCopy));
 		sizer->Add(btn);
 	}
 	sizer->AddSpacer(10);
 	{
 		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Clear"));
 		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
-			wxCommandEventHandler(CreateMeshCMPT::onClear));
+			wxCommandEventHandler(CreateMeshCMPT::OnClear));
 		sizer->Add(btn);
 	}
 	return sizer;
 }
 
-void CreateMeshCMPT::onChangeType(wxCommandEvent& event)
-{
-	int idx = event.GetSelection();
-	switch (idx)
-	{
-	case 0:
-		MeshFactory::Instance()->SetShapeType(ST_NETWORK);
-		LoadEditOP(m_mesh_op);
-		m_stage->RecreateMesh();
-		break;
-	case 1:
-		MeshFactory::Instance()->SetShapeType(ST_STRIP);
-		LoadEditOP(m_strip_op);
-		m_stage->RecreateMesh();
-		break;
-	case 2:
-		MeshFactory::Instance()->SetShapeType(ST_SKELETON);
-		LoadEditOP(m_skeleton_op);
-		m_stage->RecreateMesh();
-		break;
-	}
-}
-
-void CreateMeshCMPT::onCopy(wxCommandEvent& event)
+void CreateMeshCMPT::OnCopy(wxCommandEvent& event)
 {
 // 	std::string tag = ee::FileType::GetTag(ee::FileType::e_mesh);
 // 	wxFileDialog dlg(this, wxT("Open"), wxEmptyString, wxEmptyString, 
@@ -101,7 +78,7 @@ void CreateMeshCMPT::onCopy(wxCommandEvent& event)
 // 	}
 }
 
-void CreateMeshCMPT::onClear(wxCommandEvent& event)
+void CreateMeshCMPT::OnClear(wxCommandEvent& event)
 {
 	if (Mesh* mesh = m_stage->GetMesh()) {
 		mesh->Clear();

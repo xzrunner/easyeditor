@@ -32,15 +32,27 @@ Task::~Task()
 
 void Task::Load(const char* filepath)
 {
-	if (ee::FileType::IsType(filepath, ee::FILE_MESH)) 
-	{
-		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-		Symbol* msymbol = static_cast<Symbol*>(sym);
-		m_stage->SetMeshSymbol(msymbol);
-		
-		m_library->LoadFromSymbolMgr(*ee::SymbolMgr::Instance());
-		sym->RemoveReference();
+	if (!ee::FileType::IsType(filepath, ee::FILE_MESH)) {
+		return;
 	}
+
+	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+	Symbol* mesh_sym = static_cast<Symbol*>(sym);
+	m_stage->SetMeshSymbol(mesh_sym);
+
+	gum::MeshType type;
+	s2::Mesh* mesh = mesh_sym->GetMesh();
+	if (dynamic_cast<Network*>(mesh)) {
+		type = gum::MESH_NETWORK;
+	} else if (dynamic_cast<Strip*>(mesh)) {
+		type = gum::MESH_STRIP;
+	} else if (dynamic_cast<Skeleton*>(mesh)) {
+		type = gum::MESH_SKELETON;
+	}
+	m_toolbar->SetEditType(type);
+
+	m_library->LoadFromSymbolMgr(*ee::SymbolMgr::Instance());
+	sym->RemoveReference();
 }
 
 void Task::Store(const char* filepath) const
@@ -59,51 +71,52 @@ const ee::EditPanel* Task::GetEditPanel() const
 	return m_stage; 
 }
 
-void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter, 
-	wxSplitterWindow* leftVerticalSplitter, wxSplitterWindow* rightVerticalSplitter,
-	wxWindow*& library, wxWindow*& property, wxWindow*& stage, wxWindow*& toolbar)
+void Task::InitLayout()
 {
-	library = m_library = new ee::LibraryPanel(leftHorizontalSplitter);
+	wxSplitterWindow* right_split = new wxSplitterWindow(m_parent);
+	wxSplitterWindow* left_split = new wxSplitterWindow(right_split);
+
+	wxWindow* left = InitLayoutLeft(left_split);
+	wxWindow* center = InitLayoutCenter(left_split);
+	wxWindow* right = InitLayoutRight(right_split);
+
+	left_split->SetSashGravity(0.2f);
+	left_split->SplitVertically(left, center);
+
+	right_split->SetSashGravity(0.85f);
+	right_split->SplitVertically(left_split, right);
+
+	m_root = right_split;
+}
+
+wxWindow* Task::InitLayoutLeft(wxWindow* parent)
+{
+	wxSplitterWindow* split = new wxSplitterWindow(parent);
+
+	m_library = new ee::LibraryPanel(split);
 	m_library->AddPage(new ee::LibraryImagePage(m_library->GetNotebook()));
 	m_library->AddPage(new ecomplex::LibraryPage(m_library->GetNotebook()));
 
-	property = m_property = new ee::PropertySettingPanel(leftHorizontalSplitter);
+	m_property = new ee::PropertySettingPanel(split);
 
-	stage = m_stage = new emesh::StagePanel(leftVerticalSplitter, m_parent, NULL, m_library);
-//	m_property->SetPropertySetting(new complex::PropertySetting(m_stage, m_sstage->getSymbol()));
-	m_property->SetEditPanel(m_stage->GetStageImpl());
+	split->SetSashGravity(0.55f);
+	split->SplitHorizontally(m_library, m_property);
 
-	toolbar = new emesh::ToolbarPanel(rightVerticalSplitter, m_stage, true, NULL);
+	return split;
 }
 
-void Task::InitLayout()
+wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
-	wxSplitterWindow* rightVerticalSplitter = new wxSplitterWindow(m_parent);
-	wxSplitterWindow* leftVerticalSplitter = new wxSplitterWindow(rightVerticalSplitter);
-	wxSplitterWindow* leftHorizontalSplitter = new wxSplitterWindow(leftVerticalSplitter);
+	StagePanel* stage = new StagePanel(parent, m_parent, NULL, m_library);
+	m_stage = stage;
+	m_property->SetEditPanel(m_stage->GetStageImpl());
+	return m_stage;
+}
 
-	wxWindow *library, *property, *stage, *toolbar;
-	initWindows(leftHorizontalSplitter, leftVerticalSplitter, rightVerticalSplitter,
-		library, property, stage, toolbar);
-
-	if (library || property)
-	{
-		if (library && property)
-		{
-			leftHorizontalSplitter->SetSashGravity(0.5f);
-			leftHorizontalSplitter->SplitHorizontally(library, property);
-		}
-		leftVerticalSplitter->SetSashGravity(0.2f);
-		leftVerticalSplitter->SplitVertically(leftHorizontalSplitter, stage);
-	}
-
-	if (toolbar)
-	{
-		rightVerticalSplitter->SetSashGravity(0.85f);
-		rightVerticalSplitter->SplitVertically(leftVerticalSplitter, toolbar);
-	}
-
-	m_root = rightVerticalSplitter;
+wxWindow* Task::InitLayoutRight(wxWindow* parent)
+{
+	m_toolbar = new ToolbarPanel(parent, m_stage, true, NULL);
+	return m_toolbar;
 }
 
 }
