@@ -27,9 +27,6 @@ public:
 	virtual bool Clear();
 
 private:
-	void RefreshAll();
-	
-private:
 	StagePanel* m_stage;
 
 	s2::MeshJoint* m_selected;

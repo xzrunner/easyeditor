@@ -41,9 +41,9 @@ void Skeleton::Load(const Json::Value& value)
 	gum::JsonSerializer::Load(value["vertices"], vertices);
 	m_shape = new eshape::ChainShape(vertices, true);
 
-	RefreshTriangles();
-
 	gum::MeshIO::Load(value, m_skeleton);
+
+	RefreshTriangles();
 
 	s2::MeshTransform trans;
 	gum::MeshIO::Load(value, trans);

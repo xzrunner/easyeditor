@@ -135,7 +135,7 @@ bool CreateSkeletonOP::OnMouseDrag(int x, int y)
 	if (m_selected) {
 		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 		m_selected->SetWorldPos(pos);
-		RefreshAll();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
 	return false;
@@ -173,13 +173,6 @@ bool CreateSkeletonOP::Clear()
 	}
 
 	return false;
-}
-
-void CreateSkeletonOP::RefreshAll()
-{
-	m_stage->UpdateSymbol();
-	ResetDirty();
-	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 }
