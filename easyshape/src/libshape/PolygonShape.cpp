@@ -20,7 +20,7 @@ PolygonShape::PolygonShape()
 
 PolygonShape::PolygonShape(const PolygonShape& polygon)
 	: s2::Shape(polygon)
-	, eshape::PolylineShape(polygon)
+	, eshape::EditedPolyShape(polygon)
 	, s2::PolygonShape(polygon)
 {
 }

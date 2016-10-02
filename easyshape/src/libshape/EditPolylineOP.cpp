@@ -82,7 +82,7 @@ OnDraw() const
 
 template <typename TBase, typename TSelected>
 bool eshape::EditPolylineOP<TBase, TSelected>::
-clear() 
+Clear() 
 {
 	if (TBase::Clear()) return true;
 	m_impl->Clear();

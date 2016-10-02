@@ -22,6 +22,7 @@ public:
 	virtual bool OnMouseDrag(int x, int y);
 
 	virtual bool OnDraw() const;
+	virtual bool Clear();
 
 private:
 	StagePanel* m_stage;

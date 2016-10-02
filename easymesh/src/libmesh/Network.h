@@ -16,7 +16,7 @@ class Network : public Mesh, public s2::NetworkMesh
 {
 public:
 	Network();
-	Network(const Network& nw);
+	Network(const Network& mesh);
 	Network(const ee::Symbol* base);
 
 // 	/**

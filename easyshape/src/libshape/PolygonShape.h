@@ -1,7 +1,7 @@
 #ifndef _EASYSHAPE_POLYGON_SHAPE_H_
 #define _EASYSHAPE_POLYGON_SHAPE_H_
 
-#include "PolylineShape.h"
+#include "EditedPolyShape.h"
 
 #include <sprite2/PolygonShape.h>
 
@@ -12,7 +12,7 @@ namespace eshape
 
 class Material;
 
-class PolygonShape : public PolylineShape, public s2::PolygonShape
+class PolygonShape : public EditedPolyShape, public s2::PolygonShape
 {
 public:
 	PolygonShape();

@@ -16,7 +16,8 @@ namespace emesh
 static const int NODE_RADIUS = 5;
 
 NetworkShape::NetworkShape(const NetworkShape& nw)
-	: ee::Shape(nw)
+	: s2::Shape(nw)
+	, eshape::EditedPolyShape(nw)
 	, s2::NetworkShape(nw)
 	, m_node_radius(nw.m_node_radius)
 {
@@ -25,7 +26,7 @@ NetworkShape::NetworkShape(const NetworkShape& nw)
 NetworkShape::NetworkShape(const std::vector<sm::vec2>& vertices,
 						   float node_radius)
 	: s2::Shape()
-	, ee::Shape()
+	, eshape::EditedPolyShape()
 	, s2::NetworkShape(vertices)
 	, m_node_radius(node_radius)
 {
@@ -86,6 +87,27 @@ sm::vec2* NetworkShape::QueryInner(const sm::vec2& pos)
 		}
 	}
 	return NULL;
+}
+
+void NetworkShape::AddVertex(int index, const sm::vec2& pos)
+{
+	eshape::PolylineEditor::AddVertex(m_vertices, m_bounding, index, pos);
+}
+
+void NetworkShape::RemoveVertex(const sm::vec2& pos)
+{
+	eshape::PolylineEditor::RemoveVertex(m_vertices, m_bounding, pos);
+}
+
+void NetworkShape::ChangeVertex(const sm::vec2& from, const sm::vec2& to)
+{
+	eshape::PolylineEditor::ChangeVertex(m_vertices, m_bounding, from, to);
+}
+
+void NetworkShape::SetVertices(const std::vector<sm::vec2>& vertices)
+{
+	m_vertices = vertices;
+	UpdateBounding();
 }
 
 }

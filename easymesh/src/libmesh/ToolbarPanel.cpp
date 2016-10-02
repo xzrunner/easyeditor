@@ -1,6 +1,6 @@
 #include "ToolbarPanel.h"
-#include "CreateNWCMPT.h"
-#include "EditNWCMPT.h"
+#include "CreateMeshCMPT.h"
+#include "EditMeshCMPT.h"
 #include "EditUVCMPT.h"
 #include "StagePanel.h"
 #include "Sprite.h"
@@ -15,9 +15,9 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage,
 {
 	if (full)
 	{
-		AddChild(new CreateNWCMPT(this, "Create", stage));
+		AddChild(new CreateMeshCMPT(this, "Create", stage));
 	}
-	AddChild(new EditNWCMPT(this, "Edit", stage));
+	AddChild(new EditMeshCMPT(this, "Edit", stage));
 	AddChild(new EditUVCMPT(this, "UV", stage));
 	SetSizer(InitLayout());	
 }

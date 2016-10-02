@@ -33,7 +33,7 @@ public:
 	virtual bool OnMouseDrag(int x, int y);
 
 	virtual bool OnDraw() const;
-	virtual bool clear();
+	virtual bool Clear();
 
 	//
 	// interface IOperaterBase

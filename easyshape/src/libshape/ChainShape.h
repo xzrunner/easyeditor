@@ -1,14 +1,14 @@
 #ifndef _EASYSHAPE_CHAIN_SHAPE_H_
 #define _EASYSHAPE_CHAIN_SHAPE_H_
 
-#include "PolylineShape.h"
+#include "EditedPolyShape.h"
 
 #include <sprite2/PolylineShape.h>
 
 namespace eshape
 {
 
-class ChainShape : public PolylineShape, public s2::PolylineShape
+class ChainShape : public EditedPolyShape, public s2::PolylineShape
 {
 public:
 	ChainShape();
@@ -37,7 +37,7 @@ public:
 
 	/**
 	 *  @interface
-	 *    PolylineShape
+	 *    EditedPolyShape
 	 */
 	virtual void AddVertex(int index, const sm::vec2& pos);
 	virtual void RemoveVertex(const sm::vec2& pos);

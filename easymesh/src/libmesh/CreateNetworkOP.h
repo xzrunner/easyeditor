@@ -1,5 +1,5 @@
-#ifndef _EASYMESH_CREATE_NW_OP_H_
-#define _EASYMESH_CREATE_NW_OP_H_
+#ifndef _EASYMESH_CREATE_NETWORK_OP_H_
+#define _EASYMESH_CREATE_NETWORK_OP_H_
 
 #include <easyshape.h>
 
@@ -9,10 +9,10 @@ namespace emesh
 class StagePanel;
 class Mesh;
 
-class CreateNWOP : public eshape::EditPolylineOP<eshape::DrawLoopOP, eshape::SelectNodesOP>
+class CreateNetworkOP : public eshape::EditPolylineOP<eshape::DrawLoopOP, eshape::SelectNodesOP>
 {
 public:
-	CreateNWOP(StagePanel* stage);
+	CreateNetworkOP(StagePanel* stage);
 
 	virtual bool OnKeyDown(int keyCode);
 	virtual bool OnMouseLeftDown(int x, int y);
@@ -22,6 +22,7 @@ public:
 	virtual bool OnMouseDrag(int x, int y);
 
 	virtual bool OnDraw() const;
+	virtual bool Clear();
 
 private:
 	void RefreshAll();
@@ -31,8 +32,8 @@ private:
 
 	sm::vec2* m_selected_inner;
 
-}; // CreateNWOP
+}; // CreateNetworkOP
 
 }
 
-#endif // _EASYMESH_CREATE_NW_OP_H_
+#endif // _EASYMESH_CREATE_NETWORK_OP_H_

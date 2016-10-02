@@ -1,6 +1,7 @@
 #include "MeshFactory.h"
 #include "Network.h"
 #include "Strip.h"
+#include "Skeleton.h"
 
 namespace emesh
 {
@@ -17,6 +18,9 @@ Mesh* MeshFactory::CreateMesh(const ee::Symbol* base) const
 		break;
 	case ST_STRIP:
 		mesh = new Strip(base);
+		break;
+	case ST_SKELETON:
+		mesh = new Skeleton(base);
 		break;
 	}
 	return mesh;

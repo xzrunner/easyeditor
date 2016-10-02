@@ -132,7 +132,7 @@ void EditNodesOP::Smooth(float samplingWidth)
 
 void EditNodesOP::UpdateModified()
 {
-	std::vector<PolylineShape*> polylines;
+	std::vector<EditedPolyShape*> polylines;
 	std::vector<std::vector<sm::vec2> > chainsDst;
 
 	for (size_t i = 0, n = m_buffer.size(); i < n; ++i)

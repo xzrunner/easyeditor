@@ -19,10 +19,10 @@ Network::Network()
 {
 }
 
-Network::Network(const Network& nw)
-	: s2::Mesh(nw)
-	, Mesh(nw)
-	, s2::NetworkMesh(nw)
+Network::Network(const Network& mesh)
+	: s2::Mesh(mesh)
+	, Mesh(mesh)
+	, s2::NetworkMesh(mesh)
 {
 }
 
@@ -40,17 +40,17 @@ Network::Network(const ee::Symbol* base)
 
 void Network::Load(const Json::Value& value)
 {
-	if (m_nw) {
-		delete m_nw;
+	if (m_shape) {
+		delete m_shape;
 	}
 
 	std::vector<sm::vec2> outline;
 	gum::JsonSerializer::Load(value["shape"]["outline"], outline);
-	m_nw = new NetworkShape(outline, m_node_radius);
+	m_shape = new NetworkShape(outline, m_node_radius);
 
 	std::vector<sm::vec2> inner;
 	gum::JsonSerializer::Load(value["shape"]["inner"], inner);
-	m_nw->SetInnerVertices(inner);
+	m_shape->SetInnerVertices(inner);
 
 	RefreshTriangles();
 
@@ -63,11 +63,11 @@ void Network::Store(Json::Value& value) const
 {
 	value["type"] = GetType();
 
-	if (!m_nw) {
+	if (!m_shape) {
 		return;
 	}
 
-	dynamic_cast<NetworkShape*>(m_nw)->StoreToFile(value, "");
+	dynamic_cast<NetworkShape*>(m_shape)->StoreToFile(value, "");
 
 	s2::MeshTransform trans;
 	MeshSerialization::Load(trans, value);
@@ -216,36 +216,36 @@ void Network::Refresh()
 
 void Network::TraverseMesh(ee::Visitor<ee::Shape>& visitor) const
 {
-	if (m_nw) {
+	if (m_shape) {
 		bool has_next;
-		visitor.Visit(dynamic_cast<NetworkShape*>(m_nw), has_next);
+		visitor.Visit(dynamic_cast<ee::Shape*>(m_shape), has_next);
 	}
 }
 
-bool Network::RemoveMesh(ee::Shape* mesh)
+bool Network::RemoveMesh(ee::Shape* shape)
 {
-	if (mesh == dynamic_cast<NetworkShape*>(m_nw)) {
-		delete m_nw, m_nw = NULL;		
+	if (shape == dynamic_cast<NetworkShape*>(m_shape)) {
+		delete m_shape, m_shape = NULL;		
 		return true;
 	} else {
 		return false;
 	}
 }
 
-bool Network::InsertMesh(ee::Shape* mesh)
+bool Network::InsertMesh(ee::Shape* shape)
 {
-	eshape::ChainShape* loop = dynamic_cast<eshape::ChainShape*>(mesh);
-	if (m_nw) {
-		delete m_nw;
+	eshape::ChainShape* loop = dynamic_cast<eshape::ChainShape*>(shape);
+	if (m_shape) {
+		delete m_shape;
 	}
-	m_nw = new NetworkShape(loop->GetVertices(), m_node_radius);
+	m_shape = new NetworkShape(loop->GetVertices(), m_node_radius);
 	return true;
 }
 
 bool Network::ClearMesh()
 {
-	if (m_nw) {
-		delete m_nw, m_nw = NULL;
+	if (m_shape) {
+		delete m_shape, m_shape = NULL;
 		return true;
 	} else {
 		return false;
@@ -266,28 +266,28 @@ void Network::Clear()
 
 bool Network::InsertInner(const sm::vec2& pos)
 {
-	if (!m_nw) {
+	if (!m_shape) {
 		return false;
 	} else {
-		return dynamic_cast<NetworkShape*>(m_nw)->InsertInner(pos);
+		return dynamic_cast<NetworkShape*>(m_shape)->InsertInner(pos);
 	}
 }
 
 bool Network::RemoveInner(const sm::vec2& pos)
 {
-	if (!m_nw) {
+	if (!m_shape) {
 		return false;
 	} else {
-		return dynamic_cast<NetworkShape*>(m_nw)->RemoveInner(pos);
+		return dynamic_cast<NetworkShape*>(m_shape)->RemoveInner(pos);
 	}
 }
 
 sm::vec2* Network::QueryInner(const sm::vec2& pos)
 {
-	if (!m_nw) {
+	if (!m_shape) {
 		return NULL;
 	} else {
-		return dynamic_cast<NetworkShape*>(m_nw)->QueryInner(pos);
+		return dynamic_cast<NetworkShape*>(m_shape)->QueryInner(pos);
 	}
 }
  

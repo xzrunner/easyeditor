@@ -288,6 +288,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="skeleton"
+				>
+				<File
+					RelativePath="..\..\..\src\libmesh\Skeleton.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\Skeleton.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="file"
@@ -312,19 +324,27 @@
 				Name="create"
 				>
 				<File
-					RelativePath="..\..\..\src\libmesh\CreateNWCMPT.cpp"
+					RelativePath="..\..\..\src\libmesh\CreateMeshCMPT.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libmesh\CreateNWCMPT.h"
+					RelativePath="..\..\..\src\libmesh\CreateMeshCMPT.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libmesh\CreateNWOP.cpp"
+					RelativePath="..\..\..\src\libmesh\CreateNetworkOP.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libmesh\CreateNWOP.h"
+					RelativePath="..\..\..\src\libmesh\CreateNetworkOP.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\CreateSkeletonOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\CreateSkeletonOP.h"
 					>
 				</File>
 				<File
@@ -340,19 +360,19 @@
 				Name="edit"
 				>
 				<File
-					RelativePath="..\..\..\src\libmesh\EditNWCMPT.cpp"
+					RelativePath="..\..\..\src\libmesh\EditMeshCMPT.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libmesh\EditNWCMPT.h"
+					RelativePath="..\..\..\src\libmesh\EditMeshCMPT.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libmesh\EditNWOP.cpp"
+					RelativePath="..\..\..\src\libmesh\EditNetworkOP.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libmesh\EditNWOP.h"
+					RelativePath="..\..\..\src\libmesh\EditNetworkOP.h"
 					>
 				</File>
 				<File

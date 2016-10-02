@@ -120,4 +120,16 @@ bool CreateStripOP::OnDraw() const
 	return false;
 }
 
+bool CreateStripOP::Clear()
+{
+	if (ee::ZoomViewOP::Clear()) {
+		return true;
+	}
+
+	m_selected = NULL;
+	m_last_right.MakeInvalid();
+
+	return false;
+}
+
 }

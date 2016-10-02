@@ -16,7 +16,8 @@ enum ShapeType
 	ST_COSINE_CURVE,
 	ST_POLYGON,
 	ST_COMPLEX_POLYGON,
-	ST_BEZIER
+	ST_BEZIER,
+	ST_EDITED_POLYLINE,
 }; // ShapeType
 
 ShapeType get_shape_type(const std::string& desc);

@@ -1,12 +1,12 @@
 #include "EditNodesAtomicOP.h"
-#include "PolylineShape.h"
+#include "EditedPolyShape.h"
 
 namespace eshape
 {
 namespace edit_nodes
 {
 
-ModifyNodesAOP::ModifyNodesAOP(const std::vector<PolylineShape*>& polylines, 
+ModifyNodesAOP::ModifyNodesAOP(const std::vector<EditedPolyShape*>& polylines, 
 							   const std::vector<std::vector<sm::vec2> >& dst_polylines)
 {
 	m_polylines.reserve(polylines.size());

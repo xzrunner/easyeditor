@@ -16,7 +16,7 @@ namespace ee { class MultiShapesImpl; class EditCMPT; }
 namespace eshape
 {
 
-class PolylineShape;
+class EditedPolyShape;
 
 class SelectNodesOP : public DrawRectangleOP
 {
@@ -46,7 +46,7 @@ protected:
 	struct ChainSelectedNodes
 	{
 	public:
-		PolylineShape* polyline;
+		EditedPolyShape* polyline;
 		std::vector<sm::vec2> selectedNodes;
 	}; // ChainSelectedNodes
 

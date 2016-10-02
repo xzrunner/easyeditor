@@ -4,7 +4,7 @@
 #include "PointShape.h"
 #include "CircleShape.h"
 #include "BezierShape.h"
-#include "PolylineShape.h"
+#include "EditedPolyShape.h"
 #include "CosineShape.h"
 #include "PolygonShape.h"
 #include "RectShape.h"
@@ -64,8 +64,8 @@ Visit(ee::Shape* shape, bool& next)
 	case ST_BEZIER:
 		next = !Visit(static_cast<BezierShape*>(shape));
 		break;
-	case ST_CHAIN: case ST_POLYGON: case ST_COMPLEX_POLYGON: case ST_COSINE_CURVE:
-		next = !Visit(static_cast<PolylineShape*>(shape));
+	case ST_EDITED_POLYLINE: case ST_CHAIN: case ST_POLYGON: case ST_COMPLEX_POLYGON: case ST_COSINE_CURVE:
+		next = !Visit(static_cast<EditedPolyShape*>(shape));
 		break;
 	case ST_CIRCLE:
 		next = !Visit(static_cast<CircleShape*>(shape));
@@ -114,7 +114,7 @@ Visit(BezierShape* bezier)
 }
 
 bool NodeCapture::RectQueryVisitor::
-Visit(PolylineShape* polyline)
+Visit(EditedPolyShape* polyline)
 {
 	// capture center
 	const sm::rect& rect = polyline->GetBounding();

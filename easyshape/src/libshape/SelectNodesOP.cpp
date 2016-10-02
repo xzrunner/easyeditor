@@ -256,7 +256,7 @@ PosQueryVisitor(const sm::vec2& pos, ChainSelectedNodes** result)
 void SelectNodesOP::PosQueryVisitor::
 Visit(ee::Shape* shape, bool& next)
 {
-	PolylineShape* polyline = dynamic_cast<PolylineShape*>(shape);
+	EditedPolyShape* polyline = dynamic_cast<EditedPolyShape*>(shape);
 	if (!polyline) {
 		next = true;
 		return;
@@ -297,7 +297,7 @@ RectQueryVisitor(const sm::rect& rect, std::vector<ChainSelectedNodes*>& result)
 void SelectNodesOP::RectQueryVisitor::
 Visit(ee::Shape* shape, bool& next)
 {
-	PolylineShape* polyline = dynamic_cast<PolylineShape*>(shape);
+	EditedPolyShape* polyline = dynamic_cast<EditedPolyShape*>(shape);
 	if (!polyline) {
 		next = true;
 		return;

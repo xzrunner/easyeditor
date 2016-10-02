@@ -147,7 +147,7 @@ bool EditPolylineImpl::OnMouseLeftUp(int x, int y)
 		{
 			if (m_captured_editable.shape)
 			{
-				PolylineShape* polyline = dynamic_cast<PolylineShape*>(m_captured_editable.shape);
+				EditedPolyShape* polyline = dynamic_cast<EditedPolyShape*>(m_captured_editable.shape);
 				polyline->ChangeVertex(m_captured_editable.pos, nearest.GetNearestNode());
 				m_dirty = true;
 				m_captured_editable.pos = nearest.GetNearestNode();
@@ -188,7 +188,7 @@ bool EditPolylineImpl::OnMouseRightDown(int x, int y)
 			{
 				if (m_captured_editable.pos.IsValid())
 				{
-					PolylineShape* polyline = dynamic_cast<PolylineShape*>(m_captured_editable.shape);
+					EditedPolyShape* polyline = dynamic_cast<EditedPolyShape*>(m_captured_editable.shape);
 					polyline->RemoveVertex(m_captured_editable.pos);
 					m_dirty = true;
 				}
@@ -256,7 +256,7 @@ bool EditPolylineImpl::OnMouseDrag(int x, int y)
 			m_draw_op->m_polyline.clear();
 
 		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-		if (PolylineShape* polyline = dynamic_cast<PolylineShape*>(m_captured_editable.shape))
+		if (EditedPolyShape* polyline = dynamic_cast<EditedPolyShape*>(m_captured_editable.shape))
 		{
 			if (m_captured_editable.pos.IsValid())
 			{
@@ -312,7 +312,7 @@ void EditPolylineImpl::Clear()
 
 void EditPolylineImpl::drawCaptured(const NodeAddr& captured) const
 {
-	if (PolylineShape* polyline = dynamic_cast<PolylineShape*>(captured.shape))
+	if (EditedPolyShape* polyline = dynamic_cast<EditedPolyShape*>(captured.shape))
 	{
 		if (captured.pos.IsValid()) {
 			s2::RVG::SetColor(s2::Color(255, 102, 102));
@@ -349,7 +349,7 @@ InterruptChainVisitor(const sm::vec2& pos, int tol)
 void EditPolylineImpl::InterruptChainVisitor::
 Visit(ee::Shape* shape, bool& next) 
 {
-	PolylineShape* polyline = dynamic_cast<PolylineShape*>(shape);
+	EditedPolyShape* polyline = dynamic_cast<EditedPolyShape*>(shape);
 	if (!polyline) {
 		next = true;
 		return;
@@ -403,7 +403,7 @@ NearestNodeVisitor(const sm::vec2& pos, int tol)
 void EditPolylineImpl::NearestNodeVisitor::
 Visit(ee::Shape* shape, bool& next)
 {
-	PolylineShape* polyline = dynamic_cast<PolylineShape*>(shape);
+	EditedPolyShape* polyline = dynamic_cast<EditedPolyShape*>(shape);
 	if (!polyline) 
 	{
 		next = true;

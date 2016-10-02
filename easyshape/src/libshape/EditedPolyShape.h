@@ -1,5 +1,5 @@
-#ifndef _EASYSHAPE_POLYLINE_SHAPE_H_
-#define _EASYSHAPE_POLYLINE_SHAPE_H_
+#ifndef _EASYSHAPE_EDITED_POLY_SHAPE_H_
+#define _EASYSHAPE_EDITED_POLY_SHAPE_H_
 
 #include <ee/Shape.h>
 
@@ -10,7 +10,7 @@
 namespace eshape
 {
 
-class PolylineShape : public ee::Shape
+class EditedPolyShape : public ee::Shape
 {
 public:
 	virtual void AddVertex(int index, const sm::vec2& pos) = 0;
@@ -20,8 +20,8 @@ public:
 	virtual const std::vector<sm::vec2>& GetVertices() const  = 0;
 	virtual bool IsClosed() const = 0;
 
-}; // PolylineShape
+}; // EditedPolyShape
 
 }
 
-#endif // _EASYSHAPE_POLYLINE_SHAPE_H_
+#endif // _EASYSHAPE_EDITED_POLY_SHAPE_H_

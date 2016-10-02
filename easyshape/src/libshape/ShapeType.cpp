@@ -21,6 +21,8 @@ ShapeType get_shape_type(const std::string& desc)
 		return ST_POLYGON;
 	} else if (desc == "rect") {
 		return ST_RECT;
+	} else if (desc == "edited_poly") {
+		return ST_EDITED_POLYLINE;
 	}
 
 	return ST_UNKNOWN;

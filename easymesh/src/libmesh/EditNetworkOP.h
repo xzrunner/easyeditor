@@ -1,5 +1,5 @@
-#ifndef _EASYMESH_EDIT_NW_OP_H_
-#define _EASYMESH_EDIT_NW_OP_H_
+#ifndef _EASYMESH_EDIT_NETWORK_OP_H_
+#define _EASYMESH_EDIT_NETWORK_OP_H_
 
 #include "SelectNodesOP.h"
 
@@ -7,10 +7,10 @@ namespace emesh
 {
 
 class StagePanel;
-class EditNWOP : public SelectNodesOP
+class EditNetworkOP : public SelectNodesOP
 {
 public:
-	EditNWOP(StagePanel* stage);
+	EditNetworkOP(StagePanel* stage);
 
 	virtual bool OnMouseLeftDown(int x, int y);
 	virtual bool OnMouseLeftUp(int x, int y);
@@ -34,8 +34,8 @@ private:
 
 	bool m_dragable;
 
-}; // EditNWOP
+}; // EditNetworkOP
 
 }
 
-#endif // _EASYMESH_EDIT_NW_OP_H_
+#endif // _EASYMESH_EDIT_NETWORK_OP_H_

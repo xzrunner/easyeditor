@@ -1,4 +1,4 @@
-#include "EditNWOP.h"
+#include "EditNetworkOP.h"
 #include "StagePanel.h"
 #include "Mesh.h"
 
@@ -19,7 +19,7 @@ namespace emesh
 static const int CENTER_RADIUS = 3;
 static const int CENTER_EDGE = 10;
 
-EditNWOP::EditNWOP(StagePanel* stage)
+EditNetworkOP::EditNetworkOP(StagePanel* stage)
 	: SelectNodesOP(stage)
 	, m_right_press(false)
 	, m_select_center(false)
@@ -28,7 +28,7 @@ EditNWOP::EditNWOP(StagePanel* stage)
 	m_center.Set(0, 0);
 }
 
-bool EditNWOP::OnMouseLeftDown(int x, int y)
+bool EditNetworkOP::OnMouseLeftDown(int x, int y)
 {
 	m_dragable = true;
 
@@ -47,7 +47,7 @@ bool EditNWOP::OnMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool EditNWOP::OnMouseLeftUp(int x, int y)
+bool EditNetworkOP::OnMouseLeftUp(int x, int y)
 {
 	m_dragable = false;
 
@@ -59,7 +59,7 @@ bool EditNWOP::OnMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool EditNWOP::OnMouseRightDown(int x, int y)
+bool EditNetworkOP::OnMouseRightDown(int x, int y)
 {
 	m_dragable = true;
 
@@ -73,7 +73,7 @@ bool EditNWOP::OnMouseRightDown(int x, int y)
 	return false;
 }
 
-bool EditNWOP::OnMouseRightUp(int x, int y)
+bool EditNetworkOP::OnMouseRightUp(int x, int y)
 {
 	m_dragable = false;
 
@@ -83,7 +83,7 @@ bool EditNWOP::OnMouseRightUp(int x, int y)
 	return false;
 }
 
-bool EditNWOP::OnMouseDrag(int x, int y)
+bool EditNetworkOP::OnMouseDrag(int x, int y)
 {
 	if (!m_dragable) {
 		return false;
@@ -118,7 +118,7 @@ bool EditNWOP::OnMouseDrag(int x, int y)
 	return false;
 }
 
-bool EditNWOP::OnDraw() const
+bool EditNetworkOP::OnDraw() const
 {
 	if (Mesh* mesh = static_cast<StagePanel*>(m_wnd)->GetMesh())
 	{
@@ -137,7 +137,7 @@ bool EditNWOP::OnDraw() const
 	return false;
 }
 
-void EditNWOP::TranslasteNode(const sm::vec2& offset)
+void EditNetworkOP::TranslasteNode(const sm::vec2& offset)
 {
 	std::vector<s2::MeshNode*> nodes;
 	m_selection.Traverse(ee::FetchAllVisitor<s2::MeshNode>(nodes));
@@ -147,7 +147,7 @@ void EditNWOP::TranslasteNode(const sm::vec2& offset)
 	}
 }
 
-void EditNWOP::RotateNode(const sm::vec2& dst)
+void EditNetworkOP::RotateNode(const sm::vec2& dst)
 {
 	float angle = sm::get_angle_in_direction(m_center, m_last_pos, dst);
 	std::vector<s2::MeshNode*> nodes;

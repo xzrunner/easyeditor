@@ -1,4 +1,4 @@
-#include "CreateNWOP.h"
+#include "CreateNetworkOP.h"
 #include "StagePanel.h"
 #include "Symbol.h"
 #include "Mesh.h"
@@ -13,7 +13,7 @@
 namespace emesh
 {
 
-CreateNWOP::CreateNWOP(StagePanel* stage)
+CreateNetworkOP::CreateNetworkOP(StagePanel* stage)
 	: eshape::EditPolylineOP<eshape::DrawLoopOP, eshape::SelectNodesOP>(stage, stage->GetStageImpl(), stage, NULL, new ee::OneFloatValueStatic(5), NULL)
 	, m_stage(stage)
 	, m_selected_inner(NULL)
@@ -21,7 +21,7 @@ CreateNWOP::CreateNWOP(StagePanel* stage)
 	SetLoop(true);
 }
 
-bool CreateNWOP::OnKeyDown(int keyCode)
+bool CreateNetworkOP::OnKeyDown(int keyCode)
 {
 	if (eshape::EditPolylineOP<eshape::DrawLoopOP, eshape::SelectNodesOP>::OnKeyDown(keyCode))
 		return true;
@@ -42,18 +42,18 @@ bool CreateNWOP::OnKeyDown(int keyCode)
 	return false;
 }
 
-bool CreateNWOP::OnMouseLeftDown(int x, int y)
+bool CreateNetworkOP::OnMouseLeftDown(int x, int y)
 {
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-	Network* nw = static_cast<Network*>(m_stage->GetMesh());
-	if (!nw) {
+	Network* mesh = static_cast<Network*>(m_stage->GetMesh());
+	if (!mesh) {
 		return false;
 	}
-	sm::vec2* selected = nw->QueryInner(pos);
+	sm::vec2* selected = mesh->QueryInner(pos);
 	if (selected) {
 		m_selected_inner = selected;
 		return false;
-	} else if (nw->InsertInner(pos)) {
+	} else if (mesh->InsertInner(pos)) {
 		RefreshAll();
 		return false;
 	}
@@ -70,7 +70,7 @@ bool CreateNWOP::OnMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool CreateNWOP::OnMouseLeftUp(int x, int y)
+bool CreateNetworkOP::OnMouseLeftUp(int x, int y)
 {
 	if (m_selected_inner) {
 		m_selected_inner = NULL;
@@ -88,7 +88,7 @@ bool CreateNWOP::OnMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool CreateNWOP::OnMouseRightDown(int x, int y)
+bool CreateNetworkOP::OnMouseRightDown(int x, int y)
 {
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	Network* nw = static_cast<Network*>(m_stage->GetMesh());
@@ -109,7 +109,7 @@ bool CreateNWOP::OnMouseRightDown(int x, int y)
 	return false;
 }
 
-bool CreateNWOP::OnMouseRightUp(int x, int y)
+bool CreateNetworkOP::OnMouseRightUp(int x, int y)
 {
 	if (eshape::EditPolylineOP<eshape::DrawLoopOP, eshape::SelectNodesOP>::OnMouseRightUp(x, y))
 		return true;
@@ -122,7 +122,7 @@ bool CreateNWOP::OnMouseRightUp(int x, int y)
 	return false;
 }
 
-bool CreateNWOP::OnMouseDrag(int x, int y)
+bool CreateNetworkOP::OnMouseDrag(int x, int y)
 {
 	if (eshape::EditPolylineOP<eshape::DrawLoopOP, eshape::SelectNodesOP>::OnMouseDrag(x, y)) {
 		return true;
@@ -136,11 +136,8 @@ bool CreateNWOP::OnMouseDrag(int x, int y)
 	return false;
 }
 
-bool CreateNWOP::OnDraw() const
+bool CreateNetworkOP::OnDraw() const
 {
-	if (ee::ZoomViewOP::OnDraw())
-		return true;
-
 	if (Mesh* mesh = m_stage->GetMesh()) {
 		ee::SpriteRenderer::Instance()->Draw(mesh->GetBaseSymbol());
 		s2::DrawMesh::DrawInfoUV(mesh);
@@ -151,7 +148,16 @@ bool CreateNWOP::OnDraw() const
 	return false;
 }
 
-void CreateNWOP::RefreshAll()
+bool CreateNetworkOP::Clear()
+{
+	if (eshape::EditPolylineOP<eshape::DrawLoopOP, eshape::SelectNodesOP>::Clear()) {
+		return true;
+	}
+	m_selected_inner = NULL;
+	return false;
+}
+
+void CreateNetworkOP::RefreshAll()
 {
 	m_stage->UpdateSymbol();
 	ResetDirty();

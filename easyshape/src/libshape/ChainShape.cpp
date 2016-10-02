@@ -17,7 +17,7 @@ ChainShape::ChainShape()
 }
 
 ChainShape::ChainShape(const ChainShape& chain) 
-	: eshape::PolylineShape(chain)
+	: eshape::EditedPolyShape(chain)
 	, s2::PolylineShape(chain)
 	, m_draw_dir(chain.m_draw_dir)
 {
@@ -33,19 +33,8 @@ void ChainShape::Draw(const sm::mat4& mt, const s2::RenderColor& color) const
 {
 	s2::PolylineShape::Draw(mt, color);
 
-	if (m_draw_dir && m_vertices.size() >= 2) 
-	{
-		sm::vec2 s = m_vertices[m_vertices.size() - 2],
-			     e = m_vertices[m_vertices.size() - 1];
-		const float LEN = 20;
-		sm::vec2 seg = s - e;
-		seg.Normalize();
-		seg *= LEN;
-		sm::vec2 left, right;
-		left = e + sm::rotate_vector(seg, - SM_PI / 6);
-		right = e + sm::rotate_vector(seg, SM_PI / 6);
-		s2::RVG::Line(e, left); 
-		s2::RVG::Line(e, right);
+	if (m_draw_dir && m_vertices.size() >= 2) {
+		s2::RVG::Arrow(m_vertices[m_vertices.size() - 2], m_vertices[m_vertices.size() - 1]);
 	}
 }
 

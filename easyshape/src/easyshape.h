@@ -20,6 +20,7 @@
 #include "libshape/PolygonShape.h"
 #include "libshape/RectShape.h"
 #include "libshape/ShapeFactory.h"
+#include "libshape/PolylineEditor.h"
 
 #include "libshape/EditRectOP.h"
 #include "libshape/EditCircleOP.h"

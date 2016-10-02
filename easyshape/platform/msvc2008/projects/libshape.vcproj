@@ -258,15 +258,15 @@
 						Name="utility"
 						>
 						<File
+							RelativePath="..\..\..\src\libshape\EditedPolyShape.h"
+							>
+						</File>
+						<File
 							RelativePath="..\..\..\src\libshape\PolylineEditor.cpp"
 							>
 						</File>
 						<File
 							RelativePath="..\..\..\src\libshape\PolylineEditor.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\..\src\libshape\PolylineShape.h"
 							>
 						</File>
 					</Filter>

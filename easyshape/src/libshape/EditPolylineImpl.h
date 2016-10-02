@@ -13,7 +13,7 @@ namespace eshape
 class ChainShape;
 class DrawPolylineOP;
 class IOperaterBase;
-class PolylineShape;
+class EditedPolyShape;
 
 class EditPolylineImpl
 {
@@ -48,12 +48,12 @@ private:
 
 		virtual void Visit(ee::Shape* shape, bool& next);
 
-		PolylineShape* GetInterruptedPolyline() { return m_polyline; }
+		EditedPolyShape* GetInterruptedPolyline() { return m_polyline; }
 
 	private:
 		const sm::vec2& m_pos;
 		int m_tol;
-		PolylineShape* m_polyline;
+		EditedPolyShape* m_polyline;
 
 	}; // InterruptChainVisitor
 

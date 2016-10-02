@@ -133,10 +133,10 @@ void EditPolylinesCMPT::OnTranslate(wxCommandEvent& event)
 	m_shapes_impl->GetShapeSelection()->Traverse(ee::FetchAllVisitor<ee::Shape>(shapes));
 
 	float leftmost = FLT_MAX;
-	std::vector<PolylineShape*> polylines;
+	std::vector<EditedPolyShape*> polylines;
 	for (int i = 0, n = shapes.size(); i < n; ++i)
 	{
-		PolylineShape* polyline = dynamic_cast<PolylineShape*>(shapes[i]);
+		EditedPolyShape* polyline = dynamic_cast<EditedPolyShape*>(shapes[i]);
 		if (polyline) 
 		{
 			polylines.push_back(polyline);
