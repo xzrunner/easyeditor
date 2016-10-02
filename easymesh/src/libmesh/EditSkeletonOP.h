@@ -5,6 +5,7 @@
 
 #include <SM_Vector.h>
 
+namespace ee { class ArrangeSpriteState; }
 namespace s2 { class MeshJoint; }
 
 namespace emesh
@@ -27,10 +28,14 @@ public:
 	virtual bool Clear();
 
 private:
-	void Select(const sm::vec2& pos);
+	bool Select(const sm::vec2& pos);
+
+	void ChangeOPState(ee::ArrangeSpriteState* state);
 
 private:
 	s2::MeshJoint* m_selected;
+
+	ee::ArrangeSpriteState* m_op_state;
 
 }; // EditSkeletonOP
 

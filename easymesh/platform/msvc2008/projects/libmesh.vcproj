@@ -323,30 +323,42 @@
 					RelativePath="..\..\..\src\libmesh\CreateMeshCMPT.h"
 					>
 				</File>
-				<File
-					RelativePath="..\..\..\src\libmesh\CreateNetworkOP.cpp"
+				<Filter
+					Name="1.network"
 					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libmesh\CreateNetworkOP.h"
+					<File
+						RelativePath="..\..\..\src\libmesh\CreateNetworkOP.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libmesh\CreateNetworkOP.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="2.strip"
 					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libmesh\CreateSkeletonOP.cpp"
+					<File
+						RelativePath="..\..\..\src\libmesh\CreateStripOP.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libmesh\CreateStripOP.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="3.skeleton"
 					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libmesh\CreateSkeletonOP.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libmesh\CreateStripOP.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libmesh\CreateStripOP.h"
-					>
-				</File>
+					<File
+						RelativePath="..\..\..\src\libmesh\CreateSkeletonOP.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libmesh\CreateSkeletonOP.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="2.edit"
@@ -359,30 +371,58 @@
 					RelativePath="..\..\..\src\libmesh\EditMeshCMPT.h"
 					>
 				</File>
-				<File
-					RelativePath="..\..\..\src\libmesh\EditNetworkOP.cpp"
+				<Filter
+					Name="1.network"
 					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libmesh\EditNetworkOP.h"
+					<File
+						RelativePath="..\..\..\src\libmesh\EditNetworkOP.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libmesh\EditNetworkOP.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libmesh\SelectNodesOP.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libmesh\SelectNodesOP.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="2.strip"
 					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libmesh\EditSkeletonOP.cpp"
+				</Filter>
+				<Filter
+					Name="3.skeleton"
 					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libmesh\EditSkeletonOP.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libmesh\SelectNodesOP.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libmesh\SelectNodesOP.h"
-					>
-				</File>
+					<File
+						RelativePath="..\..\..\src\libmesh\EditSkeletonOP.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libmesh\EditSkeletonOP.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libmesh\RotateJointAOP.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libmesh\RotateJointAOP.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libmesh\RotateJointState.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libmesh\RotateJointState.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="3.uv"

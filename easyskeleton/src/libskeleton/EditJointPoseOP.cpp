@@ -167,6 +167,15 @@ bool EditJointPoseOP::Clear()
 		return true;
 	}
 
+	if (m_selected) {
+		m_selected->RemoveReference();
+		m_selected = NULL;
+	}
+	if (m_op_state) {
+		delete m_op_state;
+		m_op_state = NULL;
+	}
+
 	return false;
 }
 
@@ -176,7 +185,7 @@ bool EditJointPoseOP::Select(const sm::vec2& pos)
 		return false;
 	}
 
-	const s2::Joint* old_selected = m_selected;
+	s2::Joint* old_selected = m_selected;
 	const s2::Joint* joint = m_sk->QueryByPos(pos);
 	m_selected = dynamic_cast<Joint*>(const_cast<s2::Joint*>(joint));
 	return old_selected != m_selected;
