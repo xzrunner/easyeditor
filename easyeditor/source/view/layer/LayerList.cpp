@@ -131,14 +131,14 @@ void LayerList::ClearLayer(Layer* layer)
 
 	std::vector<Sprite*> sprs;
 	layer->TraverseSprite(FetchAllVisitor<Sprite>(sprs));
-	for_each(sprs.begin(), sprs.end(), cu::AddRefFonctor<Sprite>());
+	for_each(sprs.begin(), sprs.end(), cu::AddRefFunctor<Sprite>());
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
 		RemoveSpriteSJ::Instance()->Remove(sprs[i]);
 	}
 
 	std::vector<Shape*> shapes;
 	layer->TraverseShape(FetchAllVisitor<Shape>(shapes));
-	for_each(shapes.begin(), shapes.end(), cu::AddRefFonctor<Shape>());
+	for_each(shapes.begin(), shapes.end(), cu::AddRefFunctor<Shape>());
 	for (int i = 0, n = shapes.size(); i < n; ++i) {
 		RemoveShapeSJ::Instance()->Remove(shapes[i]);
 	}

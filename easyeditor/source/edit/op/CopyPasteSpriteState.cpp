@@ -30,7 +30,7 @@ CopyPasteSpriteState::CopyPasteSpriteState(SpriteSelection* selection)
 
 CopyPasteSpriteState::~CopyPasteSpriteState()
 {
-	for_each(m_sprs.begin(), m_sprs.end(), cu::RemoveRefFonctor<Sprite>());
+	for_each(m_sprs.begin(), m_sprs.end(), cu::RemoveRefFunctor<Sprite>());
 }
 
 void CopyPasteSpriteState::OnMousePress(const sm::vec2& pos)

@@ -19,7 +19,7 @@ SetSpriteAngleAOP::SetSpriteAngleAOP(Sprite* spr, float angle)
 SetSpriteAngleAOP::SetSpriteAngleAOP(const std::vector<Sprite*>& sprs, float angle)
 	: m_new_angle(angle)
 {
-	for_each(sprs.begin(), sprs.end(), cu::AddRefFonctor<Sprite>());
+	for_each(sprs.begin(), sprs.end(), cu::AddRefFunctor<Sprite>());
 	m_sprs = sprs;
 
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
@@ -29,7 +29,7 @@ SetSpriteAngleAOP::SetSpriteAngleAOP(const std::vector<Sprite*>& sprs, float ang
 
 SetSpriteAngleAOP::~SetSpriteAngleAOP()
 {
-	for_each(m_sprs.begin(), m_sprs.end(), cu::RemoveRefFonctor<Sprite>());
+	for_each(m_sprs.begin(), m_sprs.end(), cu::RemoveRefFunctor<Sprite>());
 }
 
 void SetSpriteAngleAOP::Undo()

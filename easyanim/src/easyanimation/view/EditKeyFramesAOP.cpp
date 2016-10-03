@@ -15,8 +15,8 @@ EditKeyFramesAOP::EditKeyFramesAOP(Layer* layer)
 
 EditKeyFramesAOP::~EditKeyFramesAOP()
 {
-	for_each(m_inserted.begin(), m_inserted.end(), cu::RemoveRefFonctor<KeyFrame>());
-	for_each(m_removed.begin(), m_removed.end(), cu::RemoveRefFonctor<KeyFrame>());
+	for_each(m_inserted.begin(), m_inserted.end(), cu::RemoveRefFunctor<KeyFrame>());
+	for_each(m_removed.begin(), m_removed.end(), cu::RemoveRefFunctor<KeyFrame>());
 	for (int i = 0, n = m_changed.size(); i < n; ++i) {
 		m_changed[i].frame->RemoveReference();
 	}

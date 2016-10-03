@@ -19,7 +19,7 @@ SetSpritePosAOP::SetSpritePosAOP(Sprite* spr, const sm::vec2& pos)
 SetSpritePosAOP::SetSpritePosAOP(const std::vector<Sprite*>& sprs, const sm::vec2& pos)
 	: m_new_pos(pos)
 {
-	for_each(sprs.begin(), sprs.end(), cu::AddRefFonctor<Sprite>());
+	for_each(sprs.begin(), sprs.end(), cu::AddRefFunctor<Sprite>());
 	m_sprs = sprs;
 
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
@@ -29,7 +29,7 @@ SetSpritePosAOP::SetSpritePosAOP(const std::vector<Sprite*>& sprs, const sm::vec
 
 SetSpritePosAOP::~SetSpritePosAOP()
 {
-	for_each(m_sprs.begin(), m_sprs.end(), cu::RemoveRefFonctor<Sprite>());
+	for_each(m_sprs.begin(), m_sprs.end(), cu::RemoveRefFunctor<Sprite>());
 }
 
 void SetSpritePosAOP::Undo()

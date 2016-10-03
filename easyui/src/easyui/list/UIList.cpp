@@ -96,7 +96,7 @@ bool UIList::ClearAllSprite()
 		m_item_spr = NULL;
 	}
 
-	for_each(m_items.begin(), m_items.end(), cu::RemoveRefFonctor<ee::Sprite>());
+	for_each(m_items.begin(), m_items.end(), cu::RemoveRefFunctor<ee::Sprite>());
 	m_items.clear();
 
 	return ret;
@@ -266,7 +266,7 @@ bool UIList::ReFilling()
 		return false;
 	}
 
-	for_each(m_items.begin(), m_items.end(), cu::RemoveRefFonctor<ee::Sprite>());
+	for_each(m_items.begin(), m_items.end(), cu::RemoveRefFunctor<ee::Sprite>());
 	m_items.clear();
 
 	ee::Sprite* cp = dynamic_cast<ee::Sprite*>(((cu::Cloneable*)m_item_spr)->Clone());
@@ -338,7 +338,7 @@ bool UIList::Filling()
 		((m_hori_count == 1 || m_vert_count == 1) &&
 		(m_hori_count > 1 || m_vert_count > 1)));
 
-	for_each(m_items.begin(), m_items.end(), cu::RemoveRefFonctor<ee::Sprite>());
+	for_each(m_items.begin(), m_items.end(), cu::RemoveRefFunctor<ee::Sprite>());
 	m_items.clear();
 
 	sm::vec2 base = m_item_spr->GetPosition();

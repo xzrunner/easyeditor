@@ -32,7 +32,7 @@ void LabelBuilder::Traverse(ee::Visitor<PackNode>& visitor) const
 
 void LabelBuilder::Clear()
 {
-	for_each(m_data.begin(), m_data.end(), cu::RemoveRefFonctor<const PackLabel>());
+	for_each(m_data.begin(), m_data.end(), cu::RemoveRefFunctor<const PackLabel>());
 	m_data.clear();
 }
 

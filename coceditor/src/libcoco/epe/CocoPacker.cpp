@@ -441,7 +441,7 @@ void CocoPacker::resolveAnimation(const eanim::Symbol* sym)
 			sym->CreateFrameSprites(i, sprs);
 			for (size_t j = 0, m = sprs.size(); j < m; ++j)
 				resolveSpriteForFrame(dynamic_cast<ee::Sprite*>(sprs[j]), order);
-			for_each(sprs.begin(), sprs.end(), cu::RemoveRefFonctor<s2::Sprite>());
+			for_each(sprs.begin(), sprs.end(), cu::RemoveRefFunctor<s2::Sprite>());
 		}
 	}
 }

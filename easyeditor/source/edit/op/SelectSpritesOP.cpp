@@ -374,7 +374,7 @@ void SelectSpritesOP::CopyFromSelection()
 		m_selection->Add(sprs[i]);
 	}
 	SelectSpriteSetSJ::Instance()->Select(m_selection);
-	for_each(sprs.begin(), sprs.end(), cu::RemoveRefFonctor<Sprite>());
+	for_each(sprs.begin(), sprs.end(), cu::RemoveRefFunctor<Sprite>());
 
 	wxTheClipboard->Close();
 }

@@ -390,7 +390,7 @@ ee::Sprite* Layer::LoadGroup(const Json::Value& val, const std::string& dir, con
 
 	ee::SpriteFactory::Instance()->Insert(spr);
 	spr->Load(val);
-	for_each(sprs.begin(), sprs.end(), cu::RemoveRefFonctor<ee::Sprite>());
+	for_each(sprs.begin(), sprs.end(), cu::RemoveRefFunctor<ee::Sprite>());
 	return spr;
 }
 

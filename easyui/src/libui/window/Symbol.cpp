@@ -65,7 +65,7 @@ void Symbol::RemoveExtRef(Sprite* spr)
 void Symbol::ClearExtRef()
 {
 	for_each(m_ext_refs.begin(), m_ext_refs.end(), 
-		cu::RemoveRefFonctor<Sprite>());
+		cu::RemoveRefFunctor<Sprite>());
 	m_ext_refs.clear();
 }
 

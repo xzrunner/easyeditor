@@ -216,7 +216,7 @@ void PropertySettingPanel::SelectShapeSet(ShapeSelection* selection)
 
 void PropertySettingPanel::ClearSelection()
 {
-	for_each(m_selection.begin(), m_selection.end(), cu::RemoveRefFonctor<Sprite>());
+	for_each(m_selection.begin(), m_selection.end(), cu::RemoveRefFunctor<Sprite>());
 	m_selection.clear();
 }
 

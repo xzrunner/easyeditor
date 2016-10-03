@@ -110,7 +110,7 @@ void ViewlistList::Clear()
 		m_selected_spr = NULL;
 	}
 
-	for_each(m_sprs.begin(), m_sprs.end(), cu::RemoveRefFonctor<Sprite>());
+	for_each(m_sprs.begin(), m_sprs.end(), cu::RemoveRefFunctor<Sprite>());
 	m_sprs.clear();
 }
 

@@ -71,7 +71,7 @@ void Symbol::LoadResources()
 
 void Symbol::Clear()
 {
-	for_each(m_syms.begin(), m_syms.end(), cu::RemoveRefFonctor<eanim::Symbol>());
+	for_each(m_syms.begin(), m_syms.end(), cu::RemoveRefFunctor<eanim::Symbol>());
 	m_syms.clear();
 }
 

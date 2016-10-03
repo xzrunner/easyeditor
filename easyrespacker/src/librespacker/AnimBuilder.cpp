@@ -63,7 +63,7 @@ void AnimBuilder::Load(const eanim::Symbol* sym, PackAnimation* anim)
 		for (int i = 0, n = sprs.size(); i < n; ++i) {
 			anim->CreateFramePart(dynamic_cast<ee::Sprite*>(sprs[i]), frame);
 		}
-		for_each(sprs.begin(), sprs.end(), cu::RemoveRefFonctor<s2::Sprite>());
+		for_each(sprs.begin(), sprs.end(), cu::RemoveRefFunctor<s2::Sprite>());
 
 		anim->frames.push_back(frame);
 	}

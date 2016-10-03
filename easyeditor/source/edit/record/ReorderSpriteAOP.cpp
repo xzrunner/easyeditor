@@ -8,13 +8,13 @@ namespace ee
 ReorderSpriteAOP::ReorderSpriteAOP(const std::vector<Sprite*>& sprs, bool up)
 	: m_up(up)
 {
-	for_each(sprs.begin(), sprs.end(), cu::AddRefFonctor<Sprite>());
+	for_each(sprs.begin(), sprs.end(), cu::AddRefFunctor<Sprite>());
 	m_sprs = sprs;
 }
 
 ReorderSpriteAOP::~ReorderSpriteAOP()
 {
-	for_each(m_sprs.begin(), m_sprs.end(), cu::RemoveRefFonctor<Sprite>());
+	for_each(m_sprs.begin(), m_sprs.end(), cu::RemoveRefFunctor<Sprite>());
 }
 
 void ReorderSpriteAOP::Undo()

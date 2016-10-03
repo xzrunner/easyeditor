@@ -23,7 +23,7 @@ namespace ee
 	SetSprite##name##ColorAOP::SetSprite##name##ColorAOP(const std::vector<Sprite*>& sprs, const s2::Color& color) \
 		: m_new_color(color) \
 	{ \
-		for_each(sprs.begin(), sprs.end(), cu::AddRefFonctor<Sprite>()); \
+		for_each(sprs.begin(), sprs.end(), cu::AddRefFunctor<Sprite>()); \
 		m_sprs = sprs; \
 	\
 		for (int i = 0, n = sprs.size(); i < n; ++i) { \
@@ -33,7 +33,7 @@ namespace ee
 	\
 	SetSprite##name##ColorAOP::~SetSprite##name##ColorAOP() \
 	{ \
-		for_each(m_sprs.begin(), m_sprs.end(), cu::RemoveRefFonctor<Sprite>()); \
+		for_each(m_sprs.begin(), m_sprs.end(), cu::RemoveRefFunctor<Sprite>()); \
 	} \
 	\
 	void SetSprite##name##ColorAOP::Undo() \

@@ -2,6 +2,8 @@
 #include "Sprite.h"
 #include "Joint.h"
 
+#include <ee/SpriteLoader.h>
+
 #include <sprite2/Skeleton.h>
 #include <sprite2/RenderParams.h>
 #include <gum/SkeletonSymLoader.h>
@@ -39,18 +41,19 @@ void Symbol::DrawSkeleton(const s2::RenderParams& params, const s2::Sprite* spr,
 
 void Symbol::LoadResources()
 {
-	class Loader : public gum::SkeletonSymLoader
-	{
-	public:
-		Loader(s2::SkeletonSymbol* sym) : gum::SkeletonSymLoader(sym) {}
-	protected:
-		virtual s2::Joint* CreateJoint(s2::Sprite* spr, const s2::JointPose& joint_pose) const {
-			return new Joint(spr, joint_pose);
-		}
-	}; // Loader
-
-	Loader loader(this);
+	ee::SpriteLoader spr_loader;
+	JointLoader joint_loader;
+	gum::SkeletonSymLoader loader(this, &spr_loader, &joint_loader);
 	loader.LoadJson(m_filepath);
+}
+
+/************************************************************************/
+/* class Symbol::JointLoader                                            */
+/************************************************************************/
+
+s2::Joint* Symbol::JointLoader::Create(s2::Sprite* spr, const s2::JointPose& joint_pose) const 
+{
+	return new Joint(spr, joint_pose);
 }
 
 }

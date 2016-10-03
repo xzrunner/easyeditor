@@ -77,7 +77,8 @@ void LibraryPage::LoadFromJsonFile(const std::string& filename)
 {
 	Symbol* sym = new Symbol;
 	sym->LoadFromFile(filename);
-	std::string easy_filename = filename.substr(0, filename.find_last_of('.')) + "_anim.json";
+	std::string easy_filename = filename.substr(0, filename.find_last_of('.')) 
+		+ "_" + ee::FileType::GetTag(ee::FILE_ANIM) + ".json";
 	sym->SetFilepath(easy_filename);
 	m_list->Insert(sym);
 	sym->RemoveReference();

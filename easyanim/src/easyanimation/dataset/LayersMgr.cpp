@@ -54,7 +54,7 @@ int LayersMgr::GetFrameCount() const
 bool LayersMgr::Clear()
 {
 	bool ret = !m_layers.empty();
-	for_each(m_layers.begin(), m_layers.end(), cu::RemoveRefFonctor<Layer>());
+	for_each(m_layers.begin(), m_layers.end(), cu::RemoveRefFunctor<Layer>());
 	m_layers.clear();
 	return ret;
 }

@@ -18,13 +18,13 @@ InsertSpriteAOP::InsertSpriteAOP(Sprite* spr)
 
 InsertSpriteAOP::InsertSpriteAOP(const std::vector<Sprite*>& sprs)
 {	
-	for_each(sprs.begin(), sprs.end(), cu::AddRefFonctor<Sprite>());
+	for_each(sprs.begin(), sprs.end(), cu::AddRefFunctor<Sprite>());
 	m_sprs = sprs;
 }
 
 InsertSpriteAOP::~InsertSpriteAOP()
 {
-	for_each(m_sprs.begin(), m_sprs.end(), cu::RemoveRefFonctor<Sprite>());
+	for_each(m_sprs.begin(), m_sprs.end(), cu::RemoveRefFunctor<Sprite>());
 }
 
 void InsertSpriteAOP::Undo()

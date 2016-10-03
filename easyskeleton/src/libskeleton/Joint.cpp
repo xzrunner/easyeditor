@@ -30,7 +30,7 @@ void Joint::DrawSkeleton(const s2::RenderParams& params, bool selected) const
 		s2::RVG::Circle(params.mt * m_world_pose.trans, RADIUS, false);
 	}
 
-	if (m_parent)
+	if (m_parent && m_skin.spr)
 	{
 		sm::vec2 s = params.mt * m_world_pose.trans;
 		sm::vec2 e = params.mt * m_skin.spr->GetCenter() * 2 - s;
@@ -62,7 +62,7 @@ void Joint::DrawSkeleton(const s2::RenderParams& params, bool selected) const
 	}
 	else
 	{
-		s2::RVG::Cross(params.mt * m_skin.spr->GetCenter(), 50, 50);
+		s2::RVG::Cross(params.mt * m_world_pose.trans, 50, 50);
 	}
 
 	// fix me

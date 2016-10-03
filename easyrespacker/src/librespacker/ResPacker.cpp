@@ -56,7 +56,7 @@ ResPacker::ResPacker(const std::string& json_dir, const std::string& tp_name,
 
 ResPacker::~ResPacker()
 {
-	for_each(m_syms.begin(), m_syms.end(), cu::RemoveRefFonctor<const ee::Symbol>());
+	for_each(m_syms.begin(), m_syms.end(), cu::RemoveRefFunctor<const ee::Symbol>());
 	PackNodeFactory::Instance()->Release();
 }
 
@@ -264,7 +264,7 @@ void ResPacker::AddUIWndSymbol(const std::string& filepath)
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
 		sym->Add(sprs[i]);
 	}
-	for_each(sprs.begin(), sprs.end(), cu::RemoveRefFonctor<ee::Sprite>());
+	for_each(sprs.begin(), sprs.end(), cu::RemoveRefFunctor<ee::Sprite>());
 
 	std::string wrapper_path = PackUIWindowTask::GetWrapperFilepath(filepath);
 	sym->SetFilepath(wrapper_path);

@@ -204,7 +204,7 @@ Page()
 PackToBin::Page::
 ~Page() 
 {
-	for_each(m_nodes.begin(), m_nodes.end(), cu::RemoveRefFonctor<PackNode>());
+	for_each(m_nodes.begin(), m_nodes.end(), cu::RemoveRefFunctor<PackNode>());
 }
 
 void PackToBin::Page::

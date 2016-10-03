@@ -32,7 +32,7 @@ LibraryPage::~LibraryPage()
 {
 	m_layer->RemoveReference();
 
-	for_each(m_editops.begin(), m_editops.end(), cu::RemoveRefFonctor<ee::EditOP>());
+	for_each(m_editops.begin(), m_editops.end(), cu::RemoveRefFunctor<ee::EditOP>());
 }
 
 bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const

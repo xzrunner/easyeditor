@@ -51,7 +51,7 @@ VerticalImageList::~VerticalImageList()
 
 void VerticalImageList::Clear()
 {
-	for_each(m_items.begin(), m_items.end(), cu::RemoveRefFonctor<ListItem>());
+	for_each(m_items.begin(), m_items.end(), cu::RemoveRefFunctor<ListItem>());
 	m_items.clear();
 	SetItemCount(0);
 	Refresh(true);

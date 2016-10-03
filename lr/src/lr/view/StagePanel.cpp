@@ -210,7 +210,7 @@ void StagePanel::PointQuery(const sm::vec2& pos)
 void StagePanel::SetLayers(const std::vector<Layer*>& layers)
 {
 	if (m_layers.empty()) {
-		for_each(layers.begin(), layers.end(), cu::AddRefFonctor<Layer>());
+		for_each(layers.begin(), layers.end(), cu::AddRefFunctor<Layer>());
 		m_layers = layers;
 		return;
 	}

@@ -305,7 +305,7 @@ void CocoPacker::ResolveSymbols()
 						}
 					}
 				}
-				for_each(sprs.begin(), sprs.end(), cu::RemoveRefFonctor<s2::Sprite>());
+				for_each(sprs.begin(), sprs.end(), cu::RemoveRefFunctor<s2::Sprite>());
 			}
 
 			m_mapSymbolID.insert(std::make_pair(sym, m_id++));
@@ -919,7 +919,7 @@ void CocoPacker::ParserAnimation(const eanim::Symbol* sym)
 					}
 				}
 			}
-			for_each(sprs.begin(), sprs.end(), cu::RemoveRefFonctor<s2::Sprite>());
+			for_each(sprs.begin(), sprs.end(), cu::RemoveRefFunctor<s2::Sprite>());
 		}
 	}	
  	// children
@@ -935,7 +935,7 @@ void CocoPacker::ParserAnimation(const eanim::Symbol* sym)
 			sym->CreateFrameSprites(i, sprs);
 			for (size_t j = 0, m = sprs.size(); j < m; ++j)
 				ParserSpriteForFrame(dynamic_cast<ee::Sprite*>(sprs[j]), order, map_id2idx);
-			for_each(sprs.begin(), sprs.end(), cu::RemoveRefFonctor<s2::Sprite>());
+			for_each(sprs.begin(), sprs.end(), cu::RemoveRefFunctor<s2::Sprite>());
  		}
  	}
 }

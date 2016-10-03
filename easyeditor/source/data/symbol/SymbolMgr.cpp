@@ -85,7 +85,7 @@ void SymbolMgr::Clear()
 	for ( ; itr != m_syms.end(); ++itr) {
 		syms.push_back(itr->second);
 	}
-	for_each(syms.begin(), syms.end(), cu::RemoveRefFonctor<Symbol>());
+	for_each(syms.begin(), syms.end(), cu::RemoveRefFunctor<Symbol>());
 	m_syms.clear();
 }
 

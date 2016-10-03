@@ -23,7 +23,7 @@ PackAnimation::PackAnimation(const eanim::Symbol* sym)
 
 PackAnimation::~PackAnimation()
 {
-	for_each(m_layers.begin(), m_layers.end(), cu::RemoveRefFonctor<Layer>());
+	for_each(m_layers.begin(), m_layers.end(), cu::RemoveRefFunctor<Layer>());
 }
 
 void PackAnimation::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const
@@ -166,7 +166,7 @@ Frame(const s2::AnimSymbol::Frame* frame)
 PackAnimation::Frame::
 ~Frame()
 {
-	for_each(m_actors.begin(), m_actors.end(), cu::RemoveRefFonctor<Actor>());
+	for_each(m_actors.begin(), m_actors.end(), cu::RemoveRefFunctor<Actor>());
 }
 
 void PackAnimation::Frame::
@@ -243,7 +243,7 @@ Layer(const s2::AnimSymbol::Layer* layer)
 PackAnimation::Layer::
 ~Layer()
 {
-	for_each(m_frames.begin(), m_frames.end(), cu::RemoveRefFonctor<Frame>());
+	for_each(m_frames.begin(), m_frames.end(), cu::RemoveRefFunctor<Frame>());
 }
 
 void PackAnimation::Layer::

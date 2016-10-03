@@ -180,7 +180,7 @@ void Layer::InsertKeyFrame(int time)
 			for (int i = 0, n = sprs.size(); i < n; ++i) {
 				frame->Insert(sprs[i], INT_MAX);
 			}
-			for_each(sprs.begin(), sprs.end(), cu::RemoveRefFonctor<ee::Sprite>());
+			for_each(sprs.begin(), sprs.end(), cu::RemoveRefFunctor<ee::Sprite>());
 			frame->SetClassicTween(true);
 		} else {
 			frame->CopyFromOther(prev);

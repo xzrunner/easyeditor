@@ -181,12 +181,12 @@ void AnchorMgr::Clear()
 	for (int i = 0; i < ANCHOR_COUNT; ++i) {
 		Anchor& anchor = m_anchors[i];
 		for_each(anchor.sprs.begin(), anchor.sprs.end(), 
-			cu::RemoveRefFonctor<ee::Sprite>());
+			cu::RemoveRefFunctor<ee::Sprite>());
 		anchor.sprs.clear();
 	}
 
 	for_each(m_sprs.begin(), m_sprs.end(), 
-		cu::RemoveRefFonctor<ee::Sprite>());
+		cu::RemoveRefFunctor<ee::Sprite>());
 	m_sprs.clear();
 }
 

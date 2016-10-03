@@ -115,7 +115,7 @@ void Symbol::LoadResources()
 
 void Symbol::Clear()
 {
-	for_each(m_oceans.begin(), m_oceans.end(), cu::RemoveRefFonctor<OceanMesh>());
+	for_each(m_oceans.begin(), m_oceans.end(), cu::RemoveRefFunctor<OceanMesh>());
 	m_oceans.clear();
 }
 

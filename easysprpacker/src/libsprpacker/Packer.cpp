@@ -47,7 +47,7 @@ Packer::Packer(const std::string& json_dir, const std::string& tp_name,
 
 Packer::~Packer()
 {
-	for_each(m_syms.begin(), m_syms.end(), cu::RemoveRefFonctor<const ee::Symbol>());
+	for_each(m_syms.begin(), m_syms.end(), cu::RemoveRefFunctor<const ee::Symbol>());
 //	PackNodeFactory::Instance()->Release();
 }
 

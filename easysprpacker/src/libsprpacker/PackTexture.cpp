@@ -29,7 +29,7 @@ PackTexture::PackTexture(const etexture::Symbol* sym)
 
 PackTexture::~PackTexture()
 {
-	for_each(m_polys.begin(), m_polys.end(), cu::RemoveRefFonctor<const PackNode>());
+	for_each(m_polys.begin(), m_polys.end(), cu::RemoveRefFunctor<const PackNode>());
 }
 
 void PackTexture::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const

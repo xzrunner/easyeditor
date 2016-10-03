@@ -14,10 +14,10 @@ DeleteLayerAOP::DeleteLayerAOP(LayerList* list, Layer* layer)
 	: m_list(list)
 {
 	layer->TraverseSprite(FetchAllVisitor<Sprite>(m_sprs));
-	for_each(m_sprs.begin(), m_sprs.end(), cu::AddRefFonctor<Sprite>());
+	for_each(m_sprs.begin(), m_sprs.end(), cu::AddRefFunctor<Sprite>());
 
 	layer->TraverseShape(FetchAllVisitor<Shape>(m_shapes));
-	for_each(m_shapes.begin(), m_shapes.end(), cu::AddRefFonctor<Shape>());
+	for_each(m_shapes.begin(), m_shapes.end(), cu::AddRefFunctor<Shape>());
 
 	layer->AddReference();
 	m_layer = layer;
@@ -25,8 +25,8 @@ DeleteLayerAOP::DeleteLayerAOP(LayerList* list, Layer* layer)
 
 DeleteLayerAOP::~DeleteLayerAOP()
 {
-	for_each(m_sprs.begin(), m_sprs.end(), cu::RemoveRefFonctor<Sprite>());
-	for_each(m_shapes.begin(), m_shapes.end(), cu::RemoveRefFonctor<Shape>());
+	for_each(m_sprs.begin(), m_sprs.end(), cu::RemoveRefFunctor<Sprite>());
+	for_each(m_shapes.begin(), m_shapes.end(), cu::RemoveRefFunctor<Shape>());
 	m_layer->RemoveReference();
 }
 

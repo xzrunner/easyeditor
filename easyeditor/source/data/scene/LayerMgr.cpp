@@ -61,7 +61,7 @@ Layer* LayerMgr::GetLayer(int idx)
 
 void LayerMgr::Clear()
 {
-	for_each(m_layers.begin(), m_layers.end(), cu::RemoveRefFonctor<Layer>());
+	for_each(m_layers.begin(), m_layers.end(), cu::RemoveRefFunctor<Layer>());
 	m_layers.clear();
 }
 

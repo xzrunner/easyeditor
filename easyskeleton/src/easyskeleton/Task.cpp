@@ -41,7 +41,7 @@ void Task::Load(const char* filename)
 	for (int i = 0, n = sprs.size(); i < sprs.size(); ++i) {
 		ee::InsertSpriteSJ::Instance()->Insert(sprs[i]);
 	}
-	for_each(sprs.begin(), sprs.end(), cu::RemoveRefFonctor<ee::Sprite>());
+	for_each(sprs.begin(), sprs.end(), cu::RemoveRefFunctor<ee::Sprite>());
 }
 
 void Task::Store(const char* filename) const
