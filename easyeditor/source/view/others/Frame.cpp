@@ -246,12 +246,7 @@ void Frame::OnSettings(wxCommandEvent& event)
 
 std::string Frame::GetFileFilter() const
 {
-	return GetJsonFileFilter(m_filetag);
-}
-
-std::string Frame::GetJsonFileFilter(const std::string& file_tag)
-{
-	return ee::StringHelper::Format("JSON files (*_%s.json)|*_%s.json", file_tag.c_str(), file_tag.c_str());
+	return ee::FileHelper::GetJsonFileFilter(m_filetag);
 }
 
 void Frame::OnQuit(wxCommandEvent& event)

@@ -8,6 +8,7 @@
 #include <ee/ExceptionDlg.h>
 #include <ee/StringHelper.h>
 #include <ee/SymbolMgr.h>
+#include <ee/FileHelper.h>
 
 #include <easycomplex.h>
 #include <easycoco.h>
@@ -29,9 +30,10 @@ bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
-	std::string filter = ee::FileType::GetTag(ee::FILE_ANIM);
-	filter = "*_" + filter + ".json";
-	filter += "; *.lua";
+	std::string ee_filter = ee::FileHelper::GetJsonFileFilter(ee::FileType::GetTag(ee::FILE_ANIM)),
+		        json_filter = "JSON files (*.json)|*.json",
+				lua_filter = "LUA files (*.lua)|*.lua";
+	std::string filter = ee_filter + "|" + json_filter + "|" + lua_filter;
 	wxFileDialog dlg(this, wxT("导入anim文件"), wxEmptyString, 
 		wxEmptyString, filter, wxFD_OPEN | wxFD_MULTIPLE);
 	if (dlg.ShowModal() == wxID_OK)
@@ -41,13 +43,19 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
 			const std::string filename = filenames[i];
-			std::string type = filename.substr(filename.find_last_of(".") + 1);
-			ee::StringHelper::ToLower(type);
+			int idx = dlg.GetFilterIndex();
 			try {
-				if (type == "json") {
+				switch (idx)
+				{
+				case 0:
+					LoadFromEasyFile(filename);
+					break;
+				case 1:
 					LoadFromJsonFile(filename);
-				} else if (type == "lua") {
+					break;
+				case 2:
 					LoadFromLuaFile(filename);
+					break;
 				}
 			} catch (ee::Exception& e) {
 				ee::ExceptionDlg dlg(m_parent, e);
@@ -57,10 +65,20 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 	}
 }
 
-void LibraryPage::LoadFromJsonFile(const std::string& filename)
+void LibraryPage::LoadFromEasyFile(const std::string& filename)
 {
 	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filename);
 	sym->RefreshThumbnail(filename);
+	m_list->Insert(sym);
+	sym->RemoveReference();
+}
+
+void LibraryPage::LoadFromJsonFile(const std::string& filename)
+{
+	Symbol* sym = new Symbol;
+	sym->LoadFromFile(filename);
+	std::string easy_filename = filename.substr(0, filename.find_last_of('.')) + "_anim.json";
+	sym->SetFilepath(easy_filename);
 	m_list->Insert(sym);
 	sym->RemoveReference();
 }

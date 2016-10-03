@@ -36,7 +36,6 @@ protected:
 	virtual void OnSettings(wxCommandEvent& event);
 
 	virtual std::string GetFileFilter() const;
-	static std::string GetJsonFileFilter(const std::string& file_tag);
 
 private:
 	void Clear();

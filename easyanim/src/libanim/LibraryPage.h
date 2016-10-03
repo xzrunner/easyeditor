@@ -17,6 +17,7 @@ protected:
 	virtual void OnAddPress(wxCommandEvent& event);
 
 private:
+	void LoadFromEasyFile(const std::string& filename);
 	void LoadFromJsonFile(const std::string& filename);
 	void LoadFromLuaFile(const std::string& filename);
 

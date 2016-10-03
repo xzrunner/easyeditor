@@ -27,7 +27,7 @@ public:
 	virtual void ReloadTexture() const;
 	virtual void Traverse(ee::Visitor<ee::Sprite>& visitor);
 
-	void LoadFromFile(const gum::SpriteLoader& spr_loader);
+	void Load(const gum::SpriteLoader& spr_loader);
 
 	static ee::Symbol* Create() { return new Symbol(); }
 

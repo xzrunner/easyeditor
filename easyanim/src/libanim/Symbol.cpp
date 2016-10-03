@@ -56,7 +56,7 @@ void Symbol::Traverse(ee::Visitor<ee::Sprite>& visitor)
 	}
 }
 
-void Symbol::LoadFromFile(const gum::SpriteLoader& spr_loader)
+void Symbol::Load(const gum::SpriteLoader& spr_loader)
 {
 	Clear();
 

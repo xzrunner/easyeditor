@@ -48,8 +48,8 @@ void Frame::OnOpen(wxCommandEvent& event)
 	if (!m_task) return;
 
 	try {
-		std::string single_filter = GetJsonFileFilter(ee::FileType::GetTag(ee::FILE_ANIM)),
-			template_filter = GetJsonFileFilter(ee::FileType::GetTag(ee::FILE_ANIS)),
+		std::string single_filter = ee::FileHelper::GetJsonFileFilter(ee::FileType::GetTag(ee::FILE_ANIM)),
+			template_filter = ee::FileHelper::GetJsonFileFilter(ee::FileType::GetTag(ee::FILE_ANIS)),
 			all_filter = "All | *_ani?.json";
 		std::string filter = all_filter + "|" + single_filter + "|" + template_filter;
 		wxFileDialog dlg(this, wxT("Open"), wxEmptyString, wxEmptyString, filter, wxFD_OPEN);
@@ -69,8 +69,8 @@ void Frame::OnSaveAs(wxCommandEvent& event)
  	if (!m_task) return;
  
  	try {
-		std::string single_filter = GetJsonFileFilter(ee::FileType::GetTag(ee::FILE_ANIM)),
-			template_filter = GetJsonFileFilter(ee::FileType::GetTag(ee::FILE_ANIS)),
+		std::string single_filter = ee::FileHelper::GetJsonFileFilter(ee::FileType::GetTag(ee::FILE_ANIM)),
+			template_filter = ee::FileHelper::GetJsonFileFilter(ee::FileType::GetTag(ee::FILE_ANIS)),
 			png_filter = "PNG files (*.png)|*.png";
 		std::string filter = single_filter + "|" + template_filter + "|" + png_filter;
  		wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, filter, wxFD_SAVE);
