@@ -1,14 +1,15 @@
 #include "Symbol.h"
 #include "config.h"
-#include "LayersLoader.h"
 
 #include <ee/FileHelper.h>
 #include <ee/SymbolSearcher.h>
 #include <ee/Visitor.h>
+#include <ee/SpriteLoader.h>
 
 #include <easycomplex.h>
 
 #include <sprite2/S2_Sprite.h>
+#include <gum/AnimSymLoader.h>
 
 #include <fstream>
 
@@ -55,41 +56,19 @@ void Symbol::Traverse(ee::Visitor<ee::Sprite>& visitor)
 	}
 }
 
-void Symbol::LoadFromFile(LayersLoader& loader)
+void Symbol::LoadFromFile(const gum::SpriteLoader& spr_loader)
 {
 	Clear();
 
-	Json::Value value;
-	Json::Reader reader;
-	std::locale::global(std::locale(""));
-	std::ifstream fin(m_filepath.c_str());
-	std::locale::global(std::locale("C"));
-	reader.parse(fin, value);
-	fin.close();
-
-	m_name  = name = value["name"].asString();
-	m_fps = value["fps"].asInt();
-
-	std::string dir = ee::FileHelper::GetFileDir(m_filepath);
-
-	loader.LoadLayers(value, dir);
+	gum::AnimSymLoader loader(this, &spr_loader);
+	loader.LoadJson(m_filepath);
 }
 
 void Symbol::LoadResources()
 {
-	class Loader : public LayersLoader
-	{
-	public:
-		Loader(Symbol* sym) : LayersLoader(sym) {}
-
-	protected:
-		virtual std::string GetSymbolPath(const std::string& dir, const Json::Value& val) const {
-			return ee::SymbolSearcher::GetSymbolPath(dir, val);
-		}
-	};
-
-	Loader loader(this);
-	LoadFromFile(loader);
+	ee::SpriteLoader spr_loader;
+	gum::AnimSymLoader loader(this, &spr_loader);
+	loader.LoadJson(m_filepath);
 }
 
 }

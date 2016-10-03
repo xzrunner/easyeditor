@@ -1,9 +1,8 @@
 #ifndef _LIBANIS_SYMBOL_H_
 #define _LIBANIS_SYMBOL_H_
 
-#include "../libanim/LayersLoader.h"
-
 #include <ee/Symbol.h>
+#include <ee/SpriteLoader.h>
 
 #include <sprite2/DummySymbol.h>
 
@@ -35,12 +34,11 @@ protected:
 	virtual void LoadResources();
 
 private:
-	class Loader : public eanim::LayersLoader
+	class SpriteLoader : public ee::SpriteLoader
 	{
 	public:
-		Loader(eanim::Symbol* sym, const std::string& dirpath) 
-			: eanim::LayersLoader(sym)
-			, m_dirpath(dirpath) {}
+		SpriteLoader(const std::string& dirpath) 
+			: m_dirpath(dirpath) {}
 
 	protected:
 		virtual std::string GetSymbolPath(const std::string& dir, const Json::Value& val) const;
@@ -48,7 +46,7 @@ private:
 	private:
 		std::string m_dirpath;
 
-	}; // Loader
+	}; // SpriteLoader
 
 private:
 	void Clear();

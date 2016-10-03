@@ -25,15 +25,6 @@ protected:
 	 */
 	virtual void LoadResources();
 
-private:
-	class Loader : public gum::Scale9SymLoader
-	{
-	public:
-		Loader(Symbol* sym);
-	protected:
-		virtual s2::Sprite* LoadSprite(const Json::Value& val, const std::string& dir);
-	}; // Loader
-
 }; // Symbol
 
 }

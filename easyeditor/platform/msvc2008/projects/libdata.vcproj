@@ -602,74 +602,82 @@
 			Name="sprite"
 			>
 			<File
-				RelativePath="..\..\..\source\data\sprite\DummySprite.cpp"
+				RelativePath="..\..\..\source\data\sprite\Sprite.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\include\ee\DummySprite.h"
+				RelativePath="..\..\..\include\ee\Sprite.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\source\data\sprite\FontBlankSprite.cpp"
+				RelativePath="..\..\..\source\data\sprite\SpriteFactory.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\include\ee\FontBlankSprite.h"
+				RelativePath="..\..\..\include\ee\SpriteFactory.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\source\data\sprite\ImageSprite.cpp"
+				RelativePath="..\..\..\source\data\sprite\SpriteIO.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\include\ee\ImageSprite.h"
+				RelativePath="..\..\..\include\ee\SpriteIO.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\source\data\sprite\ScriptsSprite.cpp"
+				RelativePath="..\..\..\source\data\sprite\SpriteLoader.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\include\ee\ScriptsSprite.h"
+				RelativePath="..\..\..\include\ee\SpriteLoader.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\SpriteObserver.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\source\data\sprite\wrap_ISprite.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\wrap_ISprite.h"
 				>
 			</File>
 			<Filter
-				Name="base"
+				Name="type"
 				>
 				<File
-					RelativePath="..\..\..\source\data\sprite\Sprite.cpp"
+					RelativePath="..\..\..\source\data\sprite\DummySprite.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\include\ee\Sprite.h"
+					RelativePath="..\..\..\include\ee\DummySprite.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\source\data\sprite\SpriteFactory.cpp"
+					RelativePath="..\..\..\source\data\sprite\FontBlankSprite.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\include\ee\SpriteFactory.h"
+					RelativePath="..\..\..\include\ee\FontBlankSprite.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\source\data\sprite\SpriteIO.cpp"
+					RelativePath="..\..\..\source\data\sprite\ImageSprite.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\include\ee\SpriteIO.h"
+					RelativePath="..\..\..\include\ee\ImageSprite.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\include\ee\SpriteObserver.h"
+					RelativePath="..\..\..\source\data\sprite\ScriptsSprite.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\source\data\sprite\wrap_ISprite.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\ee\wrap_ISprite.h"
+					RelativePath="..\..\..\include\ee\ScriptsSprite.h"
 					>
 				</File>
 			</Filter>

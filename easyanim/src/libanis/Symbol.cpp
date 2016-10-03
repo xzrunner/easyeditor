@@ -58,7 +58,7 @@ void Symbol::LoadResources()
 
 		eanim::Symbol* sym = new eanim::Symbol();
 		sym->SetFilepath(m_filepath);
-		Loader loader(sym, dirpath);
+		SpriteLoader loader(dirpath);
 		sym->LoadFromFile(loader);
 
 		temp_val = value["template"][idx++];
@@ -76,10 +76,10 @@ void Symbol::Clear()
 }
 
 //////////////////////////////////////////////////////////////////////////
-// class Symbol::Loader
+// class Symbol::SpriteLoader
 //////////////////////////////////////////////////////////////////////////
 
-std::string Symbol::Loader::
+std::string Symbol::SpriteLoader::
 GetSymbolPath(const std::string& dir, const Json::Value& val) const
 {
 	std::string filepath = val["filepath"].asString();

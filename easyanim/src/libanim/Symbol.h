@@ -7,10 +7,12 @@
 
 #include <vector>
 
+namespace gum { class SpriteLoader; }
+
 namespace eanim
 {
 
-class LayersLoader;
+class SpriteLoader;
 class Sprite;
 
 class Symbol : public ee::Symbol, public s2::AnimSymbol
@@ -25,7 +27,7 @@ public:
 	virtual void ReloadTexture() const;
 	virtual void Traverse(ee::Visitor<ee::Sprite>& visitor);
 
-	void LoadFromFile(LayersLoader& loader);
+	void LoadFromFile(const gum::SpriteLoader& spr_loader);
 
 	static ee::Symbol* Create() { return new Symbol(); }
 

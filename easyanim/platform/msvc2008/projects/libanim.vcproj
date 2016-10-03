@@ -189,14 +189,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libanim\LayersLoader.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libanim\LayersLoader.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\libanim\Sprite.cpp"
 				>
 			</File>
