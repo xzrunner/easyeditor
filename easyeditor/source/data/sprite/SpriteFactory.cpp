@@ -30,6 +30,10 @@ SpriteFactory::SpriteFactory()
 
 Sprite* SpriteFactory::Create(Symbol* sym)
 {
+	if (!sym) {
+		return NULL;
+	}
+
 	Sprite* spr = NULL;
 	int type = sym->Type();
 	switch (type)

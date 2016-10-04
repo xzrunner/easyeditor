@@ -3,6 +3,7 @@
 #include <ee/FileHelper.h>
 #include <ee/SymbolSearcher.h>
 #include <ee/Visitor.h>
+#include <ee/SymbolLoader.h>
 #include <ee/SpriteLoader.h>
 #include <ee/SymbolFile.h>
 
@@ -62,14 +63,16 @@ void Symbol::Load(const gum::SpriteLoader& spr_loader)
 {
 	Clear();
 
-	gum::AnimSymLoader loader(this, &spr_loader);
+	ee::SymbolLoader sym_loader;
+	gum::AnimSymLoader loader(this, &sym_loader, &spr_loader);
 	loader.LoadJson(m_filepath);
 }
 
 void Symbol::LoadResources()
 {
+	ee::SymbolLoader sym_loader;
 	ee::SpriteLoader spr_loader;
-	gum::AnimSymLoader loader(this, &spr_loader);
+	gum::AnimSymLoader loader(this, &sym_loader, &spr_loader);
 	loader.LoadJson(m_filepath);
 }
 

@@ -410,6 +410,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\include\ee\SymbolLoader.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\SymbolLoader.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\source\data\symbol\SymbolMgr.cpp"
 				>
 			</File>
