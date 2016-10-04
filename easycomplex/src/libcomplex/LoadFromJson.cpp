@@ -29,34 +29,23 @@ void LoadFromJson::Load(const std::string& _filepath, const Json::Value& value,
 
 	complex->m_use_render_cache = value["use_render_cache"].asBool();
 
-	int i = 0;
-	Json::Value spriteValue = value["sprite"][i++];
-	while (!spriteValue.isNull()) {
-		std::string filepath = ee::SymbolSearcher::GetSymbolPath(dir, spriteValue);
-		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-		if (!sym) {
-			std::string filepath = spriteValue["filepath"].asString();
-			throw ee::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s, [src]:%s", dir.c_str(), filepath.c_str(), _filepath.c_str());
-		}
-		ee::SymbolSearcher::SetSymbolFilepaths(dir, sym, spriteValue);
-
-		//		sym->refresh();
-		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
-		spr->Load(spriteValue, dir);
-
-		sym->RemoveReference();
-
-		static_cast<Symbol*>(complex)->Add(spr);
+	for (int i = 0, n = value["sprite"].size(); i < n; ++i) {
+		ee::Sprite* spr = LoadSprite(value["sprite"][i], dir);
+		complex->Add(spr);
 		spr->RemoveReference();
-#ifdef OPEN_SCREEN_CACHE
-		ee::SpatialPartition::Instance()->Insert(spr);
-		ee::SpriteRenderer::InvalidRect(spr);
-#endif // OPEN_SCREEN_CACHE
-
-		spriteValue = value["sprite"][i++];
-	}	
+	}
 
 	InitActions(complex, value);
+}
+
+ee::Sprite* LoadFromJson::LoadSprite(const Json::Value& val, const std::string& dir)
+{
+	ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(val, dir);
+#ifdef OPEN_SCREEN_CACHE
+	ee::SpatialPartition::Instance()->Insert(spr);
+	ee::SpriteRenderer::InvalidRect(spr);
+#endif // OPEN_SCREEN_CACHE
+	return spr;
 }
 
 void LoadFromJson::InitActions(Symbol* sym, const Json::Value& val)

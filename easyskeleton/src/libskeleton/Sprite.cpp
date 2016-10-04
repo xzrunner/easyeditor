@@ -2,6 +2,9 @@
 #include "Symbol.h"
 
 #include <gum/SkeletonIO.h>
+#include <gum/SymbolFile.h>
+
+#include <sprite2/SymType.h>
 
 namespace libskeleton
 {
@@ -36,13 +39,17 @@ ee::Sprite* Sprite::Create(ee::Symbol* sym)
 void Sprite::Load(const Json::Value& val, const std::string& dir)
 {
 	ee::Sprite::Load(val);
-	gum::SkeletonIO::Load(val["skeleton"], m_pose);
+
+	std::string key = gum::SymbolFile::Instance()->Tag(s2::SYM_SKELETON);
+	gum::SkeletonIO::Load(val[key], m_pose);
 }
 
 void Sprite::Store(Json::Value& val, const std::string& dir) const
 {
 	ee::Sprite::Store(val);
-	gum::SkeletonIO::Store(val["skeleton"], m_pose);
+
+	std::string key = gum::SymbolFile::Instance()->Tag(s2::SYM_SKELETON);
+	gum::SkeletonIO::Store(val[key], m_pose);
 }
 
 }

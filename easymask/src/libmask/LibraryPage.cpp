@@ -1,6 +1,5 @@
 #include "LibraryPage.h"
 #include "Symbol.h"
-#include "config.h"
 
 #include <ee/LibraryList.h>
 #include <ee/SymbolFile.h>

@@ -1,5 +1,4 @@
 #include "LayerLibraryPage.h"
-#include "config.h"
 
 #include <ee/LibraryList.h>
 #include <ee/LibraryPanel.h>

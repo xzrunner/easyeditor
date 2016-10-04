@@ -3,6 +3,8 @@
 
 #include <json/json.h>
 
+namespace ee { class Sprite; }
+
 namespace ecomplex
 {
 
@@ -15,6 +17,8 @@ public:
 		const std::string& dir, Symbol* complex);
 
 private:
+	static ee::Sprite* LoadSprite(const Json::Value& val, const std::string& dir);
+
 	static void InitActions(Symbol* sym, const Json::Value& val);
 	static void CreateActionsFromTag(Symbol* sym);
 

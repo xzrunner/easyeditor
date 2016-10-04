@@ -3,6 +3,8 @@
 
 #include "Visitor.h"
 
+#include <sprite2/SymType.h>
+
 #include <map>
 
 namespace ee
@@ -15,7 +17,7 @@ class SymbolMgr
 public:
 	static SymbolMgr* Instance();
 
-	Symbol* FetchSymbol(const std::string& filepath);
+	Symbol* FetchSymbol(const std::string& filepath, int type = s2::SYM_UNKNOWN);
 
 	void Clear();
 

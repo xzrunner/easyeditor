@@ -68,13 +68,19 @@ void LibraryPage::LoadFromEasyFile(const std::string& filename)
 
 void LibraryPage::LoadFromJsonFile(const std::string& filename)
 {
-	Symbol* sym = new Symbol;
-	sym->LoadFromFile(filename);
-	std::string easy_filename = filename.substr(0, filename.find_last_of('.')) 
-		+ "_" + ee::SymbolFile::Instance()->Tag(s2::SYM_SKELETON) + ".json";
-	sym->SetFilepath(easy_filename);
+	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filename, s2::SYM_SKELETON);
+//	sym->RefreshThumbnail(filename);
 	m_list->Insert(sym);
 	sym->RemoveReference();
+
+	//Symbol* sym = new Symbol;
+	//sym->LoadFromFile(filename);
+	//std::string easy_filename = filename.substr(0, filename.find_last_of('.')) 
+	//	+ "_" + ee::SymbolFile::Instance()->Tag(s2::SYM_SKELETON) + ".json";
+	//sym->SetFilepath(easy_filename);
+	//sym->RefreshThumbnail(filename);
+	//m_list->Insert(sym);
+	//sym->RemoveReference();
 }
 
 }

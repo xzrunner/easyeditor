@@ -14,10 +14,12 @@ namespace ee
 
 SymbolFactory::CallbackMap SymbolFactory::m_creators;
 
-Symbol* SymbolFactory::Create(const std::string& filepath)
+Symbol* SymbolFactory::Create(const std::string& filepath, int type)
 {
 	Symbol* sym = NULL;
-	int type = ee::SymbolFile::Instance()->Type(filepath);
+	if (type == s2::SYM_UNKNOWN) {
+		type = ee::SymbolFile::Instance()->Type(filepath);
+	}
 	switch (type)
 	{
 	case s2::SYM_IMAGE:

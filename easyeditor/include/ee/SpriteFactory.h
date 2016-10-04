@@ -17,6 +17,8 @@ class SpriteFactory
 public:
 	Sprite* Create(Symbol* sym);
 	Sprite* Create(const Json::Value& val, const std::string& dir);
+	Sprite* Create(const Json::Value& val, const std::string& dir, 
+		const std::string& filepath);
 
 	void Insert(Sprite* spr);
 	void Remove(Sprite* spr);

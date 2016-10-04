@@ -19,7 +19,7 @@
 #include <ee/SpriteFactory.h>
 #include <ee/StringHelper.h>
 #include <ee/AnimatedGifSaver.h>
-#include <ee/SymbolSearcher.h>
+#include <ee/SpriteFactory.h>
 
 #include <easyanim.h>
 #include <easyimage.h>
@@ -276,9 +276,9 @@ KeyFrame* FileIO::LoadFrame(Layer* layer, const Json::Value& frameValue, const s
 	return frame;
 }
 
-ee::Sprite* FileIO::LoadActor(const Json::Value& actorValue, const std::string& dir)
+ee::Sprite* FileIO::LoadActor(const Json::Value& val, const std::string& dir)
 {
-	std::string filepath = actorValue["filepath"].asString();
+	std::string filepath = val["filepath"].asString();
 	while (true) 
 	{
 		if (ee::FileHelper::IsFileExist(filepath))
@@ -303,15 +303,7 @@ ee::Sprite* FileIO::LoadActor(const Json::Value& actorValue, const std::string& 
 		filepath = absolute_path;
 		break;
 	}
-
-	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-	ee::SymbolSearcher::SetSymbolFilepaths(dir, sym, actorValue);
-//	sym->refresh();
-	ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
-	spr->Load(actorValue, dir);
-	sym->RemoveReference();
-
-	return spr;
+	return ee::SpriteFactory::Instance()->Create(val, dir, filepath);
 }
 
 void FileIO::LoadSkeleton(const Json::Value& skeletonValue, const std::vector<ee::Sprite*>& sprs,

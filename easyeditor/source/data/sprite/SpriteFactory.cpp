@@ -14,6 +14,7 @@
 #include "SymbolType.h"
 
 #include <sprite2/SymType.h>
+#include <gum/SymbolFile.h>
 
 namespace ee
 {
@@ -66,12 +67,23 @@ Sprite* SpriteFactory::Create(Symbol* sym)
 Sprite* SpriteFactory::Create(const Json::Value& val, const std::string& dir)
 {
 	std::string filepath = SymbolSearcher::GetSymbolPath(dir, val);
-	Symbol* sym = SymbolMgr::Instance()->FetchSymbol(filepath);
-	if (!sym) {
-		std::string filepath = val["filepath"].asString();
-		throw Exception("Symbol doesn't exist, \n[dir]:%s, \n[file]:%s !", 
-			dir.c_str(), filepath.c_str());
+	return Create(val, dir, filepath);
+}
+
+Sprite* SpriteFactory::Create(const Json::Value& val, const std::string& dir, 
+							  const std::string& filepath)
+{
+	ee::Symbol* sym = NULL;
+	try {
+		sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+	} catch (ee::Exception& e) {
+		if (val.isMember(gum::SymbolFile::Instance()->Tag(s2::SYM_SKELETON))) {
+			sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath, s2::SYM_SKELETON);
+		} else {
+			throw e;
+		}
 	}
+
 	SymbolSearcher::SetSymbolFilepaths(dir, sym, val);
 	Sprite* spr = SpriteFactory::Instance()->Create(sym);
 	spr->Load(val, dir);
