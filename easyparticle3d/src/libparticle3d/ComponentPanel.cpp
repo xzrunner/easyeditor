@@ -10,8 +10,10 @@
 #include <ee/FileHelper.h>
 #include <ee/ImagePanel.h>
 #include <ee/SliderCtrlTwo.h>
+#include <ee/SymbolFile.h>
 
 #include <ps_3d.h>
+#include <sprite2/SymType.h>
 
 #include <wx/colourdata.h>
 #include <wx/colordlg.h>
@@ -151,7 +153,7 @@ void ComponentPanel::InitLayout(wxSizer* top_sizer)
 		// Right Icon
 		{
 			std::string filepath = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(m_pc->ud))->GetFilepath();
-			if (ee::FileType::IsType(filepath, ee::FILE_IMAGE)) {
+			if (ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_IMAGE) {
 				ee::ImagePanel* panel = new ee::ImagePanel(this, filepath, 100);
 				hori_sizer->Add(panel);
 			}

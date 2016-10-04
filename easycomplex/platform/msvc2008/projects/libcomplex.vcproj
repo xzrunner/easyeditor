@@ -521,10 +521,6 @@
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath="..\..\..\src\libcomplex\config.h"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>

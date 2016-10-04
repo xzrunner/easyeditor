@@ -4,6 +4,9 @@
 #include <ee/FileHelper.h>
 #include <ee/StringHelper.h>
 #include <ee/Exception.h>
+#include <ee/SymbolFile.h>
+
+#include <sprite2/SymType.h>
 
 #include <fstream>
 
@@ -54,12 +57,17 @@ void VerifyJson::InitFiles(const std::string& dirpath)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 		std::string name = ee::FileHelper::GetFilenameWithExtension(filepath);
-		if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX)) {
+		int type = ee::SymbolFile::Instance()->Type(filepath);
+		switch (type)
+		{
+		case s2::SYM_COMPLEX:
 			_complex_files.push_back(filepath);
 			_map_name2node.insert(std::make_pair(name, new Node(filepath)));
-		} else if (ee::FileType::IsType(filepath, ee::FILE_ANIM)) {
+			break;
+		case s2::SYM_ANIMATION:
 			_anim_files.push_back(filepath);
 			_map_name2node.insert(std::make_pair(name, new Node(filepath)));
+			break;
 		}
 	}
 }
@@ -160,9 +168,9 @@ void VerifyJson::Report() const
 void VerifyJson::HandleSpritePath(const std::string& parent,
 								   const std::string& child)
 {
- 	if (!ee::FileType::IsType(child, ee::FILE_COMPLEX) &&
-		!ee::FileType::IsType(child, ee::FILE_ANIM)) {
- 		return;
+	int type = ee::SymbolFile::Instance()->Type(child);
+	if (type != s2::SYM_COMPLEX && type != s2::SYM_ANIMATION) {
+		return;
 	}
  
 	std::string childpath = ee::FileHelper::GetAbsolutePath(child);

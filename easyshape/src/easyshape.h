@@ -1,7 +1,3 @@
-#ifndef EASY_SHAPE_H
-#define EASY_SHAPE_H
-
-#include "libshape/config.h"
 #include "libshape/Symbol.h"
 #include "libshape/Sprite.h"
 #include "libshape/FileIO.h"
@@ -37,5 +33,3 @@
 
 #include "libshape/TextureMaterial.h"
 #include "libshape/ColorMaterial.h"
-
-#endif // EASY_SHAPE_H

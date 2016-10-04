@@ -222,10 +222,6 @@
 			</File>
 		</Filter>
 		<File
-			RelativePath="..\..\..\src\easyejoy2d\config.h"
-			>
-		</File>
-		<File
 			RelativePath="..\..\..\..\editor-external\wx\include\wx\msw\wx.rc"
 			>
 			<FileConfiguration

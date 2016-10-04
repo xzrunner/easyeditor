@@ -185,10 +185,6 @@
 			Name="frame"
 			>
 			<File
-				RelativePath="..\..\..\src\easyui\config.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\easyui\Frame.cpp"
 				>
 			</File>

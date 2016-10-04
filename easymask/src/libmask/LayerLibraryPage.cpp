@@ -5,6 +5,9 @@
 #include <ee/LibraryPanel.h>
 #include <ee/SymbolMgr.h>
 #include <ee/Symbol.h>
+#include <ee/SymbolFile.h>
+
+#include <sprite2/SymType.h>
 
 namespace emask
 {
@@ -13,7 +16,7 @@ LayerLibraryPage::LayerLibraryPage(wxWindow* parent, const std::string& name)
 	: ee::LibraryPage(parent, name)
 {
 	InitLayout();
-	m_list->SetFileter(FILE_TAG);
+	m_list->SetFileter(ee::SymbolFile::Instance()->Tag(s2::SYM_MASK));
 }
 
 void LayerLibraryPage::OnAddPress(wxCommandEvent& event)

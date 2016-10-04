@@ -5,10 +5,11 @@
 #include <ee/ImagePanel.h>
 #include <ee/SliderCtrlTwo.h>
 #include <ee/Symbol.h>
-#include <ee/FileType.h>
+#include <ee/SymbolFile.h>
 #include <ee/FileHelper.h>
 
 #include <mt_2d.h>
+#include <sprite2/SymType.h>
 #include <gum/JsonSerializer.h>
 
 namespace etrail
@@ -92,7 +93,7 @@ void ImageCompPanel::InitLayout(wxSizer* top_sizer)
 		// right
 		{
 			std::string filepath = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(m_pc->mode.A.ud))->GetFilepath();
-			if (ee::FileType::IsType(filepath, ee::FILE_IMAGE)) {
+			if (ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_IMAGE) {
 				ee::ImagePanel* panel = new ee::ImagePanel(this, filepath, 100);
 				hori_sizer->Add(panel);
 			}

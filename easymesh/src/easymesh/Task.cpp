@@ -2,13 +2,16 @@
 
 #include <ee/SymbolMgr.h>
 #include <ee/Bitmap.h>
-#include <ee/FileType.h>
+#include <ee/SymbolFile.h>
 #include <ee/LibraryPanel.h>
 #include <ee/LibraryImagePage.h>
 #include <ee/PropertySettingPanel.h>
+#include <ee/SymbolFile.h>
 
 #include <easymesh.h>
 #include <easycomplex.h>
+
+#include <sprite2/SymType.h>
 
 namespace emesh
 {
@@ -32,7 +35,7 @@ Task::~Task()
 
 void Task::Load(const char* filepath)
 {
-	if (!ee::FileType::IsType(filepath, ee::FILE_MESH)) {
+	if (ee::SymbolFile::Instance()->Type(filepath) != s2::SYM_MESH) {
 		return;
 	}
 

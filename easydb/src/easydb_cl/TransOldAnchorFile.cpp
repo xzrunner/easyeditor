@@ -4,11 +4,13 @@
 #include <ee/FileHelper.h>
 #include <ee/SymbolMgr.h>
 #include <ee/FontBlankSprite.h>
+#include <ee/SymbolFile.h>
 
 #include <easycomplex.h>
 #include <easyanim.h>
 
 #include <sprite2/S2_Sprite.h>
+#include <sprite2/SymType.h>
 
 namespace edb
 {
@@ -49,10 +51,15 @@ void TransOldAnchorFile::Run(const std::string& folder)
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath();
-		if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX)) {
+		int type = ee::SymbolFile::Instance()->Type(filepath);
+		switch (type)
+		{
+		case s2::SYM_COMPLEX:
 			TransComplex(filepath);
-		} else if (ee::FileType::IsType(filepath, ee::FILE_ANIM)) {
+			break;
+		case s2::SYM_ANIMATION:
 			TransAnimation(filepath);
+			break;
 		}
 	}
 }

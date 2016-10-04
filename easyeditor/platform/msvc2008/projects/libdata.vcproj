@@ -386,65 +386,41 @@
 			Name="symbol"
 			>
 			<File
-				RelativePath="..\..\..\source\data\symbol\DummySymbol.cpp"
+				RelativePath="..\..\..\source\data\symbol\Symbol.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\include\ee\DummySymbol.h"
+				RelativePath="..\..\..\include\ee\Symbol.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\source\data\symbol\FontBlankSymbol.cpp"
+				RelativePath="..\..\..\source\data\symbol\SymbolFactory.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\include\ee\FontBlankSymbol.h"
+				RelativePath="..\..\..\include\ee\SymbolFactory.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\source\data\symbol\ImageSymbol.cpp"
+				RelativePath="..\..\..\source\data\symbol\SymbolFile.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\include\ee\ImageSymbol.h"
+				RelativePath="..\..\..\include\ee\SymbolFile.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\source\data\symbol\ScriptsSymbol.cpp"
+				RelativePath="..\..\..\source\data\symbol\SymbolMgr.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\include\ee\ScriptsSymbol.h"
+				RelativePath="..\..\..\include\ee\SymbolMgr.h"
 				>
 			</File>
-			<Filter
-				Name="base"
+			<File
+				RelativePath="..\..\..\include\ee\SymbolType.h"
 				>
-				<File
-					RelativePath="..\..\..\source\data\symbol\Symbol.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\ee\Symbol.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\source\data\symbol\SymbolFactory.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\ee\SymbolFactory.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\source\data\symbol\SymbolMgr.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\ee\SymbolMgr.h"
-					>
-				</File>
-			</Filter>
+			</File>
 			<Filter
 				Name="searcher"
 				>
@@ -462,6 +438,42 @@
 				</File>
 				<File
 					RelativePath="..\..\..\include\ee\SymbolSearcher.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="type"
+				>
+				<File
+					RelativePath="..\..\..\source\data\symbol\DummySymbol.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\DummySymbol.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\data\symbol\FontBlankSymbol.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\FontBlankSymbol.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\data\symbol\ImageSymbol.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\ImageSymbol.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\data\symbol\ScriptsSymbol.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\ScriptsSymbol.h"
 					>
 				</File>
 			</Filter>

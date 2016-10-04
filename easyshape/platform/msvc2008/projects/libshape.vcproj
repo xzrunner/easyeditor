@@ -173,10 +173,6 @@
 			Name="dataset"
 			>
 			<File
-				RelativePath="..\..\..\src\libshape\config.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\libshape\Sprite.cpp"
 				>
 			</File>

@@ -22,6 +22,7 @@ public:
 	 *  @interface
 	 *    s2::Symbol
 	 */
+	virtual int Type() const;
 	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
 	virtual sm::rect GetBounding(const s2::Sprite* spr = NULL) const;
 

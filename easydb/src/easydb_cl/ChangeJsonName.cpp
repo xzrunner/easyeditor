@@ -3,6 +3,9 @@
 
 #include <ee/FileHelper.h>
 #include <ee/StringHelper.h>
+#include <ee/SymbolFile.h>
+
+#include <sprite2/SymType.h>
 
 #include <fstream>
 #include <set>
@@ -46,7 +49,7 @@ void ChangeJsonName::Trigger(const std::string& dir, const std::string& postfix)
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (!ee::FileType::IsType(filepath, ee::FILE_PARTICLE3D)) {
+		if (ee::SymbolFile::Instance()->Type(filepath) != s2::SYM_PARTICLE3D) {
 			continue;
 		}
 
@@ -55,11 +58,11 @@ void ChangeJsonName::Trigger(const std::string& dir, const std::string& postfix)
 		name = name.substr(0, name.find_last_of('_'));
 		used_set.insert(name);
 	}
-
+	
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (!ee::FileType::IsType(filepath, ee::FILE_COMPLEX)) {
+		if (ee::SymbolFile::Instance()->Type(filepath) != s2::SYM_COMPLEX) {
 			continue;
 		}
 

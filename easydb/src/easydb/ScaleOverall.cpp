@@ -11,8 +11,10 @@
 #include <ee/ImageSymbol.h>
 #include <ee/EE_ShaderLab.h>
 #include <ee/SpriteIO.h>
+#include <ee/SymbolFile.h>
 
 #include <SM_Calc.h>
+#include <sprite2/SymType.h>
 
 #include <fstream>
 
@@ -72,7 +74,7 @@ void ScaleOverall::Scale(ee::Snapshoot& ss, const std::string& dir, float scale)
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (ee::FileType::IsType(filepath, ee::FILE_IMAGE)) {
+		if (ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_IMAGE) {
 			ScaleImage(filepath, scale, ss, mapImg2Center);
 		}
 	}
@@ -80,10 +82,15 @@ void ScaleOverall::Scale(ee::Snapshoot& ss, const std::string& dir, float scale)
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX)) {
+		int type = ee::SymbolFile::Instance()->Type(filepath);
+		switch (type)
+		{
+		case s2::SYM_COMPLEX:
 			ScaleComplex(filepath, scale, mapImg2Center);
-		} else if (ee::FileType::IsType(filepath, ee::FILE_ANIM)) {
+			break;
+		case s2::SYM_ANIMATION:
 			ScaleAnim(filepath, scale, mapImg2Center);
+			break;
 		}
 	}
 }

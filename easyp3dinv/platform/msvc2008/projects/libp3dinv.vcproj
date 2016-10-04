@@ -253,10 +253,6 @@
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath="..\..\..\src\libp3dinv\config.h"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>

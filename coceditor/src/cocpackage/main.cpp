@@ -15,6 +15,9 @@
 #include <ee/Config.h>
 #include <ee/SearcherPathMgr.h>
 #include <ee/Exception.h>
+#include <ee/SymbolFile.h>
+
+#include <sprite2/SymType.h>
 
 #include <iostream>
 
@@ -28,26 +31,26 @@ std::set<std::string> IGNORE_LIST;
 
 static void InitSymbolCreators() 
 {
-	ee::SymbolFactory::RegisterCreator(ecomplex::FILE_TAG, &ecomplex::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(ecomplex::FILE_TAG, &ecomplex::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(s2::SYM_COMPLEX, &ecomplex::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_COMPLEX, &ecomplex::Sprite::Create);
 
-	ee::SymbolFactory::RegisterCreator(eanim::FILE_TAG, &eanim::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(eanim::FILE_TAG, &eanim::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(s2::SYM_ANIMATION, &eanim::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_ANIMATION, &eanim::Sprite::Create);
 
-	ee::SymbolFactory::RegisterCreator(escale9::FILE_TAG, &escale9::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(escale9::FILE_TAG, &escale9::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(s2::SYM_SCALE9, &escale9::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_SCALE9, &escale9::Sprite::Create);
 
-	ee::SymbolFactory::RegisterCreator(emesh::FILE_TAG, &emesh::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(emesh::FILE_TAG, &emesh::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(s2::SYM_MESH, &emesh::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_MESH, &emesh::Sprite::Create);
 
-	ee::SymbolFactory::RegisterCreator(eterrain2d::FILE_TAG, &eterrain2d::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(eterrain2d::FILE_TAG, &eterrain2d::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(ee::SYM_TERRAIN2D, &eterrain2d::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(ee::SYM_TERRAIN2D, &eterrain2d::Sprite::Create);
 
-	ee::SymbolFactory::RegisterCreator(etexture::FILE_TAG, &etexture::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(etexture::FILE_TAG, &etexture::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(s2::SYM_TEXTURE, &etexture::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_TEXTURE, &etexture::Sprite::Create);
 
-	ee::SymbolFactory::RegisterCreator(eicon::FILE_TAG, &eicon::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(eicon::FILE_TAG, &eicon::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(s2::SYM_ICON, &eicon::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_ICON, &eicon::Sprite::Create);
 }
 
 void LoadAllFilesSorted(const std::string& dir, std::set<std::string>& files_sorted)
@@ -72,9 +75,8 @@ void LoadFromDir(const std::string& dir)
 	std::set<std::string>::iterator itr = files_sorted.begin();
 	for ( ; itr != files_sorted.end(); ++itr) 
 	{
-		if (ee::FileType::IsType(*itr, ee::FILE_COMPLEX)
-			|| ee::FileType::IsType(*itr, ee::FILE_ANIM))
-		{
+		int type = ee::SymbolFile::Instance()->Type(*itr);
+		if (type == s2::SYM_COMPLEX || type == s2::SYM_ANIMATION) {
 			// todo release symbol
 			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(*itr);
 			SYMBOLS.push_back(sym);
@@ -133,8 +135,8 @@ void LoadFromList(const std::string& list)
 	std::set<std::string>::iterator itr = files_sorted.begin();
 	for ( ; itr != files_sorted.end(); ++itr) 
 	{
-		if (ee::FileType::IsType(*itr, ee::FILE_COMPLEX) || 
-			ee::FileType::IsType(*itr, ee::FILE_ANIM))
+		int type = ee::SymbolFile::Instance()->Type(*itr);
+		if (type == s2::SYM_COMPLEX || type == s2::SYM_ANIMATION) 
 		{
 			// todo release symbol
 			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(*itr);

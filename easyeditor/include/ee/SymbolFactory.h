@@ -11,14 +11,14 @@ class Symbol;
 class SymbolFactory
 {
 public:
-	static Symbol* create(const std::string& filepath);
+	static Symbol* Create(const std::string& filepath);
 
 	typedef Symbol* (*CreateCallback)();
-	static void RegisterCreator(const std::string& type, CreateCallback cb);
-	static void UnregisterCreator(const std::string& type);
+	static void RegisterCreator(int type, CreateCallback cb);
+	static void UnregisterCreator(int type);
 
 private:
-	typedef std::map<std::string, CreateCallback> CallbackMap;
+	typedef std::map<int, CreateCallback> CallbackMap;
 	static CallbackMap m_creators;
 
 }; // SymbolFactory

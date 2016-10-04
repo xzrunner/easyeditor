@@ -7,6 +7,7 @@
 #include <float.h>
 #include <math.h>
 #include <stdint.h>
+#include <stdlib.h>
 
 #define MAX_NODES 1024
 #define NODE_CAPACITY 32

@@ -3,9 +3,13 @@
 
 #include <ee/FileHelper.h>
 #include <ee/Image.h>
+#include <ee/SymbolFile.h>
+
+#include <easyimage.h>
+
+#include <sprite2/SymType.h>
 
 #include <glfw.h>
-#include <easyimage.h>
 
 #include <wx/arrstr.h>
 
@@ -48,7 +52,7 @@ void CalImageArea::Trigger(const std::string& dir)
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (ee::FileType::IsType(filepath, ee::FILE_IMAGE))
+		if (ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_IMAGE)
 		{
 			ee::Image* img = ee::ImageMgr::Instance()->GetItem(filepath);
 			area += img->GetClippedWidth() * img->GetClippedHeight();

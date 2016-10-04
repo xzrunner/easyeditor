@@ -13,11 +13,13 @@
 #include <ee/FetchAllVisitor.h>
 #include <ee/sprite_msg.h>
 #include <ee/Random.h>
+#include <ee/SymbolFile.h>
 
 #include <easycomplex.h>
 #include <easyanim.h>
 
 #include <sprite2/S2_Sprite.h>
+#include <sprite2/SymType.h>
 
 namespace edb
 {
@@ -51,9 +53,8 @@ void StagePanel::LoadFromDir(const std::string& dirpath)
 	for (size_t i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = files[i].ToStdString();
-		if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX) || 
-			ee::FileType::IsType(filepath, ee::FILE_ANIM))
-		{
+		int type = ee::SymbolFile::Instance()->Type(filepath);
+		if (type == s2::SYM_COMPLEX || type == s2::SYM_ANIMATION) {
 			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
 			sym->RemoveReference();

@@ -1,15 +1,17 @@
 #include "Symbol.h"
-#include "config.h"
 
 #include <ee/FileHelper.h>
 #include <ee/SymbolSearcher.h>
 #include <ee/Visitor.h>
 #include <ee/SpriteLoader.h>
+#include <ee/SymbolFile.h>
 
 #include <easycomplex.h>
 
+#include <sprite2/SymType.h>
 #include <sprite2/S2_Sprite.h>
 #include <gum/AnimSymLoader.h>
+#include <gum/StringHelper.h>
 
 #include <fstream>
 
@@ -19,7 +21,7 @@ namespace eanim
 Symbol::Symbol()
 {
 	static int id = 0;
-	m_name = eanim::FILE_TAG + wxVariant(id++);
+	m_name = ee::SymbolFile::Instance()->Tag(s2::SYM_ANIMATION) + gum::StringHelper::ToString(id++);
 }
 
 void Symbol::ReloadTexture() const

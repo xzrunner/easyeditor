@@ -2,6 +2,9 @@
 #include "std_functor.h"
 #include "FileHelper.h"
 #include "Exception.h"
+#include "SymbolFile.h"
+
+#include <sprite2/SymType.h>
 
 #include <json/json.h>
 
@@ -35,15 +38,15 @@ bool BodyData::LoadFromFile(const std::string& filename)
 	clear();
 
 	m_filename = filename;
-
-	FileFormat type = FileType::GetType(filename);
+	int type = SymbolFile::Instance()->Type(filename);
 	switch (type)
 	{
-	case FILE_MESH:
+	case s2::SYM_MESH:
 		loadFromMeshFile(filename);
 		break;
-	case FILE_SHAPE:
+	case s2::SYM_SHAPE:
 		loadFromShapeFile(filename);
+		break;
 	default:
 		return false;
 	}

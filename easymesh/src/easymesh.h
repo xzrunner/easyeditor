@@ -1,4 +1,3 @@
-#include "libmesh/config.h"
 #include "libmesh/EditDialog.h"
 #include "libmesh/StagePanel.h"
 #include "libmesh/StageCanvas.h"

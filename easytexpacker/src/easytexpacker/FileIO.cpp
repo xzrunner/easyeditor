@@ -33,7 +33,7 @@ void FileIO::Load(const char* filename)
 	ee::SymbolMgr::Instance()->Clear();
 	ee::BitmapMgr::Instance()->Clear();
 
-	std::string ext = std::string("_") + FILE_TAG + ".json";
+	std::string ext = "_packer.json";
 	if (std::string(filename).find(ext) != std::string::npos) {
 		LoadFromEasypackerFile(filename);
 	} else {
@@ -45,7 +45,7 @@ void FileIO::Load(const char* filename)
 
 void FileIO::Store(const char* filename)
 {
-	std::string ext = std::string("_") + FILE_TAG + ".json";
+	std::string ext = "_packer.json";
 	if (std::string(filename).find(ext) != std::string::npos) {
 		StoreToEasypackerFile(filename);
 	} else {

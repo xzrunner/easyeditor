@@ -10,8 +10,11 @@
 #include <ee/ImageClip.h>
 #include <ee/ImageSaver.h>
 #include <ee/ConsoleProgressBar.h>
+#include <ee/SymbolFile.h>
 
 #include <easyimage.h>
+
+#include <sprite2/SymType.h>
 
 #include <wx/filename.h>
 
@@ -73,7 +76,7 @@ void TrimImage::Trigger(const std::string& src_dir, const std::string& dst_dir)
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath();
 
-		if (!ee::FileType::IsType(filepath, ee::FILE_IMAGE)) {
+		if (ee::SymbolFile::Instance()->Type(filepath) != s2::SYM_IMAGE) {
 			continue;
 		}
 

@@ -1,11 +1,12 @@
 #include "FontBlankSymbol.h"
 #include "FontBlankSprite.h"
-#include "FileType.h"
+#include "SymbolFile.h"
 #include "FileHelper.h"
 #include "Config.h"
 #include "SettingData.h"
 #include "StringHelper.h"
 #include "Math2D.h"
+#include "SymbolType.h"
 
 #include <sprite2/RenderParams.h>
 #include <sprite2/S2_RVG.h>
@@ -29,6 +30,11 @@ FontBlankSymbol::FontBlankSymbol()
 
 FontBlankSymbol::~FontBlankSymbol()
 {
+}
+
+int FontBlankSymbol::Type() const
+{
+	return SYM_FONTBLANK;
 }
 
 void FontBlankSymbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
@@ -69,7 +75,7 @@ bool FontBlankSymbol::LoadFont(const std::string& _filename)
 		return false;
 
 	std::string filename = FileHelper::GetAbsolutePath(m_filepath, _filename);
-	if (!FileType::IsType(filename, FILE_FREETYPE) || 
+	if (ee::SymbolFile::Instance()->Type(filename) != ee::SYM_FREETYPE || 
 		!FileHelper::IsFileExist(filename)) {
 		return false;
 	}

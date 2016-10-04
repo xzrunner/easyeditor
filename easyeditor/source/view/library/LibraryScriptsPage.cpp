@@ -3,7 +3,8 @@
 #include "ExceptionDlg.h"
 #include "ScriptsSymbol.h"
 #include "SymbolMgr.h"
-#include "FileType.h"
+#include "SymbolFile.h"
+#include "SymbolType.h"
 #include "Exception.h"
 #include "StageCanvas.h"
 
@@ -29,7 +30,7 @@ bool LibraryScriptsPage::LoadFromConfig()
 
 void LibraryScriptsPage::OnAddPress(wxCommandEvent& event)
 {
-	std::string filter = FileType::GetTag(FILE_SCRIPTS);
+	std::string filter = SymbolFile::Instance()->Tag(SYM_SCRIPTS);
 	filter = wxT("*_") + filter + wxT(".lua");
 	wxFileDialog dlg(this, wxT("导入scripts文件"), wxEmptyString, 
 		wxEmptyString, filter, wxFD_OPEN | wxFD_MULTIPLE);

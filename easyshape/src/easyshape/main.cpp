@@ -5,31 +5,34 @@
 #include <ee/SpriteFactory.h>
 #include <ee/Frame.h>
 #include <ee/Config.h>
+#include <ee/SymbolFile.h>
 
 #include <easyshape.h>
 #include <easycomplex.h>
 #include <easytexture.h>
 #include <easyanim.h>
 
+#include <sprite2/SymType.h>
+
 IMPLEMENT_APP(MyApp)
 
 static void InitSymbolCreators() 
 {
-	ee::SymbolFactory::RegisterCreator(ecomplex::FILE_TAG, &ecomplex::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(ecomplex::FILE_TAG, &ecomplex::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(s2::SYM_COMPLEX, &ecomplex::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_COMPLEX, &ecomplex::Sprite::Create);
 
-	ee::SymbolFactory::RegisterCreator(etexture::FILE_TAG, &etexture::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(etexture::FILE_TAG, &etexture::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(s2::SYM_TEXTURE, &etexture::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_TEXTURE, &etexture::Sprite::Create);
 
-	ee::SymbolFactory::RegisterCreator(eanim::FILE_TAG, &eanim::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(eanim::FILE_TAG, &eanim::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(s2::SYM_ANIMATION, &eanim::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_ANIMATION, &eanim::Sprite::Create);
 }
 
 bool MyApp::OnInit()
 {
 	InitSymbolCreators();
 
-	ee::Frame* frame = new ee::Frame("EasyShape", eshape::FILE_TAG);
+	ee::Frame* frame = new ee::Frame("EasyShape", ee::SymbolFile::Instance()->Tag(s2::SYM_SHAPE));
 	eshape::Task* task = new eshape::Task(frame);
 	frame->SetTask(task);
 	frame->Show(true);

@@ -2,7 +2,6 @@
 #include "StagePanel.h"
 #include "ParticleSystem.h"
 #include "FileIO.h"
-#include "config.h"
 #include "ps_config.h"
 #include "PSConfigMgr.h"
 #include "ComponentPanel.h"

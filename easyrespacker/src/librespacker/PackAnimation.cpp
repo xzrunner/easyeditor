@@ -12,9 +12,11 @@
 #include "AnimFromBin.h"
 
 #include <ee/Sprite.h>
-#include <ee/FileType.h>
+#include <ee/SymbolFile.h>
 #include <ee/ImageSprite.h>
+#include <ee/SymbolFile.h>
 
+#include <sprite2/SymType.h>
 #include <sprite2/RenderColor.h>
 #include <sprite2/RenderShader.h>
 #include <sprite2/RenderCamera.h>
@@ -125,13 +127,13 @@ bool PackAnimation::AddComponent(const IPackNode* node, const std::string& name,
 				&& components[i].name == name
 				&& !name.empty()) 
 			{
-				ee::FileFormat type = ee::FileType::GetType(node->GetFilepath());
-				if (type == ee::FILE_IMAGE) {
+				int type = ee::SymbolFile::Instance()->Type(node->GetFilepath());
+				switch (type)
+				{
+				case s2::SYM_IMAGE:
 					comp_idx = i;
 					return false;
-				} else if (type == ee::FILE_COMPLEX ||
-					       type == ee::FILE_ANIM ||
-					       type == ee::FILE_TEXT) {
+				case s2::SYM_COMPLEX: case s2::SYM_ANIMATION: case s2::SYM_TEXTBOX:
 					comp_idx = i;
 					return true;
 				}
@@ -147,7 +149,7 @@ bool PackAnimation::AddComponent(const IPackNode* node, const std::string& name,
 
 	if (is_anchor) {
 		return true;
-	} else if (ee::FileType::IsType(node->GetFilepath(), ee::FILE_IMAGE)) {
+	} else if (ee::SymbolFile::Instance()->Type(node->GetFilepath()) == s2::SYM_IMAGE) {
 		return false;
 	} else {
 		return !name.empty();

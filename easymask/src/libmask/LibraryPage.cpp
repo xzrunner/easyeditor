@@ -3,10 +3,12 @@
 #include "config.h"
 
 #include <ee/LibraryList.h>
-#include <ee/FileType.h>
+#include <ee/SymbolFile.h>
 #include <ee/SymbolMgr.h>
 #include <ee/Exception.h>
 #include <ee/ExceptionDlg.h>
+
+#include <sprite2/SymType.h>
 
 namespace emask
 {
@@ -15,7 +17,7 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	: ee::LibraryPage(parent, "Mask")
 {
 	InitLayout();
-	m_list->SetFileter(FILE_TAG);
+	m_list->SetFileter(ee::SymbolFile::Instance()->Tag(s2::SYM_MASK));
 }
 
 bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
@@ -25,7 +27,7 @@ bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
-	std::string filter = ee::FileType::GetTag(ee::FILE_MASK);
+	std::string filter = ee::SymbolFile::Instance()->Tag(s2::SYM_MASK);
 	filter = wxT("*_") + filter + wxT(".json");
 	wxFileDialog dlg(this, wxT("导入mask文件"), wxEmptyString, 
 		wxEmptyString, filter, wxFD_OPEN | wxFD_MULTIPLE);

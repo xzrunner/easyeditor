@@ -4,6 +4,7 @@
 
 #include <ee/ObjectVector.h>
 #include <ee/SpriteRenderer.h>
+#include <ee/SymbolType.h>
 
 namespace eui
 {
@@ -18,6 +19,11 @@ Symbol::Symbol()
 Symbol::~Symbol()
 {
 
+}
+
+int Symbol::Type() const
+{
+	return ee::SYM_UIWND;
 }
 
 void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const

@@ -1,9 +1,8 @@
 #include "LibraryPage.h"
 #include "Symbol.h"
-#include "config.h"
 
 #include <ee/LibraryList.h>
-#include <ee/FileType.h>
+#include <ee/SymbolFile.h>
 #include <ee/Exception.h>
 #include <ee/ExceptionDlg.h>
 #include <ee/StringHelper.h>
@@ -13,6 +12,8 @@
 #include <easycomplex.h>
 #include <easycoco.h>
 
+#include <sprite2/SymType.h>
+
 namespace eanim
 {
 
@@ -20,7 +21,7 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	: ee::LibraryPage(parent, "Anim")
 {
 	InitLayout();
-	m_list->SetFileter(eanim::FILE_TAG);
+	m_list->SetFileter(ee::SymbolFile::Instance()->Tag(s2::SYM_ANIMATION));
 }
 
 bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
@@ -30,7 +31,7 @@ bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
-	std::string ee_filter = ee::FileHelper::GetJsonFileFilter(ee::FileType::GetTag(ee::FILE_ANIM)),
+	std::string ee_filter = ee::FileHelper::GetJsonFileFilter(ee::SymbolFile::Instance()->Tag(s2::SYM_ANIMATION)),
 		        json_filter = "JSON files (*.json)|*.json",
 				lua_filter = "LUA files (*.lua)|*.lua";
 	std::string filter = ee_filter + "|" + json_filter + "|" + lua_filter;
@@ -78,7 +79,7 @@ void LibraryPage::LoadFromJsonFile(const std::string& filename)
 	Symbol* sym = new Symbol;
 	sym->LoadFromFile(filename);
 	std::string easy_filename = filename.substr(0, filename.find_last_of('.')) 
-		+ "_" + ee::FileType::GetTag(ee::FILE_ANIM) + ".json";
+		+ "_" + ee::SymbolFile::Instance()->Tag(s2::SYM_ANIMATION) + ".json";
 	sym->SetFilepath(easy_filename);
 	m_list->Insert(sym);
 	sym->RemoveReference();

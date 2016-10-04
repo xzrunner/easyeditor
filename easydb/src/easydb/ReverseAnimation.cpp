@@ -2,6 +2,9 @@
 #include "check_params.h"
 
 #include <ee/FileHelper.h>
+#include <ee/SymbolFile.h>
+
+#include <sprite2/SymType.h>
 
 #include <fstream>
 
@@ -42,7 +45,7 @@ void ReverseAnimation::Trigger(const std::string& dir) const
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (ee::FileType::IsType(filepath, ee::FILE_ANIM))
+		if (ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_ANIMATION)
 		{
 			Json::Value value;
 			Json::Reader reader;

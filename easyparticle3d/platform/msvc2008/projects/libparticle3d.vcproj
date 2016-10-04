@@ -350,10 +350,6 @@
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath="..\..\..\src\libparticle3d\config.h"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>

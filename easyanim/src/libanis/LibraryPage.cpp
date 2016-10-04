@@ -2,7 +2,7 @@
 #include "Symbol.h"
 
 #include <ee/LibraryList.h>
-#include <ee/FileType.h>
+#include <ee/SymbolFile.h>
 #include <ee/SymbolMgr.h>
 #include <ee/Exception.h>
 #include <ee/ExceptionDlg.h>
@@ -14,7 +14,7 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	: ee::LibraryPage(parent, "Anis")
 {
 	InitLayout();
-	m_list->SetFileter(ee::FileType::GetTag(ee::FILE_ANIS));
+	m_list->SetFileter(ee::SymbolFile::Instance()->Tag(ee::SYM_ANIS));
 }
 
 bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
@@ -24,7 +24,7 @@ bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
-	wxString filter = ee::FileType::GetTag(ee::FILE_ANIM);
+	wxString filter = ee::SymbolFile::Instance()->Tag(s2::SYM_ANIMATION);
 	wxFileDialog dlg(this, wxT("导入anis文件"), wxEmptyString, 
 		wxEmptyString, filter, wxFD_OPEN | wxFD_MULTIPLE);
 	if (dlg.ShowModal() == wxID_OK)

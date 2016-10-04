@@ -314,10 +314,6 @@
 			</File>
 		</Filter>
 		<File
-			RelativePath="..\..\..\src\libparticle2d\config.h"
-			>
-		</File>
-		<File
 			RelativePath="..\..\..\src\libparticle2d\item_string.h"
 			>
 		</File>

@@ -4,8 +4,10 @@
 
 #include <ee/FileHelper.h>
 #include <ee/SpriteIO.h>
+#include <ee/SymbolFile.h>
 
 #include <SM_Calc.h>
+#include <sprite2/SymType.h>
 
 #include <fstream>
 #include <sstream>
@@ -51,10 +53,15 @@ void FixRotateTrimJson::Trigger(const std::string& dir)
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX)) {
+		int type = ee::SymbolFile::Instance()->Type(filepath);
+		switch (type)
+		{
+		case s2::SYM_COMPLEX:
 			FixComplex(filepath);
-		} else if (ee::FileType::IsType(filepath, ee::FILE_ANIM)) {
+			break;
+		case s2::SYM_ANIMATION:
 			FixAnim(filepath);
+			break;
 		}
 	}
 }
@@ -62,7 +69,7 @@ void FixRotateTrimJson::Trigger(const std::string& dir)
 bool FixRotateTrimJson::FixSprite(const std::string& filepath, Json::Value& sprite_val) const
 {
 	std::string spr_path = sprite_val["filepath"].asString();
-	if (!ee::FileType::IsType(spr_path, ee::FILE_IMAGE)) {
+	if (ee::SymbolFile::Instance()->Type(filepath) != s2::SYM_IMAGE) {
 		return false;
 	}
 

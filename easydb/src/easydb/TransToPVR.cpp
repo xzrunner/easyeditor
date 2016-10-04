@@ -3,9 +3,12 @@
 
 #include <ee/FileHelper.h>
 #include <ee/LibpngAdapter.h>
+#include <ee/SymbolFile.h>
 
 #include <easyimage.h>
 //#include <dtex_pvr.h>
+
+#include <sprite2/SymType.h>
 
 namespace edb
 {
@@ -45,7 +48,7 @@ void TransToPVR::Trigger(const std::string& path)
 		for (int i = 0, n = files.size(); i < n; ++i)
 		{
 			std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-			if (ee::FileType::IsType(filepath, ee::FILE_IMAGE))
+			if (ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_IMAGE)
 			{
 				std::cout << i << " / " << n << " : " << filepath << "\n";
 				EncodeByPvrTexTool(filepath);
@@ -55,7 +58,7 @@ void TransToPVR::Trigger(const std::string& path)
 	} 
 	else if (ee::FileHelper::IsFileExist(path))
 	{
-		if (ee::FileType::IsType(path, ee::FILE_IMAGE)) {
+		if (ee::SymbolFile::Instance()->Type(path) == s2::SYM_IMAGE) {
 			EncodeByPvrTexTool(path);
 		}
 	}

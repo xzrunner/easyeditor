@@ -2,6 +2,9 @@
 #include "check_params.h"
 
 #include <ee/FileHelper.h>
+#include <ee/SymbolFile.h>
+
+#include <sprite2/SymType.h>
 
 #include <fstream>
 
@@ -51,11 +54,17 @@ void SetNameFromFile::AddNameFromFile(const std::string& dir) const
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (ee::FileType::IsType(filepath, ee::FILE_ANIM)) {
+		int type = ee::SymbolFile::Instance()->Type(filepath);
+		switch (type)
+		{
+		case s2::SYM_ANIMATION:
 			AddName(filepath);
-		} else if (m_do_complex && 
-			ee::FileType::IsType(filepath, ee::FILE_COMPLEX)) {
-			AddName(filepath);		
+			break;
+		case s2::SYM_COMPLEX:
+			if (m_do_complex) {
+				AddName(filepath);
+			}
+			break;
 		}
 	}
 }

@@ -17,8 +17,10 @@
 #include <ee/PointQueryVisitor.h>
 #include <ee/TranslateSpriteAOP.h>
 #include <ee/StringHelper.h>
-#include <ee/FileType.h>
+#include <ee/SymbolFile.h>
 #include <ee/FilepathDialog.h>
+
+#include <sprite2/SymType.h>
 
 #include <easycomplex.h>
 
@@ -179,7 +181,7 @@ void SelectSpritesOP::BuildComplex()
 	std::string filepath = static_cast<StagePanel*>(m_wnd)->GetResDir();
 	filepath += "\\_tmp_";
 	filepath += ee::StringHelper::ToString(wxDateTime::Now().GetTicks());
-	filepath += "_" + ee::FileType::GetTag(ee::FILE_COMPLEX) + ".json";
+	filepath += "_" + ee::SymbolFile::Instance()->Tag(s2::SYM_COMPLEX) + ".json";
 	sym->SetFilepath(filepath);
 
 	ee::FilepathDialog dlg(m_wnd, sym->GetFilepath());
@@ -200,7 +202,7 @@ void SelectSpritesOP::BreakUpComplex()
 		return;
 	}
 
-	std::string tag = "_" + ee::FileType::GetTag(ee::FILE_COMPLEX) + ".json";
+	std::string tag = "_" + ee::SymbolFile::Instance()->Tag(s2::SYM_COMPLEX) + ".json";
 	std::vector<ee::Sprite*> sprs;
 	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
 	for (int i = 0, n = sprs.size(); i < n; ++i) 

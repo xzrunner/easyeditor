@@ -37,7 +37,7 @@ Symbol* SymbolMgr::FetchSymbol(const std::string& filepath)
 	std::map<std::string, Symbol*>::iterator itr = m_syms.find(fixed_path);
 	if (itr == m_syms.end())
 	{
-		Symbol* sym = SymbolFactory::create(fixed_path);
+		Symbol* sym = SymbolFactory::Create(fixed_path);
 		if (!sym) 
 		{
 			const char* path = filepath.c_str();

@@ -4,7 +4,8 @@
 #include "ExceptionDlg.h"
 #include "SymbolMgr.h"
 #include "FontBlankSymbol.h"
-#include "FileType.h"
+#include "SymbolFile.h"
+#include "SymbolType.h"
 #include "Exception.h"
 
 #include <json/json.h>
@@ -51,7 +52,7 @@ void LibraryFontBlankPage::InitLayout(bool draggable /*= true*/)
 
 void LibraryFontBlankPage::OnAddPress(wxCommandEvent& event)
 {
-	std::string filter = FileType::GetTag(FILE_FONTBLANK);
+	std::string filter = SymbolFile::Instance()->Tag(SYM_FONTBLANK);
 	filter = wxT("*_") + filter + wxT(".json");
 	wxFileDialog dlg(this, wxT("导入font blank文件"), wxEmptyString, 
 		wxEmptyString, filter, wxFD_OPEN | wxFD_MULTIPLE);

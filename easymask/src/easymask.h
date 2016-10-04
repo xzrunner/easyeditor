@@ -1,5 +1,3 @@
-#include "libmask/config.h"
-
 #include "libmask/LibraryPage.h"
 #include "libmask/LibraryPanel.h"
 #include "libmask/StagePanel.h"

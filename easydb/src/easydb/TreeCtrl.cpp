@@ -5,8 +5,11 @@
 
 #include <ee/FileHelper.h>
 #include <ee/SpriteSelection.h>
+#include <ee/SymbolFile.h>
 
 #include <easycomplex.h>
+
+#include <sprite2/SymType.h>
 
 namespace edb
 {
@@ -53,9 +56,8 @@ void TreeCtrl::init(const wxArrayString& files)
 	for (size_t i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = files[i];
-		if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX) || 
-			ee::FileType::IsType(filepath, ee::FILE_ANIM))
-		{
+		int type = ee::SymbolFile::Instance()->Type(filepath);
+		if (type == s2::SYM_COMPLEX || type == s2::SYM_ANIMATION) {
 			std::string name = ee::FileHelper::GetFilename(filepath);
 			wxTreeItemId id = AppendItem(m_root, name);
 			m_mapID2Path.insert(std::make_pair(id, filepath));
@@ -122,15 +124,21 @@ void TreeCtrl::onItemClick(wxTreeEvent& event)
 		if (itr != m_mapID2Path.end())
 		{
 			std::string filename = itr->second;
-			if (ee::FileType::IsType(filename, ee::FILE_COMPLEX))
+			int type = ee::SymbolFile::Instance()->Type(filename);
+			switch (type)
 			{
-				std::string cmd = "easycomplex.exe " + itr->second;
-				WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);
-			}
-			else if (ee::FileType::IsType(filename, ee::FILE_ANIM))
-			{
-				std::string cmd = "easyanimation.exe " + itr->second;
-				WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);
+			case s2::SYM_COMPLEX:
+				{
+					std::string cmd = "easycomplex.exe " + itr->second;
+					WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);
+				}
+				break;
+			case s2::SYM_ANIMATION:
+				{
+					std::string cmd = "easyanimation.exe " + itr->second;
+					WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);
+				}
+				break;
 			}
 
 // 				ee::Symbol* sym = ee::SymbolMgr::Instance()->getSymbol(itr->second);

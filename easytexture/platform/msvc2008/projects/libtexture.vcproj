@@ -249,10 +249,6 @@
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath="..\..\..\src\libtexture\config.h"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>

@@ -11,6 +11,7 @@
 #include <ee/StringHelper.h>
 #include <ee/Math2D.h>
 #include <ee/SpriteIO.h>
+#include <ee/SymbolFile.h>
 
 #include <lr/dataset/Grids.h>
 #include <lr/dataset/CharacterFileName.h>
@@ -18,6 +19,7 @@
 #include <easyshape.h>
 
 #include <SM_Calc.h>
+#include <sprite2/SymType.h>
 #include <gum/JsonSerializer.h>
 
 namespace edb
@@ -373,7 +375,7 @@ void LRJsonPacker::ParserCharacterFromSprite(const Json::Value& src_val, const l
 	{
 		std::string filepath = spr_val["filepath"].asString();
 		filepath = ee::FileHelper::GetAbsolutePath(m_dir, filepath);
-		if (ee::FileType::IsType(filepath, ee::FILE_PARTICLE3D)) {
+		if (ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_PARTICLE3D) {
 			spr_val = src_val["sprite"][idx++];
 			continue;
 		}				
@@ -387,7 +389,7 @@ void LRJsonPacker::ParserCharacterFromSprite(const Json::Value& src_val, const l
 		char_val["y"] = spr_io.m_position.y;
 
 		// region
-		std::string shape_tag = ee::FileType::GetTag(ee::FILE_SHAPE);
+		std::string shape_tag = ee::SymbolFile::Instance()->Tag(s2::SYM_SHAPE);
 		std::string shape_filepath = ee::FileHelper::GetFilenameAddTag(filepath, shape_tag, "json");
 		std::string tag_ext;
 		if (ee::FileHelper::IsFileExist(shape_filepath)) {

@@ -5,10 +5,13 @@
 
 #include <ee/SymbolMgr.h>
 #include <ee/Bitmap.h>
-#include <ee/FileType.h>
+#include <ee/SymbolFile.h>
 #include <ee/LibraryPanel.h>
 #include <ee/LibraryImagePage.h>
 #include <ee/PropertySettingPanel.h>
+#include <ee/SymbolFile.h>
+
+#include <sprite2/SymType.h>
 
 namespace escale9
 {
@@ -29,7 +32,7 @@ Task::~Task()
 
 void Task::Load(const char* filepath)
 {
-	if (ee::FileType::IsType(filepath, ee::FILE_SCALE9)) {
+	if (ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_SCALE9) {
 		FileIO::Load(filepath, m_library, m_stage, m_toolbar);
 	}
 }

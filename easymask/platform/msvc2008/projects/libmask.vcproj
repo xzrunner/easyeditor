@@ -241,10 +241,6 @@
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath="..\..\..\src\libmask\config.h"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>

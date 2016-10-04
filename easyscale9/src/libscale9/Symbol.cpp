@@ -1,8 +1,11 @@
 #include "Symbol.h"
-#include "config.h"
 
 #include <ee/StringHelper.h>
 #include <ee/SpriteLoader.h>
+#include <ee/SymbolFile.h>
+
+#include <sprite2/SymType.h>
+#include <gum/StringHelper.h>
 
 namespace escale9
 {
@@ -10,7 +13,7 @@ namespace escale9
 Symbol::Symbol()
 {
 	static int id = 0;
-	m_name = FILE_TAG + ee::StringHelper::ToString(id++);
+	m_name = ee::SymbolFile::Instance()->Tag(s2::SYM_SCALE9) + gum::StringHelper::ToString(id++);
 }
 
 void Symbol::LoadResources()

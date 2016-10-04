@@ -4,8 +4,11 @@
 #include <ee/FileHelper.h>
 #include <ee/SymbolMgr.h>
 #include <ee/StringHelper.h>
+#include <ee/SymbolFile.h>
 
 #include <easytexpacker.h>
+
+#include <sprite2/SymType.h>
 
 namespace edb
 {
@@ -60,8 +63,8 @@ void PackLuaDescFile::LoadJsonFiles(const std::string& dir)
 	for (int i = 0, n = files.size(); i < n; ++i) 
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX) || 
-			ee::FileType::IsType(filepath, ee::FILE_ANIM))
+		int type = ee::SymbolFile::Instance()->Type(filepath);
+		if (type == s2::SYM_COMPLEX || type == s2::SYM_ANIMATION)
 		{
 			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			m_syms.push_back(sym);

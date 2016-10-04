@@ -2,6 +2,9 @@
 #include "check_params.h"
 
 #include <ee/FileHelper.h>
+#include <ee/SymbolFile.h>
+
+#include <sprite2/SymType.h>
 
 #include <epbin.h>
 
@@ -46,7 +49,7 @@ void BinRRR::Trigger(const std::string& src_dir, const std::string& img_id_file,
 	
 	std::vector<std::string> img_files;
 	for (int i = 0, n = files.size(); i < n; ++i) {
-		if (ee::FileType::IsType(files[i].ToStdString(), ee::FILE_IMAGE)) {
+		if (ee::SymbolFile::Instance()->Type(files[i].ToStdString()) == s2::SYM_IMAGE) {
 			img_files.push_back(files[i].ToStdString());
 		}
 	}

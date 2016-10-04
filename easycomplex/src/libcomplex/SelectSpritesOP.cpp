@@ -14,6 +14,9 @@
 #include <ee/CrossGuides.h>
 #include <ee/panel_msg.h>
 #include <ee/FilepathDialog.h>
+#include <ee/SymbolFile.h>
+
+#include <sprite2/SymType.h>
 
 namespace ecomplex
 {
@@ -112,7 +115,7 @@ void SelectSpritesOP::GroupSelection()
 	std::string filepath = ee::FileHelper::GetFileDir(parent->GetFilepath());
 	filepath += "\\_tmp_";
 	filepath += ee::StringHelper::ToString(wxDateTime::Now().GetTicks());
-	filepath += "_" + ee::FileType::GetTag(ee::FILE_COMPLEX) + ".json";
+	filepath += "_" + ee::SymbolFile::Instance()->Tag(s2::SYM_COMPLEX) + ".json";
 	Symbol* sym = dynamic_cast<Symbol*>(spr->GetSymbol());
 	sym->SetFilepath(filepath);
 
@@ -131,7 +134,7 @@ void SelectSpritesOP::BreakUpSelection()
 		return;
 	}
 
-	std::string tag = "_" + ee::FileType::GetTag(ee::FILE_COMPLEX) + ".json";
+	std::string tag = "_" + ee::SymbolFile::Instance()->Tag(s2::SYM_COMPLEX) + ".json";
 	std::vector<ee::Sprite*> sprs;
 	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
 	for (int i = 0, n = sprs.size(); i < n; ++i) 

@@ -1,5 +1,4 @@
 #include "Network.h"
-#include "config.h"
 #include "NetworkShape.h"
 
 #include <easyshape.h>

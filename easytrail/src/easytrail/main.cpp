@@ -2,7 +2,7 @@
 #include "Task.h"
 
 #include <ee/Frame.h>
-#include <ee/FileType.h>
+#include <ee/SymbolFile.h>
 #include <ee/SymbolFactory.h>
 #include <ee/SpriteFactory.h>
 
@@ -10,22 +10,24 @@
 #include <easyanim.h>
 #include <easycomplex.h>
 
+#include <sprite2/SymType.h>
+
 IMPLEMENT_APP(MyApp)
 
 static void InitSymbolCreators() 
 {
-	ee::SymbolFactory::RegisterCreator(ecomplex::FILE_TAG, &ecomplex::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(ecomplex::FILE_TAG, &ecomplex::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(s2::SYM_COMPLEX, &ecomplex::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_COMPLEX, &ecomplex::Sprite::Create);
 
-	ee::SymbolFactory::RegisterCreator(eanim::FILE_TAG, &eanim::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(eanim::FILE_TAG, &eanim::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(s2::SYM_ANIMATION, &eanim::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_ANIMATION, &eanim::Sprite::Create);
 }
 
 bool MyApp::OnInit()
 {
 	InitSymbolCreators();
 
-	ee::Frame* frame = new ee::Frame("EasyTrail", ee::FileType::GetTag(ee::FILE_TRAIL));
+	ee::Frame* frame = new ee::Frame("EasyTrail", ee::SymbolFile::Instance()->Tag(s2::SYM_TRAIL));
 	etrail::Task* task = new etrail::Task(frame);
 	frame->SetTask(task);
 	frame->Show(true);

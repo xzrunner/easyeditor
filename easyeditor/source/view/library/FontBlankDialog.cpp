@@ -1,8 +1,9 @@
 #include "FontBlankDialog.h"
 #include "FontBlankSymbol.h"
-#include "FileType.h"
+#include "SymbolFile.h"
 #include "FileHelper.h"
 #include "StringHelper.h"
+#include "SymbolType.h"
 
 #include <json/json.h>
 
@@ -134,7 +135,7 @@ void FontBlankDialog::StoreSymbol()
 	std::string filepath = m_sym->GetFilepath();
 	if (filepath.empty())
 	{
-		std::string ext = FileType::GetTag(FILE_FONTBLANK);
+		std::string ext = ee::SymbolFile::Instance()->Tag(SYM_FONTBLANK);
 		ext = "_" + ext + ".json";
 
 		std::string name = m_sym->name;

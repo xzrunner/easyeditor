@@ -1,7 +1,3 @@
-#ifndef _EASYPARTICLE2D_H_
-#define _EASYPARTICLE2D_H_
-
-#include "libparticle2d/config.h"
 #include "libparticle2d/ParticleSystem.h"
 #include "libparticle2d/Symbol.h"
 #include "libparticle2d/Sprite.h"
@@ -13,5 +9,3 @@
 #include "libparticle2d/ps_config.h"
 
 #include "libparticle2d/CocoPacker.h"
-
-#endif // _EASYPARTICLE2D_H_

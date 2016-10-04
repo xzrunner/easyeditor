@@ -3,6 +3,9 @@
 
 #include <ee/FetchAllVisitor.h>
 #include <ee/FileHelper.h>
+#include <ee/SymbolFile.h>
+
+#include <sprite2/SymType.h>
 
 #include <fstream>
 
@@ -67,8 +70,8 @@ void CopyFile::CopyByExportNames(const std::set<std::string>& export_names) cons
 	for (int i = 0, n = m_files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::FormatFilepath(m_files[i].ToStdString());
-		if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX) ||
-			ee::FileType::IsType(filepath, ee::FILE_ANIM))
+		int type = ee::SymbolFile::Instance()->Type(filepath);
+		if (type == s2::SYM_COMPLEX || type == s2::SYM_ANIMATION)
 		{
 			Json::Value value;
 			Json::Reader reader;
@@ -96,63 +99,68 @@ void CopyFile::GetDependFiles(const std::string& filepath, std::set<std::string>
 		return;
 	}
 
-	if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX))
+	int type = ee::SymbolFile::Instance()->Type(filepath);
+	switch (type)
 	{
-		Json::Value value;
-		Json::Reader reader;
-		std::string fullpath = ee::FileHelper::GetAbsolutePath(m_src_dir, filepath);
-		std::locale::global(std::locale(""));
-		std::ifstream fin(fullpath.c_str());
-		std::locale::global(std::locale("C"));
-		reader.parse(fin, value);
-		fin.close();
+	case s2::SYM_COMPLEX:
+		{
+			Json::Value value;
+			Json::Reader reader;
+			std::string fullpath = ee::FileHelper::GetAbsolutePath(m_src_dir, filepath);
+			std::locale::global(std::locale(""));
+			std::ifstream fin(fullpath.c_str());
+			std::locale::global(std::locale("C"));
+			reader.parse(fin, value);
+			fin.close();
 
-		int i = 0;
-		Json::Value spriteValue = value["sprite"][i++];
-		while (!spriteValue.isNull()) {
-			std::string item_path = spriteValue["filepath"].asString();
-			if (ee::FileType::IsType(item_path, ee::FILE_COMPLEX)
-				|| ee::FileType::IsType(item_path, ee::FILE_ANIM))
+			int i = 0;
+			Json::Value spriteValue = value["sprite"][i++];
+			while (!spriteValue.isNull()) 
 			{
-				GetDependFiles(item_path, files);
-			}
-			files.insert(item_path);
-			spriteValue = value["sprite"][i++];
-		}	
-	}
-	else if (ee::FileType::IsType(filepath, ee::FILE_ANIM))
-	{
-		Json::Value value;
-		Json::Reader reader;
-		std::string fullpath = ee::FileHelper::GetAbsolutePath(m_src_dir, filepath);
-		std::locale::global(std::locale(""));
-		std::ifstream fin(fullpath.c_str());
-		std::locale::global(std::locale("C"));
-		reader.parse(fin, value);
-		fin.close();
-
-		int i = 0;
-		Json::Value layerValue = value["layer"][i++];
-		while (!layerValue.isNull()) {
-			int j = 0;
-			Json::Value frameValue = layerValue["frame"][j++];
-			while (!frameValue.isNull()) {
-				int m = 0;
-				Json::Value entryValue = frameValue["actor"][m++];
-				while (!entryValue.isNull()) {
-					std::string item_path = entryValue["filepath"].asString();
-					if (ee::FileType::IsType(item_path, ee::FILE_COMPLEX)
-						|| ee::FileType::IsType(item_path, ee::FILE_ANIM))
-					{
-						GetDependFiles(item_path, files);
-					}
-					files.insert(item_path);
-					entryValue = frameValue["actor"][m++];
+				std::string item_path = spriteValue["filepath"].asString();
+				int type = ee::SymbolFile::Instance()->Type(item_path);
+				if (type == s2::SYM_COMPLEX || type == s2::SYM_ANIMATION) {
+					GetDependFiles(item_path, files);
 				}
-				frameValue = layerValue["frame"][j++];
-			}
-			layerValue = value["layer"][i++];
+				files.insert(item_path);
+				spriteValue = value["sprite"][i++];
+			}	
 		}
+		break;
+	case s2::SYM_ANIMATION:
+		{
+			Json::Value value;
+			Json::Reader reader;
+			std::string fullpath = ee::FileHelper::GetAbsolutePath(m_src_dir, filepath);
+			std::locale::global(std::locale(""));
+			std::ifstream fin(fullpath.c_str());
+			std::locale::global(std::locale("C"));
+			reader.parse(fin, value);
+			fin.close();
+
+			int i = 0;
+			Json::Value layerValue = value["layer"][i++];
+			while (!layerValue.isNull()) {
+				int j = 0;
+				Json::Value frameValue = layerValue["frame"][j++];
+				while (!frameValue.isNull()) {
+					int m = 0;
+					Json::Value entryValue = frameValue["actor"][m++];
+					while (!entryValue.isNull()) {
+						std::string item_path = entryValue["filepath"].asString();
+						int type = ee::SymbolFile::Instance()->Type(item_path);
+						if (type == s2::SYM_COMPLEX || type == s2::SYM_ANIMATION) {
+							GetDependFiles(item_path, files);
+						}
+						files.insert(item_path);
+						entryValue = frameValue["actor"][m++];
+					}
+					frameValue = layerValue["frame"][j++];
+				}
+				layerValue = value["layer"][i++];
+			}
+		}
+		break;
 	}
 }
 

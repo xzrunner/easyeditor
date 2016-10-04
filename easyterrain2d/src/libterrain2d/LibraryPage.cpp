@@ -3,10 +3,11 @@
 #include "config.h"
 
 #include <ee/LibraryList.h>
-#include <ee/FileType.h>
+#include <ee/SymbolFile.h>
 #include <ee/SymbolMgr.h>
 #include <ee/Exception.h>
 #include <ee/ExceptionDlg.h>
+#include <ee/SymbolType.h>
 
 namespace eterrain2d
 {
@@ -15,7 +16,7 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	: ee::LibraryPage(parent, "Terrain2D")
 {
 	InitLayout();
-	m_list->SetFileter(FILE_TAG);
+	m_list->SetFileter(ee::SymbolFile::Instance()->Tag(ee::SYM_TERRAIN2D));
 }
 
 bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
@@ -25,7 +26,7 @@ bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
-	std::string filter = ee::FileType::GetTag(ee::FILE_TERRAIN2D);
+	std::string filter = ee::SymbolFile::Instance()->Tag(ee::SYM_TERRAIN2D);
 	filter = wxT("*_") + filter + wxT(".json");
 	wxFileDialog dlg(this, wxT("导入terrain2d文件"), wxEmptyString, 
 		wxEmptyString, filter, wxFD_OPEN | wxFD_MULTIPLE);

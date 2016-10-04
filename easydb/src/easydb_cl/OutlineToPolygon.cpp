@@ -2,12 +2,13 @@
 #include "check_params.h"
 
 #include <ee/FileHelper.h>
-#include <ee/FileType.h>
+#include <ee/SymbolFile.h>
 #include <ee/DummySymbol.h>
 
 #include <easyimage.h>
 #include <easyshape.h>
 
+#include <sprite2/SymType.h>
 #include <gum/JsonSerializer.h>
 
 namespace edb
@@ -47,7 +48,7 @@ void OutlineToPolygon::Trigger(const std::string& dir) const
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (!ee::FileType::IsType(filepath, ee::FILE_IMAGE)) {
+		if (ee::SymbolFile::Instance()->Type(filepath) != s2::SYM_IMAGE) {
 			continue;
 		}
 
@@ -72,7 +73,7 @@ void OutlineToPolygon::Trigger(const std::string& dir) const
 		}
 
 		std::string shape_path = ee::FileHelper::GetFilenameAddTag(
-			filepath, eshape::FILE_TAG, "json");
+			filepath, ee::SymbolFile::Instance()->Tag(s2::SYM_SHAPE), "json");
 
 		eshape::PolygonShape poly(vertices);
 		ee::DummySymbol bg(filepath);

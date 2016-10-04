@@ -2,11 +2,13 @@
 #include "Symbol.h"
 
 #include <ee/LibraryList.h>
-#include <ee/FileType.h>
+#include <ee/SymbolFile.h>
 #include <ee/SymbolMgr.h>
 #include <ee/Exception.h>
 #include <ee/ExceptionDlg.h>
 #include <ee/FileHelper.h>
+
+#include <sprite2/SymType.h>
 
 namespace libskeleton
 {
@@ -15,7 +17,7 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	: ee::LibraryPage(parent, "Skeleton")
 {
 	InitLayout();
-	m_list->SetFileter(ee::FileType::GetTag(ee::FILE_SKELETON));
+	m_list->SetFileter(ee::SymbolFile::Instance()->Tag(s2::SYM_SKELETON));
 }
 
 bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
@@ -25,7 +27,7 @@ bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
-	std::string ee_filter = ee::FileHelper::GetJsonFileFilter(ee::FileType::GetTag(ee::FILE_SKELETON)),
+	std::string ee_filter = ee::FileHelper::GetJsonFileFilter(ee::SymbolFile::Instance()->Tag(s2::SYM_SKELETON)),
 		                    json_filter = "JSON files (*.json)|*.json";
 	std::string filter = ee_filter + "|" + json_filter;
 	wxFileDialog dlg(this, wxT("导入skeleton文件"), wxEmptyString, 
@@ -69,7 +71,7 @@ void LibraryPage::LoadFromJsonFile(const std::string& filename)
 	Symbol* sym = new Symbol;
 	sym->LoadFromFile(filename);
 	std::string easy_filename = filename.substr(0, filename.find_last_of('.')) 
-		+ "_" + ee::FileType::GetTag(ee::FILE_SKELETON) + ".json";
+		+ "_" + ee::SymbolFile::Instance()->Tag(s2::SYM_SKELETON) + ".json";
 	sym->SetFilepath(easy_filename);
 	m_list->Insert(sym);
 	sym->RemoveReference();

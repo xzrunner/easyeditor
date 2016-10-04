@@ -10,12 +10,14 @@
 #include <ee/SymbolMgr.h>
 #include <ee/StringHelper.h>
 #include <ee/Symbol.h>
+#include <ee/SymbolFile.h>
 
 #include <easyrespacker.h>
 
 #include <CU_RefCountObj.h>
 #include <dtex.h>
 #include <gimg_typedef.h>
+#include <sprite2/SymType.h>
 
 #include <wx/arrstr.h>
 #include <wx/filename.h>
@@ -78,10 +80,11 @@ void Packer::LoadJsonData(const std::string& dir)
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath();
-		if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX) || 
-			ee::FileType::IsType(filepath, ee::FILE_ANIM) ||
-			ee::FileType::IsType(filepath, ee::FILE_PARTICLE3D) ||
-			ee::FileType::IsType(filepath, ee::FILE_TRAIL)) {
+		int type = ee::SymbolFile::Instance()->Type(filepath);
+		if (type == s2::SYM_COMPLEX || 
+			type == s2::SYM_ANIMATION ||
+			type == s2::SYM_PARTICLE3D ||
+			type == s2::SYM_TRAIL) {
 			filepaths.push_back(filepath);
 		}
 	}

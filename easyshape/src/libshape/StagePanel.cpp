@@ -114,7 +114,7 @@ void StagePanel::SetSymbolBG(ee::Symbol* sym)
 // 		if (!ee::FileType::isType(filepath, ee::FileType::e_shape))
 // 		{
 // 			filepath = ee::FileHelper::getFilePathExceptExtension(filepath);
-// 			filepath = filepath + "_" + ee::FileType::GetTag(ee::FileType::e_shape) + ".json";
+// 			filepath = filepath + "_" + ee::SymbolFile::Instance()->Tag(ee::FileType::e_shape) + ".json";
 // 		}
 // 
 // 		if (ee::FileHelper::isExist(filepath))
@@ -133,11 +133,11 @@ void StagePanel::SetSymbolBG(ee::Symbol* sym)
 //	{
 //		std::string filepath = m_sym.getFilepath();
 //		if (filepath.empty())
-//			filepath = m_sym.getName() + "_" + ee::FileType::GetTag(ee::FileType::e_shape) + ".json";
+//			filepath = m_sym.getName() + "_" + ee::SymbolFile::Instance()->Tag(ee::FileType::e_shape) + ".json";
 //		if (!ee::FileType::isType(filepath, ee::FileType::e_shape))
 //		{
 //			filepath = ee::FileHelper::getFilePathExceptExtension(filepath);
-//			filepath = filepath + "_" + ee::FileType::GetTag(ee::FileType::e_shape) + ".json";
+//			filepath = filepath + "_" + ee::SymbolFile::Instance()->Tag(ee::FileType::e_shape) + ".json";
 //		}
 //		else
 //		{

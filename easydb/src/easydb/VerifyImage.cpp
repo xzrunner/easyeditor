@@ -3,6 +3,9 @@
 
 #include <ee/FileHelper.h>
 #include <ee/StringHelper.h>
+#include <ee/SymbolFile.h>
+
+#include <sprite2/SymType.h>
 
 namespace edb 
 {
@@ -54,15 +57,21 @@ void VerifyImage::InitFiles(const std::string& dirpath)
 	for (size_t i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX)) {
+		int type = ee::SymbolFile::Instance()->Type(filepath);
+		switch (type)
+		{
+		case s2::SYM_COMPLEX:
 			ee::StringHelper::ToLower(filepath);
 			_complex_files.push_back(filepath);
-		} else if (ee::FileType::IsType(filepath, ee::FILE_ANIM)) {
+			break;
+		case s2::SYM_ANIMATION:
 			ee::StringHelper::ToLower(filepath);
 			_anim_files.push_back(filepath);
-		} else if (ee::FileType::IsType(filepath, ee::FILE_IMAGE)) {
+			break;
+		case s2::SYM_IMAGE:
 			ee::StringHelper::ToLower(filepath);
 			_map_images.insert(std::make_pair(filepath, false));
+			break;
 		}
 	}
 }
@@ -152,7 +161,7 @@ void VerifyImage::Report() const
 
 void VerifyImage::HandleSpritePath(const std::string& filepath)
 {
-	if (!ee::FileType::IsType(filepath, ee::FILE_IMAGE))
+	if (ee::SymbolFile::Instance()->Type(filepath) != s2::SYM_IMAGE)
 		return;
 
 	std::map<std::string, bool>::iterator itr = _map_images.find(filepath);

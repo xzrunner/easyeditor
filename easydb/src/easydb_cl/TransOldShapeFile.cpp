@@ -3,9 +3,12 @@
 
 #include <ee/FileHelper.h>
 #include <ee/SymbolMgr.h>
+#include <ee/SymbolFile.h>
 
 #include <easyshape.h>
 #include <easytexture.h>
+
+#include <sprite2/SymType.h>
 
 namespace edb
 {
@@ -44,12 +47,17 @@ void TransOldShapeFile::Run(const std::string& folder)
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (ee::FileType::IsType(filepath, ee::FILE_SHAPE)) {
+		int type = ee::SymbolFile::Instance()->Type(filepath);
+		switch (type)
+		{
+		case s2::SYM_SHAPE:
 // 			ee::Symbol* sym = ee::SymbolMgr::Instance()->fetchSymbol(filepath);
 // 			static_cast<eshape::Symbol*>(sym)->StoreToFile(sym->getFilepath());
-		} else if (ee::FileType::IsType(filepath, ee::FILE_TEXTURE)) {
+			break;
+		case s2::SYM_TEXTURE:
 			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			etexture::FileSaver::Store(filepath.c_str(), static_cast<etexture::Symbol*>(sym));
+			break;
 		}
 	}
 }

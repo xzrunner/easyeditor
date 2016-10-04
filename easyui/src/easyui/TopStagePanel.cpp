@@ -10,7 +10,8 @@
 
 #include <ee/StageCanvas.h>
 #include <ee/EditPanelImpl.h>
-#include <ee/FileType.h>
+#include <ee/SymbolFile.h>
+#include <ee/SymbolType.h>
 
 namespace eui
 {
@@ -90,9 +91,9 @@ void TopStagePanel::OnPageChanged(wxNotebookEvent& event)
 	m_top_pannels->library->Layout();
 
 	if (idx == 0) {
-		m_frame->SetFileFilter(ee::FileType::GetTag(ee::FILE_UIWND));
+		m_frame->SetFileFilter(ee::SymbolFile::Instance()->Tag(ee::SYM_UIWND));
 	} else {
-		m_frame->SetFileFilter(ee::FileType::GetTag(ee::FILE_UI));
+		m_frame->SetFileFilter(ee::SymbolFile::Instance()->Tag(ee::SYM_UI));
 	}
 }
 

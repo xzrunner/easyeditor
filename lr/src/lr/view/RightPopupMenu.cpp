@@ -17,6 +17,8 @@
 
 #include <easycomplex.h>
 
+#include <sprite2/SymType.h>
+
 namespace lr
 {
 
@@ -233,7 +235,7 @@ void RightPopupMenu::FetchCandidateAnimFiles(const std::string& filepath)
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	wxArrayString files;
-	ee::FileHelper::FetchAllFiles(dir, files, ee::FILE_COMPLEX);
+	ee::FileHelper::FetchAllFiles(dir, files, s2::SYM_COMPLEX);
 
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{

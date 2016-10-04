@@ -14,10 +14,12 @@
 #include <ee/Math2D.h>
 #include <ee/MinBoundingBox.h>
 #include <ee/EE_ShaderLab.h>
-
-#include <SM_Calc.h>
+#include <ee/SymbolFile.h>
 
 #include <easyimage.h>
+
+#include <SM_Calc.h>
+#include <sprite2/SymType.h>
 
 #include <wx/arrstr.h>
 
@@ -94,7 +96,7 @@ void RotateTrimImage::RotateTrim(ee::Snapshoot& ss, const std::string& dir)
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 		std::cout << i << " / " << n << " : " << filepath << "\n";
 
-		if (ee::FileType::IsType(filepath, ee::FILE_IMAGE))
+		if (ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_IMAGE)
 		{
 			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 

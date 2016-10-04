@@ -1,9 +1,15 @@
 #include "ScriptsSymbol.h"
+#include "SymbolType.h"
 
 #include <fstream>
 
 namespace ee
 {
+
+int ScriptsSymbol::Type() const
+{
+	return SYM_SCRIPTS;
+}
 
 void ScriptsSymbol::LoadResources()
 {

@@ -11,7 +11,7 @@
 #include "dataset/Layer.h"
 #include "dataset/KeyFrame.h"
 
-#include <ee/FileType.h>
+#include <ee/SymbolFile.h>
 #include <ee/Exception.h>
 #include <ee/ExceptionDlg.h>
 #include <ee/panel_msg.h>
@@ -19,10 +19,12 @@
 #include <ee/FetchAllVisitor.h>
 #include <ee/Snapshoot.h>
 #include <ee/FileHelper.h>
+#include <ee/SymbolType.h>
 
 #include <easybuilder.h>
 
 #include <sprite2/BoundingBox.h>
+#include <sprite2/SymType.h>
 
 namespace eanim
 {
@@ -48,8 +50,8 @@ void Frame::OnOpen(wxCommandEvent& event)
 	if (!m_task) return;
 
 	try {
-		std::string single_filter = ee::FileHelper::GetJsonFileFilter(ee::FileType::GetTag(ee::FILE_ANIM)),
-			template_filter = ee::FileHelper::GetJsonFileFilter(ee::FileType::GetTag(ee::FILE_ANIS)),
+		std::string single_filter = ee::FileHelper::GetJsonFileFilter(ee::SymbolFile::Instance()->Tag(s2::SYM_ANIMATION)),
+			template_filter = ee::FileHelper::GetJsonFileFilter(ee::SymbolFile::Instance()->Tag(ee::SYM_ANIS)),
 			all_filter = "All | *_ani?.json";
 		std::string filter = all_filter + "|" + single_filter + "|" + template_filter;
 		wxFileDialog dlg(this, wxT("Open"), wxEmptyString, wxEmptyString, filter, wxFD_OPEN);
@@ -69,8 +71,8 @@ void Frame::OnSaveAs(wxCommandEvent& event)
  	if (!m_task) return;
  
  	try {
-		std::string single_filter = ee::FileHelper::GetJsonFileFilter(ee::FileType::GetTag(ee::FILE_ANIM)),
-			template_filter = ee::FileHelper::GetJsonFileFilter(ee::FileType::GetTag(ee::FILE_ANIS)),
+		std::string single_filter = ee::FileHelper::GetJsonFileFilter(ee::SymbolFile::Instance()->Tag(s2::SYM_ANIMATION)),
+			template_filter = ee::FileHelper::GetJsonFileFilter(ee::SymbolFile::Instance()->Tag(ee::SYM_ANIS)),
 			png_filter = "PNG files (*.png)|*.png";
 		std::string filter = single_filter + "|" + template_filter + "|" + png_filter;
  		wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, filter, wxFD_SAVE);
@@ -176,7 +178,7 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 
 void Frame::SaveAsSingle(const std::string& filepath) const
 {
-	std::string tag = ee::FileType::GetTag(ee::FILE_ANIM);
+	std::string tag = ee::SymbolFile::Instance()->Tag(s2::SYM_ANIMATION);
 	std::string full_path = ee::FileHelper::GetFilenameAddTag(filepath, tag, "json");
 	m_curr_filename = full_path;
 
@@ -186,7 +188,7 @@ void Frame::SaveAsSingle(const std::string& filepath) const
 
 void Frame::SaveAsTemplate(const std::string& filepath) const
 {
-	std::string tag = ee::FileType::GetTag(ee::FILE_ANIS);
+	std::string tag = ee::SymbolFile::Instance()->Tag(ee::SYM_ANIS);
 	std::string full_path = ee::FileHelper::GetFilenameAddTag(filepath, tag, "json");
 	m_curr_filename = full_path;
 

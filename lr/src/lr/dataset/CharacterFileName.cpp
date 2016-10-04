@@ -1,6 +1,9 @@
 #include "CharacterFileName.h"
 
 #include <ee/FileHelper.h>
+#include <ee/SymbolFile.h>
+
+#include <sprite2/SymType.h>
 
 namespace lr
 {
@@ -75,7 +78,7 @@ std::string CharacterFileName::GetFilepathSwitchField(FieldType key, const std::
 
 bool CharacterFileName::IsValidFilepath(const std::string& filepath)
 {
-	if (!ee::FileType::IsType(filepath, ee::FILE_COMPLEX)) {
+	if (ee::SymbolFile::Instance()->Type(filepath) != s2::SYM_COMPLEX) {
 		return false;
 	}
 

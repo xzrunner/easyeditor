@@ -48,7 +48,7 @@ void Frame::OnNew(wxCommandEvent& event)
 
 void Frame::OnOpen(wxCommandEvent& event)
 {
- 	std::string ext = std::string("*_") + FILE_TAG + ".json";
+	std::string ext = "*_packer.json";
  	std::string filter = "Easypacker file ("+ext+")|"+ext+"|TP file (*.json)|*json";
 	wxFileDialog dlg(this, wxT("Open"), wxEmptyString, wxEmptyString, filter, wxFD_OPEN);
 	if (dlg.ShowModal() == wxID_OK)
@@ -76,7 +76,7 @@ void Frame::OnSave(wxCommandEvent& event)
 
 void Frame::OnSaveAs(wxCommandEvent& event)
 {
-	std::string ext = std::string("*_") + FILE_TAG + ".json";
+	std::string ext = "*_packer.json";
 	std::string filter = "Easypacker file ("+ext+")|"+ext+"|TP file (*.json)|*json";
 	wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, filter, wxFD_SAVE);
 	if (dlg.ShowModal() == wxID_OK)

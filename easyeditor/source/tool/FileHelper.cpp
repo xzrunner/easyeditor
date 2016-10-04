@@ -1,6 +1,7 @@
 #include "FileHelper.h"
 #include "StringHelper.h"
 #include "Config.h"
+#include "SymbolFile.h"
 
 #include <wx/dir.h>
 #include <wx/filename.h>
@@ -112,17 +113,17 @@ void FileHelper::FetchAllFiles(const std::string& dirpath, const std::vector<std
 	dir.Traverse(traverser);
 }
 
-void FileHelper::FetchAllFiles(const std::string& dirpath, wxArrayString& files, FileFormat type)
+void FileHelper::FetchAllFiles(const std::string& dirpath, wxArrayString& files, int type)
 {
 	class DirTraverser : public wxDirTraverser
 	{
 	public:
-		DirTraverser(wxArrayString& files, FileFormat type) 
+		DirTraverser(wxArrayString& files, int type) 
 			: files(files), type(type) {}
 
 		virtual wxDirTraverseResult OnFile(const wxString& filename)
 		{
-			if (FileType::IsType(filename.ToStdString(), type)) {
+			if (SymbolFile::Instance()->Type(filename.ToStdString()) == type) {
 				files.Add(filename);
 			}
 			return wxDIR_CONTINUE;
@@ -135,7 +136,7 @@ void FileHelper::FetchAllFiles(const std::string& dirpath, wxArrayString& files,
 
 	private:
 		wxArrayString& files;
-		FileFormat type;
+		int type;
 
 	}; // DirTraverser
 

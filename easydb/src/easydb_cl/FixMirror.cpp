@@ -2,9 +2,11 @@
 #include "check_params.h"
 
 #include <ee/FileHelper.h>
+#include <ee/SymbolFile.h>
 
 #include <SM_Vector.h>
 #include <sprite2/Color.h>
+#include <sprite2/SymType.h>
 #include <gum/trans_color.h>
 
 #include <fstream>
@@ -94,15 +96,24 @@ void FixMirror::Trigger(const std::string& dir) const
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
- 		if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX)) {
- 			FixComplex(filepath);
- 		} else if (ee::FileType::IsType(filepath, ee::FILE_ANIM)) {
- 			FixAnim(filepath);
- 		} else if (ee::FileType::IsType(filepath, ee::FILE_SCALE9)) {
- 			FixScale9(filepath);
- 		} else if (filepath.find("_lr.json") != std::string::npos) {
- 			FixLR(filepath);
- 		}
+		int type = ee::SymbolFile::Instance()->Type(filepath);
+		switch (type)
+		{
+		case s2::SYM_COMPLEX:
+			FixComplex(filepath);
+			break;
+		case s2::SYM_ANIMATION:
+			FixAnim(filepath);
+			break;
+		case s2::SYM_SCALE9:
+			FixScale9(filepath);
+			break;
+		case s2::SYM_UNKNOWN:
+			if (filepath.find("_lr.json") != std::string::npos) {
+				FixLR(filepath);
+			}
+			break;
+		}
 	}
 }
 

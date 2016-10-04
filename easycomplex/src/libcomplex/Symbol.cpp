@@ -1,6 +1,5 @@
 #include "Symbol.h"
 #include "Sprite.h"
-#include "config.h"
 #include "FileLoader.h"
 
 #include <ee/TPNode.h>
@@ -10,14 +9,18 @@
 #include <ee/Visitor.h>
 #include <ee/StringHelper.h>
 #include <ee/SettingData.h>
+#include <ee/SymbolFile.h>
 
 #include <easytext.h>
 
+#include <sprite2/SymType.h>
 #include <sprite2/ComplexSymbol.h>
 #include <sprite2/S2_Sprite.h>
 #include <sprite2/S2_RVG.h>
 #include <sprite2/RenderScissor.h>
 #include <sprite2/BoundingBox.h>
+
+#include <gum/StringHelper.h>
 
 #include <queue>
 
@@ -30,7 +33,7 @@ Symbol::Symbol()
 	, m_render_cache_open(true)
 {
 	static int id = 0;
-	m_name = FILE_TAG + wxVariant(id++);
+	m_name = ee::SymbolFile::Instance()->Tag(s2::SYM_COMPLEX) + gum::StringHelper::ToString(id++);
 }
 
 void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const

@@ -68,7 +68,7 @@ wxSizer* CreateMeshCMPT::InitLayout()
 
 void CreateMeshCMPT::OnCopy(wxCommandEvent& event)
 {
-// 	std::string tag = ee::FileType::GetTag(ee::FileType::e_mesh);
+// 	std::string tag = ee::SymbolFile::Instance()->Tag(ee::FileType::e_mesh);
 // 	wxFileDialog dlg(this, wxT("Open"), wxEmptyString, wxEmptyString, 
 // 		wxT("*_") + tag + wxT(".json"), wxFD_OPEN);
 // 	if (dlg.ShowModal() == wxID_OK)

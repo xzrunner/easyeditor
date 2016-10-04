@@ -7,6 +7,9 @@
 #include <ee/SymbolMgr.h>
 #include <ee/Symbol.h>
 #include <ee/EE_ShaderLab.h>
+#include <ee/SymbolFile.h>
+
+#include <sprite2/SymType.h>
 
 #include <fstream>
 #include <wx/arrstr.h>
@@ -56,8 +59,8 @@ void Snapshoot::Run(ee::Snapshoot& ss, const std::string& srcdir, const std::str
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX) || 
-			ee::FileType::IsType(filepath, ee::FILE_ANIM))
+		int type = ee::SymbolFile::Instance()->Type(filepath);
+		if (type == s2::SYM_COMPLEX || type == s2::SYM_ANIMATION)
 		{
 			Json::Value value;
 			Json::Reader reader;

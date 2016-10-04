@@ -4,6 +4,9 @@
 #include "lr_tools.h"
 
 #include <ee/FileHelper.h>
+#include <ee/SymbolFile.h>
+
+#include <sprite2/SymType.h>
 
 #include <fstream>
 
@@ -141,7 +144,7 @@ void LRToComplex::OutputComplexFile(Json::Value& complex_val, const std::string&
 	complex_val["ymin"] = 0;
 
 	std::string outfile = ee::FileHelper::GetFileDir(filepath) + "\\" + name 
-		+ "_" + ee::FileType::GetTag(ee::FILE_COMPLEX) + ".json";
+		+ "_" + ee::SymbolFile::Instance()->Tag(s2::SYM_COMPLEX) + ".json";
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
 	std::ofstream fout(outfile.c_str());

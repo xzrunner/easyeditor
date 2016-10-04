@@ -3,6 +3,9 @@
 
 #include <ee/FileHelper.h>
 #include <ee/StringHelper.h>
+#include <ee/SymbolFile.h>
+
+#include <sprite2/SymType.h>
 
 #include <wx/arrstr.h>
 
@@ -48,7 +51,7 @@ void NumberImages::Trigger(const std::string& src_dir, const std::string& dst_fi
 	ee::FileHelper::FetchAllFiles(src_dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i) {
 		std::string filepath = files[i];
-		if (!ee::FileType::IsType(filepath, ee::FILE_IMAGE)) {
+		if (ee::SymbolFile::Instance()->Type(filepath) != s2::SYM_IMAGE) {
 			continue;
 		}
 		filepath = ee::FileHelper::GetRelativePath(src_dir, filepath);

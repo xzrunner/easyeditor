@@ -1,6 +1,5 @@
 #include "FileLoader.h"
 #include "Symbol.h"
-#include "config.h"
 
 #include "LoadFromJson.h"
 #include "LoadFromLua.h"
@@ -9,7 +8,10 @@
 
 #include <ee/Config.h>
 #include <ee/FileHelper.h>
+#include <ee/SymbolType.h>
+#include <ee/SymbolFile.h>
 
+#include <sprite2/SymType.h>
 #include <gum/GUM_DTex.h>
 
 #include <fstream>
@@ -131,14 +133,15 @@ void FileLoader::Load(const std::string& filepath, Symbol* complex)
 	reader.parse(fin, value);
 	fin.close();
 
+	int type = ee::SymbolFile::Instance()->Type(filepath);
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	if (!value["lua desc"].isNull()) {
 		LoadFromLua::Load(value, dir, complex);
 	} else if (!value["bin file"].isNull()) {
 		LoadFromBin::Load(value, dir, complex);
-	} else if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX)) {
+	} else if (type == s2::SYM_COMPLEX) {
 		LoadFromJson::Load(filepath, value, dir, complex);
-	} else if (ee::FileType::IsType(filepath, ee::FILE_PSD)) {
+	} else if (type == ee::SYM_PSD) {
 		LoadFromPSD::Load(value, dir, complex);
 	}
 

@@ -2,6 +2,9 @@
 #include "check_params.h"
 
 #include <ee/FileHelper.h>
+#include <ee/SymbolFile.h>
+
+#include <sprite2/SymType.h>
 
 #include <wx/arrstr.h>
 
@@ -44,7 +47,7 @@ void TransOldTextFile::Run(const std::string& folder)
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX)) {
+		if (ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_COMPLEX) {
 			TransComplex(filepath);
 		}
 	}

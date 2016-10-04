@@ -1,15 +1,16 @@
 #include "LibraryPage.h"
 #include "Symbol.h"
-#include "config.h"
 
 #include <ee/LibraryList.h>
-#include <ee/FileType.h>
+#include <ee/SymbolFile.h>
 #include <ee/StringHelper.h>
 #include <ee/ExceptionDlg.h>
 #include <ee/Exception.h>
 #include <ee/SymbolMgr.h>
 
 #include <easycoco.h>
+
+#include <sprite2/SymType.h>
 
 namespace ecomplex
 {
@@ -18,7 +19,7 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	: ee::LibraryPage(parent, "Complex")
 {
 	InitLayout();
-	m_list->SetFileter(FILE_TAG);
+	m_list->SetFileter(ee::SymbolFile::Instance()->Tag(s2::SYM_COMPLEX));
 }
 
 bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
@@ -33,7 +34,7 @@ bool LibraryPage::LoadFromConfig()
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
-	std::string tag = ee::FileType::GetTag(ee::FILE_COMPLEX);
+	std::string tag = ee::SymbolFile::Instance()->Tag(s2::SYM_COMPLEX);
 	std::string filter = "*_" + tag + ".json";
 	filter += ";*_" + tag + "[gen].json";
 	filter += "; *.lua";

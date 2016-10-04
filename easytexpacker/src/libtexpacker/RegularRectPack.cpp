@@ -4,7 +4,9 @@
 #include <ee/StringHelper.h>
 #include <ee/std_functor.h>
 #include <ee/math_common.h>
-#include <ee/FileType.h>
+#include <ee/SymbolFile.h>
+
+#include <sprite2/SymType.h>
 
 #include <json/json.h>
 
@@ -303,7 +305,7 @@ void RegularRectPack::LoadData(const wxArrayString& files)
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = files[i];
-		if (!ee::FileType::IsType(filepath, ee::FILE_IMAGE)) {
+		if (ee::SymbolFile::Instance()->Type(filepath) != s2::SYM_IMAGE) {
 			continue;
 		}
 

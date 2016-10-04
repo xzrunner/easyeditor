@@ -3,8 +3,11 @@
 
 #include <ee/FileHelper.h>
 #include <ee/LibpngAdapter.h>
+#include <ee/SymbolFile.h>
 
 #include <easyimage.h>
+
+#include <sprite2/SymType.h>
 
 namespace edb
 {
@@ -52,7 +55,7 @@ void TransToETC2::Trigger(const std::string& path)
 
 void TransToETC2::Format(const std::string& filepath)
 {
-	if (!ee::FileType::IsType(filepath, ee::FILE_IMAGE)) {
+	if (ee::SymbolFile::Instance()->Type(filepath) != s2::SYM_IMAGE) {
 		return;		
 	}
 

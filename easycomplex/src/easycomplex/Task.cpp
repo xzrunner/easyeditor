@@ -3,13 +3,16 @@
 
 #include <ee/SymbolMgr.h>
 #include <ee/Bitmap.h>
-#include <ee/FileType.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/ViewlistPanel.h>
 #include <ee/GroupTreePanel.h>
+#include <ee/SymbolType.h>
+#include <ee/SymbolFile.h>
 
 #include <easycomplex.h>
 #include <easycoco.h>
+
+#include <sprite2/SymType.h>
 
 #include <fstream>
 
@@ -38,11 +41,16 @@ Task::~Task()
 
 void Task::Load(const char* filepath)
 {
-	if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX)) {
+	int type = ee::SymbolFile::Instance()->Type(filepath);
+	switch (type)
+	{
+	case s2::SYM_COMPLEX:
 		FileIO::load(this, filepath);
 		LoadGroupTree(filepath);
-	} else if (ee::FileType::IsType(filepath, ee::FILE_PSD)) {
+		break;
+	case ee::SYM_PSD:
 		FileIO::load(this, filepath);
+		break;
 	}
 }
 

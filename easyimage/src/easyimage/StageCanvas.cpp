@@ -2,6 +2,7 @@
 #include "StagePanel.h"
 
 #include <ee/SpriteRenderer.h>
+#include <ee/Sprite.h>
 
 #include <sprite2/S2_RVG.h>
 

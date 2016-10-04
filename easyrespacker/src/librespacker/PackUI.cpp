@@ -6,6 +6,8 @@
 #include "PackUIWrapperTask.h"
 
 #include <ee/FileHelper.h>
+#include <ee/SymbolFile.h>
+#include <ee/SymbolType.h>
 
 #include <fstream>
 
@@ -51,7 +53,7 @@ void PackUI::AddWindowTask(const std::string& filepath)
 	reader.parse(fin, value);
 	fin.close();
 
-	assert(ee::FileType::IsType(filepath, ee::FILE_UIWND));
+	assert(ee::SymbolFile::Instance()->Type(filepath) == ee::SYM_UIWND);
 	m_tasks.push_back(new PackUIWindowTask(filepath, value));
 }
 

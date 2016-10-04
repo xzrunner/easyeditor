@@ -3,7 +3,7 @@
 #include <ee/SymbolMgr.h>
 #include <ee/LibraryList.h>
 #include <ee/StringHelper.h>
-#include <ee/FileType.h>
+#include <ee/SymbolFile.h>
 
 #include <easyui.h>
 #include <easycomplex.h>
@@ -23,7 +23,7 @@ LibraryPage::LibraryPage(wxWindow* parent, const char* name,
 
 bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
 {
-	if (m_filter == ee::FileType::GetTag(ee::FILE_UIWND)) {
+	if (m_filter == ee::SymbolFile::Instance()->Tag(ee::SYM_UIWND)) {
 		return dynamic_cast<Symbol*>(sym) != NULL;	
 	} else {
 		return true;

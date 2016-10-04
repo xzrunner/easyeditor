@@ -13,12 +13,15 @@
 #include <ee/panel_msg.h>
 #include <ee/SymbolMgr.h>
 #include <ee/Bitmap.h>
-#include <ee/FileType.h>
+#include <ee/SymbolFile.h>
 #include <ee/Exception.h>
 #include <ee/ExceptionDlg.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/subject_id.h>
 #include <ee/ViewlistPanel.h>
+#include <ee/SymbolType.h>
+
+#include <sprite2/SymType.h>
 
 #include <wx/splitter.h>
 
@@ -50,8 +53,8 @@ Task::~Task()
 
 void Task::Load(const char* filepath)
 {
-	if (!ee::FileType::IsType(filepath, ee::FILE_ANIM) &&
-		!ee::FileType::IsType(filepath, ee::FILE_ANIS)) {
+	int type = ee::SymbolFile::Instance()->Type(filepath);
+	if (type != s2::SYM_ANIMATION && type != ee::SYM_ANIS) {
 		return;
 	}
 
@@ -65,12 +68,17 @@ void Task::Load(const char* filepath)
 
 void Task::Store(const char* filepath) const
 {
-	if (ee::FileType::IsType(filepath, ee::FILE_ANIM)) {
+	int type = ee::SymbolFile::Instance()->Type(filepath);
+	switch (type)
+	{
+	case s2::SYM_ANIMATION:
 		FileIO::StoreSingle(filepath);
 		ViewMgr::Instance()->stage->OnSave();
-	} else if (ee::FileType::IsType(filepath, ee::FILE_ANIS)) {
+		break;
+	case ee::SYM_ANIS:
 		FileIO::StoreTemplate(filepath);
 		ViewMgr::Instance()->stage->OnSave();
+		break;
 	}
 }
 

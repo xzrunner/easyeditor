@@ -19,6 +19,9 @@
 #include <ee/LibraryList.h>
 #include <ee/LibraryPage.h>
 #include <ee/FetchAllVisitor.h>
+#include <ee/SymbolFile.h>
+
+#include <sprite2/SymType.h>
 
 #include <wx/spinctrl.h>
 
@@ -137,7 +140,7 @@ void NormalCMPT::OnLoadFromFolder(wxCommandEvent& event)
 	for (size_t i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = files[i];
-		if (!ee::FileType::IsType(filepath, ee::FILE_IMAGE))
+		if (ee::SymbolFile::Instance()->Type(filepath) != s2::SYM_IMAGE)
 			continue;
 
 		std::string name = ee::FileHelper::GetFilename(filepath);

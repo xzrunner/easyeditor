@@ -5,11 +5,14 @@
 //#include "Image.h"
 #include "Symbol.h"
 #include "SymbolMgr.h"
-#include "FileType.h"
+#include "SymbolFile.h"
 #include "FileHelper.h"
 #include "Exception.h"
 #include "Snapshoot.h"
 #include "ImageTrim.h"
+#include "SymbolType.h"
+
+#include <sprite2/SymType.h>
 
 #include <gl/glew.h>
 //#include <wx/filename.h>
@@ -60,6 +63,7 @@ bool Bitmap::LoadFromFile(const std::string& filepath)
 		inited = true;
 	}
 
+	int type = ee::SymbolFile::Instance()->Type(filepath);
 	if (filepath.find("pvr") != std::string::npos || filepath.find("pkm") != std::string::npos) 
 	{
 		ImageData* img_data = ImageDataMgr::Instance()->GetItem(filepath);
@@ -82,13 +86,13 @@ bool Bitmap::LoadFromFile(const std::string& filepath)
 
 		delete rgb_data;
 	}
-	else if (FileType::IsType(filepath, FILE_IMAGE))
+	else if (type == s2::SYM_IMAGE)
 	{
 		wxImage image;
 		GetImage(filepath, image);
 		InitBmp(image, true);
 	}
-	else if (FileType::IsType(filepath, FILE_TERRAIN2D))
+	else if (type == ee::SYM_TERRAIN2D)
 	{
 		;
 	}

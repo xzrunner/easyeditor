@@ -11,8 +11,11 @@
 #include <ee/DummySymbol.h>
 #include <ee/SettingData.h>
 #include <ee/Config.h>
+#include <ee/SymbolFile.h>
 
 #include <easycomplex.h>
+
+#include <sprite2/SymType.h>
 
 namespace edb
 {
@@ -67,14 +70,21 @@ void AverageRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 		std::string filepath = filename.GetFullPath();
 
 		std::cout << i << " / " << n << " : " << filepath << "\n";
-		if (ee::FileType::IsType(filepath, ee::FILE_IMAGE)) {
+		int type = ee::SymbolFile::Instance()->Type(filepath);
+		switch (type)
+		{
+		case s2::SYM_IMAGE:
 			RectCutImage(src_dir, dst_dir, filepath, min_edge);
-		} else if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX)) {
+			break;
+		case s2::SYM_COMPLEX:
 			FixComplex(src_dir, dst_dir, filepath);
-		} else if (ee::FileType::IsType(filepath, ee::FILE_ANIM)) {
+			break;
+		case s2::SYM_ANIMATION:
 			FixAnim(src_dir, dst_dir, filepath);
-		} else if (ee::FileType::IsType(filepath, ee::FILE_SCALE9)) {
+			break;
+		case s2::SYM_SCALE9:
 			FixScale9(src_dir, dst_dir, filepath);
+			break;
 		}
 	}
 }
@@ -251,7 +261,7 @@ void AverageRectCut::FixSpriteValue(const std::string& src_dir, const std::strin
 									 const std::string& file_dir, Json::Value& sprite_val) const
 {
 	std::string filepath = sprite_val["filepath"].asString();
-	if (!ee::FileType::IsType(filepath, ee::FILE_IMAGE)) {
+	if (ee::SymbolFile::Instance()->Type(filepath) != s2::SYM_IMAGE) {
 		return;
 	}
 

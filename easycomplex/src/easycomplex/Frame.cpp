@@ -9,10 +9,13 @@
 #include <ee/SymbolMgr.h>
 #include <ee/SettingData.h>
 #include <ee/Snapshoot.h>
+#include <ee/SymbolFile.h>
 
 #include <easycomplex.h>
 #include <easycoco.h>
 #include <easybuilder.h>
+
+#include <sprite2/SymType.h>
 
 namespace ecomplex
 {
@@ -76,7 +79,7 @@ void Frame::OnSettings(wxCommandEvent& event)
 
 std::string Frame::GetFileFilter() const
 {
-	std::string tag = ee::FileType::GetTag(ee::FILE_COMPLEX);
+	std::string tag = ee::SymbolFile::Instance()->Tag(s2::SYM_COMPLEX);
 	std::string complex_filter = ee::FileHelper::GetJsonFileFilter(tag),
 		        psd_filter = ee::FileHelper::GetJsonFileFilter("psd");
 	return complex_filter + "|" + psd_filter;

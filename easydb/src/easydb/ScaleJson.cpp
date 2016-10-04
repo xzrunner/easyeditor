@@ -3,6 +3,9 @@
 
 #include <ee/FileHelper.h>
 #include <ee/SpriteIO.h>
+#include <ee/SymbolFile.h>
+
+#include <sprite2/SymType.h>
 
 #include <fstream>
 
@@ -43,10 +46,15 @@ void ScaleJson::Trigger(const std::string& dir, float scale, const std::string& 
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX)) {
+		int type = ee::SymbolFile::Instance()->Type(filepath);
+		switch (type)
+		{
+		case s2::SYM_COMPLEX:
 			ScaleComplex(filepath, scale, sprite_filename);
-		} else if (ee::FileType::IsType(filepath, ee::FILE_ANIM)) {
+			break;
+		case s2::SYM_ANIMATION:
 			ScaleAnim(filepath, scale, sprite_filename);
+			break;
 		}
 	}
 }

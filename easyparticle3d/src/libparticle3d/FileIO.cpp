@@ -4,7 +4,6 @@
 #include "ToolBarPanel.h"
 #include "ComponentPanel.h"
 #include "ps_config.h"
-#include "config.h"
 
 #include <ee/FileHelper.h>
 #include <ee/Symbol.h>
@@ -30,6 +29,7 @@ void FileIO::Store(const std::string& filepath, ParticleSystem* ps,
 	Json::Value value;
 
 	toolbar->Store(value);
+	static const int VERSION = 1;
 	value["version"] = VERSION;
 
 	value["name"] = ps->name;

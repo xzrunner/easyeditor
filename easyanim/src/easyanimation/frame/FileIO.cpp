@@ -13,7 +13,7 @@
 #include <ee/FileHelper.h>
 #include <ee/SymbolMgr.h>
 #include <ee/Snapshoot.h>
-#include <ee/FileType.h>
+#include <ee/SymbolFile.h>
 #include <ee/LibraryPanel.h>
 #include <ee/Exception.h>
 #include <ee/SpriteFactory.h>
@@ -21,9 +21,12 @@
 #include <ee/AnimatedGifSaver.h>
 #include <ee/SymbolSearcher.h>
 
-#include <rapidxml_utils.hpp>
 #include <easyanim.h>
 #include <easyimage.h>
+
+#include <sprite2/SymType.h>
+
+#include <rapidxml_utils.hpp>
 
 namespace eanim
 {
@@ -182,7 +185,7 @@ void FileIO::LoadFlash(const std::string& filepath)
 
 void FileIO::StoreAsGif(const std::string& src, const std::string& dst)
 {
-	if (!ee::FileType::IsType(src, ee::FILE_ANIM)) {
+	if (ee::SymbolFile::Instance()->Type(src) != s2::SYM_ANIMATION) {
 		return;
 	}
 
@@ -211,7 +214,7 @@ void FileIO::StoreAsGif(const std::string& src, const std::string& dst)
 
 void FileIO::StoreAsPng(const std::string& src, const std::string& dst)
 {
-	if (!ee::FileType::IsType(src, ee::FILE_ANIM)) {
+	if (ee::SymbolFile::Instance()->Type(src) != s2::SYM_ANIMATION) {
 		return;
 	}
 

@@ -2,7 +2,7 @@
 #include "check_params.h"
 
 #include <ee/FileHelper.h>
-#include <ee/FileType.h>
+#include <ee/SymbolFile.h>
 #include <ee/SymbolMgr.h>
 #include <ee/StringHelper.h>
 #include <ee/ImageSymbol.h>
@@ -11,6 +11,8 @@
 #include <ee/ImageSaver.h>
 
 #include <easyimage.h>
+
+#include <sprite2/SymType.h>
 
 #include <glfw.h>
 
@@ -58,7 +60,7 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 
 		std::cout << i << " / " << n << " : " << filepath << "\n";
-		if (ee::FileType::IsType(filepath, ee::FILE_IMAGE))
+		if (ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_IMAGE)
 		{
 			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 

@@ -13,10 +13,12 @@
 #include <ee/SymbolSearcher.h>
 #include <ee/SpriteFactory.h>
 #include <ee/SymbolMgr.h>
+#include <ee/SymbolFile.h>
 
 #include <easyshape.h>
 #include <easycomplex.h>
 
+#include <sprite2/SymType.h>
 #include <sprite2/RenderCamera.h>
 #include <sprite2/RenderParams.h>
 #include <sprite2/S2_Sprite.h>
@@ -427,7 +429,7 @@ ee::Sprite* Layer::LoadSprite(const Json::Value& val, const std::string& dir, co
 	}
 	ee::Symbol* sym = NULL;
 
-	std::string shape_tag = ee::FileType::GetTag(ee::FILE_SHAPE);
+	std::string shape_tag = ee::SymbolFile::Instance()->Tag(s2::SYM_SHAPE);
 	std::string shape_filepath = ee::FileHelper::GetFilenameAddTag(filepath, shape_tag, "json");
 	std::string spr_tag;
 	if (ee::FileHelper::IsFileExist(shape_filepath)) {

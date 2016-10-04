@@ -1,6 +1,5 @@
 #include "EditDialog.h"
 #include "Symbol.h"
-#include "config.h"
 #include "StagePanel.h"
 #include "ToolBarPanel.h"
 
@@ -9,6 +8,9 @@
 #include <ee/ConfirmDialog.h>
 #include <ee/SpriteFactory.h>
 #include <ee/PropertySettingPanel.h>
+#include <ee/SymbolFile.h>
+
+#include <sprite2/SymType.h>
 
 #include <wx/splitter.h>
 
@@ -27,7 +29,7 @@ EditDialog::EditDialog(wxWindow* parent, Symbol* sym)
 	InitLayout(sym);
 
 	std::string filepath = ee::FileHelper::GetFilenameAddTag(
-		sym->GetFilepath(), FILE_TAG, "json");
+		sym->GetFilepath(), ee::SymbolFile::Instance()->Tag(s2::SYM_SHAPE), "json");
 	if (ee::FileHelper::IsFileExist(filepath)) {
 		m_stage->LoadFromFile(filepath.c_str());
 		m_toolbar->SelectSuitableEditOP();

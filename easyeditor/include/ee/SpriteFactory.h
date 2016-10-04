@@ -26,8 +26,8 @@ public:
 	void UpdateBoundings(const Symbol& sym);
 
 	typedef Sprite* (*CreateCallback)(Symbol*);
-	static void RegisterCreator(const std::string& type, CreateCallback cb);
-	static void UnregisterCreator(const std::string& type);
+	static void RegisterCreator(int type, CreateCallback cb);
+	static void UnregisterCreator(int type);
 
 public:
 	static SpriteFactory* Instance();
@@ -44,7 +44,7 @@ private:
 private:
 	static SpriteFactory* m_instance;
 
-	typedef std::map<std::string, CreateCallback> CallbackMap;
+	typedef std::map<int, CreateCallback> CallbackMap;
 	static CallbackMap m_creators;
 
 }; // SpriteFactory

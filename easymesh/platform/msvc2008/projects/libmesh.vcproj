@@ -457,10 +457,6 @@
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath="..\..\..\src\libmesh\config.h"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>

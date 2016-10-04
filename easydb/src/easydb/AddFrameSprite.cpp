@@ -4,6 +4,9 @@
 #include <ee/FileHelper.h>
 #include <ee/DummySymbol.h>
 #include <ee/DummySprite.h>
+#include <ee/SymbolFile.h>
+
+#include <sprite2/SymType.h>
 
 #include <fstream>
 
@@ -45,7 +48,7 @@ void AddFrameSprite::Trigger(const std::string& dir, const std::string& sprite_p
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filename = files[i].ToStdString();
-		if (!ee::FileType::IsType(filename, ee::FILE_ANIM)) {
+		if (ee::SymbolFile::Instance()->Type(filename) != s2::SYM_ANIMATION) {
 			continue;
 		}
 

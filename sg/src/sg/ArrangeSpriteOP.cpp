@@ -39,7 +39,7 @@ bool ArrangeSpriteOP::OnMouseLeftDClick(int x, int y)
 	for (int i = 0, n = sprs.size(); i < n; ++i)
 	{
 		ee::Sprite* s = sprs[i];
-		if (&s->GetSymbol() == &selected->GetSymbol()) {
+		if (s->GetSymbol() == selected->GetSymbol()) {
 			stage->GetSpriteSelection()->Add(s);
 		}
 	}

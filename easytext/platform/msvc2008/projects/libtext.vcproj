@@ -265,10 +265,6 @@
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath="..\..\..\src\libtext\config.h"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>

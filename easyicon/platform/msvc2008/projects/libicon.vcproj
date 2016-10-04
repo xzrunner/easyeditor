@@ -361,10 +361,6 @@
 				</File>
 			</Filter>
 		</Filter>
-		<File
-			RelativePath="..\..\..\src\libicon\config.h"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>

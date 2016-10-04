@@ -1,12 +1,13 @@
 #include "LibraryPage.h"
 #include "Symbol.h"
-#include "config.h"
 
 #include <ee/LibraryList.h>
-#include <ee/FileType.h>
+#include <ee/SymbolFile.h>
 #include <ee/SymbolMgr.h>
 #include <ee/Exception.h>
 #include <ee/ExceptionDlg.h>
+
+#include <sprite2/SymType.h>
 
 namespace emesh
 {
@@ -15,7 +16,7 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	: ee::LibraryPage(parent, "Mesh")
 {
 	InitLayout();
-	m_list->SetFileter(emesh::FILE_TAG);
+	m_list->SetFileter(ee::SymbolFile::Instance()->Tag(s2::SYM_MESH));
 }
 
 bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
@@ -25,7 +26,7 @@ bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
-	std::string filter = ee::FileType::GetTag(ee::FILE_MESH);
+	std::string filter = ee::SymbolFile::Instance()->Tag(s2::SYM_MESH);
 	filter = wxT("*_") + filter + wxT(".json");
 	wxFileDialog dlg(this, wxT("导入mesh文件"), wxEmptyString, 
 		wxEmptyString, filter, wxFD_OPEN | wxFD_MULTIPLE);

@@ -13,9 +13,12 @@
 #include <ee/DummySymbol.h>
 #include <ee/FinishDialog.h>
 #include <ee/ImageClip.h>
+#include <ee/SymbolFile.h>
 
 #include <easycomplex.h>
 #include <easyimage.h>
+
+#include <sprite2/SymType.h>
 
 #include <fstream>
 
@@ -310,7 +313,7 @@ void RectCutCMPT::OnOutputData(wxCommandEvent& event)
 	complex_all->name = img_name;
 	complex_part->name = img_name + "_part";
 
-	std::string tag = ee::FileType::GetTag(ee::FILE_COMPLEX);
+	std::string tag = ee::SymbolFile::Instance()->Tag(s2::SYM_COMPLEX);
 
 	std::string filename_all = json_dir + "\\" + img_name + "_" + tag + ".json";
 	ecomplex::FileStorer::Store(filename_all.c_str(), complex_all);

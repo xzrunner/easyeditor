@@ -7,6 +7,7 @@
 #include <ee/Sprite.h>
 #include <ee/Symbol.h>
 
+#include <SM_Calc.h>
 #include <sprite2/S2_RVG.h>
 
 namespace eimage

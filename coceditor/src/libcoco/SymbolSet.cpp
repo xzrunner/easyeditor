@@ -2,6 +2,9 @@
 
 #include <ee/FileHelper.h>
 #include <ee/Symbol.h>
+#include <ee/SymbolFile.h>
+
+#include <sprite2/SymType.h>
 
 namespace ecoco
 {
@@ -15,7 +18,7 @@ void SymbolSet::Insert(const ee::Symbol* sym)
 		int zz  =0;
 	}
 
-	if (!Query(sym) || ee::FileType::IsType(sym->GetFilepath(), ee::FILE_SCALE9)) {
+	if (!Query(sym) || ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_SCALE9) {
 		m_symbol_map.insert(std::make_pair(filepath, sym));
 		m_symbol_ordered.push_back(sym);
 	}

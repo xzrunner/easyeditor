@@ -1,7 +1,7 @@
 #include "Task.h"
 
 #include <ee/SymbolMgr.h>
-#include <ee/FileType.h>
+#include <ee/SymbolFile.h>
 #include <ee/FileHelper.h>
 #include <ee/LibraryImagePage.h>
 
@@ -9,6 +9,9 @@
 #include <easycomplex.h>
 #include <easyanim.h>
 #include <easytexture.h>
+#include <ee/SymbolFile.h>
+
+#include <sprite2/SymType.h>
 
 #include <wx/splitter.h>
 
@@ -29,24 +32,27 @@ Task::~Task()
 
 void Task::Load(const char* filepath)
 {
-	ee::FileFormat type = ee::FileType::GetType(filepath);
-	if (type == ee::FILE_SHAPE) {
-		m_stage->LoadFromFile(filepath);		
-	} else if (type == ee::FILE_IMAGE 
-		|| type == ee::FILE_COMPLEX
-		|| type == ee::FILE_TEXTURE) {
-		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-		m_stage->SetSymbolBG(sym);
-		sym->RemoveReference();
+	int type = ee::SymbolFile::Instance()->Type(filepath);
+	switch (type)
+	{
+	case s2::SYM_SHAPE:
+		m_stage->LoadFromFile(filepath);
+		break;
+	case s2::SYM_IMAGE: case s2::SYM_COMPLEX: case s2::SYM_TEXTURE:
+		{
+			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+			m_stage->SetSymbolBG(sym);
+			sym->RemoveReference();
+		}
+		break;
 	}
 }
 
 void Task::Store(const char* filepath) const
 {
 	std::string fixed = filepath;
-	ee::FileFormat type = ee::FileType::GetType(fixed);
-	if (type != ee::FILE_SHAPE) {
-		std::string tag = ee::FileType::GetTag(ee::FILE_SHAPE);
+	if (ee::SymbolFile::Instance()->Type(fixed) != s2::SYM_SHAPE) {
+		std::string tag = ee::SymbolFile::Instance()->Tag(s2::SYM_SHAPE);
 		fixed = ee::FileHelper::GetFilenameAddTag(fixed, tag, "json");
 	}
 	m_stage->StoreToFile(fixed.c_str());

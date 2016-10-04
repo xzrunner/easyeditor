@@ -8,9 +8,12 @@
 #include <ee/EE_ShaderLab.h>
 #include <ee/StringHelper.h>
 #include <ee/LibpngAdapter.h>
+#include <ee/SymbolFile.h>
 
 #include <easytexpacker.h>
 #include <easyimage.h>
+
+#include <sprite2/SymType.h>
 
 #include <wx/filefn.h>
 
@@ -245,7 +248,7 @@ void PackTexture::PackPackage(const Package& pkg, const std::string& src_dir,
 		}
 	}
 	for (int i = 0, n = files.size(); i < n; ++i) {
-		if (ee::FileType::IsType(files[i].ToStdString(), ee::FILE_IMAGE)) {
+		if (ee::SymbolFile::Instance()->Type(files[i].ToStdString()) == s2::SYM_IMAGE) {
 			std::string filepath = ee::FileHelper::FormatFilepathAbsolute(files[i].ToStdString());
 			images.push_back(filepath);
 		}

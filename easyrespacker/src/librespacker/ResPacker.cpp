@@ -16,13 +16,16 @@
 #include <ee/StringHelper.h>
 #include <ee/Exception.h>
 #include <ee/SymbolMgr.h>
+#include <ee/SymbolType.h>
 
 #include <easycomplex.h>
 #include <easyanim.h>
 #include <easyparticle3d.h>
 #include <easyui.h>
 #include <easytrail.h>
+#include <ee/SymbolFile.h>
 
+#include <sprite2/SymType.h>
 #include <dtex_typedef.h>
 
 #include <fstream>
@@ -192,16 +195,19 @@ void ResPacker::LoadJsonData(const std::string& dir)
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath();
-		if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX) || 
-			ee::FileType::IsType(filepath, ee::FILE_ANIM) ||
-			ee::FileType::IsType(filepath, ee::FILE_PARTICLE3D) ||
-			ee::FileType::IsType(filepath, ee::FILE_TRAIL)) {
+		int type = ee::SymbolFile::Instance()->Type(filepath);
+		switch (type)
+		{
+		case s2::SYM_COMPLEX: case s2::SYM_ANIMATION: case s2::SYM_PARTICLE3D: case s2::SYM_TRAIL:
 			filepaths.push_back(filepath);
-		} else if (ee::FileType::IsType(filepath, ee::FILE_UI)) {
+			break;
+		case ee::SYM_UI:
 			PackUI::Instance()->AddTask(filepath);
-		} else if (ee::FileType::IsType(filepath, ee::FILE_UIWND)) {
+			break;
+		case ee::SYM_UIWND:
 			PackUI::Instance()->AddWindowTask(filepath);
 			AddUIWndSymbol(filepath);
+			break;
 		}
 	}
 

@@ -1,12 +1,14 @@
 #include "Frame.h"
 #include "Task.h"
 
-#include <ee/FileType.h>
+#include <ee/SymbolFile.h>
 #include <ee/Exception.h>
 #include <ee/ExceptionDlg.h>
 #include <ee/FileHelper.h>
 
 #include <easyparticle3d.h>
+
+#include <sprite2/SymType.h>
 
 #include <wx/splitter.h>
 
@@ -23,8 +25,8 @@ void Frame::OnSaveAs(wxCommandEvent& event)
 	if (!m_task) return;
 
 	try {
-		std::string anim_filter = ee::FileHelper::GetJsonFileFilter(ee::FileType::GetTag(ee::FILE_ANIM));
-		std::string inv_filter = ee::FileHelper::GetJsonFileFilter(ee::FileType::GetTag(ee::FILE_P3DINV));
+		std::string anim_filter = ee::FileHelper::GetJsonFileFilter(ee::SymbolFile::Instance()->Tag(s2::SYM_ANIMATION));
+		std::string inv_filter = ee::FileHelper::GetJsonFileFilter(ee::SymbolFile::Instance()->Tag(ee::SYM_P3DINV));
 		std::string filter = GetFileFilter() + "|" + anim_filter + "|" + inv_filter;
 		wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, filter, wxFD_SAVE);
 		if (dlg.ShowModal() == wxID_OK)

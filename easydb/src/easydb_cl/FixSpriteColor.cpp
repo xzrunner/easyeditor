@@ -2,8 +2,10 @@
 #include "check_params.h"
 
 #include <ee/FileHelper.h>
+#include <ee/SymbolFile.h>
 
 #include <sprite2/Color.h>
+#include <sprite2/SymType.h>
 #include <gum/trans_color.h>
 
 #include <fstream>
@@ -61,10 +63,15 @@ void FixSpriteColor::Trigger(const std::string& dir) const
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX)) {
+		int type = ee::SymbolFile::Instance()->Type(filepath);
+		switch (type)
+		{
+		case s2::SYM_COMPLEX:
 			FixComplex(filepath);
-		} else if (ee::FileType::IsType(filepath, ee::FILE_ANIM)) {
+			break;
+		case s2::SYM_ANIMATION:
 			FixAnim(filepath);
+			break;
 		}
 	}
 }

@@ -4,6 +4,7 @@
 #include <ee/Math2D.h>
 #include <ee/std_functor.h>
 
+#include <SM_Test.h>
 #include <sprite2/S2_RVG.h>
 
 #include <algorithm>

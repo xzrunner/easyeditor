@@ -5,7 +5,8 @@
 
 #include <ee/SymbolFactory.h>
 #include <ee/SpriteFactory.h>
-#include <ee/FileType.h>
+#include <ee/SymbolFile.h>
+#include <ee/SymbolType.h>
 
 #include <easycomplex.h>
 #include <easyanim.h>
@@ -14,36 +15,38 @@
 #include <easytrail.h>
 #include <easymask.h>
 
+#include <sprite2/SymType.h>
+
 #include <wx/image.h>
 
 IMPLEMENT_APP(MyApp)
 
 static void InitSymbolCreators() 
 {
-	ee::SymbolFactory::RegisterCreator(ecomplex::FILE_TAG, &ecomplex::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(ecomplex::FILE_TAG, &ecomplex::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(s2::SYM_COMPLEX, &ecomplex::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_COMPLEX, &ecomplex::Sprite::Create);
 
-	ee::SymbolFactory::RegisterCreator(eanim::FILE_TAG, &eanim::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(eanim::FILE_TAG, &eanim::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(s2::SYM_ANIMATION, &eanim::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_ANIMATION, &eanim::Sprite::Create);
 
-	ee::SymbolFactory::RegisterCreator(escale9::FILE_TAG, &escale9::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(escale9::FILE_TAG, &escale9::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(s2::SYM_SCALE9, &escale9::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_SCALE9, &escale9::Sprite::Create);
 
-	ee::SymbolFactory::RegisterCreator(eparticle3d::FILE_TAG, &eparticle3d::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(eparticle3d::FILE_TAG, &eparticle3d::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(s2::SYM_PARTICLE3D, &eparticle3d::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_PARTICLE3D, &eparticle3d::Sprite::Create);
 
-	ee::SymbolFactory::RegisterCreator(ee::FileType::GetTag(ee::FILE_TRAIL), &etrail::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(ee::FileType::GetTag(ee::FILE_TRAIL), &etrail::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(s2::SYM_TRAIL, &etrail::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_TRAIL, &etrail::Sprite::Create);
 
-	ee::SymbolFactory::RegisterCreator(ee::FileType::GetTag(ee::FILE_MASK), &emask::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(ee::FileType::GetTag(ee::FILE_MASK), &emask::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(ee::SymbolFile::Instance()->Tag(s2::SYM_MASK), &emask::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(ee::SymbolFile::Instance()->Tag(s2::SYM_MASK), &emask::Sprite::Create);
 }
 
 bool MyApp::OnInit()
 {
 	InitSymbolCreators();
 
-	eparticle3d::Frame* frame = new eparticle3d::Frame("EasyParticle3D", eparticle3d::FILE_TAG);
+	eparticle3d::Frame* frame = new eparticle3d::Frame("EasyParticle3D", ee::SymbolFile::Instance()->Tag(s2::SYM_PARTICLE3D));
 	eparticle3d::Task* task = new eparticle3d::Task(frame);
 	frame->SetTask(task);
 	frame->Show(true);

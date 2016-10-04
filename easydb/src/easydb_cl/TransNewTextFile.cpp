@@ -3,11 +3,13 @@
 
 #include <ee/FileHelper.h>
 #include <ee/SymbolMgr.h>
+#include <ee/SymbolFile.h>
 
 #include <easycomplex.h>
 #include <easytext.h>
 
 #include <sprite2/S2_Sprite.h>
+#include <sprite2/SymType.h>
 
 namespace edb
 {
@@ -48,14 +50,18 @@ void TransNewTextFile::Run(const std::string& folder)
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath();
-		if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX)) {
+		if (ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_COMPLEX) 
+		{
 			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-			if (ecomplex::Symbol* complex = dynamic_cast<ecomplex::Symbol*>(sym)) {
+			if (ecomplex::Symbol* complex = dynamic_cast<ecomplex::Symbol*>(sym)) 
+			{
 				bool dirty = false;
 				const std::vector<s2::Sprite*>& children = complex->GetChildren();
-				for (int i = 0, n = children.size(); i < n; ++i) {
+				for (int i = 0, n = children.size(); i < n; ++i) 
+				{
 					s2::Sprite* child = children[i];
-					if (etext::Sprite* text = dynamic_cast<etext::Sprite*>(child)) {
+					if (etext::Sprite* text = dynamic_cast<etext::Sprite*>(child)) 
+					{
 						dirty = true;
 						s2::Textbox& tb = text->GetTextbox();
 						tb.font_size = tb.font_size + 8;

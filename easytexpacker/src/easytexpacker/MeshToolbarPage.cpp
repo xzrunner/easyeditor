@@ -8,8 +8,11 @@
 #include <ee/SpriteFactory.h>
 #include <ee/FileHelper.h>
 #include <ee/Random.h>
+#include <ee/SymbolFile.h>
 
 #include <easyshape.h>
+
+#include <sprite2/SymType.h>
 
 namespace etexpacker
 {
@@ -169,7 +172,7 @@ void MeshToolbarPage::LoadBodies(const std::string& dir)
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (!ee::FileType::IsType(filepath, ee::FILE_SHAPE)) {
+		if (ee::SymbolFile::Instance()->Type(filepath) != s2::SYM_SHAPE) {
 			continue;
 		}
 

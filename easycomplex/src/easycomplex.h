@@ -1,7 +1,6 @@
 #ifndef _EASYCOMPLEX_H_
 #define _EASYCOMPLEX_H_
 
-#include "libcomplex/config.h"
 #include "libcomplex/Sprite.h"
 #include "libcomplex/Symbol.h"
 #include "libcomplex/FileStorer.h"

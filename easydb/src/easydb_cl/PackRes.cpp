@@ -9,12 +9,16 @@
 #include <ee/StringHelper.h>
 #include <ee/SymbolSearcher.h>
 #include <ee/SymbolMgr.h>
+#include <ee/SymbolFile.h>
+#include <ee/SymbolType.h>
 
 #include <easytexpacker.h>
 #include <easyrespacker.h>
 #include <epbin.h>
 #include <easycoco.h>
 #include <easyimage.h>
+
+#include <sprite2/SymType.h>
 
 #include <wx/filefn.h>
 
@@ -179,147 +183,152 @@ void PackRes::GetImagesFromJson(const std::vector<std::string>& src_dirs, const 
 {
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
 
-	if (ee::FileType::IsType(filepath, ee::FILE_IMAGE))
+	int type = ee::SymbolFile::Instance()->Type(filepath);
+	switch (type)
 	{
+	case s2::SYM_IMAGE:
 		img_set.insert(filepath);
-	}
-	else if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX)) 
-	{
-		Json::Value value;
-		Json::Reader reader;
-		std::locale::global(std::locale(""));
-		std::ifstream fin(filepath.c_str());
-		std::locale::global(std::locale("C"));
-		reader.parse(fin, value);
-		fin.close();
+		break;
+	case s2::SYM_COMPLEX:
+		{
+			Json::Value value;
+			Json::Reader reader;
+			std::locale::global(std::locale(""));
+			std::ifstream fin(filepath.c_str());
+			std::locale::global(std::locale("C"));
+			reader.parse(fin, value);
+			fin.close();
 
-		int j = 0;
-		Json::Value spr_val = value["sprite"][j++];
-		while (!spr_val.isNull()) {
-			GetImagesFromSprite(src_dirs, dir, spr_val, img_set);
-			spr_val = value["sprite"][j++];
-		}	
-	} 
-	else if (ee::FileType::IsType(filepath, ee::FILE_ANIM)) 
-	{
-		Json::Value value;
-		Json::Reader reader;
-		std::locale::global(std::locale(""));
-		std::ifstream fin(filepath.c_str());
-		std::locale::global(std::locale("C"));
-		reader.parse(fin, value);
-		fin.close();
+			int j = 0;
+			Json::Value spr_val = value["sprite"][j++];
+			while (!spr_val.isNull()) {
+				GetImagesFromSprite(src_dirs, dir, spr_val, img_set);
+				spr_val = value["sprite"][j++];
+			}	
+		}
+		break;
+	case s2::SYM_ANIMATION:
+		{
+			Json::Value value;
+			Json::Reader reader;
+			std::locale::global(std::locale(""));
+			std::ifstream fin(filepath.c_str());
+			std::locale::global(std::locale("C"));
+			reader.parse(fin, value);
+			fin.close();
 
-		int j = 0;
-		Json::Value layer_val = value["layer"][j++];
-		while (!layer_val.isNull()) {
-			int k = 0;
-			Json::Value frame_val = layer_val["frame"][k++];
-			while (!frame_val.isNull()) {
-				int m = 0;
-				Json::Value spr_val = frame_val["actor"][m++];
-				while (!spr_val.isNull()) {
-					GetImagesFromSprite(src_dirs, dir, spr_val, img_set);
-					spr_val = frame_val["actor"][m++];
+			int j = 0;
+			Json::Value layer_val = value["layer"][j++];
+			while (!layer_val.isNull()) {
+				int k = 0;
+				Json::Value frame_val = layer_val["frame"][k++];
+				while (!frame_val.isNull()) {
+					int m = 0;
+					Json::Value spr_val = frame_val["actor"][m++];
+					while (!spr_val.isNull()) {
+						GetImagesFromSprite(src_dirs, dir, spr_val, img_set);
+						spr_val = frame_val["actor"][m++];
+					}
+					frame_val = layer_val["frame"][k++];
 				}
-				frame_val = layer_val["frame"][k++];
+				layer_val = value["layer"][j++];
 			}
-			layer_val = value["layer"][j++];
-		}	
-	} 
-	else if (ee::FileType::IsType(filepath, ee::FILE_TEXTURE))
-	{
-		Json::Value value;
-		Json::Reader reader;
-		std::locale::global(std::locale(""));
-		std::ifstream fin(filepath.c_str());
-		std::locale::global(std::locale("C"));
-		reader.parse(fin, value);
-		fin.close();
+		}
+		break;
+	case s2::SYM_TEXTURE:
+		{
+			Json::Value value;
+			Json::Reader reader;
+			std::locale::global(std::locale(""));
+			std::ifstream fin(filepath.c_str());
+			std::locale::global(std::locale("C"));
+			reader.parse(fin, value);
+			fin.close();
 
-		int i = 0;
-		Json::Value shape_val = value["shapes"][i++];
-		while (!shape_val.isNull()) {
-			std::string type = shape_val["material"]["type"].asString();
-			if (type == "texture") {
-				std::string filepath = shape_val["material"]["texture path"].asString();
+			int i = 0;
+			Json::Value shape_val = value["shapes"][i++];
+			while (!shape_val.isNull()) {
+				std::string type = shape_val["material"]["type"].asString();
+				if (type == "texture") {
+					std::string filepath = shape_val["material"]["texture path"].asString();
+					filepath = ee::FileHelper::GetAbsolutePath(dir, filepath);
+					filepath = ee::FileHelper::FormatFilepathAbsolute(filepath);
+					img_set.insert(filepath);
+				}
+				shape_val = value["shapes"][i++];
+			}
+		}
+		break;
+	case ee::SYM_TERRAIN2D:
+		{
+			Json::Value value;
+			Json::Reader reader;
+			std::locale::global(std::locale(""));
+			std::ifstream fin(filepath.c_str());
+			std::locale::global(std::locale("C"));
+			reader.parse(fin, value);
+			fin.close();
+
+			int i = 0;
+			Json::Value ocean_val = value["ocean"][i++];
+			while (!ocean_val.isNull()) {
+				std::string filepath = ocean_val["tex0"].asString();
 				filepath = ee::FileHelper::GetAbsolutePath(dir, filepath);
 				filepath = ee::FileHelper::FormatFilepathAbsolute(filepath);
 				img_set.insert(filepath);
+				ocean_val = value["ocean"][i++];
 			}
-			shape_val = value["shapes"][i++];
 		}
-	}
-	else if (ee::FileType::IsType(filepath, ee::FILE_TERRAIN2D))
-	{
-		Json::Value value;
-		Json::Reader reader;
-		std::locale::global(std::locale(""));
-		std::ifstream fin(filepath.c_str());
-		std::locale::global(std::locale("C"));
-		reader.parse(fin, value);
-		fin.close();
+		break;
+	case s2::SYM_PARTICLE3D:
+		{
+			Json::Value value;
+			Json::Reader reader;
+			std::locale::global(std::locale(""));
+			std::ifstream fin(filepath.c_str());
+			std::locale::global(std::locale("C"));
+			reader.parse(fin, value);
+			fin.close();
 
-		int i = 0;
-		Json::Value ocean_val = value["ocean"][i++];
-		while (!ocean_val.isNull()) {
-			std::string filepath = ocean_val["tex0"].asString();
-			filepath = ee::FileHelper::GetAbsolutePath(dir, filepath);
-			filepath = ee::FileHelper::FormatFilepathAbsolute(filepath);
-			img_set.insert(filepath);
-			ocean_val = value["ocean"][i++];
+			int i = 0;
+			Json::Value comp_val = value["components"][i++];
+			while (!comp_val.isNull()) {
+				std::string filepath = comp_val["filepath"].asString();
+				filepath = ee::FileHelper::GetAbsolutePath(dir, filepath);
+				filepath = ee::FileHelper::FormatFilepathAbsolute(filepath);
+				img_set.insert(filepath);
+				comp_val = value["components"][i++];
+			}
 		}
-	}
-	else if (ee::FileType::IsType(filepath, ee::FILE_PARTICLE3D)) 
-	{
-		Json::Value value;
-		Json::Reader reader;
-		std::locale::global(std::locale(""));
-		std::ifstream fin(filepath.c_str());
-		std::locale::global(std::locale("C"));
-		reader.parse(fin, value);
-		fin.close();
+		break;
+	case s2::SYM_MESH:
+		{
+			Json::Value value;
+			Json::Reader reader;
+			std::locale::global(std::locale(""));
+			std::ifstream fin(filepath.c_str());
+			std::locale::global(std::locale("C"));
+			reader.parse(fin, value);
+			fin.close();
 
-		int i = 0;
-		Json::Value comp_val = value["components"][i++];
-		while (!comp_val.isNull()) {
-			std::string filepath = comp_val["filepath"].asString();
-			filepath = ee::FileHelper::GetAbsolutePath(dir, filepath);
-			filepath = ee::FileHelper::FormatFilepathAbsolute(filepath);
-			img_set.insert(filepath);
-			comp_val = value["components"][i++];
+			GetImagesFromJson(src_dirs, value["base_symbol"].asString(), img_set);
 		}
-	}
-	else if (ee::FileType::IsType(filepath, ee::FILE_MESH))
-	{
-		Json::Value value;
-		Json::Reader reader;
-		std::locale::global(std::locale(""));
-		std::ifstream fin(filepath.c_str());
-		std::locale::global(std::locale("C"));
-		reader.parse(fin, value);
-		fin.close();
+		break;
+	case s2::SYM_MASK:
+		{
+			Json::Value value;
+			Json::Reader reader;
+			std::locale::global(std::locale(""));
+			std::ifstream fin(filepath.c_str());
+			std::locale::global(std::locale("C"));
+			reader.parse(fin, value);
+			fin.close();
 
-		GetImagesFromJson(src_dirs, value["base_symbol"].asString(), img_set);
-	}
-	else if (ee::FileType::IsType(filepath, ee::FILE_MASK))
-	{
-		Json::Value value;
-		Json::Reader reader;
-		std::locale::global(std::locale(""));
-		std::ifstream fin(filepath.c_str());
-		std::locale::global(std::locale("C"));
-		reader.parse(fin, value);
-		fin.close();
-
-		GetImagesFromJson(src_dirs, value["base"]["filepath"].asString(), img_set);
-		GetImagesFromJson(src_dirs, value["mask"]["filepath"].asString(), img_set);
-	}
-	else if (filepath.find("_history.json")) 
-	{
-	}
-	else
-	{
+			GetImagesFromJson(src_dirs, value["base"]["filepath"].asString(), img_set);
+			GetImagesFromJson(src_dirs, value["mask"]["filepath"].asString(), img_set);
+		}
+		break;
+	default:
 		throw ee::Exception("PackRes::GetImagesFromJson: unknown file type: %s", filepath.c_str());
 	}
 }
@@ -329,7 +338,7 @@ void PackRes::GetImagesFromSprite(const std::vector<std::string>& src_dirs, cons
 {
 	std::string filepath = ee::SymbolSearcher::GetSymbolPath(spr_dir, spr_val);
 	filepath = ee::FileHelper::FormatFilepathAbsolute(filepath);
-	if (ee::FileType::IsType(filepath, ee::FILE_IMAGE)) 
+	if (ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_IMAGE) 
 	{
 //		filepath = ee::FileHelper::GetRelativePath(".", filepath);
 		images.insert(filepath);
@@ -369,12 +378,12 @@ void PackRes::GetImagesFromCfg(const Json::Value& pkg_val, const std::string& co
 			wxArrayString files;
 			ee::FileHelper::FetchAllFiles(path, files);
 			for (int i = 0, n = files.size(); i < n; ++i) {
-				if (ee::FileType::IsType(files[i].ToStdString(), ee::FILE_IMAGE)) {
+				if (ee::SymbolFile::Instance()->Type(files[i].ToStdString()) == s2::SYM_IMAGE) {
 					images.push_back(ee::FileHelper::FormatFilepath(files[i].ToStdString()));
 				}
 			}
 		} else if (ee::FileHelper::IsFileExist(path)) {
-			if (ee::FileType::IsType(path, ee::FILE_IMAGE)) {
+			if (ee::SymbolFile::Instance()->Type(path) == s2::SYM_IMAGE) {
 				images.push_back(ee::FileHelper::FormatFilepath(path));
 			}
 		} else {
@@ -464,9 +473,8 @@ void PackRes::AddJsonFile(const std::string& filepath, const std::string& filter
 		return;
 	}
 
-	if (ee::FileType::IsType(filepath, ee::FILE_COMPLEX) || 
-		ee::FileType::IsType(filepath, ee::FILE_ANIM)) 
-	{
+	int type = ee::SymbolFile::Instance()->Type(filepath);
+	if (type == s2::SYM_COMPLEX || type == s2::SYM_ANIMATION) {
 		json_set.insert(filepath);
 	}
 }
@@ -566,7 +574,7 @@ void PackRes::GetAllPTSFiles(const Json::Value& pkg_val, const std::string& conf
 			wxArrayString files;
 			ee::FileHelper::FetchAllFiles(path, files);
 			for (int i = 0, n = files.size(); i < n; ++i) {
-				if (ee::FileType::IsType(files[i].ToStdString(), ee::FILE_IMAGE)) {
+				if (ee::SymbolFile::Instance()->Type(files[i].ToStdString()) == s2::SYM_IMAGE) {
 					std::string pts_path = files[i].substr(0, files[i].find(".png")) + "_strip.json";
 					if (ee::FileHelper::IsFileExist(pts_path)) {
 						pts_files.push_back(pts_path);
@@ -574,7 +582,7 @@ void PackRes::GetAllPTSFiles(const Json::Value& pkg_val, const std::string& conf
 				}
 			}
 		} else if (ee::FileHelper::IsFileExist(path)) {
-			if (ee::FileType::IsType(path, ee::FILE_IMAGE)) {
+			if (ee::SymbolFile::Instance()->Type(path) == s2::SYM_IMAGE) {
 				std::string pts_path = path.substr(0, path.find(".png")) + "_strip.json";
 				if (ee::FileHelper::IsFileExist(pts_path)) {
 					pts_files.push_back(pts_path);

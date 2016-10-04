@@ -4,8 +4,11 @@
 #include <ee/FileHelper.h>
 #include <ee/Image.h>
 #include <ee/Math2D.h>
+#include <ee/SymbolFile.h>
 
 #include <easyimage.h>
+
+#include <sprite2/SymType.h>
 #include <gum/JsonSerializer.h>
 
 #include <wx/arrstr.h>
@@ -49,7 +52,7 @@ void OutlineImage::Trigger(const std::string& dir) const
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-		if (!ee::FileType::IsType(filepath, ee::FILE_IMAGE)) {
+		if (ee::SymbolFile::Instance()->Type(filepath) != s2::SYM_IMAGE) {
 			continue;
 		}
 

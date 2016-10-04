@@ -5,7 +5,7 @@
 #include <ee/ImageSaver.h>
 #include <ee/DummySprite.h>
 #include <ee/DummySymbol.h>
-#include <ee/FileType.h>
+#include <ee/SymbolFile.h>
 #include <ee/ImageSymbol.h>
 #include <ee/ImageSprite.h>
 #include <ee/SpriteFactory.h>
@@ -14,6 +14,7 @@
 #include <easyanim.h>
 #include <easyimage.h>
 
+#include <sprite2/SymType.h>
 #include <gum/trans_color.h>
 #include <SM_Calc.h>
 
@@ -350,7 +351,7 @@ void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames
 			ss << sym->name;
 		}
 		std::string filename = outfloder + "\\" + ss.str() 
-			+ "_" + ee::FileType::GetTag(ee::FILE_COMPLEX) + ".json";
+			+ "_" + ee::SymbolFile::Instance()->Tag(s2::SYM_COMPLEX) + ".json";
 		ecomplex::FileStorer::Store(filename.c_str(), sym);
 
 		pic->filename = filename;
@@ -425,7 +426,7 @@ void ParserLuaFile::transAniToAnimationFile(const std::string& outfloder, int id
 		ss << sym->name;
 	}
 	std::string filename = outfloder + "\\" + ss.str() 
-		+ "_" + ee::FileType::GetTag(ee::FILE_ANIM) + ".json";
+		+ "_" + ee::SymbolFile::Instance()->Tag(s2::SYM_ANIMATION) + ".json";
 	eanim::FileSaver::Store(filename.c_str(), *sym);
 
 	ani->filename = filename;
@@ -467,7 +468,7 @@ void ParserLuaFile::transAniToComplexFile(const std::string& outfloder, int id, 
 		ss << sym->name;
 	}
 	std::string filename = outfloder + "\\" + ss.str() 
-		+ "_" + ee::FileType::GetTag(ee::FILE_COMPLEX) + ".json";
+		+ "_" + ee::SymbolFile::Instance()->Tag(s2::SYM_COMPLEX) + ".json";
 	ecomplex::FileStorer::Store(filename.c_str(), sym);
 
 	ani->filename = filename;

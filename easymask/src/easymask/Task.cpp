@@ -2,11 +2,14 @@
 
 #include <ee/SymbolMgr.h>
 #include <ee/Bitmap.h>
-#include <ee/FileType.h>
+#include <ee/SymbolFile.h>
 #include <ee/LibraryPage.h>
 #include <ee/LibraryList.h>
+#include <ee/SymbolFile.h>
 
 #include <easymask.h>
+
+#include <sprite2/SymType.h>
 
 namespace emask
 {
@@ -29,7 +32,7 @@ Task::~Task()
 
 void Task::Load(const char* filepath)
 {
-	if (!ee::FileType::IsType(filepath, ee::FILE_MASK)) {
+	if (ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_MASK) {
 		return;
 	}
 

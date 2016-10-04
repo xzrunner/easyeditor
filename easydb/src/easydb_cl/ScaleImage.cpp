@@ -11,8 +11,11 @@
 #include <ee/Symbol.h>
 #include <ee/SpriteFactory.h>
 #include <ee/EE_ShaderLab.h>
+#include <ee/SymbolFile.h>
 
 #include <easyimage.h>
+
+#include <sprite2/SymType.h>
 
 #include <wx/arrstr.h>
 
@@ -78,7 +81,7 @@ void ScaleImage::Scale(ee::Snapshoot& ss, const std::string& dir, float scale)
 void ScaleImage::Scale(ee::Snapshoot& ss, const std::string& src, const std::string& dst, float scale)
 {
 	std::string filepath = ee::FileHelper::GetAbsolutePath(src);
-	if (ee::FileType::IsType(filepath, ee::FILE_IMAGE))
+	if (ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_IMAGE)
 	{
 		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 		sm::rect r = sym->GetBounding();

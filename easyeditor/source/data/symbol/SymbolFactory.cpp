@@ -4,47 +4,48 @@
 #include "ScriptsSymbol.h"
 #include "FileHelper.h"
 #include "StringHelper.h"
+#include "SymbolFile.h"
+#include "SymbolType.h"
+
+#include <sprite2/SymType.h>
 
 namespace ee
 {
 
 SymbolFactory::CallbackMap SymbolFactory::m_creators;
 
-Symbol* SymbolFactory::create(const std::string& filepath)
+Symbol* SymbolFactory::Create(const std::string& filepath)
 {
 	Symbol* sym = NULL;
-
-	std::string ext = FileHelper::GetExtension(filepath);
-	StringHelper::ToLower(ext);
-	if (ext == "png" || ext == "jpg" || ext == "bmp" || ext == "pvr" || ext == "pkm")
+	int type = ee::SymbolFile::Instance()->Type(filepath);
+	switch (type)
 	{
+	case s2::SYM_IMAGE:
 		sym = new ImageSymbol;
-	}
-	else if (ext == "json")
-	{
-		std::string type = FileType::GetTag(FileType::GetType(filepath));
-		CallbackMap::iterator itr = m_creators.find(type);
-		if (itr != m_creators.end()) {
-			sym = (itr->second)();
-		}
-		else if (FileType::IsType(filepath, FILE_FONTBLANK)) {
-			sym = new FontBlankSymbol;
-		}
-	}
-	else if (ext == "lua")
-	{
+		break;
+	case ee::SYM_SCRIPTS:
 		sym = new ScriptsSymbol;
+		break;
+	case ee::SYM_FONTBLANK:
+		sym = new FontBlankSymbol;
+		break;
+	default:
+		{
+			CallbackMap::iterator itr = m_creators.find(type);
+			if (itr != m_creators.end()) {
+				sym = (itr->second)();
+			}
+		}
 	}
-
 	return sym;
 }
 
-void SymbolFactory::RegisterCreator(const std::string& type, CreateCallback cb)
+void SymbolFactory::RegisterCreator(int type, CreateCallback cb)
 {
 	m_creators.insert(std::make_pair(type, cb));
 }
 
-void SymbolFactory::UnregisterCreator(const std::string& type)
+void SymbolFactory::UnregisterCreator(int type)
 {
 	m_creators.erase(type);
 }

@@ -1,7 +1,7 @@
 #include "ImageSprite.h"
 #include "ImageSymbol.h"
 #include "FileHelper.h"
-#include "FileType.h"
+#include "SymbolFile.h"
 #include "Math2D.h"
 
 #include <sprite2/RenderShader.h>

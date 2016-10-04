@@ -1,8 +1,11 @@
 #include "CocoPacker.h"
 
 #include <ee/FileHelper.h>
+#include <ee/SymbolFile.h>
 
 #include <easybuilder.h>
+
+#include <sprite2/SymType.h>
 
 #include <wx/filename.h>
 
@@ -22,7 +25,7 @@ void CocoPacker::PackDir(const std::string& srcdir, const std::string& dstfilena
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath();
-		if (ee::FileType::IsType(filepath, ee::FILE_PARTICLE3D)) {
+		if (ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_PARTICLE3D) {
 			PackSingle(filepath, gen);
 		}
 	}

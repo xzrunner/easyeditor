@@ -1,6 +1,6 @@
 #include "SpriteFactory.h"
 #include "FileHelper.h"
-#include "FileType.h"
+#include "SymbolFile.h"
 #include "ImageSprite.h"
 #include "ImageSymbol.h"
 #include "FontBlankSprite.h"
@@ -11,6 +11,9 @@
 #include "SymbolSearcher.h"
 #include "SymbolMgr.h"
 #include "Exception.h"
+#include "SymbolType.h"
+
+#include <sprite2/SymType.h>
 
 namespace ee
 {
@@ -27,39 +30,23 @@ SpriteFactory::SpriteFactory()
 Sprite* SpriteFactory::Create(Symbol* sym)
 {
 	Sprite* spr = NULL;
-
-	const std::string& filepath = sym->GetFilepath();
-	if (filepath.empty())
+	int type = sym->Type();
+	switch (type)
 	{
-		// todo
-// 		if (ecomplex::Symbol* s = dynamic_cast<ecomplex::Symbol*>(sym))
-// 			spr = new ecomplex::Sprite(s);
-// 		else if (eanim::Symbol* s = dynamic_cast<eanim::Symbol*>(sym))
-// 			spr = new eanim::Sprite(s);
-	}
-	else
-	{
-		std::string ext = FileHelper::GetExtension(filepath);
-		StringHelper::ToLower(ext);
-
-		if (ext == "png" || ext == "jpg" || ext == "bmp" || ext == "pvr" || ext == "pkm")
+	case s2::SYM_IMAGE:
+		spr = new ImageSprite(dynamic_cast<ImageSymbol*>(sym));
+		break;
+	case SYM_FONTBLANK:
+		spr = new FontBlankSprite(dynamic_cast<FontBlankSymbol*>(sym));
+		break;
+	case SYM_SCRIPTS:
+		spr = new ScriptsSprite(dynamic_cast<ScriptsSymbol*>(sym));
+		break;
+	default:
 		{
-			spr = new ImageSprite(dynamic_cast<ImageSymbol*>(sym));
-		}
-		else if (ext == "json")
-		{
-			std::string type = FileType::GetTag(FileType::GetType(filepath));
 			CallbackMap::iterator itr = m_creators.find(type);
 			if (itr != m_creators.end()) {
 				spr = (itr->second)(sym);
-			} else if (FileType::IsType(filepath, FILE_FONTBLANK)) {
-				spr = new FontBlankSprite(dynamic_cast<FontBlankSymbol*>(sym));
-			}
-		}
-		else if (ext == "lua")
-		{
-			if (FileType::IsType(filepath, FILE_SCRIPTS)) {
-				spr = new ScriptsSprite(dynamic_cast<ScriptsSymbol*>(sym));
 			}
 		}
 	}
@@ -142,12 +129,12 @@ void SpriteFactory::UpdateBoundings(const Symbol& sym)
 	}
 }
 
-void SpriteFactory::RegisterCreator(const std::string& type, CreateCallback cb)
+void SpriteFactory::RegisterCreator(int type, CreateCallback cb)
 {
 	m_creators.insert(std::make_pair(type, cb));
 }
 
-void SpriteFactory::UnregisterCreator(const std::string& type)
+void SpriteFactory::UnregisterCreator(int type)
 {
 	m_creators.erase(type);
 }

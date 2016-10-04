@@ -2,7 +2,7 @@
 #include "check_params.h"
 
 #include <ee/FileHelper.h>
-#include <ee/FileType.h>
+#include <ee/SymbolFile.h>
 #include <ee/ImageData.h>
 #include <ee/ImageVerticalFlip.h>
 #include <ee/ImageSaver.h>
@@ -11,6 +11,8 @@
 
 #include <easyanim.h>
 #include <easyimage.h>
+
+#include <sprite2/SymType.h>
 
 namespace edb
 {
@@ -52,7 +54,7 @@ void ImageVerticalFlip::Trigger(const std::string& path) const
 		for (int i = 0, n = files.size(); i < n; ++i)
 		{
 			std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
-			if (!ee::FileType::IsType(filepath, ee::FILE_IMAGE)) {
+			if (ee::SymbolFile::Instance()->Type(filepath) != s2::SYM_IMAGE) {
 				continue;
 			}
 
