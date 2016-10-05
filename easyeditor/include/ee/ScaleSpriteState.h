@@ -19,9 +19,12 @@ public:
 protected:
 	virtual void Scale(const sm::vec2& curr);
 
-private:
+	virtual void SetScaleTimes(const sm::vec2& st);
+
+protected:
 	Sprite* m_spr;
 
+private:
 	SpriteCtrlNode::Node m_ctrl_node;
 
 	sm::vec2 m_first_pos, m_first_scale;

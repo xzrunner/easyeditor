@@ -83,42 +83,74 @@ void Sprite::ClearUserData(bool deletePtr)
 	delete m_ud, m_ud = NULL;
 }
 
-void Sprite::Translate(const sm::vec2& offset)
+void Sprite::SetPosition(const sm::vec2& pos)
 {
-#ifdef OPEN_SCREEN_CACHE
-	bool find = SpatialPartition::Instance()->Remove(this);
-	if (find) {
-		SpriteRenderer::InvalidRect(this);
+	PartialUpdate pu;
+	pu.Begin();
+
+	s2::Sprite::SetPosition(pos);
+
+	if (m_observer) {
+		m_observer->OnSetPosition(this, pos);
 	}
-#endif // OPEN_SCREEN_CACHE
 
-	if (m_observer)
-		m_observer->Translate(this, offset);
-
-	SetPosition(m_position + offset);
-
-#ifdef OPEN_SCREEN_CACHE
-	if (find) {
-		SpriteRenderer::InvalidRect(this);
-		SpatialPartition::Instance()->Insert(this);
-	}
-#endif // OPEN_SCREEN_CACHE
+	pu.End();
 }
 
-void Sprite::Rotate(float delta)
+void Sprite::SetAngle(float angle)
 {
-#ifdef OPEN_SCREEN_CACHE
-	SpatialPartition::Instance()->Remove(this);
-#endif // OPEN_SCREEN_CACHE
+	PartialUpdate pu;
+	pu.Begin();
 
-	if (m_observer)
-		m_observer->Rotate(this, delta);
+	s2::Sprite::SetAngle(angle);
 
-	SetAngle(m_angle + delta);
+	if (m_observer) {
+		m_observer->OnSetAngle(this, angle);
+	}
 
-#ifdef OPEN_SCREEN_CACHE
-	SpatialPartition::Instance()->Insert(this);
-#endif // OPEN_SCREEN_CACHE
+	pu.End();
+}
+
+void Sprite::SetScale(const sm::vec2& scale)
+{
+	PartialUpdate pu;
+	pu.Begin();
+
+	s2::Sprite::SetScale(scale);
+
+	if (m_observer) {
+		m_observer->OnSetScale(this, scale);
+	}
+
+	pu.End();
+}
+
+void Sprite::SetShear(const sm::vec2& shear)
+{
+	PartialUpdate pu;
+	pu.Begin();
+
+	s2::Sprite::SetShear(shear);
+
+	if (m_observer) {
+		m_observer->OnSetShear(this, shear);
+	}
+
+	pu.End();
+}
+
+void Sprite::SetOffset(const sm::vec2& offset)
+{
+	PartialUpdate pu;
+	pu.Begin();
+
+	s2::Sprite::SetOffset(offset);
+
+	if (m_observer) {
+		m_observer->OnSetOffset(this, offset);
+	}
+
+	pu.End();
 }
 
 void Sprite::Load(const Json::Value& val, const std::string& dir)
@@ -136,6 +168,30 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 PropertySetting* Sprite::CreatePropertySetting(EditPanelImpl* stage)
 {
 	return new SpritePropertySetting(stage, this);
+}
+
+/************************************************************************/
+/* class Sprite::PartialUpdate                                          */
+/************************************************************************/
+
+void Sprite::PartialUpdate::Begin()
+{
+#ifdef OPEN_SCREEN_CACHE
+	m_find = SpatialPartition::Instance()->Remove(this);
+	if (m_find) {
+		SpriteRenderer::InvalidRect(this);
+	}
+#endif // OPEN_SCREEN_CACHE
+}
+
+void Sprite::PartialUpdate::End()
+{
+#ifdef OPEN_SCREEN_CACHE
+	if (m_find) {
+		SpriteRenderer::InvalidRect(this);
+		SpatialPartition::Instance()->Insert(this);
+	}
+#endif // OPEN_SCREEN_CACHE
 }
 
 //////////////////////////////////////////////////////////////////////////

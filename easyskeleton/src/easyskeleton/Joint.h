@@ -13,6 +13,7 @@ public:
 
 	virtual void Translate(const sm::vec2& trans);
 	virtual void Rotate(float rot);
+	virtual void Scale(const sm::vec2& scale);
 
 	void UpdateToJoint();
 	void UpdateToSkin();

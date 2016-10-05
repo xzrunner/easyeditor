@@ -13,35 +13,37 @@ SpriteObserver::SpriteObserver(const Layer& layer)
 {
 }
 
-void SpriteObserver::Translate(ee::Sprite* spr, const sm::vec2& offset)
+void SpriteObserver::OnSetPosition(ee::Sprite* spr, const sm::vec2& pos)
 {
 	if (!m_enable) {
 		return;
 	}
 
 	std::map<ee::Sprite*, int>::iterator itr_sprite = m_map2frame.find(spr);
-	if (itr_sprite == m_map2frame.end())
+	if (itr_sprite == m_map2frame.end()) {
 		return;
+	}
 
 	m_enable = false;
 
+	sm::vec2 trans = pos - spr->GetPosition();
 	const std::map<int, KeyFrame*>& frames = m_layer.GetAllFrames();
 	std::map<int, KeyFrame*>::const_iterator itr_frame = frames.upper_bound(itr_sprite->second);
 	for ( ; itr_frame != frames.end(); ++itr_frame)
 	{
 		KeyFrame* frame = itr_frame->second;
 		const std::vector<ee::Sprite*>& sprs = frame->GetAllSprites();
-		for (int i = 0, n = sprs.size(); i < n; ++i)
-		{
-			if (sprs[i]->GetName() == spr->GetName())
-				sprs[i]->Translate(offset);
+		for (int i = 0, n = sprs.size(); i < n; ++i) {
+			if (sprs[i]->GetName() == spr->GetName()) {
+				sprs[i]->Translate(trans);
+			}
 		}
 	}
 
 	m_enable = true;
 }
 
-void SpriteObserver::Rotate(ee::Sprite* spr, float delta)
+void SpriteObserver::OnSetAngle(ee::Sprite* spr, float angle)
 {
 	if (!m_enable) {
 		return;
@@ -53,6 +55,7 @@ void SpriteObserver::Rotate(ee::Sprite* spr, float delta)
 
 	m_enable = false;
 
+	float rot = angle - spr->GetAngle();
 	const std::map<int, KeyFrame*>& frames = m_layer.GetAllFrames();
 	std::map<int, KeyFrame*>::const_iterator itr_frame = frames.upper_bound(itr_sprite->second);
 	for ( ; itr_frame != frames.end(); ++itr_frame)
@@ -62,11 +65,26 @@ void SpriteObserver::Rotate(ee::Sprite* spr, float delta)
 		for (int i = 0, n = sprs.size(); i < n; ++i)
 		{
 			if (sprs[i]->GetName() == spr->GetName())
-				sprs[i]->Rotate(delta);
+				sprs[i]->Rotate(rot);
 		}
 	}
 
 	m_enable = true;
+}
+
+void SpriteObserver::OnSetScale(ee::Sprite* spr, const sm::vec2& scale)
+{
+
+}
+
+void SpriteObserver::OnSetShear(ee::Sprite* spr, const sm::vec2& shear)
+{
+	
+}
+
+void SpriteObserver::OnSetOffset(ee::Sprite* spr, const sm::vec2& offset)
+{
+	
 }
 
 void SpriteObserver::Insert(const ee::Sprite* spr, int frame)

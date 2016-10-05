@@ -1,7 +1,8 @@
 #include "ComposeSkeletonImpl.h"
 #include "StagePanel.h"
-#include "TranslateSpriteState.h"
-#include "RotateSpriteState.h"
+#include "TranslateSprState.h"
+#include "RotateSprState.h"
+#include "ScaleSprState.h"
 #include "Bone.h"
 #include "Joint.h"
 
@@ -15,7 +16,7 @@ namespace eskeleton
 {
 
 ComposeSkeletonImpl::ComposeSkeletonImpl(StagePanel* stage, ee::PropertySettingPanel* property)
-	: ee::ArrangeSpriteImpl(stage, stage->GetStageImpl(), stage, property, ee::ArrangeSpriteConfig(false, false, true, true))
+	: ee::ArrangeSpriteImpl(stage, stage->GetStageImpl(), stage, property, ee::ArrangeSpriteConfig(false, true, true, true))
 	, m_selected_joint(NULL)
 {
 }
@@ -145,13 +146,19 @@ void ComposeSkeletonImpl::SetRightPopupMenu(wxMenu& menu, int x, int y)
 ee::ArrangeSpriteState* 
 ComposeSkeletonImpl::CreateTranslateState(ee::SpriteSelection* selection, const sm::vec2& first_pos) const
 {
-	return new TranslateSpriteState(selection, first_pos);
+	return new TranslateSprState(selection, first_pos);
 }
 
 ee::ArrangeSpriteState* 
 ComposeSkeletonImpl::CreateRotateState(ee::SpriteSelection* selection, const sm::vec2& first_pos) const
 {
-	return new RotateSpriteState(selection, first_pos);
+	return new RotateSprState(selection, first_pos);
+}
+
+ee::ArrangeSpriteState* 
+ComposeSkeletonImpl::CreateScaleState(ee::Sprite* spr, const ee::SpriteCtrlNode::Node& ctrl_node) const
+{
+	return new ScaleSprState(spr, ctrl_node);
 }
 
 Joint* ComposeSkeletonImpl::QueryJoint(const sm::vec2& pos) const

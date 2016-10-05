@@ -32,11 +32,11 @@
 #include "CopyPasteSpriteState.h"
 #include "PerspectiveSpriteState.h"
 
-
+#include <SM_Calc.h>
 #include <sprite2/RenderColor.h>
 #include <sprite2/S2_RVG.h>
 #include <sprite2/BoundingBox.h>
-#include <SM_Calc.h>
+#include <sprite2/S2_Symbol.h>
 
 namespace ee
 {
@@ -391,7 +391,7 @@ void ArrangeSpriteImpl::OnDraw(const Camera& cam) const
 		m_selection->Traverse(FetchAllVisitor<Sprite>(sprs));
 		selected = sprs[0];
 
-		sm::vec2 sz = selected->GetBounding()->GetSize().Size();
+		sm::vec2 sz = selected->GetSymbol()->GetBounding().Size() * selected->GetScale();
 		float max_e = std::max(sz.x, sz.y);
 		if (max_e / cam.GetScale() < 100) {
 			m_ctrl_node_radius = 0;

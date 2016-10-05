@@ -257,22 +257,34 @@
 				RelativePath="..\..\..\src\easyskeleton\ComposeSkeletonOP.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\src\easyskeleton\RotateSpriteState.cpp"
+			<Filter
+				Name="state"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyskeleton\RotateSpriteState.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyskeleton\TranslateSpriteState.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyskeleton\TranslateSpriteState.h"
-				>
-			</File>
+				<File
+					RelativePath="..\..\..\src\easyskeleton\RotateSprState.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyskeleton\RotateSprState.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyskeleton\ScaleSprState.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyskeleton\ScaleSprState.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyskeleton\TranslateSprState.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyskeleton\TranslateSprState.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="view"

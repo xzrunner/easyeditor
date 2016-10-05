@@ -1,4 +1,4 @@
-#include "TranslateSpriteState.h"
+#include "TranslateSprState.h"
 #include "Bone.h"
 
 #include <ee/SpriteSelection.h>
@@ -7,13 +7,13 @@
 namespace eskeleton
 {
 
-TranslateSpriteState::TranslateSpriteState(ee::SpriteSelection* selection, 
-										   const sm::vec2& first_pos)
+TranslateSprState::TranslateSprState(ee::SpriteSelection* selection, 
+									 const sm::vec2& first_pos)
 	: ee::TranslateSpriteState(selection, first_pos)
 {
 }
 
-void TranslateSpriteState::Translate(const sm::vec2& offset)
+void TranslateSprState::Translate(const sm::vec2& offset)
 {
  	ee::SpriteSelection* selection = GetSelection();
  	if (selection->IsEmpty()) {

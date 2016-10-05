@@ -31,6 +31,12 @@ void Joint::Rotate(float rot)
 	m_world_pose.rot += rot;
 }
 
+void Joint::Scale(const sm::vec2& scale)
+{
+	m_local_pose.scale *= scale;
+	m_world_pose.scale *= scale;
+}
+
 void Joint::UpdateToJoint()
 {
 	m_world_pose = s2::local2world(m_parent->GetWorldPose(), m_local_pose);
@@ -40,7 +46,8 @@ void Joint::UpdateToJoint()
 
 void Joint::UpdateToSkin()
 {
-	s2::JointPose src(m_skin.spr->GetCenter(), m_skin.spr->GetAngle());
+	const s2::Sprite* spr = m_skin.spr;
+	s2::JointPose src(spr->GetCenter(), spr->GetAngle(), spr->GetScale());
 	m_world_pose = s2::local2world(src, -m_skin.skin_local);
 	if (m_parent) {
 		m_local_pose = s2::world2local(m_parent->GetWorldPose(), m_world_pose);

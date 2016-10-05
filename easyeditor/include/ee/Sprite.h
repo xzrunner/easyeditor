@@ -38,8 +38,11 @@ public:
 	 */
 	virtual void ClearUserData(bool deletePtr);
 
-	virtual void Translate(const sm::vec2& offset);
-	virtual void Rotate(float delta);
+	virtual void SetPosition(const sm::vec2& pos);
+	virtual void SetAngle(float angle);
+	virtual void SetScale(const sm::vec2& scale);
+	virtual void SetShear(const sm::vec2& shear);
+	virtual void SetOffset(const sm::vec2& offset);
 
 	virtual void Load(const Json::Value& val, const std::string& dir = "");
 	virtual void Store(Json::Value& val, const std::string& dir = "") const;
@@ -70,6 +73,17 @@ public:
 	void SetObserver(SpriteObserver* observer) {
 		m_observer = observer;
 	}
+
+private:
+	class PartialUpdate
+	{
+	public:
+		PartialUpdate() : m_find(false) {}
+		void Begin();
+		void End();
+	private:
+		bool m_find;
+	}; // PartialUpdate
 
 private:
 	/************************************************************************/

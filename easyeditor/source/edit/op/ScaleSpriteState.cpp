@@ -58,14 +58,21 @@ void ScaleSpriteState::Scale(const sm::vec2& curr)
 		return;
 	}
 
-	sm::vec2 scale = m_spr->GetScale();
+	sm::vec2 st(1, 1);
 	if (m_ctrl_node.type == SpriteCtrlNode::UP || m_ctrl_node.type == SpriteCtrlNode::DOWN) {
-		scale.y *= scale_times;
+		st.y = scale_times;
 	} else if (m_ctrl_node.type == SpriteCtrlNode::LEFT || m_ctrl_node.type == SpriteCtrlNode::RIGHT) {
-		scale.x *= scale_times;
+		st.x = scale_times;
 	} else {
-		scale *= scale_times;
+		st.Set(scale_times, scale_times);
 	}
+	SetScaleTimes(st);
+}
+
+void ScaleSpriteState::SetScaleTimes(const sm::vec2& st)
+{
+	sm::vec2 scale = m_spr->GetScale();
+	scale *= st;
 	m_spr->SetScale(scale);
 }
 

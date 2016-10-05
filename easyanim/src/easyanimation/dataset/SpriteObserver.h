@@ -15,8 +15,11 @@ class SpriteObserver : public ee::SpriteObserver
 public:
 	SpriteObserver(const Layer& layer);
 
-	virtual void Translate(ee::Sprite* spr, const sm::vec2& offset);
-	virtual void Rotate(ee::Sprite* spr, float delta);
+	virtual void OnSetPosition(ee::Sprite* spr, const sm::vec2& pos);
+	virtual void OnSetAngle(ee::Sprite* spr, float angle);
+	virtual void OnSetScale(ee::Sprite* spr, const sm::vec2& scale);
+	virtual void OnSetShear(ee::Sprite* spr, const sm::vec2& shear);
+	virtual void OnSetOffset(ee::Sprite* spr, const sm::vec2& offset);
 
 	void Insert(const ee::Sprite* spr, int frame);
 	void Remove(const ee::Sprite* spr);
