@@ -1,6 +1,7 @@
 #include "EditJointPoseOP.h"
 #include "TranslateJointState.h"
 #include "RotateJointState.h"
+#include "ScaleJointState.h"
 #include "StagePanel.h"
 #include "Symbol.h"
 #include "Sprite.h"
@@ -50,7 +51,11 @@ bool EditJointPoseOP::OnMouseLeftDown(int x, int y)
 	Select(pos);
 
 	if (m_selected) {
-		ChangeOPState(new TranslateJointState(m_selected, pos));
+		if (m_stage->GetKeyState(WXK_CONTROL)) {
+			ChangeOPState(new ScaleJointState(m_selected, pos));
+		} else {
+			ChangeOPState(new TranslateJointState(m_selected, pos));
+		}
 		m_op_state->OnMousePress(pos);
 	}
 

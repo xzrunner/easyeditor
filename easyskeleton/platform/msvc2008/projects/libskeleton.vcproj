@@ -272,6 +272,26 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="scale"
+				>
+				<File
+					RelativePath="..\..\..\src\libskeleton\ScaleJointAOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libskeleton\ScaleJointAOP.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libskeleton\ScaleJointState.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libskeleton\ScaleJointState.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>

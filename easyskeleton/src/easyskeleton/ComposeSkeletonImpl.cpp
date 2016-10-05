@@ -93,8 +93,9 @@ void ComposeSkeletonImpl::OnPopMenuSelected(int type)
 			ee::Sprite* spr = m_sprites_impl->QuerySpriteByPos(m_first_pos);
 			if (spr) {
 				Bone* bone = (Bone*)(spr->GetUserData());
-				s2::JointPose src(spr->GetCenter(), spr->GetAngle());
-				s2::JointPose pose = s2::world2local(src, s2::JointPose(m_first_pos, spr->GetAngle()));
+				s2::JointPose src(spr->GetCenter(), spr->GetAngle(), spr->GetScale()),
+					          dst(m_first_pos, spr->GetAngle(), spr->GetScale());
+				s2::JointPose pose = s2::world2local(src, dst);
 				bone->AddJoint(new Joint(spr, pose));
 			}
 		}

@@ -62,7 +62,8 @@ void Joint::BindSkin(const sm::vec2& world_pos, bool static_skin)
 		m_world_pose.trans = world_pos;
 	} else {
 		m_world_pose.trans = world_pos;
-		s2::JointPose src(m_skin.spr->GetCenter(), m_skin.spr->GetAngle());
+		const s2::Sprite* spr = m_skin.spr;
+		s2::JointPose src(spr->GetCenter(), spr->GetAngle(), spr->GetScale());
 		m_skin.skin_local = -s2::world2local(src, m_world_pose);
 	}
 }
