@@ -37,7 +37,7 @@ public:
 
 	int GetFPS() const { return m_fps; }
 
-	int GetStartTime() const { return m_start_frame; }
+	bool IsStartRandom() const { return m_start_random; }
 
 	int GetStaticTime() const { return m_static_time; }
 	void SetStaticTime(int static_time);

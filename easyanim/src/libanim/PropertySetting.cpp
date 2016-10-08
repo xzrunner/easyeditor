@@ -24,16 +24,12 @@ void PropertySetting::OnPropertyGridChange(const std::string& name, const wxAny&
 		spr->SetInterval(wxANY_AS(value, float));
 	} else if (name == "FPS") {
 		spr->SetFPS(wxANY_AS(value, int));
-	} else if (name == "Start") {
-		int start = wxANY_AS(value, int);
-		int max_time = dynamic_cast<Symbol*>(spr->GetSymbol())->GetMaxFrameIdx();
-		start -= std::floor((float)start / max_time) * max_time;
-		spr->SetStartTime(start);
+	} else if (name == "Start Random") {
+		spr->SetStartRandom(wxANY_AS(value, bool));
 	} else if (name == "Static") {
 		spr->SetStaticTime(wxANY_AS(value, int));
 		spr->SetActive(false);
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
-//		m_->GetProperty("Active")->SetValue(false);
 	} else if (name == "Active") {
 		spr->SetActive(wxANY_AS(value, bool));
 	}
@@ -47,7 +43,7 @@ void PropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	pg->GetProperty("Loop")->SetValue(spr->IsLoop());
 	pg->GetProperty("Interval")->SetValue(spr->GetInterval());
 	pg->GetProperty("FPS")->SetValue(spr->GetFPS());
-	pg->GetProperty("Start")->SetValue(spr->GetStartTime());
+	pg->GetProperty("Start Random")->SetValue(spr->IsStartRandom());
 	pg->GetProperty("Static")->SetValue(spr->GetStaticTime());
 	pg->GetProperty("Active")->SetValue(spr->IsActive());
 }
@@ -67,7 +63,8 @@ void PropertySetting::InitProperties(wxPropertyGrid* pg)
 	
 	pg->Append(new wxIntProperty("FPS", wxPG_LABEL, spr->GetFPS()));
 
-	pg->Append(new wxIntProperty("Start", wxPG_LABEL, spr->GetStartTime()));
+	pg->Append(new wxBoolProperty("Start Random", wxPG_LABEL, spr->IsStartRandom()));
+	pg->SetPropertyAttribute("Start Random", wxPG_BOOL_USE_CHECKBOX, spr->IsStartRandom(), wxPG_RECURSE);
 
 	wxIntProperty* static_prop = new wxIntProperty("Static", wxPG_LABEL, spr->GetStaticTime());
 	static_prop->SetValue(spr->GetStaticTime());
