@@ -13,6 +13,7 @@ Sprite::Sprite(const Sprite& spr)
 	: s2::Sprite(spr)
 	, s2::AnimSprite(spr)
 	, ee::Sprite(spr)
+	, m_static_time(spr.m_static_time)
 {
 }
 
@@ -21,6 +22,7 @@ Sprite& Sprite::operator = (const Sprite& spr)
 	s2::Sprite::operator = (spr);
 	s2::AnimSprite::operator = (spr);
 	ee::Sprite::operator = (spr);
+	m_static_time = spr.m_static_time;
 	return *this;
 }
 
@@ -28,6 +30,7 @@ Sprite::Sprite(Symbol* sym)
 	: s2::Sprite(sym)
 	, s2::AnimSprite(sym)
 	, ee::Sprite(sym)
+	, m_static_time(-1)
 {
 }
 
@@ -52,6 +55,8 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 
 	anim_val["start"] = m_start_frame;
 
+	anim_val["static_time"] = m_static_time;
+
 	anim_val["active"] = m_curr.IsActive();
 
 	val["animation"] = anim_val;
@@ -60,6 +65,12 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 ee::PropertySetting* Sprite::CreatePropertySetting(ee::EditPanelImpl* stage)
 {
 	return new PropertySetting(stage, this);
+}
+
+void Sprite::SetStaticTime(int static_time) 
+{ 
+	m_static_time = static_time;
+	SetTime(static_time);
 }
 
 ee::Sprite* Sprite::Create(ee::Symbol* sym) 

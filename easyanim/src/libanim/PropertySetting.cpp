@@ -2,6 +2,8 @@
 #include "Sprite.h"
 #include "Symbol.h"
 
+#include <ee/panel_msg.h>
+
 namespace eanim
 {
 
@@ -27,6 +29,11 @@ void PropertySetting::OnPropertyGridChange(const std::string& name, const wxAny&
 		int max_time = dynamic_cast<Symbol*>(spr->GetSymbol())->GetMaxFrameIdx();
 		start -= std::floor((float)start / max_time) * max_time;
 		spr->SetStartTime(start);
+	} else if (name == "Static") {
+		spr->SetStaticTime(wxANY_AS(value, int));
+		spr->SetActive(false);
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
+//		m_->GetProperty("Active")->SetValue(false);
 	} else if (name == "Active") {
 		spr->SetActive(wxANY_AS(value, bool));
 	}
@@ -41,6 +48,7 @@ void PropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	pg->GetProperty("Interval")->SetValue(spr->GetInterval());
 	pg->GetProperty("FPS")->SetValue(spr->GetFPS());
 	pg->GetProperty("Start")->SetValue(spr->GetStartTime());
+	pg->GetProperty("Static")->SetValue(spr->GetStaticTime());
 	pg->GetProperty("Active")->SetValue(spr->IsActive());
 }
 
@@ -60,6 +68,10 @@ void PropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->Append(new wxIntProperty("FPS", wxPG_LABEL, spr->GetFPS()));
 
 	pg->Append(new wxIntProperty("Start", wxPG_LABEL, spr->GetStartTime()));
+
+	wxIntProperty* static_prop = new wxIntProperty("Static", wxPG_LABEL, spr->GetStaticTime());
+	static_prop->SetValue(spr->GetStaticTime());
+	pg->Append(static_prop);
 
 	pg->Append(new wxBoolProperty("Active", wxPG_LABEL, spr->IsActive()));
 	pg->SetPropertyAttribute("Active", wxPG_BOOL_USE_CHECKBOX, spr->IsLoop(), wxPG_RECURSE);

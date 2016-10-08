@@ -39,9 +39,15 @@ public:
 
 	int GetStartTime() const { return m_start_frame; }
 
+	int GetStaticTime() const { return m_static_time; }
+	void SetStaticTime(int static_time);
+
 	bool IsActive() const { return m_curr.IsActive(); }
 
 	static ee::Sprite* Create(ee::Symbol* sym);
+
+private:
+	int m_static_time;
 
 }; // Sprite
 
