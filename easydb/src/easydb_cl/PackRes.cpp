@@ -121,7 +121,7 @@ void PackRes::PackTexture(const Json::Value& pkg_val, const std::string& config_
 	std::string img_path = dst_name + ".png";
 	tex_packer->OutputImage(img_path);
 	int start_id = 1;
-	bool fast = pkg_val["quality"].asString() == "fast";
+	bool fast = pkg_val["quality"].asString() == "fastest";
 	PackTexture::CompressPackedTex(*tex_packer, start_id, dst_name, fmt, fast);
 	delete tex_packer;
 
