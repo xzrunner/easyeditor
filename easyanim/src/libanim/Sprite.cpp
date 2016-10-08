@@ -50,6 +50,8 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 
 	anim_val["fps"] = m_fps;
 
+	anim_val["start"] = m_start_frame;
+
 	anim_val["active"] = m_curr.IsActive();
 
 	val["animation"] = anim_val;
