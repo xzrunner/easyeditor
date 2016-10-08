@@ -32,7 +32,8 @@ void AnimToLuaString::Pack(const PackAnimation* anim, ebuilder::CodeGenerator& g
 			int node_id = comp.node->GetSprID();
 			if (node_id == ANCHOR_ID) {
 				if (comp.name.empty()) {
-					throw ee::Exception("AnimToLuaString::Pack Anchor need a name.");
+					const std::string& filepath = anim->GetFilepath();
+					throw ee::Exception("AnimToLuaString::Pack Anchor need a name, file:%s", filepath.c_str());
 				}
 				std::string name_str = lua::assign("name", "\""+comp.name+"\"");
 				lua::tableassign(gen, "", 1, name_str);
