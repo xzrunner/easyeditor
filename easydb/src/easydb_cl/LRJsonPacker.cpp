@@ -502,8 +502,6 @@ void LRJsonPacker::ParserSpecial(const Json::Value& src_val, const std::string& 
 void LRJsonPacker::ParserSpecialFromSprite(const Json::Value& src_val, const std::string& name, 
 										   bool is_layer2, Json::Value& out_val)
 {
-	std::set<std::string> children_names;
-
 	int idx = 0;
 	Json::Value spr_val = src_val["sprite"][idx++];
 	while (!spr_val.isNull()) 
@@ -517,15 +515,9 @@ void LRJsonPacker::ParserSpecialFromSprite(const Json::Value& src_val, const std
 			//				ParserSpecialLayer(spr_val, "top", out_val);
 			out_val["top"] = name + "_top";
 		} else {
-			ParserChildren(spr_val, children_names);
+			ParserChildren(spr_val, out_val["children"]);
 		}
 		spr_val = src_val["sprite"][idx++];
-	}
-
-	idx = 0;
-	std::set<std::string>::iterator itr = children_names.begin();
-	for ( ; itr != children_names.end(); ++itr) {
-		out_val["children"][idx++] = *itr;
 	}
 }
 
@@ -590,7 +582,7 @@ void LRJsonPacker::ParserSpecialLayer(const Json::Value& spr_val, const std::str
 	out_val[name][sz] = dec_val;
 }
 
-void LRJsonPacker::ParserChildren(const Json::Value& spr_val, std::set<std::string>& children_names)
+void LRJsonPacker::ParserChildren(const Json::Value& spr_val, Json::Value& out_val)
 {
 	if (!spr_val.isMember("name")) {
 		return;
@@ -600,7 +592,12 @@ void LRJsonPacker::ParserChildren(const Json::Value& spr_val, std::set<std::stri
 		return;
 	}
 
-	children_names.insert(name);
+	for (int i = 0, n = out_val.size(); i < n; ++i) {
+		if (out_val[i].asString() == name) {
+			return;
+		}
+	}
+	out_val[out_val.size()] = name;
 }
 
 void LRJsonPacker::ParserParticleLayer(const Json::Value& spr_val, Json::Value& out_val,
