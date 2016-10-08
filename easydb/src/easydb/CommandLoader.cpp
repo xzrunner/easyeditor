@@ -67,6 +67,7 @@
 #include "PackEPNew.h"
 #include "CreateColLUT.h"
 #include "FixLRP3dLayer.h"
+#include "FixLRSprName.h"
 
 namespace edb
 {
@@ -139,6 +140,7 @@ void CommandLoader::Init()
 	fc->Register(PackEPNew::Create());
 	fc->Register(CreateColLUT::Create());
 	fc->Register(FixLRP3dLayer::Create());
+	fc->Register(FixLRSprName::Create());
 }
 
 }

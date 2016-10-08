@@ -646,6 +646,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\easydb_cl\FixLRSprName.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb_cl\FixLRSprName.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\easydb_cl\FixMirror.cpp"
 					>
 				</File>

@@ -502,6 +502,8 @@ void LRJsonPacker::ParserSpecial(const Json::Value& src_val, const std::string& 
 void LRJsonPacker::ParserSpecialFromSprite(const Json::Value& src_val, const std::string& name, 
 										   bool is_layer2, Json::Value& out_val)
 {
+	std::set<std::string> children_names;
+
 	int idx = 0;
 	Json::Value spr_val = src_val["sprite"][idx++];
 	while (!spr_val.isNull()) 
@@ -514,8 +516,16 @@ void LRJsonPacker::ParserSpecialFromSprite(const Json::Value& src_val, const std
 		} else if (tag.find(TOP_LAYER_STR) != std::string::npos) {
 			//				ParserSpecialLayer(spr_val, "top", out_val);
 			out_val["top"] = name + "_top";
+		} else {
+			ParserChildren(spr_val, children_names);
 		}
 		spr_val = src_val["sprite"][idx++];
+	}
+
+	idx = 0;
+	std::set<std::string>::iterator itr = children_names.begin();
+	for ( ; itr != children_names.end(); ++itr) {
+		out_val["children"][idx++] = *itr;
 	}
 }
 
@@ -551,6 +561,20 @@ void LRJsonPacker::ParserSpecialLayer(const Json::Value& spr_val, const std::str
 		ee::SpriteIO spr_io;
 		spr_io.Load(val["sprite"][idx]);
 		pos += spr_io.m_position;
+
+		for (int i = 0, n = val["sprite"].size(); i < n; ++i) 
+		{
+			const Json::Value& cval = val["sprite"][i];
+			if (!cval.isMember("name")) {
+				continue;
+			}
+			std::string name = cval["name"].asString();
+			if (name.empty() || name[0] == '_') {
+				continue;
+			}
+			int sz = dec_val["children"].size();
+			dec_val["children"][sz] = name;
+		}
 	}
 
 	if (!s_name.empty() && s_name[0] != '_') {
@@ -564,6 +588,19 @@ void LRJsonPacker::ParserSpecialLayer(const Json::Value& spr_val, const std::str
 
 	int sz = out_val[name].size();
 	out_val[name][sz] = dec_val;
+}
+
+void LRJsonPacker::ParserChildren(const Json::Value& spr_val, std::set<std::string>& children_names)
+{
+	if (!spr_val.isMember("name")) {
+		return;
+	}
+	std::string name = spr_val["name"].asString();
+	if (name.empty() || name[0] == '_') {
+		return;
+	}
+
+	children_names.insert(name);
 }
 
 void LRJsonPacker::ParserParticleLayer(const Json::Value& spr_val, Json::Value& out_val,

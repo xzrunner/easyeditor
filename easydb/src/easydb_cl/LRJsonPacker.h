@@ -7,6 +7,8 @@
 
 #include <json/json.h>
 
+#include <set>
+
 namespace lr { class Grids; }
 namespace ee { class Shape; }
 
@@ -58,6 +60,7 @@ private:
 	void ParserSpecial(const Json::Value& src_val, const std::string& name, Json::Value& out_val);
 	void ParserSpecialFromSprite(const Json::Value& src_val, const std::string& name, bool is_layer2, Json::Value& out_val);
 	void ParserSpecialLayer(const Json::Value& spr_val, const std::string& name, Json::Value& out_val);
+	void ParserChildren(const Json::Value& spr_val, std::set<std::string>& children_names);
 
 	void ParserParticleLayer(const Json::Value& spr_val, Json::Value& out_val, bool top_layer);
 
