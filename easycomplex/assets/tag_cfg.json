@@ -1,0 +1,89 @@
+{
+	"layout" :
+	{
+		"col" : 1
+	},
+	"widget" :
+	[
+		{
+			"type" : "choice",
+			"title" : "音效",
+			"key" : "sound",
+			"choices" :
+			[
+				{
+					"value" : "button_click",
+					"title" : "按钮点击"
+				},
+				{
+					"value" : "Command_Move",
+					"title" : "移动指令"
+				},
+				{
+					"value" : "Command_Attack",
+					"title" : "攻击指令"
+				},
+				{
+					"value" : "Command_Unavailable",
+					"title" : "无效指令"
+				},
+				{
+					"value" : "Command_HeroSelect",
+					"title" : "英雄头像选中音效"
+				},
+				{
+					"value" : "Command_PageFlip",
+					"title" : "剧情对话点击音效"
+				},
+				{
+					"value" : "alert_skill",
+					"title" : "技能发动cut-in音效"
+				},
+				{
+					"value" : "alert_enemyhero",
+					"title" : "敌将出现cut-in音效"
+				},
+				{
+					"value" : "General_Cancel",
+					"title" : "通用关闭"
+				},
+				{
+					"value" : "General_ConditionNotMet",
+					"title" : "通用未满足条件"
+				},
+				{
+					"value" : "General_Confirm",
+					"title" : "通用确认"
+				},
+				{
+					"value" : "General_Error",
+					"title" : "通用错误"
+				},
+				{
+					"value" : "General_GetItem",
+					"title" : "通用获得物品"
+				},
+				{
+					"value" : "General_NumberRoll",
+					"title" : "通用数字滚动增长"
+				},
+				{
+					"value" : "General_SpendDiamond",
+					"title" : "通用得到花掉元宝"
+				},
+				{
+					"value" : "General_SpendGold",
+					"title" : "通用得到花掉金币"
+				},
+				{
+					"value" : "General_Start",
+					"title" : "游戏开始提示音"
+				},
+				{
+					"value" : "General_Switch",
+					"title" : "通用切换"
+				}
+			]
+		}
+	]
+}

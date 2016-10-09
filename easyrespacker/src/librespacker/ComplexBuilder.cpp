@@ -5,6 +5,7 @@
 #include "ExportNameSet.h"
 #include "Utility.h"
 #include "ClipboxBuilder.h"
+#include "PackTag.h"
 
 #include "TextBuilder.h"
 
@@ -80,14 +81,23 @@ IPackNode* ComplexBuilder::LoadComplex(const ecomplex::Symbol* sym)
 {
 	PackAnimation* node = new PackAnimation;
 
+	const std::vector<s2::Sprite*>& children = sym->GetChildren();
+
 	m_export_set.LoadExport(sym, node);
 
 	// clipbox
 	const PackClipbox* cb = static_cast<const PackClipbox*>(m_cb_builder->Create(sym));
 
+	// tag key-val
+	for (int i = 0, n = children.size(); i < n; ++i) {
+		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
+		PackTag::Instance()->AddTask(sym->GetFilepath(), i, child);
+	}
+
+	// actions
 	std::map<std::string, std::vector<ee::Sprite*> > map_actions;
 	std::vector<ee::Sprite*> others;
-	GroupFromTag(sym->GetChildren(), map_actions, others);
+	GroupFromTag(children, map_actions, others);
 	
 	if (map_actions.empty()) 
 	{
@@ -99,7 +109,6 @@ IPackNode* ComplexBuilder::LoadComplex(const ecomplex::Symbol* sym)
 		if (cb) {
 			node->CreateClipboxFramePart(cb, frame);
 		}
-		const std::vector<s2::Sprite*>& children = sym->GetChildren();
 		for (int i = 0, n = children.size(); i < n; ++i) {
 			ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 			node->CreateFramePart(child, frame);

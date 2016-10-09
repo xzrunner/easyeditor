@@ -1144,6 +1144,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\librespacker\PackTag.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\librespacker\PackTag.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\librespacker\PackUI.cpp"
 					>
 				</File>

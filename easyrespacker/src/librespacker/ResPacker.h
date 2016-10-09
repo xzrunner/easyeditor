@@ -32,6 +32,8 @@ public:
 
 	void OutputSprID(const std::string& outfile) const;
 
+	void OutputTagKeyVal(const std::string& outfile) const;
+
 	void OutputEptDesc(const std::string& outfile) const;
 
 private:

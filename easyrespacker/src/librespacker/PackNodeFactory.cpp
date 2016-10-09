@@ -1,5 +1,6 @@
 #include "PackNodeFactory.h"
 #include "PackUI.h"
+#include "PackTag.h"
 
 #include <ee/ImageSprite.h>
 #include <ee/ImageSymbol.h>
@@ -249,6 +250,7 @@ const IPackNode* PackNodeFactory::Create(const ee::Symbol* sym)
 	}
 
 	PackUI::Instance()->OnKnownPackID(sym->GetFilepath(), node->GetSprID());
+	PackTag::Instance()->OnKnownPackID(sym->GetFilepath(), node->GetSprID());	
 
 	return node;
 }

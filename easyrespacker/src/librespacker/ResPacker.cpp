@@ -3,6 +3,7 @@
 #include "PackNodeFactory.h"
 #include "PackUI.h"
 #include "PackUIWindowTask.h"
+#include "PackTag.h"
 
 #include "PackToLuaString.h"
 #include "PackToBin.h"
@@ -128,6 +129,27 @@ void ResPacker::OutputSprID(const std::string& outfile) const
 	std::locale::global(std::locale("C"));
 	writer.write(fout, value);
 	fout.close();	
+}
+
+void ResPacker::OutputTagKeyVal(const std::string& outfile) const
+{
+	std::string dir = ee::FileHelper::GetFileDir(outfile);
+
+	Json::Value value;
+
+	PackTag::Instance()->Output(dir, value);
+
+	if (value.isNull()) {
+		return;
+	}
+
+	std::string filepath = outfile + "_tag.json";
+	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
+	std::ofstream fout(filepath.c_str());
+	std::locale::global(std::locale("C"));
+	writer.write(fout, value);
+	fout.close();
 }
 
 void ResPacker::OutputEptDesc(const std::string& outfile) const

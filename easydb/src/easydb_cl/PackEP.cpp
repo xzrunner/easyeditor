@@ -107,6 +107,7 @@ void PackEP::Trigger(const std::string& json_dir, const std::string& tp_json,
 		packer.OutputEptDesc(out_file);
 		packer.OutputUIExtra(out_file);
 		packer.OutputSprID(out_file);
+		packer.OutputTagKeyVal(out_file);
 	}
 }
 

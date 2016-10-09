@@ -3,6 +3,7 @@
 
 #include <string>
 #include <map>
+#include <vector>
 
 namespace ee
 {
@@ -29,6 +30,8 @@ private:
 	};
 
 	std::map<std::string, Item> m_map_val;
+
+	std::vector<std::string> m_others;
 
 }; // DynamicInfo
 

@@ -19,6 +19,7 @@
 #include "FetchAllVisitor.h"
 #include "sprite_msg.h"
 #include "EditOP.h"
+#include "SprTagEditDlg.h"
 
 #include "EditableSpriteAOP.h"
 #include "VisibleSpriteAOP.h"
@@ -640,8 +641,18 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	sm::vec2 screen_pos = m_stage->TransPosProjToScr(proj_pos);
 	wxPoint pos(screen_pos.x, screen_pos.y);
 
+	// tag
+	if (keycode =='G')
+	{
+		SprTagEditDlg dlg(m_wnd, sprs[0]);
+		if (dlg.ShowModal() == wxID_OK) {
+			sprs[0]->SetTag(dlg.ToString());
+		}
+		m_stage->GetKeyState().Reset();
+		return true;
+	}
 	// editable
-	if (keycode == 'E')
+	else if (keycode == 'E')
 	{
 		bool editable = !sprs[0]->IsEditable();
 		for (int i = 0, n = sprs.size(); i < n; ++i) {

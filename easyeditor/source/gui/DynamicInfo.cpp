@@ -54,10 +54,12 @@ void DynamicInfo::LoadFromString(const std::string& str, const std::string& tag)
 	std::vector<std::string> pairs;
 	ee::StringHelper::Split(str, ";", pairs);
 
-	for (int i = 0, n = pairs.size(); i < n; ++i) {
+	for (int i = 0, n = pairs.size(); i < n; ++i) 
+	{
 		const std::string& pair = pairs[i];
 		int pos = pair.find('=');
 		if (pos == std::string::npos) {
+			m_others.push_back(pair);
 			continue;
 		}
 
@@ -74,6 +76,10 @@ void DynamicInfo::LoadFromString(const std::string& str, const std::string& tag)
 std::string DynamicInfo::ToString() const
 {
 	std::string str;
+
+	for (int i = 0, n = m_others.size(); i < n; ++i) {
+		str += m_others[i] + ";";
+	}
 
 	std::map<std::string, Item>::const_iterator itr
 		= m_map_val.begin();

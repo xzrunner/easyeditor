@@ -239,7 +239,12 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	pg->GetProperty(wxT("Name"))->SetValue(spr->GetName());
 	pg->GetProperty(wxT("Tag"))->SetValue(spr->GetTag());
 
-	if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_DEFAULT) {
+	SprTagProperty* tag_prop = dynamic_cast<SprTagProperty*>(pg->GetProperty(wxT("Tag")));
+	tag_prop->SetParent(pg);
+	tag_prop->SetSprite(spr);
+
+	if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_DEFAULT) 
+	{
 		wxColour mul_col = wxColour(spr->Color().mul.r, spr->Color().mul.g, spr->Color().mul.b, spr->Color().mul.a);
 		wxColour add_col = wxColour(spr->Color().add.r, spr->Color().add.g, spr->Color().add.b, spr->Color().add.a);
 		pg->SetPropertyValueString(wxT("Color.Multi"), mul_col.GetAsString());
