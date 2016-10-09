@@ -24,6 +24,20 @@ SymbolFile::SymbolFile()
 	Regist(SYM_UI,			"ui");
 	Regist(SYM_PSD,			"psd");
 	Regist(SYM_UIWND,		"uiwnd");
+
+	Regist(s2::SYM_SCALE9,		"scale9");
+	Regist(s2::SYM_ICON,		"icon");
+	Regist(s2::SYM_TEXTURE,		"texture");
+	Regist(s2::SYM_TEXTBOX,		"text");
+	Regist(s2::SYM_COMPLEX,		"complex");
+	Regist(s2::SYM_ANIMATION,	"anim");
+	Regist(s2::SYM_PARTICLE3D,	"particle");
+	Regist(s2::SYM_PARTICLE2D,	"particle2d");
+	Regist(s2::SYM_SHAPE,		"shape");
+	Regist(s2::SYM_MESH,		"mesh");
+	Regist(s2::SYM_MASK,		"mask");
+	Regist(s2::SYM_TRAIL,		"trail");
+	Regist(s2::SYM_SKELETON,	"skeleton");
 }
 
 int SymbolFile::Type(const std::string& filepath) const
