@@ -414,6 +414,70 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="dynamic"
+			>
+			<File
+				RelativePath="..\..\..\source\gui\DynamicInfo.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\DynamicInfo.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\source\gui\DynamicWidget.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\DynamicWidget.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\source\gui\WidgetFactory.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\WidgetFactory.h"
+				>
+			</File>
+			<Filter
+				Name="widget"
+				>
+				<File
+					RelativePath="..\..\..\source\gui\CheckBoxWidget.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\CheckBoxWidget.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\gui\ChoiceWidget.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\ChoiceWidget.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\gui\ComboBoxWidget.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\ComboBoxWidget.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\gui\TextWidget.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\TextWidget.h"
+					>
+				</File>
+			</Filter>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

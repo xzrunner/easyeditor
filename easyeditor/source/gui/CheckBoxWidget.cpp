@@ -1,7 +1,7 @@
 #include "CheckBoxWidget.h"
 #include "DynamicInfo.h"
 
-namespace lr
+namespace ee
 {
 
 std::string CheckBoxWidget::GetValue() const

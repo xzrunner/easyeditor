@@ -1,14 +1,12 @@
-#ifndef _LR_DYNAMIC_INFO_H_
-#define _LR_DYNAMIC_INFO_H_
+#ifndef _EASYEDITOR_DYNAMIC_INFO_H_
+#define _EASYEDITOR_DYNAMIC_INFO_H_
 
 #include <string>
 #include <map>
 
-namespace lr
+namespace ee
 {
 
-static const std::string DEFAULT_VAL = "_DEFAULT_";;
-	
 class DynamicInfo
 {
 public:
@@ -36,4 +34,4 @@ private:
 
 }
 
-#endif // _LR_DYNAMIC_INFO_H_
+#endif // _EASYEDITOR_DYNAMIC_INFO_H_

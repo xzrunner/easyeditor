@@ -1,7 +1,7 @@
 #include "ComboBoxWidget.h"
 #include "DynamicInfo.h"
 
-namespace lr
+namespace ee
 {
 
 std::string ComboBoxWidget::GetValue() const

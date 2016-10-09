@@ -1,7 +1,7 @@
 #include "UnitCfg.h"
-#include "WidgetFactory.h"
 
 #include <ee/FileHelper.h>
+#include <ee/WidgetFactory.h>
 
 #include <wx/stdpaths.h>
 
@@ -52,7 +52,7 @@ void UnitCfg::LoadFromFile(const char* filename)
 	int idx = 0;
 	Json::Value w_val = val["widget"][idx++];
 	while (!w_val.isNull()) {
-		widgets.push_back(WidgetFactory::Instance()->Create(w_val));
+		widgets.push_back(ee::WidgetFactory::Instance()->Create(w_val));
 		w_val = val["widget"][idx++];
 	}
 }

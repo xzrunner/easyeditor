@@ -1,9 +1,9 @@
-#ifndef _LR_COMBO_BOX_WIDGET_H_
-#define _LR_COMBO_BOX_WIDGET_H_
+#ifndef _EASYEDITOR_COMBO_BOX_WIDGET_H_
+#define _EASYEDITOR_COMBO_BOX_WIDGET_H_
 
 #include "DynamicWidget.h"
 
-namespace lr
+namespace ee
 {
 
 class ComboBoxWidget : public DynamicWidget
@@ -44,4 +44,4 @@ private:
 
 }
 
-#endif // _LR_COMBO_BOX_WIDGET_H_
+#endif // _EASYEDITOR_COMBO_BOX_WIDGET_H_

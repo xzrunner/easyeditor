@@ -22,6 +22,7 @@
 #include "SprFilterProperty.h"
 #include "FileDirProperty.h"
 #include "EditPanel.h"
+#include "SprTagProperty.h"
 
 #include <sprite2/RenderColor.h>
 #include <sprite2/RenderShader.h>
@@ -320,7 +321,11 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->Append(new wxPropertyCategory("BASE", wxPG_LABEL));
 
 	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, spr->GetName()));
-	pg->Append(new wxStringProperty("Tag", wxPG_LABEL, spr->GetTag()));
+
+	SprTagProperty* tag_prop = new SprTagProperty("Tag", wxPG_LABEL, spr->GetTag());
+	tag_prop->SetParent(pg);
+	tag_prop->SetSprite(spr);
+	pg->Append(tag_prop);
 
 	pg->Append(new wxBoolProperty("Clip", wxPG_LABEL, spr->IsClip()));
 	pg->SetPropertyAttribute("Clip", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);

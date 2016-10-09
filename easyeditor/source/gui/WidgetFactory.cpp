@@ -1,13 +1,12 @@
 #include "WidgetFactory.h"
+#include "Exception.h"
 
 #include "TextWidget.h"
 #include "ChoiceWidget.h"
 #include "ComboBoxWidget.h"
 #include "CheckBoxWidget.h"
 
-#include <ee/Exception.h>
-
-namespace lr
+namespace ee
 {
 
 WidgetFactory* WidgetFactory::m_instance = NULL;

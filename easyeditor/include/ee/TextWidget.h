@@ -1,9 +1,9 @@
-#ifndef _LR_TEXT_WIDGET_H_
-#define _LR_TEXT_WIDGET_H_
+#ifndef _EASYEDITOR_TEXT_WIDGET_H_
+#define _EASYEDITOR_TEXT_WIDGET_H_
 
 #include "DynamicWidget.h"
 
-namespace lr
+namespace ee
 {
 
 class TextWidget : public DynamicWidget
@@ -30,4 +30,4 @@ private:
 
 }
 
-#endif // _LR_TEXT_WIDGET_H_
+#endif // _EASYEDITOR_TEXT_WIDGET_H_

@@ -1,7 +1,7 @@
 #include "TextWidget.h"
 #include "DynamicInfo.h"
 
-namespace lr
+namespace ee
 {
 
 std::string TextWidget::GetValue() const

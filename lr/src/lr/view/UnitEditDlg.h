@@ -1,12 +1,12 @@
 #ifndef _LR_UNIT_EDIT_DIALOG_H_
 #define _LR_UNIT_EDIT_DIALOG_H_
 
-#include "CfgEditDlg.h"
+#include <ee/CfgEditDlg.h>
 
 namespace lr
 {
 
-class UnitEditDlg : public CfgEditDlg
+class UnitEditDlg : public ee::CfgEditDlg
 {
 public:
 	UnitEditDlg(wxWindow* parent, ee::Sprite* spr, 
@@ -22,7 +22,7 @@ private:
 private:
 	const std::vector<std::string>& m_path_names;
 
-//	std::vector<DynamicWidget*> m_special_widgets;
+//	std::vector<ee::DynamicWidget*> m_special_widgets;
 
 }; // UnitEditDlg
 

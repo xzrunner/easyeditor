@@ -1,9 +1,9 @@
-#ifndef _LR_CHOICE_WIDGET_H_
-#define _LR_CHOICE_WIDGET_H_
+#ifndef _EASYEDITOR_CHOICE_WIDGET_H_
+#define _EASYEDITOR_CHOICE_WIDGET_H_
 
 #include "DynamicWidget.h"
 
-namespace lr
+namespace ee
 {
 
 class ChoiceWidget : public DynamicWidget
@@ -44,4 +44,4 @@ private:
 
 }
 
-#endif // _LR_CHOICE_WIDGET_H_
+#endif // _EASYEDITOR_CHOICE_WIDGET_H_

@@ -1,9 +1,9 @@
-#ifndef _LR_WIDGET_FACTORY_H_
-#define _LR_WIDGET_FACTORY_H_
+#ifndef _EASYEDITOR_WIDGET_FACTORY_H_
+#define _EASYEDITOR_WIDGET_FACTORY_H_
 
 #include <json/json.h>
 
-namespace lr
+namespace ee
 {
 
 class DynamicWidget;
@@ -25,4 +25,4 @@ private:
 
 }
 
-#endif // _LR_WIDGET_FACTORY_H_
+#endif // _EASYEDITOR_WIDGET_FACTORY_H_

@@ -1,11 +1,12 @@
 #include "LevelEditDlg.h"
 
 #include "dataset/LevelCfg.h"
-#include "dataset/DynamicWidget.h"
 
 #include <ee/Symbol.h>
+#include <ee/Sprite.h>
 #include <ee/ViewlistList.h>
 #include <ee/EditPanelImpl.h>
+#include <ee/DynamicWidget.h>
 
 namespace lr
 {
@@ -23,8 +24,8 @@ std::string LevelEditDlg::ToString()
 {
 	std::string ret = "type=" + m_type + ";";
  	for (int i = 0, n = m_widgets.size(); i < n; ++i) {
- 		DynamicWidget* dw = m_widgets[i];
-		if (dw->GetValue() == DEFAULT_VAL) {
+ 		ee::DynamicWidget* dw = m_widgets[i];
+		if (dw->GetValue() == ee::DynamicWidget::DEFAULT_VAL) {
 			continue;
 		}
 		if (dw->GetTag() == "sprite" || dw->IsChanged()) {

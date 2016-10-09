@@ -1,11 +1,10 @@
 #include "DynamicInfo.h"
-
-#include <ee/Exception.h>
-#include <ee/StringHelper.h>
+#include "Exception.h"
+#include "StringHelper.h"
 
 #include <vector>
 
-namespace lr
+namespace ee
 {
 
 std::string DynamicInfo::QueryValue(const std::string& key) const

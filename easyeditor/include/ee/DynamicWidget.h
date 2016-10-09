@@ -1,10 +1,10 @@
-#ifndef _LR_DYNAMIC_WIDGET_H_
-#define _LR_DYNAMIC_WIDGET_H_
+#ifndef _EASYEDITOR_DYNAMIC_WIDGET_H_
+#define _EASYEDITOR_DYNAMIC_WIDGET_H_
 
 #include <json/json.h>
 #include <wx/wx.h>
 
-namespace lr
+namespace ee
 {
 
 class DynamicInfo;
@@ -27,6 +27,9 @@ public:
 	void SetTag(const std::string& tag) { m_tag = tag; }
 	const std::string& GetTag() const { return m_tag; }
 
+public:
+	static const std::string DEFAULT_VAL;
+
 protected:
 	virtual void Load(const Json::Value& value) = 0;
 
@@ -41,4 +44,4 @@ protected:
 
 }
 
-#endif // _LR_DYNAMIC_WIDGET_H_
+#endif // _EASYEDITOR_DYNAMIC_WIDGET_H_

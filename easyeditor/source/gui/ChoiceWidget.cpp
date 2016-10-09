@@ -1,7 +1,7 @@
 #include "ChoiceWidget.h"
 #include "DynamicInfo.h"
 
-namespace lr
+namespace ee
 {
 
 std::string ChoiceWidget::GetValue() const

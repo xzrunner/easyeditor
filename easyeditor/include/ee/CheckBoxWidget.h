@@ -1,9 +1,9 @@
-#ifndef _LR_CHECK_BOX_WIDGET_H_
-#define _LR_CHECK_BOX_WIDGET_H_
+#ifndef _EASYEDITOR_CHECK_BOX_WIDGET_H_
+#define _EASYEDITOR_CHECK_BOX_WIDGET_H_
 
 #include "DynamicWidget.h"
 
-namespace lr
+namespace ee
 {
 
 class CheckBoxWidget : public DynamicWidget
@@ -31,4 +31,4 @@ private:
 
 }
 
-#endif // _LR_CHECK_BOX_WIDGET_H_
+#endif // _EASYEDITOR_CHECK_BOX_WIDGET_H_

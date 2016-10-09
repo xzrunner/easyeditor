@@ -1,12 +1,12 @@
 #ifndef _LR_LEVEL_EDIT_DIALOG_H_
 #define _LR_LEVEL_EDIT_DIALOG_H_
 
-#include "CfgEditDlg.h"
+#include <ee/CfgEditDlg.h>
 
 namespace lr
 {
 
-class LevelEditDlg : public CfgEditDlg
+class LevelEditDlg : public ee::CfgEditDlg
 {
 public:
 	LevelEditDlg(wxWindow* parent, ee::Sprite* spr);
@@ -20,7 +20,7 @@ private:
 private:
 	std::string m_type;
 
-	std::vector<DynamicWidget*> m_widgets;
+	std::vector<ee::DynamicWidget*> m_widgets;
 
 }; // LevelEditDlg
 

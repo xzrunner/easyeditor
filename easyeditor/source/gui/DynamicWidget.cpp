@@ -1,8 +1,10 @@
 #include "DynamicWidget.h"
 #include "DynamicInfo.h"
 
-namespace lr
+namespace ee
 {
+
+const std::string DynamicWidget::DEFAULT_VAL = "_DEFAULT_";
 
 DynamicWidget::DynamicWidget()
 	: m_special(false)

@@ -1,7 +1,7 @@
 #include "LevelCfg.h"
-#include "WidgetFactory.h"
 
 #include <ee/FileHelper.h>
+#include <ee/WidgetFactory.h>
 
 #include <wx/stdpaths.h>
 
@@ -37,7 +37,7 @@ LevelCfg::LevelCfg()
 }
 
 bool LevelCfg::QueryLayout(const std::string& type, int& col, 
-						   std::vector<DynamicWidget*>& widgets)
+						   std::vector<ee::DynamicWidget*>& widgets)
 {
 	std::map<std::string, Dialog*>::iterator itr = m_dialogs.find(type);
 	if (itr == m_dialogs.end()) {
@@ -80,7 +80,7 @@ void LevelCfg::InsertDialog(const Json::Value& val)
 	int idx = 0;
 	Json::Value w_val = val["widget"][idx++];
 	while (!w_val.isNull()) {
-		dlg->widgets.push_back(WidgetFactory::Instance()->Create(w_val));
+		dlg->widgets.push_back(ee::WidgetFactory::Instance()->Create(w_val));
 		w_val = val["widget"][idx++];
 	}
 

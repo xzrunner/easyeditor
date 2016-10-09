@@ -3,10 +3,10 @@
 
 #include <vector>
 
+namespace ee { class DynamicWidget; }
+
 namespace lr
 {
-
-class DynamicWidget;
 
 class UnitCfg
 {
@@ -21,7 +21,7 @@ private:
 public:
 	int col;
 
-	std::vector<DynamicWidget*> widgets;
+	std::vector<ee::DynamicWidget*> widgets;
 
 private:
 	static UnitCfg* m_instance;

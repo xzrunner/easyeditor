@@ -6,16 +6,16 @@
 
 #include <json/json.h>
 
+namespace ee { class DynamicWidget; }
+
 namespace lr
 {
-
-class DynamicWidget;
 
 class LevelCfg
 {
 public:
 	bool QueryLayout(const std::string& type, int& col, 
-		std::vector<DynamicWidget*>& widgets);
+		std::vector<ee::DynamicWidget*>& widgets);
 
 	static LevelCfg* Instance();
 
@@ -30,7 +30,7 @@ private:
 	{
 		std::string type;
 		int col;
-		std::vector<DynamicWidget*> widgets;
+		std::vector<ee::DynamicWidget*> widgets;
 	};
 
 private:

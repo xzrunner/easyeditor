@@ -391,6 +391,34 @@
 						RelativePath="..\..\..\include\ee\SpritePropertySetting.h"
 						>
 					</File>
+					<Filter
+						Name="tag"
+						>
+						<File
+							RelativePath="..\..\..\source\view\property\SprTagCfg.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\include\ee\SprTagCfg.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\source\view\property\SprTagEditDlg.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\include\ee\SprTagEditDlg.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\source\view\property\SprTagProperty.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\include\ee\SprTagProperty.h"
+							>
+						</File>
+					</Filter>
 				</Filter>
 			</Filter>
 			<Filter
@@ -634,6 +662,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\include\ee\BaseDialog.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\view\others\CfgEditDlg.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\CfgEditDlg.h"
 					>
 				</File>
 				<File

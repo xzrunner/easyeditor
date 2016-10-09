@@ -1,12 +1,11 @@
 #include "CfgEditDlg.h"
+#include "DynamicWidget.h"
 
-#include "dataset/DynamicWidget.h"
-
-namespace lr
+namespace ee
 {
 
-CfgEditDlg::CfgEditDlg(wxWindow* parent, const char* name, ee::Sprite* spr)
-	: ee::BaseDialog(parent, name)
+CfgEditDlg::CfgEditDlg(wxWindow* parent, const char* name, Sprite* spr)
+	: BaseDialog(parent, name)
 	, m_spr(spr)
 {
 }
