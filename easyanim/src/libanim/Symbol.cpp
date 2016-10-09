@@ -66,6 +66,8 @@ void Symbol::Load(const gum::SpriteLoader& spr_loader)
 	ee::SymbolLoader sym_loader;
 	gum::AnimSymLoader loader(this, &sym_loader, &spr_loader);
 	loader.LoadJson(m_filepath);
+
+	LoadEE();
 }
 
 void Symbol::LoadResources()
@@ -74,6 +76,22 @@ void Symbol::LoadResources()
 	ee::SpriteLoader spr_loader;
 	gum::AnimSymLoader loader(this, &sym_loader, &spr_loader);
 	loader.LoadJson(m_filepath);
+
+	LoadEE();
+}
+
+void Symbol::LoadEE()
+{
+	Json::Value value;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(m_filepath.c_str());
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, value);
+	fin.close();
+
+	name = value["name"].asString();
+	tag = value["tag"].asString();
 }
 
 }

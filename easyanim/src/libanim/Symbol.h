@@ -34,6 +34,9 @@ public:
 protected:
 	virtual void LoadResources();
 
+private:
+	void LoadEE();
+
 }; // Symbol
 
 }
