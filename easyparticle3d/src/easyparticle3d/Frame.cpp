@@ -5,6 +5,7 @@
 #include <ee/Exception.h>
 #include <ee/ExceptionDlg.h>
 #include <ee/FileHelper.h>
+#include <ee/SymbolType.h>
 
 #include <easyparticle3d.h>
 

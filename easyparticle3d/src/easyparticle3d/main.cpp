@@ -38,8 +38,8 @@ static void InitSymbolCreators()
 	ee::SymbolFactory::RegisterCreator(s2::SYM_TRAIL, &etrail::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_TRAIL, &etrail::Sprite::Create);
 
-	ee::SymbolFactory::RegisterCreator(ee::SymbolFile::Instance()->Tag(s2::SYM_MASK), &emask::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(ee::SymbolFile::Instance()->Tag(s2::SYM_MASK), &emask::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(s2::SYM_MASK, &emask::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_MASK, &emask::Sprite::Create);
 }
 
 bool MyApp::OnInit()
