@@ -4,6 +4,8 @@
 #include "ICommand.h"
 #include "FixJsonBase.h"
 
+#include <SM_Vector.h>
+
 #include <wx/wx.h>
 #include <json/json.h>
 
@@ -24,6 +26,8 @@ public:
 	virtual int Run(int argc, char *argv[]);
 
 	static ICommand* Create() { return new FixMirror(); }
+
+	static bool Fix(const Json::Value& sprite_val, sm::vec2& fixed);
 
 protected:
 	virtual bool FixSprite(const std::string& filepath, Json::Value& sprite_val) const;

@@ -41,52 +41,58 @@ int FixMirror::Run(int argc, char *argv[])
 	return 0;
 }
 
-bool FixMirror::FixSprite(const std::string& filepath, Json::Value& val) const
+bool FixMirror::Fix(const Json::Value& val, sm::vec2& fixed)
 {
 	bool dirty = false;
 
-	sm::vec2 fix_s;
 	if (val.isMember("scale")) {
-		fix_s.x = val["scale"].asDouble();
+		fixed.x = val["scale"].asDouble();
 	} else if (val.isMember("x scale")) {
-		fix_s.x = val["x scale"].asDouble();
+		fixed.x = val["x scale"].asDouble();
 	} else {
-		fix_s.x = 1;
+		fixed.x = 1;
 	}
 	if (val.isMember("scale")) {
-		fix_s.y = val["scale"].asDouble();
+		fixed.y = val["scale"].asDouble();
 	} else if (val.isMember("y scale")) {
-		fix_s.y = val["y scale"].asDouble();
+		fixed.y = val["y scale"].asDouble();
 	} else {
-		fix_s.y = 1;
+		fixed.y = 1;
 	}
-	
+
 	if (val.isMember("x mirror")) 
 	{
 		bool mirror = val["x mirror"].asBool();
-		if (mirror && fix_s.x >= 0 ||
-			!mirror && fix_s.x < 0) {
-			dirty = true;
-			fix_s.x = -fix_s.x;
+		if (mirror && fixed.x >= 0 ||
+			!mirror && fixed.x < 0) {
+				dirty = true;
+				fixed.x = -fixed.x;
 		}
 	}
 
 	if (val.isMember("y mirror")) 
 	{
 		bool mirror = val["y mirror"].asBool();
-		if (mirror && fix_s.y >= 0 ||
-			!mirror && fix_s.y < 0) {
-			dirty = true;
-			fix_s.y = -fix_s.y;
+		if (mirror && fixed.y >= 0 ||
+			!mirror && fixed.y < 0) {
+				dirty = true;
+				fixed.y = -fixed.y;
 		}
 	}
 
-	if (dirty) {
-		val["x scale"] = fix_s.x;
-		val["y scale"] = fix_s.y;
-	}
-
 	return dirty;
+}
+
+bool FixMirror::FixSprite(const std::string& filepath, Json::Value& val) const
+{
+	sm::vec2 fixed;
+	if (Fix(val, fixed)) {
+ 		val["x scale"] = fixed.x;
+ 		val["y scale"] = fixed.y;
+		return true;
+	} else {
+		return false;
+	}
 }
 
 void FixMirror::Trigger(const std::string& dir) const

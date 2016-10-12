@@ -68,6 +68,7 @@
 #include "CreateColLUT.h"
 #include "FixLRP3dLayer.h"
 #include "FixLRSprName.h"
+#include "FixLRMirror.h"
 
 namespace edb
 {
@@ -141,6 +142,7 @@ void CommandLoader::Init()
 	fc->Register(CreateColLUT::Create());
 	fc->Register(FixLRP3dLayer::Create());
 	fc->Register(FixLRSprName::Create());
+	fc->Register(FixLRMirror::Create());
 }
 
 }
