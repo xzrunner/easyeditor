@@ -1,7 +1,12 @@
 #include "DrawShapesVisitor.h"
 #include "Shape.h"
+#include "CameraMgr.h"
+#include "Camera.h"
+#include "SettingData.h"
+#include "Config.h"
 
 #include <SM_Test.h>
+#include <gum/GUM_GTxt.h>
 
 namespace ee
 {
@@ -15,13 +20,25 @@ void DrawShapesVisitor::Visit(Shape* shape, bool& next)
 {
 	next = true;
 
-	if (!shape) {
+	if (!shape || !m_screen_region.IsValid()) {
 		return;
 	}
 
-	if (!m_screen_region.IsValid() || 
-		sm::is_rect_intersect_rect(shape->GetBounding(), m_screen_region)) {
-		shape->Draw(sm::mat4(), m_ct);
+	const sm::rect& r = shape->GetBounding();
+	if (!sm::is_rect_intersect_rect(r, m_screen_region)) {
+		return;
+	}
+
+	shape->Draw(sm::mat4(), m_ct);
+
+	ee::SettingData& cfg = ee::Config::Instance()->GetSettings();
+	if (cfg.visible_node_name) {
+		sm::vec2 center = r.Center();
+		sm::mat4 mt;
+		float s = std::max(1.0f, ee::CameraMgr::Instance()->GetCamera()->GetScale()) * cfg.node_name_scale;
+		mt.x[0] = mt.x[5] = s;
+		mt.Translate(center.x, center.y, 0);
+		gum::GTxt::Instance()->Draw(mt, shape->GetName());
 	}
 }
 

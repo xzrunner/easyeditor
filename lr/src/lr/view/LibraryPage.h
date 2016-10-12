@@ -47,6 +47,7 @@ protected:
 private:
 	void OnChangeVisible(wxCommandEvent& event);
 	void OnChangeEditable(wxCommandEvent& event);
+	void OnChangeNameVisible(wxCommandEvent& event);
 
 	void OnResetSpritesVisibleEditable(wxCommandEvent& event);
 
@@ -59,6 +60,7 @@ private:
 
 	Layer* m_layer;
 
+	wxCheckBox* m_name_ctrl;
 	wxCheckBox* m_visible_ctrl;
 	wxCheckBox* m_editable_ctrl;
 

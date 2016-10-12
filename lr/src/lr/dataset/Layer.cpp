@@ -32,6 +32,7 @@ Layer::Layer(int id, LibraryPanel* library, s2::CameraMode cam)
 	, m_cam_mode(cam)
 	, m_editable(true)
 	, m_visible(true)
+	, m_name_visible(true)
 	, m_next_id(0)
 {
 }
@@ -154,6 +155,9 @@ void Layer::LoadFromFile(const Json::Value& val, const std::string& dir, int lay
 	m_name = val["name"].asString();
 	m_editable = val["editable"].asBool();
 	m_visible = val["visible"].asBool();
+	if (val.isMember("name_visible")) {
+		m_name_visible = val["name_visible"].asBool();
+	}
 
 	if (!val["base filepath"].isNull()) {
 		m_base_filepath = val["base filepath"].asString();
@@ -173,6 +177,7 @@ void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
 	val["name"] = m_name;
 	val["visible"] = m_visible;
 	val["editable"] = m_editable;
+	val["name_visible"] = m_name_visible;
 	if (!m_base_filepath.empty()) {
 		val["base filepath"] = m_base_filepath;
 	}

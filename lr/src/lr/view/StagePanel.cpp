@@ -146,7 +146,15 @@ void StagePanel::TraverseSprites(ee::Visitor<ee::Sprite>& visitor, ee::DataTrave
 			if (type == ee::DT_EDITABLE && layer->IsEditable() ||
 				type == ee::DT_VISIBLE && layer->IsVisible())
 			{
+				ee::SettingData& cfg = ee::Config::Instance()->GetSettings();
+				bool old_name_visible = cfg.visible_node_name;
+				if (!old_name_visible) {
+					cfg.visible_node_name = layer->IsNameVisible();
+				}
+
 				layer->TraverseSprite(visitor, type, order);
+
+				cfg.visible_node_name = old_name_visible;
 			}
 		}
 	}
@@ -170,7 +178,15 @@ void StagePanel::TraverseShapes(ee::Visitor<ee::Shape>& visitor, ee::DataTravers
 			if (type == ee::DT_EDITABLE && layer->IsEditable() ||
 				type == ee::DT_VISIBLE && layer->IsVisible())
 			{
+				ee::SettingData& cfg = ee::Config::Instance()->GetSettings();
+				bool old_name_visible = cfg.visible_node_name;
+				if (!old_name_visible) {
+					cfg.visible_node_name = layer->IsNameVisible();
+				}
+
 				layer->TraverseShape(visitor);
+
+				cfg.visible_node_name = old_name_visible;
 			}
 		}
 	}

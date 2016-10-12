@@ -47,7 +47,9 @@ public:
 
 	bool IsEditable() const;
 	bool IsVisible() const { return m_visible; }
+	bool IsNameVisible() const { return m_name_visible; }
 
+	void SetNameVisible(bool visible) { m_name_visible = visible; }
 	void SetEditable(bool editable) { m_editable = editable; }
 	void SetVisible(bool visible) { m_visible = visible; }
 
@@ -110,6 +112,7 @@ private:
 	std::string m_name;
 
 	bool m_editable, m_visible;
+	bool m_name_visible;
 
 	ee::ObjectVector<ee::Sprite> m_sprs;
 	ee::ObjectVector<ee::Shape> m_shapes;

@@ -44,6 +44,7 @@ void LibraryPage::UpdateStatusFromLayer()
 {
 	m_visible_ctrl->SetValue(m_layer->IsVisible());	
 	m_editable_ctrl->SetValue(m_layer->IsEditable());
+	m_name_ctrl->SetValue(m_layer->IsNameVisible());	
 }
 
 void LibraryPage::SetLayer(Layer* layer)
@@ -94,6 +95,13 @@ void LibraryPage::InitLayoutExtend(wxSizer* sizer)
 		sizer->Add(m_editable_ctrl, 0, wxALIGN_LEFT);
 	}
 	{
+		m_name_ctrl = new wxCheckBox(this, wxID_ANY, wxT("Ãû×Ö"));
+		m_name_ctrl->SetValue(m_layer->IsNameVisible());
+		Connect(m_name_ctrl->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
+			wxCommandEventHandler(LibraryPage::OnChangeNameVisible));
+		sizer->Add(m_name_ctrl, 0, wxALIGN_LEFT);
+	}
+	{
 		m_reset = new wxButton(this, wxID_ANY, "ÖØÖÃ", wxDefaultPosition, wxSize(40, 20));
 		Connect(m_reset->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, 
 			wxCommandEventHandler(LibraryPage::OnResetSpritesVisibleEditable));
@@ -130,6 +138,12 @@ void LibraryPage::OnChangeVisible(wxCommandEvent& event)
 void LibraryPage::OnChangeEditable(wxCommandEvent& event)
 {
 	m_layer->SetEditable(event.IsChecked());
+}
+
+void LibraryPage::OnChangeNameVisible(wxCommandEvent& event)
+{
+	m_layer->SetNameVisible(event.IsChecked());
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void LibraryPage::OnResetSpritesVisibleEditable(wxCommandEvent& event)
