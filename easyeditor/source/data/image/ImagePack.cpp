@@ -1,6 +1,7 @@
 #include "ImagePack.h"
 #include "Image.h"
 #include "LibpngAdapter.h"
+#include "Exception.h"
 
 #include <assert.h>
 
@@ -29,7 +30,10 @@ void ImagePack::AddImage(const uint8_t* src_buf, int src_w, int src_h, int dst_x
 {
 	assert(dst_x >= 0 && dst_y >= 0);
 	if (type == PT_NORMAL) {
-		assert(dst_x + src_w <= m_width && dst_y + src_h <= m_height);
+		if (dst_x + src_w > m_width || dst_y + src_h > m_height) {
+			throw Exception("err img.");
+		}
+//		assert(dst_x + src_w <= m_width && dst_y + src_h <= m_height);
 		for (int iy = 0; iy < src_h; ++iy) {
 			for (int ix = 0; ix < src_w; ++ix) {
 				CopyPixel(src_buf, src_w, src_h, bpp4, ix, iy, dst_x + ix, dst_y + iy);
@@ -84,7 +88,10 @@ void ImagePack::AddImage(const uint8_t* src_buf, int src_w, int src_h, int dst_x
 			}
 		}
 	} else {
-		assert(dst_x + src_h <= m_width && dst_y + src_w <= m_height);
+		if (dst_x + src_h > m_width && dst_y + src_w > m_height) {
+			throw Exception("err img.");
+		}
+//		assert(dst_x + src_h <= m_width && dst_y + src_w <= m_height);
 		if (type == PT_CLOCKWISE) {
 			for (int iy = 0; iy < src_h; ++iy) {
 				for (int ix = 0; ix < src_w; ++ix) {
@@ -206,7 +213,12 @@ void ImagePack::AddImage(const Image* img, int x, int y, int w, int h, bool rota
 	if (rotate) {
 		type = clockwise ? PT_CLOCKWISE : PT_ANTICLOCKWISE;
 	}
-	AddImage(img->GetPixelData(), sw, sh, x, y, type, bpp4, extrude_left, extrude_bottom, extrude_right, extrude_up);
+
+	try {
+		AddImage(img->GetPixelData(), sw, sh, x, y, type, bpp4, extrude_left, extrude_bottom, extrude_right, extrude_up);
+	} catch (Exception& e) {
+		throw Exception("ImagePack::AddImage: " + img->GetFilepath());
+	}
 }
 
 void ImagePack::OutputToFile(const std::string& filepath) const
