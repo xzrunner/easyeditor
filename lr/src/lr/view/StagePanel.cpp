@@ -148,8 +148,8 @@ void StagePanel::TraverseSprites(ee::Visitor<ee::Sprite>& visitor, ee::DataTrave
 			{
 				ee::SettingData& cfg = ee::Config::Instance()->GetSettings();
 				bool old_name_visible = cfg.visible_node_name;
-				if (!old_name_visible) {
-					cfg.visible_node_name = layer->IsNameVisible();
+				if (layer->IsNameVisible() != -1) {
+					cfg.visible_node_name = layer->IsNameVisible() == 1;
 				}
 
 				layer->TraverseSprite(visitor, type, order);
@@ -180,8 +180,8 @@ void StagePanel::TraverseShapes(ee::Visitor<ee::Shape>& visitor, ee::DataTravers
 			{
 				ee::SettingData& cfg = ee::Config::Instance()->GetSettings();
 				bool old_name_visible = cfg.visible_node_name;
-				if (!old_name_visible) {
-					cfg.visible_node_name = layer->IsNameVisible();
+				if (layer->IsNameVisible() != -1) {
+					cfg.visible_node_name = layer->IsNameVisible() == 1;
 				}
 
 				layer->TraverseShape(visitor);

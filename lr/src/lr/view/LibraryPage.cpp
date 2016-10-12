@@ -44,7 +44,19 @@ void LibraryPage::UpdateStatusFromLayer()
 {
 	m_visible_ctrl->SetValue(m_layer->IsVisible());	
 	m_editable_ctrl->SetValue(m_layer->IsEditable());
-	m_name_ctrl->SetValue(m_layer->IsNameVisible());	
+
+	switch (m_layer->IsNameVisible()) 
+	{
+	case 0:
+		m_name_ctrl->Set3StateValue(wxCHK_UNCHECKED);
+		break;
+	case 1:
+		m_name_ctrl->Set3StateValue(wxCHK_CHECKED);
+		break;
+	case -1:
+		m_name_ctrl->Set3StateValue(wxCHK_UNDETERMINED);
+		break;
+	}
 }
 
 void LibraryPage::SetLayer(Layer* layer)
@@ -95,8 +107,8 @@ void LibraryPage::InitLayoutExtend(wxSizer* sizer)
 		sizer->Add(m_editable_ctrl, 0, wxALIGN_LEFT);
 	}
 	{
-		m_name_ctrl = new wxCheckBox(this, wxID_ANY, wxT("Ãû×Ö"));
-		m_name_ctrl->SetValue(m_layer->IsNameVisible());
+		m_name_ctrl = new wxCheckBox(this, wxID_ANY, wxT("Ãû×Ö"), wxDefaultPosition, wxDefaultSize, wxCHK_3STATE);
+		m_name_ctrl->Set3StateValue(wxCHK_UNDETERMINED);
 		Connect(m_name_ctrl->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
 			wxCommandEventHandler(LibraryPage::OnChangeNameVisible));
 		sizer->Add(m_name_ctrl, 0, wxALIGN_LEFT);
