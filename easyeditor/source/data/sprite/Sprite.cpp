@@ -88,11 +88,11 @@ void Sprite::SetPosition(const sm::vec2& pos)
 	PartialUpdate pu;
 	pu.Begin();
 
-	s2::Sprite::SetPosition(pos);
-
 	if (m_observer) {
 		m_observer->OnSetPosition(this, pos);
 	}
+
+	s2::Sprite::SetPosition(pos);
 
 	pu.End();
 }
@@ -102,11 +102,11 @@ void Sprite::SetAngle(float angle)
 	PartialUpdate pu;
 	pu.Begin();
 
-	s2::Sprite::SetAngle(angle);
-
 	if (m_observer) {
 		m_observer->OnSetAngle(this, angle);
 	}
+
+	s2::Sprite::SetAngle(angle);
 
 	pu.End();
 }
@@ -116,11 +116,11 @@ void Sprite::SetScale(const sm::vec2& scale)
 	PartialUpdate pu;
 	pu.Begin();
 
-	s2::Sprite::SetScale(scale);
-
 	if (m_observer) {
 		m_observer->OnSetScale(this, scale);
 	}
+
+	s2::Sprite::SetScale(scale);
 
 	pu.End();
 }
@@ -130,11 +130,11 @@ void Sprite::SetShear(const sm::vec2& shear)
 	PartialUpdate pu;
 	pu.Begin();
 
-	s2::Sprite::SetShear(shear);
-
 	if (m_observer) {
 		m_observer->OnSetShear(this, shear);
 	}
+
+	s2::Sprite::SetShear(shear);
 
 	pu.End();
 }
@@ -144,11 +144,11 @@ void Sprite::SetOffset(const sm::vec2& offset)
 	PartialUpdate pu;
 	pu.Begin();
 
-	s2::Sprite::SetOffset(offset);
-
 	if (m_observer) {
 		m_observer->OnSetOffset(this, offset);
 	}
+
+	s2::Sprite::SetOffset(offset);
 
 	pu.End();
 }
