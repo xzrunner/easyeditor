@@ -20,6 +20,7 @@ public:
 	struct ScreenStyle
 	{
 		s2::Color multi_col, add_col;
+		ScreenStyle() : multi_col(0xffffffff), add_col(0) {}
 	};
 
 protected:

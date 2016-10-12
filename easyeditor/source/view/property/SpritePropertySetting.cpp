@@ -105,6 +105,17 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 
 		spr->Color().mul = col;
 	}
+	else if (name == "Color.Overlay")
+	{
+		int overlay = wxANY_AS(value, int);
+		overlay = std::max(0, std::min(255, overlay));
+
+		s2::Color add = spr->Color().add;
+		add.a = overlay;
+		EditAddRecordSJ::Instance()->Add(new SetSpriteAddColorAOP(spr, add));
+
+		spr->Color().add = add;
+	}
 // 	else if (name == "Color.R")
 // 	{
 // 		wxColour col = wxANY_AS(value, wxColour);
@@ -251,6 +262,7 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 		pg->SetPropertyValueString(wxT("Color.Add"), add_col.GetAsString());
 	}
 	pg->GetProperty(wxT("Color.Alpha"))->SetValue(spr->Color().mul.a);
+	pg->GetProperty(wxT("Color.Overlay"))->SetValue(spr->Color().add.a);
 
 // 	wxColour r_trans = wxColour(spr->rp->r_trans.r, spr->rp->r_trans.g, spr->rp->r_trans.b, spr->rp->r_trans.a);
 // 	wxColour g_trans = wxColour(spr->rp->g_trans.r, spr->rp->g_trans.g, spr->rp->g_trans.b, spr->rp->g_trans.a);
@@ -361,6 +373,10 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->AppendIn(col_prop, new wxIntProperty(wxT("Alpha"), wxPG_LABEL, spr->Color().mul.a));
 	pg->SetPropertyAttribute(wxT("Color.Alpha"), "Min", 0);
 	pg->SetPropertyAttribute(wxT("Color.Alpha"), "Max", 255);
+
+	pg->AppendIn(col_prop, new wxIntProperty(wxT("Overlay"), wxPG_LABEL, spr->Color().add.a));
+	pg->SetPropertyAttribute(wxT("Color.Overlay"), "Min", 0);
+	pg->SetPropertyAttribute(wxT("Color.Overlay"), "Max", 255);
 
 	wxPGProperty* col_conv_prop = pg->Append(new wxStringProperty(wxT("Color Conversion"), wxPG_LABEL, wxT("<composed>")));
 	col_conv_prop->SetExpanded(false);

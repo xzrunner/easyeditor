@@ -18,8 +18,6 @@ TwoPassCanvas::TwoPassCanvas(wxWindow* stage_wnd, EditPanelImpl* stage,
 							 wxGLContext* glctx, bool use_context_stack)
 	: StageCanvas(stage_wnd, stage, glctx, use_context_stack)
 {
-	m_scr_style.multi_col = WHITE;
-	m_scr_style.add_col = BLACK;
 }
 
 void TwoPassCanvas::OnSize(int w, int h)
