@@ -43,9 +43,21 @@ int FixLRSprName::Run(int argc, char *argv[])
 
 bool FixLRSprName::FixSprite(Json::Value& val) const
 {
+	bool ret = false;
+
 	std::string filepath = val["filepath"].asString();
 
-	bool ret = false;
+	if (filepath == "group") 
+	{
+		Json::Value& group_val = val["group"];
+		for (int i = 0, n = group_val.size(); i < n; ++i) {
+			if (FixSprite(group_val[i])) {
+				ret = true;
+			}
+		}
+		return ret;
+	}
+
 	for (int i = 0, n = m_map2name.size(); i < n; ++i) {
 		if (filepath.find(m_map2name[i].first) != std::string::npos) {
 			val["name"] = m_map2name[i].second;

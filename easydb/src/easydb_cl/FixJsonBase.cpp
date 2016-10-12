@@ -121,8 +121,18 @@ void FixJsonBase::FixLR(const std::string& path) const
 	for (int i = 0, n = layer_val.size(); i < n; ++i) {
 		Json::Value& spr_val = layer_val[i]["sprite"];
 		for (int j = 0, m = spr_val.size(); j < m; ++j) {
-			if (FixSprite(path, spr_val[j])) {
-				dirty = true;
+			std::string filepath = spr_val[j]["filepath"].asString();
+			if (filepath == "group") {
+				Json::Value& group_val = spr_val[j]["group"];
+				for (int i = 0, n = group_val.size(); i < n; ++i) {
+					if (FixSprite(path, group_val[i])) {
+						dirty = true;
+					}
+				}
+			} else {
+				if (FixSprite(path, spr_val[j])) {
+					dirty = true;
+				}
 			}
 		}
 	}
