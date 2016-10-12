@@ -630,6 +630,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\easydb_cl\FixAddColor.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb_cl\FixAddColor.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\easydb_cl\FixJsonBase.cpp"
 					>
 				</File>

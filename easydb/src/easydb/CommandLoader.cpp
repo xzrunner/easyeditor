@@ -69,6 +69,7 @@
 #include "FixLRP3dLayer.h"
 #include "FixLRSprName.h"
 #include "FixLRMirror.h"
+#include "FixAddColor.h"
 
 namespace edb
 {
@@ -143,6 +144,7 @@ void CommandLoader::Init()
 	fc->Register(FixLRP3dLayer::Create());
 	fc->Register(FixLRSprName::Create());
 	fc->Register(FixLRMirror::Create());
+	fc->Register(FixAddColor::Create());
 }
 
 }
