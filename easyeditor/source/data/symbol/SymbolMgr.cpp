@@ -52,10 +52,10 @@ Symbol* SymbolMgr::FetchSymbol(const std::string& filepath, int type)
 		}
 		else
 		{
-			delete sym;
-// 			const char* path = filepath.c_str();
-// 			throw Exception("Load symbol %s fail!", path);
-			return NULL;
+//			delete sym;
+ 			const char* path = filepath.c_str();
+ 			throw Exception("Load symbol %s fail!", path);
+//			return NULL;
 		}
 	}
 	else
