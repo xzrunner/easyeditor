@@ -4,6 +4,7 @@
 
 #include <ee/SymbolFactory.h>
 #include <ee/SpriteFactory.h>
+#include <ee/SymbolFile.h>
 
 #include <easymesh.h>
 #include <easycomplex.h>

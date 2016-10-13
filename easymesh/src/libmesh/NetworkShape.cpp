@@ -59,6 +59,11 @@ void NetworkShape::StoreToFile(Json::Value& value, const std::string& dir) const
 
 bool NetworkShape::InsertInner(const sm::vec2& pos)
 {
+	for (int i = 0, n = m_vertices.size(); i < n; ++i) {
+		if (m_vertices[i] == pos) {
+			return false;
+		}
+	}
 	if (IsIntersect(sm::rect(pos, NODE_RADIUS, NODE_RADIUS)) || !IsContain(pos)) {
 		return false;
 	}
