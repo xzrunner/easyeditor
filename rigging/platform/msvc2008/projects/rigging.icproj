@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="gb2312"?>
+<VisualStudioProject
+	ProjectType="Intel C++ Project"
+	Version="11.1"
+	Name="1.rigging"
+	ProjectGUID="{5475558E-1FF4-4D58-8500-B3666768CEDA}"
+	VCNestedProjectGUID="{D38903FD-20A2-4BB3-8F2F-BE31CE315CAD}"
+	VCNestedProjectFileName="rigging.vcproj">
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32">
+			<Tool
+				Name="CppCmplrTool"
+				C99Support="true"/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32">
+			<Tool
+				Name="CppCmplrTool"
+				C99Support="true"/>
+		</Configuration>
+	</Configurations>
+	<Files/>
+</VisualStudioProject>
