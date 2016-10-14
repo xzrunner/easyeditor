@@ -14,8 +14,11 @@
 #include <ee/Snapshoot.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/StageCanvas.h>
+#include <ee/StringHelper.h>
 
 #include <easyshape.h>
+
+#include <sprite2/BoundingBox.h>
 
 namespace lr
 {
@@ -23,6 +26,7 @@ namespace lr
 BEGIN_EVENT_TABLE(Frame, ee::Frame)
 	EVT_MENU(ID_PREVIEW, Frame::OnPreview)
 	EVT_MENU(ID_SETING_EXTEND, Frame::OnExtendSetting)
+	EVT_MENU(ID_STATISTICS, Frame::OnStatistics)
 	EVT_MENU_RANGE(ID_TOOLBAR+1, ID_TOOLBAR+9, Frame::OnToolBarClick)
 END_EVENT_TABLE()
 
@@ -31,6 +35,7 @@ Frame::Frame(const std::string& title, const std::string& filetag)
 {
 	m_view_menu->Append(ID_PREVIEW, wxT("&Preview\tCtrl+Enter"), wxT("Play"));
 	m_setting_menu->Append(ID_SETING_EXTEND, wxT("Extend"), wxT("Extend"));
+	m_code_menu->Append(ID_STATISTICS, "Statistics", "Statistics");
 
 	m_toolbar = new ToolBar(this, ID_TOOLBAR);
 }
@@ -87,10 +92,29 @@ void Frame::OnExtendSetting(wxCommandEvent& event)
 	dlg.ShowModal();
 }
 
+void Frame::OnStatistics(wxCommandEvent& event)
+{
+	std::vector<ee::Sprite*> sprs;
+	StagePanel* stage = (StagePanel*)(m_task->GetEditPanel());
+	stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs), ee::DT_ALL);
+	int count = sprs.size();
+	int area = 0;
+	for (int i = 0; i < count; ++i) {
+		const ee::Sprite* spr = sprs[i];
+		sm::rect r = spr->GetBounding()->GetSize();
+		area += (r.xmax - r.xmin) * (r.ymax - r.ymin);
+	}
+
+	SettingCfg* cfg = SettingCfg::Instance();
+ 	float coverage = static_cast<float>(area) / (cfg->m_map_width * cfg->m_map_height);
+	std::string msg = ee::StringHelper::Format("count %d, area %d, coverage %f", count, area, coverage);
+	wxMessageBox(msg);
+}
+
 void Frame::SaveAsPNG(const std::string& filepath) const
 {
 	SettingCfg* cfg = SettingCfg::Instance();
-	ee::Snapshoot ss(cfg->m_map_width, cfg->m_map_height);
+	ee::Snapshoot ss(cfg->m_view_width, cfg->m_view_height);
 	StagePanel* stage = (StagePanel*)(m_task->GetEditPanel());
 
 	std::vector<ee::Sprite*> sprs;

@@ -24,6 +24,7 @@ protected:
 private:
 	void OnPreview(wxCommandEvent& event);
 	void OnExtendSetting(wxCommandEvent& event);
+	void OnStatistics(wxCommandEvent& event);
 
 	void SaveAsPNG(const std::string& filepath) const;
 	void SaveAsJson(const std::string& filepath) const;
@@ -33,6 +34,7 @@ private:
 	{
 		ID_PREVIEW = 1100,
 		ID_SETING_EXTEND,
+		ID_STATISTICS,
 
 		ID_TOOLBAR = 1200,
 	};
