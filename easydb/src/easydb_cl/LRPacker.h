@@ -25,7 +25,7 @@ public:
 
 private:
 	void PackEP(const std::string& tmp_dir, const std::string& tmp_lr_file,
-		const std::string& out_dir, int LOD, const std::string& fmt);
+		const std::string& out_dir, int LOD, const std::string& fmt, int max_tex_area);
 
 	void ClearCached();
 

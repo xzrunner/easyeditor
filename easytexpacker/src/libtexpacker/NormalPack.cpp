@@ -217,6 +217,15 @@ void NormalPack::OutputImage(const std::string& filepath) const
 	}
 }
 
+int NormalPack::DstTexArea() const
+{
+	int area = 0;
+	for (int i = 0, n = m_dst_img_idx.size(); i < n; ++i) {
+		area += m_dst_img_sz[i].width * m_dst_img_sz[i].height;
+	}
+	return area;
+}
+
 void NormalPack::Pack(PACK_STRATEGY strategy, int static_size, int max_size, int min_size)
 {
 	for (int i = 0, n = m_filepaths.size(); i < n; ++i) {

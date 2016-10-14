@@ -27,6 +27,7 @@ public:
 	void OutputImage(const std::string& filepath) const;
 
 	int DstTexCount() const { return m_dst_img_idx.size(); }
+	int DstTexArea() const;
 
 private:
 	void Pack(PACK_STRATEGY strategy, int static_size, int max_size = 4096, int min_size = 0);

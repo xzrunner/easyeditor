@@ -37,7 +37,7 @@ std::string LRPacker::Description() const
 std::string LRPacker::Usage() const
 {
 	// lr-packer e:/test2/test_lr.json tmp_dir out_dir only_json lod
-	std::string usage = Command() + " [filepath] [tmp dir] [out dir] [only json] [LOD]";
+	std::string usage = Command() + " [filepath] [tmp dir] [out dir] [only json] [LOD] [fmt] [max tex area]";
 	return usage;
 }
 
@@ -94,7 +94,12 @@ int LRPacker::Run(int argc, char *argv[])
 			fmt = argv[7];
 		}
 
-		PackEP(tmp_dir, tmp_lr_file, out_dir, LOD, fmt);
+		int max_tex_area = 2048 * 2048 * 2;
+		if (argc > 8) {
+			max_tex_area = 2048 * 2048 * ee::StringHelper::FromString<int>(argv[8]);
+		}
+
+		PackEP(tmp_dir, tmp_lr_file, out_dir, LOD, fmt, max_tex_area);
 	}
 
 	// end
@@ -106,13 +111,13 @@ int LRPacker::Run(int argc, char *argv[])
 
 void LRPacker::PackEP(const std::string& tmp_dir, const std::string& tmp_lr_file,
 					  const std::string& out_dir, int LOD,
-					  const std::string& fmt)
+					  const std::string& fmt, int max_tex_area)
 {
 	Json::Value val;
 
-	// 		std::string trim_file = argv[6];
-	// 		trim_file = ee::FileHelper::GetRelativePath(tmp_dir, trim_file);
-	// 		val["trim file"] = trim_file;
+// 		std::string trim_file = argv[6];
+// 		trim_file = ee::FileHelper::GetRelativePath(tmp_dir, trim_file);
+// 		val["trim file"] = trim_file;
 
 	Json::Value pkg_val;
 
@@ -138,6 +143,10 @@ void LRPacker::PackEP(const std::string& tmp_dir, const std::string& tmp_lr_file
 
 	std::string _out_dir = ee::FileHelper::GetRelativePath(tmp_dir, out_dir);
 	pkg_val["LOD"] = LOD;
+
+	if (max_tex_area != 0) {
+		pkg_val["tex_capacity"] = max_tex_area;
+	}
 
 	idx = 0;
 	if (fmt == "png")

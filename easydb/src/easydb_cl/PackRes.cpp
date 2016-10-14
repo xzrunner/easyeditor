@@ -11,6 +11,7 @@
 #include <ee/SymbolMgr.h>
 #include <ee/SymbolFile.h>
 #include <ee/SymbolType.h>
+#include <ee/Exception.h>
 
 #include <easytexpacker.h>
 #include <easyrespacker.h>
@@ -116,6 +117,15 @@ void PackRes::PackTexture(const Json::Value& pkg_val, const std::string& config_
 		tex_packer = new etexpacker::NormalPack(images, NULL);
 	}
 	tex_packer->Pack(0);
+
+	if (pkg_val.isMember("tex_capacity")) {
+		int max = pkg_val["tex_capacity"].asInt();
+		if (max < tex_packer->DstTexArea()) {
+			throw ee::Exception("PackRes::PackTexture area overflow, %f > %f", 
+				tex_packer->DstTexArea() / 1000000.0f, max / 1000000.0f);
+		}
+	}
+
 	std::string json_path = dst_name + ".json";
 	tex_packer->OutputInfo(config_dir, json_path, fmt);
 	std::string img_path = dst_name + ".png";
