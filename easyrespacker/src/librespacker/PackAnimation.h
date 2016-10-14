@@ -93,7 +93,7 @@ public:
 	virtual void UnpackFromBin(uint8_t** ptr, 
 		const std::vector<ee::Image*>& images);
 
-	void CreateFramePart(const ee::Sprite* spr, Frame& frame);
+	bool CreateFramePart(const ee::Sprite* spr, Frame& frame);
 	void CreateClipboxFramePart(const PackClipbox* cb, Frame& frame);
 
 	void Clear();
@@ -101,7 +101,7 @@ public:
 	static bool IsMatrixIdentity(const int* mat);
 
 private:
-	bool AddComponent(const IPackNode* node, const std::string& name, int& comp_idx);	
+	bool AddComponent(const IPackNode* node, const std::string& name, int& comp_idx, bool& force_mat);	
 
 	static void LoadSprTrans(const ee::Sprite* spr, SpriteTrans& trans, bool force_mat);
 	static void LoadSprMat(const ee::Sprite* spr, SpriteTrans& trans, bool force);

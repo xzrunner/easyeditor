@@ -65,7 +65,7 @@ void PackAnimation::UnpackFromBin(uint8_t** ptr, const std::vector<ee::Image*>& 
 	AnimFromBin::Unpack(ptr, this);
 }
 
-void PackAnimation::CreateFramePart(const ee::Sprite* spr, Frame& frame)
+bool PackAnimation::CreateFramePart(const ee::Sprite* spr, Frame& frame)
 {	
 	const IPackNode* node = PackNodeFactory::Instance()->Create(spr);
 
@@ -75,17 +75,21 @@ void PackAnimation::CreateFramePart(const ee::Sprite* spr, Frame& frame)
 		name = spr->GetName();
 	}
 
-	bool force_mat = AddComponent(node, name, part.comp_idx);
+	bool force_mat = false;
+	bool new_comp = AddComponent(node, name, part.comp_idx, force_mat);
 	PackAnimation::LoadSprTrans(spr, part.t, force_mat);
 
 	frame.parts.push_back(part);
+
+	return new_comp;
 }
 
 void PackAnimation::CreateClipboxFramePart(const PackClipbox* cb, Frame& frame)
 {
 	PackAnimation::Part part;
 
-	AddComponent(cb, "", part.comp_idx);
+	bool force_mat;
+	AddComponent(cb, "", part.comp_idx, force_mat);
 
 	part.t.mat[0] = part.t.mat[3] = 1024;
 	part.t.mat[1] = part.t.mat[2] = 0;
@@ -103,22 +107,25 @@ void PackAnimation::Clear()
 	frames.clear();
 }
 
-bool PackAnimation::AddComponent(const IPackNode* node, const std::string& name, int& comp_idx)
+bool PackAnimation::AddComponent(const IPackNode* node, const std::string& name, int& comp_idx, bool& force_mat)
 {
+	bool new_comp = false;
 	bool is_anchor = false;
 	if (const PackAnchor* anchor = dynamic_cast<const PackAnchor*>(node)) {
 		is_anchor = true;
 		for (int i = 0, n = components.size(); i < n; ++i) {
 			if (dynamic_cast<const PackAnchor*>(components[i].node) && components[i].name == name) {
 				comp_idx = i;
-				return true;
+				force_mat = true;
+				return new_comp;
 			}
 		}
 	} else {
 		for (int i = 0, n = components.size(); i < n; ++i) {
 			if (components[i].node == node && components[i].name == name) {
 				comp_idx = i;
-				return true;
+				force_mat = true;
+				return new_comp;
 			}
 		}
 
@@ -132,10 +139,12 @@ bool PackAnimation::AddComponent(const IPackNode* node, const std::string& name,
 				{
 				case s2::SYM_IMAGE:
 					comp_idx = i;
-					return false;
+					force_mat = false;
+					return new_comp;
 				case s2::SYM_COMPLEX: case s2::SYM_ANIMATION: case s2::SYM_TEXTBOX:
 					comp_idx = i;
-					return true;
+					force_mat = true;
+					return new_comp;
 				}
 			}
 		}
@@ -147,13 +156,17 @@ bool PackAnimation::AddComponent(const IPackNode* node, const std::string& name,
 	components.push_back(comp);
 	comp_idx = components.size() - 1;
 
+	new_comp = true;
+
 	if (is_anchor) {
-		return true;
+		force_mat = true;
 	} else if (ee::SymbolFile::Instance()->Type(node->GetFilepath()) == s2::SYM_IMAGE) {
-		return false;
+		force_mat = false;
 	} else {
-		return !name.empty();
+		force_mat = !name.empty();
 	}
+
+	return new_comp;
 }
 
 void PackAnimation::LoadSprTrans(const ee::Sprite* spr, SpriteTrans& trans, bool force_mat)

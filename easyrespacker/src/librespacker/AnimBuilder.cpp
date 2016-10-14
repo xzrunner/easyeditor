@@ -1,6 +1,7 @@
 #include "AnimBuilder.h"
 #include "PackAnimation.h"
 #include "PackNodeFactory.h"
+#include "PackTag.h"
 
 #include <ee/Visitor.h>
 
@@ -54,6 +55,7 @@ void AnimBuilder::Load(const eanim::Symbol* sym, PackAnimation* anim)
 {
 	m_export_set.LoadExport(sym, anim);
 
+	int idx = 0;
 	for (int i = 1, n = sym->GetMaxFrameIdx(); i <= n; ++i)
 	{
 		PackAnimation::Frame frame;
@@ -61,7 +63,11 @@ void AnimBuilder::Load(const eanim::Symbol* sym, PackAnimation* anim)
 		std::vector<s2::Sprite*> sprs;
 		sym->CreateFrameSprites(i, sprs);
 		for (int i = 0, n = sprs.size(); i < n; ++i) {
-			anim->CreateFramePart(dynamic_cast<ee::Sprite*>(sprs[i]), frame);
+			ee::Sprite* spr = dynamic_cast<ee::Sprite*>(sprs[i]);
+			bool new_comp = anim->CreateFramePart(spr, frame);
+			if (new_comp) {
+				PackTag::Instance()->AddTask(sym->GetFilepath(), idx++, spr);
+			}
 		}
 		for_each(sprs.begin(), sprs.end(), cu::RemoveRefFunctor<s2::Sprite>());
 
