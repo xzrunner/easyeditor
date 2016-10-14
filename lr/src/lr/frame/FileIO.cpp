@@ -75,7 +75,9 @@ void FileIO::Load(const char* filename, LibraryPanel* library,
 	}
 	if (!value["screen"]["add_col"].isNull()) {
 		std::string str = value["screen"]["add_col"].asString();
-		stage->GetScreenAddColor() = gum::str2color(str, gum::RGBA);
+		s2::Color col = gum::str2color(str, gum::RGBA);
+		col.a = 0;
+		stage->GetScreenAddColor() = col;
 	}
 
 	// layers

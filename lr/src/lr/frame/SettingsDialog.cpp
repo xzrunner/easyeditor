@@ -225,6 +225,7 @@ void SettingDialog::OnChangeScreenAddColor(wxCommandEvent& event)
 	ee::HSLColorSettingDlg dlg(this, NULL, col);
 	if (dlg.ShowModal() == wxID_OK) {
 		col = dlg.GetColor();
+		col.a = 0;
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
