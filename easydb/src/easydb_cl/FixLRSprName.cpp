@@ -34,7 +34,7 @@ int FixLRSprName::Run(int argc, char *argv[])
 	if (!check_number(this, argc, 3)) return -1;
 	if (!check_folder(argv[2])) return -1;
 
-	InitMapName();
+	InitMap();
 
 	Trigger(argv[2]);
 
@@ -58,6 +58,20 @@ bool FixLRSprName::FixSprite(Json::Value& val) const
 		return ret;
 	}
 
+	for (int i = 0, n = m_map2path.size(); i < n; ++i) 
+	{
+		int pos = filepath.find(m_map2path[i].first);
+		if (pos == std::string::npos) {
+			continue;
+		}
+		const std::string& src = m_map2path[i].first;
+		const std::string& dst = m_map2path[i].second;
+		filepath = filepath.substr(0, pos) + dst;
+		val["filepath"] = filepath;
+		ret = true;
+		break;
+	}
+
 	for (int i = 0, n = m_map2name.size(); i < n; ++i) {
 		if (filepath.find(m_map2name[i].first) != std::string::npos) {
 			val["name"] = m_map2name[i].second;
@@ -69,8 +83,27 @@ bool FixLRSprName::FixSprite(Json::Value& val) const
 	return ret;
 }
 
-void FixLRSprName::InitMapName()
+void FixLRSprName::InitMap()
 {
+	m_map2path.push_back(std::make_pair("\\res_png\\corpse_hang_01.png", "\\res_mix\\corpse_hang_01_complex.json"));
+	m_map2path.push_back(std::make_pair("\\res_png\\corpse_lay_01.png", "\\res_mix\\corpse_lay_01_complex.json"));
+	m_map2path.push_back(std::make_pair("\\res_png\\corpse_lay_02.png", "\\res_mix\\corpse_lay_02_complex.json"));
+	m_map2path.push_back(std::make_pair("\\res_png\\corpse_lay_03.png", "\\res_mix\\corpse_lay_03_complex.json"));
+	m_map2path.push_back(std::make_pair("\\res_png\\corpse_lay_04.png", "\\res_mix\\corpse_lay_04_complex.json"));
+	m_map2path.push_back(std::make_pair("\\res_png\\corpse_lay_05.png", "\\res_mix\\corpse_lay_05_complex.json"));
+	m_map2path.push_back(std::make_pair("\\res_png\\corpse_lay_06.png", "\\res_mix\\corpse_lay_06_complex.json"));
+	m_map2path.push_back(std::make_pair("\\res_png\\corpse_lay_07.png", "\\res_mix\\corpse_lay_07_complex.json"));
+	m_map2path.push_back(std::make_pair("\\res_png\\corpse_lay_08.png", "\\res_mix\\corpse_lay_08_complex.json"));
+	m_map2path.push_back(std::make_pair("\\res_png\\corpse_sit_01.png", "\\res_mix\\corpse_sit_01_complex.json"));
+	m_map2path.push_back(std::make_pair("\\res_png\\corpse_water_01.png", "\\res_mix\\corpse_water_01_complex.json"));
+	m_map2path.push_back(std::make_pair("\\res_png\\corpse_water_02.png", "\\res_mix\\corpse_water_02_complex.json"));
+	m_map2path.push_back(std::make_pair("\\res_png\\scene_blood_01.png", "\\res_mix\\scene_blood_01_complex.json"));
+	m_map2path.push_back(std::make_pair("\\res_png\\scene_blood_02.png", "\\res_mix\\scene_blood_02_complex.json"));
+	m_map2path.push_back(std::make_pair("\\res_png\\scene_blood_03.png", "\\res_mix\\scene_blood_03_complex.json"));
+	m_map2path.push_back(std::make_pair("\\res_png\\scene_blood_04.png", "\\res_mix\\scene_blood_04_complex.json"));
+	m_map2path.push_back(std::make_pair("\\res_png\\corpse_drown_01.png", "\\res_mix\\corpse_drown_01_anim.json"));
+	m_map2path.push_back(std::make_pair("\\res_png\\corpse_drown_02.png", "\\res_mix\\corpse_drown_02_anim.json"));
+
 	m_map2name.push_back(std::make_pair("corpse_hang_01_complex.json", "corpse_hang_01"));
 	m_map2name.push_back(std::make_pair("corpse_lay_01_complex.json", "corpse_lay_01"));
 	m_map2name.push_back(std::make_pair("corpse_lay_02_complex.json", "corpse_lay_02"));

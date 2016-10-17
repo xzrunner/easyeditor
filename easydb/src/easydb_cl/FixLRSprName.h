@@ -28,11 +28,13 @@ protected:
 	virtual bool FixSprite(Json::Value& val) const;
 
 private:
-	void InitMapName();
+	void InitMap();
 
 	void Trigger(const std::string& dir) const;
 
 private:
+	std::vector<std::pair<std::string, std::string> > m_map2path;
+
 	std::vector<std::pair<std::string, std::string> > m_map2name;
 
 }; // FixLRSprName 
