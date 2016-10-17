@@ -315,18 +315,24 @@ void Layer::LoadFromBaseFile(int layer_idx, const std::string& filepath, const s
 
 void Layer::CheckSpriteName(ee::Sprite* spr)
 {
+	const std::string& name = spr->GetName();
+	if (name.empty() || name[0] != '_') {
+		return;
+	}
+
 	std::set<std::string>::iterator itr 
-		= m_name_set.find(spr->GetName());
+		= m_name_set.find(name);
 	if (itr != m_name_set.end()) 
 	{
-		spr->SetName("_sprite" + ee::StringHelper::ToString(++m_next_id));
-		assert(m_name_set.find(spr->GetName()) == m_name_set.end());
+		std::string new_name = "_sprite" + ee::StringHelper::ToString(++m_next_id);
+		spr->SetName(new_name);
+		assert(m_name_set.find(new_name) == m_name_set.end());
 	}
 	else
 	{
-		int pos = spr->GetName().find("_sprite");
+		int pos = name.find("_sprite");
 		if (pos != std::string::npos) {
-			std::string str = spr->GetName().substr(pos + 7);
+			std::string str = name.substr(pos + 7);
 			int num = atoi(str.c_str());
 			if (m_next_id < num) {
 				m_next_id = num;
