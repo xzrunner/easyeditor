@@ -90,7 +90,6 @@ bool MyApp::OnInit()
 
 	if (wxGetApp().argc > 1) {
 		const_cast<ee::EditPanel*>(task->GetEditPanel())->GetCanvas()->SetCurrentCanvas();
-
 		std::string path(wxGetApp().argv[1]);
 		frame->InitWithFile(path);
 	}

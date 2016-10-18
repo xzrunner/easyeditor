@@ -38,6 +38,12 @@ UIStagePage* TopStagePanel::GetSelectedPage()
 	}
 }
 
+UIStagePage* TopStagePanel::SetPage(PageType type)
+{
+	m_notebook->SetSelection(type);
+	return m_pages[type];
+}
+
 void TopStagePanel::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
@@ -75,7 +81,7 @@ void TopStagePanel::InitTabPages(wxSizer* sizer)
 		page->EnableObserve(false);
 		page->GetStageImpl()->EnableObserve(false);
 	}
-	m_top_pannels->toolbar->EnableToolbar(0);
+	m_top_pannels->toolbar->EnableToolbar(PAGE_WND);
 	sizer->Add(m_notebook, 1, wxEXPAND);
 }
 

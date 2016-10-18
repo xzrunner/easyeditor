@@ -4,6 +4,7 @@
 #include <ee/LibraryList.h>
 #include <ee/StringHelper.h>
 #include <ee/SymbolFile.h>
+#include <ee/SymbolType.h>
 
 #include <easyui.h>
 #include <easycomplex.h>

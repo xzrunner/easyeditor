@@ -21,6 +21,16 @@ public:
 
 	UIStagePage* GetSelectedPage();
 
+public:
+	enum PageType
+	{
+		PAGE_WND = 0,
+		PAGE_LIST,
+		PAGE_WRAPPER,
+	};
+
+	UIStagePage* SetPage(PageType type);
+
 private:
 	void InitLayout();
 	void InitTabPages(wxSizer* sizer);

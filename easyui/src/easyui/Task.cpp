@@ -9,6 +9,10 @@
 #include <ee/Bitmap.h>
 #include <ee/PropertySettingPanel.h>
 #include <ee/ViewlistPanel.h>
+#include <ee/SymbolFile.h>
+#include <ee/SymbolType.h>
+
+#include <fstream>
 
 namespace eui
 {
@@ -29,7 +33,31 @@ Task::~Task()
 
 void Task::Load(const char* filename)
 {
-	UIStagePage* stage = m_top_pannels.stage->GetSelectedPage();
+	UIStagePage* stage = NULL;
+	int type = ee::SymbolFile::Instance()->Type(filename);
+	if (type == ee::SYM_UIWND) 
+	{
+		stage = m_top_pannels.stage->SetPage(TopStagePanel::PAGE_WND);
+	} 
+	else 
+	{
+		assert(type == ee::SYM_UI);
+
+		Json::Value value;
+		Json::Reader reader;
+		std::locale::global(std::locale(""));
+		std::ifstream fin(filename);
+		std::locale::global(std::locale("C"));
+		reader.parse(fin, value);
+		fin.close();
+
+		std::string stype = value["type"].asString();
+		if (stype == "list") {
+			stage = m_top_pannels.stage->SetPage(TopStagePanel::PAGE_LIST);
+		} else {
+			stage = m_top_pannels.stage->SetPage(TopStagePanel::PAGE_WRAPPER);
+		}
+	}
 	if (stage) {
 		stage->LoadFromFile(filename);
 	}

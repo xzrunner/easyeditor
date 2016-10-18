@@ -10,6 +10,7 @@
 #include <ee/SymbolMgr.h>
 #include <ee/Symbol.h>
 #include <ee/SymbolFile.h>
+#include <ee/SymbolType.h>
 
 #include <algorithm>
 #include <fstream>
