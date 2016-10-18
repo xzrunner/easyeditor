@@ -150,8 +150,12 @@ void Bitmap::InitBmp(const wxImage& image, bool need_scale)
 void Bitmap::LoadFromSym(const Symbol* sym)
 {
 	sm::rect rect = sym->GetBounding();
+	if (!rect.IsValid()) {
+		return;
+	}
+
 	float w = std::max(1.0f, rect.Size().x),
-		h = std::max(1.0f, rect.Size().y);
+		  h = std::max(1.0f, rect.Size().y);
 	float scale = w > (MAX_WIDTH / SCALE) ? (MAX_WIDTH / w) : SCALE; 
 	w *= scale;
 	h *= scale;
@@ -160,6 +164,9 @@ void Bitmap::LoadFromSym(const Symbol* sym)
 
 	Snapshoot ss(w, h);
 	unsigned char* rgba = ss.OutputToMemory(sym, true, scale);
+	if (!rgba) {
+		return;
+	}
 	unsigned char* rgb = TransRGBA2RGB(rgba, w, h);
 	delete[] rgba;
 

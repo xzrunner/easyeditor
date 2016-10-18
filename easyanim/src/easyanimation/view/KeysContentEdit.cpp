@@ -77,7 +77,7 @@ void KeysContentEdit::CopySelection()
 		for (int i = 0, n = sprs.size(); i < n; ++i) {
 			ee::Sprite* spr = sprs[i];
 			Json::Value s_val;
-			s_val["filename"] = dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath();
+			s_val["filepath"] = dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath();
 			spr->Store(s_val);	
 			k_val["sprite"][i] = s_val;
 		}
@@ -148,7 +148,7 @@ void KeysContentEdit::PasteSelection()
 		{
 			const Json::Value& s_val = k_val["sprite"][i_spr];
 			
-			std::string filepath = s_val["filename"].asString();
+			std::string filepath = s_val["filepath"].asString();
 			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			sym->RefreshThumbnail(filepath);
 			ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);

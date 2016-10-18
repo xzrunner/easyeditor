@@ -51,10 +51,12 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 	if (val.isMember(ee::SYM_GROUP_TAG))
 	{
 		s2::ComplexSymbol* sym = dynamic_cast<s2::ComplexSymbol*>(m_sym);
-		std::string sym_filepath = ee::FileHelper::GetAbsolutePath(dir, val["filepath"].asString());
+		std::string sym_filepath = val["filepath"].asString();
+		sym_filepath = ee::FileHelper::GetAbsolutePath(dir, sym_filepath);
 		dynamic_cast<ee::Symbol*>(m_sym)->SetFilepath(sym_filepath);
+		std::string sym_dir = ee::FileHelper::GetFileDir(sym_filepath);
 		for (int i = 0, n = val[ee::SYM_GROUP_TAG].size(); i < n; ++i) {
-			ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(val[ee::SYM_GROUP_TAG][i], dir);
+			ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(val[ee::SYM_GROUP_TAG][i], sym_dir);
 			sym->Add(spr);
 			spr->RemoveReference();
 		}

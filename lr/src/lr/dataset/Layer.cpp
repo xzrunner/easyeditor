@@ -413,6 +413,8 @@ ee::Sprite* Layer::LoadSprite(const Json::Value& val, const std::string& dir, co
 	ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
 	spr->Load(val, dir);
 
+	sym->RefreshThumbnail(filepath);
+
 	std::string tag = spr->GetTag();
 	if (!tag.empty() && tag[tag.size()-1] != ';') {
 		tag += ";";

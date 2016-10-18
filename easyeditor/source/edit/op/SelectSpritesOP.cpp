@@ -289,7 +289,7 @@ Sprite* SelectSpritesOP::SelectByPos(const sm::vec2& pos) const
 
 void SelectSpritesOP::PasteSprToClipboard(const Sprite* spr, Json::Value& value) const
 {
-	value["filename"] = dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath();
+	value["filepath"] = dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath();
 	spr->Store(value);	
 }
 
@@ -355,19 +355,15 @@ void SelectSpritesOP::CopyFromSelection()
 	int i = 0;
 	Json::Value sval = value["sprite"][i++];
 	while (!sval.isNull()) {
-		std::string filepath = sval["filename"].asString();
-		// fixme
-		if (filepath != SYM_GROUP_TAG) {
-			Symbol* sym = SymbolMgr::Instance()->FetchSymbol(filepath);
-			// for snapshoot
-			sym->RefreshThumbnail(filepath);
-			Sprite* spr = SpriteFactory::Instance()->Create(sym);
-			sprs.push_back(spr);
-			sym->RemoveReference();
-			CopySprFromClipboard(spr, sval);
-			InsertSpriteSJ::Instance()->Insert(spr);
-			EditAddRecordSJ::Instance()->Add(new InsertSpriteAOP(spr));
-		}
+		std::string filepath = sval["filepath"].asString();
+		Symbol* sym = SymbolMgr::Instance()->FetchSymbol(filepath);
+		Sprite* spr = SpriteFactory::Instance()->Create(sym);
+		sym->RefreshThumbnail(filepath);
+		sprs.push_back(spr);
+		sym->RemoveReference();
+		CopySprFromClipboard(spr, sval);
+		InsertSpriteSJ::Instance()->Insert(spr);
+		EditAddRecordSJ::Instance()->Add(new InsertSpriteAOP(spr));
 		sval = value["sprite"][i++];
 	}
 

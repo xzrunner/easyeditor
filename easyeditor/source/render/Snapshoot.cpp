@@ -33,7 +33,12 @@ unsigned char* Snapshoot::OutputToMemory(const Symbol* sym, bool whitebg,
 {
 	m_fbo->DrawSymbol(sym, whitebg, scale);
 
-	sm::vec2 sz = sym->GetBounding().Size();
+	sm::rect bound = sym->GetBounding();
+	if (!bound.IsValid()) {
+		return NULL;
+	}
+
+	sm::vec2 sz = bound.Size();
 	sz *= scale;
 
 	int w = static_cast<int>(sz.x),
