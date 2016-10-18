@@ -17,7 +17,7 @@ public:
 	virtual bool OnButtonClick(wxPropertyGrid* propgrid, wxString& value);
 
 private:
-	wxString m_dir;
+	wxString m_filepath;
 
 }; // FileDirProperty
 

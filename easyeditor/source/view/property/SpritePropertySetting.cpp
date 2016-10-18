@@ -21,6 +21,7 @@
 #include "WXHelper.h"
 #include "SprFilterProperty.h"
 #include "FileDirProperty.h"
+#include "FileNameProperty.h"
 #include "EditPanel.h"
 #include "SprTagProperty.h"
 
@@ -244,9 +245,6 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	Sprite* spr = m_impl->GetSprite();
 	Symbol* sym = dynamic_cast<Symbol*>(spr->GetSymbol());
 
-	std::string filename = FileHelper::GetFilenameWithExtension(sym->GetFilepath());
-	pg->GetProperty(wxT("FileName"))->SetValue(filename);
-
 	pg->GetProperty(wxT("Name"))->SetValue(spr->GetName());
 	pg->GetProperty(wxT("Tag"))->SetValue(spr->GetTag());
 
@@ -329,11 +327,8 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	pg->Append(new wxPropertyCategory("RES", wxPG_LABEL));
 
-	std::string filedir = FileHelper::GetFileDir(sym->GetFilepath());
-	pg->Append(new FileDirProperty("FileDir", wxPG_LABEL, filedir));
-
-	std::string filename = FileHelper::GetFilenameWithExtension(sym->GetFilepath());
-	pg->Append(new wxStringProperty("FileName", wxPG_LABEL, filename));
+	pg->Append(new FileDirProperty("FileDir", wxPG_LABEL, sym->GetFilepath()));
+	pg->Append(new FileNameProperty("FileName", wxPG_LABEL, sym->GetFilepath()));
 
 	pg->Append(new wxPropertyCategory("BASE", wxPG_LABEL));
 
