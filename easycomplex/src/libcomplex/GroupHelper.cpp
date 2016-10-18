@@ -18,6 +18,7 @@ Sprite* GroupHelper::Group(const std::vector<ee::Sprite*>& sprs)
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
 		sym->Add(sprs[i]);
 	}
+	sym->RefreshThumbnail("group");
 
 	sm::vec2 c = sym->GetBounding().Center();
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
@@ -27,6 +28,8 @@ Sprite* GroupHelper::Group(const std::vector<ee::Sprite*>& sprs)
 	Sprite* spr = new Sprite(sym);
 	spr->Translate(c);
 	ee::SpriteFactory::Instance()->Insert(spr);
+
+	sym->RemoveReference();
 
 	return spr;
 }

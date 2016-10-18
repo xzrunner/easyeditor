@@ -6,6 +6,7 @@
 #include <ee/SymbolMgr.h>
 #include <ee/SpriteFactory.h>
 #include <ee/Sprite.h>
+#include <ee/SymbolType.h>
 
 namespace ecomplex
 {
@@ -30,7 +31,7 @@ ee::Sprite* LoadFromPSD::LoadItem(const Json::Value& value, const std::string& d
 	std::string type = value["type"].asString();
 	if (type == "layer") {
 		return LoadLayer(value, dir, tw, th);
-	} else if (type == "group") {
+	} else if (type == ee::SYM_GROUP_TAG) {
 		return LoadGroup(value, dir, tw, th);
 	} else {
 		return NULL;
@@ -39,7 +40,7 @@ ee::Sprite* LoadFromPSD::LoadItem(const Json::Value& value, const std::string& d
 
 ee::Sprite* LoadFromPSD::LoadGroup(const Json::Value& value, const std::string& dir, int tw, int th)
 {
-	std::string name = value["group"].asString();
+	std::string name = value[ee::SYM_GROUP_TAG].asString();
 
 	bool visible = value["visible"].asBool();
 

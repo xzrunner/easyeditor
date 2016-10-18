@@ -10,6 +10,7 @@
 #include <ee/ConfirmDialog.h>
 #include <ee/SpriteFactory.h>
 #include <ee/Sprite.h>
+#include <ee/SymbolType.h>
 
 #include <sprite2/S2_Sprite.h>
 
@@ -93,7 +94,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 	if (val == wxID_YES) 
 	{
 		const std::string& filepath = m_sym->GetFilepath();
-		if (filepath != "group") {
+		if (filepath != ee::SYM_GROUP_TAG) {
 			FileStorer::Store(filepath.c_str(), m_sym);
 			m_sym->RefreshThumbnail(filepath, true);
 		}

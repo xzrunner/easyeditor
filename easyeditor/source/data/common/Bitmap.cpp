@@ -33,6 +33,13 @@ Bitmap::Bitmap()
 {
 }
 
+Bitmap::Bitmap(const Symbol* sym)
+	: m_bmp_large(NULL)
+	, m_bmp_small(NULL)
+{
+	LoadFromSym(sym);
+}
+
 Bitmap::~Bitmap()
 {
 	BitmapMgr::Instance()->RemoveItem(m_filename);
@@ -98,25 +105,14 @@ bool Bitmap::LoadFromFile(const std::string& filepath)
 	}
 	else
 	{
-		Symbol* sym = SymbolMgr::Instance()->FetchSymbol(filepath);
-		sm::rect rect = sym->GetBounding();
-		float w = std::max(1.0f, rect.Size().x),
-			  h = std::max(1.0f, rect.Size().y);
-		float scale = w > (MAX_WIDTH / SCALE) ? (MAX_WIDTH / w) : SCALE; 
-		w *= scale;
-		h *= scale;
-		w = std::max(1.0f, w);
-		h = std::max(1.0f, h);
-
-		Snapshoot ss(w, h);
-		unsigned char* rgba = ss.OutputToMemory(sym, true, scale);
-		unsigned char* rgb = TransRGBA2RGB(rgba, w, h);
-		delete[] rgba;
-
-		wxImage image(w, h, rgb, true);
-		InitBmp(image, false);
-		delete[] rgb;
-		sym->RemoveReference();
+		std::string filename = FileHelper::GetFilename(filepath);
+		if (filename == SYM_GROUP_TAG) {
+			return false;
+		} else {
+			Symbol* sym = SymbolMgr::Instance()->FetchSymbol(filepath);
+			LoadFromSym(sym);
+			sym->RemoveReference();
+		}
 	}
 
 	return true;
@@ -149,6 +145,27 @@ void Bitmap::InitBmp(const wxImage& image, bool need_scale)
 		h = std::max(1.0f, h * scale);
 		m_bmp_small = new wxBitmap(image.Scale(w, h));
 	}
+}
+
+void Bitmap::LoadFromSym(const Symbol* sym)
+{
+	sm::rect rect = sym->GetBounding();
+	float w = std::max(1.0f, rect.Size().x),
+		h = std::max(1.0f, rect.Size().y);
+	float scale = w > (MAX_WIDTH / SCALE) ? (MAX_WIDTH / w) : SCALE; 
+	w *= scale;
+	h *= scale;
+	w = std::max(1.0f, w);
+	h = std::max(1.0f, h);
+
+	Snapshoot ss(w, h);
+	unsigned char* rgba = ss.OutputToMemory(sym, true, scale);
+	unsigned char* rgb = TransRGBA2RGB(rgba, w, h);
+	delete[] rgba;
+
+	wxImage image(w, h, rgb, true);
+	InitBmp(image, false);
+	delete[] rgb;
 }
 
 unsigned char* Bitmap::TransRGBA2RGB(unsigned char* rgba, int width, int height)

@@ -3,6 +3,7 @@
 #include "check_params.h"
 
 #include <ee/FileHelper.h>
+#include <ee/SymbolType.h>
 
 #include <SM_Vector.h>
 #include <sprite2/Color.h>
@@ -112,9 +113,9 @@ bool FixLRMirror::FixSprite(const Json::Value& old_val, Json::Value& new_val) co
 
 	std::string filepath = old_val["filepath"].asString();
 
-	if (filepath == "group") 
+	if (filepath == ee::SYM_GROUP_TAG) 
 	{
-		const Json::Value& group_val = old_val["group"];
+		const Json::Value& group_val = old_val[ee::SYM_GROUP_TAG];
 		for (int i = 0, n = group_val.size(); i < n; ++i) {
 			if (FixSprite(group_val[i], new_val)) {
 				dirty = true;
@@ -144,10 +145,10 @@ bool FixLRMirror::StoreToNew(const Json::Value& old_val, Json::Value& new_val) c
 	std::string name = old_val["name"].asString();
 
 	std::string filepath = new_val["filepath"].asString();
-	if (filepath == "group") 
+	if (filepath == ee::SYM_GROUP_TAG) 
 	{
 		bool dirty = false;
-		Json::Value& group_val = new_val["group"];
+		Json::Value& group_val = new_val[ee::SYM_GROUP_TAG];
 		for (int i = 0, n = group_val.size(); i < n; ++i) {
 			if (group_val[i]["name"].asString() != name) {
 				continue;

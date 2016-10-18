@@ -5,6 +5,7 @@
 #include "FileHelper.h"
 #include "StringHelper.h"
 #include "Visitor.h"
+#include "SymbolType.h"
 
 namespace ee
 {
@@ -34,8 +35,9 @@ Symbol* SymbolMgr::FetchSymbol(const std::string& filepath, int type)
 	std::string fixed_path = FileHelper::GetAbsolutePath(filepath);
 	StringHelper::ToLower(fixed_path);
 
+	std::string filename = FileHelper::GetFilename(filepath);
 	std::map<std::string, Symbol*>::iterator itr = m_syms.find(fixed_path);
-	if (itr == m_syms.end())
+	if (filename == SYM_GROUP_TAG || itr == m_syms.end())
 	{
 		Symbol* sym = SymbolFactory::Create(fixed_path, type);
 		if (!sym) 

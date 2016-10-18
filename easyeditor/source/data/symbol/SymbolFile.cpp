@@ -1,5 +1,6 @@
 #include "SymbolFile.h"
 #include "SymbolType.h"
+#include "FileHelper.h"
 
 #include <sprite2/SymType.h>
 #include <gum/SymbolFile.h>
@@ -43,7 +44,7 @@ SymbolFile::SymbolFile()
 int SymbolFile::Type(const std::string& filepath) const
 {
 	int type = gum::SymbolFile::Instance()->Type(filepath);
-	if (type != s2::SYM_UNKNOWN) {
+	if (type != s2::SYM_UNKNOWN && type != s2::SYM_INVALID) {
 		return type;
 	}
 	
@@ -86,6 +87,13 @@ int SymbolFile::Type(const std::string& filepath) const
 	else if (ext == "ttf")
 	{
 		return SYM_FREETYPE;
+	}
+	else
+	{
+		std::string filename = FileHelper::GetFilename(filepath);
+		if (filename == SYM_GROUP_TAG) {
+			return s2::SYM_COMPLEX;
+		}
 	}
 
 	return s2::SYM_UNKNOWN;

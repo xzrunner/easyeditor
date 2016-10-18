@@ -19,6 +19,8 @@
 #include <ee/StringHelper.h>
 #include <ee/SymbolFile.h>
 #include <ee/FilepathDialog.h>
+#include <ee/SymbolType.h>
+#include <ee/FileHelper.h>
 
 #include <sprite2/SymType.h>
 
@@ -110,7 +112,7 @@ void SelectSpritesOP::BuildGroup()
 
 	ecomplex::Sprite* spr = ecomplex::GroupHelper::Group(sprs);
 	ee::Symbol* sym = dynamic_cast<ee::Symbol*>(spr->GetSymbol());
-	sym->SetFilepath(GROUP_TAG);
+	sym->SetFilepath(ee::SYM_GROUP_TAG);
 	sym->name = "_group";
 	sym->SetName("_group");
 	spr->SetName("_group");
@@ -147,7 +149,8 @@ void SelectSpritesOP::BreakUpGroup()
 	for (int i = 0, n = sprs.size(); i < n; ++i) 
 	{
 		ee::Sprite* spr = sprs[i];
-		if (dynamic_cast<ee::Symbol*>(spr->GetSymbol())->GetFilepath() != GROUP_TAG) {
+		std::string filepath = dynamic_cast<ee::Symbol*>(spr->GetSymbol())->GetFilepath();
+		if (ee::FileHelper::GetFilename(filepath) != ee::SYM_GROUP_TAG) {
 			continue;
 		}
 

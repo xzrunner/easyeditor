@@ -3,6 +3,7 @@
 
 #include <ee/FileHelper.h>
 #include <ee/SpriteIO.h>
+#include <ee/SymbolType.h>
 
 #include <SM_Calc.h>
 
@@ -52,12 +53,12 @@ void LRExpandGroup::Run(const std::string& filepath)
 
 	Json::Value new_lr_val = lr_val;
 
-	int idx = 0;
-	Json::Value layer_val = lr_val["layer"][idx++];
-	while (!layer_val.isNull()) {
-		Expand(layer_val, new_lr_val["layer"][idx-1]);
-		layer_val = lr_val["layer"][idx++];
-	}
+// 	int idx = 0;
+// 	Json::Value layer_val = lr_val["layer"][idx++];
+// 	while (!layer_val.isNull()) {
+// 		Expand(layer_val, new_lr_val["layer"][idx-1]);
+// 		layer_val = lr_val["layer"][idx++];
+// 	}
 
 	std::string out_path = GetOutputFilepath(filepath);
 	Json::StyledStreamWriter writer;
@@ -95,9 +96,9 @@ void LRExpandGroup::LoadSprites(const Json::Value& src_spr_val, const Trans& tra
 
 	ee::SpriteIO spr_io;
 	spr_io.Load(src_spr_val);
-	if (filepath == "group") 
+	if (filepath == ee::SYM_GROUP_TAG) 
 	{
-		const Json::Value& gval = src_spr_val["group"];
+		const Json::Value& gval = src_spr_val[ee::SYM_GROUP_TAG];
 
 		if (trans.xmirror) {
 			spr_io.m_position.x = -spr_io.m_position.x;

@@ -13,10 +13,13 @@ namespace ee
 class Bitmap;
 typedef ResourcesMgr<Bitmap> BitmapMgr;
 
+class Symbol;
+
 class Bitmap : public cu::RefCountObj
 {
 public:
 	Bitmap();
+	Bitmap(const Symbol* sym);
 	virtual ~Bitmap();
 
 	bool LoadFromFile(const std::string& filepath);
@@ -26,6 +29,8 @@ public:
 
 private:
 	void InitBmp(const wxImage& image, bool scale);
+
+	void LoadFromSym(const Symbol* sym);
 
 	static unsigned char* TransRGBA2RGB(unsigned char* rgba, int width, int height);
 

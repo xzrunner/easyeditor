@@ -19,6 +19,8 @@
 namespace ecomplex
 {
 
+static const char* GROUP_TAG = "group";
+
 Task::Task(wxFrame* parent)
 	: m_root(NULL)
 	, m_parent(parent)
@@ -139,8 +141,8 @@ void Task::LoadGroupTree(const char* filepath)
 	reader.parse(fin, value);
 	fin.close();
 
-	if (!value["group"].isNull()) {
-		m_grouptree->LoadFromFile(value["group"]);
+	if (!value[GROUP_TAG].isNull()) {
+		m_grouptree->LoadFromFile(value[GROUP_TAG]);
 	} else {
 		std::map<std::string, std::vector<ee::Sprite*> > map_actions;
 		std::vector<ee::Sprite*> others;
@@ -159,7 +161,7 @@ void Task::StoreGroupTree(const char* filepath) const
 	reader.parse(fin, value);
 	fin.close();
 
-	m_grouptree->StoreToFile(value["group"]);
+	m_grouptree->StoreToFile(value[GROUP_TAG]);
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));

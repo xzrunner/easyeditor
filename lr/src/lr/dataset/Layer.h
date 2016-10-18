@@ -82,9 +82,6 @@ private:
 	void LoadShapesUD(const Json::Value& spr_val, ee::Sprite* spr) const;
 	void StoreShapesUD(ee::Sprite* spr, Json::Value& spr_val) const;
 
-	ee::Sprite* LoadGroup(const Json::Value& val, const std::string& dir, const std::string& base_path);
-	void StoreGroup(ee::Sprite* spr, Json::Value& val, const std::string& dir) const;
-
 	ee::Sprite* LoadSprite(const Json::Value& val, const std::string& dir, const std::string& base_path);
 	bool StoreSprite(ee::Sprite* spr, Json::Value& val, const std::string& dir) const;
 	

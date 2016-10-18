@@ -85,9 +85,6 @@ void FileIO::Load(const char* filename, LibraryPanel* library,
 	stage->SetResDir(dir);
 	LoadLayers(value["layer"], stage, library, dir);
 
-// 	// groups
-// 	grouptree->LoadFromFile(value["group"]);
-
 	// libraries
 	if (value["library"].isNull()) {
 		library->LoadSymbolFromLayer();
@@ -132,9 +129,6 @@ void FileIO::Store(const char* filename, LibraryPanel* library,
 	// layers
 	std::string dir = ee::FileHelper::GetFileDir(filename) + "\\";
 	StoreLayers(value["layer"], stage->GetLayers(), dir);
-
-// 	// groups
-// 	grouptree->StoreToFile(value["group"]);
 
 	// libraries
 	library->StoreToFile(value["library"], dir);

@@ -2,6 +2,7 @@
 #include "check_params.h"
 
 #include <ee/FileHelper.h>
+#include <ee/SymbolType.h>
 
 #include <SM_Vector.h>
 #include <sprite2/Color.h>
@@ -47,9 +48,9 @@ bool FixLRSprName::FixSprite(Json::Value& val) const
 
 	std::string filepath = val["filepath"].asString();
 
-	if (filepath == "group") 
+	if (filepath == ee::SYM_GROUP_TAG) 
 	{
-		Json::Value& group_val = val["group"];
+		Json::Value& group_val = val[ee::SYM_GROUP_TAG];
 		for (int i = 0, n = group_val.size(); i < n; ++i) {
 			if (FixSprite(group_val[i])) {
 				ret = true;

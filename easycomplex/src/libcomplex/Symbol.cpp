@@ -10,6 +10,8 @@
 #include <ee/StringHelper.h>
 #include <ee/SettingData.h>
 #include <ee/SymbolFile.h>
+#include <ee/FileHelper.h>
+#include <ee/SymbolType.h>
 
 #include <easytext.h>
 
@@ -206,6 +208,11 @@ void Symbol::GetActionNames(std::vector<std::string>& actions) const
 
 void Symbol::LoadResources()
 {
+	std::string filename = ee::FileHelper::GetFilename(m_filepath);
+	if (filename == ee::SYM_GROUP_TAG) {
+		return;
+	}
+
 	FileLoader::Load(m_filepath, this);
 
 	m_origin_names.clear();

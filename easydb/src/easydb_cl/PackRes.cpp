@@ -12,6 +12,7 @@
 #include <ee/SymbolFile.h>
 #include <ee/SymbolType.h>
 #include <ee/Exception.h>
+#include <ee/SymbolType.h>
 
 #include <easytexpacker.h>
 #include <easyrespacker.h>
@@ -192,7 +193,6 @@ void PackRes::GetImagesFromJson(const std::vector<std::string>& src_dirs, const 
 								 std::set<std::string>& img_set) const
 {
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
-
 	int type = ee::SymbolFile::Instance()->Type(filepath);
 	switch (type)
 	{
@@ -208,13 +208,9 @@ void PackRes::GetImagesFromJson(const std::vector<std::string>& src_dirs, const 
 			std::locale::global(std::locale("C"));
 			reader.parse(fin, value);
 			fin.close();
-
-			int j = 0;
-			Json::Value spr_val = value["sprite"][j++];
-			while (!spr_val.isNull()) {
-				GetImagesFromSprite(src_dirs, dir, spr_val, img_set);
-				spr_val = value["sprite"][j++];
-			}	
+			for (int i = 0, n = value["sprite"].size(); i < n; ++i) {
+				GetImagesFromSprite(src_dirs, dir, value["sprite"][i], img_set);
+			}
 		}
 		break;
 	case s2::SYM_ANIMATION:
@@ -346,6 +342,17 @@ void PackRes::GetImagesFromJson(const std::vector<std::string>& src_dirs, const 
 void PackRes::GetImagesFromSprite(const std::vector<std::string>& src_dirs, const std::string& spr_dir, 
 								   const Json::Value& spr_val, std::set<std::string>& images) const
 {
+	std::string raw_filepath = spr_val["filepath"].asString();
+	std::string raw_filename = ee::FileHelper::GetFilename(raw_filepath);
+	if (raw_filename == ee::SYM_GROUP_TAG) {
+		std::string raw_dir = ee::FileHelper::GetFileDir(raw_filepath);
+		std::string new_spr_dir = ee::FileHelper::GetAbsolutePath(spr_dir, raw_dir);
+		for (int i = 0, n = spr_val[ee::SYM_GROUP_TAG].size(); i < n; ++i) {
+			GetImagesFromSprite(src_dirs, new_spr_dir, spr_val[ee::SYM_GROUP_TAG][i], images);
+		}
+		return;
+	}
+
 	std::string filepath = ee::SymbolSearcher::GetSymbolPath(spr_dir, spr_val);
 	filepath = ee::FileHelper::FormatFilepathAbsolute(filepath);
 	if (ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_IMAGE) 

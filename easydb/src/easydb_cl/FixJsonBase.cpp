@@ -1,6 +1,7 @@
 #include "FixJsonBase.h"
 
 #include <ee/FileHelper.h>
+#include <ee/SymbolType.h>
 
 #include <fstream>
 
@@ -122,8 +123,8 @@ void FixJsonBase::FixLR(const std::string& path) const
 		Json::Value& spr_val = layer_val[i]["sprite"];
 		for (int j = 0, m = spr_val.size(); j < m; ++j) {
 			std::string filepath = spr_val[j]["filepath"].asString();
-			if (filepath == "group") {
-				Json::Value& group_val = spr_val[j]["group"];
+			if (filepath == ee::SYM_GROUP_TAG) {
+				Json::Value& group_val = spr_val[j][ee::SYM_GROUP_TAG];
 				for (int i = 0, n = group_val.size(); i < n; ++i) {
 					if (FixSprite(path, group_val[i])) {
 						dirty = true;

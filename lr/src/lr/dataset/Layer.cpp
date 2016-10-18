@@ -383,58 +383,9 @@ void Layer::StoreShapesUD(ee::Sprite* spr, Json::Value& spr_val) const
 	spr_val["ud"] = val;
 }
 
-ee::Sprite* Layer::LoadGroup(const Json::Value& val, const std::string& dir, const std::string& base_path)
-{
-	std::vector<ee::Sprite*> sprs;
-	int idx = 0;
-	Json::Value cval = val["group"][idx++];
-	while (!cval.isNull()) {
-		ee::Sprite* spr = LoadSprite(cval, dir, base_path);
-		sprs.push_back(spr);
-		cval = val["group"][idx++];
-	}
-
-	std::string name = val["group_name"].asString();
-
-	ecomplex::Sprite* spr = ecomplex::GroupHelper::Group(sprs);
-	ecomplex::Symbol* sym = dynamic_cast<ecomplex::Symbol*>(spr->GetSymbol());
-	sym->SetFilepath(GROUP_TAG);
-	sym->name = name;
-	sym->SetName(name);
-	spr->SetName(name);
-
-	ee::SpriteFactory::Instance()->Insert(spr);
-	spr->Load(val);
-	for_each(sprs.begin(), sprs.end(), cu::RemoveRefFunctor<ee::Sprite>());
-	return spr;
-}
-
-void Layer::StoreGroup(ee::Sprite* spr, Json::Value& val, const std::string& dir) const
-{
-	val["filepath"] = GROUP_TAG;
-	spr->Store(val);
-
-	ecomplex::Symbol* comp = dynamic_cast<ecomplex::Symbol*>(spr->GetSymbol());
-	assert(comp);
-	const std::vector<s2::Sprite*>& children = comp->GetChildren();
-	int count = 0;
-	for (int i = 0, n = children.size(); i < n; ++i) {
-		Json::Value cval;
-		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
-		if (StoreSprite(child, cval, dir)) {
-			val["group"][count++] = cval;
-		}
-	}
-	val["group_name"] = comp->GetName();
-}
-
 ee::Sprite* Layer::LoadSprite(const Json::Value& val, const std::string& dir, const std::string& base_path)
 {
 	std::string filepath = val["filepath"].asString();
-	if (filepath == GROUP_TAG) {
-		return LoadGroup(val, dir, base_path);
-	}
-
 	filepath = ee::SymbolSearcher::GetSymbolPath(dir, val);
 	if (filepath.empty()) {
 		std::string filepath = val["filepath"].asString();
@@ -460,7 +411,7 @@ ee::Sprite* Layer::LoadSprite(const Json::Value& val, const std::string& dir, co
 	}
 
 	ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
-	spr->Load(val);
+	spr->Load(val, dir);
 
 	std::string tag = spr->GetTag();
 	if (!tag.empty() && tag[tag.size()-1] != ';') {
@@ -498,15 +449,11 @@ bool Layer::StoreSprite(ee::Sprite* spr, Json::Value& val, const std::string& di
 	}
 
 	ee::Symbol* sym = dynamic_cast<ee::Symbol*>(spr->GetSymbol());
-	if (sym->GetFilepath() == GROUP_TAG) {
-		StoreGroup(spr, val, dir);
-	} else {
-		std::string filepath = sym->GetFilepath();
-		assert(!filepath.empty());
-		val["filepath"] = ee::FileHelper::GetRelativePath(dir, filepath);
-		spr->Store(val);
-		StoreShapesUD(spr, val);
-	}
+	std::string filepath = sym->GetFilepath();
+	assert(!filepath.empty());
+	val["filepath"] = ee::FileHelper::GetRelativePath(dir, filepath);
+	spr->Store(val, dir);
+	StoreShapesUD(spr, val);
 
 	return true;
 }

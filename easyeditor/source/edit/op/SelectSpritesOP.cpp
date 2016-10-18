@@ -15,6 +15,7 @@
 #include "InsertSpriteAOP.h"
 #include "Exception.h"
 #include "ExceptionDlg.h"
+#include "SymbolType.h"
 
 #include <sprite2/S2_RVG.h>
 
@@ -356,7 +357,7 @@ void SelectSpritesOP::CopyFromSelection()
 	while (!sval.isNull()) {
 		std::string filepath = sval["filename"].asString();
 		// fixme
-		if (filepath != "group") {
+		if (filepath != SYM_GROUP_TAG) {
 			Symbol* sym = SymbolMgr::Instance()->FetchSymbol(filepath);
 			// for snapshoot
 			sym->RefreshThumbnail(filepath);

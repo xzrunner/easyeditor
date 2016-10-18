@@ -19,6 +19,8 @@ enum SymType
 	SYM_UIWND,
 };
 
+static const char* SYM_GROUP_TAG = "group";
+
 }
 
 #endif // _EASYEDITOR_SYMBOL_TYPE_H_

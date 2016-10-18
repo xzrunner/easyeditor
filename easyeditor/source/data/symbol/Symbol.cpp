@@ -17,15 +17,12 @@ void Symbol::ClearUserData(bool deletePtr)
 
 bool Symbol::LoadFromFile(const std::string& filepath)
 {
-	m_filepath = FileHelper::GetExistFilepath(filepath);
-	if (m_filepath == wxEmptyString) {
-		m_name = "error";
-		m_bitmap = NULL;
-		return false;
-	}
-
 	m_name = FileHelper::GetFilename(filepath);
-//	m_bitmap = NULL;
+	m_filepath = FileHelper::GetExistFilepath(filepath);
+	m_bitmap = NULL;
+	if (m_filepath == wxEmptyString) {
+		m_filepath = filepath;
+	}
 	LoadResources();
 	return true;
 }
