@@ -1,7 +1,6 @@
 #include "SelectSpritesOP.h"
 #include "StagePanel.h"
 
-#include "dataset/NewComplexUD.h"
 #include "view/typedef.h"
 
 #include <ee/EditPanelImpl.h>
@@ -45,19 +44,20 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 	}
 
 	// group
-	if (m_stage->GetKeyState(WXK_ALT) && keyCode == 'G') {
-		BuildGroup();
+	if (m_stage->GetKeyState(WXK_CONTROL) && keyCode == 'G') {
+		ecomplex::GroupHelper::BuildGroup(m_selection);
 		return true;
-	} else if (m_stage->GetKeyState(WXK_ALT) && keyCode == 'B') {
-		BreakUpGroup();
+	} else if (m_stage->GetKeyState(WXK_CONTROL) && keyCode == 'B') {
+		ecomplex::GroupHelper::BreakUpGroup(m_selection);
 		return true;
 	}
 	// complex
-	else if (m_stage->GetKeyState(WXK_CONTROL) && keyCode == 'G') {
-		BuildComplex();
+	else if (m_stage->GetKeyState(WXK_ALT) && keyCode == 'G') {
+		const std::string& dir = static_cast<StagePanel*>(m_wnd)->GetResDir();
+		ecomplex::GroupHelper::BuildComplex(m_selection, dir, m_wnd);
 		return true;
-	} else if (m_stage->GetKeyState(WXK_CONTROL) && keyCode == 'B') {
-		BreakUpComplex();
+	} else if (m_stage->GetKeyState(WXK_ALT) && keyCode == 'B') {
+		ecomplex::GroupHelper::BreakUpComplex(m_selection);
 		return true;
 	}
 
@@ -99,134 +99,6 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	}
 
 	return false;
-}
-
-void SelectSpritesOP::BuildGroup()
-{
-	if (m_selection->IsEmpty()) {
-		return;
-	}
-
-	std::vector<ee::Sprite*> sprs;
-	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
-
-	ecomplex::Sprite* spr = ecomplex::GroupHelper::Group(sprs);
-	ee::Symbol* sym = dynamic_cast<ee::Symbol*>(spr->GetSymbol());
-	sym->SetFilepath(ee::SYM_GROUP_TAG);
-	sym->name = "_group";
-	sym->SetName("_group");
-	spr->SetName("_group");
-
-	ee::AtomicOP* move_op = new ee::TranslateSpriteAOP(sprs, -spr->GetPosition());
-
-	std::vector<ee::Sprite*> removed;
-	for (int i = 0, n = sprs.size(); i < n; ++i) {
-		ee::Sprite* spr = sprs[i];
-		ee::RemoveSpriteSJ::Instance()->Remove(spr);
-		removed.push_back(spr);
-	}
-	ee::AtomicOP* del_op = new ee::DeleteSpriteAOP(removed);
-
-	ee::InsertSpriteSJ::Instance()->Insert(spr);
-	ee::AtomicOP* add_op = new ee::InsertSpriteAOP(spr);
-	spr->RemoveReference();
-
-	ee::CombineAOP* combine = new ee::CombineAOP;
-	combine->Insert(move_op);
-	combine->Insert(del_op);
-	combine->Insert(add_op);
-	ee::EditAddRecordSJ::Instance()->Add(combine);
-}
-
-void SelectSpritesOP::BreakUpGroup()
-{
-	if (m_selection->IsEmpty()) {
-		return;
-	}
-
-	std::vector<ee::Sprite*> sprs;
-	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
-	for (int i = 0, n = sprs.size(); i < n; ++i) 
-	{
-		ee::Sprite* spr = sprs[i];
-		std::string filepath = dynamic_cast<ee::Symbol*>(spr->GetSymbol())->GetFilepath();
-		if (ee::FileHelper::GetFilename(filepath) != ee::SYM_GROUP_TAG) {
-			continue;
-		}
-
-		ee::SelectSpriteSJ::Instance()->Select(spr, true);
-
-		std::vector<ee::Sprite*> children;
-		ecomplex::GroupHelper::BreakUp(spr, children);
- 		for (int j = 0, m = children.size(); j < m; ++j) {
-			ee::Sprite* spr = children[j];
- 			ee::InsertSpriteSJ::Instance()->Insert(spr);
-			spr->RemoveReference();
- 		}
-
-		ee::RemoveSpriteSJ::Instance()->Remove(spr);
-	}
-}
-
-void SelectSpritesOP::BuildComplex()
-{
-	if (m_selection->IsEmpty()) {
-		return;
-	}
-
-	std::vector<ee::Sprite*> sprs;
-	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
-
-	ecomplex::Sprite* spr = ecomplex::GroupHelper::Group(sprs);
-	spr->SetUserData(new NewComplexUD());
-
-	ecomplex::Symbol* sym = dynamic_cast<ecomplex::Symbol*>(spr->GetSymbol());
-	std::string filepath = static_cast<StagePanel*>(m_wnd)->GetResDir();
-	filepath += "\\_tmp_";
-	filepath += ee::StringHelper::ToString(wxDateTime::Now().GetTicks());
-	filepath += "_" + ee::SymbolFile::Instance()->Tag(s2::SYM_COMPLEX) + ".json";
-	sym->SetFilepath(filepath);
-
-	ee::FilepathDialog dlg(m_wnd, sym->GetFilepath());
-	if (dlg.ShowModal() == wxID_OK) {
-		sym->SetFilepath(dlg.GetFilepath());
-		dlg.SaveLastDir();
-	}
-
-	ee::InsertSpriteSJ::Instance()->Insert(spr);
-	for (int i = 0, n = sprs.size(); i < n; ++i) {
-		ee::RemoveSpriteSJ::Instance()->Remove(sprs[i]);
-	}
-}
-
-void SelectSpritesOP::BreakUpComplex()
-{
-	if (m_selection->IsEmpty()) {
-		return;
-	}
-
-	std::string tag = "_" + ee::SymbolFile::Instance()->Tag(s2::SYM_COMPLEX) + ".json";
-	std::vector<ee::Sprite*> sprs;
-	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
-	for (int i = 0, n = sprs.size(); i < n; ++i) 
-	{
-		ee::Sprite* spr = sprs[i];
-		if (dynamic_cast<ee::Symbol*>(spr->GetSymbol())->GetFilepath().find(tag) == std::string::npos) {
-			continue;
-		}
-
-		ee::SelectSpriteSJ::Instance()->Select(spr, true);
-
-		std::vector<ee::Sprite*> children;
-		ecomplex::GroupHelper::BreakUp(spr, children);
-		for (int j = 0, m = children.size(); j < m; ++j) {
-			ee::Sprite* spr = children[j];
-			ee::InsertSpriteSJ::Instance()->Insert(spr);
-			spr->RemoveReference();
-		}
-
-		ee::RemoveSpriteSJ::Instance()->Remove(spr);
-	}
 }
 
 }

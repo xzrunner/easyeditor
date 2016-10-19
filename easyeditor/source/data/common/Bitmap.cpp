@@ -54,10 +54,6 @@ bool Bitmap::LoadFromFile(const std::string& filepath)
 		return true;
 	}
 
-	if (!FileHelper::IsFileExist(filepath)) {
-		throw Exception("File: %s don't exist!", filepath.c_str());
-	}
-
 	const GLubyte* test = glGetString(GL_VERSION);
 	if (!test) {
 		return true;

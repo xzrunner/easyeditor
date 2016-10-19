@@ -32,10 +32,6 @@ public:
 	}
 
 private:
-	void GroupSelection();
-	void BreakUpSelection();
-
-private:
 	OpenSymbolDialog m_open_symbol;
 
 	ee::CrossGuides* m_guides;

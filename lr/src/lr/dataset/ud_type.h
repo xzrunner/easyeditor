@@ -8,7 +8,6 @@ enum UDType
 {
 	UT_BASE_FILE,
 	UT_SHAPES,
-	UT_NEW_COMPLEX,
 };
 
 }

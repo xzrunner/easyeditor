@@ -4,8 +4,25 @@
 
 #include <ee/Math2D.h>
 #include <ee/SpriteFactory.h>
+#include <ee/SpriteSelection.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/StringHelper.h>
+#include <ee/SymbolFile.h>
+#include <ee/FilepathDialog.h>
+#include <ee/sprite_msg.h>
+#include <ee/SymbolType.h>
+#include <ee/AtomicOP.h>
+#include <ee/TranslateSpriteAOP.h>
+#include <ee/CombineAOP.h>
+#include <ee/DeleteSpriteAOP.h>
+#include <ee/InsertSpriteAOP.h>
+#include <ee/panel_msg.h>
+#include <ee/FileHelper.h>
 
 #include <sprite2/S2_Sprite.h>
+#include <sprite2/SymType.h>
+
+#include <wx/datetime.h>
 
 #include <assert.h>
 
@@ -18,7 +35,7 @@ Sprite* GroupHelper::Group(const std::vector<ee::Sprite*>& sprs)
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
 		sym->Add(sprs[i]);
 	}
-	sym->RefreshThumbnail("group");
+	sym->RefreshThumbnail(ee::SYM_GROUP_TAG);
 
 	sm::vec2 c = sym->GetBounding().Center();
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
@@ -69,6 +86,120 @@ void GroupHelper::BreakUp(ee::Sprite* group, std::vector<ee::Sprite*>& sprs)
 
 		sprs.push_back(spr);
 	}
+}
+
+void GroupHelper::BuildComplex(ee::SpriteSelection* selection, const std::string& dir, wxWindow* wnd)
+{
+	if (selection->IsEmpty()) {
+		return;
+	}
+
+	std::vector<ee::Sprite*> sprs;
+	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+
+	Sprite* spr = Group(sprs);
+	std::string filepath = dir;
+	filepath += "\\_tmp_";
+	filepath += ee::StringHelper::ToString(wxDateTime::Now().GetTicks());
+	filepath += "_" + ee::SymbolFile::Instance()->Tag(s2::SYM_COMPLEX) + ".json";
+	Symbol* sym = dynamic_cast<Symbol*>(spr->GetSymbol());
+	sym->SetFilepath(filepath);
+
+	ee::FilepathDialog dlg(wnd, sym->GetFilepath());
+	if (dlg.ShowModal() == wxID_OK) {
+		sym->SetFilepath(dlg.GetFilepath());
+		dlg.SaveLastDir();
+	}
+
+	ee::InsertSpriteSJ::Instance()->Insert(spr);
+}
+
+void GroupHelper::BuildGroup(ee::SpriteSelection* selection)
+{
+	if (selection->IsEmpty()) {
+		return;
+	}
+
+	std::vector<ee::Sprite*> sprs;
+	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+
+	ecomplex::Sprite* spr = ecomplex::GroupHelper::Group(sprs);
+	ee::Symbol* sym = dynamic_cast<ee::Symbol*>(spr->GetSymbol());
+	sym->SetFilepath(ee::SYM_GROUP_TAG);
+	sym->name = "_group";
+	sym->SetName("_group");
+	spr->SetName("_group");
+
+	ee::AtomicOP* move_op = new ee::TranslateSpriteAOP(sprs, -spr->GetPosition());
+
+	std::vector<ee::Sprite*> removed;
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		ee::Sprite* spr = sprs[i];
+		ee::RemoveSpriteSJ::Instance()->Remove(spr);
+		removed.push_back(spr);
+	}
+	ee::AtomicOP* del_op = new ee::DeleteSpriteAOP(removed);
+
+	ee::InsertSpriteSJ::Instance()->Insert(spr);
+	ee::AtomicOP* add_op = new ee::InsertSpriteAOP(spr);
+	spr->RemoveReference();
+
+	ee::CombineAOP* combine = new ee::CombineAOP;
+	combine->Insert(move_op);
+	combine->Insert(del_op);
+	combine->Insert(add_op);
+	ee::EditAddRecordSJ::Instance()->Add(combine);
+}
+
+void GroupHelper::BreakUpComplex(ee::SpriteSelection* selection)
+{
+	if (selection->IsEmpty()) {
+		return;
+	}
+
+	std::vector<ee::Sprite*> sprs;
+	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	for (int i = 0, n = sprs.size(); i < n; ++i) 
+	{
+		ee::Sprite* spr = sprs[i];
+		int type = ee::SymbolFile::Instance()->Type(dynamic_cast<ee::Symbol*>(spr->GetSymbol())->GetFilepath());
+		if (type == s2::SYM_COMPLEX) {
+			BreakUp(spr);
+		}
+	}
+}
+
+void GroupHelper::BreakUpGroup(ee::SpriteSelection* selection)
+{
+	if (selection->IsEmpty()) {
+		return;
+	}
+
+	std::vector<ee::Sprite*> sprs;
+	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	for (int i = 0, n = sprs.size(); i < n; ++i) 
+	{
+		ee::Sprite* spr = sprs[i];
+		const std::string& filepath = dynamic_cast<ee::Symbol*>(spr->GetSymbol())->GetFilepath();
+		if (ee::FileHelper::GetFilename(filepath) == ee::SYM_GROUP_TAG) {
+			BreakUp(spr);
+		}
+	}
+}
+
+void GroupHelper::BreakUp(ee::Sprite* spr)
+{
+	ee::SelectSpriteSJ::Instance()->Select(spr, true);
+
+	std::vector<ee::Sprite*> children;
+	BreakUp(spr, children);
+	for (int j = 0, m = children.size(); j < m; ++j) {
+		ee::Sprite* spr = children[j];
+		ee::InsertSpriteSJ::Instance()->Insert(spr);
+		spr->RemoveReference();
+	}
+
+	ee::RemoveSpriteSJ::Instance()->Remove(spr);	
 }
 
 }
