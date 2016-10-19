@@ -33,6 +33,8 @@ protected:
 private:
 	void Trigger(const std::string& dir) const;
 
+	void FixParticle3d(const std::string& filepath) const;
+
 }; // FixAddColor 
 
 

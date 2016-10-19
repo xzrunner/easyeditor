@@ -68,6 +68,9 @@ void FixAddColor::Trigger(const std::string& dir) const
 		int type = ee::SymbolFile::Instance()->Type(filepath);
 		switch (type)
 		{
+		case s2::SYM_PARTICLE3D:
+			FixParticle3d(filepath);
+			break;
 		case s2::SYM_COMPLEX:
 			FixComplex(filepath);
 			break;
@@ -83,6 +86,36 @@ void FixAddColor::Trigger(const std::string& dir) const
 			}
 			break;
 		}
+	}
+}
+
+void FixAddColor::FixParticle3d(const std::string& filepath) const
+{
+	Json::Value val;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filepath.c_str());
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, val);
+	fin.close();
+
+	bool dirty = false;
+	for (int i = 0, n = val["components"].size(); i < n; ++i) {
+		if (val["components"][i]["add_col_begin"]["a"].asInt() != 0 ||
+			val["components"][i]["add_col_end"]["a"].asInt() != 0) {
+			val["components"][i]["add_col_begin"]["a"] = 0;
+			val["components"][i]["add_col_end"]["a"] = 0;
+			dirty = true;
+		}
+	}
+
+	if (dirty) {
+		Json::StyledStreamWriter writer;
+		std::locale::global(std::locale(""));
+		std::ofstream fout(filepath.c_str());
+		std::locale::global(std::locale("C"));	
+		writer.write(fout, val);
+		fout.close();
 	}
 }
 
