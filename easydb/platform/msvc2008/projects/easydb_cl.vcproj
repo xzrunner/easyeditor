@@ -606,6 +606,14 @@
 				Name="json"
 				>
 				<File
+					RelativePath="..\..\..\src\easydb_cl\ChangeComplexOrigin.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb_cl\ChangeComplexOrigin.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\easydb\ChangeJsonFile.cpp"
 					>
 				</File>
