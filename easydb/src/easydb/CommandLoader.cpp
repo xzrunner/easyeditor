@@ -71,6 +71,7 @@
 #include "FixLRMirror.h"
 #include "FixAddColor.h"
 #include "ChangeComplexOrigin.h"
+#include "FixLRSprLayer.h"
 
 namespace edb
 {
@@ -147,6 +148,7 @@ void CommandLoader::Init()
 	fc->Register(FixLRMirror::Create());
 	fc->Register(FixAddColor::Create());
 	fc->Register(ChangeComplexOrigin::Create());
+	fc->Register(FixLRSprLayer::Create());
 }
 
 }

@@ -670,14 +670,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb_cl\FixLRSprName.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easydb_cl\FixLRSprName.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\easydb_cl\FixMirror.cpp"
 					>
 				</File>
@@ -938,6 +930,26 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\easydb_cl\TransOldLRFile.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="fix"
+					>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\FixLRSprLayer.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\FixLRSprLayer.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\FixLRSprName.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\FixLRSprName.h"
 						>
 					</File>
 				</Filter>
