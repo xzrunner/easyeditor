@@ -47,16 +47,13 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 	const Json::Value& comp_val = val["complex"];
 	
 	m_action = comp_val["action"].asInt();
-	
+
 	if (val.isMember(ee::SYM_GROUP_TAG))
 	{
 		s2::ComplexSymbol* sym = dynamic_cast<s2::ComplexSymbol*>(m_sym);
-		std::string sym_filepath = val["filepath"].asString();
-		sym_filepath = ee::FileHelper::GetAbsolutePath(dir, sym_filepath);
-		dynamic_cast<ee::Symbol*>(m_sym)->SetFilepath(sym_filepath);
-		std::string sym_dir = ee::FileHelper::GetFileDir(sym_filepath);
+		dynamic_cast<ee::Symbol*>(m_sym)->SetFilepath(ee::SYM_GROUP_TAG);
 		for (int i = 0, n = val[ee::SYM_GROUP_TAG].size(); i < n; ++i) {
-			ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(val[ee::SYM_GROUP_TAG][i], sym_dir);
+			ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(val[ee::SYM_GROUP_TAG][i], dir);
 			sym->Add(spr);
 			spr->RemoveReference();
 		}
@@ -74,10 +71,8 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 	val["complex"] = comp_val;
 
 	ee::Symbol* ee_sym = dynamic_cast<ee::Symbol*>(m_sym);
-	std::string filename = ee::FileHelper::GetFilename(ee_sym->GetFilepath());
-	if (filename == ee::SYM_GROUP_TAG)
+	if (ee_sym->GetFilepath() == ee::SYM_GROUP_TAG)
 	{
-		std::string group_dir = ee::FileHelper::GetFileDir(ee_sym->GetFilepath());
 		s2::ComplexSymbol* sym = dynamic_cast<s2::ComplexSymbol*>(m_sym);
 		assert(sym);
 		const std::vector<s2::Sprite*>& children = sym->GetChildren();
@@ -88,8 +83,11 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 			ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 			std::string filepath = dynamic_cast<ee::Symbol*>(child->GetSymbol())->GetFilepath();
 			assert(!filepath.empty());
-			val[ee::SYM_GROUP_TAG][i]["filepath"] = ee::FileHelper::GetRelativePath(group_dir, filepath);
-			child->Store(val[ee::SYM_GROUP_TAG][i]);
+			if (filepath != ee::SYM_GROUP_TAG) {
+				filepath = ee::FileHelper::GetRelativePath(dir, filepath);
+			}
+			val[ee::SYM_GROUP_TAG][i]["filepath"] = filepath;
+			child->Store(val[ee::SYM_GROUP_TAG][i], dir);
 		}
 	}
 }

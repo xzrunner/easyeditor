@@ -181,7 +181,7 @@ void GroupHelper::BreakUpGroup(ee::SpriteSelection* selection)
 	{
 		ee::Sprite* spr = sprs[i];
 		const std::string& filepath = dynamic_cast<ee::Symbol*>(spr->GetSymbol())->GetFilepath();
-		if (ee::FileHelper::GetFilename(filepath) == ee::SYM_GROUP_TAG) {
+		if (filepath == ee::SYM_GROUP_TAG) {
 			BreakUp(spr);
 		}
 	}

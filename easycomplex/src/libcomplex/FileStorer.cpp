@@ -4,6 +4,7 @@
 #include <ee/FileHelper.h>
 #include <ee/Exception.h>
 #include <ee/Sprite.h>
+#include <ee/SymbolType.h>
 
 #include <sprite2/S2_Sprite.h>
 
@@ -14,7 +15,7 @@
 namespace ecomplex
 {
 
-void FileStorer::Store(const char* filepath, const Symbol* sym)
+void FileStorer::Store(const std::string& filepath, const Symbol* sym, const std::string& _dir)
 {
 	CheckDuplicateName(sym);
 	CheckNameDiff(sym);
@@ -34,7 +35,12 @@ void FileStorer::Store(const char* filepath, const Symbol* sym)
 
 	value["use_render_cache"] = sym->m_use_render_cache;
 
-	std::string dir = ee::FileHelper::GetFileDir(filepath) + "\\";
+	std::string dir;
+	if (filepath != ee::SYM_GROUP_TAG) {
+		dir = ee::FileHelper::GetFileDir(filepath) + "\\";
+	} else {
+		dir = _dir;
+	}
 	const std::vector<s2::Sprite*>& children = sym->GetChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
 		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
@@ -45,13 +51,13 @@ void FileStorer::Store(const char* filepath, const Symbol* sym)
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
-	std::ofstream fout(filepath);
+	std::ofstream fout(filepath.c_str());
 	std::locale::global(std::locale("C"));	
 	writer.write(fout, value);
 	fout.close();
 }
 
-void FileStorer::StoreWithHistory(const char* filepath, const Symbol* sym)
+void FileStorer::StoreWithHistory(const std::string& filepath, const Symbol* sym, const std::string& _dir)
 {
 	CheckDuplicateName(sym);
 	CheckNameDiff(sym);
@@ -69,7 +75,12 @@ void FileStorer::StoreWithHistory(const char* filepath, const Symbol* sym)
 
 	value["use_render_cache"] = sym->m_use_render_cache;
 
-	std::string dir = ee::FileHelper::GetFileDir(filepath) + "\\";
+	std::string dir;
+	if (filepath != ee::SYM_GROUP_TAG) {
+		dir	= ee::FileHelper::GetFileDir(filepath) + "\\";
+	} else {
+		dir = _dir;
+	}
 
 	const std::vector<s2::Sprite*>& children = sym->GetChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
@@ -81,7 +92,7 @@ void FileStorer::StoreWithHistory(const char* filepath, const Symbol* sym)
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
-	std::ofstream fout(filepath);
+	std::ofstream fout(filepath.c_str());
 	std::locale::global(std::locale("C"));
 	if (fout.fail()) {
 		throw ee::Exception("Can't save file: %s !", filepath);
@@ -109,7 +120,11 @@ Json::Value FileStorer::Store(ee::Sprite* spr, const std::string& dir)
 	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());
 
 	// filepath
-	value["filepath"] = ee::FileHelper::GetRelativePath(dir, sym->GetFilepath());
+	std::string filepath = sym->GetFilepath();
+	if (filepath != ee::SYM_GROUP_TAG) {
+		filepath = ee::FileHelper::GetRelativePath(dir, filepath);
+	}
+	value["filepath"] = filepath;
 	// filepaths
 	const std::set<std::string>& filepaths = sym->GetFilepaths();
 	std::set<std::string>::const_iterator itr = filepaths.begin();

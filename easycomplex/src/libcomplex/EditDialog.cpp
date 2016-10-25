@@ -11,6 +11,7 @@
 #include <ee/SpriteFactory.h>
 #include <ee/Sprite.h>
 #include <ee/SymbolType.h>
+#include <ee/FileHelper.h>
 
 #include <sprite2/S2_Sprite.h>
 
@@ -95,7 +96,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 	{
 		const std::string& filepath = m_sym->GetFilepath();
 		if (filepath != ee::SYM_GROUP_TAG) {
-			FileStorer::Store(filepath.c_str(), m_sym);
+			FileStorer::Store(filepath, m_sym, ee::FileHelper::GetFileDir(filepath));
 			m_sym->RefreshThumbnail(filepath, true);
 		}
 // 		m_sym->InitBounding();

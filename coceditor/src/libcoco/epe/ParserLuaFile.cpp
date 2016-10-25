@@ -9,6 +9,7 @@
 #include <ee/ImageSymbol.h>
 #include <ee/ImageSprite.h>
 #include <ee/SpriteFactory.h>
+#include <ee/FileHelper.h>
 
 #include <easycomplex.h>
 #include <easyanim.h>
@@ -352,7 +353,7 @@ void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames
 		}
 		std::string filename = outfloder + "\\" + ss.str() 
 			+ "_" + ee::SymbolFile::Instance()->Tag(s2::SYM_COMPLEX) + ".json";
-		ecomplex::FileStorer::Store(filename.c_str(), sym);
+		ecomplex::FileStorer::Store(filename, sym, ee::FileHelper::GetFileDir(filename));
 
 		pic->filename = filename;
 		sm::vec2 sz = sym->GetBounding().Size();
@@ -469,7 +470,7 @@ void ParserLuaFile::transAniToComplexFile(const std::string& outfloder, int id, 
 	}
 	std::string filename = outfloder + "\\" + ss.str() 
 		+ "_" + ee::SymbolFile::Instance()->Tag(s2::SYM_COMPLEX) + ".json";
-	ecomplex::FileStorer::Store(filename.c_str(), sym);
+	ecomplex::FileStorer::Store(filename, sym, ee::FileHelper::GetFileDir(filename));
 
 	ani->filename = filename;
 

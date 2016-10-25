@@ -101,8 +101,7 @@ bool Bitmap::LoadFromFile(const std::string& filepath)
 	}
 	else
 	{
-		std::string filename = FileHelper::GetFilename(filepath);
-		if (filename == SYM_GROUP_TAG) {
+		if (filepath == SYM_GROUP_TAG) {
 			return false;
 		} else {
 			Symbol* sym = SymbolMgr::Instance()->FetchSymbol(filepath);
