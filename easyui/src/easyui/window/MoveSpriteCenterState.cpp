@@ -1,6 +1,7 @@
 #include "MoveSpriteCenterState.h"
 
 #include <ee/Sprite.h>
+#include <ee/FileHelper.h>
 
 #include <easycomplex.h>
 
@@ -59,7 +60,7 @@ bool MoveSpriteCenterState::OnMouseDrag(const sm::vec2& pos)
 		children[i]->Translate(offset);
 	}
 
-	ecomplex::FileStorer::Store(sym->GetFilepath().c_str(), sym);
+	ecomplex::FileStorer::Store(sym->GetFilepath(), sym, ee::FileHelper::GetFileDir(sym->GetFilepath()));
 
 	return true;
 }

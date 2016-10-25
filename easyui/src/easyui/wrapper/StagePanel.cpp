@@ -107,7 +107,7 @@ void StagePanel::StoreToFile(const char* filename) const
 	}
 	std::string items_path = name + "_items_complex[gen].json";
 	items_complex.SetFilepath(items_path);
-	ecomplex::FileStorer::Store(items_path.c_str(), &items_complex);
+	ecomplex::FileStorer::Store(items_path, &items_complex, ee::FileHelper::GetFileDir(items_path));
 //	items_complex.InitBounding();
 
 	// wrapper complex
@@ -119,7 +119,7 @@ void StagePanel::StoreToFile(const char* filename) const
 	items_sprite.AddReference();
 	std::string top_path = name + "_wrapper_complex[gen].json";
 	wrapper_complex.SetFilepath(top_path);
-	ecomplex::FileStorer::Store(top_path.c_str(), &wrapper_complex);
+	ecomplex::FileStorer::Store(top_path, &wrapper_complex, ee::FileHelper::GetFileDir(top_path));
 
 	// ui
 	std::string ui_path = filename;

@@ -126,7 +126,7 @@ std::string FileIO::StoreWrapper(const std::string& filepath, const std::string&
 	std::string wrapper_path = filename + "_wrapper_complex[gen].json";
 	wrapper_complex.SetFilepath(wrapper_path);
 	wrapper_complex.name = name;
-	ecomplex::FileStorer::Store(wrapper_path.c_str(), &wrapper_complex);
+	ecomplex::FileStorer::Store(wrapper_path.c_str(), &wrapper_complex, ee::FileHelper::GetFileDir(filepath));
 
 	return ee::FileHelper::GetRelativePath(dir, wrapper_path);
 }
