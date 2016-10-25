@@ -73,7 +73,9 @@ uint8_t* LibpngAdapter::Read(const char* filename, int& width, int& height,
 	std::locale::global(std::locale(""));
 	std::ifstream fin(filename, std::ios::binary);
 	std::locale::global(std::locale("C"));
-	assert(!fin.fail());
+	if (fin.fail()) {
+		throw Exception("Error filepath: %s\n", filename);
+	}
 
 	// get length of file:
 	fin.seekg (0, fin.end);
