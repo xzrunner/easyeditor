@@ -36,7 +36,7 @@ int CreateColLUT::Run(int argc, char *argv[])
 
 void CreateColLUT::Run(const std::string& filepath) const
 {
-	int grid = 64;
+	int grid = 16;
 	int s = 1;
 	int w = (grid + 2) * 16 * s,
 		h = (grid + 2) * s;
