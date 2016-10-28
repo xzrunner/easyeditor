@@ -68,7 +68,7 @@ void AnimToComplexWithColor::Run(const std::string& cfg_filepath)
 		output = output.substr(0, pos);
 
 		output = dir + "\\" + output + "_" + trans.ext + "_" + angle + "_complex.json";
-		ecomplex::FileStorer::Store(output.c_str(), sym);
+		ecomplex::FileStorer::Store(output, sym, dir);
 
 		delete sym;
 	}

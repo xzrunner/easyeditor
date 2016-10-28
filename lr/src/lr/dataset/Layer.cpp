@@ -201,7 +201,8 @@ void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
 
 		if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(spr)) {
 			const ecomplex::Symbol* sym = dynamic_cast<const ecomplex::Symbol*>(complex->GetSymbol());
-			ecomplex::FileStorer::Store(sym->GetFilepath().c_str(), sym);
+			const std::string& filepath = sym->GetFilepath();
+			ecomplex::FileStorer::Store(filepath, sym, ee::FileHelper::GetFileDir(filepath));
 		}
 	}
 

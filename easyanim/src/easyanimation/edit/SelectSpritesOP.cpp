@@ -9,6 +9,8 @@
 #include <ee/MultiSpritesImpl.h>
 #include <ee/Sprite.h>
 
+#include <easycomplex.h>
+
 namespace eanim
 {
 
@@ -17,6 +19,32 @@ SelectSpritesOP::SelectSpritesOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::Mu
 	: ee::SelectSpritesOP(wnd, stage, sprites_impl, callback)
 	, m_open_symbol(wnd, stage, sprites_impl)
 {
+}
+
+bool SelectSpritesOP::OnKeyDown(int keyCode)
+{
+	if (ee::SelectSpritesOP::OnKeyDown(keyCode)) {
+		return true;
+	}
+
+	// group
+	if (m_stage->GetKeyState(WXK_CONTROL) && keyCode == 'G') {
+		ecomplex::GroupHelper::BuildGroup(m_selection);
+		return true;
+	} else if (m_stage->GetKeyState(WXK_CONTROL) && keyCode == 'B') {
+		ecomplex::GroupHelper::BreakUpGroup(m_selection);
+		return true;
+	}
+	// complex
+	else if (m_stage->GetKeyState(WXK_ALT) && keyCode == 'G') {
+		ecomplex::GroupHelper::BuildComplex(m_selection, "", m_wnd);
+		return true;
+	} else if (m_stage->GetKeyState(WXK_ALT) && keyCode == 'B') {
+		ecomplex::GroupHelper::BreakUpComplex(m_selection);
+		return true;
+	}
+
+	return false;
 }
 
 bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
