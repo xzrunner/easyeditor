@@ -7,6 +7,7 @@
 
 #include "preview/MainDialog.h"
 #include "view/StagePanel.h"
+#include "view/typedef.h"
 
 #include <ee/FileHelper.h>
 #include <ee/Exception.h>
@@ -117,10 +118,28 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 	ee::Snapshoot ss(cfg->m_view_width, cfg->m_view_height);
 	StagePanel* stage = (StagePanel*)(m_task->GetEditPanel());
 
-	std::vector<ee::Sprite*> sprs;
-	stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs), ee::DT_VISIBLE);
-	for (int i = 0, n = sprs.size(); i < n; ++i) {
-		ss.DrawSprite(sprs[i]);
+	std::vector<ee::Sprite*> cover_layer, top_layer;
+
+	std::vector<ee::Sprite*> all_sprites;
+	stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(all_sprites), ee::DT_VISIBLE);
+	for (int i = 0, n = all_sprites.size(); i < n; ++i) {
+		ee::Sprite* spr = all_sprites[i];
+
+		const std::string& tag = spr->GetTag();
+		if (tag.find(TOP_LAYER_TAG) != std::string::npos) {
+			top_layer.push_back(spr);
+		} else if (tag.find(COVER_LAYER_TAG) != std::string::npos) {
+			cover_layer.push_back(spr);
+		} else {
+			ss.DrawSprite(spr);
+		}
+	}
+	std::sort(cover_layer.begin(), cover_layer.end(), ee::SpriteCmp(ee::SpriteCmp::e_y_invert));
+	for (int i = 0, n = cover_layer.size(); i < n; ++i) {
+		ss.DrawSprite(cover_layer[i]);
+	}
+	for (int i = 0, n = top_layer.size(); i < n; ++i) {
+		ss.DrawSprite(top_layer[i]);
 	}
 
 	std::vector<ee::Shape*> shapes;
