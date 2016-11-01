@@ -16,6 +16,8 @@ public:
 
 	virtual bool OnButtonClick(wxPropertyGrid* propgrid, wxString& value);
 
+	void SetFilepath(const std::string& filepath);
+
 private:
 	wxString m_filepath;
 

@@ -245,6 +245,11 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	Sprite* spr = m_impl->GetSprite();
 	Symbol* sym = dynamic_cast<Symbol*>(spr->GetSymbol());
 
+	FileDirProperty* dir_prop = dynamic_cast<FileDirProperty*>(pg->GetProperty(wxT("FileDir")));
+	dir_prop->SetFilepath(sym->GetFilepath());
+	FileNameProperty* name_prop = dynamic_cast<FileNameProperty*>(pg->GetProperty(wxT("FileName")));
+	name_prop->SetFilepath(sym->GetFilepath());
+
 	pg->GetProperty(wxT("Name"))->SetValue(spr->GetName());
 	pg->GetProperty(wxT("Tag"))->SetValue(spr->GetTag());
 

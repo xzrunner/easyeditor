@@ -19,4 +19,10 @@ bool FileNameProperty::OnButtonClick(wxPropertyGrid* propgrid, wxString& value)
 	return false;
 }
 
+void FileNameProperty::SetFilepath(const std::string& filepath)
+{
+	m_filepath = filepath;
+	SetValue(FileHelper::GetFilename(filepath));
+}
+
 }
