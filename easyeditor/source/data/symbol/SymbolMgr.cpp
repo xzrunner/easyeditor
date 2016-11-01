@@ -49,6 +49,7 @@ Symbol* SymbolMgr::FetchSymbol(const std::string& filepath, int type)
 		bool isLoaded = sym->LoadFromFile(fixed_path);
 		if (isLoaded)
 		{
+			sym->AddReference();
 			m_syms.insert(std::make_pair(fixed_path, sym));
 			return sym;
 		}

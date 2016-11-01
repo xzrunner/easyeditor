@@ -16,6 +16,8 @@
 #include "shape_msg.h"
 #include "panel_msg.h"
 #include "StringHelper.h"
+#include "SymbolMgr.h"
+#include "Bitmap.h"
 
 #include <gum/GUM_DTex.h>
 
@@ -127,6 +129,9 @@ void Frame::Clear()
 	ClearSpriteSJ::Instance()->Clear();
 	ClearShapeSJ::Instance()->Clear();
 	ClearPanelSJ::Instance()->Clear();
+
+	SymbolMgr::Instance()->Clear();
+	BitmapMgr::Instance()->Clear();
 }
 
 void Frame::SaveTmpInfo()
