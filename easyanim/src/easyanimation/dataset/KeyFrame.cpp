@@ -35,7 +35,6 @@ void KeyFrame::SetLayer(Layer* layer)
 	cu::RefCountObjAssign(m_layer, layer);
 }
 
-
 void KeyFrame::CopyFromOther(const KeyFrame* src)
 {
 	if (this == src) {
@@ -46,12 +45,12 @@ void KeyFrame::CopyFromOther(const KeyFrame* src)
 	for (size_t i = 0, n = src->m_sprs.size(); i < n; ++i)
 	{
 		ee::Sprite* s = dynamic_cast<ee::Sprite*>(((cu::Cloneable*)src->m_sprs[i])->Clone());
-		SpriteUserData::SetSprData(s, m_layer, this);
+		SpriteUserData::SetSprData(s, src->m_layer, this);
 		m_sprs.push_back(s);
 
-		if (m_layer) {
-			s->SetObserver(&m_layer->GetSpriteObserver());
-			m_layer->GetSpriteObserver().Insert(s, m_time);
+		if (src->m_layer) {
+			s->SetObserver(&src->m_layer->GetSpriteObserver());
+			src->m_layer->GetSpriteObserver().Insert(s, m_time);
 		}
 	}
 
@@ -65,30 +64,13 @@ void KeyFrame::Insert(ee::Sprite* spr, int idx)
 	if (!spr) {
 		throw ee::Exception("KeyFrame::Insert fail: spr null.");
 	}
-
-	std::ofstream fout("d:/debug_copy.txt");
-
-	fout << "KeyFrame::Insert 0\n";
-
 	spr->AddReference();
-
-	fout << "KeyFrame::Insert 1\n" << spr << " " << m_layer << " " << this << "\n";
-
-	SpriteUserData::SetSprData(spr, m_layer, this, fout);
-	fout << "KeyFrame::Insert 2\n";
-
+	SpriteUserData::SetSprData(spr, m_layer, this);
 	ee::ObjectVector<ee::Sprite>::Insert(m_sprs, spr, idx);
-	fout << "KeyFrame::Insert 3\n";
-
 	if (m_layer) {
-		fout << "KeyFrame::Insert 4\n";
 		spr->SetObserver(&m_layer->GetSpriteObserver());
-		fout << "KeyFrame::Insert 5\n";
 		m_layer->GetSpriteObserver().Insert(spr, m_time);
-		fout << "KeyFrame::Insert 6\n";
 	}
-	fout << "KeyFrame::Insert 7\n";
-	fout.close();
 }
 
 bool KeyFrame::Remove(ee::Sprite* spr) 
