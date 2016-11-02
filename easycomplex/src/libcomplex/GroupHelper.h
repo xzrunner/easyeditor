@@ -7,8 +7,6 @@
 
 class wxWindow;
 
-namespace ee { class SpriteSelection; }
-
 namespace ecomplex
 {
 
@@ -20,11 +18,11 @@ public:
 	static Sprite* Group(const std::vector<ee::Sprite*>& sprs);
 	static void BreakUp(ee::Sprite* group, std::vector<ee::Sprite*>& sprs);
 
-	static void BuildComplex(ee::SpriteSelection* selection, const std::string& dir, wxWindow* wnd);
-	static void BreakUpComplex(ee::SpriteSelection* selection);
+	static void BuildComplex(const std::vector<ee::Sprite*>& sprs, const std::string& dir, wxWindow* wnd);
+	static void BreakUpComplex(std::vector<ee::Sprite*>& sprs);
 
-	static void BuildGroup(ee::SpriteSelection* selection);
-	static void BreakUpGroup(ee::SpriteSelection* selection);
+	static void BuildGroup(const std::vector<ee::Sprite*>& sprs);
+	static void BreakUpGroup(std::vector<ee::Sprite*>& sprs);
 
 	static void BreakUp(ee::Sprite* spr);
 

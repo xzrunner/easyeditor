@@ -40,11 +40,11 @@ protected:
 	virtual void PasteSprToClipboard(const Sprite* spr, Json::Value& value) const;
 	virtual void CopySprFromClipboard(Sprite* spr, const Json::Value& value) const;
 
+	void GetOrderedSelection(std::vector<Sprite*>& sprs) const;
+
 private:
 	void PasteToSelection() const;
 	void CopyFromSelection();
-
-	void GetOrderedSelection(std::vector<Sprite*>& sprs) const;
 
 protected:
 	SpriteSelection* m_selection;

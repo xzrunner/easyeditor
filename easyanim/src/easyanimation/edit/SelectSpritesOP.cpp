@@ -29,18 +29,26 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 
 	// group
 	if (m_stage->GetKeyState(WXK_CONTROL) && keyCode == 'G') {
-		ecomplex::GroupHelper::BuildGroup(m_selection);
+		std::vector<ee::Sprite*> sprs;
+		GetOrderedSelection(sprs);
+		ecomplex::GroupHelper::BuildGroup(sprs);
 		return true;
 	} else if (m_stage->GetKeyState(WXK_CONTROL) && keyCode == 'B') {
-		ecomplex::GroupHelper::BreakUpGroup(m_selection);
+		std::vector<ee::Sprite*> sprs;
+		GetOrderedSelection(sprs);
+		ecomplex::GroupHelper::BreakUpGroup(sprs);
 		return true;
 	}
 	// complex
 	else if (m_stage->GetKeyState(WXK_ALT) && keyCode == 'G') {
-		ecomplex::GroupHelper::BuildComplex(m_selection, "", m_wnd);
+		std::vector<ee::Sprite*> sprs;
+		GetOrderedSelection(sprs);
+		ecomplex::GroupHelper::BuildComplex(sprs, "", m_wnd);
 		return true;
 	} else if (m_stage->GetKeyState(WXK_ALT) && keyCode == 'B') {
-		ecomplex::GroupHelper::BreakUpComplex(m_selection);
+		std::vector<ee::Sprite*> sprs;
+		GetOrderedSelection(sprs);
+		ecomplex::GroupHelper::BreakUpComplex(sprs);
 		return true;
 	}
 

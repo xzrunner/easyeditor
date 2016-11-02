@@ -47,24 +47,25 @@ ViewlistList::~ViewlistList()
 
 void ViewlistList::OnListSelected(wxCommandEvent& event)
 {
-	std::set<int> selected;
+	std::vector<int> selected;
+	selected.reserve(GetSelectedCount());
 	unsigned long cookie;
 	int item = GetFirstSelected(cookie);
 	while (item != wxNOT_FOUND) {
-		selected.insert(item);
+		selected.push_back(item);
 		item = GetNextSelected(cookie);
 	}
 
 	ClearSpriteSelectionSJ::Instance()->Clear();
 
 	bool clear = selected.size() == 1;
-	std::set<int>::iterator itr = selected.begin();
-	for ( ; itr != selected.end(); ++itr) {
- 		if (m_impl) {
- 			m_impl->OnSelected(this, *itr, clear);
- 		} else {
- 			OnSelected(*itr, clear);
- 		}
+	for (int i = selected.size() - 1; i >= 0; --i)
+	{
+		if (m_impl) {
+			m_impl->OnSelected(this, selected[i], clear);
+		} else {
+			OnSelected(selected[i], clear);
+		}
 	}
 }
 

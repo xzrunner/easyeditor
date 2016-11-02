@@ -4,7 +4,6 @@
 
 #include <ee/Math2D.h>
 #include <ee/SpriteFactory.h>
-#include <ee/SpriteSelection.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/StringHelper.h>
 #include <ee/SymbolFile.h>
@@ -88,14 +87,11 @@ void GroupHelper::BreakUp(ee::Sprite* group, std::vector<ee::Sprite*>& sprs)
 	}
 }
 
-void GroupHelper::BuildComplex(ee::SpriteSelection* selection, const std::string& dir, wxWindow* wnd)
+void GroupHelper::BuildComplex(const std::vector<ee::Sprite*>& sprs, const std::string& dir, wxWindow* wnd)
 {
-	if (selection->IsEmpty()) {
+	if (sprs.empty()) {
 		return;
 	}
-
-	std::vector<ee::Sprite*> sprs;
-	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
 
 	Sprite* spr = Group(sprs);
 	std::string filepath = dir;
@@ -114,14 +110,27 @@ void GroupHelper::BuildComplex(ee::SpriteSelection* selection, const std::string
 	ee::InsertSpriteSJ::Instance()->Insert(spr);
 }
 
-void GroupHelper::BuildGroup(ee::SpriteSelection* selection)
+void GroupHelper::BreakUpComplex(std::vector<ee::Sprite*>& sprs)
 {
-	if (selection->IsEmpty()) {
+	if (sprs.empty()) {
 		return;
 	}
 
-	std::vector<ee::Sprite*> sprs;
-	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	for (int i = 0, n = sprs.size(); i < n; ++i) 
+	{
+		ee::Sprite* spr = sprs[i];
+		int type = ee::SymbolFile::Instance()->Type(dynamic_cast<ee::Symbol*>(spr->GetSymbol())->GetFilepath());
+		if (type == s2::SYM_COMPLEX) {
+			BreakUp(spr);
+		}
+	}
+}
+
+void GroupHelper::BuildGroup(const std::vector<ee::Sprite*>& sprs)
+{
+	if (sprs.empty()) {
+		return;
+	}
 
 	ecomplex::Sprite* spr = ecomplex::GroupHelper::Group(sprs);
 	ee::Symbol* sym = dynamic_cast<ee::Symbol*>(spr->GetSymbol());
@@ -151,32 +160,12 @@ void GroupHelper::BuildGroup(ee::SpriteSelection* selection)
 	ee::EditAddRecordSJ::Instance()->Add(combine);
 }
 
-void GroupHelper::BreakUpComplex(ee::SpriteSelection* selection)
+void GroupHelper::BreakUpGroup(std::vector<ee::Sprite*>& sprs)
 {
-	if (selection->IsEmpty()) {
+	if (sprs.empty()) {
 		return;
 	}
 
-	std::vector<ee::Sprite*> sprs;
-	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
-	for (int i = 0, n = sprs.size(); i < n; ++i) 
-	{
-		ee::Sprite* spr = sprs[i];
-		int type = ee::SymbolFile::Instance()->Type(dynamic_cast<ee::Symbol*>(spr->GetSymbol())->GetFilepath());
-		if (type == s2::SYM_COMPLEX) {
-			BreakUp(spr);
-		}
-	}
-}
-
-void GroupHelper::BreakUpGroup(ee::SpriteSelection* selection)
-{
-	if (selection->IsEmpty()) {
-		return;
-	}
-
-	std::vector<ee::Sprite*> sprs;
-	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
 	for (int i = 0, n = sprs.size(); i < n; ++i) 
 	{
 		ee::Sprite* spr = sprs[i];

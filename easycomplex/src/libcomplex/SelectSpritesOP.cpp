@@ -37,24 +37,32 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 
 	// group
 	if (m_stage->GetKeyState(WXK_CONTROL) && keyCode == 'G') {
-		ecomplex::GroupHelper::BuildGroup(m_selection);
+		std::vector<ee::Sprite*> sprs;
+		GetOrderedSelection(sprs);
+		ecomplex::GroupHelper::BuildGroup(sprs);
 		return true;
 	} else if (m_stage->GetKeyState(WXK_CONTROL) && keyCode == 'B') {
-		ecomplex::GroupHelper::BreakUpGroup(m_selection);
+		std::vector<ee::Sprite*> sprs;
+		GetOrderedSelection(sprs);
+		ecomplex::GroupHelper::BreakUpGroup(sprs);
 		return true;
 	}
 	// complex
 	else if (m_stage->GetKeyState(WXK_ALT) && keyCode == 'G')
 	{
+		std::vector<ee::Sprite*> sprs;
+		GetOrderedSelection(sprs);
 		StagePanel* stage = static_cast<StagePanel*>(m_wnd);
 		const Symbol* parent = stage->GetSymbol();
 		std::string dir = ee::FileHelper::GetFileDir(parent->GetFilepath());
-		ecomplex::GroupHelper::BuildComplex(m_selection, dir, m_wnd);
+		ecomplex::GroupHelper::BuildComplex(sprs, dir, m_wnd);
 		return true;
 	}
 	else if (m_stage->GetKeyState(WXK_ALT) && keyCode == 'B')
 	{
-		ecomplex::GroupHelper::BreakUpComplex(m_selection);
+		std::vector<ee::Sprite*> sprs;
+		GetOrderedSelection(sprs);
+		ecomplex::GroupHelper::BreakUpComplex(sprs);
 		return true;
 	}
 
