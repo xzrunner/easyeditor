@@ -102,8 +102,7 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 	std::string out_img_dir = dst_dir + "\\" + IMAGE_DIR;
 	std::string out_json_dir = dst_dir + "\\" + JSON_DIR;
 
-	ee::ImageData* img = ee::ImageDataMgr::Instance()->GetItem(filepath);		
-	
+	ee::ImageData* img = ee::ImageDataMgr::Instance()->GetItem(filepath);
 	ee::ImageTrim trim(*img);
 	sm::rect img_r = trim.Trim();
 	if (!img_r.IsValid()) {
@@ -115,7 +114,7 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 	ee::ImageClip clip(*img);
 	const uint8_t* pixels = clip.Clip(img_r.xmin, img_r.xmax, img_r.ymin, img_r.ymax);
 	const sm::vec2& sz = img_r.Size();
-	ee::ImageData* img_trimed = new ee::ImageData(pixels, sz.x, sz.y, 4);
+	ee::ImageData* img_trimed = new ee::ImageData(pixels, sz.x, sz.y, img->GetChannels());
 
 	std::string filename = ee::FileHelper::GetRelativePath(src_dir, filepath);
 	filename = filename.substr(0, filename.find_last_of('.'));
@@ -134,7 +133,7 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 
 		std::string img_name = ee::StringHelper::Format("%s#%d#%d#%d#%d#.png", filename.c_str(), r.x, r.y, r.w, r.h);
 		std::string img_out_path = out_img_dir + "\\" + img_name;
-		ee::ImageSaver::StoreToFile(pixels, r.w, r.h, 4, img_out_path, ee::ImageSaver::e_png);
+		ee::ImageSaver::StoreToFile(pixels, r.w, r.h, img->GetChannels(), img_out_path, ee::ImageSaver::e_png);
 		delete[] pixels;
 
 		std::string spr_path = std::string(out_img_dir + "\\" + img_name);
