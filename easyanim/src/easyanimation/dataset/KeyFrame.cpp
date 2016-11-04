@@ -65,6 +65,11 @@ void KeyFrame::Insert(ee::Sprite* spr, int idx)
 		throw ee::Exception("KeyFrame::Insert fail: spr null.");
 	}
 	spr->AddReference();
+
+	if (m_layer) {
+		throw ee::Exception("KeyFrame::Insert: call zz see see.");
+	}
+
 	SpriteUserData::SetSprData(spr, m_layer, this);
 	ee::ObjectVector<ee::Sprite>::Insert(m_sprs, spr, idx);
 	if (m_layer) {
