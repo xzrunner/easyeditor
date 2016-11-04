@@ -91,6 +91,7 @@ Sprite* SpriteFactory::Create(const Json::Value& val, const std::string& dir,
 	SymbolSearcher::SetSymbolFilepaths(dir, sym, val);
 	Sprite* spr = SpriteFactory::Instance()->Create(sym);
 	spr->Load(val, dir);
+	spr->SetVisible(true);
 	sym->RemoveReference();
 	return spr;
 }
