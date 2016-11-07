@@ -66,7 +66,7 @@ void KeyFrame::Insert(ee::Sprite* spr, int idx)
 	}
 	spr->AddReference();
 
-	if (m_layer) {
+	if (!m_layer) {
 		throw ee::Exception("KeyFrame::Insert: call zz see see.");
 	}
 
