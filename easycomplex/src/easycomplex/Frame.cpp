@@ -199,8 +199,9 @@ void Frame::onCode(wxCommandEvent& event)
 
 void Frame::SaveAsPNG(const std::string& filepath) const
 {
-	ee::Snapshoot ss;
 	Symbol* sym = ((StagePanel*)(m_task->GetEditPanel()))->GetSymbol();
+	sm::vec2 sz = sym->GetBounding().Size();
+	ee::Snapshoot ss(sz.x, sz.y);
 	ss.OutputToImageFile(sym, filepath);
 }
 
