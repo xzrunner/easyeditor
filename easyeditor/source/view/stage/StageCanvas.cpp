@@ -16,6 +16,7 @@
 #include <shaderlab.h>
 #include <sprite2/RenderCtxStack.h>
 #include <sprite2/SprTimer.h>
+#include <gum/GUM_DTex.h>
 
 namespace ee
 {
@@ -176,6 +177,8 @@ void StageCanvas::OnPaint(wxPaintEvent& event)
 	SwapBuffers();
 
 	ShaderLab::Instance()->Update(1 / 30.0f);
+
+	gum::DTex::Instance()->Update();
 
 //	wxPaintDC dc(this);
 //	OnDrawDC();
