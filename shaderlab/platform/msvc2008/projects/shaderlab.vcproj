@@ -525,6 +525,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\shaderlab\utility\Statistics.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\utility\Statistics.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\shaderlab\utility\typedef.h"
 				>
 			</File>
