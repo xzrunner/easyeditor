@@ -8,6 +8,7 @@
 #include "EE_ShaderLab.h"
 
 #include <shaderlab.h>
+#include <dtex_gl.h>
 
 #include <gl/glew.h>
 
@@ -188,7 +189,7 @@ void FBO::DrawFBO(const Symbol* sym, bool whitebg, float scale)
 		h = static_cast<int>(sz.y * scale);
 	ctx_stack->SetModelView(sm::vec2(0, 0), 1);
 	ctx_stack->SetProjection(w, h);
-	sl::ShaderMgr::Instance()->GetContext()->SetViewport(0, 0, w, h);
+	dtex_gl_set_viewport(0, 0, w, h);
 
 	s2::RenderParams params;
 	sm::vec2 center = rect.Center();
@@ -207,7 +208,7 @@ void FBO::DrawFBO(const Symbol* sym, bool whitebg, float scale)
 	if (has_context) {
 		ctx_stack->SetModelView(last_offset, last_scale);
 		ctx_stack->SetProjection(last_w, last_h);
-		sl::ShaderMgr::Instance()->GetContext()->SetViewport(0, 0, last_w, last_h);
+		dtex_gl_set_viewport(0, 0, last_w, last_h);
 	}
 }
 
@@ -241,7 +242,7 @@ void FBO::DrawFBO(const Sprite* spr, bool clear, int width, int height,
 
 	ctx_stack->SetModelView(sm::vec2(0, 0), 1);
 	ctx_stack->SetProjection(width, height);
-	sl::ShaderMgr::Instance()->GetContext()->SetViewport(0, 0, width, height);
+	dtex_gl_set_viewport(0, 0, width, height);
 
 	s2::RenderParams params;
 	params.mt.Scale(scale, -scale, 1);
@@ -260,7 +261,7 @@ void FBO::DrawFBO(const Sprite* spr, bool clear, int width, int height,
 	if (has_context) {
 		ctx_stack->SetModelView(last_offset, last_scale);
 		ctx_stack->SetProjection(last_w, last_h);	
-		sl::ShaderMgr::Instance()->GetContext()->SetViewport(0, 0, last_w, last_h);
+		dtex_gl_set_viewport(0, 0, last_w, last_h);
 	}
 }
 
@@ -290,7 +291,7 @@ void FBO::DrawFBO(const Shape* shape, bool clear, int width, int height)
 
 	ctx_stack->SetModelView(sm::vec2(0, 0), 1);
 	ctx_stack->SetProjection(width, height);
-	sl::ShaderMgr::Instance()->GetContext()->SetViewport(0, 0, width, height);
+	dtex_gl_set_viewport(0, 0, width, height);
 
 	shape->Draw(sm::mat4::Scaled(1, -1, 1));
 
