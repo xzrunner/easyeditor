@@ -259,7 +259,7 @@ void PackRes::GetImagesFromJson(const std::vector<std::string>& src_dirs, const 
 					std::string filepath = shape_val["material"]["texture path"].asString();
 					filepath = ee::FileHelper::GetAbsolutePath(dir, filepath);
 					filepath = ee::FileHelper::FormatFilepathAbsolute(filepath);
-					img_set.insert(filepath);
+					GetImagesFromJson(src_dirs, filepath, img_set);
 				}
 				shape_val = value["shapes"][i++];
 			}
@@ -281,7 +281,7 @@ void PackRes::GetImagesFromJson(const std::vector<std::string>& src_dirs, const 
 				std::string filepath = ocean_val["tex0"].asString();
 				filepath = ee::FileHelper::GetAbsolutePath(dir, filepath);
 				filepath = ee::FileHelper::FormatFilepathAbsolute(filepath);
-				img_set.insert(filepath);
+				GetImagesFromJson(src_dirs, filepath, img_set);
 				ocean_val = value["ocean"][i++];
 			}
 		}
@@ -302,7 +302,7 @@ void PackRes::GetImagesFromJson(const std::vector<std::string>& src_dirs, const 
 				std::string filepath = comp_val["filepath"].asString();
 				filepath = ee::FileHelper::GetAbsolutePath(dir, filepath);
 				filepath = ee::FileHelper::FormatFilepathAbsolute(filepath);
-				img_set.insert(filepath);
+				GetImagesFromJson(src_dirs, filepath, img_set);
 				comp_val = value["components"][i++];
 			}
 		}
