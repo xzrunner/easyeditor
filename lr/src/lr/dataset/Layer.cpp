@@ -14,6 +14,7 @@
 #include <ee/SpriteFactory.h>
 #include <ee/SymbolMgr.h>
 #include <ee/SymbolFile.h>
+#include <ee/SymbolType.h>
 
 #include <easyshape.h>
 #include <easycomplex.h>
@@ -454,7 +455,10 @@ bool Layer::StoreSprite(ee::Sprite* spr, Json::Value& val, const std::string& di
 	ee::Symbol* sym = dynamic_cast<ee::Symbol*>(spr->GetSymbol());
 	std::string filepath = sym->GetFilepath();
 	assert(!filepath.empty());
-	val["filepath"] = ee::FileHelper::GetRelativePath(dir, filepath);
+	if (filepath != ee::SYM_GROUP_TAG) {
+		filepath = ee::FileHelper::GetRelativePath(dir, filepath);
+	}
+	val["filepath"] = filepath;
 	spr->Store(val, dir);
 	StoreShapesUD(spr, val);
 
