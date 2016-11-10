@@ -27,6 +27,8 @@ private:
 	void OnChangeScreenMultiColor(wxCommandEvent& event);
 	void OnChangeScreenAddColor(wxCommandEvent& event);
 
+	void OnChangeGradingTexture(wxCommandEvent& event);
+
 	void SetTerrain2dUpdate(ee::Sprite* spr, bool open);
 
 private:

@@ -33,14 +33,22 @@ void TwoPassCanvas::OnSize(int w, int h)
 
 static void
 _before_draw(void* ud) {
-	TwoPassCanvas::ScreenStyle* stype = (TwoPassCanvas::ScreenStyle*)ud;
-	s2::RenderColor color;
-	color.mul = stype->multi_col;
-	color.add = stype->add_col;
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
-	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
-	shader->SetColor(color.mul.ToABGR(), color.add.ToABGR());
-	shader->SetColorMap(color.rmap.ToABGR(), color.gmap.ToABGR(), color.bmap.ToABGR());
+	sl::FilterShader* shader = static_cast<sl::FilterShader*>(mgr->GetShader(sl::FILTER));
+	sl::ColGradingProg* prog = static_cast<sl::ColGradingProg*>(shader->GetProgram(sl::FM_COL_GRADING));
+	if (prog->IsTexValid()) {
+		mgr->SetShader(sl::FILTER);
+		shader->SetMode(sl::FM_COL_GRADING);
+	} else {
+	 	TwoPassCanvas::ScreenStyle* stype = (TwoPassCanvas::ScreenStyle*)ud;
+	 	s2::RenderColor color;
+	 	color.mul = stype->multi_col;
+	 	color.add = stype->add_col;
+	 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
+	 	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
+	 	shader->SetColor(color.mul.ToABGR(), color.add.ToABGR());
+	 	shader->SetColorMap(color.rmap.ToABGR(), color.gmap.ToABGR(), color.bmap.ToABGR());
+	}
 }
 
 #ifdef OPEN_SCREEN_CACHE

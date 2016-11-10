@@ -7,11 +7,16 @@
 #include <ee/FetchAllVisitor.h>
 #include <ee/panel_msg.h>
 #include <ee/HSLColorSettingDlg.h>
+#include <ee/Image.h>
+#include <ee/Exception.h>
+#include <ee/ExceptionDlg.h>
 
 #include <easyterrain2d.h>
 #include <easycomplex.h>
 
 #include <sprite2/S2_Sprite.h>
+#include <sprite2/RFColGrading.h>
+#include <shaderlab.h>
 
 namespace lr
 {
@@ -133,19 +138,26 @@ void SettingDialog::InitLayout()
 	right_sizer->AddSpacer(10);
 	{
 		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("ÆÁÄ»ÌØÐ§"));
-		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
-		{
-			wxButton* btn = new wxButton(this, wxID_ANY, "MULTI");
-			Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SettingDialog::OnChangeScreenMultiColor));
-			sizer->Add(btn);
-		}
-		sizer->AddSpacer(5);
-		{
-			wxButton* btn = new wxButton(this, wxID_ANY, "ADD");
-			Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SettingDialog::OnChangeScreenAddColor));
-			sizer->Add(btn);
-		}
+ 		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
+
+		wxButton* btn = new wxButton(this, wxID_ANY, "Open Grading Texture...");
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SettingDialog::OnChangeGradingTexture));
+		sizer->Add(btn);
+
 		right_sizer->Add(sizer);
+
+// 		{
+// 			wxButton* btn = new wxButton(this, wxID_ANY, "MULTI");
+// 			Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SettingDialog::OnChangeScreenMultiColor));
+// 			sizer->Add(btn);
+// 		}
+// 		sizer->AddSpacer(5);
+// 		{
+// 			wxButton* btn = new wxButton(this, wxID_ANY, "ADD");
+// 			Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SettingDialog::OnChangeScreenAddColor));
+// 			sizer->Add(btn);
+// 		}
+// 		right_sizer->Add(sizer);
 	}
 	top_sizer->Add(right_sizer);
 
@@ -227,6 +239,33 @@ void SettingDialog::OnChangeScreenAddColor(wxCommandEvent& event)
 		col = dlg.GetColor();
 		col.a = 0;
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
+	}
+}
+
+void SettingDialog::OnChangeGradingTexture(wxCommandEvent& event)
+{
+	wxFileDialog dlg(this, "Open Image", wxEmptyString, wxEmptyString, "*.png");
+	if (dlg.ShowModal() == wxID_OK)
+	{
+		std::string filepath = dlg.GetPath().ToStdString();
+		
+		sl::ColGradingProg* prog = NULL;
+		sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
+		sl::FilterShader* shader = static_cast<sl::FilterShader*>(mgr->GetShader(sl::FILTER));
+		if (shader) {
+			prog = static_cast<sl::ColGradingProg*>(shader->GetProgram(sl::FM_COL_GRADING));
+		}
+		if (prog) {
+			try {
+				ee::Image* img = ee::ImageMgr::Instance()->GetItem(filepath);
+				if (img) {
+					prog->SetLUTTex(img->GetTexID());
+				}
+			} catch (ee::Exception& e) {
+				ee::ExceptionDlg dlg(m_parent, e);
+				dlg.ShowModal();
+			}
+		}
 	}
 }
 
