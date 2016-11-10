@@ -64,40 +64,52 @@ void StageCanvas::OnDrawSprites() const
 
 void StageCanvas::DrawSprites() const
 {
-	std::vector<ee::Sprite*> cover_layer, top_layer;
+	bool force_visible = SettingCfg::Instance()->m_all_layers_visible_editable;
 
-	std::vector<ee::Sprite*> all_sprites;
-	m_stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(all_sprites), ee::DT_VISIBLE);
-	for (int i = 0, n = all_sprites.size(); i < n; ++i) {
-		ee::Sprite* spr = all_sprites[i];
+	std::vector<DrawableSpr> cover_layer, top_layer;
 
-		const std::string& tag = spr->GetTag();
-		if (tag.find(TOP_LAYER_TAG) != std::string::npos) {
-			top_layer.push_back(spr);
-		} else if (tag.find(COVER_LAYER_TAG) != std::string::npos) {
-			cover_layer.push_back(spr);
-		} else {
-			DrawSprite(spr, false);
+	const std::vector<Layer*>& layers = m_stage->GetLayers();
+	for (int i = 0, n = layers.size(); i < n; ++i) {
+		if (i == 3 || i == 8) {
+			continue;
 		}
+
+		Layer* layer = layers[i];
+		if (!force_visible && !layer->IsVisible()) {
+			continue;
+		}
+
+		int name_visible = layer->GetNameVisible();
+
+		std::vector<ee::Sprite*> sprs;
+		layer->TraverseSprite(ee::FetchAllVisitor<ee::Sprite>(sprs), ee::DT_VISIBLE);
+		for (int j = 0, m = sprs.size(); j < m; ++j) {
+			ee::Sprite* spr = sprs[j];
+			const std::string& tag = spr->GetTag();
+			if (tag.find(TOP_LAYER_TAG) != std::string::npos) {
+				top_layer.push_back(DrawableSpr(spr, name_visible));
+			} else if (tag.find(COVER_LAYER_TAG) != std::string::npos) {
+				cover_layer.push_back(DrawableSpr(spr, name_visible));
+			} else {
+				DrawSprite(spr, false, name_visible);
+			}
+		}		
 	}
 
 	bool draw_flag = SettingCfg::Instance()->m_special_layer_flag;
-	std::sort(cover_layer.begin(), cover_layer.end(), ee::SpriteCmp(ee::SpriteCmp::e_y_invert));
+	std::sort(cover_layer.begin(), cover_layer.end(), SprCmp());
 	for (int i = 0, n = cover_layer.size(); i < n; ++i) {
-		ee::Sprite* spr = cover_layer[i];
-		DrawSprite(spr, draw_flag);
+		DrawSprite(cover_layer[i].spr, draw_flag, cover_layer[i].name_visible);
 	}
-
 	for (int i = 0, n = top_layer.size(); i < n; ++i) {
-		ee::Sprite* spr = top_layer[i];
-		DrawSprite(spr, false);
+		DrawSprite(top_layer[i].spr, false, top_layer[i].name_visible);
 	}
 
-	DrawLayer(m_stage->GetLayers()[3]);
-	DrawLayer(m_stage->GetLayers()[8]);
+	DrawLayer(layers[3]);
+	DrawLayer(layers[8]);
 }
 
-void StageCanvas::DrawSprite(ee::Sprite* spr, bool draw_edge) const
+void StageCanvas::DrawSprite(ee::Sprite* spr, bool draw_edge, int name_visible) const
 {
 	if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) {
 		sm::rect screen_region = GetVisibleRegion();
@@ -116,12 +128,16 @@ void StageCanvas::DrawSprite(ee::Sprite* spr, bool draw_edge) const
 	ee::SpriteRenderer::Instance()->Draw(spr);
 
 	ee::SettingData& cfg = ee::Config::Instance()->GetSettings();
-	const std::string& name = spr->GetName();
-	if (cfg.visible_node_name && !name.empty() && name[0] != '_') {
-		sm::mat4 t = spr->GetTransMatrix();
-		float s = std::max(1.0f, ee::CameraMgr::Instance()->GetCamera()->GetScale()) * cfg.node_name_scale;
-		t.x[0] = t.x[5] = s;
-		gum::GTxt::Instance()->Draw(t, name);
+	if ((name_visible == -1 && cfg.visible_node_name) || name_visible == 1) 
+	{
+		ee::SettingData& cfg = ee::Config::Instance()->GetSettings();
+		const std::string& name = spr->GetName();
+		if (cfg.visible_node_name && !name.empty() && name[0] != '_') {
+			sm::mat4 t = spr->GetTransMatrix();
+			float s = std::max(1.0f, ee::CameraMgr::Instance()->GetCamera()->GetScale()) * cfg.node_name_scale;
+			t.x[0] = t.x[5] = s;
+			gum::GTxt::Instance()->Draw(t, name);
+		}
 	}
 }
 
@@ -170,9 +186,20 @@ void StageCanvas::DrawLayer(const Layer* layer) const
 {
 	std::vector<ee::Sprite*> sprs;
 	layer->TraverseSprite(ee::FetchAllVisitor<ee::Sprite>(sprs), ee::DT_VISIBLE);
+	int name_visible = layer->GetNameVisible();
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
-		DrawSprite(sprs[i], false);
+		DrawSprite(sprs[i], false, name_visible);
 	}
+}
+
+/************************************************************************/
+/* class StageCanvas::SprCmp                                            */
+/************************************************************************/
+
+bool StageCanvas::SprCmp::
+operator() (const DrawableSpr& s0, const DrawableSpr& s1) const
+{
+	return s0.spr->GetPosition().y > s1.spr->GetPosition().y;
 }
 
 }

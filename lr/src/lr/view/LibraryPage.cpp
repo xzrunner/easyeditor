@@ -45,7 +45,7 @@ void LibraryPage::UpdateStatusFromLayer()
 	m_visible_ctrl->SetValue(m_layer->IsVisible());	
 	m_editable_ctrl->SetValue(m_layer->IsEditable());
 
-	switch (m_layer->IsNameVisible()) 
+	switch (m_layer->GetNameVisible()) 
 	{
 	case 0:
 		m_name_ctrl->Set3StateValue(wxCHK_UNCHECKED);

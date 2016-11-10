@@ -47,7 +47,7 @@ public:
 
 	bool IsEditable() const;
 	bool IsVisible() const { return m_visible; }
-	int IsNameVisible() const { return m_name_visible; }
+	int GetNameVisible() const { return m_name_visible; }
 
 	void SetNameVisible(bool visible) { m_name_visible = visible; }
 	void SetEditable(bool editable) { m_editable = editable; }

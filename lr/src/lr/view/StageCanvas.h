@@ -24,12 +24,28 @@ protected:
 
 private:
 	void DrawSprites() const;
-	void DrawSprite(ee::Sprite* spr, bool draw_edge) const;
+	void DrawSprite(ee::Sprite* spr, bool draw_edge, int name_visible) const;
 
 	void DrawRegion() const;
 	void DrawPseudo3dBound() const;
 
 	void DrawLayer(const Layer* layer) const;
+
+private:
+	struct DrawableSpr
+	{
+		ee::Sprite* spr;
+		int name_visible;
+
+		DrawableSpr(ee::Sprite* spr, int name_visible) 
+			: spr(spr), name_visible(name_visible) {}
+	};
+
+	class SprCmp
+	{
+	public:
+		bool operator() (const DrawableSpr& s0, const DrawableSpr& s1) const;
+	}; // SprCmp
 
 private:
 	StagePanel* m_stage;
