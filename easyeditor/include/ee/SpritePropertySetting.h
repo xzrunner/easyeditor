@@ -38,6 +38,12 @@ protected:
 	Sprite* GetSprite();
 
 private:
+	static void SetColMul(ee::Sprite* spr, const std::string& val);
+	static void SetColAdd(ee::Sprite* spr, const std::string& val);
+	static void SetColAlpha(ee::Sprite* spr, const std::string& val);
+	static void SetColOverlap(ee::Sprite* spr, const std::string& val);
+
+private:
 	SpritePropertyImpl* m_impl;
 
 	wxPropertyGrid* m_pg;

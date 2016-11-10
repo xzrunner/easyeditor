@@ -24,6 +24,7 @@
 #include "FileNameProperty.h"
 #include "EditPanel.h"
 #include "SprTagProperty.h"
+#include "StringHelper.h"
 
 #include <sprite2/RenderColor.h>
 #include <sprite2/RenderShader.h>
@@ -81,41 +82,33 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 		spr->SetTag(wxANY_AS(value, wxString).ToStdString());
 	}
 	// color
+	else if (name == "Color")
+	{
+		std::vector<std::string> tags;
+		ee::StringHelper::Split(wxANY_AS(value, wxString).ToStdString(), ";", tags);
+		assert(tags.size() == 4);
+		SetColMul(spr, tags[0]);
+		SetColAdd(spr, tags[1]);
+		SetColAlpha(spr, tags[2]);
+		SetColOverlap(spr, tags[3]);
+	}
 	else if (name == "Color.Multi" && Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_DEFAULT)
 	{
 		wxColour wx_col = wxANY_AS(value, wxColour);
-		s2::Color col(wx_col.Red(), wx_col.Green(), wx_col.Blue(), spr->Color().mul.a);
-		EditAddRecordSJ::Instance()->Add(new SetSpriteMulColorAOP(spr, col));
-		spr->Color().mul = col;
+		SetColMul(spr, wx_col.GetAsString().ToStdString());
 	}
 	else if (name == "Color.Add" && Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_DEFAULT)
 	{
 		wxColour wx_col = wxANY_AS(value, wxColour);
-		s2::Color col(wx_col.Red(), wx_col.Green(), wx_col.Blue(), spr->Color().add.a);
-		EditAddRecordSJ::Instance()->Add(new SetSpriteAddColorAOP(spr, col));
-		spr->Color().add = col;
+		SetColAdd(spr, wx_col.GetAsString().ToStdString());
 	}
 	else if (name == "Color.Alpha")
 	{
-		int alpha = wxANY_AS(value, int);
-		alpha = std::max(0, std::min(255, alpha));
-
-		s2::Color col = spr->Color().mul;
-		col.a = alpha;
-		EditAddRecordSJ::Instance()->Add(new SetSpriteMulColorAOP(spr, col));
-
-		spr->Color().mul = col;
+		SetColAlpha(spr, wxANY_AS(value, wxString).ToStdString());
 	}
 	else if (name == "Color.Overlay")
 	{
-		int overlay = wxANY_AS(value, int);
-		overlay = std::max(0, std::min(255, overlay));
-
-		s2::Color add = spr->Color().add;
-		add.a = overlay;
-		EditAddRecordSJ::Instance()->Add(new SetSpriteAddColorAOP(spr, add));
-
-		spr->Color().add = add;
+		SetColOverlap(spr, wxANY_AS(value, wxString).ToStdString());
 	}
 // 	else if (name == "Color.R")
 // 	{
@@ -508,6 +501,48 @@ Sprite* SpritePropertySetting::GetSprite()
 	} else {
 		return NULL;
 	}
+}
+
+void SpritePropertySetting::SetColMul(ee::Sprite* spr, const std::string& val)
+{
+	wxColour wx_col(val);
+	s2::Color col(wx_col.Red(), wx_col.Green(), wx_col.Blue(), spr->Color().mul.a);
+	EditAddRecordSJ::Instance()->Add(new SetSpriteMulColorAOP(spr, col));
+	spr->Color().mul = col;
+}
+
+void SpritePropertySetting::SetColAdd(ee::Sprite* spr, const std::string& val)
+{
+	wxColour wx_col(val);
+	s2::Color col(wx_col.Red(), wx_col.Green(), wx_col.Blue(), spr->Color().add.a);
+	EditAddRecordSJ::Instance()->Add(new SetSpriteAddColorAOP(spr, col));
+	spr->Color().add = col;
+}
+
+void SpritePropertySetting::SetColAlpha(ee::Sprite* spr, const std::string& val)
+{
+	int alpha;
+	ee::StringHelper::FromString(val, alpha);
+	alpha = std::max(0, std::min(255, alpha));
+
+	s2::Color col = spr->Color().mul;
+	col.a = alpha;
+	EditAddRecordSJ::Instance()->Add(new SetSpriteMulColorAOP(spr, col));
+
+	spr->Color().mul = col;
+}
+
+void SpritePropertySetting::SetColOverlap(ee::Sprite* spr, const std::string& val)
+{
+	int overlay;
+	ee::StringHelper::FromString(val, overlay);
+	overlay = std::max(0, std::min(255, overlay));
+
+	s2::Color add = spr->Color().add;
+	add.a = overlay;
+	EditAddRecordSJ::Instance()->Add(new SetSpriteAddColorAOP(spr, add));
+
+	spr->Color().add = add;
 }
 
 }
