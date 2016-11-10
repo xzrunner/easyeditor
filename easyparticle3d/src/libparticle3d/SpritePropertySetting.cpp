@@ -42,6 +42,9 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 			m_pg->GetProperty("Local")->SetValue(true);
 			spr->SetLocalModeDraw(true);
 		}
+	} else if (name == "Start Radius") {
+		float radius = wxANY_AS(value, float);
+		spr->SetStartRadius(radius);
 	}
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -59,6 +62,8 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	pg->GetProperty("Local")->SetValue(spr->IsLocalModeDraw());
 	pg->GetProperty("Alone")->SetValue(spr->IsAlone());
 	pg->GetProperty("Reuse")->SetValue(spr->IsReuse());
+
+	pg->GetProperty("Start Radius")->SetValue(spr->GetStartRadius());
 }
 
 void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
@@ -67,7 +72,7 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	ee::SpritePropertySetting::InitProperties(pg);
 
-	pg->Append(new wxPropertyCategory("P3D", wxPG_LABEL));
+	pg->Append(new wxPropertyCategory("P3D SPR", wxPG_LABEL));
 
 	Sprite* spr = static_cast<Sprite*>(GetSprite());
 
@@ -79,6 +84,10 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->SetPropertyAttribute("Alone", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 	pg->Append(new wxBoolProperty("Reuse", wxPG_LABEL, spr->IsReuse()));
 	pg->SetPropertyAttribute("Reuse", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
+
+	pg->Append(new wxPropertyCategory("P3D SPR", wxPG_LABEL));
+
+	pg->Append(new wxFloatProperty("Start Radius", wxPG_LABEL, spr->GetStartRadius()));
 }
 
 }

@@ -65,6 +65,8 @@ void Sprite::Store(Json::Value& val, const std::string& _dir) const
 		p_val["local_mode_draw"] = true;
 	}
 
+	p_val["start_radius"] = m_start_radius;
+
 	val["particle3d"] = p_val;
 }
 
