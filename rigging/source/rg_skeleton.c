@@ -3,10 +3,10 @@
 
 #include <stdlib.h>
 
-static void (*RENDER_FUNC)(void* sym, float x, float y, float angle, float sx, float sy);
+static void (*RENDER_FUNC)(void* sym, float x, float y, float angle, float sx, float sy, void* ud);
 
 void 
-rg_skeleton_init(void (*render_func)(void* sym, float x, float y, float angle, float sx, float sy)) {
+rg_skeleton_init(void (*render_func)(void* sym, float x, float y, float angle, float sx, float sy, void* ud)) {
 	RENDER_FUNC = render_func;
 }
 
@@ -37,6 +37,6 @@ rg_skeleton_draw(const struct rg_skeleton* sk, const void* ud) {
 		struct rg_joint_pose world;
 		rg_local2world(&joint->world_pose, &joint->skin.local, &world);
 
-		RENDER_FUNC(joint->skin.ud, world.trans[0], world.trans[1], world.rot, world.scale[0], world.scale[1]);
+		RENDER_FUNC(joint->skin.ud, world.trans[0], world.trans[1], world.rot, world.scale[0], world.scale[1], ud);
 	}
 }

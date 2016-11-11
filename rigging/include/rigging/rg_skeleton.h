@@ -13,7 +13,7 @@ struct rg_skeleton {
 
 #define SIZEOF_RG_SKELETON (sizeof(struct rg_skeleton) + PTR_SIZE_DIFF)
 
-void rg_skeleton_init(void (*render_func)(void* sym, float x, float y, float angle, float sx, float sy));
+void rg_skeleton_init(void (*render_func)(void* sym, float x, float y, float angle, float sx, float sy, void* ud));
 
 void rg_skeleton_draw(const struct rg_skeleton*, const void* ud);
 
