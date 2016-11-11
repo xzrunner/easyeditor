@@ -3,11 +3,6 @@
 
 #include <stdlib.h>
 
-struct rg_skeleton {
-	int joint_count;
-	struct rg_joint** joints;
-};
-
 static void (*RENDER_FUNC)(void* sym, float x, float y, float angle, float sx, float sy);
 
 void 
@@ -15,26 +10,29 @@ rg_skeleton_init(void (*render_func)(void* sym, float x, float y, float angle, f
 	RENDER_FUNC = render_func;
 }
 
-struct rg_skeleton* 
-rg_skeleton_create(struct rg_joint** joints, int count) {
-	struct rg_skeleton* sk = malloc(sizeof(*sk));
-	if (!sk) {
-		return NULL;
-	}
-	sk->joint_count = count;
-	sk->joints = joints;
-	return sk;
-}
+// struct rg_skeleton* 
+// rg_skeleton_create(struct rg_joint** joints, int count) {
+// 	struct rg_skeleton* sk = malloc(sizeof(*sk));
+// 	if (!sk) {
+// 		return NULL;
+// 	}
+// 	sk->joint_count = count;
+// 	sk->joints = joints;
+// 	return sk;
+// }
+// 
+// void 
+// rg_skeleton_release(struct rg_skeleton* sk) {
+// 	free(sk);
+// }
 
 void 
-rg_skeleton_release(struct rg_skeleton* sk) {
-	free(sk);
-}
-
-void 
-rg_rigging_draw(const struct rg_skeleton* sk, const void* ud) {
+rg_skeleton_draw(const struct rg_skeleton* sk, const void* ud) {
 	for (int i = 0; i < sk->joint_count; ++i) {
 		const struct rg_joint* joint = sk->joints[i];
+		if (!joint->skin.ud) {
+			continue;
+		}
 
 		struct rg_joint_pose world;
 		rg_local2world(&joint->world_pose, &joint->skin.local, &world);

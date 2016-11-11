@@ -27,8 +27,8 @@ bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
-	std::string ee_filter = ee::FileHelper::GetJsonFileFilter(ee::SymbolFile::Instance()->Tag(s2::SYM_SKELETON)),
-		                    json_filter = "JSON files (*.json)|*.json";
+	std::string ee_filter   = ee::FileHelper::GetJsonFileFilter(ee::SymbolFile::Instance()->Tag(s2::SYM_SKELETON)),
+		        json_filter = "JSON files (*.json)|*.json";
 	std::string filter = ee_filter + "|" + json_filter;
 	wxFileDialog dlg(this, wxT("导入skeleton文件"), wxEmptyString, 
 		wxEmptyString, filter, wxFD_OPEN | wxFD_MULTIPLE);

@@ -18,19 +18,37 @@ rg_joint_pose_lerp(const struct rg_joint_pose* begin, const struct rg_joint_pose
 	dst->scale[1]	= begin->scale[1] + (end->scale[1] - begin->scale[1]) * process;
 }
 
+void 
+rg_joint_pose_identity(struct rg_joint_pose* pos) {
+	pos->trans[0] = 0;
+	pos->trans[1] = 0;
+	pos->rot      = 0;
+	pos->scale[0] = 1;
+	pos->scale[1] = 1;
+}
+
+void 
+rg_joint_pose_inv(const struct rg_joint_pose* src, struct rg_joint_pose* dst) {
+	dst->trans[0] = - src->trans[0];
+	dst->trans[1] = - src->trans[1];
+	dst->rot      = - src->rot;
+	dst->scale[0] = 1.0f / src->scale[0];
+	dst->scale[1] = 1.0f / src->scale[1];
+}
+
 void
 rg_local2world(const struct rg_joint_pose* src, const struct rg_joint_pose* local, struct rg_joint_pose* dst) {
 	// scale
-	dst->scale[0]	= src->scale[0] * local->scale[0];
-	dst->scale[1]	= src->scale[1] * local->scale[1];
+	dst->scale[0] = src->scale[0] * local->scale[0];
+	dst->scale[1] = src->scale[1] * local->scale[1];
 	// rot
-	dst->rot		= src->rot + local->rot;
+	dst->rot      = src->rot + local->rot;
 	// trans
-	// dst.trans	= src.trans + sm::rotate_vector(local.trans * src.scale, src.rot);
-	float tmp[2]	= { local->trans[0] * src->scale[0], local->trans[1] * src->scale[1] };
+	// dst.trans  = src.trans + sm::rotate_vector(local.trans * src.scale, src.rot);
+	float tmp[2]  = { local->trans[0] * src->scale[0], local->trans[1] * src->scale[1] };
 	_rotate_vector(tmp, src->rot, dst->trans);
-	dst->trans[0]	+= src->trans[0];
-	dst->trans[1]	+= src->trans[1];
+	dst->trans[0] += src->trans[0];
+	dst->trans[1] += src->trans[1];
 }
 
 void

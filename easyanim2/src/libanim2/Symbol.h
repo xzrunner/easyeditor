@@ -3,23 +3,16 @@
 
 #include <ee/Symbol.h>
 
-#include <sprite2/DummySymbol.h>
+#include <sprite2/Anim2Symbol.h>
 
 namespace libanim2
 {
 
-class Symbol : public ee::Symbol, public s2::DummySymbol
+class Symbol : public ee::Symbol, public s2::Anim2Symbol
 {
 public:
 	Symbol();
 	virtual ~Symbol();
-
-	/**
-	 *  @interface
-	 *    s2::Symbol
-	 */
-	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
-	virtual sm::rect GetBounding(const s2::Sprite* spr = NULL) const;
 
 	static ee::Symbol* Create() { return new Symbol(); }
 

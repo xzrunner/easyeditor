@@ -129,6 +129,7 @@ void StageCanvas::Init()
 		exit(1);
 	}
 
+	s2::SprTimer::Instance()->Init();
 	// prepare 2d
 	// todo: move to child, for defferent init (such as 3d ?)
 	ShaderLab::Instance()->Init();

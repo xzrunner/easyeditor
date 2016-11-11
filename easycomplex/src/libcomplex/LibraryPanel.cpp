@@ -4,6 +4,7 @@
 #include <wx/notebook.h>
 
 #include <easyanim.h>
+#include <easyanim2.h>
 #include <easymesh.h>
 #include <easyscale9.h>
 #include <easyparticle3d.h>
@@ -32,6 +33,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	AddPage(new ee::LibraryImagePage(nb));
 	AddPage(new LibraryPage(nb));
 	AddPage(new eanim::LibraryPage(nb));
+	AddPage(new libanim2::LibraryPage(nb));
 	AddPage(new escale9::LibraryPage(nb));
 	AddPage(new etext::LibraryPage(nb));
 	AddPage(new eparticle3d::LibraryPage(nb));

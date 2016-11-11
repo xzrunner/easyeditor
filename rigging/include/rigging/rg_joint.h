@@ -32,6 +32,8 @@ struct rg_joint {
 
 #define SIZEOF_RG_JOINT (sizeof(struct rg_joint) - sizeof(uint8_t) + PTR_SIZE_DIFF)
 
+void rg_joint_update(struct rg_joint*, struct rg_skeleton*);
+
 #endif // rigging_joint_h
 
 #ifdef __cplusplus

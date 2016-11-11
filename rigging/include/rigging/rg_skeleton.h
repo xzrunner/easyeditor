@@ -6,12 +6,14 @@ extern "C"
 #ifndef rigging_rigging_h
 #define rigging_rigging_h
 
-struct rg_skeleton;
+struct rg_skeleton {
+	int joint_count;
+	struct rg_joint** joints;
+};
+
+#define SIZEOF_RG_SKELETON (sizeof(struct rg_skeleton) + PTR_SIZE_DIFF)
 
 void rg_skeleton_init(void (*render_func)(void* sym, float x, float y, float angle, float sx, float sy));
-
-struct rg_skeleton* rg_skeleton_create(struct rg_joint** joints, int count);
-void rg_skeleton_release(struct rg_skeleton*);
 
 void rg_skeleton_draw(const struct rg_skeleton*, const void* ud);
 
