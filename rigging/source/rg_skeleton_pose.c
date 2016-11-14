@@ -1,11 +1,12 @@
 #include "rg_skeleton_pose.h"
 #include "rg_skeleton.h"
 #include "rg_joint.h"
+#include "rg_dopesheet.h"
 
 #include <assert.h>
 
-void 
-rg_skeleton_pose_update(struct rg_skeleton_pose* pose, struct rg_skeleton* sk, int joint_idx) {
+static void 
+_update_joint(struct rg_skeleton_pose* pose, const struct rg_skeleton* sk, int joint_idx) {
 	assert(joint_idx >= 0 && joint_idx < sk->joint_count);
 	struct rg_joint* joint = sk->joints[joint_idx];
 	if (joint->parent != 0xff) {
@@ -13,6 +14,30 @@ rg_skeleton_pose_update(struct rg_skeleton_pose* pose, struct rg_skeleton* sk, i
 		rg_local2world(&pose->poses[joint->parent].world, &pose->poses[joint_idx].local, &pose->poses[joint_idx].world);
 	}
 	for (int i = 0; i < joint->children_count; ++i) {
-		rg_skeleton_pose_update(pose, sk, joint->children[i]);
+		_update_joint(pose, sk, joint->children[i]);
 	}
+}
+
+void 
+rg_skeleton_pose_update(struct rg_skeleton_pose* pose, const struct rg_skeleton* sk, const struct rg_dopesheet** ds, int time) {
+	uint64_t dims_ptr = 0;
+	for (int i = 0; i < sk->joint_count; ++i) {
+		rg_joint_pose_identity(&pose->poses[i].local);
+		rg_joint_pose_identity(&pose->poses[i].world);
+
+		struct rg_joint* joint = sk->joints[i];
+
+		struct rg_dopesheet_state state;
+		rg_ds_query(ds[i], time, &dims_ptr, &state);
+
+		pose->poses[i].local.trans[0] = joint->local_pose.trans[0] + state.trans[0];
+		pose->poses[i].local.trans[1] = joint->local_pose.trans[1] + state.trans[1];
+		pose->poses[i].local.rot      = joint->local_pose.rot + state.rot;
+		pose->poses[i].local.scale[0] = joint->local_pose.scale[0] * state.scale[0];
+		pose->poses[i].local.scale[1] = joint->local_pose.scale[1] * state.scale[1];
+
+		pose->poses[i].skin = state.skin;
+	}
+
+	_update_joint(pose, sk, sk->root);
 }

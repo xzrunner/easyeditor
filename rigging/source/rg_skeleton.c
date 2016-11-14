@@ -1,5 +1,6 @@
 #include "rg_skeleton.h"
 #include "rg_joint.h"
+#include "rg_skeleton_pose.h"
 
 #include <stdlib.h>
 #include <assert.h>
@@ -11,37 +12,27 @@ rg_skeleton_init(void (*render_func)(void* sym, float x, float y, float angle, f
 	RENDER_FUNC = render_func;
 }
 
-// struct rg_skeleton* 
-// rg_skeleton_create(struct rg_joint** joints, int count) {
-// 	struct rg_skeleton* sk = malloc(sizeof(*sk));
-// 	if (!sk) {
-// 		return NULL;
-// 	}
-// 	sk->joint_count = count;
-// 	sk->joints = joints;
-// 	return sk;
-// }
-// 
-// void 
-// rg_skeleton_release(struct rg_skeleton* sk) {
-// 	free(sk);
-// }
-
 void 
-rg_skeleton_draw(const struct rg_skeleton* sk, const void* ud) {
+rg_skeleton_draw(const struct rg_skeleton* sk, const struct rg_skeleton_pose* pose, const void* ud) {
 	for (int i = 0; i < sk->joint_count; ++i) {
-		const struct rg_joint* joint = sk->joints[i];
-		if (joint->skin == 0xffff) {
+		int skin_idx = 0xffff;
+		if (pose->poses[i].skin != 0xffff) {
+			skin_idx = pose->poses[i].skin;
+		} else {
+			const struct rg_joint* joint = sk->joints[i];
+			if (joint->skin >= 0 && joint->skin < sk->skin_count) {
+				skin_idx = joint->skin;
+			}
+		}
+		if (skin_idx == 0xffff) {
 			continue;
 		}
-		assert(joint->skin >= 0 && joint->skin < sk->skin_count);
-		const struct rg_skin* skin = &sk->skins[joint->skin];
-		if (!skin->ud) {
-			continue;
-		}
+
+		const struct rg_skin* skin = &sk->skins[skin_idx];
+		assert(skin->ud);
 
 		struct rg_joint_pose world;
-		rg_local2world(&joint->world_pose, &skin->local, &world);
+		rg_local2world(&pose->poses[i].world, &skin->local, &world);
 
 		RENDER_FUNC(skin->ud, world.trans[0], world.trans[1], world.rot, world.scale[0], world.scale[1], ud);
 	}

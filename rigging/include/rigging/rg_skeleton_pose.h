@@ -10,6 +10,9 @@ extern "C"
 
 #include <stdint.h>
 
+struct rg_skeleton;
+struct rg_dopesheet;
+
 struct rg_pose_pair {
 	struct rg_joint_pose local;
 	struct rg_joint_pose world;
@@ -22,7 +25,7 @@ struct rg_skeleton_pose {
 
 #define SIZEOF_RG_SKELETON_POSE (sizeof(struct rg_skeleton_pose) - sizeof(struct rg_pose_pair))
 
-void rg_skeleton_pose_update(struct rg_skeleton_pose*, struct rg_skeleton*, int joint_idx);
+void rg_skeleton_pose_update(struct rg_skeleton_pose*, const struct rg_skeleton*, const struct rg_dopesheet**, int time);
 
 #endif // rigging_skeleton_pose_h
 

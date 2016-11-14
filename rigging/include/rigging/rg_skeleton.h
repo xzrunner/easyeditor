@@ -8,6 +8,8 @@ extern "C"
 
 #include "rg_skin.h"
 
+struct rg_skeleton_pose;
+
 struct rg_skeleton {
 	int joint_count;
 	struct rg_joint** joints;
@@ -22,7 +24,7 @@ struct rg_skeleton {
 
 void rg_skeleton_init(void (*render_func)(void* sym, float x, float y, float angle, float sx, float sy, const void* ud));
 
-void rg_skeleton_draw(const struct rg_skeleton*, const void* ud);
+void rg_skeleton_draw(const struct rg_skeleton*, const struct rg_skeleton_pose*, const void* ud);
 
 #endif // rigging_skeleton_h
 
