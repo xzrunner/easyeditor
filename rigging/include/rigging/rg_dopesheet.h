@@ -42,15 +42,22 @@ struct rg_frame {
 	float	 data;
 };
 
+struct rg_frame_skin {
+	uint16_t time;
+	uint16_t skin;
+};
+
 struct rg_dopesheet {
+	struct rg_frame_skin* skins;
+	uint8_t               skin_count;
+
 	uint8_t	        type;
-
 	uint8_t         dims_count[DIM_COUNT];
-
+	uint8_t         padding[3];
 	struct rg_frame frames[1];
 };
 
-#define SIZEOF_RG_DOPESHEET (sizeof(struct rg_dopesheet) - sizeof(struct rg_frame))
+#define SIZEOF_RG_DOPESHEET (sizeof(struct rg_dopesheet) - sizeof(struct rg_frame) + PTR_SIZE_DIFF)
 
 struct rg_dopesheet_state {
 	float    trans[2];

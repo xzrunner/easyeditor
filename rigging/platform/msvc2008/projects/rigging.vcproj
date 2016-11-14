@@ -197,6 +197,14 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\..\source\rg_skin.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\include\rigging\rg_skin.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\source\rg_utility.c"
 			>
 		</File>

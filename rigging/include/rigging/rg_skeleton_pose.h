@@ -8,9 +8,12 @@ extern "C"
 
 #include "rg_joint_pose.h"
 
+#include <stdint.h>
+
 struct rg_pose_pair {
 	struct rg_joint_pose local;
 	struct rg_joint_pose world;
+	uint16_t skin;
 };
 
 struct rg_skeleton_pose {

@@ -57,11 +57,6 @@ _query_dim(const struct rg_frame* frames, int frame_count, int time, uint8_t* pt
 	assert(frame_count > 0 && frames[0].time <= time && time <= frames[frame_count - 1].time);
 
 	*ptr = 0;
-	
-	if (frame_count == 1) {
-		*ret = frames[0].data;
-		return true;
-	}
 
 	int curr = 0, next = 1;
 	while (true)
@@ -83,10 +78,44 @@ _query_dim(const struct rg_frame* frames, int frame_count, int time, uint8_t* pt
 	return false;
 }
 
+static inline bool
+_query_skin(const struct rg_frame_skin* skins, int skin_count, int time, uint16_t* ret) {
+	assert(skins && skin_count != 0);
+
+	if (skin_count == 1) {
+		*ret = skins[0].skin;
+		return true;
+	}
+	if (time > skins[skin_count - 1].time) {
+		*ret = skins[skin_count - 1].skin;
+		return true;
+	}
+
+	assert(skin_count > 0 && skins[0].time <= time && time <= skins[skin_count - 1].time);
+
+	int curr = 0, next = 1;
+	while (true)
+	{
+		if (skins[curr].time <= time && time <= skins[next].time) {
+			*ret = skins[curr].skin;
+			return true;
+		} else {
+			++curr;
+			++next;
+			if (next >= skin_count) {
+				break;
+			}
+		}
+	}
+
+	return false;
+}
+
 void 
 rg_ds_query(const struct rg_dopesheet* ds, int time, uint64_t* dims_ptr, struct rg_dopesheet_state* state) {
 	memset(state, 0, sizeof(*state));
 	state->scale[0] = state->scale[1] = 1;
+	state->skin = 0xffff;
 
 	int ptr_dims = 0, ptr_frame = 0;
 	uint64_t old_dims_ptr = *dims_ptr;
@@ -141,4 +170,8 @@ rg_ds_query(const struct rg_dopesheet* ds, int time, uint64_t* dims_ptr, struct 
 		ptr_frame += ds->dims_count[DIM_IDX_SHEAR_Y];
 	}
 	*dims_ptr = new_dims_ptr;
+
+	if (ds->skins) {
+		_query_skin(ds->skins, ds->skin_count, time, &state->skin);
+	}
 }
