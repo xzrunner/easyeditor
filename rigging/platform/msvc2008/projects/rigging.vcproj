@@ -173,11 +173,19 @@
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\source\rg_joint_pose.c"
+			RelativePath="..\..\..\include\rigging\rg_pose_mat.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\include\rigging\rg_joint_pose.h"
+			RelativePath="..\..\..\include\rigging\rg_pose_mat.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\source\rg_pose_srt.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\include\rigging\rg_pose_srt.h"
 			>
 		</File>
 		<File

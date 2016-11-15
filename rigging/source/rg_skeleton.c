@@ -5,17 +5,19 @@
 #include <stdlib.h>
 #include <assert.h>
 
-static void (*RENDER_FUNC)(void* sym, float x, float y, float angle, float sx, float sy, const void* ud);
+#include <string.h>
+
+static void (*RENDER_FUNC)(void* sym, float* mat, const void* ud);
 
 void 
-rg_skeleton_init(void (*render_func)(void* sym, float x, float y, float angle, float sx, float sy, const void* ud)) {
+rg_skeleton_init(void (*render_func)(void* sym, float* mat, const void* ud)) {
 	RENDER_FUNC = render_func;
 }
 
 void 
 rg_skeleton_draw(const struct rg_skeleton* sk, const struct rg_skeleton_pose* pose, const void* ud) {
 	for (int i = 0; i < sk->joint_count; ++i) {
-		int skin_idx = 0xffff;
+		uint16_t skin_idx = 0xffff;
 		if (pose->poses[i].skin != 0xffff) {
 			skin_idx = pose->poses[i].skin;
 		} else {
@@ -31,9 +33,9 @@ rg_skeleton_draw(const struct rg_skeleton* sk, const struct rg_skeleton_pose* po
 		const struct rg_skin* skin = &sk->skins[skin_idx];
 		assert(skin->ud);
 
-		struct rg_joint_pose world;
-		rg_local2world(&pose->poses[i].world, &skin->local, &world);
+		struct rg_pose_mat world;
+		rg_local2worldmat(&pose->poses[i].world, &skin->local, &world);
 
-		RENDER_FUNC(skin->ud, world.trans[0], world.trans[1], world.rot, world.scale[0], world.scale[1], ud);
+		RENDER_FUNC(skin->ud, world.m, ud);
 	}
 }

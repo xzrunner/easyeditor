@@ -6,7 +6,8 @@ extern "C"
 #ifndef rigging_skeleton_pose_h
 #define rigging_skeleton_pose_h
 
-#include "rg_joint_pose.h"
+#include "rg_pose_srt.h"
+#include "rg_pose_mat.h"
 
 #include <stdint.h>
 
@@ -14,8 +15,8 @@ struct rg_skeleton;
 struct rg_dopesheet;
 
 struct rg_pose_pair {
-	struct rg_joint_pose local;
-	struct rg_joint_pose world;
+	struct rg_pose_srt local;
+	struct rg_pose_mat world;
 	uint16_t skin;
 };
 

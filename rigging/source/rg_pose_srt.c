@@ -1,4 +1,4 @@
-#include "rg_joint_pose.h"
+#include "rg_pose_srt.h"
 
 #include <math.h>
 
@@ -10,7 +10,7 @@ _rotate_vector(float* src, float rad, float* dst) {
 }
 
 void
-rg_joint_pose_lerp(const struct rg_joint_pose* begin, const struct rg_joint_pose* end, float process, struct rg_joint_pose* dst) {
+rg_pose_srt_lerp(const struct rg_pose_srt* begin, const struct rg_pose_srt* end, float process, struct rg_pose_srt* dst) {
 	dst->trans[0]	= begin->trans[0] + (end->trans[0] - begin->trans[0]) * process;
 	dst->trans[1]	= begin->trans[1] + (end->trans[0] - begin->trans[0]) * process;
 	dst->rot		= begin->rot + (end->rot - begin->rot) * process;
@@ -19,7 +19,7 @@ rg_joint_pose_lerp(const struct rg_joint_pose* begin, const struct rg_joint_pose
 }
 
 void 
-rg_joint_pose_identity(struct rg_joint_pose* pos) {
+rg_pose_srt_identity(struct rg_pose_srt* pos) {
 	pos->trans[0] = 0;
 	pos->trans[1] = 0;
 	pos->rot      = 0;
@@ -28,7 +28,7 @@ rg_joint_pose_identity(struct rg_joint_pose* pos) {
 }
 
 void 
-rg_joint_pose_inv(const struct rg_joint_pose* src, struct rg_joint_pose* dst) {
+rg_pose_srt_inv(const struct rg_pose_srt* src, struct rg_pose_srt* dst) {
 	dst->trans[0] = - src->trans[0];
 	dst->trans[1] = - src->trans[1];
 	dst->rot      = - src->rot;
@@ -37,7 +37,7 @@ rg_joint_pose_inv(const struct rg_joint_pose* src, struct rg_joint_pose* dst) {
 }
 
 void
-rg_local2world(const struct rg_joint_pose* src, const struct rg_joint_pose* local, struct rg_joint_pose* dst) {
+rg_local2world(const struct rg_pose_srt* src, const struct rg_pose_srt* local, struct rg_pose_srt* dst) {
 	// scale
 	dst->scale[0] = src->scale[0] * local->scale[0];
 	dst->scale[1] = src->scale[1] * local->scale[1];
@@ -52,7 +52,7 @@ rg_local2world(const struct rg_joint_pose* src, const struct rg_joint_pose* loca
 }
 
 void
-rg_world2local(const struct rg_joint_pose* src, const struct rg_joint_pose* dst, struct rg_joint_pose* local) {
+rg_world2local(const struct rg_pose_srt* src, const struct rg_pose_srt* dst, struct rg_pose_srt* local) {
 	// scale
 	local->scale[0]	= dst->scale[0] / src->scale[0];
 	local->scale[1]	= dst->scale[1] / src->scale[1];

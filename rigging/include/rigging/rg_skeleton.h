@@ -22,7 +22,7 @@ struct rg_skeleton {
 
 #define SIZEOF_RG_SKELETON (sizeof(struct rg_skeleton) - sizeof(struct rg_skin) + PTR_SIZE_DIFF)
 
-void rg_skeleton_init(void (*render_func)(void* sym, float x, float y, float angle, float sx, float sy, const void* ud));
+void rg_skeleton_init(void (*render_func)(void* sym, float* mat, const void* ud));
 
 void rg_skeleton_draw(const struct rg_skeleton*, const struct rg_skeleton_pose*, const void* ud);
 

@@ -11,7 +11,7 @@ _update_joint(struct rg_skeleton_pose* pose, const struct rg_skeleton* sk, int j
 	struct rg_joint* joint = sk->joints[joint_idx];
 	if (joint->parent != 0xff) {
 		assert(joint->parent < sk->joint_count);
-		rg_local2world(&pose->poses[joint->parent].world, &pose->poses[joint_idx].local, &pose->poses[joint_idx].world);
+		rg_local2worldmat(&pose->poses[joint->parent].world, &pose->poses[joint_idx].local, &pose->poses[joint_idx].world);
 	}
 	for (int i = 0; i < joint->children_count; ++i) {
 		_update_joint(pose, sk, joint->children[i]);
@@ -22,8 +22,8 @@ void
 rg_skeleton_pose_update(struct rg_skeleton_pose* pose, const struct rg_skeleton* sk, const struct rg_dopesheet** ds, int time) {
 	uint64_t dims_ptr = 0;
 	for (int i = 0; i < sk->joint_count; ++i) {
-		rg_joint_pose_identity(&pose->poses[i].local);
-		rg_joint_pose_identity(&pose->poses[i].world);
+		rg_pose_srt_identity(&pose->poses[i].local);
+		rg_pose_mat_identity(&pose->poses[i].world);
 
 		struct rg_joint* joint = sk->joints[i];
 

@@ -6,10 +6,10 @@ extern "C"
 #ifndef rigging_skin_h
 #define rigging_skin_h
 
-#include "rg_joint_pose.h"
+#include "rg_pose_srt.h"
 
 struct rg_skin {
-	struct rg_joint_pose local;
+	struct rg_pose_srt local;
 	void* ud;
 };
 
