@@ -17,8 +17,6 @@ struct rg_joint {
 	struct rg_pose_srt world_pose;
 	struct rg_pose_srt local_pose;
 
-	uint16_t skin;
-
 	uint8_t  parent;
 
 	uint8_t  children_count;

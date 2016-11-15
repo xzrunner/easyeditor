@@ -16,6 +16,9 @@ struct rg_skeleton {
 
 	int root;
 
+	int slot_count;
+	struct rg_slot* slots;
+
 	int skin_count;
 	struct rg_skin skins[1];
 };

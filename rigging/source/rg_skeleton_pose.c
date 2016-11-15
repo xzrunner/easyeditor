@@ -22,22 +22,25 @@ void
 rg_skeleton_pose_update(struct rg_skeleton_pose* pose, const struct rg_skeleton* sk, const struct rg_dopesheet** ds, int time) {
 	uint64_t dims_ptr = 0;
 	for (int i = 0; i < sk->joint_count; ++i) {
-		rg_pose_srt_identity(&pose->poses[i].local);
-		rg_pose_mat_identity(&pose->poses[i].world);
-
 		struct rg_joint* joint = sk->joints[i];
+		if (ds[i]) {
+			rg_pose_srt_identity(&pose->poses[i].local);
+			rg_pose_mat_identity(&pose->poses[i].world);
 
-		struct rg_dopesheet_state state;
-		rg_ds_query(ds[i], time, &dims_ptr, &state);
+			struct rg_dopesheet_state state;
+			rg_ds_query(ds[i], time, &dims_ptr, &state);
 
-		pose->poses[i].local.trans[0] = joint->local_pose.trans[0] + state.trans[0];
-		pose->poses[i].local.trans[1] = joint->local_pose.trans[1] + state.trans[1];
-		pose->poses[i].local.rot      = joint->local_pose.rot + state.rot;
-		pose->poses[i].local.scale[0] = joint->local_pose.scale[0] * state.scale[0];
-		pose->poses[i].local.scale[1] = joint->local_pose.scale[1] * state.scale[1];
+			pose->poses[i].local.trans[0] = joint->local_pose.trans[0] + state.trans[0];
+			pose->poses[i].local.trans[1] = joint->local_pose.trans[1] + state.trans[1];
+			pose->poses[i].local.rot      = joint->local_pose.rot + state.rot;
+			pose->poses[i].local.scale[0] = joint->local_pose.scale[0] * state.scale[0];
+			pose->poses[i].local.scale[1] = joint->local_pose.scale[1] * state.scale[1];
 
-		pose->poses[i].skin = state.skin;
+			pose->poses[i].skin = state.skin;
+		} else {
+			pose->poses[i].local = joint->local_pose;
+			pose->poses[i].skin = 0xffff;
+		}
 	}
-
 	_update_joint(pose, sk, sk->root);
 }

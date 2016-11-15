@@ -213,6 +213,10 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\..\include\rigging\rg_slot.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\source\rg_utility.c"
 			>
 		</File>

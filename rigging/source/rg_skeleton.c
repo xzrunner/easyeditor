@@ -1,6 +1,7 @@
 #include "rg_skeleton.h"
 #include "rg_joint.h"
 #include "rg_skeleton_pose.h"
+#include "rg_slot.h"
 
 #include <stdlib.h>
 #include <assert.h>
@@ -16,15 +17,14 @@ rg_skeleton_init(void (*render_func)(void* sym, float* mat, const void* ud)) {
 
 void 
 rg_skeleton_draw(const struct rg_skeleton* sk, const struct rg_skeleton_pose* pose, const void* ud) {
-	for (int i = 0; i < sk->joint_count; ++i) {
+	for (int i = 0; i < sk->slot_count; ++i) {
+		const struct rg_slot* slot = &sk->slots[i];
+
 		uint16_t skin_idx = 0xffff;
-		if (pose->poses[i].skin != 0xffff) {
-			skin_idx = pose->poses[i].skin;
+		if (pose->poses[slot->joint].skin != 0xffff) {
+			skin_idx = pose->poses[slot->joint].skin;
 		} else {
-			const struct rg_joint* joint = sk->joints[i];
-			if (joint->skin >= 0 && joint->skin < sk->skin_count) {
-				skin_idx = joint->skin;
-			}
+			skin_idx = slot->skin;
 		}
 		if (skin_idx == 0xffff) {
 			continue;
@@ -34,7 +34,7 @@ rg_skeleton_draw(const struct rg_skeleton* sk, const struct rg_skeleton_pose* po
 		assert(skin->ud);
 
 		struct rg_pose_mat world;
-		rg_local2worldmat(&pose->poses[i].world, &skin->local, &world);
+		rg_local2worldmat(&pose->poses[slot->joint].world, &skin->local, &world);
 
 		RENDER_FUNC(skin->ud, world.m, ud);
 	}
