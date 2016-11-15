@@ -35,39 +35,49 @@ enum INTERPOLATION {
 	LERP_LINEAR,
 };
 
-struct rg_frame {
+struct rg_ds_joint_frame {
 	uint16_t time;
 	uint8_t	 lerp;
 	uint8_t  padding;
 	float	 data;
 };
 
-struct rg_frame_skin {
-	uint16_t time;
-	uint16_t skin;
-};
-
-struct rg_dopesheet {
-	struct rg_frame_skin* skins;
-	uint8_t               skin_count;
-
-	uint8_t	        type;
-	uint8_t         dims_count[DIM_COUNT];
-	uint8_t         padding[3];
-	struct rg_frame frames[1];
-};
-
-#define SIZEOF_RG_DOPESHEET (sizeof(struct rg_dopesheet) - sizeof(struct rg_frame) + PTR_SIZE_DIFF)
-
-struct rg_dopesheet_state {
+struct rg_ds_joint_state {
 	float    trans[2];
 	float    rot;
 	float    scale[2];
 	float    shear[2];
+};
+
+struct rg_ds_joint {
+	uint8_t	                 type;
+	uint8_t                  dims_count[DIM_COUNT];
+	uint8_t                  padding[3];
+	struct rg_ds_joint_frame frames[1];
+};
+
+#define SIZEOF_RG_DOPESHEET_JOINT (sizeof(struct rg_ds_joint) - sizeof(struct rg_ds_joint_frame))
+
+struct rg_ds_skin_frame {
+	uint16_t time;
 	uint16_t skin;
 };
 
-void rg_ds_query(const struct rg_dopesheet*, int time, uint64_t* dims_ptr, struct rg_dopesheet_state*);
+struct rg_ds_skin {
+	uint8_t                 skin_count;
+	struct rg_ds_skin_frame skins[1];
+};
+
+#define SIZEOF_RG_DOPESHEET_SKIN (sizeof(struct rg_ds_skin) - sizeof(struct rg_ds_skin_frame))
+
+struct rg_dopesheet {
+	struct rg_ds_joint** joints;
+	struct rg_ds_skin**  skins;
+};
+
+void rg_ds_query_joint(const struct rg_ds_joint*, int time, uint64_t* dims_ptr, struct rg_ds_joint_state*);
+
+uint16_t rg_ds_query_skin(const struct rg_ds_skin*, int time);
 
 #endif // rigging_dopesheet_h
 

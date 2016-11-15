@@ -205,6 +205,14 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\..\source\rg_skeleton_skin.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\include\rigging\rg_skeleton_skin.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\source\rg_skin.c"
 			>
 		</File>

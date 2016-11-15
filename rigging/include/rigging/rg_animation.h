@@ -6,14 +6,16 @@ extern "C"
 #ifndef rigging_animation_h
 #define rigging_animation_h
 
-#include "rg_skeleton.h"
+#include "rg_dopesheet.h"
 
 #include <stdint.h>
+
+struct rg_skeleton;
 
 struct rg_animation {
 	struct rg_skeleton* sk;
 
-	struct rg_dopesheet** ds;
+	struct rg_dopesheet ds;
 
 	int max_frame;
 };

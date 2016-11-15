@@ -27,7 +27,7 @@ struct rg_skeleton {
 
 void rg_skeleton_init(void (*render_func)(void* sym, float* mat, const void* ud));
 
-void rg_skeleton_draw(const struct rg_skeleton*, const struct rg_skeleton_pose*, const void* ud);
+void rg_skeleton_draw(const struct rg_skeleton*, const struct rg_skeleton_pose*, const struct rg_skeleton_skin*, const void* ud);
 
 #endif // rigging_skeleton_h
 

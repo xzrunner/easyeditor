@@ -1,6 +1,7 @@
 #include "rg_skeleton.h"
 #include "rg_joint.h"
 #include "rg_skeleton_pose.h"
+#include "rg_skeleton_skin.h"
 #include "rg_slot.h"
 
 #include <stdlib.h>
@@ -16,14 +17,15 @@ rg_skeleton_init(void (*render_func)(void* sym, float* mat, const void* ud)) {
 }
 
 void 
-rg_skeleton_draw(const struct rg_skeleton* sk, const struct rg_skeleton_pose* pose, const void* ud) {
+rg_skeleton_draw(const struct rg_skeleton* sk, const struct rg_skeleton_pose* pose, const struct rg_skeleton_skin* ss, const void* ud) {
 	for (int i = 0; i < sk->slot_count; ++i) {
 		const struct rg_slot* slot = &sk->slots[i];
 
 		uint16_t skin_idx = 0xffff;
-		if (pose->poses[slot->joint].skin != 0xffff) {
-			skin_idx = pose->poses[slot->joint].skin;
-		} else {
+		if (ss->skins[i]) {
+			skin_idx = ss->skins[i];
+		} 
+		if (skin_idx == 0xffff) {
 			skin_idx = slot->skin;
 		}
 		if (skin_idx == 0xffff) {
