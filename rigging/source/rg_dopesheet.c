@@ -48,9 +48,13 @@
 
 static inline bool
 _query_dim(const struct rg_frame* frames, int frame_count, int time, uint8_t* ptr, float* ret) {
-	if (frame_count == 1) {
+	if (time < frames[0].time) {
 		*ptr = 0;
-		*ret = frames[0].data;
+		return false;
+	}
+	if (frame_count == 1 || time > frames[frame_count - 1].time) {
+		*ptr = 0;
+		*ret = frames[frame_count - 1].data;
 		return true;
 	}
 
@@ -82,11 +86,10 @@ static inline bool
 _query_skin(const struct rg_frame_skin* skins, int skin_count, int time, uint16_t* ret) {
 	assert(skins && skin_count != 0);
 
-	if (skin_count == 1) {
-		*ret = skins[0].skin;
-		return true;
+	if (time < skins[0].time) {
+		return false;
 	}
-	if (time > skins[skin_count - 1].time) {
+	if (skin_count == 1 || time > skins[skin_count - 1].time) {
 		*ret = skins[skin_count - 1].skin;
 		return true;
 	}
