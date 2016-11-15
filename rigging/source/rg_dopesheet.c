@@ -1,4 +1,5 @@
 #include "rg_dopesheet.h"
+#include "rg_utility.h"
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -46,6 +47,18 @@
 // 	return true;
 // }
 
+static inline float
+_format_angle(float angle) {
+	const float PI = 3.1415926f;
+	if (angle > PI) {
+		angle -= PI * 2;
+	}
+	if (angle < -PI) {
+		angle += PI * 2;
+	}
+	return angle;
+}
+
 static inline bool
 _query_joint(const struct rg_ds_joint_frame* frames, int frame_count, int time, uint8_t* ptr, float* ret) {
 	assert(frame_count > 0);
@@ -68,7 +81,9 @@ _query_joint(const struct rg_ds_joint_frame* frames, int frame_count, int time, 
 		if (frames[curr].time <= time && time <= frames[next].time) {
 			const struct rg_ds_joint_frame* c = &frames[curr];
 			const struct rg_ds_joint_frame* n = &frames[next];
-			*ret = (time - c->time) * (n->data - c->data) / (n->time - c->time) + c->data;
+			float cd = _format_angle(c->data),
+				  nd = _format_angle(n->data);
+			*ret = (time - c->time) * (nd - cd) / (n->time - c->time) + cd;
 			return true;
 		} else {
 			++curr;
@@ -147,7 +162,7 @@ rg_ds_query_skin(const struct rg_ds_skin* ds, int time) {
 	assert(ds && ds->skins && ds->skin_count > 0);
 
 	if (time < ds->skins[0].time) {
-		return 0xffff;
+		return RG_SKIN_UNKNOWN;
 	}
 	if (ds->skin_count == 1 || time >= ds->skins[ds->skin_count - 1].time) {
 		return ds->skins[ds->skin_count - 1].skin;
@@ -167,5 +182,5 @@ rg_ds_query_skin(const struct rg_ds_skin* ds, int time) {
 		}
 	}
 
-	return 0xffff;
+	return RG_SKIN_UNKNOWN;
 }

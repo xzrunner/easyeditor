@@ -20,15 +20,14 @@ void
 rg_skeleton_draw(const struct rg_skeleton* sk, const struct rg_skeleton_pose* pose, const struct rg_skeleton_skin* ss, const void* ud) {
 	for (int i = 0; i < sk->slot_count; ++i) {
 		const struct rg_slot* slot = &sk->slots[i];
-
-		uint16_t skin_idx = 0xffff;
+		uint16_t skin_idx = RG_SKIN_UNKNOWN;
 		if (ss->skins[i]) {
 			skin_idx = ss->skins[i];
 		} 
-		if (skin_idx == 0xffff) {
+		if (skin_idx == RG_SKIN_UNKNOWN) {
 			skin_idx = slot->skin;
 		}
-		if (skin_idx == 0xffff) {
+		if (skin_idx == RG_SKIN_UNKNOWN || skin_idx == RG_SKIN_NULL) {
 			continue;
 		}
 
