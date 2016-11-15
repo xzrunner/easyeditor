@@ -42,5 +42,9 @@ rg_skeleton_pose_update(struct rg_skeleton_pose* pose, const struct rg_skeleton*
 			pose->poses[i].skin = 0xffff;
 		}
 	}
+
+	struct rg_pose_pair* root = &pose->poses[sk->root];
+	rg_pose_mat_build(&root->world, &root->local);
+
 	_update_joint(pose, sk, sk->root);
 }

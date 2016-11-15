@@ -12,6 +12,8 @@ struct rg_pose_mat {
 
 void rg_pose_mat_identity(struct rg_pose_mat*);
 
+void rg_pose_mat_build(struct rg_pose_mat* dst, const struct rg_pose_srt* src);
+
 void rg_local2worldmat(const struct rg_pose_mat* src, const struct rg_pose_srt* local, struct rg_pose_mat* dst);
 
 #endif // rigging_pose_mat_h

@@ -6,6 +6,7 @@ extern "C"
 #ifndef rigging_joint_h
 #define rigging_joint_h
 
+#include "rg_pose_mat.h"
 #include "rg_pose_srt.h"
 #include "rg_utility.h"
 
@@ -14,7 +15,7 @@ extern "C"
 struct rg_joint {
 	const char* name;
 
-	struct rg_pose_srt world_pose;
+	struct rg_pose_mat world_pose;
 	struct rg_pose_srt local_pose;
 
 	uint8_t  parent;

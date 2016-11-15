@@ -54,7 +54,7 @@ _rot_mat(float* m, float rot) {
 	m[5] = m4_sind + m5_cosd;
 }
 
-static inline void
+void
 _build(float* m, float x, float y, float angle, float sx, float sy) {
 	float c = cos(angle), s = sin(angle);
 
@@ -64,6 +64,11 @@ _build(float* m, float x, float y, float angle, float sx, float sy) {
 	m[3] = c * sy;
 	m[4] = x;
 	m[5] = y;
+}
+
+void 
+rg_pose_mat_build(struct rg_pose_mat* dst, const struct rg_pose_srt* src) {
+	_build(dst->m, src->trans[0], src->trans[1], src->rot, src->scale[0], src->scale[1]);
 }
 
 static inline void
