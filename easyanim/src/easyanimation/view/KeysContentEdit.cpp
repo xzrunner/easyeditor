@@ -142,6 +142,8 @@ void KeysContentEdit::PasteSelection()
 		m_col += dis;
 
 		KeyFrame* frame = new KeyFrame(m_col + 1);
+		layer->InsertKeyFrame(frame);
+
 		++m_col;
 
 		for (int i_spr = 0, m = k_val["sprite"].size(); i_spr < m; ++i_spr) 
@@ -157,8 +159,6 @@ void KeysContentEdit::PasteSelection()
 			spr->RemoveReference();
 			sym->RemoveReference();
 		}
-
-		layer->InsertKeyFrame(frame);
 	}
 
 	ee::RefreshPanelSJ::Instance()->Refresh();
