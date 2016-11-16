@@ -60,7 +60,7 @@ _format_angle(float angle) {
 }
 
 static inline bool
-_query_joint(const struct rg_ds_joint_frame* frames, int frame_count, int time, uint8_t* ptr, float* ret) {
+_query_joint(const struct rg_ds_joint_frame* frames, int frame_count, int time, bool is_angle, uint8_t* ptr, float* ret) {
 	assert(frame_count > 0);
 
 	if (time < frames[0].time) {
@@ -81,8 +81,14 @@ _query_joint(const struct rg_ds_joint_frame* frames, int frame_count, int time, 
 		if (frames[curr].time <= time && time <= frames[next].time) {
 			const struct rg_ds_joint_frame* c = &frames[curr];
 			const struct rg_ds_joint_frame* n = &frames[next];
-			float cd = _format_angle(c->data),
-				  nd = _format_angle(n->data);
+			float cd, nd;
+			if (is_angle) {
+				cd = _format_angle(c->data);
+				nd = _format_angle(n->data);
+			} else {
+				cd = c->data;
+				nd = n->data;
+			}
 			*ret = (time - c->time) * (nd - cd) / (n->time - c->time) + cd;
 			return true;
 		} else {
@@ -107,49 +113,49 @@ rg_ds_query_joint(const struct rg_ds_joint* ds, int time, uint64_t* dims_ptr, st
 	uint64_t new_dims_ptr = 0;
 	if (ds->type & DIM_FLAG_TRANS_X) {
 		uint8_t dim_ptr = (old_dims_ptr >> (ptr_dims * 8)) & 0xff;
-		_query_joint(&ds->frames[ptr_frame], ds->dims_count[DIM_IDX_TRANS_X], time, &dim_ptr, &state->trans[0]);
+		_query_joint(&ds->frames[ptr_frame], ds->dims_count[DIM_IDX_TRANS_X], time, false, &dim_ptr, &state->trans[0]);
 		new_dims_ptr = (new_dims_ptr << 8) & dim_ptr;
 		++ptr_dims;
 		ptr_frame += ds->dims_count[DIM_IDX_TRANS_X];
 	}
 	if (ds->type & DIM_FLAG_TRANS_Y) {
 		uint8_t dim_ptr = (old_dims_ptr >> (ptr_dims * 8)) & 0xff;
-		_query_joint(&ds->frames[ptr_frame], ds->dims_count[DIM_IDX_TRANS_Y], time, &dim_ptr, &state->trans[1]);
+		_query_joint(&ds->frames[ptr_frame], ds->dims_count[DIM_IDX_TRANS_Y], time, false, &dim_ptr, &state->trans[1]);
 		new_dims_ptr = (new_dims_ptr << 8) & dim_ptr;
 		++ptr_dims;
 		ptr_frame += ds->dims_count[DIM_IDX_TRANS_Y];
 	}
 	if (ds->type & DIM_FLAG_ROT) {
 		uint8_t dim_ptr = (old_dims_ptr >> (ptr_dims * 8)) & 0xff;
-		_query_joint(&ds->frames[ptr_frame], ds->dims_count[DIM_IDX_ROT], time, &dim_ptr, &state->rot);
+		_query_joint(&ds->frames[ptr_frame], ds->dims_count[DIM_IDX_ROT], time, true, &dim_ptr, &state->rot);
 		new_dims_ptr = (new_dims_ptr << 8) & dim_ptr;
 		++ptr_dims;
 		ptr_frame += ds->dims_count[DIM_IDX_ROT];
 	}
 	if (ds->type & DIM_FLAG_SCALE_X) {
 		uint8_t dim_ptr = (old_dims_ptr >> (ptr_dims * 8)) & 0xff;
-		_query_joint(&ds->frames[ptr_frame], ds->dims_count[DIM_IDX_SCALE_X], time, &dim_ptr, &state->scale[0]);
+		_query_joint(&ds->frames[ptr_frame], ds->dims_count[DIM_IDX_SCALE_X], time, false, &dim_ptr, &state->scale[0]);
 		new_dims_ptr = (new_dims_ptr << 8) & dim_ptr;
 		++ptr_dims;
 		ptr_frame += ds->dims_count[DIM_IDX_SCALE_X];
 	}
 	if (ds->type & DIM_FLAG_SCALE_Y) {
 		uint8_t dim_ptr = (old_dims_ptr >> (ptr_dims * 8)) & 0xff;
-		_query_joint(&ds->frames[ptr_frame], ds->dims_count[DIM_IDX_SCALE_Y], time, &dim_ptr, &state->scale[1]);
+		_query_joint(&ds->frames[ptr_frame], ds->dims_count[DIM_IDX_SCALE_Y], time, false, &dim_ptr, &state->scale[1]);
 		new_dims_ptr = (new_dims_ptr << 8) & dim_ptr;
 		++ptr_dims;
 		ptr_frame += ds->dims_count[DIM_IDX_SCALE_Y];
 	}
 	if (ds->type & DIM_FLAG_SHEAR_X) {
 		uint8_t dim_ptr = (old_dims_ptr >> (ptr_dims * 8)) & 0xff;
-		_query_joint(&ds->frames[ptr_frame], ds->dims_count[DIM_IDX_SHEAR_X], time, &dim_ptr, &state->shear[0]);
+		_query_joint(&ds->frames[ptr_frame], ds->dims_count[DIM_IDX_SHEAR_X], time, false, &dim_ptr, &state->shear[0]);
 		new_dims_ptr = (new_dims_ptr << 8) & dim_ptr;
 		++ptr_dims;
 		ptr_frame += ds->dims_count[DIM_IDX_SHEAR_X];
 	}
 	if (ds->type & DIM_FLAG_SHEAR_Y) {
 		uint8_t dim_ptr = (old_dims_ptr >> (ptr_dims * 8)) & 0xff;
-		_query_joint(&ds->frames[ptr_frame], ds->dims_count[DIM_IDX_SHEAR_Y], time, &dim_ptr, &state->shear[1]);
+		_query_joint(&ds->frames[ptr_frame], ds->dims_count[DIM_IDX_SHEAR_Y], time, false, &dim_ptr, &state->shear[1]);
 		new_dims_ptr = (new_dims_ptr << 8) & dim_ptr;
 		++ptr_dims;
 		ptr_frame += ds->dims_count[DIM_IDX_SHEAR_Y];
