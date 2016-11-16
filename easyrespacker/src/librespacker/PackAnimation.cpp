@@ -141,7 +141,7 @@ bool PackAnimation::AddComponent(const IPackNode* node, const std::string& name,
 					comp_idx = i;
 					force_mat = false;
 					return new_comp;
-				case s2::SYM_COMPLEX: case s2::SYM_ANIMATION: case s2::SYM_TEXTBOX:
+				case s2::SYM_COMPLEX: case s2::SYM_ANIMATION: case s2::SYM_TEXTBOX: case s2::SYM_MASK: case s2::SYM_PARTICLE3D:
 					comp_idx = i;
 					force_mat = true;
 					return new_comp;
