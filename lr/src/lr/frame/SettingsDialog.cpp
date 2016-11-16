@@ -259,6 +259,7 @@ void SettingDialog::OnChangeGradingTexture(wxCommandEvent& event)
 			try {
 				ee::Image* img = ee::ImageMgr::Instance()->GetItem(filepath);
 				if (img) {
+					SettingCfg::Instance()->m_post_effect_file = filepath;
 					prog->SetLUTTex(img->GetTexID());
 				}
 			} catch (ee::Exception& e) {

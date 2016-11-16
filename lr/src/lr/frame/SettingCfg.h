@@ -1,6 +1,8 @@
 #ifndef _LR_SETTING_CONFIG_H_
 #define _LR_SETTING_CONFIG_H_
 
+#include <string>
+
 namespace lr
 {
 
@@ -19,6 +21,8 @@ public:
 	bool m_all_layers_visible_editable;
 
 	bool m_special_layer_flag;
+
+	std::string m_post_effect_file;
 
 private:
 	SettingCfg();

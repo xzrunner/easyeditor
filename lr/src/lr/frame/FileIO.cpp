@@ -13,8 +13,10 @@
 #include <ee/FileHelper.h>
 #include <ee/Sprite.h>
 #include <ee/Shape.h>
+#include <ee/Image.h>
 
 #include <gum/trans_color.h>
+#include <shaderlab.h>
 
 #include <fstream>
 
@@ -36,6 +38,8 @@ void FileIO::Load(const char* filename, LibraryPanel* library,
 	fin.close();
 
 	SettingCfg* cfg = SettingCfg::Instance();
+
+	std::string dir = ee::FileHelper::GetFileDir(filename);
 
 	// settings
 	if (!value["settings"].isNull()) {
@@ -79,9 +83,26 @@ void FileIO::Load(const char* filename, LibraryPanel* library,
 		col.a = 0;
 		stage->GetScreenAddColor() = col;
 	}
+	if (!value["screen"]["post effect"].isNull()) {
+		std::string filepath = value["screen"]["post effect"].asString();
+		filepath = ee::FileHelper::GetAbsolutePath(dir, filepath);
+		
+		sl::ColGradingProg* prog = NULL;
+		sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
+		sl::FilterShader* shader = static_cast<sl::FilterShader*>(mgr->GetShader(sl::FILTER));
+		if (shader) {
+			prog = static_cast<sl::ColGradingProg*>(shader->GetProgram(sl::FM_COL_GRADING));
+		}
+		if (prog) {
+			ee::Image* img = ee::ImageMgr::Instance()->GetItem(filepath);
+			if (img) {
+				SettingCfg::Instance()->m_post_effect_file = filepath;
+				prog->SetLUTTex(img->GetTexID());
+			}
+		}
+	}
 
 	// layers
-	std::string dir = ee::FileHelper::GetFileDir(filename);
 	stage->SetResDir(dir);
 	LoadLayers(value["layer"], stage, library, dir);
 
@@ -105,6 +126,8 @@ void FileIO::Store(const char* filename, LibraryPanel* library,
 
 	SettingCfg* cfg = SettingCfg::Instance();
 
+	std::string dir = ee::FileHelper::GetFileDir(filename) + "\\";
+
 	// settings
 	value["settings"]["terrain2d"] = cfg->m_terrain2d_anim;
 
@@ -125,9 +148,11 @@ void FileIO::Store(const char* filename, LibraryPanel* library,
 	// screen
 	value["screen"]["multi_col"] = gum::color2str(stage->GetScreenMultiColor(), gum::RGBA);
 	value["screen"]["add_col"]   = gum::color2str(stage->GetScreenAddColor(), gum::RGBA);
+	if (!cfg->m_post_effect_file.empty()) {
+		value["screen"]["post effect"] = ee::FileHelper::GetRelativePath(dir, cfg->m_post_effect_file);
+	}
 
 	// layers
-	std::string dir = ee::FileHelper::GetFileDir(filename) + "\\";
 	StoreLayers(value["layer"], stage->GetLayers(), dir);
 
 	// libraries
