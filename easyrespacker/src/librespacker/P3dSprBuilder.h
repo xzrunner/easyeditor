@@ -4,6 +4,8 @@
 #include "INodeBuilder.h"
 #include "PackP3dSpr.h"
 
+#include <map>
+
 namespace eparticle3d { class Sprite; class Symbol; }
 
 namespace erespacker
@@ -25,7 +27,8 @@ public:
 private:
 	ExportNameSet& m_export_set;
 
-	std::vector<IPackNode*> m_nodes;
+//	std::vector<IPackNode*> m_nodes;
+	std::map<const eparticle3d::Symbol*, const PackP3dSpr*> m_map_data;
 
 }; // P3dSprBuilder
 
