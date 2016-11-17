@@ -119,12 +119,12 @@ void LRSeparateComplex::SeparateFromSprites(const Json::Value& old_val, Json::Va
 		}
 
 		std::string filepath = src_val["filepath"].asString();
-		if (!is_cover &&
-			ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_PARTICLE3D &&
-			tag.find(TOP_LAYER_STR) == std::string::npos) {
-				src_val["tag"] = tag + ";" + COVER_LAYER_STR;
-				is_cover = true;
-		} 
+// 		if (!is_cover &&
+// 			ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_PARTICLE3D &&
+// 			tag.find(TOP_LAYER_STR) == std::string::npos) {
+// 				src_val["tag"] = tag + ";" + COVER_LAYER_STR;
+// 				is_cover = true;
+// 		} 
 
 		Json::Value& dst_val = new_val["sprite"][idx-1];
 		if (is_cover) {
