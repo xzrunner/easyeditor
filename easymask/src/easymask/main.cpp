@@ -5,6 +5,7 @@
 #include <ee/SymbolFactory.h>
 #include <ee/SpriteFactory.h>
 #include <ee/SymbolType.h>
+#include <ee/SymbolFile.h>
 
 #include <easycomplex.h>
 #include <easyanim.h>
