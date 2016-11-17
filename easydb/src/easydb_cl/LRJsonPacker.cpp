@@ -95,6 +95,11 @@ void LRJsonPacker::PackGraphics(const std::string& filepath)
 
 	out_val["base"] = lr_name + "_base";
 
+	if (lr_val["screen"].isMember("post effect")) {
+		std::string filepath = lr_val["screen"]["post effect"].asString();
+		out_val["post_effect"] = ee::FileHelper::GetFilename(filepath);
+	}
+
 	std::string outfile = filepath.substr(0, filepath.find_last_of('_')) + ".json";
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
