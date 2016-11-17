@@ -12,7 +12,7 @@ extern "C"
 #include <stdint.h>
 
 struct rg_skeleton;
-struct rg_ds_joint;
+struct rg_tl_joint;
 
 struct rg_pose_pair {
 	struct rg_pose_srt local;
@@ -25,7 +25,7 @@ struct rg_skeleton_pose {
 
 #define SIZEOF_RG_SKELETON_POSE (sizeof(struct rg_skeleton_pose) - sizeof(struct rg_pose_pair))
 
-void rg_skeleton_pose_update(struct rg_skeleton_pose*, const struct rg_skeleton*, const struct rg_ds_joint**, int time);
+void rg_skeleton_pose_update(struct rg_skeleton_pose*, const struct rg_skeleton*, const struct rg_tl_joint**, int time);
 
 #endif // rigging_skeleton_pose_h
 

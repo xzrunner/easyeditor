@@ -157,14 +157,6 @@
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\source\rg_dopesheet.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\include\rigging\rg_dopesheet.h"
-			>
-		</File>
-		<File
 			RelativePath="..\..\..\source\rg_joint.c"
 			>
 		</File>
@@ -222,6 +214,14 @@
 		</File>
 		<File
 			RelativePath="..\..\..\include\rigging\rg_slot.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\source\rg_timeline.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\include\rigging\rg_timeline.h"
 			>
 		</File>
 		<File

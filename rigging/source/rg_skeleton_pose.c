@@ -1,7 +1,7 @@
 #include "rg_skeleton_pose.h"
 #include "rg_skeleton.h"
 #include "rg_joint.h"
-#include "rg_dopesheet.h"
+#include "rg_timeline.h"
 
 #include <assert.h>
 
@@ -19,16 +19,16 @@ _update_joint(struct rg_skeleton_pose* pose, const struct rg_skeleton* sk, int j
 }
 
 void 
-rg_skeleton_pose_update(struct rg_skeleton_pose* pose, const struct rg_skeleton* sk, const struct rg_ds_joint** ds, int time) {
+rg_skeleton_pose_update(struct rg_skeleton_pose* pose, const struct rg_skeleton* sk, const struct rg_tl_joint** joints, int time) {
 	uint64_t dims_ptr = 0;
 	for (int i = 0; i < sk->joint_count; ++i) {
 		struct rg_joint* joint = sk->joints[i];
-		if (ds[i]) {
+		if (joints[i]) {
 			rg_pose_srt_identity(&pose->poses[i].local);
 			rg_pose_mat_identity(&pose->poses[i].world);
 
-			struct rg_ds_joint_state state;
-			rg_ds_query_joint(ds[i], time, &dims_ptr, &state);
+			struct rg_tl_joint_state state;
+			rg_tl_query_joint(joints[i], time, &dims_ptr, &state);
 
 			pose->poses[i].local.trans[0] = joint->local_pose.trans[0] + state.trans[0];
 			pose->poses[i].local.trans[1] = joint->local_pose.trans[1] + state.trans[1];

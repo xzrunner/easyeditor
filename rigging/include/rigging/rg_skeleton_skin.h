@@ -14,7 +14,7 @@ struct rg_skeleton_skin {
 
 #define SIZEOF_RG_SKELETON_SKIN (sizeof(struct rg_skeleton_skin) - sizeof(uint16_t))
 
-void rg_skeleton_skin_update(struct rg_skeleton_skin*, const struct rg_skeleton*, const struct rg_ds_skin**, int time);
+void rg_skeleton_skin_update(struct rg_skeleton_skin*, const struct rg_skeleton*, const struct rg_tl_skin**, int time);
 
 #endif // rigging_skeleton_skin_h
 
