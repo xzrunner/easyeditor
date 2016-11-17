@@ -32,7 +32,7 @@ Task::~Task()
 
 void Task::Load(const char* filepath)
 {
-	if (ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_MASK) {
+	if (ee::SymbolFile::Instance()->Type(filepath) != s2::SYM_MASK) {
 		return;
 	}
 
