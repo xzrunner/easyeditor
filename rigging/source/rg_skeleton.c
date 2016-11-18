@@ -35,7 +35,11 @@ rg_skeleton_draw(const struct rg_skeleton* sk, const struct rg_skeleton_pose* po
 		assert(skin->ud);
 
 		struct rg_pose_mat world;
-		rg_local2worldmat(&pose->poses[slot->joint].world, &skin->local, &world);
+		if (skin->type != SKIN_JOINT_MESH) {
+			rg_local2worldmat(&pose->poses[slot->joint].world, &skin->local, &world);
+		} else {
+			rg_pose_mat_identity(&world);
+		}
 
 		RENDER_FUNC(skin->ud, world.m, ud);
 	}
