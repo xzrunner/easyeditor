@@ -85,7 +85,7 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 	else if (name == "Color")
 	{
 		std::vector<std::string> tags;
-		ee::StringHelper::Split(wxANY_AS(value, wxString).ToStdString(), ";", tags);
+		ee::StringHelper::Split(wxANY_AS(value, wxString).ToStdString(), "; ", tags);
 		assert(tags.size() == 4);
 		SetColMul(spr, tags[0]);
 		SetColAdd(spr, tags[1]);
@@ -507,16 +507,20 @@ void SpritePropertySetting::SetColMul(ee::Sprite* spr, const std::string& val)
 {
 	wxColour wx_col(val);
 	s2::Color col(wx_col.Red(), wx_col.Green(), wx_col.Blue(), spr->Color().mul.a);
-	EditAddRecordSJ::Instance()->Add(new SetSpriteMulColorAOP(spr, col));
-	spr->Color().mul = col;
+	if (col != spr->Color().mul) {
+		EditAddRecordSJ::Instance()->Add(new SetSpriteMulColorAOP(spr, col));
+		spr->Color().mul = col;
+	}
 }
 
 void SpritePropertySetting::SetColAdd(ee::Sprite* spr, const std::string& val)
 {
 	wxColour wx_col(val);
 	s2::Color col(wx_col.Red(), wx_col.Green(), wx_col.Blue(), spr->Color().add.a);
-	EditAddRecordSJ::Instance()->Add(new SetSpriteAddColorAOP(spr, col));
-	spr->Color().add = col;
+	if (col != spr->Color().add) {
+		EditAddRecordSJ::Instance()->Add(new SetSpriteAddColorAOP(spr, col));
+		spr->Color().add = col;
+	}
 }
 
 void SpritePropertySetting::SetColAlpha(ee::Sprite* spr, const std::string& val)
@@ -525,11 +529,13 @@ void SpritePropertySetting::SetColAlpha(ee::Sprite* spr, const std::string& val)
 	ee::StringHelper::FromString(val, alpha);
 	alpha = std::max(0, std::min(255, alpha));
 
-	s2::Color col = spr->Color().mul;
-	col.a = alpha;
-	EditAddRecordSJ::Instance()->Add(new SetSpriteMulColorAOP(spr, col));
+	if (spr->Color().mul.a != alpha) {
+		s2::Color col = spr->Color().mul;
+		col.a = alpha;
+		EditAddRecordSJ::Instance()->Add(new SetSpriteMulColorAOP(spr, col));
 
-	spr->Color().mul = col;
+		spr->Color().mul = col;
+	}
 }
 
 void SpritePropertySetting::SetColOverlap(ee::Sprite* spr, const std::string& val)
@@ -538,11 +544,13 @@ void SpritePropertySetting::SetColOverlap(ee::Sprite* spr, const std::string& va
 	ee::StringHelper::FromString(val, overlay);
 	overlay = std::max(0, std::min(255, overlay));
 
-	s2::Color add = spr->Color().add;
-	add.a = overlay;
-	EditAddRecordSJ::Instance()->Add(new SetSpriteAddColorAOP(spr, add));
+	if (spr->Color().add.a != overlay) {
+		s2::Color add = spr->Color().add;
+		add.a = overlay;
+		EditAddRecordSJ::Instance()->Add(new SetSpriteAddColorAOP(spr, add));
 
-	spr->Color().add = add;
+		spr->Color().add = add;
+	}
 }
 
 }
