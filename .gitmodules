@@ -52,3 +52,6 @@
 [submodule "gimg/src/gimg"]
 	path = gimg/src/gimg
 	url = ssh://git@tea.ejoy.com:3222/LR/gimg.git
+[submodule "rigging/src/rigging"]
+	path = rigging/src/rigging
+	url = ssh://git@tea.ejoy.com:3222/LR/rigging.git
