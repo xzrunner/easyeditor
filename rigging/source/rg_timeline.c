@@ -5,6 +5,18 @@
 #include <stdbool.h>
 #include <assert.h>
 #include <string.h>
+#include <stdlib.h>
+
+#define MESH_BUF_SIZE 1024
+
+static float* MESH_BUF = NULL;
+
+void 
+rg_timeline_init() {
+	int sz = sizeof(float) * MESH_BUF_SIZE;
+	MESH_BUF = malloc(sz);
+	memset(MESH_BUF, 0, sz);
+}
 
 // static inline bool
 // _query_dim(const struct rg_frame* samples, int sample_count, int time, uint8_t* ptr, float* ret) {
@@ -59,6 +71,11 @@ _format_angle(float angle) {
 	return angle;
 }
 
+static inline float
+_float_lerp(uint16_t time_begin, uint16_t time_end, float begin, float end, uint16_t time) {
+	return (time - time_begin) * (end - begin) / (time_end - time_begin) + begin;
+}
+
 static inline bool
 _query_joint(const struct rg_joint_sample* samples, int sample_count, int time, bool is_angle, uint8_t* ptr, float* ret) {
 	assert(sample_count > 0);
@@ -89,7 +106,7 @@ _query_joint(const struct rg_joint_sample* samples, int sample_count, int time, 
 				cd = c->data;
 				nd = n->data;
 			}
-			*ret = (time - c->time) * (nd - cd) / (n->time - c->time) + cd;
+			*ret = _float_lerp(c->time, n->time, cd, nd, time);
 			return true;
 		} else {
 			++curr;
@@ -189,4 +206,87 @@ rg_tl_query_skin(const struct rg_tl_skin* skin, int time) {
 	}
 
 	return RG_SKIN_UNKNOWN;
+}
+
+static void 
+_query_deform(const struct rg_tl_deform* deform, int time, const struct rg_deform_sample** curr, const struct rg_deform_sample** next) {
+	*curr = NULL;
+	*next = NULL;
+	if (time < deform->samples[0].time) {
+		return;
+	}
+	if (deform->count == 1 || time > deform->samples[deform->count - 1].time) {
+		*curr = &deform->samples[deform->count - 1];
+		return;
+	}
+
+	int curr_ptr = 0, next_ptr = 1;
+	while (true)
+	{
+		if (deform->samples[curr_ptr].time <= time && time < deform->samples[next_ptr].time) {
+			*curr = &deform->samples[curr_ptr];
+			*next = &deform->samples[next_ptr];
+			return;
+		} else {
+			++curr_ptr;
+			++next_ptr;
+			if (next_ptr >= deform->count) {
+				break;
+			}
+		}
+	}
+}
+
+const float* 
+rg_tl_query_deform(const struct rg_tl_deform* deform, int time, struct rg_tl_deform_state* state) {
+	state->offset0 = 0;
+	state->count0  = 0;
+	state->offset1 = 0;
+	state->count1  = 0;
+
+	const struct rg_deform_sample* curr;
+	const struct rg_deform_sample* next;
+	_query_deform(deform, time, &curr, &next);
+	if (!curr && !next) {
+		return NULL;
+	}
+
+	int count = 0;
+	if (curr) {
+		count += curr->count;
+	}
+	if (next) {
+		count += next->count;
+	}
+	assert(count < MESH_BUF_SIZE * 2);
+
+	int buf_ptr = 0;
+	if (curr && next) {
+		int ptr = 0;
+		for (int i = 0; i < curr->count; ++i) {
+			MESH_BUF[buf_ptr++] = _float_lerp(curr->time, next->time, curr->data[ptr++], 0, time);
+			MESH_BUF[buf_ptr++] = _float_lerp(curr->time, next->time, curr->data[ptr++], 0, time);
+		}
+		ptr = 0;
+		for (int i = 0; i < next->count; ++i) {
+			MESH_BUF[buf_ptr++] = _float_lerp(curr->time, next->time, 0, next->data[ptr++], time);
+			MESH_BUF[buf_ptr++] = _float_lerp(curr->time, next->time, 0, next->data[ptr++], time);
+		}
+	} else if (curr) {
+		memcpy(MESH_BUF, curr->data, curr->count * 2);
+	} else {
+		assert(next);
+		memcpy(MESH_BUF, next->data, next->count * 2);
+	}
+
+	if (curr) {
+		state->offset0 = curr->offset;
+		state->count0  = curr->count;
+	}
+	if (next) {
+		state->offset1 = next->offset;
+		state->count1  = next->count;
+	}
+
+	return MESH_BUF;
 }

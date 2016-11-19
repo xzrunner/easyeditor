@@ -70,14 +70,41 @@ struct rg_tl_skin {
 
 #define SIZEOF_RG_TIMELINE_SKIN (sizeof(struct rg_tl_skin) - sizeof(struct rg_skin_sample))
 
-struct rg_timeline {
-	struct rg_tl_joint** joints;
-	struct rg_tl_skin**  skins;
+struct rg_tl_deform_state {
+	uint16_t offset0, count0;
+	uint16_t offset1, count1;
 };
+
+struct rg_deform_sample {
+	uint16_t time;
+	uint16_t offset;
+	uint16_t count;
+	uint16_t padding;
+	float*   data;
+};
+
+#define SIZEOF_RG_DEFORM_SAMPLE (sizeof(struct rg_deform_sample) + PTR_SIZE_DIFF)
+
+struct rg_tl_deform {
+	int                     count;
+	struct rg_deform_sample samples[1];
+};
+
+#define SIZEOF_RG_TIMELINE_DEFORM (sizeof(struct rg_tl_deform) - sizeof(struct rg_deform_sample))
+
+struct rg_timeline {
+	struct rg_tl_joint**  joints;
+	struct rg_tl_skin**   skins;
+	struct rg_tl_deform** deforms;
+};
+
+void rg_timeline_init();
 
 void rg_tl_query_joint(const struct rg_tl_joint*, int time, uint64_t* dims_ptr, struct rg_tl_joint_state*);
 
 uint16_t rg_tl_query_skin(const struct rg_tl_skin*, int time);
+
+const float* rg_tl_query_deform(const struct rg_tl_deform*, int time, struct rg_tl_deform_state*);
 
 #endif // rigging_timeline_h
 

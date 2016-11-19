@@ -16,9 +16,10 @@ struct rg_skeleton_skin {
 
 #define SIZEOF_RG_SKELETON_SKIN (sizeof(struct rg_skeleton_skin) - sizeof(uint16_t))
 
-void rg_skeleton_skin_init(void (*update_skin_func)(void* sym, const struct rg_skeleton_pose*));
+void rg_skeleton_skin_init(void (*update_skin_func)(void* sym, const struct rg_skeleton_pose*),
+						   void (*update_mesh_func)(void* sym, const struct rg_tl_deform_state*, const float*));
 
-void rg_skeleton_skin_update(struct rg_skeleton_skin*, const struct rg_skeleton*, const struct rg_skeleton_pose*, const struct rg_tl_skin**, int time);
+void rg_skeleton_skin_update(struct rg_skeleton_skin*, const struct rg_skeleton*, const struct rg_skeleton_pose*, const struct rg_tl_skin**, const struct rg_tl_deform**, int time);
 
 #endif // rigging_skeleton_skin_h
 
