@@ -4,7 +4,7 @@
 	Version="11.1"
 	Name="1.rigging"
 	ProjectGUID="{5475558E-1FF4-4D58-8500-B3666768CEDA}"
-	VCNestedProjectGUID="{D38903FD-20A2-4BB3-8F2F-BE31CE315CAD}"
+	VCNestedProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
 	VCNestedProjectFileName="rigging.vcproj">
 	<Configurations>
 		<Configuration

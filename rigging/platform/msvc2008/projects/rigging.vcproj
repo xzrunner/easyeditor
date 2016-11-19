@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="1.rigging"
-	ProjectGUID="{D38903FD-20A2-4BB3-8F2F-BE31CE315CAD}"
+	ProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
 	RootNamespace="rigging"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\include\rigging;..\..\..\..\particle\src;..\..\..\..\dtex\src;..\..\..\..\ejoy2d\src;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\model3\src\model3;..\..\..\..\logger\src\logger;..\..\..\..\camera25\src\camera25;..\..\..\..\sm\src\sm;..\..\..\..\ds\src\ds;..\..\..\..\cu\src\cu;..\..\..\..\mtrail\src\mtrail;..\..\..\..\gimg\src\gimg;..\..\..\..\sprite2\include;..\..\..\..\simp\include;..\..\..\..\gtxt\src\gtxt;&quot;..\..\..\..\editor-external\cjson\include&quot;;..\..\..\..\editor-external\json\include;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\libjpeg\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\assimp\include&quot;;&quot;..\..\..\..\editor-external\boost\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\ejoy2d\src;..\..\..\..\ejoy2d\src\render;..\..\..\..\logger\src\logger;..\..\..\..\particle\src;..\..\..\..\ds\src\ds;..\..\..\..\fs\src\fs;..\..\..\..\dtex\src;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\lua\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -49,7 +49,6 @@
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="4"
-				CompileAs="0"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -106,15 +105,13 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\include\rigging;..\..\..\..\particle\src;..\..\..\..\dtex\src;..\..\..\..\ejoy2d\src;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\model3\src\model3;..\..\..\..\logger\src\logger;..\..\..\..\camera25\src\camera25;..\..\..\..\sm\src\sm;..\..\..\..\ds\src\ds;..\..\..\..\cu\src\cu;..\..\..\..\mtrail\src\mtrail;..\..\..\..\gimg\src\gimg;..\..\..\..\sprite2\include;..\..\..\..\simp\include;..\..\..\..\gtxt\src\gtxt;&quot;..\..\..\..\editor-external\cjson\include&quot;;..\..\..\..\editor-external\json\include;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\libjpeg\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\assimp\include&quot;;&quot;..\..\..\..\editor-external\boost\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\ejoy2d\src;..\..\..\..\ejoy2d\src\render;..\..\..\..\logger\src\logger;..\..\..\..\particle\src;..\..\..\..\ds\src\ds;..\..\..\..\fs\src\fs;..\..\..\..\dtex\src;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\lua\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="3"
-				CompileAs="0"
-				DisableSpecificWarnings="94"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -149,87 +146,11 @@
 	</References>
 	<Files>
 		<File
-			RelativePath="..\..\..\source\rg_animation.c"
+			RelativePath="..\..\..\src\rigging\rigging.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\include\rigging\rg_animation.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\source\rg_joint.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\include\rigging\rg_joint.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\include\rigging\rg_pose_mat.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\include\rigging\rg_pose_mat.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\source\rg_pose_srt.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\include\rigging\rg_pose_srt.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\source\rg_skeleton.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\include\rigging\rg_skeleton.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\source\rg_skeleton_pose.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\include\rigging\rg_skeleton_pose.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\source\rg_skeleton_skin.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\include\rigging\rg_skeleton_skin.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\source\rg_skin.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\include\rigging\rg_skin.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\include\rigging\rg_slot.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\source\rg_timeline.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\include\rigging\rg_timeline.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\source\rg_utility.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\include\rigging\rg_utility.h"
+			RelativePath="..\..\..\src\rigging\rigging.h"
 			>
 		</File>
 	</Files>

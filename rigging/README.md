@@ -1,3 +1,0 @@
-# rigging
-
-skeletal animation
