@@ -505,7 +505,11 @@ Sprite* SpritePropertySetting::GetSprite()
 
 void SpritePropertySetting::SetColMul(ee::Sprite* spr, const std::string& val)
 {
-	wxColour wx_col(val);
+	std::string fixed = val;
+	if (!fixed.empty() && val[0] == '(') {
+		fixed = "rgb" + fixed;
+	}
+	wxColour wx_col(fixed);
 	s2::Color col(wx_col.Red(), wx_col.Green(), wx_col.Blue(), spr->Color().mul.a);
 	if (col != spr->Color().mul) {
 		EditAddRecordSJ::Instance()->Add(new SetSpriteMulColorAOP(spr, col));
@@ -515,7 +519,11 @@ void SpritePropertySetting::SetColMul(ee::Sprite* spr, const std::string& val)
 
 void SpritePropertySetting::SetColAdd(ee::Sprite* spr, const std::string& val)
 {
-	wxColour wx_col(val);
+	std::string fixed = val;
+	if (!fixed.empty() && val[0] == '(') {
+		fixed = "rgb" + fixed;
+	}
+	wxColour wx_col(fixed);
 	s2::Color col(wx_col.Red(), wx_col.Green(), wx_col.Blue(), spr->Color().add.a);
 	if (col != spr->Color().add) {
 		EditAddRecordSJ::Instance()->Add(new SetSpriteAddColorAOP(spr, col));
