@@ -10,6 +10,8 @@
 #include <ee/Image.h>
 #include <ee/Exception.h>
 #include <ee/ExceptionDlg.h>
+#include <ee/SettingData.h>
+#include <ee/Config.h>
 
 #include <easyterrain2d.h>
 #include <easycomplex.h>
@@ -257,7 +259,11 @@ void SettingDialog::OnChangeGradingTexture(wxCommandEvent& event)
 		}
 		if (prog) {
 			try {
+				ee::SettingData& data = ee::Config::Instance()->GetSettings();
+				bool ori_alpha_cfg = data.pre_multi_alpha;
+				data.pre_multi_alpha = false;
 				ee::Image* img = ee::ImageMgr::Instance()->GetItem(filepath);
+				data.pre_multi_alpha = ori_alpha_cfg;
 				if (img) {
 					SettingCfg::Instance()->m_post_effect_file = filepath;
 					prog->SetLUTTex(img->GetTexID());

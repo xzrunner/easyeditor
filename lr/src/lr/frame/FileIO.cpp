@@ -14,6 +14,8 @@
 #include <ee/Sprite.h>
 #include <ee/Shape.h>
 #include <ee/Image.h>
+#include <ee/SettingData.h>
+#include <ee/Config.h>
 
 #include <gum/trans_color.h>
 #include <shaderlab.h>
@@ -94,7 +96,11 @@ void FileIO::Load(const char* filename, LibraryPanel* library,
 			prog = static_cast<sl::ColGradingProg*>(shader->GetProgram(sl::FM_COL_GRADING));
 		}
 		if (prog) {
+			ee::SettingData& data = ee::Config::Instance()->GetSettings();
+			bool ori_alpha_cfg = data.pre_multi_alpha;
+			data.pre_multi_alpha = false;
 			ee::Image* img = ee::ImageMgr::Instance()->GetItem(filepath);
+			data.pre_multi_alpha = ori_alpha_cfg;
 			if (img) {
 				SettingCfg::Instance()->m_post_effect_file = filepath;
 				prog->SetLUTTex(img->GetTexID());
