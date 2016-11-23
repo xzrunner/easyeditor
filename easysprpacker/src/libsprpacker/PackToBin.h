@@ -26,6 +26,8 @@ private:
 
 		void Insert(PackNode* node);
 
+		int NodeSize() const { return m_nodes.size(); }
+
 	public:
 		int m_id_min, m_id_max;
 		std::vector<PackNode*> m_nodes;

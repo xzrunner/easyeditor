@@ -9,6 +9,7 @@
 #include <easyrespacker.h>
 
 #include <simp/simp_define.h>
+#include <simp/Page.h>
 
 #include <map>
 #include <algorithm>
@@ -42,16 +43,22 @@ void PackToBin::Pack(const std::string& filepath,
 	// to pages
 	std::vector<Page*> pages;
 	Page* page = new Page;
-	int page_sz = 0;
+	int page_sz = ALIGN_4BYTE(simp::Page::Size());
 	for (int i = 0, n = nodes.size(); i < n; ++i)
 	{
 		PackNode* node = nodes[i];
+
 		int sz = node->SizeOfUnpackFromBin();
-		if (page_sz + sz > simp::PAGE_SIZE) 
+		assert(sz < simp::PAGE_SIZE);
+		int head_sz = sizeof(uint8_t) * ALIGN_4BYTE(page->NodeSize() + 1) +
+			          simp::SIZEOF_POINTER * (page->NodeSize() + 1);
+		if (page_sz + head_sz + sz > simp::PAGE_SIZE)
 		{
 			pages.push_back(page);
 			page = new Page;
-			page_sz = sz;
+			page_sz = ALIGN_4BYTE(simp::Page::Size()) + sz;
+		} else {
+			page_sz += sz;
 		}
 		page->Insert(node);
 	}

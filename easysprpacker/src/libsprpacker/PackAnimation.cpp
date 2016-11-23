@@ -188,6 +188,7 @@ int PackAnimation::Frame::
 SizeOfUnpackFromBin() const
 {
 	int sz = simp::NodeAnimation::FrameSize();
+	sz += m_actors.size() * simp::SIZEOF_POINTER;
 	for (int i = 0, n = m_actors.size(); i < n; ++i) {
 		sz += m_actors[i]->SizeOfUnpackFromBin();
 	}
@@ -259,6 +260,7 @@ int PackAnimation::Layer::
 SizeOfUnpackFromBin() const
 {
 	int sz = simp::NodeAnimation::LayerSize();
+	sz += m_frames.size() * simp::SIZEOF_POINTER;
 	for (int i = 0, n = m_frames.size(); i < n; ++i) {
 		sz += m_frames[i]->SizeOfUnpackFromBin();
 	}

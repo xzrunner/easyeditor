@@ -79,11 +79,12 @@ int PackComplex::SizeOfUnpackFromBin() const
 {
 	int sz = simp::NodeComplex::Size();
 	sz += simp::SIZEOF_POINTER * m_children.size();
-	for (int i = 0, n = m_children_trans.size(); i < n; ++i) {
-		sz += m_children_trans[i].SizeOfUnpackFromBin();
-	}
 	for (int i = 0, n = m_actions.size(); i < n; ++i) {
 		sz += m_actions[i].SizeOfUnpackFromBin();
+	}
+	sz += sizeof(uint32_t) * m_children_trans.size();
+	for (int i = 0, n = m_children_trans.size(); i < n; ++i) {
+		sz += m_children_trans[i].SizeOfUnpackFromBin();
 	}
 	return sz;
 }

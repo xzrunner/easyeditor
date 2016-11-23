@@ -83,7 +83,7 @@ int PackScale9::SizeOfPackToBin() const
 	sz += sizeof(uint8_t);			// s9 type
 	for (int i = 0, n = m_grids.size(); i < n; ++i) {
 		const Grid& g = m_grids[i];
-		assert (!g.node);
+		assert (g.node);
 		sz += sizeof(uint32_t);		// grid id
 		sz += sizeof(uint8_t);		// dir & mirror
 	}	
@@ -104,7 +104,7 @@ void PackScale9::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float sca
 	for (int i = 0, n = m_grids.size(); i < n; ++i) 
 	{
 		const Grid& g = m_grids[i];
-		assert (!g.node);
+		assert(g.node);
 		
 		uint32_t id = g.node->GetID();
 		pack(id, ptr);
@@ -130,7 +130,8 @@ void PackScale9::Init(const escale9::Symbol* sym)
 
 	std::vector<s2::Sprite*> sprs;
 	s9.GetGrids(sprs);
-	for (int i = 0, n = m_grids.size(); i < n; ++i) 
+	m_grids.resize(sprs.size());
+	for (int i = 0, n = sprs.size(); i < n; ++i) 
 	{
 		const s2::Sprite* src = sprs[i];
 		Grid& dst = m_grids[i];
