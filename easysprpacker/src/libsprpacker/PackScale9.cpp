@@ -19,7 +19,7 @@ PackScale9::PackScale9(const escale9::Symbol* sym)
 
 PackScale9::~PackScale9()
 {
-	for (int i = 0; i < 9; ++i) {
+	for (int i = 0, n = m_grids.size(); i < n; ++i) {
 		if (m_grids[i].node) {
 			m_grids[i].node->RemoveReference();
 		}
@@ -38,12 +38,10 @@ void PackScale9::PackToLuaString(ebuilder::CodeGenerator& gen,
 	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(m_id));
 
 	lua::assign_with_end(gen, "s9_type", m_type);
-	for (int i = 0; i < 9; ++i) 
+	for (int i = 0, n = m_grids.size(); i < n; ++i) 
 	{
 		const Grid& g = m_grids[i];
-		if (!g.node) {
-			continue;
-		}
+		assert(g.node);
 		lua::TableAssign ta(gen, "", true);
 		lua::connect(gen, 4, 
 			lua::assign("id", g.node->GetID()), 
@@ -83,8 +81,9 @@ int PackScale9::SizeOfPackToBin() const
 	sz += sizeof(uint32_t);			// id
 	sz += sizeof(uint8_t);			// type
 	sz += sizeof(uint8_t);			// s9 type
-	for (int i = 0; i < 9; ++i) {
+	for (int i = 0, n = m_grids.size(); i < n; ++i) {
 		const Grid& g = m_grids[i];
+		assert (!g.node);
 		sz += sizeof(uint32_t);		// grid id
 		sz += sizeof(uint8_t);		// dir & mirror
 	}	
@@ -102,12 +101,10 @@ void PackScale9::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float sca
 	uint8_t s9_type = m_type;
 	pack(s9_type, ptr);
 
-	for (int i = 0; i < 9; ++i) 
+	for (int i = 0, n = m_grids.size(); i < n; ++i) 
 	{
 		const Grid& g = m_grids[i];
-		if (!g.node) {
-			continue;
-		}
+		assert (!g.node);
 		
 		uint32_t id = g.node->GetID();
 		pack(id, ptr);
@@ -133,7 +130,7 @@ void PackScale9::Init(const escale9::Symbol* sym)
 
 	std::vector<s2::Sprite*> sprs;
 	s9.GetGrids(sprs);
-	for (int i = 0; i < 9; ++i) 
+	for (int i = 0, n = m_grids.size(); i < n; ++i) 
 	{
 		const s2::Sprite* src = sprs[i];
 		Grid& dst = m_grids[i];

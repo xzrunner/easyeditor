@@ -50,7 +50,8 @@ private:
 private:
 	s2::SCALE9_TYPE m_type;
 
-	Grid m_grids[9];
+//	Grid m_grids[9];
+	std::vector<Grid> m_grids;
 
 }; // PackScale9
 
