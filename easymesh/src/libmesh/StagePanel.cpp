@@ -11,6 +11,8 @@
 #include <ee/subject_id.h>
 #include <ee/ImageSymbol.h>
 
+#include <sprite2/RenderParams.h>
+
 namespace emesh
 {
 
@@ -43,6 +45,11 @@ StagePanel::~StagePanel()
 	if (m_background) {
 		m_background->RemoveReference();
 	}
+}
+
+bool StagePanel::UpdateStage()
+{
+	return m_sym->Update(s2::RenderParams(), 0);
 }
 
 void StagePanel::TraverseShapes(ee::Visitor<ee::Shape>& visitor, 

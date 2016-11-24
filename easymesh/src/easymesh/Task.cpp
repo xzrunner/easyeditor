@@ -10,6 +10,7 @@
 
 #include <easymesh.h>
 #include <easycomplex.h>
+#include <easyanim.h>
 
 #include <sprite2/SymType.h>
 
@@ -99,6 +100,7 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 	m_library = new ee::LibraryPanel(split);
 	m_library->AddPage(new ee::LibraryImagePage(m_library->GetNotebook()));
 	m_library->AddPage(new ecomplex::LibraryPage(m_library->GetNotebook()));
+	m_library->AddPage(new eanim::LibraryPage(m_library->GetNotebook()));
 
 	m_property = new ee::PropertySettingPanel(split);
 

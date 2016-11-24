@@ -22,6 +22,11 @@ public:
 	virtual ~StagePanel();
 
 	//
+	// ee::EditPanel interface
+	//
+	virtual bool UpdateStage();
+
+	//
 	// ee::MultiShapesImpl interface
 	//
 	virtual void TraverseShapes(ee::Visitor<ee::Shape>& visitor, 
