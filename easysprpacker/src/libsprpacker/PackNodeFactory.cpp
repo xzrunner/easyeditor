@@ -114,11 +114,11 @@ const PackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 {
 	const PackNode* node = NULL;
 
-	if (spr->IsAnchor()) {
-		// todo
-	}
+// 	if (spr->IsAnchor()) {
+// 		// todo
+// 	}
 	// image
-	else if (const ee::ImageSprite* image = dynamic_cast<const ee::ImageSprite*>(spr)) {
+	if (const ee::ImageSprite* image = dynamic_cast<const ee::ImageSprite*>(spr)) {
 		node = IMAGE_BUILDER->Create(dynamic_cast<const ee::ImageSymbol*>(image->GetSymbol()));
 	}
 	// scale9 spr
@@ -174,6 +174,7 @@ const PackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 		throw ee::Exception("PackNodeFactory::Create unknown sprite type.");
 	}
 
+	assert(node);
 	node->SetFilepath(ee::FileHelper::GetRelativePath(m_files_dir, dynamic_cast<const  ee::Symbol*>(spr->GetSymbol())->GetFilepath()));
 
 	return node;
