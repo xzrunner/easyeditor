@@ -106,6 +106,30 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 	std::string out_json_dir = dst_dir + "\\" + JSON_DIR;
 
 	ee::ImageData* img = ee::ImageDataMgr::Instance()->GetItem(filepath);
+	if (img->GetChannels() == 3) 
+	{
+		std::string filename = ee::FileHelper::GetRelativePath(src_dir, filepath);
+		filename = filename.substr(0, filename.find_last_of('.'));
+		ee::StringHelper::ReplaceAll(filename, "\\", "%");
+
+		ecomplex::Symbol complex;
+
+		std::string img_name = ee::StringHelper::Format("%s#%d#%d#%d#%d#.png", filename.c_str(), 0, 0, img->GetWidth(), img->GetHeight());
+		std::string img_out_path = out_img_dir + "\\" + img_name;
+		ee::ImageSaver::StoreToFile(img->GetPixelData(), img->GetWidth(), img->GetHeight(), img->GetChannels(), img_out_path, ee::ImageSaver::e_png);
+
+		std::string spr_path = std::string(out_img_dir + "\\" + img_name);
+		ee::Sprite* spr = new ee::DummySprite(new ee::DummySymbol(spr_path, img->GetWidth(), img->GetHeight()));
+		complex.Add(spr);
+
+		std::string json_out_path = out_json_dir + "\\" + filename + "_complex.json";
+		ecomplex::FileStorer::Store(json_out_path, &complex, out_json_dir);
+
+		img->RemoveReference();
+
+		return;
+	}
+
 	ee::ImageTrim trim(*img);
 	sm::rect img_r = trim.Trim();
 	if (!img_r.IsValid()) {
