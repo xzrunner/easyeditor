@@ -177,6 +177,9 @@ int render_query_tex_glid(struct render *R, int tex);
 
 void render_clear_texture_cache(struct render* R);
 
+void render_gl_blend_enable();
+void render_gl_blend_disable();
+
 #endif
 
 #ifdef __cplusplus

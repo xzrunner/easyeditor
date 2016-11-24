@@ -1192,3 +1192,13 @@ void
 render_clear_texture_cache(struct render* R) {
 	memset(R->last.texture, 0, sizeof(R->last.texture));
 }
+
+void 
+render_gl_blend_enable() {
+	glEnable(GL_BLEND);
+}
+
+void 
+render_gl_blend_disable() {
+	glDisable(GL_BLEND);
+}

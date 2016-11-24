@@ -28,11 +28,9 @@ void CameraCanvas::OnSize(int w, int h)
 	const Camera* cam = CameraMgr::Instance()->GetCamera();
 	float cam_scale = cam->GetScale();
 	const sm::vec2& cam_pos = cam->GetPosition();
-	s2::RenderCtx ctx;
+	s2::RenderCtx ctx(w, h, w, h);
 	ctx.mv_offset = -cam_pos;
 	ctx.mv_scale = 1 / cam_scale;
-	ctx.proj_width = w;
-	ctx.proj_height = h;
 	s2_stack->Push(ctx);
 }
 
