@@ -151,7 +151,7 @@ void Layer::ResetSpritesVisibleEditable()
 	}
 }
 
-void Layer::LoadFromFile(const Json::Value& val, const std::string& dir, int layer_idx)
+void Layer::LoadFromFile(const Json::Value& val, const std::string& dir, int layer_idx, std::string& err_log)
 {
 	m_name = val["name"].asString();
 	m_editable = val["editable"].asBool();
@@ -164,10 +164,10 @@ void Layer::LoadFromFile(const Json::Value& val, const std::string& dir, int lay
 
 	if (!val["base filepath"].isNull()) {
 		m_base_filepath = val["base filepath"].asString();
-		LoadFromBaseFile(layer_idx, m_base_filepath, dir);
+		LoadFromBaseFile(layer_idx, m_base_filepath, dir, err_log);
 	}
 
-	LoadSprites(val["sprite"], dir);
+	LoadSprites(val["sprite"], dir, err_log);
 	LoadShapes(val["shape"], dir);
 
 	if (!val["layers"].isNull()) {
@@ -262,12 +262,19 @@ bool Layer::IsValidFloat(float f)
 }
 
 void Layer::LoadSprites(const Json::Value& val, const std::string& dir,
-						const std::string& base_path)
+						std::string& err_log, const std::string& base_path)
 {
 	int idx = 0;
 	Json::Value spr_val = val[idx++];
 	while (!spr_val.isNull()) {
-		ee::Sprite* spr = LoadSprite(spr_val, dir, base_path);
+		ee::Sprite* spr = NULL;
+		try {
+			spr = LoadSprite(spr_val, dir, base_path);
+		} catch (ee::Exception& e) {
+			err_log = err_log + e.What();
+			spr_val = val[idx++];
+			continue;
+		}
 		spr->Camera().mode = m_cam_mode;
 		m_sprs.Insert(spr);
 		spr->RemoveReference();
@@ -293,7 +300,8 @@ void Layer::LoadShapes(const Json::Value& val, const std::string& dir,
 	}
 }
 
-void Layer::LoadFromBaseFile(int layer_idx, const std::string& filepath, const std::string& dir)
+void Layer::LoadFromBaseFile(int layer_idx, const std::string& filepath, 
+							 const std::string& dir, std::string& err_log)
 {
 	std::string filepath_full = dir + "\\" + filepath;
 
@@ -308,10 +316,10 @@ void Layer::LoadFromBaseFile(int layer_idx, const std::string& filepath, const s
 	const Json::Value& layer_val = value["layer"][layer_idx];
 	if (!layer_val["base filepath"].isNull()) {
 		std::string base_path = layer_val["base filepath"].asString();
-		LoadFromBaseFile(layer_idx, base_path, dir);
+		LoadFromBaseFile(layer_idx, base_path, dir, err_log);
 	}
 
-	LoadSprites(layer_val["sprite"], dir, filepath);
+	LoadSprites(layer_val["sprite"], dir, err_log, filepath);
 	LoadShapes(layer_val["shape"], dir, filepath);
 }
 

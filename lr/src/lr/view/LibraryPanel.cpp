@@ -74,13 +74,15 @@ void LibraryPanel::LoadFromFile(const Json::Value& value, const std::string& dir
 			try {
 				ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 				if (!sym) {
-					throw ee::Exception("Create symbol %s fail!", item_path.c_str());					
+					item_val = layer_val[item_idx++];
+					continue;
 				}
 				sym->RefreshThumbnail(sym->GetFilepath());
 				list->Insert(sym);
 				sym->RemoveReference();
 			} catch (ee::Exception& e) {
-				throw ee::Exception("Create symbol %s fail!", item_path.c_str());
+				item_val = layer_val[item_idx++];
+				continue;
 			}
 			item_val = layer_val[item_idx++];
 		}

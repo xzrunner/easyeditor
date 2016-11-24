@@ -26,7 +26,7 @@ namespace lr
 {
 
 void FileIO::Load(const char* filename, LibraryPanel* library, 
-				  StagePanel* stage, ee::GroupTreePanel* grouptree)
+				  StagePanel* stage, ee::GroupTreePanel* grouptree, std::string& err_log)
 {
 // 	ee::SymbolMgr::Instance()->Clear();
 // 	ee::BitmapMgr::Instance()->Clear();
@@ -110,7 +110,7 @@ void FileIO::Load(const char* filename, LibraryPanel* library,
 
 	// layers
 	stage->SetResDir(dir);
-	LoadLayers(value["layer"], stage, library, dir);
+	LoadLayers(value["layer"], stage, library, dir, err_log);
 
 	// libraries
 	if (value["library"].isNull()) {
@@ -175,7 +175,7 @@ void FileIO::Store(const char* filename, LibraryPanel* library,
 }
 
 void FileIO::LoadLayers(const Json::Value& value, StagePanel* stage, 
-						LibraryPanel* library, const std::string& dir)
+						LibraryPanel* library, const std::string& dir, std::string& err_log)
 {
 	std::vector<Layer*> layers;
 
@@ -184,7 +184,7 @@ void FileIO::LoadLayers(const Json::Value& value, StagePanel* stage,
 	while (!layer_val.isNull()) {
 		LayerType type = library->GetLayerType(idx-1);
 		Layer* layer = LayerFactory::Create(idx-1, library, type, library->GetLayerCameraMode(idx-1));
-		layer->LoadFromFile(layer_val, dir, idx-1);
+		layer->LoadFromFile(layer_val, dir, idx-1, err_log);
 		layers.push_back(layer);
 
 		layer_val = value[idx++];

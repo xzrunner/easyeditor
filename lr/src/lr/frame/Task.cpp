@@ -20,6 +20,7 @@
 #include <ee/GroupTreePanel.h>
 #include <ee/Sprite.h>
 #include <ee/Shape.h>
+#include <ee/Exception.h>
 
 namespace lr
 {
@@ -51,7 +52,11 @@ Task::~Task()
 
 void Task::Load(const char* filename)
 {
-	FileIO::Load(filename, m_library, m_stage, m_grouptree);
+	std::string err_log;
+	FileIO::Load(filename, m_library, m_stage, m_grouptree, err_log);
+	if (!err_log.empty()) {
+		throw ee::Exception(err_log.c_str());
+	}
 }
 
 void Task::Store(const char* filename) const
