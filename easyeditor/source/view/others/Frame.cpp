@@ -18,6 +18,7 @@
 #include "StringHelper.h"
 #include "SymbolMgr.h"
 #include "Bitmap.h"
+#include "LogMgr.h"
 
 #include <gum/GUM_DTex.h>
 
@@ -115,6 +116,13 @@ void Frame::OpenFile(const std::string& filename)
 	} catch (Exception& e) {
 		ExceptionDlg dlg(this, e);
 		dlg.ShowModal();
+	}
+
+	const std::string& err_log = LogMgr::Instance()->GetException();
+	if (!err_log.empty()) {
+		ExceptionDlg dlg(this, err_log);
+		dlg.ShowModal();
+		LogMgr::Instance()->ClearException();
 	}
 }
 

@@ -52,11 +52,7 @@ Task::~Task()
 
 void Task::Load(const char* filename)
 {
-	std::string err_log;
-	FileIO::Load(filename, m_library, m_stage, m_grouptree, err_log);
-	if (!err_log.empty()) {
-		throw ee::Exception(err_log.c_str());
-	}
+	FileIO::Load(filename, m_library, m_stage, m_grouptree);
 }
 
 void Task::Store(const char* filename) const

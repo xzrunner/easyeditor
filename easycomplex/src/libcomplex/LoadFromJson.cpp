@@ -8,6 +8,7 @@
 #include <ee/SpriteFactory.h>
 #include <ee/Sprite.h>
 #include <ee/StringHelper.h>
+#include <ee/LogMgr.h>
 
 #include <gum/ComplexSymLoader.h>
 
@@ -30,7 +31,13 @@ void LoadFromJson::Load(const std::string& _filepath, const Json::Value& value,
 	complex->m_use_render_cache = value["use_render_cache"].asBool();
 
 	for (int i = 0, n = value["sprite"].size(); i < n; ++i) {
-		ee::Sprite* spr = LoadSprite(value["sprite"][i], dir);
+		ee::Sprite* spr = NULL;
+		try {
+			spr = LoadSprite(value["sprite"][i], dir);
+		} catch (ee::Exception& e) {
+			ee::LogMgr::Instance()->AddException(e.What());
+			continue;
+		}
 		complex->Add(spr);
 		spr->RemoveReference();
 	}
