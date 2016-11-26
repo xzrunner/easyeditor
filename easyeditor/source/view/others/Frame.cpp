@@ -22,6 +22,8 @@
 
 #include <gum/GUM_DTex.h>
 
+#include <wx/socket.h>
+
 #include <fstream>
 
 namespace ee
@@ -35,6 +37,8 @@ BEGIN_EVENT_TABLE(Frame, wxFrame)
 
 	EVT_MENU(ID_FULL_VIEWS, Frame::OnFullView)
 	EVT_MENU(ID_SETTINGS, Frame::OnSettings)
+	EVT_MENU(ID_CONN_DEFAULT, Frame::OnConnDefault)
+	EVT_MENU(ID_CONN_TEST, Frame::OnConnTest)
 
 	EVT_MENU(wxID_EXIT, Frame::OnQuit)
 	
@@ -63,6 +67,16 @@ Frame::Frame(const std::string& title, const std::string& filetag, const wxSize&
 	StackTrace::InitUnhandledExceptionFilter();
 
 	SetDropTarget(new FrameDropTarget(this));
+
+	// Create the socket
+	m_sock = new wxSocketClient();
+
+	// Setup the event handler and subscribe to most events
+//	m_sock->SetEventHandler(*this, SOCKET_ID);
+	m_sock->SetNotify(wxSOCKET_CONNECTION_FLAG |
+		wxSOCKET_INPUT_FLAG |
+		wxSOCKET_LOST_FLAG);
+	m_sock->Notify(true);
 }
 
 Frame::~Frame()
@@ -75,6 +89,9 @@ Frame::~Frame()
 	SaveTmpInfo();
 
 	delete m_recent_menu;
+
+	// No delayed deletion here, as the frame is dying anyway
+	delete m_sock;
 }
 
 void Frame::SetTask(Task* task)
@@ -257,6 +274,21 @@ void Frame::OnSettings(wxCommandEvent& event)
 	const_cast<EditPanel*>(m_task->GetEditPanel())->GetCanvas()->SetBgColor(col);
 }
 
+void Frame::OnConnDefault(wxCommandEvent& event)
+{
+	wxIPV4address addr;
+	addr.Hostname("localhost");
+	addr.Service(3141);
+	m_sock->Connect(addr, false);
+}
+
+void Frame::OnConnTest(wxCommandEvent& event)
+{
+	const char* zztest = "zztest 1234";
+	unsigned char len = (unsigned char)(strlen(zztest) + 1);
+	m_sock->Write(zztest, len);
+}
+
 std::string Frame::GetFileFilter() const
 {
 	return ee::FileHelper::GetJsonFileFilter(m_filetag);
@@ -290,6 +322,7 @@ void Frame::InitMenuBar()
 	menuBar->Append(m_view_menu = InitViewBar(), "&View");
 	menuBar->Append(m_setting_menu = InitSettingsBar(), "&Settings");
 	menuBar->Append(m_code_menu = InitCodeBar(), "&Code");
+	menuBar->Append(m_conn_menu = InitConnBar(), "Connect");
 	SetMenuBar(menuBar);
 }
 
@@ -336,6 +369,14 @@ wxMenu* Frame::InitSettingsBar()
 wxMenu* Frame::InitCodeBar()
 {
 	wxMenu* menu = new wxMenu;
+	return menu;
+}
+
+wxMenu* Frame::InitConnBar()
+{
+	wxMenu* menu = new wxMenu;
+	menu->Append(ID_CONN_DEFAULT, "Default");
+	menu->Append(ID_CONN_TEST, "Test");
 	return menu;
 }
 

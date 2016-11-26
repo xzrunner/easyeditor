@@ -5,6 +5,8 @@
 
 #include <wx/wx.h>
 
+class wxSocketClient;
+
 namespace ee
 {
 
@@ -34,6 +36,8 @@ protected:
 
 	virtual void OnFullView(wxCommandEvent& event);
 	virtual void OnSettings(wxCommandEvent& event);
+	virtual void OnConnDefault(wxCommandEvent& event);
+	virtual void OnConnTest(wxCommandEvent& event);
 
 	virtual std::string GetFileFilter() const;
 
@@ -58,6 +62,7 @@ private:
 	wxMenu* InitViewBar();
 	wxMenu* InitSettingsBar();
 	wxMenu* InitCodeBar();
+	wxMenu* InitConnBar();
 	wxMenu* InitHelpBar();
 
 	void SetCurrFilename();
@@ -69,6 +74,7 @@ protected:
 	wxMenu* m_view_menu;
 	wxMenu* m_setting_menu;
 	wxMenu* m_code_menu;
+	wxMenu* m_conn_menu;
 
 	Task* m_task;
 
@@ -77,6 +83,8 @@ private:
 	{
 		ID_FULL_VIEWS		= 1000,
 		ID_SETTINGS,
+		ID_CONN_DEFAULT,
+		ID_CONN_TEST,
 
 		ID_RECENT_FILENAME	= 8000,
 	};
@@ -89,6 +97,8 @@ private:
 	RecentFilesMenu* m_recent_menu;
 
 	SpecialConfig m_config;
+
+	wxSocketClient* m_sock;
 
 #ifdef _DEBUG
 	wxLogChain* m_log_chain;
