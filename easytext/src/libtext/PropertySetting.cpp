@@ -7,7 +7,7 @@
 #include <ee/panel_msg.h>
 #include <ee/Config.h>
 #include <ee/SysColorProperty.h>
-#include <ee/PropertyColorMonitor.h>
+#include <ee/PropColMonitor.h>
 
 #include <wx/propgrid/advprops.h>
 
@@ -159,7 +159,7 @@ void PropertySetting::InitProperties(wxPropertyGrid* pg)
 	ee::SysColorProperty* col_prop = new ee::SysColorProperty("FontColor");
 	col_prop->SetParent(m_parent);
 	col_prop->SetColorData(ColorConfig::Instance()->GetColorData());
-	col_prop->SetListener(new ee::PropertyColorListener(const_cast<s2::Color*>(&tb.font_color)));
+	col_prop->SetListener(new ee::PropColMonitor(const_cast<s2::Color*>(&tb.font_color)));
 	pg->Append(col_prop);
 
 	pg->Append(new wxBoolProperty("Edge", wxPG_LABEL, tb.has_edge));

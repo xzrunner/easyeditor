@@ -310,11 +310,11 @@
 			Name="property"
 			>
 			<File
-				RelativePath="..\..\..\source\view\property\PropertyColorMonitor.cpp"
+				RelativePath="..\..\..\source\view\property\PropColMonitor.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\include\ee\PropertyColorMonitor.h"
+				RelativePath="..\..\..\include\ee\PropColMonitor.h"
 				>
 			</File>
 			<File
@@ -331,6 +331,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\include\ee\PropertySettingPanel.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\source\view\property\SprPropColMonitor.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\SprPropColMonitor.h"
 				>
 			</File>
 			<Filter

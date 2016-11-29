@@ -133,21 +133,23 @@ std::string AnimToComplexWithColor::ParserTrans(const std::string& str, struct T
 
 void AnimToComplexWithColor::TransSpr(const Trans& t, ee::Sprite* spr)
 {
+	s2::RenderColor rc = spr->GetColor();
 	if (t.type & CC_R) {
 		float r, g, b;
 		ee::hsl2rgb(t.col_r.r / 255.0f, t.col_r.g / 255.0f, t.col_r.b / 255.0f, r, g, b);
-		spr->Color().rmap.FromFloat(r, g, b);
+		rc.rmap.FromFloat(r, g, b);
 	}
 	if (t.type & CC_G) {
 		float r, g, b;
 		ee::hsl2rgb(t.col_g.r / 255.0f, t.col_g.g / 255.0f, t.col_g.b / 255.0f, r, g, b);
-		spr->Color().gmap.FromFloat(r, g, b);
+		rc.gmap.FromFloat(r, g, b);
 	}
 	if (t.type & CC_B) {
 		float r, g, b;
 		ee::hsl2rgb(t.col_b.r / 255.0f, t.col_b.g / 255.0f, t.col_b.b / 255.0f, r, g, b);
-		spr->Color().bmap.FromFloat(r, g, b);
+		rc.bmap.FromFloat(r, g, b);
 	}
+	spr->SetColor(rc);
 }
 
 }

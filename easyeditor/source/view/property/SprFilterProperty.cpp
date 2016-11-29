@@ -33,35 +33,42 @@ void SprFilterProperty::InitPS(const Sprite* spr, wxPropertyGrid* pg)
 	std::vector<std::string> names;
 	FilterModes::Instance()->GetAllNameCN(names);
 	wxEnumProperty* filter_prop = new wxEnumProperty("Filter", wxPG_LABEL, WXHelper::ToWXStringArray(names));
-	s2::FilterMode filter = spr->Shader().filter->GetMode();
+	s2::FilterMode filter = s2::FM_NULL;
+	const s2::RenderFilter* rf = spr->GetShader().GetFilter();
+	if (rf) {
+		filter = rf->GetMode();
+	}
 	int idx = FilterModes::Instance()->Mode2ID(filter);
 	filter_prop->SetValue(idx);
 	pg->Append(filter_prop);
-
-	filter_prop->SetExpanded(true);
-	CreateSubPS(pg, filter_prop, spr->Shader().filter);
+	if (rf) {
+		filter_prop->SetExpanded(true);
+		CreateSubPS(pg, filter_prop, rf);
+	}
 }
 
 bool SprFilterProperty::FromPS(const std::string& name, const wxAny& value, Sprite* spr)
 {
 	bool ret = false;
+
 	if (name == "Filter")
 	{
 		int idx = wxANY_AS(value, int);
 		s2::FilterMode filter = FilterModes::Instance()->ID2Mode(idx);
-		delete spr->Shader().filter;
-		spr->Shader().filter = s2::FilterFactory::Instance()->Create(filter);
+		s2::RenderShader rs = spr->GetShader();
+		rs.SetFilter(filter);
+		spr->SetShader(rs);
 		ret = true;
 	}
-	else
+	else if (s2::RenderFilter* rf = const_cast<s2::RenderFilter*>(spr->GetShader().GetFilter()))
 	{
-		switch (spr->Shader().filter->GetMode())
+		switch (spr->GetShader().GetFilter()->GetMode())
 		{
 		case s2::FM_EDGE_DETECTION:
 			if (name == "Filter.Blend")
 			{
 				float blend = wxANY_AS(value, float);
-				s2::RFEdgeDetection* filter = static_cast<s2::RFEdgeDetection*>(spr->Shader().filter);
+				s2::RFEdgeDetection* filter = static_cast<s2::RFEdgeDetection*>(rf);
 				filter->SetBlend(blend);
 				ret = true;
 			}
@@ -70,7 +77,7 @@ bool SprFilterProperty::FromPS(const std::string& name, const wxAny& value, Spri
 			if (name == "Filter.Iterations")
 			{
 				int iterations = wxANY_AS(value, int);
-				s2::RFGaussianBlur* filter = static_cast<s2::RFGaussianBlur*>(spr->Shader().filter);
+				s2::RFGaussianBlur* filter = static_cast<s2::RFGaussianBlur*>(rf);
 				filter->SetIterations(iterations);
 				ret = true;
 			}
@@ -79,7 +86,7 @@ bool SprFilterProperty::FromPS(const std::string& name, const wxAny& value, Spri
 			if (name == "Filter.Iterations")
 			{
 				int iterations = wxANY_AS(value, int);
-				s2::RFOuterGlow* filter = static_cast<s2::RFOuterGlow*>(spr->Shader().filter);
+				s2::RFOuterGlow* filter = static_cast<s2::RFOuterGlow*>(rf);
 				filter->SetIterations(iterations);
 				ret = true;
 			}
@@ -92,7 +99,7 @@ bool SprFilterProperty::FromPS(const std::string& name, const wxAny& value, Spri
 				if (shader) {
 					prog = static_cast<sl::HeatHazeProg*>(shader->GetProgram(sl::FM_HEAT_HAZE));
 				}
-				s2::RFHeatHaze* filter = static_cast<s2::RFHeatHaze*>(spr->Shader().filter);
+				s2::RFHeatHaze* filter = static_cast<s2::RFHeatHaze*>(rf);
 
 				if (name == "Filter.Filepath")
 				{
@@ -135,7 +142,7 @@ bool SprFilterProperty::FromPS(const std::string& name, const wxAny& value, Spri
 				if (shader) {
 					prog = static_cast<sl::ColGradingProg*>(shader->GetProgram(sl::FM_COL_GRADING));
 				}
-				s2::RFColGrading* filter = static_cast<s2::RFColGrading*>(spr->Shader().filter);
+				s2::RFColGrading* filter = static_cast<s2::RFColGrading*>(rf);
 				std::string filepath = wxANY_AS(value, wxString);
 				filter->SetFilepath(filepath);
 				if (prog) {
@@ -146,18 +153,26 @@ bool SprFilterProperty::FromPS(const std::string& name, const wxAny& value, Spri
 			break;
 		}
 	}
+
 	return ret;
 }
 
 void SprFilterProperty::ToPS(const Sprite* spr, wxPropertyGrid* pg)
 {
 	wxPGProperty* filter_prop = pg->GetProperty("Filter");
-
-	const s2::RenderFilter* filter = spr->Shader().filter;
-	filter_prop->SetValue(FilterModes::Instance()->Mode2ID(filter->GetMode()));
+	
+	s2::FilterMode filter = s2::FM_NULL;
+	const s2::RenderFilter* rf = spr->GetShader().GetFilter();
+	if (rf) {
+		filter = rf->GetMode();
+	}
+	filter_prop->SetValue(FilterModes::Instance()->Mode2ID(filter));
 
 	filter_prop->DeleteChildren();
-	CreateSubPS(pg, filter_prop, filter);
+
+	if (rf) {
+		CreateSubPS(pg, filter_prop, rf);
+	}
 }
 
 void SprFilterProperty::CreateSubPS(wxPropertyGrid* pg, wxPGProperty* parent, const s2::RenderFilter* filter)

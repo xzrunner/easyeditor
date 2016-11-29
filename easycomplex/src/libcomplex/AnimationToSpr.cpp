@@ -5,6 +5,8 @@
 
 #include <ee/BlendModes.h>
 
+#include <sprite2/RenderShader.h>
+#include <sprite2/RenderColor.h>
 #include <gum/trans_color.h>
 
 #include <easyanim.h>
@@ -72,7 +74,10 @@ void AnimationToSpr::TransSprite(ee::Sprite* spr, const erespacker::PackAnimatio
 		TransSpriteMat(spr, t);
 	}
 	TransSpriteCol(spr, t);
-	spr->Shader().blend = (ee::BlendModes::Instance()->ID2Mode(t.blend));
+
+	s2::RenderShader rs = spr->GetShader();
+	rs.SetBlend(ee::BlendModes::Instance()->ID2Mode(t.blend));
+	spr->SetShader(rs);
 }
 
 void AnimationToSpr::TransSpriteMat(ee::Sprite* spr, const erespacker::PackAnimation::SpriteTrans& t)
@@ -125,12 +130,16 @@ void AnimationToSpr::TransSpriteMat(ee::Sprite* spr, const erespacker::PackAnima
 
 void AnimationToSpr::TransSpriteCol(ee::Sprite* spr, const erespacker::PackAnimation::SpriteTrans& t)
 {
-	spr->Color().mul = int2color(t.color, gum::RGBA);
-	spr->Color().add = int2color(t.additive, gum::RGBA);
+	s2::RenderColor rc;
 
-	spr->Color().rmap = int2color(t.rmap, gum::RGBA);
-	spr->Color().gmap = int2color(t.gmap, gum::RGBA);
-	spr->Color().bmap = int2color(t.bmap, gum::RGBA);
+	rc.mul = int2color(t.color, gum::RGBA);
+	rc.add = int2color(t.additive, gum::RGBA);
+
+	rc.rmap = int2color(t.rmap, gum::RGBA);
+	rc.gmap = int2color(t.gmap, gum::RGBA);
+	rc.bmap = int2color(t.bmap, gum::RGBA);
+
+	spr->SetColor(rc);
 }
 
 

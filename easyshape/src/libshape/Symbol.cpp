@@ -33,7 +33,7 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 	s2::RenderParams p = params;
 	if (spr) {
 		p.mt = spr->GetTransMatrix() * params.mt;
-		p.color = spr->Color() * params.color;
+		p.color = spr->GetColor() * params.color;
 	}
 
  	if (m_bg) {

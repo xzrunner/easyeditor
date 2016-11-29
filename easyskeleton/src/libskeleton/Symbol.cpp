@@ -29,7 +29,7 @@ void Symbol::DrawSkeleton(const s2::RenderParams& params, const s2::Sprite* spr,
 	s2::RenderParams p = params;
 	if (spr) {
 		p.mt = spr->GetTransMatrix() * params.mt;
-		p.color = spr->Color() * params.color;
+		p.color = spr->GetColor() * params.color;
 	}
 
 	const std::vector<s2::Joint*>& joints = m_skeleton->GetAllJoints();

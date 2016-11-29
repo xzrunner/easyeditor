@@ -16,6 +16,7 @@
 #include <easyimage.h>
 
 #include <sprite2/SymType.h>
+#include <sprite2/RenderColor.h>
 #include <gum/trans_color.h>
 #include <SM_Calc.h>
 
@@ -799,9 +800,11 @@ void ParserLuaFile::Animation::Item::transform(ee::Sprite* spr) const
 
 	if (is_full && valid)
 	{
-		spr->Color().mul = gum::int2color(color, gum::BGRA);
-		spr->Color().add = gum::int2color(add, gum::ABGR);
-
+		s2::RenderColor rc;
+		rc.mul = gum::int2color(color, gum::BGRA);
+		rc.add = gum::int2color(add, gum::ABGR);
+		spr->SetColor(rc);
+		
 		float x = mat[4] / 16.0f,
 			y = mat[5] / 16.0f;
 		float ang1, ang2;

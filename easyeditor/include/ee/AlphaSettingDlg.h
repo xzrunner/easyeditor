@@ -5,6 +5,8 @@
 
 #include <wx/wx.h>
 
+namespace s2 { class Sprite; }
+
 namespace ee
 {
 
@@ -13,7 +15,7 @@ class ColorSlider;
 class AlphaSettingDlg : public wxDialog, public ColorMonitor
 {
 public:
-	AlphaSettingDlg(wxWindow* parent, s2::Color& color,
+	AlphaSettingDlg(wxWindow* parent, s2::Sprite* spr,
 		const wxPoint& pos = wxDefaultPosition);
 
 	//
@@ -29,7 +31,7 @@ private:
 	void SetColor(const s2::Color& color);
 
 private:
-	s2::Color& m_color;
+	s2::Sprite* m_spr;
 
 	ColorSlider* m_alpha;
 

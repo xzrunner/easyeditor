@@ -47,15 +47,16 @@ void ImageSprite::BuildBoundingFromTexCoords(float* texCoords)
  	rect.ymax = sz.y * (texCoords[3] - 0.5f);
  
  	sm::vec2 center = rect.Center();
- 	float hw = (rect.xmax - rect.xmin) * 0.5f * m_scale.x,
- 		  hh = (rect.ymax - rect.ymin) * 0.5f * m_scale.y;
+	const sm::vec2& scale = GetScale();
+ 	float hw = (rect.xmax - rect.xmin) * 0.5f * scale.x,
+ 		  hh = (rect.ymax - rect.ymin) * 0.5f * scale.y;
  	rect.xmin = -hw;
  	rect.xmax = hw;
  	rect.ymin = -hh;
  	rect.ymax = hh;
 
 	s2::OBB* bb = new s2::OBB;
-	bb->Build(rect, m_position, m_angle, m_scale, m_shear, m_offset);
+	bb->Build(rect, GetPosition(), GetAngle(), scale, GetShear(), GetOffset());
 
 	delete m_bounding;
 	m_bounding = bb;

@@ -173,9 +173,13 @@ void PackAnimation::LoadSprTrans(const ee::Sprite* spr, SpriteTrans& trans, bool
 {
 	LoadSprMat(spr, trans, force_mat);
 	LoadSprColor(spr, trans);
-	trans.blend = static_cast<int>(spr->Shader().blend);
-	trans.filter = static_cast<int>(spr->Shader().filter->GetMode());
-	trans.camera = static_cast<int>(spr->Camera().mode);
+	trans.blend = static_cast<int>(spr->GetShader().GetBlend());
+	if (spr->GetShader().GetFilter()) {
+		trans.filter = static_cast<int>(spr->GetShader().GetFilter()->GetMode());
+	} else {
+		trans.filter = s2::FM_NULL;
+	}
+	trans.camera = static_cast<int>(spr->GetCamera().mode);
 }
 
 void PackAnimation::LoadSprMat(const ee::Sprite* spr, SpriteTrans& trans, bool force)
@@ -221,12 +225,14 @@ void PackAnimation::LoadSprMat(const ee::Sprite* spr, SpriteTrans& trans, bool f
 
 void PackAnimation::LoadSprColor(const ee::Sprite* spr, SpriteTrans& trans)
 {
-	trans.color = gum::color2int(spr->Color().mul, gum::ARGB);
-	trans.additive = gum::color2int(spr->Color().add, gum::ARGB);
+	const s2::RenderColor& rc = spr->GetColor();
 
-	trans.rmap = spr->Color().rmap.ToRGBA();
-	trans.gmap = spr->Color().gmap.ToRGBA();
-	trans.bmap = spr->Color().bmap.ToRGBA();	
+	trans.color    = gum::color2int(rc.mul, gum::ARGB);
+	trans.additive = gum::color2int(rc.add, gum::ARGB);
+
+	trans.rmap = rc.rmap.ToRGBA();
+	trans.gmap = rc.gmap.ToRGBA();
+	trans.bmap = rc.bmap.ToRGBA();	
 }
 
 bool PackAnimation::IsMatrixIdentity(const int* mat)

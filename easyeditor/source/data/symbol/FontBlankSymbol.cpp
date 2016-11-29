@@ -42,7 +42,7 @@ void FontBlankSymbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr
 	s2::RenderParams p = params;
 	if (spr) {
 		p.mt = spr->GetTransMatrix() * params.mt;
-		p.color = spr->Color() * params.color;
+		p.color = spr->GetColor() * params.color;
 	}
 	const SettingData& setting = Config::Instance()->GetSettings();
 	const FontBlankSprite* fb = dynamic_cast<const FontBlankSprite*>(spr);

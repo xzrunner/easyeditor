@@ -26,8 +26,8 @@ void DrawSpritesVisitor::Visit(Sprite* spr, bool& next)
 		!sm::is_rect_intersect_rect(spr->GetBounding()->GetSize(), m_screen_region)) {
 		return;
 	}
-
-	int filter_mode_idx = gum::FilterModes::Instance()->QueryShaderIdx(spr->Shader().filter->GetMode());
+	
+//	int filter_mode_idx = gum::FilterModes::Instance()->QueryShaderIdx(spr->GetShader().filter->GetMode());
 //	ShaderMgr::Instance()->SetSpriteShader(filter_mode_idx);
 
 	DrawSprite(spr);

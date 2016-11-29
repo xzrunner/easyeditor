@@ -702,20 +702,24 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	else if (keycode == 'M') 
 	{
 		if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_RGB) {
-			RGBColorSettingDlg dlg(m_wnd, NULL, sprs[0]->Color().mul, pos);
+			RGBColorSettingDlg dlg(m_wnd, NULL, sprs[0]->GetColor().mul, pos);
 			if (dlg.ShowModal() == wxID_OK) {
 				s2::Color col = dlg.GetColor();
 				for (int i = 0, n = sprs.size(); i < n; ++i) {
-					sprs[i]->Color().mul = col;
+					s2::RenderColor rc = sprs[i]->GetColor();
+					rc.mul = col;
+					sprs[i]->SetColor(rc);
 				}
 				SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		} else {
-			HSLColorSettingDlg dlg(m_wnd, NULL, sprs[0]->Color().mul, pos);
+			HSLColorSettingDlg dlg(m_wnd, NULL, sprs[0]->GetColor().mul, pos);
 			if (dlg.ShowModal() == wxID_OK) {
 				s2::Color col = dlg.GetColor();
 				for (int i = 0, n = sprs.size(); i < n; ++i) {
-					sprs[i]->Color().mul = col;
+					s2::RenderColor rc = sprs[i]->GetColor();
+					rc.mul = col;
+					sprs[i]->SetColor(rc);
 				}
 				SetCanvasDirtySJ::Instance()->SetDirty();
 			}
@@ -726,20 +730,24 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	else if (keycode == 'A') 
 	{
 		if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_RGB) {
-			RGBColorSettingDlg dlg(m_wnd, NULL, sprs[0]->Color().add, pos);
+			RGBColorSettingDlg dlg(m_wnd, NULL, sprs[0]->GetColor().add, pos);
 			if (dlg.ShowModal() == wxID_OK) {
 				s2::Color col = dlg.GetColor();
 				for (int i = 0, n = sprs.size(); i < n; ++i) {
-					sprs[i]->Color().add = col;
+					s2::RenderColor rc = sprs[i]->GetColor();
+					rc.add = col;
+					sprs[i]->SetColor(rc);
 				}
 				SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		} else {
-			HSLColorSettingDlg dlg(m_wnd, NULL, sprs[0]->Color().add, pos);
+			HSLColorSettingDlg dlg(m_wnd, NULL, sprs[0]->GetColor().add, pos);
 			if (dlg.ShowModal() == wxID_OK) {
 				s2::Color col = dlg.GetColor();
 				for (int i = 0, n = sprs.size(); i < n; ++i) {
-					sprs[i]->Color().add = col;
+					s2::RenderColor rc = sprs[i]->GetColor();
+					rc.add = col;
+					sprs[i]->SetColor(rc);
 				}
 				SetCanvasDirtySJ::Instance()->SetDirty();
 			}
@@ -749,17 +757,21 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	// alpha
 	else if (keycode == 'T') 
 	{
-		AlphaSettingDlg dlg(m_wnd, sprs[0]->Color().mul, pos);
-		float old_alpha = sprs[0]->Color().mul.a;
+		AlphaSettingDlg dlg(m_wnd, sprs[0], pos);
+		float old_alpha = sprs[0]->GetColor().mul.a;
 		int state = dlg.ShowModal();
 		if (state == wxID_OK) {
 			float alpha = dlg.GetColor().a;
 			for (int i = 0, n = sprs.size(); i < n; ++i) {
-				sprs[i]->Color().mul.a = alpha;
+				s2::RenderColor rc = sprs[i]->GetColor();
+				rc.mul.a = alpha;
+				sprs[i]->SetColor(rc);
 			}
 			SetCanvasDirtySJ::Instance()->SetDirty();
 		} else if (state == wxID_CANCEL) {
-			sprs[0]->Color().mul.a = old_alpha;
+			s2::RenderColor rc = sprs[0]->GetColor();
+			rc.mul.a = old_alpha;
+			sprs[0]->SetColor(rc);
 			SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		return true;

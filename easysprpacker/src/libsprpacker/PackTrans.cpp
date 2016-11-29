@@ -6,6 +6,7 @@ namespace lua = ebuilder::lua;
 
 #include <sprite2/S2_Sprite.h>
 #include <sprite2/RenderFilter.h>
+#include <sprite2/RenderShader.h>
 #include <simp/NodeTrans.h>
 
 namespace esprpacker
@@ -44,7 +45,7 @@ PackTrans::PackTrans(const s2::Sprite& spr, bool force_name)
 
 	// shader
 
-	m_color = spr.Color();
+	m_color = spr.GetColor();
 	if (m_color.mul != s2::Color(0xffffffff)) {
 		m_type |= simp::NodeTrans::COL_MUL_MASK;
 	}
@@ -61,22 +62,22 @@ PackTrans::PackTrans(const s2::Sprite& spr, bool force_name)
 		m_type |= simp::NodeTrans::COL_B_MASK;
 	}
 
-	m_blend = spr.Shader().blend;
+	m_blend = spr.GetShader().blend;
 	if (m_blend != s2::BM_NULL) {
 		m_type |= simp::NodeTrans::BLEND_MASK;
 	}
 
-	m_fast_blend = spr.Shader().fast_blend;
+	m_fast_blend = spr.GetShader().fast_blend;
 	if (m_fast_blend != s2::FBM_NULL) {
 		m_type |= simp::NodeTrans::FAST_BLEND_MASK;
 	}
 
-	m_filter = spr.Shader().filter;
+	m_filter = spr.GetShader().filter;
 	if (m_filter && m_filter->GetMode() != s2::FM_NULL) {
 		m_type |= simp::NodeTrans::FILTER_MASK;
 	}
 
-	m_camera = spr.Camera();
+	m_camera = spr.GetCamera();
 	if (m_camera.mode != s2::CM_ORTHO) {
 		m_type |= simp::NodeTrans::CAMERA_MASK;
 	}

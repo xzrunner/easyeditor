@@ -2,16 +2,19 @@
 #include "ColorSlider.h"
 #include "panel_msg.h"
 
+#include <sprite2/S2_Sprite.h>
+#include <sprite2/RenderColor.h>
+
 namespace ee
 {
 
-AlphaSettingDlg::AlphaSettingDlg(wxWindow* parent, s2::Color& color, const wxPoint& pos)
+AlphaSettingDlg::AlphaSettingDlg(wxWindow* parent, s2::Sprite* spr, const wxPoint& pos)
 	: wxDialog(parent, wxID_ANY, "Alpha Setting", pos, wxSize(450, 300))
-	, m_color(color)
+	, m_spr(spr)
 	, m_alpha(NULL)
 {
 	InitLayout();
-	SetColor(color);
+	SetColor(spr->GetColor().mul);
 }
 
 s2::Color AlphaSettingDlg::GetColor() const
@@ -23,7 +26,9 @@ s2::Color AlphaSettingDlg::GetColor() const
 
 void AlphaSettingDlg::OnColorChanged()
 {
-	m_color.a = m_alpha->GetColorValue();
+	s2::RenderColor rc = m_spr->GetColor();
+	rc.mul.a = m_alpha->GetColorValue();;
+	m_spr->SetColor(rc);
 	SetCanvasDirtySJ::Instance()->SetDirty();
 }
 

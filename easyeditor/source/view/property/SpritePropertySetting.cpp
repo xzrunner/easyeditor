@@ -1,7 +1,7 @@
 #include "SpritePropertySetting.h"
 #include "SpritePropertyImpl.h"
 #include "PropertySettingPanel.h"
-#include "PropertyColorMonitor.h"
+#include "SprPropColMonitor.h"
 #include "Math2D.h"
 #include "Config.h"
 #include "SettingData.h"
@@ -127,13 +127,17 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 // 	}
 	else if (name == "Blend")
 	{
+		s2::RenderShader rs = spr->GetShader();
 		int idx = wxANY_AS(value, int);
-		spr->Shader().blend = BlendModes::Instance()->ID2Mode(idx);
+		rs.SetBlend(BlendModes::Instance()->ID2Mode(idx));
+		spr->SetShader(rs);
 	}
 	else if (name == "FastBlend") 
 	{
+		s2::RenderShader rs = spr->GetShader();
 		int idx = wxANY_AS(value, int);
-		spr->Shader().fast_blend = FastBlendModes::Instance()->ID2Mode(idx);
+		rs.SetFastBlend(FastBlendModes::Instance()->ID2Mode(idx));
+		spr->SetShader(rs);
 	}
 	else if (name == wxT("Clip"))
 	{
@@ -252,13 +256,13 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 
 	if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_DEFAULT) 
 	{
-		wxColour mul_col = wxColour(spr->Color().mul.r, spr->Color().mul.g, spr->Color().mul.b, spr->Color().mul.a);
-		wxColour add_col = wxColour(spr->Color().add.r, spr->Color().add.g, spr->Color().add.b, spr->Color().add.a);
+		wxColour mul_col = wxColour(spr->GetColor().mul.r, spr->GetColor().mul.g, spr->GetColor().mul.b, spr->GetColor().mul.a);
+		wxColour add_col = wxColour(spr->GetColor().add.r, spr->GetColor().add.g, spr->GetColor().add.b, spr->GetColor().add.a);
 		pg->SetPropertyValueString(wxT("Color.Multi"), mul_col.GetAsString());
 		pg->SetPropertyValueString(wxT("Color.Add"), add_col.GetAsString());
 	}
-	pg->GetProperty(wxT("Color.Alpha"))->SetValue(spr->Color().mul.a);
-	pg->GetProperty(wxT("Color.Overlay"))->SetValue(spr->Color().add.a);
+	pg->GetProperty(wxT("Color.Alpha"))->SetValue(spr->GetColor().mul.a);
+	pg->GetProperty(wxT("Color.Overlay"))->SetValue(spr->GetColor().add.a);
 
 // 	wxColour r_trans = wxColour(spr->rp->r_trans.r, spr->rp->r_trans.g, spr->rp->r_trans.b, spr->rp->r_trans.a);
 // 	wxColour g_trans = wxColour(spr->rp->g_trans.r, spr->rp->g_trans.g, spr->rp->g_trans.b, spr->rp->g_trans.a);
@@ -267,20 +271,20 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 // 	pg->SetPropertyValueString(wxT("Color.G"), g_trans.GetAsString());
 // 	pg->SetPropertyValueString(wxT("Color.B"), b_trans.GetAsString());
 
-	pg->GetProperty(wxT("Blend"))->SetValue(BlendModes::Instance()->Mode2ID(spr->Shader().blend));
+	pg->GetProperty(wxT("Blend"))->SetValue(BlendModes::Instance()->Mode2ID(spr->GetShader().GetBlend()));
 
-	pg->GetProperty(wxT("FastBlend"))->SetValue(FastBlendModes::Instance()->Mode2ID(spr->Shader().fast_blend));
+	pg->GetProperty(wxT("FastBlend"))->SetValue(FastBlendModes::Instance()->Mode2ID(spr->GetShader().GetFastBlend()));
 
 	m_spr_filter_prop.ToPS(spr, pg);
 
 	MyColorProperty* rp = static_cast<MyColorProperty*>(pg->GetProperty("Color Conversion.R"));
-	rp->SetListener(new PropertyColorListener(&spr->Color().rmap));
+	rp->SetListener(new SprPropColMonitor(spr, SprPropColMonitor::CT_RMAP));
 
 	MyColorProperty* gp = static_cast<MyColorProperty*>(pg->GetProperty("Color Conversion.G"));
-	gp->SetListener(new PropertyColorListener(&spr->Color().gmap));
+	gp->SetListener(new SprPropColMonitor(spr, SprPropColMonitor::CT_GMAP));
 
 	MyColorProperty* bp = static_cast<MyColorProperty*>(pg->GetProperty("Color Conversion.B"));
-	bp->SetListener(new PropertyColorListener(&spr->Color().bmap));
+	bp->SetListener(new SprPropColMonitor(spr, SprPropColMonitor::CT_BMAP));
 
 	pg->GetProperty(wxT("Clip"))->SetValue(spr->IsClip());
 
@@ -349,25 +353,25 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 	col_prop->SetExpanded(false);
 
 	if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_DEFAULT) {
-		wxColour mul_col = wxColour(spr->Color().mul.r, spr->Color().mul.g, spr->Color().mul.b, spr->Color().mul.a);
-		wxColour add_col = wxColour(spr->Color().add.r, spr->Color().add.g, spr->Color().add.b, spr->Color().add.a);
+		wxColour mul_col = wxColour(spr->GetColor().mul.r, spr->GetColor().mul.g, spr->GetColor().mul.b, spr->GetColor().mul.a);
+		wxColour add_col = wxColour(spr->GetColor().add.r, spr->GetColor().add.g, spr->GetColor().add.b, spr->GetColor().add.a);
 		pg->AppendIn(col_prop, new wxColourProperty(wxT("Multi"), wxPG_LABEL, mul_col));
 		pg->AppendIn(col_prop, new wxColourProperty(wxT("Add"), wxPG_LABEL, add_col));
 	} else {
 		MyColorProperty* multi_prop = new MyColorProperty("Multi");
-		multi_prop->SetListener(new PropertyColorListener(&spr->Color().mul));
+		multi_prop->SetListener(new SprPropColMonitor(spr, SprPropColMonitor::CT_MUL));
 		pg->AppendIn(col_prop, multi_prop);
 
 		MyColorProperty* add_prop = new MyColorProperty("Add");
-		add_prop->SetListener(new PropertyColorListener(&spr->Color().add));
+		add_prop->SetListener(new SprPropColMonitor(spr, SprPropColMonitor::CT_ADD));
 		pg->AppendIn(col_prop, add_prop);
 	}
 
-	pg->AppendIn(col_prop, new wxIntProperty(wxT("Alpha"), wxPG_LABEL, spr->Color().mul.a));
+	pg->AppendIn(col_prop, new wxIntProperty(wxT("Alpha"), wxPG_LABEL, spr->GetColor().mul.a));
 	pg->SetPropertyAttribute(wxT("Color.Alpha"), "Min", 0);
 	pg->SetPropertyAttribute(wxT("Color.Alpha"), "Max", 255);
 
-	pg->AppendIn(col_prop, new wxIntProperty(wxT("Overlay"), wxPG_LABEL, spr->Color().add.a));
+	pg->AppendIn(col_prop, new wxIntProperty(wxT("Overlay"), wxPG_LABEL, spr->GetColor().add.a));
 	pg->SetPropertyAttribute(wxT("Color.Overlay"), "Min", 0);
 	pg->SetPropertyAttribute(wxT("Color.Overlay"), "Max", 255);
 
@@ -375,15 +379,15 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 	col_conv_prop->SetExpanded(false);
 
 	MyColorProperty* col_r_prop = new MyColorProperty("R");
-	col_r_prop->SetListener(new PropertyColorListener(&spr->Color().rmap));
+	col_r_prop->SetListener(new SprPropColMonitor(spr, SprPropColMonitor::CT_RMAP));
 	pg->AppendIn(col_conv_prop, col_r_prop);
 
 	MyColorProperty* col_g_prop = new MyColorProperty("G");
-	col_g_prop->SetListener(new PropertyColorListener(&spr->Color().gmap));
+	col_g_prop->SetListener(new SprPropColMonitor(spr, SprPropColMonitor::CT_GMAP));
 	pg->AppendIn(col_conv_prop, col_g_prop);
 
 	MyColorProperty* col_b_prop = new MyColorProperty("B");
-	col_b_prop->SetListener(new PropertyColorListener(&spr->Color().bmap));
+	col_b_prop->SetListener(new SprPropColMonitor(spr, SprPropColMonitor::CT_BMAP));
 	pg->AppendIn(col_conv_prop, col_b_prop);
 
 // 	wxColour r_trans = wxColour(spr->rp->r_trans.r, spr->rp->r_trans.g, spr->rp->r_trans.b, spr->rp->r_trans.a);
@@ -396,14 +400,14 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 	std::vector<std::string> blend_names;
 	BlendModes::Instance()->GetAllNameCN(blend_names);
 	wxEnumProperty* blend_prop = new wxEnumProperty(wxT("Blend"), wxPG_LABEL, WXHelper::ToWXStringArray(blend_names));
-	int blend_idx = BlendModes::Instance()->Mode2ID(spr->Shader().blend);
+	int blend_idx = BlendModes::Instance()->Mode2ID(spr->GetShader().GetBlend());
 	blend_prop->SetValue(blend_idx);
 	pg->Append(blend_prop);
 
 	std::vector<std::string> fast_blend_names;
 	FastBlendModes::Instance()->GetAllNameCN(fast_blend_names);
 	wxEnumProperty* fast_blend_prop = new wxEnumProperty(wxT("FastBlend"), wxPG_LABEL, WXHelper::ToWXStringArray(fast_blend_names));
-	int fast_blend_idx = FastBlendModes::Instance()->Mode2ID(spr->Shader().fast_blend);
+	int fast_blend_idx = FastBlendModes::Instance()->Mode2ID(spr->GetShader().GetFastBlend());
 	fast_blend_prop->SetValue(fast_blend_idx);
 	pg->Append(fast_blend_prop);
 
@@ -510,10 +514,12 @@ void SpritePropertySetting::SetColMul(ee::Sprite* spr, const std::string& val)
 		fixed = "rgb" + fixed;
 	}
 	wxColour wx_col(fixed);
-	s2::Color col(wx_col.Red(), wx_col.Green(), wx_col.Blue(), spr->Color().mul.a);
-	if (col != spr->Color().mul) {
+	s2::Color col(wx_col.Red(), wx_col.Green(), wx_col.Blue(), spr->GetColor().mul.a);
+	if (col != spr->GetColor().mul) {
 		EditAddRecordSJ::Instance()->Add(new SetSpriteMulColorAOP(spr, col));
-		spr->Color().mul = col;
+		s2::RenderColor rc = spr->GetColor();
+		rc.mul = col;
+		spr->SetColor(rc);
 	}
 }
 
@@ -524,10 +530,12 @@ void SpritePropertySetting::SetColAdd(ee::Sprite* spr, const std::string& val)
 		fixed = "rgb" + fixed;
 	}
 	wxColour wx_col(fixed);
-	s2::Color col(wx_col.Red(), wx_col.Green(), wx_col.Blue(), spr->Color().add.a);
-	if (col != spr->Color().add) {
+	s2::Color col(wx_col.Red(), wx_col.Green(), wx_col.Blue(), spr->GetColor().add.a);
+	if (col != spr->GetColor().add) {
 		EditAddRecordSJ::Instance()->Add(new SetSpriteAddColorAOP(spr, col));
-		spr->Color().add = col;
+		s2::RenderColor rc = spr->GetColor();
+		rc.add = col;
+		spr->SetColor(rc);
 	}
 }
 
@@ -537,12 +545,14 @@ void SpritePropertySetting::SetColAlpha(ee::Sprite* spr, const std::string& val)
 	ee::StringHelper::FromString(val, alpha);
 	alpha = std::max(0, std::min(255, alpha));
 
-	if (spr->Color().mul.a != alpha) {
-		s2::Color col = spr->Color().mul;
+	if (spr->GetColor().mul.a != alpha) {
+		s2::Color col = spr->GetColor().mul;
 		col.a = alpha;
 		EditAddRecordSJ::Instance()->Add(new SetSpriteMulColorAOP(spr, col));
 
-		spr->Color().mul = col;
+		s2::RenderColor rc = spr->GetColor();
+		rc.mul = col;
+		spr->SetColor(rc);
 	}
 }
 
@@ -552,12 +562,14 @@ void SpritePropertySetting::SetColOverlap(ee::Sprite* spr, const std::string& va
 	ee::StringHelper::FromString(val, overlay);
 	overlay = std::max(0, std::min(255, overlay));
 
-	if (spr->Color().add.a != overlay) {
-		s2::Color add = spr->Color().add;
+	if (spr->GetColor().add.a != overlay) {
+		s2::Color add = spr->GetColor().add;
 		add.a = overlay;
 		EditAddRecordSJ::Instance()->Add(new SetSpriteAddColorAOP(spr, add));
 
-		spr->Color().add = add;
+		s2::RenderColor rc = spr->GetColor();
+		rc.add = add;
+		spr->SetColor(rc);
 	}
 }
 
