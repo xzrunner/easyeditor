@@ -129,7 +129,11 @@ void PackUIWindowTask::LoadItems(const Json::Value& value, const std::string& di
 				}
 			}
 
-			assert(item);
+			if (!item) {
+				std::string str = "PackUIWindowTask::LoadItems, fail to load: " + item->filepath + ", with name: " + name;
+				throw ee::Exception(str);
+			}
+
 			item->anchor = i;
 
 			spr_val = anchor_val[idx++];
