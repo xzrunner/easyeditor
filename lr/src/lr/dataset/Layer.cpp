@@ -68,7 +68,12 @@ bool Layer::InsertSprite(ee::Sprite* spr, int idx)
 {
 	CheckSpriteName(spr);
 
-	spr->Camera().mode = m_cam_mode;
+	if (spr->GetCamera().mode != m_cam_mode)
+	{
+		s2::RenderCamera rc = spr->GetCamera();
+		rc.mode = m_cam_mode;
+		spr->SetCamera(rc);
+	}
 
 	if (m_layer_mgr.selected) {
 		return m_layer_mgr.selected->Insert(spr);
@@ -275,7 +280,14 @@ void Layer::LoadSprites(const Json::Value& val, const std::string& dir, const st
 			spr_val = val[idx++];
 			continue;
 		}
-		spr->Camera().mode = m_cam_mode;
+
+		if (spr->GetCamera().mode != m_cam_mode)
+		{
+			s2::RenderCamera rc = spr->GetCamera();
+			rc.mode = m_cam_mode;
+			spr->SetCamera(rc);
+		}
+
 		m_sprs.Insert(spr);
 		spr->RemoveReference();
 		spr_val = val[idx++];

@@ -12,6 +12,7 @@
 #include <ee/ExceptionDlg.h>
 #include <ee/SettingData.h>
 #include <ee/Config.h>
+#include <ee/ScreenCache.h>
 
 #include <easyterrain2d.h>
 #include <easycomplex.h>
@@ -267,6 +268,7 @@ void SettingDialog::OnChangeGradingTexture(wxCommandEvent& event)
 				if (img) {
 					SettingCfg::Instance()->m_post_effect_file = filepath;
 					prog->SetLUTTex(img->GetTexID());
+					ee::ScreenCache::Instance()->EnableColGrading(true);
 				}
 			} catch (ee::Exception& e) {
 				ee::ExceptionDlg dlg(m_parent, e);
