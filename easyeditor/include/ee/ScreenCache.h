@@ -24,6 +24,9 @@ public:
 
 	int GetTexID() const;
 
+	void EnableColGrading(bool enable) { m_use_col_crading = enable; }
+	bool IsColGradingEnable() const { return m_use_col_crading; }
+
 	static ScreenCache* Instance();
 
 private:
@@ -31,6 +34,8 @@ private:
 
 private:
 	int m_width, m_height;
+
+	bool m_use_col_crading;
 
 private:
 	static ScreenCache* m_instance;

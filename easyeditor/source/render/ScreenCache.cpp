@@ -20,6 +20,7 @@ ScreenCache* ScreenCache::m_instance = NULL;
 static dtex_cs* CS;
 
 ScreenCache::ScreenCache()
+	: m_use_col_crading(false)
 {
 	CS = dtex_cs_create();
 }
