@@ -62,17 +62,17 @@ PackTrans::PackTrans(const s2::Sprite& spr, bool force_name)
 		m_type |= simp::NodeTrans::COL_B_MASK;
 	}
 
-	m_blend = spr.GetShader().blend;
+	m_blend = spr.GetShader().GetBlend();
 	if (m_blend != s2::BM_NULL) {
 		m_type |= simp::NodeTrans::BLEND_MASK;
 	}
 
-	m_fast_blend = spr.GetShader().fast_blend;
+	m_fast_blend = spr.GetShader().GetFastBlend();
 	if (m_fast_blend != s2::FBM_NULL) {
 		m_type |= simp::NodeTrans::FAST_BLEND_MASK;
 	}
 
-	m_filter = spr.GetShader().filter;
+	m_filter = spr.GetShader().GetFilter();
 	if (m_filter && m_filter->GetMode() != s2::FM_NULL) {
 		m_type |= simp::NodeTrans::FILTER_MASK;
 	}
