@@ -137,7 +137,11 @@ bool PackAnimation::AddComponent(const IPackNode* node, const std::string& name,
 				int type = ee::SymbolFile::Instance()->Type(node->GetFilepath());
 				switch (type)
 				{
-				case s2::SYM_IMAGE: case s2::SYM_COMPLEX: case s2::SYM_ANIMATION: case s2::SYM_TEXTBOX: case s2::SYM_MASK: case s2::SYM_PARTICLE3D:
+				case s2::SYM_IMAGE:
+					comp_idx = i;
+					force_mat = false;
+					return new_comp;
+				case s2::SYM_COMPLEX: case s2::SYM_ANIMATION: case s2::SYM_TEXTBOX: case s2::SYM_MASK: case s2::SYM_PARTICLE3D:
 					comp_idx = i;
 					force_mat = true;
 					return new_comp;
@@ -180,7 +184,7 @@ void PackAnimation::LoadSprTrans(const ee::Sprite* spr, SpriteTrans& trans, bool
 
 void PackAnimation::LoadSprMat(const ee::Sprite* spr, SpriteTrans& trans, bool force)
 {
-	if (!force) {
+	if (!force && dynamic_cast<const ee::ImageSprite*>(spr)) {
 		return;
 	}
 
