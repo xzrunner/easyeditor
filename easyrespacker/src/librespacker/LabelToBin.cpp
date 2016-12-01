@@ -30,8 +30,10 @@ int LabelToBin::Size(const PackLabel* label)
 
 	sz += sizeof(uint8_t);				// richtext & overflow
 
-	sz += sizeof_pack_str(label->text);	// text
-	sz += sizeof_pack_str(label->tid);	// tid
+	//sz += sizeof_pack_str(label->text);	// text
+	//sz += sizeof_pack_str(label->tid);	// tid
+	sz += sizeof_pack_str("");	// text
+	sz += sizeof_pack_str("");	// tid
 
 	return sz;
 }
