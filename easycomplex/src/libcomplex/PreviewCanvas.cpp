@@ -21,11 +21,7 @@ void PreviewCanvas::OnDrawSprites() const
 	for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 	{
 		const ee::Sprite* spr = m_sprs[i];
-// 		if (!spr->visiable)
-// 			continue;
-		s2::RenderParams params;
-		params.color = spr->GetColor();
-		ee::SpriteRenderer::Instance()->Draw(spr, params);
+		ee::SpriteRenderer::Instance()->Draw(spr, s2::RenderParams());
 	}
 
 	s2::Particle3d::Instance()->Draw();
