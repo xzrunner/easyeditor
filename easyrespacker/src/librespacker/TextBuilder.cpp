@@ -67,8 +67,8 @@ const IPackNode* TextBuilder::Create(const etext::Sprite* spr)
 
 	node->richtext		= tb.richtext;
 
-// 	node->text			= spr->GetText();
-// 	node->tid			= spr->GetTID();
+	node->text			= spr->GetText();
+	node->tid			= spr->GetTID();
 
 	m_labels.push_back(node);
 

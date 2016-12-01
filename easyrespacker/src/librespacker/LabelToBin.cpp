@@ -77,8 +77,10 @@ void LabelToBin::Pack(const PackLabel* label, uint8_t** ptr)
 	uint8_t pack8 = (richtext) | (overflow << 1);
 	pack(pack8, ptr);
 
-	pack_str(label->text, ptr);
-	pack_str(label->tid, ptr);
+// 	pack_str(label->text, ptr);
+// 	pack_str(label->tid, ptr);
+	pack_str("", ptr);
+	pack_str("", ptr);
 }
 
 }
