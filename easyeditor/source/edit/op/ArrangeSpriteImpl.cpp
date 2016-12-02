@@ -259,8 +259,7 @@ void ArrangeSpriteImpl::OnMouseLeftUp(int x, int y)
 	}
 
 	if (!m_selection->IsEmpty()) {
-		sm::vec2 p;
-		ChangeOPState(CreateTranslateState(m_selection, p));
+		ChangeOPState(CreateTranslateState(m_selection, pos));
 	}
 
 	if (m_cfg.is_auto_align_open &&
