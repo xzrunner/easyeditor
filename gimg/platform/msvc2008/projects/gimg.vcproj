@@ -149,6 +149,14 @@
 			Name="fmt"
 			>
 			<File
+				RelativePath="..\..\..\src\gimg\gimg_bmp.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\gimg\gimg_bmp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\gimg\gimg_jpg.c"
 				>
 			</File>
@@ -165,6 +173,14 @@
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath="..\..\..\src\gimg\gimg_export.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\gimg\gimg_export.h"
+			>
+		</File>
 		<File
 			RelativePath="..\..\..\src\gimg\gimg_image.c"
 			>
@@ -183,6 +199,14 @@
 		</File>
 		<File
 			RelativePath="..\..\..\src\gimg\gimg_typedef.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\gimg\gimg_utility.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\gimg\gimg_utility.h"
 			>
 		</File>
 	</Files>
