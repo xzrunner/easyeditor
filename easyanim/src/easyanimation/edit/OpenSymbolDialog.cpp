@@ -5,6 +5,7 @@
 #include <ee/MultiSpritesImpl.h>
 #include <ee/EditPanelImpl.h>
 
+#include <easycomplex.h>
 #include <easymesh.h>
 #include <easyskeleton.h>
 
@@ -39,7 +40,13 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 	m_stage->GetCanvas()->EnableObserve(false);
 	m_stage->GetCanvas()->SetDrawable(false);
 
-	if (emesh::Sprite* mesh = dynamic_cast<emesh::Sprite*>(spr))
+	if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(spr))
+	{
+		ecomplex::Symbol* sym = dynamic_cast<ecomplex::Symbol*>(complex->GetSymbol());
+		ecomplex::EditDialog dlg(m_wnd, sym, m_stage->GetCanvas()->GetGLContext());
+		dlg.ShowModal();
+	}
+	else if (emesh::Sprite* mesh = dynamic_cast<emesh::Sprite*>(spr))
 	{
 		emesh::EditDialog dlg(m_wnd, mesh, m_stage->GetCanvas()->GetGLContext());
 		dlg.ShowModal();
