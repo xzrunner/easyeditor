@@ -20,6 +20,7 @@
 #include <ee/StringHelper.h>
 #include <ee/AnimatedGifSaver.h>
 #include <ee/SpriteFactory.h>
+#include <ee/SymbolType.h>
 
 #include <easyanim.h>
 #include <easyimage.h>
@@ -298,8 +299,13 @@ ee::Sprite* FileIO::LoadActor(const Json::Value& val, const std::string& dir)
 	std::string filepath = val["filepath"].asString();
 	while (true) 
 	{
-		if (ee::FileHelper::IsFileExist(filepath))
+		if (ee::FileHelper::IsFileExist(filepath)) {
 			break;
+		}
+
+		if (filepath == ee::SYM_GROUP_TAG) {
+			break;
+		}
 
 		std::string absolute_path = ee::FileHelper::GetAbsolutePath(dir, filepath);
 		if (ee::FileHelper::IsFileExist(absolute_path))
@@ -536,19 +542,20 @@ Json::Value FileIO::StoreActor(const ee::Sprite* spr, const std::string& dir,
 							   bool single)
 {
 	Json::Value value;
-
 	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());
 	// filepath
-	std::string relative_path = ee::FileHelper::GetRelativePath(dir, 
-		sym->GetFilepath());
+	std::string filepath = sym->GetFilepath();
+	if (filepath != ee::SYM_GROUP_TAG) {
+		filepath = ee::FileHelper::GetRelativePath(dir, filepath);
+	}
 	if (single) {
-		value["filepath"] = relative_path;
+		value["filepath"] = filepath;
 	} else {
-		if (DataMgr::Instance()->GetTemplate().ContainPath(relative_path)) {
+		if (DataMgr::Instance()->GetTemplate().ContainPath(filepath)) {
 			value["filepath"] = ee::FileHelper::GetFilenameWithExtension(
 				sym->GetFilepath());
 		} else {
-			value["filepath"] = relative_path;
+			value["filepath"] = filepath;
 		}
 	}
 	// filepaths
