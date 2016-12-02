@@ -516,10 +516,6 @@
 				RelativePath="..\..\..\src\libcomplex\OpenSymbolDialog.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\src\libcomplex\OpenSymbolLsn.h"
-				>
-			</File>
 		</Filter>
 	</Files>
 	<Globals>

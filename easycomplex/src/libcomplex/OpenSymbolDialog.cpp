@@ -2,7 +2,6 @@
 #include "EditDialog.h"
 #include "Sprite.h"
 #include "Symbol.h"
-#include "OpenSymbolLsn.h"
 
 #include <easyscale9.h>
 #include <easymesh.h>
@@ -49,9 +48,6 @@ void OpenSymbolDialog::Open(ee::Sprite* spr, ee::CrossGuides* guides)
 	m_stage->GetCanvas()->SetDrawable(false);
 	if (m_viewlist) {
 		m_viewlist->EnableObserve(false);
-	}
-	for (int i = 0, n = m_lsns.size(); i < n; ++i) {
-		m_lsns[i]->BeforeOpen();
 	}
 
 	if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(spr))
@@ -119,9 +115,6 @@ void OpenSymbolDialog::Open(ee::Sprite* spr, ee::CrossGuides* guides)
 	m_stage->GetCanvas()->SetDrawable(true);
 	if (m_viewlist) {
 		m_viewlist->EnableObserve(true);
-	}
-	for (int i = 0, n = m_lsns.size(); i < n; ++i) {
-		m_lsns[i]->AfterOpen();
 	}
 }
 

@@ -12,8 +12,6 @@ class wxWindow;
 namespace ecomplex
 {
 
-class OpenSymbolLsn;
-
 class OpenSymbolDialog
 {
 public:
@@ -21,10 +19,6 @@ public:
 		ee::MultiSpritesImpl* sprites_impl);
 
 	void Open(ee::Sprite* spr, ee::CrossGuides* guides = NULL);
-
-	void RegistLsn(OpenSymbolLsn* lsn) {
-		m_lsns.push_back(lsn);
-	}
 
 	// todo
 	void SetViewlist(ee::ViewlistPanel* viewlist) { m_viewlist = viewlist; }
@@ -37,8 +31,6 @@ private:
 	ee::MultiSpritesImpl* m_sprites_impl;
 
 	ee::ViewlistPanel* m_viewlist;
-
-	std::vector<OpenSymbolLsn*> m_lsns;
 
 }; // OpenSymbolDialog
 

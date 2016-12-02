@@ -17,6 +17,5 @@
 #include "libcomplex/PreviewDialog.h"
 #include "libcomplex/SphereRotateState.h"
 #include "libcomplex/GroupHelper.h"
-#include "libcomplex/OpenSymbolLsn.h"
 
 #endif // _EASYCOMPLEX_H_
