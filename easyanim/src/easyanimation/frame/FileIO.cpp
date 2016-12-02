@@ -273,7 +273,8 @@ KeyFrame* FileIO::LoadFrame(Layer* layer, const Json::Value& frameValue, const s
 		{
 			float begin = val["angle_begin"].asInt() * SM_DEG_TO_RAD,
 				  end   = val["angle_end"].asInt() * SM_DEG_TO_RAD;
-			s2::LerpSpiral* spiral = new s2::LerpSpiral(begin, end);
+			float scale = val["angle_scale"].asInt() * 0.01f;
+			s2::LerpSpiral* spiral = new s2::LerpSpiral(begin, end, scale);
 			frame->SetLerp(key, spiral);
 		}
 	}
@@ -518,6 +519,7 @@ Json::Value FileIO::StoreFrame(KeyFrame* frame, const std::string& dir,
 			spiral->GetAngle(begin, end);
 			val["angle_begin"] = static_cast<int>(begin * SM_RAD_TO_DEG);
 			val["angle_end"]   = static_cast<int>(end * SM_RAD_TO_DEG);
+			val["angle_scale"] = static_cast<int>(spiral->GetScale() * 100);
 		}
 		value["lerp"][i]["val"] = val;
 	}

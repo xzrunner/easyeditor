@@ -25,6 +25,7 @@ private:
 
 	wxCheckBox* m_pos_spiral;
 	wxSpinCtrl *m_spiral_angle_begin, *m_spiral_angle_end;
+	wxSpinCtrl* m_spiral_scale;
 
 }; // FrameLerpDialog
 
