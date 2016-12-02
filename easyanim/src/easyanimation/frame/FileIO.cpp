@@ -25,6 +25,9 @@
 #include <easyimage.h>
 
 #include <sprite2/SymType.h>
+#include <sprite2/ILerp.h>
+#include <sprite2/LerpType.h>
+#include <sprite2/LerpSpiral.h>
 
 #include <rapidxml_utils.hpp>
 
@@ -262,6 +265,19 @@ KeyFrame* FileIO::LoadFrame(Layer* layer, const Json::Value& frameValue, const s
 
 	frame->SetClassicTween(frameValue["tween"].asBool());
 
+	for (int i = 0, n = frameValue["lerp"].size(); i < n; ++i)
+	{
+		int key = frameValue["lerp"][i]["key"].asInt();
+		const Json::Value& val = frameValue["lerp"][i]["val"];
+		if (val["type"].asString() == "spiral") 
+		{
+			float begin = val["angle_begin"].asInt() * SM_DEG_TO_RAD,
+				  end   = val["angle_end"].asInt() * SM_DEG_TO_RAD;
+			s2::LerpSpiral* spiral = new s2::LerpSpiral(begin, end);
+			frame->SetLerp(key, spiral);
+		}
+	}
+
 	int i = 0;
 	Json::Value actorValue = frameValue["actor"][i++];
 	while (!actorValue.isNull()) {
@@ -486,6 +502,25 @@ Json::Value FileIO::StoreFrame(KeyFrame* frame, const std::string& dir,
 	value["time"] = frame->GetTime();
 
 	value["tween"] = frame->HasClassicTween();
+
+	const std::vector<std::pair<int, s2::ILerp*> >& lerps = frame->GetLerps();
+	for (int i = 0, n = lerps.size(); i < n; ++i) 
+	{
+		value["lerp"][i]["key"] = lerps[i].first;
+
+		Json::Value val;
+		s2::ILerp* lerp = lerps[i].second;
+		if (lerp->Type() == s2::LERP_SPIRAL) 
+		{
+			val["type"] = "spiral";
+			s2::LerpSpiral* spiral = static_cast<s2::LerpSpiral*>(lerp);
+			float begin, end;
+			spiral->GetAngle(begin, end);
+			val["angle_begin"] = static_cast<int>(begin * SM_RAD_TO_DEG);
+			val["angle_end"]   = static_cast<int>(end * SM_RAD_TO_DEG);
+		}
+		value["lerp"][i]["val"] = val;
+	}
 
 	for (size_t i = 0, n = frame->Size(); i < n; ++i)
 		value["actor"][i] = StoreActor(frame->GetSprite(i), dir, single);

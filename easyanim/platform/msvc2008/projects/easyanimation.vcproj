@@ -447,6 +447,14 @@
 					Name="keyframes"
 					>
 					<File
+						RelativePath="..\..\..\src\easyanimation\view\FrameLerpDialog.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easyanimation\view\FrameLerpDialog.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\easyanimation\view\KeysContentEdit.cpp"
 						>
 					</File>

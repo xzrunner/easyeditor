@@ -5,6 +5,8 @@
 
 #include <CU_RefCountObj.h>
 
+namespace s2 { class ILerp; }
+
 namespace eanim
 {
 
@@ -52,6 +54,9 @@ public:
 
 	void OnActive();
 
+	void SetLerp(int data, s2::ILerp* lerp);
+	const std::vector<std::pair<int, s2::ILerp*> >& GetLerps() const { return m_lerps; }
+
 	static void GetTweenSprite(const KeyFrame* start, const KeyFrame* end, std::vector<ee::Sprite*>& tween, float process);
 
 // private:
@@ -64,6 +69,7 @@ private:
 	std::vector<ee::Sprite*> m_sprs;
 
 	bool m_classic_tween;
+	std::vector<std::pair<int, s2::ILerp*> > m_lerps;
 
 	Layer* m_layer;
 

@@ -1,4 +1,5 @@
 #include "KeysContentEdit.h"
+#include "FrameLerpDialog.h"
 
 #include "dataset/KeyFrame.h"
 #include "dataset/Layer.h"
@@ -22,7 +23,8 @@
 namespace eanim
 {
 
-KeysContentEdit::KeysContentEdit()
+KeysContentEdit::KeysContentEdit(wxWindow* parent)
+	: m_parent(parent)
 {
 	m_row = m_col = -1;
 	m_col_min = m_col_max = -1;
@@ -55,6 +57,24 @@ void KeysContentEdit::OnMouseDragging(int row, int col)
 	SetSelectedRegionSJ::Instance()->Set(col);
 }
 
+void KeysContentEdit::OnMouseLeftClick(int row, int col)
+{
+	int layer_sz = DataMgr::Instance()->GetLayers().Size();
+	int index = DataMgr::Instance()->GetLayers().Size() - row - 1;
+	if (index < 0 || index >= layer_sz) {
+		return;
+	}
+	
+	Layer* layer = DataMgr::Instance()->GetLayers().GetLayer(index);
+	KeyFrame* frame = layer->GetCurrKeyFrame(col + 1);
+	if (frame && frame->HasClassicTween()) {
+		FrameLerpDialog dlg(m_parent, frame);
+		if (dlg.ShowModal() == wxID_OK) {
+			dlg.Store();
+		}
+	}
+}
+
 void KeysContentEdit::CopySelection()
 {
 	if (m_row == -1 || m_col_min == -1 || m_col_max == -1) {
@@ -69,7 +89,7 @@ void KeysContentEdit::CopySelection()
  	std::map<int, KeyFrame*>::const_iterator itr_begin = frames.lower_bound(m_col_min + 1),
  		itr_end = frames.upper_bound(m_col_max + 1);
 	int last_frame = m_col_min + 1;
- 	for (std::map<int, KeyFrame*>::const_iterator itr = itr_begin; itr != itr_end; ++itr) {		
+ 	for (std::map<int, KeyFrame*>::const_iterator itr = itr_begin; itr != itr_end; ++itr) {
 		Json::Value k_val;
 		k_val["distance"] = itr->first - last_frame;
 

@@ -52,6 +52,7 @@ LanguageEntry KeysContentWidget::entries[] =
 
 KeysContentWidget::KeysContentWidget(wxWindow* parent)
 	: wxPanel(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxBORDER_NONE)
+	, m_editop(parent)
 	, m_layer(NULL)
 	, m_frame(NULL)
 {
@@ -98,6 +99,8 @@ void KeysContentWidget::OnMouse(wxMouseEvent& event)
 		m_editop.OnMouseDragging(row, col);
 	} else if (event.Moving()) {
 		SetFocus();
+	} else if (event.LeftDClick()) {
+		m_editop.OnMouseLeftClick(row, col);
 	}
 }
 

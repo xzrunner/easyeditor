@@ -11,6 +11,7 @@
 #include <easyparticle3d.h>
 
 #include <sprite2/AnimLerp.h>
+#include <sprite2/ILerp.h>
 
 #include <algorithm>
 
@@ -106,6 +107,11 @@ void KeyFrame::Clear()
 			m_layer->GetSpriteObserver().Remove(m_sprs[i]);
 	}
 
+	for (int i = 0, n = m_lerps.size(); i < n; ++i) {
+		delete m_lerps[i].second;
+	}
+	m_lerps.clear();
+
 	ee::ObjectVector<ee::Sprite>::Clear(m_sprs);
 }
 
@@ -116,6 +122,29 @@ void KeyFrame::OnActive()
 			if (p3d->IsAlone()) {
 				p3d->OnActive();
 			}
+		}
+	}
+}
+
+void KeyFrame::SetLerp(int data, s2::ILerp* lerp)
+{
+	if (data != s2::AnimLerp::SPR_POS) {
+		return;
+	}
+
+	assert(m_lerps.size() <= 1);
+	if (lerp) {
+		if (m_lerps.empty()) {
+			m_lerps.push_back(std::make_pair(s2::AnimLerp::SPR_POS, lerp));
+		} else {
+			assert(m_lerps[0].first == s2::AnimLerp::SPR_POS);
+			delete m_lerps[0].second;
+			m_lerps[0].second = lerp;
+		}
+	} else {
+		if (!m_lerps.empty()) {
+			delete m_lerps[0].second;
+			m_lerps.clear();
 		}
 	}
 }
@@ -149,7 +178,12 @@ void KeyFrame::GetTweenSprite(const KeyFrame* start, const KeyFrame* end,
 		ends.reserve(start->m_sprs.size());
 		copy(end->m_sprs.begin(), end->m_sprs.end(), back_inserter(ends));
 
-		s2::AnimLerp::Lerp(begins, ends, tweens, process);
+		std::vector<std::pair<s2::AnimLerp::SprData, s2::ILerp*> > lerps;
+		lerps.reserve(start->m_lerps.size());
+		for (int i = 0, n = start->m_lerps.size(); i < n; ++i) {
+			lerps.push_back(std::make_pair(s2::AnimLerp::SprData(start->m_lerps[i].first), start->m_lerps[i].second));
+		}
+		s2::AnimLerp::Lerp(begins, ends, tweens, process, lerps);
 
 		tween.reserve(tweens.size());
 		for (int i = 0, n = tweens.size(); i < n; ++i) {
