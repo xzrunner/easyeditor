@@ -8,7 +8,7 @@
 
 #include <vector>
 
-namespace eanim { class Symbol; }
+namespace libanim { class Symbol; }
 
 namespace esprpacker
 {
@@ -16,7 +16,7 @@ namespace esprpacker
 class PackAnimation : public PackNode
 {
 public:
-	PackAnimation(const eanim::Symbol* sym);
+	PackAnimation(const libanim::Symbol* sym);
 	virtual ~PackAnimation();
 
 	/**
@@ -36,7 +36,7 @@ public:
 		float scale) const;	
 	
 private:
-	void Init(const eanim::Symbol* sym);
+	void Init(const libanim::Symbol* sym);
 
 private:
 	class Actor : public cu::RefCountObj

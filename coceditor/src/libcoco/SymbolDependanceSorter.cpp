@@ -51,7 +51,7 @@ void SymbolDependanceSorter::fetch(const std::vector<const ee::Symbol*>& syms)
 				buffer.push(dynamic_cast<const ee::Symbol*>(children[i]->GetSymbol()));
 			}
 		}
-		else if (const eanim::Symbol* anim = dynamic_cast<const eanim::Symbol*>(sym))
+		else if (const libanim::Symbol* anim = dynamic_cast<const libanim::Symbol*>(sym))
 		{
 			const std::vector<s2::AnimSymbol::Layer*>& layers = anim->GetLayers();
 			for (size_t i = 0, n = layers.size(); i < n; ++i)
@@ -105,7 +105,7 @@ void SymbolDependanceSorter::fetch(const std::vector<const ee::Symbol*>& syms)
 				}
 			}
 		}
-		else if (const eanim::Symbol* anim = dynamic_cast<const eanim::Symbol*>(sym))
+		else if (const libanim::Symbol* anim = dynamic_cast<const libanim::Symbol*>(sym))
 		{
 			if (m_unique.find(anim) == m_unique.end())
 			{
@@ -195,7 +195,7 @@ void SymbolDependanceSorter::sort()
 					break;
 				}
 			}
-			else if (eanim::Symbol* anim = dynamic_cast<eanim::Symbol*>(sym))
+			else if (libanim::Symbol* anim = dynamic_cast<libanim::Symbol*>(sym))
 			{
 				bool prepared = true;
 				const std::vector<s2::AnimSymbol::Layer*>& layers = anim->GetLayers();

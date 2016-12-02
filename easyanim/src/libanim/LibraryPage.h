@@ -1,9 +1,9 @@
-#ifndef _EASYANIM_LIBRARY_PAGE_H_
-#define _EASYANIM_LIBRARY_PAGE_H_
+#ifndef _LIBANIM_LIBRARY_PAGE_H_
+#define _LIBANIM_LIBRARY_PAGE_H_
 
 #include <ee/LibraryPage.h>
 
-namespace eanim
+namespace libanim
 {
 
 class LibraryPage : public ee::LibraryPage
@@ -25,4 +25,4 @@ private:
 
 }
 
-#endif // _EASYANIM_LIBRARY_PAGE_H_
+#endif // _LIBANIM_LIBRARY_PAGE_H_

@@ -384,7 +384,7 @@ void ParserLuaFile::transAniToFiles(const std::string& outfloder)
 
 void ParserLuaFile::transAniToAnimationFile(const std::string& outfloder, int id, Animation* ani)
 {
-	eanim::Symbol* sym = new eanim::Symbol;
+	libanim::Symbol* sym = new libanim::Symbol;
 	s2::AnimSymbol::Layer* layer = new s2::AnimSymbol::Layer;
 	sym->name = ani->export_name;
 	sym->SetFPS(30);
@@ -429,7 +429,7 @@ void ParserLuaFile::transAniToAnimationFile(const std::string& outfloder, int id
 	}
 	std::string filename = outfloder + "\\" + ss.str() 
 		+ "_" + ee::SymbolFile::Instance()->Tag(s2::SYM_ANIMATION) + ".json";
-	eanim::FileSaver::Store(filename.c_str(), *sym);
+	libanim::FileSaver::Store(filename.c_str(), *sym);
 
 	ani->filename = filename;
 
@@ -536,7 +536,7 @@ void ParserLuaFile::transAniToMemory()
 
 void ParserLuaFile::transAniToAnimationMemory(int id, Animation* ani)
 {
-	eanim::Symbol* sym = new eanim::Symbol;
+	libanim::Symbol* sym = new libanim::Symbol;
 	s2::AnimSymbol::Layer* layer = new s2::AnimSymbol::Layer;
 	sym->name = ani->export_name;
 	sym->SetFPS(30);

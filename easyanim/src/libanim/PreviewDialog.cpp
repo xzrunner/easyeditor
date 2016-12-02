@@ -7,7 +7,7 @@
 
 #include <wx/wx.h>
 
-namespace eanim
+namespace libanim
 {
 
 PreviewDialog::PreviewDialog(wxWindow* parent, const Symbol* sym,

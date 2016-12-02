@@ -3,7 +3,7 @@
 #include <ee/SpriteRenderer.h>
 #include <ee/panel_msg.h>
 
-namespace eanim
+namespace libanim
 {
 
 PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage,

@@ -86,7 +86,7 @@ void TransOldAnchorFile::TransComplex(const std::string& filepath) const
 void TransOldAnchorFile::TransAnimation(const std::string& filepath) const
 {
 	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-	eanim::Symbol* anim = static_cast<eanim::Symbol*>(sym);
+	libanim::Symbol* anim = static_cast<libanim::Symbol*>(sym);
 	bool dirty = false;
 	const std::vector<s2::AnimSymbol::Layer*>& layers = anim->GetLayers();
 	for (int i = 0, n = layers.size(); i < n; ++i) {
@@ -103,7 +103,7 @@ void TransOldAnchorFile::TransAnimation(const std::string& filepath) const
 		}
 	}
 	if (dirty) {
-		eanim::FileSaver::Store(filepath, *anim);
+		libanim::FileSaver::Store(filepath, *anim);
 	}
 	sym->RemoveReference();
 }

@@ -1,5 +1,5 @@
-#ifndef _EASYANIM_PREVIEW_DIALOG_H_
-#define _EASYANIM_PREVIEW_DIALOG_H_
+#ifndef _LIBANIM_PREVIEW_DIALOG_H_
+#define _LIBANIM_PREVIEW_DIALOG_H_
 
 #include <wx/dialog.h>
 
@@ -7,7 +7,7 @@ class wxGLContext;
 
 namespace ee { class EditPanel; }
 
-namespace eanim
+namespace libanim
 {
 
 class Symbol;
@@ -37,4 +37,4 @@ private:
 
 }
 
-#endif // _EASYANIM_PREVIEW_DIALOG_H_
+#endif // _LIBANIM_PREVIEW_DIALOG_H_

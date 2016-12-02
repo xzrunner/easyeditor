@@ -219,7 +219,7 @@ void CocoPacker::ResolveSymbols()
 			m_mapSymbolID.insert(std::make_pair(sym, m_id++));
 			ParserComplex(complex);
 		}
-		else if (const eanim::Symbol* anim = dynamic_cast<const eanim::Symbol*>(sym))
+		else if (const libanim::Symbol* anim = dynamic_cast<const libanim::Symbol*>(sym))
 		{
 			////////////////////////////////////////////////////////////////////////////
 			//// version 1: parser all sprs to picture
@@ -227,10 +227,10 @@ void CocoPacker::ResolveSymbols()
 
 			//for (size_t i = 0, n = anim->m_layers.size(); i < n; ++i)
 			//{
-			//	eanim::Symbol::Layer* layer = anim->m_layers[i];
+			//	libanim::Symbol::Layer* layer = anim->m_layers[i];
 			//	for (size_t j = 0, m = layer->frames.size(); j < m; ++j)
 			//	{
-			//		eanim::Symbol::Frame* frame = layer->frames[j];
+			//		libanim::Symbol::Frame* frame = layer->frames[j];
 			//		for (size_t k = 0, l = frame->sprs.size(); k < l; ++k)
 			//		{
 			//			ee::Sprite* spr = frame->sprs[k];
@@ -863,7 +863,7 @@ void CocoPacker::ParserComplex(const ecomplex::Symbol* sym)
 	}
 }
 
-void CocoPacker::ParserAnimation(const eanim::Symbol* sym)
+void CocoPacker::ParserAnimation(const libanim::Symbol* sym)
 {
 	lua::TableAssign ta(*m_gen, "animation", false, false);
 
@@ -1538,7 +1538,7 @@ void CocoPacker::ParserSpriteForComponent(const ee::Sprite* spr, std::vector<int
 		}
 		else
 		{
-			// eanim::Symbol's sprs store unique
+			// libanim::Symbol's sprs store unique
 
 			std::map<const ee::Symbol*, int>::iterator itr = m_mapSymbolID.find(sym);
 			if (itr == m_mapSymbolID.end()) {

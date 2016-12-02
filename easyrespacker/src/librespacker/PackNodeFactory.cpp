@@ -153,8 +153,8 @@ const IPackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 	// animation
 	else if (const ecomplex::Sprite* complex = dynamic_cast<const ecomplex::Sprite*>(spr)) {
 		node = m_complex_builder->Create(dynamic_cast<const ecomplex::Symbol*>(complex->GetSymbol()));
-	} else if (const eanim::Sprite* anim = dynamic_cast<const eanim::Sprite*>(spr)) {
-		node = m_anim_builder->Create(dynamic_cast<const eanim::Symbol*>(anim->GetSymbol()));
+	} else if (const libanim::Sprite* anim = dynamic_cast<const libanim::Sprite*>(spr)) {
+		node = m_anim_builder->Create(dynamic_cast<const libanim::Symbol*>(anim->GetSymbol()));
 	} else if (const eterrain2d::Sprite* terr2d = dynamic_cast<const eterrain2d::Sprite*>(spr)) {
 		node = m_terrain2d_builder->Create(dynamic_cast<const eterrain2d::Symbol*>(terr2d->GetSymbol()));
 	}
@@ -213,7 +213,7 @@ const IPackNode* PackNodeFactory::Create(const ee::Symbol* sym)
 	// animation
 	else if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(sym)) {
 		node = m_complex_builder->Create(complex);
-	} else if (const eanim::Symbol* anim = dynamic_cast<const eanim::Symbol*>(sym)) {
+	} else if (const libanim::Symbol* anim = dynamic_cast<const libanim::Symbol*>(sym)) {
 		node = m_anim_builder->Create(anim);
 	} else if (const eterrain2d::Symbol* terr2d = dynamic_cast<const eterrain2d::Symbol*>(sym)) {
 		node = m_terrain2d_builder->Create(terr2d);

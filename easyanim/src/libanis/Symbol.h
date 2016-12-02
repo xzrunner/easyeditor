@@ -6,7 +6,7 @@
 
 #include <sprite2/DummySymbol.h>
 
-namespace eanim { class Symbol; }
+namespace libanim { class Symbol; }
 
 namespace libanis
 {
@@ -54,7 +54,7 @@ private:
 private:
 	sm::rect m_rect;
 
-	std::vector<eanim::Symbol*> m_syms;	
+	std::vector<libanim::Symbol*> m_syms;	
 
 }; // Symbol
 

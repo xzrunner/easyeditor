@@ -5,7 +5,7 @@
 
 #include <map>
 
-namespace eanim { class Symbol; }
+namespace libanim { class Symbol; }
 
 namespace erespacker
 {
@@ -22,15 +22,15 @@ public:
 
 	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
 
-	const IPackNode* Create(const eanim::Symbol* sym);
+	const IPackNode* Create(const libanim::Symbol* sym);
 
 private:
-	void Load(const eanim::Symbol* sym, PackAnimation* anim);
+	void Load(const libanim::Symbol* sym, PackAnimation* anim);
 
 private:
 	ExportNameSet& m_export_set;
 
-	std::map<const eanim::Symbol*, const PackAnimation*> m_map_data;
+	std::map<const libanim::Symbol*, const PackAnimation*> m_map_data;
 
 }; // AnimBuilder
 

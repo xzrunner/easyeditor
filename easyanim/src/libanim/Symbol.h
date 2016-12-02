@@ -1,5 +1,5 @@
-#ifndef _EASYANIM_SYMBOL_H_
-#define _EASYANIM_SYMBOL_H_
+#ifndef _LIBANIM_SYMBOL_H_
+#define _LIBANIM_SYMBOL_H_
 
 #include <ee/Symbol.h>
 
@@ -9,7 +9,7 @@
 
 namespace gum { class SpriteLoader; }
 
-namespace eanim
+namespace libanim
 {
 
 class SpriteLoader;
@@ -41,4 +41,4 @@ private:
 
 }
 
-#endif // _EASYANIM_SYMBOL_H_
+#endif // _LIBANIM_SYMBOL_H_

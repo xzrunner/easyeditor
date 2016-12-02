@@ -47,7 +47,7 @@ ee::Sprite* AnimationToSpr::TransAnim(const erespacker::PackAnimation* anim)
 {
 	assert(!anim->actions.empty() && anim->actions[0].size >= 1);
 
-	eanim::Symbol* anim_symbol = new eanim::Symbol;
+	libanim::Symbol* anim_symbol = new libanim::Symbol;
 	s2::AnimSymbol::Layer* layer = new s2::AnimSymbol::Layer;
 	for (int i = 0; i < anim->actions[0].size; ++i) {
 		const erespacker::PackAnimation::Frame& src = anim->frames[i];
@@ -65,7 +65,7 @@ ee::Sprite* AnimationToSpr::TransAnim(const erespacker::PackAnimation* anim)
 	anim_symbol->SetFPS(30);
 	anim_symbol->AddLayer(layer);
 //	anim_symbol->InitBounding();
-	return new eanim::Sprite(anim_symbol);
+	return new libanim::Sprite(anim_symbol);
 }
 
 void AnimationToSpr::TransSprite(ee::Sprite* spr, const erespacker::PackAnimation::SpriteTrans& t)

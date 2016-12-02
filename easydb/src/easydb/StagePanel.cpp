@@ -97,7 +97,7 @@ void StagePanel::InitConnection()
 						m_graphics.Connect(from, sprs[i]);
 			}
 		}
-		else if (eanim::Sprite* anim = dynamic_cast<eanim::Sprite*>(from))
+		else if (libanim::Sprite* anim = dynamic_cast<libanim::Sprite*>(from))
 		{
 			const s2::AnimSymbol* sym = dynamic_cast<const s2::AnimSymbol*>(anim->GetSymbol());
 			const std::vector<s2::AnimSymbol::Layer*>& layers = sym->GetLayers();

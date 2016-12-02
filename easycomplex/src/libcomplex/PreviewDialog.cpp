@@ -16,7 +16,7 @@ class InitVisitor : public ee::Visitor<ee::Sprite>
 {
 public:
 	virtual void Visit(ee::Sprite* spr, bool& next) {
-		if (eanim::Sprite* anim = dynamic_cast<eanim::Sprite*>(spr)) {
+		if (libanim::Sprite* anim = dynamic_cast<libanim::Sprite*>(spr)) {
 			anim->SetLoop(false);
 		}
 	}
@@ -48,8 +48,8 @@ PreviewDialog::~PreviewDialog()
 	data.particle3d_loop = true;
 
 	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
-		if (const eanim::Sprite* anim = dynamic_cast<const eanim::Sprite*>(m_sprs[i])) {
-			const_cast<eanim::Sprite*>(anim)->SetLoop(true);
+		if (const libanim::Sprite* anim = dynamic_cast<const libanim::Sprite*>(m_sprs[i])) {
+			const_cast<libanim::Sprite*>(anim)->SetLoop(true);
 		}
 	}
 }

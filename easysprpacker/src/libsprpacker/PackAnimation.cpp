@@ -16,7 +16,7 @@ namespace lua = ebuilder::lua;
 namespace esprpacker
 {
 
-PackAnimation::PackAnimation(const eanim::Symbol* sym)
+PackAnimation::PackAnimation(const libanim::Symbol* sym)
 {
 	Init(sym);
 }
@@ -86,7 +86,7 @@ void PackAnimation::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float 
 	}
 }
 
-void PackAnimation::Init(const eanim::Symbol* sym)
+void PackAnimation::Init(const libanim::Symbol* sym)
 {
 	const std::vector<s2::AnimSymbol::Layer*>& layers = sym->GetLayers();
 	m_layers.reserve(layers.size());

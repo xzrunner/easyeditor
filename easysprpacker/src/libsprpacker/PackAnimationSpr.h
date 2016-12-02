@@ -3,7 +3,7 @@
 
 #include "PackNode.h"
 
-namespace eanim { class Sprite; }
+namespace libanim { class Sprite; }
 
 namespace esprpacker
 {
@@ -11,7 +11,7 @@ namespace esprpacker
 class PackAnimationSpr : public PackNode
 {
 public:
-	PackAnimationSpr(const eanim::Sprite* spr);
+	PackAnimationSpr(const libanim::Sprite* spr);
 
 	/**
 	 *  @interface
@@ -29,10 +29,10 @@ public:
 	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, 
 		float scale) const;
 
-	bool Equal(const eanim::Sprite* spr) const;
+	bool Equal(const libanim::Sprite* spr) const;
 
 private:
-	void Init(const eanim::Sprite* spr);
+	void Init(const libanim::Sprite* spr);
 
 private:
 	const PackNode* m_sym;

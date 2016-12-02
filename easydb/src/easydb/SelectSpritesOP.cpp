@@ -54,9 +54,9 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 		ecomplex::EditDialog dlg(m_stage->GetEditPanel(), sym, NULL);
 		dlg.ShowModal();
 	}
-	//else if (eanim::Sprite* anim = dynamic_cast<eanim::Sprite*>(selected))
+	//else if (libanim::Sprite* anim = dynamic_cast<libanim::Sprite*>(selected))
 	//{
-	//		eanim::PreviewDialog dlg(Context::Instance()->stage, Context::Instance()->library, &anim->getSymbol());
+	//		libanim::PreviewDialog dlg(Context::Instance()->stage, Context::Instance()->library, &anim->getSymbol());
 	//		dlg.ShowModal();
 	//		Context::Instance()->stage->resetCanvas();
 	//}

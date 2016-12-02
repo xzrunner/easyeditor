@@ -73,7 +73,7 @@ void TransToGif::Run(ee::Snapshoot& ss, const std::string& srcdir, const std::st
 	//			continue;
 	//		}
 	//		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-	//		eanim::Symbol* anim = static_cast<eanim::Symbol*>(sym);
+	//		libanim::Symbol* anim = static_cast<libanim::Symbol*>(sym);
 
 	//		int max_frame = anim->GetMaxFrameIdx();
 	//		const sm::vec2& sz = sym->GetBounding().Size();

@@ -4,7 +4,7 @@
 
 #include <ee/panel_msg.h>
 
-namespace eanim
+namespace libanim
 {
 
 PropertySetting::PropertySetting(ee::EditPanelImpl* edit_impl, Sprite* spr)

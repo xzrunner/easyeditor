@@ -16,7 +16,7 @@
 
 #include <fstream>
 
-namespace eanim
+namespace libanim
 {
 
 Symbol::Symbol()

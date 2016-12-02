@@ -17,7 +17,7 @@ AnimBuilder::AnimBuilder(ExportNameSet& export_set)
 
 AnimBuilder::~AnimBuilder()
 {
-	std::map<const eanim::Symbol*, const PackAnimation*>::iterator
+	std::map<const libanim::Symbol*, const PackAnimation*>::iterator
 		itr = m_map_data.begin();
 	for ( ; itr != m_map_data.end(); ++itr) {
 		delete itr->second;
@@ -26,7 +26,7 @@ AnimBuilder::~AnimBuilder()
 
 void AnimBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 {
- 	std::map<const eanim::Symbol*, const PackAnimation*>::const_iterator 
+ 	std::map<const libanim::Symbol*, const PackAnimation*>::const_iterator 
  		itr = m_map_data.begin();
  	for ( ; itr != m_map_data.end(); ++itr) {
 		bool has_next;
@@ -37,9 +37,9 @@ void AnimBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
  	}
 }
 
-const IPackNode* AnimBuilder::Create(const eanim::Symbol* sym)
+const IPackNode* AnimBuilder::Create(const libanim::Symbol* sym)
 {
-	std::map<const eanim::Symbol*, const PackAnimation*>::iterator 
+	std::map<const libanim::Symbol*, const PackAnimation*>::iterator 
 		itr = m_map_data.find(sym);
 	if (itr != m_map_data.end()) {
 		return itr->second;
@@ -51,7 +51,7 @@ const IPackNode* AnimBuilder::Create(const eanim::Symbol* sym)
 	return node;
 }
 
-void AnimBuilder::Load(const eanim::Symbol* sym, PackAnimation* anim)
+void AnimBuilder::Load(const libanim::Symbol* sym, PackAnimation* anim)
 {
 	m_export_set.LoadExport(sym, anim);
 

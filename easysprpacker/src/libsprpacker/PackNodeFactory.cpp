@@ -58,7 +58,7 @@ SymBuilder<escale9::Symbol, PackScale9>*									SCALE9_BUILDER;
 SymBuilder<eicon::Symbol, PackIcon>*										ICON_BUILDER;
 SymBuilder<etexture::Symbol, PackTexture>*									TEXTURE_BUILDER;
 SymBuilder<ecomplex::Symbol, PackComplex>*									COMPLEX_BUILDER;
-SymBuilder<eanim::Symbol, PackAnimation>*									ANIM_BUILDER;
+SymBuilder<libanim::Symbol, PackAnimation>*									ANIM_BUILDER;
 SymBuilder<eparticle3d::Symbol, PackParticle3d>*							P3D_BUILDER;
 SymBuilder<eparticle2d::Symbol, PackParticle2d>*							P2D_BUILDER;
 SymBuilder<eshape::Symbol, PackShape>*										SHAPE_BUILDER;
@@ -70,7 +70,7 @@ SprBuilder<escale9::Symbol, escale9::Sprite, PackScale9Spr>*				SCALE9_SPR_BUILD
 SprBuilder<eicon::Symbol, eicon::Sprite, PackIconSpr>*						ICON_SPR_BUILDER;
 SprBuilder<etexture::Symbol, etexture::Sprite, PackTextureSpr>*				TEXTURE_SPR_BUILDER;
 SprBuilder<ecomplex::Symbol, ecomplex::Sprite, PackComplexSpr>*				COMPLEX_SPR_BUILDER;
-SprBuilder<eanim::Symbol, eanim::Sprite, PackAnimationSpr>*					ANIM_SPR_BUILDER;
+SprBuilder<libanim::Symbol, libanim::Sprite, PackAnimationSpr>*					ANIM_SPR_BUILDER;
 SprBuilder<eparticle3d::Symbol, eparticle3d::Sprite, PackParticle3dSpr>*	P3D_SPR_BUILDER;
 SprBuilder<eparticle2d::Symbol, eparticle2d::Sprite, PackParticle2dSpr>*	P2D_SPR_BUILDER;
 SprBuilder<eshape::Symbol, eshape::Sprite, PackShapeSpr>*					SHAPE_SPR_BUILDER;
@@ -85,7 +85,7 @@ PackNodeFactory::PackNodeFactory()
 	ICON_BUILDER		= new SymBuilder<eicon::Symbol, PackIcon>();
 	TEXTURE_BUILDER		= new SymBuilder<etexture::Symbol, PackTexture>();
 	COMPLEX_BUILDER		= new SymBuilder<ecomplex::Symbol, PackComplex>(true);
-	ANIM_BUILDER		= new SymBuilder<eanim::Symbol, PackAnimation>(true);
+	ANIM_BUILDER		= new SymBuilder<libanim::Symbol, PackAnimation>(true);
 	P3D_BUILDER			= new SymBuilder<eparticle3d::Symbol, PackParticle3d>(true);
 	P2D_BUILDER			= new SymBuilder<eparticle2d::Symbol, PackParticle2d>(true);
 	SHAPE_BUILDER		= new SymBuilder<eshape::Symbol, PackShape>();
@@ -97,7 +97,7 @@ PackNodeFactory::PackNodeFactory()
 	ICON_SPR_BUILDER	= new SprBuilder<eicon::Symbol, eicon::Sprite, PackIconSpr>();
 	TEXTURE_SPR_BUILDER	= new SprBuilder<etexture::Symbol, etexture::Sprite, PackTextureSpr>();
 	COMPLEX_SPR_BUILDER	= new SprBuilder<ecomplex::Symbol, ecomplex::Sprite, PackComplexSpr>();
-	ANIM_SPR_BUILDER	= new SprBuilder<eanim::Symbol, eanim::Sprite, PackAnimationSpr>();
+	ANIM_SPR_BUILDER	= new SprBuilder<libanim::Symbol, libanim::Sprite, PackAnimationSpr>();
 	P3D_SPR_BUILDER		= new SprBuilder<eparticle3d::Symbol, eparticle3d::Sprite, PackParticle3dSpr>();
 	P2D_SPR_BUILDER		= new SprBuilder<eparticle2d::Symbol, eparticle2d::Sprite, PackParticle2dSpr>();
 	SHAPE_SPR_BUILDER	= new SprBuilder<eshape::Symbol, eshape::Sprite, PackShapeSpr>();
@@ -142,7 +142,7 @@ const PackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 		node = COMPLEX_SPR_BUILDER->Create(complex);
 	}
 	// animation
-	else if (const eanim::Sprite* anim = dynamic_cast<const eanim::Sprite*>(spr)) {
+	else if (const libanim::Sprite* anim = dynamic_cast<const libanim::Sprite*>(spr)) {
 		node = ANIM_SPR_BUILDER->Create(anim);
 	}
 	// particle3d
@@ -205,7 +205,7 @@ const PackNode* PackNodeFactory::Create(const ee::Symbol* sym)
 		node = COMPLEX_BUILDER->Create(complex);
 	}
 	// anim
-	else if (const eanim::Symbol* anim = dynamic_cast<const eanim::Symbol*>(sym)) {
+	else if (const libanim::Symbol* anim = dynamic_cast<const libanim::Symbol*>(sym)) {
 		node = ANIM_BUILDER->Create(anim);
 	}
 	// particle3d

@@ -6,7 +6,7 @@
 #include <map>
 
 namespace ecomplex { class Symbol; }
-namespace eanim { class Symbol; }
+namespace libanim { class Symbol; }
 namespace escale9 { class Symbol; }
 
 namespace ee { class Symbol; class ImageSprite; class ImageSymbol; class FontBlankSprite; class Sprite; }
@@ -33,7 +33,7 @@ private:
 	void resolveFont(const ee::FontBlankSprite* spr);
 
 	void resolveAnimation(const ecomplex::Symbol* sym);
-	void resolveAnimation(const eanim::Symbol* sym);
+	void resolveAnimation(const libanim::Symbol* sym);
 	void resolveAnimation(const escale9::Symbol* sym);
 
 	void resolveSpriteForComponent(const ee::Sprite* spr, 

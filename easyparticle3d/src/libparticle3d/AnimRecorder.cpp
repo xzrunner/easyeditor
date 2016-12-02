@@ -68,7 +68,7 @@ void AnimRecorder::Clear()
 
 void AnimRecorder::StoreToFile(const std::string& filepath) const
 {
-	eanim::Symbol* sym = new eanim::Symbol;
+	libanim::Symbol* sym = new libanim::Symbol;
 	s2::AnimSymbol::Layer* layer = new s2::AnimSymbol::Layer;
 	// sym->name = ani->export_name;
 	sym->SetFPS(30);
@@ -100,7 +100,7 @@ void AnimRecorder::StoreToFile(const std::string& filepath) const
 	}
 	sym->AddLayer(layer);
 
-	eanim::FileSaver::Store(filepath.c_str(), *sym);
+	libanim::FileSaver::Store(filepath.c_str(), *sym);
 	delete sym;
 }
 

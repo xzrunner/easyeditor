@@ -79,10 +79,10 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 		// 		std::string cmd = "easycomplex.exe " + complex->getSymbol().getFilepath();
 		// 		WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);
 	}
-	else if (eanim::Sprite* anim = dynamic_cast<eanim::Sprite*>(spr))
+	else if (libanim::Sprite* anim = dynamic_cast<libanim::Sprite*>(spr))
 	{
-		eanim::Symbol* sym = dynamic_cast<eanim::Symbol*>(anim->GetSymbol());
-		eanim::PreviewDialog dlg(m_wnd, sym, m_stage->GetCanvas()->GetGLContext());
+		libanim::Symbol* sym = dynamic_cast<libanim::Symbol*>(anim->GetSymbol());
+		libanim::PreviewDialog dlg(m_wnd, sym, m_stage->GetCanvas()->GetGLContext());
 		dlg.ShowModal();
 	}
 	else if (escale9::Sprite* patch9 = dynamic_cast<escale9::Sprite*>(spr))

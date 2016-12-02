@@ -1,11 +1,11 @@
-#ifndef _EASYANIM_FILE_SAVER_H_
-#define _EASYANIM_FILE_SAVER_H_
+#ifndef _LIBANIM_FILE_SAVER_H_
+#define _LIBANIM_FILE_SAVER_H_
 
 #include <sprite2/AnimSymbol.h>
 
 #include <json/json.h>
 
-namespace eanim
+namespace libanim
 {
 
 class Symbol;
@@ -24,4 +24,4 @@ private:
 
 }
 
-#endif // _EASYANIM_FILE_SAVER_H_
+#endif // _LIBANIM_FILE_SAVER_H_

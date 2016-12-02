@@ -8,7 +8,7 @@
 
 #include <fstream>
 
-namespace eanim
+namespace libanim
 {
 
 void FileSaver::Store(const std::string& filepath, const Symbol& sym)

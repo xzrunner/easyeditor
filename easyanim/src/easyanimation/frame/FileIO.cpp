@@ -191,7 +191,7 @@ void FileIO::StoreAsGif(const std::string& src, const std::string& dst)
 
 	ee::Snapshoot ss;
 	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(src);
-	eanim::Symbol* anim = static_cast<eanim::Symbol*>(sym);
+	libanim::Symbol* anim = static_cast<libanim::Symbol*>(sym);
 
 	int max_frame = anim->GetMaxFrameIdx();
 	sm::vec2 sz = sym->GetBounding().Size();

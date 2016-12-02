@@ -14,7 +14,7 @@
 
 #include <sprite2/SymType.h>
 
-namespace eanim
+namespace libanim
 {
 
 LibraryPage::LibraryPage(wxWindow* parent)

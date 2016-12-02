@@ -34,8 +34,8 @@ static void InitSymbolCreators()
 	ee::SymbolFactory::RegisterCreator(s2::SYM_COMPLEX, &ecomplex::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_COMPLEX, &ecomplex::Sprite::Create);
 
-	ee::SymbolFactory::RegisterCreator(s2::SYM_ANIMATION, &eanim::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_ANIMATION, &eanim::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(s2::SYM_ANIMATION, &libanim::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_ANIMATION, &libanim::Sprite::Create);
 
 	ee::SymbolFactory::RegisterCreator(s2::SYM_ANIM2, &libanim2::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_ANIM2, &libanim2::Sprite::Create);

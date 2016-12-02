@@ -56,7 +56,7 @@ void Symbol::LoadResources()
 	while (!temp_val.isNull()) {
 		std::string dirpath = temp_val["path"].asString();
 
-		eanim::Symbol* sym = new eanim::Symbol();
+		libanim::Symbol* sym = new libanim::Symbol();
 		sym->SetFilepath(m_filepath);
 		SpriteLoader loader(dirpath);
 		sym->LoadFromFile(loader);
@@ -71,7 +71,7 @@ void Symbol::LoadResources()
 
 void Symbol::Clear()
 {
-	for_each(m_syms.begin(), m_syms.end(), cu::RemoveRefFunctor<eanim::Symbol>());
+	for_each(m_syms.begin(), m_syms.end(), cu::RemoveRefFunctor<libanim::Symbol>());
 	m_syms.clear();
 }
 

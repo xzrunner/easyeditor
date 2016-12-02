@@ -263,7 +263,7 @@ void ResPacker::Pack() const
 		const ee::Symbol* sym = m_syms[i];
 		if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(sym)) {
 			factory->Create(complex);
-		} else if (const eanim::Symbol* anim = dynamic_cast<const eanim::Symbol*>(sym)) {
+		} else if (const libanim::Symbol* anim = dynamic_cast<const libanim::Symbol*>(sym)) {
 			factory->Create(anim);
 		} else if (const eparticle3d::Symbol* p3d = dynamic_cast<const eparticle3d::Symbol*>(sym)) {
 			factory->Create(p3d);

@@ -1,12 +1,12 @@
-#ifndef _EASYANIM_PREVIEW_CANVAS_H_
-#define _EASYANIM_PREVIEW_CANVAS_H_
+#ifndef _LIBANIM_PREVIEW_CANVAS_H_
+#define _LIBANIM_PREVIEW_CANVAS_H_
 
 #include "Symbol.h"
 
 #include <ee/CameraCanvas.h>
 #include <ee/PlayControl.h>
 
-namespace eanim
+namespace libanim
 {
 
 class PreviewCanvas : public ee::CameraCanvas
@@ -47,4 +47,4 @@ private:
 
 }
 
-#endif // _EASYANIM_PREVIEW_CANVAS_H_
+#endif // _LIBANIM_PREVIEW_CANVAS_H_

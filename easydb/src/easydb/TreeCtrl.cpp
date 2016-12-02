@@ -149,7 +149,7 @@ void TreeCtrl::onItemClick(wxTreeEvent& event)
 //  					dlg.ShowModal();
 //  					stage->resetCanvas();
 // 				}
-// 				else if (eanim::Symbol* anim = dynamic_cast<eanim::Symbol*>(sym))
+// 				else if (libanim::Symbol* anim = dynamic_cast<libanim::Symbol*>(sym))
 // 				{
 // 
 // 				}

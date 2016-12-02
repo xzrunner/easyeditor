@@ -56,7 +56,7 @@ void CocoPacker::pack(const std::vector<const ee::Symbol*>& syms)
 			m_mapSymbolID.insert(std::make_pair(sym, m_id++));
 			resolveAnimation(complex);
 		}
-		else if (const eanim::Symbol* anim = dynamic_cast<const eanim::Symbol*>(sym))
+		else if (const libanim::Symbol* anim = dynamic_cast<const libanim::Symbol*>(sym))
 		{
 			std::set<const ee::ImageSymbol*> unique;
 			const std::vector<s2::AnimSymbol::Layer*>& layers = anim->GetLayers();
@@ -391,7 +391,7 @@ void CocoPacker::resolveAnimation(const ecomplex::Symbol* sym)
 	}
 }
 
-void CocoPacker::resolveAnimation(const eanim::Symbol* sym)
+void CocoPacker::resolveAnimation(const libanim::Symbol* sym)
 {
 	lua::TableAssign ta(m_gen, "", true, false);
 
@@ -510,7 +510,7 @@ void CocoPacker::resolveSpriteForComponent(const ee::Sprite* spr, std::vector<in
 		}
 		else
 		{
-			// eanim::Symbol's sprs store unique
+			// libanim::Symbol's sprs store unique
 			std::map<const ee::Symbol*, int>::iterator itr = m_mapSymbolID.find(dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
 			assert(itr != m_mapSymbolID.end());
 			id = itr->second;

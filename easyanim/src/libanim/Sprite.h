@@ -1,11 +1,11 @@
-#ifndef _EASYANIM_SPRITE_H_
-#define _EASYANIM_SPRITE_H_
+#ifndef _LIBANIM_SPRITE_H_
+#define _LIBANIM_SPRITE_H_
 
 #include <ee/Sprite.h>
 
 #include <sprite2/AnimSprite.h>
 
-namespace eanim
+namespace libanim
 {
 
 class Symbol;
@@ -53,4 +53,4 @@ private:
 
 }
 
-#endif // _EASYANIM_SPRITE_H_
+#endif // _LIBANIM_SPRITE_H_

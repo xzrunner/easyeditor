@@ -3,7 +3,7 @@
 
 #include <ee/LibraryPanel.h>
 
-namespace eanim { class LibraryPage; }
+namespace libanim { class LibraryPage; }
 namespace ecomplex { class LibraryPage; }
 namespace escale9 { class LibraryPage; }
 

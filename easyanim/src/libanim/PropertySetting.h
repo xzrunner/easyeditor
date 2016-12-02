@@ -1,11 +1,11 @@
-#ifndef _EASYANIM_PROPERTY_SETTING_H_
-#define _EASYANIM_PROPERTY_SETTING_H_
+#ifndef _LIBANIM_PROPERTY_SETTING_H_
+#define _LIBANIM_PROPERTY_SETTING_H_
 
 #include <ee/SpritePropertySetting.h>
 
 namespace ee { class EditPanelImpl; }
 
-namespace eanim
+namespace libanim
 {
 
 class Sprite;
@@ -25,4 +25,4 @@ protected:
 
 }
 
-#endif // _EASYANIM_PROPERTY_SETTING_H_
+#endif // _LIBANIM_PROPERTY_SETTING_H_

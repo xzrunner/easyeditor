@@ -24,7 +24,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	AddPage(ViewMgr::Instance()->img_page = new ee::LibraryImagePage(nb));
 	AddPage(new libskeleton::LibraryPage(nb));	
 	AddPage(new ecomplex::LibraryPage(nb));
-	AddPage(new eanim::LibraryPage(nb));
+	AddPage(new libanim::LibraryPage(nb));
 	AddPage(new emesh::LibraryPage(nb));
 	AddPage(new emask::LibraryPage(nb));
 	AddPage(new escale9::LibraryPage(nb));

@@ -6,7 +6,7 @@
 
 #include <gum/AnimSprLoader.h>
 
-namespace eanim
+namespace libanim
 {
 
 Sprite::Sprite(const Sprite& spr)
