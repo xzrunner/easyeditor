@@ -5,6 +5,10 @@
 #include <sprite2/SymType.h>
 #include <gum/SymbolFile.h>
 
+#include <json/json.h>
+
+#include <fstream>
+
 namespace ee
 {
 
@@ -67,9 +71,21 @@ int SymbolFile::Type(const std::string& filepath) const
 		std::map<std::string, int>::const_iterator itr = m_tag2type.find(tag);
 		if (itr != m_tag2type.end()) {
 			return itr->second;
-		} else {
-			return s2::SYM_UNKNOWN;
+		} 
+
+		Json::Value val;
+		Json::Reader reader;
+		std::locale::global(std::locale(""));
+		std::ifstream fin(filepath.c_str());
+		std::locale::global(std::locale("C"));
+		reader.parse(fin, val);
+		fin.close();
+
+		if (val.isMember("skeleton") && !val["skeleton"].isArray() && val["skeleton"].isMember("spine")) {
+			return s2::SYM_ANIM2;
 		}
+
+		return s2::SYM_UNKNOWN;
 	}
 	else if (ext == "lua")
 	{
