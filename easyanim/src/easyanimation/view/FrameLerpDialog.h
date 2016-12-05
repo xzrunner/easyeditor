@@ -20,8 +20,14 @@ public:
 private:
 	void InitLayout();
 
+	wxSizer* InitCircleLayout();
+	wxSizer* InitSpiralLayout();
+
 private:
 	KeyFrame* m_frame;
+
+	wxCheckBox* m_pos_circle;
+	wxSpinCtrl* m_circle_scale;	
 
 	wxCheckBox* m_pos_spiral;
 	wxSpinCtrl *m_spiral_angle_begin, *m_spiral_angle_end;

@@ -33,6 +33,7 @@ private:
 		const std::string& dir);
 	static KeyFrame* LoadFrame(Layer* layer, const Json::Value& frameValue,
 		const std::string& dir);
+	static void LoadLerp(KeyFrame* frame, const Json::Value& val);
 	static ee::Sprite* LoadActor(const Json::Value& actorValue,
 		const std::string& dir);
 	static void LoadSkeleton(const Json::Value& skeletonValue, 
@@ -47,6 +48,7 @@ private:
 
 	static Json::Value StoreLayer(Layer* layer, const std::string& dir, bool single);
 	static Json::Value StoreFrame(KeyFrame* frame, const std::string& dir, bool single);
+	static Json::Value StoreLerp(KeyFrame* frame);	
 	static Json::Value StoreActor(const ee::Sprite* spr, const std::string& dir, bool single);
 	static Json::Value StoreSkeleton(const SkeletonData& skeleton);
 

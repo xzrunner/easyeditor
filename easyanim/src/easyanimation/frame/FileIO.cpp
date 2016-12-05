@@ -28,6 +28,7 @@
 #include <sprite2/SymType.h>
 #include <sprite2/ILerp.h>
 #include <sprite2/LerpType.h>
+#include <sprite2/LerpCircle.h>
 #include <sprite2/LerpSpiral.h>
 
 #include <rapidxml_utils.hpp>
@@ -265,20 +266,7 @@ KeyFrame* FileIO::LoadFrame(Layer* layer, const Json::Value& frameValue, const s
 	frame->SetID(frameValue["id"].asInt());
 
 	frame->SetClassicTween(frameValue["tween"].asBool());
-
-	for (int i = 0, n = frameValue["lerp"].size(); i < n; ++i)
-	{
-		int key = frameValue["lerp"][i]["key"].asInt();
-		const Json::Value& val = frameValue["lerp"][i]["val"];
-		if (val["type"].asString() == "spiral") 
-		{
-			float begin = val["angle_begin"].asInt() * SM_DEG_TO_RAD,
-				  end   = val["angle_end"].asInt() * SM_DEG_TO_RAD;
-			float scale = val["angle_scale"].asInt() * 0.01f;
-			s2::LerpSpiral* spiral = new s2::LerpSpiral(begin, end, scale);
-			frame->SetLerp(key, spiral);
-		}
-	}
+	LoadLerp(frame, frameValue["lerp"]);
 
 	int i = 0;
 	Json::Value actorValue = frameValue["actor"][i++];
@@ -292,6 +280,29 @@ KeyFrame* FileIO::LoadFrame(Layer* layer, const Json::Value& frameValue, const s
 	LoadSkeleton(frameValue["skeleton"], frame->GetAllSprites(), frame->GetSkeletonData());
 
 	return frame;
+}
+
+void FileIO::LoadLerp(KeyFrame* frame, const Json::Value& value)
+{
+	for (int i = 0, n = value.size(); i < n; ++i)
+	{
+		int key = value[i]["key"].asInt();
+		const Json::Value& val = value[i]["val"];
+		if (val["type"].asString() == "circle")
+		{
+			float scale = val["scale"].asInt() * 0.01f;
+			s2::LerpCircle* spiral = new s2::LerpCircle(scale);
+			frame->SetLerp(key, spiral);
+		}
+		else if (val["type"].asString() == "spiral") 
+		{
+			float begin = val["angle_begin"].asInt() * SM_DEG_TO_RAD,
+				  end   = val["angle_end"].asInt() * SM_DEG_TO_RAD;
+			float scale = val["scale"].asInt() * 0.01f;
+			s2::LerpSpiral* spiral = new s2::LerpSpiral(begin, end, scale);
+			frame->SetLerp(key, spiral);
+		}
+	}
 }
 
 ee::Sprite* FileIO::LoadActor(const Json::Value& val, const std::string& dir)
@@ -509,31 +520,51 @@ Json::Value FileIO::StoreFrame(KeyFrame* frame, const std::string& dir,
 	value["time"] = frame->GetTime();
 
 	value["tween"] = frame->HasClassicTween();
-
-	const std::vector<std::pair<int, s2::ILerp*> >& lerps = frame->GetLerps();
-	for (int i = 0, n = lerps.size(); i < n; ++i) 
-	{
-		value["lerp"][i]["key"] = lerps[i].first;
-
-		Json::Value val;
-		s2::ILerp* lerp = lerps[i].second;
-		if (lerp->Type() == s2::LERP_SPIRAL) 
-		{
-			val["type"] = "spiral";
-			s2::LerpSpiral* spiral = static_cast<s2::LerpSpiral*>(lerp);
-			float begin, end;
-			spiral->GetAngle(begin, end);
-			val["angle_begin"] = static_cast<int>(begin * SM_RAD_TO_DEG);
-			val["angle_end"]   = static_cast<int>(end * SM_RAD_TO_DEG);
-			val["angle_scale"] = static_cast<int>(spiral->GetScale() * 100);
-		}
-		value["lerp"][i]["val"] = val;
-	}
+	value["lerp"] = StoreLerp(frame);
 
 	for (size_t i = 0, n = frame->Size(); i < n; ++i)
 		value["actor"][i] = StoreActor(frame->GetSprite(i), dir, single);
 
 	value["skeleton"] = StoreSkeleton(frame->GetSkeletonData());
+
+	return value;
+}
+
+Json::Value FileIO::StoreLerp(KeyFrame* frame)
+{
+	Json::Value value;
+
+	const std::vector<std::pair<int, s2::ILerp*> >& lerps = frame->GetLerps();
+	for (int i = 0, n = lerps.size(); i < n; ++i) 
+	{
+		value[i]["key"] = lerps[i].first;
+
+		Json::Value val;
+		s2::ILerp* lerp = lerps[i].second;
+		switch (lerp->Type())
+		{
+		case s2::LERP_CIRCLE:
+			{
+				val["type"] = "circle";
+				s2::LerpCircle* circle = static_cast<s2::LerpCircle*>(lerp);
+				val["scale"] = static_cast<int>(circle->GetScale() * 100);
+			}
+			break;
+		case s2::LERP_SPIRAL:
+			{
+				val["type"] = "spiral";
+				s2::LerpSpiral* spiral = static_cast<s2::LerpSpiral*>(lerp);
+				float begin, end;
+				spiral->GetAngle(begin, end);
+				val["angle_begin"] = static_cast<int>(begin * SM_RAD_TO_DEG);
+				val["angle_end"]   = static_cast<int>(end * SM_RAD_TO_DEG);
+				val["scale"] = static_cast<int>(spiral->GetScale() * 100);
+			}
+			break;
+		}
+
+		value[i]["val"] = val;
+	}
 
 	return value;
 }

@@ -1,6 +1,7 @@
 #include "FrameLerpDialog.h"
 #include "dataset/KeyFrame.h"
 
+#include <sprite2/LerpCircle.h>
 #include <sprite2/LerpSpiral.h>
 #include <sprite2/AnimLerp.h>
 #include <sm_const.h>
@@ -22,7 +23,13 @@ FrameLerpDialog::FrameLerpDialog(wxWindow* parent, KeyFrame* frame)
 
 void FrameLerpDialog::Store()
 {
-	if (m_pos_spiral->IsChecked())
+	if (m_pos_circle->IsChecked()) 
+	{
+		float scale = m_circle_scale->GetValue() * 0.01f;
+		s2::LerpCircle* lerp = new s2::LerpCircle(scale);
+		m_frame->SetLerp(s2::AnimLerp::SPR_POS, lerp);
+	}
+	else if (m_pos_spiral->IsChecked())
 	{
 		float start = m_spiral_angle_begin->GetValue() * SM_DEG_TO_RAD,
 			  end = m_spiral_angle_end->GetValue() * SM_DEG_TO_RAD;
@@ -38,9 +45,64 @@ void FrameLerpDialog::Store()
 
 void FrameLerpDialog::InitLayout()
 {
+	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
+
+	sizer->Add(InitCircleLayout());
+	sizer->AddSpacer(10);
+	sizer->Add(InitSpiralLayout());
+
+	{
+		SetEscapeId(wxID_CANCEL);
+		sizer->Add(CreateStdDialogButtonSizer(wxOK | wxCANCEL), 0, wxCENTER);
+	}
+
+	SetSizer(sizer);
+	
+	sizer->Layout();
+	Refresh(true);
+}
+
+wxSizer* FrameLerpDialog::InitCircleLayout()
+{
 	wxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
 
-	// todo
+	bool pos_circle = false;
+	int circle_scale = 100;
+
+	const std::vector<std::pair<int, s2::ILerp*> >& lerps = m_frame->GetLerps();
+	for (int i = 0, n = lerps.size(); i < n; ++i) 
+	{
+		if (lerps[i].first == s2::AnimLerp::SPR_POS &&
+			lerps[i].second->Type() == s2::LERP_CIRCLE) 
+		{
+			pos_circle = true;
+			s2::LerpCircle* lerp = static_cast<s2::LerpCircle*>(lerps[i].second);
+			circle_scale = lerp->GetScale() * 100;
+			break;
+		}
+	}
+
+	m_pos_circle = new wxCheckBox(this, wxID_ANY, ("Î»ÖÃcircle²åÖµ"));
+	m_pos_circle->SetValue(pos_circle);
+	top_sizer->Add(m_pos_circle);
+
+	{
+		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
+		sizer->Add(new wxStaticText(this, wxID_ANY, "Ëõ·Å"));
+
+		m_circle_scale = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 1000, circle_scale);
+		sizer->Add(m_circle_scale);
+
+		top_sizer->Add(sizer);
+	}
+
+
+	return top_sizer;
+}
+
+wxSizer* FrameLerpDialog::InitSpiralLayout()
+{
+	wxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
 
 	bool pos_spiral = false;
 	int sprial_begin = 0, sprial_end = 0;
@@ -49,7 +111,8 @@ void FrameLerpDialog::InitLayout()
 	const std::vector<std::pair<int, s2::ILerp*> >& lerps = m_frame->GetLerps();
 	for (int i = 0, n = lerps.size(); i < n; ++i) 
 	{
-		if (lerps[i].first == s2::AnimLerp::SPR_POS) 
+		if (lerps[i].first == s2::AnimLerp::SPR_POS &&
+			lerps[i].second->Type() == s2::LERP_SPIRAL) 
 		{
 			pos_spiral = true;
 			s2::LerpSpiral* lerp = static_cast<s2::LerpSpiral*>(lerps[i].second);
@@ -94,20 +157,9 @@ void FrameLerpDialog::InitLayout()
 		sizer->Add(m_spiral_scale);
 
 		top_sizer->Add(sizer);
-
 	}
 
-	//////////////////////////////////////////////////////////////////////////
-
-	{
-		SetEscapeId(wxID_CANCEL);
-		top_sizer->Add(CreateStdDialogButtonSizer(wxOK | wxCANCEL), 0, wxCENTER);
-	}
-
-	SetSizer(top_sizer);
-	
-	top_sizer->Layout();
-	Refresh(true);
+	return top_sizer;
 }
 
 }
