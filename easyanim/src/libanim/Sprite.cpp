@@ -70,10 +70,10 @@ ee::PropertySetting* Sprite::CreatePropertySetting(ee::EditPanelImpl* stage)
 	return new PropertySetting(stage, this);
 }
 
-void Sprite::SetStaticTime(int static_time) 
-{ 
+void Sprite::SetStaticTime(int static_time)
+{
 	m_static_time = static_time;
-	SetTime(static_time);
+	SetFrame(static_time);
 }
 
 ee::Sprite* Sprite::Create(ee::Symbol* sym) 
