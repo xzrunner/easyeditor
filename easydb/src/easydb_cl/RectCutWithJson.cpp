@@ -13,6 +13,7 @@
 #include <ee/Config.h>
 #include <ee/SettingData.h>
 #include <ee/SymbolFile.h>
+#include <ee/SymbolType.h>
 
 #include <easyimage.h>
 #include <easycomplex.h>
@@ -191,7 +192,7 @@ void RectCutWithJson::FixComplex(const std::string& src_dir, const std::string& 
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	for (int i = 0, n = value["sprite"].size(); i < n; ++i) {
-		FixFilepath(src_dir, dst_dir, dir, value["sprite"][i]["filepath"]);
+		FixFilepath(src_dir, dst_dir, dir, value["sprite"][i]);
 	}
 
 	Json::StyledStreamWriter writer;
@@ -218,7 +219,7 @@ void RectCutWithJson::FixAnim(const std::string& src_dir, const std::string& dst
 		for (int frame_i = 0, frame_n = layer_val["frame"].size(); frame_i < frame_n; ++frame_i) {
 			Json::Value& frame_val = layer_val["frame"][frame_i];
 			for (int actor_i = 0, actor_n = frame_val["actor"].size(); actor_i < actor_n; ++actor_i) {
-				FixFilepath(src_dir, dst_dir, dir, frame_val["actor"][actor_i]["filepath"]);
+				FixFilepath(src_dir, dst_dir, dir, frame_val["actor"][actor_i]);
 			}
 		}
 	}	
@@ -243,7 +244,7 @@ void RectCutWithJson::FixScale9(const std::string& src_dir, const std::string& d
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	for (int i = 0, n = value["sprite"].size(); i < n; ++i) {
-		FixFilepath(src_dir, dst_dir, dir, value["sprite"][i]["filepath"]);
+		FixFilepath(src_dir, dst_dir, dir, value["sprite"][i]);
 	}
 
 	Json::StyledStreamWriter writer;
@@ -266,7 +267,7 @@ void RectCutWithJson::FixParticle3d(const std::string& src_dir, const std::strin
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	for (int i = 0, n = value["components"].size(); i < n; ++i) {
-		FixFilepath(src_dir, dst_dir, dir, value["components"][i]["filepath"]);
+		FixFilepath(src_dir, dst_dir, dir, value["components"][i]);
 	}
 
 	Json::StyledStreamWriter writer;
@@ -301,7 +302,10 @@ void RectCutWithJson::FixMesh(const std::string& src_dir, const std::string& dst
 void RectCutWithJson::FixFilepath(const std::string& src_dir, const std::string& dst_dir,
 								  const std::string& file_dir, Json::Value& val) const
 {
-	std::string filepath = val.asString();
+	std::string filepath = val["filepath"].asString();
+	if (filepath == ee::SYM_GROUP_TAG) {
+		return FixGroup(src_dir, dst_dir, file_dir, val);
+	}
 	if (ee::SymbolFile::Instance()->Type(filepath) != s2::SYM_IMAGE) {
 		return;
 	}
@@ -323,7 +327,15 @@ void RectCutWithJson::FixFilepath(const std::string& src_dir, const std::string&
 	
 	std::string out_json_dir = dst_dir + "\\" + JSON_DIR;
 	std::string fixed_filepath = out_json_dir + "\\" + filename;
-	val = ee::FileHelper::GetRelativePath(file_dir, fixed_filepath);
+	val["filepath"] = ee::FileHelper::GetRelativePath(file_dir, fixed_filepath);
+}
+
+void RectCutWithJson::FixGroup(const std::string& src_dir, const std::string& dst_dir, 
+							   const std::string& file_dir, Json::Value& val) const
+{
+	for (int i = 0, n = val["group"].size(); i < n; ++i) {
+		FixFilepath(src_dir, dst_dir, file_dir, val["group"][i]);
+	}
 }
 
 }
