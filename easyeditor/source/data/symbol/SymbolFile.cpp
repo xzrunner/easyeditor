@@ -81,7 +81,7 @@ int SymbolFile::Type(const std::string& filepath) const
 		reader.parse(fin, val);
 		fin.close();
 
-		if (val.isMember("skeleton") && !val["skeleton"].isArray() && val["skeleton"].isMember("spine")) {
+		if (!val.isArray() && val.isMember("skeleton") && !val["skeleton"].isArray() && val["skeleton"].isMember("spine")) {
 			return s2::SYM_ANIM2;
 		}
 
