@@ -493,6 +493,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\libsprpacker\PackIDMgr.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libsprpacker\PackIDMgr.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libsprpacker\PackNodeFactory.cpp"
 				>
 			</File>

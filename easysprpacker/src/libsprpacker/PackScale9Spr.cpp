@@ -27,7 +27,7 @@ void PackScale9Spr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::Text
 	lua::comments(gen, "file: " + GetFilepath());
 
 	lua::assign_with_end(gen, "type", "\"scale9_spr\"");
-	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(m_id));
+	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(GetID()));
 
 	lua::connect(gen, 3, 
 		lua::assign("sym_id", m_sym->GetID()), 
@@ -57,7 +57,7 @@ int PackScale9Spr::SizeOfPackToBin() const
 void PackScale9Spr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, 
 							  float scale) const
 {
-	uint32_t id = m_id;
+	uint32_t id = GetID();
 	pack(id, ptr);
 
 	uint8_t type = simp::TYPE_SCALE9_SPR;

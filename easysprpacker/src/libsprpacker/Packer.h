@@ -20,6 +20,8 @@ public:
 	void OutputEpe(const std::string& outfile, bool compress, float scale = 1) const;
 	void OutputEpt(const std::string& outfile, int LOD = 0, float scale = 1) const;
 
+	void OutputSprID(const std::string& outfile) const;
+
 private:
 	void LoadJsonData(const std::string& dir);
 	void LoadTPData(const std::string& tp_name);

@@ -29,9 +29,9 @@ void PackParticle2d::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::Tex
 	lua::comments(gen, "file: " + GetFilepath());
 
 	lua::assign_with_end(gen, "type", "\"particle2d\"");
-	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(m_id));
-	if (!m_name.empty()) {
-		lua::assign_with_end(gen, "export", "\"" + m_name + "\"");
+	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(GetID()));
+	if (!GetName().empty()) {
+		lua::assign_with_end(gen, "export", "\"" + GetName() + "\"");
 	}
 
 	{
@@ -98,7 +98,7 @@ int PackParticle2d::SizeOfPackToBin() const
 
 void PackParticle2d::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scale) const
 {
-	uint32_t id = m_id;
+	uint32_t id = GetID();
 	pack(id, ptr);
 
 	uint8_t type = simp::TYPE_PARTICLE2D;

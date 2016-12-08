@@ -37,20 +37,19 @@ public:
 		float scale) const = 0;
 
 	void SetName(const std::string& name) { m_name = name; }
+	const std::string& GetName() const { return m_name; }
 
-	int GetID() const { return m_id; }
+	int GetID() const;
+	int GetNodeID() const { return m_node_id; }
 
-	void SetFilepath(const std::string& filepath) const {
-		m_filepath = filepath;
-	}
-	const std::string& GetFilepath() const {
-		return m_filepath;
-	}
+	void SetFilepath(const std::string& filepath) const;
+	const std::string& GetFilepath() const { return m_filepath; }
 
-protected:
+private:
 	std::string m_name;
 
-	int m_id;
+	mutable int m_node_id;
+	mutable int m_pkg_id;
 
 	mutable std::string m_filepath;
 

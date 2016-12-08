@@ -36,7 +36,7 @@ void PackImage::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TextureP
 	lua::comments(gen, "file: " + GetFilepath());
 
 	lua::assign_with_end(gen, "type", "\"image\"");
-	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(m_id));
+	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(GetID()));
 
 	int idx = tp.QueryIdx(m_img->GetFilepath());
 	if (idx == -1) {
@@ -80,7 +80,7 @@ int PackImage::SizeOfPackToBin() const
 
 void PackImage::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scale) const
 {
-	uint32_t id = m_id;
+	uint32_t id = GetID();
 	pack(id, ptr);
 
 	uint8_t type = simp::TYPE_IMAGE;

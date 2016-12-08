@@ -27,7 +27,7 @@ void PackShapeSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::Textu
 	lua::comments(gen, "file: " + GetFilepath());
 
 	lua::assign_with_end(gen, "type", "\"shape_spr\"");
-	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(m_id));
+	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(GetID()));
 
 	lua::connect(gen, 1, 
 		lua::assign("shape_id", m_sym->GetID()));
@@ -52,7 +52,7 @@ int PackShapeSpr::SizeOfPackToBin() const
 
 void PackShapeSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scale) const
 {
-	uint32_t id = m_id;
+	uint32_t id = GetID();
 	pack(id, ptr);
 
 	uint8_t type = simp::TYPE_SHAPE_SPR;

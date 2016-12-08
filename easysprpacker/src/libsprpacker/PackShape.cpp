@@ -69,7 +69,7 @@ void PackShape::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TextureP
 	lua::comments(gen, "file: " + GetFilepath());
 
 	lua::assign_with_end(gen, "type", "\"shape\"");
-	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(m_id));
+	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(GetID()));
 
 	lua::assign_with_end(gen, "shape_type", m_type);
 	if (m_type == gum::SHAPE_POLYGON_TEXTURE) {
@@ -104,7 +104,7 @@ int PackShape::SizeOfPackToBin() const
 
 void PackShape::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scale) const
 {
-	uint32_t id = m_id;
+	uint32_t id = GetID();
 	pack(id, ptr);
 
 	uint8_t type = simp::TYPE_SHAPE;

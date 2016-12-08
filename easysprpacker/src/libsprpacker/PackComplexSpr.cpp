@@ -25,7 +25,7 @@ void PackComplexSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::Tex
 	lua::comments(gen, "file: " + GetFilepath());
 
 	lua::assign_with_end(gen, "type", "\"complex_spr\"");
-	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(m_id));
+	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(GetID()));
 
 	lua::connect(gen, 2, 
 		lua::assign("sym_id", m_sym->GetID()), 
@@ -52,7 +52,7 @@ int PackComplexSpr::SizeOfPackToBin() const
 
 void PackComplexSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scale) const
 {
-	uint32_t id = m_id;
+	uint32_t id = GetID();
 	pack(id, ptr);
 
 	uint8_t type = simp::TYPE_COMPLEX_SPR;

@@ -42,7 +42,7 @@ void PackMeshSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::Textur
 	gen.tab();
 
 	lua::assign_with_end(gen, "type", "\"mesh_spr\"");
-	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(m_id));
+	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(GetID()));
 
 	lua::connect(gen, 1, 
 		lua::assign("mesh_id", m_mesh->GetID()));
@@ -75,7 +75,7 @@ int PackMeshSpr::SizeOfPackToBin() const
 
 void PackMeshSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scale) const
 {
-	uint32_t id = m_id;
+	uint32_t id = GetID();
 	pack(id, ptr);
 
 	uint8_t type = simp::TYPE_MESH_SPR;

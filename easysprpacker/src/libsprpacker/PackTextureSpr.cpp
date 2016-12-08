@@ -27,7 +27,7 @@ void PackTextureSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::Tex
 	lua::comments(gen, "file: " + GetFilepath());
 
 	lua::assign_with_end(gen, "type", "\"texture_spr\"");
-	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(m_id));
+	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(GetID()));
 
 	lua::connect(gen, 1, 
 		lua::assign("texture_id", m_sym->GetID()));
@@ -52,7 +52,7 @@ int PackTextureSpr::SizeOfPackToBin() const
 
 void PackTextureSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scale) const
 {
-	uint32_t id = m_id;
+	uint32_t id = GetID();
 	pack(id, ptr);
 
 	uint8_t type = simp::TYPE_TEXTURE_SPR;

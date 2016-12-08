@@ -49,6 +49,7 @@ const PackNode* LabelBuilder::Create(const etext::Sprite* spr)
 	}
 
 	PackLabel* node = new PackLabel(spr);
+	node->SetFilepath(dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath());
 	m_data.push_back(node);
 	node->AddReference();
 	return node;

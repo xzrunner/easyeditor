@@ -23,12 +23,9 @@ public:
 
 	static ICommand* Create() { return new PackEPNew(); }
 
-// 	void Trigger(const std::string& pkgs_cfg_file, const std::string& json_dir, 
-// 		const std::string& tp_json, const std::string& tp_dir, const std::string& out_file, 
-// 		const std::string& type, int LOD, float scale);
 	void Trigger(const std::string& json_dir, const std::string& tp_json, 
 		const std::string& tp_dir, const std::string& out_file, 
-		const std::string& type, int LOD, float scale, const std::string& default_sym);
+		const std::string& type, int LOD, float scale);
 
 }; // PackEPNew
 

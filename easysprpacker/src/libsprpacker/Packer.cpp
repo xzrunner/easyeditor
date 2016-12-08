@@ -2,6 +2,8 @@
 #include "PackNodeFactory.h"
 #include "PackToLua.h"
 #include "PackToBin.h"
+#include "PackNode.h"
+#include "PackIDMgr.h"
 
 #include <ee/TextureFactory.h>
 #include <ee/SettingData.h>
@@ -67,6 +69,36 @@ void Packer::OutputEpt(const std::string& outfile, int LOD, float scale) const
 {
 	OutputEptDesc(outfile);
 	erespacker::PackToBin::PackEPT(outfile, m_tp, LOD, scale);
+}
+
+void Packer::OutputSprID(const std::string& outfile) const
+{
+	std::vector<PackNode*> nodes;
+	PackNodeFactory::Instance()->FetchAll(nodes);
+	if (nodes.empty()) {
+		return;
+	}
+
+	Json::Value value;
+	for (int i = 0, n = nodes.size(); i < n; ++i) 
+	{
+		PackNode* node = nodes[i];
+		if (!PackIDMgr::Instance()->IsCurrPkg(node->GetFilepath())) {
+			continue;
+		}
+
+		Json::Value item;
+		item["file"] = node->GetFilepath();
+		item["id"] = node->GetID();
+		value[value.size()] = item;
+	}
+
+	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
+	std::ofstream fout(outfile.c_str());
+	std::locale::global(std::locale("C"));
+	writer.write(fout, value);
+	fout.close();	
 }
 
 void Packer::LoadJsonData(const std::string& dir)

@@ -1,6 +1,7 @@
 #include "PackToLua.h"
 #include "PackNode.h"
 #include "PackNodeFactory.h"
+#include "PackIDMgr.h"
 
 #include <easybuilder.h>
 
@@ -24,6 +25,9 @@ void PackToLua::Pack(const std::string& filepath, const ee::TexturePacker& tp, f
 	ebuilder::CodeGenerator gen;
 	gen.line("return {");
 	for (int i = 0, n = nodes.size(); i < n; ++i) {
+		if (!PackIDMgr::Instance()->IsCurrPkg(nodes[i]->GetFilepath())) {
+			continue;
+		}
 		nodes[i]->PackToLuaString(gen, tp, scale);
 	}
 	gen.line("}");

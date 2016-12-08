@@ -24,7 +24,7 @@ std::string PackEPNew::Description() const
 
 std::string PackEPNew::Usage() const
 {
-	return Command() + " [json dir] [tp json] [tp dir] [output file] [output type] [LOD] [SCALE] [DEFAULT SYMBOL]";
+	return Command() + " [json dir] [tp json] [tp dir] [output file] [output type] [LOD] [SCALE] [DEFAULT SYMBOL] [PLATFORM] [PKG_ID_FILE] [CURR PKG]";
 }
 
 int PackEPNew::Run(int argc, char *argv[])
@@ -52,28 +52,30 @@ int PackEPNew::Run(int argc, char *argv[])
 
 // 	Trigger(argv[2], argv[3], argv[4], argv[5], argv[6], argv[7], LOD, scale);
 
-	std::string default_sym;
 	if (argc >= 10) {
-		default_sym = argv[9];
+		std::string default_sym = argv[9];
+		if (ee::FileHelper::IsFileExist(default_sym)) {
+			ee::ImageDataMgr::Instance()->SetDefaultSym(ee::FileHelper::FormatFilepathAbsolute(default_sym));
+		}
 	}
-	Trigger(argv[2], argv[3], argv[4], argv[5], argv[6], LOD, scale, default_sym);
+
+	if (argc >= 12) {
+		esprpacker::PackIDMgr* ids_mgr = esprpacker::PackIDMgr::Instance();
+		ids_mgr->Init(argv[11], argv[10]);
+		ids_mgr->AddCurrPath(argv[12]);
+		ids_mgr->AddCurrPath(argv[2]);
+	}
+
+	Trigger(argv[2], argv[3], argv[4], argv[5], argv[6], LOD, scale);
 
 	return 0;
 }
 
-// void PackEPNew::Trigger(const std::string& pkgs_cfg_file,
-// 					 const std::string& json_dir, const std::string& tp_json,
-// 					 const std::string& tp_dir, const std::string& out_file,
-// 					 const std::string& type, int LOD, float scale)
 void PackEPNew::Trigger(const std::string& json_dir, const std::string& tp_json,
 					 const std::string& tp_dir, const std::string& out_file,
-					 const std::string& type, int LOD, float scale,
-					 const std::string& default_sym)
+					 const std::string& type, int LOD, float scale)
 {
-	ee::ImageDataMgr::Instance()->SetDefaultSym(ee::FileHelper::FormatFilepathAbsolute(default_sym));
-
 	esprpacker::Packer packer(json_dir, tp_json, tp_dir);
-
 	if (type == "lua") {
 		packer.OutputLua(out_file + ".lua", scale);
 	} else if (type == "ep") {

@@ -3,6 +3,7 @@
 #include "PackNodeFactory.h"
 #include "ExportNameSet.h"
 #include "binary_io.h"
+#include "PackIDMgr.h"
 
 #include <ee/StringHelper.h>
 
@@ -35,6 +36,14 @@ void PackToBin::Pack(const std::string& filepath,
 	// src nodes
 	std::vector<PackNode*> nodes;
 	PackNodeFactory::Instance()->FetchAll(nodes);
+	std::vector<PackNode*>::iterator itr = nodes.begin();
+	for ( ; itr != nodes.end(); ) {
+		if (!PackIDMgr::Instance()->IsCurrPkg((*itr)->GetFilepath())) {
+			itr = nodes.erase(itr);
+		} else {
+			++itr;
+		}
+	}
 	if (nodes.empty()) {
 		return;
 	}
@@ -217,7 +226,7 @@ PackToBin::Page::
 void PackToBin::Page::
 Insert(PackNode* node)
 {
-	int id = node->GetID();
+	int id = node->GetNodeID();
 	if (id < m_id_min) {
 		m_id_min = id;
 	}

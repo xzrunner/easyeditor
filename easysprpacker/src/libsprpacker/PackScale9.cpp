@@ -35,7 +35,7 @@ void PackScale9::PackToLuaString(ebuilder::CodeGenerator& gen,
 	lua::comments(gen, "file: " + GetFilepath());
 
 	lua::assign_with_end(gen, "type", "\"scale9\"");
-	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(m_id));
+	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(GetID()));
 
 	lua::assign_with_end(gen, "s9_type", m_type);
 	for (int i = 0, n = m_grids.size(); i < n; ++i) 
@@ -92,7 +92,7 @@ int PackScale9::SizeOfPackToBin() const
 
 void PackScale9::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scale) const
 {
-	uint32_t id = m_id;
+	uint32_t id = GetID();
 	pack(id, ptr);
 
 	uint8_t type = simp::TYPE_SCALE9;

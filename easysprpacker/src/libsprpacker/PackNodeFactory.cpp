@@ -174,8 +174,7 @@ const PackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 		throw ee::Exception("PackNodeFactory::Create unknown sprite type.");
 	}
 
-	assert(node);
-	node->SetFilepath(ee::FileHelper::GetRelativePath(m_files_dir, dynamic_cast<const  ee::Symbol*>(spr->GetSymbol())->GetFilepath()));
+	assert(node && node->GetID() != 0xffffffff);
 
 	return node;
 }
@@ -237,7 +236,7 @@ const PackNode* PackNodeFactory::Create(const ee::Symbol* sym)
 		throw ee::Exception("PackNodeFactory::Create unknown symbol type.");
 	}
 
-	node->SetFilepath(ee::FileHelper::GetRelativePath(m_files_dir, sym->GetFilepath()));
+	assert(node && node->GetID() != 0xffffffff);
 
 	return node;
 }

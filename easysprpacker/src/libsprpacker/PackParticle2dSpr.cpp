@@ -26,9 +26,9 @@ void PackParticle2dSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::
 	lua::comments(gen, "file: " + GetFilepath());
 
 	lua::assign_with_end(gen, "type", "\"p2d_spr\"");
-	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(m_id));
-	if (!m_name.empty()) {
-		lua::assign_with_end(gen, "export", "\"" + m_name + "\"");
+	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(GetID()));
+	if (!GetName().empty()) {
+		lua::assign_with_end(gen, "export", "\"" + GetName() + "\"");
 	}
 
 	lua::connect(gen, 1, 
@@ -59,7 +59,7 @@ int PackParticle2dSpr::SizeOfPackToBin() const
 
 void PackParticle2dSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scale) const
 {
-	uint32_t id = m_id;
+	uint32_t id = GetID();
 	pack(id, ptr);
 
 	uint8_t type = simp::TYPE_P2D_SPR;

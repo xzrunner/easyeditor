@@ -71,7 +71,7 @@ void PackIcon::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePa
 		lua::assign("base_id", m_base->GetID()));
 
 	lua::assign_with_end(gen, "type", "\"icon\"");
-	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(m_id));
+	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(GetID()));
 
 	lua::assign_with_end(gen, "icon_type", m_type);
 
@@ -101,7 +101,7 @@ int PackIcon::SizeOfPackToBin() const
 
 void PackIcon::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scale) const
 {
-	uint32_t id = m_id;
+	uint32_t id = GetID();
 	pack(id, ptr);
 
 	uint8_t type = simp::TYPE_ICON;
