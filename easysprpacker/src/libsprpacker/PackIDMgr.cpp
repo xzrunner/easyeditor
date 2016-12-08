@@ -3,6 +3,7 @@
 #include <ee/std_functor.h>
 #include <ee/FileHelper.h>
 #include <ee/Exception.h>
+#include <ee/SymbolType.h>
 
 #include <gum/FilepathHelper.h>
 
@@ -118,6 +119,9 @@ void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id) 
 
 bool PackIDMgr::IsCurrPkg(const std::string& filepath) const
 {
+	if (filepath == ee::SYM_GROUP_TAG) {
+		return true;
+	}
 	for (int i = 0, n = m_curr_paths.size(); i < n; ++i) {
 		if (filepath.find(m_curr_paths[i]) != std::string::npos) {
 			return true;
