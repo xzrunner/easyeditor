@@ -100,6 +100,9 @@ bool PackMeshSpr::Equal(const emesh::Sprite* spr) const
 		return false;
 	}
 	const std::map<sm::vec2, sm::vec2, sm::Vector2Cmp>& map = spr->GetMeshTrans().GetMap();
+	if (m_trans_pairs.size() != map.size() * 2) {
+		return false;
+	}
 	std::map<sm::vec2, sm::vec2, sm::Vector2Cmp>::const_iterator itr = map.begin();
 	int idx = 0;
 	for ( ; itr != map.end(); ++itr) {
