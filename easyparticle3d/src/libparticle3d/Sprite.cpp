@@ -88,11 +88,7 @@ void Sprite::OnActive()
 {
 	// removed from buffer
 	if (!m_spr) {
-		CreateSpr();
-	}
-
-	if (m_alone) {
-		p3d_buffer_insert(m_spr);
+		CreateSpr();		
 	}
 }
 
