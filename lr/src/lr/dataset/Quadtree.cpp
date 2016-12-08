@@ -200,7 +200,7 @@ IsContain(const ee::Sprite* spr) const
 	const eshape::PolygonShape* poly = dynamic_cast<const eshape::PolygonShape*>(shape);
 
 	std::vector<sm::vec2> bound;
-	sm::trans_vertices(spr->GetTransMatrix(), poly->GetVertices(), bound);
+	sm::trans_vertices(spr->GetLocalMat(), poly->GetVertices(), bound);
 
 	return sm::is_rect_intersect_polyline(m_rect, bound, true);
 }
@@ -266,7 +266,7 @@ GetContainArea(const ee::Sprite* spr) const
 	const eshape::PolygonShape* poly = dynamic_cast<const eshape::PolygonShape*>(shape);
 
 	std::vector<sm::vec2> bound;
-	sm::trans_vertices(spr->GetTransMatrix(), poly->GetVertices(), bound);
+	sm::trans_vertices(spr->GetLocalMat(), poly->GetVertices(), bound);
 
 	std::vector<sm::vec2> loop;
 	loop.push_back(sm::vec2(m_rect.xmin, m_rect.ymin));

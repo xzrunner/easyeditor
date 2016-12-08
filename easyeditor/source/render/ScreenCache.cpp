@@ -94,7 +94,7 @@ static void _cs_draw(struct dtex_cs_rect* r, void* ud)
 		const Sprite* spr = sprs[i];
 
 		s2::RenderParams params;
-		params.mt = spr->GetTransMatrix();
+		params.mt = spr->GetLocalMat();
 		spr->GetSymbol()->Draw(params);
 	}
 

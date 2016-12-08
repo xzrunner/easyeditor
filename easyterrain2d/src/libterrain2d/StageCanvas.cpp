@@ -50,7 +50,7 @@ void StageCanvas::OnDrawSprites() const
 	if (m_edited && m_bg) 
 	{
 		s2::RenderParams params;
-		params.mt = m_edited->GetTransInvMatrix();
+		params.mt = m_edited->GetLocalInvMat();
 		ee::SpriteRenderer::Instance()->Draw(m_bg, params);
 	}
 

@@ -10,7 +10,7 @@ void DrawUtils::DrawBody(Body* body, DrawType dType)
 	s2::Color cFace, cEdge;
 	GetBodyColor(body->m_type, dType, cFace, cEdge);
 
-	body->Draw(body->m_spr->GetTransMatrix(), cFace, cEdge);
+	body->Draw(body->m_spr->GetLocalMat(), cFace, cEdge);
 }
 
 void DrawUtils::DrawFixture(Fixture* fixture, 
@@ -22,7 +22,7 @@ void DrawUtils::DrawFixture(Fixture* fixture,
 	else
 		GetBodyColor(fixture->m_body->m_type, dType, cFace, cEdge);
 
-	fixture->Draw(fixture->m_body->m_spr->GetTransMatrix(), cFace, cEdge);
+	fixture->Draw(fixture->m_body->m_spr->GetLocalMat(), cFace, cEdge);
 }
 
 void DrawUtils::GetBodyColor(Body::Type type, DrawType dType,

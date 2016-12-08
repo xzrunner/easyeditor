@@ -49,7 +49,7 @@ void StageCanvas::OnDrawSprites() const
 	if (m_edited && m_bg) 
 	{
 		s2::RenderParams params;
-		params.mt = m_edited->GetTransInvMatrix();
+		params.mt = m_edited->GetLocalInvMat();
 		ee::SpriteRenderer::Instance()->Draw(m_bg, params);
 	}
 
@@ -75,7 +75,7 @@ void StageCanvas::DrawSprBound() const
 	float hw = tb.width * 0.5f,
 		  hh = tb.height * 0.5f;
 
-	sm::mat4 mt = m_edited->GetTransMatrix();
+	sm::mat4 mt = m_edited->GetLocalMat();
 	sm::vec2 min(-hw, -hh), max(hw, hh);
 	min = mt * min;
 	max = mt * max;

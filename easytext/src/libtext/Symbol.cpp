@@ -36,7 +36,7 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 
 	const ee::SettingData& setting = ee::Config::Instance()->GetSettings();
 	if (setting.visible_label_bg) {
-		sm::mat4 mt = spr->GetTransMatrix() * params.mt;
+		sm::mat4 mt = spr->GetLocalMat() * params.mt;
 		DrawBackground(dynamic_cast<const Sprite*>(spr), mt);
 	} 
  	if (setting.visible_label_text) {

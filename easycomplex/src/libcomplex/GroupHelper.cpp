@@ -70,7 +70,7 @@ void GroupHelper::BreakUp(ee::Sprite* group, std::vector<ee::Sprite*>& sprs)
 //		float _angle = angle + spr->GetAngle();
 		float _angle = angle;
 
-		sm::vec2 _pos = group->GetTransMatrix() * spr->GetPosition();
+		sm::vec2 _pos = group->GetLocalMat() * spr->GetPosition();
 
 		const sm::vec2& gs = group->GetScale();
 		if (gs.x < 0 && gs.x >= 0 ||

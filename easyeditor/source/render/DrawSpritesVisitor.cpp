@@ -36,7 +36,7 @@ void DrawSpritesVisitor::Visit(Sprite* spr, bool& next)
 	const std::string& name = spr->GetName();
 	if (cfg.visible_node_name && !name.empty() && name[0] != '_') 
 	{
-		sm::mat4 t = spr->GetTransMatrix();
+		sm::mat4 t = spr->GetLocalMat();
 		float s = std::max(1.0f, m_cam_scale) * cfg.node_name_scale;
 		t.Scale(s, s, 1);
 		gum::GTxt::Instance()->Draw(t, name);

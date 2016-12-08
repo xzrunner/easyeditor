@@ -28,7 +28,7 @@ void Symbol::DrawSkeleton(const s2::RenderParams& params, const s2::Sprite* spr,
 
 	s2::RenderParams p = params;
 	if (spr) {
-		p.mt = spr->GetTransMatrix() * params.mt;
+		p.mt = spr->GetLocalMat() * params.mt;
 		p.color = spr->GetColor() * params.color;
 	}
 

@@ -34,7 +34,7 @@ void PreviewCanvas::OnDrawSprites() const
 
 		const sm::vec2& pos = spr->GetPosition();
 
-		sm::mat4 inv_mt = spr->GetTransInvMatrix();
+		sm::mat4 inv_mt = spr->GetLocalInvMat();
 		sm::mat4 translate_mt;
 		translate_mt.Translate(pos.x, pos.y, 0);
 		sm::mat4 mt = translate_mt * (m_scale_mt * inv_mt);
