@@ -5,6 +5,7 @@
 #include <ee/Exception.h>
 #include <ee/SymbolType.h>
 
+#include <simp/NodeFactory.h>
 #include <gum/FilepathHelper.h>
 
 #include <json/json.h>
@@ -114,12 +115,12 @@ void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id) 
 	if (itr == pkg->sprs.end()) {
 		throw ee::Exception("query spr id fail: %s", filepath.c_str());
 	}
-	node_id = itr->second;
+	node_id = simp::NodeFactory::GetNodeID(itr->second);
 }
 
 bool PackIDMgr::IsCurrPkg(const std::string& filepath) const
 {
-	if (filepath == ee::SYM_GROUP_TAG) {
+	if (filepath.empty() || filepath == ee::SYM_GROUP_TAG) {
 		return true;
 	}
 	for (int i = 0, n = m_curr_paths.size(); i < n; ++i) {
