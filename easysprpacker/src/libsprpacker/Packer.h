@@ -20,7 +20,7 @@ public:
 	void OutputEpe(const std::string& outfile, bool compress, float scale = 1) const;
 	void OutputEpt(const std::string& outfile, int LOD = 0, float scale = 1) const;
 
-	void OutputSprID(const std::string& outfile) const;
+	void OutputSprID(const std::string& pkg_name, const std::string& res_dir) const;
 
 private:
 	void LoadJsonData(const std::string& dir);

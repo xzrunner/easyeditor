@@ -29,8 +29,6 @@ PackIDMgr::~PackIDMgr()
 void PackIDMgr::Init(const std::string& filepath, const std::string& platform)
 {
 	std::string fix = gum::FilepathHelper::Format(filepath);
-	fix = ee::FileHelper::FormatFilepath(fix);
-
 	m_dir = ee::FileHelper::GetFileDir(fix);
 	m_platform = platform;
 
@@ -71,7 +69,6 @@ void PackIDMgr::Init(const std::string& filepath, const std::string& platform)
 void PackIDMgr::AddCurrPath(const std::string& path)
 {
 	std::string fix = gum::FilepathHelper::Format(path);
-	fix = ee::FileHelper::FormatFilepath(fix);
 	m_curr_paths.push_back(fix);
 
 	if (m_curr_pkg) {
@@ -112,8 +109,7 @@ void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id) 
 
 	pkg_id = pkg->id;
 	
-	std::string spr_path = filepath.substr(filepath.find(pkg->path) + pkg->path.size());
-	std::map<std::string, int>::iterator itr = pkg->sprs.find(spr_path);
+	std::map<std::string, int>::iterator itr = pkg->sprs.find(filepath);
 	if (itr == pkg->sprs.end()) {
 		throw ee::Exception("query spr id fail: %s", filepath.c_str());
 	}
@@ -128,6 +124,11 @@ bool PackIDMgr::IsCurrPkg(const std::string& filepath) const
 		}
 	}
 	return false;
+}
+
+std::string PackIDMgr::GetSprIDFile(const std::string& pkg_name) const
+{
+	return m_dir + "\\spr" + "\\" + m_platform + "\\" + pkg_name + ".json";
 }
 
 void PackIDMgr::InitSprsID(const std::string& filepath, Package* pkg) const
@@ -149,11 +150,6 @@ void PackIDMgr::InitSprsID(const std::string& filepath, Package* pkg) const
 		int id = spr_val["id"].asInt();
 		pkg->sprs.insert(std::make_pair(filepath, id));
 	}
-}
-
-std::string PackIDMgr::GetSprIDFile(const std::string& pkg_name) const
-{
-	return m_dir + "\\spr" + "\\" + m_platform + "\\" + pkg_name + ".json";
 }
 
 }

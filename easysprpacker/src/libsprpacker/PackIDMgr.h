@@ -21,6 +21,8 @@ public:
 
 	bool IsCurrPkg(const std::string& filepath) const;
 
+	std::string GetSprIDFile(const std::string& pkg_name) const;
+
 private:
 	struct Package
 	{
@@ -32,8 +34,6 @@ private:
 	};
 
 	void InitSprsID(const std::string& filepath, Package* pkg) const;
-
-	std::string GetSprIDFile(const std::string& pkg_name) const;
 
 private:
 	std::string m_dir;

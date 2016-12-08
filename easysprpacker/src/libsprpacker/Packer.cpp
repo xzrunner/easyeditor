@@ -20,6 +20,7 @@
 #include <dtex.h>
 #include <gimg_typedef.h>
 #include <sprite2/SymType.h>
+#include <gum/FilepathHelper.h>
 
 #include <wx/arrstr.h>
 #include <wx/filename.h>
@@ -71,7 +72,7 @@ void Packer::OutputEpt(const std::string& outfile, int LOD, float scale) const
 	erespacker::PackToBin::PackEPT(outfile, m_tp, LOD, scale);
 }
 
-void Packer::OutputSprID(const std::string& outfile) const
+void Packer::OutputSprID(const std::string& pkg_name, const std::string& res_dir) const
 {
 	std::vector<PackNode*> nodes;
 	PackNodeFactory::Instance()->FetchAll(nodes);
@@ -88,14 +89,16 @@ void Packer::OutputSprID(const std::string& outfile) const
 		}
 
 		Json::Value item;
-		item["file"] = node->GetFilepath();
+		item["file"] = gum::FilepathHelper::Relative(res_dir, node->GetFilepath());
 		item["id"] = node->GetID();
 		value[value.size()] = item;
 	}
 
+	std::string filepath = PackIDMgr::Instance()->GetSprIDFile(pkg_name);
+
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
-	std::ofstream fout(outfile.c_str());
+	std::ofstream fout(filepath.c_str());
 	std::locale::global(std::locale("C"));
 	writer.write(fout, value);
 	fout.close();	
