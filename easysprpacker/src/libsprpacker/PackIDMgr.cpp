@@ -173,7 +173,7 @@ void PackIDMgr::InitSprsID(const std::string& filepath, Package* pkg) const
 		std::string filepath = spr_val["file"].asString();
 
 		filepath = gum::FilepathHelper::Absolute(pkg->path, filepath);
-		if (!gum::FilepathHelper::Exists(pkg->path + "\\" + filepath)) {
+		if (!gum::FilepathHelper::Exists(filepath)) {
 			continue;
 		}
 		filepath = gum::FilepathHelper::Format(filepath);
