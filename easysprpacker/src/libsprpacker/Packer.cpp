@@ -80,16 +80,36 @@ void Packer::OutputSprID(const std::string& pkg_name, const std::string& res_dir
 		return;
 	}
 
+	PackIDMgr* id_mgr = PackIDMgr::Instance();
+
 	Json::Value value;
 	for (int i = 0, n = nodes.size(); i < n; ++i) 
 	{
 		PackNode* node = nodes[i];
-		if (!PackIDMgr::Instance()->IsCurrPkg(node->GetFilepath())) {
+		if (!id_mgr->IsCurrPkg(node->GetFilepath())) {
 			continue;
 		}
 
+		std::string filepath = gum::FilepathHelper::Relative(res_dir, node->GetFilepath());
+		if (id_mgr->IsCurrImgCut()) 
+		{
+			std::string img, json, ori;
+			id_mgr->GetCurrImgCutPath(img, json, ori);
+			if (filepath.compare(0, img.size(), img) == 0) {
+				continue;
+			} else if (filepath.compare(0, json.size(), json) == 0) {
+				filepath = filepath.substr(json.size() + 1);
+				ee::StringHelper::ReplaceAll(filepath, "%", "\\");
+				ee::StringHelper::ReplaceAll(filepath, "_complex.json", ".png");
+			} else if (filepath.compare(0, ori.size(), ori) == 0) {
+				filepath = filepath.substr(ori.size() + 1);
+			} else {
+				throw ee::Exception("Packer::OutputSprID: err file %s", filepath.c_str());
+			}
+		} 
+
 		Json::Value item;
-		item["file"] = gum::FilepathHelper::Relative(res_dir, node->GetFilepath());
+		item["file"] = filepath;
 		item["id"] = node->GetID();
 		value[value.size()] = item;
 	}

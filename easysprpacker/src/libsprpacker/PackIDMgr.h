@@ -23,6 +23,9 @@ public:
 
 	std::string GetSprIDFile(const std::string& pkg_name) const;
 
+	bool IsCurrImgCut() const { return m_curr_pkg ? m_curr_pkg->img_cut : false; }
+	void GetCurrImgCutPath(std::string& img, std::string& json, std::string& ori) const;
+
 private:
 	struct Package
 	{
@@ -31,6 +34,9 @@ private:
 		int id;
 
 		std::map<std::string, int> sprs;
+
+		bool img_cut;
+		std::string cut_img, cut_json, cut_ori;
 	};
 
 	void InitSprsID(const std::string& filepath, Package* pkg) const;

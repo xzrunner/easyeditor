@@ -49,15 +49,25 @@ void PackIDMgr::Init(const std::string& filepath, const std::string& platform)
 	m_pkgs.reserve(val.size());
 	for (int i = 0, n = val.size(); i < n; ++i)
 	{
+		const Json::Value& src = val[i];
+
 		Package* pkg = new Package;
 		
-		pkg->name = val[i]["name"].asString();
+		pkg->name = src["name"].asString();
 
-		pkg->path = val[i]["path"].asString();
+		pkg->path = src["path"].asString();
 		pkg->path = ee::FileHelper::GetAbsolutePath(m_dir, pkg->path);
 		pkg->path = ee::FileHelper::FormatFilepath(pkg->path);
 
-		pkg->id = val[i]["pkg_id"].asInt();
+		pkg->id = src["pkg_id"].asInt();
+
+		pkg->img_cut = false;
+		if (src.isMember("img_cut")) {
+			pkg->img_cut = true;
+			pkg->cut_img = src["img_cut"]["img"].asString();
+			pkg->cut_json = src["img_cut"]["json"].asString();
+			pkg->cut_ori = src["img_cut"]["ori"].asString();
+		}
 
 		std::string spr_id_file = GetSprIDFile(pkg->name);
 		if (ee::FileHelper::IsFileExist(spr_id_file)) {
@@ -134,6 +144,17 @@ bool PackIDMgr::IsCurrPkg(const std::string& filepath) const
 std::string PackIDMgr::GetSprIDFile(const std::string& pkg_name) const
 {
 	return m_dir + "\\spr" + "\\" + m_platform + "\\" + pkg_name + ".json";
+}
+
+void PackIDMgr::GetCurrImgCutPath(std::string& img, std::string& json, std::string& ori) const
+{
+	if (!m_curr_pkg) {
+		return;
+	}
+
+	img = m_curr_pkg->cut_img;
+	json = m_curr_pkg->cut_json;
+	ori = m_curr_pkg->cut_ori;
 }
 
 void PackIDMgr::InitSprsID(const std::string& filepath, Package* pkg) const
