@@ -56,6 +56,7 @@ const PackNode* SymBuilder<TSymbol, TPack>::Create(const TSymbol* sym)
 
 	TPack* node = new TPack(sym);
 	node->SetFilepath(sym->GetFilepath());
+	node->SetID(sym->GetFilepath());
 	if (m_export_name) {
 		ExportNameSet::Instance()->Insert(sym, node);
 	}

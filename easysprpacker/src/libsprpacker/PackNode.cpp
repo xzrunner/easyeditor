@@ -20,6 +20,10 @@ int PackNode::GetID() const
 void PackNode::SetFilepath(const std::string& filepath) const 
 {
 	m_filepath = filepath;
+}
+
+void PackNode::SetID(const std::string& filepath) const
+{
 	PackIDMgr::Instance()->QueryID(filepath, m_pkg_id, m_node_id);
 }
 

@@ -171,9 +171,18 @@ void PackIDMgr::InitSprsID(const std::string& filepath, Package* pkg) const
 	{
 		const Json::Value& spr_val = val[i];
 		std::string filepath = spr_val["file"].asString();
-		filepath = ee::FileHelper::GetAbsolutePath(pkg->path, filepath);
-		ee::FileHelper::FormatFilepath(filepath);
+
+		filepath = gum::FilepathHelper::Absolute(pkg->path, filepath);
+		if (!gum::FilepathHelper::Exists(pkg->path + "\\" + filepath)) {
+			continue;
+		}
+		filepath = gum::FilepathHelper::Format(filepath);
 		int id = spr_val["id"].asInt();
+
+		if (pkg->sprs.find(filepath) != pkg->sprs.end()) {
+			throw ee::Exception("PackIDMgr::InitSprsID: dup filepath %s", filepath.c_str());
+		}
+
 		pkg->sprs.insert(std::make_pair(filepath, id));
 	}
 }

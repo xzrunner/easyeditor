@@ -90,7 +90,11 @@ void Packer::OutputSprID(const std::string& pkg_name, const std::string& res_dir
 			continue;
 		}
 
-		std::string filepath = gum::FilepathHelper::Relative(res_dir, node->GetFilepath());
+		std::string filepath = node->GetFilepath();
+		if (filepath == "sprite" || filepath == "group") {
+			continue;
+		}
+		filepath = gum::FilepathHelper::Relative(res_dir, filepath);
 		if (id_mgr->IsCurrImgCut()) 
 		{
 			std::string img, json, ori;
@@ -107,6 +111,10 @@ void Packer::OutputSprID(const std::string& pkg_name, const std::string& res_dir
 				throw ee::Exception("Packer::OutputSprID: err file %s", filepath.c_str());
 			}
 		} 
+
+		if (filepath.empty()) {
+			throw ee::Exception("Packer::OutputSprID: empty filepath %s", node->GetFilepath().c_str());
+		}
 
 		Json::Value item;
 		item["file"] = filepath;

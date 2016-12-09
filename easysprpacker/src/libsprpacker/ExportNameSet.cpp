@@ -1,6 +1,7 @@
 #include "ExportNameSet.h"
 #include "check.h"
 #include "PackNode.h"
+#include "PackIDMgr.h"
 
 #include <ee/Symbol.h>
 #include <ee/Exception.h>
@@ -20,6 +21,10 @@ ExportNameSet::~ExportNameSet()
 
 void ExportNameSet::Insert(const ee::Symbol* sym, PackNode* node)
 {
+	if (!PackIDMgr::Instance()->IsCurrPkg(sym->GetFilepath())) {
+		return;
+	}
+
 	std::string export_name = sym->name;
 	if (!is_name_valid(export_name)) {
 		return;
