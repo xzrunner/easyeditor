@@ -436,6 +436,10 @@
 				RelativePath="..\..\..\src\libsprpacker\to_int.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\libsprpacker\typedef.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="builder"

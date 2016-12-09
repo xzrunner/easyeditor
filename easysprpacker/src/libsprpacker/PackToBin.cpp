@@ -12,6 +12,8 @@
 #include <simp/simp_define.h>
 #include <simp/Page.h>
 
+#include <simp/NodeFactory.h>
+
 #include <map>
 #include <algorithm>
 

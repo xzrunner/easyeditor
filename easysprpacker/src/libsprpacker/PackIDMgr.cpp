@@ -1,4 +1,5 @@
 #include "PackIDMgr.h"
+#include "typedef.h"
 
 #include <ee/std_functor.h>
 #include <ee/FileHelper.h>
@@ -130,7 +131,7 @@ void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id) 
 
 bool PackIDMgr::IsCurrPkg(const std::string& filepath) const
 {
-	if (filepath.empty() || filepath == ee::SYM_GROUP_TAG) {
+	if (filepath.empty() || filepath == ee::SYM_GROUP_TAG || filepath == SPRITE_FILEPATH) {
 		return true;
 	}
 	for (int i = 0, n = m_curr_paths.size(); i < n; ++i) {

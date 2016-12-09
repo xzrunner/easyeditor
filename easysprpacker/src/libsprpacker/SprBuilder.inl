@@ -1,6 +1,8 @@
 #ifndef _EASYSPRPACKER_SPR_BUILDER_INL_
 #define _EASYSPRPACKER_SPR_BUILDER_INL_
 
+#include "typedef.h"
+
 namespace esprpacker
 {
 
@@ -53,7 +55,7 @@ const PackNode* SprBuilder<TSymbol, TSprite, TPack>::Create(const TSprite* spr)
 
 	key->AddReference();
 	TPack* node = new TPack(spr);
-	node->SetFilepath("sprite");
+	node->SetFilepath(SPRITE_FILEPATH);
 	node->SetID(dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath());
 	node->AddReference();
 	m_map_data.insert(std::make_pair(key, node));

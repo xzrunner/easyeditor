@@ -4,6 +4,7 @@
 #include "PackToBin.h"
 #include "PackNode.h"
 #include "PackIDMgr.h"
+#include "typedef.h"
 
 #include <ee/TextureFactory.h>
 #include <ee/SettingData.h>
@@ -13,6 +14,7 @@
 #include <ee/StringHelper.h>
 #include <ee/Symbol.h>
 #include <ee/SymbolFile.h>
+#include <ee/SymbolType.h>
 
 #include <easyrespacker.h>
 
@@ -91,7 +93,7 @@ void Packer::OutputSprID(const std::string& pkg_name, const std::string& res_dir
 		}
 
 		std::string filepath = node->GetFilepath();
-		if (filepath == "sprite" || filepath == "group") {
+		if (filepath.empty() || filepath == SPRITE_FILEPATH || filepath == ee::SYM_GROUP_TAG) {
 			continue;
 		}
 		filepath = gum::FilepathHelper::Relative(res_dir, filepath);

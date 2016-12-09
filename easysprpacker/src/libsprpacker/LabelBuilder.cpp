@@ -1,5 +1,6 @@
 #include "LabelBuilder.h"
 #include "PackLabel.h"
+#include "typedef.h"
 
 #include <easytext.h>
 
@@ -49,7 +50,7 @@ const PackNode* LabelBuilder::Create(const etext::Sprite* spr)
 	}
 
 	PackLabel* node = new PackLabel(spr);
-	node->SetFilepath("sprite");
+	node->SetFilepath(SPRITE_FILEPATH);
 	node->SetID(dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath());
 	m_data.push_back(node);
 	node->AddReference();
