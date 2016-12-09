@@ -86,9 +86,10 @@ PackTrans::PackTrans(const s2::Sprite& spr, bool force_name)
 	if (!name.empty()) {
 		if (name[0] == '_') {
 			if (force_name) {
-				std::string::size_type pos = name.find_first_of("_sprite");
-				if (pos != std::string::npos) {
+				if (name.compare(0, strlen("_sprite"), "_sprite") == 0) {
 					m_name = "_" + name.substr(strlen("_sprite"));
+				} else {
+					m_name = name;
 				}
 			}
 		} else {
