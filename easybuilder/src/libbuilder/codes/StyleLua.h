@@ -40,8 +40,9 @@ static void assign_with_end(CodeGenerator& gen,
 	gen.line(name+" = "+val+",");
 }
 
+template<typename T>
 static void assign_with_end(CodeGenerator& gen, 
-	const std::string& name, float val)
+	const std::string& name, const T& val)
 {
 	gen.line(name+" = "+ee::StringHelper::ToString(val)+",");
 }
