@@ -8,6 +8,7 @@ namespace lua = ebuilder::lua;
 
 #include <simp/NodeLabel.h>
 #include <simp/simp_types.h>
+#include <gum/StringHelper.h>
 
 namespace esprpacker
 {
@@ -153,8 +154,8 @@ void PackLabel::Init(const etext::Sprite* spr)
 {
 	m_tb = spr->GetTextbox();
 
-	m_text = spr->GetText();
-	m_tid = spr->GetTID();
+	m_text = gum::StringHelper::ToUtf8(spr->GetText());
+	m_tid = gum::StringHelper::ToUtf8(spr->GetTID());
 }
 
 }
