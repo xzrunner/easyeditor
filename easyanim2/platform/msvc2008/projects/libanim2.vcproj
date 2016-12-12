@@ -200,6 +200,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="property"
+				>
+				<File
+					RelativePath="..\..\..\src\libanim2\PropertySetting.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libanim2\PropertySetting.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="dataset"
