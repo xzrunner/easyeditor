@@ -5,6 +5,8 @@
 #include <ee/SpriteFactory.h>
 #include <ee/FileHelper.h>
 #include <ee/SymbolType.h>
+#include <ee/Exception.h>
+#include <ee/LogMgr.h>
 
 #include <sprite2/RenderParams.h>
 
@@ -56,8 +58,15 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 
 		s2::ComplexSymbol* sym = dynamic_cast<s2::ComplexSymbol*>(m_sym);
 		dynamic_cast<ee::Symbol*>(m_sym)->SetFilepath(ee::SYM_GROUP_TAG);
-		for (int i = 0, n = val[ee::SYM_GROUP_TAG].size(); i < n; ++i) {
-			ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(val[ee::SYM_GROUP_TAG][i], _dir);
+		for (int i = 0, n = val[ee::SYM_GROUP_TAG].size(); i < n; ++i) 
+		{
+			ee::Sprite* spr = NULL;
+			try {
+				spr = ee::SpriteFactory::Instance()->Create(val[ee::SYM_GROUP_TAG][i], _dir);
+			} catch (ee::Exception& e) {
+				ee::LogMgr::Instance()->AddException(e.What());
+				continue;
+			}
 			sym->Add(spr);
 			spr->RemoveReference();
 		}
