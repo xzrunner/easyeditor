@@ -317,7 +317,10 @@ void PackRes::GetImagesFromJson(const std::vector<std::string>& src_dirs, const 
 			reader.parse(fin, value);
 			fin.close();
 
-			GetImagesFromJson(src_dirs, value["base_symbol"].asString(), img_set);
+			std::string filepath = value["base_symbol"].asString();
+			filepath = ee::FileHelper::GetAbsolutePath(dir, filepath);
+			filepath = ee::FileHelper::FormatFilepathAbsolute(filepath);
+			GetImagesFromJson(src_dirs, filepath, img_set);
 		}
 		break;
 	case s2::SYM_MASK:
@@ -330,8 +333,16 @@ void PackRes::GetImagesFromJson(const std::vector<std::string>& src_dirs, const 
 			reader.parse(fin, value);
 			fin.close();
 
-			GetImagesFromJson(src_dirs, value["base"]["filepath"].asString(), img_set);
-			GetImagesFromJson(src_dirs, value["mask"]["filepath"].asString(), img_set);
+			std::string filepath = value["base"]["filepath"].asString();
+			filepath = ee::FileHelper::GetAbsolutePath(dir, filepath);
+			filepath = ee::FileHelper::FormatFilepathAbsolute(filepath);
+			GetImagesFromJson(src_dirs, filepath, img_set);
+
+
+			filepath = value["mask"]["filepath"].asString();
+			filepath = ee::FileHelper::GetAbsolutePath(dir, filepath);
+			filepath = ee::FileHelper::FormatFilepathAbsolute(filepath);
+			GetImagesFromJson(src_dirs, filepath, img_set);
 		}
 		break;
 	default:
