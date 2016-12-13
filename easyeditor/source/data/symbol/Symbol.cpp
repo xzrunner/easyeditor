@@ -1,6 +1,7 @@
 #include "Symbol.h"
 #include "SymbolMgr.h"
 #include "FileHelper.h"
+#include "SymbolType.h"
 
 namespace ee
 {
@@ -18,7 +19,9 @@ void Symbol::ClearUserData(bool deletePtr)
 bool Symbol::LoadFromFile(const std::string& filepath)
 {
 	m_name = FileHelper::GetFilename(filepath);
-	m_filepath = FileHelper::GetExistFilepath(filepath);
+	if (filepath != SYM_GROUP_TAG) {
+		m_filepath = FileHelper::GetExistFilepath(filepath);
+	}
 	m_bitmap = NULL;
 	if (m_filepath == wxEmptyString) {
 		m_filepath = filepath;
