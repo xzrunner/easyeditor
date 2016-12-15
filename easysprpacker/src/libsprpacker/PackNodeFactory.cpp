@@ -2,6 +2,7 @@
 #include "SymBuilder.h"
 #include "SprBuilder.h"
 #include "LabelBuilder.h"
+#include "ComplexBuilder.h"
 
 #include "PackImage.h"
 #include "PackScale9.h"
@@ -39,6 +40,7 @@
 #include <easymesh.h>
 #include <easymask.h>
 #include <easytrail.h>
+#include <easyrespacker.h>
 
 #include <ee/ImageSprite.h>
 #include <ee/ImageSymbol.h>
@@ -57,7 +59,6 @@ SymBuilder<ee::ImageSymbol, PackImage>*										IMAGE_BUILDER;
 SymBuilder<escale9::Symbol, PackScale9>*									SCALE9_BUILDER;
 SymBuilder<eicon::Symbol, PackIcon>*										ICON_BUILDER;
 SymBuilder<etexture::Symbol, PackTexture>*									TEXTURE_BUILDER;
-SymBuilder<ecomplex::Symbol, PackComplex>*									COMPLEX_BUILDER;
 SymBuilder<libanim::Symbol, PackAnimation>*									ANIM_BUILDER;
 SymBuilder<eparticle3d::Symbol, PackParticle3d>*							P3D_BUILDER;
 SymBuilder<eparticle2d::Symbol, PackParticle2d>*							P2D_BUILDER;
@@ -84,7 +85,6 @@ PackNodeFactory::PackNodeFactory()
 	SCALE9_BUILDER		= new SymBuilder<escale9::Symbol, PackScale9>();
 	ICON_BUILDER		= new SymBuilder<eicon::Symbol, PackIcon>();
 	TEXTURE_BUILDER		= new SymBuilder<etexture::Symbol, PackTexture>();
-	COMPLEX_BUILDER		= new SymBuilder<ecomplex::Symbol, PackComplex>(true);
 	ANIM_BUILDER		= new SymBuilder<libanim::Symbol, PackAnimation>(true);
 	P3D_BUILDER			= new SymBuilder<eparticle3d::Symbol, PackParticle3d>(true);
 	P2D_BUILDER			= new SymBuilder<eparticle2d::Symbol, PackParticle2d>(true);
@@ -201,7 +201,7 @@ const PackNode* PackNodeFactory::Create(const ee::Symbol* sym)
 	}
 	// complex
 	else if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(sym)) {
-		node = COMPLEX_BUILDER->Create(complex);
+		node = ComplexBuilder::Instance()->Create(complex);
 	}
 	// anim
 	else if (const libanim::Symbol* anim = dynamic_cast<const libanim::Symbol*>(sym)) {
@@ -238,6 +238,9 @@ const PackNode* PackNodeFactory::Create(const ee::Symbol* sym)
 
 	assert(node && node->GetID() != 0xffffffff);
 
+	erespacker::PackUI::Instance()->OnKnownPackID(sym->GetFilepath(), node->GetID());
+	erespacker::PackTag::Instance()->OnKnownPackID(sym->GetFilepath(), node->GetID());	
+
 	return node;
 }
 
@@ -261,7 +264,7 @@ void PackNodeFactory::FetchAllBuilder(std::vector<NodeBuilder*>& builders)
 	builders.push_back(ICON_BUILDER);
 	builders.push_back(TEXTURE_BUILDER);
 	builders.push_back(LabelBuilder::Instance());
-	builders.push_back(COMPLEX_BUILDER);
+	builders.push_back(ComplexBuilder::Instance());
 	builders.push_back(ANIM_BUILDER);
 	builders.push_back(P3D_BUILDER);
 	builders.push_back(P2D_BUILDER);

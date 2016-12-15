@@ -476,6 +476,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="06.complex"
+				>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\ComplexBuilder.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\ComplexBuilder.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="pack"

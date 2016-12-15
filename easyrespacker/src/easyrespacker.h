@@ -15,5 +15,8 @@
 #include "librespacker/pack_unpack.h"
 #include "librespacker/Lzma.h"
 #include "librespacker/PackToBin.h"
+#include "librespacker/PackUI.h"
+#include "librespacker/PackUIWindowTask.h"
+#include "librespacker/PackTag.h"
 
 #endif // _EASYRESPACKER_H_

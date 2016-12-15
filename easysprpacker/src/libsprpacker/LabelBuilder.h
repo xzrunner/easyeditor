@@ -5,6 +5,8 @@
 
 #include <CU_Singleton.h>
 
+#include <json/json.h>
+
 #include <vector>
 
 namespace etext { class Sprite; }
@@ -23,8 +25,10 @@ public:
 
 	const PackNode* Create(const etext::Sprite* spr);
 
+	void OutputExtraInfo(Json::Value& value) const;
+
 private:
-	std::vector<const PackLabel*> m_data;
+	std::vector<const PackLabel*> m_labels;
 
 	SINGLETON_DECLARATION(LabelBuilder);
 

@@ -86,25 +86,26 @@ void PackEPNew::Trigger(const std::string& json_dir, const std::string& tp_json,
 	} else if (type == "ep") {
 		packer.OutputEpe(out_file, true, scale);
 		packer.OutputEpt(out_file, LOD, scale);
-// 		packer.OutputUIExtra(out_file);
+ 		packer.OutputUIExtra(out_file);
  		packer.OutputSprID(pkg_name, res_dir);
 	} else if (type == "epe") {
 		packer.OutputEpe(out_file, true, scale);
-// 		packer.OutputUIExtra(out_file);
+ 		packer.OutputUIExtra(out_file);
  		packer.OutputSprID(pkg_name, res_dir);
 	} else if (type == "ept") {
 		packer.OutputEpt(out_file, LOD, scale);
 	} else if (type == "debug") {
 		packer.OutputLua(out_file + ".lua", scale);
 		packer.OutputEpe(out_file, true, scale);
-// 		packer.OutputUIExtra(out_file);
+ 		packer.OutputUIExtra(out_file);
  		packer.OutputSprID(pkg_name, res_dir);
 	} else if (type == "all") {
 		packer.OutputLua(out_file + ".lua", scale);
 		packer.OutputEpe(out_file, true, scale);
 		packer.OutputEpt(out_file, LOD, scale);
-// 		packer.OutputUIExtra(out_file);
+ 		packer.OutputUIExtra(out_file);
  		packer.OutputSprID(pkg_name, res_dir);
+		packer.OutputTagKeyVal(out_file);
 	}
 }
 

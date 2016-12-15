@@ -5,6 +5,7 @@
 #include "PackNode.h"
 #include "PackIDMgr.h"
 #include "typedef.h"
+#include "LabelBuilder.h"
 
 #include <ee/TextureFactory.h>
 #include <ee/SettingData.h>
@@ -16,7 +17,9 @@
 #include <ee/SymbolFile.h>
 #include <ee/SymbolType.h>
 
+#include <easycomplex.h>
 #include <easyrespacker.h>
+#include <easyui.h>
 
 #include <CU_RefCountObj.h>
 #include <dtex.h>
@@ -72,6 +75,28 @@ void Packer::OutputEpt(const std::string& outfile, int LOD, float scale) const
 {
 	OutputEptDesc(outfile);
 	erespacker::PackToBin::PackEPT(outfile, m_tp, LOD, scale);
+}
+
+void Packer::OutputUIExtra(const std::string& outfile) const
+{
+	std::string dir = ee::FileHelper::GetFileDir(outfile);
+
+	Json::Value value;
+
+	erespacker::PackUI::Instance()->Output(dir, value);
+	LabelBuilder::Instance()->OutputExtraInfo(value);
+
+	if (value.isNull()) {
+		return;
+	}
+
+	std::string filepath = outfile + "_ui.json";
+	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
+	std::ofstream fout(filepath.c_str());
+	std::locale::global(std::locale("C"));
+	writer.write(fout, value);
+	fout.close();
 }
 
 void Packer::OutputSprID(const std::string& pkg_name, const std::string& res_dir) const
@@ -134,6 +159,27 @@ void Packer::OutputSprID(const std::string& pkg_name, const std::string& res_dir
 	fout.close();	
 }
 
+void Packer::OutputTagKeyVal(const std::string& outfile) const
+{
+	std::string dir = ee::FileHelper::GetFileDir(outfile);
+
+	Json::Value value;
+
+	erespacker::PackTag::Instance()->Output(dir, value);
+
+	if (value.isNull()) {
+		return;
+	}
+
+	std::string filepath = outfile + "_tag.json";
+	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
+	std::ofstream fout(filepath.c_str());
+	std::locale::global(std::locale("C"));
+	writer.write(fout, value);
+	fout.close();
+}
+
 void Packer::LoadJsonData(const std::string& dir)
 {
 	wxArrayString files;
@@ -146,11 +192,18 @@ void Packer::LoadJsonData(const std::string& dir)
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath();
 		int type = ee::SymbolFile::Instance()->Type(filepath);
-		if (type == s2::SYM_COMPLEX || 
-			type == s2::SYM_ANIMATION ||
-			type == s2::SYM_PARTICLE3D ||
-			type == s2::SYM_TRAIL) {
+		switch (type)
+		{
+		case s2::SYM_COMPLEX: case s2::SYM_ANIMATION: case s2::SYM_PARTICLE3D: case s2::SYM_TRAIL:
 			filepaths.push_back(filepath);
+			break;
+		case ee::SYM_UI:
+			erespacker::PackUI::Instance()->AddTask(filepath);
+			break;
+		case ee::SYM_UIWND:
+			erespacker::PackUI::Instance()->AddWindowTask(filepath);
+			AddUIWndSymbol(filepath);
+			break;
 		}
 	}
 
@@ -182,6 +235,32 @@ void Packer::Pack() const
 	for (int i = 0, n = m_syms.size(); i < n; ++i) {
 		factory->Create(m_syms[i]);
 	}
+}
+
+void Packer::AddUIWndSymbol(const std::string& filepath)
+{
+	Json::Value val;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filepath.c_str());
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, val);
+	fin.close();
+
+	std::vector<ee::Sprite*> sprs;
+	eui::window::FileIO::FetchSprites(filepath, sprs);
+
+	ecomplex::Symbol* sym = new ecomplex::Symbol();	
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		sym->Add(sprs[i]);
+	}
+	for_each(sprs.begin(), sprs.end(), cu::RemoveRefFunctor<ee::Sprite>());
+
+	std::string wrapper_path = erespacker::PackUIWindowTask::GetWrapperFilepath(filepath);
+	sym->SetFilepath(wrapper_path);
+	sym->name = val["name"].asString();
+
+	m_syms.push_back(sym);
 }
 
 void Packer::OutputEptDesc(const std::string& outfile) const
