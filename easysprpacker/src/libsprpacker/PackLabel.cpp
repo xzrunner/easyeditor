@@ -71,8 +71,10 @@ void PackLabel::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TextureP
 int PackLabel::SizeOfUnpackFromBin() const
 {
 	int sz = simp::NodeLabel::Size();
-	sz += sizeof_unpack_str(m_text);	
-	sz += sizeof_unpack_str(m_tid);	
+// 	sz += sizeof_unpack_str(m_text);	
+// 	sz += sizeof_unpack_str(m_tid);	
+	sz += sizeof_unpack_str("");	
+	sz += sizeof_unpack_str("");	
 	return sz;
 }
 
