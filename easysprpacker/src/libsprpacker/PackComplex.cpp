@@ -165,9 +165,18 @@ void PackComplex::Init(const ecomplex::Symbol* sym)
 		Action dst;
 		dst.m_name = src.name;
 		dst.m_sprs.reserve(src.sprs.size());
-		for (int j = 0, m = src.sprs.size(); j < m; ++j) {
-			dst.m_sprs.push_back(PackNodeFactory::Instance()->Create(
-				dynamic_cast<ee::Sprite*>(src.sprs[j])));
+		for (int j = 0, m = src.sprs.size(); j < m; ++j) 
+		{
+			int idx = -1;
+			for (int k = 0; k < children.size(); ++k) {
+				if (src.sprs[j] == children[k]) {
+					idx = k;
+				}
+			}
+			assert(idx != -1);
+
+			m_children[idx]->AddReference();
+			dst.m_sprs.push_back(m_children[idx]);
 		}
 		m_actions.push_back(dst);
 	}
@@ -182,6 +191,7 @@ int PackComplex::QueryIndex(const PackNode* node) const
 			return i;
 		}
 	}
+	assert(0);
 	return -1;
 }
 
