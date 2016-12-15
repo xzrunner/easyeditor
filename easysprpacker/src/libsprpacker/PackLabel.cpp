@@ -99,8 +99,10 @@ int PackLabel::SizeOfPackToBin() const
 
 	sz += sizeof(uint8_t);				// richtext & overflow
 
-	sz += sizeof_pack_str(m_text);		// text
-	sz += sizeof_pack_str(m_tid);		// tid
+// 	sz += sizeof_pack_str(m_text);		// text
+// 	sz += sizeof_pack_str(m_tid);		// tid
+	sz += sizeof_pack_str("");		// text
+	sz += sizeof_pack_str("");		// tid
 
 	return sz;
 }
@@ -146,8 +148,10 @@ void PackLabel::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scal
 	uint8_t pack8 = (richtext) | (overflow << 1);
 	pack(pack8, ptr);
 
-	pack_str(m_text, ptr);
-	pack_str(m_tid, ptr);
+// 	pack_str(m_text, ptr);
+// 	pack_str(m_tid, ptr);
+	pack_str("", ptr);
+	pack_str("", ptr);
 }
 
 void PackLabel::Init(const etext::Sprite* spr)
