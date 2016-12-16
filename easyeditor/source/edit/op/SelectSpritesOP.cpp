@@ -16,6 +16,7 @@
 #include "Exception.h"
 #include "ExceptionDlg.h"
 #include "SymbolType.h"
+#include "FileHelper.h"
 
 #include <sprite2/S2_RVG.h>
 
@@ -289,13 +290,16 @@ Sprite* SelectSpritesOP::SelectByPos(const sm::vec2& pos) const
 
 void SelectSpritesOP::PasteSprToClipboard(const Sprite* spr, Json::Value& value) const
 {
-	value["filepath"] = dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath();
-	spr->Store(value);	
+	std::string filepath = dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath();
+	value["filepath"] = filepath;
+	std::string dir = ee::FileHelper::GetFileDir(filepath);
+	spr->Store(value, dir);	
 }
 
 void SelectSpritesOP::CopySprFromClipboard(Sprite* spr, const Json::Value& value) const
 {
-	spr->Load(value);
+	std::string dir = ee::FileHelper::GetFileDir(dynamic_cast<ee::Symbol*>(spr->GetSymbol())->GetFilepath());
+	spr->Load(value, dir);
 }
 
 void SelectSpritesOP::PasteToSelection() const
