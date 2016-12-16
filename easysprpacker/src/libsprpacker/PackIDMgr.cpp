@@ -6,8 +6,10 @@
 #include <ee/Exception.h>
 #include <ee/SymbolType.h>
 
+#include <sprite2/SymType.h>
 #include <simp/NodeFactory.h>
 #include <gum/FilepathHelper.h>
+#include <gum/SymbolFile.h>
 
 #include <json/json.h>
 
@@ -132,6 +134,9 @@ void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id) 
 bool PackIDMgr::IsCurrPkg(const std::string& filepath) const
 {
 	if (filepath.empty() || filepath == ee::SYM_GROUP_TAG || filepath == SPRITE_FILEPATH) {
+		return true;
+	}
+	if (gum::SymbolFile::Instance()->Type(filepath) == s2::SYM_TEXTBOX) {
 		return true;
 	}
 	for (int i = 0, n = m_curr_paths.size(); i < n; ++i) {
