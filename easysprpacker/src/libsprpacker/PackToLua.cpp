@@ -25,7 +25,7 @@ void PackToLua::Pack(const std::string& filepath, const ee::TexturePacker& tp, f
 	ebuilder::CodeGenerator gen;
 	gen.line("return {");
 	for (int i = 0, n = nodes.size(); i < n; ++i) {
-		if (!PackIDMgr::Instance()->IsCurrPkg(nodes[i]->GetFilepath())) {
+		if (!PackIDMgr::Instance()->IsCurrPkg(nodes[i])) {
 			continue;
 		}
 		nodes[i]->PackToLuaString(gen, tp, scale);

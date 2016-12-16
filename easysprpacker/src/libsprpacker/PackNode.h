@@ -40,6 +40,7 @@ public:
 	const std::string& GetName() const { return m_name; }
 
 	int GetID() const;
+	int GetPkgID() const { return m_pkg_id; }
 	int GetNodeID() const { return m_node_id; }
 
 	void SetFilepath(const std::string& filepath) const;

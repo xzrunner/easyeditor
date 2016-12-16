@@ -40,7 +40,7 @@ void PackToBin::Pack(const std::string& filepath,
 	PackNodeFactory::Instance()->FetchAll(nodes);
 	std::vector<PackNode*>::iterator itr = nodes.begin();
 	for ( ; itr != nodes.end(); ) {
-		if (!PackIDMgr::Instance()->IsCurrPkg((*itr)->GetFilepath())) {
+		if (!PackIDMgr::Instance()->IsCurrPkg((*itr))) {
 			itr = nodes.erase(itr);
 		} else {
 			++itr;

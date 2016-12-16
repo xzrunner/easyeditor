@@ -1,4 +1,5 @@
 #include "PackIDMgr.h"
+#include "PackNode.h"
 #include "typedef.h"
 
 #include <ee/std_functor.h>
@@ -145,6 +146,11 @@ bool PackIDMgr::IsCurrPkg(const std::string& filepath) const
 		}
 	}
 	return false;
+}
+
+bool PackIDMgr::IsCurrPkg(const PackNode* node) const
+{
+	return node->GetPkgID() == m_curr_pkg->id;
 }
 
 std::string PackIDMgr::GetSprIDFile(const std::string& pkg_name) const

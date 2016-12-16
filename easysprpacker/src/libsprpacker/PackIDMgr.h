@@ -10,6 +10,8 @@
 namespace esprpacker
 {
 
+class PackNode;
+
 class PackIDMgr
 {
 public:
@@ -20,6 +22,7 @@ public:
 	void QueryID(const std::string& filepath, int& pkg_id, int& node_id) const;
 
 	bool IsCurrPkg(const std::string& filepath) const;
+	bool IsCurrPkg(const PackNode* node) const;
 
 	std::string GetSprIDFile(const std::string& pkg_name) const;
 

@@ -113,7 +113,7 @@ void Packer::OutputSprID(const std::string& pkg_name, const std::string& res_dir
 	for (int i = 0, n = nodes.size(); i < n; ++i) 
 	{
 		PackNode* node = nodes[i];
-		if (!id_mgr->IsCurrPkg(node->GetFilepath())) {
+		if (!id_mgr->IsCurrPkg(node)) {
 			continue;
 		}
 
