@@ -7,6 +7,7 @@
 
 #include <sprite2/MeshTriangle.h>
 #include <sprite2/DrawMesh.h>
+#include <sprite2/RenderParams.h>
 #include <shaderlab.h>
 #include <SM_Triangulation.h>
 #include <SM_Process.h>
@@ -123,11 +124,11 @@ void OceanMesh::Draw(const s2::RenderParams& params, bool draw_tris) const
 	if (m_blend_open && m_image1) {
 		shader->SetColor(s2::Color(255, 255, 255, (int)(m_blend_base * 255 + 0.5f)).ToABGR(), 0);
 		for (int i = 0, n = m_grids.size(); i < n; ++i) {
-			s2::DrawMesh::DrawOnlyMesh(m_grids[i], params, m_image0->GetTexID());
+			s2::DrawMesh::DrawOnlyMesh(m_grids[i], params.mt, m_image0->GetTexID());
 		}
 		shader->SetColor(s2::Color(255, 255, 255, (int)((1 - m_blend_base) * 255 + 0.5f)).ToABGR(), 0);
 		for (int i = 0, n = m_grids.size(); i < n; ++i) {
-			s2::DrawMesh::DrawOnlyMesh(m_grids[i], params, m_image1->GetTexID());
+			s2::DrawMesh::DrawOnlyMesh(m_grids[i], params.mt, m_image1->GetTexID());
 		}
 	} else {
 		shader->SetColor(0xffffffff, 0);
