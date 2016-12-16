@@ -3,6 +3,8 @@
 
 #include <ee/TexturePacker.h>
 
+#include <set>
+
 namespace ee { class Symbol; }
 
 namespace esprpacker
@@ -32,7 +34,7 @@ private:
 
 	void Pack() const;
 
-	void AddUIWndSymbol(const std::string& filepath);
+	void AddUIWndSymbol(const std::string& filepath, std::set<std::string>& cache);
 
 	void OutputEptDesc(const std::string& outfile) const;
 

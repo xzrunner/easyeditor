@@ -185,6 +185,8 @@ void Packer::LoadJsonData(const std::string& dir)
 	wxArrayString files;
 	ee::FileHelper::FetchAllFiles(dir, files);
 
+	std::set<std::string> uiwnd_paths;
+
 	std::vector<std::string> filepaths;
 	for (int i = 0, n = files.size(); i < n; ++i) 
 	{
@@ -202,14 +204,20 @@ void Packer::LoadJsonData(const std::string& dir)
 			break;
 		case ee::SYM_UIWND:
 			erespacker::PackUI::Instance()->AddWindowTask(filepath);
-			AddUIWndSymbol(filepath);
+			AddUIWndSymbol(filepath, uiwnd_paths);
 			break;
 		}
 	}
 
 	std::sort(filepaths.begin(), filepaths.end());
-	for (int i = 0, n = filepaths.size(); i < n; ++i) {
-		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepaths[i]);
+	for (int i = 0, n = filepaths.size(); i < n; ++i) 
+	{
+		std::string filepath = filepaths[i];
+		ee::StringHelper::ToLower(filepath);
+		if (uiwnd_paths.find(filepath) != uiwnd_paths.end()) {
+			continue;
+		}
+		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 		m_syms.push_back(sym);
 	}
 }
@@ -237,7 +245,7 @@ void Packer::Pack() const
 	}
 }
 
-void Packer::AddUIWndSymbol(const std::string& filepath)
+void Packer::AddUIWndSymbol(const std::string& filepath, std::set<std::string>& cache)
 {
 	Json::Value val;
 	Json::Reader reader;
@@ -257,6 +265,7 @@ void Packer::AddUIWndSymbol(const std::string& filepath)
 	for_each(sprs.begin(), sprs.end(), cu::RemoveRefFunctor<ee::Sprite>());
 
 	std::string wrapper_path = erespacker::PackUIWindowTask::GetWrapperFilepath(filepath);
+	cache.insert(wrapper_path);
 	sym->SetFilepath(wrapper_path);
 	sym->name = val["name"].asString();
 
