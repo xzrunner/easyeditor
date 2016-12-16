@@ -192,7 +192,7 @@ void RectCutWithJson::FixComplex(const std::string& src_dir, const std::string& 
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	for (int i = 0, n = value["sprite"].size(); i < n; ++i) {
-		FixFilepath(src_dir, dst_dir, dir, value["sprite"][i]);
+		FixFilepath(src_dir, dst_dir, dir, value["sprite"][i], "filepath");
 	}
 
 	Json::StyledStreamWriter writer;
@@ -219,7 +219,7 @@ void RectCutWithJson::FixAnim(const std::string& src_dir, const std::string& dst
 		for (int frame_i = 0, frame_n = layer_val["frame"].size(); frame_i < frame_n; ++frame_i) {
 			Json::Value& frame_val = layer_val["frame"][frame_i];
 			for (int actor_i = 0, actor_n = frame_val["actor"].size(); actor_i < actor_n; ++actor_i) {
-				FixFilepath(src_dir, dst_dir, dir, frame_val["actor"][actor_i]);
+				FixFilepath(src_dir, dst_dir, dir, frame_val["actor"][actor_i], "filepath");
 			}
 		}
 	}	
@@ -244,7 +244,7 @@ void RectCutWithJson::FixScale9(const std::string& src_dir, const std::string& d
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	for (int i = 0, n = value["sprite"].size(); i < n; ++i) {
-		FixFilepath(src_dir, dst_dir, dir, value["sprite"][i]);
+		FixFilepath(src_dir, dst_dir, dir, value["sprite"][i], "filepath");
 	}
 
 	Json::StyledStreamWriter writer;
@@ -267,7 +267,7 @@ void RectCutWithJson::FixParticle3d(const std::string& src_dir, const std::strin
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	for (int i = 0, n = value["components"].size(); i < n; ++i) {
-		FixFilepath(src_dir, dst_dir, dir, value["components"][i]);
+		FixFilepath(src_dir, dst_dir, dir, value["components"][i], "filepath");
 	}
 
 	Json::StyledStreamWriter writer;
@@ -289,7 +289,7 @@ void RectCutWithJson::FixMesh(const std::string& src_dir, const std::string& dst
 	fin.close();
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
-	FixFilepath(src_dir, dst_dir, dir, value["base_symbol"]);
+	FixFilepath(src_dir, dst_dir, dir, value, "base_symbol");
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -300,9 +300,9 @@ void RectCutWithJson::FixMesh(const std::string& src_dir, const std::string& dst
 }
 
 void RectCutWithJson::FixFilepath(const std::string& src_dir, const std::string& dst_dir,
-								  const std::string& file_dir, Json::Value& val) const
+								  const std::string& file_dir, Json::Value& val, const std::string& key) const
 {
-	std::string filepath = val["filepath"].asString();
+	std::string filepath = val[key].asString();
 	if (filepath == ee::SYM_GROUP_TAG) {
 		return FixGroup(src_dir, dst_dir, file_dir, val);
 	}
@@ -327,14 +327,14 @@ void RectCutWithJson::FixFilepath(const std::string& src_dir, const std::string&
 	
 	std::string out_json_dir = dst_dir + "\\" + JSON_DIR;
 	std::string fixed_filepath = out_json_dir + "\\" + filename;
-	val["filepath"] = ee::FileHelper::GetRelativePath(file_dir, fixed_filepath);
+	val[key] = ee::FileHelper::GetRelativePath(file_dir, fixed_filepath);
 }
 
 void RectCutWithJson::FixGroup(const std::string& src_dir, const std::string& dst_dir, 
 							   const std::string& file_dir, Json::Value& val) const
 {
 	for (int i = 0, n = val["group"].size(); i < n; ++i) {
-		FixFilepath(src_dir, dst_dir, file_dir, val["group"][i]);
+		FixFilepath(src_dir, dst_dir, file_dir, val["group"][i], "filepath");
 	}
 }
 
