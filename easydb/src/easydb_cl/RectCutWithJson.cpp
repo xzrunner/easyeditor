@@ -306,12 +306,23 @@ void RectCutWithJson::FixFilepath(const std::string& src_dir, const std::string&
 	if (filepath == ee::SYM_GROUP_TAG) {
 		return FixGroup(src_dir, dst_dir, file_dir, val);
 	}
-	if (ee::SymbolFile::Instance()->Type(filepath) != s2::SYM_IMAGE) {
-		return;
-	}
 
+	int type = ee::SymbolFile::Instance()->Type(filepath);
+	if (type == s2::SYM_IMAGE) {
+		FixImageFilepath(src_dir, dst_dir, file_dir, val, key);
+	} else if (type == s2::SYM_MESH) {
+		if (val.isMember("mesh") && val["mesh"].isMember("base_symbol")) {
+			FixImageFilepath(src_dir, dst_dir, file_dir, val["mesh"], "base_symbol");
+		}
+	}
+}
+
+void RectCutWithJson::FixImageFilepath(const std::string& src_dir, const std::string& dst_dir, 
+									   const std::string& file_dir, Json::Value& val, const std::string& key) const
+{
+	std::string filepath = val[key].asString();
 	filepath = ee::FileHelper::GetAbsolutePath(file_dir, filepath);
-	
+
 	std::string filename = ee::FileHelper::GetRelativePath(src_dir, filepath);
 	filename = filename.substr(0, filename.find_last_of('.')) + "_complex.json";
 
@@ -324,9 +335,10 @@ void RectCutWithJson::FixFilepath(const std::string& src_dir, const std::string&
 		else   
 			break;   
 	}  
-	
+
 	std::string out_json_dir = dst_dir + "\\" + JSON_DIR;
 	std::string fixed_filepath = out_json_dir + "\\" + filename;
+
 	val[key] = ee::FileHelper::GetRelativePath(file_dir, fixed_filepath);
 }
 
