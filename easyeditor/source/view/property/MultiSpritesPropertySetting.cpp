@@ -5,6 +5,7 @@
 #include "Math2D.h"
 #include "StageCanvas.h"
 #include "panel_msg.h"
+#include "StringHelper.h"
 
 #include <wx/propgrid/advprops.h>
 
@@ -137,6 +138,8 @@ void MultiSpritesPropertySetting::OnPropertyGridChange(const std::string& name, 
 
 void MultiSpritesPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
+	pg->GetProperty(wxT("Count"))->SetValue(m_impl->SpriteCount());
+
 	pg->GetProperty(wxT("Tag"))->SetValue(m_impl->GetTag());
 	pg->GetProperty(wxT("Clip"))->SetValue(m_impl->GetClip());
 
@@ -184,6 +187,9 @@ void MultiSpritesPropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	pg->Append(new wxPropertyCategory("INFO", wxPG_LABEL));
 
+	std::string scount = StringHelper::ToString(m_impl->SpriteCount());
+	pg->Append(new wxStringProperty("Count", wxPG_LABEL, scount));
+	
 	pg->Append(new wxStringProperty("Tag", wxPG_LABEL, m_impl->GetTag()));
 
 	pg->Append(new wxEnumProperty(wxT("Clip"), wxPG_LABEL, MultiSpritesPropertyImpl::BOOL_3TYPE_LABELS));

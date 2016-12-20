@@ -19,6 +19,8 @@ public:
 	MultiSpritesPropertyImpl(const std::vector<Sprite*>& sprs);
 	~MultiSpritesPropertyImpl();
 
+	int SpriteCount() const { return m_sprs.size(); }
+
 public:
 	static const wxChar* BOOL_3TYPE_LABELS[];
 	static const wxChar* ALIGN_LABELS[];
