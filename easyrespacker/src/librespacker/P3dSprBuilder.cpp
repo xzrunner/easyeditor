@@ -58,13 +58,23 @@ const IPackNode* P3dSprBuilder::Create(const eparticle3d::Sprite* spr)
 		return itr->second;
 	}
 
-	PackP3dSpr* node = new PackP3dSpr;
+	PackP3dSpr* node = NULL;
+
+	const IPackNode* p3d = PackNodeFactory::Instance()->Create(dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
+	itr = m_map_data.find(sym);
+	if (itr == m_map_data.end()) {
+		node = new PackP3dSpr;
+		m_map_data.insert(std::make_pair(sym, node));
+	} else {
+		node = const_cast<PackP3dSpr*>(itr->second);
+	}
+
 	node->p3d = PackNodeFactory::Instance()->Create(dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
 	node->loop = spr->IsLoop();
 	node->local = spr->IsLocalModeDraw();
 	node->alone = spr->IsAlone();
 	node->reuse = spr->IsReuse();
-	m_map_data.insert(std::make_pair(sym, node));
+
 	return node;
 }
 
