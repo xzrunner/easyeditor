@@ -34,18 +34,6 @@ T StringHelper::FromString(const std::string& str)
 }
 
 inline
-void StringHelper::ToLower(std::string& str)
-{
-	std::transform(str.begin(), str.end(), str.begin(), std::tolower);
-}
-
-inline
-void StringHelper::ToUpper(std::string& str)
-{
-	std::transform(str.begin(), str.end(), str.begin(), std::toupper);
-}
-
-inline
 std::string StringHelper::GetLine(std::ifstream& fin)
 {
 	std::string line;
