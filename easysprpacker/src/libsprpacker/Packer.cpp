@@ -21,6 +21,7 @@
 #include <easyrespacker.h>
 #include <easyui.h>
 
+#include <render/render.h>
 #include <CU_RefCountObj.h>
 #include <dtex.h>
 #include <gimg_typedef.h>
@@ -73,7 +74,7 @@ void Packer::OutputEpe(const std::string& outfile, bool compress, float scale) c
 
 void Packer::OutputEpt(const std::string& outfile, int LOD, float scale) const
 {
-	OutputEptDesc(outfile);
+	OutputEptDesc(outfile, LOD);
 	erespacker::PackToBin::PackEPT(outfile, m_tp, LOD, scale);
 }
 
@@ -272,7 +273,7 @@ void Packer::AddUIWndSymbol(const std::string& filepath, std::set<std::string>& 
 	m_syms.push_back(sym);
 }
 
-void Packer::OutputEptDesc(const std::string& outfile) const
+void Packer::OutputEptDesc(const std::string& outfile, int LOD) const
 {
 	std::string filepath = outfile + ".ept";
 	std::locale::global(std::locale(""));
@@ -281,39 +282,44 @@ void Packer::OutputEptDesc(const std::string& outfile) const
 
 	const std::vector<const ee::TexturePacker::Texture*>& textures = m_tp.GetTextures();
 
-	int count = textures.size();
+	uint16_t tex_count = textures.size();
 
 	int out_sz = 0;
-	out_sz += sizeof(int);						// count
-	out_sz += count * sizeof(uint16_t) * 2;		// size
-	out_sz += count * sizeof(uint16_t);			// type
+	out_sz += sizeof(uint16_t);						// tex count
+	out_sz += sizeof(uint16_t);						// lod count
+	out_sz += tex_count * sizeof(uint16_t) * 2;		// size
+	out_sz += tex_count * sizeof(uint16_t);			// type
 
 	// file header
 	out_sz = -out_sz;
 	fout.write(reinterpret_cast<const char*>(&out_sz), sizeof(out_sz));
 
-	// count
-	fout.write(reinterpret_cast<const char*>(&count), sizeof(count));
+	// tex count
+	fout.write(reinterpret_cast<const char*>(&tex_count), sizeof(tex_count));
+
+	// lod count
+	uint16_t lod_count = LOD + 1;
+	fout.write(reinterpret_cast<const char*>(&lod_count), sizeof(lod_count));
 
 	// size & type
-	for (int i = 0; i < count; ++i) 
+	for (int i = 0; i < tex_count; ++i) 
 	{
 		const ee::TexturePacker::Texture* tex = textures[i];
 
 		// size
 		uint16_t w = tex->width,
-			h = tex->height;
+			     h = tex->height;
 		fout.write(reinterpret_cast<const char*>(&w), sizeof(w));
 		fout.write(reinterpret_cast<const char*>(&h), sizeof(h));
 
 		// type
 		uint16_t type = GIT_PNG;
 		if (tex->format == "pvr") {
-			type = GIT_PVR;
+			type = TEXTURE_PVR4;
 		} else if (tex->format == "etc1") {
-			type = GIT_ETC1;
+			type = TEXTURE_ETC1;
 		} else if (tex->format == "etc2") {
-			type = GIT_ETC2;
+			type = TEXTURE_ETC2;
 		}
 		fout.write(reinterpret_cast<const char*>(&type), sizeof(type));
 	}

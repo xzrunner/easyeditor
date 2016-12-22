@@ -36,7 +36,7 @@ private:
 
 	void AddUIWndSymbol(const std::string& filepath, std::set<std::string>& cache);
 
-	void OutputEptDesc(const std::string& outfile) const;
+	void OutputEptDesc(const std::string& outfile, int LOD) const;
 
 private:
 	std::vector<const ee::Symbol*> m_syms;
