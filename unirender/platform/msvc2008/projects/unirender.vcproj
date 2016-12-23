@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="0.unirender"
+	Name="1.unirender"
 	ProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
 	RootNamespace="unirender"
 	Keyword="Win32Proj"
@@ -146,169 +146,49 @@
 	</References>
 	<Files>
 		<Filter
-			Name="vector"
+			Name="external"
 			>
 			<File
-				RelativePath="..\..\..\src\unirender\sm_c_vector.cpp"
+				RelativePath="..\..\..\external\ejoy2d\blendmode.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\unirender\sm_c_vector.h"
+				RelativePath="..\..\..\external\ejoy2d\block2.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\unirender\SM_Vector.h"
+				RelativePath="..\..\..\external\ejoy2d\carray.c"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\unirender\SM_Vector.inl"
+				RelativePath="..\..\..\external\ejoy2d\carray.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\ejoy2d\render.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\ejoy2d\render.h"
 				>
 			</File>
 		</Filter>
-		<Filter
-			Name="matrix"
+		<File
+			RelativePath="..\..\..\source\RenderTarget.cpp"
 			>
-			<File
-				RelativePath="..\..\..\src\unirender\sm_c_matrix.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\unirender\sm_c_matrix.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\unirender\SM_Matrix.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\unirender\SM_Matrix.inl"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="quaternion"
+		</File>
+		<File
+			RelativePath="..\..\..\include\unirender\RenderTarget.h"
 			>
-			<File
-				RelativePath="..\..\..\src\unirender\SM_Quaternion.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\unirender\SM_Quaternion.inl"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="math"
+		</File>
+		<File
+			RelativePath="..\..\..\source\Texture.cpp"
 			>
-			<File
-				RelativePath="..\..\..\src\unirender\sm_c_calc.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\unirender\sm_c_calc.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\unirender\SM_Calc.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\unirender\SM_Calc.inl"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\unirender\SM_Process.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\unirender\SM_Process.inl"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\unirender\SM_Test.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\unirender\SM_Test.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\unirender\SM_Test.inl"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="utility"
+		</File>
+		<File
+			RelativePath="..\..\..\include\unirender\Texture.h"
 			>
-			<File
-				RelativePath="..\..\..\src\unirender\sm_const.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="complex"
-			>
-			<Filter
-				Name="plane"
-				>
-				<File
-					RelativePath="..\..\..\src\unirender\SM_Plane.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\unirender\SM_Plane.inl"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="rect"
-				>
-				<File
-					RelativePath="..\..\..\src\unirender\SM_Rect.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\unirender\SM_Rect.inl"
-					>
-				</File>
-			</Filter>
-		</Filter>
-		<Filter
-			Name="algorithms"
-			>
-			<File
-				RelativePath="..\..\..\src\unirender\SM_ConvexHull.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\unirender\SM_ConvexHull.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\unirender\SM_CosineSmooth.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\unirender\SM_CosineSmooth.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\unirender\SM_DouglasPeucker.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\unirender\SM_DouglasPeucker.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\unirender\SM_Triangulation.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\unirender\SM_Triangulation.h"
-				>
-			</File>
-		</Filter>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Intel C++ Project"
 	Version="11.1"
-	Name="0.unirender"
-	ProjectGUID="{7BE11C48-28EA-4B5F-9D43-A8B0B5C554F3}"
+	Name="1.unirender"
+	ProjectGUID="{0ECDF7C8-1E3E-47D5-9543-3BB58CEBAC90}"
 	VCNestedProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
 	VCNestedProjectFileName="unirender.vcproj">
 	<Configurations>
