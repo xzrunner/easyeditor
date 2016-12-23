@@ -7,8 +7,6 @@
 #include <ee/DrawShapesVisitor.h>
 #include <ee/Config.h>
 
-#include <gum/GUM_DTex.h>
-
 namespace emesh
 {
 

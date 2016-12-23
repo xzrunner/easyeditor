@@ -14,7 +14,6 @@
 #include <easymesh.h>
 #include <easyparticle3d.h>
 #include <easyparticle2d.h>
-#include <easyejoy2d.h>
 #include <easyterrain2d.h>
 #include <easytexture.h>
 #include <easyshape.h>
@@ -51,9 +50,6 @@ static void InitSymbolCreators()
 
 	ee::SymbolFactory::RegisterCreator(s2::SYM_PARTICLE2D, &eparticle2d::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_PARTICLE2D, &eparticle2d::Sprite::Create);
-
-	ee::SymbolFactory::RegisterCreator(ee::SYM_EJOY2D, &eejoy2d::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(ee::SYM_EJOY2D, &eejoy2d::Sprite::Create);
 
 	ee::SymbolFactory::RegisterCreator(ee::SYM_TERRAIN2D, &eterrain2d::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(ee::SYM_TERRAIN2D, &eterrain2d::Sprite::Create);

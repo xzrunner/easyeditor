@@ -27,7 +27,6 @@
 #include <sprite2/S2_RVG.h>
 #include <sprite2/BoundingBox.h>
 #include <gum/FilterModes.h>
-#include <gum/GUM_DTex.h>
 #include <gum/GUM_GTxt.h>
 
 #include <algorithm>

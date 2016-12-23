@@ -11,7 +11,6 @@
 
 #include <sprite2/S2_RVG.h>
 #include <sprite2/Particle3d.h>
-#include <gum/GUM_DTex.h>
 
 namespace eanim
 {

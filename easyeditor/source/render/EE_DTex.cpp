@@ -3,8 +3,6 @@
 
 #include <SM_Vector.h>
 
-#include <gum/GUM_DTex.h>
-
 namespace ee
 {
 

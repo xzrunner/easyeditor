@@ -12,7 +12,6 @@
 #include <ee/SymbolFile.h>
 
 #include <sprite2/SymType.h>
-#include <gum/GUM_DTex.h>
 
 #include <fstream>
 

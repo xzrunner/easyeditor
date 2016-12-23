@@ -4,7 +4,6 @@
 #include "StageCanvas.h"
 
 #include <shaderlab.h>
-#include <gum/GUM_DTex.h>
 
 #include <assert.h>
 

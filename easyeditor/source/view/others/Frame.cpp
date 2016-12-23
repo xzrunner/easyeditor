@@ -20,8 +20,6 @@
 #include "Bitmap.h"
 #include "LogMgr.h"
 
-#include <gum/GUM_DTex.h>
-
 #include <wx/socket.h>
 
 #include <fstream>

@@ -26,7 +26,6 @@
 #include <shaderlab.h>
 #include <sprite2/S2_Sprite.h>
 #include <sprite2/Texture.h>
-#include <gum/GUM_DTex.h>
 
 namespace ee
 {

@@ -9,7 +9,6 @@
 #include <ee/SpriteRenderer.h>
 
 #include <sprite2/RenderParams.h>
-#include <gum/GUM_DTex.h>
 
 namespace emask
 {
@@ -41,7 +40,7 @@ void StageCanvas::OnDrawSprites() const
 
 #ifdef _DEBUG 
 	if (ee::Config::Instance()->IsUseDTex()) {
-		gum::DTex::Instance()->DebugDraw();
+		gum::DTex2::Instance()->DebugDraw();
 	}
 #endif
 }

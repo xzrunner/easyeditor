@@ -9,7 +9,6 @@
 #include "Camera.h"
 
 #include <shaderlab.h>
-#include <gum/GUM_DTex.h>
 
 namespace ee
 {

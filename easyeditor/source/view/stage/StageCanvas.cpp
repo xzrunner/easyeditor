@@ -16,8 +16,6 @@
 #include <shaderlab.h>
 #include <sprite2/RenderCtxStack.h>
 #include <sprite2/SprTimer.h>
-#include <gum/GUM_DTex.h>
-#include <dtex_gl.h>
 
 namespace ee
 {
@@ -107,7 +105,7 @@ void StageCanvas::SetCurrentCanvas()
 	int width, height;
 	if (m_render_context->GetProjection(width, height)) {
 		m_render_context->SetProjection(width, height);
-		dtex_gl_set_viewport(0, 0, width, height);
+		
 	}
 }
 
