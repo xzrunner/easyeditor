@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\logger\src\logger;..\..\..\..\fs\src\fs;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\libpng\include;..\..\..\..\editor-external\libjpeg\include"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\logger\src\logger;..\..\..\..\fs\src\fs;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\libpng\include;..\..\..\..\editor-external\libjpeg\include;..\..\..\..\editor-external\etcpack;..\..\..\..\editor-external\rg_etc1"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -105,7 +105,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\logger\src\logger;..\..\..\..\fs\src\fs;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\libpng\include;..\..\..\..\editor-external\libjpeg\include"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\logger\src\logger;..\..\..\..\fs\src\fs;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\libpng\include;..\..\..\..\editor-external\libjpeg\include;..\..\..\..\editor-external\etcpack;..\..\..\..\editor-external\rg_etc1"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -157,6 +157,22 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\gimg\gimg_etc1.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\gimg\gimg_etc1.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\gimg\gimg_etc2.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\gimg\gimg_etc2.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\gimg\gimg_jpg.c"
 				>
 			</File>
@@ -165,11 +181,23 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\gimg\gimg_math.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\gimg\gimg_png.c"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\src\gimg\gimg_png.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\gimg\gimg_pvr.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\gimg\gimg_pvr.h"
 				>
 			</File>
 		</Filter>

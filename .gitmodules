@@ -55,3 +55,15 @@
 [submodule "rigging/src/rigging"]
 	path = rigging/src/rigging
 	url = ssh://git@tea.ejoy.com:3222/LR/rigging.git
+[submodule "bimp"]
+	path = bimp
+	url = ssh://git@tea.ejoy.com:3222/LR/bimp.git
+[submodule "timp"]
+	path = timp
+	url = ssh://git@tea.ejoy.com:3222/LR/timp.git
+[submodule "dtex2"]
+	path = dtex2
+	url = ssh://git@tea.ejoy.com:3222/LR/dtex2.git
+[submodule "texpack/src/texpack"]
+	path = texpack/src/texpack
+	url = ssh://git@tea.ejoy.com:3222/LR/texpack.git

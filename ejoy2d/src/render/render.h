@@ -157,8 +157,8 @@ void render_shader_bind(struct render *R, RID id);
 int render_shader_locuniform(struct render *R, const char * name);
 void render_shader_setuniform(struct render *R, int loc, enum UNIFORM_FORMAT format, const float *v);
 
-void render_setviewport(struct render *R, int x, int y, int width, int height );
-void render_setscissor(struct render *R, int x, int y, int width, int height );
+void render_setviewport(int x, int y, int width, int height );
+void render_setscissor(int x, int y, int width, int height );
 
 void render_set_blendfunc(struct render *R, enum BLEND_FORMAT src, enum BLEND_FORMAT dst);
 void render_set_blendeq(struct render *R, enum BLEND_FUNC eq);

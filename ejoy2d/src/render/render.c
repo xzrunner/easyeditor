@@ -544,12 +544,12 @@ render_exit(struct render * R) {
 }
 
 void 
-render_setviewport(struct render *R, int x, int y, int width, int height) {
+render_setviewport(int x, int y, int width, int height) {
 	glViewport(x, y, width, height);
 }
 
 void 
-render_setscissor(struct render *R, int x, int y, int width, int height ) {
+render_setscissor(int x, int y, int width, int height ) {
 	glScissor(x,y,width,height);
 }
 
