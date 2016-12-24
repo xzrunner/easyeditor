@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\editor-external\c99"
+				AdditionalIncludeDirectories="..\..\..\include\unirender;..\..\..\external;..\..\..\..\cu\src\cu;..\..\..\..\editor-external\c99"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -105,7 +105,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\editor-external\c99"
+				AdditionalIncludeDirectories="..\..\..\include\unirender;..\..\..\external;..\..\..\..\cu\src\cu;..\..\..\..\editor-external\c99"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -174,11 +174,35 @@
 			</File>
 		</Filter>
 		<File
+			RelativePath="..\..\..\source\RenderContext.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\include\unirender\RenderContext.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\source\RenderTarget.cpp"
 			>
 		</File>
 		<File
 			RelativePath="..\..\..\include\unirender\RenderTarget.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\source\Shader.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\include\unirender\Shader.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\source\State.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\include\unirender\State.h"
 			>
 		</File>
 		<File
