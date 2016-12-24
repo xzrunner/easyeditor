@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="1.unirender"
+	Name="0.unirender"
 	ProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
 	RootNamespace="unirender"
 	Keyword="Win32Proj"
@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\include\unirender;..\..\..\external;..\..\..\..\cu\src\cu;..\..\..\..\editor-external\c99"
+				AdditionalIncludeDirectories="..\..\..\include\unirender;..\..\..\external;..\..\..\..\cu\src\cu;..\..\..\..\logger\src\logger;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\gl\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -105,7 +105,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\include\unirender;..\..\..\external;..\..\..\..\cu\src\cu;..\..\..\..\editor-external\c99"
+				AdditionalIncludeDirectories="..\..\..\include\unirender;..\..\..\external;..\..\..\..\cu\src\cu;..\..\..\..\logger\src\logger;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\gl\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -165,6 +165,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\external\ejoy2d\opengl.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\external\ejoy2d\render.c"
 				>
 			</File>
@@ -173,44 +177,52 @@
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath="..\..\..\source\RenderContext.cpp"
+		<Filter
+			Name="gl"
 			>
-		</File>
+			<File
+				RelativePath="..\..\..\source\gl\RenderContext.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\unirender\gl\RenderContext.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\source\gl\RenderTarget.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\unirender\gl\RenderTarget.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\source\gl\Shader.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\unirender\gl\Shader.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\source\gl\State.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\unirender\gl\State.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\source\gl\Texture.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\unirender\gl\Texture.h"
+				>
+			</File>
+		</Filter>
 		<File
-			RelativePath="..\..\..\include\unirender\RenderContext.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\source\RenderTarget.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\include\unirender\RenderTarget.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\source\Shader.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\include\unirender\Shader.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\source\State.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\include\unirender\State.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\source\Texture.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\include\unirender\Texture.h"
+			RelativePath="..\..\..\include\unirender\IRenderContext.h"
 			>
 		</File>
 	</Files>
