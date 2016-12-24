@@ -553,14 +553,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\render\RenderContext.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\render\RenderContext.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\shaderlab\render\RenderLayout.cpp"
 				>
 			</File>
