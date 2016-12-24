@@ -8,7 +8,6 @@
 #include "EE_ShaderLab.h"
 
 #include <shaderlab.h>
-#include <dtex_gl.h>
 
 #include <gl/glew.h>
 

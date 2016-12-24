@@ -8,9 +8,9 @@
 #include "PPMAdapter.h"
 #include "EE_ShaderLab.h"
 
-#include <dtex_pvr.h>
-#include <dtex_etc2.h>
 #include <gimg_import.h>
+#include <gimg_pvr.h>
+#include <gimg_etc2.h>
 
 #include <gl/glew.h>
 
@@ -53,8 +53,8 @@ uint8_t* ImageLoader::FileToPixels(const std::string& filepath, int& width, int&
 	else if (type == "pvr")
 	{
 		uint32_t w, h;
-		uint8_t* compressed = dtex_pvr_read_file(filepath.c_str(), &w, &h);
-		uint8_t* uncompressed = dtex_pvr_decode(compressed, w, h);
+		uint8_t* compressed = gimg_pvr_read_file(filepath.c_str(), &w, &h);
+		uint8_t* uncompressed = gimg_pvr_decode(compressed, w, h);
 		free(compressed);
 		data = uncompressed;
 		width = w;
@@ -65,8 +65,8 @@ uint8_t* ImageLoader::FileToPixels(const std::string& filepath, int& width, int&
 	{
 		uint32_t w, h;
 		int type;
-		uint8_t* compressed = dtex_etc2_read_file(filepath.c_str(), &w, &h, &type);
-		uint8_t* uncompressed = dtex_etc2_decode(compressed, w, h, type);
+		uint8_t* compressed = gimg_etc2_read_file(filepath.c_str(), &w, &h, &type);
+		uint8_t* uncompressed = gimg_etc2_decode(compressed, w, h, type);
 		free(compressed);
 		data = uncompressed;
 		width = w;
