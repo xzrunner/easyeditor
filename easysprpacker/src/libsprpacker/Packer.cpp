@@ -21,12 +21,11 @@
 #include <easyrespacker.h>
 #include <easyui.h>
 
-#include <render/render.h>
 #include <CU_RefCountObj.h>
-#include <dtex.h>
 #include <gimg_typedef.h>
 #include <sprite2/SymType.h>
 #include <gum/FilepathHelper.h>
+#include <timp/TextureFormat.h>
 
 #include <wx/arrstr.h>
 #include <wx/filename.h>
@@ -315,11 +314,11 @@ void Packer::OutputEptDesc(const std::string& outfile, int LOD) const
 		// type
 		uint16_t type = GIT_PNG;
 		if (tex->format == "pvr") {
-			type = TEXTURE_PVR4;
+			type = timp::TEXTURE_PVR4;
 		} else if (tex->format == "etc1") {
-			type = TEXTURE_ETC1;
+			type = timp::TEXTURE_ETC1;
 		} else if (tex->format == "etc2") {
-			type = TEXTURE_ETC2;
+			type = timp::TEXTURE_ETC2;
 		}
 		fout.write(reinterpret_cast<const char*>(&type), sizeof(type));
 	}

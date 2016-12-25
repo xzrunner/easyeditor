@@ -181,6 +181,14 @@
 			Name="gl"
 			>
 			<File
+				RelativePath="..\..\..\source\gl\Draw.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\unirender\gl\Draw.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\source\gl\RenderContext.cpp"
 				>
 			</File>
@@ -220,9 +228,21 @@
 				RelativePath="..\..\..\include\unirender\gl\Texture.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\include\unirender\gl\typedef.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath="..\..\..\include\unirender\IRenderContext.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\include\unirender\typedef.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\include\unirender\VertexAttrib.h"
 			>
 		</File>
 	</Files>

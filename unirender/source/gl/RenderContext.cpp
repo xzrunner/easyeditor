@@ -3,6 +3,8 @@
 #include "gl/RenderTarget.h"
 #include "gl/Shader.h"
 #include "gl/State.h"
+#include "gl/Draw.h"
+#include "gl/typedef.h"
 
 #include <ejoy2d/render.h>
 
@@ -32,6 +34,7 @@ RenderContext::RenderContext(const IRenderContext::Callback& cb)
 	m_rt      = new RenderTarget();
 	m_shader  = new Shader(m_render);
 	m_state   = new State(m_render, cb.state_change);
+	m_draw    = new Draw(m_render);
 }
 
 RenderContext::~RenderContext()
@@ -142,6 +145,16 @@ void RenderContext::BindShader(int id)
 	m_shader->Bind(id);
 }
 
+int RenderContext::GetShaderUniform(const char* name)
+{
+	return m_shader->GetUniform(name);
+}
+
+void RenderContext::SetShaderUniform(int loc, UNIFORM_FORMAT format, const float* v)
+{
+	m_shader->SetUniform(loc, format, v);
+}
+
 /************************************************************************/
 /* State                                                                */
 /************************************************************************/
@@ -189,6 +202,60 @@ void RenderContext::SetViewport(int x, int y, int w, int h)
 void RenderContext::GetViewport(int& x, int& y, int& w, int& h)
 {
 	m_state->GetViewport(x, y, w, h);
+}
+
+void RenderContext::SetDepth(DEPTH_FORMAT d)
+{
+	m_state->SetDepth(d);
+}
+
+/************************************************************************/
+/* Draw                                                                 */
+/************************************************************************/
+
+void RenderContext::DrawElements(DRAW_MODE mode, int fromidx, int ni)
+{
+	m_draw->DrawElements(mode, fromidx, ni);
+}
+
+void RenderContext::DrawArrays(DRAW_MODE mode, int fromidx, int ni)
+{
+	m_draw->DrawArrays(mode, fromidx, ni);	
+}
+
+int  RenderContext::CreateBuffer(RENDER_OBJ what, const void *data, int n, int stride)
+{
+	return m_draw->CreateBuffer(what, data, n, stride);
+}
+
+void RenderContext::ReleaseBuffer(RENDER_OBJ what, int id)
+{
+	m_draw->ReleaseBuffer(what, id);
+}
+
+void RenderContext::BindBuffer(RENDER_OBJ what, int id)
+{
+	m_draw->BindBuffer(what, id);
+}
+
+void RenderContext::UpdateBuffer(int id, const void* data, int n)
+{
+	m_draw->UpdateBuffer(id, data, n);
+}
+
+int  RenderContext::CreateVertexLayout(const std::vector<VertexAttrib>& va_list)
+{
+	return m_draw->CreateVertexLayout(va_list);
+}
+
+void RenderContext::ReleaseVertexLayout(int id)
+{
+	m_draw->ReleaseVertexLayout(id);
+}
+
+void RenderContext::BindVertexLayout(int id)
+{
+	m_draw->BindVertexLayout(id);
 }
 
 }

@@ -2,7 +2,6 @@
 #include "Exception.h"
 
 #include <shaderlab.h>
-#include <render/render.h>
 
 #include <stddef.h>
 

@@ -93,5 +93,10 @@ void State::GetViewport(int& x, int& y, int& w, int& h)
 	h = m_vp_h;
 }
 
+void State::SetDepth(DEPTH_FORMAT d)
+{
+	render_setdepth(m_render, d);
+}
+
 }
 }

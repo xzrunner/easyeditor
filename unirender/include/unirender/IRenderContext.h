@@ -1,6 +1,11 @@
 #ifndef _UNIRENDER_RENDER_CONTEXT_H_
 #define _UNIRENDER_RENDER_CONTEXT_H_
 
+#include "VertexAttrib.h"
+#include "typedef.h"
+
+#include <vector>
+
 namespace ur
 {
 
@@ -57,6 +62,9 @@ public:
 
 	virtual void BindShader(int id) = 0;
 
+	virtual int  GetShaderUniform(const char* name) = 0;
+	virtual void SetShaderUniform(int loc, UNIFORM_FORMAT format, const float* v) = 0;
+
 	/************************************************************************/
 	/* State                                                                */
 	/************************************************************************/
@@ -73,6 +81,24 @@ public:
 
 	virtual void SetViewport(int x, int y, int w, int h) = 0;
 	virtual void GetViewport(int& x, int& y, int& w, int& h) = 0;
+
+	virtual void SetDepth(DEPTH_FORMAT d) = 0;
+
+	/************************************************************************/
+	/* Draw                                                                 */
+	/************************************************************************/
+
+	virtual void DrawElements(DRAW_MODE mode, int fromidx, int ni) = 0;
+	virtual void DrawArrays(DRAW_MODE mode, int fromidx, int ni) = 0;
+
+	virtual int  CreateBuffer(RENDER_OBJ what, const void *data, int n, int stride) = 0;
+	virtual void ReleaseBuffer(RENDER_OBJ what, int id) = 0;
+	virtual void BindBuffer(RENDER_OBJ what, int id) = 0;
+	virtual void UpdateBuffer(int id, const void* data, int n) = 0;
+
+	virtual int  CreateVertexLayout(const std::vector<VertexAttrib>& va_list) = 0;
+	virtual void ReleaseVertexLayout(int id) = 0;
+	virtual void BindVertexLayout(int id) = 0;
 
 }; // IRenderContext
 

@@ -28,6 +28,8 @@ public:
 	void SetViewport(int x, int y, int w, int h);
 	void GetViewport(int& x, int& y, int& w, int& h);
 
+	void SetDepth(DEPTH_FORMAT d);
+
 private:
 	render* m_render;
 	void (*m_state_change_cb)();

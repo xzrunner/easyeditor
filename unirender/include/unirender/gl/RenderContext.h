@@ -14,6 +14,7 @@ class Texture;
 class RenderTarget;
 class Shader;
 class State;
+class Draw;
 
 class RenderContext : public IRenderContext
 {
@@ -63,6 +64,9 @@ public:
 
 	virtual void BindShader(int id);
 
+	virtual int  GetShaderUniform(const char* name);
+	virtual void SetShaderUniform(int loc, UNIFORM_FORMAT format, const float* v);
+
 	/************************************************************************/
 	/* State                                                                */
 	/************************************************************************/
@@ -80,10 +84,23 @@ public:
 	virtual void SetViewport(int x, int y, int w, int h);
 	virtual void GetViewport(int& x, int& y, int& w, int& h);
 
-public:
-	static const int MAX_LAYOUT          = 32;
-	static const int MAX_TEXTURE         = 1024;
-	static const int MAX_SHADER          = 64;
+	virtual void SetDepth(DEPTH_FORMAT d);
+
+	/************************************************************************/
+	/* Draw                                                                 */
+	/************************************************************************/
+
+	virtual void DrawElements(DRAW_MODE mode, int fromidx, int ni);
+	virtual void DrawArrays(DRAW_MODE mode, int fromidx, int ni);
+
+	virtual int  CreateBuffer(RENDER_OBJ what, const void *data, int n, int stride);
+	virtual void ReleaseBuffer(RENDER_OBJ what, int id);
+	virtual void BindBuffer(RENDER_OBJ what, int id);
+	virtual void UpdateBuffer(int id, const void* data, int n);
+
+	virtual int  CreateVertexLayout(const std::vector<VertexAttrib>& va_list);
+	virtual void ReleaseVertexLayout(int id);
+	virtual void BindVertexLayout(int id);
 
 private:
 	render* m_render;
@@ -92,6 +109,7 @@ private:
 	RenderTarget* m_rt;
 	Shader*       m_shader;
 	State*        m_state;
+	Draw*         m_draw;
 
 }; // RenderContext
 

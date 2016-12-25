@@ -31,5 +31,15 @@ void Shader::Bind(int id)
 	render_shader_bind(m_render, id);
 }
 
+int Shader::GetUniform(const char* name)
+{
+	return render_shader_locuniform(m_render, name);
+}
+
+void Shader::SetUniform(int loc, enum UNIFORM_FORMAT format, const float *v)
+{
+	render_shader_setuniform(m_render, loc, format, v);
+}
+
 }
 }

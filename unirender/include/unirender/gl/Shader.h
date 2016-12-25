@@ -1,9 +1,9 @@
 #ifndef _UNIRENDER_GL_SHADER_H_
 #define _UNIRENDER_GL_SHADER_H_
 
-#include <CU_Uncopyable.h>
+#include <ejoy2d/render.h>
 
-struct render;
+#include <CU_Uncopyable.h>
 
 namespace ur
 {
@@ -19,6 +19,9 @@ public:
 	void Release(int id);
 
 	void Bind(int id);
+
+	int  GetUniform(const char* name);
+	void SetUniform(int loc, enum UNIFORM_FORMAT format, const float *v);
 	
 private:
 	render* m_render;
