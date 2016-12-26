@@ -3,7 +3,8 @@
 #include <ee/Sprite.h>
 
 #include <SM_Calc.h>
-#include <shaderlab.h>
+#include <shaderlab/ShaderMgr.h>
+#include <shaderlab/Shader.h>
 #include <sprite2/S2_RVG.h>
 #include <sprite2/Color.h>
 #include <sprite2/RenderParams.h>

@@ -16,6 +16,7 @@
 
 #include <sprite2/S2_RVG.h>
 #include <sprite2/Particle3d.h>
+#include <gum/GUM_DTex2.h>
 
 namespace ecomplex
 {
@@ -83,7 +84,7 @@ void StageCanvas::OnDrawSprites() const
 
 #ifdef _DEBUG 
 	if (ee::Config::Instance()->IsUseDTex()) {
-		gum::DTex::Instance()->DebugDraw();
+		gum::DTex2::Instance()->DebugDraw();
 	}
 #endif
 
@@ -126,7 +127,7 @@ void StageCanvas::OnDrawSprites() const
 
 #ifdef _DEBUG 
 	if (ee::Config::Instance()->IsUseDTex()) {
-		gum::DTex::Instance()->DebugDraw();
+		gum::DTex2::Instance()->DebugDraw();
 	}
 #endif
 

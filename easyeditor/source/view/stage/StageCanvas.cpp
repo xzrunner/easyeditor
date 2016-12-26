@@ -9,13 +9,15 @@
 #include "RenderContextStack.h"
 #include "subject_id.h"
 #include "panel_msg.h"
-#include "EE_ShaderLab.h"
 #include "EE_DTex.h"
 #include "EE_GTxt.h"
 
-#include <shaderlab.h>
+#include <unirender/RenderContext.h>
+#include <shaderlab/ShaderMgr.h>
 #include <sprite2/RenderCtxStack.h>
 #include <sprite2/SprTimer.h>
+#include <gum/GUM_ShaderLab.h>
+#include <gum/RenderContext.h>
 
 namespace ee
 {
@@ -130,7 +132,7 @@ void StageCanvas::Init()
 	s2::SprTimer::Instance()->Init();
 	// prepare 2d
 	// todo: move to child, for defferent init (such as 3d ?)
-	ShaderLab::Instance()->Init();
+	gum::ShaderLab::Instance()->Init();
 	DTex::Init();
 	GTxt::Init();
 
@@ -171,14 +173,12 @@ void StageCanvas::OnPaint(wxPaintEvent& event)
 	m_dirty = false;
 	m_cam_dirty = false;
 
-	sl::ShaderMgr::Instance()->GetShader()->Commit();
+	gum::RenderContext::Instance()->GetImpl()->Clear(0);
 
 	glFlush();
 	SwapBuffers();
 
-	ShaderLab::Instance()->Update(1 / 30.0f);
-
-	gum::DTex::Instance()->Update();
+	gum::ShaderLab::Instance()->Update(1 / 30.0f);
 
 //	wxPaintDC dc(this);
 //	OnDrawDC();

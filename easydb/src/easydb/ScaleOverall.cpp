@@ -9,7 +9,6 @@
 #include <ee/Config.h>
 #include <ee/SymbolMgr.h>
 #include <ee/ImageSymbol.h>
-#include <ee/EE_ShaderLab.h>
 #include <ee/SpriteIO.h>
 #include <ee/SymbolFile.h>
 

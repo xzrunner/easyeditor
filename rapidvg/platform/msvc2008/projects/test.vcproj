@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src\rapidvg;&quot;..\..\..\..\editor-external\freeglut\include&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;..\..\..\..\shaderlab\src\shaderlab"
+				AdditionalIncludeDirectories="..\..\..\src\rapidvg;&quot;..\..\..\..\editor-external\freeglut\include&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;..\..\..\..\shaderlab\include\"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;FREEGLUT_STATIC;GLEW_STATIC;EASY_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -123,7 +123,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src\rapidvg;&quot;..\..\..\..\editor-external\freeglut\include&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;..\..\..\..\shaderlab\src\shaderlab"
+				AdditionalIncludeDirectories="..\..\..\src\rapidvg;&quot;..\..\..\..\editor-external\freeglut\include&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;..\..\..\..\shaderlab\include\"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;FREEGLUT_STATIC;GLEW_STATIC;EASY_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"

@@ -5,10 +5,11 @@
 #include <ee/Math2D.h>
 #include <ee/ImageSymbol.h>
 
+#include <shaderlab/ShaderMgr.h>
+#include <shaderlab/Sprite2Shader.h>
 #include <sprite2/MeshTriangle.h>
 #include <sprite2/DrawMesh.h>
 #include <sprite2/RenderParams.h>
-#include <shaderlab.h>
 #include <SM_Triangulation.h>
 #include <SM_Process.h>
 

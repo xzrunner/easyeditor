@@ -9,6 +9,7 @@
 #include <ee/SpriteRenderer.h>
 
 #include <sprite2/RenderParams.h>
+#include <gum/GUM_DTex2.h>
 
 namespace emask
 {

@@ -1,9 +1,9 @@
 #include "RenderContextStack.h"
 #include "RenderContext.h"
-#include "ScreenCache.h"
 #include "StageCanvas.h"
 
-#include <shaderlab.h>
+#include <shaderlab/SubjectMVP2.h>
+#include <gum/RenderContext.h>
 
 #include <assert.h>
 
@@ -51,8 +51,7 @@ void RenderContextStack::Pop()
 
 	int width, height;
 	ctx.render->GetProjection(width, height);
-	gum::DTex::Instance()->OnSize(width, height);
-	ScreenCache::Instance()->SetSize(width, height);
+	gum::RenderContext::Instance()->OnSize(width, height);
 }
 
 void RenderContextStack::SetModelView(const sm::vec2& offset, float scale)

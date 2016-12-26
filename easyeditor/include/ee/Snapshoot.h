@@ -9,7 +9,7 @@ namespace ee
 class Symbol;
 class Sprite;
 class Shape;
-class FBO;
+class RenderTarget;
 
 class Snapshoot
 {
@@ -33,12 +33,12 @@ public:
 	void SaveToFile(const std::string& filename) const;
 	void SaveToFile(const std::string& filename, int width, int height) const;
 
-	const FBO* GetFBO() const { return m_fbo; }
+	const RenderTarget* GetFBO() const { return m_fbo; }
 
 private:
 	int m_width, m_height;
 
-	FBO* m_fbo;
+	RenderTarget* m_fbo;
 
 }; // Snapshoot
 

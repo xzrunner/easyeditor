@@ -5,7 +5,8 @@
 #include <ee/ImageSymbol.h>
 #include <ee/FileHelper.h>
 
-#include <shaderlab.h>
+#include <shaderlab/ShaderMgr.h>
+#include <shaderlab/Sprite2Shader.h>
 #include <sprite2/RenderParams.h>
 
 #include <algorithm>

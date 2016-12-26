@@ -5,7 +5,6 @@
 
 #include <ps_3d.h>
 #include <ps_3d_sprite.h>
-#include <shaderlab.h>
 
 #include <ee/Math2D.h>
 #include <ee/Symbol.h>

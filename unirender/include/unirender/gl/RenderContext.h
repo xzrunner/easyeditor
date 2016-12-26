@@ -1,7 +1,7 @@
 #ifndef _UNIRENDER_GL_RENDER_CONTEXT_H_
 #define _UNIRENDER_GL_RENDER_CONTEXT_H_
 
-#include "IRenderContext.h"
+#include "../RenderContext.h"
 
 struct render;
 
@@ -10,16 +10,16 @@ namespace ur
 namespace gl
 {
 
-class Texture;
-class RenderTarget;
-class Shader;
-class State;
-class Draw;
-
-class RenderContext : public IRenderContext
+class RenderContext : public ur::RenderContext
 {
 public:
-	RenderContext(const IRenderContext::Callback& cb);
+	struct Callback
+	{
+		void (*state_change)();
+	};
+
+public:
+	RenderContext(const RenderContext::Callback& cb);
 	virtual ~RenderContext();
 	
 	virtual int RenderVersion() const;
@@ -44,16 +44,17 @@ public:
 	/* RenderTarget                                                         */
 	/************************************************************************/
 
-	virtual int  CreateRT(int id);
-	virtual void ReleaseRT(int id);
+	virtual int  CreateRenderTarget(int id);
+	virtual void ReleaseRenderTarget(int id);
 
-	virtual void BindRT(int id);
-	virtual void BindRTTexture(int tex_id);
+	virtual void BindRenderTarget(int id);
+	virtual void BindRenderTargetTex(int tex_id);
+	virtual void UnbindRenderTarget();
 
-	virtual int  CheckRTStatus();
+	virtual int  CheckRenderTargetStatus();
 
-	virtual void SetCurrRT(int id);
-	virtual int  GetCurrRT() const;
+// 	virtual void SetCurrRenderTarget(int id);
+// 	virtual int  GetCurrRenderTarget() const;
 
 	/************************************************************************/
 	/* Shader                                                               */
@@ -71,6 +72,7 @@ public:
 	/* State                                                                */
 	/************************************************************************/
 
+	virtual void EnableBlend(bool blend);
 	virtual void SetBlend(int m1, int m2);
 	virtual void SetBlendEquation(int func);
 	virtual void SetDefaultBlend();
@@ -85,6 +87,17 @@ public:
 	virtual void GetViewport(int& x, int& y, int& w, int& h);
 
 	virtual void SetDepth(DEPTH_FORMAT d);
+
+	virtual bool IsTexture(int id) const;
+
+	virtual bool OutOfMemory() const;
+	virtual void CheckError() const;
+
+	virtual void SetPointSize(float size);
+	virtual void SetLineWidth(float size);
+
+	virtual void EnableLineStripple(bool stripple);
+	virtual void SetLineStripple(int pattern);
 
 	/************************************************************************/
 	/* Draw                                                                 */
@@ -102,14 +115,41 @@ public:
 	virtual void ReleaseVertexLayout(int id);
 	virtual void BindVertexLayout(int id);
 
+	virtual void ReadPixels(const void* pixels, int width, int height);
+
+private:
+	static const int MAX_TEXTURE_CHANNEL = 8;
+	static const int MAX_RENDER_TARGET_LAYER = 8;
+
 private:
 	render* m_render;
-	
-	Texture*      m_texture;
-	RenderTarget* m_rt;
-	Shader*       m_shader;
-	State*        m_state;
-	Draw*         m_draw;
+	void (*m_state_change_cb)();
+
+	/************************************************************************/
+	/* Texture                                                              */
+	/************************************************************************/
+
+	int m_textures[MAX_TEXTURE_CHANNEL];
+
+	/************************************************************************/
+	/* RenderTarget                                                         */
+	/************************************************************************/
+
+	int m_rt_depth;
+	int m_rt_layers[MAX_RENDER_TARGET_LAYER];
+
+//	int m_curr_rt;
+
+	/************************************************************************/
+	/* State                                                                */
+	/************************************************************************/
+
+	BLEND_FORMAT m_blend_src, m_blend_dst;
+	BLEND_FUNC   m_blend_func;
+
+	int          m_clear_mask;
+
+	int          m_vp_x, m_vp_y, m_vp_w, m_vp_h;
 
 }; // RenderContext
 

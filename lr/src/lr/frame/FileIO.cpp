@@ -18,7 +18,6 @@
 #include <ee/Config.h>
 
 #include <gum/trans_color.h>
-#include <shaderlab.h>
 
 #include <fstream>
 

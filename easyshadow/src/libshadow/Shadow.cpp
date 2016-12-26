@@ -3,7 +3,7 @@
 
 #include <ee/Math2D.h>
 
-#include <shaderlab.h>
+#include <shaderlab/ShaderMgr.h>
 #include <sprite2/S2_RVG.h>
 #include <SM_Calc.h>
 #include <SM_Triangulation.h>

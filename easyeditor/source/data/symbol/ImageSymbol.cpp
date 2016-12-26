@@ -4,13 +4,16 @@
 #include "Sprite.h"
 #include "ImageData.h"
 #include "CameraMgr.h"
-#include "ScreenCache.h"
 #include "Camera.h"
 #include "Pseudo3DCamera.h"
 
+#include <unirender/Texture.h>
+#include <unirender/RenderTarget.h>
 #include <sprite2/ImageSymbol.h>
 #include <sprite2/RenderParams.h>
 #include <sprite2/S2_RVG.h>
+#include <gum/RenderContext.h>
+#include <gum/RenderTarget.h>
 
 namespace ee
 {
@@ -77,7 +80,9 @@ bool ImageSymbol::IsOrthoCam() const
 
 void ImageSymbol::GetScreenSize(int& w, int& h) const
 {
-	ScreenCache::Instance()->GetSize(w, h);
+	gum::RenderContext* rc = gum::RenderContext::Instance();
+	w = rc->GetWidth();
+	h = rc->GetHeight();
 }
 
 float ImageSymbol::GetP3dCamAngle() const
@@ -89,7 +94,7 @@ float ImageSymbol::GetP3dCamAngle() const
 
 int ImageSymbol::GetScreenCacheTexid() const
 {
-	return ScreenCache::Instance()->GetTexID();
+	return gum::RenderTarget::Instance()->GetScreen0()->GetTexture()->ID();
 }
 
 void ImageSymbol::LoadResources()

@@ -20,6 +20,8 @@
 #include "Bitmap.h"
 #include "LogMgr.h"
 
+#include <gum/GUM_DTex2.h>
+
 #include <wx/socket.h>
 
 #include <fstream>
@@ -117,7 +119,7 @@ void Frame::OpenFile(const std::string& filename)
 	}
 
 	if (Config::Instance()->IsUseDTex()) {
-		gum::DTex::Instance()->Clear();
+		gum::DTex2::Instance()->Clear();
 	}
 
 	Clear();
@@ -201,7 +203,7 @@ void Frame::OnNew(wxCommandEvent& event)
 	Clear();
 
 	if (Config::Instance()->IsUseDTex()) {
-		gum::DTex::Instance()->Clear();
+		gum::DTex2::Instance()->Clear();
 	}
 }
 

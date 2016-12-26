@@ -1,11 +1,10 @@
 #include "Pseudo3DCamera.h"
 #include "panel_msg.h"
-#include "ScreenCache.h"
 
 #include <c25_camera.h>
-#include <shaderlab.h>
-//#include <SM_Vector.h>
 #include <sm_c_vector.h>
+#include <gum/RenderContext.h>
+#include <shaderlab/SubjectMVP3.h>
 
 #include <wx/log.h>
 
@@ -24,8 +23,8 @@ Pseudo3DCamera::Pseudo3DCamera()
 	pos.x = pos.y = 0;
 	pos.z = Z;
 
-	int w, h;
-	ScreenCache::Instance()->GetSize(w, h);
+	int w = gum::RenderContext::Instance()->GetWidth(),
+		h = gum::RenderContext::Instance()->GetHeight();
 	m_cam = c25_cam_create(&pos, ANGLE, (float)w / h);
 
 	UpdateModelView();

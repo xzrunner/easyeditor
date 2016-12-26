@@ -6,7 +6,6 @@
 #include <ee/FileHelper.h>
 #include <ee/SymbolMgr.h>
 #include <ee/AnimatedGifSaver.h>
-#include <ee/EE_ShaderLab.h>
 
 #include <fstream>
 

@@ -16,14 +16,14 @@ namespace ee
 class Sprite;
 class Texture;
 class ImageData;
-class FBO;
+class RenderTarget;
 
 class Image : public cu::RefCountObj
 {
 public:
 	Image();
 	Image(ImageData* img_data);
-	Image(const FBO* fbo);
+	Image(const RenderTarget* rt);
 	~Image();
 	
 	bool LoadFromFile(const std::string& filepath);

@@ -2,6 +2,8 @@
 #include "StagePanel.h"
 #include "Sprite.h"
 
+#include <gum/GUM_DTex2.h>
+
 #include <ee/SpriteRenderer.h>
 #include <ee/EditPanelImpl.h>
 #include <ee/DrawShapesVisitor.h>
@@ -30,7 +32,7 @@ void StageCanvas::OnDrawSprites() const
 
 #ifdef _DEBUG 
 	if (ee::Config::Instance()->IsUseDTex()) {
-		gum::DTex::Instance()->DebugDraw();
+		gum::DTex2::Instance()->DebugDraw();
 	}
 #endif
 }

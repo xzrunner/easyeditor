@@ -15,7 +15,6 @@
 #include <ee/Camera.h>
 #include <ee/CameraMgr.h>
 #include <ee/color_config.h>
-#include <ee/ScreenCache.h>
 #include <ee/cfg_const.h>
 #include <ee/Math2D.h>
 #include <ee/FilterModes.h>
@@ -28,6 +27,8 @@
 #include <sprite2/BoundingBox.h>
 #include <gum/FilterModes.h>
 #include <gum/GUM_GTxt.h>
+#include <gum/GUM_DTex2.h>
+#include <gum/RenderContext.h>
 
 #include <algorithm>
 
@@ -56,7 +57,7 @@ void StageCanvas::OnDrawSprites() const
 
 #ifdef _DEBUG 
 	if (ee::Config::Instance()->IsUseDTex()) {
-		gum::DTex::Instance()->DebugDraw();
+		gum::DTex2::Instance()->DebugDraw();
 	}
 #endif
 }
@@ -162,8 +163,8 @@ void StageCanvas::DrawPseudo3dBound() const
 	if (!ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) 
 	{
 		ee::Camera* cam = static_cast<ee::Camera*>(ee::CameraMgr::Instance()->GetCamera());
-		int w, h;
-		ee::ScreenCache::Instance()->GetSize(w, h);
+		int w = gum::RenderContext::Instance()->GetWidth(),
+			h = gum::RenderContext::Instance()->GetHeight();
 //		sm::vec2 center_world(0, 0);
 //		sm::vec2 center_screen = cam->TransPosProjectToScreen(center_world, w, h);
 		sm::vec2 center_screen(w * 0.5f, h * 0.5f);

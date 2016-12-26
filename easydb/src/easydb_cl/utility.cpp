@@ -1,10 +1,8 @@
 #include "utility.h"
 
-#include <ee/EE_ShaderLab.h>
 #include <ee/EE_DTex.h>
 #include <ee/EE_GTxt.h>
-
-#include <shaderlab.h>
+#include <gum/GUM_ShaderLab.h>
 
 #include <gl/glew.h>
 #include <glfw.h>
@@ -25,7 +23,7 @@ int init_gl()
 		return -2;
 	}
 
-	ee::ShaderLab::Instance()->Init();
+	gum::ShaderLab::Instance()->Init();
 	ee::DTex::Init();
 	ee::GTxt::Init();
 

@@ -6,7 +6,6 @@
 #include <ee/FileHelper.h>
 #include <ee/SymbolMgr.h>
 #include <ee/Symbol.h>
-#include <ee/EE_ShaderLab.h>
 #include <ee/SymbolFile.h>
 
 #include <sprite2/SymType.h>

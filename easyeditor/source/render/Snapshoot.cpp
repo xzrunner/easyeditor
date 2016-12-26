@@ -1,5 +1,5 @@
 #include "Snapshoot.h"
-#include "FBO.h"
+#include "RenderTarget.h"
 #include "Symbol.h"
 #include "ImageSaver.h"
 
@@ -13,14 +13,14 @@ Snapshoot::Snapshoot()
 	: m_width(DEFAULT_WIDTH)
 	, m_height(DEFAULT_HEIGHT)
 {
-	m_fbo = new FBO(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+	m_fbo = new RenderTarget(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 }
 
 Snapshoot::Snapshoot(int width, int height)
 	: m_width(width)
 	, m_height(height)
 {
-	m_fbo = new FBO(width, height);
+	m_fbo = new RenderTarget(width, height);
 }
 
 Snapshoot::~Snapshoot()

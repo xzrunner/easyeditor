@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\ejoy2d\src;..\..\..\..\ejoy2d\src\render;..\..\..\..\logger\src\logger;..\..\..\..\particle\src;..\..\..\..\ds\src\ds;..\..\..\..\fs\src\fs;..\..\..\..\dtex\src;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\lua\include"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\logger\src\logger;..\..\..\..\particle\src;..\..\..\..\ds\src\ds;..\..\..\..\fs\src\fs;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\lua\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -105,7 +105,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\ejoy2d\src;..\..\..\..\ejoy2d\src\render;..\..\..\..\logger\src\logger;..\..\..\..\particle\src;..\..\..\..\ds\src\ds;..\..\..\..\fs\src\fs;..\..\..\..\dtex\src;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\lua\include"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\logger\src\logger;..\..\..\..\particle\src;..\..\..\..\ds\src\ds;..\..\..\..\fs\src\fs;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\lua\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"

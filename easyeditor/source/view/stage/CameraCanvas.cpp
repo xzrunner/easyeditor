@@ -3,7 +3,6 @@
 #include "RenderContextStack.h"
 #include "CameraMgr.h"
 
-#include <shaderlab.h>
 #include <sprite2/RenderCtxStack.h>
 
 namespace ee

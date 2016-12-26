@@ -4,7 +4,8 @@
 #include "OrthoCamera.h"
 #include "Pseudo3DCamera.h"
 #include "CameraMgr.h"
-#include "ScreenCache.h"
+
+#include <gum/RenderContext.h>
 
 namespace ee
 {
@@ -54,8 +55,8 @@ bool PanViewState::OnMouseDrag(int x, int y)
 		cam->Translate(offset);
 	} else if (CameraMgr::Instance()->IsType(CameraMgr::PSEUDO3D)) {
 		Pseudo3DCamera* cam = static_cast<Pseudo3DCamera*>(CameraMgr::Instance()->GetCamera());		
-		int w, h;
-		ScreenCache::Instance()->GetSize(w, h);
+		int w = gum::RenderContext::Instance()->GetWidth(),
+			h = gum::RenderContext::Instance()->GetHeight();		
 		sm::vec2 last = cam->TransPosScreenToProject(m_last_pos.x, m_last_pos.y, w, h);
 		sm::vec2 curr = cam->TransPosScreenToProject(x, y, w, h);
 		cam->Translate(sm::vec3(curr.x - last.x, curr.y - last.y, 0));

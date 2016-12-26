@@ -13,7 +13,6 @@
 #include <ee/FileHelper.h>
 #include <ee/StringHelper.h>
 #include <ee/Config.h>
-#include <ee/EE_ShaderLab.h>
 #include <ee/Bitmap.h>
 #include <ee/Image.h>
 #include <ee/ImageData.h>

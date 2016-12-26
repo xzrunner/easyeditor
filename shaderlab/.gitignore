@@ -1,2 +1,1 @@
-platform/msvc2008/shaderlab
-platform/msvc2008/test
+*.o

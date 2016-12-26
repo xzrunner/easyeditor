@@ -3,7 +3,6 @@
 #include "utility.h"
 
 #include <ee/Config.h>
-#include <ee/EE_ShaderLab.h>
 #include <ee/ImageData.h>
 #include <ee/FileHelper.h>
 

@@ -8,6 +8,10 @@
 #include "Exception.h"
 #include "ExceptionDlg.h"
 
+#include <shaderlab/ShaderMgr.h>
+#include <shaderlab/HeatHazeProg.h>
+#include <shaderlab/FilterShader.h>
+#include <shaderlab/ColGradingProg.h>
 #include <sprite2/RenderShader.h>
 #include <sprite2/RenderFilter.h>
 #include <sprite2/FilterFactory.h>
@@ -16,7 +20,6 @@
 #include <sprite2/RFOuterGlow.h>
 #include <sprite2/RFHeatHaze.h>
 #include <sprite2/RFColGrading.h>
-#include <shaderlab.h>
 
 #include <vector>
 

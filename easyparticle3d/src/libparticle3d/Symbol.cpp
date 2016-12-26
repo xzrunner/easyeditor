@@ -6,7 +6,6 @@
 
 #include <ps_3d.h>
 #include <ps_3d_sprite.h>
-#include <shaderlab.h>
 #include <sprite2/RenderParams.h>
 
 #include <assert.h>

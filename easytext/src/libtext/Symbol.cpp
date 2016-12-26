@@ -12,7 +12,6 @@
 #include <gum/GUM_GTxt.h>
 #include <gum/TextboxLoader.h>
 
-#include <shaderlab.h>
 #include <gtxt.h>
 
 #include <fstream>

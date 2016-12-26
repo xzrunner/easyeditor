@@ -3,7 +3,8 @@
 #include "CameraMgr.h"
 #include "Pseudo3DCamera.h"
 
-#include <shaderlab.h>
+#include <shaderlab/SubjectMVP2.h>
+#include <shaderlab/SubjectMVP3.h>
 
 namespace ee
 {

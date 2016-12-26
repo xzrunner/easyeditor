@@ -6,7 +6,7 @@
 #include <ee/Image.h>
 #include <ee/ImageData.h>
 
-#include <spritepack.h>
+#define TYPE_PICTURE		1
 
 namespace erespacker
 {

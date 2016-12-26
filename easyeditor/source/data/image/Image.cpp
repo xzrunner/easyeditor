@@ -4,10 +4,7 @@
 #include "TextureImgData.h"
 #include "Exception.h"
 #include "Config.h"
-#include "TextureFBO.h"
-#ifdef OPEN_SCREEN_CACHE
-#include "render/ScreenCache.h"
-#endif // OPEN_SCREEN_CACHE
+#include "TextureRT.h"
 //#include "BlendShader.h"
 #include "SettingData.h"
 #include "ImageData.h"
@@ -16,14 +13,12 @@
 #include "Sprite.h"
 #include "Math2D.h"
 #include "SpriteRenderer.h"
-#include "ScreenCache.h"
 #include "Camera.h"
 #include "CameraMgr.h"
 #include "Pseudo3DCamera.h"
 #include "ImageClip.h"
 #include "ImageTrim.h"
 
-#include <shaderlab.h>
 #include <sprite2/S2_Sprite.h>
 #include <sprite2/Texture.h>
 
@@ -50,9 +45,9 @@ Image::Image(ImageData* img_data)
 	m_xmin = m_ymin = 0;
 }
 
-Image::Image(const FBO* fbo)
+Image::Image(const RenderTarget* rt)
 {
-	m_tex = new TextureFBO(fbo);
+	m_tex = new TextureRT(rt);
 	m_s2_tex = new s2::Texture(m_tex->GetWidth(), m_tex->GetHeight(), m_tex->GetTexID());
 	m_xmin = m_ymin = 0;
 }
@@ -97,10 +92,10 @@ bool Image::LoadFromFile(const std::string& filepath)
 	}
 
 	if (Config::Instance()->IsUseDTex() && CanUseDTex()) {
-		gum::DTex* dcb = gum::DTex::Instance();
-		dcb->LoadBegin();
-		dcb->Load(GetFilepath(), GetS2Tex());
-		dcb->LoadEnd();
+// 		gum::DTex* dcb = gum::DTex::Instance();
+// 		dcb->LoadBegin();
+// 		dcb->Load(GetFilepath(), GetS2Tex());
+// 		dcb->LoadEnd();
 	}
 
 	return true;
@@ -187,7 +182,7 @@ void Image::QueryTexcoords(float* texcoords, int* texid) const
 {
 	float* c2_texcoords = NULL;
 	if (Config::Instance()->IsUseDTex() && CanUseDTex()) {
-		c2_texcoords = gum::DTex::Instance()->Query(GetFilepath(), GetS2Tex(), texid);
+//		c2_texcoords = gum::DTex::Instance()->Query(GetFilepath(), GetS2Tex(), texid);
 	}
 	if (c2_texcoords)
 	{

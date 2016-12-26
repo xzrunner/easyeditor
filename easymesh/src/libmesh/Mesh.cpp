@@ -6,7 +6,6 @@
 
 #include <SM_Test.h>
 #include <SM_Calc.h>
-#include <shaderlab.h>
 #include <sprite2/S2_RVG.h>
 #include <sprite2/MeshNode.h>
 #include <sprite2/MeshTriangle.h>

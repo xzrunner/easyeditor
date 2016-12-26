@@ -6,8 +6,6 @@
 #include "PictureToBin.h"
 #include "PictureFromBin.h"
 
-#include <spritepack.h>
-
 #include <ee/TexturePacker.h>
 #include <ee/Image.h>
 #include <ee/Exception.h>

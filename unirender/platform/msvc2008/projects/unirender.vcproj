@@ -181,14 +181,6 @@
 			Name="gl"
 			>
 			<File
-				RelativePath="..\..\..\source\gl\Draw.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\unirender\gl\Draw.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\source\gl\RenderContext.cpp"
 				>
 			</File>
@@ -197,44 +189,40 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\source\gl\RenderTarget.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\unirender\gl\RenderTarget.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\source\gl\Shader.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\unirender\gl\Shader.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\source\gl\State.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\unirender\gl\State.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\source\gl\Texture.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\unirender\gl\Texture.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\include\unirender\gl\typedef.h"
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="obj"
+			>
+			<File
+				RelativePath="..\..\..\source\RenderTarget.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\unirender\RenderTarget.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\source\Texture.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\unirender\Texture.h"
+				>
+			</File>
+		</Filter>
 		<File
-			RelativePath="..\..\..\include\unirender\IRenderContext.h"
+			RelativePath="..\..\..\source\c_wrap_ur.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\include\unirender\c_wrap_ur.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\include\unirender\RenderContext.h"
 			>
 		</File>
 		<File

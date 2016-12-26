@@ -12,11 +12,6 @@
 #include <stdlib.h>
 #include <stddef.h>
 
-// #ifdef _WIN32
-// #include <dtex_pvr.h>
-// #endif // _WIN32
-
-
 #if !defined (VAO_DISABLE) && !defined (__ANDROID__)
 // If your platform doesn't support VAO, comment it out.
 // Or define VAO_DISABLE first
@@ -70,8 +65,8 @@ struct texture {
 	int width;
 	int height;
 	int mipmap;
-	enum TEXTURE_FORMAT format;
-	enum TEXTURE_TYPE type;
+	enum EJ_TEXTURE_FORMAT format;
+	enum EJ_TEXTURE_TYPE type;
 	int memsize;
 };
 
@@ -100,9 +95,9 @@ struct rstate {
 	RID target;
 	enum BLEND_FORMAT blend_src;
 	enum BLEND_FORMAT blend_dst;
-	enum BLEND_FUNC blend_func;
-	enum DEPTH_FORMAT depth;
-	enum CULL_MODE cull;
+	enum EJ_BLEND_FUNC blend_func;
+	enum EJ_DEPTH_FORMAT depth;
+	enum EJ_CULL_MODE cull;
 	int depthmask;
 	int scissor;
 	RID texture[MAX_TEXTURE];
@@ -141,15 +136,15 @@ check_opengl_error_debug(struct render *R, const char *filename, int line) {
 	}
 }
 
-// what should be VERTEXBUFFER or INDEXBUFFER
+// what should be EJ_VERTEXBUFFER or EJ_INDEXBUFFER
 RID 
-render_buffer_create(struct render *R, enum RENDER_OBJ what, const void *data, int n, int stride) {
+render_buffer_create(struct render *R, enum EJ_RENDER_OBJ what, const void *data, int n, int stride) {
 	GLenum gltype;
 	switch(what) {
-	case VERTEXBUFFER:
+	case EJ_VERTEXBUFFER:
 		gltype = GL_ARRAY_BUFFER;
 		break;
-	case INDEXBUFFER:
+	case EJ_INDEXBUFFER:
 		gltype = GL_ELEMENT_ARRAY_BUFFER;
 		break;
 	default:
@@ -404,10 +399,10 @@ close_target(void *p, void *R) {
 }
 
 void 
-render_release(struct render *R, enum RENDER_OBJ what, RID id) {
+render_release(struct render *R, enum EJ_RENDER_OBJ what, RID id) {
 	switch (what) {
-	case VERTEXBUFFER:
-	case INDEXBUFFER: {
+	case EJ_VERTEXBUFFER:
+	case EJ_INDEXBUFFER: {
 		struct buffer * buf = (struct buffer *)array_ref(&R->buffer, id);
 		if (buf) {
 			close_buffer(buf, R);
@@ -415,7 +410,7 @@ render_release(struct render *R, enum RENDER_OBJ what, RID id) {
 		}
 		break;
 	}
-	case SHADER: {
+	case EJ_SHADER: {
 		struct shader * shader = (struct shader *)array_ref(&R->shader, id);
 		if (shader) {
 			close_shader(shader, R);
@@ -423,7 +418,7 @@ render_release(struct render *R, enum RENDER_OBJ what, RID id) {
 		}
 		break;
 	}
-	case TEXTURE : {
+	case EJ_TEXTURE : {
 		struct texture * tex = (struct texture *) array_ref(&R->texture, id);
 		if (tex) {
 			for (int i = 0; i < MAX_TEXTURE; ++i) {
@@ -437,7 +432,7 @@ render_release(struct render *R, enum RENDER_OBJ what, RID id) {
 		}
 		break;
 	}
-	case TARGET : {
+	case EJ_TARGET : {
 		struct target * tar = (struct target *)array_ref(&R->target, id);
 		if (tar) {
 			close_target(tar, R);
@@ -445,7 +440,7 @@ render_release(struct render *R, enum RENDER_OBJ what, RID id) {
 		}
 		break;
 	}
-	case VERTEXLAYOUT:
+	case EJ_VERTEXLAYOUT:
 		break;
 	default:
 		assert(0);
@@ -454,26 +449,26 @@ render_release(struct render *R, enum RENDER_OBJ what, RID id) {
 }
 
 void 
-render_set(struct render *R, enum RENDER_OBJ what, RID id, int slot) {
+render_set(struct render *R, enum EJ_RENDER_OBJ what, RID id, int slot) {
 	switch (what) {
-	case VERTEXBUFFER:
+	case EJ_VERTEXBUFFER:
 		assert(slot >= 0 && slot < MAX_VB_SLOT);
 		R->vbslot[slot] = id;
 		R->changeflag |= CHANGE_VERTEXARRAY;
 		break;
-	case INDEXBUFFER:
+	case EJ_INDEXBUFFER:
 		R->indexbuffer = id;
 		R->changeflag |= CHANGE_VERTEXARRAY;
 		break;
-	case VERTEXLAYOUT:
+	case EJ_VERTEXLAYOUT:
 		R->attrib_layout = id;
 		break;
-	case TEXTURE:
+	case EJ_TEXTURE:
 		assert(slot >= 0 && slot < MAX_TEXTURE);
 		R->current.texture[slot] = id;
 		R->changeflag |= CHANGE_TEXTURE;
 		break;
-	case TARGET:
+	case EJ_TARGET:
 		R->current.target = id;
 		R->changeflag |= CHANGE_TARGET;
 		break;
@@ -484,11 +479,11 @@ render_set(struct render *R, enum RENDER_OBJ what, RID id, int slot) {
 }
 
 RID 
-render_get(struct render *R, enum RENDER_OBJ what, int slot) {
+render_get(struct render *R, enum EJ_RENDER_OBJ what, int slot) {
 	switch (what) {
-	case TEXTURE:
+	case EJ_TEXTURE:
 		return R->current.texture[slot];
-	case TARGET:
+	case EJ_TARGET:
 		return R->current.target;
 	default:
 		assert(0);
@@ -643,24 +638,24 @@ apply_va(struct render *R) {
 // texture
 
 static int
-calc_texture_size(enum TEXTURE_FORMAT format, int width, int height) {
+calc_texture_size(enum EJ_TEXTURE_FORMAT format, int width, int height) {
 	switch( format ) {
-	case TEXTURE_RGBA8 :
+	case EJ_TEXTURE_RGBA8 :
 		return width * height * 4;
-	case TEXTURE_RGB565:
-	case TEXTURE_RGBA4 :
+	case EJ_TEXTURE_RGB565:
+	case EJ_TEXTURE_RGBA4 :
 		return width * height * 2;
-	case TEXTURE_RGB:
+	case EJ_TEXTURE_RGB:
 		return width * height * 3;
-	case TEXTURE_A8 :
-	case TEXTURE_DEPTH :
+	case EJ_TEXTURE_A8 :
+	case EJ_TEXTURE_DEPTH :
 		return width * height;
-	case TEXTURE_PVR2 :
+	case EJ_TEXTURE_PVR2 :
 		return width * height / 4;
-	case TEXTURE_PVR4 :
-	case TEXTURE_ETC1 :
+	case EJ_TEXTURE_PVR4 :
+	case EJ_TEXTURE_ETC1 :
 		return width * height / 2;
-	case TEXTURE_ETC2:
+	case EJ_TEXTURE_ETC2:
 		return width * height;
 	default:
 		return 0;
@@ -668,7 +663,7 @@ calc_texture_size(enum TEXTURE_FORMAT format, int width, int height) {
 }
 
 RID 
-render_texture_create(struct render *R, int width, int height, enum TEXTURE_FORMAT format, enum TEXTURE_TYPE type, int mipmap) {
+render_texture_create(struct render *R, int width, int height, enum EJ_TEXTURE_FORMAT format, enum EJ_TEXTURE_TYPE type, int mipmap) {
 	struct texture * tex = (struct texture *)array_alloc(&R->texture);
 	if (tex == NULL)
 		return 0;
@@ -677,13 +672,13 @@ render_texture_create(struct render *R, int width, int height, enum TEXTURE_FORM
 	tex->height = height;
 	tex->format = format;
 	tex->type = type;
-	assert(type == TEXTURE_2D || type == TEXTURE_CUBE);
+	assert(type == EJ_TEXTURE_2D || type == EJ_TEXTURE_CUBE);
 	tex->mipmap = mipmap;
 	int size = calc_texture_size(format, width, height);
 	if (mipmap) {
 		size += size / 3;
 	}
-	if (type == TEXTURE_CUBE) {
+	if (type == EJ_TEXTURE_CUBE) {
 		size *= 6;
 	}
 	tex->memsize = size;
@@ -694,11 +689,11 @@ render_texture_create(struct render *R, int width, int height, enum TEXTURE_FORM
 
 static void
 bind_texture(struct render *R, struct texture * tex, int slice, GLenum *type, int *target) {
-	if (tex->type == TEXTURE_2D) {
+	if (tex->type == EJ_TEXTURE_2D) {
 		*type = GL_TEXTURE_2D;
 		*target = GL_TEXTURE_2D;
 	} else {
-		assert(tex->type == TEXTURE_CUBE);
+		assert(tex->type == EJ_TEXTURE_CUBE);
 		*type = GL_TEXTURE_CUBE_MAP;
 		*target = GL_TEXTURE_CUBE_MAP_POSITIVE_X + slice;
 	}
@@ -716,24 +711,24 @@ texture_format(struct texture * tex, GLint *pf, GLenum *pt) {
 	GLenum itype = 0;
 	int compressed = 0;
 	switch(tex->format) {
-	case TEXTURE_RGBA8 :
+	case EJ_TEXTURE_RGBA8 :
 		format = GL_RGBA;
 		itype = GL_UNSIGNED_BYTE;
 		break;
-	case TEXTURE_RGB :
+	case EJ_TEXTURE_RGB :
 		format = GL_RGB;
 		itype = GL_UNSIGNED_BYTE;
 		break;
-	case TEXTURE_RGBA4 :
+	case EJ_TEXTURE_RGBA4 :
 		format = GL_RGBA;
 		itype = GL_UNSIGNED_SHORT_4_4_4_4;
 		break;
-	case TEXTURE_RGB565:
+	case EJ_TEXTURE_RGB565:
 		format = GL_RGB;
 		itype = GL_UNSIGNED_SHORT_5_6_5;
 		break;
-	case TEXTURE_A8 :
-	case TEXTURE_DEPTH :
+	case EJ_TEXTURE_A8 :
+	case EJ_TEXTURE_DEPTH :
 	#if OPENGLES == 3
 		format = GL_RED;
 	#else
@@ -742,25 +737,25 @@ texture_format(struct texture * tex, GLint *pf, GLenum *pt) {
 		itype = GL_UNSIGNED_BYTE;
 		break;
 #ifdef GL_COMPRESSED_RGBA_PVRTC_2BPPV1_IMG 
-	case TEXTURE_PVR2 :
+	case EJ_TEXTURE_PVR2 :
 		format = GL_COMPRESSED_RGBA_PVRTC_2BPPV1_IMG;
 		compressed = 1;
 		break;
 #endif
 #ifdef GL_COMPRESSED_RGBA_PVRTC_4BPPV1_IMG 
-	case TEXTURE_PVR4 :
+	case EJ_TEXTURE_PVR4 :
 		format = GL_COMPRESSED_RGBA_PVRTC_4BPPV1_IMG;
 		compressed = 1;
 		break;
 #endif
 #ifdef GL_ETC1_RGB8_OES
-	case TEXTURE_ETC1 :
+	case EJ_TEXTURE_ETC1 :
 		format = GL_ETC1_RGB8_OES;
 		compressed = 1;
 		break;
 #endif // GL_ETC1_RGB8_OES
 #ifdef __ANDROID__
-	case TEXTURE_ETC2:
+	case EJ_TEXTURE_ETC2:
 		format = 0x9278;	// GL_COMPRESSED_RGBA8_ETC2_EAC
 		compressed = 1;
 		break;
@@ -843,7 +838,7 @@ render_set_blendfunc(struct render *R, enum BLEND_FORMAT src, enum BLEND_FORMAT 
 
 // blend equation
 void 
-render_set_blendeq(struct render *R, enum BLEND_FUNC eq) {
+render_set_blendeq(struct render *R, enum EJ_BLEND_FUNC eq) {
 	R->current.blend_func = eq;
 	R->changeflag |= CHANGE_BLEND_EQ;
 }
@@ -863,14 +858,14 @@ render_enablescissor(struct render *R, int enable) {
 }
 
 void 
-render_setdepth(struct render *R, enum DEPTH_FORMAT d) {
+render_setdepth(struct render *R, enum EJ_DEPTH_FORMAT d) {
 	R->current.depth = d;
 	R->changeflag |= CHANGE_DEPTH;
 }
 
 // cull
 void 
-render_setcull(struct render *R, enum CULL_MODE c) {
+render_setcull(struct render *R, enum EJ_CULL_MODE c) {
 	R->current.cull = c;
 	R->changeflag |= CHANGE_CULL;
 }
@@ -898,8 +893,8 @@ create_rt(struct render *R, RID texid) {
 }
 
 RID 
-render_target_create(struct render *R, int width, int height, enum TEXTURE_FORMAT format) {
-	RID tex = render_texture_create(R, width, height, format, TEXTURE_2D, 0);
+render_target_create(struct render *R, int width, int height, enum EJ_TEXTURE_FORMAT format) {
+	RID tex = render_texture_create(R, width, height, format, EJ_TEXTURE_2D, 0);
 	if (tex == 0)
 		return 0;
 	render_texture_update(R, tex, width, height, NULL, 0, 0);
@@ -909,7 +904,7 @@ render_target_create(struct render *R, int width, int height, enum TEXTURE_FORMA
 	R->changeflag |= CHANGE_TARGET;
 
 	if (rt == 0) {
-		render_release(R, TEXTURE, tex);
+		render_release(R, EJ_TEXTURE, tex);
 	}
 	CHECK_GL_ERROR
 	return rt;
@@ -975,9 +970,9 @@ render_state_commit(struct render *R) {
 
 	if (R->changeflag & CHANGE_BLEND_FUNC) {
 		if (R->last.blend_src != R->current.blend_src || R->last.blend_dst != R->current.blend_dst) {
-			if (R->current.blend_src == BLEND_DISABLE) {
+			if (R->current.blend_src == EJ_BLEND_DISABLE) {
 				glDisable(GL_BLEND);
-			} else if (R->last.blend_src == BLEND_DISABLE) {
+			} else if (R->last.blend_src == EJ_BLEND_DISABLE) {
 				glEnable(GL_BLEND);
 			}
 			static GLenum blend[] = {
@@ -1011,7 +1006,7 @@ render_state_commit(struct render *R) {
 				GL_FUNC_SUBTRACT,
 				GL_FUNC_REVERSE_SUBTRACT,
 			};
-			enum BLEND_FUNC func = R->current.blend_func;
+			enum EJ_BLEND_FUNC func = R->current.blend_func;
 			glBlendEquation(blend[func]);
 			R->last.blend_func = func;
 		}
@@ -1019,10 +1014,10 @@ render_state_commit(struct render *R) {
 
 	if (R->changeflag & CHANGE_DEPTH) {
 		if (R->last.depth != R->current.depth) {
-			if (R->last.depth == DEPTH_DISABLE) {
+			if (R->last.depth == EJ_DEPTH_DISABLE) {
 				glEnable( GL_DEPTH_TEST);
 			} 
-			if (R->current.depth == DEPTH_DISABLE) {
+			if (R->current.depth == EJ_DEPTH_DISABLE) {
 				glDisable( GL_DEPTH_TEST);
 			} else {
 				static GLenum depth[] = {
@@ -1046,13 +1041,13 @@ render_state_commit(struct render *R) {
 
 	if (R->changeflag & CHANGE_CULL) {
 		if (R->last.cull != R->current.cull) {
-			if (R->last.cull == CULL_DISABLE) {
+			if (R->last.cull == EJ_CULL_DISABLE) {
 				glEnable(GL_CULL_FACE);
 			}
-			if (R->current.cull == CULL_DISABLE) {
+			if (R->current.cull == EJ_CULL_DISABLE) {
 				glDisable(GL_CULL_FACE);
 			} else {
-				glCullFace(R->current.cull == CULL_FRONT ? GL_FRONT : GL_BACK);
+				glCullFace(R->current.cull == EJ_CULL_FRONT ? GL_FRONT : GL_BACK);
 			}
 			R->last.cull = R->current.cull;
 		}
@@ -1089,9 +1084,9 @@ render_state_reset(struct render *R) {
 }
 
 void
-render_clear(struct render *R, enum CLEAR_MASK mask, unsigned long c) {
+render_clear(struct render *R, enum EJ_CLEAR_MASK mask, unsigned long c) {
 	GLbitfield m = 0;
-	if (mask & MASKC) {
+	if (mask & EJ_MASKC) {
 		m |= GL_COLOR_BUFFER_BIT;
 		float a = ((c >> 24) & 0xff ) / 255.0;
 		float r = ((c >> 16) & 0xff ) / 255.0;
@@ -1099,10 +1094,10 @@ render_clear(struct render *R, enum CLEAR_MASK mask, unsigned long c) {
 		float b = ((c >> 0) & 0xff ) / 255.0;
 		glClearColor(r,g,b,a);
 	}
-	if (mask & MASKD) {
+	if (mask & EJ_MASKD) {
 		m |= GL_DEPTH_BUFFER_BIT;
 	}
-	if (mask & MASKS) {
+	if (mask & EJ_MASKS) {
 		m |= GL_STENCIL_BUFFER_BIT;
 	}
 	render_state_commit(R);
@@ -1113,7 +1108,7 @@ render_clear(struct render *R, enum CLEAR_MASK mask, unsigned long c) {
 
 // draw
 void 
-render_draw_elements(struct render *R, enum DRAW_MODE mode, int fromidx, int ni) {
+render_draw_elements(struct render *R, enum EJ_DRAW_MODE mode, int fromidx, int ni) {
 	static int draw_mode[] = {
 		GL_POINTS,
 		GL_LINES,
@@ -1142,7 +1137,7 @@ render_draw_elements(struct render *R, enum DRAW_MODE mode, int fromidx, int ni)
 }
 
 void 
-render_draw_arrays(struct render *R, enum DRAW_MODE mode, int fromidx, int ni) {
+render_draw_arrays(struct render *R, enum EJ_DRAW_MODE mode, int fromidx, int ni) {
 	static int draw_mode[] = {
 		GL_POINTS,
 		GL_LINES,
@@ -1172,27 +1167,27 @@ render_shader_locuniform(struct render *R, const char * name) {
 }
 
 void 
-render_shader_setuniform(struct render *R, int loc, enum UNIFORM_FORMAT format, const float *v) {
+render_shader_setuniform(struct render *R, int loc, enum EJ_UNIFORM_FORMAT format, const float *v) {
 	switch(format) {
-	case UNIFORM_FLOAT1:
+	case EJ_UNIFORM_FLOAT1:
 		glUniform1f(loc, v[0]);
 		break;
-	case UNIFORM_FLOAT2:
+	case EJ_UNIFORM_FLOAT2:
 		glUniform2f(loc, v[0], v[1]);
 		break;
-	case UNIFORM_FLOAT3:
+	case EJ_UNIFORM_FLOAT3:
 		glUniform3f(loc, v[0], v[1], v[2]);
 		break;
-	case UNIFORM_FLOAT4:
+	case EJ_UNIFORM_FLOAT4:
 		glUniform4f(loc, v[0], v[1], v[2], v[3]);
 		break;
-	case UNIFORM_FLOAT33:
+	case EJ_UNIFORM_FLOAT33:
 		glUniformMatrix3fv(loc, 1, GL_FALSE, v);
 		break;
-	case UNIFORM_FLOAT44:
+	case EJ_UNIFORM_FLOAT44:
 		glUniformMatrix4fv(loc, 1, GL_FALSE, v);
 		break;
-	case UNIFORM_INT1:
+	case EJ_UNIFORM_INT1:
 		glUniform1i(loc, (int)v[0]);
 		break;
 	default:
@@ -1227,19 +1222,4 @@ render_query_target() {
 void 
 render_clear_texture_cache(struct render* R) {
 	memset(R->last.texture, 0, sizeof(R->last.texture));
-}
-
-void 
-render_gl_blend_enable() {
-	glEnable(GL_BLEND);
-}
-
-void 
-render_gl_blend_disable() {
-	glDisable(GL_BLEND);
-}
-
-void 
-render_gl_read_pixels(int x, int y, int w, int h, uint8_t* pixels) {
-	glReadPixels(x, y, w, h, GL_RGB, GL_UNSIGNED_BYTE, pixels);
 }

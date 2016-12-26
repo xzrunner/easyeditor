@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src\shaderlab;..\..\..\..\ds\src\ds;..\..\..\..\unirender\include;..\..\..\..\cu\src\cu;..\..\..\..\sm\src\sm;..\..\..\..\editor-external\c99"
+				AdditionalIncludeDirectories="..\..\..\include;..\..\..\include\shaderlab;..\..\..\..\ds\src\ds;..\..\..\..\unirender\include;..\..\..\..\cu\src\cu;..\..\..\..\sm\src\sm;..\..\..\..\editor-external\c99"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -105,7 +105,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src\shaderlab;..\..\..\..\ds\src\ds;..\..\..\..\unirender\include;..\..\..\..\cu\src\cu;..\..\..\..\sm\src\sm;..\..\..\..\editor-external\c99"
+				AdditionalIncludeDirectories="..\..\..\include;..\..\..\include\shaderlab;..\..\..\..\ds\src\ds;..\..\..\..\unirender\include;..\..\..\..\cu\src\cu;..\..\..\..\sm\src\sm;..\..\..\..\editor-external\c99"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -149,53 +149,53 @@
 			Name="shader"
 			>
 			<File
-				RelativePath="..\..\..\src\shaderlab\shader\Shader.h"
+				RelativePath="..\..\..\include\shaderlab\Shader.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\shader\ShaderMgr.cpp"
+				RelativePath="..\..\..\source\shader\ShaderMgr.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\shader\ShaderMgr.h"
+				RelativePath="..\..\..\include\shaderlab\ShaderMgr.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\shader\ShaderType.h"
+				RelativePath="..\..\..\include\shaderlab\ShaderType.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\shader\Uniform.h"
+				RelativePath="..\..\..\include\shaderlab\Uniform.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\shader\Utility.cpp"
+				RelativePath="..\..\..\source\shader\Utility.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\shader\Utility.h"
+				RelativePath="..\..\..\include\shaderlab\Utility.h"
 				>
 			</File>
 			<Filter
 				Name="shape"
 				>
 				<File
-					RelativePath="..\..\..\src\shaderlab\shader\ShapeShader.cpp"
+					RelativePath="..\..\..\source\shader\ShapeShader.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\shaderlab\shader\ShapeShader.h"
+					RelativePath="..\..\..\include\shaderlab\ShapeShader.h"
 					>
 				</File>
 				<Filter
 					Name="2d"
 					>
 					<File
-						RelativePath="..\..\..\src\shaderlab\shader\Shape2Shader.cpp"
+						RelativePath="..\..\..\source\shader\Shape2Shader.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\shader\Shape2Shader.h"
+						RelativePath="..\..\..\include\shaderlab\Shape2Shader.h"
 						>
 					</File>
 				</Filter>
@@ -203,11 +203,11 @@
 					Name="pseudo3d"
 					>
 					<File
-						RelativePath="..\..\..\src\shaderlab\shader\Shape3Shader.cpp"
+						RelativePath="..\..\..\source\shader\Shape3Shader.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\shader\Shape3Shader.h"
+						RelativePath="..\..\..\include\shaderlab\Shape3Shader.h"
 						>
 					</File>
 				</Filter>
@@ -216,22 +216,22 @@
 				Name="sprite"
 				>
 				<File
-					RelativePath="..\..\..\src\shaderlab\shader\SpriteShader.cpp"
+					RelativePath="..\..\..\source\shader\SpriteShader.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\shaderlab\shader\SpriteShader.h"
+					RelativePath="..\..\..\include\shaderlab\SpriteShader.h"
 					>
 				</File>
 				<Filter
 					Name="pseudo3d"
 					>
 					<File
-						RelativePath="..\..\..\src\shaderlab\shader\Sprite3Shader.cpp"
+						RelativePath="..\..\..\source\shader\Sprite3Shader.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\shader\Sprite3Shader.h"
+						RelativePath="..\..\..\include\shaderlab\Sprite3Shader.h"
 						>
 					</File>
 				</Filter>
@@ -239,11 +239,11 @@
 					Name="2d"
 					>
 					<File
-						RelativePath="..\..\..\src\shaderlab\shader\Sprite2Shader.cpp"
+						RelativePath="..\..\..\source\shader\Sprite2Shader.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\shader\Sprite2Shader.h"
+						RelativePath="..\..\..\include\shaderlab\Sprite2Shader.h"
 						>
 					</File>
 				</Filter>
@@ -252,23 +252,23 @@
 				Name="filter"
 				>
 				<File
-					RelativePath="..\..\..\src\shaderlab\shader\FilterMode.h"
+					RelativePath="..\..\..\include\shaderlab\FilterMode.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\shaderlab\shader\FilterProgram.cpp"
+					RelativePath="..\..\..\source\shader\FilterProgram.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\shaderlab\shader\FilterProgram.h"
+					RelativePath="..\..\..\include\shaderlab\FilterProgram.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\shaderlab\shader\FilterShader.cpp"
+					RelativePath="..\..\..\source\shader\FilterShader.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\shaderlab\shader\FilterShader.h"
+					RelativePath="..\..\..\include\shaderlab\FilterShader.h"
 					>
 				</File>
 				<Filter
@@ -278,11 +278,11 @@
 						Name="blur"
 						>
 						<File
-							RelativePath="..\..\..\src\shaderlab\shader\BlurProg.cpp"
+							RelativePath="..\..\..\source\shader\BlurProg.cpp"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\shaderlab\shader\BlurProg.h"
+							RelativePath="..\..\..\include\shaderlab\BlurProg.h"
 							>
 						</File>
 					</Filter>
@@ -290,11 +290,11 @@
 						Name="burning_map"
 						>
 						<File
-							RelativePath="..\..\..\src\shaderlab\shader\BurningMapProg.cpp"
+							RelativePath="..\..\..\source\shader\BurningMapProg.cpp"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\shaderlab\shader\BurningMapProg.h"
+							RelativePath="..\..\..\include\shaderlab\BurningMapProg.h"
 							>
 						</File>
 					</Filter>
@@ -302,11 +302,11 @@
 						Name="edge_detect"
 						>
 						<File
-							RelativePath="..\..\..\src\shaderlab\shader\EdgeDetectProg.cpp"
+							RelativePath="..\..\..\source\shader\EdgeDetectProg.cpp"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\shaderlab\shader\EdgeDetectProg.h"
+							RelativePath="..\..\..\include\shaderlab\EdgeDetectProg.h"
 							>
 						</File>
 					</Filter>
@@ -314,19 +314,19 @@
 						Name="gaussian_blur"
 						>
 						<File
-							RelativePath="..\..\..\src\shaderlab\shader\GaussianBlurHoriProg.cpp"
+							RelativePath="..\..\..\source\shader\GaussianBlurHoriProg.cpp"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\shaderlab\shader\GaussianBlurHoriProg.h"
+							RelativePath="..\..\..\include\shaderlab\GaussianBlurHoriProg.h"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\shaderlab\shader\GaussianBlurVertProg.cpp"
+							RelativePath="..\..\..\source\shader\GaussianBlurVertProg.cpp"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\shaderlab\shader\GaussianBlurVertProg.h"
+							RelativePath="..\..\..\include\shaderlab\GaussianBlurVertProg.h"
 							>
 						</File>
 					</Filter>
@@ -334,11 +334,11 @@
 						Name="gray"
 						>
 						<File
-							RelativePath="..\..\..\src\shaderlab\shader\GrayProg.cpp"
+							RelativePath="..\..\..\source\shader\GrayProg.cpp"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\shaderlab\shader\GrayProg.h"
+							RelativePath="..\..\..\include\shaderlab\GrayProg.h"
 							>
 						</File>
 					</Filter>
@@ -346,11 +346,11 @@
 						Name="heat_haze"
 						>
 						<File
-							RelativePath="..\..\..\src\shaderlab\shader\HeatHazeProg.cpp"
+							RelativePath="..\..\..\source\shader\HeatHazeProg.cpp"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\shaderlab\shader\HeatHazeProg.h"
+							RelativePath="..\..\..\include\shaderlab\HeatHazeProg.h"
 							>
 						</File>
 					</Filter>
@@ -358,11 +358,11 @@
 						Name="outline"
 						>
 						<File
-							RelativePath="..\..\..\src\shaderlab\shader\OutlineProg.cpp"
+							RelativePath="..\..\..\source\shader\OutlineProg.cpp"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\shaderlab\shader\OutlineProg.h"
+							RelativePath="..\..\..\include\shaderlab\OutlineProg.h"
 							>
 						</File>
 					</Filter>
@@ -370,11 +370,11 @@
 						Name="relief"
 						>
 						<File
-							RelativePath="..\..\..\src\shaderlab\shader\ReliefProg.cpp"
+							RelativePath="..\..\..\source\shader\ReliefProg.cpp"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\shaderlab\shader\ReliefProg.h"
+							RelativePath="..\..\..\include\shaderlab\ReliefProg.h"
 							>
 						</File>
 					</Filter>
@@ -382,11 +382,11 @@
 						Name="shock_wave"
 						>
 						<File
-							RelativePath="..\..\..\src\shaderlab\shader\ShockWaveProg.cpp"
+							RelativePath="..\..\..\source\shader\ShockWaveProg.cpp"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\shaderlab\shader\ShockWaveProg.h"
+							RelativePath="..\..\..\include\shaderlab\ShockWaveProg.h"
 							>
 						</File>
 					</Filter>
@@ -394,11 +394,11 @@
 						Name="swirl"
 						>
 						<File
-							RelativePath="..\..\..\src\shaderlab\shader\SwirlProg.cpp"
+							RelativePath="..\..\..\source\shader\SwirlProg.cpp"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\shaderlab\shader\SwirlProg.h"
+							RelativePath="..\..\..\include\shaderlab\SwirlProg.h"
 							>
 						</File>
 					</Filter>
@@ -410,11 +410,11 @@
 						Name="color_grading"
 						>
 						<File
-							RelativePath="..\..\..\src\shaderlab\shader\ColGradingProg.cpp"
+							RelativePath="..\..\..\source\shader\ColGradingProg.cpp"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\shaderlab\shader\ColGradingProg.h"
+							RelativePath="..\..\..\include\shaderlab\ColGradingProg.h"
 							>
 						</File>
 					</Filter>
@@ -424,15 +424,15 @@
 				Name="blend"
 				>
 				<File
-					RelativePath="..\..\..\src\shaderlab\shader\BlendMode.h"
+					RelativePath="..\..\..\include\shaderlab\BlendMode.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\shaderlab\shader\BlendShader.cpp"
+					RelativePath="..\..\..\source\shader\BlendShader.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\shaderlab\shader\BlendShader.h"
+					RelativePath="..\..\..\include\shaderlab\BlendShader.h"
 					>
 				</File>
 			</Filter>
@@ -440,11 +440,11 @@
 				Name="model3"
 				>
 				<File
-					RelativePath="..\..\..\src\shaderlab\shader\Model3Shader.cpp"
+					RelativePath="..\..\..\source\shader\Model3Shader.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\shaderlab\shader\Model3Shader.h"
+					RelativePath="..\..\..\include\shaderlab\Model3Shader.h"
 					>
 				</File>
 			</Filter>
@@ -452,42 +452,42 @@
 				Name="utility"
 				>
 				<File
-					RelativePath="..\..\..\src\shaderlab\shader\ShaderProgram.cpp"
+					RelativePath="..\..\..\source\shader\ShaderProgram.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\shaderlab\shader\ShaderProgram.h"
+					RelativePath="..\..\..\include\shaderlab\ShaderProgram.h"
 					>
 				</File>
 				<Filter
 					Name="msg"
 					>
 					<File
-						RelativePath="..\..\..\src\shaderlab\shader\ObserverMVP.cpp"
+						RelativePath="..\..\..\source\shader\ObserverMVP.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\shader\ObserverMVP.h"
+						RelativePath="..\..\..\include\shaderlab\ObserverMVP.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\shader\SubjectMVP.h"
+						RelativePath="..\..\..\include\shaderlab\SubjectMVP.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\shader\SubjectMVP2.cpp"
+						RelativePath="..\..\..\source\shader\SubjectMVP2.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\shader\SubjectMVP2.h"
+						RelativePath="..\..\..\include\shaderlab\SubjectMVP2.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\shader\SubjectMVP3.cpp"
+						RelativePath="..\..\..\source\shader\SubjectMVP3.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\shader\SubjectMVP3.h"
+						RelativePath="..\..\..\include\shaderlab\SubjectMVP3.h"
 						>
 					</File>
 				</Filter>
@@ -496,11 +496,11 @@
 				Name="mask"
 				>
 				<File
-					RelativePath="..\..\..\src\shaderlab\shader\MaskShader.cpp"
+					RelativePath="..\..\..\source\shader\MaskShader.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\shaderlab\shader\MaskShader.h"
+					RelativePath="..\..\..\include\shaderlab\MaskShader.h"
 					>
 				</File>
 			</Filter>
@@ -509,31 +509,31 @@
 			Name="utility"
 			>
 			<File
-				RelativePath="..\..\..\src\shaderlab\utility\Buffer.cpp"
+				RelativePath="..\..\..\source\utility\Buffer.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\utility\Buffer.h"
+				RelativePath="..\..\..\include\shaderlab\Buffer.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\utility\StackAllocator.cpp"
+				RelativePath="..\..\..\source\utility\StackAllocator.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\utility\StackAllocator.h"
+				RelativePath="..\..\..\include\shaderlab\StackAllocator.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\utility\Statistics.cpp"
+				RelativePath="..\..\..\source\utility\Statistics.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\utility\Statistics.h"
+				RelativePath="..\..\..\include\shaderlab\Statistics.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\utility\typedef.h"
+				RelativePath="..\..\..\include\shaderlab\typedef.h"
 				>
 			</File>
 		</Filter>
@@ -541,27 +541,27 @@
 			Name="render"
 			>
 			<File
-				RelativePath="..\..\..\src\shaderlab\render\RenderBuffer.cpp"
+				RelativePath="..\..\..\source\render\RenderBuffer.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\render\RenderBuffer.h"
+				RelativePath="..\..\..\include\shaderlab\RenderBuffer.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\render\RenderLayout.cpp"
+				RelativePath="..\..\..\source\render\RenderLayout.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\render\RenderLayout.h"
+				RelativePath="..\..\..\include\shaderlab\RenderLayout.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\render\RenderShader.cpp"
+				RelativePath="..\..\..\source\render\RenderShader.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\render\RenderShader.h"
+				RelativePath="..\..\..\include\shaderlab\RenderShader.h"
 				>
 			</File>
 		</Filter>
@@ -569,22 +569,22 @@
 			Name="parser"
 			>
 			<File
-				RelativePath="..\..\..\src\shaderlab\parser\Shader.cpp"
+				RelativePath="..\..\..\source\parser\ParserShader.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\parser\Shader.h"
+				RelativePath="..\..\..\include\shaderlab\ParserShader.h"
 				>
 			</File>
 			<Filter
 				Name="utility"
 				>
 				<File
-					RelativePath="..\..\..\src\shaderlab\parser\StringHelper.cpp"
+					RelativePath="..\..\..\source\parser\StringHelper.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\shaderlab\parser\StringHelper.h"
+					RelativePath="..\..\..\include\shaderlab\StringHelper.h"
 					>
 				</File>
 			</Filter>
@@ -592,34 +592,34 @@
 				Name="nodes"
 				>
 				<File
-					RelativePath="..\..\..\src\shaderlab\parser\Node.cpp"
+					RelativePath="..\..\..\source\parser\Node.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\shaderlab\parser\Node.h"
+					RelativePath="..\..\..\include\shaderlab\Node.h"
 					>
 				</File>
 				<Filter
 					Name="vert"
 					>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\GouraudShading.cpp"
+						RelativePath="..\..\..\source\parser\GouraudShading.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\GouraudShading.h"
+						RelativePath="..\..\..\include\shaderlab\GouraudShading.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\PositionTrans.cpp"
+						RelativePath="..\..\..\source\parser\PositionTrans.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\PositionTrans.h"
+						RelativePath="..\..\..\include\shaderlab\PositionTrans.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\VertPosition.h"
+						RelativePath="..\..\..\include\shaderlab\VertPosition.h"
 						>
 					</File>
 				</Filter>
@@ -627,31 +627,31 @@
 					Name="frag"
 					>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\ColorAddMul.cpp"
+						RelativePath="..\..\..\source\parser\ColorAddMul.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\ColorAddMul.h"
+						RelativePath="..\..\..\include\shaderlab\ColorAddMul.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\ColorMap.cpp"
+						RelativePath="..\..\..\source\parser\ColorMap.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\ColorMap.h"
+						RelativePath="..\..\..\include\shaderlab\ColorMap.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\FragColor.h"
+						RelativePath="..\..\..\include\shaderlab\FragColor.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\TextureMap.cpp"
+						RelativePath="..\..\..\source\parser\TextureMap.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\TextureMap.h"
+						RelativePath="..\..\..\include\shaderlab\TextureMap.h"
 						>
 					</File>
 				</Filter>
@@ -659,43 +659,43 @@
 					Name="atomic"
 					>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\Add1.h"
+						RelativePath="..\..\..\include\shaderlab\Add1.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\Add2.h"
+						RelativePath="..\..\..\include\shaderlab\Add2.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\Assign.cpp"
+						RelativePath="..\..\..\source\parser\Assign.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\Assign.h"
+						RelativePath="..\..\..\include\shaderlab\Assign.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\AttributeNode.cpp"
+						RelativePath="..\..\..\source\parser\AttributeNode.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\AttributeNode.h"
+						RelativePath="..\..\..\include\shaderlab\AttributeNode.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\Mul1.h"
+						RelativePath="..\..\..\include\shaderlab\Mul1.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\Mul2.h"
+						RelativePath="..\..\..\include\shaderlab\Mul2.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\VaryingNode.cpp"
+						RelativePath="..\..\..\source\parser\VaryingNode.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\VaryingNode.h"
+						RelativePath="..\..\..\include\shaderlab\VaryingNode.h"
 						>
 					</File>
 				</Filter>
@@ -703,22 +703,22 @@
 					Name="filter"
 					>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\Filter.cpp"
+						RelativePath="..\..\..\source\parser\Filter.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\Filter.h"
+						RelativePath="..\..\..\include\shaderlab\Filter.h"
 						>
 					</File>
 					<Filter
 						Name="blur"
 						>
 						<File
-							RelativePath="..\..\..\src\shaderlab\parser\blur.frag"
+							RelativePath="..\..\..\include\shaderlab\blur.frag"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\shaderlab\parser\Blur.h"
+							RelativePath="..\..\..\include\shaderlab\Blur.h"
 							>
 						</File>
 					</Filter>
@@ -726,11 +726,11 @@
 						Name="edge_detect"
 						>
 						<File
-							RelativePath="..\..\..\src\shaderlab\parser\edge_detect.frag"
+							RelativePath="..\..\..\include\shaderlab\edge_detect.frag"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\shaderlab\parser\EdgeDetect.h"
+							RelativePath="..\..\..\include\shaderlab\EdgeDetect.h"
 							>
 						</File>
 					</Filter>
@@ -738,19 +738,19 @@
 						Name="gaussian_blur"
 						>
 						<File
-							RelativePath="..\..\..\src\shaderlab\parser\gaussian_blur_hori.frag"
+							RelativePath="..\..\..\include\shaderlab\gaussian_blur_hori.frag"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\shaderlab\parser\gaussian_blur_vert.frag"
+							RelativePath="..\..\..\include\shaderlab\gaussian_blur_vert.frag"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\shaderlab\parser\GaussianBlurHori.h"
+							RelativePath="..\..\..\include\shaderlab\GaussianBlurHori.h"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\shaderlab\parser\GaussianBlurVert.h"
+							RelativePath="..\..\..\include\shaderlab\GaussianBlurVert.h"
 							>
 						</File>
 					</Filter>
@@ -758,11 +758,11 @@
 						Name="gray"
 						>
 						<File
-							RelativePath="..\..\..\src\shaderlab\parser\Gray.cpp"
+							RelativePath="..\..\..\source\parser\Gray.cpp"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\shaderlab\parser\Gray.h"
+							RelativePath="..\..\..\include\shaderlab\Gray.h"
 							>
 						</File>
 					</Filter>
@@ -770,11 +770,11 @@
 						Name="heat_haze"
 						>
 						<File
-							RelativePath="..\..\..\src\shaderlab\parser\heat_haze.frag"
+							RelativePath="..\..\..\include\shaderlab\heat_haze.frag"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\shaderlab\parser\HeatHaze.h"
+							RelativePath="..\..\..\include\shaderlab\HeatHaze.h"
 							>
 						</File>
 					</Filter>
@@ -782,11 +782,11 @@
 						Name="outline"
 						>
 						<File
-							RelativePath="..\..\..\src\shaderlab\parser\outline.frag"
+							RelativePath="..\..\..\include\shaderlab\outline.frag"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\shaderlab\parser\Outline.h"
+							RelativePath="..\..\..\include\shaderlab\Outline.h"
 							>
 						</File>
 					</Filter>
@@ -794,11 +794,11 @@
 						Name="relief"
 						>
 						<File
-							RelativePath="..\..\..\src\shaderlab\parser\relief.frag"
+							RelativePath="..\..\..\include\shaderlab\relief.frag"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\shaderlab\parser\Relief.h"
+							RelativePath="..\..\..\include\shaderlab\Relief.h"
 							>
 						</File>
 					</Filter>
@@ -806,11 +806,11 @@
 						Name="shock_wave"
 						>
 						<File
-							RelativePath="..\..\..\src\shaderlab\parser\shock_wave.frag"
+							RelativePath="..\..\..\include\shaderlab\shock_wave.frag"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\shaderlab\parser\ShockWave.h"
+							RelativePath="..\..\..\include\shaderlab\ShockWave.h"
 							>
 						</File>
 					</Filter>
@@ -818,11 +818,11 @@
 						Name="swirl"
 						>
 						<File
-							RelativePath="..\..\..\src\shaderlab\parser\swirl.frag"
+							RelativePath="..\..\..\include\shaderlab\swirl.frag"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\shaderlab\parser\Swirl.h"
+							RelativePath="..\..\..\include\shaderlab\Swirl.h"
 							>
 						</File>
 					</Filter>
@@ -830,11 +830,11 @@
 						Name="burning_map"
 						>
 						<File
-							RelativePath="..\..\..\src\shaderlab\parser\burning_map.frag"
+							RelativePath="..\..\..\include\shaderlab\burning_map.frag"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\shaderlab\parser\BurningMap.h"
+							RelativePath="..\..\..\include\shaderlab\BurningMap.h"
 							>
 						</File>
 					</Filter>
@@ -842,11 +842,11 @@
 						Name="color_grading"
 						>
 						<File
-							RelativePath="..\..\..\src\shaderlab\parser\color_grading.frag"
+							RelativePath="..\..\..\include\shaderlab\color_grading.frag"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\shaderlab\parser\ColorGrading.h"
+							RelativePath="..\..\..\include\shaderlab\ColorGrading.h"
 							>
 						</File>
 					</Filter>
@@ -855,15 +855,15 @@
 					Name="blend"
 					>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\Blend.cpp"
+						RelativePath="..\..\..\source\parser\Blend.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\blend.frag"
+						RelativePath="..\..\..\include\shaderlab\blend.frag"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\Blend.h"
+						RelativePath="..\..\..\include\shaderlab\Blend.h"
 						>
 					</File>
 				</Filter>
@@ -871,15 +871,15 @@
 					Name="mask"
 					>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\Mask.cpp"
+						RelativePath="..\..\..\source\parser\Mask.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\Mask.frag"
+						RelativePath="..\..\..\include\shaderlab\Mask.frag"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\Mask.h"
+						RelativePath="..\..\..\include\shaderlab\Mask.h"
 						>
 					</File>
 				</Filter>
@@ -888,57 +888,53 @@
 				Name="variables"
 				>
 				<File
-					RelativePath="..\..\..\src\shaderlab\parser\IOType.h"
+					RelativePath="..\..\..\include\shaderlab\IOType.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\shaderlab\parser\Variable.h"
+					RelativePath="..\..\..\include\shaderlab\Variable.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\shaderlab\parser\VariableType.h"
+					RelativePath="..\..\..\include\shaderlab\VariableType.h"
 					>
 				</File>
 				<Filter
 					Name="types"
 					>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\Attribute.cpp"
+						RelativePath="..\..\..\source\parser\Attribute.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\Attribute.h"
+						RelativePath="..\..\..\include\shaderlab\Attribute.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\Uniform.cpp"
+						RelativePath="..\..\..\source\parser\ParserUniform.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\Uniform.h"
+						RelativePath="..\..\..\include\shaderlab\ParserUniform.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\Varying.cpp"
+						RelativePath="..\..\..\source\parser\Varying.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\Varying.h"
+						RelativePath="..\..\..\include\shaderlab\Varying.h"
 						>
 					</File>
 				</Filter>
 			</Filter>
 		</Filter>
 		<File
-			RelativePath="..\..\..\src\shaderlab\c_wrap_sl.cpp"
+			RelativePath="..\..\..\source\c_wrap_sl.cpp"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\shaderlab\c_wrap_sl.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\shaderlab\shaderlab.h"
+			RelativePath="..\..\..\include\c_wrap_sl.h"
 			>
 		</File>
 	</Files>

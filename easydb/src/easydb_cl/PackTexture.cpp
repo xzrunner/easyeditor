@@ -5,7 +5,6 @@
 #include <ee/FileHelper.h>
 #include <ee/SettingData.h>
 #include <ee/Config.h>
-#include <ee/EE_ShaderLab.h>
 #include <ee/StringHelper.h>
 #include <ee/LibpngAdapter.h>
 #include <ee/SymbolFile.h>
