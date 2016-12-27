@@ -17,6 +17,7 @@
 #include <sprite2/RenderCtxStack.h>
 #include <gum/RenderContext.h>
 #include <gum/RenderTarget.h>
+#include <gum/GUM_DTex2.h>
 
 namespace ee
 {
@@ -94,6 +95,8 @@ void TwoPassCanvas::OnDrawWhole() const
 {
 //	DrawOnePass();
 	DrawTwoPass();
+
+	DebugDraw();
 }
 
 #endif // OPEN_SCREEN_CACHE
@@ -157,6 +160,11 @@ void TwoPassCanvas::DrawTwoPass() const
 	sl::ShaderMgr::Instance()->FlushShader();
 
 	s2::RenderCtxStack::Instance()->Pop(false);
+}
+
+void TwoPassCanvas::DebugDraw() const
+{
+	gum::DTex2::Instance()->DebugDraw();
 }
 
 }

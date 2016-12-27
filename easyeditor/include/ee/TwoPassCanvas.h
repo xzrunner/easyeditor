@@ -29,6 +29,8 @@ private:
 	void DrawOnePass() const;
 	void DrawTwoPass() const;
 
+	void DebugDraw() const;
+
 protected:
 	ScreenStyle m_scr_style;
 

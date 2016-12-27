@@ -21,6 +21,7 @@
 
 #include <sprite2/S2_Sprite.h>
 #include <sprite2/Texture.h>
+#include <gum/GUM_DTex2.h>
 
 namespace ee
 {
@@ -91,11 +92,13 @@ bool Image::LoadFromFile(const std::string& filepath)
 		return true;
 	}
 
-	if (Config::Instance()->IsUseDTex() && CanUseDTex()) {
-// 		gum::DTex* dcb = gum::DTex::Instance();
-// 		dcb->LoadBegin();
-// 		dcb->Load(GetFilepath(), GetS2Tex());
-// 		dcb->LoadEnd();
+	if (Config::Instance()->IsUseDTex() && CanUseDTex()) 
+	{
+		gum::DTex2* dtex = gum::DTex2::Instance();
+		dtex->LoadSymStart();
+		sm::vec2 sz = m_s2_tex->GetSize();
+		dtex->LoadSymbol(GetFilepath(), m_s2_tex->GetTexID(), sz.x, sz.y);
+		dtex->LoadSymFinish();
 	}
 
 	return true;
@@ -180,9 +183,9 @@ const ImageData* Image::GetImageData() const
 
 void Image::QueryTexcoords(float* texcoords, int* texid) const
 {
-	float* c2_texcoords = NULL;
+	const float* c2_texcoords = NULL;
 	if (Config::Instance()->IsUseDTex() && CanUseDTex()) {
-//		c2_texcoords = gum::DTex::Instance()->Query(GetFilepath(), GetS2Tex(), texid);
+		c2_texcoords = gum::DTex2::Instance()->QuerySymbol(GetFilepath(), texid);
 	}
 	if (c2_texcoords)
 	{
@@ -195,9 +198,9 @@ void Image::QueryTexcoords(float* texcoords, int* texid) const
 		txmin = tymin = 0;
 		txmax = tymax = 1;
 		texcoords[0] = txmin; texcoords[1] = tymin;
-		texcoords[2] = txmin; texcoords[3] = tymax;
+		texcoords[2] = txmax; texcoords[3] = tymin;
 		texcoords[4] = txmax; texcoords[5] = tymax;
-		texcoords[6] = txmax; texcoords[7] = tymin;
+		texcoords[6] = txmin; texcoords[7] = tymax;
 	}
 }
 
