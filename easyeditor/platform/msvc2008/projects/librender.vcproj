@@ -363,14 +363,6 @@
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\source\render\ScreenCache.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\include\ee\ScreenCache.h"
-			>
-		</File>
-		<File
 			RelativePath="..\..\..\include\ee\style_config.h"
 			>
 		</File>

@@ -27,12 +27,17 @@
 #include <ee/SymbolFile.h>
 
 #include <sprite2/SymType.h>
-#include <dtex_typedef.h>
 
 #include <fstream>
 
 namespace erespacker
 {
+
+static const int DTEX_PNG4 = 0;
+static const int DTEX_PNG8 = 1;
+static const int DTEX_PVR  = 2;
+static const int DTEX_ETC1 = 3;
+static const int DTEX_ETC2 = 4;
 
 // ResPacker::ResPacker(const std::string& json_dir, const std::string& tp_name, 
 // 					 const std::string& tp_dir, const std::string& pkgs_cfg_file)

@@ -19,6 +19,8 @@ public:
 	s2::Color& GetMultiColor() { return m_scr_style.multi_col; }
 	s2::Color& GetAddColor() { return m_scr_style.add_col; }
 
+	void EnableColGrading(bool enable) { m_scr_style.col_grading = enable; }
+
 protected:
 	virtual void OnDrawSprites() const;
 

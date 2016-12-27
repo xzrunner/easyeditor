@@ -66,13 +66,9 @@ void ShaderMgr::SetShader(ShaderType type)
 
 RenderShader* ShaderMgr::CreateRenderShader()
 {
-	if (m_render_shaders.size() < MAX_SHADER) {
-		RenderShader* shader = new RenderShader(m_context);
-		m_render_shaders.push_back(shader);
-		return shader;
-	} else {
-		return NULL;
-	}
+	RenderShader* shader = new RenderShader(m_context);
+	m_render_shaders.push_back(shader);
+	return shader;
 }
 
 void ShaderMgr::BindRenderShader(RenderShader* shader, int type)
@@ -92,11 +88,18 @@ void ShaderMgr::BindRenderShader(RenderShader* shader, int type)
 	m_curr_render_shader->Bind();
 }
 
-void ShaderMgr::Flush()
+void ShaderMgr::FlushShader()
 {
 	Shader* shader = GetShader();
 	if (shader) {
 		shader->Commit();
+	}
+}
+
+void ShaderMgr::FlushRenderShader()
+{
+	if (m_curr_render_shader) {
+		m_curr_render_shader->Commit();
 	}
 }
 

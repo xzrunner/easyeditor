@@ -240,6 +240,12 @@ s2::Color& StagePanel::GetScreenAddColor()
 	return canvas->GetAddColor();	
 }
 
+void StagePanel::EnableColorGrading(bool enable)
+{
+	StageCanvas* canvas = static_cast<StageCanvas*>(GetCanvas());
+	canvas->EnableColGrading(enable);
+}
+
 void StagePanel::OnMouseHook(wxMouseEvent& event)
 {
 	if (event.RightDown()) {

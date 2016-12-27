@@ -60,7 +60,7 @@ void RenderContextStack::SetModelView(const sm::vec2& offset, float scale)
 		m_curr_ctx->SetModelView(offset, scale);
 	} else {
 		sl::SubjectMVP2::Instance()->NotifyModelview(offset.x, offset.y, scale, scale);
-		//	sl::SubjectMVP3::Instance()->NotifyModelview(m_p3d_cam->GetModelViewMat());
+	//	sl::SubjectMVP3::Instance()->NotifyModelview(m_p3d_cam->GetModelViewMat());
 	}
 }
 

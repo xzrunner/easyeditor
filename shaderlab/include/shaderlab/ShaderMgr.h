@@ -40,7 +40,8 @@ public:
 	RenderShader* CreateRenderShader();
 	void BindRenderShader(RenderShader* shader, int type = -1);
 
-	void Flush();
+	void FlushShader();
+	void FlushRenderShader();
 	
 private:
 	ur::RenderContext* m_context;

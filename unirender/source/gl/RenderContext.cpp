@@ -15,7 +15,7 @@ namespace gl
 {
 
 RenderContext::RenderContext(const RenderContext::Callback& cb)
-	: m_state_change_cb(cb.state_change)
+	: m_cb(cb)
 {
 	render_init_args RA;
 	// todo: config these args
@@ -36,7 +36,7 @@ RenderContext::RenderContext(const RenderContext::Callback& cb)
 //	m_curr_rt = render_query_target();
 
 	m_rt_depth = 0;
-	m_rt_layers[++m_rt_depth] = render_query_target();
+	m_rt_layers[m_rt_depth++] = render_query_target();
 
 	// State
 	m_blend_src = BLEND_ONE;
@@ -91,7 +91,7 @@ void RenderContext::BindTexture(int id, int channel)
 		return;
 	}
 
-	m_state_change_cb();
+	m_cb.flush_render_shader();
 
 	m_textures[channel] = id;
 	render_set(m_render, EJ_TEXTURE, id, channel);
@@ -128,7 +128,7 @@ void RenderContext::BindRenderTarget(int id)
 {
 	assert(m_rt_depth < MAX_RENDER_TARGET_LAYER);
 
-	m_state_change_cb();
+	m_cb.flush_shader();
 
 	int curr = m_rt_layers[m_rt_depth - 1];
 	if (curr != id) {
@@ -147,7 +147,7 @@ void RenderContext::UnbindRenderTarget()
 {
 	assert(m_rt_depth > 1);
 
-	m_state_change_cb();
+	m_cb.flush_shader();
 
 	int curr = m_rt_layers[m_rt_depth - 1],
 		prev = m_rt_layers[m_rt_depth - 2];
@@ -249,7 +249,7 @@ void RenderContext::SetBlend(int m1, int m2)
 		return;
 	}
 
-	m_state_change_cb();
+	m_cb.flush_shader();
 
 	m_blend_src = static_cast<BLEND_FORMAT>(m1);
 	m_blend_dst = static_cast<BLEND_FORMAT>(m2);
@@ -262,7 +262,7 @@ void RenderContext::SetBlendEquation(int func)
 		return;
 	}
 
-	m_state_change_cb();
+	m_cb.flush_shader();
 
 	m_blend_func = static_cast<BLEND_FUNC>(func);
 	render_set_blendeq(m_render, (EJ_BLEND_FUNC)m_blend_func);
@@ -298,7 +298,7 @@ void RenderContext::SetViewport(int x, int y, int w, int h)
 {
 	if (x == m_vp_x && y == m_vp_y &&
 		w == m_vp_w && h == m_vp_h) {
-			return;
+		return;
 	}
 
 	m_vp_x = x;

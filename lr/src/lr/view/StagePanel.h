@@ -68,6 +68,7 @@ public:
 
 	s2::Color& GetScreenMultiColor();
 	s2::Color& GetScreenAddColor();
+	void EnableColorGrading(bool enable);
 
 	void SetResDir(const std::string& res_dir) { m_res_dir = res_dir; }
 	const std::string& GetResDir() const { return m_res_dir; }

@@ -64,10 +64,10 @@
 #include "TrailBuilder.h"
 #include <easytrail.h>
 
-#include <spritepack.h>
-
 namespace erespacker
 {
+
+static const int ANCHOR_ID = 0xffff;
 
 PackNodeFactory* PackNodeFactory::m_instance = NULL;
 

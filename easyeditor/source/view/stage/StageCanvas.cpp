@@ -173,7 +173,7 @@ void StageCanvas::OnPaint(wxPaintEvent& event)
 	m_dirty = false;
 	m_cam_dirty = false;
 
-	gum::RenderContext::Instance()->GetImpl()->Clear(0);
+	sl::ShaderMgr::Instance()->FlushShader();
 
 	glFlush();
 	SwapBuffers();

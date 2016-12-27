@@ -269,7 +269,7 @@ void SettingDialog::OnChangeGradingTexture(wxCommandEvent& event)
 				if (img) {
 					SettingCfg::Instance()->m_post_effect_file = filepath;
 					prog->SetLUTTex(img->GetTexID());
-//					ee::ScreenCache::Instance()->EnableColGrading(true);
+					m_stage->EnableColorGrading(true);
 				}
 			} catch (ee::Exception& e) {
 				ee::ExceptionDlg dlg(m_parent, e);

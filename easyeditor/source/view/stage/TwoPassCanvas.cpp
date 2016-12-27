@@ -14,6 +14,7 @@
 #include <shaderlab/FilterShader.h>
 #include <shaderlab/ColGradingProg.h>
 #include <shaderlab/Sprite2Shader.h>
+#include <sprite2/RenderCtxStack.h>
 #include <gum/RenderContext.h>
 #include <gum/RenderTarget.h>
 
@@ -33,18 +34,20 @@ void TwoPassCanvas::OnSize(int w, int h)
 
 static void
 _before_draw(void* ud) {
-// 	if (ScreenCache::Instance()->IsColGradingEnable()) {
-// 		sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
-// 		sl::FilterShader* shader = static_cast<sl::FilterShader*>(mgr->GetShader(sl::FILTER));
-// 		sl::ColGradingProg* prog = static_cast<sl::ColGradingProg*>(shader->GetProgram(sl::FM_COL_GRADING));
-// 		if (prog->IsTexValid()) {
-// 			mgr->SetShader(sl::FILTER);
-// 			shader->SetMode(sl::FM_COL_GRADING);
-// 			return;
-// 		}
-// 	}
+	TwoPassCanvas::ScreenStyle* stype = (TwoPassCanvas::ScreenStyle*)ud;
 
- 	TwoPassCanvas::ScreenStyle* stype = (TwoPassCanvas::ScreenStyle*)ud;
+	if (stype->col_grading) 
+	{
+		sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
+		sl::FilterShader* shader = static_cast<sl::FilterShader*>(mgr->GetShader(sl::FILTER));
+		sl::ColGradingProg* prog = static_cast<sl::ColGradingProg*>(shader->GetProgram(sl::FM_COL_GRADING));
+		if (prog->IsTexValid()) {
+			mgr->SetShader(sl::FILTER);
+			shader->SetMode(sl::FM_COL_GRADING);
+			return;
+		}
+	}
+
  	s2::RenderColor color;
  	color.mul = stype->multi_col;
  	color.add = stype->add_col;
@@ -89,62 +92,73 @@ void TwoPassCanvas::OnDrawWhole() const
 
 void TwoPassCanvas::OnDrawWhole() const
 {
-	ur::RenderContext* rc = gum::RenderContext::Instance()->GetImpl();
-
- 	//if (ScreenCache::IsOpen()) 
- 	{
-		//////////////////////////////////////////////////////////////////////////
-		// Draw to Target
-		//////////////////////////////////////////////////////////////////////////
-		if (IsDirty()) {
-			ur::RenderTarget* rt = gum::RenderTarget::Instance()->GetScreen0();
-			rt->Bind();
-
-			rc->SetClearFlag(ur::MASKC);
-			rc->Clear(0);
-
-			glClearColor(0, 0, 0, 0);
-			glClear(GL_COLOR_BUFFER_BIT);
-
-			OnDrawSprites();
-
-			rt->Unbind();
-		}
-
-		//////////////////////////////////////////////////////////////////////////
-		// Draw to Screen
-		//////////////////////////////////////////////////////////////////////////
-
-		rc->SetClearFlag(m_bg_color.a << 24 | m_bg_color.r << 16 | m_bg_color.g << 8 | m_bg_color.b);
-		rc->Clear(0);
-
-		sm::vec2 vertices[4], texcoords[4];
-		vertices[0].Set(-1, -1);
-		vertices[1].Set( 1, -1);
-		vertices[2].Set( 1,  1);
-		vertices[3].Set(-1,  1);
-		texcoords[0].Set(0, 0);
-		texcoords[1].Set(1, 0);
-		texcoords[2].Set(1, 1);
-		texcoords[3].Set(0, 1);
-
-		ur::RenderTarget* rt = gum::RenderTarget::Instance()->GetScreen0();
-		sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
-		mgr->SetShader(sl::SPRITE2);
-		sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader());
-		shader->Draw(&vertices[0].x, &texcoords[0].x, rt->GetTexture()->ID());
- 	} 
- 	//else 
- 	//{
- 	//	glClearColor(m_bg_color.r / 255.0f, m_bg_color.g / 255.0f, m_bg_color.b / 255.0f, m_bg_color.a / 255.0f);
- 	//	glClear(GL_COLOR_BUFFER_BIT);
- 
- 	//	OnDrawSprites();
- 
- 	//	ShaderContext::Flush();
- 	//}
+//	DrawOnePass();
+	DrawTwoPass();
 }
 
 #endif // OPEN_SCREEN_CACHE
+
+void TwoPassCanvas::DrawOnePass() const
+{
+	ur::RenderContext* rc = gum::RenderContext::Instance()->GetImpl();
+	rc->SetClearFlag(ur::MASKC);
+	rc->Clear(m_bg_color.a << 24 | m_bg_color.r << 16 | m_bg_color.g << 8 | m_bg_color.b);
+
+	OnDrawSprites();
+
+	sl::ShaderMgr::Instance()->FlushShader();
+}
+
+void TwoPassCanvas::DrawTwoPass() const
+{
+	ur::RenderContext* rc = gum::RenderContext::Instance()->GetImpl();
+
+	//////////////////////////////////////////////////////////////////////////
+	// Draw to Target
+	//////////////////////////////////////////////////////////////////////////
+	if (IsDirty()) 
+	{
+		ur::RenderTarget* rt = gum::RenderTarget::Instance()->GetScreen0();
+		rt->Bind();
+
+		rc->SetClearFlag(ur::MASKC);
+		rc->Clear(0);
+
+		OnDrawSprites();
+
+		rt->Unbind();
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+	// Draw to Screen
+	//////////////////////////////////////////////////////////////////////////
+
+	s2::RenderCtxStack::Instance()->Push(s2::RenderCtx(2, 2, 0, 0), false);
+
+	rc->SetClearFlag(ur::MASKC);
+	rc->Clear(m_bg_color.a << 24 | m_bg_color.r << 16 | m_bg_color.g << 8 | m_bg_color.b);
+
+	sm::vec2 vertices[4], texcoords[4];
+	float hw = gum::RenderContext::Instance()->GetWidth() * 0.5f,
+		  hh = gum::RenderContext::Instance()->GetHeight() * 0.5f;
+	vertices[0].Set(-1, -1);
+	vertices[1].Set( 1, -1);
+	vertices[2].Set( 1,  1);
+	vertices[3].Set(-1,  1);
+	texcoords[0].Set(0, 0);
+	texcoords[1].Set(1, 0);
+	texcoords[2].Set(1, 1);
+	texcoords[3].Set(0, 1);
+
+	ur::RenderTarget* rt = gum::RenderTarget::Instance()->GetScreen0();
+	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
+	mgr->SetShader(sl::SPRITE2);
+	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader());
+	shader->Draw(&vertices[0].x, &texcoords[0].x, rt->GetTexture()->ID());
+
+	s2::RenderCtxStack::Instance()->Pop(false);
+
+	sl::ShaderMgr::Instance()->FlushShader();
+}
 
 }

@@ -154,7 +154,7 @@ void RenderTarget::DrawFBO(const Symbol* sym, bool whitebg, float scale)
 	ee::SpriteRenderer::Instance()->Draw(sym, params, sm::vec2(0, 0), 0.0f, sm::vec2(scale, -scale));
 
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
-	mgr->Flush();
+	mgr->FlushShader();
 
 	m_impl->Unbind();
 
@@ -205,7 +205,7 @@ void RenderTarget::DrawFBO(const Sprite* spr, bool clear, int width, int height,
 	SpriteRenderer::Instance()->Draw(spr, params);
 
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
-	mgr->Flush();
+	mgr->FlushShader();
 
 	m_impl->Unbind();
 

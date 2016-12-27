@@ -15,7 +15,8 @@ class RenderContext : public ur::RenderContext
 public:
 	struct Callback
 	{
-		void (*state_change)();
+		void (*flush_shader)();
+		void (*flush_render_shader)();
 	};
 
 public:
@@ -123,7 +124,7 @@ private:
 
 private:
 	render* m_render;
-	void (*m_state_change_cb)();
+	Callback m_cb;
 
 	/************************************************************************/
 	/* Texture                                                              */
