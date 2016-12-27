@@ -72,6 +72,7 @@ int  RenderContext::CreateTexture(const void* pixels, int width, int height, int
 
 void RenderContext::ReleaseTexture(int id)
 {
+	BindTexture(id, 0);
 	render_release(m_render, EJ_TEXTURE, id);
 }
 
@@ -140,7 +141,8 @@ void RenderContext::BindRenderTarget(int id)
 
 void RenderContext::BindRenderTargetTex(int tex_id)
 {
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex_id, 0);
+	int gl_id = render_get_texture_gl_id(m_render, tex_id);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, gl_id, 0);
 }
 
 void RenderContext::UnbindRenderTarget()

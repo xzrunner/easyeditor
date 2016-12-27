@@ -139,12 +139,10 @@ void TwoPassCanvas::DrawTwoPass() const
 	rc->Clear(m_bg_color.a << 24 | m_bg_color.r << 16 | m_bg_color.g << 8 | m_bg_color.b);
 
 	sm::vec2 vertices[4], texcoords[4];
-	float hw = gum::RenderContext::Instance()->GetWidth() * 0.5f,
-		  hh = gum::RenderContext::Instance()->GetHeight() * 0.5f;
-	vertices[0].Set(-1, -1);
-	vertices[1].Set( 1, -1);
-	vertices[2].Set( 1,  1);
-	vertices[3].Set(-1,  1);
+ 	vertices[0].Set(-1, -1);
+ 	vertices[1].Set( 1, -1);
+ 	vertices[2].Set( 1,  1);
+ 	vertices[3].Set(-1,  1);
 	texcoords[0].Set(0, 0);
 	texcoords[1].Set(1, 0);
 	texcoords[2].Set(1, 1);
@@ -154,11 +152,11 @@ void TwoPassCanvas::DrawTwoPass() const
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	mgr->SetShader(sl::SPRITE2);
 	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader());
-	shader->Draw(&vertices[0].x, &texcoords[0].x, rt->GetTexture()->ID());
-
-	s2::RenderCtxStack::Instance()->Pop(false);
+ 	shader->Draw(&vertices[0].x, &texcoords[0].x, rt->GetTexture()->ID());
 
 	sl::ShaderMgr::Instance()->FlushShader();
+
+	s2::RenderCtxStack::Instance()->Pop(false);
 }
 
 }

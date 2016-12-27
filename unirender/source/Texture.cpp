@@ -31,7 +31,7 @@ void Texture::Init()
 	m_format = TEXTURE_RGBA8;
 
 	uint32_t* pixels = new uint32_t[m_width * m_height];
-	memset(pixels, 0, m_width * m_height);
+	memset(pixels, 0, m_width * m_height * sizeof(uint32_t));
 
 	m_id = m_rc->CreateTexture(pixels, m_width, m_height, m_format);
 
