@@ -356,6 +356,26 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="rg_etc1"
+				>
+				<File
+					RelativePath="..\..\..\..\editor-external\rg_etc1\rg_etc1.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\editor-external\rg_etc1\rg_etc1.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\editor-external\rg_etc1\rg_etc1_for_c.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\editor-external\rg_etc1\rg_etc1_for_c.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="compress"

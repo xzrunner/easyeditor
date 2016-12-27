@@ -9,6 +9,7 @@
 
 #include <easyrespacker.h>
 
+#include <bimp/typedef.h>
 #include <simp/simp_define.h>
 #include <simp/Page.h>
 

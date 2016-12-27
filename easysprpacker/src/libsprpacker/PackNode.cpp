@@ -14,7 +14,7 @@ PackNode::PackNode()
 
 int PackNode::GetID() const
 {	
-	return simp::NodeFactory::ComposeID(m_pkg_id, m_node_id);
+	return simp::NodeID::ComposeID(m_pkg_id, m_node_id);
 }
 
 void PackNode::SetFilepath(const std::string& filepath) const 

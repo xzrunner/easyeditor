@@ -129,7 +129,7 @@ void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id) 
 	if (itr == pkg->sprs.end()) {
 		throw ee::Exception("query spr id fail: %s", filepath.c_str());
 	}
-	node_id = simp::NodeFactory::GetNodeID(itr->second);
+	node_id = simp::NodeID::GetNodeID(itr->second);
 }
 
 bool PackIDMgr::IsCurrPkg(const std::string& filepath) const
