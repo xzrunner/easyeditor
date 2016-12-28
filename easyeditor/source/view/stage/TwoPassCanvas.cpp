@@ -17,7 +17,7 @@
 #include <sprite2/RenderCtxStack.h>
 #include <gum/RenderContext.h>
 #include <gum/RenderTarget.h>
-#include <gum/GUM_DTex2.h>
+#include <gum/GUM_DTex.h>
 #include <gum/GUM_Sprite2.h>
 
 namespace ee
@@ -165,7 +165,7 @@ void TwoPassCanvas::DrawTwoPass() const
 
 void TwoPassCanvas::DebugDraw() const
 {
-	gum::DTex2::Instance()->DebugDraw();
+	gum::DTex::Instance()->DebugDraw();
 	gum::Sprite2::Instance()->DebugDraw();
 }
 

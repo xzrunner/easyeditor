@@ -2,7 +2,7 @@
 #include "RenderContextStack.h"
 
 #include <SM_Vector.h>
-#include <gum/GUM_DTex2.h>
+#include <gum/GUM_DTex.h>
 
 namespace ee
 {
@@ -31,7 +31,7 @@ static void _draw_end()
 
 void DTex::Init()
 {
-	gum::DTex2::Instance()->InitHook(_draw_begin, _draw_end);	
+	gum::DTex::Instance()->InitHook(_draw_begin, _draw_end);	
 }
 
 }

@@ -119,7 +119,7 @@ namespace ecomplex
 void FileLoader::Load(const std::string& filepath, Symbol* complex)
 {
 	if (ee::Config::Instance()->IsUseDTex()) {
-//		gum::DTex2::Instance()->LoadBegin();
+//		gum::DTex::Instance()->LoadBegin();
 	}
 
 	complex->Clear();

@@ -21,7 +21,7 @@
 
 #include <sprite2/S2_Sprite.h>
 #include <sprite2/Texture.h>
-#include <gum/GUM_DTex2.h>
+#include <gum/GUM_DTex.h>
 
 namespace ee
 {
@@ -94,7 +94,7 @@ bool Image::LoadFromFile(const std::string& filepath)
 
 	if (Config::Instance()->IsUseDTex() && CanUseDTex()) 
 	{
-		gum::DTex2* dtex = gum::DTex2::Instance();
+		gum::DTex* dtex = gum::DTex::Instance();
 		dtex->LoadSymStart();
 		sm::vec2 sz = m_s2_tex->GetSize();
 		dtex->LoadSymbol(GetFilepath(), m_s2_tex->GetTexID(), sz.x, sz.y);
@@ -185,7 +185,7 @@ void Image::QueryTexcoords(float* texcoords, int* texid) const
 {
 	const float* c2_texcoords = NULL;
 	if (Config::Instance()->IsUseDTex() && CanUseDTex()) {
-		c2_texcoords = gum::DTex2::Instance()->QuerySymbol(GetFilepath(), texid);
+		c2_texcoords = gum::DTex::Instance()->QuerySymbol(GetFilepath(), texid);
 	}
 	if (c2_texcoords)
 	{
