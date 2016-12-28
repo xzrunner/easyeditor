@@ -105,7 +105,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\logger\src\logger;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\freetype\include"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\logger\src\logger;..\..\..\..\ds\src\ds;..\..\..\..\fs\src\fs;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\freetype\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
