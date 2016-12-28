@@ -2,8 +2,6 @@
 #include "StagePanel.h"
 #include "Sprite.h"
 
-#include <gum/GUM_DTex2.h>
-
 #include <ee/SpriteRenderer.h>
 #include <ee/EditPanelImpl.h>
 #include <ee/DrawShapesVisitor.h>
@@ -29,12 +27,6 @@ void StageCanvas::OnDrawSprites() const
 	m_stage->DrawEditOP();
 
 	m_panel->TraverseShapes(ee::DrawShapesVisitor(sm::rect()), ee::DT_VISIBLE);
-
-#ifdef _DEBUG 
-	if (ee::Config::Instance()->IsUseDTex()) {
-		gum::DTex2::Instance()->DebugDraw();
-	}
-#endif
 }
 
 }

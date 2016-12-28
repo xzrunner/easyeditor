@@ -82,12 +82,6 @@ void StageCanvas::OnDrawSprites() const
 
 	m_fps.End();
 
-#ifdef _DEBUG 
-	if (ee::Config::Instance()->IsUseDTex()) {
-		gum::DTex2::Instance()->DebugDraw();
-	}
-#endif
-
 	m_fps.DrawTime();
 
 	wxLogDebug("++++++++ StageCanvas::OnDrawSprites end");
@@ -124,12 +118,6 @@ void StageCanvas::OnDrawSprites() const
 	m_stage->DrawEditOP();
 
 	m_fps.End();
-
-#ifdef _DEBUG 
-	if (ee::Config::Instance()->IsUseDTex()) {
-		gum::DTex2::Instance()->DebugDraw();
-	}
-#endif
 
 	m_fps.DrawTime();
 }

@@ -27,7 +27,6 @@
 #include <sprite2/BoundingBox.h>
 #include <gum/FilterModes.h>
 #include <gum/GUM_GTxt.h>
-#include <gum/GUM_DTex2.h>
 #include <gum/RenderContext.h>
 
 #include <algorithm>
@@ -54,12 +53,6 @@ void StageCanvas::OnDrawSprites() const
 	}
 
 	m_stage->DrawEditOP();
-
-#ifdef _DEBUG 
-	if (ee::Config::Instance()->IsUseDTex()) {
-		gum::DTex2::Instance()->DebugDraw();
-	}
-#endif
 }
 
 void StageCanvas::DrawSprites() const
