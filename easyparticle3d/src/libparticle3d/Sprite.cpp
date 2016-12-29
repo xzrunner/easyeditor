@@ -54,16 +54,10 @@ void Sprite::Store(Json::Value& val, const std::string& _dir) const
 	d_val["w"] = dir.w;
 	p_val["dir"] = d_val;
 
+	p_val["loop"] = m_loop;
+	p_val["local_mode_draw"] = m_local;
 	p_val["alone"] = m_alone;
 	p_val["reuse"] = m_reuse;
-
-	if (m_spr) {
-		p_val["loop"] = m_spr->et->loop;
-		p_val["local_mode_draw"] = m_spr->local_mode_draw;
-	} else {
-		p_val["loop"] = true;
-		p_val["local_mode_draw"] = true;
-	}
 
 	p_val["start_radius"] = m_start_radius;
 
