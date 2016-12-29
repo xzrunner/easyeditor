@@ -18,6 +18,7 @@
 #include <sprite2/SprTimer.h>
 #include <gum/GUM_ShaderLab.h>
 #include <gum/RenderContext.h>
+#include <gum/GUM_DTex.h>
 
 namespace ee
 {
@@ -227,6 +228,8 @@ void StageCanvas::OnTimer(wxTimerEvent& event)
 	last_time = curr_time;
 
 	s2::SprTimer::Instance()->Update(dt);
+
+	gum::DTex::Instance()->Flush();
 
 	bool dirty = m_stage->Update();
 	if (dirty) {
