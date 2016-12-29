@@ -6,6 +6,7 @@
 #include "view/LibraryPanel.h"
 #include "view/LibraryPage.h"
 #include "view/StagePanel.h"
+#include "view/StageCanvas.h"
 
 #include <ee/CameraMgr.h>
 #include <ee/OrthoCamera.h>
@@ -17,6 +18,9 @@
 #include <ee/SettingData.h>
 #include <ee/Config.h>
 
+#include <shaderlab/ShaderMgr.h>
+#include <shaderlab/ColGradingProg.h>
+#include <shaderlab/FilterShader.h>
 #include <gum/trans_color.h>
 
 #include <fstream>
@@ -103,6 +107,7 @@ void FileIO::Load(const char* filename, LibraryPanel* library,
 			if (img) {
 				SettingCfg::Instance()->m_post_effect_file = filepath;
 				prog->SetLUTTex(img->GetTexID());
+				static_cast<StageCanvas*>(stage->GetCanvas())->EnableColGrading(true);
 			}
 		}
 	}

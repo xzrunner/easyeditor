@@ -20,7 +20,7 @@ Config::Config()
 	m_use_dtex = true;
 	m_use_render = true;
 
-	m_debug_draw = false;
+	m_debug_draw = true;
 
 	m_settings = new SettingData;
 }
@@ -79,7 +79,9 @@ void Config::LoadFromFile(const char* filename)
 	LoadFontCfg(m_value["font"]);
 	LoadUserFontCfg(m_value["user_font"]);
 
-	m_debug_draw = m_value["debug_draw"].asBool();
+	if (m_value.isMember("debug_draw")) {
+		m_debug_draw = m_value["debug_draw"].asBool();
+	}
 
 	m_settings->LoadFromFile(m_value);
 

@@ -29,6 +29,8 @@ private:
 	void DrawOnePass() const;
 	void DrawTwoPass() const;
 
+	void DrawPass2(const float* vertices, const float* texcoords, int tex_id) const;
+
 	void DebugDraw() const;
 
 protected:

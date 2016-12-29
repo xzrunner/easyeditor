@@ -36,27 +36,7 @@ void TwoPassCanvas::OnSize(int w, int h)
 
 static void
 _before_draw(void* ud) {
-	TwoPassCanvas::ScreenStyle* stype = (TwoPassCanvas::ScreenStyle*)ud;
 
-	if (stype->col_grading) 
-	{
-		sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
-		sl::FilterShader* shader = static_cast<sl::FilterShader*>(mgr->GetShader(sl::FILTER));
-		sl::ColGradingProg* prog = static_cast<sl::ColGradingProg*>(shader->GetProgram(sl::FM_COL_GRADING));
-		if (prog->IsTexValid()) {
-			mgr->SetShader(sl::FILTER);
-			shader->SetMode(sl::FM_COL_GRADING);
-			return;
-		}
-	}
-
- 	s2::RenderColor color;
- 	color.mul = stype->multi_col;
- 	color.add = stype->add_col;
- 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
- 	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
- 	shader->SetColor(color.mul.ToABGR(), color.add.ToABGR());
- 	shader->SetColorMap(color.rmap.ToABGR(), color.gmap.ToABGR(), color.bmap.ToABGR());
 }
 
 #ifdef OPEN_SCREEN_CACHE
@@ -155,16 +135,36 @@ void TwoPassCanvas::DrawTwoPass() const
 	texcoords[3].Set(0, 1);
 
 	ur::RenderTarget* rt = gum::RenderTarget::Instance()->GetScreen0();
+	DrawPass2(&vertices[0].x, &texcoords[0].x, rt->GetTexture()->ID());
+ 	sl::ShaderMgr::Instance()->FlushShader();
+
+	s2::RenderCtxStack::Instance()->Pop(false);
+}
+
+void TwoPassCanvas::DrawPass2(const float* vertices, const float* texcoords, int tex_id) const
+{
+	if (m_scr_style.col_grading) 
+	{
+		sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
+		sl::FilterShader* shader = static_cast<sl::FilterShader*>(mgr->GetShader(sl::FILTER));
+		sl::ColGradingProg* prog = static_cast<sl::ColGradingProg*>(shader->GetProgram(sl::FM_COL_GRADING));
+		if (prog->IsTexValid()) {
+			mgr->SetShader(sl::FILTER);
+			shader->SetMode(sl::FM_COL_GRADING);
+			shader->Draw(vertices, texcoords, tex_id);
+			return;
+		}
+	}
+
+	s2::RenderColor color;
+	color.mul = m_scr_style.multi_col;
+	color.add = m_scr_style.add_col;
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	mgr->SetShader(sl::SPRITE2);
 	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader());
-	shader->SetColor(0xffffffff, 0);
-	shader->SetColorMap(0x000000ff, 0x0000ff00, 0x00ff0000);
- 	shader->Draw(&vertices[0].x, &texcoords[0].x, rt->GetTexture()->ID());
-
-	sl::ShaderMgr::Instance()->FlushShader();
-
-	s2::RenderCtxStack::Instance()->Pop(false);
+	shader->SetColor(color.mul.ToABGR(), color.add.ToABGR());
+	shader->SetColorMap(color.rmap.ToABGR(), color.gmap.ToABGR(), color.bmap.ToABGR());
+	shader->Draw(vertices, texcoords, tex_id);
 }
 
 void TwoPassCanvas::DebugDraw() const
