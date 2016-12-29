@@ -21,6 +21,8 @@ public:
 	bool IsRenderOpen() const { return m_use_render; }
 	void EnableRender(bool enable) { m_use_render = enable; }
 
+	bool IsDebugDrawOpen() const { return m_debug_draw; }
+
 	const std::set<std::string>& GetResPathes() const { return m_resource_paths; }
 	std::set<std::string>& GetResPathes() { return m_resource_paths; }
 
@@ -45,6 +47,8 @@ private:
 
 	bool m_use_dtex;
 	bool m_use_render;
+
+	bool m_debug_draw;
 
 	std::vector<std::pair<std::string, std::string> > m_fonts;
 	std::vector<std::pair<std::string, std::string> > m_user_fonts;

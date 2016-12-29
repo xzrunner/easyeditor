@@ -97,7 +97,9 @@ void TwoPassCanvas::OnDrawWhole() const
 //	DrawOnePass();
 	DrawTwoPass();
 
-	DebugDraw();
+	if (Config::Instance()->IsDebugDrawOpen()) {
+		DebugDraw();
+	}
 }
 
 #endif // OPEN_SCREEN_CACHE
