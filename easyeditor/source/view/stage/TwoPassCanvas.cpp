@@ -156,6 +156,8 @@ void TwoPassCanvas::DrawTwoPass() const
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	mgr->SetShader(sl::SPRITE2);
 	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader());
+	shader->SetColor(0xffffffff, 0);
+	shader->SetColorMap(0x000000ff, 0x0000ff00, 0x00ff0000);
  	shader->Draw(&vertices[0].x, &texcoords[0].x, rt->GetTexture()->ID());
 
 	sl::ShaderMgr::Instance()->FlushShader();
