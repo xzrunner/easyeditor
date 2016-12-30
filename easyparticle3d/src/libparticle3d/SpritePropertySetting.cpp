@@ -85,8 +85,6 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->Append(new wxBoolProperty("Reuse", wxPG_LABEL, spr->IsReuse()));
 	pg->SetPropertyAttribute("Reuse", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
-	pg->Append(new wxPropertyCategory("P3D SPR", wxPG_LABEL));
-
 	pg->Append(new wxFloatProperty("Start Radius", wxPG_LABEL, spr->GetStartRadius()));
 }
 
