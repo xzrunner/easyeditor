@@ -243,6 +243,14 @@
 					RelativePath="..\..\..\src\libtrail\PropertySettingPanel.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\libtrail\SprPropSetting.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libtrail\SprPropSetting.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter

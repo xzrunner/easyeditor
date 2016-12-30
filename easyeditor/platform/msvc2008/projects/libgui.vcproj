@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="2.libgui"
+	Name="4.libgui"
 	ProjectGUID="{FA0A46EC-E1AB-4830-8898-C953EEBDF7A5}"
 	RootNamespace="libgui"
 	Keyword="Win32Proj"

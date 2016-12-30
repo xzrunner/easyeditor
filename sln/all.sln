@@ -79,12 +79,15 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libcoco", "..\coceditor\p
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyparticle3d", "..\easyparticle3d\platform\msvc2008\projects\easyparticle3d.vcproj", "{9BEDF205-2842-42B4-9B95-7C0C4D5A34D7}"
 	ProjectSection(ProjectDependencies) = postProject
+		{46769202-80C1-4AD7-8011-7FFC017BCE11} = {46769202-80C1-4AD7-8011-7FFC017BCE11}
 		{EDEF7503-BBAD-494A-A9E9-2A0CB5747E85} = {EDEF7503-BBAD-494A-A9E9-2A0CB5747E85}
 		{B2E0DE06-ACE8-4C69-8966-C81ED5686FCA} = {B2E0DE06-ACE8-4C69-8966-C81ED5686FCA}
+		{0E990407-FA63-4ECB-99A4-8CB3CB9366CB} = {0E990407-FA63-4ECB-99A4-8CB3CB9366CB}
 		{29109610-3D3C-4040-A8E6-D9EEC78470E0} = {29109610-3D3C-4040-A8E6-D9EEC78470E0}
 		{BF76851E-B6B9-4CC0-8C4B-D7FB383B2642} = {BF76851E-B6B9-4CC0-8C4B-D7FB383B2642}
 		{D4BAA61E-9918-4F72-B772-88AFD4EE76BC} = {D4BAA61E-9918-4F72-B772-88AFD4EE76BC}
 		{E5B2631F-C25D-4253-A9CB-A57EF357B004} = {E5B2631F-C25D-4253-A9CB-A57EF357B004}
+		{6275EA22-ADC7-484C-8EFF-3DE483A11A44} = {6275EA22-ADC7-484C-8EFF-3DE483A11A44}
 		{7FD22229-07E7-4EB7-9BC7-F64A04F9F76D} = {7FD22229-07E7-4EB7-9BC7-F64A04F9F76D}
 		{B4B3472D-AB27-49F1-8D2A-57A011EC7EA3} = {B4B3472D-AB27-49F1-8D2A-57A011EC7EA3}
 		{8833502D-52B5-4C5C-BE5B-6C611E6F9848} = {8833502D-52B5-4C5C-BE5B-6C611E6F9848}
@@ -112,8 +115,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyparticle3d", "..\easy
 		{716758A5-F6CF-4294-88B2-29C9950304AF} = {716758A5-F6CF-4294-88B2-29C9950304AF}
 		{AAD82BAC-510C-4571-A420-5AE5EE7E29D6} = {AAD82BAC-510C-4571-A420-5AE5EE7E29D6}
 		{62BFD3AD-27F7-4AE6-A1EB-F5E86877BB70} = {62BFD3AD-27F7-4AE6-A1EB-F5E86877BB70}
+		{D5D3DBB0-6565-4343-84FD-DD0BBE6959AF} = {D5D3DBB0-6565-4343-84FD-DD0BBE6959AF}
 		{E1843AB3-962E-4F9C-B471-74EC36DC94B0} = {E1843AB3-962E-4F9C-B471-74EC36DC94B0}
 		{E1CFC0B9-F8A8-4F14-930A-E88A436FC038} = {E1CFC0B9-F8A8-4F14-930A-E88A436FC038}
+		{0ECDF7C8-1E3E-47D5-9543-3BB58CEBAC90} = {0ECDF7C8-1E3E-47D5-9543-3BB58CEBAC90}
 		{9DC03BCC-3C8C-4BB8-8811-336F295DF7E2} = {9DC03BCC-3C8C-4BB8-8811-336F295DF7E2}
 		{FC9B43D6-8D2B-4D57-A976-9379F87A366C} = {FC9B43D6-8D2B-4D57-A976-9379F87A366C}
 		{11082ADE-13CA-49C7-9F6D-C82F69333AD7} = {11082ADE-13CA-49C7-9F6D-C82F69333AD7}
@@ -935,11 +940,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libterrain3d", "..\easyte
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libeasy3d", "..\easy3d\platform\msvc2008\projects\easy3d.vcproj", "{C4799E05-825C-4633-A3E7-8BA05B45A666}"
 EndProject
-Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "1.ps", "..\particle\platform\msvc2008\projects\particle.icproj", "{8833502D-52B5-4C5C-BE5B-6C611E6F9848}"
+Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "2.ps", "..\particle\platform\msvc2008\projects\particle.icproj", "{8833502D-52B5-4C5C-BE5B-6C611E6F9848}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.librespacker", "..\easyrespacker\platform\msvc2008\projects\librespacker.vcproj", "{E5C07F5D-F889-4FC2-8DA8-194023914BBE}"
 EndProject
-Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "1.gtxt", "..\gtxt\platform\msvc2008\projects\gtxt.icproj", "{62BFD3AD-27F7-4AE6-A1EB-F5E86877BB70}"
+Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "2.gtxt", "..\gtxt\platform\msvc2008\projects\gtxt.icproj", "{62BFD3AD-27F7-4AE6-A1EB-F5E86877BB70}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libtext", "..\easytext\platform\msvc2008\projects\libtext.vcproj", "{FC9B43D6-8D2B-4D57-A976-9379F87A366C}"
 EndProject
@@ -949,20 +954,20 @@ Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "1.rapidvg", "..\rapidvg\pla
 EndProject
 Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "1.shaderlab", "..\shaderlab\platform\msvc2008\projects\shaderlab.icproj", "{4A75EE84-4487-4506-BBAB-42F1924A1DD5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.libedit", "..\easyeditor\platform\msvc2008\projects\libedit.vcproj", "{8D18EB4E-FDDF-484A-9784-3AC9DCBCC2A1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.libedit", "..\easyeditor\platform\msvc2008\projects\libedit.vcproj", "{8D18EB4E-FDDF-484A-9784-3AC9DCBCC2A1}"
 	ProjectSection(ProjectDependencies) = postProject
 		{77E15C91-F70B-4141-A0FC-4E82D1C43BD2} = {77E15C91-F70B-4141-A0FC-4E82D1C43BD2}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.libview", "..\easyeditor\platform\msvc2008\projects\libview.vcproj", "{26A3BB4B-6AC6-4280-92E3-666056AEC52A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.libview", "..\easyeditor\platform\msvc2008\projects\libview.vcproj", "{26A3BB4B-6AC6-4280-92E3-666056AEC52A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.libdata", "..\easyeditor\platform\msvc2008\projects\libdata.vcproj", "{77E15C91-F70B-4141-A0FC-4E82D1C43BD2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.libdata", "..\easyeditor\platform\msvc2008\projects\libdata.vcproj", "{77E15C91-F70B-4141-A0FC-4E82D1C43BD2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.libmath", "..\easyeditor\platform\msvc2008\projects\libmath.vcproj", "{8CD2D282-45EE-46B4-A8D8-291E8E445BE7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.libmath", "..\easyeditor\platform\msvc2008\projects\libmath.vcproj", "{8CD2D282-45EE-46B4-A8D8-291E8E445BE7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.libtool", "..\easyeditor\platform\msvc2008\projects\libtool.vcproj", "{E1843AB3-962E-4F9C-B471-74EC36DC94B0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.libtool", "..\easyeditor\platform\msvc2008\projects\libtool.vcproj", "{E1843AB3-962E-4F9C-B471-74EC36DC94B0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.librender", "..\easyeditor\platform\msvc2008\projects\librender.vcproj", "{6216B0F5-5B88-4BA8-88F3-02585C4158B4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.librender", "..\easyeditor\platform\msvc2008\projects\librender.vcproj", "{6216B0F5-5B88-4BA8-88F3-02585C4158B4}"
 	ProjectSection(ProjectDependencies) = postProject
 		{8833502D-52B5-4C5C-BE5B-6C611E6F9848} = {8833502D-52B5-4C5C-BE5B-6C611E6F9848}
 		{08E82851-7338-42C7-831E-2CD86F65FB70} = {08E82851-7338-42C7-831E-2CD86F65FB70}
@@ -971,11 +976,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.librender", "..\easyedito
 		{62BFD3AD-27F7-4AE6-A1EB-F5E86877BB70} = {62BFD3AD-27F7-4AE6-A1EB-F5E86877BB70}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.libgui", "..\easyeditor\platform\msvc2008\projects\libgui.vcproj", "{FA0A46EC-E1AB-4830-8898-C953EEBDF7A5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.libgui", "..\easyeditor\platform\msvc2008\projects\libgui.vcproj", "{FA0A46EC-E1AB-4830-8898-C953EEBDF7A5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.libmsg", "..\easyeditor\platform\msvc2008\projects\libmsg.vcproj", "{D4BAA61E-9918-4F72-B772-88AFD4EE76BC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.libmsg", "..\easyeditor\platform\msvc2008\projects\libmsg.vcproj", "{D4BAA61E-9918-4F72-B772-88AFD4EE76BC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.libphysics", "..\easyeditor\platform\msvc2008\projects\libphysics.vcproj", "{126F1AA2-182E-4F85-B77E-AAB86C6E2FB6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.libphysics", "..\easyeditor\platform\msvc2008\projects\libphysics.vcproj", "{126F1AA2-182E-4F85-B77E-AAB86C6E2FB6}"
 EndProject
 Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "0.ds", "..\ds\platform\msvc2008\projects\ds.icproj", "{7F581889-4482-4C4A-BFBC-C39F41B1210E}"
 EndProject
@@ -1007,7 +1012,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easynavmesh", "..\easynav
 		{6216B0F5-5B88-4BA8-88F3-02585C4158B4} = {6216B0F5-5B88-4BA8-88F3-02585C4158B4}
 	EndProjectSection
 EndProject
-Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "1.sprite2", "..\sprite2\platform\msvc2008\projects\sprite2.icproj", "{E0717C73-4DAA-404E-A68C-3A84C33BF9DF}"
+Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "3.sprite2", "..\sprite2\platform\msvc2008\projects\sprite2.icproj", "{E0717C73-4DAA-404E-A68C-3A84C33BF9DF}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libmask", "..\easymask\platform\msvc2008\projects\libmask.vcproj", "{EDEF7503-BBAD-494A-A9E9-2A0CB5747E85}"
 EndProject
@@ -1065,7 +1070,7 @@ Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "0.fs", "..\fs\platform\msvc
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libui", "..\easyui\platform\msvc2008\projects\libui.vcproj", "{CE164EA1-E9BD-4BEB-88F0-41A2BA6DAB2F}"
 EndProject
-Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "1.mtrail", "..\mtrail\platform\msvc2008\projects\mtrail.icproj", "{FB2F396C-0D50-4997-BA15-F99D672F49C2}"
+Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "2.mtrail", "..\mtrail\platform\msvc2008\projects\mtrail.icproj", "{FB2F396C-0D50-4997-BA15-F99D672F49C2}"
 	ProjectSection(ProjectDependencies) = postProject
 		{7BE11C48-28EA-4B5F-9D43-A8B0B5C554F3} = {7BE11C48-28EA-4B5F-9D43-A8B0B5C554F3}
 	EndProjectSection
@@ -1120,7 +1125,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libsprpacker", "..\easysp
 EndProject
 Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "1.simp", "..\simp\platform\msvc2008\projects\simp.icproj", "{B4B3472D-AB27-49F1-8D2A-57A011EC7EA3}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.gum", "..\gum\platform\msvc2008\projects\gum.vcproj", "{70C5478D-6D53-4F75-99D4-F06373175C83}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.gum", "..\gum\platform\msvc2008\projects\gum.vcproj", "{70C5478D-6D53-4F75-99D4-F06373175C83}"
 EndProject
 Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "1.gimg", "..\gimg\platform\msvc2008\projects\gimg.icproj", "{C0ED2F66-F335-4D19-93D9-395C5A4655BB}"
 EndProject
@@ -1160,7 +1165,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyskeleton", "..\easysk
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libskeleton", "..\easyskeleton\platform\msvc2008\projects\libskeleton.vcproj", "{0A0F323F-D04E-44A6-9784-C1947AC38DA8}"
 EndProject
-Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "1.rigging", "..\rigging\platform\msvc2008\projects\rigging.icproj", "{5475558E-1FF4-4D58-8500-B3666768CEDA}"
+Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "2.rigging", "..\rigging\platform\msvc2008\projects\rigging.icproj", "{5475558E-1FF4-4D58-8500-B3666768CEDA}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libanim2", "..\easyanim2\platform\msvc2008\projects\libanim2.vcproj", "{DD070D7B-9149-4DBC-9660-5223F6D34B61}"
 EndProject
@@ -1574,48 +1579,48 @@ Global
 		{0ECDF7C8-1E3E-47D5-9543-3BB58CEBAC90}.Release|Win32.Build.0 = Release|Win32
 		{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}.Debug|Win32.ActiveCfg = Debug|Win32
 		{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}.Release|Win32.ActiveCfg = Release|Win32
-		{EC5C44A5-1C7B-4D35-B35C-3CEAE7A6E73A}.Debug|Win32.ActiveCfg = Debug|Win32
-		{EC5C44A5-1C7B-4D35-B35C-3CEAE7A6E73A}.Release|Win32.ActiveCfg = Release|Win32
-		{340B4E78-2FAD-4345-AB43-68AEDE6F2173}.Debug|Win32.ActiveCfg = Debug|Win32
-		{340B4E78-2FAD-4345-AB43-68AEDE6F2173}.Release|Win32.ActiveCfg = Release|Win32
-		{A6116442-1A3C-46A2-AEC7-2E971A97939D}.Debug|Win32.ActiveCfg = Debug|Win32
-		{A6116442-1A3C-46A2-AEC7-2E971A97939D}.Release|Win32.ActiveCfg = Release|Win32
-		{9276C731-FEAA-414E-98BC-21F68939E0C3}.Debug|Win32.ActiveCfg = Debug|Win32
-		{9276C731-FEAA-414E-98BC-21F68939E0C3}.Release|Win32.ActiveCfg = Release|Win32
-		{41DA80A5-0CE4-4506-BDE9-474AB5F534D5}.Debug|Win32.ActiveCfg = Debug|Win32
-		{41DA80A5-0CE4-4506-BDE9-474AB5F534D5}.Release|Win32.ActiveCfg = Release|Win32
-		{F8E40D67-8533-47D3-8008-984C1A167280}.Debug|Win32.ActiveCfg = Debug|Win32
-		{F8E40D67-8533-47D3-8008-984C1A167280}.Release|Win32.ActiveCfg = Release|Win32
-		{F4DA0E91-001F-4678-947E-1D9BFE9EA33B}.Debug|Win32.ActiveCfg = Debug|Win32
-		{F4DA0E91-001F-4678-947E-1D9BFE9EA33B}.Release|Win32.ActiveCfg = Release|Win32
-		{EFFE43C3-C43A-47DE-9F1C-974A6BB05B0A}.Debug|Win32.ActiveCfg = Debug|Win32
-		{EFFE43C3-C43A-47DE-9F1C-974A6BB05B0A}.Release|Win32.ActiveCfg = Release|Win32
-		{562CC687-8325-4F8E-91CB-DF80C68CC4B3}.Debug|Win32.ActiveCfg = Debug|Win32
-		{562CC687-8325-4F8E-91CB-DF80C68CC4B3}.Release|Win32.ActiveCfg = Release|Win32
+		{12E74A32-9304-497D-B46E-0E50CD9EF214}.Debug|Win32.ActiveCfg = Debug|Win32
+		{12E74A32-9304-497D-B46E-0E50CD9EF214}.Release|Win32.ActiveCfg = Release|Win32
+		{0380FA50-C8DD-405D-8D09-C6A86DE45F0B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0380FA50-C8DD-405D-8D09-C6A86DE45F0B}.Release|Win32.ActiveCfg = Release|Win32
+		{DB7918B8-9860-42F7-8EA0-2F69DE20CF3F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DB7918B8-9860-42F7-8EA0-2F69DE20CF3F}.Release|Win32.ActiveCfg = Release|Win32
+		{6145E94F-CC5A-43F4-BF98-4F0E76525922}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6145E94F-CC5A-43F4-BF98-4F0E76525922}.Release|Win32.ActiveCfg = Release|Win32
+		{DFD8D004-FAEA-42BD-B0FB-925CE93E58C7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DFD8D004-FAEA-42BD-B0FB-925CE93E58C7}.Release|Win32.ActiveCfg = Release|Win32
+		{92359EB7-A173-4C9A-92D9-6C3837B7896A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{92359EB7-A173-4C9A-92D9-6C3837B7896A}.Release|Win32.ActiveCfg = Release|Win32
+		{4271D132-378F-4156-812F-17CBA3E81F69}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4271D132-378F-4156-812F-17CBA3E81F69}.Release|Win32.ActiveCfg = Release|Win32
+		{A2D58AD2-221C-4A25-9F84-79F27199A6D3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A2D58AD2-221C-4A25-9F84-79F27199A6D3}.Release|Win32.ActiveCfg = Release|Win32
+		{EEDD5DC2-D6AB-4844-B91F-5462DC4764C9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EEDD5DC2-D6AB-4844-B91F-5462DC4764C9}.Release|Win32.ActiveCfg = Release|Win32
 		{09C39B9E-27F5-4B39-9829-2815FD1C5469}.Debug|Win32.ActiveCfg = Debug|Win32
 		{09C39B9E-27F5-4B39-9829-2815FD1C5469}.Debug|Win32.Build.0 = Debug|Win32
 		{09C39B9E-27F5-4B39-9829-2815FD1C5469}.Release|Win32.ActiveCfg = Release|Win32
 		{09C39B9E-27F5-4B39-9829-2815FD1C5469}.Release|Win32.Build.0 = Release|Win32
-		{E1EBBC71-5658-476A-93E0-18A8135BC851}.Debug|Win32.ActiveCfg = Debug|Win32
-		{E1EBBC71-5658-476A-93E0-18A8135BC851}.Release|Win32.ActiveCfg = Release|Win32
-		{E846376F-E448-448F-83B5-7C0C1B107B3A}.Debug|Win32.ActiveCfg = Debug|Win32
-		{E846376F-E448-448F-83B5-7C0C1B107B3A}.Release|Win32.ActiveCfg = Release|Win32
-		{47D46E78-0FF3-4706-A3F4-397DEB37BA20}.Debug|Win32.ActiveCfg = Debug|Win32
-		{47D46E78-0FF3-4706-A3F4-397DEB37BA20}.Release|Win32.ActiveCfg = Release|Win32
-		{9AA485B9-6B26-464F-8CFF-796BC48B2738}.Debug|Win32.ActiveCfg = Debug|Win32
-		{9AA485B9-6B26-464F-8CFF-796BC48B2738}.Release|Win32.ActiveCfg = Release|Win32
-		{E64A4461-131C-4438-8EC5-6F114DD14597}.Debug|Win32.ActiveCfg = Debug|Win32
-		{E64A4461-131C-4438-8EC5-6F114DD14597}.Release|Win32.ActiveCfg = Release|Win32
-		{B677809F-1BD9-4D2B-AFDF-3C9ED43BD03C}.Debug|Win32.ActiveCfg = Debug|Win32
-		{B677809F-1BD9-4D2B-AFDF-3C9ED43BD03C}.Release|Win32.ActiveCfg = Release|Win32
-		{E41442B1-72C5-4C68-8B64-62C3382582FA}.Debug|Win32.ActiveCfg = Debug|Win32
-		{E41442B1-72C5-4C68-8B64-62C3382582FA}.Release|Win32.ActiveCfg = Release|Win32
-		{EBF58637-39BB-48EA-857F-3CA8A88BE3F5}.Debug|Win32.ActiveCfg = Debug|Win32
-		{EBF58637-39BB-48EA-857F-3CA8A88BE3F5}.Release|Win32.ActiveCfg = Release|Win32
-		{D7FE7BBF-51BC-425E-B167-055449DE405D}.Debug|Win32.ActiveCfg = Debug|Win32
-		{D7FE7BBF-51BC-425E-B167-055449DE405D}.Release|Win32.ActiveCfg = Release|Win32
-		{7AB411D4-5E05-476B-A7FD-36131EC350B5}.Debug|Win32.ActiveCfg = Debug|Win32
-		{7AB411D4-5E05-476B-A7FD-36131EC350B5}.Release|Win32.ActiveCfg = Release|Win32
+		{4C0496FA-EFAE-4654-9A03-5378D771A8D3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4C0496FA-EFAE-4654-9A03-5378D771A8D3}.Release|Win32.ActiveCfg = Release|Win32
+		{D8BC13F3-86D6-4FA5-BCFD-E283B99CA3B0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D8BC13F3-86D6-4FA5-BCFD-E283B99CA3B0}.Release|Win32.ActiveCfg = Release|Win32
+		{EFF6949F-A315-4B87-A4EA-B3EC2C5D2B08}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EFF6949F-A315-4B87-A4EA-B3EC2C5D2B08}.Release|Win32.ActiveCfg = Release|Win32
+		{26F4CA23-2AC6-44B2-828B-11AE47B44AC2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{26F4CA23-2AC6-44B2-828B-11AE47B44AC2}.Release|Win32.ActiveCfg = Release|Win32
+		{602841BB-584D-4DEA-BFCE-69F6120D09BB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{602841BB-584D-4DEA-BFCE-69F6120D09BB}.Release|Win32.ActiveCfg = Release|Win32
+		{88A329AA-1597-4CDA-8C7A-EC7122CF49B6}.Debug|Win32.ActiveCfg = Debug|Win32
+		{88A329AA-1597-4CDA-8C7A-EC7122CF49B6}.Release|Win32.ActiveCfg = Release|Win32
+		{09B8A7D8-29EC-492F-A4FC-BA3416E9C3A2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{09B8A7D8-29EC-492F-A4FC-BA3416E9C3A2}.Release|Win32.ActiveCfg = Release|Win32
+		{21680268-DF13-44D8-B7CB-24F2D4208893}.Debug|Win32.ActiveCfg = Debug|Win32
+		{21680268-DF13-44D8-B7CB-24F2D4208893}.Release|Win32.ActiveCfg = Release|Win32
+		{D4B63B3A-A478-425F-BB8C-93A0AC9A2BE0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D4B63B3A-A478-425F-BB8C-93A0AC9A2BE0}.Release|Win32.ActiveCfg = Release|Win32
+		{E2C85C38-A476-455B-9B34-E5C9554032C8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E2C85C38-A476-455B-9B34-E5C9554032C8}.Release|Win32.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

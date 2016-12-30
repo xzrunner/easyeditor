@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="2.libphysics"
+	Name="4.libphysics"
 	ProjectGUID="{126F1AA2-182E-4F85-B77E-AAB86C6E2FB6}"
 	RootNamespace="libphysics"
 	Keyword="Win32Proj"

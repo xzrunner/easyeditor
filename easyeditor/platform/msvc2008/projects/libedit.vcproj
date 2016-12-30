@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="2.libedit"
+	Name="4.libedit"
 	ProjectGUID="{8D18EB4E-FDDF-484A-9784-3AC9DCBCC2A1}"
 	RootNamespace="libedit"
 	Keyword="Win32Proj"

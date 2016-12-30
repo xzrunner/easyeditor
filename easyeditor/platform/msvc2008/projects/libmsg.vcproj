@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="2.libmsg"
+	Name="4.libmsg"
 	ProjectGUID="{D4BAA61E-9918-4F72-B772-88AFD4EE76BC}"
 	RootNamespace="libmsg"
 	Keyword="Win32Proj"

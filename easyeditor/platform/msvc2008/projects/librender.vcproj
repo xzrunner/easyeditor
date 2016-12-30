@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="2.librender"
+	Name="4.librender"
 	ProjectGUID="{6216B0F5-5B88-4BA8-88F3-02585C4158B4}"
 	RootNamespace="librender"
 	Keyword="Win32Proj"

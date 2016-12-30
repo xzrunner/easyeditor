@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Intel C++ Project"
 	Version="11.1"
-	Name="1.rigging"
+	Name="2.rigging"
 	ProjectGUID="{5475558E-1FF4-4D58-8500-B3666768CEDA}"
 	VCNestedProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
 	VCNestedProjectFileName="rigging.vcproj">

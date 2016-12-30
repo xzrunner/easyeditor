@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="2.libmath"
+	Name="4.libmath"
 	ProjectGUID="{8CD2D282-45EE-46B4-A8D8-291E8E445BE7}"
 	RootNamespace="libmath"
 	Keyword="Win32Proj"
