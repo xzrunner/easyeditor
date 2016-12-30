@@ -42,9 +42,10 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 	}
 
 	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
+	m_sprites_impl->EnableObserve(false);
 	stage->EnableObserve(false);
+	m_stage->SetActive(false);
 	stage->GetCanvas()->EnableObserve(false);
-	stage->SetUpdateState(false);
 	stage->GetCanvas()->SetDrawable(false);
 
 	if (static_cast<LibraryPanel*>(stage->GetLibrary())->IsCurrUnitLayer()) 
@@ -131,8 +132,10 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 		}
 	}
 
-	stage->SetUpdateState(true);
+	m_sprites_impl->EnableObserve(true);
 	stage->EnableObserve(true);
+	m_stage->SetActive(true);
+	stage->GetCanvas()->EnableObserve(true);
 	stage->GetCanvas()->SetDrawable(true);
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();

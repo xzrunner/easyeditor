@@ -60,10 +60,6 @@ public:
 
 	ee::EditOP* GetBaseOP() { return m_arrange_op; }
 
-	void SetUpdateState(bool enable) {
-		m_enable_update = enable;
-	}
-
 	ee::LibraryPanel* GetLibrary() { return m_library; }
 
 	s2::Color& GetScreenMultiColor();
@@ -110,8 +106,6 @@ private:
 	std::vector<Layer*> m_layers;
 
 	CharacterAllDirections m_chara_dirs;
-
-	bool m_enable_update;
 
 	std::string m_res_dir;
 

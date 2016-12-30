@@ -45,7 +45,6 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, m_grids(NULL)
 	, m_sindex(NULL)
 	, m_pathfinding(NULL)
-	, m_enable_update(true)
 {
 	SetDropTarget(new ee::SpriteDropTarget(GetStageImpl(), library));
 
@@ -108,10 +107,6 @@ StagePanel::~StagePanel()
 
 bool StagePanel::UpdateStage()
 {
-	if (!m_enable_update) {
-		return false;
-	}
-
 	bool ret = false;
 
 	for (int i = 0, n = m_layers.size(); i < n; ++i) {

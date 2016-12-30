@@ -27,6 +27,7 @@ public:
 
 	void SetEditPanelNull();
 	
+	void SetActive(bool active) { m_active = active; }
 	bool Update();
 
 	sm::vec2 TransPosScrToProj(int x, int y) const;
@@ -107,6 +108,8 @@ private:
 	HistoryList m_history_list;
 
 	KeysState m_keys_state;
+
+	bool m_active;
 
 }; // EditPanelImpl
 

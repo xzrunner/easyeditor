@@ -37,6 +37,7 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 
 	m_sprites_impl->EnableObserve(false);
 	m_stage->EnableObserve(false);
+	m_stage->SetActive(false);
 	m_stage->GetCanvas()->EnableObserve(false);
 	m_stage->GetCanvas()->SetDrawable(false);
 
@@ -57,6 +58,7 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 
 	m_sprites_impl->EnableObserve(true);
 	m_stage->EnableObserve(true);
+	m_stage->SetActive(true);
 	m_stage->GetCanvas()->EnableObserve(true);
 	m_stage->GetCanvas()->SetDrawable(true);
 }

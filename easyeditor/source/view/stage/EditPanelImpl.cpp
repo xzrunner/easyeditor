@@ -23,6 +23,7 @@ EditPanelImpl::EditPanelImpl(wxTopLevelWindow* frame,
 							 EditPanel* stage)
 	: m_frame(frame)
 	, m_stage(stage)
+	, m_active(true)
 {
 	m_edit_op = NULL;
 	m_canvas = NULL;
@@ -49,11 +50,10 @@ void EditPanelImpl::SetEditPanelNull()
 
 bool EditPanelImpl::Update()
 {
-	if (m_stage) {
-		return m_stage->UpdateStage();
-	} else {
+	if (!m_active || !m_stage) {
 		return false;
 	}
+	return m_stage->UpdateStage();
 }
 
 sm::vec2 EditPanelImpl::TransPosScrToProj(int x, int y) const
