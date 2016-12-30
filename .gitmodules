@@ -67,3 +67,6 @@
 [submodule "texpack/src/texpack"]
 	path = texpack/src/texpack
 	url = ssh://git@tea.ejoy.com:3222/LR/texpack.git
+[submodule "unirender"]
+	path = unirender
+	url = ssh://git@tea.ejoy.com:3222/LR/unirender.git
