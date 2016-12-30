@@ -14,7 +14,7 @@ namespace ur
 namespace gl
 {
 
-RenderContext::RenderContext(const RenderContext::Callback& cb)
+RenderContext::RenderContext(const RenderContext::Callback& cb, int max_texture)
 	: m_cb(cb)
 {
 	render_init_args RA;
@@ -22,7 +22,7 @@ RenderContext::RenderContext(const RenderContext::Callback& cb)
 	RA.max_buffer  = 128;
 	RA.max_layout  = MAX_LAYOUT;
 	RA.max_target  = 128;
-	RA.max_texture = MAX_TEXTURE;
+	RA.max_texture = max_texture;
 	RA.max_shader  = MAX_SHADER;
 
 	int smz = render_size(&RA);

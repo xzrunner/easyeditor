@@ -7,7 +7,6 @@ namespace gl
 {
 
 static const int MAX_LAYOUT  = 32;
-static const int MAX_TEXTURE = 1024;
 static const int MAX_SHADER  = 64;
 
 }

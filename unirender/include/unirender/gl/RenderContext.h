@@ -20,7 +20,7 @@ public:
 	};
 
 public:
-	RenderContext(const RenderContext::Callback& cb);
+	RenderContext(const RenderContext::Callback& cb, int max_texture);
 	virtual ~RenderContext();
 	
 	virtual int RenderVersion() const;
