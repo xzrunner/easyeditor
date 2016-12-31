@@ -19,6 +19,7 @@
 #include <gum/RenderTarget.h>
 #include <gum/GUM_DTex.h>
 #include <gum/GUM_Sprite2.h>
+#include <gum/GUM_DRect.h>
 
 namespace ee
 {
@@ -97,22 +98,11 @@ void TwoPassCanvas::DrawOnePass() const
 
 void TwoPassCanvas::DrawTwoPass() const
 {
-	ur::RenderContext* rc = gum::RenderContext::Instance()->GetImpl();
-
 	//////////////////////////////////////////////////////////////////////////
 	// Draw to Target
 	//////////////////////////////////////////////////////////////////////////
-	if (IsDirty()) 
-	{
-		ur::RenderTarget* rt = gum::RenderTarget::Instance()->GetScreen0();
-		rt->Bind();
-
-		rc->SetClearFlag(ur::MASKC);
-		rc->Clear(0);
-
-		OnDrawSprites();
-
-		rt->Unbind();
+	if (IsDirty()) {
+		DrawPass1();
 	}
 
 	//////////////////////////////////////////////////////////////////////////
@@ -121,6 +111,7 @@ void TwoPassCanvas::DrawTwoPass() const
 
 	s2::RenderCtxStack::Instance()->Push(s2::RenderCtx(2, 2, 0, 0), false);
 
+	ur::RenderContext* rc = gum::RenderContext::Instance()->GetImpl();
 	rc->SetClearFlag(ur::MASKC);
 	rc->Clear(m_bg_color.a << 24 | m_bg_color.r << 16 | m_bg_color.g << 8 | m_bg_color.b);
 
@@ -139,6 +130,28 @@ void TwoPassCanvas::DrawTwoPass() const
  	sl::ShaderMgr::Instance()->FlushShader();
 
 	s2::RenderCtxStack::Instance()->Pop(false);
+}
+
+void TwoPassCanvas::DrawPass1() const
+{
+	ur::RenderContext* rc = gum::RenderContext::Instance()->GetImpl();
+
+	ur::RenderTarget* rt = gum::RenderTarget::Instance()->GetScreen0();
+	rt->Bind();
+
+	rc->SetClearFlag(ur::MASKC);
+	rc->Clear(0);
+
+	OnDrawSprites();
+
+	rt->Unbind();
+
+	// drect
+	gum::DRect::Instance()->Bind();
+	rc->SetClearFlag(ur::MASKC);
+	rc->Clear(0xffff00ff);
+	OnDrawSprites();
+	gum::DRect::Instance()->Unbind();
 }
 
 void TwoPassCanvas::DrawPass2(const float* vertices, const float* texcoords, int tex_id) const
@@ -169,8 +182,9 @@ void TwoPassCanvas::DrawPass2(const float* vertices, const float* texcoords, int
 
 void TwoPassCanvas::DebugDraw() const
 {
-	gum::DTex::Instance()->DebugDraw();
-	gum::Sprite2::Instance()->DebugDraw();
+// 	gum::DTex::Instance()->DebugDraw();
+// 	gum::Sprite2::Instance()->DebugDraw();
+	gum::DRect::Instance()->DebugDraw();
 }
 
 }
