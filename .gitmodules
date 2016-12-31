@@ -67,3 +67,6 @@
 [submodule "unirender"]
 	path = unirender
 	url = ssh://git@tea.ejoy.com:3222/LR/unirender.git
+[submodule "shaderlab"]
+	path = shaderlab
+	url = ssh://git@tea.ejoy.com:3222/LR/ShaderLab.git
