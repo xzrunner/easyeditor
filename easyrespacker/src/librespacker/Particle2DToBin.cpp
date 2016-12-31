@@ -2,7 +2,7 @@
 #include "pack_unpack.h"
 
 #include <ps_2d.h>
-#include <spritepack.h>
+#include "spritepack.h"
 
 namespace erespacker
 {

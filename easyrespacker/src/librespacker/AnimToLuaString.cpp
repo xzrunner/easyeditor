@@ -3,7 +3,7 @@
 #include <ee/Exception.h>
 
 #include <easybuilder.h>
-#include <spritepack.h>
+#include "spritepack.h"
 
 namespace lua = ebuilder::lua;
 

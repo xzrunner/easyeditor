@@ -4,7 +4,7 @@
 #include "pack_unpack.h"
 
 // for TYPE_TRAIL
-#include <spritepack.h>
+#include "spritepack.h"
 #include <mt_2d.h>
 
 #include <limits>

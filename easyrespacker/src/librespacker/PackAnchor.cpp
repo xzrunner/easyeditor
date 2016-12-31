@@ -1,6 +1,6 @@
 #include "PackAnchor.h"
 
-#include <spritepack.h>
+#include "spritepack.h"
 
 namespace erespacker
 {

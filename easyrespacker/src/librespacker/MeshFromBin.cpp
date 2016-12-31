@@ -4,7 +4,7 @@
 #include "UnpackNodeFactory.h"
 
 // for SIZEOF_MESH
-#include <spritepack.h>
+#include "spritepack.h"
 
 #include <limits>
 

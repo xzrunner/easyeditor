@@ -1,7 +1,7 @@
 #include "Particle3DToBin.h"
 #include "pack_unpack.h"
 
-#include <spritepack.h>
+#include "spritepack.h"
 
 namespace erespacker
 {

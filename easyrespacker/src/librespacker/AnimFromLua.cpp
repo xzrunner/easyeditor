@@ -4,7 +4,7 @@
 
 #include <ee/Exception.h>
 
-#include <spritepack.h>
+#include "spritepack.h"
 
 #include <assert.h>
 

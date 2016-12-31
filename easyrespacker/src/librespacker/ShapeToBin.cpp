@@ -5,7 +5,7 @@
 #include "NodeToBin.h"
 
 // for TYPE_SHAPE
-#include <spritepack.h>
+#include "spritepack.h"
 
 namespace erespacker
 {

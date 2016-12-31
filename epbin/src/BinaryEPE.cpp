@@ -8,7 +8,7 @@
 #include "epe/PackAnimation.h"
 #include "epe/PackLabel.h"
 
-#include <spritepack.h>
+#include "spritepack.h"
 
 extern "C" {
 	#include <lua.h>

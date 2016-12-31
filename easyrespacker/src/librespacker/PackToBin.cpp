@@ -12,7 +12,7 @@
 #include <ee/TexturePacker.h>
 #include <ee/StringHelper.h>
 
-#include <spritepack.h>
+#include "spritepack.h"
 
 #include <algorithm>
 

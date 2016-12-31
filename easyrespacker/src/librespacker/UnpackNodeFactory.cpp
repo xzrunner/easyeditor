@@ -10,7 +10,7 @@
 #include "PackParticle2D.h"
 #include "PackClipbox.h"
 
-#include <spritepack.h>
+#include "spritepack.h"
 
 extern "C" {
 	#include <lua.h>

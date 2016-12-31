@@ -69,7 +69,7 @@ void RenderTarget::DrawSymbol(const Symbol* sym, bool whitebg, float scale)
 void RenderTarget::ReadPixels(unsigned char* pixels, int width, int height) const
 {
 	m_impl->Bind();
-	gum::RenderContext::Instance()->GetImpl()->ReadPixels(pixels, width, height);
+	gum::RenderContext::Instance()->GetImpl()->ReadPixels(pixels, 0, 0, width, height);
 	m_impl->Unbind();
 }
 

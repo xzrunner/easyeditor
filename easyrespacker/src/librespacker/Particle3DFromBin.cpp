@@ -2,7 +2,7 @@
 #include "UnpackNodeFactory.h"
 #include "pack_unpack.h"
 
-#include <spritepack.h>
+#include "spritepack.h"
 
 namespace erespacker
 {

@@ -4,7 +4,7 @@
 #include "pack_unpack.h"
 
 // for TYPE_MESH
-#include <spritepack.h>
+#include "spritepack.h"
 
 #include <limits>
 
