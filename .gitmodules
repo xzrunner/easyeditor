@@ -1,30 +1,30 @@
 [submodule "editor-external"]
 	path = editor-external
-	url = ssh://tea.ejoy.com:3222/zz/external.git
+	url = ssh://git@tea.ejoy.com:3222/zz/external.git
 [submodule "particle/src"]
 	path = particle/src
-	url = ssh://tea.ejoy.com:3222/LR/ps.git
+	url = ssh://git@tea.ejoy.com:3222/LR/ps.git
 [submodule "dtex/src"]
 	path = dtex/src
-	url = ssh://tea.ejoy.com:3222/LR/dtex.git
+	url = ssh://git@tea.ejoy.com:3222/LR/dtex.git
 [submodule "gtxt/src/gtxt"]
 	path = gtxt/src/gtxt
-	url = ssh://tea.ejoy.com:3222/LR/gtxt.git
+	url = ssh://git@tea.ejoy.com:3222/LR/gtxt.git
 [submodule "rapidvg/src/rapidvg"]
 	path = rapidvg/src/rapidvg
-	url = ssh://tea.ejoy.com:3222/LR/RapidVG.git
+	url = ssh://git@tea.ejoy.com:3222/LR/RapidVG.git
 [submodule "ds/src/ds"]
 	path = ds/src/ds
-	url = ssh://tea.ejoy.com:3222/LR/ds.git
+	url = ssh://git@tea.ejoy.com:3222/LR/ds.git
 [submodule "model3/src/model3"]
 	path = model3/src/model3
-	url = ssh://tea.ejoy.com:3222/LR/model3.git
+	url = ssh://git@tea.ejoy.com:3222/LR/model3.git
 [submodule "sm/src/sm"]
 	path = sm/src/sm
-	url = git@github.com:xzrunner/sm.git
+	url = ssh://git@tea.ejoy.com:3222/LR/sm.git
 [submodule "camera25/src/camera25"]
 	path = camera25/src/camera25
-	url = ssh://tea.ejoy.com:3222/LR/camera25.git
+	url = ssh://git@tea.ejoy.com:3222/LR/camera25.git
 [submodule "fs/src/fs"]
 	path = fs/src/fs
 	url = ssh://git@tea.ejoy.com:3222/LR/fs.git
