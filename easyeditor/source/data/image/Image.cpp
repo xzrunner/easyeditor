@@ -15,7 +15,6 @@
 #include "SpriteRenderer.h"
 #include "Camera.h"
 #include "CameraMgr.h"
-#include "Pseudo3DCamera.h"
 #include "ImageClip.h"
 #include "ImageTrim.h"
 

@@ -5,7 +5,6 @@
 #include "ImageData.h"
 #include "CameraMgr.h"
 #include "Camera.h"
-#include "Pseudo3DCamera.h"
 
 #include <unirender/Texture.h>
 #include <unirender/RenderTarget.h>
@@ -87,9 +86,11 @@ void ImageSymbol::GetScreenSize(int& w, int& h) const
 
 float ImageSymbol::GetP3dCamAngle() const
 {
-	const Camera* cam = CameraMgr::Instance()->GetCamera();
-	const Pseudo3DCamera* pcam = static_cast<const Pseudo3DCamera*>(cam);
-	return pcam->GetAngle();
+// 	const Camera* cam = CameraMgr::Instance()->GetCamera();
+// 	const Pseudo3DCamera* pcam = static_cast<const Pseudo3DCamera*>(cam);
+// 	return pcam->GetAngle();
+
+	return 0;
 }
 
 int ImageSymbol::GetScreenCacheTexid() const

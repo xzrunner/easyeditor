@@ -1,8 +1,6 @@
 #include "PanViewState.h"
 #include "EditPanelImpl.h"
 #include "panel_msg.h"
-#include "OrthoCamera.h"
-#include "Pseudo3DCamera.h"
 #include "CameraMgr.h"
 
 #include <gum/RenderContext.h>

@@ -294,72 +294,12 @@
 				>
 			</File>
 		</Filter>
-		<Filter
-			Name="camera"
-			>
-			<File
-				RelativePath="..\..\..\source\render\Camera.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\Camera.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\source\render\CameraMgr.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\CameraMgr.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\source\render\OrthoCamera.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\OrthoCamera.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\source\render\PerspectCamera.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\PerspectCamera.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\source\render\Pseudo3DCamera.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\Pseudo3DCamera.h"
-				>
-			</File>
-		</Filter>
 		<File
 			RelativePath="..\..\..\source\render\FPS.cpp"
 			>
 		</File>
 		<File
 			RelativePath="..\..\..\include\ee\FPS.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\source\render\RenderContext.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\include\ee\RenderContext.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\source\render\RenderContextStack.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\include\ee\RenderContextStack.h"
 			>
 		</File>
 		<File

@@ -109,7 +109,7 @@ void TwoPassCanvas::DrawTwoPass() const
 	// Draw to Screen
 	//////////////////////////////////////////////////////////////////////////
 
-	s2::RenderCtxStack::Instance()->Push(s2::RenderCtx(2, 2, 0, 0), false);
+	s2::RenderCtxStack::Instance()->Push(s2::RenderContext(2, 2, 0, 0), false);
 
 	ur::RenderContext* rc = gum::RenderContext::Instance()->GetImpl();
 	rc->SetClearFlag(ur::MASKC);
@@ -185,6 +185,8 @@ void TwoPassCanvas::DebugDraw() const
 // 	gum::DTex::Instance()->DebugDraw();
 // 	gum::Sprite2::Instance()->DebugDraw();
 	gum::DRect::Instance()->DebugDraw();
+
+	gum::RenderTarget::Instance()->DebugDraw();
 }
 
 }

@@ -5,8 +5,6 @@
 #include "ExceptionDlg.h"
 #include "EditPanelImpl.h"
 #include "KeysState.h"
-#include "RenderContext.h"
-#include "RenderContextStack.h"
 #include "subject_id.h"
 #include "panel_msg.h"
 #include "EE_DTex.h"
@@ -17,7 +15,6 @@
 #include <sprite2/RenderCtxStack.h>
 #include <sprite2/SprTimer.h>
 #include <gum/GUM_ShaderLab.h>
-#include <gum/RenderContext.h>
 #include <gum/GUM_DTex.h>
 
 namespace ee
@@ -50,16 +47,16 @@ StageCanvas::StageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage,
  	, m_width(0), m_height(0)
 	, m_dirty(false)
 	, m_cam_dirty(false)
-	, m_render_context(new RenderContext)
+	, m_render_ctx(new s2::RenderContext)
 	, m_timer(this, TIMER_ID)
 	, m_draw(true)
 {
 	if (glctx) {
 		m_share_context = true;
-		m_gl_context = glctx;
+		m_gl_ctx = glctx;
 	} else {
 		m_share_context = false;
-		m_gl_context = new wxGLContext(this);
+		m_gl_ctx = new wxGLContext(this);
 		Init();
 	}
 
@@ -69,9 +66,8 @@ StageCanvas::StageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage,
 	RegistSubject(SetCanvasDirtySJ::Instance());
 
 	if (m_use_context_stack) {
-		RenderContextStack::Instance()->Push(this, m_render_context);
+		s2::RenderCtxStack::Instance()->Push(*m_render_ctx);
 	}
-	s2::RenderCtxStack::Instance()->Push(s2::RenderCtx());
 }
 
 StageCanvas::~StageCanvas()
@@ -79,13 +75,13 @@ StageCanvas::~StageCanvas()
 	m_timer.Stop();
 
 	if (!m_share_context) {
-		delete m_gl_context;
+		delete m_gl_ctx;
 	}
 
 	if (m_use_context_stack) {
-		RenderContextStack::Instance()->Pop();
 		s2::RenderCtxStack::Instance()->Pop();
 	}
+	delete m_render_ctx;
 }
 
 void StageCanvas::SetBgColor(const s2::Color& color)
@@ -95,21 +91,8 @@ void StageCanvas::SetBgColor(const s2::Color& color)
 
 void StageCanvas::SetCurrentCanvas()
 {
-	SetCurrent(*m_gl_context);
-
-	RenderContextStack::Instance()->SetCurrCtx(m_render_context);
-
-	sm::vec2 offset;
-	float scale;
-	if (m_render_context->GetModelView(offset, scale)) {
-		m_render_context->SetModelView(offset, scale);
-	}
-
-	int width, height;
-	if (m_render_context->GetProjection(width, height)) {
-		m_render_context->SetProjection(width, height);
-		
-	}
+	SetCurrent(*m_gl_ctx);
+	m_render_ctx->UpdateMVP();
 }
 
 void StageCanvas::OnNotify(int sj_id, void* ud) 

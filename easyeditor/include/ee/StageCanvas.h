@@ -9,6 +9,8 @@
 #include <wx/glcanvas.h>
 #include <wx/timer.h>
 
+namespace s2 { class RenderContext; }
+
 namespace ee
 {
 
@@ -33,7 +35,7 @@ public:
 	int GetWidth() const { return m_width; }
 	int GetHeight() const { return m_height; }
 
-	wxGLContext* GetGLContext() const { return m_gl_context; }
+	wxGLContext* GetGLContext() const { return m_gl_ctx; }
 
 	void SetDrawable(bool draw) { m_draw = draw; }
 
@@ -82,8 +84,8 @@ private:
 	bool m_share_context;
 	bool m_use_context_stack;
 
-	wxGLContext* m_gl_context;
-	RenderContext* m_render_context;
+	wxGLContext*       m_gl_ctx;
+	s2::RenderContext* m_render_ctx;
 
 	bool m_dirty;
 	bool m_cam_dirty;

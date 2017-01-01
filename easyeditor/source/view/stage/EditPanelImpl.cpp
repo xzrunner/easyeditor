@@ -9,8 +9,6 @@
 #include "StringHelper.h"
 #include "SpriteRenderer.h"
 #include "CameraMgr.h"
-#include "OrthoCamera.h"
-#include "Pseudo3DCamera.h"
 
 #include <sm_c_vector.h>
 
