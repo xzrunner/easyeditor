@@ -3,22 +3,19 @@
 #include "ParticleSystem.h"
 
 #include <ee/DrawSpritesVisitor.h>
-#include <ee/Camera.h>
-#include <ee/CameraMgr.h>
 
 namespace ep3dinv
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: ee::CameraCanvas(stage, stage->GetStageImpl())
+	: ee::CameraCanvas(stage, stage->GetStageImpl(), gum::CAM_ORTHO2D)
 	, m_stage(stage)
 {
 }
 
 void StageCanvas::OnDrawSprites() const
 {
-	float scale = ee::CameraMgr::Instance()->GetCamera()->GetScale();
-	m_stage->TraverseSprites(ee::DrawSpritesVisitor(GetVisibleRegion(), scale), ee::DT_VISIBLE);
+	m_stage->TraverseSprites(ee::DrawSpritesVisitor(GetVisibleRegion(), GetCameraScale()), ee::DT_VISIBLE);
 
 	if (m_stage->m_ps) {
 		m_stage->m_ps->Update(1.0f / 30);

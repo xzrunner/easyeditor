@@ -4,9 +4,7 @@
 #include "config.h"
 
 #include <ee/DrawSpritesVisitor.h>
-#include <ee/Camera.h>
 #include <ee/color_config.h>
-#include <ee/CameraMgr.h>
 
 #include <sprite2/S2_RVG.h>
 
@@ -14,7 +12,7 @@ namespace etexpacker
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: ee::CameraCanvas(stage, stage->GetStageImpl())
+	: ee::CameraCanvas(stage, stage->GetStageImpl(), gum::CAM_ORTHO2D)
 	, m_stage_panel(stage)
 	, m_stage_impl(stage)
 {
@@ -22,8 +20,7 @@ StageCanvas::StageCanvas(StagePanel* stage)
 
 void StageCanvas::OnDrawSprites() const
 {
-	float scale = ee::CameraMgr::Instance()->GetCamera()->GetScale();
-	m_stage_impl->TraverseSprites(ee::DrawSpritesVisitor(GetVisibleRegion(), scale), ee::DT_VISIBLE);
+	m_stage_impl->TraverseSprites(ee::DrawSpritesVisitor(GetVisibleRegion(), GetCameraScale()), ee::DT_VISIBLE);
 
 	DrawRegion();
 }

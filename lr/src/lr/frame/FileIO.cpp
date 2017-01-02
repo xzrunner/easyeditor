@@ -8,8 +8,6 @@
 #include "view/StagePanel.h"
 #include "view/StageCanvas.h"
 
-#include <ee/CameraMgr.h>
-#include <ee/OrthoCamera.h>
 #include <ee/panel_msg.h>
 #include <ee/FileHelper.h>
 #include <ee/Sprite.h>
@@ -22,6 +20,7 @@
 #include <shaderlab/ColGradingProg.h>
 #include <shaderlab/FilterShader.h>
 #include <gum/trans_color.h>
+#include <gum/OrthoCamera.h>
 
 #include <fstream>
 
@@ -66,15 +65,15 @@ void FileIO::Load(const char* filename, LibraryPanel* library,
 	stage->BuildGrids(cfg->m_map_width, cfg->m_map_height);
 
 	// camera
-	if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) 
+	ee::CameraCanvas* canvas = static_cast<ee::CameraCanvas*>(stage->GetCanvas());
+	if (canvas->GetCamera()->Type() == gum::CAM_ORTHO2D)
 	{
+		gum::OrthoCamera* cam = static_cast<gum::OrthoCamera*>(canvas->GetCamera());
 		float s = value["camera"]["scale"].asDouble();
 		float x = value["camera"]["x"].asDouble(),
 			  y = value["camera"]["y"].asDouble();
-		ee::OrthoCamera* cam = static_cast<ee::OrthoCamera*>(ee::CameraMgr::Instance()->GetCamera());
 		cam->SetScale(s);
 		cam->SetPosition(sm::vec2(x, y));
-		cam->UpdateModelView();
 	}
 
 	// screen
@@ -150,10 +149,14 @@ void FileIO::Store(const char* filename, LibraryPanel* library,
 	value["size"]["view offset y"] = cfg->m_view_dy;
 
 	// camera
-	ee::Camera* cam = ee::CameraMgr::Instance()->GetCamera();
-	value["camera"]["scale"] = cam->GetScale();
-	value["camera"]["x"] = cam->GetPosition().x;
-	value["camera"]["y"] = cam->GetPosition().y;
+	ee::CameraCanvas* canvas = static_cast<ee::CameraCanvas*>(stage->GetCanvas());
+	if (canvas->GetCamera()->Type() == gum::CAM_ORTHO2D)
+	{
+		gum::OrthoCamera* cam = static_cast<gum::OrthoCamera*>(canvas->GetCamera());
+		value["camera"]["scale"] = cam->GetScale();
+		value["camera"]["x"] = cam->GetPosition().x;
+		value["camera"]["y"] = cam->GetPosition().y;
+	}
 
 	// screen
 	value["screen"]["multi_col"] = gum::color2str(stage->GetScreenMultiColor(), gum::RGBA);

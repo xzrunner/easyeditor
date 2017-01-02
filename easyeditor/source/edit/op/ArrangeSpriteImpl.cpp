@@ -4,7 +4,6 @@
 #include "EditPanelImpl.h"
 #include "MultiSpritesImpl.h"
 #include "PropertySettingPanel.h"
-#include "Camera.h"
 #include "SpriteSelection.h"
 #include "DeleteSpriteAOP.h"
 #include "CombineAOP.h"
@@ -20,6 +19,7 @@
 #include "sprite_msg.h"
 #include "EditOP.h"
 #include "SprTagEditDlg.h"
+#include "CameraCanvas.h"
 
 #include "EditableSpriteAOP.h"
 #include "VisibleSpriteAOP.h"
@@ -38,6 +38,7 @@
 #include <sprite2/S2_RVG.h>
 #include <sprite2/BoundingBox.h>
 #include <sprite2/S2_Symbol.h>
+#include <gum/Camera.h>
 
 namespace ee
 {
@@ -381,9 +382,9 @@ void ArrangeSpriteImpl::OnPopMenuSelected(int type)
 	m_popup.OnRightPopupMenu(type);
 }
 
-void ArrangeSpriteImpl::OnDraw(const Camera& cam) const
+void ArrangeSpriteImpl::OnDraw(float cam_scale) const
 {
-	m_ctrl_node_radius = CTRL_NODE_RADIUS * cam.GetScale();
+	m_ctrl_node_radius = CTRL_NODE_RADIUS * cam_scale;
 	if ((m_cfg.is_deform_open || m_cfg.is_offset_open) && m_selection->Size() == 1)
 	{
 		Sprite* selected = NULL;
@@ -393,7 +394,7 @@ void ArrangeSpriteImpl::OnDraw(const Camera& cam) const
 
 		sm::vec2 sz = selected->GetSymbol()->GetBounding().Size() * selected->GetScale();
 		float max_e = std::max(sz.x, sz.y);
-		if (max_e / cam.GetScale() < 100) {
+		if (max_e / cam_scale < 100) {
 			m_ctrl_node_radius = 0;
 		} else if (m_ctrl_node_radius > max_e * 0.1f) {
 			m_ctrl_node_radius = 0;
@@ -558,7 +559,11 @@ ArrangeSpriteState* ArrangeSpriteImpl::CreateShearState(Sprite* spr, const Sprit
 
 ArrangeSpriteState* ArrangeSpriteImpl::CreateOffsetState(Sprite* spr) const
 {
-	return new OffsetSpriteState(spr);
+	gum::Camera* cam = NULL;
+	if (ee::CameraCanvas* canvas = dynamic_cast<ee::CameraCanvas*>(m_stage->GetCanvas())) {
+		cam = canvas->GetCamera();
+	}
+	return new OffsetSpriteState(spr, cam);
 }
 
 ArrangeSpriteState* ArrangeSpriteImpl::CreatePerspectiveState(Sprite* spr, const SpriteCtrlNode::Node& ctrl_node) const

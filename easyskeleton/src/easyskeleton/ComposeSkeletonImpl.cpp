@@ -7,7 +7,6 @@
 #include "Joint.h"
 
 #include <ee/EditPanelImpl.h>
-#include <ee/CameraMgr.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/panel_msg.h>
 #include <ee/SpriteSelection.h>

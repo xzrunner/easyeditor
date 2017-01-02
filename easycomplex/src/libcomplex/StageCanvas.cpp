@@ -8,7 +8,6 @@
 #include <ee/Config.h>
 #include <ee/SpriteRenderer.h>
 #include <ee/color_config.h>
-#include <ee/CameraMgr.h>
 #include <ee/cfg_const.h>
 
 #include <easyanim.h>
@@ -24,7 +23,7 @@ namespace ecomplex
 StageCanvas::StageCanvas(StagePanel* editPanel,
 						 ee::LibraryPanel* library,
 						 wxGLContext* glctx)
-	: ee::CameraCanvas(editPanel, editPanel->GetStageImpl(), glctx)
+						 : ee::CameraCanvas(editPanel, editPanel->GetStageImpl(), gum::CAM_ORTHO2D, glctx)
 	, m_stage(editPanel)
 	, m_library(library)
 	, m_background(NULL)
@@ -95,8 +94,7 @@ void StageCanvas::OnDrawSprites() const
 
 	DrawBackground();
 
-	float scale = ee::CameraMgr::Instance()->GetCamera()->GetScale();
-	m_stage->TraverseSprites(ee::DrawSpritesVisitor(GetVisibleRegion(), scale), ee::DT_VISIBLE);
+	m_stage->TraverseSprites(ee::DrawSpritesVisitor(GetVisibleRegion(), GetCameraScale()), ee::DT_VISIBLE);
 
 	const sm::rect& clipbox = dynamic_cast<const Symbol*>(m_stage->GetSymbol())->GetScissor();
 	sm::vec2 sz = clipbox.Size();

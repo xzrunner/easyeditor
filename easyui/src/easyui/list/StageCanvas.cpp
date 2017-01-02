@@ -2,8 +2,6 @@
 #include "StagePanel.h"
 
 #include <ee/DrawSpritesVisitor.h>
-#include <ee/Camera.h>
-#include <ee/CameraMgr.h>
 
 #include <sprite2/S2_RVG.h>
 
@@ -13,7 +11,7 @@ namespace list
 {
 
 StageCanvas::StageCanvas(StagePanel* stage, wxGLContext* glctx)
-	: ee::CameraCanvas(stage, stage->GetStageImpl(), glctx, false)
+	: ee::CameraCanvas(stage, stage->GetStageImpl(), gum::CAM_ORTHO2D, glctx, false)
 	, m_stage(stage)
 {
 }
@@ -22,8 +20,7 @@ void StageCanvas::OnDrawSprites() const
 {
 	DrawGuideLines();
 
-	float scale = ee::CameraMgr::Instance()->GetCamera()->GetScale();
-	m_stage->TraverseSprites(ee::DrawSpritesVisitor(GetVisibleRegion(), scale), ee::DT_VISIBLE);
+	m_stage->TraverseSprites(ee::DrawSpritesVisitor(GetVisibleRegion(), GetCameraScale()), ee::DT_VISIBLE);
 
 	m_stage->DrawEditOP();
 }

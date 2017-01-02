@@ -9,9 +9,10 @@
 #include "EditPanelImpl.h"
 #include "MultiSpritesImpl.h"
 #include "PropertySettingPanel.h"
-#include "CameraMgr.h"
+#include "CameraCanvas.h"
 
 #include <sprite2/S2_RVG.h>
+#include <gum/OrthoCamera.h>
 
 namespace ee
 {
@@ -119,7 +120,16 @@ template <typename TBase>
 bool ArrangeSpriteOP<TBase>::OnDraw() const
 {
 	if (TBase::OnDraw()) return true;
-	m_impl->OnDraw(*CameraMgr::Instance()->GetCamera());
+
+	float cam_scale = 1;
+	ee::CameraCanvas* canvas = static_cast<ee::CameraCanvas*>(m_stage->GetCanvas());
+	gum::Camera* cam = canvas->GetCamera();
+	if (cam->Type() == gum::CAM_ORTHO2D) {
+		cam_scale = static_cast<gum::OrthoCamera*>(cam)->GetScale();
+	}
+
+	m_impl->OnDraw(cam_scale);
+
 	return false;
 }
 

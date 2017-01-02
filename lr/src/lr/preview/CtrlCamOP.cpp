@@ -4,8 +4,9 @@
 
 #include <ee/EditPanelImpl.h>
 #include <ee/panel_msg.h>
-#include <ee/OrthoCamera.h>
-#include <ee/CameraMgr.h>
+#include <ee/CameraCanvas.h>
+
+#include <gum/OrthoCamera.h>
 
 namespace lr
 {
@@ -42,10 +43,10 @@ bool CtrlCamOP::OnKeyDown(int keyCode)
 
 void CtrlCamOP::OffsetCamera(float dx, float dy)
 {
-	SettingCfg* cfg = SettingCfg::Instance();
-	if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) {
-		ee::OrthoCamera* cam = static_cast<ee::OrthoCamera*>(ee::CameraMgr::Instance()->GetCamera());
-		cam->Translate(sm::vec2(dx, dy));
+	gum::Camera* cam = static_cast<ee::CameraCanvas*>(m_stage->GetCanvas())->GetCamera();
+	if (cam->Type() == gum::CAM_ORTHO2D) {
+		gum::OrthoCamera* ortho_cam = static_cast<gum::OrthoCamera*>(cam);
+		ortho_cam->Translate(sm::vec2(dx, dy));
 	}
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }

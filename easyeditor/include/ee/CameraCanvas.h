@@ -18,10 +18,13 @@ public:
 		wxGLContext* glctx = NULL, bool use_context_stack = true);
 	virtual ~CameraCanvas();
 
+	gum::Camera* GetCamera() { return m_camera; }
+
 protected:
 	sm::rect GetVisibleRegion() const;
+	float GetCameraScale() const;
 
-private:
+protected:
 	gum::Camera* m_camera;
 
 }; // CameraCanvas

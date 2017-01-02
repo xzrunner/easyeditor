@@ -5,15 +5,15 @@
 #include "Math2D.h"
 #include "SpriteCtrlNode.h"
 #include "ArrangeSpriteImpl.h"
-#include "CameraMgr.h"
-#include "Camera.h"
 
 #include <SM_Calc.h>
+#include <gum/OrthoCamera.h>
 
 namespace ee
 {
 
-OffsetSpriteState::OffsetSpriteState(Sprite* spr)
+OffsetSpriteState::OffsetSpriteState(Sprite* spr, const gum::Camera* camera)
+	: m_camera(camera)
 {
 	m_spr = spr;
 	m_spr->AddReference();
@@ -28,7 +28,11 @@ OffsetSpriteState::~OffsetSpriteState()
 
 void OffsetSpriteState::OnMouseRelease(const sm::vec2& pos)
 {
-	float s = CameraMgr::Instance()->GetCamera()->GetScale();
+	float s = 1;
+	if (m_camera->Type() == gum::CAM_ORTHO2D) {
+		s = static_cast<const gum::OrthoCamera*>(m_camera)->GetScale();
+	}
+
 	float r = ArrangeSpriteImpl::CTRL_NODE_RADIUS * s * 2;
 
 	sm::vec2 ctrl_nodes[8];

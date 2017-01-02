@@ -6,8 +6,6 @@
 #include <ee/render_utility.h>
 #include <ee/SpriteRenderer.h>
 #include <ee/DrawSpritesVisitor.h>
-#include <ee/Camera.h>
-#include <ee/CameraMgr.h>
 #include <ee/color_config.h>
 #include <ee/EditPanelImpl.h>
 
@@ -17,7 +15,7 @@ namespace eterrain2d
 {
 
 StageCanvas::StageCanvas(StagePanel* panel)
-	: ee::CameraCanvas(panel, panel->GetStageImpl())
+	: ee::CameraCanvas(panel, panel->GetStageImpl(), gum::CAM_ORTHO2D)
 	, m_panel(panel)
 	, m_edited(NULL)
 	, m_sprite_impl(NULL)
@@ -27,7 +25,7 @@ StageCanvas::StageCanvas(StagePanel* panel)
 
 StageCanvas::StageCanvas(StagePanel* panel, wxGLContext* glctx,
 						 ee::Sprite* edited, const ee::MultiSpritesImpl* bg_sprites)
-	: ee::CameraCanvas(panel, panel->GetStageImpl(), glctx)
+	: ee::CameraCanvas(panel, panel->GetStageImpl(), gum::CAM_ORTHO2D)
 	, m_panel(panel)
 	, m_edited(edited)
 	, m_sprite_impl(bg_sprites)
@@ -56,8 +54,7 @@ void StageCanvas::OnDrawSprites() const
 
 	DrawBG();
 
-	float scale = ee::CameraMgr::Instance()->GetCamera()->GetScale();
-	m_panel->TraverseSprites(ee::DrawSpritesVisitor(GetVisibleRegion(), scale), ee::DT_VISIBLE);
+	m_panel->TraverseSprites(ee::DrawSpritesVisitor(GetVisibleRegion(), GetCameraScale()), ee::DT_VISIBLE);
 //	m_panel->traverseShapes(ee::DrawShapesVisitor(sr), ee::DT_VISIBLE);
 
 	m_stage->DrawEditOP();

@@ -13,12 +13,13 @@ namespace ee
 class DrawShapesVisitor : public Visitor<Shape>
 {
 public:
-	DrawShapesVisitor(const sm::rect& screen_region);
+	DrawShapesVisitor(const sm::rect& screen_region, float cam_scale);
 
 	virtual void Visit(Shape* shape, bool& next);
 
 private:
 	sm::rect m_screen_region;
+	float m_cam_scale;
 
 	s2::RenderColor m_ct;
 

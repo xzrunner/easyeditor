@@ -41,4 +41,12 @@ sm::rect CameraCanvas::GetVisibleRegion() const
 	return r;
 }
 
+float CameraCanvas::GetCameraScale() const
+{
+	if (m_camera->Type() == gum::CAM_PSEUDO3D) {
+		return 1;
+	}
+	return static_cast<gum::OrthoCamera*>(m_camera)->GetScale();
+}
+
 }

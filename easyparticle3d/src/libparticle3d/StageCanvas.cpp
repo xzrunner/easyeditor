@@ -15,7 +15,7 @@ namespace eparticle3d
 {
 
 StageCanvas::StageCanvas(StagePanel* editPanel)
-	: ee::CameraCanvas(editPanel, editPanel->GetStageImpl())
+	: ee::CameraCanvas(editPanel, editPanel->GetStageImpl(), gum::CAM_ORTHO2D)
 	, m_stage(editPanel)
 {
 }

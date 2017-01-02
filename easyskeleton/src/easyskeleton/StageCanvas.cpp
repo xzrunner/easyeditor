@@ -2,8 +2,6 @@
 #include "StagePanel.h"
 #include "Bone.h"
 
-#include <ee/Camera.h>
-#include <ee/CameraMgr.h>
 #include <ee/DrawSpritesVisitor.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/SpriteRenderer.h>
@@ -14,8 +12,7 @@ namespace eskeleton
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: ee::CameraCanvas(stage, stage->GetStageImpl())
-	, m_stage(stage)
+	: ee::CameraCanvas(stage, stage->GetStageImpl(), gum::CAM_ORTHO2D), m_stage(stage)
 {
 }
 

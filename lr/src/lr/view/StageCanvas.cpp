@@ -12,8 +12,6 @@
 #include <ee/FetchAllVisitor.h>
 #include <ee/SpriteRenderer.h>
 #include <ee/SettingData.h>
-#include <ee/Camera.h>
-#include <ee/CameraMgr.h>
 #include <ee/color_config.h>
 #include <ee/cfg_const.h>
 #include <ee/Math2D.h>
@@ -28,6 +26,7 @@
 #include <gum/FilterModes.h>
 #include <gum/GUM_GTxt.h>
 #include <gum/RenderContext.h>
+#include <gum/Pseudo3DCamera.h>
 
 #include <algorithm>
 
@@ -35,7 +34,7 @@ namespace lr
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: ee::CameraCanvas(stage, stage->GetStageImpl())
+	: ee::CameraCanvas(stage, stage->GetStageImpl(), gum::CAM_ORTHO2D)
 	, m_stage(stage)
 {
 }
@@ -44,7 +43,7 @@ void StageCanvas::OnDrawSprites() const
 {
 	DrawSprites();
 
-	m_stage->TraverseShapes(ee::DrawShapesVisitor(GetVisibleRegion()), ee::DT_VISIBLE);
+	m_stage->TraverseShapes(ee::DrawShapesVisitor(GetVisibleRegion(), GetCameraScale()), ee::DT_VISIBLE);
 
 	DrawRegion();
 
@@ -104,12 +103,13 @@ void StageCanvas::DrawSprites() const
 
 void StageCanvas::DrawSprite(ee::Sprite* spr, bool draw_edge, int name_visible) const
 {
-	if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) {
+	if (m_camera->Type() == gum::CAM_ORTHO2D)
+	{
 		sm::rect screen_region = GetVisibleRegion();
 		if (screen_region.IsValid() &&
 			!sm::is_rect_intersect_rect(spr->GetBounding()->GetSize(), screen_region)) {
 			return;
-		}
+		}		
 	}
 
 	int filter_mode_idx = 0;
@@ -125,9 +125,10 @@ void StageCanvas::DrawSprite(ee::Sprite* spr, bool draw_edge, int name_visible) 
 	{
 		ee::SettingData& cfg = ee::Config::Instance()->GetSettings();
 		const std::string& name = spr->GetName();
-		if (cfg.visible_node_name && !name.empty() && name[0] != '_') {
+		if (cfg.visible_node_name && !name.empty() && name[0] != '_') 
+		{
 			sm::mat4 t = spr->GetLocalMat();
-			float s = std::max(1.0f, ee::CameraMgr::Instance()->GetCamera()->GetScale()) * cfg.node_name_scale;
+			float s = std::max(1.0f, GetCameraScale()) * cfg.node_name_scale;
 			t.x[0] = t.x[5] = s;
 			gum::GTxt::Instance()->Draw(t, name);
 		}
@@ -153,9 +154,9 @@ void StageCanvas::DrawRegion() const
 
 void StageCanvas::DrawPseudo3dBound() const
 {
-	if (!ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) 
+	if (m_camera->Type() == gum::CAM_PSEUDO3D)
 	{
-		ee::Camera* cam = static_cast<ee::Camera*>(ee::CameraMgr::Instance()->GetCamera());
+		gum::Pseudo3DCamera* cam = static_cast<gum::Pseudo3DCamera*>(m_camera);
 		int w = gum::RenderContext::Instance()->GetWidth(),
 			h = gum::RenderContext::Instance()->GetHeight();
 //		sm::vec2 center_world(0, 0);

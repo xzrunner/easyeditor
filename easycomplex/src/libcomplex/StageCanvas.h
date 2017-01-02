@@ -3,7 +3,6 @@
 
 #include <ee/CameraCanvas.h>
 #include <ee/FPS.h>
-#include <ee/Camera.h>
 
 namespace ee { class LibraryPanel; class Symbol; }
 

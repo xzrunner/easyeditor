@@ -4,12 +4,12 @@
 #include "Shape.h"
 #include "Exception.h"
 #include "SpriteRenderer.h"
-#include "RenderContextStack.h"
 
 #include <unirender/RenderTarget.h>
 #include <unirender/Texture.h>
 #include <unirender/RenderContext.h>
 #include <shaderlab/ShaderMgr.h>
+#include <sprite2/RenderCtxStack.h>
 #include <gum/RenderContext.h>
 
 namespace ee
@@ -123,28 +123,12 @@ void RenderTarget::DrawFBO(const Symbol* sym, bool whitebg, float scale)
 		rc->Clear(0);
 	}	
 
-	RenderContextStack* ctx_stack = RenderContextStack::Instance();
-
-	bool has_context = true;
-
-	sm::vec2 last_offset;
-	float last_scale;
-	if (!ctx_stack->GetModelView(last_offset, last_scale)) {
-		has_context = false;
-	}
-
-	int last_w, last_h;
-	if (!ctx_stack->GetProjection(last_w, last_h)) {
-		has_context = false;
-	}
-
 	sm::rect rect = sym->GetBounding();
 	sm::vec2 sz = rect.Size();
 	int w = static_cast<int>(sz.x * scale),
 		h = static_cast<int>(sz.y * scale);
-	ctx_stack->SetModelView(sm::vec2(0, 0), 1);
-	ctx_stack->SetProjection(w, h);
-	rc->SetViewport(0, 0, w, h);
+
+	s2::RenderCtxStack::Instance()->Push(s2::RenderContext(w, h, w, h));
 
 	s2::RenderParams params;
 	sm::vec2 center = rect.Center();
@@ -158,11 +142,7 @@ void RenderTarget::DrawFBO(const Symbol* sym, bool whitebg, float scale)
 
 	m_impl->Unbind();
 
-	if (has_context) {
-		ctx_stack->SetModelView(last_offset, last_scale);
-		ctx_stack->SetProjection(last_w, last_h);
-		rc->SetViewport(0, 0, last_w, last_h);
-	}
+	s2::RenderCtxStack::Instance()->Pop();
 }
 
 void RenderTarget::DrawFBO(const Sprite* spr, bool clear, int width, int height, float dx, float dy, float scale)
@@ -179,24 +159,7 @@ void RenderTarget::DrawFBO(const Sprite* spr, bool clear, int width, int height,
 		rc->Clear(0);
 	}
 
-	RenderContextStack* ctx_stack = RenderContextStack::Instance();
-
-	bool has_context = true;
-
-	sm::vec2 last_offset;
-	float last_scale;
-	if (!ctx_stack->GetModelView(last_offset, last_scale)) {
-		has_context = false;
-	}
-
-	int last_w, last_h;
-	if (!ctx_stack->GetProjection(last_w, last_h)) {
-		has_context = false;
-	}
-
-	ctx_stack->SetModelView(sm::vec2(0, 0), 1);
-	ctx_stack->SetProjection(width, height);
-	rc->SetViewport(0, 0, width, height);
+	s2::RenderCtxStack::Instance()->Push(s2::RenderContext(width, height, width, height));
 
 	s2::RenderParams params;
 	params.mt.Scale(scale, -scale, 1);
@@ -209,11 +172,7 @@ void RenderTarget::DrawFBO(const Sprite* spr, bool clear, int width, int height,
 
 	m_impl->Unbind();
 
-	if (has_context) {
-		ctx_stack->SetModelView(last_offset, last_scale);
-		ctx_stack->SetProjection(last_w, last_h);	
-		rc->SetViewport(0, 0, last_w, last_h);
-	}
+	s2::RenderCtxStack::Instance()->Pop();
 }
 
 void RenderTarget::DrawFBO(const Shape* shape, bool clear, int width, int height)
@@ -227,33 +186,13 @@ void RenderTarget::DrawFBO(const Shape* shape, bool clear, int width, int height
 		rc->Clear(0);
 	}
 
-	RenderContextStack* ctx_stack = RenderContextStack::Instance();
-
-	bool has_context = true;
-
-	sm::vec2 last_offset;
-	float last_scale;
-	if (!ctx_stack->GetModelView(last_offset, last_scale)) {
-		has_context = false;
-	}
-
-	int last_w, last_h;
-	if (!ctx_stack->GetProjection(last_w, last_h)) {
-		has_context = false;
-	}
-
-	ctx_stack->SetModelView(sm::vec2(0, 0), 1);
-	ctx_stack->SetProjection(width, height);
-	rc->SetViewport(0, 0, width, height);
+	s2::RenderCtxStack::Instance()->Push(s2::RenderContext(width, height, width, height));
 
 	shape->Draw(sm::mat4::Scaled(1, -1, 1));
 
 	m_impl->Unbind();
 
-	if (has_context) {
-		ctx_stack->SetModelView(last_offset, last_scale);
-		ctx_stack->SetProjection(last_w, last_h);	
-	}
+	s2::RenderCtxStack::Instance()->Pop();
 }
 
 }

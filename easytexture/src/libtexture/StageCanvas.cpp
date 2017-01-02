@@ -7,8 +7,6 @@
 #include <ee/Sprite.h>
 #include <ee/SpriteRenderer.h>
 #include <ee/DrawSpritesVisitor.h>
-#include <ee/Camera.h>
-#include <ee/CameraMgr.h>
 #include <ee/DrawShapesVisitor.h>
 #include <ee/EditPanelImpl.h>
 
@@ -18,7 +16,7 @@ namespace etexture
 {
 
 StageCanvas::StageCanvas(StagePanel* panel)
-	: ee::CameraCanvas(panel, panel->GetStageImpl())
+	: ee::CameraCanvas(panel, panel->GetStageImpl(), gum::CAM_ORTHO2D)
 	, m_panel(panel)
 	, m_edited(NULL)
 	, m_sprite_impl(NULL)
@@ -28,7 +26,7 @@ StageCanvas::StageCanvas(StagePanel* panel)
 
 StageCanvas::StageCanvas(StagePanel* panel, wxGLContext* glctx,
 						 ee::Sprite* edited, const ee::MultiSpritesImpl* bg_sprites)
-	: ee::CameraCanvas(panel, panel->GetStageImpl(), glctx)
+	: ee::CameraCanvas(panel, panel->GetStageImpl(), gum::CAM_ORTHO2D, glctx)
 	, m_panel(panel)
 	, m_edited(edited)
 	, m_sprite_impl(bg_sprites)
@@ -55,10 +53,10 @@ void StageCanvas::OnDrawSprites() const
 		ee::SpriteRenderer::Instance()->Draw(m_bg, params);
 	}
 
-	float scale = ee::CameraMgr::Instance()->GetCamera()->GetScale();
 	sm::rect reg = GetVisibleRegion();
-	m_panel->TraverseSprites(ee::DrawSpritesVisitor(reg, scale), ee::DT_VISIBLE);
-	m_panel->TraverseShapes(ee::DrawShapesVisitor(reg), ee::DT_VISIBLE);
+	float s = GetCameraScale();
+	m_panel->TraverseSprites(ee::DrawSpritesVisitor(reg, s), ee::DT_VISIBLE);
+	m_panel->TraverseShapes(ee::DrawShapesVisitor(reg, s), ee::DT_VISIBLE);
 
 	s2::RVG::SetColor(s2::Color(255, 0, 0));
 	s2::RVG::Cross(sm::vec2(0, 0), 100, 100);

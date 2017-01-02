@@ -11,8 +11,6 @@
 #include <ee/SettingData.h>
 #include <ee/panel_msg.h>
 #include <ee/EditPanelImpl.h>
-#include <ee/CameraMgr.h>
-#include <ee/Pseudo3DCamera.h>
 #include <ee/Math2D.h>
 
 #include <easycomplex.h>
@@ -37,36 +35,37 @@ bool ArrangeSpriteImpl::OnKeyDown(int key_code)
 {
 	bool ret = ee::ArrangeSpriteImpl::OnKeyDown(key_code);
 
-	if (m_stage->GetKeyState(WXK_SHIFT))
-	{
-		if (key_code == 'O') {
-			ee::CameraMgr::Instance()->SetCamera(ee::CameraMgr::ORTHO);
-			ee::SetCanvasDirtySJ::Instance()->SetDirty();
-			ret = true;
-		} else if (key_code == 'P') {
-			ee::CameraMgr::Instance()->SetCamera(ee::CameraMgr::PSEUDO3D);
-			ee::SetCanvasDirtySJ::Instance()->SetDirty();
-			ret = true;
-		}
-	}
-	else
-	{
-		if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::PSEUDO3D))
-		{
-			ee::Pseudo3DCamera* cam = static_cast<ee::Pseudo3DCamera*>(ee::CameraMgr::Instance()->GetCamera());
-			switch (key_code)
-			{
-			case WXK_PAGEDOWN:
-				cam->Rotate(1);
-				ret = true;
-				break;
-			case WXK_PAGEUP:
-				cam->Rotate(-1);
-				ret = true;
-				break;
-			}
-		}
-	}
+	// todo
+// 	if (m_stage->GetKeyState(WXK_SHIFT))
+// 	{
+// 		if (key_code == 'O') {
+// 			ee::CameraMgr::Instance()->SetCamera(ee::CameraMgr::ORTHO);
+// 			ee::SetCanvasDirtySJ::Instance()->SetDirty();
+// 			ret = true;
+// 		} else if (key_code == 'P') {
+// 			ee::CameraMgr::Instance()->SetCamera(ee::CameraMgr::PSEUDO3D);
+// 			ee::SetCanvasDirtySJ::Instance()->SetDirty();
+// 			ret = true;
+// 		}
+// 	}
+// 	else
+// 	{
+// 		if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::PSEUDO3D))
+// 		{
+// 			ee::Pseudo3DCamera* cam = static_cast<ee::Pseudo3DCamera*>(ee::CameraMgr::Instance()->GetCamera());
+// 			switch (key_code)
+// 			{
+// 			case WXK_PAGEDOWN:
+// 				cam->Rotate(1);
+// 				ret = true;
+// 				break;
+// 			case WXK_PAGEUP:
+// 				cam->Rotate(-1);
+// 				ret = true;
+// 				break;
+// 			}
+// 		}
+// 	}
 	return ret;
 }
 

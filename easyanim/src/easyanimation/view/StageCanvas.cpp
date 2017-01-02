@@ -16,7 +16,7 @@ namespace eanim
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: ee::CameraCanvas(stage, stage->GetStageImpl())
+	: ee::CameraCanvas(stage, stage->GetStageImpl(), gum::CAM_ORTHO2D)
 	, m_stage_panel(stage)
 	, m_background(NULL)
 {

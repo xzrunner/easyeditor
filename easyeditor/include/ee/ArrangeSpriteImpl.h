@@ -39,7 +39,7 @@ public:
 
 	virtual void OnPopMenuSelected(int type);
 
-	virtual void OnDraw(const Camera& cam) const;
+	virtual void OnDraw(float cam_scale) const;
 	virtual void Clear();
 
 	// query edited spr, include its extra edit region

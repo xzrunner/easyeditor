@@ -4,8 +4,6 @@
 #include "ComposeGrids.h"
 
 #include <ee/DrawSpritesVisitor.h>
-#include <ee/Camera.h>
-#include <ee/CameraMgr.h>
 #include <ee/color_config.h>
 #include <ee/cfg_const.h>
 
@@ -18,7 +16,7 @@ namespace escale9
 {
 
 StageCanvas::StageCanvas(StagePanel* editPanel)
-	: ee::CameraCanvas(editPanel, editPanel->GetStageImpl())
+	: ee::CameraCanvas(editPanel, editPanel->GetStageImpl(), gum::CAM_ORTHO2D)
 	, m_stage_panel(editPanel)
 	, m_toolbar(NULL)
 {
@@ -33,8 +31,7 @@ void StageCanvas::OnDrawSprites() const
 	if (m_toolbar->isComposeOP())
 	{
 		ComposeGrids::Draw();
-		float scale = ee::CameraMgr::Instance()->GetCamera()->GetScale();
-		m_stage_panel->TraverseSprites(ee::DrawSpritesVisitor(GetVisibleRegion(), scale), ee::DT_VISIBLE);
+		m_stage_panel->TraverseSprites(ee::DrawSpritesVisitor(GetVisibleRegion(), GetCameraScale()), ee::DT_VISIBLE);
 	}
 	else
 	{

@@ -5,7 +5,6 @@
 
 #include <ee/SpriteSelection.h>
 #include <ee/FetchAllVisitor.h>
-#include <ee/Camera.h>
 #include <ee/color_config.h>
 #include <ee/Math2D.h>
 #include <ee/std_functor.h>

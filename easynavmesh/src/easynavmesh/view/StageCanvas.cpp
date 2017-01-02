@@ -14,7 +14,7 @@ namespace enav
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: ee::CameraCanvas(stage, stage->GetStageImpl())
+	: ee::CameraCanvas(stage, stage->GetStageImpl(), gum::CAM_ORTHO2D)
 	, m_stage(stage)
 {
 }
@@ -27,7 +27,7 @@ void StageCanvas::OnDrawSprites() const
 	s2::RVG::Rect(sm::vec2(r.xmin, r.ymin), sm::vec2(r.xmax, r.ymax), false);
 
 	m_stage->TraverseSprites(ee::DrawSpritesVisitor(r, 1), ee::DT_VISIBLE);
-	m_stage->TraverseShapes(ee::DrawShapesVisitor(r), ee::DT_VISIBLE);
+	m_stage->TraverseShapes(ee::DrawShapesVisitor(r, 1), ee::DT_VISIBLE);
 
 	m_stage->GetMesh()->Draw();
 

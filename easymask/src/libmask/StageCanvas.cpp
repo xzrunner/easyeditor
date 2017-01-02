@@ -2,8 +2,6 @@
 #include "StagePanel.h"
 #include "Symbol.h"
 
-#include <ee/Camera.h>
-#include <ee/CameraMgr.h>
 #include <ee/DrawSpritesVisitor.h>
 #include <ee/Config.h>
 #include <ee/SpriteRenderer.h>
@@ -14,7 +12,7 @@ namespace emask
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: ee::CameraCanvas(stage, stage->GetStageImpl())
+	: ee::CameraCanvas(stage, stage->GetStageImpl(), gum::CAM_ORTHO2D)
 	, m_stage(stage)
 	, m_mask_render(false)
 {

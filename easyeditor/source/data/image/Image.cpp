@@ -13,8 +13,6 @@
 #include "Sprite.h"
 #include "Math2D.h"
 #include "SpriteRenderer.h"
-#include "Camera.h"
-#include "CameraMgr.h"
 #include "ImageClip.h"
 #include "ImageTrim.h"
 

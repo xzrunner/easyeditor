@@ -14,7 +14,7 @@ namespace eicon
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: ee::CameraCanvas(stage, stage->GetStageImpl())
+	: ee::CameraCanvas(stage, stage->GetStageImpl(), gum::CAM_ORTHO2D)
 	, m_stage(stage)
 	, m_edited(NULL)
 	, m_sprite_impl(NULL)
@@ -26,7 +26,7 @@ StageCanvas::StageCanvas(StagePanel* stage,
 						 wxGLContext* glctx,
 						 ee::Sprite* edited,
 						 const ee::MultiSpritesImpl* bg_sprites)
-	: ee::CameraCanvas(stage, stage->GetStageImpl(), glctx)
+	: ee::CameraCanvas(stage, stage->GetStageImpl(), gum::CAM_ORTHO2D, glctx)
 	, m_stage(stage)
 	, m_edited(edited)
 	, m_sprite_impl(bg_sprites)

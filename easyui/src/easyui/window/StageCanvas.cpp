@@ -3,8 +3,6 @@
 #include "TidCfg.h"
 
 #include <ee/DrawSpritesVisitor.h>
-#include <ee/Camera.h>
-#include <ee/CameraMgr.h>
 #include <ee/EE_DTex.h>
 #include <ee/Config.h>
 #include <ee/color_config.h>
@@ -36,8 +34,7 @@ void StageCanvas::OnDrawSprites() const
 
 	DrawGuideLines();
 
-	float scale = ee::CameraMgr::Instance()->GetCamera()->GetScale();
-	m_stage->TraverseSprites(ee::DrawSpritesVisitor(GetVisibleRegion(), scale), ee::DT_VISIBLE);
+	m_stage->TraverseSprites(ee::DrawSpritesVisitor(GetVisibleRegion(), GetCameraScale()), ee::DT_VISIBLE);
 
 	m_stage->GetSymbol()->Draw(s2::RenderParams());
 

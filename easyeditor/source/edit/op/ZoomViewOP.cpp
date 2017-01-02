@@ -1,12 +1,13 @@
 #include "ZoomViewOP.h"
 #include "ZoomViewState.h"
 #include "PanViewState.h"
-#include "Camera.h"
-#include "CameraMgr.h"
 #include "EditPanelImpl.h"
 #include "SettingData.h"
 #include "Config.h"
 #include "panel_msg.h"
+#include "CameraCanvas.h"
+
+#include <gum/Camera.h>
 
 namespace ee
 {
@@ -46,7 +47,10 @@ bool ZoomViewOP::OnKeyDown(int keyCode)
 		break;
 	case WXK_ESCAPE:
 		{
-			CameraMgr::Instance()->GetCamera()->Reset();
+			CameraCanvas* canvas = dynamic_cast<CameraCanvas*>(m_stage->GetCanvas());
+			if (canvas) {
+				canvas->GetCamera()->Reset();
+			}
 			SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;

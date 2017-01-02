@@ -17,7 +17,7 @@ namespace eshape
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: ee::CameraCanvas(stage, stage->GetStageImpl())
+	: ee::CameraCanvas(stage, stage->GetStageImpl(), gum::CAM_ORTHO2D)
 	, m_stage(stage)
 	, m_shape_impl(stage)
 	, m_edited(NULL)
@@ -30,7 +30,7 @@ StageCanvas::StageCanvas(StagePanel* stage,
 						 wxGLContext* glctx,
 						 ee::Sprite* edited,
 						 const ee::MultiSpritesImpl* bg_sprites)
-	: ee::CameraCanvas(stage, stage->GetStageImpl(), glctx)
+	: ee::CameraCanvas(stage, stage->GetStageImpl(), gum::CAM_ORTHO2D, glctx)
 	, m_stage(stage)
 	, m_shape_impl(stage)
 	, m_edited(edited)
@@ -66,7 +66,7 @@ void StageCanvas::OnDrawSprites() const
 		ee::SpriteRenderer::Instance()->Draw(m_bg, params);
 	}
 
-	m_shape_impl->TraverseShapes(ee::DrawShapesVisitor(sm::rect()), ee::DT_VISIBLE);
+	m_shape_impl->TraverseShapes(ee::DrawShapesVisitor(sm::rect(), GetCameraScale()), ee::DT_VISIBLE);
 
 	StageCanvas::DrawGuideLines();
 

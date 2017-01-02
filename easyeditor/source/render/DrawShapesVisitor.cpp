@@ -1,7 +1,5 @@
 #include "DrawShapesVisitor.h"
 #include "Shape.h"
-#include "CameraMgr.h"
-#include "Camera.h"
 #include "SettingData.h"
 #include "Config.h"
 
@@ -11,8 +9,9 @@
 namespace ee
 {
 
-DrawShapesVisitor::DrawShapesVisitor(const sm::rect& screen_region)
+DrawShapesVisitor::DrawShapesVisitor(const sm::rect& screen_region, float cam_scale)
 	: m_screen_region(screen_region)
+	, m_cam_scale(cam_scale)
 {
 }
 
@@ -32,10 +31,11 @@ void DrawShapesVisitor::Visit(Shape* shape, bool& next)
 	shape->Draw(sm::mat4(), m_ct);
 
 	ee::SettingData& cfg = ee::Config::Instance()->GetSettings();
-	if (cfg.visible_node_name) {
+	if (cfg.visible_node_name) 
+	{
 		sm::vec2 center = r.Center();
 		sm::mat4 mt;
-		float s = std::max(1.0f, ee::CameraMgr::Instance()->GetCamera()->GetScale()) * cfg.node_name_scale;
+		float s = std::max(1.0f, m_cam_scale) * cfg.node_name_scale;
 		mt.x[0] = mt.x[5] = s;
 		mt.Translate(center.x, center.y, 0);
 		gum::GTxt::Instance()->Draw(mt, shape->GetName());

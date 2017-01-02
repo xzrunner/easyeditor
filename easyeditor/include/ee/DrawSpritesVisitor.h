@@ -23,7 +23,6 @@ protected:
 
 private:
 	sm::rect m_screen_region;
-
 	float m_cam_scale;
 
 }; // DrawSpritesVisitor

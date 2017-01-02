@@ -10,7 +10,7 @@ namespace libskeleton
 {
 
 StageCanvas::StageCanvas(StagePanel* editpanel, wxGLContext* glctx)
-	: ee::CameraCanvas(editpanel, editpanel->GetStageImpl(), glctx)
+	: ee::CameraCanvas(editpanel, editpanel->GetStageImpl(), gum::CAM_ORTHO2D, glctx)
 	, m_sk(editpanel->GetSkeleton())
 {
 	if (m_sk) {

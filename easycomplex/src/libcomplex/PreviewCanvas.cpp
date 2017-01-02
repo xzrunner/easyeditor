@@ -11,7 +11,7 @@ namespace ecomplex
 PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
 							 const std::vector<ee::Sprite*>& sprs,
 							 wxGLContext* glctx)
-	: ee::CameraCanvas(stage_wnd, stage, glctx)
+	: ee::CameraCanvas(stage_wnd, stage, gum::CAM_ORTHO2D, glctx)
 	, m_sprs(sprs)
 {
 }

@@ -8,9 +8,11 @@
 #include "sprite_msg.h"
 #include "StringHelper.h"
 #include "SpriteRenderer.h"
-#include "CameraMgr.h"
+#include "CameraCanvas.h"
 
 #include <sm_c_vector.h>
+#include <gum/OrthoCamera.h>
+#include <gum/Pseudo3DCamera.h>
 
 #include <fstream>
 
@@ -60,9 +62,15 @@ sm::vec2 EditPanelImpl::TransPosScrToProj(int x, int y) const
 		return sm::vec2(0, 0);
 	}
 
+	ee::CameraCanvas* canvas = dynamic_cast<ee::CameraCanvas*>(m_canvas);
+	if (!canvas || canvas->GetCamera()->Type() != gum::CAM_ORTHO2D) {
+		return sm::vec2(0, 0);
+	}
+
+	gum::OrthoCamera* cam = static_cast<gum::OrthoCamera*>(canvas->GetCamera());
 	int w = m_stage->GetSize().GetWidth(),
 		h = m_stage->GetSize().GetHeight();
-	return CameraMgr::Instance()->GetCamera()->TransPosScreenToProject(x, y, w, h);
+	return cam->TransPosScreenToProject(x, y, w, h);
 }
 
 sm::vec2 EditPanelImpl::TransPosProjToScr(const sm::vec2& proj) const
@@ -71,9 +79,15 @@ sm::vec2 EditPanelImpl::TransPosProjToScr(const sm::vec2& proj) const
 		return sm::vec2(0, 0);
 	}
 
+	ee::CameraCanvas* canvas = dynamic_cast<ee::CameraCanvas*>(m_canvas);
+	if (!canvas || canvas->GetCamera()->Type() != gum::CAM_ORTHO2D) {
+		return sm::vec2(0, 0);
+	}
+
+	gum::OrthoCamera* cam = static_cast<gum::OrthoCamera*>(canvas->GetCamera());
 	int w = m_stage->GetSize().GetWidth(),
 		h = m_stage->GetSize().GetHeight();
-	return CameraMgr::Instance()->GetCamera()->TransPosProjectToScreen(proj, w, h);
+	return cam->TransPosProjectToScreen(proj, w, h);
 }
 
 void EditPanelImpl::DrawEditOP() const
@@ -198,27 +212,38 @@ void EditPanelImpl::OnChar(wxKeyEvent& event)
 
 void EditPanelImpl::OnMouseWheelRotation(int x, int y, int direction)
 {
-	if (CameraMgr::Instance()->IsType(CameraMgr::ORTHO) && m_stage) 
+	ee::CameraCanvas* canvas = dynamic_cast<ee::CameraCanvas*>(m_canvas);
+	if (!canvas) {
+		return;
+	}
+
+	switch (canvas->GetCamera()->Type())
 	{
-		int w = m_stage->GetSize().GetWidth(),
-			h = m_stage->GetSize().GetHeight();
-		float scale = 1;
-		if (GetKeyState(WXK_CONTROL)) {
-			scale = direction > 0 ? 1 / 1.01f : 1.01f;
-		} else {
-			scale = direction > 0 ? 1 / 1.1f : 1.1f;
+	case gum::CAM_ORTHO2D:
+		if (m_stage)
+		{
+			int w = m_stage->GetSize().GetWidth(),
+				h = m_stage->GetSize().GetHeight();
+			float scale = 1;
+			if (GetKeyState(WXK_CONTROL)) {
+				scale = direction > 0 ? 1 / 1.01f : 1.01f;
+			} else {
+				scale = direction > 0 ? 1 / 1.1f : 1.1f;
+			}
+			const float cx = static_cast<float>(x),
+				        cy = static_cast<float>(h - y);
+			gum::OrthoCamera* cam = static_cast<gum::OrthoCamera*>(canvas->GetCamera());
+			cam->Scale(scale, cx, cy, w, h);
 		}
-		const float cx = static_cast<float>(x),
-			        cy = static_cast<float>(h - y);
-		OrthoCamera* cam = static_cast<OrthoCamera*>(CameraMgr::Instance()->GetCamera());
-		cam->Scale(scale, cx, cy, w, h);
-	} 
-	else if (CameraMgr::Instance()->IsType(CameraMgr::PSEUDO3D))
-	{
-		Pseudo3DCamera* cam = static_cast<Pseudo3DCamera*>(CameraMgr::Instance()->GetCamera());
-		const sm_vec3* pos = cam->GetPos();
-		float dz = direction < 0 ? pos->z * 0.1f : - pos->z * 0.1f;
-		cam->Translate(sm::vec3(0, 0, dz));
+		break;
+	case gum::CAM_PSEUDO3D:
+		{
+			gum::Pseudo3DCamera* cam = static_cast<gum::Pseudo3DCamera*>(canvas->GetCamera());
+			const sm_vec3* pos = cam->GetPos();
+			float dz = direction < 0 ? pos->z * 0.1f : - pos->z * 0.1f;
+			cam->Translate(sm::vec3(0, 0, dz));
+		}
+		break;
 	}
 }
 

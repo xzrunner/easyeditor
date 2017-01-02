@@ -8,7 +8,7 @@ namespace libanim
 
 PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage,
 							 const Symbol* sym, wxGLContext* glctx)
-	: ee::CameraCanvas(stage_wnd, stage, glctx)
+	: ee::CameraCanvas(stage_wnd, stage, gum::CAM_ORTHO2D, glctx)
 	, m_sym(sym)
 	, m_control(1.0f / sym->GetFPS())
 {

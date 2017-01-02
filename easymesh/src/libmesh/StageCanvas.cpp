@@ -12,7 +12,7 @@ namespace emesh
 
 StageCanvas::StageCanvas(StagePanel* panel,
 						 wxGLContext* glctx)
-	: ee::CameraCanvas(panel, panel->GetStageImpl(), glctx)
+	: ee::CameraCanvas(panel, panel->GetStageImpl(), gum::CAM_ORTHO2D)
 	, m_panel(panel)
 {
 }
@@ -26,7 +26,7 @@ void StageCanvas::OnDrawSprites() const
 
 	m_stage->DrawEditOP();
 
-	m_panel->TraverseShapes(ee::DrawShapesVisitor(sm::rect()), ee::DT_VISIBLE);
+	m_panel->TraverseShapes(ee::DrawShapesVisitor(sm::rect(), GetCameraScale()), ee::DT_VISIBLE);
 }
 
 }

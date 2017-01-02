@@ -3,8 +3,6 @@
 #include "Image.h"
 #include "Sprite.h"
 #include "ImageData.h"
-#include "CameraMgr.h"
-#include "Camera.h"
 
 #include <unirender/Texture.h>
 #include <unirender/RenderTarget.h>
@@ -63,18 +61,21 @@ void ImageSymbol::QueryTexcoords(float* texcoords, int& texid) const
 
 void ImageSymbol::Proj2Screen(float px, float py, int w, int h, float& sx, float& sy) const
 {
-	const Camera* cam = CameraMgr::Instance()->GetCamera();
-	assert(cam);
-	sm::vec2 v = cam->TransPosProjectToScreen(sm::vec2(px, py), w, h);
-	sx = v.x;
-	sy = v.y;
+	// todo
+// 	const Camera* cam = CameraMgr::Instance()->GetCamera();
+// 	assert(cam);
+// 	sm::vec2 v = cam->TransPosProjectToScreen(sm::vec2(px, py), w, h);
+// 	sx = v.x;
+// 	sy = v.y;
 }
 
 bool ImageSymbol::IsOrthoCam() const
 {
-	const Camera* cam = CameraMgr::Instance()->GetCamera();
-	assert(cam);
-	return cam->Type() == "ortho";
+	// todo
+	return true;
+// 	const Camera* cam = CameraMgr::Instance()->GetCamera();
+// 	assert(cam);
+// 	return cam->Type() == "ortho";
 }
 
 void ImageSymbol::GetScreenSize(int& w, int& h) const

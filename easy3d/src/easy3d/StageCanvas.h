@@ -4,7 +4,6 @@
 #include "Camera.h"
 
 #include <ee/OnePassCanvas.h>
-#include <ee/Camera.h>
 
 namespace e3d
 {

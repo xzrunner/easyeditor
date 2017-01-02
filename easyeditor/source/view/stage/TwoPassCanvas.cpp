@@ -5,7 +5,6 @@
 #include "color_config.h"
 #include "SpriteRenderer.h"
 #include "EE_SP.h"
-#include "Camera.h"
 
 #include <unirender/RenderTarget.h>
 #include <unirender/RenderContext.h>
@@ -75,12 +74,13 @@ void TwoPassCanvas::OnDrawWhole() const
 
 void TwoPassCanvas::OnDrawWhole() const
 {
-//	DrawOnePass();
-	DrawTwoPass();
+	DrawOnePass();
 
-	if (Config::Instance()->IsDebugDrawOpen()) {
-		DebugDraw();
-	}
+// 	DrawTwoPass();
+// 
+// 	if (Config::Instance()->IsDebugDrawOpen()) {
+// 		DebugDraw();
+// 	}
 }
 
 #endif // OPEN_SCREEN_CACHE

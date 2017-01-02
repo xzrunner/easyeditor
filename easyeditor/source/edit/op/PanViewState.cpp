@@ -1,9 +1,11 @@
 #include "PanViewState.h"
 #include "EditPanelImpl.h"
 #include "panel_msg.h"
-#include "CameraMgr.h"
+#include "CameraCanvas.h"
 
 #include <gum/RenderContext.h>
+#include <gum/OrthoCamera.h>
+#include <gum/Pseudo3DCamera.h>
 
 namespace ee
 {
@@ -48,16 +50,29 @@ bool PanViewState::OnMouseDrag(int x, int y)
 
 	sm::vec2 offset(m_last_pos.x - x, m_last_pos.y - y);
 	offset.y = -offset.y;
-	if (CameraMgr::Instance()->IsType(CameraMgr::ORTHO)) {
-		OrthoCamera* cam = static_cast<OrthoCamera*>(CameraMgr::Instance()->GetCamera());
-		cam->Translate(offset);
-	} else if (CameraMgr::Instance()->IsType(CameraMgr::PSEUDO3D)) {
-		Pseudo3DCamera* cam = static_cast<Pseudo3DCamera*>(CameraMgr::Instance()->GetCamera());		
-		int w = gum::RenderContext::Instance()->GetWidth(),
-			h = gum::RenderContext::Instance()->GetHeight();		
-		sm::vec2 last = cam->TransPosScreenToProject(m_last_pos.x, m_last_pos.y, w, h);
-		sm::vec2 curr = cam->TransPosScreenToProject(x, y, w, h);
-		cam->Translate(sm::vec3(curr.x - last.x, curr.y - last.y, 0));
+
+	ee::CameraCanvas* canvas = dynamic_cast<ee::CameraCanvas*>(m_stage->GetCanvas());
+	if (canvas)
+	{
+		switch (canvas->GetCamera()->Type())
+		{
+		case gum::CAM_ORTHO2D:
+			{
+				gum::OrthoCamera* cam = static_cast<gum::OrthoCamera*>(canvas->GetCamera());
+				cam->Translate(offset);
+			}
+			break;
+		case gum::CAM_PSEUDO3D:
+			{
+				gum::Pseudo3DCamera* cam = static_cast<gum::Pseudo3DCamera*>(canvas->GetCamera());		
+				int w = gum::RenderContext::Instance()->GetWidth(),
+					h = gum::RenderContext::Instance()->GetHeight();		
+				sm::vec2 last = cam->TransPosScreenToProject(m_last_pos.x, m_last_pos.y, w, h);
+				sm::vec2 curr = cam->TransPosScreenToProject(x, y, w, h);
+				cam->Translate(sm::vec3(curr.x - last.x, curr.y - last.y, 0));
+			}
+			break;
+		}
 	}
 
 	m_last_pos.Set(x, y);

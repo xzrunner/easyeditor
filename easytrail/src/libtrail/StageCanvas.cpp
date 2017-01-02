@@ -2,8 +2,6 @@
 #include "StagePanel.h"
 #include "MotionTrail.h"
 
-#include <ee/Camera.h>
-#include <ee/CameraMgr.h>
 #include <ee/DrawSpritesVisitor.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/Sprite.h>
@@ -16,7 +14,7 @@ namespace etrail
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: ee::CameraCanvas(stage, stage->GetStageImpl())
+	: ee::CameraCanvas(stage, stage->GetStageImpl(), gum::CAM_ORTHO2D)
 	, m_stage(stage)
 {
 }

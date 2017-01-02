@@ -20,7 +20,7 @@ namespace eanim
 
 PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
 							 wxGLContext* glctx, s2::AnimCurr& curr)
-	: ee::CameraCanvas(stage_wnd, stage, glctx)
+	: ee::CameraCanvas(stage_wnd, stage, gum::CAM_ORTHO2D, glctx)
 	, m_curr(curr)
 {
 }
