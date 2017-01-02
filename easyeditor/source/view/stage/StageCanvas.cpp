@@ -47,7 +47,7 @@ StageCanvas::StageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage,
  	, m_width(0), m_height(0)
 	, m_dirty(false)
 	, m_cam_dirty(false)
-	, m_render_ctx(new s2::RenderContext)
+	, m_render_ctx_idx(-1)
 	, m_timer(this, TIMER_ID)
 	, m_draw(true)
 {
@@ -66,7 +66,7 @@ StageCanvas::StageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage,
 	RegistSubject(SetCanvasDirtySJ::Instance());
 
 	if (m_use_context_stack) {
-		s2::RenderCtxStack::Instance()->Push(*m_render_ctx);
+		m_render_ctx_idx = s2::RenderCtxStack::Instance()->Push(s2::RenderContext());
 	}
 }
 
@@ -81,7 +81,6 @@ StageCanvas::~StageCanvas()
 	if (m_use_context_stack) {
 		s2::RenderCtxStack::Instance()->Pop();
 	}
-	delete m_render_ctx;
 }
 
 void StageCanvas::SetBgColor(const s2::Color& color)
@@ -92,7 +91,7 @@ void StageCanvas::SetBgColor(const s2::Color& color)
 void StageCanvas::SetCurrentCanvas()
 {
 	SetCurrent(*m_gl_ctx);
-	m_render_ctx->UpdateMVP();
+	s2::RenderCtxStack::Instance()->Bind(m_render_ctx_idx);
 }
 
 void StageCanvas::OnNotify(int sj_id, void* ud) 

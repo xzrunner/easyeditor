@@ -109,7 +109,7 @@ void TwoPassCanvas::DrawTwoPass() const
 	// Draw to Screen
 	//////////////////////////////////////////////////////////////////////////
 
-	s2::RenderCtxStack::Instance()->Push(s2::RenderContext(2, 2, 0, 0), false);
+	s2::RenderCtxStack::Instance()->Push(s2::RenderContext(2, 2, 0, 0));
 
 	ur::RenderContext* rc = gum::RenderContext::Instance()->GetImpl();
 	rc->SetClearFlag(ur::MASKC);
@@ -129,7 +129,7 @@ void TwoPassCanvas::DrawTwoPass() const
 	DrawPass2(&vertices[0].x, &texcoords[0].x, rt->GetTexture()->ID());
  	sl::ShaderMgr::Instance()->FlushShader();
 
-	s2::RenderCtxStack::Instance()->Pop(false);
+	s2::RenderCtxStack::Instance()->Pop();
 }
 
 void TwoPassCanvas::DrawPass1() const

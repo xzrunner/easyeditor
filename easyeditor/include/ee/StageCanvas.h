@@ -9,8 +9,6 @@
 #include <wx/glcanvas.h>
 #include <wx/timer.h>
 
-namespace s2 { class RenderContext; }
-
 namespace ee
 {
 
@@ -84,8 +82,8 @@ private:
 	bool m_share_context;
 	bool m_use_context_stack;
 
-	wxGLContext*       m_gl_ctx;
-	s2::RenderContext* m_render_ctx;
+	wxGLContext* m_gl_ctx;
+	int          m_render_ctx_idx;
 
 	bool m_dirty;
 	bool m_cam_dirty;

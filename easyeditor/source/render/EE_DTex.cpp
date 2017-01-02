@@ -9,12 +9,12 @@ namespace ee
 
 static void _draw_begin() 
 {
-	s2::RenderCtxStack::Instance()->Push(s2::RenderContext(2, 2, 0, 0), false);
+	s2::RenderCtxStack::Instance()->Push(s2::RenderContext(2, 2, 0, 0));
 }
 
 static void _draw_end()
 {
-	s2::RenderCtxStack::Instance()->Pop(false);
+	s2::RenderCtxStack::Instance()->Pop();
 }
 
 void DTex::Init()
