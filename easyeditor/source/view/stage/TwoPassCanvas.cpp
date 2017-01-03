@@ -142,16 +142,10 @@ void TwoPassCanvas::DrawPass1() const
 	rc->SetClearFlag(ur::MASKC);
 	rc->Clear(0);
 
-	OnDrawSprites();
+//	DrawDirect();
+	DrawDRect();
 
 	rt->Unbind();
-
-// 	// drect
-// 	gum::DRect::Instance()->Bind();
-// 	rc->SetClearFlag(ur::MASKC);
-// 	rc->Clear(0xffff00ff);
-// 	OnDrawSprites();
-// 	gum::DRect::Instance()->Unbind();
 }
 
 void TwoPassCanvas::DrawPass2(const float* vertices, const float* texcoords, int tex_id) const
@@ -180,11 +174,34 @@ void TwoPassCanvas::DrawPass2(const float* vertices, const float* texcoords, int
 	shader->Draw(vertices, texcoords, tex_id);
 }
 
+void TwoPassCanvas::DrawDirect() const
+{
+	OnDrawSprites();
+}
+
+void TwoPassCanvas::DrawDRect() const
+{
+	ur::RenderContext* rc = gum::RenderContext::Instance()->GetImpl();
+
+	sm::vec2 offset = s2::RenderCtxStack::Instance()->Top()->GetMVOffset();
+	float scale = s2::RenderCtxStack::Instance()->Top()->GetMVScale();
+
+	gum::DRect* drect = gum::DRect::Instance();
+	if (!drect->Draw(offset , scale))
+	{
+		drect->Bind();
+ 		rc->SetClearFlag(ur::MASKC);
+ 		rc->Clear(0xffff00ff);
+ 		OnDrawSprites();
+		drect->Unbind();
+	}
+}
+
 void TwoPassCanvas::DebugDraw() const
 {
 // 	gum::DTex::Instance()->DebugDraw();
- 	gum::Sprite2::Instance()->DebugDraw();
-//	gum::DRect::Instance()->DebugDraw();
+// 	gum::Sprite2::Instance()->DebugDraw();
+	gum::DRect::Instance()->DebugDraw();
 
 //	gum::RenderTarget::Instance()->DebugDraw();
 }
