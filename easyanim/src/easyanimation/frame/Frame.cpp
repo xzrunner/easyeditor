@@ -17,7 +17,6 @@
 #include <ee/panel_msg.h>
 #include <ee/SymbolMgr.h>
 #include <ee/FetchAllVisitor.h>
-#include <ee/Snapshoot.h>
 #include <ee/FileHelper.h>
 #include <ee/SymbolType.h>
 
@@ -26,6 +25,7 @@
 #include <sprite2/BoundingBox.h>
 #include <sprite2/SymType.h>
 #include <sprite2/ILerp.h>
+#include <sprite2/DrawRT.h>
 
 namespace eanim
 {
@@ -170,12 +170,11 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 
 	sm::vec2 sz = region.Size();
 	sm::vec2 c = region.Center();
-	ee::Snapshoot ss(sz.x, sz.y);
+	s2::DrawRT rt(sz.x, sz.y);
 	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
-		ss.DrawSprite(sprs[i], false, c.x, c.y);
+		rt.Draw(sprs[i], false, c.x, c.y);
 	}
-
-	ss.SaveToFile(filepath);
+	rt.StoreToFile(filepath);
 }
 
 void Frame::SaveAsSingle(const std::string& filepath) const

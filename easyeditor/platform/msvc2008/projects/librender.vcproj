@@ -274,22 +274,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\source\render\RenderTarget.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\RenderTarget.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\source\render\Snapshoot.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\Snapshoot.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\include\ee\texture_format.h"
 				>
 			</File>

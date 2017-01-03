@@ -8,7 +8,6 @@
 #include <wx/wx.h>
 #include <map>
 
-namespace ee { class Snapshoot; }
 namespace Json { class Value; }
 
 namespace edb
@@ -30,9 +29,9 @@ public:
 	static ICommand* Create() { return new ScaleOverall(); }
 
 private:
-	void Scale(ee::Snapshoot& ss, const std::string& dir, float scale) const;
+	void Scale(const std::string& dir, float scale) const;
 
-	void ScaleImage(const std::string& filepath, float scale, ee::Snapshoot& ss,
+	void ScaleImage(const std::string& filepath, float scale,
 		std::map<std::string, sm::vec2>& mapImg2Center) const;
 	void ScaleComplex(const std::string& filepath, float scale,
 		const std::map<std::string, sm::vec2>& mapImg2Center) const;

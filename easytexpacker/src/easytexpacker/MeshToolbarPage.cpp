@@ -4,7 +4,6 @@
 
 #include <ee/physics_const.h>
 #include <ee/SymbolMgr.h>
-#include <ee/Snapshoot.h>
 #include <ee/SpriteFactory.h>
 #include <ee/FileHelper.h>
 #include <ee/Random.h>
@@ -13,6 +12,7 @@
 #include <easyshape.h>
 
 #include <sprite2/SymType.h>
+#include <sprite2/DrawRT.h>
 
 namespace etexpacker
 {
@@ -118,8 +118,8 @@ void MeshToolbarPage::OnSaveImage(wxCommandEvent& event)
 		fin.close();
 
 		const int width = 1024,
-			height = 2048;
-		ee::Snapshoot ss(width, height);
+			      height = 2048;
+		s2::DrawRT rt(width, height);
 		int i = 0;
 		Json::Value item_val = value[i++];
 
@@ -134,7 +134,7 @@ void MeshToolbarPage::OnSaveImage(wxCommandEvent& event)
 			spr->SetPosition(pos);
 			float angle = item_val["angle"].asDouble();
 			spr->SetAngle(angle);
-			ss.DrawSprite(spr);
+			rt.Draw(spr);
 
 			spr->RemoveReference();
 			sym->RemoveReference();
@@ -143,7 +143,7 @@ void MeshToolbarPage::OnSaveImage(wxCommandEvent& event)
 		}
 
 		std::string outpath = ee::FileHelper::GetFileDir(physics_filepath) + "\\image.png";
-		ss.SaveToFile(outpath);
+		rt.StoreToFile(outpath);
 	}
 }
 

@@ -3,7 +3,6 @@
 #include "utility.h"
 
 #include <ee/SettingData.h>
-#include <ee/Snapshoot.h>
 #include <ee/Config.h>
 #include <ee/FileHelper.h>
 #include <ee/SymbolMgr.h>
@@ -15,6 +14,7 @@
 #include <easyimage.h>
 
 #include <sprite2/SymType.h>
+#include <sprite2/DrawRT.h>
 
 #include <wx/arrstr.h>
 
@@ -48,8 +48,6 @@ int ScaleImage::Run(int argc, char *argv[])
 		return ret;
 	}
 
-	ee::Snapshoot ss;
-
 	ee::SettingData& data = ee::Config::Instance()->GetSettings();
 	bool ori_clip_cfg = data.open_image_edge_clip;
 	data.open_image_edge_clip = false;
@@ -57,9 +55,9 @@ int ScaleImage::Run(int argc, char *argv[])
 	data.pre_multi_alpha = false;
 
 	if (argc == 4) {
-		Scale(ss, argv[2], atof(argv[3]));
+		Scale(argv[2], atof(argv[3]));
 	} else if (argc == 5) {
-		Scale(ss, argv[2], argv[3], atof(argv[4]));
+		Scale(argv[2], argv[3], atof(argv[4]));
 	}
 
 	data.open_image_edge_clip = ori_clip_cfg;
@@ -68,16 +66,16 @@ int ScaleImage::Run(int argc, char *argv[])
 	return 0;
 }
 
-void ScaleImage::Scale(ee::Snapshoot& ss, const std::string& dir, float scale)
+void ScaleImage::Scale(const std::string& dir, float scale)
 {
 	wxArrayString files;
 	ee::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i) {
-		Scale(ss, files[i].ToStdString(), files[i].ToStdString(), scale);
+		Scale(files[i].ToStdString(), files[i].ToStdString(), scale);
 	}
 }
 
-void ScaleImage::Scale(ee::Snapshoot& ss, const std::string& src, const std::string& dst, float scale)
+void ScaleImage::Scale(const std::string& src, const std::string& dst, float scale)
 {
 	std::string filepath = ee::FileHelper::GetAbsolutePath(src);
 	if (ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_IMAGE)
@@ -88,15 +86,15 @@ void ScaleImage::Scale(ee::Snapshoot& ss, const std::string& src, const std::str
 		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
 		spr->SetScale(sm::vec2(scale, scale));
 
+		s2::DrawRT rt;
 		const sm::vec2& sz = r.Size();
 		int width = sz.x * scale,
 			height = sz.y * scale;
-		ss.DrawSprite(spr, true, width, height);
+		rt.Draw(spr, true, width, height);
+		rt.StoreToFile(dst, width, height);
 
 		spr->RemoveReference();
 		sym->RemoveReference();
-
-		ss.SaveToFile(dst, width, height);
 	}
 }
 

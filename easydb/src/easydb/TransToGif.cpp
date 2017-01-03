@@ -2,7 +2,6 @@
 #include "check_params.h"
 #include "utility.h"
 
-#include <ee/Snapshoot.h>
 #include <ee/FileHelper.h>
 #include <ee/SymbolMgr.h>
 #include <ee/AnimatedGifSaver.h>
@@ -43,14 +42,12 @@ int TransToGif::Run(int argc, char *argv[])
 		return ret;
 	}
 
-	ee::Snapshoot ss;
-
-	Run(ss, argv[2], argv[3]);
+	Run(argv[2], argv[3]);
 
 	return 0;
 }
 
-void TransToGif::Run(ee::Snapshoot& ss, const std::string& srcdir, const std::string& dstdir) const
+void TransToGif::Run(const std::string& srcdir, const std::string& dstdir) const
 {
 	//wxArrayString files;
 	//ee::FileHelper::FetchAllFiles(srcdir, files);

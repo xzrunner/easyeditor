@@ -3,8 +3,6 @@
 
 #include "ICommand.h"
 
-namespace ee { class Snapshoot; }
-
 namespace edb
 {
 
@@ -24,7 +22,7 @@ public:
 	static ICommand* Create() { return new Snapshoot(); }
 
 private:
-	void Run(ee::Snapshoot& ss, const std::string& srcdir, const std::string& dstdir) const;
+	void Run(const std::string& srcdir, const std::string& dstdir) const;
 
 }; // Snapshoot
 

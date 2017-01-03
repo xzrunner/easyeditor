@@ -5,7 +5,7 @@
 
 #include <SM_Vector.h>
 
-namespace ee { class Snapshoot; class Image; }
+namespace ee { class Image; }
 
 namespace edb
 {
@@ -28,7 +28,7 @@ public:
 	static const char* GetOutputFileName();
 
 private:
-	void RotateTrim(ee::Snapshoot& ss, const std::string& dir);	
+	void RotateTrim(const std::string& dir);	
 
 	bool GetRotateTrimInfo(const ee::Image* image, 
 		int& width, int& height,

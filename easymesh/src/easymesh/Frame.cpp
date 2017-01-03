@@ -4,12 +4,13 @@
 #include <easymesh.h>
 
 #include <ee/FileHelper.h>
-#include <ee/Snapshoot.h>
 #include <ee/SymbolMgr.h>
 #include <ee/ExceptionDlg.h>
 #include <ee/Exception.h>
 #include <ee/SpriteFactory.h>
 #include <ee/panel_msg.h>
+
+#include <sprite2/DrawRT.h>
 
 namespace emesh
 {
@@ -37,9 +38,11 @@ void Frame::OnSaveAs(wxCommandEvent& event)
 			std::string ext = ee::FileHelper::GetExtension(filename);
 			if (ext == "png")
 			{
-				ee::Snapshoot ss;
 				ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(m_curr_filename);
-				ss.OutputToImageFile(sym, filename);
+				s2::DrawRT rt;
+				rt.Draw(sym);
+				sm::vec2 sz = sym->GetBounding().Size();
+				rt.StoreToFile(filename, sz.x, sz.y);
 				sym->RemoveReference();
 			}
 			else

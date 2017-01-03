@@ -9,10 +9,11 @@
 #include <ee/ImageData.h>
 #include <ee/Image.h>
 #include <ee/ImageSymbol.h>
-#include <ee/Snapshoot.h>
 #include <ee/ImageVerticalFlip.h>
 
 #include <easyimage.h>
+
+#include <sprite2/DrawRT.h>
 
 namespace erespacker
 {
@@ -94,11 +95,15 @@ void PackPNG::StoreScaled(std::ofstream& fout, float scale) const
 
 	int width = static_cast<int>(m_width * scale),
 		height= static_cast<int>(m_height * scale);
-	ee::Snapshoot ss;
-	uint8_t* buffer = ss.OutputToMemory(&sym, false, scale);
+
+	s2::DrawRT rt;
+	rt.Draw(&sym, false, scale);
+	uint8_t* buffer = rt.StoreToMemory(width, height);
+
 	ee::ImageVerticalFlip revert(buffer, width, height);
 	uint8_t* buf_revert = revert.Revert();		
 	Store(fout, buf_revert, width, height);
+
 	delete[] buf_revert;
 	delete[] buffer;
 }

@@ -8,7 +8,6 @@
 #include <ee/Config.h>
 #include <ee/SymbolMgr.h>
 #include <ee/SettingData.h>
-#include <ee/Snapshoot.h>
 #include <ee/SymbolFile.h>
 
 #include <easycomplex.h>
@@ -16,6 +15,7 @@
 #include <easybuilder.h>
 
 #include <sprite2/SymType.h>
+#include <sprite2/DrawRT.h>
 
 namespace ecomplex
 {
@@ -201,8 +201,9 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 {
 	Symbol* sym = ((StagePanel*)(m_task->GetEditPanel()))->GetSymbol();
 	sm::vec2 sz = sym->GetBounding().Size();
-	ee::Snapshoot ss(sz.x, sz.y);
-	ss.OutputToImageFile(sym, filepath);
+	s2::DrawRT rt(sz.x, sz.y);
+	rt.Draw(sym);
+	rt.StoreToFile(filepath);
 }
 
 void Frame::SaveAsJson(const std::string& filepath) const

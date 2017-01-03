@@ -2,7 +2,6 @@
 #include "check_params.h"
 #include "utility.h"
 
-#include <ee/Snapshoot.h>
 #include <ee/SettingData.h>
 #include <ee/Config.h>
 #include <ee/FileHelper.h>
@@ -19,6 +18,7 @@
 
 #include <SM_Calc.h>
 #include <sprite2/SymType.h>
+#include <sprite2/DrawRT.h>
 
 #include <wx/arrstr.h>
 
@@ -56,15 +56,13 @@ int RotateTrimImage::Run(int argc, char *argv[])
 		return ret;
 	}
 
-	ee::Snapshoot ss;
-
 	ee::SettingData& data = ee::Config::Instance()->GetSettings();
 	bool ori_clip_cfg = data.open_image_edge_clip;
 	data.open_image_edge_clip = false;
 	bool ori_alpha_cfg = data.pre_multi_alpha;
 	data.pre_multi_alpha = false;
 
-	RotateTrim(ss, argv[2]);
+	RotateTrim(argv[2]);
 
 	data.open_image_edge_clip = ori_clip_cfg;
 	data.pre_multi_alpha = ori_alpha_cfg;
@@ -77,7 +75,7 @@ const char* RotateTrimImage::GetOutputFileName()
 	return OUTPUT_FILE;
 }
 
-void RotateTrimImage::RotateTrim(ee::Snapshoot& ss, const std::string& dir)
+void RotateTrimImage::RotateTrim(const std::string& dir)
 {
 	std::string output_file = dir + "\\" + OUTPUT_FILE;
 	std::locale::global(std::locale(""));	
@@ -112,7 +110,10 @@ void RotateTrimImage::RotateTrim(ee::Snapshoot& ss, const std::string& dir)
 			ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
 			spr->SetPosition(center);
 			spr->SetAngle(angle);
-			ss.DrawSprite(spr, true, width, height);
+
+			s2::DrawRT rt;
+			rt.Draw(spr, true, width, height);
+			rt.StoreToFile(filepath, width, height);
 
 			spr->RemoveReference();
 			sym->RemoveReference();
@@ -121,8 +122,6 @@ void RotateTrimImage::RotateTrim(ee::Snapshoot& ss, const std::string& dir)
 			//std::string name = ee::FileHelper::getFilename(filepath);
  		//	std::string outpath = dir + "\\test_" + name + ".png";
  		//	ss.SaveToFile(outpath, width, height);
-
-			ss.SaveToFile(filepath, width, height);
 
 			// output info
 			std::string path = ee::FileHelper::GetRelativePath(dir, filepath);

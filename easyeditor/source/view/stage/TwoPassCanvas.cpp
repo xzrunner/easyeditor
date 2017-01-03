@@ -74,13 +74,13 @@ void TwoPassCanvas::OnDrawWhole() const
 
 void TwoPassCanvas::OnDrawWhole() const
 {
-	DrawOnePass();
+//	DrawOnePass();
 
-// 	DrawTwoPass();
-// 
-// 	if (Config::Instance()->IsDebugDrawOpen()) {
-// 		DebugDraw();
-// 	}
+	DrawTwoPass();
+
+	if (Config::Instance()->IsDebugDrawOpen()) {
+		DebugDraw();
+	}
 }
 
 #endif // OPEN_SCREEN_CACHE
@@ -146,12 +146,12 @@ void TwoPassCanvas::DrawPass1() const
 
 	rt->Unbind();
 
-	// drect
-	gum::DRect::Instance()->Bind();
-	rc->SetClearFlag(ur::MASKC);
-	rc->Clear(0xffff00ff);
-	OnDrawSprites();
-	gum::DRect::Instance()->Unbind();
+// 	// drect
+// 	gum::DRect::Instance()->Bind();
+// 	rc->SetClearFlag(ur::MASKC);
+// 	rc->Clear(0xffff00ff);
+// 	OnDrawSprites();
+// 	gum::DRect::Instance()->Unbind();
 }
 
 void TwoPassCanvas::DrawPass2(const float* vertices, const float* texcoords, int tex_id) const
@@ -183,10 +183,10 @@ void TwoPassCanvas::DrawPass2(const float* vertices, const float* texcoords, int
 void TwoPassCanvas::DebugDraw() const
 {
 // 	gum::DTex::Instance()->DebugDraw();
-// 	gum::Sprite2::Instance()->DebugDraw();
-	gum::DRect::Instance()->DebugDraw();
+ 	gum::Sprite2::Instance()->DebugDraw();
+//	gum::DRect::Instance()->DebugDraw();
 
-	gum::RenderTarget::Instance()->DebugDraw();
+//	gum::RenderTarget::Instance()->DebugDraw();
 }
 
 }

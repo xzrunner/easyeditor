@@ -8,11 +8,11 @@
 #include "SymbolFile.h"
 #include "FileHelper.h"
 #include "Exception.h"
-#include "Snapshoot.h"
 #include "ImageTrim.h"
 #include "SymbolType.h"
 
 #include <sprite2/SymType.h>
+#include <sprite2/DrawRT.h>
 
 #include <gl/glew.h>
 //#include <wx/filename.h>
@@ -157,17 +157,20 @@ void Bitmap::LoadFromSym(const Symbol* sym)
 	w = std::max(1.0f, w);
 	h = std::max(1.0f, h);
 
-	Snapshoot ss(w, h);
-	unsigned char* rgba = ss.OutputToMemory(sym, true, scale);
-	if (!rgba) {
-		return;
-	}
-	unsigned char* rgb = TransRGBA2RGB(rgba, w, h);
-	delete[] rgba;
-
-	wxImage image(w, h, rgb, true);
-	InitBmp(image, false);
-	delete[] rgb;
+ 	s2::DrawRT rt;
+ 	rt.Draw(sym, true, scale);
+ 	unsigned char* rgba = rt.StoreToMemory(w, h, 4);
+ 	if (!rgba) {
+ 		return;
+ 	}
+ 
+ 	unsigned char* rgb = TransRGBA2RGB(rgba, w, h);
+ 
+ 	wxImage image(w, h, rgb, true);
+ 	InitBmp(image, false);
+ 
+ 	delete[] rgb;
+ 	delete[] rgba;
 }
 
 unsigned char* Bitmap::TransRGBA2RGB(unsigned char* rgba, int width, int height)

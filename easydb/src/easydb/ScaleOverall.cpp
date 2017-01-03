@@ -2,7 +2,6 @@
 #include "check_params.h"
 #include "utility.h"
 
-#include <ee/Snapshoot.h>
 #include <ee/SettingData.h>
 #include <ee/Config.h>
 #include <ee/FileHelper.h>
@@ -14,6 +13,7 @@
 
 #include <SM_Calc.h>
 #include <sprite2/SymType.h>
+#include <sprite2/DrawRT.h>
 
 #include <fstream>
 
@@ -47,15 +47,13 @@ int ScaleOverall::Run(int argc, char *argv[])
 		return ret;
 	}
 
-	ee::Snapshoot ss;
-
 	ee::SettingData& data = ee::Config::Instance()->GetSettings();
 	bool ori_clip_cfg = data.open_image_edge_clip;
 	data.open_image_edge_clip = false;
 	bool ori_alpha_cfg = data.pre_multi_alpha;
 	data.pre_multi_alpha = false;
 
-	Scale(ss, argv[2], atof(argv[3]));
+	Scale(argv[2], atof(argv[3]));
 
 	data.open_image_edge_clip = ori_clip_cfg;
 	data.pre_multi_alpha = ori_alpha_cfg;
@@ -63,7 +61,7 @@ int ScaleOverall::Run(int argc, char *argv[])
 	return 0;
 }
 
-void ScaleOverall::Scale(ee::Snapshoot& ss, const std::string& dir, float scale) const
+void ScaleOverall::Scale(const std::string& dir, float scale) const
 {	
 	wxArrayString files;
 	ee::FileHelper::FetchAllFiles(dir, files);
@@ -74,7 +72,7 @@ void ScaleOverall::Scale(ee::Snapshoot& ss, const std::string& dir, float scale)
 	{
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 		if (ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_IMAGE) {
-			ScaleImage(filepath, scale, ss, mapImg2Center);
+			ScaleImage(filepath, scale, mapImg2Center);
 		}
 	}
 
@@ -94,7 +92,7 @@ void ScaleOverall::Scale(ee::Snapshoot& ss, const std::string& dir, float scale)
 	}
 }
 
-void ScaleOverall::ScaleImage(const std::string& filepath, float scale, ee::Snapshoot& ss,
+void ScaleOverall::ScaleImage(const std::string& filepath, float scale,
 							  std::map<std::string, sm::vec2>& mapImg2Center) const
 {
 	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
@@ -104,7 +102,11 @@ void ScaleOverall::ScaleImage(const std::string& filepath, float scale, ee::Snap
 	sm::vec2 img_offset = img->GetBounding().Center();
 	mapImg2Center.insert(std::make_pair(filepath, img_offset));
 
-	ss.OutputToImageFile(sym, filepath, scale);
+	s2::DrawRT rt;
+	rt.Draw(sym);
+	sm::vec2 sz = sym->GetBounding().Size();
+	rt.StoreToFile(filepath, sz.x, sz.y);
+
 	sym->RemoveReference();
 }
 

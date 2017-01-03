@@ -12,7 +12,6 @@
 #include <ee/FileHelper.h>
 #include <ee/Exception.h>
 #include <ee/ExceptionDlg.h>
-#include <ee/Snapshoot.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/StageCanvas.h>
 #include <ee/StringHelper.h>
@@ -20,6 +19,7 @@
 #include <easyshape.h>
 
 #include <sprite2/BoundingBox.h>
+#include <sprite2/DrawRT.h>
 
 namespace lr
 {
@@ -115,7 +115,7 @@ void Frame::OnStatistics(wxCommandEvent& event)
 void Frame::SaveAsPNG(const std::string& filepath) const
 {
 	SettingCfg* cfg = SettingCfg::Instance();
-	ee::Snapshoot ss(cfg->m_view_width, cfg->m_view_height);
+	s2::DrawRT rt(cfg->m_view_width, cfg->m_view_height);
 	StagePanel* stage = (StagePanel*)(m_task->GetEditPanel());
 
 	std::vector<ee::Sprite*> cover_layer, top_layer;
@@ -131,27 +131,27 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 		} else if (tag.find(COVER_LAYER_TAG) != std::string::npos) {
 			cover_layer.push_back(spr);
 		} else {
-			ss.DrawSprite(spr);
+			rt.Draw(spr);
 		}
 	}
 	std::sort(cover_layer.begin(), cover_layer.end(), ee::SpriteCmp(ee::SpriteCmp::e_y_invert));
 	for (int i = 0, n = cover_layer.size(); i < n; ++i) {
-		ss.DrawSprite(cover_layer[i]);
+		rt.Draw(cover_layer[i]);
 	}
 	for (int i = 0, n = top_layer.size(); i < n; ++i) {
-		ss.DrawSprite(top_layer[i]);
+		rt.Draw(top_layer[i]);
 	}
 
 	std::vector<ee::Shape*> shapes;
 	stage->TraverseShapes(ee::FetchAllVisitor<ee::Shape>(shapes), ee::DT_VISIBLE);
 	for (int i = 0, n = shapes.size(); i < n; ++i) {
-		ss.DrawShape(shapes[i]);		
+		rt.Draw(shapes[i]);		
 	}
 
 	eshape::RectShape rect(sm::vec2(0, 0), cfg->m_view_width * 0.5f, cfg->m_view_height * 0.5f);
-	ss.DrawShape(&rect);
+	rt.Draw(&rect);
 
-	ss.SaveToFile(filepath);
+	rt.StoreToFile(filepath);
 }
 
 void Frame::SaveAsJson(const std::string& filepath) const

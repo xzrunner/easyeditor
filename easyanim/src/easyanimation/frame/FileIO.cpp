@@ -12,7 +12,6 @@
 
 #include <ee/FileHelper.h>
 #include <ee/SymbolMgr.h>
-#include <ee/Snapshoot.h>
 #include <ee/SymbolFile.h>
 #include <ee/LibraryPanel.h>
 #include <ee/Exception.h>
@@ -30,6 +29,7 @@
 #include <sprite2/LerpType.h>
 #include <sprite2/LerpCircle.h>
 #include <sprite2/LerpSpiral.h>
+#include <sprite2/DrawRT.h>
 
 #include <rapidxml_utils.hpp>
 
@@ -194,21 +194,20 @@ void FileIO::StoreAsGif(const std::string& src, const std::string& dst)
 		return;
 	}
 
-	ee::Snapshoot ss;
 	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(src);
 	libanim::Symbol* anim = static_cast<libanim::Symbol*>(sym);
 
-	int max_frame = anim->GetMaxFrameIdx();
 	sm::vec2 sz = sym->GetBounding().Size();
 	AnimatedGifSaver saver(sz.x, sz.y);
+	s2::DrawRT rt(sz.x, sz.y);
+
+	int max_frame = anim->GetMaxFrameIdx();
 	for (int i = 0; i < max_frame; ++i)
 	{
+		rt.Draw(sym, true);
+		uint8_t* rgb = rt.StoreToMemory(-1, -1, 3);
 //		anim->setFrameIndex(i + 1);
-		uint8_t* rgba = ss.OutputToMemory(sym, true);
-
-		uint8_t* rgb = eimage::RGBA2RGB(rgba, sz.x, sz.y, true);
 		saver.AddFrame(rgb, 1.0f / anim->GetFPS());
-		delete[] rgba;
 		delete[] rgb;
 	}
 //	anim->setFrameIndex(0);
@@ -223,9 +222,13 @@ void FileIO::StoreAsPng(const std::string& src, const std::string& dst)
 		return;
 	}
 
-	ee::Snapshoot ss;
 	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(src);
-	ss.OutputToImageFile(sym, dst);
+
+	sm::vec2 sz = sym->GetBounding().Size();
+	s2::DrawRT rt(sz.x, sz.y);
+	rt.Draw(sym);
+	rt.StoreToFile(dst);
+
 	sym->RemoveReference();
 }
 

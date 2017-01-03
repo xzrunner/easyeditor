@@ -4,12 +4,13 @@
 
 #include <ee/Symbol.h>
 #include <ee/SymbolMgr.h>
-#include <ee/Snapshoot.h>
 #include <ee/SettingData.h>
 #include <ee/Config.h>
 #include <ee/ImageVerticalFlip.h>
 
 #include <easyimage.h>
+
+#include <sprite2/DrawRT.h>
 
 #include <string>
 
@@ -353,10 +354,12 @@ void PackPVR::StoreScaled(std::ofstream& fout, float scale) const
 	sd.pre_multi_alpha = false;
 
 	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(m_base_path);
+
 	int w = static_cast<int>(m_width * scale),
 		h = static_cast<int>(m_height * scale);
-	ee::Snapshoot ss;
-	uint8_t* png_buf = ss.OutputToMemory(sym, false, scale);
+	s2::DrawRT rt;
+	rt.Draw(sym, false, scale);
+	uint8_t* png_buf = rt.StoreToMemory(w, h);
 	sym->RemoveReference();
 
 	ee::ImageVerticalFlip revert(png_buf, w, h);

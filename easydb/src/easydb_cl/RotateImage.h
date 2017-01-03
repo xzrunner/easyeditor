@@ -3,8 +3,6 @@
 
 #include "ICommand.h"
 
-namespace ee { class Snapshoot; }
-
 namespace edb
 {
 
@@ -24,7 +22,7 @@ public:
 	static ICommand* Create() { return new RotateImage(); }
 
 private:
-	void Rotate(ee::Snapshoot& ss, const std::string& src_dir, const std::string& dst_dir);
+	void Rotate(const std::string& src_dir, const std::string& dst_dir);
 
 }; // RotateImage
 

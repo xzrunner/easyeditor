@@ -2,13 +2,13 @@
 #include "check_params.h"
 #include "utility.h"
 
-#include <ee/Snapshoot.h>
 #include <ee/FileHelper.h>
 #include <ee/SymbolMgr.h>
 #include <ee/Symbol.h>
 #include <ee/SymbolFile.h>
 
 #include <sprite2/SymType.h>
+#include <sprite2/DrawRT.h>
 
 #include <fstream>
 #include <wx/arrstr.h>
@@ -44,14 +44,12 @@ int Snapshoot::Run(int argc, char *argv[])
 		return ret;
 	}
 
-	ee::Snapshoot ss;
-
-	Run(ss, argv[2], argv[3]);
+	Run(argv[2], argv[3]);
 
 	return 0;
 }
 
-void Snapshoot::Run(ee::Snapshoot& ss, const std::string& srcdir, const std::string& dstdir) const
+void Snapshoot::Run(const std::string& srcdir, const std::string& dstdir) const
 {
 	wxArrayString files;
 	ee::FileHelper::FetchAllFiles(srcdir, files);
@@ -73,9 +71,15 @@ void Snapshoot::Run(ee::Snapshoot& ss, const std::string& srcdir, const std::str
 			if (name.empty()) {
 				continue;
 			}
+
+			s2::DrawRT rt;
 			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+			rt.Draw(sym);
+
 			std::string filename = dstdir + "//" + name + ".png";
-			ss.OutputToImageFile(sym, filename);
+			sm::vec2 sz = sym->GetBounding().Size();
+			rt.StoreToFile(filename, sz.x, sz.y);
+
 			sym->RemoveReference();
 		}
 	}
