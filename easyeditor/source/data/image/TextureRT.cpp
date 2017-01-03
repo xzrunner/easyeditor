@@ -1,10 +1,11 @@
 #include "TextureRT.h"
-#include "RenderTarget.h"
+
+#include <sprite2/RenderTarget.h>
 
 namespace ee
 {
 
-TextureRT::TextureRT(const RenderTarget* rt)
+TextureRT::TextureRT(const s2::RenderTarget* rt)
 	: m_rt(rt)
 {
 	m_rt->AddReference();
@@ -22,12 +23,12 @@ unsigned int TextureRT::GetTexID() const
 
 int TextureRT::GetWidth() const
 {
-	return m_rt->GetWidth();
+	return m_rt->Width();
 }
 
 int TextureRT::GetHeight() const
 {
-	return m_rt->GetHeight();
+	return m_rt->Height();
 }
 
 int TextureRT::GetChannels() const

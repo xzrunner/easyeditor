@@ -8,7 +8,7 @@
 
 #include <stdint.h>
 
-namespace s2 { class Sprite; class RenderParams; class Texture; }
+namespace s2 { class Sprite; class RenderParams; class Texture; class RenderTarget; }
 
 namespace ee
 {
@@ -16,14 +16,13 @@ namespace ee
 class Sprite;
 class Texture;
 class ImageData;
-class RenderTarget;
 
 class Image : public cu::RefCountObj
 {
 public:
 	Image();
 	Image(ImageData* img_data);
-	Image(const RenderTarget* rt);
+	Image(const s2::RenderTarget* rt);
 	~Image();
 	
 	bool LoadFromFile(const std::string& filepath);

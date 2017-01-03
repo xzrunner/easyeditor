@@ -3,15 +3,15 @@
 
 #include "Texture.h"
 
+namespace s2 { class RenderTarget; }
+
 namespace ee
 {
-
-class RenderTarget;
 
 class TextureRT : public Texture
 {
 public:
-	TextureRT(const RenderTarget* rt);
+	TextureRT(const s2::RenderTarget* rt);
 	virtual ~TextureRT();
 
 	virtual unsigned int GetTexID() const;
@@ -23,7 +23,7 @@ public:
 	virtual void Reload();
 
 private:
-	const RenderTarget* m_rt;
+	const s2::RenderTarget* m_rt;
 
 }; // TextureRT
 

@@ -43,7 +43,7 @@ Image::Image(ImageData* img_data)
 	m_xmin = m_ymin = 0;
 }
 
-Image::Image(const RenderTarget* rt)
+Image::Image(const s2::RenderTarget* rt)
 {
 	m_tex = new TextureRT(rt);
 	m_s2_tex = new s2::Texture(m_tex->GetWidth(), m_tex->GetHeight(), m_tex->GetTexID());
