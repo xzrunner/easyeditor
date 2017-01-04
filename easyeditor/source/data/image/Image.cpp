@@ -94,7 +94,8 @@ bool Image::LoadFromFile(const std::string& filepath)
 		gum::DTex* dtex = gum::DTex::Instance();
 		dtex->LoadSymStart();
 		sm::vec2 sz = m_s2_tex->GetSize();
-		dtex->LoadSymbol(GetFilepath(), m_s2_tex->GetTexID(), sz.x, sz.y);
+		gum::UID uid = gum::ResourceUID::RawFile(GetFilepath());
+		dtex->LoadSymbol(uid, m_s2_tex->GetTexID(), sz.x, sz.y);
 		dtex->LoadSymFinish();
 	}
 
@@ -182,7 +183,8 @@ void Image::QueryTexcoords(float* texcoords, int* texid) const
 {
 	const float* c2_texcoords = NULL;
 	if (Config::Instance()->IsUseDTex() && CanUseDTex()) {
-		c2_texcoords = gum::DTex::Instance()->QuerySymbol(GetFilepath(), texid);
+		gum::UID uid = gum::ResourceUID::RawFile(GetFilepath());
+		c2_texcoords = gum::DTex::Instance()->QuerySymbol(uid, texid);
 	}
 	if (c2_texcoords)
 	{

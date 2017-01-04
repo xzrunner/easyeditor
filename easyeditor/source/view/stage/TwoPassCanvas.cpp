@@ -142,8 +142,8 @@ void TwoPassCanvas::DrawPass1() const
 	rc->SetClearFlag(ur::MASKC);
 	rc->Clear(0);
 
-//	DrawDirect();
-	DrawDRect();
+	DrawDirect();
+//	DrawDRect();
 
 	rt->Unbind();
 }
