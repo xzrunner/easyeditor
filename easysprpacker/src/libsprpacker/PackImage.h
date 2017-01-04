@@ -36,7 +36,7 @@ public:
 private:
 	void Init(const ee::ImageSymbol* sym);
 
-	void GetPackRegion(const ee::TexturePacker& tp, s2::ImageSymbol::Quad& quad) const;
+	void GetPackRegion(const ee::TexturePacker& tp, sm::i16_rect& quad) const;
 
 private:
 	const ee::Image* m_img;

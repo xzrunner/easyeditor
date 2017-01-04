@@ -45,7 +45,7 @@ void PackImage::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TextureP
 
 	char buff[256];
 
-	s2::ImageSymbol::Quad quad;
+	sm::i16_rect quad;
 	GetPackRegion(tp, quad);
 	quad.xmin *= scale;
 	quad.ymin *= scale;
@@ -92,7 +92,7 @@ void PackImage::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scal
 	}
 	pack(idx, ptr);
 
-	s2::ImageSymbol::Quad quad;
+	sm::i16_rect quad;
 	GetPackRegion(tp, quad);
 	uint16_t xmin = quad.xmin;
 	pack(xmin, ptr);
@@ -112,7 +112,7 @@ void PackImage::Init(const ee::ImageSymbol* sym)
 	}
 }
 
-void PackImage::GetPackRegion(const ee::TexturePacker& tp, s2::ImageSymbol::Quad& quad) const
+void PackImage::GetPackRegion(const ee::TexturePacker& tp, sm::i16_rect& quad) const
 {
 	const ee::TexturePacker::Frame* tp_frame = tp.Query(m_img->GetFilepath());
 	if (!tp_frame && ee::ImageDataMgr::Instance()->GetDefaultSym() != "") {

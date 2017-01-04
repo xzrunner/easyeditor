@@ -111,7 +111,7 @@ void ImageSymbol::LoadResources()
 
 void ImageSymbol::InitCoreTex()
 {
-	sm::ui16_rect r;
+	sm::i16_rect r;
 	r.xmin = r.ymin = 0;
 	r.xmax = m_image->GetClippedWidth();
 	r.ymax = m_image->GetClippedHeight();

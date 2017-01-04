@@ -95,7 +95,7 @@ bool Image::LoadFromFile(const std::string& filepath)
 		dtex->LoadSymStart();
 		sm::vec2 sz = m_s2_tex->GetSize();
 		gum::UID uid = gum::ResourceUID::RawFile(GetFilepath());
-		sm::ui16_rect r;
+		sm::i16_rect r;
 		r.xmin = r.ymin = 0;
 		r.xmax = sz.x;
 		r.ymax = sz.y;
