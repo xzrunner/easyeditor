@@ -16,6 +16,7 @@
 #include <sprite2/SprTimer.h>
 #include <gum/GUM_ShaderLab.h>
 #include <gum/GUM_DTex.h>
+#include <gum/RenderContext.h>
 
 namespace ee
 {
@@ -80,6 +81,9 @@ StageCanvas::~StageCanvas()
 
 	if (m_use_context_stack) {
 		s2::RenderCtxStack::Instance()->Pop();
+
+		const s2::RenderContext* ctx = s2::RenderCtxStack::Instance()->Top();
+		gum::RenderContext::Instance()->OnSize(ctx->GetScreenWidth(), ctx->GetScreenHeight());
 	}
 }
 

@@ -12,7 +12,7 @@ namespace emesh
 
 StageCanvas::StageCanvas(StagePanel* panel,
 						 wxGLContext* glctx)
-	: ee::CameraCanvas(panel, panel->GetStageImpl(), gum::CAM_ORTHO2D)
+	: ee::CameraCanvas(panel, panel->GetStageImpl(), gum::CAM_ORTHO2D, glctx)
 	, m_panel(panel)
 {
 }
