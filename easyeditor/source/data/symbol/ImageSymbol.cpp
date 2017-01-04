@@ -111,12 +111,14 @@ void ImageSymbol::LoadResources()
 
 void ImageSymbol::InitCoreTex()
 {
-	s2::ImageSymbol::Quad q;
-	q.xmin = q.ymin = 0;
-	q.xmax = m_image->GetClippedWidth();
-	q.ymax = m_image->GetClippedHeight();
-	const sm::vec2& off = m_image->GetOffset();
-	InitTex(m_image->GetS2Tex(), q, off);
+	sm::ui16_rect r;
+	r.xmin = r.ymin = 0;
+	r.xmax = m_image->GetClippedWidth();
+	r.ymax = m_image->GetClippedHeight();
+
+	const sm::vec2& offset = m_image->GetOffset();
+
+	InitTex(m_image->GetS2Tex(), r, offset);
 }
 
 }
