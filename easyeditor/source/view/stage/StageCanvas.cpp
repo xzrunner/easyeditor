@@ -79,11 +79,14 @@ StageCanvas::~StageCanvas()
 		delete m_gl_ctx;
 	}
 
-	if (m_use_context_stack) {
+	if (m_use_context_stack) 
+	{
 		s2::RenderCtxStack::Instance()->Pop();
 
 		const s2::RenderContext* ctx = s2::RenderCtxStack::Instance()->Top();
-		gum::RenderContext::Instance()->OnSize(ctx->GetScreenWidth(), ctx->GetScreenHeight());
+		if (ctx) {
+			gum::RenderContext::Instance()->OnSize(ctx->GetScreenWidth(), ctx->GetScreenHeight());
+		}
 	}
 }
 
