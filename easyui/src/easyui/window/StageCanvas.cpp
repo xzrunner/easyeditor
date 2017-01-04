@@ -18,7 +18,7 @@ namespace window
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: ee::CameraCanvas(stage, stage->GetStageImpl(), NULL, true)
+	: ee::CameraCanvas(stage, stage->GetStageImpl(), gum::CAM_ORTHO2D, NULL, true)
 	, m_stage(stage)
 {
 }

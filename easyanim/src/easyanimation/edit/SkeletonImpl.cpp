@@ -129,7 +129,7 @@ void SkeletonImpl::OnPopMenuSelected(int type)
 	}
 }
 
-void SkeletonImpl::OnDraw(const ee::Camera& cam) const
+void SkeletonImpl::OnDraw() const
 {
 	int cam_scale = 1;
 	ee::CameraCanvas* canvas = static_cast<ee::CameraCanvas*>(m_stage->GetCanvas());

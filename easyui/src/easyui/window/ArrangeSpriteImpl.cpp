@@ -13,8 +13,9 @@
 #include <easyui.h>
 #include <easycomplex.h>
 
-#include <sprite2/S2_RVG.h>
 #include <SM_Calc.h>
+#include <sprite2/S2_RVG.h>
+#include <gum/OrthoCamera.h>
 
 namespace eui
 {
@@ -53,9 +54,14 @@ void ArrangeSpriteImpl::OnMouseLeftUp(int x, int y)
 	m_selected = NULL;
 }
 
-void ArrangeSpriteImpl::OnDraw(const ee::Camera& cam) const
+void ArrangeSpriteImpl::OnDraw() const
 {
-	ee::ArrangeSpriteImpl::OnDraw(cam);
+	int cam_scale = 1;
+	ee::CameraCanvas* canvas = static_cast<ee::CameraCanvas*>(m_stage->GetCanvas());
+	if (canvas->GetCamera()->Type() == gum::CAM_ORTHO2D) {
+		cam_scale = static_cast<gum::OrthoCamera*>(canvas->GetCamera())->GetScale();
+	}
+	ee::ArrangeSpriteImpl::OnDraw(cam_scale);
 
 	if (!m_move_center) {
 		std::vector<ee::Sprite*> sprs;
@@ -67,7 +73,7 @@ void ArrangeSpriteImpl::OnDraw(const ee::Camera& cam) const
 
 	if (m_selected) {
 		sm::vec2 pos = m_selected->GetPosition();
-		m_center_node_radius = std::min(CENTER_NODE_RADIUS * cam.GetScale(), MAX_CENTER_NODE_RADIUS);
+		m_center_node_radius = std::min(CENTER_NODE_RADIUS * cam_scale, MAX_CENTER_NODE_RADIUS);
 		s2::RVG::SetColor(ee::RED);
 		s2::RVG::Circle(pos, m_center_node_radius, false);
 		s2::RVG::SetColor(ee::GREEN);
