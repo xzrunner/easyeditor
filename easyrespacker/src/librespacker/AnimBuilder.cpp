@@ -1,6 +1,7 @@
 #include "AnimBuilder.h"
 #include "PackAnimation.h"
 #include "PackNodeFactory.h"
+#include "PackUI.h"
 #include "PackTag.h"
 
 #include <ee/Visitor.h>
@@ -48,6 +49,10 @@ const IPackNode* AnimBuilder::Create(const libanim::Symbol* sym)
 	PackAnimation* node = new PackAnimation;
 	Load(sym, node);
 	m_map_data.insert(std::make_pair(sym, node));
+
+	PackUI::Instance()->OnKnownPackID(sym->GetFilepath(), node->GetSprID());
+	PackTag::Instance()->OnKnownPackID(sym->GetFilepath(), node->GetSprID());	
+
 	return node;
 }
 

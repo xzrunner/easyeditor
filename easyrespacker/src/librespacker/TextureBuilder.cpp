@@ -1,5 +1,7 @@
 #include "TextureBuilder.h"
 #include "PackPicture.h"
+#include "PackUI.h"
+#include "PackTag.h"
 
 #include <easyshape.h>
 #include <easytexture.h>
@@ -64,6 +66,10 @@ const IPackNode* TextureBuilder::Create(const etexture::Symbol* sym)
 	PackPicture* node = new PackPicture;
 	Load(sym, node);
 	m_map_data.insert(std::make_pair(sym, node));
+
+	PackUI::Instance()->OnKnownPackID(sym->GetFilepath(), node->GetSprID());
+	PackTag::Instance()->OnKnownPackID(sym->GetFilepath(), node->GetSprID());	
+
 	return node;
 }
 

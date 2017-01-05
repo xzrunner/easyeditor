@@ -1,6 +1,8 @@
 #include "TrailBuilder.h"
 #include "PackTrail.h"
 #include "PackNodeFactory.h"
+#include "PackUI.h"
+#include "PackTag.h"
 
 #include <ee/Visitor.h>
 
@@ -51,6 +53,10 @@ const IPackNode* TrailBuilder::Create(const etrail::Symbol* sym)
 	Load(sym, node);
 	m_map_data.insert(std::make_pair(sym, node));
 	m_export_set.LoadExport(sym, node);
+
+	PackUI::Instance()->OnKnownPackID(sym->GetFilepath(), node->GetSprID());
+	PackTag::Instance()->OnKnownPackID(sym->GetFilepath(), node->GetSprID());	
+
 	return node;
 }
 

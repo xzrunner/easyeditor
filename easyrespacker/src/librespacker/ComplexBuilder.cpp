@@ -5,6 +5,7 @@
 #include "ExportNameSet.h"
 #include "Utility.h"
 #include "ClipboxBuilder.h"
+#include "PackUI.h"
 #include "PackTag.h"
 
 #include "TextBuilder.h"
@@ -74,6 +75,10 @@ const IPackNode* ComplexBuilder::Create(const ecomplex::Symbol* sym)
 	PackNodeFactory::Instance()->GetTextBuilder()->CacheBegin();
 	IPackNode* node = LoadComplex(sym);
 	PackNodeFactory::Instance()->GetTextBuilder()->CacheEnd();
+
+	PackUI::Instance()->OnKnownPackID(sym->GetFilepath(), node->GetSprID());
+	PackTag::Instance()->OnKnownPackID(sym->GetFilepath(), node->GetSprID());	
+
 	return node;
 }
 

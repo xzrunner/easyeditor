@@ -1,6 +1,8 @@
 #include "Terrain2DBuilder.h"
 #include "PackAnimation.h"
 #include "PackPicture.h"
+#include "PackUI.h"
+#include "PackTag.h"
 
 #include <ee/Exception.h>
 #include <ee/ImageSymbol.h>
@@ -57,6 +59,10 @@ const IPackNode* Terrain2DBuilder::Create(const eterrain2d::Symbol* sym)
 	PackAnimation* node = new PackAnimation;
 	Load(sym, node);
 	m_map_data.insert(std::make_pair(sym, node));
+
+	PackUI::Instance()->OnKnownPackID(sym->GetFilepath(), node->GetSprID());
+	PackTag::Instance()->OnKnownPackID(sym->GetFilepath(), node->GetSprID());	
+
 	return node;
 }
 

@@ -1,6 +1,8 @@
 #include "P3dSprBuilder.h"
 #include "IPackNode.h"
 #include "PackNodeFactory.h"
+#include "PackUI.h"
+#include "PackTag.h"
 
 #include <ee/std_functor.h>
 #include <ee/Visitor.h>
@@ -107,6 +109,9 @@ void P3dSprBuilder::Create(const eparticle3d::Symbol* sym, const IPackNode* p3d)
 	node->alone = false;
 	node->reuse = false;
 	m_map_data.insert(std::make_pair(sym, node));
+
+	PackUI::Instance()->OnKnownPackID(sym->GetFilepath(), node->GetSprID());
+	PackTag::Instance()->OnKnownPackID(sym->GetFilepath(), node->GetSprID());	
 
 	m_export_set.LoadExport(sym, node);
 }

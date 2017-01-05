@@ -1,6 +1,4 @@
 #include "PackNodeFactory.h"
-#include "PackUI.h"
-#include "PackTag.h"
 
 #include <ee/ImageSprite.h>
 #include <ee/ImageSymbol.h>
@@ -248,9 +246,6 @@ const IPackNode* PackNodeFactory::Create(const ee::Symbol* sym)
 	if (node->GetSprID() > ANCHOR_ID) {
 		throw ee::Exception("PackNodeFactory::Create node id over ANCHOR_ID.");
 	}
-
-	PackUI::Instance()->OnKnownPackID(sym->GetFilepath(), node->GetSprID());
-	PackTag::Instance()->OnKnownPackID(sym->GetFilepath(), node->GetSprID());	
 
 	return node;
 }

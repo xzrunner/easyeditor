@@ -1,6 +1,8 @@
 #include "Particle2DBuilder.h"
 #include "PackParticle2D.h"
 #include "PackNodeFactory.h"
+#include "PackUI.h"
+#include "PackTag.h"
 
 #include <ee/Visitor.h>
 #include <ee/Exception.h>
@@ -50,6 +52,10 @@ const IPackNode* Particle2DBuilder::Create(const eparticle2d::Symbol* sym)
 	PackParticle2D* node = new PackParticle2D;
 	Load(sym, node);
 	m_map_data.insert(std::make_pair(sym, node));
+
+	PackUI::Instance()->OnKnownPackID(sym->GetFilepath(), node->GetSprID());
+	PackTag::Instance()->OnKnownPackID(sym->GetFilepath(), node->GetSprID());	
+
 	return node;
 }
 

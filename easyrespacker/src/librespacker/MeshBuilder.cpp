@@ -1,6 +1,8 @@
 #include "MeshBuilder.h"
 #include "PackMesh.h"
 #include "PackNodeFactory.h"
+#include "PackUI.h"
+#include "PackTag.h"
 
 #include <ee/std_functor.h>
 #include <ee/Visitor.h>
@@ -50,6 +52,9 @@ const IPackNode* MeshBuilder::Create(const emesh::Symbol* sym)
 	}
 
 	m_nodes.push_back(node);
+
+	PackUI::Instance()->OnKnownPackID(sym->GetFilepath(), node->GetSprID());
+	PackTag::Instance()->OnKnownPackID(sym->GetFilepath(), node->GetSprID());	
 
 	return node;
 }

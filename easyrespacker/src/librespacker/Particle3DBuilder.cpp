@@ -2,6 +2,8 @@
 #include "PackParticle3D.h"
 #include "PackNodeFactory.h"
 #include "P3dSprBuilder.h"
+#include "PackUI.h"
+#include "PackTag.h"
 
 #include <ee/Visitor.h>
 
@@ -51,6 +53,10 @@ const IPackNode* Particle3DBuilder::Create(const eparticle3d::Symbol* sym, P3dSp
 	Load(sym, node);
 	m_map_data.insert(std::make_pair(sym, node));
 	spr_builder->Create(sym, node);
+
+	PackUI::Instance()->OnKnownPackID(sym->GetFilepath(), node->GetSprID());
+	PackTag::Instance()->OnKnownPackID(sym->GetFilepath(), node->GetSprID());	
+
 	return node;
 }
 

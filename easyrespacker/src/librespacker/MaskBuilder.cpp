@@ -1,6 +1,8 @@
 #include "MaskBuilder.h"
 #include "PackMask.h"
 #include "PackNodeFactory.h"
+#include "PackUI.h"
+#include "PackTag.h"
 
 #include <ee/std_functor.h>
 #include <ee/Visitor.h>
@@ -36,6 +38,9 @@ const IPackNode* MaskBuilder::Create(const emask::Symbol* sym)
 	node->mask = PackNodeFactory::Instance()->Create(dynamic_cast<const ee::Sprite*>(sym->GetMask()));
 
 	m_nodes.push_back(node);
+
+	PackUI::Instance()->OnKnownPackID(sym->GetFilepath(), node->GetSprID());
+	PackTag::Instance()->OnKnownPackID(sym->GetFilepath(), node->GetSprID());	
 
 	return node;
 }

@@ -1,5 +1,7 @@
 #include "ShapeBuilder.h"
 #include "PackShape.h"
+#include "PackUI.h"
+#include "PackTag.h"
 
 #include <ee/Exception.h>
 
@@ -63,6 +65,10 @@ const IPackNode* ShapeBuilder::Create(const etexture::Symbol* sym)
 	PackShape* node = new PackShape;
 	Load(sym, node);
 	m_map_data.insert(std::make_pair(sym, node));
+
+	PackUI::Instance()->OnKnownPackID(sym->GetFilepath(), node->GetSprID());
+	PackTag::Instance()->OnKnownPackID(sym->GetFilepath(), node->GetSprID());	
+
 	return node;
 }
 
