@@ -1,4 +1,6 @@
 #include "PackNodeFactory.h"
+#include "PackUI.h"
+#include "PackTag.h"
 
 #include <ee/ImageSprite.h>
 #include <ee/ImageSymbol.h>
@@ -121,8 +123,13 @@ const IPackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 	const IPackNode* node = NULL;
 
 	// anchor
-	if (spr->IsAnchor()) {
+	if (spr->IsAnchor()) 
+	{
 		node = m_anchor_builder->Create(spr);
+
+		const std::string& filepath = dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath();	
+		PackUI::Instance()->OnKnownPackID(filepath, node->GetSprID());
+		PackTag::Instance()->OnKnownPackID(filepath, node->GetSprID());
 	}
 	
 	// picture
