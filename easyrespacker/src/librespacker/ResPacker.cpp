@@ -239,10 +239,17 @@ void ResPacker::LoadJsonData(const std::string& dir)
 	}
 
 	std::sort(filepaths.begin(), filepaths.end());
-	for (int i = 0, n = filepaths.size(); i < n; ++i) {
+	for (int i = 0, n = filepaths.size(); i < n; ++i) 
+	{
 		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepaths[i]);
-		m_syms.push_back(sym);
+		if (!sym->name.empty()) {
+			m_syms.push_back(sym);
+		} else {
+			sym->RemoveReference();
+		}
 	}
+
+	int zz = 0;
 }
 
 void ResPacker::LoadTPData(const std::string& tp_name)
