@@ -23,7 +23,7 @@ private:
 	static void CheckDuplicateName(const Symbol* sym);
 	static void CheckNameDiff(const Symbol* sym);
 
-	static void StoreAction(const Symbol* sym, Json::Value& val);
+//	static void StoreAction(const Symbol* sym, Json::Value& val);
 
 }; // FileStorer
 

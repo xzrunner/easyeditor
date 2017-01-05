@@ -57,11 +57,11 @@ ee::Sprite* LoadFromJson::LoadSprite(const Json::Value& val, const std::string& 
 
 void LoadFromJson::InitActions(Symbol* sym, const Json::Value& val)
 {
-	if (val.isMember("action")) {
-		gum::ComplexSymLoader::LoadJsonAction(val, sym);	
-	} else {
+// 	if (val.isMember("action")) {
+// 		gum::ComplexSymLoader::LoadJsonAction(val, sym);	
+// 	} else {
 		CreateActionsFromTag(sym);
-	}
+//	}
 }
 
 void LoadFromJson::CreateActionsFromTag(Symbol* sym)

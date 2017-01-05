@@ -47,7 +47,7 @@ void FileStorer::Store(const std::string& filepath, const Symbol* sym, const std
 		value["sprite"][i] = Store(child, dir);
 	}
 
-	StoreAction(sym, value);
+//	StoreAction(sym, value);
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -88,7 +88,7 @@ void FileStorer::StoreWithHistory(const std::string& filepath, const Symbol* sym
 		value["sprite"][i] = Store(child, dir);
 	}
 
-	StoreAction(sym, value);
+//	StoreAction(sym, value);
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -191,35 +191,35 @@ void FileStorer::CheckNameDiff(const Symbol* sym)
 	wxMessageBox(filepath + ": " + str, "É¾³ýµÄÃû×Ö");
 }
 
-void FileStorer::StoreAction(const Symbol* sym, Json::Value& val)
-{
-	const std::vector<s2::ComplexSymbol::Action>& actions = sym->GetActions();
-	if (actions.empty()) {
-		return;
-	}
-
-	Json::Value action_val;
-
-	const std::vector<s2::Sprite*>& children = sym->GetChildren();
-	for (int i = 0, n = actions.size(); i < n; ++i) {
-		const s2::ComplexSymbol::Action& action = actions[i];
-		action_val[i]["name"] = action.name;
-		for (int j = 0, m = action.sprs.size(); j < m; ++j) {
-			int idx = -1;
-			for (int k = 0; k < children.size(); ++k) {
-				if (children[k] == action.sprs[j]) {
-					idx = k;
-					break;
-				}
-			}
-			if (idx != -1) {
-				action_val[i]["sprite"][j] = idx;
-			}
-		}
-	}
-
-	val["action"] = action_val;
-}
+// void FileStorer::StoreAction(const Symbol* sym, Json::Value& val)
+// {
+// 	const std::vector<s2::ComplexSymbol::Action>& actions = sym->GetActions();
+// 	if (actions.empty()) {
+// 		return;
+// 	}
+// 
+// 	Json::Value action_val;
+// 
+// 	const std::vector<s2::Sprite*>& children = sym->GetChildren();
+// 	for (int i = 0, n = actions.size(); i < n; ++i) {
+// 		const s2::ComplexSymbol::Action& action = actions[i];
+// 		action_val[i]["name"] = action.name;
+// 		for (int j = 0, m = action.sprs.size(); j < m; ++j) {
+// 			int idx = -1;
+// 			for (int k = 0; k < children.size(); ++k) {
+// 				if (children[k] == action.sprs[j]) {
+// 					idx = k;
+// 					break;
+// 				}
+// 			}
+// 			if (idx != -1) {
+// 				action_val[i]["sprite"][j] = idx;
+// 			}
+// 		}
+// 	}
+// 
+// 	val["action"] = action_val;
+// }
 
 
 } // complex
