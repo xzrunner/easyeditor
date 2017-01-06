@@ -3,6 +3,7 @@
 #include "pack_ui_cfg.h"
 
 #include <ee/FileHelper.h>
+#include <ee/Exception.h>
 
 namespace erespacker
 {
@@ -10,6 +11,7 @@ namespace erespacker
 PackUIListTask::PackUIListTask(const std::string& filepath,
 							   const Json::Value& value)
 	: PackUITask(filepath)
+	, m_id(-1)
 {
 	std::string wrapper_filepath = value["wrapper filepath"].asString();
 	wrapper_filepath = ee::FileHelper::GetAbsolutePathFromFile(filepath, wrapper_filepath);
@@ -28,6 +30,10 @@ void PackUIListTask::OnKnownPackID(const std::string& filepath, int id)
 
 void PackUIListTask::Output(const std::string& dir, Json::Value& value) const
 {
+	if (m_id == -1) {
+		throw ee::Exception("err ui_list id %s", m_filepath.c_str());
+	}
+
 	Json::Value item_val;
 	item_val["filepath"] = ee::FileHelper::GetRelativePath(dir, m_filepath);
 	item_val["wrapper id"] = m_id;

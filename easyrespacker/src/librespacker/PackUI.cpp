@@ -20,8 +20,10 @@ PackUI::PackUI()
 {
 }
 
-void PackUI::AddTask(const std::string& filepath)
+std::string PackUI::AddTask(const std::string& filepath)
 {
+	std::string ret;
+
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
@@ -34,13 +36,17 @@ void PackUI::AddTask(const std::string& filepath)
 	PackUITask* task = NULL;
 	if (type == UI_LIST) {
 		task = new PackUIListTask(filepath, value);
+		ret = value["wrapper filepath"].asString();
 	} else if (type == UI_WRAPPER) {
 		task = new PackUIWrapperTask(filepath, value);
+		ret = value["wrapper filepath"].asString();
 	} else {
 //		throw ee::Exception("PackUI unknown task %s", type);
-		return;
+		return ret;
 	}
 	m_tasks.push_back(task);
+
+	return ret;
 }
 
 void PackUI::AddWindowTask(const std::string& filepath)

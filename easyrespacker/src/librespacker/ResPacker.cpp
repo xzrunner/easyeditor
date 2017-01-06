@@ -229,7 +229,12 @@ void ResPacker::LoadJsonData(const std::string& dir)
 			filepaths.push_back(filepath);
 			break;
 		case ee::SYM_UI:
-			PackUI::Instance()->AddTask(filepath);
+			{
+				std::string proxy = PackUI::Instance()->AddTask(filepath);
+				proxy = ee::FileHelper::GetAbsolutePathFromFile(filepath, proxy);
+				ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(proxy);
+				m_syms.push_back(sym);
+			}
 			break;
 		case ee::SYM_UIWND:
 			PackUI::Instance()->AddWindowTask(filepath);
@@ -248,8 +253,6 @@ void ResPacker::LoadJsonData(const std::string& dir)
 			sym->RemoveReference();
 		}
 	}
-
-	int zz = 0;
 }
 
 void ResPacker::LoadTPData(const std::string& tp_name)
