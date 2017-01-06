@@ -21,7 +21,7 @@ public:
 
 	virtual void OnPopMenuSelected(int type);
 
-	virtual void OnDraw() const;
+	virtual void OnDraw(float cam_scale) const;
 
 protected:
 	virtual void SetRightPopupMenu(wxMenu& menu, int x, int y);

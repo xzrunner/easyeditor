@@ -19,7 +19,7 @@ public:
 	virtual void OnMouseRightDown(int x, int y);
 	virtual void OnMouseRightUp(int x, int y);
 
-	virtual void OnDraw() const;
+	virtual void OnDraw(float cam_scale) const;
 
 private:
 	class FixCoordsVisitor : public ee::Visitor<ee::Sprite>

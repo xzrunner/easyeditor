@@ -51,9 +51,9 @@ void ArrangeSpriteImpl::OnMouseRightUp(int x, int y)
 	return OnMouseLeftUp(x, y);
 }
 
-void ArrangeSpriteImpl::OnDraw() const
+void ArrangeSpriteImpl::OnDraw(float cam_scale) const
 {
-	ee::ArrangeSpriteImpl::OnDraw(*m_stage->GetCamera());
+	ee::ArrangeSpriteImpl::OnDraw(cam_scale);
 	m_stage->TraverseSprites(
 		ee::DrawSelectedSpriteVisitor(s2::Color(1.0f, 1.0f, 0.0f)),
 		ee::DT_VISIBLE

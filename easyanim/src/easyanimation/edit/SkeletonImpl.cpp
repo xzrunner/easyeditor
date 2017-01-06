@@ -129,13 +129,8 @@ void SkeletonImpl::OnPopMenuSelected(int type)
 	}
 }
 
-void SkeletonImpl::OnDraw() const
+void SkeletonImpl::OnDraw(float cam_scale) const
 {
-	int cam_scale = 1;
-	ee::CameraCanvas* canvas = static_cast<ee::CameraCanvas*>(m_stage->GetCanvas());
-	if (canvas->GetCamera()->Type() == gum::CAM_ORTHO2D) {
-		cam_scale = static_cast<gum::OrthoCamera*>(canvas->GetCamera())->GetScale();
-	}
 	ee::ArrangeSpriteImpl::OnDraw(cam_scale);
 
 	SkeletonData* skeleton = get_curr_skeleton();

@@ -18,7 +18,7 @@ public:
 	virtual void OnMouseLeftDown(int x, int y);
 	virtual void OnMouseLeftUp(int x, int y);
 
-	virtual void OnDraw() const;
+	virtual void OnDraw(float cam_scale) const;
 
 private:
 	virtual ee::ArrangeSpriteState* CreateTranslateState(ee::SpriteSelection* selection, 
