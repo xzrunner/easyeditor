@@ -99,7 +99,7 @@ bool Image::LoadFromFile(const std::string& filepath)
 		r.xmin = r.ymin = 0;
 		r.xmax = sz.x;
 		r.ymax = sz.y;
-		dtex->LoadSymbol(uid, m_s2_tex->GetTexID(), sz.x, sz.y, r);
+		dtex->LoadSymbol(uid, m_s2_tex->GetTexID(), sz.x, sz.y, r, 0, 1, 0);
 		dtex->LoadSymFinish();
 	}
 
