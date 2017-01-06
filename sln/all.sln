@@ -1191,6 +1191,8 @@ Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "0.unirender", "..\unirender
 EndProject
 Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "1.drect", "..\drect\platform\msvc2008\projects\drect.icproj", "{162CF4BE-5B07-4010-BF11-54D434575438}"
 EndProject
+Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "0.tasks", "..\tasks\platform\msvc2008\projects\tasks.icproj", "{B3305286-8E99-465D-BCFB-590925FA5B1B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -1639,6 +1641,12 @@ Global
 		{3D0800C1-7DA2-4A4C-8931-F8E0460F6911}.Release|Win32.ActiveCfg = Release|Win32
 		{90902F5B-411A-4B09-82A8-A4034388A2A1}.Debug|Win32.ActiveCfg = Debug|Win32
 		{90902F5B-411A-4B09-82A8-A4034388A2A1}.Release|Win32.ActiveCfg = Release|Win32
+		{B3305286-8E99-465D-BCFB-590925FA5B1B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B3305286-8E99-465D-BCFB-590925FA5B1B}.Debug|Win32.Build.0 = Debug|Win32
+		{B3305286-8E99-465D-BCFB-590925FA5B1B}.Release|Win32.ActiveCfg = Release|Win32
+		{B3305286-8E99-465D-BCFB-590925FA5B1B}.Release|Win32.Build.0 = Release|Win32
+		{75BE47FD-0116-4FFD-B263-3E856116AAE0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{75BE47FD-0116-4FFD-B263-3E856116AAE0}.Release|Win32.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
