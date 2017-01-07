@@ -30,7 +30,7 @@ public:
 	Image* GetImage() const { return m_image; }
 
 protected:
-	virtual void QueryTexcoords(float* texcoords, int& texid) const;
+	virtual bool QueryTexcoords(float* texcoords, int& texid) const;
 	virtual void Proj2Screen(float px, float py, int w, int h, float& sx, float& sy) const;
 	virtual bool IsOrthoCam() const;
 	virtual void GetScreenSize(int& w, int& h) const;
@@ -41,6 +41,9 @@ protected:
 
 private:
 	void InitCoreTex();
+
+	static void LoadCB(const char* filepath, void (*unpack)(const void* data, size_t size, void* ud), void* ud);
+	static void ParserCB(const void* data, size_t size, void* ud);
 
 protected:
 	Image* m_image;

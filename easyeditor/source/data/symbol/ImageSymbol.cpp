@@ -6,6 +6,8 @@
 
 #include <unirender/Texture.h>
 #include <unirender/RenderTarget.h>
+#include <gimg_typedef.h>
+#include <gimg_import.h>
 #include <sprite2/ImageSymbol.h>
 #include <sprite2/RenderParams.h>
 #include <sprite2/S2_RVG.h>
@@ -55,9 +57,15 @@ unsigned int ImageSymbol::GetTexID() const
 	return m_image->GetTexID();
 }
 
-void ImageSymbol::QueryTexcoords(float* texcoords, int& texid) const
+bool ImageSymbol::QueryTexcoords(float* texcoords, int& texid) const
 {
-	GetImage()->QueryTexcoords(texcoords, &texid);
+	Image* img = GetImage();
+	if (!img) {
+		return false;
+	}
+
+	img->QueryTexcoords(texcoords, &texid);
+	return true;
 }
 
 void ImageSymbol::Proj2Screen(float px, float py, int w, int h, float& sx, float& sy) const
@@ -100,22 +108,16 @@ int ImageSymbol::GetScreenCacheTexid() const
 	return gum::RenderTarget::Instance()->GetScreen0()->GetTexture()->ID();
 }
 
-static void
-parser(const void* data, size_t size, void* ud)
-{
-	int zz = 0;
-}
-
 void ImageSymbol::LoadResources()
 {
-	gum::AsyncTask::Instance()->Load(m_filepath, parser, NULL);
+	gum::AsyncTask::Instance()->Load(m_filepath, LoadCB, ParserCB, this);
 
-	ImageData* img_data = ImageDataMgr::Instance()->GetItem(m_filepath);
-	BitmapMgr::Instance()->GetItem(m_filepath, &m_bitmap);
-	ImageMgr::Instance()->GetItem(m_filepath, &m_image);
-	img_data->RemoveReference();
-
-	InitCoreTex();
+// 	ImageData* img_data = ImageDataMgr::Instance()->GetItem(m_filepath);
+// 	BitmapMgr::Instance()->GetItem(m_filepath, &m_bitmap);
+// 	ImageMgr::Instance()->GetItem(m_filepath, &m_image);
+// 	img_data->RemoveReference();
+// 
+// 	InitCoreTex();
 }
 
 void ImageSymbol::InitCoreTex()
@@ -128,6 +130,45 @@ void ImageSymbol::InitCoreTex()
 	const sm::vec2& offset = m_image->GetOffset();
 
 	InitTex(m_image->GetS2Tex(), r, offset);
+}
+
+void ImageSymbol::LoadCB(const char* filepath, void (*unpack)(const void* data, size_t size, void* ud), void* ud)
+{
+	int w, h, fmt;
+	uint8_t* pixels = gimg_import(filepath, &w, &h, &fmt);
+
+	assert(fmt == GPF_RGB || fmt == GPF_RGBA);
+	int c = fmt == GPF_RGB ? 3 : 4;
+	int pixel_sz = w * h * c;
+
+	int data_sz = pixel_sz + sizeof(int) * 3;
+	uint8_t* data = (uint8_t*)malloc(data_sz);
+	uint8_t* ptr = data;
+
+	memcpy(ptr, &w, sizeof(w));
+	ptr += sizeof(w);
+	memcpy(ptr, &h, sizeof(w));
+	ptr += sizeof(h);
+	memcpy(ptr, &fmt, sizeof(w));
+	ptr += sizeof(fmt);
+	memcpy(ptr, pixels, pixel_sz);	
+
+	unpack(data, data_sz, ud);
+}
+
+void ImageSymbol::ParserCB(const void* data, size_t size, void* ud)
+{
+	const uint8_t* ptr = (const uint8_t*)data;
+
+	int w, h, fmt;
+	memcpy(&w, ptr, sizeof(w));
+	ptr += sizeof(w);
+	memcpy(&h, ptr, sizeof(h));
+	ptr += sizeof(h);
+	memcpy(&fmt, ptr, sizeof(fmt));
+	ptr += sizeof(fmt);
+
+	
 }
 
 }

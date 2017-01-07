@@ -17,6 +17,7 @@
 #include <gum/GUM_ShaderLab.h>
 #include <gum/GUM_DTex.h>
 #include <gum/RenderContext.h>
+#include <gum/AsyncTask.h>
 
 namespace ee
 {
@@ -219,6 +220,7 @@ void StageCanvas::OnTimer(wxTimerEvent& event)
 	s2::SprTimer::Instance()->Update(dt);
 
 	gum::DTex::Instance()->Flush();
+	gum::AsyncTask::Instance()->Update();
 
 	bool dirty = m_stage->Update();
 	if (dirty) {
