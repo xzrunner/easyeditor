@@ -1,9 +1,11 @@
 #include "DFFParser.h"
 
-#include <ee/ImageLoader.h>
 #include <ee/FileHelper.h>
 #include <ee/StringHelper.h>
-#include <ee/ImageSaver.h>
+
+#include <gimg_import.h>
+#include <gimg_typedef.h>
+#include <gimg_export.h>
 
 #include <assert.h>
 
@@ -12,9 +14,9 @@ namespace edb
 
 DFFParser::DFFParser(const char* filepath)
 {
-	int w, h, c, f;
-	uint8_t* pixels = ee::ImageLoader::FileToPixels(filepath, w, h, c, f);
-	assert(w == EDGE && h == EDGE && c == 4);
+	int w, h, fmt;
+	uint8_t* pixels = gimg_import(filepath, &w, &h, &fmt);
+	assert(w == EDGE && h == EDGE && fmt == GPF_RGBA);
 	m_alphas = new unsigned char[EDGE*EDGE];
 
 	int ptr = 3;
@@ -43,8 +45,8 @@ void DFFParser::outputImage(int width, int height)
 		}
 	}
 
-	std::string filepath = m_dir + "_" + ee::StringHelper::ToString(width) + "_" + ee::StringHelper::ToString(height);
-	ee::ImageSaver::StoreToFile(pixels, width, height, 4, filepath, ee::ImageSaver::e_png);
+	std::string filepath = m_dir + "_" + ee::StringHelper::ToString(width) + "_" + ee::StringHelper::ToString(height) + ".png";
+	gimg_export(filepath.c_str(), pixels, width, height, GPF_RGBA, true);
 	delete[] pixels;
 }
 
@@ -147,8 +149,8 @@ void DFFParser::outputImageFast(int width, int height)
 
 	fillingAlphaNew(pixels, width, height);
 
-	std::string filepath = m_dir + "_" + ee::StringHelper::ToString(width) + "_" + ee::StringHelper::ToString(height);
-	ee::ImageSaver::StoreToFile(pixels, width, height, 4, filepath, ee::ImageSaver::e_png);
+	std::string filepath = m_dir + "_" + ee::StringHelper::ToString(width) + "_" + ee::StringHelper::ToString(height) + ".png";
+	gimg_export(filepath.c_str(), pixels, width, height, GPF_RGBA, true);
 	delete[] pixels;
 }
 

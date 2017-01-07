@@ -5,13 +5,12 @@
 #include <ee/SymbolFile.h>
 #include <ee/ImageData.h>
 #include <ee/ImageVerticalFlip.h>
-#include <ee/ImageSaver.h>
-
-#include <glfw.h>
 
 #include <easyanim.h>
 #include <easyimage.h>
 
+#include <gimg_typedef.h>
+#include <gimg_export.h>
 #include <sprite2/SymType.h>
 
 namespace edb
@@ -66,13 +65,8 @@ void ImageVerticalFlip::Trigger(const std::string& path) const
 void ImageVerticalFlip::VerticalFlip(const std::string& filepath) const
 {
 	ee::ImageData* img = ee::ImageDataMgr::Instance()->GetItem(filepath);		
-
-	ee::ImageVerticalFlip revert(img->GetPixelData(), img->GetWidth(), img->GetHeight());
-	uint8_t* pixels_revert = revert.Revert();		
-	ee::ImageSaver::StoreToFile(pixels_revert, img->GetWidth(), img->GetHeight(), 
-		img->GetChannels(), filepath, ee::ImageSaver::e_png);
-	delete[] pixels_revert;
-
+	int format = img->GetChannels() == 3 ? GPF_RGB : GPF_RGBA;
+	gimg_export(filepath.c_str(), img->GetPixelData(), img->GetWidth(), img->GetHeight(), format, false);
 	img->RemoveReference();
 }
 

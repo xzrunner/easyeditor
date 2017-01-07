@@ -8,7 +8,6 @@
 #include <ee/Image.h>
 #include <ee/StringHelper.h>
 #include <ee/panel_msg.h>
-#include <ee/ImageSaver.h>
 #include <ee/DummySprite.h>
 #include <ee/DummySymbol.h>
 #include <ee/FinishDialog.h>
@@ -18,6 +17,8 @@
 #include <easycomplex.h>
 #include <easyimage.h>
 
+#include <gimg_typedef.h>
+#include <gimg_export.h>
 #include <sprite2/SymType.h>
 
 #include <fstream>
@@ -295,7 +296,7 @@ void RectCutCMPT::OnOutputData(wxCommandEvent& event)
 		sm::vec2 sz = r.Size();
 
 		std::string img_filename = img_dir + "\\" + img_name + "_" + ee::StringHelper::ToString(i) + ".png";
-		ee::ImageSaver::StoreToFile(pixels, sz.x, sz.y, 4, img_filename, ee::ImageSaver::e_png);
+		gimg_export(img_filename.c_str(), pixels, sz.x, sz.y, GPF_RGBA, true);
 
 		ee::Sprite* spr = new ee::DummySprite(new ee::DummySymbol(img_filename, sz.x, sz.y));
 		sm::vec2 offset = r.Center() - center;

@@ -9,8 +9,6 @@
 
 #include <sprite2/SymType.h>
 
-#include <glfw.h>
-
 #include <wx/arrstr.h>
 
 namespace edb

@@ -1,7 +1,9 @@
 #include "ImagePack.h"
 #include "Image.h"
-#include "LibpngAdapter.h"
 #include "Exception.h"
+
+#include <gimg_typedef.h>
+#include <gimg_export.h>
 
 #include <assert.h>
 
@@ -223,7 +225,7 @@ void ImagePack::AddImage(const Image* img, int x, int y, int w, int h, bool rota
 
 void ImagePack::OutputToFile(const std::string& filepath) const
 {
-	LibpngAdapter::Write(m_pixels, m_width, m_height, 4, filepath.c_str(), false);
+	gimg_export(filepath.c_str(), m_pixels, m_width, m_height, GPF_RGBA, false);
 }
 
 void ImagePack::CopyPixel(const uint8_t* src, int sw, int sh, bool sbpp4,

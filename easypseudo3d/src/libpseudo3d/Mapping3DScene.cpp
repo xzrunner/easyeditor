@@ -5,7 +5,6 @@
 #include <ee/Exception.h>
 #include <ee/ImageVerticalFlip.h>
 #include <ee/FileHelper.h>
-#include <ee/ImageSaver.h>
 
 #include <easy3d.h>
 
@@ -65,13 +64,9 @@ void Mapping3DScene::Store(const char* filename) const
 	m_canvas->GetScreenSize(&sw, &sh);
 	glReadPixels(min.x, sh - max.y, w, h, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 
-	ee::ImageVerticalFlip revert(pixels, w, h);
-	uint8_t* pixels_revert = revert.Revert();
+	std::string img_path = ee::FileHelper::GetFilePathExceptExtension(filename) + ".png";
+	gimg_export(img_path.c_str(), pixels, w, h, GPF_RGBA, false);
 	delete[] pixels;
-
-	std::string img_path = ee::FileHelper::GetFilePathExceptExtension(filename);
-	ee::ImageSaver::StoreToFile(pixels_revert, w, h, 4, img_path, ee::ImageSaver::e_png);
-	delete[] pixels_revert;
 
 	value["texture filepath"] = img_path + ".png";
 

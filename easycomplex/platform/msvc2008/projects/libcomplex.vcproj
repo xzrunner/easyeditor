@@ -417,14 +417,6 @@
 			Name="test"
 			>
 			<File
-				RelativePath="..\..\..\src\libcomplex\MyThread.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libcomplex\MyThread.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\libcomplex\RectCutLoader.cpp"
 				>
 			</File>

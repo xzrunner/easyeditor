@@ -1,7 +1,10 @@
 #include "BlockCompress.h"
 
 #include <ee/std_functor.h>
-#include <ee/LibpngAdapter.h>
+
+#include <gimg_typedef.h>
+#include <gimg_import.h>
+#include <gimg_export.h>
 
 #include <algorithm>
 #include <fstream>
@@ -54,8 +57,9 @@ void BlockCompress::Uncompress(const std::string& dir) const
 
 void BlockCompress::Compress(const std::string& filepath)
 {
-	int w, h, c, f;
-	uint8_t* pixels = ee::LibpngAdapter::Read(filepath.c_str(), w, h, c, f);
+	int w, h, fmt;
+	uint8_t* pixels = gimg_import(filepath.c_str(), &w, &h, &fmt);
+
 	m_tot_area += w * h;
 
 	Picture* pic = new Picture;
@@ -114,7 +118,7 @@ void BlockCompress::Uncompress(const std::string& dir, const Picture& pic) const
 
 //	std::string filepath = dir + "//" + ee::FileHelper::getFilenameWithExtension(pic.filepath);
 	std::string filepath = pic.filepath;
-	ee::LibpngAdapter::Write(pixels, pic.w, pic.h, 4, filepath.c_str());
+	gimg_export(filepath.c_str(), pixels, pic.w, pic.h, GPF_RGBA, true);
 
 	delete[] pixels;
 }

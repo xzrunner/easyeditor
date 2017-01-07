@@ -10,8 +10,10 @@
 #include <ee/FileHelper.h>
 #include <ee/Image.h>
 #include <ee/ImageClip.h>
-#include <ee/ImageSaver.h>
 #include <ee/StringHelper.h>
+
+#include <gimg_typedef.h>
+#include <gimg_export.h>
 
 namespace eimage
 {
@@ -134,8 +136,8 @@ void AutoRectCutCMPT::OnOutputRects(wxCommandEvent& event)
 		const eimage::Rect& r = result[i];
 		const uint8_t* pixels = img_cut.Clip(r.x, r.x+r.w, r.y, r.y+r.h);
 
-		std::string out_path = ee::StringHelper::Format("%s#%d#%d#%d#%d#", ori_path.c_str(), r.x, r.y, r.w, r.h);
-		ee::ImageSaver::StoreToFile(pixels, r.w, r.h, 4, out_path, ee::ImageSaver::e_png);
+		std::string out_path = ee::StringHelper::Format("%s#%d#%d#%d#%d#.png", ori_path.c_str(), r.x, r.y, r.w, r.h);
+		gimg_export(out_path.c_str(), pixels, r.w, r.h, GPF_RGBA, true);
 		delete[] pixels;
 	}
 }

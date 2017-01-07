@@ -6,12 +6,13 @@
 #include <ee/SettingData.h>
 #include <ee/Config.h>
 #include <ee/StringHelper.h>
-#include <ee/LibpngAdapter.h>
 #include <ee/SymbolFile.h>
 
 #include <easytexpacker.h>
 #include <easyimage.h>
 
+#include <gimg_typedef.h>
+#include <gimg_import.h>
 #include <sprite2/SymType.h>
 
 #include <wx/filefn.h>
@@ -125,8 +126,10 @@ void PackTexture::CompressPackedTex(const etexpacker::NormalPack& tp, int& start
 			std::string src = file + ee::StringHelper::ToString(i) + ".png";
 			std::string dst = file + ee::StringHelper::ToString(i) + ".pvr";
 
-			int w, h, c, f;
-			uint8_t* pixels = ee::LibpngAdapter::Read(src.c_str(), w, h, c, f);
+			int w, h, fmt;
+			uint8_t* pixels = gimg_import(src.c_str(), &w, &h, &fmt);
+			int c = fmt == GPF_RGB ? 3 : 4;
+
 			eimage::TransToPVR trans(pixels, w, h, c, false, fast);
 			delete[] pixels;
 
@@ -141,8 +144,10 @@ void PackTexture::CompressPackedTex(const etexpacker::NormalPack& tp, int& start
 			std::string src = file + ee::StringHelper::ToString(i) + ".png";
 			std::string dst = file + ee::StringHelper::ToString(i);
 
-			int w, h, c, f;
-			uint8_t* pixels = ee::LibpngAdapter::Read(src.c_str(), w, h, c, f);
+			int w, h, fmt;
+			uint8_t* pixels = gimg_import(src.c_str(), &w, &h, &fmt);
+			int c = fmt == GPF_RGB ? 3 : 4;
+
 			eimage::TransToETC1 trans(pixels, w, h, c, false, fast);
 			delete[] pixels;
 
@@ -157,8 +162,10 @@ void PackTexture::CompressPackedTex(const etexpacker::NormalPack& tp, int& start
 			std::string src = file + ee::StringHelper::ToString(i) + ".png";
 			std::string dst = file + ee::StringHelper::ToString(i) + ".pkm";
 
-			int w, h, c, f;
-			uint8_t* pixels = ee::LibpngAdapter::Read(src.c_str(), w, h, c, f);
+			int w, h, fmt;
+			uint8_t* pixels = gimg_import(src.c_str(), &w, &h, &fmt);
+			int c = fmt == GPF_RGB ? 3 : 4;
+
 			eimage::TransToETC2 trans(pixels, w, h, c, eimage::TransToETC2::RGBA, false, fast);
 			delete[] pixels;
 

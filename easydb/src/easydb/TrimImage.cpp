@@ -8,12 +8,13 @@
 #include <ee/ImageTrim.h>
 #include <ee/StringHelper.h>
 #include <ee/ImageClip.h>
-#include <ee/ImageSaver.h>
 #include <ee/ConsoleProgressBar.h>
 #include <ee/SymbolFile.h>
 
 #include <easyimage.h>
 
+#include <gimg_typedef.h>
+#include <gimg_export.h>
 #include <sprite2/SymType.h>
 
 #include <wx/filename.h>
@@ -213,12 +214,12 @@ void TrimImage::Trim(const std::string& filepath)
 	if (trimed) {
 		ee::ImageClip clip(*img);
 		const uint8_t* pixels = clip.Clip(r.xmin, r.xmax, r.ymin, r.ymax);
-		ee::ImageSaver::StoreToFile(pixels, sz.x, sz.y, img->GetChannels(), 
-			out_filepath, ee::ImageSaver::e_png);
+		float format = img->GetChannels() == 3 ? GPF_RGB : GPF_RGBA;
+		gimg_export(out_filepath.c_str(), pixels, sz.x, sz.y, format, true);
 		delete[] pixels;
 	} else {
-		ee::ImageSaver::StoreToFile(img->GetPixelData(), sz.x, sz.y, img->GetChannels(), 
-			out_filepath, ee::ImageSaver::e_png);
+		float format = img->GetChannels() == 3 ? GPF_RGB : GPF_RGBA;
+		gimg_export(out_filepath.c_str(), img->GetPixelData(), sz.x, sz.y, format, true);
 	}
 
 	img->RemoveReference();

@@ -2,12 +2,12 @@
 #include "check_params.h"
 
 #include <ee/FileHelper.h>
-#include <ee/LibpngAdapter.h>
 #include <ee/SymbolFile.h>
 
 #include <easyimage.h>
-//#include <dtex_pvr.h>
 
+#include <gimg_typedef.h>
+#include <gimg_import.h>
 #include <sprite2/SymType.h>
 
 namespace edb
@@ -85,10 +85,11 @@ void TransToPVR::EncodeByDtexPvr(const std::string& filepath) const
 
 void TransToPVR::EncodeByPvrTexTool(const std::string& filepath) const
 {
-	int w, h, c, f;
-	uint8_t* pixels = ee::LibpngAdapter::Read(filepath.c_str(), w, h, c, f);
-	eimage::TransToPVR trans(pixels, w, h, c);
+	int w, h, fmt;
+	uint8_t* pixels = gimg_import(filepath.c_str(), &w, &h, &fmt);
+	int c = fmt == GPF_RGB ? 3 : 4;
 
+	eimage::TransToPVR trans(pixels, w, h, c);
 	std::string out_file = filepath.substr(0, filepath.find_last_of('.')) + ".pvr";
 	trans.OutputFile(out_file);
 }

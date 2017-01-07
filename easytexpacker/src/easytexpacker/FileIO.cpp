@@ -16,10 +16,11 @@
 #include <ee/FileHelper.h>
 #include <ee/Config.h>
 #include <ee/FetchAllVisitor.h>
-#include <ee/ImageLoader.h>
-#include <ee/LibjpegAdapter.h>
 #include <ee/ImageData.h>
-#include <ee/ImageSaver.h>
+
+#include <gimg_import.h>
+#include <gimg_export.h>
+#include <gimg_typedef.h>
 
 #include <fstream>
 
@@ -207,9 +208,10 @@ void FileIO::StoreImage(const char* filename)
 
 		bool use_premultiplied_alpha = Context::Instance()->premultiplied_alpha && channel == 4;
 
-		int w, h, c, f;
-		uint8_t* src_data = ee::ImageLoader::FileToPixels(sym->GetFilepath(), w, h, c, f);
-
+		int w, h, fmt;
+		uint8_t* src_data = gimg_import(sym->GetFilepath().c_str(), &w, &h, &fmt);
+		assert(fmt == GPF_RGB || fmt == GPF_RGBA);
+		int c = fmt == GPF_RGB ? 3 : 4;
 		if (spr->GetAngle() != 0)
 		{
 			for (size_t iRow = 0; iRow < w; ++iRow) {
@@ -274,21 +276,19 @@ void FileIO::StoreImage(const char* filename)
 
 	std::string imgFile(filename);
 	imgFile = ee::FileHelper::GetFilePathExceptExtension(imgFile);
-
 	switch (type)
 	{
 	case e_bmp:
-//		stbi_write_bmp((imgFile + ".bmp").c_str(), width, height, channel, dst_data);
+		imgFile += ".bmp";
 		break;
 	case e_jpg:
-		ee::LibjpegAdapter::Write(dst_data, width, height, (imgFile + ".jpg").c_str(), 80);
+		imgFile += ".jpg";
 		break;
 	case e_png:
-//		stbi_write_png((imgFile + ".png").c_str(), width, height, channel, dst_data, 0);
-		ee::ImageSaver::StoreToFile(dst_data, width, height, 4, imgFile, 
-			ee::ImageSaver::e_png);
+		imgFile += ".png";
 		break;
 	}
+	gimg_export(imgFile.c_str(), dst_data, width, height, GPF_RGBA, true);
 
 	free((void*)dst_data);
 }

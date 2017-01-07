@@ -4,6 +4,10 @@
 
 #include <vector>
 #include <algorithm>
+#include <string>
+
+#include <gimg_typedef.h>
+#include <gimg_export.h>
 
 #include <assert.h>
 
@@ -102,10 +106,10 @@ void TexturePacker::StoreToMemory()
 	}
 }
 
-void TexturePacker::StoreToFile(const std::string& floder, const std::string& filename, ee::ImageSaver::Type type)
+void TexturePacker::StoreToFile(const std::string& floder, const std::string& filename)
 {
-	std::string filepath = floder + "\\" + filename;
-	ee::ImageSaver::StoreToFile(m_pixels, m_edge, m_edge, 4, filepath, type);
+	std::string filepath = floder + "\\" + filename + ".png";
+	gimg_export(filepath.c_str(), m_pixels, m_edge, m_edge, GPF_RGBA, true);
 }
 
 const sm::rect* TexturePacker::Query(ee::Image* image) const

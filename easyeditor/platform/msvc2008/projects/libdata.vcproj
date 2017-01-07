@@ -550,26 +550,6 @@
 				>
 			</File>
 			<Filter
-				Name="io"
-				>
-				<File
-					RelativePath="..\..\..\source\data\image\ImageLoader.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\ee\ImageLoader.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\source\data\image\ImageSaver.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\ee\ImageSaver.h"
-					>
-				</File>
-			</Filter>
-			<Filter
 				Name="process"
 				>
 				<File

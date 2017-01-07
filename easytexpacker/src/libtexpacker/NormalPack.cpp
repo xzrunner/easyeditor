@@ -7,7 +7,8 @@
 #include <ee/StringHelper.h>
 #include <ee/ImagePack.h>
 #include <ee/Image.h>
-#include <ee/LibpngAdapter.h>
+
+#include <gimg_import.h>
 
 #include <json/json.h>
 
@@ -232,7 +233,7 @@ void NormalPack::Pack(PACK_STRATEGY strategy, int static_size, int max_size, int
 		const std::string& path = m_filepaths[i];		
 
 		RectSize sz;
-		ee::LibpngAdapter::ReadHeader(path.c_str(), sz.width, sz.height);
+		gimg_read_header(path.c_str(), &sz.width, &sz.height);
 		if (sz.width > max_size || sz.height > max_size) {
 			throw ee::Exception("NormalPack::Pack no sapce file: %s, src_sz: %d %d, dst_sz: %d\n", 
 				m_filepaths[i].c_str(), sz.width, sz.height, max_size);

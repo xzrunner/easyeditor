@@ -42,7 +42,7 @@ void PackLuaFile::pack(const std::vector<ee::Sprite*>& sprs, const std::string& 
 	TexturePacker textures;
 	textures.Pack(setImages);
 	textures.StoreToMemory();
-	textures.StoreToFile(outfloder, "tmp.1", ee::ImageSaver::e_ppm);
+	textures.StoreToFile(outfloder, "tmp.1");
 
 	// pack lua file
 	CocoPacker code(textures);

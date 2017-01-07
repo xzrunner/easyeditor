@@ -6,7 +6,6 @@
 #include <ee/ImageTrim.h>
 #include <ee/ImageClip.h>
 #include <ee/StringHelper.h>
-#include <ee/ImageSaver.h>
 #include <ee/DummySprite.h>
 #include <ee/DummySymbol.h>
 #include <ee/SettingData.h>
@@ -15,6 +14,8 @@
 
 #include <easycomplex.h>
 
+#include <gimg_typedef.h>
+#include <gimg_export.h>
 #include <sprite2/SymType.h>
 
 namespace edb
@@ -141,7 +142,7 @@ void AverageRectCut::RectCutImage(const std::string& src_dir, const std::string&
 
 			std::string img_name = ee::StringHelper::Format("%s#%d#%d#%d#%d#.png", filename.c_str(), xmin, ymin, w, h);
 			std::string img_out_path = out_img_dir + "\\" + img_name;
-			ee::ImageSaver::StoreToFile(pixels, w, h, 4, img_out_path, ee::ImageSaver::e_png);
+			gimg_export(img_out_path.c_str(), pixels, w, h, GPF_RGBA, true);
 			delete[] pixels;
 
 			std::string spr_path = std::string(out_img_dir + "\\" + img_name);

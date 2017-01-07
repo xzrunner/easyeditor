@@ -2,12 +2,14 @@
 
 #include <ee/math_common.h>
 #include <ee/StringHelper.h>
-#include <ee/ImageSaver.h>
 
 #include <SM_Calc.h>
 
 #include <freetype/ftglyph.h>
 #include <gl/glew.h>
+
+#include <gimg_typedef.h>
+#include <gimg_export.h>
 
 #include <locale>
 #include <fstream>
@@ -195,9 +197,9 @@ void DistanceFieldFont::genChar(int unicode)
 	}
 
 	unsigned char* result = genDistanceFieldData(expanded_data, extracted, width, height);
-	std::string filepath = "e:/text_" + ee::StringHelper::ToString(unicode);
+	std::string filepath = "e:/text_" + ee::StringHelper::ToString(unicode) + ".png";
 //	ee::ImageSaver::storeToFile(extracted, width, height, filepath, ee::ImageSaver::e_png);
-	ee::ImageSaver::StoreToFile(result, 32, 32, 4, filepath, ee::ImageSaver::e_png);
+	gimg_export(filepath.c_str(), result, 32, 32, GPF_RGBA, true);
 
 	delete[] expanded_data;
 	delete[] extracted;		

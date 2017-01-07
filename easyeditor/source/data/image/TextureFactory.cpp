@@ -1,9 +1,13 @@
 #include "TextureFactory.h"
 #include "TexturePacker.h"
-#include "ImageLoader.h"
 #include "Config.h"
 #include "SettingData.h"
 #include "ImageData.h"
+
+#include <gimg_import.h>
+#include <gimg_typedef.h>
+
+#include <assert.h>
 
 namespace ee
 {
@@ -41,10 +45,13 @@ const uint8_t* TextureFactory::Load(const std::string& filepath, int& width,
 		width = frame->src.frame.w;
 		height = frame->src.frame.h;
 		channels = 4;
-		format = 6408;
+		format = GPF_RGBA;
 		return NULL;
 	} else {
-		return ImageLoader::FileToPixels(filepath, width, height, channels, format);
+		uint8_t* pixels = gimg_import(filepath.c_str(), &width, &height, &format);
+		assert(format == GPF_RGB || format == GPF_RGBA);
+		channels = format == GPF_RGB ? 3 : 4;
+		return pixels;
 	}
 }
 

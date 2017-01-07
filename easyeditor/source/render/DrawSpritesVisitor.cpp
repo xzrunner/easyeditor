@@ -5,8 +5,7 @@
 #include "Config.h"
 #include "FilterModes.h"
 
-#include <sprite2/RenderFilter.h>
-#include <sprite2/BoundingBox.h>
+#include <sprite2/DrawNode.h>
 #include <gum/FilterModes.h>
 #include <gum/GUM_GTxt.h>
 #include <SM_Test.h>
@@ -22,15 +21,13 @@ void DrawSpritesVisitor::Visit(Sprite* spr, bool& next)
 		return;
 	}
 
-	if (m_screen_region.IsValid() &&
-		!sm::is_rect_intersect_rect(spr->GetBounding()->GetSize(), m_screen_region)) {
+	s2::RenderParams params;
+	params.view_region = m_screen_region;
+	if (s2::DrawNode::IsOutsideView(spr, params)) {
 		return;
 	}
-	
-//	int filter_mode_idx = gum::FilterModes::Instance()->QueryShaderIdx(spr->GetShader().filter->GetMode());
-//	ShaderMgr::Instance()->SetSpriteShader(filter_mode_idx);
 
-	DrawSprite(spr);
+	SpriteRenderer::Instance()->Draw(spr, params);
 
 	SettingData& cfg = Config::Instance()->GetSettings();
 	const std::string& name = spr->GetName();
@@ -41,11 +38,6 @@ void DrawSpritesVisitor::Visit(Sprite* spr, bool& next)
 		t.Scale(s, s, 1);
 		gum::GTxt::Instance()->Draw(t, name);
 	}
-}
-
-void DrawSpritesVisitor::DrawSprite(Sprite* spr) const
-{
-	SpriteRenderer::Instance()->Draw(spr);
 }
 
 }

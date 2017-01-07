@@ -11,6 +11,7 @@
 #include <sprite2/S2_RVG.h>
 #include <gum/RenderContext.h>
 #include <gum/RenderTarget.h>
+#include <gum/AsyncTask.h>
 
 namespace ee
 {
@@ -99,8 +100,16 @@ int ImageSymbol::GetScreenCacheTexid() const
 	return gum::RenderTarget::Instance()->GetScreen0()->GetTexture()->ID();
 }
 
+static void
+parser(const void* data, size_t size, void* ud)
+{
+	int zz = 0;
+}
+
 void ImageSymbol::LoadResources()
 {
+	gum::AsyncTask::Instance()->Load(m_filepath, parser, NULL);
+
 	ImageData* img_data = ImageDataMgr::Instance()->GetItem(m_filepath);
 	BitmapMgr::Instance()->GetItem(m_filepath, &m_bitmap);
 	ImageMgr::Instance()->GetItem(m_filepath, &m_image);

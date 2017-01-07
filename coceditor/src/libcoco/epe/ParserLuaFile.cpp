@@ -2,7 +2,6 @@
 
 #include <ee/Image.h>
 #include <ee/ImageClip.h>
-#include <ee/ImageSaver.h>
 #include <ee/DummySprite.h>
 #include <ee/DummySymbol.h>
 #include <ee/SymbolFile.h>
@@ -15,6 +14,8 @@
 #include <easyanim.h>
 #include <easyimage.h>
 
+#include <gimg_typedef.h>
+#include <gimg_export.h>
 #include <sprite2/SymType.h>
 #include <sprite2/RenderColor.h>
 #include <gum/trans_color.h>
@@ -335,9 +336,10 @@ void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames
 			{
 				int width = part->xmax-part->xmin,
 					height = part->ymax-part->ymin;
-				std::string outfile = outfloder + "\\" + part->filename;
-				if (!wxFileExists(outfile))
-					ee::ImageSaver::StoreToFile(pixels, width, height, 4, outfile, ee::ImageSaver::e_png);
+				std::string outfile = outfloder + "\\" + part->filename + ".png";
+				if (!wxFileExists(outfile)) {
+					gimg_export(outfile.c_str(), pixels, width, height, GPF_RGBA, true);
+				}
 
 				std::string outpath = outfile + ".png";
 				ee::Sprite* spr = new ee::DummySprite(new ee::DummySymbol(outpath, width, height));

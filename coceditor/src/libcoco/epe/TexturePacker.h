@@ -1,7 +1,6 @@
 #ifndef _COCO_EPE_TEXTURE_PACKER_H_
 #define _COCO_EPE_TEXTURE_PACKER_H_
 
-#include <ee/ImageSaver.h>
 #include <ee/Image.h>
 
 #include <SM_Rect.h>
@@ -31,7 +30,7 @@ public:
 	void Pack(const std::set<ee::Image*>& images);
 
 	void StoreToMemory();
-	void StoreToFile(const std::string& floder, const std::string& filename, ee::ImageSaver::Type type);
+	void StoreToFile(const std::string& floder, const std::string& filename);
 
 	const sm::rect* Query(ee::Image* image) const;
 

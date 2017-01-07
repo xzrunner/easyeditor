@@ -8,13 +8,12 @@
 #include <ee/ImageSymbol.h>
 #include <ee/ImageClip.h>
 #include <ee/Image.h>
-#include <ee/ImageSaver.h>
 
 #include <easyimage.h>
 
+#include <gimg_typedef.h>
+#include <gimg_export.h>
 #include <sprite2/SymType.h>
-
-#include <glfw.h>
 
 #include <wx/arrstr.h>
 
@@ -81,8 +80,8 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 				const eimage::Rect& r = result[i];
 				const uint8_t* pixels = img_cut.Clip(r.x, r.x+r.w, r.y, r.y+r.h);
 
-				std::string out_path = ee::StringHelper::Format("%s\\%s#%d#%d#%d#%d#", dst_dir.c_str(), filename.c_str(), r.x, r.y, r.w, r.h);
-				ee::ImageSaver::StoreToFile(pixels, r.w, r.h, 4, out_path, ee::ImageSaver::e_png);
+				std::string out_path = ee::StringHelper::Format("%s\\%s#%d#%d#%d#%d#", dst_dir.c_str(), filename.c_str(), r.x, r.y, r.w, r.h) + ".png";
+				gimg_export(out_path.c_str(), pixels, r.w, r.h, GPF_RGBA, true);
 				delete[] pixels;
 			}
 

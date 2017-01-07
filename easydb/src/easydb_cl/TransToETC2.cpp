@@ -2,11 +2,12 @@
 #include "check_params.h"
 
 #include <ee/FileHelper.h>
-#include <ee/LibpngAdapter.h>
 #include <ee/SymbolFile.h>
 
 #include <easyimage.h>
 
+#include <gimg_typedef.h>
+#include <gimg_import.h>
 #include <sprite2/SymType.h>
 
 namespace edb
@@ -59,8 +60,10 @@ void TransToETC2::Format(const std::string& filepath)
 		return;		
 	}
 
-	int w, h, c, f;
-	uint8_t* pixels = ee::LibpngAdapter::Read(filepath.c_str(), w, h, c, f);
+	int w, h, fmt;
+	uint8_t* pixels = gimg_import(filepath.c_str(), &w, &h, &fmt);
+	int c = fmt == GPF_RGB ? 3 : 4;
+
 	eimage::TransToETC2 trans(pixels, w, h, c, eimage::TransToETC2::RGBA1, false, true);
 	std::string out_file = filepath.substr(0, filepath.find_last_of('.')) + ".pkm";
 	trans.OutputFile(out_file);

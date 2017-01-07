@@ -146,7 +146,7 @@
 	</References>
 	<Files>
 		<Filter
-			Name="fmt"
+			Name="type"
 			>
 			<File
 				RelativePath="..\..\..\src\gimg\gimg_bmp.c"
@@ -193,6 +193,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\gimg\gimg_ppm.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\gimg\gimg_ppm.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\gimg\gimg_pvr.c"
 				>
 			</File>
@@ -201,30 +209,26 @@
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath="..\..\..\src\gimg\gimg_export.c"
+		<Filter
+			Name="io"
 			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\gimg\gimg_export.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\gimg\gimg_image.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\gimg\gimg_image.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\gimg\gimg_import.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\gimg\gimg_import.h"
-			>
-		</File>
+			<File
+				RelativePath="..\..\..\src\gimg\gimg_export.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\gimg\gimg_export.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\gimg\gimg_import.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\gimg\gimg_import.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\..\..\src\gimg\gimg_typedef.h"
 			>

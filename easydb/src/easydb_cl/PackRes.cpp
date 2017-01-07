@@ -5,7 +5,6 @@
 #include <ee/FileHelper.h>
 #include <ee/Config.h>
 #include <ee/SettingData.h>
-#include <ee/LibpngAdapter.h>
 #include <ee/StringHelper.h>
 #include <ee/SymbolSearcher.h>
 #include <ee/SymbolMgr.h>

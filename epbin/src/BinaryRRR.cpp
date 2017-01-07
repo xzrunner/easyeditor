@@ -3,12 +3,14 @@
 #include "Lzma.h"
 #include "tools.h"
 
-#include <ee/LibpngAdapter.h>
 #include <ee/StringHelper.h>
 
 #include <easyimage.h>
 // #include <dtex_pvr.h>
 // #include <dtex_rrr.h>
+
+#include <gimg_typedef.h>
+#include <gimg_import.h>
 
 #include <wx/string.h>
 
@@ -114,8 +116,9 @@ void BinaryRRR::LoadPictures(const std::vector<std::string>& src_files,
 
 BinaryRRR::Picture* BinaryRRR::CreatePicture(const std::string& filepath) const
 {
-	int sw, sh, sc, sf;
-	uint8_t* src_pixels = ee::LibpngAdapter::Read(filepath.c_str(), sw, sh, sc, sf);
+	int sw, sh, fmt;
+	uint8_t* src_pixels = gimg_import(filepath.c_str(), &sw, &sh, &fmt);
+	int sc = fmt == GPF_RGB ? 3 : 4;
 
 	// cut
 	eimage::RegularRectCut cut(src_pixels, sw, sh);

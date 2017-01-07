@@ -4,7 +4,6 @@
 
 #include <ee/SettingData.h>
 #include <ee/Config.h>
-#include <ee/ImageLoader.h>
 #include <ee/Exception.h>
 #include <ee/ImageData.h>
 #include <ee/Image.h>
@@ -13,7 +12,11 @@
 
 #include <easyimage.h>
 
+#include <gimg_import.h>
+#include <gimg_typedef.h>
 #include <sprite2/DrawRT.h>
+
+#include <assert.h>
 
 namespace erespacker
 {
@@ -41,8 +44,10 @@ void PackPNG::Load(const std::string& filepath)
 	bool ori_alpha_cfg = data.pre_multi_alpha;
 	data.pre_multi_alpha = false;
 
-	int w, h, c, f;
-	uint8_t* buf = ee::ImageLoader::FileToPixels(filepath, w, h, c, f);
+	int w, h, fmt;
+	uint8_t* buf = gimg_import(filepath.c_str(), &w, &h, &fmt);
+	assert(fmt == GPF_RGB || fmt == GPF_RGBA);
+	int c = fmt == GPF_RGB ? 3 : 4;
 
 	data.open_image_edge_clip = ori_clip_cfg;
 	data.pre_multi_alpha = ori_alpha_cfg;

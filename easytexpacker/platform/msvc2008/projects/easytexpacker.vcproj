@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\src\easytexpacker;..\..\..\external\RectangleBinPack;..\..\..\..\easyeditor\include;..\..\..\..\easybuilder\src;..\..\..\..\easyshape\src;..\..\..\..\easytexpacker\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\box2d\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\gimg\src\gimg;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\src\easytexpacker;..\..\..\external\RectangleBinPack;..\..\..\..\easyeditor\include;..\..\..\..\easybuilder\src;..\..\..\..\easyshape\src;..\..\..\..\easytexpacker\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\box2d\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -122,7 +122,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\src\easytexpacker;..\..\..\external\RectangleBinPack;..\..\..\..\easyeditor\include;..\..\..\..\easybuilder\src;..\..\..\..\easyshape\src;..\..\..\..\easytexpacker\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\box2d\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\gimg\src\gimg;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\src\easytexpacker;..\..\..\external\RectangleBinPack;..\..\..\..\easyeditor\include;..\..\..\..\easybuilder\src;..\..\..\..\easyshape\src;..\..\..\..\easytexpacker\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\box2d\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
