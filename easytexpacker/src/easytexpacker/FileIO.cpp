@@ -5,7 +5,6 @@
 #include "config.h"
 
 #include <ee/SymbolMgr.h>
-#include <ee/Bitmap.h>
 #include <ee/LibraryPanel.h>
 #include <ee/TexPackerAdapter.h>
 #include <ee/SpriteFactory.h>
@@ -32,7 +31,6 @@ void FileIO::Load(const char* filename)
 	Context* context = Context::Instance();
 
 	ee::SymbolMgr::Instance()->Clear();
-	ee::BitmapMgr::Instance()->Clear();
 
 	std::string ext = "_packer.json";
 	if (std::string(filename).find(ext) != std::string::npos) {

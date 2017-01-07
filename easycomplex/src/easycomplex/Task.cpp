@@ -2,7 +2,6 @@
 #include "FileIO.h"
 
 #include <ee/SymbolMgr.h>
-#include <ee/Bitmap.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/ViewlistPanel.h>
 #include <ee/GroupTreePanel.h>
@@ -37,7 +36,6 @@ Task::Task(wxFrame* parent)
 Task::~Task()
 {
 	ee::SymbolMgr::Instance()->Clear();
-	ee::BitmapMgr::Instance()->Clear();
 	delete m_root;
 }
 

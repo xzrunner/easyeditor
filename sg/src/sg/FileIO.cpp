@@ -20,7 +20,6 @@ namespace sg
 void FileIO::load(const char* filename, StagePanel* stage)
 {
 // 	ee::SymbolMgr::Instance()->Clear();
-// 	ee::BitmapMgr::Instance()->Clear();
 
 	Json::Value value;
 	Json::Reader reader;

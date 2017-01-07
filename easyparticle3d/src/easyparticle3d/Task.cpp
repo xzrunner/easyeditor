@@ -1,7 +1,6 @@
 #include "Task.h"
 
 #include <ee/SymbolMgr.h>
-#include <ee/Bitmap.h>
 #include <ee/Exception.h>
 
 #include <easyparticle3d.h>
@@ -21,7 +20,6 @@ Task::Task(wxFrame* parent)
 Task::~Task()
 {
 	ee::SymbolMgr::Instance()->Clear();
-	ee::BitmapMgr::Instance()->Clear();
 	delete m_root;
 
 	m_parent->SetTitle("EasyParticle");

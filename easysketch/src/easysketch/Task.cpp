@@ -1,7 +1,6 @@
 #include "Task.h"
 
 #include <ee/SymbolMgr.h>
-#include <ee/Bitmap.h>
 #include <ee/LibraryPanel.h>
 #include <ee/PropertySettingPanel.h>
 
@@ -22,7 +21,6 @@ Task::Task(wxFrame* parent)
 Task::~Task()
 {
 	ee::SymbolMgr::Instance()->Clear();
-	ee::BitmapMgr::Instance()->Clear();
 	delete m_root;
 }
 

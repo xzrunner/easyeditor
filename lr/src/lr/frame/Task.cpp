@@ -12,7 +12,6 @@
 #include <ee/panel_msg.h>
 #include <ee/EditOP.h>
 #include <ee/SymbolMgr.h>
-#include <ee/Bitmap.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/PropertySettingPanel.h>
 #include <ee/ViewlistPanel.h>
@@ -46,7 +45,6 @@ Task::Task(wxFrame* parent)
 Task::~Task()
 {
 	ee::SymbolMgr::Instance()->Clear();
-	ee::BitmapMgr::Instance()->Clear();
 	delete m_root;
 }
 

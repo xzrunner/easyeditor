@@ -3,7 +3,6 @@
 #include <easyicon.h>
 
 #include <ee/SymbolMgr.h>
-#include <ee/Bitmap.h>
 #include <ee/panel_msg.h>
 
 namespace eicon
@@ -19,7 +18,6 @@ Task::Task(wxFrame* parent)
 Task::~Task()
 {
 	ee::SymbolMgr::Instance()->Clear();
-	ee::BitmapMgr::Instance()->Clear();
 	delete m_root;
 }
 

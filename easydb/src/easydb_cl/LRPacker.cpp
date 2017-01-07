@@ -13,7 +13,6 @@
 #include <ee/FileHelper.h>
 #include <ee/StringHelper.h>
 #include <ee/Config.h>
-#include <ee/Bitmap.h>
 #include <ee/Image.h>
 #include <ee/ImageData.h>
 #include <ee/SymbolMgr.h>
@@ -184,7 +183,6 @@ void LRPacker::ClearCached()
 {
 	ee::SymbolMgr::Instance()->Clear();
 
-	ee::BitmapMgr::Instance()->Clear();
 	ee::ImageMgr::Instance()->Clear();
 	ee::ImageDataMgr::Instance()->Clear();
 }

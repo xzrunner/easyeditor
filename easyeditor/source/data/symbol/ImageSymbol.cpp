@@ -113,7 +113,6 @@ void ImageSymbol::LoadResources()
 	gum::AsyncTask::Instance()->Load(m_filepath, LoadCB, ParserCB, this);
 
 // 	ImageData* img_data = ImageDataMgr::Instance()->GetItem(m_filepath);
-// 	BitmapMgr::Instance()->GetItem(m_filepath, &m_bitmap);
 // 	ImageMgr::Instance()->GetItem(m_filepath, &m_image);
 // 	img_data->RemoveReference();
 // 
@@ -168,6 +167,13 @@ void ImageSymbol::ParserCB(const void* data, size_t size, void* ud)
 	memcpy(&fmt, ptr, sizeof(fmt));
 	ptr += sizeof(fmt);
 
+	ImageSymbol* sym = static_cast<ImageSymbol*>(ud);
+	Bitmap* bmp = new Bitmap(sym->GetFilepath(), const_cast<uint8_t*>(ptr), w, h, fmt);
+	sym->SetBitmap(bmp);
+
+	assert(fmt == GPF_RGB || fmt == GPF_RGBA);
+	int c = fmt == GPF_RGB ? 3 : 4;
+	ImageData data(ptr, w, h, c);
 	
 }
 

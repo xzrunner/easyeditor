@@ -6,7 +6,6 @@
 #include "Frame.h"
 
 #include <ee/SymbolMgr.h>
-#include <ee/Bitmap.h>
 #include <ee/PropertySettingPanel.h>
 #include <ee/ViewlistPanel.h>
 #include <ee/SymbolFile.h>
@@ -27,7 +26,6 @@ Task::Task(Frame* frame)
 Task::~Task()
 {
 	ee::SymbolMgr::Instance()->Clear();
-	ee::BitmapMgr::Instance()->Clear();
 	delete m_root;
 }
 

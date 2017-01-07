@@ -31,7 +31,6 @@ void FileIO::Load(const char* filename, LibraryPanel* library,
 				  StagePanel* stage, ee::GroupTreePanel* grouptree)
 {
 // 	ee::SymbolMgr::Instance()->Clear();
-// 	ee::BitmapMgr::Instance()->Clear();
 
 	Json::Value value;
 	Json::Reader reader;

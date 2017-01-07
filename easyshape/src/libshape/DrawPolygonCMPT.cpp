@@ -16,6 +16,7 @@
 #include <ee/ImageSymbol.h>
 #include <ee/Config.h>
 #include <ee/SettingData.h>
+#include <ee/Bitmap.h>
 
 namespace eshape
 {
@@ -27,6 +28,7 @@ DrawPolygonCMPT::DrawPolygonCMPT(wxWindow* parent, const std::string& name, wxWi
 	, m_stage_wnd(stage_wnd)
 	, m_shapes_impl(shapes_impl)
 	, m_color(*wxBLACK)
+	, m_bitmap(NULL)
 {
 	m_editop = NULL;
 	// draw polygon with pen, node capture
@@ -147,7 +149,7 @@ void DrawPolygonCMPT::OnSetColor(wxCommandEvent& event)
 			if (dlg.ShowModal() == wxID_OK)
 			{
 				m_filepath = dlg.GetPath();
-				m_bitmap.LoadFromFile(m_filepath);
+				m_bitmap = new ee::Bitmap(m_filepath);
 			}
 		}
 		break;
@@ -194,8 +196,10 @@ void DrawPolygonCMPT::FillingButton()
 		}
 		break;
 	case 1:
-		if (const wxBitmap* bmp = m_bitmap.GetLargeBmp()) {
-			m_btn_review->SetBitmap(*bmp);
+		if (m_bitmap) {
+			if (const wxBitmap* bmp = m_bitmap->GetLargeBmp()) {
+				m_btn_review->SetBitmap(*bmp);
+			}
 		}
 		break;
 	}

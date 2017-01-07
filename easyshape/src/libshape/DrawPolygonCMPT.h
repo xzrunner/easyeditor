@@ -5,9 +5,9 @@
 #include "DrawPolygonOP.h"
 
 #include <ee/OneFloatValueCMPT.h>
-#include <ee/Bitmap.h>
 
 namespace s2 { class Color; }
+namespace ee { class Bitmap; }
 
 namespace eshape
 {
@@ -41,7 +41,7 @@ private:
 	wxColour m_color;
 //	wxColourData& m_colorData;
 
-	ee::Bitmap m_bitmap;
+	ee::Bitmap* m_bitmap;
 	std::string m_filepath;
 
 	wxButton* m_btn_review;

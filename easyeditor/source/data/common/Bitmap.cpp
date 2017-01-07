@@ -2,7 +2,6 @@
 #include "Config.h"
 #include "SettingData.h"
 #include "ImageData.h"
-//#include "Image.h"
 #include "Symbol.h"
 #include "SymbolMgr.h"
 #include "SymbolFile.h"
@@ -11,13 +10,9 @@
 #include "ImageTrim.h"
 #include "SymbolType.h"
 
+#include <gimg_typedef.h>
 #include <sprite2/SymType.h>
 #include <sprite2/DrawRT.h>
-
-#include <gl/glew.h>
-//#include <wx/filename.h>
-
-//#include <easyimage.h>
 
 namespace ee
 {
@@ -27,14 +22,25 @@ static const int SMALL_SIZE = 24;
 static const float MAX_WIDTH = 150.0f;
 static const float SCALE = 0.5f;
 
-Bitmap::Bitmap()
-	: m_bmp_large(NULL)
+Bitmap::Bitmap(const std::string& filepath)
+	: m_filepath(filepath)
+	, m_bmp_large(NULL)
 	, m_bmp_small(NULL)
 {
+	LoadFromFile(filepath);
+}
+
+Bitmap::Bitmap(const std::string& filepath, uint8_t* pixels, int w, int h, int fmt)
+	: m_filepath(filepath)
+	, m_bmp_large(NULL)
+	, m_bmp_small(NULL)
+{
+	LoadFromData(pixels, w, h, fmt);
 }
 
 Bitmap::Bitmap(const Symbol* sym)
-	: m_bmp_large(NULL)
+	: m_filepath(sym->GetFilepath())
+	, m_bmp_large(NULL)
 	, m_bmp_small(NULL)
 {
 	LoadFromSym(sym);
@@ -42,28 +48,16 @@ Bitmap::Bitmap(const Symbol* sym)
 
 Bitmap::~Bitmap()
 {
-	BitmapMgr::Instance()->RemoveItem(m_filename);
 	delete m_bmp_large;
+	delete m_bmp_small;
 }
 
 bool Bitmap::LoadFromFile(const std::string& filepath)
 {
-	m_filename = filepath;
+	m_filepath = filepath;
 
 	if (!Config::Instance()->GetSettings().load_image) {
 		return true;
-	}
-
-	const GLubyte* test = glGetString(GL_VERSION);
-	if (!test) {
-		return true;
-	}
-
-	static bool inited = false;
-	if (!inited)
-	{
-		wxInitAllImageHandlers();
-		inited = true;
 	}
 
 	int type = ee::SymbolFile::Instance()->Type(filepath);
@@ -113,32 +107,20 @@ bool Bitmap::LoadFromFile(const std::string& filepath)
 	return true;
 }
 
-void Bitmap::InitBmp(const wxImage& image, bool need_scale)
+void Bitmap::LoadFromData(uint8_t* pixels, int w, int h, int fmt)
 {
+	switch (fmt)
 	{
-		if (m_bmp_large) {
-			delete m_bmp_large;
+	case GPF_RGB:
+		InitBmp(wxImage(w, h, (unsigned char*)pixels, true), false);
+		break;
+	case GPF_RGBA:
+		{
+			unsigned char* rgb = TransRGBA2RGB(pixels, w, h);
+			InitBmp(wxImage(w, h, rgb, true), false);
+			delete[] rgb;
 		}
-		float w = image.GetWidth(),
-			h = image.GetHeight();
-		float scale = 1;
-		if (need_scale) {
-			scale = w > (MAX_WIDTH / SCALE) ? (MAX_WIDTH / w) : SCALE; 
-		}
-		w = std::max(1.0f, w * scale);
-		h = std::max(1.0f, h * scale);
-		m_bmp_large = new wxBitmap(image.Scale(w, h));
-	}
-	{
-		if (m_bmp_small) {
-			delete m_bmp_small;
-		}
-		float w = image.GetWidth(),
-			h = image.GetHeight();
-		float scale = (float)SMALL_SIZE / w;
-		w = std::max(1.0f, w * scale);
-		h = std::max(1.0f, h * scale);
-		m_bmp_small = new wxBitmap(image.Scale(w, h));
+		break;
 	}
 }
 
@@ -173,6 +155,35 @@ void Bitmap::LoadFromSym(const Symbol* sym)
  	delete[] rgba;
 }
 
+void Bitmap::InitBmp(const wxImage& image, bool need_scale)
+{
+	{
+		if (m_bmp_large) {
+			delete m_bmp_large;
+		}
+		float w = image.GetWidth(),
+			  h = image.GetHeight();
+		float scale = 1;
+		if (need_scale) {
+			scale = w > (MAX_WIDTH / SCALE) ? (MAX_WIDTH / w) : SCALE; 
+		}
+		w = std::max(1.0f, w * scale);
+		h = std::max(1.0f, h * scale);
+		m_bmp_large = new wxBitmap(image.Scale(w, h));
+	}
+	{
+		if (m_bmp_small) {
+			delete m_bmp_small;
+		}
+		float w = image.GetWidth(),
+			h = image.GetHeight();
+		float scale = (float)SMALL_SIZE / w;
+		w = std::max(1.0f, w * scale);
+		h = std::max(1.0f, h * scale);
+		m_bmp_small = new wxBitmap(image.Scale(w, h));
+	}
+}
+
 unsigned char* Bitmap::TransRGBA2RGB(unsigned char* rgba, int width, int height)
 {
 	unsigned char* rgb = new unsigned char[width*height*3];
@@ -188,6 +199,13 @@ unsigned char* Bitmap::TransRGBA2RGB(unsigned char* rgba, int width, int height)
 
 void Bitmap::GetImage(const std::string& filepath, wxImage& dst_img)
 {
+	static bool inited = false;
+	if (!inited)
+	{
+		wxInitAllImageHandlers();
+		inited = true;
+	}
+
 	ImageData* img_data = ImageDataMgr::Instance()->GetItem(filepath);
 	int h = img_data->GetHeight();
 	ImageTrim trim(*img_data);
