@@ -7,11 +7,12 @@
 #include "SymbolFile.h"
 #include "FileHelper.h"
 #include "Exception.h"
-#include "ImageTrim.h"
 #include "SymbolType.h"
 
 #include <gimg_typedef.h>
 #include <gimg_import.h>
+#include <pimg/Condense.h>
+#include <pimg/Rect.h>
 #include <sprite2/SymType.h>
 #include <sprite2/DrawRT.h>
 
@@ -195,26 +196,28 @@ void Bitmap::GetImage(const std::string& filepath, wxImage& dst_img)
 		inited = true;
 	}
 
-	ImageData* img_data = ImageDataMgr::Instance()->GetItem(filepath);
-	int h = img_data->GetHeight();
-	ImageTrim trim(*img_data);
-	sm::rect trim_r = trim.Trim();
-	img_data->RemoveReference();
-
-	if (trim_r.IsValid()) {
-		wxImage wx_img;
-		wx_img.LoadFile(filepath);
-
-		wxRect wx_rect;
-		wx_rect.SetLeft(trim_r.xmin);
-		wx_rect.SetRight(trim_r.xmax - 1);
-		wx_rect.SetTop(h - trim_r.ymax);
-		wx_rect.SetBottom(h - trim_r.ymin - 1);
-
-		dst_img = wx_img.GetSubImage(wx_rect);
-	} else {
+	ImageData* img = ImageDataMgr::Instance()->GetItem(filepath);
+	if (img->GetFormat() != GPF_RGBA) {
+		img->RemoveReference();
 		dst_img.LoadFile(filepath);
+		return;
 	}
+
+	pimg::Condense cd(img->GetPixelData(), img->GetWidth(), img->GetHeight());
+	pimg::Rect r = cd.GetRegion();
+	img->RemoveReference();
+
+	wxImage wx_img;
+	wx_img.LoadFile(filepath);
+
+	wxRect wx_rect;
+	int h = img->GetHeight();
+	wx_rect.SetLeft(r.xmin);
+	wx_rect.SetRight(r.xmax - 1);
+	wx_rect.SetTop(h - r.ymax);
+	wx_rect.SetBottom(h - r.ymin - 1);
+
+	dst_img = wx_img.GetSubImage(wx_rect);
 }
 
 }

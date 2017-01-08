@@ -12,11 +12,10 @@
 #include "Sprite.h"
 #include "Math2D.h"
 #include "SpriteRenderer.h"
-#include "ImageClip.h"
-#include "ImageTrim.h"
 #include "ImageData.h"
 
 #include <gimg_typedef.h>
+#include <pimg/Condense.h>
 #include <sprite2/S2_Sprite.h>
 #include <sprite2/Texture.h>
 #include <gum/GUM_DTex.h>
@@ -197,39 +196,35 @@ void Image::LoadWithClip(const std::string& filepath)
 	m_ori_w = img_data->GetWidth();
 	m_ori_h = img_data->GetHeight();
 
-	if (img_data->GetFormat() != GPF_RGBA) 
-	{
+	if (img_data->GetFormat() != GPF_RGBA) {
 		m_tex->LoadFromMemory(img_data->GetPixelData(), img_data->GetWidth(),
 			img_data->GetHeight(), img_data->GetFormat());
-	} 
-	else 
-	{
-		ImageTrim trim(*img_data);
-		sm::rect r = trim.Trim();
-		sm::vec2 sz = r.Size();
-		if (sz.x >= img_data->GetWidth() && sz.y >= img_data->GetHeight()) {
-			m_tex->LoadFromMemory(img_data->GetPixelData(), img_data->GetWidth(),
-				img_data->GetHeight(), img_data->GetFormat());
-		} else {
-			int w = img_data->GetWidth(),
-				h = img_data->GetHeight();
-
-			ImageClip clip(*img_data);
-			const uint8_t* c_pixels = clip.Clip(r);
-
-			sm::vec2 sz = r.Size();
-			img_data->SetContent(c_pixels, sz.x, sz.y);
-			m_tex->LoadFromMemory(img_data->GetPixelData(), img_data->GetWidth(),
-				img_data->GetHeight(), img_data->GetFormat());
-
-			sm::vec2 center = r.Center();
-			m_offset.x = center.x - w * 0.5f;
-			m_offset.y = center.y - h * 0.5f;
-
-			m_xmin = r.xmin;
-			m_ymin = r.ymin;
-		}
+		img_data->RemoveReference();
+		return;
 	}
+
+	pimg::Condense cd(img_data->GetPixelData(), img_data->GetWidth(), img_data->GetHeight());
+	pimg::Rect r;
+	uint8_t* c_pixels = cd.GetPixels(r);
+	if (!c_pixels) {
+		m_tex->LoadFromMemory(img_data->GetPixelData(), img_data->GetWidth(),
+			img_data->GetHeight(), img_data->GetFormat());
+		img_data->RemoveReference();
+		return;
+	}
+	
+	int w = img_data->GetWidth(),
+		h = img_data->GetHeight();
+
+	img_data->SetContent(c_pixels, r.Width(), r.Height());
+	m_tex->LoadFromMemory(img_data->GetPixelData(), img_data->GetWidth(),
+		img_data->GetHeight(), img_data->GetFormat());
+
+	m_offset.x = r.CenterX() - w * 0.5f;
+	m_offset.y = r.CenterY() - h * 0.5f;
+
+	m_xmin = r.xmin;
+	m_ymin = r.ymin;
 
 	img_data->RemoveReference();
 }

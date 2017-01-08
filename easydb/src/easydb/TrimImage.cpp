@@ -5,9 +5,7 @@
 #include <ee/FileHelper.h>
 #include <ee/Config.h>
 #include <ee/ImageData.h>
-#include <ee/ImageTrim.h>
 #include <ee/StringHelper.h>
-#include <ee/ImageClip.h>
 #include <ee/ConsoleProgressBar.h>
 #include <ee/SymbolFile.h>
 
@@ -15,6 +13,7 @@
 
 #include <gimg_typedef.h>
 #include <gimg_export.h>
+#include <pimg/Condense.h>
 #include <sprite2/SymType.h>
 
 #include <wx/filename.h>
@@ -171,7 +170,7 @@ void TrimImage::StoreBoundInfo(const ee::ImageData& img, const sm::rect& r,
 
 bool TrimImage::IsTransparent(const ee::ImageData& img, int x, int y) const
 {
-	if (img.GetChannels() != 4) {
+	if (img.GetFormat() != GPF_RGBA) {
 		return false;
 	} else {
 		return img.GetPixelData()[(img.GetWidth() * y + x) * 4 + 3] == 0;
@@ -182,10 +181,14 @@ void TrimImage::Trim(const std::string& filepath)
 {
 	ee::ImageData* img = ee::ImageDataMgr::Instance()->GetItem(filepath);
 
-	ee::ImageTrim trim(*img);
-	sm::rect r = trim.Trim();
-	bool trimed = r.IsValid();
-	if (!r.IsValid()) {
+	uint8_t* condense = NULL;
+	pimg::Rect r;
+	if (img->GetFormat() == GPF_RGBA)
+	{
+		pimg::Condense cd(img->GetPixelData(), img->GetWidth(), img->GetHeight());
+		condense = cd.GetPixels(r);
+	}
+	if (!condense) {
 		r.xmin = r.ymin = 0;
 		r.xmax = img->GetWidth();
 		r.ymax = img->GetHeight();
@@ -199,27 +202,22 @@ void TrimImage::Trim(const std::string& filepath)
 	spr_val["source size"]["h"] = img->GetHeight();
 	spr_val["position"]["x"] = r.xmin;
 	spr_val["position"]["y"] = img->GetHeight() - r.ymax;
-	const sm::vec2& sz = r.Size();
-	spr_val["position"]["w"] = sz.x;
-	spr_val["position"]["h"] = sz.y;
+	spr_val["position"]["w"] = r.Width();
+	spr_val["position"]["h"] = r.Height();
 	int64_t time = GetFileModifyTime(filepath);
 	spr_val["time"] = ee::StringHelper::ToString(time);
-	StoreBoundInfo(*img, r, spr_val);
+	StoreBoundInfo(*img, sm::rect(r.xmin, r.ymin, r.xmax, r.ymax), spr_val);
 	m_json_cfg.Insert(relative_path, spr_val, time);
 
 	std::string out_filepath = m_dst_dir + "\\" + relative_path,
 		out_dir = ee::FileHelper::GetFileDir(out_filepath);
 	ee::FileHelper::MkDir(out_dir, false);
 
-	if (trimed) {
-		ee::ImageClip clip(*img);
-		const uint8_t* pixels = clip.Clip(r.xmin, r.xmax, r.ymin, r.ymax);
-		float format = img->GetChannels() == 3 ? GPF_RGB : GPF_RGBA;
-		gimg_export(out_filepath.c_str(), pixels, sz.x, sz.y, format, true);
-		delete[] pixels;
+	if (condense) {
+		gimg_export(out_filepath.c_str(), condense, r.Width(), r.Height(), img->GetFormat(), true);
+		delete[] condense;
 	} else {
-		float format = img->GetChannels() == 3 ? GPF_RGB : GPF_RGBA;
-		gimg_export(out_filepath.c_str(), img->GetPixelData(), sz.x, sz.y, format, true);
+		gimg_export(out_filepath.c_str(), img->GetPixelData(), img->GetWidth(), img->GetHeight(), img->GetFormat(), true);
 	}
 
 	img->RemoveReference();

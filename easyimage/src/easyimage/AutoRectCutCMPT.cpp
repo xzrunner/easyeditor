@@ -8,12 +8,12 @@
 #include <ee/ImageSymbol.h>
 #include <ee/panel_msg.h>
 #include <ee/FileHelper.h>
-#include <ee/Image.h>
-#include <ee/ImageClip.h>
 #include <ee/StringHelper.h>
+#include <ee/ImageData.h>
 
 #include <gimg_typedef.h>
 #include <gimg_export.h>
+#include <pimg/Cropping.h>
 
 namespace eimage
 {
@@ -91,12 +91,10 @@ wxSizer* AutoRectCutCMPT::InitLayout()
 
 void AutoRectCutCMPT::OnCreateRects(wxCommandEvent& event)
 {
-	const ee::Sprite* spr = m_stage->GetImage();
-	const ee::ImageSymbol* sym = dynamic_cast<const ee::ImageSymbol*>(spr->GetSymbol());
-	assert(sym);
-	const ee::Image* img = sym->GetImage();
+	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(m_stage->GetImage()->GetSymbol());
+	ee::ImageData* img = ee::ImageDataMgr::Instance()->GetItem(sym->GetFilepath());
 
-	RegularRectCut cut(*img);
+	RegularRectCut cut(img->GetPixelData(), img->GetWidth(), img->GetHeight());
 	cut.AutoCut();
 
 	const std::vector<Rect>& result = cut.GetResult();
@@ -113,33 +111,38 @@ void AutoRectCutCMPT::OnCreateRects(wxCommandEvent& event)
 
 	std::string msg = ee::StringHelper::Format("Left: %d, Used: %d", cut.GetLeftArea(), cut.GetUseArea());
 	wxMessageBox(msg, wxT("Statics"), wxOK | wxICON_INFORMATION, this);
+
+	img->RemoveReference();
 }
 
 void AutoRectCutCMPT::OnOutputRects(wxCommandEvent& event)
 {
-	const ee::Sprite* spr = m_stage->GetImage();
-	const ee::ImageSymbol* sym = dynamic_cast<const ee::ImageSymbol*>(spr->GetSymbol());
-	assert(sym);
-	const ee::Image* img = sym->GetImage();
+	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(m_stage->GetImage()->GetSymbol());
+	ee::ImageData* img = ee::ImageDataMgr::Instance()->GetItem(sym->GetFilepath());
 
-	RegularRectCut cut(*img);
+	RegularRectCut cut(img->GetPixelData(), img->GetWidth(), img->GetHeight());
 	cut.AutoCut();
 
 	std::string msg = ee::StringHelper::Format("Left: %d, Used: %d", cut.GetLeftArea(), cut.GetUseArea());
 	wxMessageBox(msg, wxT("Statics"), wxOK | wxICON_INFORMATION, this);
 
+	assert(img->GetFormat() == GPF_RGB || img->GetFormat() == GPF_RGBA);
+	int channels = img->GetFormat() == GPF_RGB ? 3 : 4;
+	pimg::Cropping crop(img->GetPixelData(), img->GetWidth(), img->GetHeight(), channels);
+
 	std::string ori_path = ee::FileHelper::GetFilePathExceptExtension(img->GetFilepath());
-	ee::ImageClip img_cut(*img->GetImageData());
 	const std::vector<Rect>& result = cut.GetResult();
 	for (int i = 0, n = result.size(); i < n; ++i) 
 	{
 		const eimage::Rect& r = result[i];
-		const uint8_t* pixels = img_cut.Clip(r.x, r.x+r.w, r.y, r.y+r.h);
+		uint8_t* pixels = crop.Crop(r.x, r.y, r.x+r.w, r.y+r.h);
 
 		std::string out_path = ee::StringHelper::Format("%s#%d#%d#%d#%d#.png", ori_path.c_str(), r.x, r.y, r.w, r.h);
 		gimg_export(out_path.c_str(), pixels, r.w, r.h, GPF_RGBA, true);
 		delete[] pixels;
 	}
+
+	img->RemoveReference();
 }
 
 }

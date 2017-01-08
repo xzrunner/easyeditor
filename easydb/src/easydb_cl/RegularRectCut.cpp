@@ -6,13 +6,13 @@
 #include <ee/SymbolMgr.h>
 #include <ee/StringHelper.h>
 #include <ee/ImageSymbol.h>
-#include <ee/ImageClip.h>
-#include <ee/Image.h>
+#include <ee/ImageData.h>
 
 #include <easyimage.h>
 
 #include <gimg_typedef.h>
 #include <gimg_export.h>
+#include <pimg/Cropping.h>
 #include <sprite2/SymType.h>
 
 #include <wx/arrstr.h>
@@ -63,8 +63,8 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 		{
 			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 
-			ee::Image* image = static_cast<ee::ImageSymbol*>(sym)->GetImage();
-			eimage::RegularRectCut cut(*image);
+			ee::ImageData* img = ee::ImageDataMgr::Instance()->GetItem(filepath);		
+			eimage::RegularRectCut cut(img->GetPixelData(), img->GetWidth(), img->GetHeight());
 			cut.AutoCut();
 
 			std::cout << ee::StringHelper::Format("File: %s, Left: %d, Used: %d", filepath.c_str(), cut.GetLeftArea(), cut.GetUseArea()) << std::endl;
@@ -73,18 +73,22 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 			filename = filename.substr(0, filename.find_last_of('.'));
 			ee::StringHelper::ReplaceAll(filename, "\\", "%");
 			
+			assert(img->GetFormat() == GPF_RGB || img->GetFormat() == GPF_RGBA);
+			int channels = img->GetFormat() == GPF_RGB ? 3 : 4;
+			pimg::Cropping crop(img->GetPixelData(), img->GetWidth(), img->GetHeight(), channels, true);
+
 			const std::vector<eimage::Rect>& result = cut.GetResult();
-			ee::ImageClip img_cut(*image->GetImageData(), true);
 			for (int i = 0, n = result.size(); i < n; ++i)
 			{
 				const eimage::Rect& r = result[i];
-				const uint8_t* pixels = img_cut.Clip(r.x, r.x+r.w, r.y, r.y+r.h);
+				const uint8_t* pixels = crop.Crop(r.x, r.y, r.x+r.w, r.y+r.h);
 
 				std::string out_path = ee::StringHelper::Format("%s\\%s#%d#%d#%d#%d#", dst_dir.c_str(), filename.c_str(), r.x, r.y, r.w, r.h) + ".png";
 				gimg_export(out_path.c_str(), pixels, r.w, r.h, GPF_RGBA, true);
 				delete[] pixels;
 			}
 
+			img->RemoveReference();
 			sym->RemoveReference();
 		}
 	}

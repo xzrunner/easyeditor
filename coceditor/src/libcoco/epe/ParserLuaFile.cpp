@@ -1,7 +1,6 @@
 #include "ParserLuaFile.h"
 
 #include <ee/Image.h>
-#include <ee/ImageClip.h>
 #include <ee/DummySprite.h>
 #include <ee/DummySymbol.h>
 #include <ee/SymbolFile.h>
@@ -17,6 +16,7 @@
 
 #include <gimg_typedef.h>
 #include <gimg_export.h>
+#include <pimg/Cropping.h>
 #include <sprite2/SymType.h>
 #include <sprite2/RenderColor.h>
 #include <gum/trans_color.h>
@@ -330,9 +330,10 @@ void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames
 			Picture::Part* part = pic->parts[i];
 
 			ee::ImageData* img_data = ee::ImageDataMgr::Instance()->GetItem(images[part->tex]->GetFilepath());
-			ee::ImageClip clip(*img_data);
-
-			const uint8_t* pixels = clip.Clip(part->xmin, part->xmax, part->ymin, part->ymax);
+			assert(img_data->GetFormat() == GPF_RGB || img_data->GetFormat() == GPF_RGBA);
+			int channels = img_data->GetFormat() == GPF_RGB ? 3 : 4;
+			pimg::Cropping crop(img_data->GetPixelData(), img_data->GetWidth(), img_data->GetHeight(), channels);
+			const uint8_t* pixels = crop.Crop(part->xmin, part->ymin, part->xmax, part->ymax);
 			if (pixels) 
 			{
 				int width = part->xmax-part->xmin,

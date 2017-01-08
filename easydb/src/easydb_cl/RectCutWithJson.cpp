@@ -3,8 +3,6 @@
 
 #include <ee/FileHelper.h>
 #include <ee/ImageData.h>
-#include <ee/ImageTrim.h>
-#include <ee/ImageClip.h>
 #include <ee/StringHelper.h>
 #include <ee/DummySprite.h>
 #include <ee/DummySymbol.h>
@@ -19,6 +17,9 @@
 
 #include <gimg_typedef.h>
 #include <gimg_export.h>
+#include <pimg/Condense.h>
+#include <pimg/Cropping.h>
+#include <pimg/Rect.h>
 #include <sprite2/SymType.h>
 
 namespace edb
@@ -131,19 +132,19 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 
 		return;
 	}
-
-	ee::ImageTrim trim(*img);
-	sm::rect img_r = trim.Trim();
-	if (!img_r.IsValid()) {
-		img_r.xmin = img_r.ymin = 0;
-		img_r.xmax = img->GetWidth();
-		img_r.ymax = img->GetHeight();
+	
+	uint8_t* condense = NULL;
+	pimg::Rect pr;
+	if (img->GetFormat() == GPF_RGBA)
+	{
+		pimg::Condense cd(img->GetPixelData(), img->GetWidth(), img->GetHeight());
+		condense = cd.GetPixels(pr);
 	}
-
-	ee::ImageClip clip(*img);
-	const uint8_t* pixels = clip.Clip(img_r.xmin, img_r.xmax, img_r.ymin, img_r.ymax);
-	const sm::vec2& sz = img_r.Size();
-	ee::ImageData* img_trimed = new ee::ImageData(pixels, sz.x, sz.y, img->GetFormat());
+	if (!condense) {
+		pr.xmin = pr.ymin = 0;
+		pr.xmax = img->GetWidth();
+		pr.ymax = img->GetHeight();
+	}
 
 	std::string filename = ee::FileHelper::GetRelativePath(src_dir, filepath);
 	filename = filename.substr(0, filename.find_last_of('.'));
@@ -151,14 +152,18 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 
 	ecomplex::Symbol complex;
 
-	eimage::RegularRectCut rect_cut(pixels, sz.x, sz.y);
+	const uint8_t* pixel = condense ? condense : img->GetPixelData();
+	eimage::RegularRectCut rect_cut(pixel, pr.Width(), pr.Height());
 	rect_cut.AutoCut();
+
+	int channels = img->GetFormat() == GPF_RGB ? 3 : 4;
+	pimg::Cropping img_cut(pixel, pr.Width(), pr.Height(), channels);
+
 	const std::vector<eimage::Rect>& rects = rect_cut.GetResult();
-	ee::ImageClip img_cut(*img_trimed, true);
 	for (int i = 0, n = rects.size(); i < n; ++i) 
 	{
 		const eimage::Rect& r = rects[i];
-		const uint8_t* pixels = img_cut.Clip(r.x, r.x+r.w, r.y, r.y+r.h);
+		const uint8_t* pixels = img_cut.Crop(r.x, r.y, r.x+r.w, r.y+r.h);
 
 		std::string img_name = ee::StringHelper::Format("%s#%d#%d#%d#%d#.png", filename.c_str(), r.x, r.y, r.w, r.h);
 		std::string img_out_path = out_img_dir + "\\" + img_name;
@@ -169,8 +174,8 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 		std::string spr_path = std::string(out_img_dir + "\\" + img_name);
 		ee::Sprite* spr = new ee::DummySprite(new ee::DummySymbol(spr_path, r.w, r.h));
 		sm::vec2 offset;
-		offset.x = img_r.xmin + r.x + r.w * 0.5f - img->GetWidth() * 0.5f;
-		offset.y = img_r.ymin + r.y + r.h * 0.5f - img->GetHeight() * 0.5f;
+		offset.x = pr.xmin + r.x + r.w * 0.5f - img->GetWidth() * 0.5f;
+		offset.y = pr.ymin + r.y + r.h * 0.5f - img->GetHeight() * 0.5f;
 		spr->Translate(offset);
 		complex.Add(spr);
 	}
@@ -178,8 +183,9 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 	std::string json_out_path = out_json_dir + "\\" + filename + "_complex.json";
 	ecomplex::FileStorer::Store(json_out_path, &complex, out_json_dir);
 
+	delete[] condense;
+
 	img->RemoveReference();
-	img_trimed->RemoveReference();
 }
 
 void RectCutWithJson::FixComplex(const std::string& src_dir, const std::string& dst_dir, const std::string& filepath) const

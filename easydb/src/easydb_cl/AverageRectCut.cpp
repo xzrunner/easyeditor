@@ -3,8 +3,6 @@
 
 #include <ee/FileHelper.h>
 #include <ee/ImageData.h>
-#include <ee/ImageTrim.h>
-#include <ee/ImageClip.h>
 #include <ee/StringHelper.h>
 #include <ee/DummySprite.h>
 #include <ee/DummySymbol.h>
@@ -16,6 +14,9 @@
 
 #include <gimg_typedef.h>
 #include <gimg_export.h>
+#include <pimg/Condense.h>
+#include <pimg/Cropping.h>
+#include <pimg/Rect.h>
 #include <sprite2/SymType.h>
 
 namespace edb
@@ -97,32 +98,34 @@ void AverageRectCut::RectCutImage(const std::string& src_dir, const std::string&
 	std::string out_json_dir = dst_dir + "\\" + JSON_DIR;
 
 	ee::ImageData* img = ee::ImageDataMgr::Instance()->GetItem(filepath);		
+	assert(img->GetFormat() == GPF_RGB || img->GetFormat() == GPF_RGBA);
+	int channels = img->GetFormat() == GPF_RGB ? 3 : 4;
 
-	ee::ImageTrim trim(*img);
-	sm::rect img_r = trim.Trim();
-	if (!img_r.IsValid()) {
-		img_r.xmin = img_r.ymin = 0;
-		img_r.xmax = img->GetWidth();
-		img_r.ymax = img->GetHeight();
+	uint8_t* condense = NULL;
+	pimg::Rect pr;
+	if (img->GetFormat() == GPF_RGBA)
+	{
+		pimg::Condense cd(img->GetPixelData(), img->GetWidth(), img->GetHeight());
+		condense = cd.GetPixels(pr);
 	}
-
-	const sm::vec2& sz = img_r.Size();
-
-	ee::ImageClip clip(*img);
-	const uint8_t* pixels = clip.Clip(img_r.xmin, img_r.xmax, img_r.ymin, img_r.ymax);
-	ee::ImageData* img_trimed = new ee::ImageData(pixels, sz.x, sz.y, GPF_RGBA);
+	if (!condense) {
+		pr.xmin = pr.ymin = 0;
+		pr.xmax = img->GetWidth();
+		pr.ymax = img->GetHeight();
+	}
+	const uint8_t* pixels = condense ? condense : img->GetPixelData();
 
 	std::string filename = ee::FileHelper::GetRelativePath(src_dir, filepath);
 	filename = filename.substr(0, filename.find_last_of('.'));
 	ee::StringHelper::ReplaceAll(filename, "\\", "%");
 
 	ecomplex::Symbol complex;
-	ee::ImageClip img_cut(*img_trimed, false);
+	pimg::Cropping img_cut(pixels, pr.Width(), pr.Height(), channels);
 
-	int row = std::ceil(sz.y / min_edge),
-		col = std::ceil(sz.x / min_edge);
-	float xedge = sz.x / col,
-		  yedge = sz.y / row;
+	int row = std::ceil((float)pr.Width() / min_edge),
+		col = std::ceil((float)pr.Height() / min_edge);
+	float xedge = (float)pr.Width() / col,
+		  yedge = (float)pr.Height()  / row;
 	for (int y = 0; y < row; ++y) {
 		for (int x = 0; x < col; ++x) {
 			int xmin = std::floor(xedge * x),
@@ -130,15 +133,15 @@ void AverageRectCut::RectCutImage(const std::string& src_dir, const std::string&
 			int xmax = std::floor(xedge * (x + 1)),
 				ymax = std::floor(yedge * (y + 1));
 			if (x == col - 1) {
-				xmax = sz.x;
+				xmax = pr.Width();
 			}
 			if (y == row - 1) {
-				ymax = sz.y;
+				ymax = pr.Height();
 			}
 
 			int w = xmax - xmin,
 				h = ymax - ymin;
-			const uint8_t* pixels = img_cut.Clip(xmin, xmax, ymin, ymax);
+			const uint8_t* pixels = img_cut.Crop(xmin, ymin, xmax, ymax);
 
 			std::string img_name = ee::StringHelper::Format("%s#%d#%d#%d#%d#.png", filename.c_str(), xmin, ymin, w, h);
 			std::string img_out_path = out_img_dir + "\\" + img_name;
@@ -148,18 +151,19 @@ void AverageRectCut::RectCutImage(const std::string& src_dir, const std::string&
 			std::string spr_path = std::string(out_img_dir + "\\" + img_name);
 			ee::Sprite* spr = new ee::DummySprite(new ee::DummySymbol(spr_path, w, h));
 			sm::vec2 offset;
-			offset.x = img_r.xmin + xmin + w * 0.5f - img->GetWidth() * 0.5f;
-			offset.y = img_r.ymin + ymin + h * 0.5f - img->GetHeight() * 0.5f;
+			offset.x = pr.xmin + xmin + w * 0.5f - img->GetWidth() * 0.5f;
+			offset.y = pr.ymin + ymin + h * 0.5f - img->GetHeight() * 0.5f;
 			spr->Translate(offset);
 			complex.Add(spr);
 		}
 	}
 
+	delete[] condense;
+
 	std::string json_out_path = out_json_dir + "\\" + filename + "_complex.json";
 	ecomplex::FileStorer::Store(json_out_path, &complex, out_json_dir);
 
 	img->RemoveReference();
-	img_trimed->RemoveReference();
 }
 
 void AverageRectCut::FixComplex(const std::string& src_dir, const std::string& dst_dir, const std::string& filepath) const

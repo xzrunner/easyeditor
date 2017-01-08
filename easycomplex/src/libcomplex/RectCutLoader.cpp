@@ -6,7 +6,6 @@
 #include <ee/Sprite.h>
 #include <ee/sprite_msg.h>
 #include <ee/FileHelper.h>
-#include <ee/ImageClip.h>
 #include <ee/ImageData.h>
 #include <ee/Image.h>
 #include <ee/ImageSymbol.h>
@@ -16,6 +15,7 @@
 #include <easyimage.h>
 
 #include <gimg_typedef.h>
+#include <pimg/Cropping.h>
 
 #include <json/json.h>
 
@@ -56,12 +56,18 @@ void RectCutLoader::LoadJsonAndImg(const std::string& pack_file, const std::stri
 
 	std::string dir = ee::FileHelper::GetFileDir(pack_file);
 	ee::ImageData* img = ee::ImageDataMgr::Instance()->GetItem(dir + "\\pack.png");
-
-	ee::ImageClip clip(*img);
+	assert(img->GetFormat() == GPF_RGB || img->GetFormat() == GPF_RGBA);
+	int channels = img->GetFormat() == GPF_RGB ? 3 : 4;
+	pimg::Cropping crop(img->GetPixelData(), img->GetWidth(), img->GetHeight(), channels);
 	for (int i = 0, n = pictures.size(); i < n; ++i)
 	{		
 		const Picture& pic = pictures[i];
-		const uint8_t* pixels = clip.Clip(pic.dst.x, pic.dst.x + pic.dst.w, 1024 - pic.dst.y - pic.dst.h, 1024 - pic.dst.y);
+
+		int xmin = pic.dst.x,
+			xmax = pic.dst.x + pic.dst.w,
+			ymin = 1024 - pic.dst.y - pic.dst.h,
+			ymax = 1024 - pic.dst.y;
+		uint8_t* pixels = crop.Crop(xmin, ymin, xmax, ymax);
 
 		ee::Image* spr_img = new ee::Image(pixels, pic.dst.w, pic.dst.h, GPF_RGBA);
 		ee::ImageSymbol* spr_symbol = new ee::ImageSymbol(spr_img, "test");
