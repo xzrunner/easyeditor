@@ -9,6 +9,7 @@
 #include <ee/ImageSprite.h>
 #include <ee/SpriteFactory.h>
 #include <ee/FileHelper.h>
+#include <ee/ImageData.h>
 
 #include <easycomplex.h>
 #include <easyanim.h>
@@ -328,8 +329,8 @@ void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames
 		{
 			Picture::Part* part = pic->parts[i];
 
-			const ee::ImageData* image = images[part->tex]->GetImageData();
-			ee::ImageClip clip(*image);
+			ee::ImageData* img_data = ee::ImageDataMgr::Instance()->GetItem(images[part->tex]->GetFilepath());
+			ee::ImageClip clip(*img_data);
 
 			const uint8_t* pixels = clip.Clip(part->xmin, part->xmax, part->ymin, part->ymax);
 			if (pixels) 

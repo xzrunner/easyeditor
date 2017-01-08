@@ -6,8 +6,6 @@
 namespace ee
 {
 
-class ImageData;
-
 class TextureImgData : public Texture
 {
 public:
@@ -18,21 +16,19 @@ public:
 
 	virtual std::string GetFilepath() const;
 
-	virtual const uint8_t* GetPixelData() const;
 	virtual int GetWidth() const;
 	virtual int GetHeight() const;
-	virtual int GetChannels() const;
+	virtual int GetFormat() const;
 
-	virtual void LoadFromFile(const std::string& filepath);
-	virtual void LoadFromMemory(ImageData* img_data);
-	virtual void Reload();
-
-	virtual const ImageData* GetImageData() const { return m_img_data; }
+	virtual void LoadFromMemory(const uint8_t* pixels, int w, int h, int fmt);
 
 private:
-	unsigned int m_texid;
+	std::string m_filepath;
 
-	ImageData* m_img_data;
+	int m_width, m_height;
+	int m_format;
+
+	unsigned int m_texid;
 
 }; // TextureImgData
 

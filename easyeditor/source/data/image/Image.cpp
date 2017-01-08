@@ -7,7 +7,6 @@
 #include "TextureRT.h"
 //#include "BlendShader.h"
 #include "SettingData.h"
-#include "ImageData.h"
 #include "TextureFactory.h"
 #include "FileHelper.h"
 #include "Sprite.h"
@@ -15,7 +14,9 @@
 #include "SpriteRenderer.h"
 #include "ImageClip.h"
 #include "ImageTrim.h"
+#include "ImageData.h"
 
+#include <gimg_typedef.h>
 #include <sprite2/S2_Sprite.h>
 #include <sprite2/Texture.h>
 #include <gum/GUM_DTex.h>
@@ -30,10 +31,10 @@ Image::Image()
 	m_xmin = m_ymin = 0;
 }
 
-Image::Image(ImageData* img_data)
+Image::Image(const uint8_t* pixels, int w, int h, int fmt)
 {
 	m_tex = new TextureImgData;
-	m_tex->LoadFromMemory(img_data);
+	m_tex->LoadFromMemory(pixels, w, h, fmt);
 
 	m_ori_w = static_cast<float>(m_tex->GetWidth());
 	m_ori_h = static_cast<float>(m_tex->GetHeight());
@@ -59,12 +60,17 @@ Image::~Image()
 
 bool Image::LoadFromFile(const std::string& filepath)
 {
-	if (!Config::Instance()->GetSettings().load_image) {
-		m_tex->LoadFromMemory(ImageDataMgr::Instance()->GetItem(filepath));
+	if (!Config::Instance()->GetSettings().load_image) 
+	{
+		ImageData* img_data = ImageDataMgr::Instance()->GetItem(filepath);
+		m_tex->LoadFromMemory(img_data->GetPixelData(), img_data->GetWidth(), img_data->GetHeight(), img_data->GetFormat());
+		img_data->RemoveReference();
+
 		int w, h;
 		TextureFactory::Instance()->Load(filepath, m_ori_w, m_ori_h, w, h, m_offset);
 		m_s2_tex->Init(w, h, 0);
 		m_s2_tex->InitOri(m_ori_w, m_ori_h);
+
 		return true;
 	}
 
@@ -75,9 +81,10 @@ bool Image::LoadFromFile(const std::string& filepath)
 	//////////////////////////////////////////////////////////////////////////
 	if (Config::Instance()->GetSettings().open_image_edge_clip) {
 		LoadWithClip(filepath);
-		
 	} else {
-		m_tex->LoadFromFile(filepath);
+		ImageData* img_data = ImageDataMgr::Instance()->GetItem(filepath);
+		m_tex->LoadFromMemory(img_data->GetPixelData(), img_data->GetWidth(), img_data->GetHeight(), img_data->GetFormat());
+		img_data->RemoveReference();
 		m_ori_w = m_tex->GetWidth();
 		m_ori_h = m_tex->GetHeight();
 	}
@@ -106,15 +113,6 @@ bool Image::LoadFromFile(const std::string& filepath)
 	return true;
 }
 
-void Image::ReloadTexture()
-{
-	m_tex->Reload();
-
-	if (Config::Instance()->IsUseDTex() && CanUseDTex()) {
-//		gum::DTex::Instance()->Reload(this);
-	}
-}
-
 std::string Image::GetFilepath() const 
 { 
 	return m_tex->GetFilepath(); 
@@ -123,11 +121,6 @@ std::string Image::GetFilepath() const
 unsigned int Image::GetTexID() const 
 { 
 	return m_tex->GetTexID(); 
-}
-
-int Image::GetChannels() const 
-{ 
-	return m_tex->GetChannels(); 
 }
 
 int Image::GetOriginWidth() const 
@@ -148,11 +141,6 @@ int Image::GetClippedWidth() const
 int Image::GetClippedHeight() const 
 { 
 	return m_tex->GetHeight(); 
-}
-
-const uint8_t* Image::GetPixelData() const 
-{ 
-	return m_tex->GetPixelData(); 
 }
 
 void Image::InvalidRect(const sm::mat4& mt) const
@@ -176,11 +164,6 @@ void Image::InvalidRect(const sm::mat4& mt) const
 	}
 	ScreenCache::Instance()->InvalidRect(xmin, ymin, xmax, ymax);
 #endif // OPEN_SCREEN_CACHE
-}
-
-const ImageData* Image::GetImageData() const 
-{ 
-	return m_tex->GetImageData(); 
 }
 
 void Image::QueryTexcoords(float* texcoords, int* texid) const
@@ -214,9 +197,10 @@ void Image::LoadWithClip(const std::string& filepath)
 	m_ori_w = img_data->GetWidth();
 	m_ori_h = img_data->GetHeight();
 
-	if (img_data->GetChannels() != 4) 
+	if (img_data->GetFormat() != GPF_RGBA) 
 	{
-		m_tex->LoadFromMemory(img_data);
+		m_tex->LoadFromMemory(img_data->GetPixelData(), img_data->GetWidth(),
+			img_data->GetHeight(), img_data->GetFormat());
 	} 
 	else 
 	{
@@ -224,7 +208,8 @@ void Image::LoadWithClip(const std::string& filepath)
 		sm::rect r = trim.Trim();
 		sm::vec2 sz = r.Size();
 		if (sz.x >= img_data->GetWidth() && sz.y >= img_data->GetHeight()) {
-			m_tex->LoadFromMemory(img_data);
+			m_tex->LoadFromMemory(img_data->GetPixelData(), img_data->GetWidth(),
+				img_data->GetHeight(), img_data->GetFormat());
 		} else {
 			int w = img_data->GetWidth(),
 				h = img_data->GetHeight();
@@ -234,7 +219,8 @@ void Image::LoadWithClip(const std::string& filepath)
 
 			sm::vec2 sz = r.Size();
 			img_data->SetContent(c_pixels, sz.x, sz.y);
-			m_tex->LoadFromMemory(img_data);
+			m_tex->LoadFromMemory(img_data->GetPixelData(), img_data->GetWidth(),
+				img_data->GetHeight(), img_data->GetFormat());
 
 			sm::vec2 center = r.Center();
 			m_offset.x = center.x - w * 0.5f;

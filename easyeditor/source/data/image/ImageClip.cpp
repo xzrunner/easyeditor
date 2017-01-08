@@ -1,6 +1,10 @@
 #include "ImageClip.h"
 #include "ImageData.h"
 
+#include <gimg_typedef.h>
+
+#include <assert.h>
+
 namespace ee
 {
 
@@ -33,9 +37,11 @@ const uint8_t* ImageClip::Clip(const sm::rect& r) const
 const uint8_t* ImageClip::Clip(int xmin, int xmax, int ymin, int ymax) const
 {
 	const uint8_t* pixels = m_img_data.GetPixelData();
-	int width = m_img_data.GetWidth(),
+	int width  = m_img_data.GetWidth(),
 		height = m_img_data.GetHeight();
-	int channels = m_img_data.GetChannels();
+	int fmt = m_img_data.GetFormat();
+	assert(fmt == GPF_RGB || fmt == GPF_RGBA);
+	int channels = fmt == GPF_RGB ? 3 : 4;
 
 	if (!pixels || width <= 0 || height <= 0) {
 		return NULL;

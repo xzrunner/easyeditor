@@ -17,7 +17,7 @@ class ImageData : public cu::RefCountObj
 {
 public:
 	ImageData();
-	ImageData(const uint8_t* pixels, int w, int h, int c);
+	ImageData(const uint8_t* pixels, int w, int h, int fmt);
 	virtual ~ImageData();
 
 	bool LoadFromFile(const std::string& filepath);
@@ -27,7 +27,6 @@ public:
 	const uint8_t* GetPixelData() const { return m_pixels; }
 	int GetWidth() const { return m_width; }
 	int GetHeight() const { return m_height; }
-	int GetChannels() const { return m_channels; }
 	int GetFormat() const { return m_format; }
 
 	void SetContent(const uint8_t* pixels, int width, int height);
@@ -37,7 +36,6 @@ private:
 
 	const uint8_t* m_pixels;
 	int m_width, m_height;
-	int m_channels;
 	int m_format;
 
 }; // ImageData

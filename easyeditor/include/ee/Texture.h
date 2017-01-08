@@ -19,16 +19,11 @@ public:
 
 	virtual std::string GetFilepath() const { return ""; }
 
-	virtual const uint8_t* GetPixelData() const { return NULL; }
 	virtual int GetWidth() const = 0;
 	virtual int GetHeight() const = 0;
-	virtual int GetChannels() const = 0;
+	virtual int GetFormat() const = 0;
 
-	virtual void LoadFromFile(const std::string& filepath) {}
-	virtual void LoadFromMemory(ImageData* img_data) {}
-	virtual void Reload() = 0;
-
-	virtual const ImageData* GetImageData() const { return NULL; }
+	virtual void LoadFromMemory(const uint8_t* pixels, int w, int h, int fmt) {}
 
 }; // Texture
 

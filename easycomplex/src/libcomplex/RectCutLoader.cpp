@@ -15,6 +15,8 @@
 
 #include <easyimage.h>
 
+#include <gimg_typedef.h>
+
 #include <json/json.h>
 
 #include <fstream>
@@ -61,8 +63,7 @@ void RectCutLoader::LoadJsonAndImg(const std::string& pack_file, const std::stri
 		const Picture& pic = pictures[i];
 		const uint8_t* pixels = clip.Clip(pic.dst.x, pic.dst.x + pic.dst.w, 1024 - pic.dst.y - pic.dst.h, 1024 - pic.dst.y);
 
-		ee::ImageData* img_data = new ee::ImageData(pixels, pic.dst.w, pic.dst.h, 4);
-		ee::Image* spr_img = new ee::Image(img_data);
+		ee::Image* spr_img = new ee::Image(pixels, pic.dst.w, pic.dst.h, GPF_RGBA);
 		ee::ImageSymbol* spr_symbol = new ee::ImageSymbol(spr_img, "test");
 		ee::ImageSprite* spr_sprite = new ee::ImageSprite(spr_symbol);
 
@@ -82,7 +83,6 @@ void RectCutLoader::LoadJsonAndImg(const std::string& pack_file, const std::stri
 		
 		ee::InsertSpriteSJ::Instance()->Insert(spr_sprite);
 
-		img_data->RemoveReference();
 		spr_sprite->RemoveReference();
 		spr_symbol->RemoveReference();
 		spr_img->RemoveReference();

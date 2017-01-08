@@ -108,7 +108,7 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 	std::string out_json_dir = dst_dir + "\\" + JSON_DIR;
 
 	ee::ImageData* img = ee::ImageDataMgr::Instance()->GetItem(filepath);
-	if (img->GetChannels() == 3) 
+	if (img->GetFormat() == GPF_RGB) 
 	{
 		std::string filename = ee::FileHelper::GetRelativePath(src_dir, filepath);
 		filename = filename.substr(0, filename.find_last_of('.'));
@@ -118,8 +118,7 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 
 		std::string img_name = ee::StringHelper::Format("%s#%d#%d#%d#%d#.png", filename.c_str(), 0, 0, img->GetWidth(), img->GetHeight());
 		std::string img_out_path = out_img_dir + "\\" + img_name;
-		int format = img->GetChannels() == 3 ? GPF_RGB : GPF_RGBA;
-		gimg_export(img_out_path.c_str(), img->GetPixelData(), img->GetWidth(), img->GetHeight(), format, true);
+		gimg_export(img_out_path.c_str(), img->GetPixelData(), img->GetWidth(), img->GetHeight(), img->GetFormat(), true);
 
 		std::string spr_path = std::string(out_img_dir + "\\" + img_name);
 		ee::Sprite* spr = new ee::DummySprite(new ee::DummySymbol(spr_path, img->GetWidth(), img->GetHeight()));
@@ -144,7 +143,7 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 	ee::ImageClip clip(*img);
 	const uint8_t* pixels = clip.Clip(img_r.xmin, img_r.xmax, img_r.ymin, img_r.ymax);
 	const sm::vec2& sz = img_r.Size();
-	ee::ImageData* img_trimed = new ee::ImageData(pixels, sz.x, sz.y, img->GetChannels());
+	ee::ImageData* img_trimed = new ee::ImageData(pixels, sz.x, sz.y, img->GetFormat());
 
 	std::string filename = ee::FileHelper::GetRelativePath(src_dir, filepath);
 	filename = filename.substr(0, filename.find_last_of('.'));
@@ -163,8 +162,7 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 
 		std::string img_name = ee::StringHelper::Format("%s#%d#%d#%d#%d#.png", filename.c_str(), r.x, r.y, r.w, r.h);
 		std::string img_out_path = out_img_dir + "\\" + img_name;
-		int format = img->GetChannels() == 3 ? GPF_RGB : GPF_RGBA;
-		gimg_export(img_out_path.c_str(), pixels, r.w, r.h, format, true);
+		gimg_export(img_out_path.c_str(), pixels, r.w, r.h, img->GetFormat(), true);
 
 		delete[] pixels;
 

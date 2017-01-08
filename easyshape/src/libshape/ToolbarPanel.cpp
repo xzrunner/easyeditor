@@ -20,7 +20,7 @@
 #include <ee/SelectShapesOP.h>
 #include <ee/shape_msg.h>
 #include <ee/ImageSymbol.h>
-#include <ee/Image.h>
+#include <ee/ImageData.h>
 #include <ee/FetchAllVisitor.h>
 
 namespace eshape
@@ -115,13 +115,13 @@ void ToolbarPanel::OnCreateBounding(wxCommandEvent& event)
 
 	ee::ClearShapeSJ::Instance()->Clear();
 
-	ee::Image* img = img_symbol->GetImage();
-	eimage::ExtractOutlineRaw raw(*img);
+	ee::ImageData* img_data = ee::ImageDataMgr::Instance()->GetItem(img_symbol->GetFilepath());
+	eimage::ExtractOutlineRaw raw(img_data->GetPixelData(), img_data->GetWidth(), img_data->GetHeight());
 	raw.CreateBorderLineAndMerge();
 	eimage::ExtractOutlineFine fine(raw.GetBorderLine(), raw.GetBorderLineMerged());
 	fine.Trigger(0.04f, 0.2f);
 
-	sm::vec2 offset(-img->GetClippedWidth()*0.5f, -img->GetClippedHeight()*0.5f);
+	sm::vec2 offset(-img_data->GetWidth()*0.5f, -img_data->GetHeight()*0.5f);
 	std::vector<sm::vec2> bounding = fine.GetResult();
 	for (int i = 0, n = bounding.size(); i < n; ++i) {
 		bounding[i] += offset;
@@ -131,6 +131,8 @@ void ToolbarPanel::OnCreateBounding(wxCommandEvent& event)
 	poly->RemoveReference();
 
 	SetChoice(3);
+
+	img_data->RemoveReference();
 }
 
 void ToolbarPanel::SelectSuitableEditOP()

@@ -10,6 +10,8 @@
 
 #include <easyrespacker.h>
 
+#include <gimg_typedef.h>
+
 namespace ecomplex
 {
 
@@ -99,12 +101,10 @@ void LoadFromBin::LoadImage(uint8_t** ptr, std::vector<ee::Image*>& images)
 	erespacker::unpack(w, ptr);
 	erespacker::unpack(h, ptr);
 
-	const int c = 4;
-	int buf_sz = w * h * c;
+	int buf_sz = w * h * 4;
 	uint8_t* buf = new uint8_t[buf_sz];
 	memcpy(buf, *ptr, buf_sz);
-	ee::ImageData* data = new ee::ImageData(buf, w, h, c);
-	images.push_back(new ee::Image(data));
+	images.push_back(new ee::Image(buf, w, h, GPF_RGBA));
 }
 
 }

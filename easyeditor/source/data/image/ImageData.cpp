@@ -15,17 +15,15 @@ ImageData::ImageData()
 	: m_pixels(NULL)
 	, m_width(0)
 	, m_height(0)
-	, m_channels(0)
 	, m_format(0)
 {
 }
 
-ImageData::ImageData(const uint8_t* pixels, int w, int h, int c)
+ImageData::ImageData(const uint8_t* pixels, int w, int h, int fmt)
 	: m_pixels(pixels)
 	, m_width(w)
 	, m_height(h)
-	, m_channels(c)
-	, m_format(GPF_RGBA)
+	, m_format(fmt)
 {	
 }
 
@@ -43,7 +41,7 @@ ImageData::~ImageData()
 bool ImageData::LoadFromFile(const std::string& filepath)
 {
 	m_filepath = filepath;
-	m_pixels = TextureFactory::Instance()->Load(filepath, m_width, m_height, m_channels, m_format);
+	m_pixels = TextureFactory::Instance()->Load(filepath, m_width, m_height, m_format);
 	if (!m_pixels) {
 		throw Exception("Load image fail: %s", filepath.c_str());
 	}

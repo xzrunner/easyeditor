@@ -7,15 +7,13 @@
 
 #include <stdint.h>
 
-namespace ee { class Image; }
-
 namespace eimage
 {
 
 class ExtractOutlineRaw
 {
 public:
-	ExtractOutlineRaw(const ee::Image& image);
+	ExtractOutlineRaw(const uint8_t* pixels, int w, int h);
 
 	void CreateBorderPoints();
 

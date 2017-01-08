@@ -22,12 +22,12 @@ public:
 	 *  @interface
 	 *    ee::Symbol
 	 */
-	virtual void ReloadTexture() const;
 	virtual void InvalidRect(const sm::mat4& mt) const;
 
 	unsigned int GetTexID() const;
 
 	Image* GetImage() const { return m_image; }
+	void   SetImage(Image* img);
 
 protected:
 	virtual bool QueryTexcoords(float* texcoords, int& texid) const;

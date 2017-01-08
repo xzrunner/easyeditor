@@ -42,11 +42,6 @@ ImageSymbol::~ImageSymbol()
 	}
 }
 
-void ImageSymbol::ReloadTexture() const
-{
-	m_image->ReloadTexture();
-}
-
 void ImageSymbol::InvalidRect(const sm::mat4& mt) const
 {
 	m_image->InvalidRect(mt);
@@ -55,6 +50,11 @@ void ImageSymbol::InvalidRect(const sm::mat4& mt) const
 unsigned int ImageSymbol::GetTexID() const
 {
 	return m_image->GetTexID();
+}
+
+void ImageSymbol::SetImage(Image* img)
+{
+	cu::RefCountObjAssign(m_image, img);
 }
 
 bool ImageSymbol::QueryTexcoords(float* texcoords, int& texid) const
@@ -172,9 +172,8 @@ void ImageSymbol::ParserCB(const void* data, size_t size, void* ud)
 	sym->SetBitmap(bmp);
 
 	assert(fmt == GPF_RGB || fmt == GPF_RGBA);
-	int c = fmt == GPF_RGB ? 3 : 4;
-	ImageData data(ptr, w, h, c);
-	
+	sym->SetImage(new Image(ptr, w, h, fmt));
+	sym->InitCoreTex();
 }
 
 }

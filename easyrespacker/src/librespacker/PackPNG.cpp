@@ -94,8 +94,7 @@ void PackPNG::StoreScaled(std::ofstream& fout, float scale) const
 	uint8_t* buf = new uint8_t[sz];
 	memcpy(buf, m_buffer, sz);
 
-	ee::ImageData img_data(buf, m_width, m_height, 4);
-	ee::Image img(&img_data);
+	ee::Image img(buf, m_width, m_height, GPF_RGBA);
 	ee::ImageSymbol sym(&img, "");
 
 	int width = static_cast<int>(m_width * scale),

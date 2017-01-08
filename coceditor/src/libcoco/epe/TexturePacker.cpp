@@ -1,6 +1,7 @@
 #include "TexturePacker.h"
 
 #include <ee/cfg_const.h>
+#include <ee/ImageData.h>
 
 #include <vector>
 #include <algorithm>
@@ -77,7 +78,8 @@ void TexturePacker::StoreToMemory()
 	int size_line = m_edge * channels;
 	for ( ; itr != m_map_img2rect.end(); ++itr)
 	{
-		const unsigned char* pixels = itr->first->GetPixelData();
+		ee::ImageData* img_data = ee::ImageDataMgr::Instance()->GetItem(itr->first->GetFilepath());
+		const unsigned char* pixels = img_data->GetPixelData();
 		const sm::rect& r = itr->second;
 		sm::vec2 sz = r.Size();
 		//////////////////////////////////////////////////////////////////////////
@@ -93,6 +95,8 @@ void TexturePacker::StoreToMemory()
 				memcpy(&m_pixels[ptr_dst + size_line + channels * j], &pixels[ptr_src + size_line - channels], channels);
 			}
 		}
+		img_data->RemoveReference();
+
 		const int xoffset = static_cast<int>((r.xmin - m_extrude) * channels);
 		for (int i = 0; i < m_extrude; ++i)
 		{

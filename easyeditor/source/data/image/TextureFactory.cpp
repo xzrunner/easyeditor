@@ -32,7 +32,7 @@ void TextureFactory::AddTextureFromConfig(const std::string& filepath)
 }
 
 const uint8_t* TextureFactory::Load(const std::string& filepath, int& width, 
-									int& height, int& channels, int& format) const
+									int& height, int& format) const
 {
 	const TexturePacker::Frame* frame = NULL;
 	if (!Config::Instance()->GetSettings().load_image && m_tp) {
@@ -44,14 +44,10 @@ const uint8_t* TextureFactory::Load(const std::string& filepath, int& width,
 	if (frame) {
 		width = frame->src.frame.w;
 		height = frame->src.frame.h;
-		channels = 4;
 		format = GPF_RGBA;
 		return NULL;
 	} else {
-		uint8_t* pixels = gimg_import(filepath.c_str(), &width, &height, &format);
-		assert(format == GPF_RGB || format == GPF_RGBA);
-		channels = format == GPF_RGB ? 3 : 4;
-		return pixels;
+		return gimg_import(filepath.c_str(), &width, &height, &format);
 	}
 }
 

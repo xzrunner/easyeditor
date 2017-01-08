@@ -30,8 +30,6 @@ private:
 
 	void InitBmp(const wxImage& image, bool scale);
 
-	static unsigned char* TransRGBA2RGB(unsigned char* rgba, int width, int height);
-
 	static void GetImage(const std::string& filepath, wxImage& image);
 
 private:

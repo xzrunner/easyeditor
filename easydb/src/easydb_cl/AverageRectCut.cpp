@@ -110,7 +110,7 @@ void AverageRectCut::RectCutImage(const std::string& src_dir, const std::string&
 
 	ee::ImageClip clip(*img);
 	const uint8_t* pixels = clip.Clip(img_r.xmin, img_r.xmax, img_r.ymin, img_r.ymax);
-	ee::ImageData* img_trimed = new ee::ImageData(pixels, sz.x, sz.y, 4);
+	ee::ImageData* img_trimed = new ee::ImageData(pixels, sz.x, sz.y, GPF_RGBA);
 
 	std::string filename = ee::FileHelper::GetRelativePath(src_dir, filepath);
 	filename = filename.substr(0, filename.find_last_of('.'));

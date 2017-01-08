@@ -1,5 +1,5 @@
 #include "ImagePack.h"
-#include "Image.h"
+#include "ImageData.h"
 #include "Exception.h"
 
 #include <gimg_typedef.h>
@@ -206,11 +206,11 @@ void ImagePack::AddImage(const uint8_t* src_buf, int src_w, int src_h, int dst_x
 	}
 }
 
-void ImagePack::AddImage(const Image* img, int x, int y, int w, int h, bool rotate, bool clockwise, 
+void ImagePack::AddImage(const ImageData* img, int x, int y, int w, int h, bool rotate, bool clockwise, 
 						 bool bpp4, int extrude_left, int extrude_bottom, int extrude_right, int extrude_up)
 {
-	int sw = img->GetOriginWidth(),
-		sh = img->GetOriginHeight();
+	int sw = img->GetWidth(),
+		sh = img->GetHeight();
 	PackType type = PT_NORMAL;
 	if (rotate) {
 		type = clockwise ? PT_CLOCKWISE : PT_ANTICLOCKWISE;

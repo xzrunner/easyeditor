@@ -18,9 +18,7 @@ public:
 
 	virtual int GetWidth() const;
 	virtual int GetHeight() const;
-	virtual int GetChannels() const;
-
-	virtual void Reload();
+	virtual int GetFormat() const;
 
 private:
 	const s2::RenderTarget* m_rt;

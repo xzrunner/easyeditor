@@ -3,8 +3,6 @@
 #include "RegularRectCondense.h"
 #include "RegularRectMerge.h"
 
-#include <ee/Image.h>
-
 namespace eimage
 {
 
@@ -21,16 +19,15 @@ static const float TRY_FACTOR = 0.95f;
 static const int TRY_MIN_EDGE = 1;
 static const int TRY_MIN_LIMIT = 2;
 
-RegularRectCut::RegularRectCut(const ee::Image& image)
+RegularRectCut::RegularRectCut(const uint8_t* pixels, int w, int h)
 {
-	LoadPixels(image.GetPixelData(), image.GetClippedWidth(), image.GetClippedHeight());
-
+	LoadPixels(pixels, w, h);
 	m_area_array = new PixelAreaLUT(m_pixels, m_width, m_height, true);
 }
 
-RegularRectCut::RegularRectCut(const ee::Image& image, const std::vector<Rect>& pre_rects)
+RegularRectCut::RegularRectCut(const uint8_t* pixels, int w, int h, const std::vector<Rect>& pre_rects)
 {
-	LoadPixels(image.GetPixelData(), image.GetClippedWidth(), image.GetClippedHeight());
+	LoadPixels(pixels, w, h);
 
 	m_area_array = new PixelAreaLUT(m_pixels, m_width, m_height, true);
 
@@ -39,13 +36,6 @@ RegularRectCut::RegularRectCut(const ee::Image& image, const std::vector<Rect>& 
 		m_area_array->CutByRect(r.x, r.y, r.w, r.h, m_left_area);
 		m_result.push_back(r);
 	}
-}
-
-RegularRectCut::RegularRectCut(const uint8_t* pixels, int width, int height)
-{
-	LoadPixels(pixels, width, height);
-
-	m_area_array = new PixelAreaLUT(m_pixels, m_width, m_height, true);
 }
 
 RegularRectCut::~RegularRectCut()

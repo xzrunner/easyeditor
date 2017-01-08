@@ -1,5 +1,6 @@
 #include "TextureRT.h"
 
+#include <gimg_typedef.h>
 #include <sprite2/RenderTarget.h>
 
 namespace ee
@@ -31,13 +32,9 @@ int TextureRT::GetHeight() const
 	return m_rt->Height();
 }
 
-int TextureRT::GetChannels() const
+int TextureRT::GetFormat() const
 {
-	return 4;
-}
-
-void TextureRT::Reload()
-{	
+	return GPF_RGBA;
 }
 
 }

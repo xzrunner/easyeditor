@@ -63,10 +63,10 @@ static const sm::vec2 QUERY_OFFSET[NEARBY_COUNT] = {
 	sm::vec2( 1, -1),
 };
 
-ExtractOutlineRaw::ExtractOutlineRaw(const ee::Image& image)
-	: m_pixels(image.GetPixelData())
-	, m_width(image.GetOriginWidth())
-	, m_height(image.GetOriginHeight())
+ExtractOutlineRaw::ExtractOutlineRaw(const uint8_t* pixels, int w, int h)
+	: m_pixels(pixels)
+	, m_width(w)
+	, m_height(h)
 {
 }
 

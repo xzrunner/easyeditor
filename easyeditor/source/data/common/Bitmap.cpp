@@ -11,6 +11,7 @@
 #include "SymbolType.h"
 
 #include <gimg_typedef.h>
+#include <gimg_import.h>
 #include <sprite2/SymType.h>
 #include <sprite2/DrawRT.h>
 
@@ -116,9 +117,10 @@ void Bitmap::LoadFromData(uint8_t* pixels, int w, int h, int fmt)
 		break;
 	case GPF_RGBA:
 		{
-			unsigned char* rgb = TransRGBA2RGB(pixels, w, h);
+			uint8_t* rgb = gimg_rgba2rgb(pixels, w, h);
+			gimg_revert_y(rgb, w, h, GPF_RGB);
 			InitBmp(wxImage(w, h, rgb, true), false);
-			delete[] rgb;
+			free(rgb);
 		}
 		break;
 	}
@@ -146,7 +148,7 @@ void Bitmap::LoadFromSym(const Symbol* sym)
  		return;
  	}
  
- 	unsigned char* rgb = TransRGBA2RGB(rgba, w, h);
+ 	uint8_t* rgb = gimg_rgba2rgb(rgba, w, h);
  
  	wxImage image(w, h, rgb, true);
  	InitBmp(image, false);
@@ -182,19 +184,6 @@ void Bitmap::InitBmp(const wxImage& image, bool need_scale)
 		h = std::max(1.0f, h * scale);
 		m_bmp_small = new wxBitmap(image.Scale(w, h));
 	}
-}
-
-unsigned char* Bitmap::TransRGBA2RGB(unsigned char* rgba, int width, int height)
-{
-	unsigned char* rgb = new unsigned char[width*height*3];
-	for (int i = 0; i < height; ++i) {
-		for (int j = 0; j < width; ++j) {
-			int src = (i*width+j)*4;
-			int dst = (i*width+j)*3;
-			memcpy(&rgb[dst], &rgba[src], sizeof(unsigned char) * 3);
-		}
-	}
-	return rgb;
 }
 
 void Bitmap::GetImage(const std::string& filepath, wxImage& dst_img)

@@ -1,6 +1,8 @@
 #include "ImageTrim.h"
 #include "ImageData.h"
 
+#include <gimg_typedef.h>
+
 namespace ee
 {
 
@@ -14,7 +16,7 @@ sm::rect ImageTrim::Trim() const
 	sm::rect sub;
 	sub.MakeEmpty();
 
-	if (m_img_data.GetChannels() != 4) {
+	if (m_img_data.GetFormat() != GPF_RGBA) {
 		return sub;
 	}
 
