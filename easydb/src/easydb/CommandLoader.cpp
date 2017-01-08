@@ -50,7 +50,6 @@
 #include "CalculateImageArea.h"
 #include "RectCutWithJson.h"
 #include "LRExpandInherit.h"
-#include "ImageVerticalFlip.h"
 #include "PackLuaDescFile.h"
 #include "PackEP.h"
 #include "UnpackLuaDescFile.h"
@@ -127,7 +126,6 @@ void CommandLoader::Init()
 	fc->Register(CalImageArea::Create());
 	fc->Register(RectCutWithJson::Create());
 	fc->Register(LRExpandInherit::Create());
-	fc->Register(ImageVerticalFlip::Create());
 	fc->Register(PackLuaDescFile::Create());
 	fc->Register(PackEP::Create());
 	fc->Register(UnpackLuaDescFile::Create());

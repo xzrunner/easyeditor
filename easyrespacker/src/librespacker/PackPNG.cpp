@@ -8,7 +8,6 @@
 #include <ee/ImageData.h>
 #include <ee/Image.h>
 #include <ee/ImageSymbol.h>
-#include <ee/ImageVerticalFlip.h>
 
 #include <easyimage.h>
 
@@ -104,11 +103,8 @@ void PackPNG::StoreScaled(std::ofstream& fout, float scale) const
 	rt.Draw(&sym, false, scale);
 	uint8_t* buffer = rt.StoreToMemory(width, height);
 
-	ee::ImageVerticalFlip revert(buffer, width, height);
-	uint8_t* buf_revert = revert.Revert();		
-	Store(fout, buf_revert, width, height);
-
-	delete[] buf_revert;
+	gimg_revert_y(buffer, width, height, GPF_RGBA);
+	Store(fout, buffer, width, height);
 	delete[] buffer;
 }
 

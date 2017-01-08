@@ -6,10 +6,11 @@
 #include <ee/SymbolMgr.h>
 #include <ee/SettingData.h>
 #include <ee/Config.h>
-#include <ee/ImageVerticalFlip.h>
 
 #include <easyimage.h>
 
+#include <gimg_typedef.h>
+#include <gimg_import.h>
 #include <sprite2/DrawRT.h>
 
 #include <string>
@@ -359,15 +360,12 @@ void PackPVR::StoreScaled(std::ofstream& fout, float scale) const
 		h = static_cast<int>(m_height * scale);
 	s2::DrawRT rt;
 	rt.Draw(sym, false, scale);
-	uint8_t* png_buf = rt.StoreToMemory(w, h);
+	uint8_t* pixels = rt.StoreToMemory(w, h);
 	sym->RemoveReference();
 
-	ee::ImageVerticalFlip revert(png_buf, w, h);
-	uint8_t* buf_revert = revert.Revert();		
-	delete[] png_buf;
-
-	eimage::TransToPVR trans(buf_revert, w, h, 4, false, m_fast);
-	delete[] buf_revert;
+	gimg_revert_y(pixels, w, h, GPF_RGBA);
+	eimage::TransToPVR trans(pixels, w, h, 4, false, m_fast);
+	delete[] pixels;
 
 	uint8_t* pvr_buf = trans.GetPixelsData(w, h);
 	int sz = CalTexSize(m_internal_format, w, h);

@@ -3,7 +3,6 @@
 
 #include <ee/Image.h>
 #include <ee/Exception.h>
-#include <ee/ImageVerticalFlip.h>
 #include <ee/FileHelper.h>
 
 #include <easy3d.h>

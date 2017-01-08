@@ -7,10 +7,11 @@
 #include <ee/SymbolMgr.h>
 #include <ee/SettingData.h>
 #include <ee/Config.h>
-#include <ee/ImageVerticalFlip.h>
 
 #include <easyimage.h>
 
+#include <gimg_typedef.h>
+#include <gimg_import.h>
 #include <sprite2/DrawRT.h>
 
 #include <string>
@@ -153,15 +154,12 @@ void PackETC2::StoreScaled(std::ofstream& fout, float scale) const
 		h = static_cast<int>(m_height * scale);
 	s2::DrawRT rt;
 	rt.Draw(sym, false, scale);
-	uint8_t* png_buf = rt.StoreToMemory(w, h);
+	uint8_t* pixels = rt.StoreToMemory(w, h);
 	sym->RemoveReference();
 
-	ee::ImageVerticalFlip revert(png_buf, w, h);
-	uint8_t* buf_revert = revert.Revert();		
-	delete[] png_buf;
-
-	eimage::TransToETC2 trans(buf_revert, w, h, 4, eimage::TransToETC2::RGBA, false, m_fast);
-	delete[] buf_revert;
+	gimg_revert_y(pixels, w, h, GPF_RGBA);
+	eimage::TransToETC2 trans(pixels, w, h, 4, eimage::TransToETC2::RGBA, false, m_fast);
+	delete[] pixels;
 
 	uint8_t* etc2_buf = trans.GetPixelsData(w, h);
 	Store(fout, etc2_buf, w, h);

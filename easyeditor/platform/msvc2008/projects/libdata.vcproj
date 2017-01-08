@@ -576,14 +576,6 @@
 					RelativePath="..\..\..\include\ee\ImageTrim.h"
 					>
 				</File>
-				<File
-					RelativePath="..\..\..\source\data\image\ImageVerticalFlip.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\ee\ImageVerticalFlip.h"
-					>
-				</File>
 			</Filter>
 		</Filter>
 		<Filter
