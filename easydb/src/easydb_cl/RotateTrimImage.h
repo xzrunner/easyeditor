@@ -5,7 +5,7 @@
 
 #include <SM_Vector.h>
 
-namespace ee { class Image; }
+#include <stdint.h>
 
 namespace edb
 {
@@ -30,9 +30,8 @@ public:
 private:
 	void RotateTrim(const std::string& dir);	
 
-	bool GetRotateTrimInfo(const ee::Image* image, 
-		int& width, int& height,
-		sm::vec2& center, float& angle) const;
+	bool GetRotateTrimInfo(const uint8_t* pixels, int img_w, int img_h, 
+		int& width, int& height, sm::vec2& center, float& angle) const;
 
 }; // RotateTrimImage
 

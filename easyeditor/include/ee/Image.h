@@ -27,7 +27,10 @@ public:
 	bool LoadFromFile(const std::string& filepath);
 
 	const std::string& GetFilepath() const { return m_filepath; }
+
+	int GetFormat() const;
 	unsigned int GetTexID() const;
+
 	int GetOriginWidth() const;
 	int GetOriginHeight() const;
 	int GetClippedWidth() const;

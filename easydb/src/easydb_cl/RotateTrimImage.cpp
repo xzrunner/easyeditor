@@ -9,10 +9,10 @@
 #include <ee/ImageSymbol.h>
 #include <ee/SpriteFactory.h>
 #include <ee/Sprite.h>
-#include <ee/Image.h>
 #include <ee/Math2D.h>
 #include <ee/MinBoundingBox.h>
 #include <ee/SymbolFile.h>
+#include <ee/ImageData.h>
 
 #include <easyimage.h>
 
@@ -97,15 +97,17 @@ void RotateTrimImage::RotateTrim(const std::string& dir)
 		{
 			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 
-			ee::Image* image = static_cast<ee::ImageSymbol*>(sym)->GetImage();
+			ee::ImageData* img_data = ee::ImageDataMgr::Instance()->GetItem(filepath);
 			int width, height;
 			sm::vec2 center;
 			float angle;
-			bool success = GetRotateTrimInfo(image, width, height, center, angle);
+			bool success = GetRotateTrimInfo(img_data->GetPixelData(), img_data->GetWidth(), 
+				img_data->GetHeight(), width, height, center, angle);
 			if (!success || angle == 0) {
-				image->RemoveReference();
+				img_data->RemoveReference();
 				continue;
-			}
+			} 
+			img_data->RemoveReference();
 
 			ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
 			spr->SetPosition(center);
@@ -132,10 +134,10 @@ void RotateTrimImage::RotateTrim(const std::string& dir)
 	fout.close();
 }
 
-bool RotateTrimImage::GetRotateTrimInfo(const ee::Image* image, int& width, int& height,
-										sm::vec2& center, float& angle) const
+bool RotateTrimImage::GetRotateTrimInfo(const uint8_t* pixels, int img_w, int img_h, 
+										int& width, int& height, sm::vec2& center, float& angle) const
 {
-	eimage::ExtractOutlineRaw raw(*image);
+	eimage::ExtractOutlineRaw raw(pixels, img_w, img_h);
 	raw.CreateBorderLineAndMerge();
 	if (raw.GetBorderLine().empty()) {
 		return false;
@@ -146,8 +148,8 @@ bool RotateTrimImage::GetRotateTrimInfo(const ee::Image* image, int& width, int&
 	bool is_rotate = ee::MinBoundingBox::Do(raw.GetConvexHull(), bound);
 
 	center = (bound[0] + bound[2]) * 0.5f;
-	center.x -= image->GetOriginWidth() * 0.5f;
-	center.y -= image->GetOriginHeight() * 0.5f;
+	center.x -= img_w * 0.5f;
+	center.y -= img_h * 0.5f;
 
 	center = -center;
 

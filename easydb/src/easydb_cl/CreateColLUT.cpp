@@ -3,6 +3,7 @@
 #include "utility.h"
 
 #include <gimg_png.h>
+#include <gimg_typedef.h>
 
 #include <stdint.h>
 
@@ -56,7 +57,7 @@ void CreateColLUT::Run(const std::string& filepath) const
 		}
 	}
 	
-	gimg_png_write(filepath.c_str(), pixels, w, h);
+	gimg_png_write(filepath.c_str(), pixels, w, h, GPF_RGBA, true);
 	
 	delete[] pixels;
 }

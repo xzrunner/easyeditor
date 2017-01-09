@@ -5,6 +5,7 @@
 #include <ee/Image.h>
 #include <ee/Math2D.h>
 #include <ee/SymbolFile.h>
+#include <ee/ImageData.h>
 
 #include <easyimage.h>
 
@@ -59,8 +60,9 @@ void OutlineImage::Trigger(const std::string& dir) const
 		std::cout << i << " / " << n << " : " << filepath << "\n";
 
 		ee::Image* image = ee::ImageMgr::Instance()->GetItem(filepath);
+		ee::ImageData* img_data = ee::ImageDataMgr::Instance()->GetItem(filepath);
 
-		eimage::ExtractOutlineRaw raw(*image);
+		eimage::ExtractOutlineRaw raw(img_data->GetPixelData(), img_data->GetWidth(), img_data->GetHeight());
 		raw.CreateBorderLineAndMerge();
 		eimage::ExtractOutlineFine fine(raw.GetBorderLine(), raw.GetBorderLineMerged());
 		fine.Trigger(0.04f, 0.2f);
@@ -88,6 +90,7 @@ void OutlineImage::Trigger(const std::string& dir) const
 			fout.close();	
 		}
 
+		img_data->RemoveReference();
 		image->RemoveReference();
 	}
 }

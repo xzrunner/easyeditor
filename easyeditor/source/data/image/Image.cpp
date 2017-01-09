@@ -116,6 +116,11 @@ bool Image::LoadFromFile(const std::string& filepath)
 	return true;
 }
 
+int Image::GetFormat() const
+{
+	return m_tex->GetFormat();
+}
+
 unsigned int Image::GetTexID() const 
 { 
 	return m_tex->GetTexID(); 
