@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\mtrail\src\mtrail;..\..\..\..\gimg\src\gimg;..\..\..\..\bimp\include;..\..\..\..\simp\include;..\..\..\..\timp\include;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easyrespacker\src;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easyui\src;..\..\..\..\easyscale9\src;..\..\..\..\easycomplex\src;..\..\..\..\easymesh\src;..\..\..\..\easymask\src;..\..\..\..\easyimage\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\particle\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easytrail\src;..\..\..\..\easytext\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\mtrail\src\mtrail;..\..\..\..\gimg\src\gimg;..\..\..\..\rigging\src\rigging;..\..\..\..\bimp\include;..\..\..\..\simp\include;..\..\..\..\timp\include;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easyrespacker\src;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easyanim2\src;..\..\..\..\easyui\src;..\..\..\..\easyscale9\src;..\..\..\..\easycomplex\src;..\..\..\..\easymesh\src;..\..\..\..\easymask\src;..\..\..\..\easyimage\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\particle\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easytrail\src;..\..\..\..\easytext\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -107,7 +107,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\mtrail\src\mtrail;..\..\..\..\gimg\src\gimg;..\..\..\..\bimp\include;..\..\..\..\simp\include;..\..\..\..\timp\include;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easyrespacker\src;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easyui\src;..\..\..\..\easyscale9\src;..\..\..\..\easycomplex\src;..\..\..\..\easymesh\src;..\..\..\..\easymask\src;..\..\..\..\easyimage\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\particle\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easytrail\src;..\..\..\..\easytext\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\mtrail\src\mtrail;..\..\..\..\gimg\src\gimg;..\..\..\..\rigging\src\rigging;..\..\..\..\bimp\include;..\..\..\..\simp\include;..\..\..\..\timp\include;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easyrespacker\src;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easyanim2\src;..\..\..\..\easyui\src;..\..\..\..\easyscale9\src;..\..\..\..\easycomplex\src;..\..\..\..\easymesh\src;..\..\..\..\easymask\src;..\..\..\..\easyimage\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\particle\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easytrail\src;..\..\..\..\easytext\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -417,6 +417,26 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\libsprpacker\PackShapeSpr.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="07.anim2"
+				>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackAnim2.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackAnim2.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackAnim2Spr.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackAnim2Spr.h"
 					>
 				</File>
 			</Filter>
