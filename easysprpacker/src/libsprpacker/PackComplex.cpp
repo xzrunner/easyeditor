@@ -22,9 +22,6 @@ PackComplex::PackComplex(const ecomplex::Symbol* sym)
 PackComplex::~PackComplex()
 {
 	for_each(m_children.begin(), m_children.end(), cu::RemoveRefFunctor<PackNode>());
-	for (int i = 0, n = m_actions.size(); i < n; ++i) {
-		for_each(m_actions[i].m_sprs.begin(), m_actions[i].m_sprs.end(), cu::RemoveRefFunctor<PackNode>());
-	}
 }
 
 void PackComplex::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const
@@ -198,6 +195,12 @@ int PackComplex::QueryIndex(const PackNode* node) const
 /************************************************************************/
 /* class PackComplex::Action                                                                     */
 /************************************************************************/
+
+PackComplex::Action::
+~Action()
+{
+	for_each(m_sprs.begin(), m_sprs.end(), cu::RemoveRefFunctor<PackNode>());
+}
 
 int PackComplex::Action::
 SizeOfUnpackFromBin() const 

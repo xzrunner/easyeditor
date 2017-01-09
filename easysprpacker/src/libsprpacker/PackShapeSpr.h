@@ -12,6 +12,7 @@ class PackShapeSpr : public PackNode
 {
 public:
 	PackShapeSpr(const eshape::Sprite* spr);
+	virtual ~PackShapeSpr();
 
 	/**
 	 *  @interface

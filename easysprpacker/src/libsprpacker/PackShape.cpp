@@ -61,6 +61,13 @@ PackShape::PackShape(const eshape::Symbol* sym)
 	}
 }
 
+PackShape::~PackShape()
+{
+	if (m_texture) {
+		m_texture->RemoveReference();
+	}
+}
+
 void PackShape::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const
 {
 	gen.line("{");

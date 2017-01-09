@@ -17,6 +17,13 @@ PackComplexSpr::PackComplexSpr(const ecomplex::Sprite* spr)
 	Init(spr);
 }
 
+PackComplexSpr::~PackComplexSpr()
+{
+	if (m_sym) {
+		m_sym->RemoveReference();
+	}
+}
+
 void PackComplexSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const
 {
 	gen.line("{");

@@ -21,6 +21,13 @@ PackIconSpr::PackIconSpr(const eicon::Sprite* spr)
 	m_process = spr->GetProcess();
 }
 
+PackIconSpr::~PackIconSpr()
+{
+	if (m_sym) {
+		m_sym->RemoveReference();
+	}
+}
+
 void PackIconSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const
 {
 	gen.line("{");

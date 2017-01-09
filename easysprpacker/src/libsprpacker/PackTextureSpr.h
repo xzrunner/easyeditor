@@ -12,6 +12,7 @@ class PackTextureSpr : public PackNode
 {
 public:
 	PackTextureSpr(const etexture::Sprite* spr);
+	virtual ~PackTextureSpr();
 
 	/**
 	 *  @interface

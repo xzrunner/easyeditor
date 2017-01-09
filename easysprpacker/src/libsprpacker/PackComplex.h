@@ -44,6 +44,8 @@ private:
 	class Action
 	{
 	public:
+		~Action();
+
 		int SizeOfUnpackFromBin() const;
 		int SizeOfPackToBin() const;
 		void PackToBin(uint8_t** ptr, const PackComplex& complex) const;	

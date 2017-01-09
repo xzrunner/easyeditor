@@ -18,10 +18,6 @@ PackLabel::PackLabel(const etext::Sprite* spr)
 	Init(spr);
 }
 
-PackLabel::~PackLabel()
-{
-}
-
 void PackLabel::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const
 {
 	gen.line("{");

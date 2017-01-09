@@ -12,6 +12,7 @@ class PackIconSpr : public PackNode
 {
 public:
 	PackIconSpr(const eicon::Sprite* spr);
+	virtual ~PackIconSpr();
 
 	/**
 	 *  @interface

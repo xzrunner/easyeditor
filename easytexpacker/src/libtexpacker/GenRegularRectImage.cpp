@@ -3,7 +3,7 @@
 #include <ee/StringHelper.h>
 #include <ee/FileHelper.h>
 #include <ee/ImagePack.h>
-#include <ee/Image.h>
+#include <ee/ImageData.h>
 
 #include <easyimage.h>
 
@@ -50,12 +50,13 @@ void GenRegularRectImage::CreateSingle(const std::string& filepath)
 		int w = spr_val["dst"]["w"].asInt(),
 			h = spr_val["dst"]["h"].asInt();
 		std::string filepath = spr_val["filepath"].asString();
-		ee::Image* img = ee::ImageMgr::Instance()->GetItem(filepath);
-		assert(img->GetOriginWidth() == w && img->GetOriginHeight() == h 
-			|| img->GetOriginWidth() == h && img->GetOriginHeight() == w);
-		bool rot = img->GetOriginWidth() != w && img->GetOriginHeight() != h;
-		pack.AddImage(img, x ,y, w, h, rot, true);
-		img->RemoveReference();
+
+		ee::ImageData* img_data = ee::ImageDataMgr::Instance()->GetItem(filepath);
+		assert(img_data->GetWidth() == w && img_data->GetHeight() == h 
+			|| img_data->GetWidth() == h && img_data->GetHeight() == w);
+		bool rot = img_data->GetWidth() != w && img_data->GetHeight() != h;
+		pack.AddImage(img_data, x ,y, w, h, rot, true);
+		img_data->RemoveReference();
 
 		spr_val = value["parts"][i++];
 	}

@@ -60,6 +60,13 @@ PackIcon::PackIcon(const eicon::Symbol* sym)
 	}
 }
 
+PackIcon::~PackIcon() 
+{ 
+	if (m_base) { 
+		m_base->RemoveReference(); 
+	} 
+}
+
 void PackIcon::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const
 {
 	gen.line("{");

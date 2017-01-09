@@ -12,6 +12,7 @@ class PackAnimationSpr : public PackNode
 {
 public:
 	PackAnimationSpr(const libanim::Sprite* spr);
+	~PackAnimationSpr();
 
 	/**
 	 *  @interface

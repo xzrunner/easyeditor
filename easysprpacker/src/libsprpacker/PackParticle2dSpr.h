@@ -12,6 +12,7 @@ class PackParticle2dSpr : public PackNode
 {
 public:
 	PackParticle2dSpr(const eparticle2d::Sprite* spr);
+	virtual ~PackParticle2dSpr();
 
 	/**
 	 *  @interface

@@ -17,15 +17,6 @@ PackScale9::PackScale9(const escale9::Symbol* sym)
 	Init(sym);
 }
 
-PackScale9::~PackScale9()
-{
-	for (int i = 0, n = m_grids.size(); i < n; ++i) {
-		if (m_grids[i].node) {
-			m_grids[i].node->RemoveReference();
-		}
-	}
-}
-
 void PackScale9::PackToLuaString(ebuilder::CodeGenerator& gen,
 								 const ee::TexturePacker& tp, float scale) const
 {

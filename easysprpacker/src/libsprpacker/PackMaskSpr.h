@@ -12,6 +12,7 @@ class PackMaskSpr : public PackNode
 {
 public:
 	PackMaskSpr(const emask::Sprite* spr);
+	virtual ~PackMaskSpr();
 
 	/**
 	 *  @interface

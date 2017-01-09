@@ -14,7 +14,6 @@ class PackLabel : public PackNode
 {
 public:
 	PackLabel(const etext::Sprite* spr);
-	virtual ~PackLabel();
 
 	/**
 	 *  @interface

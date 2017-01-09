@@ -19,6 +19,13 @@ PackTextureSpr::PackTextureSpr(const etexture::Sprite* spr)
 		dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
 }
 
+PackTextureSpr::~PackTextureSpr()
+{
+	if (m_sym) {
+		m_sym->RemoveReference();
+	}
+}
+
 void PackTextureSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const
 {
 	gen.line("{");

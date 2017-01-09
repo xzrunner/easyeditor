@@ -16,7 +16,6 @@ class PackScale9 : public PackNode
 {
 public:
 	PackScale9(const escale9::Symbol* sym);
-	virtual ~PackScale9();
 
 	/**
 	 *  @interface
@@ -45,6 +44,7 @@ private:
 		sm::bvec2 mirror;
 
 		Grid() : node(NULL), angle(0), mirror(false, false) {}
+		~Grid() { if (node) { node->RemoveReference(); }  }
 	};
 
 private:

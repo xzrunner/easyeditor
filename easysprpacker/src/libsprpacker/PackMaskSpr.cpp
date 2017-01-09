@@ -18,6 +18,13 @@ PackMaskSpr::PackMaskSpr(const emask::Sprite* spr)
 	Init(spr);
 }
 
+PackMaskSpr::~PackMaskSpr()
+{
+	if (m_sym) {
+		m_sym->RemoveReference();
+	}
+}
+
 void PackMaskSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const
 {
 	gen.line("{");

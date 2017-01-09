@@ -18,6 +18,13 @@ PackAnimationSpr::PackAnimationSpr(const libanim::Sprite* spr)
 	Init(spr);
 }
 
+PackAnimationSpr::~PackAnimationSpr()
+{
+	if (m_sym) {
+		m_sym->RemoveReference();
+	}
+}
+
 void PackAnimationSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const
 {
 	gen.line("{");

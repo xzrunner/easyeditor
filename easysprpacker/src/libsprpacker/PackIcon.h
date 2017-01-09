@@ -17,6 +17,7 @@ class PackIcon : public PackNode
 {
 public:
 	PackIcon(const eicon::Symbol* sym);
+	virtual ~PackIcon();
 
 	/**
 	 *  @interface

@@ -6,9 +6,10 @@
 #include <ee/Exception.h>
 #include <ee/StringHelper.h>
 #include <ee/ImagePack.h>
-#include <ee/Image.h>
+#include <ee/ImageData.h>
 
 #include <gimg_import.h>
+#include <gimg_typedef.h>
 
 #include <json/json.h>
 
@@ -182,7 +183,7 @@ void NormalPack::OutputImage(const std::string& filepath) const
 				rot = true;
 			}
 
-			ee::Image* img = ee::ImageMgr::Instance()->GetItem(m_filepaths[idx]);
+			ee::ImageData* img_data = ee::ImageDataMgr::Instance()->GetItem(m_filepaths[idx]);
 
 			int e_left, e_right, e_bottom, e_up;
 			if (m_trim_info) {
@@ -191,7 +192,7 @@ void NormalPack::OutputImage(const std::string& filepath) const
 					throw ee::Exception("NormalPack::OutputInfo didn't find trim_info info: %s\n", m_filepaths[idx]);
 				}
 
-				assert(t->w == img->GetOriginWidth() && t->h == img->GetOriginHeight());
+				assert(t->w == img_data->GetWidth() && t->h == img_data->GetHeight());
 				GetExtrude(t->bound, t->w, t->h, e_left, e_right, e_bottom, e_up);
 			} else {
 				e_left = e_right = e_bottom = e_up = m_extrude_min;
@@ -199,17 +200,17 @@ void NormalPack::OutputImage(const std::string& filepath) const
 			
 			if (rot) {
 				if (CLOCKWISE_ROT) {
-					pack.AddImage(img, pos.x + e_up, pos.y + e_left, pos.width - e_bottom - e_up, pos.height - e_left - e_right, 
-						rot, CLOCKWISE_ROT, img->GetChannels() == 4, e_left, e_bottom, e_right, e_up);
+					pack.AddImage(img_data, pos.x + e_up, pos.y + e_left, pos.width - e_bottom - e_up, pos.height - e_left - e_right, 
+						rot, CLOCKWISE_ROT, img_data->GetFormat() == GPF_RGBA, e_left, e_bottom, e_right, e_up);
 				} else {
-					pack.AddImage(img, pos.x + e_bottom, pos.y + e_right, pos.width - e_bottom - e_up, pos.height - e_left - e_right, 
-						rot, CLOCKWISE_ROT, img->GetChannels() == 4, e_left, e_bottom, e_right, e_up);
+					pack.AddImage(img_data, pos.x + e_bottom, pos.y + e_right, pos.width - e_bottom - e_up, pos.height - e_left - e_right, 
+						rot, CLOCKWISE_ROT, img_data->GetFormat() == GPF_RGBA, e_left, e_bottom, e_right, e_up);
 				}
 			} else {
-				pack.AddImage(img, pos.x + e_left, pos.y + e_bottom, pos.width - e_left - e_right, pos.height - e_bottom - e_up, 
-					rot, CLOCKWISE_ROT, img->GetChannels() == 4, e_left, e_bottom, e_right, e_up);
+				pack.AddImage(img_data, pos.x + e_left, pos.y + e_bottom, pos.width - e_left - e_right, pos.height - e_bottom - e_up, 
+					rot, CLOCKWISE_ROT, img_data->GetFormat() == GPF_RGBA, e_left, e_bottom, e_right, e_up);
 			}
-			img->RemoveReference();
+			img_data->RemoveReference();
 		}
 
 		std::string out_filepath = filepath;

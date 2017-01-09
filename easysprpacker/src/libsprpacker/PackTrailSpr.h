@@ -12,6 +12,7 @@ class PackTrailSpr : public PackNode
 {
 public:
 	PackTrailSpr(const etrail::Sprite* spr);
+	virtual ~PackTrailSpr();
 
 	/**
 	 *  @interface

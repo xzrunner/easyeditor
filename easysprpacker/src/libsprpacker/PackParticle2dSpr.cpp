@@ -18,6 +18,13 @@ PackParticle2dSpr::PackParticle2dSpr(const eparticle2d::Sprite* spr)
 	Init(spr);
 }
 
+PackParticle2dSpr::~PackParticle2dSpr()
+{
+	if (m_sym) {
+		m_sym->RemoveReference();
+	}
+}
+
 void PackParticle2dSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const
 {
 	gen.line("{");

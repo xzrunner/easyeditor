@@ -19,6 +19,13 @@ PackTrailSpr::PackTrailSpr(const etrail::Sprite* spr)
 		dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
 }
 
+PackTrailSpr::~PackTrailSpr()
+{
+	if (m_sym) {
+		m_sym->RemoveReference();
+	}
+}
+
 void PackTrailSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const
 {
 	gen.line("{");

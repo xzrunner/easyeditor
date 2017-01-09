@@ -12,6 +12,7 @@ class PackComplexSpr : public PackNode
 {
 public:
 	PackComplexSpr(const ecomplex::Sprite* spr);
+	virtual ~PackComplexSpr();
 
 	/**
 	 *  @interface

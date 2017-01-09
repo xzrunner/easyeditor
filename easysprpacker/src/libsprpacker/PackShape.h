@@ -18,6 +18,7 @@ class PackShape : public PackNode
 {
 public:
 	PackShape(const eshape::Symbol* sym);
+	virtual ~PackShape();
 
 	/**
 	 *  @interface

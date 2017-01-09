@@ -19,6 +19,13 @@ PackShapeSpr::PackShapeSpr(const eshape::Sprite* spr)
 		dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
 }
 
+PackShapeSpr::~PackShapeSpr()
+{
+	if (m_sym) {
+		m_sym->RemoveReference();
+	}
+}
+
 void PackShapeSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const
 {
 	gen.line("{");

@@ -15,6 +15,8 @@
 #include "PackComplexSpr.h"
 #include "PackAnimation.h"
 #include "PackAnimationSpr.h"
+#include "PackAnim2.h"
+#include "PackAnim2Spr.h"
 #include "PackParticle3d.h"
 #include "PackParticle3dSpr.h"
 #include "PackParticle2d.h"
@@ -34,6 +36,7 @@
 #include <easytext.h>
 #include <easycomplex.h>
 #include <easyanim.h>
+#include <easyanim2.h>
 #include <easyparticle3d.h>
 #include <easyparticle2d.h>
 #include <easyshape.h>
@@ -60,6 +63,7 @@ SymBuilder<escale9::Symbol, PackScale9>*									SCALE9_BUILDER;
 SymBuilder<eicon::Symbol, PackIcon>*										ICON_BUILDER;
 SymBuilder<etexture::Symbol, PackTexture>*									TEXTURE_BUILDER;
 SymBuilder<libanim::Symbol, PackAnimation>*									ANIM_BUILDER;
+SymBuilder<libanim2::Symbol, PackAnim2>*									ANIM2_BUILDER;
 SymBuilder<eparticle3d::Symbol, PackParticle3d>*							P3D_BUILDER;
 SymBuilder<eparticle2d::Symbol, PackParticle2d>*							P2D_BUILDER;
 SymBuilder<eshape::Symbol, PackShape>*										SHAPE_BUILDER;
@@ -71,7 +75,8 @@ SprBuilder<escale9::Symbol, escale9::Sprite, PackScale9Spr>*				SCALE9_SPR_BUILD
 SprBuilder<eicon::Symbol, eicon::Sprite, PackIconSpr>*						ICON_SPR_BUILDER;
 SprBuilder<etexture::Symbol, etexture::Sprite, PackTextureSpr>*				TEXTURE_SPR_BUILDER;
 SprBuilder<ecomplex::Symbol, ecomplex::Sprite, PackComplexSpr>*				COMPLEX_SPR_BUILDER;
-SprBuilder<libanim::Symbol, libanim::Sprite, PackAnimationSpr>*					ANIM_SPR_BUILDER;
+SprBuilder<libanim::Symbol, libanim::Sprite, PackAnimationSpr>*				ANIM_SPR_BUILDER;
+SprBuilder<libanim2::Symbol, libanim2::Sprite, PackAnim2Spr>*				ANIM2_SPR_BUILDER;
 SprBuilder<eparticle3d::Symbol, eparticle3d::Sprite, PackParticle3dSpr>*	P3D_SPR_BUILDER;
 SprBuilder<eparticle2d::Symbol, eparticle2d::Sprite, PackParticle2dSpr>*	P2D_SPR_BUILDER;
 SprBuilder<eshape::Symbol, eshape::Sprite, PackShapeSpr>*					SHAPE_SPR_BUILDER;
@@ -86,6 +91,7 @@ PackNodeFactory::PackNodeFactory()
 	ICON_BUILDER		= new SymBuilder<eicon::Symbol, PackIcon>();
 	TEXTURE_BUILDER		= new SymBuilder<etexture::Symbol, PackTexture>();
 	ANIM_BUILDER		= new SymBuilder<libanim::Symbol, PackAnimation>(true);
+	ANIM2_BUILDER		= new SymBuilder<libanim2::Symbol, PackAnim2>(true);
 	P3D_BUILDER			= new SymBuilder<eparticle3d::Symbol, PackParticle3d>(true);
 	P2D_BUILDER			= new SymBuilder<eparticle2d::Symbol, PackParticle2d>(true);
 	SHAPE_BUILDER		= new SymBuilder<eshape::Symbol, PackShape>();
@@ -98,6 +104,7 @@ PackNodeFactory::PackNodeFactory()
 	TEXTURE_SPR_BUILDER	= new SprBuilder<etexture::Symbol, etexture::Sprite, PackTextureSpr>();
 	COMPLEX_SPR_BUILDER	= new SprBuilder<ecomplex::Symbol, ecomplex::Sprite, PackComplexSpr>();
 	ANIM_SPR_BUILDER	= new SprBuilder<libanim::Symbol, libanim::Sprite, PackAnimationSpr>();
+	ANIM2_SPR_BUILDER	= new SprBuilder<libanim2::Symbol, libanim2::Sprite, PackAnim2Spr>();
 	P3D_SPR_BUILDER		= new SprBuilder<eparticle3d::Symbol, eparticle3d::Sprite, PackParticle3dSpr>();
 	P2D_SPR_BUILDER		= new SprBuilder<eparticle2d::Symbol, eparticle2d::Sprite, PackParticle2dSpr>();
 	SHAPE_SPR_BUILDER	= new SprBuilder<eshape::Symbol, eshape::Sprite, PackShapeSpr>();
@@ -144,6 +151,10 @@ const PackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 	// animation
 	else if (const libanim::Sprite* anim = dynamic_cast<const libanim::Sprite*>(spr)) {
 		node = ANIM_SPR_BUILDER->Create(anim);
+	}
+	// anim2
+	else if (const libanim2::Sprite* anim2 = dynamic_cast<const libanim2::Sprite*>(spr)) {
+		node = ANIM2_SPR_BUILDER->Create(anim2);
 	}
 	// particle3d
 	else if (const eparticle3d::Sprite* p3d = dynamic_cast<const eparticle3d::Sprite*>(spr)) {
@@ -207,6 +218,10 @@ const PackNode* PackNodeFactory::Create(const ee::Symbol* sym)
 	else if (const libanim::Symbol* anim = dynamic_cast<const libanim::Symbol*>(sym)) {
 		node = ANIM_BUILDER->Create(anim);
 	}
+	// anim2
+	else if (const libanim2::Symbol* anim = dynamic_cast<const libanim2::Symbol*>(sym)) {
+		node = ANIM2_BUILDER->Create(anim);
+	}
 	// particle3d
 	else if (const eparticle3d::Symbol* p3d = dynamic_cast<const eparticle3d::Symbol*>(sym)) {
 		node = P3D_BUILDER->Create(p3d);
@@ -266,6 +281,7 @@ void PackNodeFactory::FetchAllBuilder(std::vector<NodeBuilder*>& builders)
 	builders.push_back(LabelBuilder::Instance());
 	builders.push_back(ComplexBuilder::Instance());
 	builders.push_back(ANIM_BUILDER);
+	builders.push_back(ANIM2_BUILDER);
 	builders.push_back(P3D_BUILDER);
 	builders.push_back(P2D_BUILDER);
 	builders.push_back(SHAPE_BUILDER);
@@ -278,6 +294,7 @@ void PackNodeFactory::FetchAllBuilder(std::vector<NodeBuilder*>& builders)
 	builders.push_back(TEXTURE_SPR_BUILDER);
 	builders.push_back(COMPLEX_SPR_BUILDER);
 	builders.push_back(ANIM_SPR_BUILDER);
+	builders.push_back(ANIM2_SPR_BUILDER);
 	builders.push_back(P3D_SPR_BUILDER);
 	builders.push_back(P2D_SPR_BUILDER);
 	builders.push_back(SHAPE_SPR_BUILDER);
