@@ -73,3 +73,6 @@
 [submodule "tasks/src/tasks"]
 	path = tasks/src/tasks
 	url = ssh://git@tea.ejoy.com:3222/LR/tasks.git
+[submodule "pimg"]
+	path = pimg
+	url = ssh://git@tea.ejoy.com:3222/LR/pimg.git
