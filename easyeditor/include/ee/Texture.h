@@ -17,8 +17,6 @@ public:
 
 	virtual unsigned int GetTexID() const = 0;
 
-	virtual std::string GetFilepath() const { return ""; }
-
 	virtual int GetWidth() const = 0;
 	virtual int GetHeight() const = 0;
 	virtual int GetFormat() const = 0;

@@ -42,6 +42,9 @@ protected:
 private:
 	void InitCoreTex();
 
+	void LoadSync();
+	void LoadAsync();
+
 	static void LoadCB(const char* filepath, void (*unpack)(const void* data, size_t size, void* ud), void* ud);
 	static void ParserCB(const void* data, size_t size, void* ud);
 

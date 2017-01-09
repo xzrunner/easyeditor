@@ -26,7 +26,7 @@ public:
 	
 	bool LoadFromFile(const std::string& filepath);
 
-	std::string GetFilepath() const;
+	const std::string& GetFilepath() const { return m_filepath; }
 	unsigned int GetTexID() const;
 	int GetOriginWidth() const;
 	int GetOriginHeight() const;
@@ -47,6 +47,8 @@ private:
 	bool CanUseDTex() const;
 
 private:
+	std::string m_filepath;
+
 	Texture* m_tex;
 	s2::Texture* m_s2_tex;
 

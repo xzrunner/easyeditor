@@ -23,11 +23,6 @@ TextureImgData::~TextureImgData()
 	}
 }
 
-std::string TextureImgData::GetFilepath() const 
-{
-	return m_filepath;
-}
-
 int TextureImgData::GetWidth() const 
 { 
 	return m_width;

@@ -199,7 +199,7 @@ void TwoPassCanvas::DrawDRect() const
 
 void TwoPassCanvas::DebugDraw() const
 {
-// 	gum::DTex::Instance()->DebugDraw();
+ 	gum::DTex::Instance()->DebugDraw();
 // 	gum::Sprite2::Instance()->DebugDraw();
 	gum::DRect::Instance()->DebugDraw();
 

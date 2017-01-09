@@ -167,38 +167,6 @@
 			</Filter>
 		</Filter>
 		<Filter
-			Name="image"
-			>
-			<Filter
-				Name="adapter"
-				>
-				<File
-					RelativePath="..\..\..\source\tool\LibjpegAdapter.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\ee\LibjpegAdapter.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\source\tool\LibpngAdapter.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\ee\LibpngAdapter.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\source\tool\PPMAdapter.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\ee\PPMAdapter.h"
-					>
-				</File>
-			</Filter>
-		</Filter>
-		<Filter
 			Name="script"
 			>
 			<File

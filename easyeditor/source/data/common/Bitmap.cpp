@@ -205,7 +205,6 @@ void Bitmap::GetImage(const std::string& filepath, wxImage& dst_img)
 
 	pimg::Condense cd(img->GetPixelData(), img->GetWidth(), img->GetHeight());
 	pimg::Rect r = cd.GetRegion();
-	img->RemoveReference();
 
 	wxImage wx_img;
 	wx_img.LoadFile(filepath);
@@ -218,6 +217,8 @@ void Bitmap::GetImage(const std::string& filepath, wxImage& dst_img)
 	wx_rect.SetBottom(h - r.ymin - 1);
 
 	dst_img = wx_img.GetSubImage(wx_rect);
+
+	img->RemoveReference();
 }
 
 }

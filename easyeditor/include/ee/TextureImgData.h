@@ -14,8 +14,6 @@ public:
 	
 	virtual unsigned int GetTexID() const { return m_texid; }
 
-	virtual std::string GetFilepath() const;
-
 	virtual int GetWidth() const;
 	virtual int GetHeight() const;
 	virtual int GetFormat() const;
@@ -23,8 +21,6 @@ public:
 	virtual void LoadFromMemory(const uint8_t* pixels, int w, int h, int fmt);
 
 private:
-	std::string m_filepath;
-
 	int m_width, m_height;
 	int m_format;
 

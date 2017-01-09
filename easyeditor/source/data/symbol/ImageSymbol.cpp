@@ -110,13 +110,7 @@ int ImageSymbol::GetScreenCacheTexid() const
 
 void ImageSymbol::LoadResources()
 {
-	gum::AsyncTask::Instance()->Load(m_filepath, LoadCB, ParserCB, this);
-
-// 	ImageData* img_data = ImageDataMgr::Instance()->GetItem(m_filepath);
-// 	ImageMgr::Instance()->GetItem(m_filepath, &m_image);
-// 	img_data->RemoveReference();
-// 
-// 	InitCoreTex();
+	LoadSync();
 }
 
 void ImageSymbol::InitCoreTex()
@@ -129,6 +123,22 @@ void ImageSymbol::InitCoreTex()
 	const sm::vec2& offset = m_image->GetOffset();
 
 	InitTex(m_image->GetS2Tex(), r, offset);
+}
+
+void ImageSymbol::LoadSync()
+{
+	m_bitmap = new Bitmap(m_filepath);
+	ImageMgr::Instance()->GetItem(m_filepath, &m_image);
+	InitCoreTex();
+}
+
+void ImageSymbol::LoadAsync()
+{
+	gum::AsyncTask::Instance()->Load(m_filepath, LoadCB, ParserCB, this);
+
+	int w, h;
+	gimg_read_header(m_filepath.c_str(), &w, &h);
+	m_size.Build(w, h);
 }
 
 void ImageSymbol::LoadCB(const char* filepath, void (*unpack)(const void* data, size_t size, void* ud), void* ud)

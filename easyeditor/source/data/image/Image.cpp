@@ -52,13 +52,17 @@ Image::Image(const s2::RenderTarget* rt)
 
 Image::~Image()
 {
-	ImageMgr::Instance()->RemoveItem(m_tex->GetFilepath());
+	if (!m_filepath.empty()) {
+		ImageMgr::Instance()->RemoveItem(m_filepath);
+	}
 	delete m_tex;
 	m_s2_tex->RemoveReference();
 }
 
 bool Image::LoadFromFile(const std::string& filepath)
 {
+	m_filepath = filepath;
+
 	if (!Config::Instance()->GetSettings().load_image) 
 	{
 		ImageData* img_data = ImageDataMgr::Instance()->GetItem(filepath);
@@ -110,11 +114,6 @@ bool Image::LoadFromFile(const std::string& filepath)
 	}
 
 	return true;
-}
-
-std::string Image::GetFilepath() const 
-{ 
-	return m_tex->GetFilepath(); 
 }
 
 unsigned int Image::GetTexID() const 
