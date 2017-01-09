@@ -178,6 +178,45 @@ void SprFilterProperty::ToPS(const Sprite* spr, wxPropertyGrid* pg)
 	}
 }
 
+static void set_filepath_cb(const std::string& filepath, void* ud)
+{
+	s2::RenderFilter* filter = static_cast<s2::RenderFilter*>(ud);
+	if (s2::RFHeatHaze* hh = dynamic_cast<s2::RFHeatHaze*>(filter)) 
+	{
+		hh->SetFilepath(filepath);
+
+		sl::HeatHazeProg* prog = NULL;
+		sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
+		sl::FilterShader* shader = static_cast<sl::FilterShader*>(mgr->GetShader(sl::FILTER));
+		if (shader) {
+			prog = static_cast<sl::HeatHazeProg*>(shader->GetProgram(sl::FM_HEAT_HAZE));
+		}
+		if (prog) {
+			Image* img = ImageMgr::Instance()->GetItem(filepath);
+			if (img) {
+				prog->SetDistortionMapTex(img->GetTexID());
+			}
+		}
+	} 
+	else if (s2::RFColGrading* cg = dynamic_cast<s2::RFColGrading*>(filter))
+	{
+		cg->SetFilepath(filepath);
+
+		sl::ColGradingProg* prog = NULL;
+		sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
+		sl::FilterShader* shader = static_cast<sl::FilterShader*>(mgr->GetShader(sl::FILTER));
+		if (shader) {
+			prog = static_cast<sl::ColGradingProg*>(shader->GetProgram(sl::FM_COL_GRADING));
+		}
+		if (prog) {
+			Image* img = ImageMgr::Instance()->GetItem(filepath);
+			if (img) {
+				prog->SetLUTTex(img->GetTexID());
+			}
+		}
+	}
+}
+
 void SprFilterProperty::CreateSubPS(wxPropertyGrid* pg, wxPGProperty* parent, const s2::RenderFilter* filter)
 {
 	s2::FilterMode mode = filter->GetMode();
@@ -208,12 +247,9 @@ void SprFilterProperty::CreateSubPS(wxPropertyGrid* pg, wxPGProperty* parent, co
 		{
 			const s2::RFHeatHaze* hh = static_cast<const s2::RFHeatHaze*>(filter);
 
-// 			FilepathProperty* prop = new FilepathProperty("Filepath", wxPG_LABEL, hh->GetFilepath());
-// 			prop->SetParent(m_parent);
-// 			prop->SetFilter("*.png");
-
-			wxPGProperty* filepath_prop = new wxStringProperty("Filepath", wxPG_LABEL, hh->GetFilepath());
-			pg->AppendIn(parent, filepath_prop);
+			FilepathProperty* file_prop = new FilepathProperty("Filepath", wxPG_LABEL, hh->GetFilepath());
+			file_prop->SetCallback(set_filepath_cb, const_cast<s2::RenderFilter*>(filter));
+			pg->AppendIn(parent, file_prop);
 
 			float dist, rise;
 			hh->GetFactor(dist, rise);
@@ -226,8 +262,9 @@ void SprFilterProperty::CreateSubPS(wxPropertyGrid* pg, wxPGProperty* parent, co
 	case s2::FM_COL_GRADING:
 		{
 			const s2::RFColGrading* cg = static_cast<const s2::RFColGrading*>(filter);
-			wxPGProperty* filepath_prop = new wxStringProperty("Filepath", wxPG_LABEL, cg->GetFilepath());
-			pg->AppendIn(parent, filepath_prop);
+			FilepathProperty* file_prop = new FilepathProperty("Filepath", wxPG_LABEL, cg->GetFilepath());
+			file_prop->SetCallback(set_filepath_cb, const_cast<s2::RenderFilter*>(filter));
+			pg->AppendIn(parent, file_prop);
 		}
 		break;
 	}

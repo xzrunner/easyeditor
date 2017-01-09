@@ -20,12 +20,20 @@ public:
 
 	void SetParent(wxWindow* parent) { m_parent = parent; }
 
+	void SetCallback(void (*cb)(const std::string& fileppath, void* ud), void* ud) {
+		m_cb = cb;
+		m_ud = ud;
+	}
+
 private:
 	wxWindow* m_parent;
 
 	std::string m_filter;
 
 	std::string m_filepath;
+
+	void (*m_cb)(const std::string& fileppath, void* ud);
+	void* m_ud;
 
 }; // FilepathProperty
 
