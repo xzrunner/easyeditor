@@ -30,12 +30,16 @@ void Skeleton2Mesh::PackToLuaString(ebuilder::CodeGenerator& gen) const
 {
 	const std::vector<s2::Skeleton2Mesh::SkinnedVertex>& 
 		vertices = m_mesh->GetVertices();
-	for (int i = 0, n = vertices.size(); i < n; ++i) {
-		PackToLuaString(vertices[i], gen);
+	lua::assign_with_end(gen, "vertices_num", vertices.size());
+	{
+		lua::TableAssign ta(gen, "vertices", true);
+		for (int i = 0, n = vertices.size(); i < n; ++i) {
+			PackToLuaString(vertices[i], gen);
+		}
 	}
 
 	PackCoords::PackToLua(gen, m_mesh->GetTexcoords(), "texcoords", 8192);
-	PackArray<int, uint16_t, uint16_t>::PackToLua(gen, m_mesh->GetTriangles(), "texcoords");
+	PackArray<int, uint16_t, uint16_t>::PackToLua(gen, m_mesh->GetTriangles(), "triangles");
 }
 
 int Skeleton2Mesh::SizeOfUnpackFromBin() const
@@ -96,7 +100,15 @@ void Skeleton2Mesh::PackToBin(uint8_t** ptr) const
 
 void Skeleton2Mesh::PackToLuaString(const VERTEX& vertex, ebuilder::CodeGenerator& gen)
 {
-	// todo
+	for (int i = 0, n = vertex.items.size(); i < n; ++i) 
+	{
+		const s2::Skeleton2Mesh::SkinnedVertex::Item& v = vertex.items[i];
+		lua::connect(gen, 4, 
+			lua::assign("joint", v.joint), 
+			lua::assign("vx", v.vx),
+			lua::assign("vy", v.vy),
+			lua::assign("weight", v.weight));
+	}
 }
 
 int Skeleton2Mesh::SizeOfUnpackFromBin(const VERTEX& vertex)

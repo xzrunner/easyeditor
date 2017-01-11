@@ -21,6 +21,7 @@ PackToLua(ebuilder::CodeGenerator& gen, const std::vector<T>& array, const std::
 	ss << name << " = {";
 	for (int i = 0, n = array.size(); i < n; ++i) {
 		TPack v = static_cast<TPack>(array[i]);
+		ss << v << ", ";
 	}
 	ss << "}";
 	gen.line(ss.str());

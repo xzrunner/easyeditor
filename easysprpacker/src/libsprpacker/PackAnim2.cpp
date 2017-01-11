@@ -1,6 +1,7 @@
 #include "PackAnim2.h"
 #include "PackNodeFactory.h"
 #include "binary_io.h"
+#include "PackCoords.h"
 
 #include <easyanim2.h>
 #include <easybuilder.h>
@@ -31,6 +32,49 @@ void PackAnim2::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TextureP
 
 	lua::assign_with_end(gen, "type", "\"anim2\"");
 	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(GetID()));
+
+	lua::assign_with_end(gen, "joints_num", m_joints.size());
+	{
+		lua::TableAssign ta(gen, "joints", true);
+		for (int i = 0, n = m_joints.size(); i < n; ++i) {
+			m_joints[i].PackToLuaString(gen);
+		}
+	}
+
+	lua::assign_with_end(gen, "skins_num", m_skins.size());
+	{
+		lua::TableAssign ta(gen, "skins", true);
+		for (int i = 0, n = m_skins.size(); i < n; ++i) {
+			m_skins[i].PackToLuaString(gen);
+		}
+	}
+
+	lua::assign_with_end(gen, "slots_num", m_slots.size());
+	{
+		lua::TableAssign ta(gen, "slots", true);
+		for (int i = 0, n = m_slots.size(); i < n; ++i) {
+			m_slots[i].PackToLuaString(gen);
+		}
+	}
+
+	{
+		lua::TableAssign ta(gen, "tl_joints", true);
+		for (int i = 0, n = m_tl_joints.size(); i < n; ++i) {
+			m_tl_joints[i].PackToLuaString(gen);
+		}
+	}
+	{
+		lua::TableAssign ta(gen, "tl_skins", true);
+		for (int i = 0, n = m_tl_skins.size(); i < n; ++i) {
+			m_tl_skins[i].PackToLuaString(gen);
+		}
+	}
+	{
+		lua::TableAssign ta(gen, "tl_deforms", true);
+		for (int i = 0, n = m_tl_deforms.size(); i < n; ++i) {
+			m_tl_deforms[i].PackToLuaString(gen);
+		}
+	}
 
 	gen.detab();
 	gen.line("},");
@@ -247,14 +291,14 @@ void PackAnim2::InitTimeline(const rg_timeline* tl)
 		rg_tl_skin* src = tl->skins[i];
 		TL_Skin dst;
 
-		dst.smaples.reserve(src->skin_count);
+		dst.samples.reserve(src->skin_count);
 		for (int j = 0; j < src->skin_count; ++j)
 		{
 			rg_skin_sample* s_src = &src->skins[j];
 			SkinSample s_dst;
 			s_dst.skin = s_src->skin;
 			s_dst.time = s_src->time;
-			dst.smaples.push_back(s_dst);
+			dst.samples.push_back(s_dst);
 		}
 
 		m_tl_skins.push_back(dst);
@@ -293,6 +337,17 @@ void PackAnim2::InitTimeline(const rg_timeline* tl)
 /************************************************************************/
 
 void PackAnim2::Srt::
+PackToLuaString(ebuilder::CodeGenerator& gen) const
+{
+	lua::connect(gen, 5,
+		lua::assign("trans_x", trans.x),
+		lua::assign("trans_y", trans.y),
+		lua::assign("rot", rot),
+		lua::assign("scale_x", scale.x),
+		lua::assign("scale_y", scale.y));
+}
+
+void PackAnim2::Srt::
 Init(const rg_pose_srt& srt)
 {
 	trans.Set(srt.trans[0], srt.trans[1]);
@@ -328,6 +383,16 @@ PackToBin(uint8_t** ptr) const
 /************************************************************************/
 /* struct PackAnim2::Joint                                              */
 /************************************************************************/
+
+void PackAnim2::Joint::
+PackToLuaString(ebuilder::CodeGenerator& gen) const
+{
+	lua::assign_with_end(gen, "name", name);
+	lua::connect(gen, 2,
+		lua::assign("parent", parent),
+		lua::assign("children_count", children_count));
+	local.PackToLuaString(gen);
+}
 
 int PackAnim2::Joint::
 SizeOfPackToBin() const
@@ -370,6 +435,15 @@ PackAnim2::Skin::
 	}
 }
 
+void PackAnim2::Skin::
+PackToLuaString(ebuilder::CodeGenerator& gen) const
+{
+	lua::connect(gen, 2,
+		lua::assign("symbol", node->GetID()),
+		lua::assign("type", type));
+	local.PackToLuaString(gen);
+}
+
 int PackAnim2::Skin::
 SizeOfPackToBin() const
 {
@@ -396,6 +470,14 @@ PackToBin(uint8_t** ptr) const
 /* struct PackAnim2::Slot                                               */
 /************************************************************************/
 
+void PackAnim2::Slot::
+PackToLuaString(ebuilder::CodeGenerator& gen) const
+{
+	lua::connect(gen, 2,
+		lua::assign("joint", joint),
+		lua::assign("skin", skin));
+}
+
 int PackAnim2::Slot::
 SizeOfPackToBin() const
 {
@@ -415,6 +497,15 @@ PackToBin(uint8_t** ptr) const
 /************************************************************************/
 /* struct PackAnim2::JointSample                                        */
 /************************************************************************/
+
+void PackAnim2::JointSample::
+PackToLuaString(ebuilder::CodeGenerator& gen) const
+{
+	lua::connect(gen, 3,
+		lua::assign("time", time),
+		lua::assign("lerp", lerp),
+		lua::assign("data", data));
+}
 
 int PackAnim2::JointSample::
 SizeOfPackToBin() const
@@ -442,6 +533,28 @@ PackToBin(uint8_t** ptr) const
 /************************************************************************/
 /* struct PackAnim2::TL_Joint                                           */
 /************************************************************************/
+
+void PackAnim2::TL_Joint::
+PackToLuaString(ebuilder::CodeGenerator& gen) const
+{
+	lua::assign_with_end(gen, "type", type);
+	
+	lua::connect(gen, 7,
+		lua::assign("trans_x",	dims_count[0]),
+		lua::assign("trans_y",	dims_count[1]),
+		lua::assign("rot",		dims_count[2]),
+		lua::assign("scale_x",	dims_count[3]),
+		lua::assign("scale_y",	dims_count[4]),
+		lua::assign("shear_x",	dims_count[5]),
+		lua::assign("shear_y",	dims_count[6]));
+
+	{
+		lua::TableAssign ta(gen, "samples", true);
+		for (int i = 0, n = samples.size(); i < n; ++i) {
+			samples[i].PackToLuaString(gen);
+		}
+	}
+}
 
 int PackAnim2::TL_Joint::
 SizeOfPackToBin() const
@@ -475,6 +588,14 @@ PackToBin(uint8_t** ptr) const
 /* struct PackAnim2::SkinSample                                         */
 /************************************************************************/
 
+void PackAnim2::SkinSample::
+PackToLuaString(ebuilder::CodeGenerator& gen) const
+{
+	lua::connect(gen, 2,
+		lua::assign("time", time),
+		lua::assign("skin", skin));	
+}
+
 int PackAnim2::SkinSample::
 SizeOfPackToBin() const
 {
@@ -497,12 +618,21 @@ PackToBin(uint8_t** ptr) const
 /* struct PackAnim2::TL_Skin                                            */
 /************************************************************************/
 
+void PackAnim2::TL_Skin::
+PackToLuaString(ebuilder::CodeGenerator& gen) const
+{
+	lua::TableAssign ta(gen, "samples", true);
+	for (int i = 0, n = samples.size(); i < n; ++i) {
+		samples[i].PackToLuaString(gen);
+	}	
+}
+
 int PackAnim2::TL_Skin::
 SizeOfPackToBin() const
 {
 	int sz = 0;
-	for (int i = 0, n = smaples.size(); i < n; ++i) {
-		sz += smaples[i].SizeOfPackToBin();
+	for (int i = 0, n = samples.size(); i < n; ++i) {
+		sz += samples[i].SizeOfPackToBin();
 	}
 	return sz;
 }
@@ -510,14 +640,24 @@ SizeOfPackToBin() const
 void PackAnim2::TL_Skin::
 PackToBin(uint8_t** ptr) const
 {
-	for (int i = 0, n = smaples.size(); i < n; ++i) {
-		smaples[i].PackToBin(ptr);
+	for (int i = 0, n = samples.size(); i < n; ++i) {
+		samples[i].PackToBin(ptr);
 	}
 }
 
 /************************************************************************/
 /* struct PackAnim2::DeformSample                                       */
 /************************************************************************/
+
+void PackAnim2::DeformSample::
+PackToLuaString(ebuilder::CodeGenerator& gen) const
+{
+	lua::connect(gen, 2,
+		lua::assign("time", time),
+		lua::assign("offset", offset));	
+
+	PackCoords::PackToLua(gen, data, "data");
+}
 
 int PackAnim2::DeformSample::
 SizeOfPackToBin() const
@@ -554,6 +694,15 @@ PackToBin(uint8_t** ptr) const
 /************************************************************************/
 /* struct PackAnim2::TL_Deform                                          */
 /************************************************************************/
+
+void PackAnim2::TL_Deform::
+PackToLuaString(ebuilder::CodeGenerator& gen) const
+{
+	lua::TableAssign ta(gen, "deforms", true);
+	for (int i = 0, n = deforms.size(); i < n; ++i) {
+		deforms[i].PackToLuaString(gen);
+	}	
+}
 
 int PackAnim2::TL_Deform::
 SizeOfPackToBin() const

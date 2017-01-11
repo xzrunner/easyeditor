@@ -34,7 +34,9 @@ void PackAnim2Spr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::Textu
 	lua::assign_with_end(gen, "type", "\"anim2_spr\"");
 	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(GetID()));
 
-	lua::assign_with_end(gen, "static_time", m_static_time);	
+	lua::connect(gen, 2, 
+		lua::assign("sym_id", m_sym->GetID()), 
+		lua::assign("static_time", m_static_time));
 
 	gen.detab();
 	gen.line("},");

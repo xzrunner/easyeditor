@@ -66,7 +66,31 @@ void PackMesh::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePa
 	lua::connect(gen, 1, 
 		lua::assign("base_id", m_base->GetID()));
 
-	if (m_mesh) {
+	if (m_mesh) 
+	{
+		std::string type;
+		switch (m_mesh->Type())
+		{
+		case simp::MESH_STRIP:
+			type = "strip";
+			break;
+		case simp::MESH_NETWORK:
+			type = "network";
+			break;
+		case simp::MESH_TRIANGLES:
+			type = "triangles";
+			break;
+		case simp::MESH_SKELETON:
+			type = "skeleton";
+			break;
+		case simp::MESH_SKELETON2:
+			type = "skeleton2";
+			break;
+		}
+
+		lua::connect(gen, 1, 
+			lua::assign("mesh_type", type));
+
 		m_mesh->PackToLuaString(gen);
 	}
 

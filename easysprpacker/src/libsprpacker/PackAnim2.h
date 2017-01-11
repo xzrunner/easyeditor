@@ -52,6 +52,7 @@ private:
 
 		void Init(const rg_pose_srt& srt);
 
+		void PackToLuaString(ebuilder::CodeGenerator& gen) const;
 		int SizeOfPackToBin() const;
 		void PackToBin(uint8_t** ptr) const;
 	};
@@ -65,6 +66,7 @@ private:
 
 		Srt local;
 
+		void PackToLuaString(ebuilder::CodeGenerator& gen) const;
 		int SizeOfPackToBin() const;
 		void PackToBin(uint8_t** ptr) const;
 	};
@@ -78,6 +80,7 @@ private:
 		Skin();
 		~Skin();
 
+		void PackToLuaString(ebuilder::CodeGenerator& gen) const;
 		int SizeOfPackToBin() const;
 		void PackToBin(uint8_t** ptr) const;
 	};
@@ -87,6 +90,7 @@ private:
 		uint16_t joint;
 		uint16_t skin;
 
+		void PackToLuaString(ebuilder::CodeGenerator& gen) const;
 		int SizeOfPackToBin() const;
 		void PackToBin(uint8_t** ptr) const;
 	};
@@ -98,6 +102,7 @@ private:
 		uint8_t  padding;
 		float	 data;
 
+		void PackToLuaString(ebuilder::CodeGenerator& gen) const;
 		int SizeOfPackToBin() const;
 		void PackToBin(uint8_t** ptr) const;
 	};
@@ -108,6 +113,7 @@ private:
 		int dims_count[DIM_COUNT];
 		std::vector<JointSample> samples;
 
+		void PackToLuaString(ebuilder::CodeGenerator& gen) const;
 		int SizeOfPackToBin() const;
 		void PackToBin(uint8_t** ptr) const;
 	};
@@ -117,14 +123,16 @@ private:
 		uint16_t time;
 		uint16_t skin;
 
+		void PackToLuaString(ebuilder::CodeGenerator& gen) const;
 		int SizeOfPackToBin() const;
 		void PackToBin(uint8_t** ptr) const;
 	};
 
 	struct TL_Skin
 	{
-		std::vector<SkinSample> smaples;
+		std::vector<SkinSample> samples;
 
+		void PackToLuaString(ebuilder::CodeGenerator& gen) const;
 		int SizeOfPackToBin() const;
 		void PackToBin(uint8_t** ptr) const;
 	};
@@ -135,6 +143,7 @@ private:
 		uint16_t offset;
 		std::vector<sm::vec2> data;
 
+		void PackToLuaString(ebuilder::CodeGenerator& gen) const;
 		int SizeOfPackToBin() const;
 		void PackToBin(uint8_t** ptr) const;
 	};
@@ -143,6 +152,7 @@ private:
 	{
 		std::vector<DeformSample> deforms;
 
+		void PackToLuaString(ebuilder::CodeGenerator& gen) const;
 		int SizeOfPackToBin() const;
 		void PackToBin(uint8_t** ptr) const;
 	};

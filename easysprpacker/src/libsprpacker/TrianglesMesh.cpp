@@ -28,7 +28,7 @@ void TrianglesMesh::PackToLuaString(ebuilder::CodeGenerator& gen) const
 {
 	PackCoords::PackToLua(gen, m_mesh->GetVertices(), "vertices");
 	PackCoords::PackToLua(gen, m_mesh->GetTexcoords(), "texcoords", 8192);
-	PackArray<int, uint16_t, uint16_t>::PackToLua(gen, m_mesh->GetTriangles(), "texcoords");
+	PackArray<int, uint16_t, uint16_t>::PackToLua(gen, m_mesh->GetTriangles(), "triangles");
 }
 
 int TrianglesMesh::SizeOfUnpackFromBin() const
