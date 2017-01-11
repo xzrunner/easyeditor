@@ -39,9 +39,24 @@ void PackAnim2::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TextureP
 int PackAnim2::SizeOfUnpackFromBin() const
 {
 	int sz = simp::NodeAnim2::Size();
+	// joints
+	sz += sizeof(uint16_t);
 	sz += simp::NodeAnim2::JointSize() * m_joints.size();
+	// skins
+	sz += sizeof(uint16_t);
 	sz += simp::NodeAnim2::SkinSize() * m_skins.size();
+	// slots
+	sz += sizeof(uint16_t);
 	sz += simp::NodeAnim2::SlotSize() * m_slots.size();
+	// tl joints
+	sz += sizeof(uint16_t);
+	sz += simp::NodeAnim2::TLJointSize() * m_tl_joints.size();
+	// tl skins
+	sz += sizeof(uint16_t);
+	sz += simp::NodeAnim2::TLSkinSize() * m_tl_skins.size();
+	// tl deforms
+	sz += sizeof(uint16_t);
+	sz += simp::NodeAnim2::TLDeformSize() * m_tl_deforms.size();
 	return sz;
 }
 
@@ -52,16 +67,31 @@ int PackAnim2::SizeOfPackToBin() const
 	sz += sizeof(uint8_t);			// type
 	sz += sizeof(uint16_t);         // root
 	// joints
+	sz += sizeof(uint16_t);
 	for (int i = 0, n = m_joints.size(); i < n; ++i) {
 		sz += m_joints[i].SizeOfPackToBin();
 	}
 	// skins
+	sz += sizeof(uint16_t);
 	for (int i = 0, n = m_skins.size(); i < n; ++i) {
 		sz += m_skins[i].SizeOfPackToBin();
 	}
 	// slots
+	sz += sizeof(uint16_t);
 	for (int i = 0, n = m_slots.size(); i < n; ++i) {
 		sz += m_slots[i].SizeOfPackToBin();
+	}
+	// tl joints
+	for (int i = 0, n = m_tl_joints.size(); i < n; ++i) {
+		sz += m_tl_joints[i].SizeOfPackToBin();
+	}
+	// tl skins
+	for (int i = 0, n = m_tl_skins.size(); i < n; ++i) {
+		sz += m_tl_skins[i].SizeOfPackToBin();
+	}
+	// tl deforms
+	for (int i = 0, n = m_tl_deforms.size(); i < n; ++i) {
+		sz += m_tl_deforms[i].SizeOfPackToBin();
 	}
 	return sz;
 }
@@ -74,17 +104,38 @@ void PackAnim2::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scal
 	uint8_t type = simp::TYPE_ANIM2;
 	pack(type, ptr);
 
+	uint16_t root = m_root;
+	pack(root, ptr);
+
 	// joints
-	for (int i = 0, n = m_joints.size(); i < n; ++i) {
+	uint16_t joints_n = m_joints.size();
+	pack(joints_n, ptr);
+	for (int i = 0; i < joints_n; ++i) {
 		m_joints[i].PackToBin(ptr);
 	}
 	// skins
-	for (int i = 0, n = m_skins.size(); i < n; ++i) {
+	uint16_t skins_n = m_skins.size();
+	pack(skins_n, ptr);
+	for (int i = 0; i < skins_n; ++i) {
 		m_skins[i].PackToBin(ptr);
 	}
 	// slots
-	for (int i = 0, n = m_slots.size(); i < n; ++i) {
+	uint16_t slots_n = m_slots.size();
+	pack(slots_n, ptr);
+	for (int i = 0; i < slots_n; ++i) {
 		m_slots[i].PackToBin(ptr);
+	}
+	// tl joints
+	for (int i = 0, n = m_tl_joints.size(); i < n; ++i) {
+		m_tl_joints[i].PackToBin(ptr);
+	}
+	// tl skins
+	for (int i = 0, n = m_tl_skins.size(); i < n; ++i) {
+		m_tl_skins[i].PackToBin(ptr);
+	}
+	// tl deforms
+	for (int i = 0, n = m_tl_deforms.size(); i < n; ++i) {
+		m_tl_deforms[i].PackToBin(ptr);
 	}
 }
 
@@ -120,7 +171,7 @@ void PackAnim2::InitSkeleton(const rg_skeleton* sk)
 		const rg_skin& src = sk->skins[i];
 		Skin dst;
 		s2::Symbol* sym = static_cast<s2::Symbol*>(src.ud);
-		dst.node = PackNodeFactory::Instance()->Create(dynamic_cast<ee::Symbol*>(sym));
+		dst.node = PackNodeFactory::Instance()->Create(VI_DOWNCASTING<ee::Symbol*>(sym));
 		switch (sym->Type())
 		{
 		case s2::SYM_IMAGE:
@@ -163,26 +214,29 @@ void PackAnim2::InitTimeline(const rg_timeline* tl)
 	{
 		rg_tl_joint* src = tl->joints[i];
 		TL_Joint dst;
+		if (!src) {
+			dst.type = 0;
+			memset(dst.dims_count, 0, sizeof(dst.dims_count));
+		} else {
+			dst.type = src->type;
 
-		dst.type = src->type;
-		
-		int count = 0;
-		for (int j = 0; j < DIM_COUNT; ++i) {
-			count += src->dims_count[j];
-			dst.dims_count[j] = src->dims_count[j];
-		}
+			int count = 0;
+			for (int j = 0; j < DIM_COUNT; ++j) {
+				count += src->dims_count[j];
+				dst.dims_count[j] = src->dims_count[j];
+			}
 
-		dst.samples.reserve(count);
-		for (int j = 0; j < count; ++j) 
-		{
-			rg_joint_sample* s_src = &src->samples[j];
-			JointSample s_dst;
-			s_dst.time = s_src->time;
-			s_dst.lerp = s_src->lerp;
-			s_dst.data = s_src->data;
-			dst.samples.push_back(s_dst);
+			dst.samples.reserve(count);
+			for (int j = 0; j < count; ++j) 
+			{
+				rg_joint_sample* s_src = &src->samples[j];
+				JointSample s_dst;
+				s_dst.time = s_src->time;
+				s_dst.lerp = s_src->lerp;
+				s_dst.data = s_src->data;
+				dst.samples.push_back(s_dst);
+			}
 		}
-		
 		m_tl_joints.push_back(dst);
 	}
 

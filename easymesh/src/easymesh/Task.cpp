@@ -42,14 +42,14 @@ void Task::Load(const char* filepath)
 	Symbol* mesh_sym = static_cast<Symbol*>(sym);
 	m_stage->SetMeshSymbol(mesh_sym);
 
-	gum::MeshType type;
+	s2::MeshType type;
 	s2::Mesh* mesh = mesh_sym->GetMesh();
 	if (dynamic_cast<Network*>(mesh)) {
-		type = gum::MESH_NETWORK;
+		type = s2::MESH_NETWORK;
 	} else if (dynamic_cast<Strip*>(mesh)) {
-		type = gum::MESH_STRIP;
+		type = s2::MESH_STRIP;
 	} else if (dynamic_cast<Skeleton*>(mesh)) {
-		type = gum::MESH_SKELETON;
+		type = s2::MESH_SKELETON;
 	}
 	m_toolbar->SetEditType(type);
 

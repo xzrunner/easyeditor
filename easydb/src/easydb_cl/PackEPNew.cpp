@@ -9,6 +9,7 @@
 #include <easysprpacker.h>
 
 #include <gum/FilepathHelper.h>
+#include <sprite2/SprTimer.h>
 
 namespace edb
 {
@@ -66,6 +67,8 @@ int PackEPNew::Run(int argc, char *argv[])
 		ids_mgr->AddCurrPath(argv[12]);
 		ids_mgr->AddCurrPath(argv[2]);
 	}
+
+	s2::SprTimer::Instance()->Init();
 
 	Trigger(argv[2], argv[3], argv[4], argv[5], argv[6], LOD, scale);
 

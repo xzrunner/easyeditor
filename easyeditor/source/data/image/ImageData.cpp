@@ -42,9 +42,6 @@ bool ImageData::LoadFromFile(const std::string& filepath)
 {
 	m_filepath = filepath;
 	m_pixels = TextureFactory::Instance()->Load(filepath, m_width, m_height, m_format);
-	if (!m_pixels) {
-		throw Exception("Load image fail: %s", filepath.c_str());
-	}
 	return true;
 }
 

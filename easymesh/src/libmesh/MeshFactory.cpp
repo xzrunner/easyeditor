@@ -13,20 +13,20 @@ Mesh* MeshFactory::CreateMesh(const ee::Symbol* base) const
 	Mesh* mesh = NULL;
 	switch (m_type)
 	{
-	case gum::MESH_NETWORK:
+	case s2::MESH_NETWORK:
 		mesh = new Network(base);
 		break;
-	case gum::MESH_STRIP:
+	case s2::MESH_STRIP:
 		mesh = new Strip(base);
 		break;
-	case gum::MESH_SKELETON:
+	case s2::MESH_SKELETON:
 		mesh = new Skeleton(base);
 		break;
 	}
 	return mesh;
 }
 
-void MeshFactory::SetShapeType(gum::MeshType type)
+void MeshFactory::SetShapeType(s2::MeshType type)
 {
 	m_type = type;
 }

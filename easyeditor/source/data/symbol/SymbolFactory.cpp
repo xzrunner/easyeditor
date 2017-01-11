@@ -16,10 +16,15 @@ SymbolFactory::CallbackMap SymbolFactory::m_creators;
 
 Symbol* SymbolFactory::Create(const std::string& filepath, int type)
 {
-	Symbol* sym = NULL;
 	if (type == s2::SYM_UNKNOWN) {
 		type = ee::SymbolFile::Instance()->Type(filepath);
 	}
+	return Create(type);
+}
+
+Symbol* SymbolFactory::Create(int type)
+{
+	Symbol* sym = NULL;
 	switch (type)
 	{
 	case s2::SYM_IMAGE:

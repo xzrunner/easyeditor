@@ -113,14 +113,14 @@ void PackParticle2d::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float
 
 	// body
 
-	uint16_t emission_time = float100x2int(m_emission_time);
+	uint16_t emission_time = float2int(m_emission_time, 100);
 	pack(emission_time, ptr);
 	uint16_t count = m_count;
 	pack(count, ptr);
 
-	uint16_t life = float100x2int(m_life);
+	uint16_t life = float2int(m_life, 100);
 	pack(life, ptr);
-	uint16_t life_var = float100x2int(m_life_var);
+	uint16_t life_var = float2int(m_life_var, 100);
 	pack(life_var, ptr);
 
 	uint16_t position_x = float2int(m_position.x);
@@ -420,14 +420,14 @@ PackToBin(uint8_t** ptr) const
 	uint32_t id = m_node->GetID();
 	pack(id, ptr);
 
-	uint16_t angle_start = float100x2int(m_angle_start);
+	uint16_t angle_start = float2int(m_angle_start, 100);
 	pack(angle_start, ptr);
-	uint16_t angle_end = float100x2int(m_angle_end);
+	uint16_t angle_end = float2int(m_angle_end, 100);
 	pack(angle_end, ptr);
 
-	uint16_t scale_start = float100x2int(m_scale_start);
+	uint16_t scale_start = float2int(m_scale_start, 100);
 	pack(scale_start, ptr);
-	uint16_t scale_end = float100x2int(m_scale_end);
+	uint16_t scale_end = float2int(m_scale_end, 100);
 	pack(scale_end, ptr);
 
 	uint32_t mul_col_begin = m_mul_col_begin;

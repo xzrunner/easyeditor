@@ -25,7 +25,7 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage, bool full, Sprit
 	SetSizer(InitLayout());	
 }
 
-void ToolbarPanel::SetEditType(gum::MeshType type)
+void ToolbarPanel::SetEditType(s2::MeshType type)
 {
 	MeshFactory::Instance()->SetShapeType(type);
 	if (m_create_cmpt) {
@@ -52,7 +52,7 @@ wxSizer* ToolbarPanel::InitLayout()
 		choices.Add(wxT("skeleton"));
 		m_type_choice = new wxRadioBox(this, wxID_ANY, wxT("Type"), wxDefaultPosition, wxDefaultSize, choices, 3, wxRA_SPECIFY_ROWS);
 		m_type_choice->SetSelection(0);
-		MeshFactory::Instance()->SetShapeType(gum::MESH_NETWORK);
+		MeshFactory::Instance()->SetShapeType(s2::MESH_NETWORK);
 		Connect(m_type_choice->GetId(), wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler(ToolbarPanel::OnChangeType));
 		sizer->Add(m_type_choice);
 	}
@@ -96,7 +96,7 @@ void ToolbarPanel::OnSetSpeed(wxCommandEvent& event)
 void ToolbarPanel::OnChangeType(wxCommandEvent& event)
 {
 	int idx = event.GetSelection();
-	SetEditType(gum::MeshType(idx));
+	SetEditType(s2::MeshType(idx));
 	m_stage->RecreateMesh();
 }
 

@@ -153,6 +153,22 @@
 			Name="nodes"
 			>
 			<File
+				RelativePath="..\..\..\src\libsprpacker\PackArray.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libsprpacker\PackArray.inl"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libsprpacker\PackCoords.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libsprpacker\PackCoords.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libsprpacker\PackNode.cpp"
 				>
 			</File>
@@ -166,14 +182,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\libsprpacker\PackTrans.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libsprpacker\PackVertices.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libsprpacker\PackVertices.h"
 				>
 			</File>
 			<Filter
@@ -384,6 +392,10 @@
 				Name="11.mesh"
 				>
 				<File
+					RelativePath="..\..\..\src\libsprpacker\MeshShape.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libsprpacker\PackMesh.cpp"
 					>
 				</File>
@@ -399,6 +411,34 @@
 					RelativePath="..\..\..\src\libsprpacker\PackMeshSpr.h"
 					>
 				</File>
+				<Filter
+					Name="shape"
+					>
+					<File
+						RelativePath="..\..\..\src\libsprpacker\NetworkMesh.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libsprpacker\NetworkMesh.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libsprpacker\Skeleton2Mesh.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libsprpacker\Skeleton2Mesh.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libsprpacker\TrianglesMesh.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libsprpacker\TrianglesMesh.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="10.shape"

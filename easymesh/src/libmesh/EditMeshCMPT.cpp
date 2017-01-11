@@ -26,14 +26,14 @@ EditMeshCMPT::~EditMeshCMPT()
 	m_skeleton_op->RemoveReference();
 }
 
-void EditMeshCMPT::SetEditOP(gum::MeshType type)
+void EditMeshCMPT::SetEditOP(s2::MeshType type)
 {
 	switch (type)
 	{
-	case gum::MESH_NETWORK: case gum::MESH_STRIP:
+	case s2::MESH_NETWORK: case s2::MESH_STRIP:
 		LoadEditOP(m_network_op);
 		break;
-	case gum::MESH_SKELETON:
+	case s2::MESH_SKELETON:
 		LoadEditOP(m_skeleton_op);
 		break;
 	}

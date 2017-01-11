@@ -14,6 +14,7 @@ class SymbolFactory
 {
 public:
 	static Symbol* Create(const std::string& filepath, int type = s2::SYM_UNKNOWN);
+	static Symbol* Create(int type);
 
 	typedef Symbol* (*CreateCallback)();
 	static void RegisterCreator(int type, CreateCallback cb);

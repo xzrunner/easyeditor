@@ -1,34 +1,53 @@
 #include "PackMesh.h"
 #include "PackNodeFactory.h"
 #include "binary_io.h"
-#include "PackVertices.h"
+#include "PackCoords.h"
+
+#include "NetworkMesh.h"
+#include "TrianglesMesh.h"
+#include "Skeleton2Mesh.h"
 
 #include <easymesh.h>
 #include <easybuilder.h>
 namespace lua = ebuilder::lua;
 
-#include <sprite2/MeshTriangle.h>
 #include <sprite2/NetworkMesh.h>
-#include <sprite2/NetworkShape.h>
+#include <sprite2/TrianglesMesh.h>
+#include <sprite2/Skeleton2Mesh.h>
 #include <simp/NodeMesh.h>
 #include <simp/simp_types.h>
+#include <simp/MeshType.h>
 
 namespace esprpacker
 {
 
 PackMesh::PackMesh(const emesh::Symbol* sym)
+	: m_mesh(NULL)
 {
 	m_base = PackNodeFactory::Instance()->Create(dynamic_cast<const ee::Symbol*>(
 		sym->GetMesh()->GetBaseSymbol()));
 
-	const s2::NetworkMesh* nw_mesh = VI_DOWNCASTING<const s2::NetworkMesh*>(sym->GetMesh());
-	m_outer_line = nw_mesh->GetShape()->GetVertices();
-	m_inner_line = nw_mesh->GetShape()->GetInnerVertices();
+	const s2::Mesh* mesh = sym->GetMesh();
+	switch (mesh->Type())
+	{
+	case s2::MESH_NETWORK:
+		m_mesh = new NetworkMesh(VI_DOWNCASTING<const s2::NetworkMesh*>(mesh));		
+		break;
+	case s2::MESH_TRIANGLES:
+		m_mesh = new TrianglesMesh(VI_DOWNCASTING<const s2::TrianglesMesh*>(mesh));
+		break;
+	case s2::MESH_SKELETON2:
+		m_mesh = new Skeleton2Mesh(VI_DOWNCASTING<const s2::Skeleton2Mesh*>(mesh));
+		break;
+	default:
+		throw ee::Exception("PackMesh::PackMesh unknown type %d", mesh->Type());
+	}
 }
 
 PackMesh::~PackMesh()
 {
 	m_base->RemoveReference();
+	delete m_mesh;
 }
 
 void PackMesh::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const
@@ -47,8 +66,9 @@ void PackMesh::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePa
 	lua::connect(gen, 1, 
 		lua::assign("base_id", m_base->GetID()));
 
-	PackVertices::PackToLua(gen, m_outer_line, "outer");
-	PackVertices::PackToLua(gen, m_inner_line, "inner");
+	if (m_mesh) {
+		m_mesh->PackToLuaString(gen);
+	}
 
 	gen.detab();
 	gen.line("},");
@@ -57,19 +77,22 @@ void PackMesh::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePa
 int PackMesh::SizeOfUnpackFromBin() const
 {
 	int sz = simp::NodeMesh::Size();
-	sz += PackVertices::SizeOfUnpackFromBin(m_outer_line);
-	sz += PackVertices::SizeOfUnpackFromBin(m_inner_line);
+	if (m_mesh) {
+		sz += m_mesh->SizeOfUnpackFromBin();
+	}
 	return sz;
 }
 
 int PackMesh::SizeOfPackToBin() const
 {
 	int sz = 0;
-	sz += sizeof(uint32_t);								// id
-	sz += sizeof(uint8_t);								// type
-	sz += sizeof(uint32_t);								// base id
-	sz += PackVertices::SizeOfPackToBin(m_outer_line);	// outer
-	sz += PackVertices::SizeOfPackToBin(m_inner_line);	// inner
+	sz += sizeof(uint32_t);		// id
+	sz += sizeof(uint8_t);		// type
+	sz += sizeof(uint32_t);		// base id
+	if (m_mesh) {
+		sz += sizeof(uint8_t);	// type
+		sz += m_mesh->SizeOfPackToBin();
+	}
 	return sz;
 }
 
@@ -85,8 +108,15 @@ void PackMesh::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scale
 	uint32_t base_id = m_base->GetID();
 	pack(base_id, ptr);
 
-	PackVertices::PackToBin(m_outer_line, ptr);
-	PackVertices::PackToBin(m_inner_line, ptr);
+	if (m_mesh) {
+		uint8_t type = m_mesh->Type();
+		pack(type, ptr);
+
+		m_mesh->PackToBin(ptr);
+	} else {
+		uint8_t type = simp::MESH_UNKNOWN;
+		pack(type, ptr);
+	}
 }
 
 }

@@ -3,7 +3,7 @@
 
 #include <ee/EditCMPT.h>
 
-#include <gum/MeshType.h>
+#include <sprite2/MeshType.h>
 
 namespace emesh
 {
@@ -16,7 +16,7 @@ public:
 		StagePanel* stage);
 	virtual ~CreateMeshCMPT();
 
-	void SetEditOP(gum::MeshType type);
+	void SetEditOP(s2::MeshType type);
 
 protected:
 	virtual wxSizer* InitLayout();

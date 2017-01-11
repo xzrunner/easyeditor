@@ -60,7 +60,9 @@ void TextureImgData::LoadFromMemory(const uint8_t* pixels, int w, int h, int fmt
 	m_height = h;
 	m_format = fmt;
 
-	m_texid = gum::RenderContext::Instance()->GetImpl()->CreateTexture(pixels, w, h, tf);
+	if (pixels) {
+		m_texid = gum::RenderContext::Instance()->GetImpl()->CreateTexture(pixels, w, h, tf);
+	}
 }
 
 }

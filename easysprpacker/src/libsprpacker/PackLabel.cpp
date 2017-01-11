@@ -126,7 +126,7 @@ void PackLabel::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scal
 
 	uint8_t edge = bool2int(m_tb.has_edge);
 	pack(edge, ptr);
-	uint16_t edge_size = float1024x2int(m_tb.edge_size);
+	uint16_t edge_size = float2int(m_tb.edge_size, 1024);
 	pack(edge_size, ptr);
 	uint32_t edge_color = m_tb.edge_color.ToRGBA();
 	pack(edge_color, ptr);
@@ -136,8 +136,8 @@ void PackLabel::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scal
 	uint8_t align_vert = m_tb.align_vert;
 	pack(align_vert, ptr);
 
-	uint16_t space_hori = float1024x2int(m_tb.space_hori);
-	uint16_t space_vert = float1024x2int(m_tb.space_vert);
+	uint16_t space_hori = float2int(m_tb.space_hori, 1024);
+	uint16_t space_vert = float2int(m_tb.space_vert, 1024);
 	pack(space_hori, ptr);
 	pack(space_vert, ptr);
 

@@ -12,6 +12,8 @@ namespace emesh { class Symbol; }
 namespace esprpacker
 {
 
+class MeshShape;
+
 class PackMesh : public PackNode
 {
 public:
@@ -37,8 +39,7 @@ public:
 private:
 	const PackNode* m_base;
 
-	// todo: for NetworkMesh
-	std::vector<sm::vec2> m_outer_line, m_inner_line;
+	MeshShape* m_mesh;
 
 }; // PackMesh
 

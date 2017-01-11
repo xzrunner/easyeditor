@@ -11,6 +11,8 @@ class MeshShape : public emesh::Mesh
 public:
 	MeshShape(const ee::Symbol* base);
 
+	virtual s2::MeshType Type() const { return s2::MESH_UNKNOWN; }
+
 	void InsertTriangle(const sm::vec2* vertices, 
 		const sm::vec2* texcoords, const std::vector<sm::vec2>& bound);
 

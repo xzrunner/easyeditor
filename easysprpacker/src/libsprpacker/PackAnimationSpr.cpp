@@ -76,7 +76,7 @@ void PackAnimationSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, flo
 	uint8_t loop = bool2int(m_loop);
 	pack(loop, ptr);
 
-	uint32_t interval = float1024x2int(m_interval);
+	uint32_t interval = float2int(m_interval, 1024);
 	pack(interval, ptr);
 
 	uint16_t fps = m_fps;

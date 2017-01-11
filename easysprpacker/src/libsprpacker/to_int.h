@@ -23,19 +23,8 @@ int float2int(float f) {
 	return static_cast<int>(floor(f + 0.5f));
 }
 
-inline
-int float16x2int(float f) {
-	return float2int(f * 16);
-}
-
-inline
-int float100x2int(float f) {
-	return float2int(f * 100);
-}
-
-inline
-int float1024x2int(float f) {
-	return float2int(f * 1024);
+inline int float2int(float f, int precision) {
+	return float2int(f * precision);
 }
 
 inline

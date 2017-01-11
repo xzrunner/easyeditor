@@ -72,7 +72,7 @@ void PackIconSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float sc
 	uint32_t sym = m_sym->GetID();
 	pack(sym, ptr);
 
-	uint16_t process = float1024x2int(m_process);
+	uint16_t process = float2int(m_process, 1024);
 	pack(process, ptr);
 }
 

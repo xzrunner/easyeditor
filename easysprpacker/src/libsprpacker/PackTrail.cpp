@@ -111,12 +111,12 @@ void PackTrail::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scal
 	uint16_t count = m_count;
 	pack(count, ptr);
 
-	uint16_t life_begin = float100x2int(m_life_begin);
+	uint16_t life_begin = float2int(m_life_begin, 100);
 	pack(life_begin, ptr);
-	uint16_t life_offset = float100x2int(m_life_offset);
+	uint16_t life_offset = float2int(m_life_offset, 100);
 	pack(life_offset, ptr);
 
-	uint16_t fadeout_time = float100x2int(m_fadeout_time);
+	uint16_t fadeout_time = float2int(m_fadeout_time, 100);
 	pack(fadeout_time, ptr);
 }
 
@@ -231,9 +231,9 @@ PackToBin(uint8_t** ptr) const
 	uint32_t id = m_node->GetID();
 	pack(id, ptr);
 
-	uint16_t scale_begin = float100x2int(m_scale_begin);
+	uint16_t scale_begin = float2int(m_scale_begin, 100);
 	pack(scale_begin, ptr);
-	uint16_t scale_end = float100x2int(m_scale_end);
+	uint16_t scale_end = float2int(m_scale_end, 100);
 	pack(scale_end, ptr);
 
 	uint32_t mul_col_begin = m_mul_col_begin;
@@ -287,10 +287,10 @@ SizeOfPackToBin() const
 void PackTrail::CompShape::
 PackToBin(uint8_t** ptr) const
 {
-	uint16_t linewidth = float100x2int(m_linewidth);
+	uint16_t linewidth = float2int(m_linewidth, 100);
 	pack(linewidth, ptr);
 
-	uint16_t acuity = float100x2int(m_acuity);
+	uint16_t acuity = float2int(m_acuity, 100);
 	pack(acuity, ptr);
 
 	uint32_t col_begin = m_col_begin;

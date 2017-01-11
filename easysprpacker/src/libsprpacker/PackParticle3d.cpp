@@ -103,14 +103,14 @@ void PackParticle3d::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float
 	uint8_t static_mode = bool2int(m_static_mode);
 	pack(static_mode, ptr);
 
-	uint16_t emission_time = float100x2int(m_emission_time);
+	uint16_t emission_time = float2int(m_emission_time, 100);
 	pack(emission_time, ptr);
 	uint16_t count = m_count;
 	pack(count, ptr);
 
-	uint16_t life = float100x2int(m_life);
+	uint16_t life = float2int(m_life, 100);
 	pack(life, ptr);
-	uint16_t life_var = float100x2int(m_life_var);
+	uint16_t life_var = float2int(m_life_var, 100);
 	pack(life_var, ptr);
 
 	int16_t hori = radian2int(m_hori);
@@ -154,7 +154,7 @@ void PackParticle3d::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float
 	uint16_t linear_acc_var = float2int(m_linear_acc_var);
 	pack(linear_acc_var, ptr);
 
-	uint16_t fadeout_time = float100x2int(m_fadeout_time);
+	uint16_t fadeout_time = float2int(m_fadeout_time, 100);
 	pack(fadeout_time, ptr);
 
 	uint8_t ground = m_ground;
@@ -361,9 +361,9 @@ PackToBin(uint8_t** ptr) const
 	uint16_t count = m_count;
 	pack(count, ptr);
 
-	uint16_t scale_start = float100x2int(m_scale_start);
+	uint16_t scale_start = float2int(m_scale_start, 100);
 	pack(scale_start, ptr);
-	uint16_t scale_end = float100x2int(m_scale_end);
+	uint16_t scale_end = float2int(m_scale_end, 100);
 	pack(scale_end, ptr);
 
 	int16_t angle = float2int(m_angle);

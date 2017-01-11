@@ -2,7 +2,7 @@
 #include "PackNodeFactory.h"
 #include "binary_io.h"
 #include "to_int.h"
-#include "PackVertices.h"
+#include "PackCoords.h"
 
 #include <easymesh.h>
 #include <easybuilder.h>
@@ -49,7 +49,7 @@ void PackMeshSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::Textur
 	lua::connect(gen, 1, 
 		lua::assign("base_id", m_base->GetID()));
 
-	PackVertices::PackToLua(gen, m_trans_pairs, "trans_pairs");
+	PackCoords::PackToLua(gen, m_trans_pairs, "trans_pairs");
 
 	gen.detab();
 	gen.line("},");
@@ -58,7 +58,7 @@ void PackMeshSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::Textur
 int PackMeshSpr::SizeOfUnpackFromBin() const
 {
 	int sz = simp::NodeMeshSpr::Size();
-	sz += PackVertices::SizeOfUnpackFromBin(m_trans_pairs);
+	sz += PackCoords::SizeOfUnpackFromBin(m_trans_pairs);
 	return sz;
 }
 
@@ -69,7 +69,7 @@ int PackMeshSpr::SizeOfPackToBin() const
 	sz += sizeof(uint8_t);									// type
 	sz += sizeof(uint32_t);									// mesh id
 	sz += sizeof(uint32_t);									// base id
-	sz += PackVertices::SizeOfPackToBin(m_trans_pairs);		// trans
+	sz += PackCoords::SizeOfPackToBin(m_trans_pairs);		// trans
 	return sz;
 }
 
@@ -89,7 +89,7 @@ void PackMeshSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float sc
 	uint32_t base_id = m_base->GetID();
 	pack(base_id, ptr);
 
-	PackVertices::PackToBin(m_trans_pairs, ptr);
+	PackCoords::PackToBin(m_trans_pairs, ptr);
 }
 
 bool PackMeshSpr::Equal(const emesh::Sprite* spr) const

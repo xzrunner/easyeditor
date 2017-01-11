@@ -1,6 +1,6 @@
 #include "PackIcon.h"
 #include "binary_io.h"
-#include "PackVertices.h"
+#include "PackCoords.h"
 #include "PackNodeFactory.h"
 
 #include <easyicon.h>
@@ -82,7 +82,7 @@ void PackIcon::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePa
 
 	lua::assign_with_end(gen, "icon_type", m_type);
 
-	PackVertices::PackToLua(gen, m_vertices, "vertices");
+	PackCoords::PackToLua(gen, m_vertices, "vertices");
 
 	gen.detab();
 	gen.line("},");
@@ -91,7 +91,7 @@ void PackIcon::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePa
 int PackIcon::SizeOfUnpackFromBin() const
 {
 	int sz = simp::NodeIcon::Size();
-	sz += PackVertices::SizeOfUnpackFromBin(m_vertices);
+	sz += PackCoords::SizeOfUnpackFromBin(m_vertices);
 	return sz;
 }
 
@@ -102,7 +102,7 @@ int PackIcon::SizeOfPackToBin() const
 	sz += sizeof(uint8_t);								// type
 	sz += sizeof(uint32_t);								// base id
 	sz += sizeof(uint8_t);								// icon type
-	sz += PackVertices::SizeOfPackToBin(m_vertices);	// vertices
+	sz += PackCoords::SizeOfPackToBin(m_vertices);	// vertices
 	return sz;
 }
 
@@ -121,7 +121,7 @@ void PackIcon::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scale
 	uint8_t icon_type = m_type;
 	pack(icon_type, ptr);
 
-	PackVertices::PackToBin(m_vertices, ptr);
+	PackCoords::PackToBin(m_vertices, ptr);
 }
 
 }
