@@ -18,14 +18,15 @@ BEGIN_EVENT_TABLE(EditDialog, wxDialog)
 	EVT_CLOSE(EditDialog::OnCloseEvent)
 END_EVENT_TABLE()
 
-EditDialog::EditDialog(wxWindow* parent, Sprite* spr, wxGLContext* glctx)
+EditDialog::EditDialog(wxWindow* parent, wxGLContext* glctx, 
+					   Sprite* edited, const ee::MultiSpritesImpl* sprite_impl)
 	: wxDialog(parent, wxID_ANY, "Edit Mesh", wxDefaultPosition, 
 	wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
-	, m_spr(spr)
+	, m_spr(edited)
 {
 	Symbol* sym = dynamic_cast<Symbol*>(m_spr->GetSymbol());
 	SetTitle(sym->GetFilepath());
-	InitLayout(glctx);
+	InitLayout(glctx, edited, sprite_impl);
 
 	sym->SetPause(true);
 }
@@ -36,11 +37,12 @@ EditDialog::~EditDialog()
 	sym->SetPause(false);
 }
 
-void EditDialog::InitLayout(wxGLContext* glctx)
+void EditDialog::InitLayout(wxGLContext* glctx, ee::Sprite* edited, 
+							const ee::MultiSpritesImpl* sprite_impl)
 {
  	wxSplitterWindow* splitter = new wxSplitterWindow(this);
  
- 	StagePanel* stage = new StagePanel(splitter, this, glctx);
+ 	StagePanel* stage = new StagePanel(splitter, this, glctx, edited, sprite_impl);
 	Symbol* sym = dynamic_cast<Symbol*>(m_spr->GetSymbol());
 	stage->SetMeshSymbol(sym);
  	m_stage = stage;

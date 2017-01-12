@@ -39,6 +39,26 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, wxGLContext* g
 	InitSubjects();
 }
 
+StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
+					   wxGLContext* glctx, ee::Sprite* edited, 
+					   const ee::MultiSpritesImpl* bg_sprites)
+	: ee::EditPanel(parent, frame)
+	, ee::MultiShapesImpl()
+	, m_background(NULL)
+{
+	m_sym = new Symbol;
+
+	ee::EditOP* editop = new ee::ZoomViewOP(this, GetStageImpl(), true);
+	SetEditOP(editop);
+	editop->RemoveReference();
+
+	ee::StageCanvas* canvas = new StageCanvas(this, glctx, edited, bg_sprites);
+	SetCanvas(canvas);
+	canvas->RemoveReference();
+
+	InitSubjects();
+}
+
 StagePanel::~StagePanel()
 {
 	m_sym->RemoveReference();

@@ -8,6 +8,8 @@
 
 class wxGLContext;
 
+namespace ee { class MultiSpritesImpl; }
+
 namespace emesh
 {
 
@@ -19,6 +21,8 @@ class StagePanel : public ee::EditPanel, public ee::MultiShapesImpl
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, wxGLContext* glctx, 
 		ee::LibraryPanel* library = NULL);
+	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, wxGLContext* glctx, 
+		ee::Sprite* edited, const ee::MultiSpritesImpl* bg_sprites);
 	virtual ~StagePanel();
 
 	//

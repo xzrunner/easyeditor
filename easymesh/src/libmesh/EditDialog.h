@@ -3,7 +3,7 @@
 
 #include <wx/dialog.h>
 
-namespace ee { class EditPanel; }
+namespace ee { class EditPanel; class MultiSpritesImpl; class Sprite; }
 
 class wxGLContext;
 
@@ -15,11 +15,13 @@ class Sprite;
 class EditDialog : public wxDialog
 {
 public:
-	EditDialog(wxWindow* parent, Sprite* spr, wxGLContext* glctx);
+	EditDialog(wxWindow* parent, wxGLContext* glctx, 
+		Sprite* edited, const ee::MultiSpritesImpl* sprite_impl);
 	virtual ~EditDialog();
 
 private:
-	void InitLayout(wxGLContext* glctx);
+	void InitLayout(wxGLContext* glctx, ee::Sprite* edited, 
+		const ee::MultiSpritesImpl* sprite_impl);
 
 	void OnCloseEvent(wxCloseEvent& event);
 

@@ -81,7 +81,7 @@ void OpenSymbolDialog::Open(ee::Sprite* spr, ee::CrossGuides* guides)
  	}
 	else if (emesh::Sprite* mesh = dynamic_cast<emesh::Sprite*>(spr))
 	{
-		emesh::EditDialog dlg(m_wnd, mesh, m_stage->GetCanvas()->GetGLContext());
+		emesh::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), mesh, m_sprites_impl);
 		dlg.ShowModal();
 	}
 	else if (ee::FontBlankSprite* font = dynamic_cast<ee::FontBlankSprite*>(spr))
