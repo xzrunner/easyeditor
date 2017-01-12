@@ -18,6 +18,7 @@
 #include <ee/FontBlankSprite.h>
 #include <ee/TextDialog.h>
 #include <ee/ViewlistPanel.h>
+#include <ee/panel_msg.h>
 
 namespace ecomplex
 {
@@ -51,9 +52,11 @@ void OpenSymbolDialog::Open(ee::Sprite* spr, ee::CrossGuides* guides)
 		m_viewlist->EnableObserve(false);
 	}
 
+	const ee::Symbol* edited_sym = NULL;
 	if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(spr))
 	{
 		ecomplex::Symbol* sym = dynamic_cast<ecomplex::Symbol*>(complex->GetSymbol());
+		edited_sym = sym;
  		EditDialog dlg(m_wnd, sym, m_stage->GetCanvas()->GetGLContext(), guides);
  		dlg.ShowModal();
 
@@ -65,12 +68,14 @@ void OpenSymbolDialog::Open(ee::Sprite* spr, ee::CrossGuides* guides)
 	else if (libanim::Sprite* anim = dynamic_cast<libanim::Sprite*>(spr))
 	{
 		const libanim::Symbol* sym = dynamic_cast<const libanim::Symbol*>(anim->GetSymbol());
+		edited_sym = sym;
 		libanim::PreviewDialog dlg(m_wnd, sym, m_stage->GetCanvas()->GetGLContext());
  		dlg.ShowModal();
 	}
 	else if (escale9::Sprite* patch9 = dynamic_cast<escale9::Sprite*>(spr))
  	{
 		escale9::Symbol* sym = dynamic_cast<escale9::Symbol*>(patch9->GetSymbol());
+		edited_sym = sym;
   		escale9::EditDialog dlg(m_wnd, sym, m_stage->GetCanvas()->GetGLContext());
   		dlg.ShowModal();
  	}
@@ -117,6 +122,11 @@ void OpenSymbolDialog::Open(ee::Sprite* spr, ee::CrossGuides* guides)
 	m_stage->GetCanvas()->SetDrawable(true);
 	if (m_viewlist) {
 		m_viewlist->EnableObserve(true);
+	}
+
+	if (edited_sym && edited_sym->IsEditDirty()) {
+		ee::SetWndDirtySJ::Instance()->SetDirty();
+		const_cast<ee::Symbol*>(edited_sym)->SetEditDirty(false);
 	}
 }
 

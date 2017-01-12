@@ -48,6 +48,7 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 	stage->GetCanvas()->EnableObserve(false);
 	stage->GetCanvas()->SetDrawable(false);
 
+	const ee::Symbol* edited_sym = NULL;
 	if (static_cast<LibraryPanel*>(stage->GetLibrary())->IsCurrUnitLayer()) 
 	{
 		std::vector<std::string> path_names;
@@ -72,6 +73,7 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 	else if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(spr))
 	{
 		ecomplex::Symbol* sym = dynamic_cast<ecomplex::Symbol*>(complex->GetSymbol());
+		edited_sym = sym;
 		ecomplex::EditDialog dlg(m_wnd, sym, m_stage->GetCanvas()->GetGLContext());
 		dlg.ShowModal();
 
@@ -83,12 +85,14 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 	else if (libanim::Sprite* anim = dynamic_cast<libanim::Sprite*>(spr))
 	{
 		libanim::Symbol* sym = dynamic_cast<libanim::Symbol*>(anim->GetSymbol());
+		edited_sym = sym;
 		libanim::PreviewDialog dlg(m_wnd, sym, m_stage->GetCanvas()->GetGLContext());
 		dlg.ShowModal();
 	}
 	else if (escale9::Sprite* patch9 = dynamic_cast<escale9::Sprite*>(spr))
 	{
 		escale9::Symbol* sym = dynamic_cast<escale9::Symbol*>(patch9->GetSymbol());
+		edited_sym = sym;
 		escale9::EditDialog dlg(m_wnd, sym, m_stage->GetCanvas()->GetGLContext());
 		dlg.ShowModal();
 	}
@@ -139,6 +143,11 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 	stage->GetCanvas()->SetDrawable(true);
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
+
+	if (edited_sym && edited_sym->IsEditDirty()) {
+		ee::SetWndDirtySJ::Instance()->SetDirty();
+		const_cast<ee::Symbol*>(edited_sym)->SetEditDirty(false);
+	}
 }
 
 void OpenSymbolDialog::UpdateShapeFromETexture(etexture::Sprite* spr)

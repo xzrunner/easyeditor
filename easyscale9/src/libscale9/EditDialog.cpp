@@ -52,6 +52,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 	int val = dlg.ShowModal();
 	if (val == wxID_YES)
 	{
+		m_sym->SetEditDirty(true);
 		const std::string& filepath = m_sym->GetFilepath();
 		FileSaver::Store(filepath.c_str(), *m_sym);
 		m_sym->RefreshThumbnail(filepath);

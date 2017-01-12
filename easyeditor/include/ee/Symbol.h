@@ -43,6 +43,9 @@ public:
 	const std::set<std::string>& GetFilepaths() const;
 	void SetFilepaths(const std::set<std::string>& filepaths);
 
+	bool IsEditDirty() const { return m_edit_dirty; }
+	void SetEditDirty(bool dirty) { m_edit_dirty = dirty; }
+
 public:
 	std::string name;
 	std::string tag;
@@ -55,6 +58,8 @@ protected:
 
 private:
 	std::set<std::string> m_filepaths;
+
+	bool m_edit_dirty;
 
 }; // Symbol
 

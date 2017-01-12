@@ -94,6 +94,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 	int val = dlg.ShowModal();
 	if (val == wxID_YES) 
 	{
+		m_sym->SetEditDirty(true);
 		const std::string& filepath = m_sym->GetFilepath();
 		if (filepath != ee::SYM_GROUP_TAG) {
 			FileStorer::Store(filepath, m_sym, ee::FileHelper::GetFileDir(filepath));

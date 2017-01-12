@@ -41,9 +41,11 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 	m_stage->GetCanvas()->EnableObserve(false);
 	m_stage->GetCanvas()->SetDrawable(false);
 
+	const ee::Symbol* edited_sym = NULL;
 	if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(spr))
 	{
 		ecomplex::Symbol* sym = dynamic_cast<ecomplex::Symbol*>(complex->GetSymbol());
+		edited_sym = sym;
 		ecomplex::EditDialog dlg(m_wnd, sym, m_stage->GetCanvas()->GetGLContext());
 		dlg.ShowModal();
 	}
@@ -61,6 +63,11 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 	m_stage->SetActive(true);
 	m_stage->GetCanvas()->EnableObserve(true);
 	m_stage->GetCanvas()->SetDrawable(true);
+
+	if (edited_sym && edited_sym->IsEditDirty()) {
+		ee::SetWndDirtySJ::Instance()->SetDirty();
+		const_cast<ee::Symbol*>(edited_sym)->SetEditDirty(false);
+	}
 }
 
 }
