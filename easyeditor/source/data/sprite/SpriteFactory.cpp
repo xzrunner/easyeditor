@@ -15,7 +15,6 @@
 
 #include <sprite2/SymType.h>
 #include <gum/SymbolFile.h>
-#include <gum/FilepathHelper.h>
 
 namespace ee
 {
@@ -78,10 +77,6 @@ Sprite* SpriteFactory::Create(const Json::Value& val, const std::string& dir)
 Sprite* SpriteFactory::Create(const Json::Value& val, const std::string& dir, 
 							  const std::string& filepath)
 {
-	if (!gum::FilepathHelper::Exists(filepath)) {
-		throw Exception("error filepath: %s", filepath.c_str());
-	}
-
 	ee::Symbol* sym = NULL;
 	try {
 		sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
