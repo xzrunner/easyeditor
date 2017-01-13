@@ -392,7 +392,9 @@ void ArrangeSpriteImpl::OnDraw(float cam_scale) const
 		m_selection->Traverse(FetchAllVisitor<Sprite>(sprs));
 		selected = sprs[0];
 
-		sm::vec2 sz = selected->GetSymbol()->GetBounding().Size() * selected->GetScale();
+		sm::vec2 sz = selected->GetSymbol()->GetBounding().Size();
+		sz.x *= fabs(selected->GetScale().x);
+		sz.y *= fabs(selected->GetScale().y);
 		float max_e = std::max(sz.x, sz.y);
 		if (max_e / cam_scale < 100) {
 			m_ctrl_node_radius = 0;
