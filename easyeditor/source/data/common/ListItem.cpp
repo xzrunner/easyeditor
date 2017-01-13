@@ -10,7 +10,9 @@ namespace ee
 void ListItem::RefreshThumbnail(const std::string& filepath, bool force)
 {
 	if (force) {
-		m_bitmap->RemoveReference();
+		if (m_bitmap) {
+			m_bitmap->RemoveReference();
+		}
 	} else {
 		if (m_bitmap) {
 			return;
