@@ -33,6 +33,8 @@ void PackAnim2::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TextureP
 	lua::assign_with_end(gen, "type", "\"anim2\"");
 	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(GetID()));
 
+	lua::assign_with_end(gen, "root", m_root);
+
 	lua::assign_with_end(gen, "joints_num", m_joints.size());
 	{
 		lua::TableAssign ta(gen, "joints", true);
@@ -84,23 +86,37 @@ int PackAnim2::SizeOfUnpackFromBin() const
 {
 	int sz = simp::NodeAnim2::Size();
 	// joints
-	sz += sizeof(uint16_t);
-	sz += simp::NodeAnim2::JointSize() * m_joints.size();
+	sz += simp::NodeAnim2::Joint::Size() * m_joints.size();
 	// skins
-	sz += sizeof(uint16_t);
-	sz += simp::NodeAnim2::SkinSize() * m_skins.size();
+	sz += simp::NodeAnim2::Skin::Size() * m_skins.size();
 	// slots
-	sz += sizeof(uint16_t);
-	sz += simp::NodeAnim2::SlotSize() * m_slots.size();
+	sz += simp::NodeAnim2::Slot::Size() * m_slots.size();
 	// tl joints
-	sz += sizeof(uint16_t);
-	sz += simp::NodeAnim2::TLJointSize() * m_tl_joints.size();
+	assert(m_tl_joints.size() == m_joints.size());
+	sz += sizeof(simp::NodeAnim2::TL_Joint*) * m_tl_joints.size();
+	for (int i = 0, n = m_tl_joints.size(); i < n; ++i) {
+		sz += simp::NodeAnim2::TL_Joint::Size();
+		sz += simp::NodeAnim2::JointSample::Size() * m_tl_joints[i].samples.size();
+	}
 	// tl skins
-	sz += sizeof(uint16_t);
-	sz += simp::NodeAnim2::TLSkinSize() * m_tl_skins.size();
+	assert(m_tl_skins.size() == m_slots.size());
+	sz += sizeof(simp::NodeAnim2::TL_Skin*) * m_tl_skins.size();
+	for (int i = 0, n = m_tl_skins.size(); i < n; ++i) {
+		sz += simp::NodeAnim2::TL_Skin::Size();
+		sz += simp::NodeAnim2::SkinSample::Size() * m_tl_skins[i].samples.size();
+	}	
 	// tl deforms
-	sz += sizeof(uint16_t);
-	sz += simp::NodeAnim2::TLDeformSize() * m_tl_deforms.size();
+	assert(m_tl_deforms.size() == m_skins.size());
+	sz += sizeof(simp::NodeAnim2::TL_Deform*) * m_tl_deforms.size();
+	for (int i = 0, n = m_tl_deforms.size(); i < n; ++i) 
+	{
+		const TL_Deform& deform = m_tl_deforms[i];
+		sz += simp::NodeAnim2::TL_Deform::Size();
+		sz += sizeof(simp::NodeAnim2::DeformSample*) * deform.deforms.size();
+		for (int j = 0, m = deform.deforms.size(); j < m; ++j) {
+			sz += simp::NodeAnim2::DeformSample::Size() + sizeof(float) * 2 * deform.deforms[j].data.size();
+		}
+	}
 	return sz;
 }
 
@@ -523,8 +539,8 @@ PackToBin(uint8_t** ptr) const
 	uint16_t _time = time;
 	pack(_time, ptr);
 
-	uint8_t _padding = padding;
-	pack(_padding, ptr);
+	uint8_t _lerp = lerp;
+	pack(_lerp, ptr);
 
 	float _data = data;
 	pack(_data, ptr);
@@ -631,6 +647,7 @@ int PackAnim2::TL_Skin::
 SizeOfPackToBin() const
 {
 	int sz = 0;
+	sz += sizeof(uint16_t);
 	for (int i = 0, n = samples.size(); i < n; ++i) {
 		sz += samples[i].SizeOfPackToBin();
 	}
@@ -640,7 +657,9 @@ SizeOfPackToBin() const
 void PackAnim2::TL_Skin::
 PackToBin(uint8_t** ptr) const
 {
-	for (int i = 0, n = samples.size(); i < n; ++i) {
+	uint16_t num = samples.size();
+	pack(num, ptr);
+	for (int i = 0; i < num; ++i) {
 		samples[i].PackToBin(ptr);
 	}
 }
@@ -656,7 +675,7 @@ PackToLuaString(ebuilder::CodeGenerator& gen) const
 		lua::assign("time", time),
 		lua::assign("offset", offset));	
 
-	PackCoords::PackToLua(gen, data, "data");
+	PackCoords::PackToLua(gen, data, "data", 1);
 }
 
 int PackAnim2::DeformSample::
@@ -708,6 +727,7 @@ int PackAnim2::TL_Deform::
 SizeOfPackToBin() const
 {
 	int sz = 0;
+	sz += sizeof(uint16_t);
 	for (int i = 0, n = deforms.size(); i < n; ++i) {
 		sz += deforms[i].SizeOfPackToBin();
 	}
@@ -717,9 +737,11 @@ SizeOfPackToBin() const
 void PackAnim2::TL_Deform::
 PackToBin(uint8_t** ptr) const
 {
-	for (int i = 0, n = deforms.size(); i < n; ++i) {
+	uint16_t num = deforms.size();
+	pack(num, ptr);
+	for (int i = 0; i < num; ++i) {
 		deforms[i].PackToBin(ptr);
-	}	
+	}
 }
 
 }
