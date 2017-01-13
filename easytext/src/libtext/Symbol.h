@@ -29,7 +29,7 @@ protected:
 	 *  @interface
 	 *    ee::Symbol
 	 */
-	virtual void LoadResources();
+	virtual bool LoadResources();
 
 	/**
 	 *  @interface

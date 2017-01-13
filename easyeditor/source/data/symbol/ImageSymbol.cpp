@@ -14,6 +14,7 @@
 #include <gum/RenderContext.h>
 #include <gum/RenderTarget.h>
 #include <gum/AsyncTask.h>
+#include <gum/FilepathHelper.h>
 
 namespace ee
 {
@@ -108,9 +109,13 @@ int ImageSymbol::GetScreenCacheTexid() const
 	return gum::RenderTarget::Instance()->GetScreen0()->GetTexture()->ID();
 }
 
-void ImageSymbol::LoadResources()
+bool ImageSymbol::LoadResources()
 {
+	if (!gum::FilepathHelper::Exists(m_filepath)) {
+		return false;
+	}
 	LoadSync();
+	return true;
 }
 
 void ImageSymbol::InitCoreTex()

@@ -5,6 +5,8 @@
 #include <ee/FileHelper.h>
 #include <ee/Exception.h>
 
+#include <gum/FilepathHelper.h>
+
 #include <fstream>
 #include <algorithm>
 
@@ -37,8 +39,12 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-void Symbol::LoadResources()
+bool Symbol::LoadResources()
 {
+	if (!gum::FilepathHelper::Exists(m_filepath)) {
+		return false;
+	}
+
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
@@ -67,6 +73,8 @@ void Symbol::LoadResources()
 	for (int i = 0, n = m_syms.size(); i < n; ++i) {
 		m_rect.Combine(m_syms[i]->GetBounding());
 	}
+
+	return true;
 }
 
 void Symbol::Clear()

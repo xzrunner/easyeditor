@@ -3,9 +3,10 @@
 #include "config.h"
 #include "FileIO.h"
 
-#include <sprite2/RenderParams.h>
-
 #include <ee/Sprite.h>
+
+#include <sprite2/RenderParams.h>
+#include <gum/FilepathHelper.h>
 
 namespace eshadow
 {
@@ -43,9 +44,13 @@ sm::rect Symbol::GetBounding(const s2::Sprite* spr) const
 	}
 }
 
-void Symbol::LoadResources()
+bool Symbol::LoadResources()
 {
+	if (!gum::FilepathHelper::Exists(m_filepath)) {
+		return false;
+	}
 	FileIO::LoadFromFile(m_filepath.c_str(), this);
+	return true;
 }
 
 }

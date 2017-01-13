@@ -51,7 +51,7 @@ public:
 	static ee::Symbol* Create() { return new Symbol(); }
 
 protected:
-	virtual void LoadResources();
+	virtual bool LoadResources();
 
 private:
 	int m_width, m_height;

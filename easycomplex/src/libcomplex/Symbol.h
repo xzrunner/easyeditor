@@ -37,7 +37,7 @@ public:
 	static ee::Symbol* Create() { return new Symbol(); }
 
 protected:
-	virtual void LoadResources();
+	virtual bool LoadResources();
 
 public:
 	struct Group

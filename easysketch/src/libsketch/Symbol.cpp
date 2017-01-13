@@ -55,8 +55,12 @@ void Symbol::SetModel(e3d::IModel* model)
 	}
 }
 
-void Symbol::LoadResources()
+bool Symbol::LoadResources()
 {
+	if (!gum::FilepathHelper::Exists(m_filepath)) {
+		return false;
+	}
+
  	if (m_model) {
  		delete m_model;
  	}
@@ -72,6 +76,8 @@ void Symbol::LoadResources()
   	wxString dir = ee::FileHelper::GetFileDir(m_filepath);
   	std::string filepath = ee::FileHelper::GetAbsolutePath(dir.ToStdString(), value["filepath"].asString());
   	m_model = new e3d::ModelObj(filepath.c_str(), 0.02f);
+
+	return true;
 }
 
 }

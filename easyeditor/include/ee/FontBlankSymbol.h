@@ -27,7 +27,7 @@ public:
 	bool LoadFont(const std::string& filename);
 
 protected:
-	virtual void LoadResources();
+	virtual bool LoadResources();
 
 private:
 	void DrawBackground(const FontBlankSprite* fb, const sm::mat4& mt) const;

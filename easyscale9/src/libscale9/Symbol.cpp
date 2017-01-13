@@ -8,6 +8,7 @@
 
 #include <sprite2/SymType.h>
 #include <gum/StringHelper.h>
+#include <gum/FilepathHelper.h>
 
 namespace escale9
 {
@@ -18,8 +19,12 @@ Symbol::Symbol()
 	m_name = ee::SymbolFile::Instance()->Tag(s2::SYM_SCALE9) + gum::StringHelper::ToString(id++);
 }
 
-void Symbol::LoadResources()
+bool Symbol::LoadResources()
 {
+	if (!gum::FilepathHelper::Exists(m_filepath)) {
+		return false;
+	}
+
 	ee::SettingData& setting = ee::Config::Instance()->GetSettings();
 	setting.open_image_edge_clip = false;
 
@@ -28,6 +33,8 @@ void Symbol::LoadResources()
 	loader.LoadJson(m_filepath);
 
 	setting.open_image_edge_clip = true;
+
+	return true;
 }
 
 }

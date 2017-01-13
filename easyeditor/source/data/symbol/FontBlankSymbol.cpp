@@ -10,6 +10,7 @@
 
 #include <sprite2/RenderParams.h>
 #include <sprite2/S2_RVG.h>
+#include <gum/FilepathHelper.h>
 
 #include <json/json.h>
 
@@ -83,8 +84,12 @@ bool FontBlankSymbol::LoadFont(const std::string& _filename)
 	return false;
 }
 
-void FontBlankSymbol::LoadResources()
+bool FontBlankSymbol::LoadResources()
 {
+	if (!gum::FilepathHelper::Exists(m_filepath)) {
+		return false;
+	}
+
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
@@ -111,6 +116,8 @@ void FontBlankSymbol::LoadResources()
 		filename = value["font filename"].asString();
 		LoadFont(filename);
 	}
+
+	return true;
 }
 
 void FontBlankSymbol::DrawBackground(const FontBlankSprite* fb, const sm::mat4& mt) const

@@ -7,6 +7,7 @@
 #include <ps_3d.h>
 #include <ps_3d_sprite.h>
 #include <sprite2/RenderParams.h>
+#include <gum/FilepathHelper.h>
 
 #include <assert.h>
 
@@ -32,8 +33,12 @@ void Symbol::Traverse(ee::Visitor<ee::Sprite>& visitor)
 	}
 }
 
-void Symbol::LoadResources()
+bool Symbol::LoadResources()
 {
+	if (!gum::FilepathHelper::Exists(m_filepath)) {
+		return false;
+	}
+
 	m_et_cfg = PSConfigMgr::Instance()->GetConfig(m_filepath);
 	m_et = p3d_emitter_create(m_et_cfg);
 	p3d_emitter_start(m_et);
@@ -50,6 +55,8 @@ void Symbol::LoadResources()
 
 	m_loop = value["loop"].asBool();
 	m_local = value["local"].asBool();
+
+	return true;
 }
 
 }

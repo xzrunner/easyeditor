@@ -51,7 +51,7 @@ public:
 	std::string tag;
 
 protected:
-	virtual void LoadResources() = 0;
+	virtual bool LoadResources() = 0;
 
 protected:
 	std::string m_filepath;

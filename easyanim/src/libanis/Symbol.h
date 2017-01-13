@@ -31,7 +31,7 @@ public:
 	virtual void ReloadTexture() const;
 
 protected:
-	virtual void LoadResources();
+	virtual bool LoadResources();
 
 private:
 	class SpriteLoader : public ee::SpriteLoader

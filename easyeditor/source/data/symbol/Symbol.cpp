@@ -26,8 +26,7 @@ bool Symbol::LoadFromFile(const std::string& filepath)
 	if (m_filepath == wxEmptyString) {
 		m_filepath = filepath;
 	}
-	LoadResources();
-	return true;
+	return LoadResources();
 }
 
 const std::set<std::string>& Symbol::GetFilepaths() const 

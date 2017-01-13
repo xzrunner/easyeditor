@@ -6,6 +6,7 @@
 #include <easyshape.h>
 
 #include <sprite2/PolygonShape.h>
+#include <gum/FilepathHelper.h>
 
 #include <json/json.h>
 
@@ -18,8 +19,12 @@ Symbol::Symbol()
 {
 }
 
-void Symbol::LoadResources()
+bool Symbol::LoadResources()
 {
+	if (!gum::FilepathHelper::Exists(m_filepath)) {
+		return false;
+	}
+
 	Clear();
 
 	Json::Value value;
@@ -39,6 +44,8 @@ void Symbol::LoadResources()
 		m_polygons.push_back(dynamic_cast<s2::PolygonShape*>(shape));
 		shape_val = value["shapes"][i++];
 	}
+
+	return true;
 }
 
 }

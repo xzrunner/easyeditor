@@ -7,6 +7,7 @@
 #include <sprite2/Skeleton.h>
 #include <sprite2/RenderParams.h>
 #include <gum/SkeletonSymLoader.h>
+#include <gum/FilepathHelper.h>
 
 namespace libskeleton
 {
@@ -39,12 +40,18 @@ void Symbol::DrawSkeleton(const s2::RenderParams& params, const s2::Sprite* spr,
 	}
 }
 
-void Symbol::LoadResources()
+bool Symbol::LoadResources()
 {
+	if (!gum::FilepathHelper::Exists(m_filepath)) {
+		return false;
+	}
+
 	ee::SpriteLoader spr_loader;
 	JointLoader joint_loader;
 	gum::SkeletonSymLoader loader(this, &spr_loader, &joint_loader);
 	loader.LoadJson(m_filepath);
+
+	return true;
 }
 
 /************************************************************************/

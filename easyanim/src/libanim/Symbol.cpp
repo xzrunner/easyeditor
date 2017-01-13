@@ -13,6 +13,7 @@
 #include <sprite2/S2_Sprite.h>
 #include <gum/AnimSymLoader.h>
 #include <gum/StringHelper.h>
+#include <gum/FilepathHelper.h>
 
 #include <fstream>
 
@@ -70,14 +71,20 @@ void Symbol::Load(const gum::SpriteLoader& spr_loader)
 	LoadEE();
 }
 
-void Symbol::LoadResources()
+bool Symbol::LoadResources()
 {
+	if (!gum::FilepathHelper::Exists(m_filepath)) {
+		return false;
+	}
+
 	ee::SymbolLoader sym_loader;
 	ee::SpriteLoader spr_loader;
 	gum::AnimSymLoader loader(this, &sym_loader, &spr_loader);
 	loader.LoadJson(m_filepath);
 
 	LoadEE();
+
+	return true;
 }
 
 void Symbol::LoadEE()

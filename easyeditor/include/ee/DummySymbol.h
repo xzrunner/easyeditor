@@ -21,7 +21,7 @@ public:
 	virtual sm::rect GetBounding(const s2::Sprite* spr = NULL) const;
 
 protected:
-	virtual void LoadResources() {}
+	virtual bool LoadResources() { return true; }
 
 private:
 	sm::rect m_bounding;

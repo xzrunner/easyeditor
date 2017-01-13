@@ -4,6 +4,8 @@
 
 #include <ee/ImageSymbol.h>
 
+#include <gum/FilepathHelper.h>
+
 namespace eicon
 {
 
@@ -14,11 +16,17 @@ void Symbol::SetImage(ee::ImageSymbol* img)
 	}
 }
 
-void Symbol::LoadResources()
+bool Symbol::LoadResources()
 {
+	if (!gum::FilepathHelper::Exists(m_filepath)) {
+		return false;
+	}
+
 	Icon* icon = FileIO::LoadFromFile(m_filepath.c_str());
 	SetIcon(icon);
 	icon->RemoveReference();
+
+	return true;
 }
 
 }

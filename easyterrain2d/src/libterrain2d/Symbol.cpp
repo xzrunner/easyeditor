@@ -8,6 +8,7 @@
 #include <shaderlab/ShaderMgr.h>
 #include <shaderlab/Sprite2Shader.h>
 #include <sprite2/RenderParams.h>
+#include <gum/FilepathHelper.h>
 
 #include <algorithm>
 
@@ -81,8 +82,12 @@ void Symbol::ReloadTexture() const
 	}	
 }
 
-void Symbol::LoadResources()
+bool Symbol::LoadResources()
 {
+	if (!gum::FilepathHelper::Exists(m_filepath)) {
+		return false;
+	}
+
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
@@ -112,6 +117,8 @@ void Symbol::LoadResources()
 		}
 		ocean_val = value["ocean"][i++];
 	}
+
+	return true;
 }
 
 void Symbol::Clear()

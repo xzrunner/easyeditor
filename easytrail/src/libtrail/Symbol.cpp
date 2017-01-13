@@ -3,6 +3,7 @@
 
 #include <mt_2d.h>
 #include <sprite2/Trail.h>
+#include <gum/FilepathHelper.h>
 
 #include <json/json.h>
 
@@ -16,8 +17,12 @@ Symbol::Symbol()
 	s2::Trail::Instance();
 }
 
-void Symbol::LoadResources()
+bool Symbol::LoadResources()
 {
+	if (!gum::FilepathHelper::Exists(m_filepath)) {
+		return false;
+	}
+
 	m_et_cfg = MTConfigMgr::Instance()->GetConfig(m_filepath);
 	m_et = t2d_emitter_create(m_et_cfg);
 
@@ -32,6 +37,8 @@ void Symbol::LoadResources()
 	fin.close();
 
 	name = value["name"].asString();
+
+	return true;
 }
 
 }

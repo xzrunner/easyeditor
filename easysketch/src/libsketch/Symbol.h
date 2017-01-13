@@ -32,7 +32,7 @@ public:
 	const e3d::AABB& GetAABB() const { return m_aabb; }
 
 protected:
-	virtual void LoadResources();
+	virtual bool LoadResources();
 
 private:
 	e3d::IModel* m_model;

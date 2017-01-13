@@ -23,7 +23,7 @@ public:
 	const std::string GetContent() const { return m_data; }
 
 protected:
-	virtual void LoadResources();
+	virtual bool LoadResources();
 
 private:
 	std::string m_data;

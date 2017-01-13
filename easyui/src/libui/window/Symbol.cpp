@@ -6,6 +6,8 @@
 #include <ee/SpriteRenderer.h>
 #include <ee/SymbolType.h>
 
+#include <gum/FilepathHelper.h>
+
 namespace eui
 {
 namespace window
@@ -85,9 +87,13 @@ void Symbol::ResetExtRefOrderMost(Sprite* spr, bool up)
 	ee::ObjectVector<Sprite>::ResetOrderMost(m_ext_refs, spr, up);
 }
 
-void Symbol::LoadResources()
+bool Symbol::LoadResources()
 {
+	if (!gum::FilepathHelper::Exists(m_filepath)) {
+		return false;
+	}
 	FileIO::Load(m_filepath.c_str(), this);
+	return true;
 }
 
 }

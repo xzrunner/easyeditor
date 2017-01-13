@@ -30,7 +30,7 @@ private:
 	}; // JointLoader
 
 protected:
-	virtual void LoadResources();
+	virtual bool LoadResources();
 
 }; // Symbol
 

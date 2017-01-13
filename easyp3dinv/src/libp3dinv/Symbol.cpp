@@ -3,6 +3,7 @@
 #include "ParticleSystem.h"
 
 #include <sprite2/RenderParams.h>
+#include <gum/FilepathHelper.h>
 
 namespace ep3dinv
 {
@@ -37,12 +38,18 @@ sm::rect Symbol::GetBounding(const s2::Sprite* spr) const
 	return sm::rect(200, 200);
 }
 
-void Symbol::LoadResources()
+bool Symbol::LoadResources()
 {
+	if (!gum::FilepathHelper::Exists(m_filepath)) {
+		return false;
+	}
+
 	if (!m_ps) {
 		m_ps = new ParticleSystem;
 	}
 	m_ps->LoadFromFile(m_filepath);
+
+	return true;
 }
 
 }

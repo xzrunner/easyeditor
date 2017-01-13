@@ -37,7 +37,7 @@ protected:
 	virtual float GetP3dCamAngle() const;
 	virtual int GetScreenCacheTexid() const;
 
-	virtual void LoadResources();
+	virtual bool LoadResources();
 
 private:
 	void InitCoreTex();

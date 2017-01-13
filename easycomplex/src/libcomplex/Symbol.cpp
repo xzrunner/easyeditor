@@ -23,6 +23,7 @@
 #include <sprite2/BoundingBox.h>
 
 #include <gum/StringHelper.h>
+#include <gum/FilepathHelper.h>
 
 #include <queue>
 
@@ -206,11 +207,15 @@ void Symbol::GetActionNames(std::vector<std::string>& actions) const
 	}
 }
 
-void Symbol::LoadResources()
+bool Symbol::LoadResources()
 {
 	std::string filename = ee::FileHelper::GetFilename(m_filepath);
 	if (filename == ee::SYM_GROUP_TAG) {
-		return;
+		return true;
+	}
+
+	if (!gum::FilepathHelper::Exists(m_filepath)) {
+		return false;
 	}
 
 	FileLoader::Load(m_filepath, this);
@@ -223,6 +228,8 @@ void Symbol::LoadResources()
 			m_origin_names.push_back(children[i]->GetName());
 		}
 	}
+
+	return true;
 }
 
 }

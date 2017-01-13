@@ -11,6 +11,7 @@
 #include <gum/trans_color.h>
 #include <gum/GUM_GTxt.h>
 #include <gum/TextboxLoader.h>
+#include <gum/FilepathHelper.h>
 
 #include <gtxt.h>
 
@@ -43,8 +44,12 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
  	}
 }
 
-void Symbol::LoadResources()
+bool Symbol::LoadResources()
 {
+	if (!gum::FilepathHelper::Exists(m_filepath)) {
+		return false;
+	}
+
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
@@ -55,6 +60,8 @@ void Symbol::LoadResources()
 
 	gum::TextboxLoader loader(GetTextbox());
 	loader.LoadJson(value);
+
+	return true;
 }
 
 void Symbol::DrawText(const gtxt_label_style& style, const sm::mat4& mt, const s2::Color& mul, 

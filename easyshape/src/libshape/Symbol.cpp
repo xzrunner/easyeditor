@@ -12,6 +12,7 @@
 
 #include <sprite2/RenderParams.h>
 #include <gum/JsonSerializer.h>
+#include <gum/FilepathHelper.h>
 
 #include <fstream>
 
@@ -124,10 +125,16 @@ void Symbol::StoreToFile(const char* filename) const
 	FileIO::StoreToFile(filename, dynamic_cast<ee::Shape*>(const_cast<s2::Shape*>(m_shape)), m_bg);
 }
 
-void Symbol::LoadResources()
+bool Symbol::LoadResources()
 {
+	if (!gum::FilepathHelper::Exists(m_filepath)) {
+		return false;
+	}
+
 	Clear();
 	m_shape = FileIO::LoadFromFile(m_filepath.c_str(), m_bg);
+
+	return true;
 }
 
 void Symbol::LoadBGOutline(ee::Symbol* bg)

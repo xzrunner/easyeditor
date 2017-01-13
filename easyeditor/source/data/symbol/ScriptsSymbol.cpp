@@ -1,6 +1,8 @@
 #include "ScriptsSymbol.h"
 #include "SymbolType.h"
 
+#include <gum/FilepathHelper.h>
+
 #include <fstream>
 
 namespace ee
@@ -11,8 +13,12 @@ int ScriptsSymbol::Type() const
 	return SYM_SCRIPTS;
 }
 
-void ScriptsSymbol::LoadResources()
+bool ScriptsSymbol::LoadResources()
 {
+	if (!gum::FilepathHelper::Exists(m_filepath)) {
+		return false;
+	}
+
 	std::locale::global(std::locale(""));
 	std::ifstream fin(m_filepath.c_str());
 	std::locale::global(std::locale("C"));
@@ -23,6 +29,8 @@ void ScriptsSymbol::LoadResources()
 		std::istreambuf_iterator<char>());
 
 	std::string str = m_data;
+
+	return true;
 }
 
 }
