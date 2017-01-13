@@ -172,7 +172,6 @@ void PackComplex::Init(const ecomplex::Symbol* sym)
 			}
 			assert(idx != -1);
 
-			m_children[idx]->AddReference();
 			dst.m_sprs.push_back(m_children[idx]);
 		}
 		m_actions.push_back(dst);
@@ -195,12 +194,6 @@ int PackComplex::QueryIndex(const PackNode* node) const
 /************************************************************************/
 /* class PackComplex::Action                                                                     */
 /************************************************************************/
-
-PackComplex::Action::
-~Action()
-{
-	for_each(m_sprs.begin(), m_sprs.end(), cu::RemoveRefFunctor<PackNode>());
-}
 
 int PackComplex::Action::
 SizeOfUnpackFromBin() const 
