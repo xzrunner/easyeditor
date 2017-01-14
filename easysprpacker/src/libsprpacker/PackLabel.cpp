@@ -156,8 +156,8 @@ void PackLabel::Init(const etext::Sprite* spr)
 {
 	m_tb = spr->GetTextbox();
 
-	m_text = gum::StringHelper::ToUtf8(spr->GetText());
-	m_tid = gum::StringHelper::ToUtf8(spr->GetTID());
+	m_text = gum::StringHelper::GBKToUTF8(spr->GetText());
+	m_tid = gum::StringHelper::GBKToUTF8(spr->GetTID());
 }
 
 }

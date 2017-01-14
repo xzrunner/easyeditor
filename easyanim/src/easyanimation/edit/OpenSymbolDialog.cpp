@@ -4,6 +4,7 @@
 #include <ee/Symbol.h>
 #include <ee/MultiSpritesImpl.h>
 #include <ee/EditPanelImpl.h>
+#include <ee/panel_msg.h>
 
 #include <easycomplex.h>
 #include <easymesh.h>
@@ -51,7 +52,7 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 	}
 	else if (emesh::Sprite* mesh = dynamic_cast<emesh::Sprite*>(spr))
 	{
-		emesh::EditDialog dlg(m_wnd, mesh, m_stage->GetCanvas()->GetGLContext());
+		emesh::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), mesh, m_sprites_impl);
 		dlg.ShowModal();
 	} else if (libskeleton::Sprite* sk = dynamic_cast<libskeleton::Sprite*>(spr)) {
 		libskeleton::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), sk);
