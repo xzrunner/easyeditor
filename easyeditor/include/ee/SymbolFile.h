@@ -19,6 +19,8 @@ public:
 private:
 	void Regist(int type, const std::string& tag);
 
+	int  CheckTypeFromData(const std::string& filepath) const;
+
 protected:
 	std::map<int, std::string> m_type2tag;
 	std::map<std::string, int> m_tag2type;

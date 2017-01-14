@@ -59,7 +59,7 @@ int SymbolFile::Type(const std::string& filepath) const
 		const std::string filename = filepath.substr(0, filepath.find_last_of('.'));
 		int pos = filename.find_last_of('_');
 		if (pos == -1) {
-			return s2::SYM_UNKNOWN;
+			return CheckTypeFromData(filepath);
 		}
 
 		std::string tag = filename.substr(pos + 1);
@@ -73,19 +73,7 @@ int SymbolFile::Type(const std::string& filepath) const
 			return itr->second;
 		} 
 
-		Json::Value val;
-		Json::Reader reader;
-		std::locale::global(std::locale(""));
-		std::ifstream fin(filepath.c_str());
-		std::locale::global(std::locale("C"));
-		reader.parse(fin, val);
-		fin.close();
-
-		if (!val.isArray() && val.isMember("skeleton") && !val["skeleton"].isArray() && val["skeleton"].isMember("spine")) {
-			return s2::SYM_ANIM2;
-		}
-
-		return s2::SYM_UNKNOWN;
+		return CheckTypeFromData(filepath);
 	}
 	else if (ext == "lua")
 	{
@@ -134,6 +122,23 @@ void SymbolFile::Regist(int type, const std::string& tag)
 {
 	m_type2tag.insert(std::make_pair(type, tag));
 	m_tag2type.insert(std::make_pair(tag, type));
+}
+
+int SymbolFile::CheckTypeFromData(const std::string& filepath) const
+{
+	Json::Value val;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filepath.c_str());
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, val);
+	fin.close();
+
+	if (!val.isArray() && val.isMember("skeleton") && !val["skeleton"].isArray() && val["skeleton"].isMember("spine")) {
+		return val.isMember("animations") ? s2::SYM_ANIM2 : s2::SYM_SKELETON;
+	}
+
+	return s2::SYM_UNKNOWN;
 }
 
 }
