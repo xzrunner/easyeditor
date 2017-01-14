@@ -100,6 +100,7 @@ void Skeleton2Mesh::PackToBin(uint8_t** ptr) const
 
 void Skeleton2Mesh::PackToLuaString(const VERTEX& vertex, ebuilder::CodeGenerator& gen)
 {
+	lua::TableAssign ta(gen, "items", true);
 	for (int i = 0, n = vertex.items.size(); i < n; ++i) 
 	{
 		const s2::Skeleton2Mesh::SkinnedVertex::Item& v = vertex.items[i];
@@ -129,9 +130,9 @@ void Skeleton2Mesh::PackToBin(const VERTEX& vertex, uint8_t** ptr)
 	{
 		uint16_t joint = vertex.items[i].joint;
 		pack(joint, ptr);
-		uint16_t vx = float2int(vertex.items[i].vx, 1024);
+		uint16_t vx = float2int(vertex.items[i].vx, 128);
 		pack(vx, ptr);
-		uint16_t vy = float2int(vertex.items[i].vy, 1024);
+		uint16_t vy = float2int(vertex.items[i].vy, 128);
 		pack(vy, ptr);
 		uint16_t weight = float2int(vertex.items[i].weight, 4096);
 		pack(weight, ptr);
