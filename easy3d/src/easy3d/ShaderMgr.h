@@ -1,6 +1,10 @@
 #ifndef _EASY3D_SHADER_MGR_H_
 #define _EASY3D_SHADER_MGR_H_
 
+#include <SM_Matrix.h>
+
+namespace s2 { class Color; }
+
 namespace e3d
 {
 
@@ -9,7 +13,7 @@ class ModelShader;
 class ShapeShader;
 class SpriteShader;
 
-class ShaderMgr : public ee::ShaderMgrBase
+class ShaderMgr
 {
 public:
 	static ShaderMgr* Instance();

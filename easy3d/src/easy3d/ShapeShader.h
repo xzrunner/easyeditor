@@ -1,12 +1,10 @@
 #ifndef _EASY3D_SHAPE_SHADER_H_
 #define _EASY3D_SHAPE_SHADER_H_
 
-#include <ee/IShader.h>
-
 namespace e3d
 {
 
-class ShapeShader : public ee::IShader
+class ShapeShader
 {
 public:
 	ShapeShader();

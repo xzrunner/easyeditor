@@ -4,8 +4,6 @@
 #include <string>
 #include <vector>
 
-namespace ee { class IShader; }
-
 namespace eshader 
 {
 
@@ -25,8 +23,6 @@ public:
 
 	void AddUniform(Uniform* uniform);
 
-	ee::IShader* GetShaderImpl() { return m_shader_impl; }
-
 protected:
 	class ShaderImpl
 	{
@@ -40,9 +36,6 @@ protected:
 		std::string m_vert, m_frag;
 
 	}; // ShaderImpl
-
-protected:
-	ee::IShader* m_shader_impl;
 
 private:
 	std::vector<Uniform*> m_uniforms;

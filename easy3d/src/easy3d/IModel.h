@@ -10,7 +10,7 @@
 namespace e3d 
 {
 
-	class IModel : public cu::RefCountObj
+class IModel : public cu::RefCountObj
 {
 public:
 	virtual const std::vector<Mesh>& GetAllMeshes() const = 0;

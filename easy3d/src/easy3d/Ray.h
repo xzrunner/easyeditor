@@ -1,6 +1,9 @@
 #ifndef _EASY3D_RAY_H_
 #define _EASY3D_RAY_H_
 
+#include <SM_Vector.h>
+#include <SM_Quaternion.h>
+
 namespace e3d
 {
 

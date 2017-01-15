@@ -3,6 +3,9 @@
 
 #include <ee/color_config.h>
 
+#include <SM_Vector.h>
+#include <SM_Matrix.h>
+
 #include <vector>
 
 namespace e3d

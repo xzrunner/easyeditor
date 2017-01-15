@@ -1,8 +1,6 @@
 #ifndef _EASY3D_MODEL_SHADER_H_
 #define _EASY3D_MODEL_SHADER_H_
 
-#include <ee/IShader.h>
-
 #include <vector>
 
 namespace e3d
@@ -11,7 +9,7 @@ namespace e3d
 class IModel;
 struct Material;
 
-class ModelShader : public ee::IShader
+class ModelShader
 {
 public:
 	ModelShader();

@@ -1,7 +1,6 @@
 #include "Shader.h"
 #include "Uniform.h"
 
-#include <ee/IShader.h>
 #include <ee/std_functor.h>
 
 #include <algorithm>

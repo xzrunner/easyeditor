@@ -1,12 +1,10 @@
 #ifndef _EASY3D_SPRITE_SHADER_H_
 #define _EASY3D_SPRITE_SHADER_H_
 
-#include <ee/IShader.h>
-
 namespace e3d
 {
 
-class SpriteShader : public ee::IShader
+class SpriteShader
 {
 public:
 	SpriteShader();
