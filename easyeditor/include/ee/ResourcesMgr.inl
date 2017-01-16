@@ -27,6 +27,7 @@ inline T* ResourcesMgr<T>::GetItem(const std::string& filename)
 		bool loaded = item->LoadFromFile(filename);
 		if (loaded)
 		{
+			item->AddReference();
 			m_items.insert(std::make_pair(filename, item));
 			return item;
 		}
