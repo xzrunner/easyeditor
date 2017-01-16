@@ -24,11 +24,12 @@ public:
 	virtual void PackToBin(uint8_t** ptr) const;
 
 private:
-	typedef s2::Skeleton2Mesh::SkinnedVertex VERTEX;
-	static void PackToLuaString(const VERTEX& vertex, ebuilder::CodeGenerator& gen);
-	static int  SizeOfUnpackFromBin(const VERTEX& vertex);
-	static int  SizeOfPackToBin(const VERTEX& vertex);
-	static void PackToBin(const VERTEX& vertex, uint8_t** ptr);
+	static void PackToLuaString(const std::vector<s2::Skeleton2Mesh::Item>& items, 
+		const s2::Skeleton2Mesh::Vertex& vertex, ebuilder::CodeGenerator& gen);
+	static int  SizeOfUnpackFromBin(const s2::Skeleton2Mesh::Vertex& vertex);
+	static int  SizeOfPackToBin(const s2::Skeleton2Mesh::Vertex& vertex);
+	static void PackToBin(const std::vector<s2::Skeleton2Mesh::Item>& items, 
+		const s2::Skeleton2Mesh::Vertex& vertex, uint8_t** ptr);
 
 private:
 	const s2::Skeleton2Mesh* m_mesh;
