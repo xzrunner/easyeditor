@@ -26,18 +26,18 @@ public:
 
 	static ee::Symbol* Create() { return new Symbol(); }
 
-	void SetModel(e3d::IModel* model);
+	void SetModel(m3::Model* model);
 
-	void SetAABB(const e3d::AABB& aabb) { m_aabb = aabb; }
-	const e3d::AABB& GetAABB() const { return m_aabb; }
+	void SetAABB(const m3::AABB& aabb) { m_aabb = aabb; }
+	const m3::AABB& GetAABB() const { return m_aabb; }
 
 protected:
 	virtual bool LoadResources();
 
 private:
-	e3d::IModel* m_model;
+	m3::Model* m_model;
 
-	e3d::AABB m_aabb;
+	m3::AABB m_aabb;
 
 }; // Symbol
 

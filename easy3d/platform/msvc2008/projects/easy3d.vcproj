@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="5.libeasy3d"
+	Name="4.libeasy3d"
 	ProjectGUID="{C4799E05-825C-4633-A3E7-8BA05B45A666}"
 	RootNamespace="easy3d"
 	Keyword="Win32Proj"

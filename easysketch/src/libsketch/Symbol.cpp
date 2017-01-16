@@ -43,7 +43,7 @@ sm::rect Symbol::GetBounding(const s2::Sprite* spr/* = NULL*/) const
 	return sm::rect(100, 100);
 }
 
-void Symbol::SetModel(e3d::IModel* model)
+void Symbol::SetModel(m3::Model* model)
 {
 	if (m_model != model)
 	{

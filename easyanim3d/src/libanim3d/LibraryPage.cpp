@@ -32,7 +32,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 		{
 			e3d::ModelParametric* model = new e3d::ModelParametric();
 			e3d::AssimpHelper loader;
-			e3d::AABB aabb;
+			m3::AABB aabb;
 			loader.LoadFile(filenames[i], *model, aabb);
 			Symbol* sym = new Symbol();
 			sym->SetModel(model);

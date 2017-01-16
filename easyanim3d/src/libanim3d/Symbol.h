@@ -3,38 +3,20 @@
 
 #include <ee/Symbol.h>
 
-#include <easy3d.h>
+#include <sprite2/ModelSymbol.h>
 
 namespace eanim3d
 {
 
-class Symbol : public ee::Symbol, public s2::DummySymbol
+class Symbol : public ee::Symbol, public s2::ModelSymbol
 {
 public:
 	Symbol();
-	virtual ~Symbol();
-
-	/**
-	 *  @interface
-	 *    s2::Symbol
-	 */
-	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
-	virtual sm::rect GetBounding(const s2::Sprite* spr = NULL) const;
-
-	void SetModel(e3d::IModel* model);
-
-	void SetAABB(const e3d::AABB& aabb) { m_aabb = aabb; }
-	const e3d::AABB& GetAABB() const { return m_aabb; }
 
 	static ee::Symbol* Create() { return new Symbol(); }
 
 protected:
 	virtual bool LoadResources();
-
-private:
-	e3d::IModel* m_model;
-
-	e3d::AABB m_aabb;
 
 }; // Symbol
 

@@ -1,8 +1,6 @@
 #ifndef _EASYANIM3D_STAGE_CANVAS_H_
 #define _EASYANIM3D_STAGE_CANVAS_H_
 
-#include <easy3d.h>
-
 namespace ee { class MultiSpritesImpl; }
 
 namespace eanim3d
