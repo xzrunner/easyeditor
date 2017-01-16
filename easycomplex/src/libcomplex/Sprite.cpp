@@ -67,8 +67,10 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 				ee::LogMgr::Instance()->AddException(e.What());
 				continue;
 			}
-			sym->Add(spr);
-			spr->RemoveReference();
+			if (spr) {
+				sym->Add(spr);
+				spr->RemoveReference();
+			}
 		}
 	}
 }

@@ -90,8 +90,10 @@ void FileIO::FetchSprites(const std::string& filepath, std::vector<ee::Sprite*>&
 		std::string path = ee::SymbolSearcher::GetSymbolPath(dir, spr_val);
 		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(path);
 		if (!sym) {
-			std::string filepath = spr_val["filepath"].asString();
-			throw ee::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", dir.c_str(), filepath.c_str());
+// 			std::string filepath = spr_val["filepath"].asString();
+// 			throw ee::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", dir.c_str(), filepath.c_str());
+
+			return;
 		}
 
 		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);

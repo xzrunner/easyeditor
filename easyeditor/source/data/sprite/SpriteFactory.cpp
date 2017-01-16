@@ -88,6 +88,10 @@ Sprite* SpriteFactory::Create(const Json::Value& val, const std::string& dir,
 		}
 	}
 
+	if (!sym) {
+		return NULL;
+	}
+
 	SymbolSearcher::SetSymbolFilepaths(dir, sym, val);
 	Sprite* spr = SpriteFactory::Instance()->Create(sym);
 	spr->Load(val, dir);

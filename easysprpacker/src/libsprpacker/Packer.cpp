@@ -185,8 +185,6 @@ void Packer::LoadJsonData(const std::string& dir)
 	wxArrayString files;
 	ee::FileHelper::FetchAllFiles(dir, files);
 
-	std::set<std::string> uiwnd_paths;
-
 	std::vector<std::string> filepaths;
 	for (int i = 0, n = files.size(); i < n; ++i) 
 	{
@@ -200,11 +198,16 @@ void Packer::LoadJsonData(const std::string& dir)
 			filepaths.push_back(filepath);
 			break;
 		case ee::SYM_UI:
-			erespacker::PackUI::Instance()->AddTask(filepath);
+			{
+				std::string proxy = erespacker::PackUI::Instance()->AddTask(filepath);
+				proxy = ee::FileHelper::GetAbsolutePathFromFile(filepath, proxy);
+				ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(proxy);
+				m_syms.push_back(sym);
+			}
 			break;
 		case ee::SYM_UIWND:
 			erespacker::PackUI::Instance()->AddWindowTask(filepath);
-			AddUIWndSymbol(filepath, uiwnd_paths);
+			AddUIWndSymbol(filepath);
 			break;
 		}
 	}
@@ -212,13 +215,12 @@ void Packer::LoadJsonData(const std::string& dir)
 	std::sort(filepaths.begin(), filepaths.end());
 	for (int i = 0, n = filepaths.size(); i < n; ++i) 
 	{
-		std::string filepath = filepaths[i];
-		ee::StringHelper::ToLower(filepath);
-		if (uiwnd_paths.find(filepath) != uiwnd_paths.end()) {
-			continue;
+		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepaths[i]);
+		if (!sym->name.empty()) {
+			m_syms.push_back(sym);
+		} else {
+			sym->RemoveReference();
 		}
-		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-		m_syms.push_back(sym);
 	}
 }
 
@@ -245,7 +247,7 @@ void Packer::Pack() const
 	}
 }
 
-void Packer::AddUIWndSymbol(const std::string& filepath, std::set<std::string>& cache)
+void Packer::AddUIWndSymbol(const std::string& filepath)
 {
 	Json::Value val;
 	Json::Reader reader;
@@ -265,7 +267,6 @@ void Packer::AddUIWndSymbol(const std::string& filepath, std::set<std::string>& 
 	for_each(sprs.begin(), sprs.end(), cu::RemoveRefFunctor<ee::Sprite>());
 
 	std::string wrapper_path = erespacker::PackUIWindowTask::GetWrapperFilepath(filepath);
-	cache.insert(wrapper_path);
 	sym->SetFilepath(wrapper_path);
 	sym->name = val["name"].asString();
 

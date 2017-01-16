@@ -38,8 +38,10 @@ void LoadFromJson::Load(const std::string& _filepath, const Json::Value& value,
 			ee::LogMgr::Instance()->AddException(e.What());
 			continue;
 		}
-		complex->Add(spr);
-		spr->RemoveReference();
+		if (spr) {
+			complex->Add(spr);
+			spr->RemoveReference();
+		}
 	}
 
 	InitActions(complex, value);

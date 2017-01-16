@@ -46,6 +46,7 @@ Symbol* SymbolMgr::FetchSymbol(const std::string& filepath, int type)
 			throw Exception("Create symbol fail: %s", path);
 //			return NULL;
 		}
+
 		bool succ = sym->LoadFromFile(fixed_path);
 		if (succ)
 		{
@@ -55,10 +56,11 @@ Symbol* SymbolMgr::FetchSymbol(const std::string& filepath, int type)
 		}
 		else
 		{
-			sym->RemoveReference();
- 			const char* path = filepath.c_str();
- 			throw Exception("Load symbol %s fail!", path);
-//			return NULL;
+// 			sym->RemoveReference();
+// 			const char* path = filepath.c_str();
+// 			throw Exception("Load symbol %s fail!", path);
+
+			return NULL;
 		}
 	}
 	else
