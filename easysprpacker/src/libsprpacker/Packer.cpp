@@ -57,7 +57,12 @@ Packer::Packer(const std::string& json_dir, const std::string& tp_name,
 
 Packer::~Packer()
 {
-	for_each(m_syms.begin(), m_syms.end(), cu::RemoveRefFunctor<const ee::Symbol>());
+	for (int i = 0, n = m_syms.size(); i < n; ++i) {
+		if (m_syms[i]) {
+			m_syms[i]->RemoveReference();
+		}
+	}
+
 //	PackNodeFactory::Instance()->Release();
 }
 
@@ -243,7 +248,9 @@ void Packer::Pack() const
 {
 	PackNodeFactory* factory = PackNodeFactory::Instance();
 	for (int i = 0, n = m_syms.size(); i < n; ++i) {
-		factory->Create(m_syms[i]);
+		if (m_syms[i]) {
+			factory->Create(m_syms[i]);
+		}
 	}
 }
 
