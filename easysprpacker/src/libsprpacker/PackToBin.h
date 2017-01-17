@@ -21,14 +21,24 @@ private:
 	class Page
 	{
 	public:
-		Page();
+		Page(int size);
 		~Page();
 
-		void Insert(PackNode* node);
+		void Add(PackNode* node);
 
-		int NodeSize() const { return m_nodes.size(); }
+		int NodeNum() const { return m_nodes.size(); }
 
-	public:
+		int  GetSize() const { return m_size; }
+		void Enlarge() { m_size *= 2; }
+		void Condense(int size);
+
+		int GetMinID() const { return m_id_min; }
+		int GetMaxID() const { return m_id_max; }
+
+		const std::vector<PackNode*>& GetNodes() const { return m_nodes; }
+		
+	private:
+		int m_size;
 		int m_id_min, m_id_max;
 		std::vector<PackNode*> m_nodes;
 

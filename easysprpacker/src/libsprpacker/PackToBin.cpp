@@ -54,27 +54,45 @@ void PackToBin::Pack(const std::string& filepath,
 
 	// to pages
 	std::vector<Page*> pages;
-	Page* page = new Page;
+	Page* page = new Page(simp::PAGE_SIZE);
 	int page_sz = ALIGN_4BYTE(simp::Page::Size());
 	for (int i = 0, n = nodes.size(); i < n; ++i)
 	{
 		PackNode* node = nodes[i];
 
 		int sz = node->SizeOfUnpackFromBin();
-		assert(sz < simp::PAGE_SIZE);
-		int head_sz = sizeof(uint8_t) * ALIGN_4BYTE(page->NodeSize() + 1) +
-			          simp::SIZEOF_POINTER * (page->NodeSize() + 1);
-		if (page_sz + head_sz + sz > simp::PAGE_SIZE)
-		{
-			pages.push_back(page);
-			page = new Page;
-			page_sz = ALIGN_4BYTE(simp::Page::Size()) + sz;
-		} else {
-			page_sz += sz;
+		if (sz >= simp::PAGE_SIZE) {
+			int zz = 0;
 		}
-		page->Insert(node);
+
+		int head_sz = sizeof(uint8_t) * ALIGN_4BYTE(page->NodeNum() + 1) 
+			        + simp::SIZEOF_POINTER * (page->NodeNum() + 1);
+		while (true)
+		{
+			if (page_sz + head_sz + sz <= page->GetSize()) {
+				page_sz += sz;
+				page->Add(node);
+				break;
+			}
+			if (page->NodeNum() > 0) 
+			{
+				page->Condense(page_sz + head_sz);
+				pages.push_back(page);
+				page = new Page(simp::PAGE_SIZE);
+				page_sz = ALIGN_4BYTE(simp::Page::Size());
+			} else {
+				page->Enlarge();
+				if (page->GetSize() > simp::PAGE_SIZE_MAX) {
+					throw ee::Exception("PackToBin::Pack page size too large %d", sz);
+				}
+			}
+		}
 	}
-	if (!page->m_nodes.empty()) {
+	if (page->NodeNum() > 0) 
+	{
+		int head_sz = sizeof(uint8_t) * ALIGN_4BYTE(page->NodeNum() + 1) 
+			        + simp::SIZEOF_POINTER * (page->NodeNum() + 1);
+		page->Condense(page_sz + head_sz);
 		pages.push_back(page);
 	}
 
@@ -109,6 +127,7 @@ void PackToBin::PageIndex(const std::string& filepath, const std::vector<Page*>&
 	// pages
 	sz += sizeof(uint16_t);					// num
 	for (int i = 0, n = pages.size(); i < n; ++i) {
+		sz += sizeof(uint32_t);				// size
 		sz += sizeof(uint32_t);				// min
 		sz += sizeof(uint32_t);				// max
 	}
@@ -132,9 +151,13 @@ void PackToBin::PageIndex(const std::string& filepath, const std::vector<Page*>&
 	// pages
 	uint16_t page_n = pages.size();
 	pack(page_n, &ptr);
-	for (int i = 0, n = pages.size(); i < n; ++i) {
-		uint32_t min = pages[i]->m_id_min,
-			     max = pages[i]->m_id_max;
+	for (int i = 0, n = pages.size(); i < n; ++i) 
+	{
+		uint32_t size = pages[i]->GetSize();
+		pack(size, &ptr);
+
+		uint32_t min = pages[i]->GetMinID(),
+			     max = pages[i]->GetMaxID();
 		pack(min, &ptr);
 		pack(max, &ptr);
 	}
@@ -171,18 +194,19 @@ void PackToBin::PackPage(const std::string& filepath, const Page& page,
 #endif // DEBUG_PACK_BIN
 
 	int out_sz = 0;
-	for (int i = 0, n = page.m_nodes.size(); i < n; ++i) {
+	const std::vector<PackNode*>& nodes = page.GetNodes();
+	for (int i = 0, n = nodes.size(); i < n; ++i) {
 #ifdef DEBUG_PACK_BIN
 		tot_sz += page.m_nodes[i]->SizeOfPackToBin();
 		list0.push_back(tot_sz);
 #endif // DEBUG_PACK_BIN
-		out_sz += page.m_nodes[i]->SizeOfPackToBin();
+		out_sz += nodes[i]->SizeOfPackToBin();
 	}
 	
 	uint8_t* buf = new uint8_t[out_sz];
 	uint8_t* ptr = buf;
-	for (int i = 0, n = page.m_nodes.size(); i < n; ++i) {
-		page.m_nodes[i]->PackToBin(&ptr, tp, scale);
+	for (int i = 0, n = nodes.size(); i < n; ++i) {
+		nodes[i]->PackToBin(&ptr, tp, scale);
 #ifdef DEBUG_PACK_BIN
 		list1.push_back(ptr - buf);
 #endif // DEBUG_PACK_BIN
@@ -215,8 +239,9 @@ void PackToBin::PackPage(const std::string& filepath, const Page& page,
 /************************************************************************/
 
 PackToBin::Page::
-Page() 
-	: m_id_min(INT_MAX)
+Page(int size) 
+	: m_size(size)
+	, m_id_min(INT_MAX)
 	, m_id_max(-INT_MAX) 
 {}
 
@@ -227,7 +252,7 @@ PackToBin::Page::
 }
 
 void PackToBin::Page::
-Insert(PackNode* node)
+Add(PackNode* node)
 {
 	int id = node->GetNodeID();
 	if (id < m_id_min) {
@@ -237,6 +262,14 @@ Insert(PackNode* node)
 		m_id_max = id;
 	}
 	m_nodes.push_back(node);
+}
+
+void PackToBin::Page::
+Condense(int size)
+{
+	while (size < m_size / 2) {
+		m_size /= 2;
+	}
 }
 
 }
