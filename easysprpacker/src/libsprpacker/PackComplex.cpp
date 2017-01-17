@@ -10,6 +10,7 @@ namespace lua = ebuilder::lua;
 #include <simp/simp_types.h>
 #include <simp/simp_define.h>
 #include <simp/NodeComplex.h>
+#include <bimp/typedef.h>
 
 namespace esprpacker
 {
@@ -200,7 +201,7 @@ SizeOfUnpackFromBin() const
 {
 	int sz = simp::NodeComplex::ActionSize();
 	sz += sizeof_unpack_str(m_name);
-	sz += sizeof(uint16_t) * m_sprs.size();
+	sz += ALIGN_4BYTE(sizeof(uint16_t) * m_sprs.size());
 	return sz;
 }
 
