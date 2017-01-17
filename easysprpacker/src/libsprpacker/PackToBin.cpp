@@ -82,9 +82,6 @@ void PackToBin::Pack(const std::string& filepath,
 				page_sz = ALIGN_4BYTE(simp::Page::Size());
 			} else {
 				page->Enlarge();
-				if (page->GetSize() > simp::PAGE_SIZE_MAX) {
-					throw ee::Exception("PackToBin::Pack page size too large %d", sz);
-				}
 			}
 		}
 	}
@@ -265,9 +262,18 @@ Add(PackNode* node)
 }
 
 void PackToBin::Page::
+Enlarge() 
+{
+	m_size *= 2;
+	if (m_size > simp::PAGE_SIZE_MAX) {
+		throw ee::Exception("Page::Enlarge page size too large %d", m_size);
+	}
+}
+
+void PackToBin::Page::
 Condense(int size)
 {
-	while (size < m_size / 2) {
+	while (size < m_size / 2 && m_size > simp::PAGE_SIZE_MIN) {
 		m_size /= 2;
 	}
 }

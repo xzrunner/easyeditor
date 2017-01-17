@@ -29,7 +29,7 @@ private:
 		int NodeNum() const { return m_nodes.size(); }
 
 		int  GetSize() const { return m_size; }
-		void Enlarge() { m_size *= 2; }
+		void Enlarge();
 		void Condense(int size);
 
 		int GetMinID() const { return m_id_min; }
