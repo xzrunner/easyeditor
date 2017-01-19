@@ -4,7 +4,10 @@
 #include "INodeBuilder.h"
 #include "PackPicture.h"
 
+#include <map>
+
 namespace ee { class ImageSprite; class Sprite; }
+namespace s2 { class Symbol; }
 
 namespace erespacker
 {
@@ -26,7 +29,7 @@ public:
 	static void TransScreen(PackPicture::Quad& quad, const ee::Sprite* spr);
 
 private:
-	std::vector<IPackNode*> m_nodes;
+	std::map<const s2::Symbol*, std::vector<PackPicture*> > m_nodes;
 
 }; // ImageBuilder
 

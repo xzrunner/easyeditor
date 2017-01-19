@@ -21,27 +21,56 @@ ImageBuilder::ImageBuilder()
 
 ImageBuilder::~ImageBuilder()
 {
-	for_each(m_nodes.begin(), m_nodes.end(), ee::DeletePointerFunctor<IPackNode>());	
+	std::map<const s2::Symbol*, std::vector<PackPicture*> >::iterator itr = m_nodes.begin();
+	for ( ; itr != m_nodes.end(); ++itr) {
+		for_each(itr->second.begin(), itr->second.end(), ee::DeletePointerFunctor<IPackNode>());	
+	}
 }
 
 void ImageBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 {
-	for (int i = 0, n = m_nodes.size(); i < n; ++i) {
-		bool has_next;
-		visitor.Visit(m_nodes[i], has_next);
-		if (!has_next) {
-			break;
+	std::map<const s2::Symbol*, std::vector<PackPicture*> >::const_iterator itr = m_nodes.begin();
+	for ( ; itr != m_nodes.end(); ++itr) 
+	{
+		for (int i = 0, n = itr->second.size(); i < n; ++i) {
+			bool has_next;
+			visitor.Visit(itr->second[i], has_next);
+			if (!has_next) {
+				return;
+			}			
 		}
 	}
 }
 
 const IPackNode* ImageBuilder::Create(const ee::ImageSprite* spr)
 {
-	PackPicture* node = new PackPicture;
 	PackPicture::Quad quad;
 	LoadPictureQuad(spr, quad);
+
+	// query
+	std::map<const s2::Symbol*, std::vector<PackPicture*> >::iterator itr 
+		= m_nodes.find(spr->GetSymbol());
+	if (itr != m_nodes.end()) {
+		for (int i = 0, n = itr->second.size(); i < n; ++i) {
+			PackPicture::Quad* old = &itr->second[i]->quads[0];
+			if (old->img == quad.img &&
+				memcmp(old->texture_coord, quad.texture_coord, sizeof(old->texture_coord)) == 0 &&
+				memcmp(old->screen_coord, quad.screen_coord, sizeof(old->screen_coord)) == 0) {
+				return itr->second[i];
+			}
+		}
+	}
+
+	// create
+	PackPicture* node = new PackPicture;
 	node->quads.push_back(quad);
-	m_nodes.push_back(node);
+	if (itr == m_nodes.end()) {
+		std::vector<PackPicture*> nodes;
+		nodes.push_back(node);
+		m_nodes.insert(std::make_pair(spr->GetSymbol(), nodes));
+	} else {
+		itr->second.push_back(node);
+	}
 	return node;
 }
 
