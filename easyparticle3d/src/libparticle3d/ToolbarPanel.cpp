@@ -195,7 +195,7 @@ wxSizer* ToolbarPanel::CreateMainLayout()
 
 	// Count
 	ee::SliderCtrlOne* s_count = new ee::SliderCtrlOne(this, LANG[LK_COUNT], 
-		"count", this, PS_COUNT, ee::SliderItem("", "", COUNT, 1, 500));
+		"count", this, PS_COUNT, ee::SliderItem("", "", COUNT, 1, 5000));
 	top_sizer->Add(s_count);
 	m_sliders.push_back(s_count);
 	m_count_ctrl = s_count;
