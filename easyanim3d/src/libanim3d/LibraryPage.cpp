@@ -4,7 +4,8 @@
 
 #include <ee/LibraryList.h>
 
-#include <easy3d.h>
+#include <model3/AssimpHelper.h>
+#include <model3/Model.h>
 
 namespace eanim3d
 {
@@ -30,17 +31,15 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 		dlg.GetPaths(filenames);
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
-			e3d::ModelParametric* model = new e3d::ModelParametric();
-			e3d::AssimpHelper loader;
-			m3::AABB aabb;
-			loader.LoadFile(filenames[i], *model, aabb);
+			m3::Model* model = m3::AssimpHelper::Load(filenames[i].ToStdString());
 			Symbol* sym = new Symbol();
 			sym->SetModel(model);
+			model->RemoveReference();
 
 			std::string filepath = FILE_TAG;
 			filepath += ".json";
 			sym->SetFilepath(filepath);
-			sym->SetAABB(aabb);
+// 			sym->SetAABB(aabb);
 
 			AddItem(sym);
 		}
