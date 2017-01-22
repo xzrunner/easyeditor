@@ -22,8 +22,7 @@ public:
 	virtual ChainShape* Clone() const { return new ChainShape(*this); }
 	virtual bool IsContain(const sm::vec2& pos) const { return s2::PolylineShape::IsContain(pos); }
 	virtual bool IsIntersect(const sm::rect& rect) const { return s2::PolylineShape::IsIntersect(rect); }
-	virtual void Draw(const sm::mat4& mt, 
-		const s2::RenderColor& color = s2::RenderColor()) const;
+	virtual void Draw(const sm::mat4& mt, const s2::RenderColor* color = NULL) const;
 
 	/**
 	 *  @interface

@@ -1905,23 +1905,28 @@ void CocoPacker::TransToMat(const ee::Sprite* spr, float mat[6], bool force /*= 
 
 void CocoPacker::GetColorAssignParams(const ee::Sprite* spr, std::vector<std::string>& params) const
 {
-	if (spr->GetColor().mul != s2::Color(1,1,1,1) || spr->GetColor().add != s2::Color(0,0,0,0)) 
+	const s2::Color& mul = spr->GetColor().GetMul();
+	const s2::Color& add = spr->GetColor().GetAdd();
+	if (mul != s2::Color(1,1,1,1) || add != s2::Color(0,0,0,0)) 
 	{
-		std::string str_multi = lua::assign("color", color2int(spr->GetColor().mul, gum::BGRA));
+		std::string str_multi = lua::assign("color", color2int(mul, gum::BGRA));
 		params.push_back(str_multi);
-		std::string str_add = lua::assign("add", color2int(spr->GetColor().add, gum::ABGR));
+		std::string str_add = lua::assign("add", color2int(add, gum::ABGR));
 		params.push_back(str_add);
 	}
 
-	if (spr->GetColor().rmap != s2::Color(255, 0, 0, 255) || spr->GetColor().gmap != s2::Color(0, 255, 0, 255) || spr->GetColor().bmap != s2::Color(0, 0, 255, 255))
+	const s2::Color& rmap = spr->GetColor().GetMapR();
+	const s2::Color& gmap = spr->GetColor().GetMapG();
+	const s2::Color& bmap = spr->GetColor().GetMapB();
+	if (rmap != s2::Color(255, 0, 0, 255) || gmap != s2::Color(0, 255, 0, 255) || bmap != s2::Color(0, 0, 255, 255))
 	{
-		std::string str_r = lua::assign("r_map", gum::color2str(spr->GetColor().rmap, gum::RGBA));
+		std::string str_r = lua::assign("r_map", gum::color2str(rmap, gum::RGBA));
 		params.push_back(str_r);
 
-		std::string str_g = lua::assign("g_map", gum::color2str(spr->GetColor().gmap, gum::RGBA));
+		std::string str_g = lua::assign("g_map", gum::color2str(gmap, gum::RGBA));
 		params.push_back(str_g);
 
-		std::string str_b = lua::assign("b_map", gum::color2str(spr->GetColor().bmap, gum::RGBA));
+		std::string str_b = lua::assign("b_map", gum::color2str(bmap, gum::RGBA));
 		params.push_back(str_b);
 	}
 }

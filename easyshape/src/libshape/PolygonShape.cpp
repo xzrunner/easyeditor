@@ -36,10 +36,10 @@ PolygonShape::~PolygonShape()
 	ClearUserData(true);
 }
 
-void PolygonShape::Draw(const sm::mat4& mt, const s2::RenderColor& color) const
+void PolygonShape::Draw(const sm::mat4& mt, const s2::RenderColor* color) const
 {
 	if (m_poly) {
-		m_poly->Draw(mt, color);
+		m_poly->Draw(mt, *color);
 		if (ee::SettingData::draw_tris_edge) {
 			m_poly->DebugDraw(mt);
 		}

@@ -164,13 +164,13 @@ void TwoPassCanvas::DrawPass2(const float* vertices, const float* texcoords, int
 	}
 
 	s2::RenderColor color;
-	color.mul = m_scr_style.multi_col;
-	color.add = m_scr_style.add_col;
+	color.SetMul(m_scr_style.multi_col);
+	color.SetAdd(m_scr_style.add_col);
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	mgr->SetShader(sl::SPRITE2);
 	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader());
-	shader->SetColor(color.mul.ToABGR(), color.add.ToABGR());
-	shader->SetColorMap(color.rmap.ToABGR(), color.gmap.ToABGR(), color.bmap.ToABGR());
+	shader->SetColor(color.GetMul().ToABGR(), color.GetAdd().ToABGR());
+	shader->SetColorMap(color.GetMapR().ToABGR(), color.GetMapG().ToABGR(), color.GetMapB().ToABGR());
 	shader->Draw(vertices, texcoords, tex_id);
 }
 

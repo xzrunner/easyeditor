@@ -22,7 +22,7 @@ public:
 	virtual PointShape* Clone() const { return new PointShape(*this); }
 	virtual bool IsContain(const sm::vec2& pos) const { return s2::PointShape::IsContain(pos); }
 	virtual bool IsIntersect(const sm::rect& rect) const { return s2::PointShape::IsIntersect(rect); }
-	virtual void Draw(const sm::mat4& mt, const s2::RenderColor& color = s2::RenderColor()) const { s2::PointShape::Draw(mt, color); }
+	virtual void Draw(const sm::mat4& mt, const s2::RenderColor* color = NULL) const { s2::PointShape::Draw(mt, color); }
 
 	/**
 	 *  @interface

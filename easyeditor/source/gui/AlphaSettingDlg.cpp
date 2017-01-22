@@ -14,7 +14,7 @@ AlphaSettingDlg::AlphaSettingDlg(wxWindow* parent, s2::Sprite* spr, const wxPoin
 	, m_alpha(NULL)
 {
 	InitLayout();
-	SetColor(spr->GetColor().mul);
+	SetColor(spr->GetColor().GetMul());
 }
 
 s2::Color AlphaSettingDlg::GetColor() const
@@ -27,7 +27,9 @@ s2::Color AlphaSettingDlg::GetColor() const
 void AlphaSettingDlg::OnColorChanged()
 {
 	s2::RenderColor rc = m_spr->GetColor();
-	rc.mul.a = m_alpha->GetColorValue();;
+	s2::Color mul = rc.GetMul();
+	mul.a = m_alpha->GetColorValue();
+	rc.SetMul(mul);
 	m_spr->SetColor(rc);
 	SetCanvasDirtySJ::Instance()->SetDirty();
 }

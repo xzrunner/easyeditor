@@ -29,7 +29,7 @@ ChainShape::ChainShape(const std::vector<sm::vec2>& vertices, bool closed)
 {
 }
 
-void ChainShape::Draw(const sm::mat4& mt, const s2::RenderColor& color) const
+void ChainShape::Draw(const sm::mat4& mt, const s2::RenderColor* color) const
 {
 	s2::PolylineShape::Draw(mt, color);
 

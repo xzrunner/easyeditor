@@ -46,19 +46,22 @@ PackTrans::PackTrans(const s2::Sprite& spr, bool force_name)
 	// shader
 
 	m_color = spr.GetColor();
-	if (m_color.mul != s2::Color(0xffffffff)) {
+	if (m_color.GetMul() != s2::Color(0xffffffff)) {
 		m_type |= simp::NodeTrans::COL_MUL_MASK;
 	}
-	if (m_color.add != s2::Color(0)) {
+	if (m_color.GetAdd() != s2::Color(0)) {
 		m_type |= simp::NodeTrans::COL_ADD_MASK;
 	}
-	if (m_color.rmap.r != 255 || m_color.rmap.g != 0 || m_color.rmap.b != 0) {
+	const s2::Color& rmap = m_color.GetMapR();
+	if (rmap.r != 255 || rmap.g != 0 || rmap.b != 0) {
 		m_type |= simp::NodeTrans::COL_R_MASK;
 	}
-	if (m_color.gmap.r != 0 || m_color.gmap.g != 255 || m_color.gmap.b != 0) {
+	const s2::Color& gmap = m_color.GetMapG();
+	if (gmap.r != 0 || gmap.g != 255 || gmap.b != 0) {
 		m_type |= simp::NodeTrans::COL_G_MASK;
 	}
-	if (m_color.bmap.r != 0 || m_color.bmap.g != 0 || m_color.bmap.b != 255) {
+	const s2::Color& bmap = m_color.GetMapB();
+	if (bmap.r != 0 || bmap.g != 0 || bmap.b != 255) {
 		m_type |= simp::NodeTrans::COL_B_MASK;
 	}
 
@@ -78,7 +81,7 @@ PackTrans::PackTrans(const s2::Sprite& spr, bool force_name)
 	}
 
 	m_camera = spr.GetCamera();
-	if (m_camera.mode != s2::CM_ORTHO) {
+	if (m_camera.GetMode() != s2::CM_ORTHO) {
 		m_type |= simp::NodeTrans::CAMERA_MASK;
 	}
 
@@ -132,19 +135,19 @@ void PackTrans::PackToLua(ebuilder::CodeGenerator& gen) const
 	// color
 	std::vector<std::string> colors;
 	if (m_type & simp::NodeTrans::COL_MUL_MASK) {
-		colors.push_back(lua::assign("mul", ee::StringHelper::ToString(m_color.mul.ToRGBA())));
+		colors.push_back(lua::assign("mul", ee::StringHelper::ToString(m_color.GetMul().ToRGBA())));
 	}
 	if (m_type & simp::NodeTrans::COL_ADD_MASK) {
-		colors.push_back(lua::assign("add", ee::StringHelper::ToString(m_color.add.ToRGBA())));
+		colors.push_back(lua::assign("add", ee::StringHelper::ToString(m_color.GetAdd().ToRGBA())));
 	}
 	if (m_type & simp::NodeTrans::COL_R_MASK) {
-		colors.push_back(lua::assign("rmap", ee::StringHelper::ToString(m_color.rmap.ToRGBA())));
+		colors.push_back(lua::assign("rmap", ee::StringHelper::ToString(m_color.GetMapR().ToRGBA())));
 	}
 	if (m_type & simp::NodeTrans::COL_G_MASK) {
-		colors.push_back(lua::assign("gmap", ee::StringHelper::ToString(m_color.gmap.ToRGBA())));
+		colors.push_back(lua::assign("gmap", ee::StringHelper::ToString(m_color.GetMapG().ToRGBA())));
 	}
 	if (m_type & simp::NodeTrans::COL_B_MASK) {
-		colors.push_back(lua::assign("bmap", ee::StringHelper::ToString(m_color.bmap.ToRGBA())));
+		colors.push_back(lua::assign("bmap", ee::StringHelper::ToString(m_color.GetMapB().ToRGBA())));
 	}
 	lua::connect(gen, colors);
 
@@ -160,7 +163,7 @@ void PackTrans::PackToLua(ebuilder::CodeGenerator& gen) const
 		shaders.push_back(lua::assign("filter", ee::StringHelper::ToString((int)(m_filter->GetMode()))));
 	}
 	if (m_type & simp::NodeTrans::CAMERA_MASK) {
-		shaders.push_back(lua::assign("camera", ee::StringHelper::ToString((int)(m_camera.mode))));
+		shaders.push_back(lua::assign("camera", ee::StringHelper::ToString((int)(m_camera.GetMode()))));
 	}
 	lua::connect(gen, shaders);
 
@@ -300,23 +303,23 @@ void PackTrans::PackToBin(uint8_t** ptr) const
 		pack(angle, ptr);
 	}
 	if (m_type & simp::NodeTrans::COL_MUL_MASK) {
-		uint32_t col = m_color.mul.ToRGBA();
+		uint32_t col = m_color.GetMul().ToRGBA();
 		pack(col, ptr);
 	}
 	if (m_type & simp::NodeTrans::COL_ADD_MASK) {
-		uint32_t col = m_color.add.ToRGBA();
+		uint32_t col = m_color.GetAdd().ToRGBA();
 		pack(col, ptr);
 	}
 	if (m_type & simp::NodeTrans::COL_R_MASK) {
-		uint32_t col = m_color.rmap.ToRGBA();
+		uint32_t col = m_color.GetMapR().ToRGBA();
 		pack(col, ptr);
 	}
 	if (m_type & simp::NodeTrans::COL_G_MASK) {
-		uint32_t col = m_color.gmap.ToRGBA();
+		uint32_t col = m_color.GetMapG().ToRGBA();
 		pack(col, ptr);
 	}
 	if (m_type & simp::NodeTrans::COL_B_MASK) {
-		uint32_t col = m_color.bmap.ToRGBA();
+		uint32_t col = m_color.GetMapB().ToRGBA();
 		pack(col, ptr);
 	}
 	if (m_type & simp::NodeTrans::BLEND_MASK) {
@@ -332,7 +335,7 @@ void PackTrans::PackToBin(uint8_t** ptr) const
 		pack(mode, ptr);
 	}
 	if (m_type & simp::NodeTrans::CAMERA_MASK) {
-		uint32_t mode = m_camera.mode;
+		uint32_t mode = m_camera.GetMode();
 		pack(mode, ptr);
 	}
 	pack_str(m_name, ptr);

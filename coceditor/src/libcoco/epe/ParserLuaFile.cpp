@@ -805,8 +805,8 @@ void ParserLuaFile::Animation::Item::transform(ee::Sprite* spr) const
 	if (is_full && valid)
 	{
 		s2::RenderColor rc;
-		rc.mul = gum::int2color(color, gum::BGRA);
-		rc.add = gum::int2color(add, gum::ABGR);
+		rc.SetMul(gum::int2color(color, gum::BGRA));
+		rc.SetAdd(gum::int2color(add, gum::ABGR));
 		spr->SetColor(rc);
 		
 		float x = mat[4] / 16.0f,

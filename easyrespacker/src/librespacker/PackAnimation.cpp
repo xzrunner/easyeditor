@@ -179,7 +179,7 @@ void PackAnimation::LoadSprTrans(const ee::Sprite* spr, SpriteTrans& trans, bool
 	} else {
 		trans.filter = s2::FM_NULL;
 	}
-	trans.camera = static_cast<int>(spr->GetCamera().mode);
+	trans.camera = static_cast<int>(spr->GetCamera().GetMode());
 }
 
 void PackAnimation::LoadSprMat(const ee::Sprite* spr, SpriteTrans& trans, bool force)
@@ -227,12 +227,12 @@ void PackAnimation::LoadSprColor(const ee::Sprite* spr, SpriteTrans& trans)
 {
 	const s2::RenderColor& rc = spr->GetColor();
 
-	trans.color    = gum::color2int(rc.mul, gum::ARGB);
-	trans.additive = gum::color2int(rc.add, gum::ARGB);
+	trans.color    = gum::color2int(rc.GetMul(), gum::ARGB);
+	trans.additive = gum::color2int(rc.GetAdd(), gum::ARGB);
 
-	trans.rmap = rc.rmap.ToRGBA();
-	trans.gmap = rc.gmap.ToRGBA();
-	trans.bmap = rc.bmap.ToRGBA();	
+	trans.rmap = rc.GetMapR().ToRGBA();
+	trans.gmap = rc.GetMapG().ToRGBA();
+	trans.bmap = rc.GetMapB().ToRGBA();	
 }
 
 bool PackAnimation::IsMatrixIdentity(const int* mat)

@@ -644,14 +644,18 @@ void CocoPacker::resolveSpriteForFrame(const ee::Sprite* spr, int id, bool force
 		m[3], m[4], m[5]);
 	std::string assignMat = lua::assign("mat", smat);
 
-	if (spr->GetColor().mul != s2::Color(255, 255, 255, 255) || spr->GetColor().add != s2::Color(0,0,0,0))
+	const s2::Color& mul = spr->GetColor().GetMul();
+	const s2::Color& add = spr->GetColor().GetAdd();
+	if (mul != s2::Color(255, 255, 255, 255) || add != s2::Color(0,0,0,0))
 	{
-		std::string assignColor = lua::assign("color", gum::color2str(spr->GetColor().mul, gum::BGRA));
-		std::string assignAdd = lua::assign("add", gum::color2str(spr->GetColor().add, gum::ABGR));
+		std::string assignColor = lua::assign("color", gum::color2str(mul, gum::BGRA));
+		std::string assignAdd = lua::assign("add", gum::color2str(add, gum::ABGR));
 		lua::tableassign(m_gen, "", 4, assignIndex, assignColor, assignAdd, assignMat);
 	}
 	else
+	{
 		lua::tableassign(m_gen, "", 2, assignIndex, assignMat);
+	}
 }
 
 void CocoPacker::resolveSpriteForFrameImage(const ee::Sprite* spr, int id)
@@ -668,10 +672,12 @@ void CocoPacker::resolveSpriteForFrameImage(const ee::Sprite* spr, int id)
 		m[3], m[4], m[5]);
 	std::string assignMat = lua::assign("mat", smat);
 
-	if (spr->GetColor().mul != s2::Color(1,1,1,1) || spr->GetColor().add != s2::Color(0,0,0,0))
+	const s2::Color& mul = spr->GetColor().GetMul();
+	const s2::Color& add = spr->GetColor().GetAdd();
+	if (mul != s2::Color(1,1,1,1) || add != s2::Color(0,0,0,0))
 	{
-		std::string assignColor = lua::assign("color", gum::color2str(spr->GetColor().mul, gum::BGRA));
-		std::string assignAdd = lua::assign("add", gum::color2str(spr->GetColor().add, gum::ABGR));
+		std::string assignColor = lua::assign("color", gum::color2str(mul, gum::BGRA));
+		std::string assignAdd = lua::assign("add", gum::color2str(add, gum::ABGR));
 		if (spr->IsClip())
 			lua::tableassign(m_gen, "", 5, assignIndex, assignColor, assignAdd, assignMat, "clip=true");
 		else

@@ -17,7 +17,7 @@ namespace ee
 	{ \
 		spr->AddReference(); \
 		m_sprs.push_back(spr); \
-		m_old_color.push_back(spr->GetColor().##var##); \
+		m_old_color.push_back(spr->GetColor().Get##var##()); \
 	} \
 	\
 	SetSprite##name##ColorAOP::SetSprite##name##ColorAOP(const std::vector<Sprite*>& sprs, const s2::Color& color) \
@@ -27,7 +27,7 @@ namespace ee
 		m_sprs = sprs; \
 	\
 		for (int i = 0, n = sprs.size(); i < n; ++i) { \
-			m_old_color.push_back(m_sprs[i]->GetColor().##var##); \
+			m_old_color.push_back(m_sprs[i]->GetColor().Get##var##()); \
 		} \
 	} \
 	\
@@ -41,7 +41,7 @@ namespace ee
 		assert(m_sprs.size() == m_old_color.size()); \
 		for (int i = 0, n = m_sprs.size(); i < n; ++i) { \
 			s2::RenderColor rc = m_sprs[i]->GetColor(); \
-			rc.##var## = m_old_color[i]; \
+			rc.Set##var##(m_old_color[i]); \
 			m_sprs[i]->SetColor(rc); \
 		} \
 	} \
@@ -50,7 +50,7 @@ namespace ee
 	{ \
 		for (int i = 0, n = m_sprs.size(); i < n; ++i) { \
 			s2::RenderColor rc = m_sprs[i]->GetColor(); \
-			rc.##var## = m_new_color; \
+			rc.Set##var##(m_new_color); \
 			m_sprs[i]->SetColor(rc); \
 		} \
 	} \
@@ -61,10 +61,10 @@ namespace ee
 		return ret; \
 	} \
 
-SET_SPRITE_COLOR_AOP_DEF(Mul, mul)
-SET_SPRITE_COLOR_AOP_DEF(Add, add)
-SET_SPRITE_COLOR_AOP_DEF(TransR, rmap)
-SET_SPRITE_COLOR_AOP_DEF(TransG, gmap)
-SET_SPRITE_COLOR_AOP_DEF(TransB, bmap)
+SET_SPRITE_COLOR_AOP_DEF(Mul, Mul)
+SET_SPRITE_COLOR_AOP_DEF(Add, Add)
+SET_SPRITE_COLOR_AOP_DEF(TransR, MapR)
+SET_SPRITE_COLOR_AOP_DEF(TransG, MapG)
+SET_SPRITE_COLOR_AOP_DEF(TransB, MapB)
 
 }

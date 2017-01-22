@@ -35,8 +35,7 @@ public:
 	 *  @interface
 	 *    Mesh
 	 */
-	virtual void Draw(const sm::mat4& mt,
-		const s2::RenderColor& color = s2::RenderColor()) const;
+	virtual void Draw(const sm::mat4& mt, const s2::RenderColor* color = NULL) const;
 	virtual void LoadFromFile(const Json::Value& value, const std::string& dir);
 	virtual void StoreToFile(Json::Value& value, const std::string& dir) const;
 

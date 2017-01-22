@@ -43,8 +43,8 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
-	shader->SetColor(p.color.mul.ToABGR(), p.color.add.ToABGR());
-	shader->SetColorMap(p.color.rmap.ToABGR(), p.color.gmap.ToABGR(), p.color.bmap.ToABGR());
+	shader->SetColor(p.color.GetMul().ToABGR(), p.color.GetAdd().ToABGR());
+	shader->SetColorMap(p.color.GetMapR().ToABGR(), p.color.GetMapG().ToABGR(), p.color.GetMapB().ToABGR());
 
 	float dt = (float)(curr - m_time) / CLOCKS_PER_SEC;
 	for (int i = 0, n = m_oceans.size(); i < n; ++i) {

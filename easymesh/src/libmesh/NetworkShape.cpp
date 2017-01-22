@@ -32,7 +32,7 @@ NetworkShape::NetworkShape(const std::vector<sm::vec2>& vertices,
 {
 }
 
-void NetworkShape::Draw(const sm::mat4& mt, const s2::RenderColor& color) const
+void NetworkShape::Draw(const sm::mat4& mt, const s2::RenderColor* color) const
 {
 	s2::NetworkShape::Draw(mt, color);
 

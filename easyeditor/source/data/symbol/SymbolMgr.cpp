@@ -56,11 +56,11 @@ Symbol* SymbolMgr::FetchSymbol(const std::string& filepath, int type)
 		}
 		else
 		{
-// 			sym->RemoveReference();
-// 			const char* path = filepath.c_str();
-// 			throw Exception("Load symbol %s fail!", path);
+			sym->RemoveReference();
+			const char* path = filepath.c_str();
+			throw Exception("Load symbol %s fail!", path);
 
-			return NULL;
+//			return NULL;
 		}
 	}
 	else

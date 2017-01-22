@@ -20,15 +20,15 @@ s2::Color SprPropColMonitor::GetColor() const
 	switch (m_type)
 	{
 	case CT_MUL:
-		return m_spr->GetColor().mul;
+		return m_spr->GetColor().GetMul();
 	case CT_ADD:
-		return m_spr->GetColor().add;
+		return m_spr->GetColor().GetAdd();
 	case CT_RMAP:
-		return m_spr->GetColor().rmap;
+		return m_spr->GetColor().GetMapR();
 	case CT_GMAP:
-		return m_spr->GetColor().gmap;
+		return m_spr->GetColor().GetMapG();
 	case CT_BMAP:
-		return m_spr->GetColor().bmap;
+		return m_spr->GetColor().GetMapB();
 	default:
 		return s2::Color();
 	}
@@ -45,19 +45,19 @@ void SprPropColMonitor::OnColorChanged(const s2::Color& col)
 	switch (m_type)
 	{
 	case CT_MUL:
-		rc.mul = col;
+		rc.SetMul(col);
 		break;
 	case CT_ADD:
-		rc.add = col;
+		rc.SetAdd(col);
 		break;
 	case CT_RMAP:
-		rc.rmap = col;
+		rc.SetMapR(col);
 		break;
 	case CT_GMAP:
-		rc.gmap = col;
+		rc.SetMapG(col);
 		break;
 	case CT_BMAP:
-		rc.bmap = col;
+		rc.SetMapB(col);
 		break;
 	}
 	m_spr->SetColor(rc);

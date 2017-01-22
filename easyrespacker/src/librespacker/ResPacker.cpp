@@ -285,7 +285,7 @@ void ResPacker::Pack() const
 		} else if (const etrail::Symbol* trail = dynamic_cast<const etrail::Symbol*>(sym)) {
 			factory->Create(trail);
 		} else {
-			throw ee::Exception("ResPacker::Pack unhandled type.");
+			throw ee::Exception("ResPacker::Pack unhandled type %s.", sym->GetFilepath());
 		}
 	}
 }
