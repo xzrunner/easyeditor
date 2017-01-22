@@ -276,6 +276,9 @@ void ResPacker::Pack() const
 	for (int i = 0, n = m_syms.size(); i < n; ++i) 
 	{
 		const ee::Symbol* sym = m_syms[i];
+		if (!sym) {
+			continue;
+		}
 		if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(sym)) {
 			factory->Create(complex);
 		} else if (const libanim::Symbol* anim = dynamic_cast<const libanim::Symbol*>(sym)) {
