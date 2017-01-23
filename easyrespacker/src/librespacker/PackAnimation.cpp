@@ -139,7 +139,7 @@ bool PackAnimation::AddComponent(const IPackNode* node, const std::string& name,
 				{
 				case s2::SYM_IMAGE:
 					comp_idx = i;
-					force_mat = false;
+					force_mat = true;	// IMAGE_BUILDER_CACHE
 					return new_comp;
 				case s2::SYM_COMPLEX: case s2::SYM_ANIMATION: case s2::SYM_TEXTBOX: case s2::SYM_MASK: case s2::SYM_PARTICLE3D:
 					comp_idx = i;
@@ -161,7 +161,7 @@ bool PackAnimation::AddComponent(const IPackNode* node, const std::string& name,
 	if (is_anchor) {
 		force_mat = true;
 	} else if (ee::SymbolFile::Instance()->Type(node->GetFilepath()) == s2::SYM_IMAGE) {
-		force_mat = false;
+		force_mat = true;	// IMAGE_BUILDER_CACHE
 	} else {
 		force_mat = !name.empty();
 	}

@@ -9,6 +9,8 @@
 namespace ee { class ImageSprite; class Sprite; }
 namespace s2 { class Symbol; }
 
+#define IMAGE_BUILDER_CACHE
+
 namespace erespacker
 {
 
@@ -29,7 +31,11 @@ public:
 	static void TransScreen(PackPicture::Quad& quad, const ee::Sprite* spr);
 
 private:
-	std::map<const s2::Symbol*, std::vector<PackPicture*> > m_nodes;
+#ifdef IMAGE_BUILDER_CACHE
+	std::map<const s2::Symbol*, const PackPicture*> m_nodes;
+#else
+	std::vector<PackPicture*> m_nodes;
+#endif // IMAGE_BUILDER_CACHE
 
 }; // ImageBuilder
 

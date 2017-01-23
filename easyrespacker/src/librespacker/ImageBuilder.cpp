@@ -21,56 +21,58 @@ ImageBuilder::ImageBuilder()
 
 ImageBuilder::~ImageBuilder()
 {
-	std::map<const s2::Symbol*, std::vector<PackPicture*> >::iterator itr = m_nodes.begin();
+#ifdef IMAGE_BUILDER_CACHE
+	std::map<const s2::Symbol*, const PackPicture*>::iterator itr = m_nodes.begin();
 	for ( ; itr != m_nodes.end(); ++itr) {
-		for_each(itr->second.begin(), itr->second.end(), ee::DeletePointerFunctor<IPackNode>());	
+		delete itr->second;
 	}
+#else
+	for_each(m_nodes.begin(), m_nodes.end(), ee::DeletePointerFunctor<IPackNode>());	
+#endif // IMAGE_BUILDER_CACHE
 }
 
 void ImageBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 {
-	std::map<const s2::Symbol*, std::vector<PackPicture*> >::const_iterator itr = m_nodes.begin();
-	for ( ; itr != m_nodes.end(); ++itr) 
-	{
-		for (int i = 0, n = itr->second.size(); i < n; ++i) {
-			bool has_next;
-			visitor.Visit(itr->second[i], has_next);
-			if (!has_next) {
-				return;
-			}			
+#ifdef IMAGE_BUILDER_CACHE
+	std::map<const s2::Symbol*, const PackPicture*>::const_iterator itr = m_nodes.begin();
+	for ( ; itr != m_nodes.end(); ++itr) {
+		bool has_next;
+		visitor.Visit(const_cast<PackPicture*>(itr->second), has_next);
+		if (!has_next) {
+			return;
 		}
 	}
+#else
+	for (int i = 0, n = m_nodes.size(); i < n; ++i) 
+	{
+		bool has_next;
+		visitor.Visit(m_nodes[i], has_next);
+		if (!has_next) {
+			return;
+		}			
+	}
+#endif // #ifdef IMAGE_BUILDER_CACHE
 }
 
 const IPackNode* ImageBuilder::Create(const ee::ImageSprite* spr)
 {
+	std::map<const s2::Symbol*, const PackPicture*>::iterator 
+		itr = m_nodes.find(spr->GetSymbol());
+	if (itr != m_nodes.end()) {
+		return itr->second;
+	}
+
 	PackPicture::Quad quad;
 	LoadPictureQuad(spr, quad);
-
-	// query
-	std::map<const s2::Symbol*, std::vector<PackPicture*> >::iterator itr 
-		= m_nodes.find(spr->GetSymbol());
-	if (itr != m_nodes.end()) {
-		for (int i = 0, n = itr->second.size(); i < n; ++i) {
-			PackPicture::Quad* old = &itr->second[i]->quads[0];
-			if (old->img == quad.img &&
-				memcmp(old->texture_coord, quad.texture_coord, sizeof(old->texture_coord)) == 0 &&
-				memcmp(old->screen_coord, quad.screen_coord, sizeof(old->screen_coord)) == 0) {
-				return itr->second[i];
-			}
-		}
-	}
 
 	// create
 	PackPicture* node = new PackPicture;
 	node->quads.push_back(quad);
-	if (itr == m_nodes.end()) {
-		std::vector<PackPicture*> nodes;
-		nodes.push_back(node);
-		m_nodes.insert(std::make_pair(spr->GetSymbol(), nodes));
-	} else {
-		itr->second.push_back(node);
-	}
+#ifdef IMAGE_BUILDER_CACHE
+	m_nodes.insert(std::make_pair(spr->GetSymbol(), node));
+#else
+	m_nodes.push_back(node);
+#endif // IMAGE_BUILDER_CACHE
 	return node;
 }
 
@@ -89,7 +91,9 @@ void ImageBuilder::LoadPictureQuad(const ee::ImageSprite* img, PackPicture::Quad
  	quad.screen_coord[2].Set(r.xmax, r.ymax);
  	quad.screen_coord[3].Set(r.xmax, r.ymin);	
 
+#ifdef IMAGE_BUILDER_CACHE
 	TransScreen(quad, img);
+#endif // IMAGE_BUILDER_CACHE
 }
 
 void ImageBuilder::TransScreen(PackPicture::Quad& quad, const ee::Sprite* spr)
