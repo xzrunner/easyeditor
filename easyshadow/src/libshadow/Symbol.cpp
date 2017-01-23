@@ -31,7 +31,7 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 		p.color = spr->GetColor() * params.color;
 	}
 	if (m_shadow) {
-		m_shadow->Draw(p.mt, p.color.mul.a);
+		m_shadow->Draw(p.mt, p.color.GetMul().a);
 	}
 }
 
