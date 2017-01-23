@@ -83,7 +83,7 @@ void Scale9Builder::Load(const escale9::Sprite* spr, PackPicture* pic)
 		s2::Sprite* grid = grids[i];
 		if (ee::ImageSprite* image = dynamic_cast<ee::ImageSprite*>(grid)) {
 			PackPicture::Quad quad;
-			ImageBuilder::LoadPictureQuad(image, quad);
+			ImageBuilder::LoadPictureQuad(image, quad, true);
 			pic->quads.push_back(quad);
 		} else {
 			throw ee::Exception("PackPicture::LoadScale9 unknown spr type, filepath: %s", 

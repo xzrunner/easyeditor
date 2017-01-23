@@ -76,7 +76,7 @@ const IPackNode* ImageBuilder::Create(const ee::ImageSprite* spr)
 	return node;
 }
 
-void ImageBuilder::LoadPictureQuad(const ee::ImageSprite* img, PackPicture::Quad& quad)
+void ImageBuilder::LoadPictureQuad(const ee::ImageSprite* img, PackPicture::Quad& quad, bool force_mat)
 {
 	quad.img = dynamic_cast<const ee::ImageSymbol*>(img->GetSymbol())->GetImage();
 
@@ -89,9 +89,13 @@ void ImageBuilder::LoadPictureQuad(const ee::ImageSprite* img, PackPicture::Quad
  	quad.screen_coord[0].Set(r.xmin, r.ymin);
  	quad.screen_coord[1].Set(r.xmin, r.ymax);
  	quad.screen_coord[2].Set(r.xmax, r.ymax);
- 	quad.screen_coord[3].Set(r.xmax, r.ymin);	
+ 	quad.screen_coord[3].Set(r.xmax, r.ymin);
 
 #ifdef IMAGE_BUILDER_CACHE
+	if (force_mat) {
+		TransScreen(quad, img);
+	}
+#else
 	TransScreen(quad, img);
 #endif // IMAGE_BUILDER_CACHE
 }

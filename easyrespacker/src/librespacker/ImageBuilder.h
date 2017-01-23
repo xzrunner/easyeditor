@@ -26,7 +26,7 @@ public:
 
 	const IPackNode* Create(const ee::ImageSprite* spr);
 
-	static void LoadPictureQuad(const ee::ImageSprite* img, PackPicture::Quad& quad);
+	static void LoadPictureQuad(const ee::ImageSprite* img, PackPicture::Quad& quad, bool force_mat = false);
 	
 	static void TransScreen(PackPicture::Quad& quad, const ee::Sprite* spr);
 
