@@ -18,6 +18,7 @@
 #include "StringHelper.h"
 #include "SymbolMgr.h"
 #include "LogMgr.h"
+#include "ReloadSymVisitor.h"
 
 #include <gum/GUM_DTex.h>
 
@@ -146,6 +147,8 @@ void Frame::RefreshWithCurrFile()
 {
 //	m_task->clear();
 	OpenFile(m_curr_filename);
+
+	SymbolMgr::Instance()->Traverse(ReloadSymVisitor());
 }
 
 void Frame::Clear()

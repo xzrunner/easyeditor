@@ -205,6 +205,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\include\ee\ReloadSymVisitor.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\include\ee\Visitor.h"
 					>
 				</File>

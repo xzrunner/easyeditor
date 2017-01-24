@@ -2,6 +2,7 @@
 #include "SymbolMgr.h"
 #include "FileHelper.h"
 #include "SymbolType.h"
+#include "Bitmap.h"
 
 namespace ee
 {
@@ -22,7 +23,10 @@ bool Symbol::LoadFromFile(const std::string& filepath)
 	if (filepath != SYM_GROUP_TAG) {
 		m_filepath = FileHelper::GetExistFilepath(filepath);
 	}
-	m_bitmap = NULL;
+	if (m_bitmap) {
+		m_bitmap->RemoveReference();
+		m_bitmap = NULL;
+	}
 	if (m_filepath == wxEmptyString) {
 		m_filepath = filepath;
 	}
