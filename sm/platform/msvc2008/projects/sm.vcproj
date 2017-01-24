@@ -217,6 +217,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\sm\SM_Math.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\sm\SM_Math.inl"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\sm\SM_Process.h"
 				>
 			</File>
