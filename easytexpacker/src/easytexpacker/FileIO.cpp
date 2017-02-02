@@ -20,6 +20,7 @@
 #include <gimg_import.h>
 #include <gimg_export.h>
 #include <gimg_typedef.h>
+#include <gum/Config.h>
 
 #include <fstream>
 
@@ -208,6 +209,9 @@ void FileIO::StoreImage(const char* filename)
 
 		int w, h, fmt;
 		uint8_t* src_data = gimg_import(sym->GetFilepath().c_str(), &w, &h, &fmt);
+		if (fmt == GPF_RGBA && gum::Config::Instance()->GetPreMulAlpha()) {
+			gimg_pre_mul_alpha(src_data, w, h);
+		}
 		assert(fmt == GPF_RGB || fmt == GPF_RGBA);
 		int c = fmt == GPF_RGB ? 3 : 4;
 		if (spr->GetAngle() != 0)

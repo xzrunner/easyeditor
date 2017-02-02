@@ -1,9 +1,7 @@
 #include "TrimImage.h"
 #include "check_params.h"
 
-#include <ee/SettingData.h>
 #include <ee/FileHelper.h>
-#include <ee/Config.h>
 #include <ee/ImageData.h>
 #include <ee/StringHelper.h>
 #include <ee/ConsoleProgressBar.h>
@@ -15,6 +13,7 @@
 #include <gimg_export.h>
 #include <pimg/Condense.h>
 #include <sprite2/SymType.h>
+#include <gum/Config.h>
 
 #include <wx/filename.h>
 
@@ -45,12 +44,12 @@ int TrimImage::Run(int argc, char *argv[])
 	if (!check_number(this, argc, 4)) return -1;
 	if (!check_folder(argv[2])) return -1;
 
-	ee::SettingData& setting = ee::Config::Instance()->GetSettings();
-	bool old = setting.pre_multi_alpha;
-	setting.pre_multi_alpha = false;
+	gum::Config* cfg = gum::Config::Instance();
+	bool old = cfg->GetPreMulAlpha();
+	cfg->SetPreMulAlpha(false);
 	Trigger(argv[2], argv[3]);
-	setting.pre_multi_alpha = old;
-
+	cfg->SetPreMulAlpha(old);
+	
 	return 0;
 }
 

@@ -9,6 +9,7 @@
 #include <gimg_typedef.h>
 #include <gimg_import.h>
 #include <sprite2/SymType.h>
+#include <gum/Config.h>
 
 namespace edb
 {
@@ -62,6 +63,10 @@ void TransToETC1::Format(const std::string& filepath)
 
 	int w, h, fmt;
 	uint8_t* pixels = gimg_import(filepath.c_str(), &w, &h, &fmt);
+	if (fmt == GPF_RGBA && gum::Config::Instance()->GetPreMulAlpha()) {
+		gimg_pre_mul_alpha(pixels, w, h);
+	}
+
 	int c = fmt == GPF_RGB ? 3 : 4;
 
 	eimage::TransToETC1 trans(pixels, w, h, c, false, true);

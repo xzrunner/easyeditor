@@ -10,6 +10,7 @@ namespace lua = ebuilder::lua;
 
 #include <simp/NodeMeshSpr.h>
 #include <simp/simp_types.h>
+#include <sprite2/MeshTriangle.h>
 
 namespace esprpacker
 {
@@ -21,13 +22,34 @@ PackMeshSpr::PackMeshSpr(const emesh::Sprite* spr)
 	m_base = PackNodeFactory::Instance()->Create(
 		dynamic_cast<const ee::Symbol*>(spr->GetBaseSym()));
 
-	const std::map<sm::vec2, sm::vec2, sm::Vector2Cmp>& map = spr->GetMeshTrans().GetMap();
-	m_trans_pairs.reserve(map.size() * 2);
-	std::map<sm::vec2, sm::vec2, sm::Vector2Cmp>::const_iterator itr = map.begin();
-	for ( ; itr != map.end(); ++itr) {
-		m_trans_pairs.push_back(itr->first);
-		m_trans_pairs.push_back(itr->second);
+	//////////////////////////////////////////////////////////////////////////
+
+	//const std::map<sm::vec2, sm::vec2, sm::Vector2Cmp>& map = spr->GetMeshTrans().GetMap();
+	//m_trans_pairs.reserve(map.size() * 2);
+	//std::map<sm::vec2, sm::vec2, sm::Vector2Cmp>::const_iterator itr = map.begin();
+	//for ( ; itr != map.end(); ++itr) {
+	//	m_trans_pairs.push_back(itr->first);
+	//	m_trans_pairs.push_back(itr->second);
+	//}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	const s2::Mesh* mesh = dynamic_cast<const s2::MeshSymbol*>(spr->GetSymbol())->GetMesh();
+	const std::vector<s2::MeshTriangle*>& tris = mesh->GetTriangles();
+	const std::vector<std::pair<int, sm::vec2> >& trans = spr->GetMeshTrans().GetTrans();
+	for (int i = 0, n = trans.size(); i < n; ++i) 
+	{
+		int idx = trans[i].first;
+		int tri = idx / 3;
+		int ver = idx - tri * 3;
+
+		const sm::vec2& from = tris[tri]->nodes[ver]->ori_xy;
+		sm::vec2 to = from + trans[i].second;
+		m_trans_pairs.push_back(from);
+		m_trans_pairs.push_back(to);
 	}
+
+	//////////////////////////////////////////////////////////////////////////
 }
 
 PackMeshSpr::~PackMeshSpr()
@@ -99,19 +121,26 @@ bool PackMeshSpr::Equal(const emesh::Sprite* spr) const
 	if (m_base != base) {
 		return false;
 	}
-	const std::map<sm::vec2, sm::vec2, sm::Vector2Cmp>& map = spr->GetMeshTrans().GetMap();
-	if (m_trans_pairs.size() != map.size() * 2) {
-		return false;
-	}
-	std::map<sm::vec2, sm::vec2, sm::Vector2Cmp>::const_iterator itr = map.begin();
-	int idx = 0;
-	for ( ; itr != map.end(); ++itr) {
-		if (itr->first != m_trans_pairs[idx++] ||
-			itr->second != m_trans_pairs[idx++]) {
-			return false;
-		}
-	}
-	return true;
+
+	//////////////////////////////////////////////////////////////////////////
+
+// 	const std::map<sm::vec2, sm::vec2, sm::Vector2Cmp>& map = spr->GetMeshTrans().GetMap();
+// 	if (m_trans_pairs.size() != map.size() * 2) {
+// 		return false;
+// 	}
+// 	std::map<sm::vec2, sm::vec2, sm::Vector2Cmp>::const_iterator itr = map.begin();
+// 	int idx = 0;
+// 	for ( ; itr != map.end(); ++itr) {
+// 		if (itr->first != m_trans_pairs[idx++] ||
+// 			itr->second != m_trans_pairs[idx++]) {
+// 			return false;
+// 		}
+// 	}
+// 	return true;
+
+	//////////////////////////////////////////////////////////////////////////
+
+	return false;
 }
 
 }

@@ -14,6 +14,7 @@
 #include <gimg_typedef.h>
 #include <gimg_import.h>
 #include <sprite2/SymType.h>
+#include <gum/Config.h>
 
 #include <wx/filefn.h>
 
@@ -128,6 +129,10 @@ void PackTexture::CompressPackedTex(const etexpacker::NormalPack& tp, int& start
 
 			int w, h, fmt;
 			uint8_t* pixels = gimg_import(src.c_str(), &w, &h, &fmt);
+			if (fmt == GPF_RGBA && gum::Config::Instance()->GetPreMulAlpha()) {
+				gimg_pre_mul_alpha(pixels, w, h);
+			}
+
 			int c = fmt == GPF_RGB ? 3 : 4;
 
 			eimage::TransToPVR trans(pixels, w, h, c, false, fast);
@@ -146,6 +151,10 @@ void PackTexture::CompressPackedTex(const etexpacker::NormalPack& tp, int& start
 
 			int w, h, fmt;
 			uint8_t* pixels = gimg_import(src.c_str(), &w, &h, &fmt);
+			if (fmt == GPF_RGBA && gum::Config::Instance()->GetPreMulAlpha()) {
+				gimg_pre_mul_alpha(pixels, w, h);
+			}
+
 			int c = fmt == GPF_RGB ? 3 : 4;
 
 			eimage::TransToETC1 trans(pixels, w, h, c, false, fast);
@@ -164,6 +173,10 @@ void PackTexture::CompressPackedTex(const etexpacker::NormalPack& tp, int& start
 
 			int w, h, fmt;
 			uint8_t* pixels = gimg_import(src.c_str(), &w, &h, &fmt);
+			if (fmt == GPF_RGBA && gum::Config::Instance()->GetPreMulAlpha()) {
+				gimg_pre_mul_alpha(pixels, w, h);
+			}
+
 			int c = fmt == GPF_RGB ? 3 : 4;
 
 			eimage::TransToETC2 trans(pixels, w, h, c, eimage::TransToETC2::RGBA, false, fast);

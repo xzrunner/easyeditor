@@ -7,8 +7,6 @@
 #include <ee/DummySprite.h>
 #include <ee/DummySymbol.h>
 #include <ee/DummySprite.h>
-#include <ee/Config.h>
-#include <ee/SettingData.h>
 #include <ee/SymbolFile.h>
 #include <ee/SymbolType.h>
 
@@ -21,6 +19,7 @@
 #include <pimg/Cropping.h>
 #include <pimg/Rect.h>
 #include <sprite2/SymType.h>
+#include <gum/Config.h>
 
 namespace edb
 {
@@ -50,13 +49,11 @@ int RectCutWithJson::Run(int argc, char *argv[])
 	if (!check_number(this, argc, 3)) return -1;
 	if (!check_folder(argv[2])) return -1;
 
-	ee::SettingData& setting = ee::Config::Instance()->GetSettings();
-	bool old = setting.pre_multi_alpha;
-	setting.pre_multi_alpha = false;
-
+	gum::Config* cfg = gum::Config::Instance();
+	bool old = cfg->GetPreMulAlpha();
+	cfg->SetPreMulAlpha(false);
 	Trigger(argv[2], argv[3]);
-
-	setting.pre_multi_alpha = true;
+	cfg->SetPreMulAlpha(old);
 
 	return 0;
 }

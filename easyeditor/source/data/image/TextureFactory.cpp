@@ -1,11 +1,12 @@
 #include "TextureFactory.h"
 #include "TexturePacker.h"
+#include "ImageData.h"
 #include "Config.h"
 #include "SettingData.h"
-#include "ImageData.h"
 
 #include <gimg_import.h>
 #include <gimg_typedef.h>
+#include <gum/Config.h>
 
 #include <assert.h>
 
@@ -47,7 +48,11 @@ const uint8_t* TextureFactory::Load(const std::string& filepath, int& width,
 		format = GPF_RGBA;
 		return NULL;
 	} else {
-		return gimg_import(filepath.c_str(), &width, &height, &format);
+		uint8_t* pixels = gimg_import(filepath.c_str(), &width, &height, &format);
+		if (format == GPF_RGBA && gum::Config::Instance()->GetPreMulAlpha()) {
+			gimg_pre_mul_alpha(pixels, width, height);
+		}
+		return pixels;
 	}
 }
 

@@ -12,6 +12,7 @@
 #include <gimg_typedef.h>
 #include <gimg_import.h>
 #include <sprite2/DrawRT.h>
+#include <gum/Config.h>
 
 #include <string>
 
@@ -350,9 +351,11 @@ void PackPVR::StoreScaled(std::ofstream& fout, float scale) const
 {
 	ee::SettingData& sd = ee::Config::Instance()->GetSettings();
 	bool old_clip = sd.open_image_edge_clip;
-	bool old_premul = sd.pre_multi_alpha;
 	sd.open_image_edge_clip = false;
-	sd.pre_multi_alpha = false;
+
+	gum::Config* cfg = gum::Config::Instance();
+	bool old_premul = cfg->GetPreMulAlpha();
+	cfg->SetPreMulAlpha(false);
 
 	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(m_base_path);
 
@@ -373,7 +376,7 @@ void PackPVR::StoreScaled(std::ofstream& fout, float scale) const
 	delete[] pvr_buf;
 
 	sd.open_image_edge_clip = old_clip;
-	sd.pre_multi_alpha = old_premul;
+	cfg->SetPreMulAlpha(old_premul);
 }
 
 }

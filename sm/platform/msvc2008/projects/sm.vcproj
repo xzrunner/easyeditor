@@ -249,6 +249,10 @@
 			Name="utility"
 			>
 			<File
+				RelativePath="..\..\..\src\sm\external\sm_config.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\sm\sm_const.h"
 				>
 			</File>

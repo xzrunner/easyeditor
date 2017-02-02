@@ -2,18 +2,18 @@
 #include "check_params.h"
 #include "utility.h"
 
-#include <ee/SettingData.h>
-#include <ee/Config.h>
 #include <ee/FileHelper.h>
-#include <ee/Config.h>
 #include <ee/SymbolMgr.h>
 #include <ee/ImageSymbol.h>
 #include <ee/SpriteIO.h>
 #include <ee/SymbolFile.h>
+#include <ee/Config.h>
+#include <ee/SettingData.h>
 
 #include <SM_Calc.h>
 #include <sprite2/SymType.h>
 #include <sprite2/DrawRT.h>
+#include <gum/Config.h>
 
 #include <fstream>
 
@@ -50,13 +50,15 @@ int ScaleOverall::Run(int argc, char *argv[])
 	ee::SettingData& data = ee::Config::Instance()->GetSettings();
 	bool ori_clip_cfg = data.open_image_edge_clip;
 	data.open_image_edge_clip = false;
-	bool ori_alpha_cfg = data.pre_multi_alpha;
-	data.pre_multi_alpha = false;
+
+	gum::Config* cfg = gum::Config::Instance();
+	bool ori_alpha_cfg = cfg->GetPreMulAlpha();
+	cfg->SetPreMulAlpha(false);
 
 	Scale(argv[2], atof(argv[3]));
 
 	data.open_image_edge_clip = ori_clip_cfg;
-	data.pre_multi_alpha = ori_alpha_cfg;
+	cfg->SetPreMulAlpha(ori_alpha_cfg);
 
 	return 0;
 }

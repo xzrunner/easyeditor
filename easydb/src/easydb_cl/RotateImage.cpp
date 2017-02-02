@@ -16,6 +16,7 @@
 #include <SM_Calc.h>
 #include <sprite2/SymType.h>
 #include <sprite2/DrawRT.h>
+#include <gum/Config.h>
 
 namespace edb
 {
@@ -51,13 +52,15 @@ int RotateImage::Run(int argc, char *argv[])
 	ee::SettingData& data = ee::Config::Instance()->GetSettings();
 	bool ori_clip_cfg = data.open_image_edge_clip;
 	data.open_image_edge_clip = false;
-	bool ori_alpha_cfg = data.pre_multi_alpha;
-	data.pre_multi_alpha = false;
+
+	gum::Config* cfg = gum::Config::Instance();
+	bool ori_alpha_cfg = cfg->GetPreMulAlpha();
+	cfg->SetPreMulAlpha(false);
 
 	Rotate(argv[2], argv[3]);
 
 	data.open_image_edge_clip = ori_clip_cfg;
-	data.pre_multi_alpha = ori_alpha_cfg;
+	cfg->SetPreMulAlpha(ori_alpha_cfg);
 
 	return 0;
 }

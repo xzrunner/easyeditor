@@ -33,7 +33,6 @@ SettingData::SettingData()
 
 	linear_filter = true;
 
-	pre_multi_alpha = true;
 	load_image = true;
 
 	color_setting_dlg_type = CSDT_DEFAULT;

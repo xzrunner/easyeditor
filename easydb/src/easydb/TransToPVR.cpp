@@ -9,6 +9,7 @@
 #include <gimg_typedef.h>
 #include <gimg_import.h>
 #include <sprite2/SymType.h>
+#include <gum/Config.h>
 
 namespace edb
 {
@@ -87,6 +88,10 @@ void TransToPVR::EncodeByPvrTexTool(const std::string& filepath) const
 {
 	int w, h, fmt;
 	uint8_t* pixels = gimg_import(filepath.c_str(), &w, &h, &fmt);
+	if (fmt == GPF_RGBA && gum::Config::Instance()->GetPreMulAlpha()) {
+		gimg_pre_mul_alpha(pixels, w, h);
+	}
+
 	int c = fmt == GPF_RGB ? 3 : 4;
 
 	eimage::TransToPVR trans(pixels, w, h, c);

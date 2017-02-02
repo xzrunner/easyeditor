@@ -9,6 +9,8 @@
 #include <ee/Image.h>
 #include <ee/Sprite.h>
 
+#include <gum/Config.h>
+
 namespace ecomplex
 {
 
@@ -34,8 +36,10 @@ void LoadFromLua::LoadImages(const std::string& name, std::vector<ee::Image*>& i
 	ee::SettingData& data = ee::Config::Instance()->GetSettings();
 	bool old_open_image_edge_clip = data.open_image_edge_clip;
 	data.open_image_edge_clip = false;
-	bool old_pre_multi_alpha = data.pre_multi_alpha;
-	data.pre_multi_alpha = false;
+
+	gum::Config* cfg = gum::Config::Instance();
+	bool old_pre_multi_alpha = cfg->GetPreMulAlpha();
+	cfg->SetPreMulAlpha(false);
 
 	int idx = 1;
 	while (true)
@@ -50,7 +54,7 @@ void LoadFromLua::LoadImages(const std::string& name, std::vector<ee::Image*>& i
 	}
 
 	data.open_image_edge_clip = old_open_image_edge_clip;
-	data.pre_multi_alpha = old_pre_multi_alpha;
+	cfg->SetPreMulAlpha(old_pre_multi_alpha);
 }
 
 }

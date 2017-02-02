@@ -14,6 +14,7 @@
 #include <gimg_import.h>
 #include <gimg_typedef.h>
 #include <sprite2/DrawRT.h>
+#include <gum/Config.h>
 
 #include <assert.h>
 
@@ -40,16 +41,21 @@ void PackPNG::Load(const std::string& filepath)
 	ee::SettingData& data = ee::Config::Instance()->GetSettings();
 	bool ori_clip_cfg = data.open_image_edge_clip;
 	data.open_image_edge_clip = false;
-	bool ori_alpha_cfg = data.pre_multi_alpha;
-	data.pre_multi_alpha = false;
+
+	gum::Config* cfg = gum::Config::Instance();
+	bool ori_alpha_cfg = cfg->GetPreMulAlpha();
+	cfg->SetPreMulAlpha(false);
 
 	int w, h, fmt;
 	uint8_t* buf = gimg_import(filepath.c_str(), &w, &h, &fmt);
+	if (fmt == GPF_RGBA && cfg->GetPreMulAlpha()) {
+		gimg_pre_mul_alpha(buf, w, h);
+	}
 	assert(fmt == GPF_RGB || fmt == GPF_RGBA);
 	int c = fmt == GPF_RGB ? 3 : 4;
 
 	data.open_image_edge_clip = ori_clip_cfg;
-	data.pre_multi_alpha = ori_alpha_cfg;
+	cfg->SetPreMulAlpha(ori_alpha_cfg);
 
 	m_width = w;
 	m_height = h;

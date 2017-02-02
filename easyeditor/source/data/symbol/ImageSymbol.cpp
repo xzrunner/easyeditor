@@ -15,6 +15,7 @@
 #include <gum/RenderTarget.h>
 #include <gum/AsyncTask.h>
 #include <gum/FilepathHelper.h>
+#include <gum/Config.h>
 
 namespace ee
 {
@@ -150,6 +151,9 @@ void ImageSymbol::LoadCB(const char* filepath, void (*unpack)(const void* data, 
 {
 	int w, h, fmt;
 	uint8_t* pixels = gimg_import(filepath, &w, &h, &fmt);
+	if (fmt == GPF_RGBA && gum::Config::Instance()->GetPreMulAlpha()) {
+		gimg_pre_mul_alpha(pixels, w, h);
+	}
 
 	assert(fmt == GPF_RGB || fmt == GPF_RGBA);
 	int c = fmt == GPF_RGB ? 3 : 4;

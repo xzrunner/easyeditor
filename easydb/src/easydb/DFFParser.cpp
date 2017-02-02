@@ -6,6 +6,7 @@
 #include <gimg_import.h>
 #include <gimg_typedef.h>
 #include <gimg_export.h>
+#include <gum/Config.h>
 
 #include <assert.h>
 
@@ -16,6 +17,9 @@ DFFParser::DFFParser(const char* filepath)
 {
 	int w, h, fmt;
 	uint8_t* pixels = gimg_import(filepath, &w, &h, &fmt);
+	if (fmt == GPF_RGBA && gum::Config::Instance()->GetPreMulAlpha()) {
+		gimg_pre_mul_alpha(pixels, w, h);
+	}
 	assert(w == EDGE && h == EDGE && fmt == GPF_RGBA);
 	m_alphas = new unsigned char[EDGE*EDGE];
 
