@@ -5,7 +5,7 @@
 
 #include <sprite2/MeshTriangle.h>
 #include <sprite2/NetworkShape.h>
-#include <sprite2/MeshTransform.h>
+#include <sprite2/MeshTransform2.h>
 #include <gum/JsonSerializer.h>
 #include <gum/MeshIO.h>
 
@@ -53,8 +53,8 @@ void Network::Load(const Json::Value& value)
 
 	RefreshTriangles();
 
-	s2::MeshTransform trans;
-	gum::MeshIO::Load(value, trans);
+	s2::MeshTransform2 trans;
+	gum::MeshIO::Load(value, trans, *this);
 	trans.StoreToMesh(this);
 }
 
@@ -68,8 +68,8 @@ void Network::Store(Json::Value& value) const
 
 	dynamic_cast<NetworkShape*>(m_shape)->StoreToFile(value, "");
 
-	s2::MeshTransform trans;
-	gum::MeshIO::Load(value, trans);
+	s2::MeshTransform2 trans;
+	gum::MeshIO::Load(value, trans, *this);
 	trans.StoreToMesh(this);
 }
 

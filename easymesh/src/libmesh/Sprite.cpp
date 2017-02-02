@@ -39,8 +39,9 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 	ee::Sprite::Load(val);
 	
 	const Json::Value& mesh_val = val["mesh"];
-	gum::MeshIO::Load(mesh_val, m_trans);
-	m_trans.StoreToMesh(dynamic_cast<Symbol*>(m_sym)->GetMesh());
+	const s2::Mesh* mesh = dynamic_cast<Symbol*>(m_sym)->GetMesh();
+	gum::MeshIO::Load(mesh_val, m_trans, *mesh);
+	m_trans.StoreToMesh(mesh);
 
 	if (!mesh_val["base_symbol"].isNull()) {
 		m_base->RemoveReference();
@@ -56,7 +57,8 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 	Json::Value mesh_val;
 
 //	m_trans.LoadFromMesh(m_sym->GetMesh());
-	gum::MeshIO::Store(mesh_val, m_trans);
+	const s2::Mesh* mesh = dynamic_cast<Symbol*>(m_sym)->GetMesh();
+	gum::MeshIO::Store(mesh_val, m_trans, *mesh);
 
 	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(m_base);
 	mesh_val["base_symbol"] = ee::FileHelper::GetRelativePath(dir, sym->GetFilepath());

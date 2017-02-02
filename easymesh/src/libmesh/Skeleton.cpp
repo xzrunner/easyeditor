@@ -6,7 +6,7 @@
 #include <easyshape.h>
 
 #include <sprite2/PolylineShape.h>
-#include <sprite2/MeshTransform.h>
+#include <sprite2/MeshTransform2.h>
 #include <gum/JsonSerializer.h>
 #include <gum/MeshIO.h>
 
@@ -45,8 +45,8 @@ void Skeleton::Load(const Json::Value& value)
 
 	RefreshTriangles();
 
-	s2::MeshTransform trans;
-	gum::MeshIO::Load(value, trans);
+	s2::MeshTransform2 trans;
+	gum::MeshIO::Load(value, trans, *this);
 	trans.StoreToMesh(this);
 }
 
@@ -62,8 +62,8 @@ void Skeleton::Store(Json::Value& value) const
 
 	gum::MeshIO::Store(value, m_skeleton);
 
-	s2::MeshTransform trans;
-	gum::MeshIO::Load(value, trans);
+	s2::MeshTransform2 trans;
+	gum::MeshIO::Load(value, trans, *this);
 	trans.StoreToMesh(this);
 }
 
