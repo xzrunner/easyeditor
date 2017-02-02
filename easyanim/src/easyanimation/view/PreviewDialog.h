@@ -33,7 +33,11 @@ private:
 private:
 	PreviewPanel* m_stage;
 
+#ifdef S2_ANIM_CURR_OLD
 	s2::AnimCurr m_curr;
+#else
+	s2::AnimCurr2 m_curr;
+#endif // S2_ANIM_CURR_OLD
 
 }; // PreviewDialog
 

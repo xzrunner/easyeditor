@@ -6,15 +6,26 @@
 #include <ee/Config.h>
 #include <ee/SettingData.h>
 
+#ifdef S2_ANIM_CURR_OLD
 #include <sprite2/AnimCurr.h>
+#else
+#include <sprite2/AnimCurr2.h>
+#endif // S2_ANIM_CURR_OLD
 
 namespace eanim
 {
 
 PreviewDialog::PreviewDialog(wxWindow* parent, wxGLContext* glctx, s2::AnimSymbol* sym)
  	: wxDialog(parent, wxID_ANY, "Preview", wxDefaultPosition, wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
+#ifdef S2_ANIM_CURR_OLD
 	, m_curr(sym)
+#endif // S2_ANIM_CURR_OLD
 {
+#ifndef S2_ANIM_CURR_OLD
+	sym->LoadCopy();
+	m_curr.SetAnimCopy(&dynamic_cast<s2::AnimSymbol*>(sym)->GetCopy());
+#endif // S2_ANIM_CURR_OLD
+
 	InitLayout(glctx);
 
 	const s2::Color& col = ee::Config::Instance()->GetSettings().bg_color;
