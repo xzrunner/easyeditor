@@ -3,6 +3,8 @@
 
 #include "StageCanvas.h"
 
+namespace gum { class RenderTarget; }
+
 namespace ee
 {
 
@@ -11,6 +13,7 @@ class TwoPassCanvas : public StageCanvas
 public:
 	TwoPassCanvas(wxWindow* stage_wnd, EditPanelImpl* stage,
 		wxGLContext* glctx = NULL, bool use_context_stack = true);
+	virtual ~TwoPassCanvas();
 
 public:
 	struct ScreenStyle
@@ -39,6 +42,9 @@ private:
 
 protected:
 	ScreenStyle m_scr_style;
+
+private:
+	gum::RenderTarget* m_rt;
 
 }; // TwoPassCanvas
 

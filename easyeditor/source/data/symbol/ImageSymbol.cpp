@@ -107,7 +107,8 @@ float ImageSymbol::GetP3dCamAngle() const
 
 int ImageSymbol::GetScreenCacheTexid() const
 {
-	return gum::RenderTarget::Instance()->GetScreen0()->GetTexture()->ID();
+//	return gum::RenderTarget::Instance()->GetScreen0()->GetTexture()->ID();
+	return 0;
 }
 
 bool ImageSymbol::LoadResources()

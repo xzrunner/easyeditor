@@ -16,6 +16,7 @@
 #include <sprite2/RenderCtxStack.h>
 #include <gum/RenderContext.h>
 #include <gum/RenderTarget.h>
+#include <gum/RenderTargetMgr.h>
 #include <gum/GUM_DTex.h>
 #include <gum/GUM_Sprite2.h>
 #include <gum/GUM_DRect.h>
@@ -26,12 +27,21 @@ namespace ee
 TwoPassCanvas::TwoPassCanvas(wxWindow* stage_wnd, EditPanelImpl* stage,
 							 wxGLContext* glctx, bool use_context_stack)
 	: StageCanvas(stage_wnd, stage, glctx, use_context_stack)
+	, m_rt(NULL)
 {
+}
+
+TwoPassCanvas::~TwoPassCanvas()
+{
+	gum::RenderTargetMgr::Instance()->Return(m_rt);
 }
 
 void TwoPassCanvas::OnSize(int w, int h)
 {
 	gum::RenderContext::Instance()->OnSize(w, h);
+
+	gum::RenderTargetMgr::Instance()->Return(m_rt);
+	m_rt = gum::RenderTargetMgr::Instance()->Fetch();
 }
 
 static void
@@ -125,8 +135,7 @@ void TwoPassCanvas::DrawTwoPass() const
 	texcoords[2].Set(1, 1);
 	texcoords[3].Set(0, 1);
 
-	ur::RenderTarget* rt = gum::RenderTarget::Instance()->GetScreen0();
-	DrawPass2(&vertices[0].x, &texcoords[0].x, rt->GetTexture()->ID());
+	DrawPass2(&vertices[0].x, &texcoords[0].x, m_rt->GetTexID());
  	sl::ShaderMgr::Instance()->FlushShader();
 
 	s2::RenderCtxStack::Instance()->Pop();
@@ -136,8 +145,7 @@ void TwoPassCanvas::DrawPass1() const
 {
 	ur::RenderContext* rc = gum::RenderContext::Instance()->GetImpl();
 
-	ur::RenderTarget* rt = gum::RenderTarget::Instance()->GetScreen0();
-	rt->Bind();
+	m_rt->Bind();
 
 	rc->SetClearFlag(ur::MASKC);
 	rc->Clear(0);
@@ -145,7 +153,7 @@ void TwoPassCanvas::DrawPass1() const
 	DrawDirect();
 //	DrawDRect();
 
-	rt->Unbind();
+	m_rt->Unbind();
 }
 
 void TwoPassCanvas::DrawPass2(const float* vertices, const float* texcoords, int tex_id) const
@@ -201,7 +209,7 @@ void TwoPassCanvas::DebugDraw() const
 {
  	gum::DTex::Instance()->DebugDraw();
 // 	gum::Sprite2::Instance()->DebugDraw();
-	gum::DRect::Instance()->DebugDraw();
+//	gum::DRect::Instance()->DebugDraw();
 
 //	gum::RenderTarget::Instance()->DebugDraw();
 }
