@@ -22,9 +22,9 @@ public:
 		bool use_context_stack = true);
 	virtual ~StageCanvas();
 
-	void SetBgColor(const s2::Color& color);
+	virtual void SetCurrentCanvas();
 
-	void SetCurrentCanvas();
+	void SetBgColor(const s2::Color& color);
 
 	bool IsDirty() const { return m_dirty; }
 

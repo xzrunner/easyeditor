@@ -3,6 +3,7 @@
 #include <sprite2/RenderCtxStack.h>
 #include <sprite2/OrthoCamera.h>
 #include <sprite2/Pseudo3DCamera.h>
+#include <sprite2/Blackboard.h>
 
 namespace ee
 {
@@ -22,6 +23,12 @@ CameraCanvas::CameraCanvas(wxWindow* stage_wnd, EditPanelImpl* stage, s2::Camera
 CameraCanvas::~CameraCanvas()
 {
 	delete m_camera;
+}
+
+void CameraCanvas::SetCurrentCanvas()
+{
+	TwoPassCanvas::SetCurrentCanvas();
+	s2::Blackboard::Instance()->SetCamera(m_camera);
 }
 
 sm::rect CameraCanvas::GetVisibleRegion() const

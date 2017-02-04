@@ -14,6 +14,7 @@
 #include <shaderlab/ColGradingProg.h>
 #include <shaderlab/Sprite2Shader.h>
 #include <sprite2/RenderCtxStack.h>
+#include <sprite2/Blackboard.h>
 #include <gum/RenderContext.h>
 #include <gum/RenderTarget.h>
 #include <gum/RenderTargetMgr.h>
@@ -42,6 +43,8 @@ void TwoPassCanvas::OnSize(int w, int h)
 
 	gum::RenderTargetMgr::Instance()->Return(m_rt);
 	m_rt = gum::RenderTargetMgr::Instance()->Fetch();
+
+	s2::Blackboard::Instance()->SetScreenCacheTexID(m_rt->GetTexID());
 }
 
 static void
@@ -211,7 +214,7 @@ void TwoPassCanvas::DebugDraw() const
 // 	gum::Sprite2::Instance()->DebugDraw();
 //	gum::DRect::Instance()->DebugDraw();
 
-//	gum::RenderTarget::Instance()->DebugDraw();
+//	gum::RenderTargetMgr::Instance()->DebugDraw();
 }
 
 }

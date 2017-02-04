@@ -91,15 +91,15 @@ StageCanvas::~StageCanvas()
 	}
 }
 
-void StageCanvas::SetBgColor(const s2::Color& color)
-{
-	m_bg_color = color;
-}
-
 void StageCanvas::SetCurrentCanvas()
 {
 	SetCurrent(*m_gl_ctx);
 	s2::RenderCtxStack::Instance()->Bind(m_render_ctx_idx);
+}
+
+void StageCanvas::SetBgColor(const s2::Color& color)
+{
+	m_bg_color = color;
 }
 
 void StageCanvas::OnNotify(int sj_id, void* ud) 

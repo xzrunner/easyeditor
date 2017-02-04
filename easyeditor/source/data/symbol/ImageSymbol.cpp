@@ -49,16 +49,6 @@ void ImageSymbol::InvalidRect(const sm::mat4& mt) const
 	m_image->InvalidRect(mt);
 }
 
-unsigned int ImageSymbol::GetTexID() const
-{
-	return m_image->GetTexID();
-}
-
-void ImageSymbol::SetImage(Image* img)
-{
-	cu::RefCountObjAssign(m_image, img);
-}
-
 bool ImageSymbol::QueryTexcoords(float* texcoords, int& texid) const
 {
 	Image* img = GetImage();
@@ -70,39 +60,14 @@ bool ImageSymbol::QueryTexcoords(float* texcoords, int& texid) const
 	return true;
 }
 
-void ImageSymbol::Proj2Screen(float px, float py, int w, int h, float& sx, float& sy) const
+unsigned int ImageSymbol::GetTexID() const
 {
-// 	// todo
-// 	const Camera* cam = CameraMgr::Instance()->GetCamera();
-// 	assert(cam);
-// 	sm::vec2 v = cam->TransPosProjectToScreen(sm::vec2(px, py), w, h);
-// 	sx = v.x;
-// 	sy = v.y;
+	return m_image->GetTexID();
 }
 
-bool ImageSymbol::IsOrthoCam() const
+void ImageSymbol::SetImage(Image* img)
 {
-	// todo
-	return true;
-// 	const Camera* cam = CameraMgr::Instance()->GetCamera();
-// 	assert(cam);
-// 	return cam->Type() == "ortho";
-}
-
-void ImageSymbol::GetScreenSize(int& w, int& h) const
-{
-	gum::RenderContext* rc = gum::RenderContext::Instance();
-	w = rc->GetWidth();
-	h = rc->GetHeight();
-}
-
-float ImageSymbol::GetP3dCamAngle() const
-{
-// 	const Camera* cam = CameraMgr::Instance()->GetCamera();
-// 	const Pseudo3DCamera* pcam = static_cast<const Pseudo3DCamera*>(cam);
-// 	return pcam->GetAngle();
-
-	return 0;
+	cu::RefCountObjAssign(m_image, img);
 }
 
 bool ImageSymbol::LoadResources()

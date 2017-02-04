@@ -24,18 +24,18 @@ public:
 	 */
 	virtual void InvalidRect(const sm::mat4& mt) const;
 
+	/**
+	 *  @interface
+	 *    s2::ImageSymbol
+	 */
+	virtual bool QueryTexcoords(float* texcoords, int& texid) const;
+
 	unsigned int GetTexID() const;
 
 	Image* GetImage() const { return m_image; }
 	void   SetImage(Image* img);
 
 protected:
-	virtual bool QueryTexcoords(float* texcoords, int& texid) const;
-	virtual void Proj2Screen(float px, float py, int w, int h, float& sx, float& sy) const;
-	virtual bool IsOrthoCam() const;
-	virtual void GetScreenSize(int& w, int& h) const;
-	virtual float GetP3dCamAngle() const;
-
 	virtual bool LoadResources();
 
 private:
