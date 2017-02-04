@@ -38,7 +38,7 @@
 #include <sprite2/S2_RVG.h>
 #include <sprite2/BoundingBox.h>
 #include <sprite2/S2_Symbol.h>
-#include <gum/Camera.h>
+#include <sprite2/Camera.h>
 
 namespace ee
 {
@@ -561,7 +561,7 @@ ArrangeSpriteState* ArrangeSpriteImpl::CreateShearState(Sprite* spr, const Sprit
 
 ArrangeSpriteState* ArrangeSpriteImpl::CreateOffsetState(Sprite* spr) const
 {
-	gum::Camera* cam = NULL;
+	s2::Camera* cam = NULL;
 	if (ee::CameraCanvas* canvas = dynamic_cast<ee::CameraCanvas*>(m_stage->GetCanvas())) {
 		cam = canvas->GetCamera();
 	}

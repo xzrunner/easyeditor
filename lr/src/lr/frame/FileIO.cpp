@@ -18,7 +18,7 @@
 #include <shaderlab/ColGradingProg.h>
 #include <shaderlab/FilterShader.h>
 #include <gum/trans_color.h>
-#include <gum/OrthoCamera.h>
+#include <sprite2/OrthoCamera.h>
 #include <gum/Config.h>
 
 #include <fstream>
@@ -64,9 +64,9 @@ void FileIO::Load(const char* filename, LibraryPanel* library,
 
 	// camera
 	ee::CameraCanvas* canvas = static_cast<ee::CameraCanvas*>(stage->GetCanvas());
-	if (canvas->GetCamera()->Type() == gum::CAM_ORTHO2D)
+	if (canvas->GetCamera()->Type() == s2::CAM_ORTHO2D)
 	{
-		gum::OrthoCamera* cam = static_cast<gum::OrthoCamera*>(canvas->GetCamera());
+		s2::OrthoCamera* cam = static_cast<s2::OrthoCamera*>(canvas->GetCamera());
 		float s = value["camera"]["scale"].asDouble();
 		float x = value["camera"]["x"].asDouble(),
 			  y = value["camera"]["y"].asDouble();
@@ -149,9 +149,9 @@ void FileIO::Store(const char* filename, LibraryPanel* library,
 
 	// camera
 	ee::CameraCanvas* canvas = static_cast<ee::CameraCanvas*>(stage->GetCanvas());
-	if (canvas->GetCamera()->Type() == gum::CAM_ORTHO2D)
+	if (canvas->GetCamera()->Type() == s2::CAM_ORTHO2D)
 	{
-		gum::OrthoCamera* cam = static_cast<gum::OrthoCamera*>(canvas->GetCamera());
+		s2::OrthoCamera* cam = static_cast<s2::OrthoCamera*>(canvas->GetCamera());
 		value["camera"]["scale"] = cam->GetScale();
 		value["camera"]["x"] = cam->GetPosition().x;
 		value["camera"]["y"] = cam->GetPosition().y;

@@ -72,7 +72,7 @@ bool ImageSymbol::QueryTexcoords(float* texcoords, int& texid) const
 
 void ImageSymbol::Proj2Screen(float px, float py, int w, int h, float& sx, float& sy) const
 {
-	// todo
+// 	// todo
 // 	const Camera* cam = CameraMgr::Instance()->GetCamera();
 // 	assert(cam);
 // 	sm::vec2 v = cam->TransPosProjectToScreen(sm::vec2(px, py), w, h);
@@ -102,12 +102,6 @@ float ImageSymbol::GetP3dCamAngle() const
 // 	const Pseudo3DCamera* pcam = static_cast<const Pseudo3DCamera*>(cam);
 // 	return pcam->GetAngle();
 
-	return 0;
-}
-
-int ImageSymbol::GetScreenCacheTexid() const
-{
-//	return gum::RenderTarget::Instance()->GetScreen0()->GetTexture()->ID();
 	return 0;
 }
 

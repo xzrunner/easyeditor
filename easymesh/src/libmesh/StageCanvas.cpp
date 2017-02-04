@@ -10,12 +10,14 @@
 #include <ee/FetchAllVisitor.h>
 #include <ee/render_utility.h>
 
+#include <sprite2/CameraType.h>
+
 namespace emesh
 {
 
 StageCanvas::StageCanvas(StagePanel* panel,
 						 wxGLContext* glctx)
-	: ee::CameraCanvas(panel, panel->GetStageImpl(), gum::CAM_ORTHO2D, glctx)
+	: ee::CameraCanvas(panel, panel->GetStageImpl(), s2::CAM_ORTHO2D, glctx)
 	, m_panel(panel)
 	, m_edited(NULL)
 	, m_sprite_impl(NULL)
@@ -25,7 +27,7 @@ StageCanvas::StageCanvas(StagePanel* panel,
 
 StageCanvas::StageCanvas(StagePanel* panel, wxGLContext* glctx,
 						 ee::Sprite* edited, const ee::MultiSpritesImpl* bg_sprites)
-	: ee::CameraCanvas(panel, panel->GetStageImpl(), gum::CAM_ORTHO2D, glctx)
+	: ee::CameraCanvas(panel, panel->GetStageImpl(), s2::CAM_ORTHO2D, glctx)
 	, m_panel(panel)
 	, m_edited(edited)
 	, m_sprite_impl(bg_sprites)

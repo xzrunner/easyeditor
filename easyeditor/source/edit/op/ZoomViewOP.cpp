@@ -7,7 +7,7 @@
 #include "panel_msg.h"
 #include "CameraCanvas.h"
 
-#include <gum/Camera.h>
+#include <sprite2/Camera.h>
 
 namespace ee
 {

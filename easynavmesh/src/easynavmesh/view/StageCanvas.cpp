@@ -14,7 +14,7 @@ namespace enav
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: ee::CameraCanvas(stage, stage->GetStageImpl(), gum::CAM_ORTHO2D)
+	: ee::CameraCanvas(stage, stage->GetStageImpl(), s2::CAM_ORTHO2D)
 	, m_stage(stage)
 {
 }

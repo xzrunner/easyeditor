@@ -12,7 +12,7 @@
 #include "CameraCanvas.h"
 
 #include <sprite2/S2_RVG.h>
-#include <gum/OrthoCamera.h>
+#include <sprite2/OrthoCamera.h>
 
 namespace ee
 {
@@ -123,9 +123,9 @@ bool ArrangeSpriteOP<TBase>::OnDraw() const
 
 	float cam_scale = 1;
 	ee::CameraCanvas* canvas = static_cast<ee::CameraCanvas*>(m_stage->GetCanvas());
-	gum::Camera* cam = canvas->GetCamera();
-	if (cam->Type() == gum::CAM_ORTHO2D) {
-		cam_scale = static_cast<gum::OrthoCamera*>(cam)->GetScale();
+	s2::Camera* cam = canvas->GetCamera();
+	if (cam->Type() == s2::CAM_ORTHO2D) {
+		cam_scale = static_cast<s2::OrthoCamera*>(cam)->GetScale();
 	}
 
 	m_impl->OnDraw(cam_scale);

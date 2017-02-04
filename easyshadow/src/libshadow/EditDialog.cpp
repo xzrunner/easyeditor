@@ -10,7 +10,7 @@
 #include <ee/CameraCanvas.h>
 
 #include <sprite2/BoundingBox.h>
-#include <gum/OrthoCamera.h>
+#include <sprite2/OrthoCamera.h>
 
 #include <wx/splitter.h>
 
@@ -90,8 +90,8 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 void EditDialog::InitCamera(ee::Sprite* spr) const
 {
 	ee::CameraCanvas* canvas = static_cast<ee::CameraCanvas*>(m_stage->GetCanvas());
-	gum::Camera* cam = canvas->GetCamera();
-	if (cam->Type() == gum::CAM_PSEUDO3D) {
+	s2::Camera* cam = canvas->GetCamera();
+	if (cam->Type() == s2::CAM_PSEUDO3D) {
 		return;
 	}
 
@@ -99,7 +99,7 @@ void EditDialog::InitCamera(ee::Sprite* spr) const
 	sm::vec2 r_sz = spr->GetBounding()->GetSize().Size();
 	float scale = std::min(sz.GetWidth() / r_sz.x, sz.GetHeight() / r_sz.y);
 
-	gum::OrthoCamera* ortho_cam = static_cast<gum::OrthoCamera*>(cam);
+	s2::OrthoCamera* ortho_cam = static_cast<s2::OrthoCamera*>(cam);
 	ortho_cam->SetScale(1 / scale);
 	ortho_cam->SetPosition(sm::vec2(0, 0));
 }

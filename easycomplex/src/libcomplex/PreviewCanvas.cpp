@@ -4,6 +4,7 @@
 #include <ee/Sprite.h>
 
 #include <sprite2/Particle3d.h>
+#include <sprite2/CameraType.h>
 
 namespace ecomplex
 {
@@ -11,7 +12,7 @@ namespace ecomplex
 PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
 							 const std::vector<ee::Sprite*>& sprs,
 							 wxGLContext* glctx)
-	: ee::CameraCanvas(stage_wnd, stage, gum::CAM_ORTHO2D, glctx)
+	: ee::CameraCanvas(stage_wnd, stage, s2::CAM_ORTHO2D, glctx)
 	, m_sprs(sprs)
 {
 }

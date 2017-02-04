@@ -35,7 +35,6 @@ protected:
 	virtual bool IsOrthoCam() const;
 	virtual void GetScreenSize(int& w, int& h) const;
 	virtual float GetP3dCamAngle() const;
-	virtual int GetScreenCacheTexid() const;
 
 	virtual bool LoadResources();
 

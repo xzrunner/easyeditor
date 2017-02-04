@@ -7,12 +7,12 @@
 #include "ArrangeSpriteImpl.h"
 
 #include <SM_Calc.h>
-#include <gum/OrthoCamera.h>
+#include <sprite2/OrthoCamera.h>
 
 namespace ee
 {
 
-OffsetSpriteState::OffsetSpriteState(Sprite* spr, const gum::Camera* camera)
+OffsetSpriteState::OffsetSpriteState(Sprite* spr, const s2::Camera* camera)
 	: m_camera(camera)
 {
 	m_spr = spr;
@@ -29,8 +29,8 @@ OffsetSpriteState::~OffsetSpriteState()
 void OffsetSpriteState::OnMouseRelease(const sm::vec2& pos)
 {
 	float s = 1;
-	if (m_camera->Type() == gum::CAM_ORTHO2D) {
-		s = static_cast<const gum::OrthoCamera*>(m_camera)->GetScale();
+	if (m_camera->Type() == s2::CAM_ORTHO2D) {
+		s = static_cast<const s2::OrthoCamera*>(m_camera)->GetScale();
 	}
 
 	float r = ArrangeSpriteImpl::CTRL_NODE_RADIUS * s * 2;

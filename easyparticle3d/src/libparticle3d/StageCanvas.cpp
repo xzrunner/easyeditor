@@ -8,14 +8,14 @@
 #include <ee/cfg_const.h>
 
 #include <ps_3d.h>
-
 #include <sprite2/S2_RVG.h>
+#include <sprite2/CameraType.h>
 
 namespace eparticle3d
 {
 
 StageCanvas::StageCanvas(StagePanel* editPanel)
-	: ee::CameraCanvas(editPanel, editPanel->GetStageImpl(), gum::CAM_ORTHO2D)
+	: ee::CameraCanvas(editPanel, editPanel->GetStageImpl(), s2::CAM_ORTHO2D)
 	, m_stage(editPanel)
 {
 }

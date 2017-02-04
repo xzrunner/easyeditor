@@ -6,7 +6,7 @@
 #include <ee/panel_msg.h>
 #include <ee/CameraCanvas.h>
 
-#include <gum/OrthoCamera.h>
+#include <sprite2/OrthoCamera.h>
 
 namespace lr
 {
@@ -43,9 +43,9 @@ bool CtrlCamOP::OnKeyDown(int keyCode)
 
 void CtrlCamOP::OffsetCamera(float dx, float dy)
 {
-	gum::Camera* cam = static_cast<ee::CameraCanvas*>(m_stage->GetCanvas())->GetCamera();
-	if (cam->Type() == gum::CAM_ORTHO2D) {
-		gum::OrthoCamera* ortho_cam = static_cast<gum::OrthoCamera*>(cam);
+	s2::Camera* cam = static_cast<ee::CameraCanvas*>(m_stage->GetCanvas())->GetCamera();
+	if (cam->Type() == s2::CAM_ORTHO2D) {
+		s2::OrthoCamera* ortho_cam = static_cast<s2::OrthoCamera*>(cam);
 		ortho_cam->Translate(sm::vec2(dx, dy));
 	}
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();

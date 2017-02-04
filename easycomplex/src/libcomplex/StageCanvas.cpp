@@ -15,6 +15,7 @@
 
 #include <sprite2/S2_RVG.h>
 #include <sprite2/Particle3d.h>
+#include <sprite2/CameraType.h>
 #include <gum/GUM_DTex.h>
 
 namespace ecomplex
@@ -23,7 +24,7 @@ namespace ecomplex
 StageCanvas::StageCanvas(StagePanel* editPanel,
 						 ee::LibraryPanel* library,
 						 wxGLContext* glctx)
-						 : ee::CameraCanvas(editPanel, editPanel->GetStageImpl(), gum::CAM_ORTHO2D, glctx)
+						 : ee::CameraCanvas(editPanel, editPanel->GetStageImpl(), s2::CAM_ORTHO2D, glctx)
 	, m_stage(editPanel)
 	, m_library(library)
 	, m_background(NULL)

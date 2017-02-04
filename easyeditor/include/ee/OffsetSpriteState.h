@@ -3,7 +3,7 @@
 
 #include "ArrangeSpriteState.h"
 
-namespace gum { class Camera; }
+namespace s2 { class Camera; }
 
 namespace ee
 {
@@ -13,7 +13,7 @@ class Sprite;
 class OffsetSpriteState : public ArrangeSpriteState
 {
 public:
-	OffsetSpriteState(Sprite* spr, const gum::Camera* camera);
+	OffsetSpriteState(Sprite* spr, const s2::Camera* camera);
 	virtual ~OffsetSpriteState();
 
 	virtual void OnMouseRelease(const sm::vec2& pos);
@@ -21,7 +21,7 @@ public:
 
 private:
 	Sprite* m_spr;
-	const gum::Camera* m_camera;
+	const s2::Camera* m_camera;
 
 	sm::vec2 m_old_offset;
 

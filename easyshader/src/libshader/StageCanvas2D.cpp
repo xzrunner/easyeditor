@@ -19,7 +19,7 @@ BEGIN_EVENT_TABLE(StageCanvas2D, ee::CameraCanvas)
 END_EVENT_TABLE()
 
 StageCanvas2D::StageCanvas2D(StagePanel2D* stage)
-	: ee::CameraCanvas(stage, stage->GetStageImpl(), gum::CAM_ORTHO2D)
+	: ee::CameraCanvas(stage, stage->GetStageImpl(), s2::CAM_ORTHO2D)
 	, m_timer(this, TIMER_ID)
 	, m_stage(stage)
 	, m_start_time(0)

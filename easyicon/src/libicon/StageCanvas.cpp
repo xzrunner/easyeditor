@@ -9,12 +9,13 @@
 #include <ee/render_utility.h>
 
 #include <sprite2/S2_RVG.h>
+#include <sprite2/CameraType.h>
 
 namespace eicon
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: ee::CameraCanvas(stage, stage->GetStageImpl(), gum::CAM_ORTHO2D)
+	: ee::CameraCanvas(stage, stage->GetStageImpl(), s2::CAM_ORTHO2D)
 	, m_stage(stage)
 	, m_edited(NULL)
 	, m_sprite_impl(NULL)
@@ -26,7 +27,7 @@ StageCanvas::StageCanvas(StagePanel* stage,
 						 wxGLContext* glctx,
 						 ee::Sprite* edited,
 						 const ee::MultiSpritesImpl* bg_sprites)
-	: ee::CameraCanvas(stage, stage->GetStageImpl(), gum::CAM_ORTHO2D, glctx)
+	: ee::CameraCanvas(stage, stage->GetStageImpl(), s2::CAM_ORTHO2D, glctx)
 	, m_stage(stage)
 	, m_edited(edited)
 	, m_sprite_impl(bg_sprites)

@@ -9,12 +9,13 @@
 #include <ee/cfg_const.h>
 
 #include <sprite2/S2_RVG.h>
+#include <sprite2/CameraType.h>
 
 namespace eparticle2d
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: ee::CameraCanvas(stage, stage->GetStageImpl(), gum::CAM_ORTHO2D)
+	: ee::CameraCanvas(stage, stage->GetStageImpl(), s2::CAM_ORTHO2D)
 	, m_stage(stage)
 {
 }

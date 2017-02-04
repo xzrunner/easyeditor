@@ -7,7 +7,7 @@
 #include <ee/EditPanel.h>
 #include <ee/panel_msg.h>
 
-#include <gum/OrthoCamera.h>
+#include <sprite2/OrthoCamera.h>
 
 #include <wx/sizer.h>
 
@@ -35,9 +35,9 @@ void MainDialog::InitLayout(wxGLContext* glctx)
 	stage->SetCanvas(canvas);
 	canvas->RemoveReference();
 
-	if (canvas->GetCamera()->Type() == gum::CAM_ORTHO2D)
+	if (canvas->GetCamera()->Type() == s2::CAM_ORTHO2D)
 	{
-		gum::OrthoCamera* cam = static_cast<gum::OrthoCamera*>(canvas->GetCamera());
+		s2::OrthoCamera* cam = static_cast<s2::OrthoCamera*>(canvas->GetCamera());
 		float old_scale = cam->GetScale();
 		cam->SetScale(old_scale / PREVIEW_SCALE);
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();		

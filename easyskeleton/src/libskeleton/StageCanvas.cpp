@@ -5,12 +5,13 @@
 #include <ee/EditPanelImpl.h>
 
 #include <sprite2/Skeleton.h>
+#include <sprite2/CameraType.h>
 
 namespace libskeleton
 {
 
 StageCanvas::StageCanvas(StagePanel* editpanel, wxGLContext* glctx)
-	: ee::CameraCanvas(editpanel, editpanel->GetStageImpl(), gum::CAM_ORTHO2D, glctx)
+	: ee::CameraCanvas(editpanel, editpanel->GetStageImpl(), s2::CAM_ORTHO2D, glctx)
 	, m_sk(editpanel->GetSkeleton())
 {
 	if (m_sk) {

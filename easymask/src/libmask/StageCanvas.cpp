@@ -7,12 +7,13 @@
 #include <ee/SpriteRenderer.h>
 
 #include <sprite2/RenderParams.h>
+#include <sprite2/CameraType.h>
 
 namespace emask
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: ee::CameraCanvas(stage, stage->GetStageImpl(), gum::CAM_ORTHO2D)
+	: ee::CameraCanvas(stage, stage->GetStageImpl(), s2::CAM_ORTHO2D)
 	, m_stage(stage)
 	, m_mask_render(false)
 {

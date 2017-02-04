@@ -26,7 +26,6 @@
 #include <gum/FilterModes.h>
 #include <gum/GUM_GTxt.h>
 #include <gum/RenderContext.h>
-#include <gum/Pseudo3DCamera.h>
 
 #include <algorithm>
 
@@ -34,7 +33,7 @@ namespace lr
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: ee::CameraCanvas(stage, stage->GetStageImpl(), gum::CAM_ORTHO2D)
+	: ee::CameraCanvas(stage, stage->GetStageImpl(), s2::CAM_ORTHO2D)
 	, m_stage(stage)
 {
 }
@@ -103,7 +102,7 @@ void StageCanvas::DrawSprites() const
 
 void StageCanvas::DrawSprite(ee::Sprite* spr, bool draw_edge, int name_visible) const
 {
-	if (m_camera->Type() == gum::CAM_ORTHO2D)
+	if (m_camera->Type() == s2::CAM_ORTHO2D)
 	{
 		sm::rect screen_region = GetVisibleRegion();
 		if (screen_region.IsValid() &&
@@ -154,9 +153,9 @@ void StageCanvas::DrawRegion() const
 
 void StageCanvas::DrawPseudo3dBound() const
 {
-	if (m_camera->Type() == gum::CAM_PSEUDO3D)
+	if (m_camera->Type() == s2::CAM_PSEUDO3D)
 	{
-		gum::Pseudo3DCamera* cam = static_cast<gum::Pseudo3DCamera*>(m_camera);
+		s2::Pseudo3DCamera* cam = static_cast<s2::Pseudo3DCamera*>(m_camera);
 		int w = gum::RenderContext::Instance()->GetWidth(),
 			h = gum::RenderContext::Instance()->GetHeight();
 //		sm::vec2 center_world(0, 0);

@@ -16,7 +16,7 @@
 #include <ee/panel_msg.h>
 #include <ee/CameraCanvas.h>
 
-#include <gum/OrthoCamera.h>
+#include <sprite2/OrthoCamera.h>
 
 namespace eanim
 {

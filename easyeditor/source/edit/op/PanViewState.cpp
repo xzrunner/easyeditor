@@ -4,8 +4,8 @@
 #include "CameraCanvas.h"
 
 #include <gum/RenderContext.h>
-#include <gum/OrthoCamera.h>
-#include <gum/Pseudo3DCamera.h>
+#include <sprite2/OrthoCamera.h>
+#include <sprite2/Pseudo3DCamera.h>
 
 namespace ee
 {
@@ -56,15 +56,15 @@ bool PanViewState::OnMouseDrag(int x, int y)
 	{
 		switch (canvas->GetCamera()->Type())
 		{
-		case gum::CAM_ORTHO2D:
+		case s2::CAM_ORTHO2D:
 			{
-				gum::OrthoCamera* cam = static_cast<gum::OrthoCamera*>(canvas->GetCamera());
+				s2::OrthoCamera* cam = static_cast<s2::OrthoCamera*>(canvas->GetCamera());
 				cam->Translate(offset);
 			}
 			break;
-		case gum::CAM_PSEUDO3D:
+		case s2::CAM_PSEUDO3D:
 			{
-				gum::Pseudo3DCamera* cam = static_cast<gum::Pseudo3DCamera*>(canvas->GetCamera());		
+				s2::Pseudo3DCamera* cam = static_cast<s2::Pseudo3DCamera*>(canvas->GetCamera());		
 				int w = gum::RenderContext::Instance()->GetWidth(),
 					h = gum::RenderContext::Instance()->GetHeight();		
 				sm::vec2 last = cam->TransPosScreenToProject(m_last_pos.x, m_last_pos.y, w, h);
