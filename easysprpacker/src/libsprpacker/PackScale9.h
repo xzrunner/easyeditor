@@ -53,6 +53,8 @@ private:
 //	Grid m_grids[9];
 	std::vector<Grid> m_grids;
 
+	int m_left, m_right, m_top, m_down;
+
 }; // PackScale9
 
 }

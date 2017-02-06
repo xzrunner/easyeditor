@@ -8,6 +8,7 @@ namespace lua = ebuilder::lua;
 
 #include <simp/NodeScale9.h>
 #include <simp/simp_types.h>
+#include <sprite2/ImageSymbol.h>
 
 namespace esprpacker
 {
@@ -41,6 +42,12 @@ void PackScale9::PackToLuaString(ebuilder::CodeGenerator& gen,
 			lua::assign("ymirror", g.mirror.y));
 	}
 
+	lua::connect(gen, 4, 
+		lua::assign("left", m_left), 
+		lua::assign("right", m_right),
+		lua::assign("top", m_top),
+		lua::assign("down", m_down));
+
 	gen.detab();
 	gen.line("},");
 }
@@ -72,12 +79,13 @@ int PackScale9::SizeOfPackToBin() const
 	sz += sizeof(uint32_t);			// id
 	sz += sizeof(uint8_t);			// type
 	sz += sizeof(uint8_t);			// s9 type
+	sz += sizeof(uint16_t) * 4;		// size
 	for (int i = 0, n = m_grids.size(); i < n; ++i) {
 		const Grid& g = m_grids[i];
 		assert (g.node);
 		sz += sizeof(uint32_t);		// grid id
 		sz += sizeof(uint8_t);		// dir & mirror
-	}	
+	}
 	return sz;
 }
 
@@ -91,6 +99,15 @@ void PackScale9::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float sca
 
 	uint8_t s9_type = m_type;
 	pack(s9_type, ptr);
+
+	int16_t s9_left = m_left;
+	pack(s9_left, ptr);
+	int16_t s9_right = m_right;
+	pack(s9_right, ptr);
+	int16_t s9_top = m_top;
+	pack(s9_top, ptr);
+	int16_t s9_down = m_down;
+	pack(s9_down, ptr);
 
 	for (int i = 0, n = m_grids.size(); i < n; ++i) 
 	{
@@ -137,6 +154,37 @@ void PackScale9::Init(const escale9::Symbol* sym)
 		dst.node = PackNodeFactory::Instance()->Create(
 			dynamic_cast<const ee::Sprite*>(src));
 	}
+
+	const s2::Sprite* spr = NULL;
+	// left
+	if (spr = s9.GetGrid(s2::S9_DOWN_LEFT)) {
+	} else if (spr = s9.GetGrid(s2::S9_MID_LEFT)) {
+		
+	} else if (spr = s9.GetGrid(s2::S9_TOP_LEFT)) {
+	}
+	assert(spr);
+	m_left = dynamic_cast<const s2::ImageSymbol*>(spr->GetSymbol())->GetNoTrimedSize().x;
+	// right
+	if (spr = s9.GetGrid(s2::S9_DOWN_RIGHT)) {
+	} else if (spr = s9.GetGrid(s2::S9_MID_RIGHT)) {
+	} else if (spr = s9.GetGrid(s2::S9_TOP_RIGHT)) {
+	}
+	assert(spr);
+	m_right = dynamic_cast<const s2::ImageSymbol*>(spr->GetSymbol())->GetNoTrimedSize().x;
+	// top
+	if (spr = s9.GetGrid(s2::S9_TOP_LEFT)) {
+	} else if (spr = s9.GetGrid(s2::S9_TOP_CENTER)) {
+	} else if (spr = s9.GetGrid(s2::S9_TOP_RIGHT)) {
+	}
+	assert(spr);
+	m_top = dynamic_cast<const s2::ImageSymbol*>(spr->GetSymbol())->GetNoTrimedSize().y;
+	// down
+	if (spr = s9.GetGrid(s2::S9_DOWN_LEFT)) {
+	} else if (spr = s9.GetGrid(s2::S9_DOWN_CENTER)) {
+	} else if (spr = s9.GetGrid(s2::S9_DOWN_RIGHT)) {
+	}
+	assert(spr);
+	m_down = dynamic_cast<const s2::ImageSymbol*>(spr->GetSymbol())->GetNoTrimedSize().y;
 }
 
 }
