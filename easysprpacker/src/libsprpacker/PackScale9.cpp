@@ -159,32 +159,35 @@ void PackScale9::Init(const escale9::Symbol* sym)
 	// left
 	if (spr = s9.GetGrid(s2::S9_DOWN_LEFT)) {
 	} else if (spr = s9.GetGrid(s2::S9_MID_LEFT)) {
-		
 	} else if (spr = s9.GetGrid(s2::S9_TOP_LEFT)) {
 	}
-	assert(spr);
-	m_left = dynamic_cast<const s2::ImageSymbol*>(spr->GetSymbol())->GetNoTrimedSize().x;
+	if (spr) {
+		m_left = dynamic_cast<const s2::ImageSymbol*>(spr->GetSymbol())->GetNoTrimedSize().x;
+	}
 	// right
 	if (spr = s9.GetGrid(s2::S9_DOWN_RIGHT)) {
 	} else if (spr = s9.GetGrid(s2::S9_MID_RIGHT)) {
 	} else if (spr = s9.GetGrid(s2::S9_TOP_RIGHT)) {
 	}
-	assert(spr);
-	m_right = dynamic_cast<const s2::ImageSymbol*>(spr->GetSymbol())->GetNoTrimedSize().x;
+	if (spr) {
+		m_right = dynamic_cast<const s2::ImageSymbol*>(spr->GetSymbol())->GetNoTrimedSize().x;
+	}
 	// top
 	if (spr = s9.GetGrid(s2::S9_TOP_LEFT)) {
 	} else if (spr = s9.GetGrid(s2::S9_TOP_CENTER)) {
 	} else if (spr = s9.GetGrid(s2::S9_TOP_RIGHT)) {
 	}
-	assert(spr);
-	m_top = dynamic_cast<const s2::ImageSymbol*>(spr->GetSymbol())->GetNoTrimedSize().y;
+	if (spr) {
+		m_top = dynamic_cast<const s2::ImageSymbol*>(spr->GetSymbol())->GetNoTrimedSize().y;
+	}
 	// down
 	if (spr = s9.GetGrid(s2::S9_DOWN_LEFT)) {
 	} else if (spr = s9.GetGrid(s2::S9_DOWN_CENTER)) {
 	} else if (spr = s9.GetGrid(s2::S9_DOWN_RIGHT)) {
 	}
-	assert(spr);
-	m_down = dynamic_cast<const s2::ImageSymbol*>(spr->GetSymbol())->GetNoTrimedSize().y;
+	if (spr) {
+		m_down = dynamic_cast<const s2::ImageSymbol*>(spr->GetSymbol())->GetNoTrimedSize().y;
+	}
 }
 
 }
