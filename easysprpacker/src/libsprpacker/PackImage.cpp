@@ -46,7 +46,8 @@ void PackImage::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TextureP
 	char buff[256];
 
 	sm::i16_rect quad;
-	GetPackRegion(tp, quad);
+	sm::ivec2 offset;
+	GetPackRegion(tp, quad, offset);
 	quad.xmin *= scale;
 	quad.ymin *= scale;
 	quad.xmax *= scale;
@@ -58,6 +59,12 @@ void PackImage::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TextureP
 	lua::connect(gen, 2, 
 		lua::assign("tex", ee::StringHelper::ToString(idx)), 
 		lua::assign("quad", src_str));
+
+	if (offset.x != 0 || offset.y != 0) {
+		lua::connect(gen, 2, 
+			lua::assign("offx", offset.x), 
+			lua::assign("offy", offset.y));
+	}
 
 	gen.detab();
 	gen.line("},");
@@ -75,6 +82,7 @@ int PackImage::SizeOfPackToBin() const
 	sz += sizeof(uint8_t);			// type
 	sz += sizeof(uint8_t);			// texid
 	sz += sizeof(uint16_t) * 4;		// texcoords
+	sz += sizeof(int16_t) * 2;		// offset
 	return sz;
 }
 
@@ -93,7 +101,9 @@ void PackImage::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scal
 	pack(idx, ptr);
 
 	sm::i16_rect quad;
-	GetPackRegion(tp, quad);
+	sm::ivec2 offset;
+	GetPackRegion(tp, quad, offset);
+
 	uint16_t xmin = quad.xmin;
 	pack(xmin, ptr);
 	uint16_t ymin = quad.ymin;
@@ -102,6 +112,11 @@ void PackImage::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scal
 	pack(xmax, ptr);
 	uint16_t ymax = quad.ymax;
 	pack(ymax, ptr);
+
+	int16_t offx = offset.x;
+	pack(offx, ptr);
+	int16_t offy = offset.y;
+	pack(offy, ptr);
 }
 
 void PackImage::Init(const ee::ImageSymbol* sym)
@@ -112,7 +127,7 @@ void PackImage::Init(const ee::ImageSymbol* sym)
 	}
 }
 
-void PackImage::GetPackRegion(const ee::TexturePacker& tp, sm::i16_rect& quad) const
+void PackImage::GetPackRegion(const ee::TexturePacker& tp, sm::i16_rect& quad, sm::ivec2& offset) const
 {
 	const ee::TexturePacker::Frame* tp_frame = tp.Query(m_img->GetFilepath());
 	if (!tp_frame && ee::ImageDataMgr::Instance()->GetDefaultSym() != "") {
@@ -135,6 +150,9 @@ void PackImage::GetPackRegion(const ee::TexturePacker& tp, sm::i16_rect& quad) c
 	int h = tp.GetTextureHeight(idx);
 	quad.ymin = h - quad.ymin;
 	quad.ymax = h - quad.ymax;
+
+	offset.x = tp_frame->dst.offset.x * 2;
+	offset.y = tp_frame->dst.offset.y * 2;
 }
 
 }
