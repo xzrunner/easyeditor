@@ -50,7 +50,8 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 		p.color = spr->GetColor() * params.color;
 	}
 
-	if (scissor) {
+	if (scissor) 
+	{
 		sm::vec2 min = p.mt * sm::vec2(m_scissor.xmin, m_scissor.ymin),
 			     max = p.mt * sm::vec2(m_scissor.xmax, m_scissor.ymax);
 		if (min.x > max.x) {
@@ -129,7 +130,10 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 		}
 		const std::vector<s2::Sprite*>& sprs = GetSprs(action);
 		for (int i = 0, n = sprs.size(); i < n; ++i) {
-			ee::SpriteRenderer::Instance()->Draw(sprs[i], p);
+			if (IsChildOutside(sprs[i], params)) {
+				continue;
+			}
+			ee::SpriteRenderer::Instance()->Draw(sprs[i], p, false);
 		}
 	}
 

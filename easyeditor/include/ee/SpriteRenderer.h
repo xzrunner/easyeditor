@@ -14,7 +14,8 @@ class SpriteRenderer
 {
 public:
 	void Draw(const s2::Sprite* spr,
-		      const s2::RenderParams& params = s2::RenderParams());
+		      const s2::RenderParams& params = s2::RenderParams(),
+			  bool scissor = true);
 
 	void Draw(const s2::Symbol* sym, 
 		      const s2::RenderParams& params = s2::RenderParams(),

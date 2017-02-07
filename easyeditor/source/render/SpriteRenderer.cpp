@@ -46,9 +46,9 @@ SpriteRenderer::~SpriteRenderer()
 {
 }
 
-void SpriteRenderer::Draw(const s2::Sprite* spr, const s2::RenderParams& params)
+void SpriteRenderer::Draw(const s2::Sprite* spr, const s2::RenderParams& params, bool scissor)
 {
-	s2::DrawNode::Draw(spr, params);
+	s2::DrawNode::Draw(spr, params, scissor);
 }
 
 void SpriteRenderer::Draw(const s2::Symbol* sym, const s2::RenderParams& params, 
