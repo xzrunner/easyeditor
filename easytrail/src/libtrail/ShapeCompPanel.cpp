@@ -104,7 +104,7 @@ void ShapeCompPanel::InitLayout(wxSizer* top_sizer)
 
 	// Line width
 	ee::SliderCtrlOne* s_width = new ee::SliderCtrlOne(this, "Ïß¿í", "linewidth", this, MT_LINE_WIDTH, 
-		ee::SliderItem("", "", 10, 5, 30));
+		ee::SliderItem("", "", 10, 5, 100));
 	top_sizer->Add(s_width);
 	m_sliders.push_back(s_width);
 
