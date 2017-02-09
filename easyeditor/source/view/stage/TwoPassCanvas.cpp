@@ -41,8 +41,12 @@ void TwoPassCanvas::OnSize(int w, int h)
 {
 	gum::RenderContext::Instance()->OnSize(w, h);
 
-	gum::RenderTargetMgr::Instance()->Return(m_rt);
-	m_rt = gum::RenderTargetMgr::Instance()->Fetch();
+	gum::RenderTargetMgr* rt_mgr = gum::RenderTargetMgr::Instance();
+	rt_mgr->OnSize(w, h);
+	if (!m_rt) {
+		m_rt = rt_mgr->Fetch();
+		assert(m_rt);
+	}
 
 	s2::Blackboard::Instance()->SetScreenCacheTexID(m_rt->GetTexID());
 }

@@ -39,7 +39,7 @@ void RenderTarget::SetCenter(int x, int y)
 
 int RenderTarget::GetTexID() const
 {
-	return m_rt->GetTexture()->ID();
+	return m_rt->TexID();
 }
 
 }
