@@ -128,7 +128,7 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 		if (spr) {
 			action = dynamic_cast<const s2::ComplexSprite*>(spr)->GetAction();
 		}
-		const std::vector<s2::Sprite*>& sprs = GetSprs(action);
+		const std::vector<s2::Sprite*>& sprs = GetActionChildren(action);
 		for (int i = 0, n = sprs.size(); i < n; ++i) {
 			if (IsChildOutside(sprs[i], params)) {
 				continue;
@@ -161,7 +161,7 @@ sm::rect Symbol::GetBounding(const s2::Sprite* spr) const
 	if (spr) {
 		action = dynamic_cast<const s2::ComplexSprite*>(spr)->GetAction();
 	}
-	const std::vector<s2::Sprite*>& sprs = GetSprs(action);
+	const std::vector<s2::Sprite*>& sprs = GetActionChildren(action);
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
 		sprs[i]->GetBounding()->CombineTo(b);
 	}
@@ -189,7 +189,7 @@ void Symbol::ReloadTexture() const
 
 void Symbol::Traverse(ee::Visitor<ee::Sprite>& visitor)
 {
-	const std::vector<s2::Sprite*>& children = GetChildren();
+	const std::vector<s2::Sprite*>& children = GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
 		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 		bool next;
@@ -225,7 +225,7 @@ bool Symbol::LoadResources()
 	FileLoader::Load(m_filepath, this);
 
 	m_origin_names.clear();
-	const std::vector<s2::Sprite*>& children = GetChildren();
+	const std::vector<s2::Sprite*>& children = GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
 		const std::string& name = children[i]->GetName();
 		if (!name.empty() && name[0] != '_') {

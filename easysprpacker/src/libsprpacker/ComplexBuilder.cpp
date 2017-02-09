@@ -53,7 +53,7 @@ const PackNode* ComplexBuilder::Create(const ecomplex::Symbol* sym)
 	}
 
 	// tag key-val
-	const std::vector<s2::Sprite*>& children = sym->GetChildren();
+	const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
 		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 		erespacker::PackTag::Instance()->AddTask(sym->GetFilepath(), i, child);

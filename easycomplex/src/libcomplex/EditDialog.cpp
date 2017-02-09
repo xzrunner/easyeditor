@@ -113,7 +113,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 
 void EditDialog::LoadSymbolInfo()
 {
-	const std::vector<s2::Sprite*>& children = m_sym->GetChildren();
+	const std::vector<s2::Sprite*>& children = m_sym->GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
 		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 		m_library->AddSymbol(dynamic_cast<ee::Symbol*>(child->GetSymbol()));

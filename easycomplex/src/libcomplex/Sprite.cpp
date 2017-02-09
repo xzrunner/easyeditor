@@ -90,7 +90,7 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 	{
 		s2::ComplexSymbol* sym = dynamic_cast<s2::ComplexSymbol*>(m_sym);
 		assert(sym);
-		const std::vector<s2::Sprite*>& children = sym->GetChildren();
+		const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
 		int count = 0;
 		for (int i = 0, n = children.size(); i < n; ++i) 
 		{

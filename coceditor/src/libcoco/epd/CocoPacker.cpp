@@ -96,7 +96,7 @@ void CocoPacker::ResolveSymbols()
 		}
 		else if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(sym))
 		{
-			const std::vector<s2::Sprite*>& children = complex->GetChildren();			
+			const std::vector<s2::Sprite*>& children = complex->GetAllChildren();			
 			for (size_t i = 0, n = children.size(); i < n; ++i)
 			{
 				ee::Sprite* spr = dynamic_cast<ee::Sprite*>(children[i]);
@@ -807,7 +807,7 @@ void CocoPacker::ParserComplex(const ecomplex::Symbol* sym)
 	std::vector<std::pair<int, std::string> > order;
 	{
 		lua::TableAssign ta(*m_gen, "component", true);
-		const std::vector<s2::Sprite*>& children = sym->GetChildren();
+		const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
 		for (int i = 0, n = children.size(); i < n; ++i) {
 			ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 			ParserSpriteForComponent(child, ids, unique, order);
@@ -817,7 +817,7 @@ void CocoPacker::ParserComplex(const ecomplex::Symbol* sym)
 	// children
 	std::map<std::string, std::vector<ee::Sprite*> > map_actions;
 	std::vector<ee::Sprite*> others;
-	Utility::GroupSpritesFromTag(sym->GetChildren(), map_actions, others);
+	Utility::GroupSpritesFromTag(sym->GetAllChildren(), map_actions, others);
 	if (!map_actions.empty())
 	{
 		std::map<std::string, std::vector<ee::Sprite*> >::iterator itr;
@@ -828,7 +828,7 @@ void CocoPacker::ParserComplex(const ecomplex::Symbol* sym)
 			// frame 0
 			{
 				lua::TableAssign ta(*m_gen, "", true);
-				const std::vector<s2::Sprite*>& children = sym->GetChildren();
+				const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
 				for (size_t i = 0, n = itr->second.size(); i < n; ++i)
 				{
 					int idx = -1;
@@ -848,7 +848,7 @@ void CocoPacker::ParserComplex(const ecomplex::Symbol* sym)
  		// frame 0
  		{
  			lua::TableAssign ta(*m_gen, "", true);
-			const std::vector<s2::Sprite*>& children = sym->GetChildren();
+			const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
   			for (size_t i = 0, n = others.size(); i < n; ++i)
 			{
 				int idx = -1;
@@ -1619,8 +1619,8 @@ void CocoPacker::ParserSpriteForComponent(const ee::Sprite* spr, std::vector<int
 			const ecomplex::Sprite* ecomplex = dynamic_cast<const ecomplex::Sprite*>(spr);
 			if (ecomplex) {
 				const ecomplex::Symbol* comp_sym = dynamic_cast<const ecomplex::Symbol*>(ecomplex->GetSymbol());
-				if (comp_sym->GetChildren().size() == 1) {
-					const ee::FontBlankSprite* font = dynamic_cast<const ee::FontBlankSprite*>(comp_sym->GetChildren()[0]);
+				if (comp_sym->GetAllChildren().size() == 1) {
+					const ee::FontBlankSprite* font = dynamic_cast<const ee::FontBlankSprite*>(comp_sym->GetAllChildren()[0]);
 					is_mount_node = font && font->font.empty() && font->font_color == s2::Color(0, 0, 0, 0);
 				}
 			}
@@ -1657,8 +1657,8 @@ void CocoPacker::ParserSpriteForComponent(const ee::Sprite* spr, std::vector<int
 			const ecomplex::Sprite* ecomplex = dynamic_cast<const ecomplex::Sprite*>(spr);
 			if (ecomplex) {
 				const ecomplex::Symbol* comp_sym = dynamic_cast<const ecomplex::Symbol*>(ecomplex->GetSymbol());
-				if (comp_sym->GetChildren().size() == 1) {
-					ee::Sprite* child = dynamic_cast<ee::Sprite*>(comp_sym->GetChildren()[0]);				
+				if (comp_sym->GetAllChildren().size() == 1) {
+					ee::Sprite* child = dynamic_cast<ee::Sprite*>(comp_sym->GetAllChildren()[0]);				
 					const ee::FontBlankSprite* font = dynamic_cast<const ee::FontBlankSprite*>(child);
 					is_mount_node = font && font->font.empty() && font->font_color == s2::Color(0, 0, 0, 0);
 				}

@@ -56,7 +56,7 @@ void TransNewTextFile::Run(const std::string& folder)
 			if (ecomplex::Symbol* complex = dynamic_cast<ecomplex::Symbol*>(sym)) 
 			{
 				bool dirty = false;
-				const std::vector<s2::Sprite*>& children = complex->GetChildren();
+				const std::vector<s2::Sprite*>& children = complex->GetAllChildren();
 				for (int i = 0, n = children.size(); i < n; ++i) 
 				{
 					s2::Sprite* child = children[i];

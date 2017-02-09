@@ -86,7 +86,7 @@ IPackNode* ComplexBuilder::LoadComplex(const ecomplex::Symbol* sym)
 {
 	PackAnimation* node = new PackAnimation;
 
-	const std::vector<s2::Sprite*>& children = sym->GetChildren();
+	const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
 
 	m_export_set.LoadExport(sym, node);
 
@@ -152,7 +152,7 @@ IPackNode* ComplexBuilder::LoadComplex(const ecomplex::Symbol* sym)
 
 IPackNode* ComplexBuilder::LoadAnchor(const ecomplex::Symbol* sym)
 {
-	const std::vector<s2::Sprite*>& children = sym->GetChildren();
+	const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
 	assert(children.size() == 1);
 
 	ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[0]);

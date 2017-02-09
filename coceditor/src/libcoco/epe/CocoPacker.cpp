@@ -39,7 +39,7 @@ void CocoPacker::pack(const std::vector<const ee::Symbol*>& syms)
 		const ee::Symbol* sym = syms[i];
 		if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(sym))
 		{
-			const std::vector<s2::Sprite*>& children = complex->GetChildren();
+			const std::vector<s2::Sprite*>& children = complex->GetAllChildren();
 			for (int i = 0, n = children.size(); i < n; ++i) {
 				ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 				if (ee::ImageSprite* image = dynamic_cast<ee::ImageSprite*>(child))
@@ -336,7 +336,7 @@ void CocoPacker::resolveAnimation(const ecomplex::Symbol* sym)
 	std::vector<std::pair<int, std::string> > order;
 	{
 		lua::TableAssign ta(m_gen, "component", true);
-		const std::vector<s2::Sprite*>& children = sym->GetChildren();
+		const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
 		for (int i = 0, n = children.size(); i < n; ++i) {
 			ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 			resolveSpriteForComponent(child, ids, unique, order);
@@ -346,7 +346,7 @@ void CocoPacker::resolveAnimation(const ecomplex::Symbol* sym)
 	// children
 	std::map<std::string, std::vector<ee::Sprite*> > map_actions;
 	std::vector<ee::Sprite*> others;
-	const std::vector<s2::Sprite*>& children = sym->GetChildren();
+	const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
 	Utility::GroupSpritesFromTag(children, map_actions, others);
 	if (!map_actions.empty())
 	{

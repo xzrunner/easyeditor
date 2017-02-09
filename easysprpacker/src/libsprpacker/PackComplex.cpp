@@ -147,7 +147,7 @@ void PackComplex::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float sc
 
 void PackComplex::Init(const ecomplex::Symbol* sym)
 {
-	const std::vector<s2::Sprite*>& children = sym->GetChildren();
+	const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
 	m_children.reserve(children.size());
 	m_children_trans.reserve(children.size());
 	for (int i = 0, n = children.size(); i < n; ++i) {

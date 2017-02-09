@@ -58,7 +58,7 @@ void GroupHelper::BreakUp(ee::Sprite* group, std::vector<ee::Sprite*>& sprs)
 	const sm::vec2& pos = group->GetPosition();
 	const sm::vec2& scale = group->GetScale();
 	float angle = group->GetAngle();
-	const std::vector<s2::Sprite*>& children = comp->GetChildren();
+	const std::vector<s2::Sprite*>& children = comp->GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) 
 	{
 		ee::Sprite* spr = dynamic_cast<ee::Sprite*>(((cu::Cloneable*)children[i])->Clone());

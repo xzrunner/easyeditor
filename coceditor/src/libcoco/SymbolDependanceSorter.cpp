@@ -46,7 +46,7 @@ void SymbolDependanceSorter::fetch(const std::vector<const ee::Symbol*>& syms)
 		const ee::Symbol* sym = syms[i];
 		if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(sym))
 		{
-			const std::vector<s2::Sprite*>& children = complex->GetChildren();
+			const std::vector<s2::Sprite*>& children = complex->GetAllChildren();
 			for (size_t j = 0, n = children.size(); j < n; ++j) {
 				buffer.push(dynamic_cast<const ee::Symbol*>(children[i]->GetSymbol()));
 			}
@@ -92,7 +92,7 @@ void SymbolDependanceSorter::fetch(const std::vector<const ee::Symbol*>& syms)
 			if (m_unique.find(complex) == m_unique.end())
 			{
 				m_unique.insert(complex);
-				const std::vector<s2::Sprite*>& children = complex->GetChildren();
+				const std::vector<s2::Sprite*>& children = complex->GetAllChildren();
 				for (size_t i = 0, n = children.size(); i < n; ++i)
 				{
 					const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(children[i]->GetSymbol());
@@ -181,7 +181,7 @@ void SymbolDependanceSorter::sort()
 			else if (ecomplex::Symbol* complex = dynamic_cast<ecomplex::Symbol*>(sym))
 			{
 				bool prepared = true;
-				const std::vector<s2::Sprite*>& children = complex->GetChildren();
+				const std::vector<s2::Sprite*>& children = complex->GetAllChildren();
 				for (size_t i = 0, n = children.size(); i < n && prepared; ++i) {
 					ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 					if (!IsSymbolPrepared(child)) {

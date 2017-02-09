@@ -86,7 +86,7 @@ bool SymbolContainer::Sort(std::vector<ee::Sprite*>& sprs)
 
 void SymbolContainer::GetSprites(std::vector<ee::Sprite*>& sprs) const
 {
-	const std::vector<s2::Sprite*>& children = m_sym->GetChildren();
+	const std::vector<s2::Sprite*>& children = m_sym->GetAllChildren();
 	sprs.reserve(children.size());
 	for (int i = 0, n = children.size(); i < n; ++i) {
 		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);

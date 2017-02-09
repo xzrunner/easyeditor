@@ -70,7 +70,7 @@ void LoadFromJson::CreateActionsFromTag(Symbol* sym)
 {
 	std::vector<s2::ComplexSymbol::Action> actions;
 
-	const std::vector<s2::Sprite*>& children = sym->GetChildren();
+	const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i)
 	{
 		ee::Sprite* spr = dynamic_cast<ee::Sprite*>(children[i]);

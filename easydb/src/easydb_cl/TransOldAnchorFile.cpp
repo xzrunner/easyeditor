@@ -69,7 +69,7 @@ void TransOldAnchorFile::TransComplex(const std::string& filepath) const
 	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	ecomplex::Symbol* complex = static_cast<ecomplex::Symbol*>(sym);
 	bool dirty = false;
-	const std::vector<s2::Sprite*>& children = complex->GetChildren();
+	const std::vector<s2::Sprite*>& children = complex->GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
 		ee::Sprite* spr = dynamic_cast<ee::Sprite*>(children[i]);
 		if (IsAnchor(spr)) {
@@ -113,7 +113,7 @@ bool TransOldAnchorFile::IsAnchor(const ee::Sprite* spr) const
 	if (const ee::FontBlankSprite* font = dynamic_cast<const ee::FontBlankSprite*>(spr)) {
 		return font->font.empty() && font->font_color == s2::Color(0, 0, 0, 0);
 	} else if (const ecomplex::Sprite* complex = dynamic_cast<const ecomplex::Sprite*>(spr)) {
-		const std::vector<s2::Sprite*>& children = dynamic_cast<const s2::ComplexSymbol*>(complex->GetSymbol())->GetChildren();
+		const std::vector<s2::Sprite*>& children = dynamic_cast<const s2::ComplexSymbol*>(complex->GetSymbol())->GetAllChildren();
 		if (children.size() == 1) {
 			ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[0]);
 			return IsAnchor(child);

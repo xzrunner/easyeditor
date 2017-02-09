@@ -41,7 +41,7 @@ void FileStorer::Store(const std::string& filepath, const Symbol* sym, const std
 	} else {
 		dir = _dir;
 	}
-	const std::vector<s2::Sprite*>& children = sym->GetChildren();
+	const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
 		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 		value["sprite"][i] = Store(child, dir);
@@ -82,7 +82,7 @@ void FileStorer::StoreWithHistory(const std::string& filepath, const Symbol* sym
 		dir = _dir;
 	}
 
-	const std::vector<s2::Sprite*>& children = sym->GetChildren();
+	const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
 		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 		value["sprite"][i] = Store(child, dir);
@@ -106,7 +106,7 @@ void FileStorer::StoreWithHistory(const std::string& filepath, const Symbol* sym
 void FileStorer::CenterSymbol(Symbol* sym)
 {
 	sm::vec2 offset = sym->GetBounding().Center();
-	const std::vector<s2::Sprite*>& children = sym->GetChildren();
+	const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
 		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 		child->Translate(-offset);
@@ -140,7 +140,7 @@ Json::Value FileStorer::Store(ee::Sprite* spr, const std::string& dir)
 void FileStorer::CheckDuplicateName(const Symbol* sym)
 {
 	std::set<std::string> names_set;
-	const std::vector<s2::Sprite*>& children = sym->GetChildren();
+	const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) 
 	{
 		ee::Sprite* spr = dynamic_cast<ee::Sprite*>(children[i]);
@@ -162,7 +162,7 @@ void FileStorer::CheckDuplicateName(const Symbol* sym)
 void FileStorer::CheckNameDiff(const Symbol* sym)
 {
 	std::set<std::string> curr_names;
-	const std::vector<s2::Sprite*>& children = sym->GetChildren();
+	const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
 		const std::string& name = children[i]->GetName();
 		if (!name.empty() && name[0] != '_') {
