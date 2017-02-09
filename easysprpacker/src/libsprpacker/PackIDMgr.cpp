@@ -92,7 +92,7 @@ void PackIDMgr::AddCurrPath(const std::string& path)
 	}
 
 	for (int i = 0, n = m_pkgs.size(); i < n; ++i) {
-		if (fix.find(m_pkgs[i]->path) != std::string::npos) {
+		if (m_pkgs[i]->path.find(fix) != std::string::npos) {
 			m_curr_pkg = m_pkgs[i];
 			break;
 		}

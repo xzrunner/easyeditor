@@ -65,7 +65,6 @@ int PackEPNew::Run(int argc, char *argv[])
 		esprpacker::PackIDMgr* ids_mgr = esprpacker::PackIDMgr::Instance();
 		ids_mgr->Init(argv[11], argv[10]);
 		ids_mgr->AddCurrPath(argv[12]);
-		ids_mgr->AddCurrPath(argv[2]);
 	}
 
 	s2::SprTimer::Instance()->Init();
