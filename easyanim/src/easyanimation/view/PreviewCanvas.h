@@ -3,6 +3,8 @@
 
 #include <ee/CameraCanvas.h>
 
+#include <sprite2/s2_config.h>
+
 #include <wx/wx.h>
 
 #ifdef S2_ANIM_CURR_OLD

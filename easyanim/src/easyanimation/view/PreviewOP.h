@@ -3,6 +3,8 @@
 
 #include <ee/ZoomViewOP.h>
 
+#include <sprite2/s2_config.h>
+
 #ifdef S2_ANIM_CURR_OLD
 namespace s2 { class AnimCurr; }
 #else
