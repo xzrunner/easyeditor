@@ -26,17 +26,17 @@ public:
 								  const std::vector<int>& triangles);
 
 private:
-	uint16_t m_part_num;
+	uint16_t m_joint_num;
 	uint16_t m_vert_num;
 	uint16_t m_tri_num;
-	uint16_t m_vert_part_num;
+	uint16_t m_vertices_joint_num;
 
 	Skin2Vertex* m_vertices;
-	uint16_t*    m_vertices_parts;
+	uint16_t*    m_vertices_joint;
 
 	uint16_t*    m_triangles;
 
-	Skin2Vertex::Part m_parts[1];	
+	Skin2Joint   m_joints[1];	
 
 	friend class Skin2Mesh;
 

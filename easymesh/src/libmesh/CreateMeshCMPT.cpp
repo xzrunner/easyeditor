@@ -30,7 +30,7 @@ CreateMeshCMPT::~CreateMeshCMPT()
 	m_skeleton_op->RemoveReference();
 }
 
-void CreateMeshCMPT::SetEditOP(s2::MeshType type)
+void CreateMeshCMPT::SetEditOP(pm::MeshType type)
 {
 	switch (type)
 	{

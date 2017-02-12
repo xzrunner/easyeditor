@@ -26,7 +26,7 @@ Mesh* MeshFactory::CreateMesh(const ee::Symbol* base) const
 	return mesh;
 }
 
-void MeshFactory::SetShapeType(s2::MeshType type)
+void MeshFactory::SetShapeType(pm::MeshType type)
 {
 	m_type = type;
 }

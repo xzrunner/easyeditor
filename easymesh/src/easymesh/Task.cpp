@@ -42,7 +42,7 @@ void Task::Load(const char* filepath)
 	Symbol* mesh_sym = static_cast<Symbol*>(sym);
 	m_stage->SetMeshSymbol(mesh_sym);
 
-	s2::MeshType type;
+	pm::MeshType type;
 	s2::Mesh* mesh = mesh_sym->GetMesh();
 	if (dynamic_cast<Network*>(mesh)) {
 		type = s2::MESH_NETWORK;

@@ -3,7 +3,7 @@
 
 #include <ee/EditCMPT.h>
 
-#include <sprite2/MeshType.h>
+#include <polymesh/MeshType.h>
 
 namespace emesh
 {
@@ -16,7 +16,7 @@ public:
 		StagePanel* stage);
 	virtual ~CreateMeshCMPT();
 
-	void SetEditOP(s2::MeshType type);
+	void SetEditOP(pm::MeshType type);
 
 protected:
 	virtual wxSizer* InitLayout();

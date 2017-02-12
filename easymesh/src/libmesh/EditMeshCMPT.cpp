@@ -26,7 +26,7 @@ EditMeshCMPT::~EditMeshCMPT()
 	m_skeleton_op->RemoveReference();
 }
 
-void EditMeshCMPT::SetEditOP(s2::MeshType type)
+void EditMeshCMPT::SetEditOP(pm::MeshType type)
 {
 	switch (type)
 	{

@@ -25,7 +25,7 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage, bool full, Sprit
 	SetSizer(InitLayout());	
 }
 
-void ToolbarPanel::SetEditType(s2::MeshType type)
+void ToolbarPanel::SetEditType(pm::MeshType type)
 {
 	MeshFactory::Instance()->SetShapeType(type);
 	if (m_create_cmpt) {
@@ -96,7 +96,7 @@ void ToolbarPanel::OnSetSpeed(wxCommandEvent& event)
 void ToolbarPanel::OnChangeType(wxCommandEvent& event)
 {
 	int idx = event.GetSelection();
-	SetEditType(s2::MeshType(idx));
+	SetEditType(pm::MeshType(idx));
 	m_stage->RecreateMesh();
 }
 

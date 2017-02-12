@@ -3,7 +3,7 @@
 
 #include <ee/ToolbarPanel.h>
 
-#include <sprite2/MeshType.h>
+#include <polymesh/MeshType.h>
 
 namespace emesh
 {
@@ -19,7 +19,7 @@ public:
 	ToolbarPanel(wxWindow* parent, StagePanel* stage, bool full,
 		Sprite* spr);
 
-	void SetEditType(s2::MeshType type);
+	void SetEditType(pm::MeshType type);
 
 protected:
 	virtual wxSizer* InitLayout();
