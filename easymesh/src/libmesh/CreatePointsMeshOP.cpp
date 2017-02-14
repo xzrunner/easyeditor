@@ -1,8 +1,8 @@
-#include "CreateNetworkOP.h"
+#include "CreatePointsMeshOP.h"
 #include "StagePanel.h"
 #include "Symbol.h"
 #include "Mesh.h"
-#include "Network.h"
+#include "PointsMesh.h"
 
 #include <ee/Image.h>
 #include <ee/panel_msg.h>
@@ -13,48 +13,48 @@
 namespace emesh
 {
 
-CreateNetworkOP::CreateNetworkOP(StagePanel* stage)
+CreatePointsMeshOP::CreatePointsMeshOP(StagePanel* stage)
 	: eshape::EditPolylineOP<eshape::DrawLoopOP, eshape::SelectNodesOP>(stage, stage->GetStageImpl(), stage, NULL, new ee::OneFloatValueStatic(5), NULL)
 	, m_stage(stage)
-	, m_selected_inner(NULL)
+	, m_selected_inner(-1)
 {
 	SetLoop(true);
 }
 
-bool CreateNetworkOP::OnKeyDown(int keyCode)
+bool CreatePointsMeshOP::OnKeyDown(int keyCode)
 {
 	if (eshape::EditPolylineOP<eshape::DrawLoopOP, eshape::SelectNodesOP>::OnKeyDown(keyCode))
 		return true;
 
-	switch (keyCode)
-	{
-	case 'a': case 'A':
-	case 'd': case 'D':
-	case 's': case 'S':
-	case 'w': case 'W':
-		if (IsDirty()) {
-			m_stage->UpdateSymbol();
-			ResetDirty();
-		}
-		break;
-	}
+// 	switch (keyCode)
+// 	{
+// 	case 'a': case 'A':
+// 	case 'd': case 'D':
+// 	case 's': case 'S':
+// 	case 'w': case 'W':
+// 		if (IsDirty()) {
+// 			ResetDirty();
+// 		}
+// 		break;
+// 	}
 
 	return false;
 }
 
-bool CreateNetworkOP::OnMouseLeftDown(int x, int y)
+bool CreatePointsMeshOP::OnMouseLeftDown(int x, int y)
 {
-	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-	Network* mesh = static_cast<Network*>(m_stage->GetMesh());
+	PointsMesh* mesh = dynamic_cast<PointsMesh*>(m_stage->GetMesh());
 	if (!mesh) {
 		return false;
 	}
-	sm::vec2* selected = mesh->QueryInner(pos);
-	if (selected) {
-		m_selected_inner = selected;
+
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
+	int idx = mesh->QueryInnerPos(pos);
+	if (idx != -1) {
+		m_selected_inner = idx;
 		return false;
-	} else if (mesh->InsertInner(pos)) {
-		RefreshAll();
+	} else if (mesh->InsertInnerPos(pos)) {
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		return false;
 	}
 
@@ -63,37 +63,34 @@ bool CreateNetworkOP::OnMouseLeftDown(int x, int y)
 	}
 
 	if (IsDirty()) {
-		m_stage->UpdateSymbol();
 		ResetDirty();
 	}
 
 	return false;
 }
 
-bool CreateNetworkOP::OnMouseLeftUp(int x, int y)
+bool CreatePointsMeshOP::OnMouseLeftUp(int x, int y)
 {
-	if (m_selected_inner) {
-		m_selected_inner = NULL;
-		RefreshAll();
+	if (m_selected_inner != -1) {
+		m_selected_inner = -1;
 	}
 
 	if (eshape::EditPolylineOP<eshape::DrawLoopOP, eshape::SelectNodesOP>::OnMouseLeftUp(x, y))
 		return true;
 
 	if (IsDirty()) {
-		m_stage->UpdateSymbol();
 		ResetDirty();
 	}
 
 	return false;
 }
 
-bool CreateNetworkOP::OnMouseRightDown(int x, int y)
+bool CreatePointsMeshOP::OnMouseRightDown(int x, int y)
 {
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-	Network* nw = static_cast<Network*>(m_stage->GetMesh());
-	if (nw->RemoveInner(pos)) {
-		RefreshAll();
+	PointsMesh* points_mesh = static_cast<PointsMesh*>(m_stage->GetMesh());
+	if (points_mesh->RemoveInnerPos(pos)) {
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		return false;
 	}
 
@@ -102,41 +99,45 @@ bool CreateNetworkOP::OnMouseRightDown(int x, int y)
 	}
 
 	if (IsDirty()) {
-		m_stage->UpdateSymbol();
 		ResetDirty();
 	}
 
 	return false;
 }
 
-bool CreateNetworkOP::OnMouseRightUp(int x, int y)
+bool CreatePointsMeshOP::OnMouseRightUp(int x, int y)
 {
 	if (eshape::EditPolylineOP<eshape::DrawLoopOP, eshape::SelectNodesOP>::OnMouseRightUp(x, y))
 		return true;
 
 	if (IsDirty()) {
-		m_stage->UpdateSymbol();
 		ResetDirty();
 	}
 
 	return false;
 }
 
-bool CreateNetworkOP::OnMouseDrag(int x, int y)
+bool CreatePointsMeshOP::OnMouseDrag(int x, int y)
 {
 	if (eshape::EditPolylineOP<eshape::DrawLoopOP, eshape::SelectNodesOP>::OnMouseDrag(x, y)) {
 		return true;
 	}
 
-	if (m_selected_inner) {
-		*m_selected_inner = m_stage->TransPosScrToProj(x, y);
+	if (m_selected_inner == -1) {
+		return false;
+	}
+
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
+	PointsMesh* points_mesh = static_cast<PointsMesh*>(m_stage->GetMesh());
+	if (points_mesh->MoveInnerPos(m_selected_inner, pos)) {
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
+		return true;
 	}
 
 	return false;
 }
 
-bool CreateNetworkOP::OnDraw() const
+bool CreatePointsMeshOP::OnDraw() const
 {
 	if (Mesh* mesh = m_stage->GetMesh()) {
 		ee::SpriteRenderer::Instance()->Draw(mesh->GetBaseSymbol());
@@ -148,20 +149,13 @@ bool CreateNetworkOP::OnDraw() const
 	return false;
 }
 
-bool CreateNetworkOP::Clear()
+bool CreatePointsMeshOP::Clear()
 {
 	if (eshape::EditPolylineOP<eshape::DrawLoopOP, eshape::SelectNodesOP>::Clear()) {
 		return true;
 	}
-	m_selected_inner = NULL;
+	m_selected_inner = -1;
 	return false;
-}
-
-void CreateNetworkOP::RefreshAll()
-{
-	m_stage->UpdateSymbol();
-	ResetDirty();
-	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 }

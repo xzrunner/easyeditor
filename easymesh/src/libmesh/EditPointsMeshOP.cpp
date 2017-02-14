@@ -1,4 +1,4 @@
-#include "EditNetworkOP.h"
+#include "EditPointsMeshOP.h"
 #include "StagePanel.h"
 #include "Mesh.h"
 
@@ -7,9 +7,9 @@
 #include <ee/FetchAllVisitor.h>
 #include <ee/EditPanelImpl.h>
 
+#include <polymesh/Mesh.h>
 #include <sprite2/RenderParams.h>
 #include <sprite2/S2_RVG.h>
-#include <sprite2/MeshNode.h>
 #include <sprite2/DrawMesh.h>
 #include <SM_Calc.h>
 
@@ -19,8 +19,8 @@ namespace emesh
 static const int CENTER_RADIUS = 3;
 static const int CENTER_EDGE = 10;
 
-EditNetworkOP::EditNetworkOP(StagePanel* stage)
-	: SelectNodesOP(stage)
+EditPointsMeshOP::EditPointsMeshOP(StagePanel* stage)
+	: SelectPointsMeshOP(stage)
 	, m_right_press(false)
 	, m_select_center(false)
 	, m_dragable(false)
@@ -28,7 +28,7 @@ EditNetworkOP::EditNetworkOP(StagePanel* stage)
 	m_center.Set(0, 0);
 }
 
-bool EditNetworkOP::OnMouseLeftDown(int x, int y)
+bool EditPointsMeshOP::OnMouseLeftDown(int x, int y)
 {
 	m_dragable = true;
 
@@ -39,7 +39,7 @@ bool EditNetworkOP::OnMouseLeftDown(int x, int y)
 		return false;
 	}
 
-	if (SelectNodesOP::OnMouseLeftDown(x, y))
+	if (SelectPointsMeshOP::OnMouseLeftDown(x, y))
 		return true;
 
 	m_right_press = false;
@@ -47,11 +47,11 @@ bool EditNetworkOP::OnMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool EditNetworkOP::OnMouseLeftUp(int x, int y)
+bool EditPointsMeshOP::OnMouseLeftUp(int x, int y)
 {
 	m_dragable = false;
 
-	if (SelectNodesOP::OnMouseLeftUp(x, y))
+	if (SelectPointsMeshOP::OnMouseLeftUp(x, y))
 		return true;
 
 	m_select_center = false;
@@ -59,11 +59,11 @@ bool EditNetworkOP::OnMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool EditNetworkOP::OnMouseRightDown(int x, int y)
+bool EditPointsMeshOP::OnMouseRightDown(int x, int y)
 {
 	m_dragable = true;
 
-	if (SelectNodesOP::OnMouseRightDown(x, y))
+	if (SelectPointsMeshOP::OnMouseRightDown(x, y))
 		return true;
 
 	m_last_pos = m_stage->TransPosScrToProj(x, y);
@@ -73,17 +73,17 @@ bool EditNetworkOP::OnMouseRightDown(int x, int y)
 	return false;
 }
 
-bool EditNetworkOP::OnMouseRightUp(int x, int y)
+bool EditPointsMeshOP::OnMouseRightUp(int x, int y)
 {
 	m_dragable = false;
 
-	if (SelectNodesOP::OnMouseRightUp(x, y))
+	if (SelectPointsMeshOP::OnMouseRightUp(x, y))
 		return true;
 
 	return false;
 }
 
-bool EditNetworkOP::OnMouseDrag(int x, int y)
+bool EditPointsMeshOP::OnMouseDrag(int x, int y)
 {
 	if (!m_dragable) {
 		return false;
@@ -97,13 +97,13 @@ bool EditNetworkOP::OnMouseDrag(int x, int y)
 		return true;
 	}
 
-	if (SelectNodesOP::OnMouseDrag(x, y))
+	if (SelectPointsMeshOP::OnMouseDrag(x, y))
 		return true;
 
 	Mesh* mesh = static_cast<StagePanel*>(m_wnd)->GetMesh();
 	if (!mesh) return false;
 
-	if (!m_selection.IsEmpty())
+	if (!m_selection.empty())
 	{
 		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 		if (m_right_press)
@@ -118,7 +118,7 @@ bool EditNetworkOP::OnMouseDrag(int x, int y)
 	return false;
 }
 
-bool EditNetworkOP::OnDraw() const
+bool EditPointsMeshOP::OnDraw() const
 {
 	if (Mesh* mesh = static_cast<StagePanel*>(m_wnd)->GetMesh())
 	{
@@ -131,33 +131,52 @@ bool EditNetworkOP::OnDraw() const
 	s2::RVG::SetColor(s2::Color(51, 102, 204));
 	s2::RVG::Circle(m_center, CENTER_RADIUS, true);
 
-	if (SelectNodesOP::OnDraw())
+	if (SelectPointsMeshOP::OnDraw())
 		return true;
 
 	return false;
 }
 
-void EditNetworkOP::TranslasteNode(const sm::vec2& offset)
+void EditPointsMeshOP::TranslasteNode(const sm::vec2& offset)
 {
-	std::vector<s2::MeshNode*> nodes;
-	m_selection.Traverse(ee::FetchAllVisitor<s2::MeshNode>(nodes));
-	for (int i = 0, n = nodes.size(); i < n; ++i)
-	{
-		nodes[i]->xy += offset;
+	Mesh* mesh = static_cast<StagePanel*>(m_wnd)->GetMesh();
+	if (!mesh) {
+		return;
+	}
+
+	pm::Mesh* pm_mesh = mesh->GetMesh();
+
+	std::vector<sm::vec2> vertices, texcoords;
+	std::vector<int> triangles;
+	pm_mesh->Dump(vertices, texcoords, triangles);
+	std::set<int>::iterator itr = m_selection.begin();
+	for ( ; itr != m_selection.end(); ++itr) {
+		int idx = *itr;
+		pm_mesh->SetVertexPos(idx, vertices[idx] + offset);
 	}
 }
 
-void EditNetworkOP::RotateNode(const sm::vec2& dst)
+void EditPointsMeshOP::RotateNode(const sm::vec2& dst)
 {
+	Mesh* mesh = static_cast<StagePanel*>(m_wnd)->GetMesh();
+	if (!mesh) {
+		return;
+	}
+
+	pm::Mesh* pm_mesh = mesh->GetMesh();
+
 	float angle = sm::get_angle_in_direction(m_center, m_last_pos, dst);
-	std::vector<s2::MeshNode*> nodes;
-	m_selection.Traverse(ee::FetchAllVisitor<s2::MeshNode>(nodes));
-	for (int i = 0, n = nodes.size(); i < n; ++i)
+	std::vector<sm::vec2> vertices, texcoords;
+	std::vector<int> triangles;
+	pm_mesh->Dump(vertices, texcoords, triangles);
+	std::set<int>::iterator itr = m_selection.begin();
+	for ( ; itr != m_selection.end(); ++itr) 
 	{
-		s2::MeshNode* node = nodes[i];
-		sm::vec2 v = node->xy - m_center;
+		int idx = *itr;
+
+		sm::vec2 v = vertices[idx] - m_center;
 		v = sm::rotate_vector(v, angle);
-		node->xy = m_center + v;
+		pm_mesh->SetVertexPos(idx, m_center + v);
 	}
 }
 

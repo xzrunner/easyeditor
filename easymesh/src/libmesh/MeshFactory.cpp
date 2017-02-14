@@ -1,7 +1,9 @@
 #include "MeshFactory.h"
-#include "Network.h"
-#include "Strip.h"
-#include "Skeleton.h"
+#include "PointsMesh.h"
+#include "StripMesh.h"
+#include "SkeletonMesh.h"
+
+#include <polymesh/MeshType.h>
 
 namespace emesh
 {
@@ -11,24 +13,24 @@ MeshFactory* MeshFactory::m_instance = NULL;
 Mesh* MeshFactory::CreateMesh(const ee::Symbol* base) const
 {
 	Mesh* mesh = NULL;
-	switch (m_type)
+	switch (m_pm_mesh_type)
 	{
-	case s2::MESH_NETWORK:
-		mesh = new Network(base);
+	case pm::MESH_POINTS:
+		mesh = new PointsMesh(base);
 		break;
-	case s2::MESH_STRIP:
-		mesh = new Strip(base);
+	case pm::MESH_STRIP:
+//		mesh = new StripMesh(base);
 		break;
-	case s2::MESH_SKELETON:
-		mesh = new Skeleton(base);
+	case pm::MESH_SKIN:
+//		mesh = new SkinMesh(base);
 		break;
 	}
 	return mesh;
 }
 
-void MeshFactory::SetShapeType(pm::MeshType type)
+void MeshFactory::SetShapeType(int pm_mesh_type)
 {
-	m_type = type;
+	m_pm_mesh_type = pm_mesh_type;
 }
 
 MeshFactory* MeshFactory::Instance()

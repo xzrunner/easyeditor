@@ -1,16 +1,16 @@
-#ifndef _EASYMESH_EDIT_NETWORK_OP_H_
-#define _EASYMESH_EDIT_NETWORK_OP_H_
+#ifndef _EASYMESH_EDIT_POINTS_MESH_OP_H_
+#define _EASYMESH_EDIT_POINTS_MESH_OP_H_
 
-#include "SelectNodesOP.h"
+#include "SelectPointsMeshOP.h"
 
 namespace emesh
 {
 
 class StagePanel;
-class EditNetworkOP : public SelectNodesOP
+class EditPointsMeshOP : public SelectPointsMeshOP
 {
 public:
-	EditNetworkOP(StagePanel* stage);
+	EditPointsMeshOP(StagePanel* stage);
 
 	virtual bool OnMouseLeftDown(int x, int y);
 	virtual bool OnMouseLeftUp(int x, int y);
@@ -38,4 +38,4 @@ private:
 
 }
 
-#endif // _EASYMESH_EDIT_NETWORK_OP_H_
+#endif // _EASYMESH_EDIT_POINTS_MESH_OP_H_

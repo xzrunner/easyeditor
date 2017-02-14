@@ -3,8 +3,6 @@
 
 #include <ee/EditCMPT.h>
 
-#include <polymesh/MeshType.h>
-
 namespace emesh
 {
 
@@ -16,7 +14,7 @@ public:
 		StagePanel* stage);
 	virtual ~EditMeshCMPT();
 
-	void SetEditOP(pm::MeshType type);
+	void SetEditOP(int pm_mesh_type);
 
 protected:
 	virtual wxSizer* InitLayout();
@@ -27,7 +25,7 @@ private:
 private:
 	StagePanel* m_stage;
 
-	ee::EditOP *m_network_op, *m_skeleton_op;
+	ee::EditOP *m_points_op, *m_skin_op;
 
 }; // EditMeshCMPT
 

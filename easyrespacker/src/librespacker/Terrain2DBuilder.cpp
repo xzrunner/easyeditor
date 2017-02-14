@@ -9,8 +9,6 @@
 
 #include <easyterrain2d.h>
 
-#include <sprite2/MeshTriangle.h>
-
 namespace erespacker
 {
 
@@ -68,76 +66,76 @@ const IPackNode* Terrain2DBuilder::Create(const eterrain2d::Symbol* sym)
 
 void Terrain2DBuilder::Load(const eterrain2d::Symbol* sym, PackAnimation* anim)
 {
-	const std::vector<eterrain2d::OceanMesh*> oceans = sym->GetOceans();
-	// todo
-	if (oceans.size() != 1) {
-		throw ee::Exception("Terrain2DBuilder::Load oceans.size() != 1, filepath: %s", sym->GetFilepath().c_str());
-	}
-
-	eterrain2d::OceanMesh* ocean = oceans[0];
-	
-	// todo
-	ocean->OpenWave(false);
-	ocean->OpenBlend(false);
-
-	static const float FPS = 30;
-	if (ocean->GetUVMoveSpeed().y == 0) {
-		throw ee::Exception("Terrain2DBuilder::Load ocean speed 0, filepath: %s", sym->GetFilepath().c_str());
-	}
-	int frame = (int)(fabs(FPS / ocean->GetUVMoveSpeed().y));
-
-	ocean->Build();
-
-	for (int i = 0; i < frame; ++i)
-	{
-		PackAnimation::Frame frame;
-		PackPicture* pic = new PackPicture;
-
-		const std::vector<eterrain2d::MeshShape*>& meshes = ocean->GetMeshes();
-		for (int j = 0, m = meshes.size(); j < m; ++j)
-		{
-			const eterrain2d::MeshShape* mesh = meshes[j];
-			const std::vector<s2::MeshTriangle*>& tris = mesh->GetTriangles();
-			for (int k = 0, l = tris.size(); k < l; ++k)
-			{
-				s2::MeshTriangle* tri = tris[k];
-
-				PackPicture::Quad quad;
-
-				quad.img = ocean->GetImage0()->GetImage();
-
-				for (int i = 0; i < 3; ++i) {
-					quad.texture_coord[i] = tri->nodes[i]->uv;
-				}
-				quad.texture_coord[3] = quad.texture_coord[2];
-
-				for (int i = 0; i < 3; ++i) {
-					quad.screen_coord[i] = tri->nodes[i]->xy;
-				}
-				quad.screen_coord[3] = quad.screen_coord[2];
-
-				pic->quads.push_back(quad);
-			}
-		}
-		m_pics.push_back(pic);
-
-		int comp_idx = anim->components.size();
-		PackAnimation::Component comp;
-		comp.node = pic;
-		anim->components.push_back(comp);
-
-		PackAnimation::Part part;
-		part.comp_idx = comp_idx;
-		frame.parts.push_back(part);
-
-		anim->frames.push_back(frame);
-
-		ocean->Update(1 / FPS);
-	}
-
-	PackAnimation::Action action;
-	action.size = anim->frames.size();
-	anim->actions.push_back(action);
+// 	const std::vector<eterrain2d::OceanMesh*> oceans = sym->GetOceans();
+// 	// todo
+// 	if (oceans.size() != 1) {
+// 		throw ee::Exception("Terrain2DBuilder::Load oceans.size() != 1, filepath: %s", sym->GetFilepath().c_str());
+// 	}
+// 
+// 	eterrain2d::OceanMesh* ocean = oceans[0];
+// 	
+// 	// todo
+// 	ocean->OpenWave(false);
+// 	ocean->OpenBlend(false);
+// 
+// 	static const float FPS = 30;
+// 	if (ocean->GetUVMoveSpeed().y == 0) {
+// 		throw ee::Exception("Terrain2DBuilder::Load ocean speed 0, filepath: %s", sym->GetFilepath().c_str());
+// 	}
+// 	int frame = (int)(fabs(FPS / ocean->GetUVMoveSpeed().y));
+// 
+// 	ocean->Build();
+// 
+// 	for (int i = 0; i < frame; ++i)
+// 	{
+// 		PackAnimation::Frame frame;
+// 		PackPicture* pic = new PackPicture;
+// 
+// 		const std::vector<eterrain2d::MeshShape*>& meshes = ocean->GetMeshes();
+// 		for (int j = 0, m = meshes.size(); j < m; ++j)
+// 		{
+// 			const eterrain2d::MeshShape* mesh = meshes[j];
+// 			const std::vector<s2::MeshTriangle*>& tris = mesh->GetTriangles();
+// 			for (int k = 0, l = tris.size(); k < l; ++k)
+// 			{
+// 				s2::MeshTriangle* tri = tris[k];
+// 
+// 				PackPicture::Quad quad;
+// 
+// 				quad.img = ocean->GetImage0()->GetImage();
+// 
+// 				for (int i = 0; i < 3; ++i) {
+// 					quad.texture_coord[i] = tri->nodes[i]->uv;
+// 				}
+// 				quad.texture_coord[3] = quad.texture_coord[2];
+// 
+// 				for (int i = 0; i < 3; ++i) {
+// 					quad.screen_coord[i] = tri->nodes[i]->xy;
+// 				}
+// 				quad.screen_coord[3] = quad.screen_coord[2];
+// 
+// 				pic->quads.push_back(quad);
+// 			}
+// 		}
+// 		m_pics.push_back(pic);
+// 
+// 		int comp_idx = anim->components.size();
+// 		PackAnimation::Component comp;
+// 		comp.node = pic;
+// 		anim->components.push_back(comp);
+// 
+// 		PackAnimation::Part part;
+// 		part.comp_idx = comp_idx;
+// 		frame.parts.push_back(part);
+// 
+// 		anim->frames.push_back(frame);
+// 
+// 		ocean->Update(1 / FPS);
+// 	}
+// 
+// 	PackAnimation::Action action;
+// 	action.size = anim->frames.size();
+// 	anim->actions.push_back(action);
 }
 
 }

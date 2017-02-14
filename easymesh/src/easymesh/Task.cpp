@@ -44,13 +44,14 @@ void Task::Load(const char* filepath)
 
 	pm::MeshType type;
 	s2::Mesh* mesh = mesh_sym->GetMesh();
-	if (dynamic_cast<Network*>(mesh)) {
-		type = s2::MESH_NETWORK;
-	} else if (dynamic_cast<Strip*>(mesh)) {
-		type = s2::MESH_STRIP;
-	} else if (dynamic_cast<Skeleton*>(mesh)) {
-		type = s2::MESH_SKELETON;
+	if (dynamic_cast<emesh::PointsMesh*>(mesh)) {
+		type = pm::MESH_POINTS;
 	}
+// 	else if (dynamic_cast<Strip*>(mesh)) {
+// 		type = pm::MESH_STRIP;
+// 	} else if (dynamic_cast<Skeleton*>(mesh)) {
+// 		type = pm::MESH_SKIN;
+// 	}
 	m_toolbar->SetEditType(type);
 
 	m_library->LoadFromSymbolMgr(*ee::SymbolMgr::Instance());

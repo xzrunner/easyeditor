@@ -1,3 +1,5 @@
+#include <polymesh/MeshType.h>
+
 #include "LibraryPanel.h"
 #include "LibraryPage.h"
 

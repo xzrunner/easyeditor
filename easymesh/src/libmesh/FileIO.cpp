@@ -1,8 +1,8 @@
 #include "FileIO.h"
 #include "Symbol.h"
-#include "Strip.h"
-#include "Network.h"
-#include "Skeleton.h"
+#include "StripMesh.h"
+#include "PointsMesh.h"
+#include "SkeletonMesh.h"
 
 #include <ee/FileHelper.h>
 #include <ee/panel_msg.h>
@@ -63,15 +63,21 @@ void FileIO::Load(const char* filepath, Symbol* sym)
 
 	std::string type = value["type"].asString();
 	Mesh* mesh = NULL;
-	if (type == Strip::GetTypeName()) {
-		mesh = new Strip(base_symbol);
-	} else if (type == Network::GetTypeName()) {
-		mesh = new Network(base_symbol);
-	} else if (type == Skeleton::GetTypeName()) {
-		mesh = new Skeleton(base_symbol);
+	if (type == "network" || type == "points") {
+		mesh = new PointsMesh(base_symbol);
 	} else {
-		throw ee::Exception("Unknown mesh type.");
+		throw ee::Exception("Unknown mesh type %s", filepath);
 	}
+
+// 	if (type == StripMesh::GetTypeName()) {
+// 		mesh = new StripMesh(base_symbol);
+// 	} else if (type == PointsMesh::GetTypeName()) {
+// 		mesh = new PointsMesh(base_symbol);
+// 	} else if (type == SkeletonMesh::GetTypeName()) {
+// 		mesh = new SkeletonMesh(base_symbol);
+// 	} else {
+// 		throw ee::Exception("Unknown mesh type.");
+// 	}
 	if (mesh)
 	{
 		mesh->Load(value);

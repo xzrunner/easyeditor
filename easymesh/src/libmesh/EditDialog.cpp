@@ -67,7 +67,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 	int val = dlg.ShowModal();
 	if (val == wxID_YES)
 	{
-		m_spr->GetMeshTrans().LoadFromMesh(sym->GetMesh());
+		sym->GetMesh()->StoreToTransforom(m_spr->GetMeshTrans());
 
 // 		const std::string& filepath = sym.GetFilepath();
 // 		FileIO::Store(sym.GetFilepath().c_str(), &sym);

@@ -1,7 +1,8 @@
-#include "CreateStripOP.h"
+#include "CreateStripMeshOP.h"
 #include "StagePanel.h"
-#include "Strip.h"
+#include "StripMesh.h"
 #include "Symbol.h"
+#include "Mesh.h"
 
 #include <ee/panel_msg.h>
 #include <ee/Image.h>
@@ -25,11 +26,11 @@ bool CreateStripOP::OnMouseLeftDown(int x, int y)
 	if (ee::ZoomViewOP::OnMouseLeftDown(x, y))
 		return true;
 
-	if (Strip* strip = static_cast<Strip*>(m_stage->GetMesh()))
-	{
-		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-		m_selected = strip->FindNode(pos);
-	}
+// 	if (StripMesh* strip = static_cast<StripMesh*>(m_stage->GetMesh()))
+// 	{
+// 		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
+// 		m_selected = strip->FindNode(pos);
+// 	}
 
 	return false;
 }
@@ -43,12 +44,12 @@ bool CreateStripOP::OnMouseLeftUp(int x, int y)
 		return false;
 	}
 
-	if (Strip* strip = static_cast<Strip*>(m_stage->GetMesh()))
-	{
-		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-		strip->InsertNode(pos);
-		ee::SetCanvasDirtySJ::Instance()->SetDirty();
-	}
+// 	if (StripMesh* strip = static_cast<StripMesh*>(m_stage->GetMesh()))
+// 	{
+// 		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
+// 		strip->InsertNode(pos);
+// 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
+// 	}
 
 	return false;
 }
@@ -58,13 +59,13 @@ bool CreateStripOP::OnMouseRightDown(int x, int y)
 	if (ee::ZoomViewOP::OnMouseRightDown(x, y))
 		return true;
 
-	if (Strip* strip = static_cast<Strip*>(m_stage->GetMesh()))
-	{
-		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-		strip->RemoveNode(pos);
-		ee::SetCanvasDirtySJ::Instance()->SetDirty();
-		m_last_right = pos;
-	}
+// 	if (StripMesh* strip = static_cast<StripMesh*>(m_stage->GetMesh()))
+// 	{
+// 		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
+// 		strip->RemoveNode(pos);
+// 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
+// 		m_last_right = pos;
+// 	}
 
 	return false;
 }
@@ -99,11 +100,11 @@ bool CreateStripOP::OnMouseDrag(int x, int y)
 		return false;
 	}
 
-	if (Strip* strip = static_cast<Strip*>(m_stage->GetMesh()))
-	{
-		strip->MoveNode(m_selected, pos);
-		ee::SetCanvasDirtySJ::Instance()->SetDirty();
-	}
+// 	if (StripMesh* strip = static_cast<StripMesh*>(m_stage->GetMesh()))
+// 	{
+// 		strip->MoveNode(m_selected, pos);
+// 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
+// 	}
 
 	return false;
 }

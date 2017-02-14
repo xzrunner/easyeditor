@@ -100,15 +100,6 @@ void StagePanel::LoadFromSymbol(const ee::Symbol* sym)
 {
 }
 
-void StagePanel::UpdateSymbol()
-{
-	if (Mesh* mesh = dynamic_cast<Mesh*>(m_sym->GetMesh())) {
-		std::vector<ee::Shape*> polylines;
-		TraverseShapes(ee::FetchAllVisitor<ee::Shape>(polylines));
-		mesh->Refresh();
-	}
-}
-
 void StagePanel::RecreateMesh()
 {
 	const s2::Symbol* base_sym = m_sym->GetMesh()->GetBaseSymbol();
@@ -148,17 +139,17 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 	case ee::MSG_INSERT_SHAPE:
 		if (Mesh* mesh = dynamic_cast<Mesh*>(m_sym->GetMesh())) {
 			if (mesh->InsertMesh((ee::Shape*)ud)) {
-				UpdateSymbol();
+//				UpdateSymbol();
 				ee::SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		}
 		break;
 	case ee::MSG_CLEAR_SHAPE:
-		if (Mesh* mesh = dynamic_cast<Mesh*>(m_sym->GetMesh())) {
-			if (mesh->ClearMesh()) {
-				ee::SetCanvasDirtySJ::Instance()->SetDirty();
-			}
-		}
+// 		if (Mesh* mesh = dynamic_cast<Mesh*>(m_sym->GetMesh())) {
+// 			if (mesh->ClearMesh()) {
+// 				ee::SetCanvasDirtySJ::Instance()->SetDirty();
+// 			}
+// 		}
 		break;
 	case ee::MSG_CLEAR_PANEL:
 		m_sym->RemoveReference();

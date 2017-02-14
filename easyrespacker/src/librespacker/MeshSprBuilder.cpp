@@ -7,8 +7,6 @@
 
 #include <easymesh.h>
 
-#include <sprite2/MeshTriangle.h>
-
 #include <algorithm>
 
 namespace erespacker
@@ -50,20 +48,20 @@ const IPackNode* MeshSprBuilder::Create(const emesh::Sprite* spr)
 
 	//////////////////////////////////////////////////////////////////////////
 
-	const s2::Mesh* mesh = dynamic_cast<const s2::MeshSymbol*>(spr->GetSymbol())->GetMesh();
-	const std::vector<s2::MeshTriangle*>& tris = mesh->GetTriangles();
-	const std::vector<std::pair<int, sm::vec2> >& trans = spr->GetMeshTrans().GetTrans();
-	for (int i = 0, n = trans.size(); i < n; ++i) 
-	{
-		int idx = trans[i].first;
-		int tri = idx / 3;
-		int ver = idx - tri * 3;
-
-		const sm::vec2& from = tris[tri]->nodes[ver]->ori_xy;
-		sm::vec2 to = from + trans[i].second;
- 		node->trans_pairs.push_back(from);
- 		node->trans_pairs.push_back(to);
-	}
+// 	const s2::Mesh* mesh = dynamic_cast<const s2::MeshSymbol*>(spr->GetSymbol())->GetMesh();
+// 	const std::vector<s2::MeshTriangle*>& tris = mesh->GetTriangles();
+// 	const std::vector<std::pair<int, sm::vec2> >& trans = spr->GetMeshTrans().GetTrans();
+// 	for (int i = 0, n = trans.size(); i < n; ++i) 
+// 	{
+// 		int idx = trans[i].first;
+// 		int tri = idx / 3;
+// 		int ver = idx - tri * 3;
+// 
+// 		const sm::vec2& from = tris[tri]->nodes[ver]->ori_xy;
+// 		sm::vec2 to = from + trans[i].second;
+//  		node->trans_pairs.push_back(from);
+//  		node->trans_pairs.push_back(to);
+// 	}
 
 	//////////////////////////////////////////////////////////////////////////
 

@@ -21,9 +21,25 @@ public:
 	virtual ~PointsMesh();
 
 	virtual MeshType Type() const { return MESH_POINTS; }
-	virtual const MeshData* GetMeshData() const { return m_mesh_data; }
+
+	virtual void Dump(std::vector<sm::vec2>& vertices, std::vector<sm::vec2>& texcoords,
+		std::vector<int>& triangles) const;
+
+	virtual void LoadFromTransform(const MeshTransform& transform);
+	virtual void StoreToTransform(MeshTransform& transform) const;
+
+	virtual const sm::vec2* GetVertexPos(int idx) const;
+	virtual void SetVertexPos(int idx, const sm::vec2& pos);
+
+	void Build(const std::vector<sm::vec2>& outline, const std::vector<sm::vec2>& points);
+	void Clear();
+
+	const std::vector<sm::vec2>& GetOutline() const { return m_outline; }
+	const std::vector<sm::vec2>& GetPoints() const { return m_points; }
 
 private:
+	float m_width, m_height;
+
 	std::vector<sm::vec2> m_outline;
 	std::vector<sm::vec2> m_points;	
 

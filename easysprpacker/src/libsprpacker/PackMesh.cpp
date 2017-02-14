@@ -3,17 +3,14 @@
 #include "binary_io.h"
 #include "PackCoords.h"
 
-#include "NetworkMesh.h"
+#include "PointsMesh.h"
 #include "TrianglesMesh.h"
-#include "Skeleton2Mesh.h"
+#include "Skin2Mesh.h"
 
 #include <easymesh.h>
 #include <easybuilder.h>
 namespace lua = ebuilder::lua;
 
-#include <sprite2/NetworkMesh.h>
-#include <sprite2/TrianglesMesh.h>
-#include <sprite2/Skeleton2Mesh.h>
 #include <simp/NodeMesh.h>
 #include <simp/simp_types.h>
 #include <simp/MeshType.h>
@@ -27,17 +24,17 @@ PackMesh::PackMesh(const emesh::Symbol* sym)
 	m_base = PackNodeFactory::Instance()->Create(dynamic_cast<const ee::Symbol*>(
 		sym->GetMesh()->GetBaseSymbol()));
 
-	const s2::Mesh* mesh = sym->GetMesh();
+	const emesh::Mesh* mesh = sym->GetMesh();
 	switch (mesh->Type())
 	{
-	case s2::MESH_NETWORK:
-		m_mesh = new NetworkMesh(VI_DOWNCASTING<const s2::NetworkMesh*>(mesh));		
+	case pm::MESH_POINTS:
+		m_mesh = new PointsMesh(VI_DOWNCASTING<const s2::PointsMesh*>(mesh));		
 		break;
 	case s2::MESH_TRIANGLES:
 		m_mesh = new TrianglesMesh(VI_DOWNCASTING<const s2::TrianglesMesh*>(mesh));
 		break;
 	case s2::MESH_SKELETON2:
-		m_mesh = new Skeleton2Mesh(VI_DOWNCASTING<const s2::Skeleton2Mesh*>(mesh));
+		m_mesh = new Skin2Mesh(VI_DOWNCASTING<const s2::Skin2Mesh*>(mesh));
 		break;
 	default:
 		throw ee::Exception("PackMesh::PackMesh unknown type %d", mesh->Type());
@@ -74,16 +71,16 @@ void PackMesh::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePa
 		case simp::MESH_STRIP:
 			type = "strip";
 			break;
-		case simp::MESH_NETWORK:
+		case simp::MESH_POINTS:
 			type = "network";
 			break;
 		case simp::MESH_TRIANGLES:
 			type = "triangles";
 			break;
-		case simp::MESH_SKELETON:
+		case simp::MESH_SKIN:
 			type = "skeleton";
 			break;
-		case simp::MESH_SKELETON2:
+		case simp::MESH_SKIN2:
 			type = "skeleton2";
 			break;
 		}

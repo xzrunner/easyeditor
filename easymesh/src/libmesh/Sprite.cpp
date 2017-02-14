@@ -7,6 +7,7 @@
 #include <ee/FileHelper.h>
 #include <ee/SymbolMgr.h>
 
+#include <polymesh/Mesh.h>
 #include <gum/MeshIO.h>
 
 namespace emesh
@@ -39,9 +40,9 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 	ee::Sprite::Load(val);
 	
 	const Json::Value& mesh_val = val["mesh"];
-	const s2::Mesh* mesh = dynamic_cast<Symbol*>(m_sym)->GetMesh();
+	s2::Mesh* mesh = dynamic_cast<Symbol*>(m_sym)->GetMesh();
 	gum::MeshIO::Load(mesh_val, m_trans, *mesh);
-	m_trans.StoreToMesh(mesh);
+	mesh->GetMesh()->LoadFromTransform(m_trans);
 
 	if (!mesh_val["base_symbol"].isNull()) {
 		m_base->RemoveReference();
@@ -56,7 +57,6 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 
 	Json::Value mesh_val;
 
-//	m_trans.LoadFromMesh(m_sym->GetMesh());
 	const s2::Mesh* mesh = dynamic_cast<Symbol*>(m_sym)->GetMesh();
 	gum::MeshIO::Store(mesh_val, m_trans, *mesh);
 

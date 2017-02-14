@@ -149,10 +149,6 @@
 			Name="data"
 			>
 			<File
-				RelativePath="..\..\..\include\polymesh\MeshData.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\source\data\MeshTransform.cpp"
 				>
 			</File>
@@ -161,7 +157,7 @@
 				>
 			</File>
 			<Filter
-				Name="common"
+				Name="1.common"
 				>
 				<File
 					RelativePath="..\..\..\source\data\Strips.cpp"
@@ -180,16 +176,12 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\source\data\Vertex.cpp"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\include\polymesh\Vertex.h"
 					>
 				</File>
 			</Filter>
 			<Filter
-				Name="skin"
+				Name="2.skin"
 				>
 				<File
 					RelativePath="..\..\..\source\data\SkinTriangles.cpp"
@@ -209,18 +201,18 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="skin2"
+				Name="3.skin2"
 				>
+				<File
+					RelativePath="..\..\..\include\polymesh\Skin2Joint.h"
+					>
+				</File>
 				<File
 					RelativePath="..\..\..\source\data\Skin2Triangles.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\..\..\include\polymesh\Skin2Triangles.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\source\data\Skin2Vertex.cpp"
 					>
 				</File>
 				<File
@@ -298,6 +290,26 @@
 			>
 			<File
 				RelativePath="..\..\..\include\polymesh\pm_define.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="middle"
+			>
+			<File
+				RelativePath="..\..\..\source\middle\Skin2TrisHelper.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\polymesh\Skin2TrisHelper.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\source\middle\TrianglesHelper.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\polymesh\TrianglesHelper.h"
 				>
 			</File>
 		</Filter>

@@ -7,7 +7,6 @@
 
 #include <shaderlab/ShaderMgr.h>
 #include <shaderlab/Sprite2Shader.h>
-#include <sprite2/MeshTriangle.h>
 #include <sprite2/DrawMesh.h>
 #include <sprite2/RenderParams.h>
 #include <SM_Triangulation.h>
@@ -324,43 +323,43 @@ void OceanMesh::BuildGrids(const sm::rect& region,
 
 void OceanMesh::UpdateWave(float during)
 {
-	sm::vec2 sz = m_image0->GetBounding().Size();
-	for (int i = 0, n = m_grids.size(); i < n; ++i) {
-		MeshShape* grid = m_grids[i];
-		const std::vector<s2::MeshTriangle*>& tris = grid->GetTriangles();
-		for (int j = 0, m = tris.size(); j < m; ++j) {
-			s2::MeshTriangle* tri = tris[j];
-			for (int k = 0; k < 3; ++k) {
-				s2::MeshNode* n = tri->nodes[k];
-				if (m_lock_bound && *((bool*)n->ud)) {
-					continue;
-				}
-
-  				// todo
-  				float x_times = (n->ori_xy.x - debug_r.xmin - m_texcoords_base.x * sz.x) / sz.x,
-  					  y_times = (n->ori_xy.y - debug_r.ymin - m_texcoords_base.y * sz.y) / sz.y;
-//   				if (fabs(x_times - (int)x_times) < 0.001f || 
-//   					fabs(y_times - (int)y_times) < 0.001f) {
-				if (fabs(y_times - (int)y_times) < 0.001f) {
-//  					float dis = n->ori_xy.y - m_wave_speed * during;
-//   					//n->xy.y = n->ori_xy.y;
-//  					n->xy.y = n->ori_xy.y + m_wave_height * cos(dis);
-
-					float dis = n->ori_xy.y - m_texcoords_base.y * sz.y + m_wave_speed * during;
-					n->xy.y = n->ori_xy.y + m_wave_height * cos(dis);
-  				} else {
-  					float dis = n->ori_xy.y - m_wave_speed * during;
-  					n->xy.y = n->ori_xy.y + m_wave_height * cos(dis);
-  				}
-
-// 				float dis = n->ori_xy.y + m_texcoords_base.y * sz.y - m_wave_speed * during;
-// 				n->xy.y = n->ori_xy.y + m_wave_height * cos(dis);
-
-// 				float dis = n->ori_xy.y - m_wave_speed * during;
-// 				n->xy.y = n->ori_xy.y + m_wave_height * cos(dis);
-			}
-		}
-	}
+// 	sm::vec2 sz = m_image0->GetBounding().Size();
+// 	for (int i = 0, n = m_grids.size(); i < n; ++i) {
+// 		MeshShape* grid = m_grids[i];
+// 		const std::vector<s2::MeshTriangle*>& tris = grid->GetTriangles();
+// 		for (int j = 0, m = tris.size(); j < m; ++j) {
+// 			s2::MeshTriangle* tri = tris[j];
+// 			for (int k = 0; k < 3; ++k) {
+// 				s2::MeshNode* n = tri->nodes[k];
+// 				if (m_lock_bound && *((bool*)n->ud)) {
+// 					continue;
+// 				}
+// 
+//   				// todo
+//   				float x_times = (n->ori_xy.x - debug_r.xmin - m_texcoords_base.x * sz.x) / sz.x,
+//   					  y_times = (n->ori_xy.y - debug_r.ymin - m_texcoords_base.y * sz.y) / sz.y;
+// //   				if (fabs(x_times - (int)x_times) < 0.001f || 
+// //   					fabs(y_times - (int)y_times) < 0.001f) {
+// 				if (fabs(y_times - (int)y_times) < 0.001f) {
+// //  					float dis = n->ori_xy.y - m_wave_speed * during;
+// //   					//n->xy.y = n->ori_xy.y;
+// //  					n->xy.y = n->ori_xy.y + m_wave_height * cos(dis);
+// 
+// 					float dis = n->ori_xy.y - m_texcoords_base.y * sz.y + m_wave_speed * during;
+// 					n->xy.y = n->ori_xy.y + m_wave_height * cos(dis);
+//   				} else {
+//   					float dis = n->ori_xy.y - m_wave_speed * during;
+//   					n->xy.y = n->ori_xy.y + m_wave_height * cos(dis);
+//   				}
+// 
+// // 				float dis = n->ori_xy.y + m_texcoords_base.y * sz.y - m_wave_speed * during;
+// // 				n->xy.y = n->ori_xy.y + m_wave_height * cos(dis);
+// 
+// // 				float dis = n->ori_xy.y - m_wave_speed * during;
+// // 				n->xy.y = n->ori_xy.y + m_wave_height * cos(dis);
+// 			}
+// 		}
+// 	}
 }
 
 void OceanMesh::UpdateUVMove(float dt)

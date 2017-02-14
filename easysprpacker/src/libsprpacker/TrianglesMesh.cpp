@@ -2,58 +2,69 @@
 #include "PackCoords.h"
 #include "PackArray.h"
 
-#include <sprite2/TrianglesMesh.h>
 #include <simp/TrianglesMesh.h>
+#include <polymesh/MeshType.h>
+#include <polymesh/TrianglesHelper.h>
 
 namespace esprpacker
 {
 
-TrianglesMesh::TrianglesMesh(const s2::TrianglesMesh* mesh)
+TrianglesMesh::TrianglesMesh(const pm::Triangles* mesh)
+	: m_mesh(mesh)
 {
-	mesh->AddReference();
-	m_mesh = mesh;
-}
-
-TrianglesMesh::~TrianglesMesh()
-{
-	m_mesh->RemoveReference();
 }
 
 int TrianglesMesh::Type() const
 {
-	return s2::MESH_TRIANGLES;
+	return pm::MESH_TRIANGLES;
 }
 
 void TrianglesMesh::PackToLuaString(ebuilder::CodeGenerator& gen) const
 {
-	PackCoords::PackToLua(gen, m_mesh->GetVertices(), "vertices");
-	PackCoords::PackToLua(gen, m_mesh->GetTexcoords(), "texcoords", 8192);
-	PackArray<int, uint16_t, uint16_t>::PackToLua(gen, m_mesh->GetTriangles(), "triangles");
+	std::vector<sm::vec2> vertices, texcoords;
+	std::vector<int> triangles;
+	pm::TrianglesHelper::Dump(*m_mesh, vertices, texcoords, triangles);
+
+	PackCoords::PackToLua(gen, vertices, "vertices");
+	PackCoords::PackToLua(gen, texcoords, "texcoords", 8192);
+	PackArray<int, uint16_t, uint16_t>::PackToLua(gen, triangles, "triangles");
 }
 
 int TrianglesMesh::SizeOfUnpackFromBin() const
 {
+	std::vector<sm::vec2> vertices, texcoords;
+	std::vector<int> triangles;
+	pm::TrianglesHelper::Dump(*m_mesh, vertices, texcoords, triangles);
+
 	int sz = simp::TrianglesMesh::Size();
-	sz += PackCoords::SizeOfUnpackFromBin(m_mesh->GetVertices());
-	sz += PackCoords::SizeOfUnpackFromBin(m_mesh->GetTexcoords());
-	sz += PackArray<int, uint16_t, uint16_t>::SizeOfUnpackFromBin(m_mesh->GetTriangles());
+	sz += PackCoords::SizeOfUnpackFromBin(vertices);
+	sz += PackCoords::SizeOfUnpackFromBin(texcoords);
+	sz += PackArray<int, uint16_t, uint16_t>::SizeOfUnpackFromBin(triangles);
 	return sz;
 }
 
 int TrianglesMesh::SizeOfPackToBin() const
 {
+	std::vector<sm::vec2> vertices, texcoords;
+	std::vector<int> triangles;
+	pm::TrianglesHelper::Dump(*m_mesh, vertices, texcoords, triangles);
+
 	int sz = 0;
-	sz += PackCoords::SizeOfPackToBin(m_mesh->GetVertices());
-	sz += PackCoords::SizeOfPackToBin(m_mesh->GetTexcoords());
-	sz += PackArray<int, uint16_t, uint16_t>::SizeOfPackToBin(m_mesh->GetTriangles());
+	sz += PackCoords::SizeOfPackToBin(vertices);
+	sz += PackCoords::SizeOfPackToBin(texcoords);
+	sz += PackArray<int, uint16_t, uint16_t>::SizeOfPackToBin(triangles);
 	return sz;
 }
 
 void TrianglesMesh::PackToBin(uint8_t** ptr) const
 {
-	PackCoords::PackToBin(m_mesh->GetVertices(), ptr);
-	PackCoords::PackToBin(m_mesh->GetTexcoords(), ptr, 8192);
-	PackArray<int, uint16_t, uint16_t>::PackToBin(m_mesh->GetTriangles(), ptr);
+	std::vector<sm::vec2> vertices, texcoords;
+	std::vector<int> triangles;
+	pm::TrianglesHelper::Dump(*m_mesh, vertices, texcoords, triangles);
+
+	PackCoords::PackToBin(vertices, ptr);
+	PackCoords::PackToBin(texcoords, ptr, 8192);
+	PackArray<int, uint16_t, uint16_t>::PackToBin(triangles, ptr);
 }
 
 }

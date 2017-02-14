@@ -19,12 +19,12 @@ void DrawShapesVisitor::Visit(Shape* shape, bool& next)
 {
 	next = true;
 
-	if (!shape || !m_screen_region.IsValid()) {
+	if (!shape) {
 		return;
 	}
 
 	const sm::rect& r = shape->GetBounding();
-	if (!sm::is_rect_intersect_rect(r, m_screen_region)) {
+	if (m_screen_region.IsValid() && !sm::is_rect_intersect_rect(r, m_screen_region)) {
 		return;
 	}
 

@@ -10,8 +10,6 @@ namespace lua = ebuilder::lua;
 #include <rigging.h>
 #include <sprite2/SymType.h>
 #include <sprite2/MeshSymbol.h>
-#include <sprite2/Skeleton2Mesh.h>
-#include <sprite2/TrianglesMesh.h>
 #include <simp/NodeAnim2.h>
 #include <simp/simp_types.h>
 
@@ -242,7 +240,7 @@ void PackAnim2::InitSkeleton(const rg_skeleton* sk)
 				const s2::Mesh* mesh = dynamic_cast<s2::MeshSymbol*>(sym)->GetMesh();
 				if (dynamic_cast<const s2::TrianglesMesh*>(mesh)) {
 					dst.type = SKIN_MESH;
-				} else if (dynamic_cast<const s2::Skeleton2Mesh*>(mesh)) {
+				} else if (dynamic_cast<const s2::Skin2Mesh*>(mesh)) {
 					dst.type = SKIN_JOINT_MESH;
 				} else {
 					assert(0);

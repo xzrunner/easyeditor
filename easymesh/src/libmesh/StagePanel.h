@@ -56,8 +56,6 @@ public:
 
 	void LoadFromSymbol(const ee::Symbol* sym);
 
-	void UpdateSymbol();
-
 	void RecreateMesh();
 
 protected:

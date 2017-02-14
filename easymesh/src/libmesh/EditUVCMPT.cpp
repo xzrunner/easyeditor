@@ -41,10 +41,10 @@ wxSizer* EditUVCMPT::InitLayout()
 
 void EditUVCMPT::onMove(wxCommandEvent& event)
 {
-	if (Mesh* mesh = m_stage->GetMesh()) {
-		m_stage->GetMesh()->OffsetUV(0, SPEED_Y);
-		ee::SetCanvasDirtySJ::Instance()->SetDirty();
-	}
+// 	if (Mesh* mesh = m_stage->GetMesh()) {
+// 		m_stage->GetMesh()->OffsetUV(0, SPEED_Y);
+// 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
+// 	}
 }
 
 void EditUVCMPT::onReset(wxCommandEvent& event)

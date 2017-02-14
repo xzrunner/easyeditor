@@ -12,23 +12,14 @@
 
 namespace ee { class Symbol; class Rect; class RenderParams; class Shape; }
 
-namespace s2 { class MeshNode; class MeshTriangle; }
-
 namespace emesh
 {
 
-class Mesh : public virtual s2::Mesh
+class Mesh : public s2::Mesh
 {
 public:
 	Mesh();
-	Mesh(const Mesh& mesh);
 	Mesh(const ee::Symbol* base);
-
-// 	/**
-// 	 *  @interface
-// 	 *    Cloneable
-// 	 */
-// 	virtual Mesh* Clone() const { return NULL; }
 
 	/**
 	 *  @interface
@@ -36,9 +27,10 @@ public:
 	 */
 	virtual void Load(const Json::Value& value) {}
 	virtual void Store(Json::Value& value) const {}
-	virtual void Update() {}
+//	virtual void Update() {}
 	virtual void Refresh() {}
-
+	virtual void Draw() const {}
+	
 	/**
 	 *  @interface
 	 *    Editable
@@ -46,16 +38,16 @@ public:
 	virtual void TraverseMesh(ee::Visitor<ee::Shape>& visitor) const {}
 	virtual bool RemoveMesh(ee::Shape* mesh) { return false; }
 	virtual bool InsertMesh(ee::Shape* mesh) { return false; }
-	virtual bool ClearMesh() { return false; }
+// 	virtual bool ClearMesh() { return false; }
 	virtual void Reset() {}
 	virtual void Clear() {}
 
-	s2::MeshNode* PointQueryNode(const sm::vec2& p);
-	void RectQueryNodes(const sm::rect& r, std::vector<s2::MeshNode*>& nodes);
+	virtual int PointQueryVertex(const sm::vec2& p) const = 0;
+	virtual void RectQueryVertices(const sm::rect& r, std::vector<int>& vertices) const = 0;
 
 protected:
-	void StoreTriangles(Json::Value& value) const;
-	void LoadTriangles(const Json::Value& value);
+// 	void StoreTriangles(Json::Value& value) const;
+// 	void LoadTriangles(const Json::Value& value);
 
 }; // Mesh
 

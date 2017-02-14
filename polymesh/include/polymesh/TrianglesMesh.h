@@ -19,7 +19,15 @@ public:
 	virtual ~TrianglesMesh();
 
 	virtual MeshType Type() const { return MESH_TRIANGLES; }
-	virtual const MeshData* GetMeshData() const { return m_mesh_data; }
+
+	virtual void Dump(std::vector<sm::vec2>& vertices, std::vector<sm::vec2>& texcoords,
+		std::vector<int>& triangles) const;
+
+	virtual void LoadFromTransform(const MeshTransform& transform);
+	virtual void StoreToTransform(MeshTransform& transform) const;
+
+	virtual const sm::vec2* GetVertexPos(int idx) const;
+	virtual void SetVertexPos(int idx, const sm::vec2& pos);
 
 	void Update(int offset0, int count0, int offset1, int count1, const float* vertices);
 

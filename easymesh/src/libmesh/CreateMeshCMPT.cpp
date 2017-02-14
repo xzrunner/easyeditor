@@ -1,13 +1,15 @@
 #include "CreateMeshCMPT.h"
-#include "CreateNetworkOP.h"
-#include "CreateStripOP.h"
-#include "CreateSkeletonOP.h"
+#include "CreatePointsMeshOP.h"
+#include "CreateStripMeshOP.h"
+#include "CreateSkinMeshOP.h"
 #include "StagePanel.h"
 #include "FileIO.h"
 #include "MeshFactory.h"
 #include "Mesh.h"
 
 #include <ee/shape_msg.h>
+
+#include <polymesh/MeshType.h>
 
 namespace emesh
 {
@@ -17,7 +19,7 @@ CreateMeshCMPT::CreateMeshCMPT(wxWindow* parent, const std::string& name,
 	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage(stage)
 {
-	m_network_op = new CreateNetworkOP(stage);
+	m_network_op = new CreatePointsMeshOP(stage);
 	m_strip_op= new CreateStripOP(stage);
 	m_skeleton_op = new CreateSkeletonOP(stage);
 	LoadEditOP(m_network_op);
@@ -30,17 +32,17 @@ CreateMeshCMPT::~CreateMeshCMPT()
 	m_skeleton_op->RemoveReference();
 }
 
-void CreateMeshCMPT::SetEditOP(pm::MeshType type)
+void CreateMeshCMPT::SetEditOP(int pm_mesh_type)
 {
-	switch (type)
+	switch (pm_mesh_type)
 	{
-	case s2::MESH_NETWORK:
+	case pm::MESH_POINTS:
 		LoadEditOP(m_network_op);
 		break;
-	case s2::MESH_STRIP:
+	case pm::MESH_STRIP:
 		LoadEditOP(m_strip_op);
 		break;
-	case s2::MESH_SKELETON:
+	case pm::MESH_SKIN:
 		LoadEditOP(m_skeleton_op);
 		break;
 	}

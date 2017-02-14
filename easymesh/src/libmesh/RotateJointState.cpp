@@ -5,7 +5,6 @@
 
 #include <SM_Calc.h>
 #include <sprite2/S2_Sprite.h>
-#include <sprite2/MeshJoint.h>
 
 namespace emesh
 {
@@ -14,26 +13,26 @@ RotateJointState::RotateJointState(s2::MeshJoint* joint, const sm::vec2& first_p
 	: m_joint(joint)
 	, m_angle(0)
 {
-	if (m_joint) {
-		m_joint->AddReference();
-	}
+// 	if (m_joint) {
+// 		m_joint->AddReference();
+// 	}
 
 	m_first_pos = m_last_pos = first_pos;
 }
 
 RotateJointState::~RotateJointState()
 {
-	if (m_joint) {
-		m_joint->RemoveReference();
-	}
+// 	if (m_joint) {
+// 		m_joint->RemoveReference();
+// 	}
 }
 
 void RotateJointState::OnMouseRelease(const sm::vec2& pos)
 {
-	if (m_joint && pos != m_first_pos) {
-		ee::AtomicOP* aop = new RotateJointAOP(m_joint, m_angle);
-		ee::EditAddRecordSJ::Instance()->Add(aop);
-	}
+// 	if (m_joint && pos != m_first_pos) {
+// 		ee::AtomicOP* aop = new RotateJointAOP(m_joint, m_angle);
+// 		ee::EditAddRecordSJ::Instance()->Add(aop);
+// 	}
 }
 
 bool RotateJointState::OnMouseDrag(const sm::vec2& pos)
@@ -48,9 +47,9 @@ bool RotateJointState::OnMouseDrag(const sm::vec2& pos)
 
 void RotateJointState::Rotate(const sm::vec2& dst)
 {
-	float rot = sm::get_angle_in_direction(m_joint->GetWorldPose().trans, m_last_pos, dst);
-	m_joint->Rotate(rot);
-	m_angle += rot;
+// 	float rot = sm::get_angle_in_direction(m_joint->GetWorldPose().trans, m_last_pos, dst);
+// 	m_joint->Rotate(rot);
+// 	m_angle += rot;
 }
 
 }

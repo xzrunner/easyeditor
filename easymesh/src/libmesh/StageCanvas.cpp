@@ -1,6 +1,7 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
 #include "Sprite.h"
+#include "Mesh.h"
 
 #include <ee/SpriteRenderer.h>
 #include <ee/EditPanelImpl.h>

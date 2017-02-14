@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\easyshape\src;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\cu\src\cu;..\..\..\..\particle\src;..\..\..\..\shaderlab\include\;..\..\..\..\polymesh\include\;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\easyshape\src;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\cu\src\cu;..\..\..\..\particle\src;..\..\..\..\shaderlab\include;..\..\..\..\polymesh\include;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -107,7 +107,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\easyshape\src;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\cu\src\cu;..\..\..\..\particle\src;..\..\..\..\shaderlab\include\;..\..\..\..\polymesh\include\;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\easyshape\src;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\cu\src\cu;..\..\..\..\particle\src;..\..\..\..\shaderlab\include;..\..\..\..\polymesh\include;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -229,34 +229,26 @@
 				>
 			</File>
 			<Filter
-				Name="network"
+				Name="2.points"
 				>
 				<File
-					RelativePath="..\..\..\src\libmesh\Network.cpp"
+					RelativePath="..\..\..\src\libmesh\PointsMesh.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libmesh\Network.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libmesh\NetworkShape.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libmesh\NetworkShape.h"
+					RelativePath="..\..\..\src\libmesh\PointsMesh.h"
 					>
 				</File>
 			</Filter>
 			<Filter
-				Name="strip"
+				Name="1.strip"
 				>
 				<File
-					RelativePath="..\..\..\src\libmesh\Strip.cpp"
+					RelativePath="..\..\..\src\libmesh\StripMesh.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libmesh\Strip.h"
+					RelativePath="..\..\..\src\libmesh\StripMesh.h"
 					>
 				</File>
 			</Filter>
@@ -281,14 +273,14 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="skeleton"
+				Name="4.skin"
 				>
 				<File
-					RelativePath="..\..\..\src\libmesh\Skeleton.cpp"
+					RelativePath="..\..\..\src\libmesh\SkeletonMesh.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libmesh\Skeleton.h"
+					RelativePath="..\..\..\src\libmesh\SkeletonMesh.h"
 					>
 				</File>
 			</Filter>
@@ -324,14 +316,14 @@
 					>
 				</File>
 				<Filter
-					Name="1.network"
+					Name="1.points"
 					>
 					<File
-						RelativePath="..\..\..\src\libmesh\CreateNetworkOP.cpp"
+						RelativePath="..\..\..\src\libmesh\CreatePointsMeshOP.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\libmesh\CreateNetworkOP.h"
+						RelativePath="..\..\..\src\libmesh\CreatePointsMeshOP.h"
 						>
 					</File>
 				</Filter>
@@ -339,23 +331,23 @@
 					Name="2.strip"
 					>
 					<File
-						RelativePath="..\..\..\src\libmesh\CreateStripOP.cpp"
+						RelativePath="..\..\..\src\libmesh\CreateStripMeshOP.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\libmesh\CreateStripOP.h"
+						RelativePath="..\..\..\src\libmesh\CreateStripMeshOP.h"
 						>
 					</File>
 				</Filter>
 				<Filter
-					Name="3.skeleton"
+					Name="3.skin"
 					>
 					<File
-						RelativePath="..\..\..\src\libmesh\CreateSkeletonOP.cpp"
+						RelativePath="..\..\..\src\libmesh\CreateSkinMeshOP.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\libmesh\CreateSkeletonOP.h"
+						RelativePath="..\..\..\src\libmesh\CreateSkinMeshOP.h"
 						>
 					</File>
 				</Filter>
@@ -372,22 +364,22 @@
 					>
 				</File>
 				<Filter
-					Name="1.network"
+					Name="1.points"
 					>
 					<File
-						RelativePath="..\..\..\src\libmesh\EditNetworkOP.cpp"
+						RelativePath="..\..\..\src\libmesh\EditPointsMeshOP.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\libmesh\EditNetworkOP.h"
+						RelativePath="..\..\..\src\libmesh\EditPointsMeshOP.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\libmesh\SelectNodesOP.cpp"
+						RelativePath="..\..\..\src\libmesh\SelectPointsMeshOP.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\libmesh\SelectNodesOP.h"
+						RelativePath="..\..\..\src\libmesh\SelectPointsMeshOP.h"
 						>
 					</File>
 				</Filter>

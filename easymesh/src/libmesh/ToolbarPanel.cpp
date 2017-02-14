@@ -6,6 +6,8 @@
 #include "Sprite.h"
 #include "MeshFactory.h"
 
+#include <polymesh/MeshType.h>
+
 namespace emesh
 {
 
@@ -25,18 +27,29 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage, bool full, Sprit
 	SetSizer(InitLayout());	
 }
 
-void ToolbarPanel::SetEditType(pm::MeshType type)
+void ToolbarPanel::SetEditType(int pm_mesh_type)
 {
-	MeshFactory::Instance()->SetShapeType(type);
+	MeshFactory::Instance()->SetShapeType(pm_mesh_type);
 	if (m_create_cmpt) {
-		m_create_cmpt->SetEditOP(type);
+		m_create_cmpt->SetEditOP(pm_mesh_type);
 	}
 	if (m_edit_cmpt) {
-		m_edit_cmpt->SetEditOP(type);
+		m_edit_cmpt->SetEditOP(pm_mesh_type);
 	}
 	m_stage->SetEditOP(GetChildEditOP());
 
-	m_type_choice->SetSelection(type);
+	switch (pm_mesh_type)
+	{
+	case pm::MESH_POINTS:
+		m_type_choice->SetSelection(0);
+		break;
+	case pm::MESH_STRIP:
+		m_type_choice->SetSelection(1);
+		break;
+	case pm::MESH_SKIN:
+		m_type_choice->SetSelection(2);
+		break;
+	}
 }
 
 wxSizer* ToolbarPanel::InitLayout()
@@ -47,12 +60,12 @@ wxSizer* ToolbarPanel::InitLayout()
 	sizer->AddSpacer(15);
 	{
 		wxArrayString choices;
-		choices.Add(wxT("network"));
+		choices.Add(wxT("points"));
 		choices.Add(wxT("strip"));
-		choices.Add(wxT("skeleton"));
+		choices.Add(wxT("skin"));
 		m_type_choice = new wxRadioBox(this, wxID_ANY, wxT("Type"), wxDefaultPosition, wxDefaultSize, choices, 3, wxRA_SPECIFY_ROWS);
 		m_type_choice->SetSelection(0);
-		MeshFactory::Instance()->SetShapeType(s2::MESH_NETWORK);
+		MeshFactory::Instance()->SetShapeType(pm::MESH_POINTS);
 		Connect(m_type_choice->GetId(), wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler(ToolbarPanel::OnChangeType));
 		sizer->Add(m_type_choice);
 	}
@@ -96,7 +109,20 @@ void ToolbarPanel::OnSetSpeed(wxCommandEvent& event)
 void ToolbarPanel::OnChangeType(wxCommandEvent& event)
 {
 	int idx = event.GetSelection();
-	SetEditType(pm::MeshType(idx));
+	pm::MeshType type = pm::MESH_UNKNOWN;
+	switch (idx)
+	{
+	case 0:
+		type = pm::MESH_POINTS;
+		break;
+	case 1:
+		type = pm::MESH_STRIP;
+		break;
+	case 2:
+		type = pm::MESH_SKIN;
+		break;
+	}
+	SetEditType(type);
 	m_stage->RecreateMesh();
 }
 

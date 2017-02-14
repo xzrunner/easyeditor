@@ -1,17 +1,17 @@
-#ifndef _EASYSPRPACKER_TRIANGLES_MESH_H_
-#define _EASYSPRPACKER_TRIANGLES_MESH_H_
+#ifndef _EASYSPRPACKER_SKIN2_MESH_H_
+#define _EASYSPRPACKER_SKIN2_MESH_H_
 
 #include "MeshShape.h"
 
-namespace pm { class Triangles; }
+namespace pm { class Skin2Triangles; }
 
 namespace esprpacker
 {
 
-class TrianglesMesh : public MeshShape
+class Skin2Mesh : public MeshShape
 {
 public:
-	TrianglesMesh(const pm::Triangles* mesh);
+	Skin2Mesh(const pm::Skin2Triangles* mesh);
 
 	virtual int Type() const;
 
@@ -23,10 +23,10 @@ public:
 	virtual void PackToBin(uint8_t** ptr) const;
 
 private:
-	const pm::Triangles* m_mesh;
+	const pm::Skin2Triangles* m_mesh;
 
-}; // TrianglesMesh
+}; // Skin2Mesh
 
 }
 
-#endif // _EASYSPRPACKER_TRIANGLES_MESH_H_
+#endif // _EASYSPRPACKER_SKIN2_MESH_H_

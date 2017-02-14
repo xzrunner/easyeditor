@@ -10,7 +10,6 @@ namespace lua = ebuilder::lua;
 
 #include <simp/NodeMeshSpr.h>
 #include <simp/simp_types.h>
-#include <sprite2/MeshTriangle.h>
 
 namespace esprpacker
 {

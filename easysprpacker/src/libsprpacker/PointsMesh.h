@@ -1,17 +1,17 @@
-#ifndef _EASYSPRPACKER_TRIANGLES_MESH_H_
-#define _EASYSPRPACKER_TRIANGLES_MESH_H_
+#ifndef _EASYSPRPACKER_POINTS_MESH_H_
+#define _EASYSPRPACKER_POINTS_MESH_H_
 
 #include "MeshShape.h"
 
-namespace pm { class Triangles; }
+namespace emesh { class PointsMesh; }
 
 namespace esprpacker
 {
 
-class TrianglesMesh : public MeshShape
+class PointsMesh : public MeshShape
 {
 public:
-	TrianglesMesh(const pm::Triangles* mesh);
+	PointsMesh(const emesh::PointsMesh* mesh);
 
 	virtual int Type() const;
 
@@ -23,10 +23,10 @@ public:
 	virtual void PackToBin(uint8_t** ptr) const;
 
 private:
-	const pm::Triangles* m_mesh;
+	const emesh::PointsMesh* m_mesh;
 
-}; // TrianglesMesh
+}; // PointsMesh
 
 }
 
-#endif // _EASYSPRPACKER_TRIANGLES_MESH_H_
+#endif // _EASYSPRPACKER_POINTS_MESH_H_

@@ -22,7 +22,6 @@
 
 #include <gum/trans_color.h>
 #include <sprite2/S2_Sprite.h>
-#include <sprite2/MeshTriangle.h>
 #include <SM_Process.h>
 
 #include <queue>
@@ -1028,362 +1027,366 @@ void CocoPacker::CalSrcFromUVFixed(sm::vec2 src[4], TPParser::Picture* picture)
 
 int CocoPacker::ParserMesh(const emesh::Sprite* spr)
 {
-	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());
-	ee::Symbol* img_symbol = ee::SymbolMgr::Instance()->FetchSymbol(sym->GetFilepath());
-	TPParser::Picture* picture = m_parser.FindPicture(img_symbol);
-	if (!picture) {
-		std::string str = "\""+sym->GetFilepath()+"\""+" not in the texpacker file 3!";
-		throw ee::Exception(str);
-	}
+// 	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());
+// 	ee::Symbol* img_symbol = ee::SymbolMgr::Instance()->FetchSymbol(sym->GetFilepath());
+// 	TPParser::Picture* picture = m_parser.FindPicture(img_symbol);
+// 	if (!picture) {
+// 		std::string str = "\""+sym->GetFilepath()+"\""+" not in the texpacker file 3!";
+// 		throw ee::Exception(str);
+// 	}
+// 
+// 	//////////////////////////////////////////////////////////////////////////
+// 	// pictures
+// 	//////////////////////////////////////////////////////////////////////////
+// 	// id
+// 	std::map<const ee::Sprite*, int>::iterator itr_sprite = m_mapSpriteID.find(spr);
+// 	if (itr_sprite == m_mapSpriteID.end()) {
+// 		std::string str = "\""+sym->GetFilepath()+"\""+" not in the m_mapSpriteID!";
+// 		throw ee::Exception(str);
+// 	}
+// 	int curr_id = itr_sprite->second;
+// 	// tex
+// 	std::string assign_tex = lua::assign("tex", ee::StringHelper::ToString(picture->tex));
+// 
+// 	int frame = 1;
+// 	if (spr->GetSpeed().y != 0) {
+// 		frame = std::fabs(std::floor(1.0f / spr->GetSpeed().y));
+// 	}
+// 	std::vector<int> frame_size;
+// 	sm::vec2 speed = spr->GetSpeed();
+// 	emesh::Mesh* shape = const_cast<emesh::Mesh*>(dynamic_cast<const emesh::Mesh*>(dynamic_cast<const emesh::Symbol*>(sym)->GetMesh()));
+// 	// 打包emesh::Strip做的流水
+// 	if (dynamic_cast<emesh::Strip*>(shape))
+// 	{
+// 		for (int i = 0; i < frame; ++i)
+// 		{
+// 			// todo 只是具体strip的情况，不支持mesh的旋转
+// 			const std::vector<s2::MeshTriangle*>& tris = shape->GetTriangles();
+// 
+// 			int quad_size = tris.size() / 2;
+// 			frame_size.push_back(quad_size);
+// 
+// 			for (int j = 0; j < quad_size; ++j)
+// 			{
+// 				s2::MeshTriangle* right_down = tris[j*2];
+// 				s2::MeshTriangle* left_up = tris[j*2+1];
+// 
+// 				// id
+// 				lua::TableAssign ta(*m_gen, "picture", false, false);
+// 				m_gen->line(lua::assign("id", ee::StringHelper::ToString(curr_id++)) + ",");
+// 
+// 				// src
+// 				sm::vec2 src[4];
+// 				src[0] = left_up->nodes[2]->uv;
+// 				src[1] = left_up->nodes[0]->uv;
+// 				src[2] = right_down->nodes[1]->uv;
+// 				src[3] = right_down->nodes[2]->uv;
+// 				CalSrcFromUV(src, picture);
+// 				std::string sx0 = ee::StringHelper::ToString(src[0].x), sy0 = ee::StringHelper::ToString(src[0].y);
+// 				std::string sx1 = ee::StringHelper::ToString(src[1].x), sy1 = ee::StringHelper::ToString(src[1].y);
+// 				std::string sx2 = ee::StringHelper::ToString(src[2].x), sy2 = ee::StringHelper::ToString(src[2].y);
+// 				std::string sx3 = ee::StringHelper::ToString(src[3].x), sy3 = ee::StringHelper::ToString(src[3].y);
+// 				std::string assign_src = lua::assign("src", 
+// 					lua::tableassign("", 8, sx0, sy0, sx1, sy1, sx2, sy2, sx3, sy3));		
+// 
+// 				// screen
+// 				sm::vec2 screen[4];
+// 				screen[0] = left_up->nodes[2]->xy;
+// 				screen[1] = left_up->nodes[0]->xy;
+// 				screen[2] = right_down->nodes[1]->xy;
+// 				screen[3] = right_down->nodes[2]->xy;
+// 				// 			// translate
+// 				// 			for (size_t i = 0; i < 4; ++i)
+// 				// 				screen[i] += spr->getPosition();
+// 				// flip y
+// 				for (size_t i = 0; i < 4; ++i)
+// 					screen[i].y = -screen[i].y;
+// 				// scale 16
+// 				const float SCALE = 16;
+// 				for (size_t i = 0; i < 4; ++i)
+// 					screen[i] *= SCALE; 
+// 				std::string dx0 = ee::StringHelper::ToString(screen[0].x); std::string dy0 = ee::StringHelper::ToString(screen[0].y);
+// 				std::string dx1 = ee::StringHelper::ToString(screen[1].x); std::string dy1 = ee::StringHelper::ToString(screen[1].y);
+// 				std::string dx2 = ee::StringHelper::ToString(screen[2].x); std::string dy2 = ee::StringHelper::ToString(screen[2].y);
+// 				std::string dx3 = ee::StringHelper::ToString(screen[3].x); std::string dy3 = ee::StringHelper::ToString(screen[3].y);
+// 				std::string assign_screen = lua::assign("screen", 
+// 					lua::tableassign("", 8, dx0, dy0, dx1, dy1, dx2, dy2, dx3, dy3));
+// 
+// 				lua::tableassign(*m_gen, "", 3, assign_tex, assign_src, assign_screen);
+// 			}
+// 			shape->OffsetUV(speed.x, speed.y);
+// 		}
+// 	}
+// 	// 打包普通emesh::Mesh
+// 	else if (dynamic_cast<emesh::Network*>(shape))
+// 	{
+// 		const std::vector<s2::MeshTriangle*>& tris = shape->GetTriangles();
+// 		frame_size.push_back(tris.size());
+// 		for (int i = 0, n = tris.size(); i < n; ++i)
+// 		{
+// 			s2::MeshTriangle* tri = tris[i];
+// 
+// 			// id
+// 			lua::TableAssign ta(*m_gen, "picture", false, false);
+// 			m_gen->line(lua::assign("id", ee::StringHelper::ToString(curr_id++)) + ",");
+// 
+// 			// src
+// 			sm::vec2 src[4];
+// 			src[0] = tri->nodes[0]->uv;
+// 			src[1] = tri->nodes[1]->uv;
+// 			src[2] = tri->nodes[2]->uv;
+// 			src[3] = tri->nodes[2]->uv;
+// 			CalSrcFromUV(src, picture);
+// 			std::string sx0 = ee::StringHelper::ToString(src[0].x), sy0 = ee::StringHelper::ToString(src[0].y);
+// 			std::string sx1 = ee::StringHelper::ToString(src[1].x), sy1 = ee::StringHelper::ToString(src[1].y);
+// 			std::string sx2 = ee::StringHelper::ToString(src[2].x), sy2 = ee::StringHelper::ToString(src[2].y);
+// 			std::string sx3 = ee::StringHelper::ToString(src[3].x), sy3 = ee::StringHelper::ToString(src[3].y);
+// 			std::string assign_src = lua::assign("src", 
+// 				lua::tableassign("", 8, sx0, sy0, sx1, sy1, sx2, sy2, sx3, sy3));		
+// 
+// 			// screen
+// 			sm::vec2 screen[4];
+// 			screen[0] = tri->nodes[0]->xy;
+// 			screen[1] = tri->nodes[1]->xy;
+// 			screen[2] = tri->nodes[2]->xy;
+// 			screen[3] = tri->nodes[2]->xy;
+// 			// 			// translate
+// 			// 			for (size_t i = 0; i < 4; ++i)
+// 			// 				screen[i] += spr->getPosition();
+// 			// flip y
+// 			for (size_t i = 0; i < 4; ++i)
+// 				screen[i].y = -screen[i].y;
+// 			// scale 16
+// 			const float SCALE = 16;
+// 			for (size_t i = 0; i < 4; ++i)
+// 				screen[i] *= SCALE; 
+// 			std::string dx0 = ee::StringHelper::ToString(screen[0].x); std::string dy0 = ee::StringHelper::ToString(screen[0].y);
+// 			std::string dx1 = ee::StringHelper::ToString(screen[1].x); std::string dy1 = ee::StringHelper::ToString(screen[1].y);
+// 			std::string dx2 = ee::StringHelper::ToString(screen[2].x); std::string dy2 = ee::StringHelper::ToString(screen[2].y);
+// 			std::string dx3 = ee::StringHelper::ToString(screen[3].x); std::string dy3 = ee::StringHelper::ToString(screen[3].y);
+// 			std::string assign_screen = lua::assign("screen", 
+// 				lua::tableassign("", 8, dx0, dy0, dx1, dy1, dx2, dy2, dx3, dy3));
+// 
+// 			lua::tableassign(*m_gen, "", 3, assign_tex, assign_src, assign_screen);
+// 		}
+// 	}
+// 
+// 	//////////////////////////////////////////////////////////////////////////
+// 	// animation
+// 	//////////////////////////////////////////////////////////////////////////
+// 	lua::TableAssign ta(*m_gen, "animation", false, false);
+// 	// export
+// 	if (!sym->name.empty())
+// 		m_gen->line(lua::assign("export", "\""+sym->name+"\"")+",");
+//  	// id
+//  	std::map<const ee::Symbol*, int>::iterator itr_mesh_symbol = m_mapSymbolID.find(sym);
+//  	if (itr_mesh_symbol == m_mapSymbolID.end()) {
+//  		std::string str = "\""+sym->GetFilepath()+"\""+" not in m_mapSymbolID 1!";
+//  		throw ee::Exception(str);
+//  	}
+//  	std::string sid = ee::StringHelper::ToString(itr_mesh_symbol->second);
+//  	m_gen->line(lua::assign("id", sid) + ",");
+// 	// component
+// 	{
+// 		lua::TableAssign ta(*m_gen, "component", true);
+// 		for (int id = itr_sprite->second; id < curr_id; ++id)
+// 		{
+// 			std::string assign_id = lua::assign("id", ee::StringHelper::ToString(id));
+// 			lua::tableassign(*m_gen, "", 1, assign_id);
+// 		}
+// 	}
+// 	// frames
+// 	int id = 0;
+// 	{
+// 		lua::TableAssign ta(*m_gen, "", true);
+// 		
+// 		for (int i = 0; i < frame; ++i)
+// 		{
+// 			lua::TableAssign ta(*m_gen, "", true);
+// 			for (int j = 0; j < frame_size[i]; ++j)
+// 			{
+// 				std::vector<std::string> params;
+// 				std::string assign_index = lua::assign("index", ee::StringHelper::ToString(id++));
+// 				params.push_back(assign_index);
+// 				GetColorAssignParams(spr, params);
+// 				lua::tableassign(*m_gen, "", params);
+// 			}
+// 		}
+// 	}
+// 
+// 	return id;
 
-	//////////////////////////////////////////////////////////////////////////
-	// pictures
-	//////////////////////////////////////////////////////////////////////////
-	// id
-	std::map<const ee::Sprite*, int>::iterator itr_sprite = m_mapSpriteID.find(spr);
-	if (itr_sprite == m_mapSpriteID.end()) {
-		std::string str = "\""+sym->GetFilepath()+"\""+" not in the m_mapSpriteID!";
-		throw ee::Exception(str);
-	}
-	int curr_id = itr_sprite->second;
-	// tex
-	std::string assign_tex = lua::assign("tex", ee::StringHelper::ToString(picture->tex));
-
-	int frame = 1;
-	if (spr->GetSpeed().y != 0) {
-		frame = std::fabs(std::floor(1.0f / spr->GetSpeed().y));
-	}
-	std::vector<int> frame_size;
-	sm::vec2 speed = spr->GetSpeed();
-	emesh::Mesh* shape = const_cast<emesh::Mesh*>(dynamic_cast<const emesh::Mesh*>(dynamic_cast<const emesh::Symbol*>(sym)->GetMesh()));
-	// 打包emesh::Strip做的流水
-	if (dynamic_cast<emesh::Strip*>(shape))
-	{
-		for (int i = 0; i < frame; ++i)
-		{
-			// todo 只是具体strip的情况，不支持mesh的旋转
-			const std::vector<s2::MeshTriangle*>& tris = shape->GetTriangles();
-
-			int quad_size = tris.size() / 2;
-			frame_size.push_back(quad_size);
-
-			for (int j = 0; j < quad_size; ++j)
-			{
-				s2::MeshTriangle* right_down = tris[j*2];
-				s2::MeshTriangle* left_up = tris[j*2+1];
-
-				// id
-				lua::TableAssign ta(*m_gen, "picture", false, false);
-				m_gen->line(lua::assign("id", ee::StringHelper::ToString(curr_id++)) + ",");
-
-				// src
-				sm::vec2 src[4];
-				src[0] = left_up->nodes[2]->uv;
-				src[1] = left_up->nodes[0]->uv;
-				src[2] = right_down->nodes[1]->uv;
-				src[3] = right_down->nodes[2]->uv;
-				CalSrcFromUV(src, picture);
-				std::string sx0 = ee::StringHelper::ToString(src[0].x), sy0 = ee::StringHelper::ToString(src[0].y);
-				std::string sx1 = ee::StringHelper::ToString(src[1].x), sy1 = ee::StringHelper::ToString(src[1].y);
-				std::string sx2 = ee::StringHelper::ToString(src[2].x), sy2 = ee::StringHelper::ToString(src[2].y);
-				std::string sx3 = ee::StringHelper::ToString(src[3].x), sy3 = ee::StringHelper::ToString(src[3].y);
-				std::string assign_src = lua::assign("src", 
-					lua::tableassign("", 8, sx0, sy0, sx1, sy1, sx2, sy2, sx3, sy3));		
-
-				// screen
-				sm::vec2 screen[4];
-				screen[0] = left_up->nodes[2]->xy;
-				screen[1] = left_up->nodes[0]->xy;
-				screen[2] = right_down->nodes[1]->xy;
-				screen[3] = right_down->nodes[2]->xy;
-				// 			// translate
-				// 			for (size_t i = 0; i < 4; ++i)
-				// 				screen[i] += spr->getPosition();
-				// flip y
-				for (size_t i = 0; i < 4; ++i)
-					screen[i].y = -screen[i].y;
-				// scale 16
-				const float SCALE = 16;
-				for (size_t i = 0; i < 4; ++i)
-					screen[i] *= SCALE; 
-				std::string dx0 = ee::StringHelper::ToString(screen[0].x); std::string dy0 = ee::StringHelper::ToString(screen[0].y);
-				std::string dx1 = ee::StringHelper::ToString(screen[1].x); std::string dy1 = ee::StringHelper::ToString(screen[1].y);
-				std::string dx2 = ee::StringHelper::ToString(screen[2].x); std::string dy2 = ee::StringHelper::ToString(screen[2].y);
-				std::string dx3 = ee::StringHelper::ToString(screen[3].x); std::string dy3 = ee::StringHelper::ToString(screen[3].y);
-				std::string assign_screen = lua::assign("screen", 
-					lua::tableassign("", 8, dx0, dy0, dx1, dy1, dx2, dy2, dx3, dy3));
-
-				lua::tableassign(*m_gen, "", 3, assign_tex, assign_src, assign_screen);
-			}
-			shape->OffsetUV(speed.x, speed.y);
-		}
-	}
-	// 打包普通emesh::Mesh
-	else if (dynamic_cast<emesh::Network*>(shape))
-	{
-		const std::vector<s2::MeshTriangle*>& tris = shape->GetTriangles();
-		frame_size.push_back(tris.size());
-		for (int i = 0, n = tris.size(); i < n; ++i)
-		{
-			s2::MeshTriangle* tri = tris[i];
-
-			// id
-			lua::TableAssign ta(*m_gen, "picture", false, false);
-			m_gen->line(lua::assign("id", ee::StringHelper::ToString(curr_id++)) + ",");
-
-			// src
-			sm::vec2 src[4];
-			src[0] = tri->nodes[0]->uv;
-			src[1] = tri->nodes[1]->uv;
-			src[2] = tri->nodes[2]->uv;
-			src[3] = tri->nodes[2]->uv;
-			CalSrcFromUV(src, picture);
-			std::string sx0 = ee::StringHelper::ToString(src[0].x), sy0 = ee::StringHelper::ToString(src[0].y);
-			std::string sx1 = ee::StringHelper::ToString(src[1].x), sy1 = ee::StringHelper::ToString(src[1].y);
-			std::string sx2 = ee::StringHelper::ToString(src[2].x), sy2 = ee::StringHelper::ToString(src[2].y);
-			std::string sx3 = ee::StringHelper::ToString(src[3].x), sy3 = ee::StringHelper::ToString(src[3].y);
-			std::string assign_src = lua::assign("src", 
-				lua::tableassign("", 8, sx0, sy0, sx1, sy1, sx2, sy2, sx3, sy3));		
-
-			// screen
-			sm::vec2 screen[4];
-			screen[0] = tri->nodes[0]->xy;
-			screen[1] = tri->nodes[1]->xy;
-			screen[2] = tri->nodes[2]->xy;
-			screen[3] = tri->nodes[2]->xy;
-			// 			// translate
-			// 			for (size_t i = 0; i < 4; ++i)
-			// 				screen[i] += spr->getPosition();
-			// flip y
-			for (size_t i = 0; i < 4; ++i)
-				screen[i].y = -screen[i].y;
-			// scale 16
-			const float SCALE = 16;
-			for (size_t i = 0; i < 4; ++i)
-				screen[i] *= SCALE; 
-			std::string dx0 = ee::StringHelper::ToString(screen[0].x); std::string dy0 = ee::StringHelper::ToString(screen[0].y);
-			std::string dx1 = ee::StringHelper::ToString(screen[1].x); std::string dy1 = ee::StringHelper::ToString(screen[1].y);
-			std::string dx2 = ee::StringHelper::ToString(screen[2].x); std::string dy2 = ee::StringHelper::ToString(screen[2].y);
-			std::string dx3 = ee::StringHelper::ToString(screen[3].x); std::string dy3 = ee::StringHelper::ToString(screen[3].y);
-			std::string assign_screen = lua::assign("screen", 
-				lua::tableassign("", 8, dx0, dy0, dx1, dy1, dx2, dy2, dx3, dy3));
-
-			lua::tableassign(*m_gen, "", 3, assign_tex, assign_src, assign_screen);
-		}
-	}
-
-	//////////////////////////////////////////////////////////////////////////
-	// animation
-	//////////////////////////////////////////////////////////////////////////
-	lua::TableAssign ta(*m_gen, "animation", false, false);
-	// export
-	if (!sym->name.empty())
-		m_gen->line(lua::assign("export", "\""+sym->name+"\"")+",");
- 	// id
- 	std::map<const ee::Symbol*, int>::iterator itr_mesh_symbol = m_mapSymbolID.find(sym);
- 	if (itr_mesh_symbol == m_mapSymbolID.end()) {
- 		std::string str = "\""+sym->GetFilepath()+"\""+" not in m_mapSymbolID 1!";
- 		throw ee::Exception(str);
- 	}
- 	std::string sid = ee::StringHelper::ToString(itr_mesh_symbol->second);
- 	m_gen->line(lua::assign("id", sid) + ",");
-	// component
-	{
-		lua::TableAssign ta(*m_gen, "component", true);
-		for (int id = itr_sprite->second; id < curr_id; ++id)
-		{
-			std::string assign_id = lua::assign("id", ee::StringHelper::ToString(id));
-			lua::tableassign(*m_gen, "", 1, assign_id);
-		}
-	}
-	// frames
-	int id = 0;
-	{
-		lua::TableAssign ta(*m_gen, "", true);
-		
-		for (int i = 0; i < frame; ++i)
-		{
-			lua::TableAssign ta(*m_gen, "", true);
-			for (int j = 0; j < frame_size[i]; ++j)
-			{
-				std::vector<std::string> params;
-				std::string assign_index = lua::assign("index", ee::StringHelper::ToString(id++));
-				params.push_back(assign_index);
-				GetColorAssignParams(spr, params);
-				lua::tableassign(*m_gen, "", params);
-			}
-		}
-	}
-
-	return id;
+	return 0;
 }
 
 int CocoPacker::ParserTerrain2D(const eterrain2d::Sprite* spr)
 {
-	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());
-	std::map<const ee::Symbol*, int>::iterator itr_mesh_symbol = m_mapSymbolID.find(sym);
-	if (itr_mesh_symbol == m_mapSymbolID.end()) {
-		std::string str = "\""+sym->GetFilepath()+"\""+" not in m_mapSymbolID 2!";
-		throw ee::Exception(str);
-	}
+// 	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());
+// 	std::map<const ee::Symbol*, int>::iterator itr_mesh_symbol = m_mapSymbolID.find(sym);
+// 	if (itr_mesh_symbol == m_mapSymbolID.end()) {
+// 		std::string str = "\""+sym->GetFilepath()+"\""+" not in m_mapSymbolID 2!";
+// 		throw ee::Exception(str);
+// 	}
+// 
+// 	if (m_terrain2d_ids.find(itr_mesh_symbol->second) != m_terrain2d_ids.end()) {
+// 		return 0;
+// 	} else {
+// 		m_terrain2d_ids.insert(itr_mesh_symbol->second);
+// 	}
+// 
+// 	// only use one texture in the sprite
+// 
+// 	const std::vector<eterrain2d::OceanMesh*> oceans = static_cast<const eterrain2d::Symbol*>(sym)->GetOceans();
+// 	assert(oceans.size() == 1);
+// 	eterrain2d::OceanMesh* ocean = oceans[0];
+// 	const ee::ImageSymbol* img = ocean->GetImage0();
+// 	ee::Symbol* img_symbol = ee::SymbolMgr::Instance()->FetchSymbol(img->GetFilepath());
+// 	TPParser::Picture* picture = m_parser.FindPicture(img_symbol);
+// 	if (!picture) {
+// 		std::string str = "\""+sym->GetFilepath()+"\""+" not in the texpacker file 4!";
+// 		throw ee::Exception(str);
+// 	}
+// 
+// 	//////////////////////////////////////////////////////////////////////////
+// 	// pictures
+// 	//////////////////////////////////////////////////////////////////////////
+// 	// id
+// 	std::map<const ee::Sprite*, int>::iterator itr_sprite = m_mapSpriteID.find(spr);
+// 	if (itr_sprite == m_mapSpriteID.end()) {
+// 		std::string str = "\""+sym->GetFilepath()+"\""+" not in the m_mapSpriteID!";
+// 		throw ee::Exception(str);
+// 	}
+// 	int curr_id = itr_sprite->second;
+// 	// tex
+// 	std::string assign_tex = lua::assign("tex", ee::StringHelper::ToString(picture->tex));
+// 
+// 	static const float FPS = 30;
+// 
+// 	int frame = (int)(fabs(FPS / ocean->GetUVMoveSpeed().y));
+// 
+// 	for (int i = 0; i < oceans.size(); ++i) {
+// 		eterrain2d::OceanMesh* ocean = oceans[i];
+// 		ocean->Build();
+// 	}
+// 
+// 	std::vector<int> frames_count;
+// 	for (int i = 0; i < frame; ++i)
+// 	{
+// 		int img_count = 0;
+// 
+// 		for (int i = 0; i < oceans.size(); ++i) {
+// 			eterrain2d::OceanMesh* ocean = oceans[i];
+// 			ocean->OpenWave(false);
+// 			ocean->OpenBlend(false);
+// 			const std::vector<eterrain2d::MeshShape*>& meshes = ocean->GetMeshes();
+// 
+// 			// id
+// 			lua::TableAssign ta(*m_gen, "picture", false, false);
+// 			m_gen->line(lua::assign("id", ee::StringHelper::ToString(curr_id++)) + ",");
+// 
+// 			
+// 
+// 			++img_count;
+// 
+// 			for (int j = 0; j < meshes.size(); ++j) {
+// 				const eterrain2d::MeshShape* mesh = meshes[j];
+// 				const std::vector<s2::MeshTriangle*>& tris = mesh->GetTriangles();
+// 				for (int k = 0; k < tris.size(); ++k) {
+// 					// same with 打包普通emesh::Mesh
+// 
+// 					s2::MeshTriangle* tri = tris[k];
+// 
+// 					// src
+// 					sm::vec2 src[4];
+// 					src[0] = tri->nodes[0]->uv;
+// 					src[1] = tri->nodes[1]->uv;
+// 					src[2] = tri->nodes[2]->uv;
+// 					src[3] = tri->nodes[2]->uv;
+// 					CalSrcFromUVFixed(src, picture);
+// 					std::string sx0 = ee::StringHelper::ToString(src[0].x), sy0 = ee::StringHelper::ToString(src[0].y);
+// 					std::string sx1 = ee::StringHelper::ToString(src[1].x), sy1 = ee::StringHelper::ToString(src[1].y);
+// 					std::string sx2 = ee::StringHelper::ToString(src[2].x), sy2 = ee::StringHelper::ToString(src[2].y);
+// 					std::string sx3 = ee::StringHelper::ToString(src[3].x), sy3 = ee::StringHelper::ToString(src[3].y);
+// 					std::string assign_src = lua::assign("src", lua::tableassign("", 8, sx0, sy0, 
+// 						sx1, sy1, sx2, sy2, sx3, sy3));		
+// 
+// 					// screen
+// 					sm::vec2 screen[4];
+// 					screen[0] = tri->nodes[0]->xy;
+// 					screen[1] = tri->nodes[1]->xy;
+// 					screen[2] = tri->nodes[2]->xy;
+// 					screen[3] = tri->nodes[2]->xy;
+// 					// 			// translate
+// 					// 			for (size_t i = 0; i < 4; ++i)
+// 					// 				screen[i] += spr->getPosition();
+// 					// flip y
+// 					for (size_t i = 0; i < 4; ++i)
+// 						screen[i].y = -screen[i].y;
+// 					// scale 16
+// 					const float SCALE = 16;
+// 					for (size_t i = 0; i < 4; ++i)
+// 						screen[i] *= SCALE; 
+// 					std::string dx0 = ee::StringHelper::ToString(screen[0].x); std::string dy0 = ee::StringHelper::ToString(screen[0].y);
+// 					std::string dx1 = ee::StringHelper::ToString(screen[1].x); std::string dy1 = ee::StringHelper::ToString(screen[1].y);
+// 					std::string dx2 = ee::StringHelper::ToString(screen[2].x); std::string dy2 = ee::StringHelper::ToString(screen[2].y);
+// 					std::string dx3 = ee::StringHelper::ToString(screen[3].x); std::string dy3 = ee::StringHelper::ToString(screen[3].y);
+// 					std::string assign_screen = lua::assign("screen", lua::tableassign("", 8, dx0, dy0, 
+// 						dx1, dy1, dx2, dy2, dx3, dy3));
+// 
+// 					lua::tableassign(*m_gen, "", 3, assign_tex, assign_src, assign_screen);
+// 				}
+// 			}
+// 
+// 			ocean->Update(1 / FPS);
+// 		}
+// 
+//  		frames_count.push_back(img_count);
+// 	}
+// 
+// 	//////////////////////////////////////////////////////////////////////////
+// 	// animation
+// 	//////////////////////////////////////////////////////////////////////////
+// 
+// 	// copy from ParserMesh
+// 
+// 	lua::TableAssign ta(*m_gen, "animation", false, false);
+// 	// export
+// 	if (!sym->name.empty())
+// 		m_gen->line(lua::assign("export", "\""+sym->name+"\"")+",");
+// 
+// 	std::string sid = ee::StringHelper::ToString(itr_mesh_symbol->second);
+// 	m_gen->line(lua::assign("id", sid) + ",");
+// 	// component
+// 	{
+// 		lua::TableAssign ta(*m_gen, "component", true);
+// 		for (int id = itr_sprite->second; id < curr_id; ++id)
+// 		{
+// 			std::string assign_id = lua::assign("id", ee::StringHelper::ToString(id));
+// 			lua::tableassign(*m_gen, "", 1, assign_id);
+// 		}
+// 	}
+// 	// frames
+// 	int id = 0;
+// 	{
+// 		lua::TableAssign ta(*m_gen, "", true);
+// 
+// 		for (int i = 0; i < frame; ++i)
+// 		{
+// 			lua::TableAssign ta(*m_gen, "", true);
+// 			for (int j = 0; j < frames_count[i]; ++j)
+// 			{
+// 				std::vector<std::string> params;
+// 				std::string assign_index = lua::assign("index", ee::StringHelper::ToString(id++));
+// 				params.push_back(assign_index);
+// 				GetColorAssignParams(spr, params);
+// 				lua::tableassign(*m_gen, "", params);
+// 			}
+// 		}
+// 	}
+// 
+// 	return id;
 
-	if (m_terrain2d_ids.find(itr_mesh_symbol->second) != m_terrain2d_ids.end()) {
-		return 0;
-	} else {
-		m_terrain2d_ids.insert(itr_mesh_symbol->second);
-	}
-
-	// only use one texture in the sprite
-
-	const std::vector<eterrain2d::OceanMesh*> oceans = static_cast<const eterrain2d::Symbol*>(sym)->GetOceans();
-	assert(oceans.size() == 1);
-	eterrain2d::OceanMesh* ocean = oceans[0];
-	const ee::ImageSymbol* img = ocean->GetImage0();
-	ee::Symbol* img_symbol = ee::SymbolMgr::Instance()->FetchSymbol(img->GetFilepath());
-	TPParser::Picture* picture = m_parser.FindPicture(img_symbol);
-	if (!picture) {
-		std::string str = "\""+sym->GetFilepath()+"\""+" not in the texpacker file 4!";
-		throw ee::Exception(str);
-	}
-
-	//////////////////////////////////////////////////////////////////////////
-	// pictures
-	//////////////////////////////////////////////////////////////////////////
-	// id
-	std::map<const ee::Sprite*, int>::iterator itr_sprite = m_mapSpriteID.find(spr);
-	if (itr_sprite == m_mapSpriteID.end()) {
-		std::string str = "\""+sym->GetFilepath()+"\""+" not in the m_mapSpriteID!";
-		throw ee::Exception(str);
-	}
-	int curr_id = itr_sprite->second;
-	// tex
-	std::string assign_tex = lua::assign("tex", ee::StringHelper::ToString(picture->tex));
-
-	static const float FPS = 30;
-
-	int frame = (int)(fabs(FPS / ocean->GetUVMoveSpeed().y));
-
-	for (int i = 0; i < oceans.size(); ++i) {
-		eterrain2d::OceanMesh* ocean = oceans[i];
-		ocean->Build();
-	}
-
-	std::vector<int> frames_count;
-	for (int i = 0; i < frame; ++i)
-	{
-		int img_count = 0;
-
-		for (int i = 0; i < oceans.size(); ++i) {
-			eterrain2d::OceanMesh* ocean = oceans[i];
-			ocean->OpenWave(false);
-			ocean->OpenBlend(false);
-			const std::vector<eterrain2d::MeshShape*>& meshes = ocean->GetMeshes();
-
-			// id
-			lua::TableAssign ta(*m_gen, "picture", false, false);
-			m_gen->line(lua::assign("id", ee::StringHelper::ToString(curr_id++)) + ",");
-
-			
-
-			++img_count;
-
-			for (int j = 0; j < meshes.size(); ++j) {
-				const eterrain2d::MeshShape* mesh = meshes[j];
-				const std::vector<s2::MeshTriangle*>& tris = mesh->GetTriangles();
-				for (int k = 0; k < tris.size(); ++k) {
-					// same with 打包普通emesh::Mesh
-
-					s2::MeshTriangle* tri = tris[k];
-
-					// src
-					sm::vec2 src[4];
-					src[0] = tri->nodes[0]->uv;
-					src[1] = tri->nodes[1]->uv;
-					src[2] = tri->nodes[2]->uv;
-					src[3] = tri->nodes[2]->uv;
-					CalSrcFromUVFixed(src, picture);
-					std::string sx0 = ee::StringHelper::ToString(src[0].x), sy0 = ee::StringHelper::ToString(src[0].y);
-					std::string sx1 = ee::StringHelper::ToString(src[1].x), sy1 = ee::StringHelper::ToString(src[1].y);
-					std::string sx2 = ee::StringHelper::ToString(src[2].x), sy2 = ee::StringHelper::ToString(src[2].y);
-					std::string sx3 = ee::StringHelper::ToString(src[3].x), sy3 = ee::StringHelper::ToString(src[3].y);
-					std::string assign_src = lua::assign("src", lua::tableassign("", 8, sx0, sy0, 
-						sx1, sy1, sx2, sy2, sx3, sy3));		
-
-					// screen
-					sm::vec2 screen[4];
-					screen[0] = tri->nodes[0]->xy;
-					screen[1] = tri->nodes[1]->xy;
-					screen[2] = tri->nodes[2]->xy;
-					screen[3] = tri->nodes[2]->xy;
-					// 			// translate
-					// 			for (size_t i = 0; i < 4; ++i)
-					// 				screen[i] += spr->getPosition();
-					// flip y
-					for (size_t i = 0; i < 4; ++i)
-						screen[i].y = -screen[i].y;
-					// scale 16
-					const float SCALE = 16;
-					for (size_t i = 0; i < 4; ++i)
-						screen[i] *= SCALE; 
-					std::string dx0 = ee::StringHelper::ToString(screen[0].x); std::string dy0 = ee::StringHelper::ToString(screen[0].y);
-					std::string dx1 = ee::StringHelper::ToString(screen[1].x); std::string dy1 = ee::StringHelper::ToString(screen[1].y);
-					std::string dx2 = ee::StringHelper::ToString(screen[2].x); std::string dy2 = ee::StringHelper::ToString(screen[2].y);
-					std::string dx3 = ee::StringHelper::ToString(screen[3].x); std::string dy3 = ee::StringHelper::ToString(screen[3].y);
-					std::string assign_screen = lua::assign("screen", lua::tableassign("", 8, dx0, dy0, 
-						dx1, dy1, dx2, dy2, dx3, dy3));
-
-					lua::tableassign(*m_gen, "", 3, assign_tex, assign_src, assign_screen);
-				}
-			}
-
-			ocean->Update(1 / FPS);
-		}
-
- 		frames_count.push_back(img_count);
-	}
-
-	//////////////////////////////////////////////////////////////////////////
-	// animation
-	//////////////////////////////////////////////////////////////////////////
-
-	// copy from ParserMesh
-
-	lua::TableAssign ta(*m_gen, "animation", false, false);
-	// export
-	if (!sym->name.empty())
-		m_gen->line(lua::assign("export", "\""+sym->name+"\"")+",");
-
-	std::string sid = ee::StringHelper::ToString(itr_mesh_symbol->second);
-	m_gen->line(lua::assign("id", sid) + ",");
-	// component
-	{
-		lua::TableAssign ta(*m_gen, "component", true);
-		for (int id = itr_sprite->second; id < curr_id; ++id)
-		{
-			std::string assign_id = lua::assign("id", ee::StringHelper::ToString(id));
-			lua::tableassign(*m_gen, "", 1, assign_id);
-		}
-	}
-	// frames
-	int id = 0;
-	{
-		lua::TableAssign ta(*m_gen, "", true);
-
-		for (int i = 0; i < frame; ++i)
-		{
-			lua::TableAssign ta(*m_gen, "", true);
-			for (int j = 0; j < frames_count[i]; ++j)
-			{
-				std::vector<std::string> params;
-				std::string assign_index = lua::assign("index", ee::StringHelper::ToString(id++));
-				params.push_back(assign_index);
-				GetColorAssignParams(spr, params);
-				lua::tableassign(*m_gen, "", params);
-			}
-		}
-	}
-
-	return id;
+	return 0;
 }
 
 int CocoPacker::ParserTexture(const etexture::Sprite* spr)

@@ -1,31 +1,26 @@
-#include "SelectNodesOP.h"
+#include "SelectPointsMeshOP.h"
 #include "StagePanel.h"
-#include "Network.h"
+#include "PointsMesh.h"
 #include "color_config.h"
 
 #include <ee/panel_msg.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/EditPanelImpl.h>
 
+#include <polymesh/Mesh.h>
 #include <sprite2/S2_RVG.h>
-#include <sprite2/MeshNode.h>
 
 namespace emesh
 {
 
-SelectNodesOP::SelectNodesOP(StagePanel* stage)
+SelectPointsMeshOP::SelectPointsMeshOP(StagePanel* stage)
 	: ee::DrawRectangleOP(stage, stage->GetStageImpl(), false)
 	, m_draggable(true)
 {
 	m_first_pos.MakeInvalid();
 }
 
-SelectNodesOP::~SelectNodesOP()
-{
-	m_selection.Clear();
-}
-
-bool SelectNodesOP::OnMouseLeftDown(int x, int y)
+bool SelectPointsMeshOP::OnMouseLeftDown(int x, int y)
 {
 	if (ee::DrawRectangleOP::OnMouseLeftDown(x, y)) 
 		return true;
@@ -34,22 +29,23 @@ bool SelectNodesOP::OnMouseLeftDown(int x, int y)
 	if (!mesh) return false;
 
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-	s2::MeshNode* selected = mesh->PointQueryNode(pos);
-	if (selected)
+	int selected = mesh->PointQueryVertex(pos);
+	if (selected != -1)
 	{
+		std::set<int>::iterator itr = m_selection.find(selected);
 		if (m_stage->GetKeyState(WXK_CONTROL))
 		{
-			if (m_selection.IsExist(selected)) {
-				m_selection.Remove(selected);
+			if (itr != m_selection.end()) {
+				m_selection.erase(itr);
 			} else {
-				m_selection.Add(selected);
+				m_selection.insert(selected);
 			}
 		}
 		else
 		{
-			if (!m_selection.IsExist(selected)) {
-				m_selection.Clear();
-				m_selection.Add(selected);
+			if (itr == m_selection.end()) {
+				m_selection.clear();
+				m_selection.insert(selected);
 			}
 		}
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -62,7 +58,7 @@ bool SelectNodesOP::OnMouseLeftDown(int x, int y)
 		if (m_stage->GetKeyState(WXK_CONTROL)) {
 			m_draggable = false;
 		} else {
-			m_selection.Clear();
+			m_selection.clear();
 			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 	}
@@ -70,7 +66,7 @@ bool SelectNodesOP::OnMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool SelectNodesOP::OnMouseLeftUp(int x, int y)
+bool SelectPointsMeshOP::OnMouseLeftUp(int x, int y)
 {
 	if (DrawRectangleOP::OnMouseLeftUp(x, y)) return true;
 
@@ -81,10 +77,10 @@ bool SelectNodesOP::OnMouseLeftUp(int x, int y)
 	{
 		sm::vec2 end = m_stage->TransPosScrToProj(x, y);
 		sm::rect rect(m_first_pos, end);
-		std::vector<s2::MeshNode*> nodes;
-		mesh->RectQueryNodes(rect, nodes);
-		for (size_t i = 0, n = nodes.size(); i < n; ++i) {
-			m_selection.Add(nodes[i]);
+		std::vector<int> vertices;
+		mesh->RectQueryVertices(rect, vertices);
+		for (size_t i = 0, n = vertices.size(); i < n; ++i) {
+			m_selection.insert(vertices[i]);
 		}
 
 		m_first_pos.MakeInvalid();
@@ -97,14 +93,14 @@ bool SelectNodesOP::OnMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool SelectNodesOP::OnMouseDrag(int x, int y)
+bool SelectPointsMeshOP::OnMouseDrag(int x, int y)
 {
 	if (ee::DrawRectangleOP::OnMouseDrag(x, y)) return true;
 
 	return !m_draggable;
 }
 
-bool SelectNodesOP::OnDraw() const
+bool SelectPointsMeshOP::OnDraw() const
 {
 	if (m_first_pos.IsValid())
 	{
@@ -112,26 +108,27 @@ bool SelectNodesOP::OnDraw() const
 			return true;
 	}
 
-	std::vector<s2::MeshNode*> nodes;
-	m_selection.Traverse(ee::FetchAllVisitor<s2::MeshNode>(nodes));
-	std::vector<sm::vec2> points;
-	points.reserve(nodes.size());
-	for (int i = 0, n = nodes.size(); i < n; ++i)
-		points.push_back(nodes[i]->xy);
+	if (Mesh* mesh = static_cast<StagePanel*>(m_wnd)->GetMesh()) 
+	{
+		std::vector<sm::vec2> vertices, texcoords;
+		std::vector<int> triangles;
+		mesh->GetMesh()->Dump(vertices, texcoords, triangles);
 
-	if (Mesh* mesh = static_cast<StagePanel*>(m_wnd)->GetMesh()) {
 		s2::RVG::SetColor(GREEN);
-		s2::RVG::Circles(points, mesh->GetNodeRegion(), true);
+		std::set<int>::const_iterator itr = m_selection.begin();
+		for ( ; itr != m_selection.end(); ++itr) {
+			s2::RVG::Circle(vertices[*itr], mesh->GetNodeRadius(), true);	
+		}
 	}
 
 	return false;
 }
 
-bool SelectNodesOP::Clear()
+bool SelectPointsMeshOP::Clear()
 {
 	if (ee::DrawRectangleOP::Clear()) return true;
 
-	m_selection.Clear();
+ 	m_selection.clear();
 	m_first_pos.MakeInvalid();
 
 	return false;
