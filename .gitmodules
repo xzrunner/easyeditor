@@ -78,4 +78,4 @@
 	url = ssh://git@github.com:xzrunner/model3.git
 [submodule "polymesh"]
 	path = polymesh
-	url = ssh://git@tea.ejoy.com:3222/LR/polymesh.git
+	url = ssh://git@github.com:xzrunner/polymesh.git
