@@ -1,3 +1,0 @@
-# polymesh
-
-Polygon Mesh
