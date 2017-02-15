@@ -38,7 +38,7 @@ public:
 
 private:
 	const PackNode *m_mesh, *m_base;
-	std::vector<sm::vec2> m_trans_pairs;
+	std::vector<std::pair<int, sm::vec2> > m_transform;
 
 }; // PackMeshSpr
 

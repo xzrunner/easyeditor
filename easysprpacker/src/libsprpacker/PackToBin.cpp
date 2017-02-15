@@ -194,7 +194,7 @@ void PackToBin::PackPage(const std::string& filepath, const Page& page,
 	const std::vector<PackNode*>& nodes = page.GetNodes();
 	for (int i = 0, n = nodes.size(); i < n; ++i) {
 #ifdef DEBUG_PACK_BIN
-		tot_sz += page.m_nodes[i]->SizeOfPackToBin();
+		tot_sz += page.GetNodes()[i]->SizeOfPackToBin();
 		list0.push_back(tot_sz);
 #endif // DEBUG_PACK_BIN
 		out_sz += nodes[i]->SizeOfPackToBin();

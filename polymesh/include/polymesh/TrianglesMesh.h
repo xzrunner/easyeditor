@@ -31,6 +31,8 @@ public:
 
 	void Update(int offset0, int count0, int offset1, int count1, const float* vertices);
 
+	const Triangles* GetMeshData() const { return m_mesh_data; }
+
 private:
 	Triangles* m_mesh_data;
 

@@ -33,22 +33,24 @@ PackMeshSpr::PackMeshSpr(const emesh::Sprite* spr)
 
 	//////////////////////////////////////////////////////////////////////////
 
-	const s2::Mesh* mesh = dynamic_cast<const s2::MeshSymbol*>(spr->GetSymbol())->GetMesh();
-	const std::vector<s2::MeshTriangle*>& tris = mesh->GetTriangles();
-	const std::vector<std::pair<int, sm::vec2> >& trans = spr->GetMeshTrans().GetTrans();
-	for (int i = 0, n = trans.size(); i < n; ++i) 
-	{
-		int idx = trans[i].first;
-		int tri = idx / 3;
-		int ver = idx - tri * 3;
-
-		const sm::vec2& from = tris[tri]->nodes[ver]->ori_xy;
-		sm::vec2 to = from + trans[i].second;
-		m_trans_pairs.push_back(from);
-		m_trans_pairs.push_back(to);
-	}
+// 	const s2::Mesh* mesh = dynamic_cast<const s2::MeshSymbol*>(spr->GetSymbol())->GetMesh();
+// 	const std::vector<s2::MeshTriangle*>& tris = mesh->GetTriangles();
+// 	const std::vector<std::pair<int, sm::vec2> >& trans = spr->GetMeshTrans().GetTrans();
+// 	for (int i = 0, n = trans.size(); i < n; ++i) 
+// 	{
+// 		int idx = trans[i].first;
+// 		int tri = idx / 3;
+// 		int ver = idx - tri * 3;
+// 
+// 		const sm::vec2& from = tris[tri]->nodes[ver]->ori_xy;
+// 		sm::vec2 to = from + trans[i].second;
+// 		m_trans_pairs.push_back(from);
+// 		m_trans_pairs.push_back(to);
+// 	}
 
 	//////////////////////////////////////////////////////////////////////////
+
+	m_transform = spr->GetMeshTrans().GetTrans();
 }
 
 PackMeshSpr::~PackMeshSpr()
@@ -70,7 +72,19 @@ void PackMeshSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::Textur
 	lua::connect(gen, 1, 
 		lua::assign("base_id", m_base->GetID()));
 
-	PackCoords::PackToLua(gen, m_trans_pairs, "trans_pairs");
+	
+	lua::assign_with_end(gen, "trans_num", m_transform.size());
+	std::stringstream ss;
+	ss << "trans = {";
+	for (int i = 0, n = m_transform.size(); i < n; ++i) 
+	{
+		int idx = m_transform[i].first;
+		int16_t x = float2int(m_transform[i].second.x, 16),
+			    y = float2int(m_transform[i].second.y, 16);
+		ss << idx << ", " << x << ", " << y << ", ";
+	}
+	ss << "}";
+	gen.line(ss.str());
 
 	gen.detab();
 	gen.line("},");
@@ -79,7 +93,7 @@ void PackMeshSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::Textur
 int PackMeshSpr::SizeOfUnpackFromBin() const
 {
 	int sz = simp::NodeMeshSpr::Size();
-	sz += PackCoords::SizeOfUnpackFromBin(m_trans_pairs);
+	sz += sizeof(uint16_t) * 3 * m_transform.size();
 	return sz;
 }
 
@@ -90,7 +104,9 @@ int PackMeshSpr::SizeOfPackToBin() const
 	sz += sizeof(uint8_t);									// type
 	sz += sizeof(uint32_t);									// mesh id
 	sz += sizeof(uint32_t);									// base id
-	sz += PackCoords::SizeOfPackToBin(m_trans_pairs);		// trans
+	// trans
+	sz += sizeof(uint16_t);
+	sz += sizeof(uint16_t) * 3 * m_transform.size();
 	return sz;
 }
 
@@ -110,7 +126,19 @@ void PackMeshSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float sc
 	uint32_t base_id = m_base->GetID();
 	pack(base_id, ptr);
 
-	PackCoords::PackToBin(m_trans_pairs, ptr);
+	uint16_t num = m_transform.size();
+	pack(num, ptr);
+	for (int i = 0, n = m_transform.size(); i < n; ++i) 
+	{
+		uint16_t idx = m_transform[i].first;
+		pack(idx, ptr);
+
+		const sm::vec2& pos = m_transform[i].second;
+		int16_t x = float2int(pos.x, 16),
+			    y = float2int(pos.y, 16);
+		pack(x, ptr);
+		pack(y, ptr);
+	}
 }
 
 bool PackMeshSpr::Equal(const emesh::Sprite* spr) const
@@ -121,25 +149,21 @@ bool PackMeshSpr::Equal(const emesh::Sprite* spr) const
 		return false;
 	}
 
-	//////////////////////////////////////////////////////////////////////////
+	const std::vector<std::pair<int, sm::vec2> >& trans 
+		= spr->GetMeshTrans().GetTrans();
+	if (m_transform.size() != trans.size()) {
+		return false;
+	}
+	for (int i = 0, n = trans.size(); i < n; ++i) {
+		const std::pair<int, sm::vec2>& t0 = m_transform[i];
+		const std::pair<int, sm::vec2>& t1 = trans[i];
+		if (t0.first != t1.first ||
+			t0.second != t1.second) {
+			return false;
+		}
+	}
 
-// 	const std::map<sm::vec2, sm::vec2, sm::Vector2Cmp>& map = spr->GetMeshTrans().GetMap();
-// 	if (m_trans_pairs.size() != map.size() * 2) {
-// 		return false;
-// 	}
-// 	std::map<sm::vec2, sm::vec2, sm::Vector2Cmp>::const_iterator itr = map.begin();
-// 	int idx = 0;
-// 	for ( ; itr != map.end(); ++itr) {
-// 		if (itr->first != m_trans_pairs[idx++] ||
-// 			itr->second != m_trans_pairs[idx++]) {
-// 			return false;
-// 		}
-// 	}
-// 	return true;
-
-	//////////////////////////////////////////////////////////////////////////
-
-	return false;
+	return true;
 }
 
 }

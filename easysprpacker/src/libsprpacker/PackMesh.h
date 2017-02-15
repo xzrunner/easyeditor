@@ -39,7 +39,7 @@ public:
 private:
 	const PackNode* m_base;
 
-	MeshShape* m_mesh;
+	const MeshShape* m_mesh;
 
 }; // PackMesh
 

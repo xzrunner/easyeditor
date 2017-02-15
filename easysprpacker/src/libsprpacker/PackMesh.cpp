@@ -14,6 +14,9 @@ namespace lua = ebuilder::lua;
 #include <simp/NodeMesh.h>
 #include <simp/simp_types.h>
 #include <simp/MeshType.h>
+#include <polymesh/Mesh.h>
+#include <polymesh/TrianglesMesh.h>
+#include <polymesh/Skin2Mesh.h>
 
 namespace esprpacker
 {
@@ -24,17 +27,17 @@ PackMesh::PackMesh(const emesh::Symbol* sym)
 	m_base = PackNodeFactory::Instance()->Create(dynamic_cast<const ee::Symbol*>(
 		sym->GetMesh()->GetBaseSymbol()));
 
-	const emesh::Mesh* mesh = sym->GetMesh();
+	const pm::Mesh* mesh = sym->GetMesh()->GetMesh();
 	switch (mesh->Type())
 	{
 	case pm::MESH_POINTS:
-		m_mesh = new PointsMesh(VI_DOWNCASTING<const s2::PointsMesh*>(mesh));		
+		m_mesh = new PointsMesh(static_cast<const emesh::PointsMesh*>(sym->GetMesh()));
 		break;
-	case s2::MESH_TRIANGLES:
-		m_mesh = new TrianglesMesh(VI_DOWNCASTING<const s2::TrianglesMesh*>(mesh));
+	case pm::MESH_TRIANGLES:
+		m_mesh = new TrianglesMesh(static_cast<const pm::TrianglesMesh*>(mesh)->GetMeshData());
 		break;
-	case s2::MESH_SKELETON2:
-		m_mesh = new Skin2Mesh(VI_DOWNCASTING<const s2::Skin2Mesh*>(mesh));
+	case pm::MESH_SKIN2:
+		m_mesh = new Skin2Mesh(static_cast<const pm::Skin2Mesh*>(mesh)->GetMeshData());
 		break;
 	default:
 		throw ee::Exception("PackMesh::PackMesh unknown type %d", mesh->Type());
@@ -44,7 +47,6 @@ PackMesh::PackMesh(const emesh::Symbol* sym)
 PackMesh::~PackMesh()
 {
 	m_base->RemoveReference();
-	delete m_mesh;
 }
 
 void PackMesh::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const

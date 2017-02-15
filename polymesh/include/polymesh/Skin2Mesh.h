@@ -34,6 +34,8 @@ public:
 	void Update(const float* (*query_joint_world_mt)(int joint_id, const void* ud), const void* ud);
 	void Update(int offset0, int count0, int offset1, int count1, const float* vertices);
 
+	const Skin2Triangles* GetMeshData() const { return m_mesh_data; }
+
 private:
 	Skin2Triangles* m_mesh_data;
 

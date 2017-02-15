@@ -37,6 +37,8 @@ public:
 	const std::vector<sm::vec2>& GetOutline() const { return m_outline; }
 	const std::vector<sm::vec2>& GetPoints() const { return m_points; }
 
+	const Triangles* GetMeshData() const { return m_mesh_data; }
+
 private:
 	float m_width, m_height;
 
