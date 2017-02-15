@@ -19,11 +19,13 @@
 namespace eanim
 {
 
-#ifdef S2_ANIM_CURR_OLD
+#ifdef S2_ANIM_CURR_V0
 PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, wxGLContext* glctx, s2::AnimCurr& curr)
-#else
+#elif defined S2_ANIM_CURR_V1
 PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, wxGLContext* glctx, s2::AnimCurr2& curr)
-#endif // S2_ANIM_CURR_OLD
+#elif defined S2_ANIM_CURR_V2
+PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, wxGLContext* glctx, s2::AnimCurr3& curr)
+#endif
 	: ee::CameraCanvas(stage_wnd, stage, s2::CAM_ORTHO2D, glctx)
 	, m_curr(curr)
 {

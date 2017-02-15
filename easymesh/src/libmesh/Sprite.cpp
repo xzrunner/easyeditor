@@ -41,6 +41,9 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 	
 	const Json::Value& mesh_val = val["mesh"];
 	s2::Mesh* mesh = dynamic_cast<Symbol*>(m_sym)->GetMesh();
+	// reset
+	pm::MeshTransform trans;
+	mesh->GetMesh()->LoadFromTransform(trans);
 	gum::MeshIO::Load(mesh_val, m_trans, *mesh);
 	mesh->GetMesh()->LoadFromTransform(m_trans);
 

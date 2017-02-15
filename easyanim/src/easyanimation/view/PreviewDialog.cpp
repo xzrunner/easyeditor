@@ -6,25 +6,27 @@
 #include <ee/Config.h>
 #include <ee/SettingData.h>
 
-#ifdef S2_ANIM_CURR_OLD
+#ifdef S2_ANIM_CURR_V0
 #include <sprite2/AnimCurr.h>
-#else
+#elif defined S2_ANIM_CURR_V1
 #include <sprite2/AnimCurr2.h>
-#endif // S2_ANIM_CURR_OLD
+#elif defined S2_ANIM_CURR_V2
+#include <sprite2/AnimCurr3.h>
+#endif
 
 namespace eanim
 {
 
 PreviewDialog::PreviewDialog(wxWindow* parent, wxGLContext* glctx, s2::AnimSymbol* sym)
  	: wxDialog(parent, wxID_ANY, "Preview", wxDefaultPosition, wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
-#ifdef S2_ANIM_CURR_OLD
+#ifdef S2_ANIM_CURR_V0
 	, m_curr(sym)
-#endif // S2_ANIM_CURR_OLD
+#endif // S2_ANIM_CURR_V0
 {
-#ifndef S2_ANIM_CURR_OLD
+#ifndef S2_ANIM_CURR_V0
 	sym->LoadCopy();
 	m_curr.SetAnimCopy(&dynamic_cast<s2::AnimSymbol*>(sym)->GetCopy());
-#endif // S2_ANIM_CURR_OLD
+#endif // S2_ANIM_CURR_V0
 
 	InitLayout(glctx);
 
