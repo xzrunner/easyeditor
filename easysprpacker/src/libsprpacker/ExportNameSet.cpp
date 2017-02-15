@@ -6,6 +6,8 @@
 #include <ee/Symbol.h>
 #include <ee/Exception.h>
 
+#include <gum/StringHelper.h>
+
 namespace esprpacker
 {
 
@@ -25,7 +27,7 @@ void ExportNameSet::Insert(const ee::Symbol* sym, PackNode* node)
 		return;
 	}
 
-	std::string export_name = sym->name;
+	std::string export_name = gum::StringHelper::UTF8ToGBK(sym->name);
 	if (!is_name_valid(export_name)) {
 		return;
 	}
