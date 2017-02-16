@@ -310,6 +310,10 @@ void PackAnim2::InitTimeline(const rg_timeline* tl)
 	{
 		rg_tl_skin* src = tl->skins[i];
 		TL_Skin dst;
+		if (!src) {
+			m_tl_skins.push_back(dst);
+			continue;
+		}
 
 		dst.samples.reserve(src->skin_count);
 		for (int j = 0; j < src->skin_count; ++j)
