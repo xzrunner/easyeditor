@@ -3,6 +3,10 @@
 
 #include "MeshShape.h"
 
+#include <SM_Vector.h>
+
+#include <vector>
+
 namespace emesh { class PointsMesh; }
 
 namespace esprpacker
@@ -21,6 +25,9 @@ public:
 
 	virtual int SizeOfPackToBin() const;
 	virtual void PackToBin(uint8_t** ptr) const;
+
+private:
+	std::vector<sm::vec2> FormatVertices() const;
 
 private:
 	const emesh::PointsMesh* m_mesh;

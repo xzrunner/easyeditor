@@ -20,9 +20,7 @@ int PointsMesh::Type() const
 
 void PointsMesh::PackToLuaString(ebuilder::CodeGenerator& gen) const
 {
-	std::vector<sm::vec2> vertices = m_mesh->GetVertices();
-	vertices.pop_back();
-	PackCoords::PackToLua(gen, vertices, "outline");
+	PackCoords::PackToLua(gen, FormatVertices(), "outline");
 	
 	std::vector<sm::vec2> points;
 	m_mesh->GetInnerPoints(points);
@@ -32,9 +30,7 @@ void PointsMesh::PackToLuaString(ebuilder::CodeGenerator& gen) const
 int PointsMesh::SizeOfUnpackFromBin() const
 {
 	int sz = simp::PointsMesh::Size();
-	std::vector<sm::vec2> vertices = m_mesh->GetVertices();
-	vertices.pop_back();
-	sz += PackCoords::SizeOfUnpackFromBin(vertices);
+	sz += PackCoords::SizeOfUnpackFromBin(FormatVertices());
 	std::vector<sm::vec2> points;
 	m_mesh->GetInnerPoints(points);
 	sz += PackCoords::SizeOfUnpackFromBin(points);
@@ -44,9 +40,7 @@ int PointsMesh::SizeOfUnpackFromBin() const
 int PointsMesh::SizeOfPackToBin() const
 {
 	int sz = 0;
-	std::vector<sm::vec2> vertices = m_mesh->GetVertices();
-	vertices.pop_back();
-	sz += PackCoords::SizeOfPackToBin(vertices);
+	sz += PackCoords::SizeOfPackToBin(FormatVertices());
 	std::vector<sm::vec2> points;
 	m_mesh->GetInnerPoints(points);
 	sz += PackCoords::SizeOfPackToBin(points);
@@ -55,13 +49,22 @@ int PointsMesh::SizeOfPackToBin() const
 
 void PointsMesh::PackToBin(uint8_t** ptr) const
 {
-	std::vector<sm::vec2> vertices = m_mesh->GetVertices();
-	vertices.pop_back();
-	PackCoords::PackToBin(vertices, ptr);
+	PackCoords::PackToBin(FormatVertices(), ptr);
 
 	std::vector<sm::vec2> points;
 	m_mesh->GetInnerPoints(points);
 	PackCoords::PackToBin(points, ptr);
+}
+
+std::vector<sm::vec2> PointsMesh::FormatVertices() const
+{
+	std::vector<sm::vec2> ret = m_mesh->GetVertices();
+	if (ret.size() > 1) {
+		if (ret.front() == ret.back()) {
+			ret.pop_back();
+		}
+	}
+	return ret;
 }
 
 }
