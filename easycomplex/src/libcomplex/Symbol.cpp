@@ -130,7 +130,7 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 		}
 		const std::vector<s2::Sprite*>& sprs = GetActionChildren(action);
 		for (int i = 0, n = sprs.size(); i < n; ++i) {
-			if (IsChildOutside(sprs[i], params)) {
+			if (IsChildOutside(sprs[i], p)) {
 				continue;
 			}
 			ee::SpriteRenderer::Instance()->Draw(sprs[i], p, false);
