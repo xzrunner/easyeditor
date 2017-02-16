@@ -11,6 +11,7 @@
 #include <easycomplex.h>
 #include <easyanim.h>
 
+#include <polymesh/MeshType.h>
 #include <sprite2/SymType.h>
 
 namespace emesh
