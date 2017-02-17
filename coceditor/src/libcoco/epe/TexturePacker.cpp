@@ -38,8 +38,8 @@ void TexturePacker::Pack(const std::set<ee::Image*>& images)
 	{
 		ee::Image* img = sorted[i];
 		sm::rect r;
-		int w = img->GetClippedWidth() + extra_tot,
-			h = img->GetClippedHeight() + extra_tot;
+		int w = img->GetClippedRegion().Width() + extra_tot,
+			h = img->GetClippedRegion().Height() + extra_tot;
 		assert(w < m_edge && h < m_edge);
 		if (m_width == 0)
 			m_width = w;

@@ -56,8 +56,7 @@ const uint8_t* TextureFactory::Load(const std::string& filepath, int& width,
 	}
 }
 
-void TextureFactory::Load(const std::string& filepath, float& ori_w, float& ori_h, 
-						  int& w, int& h, sm::vec2& offset) const
+void TextureFactory::Load(const std::string& filepath, sm::i16_vec2& ori_sz, sm::i16_rect& clipped_sz) const
 {
 	const TexturePacker::Frame* frame = NULL;
 	if (!Config::Instance()->GetSettings().load_image && m_tp) {
@@ -69,14 +68,13 @@ void TextureFactory::Load(const std::string& filepath, float& ori_w, float& ori_
 	if (frame) {
 		const TexturePacker::FrameSrcData& src = frame->src;
 
-		ori_w = static_cast<float>(src.src_width);
-		ori_h = static_cast<float>(src.src_height);
+		ori_sz.x = src.src_width;
+		ori_sz.y = src.src_height;
 
-		w = src.sprite_source_size.w;
-		h = src.sprite_source_size.h;
-
-		offset.x = src.sprite_source_size.x + src.sprite_source_size.w * 0.5f - ori_w * 0.5f;
-		offset.y = -(src.sprite_source_size.y + src.sprite_source_size.h * 0.5f - ori_h * 0.5f);
+		clipped_sz.xmin = src.sprite_source_size.x;
+		clipped_sz.ymin = src.sprite_source_size.y;
+		clipped_sz.xmax = clipped_sz.xmin + src.sprite_source_size.w;
+		clipped_sz.ymax = clipped_sz.ymin + src.sprite_source_size.h;
 	}
 }
 

@@ -81,14 +81,7 @@ bool ImageSymbol::LoadResources()
 
 void ImageSymbol::InitCoreTex()
 {
-	sm::i16_rect r;
-	r.xmin = r.ymin = 0;
-	r.xmax = m_image->GetClippedWidth();
-	r.ymax = m_image->GetClippedHeight();
-
-	const sm::vec2& offset = m_image->GetOffset();
-
-	InitTex(m_image->GetS2Tex(), r, offset);
+	InitTex(m_image->GetS2Tex(), m_image->GetClippedRegion());
 }
 
 void ImageSymbol::LoadSync()

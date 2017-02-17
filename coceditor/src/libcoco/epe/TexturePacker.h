@@ -66,13 +66,13 @@ public:
 		switch (m_type)
 		{
 		case e_width:
-			return t0->GetClippedWidth() > t1->GetClippedWidth();
+			return t0->GetClippedRegion().Width() > t1->GetClippedRegion().Width();
 		case e_height:
-			return t0->GetClippedHeight() > t1->GetClippedHeight();
+			return t0->GetClippedRegion().Height() > t1->GetClippedRegion().Height();
 		case e_area:
-			return t0->GetClippedWidth() * t0->GetClippedHeight() > t1->GetClippedWidth() * t1->GetClippedHeight();
+			return t0->GetClippedRegion().Width() * t0->GetClippedRegion().Height() > t1->GetClippedRegion().Width() * t1->GetClippedRegion().Height();
 		default:
-			return t0->GetClippedWidth() > t1->GetClippedWidth();
+			return t0->GetClippedRegion().Width() > t1->GetClippedRegion().Width();
 		}
 	}
 

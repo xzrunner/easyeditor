@@ -4,6 +4,7 @@
 #include "ResourcesMgr.h"
 
 #include <SM_Matrix.h>
+#include <SM_Rect.h>
 #include <CU_RefCountObj.h>
 
 #include <stdint.h>
@@ -31,14 +32,10 @@ public:
 	int GetFormat() const;
 	unsigned int GetTexID() const;
 
-	int GetOriginWidth() const;
-	int GetOriginHeight() const;
-	int GetClippedWidth() const;
-	int GetClippedHeight() const;
+	const sm::i16_vec2& GetOriginSize() const { return m_ori_sz; }
+	const sm::i16_rect& GetClippedRegion() const { return m_clipped_region; }
 
 	void InvalidRect(const sm::mat4& mt) const;
-
-	const sm::vec2& GetOffset() const { return m_offset; }
 
 	void QueryTexcoords(float* texcoords, int* texid) const;
 
@@ -55,11 +52,8 @@ private:
 	Texture* m_tex;
 	s2::Texture* m_s2_tex;
 
-	float m_ori_w, m_ori_h;
-
-	sm::vec2 m_offset;
-
-	int m_xmin, m_ymin;
+	sm::i16_vec2 m_ori_sz;
+	sm::i16_rect m_clipped_region;
 
 }; // Image
 

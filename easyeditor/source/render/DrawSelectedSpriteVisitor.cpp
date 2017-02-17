@@ -36,9 +36,8 @@ void DrawSelectedSpriteVisitor::Visit(Sprite* spr, bool& next)
 			s2::RVG::LineWidth(1);
 
 			Image* img = dynamic_cast<ImageSymbol*>(s->GetSymbol())->GetImage();
-			float hw = img->GetOriginWidth() * 0.5f,
-				  hh = img->GetOriginHeight() * 0.5f;
-
+			float hw = img->GetOriginSize().x * 0.5f,
+				  hh = img->GetOriginSize().y * 0.5f;
 			sm::mat4 mt = s->GetLocalMat();
 			sm::vec2 min(-hw, -hh), max(hw, hh);
 			min = mt * min;

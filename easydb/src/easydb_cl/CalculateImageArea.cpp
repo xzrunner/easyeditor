@@ -53,7 +53,7 @@ void CalImageArea::Trigger(const std::string& dir)
 		if (ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_IMAGE)
 		{
 			ee::Image* img = ee::ImageMgr::Instance()->GetItem(filepath);
-			area += img->GetClippedWidth() * img->GetClippedHeight();
+			area += img->GetClippedRegion().Width() * img->GetClippedRegion().Height();
 			img->RemoveReference();
 		}
 	}

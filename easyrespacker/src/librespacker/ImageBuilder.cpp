@@ -103,8 +103,8 @@ void ImageBuilder::LoadPictureQuad(const ee::ImageSprite* img, PackPicture::Quad
 void ImageBuilder::TransScreen(PackPicture::Quad& quad, const ee::Sprite* spr)
 {
 	// 1. shear
-	float hw = quad.img->GetClippedWidth() * 0.5f,
-		hh = quad.img->GetClippedHeight() * 0.5f;
+	float hw = quad.img->GetClippedRegion().Width() * 0.5f,
+		hh = quad.img->GetClippedRegion().Height() * 0.5f;
 	float sx = spr->GetShear().x,
 		sy = spr->GetShear().y;
 	quad.screen_coord[1].x += sx * hh;

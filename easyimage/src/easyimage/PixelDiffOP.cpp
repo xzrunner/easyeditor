@@ -31,7 +31,7 @@ bool PixelDiffOP::OnMouseLeftDown(int x, int y)
 	m_stage->GetLeft()->GetSymbol()->GetBounding();
 
 	int row, col;
-	row = (p.y - left->GetOriginHeight() * 0.5f) / left->GetOriginHeight();
+	row = (p.y - left->GetOriginSize().y * 0.5f) / left->GetOriginSize().y;
 
 	if (p.x < 0) {
 

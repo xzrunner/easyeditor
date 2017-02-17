@@ -68,10 +68,13 @@ void OutlineImage::Trigger(const std::string& dir) const
 		fine.Trigger(0.04f, 0.2f);
 
 		Json::Value value;
-		sm::vec2 offset(-0.5f*image->GetOriginWidth(), -0.5f*image->GetOriginHeight());
+		sm::vec2 offset;
+		offset.x = -0.5f * image->GetOriginSize().x;
+		offset.y = -0.5f * image->GetOriginSize().y;
+
 		std::vector<sm::vec2> vertices(fine.GetResult());
 
-		float src_area = image->GetClippedWidth() * image->GetClippedHeight();
+		float src_area = image->GetClippedRegion().Width() * image->GetClippedRegion().Height();
 		float dst_area = ee::Math2D::GetPolygonArea(vertices);
 		if (dst_area < src_area * 0.95f)
 		{

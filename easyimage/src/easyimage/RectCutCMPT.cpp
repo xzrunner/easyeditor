@@ -281,8 +281,8 @@ void RectCutCMPT::OnOutputData(wxCommandEvent& event)
 	
 	sm::vec2 center = op->GetCenter();
 	if (center == sm::vec2(0, 0)) {
-		center.x = image->GetClippedWidth() * 0.5f;
-		center.y = image->GetClippedHeight() * 0.5f;
+		center.x = image->GetClippedRegion().Width() * 0.5f;
+		center.y = image->GetClippedRegion().Height() * 0.5f;
 	}
 
 	ee::ImageData* img_data = ee::ImageDataMgr::Instance()->GetItem(sym->GetFilepath());

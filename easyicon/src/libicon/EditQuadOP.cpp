@@ -119,8 +119,8 @@ bool EditQuadOP::OnDraw() const
 	}
 
 	const ee::Image* ee_img = dynamic_cast<const ee::ImageSymbol*>(img)->GetImage();
-	float w = ee_img->GetClippedWidth(),
-		  h = ee_img->GetClippedHeight();
+	float w = ee_img->GetClippedRegion().Width(),
+		  h = ee_img->GetClippedRegion().Height();
 	s2::RVG::SetColor(ee::LIGHT_RED);
 	s2::RVG::LineWidth(1);
 	s2::RVG::Rect(sm::vec2(0, 0), w * 0.5f, h * 0.5f, false);

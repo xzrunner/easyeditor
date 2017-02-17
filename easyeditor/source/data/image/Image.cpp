@@ -27,7 +27,6 @@ Image::Image()
 {
 	m_tex = new TextureImgData;
 	m_s2_tex = new s2::Texture(0, 0, 0);
-	m_xmin = m_ymin = 0;
 }
 
 Image::Image(const uint8_t* pixels, int w, int h, int fmt)
@@ -35,19 +34,16 @@ Image::Image(const uint8_t* pixels, int w, int h, int fmt)
 	m_tex = new TextureImgData;
 	m_tex->LoadFromMemory(pixels, w, h, fmt);
 
-	m_ori_w = static_cast<float>(m_tex->GetWidth());
-	m_ori_h = static_cast<float>(m_tex->GetHeight());
-	m_offset.Set(0, 0);
+	m_ori_sz.x = static_cast<float>(m_tex->GetWidth());
+	m_ori_sz.y = static_cast<float>(m_tex->GetHeight());
 
 	m_s2_tex = new s2::Texture(m_tex->GetWidth(), m_tex->GetHeight(), m_tex->GetTexID());
-	m_xmin = m_ymin = 0;
 }
 
 Image::Image(const s2::RenderTarget* rt)
 {
 	m_tex = new TextureRT(rt);
 	m_s2_tex = new s2::Texture(m_tex->GetWidth(), m_tex->GetHeight(), m_tex->GetTexID());
-	m_xmin = m_ymin = 0;
 }
 
 Image::~Image()
@@ -69,10 +65,9 @@ bool Image::LoadFromFile(const std::string& filepath)
 		m_tex->LoadFromMemory(img_data->GetPixelData(), img_data->GetWidth(), img_data->GetHeight(), img_data->GetFormat());
 		img_data->RemoveReference();
 
-		int w, h;
-		TextureFactory::Instance()->Load(filepath, m_ori_w, m_ori_h, w, h, m_offset);
-		m_s2_tex->Init(w, h, 0);
-		m_s2_tex->InitOri(m_ori_w, m_ori_h);
+		TextureFactory::Instance()->Load(filepath, m_ori_sz, m_clipped_region);
+		m_s2_tex->Init(m_clipped_region.Width(), m_clipped_region.Height(), 0);
+		m_s2_tex->InitOri(m_ori_sz.x, m_ori_sz.y);
 
 		return true;
 	}
@@ -88,12 +83,15 @@ bool Image::LoadFromFile(const std::string& filepath)
 		ImageData* img_data = ImageDataMgr::Instance()->GetItem(filepath);
 		m_tex->LoadFromMemory(img_data->GetPixelData(), img_data->GetWidth(), img_data->GetHeight(), img_data->GetFormat());
 		img_data->RemoveReference();
-		m_ori_w = m_tex->GetWidth();
-		m_ori_h = m_tex->GetHeight();
+		m_ori_sz.x = m_tex->GetWidth();
+		m_ori_sz.y = m_tex->GetHeight();
+		m_clipped_region.xmin = m_clipped_region.ymin = 0;
+		m_clipped_region.xmax = m_ori_sz.x;
+		m_clipped_region.ymax = m_ori_sz.y;
 	}
 
 	m_s2_tex->Init(m_tex->GetWidth(), m_tex->GetHeight(), m_tex->GetTexID());
-	m_s2_tex->InitOri(m_ori_w, m_ori_h);
+	m_s2_tex->InitOri(m_ori_sz.x, m_ori_sz.y);
 
 	if (m_tex->GetWidth() == 0 || m_tex->GetHeight() == 0) {
 		return true;
@@ -124,26 +122,6 @@ int Image::GetFormat() const
 unsigned int Image::GetTexID() const 
 { 
 	return m_tex->GetTexID(); 
-}
-
-int Image::GetOriginWidth() const 
-{ 
-	return m_ori_w; 
-}
-
-int Image::GetOriginHeight() const 
-{ 
-	return m_ori_h; 
-}
-
-int Image::GetClippedWidth() const 
-{ 
-	return m_tex->GetWidth(); 
-}
-
-int Image::GetClippedHeight() const 
-{ 
-	return m_tex->GetHeight(); 
 }
 
 void Image::InvalidRect(const sm::mat4& mt) const
@@ -197,8 +175,8 @@ void Image::LoadWithClip(const std::string& filepath)
 {
 	ImageData* img_data = ImageDataMgr::Instance()->GetItem(filepath);
 
-	m_ori_w = img_data->GetWidth();
-	m_ori_h = img_data->GetHeight();
+	m_ori_sz.x = img_data->GetWidth();
+	m_ori_sz.y = img_data->GetHeight();
 
 	if (img_data->GetFormat() != GPF_RGBA) {
 		m_tex->LoadFromMemory(img_data->GetPixelData(), img_data->GetWidth(),
@@ -224,11 +202,10 @@ void Image::LoadWithClip(const std::string& filepath)
 	m_tex->LoadFromMemory(img_data->GetPixelData(), img_data->GetWidth(),
 		img_data->GetHeight(), img_data->GetFormat());
 
-	m_offset.x = r.CenterX() - w * 0.5f;
-	m_offset.y = r.CenterY() - h * 0.5f;
-
-	m_xmin = r.xmin;
-	m_ymin = r.ymin;
+	m_clipped_region.xmin = r.xmin;
+	m_clipped_region.ymin = r.ymin;
+	m_clipped_region.xmax = r.xmax;
+	m_clipped_region.ymax = r.ymax;
 
 	img_data->RemoveReference();
 }

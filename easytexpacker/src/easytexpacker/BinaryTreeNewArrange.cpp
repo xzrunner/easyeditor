@@ -94,8 +94,8 @@ Insert(ee::ImageSprite& img) const
 
 	ee::TPNode* n = NULL;
 	ee::Image* image = img.GetSymbol()->GetImage();
-	int w = image->GetClippedWidth(),
-		h = image->GetClippedHeight();
+	int w = image->GetClippedRegion().Width(),
+		h = image->GetClippedRegion().Height();
 	float scale = 1.0f;
 	if (m_root->IsRoomEnough(w, h)) {
 		n = m_root->Insert(w*scale+PADDING*2, h*scale+PADDING*2);		

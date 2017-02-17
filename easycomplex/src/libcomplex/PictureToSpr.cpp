@@ -28,13 +28,12 @@ ee::Sprite* PictureToSpr::Trans(const erespacker::PackPicture* pic)
 
 ee::Sprite* PictureToSpr::TransQuad(const erespacker::PackPicture::Quad* quad)
 {
-	float w = quad->img->GetOriginWidth(),
-		  h = quad->img->GetOriginHeight();
-
+	const sm::i16_vec2& sz = quad->img->GetOriginSize();
+	
 	sm::vec2 src[4], screen[4];
 	for (int i = 0; i < 4; ++i) {
-		src[i].x = quad->texture_coord[i].x / w;
-		src[i].y = 1 - quad->texture_coord[i].y / h;
+		src[i].x = quad->texture_coord[i].x / sz.x;
+		src[i].y = 1 - quad->texture_coord[i].y / sz.y;
 		screen[i] = quad->screen_coord[i];
 	}
 

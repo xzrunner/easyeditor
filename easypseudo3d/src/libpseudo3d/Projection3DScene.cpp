@@ -54,8 +54,8 @@ void Projection3DScene::DrawSprite(ee::Image* img, int x, int y) const
 	x *= SCALE;
 	y *= SCALE;
 
-	float w = img->GetClippedWidth() * 0.5f * SCALE,
-		h = img->GetClippedHeight() * 0.5f * SCALE;
+	float w = img->GetClippedRegion().Width() * 0.5f * SCALE,
+		h = img->GetClippedRegion().Height() * 0.5f * SCALE;
 	
 	std::vector<sm::vec3> vertices;
 	std::vector<sm::vec2> texcoords;
