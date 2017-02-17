@@ -178,7 +178,12 @@ void Image::LoadWithClip(const std::string& filepath)
 	m_ori_sz.x = img_data->GetWidth();
 	m_ori_sz.y = img_data->GetHeight();
 
-	if (img_data->GetFormat() != GPF_RGBA) {
+	if (img_data->GetFormat() != GPF_RGBA) 
+	{
+		m_clipped_region.xmin = 0;
+		m_clipped_region.ymin = 0;
+		m_clipped_region.xmax = m_ori_sz.x;
+		m_clipped_region.ymax = m_ori_sz.y;
 		m_tex->LoadFromMemory(img_data->GetPixelData(), img_data->GetWidth(),
 			img_data->GetHeight(), img_data->GetFormat());
 		img_data->RemoveReference();
