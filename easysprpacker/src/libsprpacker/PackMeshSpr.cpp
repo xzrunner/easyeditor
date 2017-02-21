@@ -8,6 +8,7 @@
 #include <easybuilder.h>
 namespace lua = ebuilder::lua;
 
+#include <bimp/typedef.h>
 #include <simp/NodeMeshSpr.h>
 #include <simp/simp_types.h>
 
@@ -93,7 +94,7 @@ void PackMeshSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::Textur
 int PackMeshSpr::SizeOfUnpackFromBin() const
 {
 	int sz = simp::NodeMeshSpr::Size();
-	sz += sizeof(uint16_t) * 3 * m_transform.size();
+	sz += ALIGN_4BYTE(sizeof(uint16_t) * 3 * m_transform.size());
 	return sz;
 }
 
