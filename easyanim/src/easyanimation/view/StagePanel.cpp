@@ -237,20 +237,24 @@ void StagePanel::InsertWithUD(ee::Sprite* spr, int idx)
 	SpriteUserData* ud = (SpriteUserData*)spr->GetUserData();
 	assert(ud);
 
-	if (ud->layer_idx != -1) {
-		assert(ud->layer_idx != -1);
-		while (ud && ud->layer_idx >= DataMgr::Instance()->GetLayers().Size()) {
-			InsertLayerSJ::Instance()->Insert();
-			SetSelectedSJ::Instance()->Set(0, 0);
-		}
+	//// insert to same layer
+	//if (ud->layer_idx != -1) 
+	//{
+	//	assert(ud->layer_idx != -1);
+	//	while (ud && ud->layer_idx >= DataMgr::Instance()->GetLayers().Size()) {
+	//		InsertLayerSJ::Instance()->Insert();
+	//		SetSelectedSJ::Instance()->Set(0, 0);
+	//	}
 
-		assert(m_frame);
+	//	assert(m_frame);
+	//	m_frame->Insert(spr, idx);
+
+	//	ud->layer = DataMgr::Instance()->GetLayers().GetLayer(ud->layer_idx);
+	//	ud->frame = m_frame;
+	//}
+	if (m_frame) {
 		m_frame->Insert(spr, idx);
-
-		ud->layer = DataMgr::Instance()->GetLayers().GetLayer(ud->layer_idx);
-		ud->frame = m_frame;
-	} else {
-		assert(ud->frame);
+	} else if (ud->frame) {
 		ud->frame->Insert(spr, idx);
 	}
 }
