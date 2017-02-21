@@ -211,10 +211,11 @@ void ScaleOverall::ScaleAnim(const std::string& path, float scale,
 }
 
 sm::vec2 ScaleOverall::GetScaledPos(Json::Value& sprite_val, float scale, 
-									   const sm::vec2& img_offset) const
+									const sm::vec2& img_offset) const
 {
 	ee::SpriteIO spr_io;
-	spr_io.Load(sprite_val);
+	std::string dir = ee::FileHelper::GetFileDir(sprite_val["filepath"].asString());
+	spr_io.Load(sprite_val, dir);
 
 // 	sm::vec2 center = pos + sm::rotate_vector(-offset, angle);
 // 	center = center + sm::rotate_vector(img_offset, angle);

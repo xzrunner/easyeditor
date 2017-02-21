@@ -95,7 +95,8 @@ void LRExpandGroup::LoadSprites(const Json::Value& src_spr_val, const Trans& tra
 	std::string filepath = src_spr_val["filepath"].asString();
 
 	ee::SpriteIO spr_io;
-	spr_io.Load(src_spr_val);
+	std::string dir = ee::FileHelper::GetFileDir(filepath);
+	spr_io.Load(src_spr_val, dir);
 	if (filepath == ee::SYM_GROUP_TAG) 
 	{
 		const Json::Value& gval = src_spr_val[ee::SYM_GROUP_TAG];
@@ -148,7 +149,7 @@ void LRExpandGroup::LoadSprites(const Json::Value& src_spr_val, const Trans& tra
 
 		int sz = dst_sprs_val.size();
 		dst_sprs_val[sz] = src_spr_val;
-		spr_io.Store(dst_sprs_val[sz]);
+		spr_io.Store(dst_sprs_val[sz], dir);
 	}
 }
 

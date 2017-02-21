@@ -156,13 +156,13 @@ void Sprite::SetOffset(const sm::vec2& offset)
 void Sprite::Load(const Json::Value& val, const std::string& dir)
 {
 	ee::SpriteIO spr_io;
-	spr_io.Load(val, this);
+	spr_io.Load(val, this, dir);
 }
 
 void Sprite::Store(Json::Value& val, const std::string& dir) const
 {
 	ee::SpriteIO spr_io;
-	spr_io.Store(val, this);
+	spr_io.Store(val, this, dir);
 }
 
 PropertySetting* Sprite::CreatePropertySetting(EditPanelImpl* stage)

@@ -137,13 +137,15 @@ void ScaleJson::ScaleAnim(const std::string& path, float scale, const std::strin
 
 void ScaleJson::ScaleSprite(Json::Value& sprite_val, float scale) const
 {
+	std::string dir = ee::FileHelper::GetFileDir(sprite_val["filepath"].asString());
+
 	ee::SpriteIO spr_io;
-	spr_io.Load(sprite_val);
+	spr_io.Load(sprite_val, dir);
 
 	spr_io.m_scale *= scale;
 	spr_io.m_position *= scale;
 
-	spr_io.Store(sprite_val);
+	spr_io.Store(sprite_val, dir);
 }
 
 }

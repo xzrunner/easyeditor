@@ -3,6 +3,7 @@
 
 #include <ee/std_functor.h>
 #include <ee/SpriteIO.h>
+#include <ee/FileHelper.h>
 
 #include <fstream>
 #include <algorithm>
@@ -121,7 +122,8 @@ Sprite(const Json::Value& json_val)
 	filepath = json_val["filepath"].asString();
 
 	ee::SpriteIO spr_io;
-	spr_io.Load(json_val);
+	std::string dir = ee::FileHelper::GetFileDir(filepath);
+	spr_io.Load(json_val, dir);
 	pos = spr_io.m_position;
 	angle = spr_io.m_angle;
 	scale = spr_io.m_scale;

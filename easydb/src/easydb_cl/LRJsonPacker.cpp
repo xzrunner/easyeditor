@@ -342,7 +342,8 @@ void LRJsonPacker::ParserCameraFromSprite(const Json::Value& src_val, const char
 		Json::Value cam_val;
 
 		ee::SpriteIO spr_io;
-		spr_io.Load(spr_val);
+		std::string dir = ee::FileHelper::GetFileDir(src_val["filepath"].asString());
+		spr_io.Load(spr_val, dir);
 
 		cam_val["name"] = spr_io.m_name;
 		cam_val["x"] = spr_io.m_position.x;
@@ -386,7 +387,8 @@ void LRJsonPacker::ParserCharacterFromSprite(const Json::Value& src_val, const l
 		}				
 
 		ee::SpriteIO spr_io;
-		spr_io.Load(spr_val);
+		std::string spr_dir = ee::FileHelper::GetFileDir(spr_val["filepath"].asString());
+		spr_io.Load(spr_val, spr_dir);
 
 		Json::Value char_val;
 		char_val["name"] = spr_io.m_name;
@@ -529,7 +531,8 @@ void LRJsonPacker::ParserSpecialFromSprite(const Json::Value& src_val, const std
 void LRJsonPacker::ParserSpecialLayer(const Json::Value& spr_val, const std::string& name, Json::Value& out_val)
 {
 	ee::SpriteIO spr_io;
-	spr_io.Load(spr_val);
+	std::string dir = ee::FileHelper::GetFileDir(spr_val["filepath"].asString());
+	spr_io.Load(spr_val, dir);
 
 	Json::Value dec_val;
 
@@ -556,7 +559,8 @@ void LRJsonPacker::ParserSpecialLayer(const Json::Value& spr_val, const std::str
 		int idx = 0;
 
 		ee::SpriteIO spr_io;
-		spr_io.Load(val["sprite"][idx]);
+		std::string dir = ee::FileHelper::GetFileDir(val["sprite"][idx]["filepath"].asString());
+		spr_io.Load(val["sprite"][idx], dir);
 		pos += spr_io.m_position;
 
 		for (int i = 0, n = val["sprite"].size(); i < n; ++i) 
@@ -611,7 +615,8 @@ void LRJsonPacker::ParserParticleLayer(const Json::Value& spr_val, Json::Value& 
 	Json::Value dec_val;
 
 	ee::SpriteIO spr_io;
-	spr_io.Load(spr_val);
+	std::string dir = ee::FileHelper::GetFileDir(spr_val["filepath"].asString());
+	spr_io.Load(spr_val, dir);
 
 	dec_val["x"] = spr_io.m_position.x;
 	dec_val["y"] = spr_io.m_position.y;
