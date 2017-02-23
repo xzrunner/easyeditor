@@ -16,11 +16,12 @@ public:
 	static void Load(const std::string& filepath, const Json::Value& value, 
 		const std::string& dir, Symbol* complex);
 
+	static void CreateActionsFromTag(Symbol* sym);
+
 private:
 	static ee::Sprite* LoadSprite(const Json::Value& val, const std::string& dir);
 
 	static void InitActions(Symbol* sym, const Json::Value& val);
-	static void CreateActionsFromTag(Symbol* sym);
 
 }; // LoadFromJson
 

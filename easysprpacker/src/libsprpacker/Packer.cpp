@@ -277,6 +277,8 @@ void Packer::AddUIWndSymbol(const std::string& filepath)
 	sym->SetFilepath(wrapper_path);
 	sym->name = val["name"].asString();
 
+	ecomplex::LoadFromJson::CreateActionsFromTag(sym);
+
 	m_syms.push_back(sym);
 }
 

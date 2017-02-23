@@ -47,25 +47,6 @@ void LoadFromJson::Load(const std::string& _filepath, const Json::Value& value,
 	InitActions(complex, value);
 }
 
-ee::Sprite* LoadFromJson::LoadSprite(const Json::Value& val, const std::string& dir)
-{
-	ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(val, dir);
-#ifdef OPEN_SCREEN_CACHE
-	ee::SpatialPartition::Instance()->Insert(spr);
-	ee::SpriteRenderer::InvalidRect(spr);
-#endif // OPEN_SCREEN_CACHE
-	return spr;
-}
-
-void LoadFromJson::InitActions(Symbol* sym, const Json::Value& val)
-{
-// 	if (val.isMember("action")) {
-// 		gum::ComplexSymLoader::LoadJsonAction(val, sym);	
-// 	} else {
-		CreateActionsFromTag(sym);
-//	}
-}
-
 void LoadFromJson::CreateActionsFromTag(Symbol* sym)
 {
 	std::vector<s2::ComplexSymbol::Action> actions;
@@ -105,6 +86,25 @@ void LoadFromJson::CreateActionsFromTag(Symbol* sym)
 	}
 
 	sym->SetActions(actions);
+}
+
+ee::Sprite* LoadFromJson::LoadSprite(const Json::Value& val, const std::string& dir)
+{
+	ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(val, dir);
+#ifdef OPEN_SCREEN_CACHE
+	ee::SpatialPartition::Instance()->Insert(spr);
+	ee::SpriteRenderer::InvalidRect(spr);
+#endif // OPEN_SCREEN_CACHE
+	return spr;
+}
+
+void LoadFromJson::InitActions(Symbol* sym, const Json::Value& val)
+{
+// 	if (val.isMember("action")) {
+// 		gum::ComplexSymLoader::LoadJsonAction(val, sym);	
+// 	} else {
+		CreateActionsFromTag(sym);
+//	}
 }
 
 }
