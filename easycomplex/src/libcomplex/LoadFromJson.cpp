@@ -12,6 +12,8 @@
 
 #include <gum/ComplexSymLoader.h>
 
+#include <assert.h>
+
 namespace ecomplex
 {
 
@@ -49,42 +51,74 @@ void LoadFromJson::Load(const std::string& _filepath, const Json::Value& value,
 
 void LoadFromJson::CreateActionsFromTag(Symbol* sym)
 {
-	std::vector<s2::ComplexSymbol::Action> actions;
+	std::map<std::string, std::vector<s2::Sprite*> > map_actions;
 
 	const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i)
 	{
-		ee::Sprite* spr = dynamic_cast<ee::Sprite*>(children[i]);
-		if (spr->GetTag().empty()) {
-			continue;			
-		}
-
-		std::vector<std::string> tags;
-		ee::StringHelper::Split(spr->GetTag(), ";", tags);
+ 		ee::Sprite* spr = dynamic_cast<ee::Sprite*>(children[i]);
+ 		if (spr->GetTag().empty()) {
+ 			continue;			
+ 		}
+ 
+ 		std::vector<std::string> tags;
+ 		ee::StringHelper::Split(spr->GetTag(), ";", tags);
 		for (int j = 0, m = tags.size(); j < m; ++j)
 		{
-			const std::string& tag = tags[j];
-			if (tag.find("=") != std::string::npos) {
-				continue;
-			}
-
-			bool find = false;
-			for (int k = 0; k < actions.size(); ++k) {
-				if (actions[k].name == tag) {
-					find = true;
-					actions[k].sprs.push_back(spr);
-				}
-			}
-
-			if (!find) {
-				s2::ComplexSymbol::Action a;
-				a.name = tag;
-				a.sprs.push_back(spr);
-				actions.push_back(a);
+ 			const std::string& tag = tags[j];
+ 			if (tag.find("=") != std::string::npos) {
+ 				continue;
+ 			}
+			if (map_actions.find(tag) == map_actions.end()) {
+				map_actions.insert(std::make_pair(tag, std::vector<s2::Sprite*>()));
 			}
 		}
 	}
 
+	for (int i = 0, n = children.size(); i < n; ++i)
+	{
+		ee::Sprite* spr = dynamic_cast<ee::Sprite*>(children[i]);
+
+		bool inserted = false;
+		if (!spr->GetTag().empty()) 
+		{
+			std::vector<std::string> tags;
+			ee::StringHelper::Split(spr->GetTag(), ";", tags);
+			for (int j = 0, m = tags.size(); j < m; ++j)
+			{
+				const std::string& tag = tags[j];
+				if (tag.find("=") != std::string::npos) {
+					continue;
+				}
+
+				std::map<std::string, std::vector<s2::Sprite*> >::iterator itr 
+					= map_actions.find(tag);
+				assert(itr != map_actions.end());
+				itr->second.push_back(spr);
+				inserted = true;
+			}			
+		}
+
+		if (!inserted) {
+			std::map<std::string, std::vector<s2::Sprite*> >::iterator itr 
+				= map_actions.begin();
+			for ( ; itr != map_actions.end(); ++itr) {
+				itr->second.push_back(spr);
+			}
+		}
+	}
+
+	std::vector<s2::ComplexSymbol::Action> actions;
+	actions.reserve(map_actions.size());
+	std::map<std::string, std::vector<s2::Sprite*> >::iterator itr 
+		= map_actions.begin();
+	for ( ; itr != map_actions.end(); ++itr) 
+	{
+		s2::ComplexSymbol::Action action;
+		action.name = itr->first;
+		action.sprs = itr->second;
+		actions.push_back(action);
+	}
 	sym->SetActions(actions);
 }
 
