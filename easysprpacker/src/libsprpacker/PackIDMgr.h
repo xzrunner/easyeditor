@@ -29,6 +29,8 @@ public:
 	bool IsCurrImgCut() const { return m_curr_pkg ? m_curr_pkg->img_cut : false; }
 	void GetCurrImgCutPath(std::string& img, std::string& json, std::string& ori) const;
 
+	void SetCurrPkgID(int id) { m_curr_pkg_id = id; }
+
 private:
 	struct Package
 	{
@@ -53,6 +55,7 @@ private:
 	std::vector<Package*> m_pkgs;
 
 	Package* m_curr_pkg;
+	int m_curr_pkg_id;
 
 	SINGLETON_DECLARATION(PackIDMgr)
 

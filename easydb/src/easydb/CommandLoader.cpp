@@ -71,6 +71,7 @@
 #include "FixAddColor.h"
 #include "ChangeComplexOrigin.h"
 #include "FixLRSprLayer.h"
+#include "LRPackerNew.h"
 
 namespace edb
 {
@@ -147,6 +148,7 @@ void CommandLoader::Init()
 	fc->Register(FixAddColor::Create());
 	fc->Register(ChangeComplexOrigin::Create());
 	fc->Register(FixLRSprLayer::Create());
+	fc->Register(LRPackerNew::Create());
 }
 
 }

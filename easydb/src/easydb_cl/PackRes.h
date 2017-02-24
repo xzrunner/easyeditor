@@ -27,7 +27,8 @@ public:
 
 	static ICommand* Create() { return new PackRes(); }
 
-	void Trigger(const std::string& str_val, const std::string& dir);
+	void Pack(const std::string& str_val, const std::string& dir);
+	void PackNew(const std::string& str_val, const std::string& dir);
 
 private:
 	void Prepare(const Json::Value& pkg_val, const std::string& config_dir);
@@ -54,6 +55,7 @@ private:
 
 	// new packer
 	void PackLuaAndBinFiles(const Json::Value& pkg_val, const std::string& config_dir, int LOD) const;
+	void PackLuaAndBinFilesNew(const Json::Value& pkg_val, const std::string& config_dir, int LOD) const;
 
 	std::string ConnectCfgDir(const std::string& cfg_dir, const std::string& path) const;
 

@@ -12,7 +12,7 @@ PackNode::PackNode()
 {
 }
 
-int PackNode::GetID() const
+uint32_t PackNode::GetID() const
 {	
 	return simp::NodeID::ComposeID(m_pkg_id, m_node_id);
 }

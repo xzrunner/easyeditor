@@ -690,6 +690,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\easydb_cl\GenPackCfg.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb_cl\GenPackCfg.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\easydb_cl\RemoveDuplicateSprite.cpp"
 					>
 				</File>
@@ -835,6 +843,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\easydb_cl\LRPacker.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb_cl\LRPackerNew.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb_cl\LRPackerNew.h"
 					>
 				</File>
 				<Filter

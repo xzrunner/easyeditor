@@ -15,6 +15,7 @@
 
 #include <easytexpacker.h>
 #include <easyrespacker.h>
+#include <easysprpacker.h>
 #include <epbin.h>
 #include <easycoco.h>
 #include <easyimage.h>
@@ -49,12 +50,12 @@ int PackRes::Run(int argc, char *argv[])
 	if (!check_file(argv[2])) return -1;
 	if (!check_folder(argv[3])) return -1;
 
-	Trigger(argv[2], argv[3]);
+	Pack(argv[2], argv[3]);
 
 	return 0;
 }
 
-void PackRes::Trigger(const std::string& str_val, const std::string& dir)
+void PackRes::Pack(const std::string& str_val, const std::string& dir)
 {
 	Json::Value value;
 	Json::Reader reader;
@@ -78,6 +79,29 @@ void PackRes::Trigger(const std::string& str_val, const std::string& dir)
 		// new 
 		int LOD = pkg_val["LOD"].asInt();
 		PackLuaAndBinFiles(pkg_val, config_dir, LOD);
+
+		pkg_val = value["packages"][i++];
+	}
+}
+
+void PackRes::PackNew(const std::string& str_val, const std::string& dir)
+{
+	Json::Value value;
+	Json::Reader reader;
+	reader.parse(str_val, value);
+
+	std::string config_dir = ee::FileHelper::FormatFilepathAbsolute(dir);
+
+	std::string trim_file = ConnectCfgDir(config_dir, value["trim file"].asString());
+
+	int i = 0;
+	Json::Value pkg_val = value["packages"][i++];
+	while (!pkg_val.isNull()) {
+		Prepare(pkg_val, config_dir);
+		PackTexture(pkg_val, config_dir);
+
+		int LOD = pkg_val["LOD"].asInt();
+		PackLuaAndBinFilesNew(pkg_val, config_dir, LOD);
 
 		pkg_val = value["packages"][i++];
 	}
@@ -587,6 +611,19 @@ void PackRes::PackLuaAndBinFiles(const Json::Value& pkg_val, const std::string& 
 	packer.OutputEptDesc(tp_name);
 
 	// debug
+	packer.OutputLua(tp_name + ".lua");
+}
+
+void PackRes::PackLuaAndBinFilesNew(const Json::Value& pkg_val, const std::string& config_dir, int LOD) const
+{
+	std::string name = pkg_val["name"].asString();
+	//	std::string tp_dir = ConnectCfgDir(config_dir, pkg_val["dst"].asString());
+	std::string tp_dir = config_dir;
+	std::string tp_name = ConnectCfgDir(config_dir, pkg_val["dst"].asString()) + "\\" + name;
+
+	esprpacker::Packer packer(config_dir, tp_name, tp_dir);
+	packer.OutputEpe(tp_name, true);
+	packer.OutputEpt(tp_name, LOD);
 	packer.OutputLua(tp_name + ".lua");
 }
 

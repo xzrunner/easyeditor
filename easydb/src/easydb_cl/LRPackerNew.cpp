@@ -1,4 +1,4 @@
-#include "LRPacker.h"
+#include "LRPackerNew.h"
 #include "check_params.h"
 #include "utility.h"
 #include "lr_tools.h"
@@ -17,29 +17,31 @@
 #include <ee/ImageData.h>
 #include <ee/SymbolMgr.h>
 
+#include <easysprpacker.h>
+
 #include <wx/stdpaths.h>
 
 namespace edb
 {
 
-std::string LRPacker::Command() const
+std::string LRPackerNew::Command() const
 {
-	return "lr-packer";
+	return "lr-packer-new";
 }
 
-std::string LRPacker::Description() const
+std::string LRPackerNew::Description() const
 {
 	return "lr packer";
 }
 
-std::string LRPacker::Usage() const
+std::string LRPackerNew::Usage() const
 {
 	// lr-packer e:/test2/test_lr.json tmp_dir out_dir only_json lod
-	std::string usage = Command() + " [filepath] [tmp dir] [out dir] [only json] [LOD] [fmt] [max tex area]";
+	std::string usage = Command() + " [filepath] [tmp dir] [out dir] [only json] [LOD] [fmt] [max tex area] []";
 	return usage;
 }
 
-int LRPacker::Run(int argc, char *argv[])
+int LRPackerNew::Run(int argc, char *argv[])
 {
 	if (!check_number(this, argc, 5)) return -1;
 	if (!check_file(argv[2])) return -1;
@@ -84,20 +86,13 @@ int LRPacker::Run(int argc, char *argv[])
 	json_pack.Run(tmp_lr_file);
 
 	// 5
-	if (only_json != 1) {
+	if (only_json != 1) 
+	{
+		assert(argc > 8);
 		int LOD = ee::StringHelper::FromString<int>(argv[6]);
-
-		std::string fmt = "png";
-		if (argc > 7) {
-			fmt = argv[7];
-		}
-
-		int max_tex_area = 2048 * 2048 * 2;
-		if (argc > 8) {
-			max_tex_area = 2048 * 2048 * ee::StringHelper::FromString<int>(argv[8]);
-		}
-
-		PackEP(tmp_dir, tmp_lr_file, out_dir, LOD, fmt, max_tex_area);
+		std::string fmt = argv[7];
+		int pkg_id = ee::StringHelper::FromString<int>(argv[8]);
+		PackEP(tmp_dir, tmp_lr_file, out_dir, LOD, fmt, pkg_id);
 	}
 
 	// end
@@ -107,10 +102,12 @@ int LRPacker::Run(int argc, char *argv[])
 	return 0;
 }
 
-void LRPacker::PackEP(const std::string& tmp_dir, const std::string& tmp_lr_file,
-					  const std::string& out_dir, int LOD,
-					  const std::string& fmt, int max_tex_area)
+void LRPackerNew::PackEP(const std::string& tmp_dir, const std::string& tmp_lr_file,
+						 const std::string& out_dir, int LOD,
+						 const std::string& fmt, int pkg_id)
 {
+	esprpacker::PackIDMgr::Instance()->SetCurrPkgID(pkg_id);
+
 	Json::Value val;
 
 // 		std::string trim_file = argv[6];
@@ -142,10 +139,6 @@ void LRPacker::PackEP(const std::string& tmp_dir, const std::string& tmp_lr_file
 	std::string _out_dir = ee::FileHelper::GetRelativePath(tmp_dir, out_dir);
 	pkg_val["LOD"] = LOD;
 
-	if (max_tex_area != 0) {
-		pkg_val["tex_capacity"] = max_tex_area;
-	}
-
 	idx = 0;
 	if (fmt == "png")
 	{
@@ -155,7 +148,7 @@ void LRPacker::PackEP(const std::string& tmp_dir, const std::string& tmp_lr_file
 		pkg_val["extrude"] = 1;
 		val["packages"][idx] = pkg_val;
 		PackRes pack;
-		pack.Pack(val.toStyledString(), tmp_dir);
+		pack.PackNew(val.toStyledString(), tmp_dir);
 	}
 	else if (fmt == "pvr")
 	{
@@ -165,7 +158,7 @@ void LRPacker::PackEP(const std::string& tmp_dir, const std::string& tmp_lr_file
 		pkg_val["extrude"] = 4;
 		val["packages"][idx] = pkg_val;
 		PackRes pack;
-		pack.Pack(val.toStyledString(), tmp_dir);
+		pack.PackNew(val.toStyledString(), tmp_dir);
 	}
 	else if (fmt == "etc2")
 	{
@@ -175,11 +168,11 @@ void LRPacker::PackEP(const std::string& tmp_dir, const std::string& tmp_lr_file
 		pkg_val["extrude"] = 1;
 		val["packages"][idx] = pkg_val;
 		PackRes pack;
-		pack.Pack(val.toStyledString(), tmp_dir);
+		pack.PackNew(val.toStyledString(), tmp_dir);
 	}
 }
 
-void LRPacker::ClearCached()
+void LRPackerNew::ClearCached()
 {
 	ee::SymbolMgr::Instance()->Clear();
 

@@ -24,6 +24,7 @@ SINGLETON_DEFINITION(PackIDMgr)
 
 PackIDMgr::PackIDMgr()
 	: m_curr_pkg(NULL)
+	, m_curr_pkg_id(-1)
 {
 }
 
@@ -84,6 +85,10 @@ void PackIDMgr::Init(const std::string& filepath, const std::string& platform)
 
 void PackIDMgr::AddCurrPath(const std::string& path)
 {
+	if (m_curr_pkg_id != -1) {
+		return;
+	}
+
 	std::string fix = gum::FilepathHelper::Format(path);
 	m_curr_paths.push_back(fix);
 
@@ -102,8 +107,13 @@ void PackIDMgr::AddCurrPath(const std::string& path)
 void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id) const
 {
 	static int NEXT_NODE_ID = 0;
-
-	if (IsCurrPkg(filepath)) 
+	if (m_curr_pkg_id != -1)
+	{
+		pkg_id = m_curr_pkg_id;
+		node_id = NEXT_NODE_ID++;
+		return;
+	}
+	else if (IsCurrPkg(filepath)) 
 	{
 		assert(m_curr_pkg);
 		pkg_id = m_curr_pkg->id;
@@ -134,6 +144,9 @@ void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id) 
 
 bool PackIDMgr::IsCurrPkg(const std::string& filepath) const
 {
+	if (m_curr_pkg_id != -1) {
+		return true;
+	}
 	if (filepath.empty() || filepath == ee::SYM_GROUP_TAG || filepath == SPRITE_FILEPATH) {
 		return true;
 	}
@@ -150,7 +163,8 @@ bool PackIDMgr::IsCurrPkg(const std::string& filepath) const
 
 bool PackIDMgr::IsCurrPkg(const PackNode* node) const
 {
-	return node->GetPkgID() == m_curr_pkg->id;
+	int curr_pkg_id = (m_curr_pkg_id != -1 ? m_curr_pkg_id : m_curr_pkg->id);
+	return curr_pkg_id == node->GetPkgID();
 }
 
 std::string PackIDMgr::GetSprIDFile(const std::string& pkg_name) const
