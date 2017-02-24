@@ -85,7 +85,7 @@ void PackShape::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TextureP
 		lua::assign_with_end(gen, "color", m_color.ToRGBA());
 	}
 
-	PackCoords::PackToLua(gen, m_vertices, "vertices");
+	PackCoords::PackToLuaF32(gen, m_vertices, "vertices");
 
 	gen.detab();
 	gen.line("},");
@@ -94,7 +94,7 @@ void PackShape::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TextureP
 int PackShape::SizeOfUnpackFromBin() const
 {
 	int sz = simp::NodeShape::Size();
-	sz += PackCoords::SizeOfUnpackFromBin(m_vertices);
+	sz += PackCoords::SizeOfUnpackFromBinF32(m_vertices);
 	return sz;
 }
 
@@ -105,7 +105,7 @@ int PackShape::SizeOfPackToBin() const
 	sz += sizeof(uint8_t);								// type
 	sz += sizeof(uint8_t);								// shape type
 	sz += sizeof(uint32_t);								// color or texture_id
-	sz += PackCoords::SizeOfPackToBin(m_vertices);	// vertices
+	sz += PackCoords::SizeOfPackToBinF32(m_vertices);	// vertices
 	return sz;
 }
 
@@ -128,7 +128,7 @@ void PackShape::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scal
 		pack(font_color, ptr);
 	}
 
-	PackCoords::PackToBin(m_vertices, ptr);
+	PackCoords::PackToBinF32(m_vertices, ptr);
 }
 
 }
