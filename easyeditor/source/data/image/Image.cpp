@@ -36,6 +36,9 @@ Image::Image(const uint8_t* pixels, int w, int h, int fmt)
 
 	m_ori_sz.x = static_cast<float>(m_tex->GetWidth());
 	m_ori_sz.y = static_cast<float>(m_tex->GetHeight());
+	m_clipped_region.xmin = m_clipped_region.ymin = 0;
+	m_clipped_region.xmax = m_ori_sz.x;
+	m_clipped_region.ymax = m_ori_sz.y;
 
 	m_s2_tex = new s2::Texture(m_tex->GetWidth(), m_tex->GetHeight(), m_tex->GetTexID());
 }
