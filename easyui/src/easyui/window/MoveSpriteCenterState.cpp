@@ -53,7 +53,7 @@ bool MoveSpriteCenterState::OnMouseDrag(const sm::vec2& pos)
 	m_dirty = true;
 
 	const ecomplex::Symbol* sym = dynamic_cast<const ecomplex::Symbol*>(m_spr->GetSymbol());
-	const std::vector<s2::Sprite*>& children = sym->GetChildren();
+	const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
 		children[i]->Translate(-offset);
 	}

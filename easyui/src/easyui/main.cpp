@@ -5,6 +5,7 @@
 #include <easyui.h>
 #include <easycomplex.h>
 #include <easyanim.h>
+#include <easyanim2.h>
 #include <easyscale9.h>
 #include <easymesh.h>
 #include <easymask.h>
@@ -31,6 +32,9 @@ static void InitSymbolCreators()
 
 	ee::SymbolFactory::RegisterCreator(s2::SYM_ANIMATION, &libanim::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_ANIMATION, &libanim::Sprite::Create);
+
+	ee::SymbolFactory::RegisterCreator(s2::SYM_ANIM2, &libanim2::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_ANIM2, &libanim2::Sprite::Create);
 
 	ee::SymbolFactory::RegisterCreator(s2::SYM_SCALE9, &escale9::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_SCALE9, &escale9::Sprite::Create);

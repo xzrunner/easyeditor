@@ -238,7 +238,7 @@ void UIList::LoadFromFile(const char* filename)
 	items_filepath = ee::FileHelper::GetAbsolutePathFromFile(filename, items_filepath);
 	ecomplex::Symbol items_complex;
 	items_complex.LoadFromFile(items_filepath);
-	const std::vector<s2::Sprite*>& children = items_complex.GetChildren();
+	const std::vector<s2::Sprite*>& children = items_complex.GetAllChildren();
 	if (!m_reverse_order) {
 		for (int i = 0, n = children.size(); i < n; ++i) {
 			ee::Sprite* spr = dynamic_cast<ee::Sprite*>(children[i]);

@@ -6,6 +6,8 @@
 #include <ee/SpriteRenderer.h>
 #include <ee/PlayControl.h>
 
+#include <sprite2/CameraType.h>
+
 namespace eui
 {
 namespace window
