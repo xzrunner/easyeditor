@@ -46,23 +46,20 @@ PackTrans::PackTrans(const s2::Sprite& spr, bool force_name)
 	// shader
 
 	m_color = spr.GetColor();
-	if (m_color.GetMul() != s2::Color(0xffffffff)) {
+	if (m_color.GetMulABGR() != 0xffffffff) {
 		m_type |= simp::NodeTrans::COL_MUL_MASK;
 	}
-	if (m_color.GetAdd() != s2::Color(0)) {
+	if (m_color.GetAddABGR() != 0) {
 		m_type |= simp::NodeTrans::COL_ADD_MASK;
 	}
-	const s2::Color& rmap = m_color.GetMapR();
-	if (rmap.r != 255 || rmap.g != 0 || rmap.b != 0) {
+	if (m_color.GetRMapABGR() != 0x000000ff) {
 		m_type |= simp::NodeTrans::COL_R_MASK;
 	}
-	const s2::Color& gmap = m_color.GetMapG();
-	if (gmap.r != 0 || gmap.g != 255 || gmap.b != 0) {
-		m_type |= simp::NodeTrans::COL_G_MASK;
+	if (m_color.GetGMapABGR() != 0x0000ff00) {
+		m_type |= simp::NodeTrans::COL_R_MASK;
 	}
-	const s2::Color& bmap = m_color.GetMapB();
-	if (bmap.r != 0 || bmap.g != 0 || bmap.b != 255) {
-		m_type |= simp::NodeTrans::COL_B_MASK;
+	if (m_color.GetBMapABGR() != 0x00ff0000) {
+		m_type |= simp::NodeTrans::COL_R_MASK;
 	}
 
 	m_blend = spr.GetShader().GetBlend();
@@ -141,13 +138,13 @@ void PackTrans::PackToLua(ebuilder::CodeGenerator& gen) const
 		colors.push_back(lua::assign("add", ee::StringHelper::ToString(m_color.GetAdd().ToRGBA())));
 	}
 	if (m_type & simp::NodeTrans::COL_R_MASK) {
-		colors.push_back(lua::assign("rmap", ee::StringHelper::ToString(m_color.GetMapR().ToRGBA())));
+		colors.push_back(lua::assign("rmap", ee::StringHelper::ToString(m_color.GetRMap().ToRGBA())));
 	}
 	if (m_type & simp::NodeTrans::COL_G_MASK) {
-		colors.push_back(lua::assign("gmap", ee::StringHelper::ToString(m_color.GetMapG().ToRGBA())));
+		colors.push_back(lua::assign("gmap", ee::StringHelper::ToString(m_color.GetGMap().ToRGBA())));
 	}
 	if (m_type & simp::NodeTrans::COL_B_MASK) {
-		colors.push_back(lua::assign("bmap", ee::StringHelper::ToString(m_color.GetMapB().ToRGBA())));
+		colors.push_back(lua::assign("bmap", ee::StringHelper::ToString(m_color.GetBMap().ToRGBA())));
 	}
 	lua::connect(gen, colors);
 
@@ -311,15 +308,15 @@ void PackTrans::PackToBin(uint8_t** ptr) const
 		pack(col, ptr);
 	}
 	if (m_type & simp::NodeTrans::COL_R_MASK) {
-		uint32_t col = m_color.GetMapR().ToRGBA();
+		uint32_t col = m_color.GetRMap().ToRGBA();
 		pack(col, ptr);
 	}
 	if (m_type & simp::NodeTrans::COL_G_MASK) {
-		uint32_t col = m_color.GetMapG().ToRGBA();
+		uint32_t col = m_color.GetGMap().ToRGBA();
 		pack(col, ptr);
 	}
 	if (m_type & simp::NodeTrans::COL_B_MASK) {
-		uint32_t col = m_color.GetMapB().ToRGBA();
+		uint32_t col = m_color.GetBMap().ToRGBA();
 		pack(col, ptr);
 	}
 	if (m_type & simp::NodeTrans::BLEND_MASK) {

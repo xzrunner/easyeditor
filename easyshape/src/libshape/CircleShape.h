@@ -22,7 +22,7 @@ public:
 	virtual CircleShape* Clone() const { return new CircleShape(*this); }
 	virtual bool IsContain(const sm::vec2& pos) const { return s2::CircleShape::IsContain(pos); }
 	virtual bool IsIntersect(const sm::rect& rect) const { return s2::CircleShape::IsIntersect(rect); }
-	virtual void Draw(const sm::mat4& mt, const s2::RenderColor* color = NULL) const { s2::CircleShape::Draw(mt, color); }
+	virtual void Draw(const s2::RenderParams& rp) const { s2::CircleShape::Draw(rp); }
 
 	/**
 	 *  @interface

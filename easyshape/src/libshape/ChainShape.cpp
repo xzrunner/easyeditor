@@ -29,9 +29,9 @@ ChainShape::ChainShape(const std::vector<sm::vec2>& vertices, bool closed)
 {
 }
 
-void ChainShape::Draw(const sm::mat4& mt, const s2::RenderColor* color) const
+void ChainShape::Draw(const s2::RenderParams& rp) const
 {
-	s2::PolylineShape::Draw(mt, color);
+	s2::PolylineShape::Draw(rp);
 
 	if (m_draw_dir && m_vertices.size() >= 2) {
 		s2::RVG::Arrow(m_vertices[m_vertices.size() - 2], m_vertices[m_vertices.size() - 1]);

@@ -10,14 +10,14 @@
 #include "EE_DTex.h"
 #include "EE_GTxt.h"
 
-#include <unirender/RenderContext.h>
+#include <unirender/UR_RenderContext.h>
 #include <shaderlab/ShaderMgr.h>
 #include <sprite2/RenderCtxStack.h>
 #include <sprite2/SprTimer.h>
 #include <gum/GUM_ShaderLab.h>
 #include <gum/GUM_DTex.h>
 #include <gum/RenderContext.h>
-#include <gum/AsyncTask.h>
+#include <gum/GUM_AsyncTask.h>
 
 namespace ee
 {

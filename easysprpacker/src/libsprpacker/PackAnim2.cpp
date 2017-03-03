@@ -11,7 +11,7 @@ namespace lua = ebuilder::lua;
 #include <polymesh/Mesh.h>
 #include <sprite2/SymType.h>
 #include <sprite2/MeshSymbol.h>
-#include <sprite2/Mesh.h>
+#include <sprite2/S2_Mesh.h>
 #include <simp/NodeAnim2.h>
 #include <simp/simp_types.h>
 

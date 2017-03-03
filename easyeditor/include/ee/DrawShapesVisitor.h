@@ -4,7 +4,7 @@
 #include "Visitor.h"
 #include "Shape.h"
 
-#include <sprite2/RenderColor.h>
+#include <sprite2/RenderParams.h>
 #include <SM_Rect.h>
 
 namespace ee
@@ -21,7 +21,7 @@ private:
 	sm::rect m_screen_region;
 	float m_cam_scale;
 
-	s2::RenderColor m_ct;
+	s2::RenderParams m_rp;
 
 }; // DrawShapesVisitor
 

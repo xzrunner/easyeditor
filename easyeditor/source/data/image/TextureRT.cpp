@@ -1,7 +1,7 @@
 #include "TextureRT.h"
 
 #include <gimg_typedef.h>
-#include <sprite2/RenderTarget.h>
+#include <sprite2/S2_RenderTarget.h>
 
 namespace ee
 {

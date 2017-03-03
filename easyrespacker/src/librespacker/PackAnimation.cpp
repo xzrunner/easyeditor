@@ -227,12 +227,12 @@ void PackAnimation::LoadSprColor(const ee::Sprite* spr, SpriteTrans& trans)
 {
 	const s2::RenderColor& rc = spr->GetColor();
 
-	trans.color    = gum::color2int(rc.GetMul(), gum::ARGB);
-	trans.additive = gum::color2int(rc.GetAdd(), gum::ARGB);
+	trans.color    = gum::color2int(rc.GetMul(), s2::ARGB);
+	trans.additive = gum::color2int(rc.GetAdd(), s2::ARGB);
 
-	trans.rmap = rc.GetMapR().ToRGBA();
-	trans.gmap = rc.GetMapG().ToRGBA();
-	trans.bmap = rc.GetMapB().ToRGBA();	
+	trans.rmap = rc.GetRMap().ToRGBA();
+	trans.gmap = rc.GetGMap().ToRGBA();
+	trans.bmap = rc.GetBMap().ToRGBA();	
 }
 
 bool PackAnimation::IsMatrixIdentity(const int* mat)

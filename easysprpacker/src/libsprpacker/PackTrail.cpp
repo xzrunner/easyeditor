@@ -184,10 +184,10 @@ CompImage(const t2d_symbol& sym)
 	m_scale_begin		= sym.mode.A.scale_begin;
 	m_scale_end			= sym.mode.A.scale_end;
 
-	m_mul_col_begin		= gum::color2int(sym.col_begin.rgba, gum::RGBA);
-	m_mul_col_end		= gum::color2int(sym.col_end.rgba, gum::RGBA);
-	m_add_col_begin		= gum::color2int(sym.mode.A.add_col_begin.rgba, gum::RGBA);
-	m_add_col_end		= gum::color2int(sym.mode.A.add_col_end.rgba, gum::RGBA);
+	m_mul_col_begin		= gum::color2int(sym.col_begin.rgba, s2::RGBA);
+	m_mul_col_end		= gum::color2int(sym.col_end.rgba, s2::RGBA);
+	m_add_col_begin		= gum::color2int(sym.mode.A.add_col_begin.rgba, s2::RGBA);
+	m_add_col_end		= gum::color2int(sym.mode.A.add_col_end.rgba, s2::RGBA);
 }
 
 PackTrail::CompImage::
@@ -256,8 +256,8 @@ CompShape(const t2d_symbol& sym)
 	m_linewidth		= sym.mode.B.size;
 	m_acuity		= sym.mode.B.acuity;
 
-	m_col_begin		= gum::color2int(sym.col_begin.rgba, gum::RGBA);
-	m_col_end		= gum::color2int(sym.col_end.rgba, gum::RGBA);
+	m_col_begin		= gum::color2int(sym.col_begin.rgba, s2::RGBA);
+	m_col_end		= gum::color2int(sym.col_end.rgba, s2::RGBA);
 }
 
 void PackTrail::CompShape::

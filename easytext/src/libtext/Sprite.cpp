@@ -63,11 +63,11 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 
 	text_val["font"]			= m_tb.font_type;
 	text_val["font_size"]		= m_tb.font_size;
-	text_val["font_color"]		= color2str(m_tb.font_color, gum::RGBA);
+	text_val["font_color"]		= gum::color2str(m_tb.font_color, s2::RGBA);
 
 	text_val["edge"]			= m_tb.has_edge;
 	text_val["edge_size"]		= m_tb.edge_size;
-	text_val["edge_color"]		= color2str(m_tb.edge_color, gum::RGBA);
+	text_val["edge_color"]		= gum::color2str(m_tb.edge_color, s2::RGBA);
 
 	text_val["align_hori"]		= m_tb.align_hori;
 	text_val["align_vert"]		= m_tb.align_vert;

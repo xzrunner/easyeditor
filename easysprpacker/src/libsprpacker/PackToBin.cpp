@@ -9,7 +9,7 @@
 
 #include <easyrespacker.h>
 
-#include <bimp/typedef.h>
+#include <bimp/bimp_typedef.h>
 #include <simp/simp_define.h>
 #include <simp/Page.h>
 
@@ -59,12 +59,7 @@ void PackToBin::Pack(const std::string& filepath,
 	for (int i = 0, n = nodes.size(); i < n; ++i)
 	{
 		PackNode* node = nodes[i];
-
 		int sz = node->SizeOfUnpackFromBin();
-		if (sz >= simp::PAGE_SIZE) {
-			int zz = 0;
-		}
-
 		int head_sz = sizeof(uint8_t) * ALIGN_4BYTE(page->NodeNum() + 1) 
 			        + simp::SIZEOF_POINTER * (page->NodeNum() + 1);
 		while (true)

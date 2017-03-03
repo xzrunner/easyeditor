@@ -6,9 +6,9 @@
 #include "SpriteRenderer.h"
 #include "EE_SP.h"
 
-#include <unirender/RenderTarget.h>
-#include <unirender/RenderContext.h>
-#include <unirender/Texture.h>
+#include <unirender/UR_RenderTarget.h>
+#include <unirender/UR_RenderContext.h>
+#include <unirender/UR_Texture.h>
 #include <shaderlab/ShaderMgr.h>
 #include <shaderlab/FilterShader.h>
 #include <shaderlab/ColGradingProg.h>
@@ -184,8 +184,8 @@ void TwoPassCanvas::DrawPass2(const float* vertices, const float* texcoords, int
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	mgr->SetShader(sl::SPRITE2);
 	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader());
-	shader->SetColor(color.GetMul().ToABGR(), color.GetAdd().ToABGR());
-	shader->SetColorMap(color.GetMapR().ToABGR(), color.GetMapG().ToABGR(), color.GetMapB().ToABGR());
+	shader->SetColor(color.GetMulABGR(), color.GetAddABGR());
+	shader->SetColorMap(color.GetRMapABGR(), color.GetGMapABGR(), color.GetBMapABGR());
 	shader->Draw(vertices, texcoords, tex_id);
 }
 
@@ -196,20 +196,20 @@ void TwoPassCanvas::DrawDirect() const
 
 void TwoPassCanvas::DrawDRect() const
 {
-	ur::RenderContext* rc = gum::RenderContext::Instance()->GetImpl();
-
-	sm::vec2 offset = s2::RenderCtxStack::Instance()->Top()->GetMVOffset();
-	float scale = s2::RenderCtxStack::Instance()->Top()->GetMVScale();
-
-	gum::DRect* drect = gum::DRect::Instance();
-	if (!drect->Draw(offset , scale))
-	{
-		drect->Bind();
- 		rc->SetClearFlag(ur::MASKC);
- 		rc->Clear(0xffff00ff);
- 		OnDrawSprites();
-		drect->Unbind();
-	}
+// 	ur::RenderContext* rc = gum::RenderContext::Instance()->GetImpl();
+// 
+// 	sm::vec2 offset = s2::RenderCtxStack::Instance()->Top()->GetMVOffset();
+// 	float scale = s2::RenderCtxStack::Instance()->Top()->GetMVScale();
+// 
+// 	gum::DRect* drect = gum::DRect::Instance();
+// 	if (!drect->Draw(offset , scale))
+// 	{
+// 		drect->Bind();
+//  		rc->SetClearFlag(ur::MASKC);
+//  		rc->Clear(0xffff00ff);
+//  		OnDrawSprites();
+// 		drect->Unbind();
+// 	}
 }
 
 void TwoPassCanvas::DebugDraw() const

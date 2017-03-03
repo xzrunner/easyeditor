@@ -12,6 +12,7 @@
 #include <ee/panel_msg.h>
 
 #include <sprite2/S2_RVG.h>
+#include <sprite2/RenderParams.h>
 #include <SM_Calc.h>
 
 namespace eshape
@@ -207,7 +208,7 @@ bool EditBezierOP::OnDraw() const
 		if (m_first_pos.IsValid() && m_curr_pos.IsValid())
 		{
 			BezierShape bezier(m_first_pos, m_curr_pos);
-			bezier.Draw(sm::mat4());
+			bezier.Draw(s2::RenderParams());
 		}
 	}
 

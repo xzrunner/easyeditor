@@ -22,7 +22,7 @@ public:
 	virtual CosineShape* Clone() const { return new CosineShape(*this); }
 	virtual bool IsContain(const sm::vec2& pos) const { return s2::CosineShape::IsContain(pos); }
 	virtual bool IsIntersect(const sm::rect& rect) const { return s2::CosineShape::IsIntersect(rect); }
-	virtual void Draw(const sm::mat4& mt, const s2::RenderColor* color = NULL) const { s2::CosineShape::Draw(mt, color); }
+	virtual void Draw(const s2::RenderParams& rp) const { s2::CosineShape::Draw(rp); }
 
 	/**
 	 *  @interface

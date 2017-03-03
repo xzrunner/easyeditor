@@ -2,7 +2,7 @@
 #include "PackCoords.h"
 
 #include <easymesh.h>
-#include <simp/PointsMesh.h>
+#include <simp/SIMP_PointsMesh.h>
 #include <polymesh/MeshType.h>
 
 namespace esprpacker

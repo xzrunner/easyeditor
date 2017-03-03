@@ -4,7 +4,7 @@
 #include "ImageSymbol.h"
 
 #include <sprite2/BoundingBox.h>
-#include <sprite2/RenderTarget.h>
+#include <sprite2/S2_RenderTarget.h>
 #include <sprite2/DrawRT.h>
 
 namespace ee

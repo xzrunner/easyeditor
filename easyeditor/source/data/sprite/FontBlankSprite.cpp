@@ -10,7 +10,7 @@ namespace ee
 {
 
 FontBlankSprite::FontBlankSprite()
-	: font_color(0xffffffff)
+	: font_color(255, 255, 255, 255)
 {
 	font		= "";
 	has_edge	= false;
@@ -66,7 +66,7 @@ FontBlankSprite::FontBlankSprite(FontBlankSymbol* sym)
 	, Sprite(sym)
 {
 	font = sym->font;
-	font_color = gum::str2color(sym->color, gum::ARGB);
+	font_color = gum::str2color(sym->color, s2::ARGB);
 
 	if (sym->align_hori == 0)
 		align_hori = HAT_LEFT;
@@ -104,7 +104,7 @@ void FontBlankSprite::Load(const Json::Value& val, const std::string& dir)
 	if (val["font"].isNull())
 	{
 		font		= sym->font;
-		font_color	= gum::str2color(sym->color, gum::ARGB);
+		font_color	= gum::str2color(sym->color, s2::ARGB);
 		align_hori	= HoriAlignType((int)sym->align_hori);
 		align_vert	= VertAlignType((int)sym->align_vert);
 		size		= static_cast<int>(sym->size);
@@ -115,7 +115,7 @@ void FontBlankSprite::Load(const Json::Value& val, const std::string& dir)
 	else
 	{
 		font		= val["font"].asString();
-		font_color	= gum::str2color(val["color"].asString(), gum::ARGB);
+		font_color	= gum::str2color(val["color"].asString(), s2::ARGB);
 		// is old version data
 		if (!val["align"].isNull()) {
 			align_hori = HoriAlignType(val["align"].asInt());
@@ -140,7 +140,7 @@ void FontBlankSprite::Store(Json::Value& val, const std::string& dir) const
 	Sprite::Store(val);
 
 	val["font"]			= font;
-	val["color"]		= gum::color2str(font_color, gum::ARGB);
+	val["color"]		= gum::color2str(font_color, s2::ARGB);
 	val["align hori"]	= align_hori;
 	val["align vert"]	= align_vert;
 	val["size"]			= size;

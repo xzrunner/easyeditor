@@ -10,7 +10,7 @@ namespace lua = ebuilder::lua;
 #include <simp/simp_types.h>
 #include <simp/simp_define.h>
 #include <simp/NodeComplex.h>
-#include <bimp/typedef.h>
+#include <bimp/bimp_typedef.h>
 
 namespace esprpacker
 {

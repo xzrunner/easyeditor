@@ -2,7 +2,7 @@
 #include "PackCoords.h"
 #include "PackArray.h"
 
-#include <simp/TrianglesMesh.h>
+#include <simp/SIMP_TrianglesMesh.h>
 #include <polymesh/MeshType.h>
 #include <polymesh/TrianglesHelper.h>
 

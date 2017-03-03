@@ -77,11 +77,11 @@ void FileIO::Load(const char* filename, LibraryPanel* library,
 	// screen
 	if (!value["screen"]["multi_col"].isNull()) {
 		std::string str = value["screen"]["multi_col"].asString();
-		stage->GetScreenMultiColor() = gum::str2color(str, gum::RGBA);
+		stage->GetScreenMultiColor() = gum::str2color(str, s2::RGBA);
 	}
 	if (!value["screen"]["add_col"].isNull()) {
 		std::string str = value["screen"]["add_col"].asString();
-		s2::Color col = gum::str2color(str, gum::RGBA);
+		s2::Color col = gum::str2color(str, s2::RGBA);
 		col.a = 0;
 		stage->GetScreenAddColor() = col;
 	}
@@ -158,8 +158,8 @@ void FileIO::Store(const char* filename, LibraryPanel* library,
 	}
 
 	// screen
-	value["screen"]["multi_col"] = gum::color2str(stage->GetScreenMultiColor(), gum::RGBA);
-	value["screen"]["add_col"]   = gum::color2str(stage->GetScreenAddColor(), gum::RGBA);
+	value["screen"]["multi_col"] = gum::color2str(stage->GetScreenMultiColor(), s2::RGBA);
+	value["screen"]["add_col"]   = gum::color2str(stage->GetScreenAddColor(), s2::RGBA);
 	if (!cfg->m_post_effect_file.empty()) {
 		value["screen"]["post effect"] = ee::FileHelper::GetRelativePath(dir, cfg->m_post_effect_file);
 	}

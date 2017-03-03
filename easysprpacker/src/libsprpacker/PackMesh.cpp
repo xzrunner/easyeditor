@@ -13,7 +13,7 @@ namespace lua = ebuilder::lua;
 
 #include <simp/NodeMesh.h>
 #include <simp/simp_types.h>
-#include <simp/MeshType.h>
+#include <simp/SIMP_MeshType.h>
 #include <polymesh/Mesh.h>
 #include <polymesh/TrianglesMesh.h>
 #include <polymesh/Skin2Mesh.h>

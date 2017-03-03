@@ -3,7 +3,7 @@
 
 #include <ee/Visitor.h>
 
-#include <sprite2/Mesh.h>
+#include <sprite2/S2_Mesh.h>
 
 #include <SM_Vector.h>
 #include <SM_Rect.h>

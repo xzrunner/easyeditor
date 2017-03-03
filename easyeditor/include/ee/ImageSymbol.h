@@ -28,7 +28,7 @@ public:
 	 *  @interface
 	 *    s2::ImageSymbol
 	 */
-	virtual bool QueryTexcoords(float* texcoords, int& texid) const;
+	virtual bool QueryTexcoords(const s2::RenderParams& rp, float* texcoords, int& texid) const;
 
 	unsigned int GetTexID() const;
 

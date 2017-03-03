@@ -359,10 +359,10 @@ Component(const p2d_symbol& sym)
 	m_scale_start		= sym.scale_start;
 	m_scale_end			= sym.scale_end;
 
-	m_mul_col_begin		= gum::color2int(sym.mul_col_begin.rgba, gum::RGBA);
-	m_mul_col_end		= gum::color2int(sym.mul_col_end.rgba, gum::RGBA);
-	m_add_col_begin		= gum::color2int(sym.add_col_begin.rgba, gum::RGBA);
-	m_add_col_end		= gum::color2int(sym.add_col_end.rgba, gum::RGBA);
+	m_mul_col_begin		= gum::color2int(sym.mul_col_begin.rgba, s2::RGBA);
+	m_mul_col_end		= gum::color2int(sym.mul_col_end.rgba, s2::RGBA);
+	m_add_col_begin		= gum::color2int(sym.add_col_begin.rgba, s2::RGBA);
+	m_add_col_end		= gum::color2int(sym.add_col_end.rgba, s2::RGBA);
 
 	ee::Symbol* ee_sym = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(sym.ud));
 	m_node = PackNodeFactory::Instance()->Create(ee_sym);

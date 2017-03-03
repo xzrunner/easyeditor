@@ -291,7 +291,7 @@ void CocoPacker::resolveFont(const ee::FontBlankSprite* spr)
 	}
 
 	std::string aFont = lua::assign("font", "\""+spr->font+"\"");
-	std::string aColor = lua::assign("color", gum::color2str(spr->font_color, gum::ARGB));
+	std::string aColor = lua::assign("color", gum::color2str(spr->font_color, s2::ARGB));
 //	std::string aAlign = lua::assign("align", ee::StringHelper::ToString(spr->align));
 	std::string aAlign = lua::assign("align", ee::StringHelper::ToString(spr->align_hori));
 	std::string aSize = lua::assign("size", ee::StringHelper::ToString(spr->size));
@@ -648,8 +648,8 @@ void CocoPacker::resolveSpriteForFrame(const ee::Sprite* spr, int id, bool force
 	const s2::Color& add = spr->GetColor().GetAdd();
 	if (mul != s2::Color(255, 255, 255, 255) || add != s2::Color(0,0,0,0))
 	{
-		std::string assignColor = lua::assign("color", gum::color2str(mul, gum::BGRA));
-		std::string assignAdd = lua::assign("add", gum::color2str(add, gum::ABGR));
+		std::string assignColor = lua::assign("color", gum::color2str(mul, s2::BGRA));
+		std::string assignAdd = lua::assign("add", gum::color2str(add, s2::ABGR));
 		lua::tableassign(m_gen, "", 4, assignIndex, assignColor, assignAdd, assignMat);
 	}
 	else
@@ -676,8 +676,8 @@ void CocoPacker::resolveSpriteForFrameImage(const ee::Sprite* spr, int id)
 	const s2::Color& add = spr->GetColor().GetAdd();
 	if (mul != s2::Color(1,1,1,1) || add != s2::Color(0,0,0,0))
 	{
-		std::string assignColor = lua::assign("color", gum::color2str(mul, gum::BGRA));
-		std::string assignAdd = lua::assign("add", gum::color2str(add, gum::ABGR));
+		std::string assignColor = lua::assign("color", gum::color2str(mul, s2::BGRA));
+		std::string assignAdd = lua::assign("add", gum::color2str(add, s2::ABGR));
 		if (spr->IsClip())
 			lua::tableassign(m_gen, "", 5, assignIndex, assignColor, assignAdd, assignMat, "clip=true");
 		else

@@ -43,7 +43,7 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 	if (ee::Config::Instance()->GetSettings().visible_shape)
 	{
 		for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
-			m_bg_outline[i]->Draw(p.mt);
+			m_bg_outline[i]->Draw(p);
 		}
 		s2::ShapeSymbol::Draw(params, spr);
 	}

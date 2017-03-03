@@ -8,7 +8,7 @@
 #include <easybuilder.h>
 namespace lua = ebuilder::lua;
 
-#include <bimp/typedef.h>
+#include <bimp/bimp_typedef.h>
 #include <simp/NodeMeshSpr.h>
 #include <simp/simp_types.h>
 

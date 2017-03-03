@@ -1600,7 +1600,7 @@ void CocoPacker::ParserSpriteForComponent(const ee::Sprite* spr, std::vector<int
 			{
 				std::string aName = lua::assign("name", "\""+name+"\"");
 				std::string aFont = lua::assign("font", "\""+font->font+"\"");
-				std::string aColor = lua::assign("color", gum::color2str(font->font_color, gum::ARGB));
+				std::string aColor = lua::assign("color", gum::color2str(font->font_color, s2::ARGB));
 
 //				std::string aAlign = lua::assign("align", ee::StringHelper::ToString(font->align));
 				int align_hori = font->align_hori;
@@ -1912,24 +1912,24 @@ void CocoPacker::GetColorAssignParams(const ee::Sprite* spr, std::vector<std::st
 	const s2::Color& add = spr->GetColor().GetAdd();
 	if (mul != s2::Color(1,1,1,1) || add != s2::Color(0,0,0,0)) 
 	{
-		std::string str_multi = lua::assign("color", color2int(mul, gum::BGRA));
+		std::string str_multi = lua::assign("color", gum::color2int(mul, s2::BGRA));
 		params.push_back(str_multi);
-		std::string str_add = lua::assign("add", color2int(add, gum::ABGR));
+		std::string str_add = lua::assign("add", gum::color2int(add, s2::ABGR));
 		params.push_back(str_add);
 	}
 
-	const s2::Color& rmap = spr->GetColor().GetMapR();
-	const s2::Color& gmap = spr->GetColor().GetMapG();
-	const s2::Color& bmap = spr->GetColor().GetMapB();
+	s2::Color rmap = spr->GetColor().GetRMap();
+	s2::Color gmap = spr->GetColor().GetGMap();
+	s2::Color bmap = spr->GetColor().GetBMap();
 	if (rmap != s2::Color(255, 0, 0, 255) || gmap != s2::Color(0, 255, 0, 255) || bmap != s2::Color(0, 0, 255, 255))
 	{
-		std::string str_r = lua::assign("r_map", gum::color2str(rmap, gum::RGBA));
+		std::string str_r = lua::assign("r_map", gum::color2str(rmap, s2::RGBA));
 		params.push_back(str_r);
 
-		std::string str_g = lua::assign("g_map", gum::color2str(gmap, gum::RGBA));
+		std::string str_g = lua::assign("g_map", gum::color2str(gmap, s2::RGBA));
 		params.push_back(str_g);
 
-		std::string str_b = lua::assign("b_map", gum::color2str(bmap, gum::RGBA));
+		std::string str_b = lua::assign("b_map", gum::color2str(bmap, s2::RGBA));
 		params.push_back(str_b);
 	}
 }

@@ -11,6 +11,8 @@
 #include <ee/Config.h>
 #include <ee/color_config.h>
 
+#include <sprite2/RenderParams.h>
+
 namespace eshape
 {
 
@@ -36,17 +38,17 @@ PolygonShape::~PolygonShape()
 	ClearUserData(true);
 }
 
-void PolygonShape::Draw(const sm::mat4& mt, const s2::RenderColor* color) const
+void PolygonShape::Draw(const s2::RenderParams& rp) const
 {
 	if (m_poly) {
-		m_poly->Draw(mt, *color);
+		m_poly->Draw(rp);
 		if (ee::SettingData::draw_tris_edge) {
-			m_poly->DebugDraw(mt);
+			m_poly->DebugDraw(rp.mt);
 		}
 	}
 
 	if (ee::Config::Instance()->GetSettings().visible_tex_edge) {
-		s2::PolylineShape::Draw(mt, color);
+		s2::PolylineShape::Draw(rp);
 	}
 }
 

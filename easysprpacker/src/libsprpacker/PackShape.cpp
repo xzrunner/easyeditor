@@ -17,7 +17,7 @@ namespace esprpacker
 {
 
 PackShape::PackShape(const eshape::Symbol* sym)
-	: m_color(0)
+	: m_color(0, 0, 0, 0)
 	, m_texture(NULL)
 	, m_filling(false)
 {

@@ -4,8 +4,8 @@
 #include "Sprite.h"
 #include "ImageData.h"
 
-#include <unirender/Texture.h>
-#include <unirender/RenderTarget.h>
+#include <unirender/UR_Texture.h>
+#include <unirender/UR_RenderTarget.h>
 #include <gimg_typedef.h>
 #include <gimg_import.h>
 #include <sprite2/ImageSymbol.h>
@@ -13,7 +13,7 @@
 #include <sprite2/S2_RVG.h>
 #include <gum/RenderContext.h>
 #include <gum/RenderTarget.h>
-#include <gum/AsyncTask.h>
+#include <gum/GUM_AsyncTask.h>
 #include <gum/FilepathHelper.h>
 #include <gum/Config.h>
 
@@ -49,7 +49,7 @@ void ImageSymbol::InvalidRect(const sm::mat4& mt) const
 	m_image->InvalidRect(mt);
 }
 
-bool ImageSymbol::QueryTexcoords(float* texcoords, int& texid) const
+bool ImageSymbol::QueryTexcoords(const s2::RenderParams& rp, float* texcoords, int& texid) const
 {
 	Image* img = GetImage();
 	if (!img) {

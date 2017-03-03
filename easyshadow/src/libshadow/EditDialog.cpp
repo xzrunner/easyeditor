@@ -100,8 +100,7 @@ void EditDialog::InitCamera(ee::Sprite* spr) const
 	float scale = std::min(sz.GetWidth() / r_sz.x, sz.GetHeight() / r_sz.y);
 
 	s2::OrthoCamera* ortho_cam = static_cast<s2::OrthoCamera*>(cam);
-	ortho_cam->SetScale(1 / scale);
-	ortho_cam->SetPosition(sm::vec2(0, 0));
+	ortho_cam->Set(sm::vec2(0, 0), 1 / scale);
 }
 
 }

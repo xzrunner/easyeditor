@@ -1,7 +1,7 @@
 #include "TextureImgData.h"
 #include "Exception.h"
 
-#include <unirender/RenderContext.h>
+#include <unirender/UR_RenderContext.h>
 #include <gimg_typedef.h>
 #include <gum/RenderContext.h>
 

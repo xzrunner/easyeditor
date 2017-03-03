@@ -8,6 +8,7 @@
 #include <ee/SettingData.h>
 
 #include <sprite2/S2_RVG.h>
+#include <sprite2/RenderParams.h>
 #include <SM_DouglasPeucker.h>
 
 namespace eshape
@@ -70,12 +71,12 @@ bool EditPolylinesOP::OnDraw() const
 {
 	if (ee::SelectShapesOP::OnDraw()) return true;
 
-	s2::RenderColor color;
-	color.SetMul(s2::Color(0.8f, 0.8f, 0.2f));
+	s2::RenderParams rp;
+	rp.color.SetMul(s2::Color(0.8f, 0.8f, 0.2f));
 
 	std::map<ChainShape*, ChainShape*>::const_iterator itr = m_simplify_buffer.begin();
 	for ( ; itr != m_simplify_buffer.end(); ++itr) {
-		itr->second->Draw(sm::mat4(), &color);
+		itr->second->Draw(rp);
 		s2::RVG::SetColor(s2::Color(51, 51, 204));
 		s2::RVG::Circles(itr->second->GetVertices(), ee::SettingData::ctl_pos_sz, true);
 	}

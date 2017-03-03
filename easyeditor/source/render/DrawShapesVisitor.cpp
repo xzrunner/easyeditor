@@ -28,7 +28,7 @@ void DrawShapesVisitor::Visit(Shape* shape, bool& next)
 		return;
 	}
 
-	shape->Draw(sm::mat4(), &m_ct);
+	shape->Draw(m_rp);
 
 	ee::SettingData& cfg = ee::Config::Instance()->GetSettings();
 	if (cfg.visible_node_name) 

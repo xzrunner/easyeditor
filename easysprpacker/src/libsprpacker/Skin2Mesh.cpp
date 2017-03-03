@@ -3,8 +3,8 @@
 #include "PackArray.h"
 #include "to_int.h"
 
-#include <bimp/typedef.h>
-#include <simp/Skin2Mesh.h>
+#include <bimp/bimp_typedef.h>
+#include <simp/SIMP_Skin2Mesh.h>
 #include <polymesh/Skin2Triangles.h>
 #include <polymesh/MeshType.h>
 
