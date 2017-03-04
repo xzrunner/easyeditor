@@ -72,6 +72,7 @@
 #include "ChangeComplexOrigin.h"
 #include "FixLRSprLayer.h"
 #include "LRPackerNew.h"
+#include "PackResID.h"
 
 namespace edb
 {
@@ -149,6 +150,7 @@ void CommandLoader::Init()
 	fc->Register(ChangeComplexOrigin::Create());
 	fc->Register(FixLRSprLayer::Create());
 	fc->Register(LRPackerNew::Create());
+	fc->Register(PackResID::Create());
 }
 
 }

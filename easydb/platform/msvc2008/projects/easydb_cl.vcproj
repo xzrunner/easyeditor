@@ -405,6 +405,14 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\..\src\easydb_cl\PackResID.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\PackResID.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\easydb_cl\UnpackLuaDescFile.cpp"
 						>
 					</File>
