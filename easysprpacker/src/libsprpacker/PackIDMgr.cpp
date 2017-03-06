@@ -74,7 +74,12 @@ void PackIDMgr::Init(const std::string& filepath, const std::string& platform)
 			pkg->cut_ori = src["img_cut"]["ori"].asString();
 		}
 
-		std::string spr_id_file = GetSprIDFile(pkg->name);
+		std::string name = pkg->name;
+		std::string::size_type pos = pkg->name.find('/');
+		if (pos != std::string::npos) {
+			name = name.substr(pos + 1);
+		}
+		std::string spr_id_file = GetSprIDFile(name);
 		if (ee::FileHelper::IsFileExist(spr_id_file)) {
 			InitSprsID(spr_id_file, pkg);
 		}
