@@ -124,6 +124,10 @@ const PackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 
 	if (spr->IsAnchor()) {
 		node = new PackAnchor();
+
+		const std::string& filepath = dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath();	
+		erespacker::PackUI::Instance()->OnKnownPackID(filepath, 0xffffffff);
+		erespacker::PackTag::Instance()->OnKnownPackID(filepath, 0xffffffff);
 	}
 	// image
 	else if (const ee::ImageSprite* image = dynamic_cast<const ee::ImageSprite*>(spr)) {
