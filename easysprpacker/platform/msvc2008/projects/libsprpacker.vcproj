@@ -480,6 +480,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="00.anchor"
+				>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackAnchor.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsprpacker\PackAnchor.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="tools"

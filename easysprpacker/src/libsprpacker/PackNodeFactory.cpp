@@ -4,6 +4,7 @@
 #include "LabelBuilder.h"
 #include "ComplexBuilder.h"
 
+#include "PackAnchor.h"
 #include "PackImage.h"
 #include "PackScale9.h"
 #include "PackScale9Spr.h"
@@ -121,11 +122,11 @@ const PackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 {
 	const PackNode* node = NULL;
 
-// 	if (spr->IsAnchor()) {
-// 		// todo
-// 	}
+	if (spr->IsAnchor()) {
+		node = new PackAnchor();
+	}
 	// image
-	if (const ee::ImageSprite* image = dynamic_cast<const ee::ImageSprite*>(spr)) {
+	else if (const ee::ImageSprite* image = dynamic_cast<const ee::ImageSprite*>(spr)) {
 		node = IMAGE_BUILDER->Create(dynamic_cast<const ee::ImageSymbol*>(image->GetSymbol()));
 	}
 	// scale9 spr
@@ -185,7 +186,7 @@ const PackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 		throw ee::Exception("PackNodeFactory::Create unknown sprite type.");
 	}
 
-	assert(node && node->GetID() != 0xffffffff);
+	assert(node && (spr->IsAnchor() || node->GetID() != 0xffffffff));
 
 	return node;
 }
