@@ -20,8 +20,11 @@ private:
 	static void CenterSymbol(Symbol* sym);
 	static Json::Value Store(ee::Sprite* spr, const std::string& dir);
 
+	static void CheckName(const Symbol* sym);
+
 	static void CheckDuplicateName(const Symbol* sym);
 	static void CheckNameDiff(const Symbol* sym);
+	static void CheckAnchorName(const Symbol* sym);
 
 //	static void StoreAction(const Symbol* sym, Json::Value& val);
 

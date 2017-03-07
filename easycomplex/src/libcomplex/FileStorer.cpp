@@ -17,8 +17,7 @@ namespace ecomplex
 
 void FileStorer::Store(const std::string& filepath, const Symbol* sym, const std::string& _dir)
 {
-	CheckDuplicateName(sym);
-	CheckNameDiff(sym);
+	CheckName(sym);
 
 	Json::Value value;
 
@@ -59,8 +58,7 @@ void FileStorer::Store(const std::string& filepath, const Symbol* sym, const std
 
 void FileStorer::StoreWithHistory(const std::string& filepath, const Symbol* sym, const std::string& _dir)
 {
-	CheckDuplicateName(sym);
-	CheckNameDiff(sym);
+	CheckName(sym);
 
 	Json::Value value;
 
@@ -137,6 +135,13 @@ Json::Value FileStorer::Store(ee::Sprite* spr, const std::string& dir)
 	return value;
 }
 
+void FileStorer::CheckName(const Symbol* sym)
+{
+	CheckDuplicateName(sym);
+	CheckNameDiff(sym);
+	CheckAnchorName(sym);
+}
+
 void FileStorer::CheckDuplicateName(const Symbol* sym)
 {
 	std::set<std::string> names_set;
@@ -189,6 +194,21 @@ void FileStorer::CheckNameDiff(const Symbol* sym)
 
 	std::string filepath = sym->GetFilepath();
 	wxMessageBox(filepath + ": " + str, "删除的名字");
+}
+
+void FileStorer::CheckAnchorName(const Symbol* sym)
+{
+	const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
+	for (int i = 0, n = children.size(); i < n; ++i) 
+	{
+		ee::Sprite* spr = dynamic_cast<ee::Sprite*>(children[i]);
+		if (spr->IsAnchor() && spr->GetName().compare(0, strlen("_sprite"), "_sprite") == 0) 
+		{
+			std::string filepath = sym->GetFilepath();
+			const ee::Symbol* ee_sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());
+			wxMessageBox(filepath + ": " + ee_sym->GetName(), "anchor没有名字");
+		}
+	}
 }
 
 // void FileStorer::StoreAction(const Symbol* sym, Json::Value& val)
