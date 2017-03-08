@@ -22,6 +22,7 @@ CameraCanvas::CameraCanvas(wxWindow* stage_wnd, EditPanelImpl* stage, s2::Camera
 
 CameraCanvas::~CameraCanvas()
 {
+	s2::Blackboard::Instance()->SetCamera(NULL);
 	delete m_camera;
 }
 
