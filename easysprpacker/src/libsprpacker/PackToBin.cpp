@@ -54,7 +54,7 @@ void PackToBin::Pack(const std::string& filepath,
 
 	// to pages
 	std::vector<Page*> pages;
-	Page* page = new Page(simp::PAGE_SIZE);
+	Page* page = new Page(simp::SIMP_PAGE_SIZE);
 	int page_sz = ALIGN_4BYTE(simp::Page::Size());
 	for (int i = 0, n = nodes.size(); i < n; ++i)
 	{
@@ -73,7 +73,7 @@ void PackToBin::Pack(const std::string& filepath,
 			{
 				page->Condense(page_sz + head_sz);
 				pages.push_back(page);
-				page = new Page(simp::PAGE_SIZE);
+				page = new Page(simp::SIMP_PAGE_SIZE);
 				page_sz = ALIGN_4BYTE(simp::Page::Size());
 			} else {
 				page->Enlarge();
@@ -260,7 +260,7 @@ void PackToBin::Page::
 Enlarge() 
 {
 	m_size *= 2;
-	if (m_size > simp::PAGE_SIZE_MAX) {
+	if (m_size > simp::SIMP_PAGE_SIZE_MAX) {
 		throw ee::Exception("Page::Enlarge page size too large %d", m_size);
 	}
 }
@@ -268,7 +268,7 @@ Enlarge()
 void PackToBin::Page::
 Condense(int size)
 {
-	while (size < m_size / 2 && m_size > simp::PAGE_SIZE_MIN) {
+	while (size < m_size / 2 && m_size > simp::SIMP_PAGE_SIZE_MIN) {
 		m_size /= 2;
 	}
 }

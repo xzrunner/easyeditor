@@ -18,7 +18,7 @@ public:
 	 *  @interface
 	 *    s2::Symbol
 	 */
-	virtual void Traverse(const s2::SymVisitor& visitor) {}
+	virtual void Traverse(const s2::SymbolVisitor& visitor) {}
 	virtual sm::rect GetBounding(const s2::Sprite* spr = NULL) const;
 
 protected:
