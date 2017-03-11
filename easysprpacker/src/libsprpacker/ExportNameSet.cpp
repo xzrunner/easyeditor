@@ -27,7 +27,7 @@ void ExportNameSet::Insert(const ee::Symbol* sym, PackNode* node)
 		return;
 	}
 
-	std::string export_name = gum::StringHelper::GBKToUTF8(sym->name);
+	std::string export_name = gum::StringHelper::UTF8ToGBK(sym->name);
 	if (!is_name_valid(export_name)) {
 		return;
 	}
