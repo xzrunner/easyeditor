@@ -208,38 +208,38 @@
 				RelativePath="..\..\..\src\easyui\Task.h"
 				>
 			</File>
-		</Filter>
-		<Filter
-			Name="view"
-			>
-			<File
-				RelativePath="..\..\..\src\easyui\TopLibraryPanel.cpp"
+			<Filter
+				Name="view"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyui\TopLibraryPanel.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyui\TopStagePanel.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyui\TopStagePanel.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyui\TopToolbarPanel.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyui\TopToolbarPanel.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyui\UIStagePage.h"
-				>
-			</File>
+				<File
+					RelativePath="..\..\..\src\easyui\TopLibraryPanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\TopLibraryPanel.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\TopStagePanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\TopStagePanel.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\TopToolbarPanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\TopToolbarPanel.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\UIStagePage.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="dataset"
