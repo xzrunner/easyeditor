@@ -20,11 +20,11 @@ ee::ArrangeSpriteState* ArrangeSpriteImpl::CreateRotateState(ee::SpriteSelection
 {
 	std::vector<ee::Sprite*> sprs;
 	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
-	if (sprs.size() == 1 && dynamic_cast<eparticle3d::Sprite*>(sprs[0])) {
-		return new SphereRotateState(m_stage, first_pos, static_cast<eparticle3d::Sprite*>(sprs[0])->GetDir());
-	} else {
+// 	if (sprs.size() == 1 && dynamic_cast<eparticle3d::Sprite*>(sprs[0])) {
+// 		return new SphereRotateState(m_stage, first_pos, static_cast<eparticle3d::Sprite*>(sprs[0])->GetDir());
+// 	} else {
 		return ee::ArrangeSpriteImpl::CreateRotateState(selection, first_pos);
-	}
+//	}
 }
 
 }
