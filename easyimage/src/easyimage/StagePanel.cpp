@@ -48,10 +48,14 @@ void StagePanel::SetImage(const std::string& filepath)
 void StagePanel::SetImage(ee::Symbol* sym)
 {
 	ee::ImageSymbol* img_sym = static_cast<ee::ImageSymbol*>(sym);
-	sm::vec2 offset = - img_sym->GetImage()->GetOffset();
+	const sm::i16_vec2& ori_sz = img_sym->GetImage()->GetOriginSize();
+	const sm::i16_rect& clip_r = img_sym->GetImage()->GetClippedRegion();
+
+	sm::vec2 offset;
+	offset.x = ori_sz.x * 0.5f - clip_r.xmin;
+	offset.y = ori_sz.y * 0.5f - clip_r.ymin;
 
 	ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
-	offset += spr->GetSymbol()->GetBounding().Size() * 0.5f;
 	spr->Translate(offset);
 	m_image = spr;
 

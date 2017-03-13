@@ -302,7 +302,6 @@ void RectCutCMPT::OnOutputData(wxCommandEvent& event)
 
 		std::string img_filename = img_dir + "\\" + img_name + "_" + ee::StringHelper::ToString(i) + ".png";
 		gimg_export(img_filename.c_str(), pixels, sz.x, sz.y, GPF_RGBA, true);
-		delete[] img_data;
 
 		ee::Sprite* spr = new ee::DummySprite(new ee::DummySymbol(img_filename, sz.x, sz.y));
 		sm::vec2 offset = r.Center() - center;
@@ -325,12 +324,12 @@ void RectCutCMPT::OnOutputData(wxCommandEvent& event)
 	std::string tag = ee::SymbolFile::Instance()->Tag(s2::SYM_COMPLEX);
 
 	std::string filename_all = json_dir + "\\" + img_name + "_" + tag + ".json";
-	ecomplex::FileStorer::Store(filename_all.c_str(), complex_all);
+	ecomplex::FileStorer::Store(filename_all.c_str(), complex_all, json_dir);
 	delete complex_all;
 
-	if (!complex_part->GetChildren().empty()) {
+	if (!complex_part->GetAllChildren().empty()) {
 		std::string filename_part = json_dir + "\\" + img_name + "_part_" + tag + ".json";
-		ecomplex::FileStorer::Store(filename_part.c_str(), complex_part);
+		ecomplex::FileStorer::Store(filename_part.c_str(), complex_part, json_dir);
 	}
 	delete complex_part;
 
@@ -355,7 +354,7 @@ void RectCutCMPT::OnAutoCreateRects(wxCommandEvent& event)
 	const ee::Sprite* spr = m_stage->GetImage();
 	const ee::ImageSymbol* sym = dynamic_cast<const ee::ImageSymbol*>(spr->GetSymbol());
 	assert(sym);
-	const ee::Image* img = sym->GetImage();
+	ee::ImageData* img = ee::ImageDataMgr::Instance()->GetItem(sym->GetFilepath());
 
 	RectMgr& rects = static_cast<RectCutOP*>(m_editop)->GetRectMgr();
 
@@ -375,7 +374,7 @@ void RectCutCMPT::OnAutoCreateRects(wxCommandEvent& event)
 	}
 	rects.Clear();
 
-	RegularRectCut cut(*img, pre_rects);
+	RegularRectCut cut(img->GetPixelData(), img->GetWidth(), img->GetHeight(), pre_rects);
 	cut.AutoCut();
 
 	const std::vector<Rect>& result = cut.GetResult();

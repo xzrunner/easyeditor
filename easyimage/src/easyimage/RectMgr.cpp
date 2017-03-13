@@ -54,7 +54,7 @@ void RectMgr::Draw() const
 	for (int i = 0, n = m_rects.size(); i < n; ++i)
 	{
 		sm::vec2 min(m_rects[i]->xmin, m_rects[i]->ymin),
-			max(m_rects[i]->xmax, m_rects[i]->ymax);
+			     max(m_rects[i]->xmax, m_rects[i]->ymax);
 		s2::RVG::SetColor(ee::LIGHT_RED);
 		s2::RVG::Rect(min, max, true);
 		s2::RVG::LineWidth(1);
