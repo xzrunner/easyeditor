@@ -21,6 +21,7 @@
 #include <sprite2/S2_RVG.h>
 #include <sprite2/RenderScissor.h>
 #include <sprite2/BoundingBox.h>
+#include <sprite2/DrawNode.h>
 
 #include <gum/StringHelper.h>
 #include <gum/FilepathHelper.h>
@@ -39,21 +40,20 @@ Symbol::Symbol()
 	m_name = ee::SymbolFile::Instance()->Tag(s2::SYM_COMPLEX) + gum::StringHelper::ToString(id++);
 }
 
-void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
+void Symbol::Draw(const s2::RenderParams& rp, const s2::Sprite* spr) const
 {
+	s2::RenderParams rp_child;
+	if (!s2::DrawNode::Prepare(rp, spr, rp_child)) {
+		return;
+	}
+
 	sm::vec2 scissor_sz = m_scissor.Size();
 	bool scissor = scissor_sz.x > 0 && scissor_sz.y > 0 && !ee::Config::Instance()->GetSettings().visible_scissor;
 
-	s2::RenderParams p = params;
-	if (spr) {
-		p.mt = spr->GetLocalMat() * params.mt;
-		p.color = spr->GetColor() * params.color;
-	}
-
 	if (scissor) 
 	{
-		sm::vec2 min = p.mt * sm::vec2(m_scissor.xmin, m_scissor.ymin),
-			     max = p.mt * sm::vec2(m_scissor.xmax, m_scissor.ymax);
+		sm::vec2 min = rp_child.mt * sm::vec2(m_scissor.xmin, m_scissor.ymin),
+			     max = rp_child.mt * sm::vec2(m_scissor.xmax, m_scissor.ymax);
 		if (min.x > max.x) {
 			std::swap(min.x, max.x);
 		}
@@ -130,10 +130,10 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 		}
 		const std::vector<s2::Sprite*>& sprs = GetActionChildren(action);
 		for (int i = 0, n = sprs.size(); i < n; ++i) {
-			if (IsChildOutside(sprs[i], p)) {
+			if (IsChildOutside(sprs[i], rp_child)) {
 				continue;
 			}
-			ee::SpriteRenderer::Instance()->Draw(sprs[i], p, false);
+			ee::SpriteRenderer::Instance()->Draw(sprs[i], rp_child, false);
 		}
 	}
 
@@ -145,7 +145,7 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 		sm::vec2 min(m_scissor.xmin, m_scissor.ymin), 
 				 max(m_scissor.xmax, m_scissor.ymax);
 		s2::RVG::SetColor(s2::Color(0, 204, 0));
-		s2::RVG::Rect(p.mt * min, p.mt * max, false);
+		s2::RVG::Rect(rp_child.mt * min, rp_child.mt * max, false);
 	}
 }
 
