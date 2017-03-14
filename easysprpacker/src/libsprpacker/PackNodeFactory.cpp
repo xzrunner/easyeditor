@@ -2,6 +2,7 @@
 #include "SymBuilder.h"
 #include "SprBuilder.h"
 #include "SprWithTransBuilder.h"
+#include "SprBuilder2.h"
 #include "LabelBuilder.h"
 #include "ComplexBuilder.h"
 
@@ -73,18 +74,31 @@ SymBuilder<emesh::Symbol, PackMesh>*										MESH_BUILDER;
 SymBuilder<emask::Symbol, PackMask>*										MASK_BUILDER;
 SymBuilder<etrail::Symbol, PackTrail>*										TRAIL_BUILDER;
 
-SprBuilder<escale9::Symbol, escale9::Sprite, PackScale9Spr>*				SCALE9_SPR_BUILDER;
-SprBuilder<eicon::Symbol, eicon::Sprite, PackIconSpr>*						ICON_SPR_BUILDER;
-SprBuilder<etexture::Symbol, etexture::Sprite, PackTextureSpr>*				TEXTURE_SPR_BUILDER;
-SprWithTransBuilder<ecomplex::Symbol, ecomplex::Sprite, PackComplexSpr>*	COMPLEX_SPR_BUILDER;
-SprWithTransBuilder<libanim::Symbol, libanim::Sprite, PackAnimationSpr>*	ANIM_SPR_BUILDER;
-SprBuilder<libanim2::Symbol, libanim2::Sprite, PackAnim2Spr>*				ANIM2_SPR_BUILDER;
-SprBuilder<eparticle3d::Symbol, eparticle3d::Sprite, PackParticle3dSpr>*	P3D_SPR_BUILDER;
-SprBuilder<eparticle2d::Symbol, eparticle2d::Sprite, PackParticle2dSpr>*	P2D_SPR_BUILDER;
-SprBuilder<eshape::Symbol, eshape::Sprite, PackShapeSpr>*					SHAPE_SPR_BUILDER;
-SprBuilder<emesh::Symbol, emesh::Sprite, PackMeshSpr>*						MESH_SPR_BUILDER;
-SprBuilder<emask::Symbol, emask::Sprite, PackMaskSpr>*						MASK_SPR_BUILDER;
-SprBuilder<etrail::Symbol, etrail::Sprite, PackTrailSpr>*					TRAIL_SPR_BUILDER;
+//SprBuilder<escale9::Symbol, escale9::Sprite, PackScale9Spr>*				SCALE9_SPR_BUILDER;
+//SprBuilder<eicon::Symbol, eicon::Sprite, PackIconSpr>*						ICON_SPR_BUILDER;
+//SprBuilder<etexture::Symbol, etexture::Sprite, PackTextureSpr>*				TEXTURE_SPR_BUILDER;
+//SprWithTransBuilder<ecomplex::Symbol, ecomplex::Sprite, PackComplexSpr>*	COMPLEX_SPR_BUILDER;
+//SprWithTransBuilder<libanim::Symbol, libanim::Sprite, PackAnimationSpr>*	ANIM_SPR_BUILDER;
+//SprBuilder<libanim2::Symbol, libanim2::Sprite, PackAnim2Spr>*				ANIM2_SPR_BUILDER;
+//SprBuilder<eparticle3d::Symbol, eparticle3d::Sprite, PackParticle3dSpr>*	P3D_SPR_BUILDER;
+//SprBuilder<eparticle2d::Symbol, eparticle2d::Sprite, PackParticle2dSpr>*	P2D_SPR_BUILDER;
+//SprBuilder<eshape::Symbol, eshape::Sprite, PackShapeSpr>*					SHAPE_SPR_BUILDER;
+//SprBuilder<emesh::Symbol, emesh::Sprite, PackMeshSpr>*						MESH_SPR_BUILDER;
+//SprBuilder<emask::Symbol, emask::Sprite, PackMaskSpr>*						MASK_SPR_BUILDER;
+//SprBuilder<etrail::Symbol, etrail::Sprite, PackTrailSpr>*					TRAIL_SPR_BUILDER;
+
+SprBuilder2<escale9::Sprite, PackScale9Spr>*								SCALE9_SPR_BUILDER;
+SprBuilder2<eicon::Sprite, PackIconSpr>*									ICON_SPR_BUILDER;
+SprBuilder2<etexture::Sprite, PackTextureSpr>*								TEXTURE_SPR_BUILDER;
+SprBuilder2<ecomplex::Sprite, PackComplexSpr>*								COMPLEX_SPR_BUILDER;
+SprBuilder2<libanim::Sprite, PackAnimationSpr>*								ANIM_SPR_BUILDER;
+SprBuilder2<libanim2::Sprite, PackAnim2Spr>*								ANIM2_SPR_BUILDER;
+SprBuilder2<eparticle3d::Sprite, PackParticle3dSpr>*						P3D_SPR_BUILDER;
+SprBuilder2<eparticle2d::Sprite, PackParticle2dSpr>*						P2D_SPR_BUILDER;
+SprBuilder2<eshape::Sprite, PackShapeSpr>*									SHAPE_SPR_BUILDER;
+SprBuilder2<emesh::Sprite, PackMeshSpr>*									MESH_SPR_BUILDER;
+SprBuilder2<emask::Sprite, PackMaskSpr>*									MASK_SPR_BUILDER;
+SprBuilder2<etrail::Sprite, PackTrailSpr>*									TRAIL_SPR_BUILDER;
 
 PackNodeFactory::PackNodeFactory()
 {
@@ -101,18 +115,31 @@ PackNodeFactory::PackNodeFactory()
 	MASK_BUILDER		= new SymBuilder<emask::Symbol, PackMask>();
 	TRAIL_BUILDER		= new SymBuilder<etrail::Symbol, PackTrail>(true);
 
-	SCALE9_SPR_BUILDER	= new SprBuilder<escale9::Symbol, escale9::Sprite, PackScale9Spr>();
-	ICON_SPR_BUILDER	= new SprBuilder<eicon::Symbol, eicon::Sprite, PackIconSpr>();
-	TEXTURE_SPR_BUILDER	= new SprBuilder<etexture::Symbol, etexture::Sprite, PackTextureSpr>();
-	COMPLEX_SPR_BUILDER	= new SprWithTransBuilder<ecomplex::Symbol, ecomplex::Sprite, PackComplexSpr>();
-	ANIM_SPR_BUILDER	= new SprWithTransBuilder<libanim::Symbol, libanim::Sprite, PackAnimationSpr>();
-	ANIM2_SPR_BUILDER	= new SprBuilder<libanim2::Symbol, libanim2::Sprite, PackAnim2Spr>();
-	P3D_SPR_BUILDER		= new SprBuilder<eparticle3d::Symbol, eparticle3d::Sprite, PackParticle3dSpr>();
-	P2D_SPR_BUILDER		= new SprBuilder<eparticle2d::Symbol, eparticle2d::Sprite, PackParticle2dSpr>();
-	SHAPE_SPR_BUILDER	= new SprBuilder<eshape::Symbol, eshape::Sprite, PackShapeSpr>();
-	MESH_SPR_BUILDER	= new SprBuilder<emesh::Symbol, emesh::Sprite, PackMeshSpr>();
-	MASK_SPR_BUILDER	= new SprBuilder<emask::Symbol, emask::Sprite, PackMaskSpr>();
-	TRAIL_SPR_BUILDER	= new SprBuilder<etrail::Symbol, etrail::Sprite, PackTrailSpr>();
+// 	SCALE9_SPR_BUILDER	= new SprBuilder<escale9::Symbol, escale9::Sprite, PackScale9Spr>();
+// 	ICON_SPR_BUILDER	= new SprBuilder<eicon::Symbol, eicon::Sprite, PackIconSpr>();
+// 	TEXTURE_SPR_BUILDER	= new SprBuilder<etexture::Symbol, etexture::Sprite, PackTextureSpr>();
+// 	COMPLEX_SPR_BUILDER	= new SprWithTransBuilder<ecomplex::Symbol, ecomplex::Sprite, PackComplexSpr>();
+// 	ANIM_SPR_BUILDER	= new SprWithTransBuilder<libanim::Symbol, libanim::Sprite, PackAnimationSpr>();
+// 	ANIM2_SPR_BUILDER	= new SprBuilder<libanim2::Symbol, libanim2::Sprite, PackAnim2Spr>();
+// 	P3D_SPR_BUILDER		= new SprBuilder<eparticle3d::Symbol, eparticle3d::Sprite, PackParticle3dSpr>();
+// 	P2D_SPR_BUILDER		= new SprBuilder<eparticle2d::Symbol, eparticle2d::Sprite, PackParticle2dSpr>();
+// 	SHAPE_SPR_BUILDER	= new SprBuilder<eshape::Symbol, eshape::Sprite, PackShapeSpr>();
+// 	MESH_SPR_BUILDER	= new SprBuilder<emesh::Symbol, emesh::Sprite, PackMeshSpr>();
+// 	MASK_SPR_BUILDER	= new SprBuilder<emask::Symbol, emask::Sprite, PackMaskSpr>();
+// 	TRAIL_SPR_BUILDER	= new SprBuilder<etrail::Symbol, etrail::Sprite, PackTrailSpr>();
+
+	SCALE9_SPR_BUILDER	= new SprBuilder2<escale9::Sprite, PackScale9Spr>();
+	ICON_SPR_BUILDER	= new SprBuilder2<eicon::Sprite, PackIconSpr>();
+	TEXTURE_SPR_BUILDER	= new SprBuilder2<etexture::Sprite, PackTextureSpr>();
+	COMPLEX_SPR_BUILDER	= new SprBuilder2<ecomplex::Sprite, PackComplexSpr>();
+	ANIM_SPR_BUILDER	= new SprBuilder2<libanim::Sprite, PackAnimationSpr>();
+	ANIM2_SPR_BUILDER	= new SprBuilder2<libanim2::Sprite, PackAnim2Spr>();
+	P3D_SPR_BUILDER		= new SprBuilder2<eparticle3d::Sprite, PackParticle3dSpr>();
+	P2D_SPR_BUILDER		= new SprBuilder2<eparticle2d::Sprite, PackParticle2dSpr>();
+	SHAPE_SPR_BUILDER	= new SprBuilder2<eshape::Sprite, PackShapeSpr>();
+	MESH_SPR_BUILDER	= new SprBuilder2<emesh::Sprite, PackMeshSpr>();
+	MASK_SPR_BUILDER	= new SprBuilder2<emask::Sprite, PackMaskSpr>();
+	TRAIL_SPR_BUILDER	= new SprBuilder2<etrail::Sprite, PackTrailSpr>();
 }
 
 PackNodeFactory::~PackNodeFactory()

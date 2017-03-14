@@ -529,6 +529,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\libsprpacker\SprBuilder2.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libsprpacker\SprBuilder2.inl"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libsprpacker\SprWithTransBuilder.h"
 				>
 			</File>
