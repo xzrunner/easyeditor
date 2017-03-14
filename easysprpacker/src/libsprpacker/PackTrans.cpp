@@ -115,7 +115,7 @@ bool PackTrans::operator == (const PackTrans& trans) const
 {
 	if (!m_filter && !trans.m_filter) {
 		;
-	} else if (m_filter && m_filter) {
+	} else if (m_filter && trans.m_filter) {
 		if (*m_filter == *trans.m_filter) {
 			;
 		} else {
