@@ -19,8 +19,11 @@ namespace esprpacker
 class PackTrans
 {
 public:
+	PackTrans();
 	PackTrans(const s2::Sprite& spr, bool force_name = false);
 	~PackTrans();
+
+	bool operator == (const PackTrans& trans) const;
 
 	void PackToLua(ebuilder::CodeGenerator& gen) const;
 

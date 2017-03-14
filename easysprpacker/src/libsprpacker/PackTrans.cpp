@@ -12,6 +12,13 @@ namespace lua = ebuilder::lua;
 namespace esprpacker
 {
 
+PackTrans::PackTrans()
+	: m_type(0)
+	, m_filter(NULL)
+	, m_visible(true)
+{
+}
+
 PackTrans::PackTrans(const s2::Sprite& spr, bool force_name)
 {
 	m_type = 0;
@@ -102,6 +109,34 @@ PackTrans::PackTrans(const s2::Sprite& spr, bool force_name)
 
 PackTrans::~PackTrans()
 {
+}
+
+bool PackTrans::operator == (const PackTrans& trans) const
+{
+	if (!m_filter && !trans.m_filter) {
+		;
+	} else if (m_filter && m_filter) {
+		if (*m_filter == *trans.m_filter) {
+			;
+		} else {
+			return false;
+		}
+	} else {
+		return false;
+	}
+
+	return m_type == trans.m_type 
+		&& m_scale == trans.m_scale 
+		&& m_shear == trans.m_shear 
+		&& m_offset == trans.m_offset 
+		&& m_position == trans.m_position 
+		&& m_angle == trans.m_angle 
+		&& m_color == trans.m_color 
+		&& m_blend == trans.m_blend 
+		&& m_fast_blend == trans.m_fast_blend 
+		&& m_camera == trans.m_camera 
+		&& m_name == trans.m_name 
+		&& m_visible == trans.m_visible;
 }
 
 void PackTrans::PackToLua(ebuilder::CodeGenerator& gen) const

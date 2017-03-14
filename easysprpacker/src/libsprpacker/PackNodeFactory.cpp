@@ -1,6 +1,7 @@
 #include "PackNodeFactory.h"
 #include "SymBuilder.h"
 #include "SprBuilder.h"
+#include "SprWithTransBuilder.h"
 #include "LabelBuilder.h"
 #include "ComplexBuilder.h"
 
@@ -75,8 +76,8 @@ SymBuilder<etrail::Symbol, PackTrail>*										TRAIL_BUILDER;
 SprBuilder<escale9::Symbol, escale9::Sprite, PackScale9Spr>*				SCALE9_SPR_BUILDER;
 SprBuilder<eicon::Symbol, eicon::Sprite, PackIconSpr>*						ICON_SPR_BUILDER;
 SprBuilder<etexture::Symbol, etexture::Sprite, PackTextureSpr>*				TEXTURE_SPR_BUILDER;
-SprBuilder<ecomplex::Symbol, ecomplex::Sprite, PackComplexSpr>*				COMPLEX_SPR_BUILDER;
-SprBuilder<libanim::Symbol, libanim::Sprite, PackAnimationSpr>*				ANIM_SPR_BUILDER;
+SprWithTransBuilder<ecomplex::Symbol, ecomplex::Sprite, PackComplexSpr>*	COMPLEX_SPR_BUILDER;
+SprWithTransBuilder<libanim::Symbol, libanim::Sprite, PackAnimationSpr>*	ANIM_SPR_BUILDER;
 SprBuilder<libanim2::Symbol, libanim2::Sprite, PackAnim2Spr>*				ANIM2_SPR_BUILDER;
 SprBuilder<eparticle3d::Symbol, eparticle3d::Sprite, PackParticle3dSpr>*	P3D_SPR_BUILDER;
 SprBuilder<eparticle2d::Symbol, eparticle2d::Sprite, PackParticle2dSpr>*	P2D_SPR_BUILDER;
@@ -103,8 +104,8 @@ PackNodeFactory::PackNodeFactory()
 	SCALE9_SPR_BUILDER	= new SprBuilder<escale9::Symbol, escale9::Sprite, PackScale9Spr>();
 	ICON_SPR_BUILDER	= new SprBuilder<eicon::Symbol, eicon::Sprite, PackIconSpr>();
 	TEXTURE_SPR_BUILDER	= new SprBuilder<etexture::Symbol, etexture::Sprite, PackTextureSpr>();
-	COMPLEX_SPR_BUILDER	= new SprBuilder<ecomplex::Symbol, ecomplex::Sprite, PackComplexSpr>();
-	ANIM_SPR_BUILDER	= new SprBuilder<libanim::Symbol, libanim::Sprite, PackAnimationSpr>();
+	COMPLEX_SPR_BUILDER	= new SprWithTransBuilder<ecomplex::Symbol, ecomplex::Sprite, PackComplexSpr>();
+	ANIM_SPR_BUILDER	= new SprWithTransBuilder<libanim::Symbol, libanim::Sprite, PackAnimationSpr>();
 	ANIM2_SPR_BUILDER	= new SprBuilder<libanim2::Symbol, libanim2::Sprite, PackAnim2Spr>();
 	P3D_SPR_BUILDER		= new SprBuilder<eparticle3d::Symbol, eparticle3d::Sprite, PackParticle3dSpr>();
 	P2D_SPR_BUILDER		= new SprBuilder<eparticle2d::Symbol, eparticle2d::Sprite, PackParticle2dSpr>();
