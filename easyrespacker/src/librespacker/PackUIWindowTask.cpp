@@ -24,7 +24,7 @@ PackUIWindowTask::PackUIWindowTask(const std::string& filepath, const Json::Valu
 	m_wrapper_filepath = GetWrapperFilepath(filepath);
 	PackUI::Instance()->Instance()->AddListener(m_wrapper_filepath, this);
 
-	LoadItems(value, ee::FileHelper::GetFileDir(filepath));
+	LoadItems(value, filepath);
 }
 
 PackUIWindowTask::~PackUIWindowTask()
@@ -89,8 +89,10 @@ std::string PackUIWindowTask::GetWrapperFilepath(const std::string& filepath)
 	return ee::FileHelper::FormatFilepathAbsolute(filename + "_wrapper_complex[gen].json");
 }
 
-void PackUIWindowTask::LoadItems(const Json::Value& value, const std::string& dir)
+void PackUIWindowTask::LoadItems(const Json::Value& value, const std::string& filepath)
 {
+	std::string dir = ee::FileHelper::GetFileDir(filepath);
+
 	int idx = 0;
 	Json::Value spr_val = value["sprite"][idx++];
 	while (!spr_val.isNull()) {
@@ -130,7 +132,7 @@ void PackUIWindowTask::LoadItems(const Json::Value& value, const std::string& di
 			}
 
 			if (!item) {
-				std::string str = "PackUIWindowTask::LoadItems, fail to load: " + item->filepath + ", with name: " + name;
+				std::string str = "PackUIWindowTask::LoadItems, fail to load: " + filepath + ", with name: " + name;
 				throw ee::Exception(str);
 			}
 

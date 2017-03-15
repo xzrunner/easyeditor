@@ -18,7 +18,7 @@ public:
 	static std::string GetWrapperFilepath(const std::string& filepath);
 
 private:
-	void LoadItems(const Json::Value& value, const std::string& dir);
+	void LoadItems(const Json::Value& value, const std::string& filepath);
 
 private:
 	struct Item {
