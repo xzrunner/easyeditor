@@ -2,6 +2,7 @@
 #include "PackCoords.h"
 #include "PackArray.h"
 
+#include <bimp/bimp_typedef.h>
 #include <simp/SIMP_TrianglesMesh.h>
 #include <polymesh/MeshType.h>
 #include <polymesh/TrianglesHelper.h>
@@ -39,7 +40,7 @@ int TrianglesMesh::SizeOfUnpackFromBin() const
 	int sz = simp::TrianglesMesh::Size();
 	sz += PackCoords::SizeOfUnpackFromBin(vertices);
 	sz += PackCoords::SizeOfUnpackFromBin(texcoords);
-	sz += PackArray<int, uint16_t, uint16_t>::SizeOfUnpackFromBin(triangles);
+	sz += ALIGN_4BYTE((PackArray<int, uint16_t, uint16_t>::SizeOfUnpackFromBin(triangles)));
 	return sz;
 }
 

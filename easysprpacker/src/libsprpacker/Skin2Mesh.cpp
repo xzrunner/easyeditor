@@ -72,9 +72,9 @@ int Skin2Mesh::SizeOfUnpackFromBin() const
 	// joints
 	sz += simp::Skin2Mesh::JointSize() * m_mesh->joint_num;
 	// texcoords
-	sz += sizeof(int16_t) * 2 * m_mesh->vert_num;
+	sz += ALIGN_4BYTE(sizeof(int16_t) * 2 * m_mesh->vert_num);
 	// triangles
-	sz += sizeof(uint16_t) * m_mesh->tri_num;
+	sz += ALIGN_4BYTE(sizeof(uint16_t) * m_mesh->tri_num);
 
 	return sz;
 }
