@@ -59,14 +59,17 @@ PackTrans::PackTrans(const s2::Sprite& spr, bool force_name)
 	if (m_color.GetAddABGR() != 0) {
 		m_type |= simp::NodeTrans::COL_ADD_MASK;
 	}
+	uint32_t r = m_color.GetRMapABGR();
+	uint32_t g = m_color.GetGMapABGR();
+	uint32_t b = m_color.GetBMapABGR();
 	if (m_color.GetRMapABGR() != 0x000000ff) {
 		m_type |= simp::NodeTrans::COL_R_MASK;
 	}
 	if (m_color.GetGMapABGR() != 0x0000ff00) {
-		m_type |= simp::NodeTrans::COL_R_MASK;
+		m_type |= simp::NodeTrans::COL_G_MASK;
 	}
 	if (m_color.GetBMapABGR() != 0x00ff0000) {
-		m_type |= simp::NodeTrans::COL_R_MASK;
+		m_type |= simp::NodeTrans::COL_B_MASK;
 	}
 
 	m_blend = spr.GetShader().GetBlend();
