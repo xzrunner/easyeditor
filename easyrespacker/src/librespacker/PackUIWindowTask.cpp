@@ -66,10 +66,10 @@ void PackUIWindowTask::Output(const std::string& dir, Json::Value& value) const
 
 	for (int i = 0, n = m_items.size(); i < n; ++i) {
 		Item* item = m_items[i];
-		//if (item->id == -1) {
-		//	throw ee::Exception("Unknown uiwnd's item id, wrapper_file %s, name %s, filepath %s", 
-		//		m_wrapper_filepath.c_str(), item->name.c_str(), item->filepath.c_str());
-		//}
+		if (item->id == -1) {
+			throw ee::Exception("Unknown uiwnd's item id, wrapper_file %s, name %s, filepath %s", 
+				m_wrapper_filepath.c_str(), item->name.c_str(), item->filepath.c_str());
+		}
 		if (item->anchor == -1) {
 			throw ee::Exception("Unknown uiwnd's item anchor, wrapper_file %s, name %s, filepath %s, repeated name", 
 				m_wrapper_filepath.c_str(), item->name.c_str(), item->filepath.c_str());
@@ -156,7 +156,7 @@ void PackUIWindowTask::LoadItems(const Json::Value& value, const std::string& fi
 		reader.parse(fin, ext_val);
 		fin.close();
 
-		LoadItems(ext_val, ee::FileHelper::GetFileDir(filepath));
+		LoadItems(ext_val, filepath);
 
 		ref_val = value["ref_spr"][idx++];
 	}
