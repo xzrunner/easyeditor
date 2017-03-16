@@ -3,14 +3,12 @@
 
 #include <ee/Symbol.h>
 
-#include <sprite2/DummySymbol.h>
-
 namespace eshadow
 {
 
 class Shadow;
 
-class Symbol : public ee::Symbol, public s2::DummySymbol
+class Symbol : public ee::Symbol
 {
 public:
 	Symbol();
@@ -20,6 +18,7 @@ public:
 	 *  @interface
 	 *    s2::Symbol
 	 */
+	virtual int Type() const;
 	virtual void Traverse(const s2::SymbolVisitor& visitor) {}
 	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
 	virtual sm::rect GetBounding(const s2::Sprite* spr = NULL) const;

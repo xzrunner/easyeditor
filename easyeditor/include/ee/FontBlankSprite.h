@@ -4,14 +4,13 @@
 #include "Sprite.h"
 
 #include <sprite2/Color.h>
-#include <sprite2/DummySprite.h>
 
 namespace ee
 {
 
 class FontBlankSymbol;
 
-class FontBlankSprite : public s2::DummySprite, public Sprite
+class FontBlankSprite : public Sprite
 {
 public:
 	enum HoriAlignType

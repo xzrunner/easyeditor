@@ -4,6 +4,7 @@
 #include "FileIO.h"
 
 #include <ee/Sprite.h>
+#include <ee/SymbolType.h>
 
 #include <sprite2/RenderParams.h>
 #include <gum/FilepathHelper.h>
@@ -21,6 +22,11 @@ Symbol::~Symbol()
 	if (m_shadow) {
 		m_shadow->RemoveReference();
 	}
+}
+
+int Symbol::Type() const
+{
+	return ee::SYM_SHADOW;
 }
 
 void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const

@@ -3,14 +3,12 @@
 
 #include <ee/Symbol.h>
 
-#include <sprite2/DummySymbol.h>
-
 namespace ep3dinv
 {
 
 class ParticleSystem;
 
-class Symbol : public ee::Symbol, public s2::DummySymbol
+class Symbol : public ee::Symbol
 {
 public:
 	Symbol();

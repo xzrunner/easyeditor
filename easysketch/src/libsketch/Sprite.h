@@ -8,7 +8,7 @@
 namespace esketch
 {
 
-class Sprite : public s2::DummySprite, public ee::Sprite
+class Sprite : public ee::Sprite
 {
 public:
 	Sprite(const Sprite& spr);

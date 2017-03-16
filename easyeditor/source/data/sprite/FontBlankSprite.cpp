@@ -3,7 +3,6 @@
 #include "FontBlankPropertySetting.h"
 
 #include <sprite2/RenderColor.h>
-#include <sprite2/DummySprite.h>
 #include <gum/trans_color.h>
 
 namespace ee
@@ -23,7 +22,6 @@ FontBlankSprite::FontBlankSprite()
 
 FontBlankSprite::FontBlankSprite(const FontBlankSprite& spr)
 	: s2::Sprite(spr)
-	, s2::DummySprite(spr)
 	, Sprite(spr)
 {
 	font		= spr.font;
@@ -42,7 +40,6 @@ FontBlankSprite::FontBlankSprite(const FontBlankSprite& spr)
 FontBlankSprite& FontBlankSprite::operator = (const FontBlankSprite& spr)
 {
 	s2::Sprite::operator = (spr);
-	s2::DummySprite::operator = (spr);
 	Sprite::operator = (spr);
 
 	font		= spr.font;
@@ -62,7 +59,6 @@ FontBlankSprite& FontBlankSprite::operator = (const FontBlankSprite& spr)
 
 FontBlankSprite::FontBlankSprite(FontBlankSymbol* sym)
 	: s2::Sprite(sym)
-	, s2::DummySprite(sym)
 	, Sprite(sym)
 {
 	font = sym->font;

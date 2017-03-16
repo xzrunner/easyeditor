@@ -3,14 +3,12 @@
 
 #include "Symbol.h"
 
-#include <sprite2/DummySymbol.h>
-
 namespace ee
 {
 
 class FontBlankSprite;
 
-class FontBlankSymbol : public s2::DummySymbol, public Symbol
+class FontBlankSymbol : public Symbol
 {
 public:
 	FontBlankSymbol();
@@ -23,7 +21,7 @@ public:
 	virtual int Type() const;
 	virtual void Traverse(const s2::SymbolVisitor& visitor) {}
 	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
-	virtual sm::rect GetSize(const Sprite* spr = NULL) const;
+	virtual sm::rect GetBounding(const s2::Sprite* spr = NULL) const;
 
 	bool LoadFont(const std::string& filename);
 

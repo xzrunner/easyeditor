@@ -3,8 +3,6 @@
 
 #include <ee/Symbol.h>
 
-#include <sprite2/DummySymbol.h>
-
 #include <vector>
 
 #include <time.h>
@@ -14,7 +12,7 @@ namespace eterrain2d
 
 class OceanMesh;
 
-class Symbol : public ee::Symbol, public s2::DummySymbol
+class Symbol : public ee::Symbol
 {
 public:
 	Symbol();
@@ -24,6 +22,7 @@ public:
 	 *  @interface
 	 *    s2::Symbol
 	 */
+	virtual int Type() const;
 	virtual void Traverse(const s2::SymbolVisitor& visitor) {}
 	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
 	virtual sm::rect GetBounding(const s2::Sprite* spr = NULL) const;

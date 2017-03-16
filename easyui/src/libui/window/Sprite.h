@@ -3,8 +3,6 @@
 
 #include <ee/Sprite.h>
 
-#include <sprite2/DummySprite.h>
-
 namespace eui
 {
 namespace window
@@ -12,7 +10,7 @@ namespace window
 
 class Symbol;
 
-class Sprite : s2::DummySprite, public ee::Sprite
+class Sprite : public ee::Sprite
 {
 public:
 	Sprite(const Sprite& spr);

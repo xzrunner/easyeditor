@@ -3,14 +3,12 @@
 
 #include "Sprite.h"
 
-#include <sprite2/DummySprite.h>
-
 namespace ee
 {
 
 class ScriptsSymbol;
 
-class ScriptsSprite : public s2::DummySprite, public Sprite
+class ScriptsSprite : public Sprite
 {
 public:
 	ScriptsSprite& operator = (const ScriptsSprite& spr);

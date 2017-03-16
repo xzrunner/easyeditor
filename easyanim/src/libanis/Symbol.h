@@ -4,14 +4,12 @@
 #include <ee/Symbol.h>
 #include <ee/SpriteLoader.h>
 
-#include <sprite2/DummySymbol.h>
-
 namespace libanim { class Symbol; }
 
 namespace libanis
 {
 
-class Symbol : public ee::Symbol, public s2::DummySymbol
+class Symbol : public ee::Symbol
 {
 public:
 	Symbol();

@@ -3,14 +3,12 @@
 
 #include "Sprite.h"
 
-#include <sprite2/DummySprite.h>
-
 namespace ee
 {
 
 class DummySymbol;
 
-class DummySprite : public s2::DummySprite, public Sprite
+class DummySprite : public Sprite
 {
 public:
 	DummySprite(const DummySprite& spr);

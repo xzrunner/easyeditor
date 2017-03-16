@@ -3,14 +3,12 @@
 
 #include <ee/Sprite.h>
 
-#include <sprite2/DummySprite.h>
-
 namespace eterrain2d
 {
 
 class Symbol;
 
-class Sprite : public s2::DummySprite, public ee::Sprite
+class Sprite : public ee::Sprite
 {
 public:
 	Sprite(const Sprite& spr);

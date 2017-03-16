@@ -3,12 +3,10 @@
 
 #include "Symbol.h"
 
-#include <sprite2/DummySymbol.h>
-
 namespace ee
 {
 
-class DummySymbol : public Symbol, public s2::DummySymbol
+class DummySymbol : public Symbol
 {
 public:
 	DummySymbol(const std::string& filepath);
@@ -18,7 +16,9 @@ public:
 	 *  @interface
 	 *    s2::Symbol
 	 */
+	virtual int Type() const { return -1; }
 	virtual void Traverse(const s2::SymbolVisitor& visitor) {}
+	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const {}
 	virtual sm::rect GetBounding(const s2::Sprite* spr = NULL) const;
 
 protected:

@@ -3,12 +3,10 @@
 
 #include <ee/Symbol.h>
 
-#include <sprite2/DummySymbol.h>
-
 namespace etemplate
 {
 
-class Symbol : public ee::Symbol, public s2::DummySymbol
+class Symbol : public ee::Symbol
 {
 public:
 	Symbol();

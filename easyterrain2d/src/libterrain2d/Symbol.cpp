@@ -4,6 +4,7 @@
 
 #include <ee/ImageSymbol.h>
 #include <ee/FileHelper.h>
+#include <ee/SymbolType.h>
 
 #include <shaderlab/ShaderMgr.h>
 #include <shaderlab/Sprite2Shader.h>
@@ -25,6 +26,11 @@ Symbol::Symbol()
 Symbol::~Symbol()
 {
 	Clear();
+}
+
+int Symbol::Type() const
+{
+	return ee::SYM_TERRAIN2D;
 }
 
 void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
