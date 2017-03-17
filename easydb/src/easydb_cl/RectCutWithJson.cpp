@@ -80,7 +80,7 @@ void RectCutWithJson::Trigger(const std::string& src_dir, const std::string& dst
 		switch (type)
 		{
 		case s2::SYM_IMAGE:
-			RectCutImage(src_dir, dst_dir, filepath);
+//			RectCutImage(src_dir, dst_dir, filepath);
 			break;
 		case s2::SYM_COMPLEX:
 			FixComplex(src_dir, dst_dir, filepath);
@@ -393,26 +393,36 @@ void RectCutWithJson::FixImageFilepathOutPkg(const std::string& src_dir, const s
 		throw ee::Exception("Can find out pkg's dir: %s\n", filepath.c_str());
 	}
 
-	new_path += "\\_tmp_pack";
-	std::string dir = ee::FileHelper::GetAbsolutePath(file_dir, new_path);
-	if (!ee::FileHelper::IsDirExist(dir)) {
-		throw ee::Exception("Out pkg should pack first, find %s fail\n", new_path.c_str());		
+	//////////////////////////////////////////////////////////////////////////
+
+	for (int i = 1, n = tokens.size(); i < n; ++i) {
+		new_path += "\\" + tokens[i];		
 	}
-	new_path += "\\json";
-	dir = ee::FileHelper::GetAbsolutePath(file_dir, new_path);
-	if (!ee::FileHelper::IsDirExist(dir)) {
-		throw ee::Exception("Out pkg should trim images first, find %s fail\n", new_path.c_str());		
-	}
-	if (tokens[1] != "editor_data") {
-		throw ee::Exception("Error filepath %s, no editor_data\n", filepath.c_str());		
-	}
-	new_path += "\\";
-	for (int i = 2, n = tokens.size() - 1; i < n; ++i) {
-		new_path += tokens[i] + "%";
-	}
-	new_path += tokens.back();
-	new_path = new_path.substr(0, new_path.find_last_of('.'));
-	new_path += "_complex.json";
+
+	//////////////////////////////////////////////////////////////////////////
+
+// 	new_path += "\\_tmp_pack";
+// 	std::string dir = ee::FileHelper::GetAbsolutePath(file_dir, new_path);
+// 	if (!ee::FileHelper::IsDirExist(dir)) {
+// 		throw ee::Exception("Out pkg should pack first, find %s fail\n", new_path.c_str());		
+// 	}
+// 	new_path += "\\json";
+// 	dir = ee::FileHelper::GetAbsolutePath(file_dir, new_path);
+// 	if (!ee::FileHelper::IsDirExist(dir)) {
+// 		throw ee::Exception("Out pkg should trim images first, find %s fail\n", new_path.c_str());		
+// 	}
+// 	if (tokens[1] != "editor_data") {
+// 		throw ee::Exception("Error filepath %s, no editor_data\n", filepath.c_str());		
+// 	}
+// 	new_path += "\\";
+// 	for (int i = 2, n = tokens.size() - 1; i < n; ++i) {
+// 		new_path += tokens[i] + "%";
+// 	}
+// 	new_path += tokens.back();
+// 	new_path = new_path.substr(0, new_path.find_last_of('.'));
+// 	new_path += "_complex.json";
+
+	//////////////////////////////////////////////////////////////////////////
 
 	val[key] = new_path;
 }
