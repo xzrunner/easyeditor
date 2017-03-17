@@ -80,7 +80,7 @@ void RectCutWithJson::Trigger(const std::string& src_dir, const std::string& dst
 		switch (type)
 		{
 		case s2::SYM_IMAGE:
-//			RectCutImage(src_dir, dst_dir, filepath);
+			RectCutImage(src_dir, dst_dir, filepath);
 			break;
 		case s2::SYM_COMPLEX:
 			FixComplex(src_dir, dst_dir, filepath);
