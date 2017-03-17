@@ -1,6 +1,7 @@
 #include "Sprite.h"
 #include "Symbol.h"
 #include "SpritePropertySetting.h"
+#include "LoadFromJson.h"
 
 #include <ee/SpriteFactory.h>
 #include <ee/FileHelper.h>
@@ -72,6 +73,7 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 				spr->RemoveReference();
 			}
 		}
+		LoadFromJson::CreateActionsFromTag(dynamic_cast<Symbol*>(sym));
 	}
 }
 
