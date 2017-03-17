@@ -9,6 +9,7 @@
 #include <ee/DummySprite.h>
 #include <ee/SymbolFile.h>
 #include <ee/SymbolType.h>
+#include <ee/Exception.h>
 
 #include <easyimage.h>
 #include <easycomplex.h>
@@ -20,6 +21,7 @@
 #include <pimg/Rect.h>
 #include <sprite2/SymType.h>
 #include <gum/Config.h>
+#include <gum/FilepathHelper.h>
 
 namespace edb
 {
@@ -327,7 +329,18 @@ void RectCutWithJson::FixImageFilepath(const std::string& src_dir, const std::st
 {
 	std::string filepath = val[key].asString();
 	filepath = ee::FileHelper::GetAbsolutePath(file_dir, filepath);
+	if (ee::FileHelper::IsFileExist(filepath)) {
+		FixImageFilepathInPkg(src_dir, dst_dir, file_dir, val, key);
+	} else {
+		FixImageFilepathOutPkg(src_dir, dst_dir, file_dir, val, key);
+	}
+}
 
+void RectCutWithJson::FixImageFilepathInPkg(const std::string& src_dir, const std::string& dst_dir, 
+											const std::string& file_dir, Json::Value& val, const std::string& key) const
+{
+	std::string filepath = val[key].asString();
+	filepath = ee::FileHelper::GetAbsolutePath(file_dir, filepath);
 	std::string filename = ee::FileHelper::GetRelativePath(src_dir, filepath);
 	filename = filename.substr(0, filename.find_last_of('.')) + "_complex.json";
 
@@ -345,6 +358,63 @@ void RectCutWithJson::FixImageFilepath(const std::string& src_dir, const std::st
 	std::string fixed_filepath = out_json_dir + "\\" + filename;
 
 	val[key] = ee::FileHelper::GetRelativePath(file_dir, fixed_filepath);
+}
+
+void RectCutWithJson::FixImageFilepathOutPkg(const std::string& src_dir, const std::string& dst_dir, 
+											 const std::string& file_dir, Json::Value& val, const std::string& key) const
+{
+	std::string filepath = val[key].asString();
+	int ptr = 0;
+	while (ptr + 2 < filepath.size() && filepath[ptr] == '.' && filepath[ptr + 1] == '.' && filepath[ptr + 2] == '\\') {
+		ptr += 3;
+	}
+
+	std::vector<std::string> tokens;
+	ee::StringHelper::Split(filepath.substr(ptr), "\\", tokens);
+	if (tokens.size() < 3) {
+		throw ee::Exception("Parse filepath fail: %s\n", filepath.c_str());
+	}
+
+	std::string new_path = tokens[0];
+	int level = 0;
+	bool find = false;
+	const int MAX_LEVEL = 20;
+	while (level++ < MAX_LEVEL) 
+	{
+		new_path = "..\\" + new_path;
+		std::string dir = ee::FileHelper::GetAbsolutePath(file_dir, new_path);
+		if (ee::FileHelper::IsDirExist(dir)) {
+			find = true;
+			break;
+		}
+	}
+
+	if (!find) {
+		throw ee::Exception("Can find out pkg's dir: %s\n", filepath.c_str());
+	}
+
+	new_path += "\\_tmp_pack";
+	std::string dir = ee::FileHelper::GetAbsolutePath(file_dir, new_path);
+	if (!ee::FileHelper::IsDirExist(dir)) {
+		throw ee::Exception("Out pkg should pack first, find %s fail\n", new_path.c_str());		
+	}
+	new_path += "\\json";
+	dir = ee::FileHelper::GetAbsolutePath(file_dir, new_path);
+	if (!ee::FileHelper::IsDirExist(dir)) {
+		throw ee::Exception("Out pkg should trim images first, find %s fail\n", new_path.c_str());		
+	}
+	if (tokens[1] != "editor_data") {
+		throw ee::Exception("Error filepath %s, no editor_data\n", filepath.c_str());		
+	}
+	new_path += "\\";
+	for (int i = 2, n = tokens.size() - 1; i < n; ++i) {
+		new_path += tokens[i] + "%";
+	}
+	new_path += tokens.back();
+	new_path = new_path.substr(0, new_path.find_last_of('.'));
+	new_path += "_complex.json";
+
+	val[key] = new_path;
 }
 
 void RectCutWithJson::FixGroup(const std::string& src_dir, const std::string& dst_dir, 

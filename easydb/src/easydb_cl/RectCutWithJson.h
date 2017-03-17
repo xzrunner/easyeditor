@@ -40,6 +40,10 @@ private:
 		const std::string& file_dir, Json::Value& val, const std::string& key) const;
 	void FixImageFilepath(const std::string& src_dir, const std::string& dst_dir, 
 		const std::string& file_dir, Json::Value& val, const std::string& key) const;
+	void FixImageFilepathInPkg(const std::string& src_dir, const std::string& dst_dir, 
+		const std::string& file_dir, Json::Value& val, const std::string& key) const;
+	void FixImageFilepathOutPkg(const std::string& src_dir, const std::string& dst_dir, 
+		const std::string& file_dir, Json::Value& val, const std::string& key) const;	
 
 	void FixGroup(const std::string& src_dir, const std::string& dst_dir, 
 		const std::string& file_dir, Json::Value& val) const;
