@@ -60,10 +60,10 @@ void PackToBin::Pack(const std::string& filepath,
 	{
 		PackNode* node = nodes[i];
 		int sz = node->SizeOfUnpackFromBin();
-		int head_sz = sizeof(uint8_t) * ALIGN_4BYTE(page->NodeNum() + 1) 
-			        + simp::SIZEOF_POINTER * (page->NodeNum() + 1);
 		while (true)
 		{
+			int head_sz = sizeof(uint8_t) * ALIGN_4BYTE(page->NodeNum() + 1) 
+						+ simp::SIZEOF_POINTER * (page->NodeNum() + 1);
 			if (page_sz + head_sz + sz <= page->GetSize()) {
 				page_sz += sz;
 				page->Add(node);

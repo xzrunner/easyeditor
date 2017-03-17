@@ -93,26 +93,26 @@ int PackAnim2::SizeOfUnpackFromBin() const
 	sz += simp::NodeAnim2::Slot::Size() * m_slots.size();
 	// tl joints
 	assert(m_tl_joints.size() == m_joints.size());
-	sz += sizeof(simp::NodeAnim2::TL_Joint*) * m_tl_joints.size();
+	sz += SIZEOF_POINTER * m_tl_joints.size();
 	for (int i = 0, n = m_tl_joints.size(); i < n; ++i) {
 		sz += simp::NodeAnim2::TL_Joint::Size();
 		sz += simp::NodeAnim2::JointSample::Size() * m_tl_joints[i].samples.size();
 	}
 	// tl skins
 	assert(m_tl_skins.size() == m_slots.size());
-	sz += sizeof(simp::NodeAnim2::TL_Skin*) * m_tl_skins.size();
+	sz += SIZEOF_POINTER * m_tl_skins.size();
 	for (int i = 0, n = m_tl_skins.size(); i < n; ++i) {
 		sz += simp::NodeAnim2::TL_Skin::Size();
 		sz += simp::NodeAnim2::SkinSample::Size() * m_tl_skins[i].samples.size();
-	}	
+	}
 	// tl deforms
 	assert(m_tl_deforms.size() == m_skins.size());
-	sz += sizeof(simp::NodeAnim2::TL_Deform*) * m_tl_deforms.size();
+	sz += SIZEOF_POINTER * m_tl_deforms.size();
 	for (int i = 0, n = m_tl_deforms.size(); i < n; ++i) 
 	{
 		const TL_Deform& deform = m_tl_deforms[i];
 		sz += simp::NodeAnim2::TL_Deform::Size();
-		sz += sizeof(simp::NodeAnim2::DeformSample*) * deform.deforms.size();
+		sz += SIZEOF_POINTER * deform.deforms.size();
 		for (int j = 0, m = deform.deforms.size(); j < m; ++j) {
 			sz += simp::NodeAnim2::DeformSample::Size() + sizeof(float) * 2 * deform.deforms[j].data.size();
 		}
