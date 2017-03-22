@@ -33,13 +33,7 @@ private:
 private:
 	PreviewPanel* m_stage;
 
-#ifdef S2_ANIM_CURR_V0
 	s2::AnimCurr m_curr;
-#elif defined S2_ANIM_CURR_V1
-	s2::AnimCurr2 m_curr;
-#elif defined S2_ANIM_CURR_V2
-	s2::AnimCurr3 m_curr;
-#endif
 
 }; // PreviewDialog
 
