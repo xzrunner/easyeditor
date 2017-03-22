@@ -2,6 +2,8 @@
 #include "Sprite.h"
 #include "Symbol.h"
 
+#include <sprite2/SprTreePath.h>
+
 #include <ee/panel_msg.h>
 
 namespace libanim
@@ -25,13 +27,13 @@ void PropertySetting::OnPropertyGridChange(const std::string& name, const wxAny&
 	} else if (name == "FPS") {
 		spr->SetFPS(wxANY_AS(value, int));
 	} else if (name == "Start Random") {
-		spr->SetStartRandom(wxANY_AS(value, bool));
+		spr->SetStartRandom(wxANY_AS(value, bool), s2::SprTreePath());
 	} else if (name == "Static") {
 		spr->SetStaticTime(wxANY_AS(value, int));
-		spr->SetActive(false);
+		spr->SetActive(false, s2::SprTreePath());
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	} else if (name == "Active") {
-		spr->SetActive(wxANY_AS(value, bool));
+		spr->SetActive(wxANY_AS(value, bool), s2::SprTreePath());
 	}
 }
 

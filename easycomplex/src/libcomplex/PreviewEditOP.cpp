@@ -22,8 +22,9 @@ bool PreviewEditOP::OnMouseLeftDown(int x, int y)
 		return true;
 	}
 
+	s2::SprTreePath path;
 	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
-		m_sprs[i]->OnMessage(s2::MSG_START);
+		m_sprs[i]->OnMessage(s2::MSG_START, path);
 	}
 
 	return false;

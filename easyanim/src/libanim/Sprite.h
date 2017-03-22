@@ -42,7 +42,7 @@ public:
 	int GetStaticTime() const { return m_static_time; }
 	void SetStaticTime(int static_time);
 
-	bool IsActive() const { return m_curr.IsActive(); }
+	bool IsActive() const;
 
 	static ee::Sprite* Create(ee::Symbol* sym);
 

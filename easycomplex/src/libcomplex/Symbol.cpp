@@ -60,7 +60,7 @@ void Symbol::Draw(const s2::RenderParams& rp, const s2::Sprite* spr) const
 		if (min.y > max.y) {
 			std::swap(min.y, max.y);
 		}
-		s2::RenderScissor::Instance()->Push(min.x, min.y, max.x-min.x, max.y-min.y);
+		s2::RenderScissor::Instance()->Push(min.x, min.y, max.x-min.x, max.y-min.y, true, false);
 	}
 
  	const ee::TPNode* n = NULL;

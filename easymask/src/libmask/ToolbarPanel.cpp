@@ -38,10 +38,11 @@ void ToolbarPanel::OnChangeMaskRender(wxCommandEvent& event)
 	static_cast<StageCanvas*>(m_stage->GetCanvas())->SetMaskRender(mask_render);
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
-	if (mask_render) {
+	if (mask_render) 
+	{
 		Symbol* sym = m_stage->GetSymbol();
-		const_cast<s2::Sprite*>(sym->GetBase())->OnMessage(s2::MSG_START);
-		const_cast<s2::Sprite*>(sym->GetMask())->OnMessage(s2::MSG_START);
+		const_cast<s2::Sprite*>(sym->GetBase())->OnMessage(s2::MSG_START, s2::SprTreePath());
+		const_cast<s2::Sprite*>(sym->GetMask())->OnMessage(s2::MSG_START, s2::SprTreePath());
 	}
 }
 
