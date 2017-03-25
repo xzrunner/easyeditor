@@ -119,7 +119,7 @@ void Skin2Mesh::PackToBin(uint8_t** ptr) const
 		pack(vx, ptr);
 		uint16_t vy = float2int(joint.vertex.y, 128);
 		pack(vy, ptr);
-		uint16_t weight = float2int(joint.weight, 4096);
+		int16_t weight = float2int(joint.weight - 0.5f, 2048);
 		pack(weight, ptr);
 	}
 	// texcoords
