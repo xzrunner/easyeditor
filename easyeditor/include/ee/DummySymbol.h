@@ -19,7 +19,7 @@ public:
 	virtual int Type() const { return -1; }
 	virtual void Traverse(const s2::SymbolVisitor& visitor) {}
 	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const {}
-	virtual sm::rect GetBounding(const s2::Sprite* spr = NULL) const;
+	virtual sm::rect GetBounding(const s2::Sprite* spr = NULL, const s2::Actor* actor = NULL) const;
 
 protected:
 	virtual bool LoadResources() { return true; }

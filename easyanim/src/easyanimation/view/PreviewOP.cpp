@@ -19,7 +19,7 @@ bool PreviewOP::OnMouseLeftDown(int x, int y)
 		return true;
 	}
 
-	m_curr.Start(s2::SprTreePath());
+	m_curr.Start(NULL);
 
 	return false;
 }

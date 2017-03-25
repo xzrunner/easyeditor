@@ -149,7 +149,7 @@ void Symbol::Draw(const s2::RenderParams& rp, const s2::Sprite* spr) const
 	}
 }
 
-sm::rect Symbol::GetBounding(const s2::Sprite* spr) const
+sm::rect Symbol::GetBounding(const s2::Sprite* spr, const s2::Actor* actor) const
 {
 	sm::vec2 scissor_sz = m_scissor.Size();
 	if (scissor_sz.x > 0 && scissor_sz.y > 0 && !ee::Config::Instance()->GetSettings().visible_scissor) {

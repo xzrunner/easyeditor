@@ -27,13 +27,13 @@ void PropertySetting::OnPropertyGridChange(const std::string& name, const wxAny&
 	} else if (name == "FPS") {
 		spr->SetFPS(wxANY_AS(value, int));
 	} else if (name == "Start Random") {
-		spr->SetStartRandom(wxANY_AS(value, bool), s2::SprTreePath());
+		spr->SetStartRandom(wxANY_AS(value, bool), NULL);
 	} else if (name == "Static") {
 		spr->SetStaticTime(wxANY_AS(value, int));
-		spr->SetActive(false, s2::SprTreePath());
+		spr->SetActive(false, NULL);
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	} else if (name == "Active") {
-		spr->SetActive(wxANY_AS(value, bool), s2::SprTreePath());
+		spr->SetActive(wxANY_AS(value, bool), NULL);
 	}
 }
 

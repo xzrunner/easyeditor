@@ -55,7 +55,7 @@ void FontBlankSymbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr
 	}
 }
 
-sm::rect FontBlankSymbol::GetBounding(const s2::Sprite* spr/* = NULL*/) const
+sm::rect FontBlankSymbol::GetBounding(const s2::Sprite* spr, const s2::Actor* actor) const
 {
 	sm::rect b;
 	float w = width, h = height;

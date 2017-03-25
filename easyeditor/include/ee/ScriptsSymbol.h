@@ -19,7 +19,8 @@ public:
 	virtual int Type() const;
 	virtual void Traverse(const s2::SymbolVisitor& visitor) {}
 	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const {}
-	virtual sm::rect GetBounding(const s2::Sprite* spr = NULL) const { return sm::rect(0, 0); }
+	virtual sm::rect GetBounding(const s2::Sprite* spr = NULL, const s2::Actor* actor = NULL) const { 
+		return sm::rect(0, 0); }
 
 	const std::string GetContent() const { return m_data; }
 

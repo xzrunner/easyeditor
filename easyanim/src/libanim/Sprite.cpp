@@ -74,7 +74,7 @@ ee::PropertySetting* Sprite::CreatePropertySetting(ee::EditPanelImpl* stage)
 void Sprite::SetStaticTime(int static_time)
 {
 	m_static_time = static_time;
-	SetFrame(static_time, s2::SprTreePath());
+	SetFrame(static_time, NULL);
 }
 
 bool Sprite::IsActive() const 

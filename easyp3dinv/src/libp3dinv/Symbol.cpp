@@ -33,7 +33,7 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 	}
 }
 
-sm::rect Symbol::GetBounding(const s2::Sprite* spr) const
+sm::rect Symbol::GetBounding(const s2::Sprite* spr, const s2::Actor* actor) const
 {
 	return sm::rect(200, 200);
 }

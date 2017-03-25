@@ -21,7 +21,7 @@ public:
 	virtual int Type() const;
 	virtual void Traverse(const s2::SymbolVisitor& visitor) {}
 	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
-	virtual sm::rect GetBounding(const s2::Sprite* spr = NULL) const;
+	virtual sm::rect GetBounding(const s2::Sprite* spr = NULL, const s2::Actor* actor = NULL) const;
 
 	Shadow* GetShadow() { return m_shadow; }
 	const Shadow* GetShadow() const { return m_shadow; }
