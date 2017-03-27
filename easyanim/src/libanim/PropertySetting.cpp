@@ -2,7 +2,7 @@
 #include "Sprite.h"
 #include "Symbol.h"
 
-#include <sprite2/SprTreePath.h>
+#include <sprite2/UpdateParams.h>
 
 #include <ee/panel_msg.h>
 
@@ -27,7 +27,7 @@ void PropertySetting::OnPropertyGridChange(const std::string& name, const wxAny&
 	} else if (name == "FPS") {
 		spr->SetFPS(wxANY_AS(value, int));
 	} else if (name == "Start Random") {
-		spr->SetStartRandom(wxANY_AS(value, bool), NULL);
+		spr->SetStartRandom(s2::UpdateParams(), wxANY_AS(value, bool));
 	} else if (name == "Static") {
 		spr->SetStaticTime(wxANY_AS(value, int));
 		spr->SetActive(false, NULL);

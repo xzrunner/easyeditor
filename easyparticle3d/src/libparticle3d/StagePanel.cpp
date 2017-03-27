@@ -7,6 +7,8 @@
 
 #include <ee/FetchAllVisitor.h>
 
+#include <sprite2/UpdateParams.h>
+
 namespace eparticle3d
 {
 
@@ -30,9 +32,8 @@ bool StagePanel::UpdateStage()
 {
 	std::vector<ee::Sprite*> sprs;
 	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
-	s2::RenderParams rp;
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
-		sprs[i]->Update(rp);
+		sprs[i]->Update(s2::UpdateParams());
 	}
 
 	if (m_ps) {

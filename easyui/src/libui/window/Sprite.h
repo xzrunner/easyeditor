@@ -22,7 +22,7 @@ public:
 	 *    s2::Sprite
 	 */
 	virtual Sprite* Clone() const { return new Sprite(*this); }
-	virtual bool Update(const s2::RenderParams& params);
+	virtual bool Update(const s2::UpdateParams& up);
 
 	static ee::Sprite* Create(ee::Symbol* sym);
 

@@ -8,7 +8,7 @@
 #include <json/json.h>
 
 namespace ee { class Sprite; }
-namespace s2 { class RenderParams; }
+namespace s2 { class RenderParams; class UpdateParams; }
 
 namespace eui
 {
@@ -21,7 +21,7 @@ public:
 	AnchorMgr();
 	~AnchorMgr();
 
-	virtual bool Update(const s2::RenderParams& params);
+	virtual bool Update(const s2::UpdateParams& up);
 
 	void LoadFromFile(const Json::Value& value, 
 		const std::vector<ee::Sprite*>& sprs);

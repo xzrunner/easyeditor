@@ -9,6 +9,8 @@
 #include <easyanim.h>
 #include <easycomplex.h>
 
+#include <sprite2/UpdateParams.h>
+
 namespace emask
 {
 
@@ -41,8 +43,8 @@ void ToolbarPanel::OnChangeMaskRender(wxCommandEvent& event)
 	if (mask_render) 
 	{
 		Symbol* sym = m_stage->GetSymbol();
-		const_cast<s2::Sprite*>(sym->GetBase())->OnMessage(s2::MSG_START, NULL);
-		const_cast<s2::Sprite*>(sym->GetMask())->OnMessage(s2::MSG_START, NULL);
+		const_cast<s2::Sprite*>(sym->GetBase())->OnMessage(s2::UpdateParams(), s2::MSG_START);
+		const_cast<s2::Sprite*>(sym->GetMask())->OnMessage(s2::UpdateParams(), s2::MSG_START);
 	}
 }
 

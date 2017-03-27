@@ -14,7 +14,7 @@
 #include <ee/subject_id.h>
 
 #include <sprite2/S2_Sprite.h>
-#include <sprite2/RenderParams.h>
+#include <sprite2/UpdateParams.h>
 #include <sprite2/Particle3d.h>
 
 namespace ee { extern StageModule MODULE_STAGE; }
@@ -75,7 +75,7 @@ bool StagePanel::UpdateStage()
 	bool dirty = false;
 	const std::vector<s2::Sprite*>& children = m_sym->GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
-		if (children[i]->Update(s2::RenderParams())) {
+		if (children[i]->Update(s2::UpdateParams())) {
 			dirty = true;
 		}
 	}

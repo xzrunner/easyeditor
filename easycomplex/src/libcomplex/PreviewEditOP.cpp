@@ -6,6 +6,8 @@
 #include <easyparticle3d.h>
 #include <easyanim.h>
 
+#include <sprite2/UpdateParams.h>
+
 namespace ecomplex
 {
 
@@ -23,7 +25,7 @@ bool PreviewEditOP::OnMouseLeftDown(int x, int y)
 	}
 
 	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
-		m_sprs[i]->OnMessage(s2::MSG_START, NULL);
+		m_sprs[i]->OnMessage(s2::UpdateParams(), s2::MSG_START);
 	}
 
 	return false;

@@ -10,7 +10,7 @@
 #include <ee/Visitor.h>
 #include <ee/Sprite.h>
 
-#include <sprite2/RenderParams.h>
+#include <sprite2/UpdateParams.h>
 
 namespace emask
 {
@@ -40,10 +40,10 @@ StagePanel::~StagePanel()
 bool StagePanel::UpdateStage()
 {
 	if (const s2::Sprite* base = m_sym->GetBase()) {
-		const_cast<s2::Sprite*>(base)->Update(s2::RenderParams());
+		const_cast<s2::Sprite*>(base)->Update(s2::UpdateParams());
 	}
 	if (const s2::Sprite* mask = m_sym->GetMask()) {
-		const_cast<s2::Sprite*>(mask)->Update(s2::RenderParams());
+		const_cast<s2::Sprite*>(mask)->Update(s2::UpdateParams());
 	}
 	return true;
 }

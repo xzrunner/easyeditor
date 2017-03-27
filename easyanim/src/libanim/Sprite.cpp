@@ -4,7 +4,7 @@
 
 #include <ee/std_functor.h>
 
-#include <sprite2/SprTreePath.h>
+#include <sprite2/UpdateParams.h>
 #include <gum/AnimSprLoader.h>
 
 namespace libanim
@@ -74,7 +74,7 @@ ee::PropertySetting* Sprite::CreatePropertySetting(ee::EditPanelImpl* stage)
 void Sprite::SetStaticTime(int static_time)
 {
 	m_static_time = static_time;
-	SetFrame(static_time, NULL);
+	SetFrame(s2::UpdateParams(), static_time);
 }
 
 bool Sprite::IsActive() const 

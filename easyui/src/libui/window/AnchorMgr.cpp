@@ -34,11 +34,11 @@ AnchorMgr::~AnchorMgr()
 	Clear();
 }
 
-bool AnchorMgr::Update(const s2::RenderParams& params)
+bool AnchorMgr::Update(const s2::UpdateParams& up)
 {
 	bool dirty = false;
 	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
-		if (m_sprs[i]->Update(params)) {
+		if (m_sprs[i]->Update(up)) {
 			dirty = true;
 		}
 	}

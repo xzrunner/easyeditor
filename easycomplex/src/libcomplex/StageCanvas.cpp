@@ -112,7 +112,7 @@ void StageCanvas::OnDrawSprites() const
 		s2::RVG::Cross(sm::vec2(0,0), EDGE, EDGE);
 	}
 
-	s2::Particle3d::Instance()->Draw();
+	s2::Particle3d::Instance()->BufferDraw();
 
 	m_stage->DrawEditOP();
 

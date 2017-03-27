@@ -25,7 +25,7 @@ void PreviewCanvas::OnDrawSprites() const
 		ee::SpriteRenderer::Instance()->Draw(spr, s2::RenderParams());
 	}
 
-	s2::Particle3d::Instance()->Draw();
+	s2::Particle3d::Instance()->BufferDraw();
 }
 
 }

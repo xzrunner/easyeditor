@@ -2,8 +2,6 @@
 
 #include <easyanim.h>
 
-#include <sprite2/SprTreePath.h>
-
 namespace eanim
 {
 

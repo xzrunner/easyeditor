@@ -11,7 +11,7 @@
 #include <ee/subject_id.h>
 #include <ee/ImageSymbol.h>
 
-#include <sprite2/RenderParams.h>
+#include <sprite2/UpdateParams.h>
 
 namespace emesh
 {
@@ -69,7 +69,7 @@ StagePanel::~StagePanel()
 
 bool StagePanel::UpdateStage()
 {
-	return m_sym->Update(s2::RenderParams(), 0);
+	return m_sym->Update(s2::UpdateParams(), 0);
 }
 
 void StagePanel::TraverseShapes(ee::Visitor<ee::Shape>& visitor, 

@@ -34,7 +34,7 @@ Sprite::Sprite(Symbol* sym)
 {
 }
 
-bool Sprite::Update(const s2::RenderParams& params) 
+bool Sprite::Update(const s2::UpdateParams& up) 
 { 
 	return m_text.find("dynamic") != std::string::npos;
 }
