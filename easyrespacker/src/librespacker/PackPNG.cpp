@@ -15,6 +15,7 @@
 #include <gimg_typedef.h>
 #include <sprite2/DrawRT.h>
 #include <gum/Config.h>
+#include <timp/TextureFormat.h>
 
 #include <assert.h>
 
@@ -26,7 +27,7 @@ PackPNG::PackPNG(bool png8)
 	, m_height(0)
 	, m_buffer(NULL)
 {
-	m_type = png8 ? TT_PNG8 : TT_PNG4;
+	m_type = png8 ? timp::TEXTURE_RGBA8 : timp::TEXTURE_RGBA4;
 }
 
 PackPNG::~PackPNG()
@@ -75,7 +76,7 @@ void PackPNG::Load(const std::string& filepath)
 		throw ee::Exception("PackPNG::Load: error channels %d.", c);
 	}
 
-	if (m_type == TT_PNG4) {
+	if (m_type == timp::TEXTURE_RGBA4) {
 		GenPng4();
 	}
 }

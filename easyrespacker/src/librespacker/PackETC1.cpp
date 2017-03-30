@@ -4,6 +4,8 @@
 
 #include <ee/Exception.h>
 
+#include <timp/TextureFormat.h>
+
 #include <string>
 
 #include <assert.h>
@@ -26,7 +28,7 @@ struct PKMHeader
 
 PackETC1::PackETC1()
 {
-	m_type = TT_ETC1;
+	m_type = timp::TEXTURE_ETC1;
 
 	m_width = m_height = 0;
 	m_rgb_buf = m_alpha_buf = NULL;

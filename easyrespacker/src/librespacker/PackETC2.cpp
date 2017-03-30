@@ -14,6 +14,7 @@
 #include <gimg_import.h>
 #include <sprite2/DrawRT.h>
 #include <gum/Config.h>
+#include <timp/TextureFormat.h>
 
 #include <string>
 
@@ -38,7 +39,7 @@ struct PKMHeader
 PackETC2::PackETC2(bool fast)
 	: m_fast(fast)
 {
-	m_type = TT_ETC2;
+	m_type = timp::TEXTURE_ETC2;
 
 	m_width = m_height = 0;
 	m_buf = NULL;

@@ -17,15 +17,6 @@ static const uint8_t TAG_CAMERA		= 32;
 static const uint8_t TAG_COLMAP		= 64;
 static const uint8_t TAG_BLEND		= 128;
 
-enum TextureType
-{
-	TT_PNG4,
-	TT_PNG8,
-	TT_PVR,
-	TT_ETC1,
-	TT_ETC2,
-};
-
 }
 
 #endif // _EASYRESPACKER_TYPEDEF_H_

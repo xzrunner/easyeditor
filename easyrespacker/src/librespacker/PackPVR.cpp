@@ -13,6 +13,7 @@
 #include <gimg_import.h>
 #include <sprite2/DrawRT.h>
 #include <gum/Config.h>
+#include <timp/TextureFormat.h>
 
 #include <string>
 
@@ -126,7 +127,7 @@ PackPVR::PackPVR(bool fast)
 	, m_data_sz(0)
 	, m_buffer(NULL)
 {
-	m_type = TT_PVR;
+	m_type = timp::TEXTURE_PVR4;
 }
 
 PackPVR::~PackPVR()

@@ -23,8 +23,7 @@ public:
 
 	static ICommand* Create() { return new PackImageEPT(); }
 
-	void Trigger(const std::string& src, const std::string& dst, 
-		erespacker::TextureType type);
+	void Trigger(const std::string& src, const std::string& dst, int type);
 
 }; // PackImageEPT
 

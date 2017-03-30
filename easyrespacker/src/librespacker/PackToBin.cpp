@@ -12,6 +12,8 @@
 #include <ee/TexturePacker.h>
 #include <ee/StringHelper.h>
 
+#include <timp/TextureFormat.h>
+
 #include "spritepack.h"
 
 #include <algorithm>
@@ -147,18 +149,19 @@ void PackToBin::PackEPT(const std::string& filepath, const ee::TexturePacker& tp
 	}
 }
 
-void PackToBin::PackEPT(const std::string& src_file, const std::string& dst_file, TextureType type)
+void PackToBin::PackEPT(const std::string& src_file, const std::string& dst_file, 
+						int type)
 {
 	std::string ext;
 	switch (type) 
 	{
-	case TT_PNG4: case TT_PNG8:
+	case timp::TEXTURE_RGBA4: case timp::TEXTURE_RGBA8:
 		ext = ".png";
 		break;
-	case TT_PVR:
+	case timp::TEXTURE_PVR2: case timp::TEXTURE_PVR4:
 		ext = ".pvr";
 		break;
-	case TT_ETC1: case TT_ETC2:
+	case timp::TEXTURE_ETC1: case timp::TEXTURE_ETC2:
 		ext = ".pkm";
 		break;
 	}
@@ -166,19 +169,19 @@ void PackToBin::PackEPT(const std::string& src_file, const std::string& dst_file
 	PackImage* packer;
 	switch (type)
 	{
-	case TT_PNG4:
+	case timp::TEXTURE_RGBA4:
 		packer = new PackPNG(false);
 		break;
-	case TT_PNG8:
+	case timp::TEXTURE_RGBA8:
 		packer = new PackPNG(true);
 		break;
-	case TT_PVR:
+	case timp::TEXTURE_PVR2: case timp::TEXTURE_PVR4:
 		packer = new PackPVR(true);
 		break;
-	case TT_ETC1:
+	case timp::TEXTURE_ETC1:
 		packer = new PackETC1();
 		break;
-	case TT_ETC2:
+	case timp::TEXTURE_ETC2:
 		packer = new PackETC2(true);
 		break;
 	default:
