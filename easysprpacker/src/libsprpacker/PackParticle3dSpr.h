@@ -43,6 +43,8 @@ private:
 	bool m_alone;
 	bool m_reuse;
 
+	float m_start_radius;
+
 }; // PackParticle3dSpr
 
 }

@@ -47,6 +47,9 @@ void PackParticle3dSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::
 		lua::assign("is_alone", m_alone), 
 		lua::assign("is_reuse", m_reuse));
 
+	lua::connect(gen, 1, 
+		lua::assign("start_radius", m_start_radius));
+
 	gen.detab();
 	gen.line("},");
 }
@@ -62,7 +65,8 @@ int PackParticle3dSpr::SizeOfPackToBin() const
 	sz += sizeof(uint32_t);			// id
 	sz += sizeof(uint8_t);			// type
 	sz += sizeof(uint32_t);			// p3d id
-	sz += sizeof(uint8_t) * 4;		// loop, local, alone, reuse
+	sz += sizeof(uint8_t);		    // loop, local, alone, reuse
+	sz += sizeof(uint16_t);			// start radius
 	return sz;
 }
 
@@ -78,16 +82,14 @@ void PackParticle3dSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, fl
 	pack(sym, ptr);
 
 	uint8_t loop = bool2int(m_loop);
-	pack(loop, ptr);
-
 	uint8_t local = bool2int(m_local);
-	pack(local, ptr);
-
 	uint8_t alone = bool2int(m_alone);
-	pack(alone, ptr);
-
 	uint8_t reuse = bool2int(m_reuse);
-	pack(reuse, ptr);
+	uint8_t pack8 = (loop) | (local << 1) | (alone << 2) | (reuse << 3);
+	pack(pack8, ptr);
+
+	uint16_t radius = float2int(m_start_radius, 16);
+	pack(radius, ptr);
 }
 
 bool PackParticle3dSpr::Equal(const eparticle3d::Sprite* spr) const
@@ -95,7 +97,8 @@ bool PackParticle3dSpr::Equal(const eparticle3d::Sprite* spr) const
 	return m_loop == spr->IsLoop()
 		&& m_local == spr->IsLocalModeDraw()
 		&& m_alone == spr->IsAlone()
-		&& m_reuse == spr->IsReuse();
+		&& m_reuse == spr->IsReuse()
+		&& m_start_radius == spr->GetStartRadius();
 }
 
 void PackParticle3dSpr::Init(const eparticle3d::Sprite* spr)
@@ -107,6 +110,8 @@ void PackParticle3dSpr::Init(const eparticle3d::Sprite* spr)
 	m_local	= spr->IsLocalModeDraw();
 	m_alone	= spr->IsAlone();
 	m_reuse	= spr->IsReuse();
+
+	m_start_radius = spr->GetStartRadius();
 }
 
 }
