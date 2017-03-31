@@ -79,6 +79,8 @@ int PackParticle3d::SizeOfPackToBin() const
 	sz += sizeof(uint8_t);				// ground
 	sz += sizeof(uint16_t) * 2;			// start position
 	sz += sizeof(uint8_t);				// orient_to_movement
+	sz += sizeof(uint8_t);				// loop
+	sz += sizeof(uint8_t);				// local
 	sz += sizeof(uint8_t);				// blend
 	return sz;
 }
@@ -168,6 +170,11 @@ void PackParticle3d::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float
 	uint8_t orient_to_movement = bool2int(m_orient_to_movement);
 	pack(orient_to_movement, ptr);
 
+	uint8_t loop = bool2int(m_loop);
+	pack(loop, ptr);
+	uint8_t local = bool2int(m_local);
+	pack(local, ptr);
+
 	uint8_t blend = m_blend;
 	pack(blend, ptr);
 }
@@ -216,6 +223,9 @@ void PackParticle3d::Init(const eparticle3d::Symbol* sym)
 	m_start_height		= cfg->start_height;
 
 	m_orient_to_movement= cfg->orient_to_movement;
+
+	m_loop              = sym->IsLoop();
+	m_local             = sym->IsLocal();
 
 	m_components.reserve(cfg->sym_count);
 	for (int i = 0; i < cfg->sym_count; ++i) {
@@ -273,6 +283,10 @@ void PackParticle3d::PackToLuaPS(ebuilder::CodeGenerator& gen) const
 
 	lua::connect(gen, 1, 
 		lua::assign("orient_to_movement", m_orient_to_movement));
+
+	lua::connect(gen, 2, 
+		lua::assign("loop", m_loop), 
+		lua::assign("local", m_local));
 
 	lua::connect(gen, 1, 
 		lua::assign("blend", m_blend));

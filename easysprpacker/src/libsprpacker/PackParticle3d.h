@@ -98,6 +98,9 @@ private:
 
 	bool m_orient_to_movement;
 
+	bool m_loop;
+	bool m_local;
+
 	std::vector<Component> m_components;
 
 }; // PackParticle3d
