@@ -7,6 +7,7 @@
 #include <CU_RefCountObj.h>
 #include <SM_Matrix.h>
 #include <sprite2/Particle3d.h>
+#include <sprite2/P3dRenderParams.h>
 
 #include <string>
 
@@ -14,6 +15,7 @@ struct p3d_emitter;
 struct p3d_emitter_cfg;
 struct p3d_symbol;
 struct p3d_particle;
+struct p3d_sprite;
 
 namespace s2 { class Symbol; }
 

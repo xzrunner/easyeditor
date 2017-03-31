@@ -158,7 +158,7 @@ void ParticleSystem::Draw(const sm::mat4& mt, AnimRecorder* recorder) const
 // 		m_anim_recorder->FinishFrame();
 // 	}
 
-	m_rp.mat = const_cast<sm::mat4&>(mt);
+	m_rp.mt = const_cast<sm::mat4&>(mt);
 	p3d_emitter_draw(m_spr->et, &m_rp);
 
 //	sl::ShaderMgr::Instance()->GetContext()->SetDefaultBlend();
@@ -399,7 +399,9 @@ void ParticleSystem::Init(const p3d_emitter_cfg* cfg)
 	memset(m_spr->mat, 0, sizeof(m_spr->mat));
 	m_spr->ptr_self = &m_spr;
 
-	m_rp.p3d = m_spr;
+	if (m_spr) {
+		m_rp.local = m_rp.local;
+	}
 }
 
 }
