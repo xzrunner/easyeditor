@@ -15,6 +15,12 @@ class Symbol : public ee::Symbol, public s2::Particle2dSymbol
 public:
 	Symbol();
 
+	/**
+	 *  @interface
+	 *    ee::Symbol
+	 */
+	virtual sm::rect GetBounding(const s2::Sprite* spr = NULL, const s2::Actor* actor = NULL) const;
+
 	static ee::Symbol* Create() { return new Symbol(); }
 
 protected:

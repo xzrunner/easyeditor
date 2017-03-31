@@ -18,6 +18,7 @@ public:
 	 *    ee::Symbol
 	 */
 	virtual void Traverse(ee::Visitor<ee::Sprite>& visitor);
+	virtual sm::rect GetBounding(const s2::Sprite* spr = NULL, const s2::Actor* actor = NULL) const;
 
 	static ee::Symbol* Create() { return new Symbol(); }
 

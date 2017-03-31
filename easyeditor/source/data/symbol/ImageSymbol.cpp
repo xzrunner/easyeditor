@@ -11,6 +11,7 @@
 #include <sprite2/ImageSymbol.h>
 #include <sprite2/RenderParams.h>
 #include <sprite2/S2_RVG.h>
+#include <sprite2/S2_Texture.h>
 #include <gum/RenderContext.h>
 #include <gum/RenderTarget.h>
 #include <gum/GUM_AsyncTask.h>
@@ -81,7 +82,14 @@ bool ImageSymbol::LoadResources()
 
 void ImageSymbol::InitCoreTex()
 {
-	InitTex(m_image->GetS2Tex(), m_image->GetClippedRegion());
+	const sm::i16_rect& region = m_image->GetClippedRegion();
+	InitTex(m_image->GetS2Tex(), region);
+
+	sm::vec2 sz = m_tex->GetOriSize();
+	m_size.xmin = region.xmin - sz.x * 0.5f;
+	m_size.ymin = region.ymin - sz.y * 0.5f;
+	m_size.xmax = region.xmax - sz.x * 0.5f;
+	m_size.ymax = region.ymax - sz.y * 0.5f;
 }
 
 void ImageSymbol::LoadSync()

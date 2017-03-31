@@ -33,6 +33,11 @@ void Symbol::Traverse(ee::Visitor<ee::Sprite>& visitor)
 	}
 }
 
+sm::rect Symbol::GetBounding(const s2::Sprite* spr, const s2::Actor* actor) const
+{
+	return sm::rect(200, 200);
+}
+
 bool Symbol::LoadResources()
 {
 	if (!gum::FilepathHelper::Exists(m_filepath)) {
