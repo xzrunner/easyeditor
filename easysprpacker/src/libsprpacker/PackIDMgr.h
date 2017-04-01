@@ -7,6 +7,8 @@
 #include <map>
 #include <vector>
 
+#include <stdint.h>
+
 namespace esprpacker
 {
 
@@ -38,7 +40,7 @@ private:
 		std::string path;
 		int id;
 
-		std::map<std::string, int> sprs;
+		std::map<std::string, uint32_t> sprs;
 
 		bool img_cut;
 		std::string cut_img, cut_json, cut_ori;

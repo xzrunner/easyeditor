@@ -140,7 +140,7 @@ void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id) 
 
 	pkg_id = pkg->id;
 	
-	std::map<std::string, int>::iterator itr = pkg->sprs.find(filepath);
+	std::map<std::string, uint32_t>::iterator itr = pkg->sprs.find(filepath);
 	if (itr == pkg->sprs.end()) {
 		throw ee::Exception("query spr id fail: %s", filepath.c_str());
 	}
@@ -208,7 +208,7 @@ void PackIDMgr::InitSprsID(const std::string& filepath, Package* pkg) const
 			continue;
 		}
 		filepath = gum::FilepathHelper::Format(filepath);
-		int id = spr_val["id"].asInt();
+		uint32_t id = spr_val["id"].asUInt();
 
 		if (pkg->sprs.find(filepath) != pkg->sprs.end()) {
 			throw ee::Exception("PackIDMgr::InitSprsID: dup filepath %s", filepath.c_str());
