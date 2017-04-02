@@ -28,7 +28,7 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 		spr->SetLoop(wxANY_AS(value, bool));
 	} else if (name == "Local") {
 		bool local = wxANY_AS(value, bool);
-		spr->SetLocalModeDraw(local);
+		spr->SetLocal(local);
 		if (!local) {
 			m_pg->GetProperty("Reuse")->SetValue(false);
 			spr->SetReuse(false);
@@ -40,7 +40,7 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 		spr->SetReuse(reuse);
 		if (reuse) {
 			m_pg->GetProperty("Local")->SetValue(true);
-			spr->SetLocalModeDraw(true);
+			spr->SetLocal(true);
 		}
 	} else if (name == "Start Radius") {
 		float radius = wxANY_AS(value, float);

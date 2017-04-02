@@ -50,8 +50,8 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 	ee::Sprite::Store(val);
 
 	Json::Value p_val;
-	p_val["loop"] = GetLoop();
-	p_val["local_mode_draw"] = GetLocalModeDraw();
+	p_val["loop"] = IsLoop();
+	p_val["local_mode_draw"] = IsLocal();
 
 	val["particle2d"] = p_val;
 }

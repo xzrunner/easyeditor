@@ -27,7 +27,7 @@ void PropertySetting::OnPropertyGridChange(const std::string& name, const wxAny&
 	if (name == "Loop") {
 		spr->SetLoop(wxANY_AS(value, bool));
 	} else if (name == "Local") {
-		spr->SetLocalModeDraw(wxANY_AS(value, bool));
+		spr->SetLocal(wxANY_AS(value, bool));
 	}
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -39,8 +39,8 @@ void PropertySetting::UpdateProperties(wxPropertyGrid* pg)
 
 	Sprite* spr = static_cast<Sprite*>(GetSprite());
 
-	pg->GetProperty("Loop")->SetValue(spr->GetLoop());
-	pg->GetProperty("Local")->SetValue(spr->GetLocalModeDraw());
+	pg->GetProperty("Loop")->SetValue(spr->IsLoop());
+	pg->GetProperty("Local")->SetValue(spr->IsLocal());
 }
 
 void PropertySetting::InitProperties(wxPropertyGrid* pg)
@@ -51,9 +51,9 @@ void PropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	Sprite* spr = static_cast<Sprite*>(GetSprite());
 
-	pg->Append(new wxBoolProperty("Loop", wxPG_LABEL, spr->GetLoop()));
+	pg->Append(new wxBoolProperty("Loop", wxPG_LABEL, spr->IsLoop()));
 	pg->SetPropertyAttribute("Loop", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
-	pg->Append(new wxBoolProperty("Local", wxPG_LABEL, spr->GetLocalModeDraw()));
+	pg->Append(new wxBoolProperty("Local", wxPG_LABEL, spr->IsLocal()));
 	pg->SetPropertyAttribute("Local", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 }
 

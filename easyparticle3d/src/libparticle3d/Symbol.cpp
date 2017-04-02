@@ -22,12 +22,13 @@ Symbol::Symbol()
 
 void Symbol::Traverse(ee::Visitor<ee::Sprite>& visitor)
 {
-	if (!m_et_cfg) {
+	const p3d_emitter_cfg* cfg = GetEmitterCfg();
+	if (!cfg) {
 		return;
 	}
-	for (int i = 0; i < m_et_cfg->sym_count; ++i)
+	for (int i = 0; i < cfg->sym_count; ++i)
 	{
-		const p3d_symbol& p_symbol = m_et_cfg->syms[i];
+		const p3d_symbol& p_symbol = cfg->syms[i];
 		ee::Symbol* sym = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(p_symbol.ud));
 		sym->Traverse(visitor);
 	}
@@ -44,9 +45,8 @@ bool Symbol::LoadResources()
 		return false;
 	}
 
-	m_et_cfg = PSConfigMgr::Instance()->GetConfig(m_filepath);
-	m_et = p3d_emitter_create(m_et_cfg);
-	p3d_emitter_start(m_et);
+	const p3d_emitter_cfg* cfg = PSConfigMgr::Instance()->GetConfig(m_filepath);
+	SetEmitterCfg(cfg);
 
 	Json::Value value;
 	Json::Reader reader;
@@ -58,8 +58,8 @@ bool Symbol::LoadResources()
 
 	name = value["name"].asString();
 
-	m_loop = value["loop"].asBool();
-	m_local = value["local"].asBool();
+	SetLoop(value["loop"].asBool());
+	SetLocal(value["local"].asBool());
 
 	return true;
 }
