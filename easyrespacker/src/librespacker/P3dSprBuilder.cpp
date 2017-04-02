@@ -73,9 +73,10 @@ const IPackNode* P3dSprBuilder::Create(const eparticle3d::Sprite* spr)
 
 	node->p3d = PackNodeFactory::Instance()->Create(dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
 	node->loop = spr->IsLoop();
-	node->local = spr->IsLocalModeDraw();
+	node->local = spr->IsLocal();
 	node->alone = spr->IsAlone();
-	node->reuse = spr->IsReuse();
+//	node->reuse = spr->IsReuse();
+	node->reuse = false;
 
 	return node;
 }

@@ -9,6 +9,7 @@
 
 #include <easyparticle3d.h>
 
+#include <sprite2/P3dEmitterCfg.h>
 #include <gum/trans_color.h>
 #include <ps_3d.h>
 
@@ -62,7 +63,7 @@ const IPackNode* Particle3DBuilder::Create(const eparticle3d::Symbol* sym, P3dSp
 
 void Particle3DBuilder::Load(const eparticle3d::Symbol* sym, PackParticle3D* ps)
 {
-	const p3d_emitter_cfg* cfg = sym->GetEmitterCfg();
+	const p3d_emitter_cfg* cfg = sym->GetEmitterCfg()->GetImpl();
 	
 	ps->blend = cfg->blend;
 

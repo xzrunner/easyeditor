@@ -7,8 +7,6 @@
 #include <sprite2/Particle3dSprite.h>
 #include <sprite2/Particle3d.h>
 
-struct p3d_sprite;
-
 namespace eparticle3d
 {
 
@@ -38,8 +36,7 @@ public:
 	sm::Quaternion& GetDir() { return m_dir; }
 	const sm::Quaternion& GetDir() const { return m_dir; }
 
-	bool IsLoop() const;
-	bool IsReuse() const { return m_reuse; }
+// 	bool IsReuse() const { return m_reuse; }
 
 	void OnActive();
 

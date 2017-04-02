@@ -22,7 +22,7 @@ void SymbolPropertySetting::OnPropertyGridChange(const std::string& name, const 
 	if (name == "Loop") {
 		m_ps->SetLoop(wxANY_AS(value, bool));
 	} else if (name == "Local") {
-		m_ps->SetLocalModeDraw(wxANY_AS(value, bool));
+		m_ps->SetLocal(wxANY_AS(value, bool));
 	}
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -32,8 +32,8 @@ void SymbolPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
 	ee::SymbolPropertySetting::UpdateProperties(pg);
 
-	pg->GetProperty("Loop")->SetValue(m_ps->GetEmitter()->loop);
-	pg->GetProperty("Local")->SetValue(m_ps->IsLocalModeDraw());
+	pg->GetProperty("Loop")->SetValue(m_ps->IsLoop());
+	pg->GetProperty("Local")->SetValue(m_ps->IsLocal());
 }
 
 void SymbolPropertySetting::InitProperties(wxPropertyGrid* pg)
@@ -42,9 +42,9 @@ void SymbolPropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	pg->Append(new wxPropertyCategory("State", wxPG_LABEL));
 
-	pg->Append(new wxBoolProperty("Loop", wxPG_LABEL, m_ps->GetEmitter()->loop));
+	pg->Append(new wxBoolProperty("Loop", wxPG_LABEL, m_ps->IsLoop()));
 	pg->SetPropertyAttribute("Loop", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
-	pg->Append(new wxBoolProperty("Local", wxPG_LABEL, m_ps->IsLocalModeDraw()));
+	pg->Append(new wxBoolProperty("Local", wxPG_LABEL, m_ps->IsLocal()));
 	pg->SetPropertyAttribute("Local", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 }
 

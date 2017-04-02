@@ -95,7 +95,7 @@ void PackParticle3dSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, fl
 bool PackParticle3dSpr::Equal(const eparticle3d::Sprite* spr) const
 {
 	return m_loop == spr->IsLoop()
-		&& m_local == spr->IsLocalModeDraw()
+		&& m_local == spr->IsLocal()
 		&& m_alone == spr->IsAlone()
 		&& m_reuse == spr->IsReuse()
 		&& m_start_radius == spr->GetStartRadius();
@@ -107,7 +107,7 @@ void PackParticle3dSpr::Init(const eparticle3d::Sprite* spr)
 		dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
 
 	m_loop	= spr->IsLoop();
-	m_local	= spr->IsLocalModeDraw();
+	m_local	= spr->IsLocal();
 	m_alone	= spr->IsAlone();
 	m_reuse	= spr->IsReuse();
 

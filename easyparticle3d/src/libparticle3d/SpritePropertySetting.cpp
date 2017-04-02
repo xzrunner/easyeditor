@@ -29,19 +29,19 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 	} else if (name == "Local") {
 		bool local = wxANY_AS(value, bool);
 		spr->SetLocal(local);
-		if (!local) {
-			m_pg->GetProperty("Reuse")->SetValue(false);
-			spr->SetReuse(false);
-		}
+// 		if (!local) {
+// 			m_pg->GetProperty("Reuse")->SetValue(false);
+// 			spr->SetReuse(false);
+// 		}
 	} else if (name == "Alone") {
 		spr->SetAlone(wxANY_AS(value, bool));
 	} else if (name == "Reuse") {
-		bool reuse = wxANY_AS(value, bool);
-		spr->SetReuse(reuse);
-		if (reuse) {
-			m_pg->GetProperty("Local")->SetValue(true);
-			spr->SetLocal(true);
-		}
+// 		bool reuse = wxANY_AS(value, bool);
+// 		spr->SetReuse(reuse);
+// 		if (reuse) {
+// 			m_pg->GetProperty("Local")->SetValue(true);
+// 			spr->SetLocal(true);
+// 		}
 	} else if (name == "Start Radius") {
 		float radius = wxANY_AS(value, float);
 		spr->SetStartRadius(radius);
@@ -59,9 +59,9 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	Sprite* spr = static_cast<Sprite*>(GetSprite());
 
 	pg->GetProperty("Loop")->SetValue(spr->IsLoop());
-	pg->GetProperty("Local")->SetValue(spr->IsLocalModeDraw());
+	pg->GetProperty("Local")->SetValue(spr->IsLocal());
 	pg->GetProperty("Alone")->SetValue(spr->IsAlone());
-	pg->GetProperty("Reuse")->SetValue(spr->IsReuse());
+//	pg->GetProperty("Reuse")->SetValue(spr->IsReuse());
 
 	pg->GetProperty("Start Radius")->SetValue(spr->GetStartRadius());
 }
@@ -78,12 +78,12 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	pg->Append(new wxBoolProperty("Loop", wxPG_LABEL, spr->IsLoop()));
 	pg->SetPropertyAttribute("Loop", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
-	pg->Append(new wxBoolProperty("Local", wxPG_LABEL, spr->IsLocalModeDraw()));
+	pg->Append(new wxBoolProperty("Local", wxPG_LABEL, spr->IsLocal()));
 	pg->SetPropertyAttribute("Local", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 	pg->Append(new wxBoolProperty("Alone", wxPG_LABEL, spr->IsAlone()));
 	pg->SetPropertyAttribute("Alone", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
-	pg->Append(new wxBoolProperty("Reuse", wxPG_LABEL, spr->IsReuse()));
-	pg->SetPropertyAttribute("Reuse", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
+// 	pg->Append(new wxBoolProperty("Reuse", wxPG_LABEL, spr->IsReuse()));
+// 	pg->SetPropertyAttribute("Reuse", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
 	pg->Append(new wxFloatProperty("Start Radius", wxPG_LABEL, spr->GetStartRadius()));
 }

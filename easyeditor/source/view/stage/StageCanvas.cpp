@@ -217,7 +217,9 @@ void StageCanvas::OnTimer(wxTimerEvent& event)
 	}
 	last_time = curr_time;
 
-	s2::SprTimer::Instance()->Update(dt);
+	if (s2::SprTimer::Instance()->Update(dt)) {
+		m_dirty = true;
+	}
 
 	gum::DTex::Instance()->Flush();
 	gum::AsyncTask::Instance()->Update();

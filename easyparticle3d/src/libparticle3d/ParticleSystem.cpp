@@ -3,20 +3,22 @@
 #include "InvertRecord.h"
 #include "ps_config.h"
 
-#include <ps_3d.h>
-#include <ps_3d_sprite.h>
-
 #include <ee/Math2D.h>
 #include <ee/Symbol.h>
+
+#include <ps_3d.h>
+#include <sprite2/Particle3dEmitter.h>
+#include <sprite2/P3dEmitterCfg.h>
 
 #include <assert.h>
 
 namespace eparticle3d
 {
 
-ParticleSystem::ParticleSystem(p3d_emitter_cfg* cfg, bool record)
+ParticleSystem::ParticleSystem(const s2::P3dEmitterCfg* cfg, bool record)
 	: m_anim_recorder(NULL)
 	, m_inv_record(NULL)
+	, m_et(NULL)
 {
 	s2::Particle3d::Instance();
 
@@ -25,29 +27,35 @@ ParticleSystem::ParticleSystem(p3d_emitter_cfg* cfg, bool record)
 		m_inv_record = new InvertRecord;
 	}
 
-	Init(cfg);
+	InitEmitter(cfg);
 }
 
 ParticleSystem::ParticleSystem(const ParticleSystem& ps)
 	: m_anim_recorder(NULL)
 	, m_inv_record(NULL)
+	, m_et(NULL)
 {
 	s2::Particle3d::Instance();
 
-	Init(ps.m_spr->et->cfg);
+	InitEmitter(ps.m_et->GetEmitterCfg());
 }
 
 ParticleSystem::~ParticleSystem()
 {
 	delete m_anim_recorder;
 	delete m_inv_record;
-	p3d_sprite_release(m_spr);	
+
+	if (m_et) {
+		m_et->RemoveReference();
+	}
 }
 
 void ParticleSystem::SetValue(int key, const ee::UICallback::Data& data)
 {
-	p3d_emitter_cfg* cfg = const_cast<p3d_emitter_cfg*>(m_spr->et->cfg);
-
+	if (!m_et) {
+		return;
+	}
+	p3d_emitter_cfg* cfg = const_cast<p3d_emitter_cfg*>(m_et->GetEmitterCfg()->GetImpl());
 	switch (key)
 	{
 	case PS_COUNT:
@@ -102,73 +110,76 @@ void ParticleSystem::SetValue(int key, const ee::UICallback::Data& data)
 
 void ParticleSystem::GetValue(int key, ee::UICallback::Data& data)
 {
+	if (!m_et) {
+		return;
+	}
+	const p3d_emitter_cfg* cfg = m_et->GetEmitterCfg()->GetImpl();
 	switch (key)
 	{
 	case PS_COUNT:
-		data.val0 = static_cast<float>(m_spr->et->cfg->count);
+		data.val0 = static_cast<float>(cfg->count);
 		break;
 	case PS_EMISSION_TIME:
-		data.val0 = m_spr->et->cfg->emission_time * 1000;
+		data.val0 = cfg->emission_time * 1000;
 		break;
 	case PS_LIFE_TIME:
-		data.val0 = m_spr->et->cfg->life * 1000;
-		data.val1 = m_spr->et->cfg->life_var * 1000;
+		data.val0 = cfg->life * 1000;
+		data.val1 = cfg->life_var * 1000;
 		break;
 	case PS_RADIAL_SPEED:
-		data.val0 = m_spr->et->cfg->radial_spd * 4;
-		data.val1 = m_spr->et->cfg->radial_spd_var * 4;
+		data.val0 = cfg->radial_spd * 4;
+		data.val1 = cfg->radial_spd_var * 4;
 		break;
 	case PS_TANGENTIAL_SPEED:
-		data.val0 = m_spr->et->cfg->tangential_spd;
-		data.val1 = m_spr->et->cfg->tangential_spd_var;
+		data.val0 = cfg->tangential_spd;
+		data.val1 = cfg->tangential_spd_var;
 		break;
 	case PS_ANGULAR_SPEED:
-		data.val0 = m_spr->et->cfg->angular_spd * SM_RAD_TO_DEG;
-		data.val1 = m_spr->et->cfg->angular_spd_var * SM_RAD_TO_DEG;
+		data.val0 = cfg->angular_spd * SM_RAD_TO_DEG;
+		data.val1 = cfg->angular_spd_var * SM_RAD_TO_DEG;
 		break;
 	case PS_DISTURBANCE_RADIUS:
-		data.val0 = m_spr->et->cfg->dis_region;
-		data.val1 = m_spr->et->cfg->dis_region_var;
+		data.val0 = cfg->dis_region;
+		data.val1 = cfg->dis_region_var;
 		break;
 	case PS_DISTURBANCE_SPD:
-		data.val0 = m_spr->et->cfg->dis_spd;
-		data.val1 = m_spr->et->cfg->dis_spd_var;
+		data.val0 = cfg->dis_spd;
+		data.val1 = cfg->dis_spd_var;
 		break;
 	case PS_GRAVITY:
-		data.val0 = m_spr->et->cfg->gravity / 0.3f;
+		data.val0 = cfg->gravity / 0.3f;
 		break;
 	case PS_LINEAR_ACC:
-		data.val0 = m_spr->et->cfg->linear_acc;
-		data.val1 = m_spr->et->cfg->linear_acc_var;
+		data.val0 = cfg->linear_acc;
+		data.val1 = cfg->linear_acc_var;
 		break;
 	case PS_FADEOUT_TIME:
-		data.val0 = m_spr->et->cfg->fadeout_time * 1000;
+		data.val0 = cfg->fadeout_time * 1000;
 		break;
 	case PS_START_POS:
-		data.val0 = m_spr->et->cfg->start_radius;
-		data.val1 = m_spr->et->cfg->start_height;
+		data.val0 = cfg->start_radius;
+		data.val1 = cfg->start_height;
 		break;
 	}
 }
 
-void ParticleSystem::Draw(const sm::mat4& mt, AnimRecorder* recorder) const
+void ParticleSystem::Draw(AnimRecorder* recorder) const
 {
 //  // todo record
 // 	if (m_anim_recorder) {
 // 		m_anim_recorder->FinishFrame();
 // 	}
 
-	m_rp.mt = const_cast<sm::mat4&>(mt);
-	p3d_emitter_draw(m_spr->et, &m_rp);
+	if (m_et) {
+		m_et->Draw(s2::P3dRenderParams(), true);
+	}
 
 //	sl::ShaderMgr::Instance()->GetContext()->SetDefaultBlend();
 }
 
 bool ParticleSystem::Update(const sm::mat4& mat)
 {
-	float time = s2::Particle3d::Instance()->GetTime();
-	assert(m_spr->et->time <= time);
-	if (m_spr->et->time == time) {
+	if (!m_et) {
 		return false;
 	}
 
@@ -179,17 +190,18 @@ bool ParticleSystem::Update(const sm::mat4& mat)
 	mt[3] = mat.x[5];
 	mt[4] = mat.x[12];
 	mt[5] = mat.x[13];	
+	m_et->SetMat(mt);
 
-	float dt = time - m_spr->et->time;
-	p3d_emitter_update(m_spr->et, dt, mt);
-	m_spr->et->time = time;
-
-	return true;
+	float time = s2::Particle3d::Instance()->GetTime();
+	return m_et->Update(time);
 }
 
 void ParticleSystem::SetStaticMode(bool is_static)
 {
-	p3d_emitter_cfg* cfg = const_cast<p3d_emitter_cfg*>(m_spr->et->cfg);
+	if (!m_et) {
+		return;
+	}
+	p3d_emitter_cfg* cfg = const_cast<p3d_emitter_cfg*>(m_et->GetEmitterCfg()->GetImpl());
 	cfg->static_mode = is_static;
 }
 
@@ -208,12 +220,16 @@ void ParticleSystem::SetDirection(const sm::Quaternion& dir)
 
 void ParticleSystem::Start()
 {
-	p3d_emitter_start(m_spr->et);
+	if (m_et) {
+		m_et->Start();
+	}
 }
 
 void ParticleSystem::Stop()
 {
-	p3d_emitter_stop(m_spr->et);
+	if (m_et) {
+		m_et->Stop();
+	}
 }
 
 void ParticleSystem::Reset()
@@ -223,18 +239,24 @@ void ParticleSystem::Reset()
 
 void ParticleSystem::Pause()
 {
-	p3d_emitter_pause(m_spr->et);
+	if (m_et) {
+		m_et->Pause();
+	}
 }
 
 void ParticleSystem::SetLoop(bool loop)
 {
-	if (loop == m_spr->et->loop) {
+	if (!m_et) {
 		return;
 	}
 
-	m_spr->et->loop = loop;
+	if (m_et->IsLoop() == loop) {
+		return;
+	}
 
-	Start();
+	m_et->SetLoop(loop);
+	m_et->Start();
+
 // 	if (m_spr->et->loop) {
 // 		Start();
 // 	} else {
@@ -242,19 +264,36 @@ void ParticleSystem::SetLoop(bool loop)
 // 	}
 }
 
-void ParticleSystem::SetLocalModeDraw(bool local)
+bool ParticleSystem::IsLoop() const
 {
-	m_spr->local_mode_draw = local;
+	if (m_et) {
+		return m_et->IsLoop();
+	} else {
+		return true;
+	}
 }
 
-bool ParticleSystem::IsLocalModeDraw() const
+void ParticleSystem::SetLocal(bool local)
 {
-	return m_spr->local_mode_draw;
+	if (m_et) {
+		m_et->SetLocal(local);
+	}
+}
+
+bool ParticleSystem::IsLocal() const
+{
+	if (m_et) {
+		return m_et->IsLocal();
+	} else {
+		return true;
+	}
 }
 
 void ParticleSystem::Clear()
 {
-	p3d_emitter_clear(m_spr->et);
+	if (m_et) {
+		m_et->Clear();
+	}
 	if (m_anim_recorder) {
 		m_anim_recorder->Clear();
 	}
@@ -265,14 +304,10 @@ void ParticleSystem::Clear()
 
 bool ParticleSystem::IsEmpty() const
 {
-	return !m_spr->et->head;
-}
-
-void ParticleSystem::ReloadTexture() const
-{
-	for (int i = 0; i < m_spr->et->cfg->sym_count; ++i) {
-		ee::Symbol* sym = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(m_spr->et->cfg->syms[i].ud));
-		sym->ReloadTexture();
+	if (m_et) {
+		return m_et->IsFinished();
+	} else {
+		return true;
 	}
 }
 
@@ -299,39 +334,60 @@ void ParticleSystem::RemoveFromInvertRecord(p3d_particle* p)
 
 void ParticleSystem::SetHori(int min, int max) 
 {
-	p3d_emitter_cfg* cfg = const_cast<p3d_emitter_cfg*>(m_spr->et->cfg);
+	if (!m_et) {
+		return;
+	}
+	p3d_emitter_cfg* cfg = const_cast<p3d_emitter_cfg*>(m_et->GetEmitterCfg()->GetImpl());
 	cfg->hori = (min + max) * 0.5f * SM_DEG_TO_RAD;
 	cfg->hori_var = (max - min) * 0.5f * SM_DEG_TO_RAD;
 }
 
 void ParticleSystem::SetVert(int min, int max) 
 { 
-	p3d_emitter_cfg* cfg = const_cast<p3d_emitter_cfg*>(m_spr->et->cfg);
+	if (!m_et) {
+		return;
+	}
+	p3d_emitter_cfg* cfg = const_cast<p3d_emitter_cfg*>(m_et->GetEmitterCfg()->GetImpl());
 	cfg->vert = (min + max) * 0.5f * SM_DEG_TO_RAD;
 	cfg->vert_var = (max - min) * 0.5f * SM_DEG_TO_RAD;
 }
 
 void ParticleSystem::SetGround(int ground)
 {
-	const_cast<p3d_emitter_cfg*>(m_spr->et->cfg)->ground = ground;
+	if (!m_et) {
+		return;
+	}
+	p3d_emitter_cfg* cfg = const_cast<p3d_emitter_cfg*>(m_et->GetEmitterCfg()->GetImpl());
+	cfg->ground = ground;
 }
 
 void ParticleSystem::SetOrientToMovement(bool open) 
-{ 
-	const_cast<p3d_emitter_cfg*>(m_spr->et->cfg)->orient_to_movement = open;
+{
+	if (!m_et) {
+		return;
+	}
+	p3d_emitter_cfg* cfg = const_cast<p3d_emitter_cfg*>(m_et->GetEmitterCfg()->GetImpl());
+	cfg->orient_to_movement = open;
 }
 
 void ParticleSystem::SetBlend(int blend)
 {
-	const_cast<p3d_emitter_cfg*>(m_spr->et->cfg)->blend = blend;	
+	if (!m_et) {
+		return;
+	}
+	p3d_emitter_cfg* cfg = const_cast<p3d_emitter_cfg*>(m_et->GetEmitterCfg()->GetImpl());
+	cfg->blend = blend;
 }
 
 p3d_symbol* ParticleSystem::AddSymbol(s2::Symbol* sym)
 {
-	assert(m_spr->et->cfg->sym_count < MAX_COMPONENTS);
+	if (!m_et) {
+		return NULL;
+	}
+	p3d_emitter_cfg* cfg = const_cast<p3d_emitter_cfg*>(m_et->GetEmitterCfg()->GetImpl());
+	assert(cfg->sym_count < MAX_COMPONENTS);
 
-	p3d_emitter_cfg* cfg = const_cast<p3d_emitter_cfg*>(m_spr->et->cfg);
-	p3d_symbol& comp = m_spr->et->cfg->syms[cfg->sym_count++];
+	p3d_symbol& comp = cfg->syms[cfg->sym_count++];
 	memset(&comp, 0, SIZEOF_P3D_SYMBOL);
 
 	comp.scale_start = comp.scale_end = 1;
@@ -341,6 +397,7 @@ p3d_symbol* ParticleSystem::AddSymbol(s2::Symbol* sym)
 	comp.add_col_begin.r = comp.add_col_begin.g = comp.add_col_begin.b = comp.add_col_begin.a = 0;
 	comp.add_col_end.r = comp.add_col_end.g = comp.add_col_end.b = comp.add_col_end.a = 0;
 
+	sym->AddReference();
 	comp.ud = sym;
 
 	return &comp;
@@ -348,11 +405,16 @@ p3d_symbol* ParticleSystem::AddSymbol(s2::Symbol* sym)
 
 void ParticleSystem::DelSymbol(int idx)
 {
-	if (idx < 0 || idx >= m_spr->et->cfg->sym_count) {
+	if (!m_et) {
+		return;
+	}
+	p3d_emitter_cfg* cfg = const_cast<p3d_emitter_cfg*>(m_et->GetEmitterCfg()->GetImpl());
+	if (!cfg || idx < 0 || idx >= cfg->sym_count) {
 		return;
 	}
 
-	p3d_emitter_cfg* cfg = const_cast<p3d_emitter_cfg*>(m_spr->et->cfg);
+	p3d_symbol& comp = cfg->syms[idx];
+	static_cast<s2::Symbol*>(comp.ud)->RemoveReference();
 	if (cfg->sym_count == 1) {
 		cfg->sym_count = 0;
 	} else {
@@ -367,41 +429,51 @@ void ParticleSystem::DelSymbol(int idx)
 
 void ParticleSystem::DelAllSymbol()
 {
-	const_cast<p3d_emitter_cfg*>(m_spr->et->cfg)->sym_count = 0;
+	if (!m_et) {
+		return;
+	}
+	p3d_emitter_cfg* cfg = const_cast<p3d_emitter_cfg*>(m_et->GetEmitterCfg()->GetImpl());
+	for (int i = 0; i < cfg->sym_count; ++i) {
+		s2::Symbol* sym = (s2::Symbol*)(cfg->syms[i].ud);
+		sym->RemoveReference();
+	}
+	cfg->sym_count = 0;
 }
 
 p3d_symbol* ParticleSystem::GetSymbol(int idx)
 {
-	if (idx < 0 || idx >= m_spr->et->cfg->sym_count) {
+	if (!m_et) {
+		return NULL;
+	}
+	p3d_emitter_cfg* cfg = const_cast<p3d_emitter_cfg*>(m_et->GetEmitterCfg()->GetImpl());
+	if (idx < 0 || idx >= cfg->sym_count) {
 		return NULL;
 	} else {
-		return &m_spr->et->cfg->syms[idx];
+		return &cfg->syms[idx];
 	}
 }
 
-const p3d_emitter_cfg* ParticleSystem::GetConfig() const
+const s2::P3dEmitterCfg* ParticleSystem::GetConfig() const
 {
-	return m_spr->et->cfg;
-}
-
-const p3d_emitter* ParticleSystem::GetEmitter() const 
-{ 
-	return m_spr->et; 
-}
-
-void ParticleSystem::Init(const p3d_emitter_cfg* cfg)
-{
-	m_spr = p3d_sprite_create();
-	assert(m_spr);
-	m_spr->et = p3d_emitter_create(cfg);
-	m_spr->et->ud = this;
-	m_spr->local_mode_draw = true;
-	memset(m_spr->mat, 0, sizeof(m_spr->mat));
-	m_spr->ptr_self = &m_spr;
-
-	if (m_spr) {
-		m_rp.local = m_rp.local;
+	if (m_et) {
+		return m_et->GetEmitterCfg();
+	} else {
+		return NULL;
 	}
+}
+
+//
+//const p3d_emitter* ParticleSystem::GetEmitter() const 
+//{ 
+//}
+
+void ParticleSystem::InitEmitter(const s2::P3dEmitterCfg* cfg)
+{
+	if (!m_et) {
+		m_et = s2::P3dEmitterPool::Instance()->Pop();
+	}
+	m_et->CreateEmitter(cfg);
+	m_et->Start();
 }
 
 }

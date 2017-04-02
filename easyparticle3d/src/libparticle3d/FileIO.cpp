@@ -13,6 +13,7 @@
 #include <ee/Exception.h>
 
 #include <ps_3d.h>
+#include <sprite2/P3dEmitterCfg.h>
 #include <gum/JsonSerializer.h>
 #include <gum/P3dSymLoader.h>
 
@@ -42,11 +43,12 @@ void FileIO::Store(const std::string& filepath, ParticleSystem* ps,
 	value["max_vert"] = toolbar->m_max_vert->GetValue();
 
 	value["ground"] = toolbar->m_ground->GetSelection();
+	
+	const s2::P3dEmitterCfg* cfg = ps->GetConfig();
+	value["orient_to_movement"] = cfg->GetImpl()->orient_to_movement;
 
-	value["orient_to_movement"] = ps->GetEmitter()->cfg->orient_to_movement;
-
-	value["loop"] = ps->GetEmitter()->loop;
-	value["local"] = ps->IsLocalModeDraw();
+	value["loop"] = ps->IsLoop();
+	value["local"] = ps->IsLocal();
 
 //	value["orient_to_parent"] = toolbar->m_orient_to_parent->GetValue();
 
@@ -109,7 +111,7 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 	}
 
 	ps->SetLoop(adapter.loop);
-	ps->SetLocalModeDraw(adapter.local);
+	ps->SetLocal(adapter.local);
 
 	toolbar->Load(value, version);
 
@@ -147,11 +149,11 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 
 ParticleSystem* FileIO::LoadPS(const std::string& filepath)
 {
-	p3d_emitter_cfg* cfg = PSConfigMgr::Instance()->GetConfig(filepath);
+	s2::P3dEmitterCfg* cfg = PSConfigMgr::Instance()->GetConfig(filepath);
 	return new ParticleSystem(cfg, false);
 }
 
-p3d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
+s2::P3dEmitterCfg* FileIO::LoadPSConfig(const std::string& filepath)
 {
 	class Loader : public gum::P3dSymLoader
 	{
@@ -169,7 +171,7 @@ p3d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
  	memset(cfg, 0, sz);
 	adapter.Store(cfg);
 
-	return cfg;
+	return new s2::P3dEmitterCfg(cfg);
 }
 
 }

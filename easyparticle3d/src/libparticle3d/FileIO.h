@@ -3,9 +3,8 @@
 
 #include <string>
 
-struct p3d_emitter_cfg;
-
 namespace ee { class LibraryPanel; }
+namespace s2 { class P3dEmitterCfg; }
 
 namespace eparticle3d
 {
@@ -22,7 +21,7 @@ public:
 		ToolbarPanel* toolbar, ee::LibraryPanel* library);
 
 	static ParticleSystem* LoadPS(const std::string& filepath);
-	static p3d_emitter_cfg* LoadPSConfig(const std::string& filepath);
+	static s2::P3dEmitterCfg* LoadPSConfig(const std::string& filepath);
 
 }; // FileIO
 

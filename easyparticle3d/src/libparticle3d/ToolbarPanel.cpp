@@ -403,7 +403,7 @@ void ToolbarPanel::InitParticle()
 {
 	Clear();
 
-	p3d_emitter_cfg* cfg = PSConfigMgr::Instance()->GetDefaultConfig();
+	s2::P3dEmitterCfg* cfg = PSConfigMgr::Instance()->GetDefaultConfig();
 	ParticleSystem* ps = new ParticleSystem(cfg, false);
 //	ps->Start();
 	cu::RefCountObjAssign<ParticleSystem>(m_stage->m_ps, ps);
@@ -503,7 +503,7 @@ void ToolbarPanel::OnSetLoop(wxCommandEvent& event)
 
 void ToolbarPanel::OnSetLocalModeDraw(wxCommandEvent& event)
 {
-	m_stage->m_ps->SetLocalModeDraw(event.IsChecked());
+	m_stage->m_ps->SetLocal(event.IsChecked());
 }
 
 void ToolbarPanel::OnSetHori(wxSpinEvent& event)

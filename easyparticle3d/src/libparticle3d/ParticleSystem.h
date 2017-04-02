@@ -11,13 +11,10 @@
 
 #include <string>
 
-struct p3d_emitter;
-struct p3d_emitter_cfg;
 struct p3d_symbol;
 struct p3d_particle;
-struct p3d_sprite;
 
-namespace s2 { class Symbol; }
+namespace s2 { class Symbol; class Particle3dEmitter; class P3dEmitterCfg; }
 
 namespace eparticle3d
 {
@@ -28,7 +25,7 @@ class InvertRecord;
 class ParticleSystem : public cu::RefCountObj, public ee::UICallback
 {
 public:
-	ParticleSystem(p3d_emitter_cfg* cfg, bool record);
+	ParticleSystem(const s2::P3dEmitterCfg* cfg, bool record);
 	ParticleSystem(const ParticleSystem& ps);
 
 	virtual ~ParticleSystem();
@@ -40,7 +37,7 @@ public:
 	virtual void SetValue(int key, const ee::UICallback::Data& data);
 	virtual void GetValue(int key, ee::UICallback::Data& data);
 
-	virtual void Draw(const sm::mat4& mt, AnimRecorder* recorder = NULL) const;
+	virtual void Draw(AnimRecorder* recorder = NULL) const;
 
 	bool Update(const sm::mat4& mat);
 
@@ -51,17 +48,19 @@ public:
 
 	void Start();
 	void Stop();
+
 	void Reset();
 	void Pause();
+
 	void SetLoop(bool loop);
-	void SetLocalModeDraw(bool local);
-	bool IsLocalModeDraw() const;
+	bool IsLoop() const;
+
+	void SetLocal(bool local);
+	bool IsLocal() const;
 
 	void Clear();
 
 	bool IsEmpty() const;
-
-	void ReloadTexture() const;
 
 	void StoreAnimRecord(const std::string& filepath) const;
 	void StoreInvertRecord(const std::string& filepath) const;
@@ -82,23 +81,21 @@ public:
 	void DelAllSymbol();
 	p3d_symbol* GetSymbol(int idx);
 
-	const p3d_emitter_cfg* GetConfig() const;
-	const p3d_emitter* GetEmitter() const;
+	const s2::P3dEmitterCfg* GetConfig() const;
+// 	const p3d_emitter* GetEmitter() const;
 
 private:
-	void Init(const p3d_emitter_cfg* cfg);
+	void InitEmitter(const s2::P3dEmitterCfg* cfg);
 
 public:
 	std::string name;
 
 private:
-	mutable s2::P3dRenderParams m_rp;
-
 	AnimRecorder* m_anim_recorder;
 	InvertRecord* m_inv_record;
 
 private:
-	p3d_sprite* m_spr;
+	s2::Particle3dEmitter* m_et;
 
 }; // ParticleSystem
 

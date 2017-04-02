@@ -40,11 +40,7 @@ void StageCanvas::OnDrawSprites() const
 
 	ParticleSystem* ps = m_stage->m_ps;
 	if (ps) {
-		if (ps->IsLocalModeDraw()) {
-			m_stage->m_ps->Draw(m_stage->GetPSMat());
-		} else {
-			m_stage->m_ps->Draw(sm::mat4());
-		}
+		m_stage->m_ps->Draw();
 	}
 
 	m_stage->DrawEditOP();

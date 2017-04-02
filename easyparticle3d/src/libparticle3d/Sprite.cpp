@@ -4,9 +4,8 @@
 #include "SpritePropertySetting.h"
 
 #include <ps_3d.h>
-#include <ps_3d_sprite.h>
-#include <ps_3d_buffer.h>
 #include <sprite2/RenderParams.h>
+#include <sprite2/Particle3dEmitter.h>
 #include <gum/P3dSprLoader.h>
 
 namespace eparticle3d
@@ -69,20 +68,11 @@ ee::PropertySetting* Sprite::CreatePropertySetting(ee::EditPanelImpl* stage)
 	return new SpritePropertySetting(stage, this);
 }
 
-bool Sprite::IsLoop() const
-{
-	if (m_spr) {
-		return m_spr->et->loop;
-	} else {
-		return false;
-	}
-}
-
 void Sprite::OnActive()
 {
-	// removed from buffer
-	if (!m_spr) {
-		CreateSpr();		
+	if (m_et) {
+		m_et->RemoveReference();
+		m_et = NULL;
 	}
 }
 

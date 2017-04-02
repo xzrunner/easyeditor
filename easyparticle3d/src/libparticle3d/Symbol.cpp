@@ -5,8 +5,8 @@
 #include "PSConfigMgr.h"
 
 #include <ps_3d.h>
-#include <ps_3d_sprite.h>
 #include <sprite2/RenderParams.h>
+#include <sprite2/P3dEmitterCfg.h>
 #include <gum/FilepathHelper.h>
 
 #include <assert.h>
@@ -22,13 +22,14 @@ Symbol::Symbol()
 
 void Symbol::Traverse(ee::Visitor<ee::Sprite>& visitor)
 {
-	const p3d_emitter_cfg* cfg = GetEmitterCfg();
+	const s2::P3dEmitterCfg* cfg = GetEmitterCfg();
 	if (!cfg) {
 		return;
 	}
-	for (int i = 0; i < cfg->sym_count; ++i)
+	const p3d_emitter_cfg* impl = cfg->GetImpl();
+	for (int i = 0; i < impl->sym_count; ++i)
 	{
-		const p3d_symbol& p_symbol = cfg->syms[i];
+		const p3d_symbol& p_symbol = impl->syms[i];
 		ee::Symbol* sym = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(p_symbol.ud));
 		sym->Traverse(visitor);
 	}
@@ -45,7 +46,7 @@ bool Symbol::LoadResources()
 		return false;
 	}
 
-	const p3d_emitter_cfg* cfg = PSConfigMgr::Instance()->GetConfig(m_filepath);
+	const s2::P3dEmitterCfg* cfg = PSConfigMgr::Instance()->GetConfig(m_filepath);
 	SetEmitterCfg(cfg);
 
 	Json::Value value;

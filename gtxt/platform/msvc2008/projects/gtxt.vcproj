@@ -194,14 +194,6 @@
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\gtxt\gtxt_user_font.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\gtxt\gtxt_user_font.h"
-			>
-		</File>
-		<File
 			RelativePath="..\..\..\src\gtxt\gtxt_util.c"
 			>
 		</File>

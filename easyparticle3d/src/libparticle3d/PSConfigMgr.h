@@ -4,7 +4,7 @@
 #include <string>
 #include <map>
 
-struct p3d_emitter_cfg;
+namespace s2 { class P3dEmitterCfg; }
 
 namespace eparticle3d
 {
@@ -12,11 +12,11 @@ namespace eparticle3d
 class PSConfigMgr
 {
 public:
-	p3d_emitter_cfg* GetDefaultConfig();
+	s2::P3dEmitterCfg* GetDefaultConfig();
 
-	p3d_emitter_cfg* GetConfig(const std::string& filepath);
+	s2::P3dEmitterCfg* GetConfig(const std::string& filepath);
 
-	std::string GetFilepath(const p3d_emitter_cfg* cfg);
+	std::string GetFilepath(const s2::P3dEmitterCfg* cfg);
 
 public:
 	static PSConfigMgr* Instance();
@@ -25,7 +25,7 @@ private:
 	PSConfigMgr();
 	
 private:
-	std::map<std::string, p3d_emitter_cfg*> m_map2cfg;
+	std::map<std::string, s2::P3dEmitterCfg*> m_map2cfg;
 
 	static PSConfigMgr* m_instance;
 

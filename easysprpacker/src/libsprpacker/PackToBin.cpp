@@ -36,6 +36,12 @@ void PackToBin::Pack(const std::string& filepath,
 					 bool compress, 
 					 float scale)
 {
+	printf("++ pack %s \n", filepath.c_str());
+
+	if (filepath.find("ui.109.epe") != std::string::npos) {
+		int zz = 0;
+	}
+
 	// src nodes
 	std::vector<PackNode*> nodes;
 	PackNodeFactory::Instance()->FetchAll(nodes);
@@ -60,6 +66,9 @@ void PackToBin::Pack(const std::string& filepath,
 	{
 		PackNode* node = nodes[i];
 		int sz = node->SizeOfUnpackFromBin();
+
+		printf("++ node idx %d, sz %d\n", i, sz);
+
 		while (true)
 		{
 			int head_sz = sizeof(uint8_t) * ALIGN_4BYTE(page->NodeNum() + 1) 
