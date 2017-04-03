@@ -28,7 +28,6 @@ public:
 
 public:
 	std::string GetTag() const;
-	const wxChar* GetClip() const;
 	sm::vec2 GetPosition() const;
 	s2::Color GetMultiColor() const;
 	s2::Color GetAddColor() const;
@@ -42,7 +41,6 @@ public:
 	bool GetEditable() const;
 
 	void SetTag(const std::string& tag);
-	void SetClip(int clip);
 	void SetPos(float x, float y);
 	void SetColorMul(const s2::Color& col);
 	void SetColorAdd(const s2::Color& col);

@@ -36,10 +36,6 @@ void MultiSpritesPropertySetting::OnPropertyGridChange(const std::string& name, 
 	{
 		m_impl->SetTag(wxANY_AS(value, wxString).ToStdString());
 	}
-	else if (name == wxT("Clip"))
-	{
-		m_impl->SetClip(wxANY_AS(value, int));
-	}
 	else if (name == "Color.Multi")
 	{
 		wxColour col = wxANY_AS(value, wxColour);
@@ -141,7 +137,6 @@ void MultiSpritesPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	pg->GetProperty(wxT("Count"))->SetValue(m_impl->SpriteCount());
 
 	pg->GetProperty(wxT("Tag"))->SetValue(m_impl->GetTag());
-	pg->GetProperty(wxT("Clip"))->SetValue(m_impl->GetClip());
 
 	s2::Color mul_col = m_impl->GetMultiColor();
 	s2::Color add_col = m_impl->GetAddColor();
@@ -191,9 +186,6 @@ void MultiSpritesPropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->Append(new wxStringProperty("Count", wxPG_LABEL, scount));
 	
 	pg->Append(new wxStringProperty("Tag", wxPG_LABEL, m_impl->GetTag()));
-
-	pg->Append(new wxEnumProperty(wxT("Clip"), wxPG_LABEL, MultiSpritesPropertyImpl::BOOL_3TYPE_LABELS));
-	pg->GetProperty(wxT("Clip"))->SetValue(m_impl->GetClip());
 
 	wxPGProperty* col_prop = pg->Append(new wxStringProperty(wxT("Color"), wxPG_LABEL, wxT("<composed>")));
 	s2::Color mul_col = m_impl->GetMultiColor();

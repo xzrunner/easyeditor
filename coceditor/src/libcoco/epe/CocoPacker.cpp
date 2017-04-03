@@ -678,17 +678,17 @@ void CocoPacker::resolveSpriteForFrameImage(const ee::Sprite* spr, int id)
 	{
 		std::string assignColor = lua::assign("color", gum::color2str(mul, s2::BGRA));
 		std::string assignAdd = lua::assign("add", gum::color2str(add, s2::ABGR));
-		if (spr->IsClip())
-			lua::tableassign(m_gen, "", 5, assignIndex, assignColor, assignAdd, assignMat, "clip=true");
-		else
-			lua::tableassign(m_gen, "", 4, assignIndex, assignColor, assignAdd, assignMat);
+// 		if (spr->IsClip())
+// 			lua::tableassign(m_gen, "", 5, assignIndex, assignColor, assignAdd, assignMat, "clip=true");
+// 		else
+// 			lua::tableassign(m_gen, "", 4, assignIndex, assignColor, assignAdd, assignMat);
 	}
 	else
 	{
-		if (spr->IsClip())
-			lua::tableassign(m_gen, "", 3, assignIndex, assignMat, "clip=true");
-		else
-			lua::tableassign(m_gen, "", 2, assignIndex, assignMat);
+// 		if (spr->IsClip())
+// 			lua::tableassign(m_gen, "", 3, assignIndex, assignMat, "clip=true");
+// 		else
+// 			lua::tableassign(m_gen, "", 2, assignIndex, assignMat);
 	}
 }
 

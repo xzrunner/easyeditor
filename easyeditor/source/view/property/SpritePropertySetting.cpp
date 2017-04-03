@@ -139,13 +139,13 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 		rs.SetFastBlend(FastBlendModes::Instance()->ID2Mode(idx));
 		spr->SetShader(rs);
 	}
-	else if (name == wxT("Clip"))
-	{
-		spr->SetClip(wxANY_AS(value, bool));
-	}
 	else if (name == "Anchor")
 	{
 		spr->SetAnchor(wxANY_AS(value, bool));
+	}
+	else if (name == "Actor")
+	{
+		spr->SetNeedActor(wxANY_AS(value, bool));
 	}
 	// pos
 	else if (name == wxT("Pos"))
@@ -288,9 +288,9 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	MyColorProperty* bp = static_cast<MyColorProperty*>(pg->GetProperty("Color Conversion.B"));
 	bp->SetListener(new SprPropColMonitor(spr, SprPropColMonitor::CT_BMAP));
 
-	pg->GetProperty(wxT("Clip"))->SetValue(spr->IsClip());
-
 	pg->GetProperty(wxT("Anchor"))->SetValue(spr->IsAnchor());
+
+	pg->GetProperty(wxT("Actor"))->SetValue(spr->IsNeedActor());
 
 	pg->GetProperty(wxT("Pos.X"))->SetValue(spr->GetPosition().x);
 	pg->GetProperty(wxT("Pos.Y"))->SetValue(spr->GetPosition().y);
@@ -343,11 +343,11 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 	tag_prop->SetSprite(spr);
 	pg->Append(tag_prop);
 
-	pg->Append(new wxBoolProperty("Clip", wxPG_LABEL, spr->IsClip()));
-	pg->SetPropertyAttribute("Clip", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
-
 	pg->Append(new wxBoolProperty("Anchor", wxPG_LABEL, spr->IsAnchor()));
 	pg->SetPropertyAttribute("Anchor", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
+
+	pg->Append(new wxBoolProperty("Actor", wxPG_LABEL, spr->IsNeedActor()));
+	pg->SetPropertyAttribute("Actor", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
 	pg->Append(new wxPropertyCategory("COLOR", wxPG_LABEL));
 

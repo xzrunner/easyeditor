@@ -1808,9 +1808,9 @@ void CocoPacker::ParserImageForFrame(const ee::Sprite* spr, int id)
 	std::string assignMat = lua::assign("mat", smat);
 	params.push_back(assignMat);
 
-	if (spr->IsClip()) {
-		params.push_back("clip=true");
-	}
+// 	if (spr->IsClip()) {
+// 		params.push_back("clip=true");
+// 	}
 
 	GetColorAssignParams(spr, params);
 

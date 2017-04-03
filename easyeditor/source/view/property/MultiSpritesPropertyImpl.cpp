@@ -57,21 +57,6 @@ std::string MultiSpritesPropertyImpl::GetTag() const
 	return tag;
 }
 
-const wxChar* MultiSpritesPropertyImpl::GetClip() const
-{
-	if (m_sprs.empty()) {
-		return BOOL_3TYPE_LABELS[e_bool_different];
-	}
-
-	bool clip = m_sprs[0]->IsClip();
-	for (int i = 1, n = m_sprs.size(); i < n; ++i) {
-		if (clip != m_sprs[i]->IsClip()) {
-			return BOOL_3TYPE_LABELS[e_bool_different];
-		}
-	}
-	return clip ? BOOL_3TYPE_LABELS[e_bool_true] : BOOL_3TYPE_LABELS[e_bool_false];
-}
-
 sm::vec2 MultiSpritesPropertyImpl::GetPosition() const
 {
 	if (m_sprs.empty()) {
@@ -258,22 +243,6 @@ void MultiSpritesPropertyImpl::SetTag(const std::string& tag)
 
 	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
 		m_sprs[i]->SetTag(tag);
-	}
-}
-
-void MultiSpritesPropertyImpl::SetClip(int clip)
-{
-	SetWndDirtySJ::Instance()->SetDirty();
-
-	Bool3Type type = (Bool3Type)clip;
-	if (type == e_bool_true) {
-		for (int i = 0, n = m_sprs.size(); i < n; ++i) {
-			m_sprs[i]->SetClip(true);
-		}
-	} else if (type == e_bool_false) {
-		for (int i = 0, n = m_sprs.size(); i < n; ++i) {
-			m_sprs[i]->SetClip(false);
-		}
 	}
 }
 

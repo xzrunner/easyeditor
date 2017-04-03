@@ -21,7 +21,6 @@ namespace ee
 Sprite::Sprite()
 	: s2::Sprite()
 	, m_perspective(0, 0)
-	, m_clip(false)
 	, m_anchor(false)
 	, m_observer(NULL)
 {
@@ -32,7 +31,6 @@ Sprite::Sprite(const Sprite& spr)
 	: s2::Sprite(spr)
 	, m_perspective(spr.m_perspective)
 	, m_tag(spr.m_tag)
-	, m_clip(spr.m_clip)
 	, m_anchor(spr.m_anchor)
 	, m_observer(NULL)
 {
@@ -45,8 +43,7 @@ Sprite& Sprite::operator = (const Sprite& spr)
 	
 	m_perspective = spr.m_perspective;
 
-	m_tag = spr.m_tag;
-	m_clip = spr.m_clip;
+	m_tag    = spr.m_tag;
 	m_anchor = spr.m_anchor;
 
 	m_observer = NULL;
@@ -59,7 +56,6 @@ Sprite& Sprite::operator = (const Sprite& spr)
 Sprite::Sprite(Symbol* sym)
 	: s2::Sprite(sym)
 	, m_perspective(0, 0)
-	, m_clip(false)
 	, m_anchor(false)
 	, m_observer(NULL)
 {

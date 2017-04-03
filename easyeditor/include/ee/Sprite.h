@@ -61,9 +61,6 @@ public:
 	const std::string& GetTag() const { return m_tag; }
 	void SetTag(const std::string& tag) { m_tag = tag; }
 
-	bool IsClip() const { return m_clip; }
-	void SetClip(bool clip) { m_clip = clip; }
-
 	bool IsAnchor() const { return m_anchor; }
 	void SetAnchor(bool anchor) { m_anchor = anchor; }
 
@@ -95,7 +92,6 @@ private:
 	/* info                                                                 */
 	/************************************************************************/
 	std::string			m_tag;
-	bool				m_clip;
 	bool				m_anchor;
 
 	/************************************************************************/

@@ -64,7 +64,6 @@ void SpriteIO::LoadInfo(s2::Sprite* spr)
 
 	Sprite* ee_spr = dynamic_cast<Sprite*>(spr);
 	ee_spr->SetTag(m_tag);
-	ee_spr->SetClip(m_clip);
 	ee_spr->SetAnchor(m_anchor);
 }
 
@@ -73,8 +72,7 @@ void SpriteIO::StoreInfo(const s2::Sprite* spr)
 	gum::SpriteIO::StoreInfo(spr);
 
 	const Sprite* ee_spr = dynamic_cast<const Sprite*>(spr);
-	m_tag = ee_spr->GetTag();
-	m_clip = ee_spr->IsClip();
+	m_tag    = ee_spr->GetTag();
 	m_anchor = ee_spr->IsAnchor();
 }
 
