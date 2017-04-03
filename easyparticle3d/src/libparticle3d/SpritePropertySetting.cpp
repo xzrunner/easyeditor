@@ -5,6 +5,8 @@
 #include <ee/EditPanel.h>
 #include <ee/panel_msg.h>
 
+#include <sprite2/Particle3dSprite.h>
+
 namespace eparticle3d
 {
 
@@ -27,21 +29,18 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 	if (name == "Loop") {
 		spr->SetLoop(wxANY_AS(value, bool));
 	} else if (name == "Local") {
-		bool local = wxANY_AS(value, bool);
-		spr->SetLocal(local);
-// 		if (!local) {
-// 			m_pg->GetProperty("Reuse")->SetValue(false);
-// 			spr->SetReuse(false);
-// 		}
+		spr->SetLocal(wxANY_AS(value, bool));
 	} else if (name == "Alone") {
 		spr->SetAlone(wxANY_AS(value, bool));
 	} else if (name == "Reuse") {
-// 		bool reuse = wxANY_AS(value, bool);
-// 		spr->SetReuse(reuse);
-// 		if (reuse) {
-// 			m_pg->GetProperty("Local")->SetValue(true);
-// 			spr->SetLocal(true);
-// 		}
+		int idx = wxANY_AS(value, int);
+		s2::Particle3dSprite::ReuseType reuse = s2::Particle3dSprite::REUSE_COMMON;
+		if (idx == 0) {
+			reuse = s2::Particle3dSprite::REUSE_ALL;
+		} else if (idx == 2) {
+			reuse = s2::Particle3dSprite::REUSE_NONE;
+		}
+		spr->SetReuse(reuse);
 	} else if (name == "Start Radius") {
 		float radius = wxANY_AS(value, float);
 		spr->SetStartRadius(radius);
@@ -61,7 +60,15 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	pg->GetProperty("Loop")->SetValue(spr->IsLoop());
 	pg->GetProperty("Local")->SetValue(spr->IsLocal());
 	pg->GetProperty("Alone")->SetValue(spr->IsAlone());
-//	pg->GetProperty("Reuse")->SetValue(spr->IsReuse());
+
+	s2::Particle3dSprite::ReuseType reuse = spr->GetReuse();
+	int reuse_idx = 1;
+	if (reuse == s2::Particle3dSprite::REUSE_ALL) {
+		reuse_idx = 0;
+	} else if (reuse == s2::Particle3dSprite::REUSE_NONE) {
+		reuse_idx = 2;
+	}
+	pg->GetProperty("Reuse")->SetValue(reuse_idx);
 
 	pg->GetProperty("Start Radius")->SetValue(spr->GetStartRadius());
 }
@@ -82,8 +89,12 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->SetPropertyAttribute("Local", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 	pg->Append(new wxBoolProperty("Alone", wxPG_LABEL, spr->IsAlone()));
 	pg->SetPropertyAttribute("Alone", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
-// 	pg->Append(new wxBoolProperty("Reuse", wxPG_LABEL, spr->IsReuse()));
-// 	pg->SetPropertyAttribute("Reuse", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
+
+	wxArrayString choices;
+	choices.push_back("All");
+	choices.push_back("Common");
+	choices.push_back("None");
+	pg->Append(new wxEnumProperty("Reuse", wxPG_LABEL, choices, wxArrayInt(), 1));	
 
 	pg->Append(new wxFloatProperty("Start Radius", wxPG_LABEL, spr->GetStartRadius()));
 }
