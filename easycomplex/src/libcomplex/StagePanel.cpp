@@ -74,8 +74,12 @@ bool StagePanel::UpdateStage()
 {
 	bool dirty = false;
 	const std::vector<s2::Sprite*>& children = m_sym->GetAllChildren();
-	for (int i = 0, n = children.size(); i < n; ++i) {
-		if (children[i]->Update(s2::UpdateParams())) {
+	s2::UpdateParams up;
+	for (int i = 0, n = children.size(); i < n; ++i) 
+	{
+		s2::Sprite* child = children[i];
+		up.SetActor(child->QueryActor(NULL));
+		if (children[i]->Update(up)) {
 			dirty = true;
 		}
 	}

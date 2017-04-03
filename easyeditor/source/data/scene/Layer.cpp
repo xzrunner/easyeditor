@@ -84,7 +84,7 @@ void Layer::LoadFromFile(const Json::Value& val, const std::string& dir)
 		}
 		SymbolSearcher::SetSymbolFilepaths(dir, sym, spr_val);
 
-		Sprite* spr = SpriteFactory::Instance()->Create(sym);
+		Sprite* spr = SpriteFactory::Instance()->CreateRoot(sym);
 		spr->Load(spr_val);
 		m_sprs.Insert(spr);
 

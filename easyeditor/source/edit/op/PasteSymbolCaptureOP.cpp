@@ -30,7 +30,7 @@ bool PasteSymbolCaptureOP::OnMouseLeftDown(int x, int y)
 			m_pos = m_stage->TransPosScrToProj(x, y);
 		m_last_pos = m_pos;
 
-		Sprite* spr = SpriteFactory::Instance()->Create(sym);
+		Sprite* spr = SpriteFactory::Instance()->CreateRoot(sym);
 		spr->Translate(m_pos);
 		InsertSpriteSJ::Instance()->Insert(spr);
 		spr->RemoveReference();

@@ -23,6 +23,7 @@ void DrawSpritesVisitor::Visit(Sprite* spr, bool& next)
 
 	s2::RenderParams params;
 	params.view_region = m_screen_region;
+	params.actor = spr->QueryActor(NULL);
 	if (s2::DrawNode::IsOutsideView(spr, params)) {
 		return;
 	}

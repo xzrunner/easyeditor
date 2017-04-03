@@ -32,7 +32,7 @@ bool PasteSymbolTileOP::OnMouseLeftDown(int x, int y)
 		if (!m_bCaptured)
 			m_pos = m_stage->TransPosScrToProj(x, y);
 
-		Sprite* spr = SpriteFactory::Instance()->Create(sym);
+		Sprite* spr = SpriteFactory::Instance()->CreateRoot(sym);
 		spr->Translate(m_pos);
 		spr->Rotate(m_rotate);
 		InsertSpriteSJ::Instance()->Insert(spr);

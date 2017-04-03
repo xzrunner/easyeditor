@@ -43,7 +43,7 @@ void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 			continue;
 		}
 
-		Sprite* spr = SpriteFactory::Instance()->Create(sym);
+		Sprite* spr = SpriteFactory::Instance()->CreateRoot(sym);
 		if (spr->GetSymbol()->GetBounding().IsValid()) {
 			spr->Translate(pos);
 			InsertSpriteSJ::Instance()->Insert(spr);
@@ -68,7 +68,7 @@ void StageDropTarget::OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& fil
 				continue;
 			}
 
-			Sprite* spr = SpriteFactory::Instance()->Create(sym);
+			Sprite* spr = SpriteFactory::Instance()->CreateRoot(sym);
 			spr->Translate(pos);
 			InsertSpriteSJ::Instance()->Insert(spr);
 			EditAddRecordSJ::Instance()->Add(new InsertSpriteAOP(spr));

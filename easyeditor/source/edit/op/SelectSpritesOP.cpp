@@ -361,7 +361,7 @@ void SelectSpritesOP::CopyFromSelection()
 	while (!sval.isNull()) {
 		std::string filepath = sval["filepath"].asString();
 		Symbol* sym = SymbolMgr::Instance()->FetchSymbol(filepath);
-		Sprite* spr = SpriteFactory::Instance()->Create(sym);
+		Sprite* spr = SpriteFactory::Instance()->CreateRoot(sym);
 		sym->RefreshThumbnail(filepath);
 		sprs.push_back(spr);
 		sym->RemoveReference();

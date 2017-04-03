@@ -41,6 +41,7 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 			reuse = s2::Particle3dSprite::REUSE_NONE;
 		}
 		spr->SetReuse(reuse);
+		spr->SetNeedActor(reuse == s2::Particle3dSprite::REUSE_NONE);
 	} else if (name == "Start Radius") {
 		float radius = wxANY_AS(value, float);
 		spr->SetStartRadius(radius);

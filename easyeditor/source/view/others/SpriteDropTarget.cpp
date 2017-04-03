@@ -30,7 +30,7 @@ bool SpriteDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& data)
 	if (sym)
 	{
 		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-		Sprite* spr = SpriteFactory::Instance()->Create(sym);
+		Sprite* spr = SpriteFactory::Instance()->CreateRoot(sym);
 		spr->Translate(pos);
 		InsertSpriteSJ::Instance()->Insert(spr);
 		EditAddRecordSJ::Instance()->Add(new InsertSpriteAOP(spr));

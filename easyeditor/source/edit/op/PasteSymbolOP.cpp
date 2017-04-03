@@ -29,7 +29,7 @@ bool PasteSymbolOP::OnMouseLeftDown(int x, int y)
 	if (sym)
 	{
 		m_pos = m_stage->TransPosScrToProj(x, y);
-		Sprite* spr = SpriteFactory::Instance()->Create(sym);
+		Sprite* spr = SpriteFactory::Instance()->CreateRoot(sym);
 		spr->Translate(m_pos);
 		if (m_scale) {
 			spr->SetScale(sm::vec2(*m_scale, *m_scale));

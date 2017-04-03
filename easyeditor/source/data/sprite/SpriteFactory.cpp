@@ -14,6 +14,9 @@
 #include "SymbolType.h"
 
 #include <sprite2/SymType.h>
+#include <sprite2/ResetActorFlagVisitor.h>
+#include <sprite2/CreateActorsVisitor.h>
+#include <sprite2/SprVisitorParams.h>
 #include <gum/SymbolFile.h>
 
 namespace ee
@@ -97,6 +100,22 @@ Sprite* SpriteFactory::Create(const Json::Value& val, const std::string& dir,
 	spr->Load(val, dir);
 	spr->SetVisible(true);
 	sym->RemoveReference();
+	return spr;
+}
+
+Sprite* SpriteFactory::CreateRoot(Symbol* sym)
+{
+	Sprite* spr = Create(sym);
+	if (!spr) {
+		return spr;
+	}
+
+	s2::ResetActorFlagVisitor v0;
+	spr->Traverse(v0, s2::SprVisitorParams());
+
+	s2::CreateActorsVisitor v1;
+	spr->Traverse(v1, s2::SprVisitorParams());
+
 	return spr;
 }
 

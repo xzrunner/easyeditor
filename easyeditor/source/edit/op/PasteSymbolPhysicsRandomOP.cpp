@@ -31,7 +31,7 @@ bool PasteSymbolPhysicsRandomOP::OnMouseLeftDown(int x, int y)
 	{
 		m_pos = m_stage->TransPosScrToProj(x, y);
 
-		Sprite* spr = SpriteFactory::Instance()->Create(sym);
+		Sprite* spr = SpriteFactory::Instance()->CreateRoot(sym);
 		spr->Translate(m_pos);
 
 		if (m_random_value.scale != 1.0f) {

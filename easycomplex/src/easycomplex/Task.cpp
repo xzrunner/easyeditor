@@ -12,6 +12,9 @@
 #include <easycoco.h>
 
 #include <sprite2/SymType.h>
+#include <sprite2/ResetActorFlagVisitor.h>
+#include <sprite2/CreateActorsVisitor.h>
+#include <sprite2/SprVisitorParams.h>
 
 #include <fstream>
 
@@ -51,6 +54,19 @@ void Task::Load(const char* filepath)
 	case ee::SYM_PSD:
 		FileIO::load(this, filepath);
 		break;
+	}
+
+	// create actors
+	const std::vector<s2::Sprite*>& children = m_stage->GetSymbol()->GetAllChildren();
+	for (int i = 0, n = children.size(); i < n; ++i) 
+	{
+		s2::Sprite* spr = children[i];
+
+		s2::ResetActorFlagVisitor v0;
+		spr->Traverse(v0, s2::SprVisitorParams());
+
+		s2::CreateActorsVisitor v1;
+		spr->Traverse(v1, s2::SprVisitorParams());
 	}
 }
 

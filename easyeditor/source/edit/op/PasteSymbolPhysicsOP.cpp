@@ -31,7 +31,7 @@ bool PasteSymbolPhysicsOP::OnMouseLeftDown(int x, int y)
 	{
 		m_pos = m_stage->TransPosScrToProj(x, y);
 
-		Sprite* spr = SpriteFactory::Instance()->Create(sym);
+		Sprite* spr = SpriteFactory::Instance()->CreateRoot(sym);
 		spr->Translate(m_pos);
 		if (m_pScale) {
 			spr->SetScale(sm::vec2(*m_pScale, *m_pScale));

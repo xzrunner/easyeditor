@@ -28,7 +28,7 @@ bool PasteSymbolRandomOP::OnMouseLeftDown(int x, int y)
 	if (sym) 
 	{
 		m_pos = m_stage->TransPosScrToProj(x, y);
-		Sprite* spr = SpriteFactory::Instance()->Create(sym);
+		Sprite* spr = SpriteFactory::Instance()->CreateRoot(sym);
 		spr->Translate(m_pos);
 		if (m_random_val.scale != 1.0f) {
 			spr->SetScale(sm::vec2(m_random_val.scale, m_random_val.scale));

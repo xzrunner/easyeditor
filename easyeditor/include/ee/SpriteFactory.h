@@ -20,6 +20,8 @@ public:
 	Sprite* Create(const Json::Value& val, const std::string& dir, 
 		const std::string& filepath);
 
+	Sprite* CreateRoot(Symbol* sym);
+
 	void Insert(Sprite* spr);
 	void Remove(Sprite* spr);
 
