@@ -129,11 +129,14 @@ void Symbol::Draw(const s2::RenderParams& rp, const s2::Sprite* spr) const
 			action = dynamic_cast<const s2::ComplexSprite*>(spr)->GetAction();
 		}
 		const std::vector<s2::Sprite*>& sprs = GetActionChildren(action);
-		for (int i = 0, n = sprs.size(); i < n; ++i) {
-			if (IsChildOutside(sprs[i], rp_child)) {
+		for (int i = 0, n = sprs.size(); i < n; ++i) 
+		{
+			const s2::Sprite* spr = sprs[i];
+			rp_child.actor = spr->QueryActor(rp.actor);
+			if (IsChildOutside(spr, rp_child)) {
 				continue;
 			}
-			ee::SpriteRenderer::Instance()->Draw(sprs[i], rp_child, false);
+			ee::SpriteRenderer::Instance()->Draw(spr, rp_child, false);
 		}
 	}
 
