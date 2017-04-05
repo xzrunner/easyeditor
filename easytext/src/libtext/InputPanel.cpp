@@ -3,6 +3,8 @@
 
 #include <ee/panel_msg.h>
 
+#include <sprite2/UpdateParams.h>
+
 #include <wx/wx.h>
 
 namespace etext
@@ -28,7 +30,7 @@ void InputPanel::InitLayout()
 {
 	wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 	{
-		m_text_ctrl = new wxTextCtrl(this, wxID_ANY, m_spr->GetText(), 
+		m_text_ctrl = new wxTextCtrl(this, wxID_ANY, m_spr->GetText(s2::UpdateParams()), 
 			wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE);
 		sizer->Add(m_text_ctrl, 12, wxEXPAND);
 	}
@@ -49,7 +51,7 @@ void InputPanel::OnEnterPress(wxCommandEvent& event)
 	while (!str.empty() && str[str.size() - 1] == '\n') {
 		str.erase(--str.end());
 	}
-	m_spr->SetText(str);
+	m_spr->SetText(s2::UpdateParams(), str);
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 

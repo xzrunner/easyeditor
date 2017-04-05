@@ -13,6 +13,7 @@
 #include <ee/TextDialog.h>
 #include <ee/SpriteDialog.h>
 #include <ee/panel_msg.h>
+#include <ee/CurrSprTreePath.h>
 
 #include <easyscale9.h>
 #include <easymesh.h>
@@ -40,6 +41,8 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 		wxMessageBox("禁止编辑自动生成的文件", "warning", wxOK | wxICON_INFORMATION, m_wnd);
 		return;
 	}
+
+	ee::CurrSprTreePath::Instance()->Push(spr);
 
 	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
 	m_sprites_impl->EnableObserve(false);
@@ -148,6 +151,8 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 		ee::SetWndDirtySJ::Instance()->SetDirty();
 		const_cast<ee::Symbol*>(edited_sym)->SetEditDirty(false);
 	}
+
+	ee::CurrSprTreePath::Instance()->Pop();
 }
 
 void OpenSymbolDialog::UpdateShapeFromETexture(etexture::Sprite* spr)

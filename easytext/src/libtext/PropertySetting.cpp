@@ -8,6 +8,9 @@
 #include <ee/Config.h>
 #include <ee/SysColorProperty.h>
 #include <ee/PropColMonitor.h>
+#include <ee/CurrSprTreePath.h>
+
+#include <sprite2/UpdateParams.h>
 
 #include <wx/propgrid/advprops.h>
 
@@ -74,7 +77,11 @@ void PropertySetting::OnPropertyGridChange(const std::string& name, const wxAny&
 	} else if (name == "Richtext") {
 		tb.richtext = wxANY_AS(value, bool);
 	} else if (name == "TextContent") {
-		spr->SetText(wxANY_AS(value, wxString).ToStdString());
+		std::string text = wxANY_AS(value, wxString).ToStdString();
+		s2::UpdateParams up;
+		const s2::Actor* prev_actor = ee::CurrSprTreePath::Instance()->TopActor();
+		up.SetActor(spr->QueryActor(prev_actor));
+		spr->SetText(up, text);
 	} else if (name == "TextID") {
 		spr->SetTID(wxANY_AS(value, wxString).ToStdString());
 	}
@@ -120,7 +127,7 @@ void PropertySetting::UpdateProperties(wxPropertyGrid* pg)
 
 	pg->GetProperty("Richtext")->SetValue(tb.richtext);
 
-	pg->GetProperty("TextContent")->SetValue(spr->GetText());
+	pg->GetProperty("TextContent")->SetValue(spr->GetText(s2::UpdateParams()));
 	pg->GetProperty("TextID")->SetValue(spr->GetTID());
 }
 
@@ -186,7 +193,7 @@ void PropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->Append(new wxBoolProperty("Richtext", wxPG_LABEL, tb.richtext));
 	pg->SetPropertyAttribute("Richtext", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
-	pg->Append(new wxStringProperty("TextContent", wxPG_LABEL, spr->GetText()));
+	pg->Append(new wxStringProperty("TextContent", wxPG_LABEL, spr->GetText(s2::UpdateParams())));
 	pg->Append(new wxStringProperty("TextID", wxPG_LABEL, spr->GetTID()));
 }
 

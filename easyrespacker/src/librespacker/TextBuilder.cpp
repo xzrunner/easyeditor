@@ -7,6 +7,8 @@
 
 #include <easytext.h>
 
+#include <sprite2/UpdateParams.h>
+
 #include <algorithm>
 
 namespace erespacker
@@ -67,7 +69,7 @@ const IPackNode* TextBuilder::Create(const etext::Sprite* spr)
 
 	node->richtext		= tb.richtext;
 
-	node->text			= spr->GetText();
+	node->text			= spr->GetText(s2::UpdateParams());
 	node->tid			= spr->GetTID();
 
 	m_labels.push_back(node);
@@ -137,7 +139,7 @@ const IPackNode* TextBuilder::QueryCache(const etext::Sprite* spr) const
 			
 			label->richtext		== tb.richtext&&
 
- 			label->text			== spr->GetText() &&
+ 			label->text			== spr->GetText(s2::UpdateParams()) &&
  			label->tid			== spr->GetTID()) {
  			return label;
  		}
