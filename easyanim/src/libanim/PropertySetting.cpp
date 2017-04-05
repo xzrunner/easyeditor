@@ -59,21 +59,21 @@ void PropertySetting::InitProperties(wxPropertyGrid* pg)
 	Sprite* spr = static_cast<Sprite*>(GetSprite());
 
 	pg->Append(new wxBoolProperty("Loop", wxPG_LABEL, spr->IsLoop()));
-	pg->SetPropertyAttribute("Loop", wxPG_BOOL_USE_CHECKBOX, spr->IsLoop(), wxPG_RECURSE);
+	pg->SetPropertyAttribute("Loop", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
 	pg->Append(new wxFloatProperty("Interval", wxPG_LABEL, spr->GetInterval()));
 	
 	pg->Append(new wxIntProperty("FPS", wxPG_LABEL, spr->GetFPS()));
 
 	pg->Append(new wxBoolProperty("Start Random", wxPG_LABEL, spr->IsStartRandom()));
-	pg->SetPropertyAttribute("Start Random", wxPG_BOOL_USE_CHECKBOX, spr->IsStartRandom(), wxPG_RECURSE);
+	pg->SetPropertyAttribute("Start Random", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
 	wxIntProperty* static_prop = new wxIntProperty("Static", wxPG_LABEL, spr->GetStaticTime());
 	static_prop->SetValue(spr->GetStaticTime());
 	pg->Append(static_prop);
 
 	pg->Append(new wxBoolProperty("Active", wxPG_LABEL, spr->IsActive()));
-	pg->SetPropertyAttribute("Active", wxPG_BOOL_USE_CHECKBOX, spr->IsLoop(), wxPG_RECURSE);
+	pg->SetPropertyAttribute("Active", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 }
 
 }
