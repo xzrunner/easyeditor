@@ -35,10 +35,11 @@ void PackAnimationSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::T
 	lua::assign_with_end(gen, "type", "\"anim_spr\"");
 	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(GetID()));
 
-	lua::connect(gen, 4, 
+	lua::connect(gen, 5, 
 		lua::assign("sym_id", m_sym->GetID()), 
 		lua::assign("loop", m_loop),
 		lua::assign("interval", m_interval),
+		lua::assign("start_random", m_start_random),
 		lua::assign("fps", m_fps));
 
 	gen.detab();
@@ -56,7 +57,7 @@ int PackAnimationSpr::SizeOfPackToBin() const
 	sz += sizeof(uint32_t);			// id
 	sz += sizeof(uint8_t);			// type
 	sz += sizeof(uint32_t);			// sym id
-	sz += sizeof(uint8_t);			// loop
+	sz += sizeof(uint8_t);			// pack8: loop & start_random
 	sz += sizeof(uint32_t);			// interval
 	sz += sizeof(uint16_t);			// fps
 	return sz;
@@ -74,7 +75,9 @@ void PackAnimationSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, flo
 	pack(sym, ptr);
 
 	uint8_t loop = bool2int(m_loop);
-	pack(loop, ptr);
+	uint8_t start_random = bool2int(m_start_random);
+	uint8_t pack8 = (loop) | (start_random << 1);
+	pack(pack8, ptr);
 
 	uint32_t interval = float2int(m_interval, 1024);
 	pack(interval, ptr);
@@ -87,6 +90,7 @@ bool PackAnimationSpr::Equal(const libanim::Sprite* spr) const
 {
 	return m_loop == spr->IsLoop()
 		&& m_interval == spr->GetInterval()
+		&& m_start_random == spr->IsStartRandom()
 		&& m_fps == spr->GetFPS();
 }
 
@@ -97,6 +101,8 @@ void PackAnimationSpr::Init(const libanim::Sprite* spr)
 
 	m_loop = spr->IsLoop();
 	m_interval = spr->GetInterval();
+
+	m_start_random = spr->IsStartRandom();
 
 	m_fps = spr->GetFPS();
 }

@@ -41,6 +41,8 @@ private:
 	bool m_loop;
 	float m_interval;
 
+	bool m_start_random;
+
 	int m_fps;
 
 }; // PackAnimationSpr
