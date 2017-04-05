@@ -84,8 +84,8 @@ void PackParticle2dSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, fl
 
 bool PackParticle2dSpr::Equal(const eparticle2d::Sprite* spr) const
 {
-	return m_loop == spr->GetLoop()
-		&& m_local == spr->GetLocalModeDraw();
+	return m_loop == spr->IsLoop()
+		&& m_local == spr->IsLocal();
 }
 
 void PackParticle2dSpr::Init(const eparticle2d::Sprite* spr)
@@ -93,8 +93,8 @@ void PackParticle2dSpr::Init(const eparticle2d::Sprite* spr)
 	m_sym = PackNodeFactory::Instance()->Create(
 		dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
 
-	m_loop	= spr->GetLoop();
-	m_local	= spr->GetLocalModeDraw();
+	m_loop	= spr->IsLoop();
+	m_local	= spr->IsLocal();
 }
 
 }
