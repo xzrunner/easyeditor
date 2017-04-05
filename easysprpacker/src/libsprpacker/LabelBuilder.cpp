@@ -6,6 +6,8 @@
 
 #include <easytext.h>
 
+#include <sprite2/UpdateParams.h>
+
 #include <algorithm>
 
 namespace esprpacker
@@ -44,7 +46,7 @@ const PackNode* LabelBuilder::Create(const etext::Sprite* spr)
 	for (int i = 0, n = m_labels.size(); i < n; ++i) {
 		const PackLabel* label = m_labels[i];
 		if (spr->GetTextbox() == label->GetTextBox() && 
-			spr->GetText() == label->GetText() &&
+			spr->GetText(s2::UpdateParams()) == label->GetText() &&
 			spr->GetTID() == label->GetTid()) {
 			label->AddReference();
 			return label;
