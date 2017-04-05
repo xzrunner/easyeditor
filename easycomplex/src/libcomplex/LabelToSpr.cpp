@@ -2,6 +2,8 @@
 
 #include <easytext.h>
 
+#include <sprite2/UpdateParams.h>
+
 namespace ecomplex
 {
 
@@ -29,7 +31,7 @@ ee::Sprite* LabelToSpr::Trans(const erespacker::PackLabel* label)
 	tb.space_hori	= label->space_hori;
 	tb.space_vert	= label->space_vert;
 	
-	spr->SetText(label->text);
+	spr->SetText(s2::UpdateParams(), label->text);
 	spr->SetTID(label->tid);
 
 	return spr;

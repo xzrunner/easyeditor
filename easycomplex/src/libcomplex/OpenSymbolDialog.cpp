@@ -19,6 +19,7 @@
 #include <ee/TextDialog.h>
 #include <ee/ViewlistPanel.h>
 #include <ee/panel_msg.h>
+#include <ee/CurrSprTreePath.h>
 
 namespace ecomplex
 {
@@ -42,6 +43,8 @@ void OpenSymbolDialog::Open(ee::Sprite* spr, ee::CrossGuides* guides)
 		wxMessageBox("禁止编辑自动生成的文件", "warning", wxOK | wxICON_INFORMATION, m_wnd);
 		return;
 	}
+
+	ee::CurrSprTreePath::Instance()->Push(spr);
 
 	m_sprites_impl->EnableObserve(false);
 	m_stage->EnableObserve(false);
@@ -128,6 +131,8 @@ void OpenSymbolDialog::Open(ee::Sprite* spr, ee::CrossGuides* guides)
 		ee::SetWndDirtySJ::Instance()->SetDirty();
 		const_cast<ee::Symbol*>(edited_sym)->SetEditDirty(false);
 	}
+
+	ee::CurrSprTreePath::Instance()->Pop();
 }
 
 }

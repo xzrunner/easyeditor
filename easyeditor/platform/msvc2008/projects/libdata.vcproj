@@ -278,6 +278,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\source\data\config\CurrSprTreePath.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\CurrSprTreePath.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\include\ee\dev_config.h"
 				>
 			</File>

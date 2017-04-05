@@ -5,6 +5,7 @@
 #include <ee/MultiSpritesImpl.h>
 #include <ee/EditPanelImpl.h>
 #include <ee/panel_msg.h>
+#include <ee/CurrSprTreePath.h>
 
 #include <easycomplex.h>
 #include <easymesh.h>
@@ -35,6 +36,8 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 		wxMessageBox("禁止编辑自动生成的文件", "warning", wxOK | wxICON_INFORMATION, m_wnd);
 		return;
 	}
+
+	ee::CurrSprTreePath::Instance()->Push(spr);
 
 	m_sprites_impl->EnableObserve(false);
 	m_stage->EnableObserve(false);
@@ -69,6 +72,8 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 		ee::SetWndDirtySJ::Instance()->SetDirty();
 		const_cast<ee::Symbol*>(edited_sym)->SetEditDirty(false);
 	}
+
+	ee::CurrSprTreePath::Instance()->Pop();
 }
 
 }

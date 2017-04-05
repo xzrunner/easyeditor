@@ -4,6 +4,7 @@
 #include "SettingData.h"
 #include "Config.h"
 #include "FilterModes.h"
+#include "CurrSprTreePath.h"
 
 #include <sprite2/DrawNode.h>
 #include <gum/FilterModes.h>
@@ -23,7 +24,8 @@ void DrawSpritesVisitor::Visit(Sprite* spr, bool& next)
 
 	s2::RenderParams params;
 	params.view_region = m_screen_region;
-	params.actor = spr->QueryActor(NULL);
+	const s2::Actor* prev_actor = CurrSprTreePath::Instance()->TopActor();
+	params.actor = spr->QueryActor(prev_actor);
 	if (s2::DrawNode::IsOutsideView(spr, params)) {
 		return;
 	}
