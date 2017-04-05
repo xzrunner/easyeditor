@@ -3,6 +3,8 @@
 
 #include "PackNode.h"
 
+#include <sprite2/Particle3dSprite.h>
+
 namespace eparticle3d { class Sprite; }
 
 namespace esprpacker
@@ -41,7 +43,7 @@ private:
 	bool m_loop;
 	bool m_local;
 	bool m_alone;
-	bool m_reuse;
+	s2::Particle3dSprite::ReuseType m_reuse;
 
 	float m_start_radius;
 
