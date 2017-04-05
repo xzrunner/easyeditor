@@ -2,6 +2,8 @@
 
 #include <easyanim.h>
 
+#include <sprite2/UpdateParams.h>
+
 namespace eanim
 {
 
@@ -17,7 +19,7 @@ bool PreviewOP::OnMouseLeftDown(int x, int y)
 		return true;
 	}
 
-	m_curr.Start(NULL);
+	m_curr.Start(s2::UpdateParams(), NULL);
 
 	return false;
 }

@@ -39,7 +39,7 @@ void PreviewCanvas::DrawStageData() const
 {
 	s2::Particle3d::Instance()->BufferClear();
 	m_curr.Draw(s2::RenderParams());
-	s2::Particle3d::Instance()->Draw();
+	s2::Particle3d::Instance()->BufferDraw();
 }
 
 } // eanim

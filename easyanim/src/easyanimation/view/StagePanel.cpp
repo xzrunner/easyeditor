@@ -17,7 +17,7 @@
 
 #include <easyparticle3d.h>
 
-#include <sprite2/RenderParams.h>
+#include <sprite2/UpdateParams.h>
 
 namespace eanim
 {
@@ -278,7 +278,7 @@ CheckUpdateVisitor()
 void StagePanel::CheckUpdateVisitor::
 Visit(ee::Sprite* spr, bool& next)
 {
-	if (spr->Update(s2::RenderParams())) {
+	if (spr->Update(s2::UpdateParams())) {
 		m_update = true;
 	}
 	next = true;

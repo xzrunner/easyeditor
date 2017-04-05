@@ -45,7 +45,7 @@ void StageCanvas::OnDrawSprites() const
 		ee::SpriteRenderer::Instance()->Draw(sprs[i]);
 	}
 
-	s2::Particle3d::Instance()->Draw();
+	s2::Particle3d::Instance()->BufferDraw();
 
 	m_stage->DrawEditOP();
 }
