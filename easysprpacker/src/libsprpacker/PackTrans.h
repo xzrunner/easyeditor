@@ -53,6 +53,9 @@ private:
 	const s2::RenderFilter*	m_filter;
 	s2::RenderCamera	m_camera;
 
+	// actor
+	bool                m_need_actor;
+
 	// info
 	std::string			m_name;
 

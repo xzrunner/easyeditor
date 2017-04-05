@@ -89,6 +89,14 @@ PackTrans::PackTrans(const s2::Sprite& spr, bool force_name)
 		m_type |= simp::NodeTrans::CAMERA_MASK;
 	}
 
+	// actor
+	m_need_actor = spr.IsNeedActor();
+	if (m_need_actor) {
+		m_type |= simp::NodeTrans::ACTOR_MASK;
+	}
+
+	// name
+
 	std::string name = spr.GetName();
 	if (!name.empty()) {
 		if (name[0] == '_') {
@@ -135,6 +143,7 @@ bool PackTrans::operator == (const PackTrans& trans) const
 		&& m_blend == trans.m_blend 
 		&& m_fast_blend == trans.m_fast_blend 
 		&& m_camera == trans.m_camera 
+		&& m_need_actor == trans.m_need_actor
 		&& m_name == trans.m_name 
 		&& m_visible == trans.m_visible;
 }
@@ -198,6 +207,11 @@ void PackTrans::PackToLua(ebuilder::CodeGenerator& gen) const
 		shaders.push_back(lua::assign("camera", ee::StringHelper::ToString((int)(m_camera.GetMode()))));
 	}
 	lua::connect(gen, shaders);
+
+	// actor
+	if (m_need_actor) {
+		lua::connect(gen, 1, lua::assign("need_actor", m_need_actor));
+	}	
 
 	if (!m_name.empty()) {
 		lua::connect(gen, 1, lua::assign("name", "\""+m_name+"\""));
