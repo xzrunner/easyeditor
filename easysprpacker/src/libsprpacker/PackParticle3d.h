@@ -3,6 +3,7 @@
 
 #include "PackNode.h"
 
+#include <ps_3d.h>
 #include <sprite2/Particle3dSymbol.h>
 
 #include <vector>

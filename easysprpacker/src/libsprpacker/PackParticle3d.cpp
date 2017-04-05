@@ -11,6 +11,7 @@ namespace lua = ebuilder::lua;
 
 #include <simp/NodeParticle3d.h>
 #include <simp/simp_types.h>
+#include <sprite2/P3dEmitterCfg.h>
 #include <gum/trans_color.h>
 
 namespace esprpacker
@@ -181,7 +182,7 @@ void PackParticle3d::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float
 
 void PackParticle3d::Init(const eparticle3d::Symbol* sym)
 {
-	const p3d_emitter_cfg* cfg = sym->GetEmitterCfg();
+	const p3d_emitter_cfg* cfg = sym->GetEmitterCfg()->GetImpl();
 
 	m_blend				= cfg->blend;
 
