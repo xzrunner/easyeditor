@@ -320,7 +320,9 @@ void RectCutWithJson::FixFilepath(const std::string& src_dir, const std::string&
 	} else if (type == s2::SYM_MESH) {
 		if (val.isMember("mesh") && val["mesh"].isMember("base_symbol")) {
 			FixImageFilepath(src_dir, dst_dir, file_dir, val["mesh"], "base_symbol");
-		}
+		 }
+	} else {
+		FixJsonFilepath(src_dir, dst_dir, file_dir, val, key);
 	}
 }
 
@@ -332,7 +334,7 @@ void RectCutWithJson::FixImageFilepath(const std::string& src_dir, const std::st
 	if (ee::FileHelper::IsFileExist(filepath)) {
 		FixImageFilepathInPkg(src_dir, dst_dir, file_dir, val, key);
 	} else {
-		FixImageFilepathOutPkg(src_dir, dst_dir, file_dir, val, key);
+		FixFilepathOutPkg(src_dir, dst_dir, file_dir, val, key);
 	}
 }
 
@@ -360,7 +362,7 @@ void RectCutWithJson::FixImageFilepathInPkg(const std::string& src_dir, const st
 	val[key] = ee::FileHelper::GetRelativePath(file_dir, fixed_filepath);
 }
 
-void RectCutWithJson::FixImageFilepathOutPkg(const std::string& src_dir, const std::string& dst_dir, 
+void RectCutWithJson::FixFilepathOutPkg(const std::string& src_dir, const std::string& dst_dir, 
 											 const std::string& file_dir, Json::Value& val, const std::string& key) const
 {
 	std::string filepath = val[key].asString();
@@ -425,6 +427,19 @@ void RectCutWithJson::FixImageFilepathOutPkg(const std::string& src_dir, const s
 	//////////////////////////////////////////////////////////////////////////
 
 	val[key] = new_path;
+}
+
+void RectCutWithJson::FixJsonFilepath(const std::string& src_dir, const std::string& dst_dir, 
+									  const std::string& file_dir, Json::Value& val, const std::string& key) const
+{
+	std::string filepath = val[key].asString();
+	filepath = ee::FileHelper::GetAbsolutePath(file_dir, filepath);
+	if (filepath.find("%") != std::string::npos) {
+		return;
+	}
+	if (!ee::FileHelper::IsFileExist(filepath)) {
+		FixFilepathOutPkg(src_dir, dst_dir, file_dir, val, key);
+	}
 }
 
 void RectCutWithJson::FixGroup(const std::string& src_dir, const std::string& dst_dir, 
