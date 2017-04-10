@@ -33,7 +33,7 @@ public:
 
 private:
 	static int ToInt(float f) {
-		return static_cast<int>(f * 1024.0f + 0.5f);
+		return static_cast<int>(floor(f * 1024.0f + 0.5f));
 	}
 
 private:
