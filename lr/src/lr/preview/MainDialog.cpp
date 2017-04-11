@@ -39,7 +39,7 @@ void MainDialog::InitLayout(wxGLContext* glctx)
 	{
 		s2::OrthoCamera* cam = static_cast<s2::OrthoCamera*>(canvas->GetCamera());
 		float old_scale = cam->GetScale();
-		cam->SetScale(old_scale / PREVIEW_SCALE);
+		cam->Set(cam->GetPosition(), old_scale / PREVIEW_SCALE);
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();		
 	}
 	

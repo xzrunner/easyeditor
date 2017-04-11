@@ -23,6 +23,9 @@
 #include <SM_Test.h>
 #include <sprite2/S2_RVG.h>
 #include <sprite2/BoundingBox.h>
+#include <sprite2/CameraType.h>
+#include <sprite2/Camera.h>
+#include <sprite2/Pseudo3DCamera.h>
 #include <gum/FilterModes.h>
 #include <gum/GUM_GTxt.h>
 #include <gum/RenderContext.h>

@@ -89,7 +89,7 @@ void Quadtree::DebugDraw() const
 		s2::RVG::LineWidth(2);
 
 		s2::RenderColor color;
-		color.mul = ee::LIGHT_BLUE;
+		color.SetMul(ee::LIGHT_BLUE);
 		s2::RenderParams params;
 		params.color = color;
 		for (int i = 0, n = m_selected->m_sprs.size(); i < n; ++i) {

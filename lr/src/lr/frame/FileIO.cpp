@@ -70,8 +70,7 @@ void FileIO::Load(const char* filename, LibraryPanel* library,
 		float s = value["camera"]["scale"].asDouble();
 		float x = value["camera"]["x"].asDouble(),
 			  y = value["camera"]["y"].asDouble();
-		cam->SetScale(s);
-		cam->SetPosition(sm::vec2(x, y));
+		cam->Set(sm::vec2(x, y), s);
 	}
 
 	// screen

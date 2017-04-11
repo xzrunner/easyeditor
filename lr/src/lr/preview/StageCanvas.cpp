@@ -4,6 +4,8 @@
 #include <ee/Sprite.h>
 #include <ee/PlayControl.h>
 
+#include <sprite2/CameraType.h>
+
 namespace lr
 {
 namespace preview

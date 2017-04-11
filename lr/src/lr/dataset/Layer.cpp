@@ -24,6 +24,7 @@
 #include <sprite2/RenderCamera.h>
 #include <sprite2/RenderParams.h>
 #include <sprite2/S2_Sprite.h>
+#include <sprite2/UpdateParams.h>
 
 namespace lr
 {
@@ -68,10 +69,10 @@ bool Layer::InsertSprite(ee::Sprite* spr, int idx)
 {
 	CheckSpriteName(spr);
 
-	if (spr->GetCamera().mode != m_cam_mode)
+	if (spr->GetCamera().GetMode() != m_cam_mode)
 	{
 		s2::RenderCamera rc = spr->GetCamera();
-		rc.mode = m_cam_mode;
+		rc.SetMode(m_cam_mode);
 		spr->SetCamera(rc);
 	}
 
@@ -236,7 +237,7 @@ bool Layer::Update()
 	std::vector<ee::Sprite*> sprs;
 	TraverseSprite(ee::FetchAllVisitor<ee::Sprite>(sprs), true);
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
-		bool dirty = sprs[i]->Update(s2::RenderParams());
+		bool dirty = sprs[i]->Update(s2::UpdateParams());
 		if (dirty) {
 			ret = true;
 		}
@@ -281,10 +282,10 @@ void Layer::LoadSprites(const Json::Value& val, const std::string& dir, const st
 			continue;
 		}
 
-		if (spr->GetCamera().mode != m_cam_mode)
+		if (spr->GetCamera().GetMode() != m_cam_mode)
 		{
 			s2::RenderCamera rc = spr->GetCamera();
-			rc.mode = m_cam_mode;
+			rc.SetMode(m_cam_mode);
 			spr->SetCamera(rc);
 		}
 
