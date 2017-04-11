@@ -6,6 +6,8 @@
 #include <ee/FileHelper.h>
 #include <ee/Exception.h>
 #include <ee/SymbolType.h>
+#include <ee/ImageData.h>
+#include <ee/Symbol.h>
 
 #include <sprite2/SymType.h>
 #include <simp/NodeFactory.h>
@@ -134,15 +136,24 @@ void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id) 
 		}
 	}
 
-	if (!pkg) {
-		throw ee::Exception("query pkg id fail: %s", filepath.c_str());
+	if (!pkg) 
+	{
+		const std::string default_sym = ee::ImageDataMgr::Instance()->GetDefaultSym();
+		if (default_sym.empty()) {
+			throw ee::Exception("query spr id fail: %s", filepath.c_str());
+		}
+		return QueryID(default_sym, pkg_id, node_id);
 	}
 
 	pkg_id = pkg->id;
 	
 	std::map<std::string, uint32_t>::iterator itr = pkg->sprs.find(filepath);
 	if (itr == pkg->sprs.end()) {
-		throw ee::Exception("query spr id fail: %s", filepath.c_str());
+		const std::string default_sym = ee::ImageDataMgr::Instance()->GetDefaultSym();
+		if (default_sym.empty()) {
+			throw ee::Exception("query spr id fail: %s", filepath.c_str());
+		}
+		return QueryID(default_sym, pkg_id, node_id);
 	}
 	node_id = simp::NodeID::GetNodeID(itr->second);
 }
