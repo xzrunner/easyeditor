@@ -69,7 +69,7 @@ void StagePanel::rebuildPatchSymbol()
 	float width = m_toolbar->getWidth(),
 		  height = m_toolbar->getHeight();
 	s2::Scale9& s9 = const_cast<s2::Scale9&>(dynamic_cast<s2::Scale9Symbol*>(m_sym)->GetScale9());
-	s9.Build(type, width, height, m_sprs);
+	s9.Build(type, width, height, m_sprs, 0, 0, 0, 0);
 
 	m_toolbar->setSize(width, height);
 }
