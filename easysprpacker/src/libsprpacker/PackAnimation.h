@@ -38,6 +38,8 @@ public:
 private:
 	void Init(const libanim::Symbol* sym);
 
+	void CheckLerp(const std::string& filepath);
+
 private:
 	class Actor : public cu::RefCountObj
 	{

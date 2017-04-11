@@ -31,6 +31,8 @@ public:
 	int SizeOfPackToBin() const;
 	void PackToBin(uint8_t** ptr) const;
 
+	const std::string& GetName() const { return m_name; }
+
 private:
 	static int ToInt(float f) {
 		return static_cast<int>(floor(f * 1024.0f + 0.5f));

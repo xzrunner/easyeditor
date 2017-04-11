@@ -93,6 +93,41 @@ void PackAnimation::Init(const libanim::Symbol* sym)
 	for (int i = 0, n = layers.size(); i < n; ++i) {
 		m_layers.push_back(new Layer(layers[i]));
 	}
+
+	CheckLerp(sym->GetFilepath());
+}
+
+void PackAnimation::CheckLerp(const std::string& filepath)
+{
+	for (int i = 0, n = m_layers.size(); i < n; ++i) 
+	{
+		Layer* layer = m_layers[i];
+		for (int j = 0, m = layer->m_frames.size(); j < m - 1; ++j) 
+		{
+			Frame *curr = layer->m_frames[j],
+				  *next = layer->m_frames[j + 1];
+			if (!curr->m_tween) {
+				continue;
+			}
+
+			for (int curr_idx = 0; curr_idx < curr->m_actors.size(); ++curr_idx) {
+				int count = 0;
+				std::string name;
+				for (int next_idx = 0; next_idx < next->m_actors.size(); ++next_idx) {
+					const std::string& curr_name = curr->m_actors[curr_idx]->m_trans.GetName();
+					const std::string& next_name = next->m_actors[next_idx]->m_trans.GetName();
+					if (curr_name == next_name) {
+						name = curr_name;
+						++count;
+					}
+				}
+				if (count > 1) {
+					throw ee::Exception("anim lerp error! filepath %s, layer %d, frame %d, name %s\n", 
+						filepath.c_str(), i, j, name.c_str());
+				}
+			}
+		}
+	}
 }
 
 /************************************************************************/
