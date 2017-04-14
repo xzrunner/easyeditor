@@ -296,6 +296,9 @@ void RectCutCMPT::OnOutputData(wxCommandEvent& event)
 	for (int i = 0, n = rects.size(); i < n; ++i)
 	{
 		const sm::rect& r = *rects[i];
+		if (r.Width() == 0 || r.Height() == 0) {
+			continue;
+		}
 
 		uint8_t* pixels = crop.Crop(r.xmin, r.ymin, r.xmax, r.ymax);
 		sm::vec2 sz = r.Size();
