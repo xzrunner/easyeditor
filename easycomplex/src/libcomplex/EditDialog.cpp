@@ -5,6 +5,7 @@
 #include "LibraryPanel.h"
 #include "Symbol.h"
 #include "ViewlistListImpl.h"
+#include "SelectSpritesOP.h"
 
 #include <ee/ViewlistPanel.h>
 #include <ee/ConfirmDialog.h>
@@ -80,6 +81,7 @@ wxWindow* EditDialog::InitLayoutRight(wxWindow* parent)
 {
 	m_viewlist = new ee::ViewlistPanel(parent);
 	m_viewlist->SetListImpl(new ViewlistListImpl(m_stage, m_stage->GetStageImpl(), m_stage));
+	dynamic_cast<SelectSpritesOP*>(m_stage->GetEditOP())->SetOpenSymbolDialogViewlist(m_viewlist);
 	return m_viewlist;
 }
 

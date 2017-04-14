@@ -136,6 +136,7 @@ wxWindow* Task::InitLayoutRight(wxWindow* parent)
 
 	m_viewlist = new ee::ViewlistPanel(split);
 	m_viewlist->SetListImpl(new ViewlistListImpl(m_stage, m_stage->GetStageImpl(), m_stage));
+	dynamic_cast<SelectSpritesOP*>(m_stage->GetEditOP())->SetOpenSymbolDialogViewlist(m_viewlist);
 
 	m_grouptree = new ee::GroupTreePanel(split, m_stage, m_stage->GetKeyState());
 
