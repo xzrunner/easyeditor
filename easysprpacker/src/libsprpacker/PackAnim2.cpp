@@ -217,7 +217,6 @@ void PackAnim2::InitSkeleton(const rg_skeleton* sk)
 	{
 		rg_joint* src = sk->joints[i];
 		Joint dst;
-		dst.name = src->name;
 		dst.parent = src->parent;
 		dst.children_count = src->children_count;
 		dst.local.Init(src->local_pose);
