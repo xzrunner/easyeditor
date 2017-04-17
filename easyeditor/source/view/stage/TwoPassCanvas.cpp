@@ -186,7 +186,7 @@ void TwoPassCanvas::DrawPass2(const float* vertices, const float* texcoords, int
 	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader());
 	shader->SetColor(color.GetMulABGR(), color.GetAddABGR());
 	shader->SetColorMap(color.GetRMapABGR(), color.GetGMapABGR(), color.GetBMapABGR());
-	shader->Draw(vertices, texcoords, tex_id);
+	shader->DrawQuad(vertices, texcoords, tex_id);
 }
 
 void TwoPassCanvas::DrawDirect() const

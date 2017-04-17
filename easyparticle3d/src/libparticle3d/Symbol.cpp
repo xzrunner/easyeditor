@@ -35,7 +35,7 @@ void Symbol::Traverse(ee::Visitor<ee::Sprite>& visitor)
 	}
 }
 
-sm::rect Symbol::GetBounding(const s2::Sprite* spr, const s2::Actor* actor) const
+sm::rect Symbol::GetBoundingImpl(const s2::Sprite* spr, const s2::Actor* actor, bool cache) const
 {
 	return sm::rect(200, 200);
 }

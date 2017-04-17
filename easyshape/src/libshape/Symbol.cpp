@@ -49,16 +49,6 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 	}
 }
 
-sm::rect Symbol::GetBounding(const s2::Sprite* spr, const s2::Actor* actor) const
-{
-	sm::rect b;
-	for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
-		b.Combine(m_bg_outline[i]->GetBounding());
-	}
-	b.Combine(s2::ShapeSymbol::GetBounding(spr));
-	return b;
-}
-
 void Symbol::ReloadTexture() const
 {
 	if (m_bg) {
@@ -123,6 +113,16 @@ void Symbol::SetBG(ee::Symbol* bg)
 void Symbol::StoreToFile(const char* filename) const
 {
 	FileIO::StoreToFile(filename, dynamic_cast<ee::Shape*>(const_cast<s2::Shape*>(m_shape)), m_bg);
+}
+
+sm::rect Symbol::GetBoundingImpl(const s2::Sprite* spr, const s2::Actor* actor, bool cache) const
+{
+	sm::rect b;
+	for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
+		b.Combine(m_bg_outline[i]->GetBounding());
+	}
+	b.Combine(s2::ShapeSymbol::GetBounding(spr));
+	return b;
 }
 
 bool Symbol::LoadResources()

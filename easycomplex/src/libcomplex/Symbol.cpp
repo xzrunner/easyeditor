@@ -152,25 +152,6 @@ void Symbol::Draw(const s2::RenderParams& rp, const s2::Sprite* spr) const
 	}
 }
 
-sm::rect Symbol::GetBounding(const s2::Sprite* spr, const s2::Actor* actor) const
-{
-	sm::vec2 scissor_sz = m_scissor.Size();
-	if (scissor_sz.x > 0 && scissor_sz.y > 0 && !ee::Config::Instance()->GetSettings().visible_scissor) {
-		return m_scissor;
-	}
-
-	sm::rect b;
-	int action = -1;
-	if (spr) {
-		action = dynamic_cast<const s2::ComplexSprite*>(spr)->GetAction();
-	}
-	const std::vector<s2::Sprite*>& sprs = GetActionChildren(action);
-	for (int i = 0, n = sprs.size(); i < n; ++i) {
-		sprs[i]->GetBounding()->CombineTo(b);
-	}
-	return b;
-}
-
 void Symbol::ReloadTexture() const
 {
 	for (int i = 0, n = m_children.size(); i < n; ++i) {
@@ -212,6 +193,25 @@ void Symbol::GetActionNames(std::vector<std::string>& actions) const
 	for (int i = 0, n = m_actions.size(); i < n; ++i) {
 		actions.push_back(m_actions[i].name);
 	}
+}
+
+sm::rect Symbol::GetBoundingImpl(const s2::Sprite* spr, const s2::Actor* actor, bool cache) const
+{
+	sm::vec2 scissor_sz = m_scissor.Size();
+	if (scissor_sz.x > 0 && scissor_sz.y > 0 && !ee::Config::Instance()->GetSettings().visible_scissor) {
+		return m_scissor;
+	}
+
+	sm::rect b;
+	int action = -1;
+	if (spr) {
+		action = dynamic_cast<const s2::ComplexSprite*>(spr)->GetAction();
+	}
+	const std::vector<s2::Sprite*>& sprs = GetActionChildren(action);
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		sprs[i]->GetBounding()->CombineTo(b);
+	}
+	return b;
 }
 
 bool Symbol::LoadResources()

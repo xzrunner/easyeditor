@@ -17,7 +17,7 @@ Symbol::Symbol()
 	s2::Trail::Instance();
 }
 
-sm::rect Symbol::GetBounding(const s2::Sprite* spr, const s2::Actor* actor) const
+sm::rect Symbol::GetBoundingImpl(const s2::Sprite* spr, const s2::Actor* actor, bool cache) const
 {
 	return sm::rect(200, 200);
 }

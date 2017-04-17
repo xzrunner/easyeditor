@@ -25,7 +25,6 @@ public:
 	virtual int Type() const;
 	virtual void Traverse(const s2::SymbolVisitor& visitor) {}
 	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
-	virtual sm::rect GetBounding(const s2::Sprite* spr = NULL, const s2::Actor* actor = NULL) const;
 
 	/**
 	 *  @interface
@@ -43,6 +42,8 @@ public:
 	static ee::Symbol* Create() { return new Symbol(); }
 
 protected:
+	virtual sm::rect GetBoundingImpl(const s2::Sprite* spr = NULL, const s2::Actor* actor = NULL, bool cache = true) const;
+
 	virtual bool LoadResources();
 
 private:

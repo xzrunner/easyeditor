@@ -22,7 +22,6 @@ public:
 	 */
 	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL, 
 		const s2::Sprite* root = NULL) const;
-	virtual sm::rect GetBounding(const s2::Sprite* spr = NULL, const s2::Actor* actor = NULL) const;
 
 	static ee::Symbol* Create() { return new Symbol(); }
 
@@ -32,6 +31,8 @@ public:
 	const m3::AABB& GetAABB() const { return m_aabb; }
 
 protected:
+	virtual sm::rect GetBoundingImpl(const s2::Sprite* spr = NULL, const s2::Actor* actor = NULL, bool cache = true) const;
+
 	virtual bool LoadResources();
 
 private:

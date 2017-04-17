@@ -64,15 +64,6 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 	m_time = curr;
 }
 
-sm::rect Symbol::GetBounding(const s2::Sprite* spr, const s2::Actor* actor) const
-{
-	sm::rect ret;
-	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
-		ret.Combine(m_oceans[i]->GetRegion());
-	}
-	return ret; 
-}
-
 void Symbol::ReloadTexture() const
 {
 	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
@@ -86,6 +77,15 @@ void Symbol::ReloadTexture() const
 			img1->ReloadTexture();
 		}
 	}	
+}
+
+sm::rect Symbol::GetBoundingImpl(const s2::Sprite* spr, const s2::Actor* actor, bool cache) const
+{
+	sm::rect ret;
+	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
+		ret.Combine(m_oceans[i]->GetRegion());
+	}
+	return ret; 
 }
 
 bool Symbol::LoadResources()
