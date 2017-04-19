@@ -15,9 +15,6 @@ class ToolbarPanel : public ee::ToolbarPanel
 public:
 	ToolbarPanel(wxWindow* parent, StagePanel* stage_panel);
 
-	void EnableHori(bool enable);
-	void EnableVert(bool enable);
-
 	void EnableReverseOrder(bool enable);
 	void EnableColumnOrder(bool enable);
 
@@ -31,8 +28,7 @@ private:
 
 	void OnChangeSize(wxCommandEvent& event);
 
-	void OnChangeHori(wxCommandEvent& event);
-	void OnChangeVert(wxCommandEvent& event);
+	void OnChangeCheck(wxCommandEvent& event);
 
 	void OnReverseOrder(wxCommandEvent& event);
 	void OnColumnOrder(wxCommandEvent& event);
@@ -43,8 +39,7 @@ private:
 	wxTextCtrl* m_width_text;
 	wxTextCtrl* m_height_text;
 
-	wxCheckBox* m_hori_check;
-	wxCheckBox* m_vert_check;
+	wxChoice* m_check_dir;
 
 	wxCheckBox* m_reverse_check;
 	wxCheckBox* m_column_check; // column major order

@@ -23,7 +23,7 @@
 #include <easycomplex.h>
 #include <easybuilder.h>
 
-#include <sprite2/RenderParams.h>
+#include <sprite2/UpdateParams.h>
 
 namespace eui
 {
@@ -71,13 +71,13 @@ bool StagePanel::UpdateStage()
 {
 	bool dirty = false;
 
-	if (m_sym->GetAnchorMgr().Update(s2::RenderParams())) {
+	if (m_sym->GetAnchorMgr().Update(s2::UpdateParams())) {
 		dirty = true;
 	}
 	
 	const std::vector<Sprite*>& sprs = m_sym->GetExtRefs();
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
-		if (sprs[i]->Update(s2::RenderParams())) {
+		if (sprs[i]->Update(s2::UpdateParams())) {
 			dirty = true;
 		}
 	}

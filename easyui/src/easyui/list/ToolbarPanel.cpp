@@ -17,16 +17,6 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage_panel)
 	SetSizer(InitLayout());	
 }
 
-void ToolbarPanel::EnableHori(bool enable)
-{
-	m_hori_check->SetValue(enable);
-}
-
-void ToolbarPanel::EnableVert(bool enable)
-{
-	m_vert_check->SetValue(enable);
-}
-
 void ToolbarPanel::EnableReverseOrder(bool enable)
 {
 	m_reverse_check->SetValue(enable);
@@ -84,21 +74,15 @@ wxSizer* ToolbarPanel::InitLayout()
 	}
 	sizer->AddSpacer(20);
 	{
-		wxSizer* hori_sizer = new wxBoxSizer(wxHORIZONTAL);
-		{
-			m_hori_check = new wxCheckBox(this, wxID_ANY, wxT("hori"));
-			Connect(m_hori_check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
-				wxCommandEventHandler(ToolbarPanel::OnChangeHori));
-			hori_sizer->Add(m_hori_check);
-		}
-		hori_sizer->AddSpacer(10);
-		{
-			m_vert_check = new wxCheckBox(this, wxID_ANY, wxT("vert"));
-			Connect(m_vert_check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
-				wxCommandEventHandler(ToolbarPanel::OnChangeVert));
-			hori_sizer->Add(m_vert_check);
-		}
-		sizer->Add(hori_sizer);
+		const int size = 2;
+		wxString choices[size];
+		choices[0] = "hori";
+		choices[1] = "vert";
+		m_check_dir = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, size, choices);
+		m_check_dir->SetSelection(1);
+		Connect(m_check_dir->GetId(), wxEVT_COMMAND_CHOICE_SELECTED, 
+			wxCommandEventHandler(ToolbarPanel::OnChangeCheck));
+		sizer->Add(m_check_dir);
 	}
 	sizer->AddSpacer(20);
 	{
@@ -143,14 +127,16 @@ void ToolbarPanel::OnChangeSize(wxCommandEvent& event)
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void ToolbarPanel::OnChangeHori(wxCommandEvent& event)
+void ToolbarPanel::OnChangeCheck(wxCommandEvent& event)
 {
-	m_stage_panel->GetList().EnableHori(event.IsChecked());
-}
-
-void ToolbarPanel::OnChangeVert(wxCommandEvent& event)
-{
-	m_stage_panel->GetList().EnableVert(event.IsChecked());
+	UIList& list = m_stage_panel->GetList();
+	if (event.GetSelection() == 0) {
+		list.EnableHori(true);
+		list.EnableVert(false);
+	} else {
+		list.EnableHori(false);
+		list.EnableVert(true);
+	}
 }
 
 void ToolbarPanel::OnReverseOrder(wxCommandEvent& event)

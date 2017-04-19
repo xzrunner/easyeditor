@@ -47,9 +47,6 @@ void StagePanel::LoadFromFile(const char* filename)
 {
 	m_list.LoadFromFile(filename);
 
-	m_toolbar->EnableHori(m_list.IsHoriEnable());
-	m_toolbar->EnableVert(m_list.IsVertEnable());
-
 	m_toolbar->EnableReverseOrder(m_list.IsReverseOrderEnable());
 	m_toolbar->EnableColumnOrder(m_list.IsColumnOrderEnable());
 

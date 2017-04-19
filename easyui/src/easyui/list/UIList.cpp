@@ -25,7 +25,9 @@ UIList::UIList()
 	m_clipbox.xmin = m_clipbox.ymin = -200;
 	m_clipbox.xmax = m_clipbox.ymax =  200;
 
-	m_vertical = m_horizontal = false;
+	m_vertical = true;
+	m_horizontal = false;
+
 	m_hori_count = m_vert_count = 0;
 	m_hori_space = m_vert_space = 0;
 
