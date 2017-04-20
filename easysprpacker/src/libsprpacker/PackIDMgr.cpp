@@ -140,7 +140,7 @@ void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id) 
 	{
 		const std::string default_sym = ee::ImageDataMgr::Instance()->GetDefaultSym();
 		if (default_sym.empty()) {
-			throw ee::Exception("query spr id fail: %s", filepath.c_str());
+			throw ee::Exception("query pkg id fail: %s", filepath.c_str());
 		}
 		return QueryID(default_sym, pkg_id, node_id);
 	}
