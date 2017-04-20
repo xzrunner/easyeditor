@@ -156,7 +156,7 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 	rect_cut.AutoCut();
 
 	int channels = img->GetFormat() == GPF_RGB ? 3 : 4;
-	pimg::Cropping img_cut(pixel, pr.Width(), pr.Height(), channels);
+	pimg::Cropping img_cut(pixel, pr.Width(), pr.Height(), channels, true);
 
 	const std::vector<eimage::Rect>& rects = rect_cut.GetResult();
 	for (int i = 0, n = rects.size(); i < n; ++i) 
