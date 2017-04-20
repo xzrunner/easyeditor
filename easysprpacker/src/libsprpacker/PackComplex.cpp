@@ -66,7 +66,7 @@ void PackComplex::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::Textur
 
 			gen.line(lua::assign("action", "\"" + action.m_name + "\"") + ",");
 			for (int j = 0, m = action.m_sprs.size(); j < m; ++j) {
-				std::string str = lua::assign("idx", ee::StringHelper::ToString(QueryIndex(action.m_sprs[j])));
+				std::string str = lua::assign("idx", ee::StringHelper::ToString(QueryIndex(action.m_sprs[j], action.m_spr_trans[j])));
 				lua::tableassign(gen, "", 1, str);
 			}
 		}
@@ -163,6 +163,7 @@ void PackComplex::Init(const ecomplex::Symbol* sym)
 		Action dst;
 		dst.m_name = src.name;
 		dst.m_sprs.reserve(src.sprs.size());
+		dst.m_spr_trans.reserve(src.sprs.size());
 		for (int j = 0, m = src.sprs.size(); j < m; ++j) 
 		{
 			int idx = -1;
@@ -174,6 +175,7 @@ void PackComplex::Init(const ecomplex::Symbol* sym)
 			assert(idx != -1);
 
 			dst.m_sprs.push_back(m_children[idx]);
+			dst.m_spr_trans.push_back(m_children_trans[idx]);
 		}
 		m_actions.push_back(dst);
 	}
@@ -181,10 +183,10 @@ void PackComplex::Init(const ecomplex::Symbol* sym)
 	m_scissor = sym->GetScissor();
 }
 
-int PackComplex::QueryIndex(const PackNode* node) const
+int PackComplex::QueryIndex(const PackNode* node, const PackTrans& trans) const
 {
 	for (int i = 0, n = m_children.size(); i < n; ++i) {
-		if (m_children[i] == node) {
+		if (m_children[i] == node && m_children_trans[i] == trans) {
 			return i;
 		}
 	}
@@ -224,7 +226,7 @@ PackToBin(uint8_t** ptr, const PackComplex& complex) const
 	uint16_t n = m_sprs.size();
 	pack(n, ptr);
 	for (int i = 0; i < n; ++i) {
-		int idx = complex.QueryIndex(m_sprs[i]);
+		int idx = complex.QueryIndex(m_sprs[i], m_spr_trans[i]);
 		assert(idx >= 0 && idx < 0xffff);
 		uint16_t _idx = idx;
 		pack(_idx, ptr);

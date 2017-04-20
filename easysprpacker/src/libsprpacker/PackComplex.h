@@ -38,7 +38,7 @@ public:
 private:
 	void Init(const ecomplex::Symbol* sym);
 
-	int QueryIndex(const PackNode* node) const;
+	int QueryIndex(const PackNode* node, const PackTrans& trans) const;
 
 private:
 	class Action
@@ -51,6 +51,7 @@ private:
 	public:
 		std::string m_name;
 		std::vector<const PackNode*> m_sprs;
+		std::vector<const PackTrans> m_spr_trans;
 
 	}; // Action
 
