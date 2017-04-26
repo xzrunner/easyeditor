@@ -97,6 +97,9 @@ void RectCutWithJson::Trigger(const std::string& src_dir, const std::string& dst
 		case s2::SYM_MESH:
 			FixMesh(src_dir, dst_dir, filepath);
 			break;
+		case s2::SYM_MASK:
+			FixMask(src_dir, dst_dir, filepath);
+			break;
 		}
 	}
 }
@@ -297,6 +300,28 @@ void RectCutWithJson::FixMesh(const std::string& src_dir, const std::string& dst
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	FixFilepath(src_dir, dst_dir, dir, value, "base_symbol");
+
+	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
+	std::ofstream fout(filepath.c_str());
+	std::locale::global(std::locale("C"));	
+	writer.write(fout, value);
+	fout.close();
+}
+
+void RectCutWithJson::FixMask(const std::string& src_dir, const std::string& dst_dir, const std::string& filepath) const
+{
+	Json::Value value;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filepath.c_str());
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, value);
+	fin.close();
+
+	std::string dir = ee::FileHelper::GetFileDir(filepath);
+	FixFilepath(src_dir, dst_dir, dir, value["base"], "filepath");
+	FixFilepath(src_dir, dst_dir, dir, value["mask"], "filepath");
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));

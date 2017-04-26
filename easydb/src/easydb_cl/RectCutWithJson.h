@@ -35,6 +35,7 @@ private:
 	void FixScale9(const std::string& src_dir, const std::string& dst_dir, const std::string& filepath) const;
 	void FixParticle3d(const std::string& src_dir, const std::string& dst_dir, const std::string& filepath) const;
 	void FixMesh(const std::string& src_dir, const std::string& dst_dir, const std::string& filepath) const;
+	void FixMask(const std::string& src_dir, const std::string& dst_dir, const std::string& filepath) const;
 
 	void FixFilepath(const std::string& src_dir, const std::string& dst_dir, 
 		const std::string& file_dir, Json::Value& val, const std::string& key) const;
