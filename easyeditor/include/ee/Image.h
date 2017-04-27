@@ -6,6 +6,8 @@
 #include <SM_Matrix.h>
 #include <SM_Rect.h>
 #include <CU_RefCountObj.h>
+#include <sprite2/pre_defined.h>
+#include S2_MAT_HEADER
 
 #include <stdint.h>
 
@@ -35,7 +37,7 @@ public:
 	const sm::i16_vec2& GetOriginSize() const { return m_ori_sz; }
 	const sm::i16_rect& GetClippedRegion() const { return m_clipped_region; }
 
-	void InvalidRect(const sm::mat4& mt) const;
+	void InvalidRect(const S2_MAT& mt) const;
 
 	void QueryTexcoords(float* texcoords, int* texid) const;
 

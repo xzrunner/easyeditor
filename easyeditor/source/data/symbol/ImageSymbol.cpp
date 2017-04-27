@@ -45,12 +45,12 @@ ImageSymbol::~ImageSymbol()
 	}
 }
 
-void ImageSymbol::InvalidRect(const sm::mat4& mt) const
+void ImageSymbol::InvalidRect(const S2_MAT& mt) const
 {
 	m_image->InvalidRect(mt);
 }
 
-bool ImageSymbol::QueryTexcoords(const s2::RenderParams& rp, float* texcoords, int& texid) const
+bool ImageSymbol::QueryTexcoords(bool use_dtex, float* texcoords, int& texid) const
 {
 	Image* img = GetImage();
 	if (!img) {

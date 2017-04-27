@@ -239,4 +239,17 @@ bool Symbol::LoadResources()
 	return true;
 }
 
+bool Symbol::IsChildOutside(const s2::Sprite* spr, const s2::RenderParams& rp) const
+{
+	int type = spr->GetSymbol()->Type();
+	if (type == s2::SYM_PARTICLE3D || 
+		type == s2::SYM_PARTICLE2D ||
+		type == s2::SYM_TRAIL ||
+		type == s2::SYM_ANIM2) {
+		return false;
+	} else {
+		return s2::ComplexSymbol::IsChildOutside(spr, rp);
+	}
+}
+
 }

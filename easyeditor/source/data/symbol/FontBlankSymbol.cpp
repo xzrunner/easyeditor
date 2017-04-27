@@ -120,7 +120,7 @@ bool FontBlankSymbol::LoadResources()
 	return true;
 }
 
-void FontBlankSymbol::DrawBackground(const FontBlankSprite* fb, const sm::mat4& mt) const
+void FontBlankSymbol::DrawBackground(const FontBlankSprite* fb, const S2_MAT& mt) const
 {
 	s2::RVG::SetColor(s2::Color(179, 179, 179, 179));
 
@@ -138,7 +138,7 @@ void FontBlankSymbol::DrawBackground(const FontBlankSprite* fb, const sm::mat4& 
 	s2::RVG::Rect(min, max, true);
 }
 
-void FontBlankSymbol::DrawText(const FontBlankSprite* fb, const sm::mat4& mt) const
+void FontBlankSymbol::DrawText(const FontBlankSprite* fb, const S2_MAT& mt) const
 {
 // 	if (spr) {
 // 		if (const FontBlankSprite* font = dynamic_cast<const FontBlankSprite*>(spr)) {

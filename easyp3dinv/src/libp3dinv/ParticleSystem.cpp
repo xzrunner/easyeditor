@@ -32,7 +32,7 @@ void ParticleSystem::Update(float dt)
 	}
 }
 
-void ParticleSystem::Draw(const sm::mat4& mt) const
+void ParticleSystem::Draw(const S2_MAT& mt) const
 {
 	for (int i = 0, n = m_particles.size(); i < n; ++i) {
 		Particle* p = m_particles[i];

@@ -127,7 +127,7 @@ unsigned int Image::GetTexID() const
 	return m_tex->GetTexID(); 
 }
 
-void Image::InvalidRect(const sm::mat4& mt) const
+void Image::InvalidRect(const S2_MAT& mt) const
 {
 #ifdef OPEN_SCREEN_CACHE
 	float hw = m_tex->GetWidth() * 0.5f,

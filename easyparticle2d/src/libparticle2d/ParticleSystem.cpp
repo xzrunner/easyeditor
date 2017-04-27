@@ -169,7 +169,7 @@ void ParticleSystem::GetValue(int key, ee::UICallback::Data& data)
 	}
 }
 
-void ParticleSystem::Draw(const sm::mat4& mt) const
+void ParticleSystem::Draw(const S2_MAT& mt) const
 {
 	if (m_et->local_mode_draw) {
 		p2d_emitter_draw(m_et, &mt);
@@ -178,7 +178,7 @@ void ParticleSystem::Draw(const sm::mat4& mt) const
 	}
 }
 
-bool ParticleSystem::Update(const sm::mat4& mat)
+bool ParticleSystem::Update(const S2_MAT& mat)
 {
 	float time = s2::Particle2d::Instance()->GetTime();
 	assert(m_et->time <= time);

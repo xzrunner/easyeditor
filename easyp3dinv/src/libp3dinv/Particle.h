@@ -17,7 +17,7 @@ public:
 	~Particle();
 
 	void Update(float dt, float gravity);
-	void Draw(const sm::mat4& mt) const;
+	void Draw(const S2_MAT& mt) const;
 
 	void LoadFromFile(const Json::Value& val);
 

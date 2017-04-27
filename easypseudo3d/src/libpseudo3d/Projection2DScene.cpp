@@ -59,7 +59,7 @@ void Projection2DScene::Draw() const
 		float scale;
 		CalProjInfo(m_positions[i], &pos, &scale);
 
-		ee::SpriteRenderer::Instance()->Draw(sym, sm::mat4(), pos, 0, scale, scale);
+		ee::SpriteRenderer::Instance()->Draw(sym, S2_MAT(), pos, 0, scale, scale);
 	}
 }
 

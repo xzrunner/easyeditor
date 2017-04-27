@@ -6,6 +6,9 @@
 #include <sprite2/Color.h>
 #include <CU_RefCountObj.h>
 
+#include <sprite2/pre_defined.h>
+#include S2_MAT_HEADER
+
 #include <json/json.h>
 
 namespace eshadow
@@ -20,7 +23,7 @@ public:
 	void StoreToFile(Json::Value& value) const;
 	void LoadFromFile(const Json::Value& value);
 
-	void Draw(const sm::mat4& mt, float alpha) const;
+	void Draw(const S2_MAT& mt, float alpha) const;
 
 	void BuildFace();
 	void BuildOutterLine();

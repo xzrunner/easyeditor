@@ -28,7 +28,7 @@
 //	virtual bool IsContain(const sm::vec2& pos) const;
 //	virtual bool IsIntersect(const sm::rect& rect) const;
 //	virtual void Translate(const sm::vec2& offset);
-//	virtual void Draw(const sm::mat4& mt,
+//	virtual void Draw(const S2_MAT& mt,
 //		const s2::RenderColor& color = s2::RenderColor()) const;
 //
 //	const std::vector<std::vector<sm::vec2> >& GetHoles() const { return m_holes; }

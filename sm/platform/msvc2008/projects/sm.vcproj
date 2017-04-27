@@ -184,6 +184,18 @@
 				RelativePath="..\..\..\src\sm\SM_Matrix.inl"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\sm\SM_Matrix2D.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\sm\SM_Matrix2D.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\sm\SM_Matrix2D.inl"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="quaternion"

@@ -22,13 +22,13 @@ public:
 	 *  @interface
 	 *    ee::Symbol
 	 */
-	virtual void InvalidRect(const sm::mat4& mt) const;
+	virtual void InvalidRect(const S2_MAT& mt) const;
 
 	/**
 	 *  @interface
 	 *    s2::ImageSymbol
 	 */
-	virtual bool QueryTexcoords(const s2::RenderParams& rp, float* texcoords, int& texid) const;
+	virtual bool QueryTexcoords(bool use_dtex, float* texcoords, int& texid) const;
 
 	unsigned int GetTexID() const;
 

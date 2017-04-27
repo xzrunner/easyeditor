@@ -3,6 +3,8 @@
 
 #include "Symbol.h"
 
+#include S2_MAT_HEADER
+
 namespace ee
 {
 
@@ -30,8 +32,8 @@ protected:
 	virtual bool LoadResources();
 
 private:
-	void DrawBackground(const FontBlankSprite* fb, const sm::mat4& mt) const;
-	void DrawText(const FontBlankSprite* fb, const sm::mat4& mt) const;
+	void DrawBackground(const FontBlankSprite* fb, const S2_MAT& mt) const;
+	void DrawText(const FontBlankSprite* fb, const S2_MAT& mt) const;
 
 	// from NeHe's FreeType
 	void print(float x, float y, const char* text) const;

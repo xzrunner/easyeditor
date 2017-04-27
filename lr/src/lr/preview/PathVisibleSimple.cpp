@@ -109,7 +109,7 @@ void PathVisibleSimple::InsertBoundary(const ee::Sprite* spr)
 	// fix
 	std::vector<sm::vec2> fixed;
 	sm::rm_duplicate_nodes(bound, fixed);
-	sm::mat4 mat = spr->GetLocalMat();
+	S2_MAT mat = spr->GetLocalMat();
 	for (int i = 0; i < fixed.size(); ++i) {
 		fixed[i] = mat * fixed[i];
 	}

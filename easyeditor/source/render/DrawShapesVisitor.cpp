@@ -34,10 +34,10 @@ void DrawShapesVisitor::Visit(Shape* shape, bool& next)
 	if (cfg.visible_node_name) 
 	{
 		sm::vec2 center = r.Center();
-		sm::mat4 mt;
+		S2_MAT mt;
 		float s = std::max(1.0f, m_cam_scale) * cfg.node_name_scale;
-		mt.x[0] = mt.x[5] = s;
-		mt.Translate(center.x, center.y, 0);
+		mt.Scale(s, s);
+		mt.Translate(center.x, center.y);
 		gum::GTxt::Instance()->Draw(mt, shape->GetName());
 	}
 }

@@ -11,7 +11,7 @@ void SpriteCtrlNode::GetSpriteCtrlNodes(const Sprite* spr, sm::vec2 nodes[8])
 {
 	sm::rect r = spr->GetSymbol()->GetBounding(spr);
 
-	sm::mat4 t;
+	S2_MAT t;
 	t.SetTransformation(spr->GetPosition().x, spr->GetPosition().y, spr->GetAngle(),
 		spr->GetScale().x, spr->GetScale().y, 0, 0, spr->GetShear().x, spr->GetShear().y);
 	// scale
@@ -37,7 +37,7 @@ void SpriteCtrlNode::GetSpriteCtrlNodesExt(const Sprite* spr, sm::vec2 nodes[4])
 {
 	sm::rect r = spr->GetSymbol()->GetBounding(spr);
 
-	sm::mat4 t;
+	S2_MAT t;
 	t.SetTransformation(spr->GetPosition().x, spr->GetPosition().y, spr->GetAngle(),
 		spr->GetScale().x, spr->GetScale().y, 0, 0, spr->GetShear().x, spr->GetShear().y);
 	// perspective

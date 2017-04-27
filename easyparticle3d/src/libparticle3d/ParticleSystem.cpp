@@ -177,7 +177,7 @@ void ParticleSystem::Draw(AnimRecorder* recorder) const
 //	sl::ShaderMgr::Instance()->GetContext()->SetDefaultBlend();
 }
 
-bool ParticleSystem::Update(const sm::mat4& mat)
+bool ParticleSystem::Update(const S2_MAT& mat)
 {
 	if (!m_et) {
 		return false;

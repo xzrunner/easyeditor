@@ -43,7 +43,7 @@ bool Body::IsIntersect(const sm::rect& rect) const
 	return false;
 }
 
-void Body::Draw(const sm::mat4& mt, const s2::Color& cFace, const s2::Color& cEdge) const
+void Body::Draw(const S2_MAT& mt, const s2::Color& cFace, const s2::Color& cEdge) const
 {
 	for (size_t i = 0, n = m_fixtures.size(); i < n; ++i) {
 		m_fixtures[i]->Draw(mt, cFace, cEdge);

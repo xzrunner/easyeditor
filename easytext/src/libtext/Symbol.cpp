@@ -36,7 +36,7 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 
 	const ee::SettingData& setting = ee::Config::Instance()->GetSettings();
 	if (setting.visible_label_bg) {
-		sm::mat4 mt = spr->GetLocalMat() * params.mt;
+		S2_MAT mt = spr->GetLocalMat() * params.mt;
 		DrawBackground(dynamic_cast<const Sprite*>(spr), mt);
 	} 
  	if (setting.visible_label_text) {
@@ -64,14 +64,14 @@ bool Symbol::LoadResources()
 	return true;
 }
 
-void Symbol::DrawText(const gtxt_label_style& style, const sm::mat4& mt, const s2::Color& mul, 
+void Symbol::DrawText(const gtxt_label_style& style, const S2_MAT& mt, const s2::Color& mul, 
 					  const s2::Color& add, const std::string& text, int time, bool richtext) const
 {
 	std::string t_text = ee::StringHelper::ToUtf8(text);
 	gum::GTxt::Instance()->Draw(style, mt, mul, add, t_text, time, richtext);
 }
 
-void Symbol::DrawBackground(const Sprite* spr, const sm::mat4& mt) const
+void Symbol::DrawBackground(const Sprite* spr, const S2_MAT& mt) const
 {
 	if (!spr) {
 		return;

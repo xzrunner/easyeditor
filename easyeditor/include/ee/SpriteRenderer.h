@@ -25,7 +25,7 @@ public:
 			  const sm::vec2& shear = sm::vec2(0, 0));
 
 	//static void InvalidRect(const Sprite* spr, 
-	//	                    const sm::mat4& mt = sm::mat4());
+	//	                    const S2_MAT& mt = S2_MAT());
 
 private:
 	

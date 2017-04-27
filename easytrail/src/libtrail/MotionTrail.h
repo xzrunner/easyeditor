@@ -29,7 +29,7 @@ public:
 	virtual void SetValue(int key, const ee::UICallback::Data& data);
 	virtual void GetValue(int key, ee::UICallback::Data& data);
 
-	void Draw(const sm::mat4& mt) const;
+	void Draw(const S2_MAT& mt) const;
 	bool Update(const sm::vec2& pos);
 
 	void Start();

@@ -20,9 +20,9 @@ SpatialPartition::SpatialPartition()
 	SIDX = sp_null_create();
 }
 
-void SpatialPartition::Insert(const Sprite* spr/*, const sm::mat4& mt*/)
+void SpatialPartition::Insert(const Sprite* spr/*, const S2_MAT& mt*/)
 {
-// 	sm::mat4 t;
+// 	S2_MAT t;
 // 	spr->GetTransMatrix(t);
 //	t = t * mt;
 

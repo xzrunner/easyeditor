@@ -56,7 +56,7 @@ void FPS::DrawFPS() const
 void FPS::Draw(const std::string& str) const
 {
  //	const sm::vec2& size = scr.GetSize();
-	//sm::mat4 t;
+	//S2_MAT t;
 	//t.setTranslation(-size.x * 0.4f, size.y * 0.45f);
 	//etext::GTxt::Instance()->Draw(t, str);
 }

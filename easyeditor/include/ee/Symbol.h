@@ -8,6 +8,7 @@
 #include <SM_Matrix.h>
 #include <SM_Rect.h>
 #include <sprite2/S2_Symbol.h>
+#include S2_MAT_HEADER
 
 #include <set>
 
@@ -28,7 +29,7 @@ public:
 	virtual void ClearUserData(bool deletePtr);
 
 	virtual void ReloadTexture() const {}
-	virtual void InvalidRect(const sm::mat4& mt) const {}
+	virtual void InvalidRect(const S2_MAT& mt) const {}
 	virtual void Traverse(Visitor<Sprite>& visitor) {}
 
 	bool LoadFromFile(const std::string& filepath);

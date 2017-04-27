@@ -56,7 +56,7 @@
 //	}
 //}
 //
-//void ComplexPolygonShape::Draw(const sm::mat4& mt, const s2::RenderColor& color) const
+//void ComplexPolygonShape::Draw(const S2_MAT& mt, const s2::RenderColor& color) const
 //{
 //	PolygonShape::Draw(mt, color);
 //

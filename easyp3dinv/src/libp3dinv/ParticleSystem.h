@@ -14,7 +14,7 @@ public:
 
 	void Update(float dt);
 
-	void Draw(const sm::mat4& mt) const;
+	void Draw(const S2_MAT& mt) const;
 
 	void Reset();
 

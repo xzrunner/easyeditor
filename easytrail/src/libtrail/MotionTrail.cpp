@@ -63,9 +63,9 @@ void MotionTrail::GetValue(int key, ee::UICallback::Data& data)
 	}
 }
 
-void MotionTrail::Draw(const sm::mat4& mt) const
+void MotionTrail::Draw(const S2_MAT& mt) const
 {
-	m_rp.mat = const_cast<sm::mat4&>(mt);
+	m_rp.mat = const_cast<S2_MAT&>(mt);
 	t2d_emitter_draw(m_spr, &m_rp);
 }
 

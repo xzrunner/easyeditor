@@ -19,7 +19,7 @@ public:
 	bool IsContain(const sm::vec2& pos) const;
 	bool IsIntersect(const sm::rect& rect) const;
 
-	void Draw(const sm::mat4& mt, const s2::Color& cFace, 
+	void Draw(const S2_MAT& mt, const s2::Color& cFace, 
 		const s2::Color& cEdge) const;
 
 private:

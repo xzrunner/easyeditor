@@ -113,7 +113,7 @@ void SymbolRender::DrawGrids(const ee::Symbol& sym,
 				m_grid->SetPosition(pos);
 				s2::RenderColor ct;
 				ct.mul = color;
-				ee::SpriteRenderer::Instance()->Draw(m_grid, NULL, s2::RenderParams(sm::mat4(), ct));
+				ee::SpriteRenderer::Instance()->Draw(m_grid, NULL, s2::RenderParams(S2_MAT(), ct));
 			}
 		}
 	}
@@ -134,25 +134,25 @@ void SymbolRender::DrawArrow(const ee::Symbol& sym,
 	{
 		sm::vec2 pos;
 		m_stage->TransGridPosToCoords(row, col - r, pos);
-		ee::SpriteRenderer::Instance()->Draw(m_arrow_down, sm::mat4(), pos, 0, -1);
+		ee::SpriteRenderer::Instance()->Draw(m_arrow_down, S2_MAT(), pos, 0, -1);
 	}
 	// right
 	{
 		sm::vec2 pos;
 		m_stage->TransGridPosToCoords(row, col + r, pos);
-		ee::SpriteRenderer::Instance()->Draw(m_arrow_right, sm::mat4(), pos);
+		ee::SpriteRenderer::Instance()->Draw(m_arrow_right, S2_MAT(), pos);
 	}
 	// up
 	{
 		sm::vec2 pos;
 		m_stage->TransGridPosToCoords(row + r, col, pos);
-		ee::SpriteRenderer::Instance()->Draw(m_arrow_right, sm::mat4(), pos, 0, -1);
+		ee::SpriteRenderer::Instance()->Draw(m_arrow_right, S2_MAT(), pos, 0, -1);
 	}
 	// down
 	{
 		sm::vec2 pos;
 		m_stage->TransGridPosToCoords(row - r, col, pos);
-		ee::SpriteRenderer::Instance()->Draw(m_arrow_down, sm::mat4(), pos);
+		ee::SpriteRenderer::Instance()->Draw(m_arrow_down, S2_MAT(), pos);
 	}
 }
 
@@ -172,10 +172,10 @@ void SymbolRender::DrawRegion(const ee::Symbol& sym, const sm::vec2& pos)
 	float s = (float)(max_reg) / m_region_size;
 	s2::RenderColor ct;
 	ct.mul = s2::Color(255, 0, 0);
-	ee::SpriteRenderer::Instance()->Draw(m_region, s2::RenderParams(sm::mat4(), ct), pos, 0, s, s, 0, 0);
+	ee::SpriteRenderer::Instance()->Draw(m_region, s2::RenderParams(S2_MAT(), ct), pos, 0, s, s, 0, 0);
 	if (min_reg != 0) {
 		float s = (float)(min_reg) / m_region_size;
-		ee::SpriteRenderer::Instance()->Draw(m_region, sm::mat4(), pos, 0, s, s);
+		ee::SpriteRenderer::Instance()->Draw(m_region, S2_MAT(), pos, 0, s, s);
 	}
 }
 

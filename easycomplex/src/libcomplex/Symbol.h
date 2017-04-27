@@ -48,6 +48,10 @@ public:
 	};
 
 	// todo: 
+
+private:
+	virtual bool IsChildOutside(const s2::Sprite* spr, const s2::RenderParams& rp) const;
+
 public:
 	std::vector<Group> m_groups;
 

@@ -39,7 +39,7 @@ public:
 
 	virtual void Draw(AnimRecorder* recorder = NULL) const;
 
-	bool Update(const sm::mat4& mat);
+	bool Update(const S2_MAT& mat);
 
 	void SetStaticMode(bool is_static);
 

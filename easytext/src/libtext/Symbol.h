@@ -5,6 +5,8 @@
 
 #include <sprite2/TextboxSymbol.h>
 
+#include S2_MAT_HEADER
+
 namespace etext
 {
 
@@ -35,11 +37,11 @@ protected:
 	 *  @interface
 	 *    s2::TextboxSymbol
 	 */
-	virtual void DrawText(const gtxt_label_style& style, const sm::mat4& mt, const s2::Color& mul, 
+	virtual void DrawText(const gtxt_label_style& style, const S2_MAT& mt, const s2::Color& mul, 
 		const s2::Color& add, const std::string& text, int time, bool richtext) const;
 
 private:
-	void DrawBackground(const Sprite* spr, const sm::mat4& mt) const;
+	void DrawBackground(const Sprite* spr, const S2_MAT& mt) const;
 
 }; // Symbol
 

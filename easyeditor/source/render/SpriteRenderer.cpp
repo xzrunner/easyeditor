@@ -58,7 +58,7 @@ void SpriteRenderer::Draw(const s2::Symbol* sym, const s2::RenderParams& params,
 	s2::DrawNode::Draw(sym, params, pos, angle, scale, shear);
 }
 
-//void SpriteRenderer::InvalidRect(const s2::Sprite* spr, const sm::mat4& mt)
+//void SpriteRenderer::InvalidRect(const s2::Sprite* spr, const S2_MAT& mt)
 //{
 //	if (!spr->IsVisible()) {
 //		return;

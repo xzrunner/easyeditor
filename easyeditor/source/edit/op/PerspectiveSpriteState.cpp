@@ -38,7 +38,7 @@ bool PerspectiveSpriteState::OnMouseDrag(const sm::vec2& pos)
 void PerspectiveSpriteState::Perspective(const sm::vec2& curr)
 {
 	sm::rect r = m_spr->GetSymbol()->GetBounding(m_spr);
-	sm::mat4 t;
+	S2_MAT t;
 	t.SetTransformation(m_spr->GetPosition().x, m_spr->GetPosition().y, m_spr->GetAngle(),
 		m_spr->GetScale().x, m_spr->GetScale().y, 0, 0, m_spr->GetShear().x, m_spr->GetShear().y);
 

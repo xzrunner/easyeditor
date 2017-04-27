@@ -22,7 +22,7 @@ public:
 	virtual bool UpdateStage();
 
 	void SetPSMat(const sm::vec2& pos);
-	const sm::mat4& GetPSMat() const { return m_ps_mat; }
+	const S2_MAT& GetPSMat() const { return m_ps_mat; }
 
 private:
 	void UpdateControl();
@@ -33,7 +33,7 @@ public:
 	float xRot, yRot;
 
 private:
-	sm::mat4 m_ps_mat;
+	S2_MAT m_ps_mat;
 
 }; // StagePanel
 

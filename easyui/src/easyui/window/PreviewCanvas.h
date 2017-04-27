@@ -24,7 +24,7 @@ protected:
 	virtual void OnTimer();
 
 private:
-	sm::mat4 m_scale_mt;
+	S2_MAT m_scale_mt;
 
 	ee::PlayControl& m_control;
 

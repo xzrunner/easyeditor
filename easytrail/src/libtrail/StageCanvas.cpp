@@ -36,10 +36,10 @@ void StageCanvas::OnDrawSprites() const
 
 	MotionTrail* trail = m_stage->m_trail;
 	if (trail) {
-		trail->Draw(sm::mat4());
+		trail->Draw(S2_MAT());
 	}
 // 	for (int i = 0, n = m_stage->m_trails.size(); i < n; ++i) {
-// 		m_stage->m_trails[i]->Draw(sm::mat4());
+// 		m_stage->m_trails[i]->Draw(S2_MAT());
 // 	}
 
 	m_stage->DrawEditOP();

@@ -214,7 +214,7 @@ Draw(const sm::vec2& pos, bool isHorMirror, bool isVerMirror) const
 				y += (m_center.y - pos.y) * 2;
 
 			s2::RenderParams params;
-			params.mt = sm::mat4::Translated(x, y, 0);
+			params.mt.Translate(x, y);
 			SpriteRenderer::Instance()->Draw(m_selected[i], params);
 		}
 	}
