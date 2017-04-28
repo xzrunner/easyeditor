@@ -15,6 +15,7 @@
 #include <easytext.h>
 #include <easytexture.h>
 #include <easyicon.h>
+#include <easytrail.h>
 
 #include <ee/SymbolFactory.h>
 #include <ee/SpriteFactory.h>
@@ -62,6 +63,9 @@ static void InitSymbolCreators()
 
 	ee::SymbolFactory::RegisterCreator(s2::SYM_ICON, &eicon::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_ICON, &eicon::Sprite::Create);
+
+	ee::SymbolFactory::RegisterCreator(s2::SYM_TRAIL, &etrail::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_TRAIL, &etrail::Sprite::Create);
 
 	ee::SymbolFactory::RegisterCreator(ee::SYM_UIWND, &eui::window::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(ee::SYM_UIWND, &eui::window::Sprite::Create);
