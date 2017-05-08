@@ -381,9 +381,9 @@ PackToBin(uint8_t** ptr) const
 	uint16_t scale_end = float2int(m_scale_end, 100);
 	pack(scale_end, ptr);
 
-	int16_t angle = float2int(m_angle);
+	int16_t angle = radian2int(m_angle);
 	pack(angle, ptr);
-	uint16_t angle_var = float2int(m_angle_var);
+	uint16_t angle_var = radian2int(m_angle_var);
 	pack(angle_var, ptr);
 
 	uint32_t mul_col_begin = m_mul_col_begin;
