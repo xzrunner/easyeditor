@@ -2,6 +2,8 @@
 #include "Sprite.h"
 #include "Symbol.h"
 
+#include <sprite2/UpdateParams.h>
+
 #include <ee/panel_msg.h>
 
 namespace libanim2
@@ -19,7 +21,7 @@ void PropertySetting::OnPropertyGridChange(const std::string& name, const wxAny&
 
 	Sprite* spr = static_cast<Sprite*>(GetSprite());
 	if (name == "Static") {
-		spr->SetStaticTime(wxANY_AS(value, int));
+		spr->SetStaticTime(s2::UpdateParams(), wxANY_AS(value, int));
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }

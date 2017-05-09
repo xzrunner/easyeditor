@@ -46,6 +46,7 @@ private:
 
 	static void LoadCB(const char* filepath, void (*unpack)(const void* data, size_t size, void* ud), void* ud);
 	static void ParserCB(const void* data, size_t size, void* ud);
+	static void ReleaseCB(void* ud);
 
 protected:
 	Image* m_image;

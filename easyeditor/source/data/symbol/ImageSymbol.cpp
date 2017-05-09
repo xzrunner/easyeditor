@@ -101,7 +101,8 @@ void ImageSymbol::LoadSync()
 
 void ImageSymbol::LoadAsync()
 {
-	gum::AsyncTask::Instance()->Load(m_filepath, LoadCB, ParserCB, this);
+	AddReference();
+	gum::AsyncTask::Instance()->Load(m_filepath, LoadCB, ParserCB, ReleaseCB, this);
 
 	int w, h;
 	gimg_read_header(m_filepath.c_str(), &w, &h);
@@ -154,6 +155,12 @@ void ImageSymbol::ParserCB(const void* data, size_t size, void* ud)
 	assert(fmt == GPF_RGB || fmt == GPF_RGBA);
 	sym->SetImage(new Image(ptr, w, h, fmt));
 	sym->InitCoreTex();
+}
+
+void ImageSymbol::ReleaseCB(void* ud)
+{
+	ImageSymbol* sym = static_cast<ImageSymbol*>(ud);
+	sym->RemoveReference();
 }
 
 }
