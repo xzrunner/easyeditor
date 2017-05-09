@@ -85,9 +85,12 @@
 	// ],
 
 
+	// id
+	"pack_id_dir" : "D:\\projects\\lr\\lr_rawres\\id",
+
 
 	// render
 
-	"use_dtex" : true
+	"debug_draw" : false
 
 }

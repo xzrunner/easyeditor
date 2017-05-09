@@ -19,10 +19,11 @@
 #include "SymbolMgr.h"
 #include "LogMgr.h"
 #include "ReloadSymVisitor.h"
+#include "Socket.h"
+#include "EditedFileStack.h"
+#include "PackIDMgr.h"
 
 #include <gum/GUM_DTex.h>
-
-#include <wx/socket.h>
 
 #include <fstream>
 
@@ -38,7 +39,9 @@ BEGIN_EVENT_TABLE(Frame, wxFrame)
 	EVT_MENU(ID_FULL_VIEWS, Frame::OnFullView)
 	EVT_MENU(ID_SETTINGS, Frame::OnSettings)
 	EVT_MENU(ID_CONN_DEFAULT, Frame::OnConnDefault)
-	EVT_MENU(ID_CONN_TEST, Frame::OnConnTest)
+	EVT_MENU(ID_CONN_PC, Frame::OnConnPC)
+	EVT_MENU(ID_CONN_IOS, Frame::OnConnIOS)
+	EVT_MENU(ID_CONN_ANDROID, Frame::OnConnANDROID)
 
 	EVT_MENU(wxID_EXIT, Frame::OnQuit)
 	
@@ -67,16 +70,6 @@ Frame::Frame(const std::string& title, const std::string& filetag, const wxSize&
 	StackTrace::InitUnhandledExceptionFilter();
 
 	SetDropTarget(new FrameDropTarget(this));
-
-	// Create the socket
-	m_sock = new wxSocketClient();
-
-	// Setup the event handler and subscribe to most events
-//	m_sock->SetEventHandler(*this, SOCKET_ID);
-	m_sock->SetNotify(wxSOCKET_CONNECTION_FLAG |
-		wxSOCKET_INPUT_FLAG |
-		wxSOCKET_LOST_FLAG);
-	m_sock->Notify(true);
 }
 
 Frame::~Frame()
@@ -89,9 +82,6 @@ Frame::~Frame()
 	SaveTmpInfo();
 
 	delete m_recent_menu;
-
-	// No delayed deletion here, as the frame is dying anyway
-	delete m_sock;
 }
 
 void Frame::SetTask(Task* task)
@@ -102,7 +92,7 @@ void Frame::SetTask(Task* task)
 void Frame::InitWithFile(const std::string& path)
 {
 	Clear();
-	m_curr_filename = path;
+	EditedFileStack::Instance()->SetBottom(path);
 //	SetTitle(path);
 	try {
 		m_task->Load(path.c_str());
@@ -124,12 +114,12 @@ void Frame::OpenFile(const std::string& filename)
 
 	Clear();
 
-	m_curr_filename = filename;
-	m_recent_menu->Insert(m_curr_filename);
-	SetTitle(m_curr_filename);
+	EditedFileStack::Instance()->SetBottom(filename);
+	m_recent_menu->Insert(filename);
+	SetTitle(filename);
 
 	try {
-		m_task->Load(m_curr_filename.c_str());
+		m_task->Load(filename.c_str());
 	} catch (Exception& e) {
 		ExceptionDlg dlg(this, e);
 		dlg.ShowModal();
@@ -146,7 +136,7 @@ void Frame::OpenFile(const std::string& filename)
 void Frame::RefreshWithCurrFile()
 {
 //	m_task->clear();
-	OpenFile(m_curr_filename);
+	OpenFile(EditedFileStack::Instance()->GetBottom());
 
 	SymbolMgr::Instance()->Traverse(ReloadSymVisitor());
 }
@@ -226,7 +216,10 @@ void Frame::OnOpen(wxCommandEvent& event)
 
 void Frame::OnSave(wxCommandEvent& event)
 {
-	if (!m_task || m_curr_filename.empty()) return;
+	std::string filepath = EditedFileStack::Instance()->GetBottom();
+	if (!m_task || filepath.empty()) {
+		return;
+	}
 
 	try {
 		wxMessageDialog* dlg = new wxMessageDialog(NULL, 
@@ -234,8 +227,8 @@ void Frame::OnSave(wxCommandEvent& event)
 			wxYES_NO | wxNO_DEFAULT | wxICON_QUESTION);
 		if (dlg->ShowModal() == wxID_YES)
 		{
-			SetTitle(m_curr_filename);
-			m_task->Store(m_curr_filename.c_str());
+			SetTitle(filepath);
+			m_task->Store(filepath.c_str());
 		}
 	} catch (Exception& e) {
 		ExceptionDlg dlg(this, e);
@@ -253,7 +246,7 @@ void Frame::OnSaveAs(wxCommandEvent& event)
 		if (dlg.ShowModal() == wxID_OK)
 		{
 			std::string fixed = FileHelper::GetFilenameAddTag(dlg.GetPath().ToStdString(), m_filetag, "json");
-			m_curr_filename = fixed;
+			EditedFileStack::Instance()->SetBottom(fixed);
 			m_task->Store(fixed.c_str());
 		}
 	} catch (Exception& e) {
@@ -277,17 +270,50 @@ void Frame::OnSettings(wxCommandEvent& event)
 
 void Frame::OnConnDefault(wxCommandEvent& event)
 {
-	wxIPV4address addr;
-	addr.Hostname("localhost");
-	addr.Service(3141);
-	m_sock->Connect(addr, false);
+	// prepare id mgr
+	std::string filepath = Config::Instance()->GetSettings().pack_id_dir + "\\pkg_cfg_only_ui.json";
+	PackIDMgr::Instance()->Init(filepath, "pc");
+
+	Socket::Instance()->ConnDefault();
 }
 
-void Frame::OnConnTest(wxCommandEvent& event)
+void Frame::OnConnPC(wxCommandEvent& event)
 {
-	const char* zztest = "zztest 1234";
-	unsigned char len = (unsigned char)(strlen(zztest) + 1);
-	m_sock->Write(zztest, len);
+	// prepare id mgr
+	std::string filepath = Config::Instance()->GetSettings().pack_id_dir + "\\pkg_cfg_only_ui.json";
+	PackIDMgr::Instance()->Init(filepath, "pc");
+
+	wxString hostname = wxGetTextFromUser(
+		_("Enter the address of the client:"),
+		_("Connect ..."),
+		_("localhost"));
+	Socket::Instance()->ConnFromUser(hostname.ToStdString());
+}
+
+void Frame::OnConnIOS(wxCommandEvent& event)
+{
+	// prepare id mgr
+	std::string filepath = Config::Instance()->GetSettings().pack_id_dir + "\\pkg_cfg_only_ui.json";
+	PackIDMgr::Instance()->Init(filepath, "ios");
+
+	wxString hostname = wxGetTextFromUser(
+		_("Enter the address of the client:"),
+		_("Connect ..."),
+		_("localhost"));
+	Socket::Instance()->ConnFromUser(hostname.ToStdString());
+}
+
+void Frame::OnConnANDROID(wxCommandEvent& event)
+{
+	// prepare id mgr
+	std::string filepath = Config::Instance()->GetSettings().pack_id_dir + "\\pkg_cfg_only_ui.json";
+	PackIDMgr::Instance()->Init(filepath, "android");
+
+	wxString hostname = wxGetTextFromUser(
+		_("Enter the address of the client:"),
+		_("Connect ..."),
+		_("localhost"));
+	Socket::Instance()->ConnFromUser(hostname.ToStdString());
 }
 
 std::string Frame::GetFileFilter() const
@@ -304,14 +330,18 @@ void Frame::OnClose(wxCloseEvent& event)
 {
 	ConfirmDialog dlg(this);
 	int val = dlg.ShowModal();
-	if (val == wxID_YES) {
-		if (!m_curr_filename.empty()) {
-			m_task->Store(m_curr_filename.c_str());
+	if (val == wxID_YES) 
+	{
+		std::string filepath = EditedFileStack::Instance()->GetBottom();
+		if (!filepath.empty()) {
+			m_task->Store(filepath.c_str());
 		} else {
 			OnSaveAs(wxCommandEvent());
 		}
 		Destroy();
-	} else if (val == wxID_NO) {
+	} 
+	else if (val == wxID_NO) 
+	{
 		Destroy();
 	}
 }
@@ -377,7 +407,9 @@ wxMenu* Frame::InitConnBar()
 {
 	wxMenu* menu = new wxMenu;
 	menu->Append(ID_CONN_DEFAULT, "Default");
-	menu->Append(ID_CONN_TEST, "Test");
+	menu->Append(ID_CONN_PC, "PC");
+	menu->Append(ID_CONN_IOS, "IOS");
+	menu->Append(ID_CONN_ANDROID, "Android");
 	return menu;
 }
 
@@ -400,7 +432,7 @@ void Frame::SetCurrFilename()
 
 		if (!FileHelper::IsFileExist(str))
 		{
-			m_curr_filename = str;
+			EditedFileStack::Instance()->SetBottom(str);
 			break;
 		}
 	}

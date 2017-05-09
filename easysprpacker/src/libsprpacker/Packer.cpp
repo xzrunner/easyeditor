@@ -154,7 +154,7 @@ void Packer::OutputSprID(const std::string& pkg_name, const std::string& res_dir
 		value[value.size()] = item;
 	}
 
-	std::string filepath = PackIDMgr::Instance()->GetSprIDFile(pkg_name);
+	std::string filepath = ee::PackIDMgr::Instance()->GetSprIDFile(pkg_name);
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));

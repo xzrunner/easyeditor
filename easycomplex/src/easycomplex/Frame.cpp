@@ -9,6 +9,7 @@
 #include <ee/SymbolMgr.h>
 #include <ee/SettingData.h>
 #include <ee/SymbolFile.h>
+#include <ee/EditedFileStack.h>
 
 #include <easycomplex.h>
 #include <easycoco.h>
@@ -209,7 +210,7 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 void Frame::SaveAsJson(const std::string& filepath) const
 {
 	std::string fixed = ee::FileHelper::GetFilenameAddTag(filepath, m_filetag, "json");
-	m_curr_filename = fixed;
+	ee::EditedFileStack::Instance()->SetBottom(fixed);
 	m_task->Store(fixed.c_str());
 }
 

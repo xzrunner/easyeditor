@@ -2,6 +2,7 @@
 #include "TranslateSpriteAOP.h"
 #include "SpriteSelection.h"
 #include "panel_msg.h"
+#include "EditSprMsg.h"
 
 namespace ee
 {
@@ -29,10 +30,18 @@ void TranslateSpriteState::OnMousePress(const sm::vec2& pos)
 void TranslateSpriteState::OnMouseRelease(const sm::vec2& pos)
 {
 	m_last_pos.MakeInvalid();
-	if (m_dirty) {
-		m_dirty = false;
-		AtomicOP* aop = new TranslateSpriteAOP(*m_selection, pos - m_first_pos);
+	if (!m_dirty) {
+		return;
+	}
+
+	m_dirty = false;
+
+	if (m_selection) {
+		sm::vec2 offset = pos - m_first_pos;
+		AtomicOP* aop = new TranslateSpriteAOP(*m_selection, offset);
 		EditAddRecordSJ::Instance()->Add(aop);
+
+		EditSprMsg::Translate(*m_selection, offset);
 	}
 }
 
@@ -71,9 +80,15 @@ bool TranslateSpriteState::OnDirectionKeyDown(int type)
 		break;
 	}
 
-	if (offset.x != 0 || offset.y != 0) {
-		Translate(offset);
+	if (offset.x == 0 && offset.y == 0) {
+		return false;
+	}
+
+	Translate(offset);
+
+	if (m_selection) {
 		EditAddRecordSJ::Instance()->Add(new TranslateSpriteAOP(*m_selection, offset));
+		EditSprMsg::Translate(*m_selection, offset);
 	}
 
 	return true;

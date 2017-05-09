@@ -66,6 +66,9 @@ public:
 	// file
 	bool spr_output_compress;
 
+	// pack id dir
+	std::string pack_id_dir;
+
 public:
 	SettingData();
 

@@ -3,6 +3,7 @@
 #include "Math2D.h"
 #include "SpriteSelection.h"
 #include "panel_msg.h"
+#include "EditSprMsg.h"
 
 #include <SM_Calc.h>
 
@@ -26,10 +27,14 @@ RotateSpriteState::~RotateSpriteState()
 
 void RotateSpriteState::OnMouseRelease(const sm::vec2& pos)
 {
-	if (pos != m_first_pos) {
-		AtomicOP* aop = new RotateSpriteAOP(*m_selection, m_angle);
-		EditAddRecordSJ::Instance()->Add(aop);
+	if (pos == m_first_pos || !m_selection) {
+		return;
 	}
+
+	AtomicOP* aop = new RotateSpriteAOP(*m_selection, m_angle);
+	EditAddRecordSJ::Instance()->Add(aop);
+
+	EditSprMsg::Rotate(*m_selection, m_angle);
 }
 
 bool RotateSpriteState::OnMouseDrag(const sm::vec2& pos)

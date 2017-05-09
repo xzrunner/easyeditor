@@ -746,6 +746,26 @@
 				</File>
 			</Filter>
 		</Filter>
+		<Filter
+			Name="msg"
+			>
+			<File
+				RelativePath="..\..\..\source\edit\msg\EditSprMsg.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\EditSprMsg.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\source\edit\op\MsgHelper.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\MsgHelper.h"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>
