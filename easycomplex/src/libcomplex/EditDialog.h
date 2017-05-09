@@ -19,6 +19,7 @@ class EditDialog : public wxDialog
 public:
 	EditDialog(wxWindow* parent, Symbol* sym, 
 		wxGLContext* glctx, ee::CrossGuides* guides = NULL);
+	virtual ~EditDialog();
 
 private:
 	void InitLayout(wxGLContext* glctx, ee::CrossGuides* guides);

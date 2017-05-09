@@ -13,6 +13,7 @@
 #include <ee/Sprite.h>
 #include <ee/SymbolType.h>
 #include <ee/FileHelper.h>
+#include <ee/EditedFileStack.h>
 
 #include <sprite2/S2_Sprite.h>
 
@@ -36,6 +37,13 @@ EditDialog::EditDialog(wxWindow* parent, Symbol* sym,
 	LoadSymbolInfo();
 
 	m_property->SetDefaultPropertySetting();
+
+	ee::EditedFileStack::Instance()->Push(sym->GetFilepath());
+}
+
+EditDialog::~EditDialog()
+{
+	ee::EditedFileStack::Instance()->Pop();
 }
 
 void EditDialog::InitLayout(wxGLContext* glctx, ee::CrossGuides* guides)
