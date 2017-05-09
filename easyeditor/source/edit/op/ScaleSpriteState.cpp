@@ -6,6 +6,7 @@
 #include "ScaleSpriteAOP.h"
 #include "panel_msg.h"
 #include "Math2D.h"
+#include "EditSprMsg.h"
 
 #include <SM_Calc.h>
 
@@ -35,6 +36,8 @@ void ScaleSpriteState::OnMouseRelease(const sm::vec2& pos)
 	comb->Insert(new ScaleSpriteAOP(m_spr, m_spr->GetScale(), m_first_scale));
 
 	EditAddRecordSJ::Instance()->Add(comb);
+
+	EditSprMsg::SetScale(m_spr, m_spr->GetPosition(), m_spr->GetScale());
 }
 
 bool ScaleSpriteState::OnMouseDrag(const sm::vec2& pos)

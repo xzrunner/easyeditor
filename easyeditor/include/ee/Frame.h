@@ -5,8 +5,6 @@
 
 #include <wx/wx.h>
 
-class wxSocketClient;
-
 namespace ee
 {
 
@@ -37,7 +35,9 @@ protected:
 	virtual void OnFullView(wxCommandEvent& event);
 	virtual void OnSettings(wxCommandEvent& event);
 	virtual void OnConnDefault(wxCommandEvent& event);
-	virtual void OnConnTest(wxCommandEvent& event);
+	virtual void OnConnPC(wxCommandEvent& event);
+	virtual void OnConnIOS(wxCommandEvent& event);
+	virtual void OnConnANDROID(wxCommandEvent& event);
 
 	virtual std::string GetFileFilter() const;
 
@@ -84,21 +84,20 @@ private:
 		ID_FULL_VIEWS		= 1000,
 		ID_SETTINGS,
 		ID_CONN_DEFAULT,
-		ID_CONN_TEST,
+		ID_CONN_PC,
+		ID_CONN_IOS,
+		ID_CONN_ANDROID,
 
 		ID_RECENT_FILENAME	= 8000,
 	};
 
 protected:
 	std::string m_filetag;
-	mutable std::string m_curr_filename;
 
 private:
 	RecentFilesMenu* m_recent_menu;
 
 	SpecialConfig m_config;
-
-	wxSocketClient* m_sock;
 
 #ifdef _DEBUG
 	wxLogChain* m_log_chain;
