@@ -62,9 +62,8 @@ int PackEPNew::Run(int argc, char *argv[])
 	}
 
 	if (argc >= 12) {
-		esprpacker::PackIDMgr* ids_mgr = esprpacker::PackIDMgr::Instance();
-		ids_mgr->Init(argv[11], argv[10]);
-		ids_mgr->AddCurrPath(argv[12]);
+		ee::PackIDMgr::Instance()->Init(argv[11], argv[10]);
+		esprpacker::PackIDMgr::Instance()->AddCurrPath(argv[12]);
 	}
 
 	s2::SprTimer::Instance()->Init();

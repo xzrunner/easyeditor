@@ -2,22 +2,16 @@
 #include "PackNode.h"
 #include "typedef.h"
 
-#include <ee/std_functor.h>
-#include <ee/FileHelper.h>
-#include <ee/Exception.h>
-#include <ee/SymbolType.h>
-#include <ee/ImageData.h>
-#include <ee/Symbol.h>
-
+#include <simp/NodeID.h>
 #include <sprite2/SymType.h>
-#include <simp/NodeFactory.h>
 #include <gum/FilepathHelper.h>
 #include <gum/SymbolFile.h>
 
-#include <json/json.h>
+#include <ee/SymbolType.h>
+#include <ee/ImageData.h>
+#include <ee/Exception.h>
 
-#include <algorithm>
-#include <fstream>
+#include <assert.h>
 
 namespace esprpacker
 {
@@ -30,66 +24,6 @@ PackIDMgr::PackIDMgr()
 {
 }
 
-PackIDMgr::~PackIDMgr()
-{
-	for_each(m_pkgs.begin(), m_pkgs.end(), ee::DeletePointerFunctor<Package>());
-}
-
-void PackIDMgr::Init(const std::string& filepath, const std::string& platform)
-{
-	std::string fix = gum::FilepathHelper::Format(filepath);
-	m_dir = ee::FileHelper::GetFileDir(fix);
-	m_platform = platform;
-
-	if (!ee::FileHelper::IsFileExist(filepath)) {
-		return;
-	}
-
-	Json::Value val;
-	Json::Reader reader;
-	std::locale::global(std::locale(""));
-	std::ifstream fin(filepath.c_str());
-	std::locale::global(std::locale("C"));
-	reader.parse(fin, val);
-	fin.close();
-
-	m_pkgs.reserve(val.size());
-	for (int i = 0, n = val.size(); i < n; ++i)
-	{
-		const Json::Value& src = val[i];
-
-		Package* pkg = new Package;
-		
-		pkg->name = src["name"].asString();
-
-		pkg->path = src["path"].asString();
-		pkg->path = ee::FileHelper::GetAbsolutePath(m_dir, pkg->path);
-		pkg->path = ee::FileHelper::FormatFilepath(pkg->path);
-
-		pkg->id = src["pkg_id"].asInt();
-
-		pkg->img_cut = false;
-		if (src.isMember("img_cut")) {
-			pkg->img_cut = true;
-			pkg->cut_img = src["img_cut"]["img"].asString();
-			pkg->cut_json = src["img_cut"]["json"].asString();
-			pkg->cut_ori = src["img_cut"]["ori"].asString();
-		}
-
-		std::string name = pkg->name;
-		std::string::size_type pos = pkg->name.find('/');
-		if (pos != std::string::npos) {
-			name = name.substr(pos + 1);
-		}
-		std::string spr_id_file = GetSprIDFile(name);
-		if (ee::FileHelper::IsFileExist(spr_id_file)) {
-			InitSprsID(spr_id_file, pkg);
-		}
-
-		m_pkgs.push_back(pkg);
-	}
-}
-
 void PackIDMgr::AddCurrPath(const std::string& path)
 {
 	if (m_curr_pkg_id != -1) {
@@ -98,64 +32,9 @@ void PackIDMgr::AddCurrPath(const std::string& path)
 
 	std::string fix = gum::FilepathHelper::Format(path);
 	m_curr_paths.push_back(fix);
-
-	if (m_curr_pkg) {
-		return;
+	if (!m_curr_pkg) {
+		m_curr_pkg = ee::PackIDMgr::Instance()->QueryPkg(fix, true);
 	}
-
-	for (int i = 0, n = m_pkgs.size(); i < n; ++i) {
-		if (m_pkgs[i]->path.find(fix) != std::string::npos) {
-			m_curr_pkg = m_pkgs[i];
-			break;
-		}
-	}
-}
-
-void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id) const
-{
-	static int NEXT_NODE_ID = 0;
-	if (m_curr_pkg_id != -1)
-	{
-		pkg_id = m_curr_pkg_id;
-		node_id = NEXT_NODE_ID++;
-		return;
-	}
-	else if (IsCurrPkg(filepath)) 
-	{
-		assert(m_curr_pkg);
-		pkg_id = m_curr_pkg->id;
-		node_id = NEXT_NODE_ID++;
-		return;
-	}
-
-	Package* pkg = NULL;
-	for (int i = 0, n = m_pkgs.size(); i < n; ++i) {
-		if (filepath.find(m_pkgs[i]->path) != std::string::npos) {
-			pkg = m_pkgs[i];
-			break;
-		}
-	}
-
-	if (!pkg) 
-	{
-		const std::string default_sym = ee::ImageDataMgr::Instance()->GetDefaultSym();
-		if (default_sym.empty()) {
-			throw ee::Exception("query pkg id fail: %s", filepath.c_str());
-		}
-		return QueryID(default_sym, pkg_id, node_id);
-	}
-
-	pkg_id = pkg->id;
-	
-	std::map<std::string, uint32_t>::iterator itr = pkg->sprs.find(filepath);
-	if (itr == pkg->sprs.end()) {
-		const std::string default_sym = ee::ImageDataMgr::Instance()->GetDefaultSym();
-		if (default_sym.empty()) {
-			throw ee::Exception("query spr id fail: %s", filepath.c_str());
-		}
-		return QueryID(default_sym, pkg_id, node_id);
-	}
-	node_id = simp::NodeID::GetNodeID(itr->second);
 }
 
 bool PackIDMgr::IsCurrPkg(const std::string& filepath) const
@@ -183,9 +62,44 @@ bool PackIDMgr::IsCurrPkg(const PackNode* node) const
 	return curr_pkg_id == node->GetPkgID();
 }
 
-std::string PackIDMgr::GetSprIDFile(const std::string& pkg_name) const
+void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id) const
 {
-	return m_dir + "\\spr" + "\\" + m_platform + "\\" + pkg_name + ".json";
+	static int NEXT_NODE_ID = 0;
+	if (m_curr_pkg_id != -1)
+	{
+		pkg_id = m_curr_pkg_id;
+		node_id = NEXT_NODE_ID++;
+		return;
+	}
+	else if (IsCurrPkg(filepath)) 
+	{
+		assert(m_curr_pkg);
+		pkg_id = m_curr_pkg->id;
+		node_id = NEXT_NODE_ID++;
+		return;
+	}
+
+	const ee::PackIDMgr::Package* pkg = ee::PackIDMgr::Instance()->QueryPkg(filepath, false);
+	if (!pkg) 
+	{
+		const std::string default_sym = ee::ImageDataMgr::Instance()->GetDefaultSym();
+		if (default_sym.empty()) {
+			throw ee::Exception("query pkg id fail: %s", filepath.c_str());
+		}
+		return QueryID(default_sym, pkg_id, node_id);
+	}
+
+	pkg_id = pkg->id;
+
+	std::map<std::string, uint32_t>::const_iterator itr = pkg->sprs.find(filepath);
+	if (itr == pkg->sprs.end()) {
+		const std::string default_sym = ee::ImageDataMgr::Instance()->GetDefaultSym();
+		if (default_sym.empty()) {
+			throw ee::Exception("query spr id fail: %s", filepath.c_str());
+		}
+		return QueryID(default_sym, pkg_id, node_id);
+	}
+	node_id = simp::NodeID::GetNodeID(itr->second);
 }
 
 void PackIDMgr::GetCurrImgCutPath(std::string& img, std::string& json, std::string& ori) const
@@ -197,36 +111,6 @@ void PackIDMgr::GetCurrImgCutPath(std::string& img, std::string& json, std::stri
 	img = m_curr_pkg->cut_img;
 	json = m_curr_pkg->cut_json;
 	ori = m_curr_pkg->cut_ori;
-}
-
-void PackIDMgr::InitSprsID(const std::string& filepath, Package* pkg) const
-{
-	Json::Value val;
-	Json::Reader reader;
-	std::locale::global(std::locale(""));
-	std::ifstream fin(filepath.c_str());
-	std::locale::global(std::locale("C"));
-	reader.parse(fin, val);
-	fin.close();
-
-	for (int i = 0, n = val.size(); i < n; ++i) 
-	{
-		const Json::Value& spr_val = val[i];
-		std::string filepath = spr_val["file"].asString();
-
-		filepath = gum::FilepathHelper::Absolute(pkg->path, filepath);
-		if (!gum::FilepathHelper::Exists(filepath)) {
-			continue;
-		}
-		filepath = gum::FilepathHelper::Format(filepath);
-		uint32_t id = spr_val["id"].asUInt();
-
-		if (pkg->sprs.find(filepath) != pkg->sprs.end()) {
-			throw ee::Exception("PackIDMgr::InitSprsID: dup filepath %s", filepath.c_str());
-		}
-
-		pkg->sprs.insert(std::make_pair(filepath, id));
-	}
 }
 
 }
