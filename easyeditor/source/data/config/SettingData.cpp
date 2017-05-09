@@ -110,6 +110,10 @@ void SettingData::LoadFromFile(const Json::Value& value)
 	if (!value["spr_output_compress"].isNull()) {
 		spr_output_compress = value["spr_output_compress"].asBool();
 	}
+
+	if (!value["pack_id_dir"].isNull()) {
+		pack_id_dir = value["pack_id_dir"].asString();
+	}
 }
 
 }
