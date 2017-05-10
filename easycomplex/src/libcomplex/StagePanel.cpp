@@ -78,10 +78,15 @@ bool StagePanel::UpdateStage()
 	for (int i = 0, n = children.size(); i < n; ++i) 
 	{
 		s2::Sprite* child = children[i];
+		bool old_inherit_update = child->IsInheritUpdate();
+		child->SetInheritUpdate(true);
+
 		up.SetActor(child->QueryActor(NULL));
 		if (children[i]->Update(up)) {
 			dirty = true;
 		}
+
+		child->SetInheritUpdate(old_inherit_update);
 	}
 	return dirty;
 }

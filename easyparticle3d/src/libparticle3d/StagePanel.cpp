@@ -32,8 +32,15 @@ bool StagePanel::UpdateStage()
 {
 	std::vector<ee::Sprite*> sprs;
 	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
-	for (int i = 0, n = sprs.size(); i < n; ++i) {
+	for (int i = 0, n = sprs.size(); i < n; ++i) 
+	{
+		s2::Sprite* child = sprs[i];
+		bool old_inherit_update = child->IsInheritUpdate();
+		child->SetInheritUpdate(true);
+
 		sprs[i]->Update(s2::UpdateParams());
+
+		child->SetInheritUpdate(old_inherit_update);
 	}
 
 	if (m_ps) {
