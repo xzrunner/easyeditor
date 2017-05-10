@@ -38,7 +38,9 @@ std::string EditedFileStack::GetBottom() const
 
 void EditedFileStack::SetBottom(const std::string& filepath)
 {
-	if (!m_files.empty()) {
+	if (m_files.empty()) {
+		m_files.push_back(filepath);
+	} else {
 		m_files[0] = filepath;
 	}
 }
