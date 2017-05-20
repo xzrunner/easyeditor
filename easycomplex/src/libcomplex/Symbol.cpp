@@ -230,9 +230,10 @@ bool Symbol::LoadResources()
 	m_origin_names.clear();
 	const std::vector<s2::Sprite*>& children = GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
-		const std::string& name = children[i]->GetName();
+		std::string name;
+		s2::SprNameMap::Instance()->IDToStr(children[i]->GetName(), name);
 		if (!name.empty() && name[0] != '_') {
-			m_origin_names.push_back(children[i]->GetName());
+			m_origin_names.push_back(name);
 		}
 	}
 

@@ -248,7 +248,9 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	FileNameProperty* name_prop = dynamic_cast<FileNameProperty*>(pg->GetProperty(wxT("FileName")));
 	name_prop->SetFilepath(sym->GetFilepath());
 
-	pg->GetProperty(wxT("Name"))->SetValue(spr->GetName());
+	std::string name;
+	s2::SprNameMap::Instance()->IDToStr(spr->GetName(), name);
+	pg->GetProperty(wxT("Name"))->SetValue(name);
 	pg->GetProperty(wxT("Tag"))->SetValue(spr->GetTag());
 
 	SprTagProperty* tag_prop = dynamic_cast<SprTagProperty*>(pg->GetProperty(wxT("Tag")));
@@ -337,7 +339,9 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	pg->Append(new wxPropertyCategory("BASE", wxPG_LABEL));
 
-	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, spr->GetName()));
+	std::string name;
+	s2::SprNameMap::Instance()->IDToStr(spr->GetName(), name);
+	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, name));
 
 	SprTagProperty* tag_prop = new SprTagProperty("Tag", wxPG_LABEL, spr->GetTag());
 	tag_prop->SetParent(pg);

@@ -149,7 +149,8 @@ void FileStorer::CheckDuplicateName(const Symbol* sym)
 	for (int i = 0, n = children.size(); i < n; ++i) 
 	{
 		ee::Sprite* spr = dynamic_cast<ee::Sprite*>(children[i]);
-		std::string name = spr->GetName();
+		std::string name;
+		s2::SprNameMap::Instance()->IDToStr(spr->GetName(), name);
 		if (name.empty() || name[0] == '_') {
 			continue;
 		}
@@ -169,9 +170,10 @@ void FileStorer::CheckNameDiff(const Symbol* sym)
 	std::set<std::string> curr_names;
 	const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
-		const std::string& name = children[i]->GetName();
+		std::string name;
+		s2::SprNameMap::Instance()->IDToStr(children[i]->GetName(), name);
 		if (!name.empty() && name[0] != '_') {
-			curr_names.insert(children[i]->GetName());
+			curr_names.insert(name);
 		}
 	}
 
@@ -202,7 +204,9 @@ void FileStorer::CheckAnchorName(const Symbol* sym)
 	for (int i = 0, n = children.size(); i < n; ++i) 
 	{
 		ee::Sprite* spr = dynamic_cast<ee::Sprite*>(children[i]);
-		if (spr->IsAnchor() && spr->GetName().compare(0, strlen("_sprite"), "_sprite") == 0) 
+		std::string name;
+		s2::SprNameMap::Instance()->IDToStr(spr->GetName(), name);
+		if (spr->IsAnchor() && name.compare(0, strlen("_sprite"), "_sprite") == 0) 
 		{
 			std::string filepath = sym->GetFilepath();
 			const ee::Symbol* ee_sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());

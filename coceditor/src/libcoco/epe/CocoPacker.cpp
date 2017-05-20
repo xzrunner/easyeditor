@@ -532,7 +532,8 @@ void CocoPacker::resolveSpriteForComponent(const ee::Sprite* spr, std::vector<in
 
 	ids.push_back(id);
 
-	const std::string& name = spr->GetName();
+	std::string name;
+	s2::SprNameMap::Instance()->IDToStr(spr->GetName(), name);
 
 	std::map<int, std::vector<std::string> >::iterator itr = unique.find(id);
 	if (unique.find(id) == unique.end())

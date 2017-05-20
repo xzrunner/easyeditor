@@ -42,8 +42,11 @@ void GroupTreeIO::Load(const Json::Value& value)
 				if (!node.spr.empty()) {
 					Sprite* spr = NULL;
 
-					for (int i = 0, n = sprs.size(); i < n; ++i) {
-						if (node.name == sprs[i]->GetName()) {
+					for (int i = 0, n = sprs.size(); i < n; ++i) 
+					{
+						std::string name;
+						s2::SprNameMap::Instance()->IDToStr(sprs[i]->GetName(), name);
+						if (node.name == name) {
 							spr = sprs[i];
 							break;
 						}

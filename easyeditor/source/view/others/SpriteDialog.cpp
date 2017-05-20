@@ -19,7 +19,9 @@ void SpriteDialog::InitLayout()
 		wxSizer* sz = new wxBoxSizer(wxHORIZONTAL);
 		sz->Add(new wxStaticText(this, wxID_ANY, "name"), 0, wxLEFT | wxRIGHT, 5);
 
-		m_name_ctrl = new wxTextCtrl(this, wxID_ANY, m_spr->GetName(), wxDefaultPosition, wxSize(400, -1));
+		std::string name;
+		s2::SprNameMap::Instance()->IDToStr(m_spr->GetName(), name);
+		m_name_ctrl = new wxTextCtrl(this, wxID_ANY, name, wxDefaultPosition, wxSize(400, -1));
 		sz->Add(m_name_ctrl, 0, wxLEFT | wxRIGHT, 5);
 
 		sizer->Add(sz);

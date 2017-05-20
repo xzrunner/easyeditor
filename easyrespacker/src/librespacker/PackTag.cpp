@@ -29,7 +29,8 @@ void PackTag::AddTask(const std::string& filepath, int index, const ee::Sprite* 
 
 	task->index = index;
 
-	const std::string& name = spr->GetName();
+	std::string name;
+	s2::SprNameMap::Instance()->IDToStr(spr->GetName(), name);
 	if (!name.empty() && name[0] != '_') {
 		task->name = name;
 	}

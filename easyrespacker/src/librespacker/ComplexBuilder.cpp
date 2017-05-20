@@ -156,7 +156,9 @@ IPackNode* ComplexBuilder::LoadAnchor(const ecomplex::Symbol* sym)
 	assert(children.size() == 1);
 
 	ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[0]);
-	if (!Utility::IsNameValid(child->GetName())) {
+	std::string name;
+	s2::SprNameMap::Instance()->IDToStr(child->GetName(), name);
+	if (!Utility::IsNameValid(name)) {
 		return NULL;
 	}
 

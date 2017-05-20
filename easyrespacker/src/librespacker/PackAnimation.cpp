@@ -70,9 +70,11 @@ bool PackAnimation::CreateFramePart(const ee::Sprite* spr, Frame& frame)
 	const IPackNode* node = PackNodeFactory::Instance()->Create(spr);
 
 	PackAnimation::Part part;
-	std::string name = "";
-	if (Utility::IsNameValid(spr->GetName())) {
-		name = spr->GetName();
+
+	std::string name;
+	s2::SprNameMap::Instance()->IDToStr(spr->GetName(), name);
+	if (Utility::IsNameValid(name)) {
+		name = name;
 	}
 
 	bool force_mat = false;

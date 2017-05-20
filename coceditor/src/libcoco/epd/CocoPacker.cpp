@@ -1582,7 +1582,8 @@ void CocoPacker::ParserSpriteForComponent(const ee::Sprite* spr, std::vector<int
 
 	ids.push_back(id);
 
-	const std::string& name = spr->GetName();
+	std::string name;
+	s2::SprNameMap::Instance()->IDToStr(spr->GetName(), name);
 
 	std::map<int, std::vector<std::string> >::iterator itr = unique.find(id);
 	if (unique.find(id) == unique.end())
@@ -1696,7 +1697,8 @@ void CocoPacker::ParserSpriteForFrame(const ee::Sprite* spr, int index,
 {
 	int id = ids[index];
 	int cindex = -1;
-	const std::string& name = spr->GetName();
+	std::string name;
+	s2::SprNameMap::Instance()->IDToStr(spr->GetName(), name);
 	for (size_t i = 0, n = order.size(); i < n; ++i)
 		if (id == order[i].first && name == order[i].second)
 		{
@@ -1721,7 +1723,8 @@ void CocoPacker::ParserSpriteForFrame(const ee::Sprite* spr,
 									  const std::vector<std::pair<int, std::string> >& order,
 									  const std::map<int, int>& map_id2idx)
 {
-	const std::string& name = spr->GetName();
+	std::string name;
+	s2::SprNameMap::Instance()->IDToStr(spr->GetName(), name);
 	if (const eicon::Sprite* icon = dynamic_cast<const eicon::Sprite*>(spr)) 
 	{
 		int id = QueryIconID(icon);

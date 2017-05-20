@@ -33,7 +33,8 @@ void DrawSpritesVisitor::Visit(Sprite* spr, bool& next)
 	SpriteRenderer::Instance()->Draw(spr, params);
 
 	SettingData& cfg = Config::Instance()->GetSettings();
-	const std::string& name = spr->GetName();
+	std::string name;
+	s2::SprNameMap::Instance()->IDToStr(spr->GetName(), name);
 	if (cfg.visible_node_name && !name.empty() && name[0] != '_') 
 	{
 		S2_MAT t = spr->GetLocalMat();

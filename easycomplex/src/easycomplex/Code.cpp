@@ -51,11 +51,14 @@ void Code::ResolveUI(const Symbol& sym)
 			for (int i = 0, n = children.size(); i < n; ++i)
 			{
 				ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
-
-				const std::string& cname = child->GetName();
-				if (cname.empty() || cname[0] == '_') {
+				
+				int name_id = child->GetName();
+				if (name_id == -1 || s2::SprNameMap::IsTmpName(name_id)) {
 					continue;
 				}
+
+				std::string cname;
+				s2::SprNameMap::Instance()->IDToStr(child->GetName(), cname);
 
 				std::string path, name;
 				if (parent.path.empty()) {
@@ -112,11 +115,11 @@ void Code::ResolveText(const Symbol& sym)
  		{
 			ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
 
-			const std::string& name = child->GetName();
- 			if (name.empty() || name[0] == '_') {
- 				continue;
- 			}
- 
+			int name_id = child->GetName();
+			if (name_id == -1 || s2::SprNameMap::IsTmpName(name_id)) {
+				continue;
+			}
+			 
  			if (ee::FontBlankSprite* s = dynamic_cast<ee::FontBlankSprite*>(child))
  			{
 				std::string content = s->GetTextContext();
