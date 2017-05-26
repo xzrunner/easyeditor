@@ -97,7 +97,8 @@ PackTrans::PackTrans(const s2::Sprite& spr, bool force_name)
 
 	// name
 
-	std::string name = spr.GetName();
+	std::string name;
+	s2::SprNameMap::Instance()->IDToStr(spr.GetName(), name);
 	if (!name.empty()) {
 		if (name[0] == '_') {
 			if (force_name) {
