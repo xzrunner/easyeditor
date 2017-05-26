@@ -51,6 +51,13 @@ int RectCutWithJson::Run(int argc, char *argv[])
 	if (!check_number(this, argc, 3)) return -1;
 	if (!check_folder(argv[2])) return -1;
 
+	if (argc > 4) 
+	{
+		wxFileName filename(argv[4]);
+		filename.Normalize();
+		m_ignore_dir = filename.GetFullPath();
+	}
+
 	gum::Config* cfg = gum::Config::Instance();
 	bool old = cfg->GetPreMulAlpha();
 	cfg->SetPreMulAlpha(false);
@@ -74,6 +81,9 @@ void RectCutWithJson::Trigger(const std::string& src_dir, const std::string& dst
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath();
+		if (IsIgnored(filepath)) {
+			continue;
+		}
 
 		std::cout << i << " / " << n << " : " << filepath << "\n";
 		int type = ee::SymbolFile::Instance()->Type(filepath);
@@ -356,6 +366,9 @@ void RectCutWithJson::FixImageFilepath(const std::string& src_dir, const std::st
 {
 	std::string filepath = val[key].asString();
 	filepath = ee::FileHelper::GetAbsolutePath(file_dir, filepath);
+	if (IsIgnored(filepath)) {
+		return;
+	}
 	if (ee::FileHelper::IsFileExist(filepath)) {
 		FixImageFilepathInPkg(src_dir, dst_dir, file_dir, val, key);
 	} else {
@@ -473,6 +486,11 @@ void RectCutWithJson::FixGroup(const std::string& src_dir, const std::string& ds
 	for (int i = 0, n = val["group"].size(); i < n; ++i) {
 		FixFilepath(src_dir, dst_dir, file_dir, val["group"][i], "filepath");
 	}
+}
+
+bool RectCutWithJson::IsIgnored(const std::string& filepath) const
+{
+	return !m_ignore_dir.empty() && filepath.find(m_ignore_dir) != std::string::npos;
 }
 
 }

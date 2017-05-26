@@ -52,6 +52,11 @@ private:
 	void FixGroup(const std::string& src_dir, const std::string& dst_dir, 
 		const std::string& file_dir, Json::Value& val) const;
 
+	bool IsIgnored(const std::string& filepath) const;
+
+private:
+	std::string m_ignore_dir;
+
 }; // RectCutWithJson
 
 }
