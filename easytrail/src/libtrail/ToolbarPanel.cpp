@@ -14,6 +14,8 @@
 #include <ee/SymbolMgr.h>
 #include <ee/Symbol.h>
 
+#include <sprite2/TrailEmitterCfg.h>
+
 #include <mt_2d.h>
 
 namespace etrail
@@ -56,7 +58,7 @@ void ToolbarPanel::Load(const Json::Value& val, const std::string& dir)
 
 	int mode = val["mode"].asInt();
 	m_mode_choice->SetSelection(mode);
-	t2d_emitter_cfg* cfg = m_stage->m_trail->GetConfig();
+	t2d_emitter_cfg* cfg = const_cast<t2d_emitter_cfg*>(m_stage->m_trail->GetConfig()->GetImpl());
 	cfg->mode_type = mode;
 
 	int idx = 0;
@@ -95,7 +97,7 @@ void ToolbarPanel::InitTrail()
 {
 	Clear();
 
-	t2d_emitter_cfg* cfg = MTConfigMgr::Instance()->GetDefaultConfig();
+	s2::TrailEmitterCfg* cfg = MTConfigMgr::Instance()->GetDefaultConfig();
 	MotionTrail* mt = new MotionTrail(cfg);
 	//	mt->Start();
 	cu::RefCountObjAssign<MotionTrail>(m_stage->m_trail, mt);
@@ -222,7 +224,7 @@ void ToolbarPanel::OnChangeMode(wxCommandEvent& event)
 {
 	Clear();
 
-	t2d_emitter_cfg* cfg = m_stage->m_trail->GetConfig();
+	t2d_emitter_cfg* cfg = const_cast<t2d_emitter_cfg*>(m_stage->m_trail->GetConfig()->GetImpl());
 	int idx = m_mode_choice->GetSelection();
 	if (idx == 0) {
 		cfg->mode_type = T2D_MODE_IMAGE;
@@ -239,7 +241,7 @@ ComponentPanel* ToolbarPanel::OnAddChild(s2::Symbol* sym)
 	}
 	t2d_symbol* mt = m_stage->m_trail->AddSymbol(sym);
 	ComponentPanel* cp = NULL;
-	t2d_emitter_cfg* cfg = m_stage->m_trail->GetConfig();
+	const t2d_emitter_cfg* cfg = m_stage->m_trail->GetConfig()->GetImpl();
 	if (cfg->mode_type == T2D_MODE_IMAGE) {
 		cp = new ImageCompPanel(this, mt, this);	
 	} else {

@@ -9,6 +9,7 @@ namespace lua = ebuilder::lua;
 
 #include <simp/NodeTrail.h>
 #include <simp/simp_types.h>
+#include <sprite2/TrailEmitterCfg.h>
 #include <gum/trans_color.h>
 
 namespace esprpacker
@@ -122,7 +123,7 @@ void PackTrail::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scal
 
 void PackTrail::Init(const etrail::Symbol* sym)
 {
-	const t2d_emitter_cfg* cfg = sym->GetEmitterCfg();
+	const t2d_emitter_cfg* cfg = sym->GetEmitterCfg()->GetImpl();
 
 	m_mode			= cfg->mode_type;
 

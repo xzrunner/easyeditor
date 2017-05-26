@@ -3,6 +3,8 @@
 
 #include <mt_2d.h>
 #include <sprite2/Trail.h>
+#include <sprite2/TrailEmitterCfg.h>
+#include <sprite2/TrailEmitter.h>
 #include <gum/FilepathHelper.h>
 
 #include <json/json.h>
@@ -29,9 +31,9 @@ bool Symbol::LoadResources()
 	}
 
 	m_et_cfg = MTConfigMgr::Instance()->GetConfig(m_filepath);
-	m_et = t2d_emitter_create(m_et_cfg);
-
-	t2d_emitter_start(m_et);
+	m_et = s2::TrailEmitterPool::Instance()->Pop();
+	m_et->CreateEmitter(m_et_cfg);
+	m_et->Start();
 
 	Json::Value value;
 	Json::Reader reader;

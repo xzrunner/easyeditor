@@ -4,7 +4,7 @@
 #include <string>
 #include <map>
 
-struct t2d_emitter_cfg;
+namespace s2 { class TrailEmitterCfg; }
 
 namespace etrail
 {
@@ -12,11 +12,11 @@ namespace etrail
 class MTConfigMgr
 {
 public:
-	t2d_emitter_cfg* GetDefaultConfig();
+	s2::TrailEmitterCfg* GetDefaultConfig();
 
-	t2d_emitter_cfg* GetConfig(const std::string& filepath);
+	s2::TrailEmitterCfg* GetConfig(const std::string& filepath);
 
-	std::string GetFilepath(const t2d_emitter_cfg* cfg);
+	std::string GetFilepath(const s2::TrailEmitterCfg* cfg);
 
 public:
 	static MTConfigMgr* Instance();
@@ -25,7 +25,7 @@ private:
 	MTConfigMgr();
 
 private:
-	std::map<std::string, t2d_emitter_cfg*> m_map2cfg;
+	std::map<std::string, s2::TrailEmitterCfg*> m_map2cfg;
 
 	static MTConfigMgr* m_instance;
 

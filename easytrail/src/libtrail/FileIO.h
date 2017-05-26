@@ -4,8 +4,7 @@
 #include <string>
 
 namespace ee { class LibraryPanel; }
-
-struct t2d_emitter_cfg;
+namespace s2 { class TrailEmitterCfg; }
 
 namespace etrail
 {
@@ -22,7 +21,7 @@ public:
 		ToolbarPanel* toolbar, ee::LibraryPanel* library);
 
 	static MotionTrail* LoadMT(const std::string& filepath);
-	static t2d_emitter_cfg* LoadMTConfig(const std::string& filepath);
+	static s2::TrailEmitterCfg* LoadMTConfig(const std::string& filepath);
 
 }; // FileIO
 

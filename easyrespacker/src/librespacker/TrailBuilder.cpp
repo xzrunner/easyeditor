@@ -8,6 +8,7 @@
 
 #include <easytrail.h>
 
+#include <sprite2/TrailEmitterCfg.h>
 #include <gum/trans_color.h>
 #include <mt_2d.h>
 
@@ -62,7 +63,7 @@ const IPackNode* TrailBuilder::Create(const etrail::Symbol* sym)
 
 void TrailBuilder::Load(const etrail::Symbol* sym, PackTrail* trail)
 {
-	const t2d_emitter_cfg* cfg = sym->GetEmitterCfg();
+	const t2d_emitter_cfg* cfg = sym->GetEmitterCfg()->GetImpl();
 
 	trail->mode = cfg->mode_type;
 

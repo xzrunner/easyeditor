@@ -9,11 +9,10 @@
 
 #include <string>
 
-struct t2d_emitter_cfg;
-struct t2d_emitter;
-struct t2d_symbol;
+namespace s2 { class Symbol; class TrailEmitterCfg; class TrailEmitter; }
 
-namespace s2 { class Symbol; }
+struct t2d_symbol;
+struct t2d_emitter_cfg;
 
 namespace etrail
 {
@@ -21,7 +20,8 @@ namespace etrail
 class MotionTrail : public cu::RefCountObj, public ee::UICallback
 {
 public:
-	MotionTrail(t2d_emitter_cfg* cfg);
+	MotionTrail(s2::TrailEmitterCfg* cfg);
+	virtual ~MotionTrail();
 
 	//
 	// UICallback interface
@@ -42,10 +42,10 @@ public:
 	void DelAllSymbol();
 	t2d_symbol* GetSymbol(int idx);
 
-	t2d_emitter_cfg* GetConfig();
+	const s2::TrailEmitterCfg* GetConfig();
 
 private:
-	void Init(const t2d_emitter_cfg* cfg);
+	void Init(const s2::TrailEmitterCfg* cfg);
 
 public:
 	std::string name;
@@ -53,7 +53,7 @@ public:
 private:
 	mutable s2::TrailRenderParams m_rp;
 
-	t2d_emitter* m_spr;
+	s2::TrailEmitter* m_et;
 
 }; // MotionTrail
 

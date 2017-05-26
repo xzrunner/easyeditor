@@ -1,6 +1,10 @@
 #include "MotionTrail.h"
 #include "mt_config.h"
 
+#include <sprite2/TrailEmitter.h>
+#include <sprite2/TrailEmitterCfg.h>
+#include <sprite2/S2_Symbol.h>
+
 #include <mt_2d.h>
 
 #include <assert.h>
@@ -8,17 +12,27 @@
 namespace etrail
 {
 
-MotionTrail::MotionTrail(t2d_emitter_cfg* cfg)
+MotionTrail::MotionTrail(s2::TrailEmitterCfg* cfg)
+	: m_et(NULL)
 {
 	s2::Trail::Instance();
 
 	Init(cfg);
 }
 
+MotionTrail::~MotionTrail()
+{
+	if (m_et) {
+		m_et->RemoveReference();
+	}
+}
+
 void MotionTrail::SetValue(int key, const ee::UICallback::Data& data)
 {
-	t2d_emitter_cfg* cfg = const_cast<t2d_emitter_cfg*>(m_spr->cfg);
-
+	if (!m_et) {
+		return;
+	}
+	t2d_emitter_cfg* cfg = const_cast<t2d_emitter_cfg*>(m_et->GetEmitterCfg()->GetImpl());
 	switch (key)
 	{
 	case MT_COUNT:
@@ -42,23 +56,27 @@ void MotionTrail::SetValue(int key, const ee::UICallback::Data& data)
 
 void MotionTrail::GetValue(int key, ee::UICallback::Data& data)
 {
+	if (!m_et) {
+		return;
+	}
+	t2d_emitter_cfg* cfg = const_cast<t2d_emitter_cfg*>(m_et->GetEmitterCfg()->GetImpl());
 	switch (key)
 	{
 	case MT_COUNT:
-		data.val0 = static_cast<float>(m_spr->cfg->count);
+		data.val0 = static_cast<float>(cfg->count);
 		break;
 	case MT_LIFETIME_BEGIN:
-		if (m_spr->cfg->life_begin == FLT_MAX) {
+		if (cfg->life_begin == FLT_MAX) {
 			data.val0 = -1;
 		} else {
-			data.val0 = m_spr->cfg->life_begin * 1000;
+			data.val0 = cfg->life_begin * 1000;
 		}
 		break;
 	case MT_LIFETIME_OFFSET:
-		data.val0 = m_spr->cfg->life_offset * 1000;
+		data.val0 = cfg->life_offset * 1000;
 		break;
 	case MT_FADEOUT_TIME:
-		data.val0 = m_spr->cfg->fadeout_time * 1000;
+		data.val0 = cfg->fadeout_time * 1000;
 		break;
 	}
 }
@@ -66,45 +84,51 @@ void MotionTrail::GetValue(int key, ee::UICallback::Data& data)
 void MotionTrail::Draw(const S2_MAT& mt) const
 {
 	m_rp.mat = const_cast<S2_MAT&>(mt);
-	t2d_emitter_draw(m_spr, &m_rp);
+	if (m_et) {
+		m_et->Draw(m_rp);
+	}
 }
 
 bool MotionTrail::Update(const sm::vec2& pos)
 {
-	float time = s2::Trail::Instance()->GetTime();
-	assert(m_spr->time <= time);
-	if (m_spr->time == time) {
+	if (!m_et) {
 		return false;
 	}
 
-	float dt = time - m_spr->time;
-	t2d_emitter_update(m_spr, dt, (sm_vec2*)(&pos));
-	m_spr->time = time;
-
-	return true;
+	float time = s2::Trail::Instance()->GetTime();
+	return m_et->Update(time, pos);
 }
 
 void MotionTrail::Start()
 {
-	t2d_emitter_start(m_spr);
+	if (m_et) {
+		m_et->Start();
+	}
 }
 
 void MotionTrail::Stop()
 {
-	t2d_emitter_stop(m_spr);
+	if (m_et) {
+		m_et->Stop();
+	}
 }
 
 void MotionTrail::Clear()
 {
-	t2d_emitter_clear(m_spr);
+	if (m_et) {
+		m_et->Clear();
+	}
 }
 
 t2d_symbol* MotionTrail::AddSymbol(s2::Symbol* sym)
 {
-	assert(m_spr->cfg->sym_count < MAX_COMPONENTS);
+	if (!m_et) {
+		return NULL;
+	}
+	t2d_emitter_cfg* cfg = const_cast<t2d_emitter_cfg*>(m_et->GetEmitterCfg()->GetImpl());
+	assert(cfg->sym_count < MAX_COMPONENTS);
 
-	t2d_emitter_cfg* cfg = const_cast<t2d_emitter_cfg*>(m_spr->cfg);
-	t2d_symbol& comp = m_spr->cfg->syms[cfg->sym_count++];
+	t2d_symbol& comp = cfg->syms[cfg->sym_count++];
 	memset(&comp, 0, SIZEOF_T2D_SYMBOL);
 
 	comp.col_begin.r = comp.col_begin.g = comp.col_begin.b = comp.col_begin.a = 255;
@@ -124,11 +148,14 @@ t2d_symbol* MotionTrail::AddSymbol(s2::Symbol* sym)
 
 void MotionTrail::DelSymbol(int idx)
 {
-	if (idx < 0 || idx >= m_spr->cfg->sym_count) {
+	if (!m_et) {
+		return;
+	}
+	t2d_emitter_cfg* cfg = const_cast<t2d_emitter_cfg*>(m_et->GetEmitterCfg()->GetImpl());
+	if (idx < 0 || idx >= cfg->sym_count) {
 		return;
 	}
 
-	t2d_emitter_cfg* cfg = const_cast<t2d_emitter_cfg*>(m_spr->cfg);
 	if (cfg->sym_count == 1) {
 		cfg->sym_count = 0;
 	} else {
@@ -143,29 +170,48 @@ void MotionTrail::DelSymbol(int idx)
 
 void MotionTrail::DelAllSymbol()
 {
-	const_cast<t2d_emitter_cfg*>(m_spr->cfg)->sym_count = 0;
+	if (!m_et) {
+		return;
+	}
+	t2d_emitter_cfg* cfg = const_cast<t2d_emitter_cfg*>(m_et->GetEmitterCfg()->GetImpl());
+	if (cfg->mode_type == T2D_MODE_IMAGE) {
+		for (int i = 0; i < cfg->sym_count; ++i) {
+			s2::Symbol* sym = (s2::Symbol*)(cfg->syms[i].mode.A.ud);
+			sym->RemoveReference();
+		}
+	}
+	cfg->sym_count = 0;
 }
 
 t2d_symbol* MotionTrail::GetSymbol(int idx)
 {
-	if (idx < 0 || idx >= m_spr->cfg->sym_count) {
+	if (!m_et) {
+		return NULL;
+	}
+	t2d_emitter_cfg* cfg = const_cast<t2d_emitter_cfg*>(m_et->GetEmitterCfg()->GetImpl());
+	if (idx < 0 || idx >= cfg->sym_count) {
 		return NULL;
 	} else {
-		return &m_spr->cfg->syms[idx];
+		return &cfg->syms[idx];
 	}
 }
 
-t2d_emitter_cfg* MotionTrail::GetConfig() 
+const s2::TrailEmitterCfg* MotionTrail::GetConfig() 
 { 
-	return const_cast<t2d_emitter_cfg*>(m_spr->cfg);
+	if (m_et) {
+		return m_et->GetEmitterCfg();
+	} else {
+		return NULL;
+	}
 }
 
-void MotionTrail::Init(const t2d_emitter_cfg* cfg)
+void MotionTrail::Init(const s2::TrailEmitterCfg* cfg)
 {
-	m_spr = t2d_emitter_create(cfg);
-	assert(m_spr);
-
-//	m_rp.trail = m_spr;
+	if (!m_et) {
+		m_et = s2::TrailEmitterPool::Instance()->Pop();
+	}
+	m_et->CreateEmitter(cfg);
+	m_et->Start();
 }
 
 }

@@ -11,6 +11,7 @@
 
 #include <mt_2d.h>
 #include <gum/TrailSymLoader.h>
+#include <sprite2/TrailEmitterCfg.h>
 
 #include <json/json.h>
 
@@ -53,11 +54,11 @@ void FileIO::Load(const std::string& filepath, MotionTrail* mt, ToolbarPanel* to
 
 MotionTrail* FileIO::LoadMT(const std::string& filepath)
 {
-	t2d_emitter_cfg* cfg = MTConfigMgr::Instance()->GetConfig(filepath);
+	s2::TrailEmitterCfg* cfg = MTConfigMgr::Instance()->GetConfig(filepath);
 	return new MotionTrail(cfg);
 }
 
-t2d_emitter_cfg* FileIO::LoadMTConfig(const std::string& filepath)
+s2::TrailEmitterCfg* FileIO::LoadMTConfig(const std::string& filepath)
 {
 	class Loader : public gum::TrailSymLoader
 	{
@@ -73,10 +74,9 @@ t2d_emitter_cfg* FileIO::LoadMTConfig(const std::string& filepath)
 	int sz = SIZEOF_T2D_EMITTER_CFG + SIZEOF_T2D_SYMBOL * MAX_COMPONENTS;
 	t2d_emitter_cfg* cfg = (t2d_emitter_cfg*) operator new(sz);
 	memset(cfg, 0, sz);
-
 	adapter.Store(cfg);
 
-	return cfg;
+	return new s2::TrailEmitterCfg(cfg);
 }
 
 }
