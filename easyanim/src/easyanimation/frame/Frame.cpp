@@ -19,6 +19,7 @@
 #include <ee/FetchAllVisitor.h>
 #include <ee/FileHelper.h>
 #include <ee/SymbolType.h>
+#include <ee/EditedFileStack.h>
 
 #include <easybuilder.h>
 
@@ -181,7 +182,7 @@ void Frame::SaveAsSingle(const std::string& filepath) const
 {
 	std::string tag = ee::SymbolFile::Instance()->Tag(s2::SYM_ANIMATION);
 	std::string full_path = ee::FileHelper::GetFilenameAddTag(filepath, tag, "json");
-	m_curr_filename = full_path;
+	ee::EditedFileStack::Instance()->SetBottom(full_path);
 
 	FileIO::StoreSingle(full_path);
 	ViewMgr::Instance()->stage->OnSave();
@@ -191,7 +192,7 @@ void Frame::SaveAsTemplate(const std::string& filepath) const
 {
 	std::string tag = ee::SymbolFile::Instance()->Tag(ee::SYM_ANIS);
 	std::string full_path = ee::FileHelper::GetFilenameAddTag(filepath, tag, "json");
-	m_curr_filename = full_path;
+	ee::EditedFileStack::Instance()->SetBottom(full_path);
 
 	FileIO::StoreTemplate(full_path);
 	ViewMgr::Instance()->stage->OnSave();

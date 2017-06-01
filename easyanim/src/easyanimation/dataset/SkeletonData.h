@@ -46,7 +46,7 @@ private:
 
 	void Translate(ee::Sprite* spr, const sm::vec2& offset);
 
-	static ee::Sprite* GetSpriteByName(const std::vector<ee::Sprite*>& sprs, const std::string& name);
+	static ee::Sprite* GetSpriteByName(const std::vector<ee::Sprite*>& sprs, int name);
 
 private:
 	std::map<ee::Sprite*, std::vector<Joint*> > m_map_joints;

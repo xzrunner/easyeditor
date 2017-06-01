@@ -358,7 +358,7 @@ void SkeletonData::Translate(ee::Sprite* spr, const sm::vec2& offset)
 		(*itr)->Translate(offset);
 }
 
-ee::Sprite* SkeletonData::GetSpriteByName(const std::vector<ee::Sprite*>& sprs, const std::string& name)
+ee::Sprite* SkeletonData::GetSpriteByName(const std::vector<ee::Sprite*>& sprs, int name)
 {
 	for (int i = 0, n = sprs.size(); i < n; ++i)
 		if (sprs[i]->GetName() == name)
