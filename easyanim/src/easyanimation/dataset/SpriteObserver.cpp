@@ -74,7 +74,31 @@ void SpriteObserver::OnSetAngle(ee::Sprite* spr, float angle)
 
 void SpriteObserver::OnSetScale(ee::Sprite* spr, const sm::vec2& scale)
 {
+	if (!m_enable) {
+		return;
+	}
 
+	std::map<ee::Sprite*, int>::iterator itr_sprite = m_map2frame.find(spr);
+	if (itr_sprite == m_map2frame.end())
+		return;
+
+	m_enable = false;
+
+	sm::vec2 d_scale = scale / spr->GetScale();
+	const std::map<int, KeyFrame*>& frames = m_layer.GetAllFrames();
+	std::map<int, KeyFrame*>::const_iterator itr_frame = frames.upper_bound(itr_sprite->second);
+	for ( ; itr_frame != frames.end(); ++itr_frame)
+	{
+		KeyFrame* frame = itr_frame->second;
+		const std::vector<ee::Sprite*>& sprs = frame->GetAllSprites();
+		for (int i = 0, n = sprs.size(); i < n; ++i)
+		{
+			if (sprs[i]->GetName() == spr->GetName())
+				sprs[i]->Scale(d_scale);
+		}
+	}
+
+	m_enable = true;
 }
 
 void SpriteObserver::OnSetShear(ee::Sprite* spr, const sm::vec2& shear)
