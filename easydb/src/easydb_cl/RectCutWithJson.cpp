@@ -355,7 +355,8 @@ void RectCutWithJson::FixFilepath(const std::string& src_dir, const std::string&
 	} else if (type == s2::SYM_MESH) {
 		if (val.isMember("mesh") && val["mesh"].isMember("base_symbol")) {
 			FixImageFilepath(src_dir, dst_dir, file_dir, val["mesh"], "base_symbol");
-		 }
+		}
+		FixJsonFilepath(src_dir, dst_dir, file_dir, val, key);
 	} else {
 		FixJsonFilepath(src_dir, dst_dir, file_dir, val, key);
 	}
