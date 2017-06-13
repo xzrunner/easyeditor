@@ -79,3 +79,6 @@
 [submodule "polymesh"]
 	path = polymesh
 	url = ssh://git@github.com:xzrunner/polymesh.git
+[submodule "glp/src/glp"]
+	path = glp/src/glp
+	url = ssh://git@tea.ejoy.com:3222/LR/glp.git
