@@ -47,7 +47,7 @@ void StageCanvas::OnDrawSprites() const
 	if (m_edited && m_bg) 
 	{
 		s2::RenderParams params;
-		params.mt = m_edited->GetLocalInvMat();
+		params.mt = m_edited->GetLocalMat().Inverted();
 		ee::SpriteRenderer::Instance()->Draw(m_bg, params);
 	}
 

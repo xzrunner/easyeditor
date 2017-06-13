@@ -28,10 +28,10 @@ Symbol::~Symbol()
 {
 }
 
-void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
+s2::RenderReturn Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	if (!spr) {
-		return;
+		return s2::RENDER_NO_DATA;
 	}
 
 	const ee::SettingData& setting = ee::Config::Instance()->GetSettings();
@@ -42,6 +42,8 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
  	if (setting.visible_label_text) {
 		s2::TextboxSymbol::Draw(params, spr);
  	}
+
+	return s2::RENDER_OK;
 }
 
 bool Symbol::LoadResources()

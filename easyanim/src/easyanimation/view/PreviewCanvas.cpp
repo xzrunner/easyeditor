@@ -15,11 +15,12 @@
 #include <sprite2/S2_RVG.h>
 #include <sprite2/Particle3d.h>
 #include <sprite2/CameraType.h>
+#include <sprite2/AnimTreeCurr.h>
 
 namespace eanim
 {
 
-PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, wxGLContext* glctx, s2::AnimCurr& curr)
+PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, wxGLContext* glctx, s2::AnimTreeCurr& curr)
 	: ee::CameraCanvas(stage_wnd, stage, s2::CAM_ORTHO2D, glctx)
 	, m_curr(curr)
 {

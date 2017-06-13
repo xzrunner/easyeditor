@@ -20,7 +20,7 @@ Symbol::~Symbol()
 	}
 }
 
-void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
+s2::RenderReturn Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	s2::RenderParams p = params;
 	if (spr) {
@@ -31,6 +31,7 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 		m_ps->Update(1.0f / 30);
 		m_ps->Draw(p.mt);
 	}
+	return s2::RENDER_OK;
 }
 
 sm::rect Symbol::GetBoundingImpl(const s2::Sprite* spr, const s2::Actor* actor, bool cache) const

@@ -62,13 +62,15 @@ s2::TrailEmitterCfg* FileIO::LoadMTConfig(const std::string& filepath)
 {
 	class Loader : public gum::TrailSymLoader
 	{
+	public:
+		Loader(bool flatten) : gum::TrailSymLoader(flatten) {}
 	protected:
 		virtual s2::Symbol* LoadSymbol(const std::string& filepath) const {
 			return ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 		}
 	}; // Loader
 
-	Loader adapter;
+	Loader adapter(false);
 	adapter.LoadJson(filepath);
 
 	int sz = SIZEOF_T2D_EMITTER_CFG + SIZEOF_T2D_SYMBOL * MAX_COMPONENTS;

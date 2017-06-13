@@ -29,7 +29,7 @@ Symbol::~Symbol()
 	Clear();
 }
 
-void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
+s2::RenderReturn Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	s2::RenderParams p = params;
 	if (spr) {
@@ -47,6 +47,8 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 		}
 		s2::ShapeSymbol::Draw(params, spr);
 	}
+
+	return s2::RENDER_OK;
 }
 
 void Symbol::ReloadTexture() const

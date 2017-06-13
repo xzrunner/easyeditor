@@ -22,9 +22,9 @@ Symbol::~Symbol()
 	Clear();
 }
 
-void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
+s2::RenderReturn Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
-
+	return s2::RENDER_OK;
 }
 
 sm::rect Symbol::GetBounding(const s2::Sprite* spr/* = NULL*/) const

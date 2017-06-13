@@ -28,13 +28,14 @@ int Symbol::Type() const
 	return ee::SYM_UIWND;
 }
 
-void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
+s2::RenderReturn Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	m_anchors.DrawSprites(params);
 	for (int i = 0, n = m_ext_refs.size(); i < n; ++i) {
 		ee::SpriteRenderer::Instance()->Draw(m_ext_refs[i], params);
 	}
 	m_anchors.DrawNodes(params);
+	return s2::RENDER_OK;
 }
 
 sm::rect Symbol::GetBoundingImpl(const s2::Sprite* spr, const s2::Actor* actor, bool cache) const

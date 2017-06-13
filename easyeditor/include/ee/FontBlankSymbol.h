@@ -22,7 +22,7 @@ public:
 	 */
 	virtual int Type() const;
 	virtual void Traverse(const s2::SymbolVisitor& visitor) {}
-	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
+	virtual s2::RenderReturn Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
 
 	bool LoadFont(const std::string& filename);
 

@@ -65,7 +65,7 @@ void Symbol::Load(const gum::SpriteLoader& spr_loader)
 	Clear();
 
 	ee::SymbolLoader sym_loader;
-	gum::AnimSymLoader loader(this, &sym_loader, &spr_loader);
+	gum::AnimSymLoader loader(this, false, &sym_loader, &spr_loader);
 	loader.LoadJson(m_filepath);
 
 	LoadEE();
@@ -79,7 +79,7 @@ bool Symbol::LoadResources()
 
 	ee::SymbolLoader sym_loader;
 	ee::SpriteLoader spr_loader;
-	gum::AnimSymLoader loader(this, &sym_loader, &spr_loader);
+	gum::AnimSymLoader loader(this, false, &sym_loader, &spr_loader);
 	loader.LoadJson(m_filepath);
 
 	LoadEE();

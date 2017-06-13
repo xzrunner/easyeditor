@@ -33,7 +33,7 @@ int Symbol::Type() const
 	return ee::SYM_TERRAIN2D;
 }
 
-void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
+s2::RenderReturn Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	s2::RenderParams p = params;
 	if (spr) {
@@ -44,7 +44,7 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 	clock_t curr = clock();
 	if (m_time == 0) {
 		m_time = curr;
-		return;
+		return s2::RENDER_NO_DATA;
 	}
 
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
@@ -62,6 +62,8 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 	}
 
 	m_time = curr;
+
+	return s2::RENDER_OK;
 }
 
 void Symbol::ReloadTexture() const

@@ -5,7 +5,7 @@
 
 #include <sprite2/s2_config.h>
 
-namespace s2 { class AnimCurr; }
+namespace s2 { class AnimTreeCurr; }
 
 namespace eanim
 {
@@ -13,7 +13,7 @@ namespace eanim
 class PreviewPanel : public ee::EditPanel
 {
 public:
-	PreviewPanel(wxWindow* parent, wxTopLevelWindow* frame, s2::AnimCurr& curr);
+	PreviewPanel(wxWindow* parent, wxTopLevelWindow* frame, s2::AnimTreeCurr& curr);
 
 	//
 	// ee::EditPanel interface
@@ -23,7 +23,7 @@ public:
 	void SetLoop(bool loop) { m_loop = loop; }
 
 private:
-	s2::AnimCurr& m_curr;
+	s2::AnimTreeCurr& m_curr;
 
 	bool m_loop;
 

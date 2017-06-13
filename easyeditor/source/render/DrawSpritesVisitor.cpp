@@ -26,7 +26,7 @@ void DrawSpritesVisitor::Visit(Sprite* spr, bool& next)
 	params.view_region = m_screen_region;
 	const s2::Actor* prev_actor = CurrSprTreePath::Instance()->TopActor();
 	params.actor = spr->QueryActor(prev_actor);
-	if (s2::DrawNode::IsOutsideView(spr, params)) {
+	if (s2::DrawNode::CullingTestOutside(spr, params)) {
 		return;
 	}
 

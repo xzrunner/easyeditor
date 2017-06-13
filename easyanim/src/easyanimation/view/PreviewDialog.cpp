@@ -6,7 +6,7 @@
 #include <ee/Config.h>
 #include <ee/SettingData.h>
 
-#include <sprite2/AnimCurr.h>
+#include <sprite2/AnimTreeCurr.h>
 
 namespace eanim
 {
@@ -15,7 +15,7 @@ PreviewDialog::PreviewDialog(wxWindow* parent, wxGLContext* glctx, s2::AnimSymbo
  	: wxDialog(parent, wxID_ANY, "Preview", wxDefaultPosition, wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 {
 	sym->LoadCopy();
-	m_curr.SetAnimCopy(&dynamic_cast<s2::AnimSymbol*>(sym)->GetCopy());
+	m_curr.SetAnimCopy(dynamic_cast<s2::AnimSymbol*>(sym)->GetCopy());
 
 	InitLayout(glctx);
 

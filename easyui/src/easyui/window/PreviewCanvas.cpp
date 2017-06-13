@@ -36,7 +36,7 @@ void PreviewCanvas::OnDrawSprites() const
 
 		const sm::vec2& pos = spr->GetPosition();
 
-		S2_MAT inv_mt = spr->GetLocalInvMat();
+		S2_MAT inv_mt = spr->GetLocalMat().Inverted();
 		S2_MAT translate_mt;
 		translate_mt.Translate(pos.x, pos.y, 0);
 		S2_MAT mt = translate_mt * (m_scale_mt * inv_mt);

@@ -6,12 +6,12 @@
 
 #include <sprite2/UpdateParams.h>
 #include <sprite2/Particle3d.h>
-#include <sprite2/AnimCurr.h>
+#include <sprite2/AnimTreeCurr.h>
 
 namespace eanim
 {
 
-PreviewPanel::PreviewPanel(wxWindow* parent, wxTopLevelWindow* frame, s2::AnimCurr& curr)
+PreviewPanel::PreviewPanel(wxWindow* parent, wxTopLevelWindow* frame, s2::AnimTreeCurr& curr)
 	: ee::EditPanel(parent, frame)
 	, m_curr(curr)
 	, m_loop(true)
@@ -21,7 +21,7 @@ PreviewPanel::PreviewPanel(wxWindow* parent, wxTopLevelWindow* frame, s2::AnimCu
 
 bool PreviewPanel::UpdateStage()
 {
-	return m_curr.Update(s2::UpdateParams(), NULL, m_loop, 0, m_fps);
+	return m_curr.Update(s2::UpdateParams(), NULL, NULL, m_loop, 0, m_fps);
 }
 
 }

@@ -5,6 +5,8 @@
 
 #include <easyanim.h>
 
+#include <sprite2/AnimTreeCurr.h>
+
 #include <wx/wx.h>
 
 namespace ee { class EditPanel; }
@@ -33,7 +35,7 @@ private:
 private:
 	PreviewPanel* m_stage;
 
-	s2::AnimCurr m_curr;
+	s2::AnimTreeCurr m_curr;
 
 }; // PreviewDialog
 

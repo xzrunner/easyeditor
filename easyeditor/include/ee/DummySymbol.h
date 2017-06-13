@@ -18,7 +18,7 @@ public:
 	 */
 	virtual int Type() const { return -1; }
 	virtual void Traverse(const s2::SymbolVisitor& visitor) {}
-	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const {}
+	virtual s2::RenderReturn Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const { return s2::RENDER_NO_DATA; }
 
 protected:
 	virtual sm::rect GetBoundingImpl(const s2::Sprite* spr = NULL, const s2::Actor* actor = NULL, bool cache = true) const;

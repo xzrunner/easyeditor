@@ -5,6 +5,7 @@
 #include <ee/std_functor.h>
 
 #include <sprite2/UpdateParams.h>
+#include <sprite2/AnimCurr.h>
 #include <gum/AnimSprLoader.h>
 
 namespace libanim

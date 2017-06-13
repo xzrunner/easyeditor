@@ -29,7 +29,7 @@ int Symbol::Type() const
 	return ee::SYM_SHADOW;
 }
 
-void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
+s2::RenderReturn Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	s2::RenderParams p = params;
 	if (spr) {
@@ -39,6 +39,7 @@ void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 	if (m_shadow) {
 		m_shadow->Draw(p.mt, p.color.GetMul().a);
 	}
+	return s2::RENDER_OK;
 }
 
 sm::rect Symbol::GetBoundingImpl(const s2::Sprite* spr, const s2::Actor* actor, bool cache) const

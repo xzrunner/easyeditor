@@ -40,11 +40,11 @@ Symbol::Symbol()
 	m_name = ee::SymbolFile::Instance()->Tag(s2::SYM_COMPLEX) + gum::StringHelper::ToString(id++);
 }
 
-void Symbol::Draw(const s2::RenderParams& rp, const s2::Sprite* spr) const
+s2::RenderReturn Symbol::Draw(const s2::RenderParams& rp, const s2::Sprite* spr) const
 {
 	s2::RenderParams rp_child;
 	if (!s2::DrawNode::Prepare(rp, spr, rp_child)) {
-		return;
+		return s2::RENDER_OUTSIDE;
 	}
 
 	sm::vec2 scissor_sz = m_scissor.Size();
@@ -133,10 +133,10 @@ void Symbol::Draw(const s2::RenderParams& rp, const s2::Sprite* spr) const
 		{
 			const s2::Sprite* spr = sprs[i];
 			rp_child.actor = spr->QueryActor(rp.actor);
-			if (IsChildOutside(spr, rp_child)) {
+			if (CullingTestOutside(spr, rp_child)) {
 				continue;
 			}
-			ee::SpriteRenderer::Instance()->Draw(spr, rp_child, false);
+			ee::SpriteRenderer::Instance()->Draw(spr, rp_child);
 		}
 	}
 
@@ -150,6 +150,8 @@ void Symbol::Draw(const s2::RenderParams& rp, const s2::Sprite* spr) const
 		s2::RVG::SetColor(s2::Color(0, 204, 0));
 		s2::RVG::Rect(rp_child.mt * min, rp_child.mt * max, false);
 	}
+
+	return s2::RENDER_OK;
 }
 
 void Symbol::ReloadTexture() const
@@ -240,7 +242,7 @@ bool Symbol::LoadResources()
 	return true;
 }
 
-bool Symbol::IsChildOutside(const s2::Sprite* spr, const s2::RenderParams& rp) const
+bool Symbol::CullingTestOutside(const s2::Sprite* spr, const s2::RenderParams& rp) const
 {
 	int type = spr->GetSymbol()->Type();
 	if (type == s2::SYM_PARTICLE3D || 
@@ -249,7 +251,7 @@ bool Symbol::IsChildOutside(const s2::Sprite* spr, const s2::RenderParams& rp) c
 		type == s2::SYM_ANIM2) {
 		return false;
 	} else {
-		return s2::ComplexSymbol::IsChildOutside(spr, rp);
+		return s2::DrawNode::CullingTestOutside(spr, rp);
 	}
 }
 

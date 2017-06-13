@@ -3,11 +3,12 @@
 #include <easyanim.h>
 
 #include <sprite2/UpdateParams.h>
+#include <sprite2/AnimTreeCurr.h>
 
 namespace eanim
 {
 
-PreviewOP::PreviewOP(wxWindow* wnd, ee::EditPanelImpl* stage, s2::AnimCurr& curr)
+PreviewOP::PreviewOP(wxWindow* wnd, ee::EditPanelImpl* stage, s2::AnimTreeCurr& curr)
 	: ee::ZoomViewOP(wnd, stage, true, true, false)
 	, m_curr(curr)
 {

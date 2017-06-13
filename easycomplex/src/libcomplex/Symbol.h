@@ -19,7 +19,7 @@ public:
 	 *  @interface
 	 *    s2::Symbol
 	 */
-	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
+	virtual s2::RenderReturn Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
 
 	/**
 	 *  @interface
@@ -50,7 +50,7 @@ public:
 	// todo: 
 
 private:
-	virtual bool IsChildOutside(const s2::Sprite* spr, const s2::RenderParams& rp) const;
+	bool CullingTestOutside(const s2::Sprite* spr, const s2::RenderParams& rp) const;
 
 public:
 	std::vector<Group> m_groups;

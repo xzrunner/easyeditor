@@ -38,7 +38,7 @@ int FontBlankSymbol::Type() const
 	return SYM_FONTBLANK;
 }
 
-void FontBlankSymbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
+s2::RenderReturn FontBlankSymbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
 {
 	s2::RenderParams p = params;
 	if (spr) {
@@ -53,6 +53,7 @@ void FontBlankSymbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr
 	if (setting.visible_label_text) {
 		DrawText(fb, p.mt);
 	}
+	return s2::RENDER_OK;
 }
 
 sm::rect FontBlankSymbol::GetBoundingImpl(const s2::Sprite* spr, const s2::Actor* actor, bool cache) const
