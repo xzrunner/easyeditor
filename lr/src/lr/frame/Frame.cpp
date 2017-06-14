@@ -15,6 +15,7 @@
 #include <ee/FetchAllVisitor.h>
 #include <ee/StageCanvas.h>
 #include <ee/StringHelper.h>
+#include <ee/EditedFileStack.h>
 
 #include <easyshape.h>
 
@@ -157,7 +158,7 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 void Frame::SaveAsJson(const std::string& filepath) const
 {
 	std::string fixed = ee::FileHelper::GetFilenameAddTag(filepath, m_filetag, "json");
-	m_curr_filename = fixed;
+	ee::EditedFileStack::Instance()->SetBottom(fixed);
 	m_task->Store(fixed.c_str());
 }
 

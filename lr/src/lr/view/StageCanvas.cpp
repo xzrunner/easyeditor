@@ -126,13 +126,15 @@ void StageCanvas::DrawSprite(ee::Sprite* spr, bool draw_edge, int name_visible) 
 	if ((name_visible == -1 && cfg.visible_node_name) || name_visible == 1) 
 	{
 		ee::SettingData& cfg = ee::Config::Instance()->GetSettings();
-		const std::string& name = spr->GetName();
-		if (cfg.visible_node_name && !name.empty() && name[0] != '_') 
+		int name = spr->GetName();
+		if (cfg.visible_node_name && s2::SprNameMap::IsNormalName(name)) 
 		{
 			S2_MAT t = spr->GetLocalMat();
 			float s = std::max(1.0f, GetCameraScale()) * cfg.node_name_scale;
 			t.x[0] = t.x[5] = s;
-			gum::GTxt::Instance()->Draw(t, name);
+			std::string sname;
+			s2::SprNameMap::Instance()->IDToStr(name, sname);
+			gum::GTxt::Instance()->Draw(t, sname);
 		}
 	}
 }

@@ -54,7 +54,9 @@ void Layer::TraverseSprite(ee::Visitor<ee::Sprite>& visitor, ee::DataTraverseTyp
 
 bool Layer::RemoveSprite(ee::Sprite* spr)
 {
-	m_name_set.erase(spr->GetName());
+	std::string sname;
+	s2::SprNameMap::Instance()->IDToStr(spr->GetName(), sname);
+	m_name_set.erase(sname);
 
 	const std::vector<ee::Layer*>& layers = m_layer_mgr.GetAllLayers();
 	for (int i = 0, n = layers.size(); i < n; ++i) {
@@ -263,6 +265,48 @@ ee::Shape* Layer::QueryShape(const std::string& name) const
 	return visitor.GetResult();
 }
 
+void Layer::ClearSprCoverInfo()
+{
+	std::vector<ee::Sprite*> sprs = m_sprs.GetObjs();
+	std::vector<ee::Sprite*> covers;
+	std::vector<ee::Sprite*>::iterator itr = sprs.begin();
+	for ( ; itr != sprs.end(); )
+	{
+		ee::Sprite* spr = *itr;
+		const std::string& tag = spr->GetTag();
+		if (tag.find(COVER_LAYER_TAG) != std::string::npos) 
+		{
+			std::string tag = spr->GetTag();
+			size_t p_begin = tag.find("layer=");
+			if (p_begin != std::string::npos) {
+				size_t p_end = tag.find(";", p_begin) + 1;
+				tag.erase(tag.begin() + p_begin, tag.begin() + p_end);
+			}
+			covers.push_back(spr);
+			spr->SetTag(tag);
+
+			itr = sprs.erase(itr);
+		} 
+		else 
+		{
+			++itr;
+		}
+	}
+
+	class SprCmp
+	{
+	public:
+		bool operator() (const ee::Sprite* s0, const ee::Sprite* s1) const
+		{
+			return s0->GetPosition().y > s1->GetPosition().y;
+		}
+	}; // SprCmp
+	std::sort(covers.begin(), covers.end(), SprCmp());
+
+	std::copy(covers.begin(), covers.end(), back_inserter(sprs));
+	m_sprs.SetObjs(sprs);
+}
+
 bool Layer::IsValidFloat(float f)
 {
 	return (f == f) && (f <= FLT_MAX && f >= -FLT_MAX);
@@ -337,31 +381,33 @@ void Layer::LoadFromBaseFile(int layer_idx, const std::string& filepath, const s
 
 void Layer::CheckSpriteName(ee::Sprite* spr)
 {
-	const std::string& name = spr->GetName();
-	if (name.empty() || name[0] != '_') {
+	std::string sname;
+	s2::SprNameMap::Instance()->IDToStr(spr->GetName(), sname);
+	if (sname.empty() || sname[0] != '_') {
 		return;
 	}
 
 	std::set<std::string>::iterator itr 
-		= m_name_set.find(name);
+		= m_name_set.find(sname);
 	if (itr != m_name_set.end()) 
 	{
 		std::string new_name = "_sprite" + ee::StringHelper::ToString(++m_next_id);
 		spr->SetName(new_name);
 		assert(m_name_set.find(new_name) == m_name_set.end());
+		m_name_set.insert(new_name);
 	}
 	else
 	{
-		int pos = name.find("_sprite");
+		int pos = sname.find("_sprite");
 		if (pos != std::string::npos) {
-			std::string str = name.substr(pos + 7);
+			std::string str = sname.substr(pos + 7);
 			int num = atoi(str.c_str());
 			if (m_next_id < num) {
 				m_next_id = num;
 			}
 		}
+		m_name_set.insert(sname);
 	}
-	m_name_set.insert(spr->GetName());
 }
 
 void Layer::LoadShapesUD(const Json::Value& spr_val, ee::Sprite* spr) const

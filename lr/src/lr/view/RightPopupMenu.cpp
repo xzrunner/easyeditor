@@ -116,6 +116,10 @@ void RightPopupMenu::CreateLayerTagMenu(wxMenu& menu)
 			m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnRightPopupMenu, m_stage, MENU_LAYER_CLEAR_TAG_ID);
 			menu.Append(MENU_LAYER_CLEAR_TAG_ID, "清除层信息");	
 		}
+		if (tag.find("layer=") != std::string::npos) {
+			m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnRightPopupMenu, m_stage, MENU_LAYER_CLEAR_COVER_TAG_ID);
+			menu.Append(MENU_LAYER_CLEAR_COVER_TAG_ID, "清除遮挡层信息");	
+		}
 	} 
 	else 
 	{
@@ -127,6 +131,9 @@ void RightPopupMenu::CreateLayerTagMenu(wxMenu& menu)
 
 		m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnRightPopupMenu, m_stage, MENU_LAYER_CLEAR_TAG_ID);
 		menu.Append(MENU_LAYER_CLEAR_TAG_ID, "清除层信息");	
+
+		m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnRightPopupMenu, m_stage, MENU_LAYER_CLEAR_COVER_TAG_ID);
+		menu.Append(MENU_LAYER_CLEAR_COVER_TAG_ID, "清除遮挡层信息");	
 	}
 }
 
@@ -201,6 +208,16 @@ void RightPopupMenu::HandleLayerTagMenu(int id)
 	SetLayerTagAOP::Type type;
 	if (id == MENU_COVER_LAYER_TAG_ID) {
 		type = SetLayerTagAOP::COVER;
+	} else if (id == MENU_LAYER_CLEAR_COVER_TAG_ID) {
+		// clear all layers
+		if (selection->IsEmpty())
+		{
+			const std::vector<Layer*>& layers = m_stage->GetLayers();
+			for (int i = 0, n = layers.size(); i < n; ++i) {
+				layers[i]->ClearSprCoverInfo();
+			}
+			return;
+		}
 	} else if (id == MENU_TOP_LAYER_TAG_ID) {
 		type = SetLayerTagAOP::TOP;
 	} else {

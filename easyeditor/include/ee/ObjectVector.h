@@ -34,6 +34,9 @@ public:
 
 	int Size() const;
 
+	const std::vector<T*>& GetObjs() const { return m_objs; }
+	void SetObjs(const std::vector<T*>& objs) { m_objs = objs; }
+
 public:
 	static void Traverse(const std::vector<T*>& objs, Visitor<T>& visitor, bool order = true);
 	static void Traverse(const std::vector<T*>& objs, Visitor<T>& visitor, DataTraverseType type = DT_ALL, bool order = true);

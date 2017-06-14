@@ -42,9 +42,10 @@ private:
 
 	static const int MENU_COLOR_START_ID		= 210;
 
-	static const int MENU_LAYER_CLEAR_TAG_ID	= 250;
-	static const int MENU_COVER_LAYER_TAG_ID	= 251;
-	static const int MENU_TOP_LAYER_TAG_ID		= 252;
+	static const int MENU_LAYER_CLEAR_TAG_ID	    = 250;
+	static const int MENU_LAYER_CLEAR_COVER_TAG_ID	= 251;
+	static const int MENU_COVER_LAYER_TAG_ID	    = 252;
+	static const int MENU_TOP_LAYER_TAG_ID		    = 253;
 
 	static const int MENU_MOVE_TO_LAYER_BEGIN_ID= 260;
 	static const int MENU_MOVE_TO_LAYER_END_ID	= 280;

@@ -67,6 +67,8 @@ public:
 
 	ee::LayerMgr* GetLayerMgr() { return &m_layer_mgr; }
 
+	void ClearSprCoverInfo();
+
 private:
 	static bool IsValidFloat(float f);
 
