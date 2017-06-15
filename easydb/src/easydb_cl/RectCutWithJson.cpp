@@ -13,6 +13,7 @@
 
 #include <easyimage.h>
 #include <easycomplex.h>
+#include <easytexpacker.h>
 
 #include <gimg_typedef.h>
 #include <gimg_export.h>
@@ -53,21 +54,29 @@ int RectCutWithJson::Run(int argc, char *argv[])
 
 	if (argc > 4) 
 	{
-		wxFileName filename(argv[4]);
-		filename.Normalize();
-		m_ignore_dir = filename.GetFullPath();
+		if (strcmp(argv[4], "null") != 0) {
+			wxFileName filename(argv[4]);
+			filename.Normalize();
+			m_ignore_dir = filename.GetFullPath();
+		}
+	}
+
+	etexpacker::ImageTrimData* trim = NULL;
+	if (argc > 5) {
+		trim = new etexpacker::ImageTrimData(argv[5]);
 	}
 
 	gum::Config* cfg = gum::Config::Instance();
 	bool old = cfg->GetPreMulAlpha();
 	cfg->SetPreMulAlpha(false);
-	Trigger(argv[2], argv[3]);
+	Trigger(argv[2], argv[3], trim);
 	cfg->SetPreMulAlpha(old);
 
 	return 0;
 }
 
-void RectCutWithJson::Trigger(const std::string& src_dir, const std::string& dst_dir)
+void RectCutWithJson::Trigger(const std::string& src_dir, const std::string& dst_dir,
+							  const etexpacker::ImageTrimData* trim)
 {
 	std::string out_img_dir = dst_dir + "\\" + IMAGE_DIR;
 	ee::FileHelper::MkDir(out_img_dir);
@@ -81,6 +90,7 @@ void RectCutWithJson::Trigger(const std::string& src_dir, const std::string& dst
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath();
+		filepath = gum::FilepathHelper::Format(filepath);
 		if (IsIgnored(filepath)) {
 			continue;
 		}
@@ -90,7 +100,7 @@ void RectCutWithJson::Trigger(const std::string& src_dir, const std::string& dst
 		switch (type)
 		{
 		case s2::SYM_IMAGE:
-			RectCutImage(src_dir, dst_dir, filepath);
+			RectCutImage(src_dir, dst_dir, filepath, trim);
 			break;
 		case s2::SYM_COMPLEX:
 			FixComplex(src_dir, dst_dir, filepath);
@@ -115,7 +125,7 @@ void RectCutWithJson::Trigger(const std::string& src_dir, const std::string& dst
 }
 
 void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string& dst_dir, 
-								   const std::string& filepath) const
+								   const std::string& filepath, const etexpacker::ImageTrimData* trim) const
 {
 	std::string out_img_dir = dst_dir + "\\" + IMAGE_DIR;
 	std::string out_json_dir = dst_dir + "\\" + JSON_DIR;
@@ -171,6 +181,15 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 	int channels = img->GetFormat() == GPF_RGB ? 3 : 4;
 	pimg::Cropping img_cut(pixel, pr.Width(), pr.Height(), channels, true);
 
+	sm::vec2 scale(1, 1);
+	if (trim)
+	{
+		const etexpacker::ImageTrimData::Trim* rect = trim->Query(filepath);
+		assert(rect);
+		scale.x = static_cast<float>(rect->ori_w) / img->GetWidth();
+		scale.y = static_cast<float>(rect->ori_h) / img->GetHeight();
+	}
+
 	const std::vector<eimage::Rect>& rects = rect_cut.GetResult();
 	for (int i = 0, n = rects.size(); i < n; ++i) 
 	{
@@ -188,7 +207,7 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 		sm::vec2 offset;
 		offset.x = pr.xmin + r.x + r.w * 0.5f - img->GetWidth() * 0.5f;
 		offset.y = pr.ymin + r.y + r.h * 0.5f - img->GetHeight() * 0.5f;
-		spr->Translate(offset);
+		spr->Translate(offset * scale);
 		complex.Add(spr);
 	}
 

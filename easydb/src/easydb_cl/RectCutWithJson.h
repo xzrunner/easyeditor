@@ -5,6 +5,8 @@
 
 #include <json/json.h>
 
+namespace etexpacker { class ImageTrimData; }
+
 namespace edb
 {
 
@@ -24,11 +26,12 @@ public:
 	static ICommand* Create() { return new RectCutWithJson(); }
 
 private:
-	void Trigger(const std::string& src_dir, const std::string& dst_dir);
+	void Trigger(const std::string& src_dir, const std::string& dst_dir,
+		const etexpacker::ImageTrimData* trim);
 
 private:
 	void RectCutImage(const std::string& src_dir, const std::string& dst_dir, 
-		const std::string& filepath) const;
+		const std::string& filepath, const etexpacker::ImageTrimData* trim) const;
 
 	void FixComplex(const std::string& src_dir, const std::string& dst_dir, const std::string& filepath) const;
 	void FixAnim(const std::string& src_dir, const std::string& dst_dir, const std::string& filepath) const;
