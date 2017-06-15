@@ -55,7 +55,7 @@ void PackEPT::Trigger(const std::string& tp_json, const std::string& tp_dir,
 	}
 
 	// pack
-	erespacker::PackToBin::PackEPT(out_file, tp, 0, 1);
+	erespacker::PackToBin::PackEPT(out_file, tp, 0);
 }
 
 }

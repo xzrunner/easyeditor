@@ -20,7 +20,7 @@ PackTrail::PackTrail(const etrail::Symbol* sym)
 	Init(sym);
 }
 
-void PackTrail::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const
+void PackTrail::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp) const
 {
 	gen.line("{");
 	gen.tab();
@@ -79,7 +79,7 @@ int PackTrail::SizeOfPackToBin() const
 	return sz;
 }
 
-void PackTrail::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scale) const
+void PackTrail::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 {
 	uint32_t id = GetID();
 	pack(id, ptr);

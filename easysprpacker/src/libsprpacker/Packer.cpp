@@ -66,9 +66,9 @@ Packer::~Packer()
 //	PackNodeFactory::Instance()->Release();
 }
 
-void Packer::OutputLua(const std::string& outfile, float scale) const
+void Packer::OutputLua(const std::string& outfile) const
 {
-	PackToLua::Pack(outfile, m_tp, scale);
+	PackToLua::Pack(outfile, m_tp);
 }
 
 void Packer::OutputEpe(const std::string& outfile, bool compress, float scale) const
@@ -76,10 +76,10 @@ void Packer::OutputEpe(const std::string& outfile, bool compress, float scale) c
 	PackToBin::Pack(outfile, m_tp, compress, scale);
 }
 
-void Packer::OutputEpt(const std::string& outfile, int LOD, float scale) const
+void Packer::OutputEpt(const std::string& outfile, int LOD) const
 {
 	OutputEptDesc(outfile, LOD);
-	erespacker::PackToBin::PackEPT(outfile, m_tp, LOD, scale);
+	erespacker::PackToBin::PackEPT(outfile, m_tp, LOD);
 }
 
 void Packer::OutputUIExtra(const std::string& outfile) const

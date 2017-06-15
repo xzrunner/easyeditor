@@ -12,8 +12,7 @@ namespace esprpacker
 class PackToLua
 {
 public:
-	static void Pack(const std::string& filepath, const ee::TexturePacker& tp,
-		float scale);
+	static void Pack(const std::string& filepath, const ee::TexturePacker& tp);
 
 }; // PackToLua
 

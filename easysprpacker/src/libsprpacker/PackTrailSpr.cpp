@@ -26,7 +26,7 @@ PackTrailSpr::~PackTrailSpr()
 	}
 }
 
-void PackTrailSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const
+void PackTrailSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp) const
 {
 	gen.line("{");
 	gen.tab();
@@ -57,7 +57,7 @@ int PackTrailSpr::SizeOfPackToBin() const
 	return sz;
 }
 
-void PackTrailSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scale) const
+void PackTrailSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 {
 	uint32_t id = GetID();
 	pack(id, ptr);

@@ -82,10 +82,10 @@ void PackEPNew::Trigger(const std::string& json_dir, const std::string& tp_json,
 
 	esprpacker::Packer packer(json_dir, tp_json, tp_dir);
 	if (type == "lua") {
-		packer.OutputLua(out_file + ".lua", scale);
+		packer.OutputLua(out_file + ".lua");
 	} else if (type == "ep") {
 		packer.OutputEpe(out_file, true, scale);
-		packer.OutputEpt(out_file, LOD, scale);
+		packer.OutputEpt(out_file, LOD);
  		packer.OutputUIExtra(out_file);
  		packer.OutputSprID(pkg_name, res_dir);
 	} else if (type == "epe") {
@@ -93,16 +93,16 @@ void PackEPNew::Trigger(const std::string& json_dir, const std::string& tp_json,
  		packer.OutputUIExtra(out_file);
  		packer.OutputSprID(pkg_name, res_dir);
 	} else if (type == "ept") {
-		packer.OutputEpt(out_file, LOD, scale);
+		packer.OutputEpt(out_file, LOD);
 	} else if (type == "debug") {
-		packer.OutputLua(out_file + ".lua", scale);
+		packer.OutputLua(out_file + ".lua");
 		packer.OutputEpe(out_file, true, scale);
  		packer.OutputUIExtra(out_file);
  		packer.OutputSprID(pkg_name, res_dir);
 	} else if (type == "all") {
-		packer.OutputLua(out_file + ".lua", scale);
+		packer.OutputLua(out_file + ".lua");
 		packer.OutputEpe(out_file, true, scale);
-		packer.OutputEpt(out_file, LOD, scale);
+		packer.OutputEpt(out_file, LOD);
  		packer.OutputUIExtra(out_file);
  		packer.OutputSprID(pkg_name, res_dir);
 		packer.OutputTagKeyVal(out_file);

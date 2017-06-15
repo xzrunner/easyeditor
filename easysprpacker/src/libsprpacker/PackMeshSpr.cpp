@@ -60,7 +60,7 @@ PackMeshSpr::~PackMeshSpr()
 	m_base->RemoveReference();
 }
 
-void PackMeshSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const
+void PackMeshSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp) const
 {
 	gen.line("{");
 	gen.tab();
@@ -111,7 +111,7 @@ int PackMeshSpr::SizeOfPackToBin() const
 	return sz;
 }
 
-void PackMeshSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scale) const
+void PackMeshSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 {
 	uint32_t id = GetID();
 	pack(id, ptr);

@@ -24,7 +24,7 @@ public:
 	 *    lua
 	 */
 	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
-		const ee::TexturePacker& tp, float scale) const;
+		const ee::TexturePacker& tp) const;
 	
 	/**
 	 *  @interface
@@ -32,8 +32,7 @@ public:
 	 */
 	virtual int SizeOfUnpackFromBin() const;
 	virtual int SizeOfPackToBin() const;
-	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, 
-		float scale) const;	
+	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const;	
 	
 private:
 	void Init(const etrail::Symbol* sym);	

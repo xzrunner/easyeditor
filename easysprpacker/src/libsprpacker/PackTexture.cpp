@@ -32,7 +32,7 @@ PackTexture::~PackTexture()
 	for_each(m_polys.begin(), m_polys.end(), cu::RemoveRefFunctor<const PackNode>());
 }
 
-void PackTexture::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const
+void PackTexture::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp) const
 {
 	gen.line("{");
 	gen.tab();
@@ -70,7 +70,7 @@ int PackTexture::SizeOfPackToBin() const
 	return sz;
 }
 
-void PackTexture::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scale) const
+void PackTexture::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 {
 	uint32_t id = GetID();
 	pack(id, ptr);

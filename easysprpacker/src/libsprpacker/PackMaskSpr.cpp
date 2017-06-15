@@ -25,7 +25,7 @@ PackMaskSpr::~PackMaskSpr()
 	}
 }
 
-void PackMaskSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const
+void PackMaskSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp) const
 {
 	gen.line("{");
 	gen.tab();
@@ -56,7 +56,7 @@ int PackMaskSpr::SizeOfPackToBin() const
 	return sz;
 }
 
-void PackMaskSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scale) const
+void PackMaskSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 {
 	uint32_t id = GetID();
 	pack(id, ptr);

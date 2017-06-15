@@ -26,7 +26,7 @@ PackAnimation::~PackAnimation()
 	for_each(m_layers.begin(), m_layers.end(), cu::RemoveRefFunctor<Layer>());
 }
 
-void PackAnimation::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const
+void PackAnimation::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp) const
 {
 	gen.line("{");
 	gen.tab();
@@ -70,7 +70,7 @@ int PackAnimation::SizeOfPackToBin() const
 	return sz;
 }
 
-void PackAnimation::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scale) const
+void PackAnimation::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 {
 	uint32_t id = GetID();
 	pack(id, ptr);

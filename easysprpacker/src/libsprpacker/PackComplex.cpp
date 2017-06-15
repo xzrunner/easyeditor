@@ -25,7 +25,7 @@ PackComplex::~PackComplex()
 	for_each(m_children.begin(), m_children.end(), cu::RemoveRefFunctor<PackNode>());
 }
 
-void PackComplex::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const
+void PackComplex::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp) const
 {
 	gen.line("{");
 	gen.tab();
@@ -110,7 +110,7 @@ int PackComplex::SizeOfPackToBin() const
 	return sz;
 }
 
-void PackComplex::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scale) const
+void PackComplex::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 {
 	uint32_t id = GetID();
 	pack(id, ptr);

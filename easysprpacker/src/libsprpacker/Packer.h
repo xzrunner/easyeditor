@@ -15,10 +15,10 @@ public:
 		const std::string& tp_dir);
 	~Packer();
 
-	void OutputLua(const std::string& outfile, float scale = 1) const;
+	void OutputLua(const std::string& outfile) const;
 
 	void OutputEpe(const std::string& outfile, bool compress, float scale = 1) const;
-	void OutputEpt(const std::string& outfile, int LOD = 0, float scale = 1) const;
+	void OutputEpt(const std::string& outfile, int LOD = 0) const;
 
 	void OutputUIExtra(const std::string& outfile) const;
 

@@ -23,7 +23,7 @@ PackAnim2::PackAnim2(const libanim2::Symbol* sym)
 	Init(sym);
 }
 
-void PackAnim2::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const
+void PackAnim2::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp) const
 {
 	gen.line("{");
 	gen.tab();
@@ -156,7 +156,7 @@ int PackAnim2::SizeOfPackToBin() const
 	return sz;
 }
 
-void PackAnim2::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scale) const
+void PackAnim2::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 {
 	uint32_t id = GetID();
 	pack(id, ptr);

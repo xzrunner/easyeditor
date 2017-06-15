@@ -89,16 +89,17 @@ void PackToBin::Pack(const std::string& filepath,
 	}
 
 	// pack index
-	PageIndex(filepath + ".epe", pages, compress);
+	PageIndex(filepath + ".epe", pages, compress, scale);
 
 	// pack pages
 	for (int i = 0, n = pages.size(); i < n; ++i) {
 		std::string path = filepath + "." + ee::StringHelper::ToString(i + 1) + ".epe";
-		PackPage(path, *pages[i], tp, compress, scale);
+		PackPage(path, *pages[i], tp, compress);
 	}
 }
 
-void PackToBin::PageIndex(const std::string& filepath, const std::vector<Page*>& pages, bool compress)
+void PackToBin::PageIndex(const std::string& filepath, const std::vector<Page*>& pages, 
+						  bool compress, float scale)
 {
 	const std::map<std::string, int>& exports = ExportNameSet::Instance()->GetData();
 
@@ -123,6 +124,9 @@ void PackToBin::PageIndex(const std::string& filepath, const std::vector<Page*>&
 		sz += sizeof(uint32_t);				// min
 		sz += sizeof(uint32_t);				// max
 	}
+
+	// scale
+	sz += sizeof(float);
 
 	/************************************************************************/
 	/* fill                                                                 */
@@ -154,6 +158,9 @@ void PackToBin::PageIndex(const std::string& filepath, const std::vector<Page*>&
 		pack(max, &ptr);
 	}
 
+	// scale
+	pack(scale, &ptr);
+
 	/************************************************************************/
 	/* output                                                               */
 	/************************************************************************/
@@ -178,7 +185,7 @@ void PackToBin::PageIndex(const std::string& filepath, const std::vector<Page*>&
 }
 
 void PackToBin::PackPage(const std::string& filepath, const Page& page, 
-						 const ee::TexturePacker& tp, bool compress, float scale)
+						 const ee::TexturePacker& tp, bool compress)
 {
 #ifdef DEBUG_PACK_BIN
 	std::vector<int> list0, list1;
@@ -198,7 +205,7 @@ void PackToBin::PackPage(const std::string& filepath, const Page& page,
 	uint8_t* buf = new uint8_t[out_sz];
 	uint8_t* ptr = buf;
 	for (int i = 0, n = nodes.size(); i < n; ++i) {
-		nodes[i]->PackToBin(&ptr, tp, scale);
+		nodes[i]->PackToBin(&ptr, tp);
 #ifdef DEBUG_PACK_BIN
 		list1.push_back(ptr - buf);
 #endif // DEBUG_PACK_BIN

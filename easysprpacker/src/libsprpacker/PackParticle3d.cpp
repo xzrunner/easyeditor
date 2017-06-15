@@ -22,7 +22,7 @@ PackParticle3d::PackParticle3d(const eparticle3d::Symbol* sym)
 	Init(sym);
 }
 
-void PackParticle3d::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const
+void PackParticle3d::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp) const
 {
 	gen.line("{");
 	gen.tab();
@@ -86,7 +86,7 @@ int PackParticle3d::SizeOfPackToBin() const
 	return sz;
 }
 
-void PackParticle3d::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scale) const
+void PackParticle3d::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 {
 	uint32_t id = GetID();
 	pack(id, ptr);

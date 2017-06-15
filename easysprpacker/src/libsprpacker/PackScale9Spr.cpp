@@ -18,8 +18,8 @@ PackScale9Spr::PackScale9Spr(const escale9::Sprite* spr)
 	Init(spr);
 }
 
-void PackScale9Spr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, 
-									float scale) const
+void PackScale9Spr::PackToLuaString(ebuilder::CodeGenerator& gen, 
+									const ee::TexturePacker& tp) const
 {
 	gen.line("{");
 	gen.tab();
@@ -54,8 +54,7 @@ int PackScale9Spr::SizeOfPackToBin() const
 	return sz;
 }
 
-void PackScale9Spr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, 
-							  float scale) const
+void PackScale9Spr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 {
 	uint32_t id = GetID();
 	pack(id, ptr);

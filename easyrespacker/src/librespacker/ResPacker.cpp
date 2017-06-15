@@ -79,9 +79,9 @@ void ResPacker::OutputEpe(const std::string& outfile, bool compress, float scale
 	PackToBin::PackEPE(outfile + ".epe", m_tp, compress, scale);
 }
 
-void ResPacker::OutputEpt(const std::string& outfile, int LOD, float scale) const
+void ResPacker::OutputEpt(const std::string& outfile, int LOD) const
 {
-	PackToBin::PackEPT(outfile, m_tp, LOD, scale);
+	PackToBin::PackEPT(outfile, m_tp, LOD);
 }
 
 void ResPacker::OutputUIExtra(const std::string& outfile) const

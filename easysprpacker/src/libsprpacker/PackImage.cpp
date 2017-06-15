@@ -28,7 +28,7 @@ PackImage::~PackImage()
 	}
 }
 
-void PackImage::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const
+void PackImage::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp) const
 {
 	gen.line("{");
 	gen.tab();
@@ -48,10 +48,6 @@ void PackImage::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TextureP
 	sm::i16_rect quad;
 	sm::ivec2 offset;
 	GetPackRegion(tp, quad, offset);
-	quad.xmin *= scale;
-	quad.ymin *= scale;
-	quad.xmax *= scale;
-	quad.ymax *= scale;
 	sprintf(buff, "{ %d, %d, %d, %d }",
 		quad.xmin, quad.ymin, quad.xmax, quad.ymax);
 	std::string src_str = buff;
@@ -86,7 +82,7 @@ int PackImage::SizeOfPackToBin() const
 	return sz;
 }
 
-void PackImage::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scale) const
+void PackImage::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 {
 	uint32_t id = GetID();
 	pack(id, ptr);

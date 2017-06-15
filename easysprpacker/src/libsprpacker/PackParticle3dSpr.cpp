@@ -25,7 +25,7 @@ PackParticle3dSpr::~PackParticle3dSpr()
 	}
 }
 
-void PackParticle3dSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const
+void PackParticle3dSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp) const
 {
 	gen.line("{");
 	gen.tab();
@@ -70,7 +70,7 @@ int PackParticle3dSpr::SizeOfPackToBin() const
 	return sz;
 }
 
-void PackParticle3dSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scale) const
+void PackParticle3dSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 {
 	uint32_t id = GetID();
 	pack(id, ptr);

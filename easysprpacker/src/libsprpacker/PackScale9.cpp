@@ -19,7 +19,7 @@ PackScale9::PackScale9(const escale9::Symbol* sym)
 }
 
 void PackScale9::PackToLuaString(ebuilder::CodeGenerator& gen,
-								 const ee::TexturePacker& tp, float scale) const
+								 const ee::TexturePacker& tp) const
 {
 	gen.line("{");
 	gen.tab();
@@ -89,7 +89,7 @@ int PackScale9::SizeOfPackToBin() const
 	return sz;
 }
 
-void PackScale9::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scale) const
+void PackScale9::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 {
 	uint32_t id = GetID();
 	pack(id, ptr);

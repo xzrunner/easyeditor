@@ -16,7 +16,7 @@ public:
 	}
 }; // PackNodeCmp
 
-void PackToLua::Pack(const std::string& filepath, const ee::TexturePacker& tp, float scale)
+void PackToLua::Pack(const std::string& filepath, const ee::TexturePacker& tp)
 {
 	std::vector<PackNode*> nodes;
 	PackNodeFactory::Instance()->FetchAll(nodes);
@@ -28,7 +28,7 @@ void PackToLua::Pack(const std::string& filepath, const ee::TexturePacker& tp, f
 		if (!PackIDMgr::Instance()->IsCurrPkg(nodes[i])) {
 			continue;
 		}
-		nodes[i]->PackToLuaString(gen, tp, scale);
+		nodes[i]->PackToLuaString(gen, tp);
 	}
 	gen.line("}");
 

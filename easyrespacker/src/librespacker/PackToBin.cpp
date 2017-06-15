@@ -104,7 +104,7 @@ void PackToBin::PackEPE(const std::string& filepath,
 	fout.close();
 }
 
-void PackToBin::PackEPT(const std::string& filepath, const ee::TexturePacker& tp, int LOD, float scale)
+void PackToBin::PackEPT(const std::string& filepath, const ee::TexturePacker& tp, int LOD)
 {
 	const std::vector<const ee::TexturePacker::Texture*>& textures = tp.GetTextures();
 	for (int i = 0, n = textures.size(); i < n; ++i) 
@@ -130,7 +130,7 @@ void PackToBin::PackEPT(const std::string& filepath, const ee::TexturePacker& tp
 
 		packer->Load(img_path);
 
-		float pack_scale = scale;
+		float pack_scale = 1.0f;
 		for (int lod = 0; lod <= LOD; ++lod) 
 		{
 			std::string idx_str = "." + ee::StringHelper::ToString(i + 1);

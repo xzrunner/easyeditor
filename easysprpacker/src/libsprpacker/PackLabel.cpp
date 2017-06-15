@@ -19,7 +19,7 @@ PackLabel::PackLabel(const etext::Sprite* spr)
 	Init(spr);
 }
 
-void PackLabel::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const
+void PackLabel::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp) const
 {
 	gen.line("{");
 	gen.tab();
@@ -106,7 +106,7 @@ int PackLabel::SizeOfPackToBin() const
 	return sz;
 }
 
-void PackLabel::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scale) const
+void PackLabel::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 {
 	uint32_t id = GetID();
 	pack(id, ptr);

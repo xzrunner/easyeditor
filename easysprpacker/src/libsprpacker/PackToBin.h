@@ -45,9 +45,9 @@ private:
 	}; // Page
 
 	static void PageIndex(const std::string& filepath, 
-		const std::vector<Page*>& pages, bool compress);
+		const std::vector<Page*>& pages, bool compress, float scale);
 	static void PackPage(const std::string& filepath, const Page& page, 
-		const ee::TexturePacker& tp, bool compress, float scale);
+		const ee::TexturePacker& tp, bool compress);
 
 }; // PackToBin
 

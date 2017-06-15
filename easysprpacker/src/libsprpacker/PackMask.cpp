@@ -24,7 +24,7 @@ PackMask::~PackMask()
 	m_mask->RemoveReference();
 }
 
-void PackMask::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp, float scale) const
+void PackMask::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp) const
 {
 	gen.line("{");
 	gen.tab();
@@ -60,7 +60,7 @@ int PackMask::SizeOfPackToBin() const
 	return sz;
 }
 
-void PackMask::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp, float scale) const
+void PackMask::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 {
 	uint32_t id = GetID();
 	pack(id, ptr);
