@@ -182,12 +182,16 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 	pimg::Cropping img_cut(pixel, pr.Width(), pr.Height(), channels, true);
 
 	sm::vec2 scale(1, 1);
+	sm::vec2 offset(0, 0);
 	if (trim)
 	{
 		const etexpacker::ImageTrimData::Trim* rect = trim->Query(filepath);
 		assert(rect);
-		scale.x = static_cast<float>(rect->ori_w) / img->GetWidth();
-		scale.y = static_cast<float>(rect->ori_h) / img->GetHeight();
+		scale.x = static_cast<float>(rect->w) / img->GetWidth();
+		scale.y = static_cast<float>(rect->h) / img->GetHeight();
+
+		offset.x = rect->x + rect->w * 0.5f - rect->ori_w * 0.5f;
+		offset.y = rect->ori_h * 0.5f - (rect->y + rect->h * 0.5f);
 	}
 
 	const std::vector<eimage::Rect>& rects = rect_cut.GetResult();
@@ -204,10 +208,14 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 
 		std::string spr_path = std::string(out_img_dir + "\\" + img_name);
 		ee::Sprite* spr = new ee::DummySprite(new ee::DummySymbol(spr_path, r.w, r.h));
-		sm::vec2 offset;
-		offset.x = pr.xmin + r.x + r.w * 0.5f - img->GetWidth() * 0.5f;
-		offset.y = pr.ymin + r.y + r.h * 0.5f - img->GetHeight() * 0.5f;
-		spr->Translate(offset * scale);
+		sm::vec2 _offset;
+		_offset.x = r.x + r.w * 0.5f - img->GetWidth() * 0.5f;
+		_offset.y = r.y + r.h * 0.5f - img->GetHeight() * 0.5f;
+		_offset *= scale;
+		_offset.x += pr.xmin;
+		_offset.y += pr.ymin;
+		_offset += offset;
+		spr->Translate(_offset);
 		complex.Add(spr);
 	}
 
