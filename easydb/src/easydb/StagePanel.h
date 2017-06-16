@@ -1,7 +1,8 @@
 #ifndef _EASYDB_STAGE_PANEL_H_
 #define _EASYDB_STAGE_PANEL_H_
 
-#include "Graphics.h"
+//#include "Graphics.h"
+#include "Database.h"
 
 #include <ee/EditPanel.h>
 #include <ee/SpritesPanelImpl.h>
@@ -20,13 +21,17 @@ public:
 	void LoadFromDir(const std::string& dirpath);
 	void LoadFromDirFast(const std::string& dirpath);
 
+	Database& GetDB() { return m_db; }
+
 private:
 	void InitConnection();
 
 	void InitPosition();
 
 private:
-	Graphics m_graphics;
+//	Graphics m_graphics;
+
+	Database m_db;
 
 	friend class StageCanvas;
 

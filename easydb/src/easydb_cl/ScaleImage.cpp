@@ -87,7 +87,6 @@ void ScaleImage::Scale(const std::string& src, const std::string& dst, float sca
 		sm::rect r = sym->GetBounding();
 
 		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
-		//		spr->SetScale(sm::vec2(scale, scale));
 
 		s2::DrawRT rt;
 		const sm::vec2& sz = r.Size();

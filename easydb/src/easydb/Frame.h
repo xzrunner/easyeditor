@@ -1,7 +1,7 @@
 #ifndef _EASYDB_FRAME_H_
 #define _EASYDB_FRAME_H_
 
-#include <wx/frame.h>
+#include <wx/wx.h>
 
 namespace edb
 {
@@ -12,6 +12,7 @@ class Frame : public wxFrame
 {
 public:
 	Frame(const std::string& title);
+	virtual ~Frame();
 
 private:
 	void OnNew(wxCommandEvent& event);
@@ -42,6 +43,10 @@ private:
 	Task* m_task;
 
 	std::string m_curr_filename;
+
+#ifdef _DEBUG
+	wxLogChain* m_log_chain;
+#endif
 
 	DECLARE_EVENT_TABLE()
 

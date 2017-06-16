@@ -187,27 +187,27 @@
 			Name="todo"
 			>
 			<File
-				RelativePath="..\..\..\src\easydb\CopyFile.cpp"
+				RelativePath="..\..\..\src\easydb_cl\CopyFile.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easydb\CopyFile.h"
+				RelativePath="..\..\..\src\easydb_cl\CopyFile.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easydb\DFFParser.cpp"
+				RelativePath="..\..\..\src\easydb_cl\DFFParser.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easydb\DFFParser.h"
+				RelativePath="..\..\..\src\easydb_cl\DFFParser.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easydb\DistanceFieldFont.cpp"
+				RelativePath="..\..\..\src\easydb_cl\DistanceFieldFont.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easydb\DistanceFieldFont.h"
+				RelativePath="..\..\..\src\easydb_cl\DistanceFieldFont.h"
 				>
 			</File>
 		</Filter>
@@ -215,23 +215,23 @@
 			Name="base"
 			>
 			<File
-				RelativePath="..\..\..\src\easydb\CommandFactory.cpp"
+				RelativePath="..\..\..\src\easydb_cl\CommandFactory.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easydb\CommandFactory.h"
+				RelativePath="..\..\..\src\easydb_cl\CommandFactory.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easydb\CommandLoader.cpp"
+				RelativePath="..\..\..\src\easydb_cl\CommandLoader.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easydb\CommandLoader.h"
+				RelativePath="..\..\..\src\easydb_cl\CommandLoader.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easydb\ICommand.h"
+				RelativePath="..\..\..\src\easydb_cl\ICommand.h"
 				>
 			</File>
 		</Filter>
@@ -239,11 +239,11 @@
 			Name="tools"
 			>
 			<File
-				RelativePath="..\..\..\src\easydb\check_params.cpp"
+				RelativePath="..\..\..\src\easydb_cl\check_params.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easydb\check_params.h"
+				RelativePath="..\..\..\src\easydb_cl\check_params.h"
 				>
 			</File>
 			<File
@@ -273,19 +273,19 @@
 					Name="particle"
 					>
 					<File
-						RelativePath="..\..\..\src\easydb\PackParticle2D.cpp"
+						RelativePath="..\..\..\src\easydb_cl\PackParticle2D.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\easydb\PackParticle2D.h"
+						RelativePath="..\..\..\src\easydb_cl\PackParticle2D.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\easydb\PackParticle3D.cpp"
+						RelativePath="..\..\..\src\easydb_cl\PackParticle3D.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\easydb\PackParticle3D.h"
+						RelativePath="..\..\..\src\easydb_cl\PackParticle3D.h"
 						>
 					</File>
 				</Filter>
@@ -434,19 +434,19 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb\Snapshoot.cpp"
+					RelativePath="..\..\..\src\easydb_cl\Snapshoot.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb\Snapshoot.h"
+					RelativePath="..\..\..\src\easydb_cl\Snapshoot.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb\TransToGif.cpp"
+					RelativePath="..\..\..\src\easydb_cl\TransToGif.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb\TransToGif.h"
+					RelativePath="..\..\..\src\easydb_cl\TransToGif.h"
 					>
 				</File>
 				<Filter
@@ -461,11 +461,11 @@
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\easydb\TrimImage.cpp"
+						RelativePath="..\..\..\src\easydb_cl\TrimImage.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\easydb\TrimImage.h"
+						RelativePath="..\..\..\src\easydb_cl\TrimImage.h"
 						>
 					</File>
 				</Filter>
@@ -565,11 +565,11 @@
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\easydb\TransToPVR.cpp"
+						RelativePath="..\..\..\src\easydb_cl\TransToPVR.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\easydb\TransToPVR.h"
+						RelativePath="..\..\..\src\easydb_cl\TransToPVR.h"
 						>
 					</File>
 				</Filter>
@@ -610,11 +610,11 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb\ChangeJsonFile.cpp"
+					RelativePath="..\..\..\src\easydb_cl\ChangeJsonFile.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb\ChangeJsonFile.h"
+					RelativePath="..\..\..\src\easydb_cl\ChangeJsonFile.h"
 					>
 				</File>
 				<File
@@ -626,11 +626,11 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb\ChangeTPJsonFile.cpp"
+					RelativePath="..\..\..\src\easydb_cl\ChangeTPJsonFile.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb\ChangeTPJsonFile.h"
+					RelativePath="..\..\..\src\easydb_cl\ChangeTPJsonFile.h"
 					>
 				</File>
 				<File
@@ -690,11 +690,11 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb\FormatJsonFile.cpp"
+					RelativePath="..\..\..\src\easydb_cl\FormatJsonFile.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb\FormatJsonFile.h"
+					RelativePath="..\..\..\src\easydb_cl\FormatJsonFile.h"
 					>
 				</File>
 				<File
@@ -714,11 +714,11 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb\ScaleJson.cpp"
+					RelativePath="..\..\..\src\easydb_cl\ScaleJson.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb\ScaleJson.h"
+					RelativePath="..\..\..\src\easydb_cl\ScaleJson.h"
 					>
 				</File>
 				<File
@@ -766,67 +766,67 @@
 				Name="preprocess"
 				>
 				<File
-					RelativePath="..\..\..\src\easydb\AddFrameSprite.cpp"
+					RelativePath="..\..\..\src\easydb_cl\AddFrameSprite.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb\AddFrameSprite.h"
+					RelativePath="..\..\..\src\easydb_cl\AddFrameSprite.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb\FormatTIDString.cpp"
+					RelativePath="..\..\..\src\easydb_cl\FormatTIDString.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb\FormatTIDString.h"
+					RelativePath="..\..\..\src\easydb_cl\FormatTIDString.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb\ReverseAnimation.cpp"
+					RelativePath="..\..\..\src\easydb_cl\ReverseAnimation.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb\ReverseAnimation.h"
+					RelativePath="..\..\..\src\easydb_cl\ReverseAnimation.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb\ScaleOverall.cpp"
+					RelativePath="..\..\..\src\easydb_cl\ScaleOverall.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb\ScaleOverall.h"
+					RelativePath="..\..\..\src\easydb_cl\ScaleOverall.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb\SetNameFromFile.cpp"
+					RelativePath="..\..\..\src\easydb_cl\SetNameFromFile.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb\SetNameFromFile.h"
+					RelativePath="..\..\..\src\easydb_cl\SetNameFromFile.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb\UniqueImage.cpp"
+					RelativePath="..\..\..\src\easydb_cl\UniqueImage.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb\UniqueImage.h"
+					RelativePath="..\..\..\src\easydb_cl\UniqueImage.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb\VerifyImage.cpp"
+					RelativePath="..\..\..\src\easydb_cl\VerifyImage.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb\VerifyImage.h"
+					RelativePath="..\..\..\src\easydb_cl\VerifyImage.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb\VerifyJson.cpp"
+					RelativePath="..\..\..\src\easydb_cl\VerifyJson.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb\VerifyJson.h"
+					RelativePath="..\..\..\src\easydb_cl\VerifyJson.h"
 					>
 				</File>
 			</Filter>

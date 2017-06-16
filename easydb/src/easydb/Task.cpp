@@ -33,12 +33,18 @@ void Task::LoadFromFile(const char* filename)
 		throw ee::Exception("File: %s don't exist!", filename);
 	}
 
-	FileIO::Load(filename);
+//	FileIO::Load(filename);
+
+	Context* ctx = Context::Instance();
+	ctx->stage->GetDB().Load(filename);
+	ctx->tree->Build(ctx->stage->GetDB());
 }
 
 void Task::StoreToFile(const char* filename) const
 {
-	FileIO::Store(filename);
+//	FileIO::Store(filename);
+
+	Context::Instance()->stage->GetDB().Store(filename);
 }
 
 void Task::Clear()
@@ -55,7 +61,7 @@ void Task::InitLayout()
 	StagePanel* stage = context->stage = new StagePanel(splitter, m_parent, NULL);
 	TreeCtrl* tree = context->tree = new TreeCtrl(splitter);
 
-	splitter->SetSashGravity(0.2f);
+	splitter->SetSashGravity(0.4f);
 	splitter->SplitVertically(tree, stage);
 }
 

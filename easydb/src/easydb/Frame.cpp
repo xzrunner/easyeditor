@@ -30,6 +30,20 @@ Frame::Frame(const std::string& title)
 {
 	m_task = Task::Create(this);
 	InitMenuBar();
+
+#ifdef _DEBUG
+	wxLog::SetActiveTarget(new wxLogWindow(this, _T("Log window")));
+	m_log_chain = new wxLogChain(new wxLogStderr);
+#else
+	wxLog::SetLogLevel(0);
+#endif
+}
+
+Frame::~Frame()
+{
+#ifdef _DEBUG
+	delete m_log_chain;
+#endif
 }
 
 void Frame::OnNew(wxCommandEvent& event)
@@ -40,8 +54,7 @@ void Frame::OnNew(wxCommandEvent& event)
 
 void Frame::OnOpen(wxCommandEvent& event)
 {
-	wxFileDialog dlg(this, wxT("Open"), wxEmptyString, wxEmptyString, 
-		wxT("*_") + FILE_TAG + wxT(".json"), wxFD_OPEN);
+	wxFileDialog dlg(this, wxT("Open"), wxEmptyString, wxEmptyString, "EASY DB files (*.edb)|*.edb", wxFD_OPEN);
 	if (dlg.ShowModal() == wxID_OK)
 	{
 		m_task->Clear();
@@ -67,11 +80,10 @@ void Frame::OnSave(wxCommandEvent& event)
 
 void Frame::OnSaveAs(wxCommandEvent& event)
 {
-	wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, 
-		wxT("*_") + FILE_TAG + wxT(".json"), wxFD_SAVE);
+	wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, wxT(".edb"), wxFD_SAVE);
 	if (dlg.ShowModal() == wxID_OK)
 	{
-		std::string fixed = ee::FileHelper::GetFilenameAddTag(dlg.GetPath().ToStdString(), FILE_TAG, "json");
+		std::string fixed = dlg.GetPath().ToStdString();
 		m_curr_filename = fixed;
 		m_task->StoreToFile(fixed.c_str());
 	}
@@ -145,7 +157,7 @@ void Frame::SetCurrFilename()
 		std::string str = 
 			std::string("new") + 
 			ee::StringHelper::ToString(id++) + 
-			std::string(".json");
+			std::string(".edb");
 
 		if (!ee::FileHelper::IsFileExist(str))
 		{

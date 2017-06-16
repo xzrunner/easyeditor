@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src\easydb;..\..\..\..\easyeditor\include;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;..\..\..\..\easyanim\src;..\..\..\..\easycomplex\src;..\..\..\..\easyscale9\src;..\..\..\..\easymesh\src;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\sprite2\include"
+				AdditionalIncludeDirectories="..\..\..\src\easydb;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\polymesh\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\easyeditor\include;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;..\..\..\..\easyanim\src;..\..\..\..\easycomplex\src;..\..\..\..\easyscale9\src;..\..\..\..\easymesh\src;..\..\..\..\easyshape\src;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -63,10 +63,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw30ud_gl.lib wxmsw30ud_propgrid.lib wxmsw30ud_adv.lib wxmsw30ud_stc.lib wxmsw30ud_core.lib wxbase30ud.lib wxscintillad.lib wxtiffd.lib wxjpegd.lib wxpngd.lib wxzlibd.lib comctl32.lib rpcrt4.lib glew32s.lib jsond.lib freetype250_D.lib luad.lib md5d.lib libpngd.lib cjsond.lib lzmad.lib pthreadVC2.lib assimpd.lib"
+				AdditionalDependencies="wxmsw30ud_gl.lib wxmsw30ud_propgrid.lib wxmsw30ud_adv.lib wxmsw30ud_stc.lib wxmsw30ud_core.lib wxbase30ud_net.lib wxbase30ud.lib wxscintillad.lib wxtiffd.lib wxjpegd.lib wxpngd.lib wxzlibd.lib comctl32.lib rpcrt4.lib glew32s.lib jsond.lib freetype250_D.lib luad.lib md5d.lib libpngd.lib cjsond.lib lzmad.lib pthreadVC2.lib assimpd.lib wsock32.lib"
 				OutputFile="..\easydb\x86\Debug\easydb.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\wx\lib&quot;;&quot;..\..\..\..\editor-external\gl\lib&quot;;&quot;..\..\..\..\editor-external\json\lib&quot;;&quot;..\..\..\..\editor-external\freetype\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\md5\lib&quot;;&quot;..\..\..\..\editor-external\lua\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\cjson\lib&quot;;&quot;..\..\..\..\editor-external\pthread\lib&quot;;&quot;..\..\..\..\editor-external\assimp\lib&quot;"
+				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\wx\lib&quot;;&quot;..\..\..\..\editor-external\gl\lib&quot;;&quot;..\..\..\..\editor-external\json\lib&quot;;&quot;..\..\..\..\editor-external\freetype\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\md5\lib&quot;;&quot;..\..\..\..\editor-external\lua\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\cjson\lib&quot;;&quot;..\..\..\..\editor-external\pthread\lib&quot;;&quot;..\..\..\..\editor-external\assimp\lib&quot;;&quot;..\..\..\..\editor-external\boost\lib&quot;"
 				IgnoreDefaultLibraryNames="LIBC.LIB"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="..\easydb\x86\Debug\easydb.pdb"
@@ -122,7 +122,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src\easydb;..\..\..\..\easyeditor\include;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;..\..\..\..\easyanim\src;..\..\..\..\easycomplex\src;..\..\..\..\easyscale9\src;..\..\..\..\easymesh\src;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\sprite2\include"
+				AdditionalIncludeDirectories="..\..\..\src\easydb;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\polymesh\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\easyeditor\include;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;..\..\..\..\easyanim\src;..\..\..\..\easycomplex\src;..\..\..\..\easyscale9\src;..\..\..\..\easymesh\src;..\..\..\..\easyshape\src;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -143,10 +143,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw30u_gl.lib wxmsw30u_propgrid.lib wxmsw30u_adv.lib wxmsw30u_stc.lib wxmsw30u_core.lib wxbase30u.lib wxscintilla.lib wxtiff.lib wxjpeg.lib wxpng.lib wxzlib.lib comctl32.lib rpcrt4.lib glew32s.lib json.lib freetype250.lib lua.lib md5.lib libpng.lib cjson.lib lzma.lib pthreadVC2.lib assimp.lib"
+				AdditionalDependencies="wxmsw30u_gl.lib wxmsw30u_propgrid.lib wxmsw30u_adv.lib wxmsw30u_stc.lib wxmsw30u_core.lib wxbase30u_net.lib wxbase30u.lib wxscintilla.lib wxtiff.lib wxjpeg.lib wxpng.lib wxzlib.lib comctl32.lib rpcrt4.lib glew32s.lib json.lib freetype250.lib lua.lib md5.lib libpng.lib cjson.lib lzma.lib pthreadVC2.lib assimp.lib wsock32.lib wsock32.lib"
 				OutputFile="..\easydb\x86\Release\easydb.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\wx\lib&quot;;&quot;..\..\..\..\editor-external\gl\lib&quot;;&quot;..\..\..\..\editor-external\json\lib&quot;;&quot;..\..\..\..\editor-external\freetype\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\md5\lib&quot;;&quot;..\..\..\..\editor-external\lua\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\cjson\lib&quot;;&quot;..\..\..\..\editor-external\pthread\lib&quot;;&quot;..\..\..\..\editor-external\assimp\lib&quot;"
+				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\wx\lib&quot;;&quot;..\..\..\..\editor-external\gl\lib&quot;;&quot;..\..\..\..\editor-external\json\lib&quot;;&quot;..\..\..\..\editor-external\freetype\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\md5\lib&quot;;&quot;..\..\..\..\editor-external\lua\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\cjson\lib&quot;;&quot;..\..\..\..\editor-external\pthread\lib&quot;;&quot;..\..\..\..\editor-external\assimp\lib&quot;;&quot;..\..\..\..\editor-external\boost\lib&quot;"
 				IgnoreDefaultLibraryNames="LIBC.LIB"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="..\easydb\x86\Release\easydb.pdb"
@@ -185,11 +185,47 @@
 			Name="dataset"
 			>
 			<File
+				RelativePath="..\..\..\src\easydb\Database.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easydb\Database.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\easydb\Graphics.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\src\easydb\Graphics.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easydb\IndexNode.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easydb\IndexNode.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easydb\LeafNode.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easydb\LeafNode.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easydb\Node.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easydb\Node.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easydb\NodeType.h"
 				>
 			</File>
 		</Filter>
@@ -290,6 +326,14 @@
 			>
 			<File
 				RelativePath="..\..\..\src\easydb\filetools.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easydb\Serializer.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easydb\Serializer.h"
 				>
 			</File>
 		</Filter>

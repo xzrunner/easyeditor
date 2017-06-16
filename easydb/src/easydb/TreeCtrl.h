@@ -10,20 +10,16 @@ namespace ee { class Sprite; }
 namespace edb
 {
 
-class Graphics;
-struct Node;
+class Database;
 
 class TreeCtrl : public wxTreeCtrl
 {
 public:
 	TreeCtrl(wxWindow* parent);
 
-	void test();
+	void Build(const Database& db);
 
-	void init(const Graphics& graph);
-	void init(const wxArrayString& files);
-
-	void clear();
+	void Clear();
 
 private:
 	enum
@@ -32,21 +28,19 @@ private:
 	};
 
 private:
-	void addNode(const Graphics& graph, const Node& node, wxTreeItemId parent);
+	void BuildFromNode(const Database& db, int node, wxTreeItemId parent, bool first);
 
-	std::string getItemName(const ee::Sprite& spr) const;
+//	void addNode(const Graphics& graph, const Node& node, wxTreeItemId parent);
 
-	void onSelChanged(wxTreeEvent& event);
-	void onItemClick(wxTreeEvent& event);
+	std::string GetItemName(const ee::Sprite& spr) const;
 
-	ee::Sprite* querySpriteByID(wxTreeItemId id) const;
+	void OnSelChanged(wxTreeEvent& event);
+	void OnItemClick(wxTreeEvent& event);
 
 private:
 	wxTreeItemId m_root;
 
-	std::map<wxTreeItemId, ee::Sprite*> m_mapID2Sprite;
-
-	std::map<wxTreeItemId, std::string> m_mapID2Path;
+	std::map<wxTreeItemId, int> m_map2node;
 
 	DECLARE_EVENT_TABLE()
 

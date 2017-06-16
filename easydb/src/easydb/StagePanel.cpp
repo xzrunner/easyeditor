@@ -65,110 +65,113 @@ void StagePanel::LoadFromDir(const std::string& dirpath)
 	InitConnection();
 	InitPosition();
 
-	Context::Instance()->tree->init(m_graphics);
+//	Context::Instance()->tree->init(m_graphics);
 }
 
 void StagePanel::LoadFromDirFast(const std::string& dirpath)
 {
-	wxArrayString files;
-	ee::FileHelper::FetchAllFiles(dirpath, files);
+	//wxArrayString files;
+	//ee::FileHelper::FetchAllFiles(dirpath, files);
 
-	Context::Instance()->tree->init(files);
+	//Context::Instance()->tree->init(files);
+
+	m_db.Build(dirpath);
+	Context::Instance()->tree->Build(m_db);
 }
 
 void StagePanel::InitConnection()
 {
-	m_graphics.Clear();
+//	m_graphics.Clear();
 
-	std::vector<ee::Sprite*> sprs;
-	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
-	for (size_t i = 0, n = sprs.size(); i < n; ++i)
-	{
-		ee::Sprite* from = sprs[i];
-		if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(from))
-		{
-			const s2::ComplexSymbol* sym = dynamic_cast<const s2::ComplexSymbol*>(complex->GetSymbol());
-			const std::vector<s2::Sprite*>& children = sym->GetChildren();
-			for (size_t i = 0, n = children.size(); i < n; ++i)
-			{
-				ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
-				for (size_t i = 0, n = sprs.size(); i < n; ++i)
-					if (child->GetSymbol() == sprs[i]->GetSymbol())
-						m_graphics.Connect(from, sprs[i]);
-			}
-		}
-		else if (libanim::Sprite* anim = dynamic_cast<libanim::Sprite*>(from))
-		{
-			const s2::AnimSymbol* sym = dynamic_cast<const s2::AnimSymbol*>(anim->GetSymbol());
-			const std::vector<s2::AnimSymbol::Layer*>& layers = sym->GetLayers();
-			for (size_t i = 0, n = layers.size(); i < n; ++i)
-			{
-				s2::AnimSymbol::Layer* layer = layers[i];
-				for (size_t i = 0, n = layer->frames.size(); i < n; ++i)
-				{
-					s2::AnimSymbol::Frame* frame = layer->frames[i];
-					for (size_t i = 0, n = frame->sprs.size(); i < n; ++i)
-					{
-						ee::Sprite* child = dynamic_cast<ee::Sprite*>(frame->sprs[i]);
-						for (size_t i = 0, n = sprs.size(); i < n; ++i)
-							if (child->GetSymbol() == sprs[i]->GetSymbol())
-								m_graphics.Connect(from, sprs[i]);
-					}
-				}
-			}
-		}
-	}
+	//std::vector<ee::Sprite*> sprs;
+	//TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	//for (size_t i = 0, n = sprs.size(); i < n; ++i)
+	//{
+	//	ee::Sprite* from = sprs[i];
+	//	if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(from))
+	//	{
+	//		const s2::ComplexSymbol* sym = dynamic_cast<const s2::ComplexSymbol*>(complex->GetSymbol());
+	//		const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
+	//		for (size_t i = 0, n = children.size(); i < n; ++i)
+	//		{
+	//			ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
+	//			for (size_t i = 0, n = sprs.size(); i < n; ++i)
+	//				if (child->GetSymbol() == sprs[i]->GetSymbol())
+	//					m_graphics.Connect(from, sprs[i]);
+	//		}
+	//	}
+	//	else if (libanim::Sprite* anim = dynamic_cast<libanim::Sprite*>(from))
+	//	{
+	//		const s2::AnimSymbol* sym = dynamic_cast<const s2::AnimSymbol*>(anim->GetSymbol());
+	//		const std::vector<s2::AnimSymbol::Layer*>& layers = sym->GetLayers();
+	//		for (size_t i = 0, n = layers.size(); i < n; ++i)
+	//		{
+	//			s2::AnimSymbol::Layer* layer = layers[i];
+	//			for (size_t i = 0, n = layer->frames.size(); i < n; ++i)
+	//			{
+	//				s2::AnimSymbol::Frame* frame = layer->frames[i];
+	//				for (size_t i = 0, n = frame->sprs.size(); i < n; ++i)
+	//				{
+	//					ee::Sprite* child = dynamic_cast<ee::Sprite*>(frame->sprs[i]);
+	//					for (size_t i = 0, n = sprs.size(); i < n; ++i)
+	//						if (child->GetSymbol() == sprs[i]->GetSymbol())
+	//							m_graphics.Connect(from, sprs[i]);
+	//				}
+	//			}
+	//		}
+	//	}
+	//}
 }
 
 void StagePanel::InitPosition()
 {
-	std::vector<ee::Sprite*> sprs;
-	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
-
-	// 1 single random
-	for (size_t i = 0, n = sprs.size(); i < n; ++i)
-	{
-		ee::Sprite* spr = sprs[i];
-
-		Node* node = m_graphics.Query(spr);
-		if (!node || node->in.empty())
-		{
-			sm::vec2 pos;
-			float radius = ee::Random::GetNum0To1() * 4096;
-			float angle = ee::Random::GetNum(0, SM_PI*2);
-			pos.x = cos(angle)*radius;
-			pos.y = sin(angle)*radius;
-			spr->SetPosition(pos);
-			spr->SetAngle(0);
-		}
-	}
-
-	// 2 to
-	for (size_t i = 0, n = sprs.size(); i < n; ++i)
-	{
-		ee::Sprite* spr = sprs[i];
-
-		Node* node = m_graphics.Query(spr);
-//		if (node && node->in.empty())
-		if (node)
-		{
-			float radius = 256;
-			float angle = SM_PI*2 / node->out.size();
-			for (size_t i = 0, n = node->out.size(); i < n; ++i)
-			{
-				ee::Sprite* to = node->out[i];
-
-				sm::vec2 pos = spr->GetPosition();
-				pos.x += cos(angle*i)*radius;
-				pos.y += sin(angle*i)*radius;
-// 				if (to->getPosition().x != 0 || to->getPosition().y != 0)
-// 					pos = (pos + to->getPosition()) * 0.5f;
-
-			//	to->setTransform(pos, 0);
-				m_graphics.Move(to, pos - to->GetPosition());
-			}
-		}
-	}
+//	std::vector<ee::Sprite*> sprs;
+//	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+//
+//	// 1 single random
+//	for (size_t i = 0, n = sprs.size(); i < n; ++i)
+//	{
+//		ee::Sprite* spr = sprs[i];
+//
+//		Node* node = m_graphics.Query(spr);
+//		if (!node || node->in.empty())
+//		{
+//			sm::vec2 pos;
+//			float radius = ee::Random::GetNum0To1() * 4096;
+//			float angle = ee::Random::GetNum(0, SM_PI*2);
+//			pos.x = cos(angle)*radius;
+//			pos.y = sin(angle)*radius;
+//			spr->SetPosition(pos);
+//			spr->SetAngle(0);
+//		}
+//	}
+//
+//	// 2 to
+//	for (size_t i = 0, n = sprs.size(); i < n; ++i)
+//	{
+//		ee::Sprite* spr = sprs[i];
+//
+//		Node* node = m_graphics.Query(spr);
+////		if (node && node->in.empty())
+//		if (node)
+//		{
+//			float radius = 256;
+//			float angle = SM_PI*2 / node->out.size();
+//			for (size_t i = 0, n = node->out.size(); i < n; ++i)
+//			{
+//				ee::Sprite* to = node->out[i];
+//
+//				sm::vec2 pos = spr->GetPosition();
+//				pos.x += cos(angle*i)*radius;
+//				pos.y += sin(angle*i)*radius;
+//// 				if (to->getPosition().x != 0 || to->getPosition().y != 0)
+//// 					pos = (pos + to->getPosition()) * 0.5f;
+//
+//			//	to->setTransform(pos, 0);
+//				m_graphics.Move(to, pos - to->GetPosition());
+//			}
+//		}
+//	}
 }
 
 }
