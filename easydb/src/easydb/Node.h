@@ -21,6 +21,7 @@ public:
 	const std::string& GetPath() const { return m_path; }
 
 	int GetID() const { return m_id; }
+	void SetID(int id) { m_id = id; }
 
 private:
 	std::string m_path;

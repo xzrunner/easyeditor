@@ -18,7 +18,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 {
 	InitLayout();
 
-	SetDropTarget(new LibraryPanelDropTarget(this));
+//	SetDropTarget(new LibraryPanelDropTarget(this));
 
 	RegistSubject(ClearPanelSJ::Instance());
 }

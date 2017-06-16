@@ -3,6 +3,7 @@
 #include "Context.h"
 #include "StagePanel.h"
 #include "IndexNode.h"
+#include "Database.h"
 
 #include <ee/FileHelper.h>
 #include <ee/SpriteSelection.h>
@@ -11,6 +12,7 @@
 #include <easycomplex.h>
 
 #include <sprite2/SymType.h>
+#include <gum/StringHelper.h>
 
 namespace edb
 {
@@ -18,7 +20,8 @@ namespace edb
 BEGIN_EVENT_TABLE(TreeCtrl, wxTreeCtrl)
 	EVT_TREE_SEL_CHANGED(ID_CTRL, TreeCtrl::OnSelChanged)
 	EVT_TREE_ITEM_ACTIVATED(ID_CTRL, TreeCtrl::OnItemClick)
-
+	EVT_TREE_BEGIN_DRAG(ID_CTRL, TreeCtrl::OnBeginDrag)
+	EVT_TREE_END_DRAG(ID_CTRL, TreeCtrl::OnEndDrag)
 END_EVENT_TABLE()
 
 TreeCtrl::TreeCtrl(wxWindow* parent)
@@ -193,6 +196,26 @@ void TreeCtrl::OnItemClick(wxTreeEvent& event)
 //// 				}
 //		}
 //	}
+}
+
+void TreeCtrl::OnBeginDrag(wxTreeEvent& event)
+{
+	wxTreeItemId id = event.GetItem();
+	std::map<wxTreeItemId, int>::iterator itr = m_map2node.find(id);
+	if (itr == m_map2node.end()) {
+		return;
+	}
+
+	wxTextDataObject tdo(gum::StringHelper::ToString(itr->second));
+	wxDropSource ds(tdo);
+	ds.DoDragDrop(wxDrag_CopyOnly);
+
+//	event.Allow();
+}
+
+void TreeCtrl::OnEndDrag(wxTreeEvent& event)
+{
+
 }
 
 }

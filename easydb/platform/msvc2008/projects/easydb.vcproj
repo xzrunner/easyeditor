@@ -185,14 +185,6 @@
 			Name="dataset"
 			>
 			<File
-				RelativePath="..\..\..\src\easydb\Database.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easydb\Database.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\easydb\Graphics.cpp"
 				>
 			</File>
@@ -200,34 +192,74 @@
 				RelativePath="..\..\..\src\easydb\Graphics.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\src\easydb\IndexNode.cpp"
+			<Filter
+				Name="db"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easydb\IndexNode.h"
+				<File
+					RelativePath="..\..\..\src\easydb\Database.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb\Database.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb\IndexNode.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb\IndexNode.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb\JsonRefParser.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb\JsonRefParser.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb\LeafNode.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb\LeafNode.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb\Node.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb\Node.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb\NodeType.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="view"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easydb\LeafNode.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easydb\LeafNode.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easydb\Node.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easydb\Node.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easydb\NodeType.h"
-				>
-			</File>
+				<File
+					RelativePath="..\..\..\src\easydb\Sprite.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb\Sprite.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb\Symbol.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb\Symbol.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="frame"

@@ -3,6 +3,7 @@
 
 #include <fstream>
 #include <vector>
+#include <set>
 
 namespace edb
 {
@@ -15,6 +16,9 @@ public:
 
 	static void WriteArrayInt16(std::ofstream& fout, const std::vector<int>& array);
 	static void ReadArrayInt16(std::ifstream& fin, std::vector<int>& array);
+
+	static void WriteSetInt16(std::ofstream& fout, const std::set<int>& array);
+	static void ReadSetInt16(std::ifstream& fin, std::set<int>& array);
 
 }; // Serializer
 

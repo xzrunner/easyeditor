@@ -3,6 +3,7 @@
 #include "FileIO.h"
 #include "Context.h"
 #include "TreeCtrl.h"
+#include "Database.h"
 
 #include <ee/SymbolMgr.h>
 #include <ee/Exception.h>
@@ -36,15 +37,15 @@ void Task::LoadFromFile(const char* filename)
 //	FileIO::Load(filename);
 
 	Context* ctx = Context::Instance();
-	ctx->stage->GetDB().Load(filename);
-	ctx->tree->Build(ctx->stage->GetDB());
+	ctx->stage->GetDB()->Load(filename);
+	ctx->tree->Build(*ctx->stage->GetDB());
 }
 
 void Task::StoreToFile(const char* filename) const
 {
 //	FileIO::Store(filename);
 
-	Context::Instance()->stage->GetDB().Store(filename);
+	Context::Instance()->stage->GetDB()->Store(filename);
 }
 
 void Task::Clear()
@@ -58,8 +59,8 @@ void Task::InitLayout()
 
 	Context* context = Context::Instance();
 
-	StagePanel* stage = context->stage = new StagePanel(splitter, m_parent, NULL);
 	TreeCtrl* tree = context->tree = new TreeCtrl(splitter);
+	StagePanel* stage = context->stage = new StagePanel(splitter, m_parent, NULL);
 
 	splitter->SetSashGravity(0.4f);
 	splitter->SplitVertically(tree, stage);

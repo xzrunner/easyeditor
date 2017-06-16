@@ -24,7 +24,7 @@ public:
 private:
 	enum
 	{
-		ID_CTRL
+		ID_CTRL,
 	};
 
 private:
@@ -36,6 +36,8 @@ private:
 
 	void OnSelChanged(wxTreeEvent& event);
 	void OnItemClick(wxTreeEvent& event);
+	void OnBeginDrag(wxTreeEvent& event);
+	void OnEndDrag(wxTreeEvent& event);
 
 private:
 	wxTreeItemId m_root;

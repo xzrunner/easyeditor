@@ -13,6 +13,7 @@ public:
 		ee::MultiSpritesImpl* sprites_impl, ee::EditCMPT* callback = NULL);
 
 	virtual bool OnKeyDown(int keyCode); 
+	virtual bool OnMouseLeftDown(int x, int y);
 	virtual bool OnMouseLeftDClick(int x, int y);
 
 }; // SelectSpritesOP

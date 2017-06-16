@@ -28,10 +28,16 @@ public:
 	int GetRoot() const { return m_root; }
 	const std::vector<Node*>& GetNodes() const { return m_nodes; }
 
+	int Query(const std::string& path) const;
+
+	const Node* Fetch(int idx) const;
+
 private:
 	void Clear();
 
 	int BuildNode(const std::string& path);
+
+	void BuildConnection();
 
 private:
 	std::string m_dir_path;

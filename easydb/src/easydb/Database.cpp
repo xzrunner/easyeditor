@@ -86,6 +86,7 @@ void Database::Load(const std::string& filepath)
 			break;
 		}
 		node->Load(fin);
+		node->SetID(i);
 
 		m_nodes.push_back(node);
 
@@ -107,6 +108,27 @@ void Database::Build(const std::string& dir_path)
 	m_dir_path = dir_path;
 
 	m_root = BuildNode(dir_path);
+
+	BuildConnection();
+}
+
+int Database::Query(const std::string& path) const
+{
+	std::map<std::string, int>::const_iterator itr = m_map.find(path);
+	if (itr == m_map.end()) {
+		return -1;
+	} else {
+		return itr->second;
+	}
+}
+
+const Node* Database::Fetch(int idx) const
+{
+	if (idx < 0 || idx >= m_nodes.size()) {
+		return NULL;
+	} else {
+		return m_nodes[idx];
+	}
 }
 
 void Database::Clear()
@@ -148,7 +170,7 @@ int Database::BuildNode(const std::string& path)
 		idx_node->SetChildren(children);
 
 		node = idx_node;
-	} 
+	}
 	else 
 	{
 //		wxLogDebug("file: %s", path.c_str());
@@ -156,10 +178,22 @@ int Database::BuildNode(const std::string& path)
 	}
 
 	int id = m_nodes.size();
+	node->SetID(id);
 	m_nodes.push_back(node);
 	m_map.insert(std::make_pair(gum::FilepathHelper::Format(path), id));	
 
 	return id;
+}
+
+void Database::BuildConnection()
+{
+	for (int i = 0, n = m_nodes.size(); i < n; ++i)
+	{
+		Node* node = m_nodes[i];
+		if (node->Type() == NODE_LEAF) {
+			static_cast<LeafNode*>(node)->BuildConnection(*this);
+		}
+	}
 }
 
 }

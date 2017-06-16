@@ -1,6 +1,8 @@
 #include "SelectSpritesOP.h"
 #include "Context.h"
 #include "StagePanel.h"
+#include "Symbol.h"
+#include "Sprite.h"
 
 #include <ee/SpriteSelection.h>
 #include <ee/FetchAllVisitor.h>
@@ -40,6 +42,22 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 	}
 
 	return false;
+}
+
+bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
+{
+	bool ret = ee::SelectSpritesOP::OnMouseLeftDown(x, y);
+
+	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
+	if (m_selection->Size() != 1) {
+		return ret;
+	}
+
+	std::vector<ee::Sprite*> selection;
+	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(selection));
+	Symbol::OnSprPressed(dynamic_cast<Sprite*>(selection[0]), pos);
+
+	return ret;
 }
 
 bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)

@@ -3,6 +3,7 @@
 #include "Context.h"
 
 #include <ee/DrawShapesVisitor.h>
+#include <ee/DrawSpritesVisitor.h>
 #include <ee/Sprite.h>
 
 #include <sprite2/S2_RVG.h>
@@ -24,11 +25,10 @@ StageCanvas::~StageCanvas()
 void StageCanvas::OnDrawSprites() const
 {
 	m_stage_panel->TraverseShapes(ee::DrawShapesVisitor(sm::rect(), GetCameraScale()), ee::DT_VISIBLE);
+	m_stage_panel->TraverseSprites(ee::DrawSpritesVisitor(GetVisibleRegion(), GetCameraScale()), ee::DT_VISIBLE);
 
-	// fixme
-//	editPanel->traverseSprites(ee::DrawSpritesVisitor(m_batch), ee::DT_VISIBLE);
 
-	drawConnection();
+//	drawConnection();
 	m_stage_panel->DrawEditOP();
 }
 
