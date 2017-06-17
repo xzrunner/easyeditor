@@ -74,6 +74,8 @@ void TreeCtrl::Build(const Database& db)
 //	}
 
 	BuildFromNode(db, db.GetRoot(), m_root, true);
+
+	Expand(m_root);
 }
 
 void TreeCtrl::OnSelected(int node_id)
@@ -425,12 +427,59 @@ void TreeCtrl::OnMenuRefInfo(wxCommandEvent& event)
 
 void TreeCtrl::OnMenuCopyTreeTo(wxCommandEvent& event)
 {
-	
+	if (!m_on_menu_id.IsOk()) {
+		return;
+	}
+
+	std::map<wxTreeItemId, int>::iterator itr = m_map2node.find(m_on_menu_id);
+	const Node* node = m_db->Fetch(itr->second);
+	if (node->Type() == NODE_INDEX) {
+		return;
+	}
+
+	wxDirDialog dlg(NULL, "目标文件夹", wxEmptyString,
+		wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
+	if (dlg.ShowModal() == wxID_OK) {
+		const LeafNode* leaf = static_cast<const LeafNode*>(node);
+		DBHelper::CopyTree(*m_db, leaf, dlg.GetPath().ToStdString());
+	}
 }
 
 void TreeCtrl::OnMenuDelTree(wxCommandEvent& event)
 {
-	
+	if (!m_on_menu_id.IsOk()) {
+		return;
+	}
+
+	std::map<wxTreeItemId, int>::iterator itr = m_map2node.find(m_on_menu_id);
+	const Node* node = m_db->Fetch(itr->second);
+	if (node->Type() == NODE_INDEX) {
+		return;
+	}
+
+	const LeafNode* leaf = static_cast<const LeafNode*>(node);
+
+	bool closure = DBHelper::IsTreeClosure(*m_db, leaf);
+	bool in = !leaf->GetNodes(true).empty();
+	if (!closure || in)
+	{
+		std::string msg;
+		if (!closure && in) {
+			msg = "不是闭包并且被别的节点引用";
+		} else if (!closure) {
+			msg = "不是闭包";
+		} else if (in) {
+			msg = "被别的节点引用";
+		}
+		int answer = wxMessageBox(msg, "确定要删除吗？", wxYES_NO | wxCANCEL, this);
+		if (answer == wxYES) {
+			DBHelper::DeleteTree(*m_db, node->GetID());
+		}
+	} 
+	else
+	{
+		DBHelper::DeleteTree(*m_db, node->GetID());		
+	}
 }
 
 void TreeCtrl::OpenFileByEditor(wxTreeItemId id)
