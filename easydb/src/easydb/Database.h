@@ -28,7 +28,8 @@ public:
 	int GetRoot() const { return m_root; }
 	const std::vector<Node*>& GetNodes() const { return m_nodes; }
 
-	int Query(const std::string& path) const;
+	int QueryByPath(const std::string& path) const;
+	int QueryByExportName(const std::string& name) const;
 
 	const Node* Fetch(int idx) const;
 
@@ -46,7 +47,8 @@ private:
 	
 	std::vector<Node*> m_nodes;
 
-	std::map<std::string, int> m_map;
+	std::map<std::string, int> m_map_path;
+	std::map<std::string, int> m_map_export_name;
 
 //	SINGLETON_DECLARATION(Database);
 

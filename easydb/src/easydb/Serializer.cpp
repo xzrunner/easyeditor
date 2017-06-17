@@ -40,6 +40,9 @@ void Serializer::ReadArrayInt16(std::ifstream& fin, std::vector<int>& array)
 	{
 		int id = 0;
 		fin.read(reinterpret_cast<char*>(&id), sizeof(uint16_t));
+		if (id == 0xffff) {
+			id = -1;
+		}
 		array[i] = id;
 	}
 }
@@ -62,6 +65,9 @@ void Serializer::ReadSetInt16(std::ifstream& fin, std::set<int>& array)
 	{
 		int id = 0;
 		fin.read(reinterpret_cast<char*>(&id), sizeof(uint16_t));
+		if (id == 0xffff) {
+			id = -1;
+		}
 		array.insert(id);
 	}
 }

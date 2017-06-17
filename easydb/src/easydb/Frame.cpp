@@ -2,12 +2,16 @@
 #include "Task.h"
 #include "Context.h"
 #include "StagePanel.h"
+#include "Database.h"
+#include "TreeCtrl.h"
 
 #include <ee/FileHelper.h>
 #include <ee/Exception.h>
 #include <ee/ExceptionDlg.h>
 #include <ee/ZoomViewOP.h>
 #include <ee/StringHelper.h>
+
+#include <gum/StringHelper.h>
 
 namespace edb
 {
@@ -19,6 +23,7 @@ BEGIN_EVENT_TABLE(Frame, wxFrame)
 	EVT_MENU(wxID_SAVEAS, Frame::OnSaveAs)
 
 	EVT_MENU(ID_CONNECT, Frame::OnConnect)
+	EVT_MENU(ID_SEARCH, Frame::OnSearch)
 
 	EVT_MENU(wxID_EXIT, Frame::OnQuit)
 END_EVENT_TABLE()
@@ -115,6 +120,22 @@ void Frame::OnConnect(wxCommandEvent& event)
 	}
 }
 
+void Frame::OnSearch(wxCommandEvent& event)
+{
+	wxTextEntryDialog dlg(this, "Search");
+	if (dlg.ShowModal()) 
+	{
+		std::string str = dlg.GetValue().ToStdString();
+		gum::StringHelper::ToLower(str);
+		
+		Context* ctx = Context::Instance();
+		int id = ctx->stage->GetDB()->QueryByExportName(str);
+		if (id != -1) {
+			ctx->tree->OnSelected(id);
+		}
+	}
+}
+
 void Frame::OnQuit(wxCommandEvent& event)
 {
 	Close(true);
@@ -124,6 +145,7 @@ void Frame::InitMenuBar()
 {
 	wxMenuBar* menuBar = new wxMenuBar;
 	menuBar->Append(InitFileBar(), "&File");
+	menuBar->Append(InitToolBar(), "&Tool");
 	SetMenuBar(menuBar);
 }
 
@@ -140,6 +162,13 @@ wxMenu* Frame::InitFileBar()
 	fileMenu->AppendSeparator();
 	fileMenu->Append(wxID_EXIT, wxT("E&xit\tAlt+X"), wxT("Quit GameFruits"));
 	return fileMenu;
+}
+
+wxMenu* Frame::InitToolBar()
+{
+	wxMenu* tool = new wxMenu;
+	tool->Append(ID_SEARCH, wxT("&Search...\tCtrl+F"), wxT("Search"));
+	return tool;
 }
 
 wxMenu* Frame::InitHelpBar()

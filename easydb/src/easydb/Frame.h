@@ -21,12 +21,14 @@ private:
 	void OnSaveAs(wxCommandEvent& event);
 
 	void OnConnect(wxCommandEvent& event);
+	void OnSearch(wxCommandEvent& event);
 
 	void OnQuit(wxCommandEvent& event);
 
 	void InitMenuBar();
 
 	wxMenu* InitFileBar();
+	wxMenu* InitToolBar();
 	wxMenu* InitHelpBar();
 
 	void Clear();
@@ -36,7 +38,8 @@ private:
 private:
 	enum
 	{
-		ID_CONNECT = 1000
+		ID_CONNECT = 1000,
+		ID_SEARCH,
 	};
 
 private:

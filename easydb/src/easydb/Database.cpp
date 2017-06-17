@@ -91,7 +91,16 @@ void Database::Load(const std::string& filepath)
 		m_nodes.push_back(node);
 
 		std::string path = gum::FilepathHelper::Absolute(m_dir_path, node->GetPath());
-		m_map.insert(std::make_pair(path, node->GetID()));
+		m_map_path.insert(std::make_pair(path, node->GetID()));
+
+		if (node->Type() == NODE_LEAF)
+		{
+			LeafNode* leaf = static_cast<LeafNode*>(node);
+			const std::string& name = leaf->GetExportName();
+			if (!name.empty()) {
+				m_map_export_name.insert(std::make_pair(name, node->GetID()));
+			}
+		}
 	}
 
 	fin.close();
@@ -112,14 +121,38 @@ void Database::Build(const std::string& dir_path)
 	BuildConnection();
 }
 
-int Database::Query(const std::string& path) const
+int Database::QueryByPath(const std::string& path) const
 {
-	std::map<std::string, int>::const_iterator itr = m_map.find(path);
-	if (itr == m_map.end()) {
+	std::map<std::string, int>::const_iterator itr = m_map_path.find(path);
+	if (itr == m_map_path.end()) {
 		return -1;
 	} else {
 		return itr->second;
 	}
+}
+
+int Database::QueryByExportName(const std::string& name) const
+{
+	std::map<std::string, int>::const_iterator itr = m_map_export_name.find(name);
+	if (itr != m_map_export_name.end()) {
+		return itr->second;
+	}
+
+	itr = m_map_export_name.begin();
+	for ( ; itr != m_map_export_name.end(); ++itr) {
+		if (itr->first.find(name) != std::string::npos) {
+			return itr->second;
+		}
+	}
+
+	std::map<std::string, int>::const_iterator itr_path = m_map_path.begin();
+	for ( ; itr_path != m_map_export_name.end(); ++itr_path) {
+		if (itr_path->first.find(name) != std::string::npos) {
+			return itr_path->second;
+		}
+	}
+
+	return -1;
 }
 
 const Node* Database::Fetch(int idx) const
@@ -140,7 +173,8 @@ void Database::Clear()
 	for_each(m_nodes.begin(), m_nodes.end(), ee::DeletePointerFunctor<Node>());
 	m_nodes.clear();
 
-	m_map.clear();
+	m_map_path.clear();
+	m_map_export_name.clear();
 }
 
 int Database::BuildNode(const std::string& path)
@@ -180,7 +214,16 @@ int Database::BuildNode(const std::string& path)
 	int id = m_nodes.size();
 	node->SetID(id);
 	m_nodes.push_back(node);
-	m_map.insert(std::make_pair(gum::FilepathHelper::Format(path), id));	
+	m_map_path.insert(std::make_pair(gum::FilepathHelper::Format(path), id));	
+
+	if (node->Type() == NODE_LEAF)
+	{
+		LeafNode* leaf = static_cast<LeafNode*>(node);
+		const std::string& name = leaf->GetExportName();
+		if (!name.empty()) {
+			m_map_export_name.insert(std::make_pair(name, node->GetID()));
+		}
+	}
 
 	return id;
 }

@@ -204,6 +204,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\easydb\DBHelper.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb\DBHelper.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\easydb\IndexNode.cpp"
 					>
 				</File>
@@ -212,11 +220,11 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb\JsonRefParser.cpp"
+					RelativePath="..\..\..\src\easydb\JsonResParser.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb\JsonRefParser.h"
+					RelativePath="..\..\..\src\easydb\JsonResParser.h"
 					>
 				</File>
 				<File

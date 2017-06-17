@@ -26,6 +26,8 @@ public:
 	virtual void Store(std::ofstream& fout) const;
 	virtual void Load(std::ifstream& fin);
 
+	const std::string& GetExportName() const { return m_export_name; }
+
 	void BuildConnection(const Database& db);
 
 	void AddInput(int id);
@@ -36,6 +38,8 @@ public:
 private:
 	uint32_t m_timestamp;
 
+	std::string m_export_name;
+	
 	std::set<int> m_in_nodes, m_out_nodes;
 
 }; // LeafNode

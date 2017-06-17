@@ -1,4 +1,4 @@
-#include "JsonRefParser.h"
+#include "JsonResParser.h"
 #include "Database.h"
 
 #include <ee/SymbolFile.h>
@@ -6,6 +6,7 @@
 
 #include <sprite2/SymType.h>
 #include <gum/FilepathHelper.h>
+#include <gum/StringHelper.h>
 
 #include <fstream>
 
@@ -17,9 +18,10 @@ namespace edb
 static const std::string KEY_SPR = "sprite";
 static const std::string KEY_COMP = "components";
 static const std::string KEY_PATH = "filepath";
+static const std::string KEY_EXPORT_NAME = "name";
 
-void JsonRefParser::GetOutput(const Database& db, const std::string& filepath,
-							  std::set<int>& output)
+void JsonResParser::Parse(const Database& db, const std::string& filepath,
+						  std::string& export_name, std::set<int>& output)
 {
 	output.clear();
 
@@ -30,7 +32,7 @@ void JsonRefParser::GetOutput(const Database& db, const std::string& filepath,
 	case s2::SYM_IMAGE:
 		break;
 	case s2::SYM_SCALE9:
-		ParserCommonArray(db, filepath, KEY_SPR, output);
+		ParserCommon(db, filepath, KEY_SPR, output, export_name);
 		break;
 	case s2::SYM_ICON:
 		break;
@@ -38,19 +40,19 @@ void JsonRefParser::GetOutput(const Database& db, const std::string& filepath,
 		ParserTexture(db, filepath, output);
 		break;
 	case s2::SYM_COMPLEX:
-		ParserCommonArray(db, filepath, KEY_SPR, output);
+		ParserCommon(db, filepath, KEY_SPR, output, export_name);
 		break;
 	case s2::SYM_ANIMATION:
-		ParserAnim(db, filepath, output);
+		ParserAnim(db, filepath, output, export_name);
 		break;
 	case s2::SYM_ANIM2:
 		// todo
 		break;
 	case s2::SYM_PARTICLE3D:
-		ParserCommonArray(db, filepath, KEY_COMP, output);
+		ParserCommon(db, filepath, KEY_COMP, output, export_name);
 		break;
 	case s2::SYM_PARTICLE2D:
-		ParserCommonArray(db, filepath, KEY_COMP, output);
+		ParserCommon(db, filepath, KEY_COMP, output, export_name);
 		break;
 	case s2::SYM_SHAPE:
 		// todo
@@ -70,10 +72,16 @@ void JsonRefParser::GetOutput(const Database& db, const std::string& filepath,
 	case s2::SYM_MODEL:
 		// todo
 		break;
+	case ee::SYM_UIWND:
+		ParserCommon(db, filepath, KEY_SPR, output, export_name);
+		break;
+	case ee::SYM_UI:
+		ParserUI(db, filepath, output);
+		break;
 	}
 }
 
-void JsonRefParser::ParserFile(const Database& db, const std::string& base_dir,
+void JsonResParser::ParserFile(const Database& db, const std::string& base_dir,
 							   const Json::Value& val, const std::string& key, 
 							   std::set<int>& output)
 {
@@ -84,12 +92,11 @@ void JsonRefParser::ParserFile(const Database& db, const std::string& base_dir,
 
 	std::string absolute = gum::FilepathHelper::Absolute(base_dir, filepath);
 	absolute = gum::FilepathHelper::Format(absolute);
-	int id = db.Query(absolute);
-	assert(id != -1);
+	int id = db.QueryByPath(absolute);
 	output.insert(id);
 }
 
-void JsonRefParser::ParserGroup(const Database& db, const std::string& base_dir, 
+void JsonResParser::ParserGroup(const Database& db, const std::string& base_dir, 
 								const Json::Value& val, std::set<int>& output)
 {
 	for (int i = 0, n = val["group"].size(); i < n; ++i) {
@@ -97,7 +104,7 @@ void JsonRefParser::ParserGroup(const Database& db, const std::string& base_dir,
 	}
 }
 
-void JsonRefParser::LoadJson(const std::string& filepath, Json::Value& val)
+void JsonResParser::LoadJson(const std::string& filepath, Json::Value& val)
 {
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
@@ -107,20 +114,24 @@ void JsonRefParser::LoadJson(const std::string& filepath, Json::Value& val)
 	fin.close();
 }
 
-void JsonRefParser::ParserCommonArray(const Database& db, const std::string& filepath, 
-									  const std::string& key, std::set<int>& output)
+void JsonResParser::ParserCommon(const Database& db, const std::string& filepath, 
+								 const std::string& key, std::set<int>& output,
+								 std::string& export_name)
 {
 	Json::Value value;
 	LoadJson(filepath, value);
 
+	export_name = value[KEY_EXPORT_NAME].asString();
+	gum::StringHelper::ToLower(export_name);
+
 	std::string dir = gum::FilepathHelper::Dir(filepath);
-	int n = value[KEY_SPR].size();
+	int n = value[key].size();
 	for (int i = 0; i < n; ++i) {
 		ParserFile(db, dir, value[key][i], KEY_PATH, output);
 	}
 }
 
-void JsonRefParser::ParserTexture(const Database& db, const std::string& filepath, 
+void JsonResParser::ParserTexture(const Database& db, const std::string& filepath, 
 								  std::set<int>& output)
 {
 	Json::Value value;
@@ -139,11 +150,13 @@ void JsonRefParser::ParserTexture(const Database& db, const std::string& filepat
 	}
 }
 
-void JsonRefParser::ParserAnim(const Database& db, const std::string& filepath, 
-							   std::set<int>& output)
+void JsonResParser::ParserAnim(const Database& db, const std::string& filepath, 
+							   std::set<int>& output, std::string& export_name)
 {
 	Json::Value value;
 	LoadJson(filepath, value);
+
+	export_name = value[KEY_EXPORT_NAME].asString();
 
 	std::string dir = gum::FilepathHelper::Dir(filepath);
 	for (int layer_i = 0, layer_n = value["layer"].size(); layer_i < layer_n; ++layer_i) {
@@ -157,7 +170,7 @@ void JsonRefParser::ParserAnim(const Database& db, const std::string& filepath,
 	}
 }
 
-void JsonRefParser::ParserMesh(const Database& db, const std::string& filepath,
+void JsonResParser::ParserMesh(const Database& db, const std::string& filepath,
 							   std::set<int>& output)
 {
 	Json::Value value;
@@ -167,7 +180,7 @@ void JsonRefParser::ParserMesh(const Database& db, const std::string& filepath,
 	ParserFile(db, dir, value, "base_symbol", output);
 }
 
-void JsonRefParser::ParserMask(const Database& db, const std::string& filepath,
+void JsonResParser::ParserMask(const Database& db, const std::string& filepath,
 							   std::set<int>& output)
 {
 	Json::Value value;
@@ -176,6 +189,16 @@ void JsonRefParser::ParserMask(const Database& db, const std::string& filepath,
 	std::string dir = gum::FilepathHelper::Dir(filepath);
 	ParserFile(db, dir, value["base"], KEY_PATH, output);
 	ParserFile(db, dir, value["mask"], KEY_PATH, output);
+}
+
+void JsonResParser::ParserUI(const Database& db, const std::string& filepath, std::set<int>& output)
+{
+	Json::Value value;
+	LoadJson(filepath, value);
+
+	std::string dir = gum::FilepathHelper::Dir(filepath);
+	ParserFile(db, dir, value, "items filepath", output);
+	ParserFile(db, dir, value, "wrapper filepath", output);
 }
 
 }
