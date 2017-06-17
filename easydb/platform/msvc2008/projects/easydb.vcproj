@@ -184,14 +184,6 @@
 		<Filter
 			Name="dataset"
 			>
-			<File
-				RelativePath="..\..\..\src\easydb\Graphics.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easydb\Graphics.h"
-				>
-			</File>
 			<Filter
 				Name="db"
 				>
@@ -364,10 +356,6 @@
 		<Filter
 			Name="tools"
 			>
-			<File
-				RelativePath="..\..\..\src\easydb\filetools.h"
-				>
-			</File>
 			<File
 				RelativePath="..\..\..\src\easydb\Serializer.cpp"
 				>

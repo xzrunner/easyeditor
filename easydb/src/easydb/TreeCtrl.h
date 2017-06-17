@@ -43,8 +43,6 @@ private:
 
 	void SetItemStatus(wxTreeItemId id, const Node* node);
 
-//	void addNode(const Graphics& graph, const Node& node, wxTreeItemId parent);
-
 	std::string GetItemName(const ee::Sprite& spr) const;
 
 	void OnItemMenu(wxTreeEvent& event);

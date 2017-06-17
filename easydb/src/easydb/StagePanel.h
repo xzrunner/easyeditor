@@ -1,8 +1,6 @@
 #ifndef _EASYDB_STAGE_PANEL_H_
 #define _EASYDB_STAGE_PANEL_H_
 
-//#include "Graphics.h"
-
 #include <ee/EditPanel.h>
 #include <ee/SpritesPanelImpl.h>
 #include <ee/ShapesPanelImpl.h>
@@ -31,11 +29,6 @@ public:
 	Symbol* GetSymbol() { return m_sym; }
 
 private:
-	void InitConnection();
-
-	void InitPosition();
-
-private:
 	class DropTarget : public ee::CombinedDropTarget
 	{
 	public:
@@ -52,8 +45,6 @@ private:
 	}; // DropTarget
 
 private:
-//	Graphics m_graphics;
-
 	Database* m_db;
 
 	Symbol* m_sym;

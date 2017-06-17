@@ -1,5 +1,4 @@
 #include "TreeCtrl.h"
-//#include "Graphics.h"
 #include "Context.h"
 #include "StagePanel.h"
 #include "IndexNode.h"
@@ -42,25 +41,6 @@ TreeCtrl::TreeCtrl(wxWindow* parent)
 {
 }
 
-//void TreeCtrl::init(const Graphics& graph)
-//{
-//	bool empty = IsEmpty();
-//
-//	clear();
-//	
-//	if (empty)
-//		m_root = AddRoot("Root");
-//
-//	std::map<ee::Sprite*, Node*>::const_iterator itr
-//		= graph.connection.begin();
-//	for ( ; itr != graph.connection.end(); ++itr)
-//	{
-//		wxTreeItemId id = AppendItem(m_root, GetItemName(*itr->first));
-//		m_mapID2Sprite.insert(std::make_pair(id, itr->first));
-//		addNode(graph, *itr->second, id);
-//	}
-//}
-
 void TreeCtrl::Build(const Database& db)
 {
 	m_db = &db;
@@ -69,9 +49,7 @@ void TreeCtrl::Build(const Database& db)
 
 	Clear();
 
-//	if (empty) {
-		m_root = AddRoot(db.GetDirPath());
-//	}
+	m_root = AddRoot(db.GetDirPath());
 
 	BuildFromNode(db, db.GetRoot(), m_root, true);
 
@@ -82,31 +60,9 @@ void TreeCtrl::OnSelected(int node_id)
 {
 	std::map<int, wxTreeItemId>::iterator itr = m_map2id.find(node_id);
 	if (itr != m_map2id.end()) {
-//		SetFocusedItem(itr->second);
 		SelectItem(itr->second);
 	}
 }
-
-//void TreeCtrl::init(const wxArrayString& files)
-//{
-//	bool empty = IsEmpty();
-//
-//	clear();
-//
-//	if (empty)
-//		m_root = AddRoot("Root");
-//
-//	for (size_t i = 0, n = files.size(); i < n; ++i)
-//	{
-//		std::string filepath = files[i];
-//		int type = ee::SymbolFile::Instance()->Type(filepath);
-//		if (type == s2::SYM_COMPLEX || type == s2::SYM_ANIMATION) {
-//			std::string name = ee::FileHelper::GetFilename(filepath);
-//			wxTreeItemId id = AppendItem(m_root, name);
-//			m_mapID2Path.insert(std::make_pair(id, filepath));
-//		}
-//	}
-//}
 
 void TreeCtrl::Clear()
 {
@@ -165,20 +121,6 @@ void TreeCtrl::SetItemStatus(wxTreeItemId id, const Node* node)
 		SetItemTextColour(id, COL_RED);
 	}
 }
-
-//void TreeCtrl::addNode(const Graphics& graph, const Node& node, wxTreeItemId parent)
-//{
-//	for (size_t i = 0, n = node.out.size(); i < n; ++i)
-//	{
-//		ee::Sprite* child = node.out[i];
-//		wxTreeItemId id = AppendItem(parent, GetItemName(*child));
-//		m_mapID2Sprite.insert(std::make_pair(id, child));
-//
-//		Node* query = graph.Query(child);
-//		if (query)
-//			addNode(graph, *query, id);
-//	}
-//}
 
 std::string TreeCtrl::GetItemName(const ee::Sprite& spr) const
 {
