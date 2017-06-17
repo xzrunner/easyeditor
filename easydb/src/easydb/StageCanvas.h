@@ -18,9 +18,6 @@ protected:
 	virtual void OnDrawSprites() const;
 
 private:
-	void drawConnection() const;
-
-private:
 	StagePanel* m_stage_panel;
 
 }; // StageCanvas

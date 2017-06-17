@@ -47,8 +47,6 @@ private:
 
 	void OnItemMenu(wxTreeEvent& event);
 	void OnItemActivated(wxTreeEvent& event);
-	void OnSelChanged(wxTreeEvent& event);
-	void OnItemClick(wxTreeEvent& event);
 	void OnBeginDrag(wxTreeEvent& event);
 	void OnEndDrag(wxTreeEvent& event);
 

@@ -25,8 +25,6 @@ namespace edb
 BEGIN_EVENT_TABLE(TreeCtrl, wxTreeCtrl)
 	EVT_TREE_ITEM_MENU(ID_CTRL, TreeCtrl::OnItemMenu)
 	EVT_TREE_ITEM_ACTIVATED(ID_CTRL, TreeCtrl::OnItemActivated)
-	EVT_TREE_SEL_CHANGED(ID_CTRL, TreeCtrl::OnSelChanged)
-	EVT_TREE_ITEM_ACTIVATED(ID_CTRL, TreeCtrl::OnItemClick)
 	EVT_TREE_BEGIN_DRAG(ID_CTRL, TreeCtrl::OnBeginDrag)
 	EVT_TREE_END_DRAG(ID_CTRL, TreeCtrl::OnEndDrag)
 END_EVENT_TABLE()
@@ -148,71 +146,6 @@ void TreeCtrl::OnItemActivated(wxTreeEvent& event)
 	if (id.IsOk()) {
 		OpenFileByEditor(id);
 	}
-}
-
-void TreeCtrl::OnSelChanged(wxTreeEvent& event)
-{
-	//ee::Sprite* spr = querySpriteByID(event.GetItem());
-	//if (!spr) return;
-	//
-	//ee::SpriteSelection* selection = Context::Instance()->stage->GetSpriteSelection();
-	//selection->Clear();
-	//selection->Add(spr);
-
-	//m_parent->Refresh(true);
-}
-
-void TreeCtrl::OnItemClick(wxTreeEvent& event)
-{
-//	ee::Sprite* spr = querySpriteByID(event.GetItem());
-//	if (spr) 
-//	{
-//		if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(spr))
-//		{
-//			StagePanel* stage = Context::Instance()->stage;
-//
-//			ecomplex::Symbol* sym = dynamic_cast<ecomplex::Symbol*>(complex->GetSymbol());
-//			ecomplex::EditDialog dlg(stage, sym, NULL);
-//			dlg.ShowModal();
-//		}
-//	}
-//	else
-//	{
-//		std::map<wxTreeItemId, std::string>::iterator itr = m_mapID2Path.find(event.GetItem());
-//		if (itr != m_mapID2Path.end())
-//		{
-//			std::string filename = itr->second;
-//			int type = ee::SymbolFile::Instance()->Type(filename);
-//			switch (type)
-//			{
-//			case s2::SYM_COMPLEX:
-//				{
-//					std::string cmd = "easycomplex.exe " + itr->second;
-//					WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);
-//				}
-//				break;
-//			case s2::SYM_ANIMATION:
-//				{
-//					std::string cmd = "easyanimation.exe " + itr->second;
-//					WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);
-//				}
-//				break;
-//			}
-//
-//// 				ee::Symbol* sym = ee::SymbolMgr::Instance()->getSymbol(itr->second);
-//// 				if (ecomplex::Symbol* complex = dynamic_cast<ecomplex::Symbol*>(sym))
-//// 				{
-////  					StagePanel* stage = Context::Instance()->stage;
-////  					ecomplex::EditDialog dlg(stage, complex);
-////  					dlg.ShowModal();
-////  					stage->resetCanvas();
-//// 				}
-//// 				else if (libanim::Symbol* anim = dynamic_cast<libanim::Symbol*>(sym))
-//// 				{
-//// 
-//// 				}
-//		}
-//	}
 }
 
 void TreeCtrl::OnBeginDrag(wxTreeEvent& event)

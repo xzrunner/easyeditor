@@ -58,29 +58,6 @@ StagePanel::~StagePanel()
 
 void StagePanel::LoadFromDir(const std::string& dirpath)
 {
-	ee::ClearSpriteSJ::Instance()->Clear();
-
-	wxArrayString files;
-	ee::FileHelper::FetchAllFiles(dirpath, files);
-
-	for (size_t i = 0, n = files.size(); i < n; ++i)
-	{
-		std::string filepath = files[i].ToStdString();
-		int type = ee::SymbolFile::Instance()->Type(filepath);
-		if (type == s2::SYM_COMPLEX || type == s2::SYM_ANIMATION) {
-			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-			ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
-			sym->RemoveReference();
-			ee::InsertSpriteSJ::Instance()->Insert(spr);
-		}
-	}
-
-	InitConnection();
-	InitPosition();
-}
-
-void StagePanel::LoadFromDirFast(const std::string& dirpath)
-{
 	m_db->Build(dirpath);
 	Context::Instance()->tree->Build(*m_db);
 }

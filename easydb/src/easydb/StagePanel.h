@@ -22,7 +22,6 @@ public:
 	virtual ~StagePanel();
 
 	void LoadFromDir(const std::string& dirpath);
-	void LoadFromDirFast(const std::string& dirpath);
 
 	Database* GetDB() { return m_db; }
 	

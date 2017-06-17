@@ -1,6 +1,5 @@
 #include "Task.h"
 #include "StagePanel.h"
-#include "FileIO.h"
 #include "Context.h"
 #include "TreeCtrl.h"
 #include "Database.h"
@@ -34,8 +33,6 @@ void Task::LoadFromFile(const char* filename)
 		throw ee::Exception("File: %s don't exist!", filename);
 	}
 
-//	FileIO::Load(filename);
-
 	Context* ctx = Context::Instance();
 	ctx->stage->GetDB()->Load(filename);
 	ctx->tree->Build(*ctx->stage->GetDB());
@@ -43,8 +40,6 @@ void Task::LoadFromFile(const char* filename)
 
 void Task::StoreToFile(const char* filename) const
 {
-//	FileIO::Store(filename);
-
 	Context::Instance()->stage->GetDB()->Store(filename);
 }
 

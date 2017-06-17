@@ -273,14 +273,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easydb\FileIO.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easydb\FileIO.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\easydb\Frame.cpp"
 				>
 			</File>

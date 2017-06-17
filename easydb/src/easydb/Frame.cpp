@@ -108,7 +108,7 @@ void Frame::OnConnect(wxCommandEvent& event)
 	{
 		try {
 //			Context::Instance()->stage->loadFromDir(dlg.GetPath().ToStdString());
-			Context::Instance()->stage->LoadFromDirFast(dlg.GetPath().ToStdString());
+			Context::Instance()->stage->LoadFromDir(dlg.GetPath().ToStdString());
 		} catch (ee::Exception& e) {
 			ee::ExceptionDlg dlg(this, e);
 			dlg.ShowModal();

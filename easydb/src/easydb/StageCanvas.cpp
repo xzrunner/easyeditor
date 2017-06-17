@@ -27,26 +27,7 @@ void StageCanvas::OnDrawSprites() const
 	m_stage_panel->TraverseShapes(ee::DrawShapesVisitor(sm::rect(), GetCameraScale()), ee::DT_VISIBLE);
 	m_stage_panel->TraverseSprites(ee::DrawSpritesVisitor(GetVisibleRegion(), GetCameraScale()), ee::DT_VISIBLE);
 
-
-//	drawConnection();
 	m_stage_panel->DrawEditOP();
-}
-
-void StageCanvas::drawConnection() const
-{
-	//std::map<ee::Sprite*, Node*>& connection
-	//	= Context::Instance()->stage->m_graphics.connection;
-	//std::map<ee::Sprite*, Node*>::iterator itr = connection.begin();
-	//for ( ; itr != connection.end(); ++itr)
-	//{
-	//	ee::Sprite* from = itr->first;
-	//	for (size_t i = 0, n = itr->second->out.size(); i < n; ++i)
-	//	{
-	//		ee::Sprite* to = itr->second->out[i];
-	//		s2::RVG::SetColor(s2::Color(204, 204, 204));
-	//		s2::RVG::Line(from->GetPosition(), to->GetPosition());
-	//	}
-	//}
 }
 
 }
