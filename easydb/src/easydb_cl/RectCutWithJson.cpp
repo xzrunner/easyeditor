@@ -114,6 +114,9 @@ void RectCutWithJson::Trigger(const std::string& src_dir, const std::string& dst
 		case s2::SYM_PARTICLE3D:
 			FixParticle3d(src_dir, dst_dir, filepath);
 			break;
+		case s2::SYM_TRAIL:
+			FixTrail(src_dir, dst_dir, filepath);
+			break;
 		case s2::SYM_MESH:
 			FixMesh(src_dir, dst_dir, filepath);
 			break;
@@ -303,6 +306,29 @@ void RectCutWithJson::FixScale9(const std::string& src_dir, const std::string& d
 }
 
 void RectCutWithJson::FixParticle3d(const std::string& src_dir, const std::string& dst_dir, const std::string& filepath) const
+{
+	Json::Value value;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filepath.c_str());
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, value);
+	fin.close();
+
+	std::string dir = ee::FileHelper::GetFileDir(filepath);
+	for (int i = 0, n = value["components"].size(); i < n; ++i) {
+		FixFilepath(src_dir, dst_dir, dir, value["components"][i], "filepath");
+	}
+
+	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
+	std::ofstream fout(filepath.c_str());
+	std::locale::global(std::locale("C"));	
+	writer.write(fout, value);
+	fout.close();
+}
+
+void RectCutWithJson::FixTrail(const std::string& src_dir, const std::string& dst_dir, const std::string& filepath) const
 {
 	Json::Value value;
 	Json::Reader reader;
