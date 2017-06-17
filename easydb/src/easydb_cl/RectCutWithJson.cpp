@@ -338,6 +338,11 @@ void RectCutWithJson::FixTrail(const std::string& src_dir, const std::string& ds
 	reader.parse(fin, value);
 	fin.close();
 
+	int mode = value["mode"].asInt();
+	if (mode != 0) {
+		return;
+	}
+
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	for (int i = 0, n = value["components"].size(); i < n; ++i) {
 		FixFilepath(src_dir, dst_dir, dir, value["components"][i], "filepath");
