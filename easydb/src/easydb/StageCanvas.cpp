@@ -1,6 +1,5 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
-#include "Context.h"
 
 #include <ee/DrawShapesVisitor.h>
 #include <ee/DrawSpritesVisitor.h>

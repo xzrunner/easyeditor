@@ -9,15 +9,12 @@
 
 #include <wx/dir.h>
 #include <wx/filename.h>
-//#include <wx/log.h>
 
 #include <algorithm>
 #include <fstream>
 
 namespace edb
 {
-
-//SINGLETON_DEFINITION(Database);
 
 Database::Database()
 	: m_root(-1)
@@ -86,21 +83,8 @@ void Database::Load(const std::string& filepath)
 			break;
 		}
 		node->Load(fin);
-		node->SetID(i);
 
-		m_nodes.push_back(node);
-
-		std::string path = gum::FilepathHelper::Absolute(m_dir_path, node->GetPath());
-		m_map_path.insert(std::make_pair(path, node->GetID()));
-
-		if (node->Type() == NODE_LEAF)
-		{
-			LeafNode* leaf = static_cast<LeafNode*>(node);
-			const std::string& name = leaf->GetExportName();
-			if (!name.empty()) {
-				m_map_export_name.insert(std::make_pair(name, node->GetID()));
-			}
-		}
+		Insert(node, i);
 	}
 
 	fin.close();
@@ -118,7 +102,7 @@ void Database::Build(const std::string& dir_path)
 
 	m_root = BuildNode(dir_path);
 
-	Parser();
+	FinalParse();
 }
 
 int Database::QueryByPath(const std::string& path) const
@@ -133,7 +117,7 @@ int Database::QueryByPath(const std::string& path) const
 
 int Database::QueryByExportName(const std::string& name) const
 {
-	std::map<std::string, int>::const_iterator itr = m_map_export_name.find(name);
+	std::multimap<std::string, int>::const_iterator itr = m_map_export_name.find(name);
 	if (itr != m_map_export_name.end()) {
 		return itr->second;
 	}
@@ -212,23 +196,40 @@ int Database::BuildNode(const std::string& path)
 	}
 
 	int id = m_nodes.size();
-	node->SetID(id);
-	m_nodes.push_back(node);
-	m_map_path.insert(std::make_pair(gum::FilepathHelper::Format(path), id));	
-
-	if (node->Type() == NODE_LEAF)
-	{
-		LeafNode* leaf = static_cast<LeafNode*>(node);
-		const std::string& name = leaf->GetExportName();
-		if (!name.empty()) {
-			m_map_export_name.insert(std::make_pair(name, node->GetID()));
-		}
-	}
+	Insert(node, id);
 
 	return id;
 }
 
-void Database::Parser()
+void Database::Insert(Node* node, int id)
+{
+	node->SetID(id);
+	m_nodes.push_back(node);
+
+	// map_path
+	std::string path = gum::FilepathHelper::Absolute(m_dir_path, node->GetPath());
+	m_map_path.insert(std::make_pair(path, node->GetID()));
+
+	if (node->Type() != NODE_LEAF) {
+		return;
+	}
+
+	LeafNode* leaf = static_cast<LeafNode*>(node);
+
+	// map_export_name
+	const std::string& name = leaf->GetExportName();
+	if (!name.empty()) {
+		m_map_export_name.insert(std::make_pair(name, node->GetID()));
+	}
+
+	// map_md5
+	const std::string& md5 = leaf->GetMD5();
+	if (!md5.empty()) {
+		m_map_md5.insert(std::make_pair(md5, node->GetID()));
+	}
+}
+
+void Database::FinalParse()
 {
 	for (int i = 0, n = m_nodes.size(); i < n; ++i)
 	{

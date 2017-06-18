@@ -1,9 +1,11 @@
 #include "Frame.h"
 #include "Task.h"
-#include "Context.h"
 #include "StagePanel.h"
 #include "Database.h"
-#include "TreeCtrl.h"
+#include "MainList.h"
+#include "MainPanel.h"
+#include "WarnPanel.h"
+#include "WarnList.h"
 
 #include <ee/FileHelper.h>
 #include <ee/Exception.h>
@@ -97,7 +99,7 @@ void Frame::OnSaveAs(wxCommandEvent& event)
 void Frame::OnConnect(wxCommandEvent& event)
 {
 	ee::ZoomViewOP* op = dynamic_cast<ee::ZoomViewOP*>
-		(Context::Instance()->stage->GetEditOP());
+		(m_task->GetStagePanel()->GetEditOP());
 	if (op) {
 		op->SetMouseMoveFocus(false);
 	}
@@ -107,8 +109,11 @@ void Frame::OnConnect(wxCommandEvent& event)
 	if (dlg.ShowModal() == wxID_OK)
 	{
 		try {
-//			Context::Instance()->stage->loadFromDir(dlg.GetPath().ToStdString());
-			Context::Instance()->stage->LoadFromDir(dlg.GetPath().ToStdString());
+			std::string dirpath = dlg.GetPath().ToStdString();
+			Database* db = m_task->GetStagePanel()->GetDB();
+			db->Build(dirpath);
+			m_task->GetMainPanel()->GetList()->Build(*db);
+			m_task->GetWarnPanel()->GetList()->Build(*db);
 		} catch (ee::Exception& e) {
 			ee::ExceptionDlg dlg(this, e);
 			dlg.ShowModal();
@@ -128,10 +133,9 @@ void Frame::OnSearch(wxCommandEvent& event)
 		std::string str = dlg.GetValue().ToStdString();
 		gum::StringHelper::ToLower(str);
 		
-		Context* ctx = Context::Instance();
-		int id = ctx->stage->GetDB()->QueryByExportName(str);
+		int id = m_task->GetStagePanel()->GetDB()->QueryByExportName(str);
 		if (id != -1) {
-			ctx->tree->OnSelected(id);
+			m_task->GetMainPanel()->GetList()->OnSelected(id);
 		}
 	}
 }

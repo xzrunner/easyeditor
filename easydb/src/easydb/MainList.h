@@ -1,11 +1,9 @@
-#ifndef _EASYDB_TREE_CTRL_H_
-#define _EASYDB_TREE_CTRL_H_
+#ifndef _EASYDB_MAIN_LIST_H_
+#define _EASYDB_MAIN_LIST_H_
 
 #include <wx/treectrl.h>
 
 #include <map>
-
-namespace ee { class Sprite; }
 
 namespace edb
 {
@@ -13,10 +11,10 @@ namespace edb
 class Database;
 class Node;
 
-class TreeCtrl : public wxTreeCtrl
+class MainList : public wxTreeCtrl
 {
 public:
-	TreeCtrl(wxWindow* parent);
+	MainList(wxWindow* parent);
 
 	void Build(const Database& db);
 
@@ -43,8 +41,6 @@ private:
 	void BuildFromNode(const Database& db, int node, wxTreeItemId parent, bool first);
 
 	void SetItemStatus(wxTreeItemId id, const Node* node);
-
-	std::string GetItemName(const ee::Sprite& spr) const;
 
 	void OnItemMenu(wxTreeEvent& event);
 	void OnItemActivated(wxTreeEvent& event);
@@ -76,8 +72,8 @@ private:
 
 	DECLARE_EVENT_TABLE()
 
-}; // TreeCtrl
+}; // MainList
 
 }
 
-#endif // _EASYDB_TREE_CTRL_H_s
+#endif // _EASYDB_MAIN_LIST_H_

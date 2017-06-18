@@ -18,10 +18,8 @@ class StagePanel : public ee::EditPanel, public ee::SpritesPanelImpl,
 	               public ee::ShapesPanelImpl
 {
 public:
-	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, wxTreeCtrl* tree);
+	StagePanel(wxWindow* parent, wxTopLevelWindow* frame);
 	virtual ~StagePanel();
-
-	void LoadFromDir(const std::string& dirpath);
 
 	Database* GetDB() { return m_db; }
 	
@@ -31,15 +29,13 @@ private:
 	class DropTarget : public ee::CombinedDropTarget
 	{
 	public:
-		DropTarget(wxWindow* stage_wnd, StagePanel* stage, 
-			wxTreeCtrl* tree);
+		DropTarget(wxWindow* stage_wnd, StagePanel* stage);
 
 		virtual void OnDropText(wxCoord x, wxCoord y, const wxString& text);
 		virtual void OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames) {}
 
 	private:
 		StagePanel* m_stage;
-		wxTreeCtrl* m_tree;
 
 	}; // DropTarget
 

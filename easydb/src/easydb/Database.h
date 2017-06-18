@@ -1,8 +1,6 @@
 #ifndef _EASYDB_DATABASE_H_
 #define _EASYDB_DATABASE_H_
 
-//#include <CU_Singleton.h>
-
 #include <string>
 #include <vector>
 #include <map>
@@ -33,12 +31,16 @@ public:
 
 	const Node* Fetch(int idx) const;
 
+	const std::multimap<std::string, int>& GetMD5Map() const { return m_map_md5; }
+
 private:
 	void Clear();
 
 	int BuildNode(const std::string& path);
 
-	void Parser();
+	void Insert(Node* node, int id);
+
+	void FinalParse();
 
 private:
 	std::string m_dir_path;
@@ -48,9 +50,9 @@ private:
 	std::vector<Node*> m_nodes;
 
 	std::map<std::string, int> m_map_path;
-	std::map<std::string, int> m_map_export_name;
+	std::multimap<std::string, int> m_map_export_name;
 
-//	SINGLETON_DECLARATION(Database);
+	std::multimap<std::string, int> m_map_md5;
 
 }; // Database
 

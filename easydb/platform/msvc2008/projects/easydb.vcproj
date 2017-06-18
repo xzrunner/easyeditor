@@ -265,14 +265,6 @@
 			Name="frame"
 			>
 			<File
-				RelativePath="..\..\..\src\easydb\Context.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easydb\Context.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\easydb\Frame.cpp"
 				>
 			</File>
@@ -329,14 +321,62 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="list"
+				Name="main"
 				>
 				<File
-					RelativePath="..\..\..\src\easydb\TreeCtrl.cpp"
+					RelativePath="..\..\..\src\easydb\MainList.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb\TreeCtrl.h"
+					RelativePath="..\..\..\src\easydb\MainList.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb\MainPanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb\MainPanel.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="search"
+				>
+				<File
+					RelativePath="..\..\..\src\easydb\SearchList.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb\SearchList.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb\SearchPanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb\SearchPanel.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="warn"
+				>
+				<File
+					RelativePath="..\..\..\src\easydb\WarnList.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb\WarnList.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb\WarnPanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb\WarnPanel.h"
 					>
 				</File>
 			</Filter>

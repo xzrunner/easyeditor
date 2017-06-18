@@ -1,7 +1,10 @@
 #include "Task.h"
 #include "StagePanel.h"
-#include "Context.h"
-#include "TreeCtrl.h"
+#include "MainPanel.h"
+#include "MainList.h"
+#include "SearchPanel.h"
+#include "WarnPanel.h"
+#include "WarnList.h"
 #include "Database.h"
 
 #include <ee/SymbolMgr.h>
@@ -33,14 +36,14 @@ void Task::LoadFromFile(const char* filename)
 		throw ee::Exception("File: %s don't exist!", filename);
 	}
 
-	Context* ctx = Context::Instance();
-	ctx->stage->GetDB()->Load(filename);
-	ctx->tree->Build(*ctx->stage->GetDB());
+	m_stage_panel->GetDB()->Load(filename);
+	m_main_panel->GetList()->Build(*m_stage_panel->GetDB());
+	m_warn_panel->GetList()->Build(*m_stage_panel->GetDB());
 }
 
 void Task::StoreToFile(const char* filename) const
 {
-	Context::Instance()->stage->GetDB()->Store(filename);
+	m_stage_panel->GetDB()->Store(filename);
 }
 
 void Task::Clear()
@@ -50,15 +53,45 @@ void Task::Clear()
 
 void Task::InitLayout()
 {
-	wxSplitterWindow* splitter = new wxSplitterWindow(m_parent);
+	wxSplitterWindow* right_split = new wxSplitterWindow(m_parent);
+	wxSplitterWindow* left_split = new wxSplitterWindow(right_split);
 
-	Context* context = Context::Instance();
+	wxWindow* left = InitLayoutLeft(left_split);
+	wxWindow* center = InitLayoutCenter(left_split);
+	wxWindow* right = InitLayoutRight(right_split);
 
-	TreeCtrl* tree = context->tree = new TreeCtrl(splitter);
-	StagePanel* stage = context->stage = new StagePanel(splitter, m_parent, NULL);
+	left_split->SetSashGravity(0.3f);
+	left_split->SplitVertically(left, center);
 
-	splitter->SetSashGravity(0.4f);
-	splitter->SplitVertically(tree, stage);
+	right_split->SetSashGravity(0.75f);
+	right_split->SplitVertically(left_split, right);
+
+	m_root = right_split;
+}
+
+wxWindow* Task::InitLayoutLeft(wxWindow* parent)
+{
+	m_main_panel = new MainPanel(parent);
+	return m_main_panel;
+}
+
+wxWindow* Task::InitLayoutCenter(wxWindow* parent)
+{
+	m_stage_panel = new StagePanel(parent, m_parent);
+	return m_stage_panel;
+}
+
+wxWindow* Task::InitLayoutRight(wxWindow* parent)
+{
+	wxSplitterWindow* split = new wxSplitterWindow(parent);
+
+	m_search_panel = new SearchPanel(split);
+	m_warn_panel = new WarnPanel(split);
+
+	split->SetSashGravity(0.5f);
+	split->SplitHorizontally(m_search_panel, m_warn_panel);
+
+	return split;
 }
 
 }

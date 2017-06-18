@@ -1,5 +1,4 @@
-#include "TreeCtrl.h"
-#include "Context.h"
+#include "MainList.h"
 #include "StagePanel.h"
 #include "IndexNode.h"
 #include "LeafNode.h"
@@ -22,24 +21,25 @@
 namespace edb
 {
 
-BEGIN_EVENT_TABLE(TreeCtrl, wxTreeCtrl)
-	EVT_TREE_ITEM_MENU(ID_CTRL, TreeCtrl::OnItemMenu)
-	EVT_TREE_ITEM_ACTIVATED(ID_CTRL, TreeCtrl::OnItemActivated)
-	EVT_TREE_BEGIN_DRAG(ID_CTRL, TreeCtrl::OnBeginDrag)
-	EVT_TREE_END_DRAG(ID_CTRL, TreeCtrl::OnEndDrag)
+BEGIN_EVENT_TABLE(MainList, wxTreeCtrl)
+	EVT_TREE_ITEM_MENU(ID_CTRL, MainList::OnItemMenu)
+	EVT_TREE_ITEM_ACTIVATED(ID_CTRL, MainList::OnItemActivated)
+	EVT_TREE_BEGIN_DRAG(ID_CTRL, MainList::OnBeginDrag)
+	EVT_TREE_END_DRAG(ID_CTRL, MainList::OnEndDrag)
 END_EVENT_TABLE()
 
 static const wxColour COL_RED    = wxColour(204, 0, 0);
 static const wxColour COL_GREEN  = wxColour(0, 204, 0);
 static const wxColour COL_YELLOW = wxColour(204, 204, 0);
 
-TreeCtrl::TreeCtrl(wxWindow* parent)
+MainList::MainList(wxWindow* parent)
 	: wxTreeCtrl(parent, ID_CTRL)
 	, m_db(NULL)
 {
+	SetBackgroundColour(wxColour(229, 229, 229));
 }
 
-void TreeCtrl::Build(const Database& db)
+void MainList::Build(const Database& db)
 {
 	m_db = &db;
 
@@ -54,7 +54,7 @@ void TreeCtrl::Build(const Database& db)
 	Expand(m_root);
 }
 
-void TreeCtrl::OnSelected(int node_id)
+void MainList::OnSelected(int node_id)
 {
 	std::map<int, wxTreeItemId>::iterator itr = m_map2id.find(node_id);
 	if (itr != m_map2id.end()) {
@@ -62,14 +62,14 @@ void TreeCtrl::OnSelected(int node_id)
 	}
 }
 
-void TreeCtrl::Clear()
+void MainList::Clear()
 {
 	DeleteAllItems();
 	m_map2node.clear();
 	m_map2id.clear();
 }
 
-void TreeCtrl::BuildFromNode(const Database& db, int node_id, wxTreeItemId parent, bool first)
+void MainList::BuildFromNode(const Database& db, int node_id, wxTreeItemId parent, bool first)
 {
 	const std::vector<Node*>& nodes = db.GetNodes();
 	if (node_id < 0 || node_id >= nodes.size()) {
@@ -95,7 +95,7 @@ void TreeCtrl::BuildFromNode(const Database& db, int node_id, wxTreeItemId paren
 	}
 }
 
-void TreeCtrl::SetItemStatus(wxTreeItemId id, const Node* node)
+void MainList::SetItemStatus(wxTreeItemId id, const Node* node)
 {
 	if (node->Type() == NODE_INDEX) {
 		return;
@@ -120,14 +120,7 @@ void TreeCtrl::SetItemStatus(wxTreeItemId id, const Node* node)
 	}
 }
 
-std::string TreeCtrl::GetItemName(const ee::Sprite& spr) const
-{
-	std::string name = dynamic_cast<const ee::Symbol*>(spr.GetSymbol())->GetFilepath();
-	name = ee::FileHelper::GetFilename(name);
-	return name;
-}
-
-void TreeCtrl::OnItemMenu(wxTreeEvent& event)
+void MainList::OnItemMenu(wxTreeEvent& event)
 {
 	wxTreeItemId id = event.GetItem();
 	if (!id.IsOk()) {
@@ -140,7 +133,7 @@ void TreeCtrl::OnItemMenu(wxTreeEvent& event)
 	event.Skip();
 }
 
-void TreeCtrl::OnItemActivated(wxTreeEvent& event)
+void MainList::OnItemActivated(wxTreeEvent& event)
 {
 	wxTreeItemId id = event.GetItem();
 	if (id.IsOk()) {
@@ -148,7 +141,7 @@ void TreeCtrl::OnItemActivated(wxTreeEvent& event)
 	}
 }
 
-void TreeCtrl::OnBeginDrag(wxTreeEvent& event)
+void MainList::OnBeginDrag(wxTreeEvent& event)
 {
 	wxTreeItemId id = event.GetItem();
 	std::map<wxTreeItemId, int>::iterator itr = m_map2node.find(id);
@@ -161,56 +154,56 @@ void TreeCtrl::OnBeginDrag(wxTreeEvent& event)
 	ds.DoDragDrop(wxDrag_CopyOnly);
 }
 
-void TreeCtrl::OnEndDrag(wxTreeEvent& event)
+void MainList::OnEndDrag(wxTreeEvent& event)
 {
 
 }
 
-void TreeCtrl::ShowMenu(wxTreeItemId id, const wxPoint& pt)
+void MainList::ShowMenu(wxTreeItemId id, const wxPoint& pt)
 {
 	m_on_menu_id = id;
 
 	wxMenu menu;
 
 	menu.Append(ID_MENU_OPEN, wxT("打开"));
-	Bind(wxEVT_COMMAND_MENU_SELECTED, &TreeCtrl::OnMenuOpen, this, ID_MENU_OPEN);
+	Bind(wxEVT_COMMAND_MENU_SELECTED, &MainList::OnMenuOpen, this, ID_MENU_OPEN);
 
 	menu.Append(ID_MENU_OPEN_PATH, wxT("打开路径"));
-	Bind(wxEVT_COMMAND_MENU_SELECTED, &TreeCtrl::OnMenuOpenPath, this, ID_MENU_OPEN_PATH);
+	Bind(wxEVT_COMMAND_MENU_SELECTED, &MainList::OnMenuOpenPath, this, ID_MENU_OPEN_PATH);
 
 	menu.Append(ID_MENU_COPY_FILENAME, wxT("复制文件名"));
-	Bind(wxEVT_COMMAND_MENU_SELECTED, &TreeCtrl::OnMenuCopyFilename, this, ID_MENU_COPY_FILENAME);
+	Bind(wxEVT_COMMAND_MENU_SELECTED, &MainList::OnMenuCopyFilename, this, ID_MENU_COPY_FILENAME);
 
 	menu.Append(ID_MENU_COPY_FILEPATH, wxT("复制完整路径和文件名"));
-	Bind(wxEVT_COMMAND_MENU_SELECTED, &TreeCtrl::OnMenuCopyFilepath, this, ID_MENU_COPY_FILEPATH);
+	Bind(wxEVT_COMMAND_MENU_SELECTED, &MainList::OnMenuCopyFilepath, this, ID_MENU_COPY_FILEPATH);
 
 	menu.AppendSeparator();
 
 	menu.Append(ID_MENU_REF_INFO, wxT("引用信息"));
-	Bind(wxEVT_COMMAND_MENU_SELECTED, &TreeCtrl::OnMenuRefInfo, this, ID_MENU_REF_INFO);
+	Bind(wxEVT_COMMAND_MENU_SELECTED, &MainList::OnMenuRefInfo, this, ID_MENU_REF_INFO);
 
 	menu.Append(ID_MENU_COPY_TREE_TO, wxT("拷贝整棵树..."));
-	Bind(wxEVT_COMMAND_MENU_SELECTED, &TreeCtrl::OnMenuCopyTreeTo, this, ID_MENU_COPY_TREE_TO);
+	Bind(wxEVT_COMMAND_MENU_SELECTED, &MainList::OnMenuCopyTreeTo, this, ID_MENU_COPY_TREE_TO);
 
 	menu.Append(ID_MENU_DEL_TREE, wxT("删除整棵树"));
-	Bind(wxEVT_COMMAND_MENU_SELECTED, &TreeCtrl::OnMenuDelTree, this, ID_MENU_DEL_TREE);
+	Bind(wxEVT_COMMAND_MENU_SELECTED, &MainList::OnMenuDelTree, this, ID_MENU_DEL_TREE);
 
 	menu.AppendSeparator();
 
 	menu.Append(ID_MENU_BASE_INFO, wxT("基本信息"));
-	Bind(wxEVT_COMMAND_MENU_SELECTED, &TreeCtrl::OnMenuBaseInfo, this, ID_MENU_BASE_INFO);
+	Bind(wxEVT_COMMAND_MENU_SELECTED, &MainList::OnMenuBaseInfo, this, ID_MENU_BASE_INFO);
 
 	PopupMenu(&menu, pt);
 }
 
-void TreeCtrl::OnMenuOpen(wxCommandEvent& event)
+void MainList::OnMenuOpen(wxCommandEvent& event)
 {
 	if (m_on_menu_id.IsOk()) {
 		OpenFileByEditor(m_on_menu_id);
 	}
 }
 
-void TreeCtrl::OnMenuOpenPath(wxCommandEvent& event)
+void MainList::OnMenuOpenPath(wxCommandEvent& event)
 {
 	if (!m_on_menu_id.IsOk()) {
 		return;
@@ -224,7 +217,7 @@ void TreeCtrl::OnMenuOpenPath(wxCommandEvent& event)
 	wxExecute(command, wxEXEC_ASYNC, NULL);
 }
 
-void TreeCtrl::OnMenuCopyFilename(wxCommandEvent& event)
+void MainList::OnMenuCopyFilename(wxCommandEvent& event)
 {
 	if (!m_on_menu_id.IsOk()) {
 		return;
@@ -239,7 +232,7 @@ void TreeCtrl::OnMenuCopyFilename(wxCommandEvent& event)
 	}
 }
 
-void TreeCtrl::OnMenuCopyFilepath(wxCommandEvent& event)
+void MainList::OnMenuCopyFilepath(wxCommandEvent& event)
 {
 	if (!m_on_menu_id.IsOk()) {
 		return;
@@ -273,7 +266,7 @@ static std::string NodesToStr(const Database& db, const std::set<int>& nodes)
 	return str;
 }
 
-void TreeCtrl::OnMenuRefInfo(wxCommandEvent& event)
+void MainList::OnMenuRefInfo(wxCommandEvent& event)
 {
 	if (!m_on_menu_id.IsOk()) {
 		return;
@@ -305,7 +298,7 @@ void TreeCtrl::OnMenuRefInfo(wxCommandEvent& event)
 	wxMessageBox(msg, "ref info");
 }
 
-void TreeCtrl::OnMenuCopyTreeTo(wxCommandEvent& event)
+void MainList::OnMenuCopyTreeTo(wxCommandEvent& event)
 {
 	if (!m_on_menu_id.IsOk()) {
 		return;
@@ -325,7 +318,7 @@ void TreeCtrl::OnMenuCopyTreeTo(wxCommandEvent& event)
 	}
 }
 
-void TreeCtrl::OnMenuDelTree(wxCommandEvent& event)
+void MainList::OnMenuDelTree(wxCommandEvent& event)
 {
 	if (!m_on_menu_id.IsOk()) {
 		return;
@@ -362,7 +355,7 @@ void TreeCtrl::OnMenuDelTree(wxCommandEvent& event)
 	}
 }
 
-void TreeCtrl::OnMenuBaseInfo(wxCommandEvent& event)
+void MainList::OnMenuBaseInfo(wxCommandEvent& event)
 {
 	if (!m_on_menu_id.IsOk()) {
 		return;
@@ -383,7 +376,7 @@ void TreeCtrl::OnMenuBaseInfo(wxCommandEvent& event)
 	wxMessageBox(msg, "base info");
 }
 
-void TreeCtrl::OpenFileByEditor(wxTreeItemId id)
+void MainList::OpenFileByEditor(wxTreeItemId id)
 {
 	std::map<wxTreeItemId, int>::iterator itr = m_map2node.find(id);
 	const Node* node = m_db->Fetch(itr->second);

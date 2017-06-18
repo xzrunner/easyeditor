@@ -1,5 +1,4 @@
 #include "SelectSpritesOP.h"
-#include "Context.h"
 #include "StagePanel.h"
 #include "Symbol.h"
 #include "Sprite.h"
@@ -26,7 +25,7 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 
 	if (keyCode == WXK_SPACE)
 	{
-		ee::SpriteSelection* selection = Context::Instance()->stage->GetSpriteSelection();
+		ee::SpriteSelection* selection = static_cast<StagePanel*>(m_wnd)->GetSpriteSelection();
 		std::vector<ee::Sprite*> sprs;
 		selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
 

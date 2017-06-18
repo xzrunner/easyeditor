@@ -7,6 +7,11 @@ class wxWindow;
 namespace edb
 {
 
+class MainPanel;
+class StagePanel;
+class SearchPanel;
+class WarnPanel;
+
 class Task
 {
 public:
@@ -15,6 +20,10 @@ public:
 	virtual void StoreToFile(const char* filename) const;
 
 	virtual void Clear();
+
+	MainPanel* GetMainPanel() { return m_main_panel; }
+	StagePanel* GetStagePanel() { return m_stage_panel; }
+	WarnPanel* GetWarnPanel() { return m_warn_panel; }
 
 	static Task* Create(wxFrame* parent)
 	{
@@ -27,11 +36,19 @@ protected:
 
 private:
 	void InitLayout();
+	wxWindow* InitLayoutLeft(wxWindow* parent);
+	wxWindow* InitLayoutCenter(wxWindow* parent);
+	wxWindow* InitLayoutRight(wxWindow* parent);
 
 private:
 	wxWindow* m_root;
 
 	wxFrame* m_parent;
+
+	MainPanel* m_main_panel;
+	StagePanel* m_stage_panel;
+	SearchPanel* m_search_panel;
+	WarnPanel* m_warn_panel;
 
 }; // Task
 

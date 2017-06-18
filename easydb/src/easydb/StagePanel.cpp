@@ -1,9 +1,6 @@
 #include "StagePanel.h"
-
 #include "StageCanvas.h"
-#include "Context.h"
 #include "SelectSpritesOP.h"
-#include "TreeCtrl.h"
 #include "Database.h"
 #include "Symbol.h"
 #include "Sprite.h"
@@ -29,8 +26,7 @@
 namespace edb
 {
 
-StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
-					   wxTreeCtrl* tree)
+StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 	: ee::EditPanel(parent, frame)
 	, ee::SpritesPanelImpl(GetStageImpl(), (ee::LibraryPanel*)(NULL))
 	, ee::ShapesPanelImpl()
@@ -47,7 +43,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	SetCanvas(canvas);
 	canvas->RemoveReference();
 
-	SetDropTarget(new DropTarget(this, this, tree));
+	SetDropTarget(new DropTarget(this, this));
 }
 
 StagePanel::~StagePanel()
@@ -56,20 +52,13 @@ StagePanel::~StagePanel()
 	delete m_db;
 }
 
-void StagePanel::LoadFromDir(const std::string& dirpath)
-{
-	m_db->Build(dirpath);
-	Context::Instance()->tree->Build(*m_db);
-}
-
 /************************************************************************/
 /* class StagePanel::DropTarget                                         */
 /************************************************************************/
 
-StagePanel::DropTarget::DropTarget(wxWindow* stage_wnd, StagePanel* stage, wxTreeCtrl* tree)
+StagePanel::DropTarget::DropTarget(wxWindow* stage_wnd, StagePanel* stage)
 	: CombinedDropTarget(stage_wnd)
 	, m_stage(stage)
-	, m_tree(tree)
 {
 }
 
