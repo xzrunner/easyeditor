@@ -146,7 +146,7 @@ int Database::QueryByExportName(const std::string& name) const
 	}
 
 	std::map<std::string, int>::const_iterator itr_path = m_map_path.begin();
-	for ( ; itr_path != m_map_export_name.end(); ++itr_path) {
+	for ( ; itr_path != m_map_path.end(); ++itr_path) {
 		if (itr_path->first.find(name) != std::string::npos) {
 			return itr_path->second;
 		}
