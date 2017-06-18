@@ -1,6 +1,6 @@
 #include "UniqueImage.h"
 #include "check_params.h"
-#include "filetools.h"
+#include "MD5Helper.h"
 
 #include <ee/FileHelper.h>
 #include <ee/StringHelper.h>
@@ -57,13 +57,12 @@ void UniqueImage::ProcessImageFiles(const std::string& imgdir)
 			std::string imgpath(filepath.c_str());
 			ee::StringHelper::ToLower(imgpath);
 
-			char sig[32];
-			md5_file(imgpath.c_str(), sig);
-			std::string md5(reinterpret_cast<char*>(sig));
-			if (md5.empty()) {
+			std::string md5;
+			md5.resize(32);
+			if (!MD5Helper::File(imgpath, md5)) {
 				throw ee::Exception("ProcessImageFiles md5 empty");
 			}
-
+			
 			std::map<std::string, std::string>::iterator itr_md5 
 				= m_map_md5_2_image.find(md5);
 			if (itr_md5 == m_map_md5_2_image.end()) {

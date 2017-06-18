@@ -118,7 +118,7 @@ void Database::Build(const std::string& dir_path)
 
 	m_root = BuildNode(dir_path);
 
-	BuildConnection();
+	Parser();
 }
 
 int Database::QueryByPath(const std::string& path) const
@@ -228,13 +228,13 @@ int Database::BuildNode(const std::string& path)
 	return id;
 }
 
-void Database::BuildConnection()
+void Database::Parser()
 {
 	for (int i = 0, n = m_nodes.size(); i < n; ++i)
 	{
 		Node* node = m_nodes[i];
 		if (node->Type() == NODE_LEAF) {
-			static_cast<LeafNode*>(node)->BuildConnection(*this);
+			static_cast<LeafNode*>(node)->Parser(*this);
 		}
 	}
 }

@@ -195,6 +195,11 @@ void TreeCtrl::ShowMenu(wxTreeItemId id, const wxPoint& pt)
 	menu.Append(ID_MENU_DEL_TREE, wxT("删除整棵树"));
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &TreeCtrl::OnMenuDelTree, this, ID_MENU_DEL_TREE);
 
+	menu.AppendSeparator();
+
+	menu.Append(ID_MENU_BASE_INFO, wxT("基本信息"));
+	Bind(wxEVT_COMMAND_MENU_SELECTED, &TreeCtrl::OnMenuBaseInfo, this, ID_MENU_BASE_INFO);
+
 	PopupMenu(&menu, pt);
 }
 
@@ -355,6 +360,27 @@ void TreeCtrl::OnMenuDelTree(wxCommandEvent& event)
 	{
 		DBHelper::DeleteTree(*m_db, node->GetID());		
 	}
+}
+
+void TreeCtrl::OnMenuBaseInfo(wxCommandEvent& event)
+{
+	if (!m_on_menu_id.IsOk()) {
+		return;
+	}
+
+	std::map<wxTreeItemId, int>::iterator itr = m_map2node.find(m_on_menu_id);
+	const Node* node = m_db->Fetch(itr->second);
+	if (node->Type() == NODE_INDEX) {
+		return;
+	}
+
+	const LeafNode* leaf = static_cast<const LeafNode*>(node);
+
+	wxString msg;
+	msg.Printf("修改时间: %d\nMD5: %s\n", 
+		static_cast<uint32_t>(leaf->GetTimestamp()),
+		leaf->GetMD5().c_str());
+	wxMessageBox(msg, "base info");
 }
 
 void TreeCtrl::OpenFileByEditor(wxTreeItemId id)

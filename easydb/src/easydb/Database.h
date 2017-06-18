@@ -38,7 +38,7 @@ private:
 
 	int BuildNode(const std::string& path);
 
-	void BuildConnection();
+	void Parser();
 
 private:
 	std::string m_dir_path;

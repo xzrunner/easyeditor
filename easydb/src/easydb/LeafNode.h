@@ -26,9 +26,13 @@ public:
 	virtual void Store(std::ofstream& fout) const;
 	virtual void Load(std::ifstream& fin);
 
+	time_t GetTimestamp() const { return m_timestamp; }
+
+	const std::string& GetMD5() const { return m_md5; }
+
 	const std::string& GetExportName() const { return m_export_name; }
 
-	void BuildConnection(const Database& db);
+	void Parser(const Database& db);
 
 	void AddInput(int id);
 
@@ -36,7 +40,9 @@ public:
 		return in ? m_in_nodes : m_out_nodes; }
 
 private:
-	uint32_t m_timestamp;
+	time_t m_timestamp;
+
+	std::string m_md5;
 
 	std::string m_export_name;
 	

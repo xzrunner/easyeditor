@@ -2,12 +2,14 @@
 #include "Serializer.h"
 #include "Database.h"
 #include "JsonResParser.h"
+#include "MD5Helper.h"
 
 #include <gum/FilepathHelper.h>
 
 #include <fstream>
 
 #include <assert.h>
+#include <sys/stat.h> 
 
 namespace edb
 {
@@ -27,7 +29,9 @@ void LeafNode::Store(std::ofstream& fout) const
 {
 	Node::Store(fout);
 
-	fout.write(reinterpret_cast<const char*>(&m_timestamp), sizeof(uint32_t));
+	fout.write(reinterpret_cast<const char*>(&m_timestamp), sizeof(m_timestamp));
+
+	Serializer::WriteStr(fout, m_md5);
 
 	Serializer::WriteStr(fout, m_export_name);
 
@@ -39,19 +43,24 @@ void LeafNode::Load(std::ifstream& fin)
 {
 	Node::Load(fin);
 
-	fin.read(reinterpret_cast<char*>(&m_timestamp), sizeof(uint32_t));
-	
+	fin.read(reinterpret_cast<char*>(&m_timestamp), sizeof(m_timestamp));
+
+	Serializer::ReadStr(fin, m_md5);
+
 	Serializer::ReadStr(fin, m_export_name);
 
 	Serializer::ReadSetInt16(fin, m_in_nodes);
 	Serializer::ReadSetInt16(fin, m_out_nodes);
 }
 
-void LeafNode::BuildConnection(const Database& db)
+void LeafNode::Parser(const Database& db)
 {
 	std::string filepath = gum::FilepathHelper::Absolute(db.GetDirPath(), GetPath());
+
+	// export name and out nodes
 	JsonResParser::Parse(db, filepath, m_export_name, m_out_nodes);
 
+	// in nodes
 	std::set<int>::iterator itr = m_out_nodes.begin();
 	for ( ; itr != m_out_nodes.end(); ++itr) 
 	{
@@ -62,6 +71,15 @@ void LeafNode::BuildConnection(const Database& db)
 		assert(to && to->Type() == NODE_LEAF);
 		const_cast<LeafNode*>(static_cast<const LeafNode*>(to))->AddInput(GetID());		
 	}
+
+	// timestamp
+	struct stat st;
+	stat(filepath.c_str(), &st);
+	m_timestamp = st.st_mtime;
+
+	// md5
+	m_md5.resize(32);
+	MD5Helper::File(filepath, m_md5);	
 }
 
 void LeafNode::AddInput(int id)
