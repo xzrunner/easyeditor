@@ -87,8 +87,8 @@ void MainList::BuildFromNode(const Database& db, int node_id, wxTreeItemId paren
 	m_map2node.insert(std::make_pair(curr, node->GetID()));
 	m_map2id.insert(std::make_pair(node->GetID(), curr));
 
-	if (const IndexNode* idx_node = dynamic_cast<const IndexNode*>(node)) {
-		const std::vector<int>& children = idx_node->GetChildren();
+	if (node->Type() == NODE_INDEX) {
+		const std::vector<int>& children = static_cast<const IndexNode*>(node)->GetChildren();
 		for (int i = 0, n = children.size(); i < n; ++i) {
 			BuildFromNode(db, children[i], curr, false);
 		}
@@ -103,7 +103,7 @@ void MainList::SetItemStatus(wxTreeItemId id, const Node* node)
 
 	bool green = false, red = false;
 
-	const LeafNode* leaf = dynamic_cast<const LeafNode*>(node);
+	const LeafNode* leaf = static_cast<const LeafNode*>(node);
 	if (leaf->GetNodes(true).empty() && leaf->GetExportName().empty()) {
 		green = true;
 	}
@@ -187,6 +187,9 @@ void MainList::ShowMenu(wxTreeItemId id, const wxPoint& pt)
 
 	menu.Append(ID_MENU_DEL_TREE, wxT("删除整棵树"));
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &MainList::OnMenuDelTree, this, ID_MENU_DEL_TREE);
+
+	menu.Append(ID_MENU_RENAME, wxT("重命名"));
+	Bind(wxEVT_COMMAND_MENU_SELECTED, &MainList::OnMenuRename, this, ID_MENU_RENAME);
 
 	menu.AppendSeparator();
 
@@ -345,13 +348,47 @@ void MainList::OnMenuDelTree(wxCommandEvent& event)
 			msg = "被别的节点引用";
 		}
 		int answer = wxMessageBox(msg, "确定要删除吗？", wxYES_NO | wxCANCEL, this);
-		if (answer == wxYES) {
+		if (answer == wxYES) 
+		{
+			Delete(m_on_menu_id);
 			DBHelper::DeleteTree(*m_db, node->GetID());
+			if (in) {
+				DBHelper::FixNodeRef(*m_db, static_cast<const LeafNode*>(node));
+			}
 		}
-	} 
+	}
 	else
 	{
-		DBHelper::DeleteTree(*m_db, node->GetID());		
+		DBHelper::DeleteTree(*m_db, node->GetID());
+	}
+
+	m_on_menu_id.Unset();
+}
+
+void MainList::OnMenuRename(wxCommandEvent& event)
+{
+	if (!m_on_menu_id.IsOk()) {
+		return;
+	}
+
+	std::map<wxTreeItemId, int>::iterator itr = m_map2node.find(m_on_menu_id);
+	const Node* node = m_db->Fetch(itr->second);
+	if (node->Type() == NODE_INDEX) {
+		return;
+	}
+
+	std::string filename = m_db->GetDirPath() + "\\" + node->GetPath();
+	filename = gum::FilepathHelper::Filename(filename);
+	wxTextEntryDialog dlg(this, "Rename", wxGetTextFromUserPromptStr, filename);
+	if (dlg.ShowModal()) 
+	{
+		std::string new_name = dlg.GetValue().ToStdString();
+		if (new_name != filename) 
+		{
+			DBHelper::RenameNode(*m_db, static_cast<const LeafNode*>(node), new_name);
+			std::string new_path = node->GetPath().substr(0, node->GetPath().find(filename));
+			SetItemText(m_on_menu_id, new_path + new_name);
+		}
 	}
 }
 

@@ -212,14 +212,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb\JsonResParser.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easydb\JsonResParser.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\easydb\LeafNode.cpp"
 					>
 				</File>
@@ -239,6 +231,50 @@
 					RelativePath="..\..\..\src\easydb\NodeType.h"
 					>
 				</File>
+				<Filter
+					Name="json"
+					>
+					<File
+						RelativePath="..\..\..\src\easydb\JsonResDelOP.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb\JsonResDelOP.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb\JsonResFixOP.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb\JsonResFixOP.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb\JsonResOP.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb\JsonResOP.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb\JsonResParserOP.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb\JsonResParserOP.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb\JsonResRenameOP.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb\JsonResRenameOP.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="view"

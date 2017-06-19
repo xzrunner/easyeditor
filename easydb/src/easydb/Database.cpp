@@ -6,6 +6,7 @@
 #include <ee/std_functor.h>
 
 #include <gum/FilepathHelper.h>
+#include <gum/StringHelper.h>
 
 #include <wx/dir.h>
 #include <wx/filename.h>
@@ -99,8 +100,9 @@ void Database::Build(const std::string& dir_path)
 	Clear();
 
 	m_dir_path = dir_path;
+	gum::StringHelper::ToLower(m_dir_path);
 
-	m_root = BuildNode(dir_path);
+	m_root = BuildNode(m_dir_path);
 
 	FinalParse();
 }
@@ -145,6 +147,17 @@ const Node* Database::Fetch(int idx) const
 		return NULL;
 	} else {
 		return m_nodes[idx];
+	}
+}
+
+void Database::RenamePath(const std::string& old_path, const std::string& new_path)
+{
+	std::map<std::string, int>::iterator itr = m_map_path.find(old_path);
+	if (itr != m_map_path.end()) 
+	{
+		int id = itr->second;
+		m_map_path.erase(itr);
+		m_map_path.insert(std::make_pair(new_path, id));
 	}
 }
 

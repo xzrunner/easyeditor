@@ -19,6 +19,7 @@ public:
 	virtual void Load(std::ifstream& fin);
 
 	const std::string& GetPath() const { return m_path; }
+	void SetPath(const std::string& path) { m_path = path; }
 
 	int GetID() const { return m_id; }
 	void SetID(int id) { m_id = id; }

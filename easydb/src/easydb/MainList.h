@@ -32,6 +32,7 @@ private:
 		ID_MENU_REF_INFO,
 		ID_MENU_COPY_TREE_TO,
 		ID_MENU_DEL_TREE,
+		ID_MENU_RENAME,
 		ID_MENU_BASE_INFO,
 
 		ID_CTRL = 1000,
@@ -56,6 +57,7 @@ private:
 	void OnMenuRefInfo(wxCommandEvent& event);
 	void OnMenuCopyTreeTo(wxCommandEvent& event);
 	void OnMenuDelTree(wxCommandEvent& event);
+	void OnMenuRename(wxCommandEvent& event);
 	void OnMenuBaseInfo(wxCommandEvent& event);
 
 	void OpenFileByEditor(wxTreeItemId id);

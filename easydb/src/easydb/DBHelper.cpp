@@ -1,6 +1,9 @@
 #include "DBHelper.h"
 #include "Database.h"
 #include "LeafNode.h"
+#include "JsonResDelOP.h"
+#include "JsonResFixOP.h"
+#include "JsonResRenameOP.h"
 
 #include <gum/FilepathHelper.h>
 
@@ -106,6 +109,67 @@ void DBHelper::DeleteTree(const Database& db, int root)
 		for (std::set<int>::const_iterator itr = child_out.begin(); itr != child_out.end(); ++itr) {
 			buffer.push(*itr);
 		}
+	}
+}
+
+void DBHelper::FixNodeRef(const Database& db, const LeafNode* removed)
+{
+	const std::set<int>& list = removed->GetNodes(true);
+	if (list.empty()) {
+		return;
+	}
+
+	std::string rm_path = db.GetDirPath() + "\\" + removed->GetPath();
+ 	std::set<int>::const_iterator itr = list.begin();
+ 	for ( ; itr != list.end(); ++itr) 
+	{
+		const Node* node = db.Fetch(*itr);
+		if (node->Type() != NODE_LEAF) {
+			continue;
+		}
+
+		std::string path = db.GetDirPath() + "\\" + node->GetPath();
+
+		const LeafNode* leaf = static_cast<const LeafNode*>(node);
+		const_cast<std::set<int>&>(leaf->GetNodes(false)).erase(removed->GetID());
+
+		JsonResDelOP del_op(path, rm_path);
+		del_op.Do();
+		JsonResFixOP fix_op(path);
+		fix_op.Do();
+ 	}
+}
+
+void DBHelper::RenameNode(const Database& db, const LeafNode* node, 
+						  const std::string& new_name)
+{
+	std::string old_path = db.GetDirPath() + "\\" + node->GetPath();
+	std::string dir = gum::FilepathHelper::Dir(old_path);
+	std::string old_name = gum::FilepathHelper::Filename(old_path);
+	std::string new_path = dir + "\\" + new_name;
+	wxRenameFile(old_path, new_path);
+
+	const_cast<Database&>(db).RenamePath(old_path, new_path);
+
+	std::string new_node_path = gum::FilepathHelper::Relative(db.GetDirPath(), new_path);
+	const_cast<LeafNode*>(node)->SetPath(new_node_path);
+
+	const std::set<int>& list = node->GetNodes(true);
+	if (list.empty()) {
+		return;
+	}
+
+	std::set<int>::const_iterator itr = list.begin();
+	for ( ; itr != list.end(); ++itr) 
+	{
+		const Node* node = db.Fetch(*itr);
+		if (node->Type() != NODE_LEAF) {
+			continue;
+		}
+	
+		std::string path = db.GetDirPath() + "\\" + node->GetPath();
+		JsonResRenameOP op(path, old_name, new_name);
+		op.Do();
 	}
 }
 

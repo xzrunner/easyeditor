@@ -16,7 +16,11 @@ public:
 
 	static void CopyTree(const Database& db, const LeafNode* root, const std::string& dst_dir);
 	static void DeleteTree(const Database& db, int root);
-	
+
+	static void FixNodeRef(const Database& db, const LeafNode* removed);
+
+	static void RenameNode(const Database& db, const LeafNode* node, const std::string& new_name);
+
 }; // DBHelper
 
 }

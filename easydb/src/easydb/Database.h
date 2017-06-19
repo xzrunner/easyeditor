@@ -33,6 +33,8 @@ public:
 
 	const std::multimap<std::string, int>& GetMD5Map() const { return m_map_md5; }
 
+	void RenamePath(const std::string& old_path, const std::string& new_path);
+
 private:
 	void Clear();
 

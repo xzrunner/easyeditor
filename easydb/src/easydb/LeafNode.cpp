@@ -1,7 +1,7 @@
 #include "LeafNode.h"
 #include "Serializer.h"
 #include "Database.h"
-#include "JsonResParser.h"
+#include "JsonResParserOP.h"
 #include "MD5Helper.h"
 
 #include <gum/FilepathHelper.h>
@@ -55,10 +55,11 @@ void LeafNode::Load(std::ifstream& fin)
 
 void LeafNode::Parser(const Database& db)
 {
-	std::string filepath = gum::FilepathHelper::Absolute(db.GetDirPath(), GetPath());
+	std::string filepath = db.GetDirPath() + "\\" + GetPath();
 
 	// export name and out nodes
-	JsonResParser::Parse(db, filepath, m_export_name, m_out_nodes);
+	JsonResParserOP parser(filepath, db, m_export_name, m_out_nodes);
+	parser.Do();
 
 	// in nodes
 	std::set<int>::iterator itr = m_out_nodes.begin();
