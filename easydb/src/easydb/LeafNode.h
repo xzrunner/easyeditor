@@ -39,6 +39,9 @@ public:
 	const std::set<int>& GetNodes(bool in) const { 
 		return in ? m_in_nodes : m_out_nodes; }
 
+	bool IsRefError() const;
+	bool IsNoUse() const;
+
 private:
 	time_t m_timestamp;
 

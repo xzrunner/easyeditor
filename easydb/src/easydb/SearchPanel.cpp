@@ -4,14 +4,14 @@
 namespace edb
 {
 
-SearchPanel::SearchPanel(wxWindow* parent)
+SearchPanel::SearchPanel(wxWindow* parent, MainList* main_list, const Database& db)
 	: wxPanel(parent, wxID_ANY)
 	, m_list(NULL)
 {
-	InitLayout();
+	InitLayout(main_list, db);
 }
 
-void SearchPanel::InitLayout()
+void SearchPanel::InitLayout(MainList* main_list, const Database& db)
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
@@ -21,7 +21,7 @@ void SearchPanel::InitLayout()
 	title->SetBackgroundColour(*wxBLACK);
 	sizer->Add(title, 0, wxEXPAND);
 
-	m_list = new SearchList(this);
+	m_list = new SearchList(this, main_list, db);
 	sizer->Add(m_list, 1, wxEXPAND);
 
 	SetSizer(sizer);

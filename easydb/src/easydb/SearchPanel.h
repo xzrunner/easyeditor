@@ -7,16 +7,18 @@ namespace edb
 {
 
 class SearchList;
+class MainList;
+class Database;
 
 class SearchPanel : public wxPanel
 {
 public:
-	SearchPanel(wxWindow* parent);
+	SearchPanel(wxWindow* parent, MainList* main_list, const Database& db);
 
 	SearchList* GetList() { return m_list; }
 
 private:
-	void InitLayout();
+	void InitLayout(MainList* main_list, const Database& db);
 
 private:
 	SearchList* m_list;

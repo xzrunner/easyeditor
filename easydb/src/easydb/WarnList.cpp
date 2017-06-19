@@ -2,14 +2,21 @@
 #include "Database.h"
 #include "NodeType.h"
 #include "LeafNode.h"
+#include "MainList.h"
 
 #include <map>
 
 namespace edb
 {
 
-WarnList::WarnList(wxWindow* parent)
-	: wxTreeCtrl(parent)
+BEGIN_EVENT_TABLE(WarnList, wxTreeCtrl)
+	EVT_TREE_ITEM_ACTIVATED(ID_CTRL, WarnList::OnItemActivated)
+END_EVENT_TABLE()
+
+WarnList::WarnList(wxWindow* parent, MainList* main_list, const Database& db)
+	: wxTreeCtrl(parent, ID_CTRL, wxDefaultPosition, wxDefaultSize, wxTR_HAS_BUTTONS | wxTR_LINES_AT_ROOT | wxTR_HIDE_ROOT)
+	, m_main_list(main_list)
+	, m_db(db)
 {
 	SetBackgroundColour(wxColour(229, 229, 229));
 }
@@ -20,14 +27,36 @@ void WarnList::Build(const Database& db)
 
 	m_root = AddRoot("warn");
 
+	BuildNodeErr(db);
 	BuildDup(db);
 
 	ExpandAll();
 }
 
+void WarnList::BuildNodeErr(const Database& db)
+{
+	wxTreeItemId ref_id = AppendItem(m_root, "引用错误");
+	wxTreeItemId nouse_id = AppendItem(m_root, "多余");
+	const std::vector<Node*>& nodes = db.GetNodes();
+	for (int i = 0, n = nodes.size(); i < n; ++i)
+	{
+		Node* node = nodes[i];
+		if (node->Type() != NODE_LEAF) {
+			continue;
+		}
+		LeafNode* leaf = static_cast<LeafNode*>(node);
+		if (leaf->IsRefError()) {
+			AppendItem(ref_id, leaf->GetPath());
+		}
+		if (leaf->IsNoUse()) {
+			AppendItem(nouse_id, leaf->GetPath());
+		}
+	}
+}
+
 void WarnList::BuildDup(const Database& db)
 {
-	wxTreeItemId dup_id = AppendItem(m_root, "重复");
+	wxTreeItemId id = AppendItem(m_root, "重复");
 
 	const std::multimap<std::string, int>& map_md5 = db.GetMD5Map();
 	if (map_md5.size() < 2) {
@@ -45,12 +74,12 @@ void WarnList::BuildDup(const Database& db)
 			dup_list.push_back(itr0->second);
 		} else if (!dup_list.empty()) {
 			dup_list.push_back(itr0->second);
-			InsertDupList(db, dup_list, dup_id);
+			InsertDupList(db, dup_list, id);
 			dup_list.clear();
 		}
 	}
 	if (!dup_list.empty()) {
-		InsertDupList(db, dup_list, dup_id);
+		InsertDupList(db, dup_list, id);
 	}
 }
 
@@ -67,6 +96,14 @@ void WarnList::InsertDupList(const Database& db, const std::vector<int>& list, w
 		const LeafNode* leaf = static_cast<const LeafNode*>(node);
 		AppendItem(id, leaf->GetPath());
 	}
+}
+
+void WarnList::OnItemActivated(wxTreeEvent& event)
+{
+	wxTreeItemId id = event.GetItem();
+	wxString text = GetItemText(id);
+	int node_id = m_db.QueryByPath(m_db.GetDirPath() + "\\" + text.ToStdString());
+	m_main_list->OnSelected(node_id);
 }
 
 }

@@ -4,6 +4,8 @@
 #include "Database.h"
 #include "MainList.h"
 #include "MainPanel.h"
+#include "SearchPanel.h"
+#include "SearchList.h"
 #include "WarnPanel.h"
 #include "WarnList.h"
 
@@ -132,11 +134,7 @@ void Frame::OnSearch(wxCommandEvent& event)
 	{
 		std::string str = dlg.GetValue().ToStdString();
 		gum::StringHelper::ToLower(str);
-		
-		int id = m_task->GetStagePanel()->GetDB()->QueryByExportName(str);
-		if (id != -1) {
-			m_task->GetMainPanel()->GetList()->OnSelected(id);
-		}
+		m_task->GetSearchPanel()->GetList()->OnSearch(str);
 	}
 }
 

@@ -27,7 +27,7 @@ public:
 	const std::vector<Node*>& GetNodes() const { return m_nodes; }
 
 	int QueryByPath(const std::string& path) const;
-	int QueryByExportName(const std::string& name) const;
+	void QueryByStr(const std::string& str, int max, std::vector<int>& result) const;
 
 	const Node* Fetch(int idx) const;
 

@@ -101,16 +101,9 @@ void MainList::SetItemStatus(wxTreeItemId id, const Node* node)
 		return;
 	}
 
-	bool green = false, red = false;
-
 	const LeafNode* leaf = static_cast<const LeafNode*>(node);
-	if (leaf->GetNodes(true).empty() && leaf->GetExportName().empty()) {
-		green = true;
-	}
-	const std::set<int>& out = leaf->GetNodes(false);
-	if (out.find(-1) != out.end()) {
-		red = true;
-	}
+	bool green = leaf->IsNoUse(), 
+		 red = leaf->IsRefError();
 	if (green && red) {
 		SetItemTextColour(id, COL_YELLOW);
 	} else if (green) {

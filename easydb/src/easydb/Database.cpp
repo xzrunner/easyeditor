@@ -117,28 +117,35 @@ int Database::QueryByPath(const std::string& path) const
 	}
 }
 
-int Database::QueryByExportName(const std::string& name) const
+void Database::QueryByStr(const std::string& str, int max, std::vector<int>& result) const
 {
-	std::multimap<std::string, int>::const_iterator itr = m_map_export_name.find(name);
+	std::multimap<std::string, int>::const_iterator itr = m_map_export_name.find(str);
 	if (itr != m_map_export_name.end()) {
-		return itr->second;
+		result.push_back(itr->second);
+	}
+	if (result.size() >= max) {
+		return;
 	}
 
 	itr = m_map_export_name.begin();
 	for ( ; itr != m_map_export_name.end(); ++itr) {
-		if (itr->first.find(name) != std::string::npos) {
-			return itr->second;
+		if (itr->first.find(str) != std::string::npos) {
+			result.push_back(itr->second);
+			if (result.size() >= max) {
+				return;
+			}
 		}
 	}
 
 	std::map<std::string, int>::const_iterator itr_path = m_map_path.begin();
 	for ( ; itr_path != m_map_path.end(); ++itr_path) {
-		if (itr_path->first.find(name) != std::string::npos) {
-			return itr_path->second;
+		if (itr_path->first.find(str) != std::string::npos) {
+			result.push_back(itr_path->second);
+			if (result.size() >= max) {
+				return;
+			}
 		}
 	}
-
-	return -1;
 }
 
 const Node* Database::Fetch(int idx) const

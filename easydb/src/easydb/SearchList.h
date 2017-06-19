@@ -6,16 +6,35 @@
 namespace edb
 {
 
+class Database;
+class MainList;
+
 class SearchList : public wxTreeCtrl
 {
 public:
-	SearchList(wxWindow* parent);
+	SearchList(wxWindow* parent, MainList* main_list, const Database& db);
+
+	void OnSearch(const std::string& str);
 
 	void Clear() {}
 
 private:
+	void OnItemActivated(wxTreeEvent& event);
 
-//	DECLARE_EVENT_TABLE()
+private:
+	enum
+	{
+		ID_CTRL = 1000,
+	};
+
+private:
+	wxTreeItemId m_root;
+
+	MainList* m_main_list;
+
+	const Database& m_db;
+
+	DECLARE_EVENT_TABLE()
 
 }; // SearchList
 

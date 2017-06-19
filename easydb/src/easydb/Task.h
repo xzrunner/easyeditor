@@ -23,6 +23,7 @@ public:
 
 	MainPanel* GetMainPanel() { return m_main_panel; }
 	StagePanel* GetStagePanel() { return m_stage_panel; }
+	SearchPanel* GetSearchPanel() { return m_search_panel; }		
 	WarnPanel* GetWarnPanel() { return m_warn_panel; }
 
 	static Task* Create(wxFrame* parent)

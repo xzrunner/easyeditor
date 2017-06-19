@@ -85,8 +85,8 @@ wxWindow* Task::InitLayoutRight(wxWindow* parent)
 {
 	wxSplitterWindow* split = new wxSplitterWindow(parent);
 
-	m_search_panel = new SearchPanel(split);
-	m_warn_panel = new WarnPanel(split);
+	m_search_panel = new SearchPanel(split, m_main_panel->GetList(), *m_stage_panel->GetDB());
+	m_warn_panel = new WarnPanel(split, m_main_panel->GetList(), *m_stage_panel->GetDB());
 
 	split->SetSashGravity(0.5f);
 	split->SplitHorizontally(m_search_panel, m_warn_panel);

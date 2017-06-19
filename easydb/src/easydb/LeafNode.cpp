@@ -88,4 +88,14 @@ void LeafNode::AddInput(int id)
 	m_in_nodes.insert(id);
 }
 
+bool LeafNode::IsRefError() const
+{
+	return m_out_nodes.find(-1) != m_out_nodes.end();
+}
+
+bool LeafNode::IsNoUse() const
+{
+	return m_in_nodes.empty() && m_export_name.empty();
+}
+
 }
