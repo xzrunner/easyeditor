@@ -208,6 +208,7 @@ void Database::Insert(Node* node, int id)
 
 	// map_path
 	std::string path = gum::FilepathHelper::Absolute(m_dir_path, node->GetPath());
+	path = gum::FilepathHelper::Format(path);
 	m_map_path.insert(std::make_pair(path, node->GetID()));
 
 	if (node->Type() != NODE_LEAF) {
