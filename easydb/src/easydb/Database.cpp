@@ -179,6 +179,8 @@ void Database::Clear()
 
 	m_map_path.clear();
 	m_map_export_name.clear();
+
+	m_map_md5.clear();
 }
 
 int Database::BuildNode(const std::string& path)
