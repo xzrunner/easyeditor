@@ -20,6 +20,8 @@ public:
 	static void FixNodeRef(const Database& db, const LeafNode* removed);
 
 	static void RenameNode(const Database& db, const LeafNode* node, const std::string& new_name);
+	static void MoveNode(const Database& db, const LeafNode* node, const std::string& dst_dir);
+	static void CopyNode(const Database& db, const LeafNode* node, const std::string& dst_dir);
 
 }; // DBHelper
 

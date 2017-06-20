@@ -235,6 +235,22 @@
 					Name="json"
 					>
 					<File
+						RelativePath="..\..\..\src\easydb\JsonResChangeDirOP.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb\JsonResChangeDirOP.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb\JsonResChangePathOP.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb\JsonResChangePathOP.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\easydb\JsonResDelOP.cpp"
 						>
 					</File>

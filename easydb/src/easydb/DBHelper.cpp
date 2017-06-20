@@ -4,6 +4,8 @@
 #include "JsonResDelOP.h"
 #include "JsonResFixOP.h"
 #include "JsonResRenameOP.h"
+#include "JsonResChangePathOP.h"
+#include "JsonResChangeDirOP.h"
 
 #include <gum/FilepathHelper.h>
 
@@ -172,6 +174,52 @@ void DBHelper::RenameNode(const Database& db, const LeafNode* node,
 		JsonResRenameOP op(path, old_name, new_name);
 		op.Do();
 	}
+}
+
+void DBHelper::MoveNode(const Database& db, const LeafNode* node, 
+						const std::string& dst_dir)
+{
+	std::string old_path = db.GetDirPath() + "\\" + node->GetPath();
+	std::string dir = gum::FilepathHelper::Dir(old_path);
+	std::string old_name = gum::FilepathHelper::Filename(old_path);
+	std::string new_path = dst_dir + "\\" + old_name;
+
+	const_cast<Database&>(db).RenamePath(old_path, new_path);
+
+	std::string new_node_path = gum::FilepathHelper::Relative(db.GetDirPath(), new_path);
+	const_cast<LeafNode*>(node)->SetPath(new_node_path);
+
+	const std::set<int>& list = node->GetNodes(true);
+	std::set<int>::const_iterator itr = list.begin();
+	for ( ; itr != list.end(); ++itr) 
+	{
+		const Node* node = db.Fetch(*itr);
+		if (node->Type() != NODE_LEAF) {
+			continue;
+		}
+
+		std::string path = db.GetDirPath() + "\\" + node->GetPath();
+		JsonResChangePathOP op(path, old_path, new_path);
+		op.Do();
+	}
+
+	wxCopyFile(old_path, new_path);
+	wxRemoveFile(old_path);
+}
+
+void DBHelper::CopyNode(const Database& db, const LeafNode* node, 
+						const std::string& dst_dir)
+{
+	std::string old_path = db.GetDirPath() + "\\" + node->GetPath();
+	std::string dir = gum::FilepathHelper::Dir(old_path);
+	std::string old_name = gum::FilepathHelper::Filename(old_path);
+	std::string old_dir = gum::FilepathHelper::Dir(old_path);
+	std::string new_path = dst_dir + "\\" + old_name;
+
+	wxCopyFile(old_path, new_path);
+
+	JsonResChangeDirOP op(new_path, old_dir, dst_dir);
+	op.Do();
 }
 
 }

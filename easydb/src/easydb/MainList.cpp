@@ -175,14 +175,24 @@ void MainList::ShowMenu(wxTreeItemId id, const wxPoint& pt)
 	menu.Append(ID_MENU_REF_INFO, wxT("引用信息"));
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &MainList::OnMenuRefInfo, this, ID_MENU_REF_INFO);
 
+	menu.AppendSeparator();
+
 	menu.Append(ID_MENU_COPY_TREE_TO, wxT("拷贝整棵树..."));
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &MainList::OnMenuCopyTreeTo, this, ID_MENU_COPY_TREE_TO);
 
 	menu.Append(ID_MENU_DEL_TREE, wxT("删除整棵树"));
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &MainList::OnMenuDelTree, this, ID_MENU_DEL_TREE);
 
-	menu.Append(ID_MENU_RENAME, wxT("重命名"));
-	Bind(wxEVT_COMMAND_MENU_SELECTED, &MainList::OnMenuRename, this, ID_MENU_RENAME);
+	menu.AppendSeparator();
+
+	menu.Append(ID_MENU_RENAME_NODE, wxT("重命名结点"));
+	Bind(wxEVT_COMMAND_MENU_SELECTED, &MainList::OnMenuRenameNode, this, ID_MENU_RENAME_NODE);
+
+	menu.Append(ID_MENU_MOVE_NODE, wxT("移动结点"));
+	Bind(wxEVT_COMMAND_MENU_SELECTED, &MainList::OnMenuMoveNode, this, ID_MENU_MOVE_NODE);
+
+	menu.Append(ID_MENU_COPY_NODE, wxT("拷贝结点"));
+	Bind(wxEVT_COMMAND_MENU_SELECTED, &MainList::OnMenuCopyNode, this, ID_MENU_COPY_NODE);
 
 	menu.AppendSeparator();
 
@@ -308,9 +318,12 @@ void MainList::OnMenuCopyTreeTo(wxCommandEvent& event)
 
 	wxDirDialog dlg(NULL, "目标文件夹", wxEmptyString,
 		wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
-	if (dlg.ShowModal() == wxID_OK) {
+	if (dlg.ShowModal() == wxID_OK) 
+	{
 		const LeafNode* leaf = static_cast<const LeafNode*>(node);
-		DBHelper::CopyTree(*m_db, leaf, dlg.GetPath().ToStdString());
+		std::string dst_dir = dlg.GetPath().ToStdString();
+		gum::StringHelper::ToLower(dst_dir);
+		DBHelper::CopyTree(*m_db, leaf, dst_dir);
 	}
 }
 
@@ -358,7 +371,7 @@ void MainList::OnMenuDelTree(wxCommandEvent& event)
 	m_on_menu_id.Unset();
 }
 
-void MainList::OnMenuRename(wxCommandEvent& event)
+void MainList::OnMenuRenameNode(wxCommandEvent& event)
 {
 	if (!m_on_menu_id.IsOk()) {
 		return;
@@ -382,6 +395,85 @@ void MainList::OnMenuRename(wxCommandEvent& event)
 			std::string new_path = node->GetPath().substr(0, node->GetPath().find(filename));
 			SetItemText(m_on_menu_id, new_path + new_name);
 		}
+	}
+}
+
+void MainList::OnMenuMoveNode(wxCommandEvent& event)
+{
+	if (!m_on_menu_id.IsOk()) {
+		return;
+	}
+
+	std::map<wxTreeItemId, int>::iterator itr = m_map2node.find(m_on_menu_id);
+	const Node* node = m_db->Fetch(itr->second);
+	if (node->Type() == NODE_INDEX) {
+		return;
+	}
+
+	wxDirDialog dlg(NULL, "目标文件夹", wxEmptyString,
+		wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
+	if (dlg.ShowModal() == wxID_OK) 
+	{
+		const LeafNode* leaf = static_cast<const LeafNode*>(node);
+		std::string dst_dir = dlg.GetPath().ToStdString();
+		gum::StringHelper::ToLower(dst_dir);
+		DBHelper::MoveNode(*m_db, leaf, dst_dir);
+
+		// rm
+
+		m_map2node.erase(m_on_menu_id);
+		m_map2id.erase(node->GetID());
+
+		Delete(m_on_menu_id);
+		m_on_menu_id.Unset();
+
+		// add
+
+		std::string new_path = m_db->GetDirPath() + "\\" + node->GetPath();
+		std::string new_dir = gum::FilepathHelper::Dir(new_path);
+		int parent_id = m_db->QueryByPath(new_dir);
+		std::map<int, wxTreeItemId>::iterator itr = m_map2id.find(parent_id);
+		assert(itr != m_map2id.end());
+		wxTreeItemId item = AppendItem(itr->second, node->GetPath());
+		m_map2node.insert(std::make_pair(item, node->GetID()));
+		m_map2id.insert(std::make_pair(node->GetID(), item));
+
+		SelectItem(item);
+	}
+}
+
+void MainList::OnMenuCopyNode(wxCommandEvent& event)
+{
+	if (!m_on_menu_id.IsOk()) {
+		return;
+	}
+
+	std::map<wxTreeItemId, int>::iterator itr = m_map2node.find(m_on_menu_id);
+	const Node* node = m_db->Fetch(itr->second);
+	if (node->Type() == NODE_INDEX) {
+		return;
+	}
+
+	wxDirDialog dlg(NULL, "目标文件夹", wxEmptyString,
+		wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
+	if (dlg.ShowModal() == wxID_OK) 
+	{
+		const LeafNode* leaf = static_cast<const LeafNode*>(node);
+		std::string dst_dir = dlg.GetPath().ToStdString();
+		gum::StringHelper::ToLower(dst_dir);
+		DBHelper::CopyNode(*m_db, leaf, dst_dir);
+
+		// todo
+// 		std::string new_path = m_db->GetDirPath() + "\\" + node->GetPath();
+// 		std::string new_dir = gum::FilepathHelper::Dir(new_path);
+// 		int parent_id = m_db->QueryByPath(new_dir);
+// 		std::map<int, wxTreeItemId>::iterator itr = m_map2id.find(parent_id);
+// 		assert(itr != m_map2id.end());
+// 		wxTreeItemId item = AppendItem(itr->second, node->GetPath());
+// 		m_map2node.insert(std::make_pair(item, node->GetID()));
+// 		m_map2id.insert(std::make_pair(node->GetID(), item));
+// 
+// 		SelectItem(item);
 	}
 }
 
