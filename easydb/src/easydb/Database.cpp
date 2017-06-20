@@ -242,12 +242,6 @@ void Database::Insert(Node* node, int id)
 	if (!name.empty()) {
 		m_map_export_name.insert(std::make_pair(name, node->GetID()));
 	}
-
-	// map_md5
-	const std::string& md5 = leaf->GetMD5();
-	if (!md5.empty()) {
-		m_map_md5.insert(std::make_pair(md5, node->GetID()));
-	}
 }
 
 void Database::FinalParse()
@@ -255,8 +249,17 @@ void Database::FinalParse()
 	for (int i = 0, n = m_nodes.size(); i < n; ++i)
 	{
 		Node* node = m_nodes[i];
-		if (node->Type() == NODE_LEAF) {
-			static_cast<LeafNode*>(node)->Parser(*this);
+		if (node->Type() != NODE_LEAF) {
+			continue;
+		}
+
+		LeafNode* leaf = static_cast<LeafNode*>(node);
+		leaf->Parser(*this);
+
+		// map_md5
+		const std::string& md5 = leaf->GetMD5();
+		if (!md5.empty()) {
+			m_map_md5.insert(std::make_pair(md5, node->GetID()));
 		}
 	}
 }
