@@ -3,6 +3,8 @@
 
 #include <wx/treectrl.h>
 
+#include <vector>
+
 namespace edb
 {
 
@@ -15,11 +17,15 @@ public:
 	SearchList(wxWindow* parent, MainList* main_list, const Database& db);
 
 	void OnSearch(const std::string& str);
+	void OnSearchSameImages(float val);
 
 	void Clear() {}
 
 private:
 	void OnItemActivated(wxTreeEvent& event);
+
+	void GetSameImages(const std::vector<std::string>& src, float val,
+		std::vector<std::vector<int> >& dst);
 
 private:
 	enum

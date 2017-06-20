@@ -28,6 +28,7 @@ BEGIN_EVENT_TABLE(Frame, wxFrame)
 
 	EVT_MENU(ID_CONNECT, Frame::OnConnect)
 	EVT_MENU(ID_SEARCH, Frame::OnSearch)
+	EVT_MENU(ID_SAME_IMAGE, Frame::OnSameImage)
 
 	EVT_MENU(wxID_EXIT, Frame::OnQuit)
 END_EVENT_TABLE()
@@ -138,6 +139,20 @@ void Frame::OnSearch(wxCommandEvent& event)
 	}
 }
 
+void Frame::OnSameImage(wxCommandEvent& event)
+{
+	wxTextEntryDialog dlg(this, "Same Val 1-100");
+	if (dlg.ShowModal()) 
+	{
+		std::string str = dlg.GetValue().ToStdString();
+		int val;
+		gum::StringHelper::FromString(str, val);
+		if (val >= 1 && val <= 100) {
+			m_task->GetSearchPanel()->GetList()->OnSearchSameImages(val * 0.01f);			
+		}
+	}
+}
+
 void Frame::OnQuit(wxCommandEvent& event)
 {
 	Close(true);
@@ -170,6 +185,7 @@ wxMenu* Frame::InitToolBar()
 {
 	wxMenu* tool = new wxMenu;
 	tool->Append(ID_SEARCH, wxT("&Search...\tCtrl+F"), wxT("Search"));
+	tool->Append(ID_SAME_IMAGE, wxT("Same Image"), wxT("Same Image"));
 	return tool;
 }
 

@@ -389,6 +389,18 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="compare"
+			>
+			<File
+				RelativePath="..\..\..\src\libimage\ImageCmp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libimage\ImageCmp.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\..\..\src\libimage\config.h"
 			>

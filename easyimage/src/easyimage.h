@@ -9,3 +9,5 @@
 #include "libimage/TransToETC2.h"
 
 #include "libimage/BlockCompress.h"
+
+#include "libimage/ImageCmp.h"
