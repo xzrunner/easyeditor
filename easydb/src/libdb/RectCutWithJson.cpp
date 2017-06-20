@@ -23,12 +23,25 @@
 #include <sprite2/SymType.h>
 #include <gum/Config.h>
 #include <gum/FilepathHelper.h>
+#include <gum/StringHelper.h>
 
 namespace edb
 {
 
 static const char* IMAGE_DIR = "image";
 static const char* JSON_DIR = "json";
+
+RectCutWithJson::RectCutWithJson()
+	: m_cfg(NULL)
+{
+}
+
+RectCutWithJson::~RectCutWithJson()
+{
+	if (m_cfg) {
+		delete m_cfg;
+	}
+}
 
 std::string RectCutWithJson::Command() const
 {
@@ -54,10 +67,11 @@ int RectCutWithJson::Run(int argc, char *argv[])
 
 	if (argc > 4) 
 	{
-		if (strcmp(argv[4], "null") != 0) {
+		if (strcmp(argv[4], "null") != 0) 
+		{
 			wxFileName filename(argv[4]);
 			filename.Normalize();
-			m_ignore_dir = filename.GetFullPath();
+			m_cfg = new Config(filename.GetFullPath().ToStdString());
 		}
 	}
 
@@ -71,6 +85,10 @@ int RectCutWithJson::Run(int argc, char *argv[])
 	cfg->SetPreMulAlpha(false);
 	Trigger(argv[2], argv[3], trim);
 	cfg->SetPreMulAlpha(old);
+
+	if (m_cfg) {
+		m_cfg->Ouput();
+	}
 
 	return 0;
 }
@@ -91,7 +109,7 @@ void RectCutWithJson::Trigger(const std::string& src_dir, const std::string& dst
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath();
 		filepath = gum::FilepathHelper::Format(filepath);
-		if (IsIgnored(filepath)) {
+		if (m_cfg && m_cfg->IsIgnored(filepath)) {
 			continue;
 		}
 
@@ -145,6 +163,9 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 		std::string img_name = ee::StringHelper::Format("%s#%d#%d#%d#%d#.png", filename.c_str(), 0, 0, img->GetWidth(), img->GetHeight());
 		std::string img_out_path = out_img_dir + "\\" + img_name;
 		gimg_export(img_out_path.c_str(), img->GetPixelData(), img->GetWidth(), img->GetHeight(), img->GetFormat(), true);
+		if (m_cfg) {
+			m_cfg->AddCut(filepath, img_out_path);
+		}
 
 		std::string spr_path = std::string(out_img_dir + "\\" + img_name);
 		ee::Sprite* spr = new ee::DummySprite(new ee::DummySymbol(spr_path, img->GetWidth(), img->GetHeight()));
@@ -206,6 +227,9 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 		std::string img_name = ee::StringHelper::Format("%s#%d#%d#%d#%d#.png", filename.c_str(), r.x, r.y, r.w, r.h);
 		std::string img_out_path = out_img_dir + "\\" + img_name;
 		gimg_export(img_out_path.c_str(), pixels, r.w, r.h, img->GetFormat(), true);
+		if (m_cfg) {
+			m_cfg->AddCut(filepath, img_out_path);
+		}
 
 		delete[] pixels;
 
@@ -425,7 +449,8 @@ void RectCutWithJson::FixImageFilepath(const std::string& src_dir, const std::st
 {
 	std::string filepath = val[key].asString();
 	filepath = ee::FileHelper::GetAbsolutePath(file_dir, filepath);
-	if (IsIgnored(filepath)) {
+	filepath = gum::FilepathHelper::Format(filepath);
+	if (m_cfg && m_cfg->IsIgnored(filepath)) {
 		return;
 	}
 	if (ee::FileHelper::IsFileExist(filepath)) {
@@ -547,9 +572,87 @@ void RectCutWithJson::FixGroup(const std::string& src_dir, const std::string& ds
 	}
 }
 
-bool RectCutWithJson::IsIgnored(const std::string& filepath) const
+/************************************************************************/
+/* class RectCutWithJson::Config                                        */
+/************************************************************************/
+
+RectCutWithJson::Config::Config(const std::string& filepath)
+	: m_filepath(filepath)
 {
-	return !m_ignore_dir.empty() && filepath.find(m_ignore_dir) != std::string::npos;
+	Json::Value val;
+
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filepath.c_str());
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, val);
+	fin.close();
+
+	if (val.isNull() || val["no_cut"].isNull()) {
+		return;
+	}
+
+	std::string dir = gum::FilepathHelper::Dir(filepath);
+	for (int i = 0, n = val["no_cut"].size(); i < n; ++i) 
+	{
+		std::string path = dir + "\\" + val["no_cut"][i].asString();
+		gum::StringHelper::ToLower(path);
+		m_no_cut.insert(path);
+	}
+
+	for (int i = 0, n = val["no_compress"].size(); i < n; ++i) 
+	{
+		std::string path = dir + "\\" + val["no_compress"][i].asString();
+		gum::StringHelper::ToLower(path);
+		m_no_compress.insert(path);
+	}
+
+	std::set<std::string>::iterator itr = m_no_cut.begin();
+	for ( ; itr != m_no_cut.end(); ++itr)
+	{
+		std::set<std::string>::iterator itr1 = m_no_compress.find(*itr);
+		if (itr1 != m_no_compress.end()) {
+			m_out_no_compress.push_back(*itr);
+		} else {
+			m_out_compress.push_back(*itr);
+		}
+	}
+}
+
+bool RectCutWithJson::Config::IsIgnored(const std::string& filepath) const
+{
+	return m_no_cut.find(filepath) != m_no_cut.end();
+}
+
+void RectCutWithJson::Config::AddCut(const std::string& ori, const std::string& cut)
+{
+	std::string path = gum::FilepathHelper::Format(cut);
+	if (m_no_compress.find(ori) != m_no_compress.end()) {
+		m_out_no_compress.push_back(cut);
+	} else {
+		m_out_compress.push_back(cut);
+	}
+}
+
+void RectCutWithJson::Config::Ouput()
+{
+	std::string dir = gum::FilepathHelper::Dir(m_filepath);
+	{
+		std::string filepath = dir + "\\compress.json";
+		std::ofstream fout(filepath.c_str());
+		for (int i = 0, n = m_out_compress.size(); i < n; ++i) {
+			fout << m_out_compress[i] << "\n";
+		}
+		fout.close();
+	}
+	{
+		std::string filepath = dir + "\\no_compress.json";
+		std::ofstream fout(filepath.c_str());
+		for (int i = 0, n = m_out_no_compress.size(); i < n; ++i) {
+			fout << m_out_no_compress[i] << "\n";
+		}
+		fout.close();
+	}
 }
 
 }

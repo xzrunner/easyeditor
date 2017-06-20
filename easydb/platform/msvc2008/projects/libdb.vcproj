@@ -236,14 +236,6 @@
 			<Filter
 				Name="pack"
 				>
-				<File
-					RelativePath="..\..\..\src\libdb\PackTexture.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libdb\PackTexture.h"
-					>
-				</File>
 				<Filter
 					Name="particle"
 					>
@@ -393,6 +385,18 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\libdb\UnpackLuaDescFile.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="texture"
+					>
+					<File
+						RelativePath="..\..\..\src\libdb\PackTexture.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libdb\PackTexture.h"
 						>
 					</File>
 				</Filter>

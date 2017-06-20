@@ -5,6 +5,8 @@
 
 #include <json/json.h>
 
+#include <set>
+
 namespace etexpacker { class ImageTrimData; }
 
 namespace edb
@@ -13,7 +15,8 @@ namespace edb
 class RectCutWithJson : public ICommand
 {
 public:
-	RectCutWithJson() {}
+	RectCutWithJson();
+	virtual ~RectCutWithJson();
 
 	//
 	// interface ICommand
@@ -56,10 +59,31 @@ private:
 	void FixGroup(const std::string& src_dir, const std::string& dst_dir, 
 		const std::string& file_dir, Json::Value& val) const;
 
-	bool IsIgnored(const std::string& filepath) const;
+private:
+	class Config
+	{
+	public:
+		Config(const std::string& filepath);
+
+		bool IsIgnored(const std::string& filepath) const;
+
+		void AddCut(const std::string& ori, const std::string& cut);
+
+		void Ouput();
+
+	private:
+		std::string m_filepath;
+
+		std::set<std::string> m_no_compress;
+		std::set<std::string> m_no_cut;
+
+		std::vector<std::string> m_out_compress;
+		std::vector<std::string> m_out_no_compress;
+
+	}; // Config
 
 private:
-	std::string m_ignore_dir;
+	Config* m_cfg;
 
 }; // RectCutWithJson
 
