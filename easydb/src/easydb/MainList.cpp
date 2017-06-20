@@ -344,10 +344,10 @@ void MainList::OnMenuDelTree(wxCommandEvent& event)
 		if (answer == wxYES) 
 		{
 			Delete(m_on_menu_id);
-			DBHelper::DeleteTree(*m_db, node->GetID());
 			if (in) {
 				DBHelper::FixNodeRef(*m_db, static_cast<const LeafNode*>(node));
 			}
+			DBHelper::DeleteTree(*m_db, node->GetID());
 		}
 	}
 	else

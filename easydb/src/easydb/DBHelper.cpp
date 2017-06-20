@@ -77,6 +77,7 @@ void DBHelper::CopyTree(const Database& db, const LeafNode* root, const std::str
 		std::string src = db.GetDirPath() + "\\" + leaf->GetPath();
 		std::string relative = gum::FilepathHelper::Relative(base_dir, src);
 		std::string dst = dst_dir + "\\" + relative;
+		dst = gum::FilepathHelper::Format(dst);
 		std::string _dst_dir = gum::FilepathHelper::Dir(dst);
 		if (!wxDir::Exists(_dst_dir)) {
 			wxFileName::Mkdir(_dst_dir, wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL);
