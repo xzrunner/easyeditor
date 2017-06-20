@@ -39,6 +39,7 @@ private:
 	bool DoGroup(Json::Value& val, const std::string& key);
 
 	void DoCommon(const std::string& key);
+	void DoUIWnd();
 	void DoTexture();
 	void DoAnim();
 	void DoMesh();

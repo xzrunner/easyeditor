@@ -72,7 +72,7 @@ void JsonResOP::Do()
 		// todo
 		break;
 	case ee::SYM_UIWND:
-		DoCommon(KEY_SPR);
+		DoUIWnd();
 		break;
 	case ee::SYM_UI:
 		DoUI();
@@ -123,6 +123,32 @@ void JsonResOP::DoCommon(const std::string& key)
 	}
 
 	AfterDoCommon(dirty, value, key);
+
+	if (dirty) {
+		StoreJson(m_filepath, value);
+	}
+}
+
+void JsonResOP::DoUIWnd()
+{
+	Json::Value value;
+	LoadJson(m_filepath, value);
+
+	BeforeDoCommon(value);
+
+	bool dirty = false;
+	int n = value[KEY_SPR].size();
+	for (int i = 0; i < n; ++i) {
+		if (DoFile(value[KEY_SPR][i], KEY_PATH)) {
+			dirty = true;
+		}
+	}
+
+	if (DoFile(value["ref_spr"], KEY_PATH)) {
+		dirty = true;
+	}
+
+	AfterDoCommon(dirty, value, KEY_SPR);
 
 	if (dirty) {
 		StoreJson(m_filepath, value);
