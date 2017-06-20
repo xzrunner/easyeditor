@@ -595,15 +595,15 @@ RectCutWithJson::Config::Config(const std::string& filepath)
 	std::string dir = gum::FilepathHelper::Dir(filepath);
 	for (int i = 0, n = val["no_cut"].size(); i < n; ++i) 
 	{
-		std::string path = dir + "\\" + val["no_cut"][i].asString();
-		gum::StringHelper::ToLower(path);
+		std::string path = gum::FilepathHelper::Absolute(dir, val["no_cut"][i].asString());
+		path = gum::FilepathHelper::Format(path);
 		m_no_cut.insert(path);
 	}
 
 	for (int i = 0, n = val["no_compress"].size(); i < n; ++i) 
 	{
-		std::string path = dir + "\\" + val["no_compress"][i].asString();
-		gum::StringHelper::ToLower(path);
+		std::string path = gum::FilepathHelper::Absolute(dir, val["no_compress"][i].asString());
+		path = gum::FilepathHelper::Format(path);
 		m_no_compress.insert(path);
 	}
 
