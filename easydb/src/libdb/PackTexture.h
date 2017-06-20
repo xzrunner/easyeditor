@@ -59,6 +59,9 @@ private:
 	static etexpacker::ImageTrimData* PreparePackages(const std::string& str, std::vector<Package>& packages, std::string& src, std::string& dst);
 	static void PackPackage(const Package& pkg, const std::string& src_dir, const std::string& dst_file, int& start_id);
 
+	static void LoadSrcImages(const std::string& src, const std::vector<std::string>& ignores,
+		std::vector<std::string>& images);
+
 }; // PackTexture
 
 }

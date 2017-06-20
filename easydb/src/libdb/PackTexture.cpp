@@ -17,6 +17,7 @@
 #include <gum/Config.h>
 
 #include <wx/filefn.h>
+#include <wx/filename.h>
 
 #include <fstream>
 
@@ -255,22 +256,8 @@ void PackTexture::PackPackage(const Package& pkg, const std::string& src_dir,
 							  const std::string& dst_file, int& start_id)
 {
 	std::vector<std::string> images;
-
-	wxArrayString files;
-	if (pkg.ignores.empty()) {
-		for (int i = 0, n = pkg.sources.size(); i < n; ++i) {
-			ee::FileHelper::FetchAllFiles(pkg.sources[i], files);
-		}
-	} else {
-		for (int i = 0, n = pkg.sources.size(); i < n; ++i) {
-			ee::FileHelper::FetchAllFiles(pkg.sources[i], pkg.ignores, files);
-		}
-	}
-	for (int i = 0, n = files.size(); i < n; ++i) {
-		if (ee::SymbolFile::Instance()->Type(files[i].ToStdString()) == s2::SYM_IMAGE) {
-			std::string filepath = ee::FileHelper::FormatFilepathAbsolute(files[i].ToStdString());
-			images.push_back(filepath);
-		}
+	for (int i = 0, n = pkg.sources.size(); i < n; ++i) {
+		LoadSrcImages(pkg.sources[i], pkg.ignores, images);
 	}
 
 	etexpacker::NormalPack tex_packer(images, pkg.trim, pkg.extrude_min, pkg.extrude_max, start_id);
@@ -279,6 +266,49 @@ void PackTexture::PackPackage(const Package& pkg, const std::string& src_dir,
 	tex_packer.OutputImage(dst_file + ".png");
 
 	CompressPackedTex(tex_packer, start_id, dst_file, pkg.format, pkg.quality == "fastest");
+}
+
+void PackTexture::LoadSrcImages(const std::string& src, 
+								const std::vector<std::string>& ignores,
+								std::vector<std::string>& images)
+{
+	if (ee::FileHelper::IsDirExist(src)) 
+	{
+		wxArrayString files;
+		if (ignores.empty()) {
+			ee::FileHelper::FetchAllFiles(src, files);
+		} else {
+			ee::FileHelper::FetchAllFiles(src, ignores, files);
+		}
+		for (int i = 0, n = files.size(); i < n; ++i) {
+			if (ee::SymbolFile::Instance()->Type(files[i].ToStdString()) == s2::SYM_IMAGE) {
+				std::string filepath = ee::FileHelper::FormatFilepathAbsolute(files[i].ToStdString());
+				images.push_back(filepath);
+			}
+		}
+	} 
+	else 
+	{
+		std::ifstream fin(src.c_str());
+		std::string line;
+		while (getline(fin, line))
+		{
+			bool skip = false;
+			for (int i = 0, n = ignores.size(); i < n; ++i) {
+				if (ignores[i] == line) {
+					skip = true;
+					break;
+				}
+			}
+			if (skip) {
+				continue;
+			}
+			if (ee::SymbolFile::Instance()->Type(line) == s2::SYM_IMAGE) {
+				images.push_back(line);
+			}
+		}
+		fin.close();
+	}
 }
 
 }

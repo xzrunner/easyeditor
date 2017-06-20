@@ -628,9 +628,9 @@ void RectCutWithJson::Config::AddCut(const std::string& ori, const std::string& 
 {
 	std::string path = gum::FilepathHelper::Format(cut);
 	if (m_no_compress.find(ori) != m_no_compress.end()) {
-		m_out_no_compress.push_back(cut);
+		m_out_no_compress.push_back(path);
 	} else {
-		m_out_compress.push_back(cut);
+		m_out_compress.push_back(path);
 	}
 }
 
@@ -638,7 +638,7 @@ void RectCutWithJson::Config::Ouput()
 {
 	std::string dir = gum::FilepathHelper::Dir(m_filepath);
 	{
-		std::string filepath = dir + "\\compress.json";
+		std::string filepath = dir + "\\compress.tmp";
 		std::ofstream fout(filepath.c_str());
 		for (int i = 0, n = m_out_compress.size(); i < n; ++i) {
 			fout << m_out_compress[i] << "\n";
@@ -646,7 +646,7 @@ void RectCutWithJson::Config::Ouput()
 		fout.close();
 	}
 	{
-		std::string filepath = dir + "\\no_compress.json";
+		std::string filepath = dir + "\\no_compress.tmp";
 		std::ofstream fout(filepath.c_str());
 		for (int i = 0, n = m_out_no_compress.size(); i < n; ++i) {
 			fout << m_out_no_compress[i] << "\n";
