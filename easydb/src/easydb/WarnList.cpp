@@ -4,6 +4,8 @@
 #include "LeafNode.h"
 #include "MainList.h"
 
+#include <gum/StringHelper.h>
+
 #include <map>
 
 namespace edb
@@ -37,6 +39,9 @@ void WarnList::BuildNodeErr(const Database& db)
 {
 	wxTreeItemId ref_id = AppendItem(m_root, "引用错误");
 	wxTreeItemId nouse_id = AppendItem(m_root, "多余");
+
+	int ref_count = 0, nouse_count = 0;
+	
 	const std::vector<Node*>& nodes = db.GetNodes();
 	for (int i = 0, n = nodes.size(); i < n; ++i)
 	{
@@ -47,11 +52,19 @@ void WarnList::BuildNodeErr(const Database& db)
 		LeafNode* leaf = static_cast<LeafNode*>(node);
 		if (leaf->IsRefError()) {
 			AppendItem(ref_id, leaf->GetPath());
+			++ref_count;
 		}
 		if (leaf->IsNoUse()) {
 			AppendItem(nouse_id, leaf->GetPath());
+			++nouse_count;
 		}
 	}
+
+	wxString ref_str, nouse_str;
+	ref_str.Printf("引用错误 [%d]", ref_count);
+	nouse_str.Printf("多余 [%d]", nouse_count);
+	SetItemText(ref_id, ref_str);
+	SetItemText(nouse_id, nouse_str);
 }
 
 void WarnList::BuildDup(const Database& db)
@@ -68,6 +81,7 @@ void WarnList::BuildDup(const Database& db)
 		itr0 = map_md5.begin(),
 		itr1 = itr0;
 	++itr1;
+	int count = 0;
 	for ( ; itr1 != map_md5.end(); ++itr0, ++itr1) 
 	{
 		if (itr0->first == itr1->first) {
@@ -75,12 +89,18 @@ void WarnList::BuildDup(const Database& db)
 		} else if (!dup_list.empty()) {
 			dup_list.push_back(itr0->second);
 			InsertDupList(db, dup_list, id);
+			++count;
 			dup_list.clear();
 		}
 	}
 	if (!dup_list.empty()) {
 		InsertDupList(db, dup_list, id);
+		++count;
 	}
+
+	wxString str;
+	str.Printf("重复 [%d]", count);
+	SetItemText(id, str);
 }
 
 void WarnList::InsertDupList(const Database& db, const std::vector<int>& list, wxTreeItemId parent)
