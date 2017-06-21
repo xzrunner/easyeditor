@@ -88,6 +88,11 @@ void LeafNode::AddInput(int id)
 	m_in_nodes.insert(id);
 }
 
+void LeafNode::ClearInput()
+{
+	m_in_nodes.clear();
+}
+
 bool LeafNode::IsRefError() const
 {
 	return m_out_nodes.find(-1) != m_out_nodes.end();

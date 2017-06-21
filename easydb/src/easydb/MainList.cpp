@@ -194,6 +194,9 @@ void MainList::ShowMenu(wxTreeItemId id, const wxPoint& pt)
 	menu.Append(ID_MENU_COPY_NODE, wxT("拷贝结点"));
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &MainList::OnMenuCopyNode, this, ID_MENU_COPY_NODE);
 
+	menu.Append(ID_MENU_CHANGE_NODE, wxT("替换结点"));
+	Bind(wxEVT_COMMAND_MENU_SELECTED, &MainList::OnMenuChangeNode, this, ID_MENU_CHANGE_NODE);
+
 	menu.AppendSeparator();
 
 	menu.Append(ID_MENU_BASE_INFO, wxT("基本信息"));
@@ -473,6 +476,37 @@ void MainList::OnMenuCopyNode(wxCommandEvent& event)
 // 		m_map2id.insert(std::make_pair(node->GetID(), item));
 // 
 // 		SelectItem(item);
+	}
+}
+
+void MainList::OnMenuChangeNode(wxCommandEvent& event)
+{
+	if (!m_on_menu_id.IsOk()) {
+		return;
+	}
+
+	std::map<wxTreeItemId, int>::iterator itr = m_map2node.find(m_on_menu_id);
+	const Node* node = m_db->Fetch(itr->second);
+	if (node->Type() == NODE_INDEX) {
+		return;
+	}
+
+	wxFileDialog dlg(NULL, "替换文件");
+	if (dlg.ShowModal() == wxID_OK) 
+	{
+		const LeafNode* leaf = static_cast<const LeafNode*>(node);
+		std::string dst_file = dlg.GetPath().ToStdString();
+		gum::StringHelper::ToLower(dst_file);
+		DBHelper::ChangeNode(*m_db, leaf, dst_file);
+
+		SetItemStatus(m_on_menu_id, leaf);
+
+		int new_node = m_db->QueryByPath(dst_file);
+		std::map<int, wxTreeItemId>::iterator itr = m_map2id.find(new_node);
+		if (itr != m_map2id.end()) {
+			SetItemStatus(itr->second, m_db->Fetch(new_node));
+			SelectItem(itr->second);
+		}
 	}
 }
 

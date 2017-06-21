@@ -35,6 +35,7 @@ public:
 	void Parser(const Database& db);
 
 	void AddInput(int id);
+	void ClearInput();
 
 	const std::set<int>& GetNodes(bool in) const { 
 		return in ? m_in_nodes : m_out_nodes; }

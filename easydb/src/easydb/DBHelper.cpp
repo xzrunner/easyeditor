@@ -199,8 +199,10 @@ void DBHelper::MoveNode(const Database& db, const LeafNode* node,
 		}
 
 		std::string path = db.GetDirPath() + "\\" + node->GetPath();
-		JsonResChangePathOP op(path, old_path, new_path);
-		op.Do();
+		if (path != new_path) {
+			JsonResChangePathOP op(path, old_path, new_path);
+			op.Do();
+		}
 	}
 
 	wxCopyFile(old_path, new_path);
@@ -220,6 +222,37 @@ void DBHelper::CopyNode(const Database& db, const LeafNode* node,
 
 	JsonResChangeDirOP op(new_path, old_dir, dst_dir);
 	op.Do();
+}
+
+void DBHelper::ChangeNode(const Database& db, const LeafNode* node, 
+						  const std::string& new_node_path)
+{
+	std::string old_path = db.GetDirPath() + "\\" + node->GetPath();
+	std::string dir = gum::FilepathHelper::Dir(old_path);
+
+	int new_node_id = db.QueryByPath(new_node_path);
+	const Node* new_node = db.Fetch(new_node_id);
+	assert(new_node);
+	LeafNode* new_leaf = const_cast<LeafNode*>(static_cast<const LeafNode*>(new_node));
+
+	const std::set<int>& list = node->GetNodes(true);
+	std::set<int>::const_iterator itr = list.begin();
+	for ( ; itr != list.end(); ++itr) 
+	{
+		const Node* node = db.Fetch(*itr);
+		if (node->Type() != NODE_LEAF) {
+			continue;
+		}
+
+		std::string path = db.GetDirPath() + "\\" + node->GetPath();
+		if (path != new_node_path) 
+		{
+			new_leaf->AddInput(*itr);
+			JsonResChangePathOP op(path, old_path, new_node_path);
+			op.Do();
+		}
+	}
+	const_cast<LeafNode*>(node)->ClearInput();
 }
 
 }

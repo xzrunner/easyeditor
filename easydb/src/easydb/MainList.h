@@ -31,11 +31,14 @@ private:
 		ID_MENU_COPY_FILEPATH,
 
 		ID_MENU_REF_INFO,
+
 		ID_MENU_COPY_TREE_TO,
 		ID_MENU_DEL_TREE,
+
 		ID_MENU_RENAME_NODE,
 		ID_MENU_MOVE_NODE,
 		ID_MENU_COPY_NODE,
+		ID_MENU_CHANGE_NODE,
 
 		ID_MENU_BASE_INFO,
 
@@ -64,6 +67,7 @@ private:
 	void OnMenuRenameNode(wxCommandEvent& event);
 	void OnMenuMoveNode(wxCommandEvent& event);
 	void OnMenuCopyNode(wxCommandEvent& event);
+	void OnMenuChangeNode(wxCommandEvent& event);
 	void OnMenuBaseInfo(wxCommandEvent& event);
 
 	void OpenFileByEditor(wxTreeItemId id);
