@@ -392,8 +392,7 @@ void MainList::OnMenuRenameNode(wxCommandEvent& event)
 		if (new_name != filename) 
 		{
 			DBHelper::RenameNode(*m_db, static_cast<const LeafNode*>(node), new_name);
-			std::string new_path = node->GetPath().substr(0, node->GetPath().find(filename));
-			SetItemText(m_on_menu_id, new_path + new_name);
+			SetItemText(m_on_menu_id, node->GetPath());
 		}
 	}
 }
