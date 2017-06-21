@@ -36,12 +36,17 @@ void PackToBin::Pack(const std::string& filepath,
 					 bool compress, 
 					 float scale)
 {
+	std::set<int> ref_pkgs;
+
 	// src nodes
 	std::vector<PackNode*> nodes;
 	PackNodeFactory::Instance()->FetchAll(nodes);
 	std::vector<PackNode*>::iterator itr = nodes.begin();
-	for ( ; itr != nodes.end(); ) {
-		if (!PackIDMgr::Instance()->IsCurrPkg((*itr))) {
+	for ( ; itr != nodes.end(); ) 
+	{
+		PackNode* node = *itr;
+		if (!PackIDMgr::Instance()->IsCurrPkg(node)) {
+			ref_pkgs.insert(node->GetPkgID());
 			itr = nodes.erase(itr);
 		} else {
 			++itr;
@@ -89,7 +94,7 @@ void PackToBin::Pack(const std::string& filepath,
 	}
 
 	// pack index
-	PageIndex(filepath + ".epe", pages, compress, scale);
+	PageIndex(filepath + ".epe", pages, compress, scale, ref_pkgs);
 
 	// pack pages
 	for (int i = 0, n = pages.size(); i < n; ++i) {
@@ -99,7 +104,7 @@ void PackToBin::Pack(const std::string& filepath,
 }
 
 void PackToBin::PageIndex(const std::string& filepath, const std::vector<Page*>& pages, 
-						  bool compress, float scale)
+						  bool compress, float scale, const std::set<int>& ref_pkgs)
 {
 	const std::map<std::string, int>& exports = ExportNameSet::Instance()->GetData();
 
@@ -127,6 +132,10 @@ void PackToBin::PageIndex(const std::string& filepath, const std::vector<Page*>&
 
 	// scale
 	sz += sizeof(float);
+
+	// ref others
+	sz += sizeof(uint16_t);
+	sz += sizeof(uint16_t) * ref_pkgs.size();
 
 	/************************************************************************/
 	/* fill                                                                 */
@@ -160,6 +169,15 @@ void PackToBin::PageIndex(const std::string& filepath, const std::vector<Page*>&
 
 	// scale
 	pack(scale, &ptr);
+
+	// ref others
+	uint16_t ref_count = ref_pkgs.size();
+	pack(ref_count, &ptr);
+	std::set<int>::const_iterator itr_ref = ref_pkgs.begin();
+	for ( ; itr_ref != ref_pkgs.end(); ++itr_ref) {
+		uint16_t pkg = *itr_ref;
+		pack(pkg, &ptr);
+	}
 
 	/************************************************************************/
 	/* output                                                               */

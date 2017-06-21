@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <set>
 
 namespace ee { class TexturePacker; }
 
@@ -44,8 +45,8 @@ private:
 
 	}; // Page
 
-	static void PageIndex(const std::string& filepath, 
-		const std::vector<Page*>& pages, bool compress, float scale);
+	static void PageIndex(const std::string& filepath, const std::vector<Page*>& pages, 
+		bool compress, float scale, const std::set<int>& ref_pkgs);
 	static void PackPage(const std::string& filepath, const Page& page, 
 		const ee::TexturePacker& tp, bool compress);
 
