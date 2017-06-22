@@ -364,6 +364,14 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\..\src\libdb\PackPkg.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libdb\PackPkg.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\libdb\PackRes.cpp"
 						>
 					</File>

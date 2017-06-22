@@ -73,6 +73,7 @@
 #include "FixLRSprLayer.h"
 #include "LRPackerNew.h"
 #include "PackResID.h"
+#include "PackPkg.h"
 
 namespace edb
 {
@@ -151,6 +152,7 @@ void CommandLoader::Init()
 	fc->Register(FixLRSprLayer::Create());
 	fc->Register(LRPackerNew::Create());
 	fc->Register(PackResID::Create());
+	fc->Register(PackPkg::Create());
 }
 
 }
