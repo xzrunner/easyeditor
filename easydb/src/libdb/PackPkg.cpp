@@ -87,14 +87,16 @@ void PackPkg::Trigger(const std::string& dir, const std::string& name)
 		++i;
 	}
 
-	if (epe_size.size() <= 1 || ept_size.size() <= 1) {
-		throw ee::Exception("less ep file dir: %s, name: %s, epe %d, ept %d",
-			dir.c_str(), name.c_str(), epe_size.size(), ept_size.size());
-	}
+	//if (epe_size.size() <= 1 || ept_size.size() <= 1) {
+	//	throw ee::Exception("less ep file dir: %s, name: %s, epe %d, ept %d",
+	//		dir.c_str(), name.c_str(), epe_size.size(), ept_size.size());
+	//}
 
 	filepath = gum::FilepathHelper::Absolute(dir, name + ".pkg");
+	std::locale::global(std::locale(""));
 	std::ofstream fout(filepath.c_str(), std::ios::binary);
-	
+	std::locale::global(std::locale("C"));	
+
 	// header
 	uint16_t count = epe_size.size();
 	fout.write(reinterpret_cast<const char*>(&count), sizeof(count));
