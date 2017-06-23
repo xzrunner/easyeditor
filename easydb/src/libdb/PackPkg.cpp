@@ -108,7 +108,6 @@ void PackPkg::Trigger(const std::string& dir, const std::string& name)
 	{
 		uint32_t size = epe_size[i];
 		fout.write(reinterpret_cast<const char*>(&ptr), sizeof(ptr));
-		printf("++ epe ptr %d\n", ptr);
 		ptr += size;
 	}
 	// ept header
