@@ -5,6 +5,7 @@
 
 #include <gum/FilepathHelper.h>
 #include <gum/StringHelper.h>
+#include <bimp/BIMP_ImportStream.h>
 
 #include <fstream>
 
@@ -49,42 +50,47 @@ int PackPkg::Run(int argc, char *argv[])
 
 void PackPkg::Trigger(const std::string& dir, const std::string& name)
 {
+	std::string epe_path = gum::FilepathHelper::Absolute(dir, name + ".epe");
+	if (!gum::FilepathHelper::Exists(epe_path)) {
+		throw ee::Exception("no epe file %s", epe_path.c_str());
+	}
+	std::string ept_path = gum::FilepathHelper::Absolute(dir, name + ".ept");
+	if (!gum::FilepathHelper::Exists(ept_path)) {
+		throw ee::Exception("no ept file %s", ept_path.c_str());
+	}
+
+	EpeLoader epe_loader(epe_path);
+	epe_loader.Load();
+	int epe_num = epe_loader.GetCount();
+
+	EptLoader ept_loader(ept_path);
+	ept_loader.Load();
+	int ept_num = ept_loader.GetCount();
+
 	std::vector<uint32_t> epe_size, ept_size;
+	epe_size.resize(epe_num + 1);
+	ept_size.resize(ept_num + 1);
 
-	std::string filepath = gum::FilepathHelper::Absolute(dir, name + ".epe");
-	if (!gum::FilepathHelper::Exists(filepath)) {
-		throw ee::Exception("no epe file %s", filepath.c_str());
-	}
-	epe_size.push_back(GetFileSize(filepath));
-	int i = 1;
-	while (true)
+	epe_size[0] = GetFileSize(epe_path);
+	for (int i = 0; i < epe_num; ++i) 
 	{
-		std::string filename = name + "." + gum::StringHelper::ToString(i) + ".epe";
+		std::string filename = name + "." + gum::StringHelper::ToString(i + 1) + ".epe";
 		std::string filepath = gum::FilepathHelper::Absolute(dir, filename);
 		if (!gum::FilepathHelper::Exists(filepath)) {
-			break;
-		} else {
-			epe_size.push_back(GetFileSize(filepath));
+			throw ee::Exception("no epe file %s", filepath.c_str());
 		}
-		++i;
+		epe_size[i + 1] = GetFileSize(filepath);
 	}
 
-	filepath = gum::FilepathHelper::Absolute(dir, name + ".ept");
-	if (!gum::FilepathHelper::Exists(filepath)) {
-		throw ee::Exception("no ept file %s", filepath.c_str());
-	}
-	ept_size.push_back(GetFileSize(filepath));
-	i = 1;
-	while (true)
+	ept_size[0] = GetFileSize(ept_path);
+	for (int i = 0; i < ept_num; ++i)
 	{
-		std::string filename = name + "." + gum::StringHelper::ToString(i) + ".ept";
+		std::string filename = name + "." + gum::StringHelper::ToString(i + 1) + ".ept";
 		std::string filepath = gum::FilepathHelper::Absolute(dir, filename);
 		if (!gum::FilepathHelper::Exists(filepath)) {
-			break;
-		} else {
-			ept_size.push_back(GetFileSize(filepath));
+			throw ee::Exception("no ept file %s", filepath.c_str());
 		}
-		++i;
+		ept_size[i + 1] = GetFileSize(filepath);
 	}
 
 	//if (epe_size.size() <= 1 || ept_size.size() <= 1) {
@@ -92,9 +98,9 @@ void PackPkg::Trigger(const std::string& dir, const std::string& name)
 	//		dir.c_str(), name.c_str(), epe_size.size(), ept_size.size());
 	//}
 
-	filepath = gum::FilepathHelper::Absolute(dir, name + ".pkg");
+	std::string pkg_path = gum::FilepathHelper::Absolute(dir, name + ".pkg");
 	std::locale::global(std::locale(""));
-	std::ofstream fout(filepath.c_str(), std::ios::binary);
+	std::ofstream fout(pkg_path.c_str(), std::ios::binary);
 	std::locale::global(std::locale("C"));	
 
 	// header
@@ -120,8 +126,8 @@ void PackPkg::Trigger(const std::string& dir, const std::string& name)
 		ptr += size;
 	}
 	// epe data
-	filepath = gum::FilepathHelper::Absolute(dir, name + ".epe");
-	WriteFile(filepath, epe_size[0], fout);
+	epe_path = gum::FilepathHelper::Absolute(dir, name + ".epe");
+	WriteFile(epe_path, epe_size[0], fout);
 	for (int i = 1, n = epe_size.size(); i < n; ++i) 
 	{
 		std::string filename = name + "." + gum::StringHelper::ToString(i) + ".epe";
@@ -129,8 +135,8 @@ void PackPkg::Trigger(const std::string& dir, const std::string& name)
 		WriteFile(filepath, epe_size[i], fout);
 	}
 	// ept data
-	filepath = gum::FilepathHelper::Absolute(dir, name + ".ept");
-	WriteFile(filepath, ept_size[0], fout);
+	ept_path = gum::FilepathHelper::Absolute(dir, name + ".ept");
+	WriteFile(ept_path, ept_size[0], fout);
 	for (int i = 1, n = ept_size.size(); i < n; ++i) 
 	{
 		std::string filename = name + "." + gum::StringHelper::ToString(i) + ".ept";
@@ -167,6 +173,50 @@ void PackPkg::WriteFile(const std::string& src, uint32_t size, std::ofstream& fo
 	fin.read(reinterpret_cast<char*>(m_buf), size);
 	fout.write(reinterpret_cast<const char*>(m_buf), size);
 	fin.close();
+}
+
+/************************************************************************/
+/* class PackPkg::EpeLoader                                             */
+/************************************************************************/
+
+PackPkg::EpeLoader::EpeLoader(const std::string& filepath)
+	: bimp::FileLoader(filepath)
+{
+}
+
+int PackPkg::EpeLoader::GetCount() const
+{
+	return m_count;
+}
+
+void PackPkg::EpeLoader::OnLoad(bimp::ImportStream& is)
+{
+	int export_n = is.UInt16();
+	for (int i = 0; i < export_n; ++i) {
+		is.String();
+		is.UInt32();
+	}
+
+	m_count = is.UInt16();
+}
+
+/************************************************************************/
+/* class PackPkg::EptLoader                                             */
+/************************************************************************/
+
+PackPkg::EptLoader::EptLoader(const std::string& filepath)
+	: bimp::FileLoader(filepath)
+{
+}
+
+int PackPkg::EptLoader::GetCount() const
+{
+	return m_count;
+}
+
+void PackPkg::EptLoader::OnLoad(bimp::ImportStream& is)
+{
+	m_count = is.UInt16();
 }
 
 }

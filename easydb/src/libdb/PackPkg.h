@@ -3,6 +3,8 @@
 
 #include "ICommand.h"
 
+#include <bimp/FileLoader.h>
+
 #include <stdint.h>
 
 namespace edb
@@ -30,6 +32,36 @@ private:
 	static uint32_t GetFileSize(const std::string& filepath);
 	
 	void WriteFile(const std::string& src, uint32_t size, std::ofstream& fout);
+
+	class EpeLoader : public bimp::FileLoader
+	{
+	public:
+		EpeLoader(const std::string& filepath);
+
+		int GetCount() const;
+
+	protected:
+		virtual void OnLoad(bimp::ImportStream& is);
+
+	private:
+		int m_count;
+
+	}; // EpeLoader
+
+	class EptLoader : public bimp::FileLoader
+	{
+	public:
+		EptLoader(const std::string& filepath);
+
+		int GetCount() const;
+
+	protected:
+		virtual void OnLoad(bimp::ImportStream& is);
+
+	private:
+		int m_count;
+
+	}; // EptLoader
 
 private:
 	unsigned char* m_buf;
