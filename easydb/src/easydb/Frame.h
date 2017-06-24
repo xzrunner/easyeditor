@@ -23,6 +23,7 @@ private:
 	void OnConnect(wxCommandEvent& event);
 	void OnSearch(wxCommandEvent& event);
 	void OnSameImage(wxCommandEvent& event);
+	void OnBuildSnapshoot(wxCommandEvent& event);
 
 	void OnQuit(wxCommandEvent& event);
 
@@ -42,6 +43,7 @@ private:
 		ID_CONNECT = 1000,
 		ID_SEARCH,
 		ID_SAME_IMAGE,
+		ID_BUILD_SNAPSHOOT,
 	};
 
 private:

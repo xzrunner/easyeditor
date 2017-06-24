@@ -6,9 +6,12 @@
 #include "LeafNode.h"
 
 #include <SM_Test.h>
+#include <shaderlab/ShaderMgr.h>
+#include <shaderlab/Sprite2Shader.h>
 #include <sprite2/RenderParams.h>
 #include <sprite2/S2_RVG.h>
 #include <gum/GUM_GTxt.h>
+#include <gum/Image.h>
 
 #include <assert.h>
 
@@ -64,6 +67,10 @@ s2::RenderReturn Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* 
 	DrawBtn(mt, sm::vec2(-WIDTH * 0.5f + BTN_RADIUS, 0), !in);
 	DrawBtn(mt, sm::vec2(WIDTH * 0.5f - BTN_RADIUS, 0), !out);
 
+	if (const gum::Image* ss = db_spr->GetSnapshoot()) {
+		DrawSnapshoot(mt, ss);
+	}
+
 	if (!in && !out) {
 		return s2::RENDER_OK;
 	}
@@ -116,6 +123,36 @@ void Symbol::DrawBtn(const S2_MAT& mt, const sm::vec2& offset, bool closed)
 	} else {
 		s2::RVG::Line(center - sm::vec2(BTN_RADIUS, 0), center + sm::vec2(BTN_RADIUS, 0));
 	}
+}
+
+void Symbol::DrawSnapshoot(const S2_MAT& mt, const gum::Image* img)
+{
+	sm::ivec2 sz = img->GetSize();
+	float hw = sz.x * 0.5f,
+		  hh = sz.y * 0.5f;
+
+	sm::vec2 vertices[4];
+	vertices[0] = sm::vec2(-hw, -hh);
+	vertices[1] = sm::vec2( hw, -hh);
+	vertices[2] = sm::vec2( hw,  hh);
+	vertices[3] = sm::vec2(-hw,  hh);
+	for (int i = 0; i < 4; ++i) 
+	{
+		sm::vec2 pos = mt * vertices[i];
+		vertices[i] = pos;
+	}
+
+	int tex_id = img->GetTexID();
+	float texcoords[8];
+	texcoords[0] = 0; texcoords[1] = 0;
+	texcoords[2] = 1; texcoords[3] = 0;
+	texcoords[4] = 1; texcoords[5] = 1;
+	texcoords[6] = 0; texcoords[7] = 1;
+
+	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
+	mgr->SetShader(sl::SPRITE2);
+	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader());
+	shader->DrawQuad(&vertices[0].x, texcoords, tex_id);
 }
 
 }

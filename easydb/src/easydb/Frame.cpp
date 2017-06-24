@@ -8,6 +8,7 @@
 #include "SearchList.h"
 #include "WarnPanel.h"
 #include "WarnList.h"
+#include "Snapshoot.h"
 
 #include <ee/FileHelper.h>
 #include <ee/Exception.h>
@@ -29,6 +30,7 @@ BEGIN_EVENT_TABLE(Frame, wxFrame)
 	EVT_MENU(ID_CONNECT, Frame::OnConnect)
 	EVT_MENU(ID_SEARCH, Frame::OnSearch)
 	EVT_MENU(ID_SAME_IMAGE, Frame::OnSameImage)
+	EVT_MENU(ID_BUILD_SNAPSHOOT, Frame::OnBuildSnapshoot)
 
 	EVT_MENU(wxID_EXIT, Frame::OnQuit)
 END_EVENT_TABLE()
@@ -153,6 +155,15 @@ void Frame::OnSameImage(wxCommandEvent& event)
 	}
 }
 
+void Frame::OnBuildSnapshoot(wxCommandEvent& event)
+{
+	wxDirDialog dlg(NULL, "output directory", wxEmptyString,
+		wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
+	if (dlg.ShowModal() == wxID_OK) {
+		Snapshoot::Build(*m_task->GetStagePanel()->GetDB(), dlg.GetPath().ToStdString());
+	}
+}
+
 void Frame::OnQuit(wxCommandEvent& event)
 {
 	Close(true);
@@ -186,6 +197,7 @@ wxMenu* Frame::InitToolBar()
 	wxMenu* tool = new wxMenu;
 	tool->Append(ID_SEARCH, wxT("&Search...\tCtrl+F"), wxT("Search"));
 	tool->Append(ID_SAME_IMAGE, wxT("Same Image"), wxT("Same Image"));
+	tool->Append(ID_BUILD_SNAPSHOOT, wxT("Пьее"), wxT("Пьее"));
 	return tool;
 }
 

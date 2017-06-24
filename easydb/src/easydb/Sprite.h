@@ -3,6 +3,8 @@
 
 #include <ee/Sprite.h>
 
+namespace gum { class Image; }
+
 namespace edb
 {
 
@@ -27,10 +29,14 @@ public:
 	void SetClosed(bool in, bool closed);
 	bool IsClosed(bool in) const;
 
+	const gum::Image* GetSnapshoot() const { return m_snapshoot; }
+
 private:
 	int m_id;
 
 	bool m_in_closed, m_out_closed;
+
+	gum::Image* m_snapshoot;
 
 }; // Sprite
 

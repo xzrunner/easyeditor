@@ -20,6 +20,7 @@ public:
 	void Load(const std::string& filepath);
 
 	const std::string& GetDirPath() const { return m_dir_path; }
+	const std::string& GetProjPath() const { return m_proj_path; }
 
 	void Build(const std::string& path);
 
@@ -45,6 +46,8 @@ private:
 	void FinalParse();
 
 private:
+	std::string m_proj_path;
+
 	std::string m_dir_path;
 
 	int m_root;

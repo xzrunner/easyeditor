@@ -3,6 +3,8 @@
 
 #include <ee/Symbol.h>
 
+namespace gum { class Image; }
+
 namespace edb
 {
 
@@ -23,6 +25,8 @@ public:
 	virtual void Traverse(const s2::SymbolVisitor& visitor) {}
 	virtual s2::RenderReturn Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
 
+	const Database* GetDB() const { return m_db; }
+
 	static void OnSprPressed(Sprite* spr, const sm::vec2& pos);
 
 protected:
@@ -33,6 +37,7 @@ protected:
 private:
 	static void DrawBG(const S2_MAT& mt);
 	static void DrawBtn(const S2_MAT& mt, const sm::vec2& offset, bool closed);
+	static void DrawSnapshoot(const S2_MAT& mt, const gum::Image* img);
 
 private:
 	const Database* m_db;

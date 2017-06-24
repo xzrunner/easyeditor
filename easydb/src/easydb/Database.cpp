@@ -57,6 +57,8 @@ void Database::Load(const std::string& filepath)
 {
 	Clear();
 
+	m_proj_path = filepath;
+
 	std::ifstream fin(filepath.c_str(), std::ios::binary);
 
 	// dir path
