@@ -144,8 +144,13 @@ void JsonResOP::DoUIWnd()
 		}
 	}
 
-	if (DoFile(value["ref_spr"], KEY_PATH)) {
-		dirty = true;
+	if (value.isMember("ref_spr")) 
+	{
+		for (int i = 0, n = value["ref_spr"].size(); i < n; ++i) {
+			if (DoFile(value["ref_spr"][i], KEY_PATH)) {
+				dirty = true;
+			}
+		}
 	}
 
 	AfterDoCommon(dirty, value, KEY_SPR);
