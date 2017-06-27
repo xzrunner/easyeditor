@@ -397,7 +397,8 @@ void PackTrans::PackToBin(uint8_t** ptr) const
 		pack(mode, ptr);
 	}
 	if (m_type & simp::NodeTrans::DOWNSMAPLE_MASK) {
-		pack(m_downsample, ptr);
+		uint32_t ds = m_downsample * 0xffffffff;
+		pack(ds, ptr);
 	}
 	if (m_type & simp::NodeTrans::CAMERA_MASK) {
 		uint32_t mode = m_camera.GetMode();
