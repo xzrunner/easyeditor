@@ -84,6 +84,11 @@ PackTrans::PackTrans(const s2::Sprite& spr, bool force_name)
 		m_type |= simp::NodeTrans::FILTER_MASK;
 	}
 
+	m_downsample = spr.GetShader().GetDownsample();
+	if (fabs(m_downsample - 1) > FLT_EPSILON) {
+		m_type |= simp::NodeTrans::DOWNSMAPLE_MASK;
+	}
+
 	m_camera = spr.GetCamera();
 	if (m_camera.GetMode() != s2::CM_ORTHO) {
 		m_type |= simp::NodeTrans::CAMERA_MASK;
@@ -143,6 +148,7 @@ bool PackTrans::operator == (const PackTrans& trans) const
 		&& m_color == trans.m_color 
 		&& m_blend == trans.m_blend 
 		&& m_fast_blend == trans.m_fast_blend 
+		&& fabs(m_downsample - trans.m_downsample) < FLT_EPSILON
 		&& m_camera == trans.m_camera 
 		&& m_need_actor == trans.m_need_actor
 		&& m_name == trans.m_name 
@@ -204,6 +210,9 @@ void PackTrans::PackToLua(ebuilder::CodeGenerator& gen) const
 	if (m_type & simp::NodeTrans::FILTER_MASK) {
 		shaders.push_back(lua::assign("filter", ee::StringHelper::ToString((int)(m_filter->GetMode()))));
 	}
+	if (m_type & simp::NodeTrans::DOWNSMAPLE_MASK) {
+		shaders.push_back(lua::assign("downsample", ee::StringHelper::ToString(m_downsample)));
+	}
 	if (m_type & simp::NodeTrans::CAMERA_MASK) {
 		shaders.push_back(lua::assign("camera", ee::StringHelper::ToString((int)(m_camera.GetMode()))));
 	}
@@ -261,6 +270,9 @@ int PackTrans::SizeOfUnpackFromBin() const
 	if (m_type & simp::NodeTrans::FILTER_MASK) {
 		sz += sizeof(uint32_t);
 	}
+	if (m_type & simp::NodeTrans::DOWNSMAPLE_MASK) {
+		sz += sizeof(uint32_t);
+	}
 	if (m_type & simp::NodeTrans::CAMERA_MASK) {
 		sz += sizeof(uint32_t);
 	}
@@ -309,6 +321,9 @@ int PackTrans::SizeOfPackToBin() const
 		sz += sizeof(uint32_t);
 	}
 	if (m_type & simp::NodeTrans::FILTER_MASK) {
+		sz += sizeof(uint32_t);
+	}
+	if (m_type & simp::NodeTrans::DOWNSMAPLE_MASK) {
 		sz += sizeof(uint32_t);
 	}
 	if (m_type & simp::NodeTrans::CAMERA_MASK) {
@@ -380,6 +395,9 @@ void PackTrans::PackToBin(uint8_t** ptr) const
 	if (m_type & simp::NodeTrans::FILTER_MASK) {
 		uint32_t mode = m_filter->GetMode();
 		pack(mode, ptr);
+	}
+	if (m_type & simp::NodeTrans::DOWNSMAPLE_MASK) {
+		pack(m_downsample, ptr);
 	}
 	if (m_type & simp::NodeTrans::CAMERA_MASK) {
 		uint32_t mode = m_camera.GetMode();
