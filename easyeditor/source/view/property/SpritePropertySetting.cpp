@@ -140,6 +140,12 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 		rs.SetFastBlend(FastBlendModes::Instance()->ID2Mode(idx));
 		spr->SetShader(rs);
 	}
+	else if (name == "Downsample")
+	{
+		s2::RenderShader rs = spr->GetShader();
+		rs.SetDownsample(wxANY_AS(value, float));
+		spr->SetShader(rs);
+	}
 	else if (name == "Anchor")
 	{
 		spr->SetAnchor(wxANY_AS(value, bool));
@@ -291,6 +297,8 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	MyColorProperty* bp = static_cast<MyColorProperty*>(pg->GetProperty("Color Conversion.B"));
 	bp->SetListener(new SprPropColMonitor(spr, SprPropColMonitor::CT_BMAP));
 
+	pg->GetProperty(wxT("Downsample"))->SetValue(spr->GetShader().GetDownsample());
+
 	pg->GetProperty(wxT("Anchor"))->SetValue(spr->IsAnchor());
 
 	pg->GetProperty(wxT("Actor"))->SetValue(spr->IsNeedActor());
@@ -406,6 +414,8 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 // 	pg->AppendIn(colProp, new wxColourProperty(wxT("G"), wxPG_LABEL, g_trans));
 // 	pg->AppendIn(colProp, new wxColourProperty(wxT("B"), wxPG_LABEL, b_trans));
 
+	pg->Append(new wxPropertyCategory("SHADER", wxPG_LABEL));
+
 	std::vector<std::string> blend_names;
 	BlendModes::Instance()->GetAllNameCN(blend_names);
 	wxEnumProperty* blend_prop = new wxEnumProperty(wxT("Blend"), wxPG_LABEL, WXHelper::ToWXStringArray(blend_names));
@@ -421,6 +431,10 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->Append(fast_blend_prop);
 
 	m_spr_filter_prop.InitPS(spr, pg);
+
+	pg->Append(new wxFloatProperty("Downsample", wxPG_LABEL, spr->GetShader().GetDownsample()));
+	pg->SetPropertyAttribute(wxT("Downsample"), "Min", 0.01f);
+	pg->SetPropertyAttribute(wxT("Downsample"), "Max", 1);
 
 	pg->Append(new wxPropertyCategory("GEOMETRY", wxPG_LABEL));
 
