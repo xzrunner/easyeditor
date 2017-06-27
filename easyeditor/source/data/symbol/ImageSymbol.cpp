@@ -17,6 +17,7 @@
 #include <gum/GUM_AsyncTask.h>
 #include <gum/FilepathHelper.h>
 #include <gum/Config.h>
+#include <gum/ResPath.h>
 
 namespace ee
 {
@@ -107,17 +108,20 @@ void ImageSymbol::LoadSync()
 void ImageSymbol::LoadAsync()
 {
 	AddReference();
-	gum::AsyncTask::Instance()->Load(m_filepath, LoadCB, ParserCB, ReleaseCB, this);
+	gum::AsyncTask::Instance()->Load(gum::ResPath(m_filepath), LoadCB, ParserCB, ReleaseCB, this);
 
 	int w, h;
 	gimg_read_header(m_filepath.c_str(), &w, &h);
 	m_size.Build(w, h);
 }
 
-void ImageSymbol::LoadCB(const char* filepath, void (*unpack)(const void* data, size_t size, void* ud), void* ud)
+void ImageSymbol::LoadCB(const void* res_path, void (*unpack)(const void* data, size_t size, void* ud), void* ud)
 {
+	gum::ResPath path;
+	path.Deserialization(static_cast<const char*>(res_path));
+
 	int w, h, fmt;
-	uint8_t* pixels = gimg_import(filepath, &w, &h, &fmt);
+	uint8_t* pixels = gimg_import(path.GetFilepath().c_str(), &w, &h, &fmt);
 	if (fmt == GPF_RGBA && gum::Config::Instance()->GetPreMulAlpha()) {
 		gimg_pre_mul_alpha(pixels, w, h);
 	}

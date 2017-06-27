@@ -49,7 +49,7 @@ private:
 	void LoadSync();
 	void LoadAsync();
 
-	static void LoadCB(const char* filepath, void (*unpack)(const void* data, size_t size, void* ud), void* ud);
+	static void LoadCB(const void* res_path, void (*unpack)(const void* data, size_t size, void* ud), void* ud);
 	static void ParserCB(const void* data, size_t size, void* ud);
 	static void ReleaseCB(void* ud);
 
