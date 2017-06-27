@@ -131,7 +131,7 @@ void StageCanvas::DrawSprite(ee::Sprite* spr, bool draw_edge, int name_visible) 
 		{
 			S2_MAT t = spr->GetLocalMat();
 			float s = std::max(1.0f, GetCameraScale()) * cfg.node_name_scale;
-			t.x[0] = t.x[5] = s;
+			t.x[0] = t.x[3] = s;
 			std::string sname;
 			s2::SprNameMap::Instance()->IDToStr(name, sname);
 			gum::GTxt::Instance()->Draw(t, sname);
