@@ -23,6 +23,11 @@ void JsonResParserOP::Clear()
 
 bool JsonResParserOP::OnDoFile(const std::string& filepath, Json::Value& val, const std::string& key)
 {
+	// todo: out pkg
+	if (filepath.find(m_db.GetDirPath()) == std::string::npos) {
+		return false;
+	}
+
 	int id = m_db.QueryByPath(filepath);
 	m_output.insert(id);
 	return false;
