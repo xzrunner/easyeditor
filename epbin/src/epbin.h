@@ -10,4 +10,7 @@
 #include "ImageIDer.h"
 #include "Exception.h"
 
+#include "epe/PackPicture.h"
+#include "epe/PackAnimation.h"
+
 #endif // _EPBIN_H_

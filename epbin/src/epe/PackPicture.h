@@ -20,13 +20,15 @@ public:
 	virtual size_t Size() const;
 	virtual void Store(std::ofstream& fout) const;
 
-private:
+public:
 	struct Quad
 	{
 		uint8_t texid;
 		uint16_t texture_coord[8];
 		int32_t screen_coord[8];
 	};
+
+	const std::vector<Quad>& GetQuads() const { return m_quads; }
 
 private:
 	void Load(lua_State* L);

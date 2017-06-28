@@ -332,8 +332,10 @@ void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames
 			ee::ImageData* img_data = ee::ImageDataMgr::Instance()->GetItem(images[part->tex]->GetFilepath());
 			assert(img_data->GetFormat() == GPF_RGB || img_data->GetFormat() == GPF_RGBA);
 			int channels = img_data->GetFormat() == GPF_RGB ? 3 : 4;
-			pimg::Cropping crop(img_data->GetPixelData(), img_data->GetWidth(), img_data->GetHeight(), channels);
-			const uint8_t* pixels = crop.Crop(part->xmin, part->ymin, part->xmax, part->ymax);
+			int img_w = img_data->GetWidth(),
+				img_h = img_data->GetHeight();
+			pimg::Cropping crop(img_data->GetPixelData(), img_w, img_h, channels);
+			const uint8_t* pixels = crop.Crop(part->xmin, img_h - 1 - part->ymax, part->xmax, img_h - 1 - part->ymin);
 			if (pixels) 
 			{
 				int width = part->xmax-part->xmin,
@@ -343,8 +345,7 @@ void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames
 					gimg_export(outfile.c_str(), pixels, width, height, GPF_RGBA, true);
 				}
 
-				std::string outpath = outfile + ".png";
-				ee::Sprite* spr = new ee::DummySprite(new ee::DummySymbol(outpath, width, height));
+				ee::Sprite* spr = new ee::DummySprite(new ee::DummySymbol(outfile, width, height));
 				part->transform(spr);
 				sym->Add(spr);
 			}

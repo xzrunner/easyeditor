@@ -621,6 +621,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\libdb\DecodeEjoy2dRes.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libdb\DecodeEjoy2dRes.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libdb\FixAddColor.cpp"
 					>
 				</File>

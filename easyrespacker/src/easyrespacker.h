@@ -18,5 +18,6 @@
 #include "librespacker/PackUI.h"
 #include "librespacker/PackUIWindowTask.h"
 #include "librespacker/PackTag.h"
+#include "librespacker/LuaDataHelper.h"
 
 #endif // _EASYRESPACKER_H_

@@ -74,6 +74,7 @@
 #include "LRPackerNew.h"
 #include "PackResID.h"
 #include "PackPkg.h"
+#include "DecodeEjoy2dRes.h"
 
 namespace edb
 {
@@ -153,6 +154,7 @@ void CommandLoader::Init()
 	fc->Register(LRPackerNew::Create());
 	fc->Register(PackResID::Create());
 	fc->Register(PackPkg::Create());
+	fc->Register(DecodeEjoy2dRes::Create());
 }
 
 }
