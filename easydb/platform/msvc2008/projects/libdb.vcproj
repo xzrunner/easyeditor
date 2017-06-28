@@ -961,6 +961,18 @@
 					</File>
 				</Filter>
 			</Filter>
+			<Filter
+				Name="tools"
+				>
+				<File
+					RelativePath="..\..\..\src\libdb\PrintGLExt.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libdb\PrintGLExt.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>
