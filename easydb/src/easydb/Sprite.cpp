@@ -54,7 +54,7 @@ Sprite::Sprite(Symbol* sym, int id)
 		std::string ss_path = gum::FilepathHelper::Dir(db->GetProjPath()) + "\\" + node->GetPath();
 		ss_path = ss_path.substr(0, ss_path.find_last_of(".")) + "_ss.png";
 		if (gum::FilepathHelper::Exists(ss_path)) {
-			m_snapshoot = gum::ImageMgr::Instance()->Create(ss_path);
+			m_snapshoot = gum::ImageMgr::Instance()->Create(gum::ResPath(ss_path));
 		}
 	}
 }
