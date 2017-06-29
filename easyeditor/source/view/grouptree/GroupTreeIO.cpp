@@ -84,7 +84,12 @@ void GroupTreeIO::LoadToNodes(const Json::Value& value, std::vector<Node>& nodes
 		node.is_leaf = node_val["leaf"].asBool();
 		node.name = node_val["name"].asString();
 		node.parent = node_val["parent"].asString();
-		node.spr = node_val["sprite"].asString();
+		if (node_val.isMember("sprite")) {
+			const Json::Value& spr_val = node_val["sprite"];
+			if (spr_val.isString()) {
+				node.spr = spr_val.asString();
+			}
+		}
 		if (!node_val["visible"].isNull()) {
 			node.visible = node_val["visible"].asBool();
 		} else {

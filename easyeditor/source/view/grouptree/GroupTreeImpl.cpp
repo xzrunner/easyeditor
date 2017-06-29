@@ -338,7 +338,9 @@ VisitLeaf(wxTreeItemId id)
 		assert(data && !data->IsGroup());
 		Sprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
 		if (spr) {
-			val["sprite"] = spr->GetName();
+			std::string str;
+			s2::SprNameMap::Instance()->IDToStr(spr->GetName(), str);
+			val["sprite"] = str;
 		} else {
 			// fixme
 			int zz = 0;
