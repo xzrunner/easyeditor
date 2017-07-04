@@ -45,10 +45,9 @@ int GenNoCompressCfg::Run(int argc, char *argv[])
 	return 0;
 }
 
-void GenNoCompressCfg::Trigger(const std::string& src_dir, const std::string& src_cfg, const std::string& dst_cfg)
+void GenNoCompressCfg::Trigger(const std::string& src_dir, const std::string& src_cfg, 
+							   const std::string& dst_dir)
 {
-	std::string dst_dir = gum::FilepathHelper::Dir(dst_cfg);
-
 	wxArrayString files;
 	ee::FileHelper::FetchAllFiles(src_dir, files);
 	
@@ -66,8 +65,7 @@ void GenNoCompressCfg::Trigger(const std::string& src_dir, const std::string& sr
 		for (int i = 0, n = src_value["no_compress"].size(); i < n; ++i) {
 			std::string path = src_value["no_compress"][i].asString();
 			std::string full_path = gum::FilepathHelper::Absolute(src_dir, path);
-			std::string dst_path = gum::FilepathHelper::Relative(dst_dir, full_path);
-			paths.insert(dst_path);
+			paths.insert(gum::FilepathHelper::Format(full_path));
 		}
 	}
 
@@ -134,19 +132,27 @@ void GenNoCompressCfg::Trigger(const std::string& src_dir, const std::string& sr
 	}
 
 	// output
-	Json::Value dst_value = src_value;
-	dst_value.removeMember("no_compress");
-	std::set<std::string>::iterator itr = paths.begin();
-	for (int i = 0; itr != paths.end(); ++itr, ++i) {
-		dst_value["no_compress"][i] = *itr;
-	}
+	std::ofstream f_compress((dst_dir + "\\compress.tmp").c_str());
+	std::ofstream f_no_compress((dst_dir + "\\no_compress.tmp").c_str());
+	for (int i = 0, n = files.size(); i < n; ++i)
+	{
+		wxFileName filename(files[i]);
+		filename.Normalize();
+		std::string filepath = filename.GetFullPath();
+		int type = ee::SymbolFile::Instance()->Type(filepath);
+		if (type != s2::SYM_IMAGE) {
+			continue;
+		}
 
-	Json::StyledStreamWriter writer;
-	std::locale::global(std::locale(""));
-	std::ofstream fout(dst_cfg.c_str());
-	std::locale::global(std::locale("C"));	
-	writer.write(fout, dst_value);
-	fout.close();
+		filepath = gum::FilepathHelper::Format(filepath);
+		if (paths.find(filepath) != paths.end()) {
+			f_no_compress << filepath << "\n";
+		} else {
+			f_compress << filepath << "\n";
+		}
+	}
+	f_compress.close();
+	f_no_compress.close();
 }
 
 void GenNoCompressCfg::AddPath(std::set<std::string>& dst, 
@@ -156,8 +162,7 @@ void GenNoCompressCfg::AddPath(std::set<std::string>& dst,
 {
 	std::string path = src["filepath"].asString();
 	std::string full_path = gum::FilepathHelper::Absolute(src_dir, path);
-	std::string dst_path = gum::FilepathHelper::Relative(dst_dir, full_path);
-	dst.insert(dst_path);
+	dst.insert(gum::FilepathHelper::Format(full_path));
 }
 
 }

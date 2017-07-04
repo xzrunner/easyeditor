@@ -27,7 +27,7 @@ public:
 
 private:
 	void Trigger(const std::string& src_dir, const std::string& src_cfg,
-		const std::string& dst_cfg);
+		const std::string& dst_dir);
 
 	static void AddPath(std::set<std::string>& dst, const std::string& dst_dir,
 		const Json::Value& src, const std::string& src_dir);
