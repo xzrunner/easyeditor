@@ -21,8 +21,8 @@ RefInfoDlg::RefInfoDlg(wxWindow* parent, const Database* db, const LeafNode* lea
 
 	SetSizer(sizer);
 
-	sizer->Layout();
-	Refresh(true);
+ 	sizer->Layout();
+ 	Refresh(true);
 }
 
 void RefInfoDlg::InitLayout(wxSizer* sizer, const LeafNode* leaf)
@@ -35,8 +35,37 @@ void RefInfoDlg::InitLayout(wxSizer* sizer, const LeafNode* leaf)
 
 	sizer->AddSpacer(10);
 
+	wxSize sz = GetSize();
+	ItemsPanel* panel = new ItemsPanel(this, sz.GetX(), sz.GetY(), m_db, leaf);
+	sizer->Add(panel);
+}
+
+/************************************************************************/
+/* class RefInfoDlg::ItemsPanel                                         */
+/************************************************************************/
+
+RefInfoDlg::ItemsPanel::ItemsPanel(wxWindow* parent, int width, int height,
+								   const Database* db, const LeafNode* leaf)
+	: wxScrolledWindow(parent, wxID_ANY, wxDefaultPosition, wxSize(width, height))
+	, m_db(db)
+{
+	SetScrollbars(1, 1, 200, 100, 0, 0);
+
+	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
+
+	InitLayout(sizer, leaf);
+
+	SetSizer(sizer);
+
+ 	sizer->Layout();
+ 	Refresh(true);
+}
+
+void RefInfoDlg::ItemsPanel::InitLayout(wxSizer* sizer, const LeafNode* leaf)
+{
 	const std::set<int>& in_nodes = leaf->GetNodes(true);
 
+	wxString str;
 	str.Printf("被引用数量 %d", in_nodes.size());
 	sizer->Add(new wxStaticText(this, wxID_ANY, str));
 
@@ -64,7 +93,7 @@ void RefInfoDlg::InitLayout(wxSizer* sizer, const LeafNode* leaf)
 	}
 }
 
-wxSizer* RefInfoDlg::NodeToCtrl(int node_id)
+wxSizer* RefInfoDlg::ItemsPanel::NodeToCtrl(int node_id)
 {
 	if (node_id == -1) {
 		return NULL;
@@ -81,7 +110,7 @@ wxSizer* RefInfoDlg::NodeToCtrl(int node_id)
 	sz->Add(text);
 
 	wxButton* btn = new wxButton(this, wxID_ANY, "...", wxDefaultPosition, wxSize(25, 25));
-	Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(RefInfoDlg::OnOpenFilepath));
+	Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ItemsPanel::OnOpenFilepath));
 	sz->Add(btn, 0, wxLEFT | wxRIGHT, 5);
 
 	m_id2path.insert(std::make_pair(btn->GetId(), node->GetPath()));
@@ -89,7 +118,7 @@ wxSizer* RefInfoDlg::NodeToCtrl(int node_id)
 	return sz;
 }
 
-void RefInfoDlg::OnOpenFilepath(wxCommandEvent& event)
+void RefInfoDlg::ItemsPanel::OnOpenFilepath(wxCommandEvent& event)
 {
 	int id = event.GetId();
 	std::map<int, std::string>::iterator itr = m_id2path.find(id);

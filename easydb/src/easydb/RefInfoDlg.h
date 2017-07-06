@@ -19,14 +19,29 @@ public:
 private:
 	void InitLayout(wxSizer* sizer, const LeafNode* leaf);
 
-	wxSizer* NodeToCtrl(int node_id);
+private:
+	class ItemsPanel : public wxScrolledWindow
+	{
+	public:
+		ItemsPanel(wxWindow* parent, int width, int height,
+			const Database* db, const LeafNode* leaf);
 
-	void OnOpenFilepath(wxCommandEvent& event);
+	private:
+		void InitLayout(wxSizer* sizer, const LeafNode* leaf);
+
+		wxSizer* NodeToCtrl(int node_id);
+
+		void OnOpenFilepath(wxCommandEvent& event);
+
+	private:
+		const Database* m_db;
+
+		std::map<int, std::string> m_id2path;
+
+	}; // ItemsPanel
 
 private:
 	const Database* m_db;
-
-	std::map<int, std::string> m_id2path;
 
 }; // RefInfoDlg
 
