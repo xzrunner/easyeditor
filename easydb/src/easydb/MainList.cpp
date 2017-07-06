@@ -4,6 +4,8 @@
 #include "LeafNode.h"
 #include "Database.h"
 #include "DBHelper.h"
+#include "RefInfoDlg.h"
+#include "Utility.h"
 
 #include <ee/FileHelper.h>
 #include <ee/SpriteSelection.h>
@@ -220,10 +222,7 @@ void MainList::OnMenuOpenPath(wxCommandEvent& event)
 
 	std::map<wxTreeItemId, int>::iterator itr = m_map2node.find(m_on_menu_id);
 	const Node* node = m_db->Fetch(itr->second);
-	std::string path = m_db->GetDirPath() + "\\" + node->GetPath();
-	
-	std::string command = "explorer /select, " + path;
-	wxExecute(command, wxEXEC_ASYNC, NULL);
+	Utility::OpenPath(m_db->GetDirPath() + "\\" + node->GetPath());
 }
 
 void MainList::OnMenuCopyFilename(wxCommandEvent& event)
@@ -256,25 +255,6 @@ void MainList::OnMenuCopyFilepath(wxCommandEvent& event)
 	}
 }
 
-static std::string NodesToStr(const Database& db, const std::set<int>& nodes)
-{
-	std::string str;
-	std::set<int>::const_iterator itr = nodes.begin();
-	for ( ; itr != nodes.end(); ++itr)
-	{
-		int id = *itr;
-		if (id == -1) {
-			continue;;
-		}
-		const Node* node = db.Fetch(id);
-		if (node->Type() == NODE_INDEX) {
-			continue;;
-		}
-		str += node->GetPath() + "\n";
-	}
-	return str;
-}
-
 void MainList::OnMenuRefInfo(wxCommandEvent& event)
 {
 	if (!m_on_menu_id.IsOk()) {
@@ -288,23 +268,8 @@ void MainList::OnMenuRefInfo(wxCommandEvent& event)
 	}
 
 	const LeafNode* leaf = static_cast<const LeafNode*>(node);
-
-	bool closure = DBHelper::IsTreeClosure(*m_db, leaf);
-
-	const std::set<int>& in_nodes = leaf->GetNodes(true);
-	const std::set<int>& out_nodes = leaf->GetNodes(false);
-
-	std::string in_str = NodesToStr(*m_db, in_nodes);
-	std::string out_str = NodesToStr(*m_db, out_nodes);
-
-	wxString msg;
-	msg.Printf("被引用数量: %d\n%s\n引用数量: %d\n%s\n闭包: %s", 
-		in_nodes.size(), 
-		in_str,
-		out_nodes.size(),
-		out_str,
-		closure ? "yes" : "no");
-	wxMessageBox(msg, "ref info");
+	RefInfoDlg dlg(this, m_db, leaf);
+	dlg.ShowModal();
 }
 
 void MainList::OnMenuCopyTreeTo(wxCommandEvent& event)

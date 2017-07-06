@@ -399,6 +399,14 @@
 					RelativePath="..\..\..\src\easydb\MainPanel.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\easydb\RefInfoDlg.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb\RefInfoDlg.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="search"
@@ -450,6 +458,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\easydb\Serializer.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easydb\Utility.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easydb\Utility.h"
 				>
 			</File>
 		</Filter>
