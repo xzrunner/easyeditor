@@ -92,7 +92,8 @@ int LRPackerNew::Run(int argc, char *argv[])
 		int LOD = ee::StringHelper::FromString<int>(argv[6]);
 		std::string fmt = argv[7];
 		int pkg_id = ee::StringHelper::FromString<int>(argv[8]);
-		PackEP(tmp_dir, tmp_lr_file, out_dir, LOD, fmt, pkg_id);
+		int pkg_id_base = ee::StringHelper::FromString<int>(argv[9]);
+		PackEP(tmp_dir, tmp_lr_file, out_dir, LOD, fmt, pkg_id, pkg_id_base);
 	}
 
 	// end
@@ -104,15 +105,75 @@ int LRPackerNew::Run(int argc, char *argv[])
 
 void LRPackerNew::PackEP(const std::string& tmp_dir, const std::string& tmp_lr_file,
 						 const std::string& out_dir, int LOD,
-						 const std::string& fmt, int pkg_id)
+						 const std::string& fmt, int pkg_id, int pkg_id_base)
+{
+	PackBaseEP(tmp_dir, tmp_lr_file, out_dir, LOD, fmt, pkg_id_base);
+	PackOthersEP(tmp_dir, tmp_lr_file, out_dir, LOD, fmt, pkg_id);
+}
+
+void LRPackerNew::PackBaseEP(const std::string& tmp_dir, const std::string& tmp_lr_file,
+							 const std::string& out_dir, int LOD, const std::string& fmt, 
+							 int pkg_id)
 {
 	esprpacker::PackIDMgr::Instance()->SetCurrPkgID(pkg_id);
 
 	Json::Value val;
 
-// 		std::string trim_file = argv[6];
-// 		trim_file = ee::FileHelper::GetRelativePath(tmp_dir, trim_file);
-// 		val["trim file"] = trim_file;
+	Json::Value pkg_val;
+
+	std::string lr_name = get_lr_name_from_file(tmp_lr_file);
+
+	pkg_val["name"] = lr_name + "_scene_bae";
+
+	int idx = 0;
+	pkg_val["src"][idx] = lr_name + "_base_complex.json";
+
+	std::string _out_dir = ee::FileHelper::GetRelativePath(tmp_dir, out_dir);
+	pkg_val["LOD"] = LOD;
+
+	if (fmt == "png")
+	{
+		pkg_val["dst"] = _out_dir + "\\png";
+		pkg_val["format"] = "png";
+		pkg_val["quality"] = "best";
+		pkg_val["extrude"] = 1;
+		val["packages"][idx] = pkg_val;
+		PackRes pack;
+		pack.PackNew(val.toStyledString(), tmp_dir);
+	}
+	else if (fmt == "pvr")
+	{
+		pkg_val["dst"] = _out_dir + "\\pvr";
+		pkg_val["format"] = "pvr";
+		pkg_val["quality"] = "best";
+		pkg_val["extrude"] = 4;
+		val["packages"][idx] = pkg_val;
+		PackRes pack;
+		pack.PackNew(val.toStyledString(), tmp_dir);
+	}
+	else if (fmt == "etc2")
+	{
+		pkg_val["dst"] = _out_dir + "\\etc2";
+		pkg_val["format"] = "etc2";
+		pkg_val["quality"] = "fastest";
+		pkg_val["extrude"] = 1;
+		val["packages"][idx] = pkg_val;
+		PackRes pack;
+		pack.PackNew(val.toStyledString(), tmp_dir);
+	}
+}
+
+void LRPackerNew::PackOthersEP(const std::string& tmp_dir, const std::string& tmp_lr_file,
+							   const std::string& out_dir, int LOD,
+							   const std::string& fmt, int pkg_id)
+{
+	esprpacker::PackIDMgr::Instance()->SetCurrPkgID(pkg_id);
+
+	Json::Value val;
+
+	// 		std::string trim_file = argv[6];
+	// 		trim_file = ee::FileHelper::GetRelativePath(tmp_dir, trim_file);
+	// 		val["trim file"] = trim_file;
 
 	Json::Value pkg_val;
 
@@ -121,8 +182,6 @@ void LRPackerNew::PackEP(const std::string& tmp_dir, const std::string& tmp_lr_f
 	pkg_val["name"] = lr_name + "_scene";
 
 	int idx = 0;
-	pkg_val["src"][idx] = lr_name + "_base_complex.json";
-	++idx;
 	pkg_val["src"][idx] = lr_name + "_top_complex.json";
 	++idx;
 	{

@@ -70,6 +70,7 @@ void PackRes::Pack(const std::string& str_val, const std::string& dir)
 	Json::Value pkg_val = value["packages"][i++];
 	while (!pkg_val.isNull()) {
 		Prepare(pkg_val, config_dir);
+		
  		PackTexture(pkg_val, config_dir);
 
 // 		// old
@@ -621,7 +622,7 @@ void PackRes::PackLuaAndBinFilesNew(const Json::Value& pkg_val, const std::strin
 	std::string tp_dir = config_dir;
 	std::string tp_name = ConnectCfgDir(config_dir, pkg_val["dst"].asString()) + "\\" + name;
 
-	esprpacker::Packer packer(config_dir, tp_name, tp_dir);
+	esprpacker::Packer packer(config_dir, tp_name, tp_dir, pkg_val["src"]);
 	packer.OutputEpe(tp_name, true);
 	packer.OutputEpt(tp_name, LOD);
 	packer.OutputLua(tp_name + ".lua");

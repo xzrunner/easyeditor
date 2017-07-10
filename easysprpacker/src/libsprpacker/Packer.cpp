@@ -55,6 +55,26 @@ Packer::Packer(const std::string& json_dir, const std::string& tp_name,
 	data.load_image = old_cfg;
 }
 
+Packer::Packer(const std::string& json_dir, const std::string& tp_name, 
+			   const std::string& tp_dir, const Json::Value& json_data)
+	: m_tp(tp_dir)
+{
+	ee::TextureFactory::Instance()->InitTexturePacker(tp_dir);
+
+	ee::SettingData& data = ee::Config::Instance()->GetSettings();
+	bool old_cfg = data.load_image;
+	data.load_image = false;
+
+	PackNodeFactory::Instance()->SetFilesDir(json_dir);
+
+	LoadTPData(tp_name);
+	LoadJsonData(json_dir, json_data);
+
+	Pack();
+
+	data.load_image = old_cfg;
+}
+
 Packer::~Packer()
 {
 	for (int i = 0, n = m_syms.size(); i < n; ++i) {
@@ -196,6 +216,45 @@ void Packer::LoadJsonData(const std::string& dir)
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath();
+		int type = ee::SymbolFile::Instance()->Type(filepath);
+		switch (type)
+		{
+		case s2::SYM_COMPLEX: case s2::SYM_ANIMATION: case s2::SYM_PARTICLE3D: case s2::SYM_TRAIL:
+			filepaths.push_back(filepath);
+			break;
+		case ee::SYM_UI:
+			{
+				std::string proxy = erespacker::PackUI::Instance()->AddTask(filepath);
+				proxy = ee::FileHelper::GetAbsolutePathFromFile(filepath, proxy);
+				ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(proxy);
+				m_syms.push_back(sym);
+			}
+			break;
+		case ee::SYM_UIWND:
+			erespacker::PackUI::Instance()->AddWindowTask(filepath);
+			AddUIWndSymbol(filepath);
+			break;
+		}
+	}
+
+	std::sort(filepaths.begin(), filepaths.end());
+	for (int i = 0, n = filepaths.size(); i < n; ++i) 
+	{
+		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepaths[i]);
+		if (!sym->name.empty()) {
+			m_syms.push_back(sym);
+		} else {
+			sym->RemoveReference();
+		}
+	}
+}
+
+void Packer::LoadJsonData(const std::string& dir, const Json::Value& json_data)
+{
+	std::vector<std::string> filepaths;
+	for (int i = 0, n = json_data.size(); i < n; ++i)
+	{
+		std::string filepath = gum::FilepathHelper::Absolute(dir, json_data[i].asString());
 		int type = ee::SymbolFile::Instance()->Type(filepath);
 		switch (type)
 		{

@@ -23,7 +23,12 @@ public:
 
 private:
 	void PackEP(const std::string& tmp_dir, const std::string& tmp_lr_file,
-		const std::string& out_dir, int LOD, const std::string& fmt, int pkg_id);
+		const std::string& out_dir, int LOD, const std::string& fmt, int pkg_id, int pkg_id_base);
+
+	void PackBaseEP(const std::string& tmp_dir, const std::string& tmp_lr_file,
+		const std::string& out_dir, int LOD, const std::string& fmt, int pkg_id);	
+	void PackOthersEP(const std::string& tmp_dir, const std::string& tmp_lr_file,
+		const std::string& out_dir, int LOD, const std::string& fmt, int pkg_id);	
 
 	void ClearCached();
 

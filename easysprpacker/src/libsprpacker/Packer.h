@@ -13,6 +13,8 @@ class Packer
 public:
 	Packer(const std::string& json_dir, const std::string& tp_name, 
 		const std::string& tp_dir);
+	Packer(const std::string& json_dir, const std::string& tp_name, 
+		const std::string& tp_dir, const Json::Value& json_data);
 	~Packer();
 
 	void OutputLua(const std::string& outfile) const;
@@ -28,6 +30,7 @@ public:
 
 private:
 	void LoadJsonData(const std::string& dir);
+	void LoadJsonData(const std::string& dir, const Json::Value& json_data);
 	void LoadTPData(const std::string& tp_name);
 
 	void Pack() const;
