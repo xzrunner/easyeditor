@@ -26,6 +26,8 @@ public:
 		m_files_dir = files_dir;
 	}
 
+	void Clear();
+
 private:
 	static void FetchAllBuilder(std::vector<NodeBuilder*>& builders);
 
