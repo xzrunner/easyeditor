@@ -47,6 +47,16 @@ Image::Image(const s2::RenderTarget* rt)
 {
 	m_tex = new TextureRT(rt);
 	m_s2_tex = new s2::Texture(m_tex->GetWidth(), m_tex->GetHeight(), m_tex->GetTexID());
+
+	m_ori_sz.x = m_tex->GetWidth();
+	m_ori_sz.y = m_tex->GetHeight();
+
+	float hw = m_ori_sz.x * 0.5f,
+		  hh = m_ori_sz.y * 0.5f;
+	m_clipped_region.xmin = -hw;
+	m_clipped_region.ymin = -hh;
+	m_clipped_region.xmax =  hw;
+	m_clipped_region.ymax =  hh;
 }
 
 Image::~Image()
