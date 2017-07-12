@@ -303,6 +303,15 @@ void PackNodeFactory::FetchAll(std::vector<PackNode*>& nodes) const
 	}
 }
 
+void PackNodeFactory::Clear()
+{
+	std::vector<NodeBuilder*> builders;
+	FetchAllBuilder(builders);
+	for (int i = 0, n = builders.size(); i < n; ++i) {
+		builders[i]->Clear();
+	}
+}
+
 void PackNodeFactory::FetchAllBuilder(std::vector<NodeBuilder*>& builders)
 {
 	builders.clear();

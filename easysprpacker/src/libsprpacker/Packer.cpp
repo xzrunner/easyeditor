@@ -45,7 +45,9 @@ Packer::Packer(const std::string& json_dir, const std::string& tp_name,
 	bool old_cfg = data.load_image;
 	data.load_image = false;
 
-	PackNodeFactory::Instance()->SetFilesDir(json_dir);
+	PackNodeFactory* cache = PackNodeFactory::Instance();
+	cache->Clear();
+	cache->SetFilesDir(json_dir);
 
 	LoadTPData(tp_name);
 	LoadJsonData(json_dir);
@@ -65,7 +67,9 @@ Packer::Packer(const std::string& json_dir, const std::string& tp_name,
 	bool old_cfg = data.load_image;
 	data.load_image = false;
 
-	PackNodeFactory::Instance()->SetFilesDir(json_dir);
+	PackNodeFactory* cache = PackNodeFactory::Instance();
+	cache->Clear();
+	cache->SetFilesDir(json_dir);
 
 	LoadTPData(tp_name);
 	LoadJsonData(json_dir, json_data);
