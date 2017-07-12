@@ -77,6 +77,7 @@
 #include "DecodeEjoy2dRes.h"
 #include "PrintGLExt.h"
 #include "GenNoCompressCfg.h"
+#include "FixPackCfg.h"
 
 namespace edb
 {
@@ -159,6 +160,7 @@ void CommandLoader::Init()
 	fc->Register(DecodeEjoy2dRes::Create());
 	fc->Register(PrintGLExt::Create());
 	fc->Register(GenNoCompressCfg::Create());
+	fc->Register(FixPackCfg::Create());
 }
 
 }
