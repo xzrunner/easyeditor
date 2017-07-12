@@ -399,13 +399,16 @@ void MainList::OnMenuMoveNode(wxCommandEvent& event)
 		std::string new_path = m_db->GetDirPath() + "\\" + node->GetPath();
 		std::string new_dir = gum::FilepathHelper::Dir(new_path);
 		int parent_id = m_db->QueryByPath(new_dir);
-		std::map<int, wxTreeItemId>::iterator itr = m_map2id.find(parent_id);
-		assert(itr != m_map2id.end());
-		wxTreeItemId item = AppendItem(itr->second, node->GetPath());
-		m_map2node.insert(std::make_pair(item, node->GetID()));
-		m_map2id.insert(std::make_pair(node->GetID(), item));
+		if (parent_id != -1) 
+		{
+			std::map<int, wxTreeItemId>::iterator itr = m_map2id.find(parent_id);
+			assert(itr != m_map2id.end());
+			wxTreeItemId item = AppendItem(itr->second, node->GetPath());
+			m_map2node.insert(std::make_pair(item, node->GetID()));
+			m_map2id.insert(std::make_pair(node->GetID(), item));
 
-		SelectItem(item);
+			SelectItem(item);
+		}
 	}
 }
 
