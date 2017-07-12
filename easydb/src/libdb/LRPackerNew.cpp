@@ -92,7 +92,7 @@ int LRPackerNew::Run(int argc, char *argv[])
 		int LOD = ee::StringHelper::FromString<int>(argv[6]);
 		std::string fmt = argv[7];
 		int pkg_id = ee::StringHelper::FromString<int>(argv[8]);
-		int pkg_id_base = ee::StringHelper::FromString<int>(argv[9]);
+		int pkg_id_base = pkg_id + 1; 
 		PackEP(tmp_dir, tmp_lr_file, out_dir, LOD, fmt, pkg_id, pkg_id_base);
 	}
 
@@ -123,7 +123,7 @@ void LRPackerNew::PackBaseEP(const std::string& tmp_dir, const std::string& tmp_
 
 	std::string lr_name = get_lr_name_from_file(tmp_lr_file);
 
-	pkg_val["name"] = lr_name + "_scene_bae";
+	pkg_val["name"] = lr_name + "_scene_base";
 
 	int idx = 0;
 	pkg_val["src"][idx] = lr_name + "_base_complex.json";
