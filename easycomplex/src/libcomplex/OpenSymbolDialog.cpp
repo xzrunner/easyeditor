@@ -117,6 +117,11 @@ void OpenSymbolDialog::Open(ee::Sprite* spr, ee::CrossGuides* guides)
 		libskeleton::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), skeleton);
 		dlg.ShowModal();
 	}
+	else if (eshape::Sprite* shape = dynamic_cast<eshape::Sprite*>(spr))
+	{
+		eshape::EditDialogSimple dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), shape, m_sprites_impl);
+		dlg.ShowModal();
+	}
 
 	m_sprites_impl->EnableObserve(true);
 	m_stage->EnableObserve(true);
