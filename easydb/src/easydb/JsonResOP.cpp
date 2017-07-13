@@ -3,6 +3,7 @@
 #include <ee/SymbolFile.h>
 #include <ee/SymbolType.h>
 
+#include <mt_2d.h>
 #include <sprite2/SymType.h>
 #include <gum/FilepathHelper.h>
 
@@ -235,6 +236,29 @@ void JsonResOP::DoMask()
 	if (DoFile(value["mask"], KEY_PATH)) {
 		dirty = true;
 	}
+	if (dirty) {
+		StoreJson(m_filepath, value);
+	}
+}
+
+void JsonResOP::DoTrail()
+{
+	Json::Value value;
+	LoadJson(m_filepath, value);
+
+	int mode = value["mode"].asInt();
+	if (mode != T2D_MODE_IMAGE) {
+		return;
+	}
+
+	bool dirty = false;
+	int n = value[KEY_COMP].size();
+	for (int i = 0; i < n; ++i) {
+		if (DoFile(value[KEY_COMP][i], KEY_PATH)) {
+			dirty = true;
+		}
+	}
+
 	if (dirty) {
 		StoreJson(m_filepath, value);
 	}

@@ -44,6 +44,7 @@ private:
 	void DoAnim();
 	void DoMesh();
 	void DoMask();
+	void DoTrail();
 	void DoUI();
 
 private:
