@@ -17,7 +17,7 @@ class NodeBuilder;
 class PackNodeFactory
 {
 public:
-	const PackNode* Create(const ee::Sprite* spr);
+	const PackNode* Create(const ee::Sprite* spr, bool force_curr = false);
 	const PackNode* Create(const ee::Symbol* sym);
 
 	void FetchAll(std::vector<PackNode*>& nodes) const;

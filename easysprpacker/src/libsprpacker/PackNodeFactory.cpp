@@ -146,7 +146,7 @@ PackNodeFactory::~PackNodeFactory()
 {
 }
 
-const PackNode* PackNodeFactory::Create(const ee::Sprite* spr)
+const PackNode* PackNodeFactory::Create(const ee::Sprite* spr, bool force_curr)
 {
 	const PackNode* node = NULL;
 
@@ -163,15 +163,15 @@ const PackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 	}
 	// scale9 spr
 	else if (const escale9::Sprite* s9 = dynamic_cast<const escale9::Sprite*>(spr)) {
-		node = SCALE9_SPR_BUILDER->Create(s9);
+		node = SCALE9_SPR_BUILDER->Create(s9, force_curr);
 	}
 	// icon spr
 	else if (const eicon::Sprite* icon = dynamic_cast<const eicon::Sprite*>(spr)) {
-		node = ICON_SPR_BUILDER->Create(icon);
+		node = ICON_SPR_BUILDER->Create(icon, force_curr);
 	}
 	// texture
 	else if (const etexture::Sprite* texture = dynamic_cast<const etexture::Sprite*>(spr)) {
-		node = TEXTURE_SPR_BUILDER->Create(texture);
+		node = TEXTURE_SPR_BUILDER->Create(texture, force_curr);
 	}
 	// label
 	else if (const etext::Sprite* label = dynamic_cast<const etext::Sprite*>(spr)) {
@@ -179,39 +179,39 @@ const PackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 	}
 	// complex
 	else if (const ecomplex::Sprite* complex = dynamic_cast<const ecomplex::Sprite*>(spr)) {
-		node = COMPLEX_SPR_BUILDER->Create(complex);
+		node = COMPLEX_SPR_BUILDER->Create(complex, force_curr);
 	}
 	// animation
 	else if (const libanim::Sprite* anim = dynamic_cast<const libanim::Sprite*>(spr)) {
-		node = ANIM_SPR_BUILDER->Create(anim);
+		node = ANIM_SPR_BUILDER->Create(anim, force_curr);
 	}
 	// anim2
 	else if (const libanim2::Sprite* anim2 = dynamic_cast<const libanim2::Sprite*>(spr)) {
-		node = ANIM2_SPR_BUILDER->Create(anim2);
+		node = ANIM2_SPR_BUILDER->Create(anim2, force_curr);
 	}
 	// particle3d
 	else if (const eparticle3d::Sprite* p3d = dynamic_cast<const eparticle3d::Sprite*>(spr)) {
-		node = P3D_SPR_BUILDER->Create(p3d);
+		node = P3D_SPR_BUILDER->Create(p3d, force_curr);
 	}
 	// particle2d
 	else if (const eparticle2d::Sprite* p2d = dynamic_cast<const eparticle2d::Sprite*>(spr)) {
-		node = P2D_SPR_BUILDER->Create(p2d);
+		node = P2D_SPR_BUILDER->Create(p2d, force_curr);
 	}
 	// shape
 	else if (const eshape::Sprite* shape = dynamic_cast<const eshape::Sprite*>(spr)) {
-		node = SHAPE_SPR_BUILDER->Create(shape);
+		node = SHAPE_SPR_BUILDER->Create(shape, force_curr);
 	}
 	// mesh
 	else if (const emesh::Sprite* mesh = dynamic_cast<const emesh::Sprite*>(spr)) {
-		node = MESH_SPR_BUILDER->Create(mesh);
+		node = MESH_SPR_BUILDER->Create(mesh, force_curr);
 	}
 	// mask
 	else if (const emask::Sprite* mask = dynamic_cast<const emask::Sprite*>(spr)) {
-		node = MASK_SPR_BUILDER->Create(mask);
+		node = MASK_SPR_BUILDER->Create(mask, force_curr);
 	}
 	// trail
 	else if (const etrail::Sprite* trail = dynamic_cast<const etrail::Sprite*>(spr)) {
-		node = TRAIL_SPR_BUILDER->Create(trail);
+		node = TRAIL_SPR_BUILDER->Create(trail, force_curr);
 	}
 
 	else {

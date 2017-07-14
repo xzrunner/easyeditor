@@ -39,7 +39,7 @@ void SprBuilder2<TSprite, TPack>::Clear()
 }
 
 template <typename TSprite, typename TPack>
-const PackNode* SprBuilder2<TSprite, TPack>::Create(const TSprite* spr)
+const PackNode* SprBuilder2<TSprite, TPack>::Create(const TSprite* spr, bool force_curr)
 {
 	std::map<const TSprite*, const TPack*>::iterator
 		itr = m_map_data.find(spr);
@@ -50,7 +50,7 @@ const PackNode* SprBuilder2<TSprite, TPack>::Create(const TSprite* spr)
 
 	TPack* node = new TPack(spr);
 	node->SetFilepath(SPRITE_FILEPATH);
-	node->SetID(dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath());
+	node->SetID(dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath(), force_curr);
 	spr->AddReference();
 	m_map_data.insert(std::make_pair(spr, node));
 	node->AddReference();

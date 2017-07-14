@@ -45,7 +45,7 @@ public:
 	void SetFilepath(const std::string& filepath) const;
 	const std::string& GetFilepath() const { return m_filepath; }
 
-	void SetID(const std::string& filepath) const;
+	void SetID(const std::string& filepath, bool force_curr = false) const;
 
 private:
 	std::string m_name;

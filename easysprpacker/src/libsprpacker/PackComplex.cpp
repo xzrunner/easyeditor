@@ -1,6 +1,7 @@
 #include "PackComplex.h"
 #include "PackNodeFactory.h"
 #include "binary_io.h"
+#include "PackIDMgr.h"
 
 #include <easycomplex.h>
 #include <easybuilder.h>
@@ -147,12 +148,14 @@ void PackComplex::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 
 void PackComplex::Init(const ecomplex::Symbol* sym)
 {
+	bool is_curr_pkg = PackIDMgr::Instance()->IsCurrPkg(sym->GetFilepath());
+
 	const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
 	m_children.reserve(children.size());
 	m_children_trans.reserve(children.size());
 	for (int i = 0, n = children.size(); i < n; ++i) {
 		m_children.push_back(PackNodeFactory::Instance()->Create(
-			dynamic_cast<ee::Sprite*>(children[i])));
+			dynamic_cast<ee::Sprite*>(children[i]), is_curr_pkg));
 		m_children_trans.push_back(*children[i]);
 	}
 

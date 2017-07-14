@@ -62,7 +62,8 @@ bool PackIDMgr::IsCurrPkg(const PackNode* node) const
 	return curr_pkg_id == node->GetPkgID();
 }
 
-void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id) const
+void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id,
+						bool force_curr) const
 {
 	static int NEXT_NODE_ID = 0;
 	if (m_curr_pkg_id != -1)
@@ -77,6 +78,22 @@ void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id) 
 		pkg_id = m_curr_pkg->id;
 		node_id = NEXT_NODE_ID++;
 		return;
+	}
+
+	if (force_curr)
+	{
+		if (m_curr_pkg_id != -1)
+		{
+			pkg_id = m_curr_pkg_id;
+			node_id = NEXT_NODE_ID++;
+			return;
+		}
+		else if (m_curr_pkg) 
+		{
+			pkg_id = m_curr_pkg->id;
+			node_id = NEXT_NODE_ID++;
+			return;
+		}
 	}
 
 	const ee::PackIDMgr::Package* pkg = ee::PackIDMgr::Instance()->QueryPkg(filepath, false);
