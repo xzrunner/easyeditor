@@ -19,7 +19,7 @@ static void _draw_end()
 
 void DTex::Init()
 {
-	gum::DTex::Instance()->InitHook(_draw_begin, _draw_end);	
+	gum::DTex::Instance()->InitHook(_draw_begin, _draw_end, NULL);	
 }
 
 }
