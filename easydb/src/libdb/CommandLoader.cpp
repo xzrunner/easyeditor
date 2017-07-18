@@ -78,6 +78,7 @@
 #include "PrintGLExt.h"
 #include "GenNoCompressCfg.h"
 #include "FixPackCfg.h"
+#include "Cropping.h"
 
 namespace edb
 {
@@ -161,6 +162,7 @@ void CommandLoader::Init()
 	fc->Register(PrintGLExt::Create());
 	fc->Register(GenNoCompressCfg::Create());
 	fc->Register(FixPackCfg::Create());
+	fc->Register(Cropping::Create());
 }
 
 }

@@ -532,6 +532,14 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\..\src\libdb\Cropping.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libdb\Cropping.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\libdb\RectCutWithJson.cpp"
 						>
 					</File>
