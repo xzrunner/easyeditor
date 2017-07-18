@@ -4,6 +4,7 @@
 
 #include <sprite2/SymType.h>
 #include <gum/SymbolFile.h>
+#include <gum/ExtendSymFile.h>
 
 #include <json/json.h>
 
@@ -134,11 +135,18 @@ int SymbolFile::CheckTypeFromData(const std::string& filepath) const
 	reader.parse(fin, val);
 	fin.close();
 
-	if (!val.isArray() && val.isMember("skeleton") && !val["skeleton"].isArray() && val["skeleton"].isMember("spine")) {
-		return val.isMember("animations") ? s2::SYM_ANIM2 : s2::SYM_SKELETON;
+	int ret = s2::SYM_UNKNOWN;
+	int type = gum::ExtendSymFile::GetType(val);
+	switch (type)
+	{
+	case gum::SYM_SPINE:
+		ret = val.isMember("animations") ? s2::SYM_ANIM2 : s2::SYM_SKELETON;
+		break;
+	case gum::SYM_BODYMOVIN:
+		ret = s2::SYM_ANIMATION;
+		break;
 	}
-
-	return s2::SYM_UNKNOWN;
+	return ret;
 }
 
 }
