@@ -37,6 +37,10 @@ void FileIO::Load(const std::string& filepath)
 	case gum::SYM_SPINE:
 		break;
 	case gum::SYM_BODYMOVIN:
+		{
+			std::string dir = ee::FileHelper::GetFileDir(filepath);
+			BodymovinLoader::Load(value, dir);
+		}
 		break;
 	case gum::SYM_UNKNOWN:
 		{
