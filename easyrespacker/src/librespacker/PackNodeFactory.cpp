@@ -118,7 +118,7 @@ PackNodeFactory::PackNodeFactory()
 	m_builders.push_back(m_trail_builder = new TrailBuilder(m_export_set));
 }
 
-const IPackNode* PackNodeFactory::Create(const ee::Sprite* spr, bool force)
+const IPackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 {
 	const IPackNode* node = NULL;
 
