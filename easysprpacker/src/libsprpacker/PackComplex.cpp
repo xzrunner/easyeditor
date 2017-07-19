@@ -8,6 +8,7 @@
 namespace lua = ebuilder::lua;
 
 #include <sprite2/S2_Sprite.h>
+#include <sprite2/SymType.h>
 #include <simp/simp_types.h>
 #include <simp/simp_define.h>
 #include <simp/NodeComplex.h>
@@ -153,10 +154,13 @@ void PackComplex::Init(const ecomplex::Symbol* sym)
 	const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
 	m_children.reserve(children.size());
 	m_children_trans.reserve(children.size());
-	for (int i = 0, n = children.size(); i < n; ++i) {
+	for (int i = 0, n = children.size(); i < n; ++i) 
+	{
+		s2::Sprite* child = children[i];
+		bool force_curr = is_curr_pkg && child->GetSymbol()->Type() == s2::SYM_SCALE9;
 		m_children.push_back(PackNodeFactory::Instance()->Create(
-			dynamic_cast<ee::Sprite*>(children[i]), is_curr_pkg));
-		m_children_trans.push_back(*children[i]);
+			dynamic_cast<ee::Sprite*>(child), force_curr));
+		m_children_trans.push_back(*child);
 	}
 
 	const std::vector<s2::ComplexSymbol::Action>& actions = sym->GetActions();
