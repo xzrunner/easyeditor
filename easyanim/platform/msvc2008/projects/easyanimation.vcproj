@@ -289,14 +289,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easyanimation\frame\FileIO.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyanimation\frame\FileIO.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\easyanimation\frame\Frame.cpp"
 				>
 			</File>
@@ -331,6 +323,58 @@
 					RelativePath="..\..\..\src\easyanimation\frame\Love2dCode.h"
 					>
 				</File>
+			</Filter>
+			<Filter
+				Name="file"
+				>
+				<File
+					RelativePath="..\..\..\src\easyanimation\frame\FileIO.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\frame\FileIO.h"
+					>
+				</File>
+				<Filter
+					Name="loader"
+					>
+					<File
+						RelativePath="..\..\..\src\easyanimation\frame\BodymovinLoader.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easyanimation\frame\BodymovinLoader.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easyanimation\frame\DefaultFileLoader.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easyanimation\frame\DefaultFileLoader.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easyanimation\frame\FlashLoader.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easyanimation\frame\FlashLoader.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="saver"
+					>
+					<File
+						RelativePath="..\..\..\src\easyanimation\frame\FileSaver.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easyanimation\frame\FileSaver.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter

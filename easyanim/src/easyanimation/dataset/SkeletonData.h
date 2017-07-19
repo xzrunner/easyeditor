@@ -38,6 +38,13 @@ public:
 
 	bool Empty() const { return m_map_joints.empty(); }
 
+	void InsertJoints(ee::Sprite* spr, const std::vector<Joint*>& joints) {
+		m_map_joints.insert(std::make_pair(spr, joints));
+	}
+
+	const std::map<ee::Sprite*, std::vector<Joint*> >& GetMapJoints() const { 
+		return m_map_joints; }
+
 	static void GetTweenSprites(SkeletonData& start, SkeletonData& end, 
 		std::vector<ee::Sprite*>& tween, float process);
 
@@ -50,8 +57,6 @@ private:
 
 private:
 	std::map<ee::Sprite*, std::vector<Joint*> > m_map_joints;
-
-	friend class FileIO;
 
 }; // SkeletonData
 
