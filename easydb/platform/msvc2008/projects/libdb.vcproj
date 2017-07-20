@@ -741,6 +741,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\libdb\TranslateJson.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libdb\TranslateJson.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libdb\TransNewTextFile.cpp"
 					>
 				</File>

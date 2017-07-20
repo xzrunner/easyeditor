@@ -79,6 +79,7 @@
 #include "GenNoCompressCfg.h"
 #include "FixPackCfg.h"
 #include "Cropping.h"
+#include "TranslateJson.h"
 
 namespace edb
 {
@@ -163,6 +164,7 @@ void CommandLoader::Init()
 	fc->Register(GenNoCompressCfg::Create());
 	fc->Register(FixPackCfg::Create());
 	fc->Register(Cropping::Create());
+	fc->Register(TranslateJson::Create());
 }
 
 }
