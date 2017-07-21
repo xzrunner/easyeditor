@@ -15,6 +15,7 @@
 #include <easyicon.h>
 #include <easytext.h>
 #include <easyskeleton.h>
+#include <easyshape.h>
 
 #include <ee/SymbolFactory.h>
 #include <ee/SpriteFactory.h>
@@ -61,6 +62,9 @@ static void InitSymbolCreators()
 
 	ee::SymbolFactory::RegisterCreator(s2::SYM_SKELETON, &libskeleton::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_SKELETON, &libskeleton::Sprite::Create);
+
+	ee::SymbolFactory::RegisterCreator(s2::SYM_SHAPE, &eshape::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_SHAPE, &eshape::Sprite::Create);
 }
 
 bool MyApp::OnInit()
