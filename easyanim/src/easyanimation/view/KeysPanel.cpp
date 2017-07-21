@@ -77,8 +77,11 @@ void KeysPanel::InitLayout()
 	sizer->Add(new KeysContentWidget(this), 99, wxEXPAND);
 
 	wxBoxSizer* hori_sizer = new wxBoxSizer(wxHORIZONTAL);
-//	hori_sizer->AddSpacer(6000);	// todo
+#ifdef ANIM_LONG_TIMELINE
+	hori_sizer->AddSpacer(12000);	// todo
+#else
 	hori_sizer->AddSpacer(1200);	// todo
+#endif // ANIM_LONG_TIMELINE
 	sizer->Add(hori_sizer);
 
 // 	wxBoxSizer* vert_sizer = new wxBoxSizer(wxVERTICAL);

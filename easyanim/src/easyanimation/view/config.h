@@ -24,11 +24,17 @@ struct LanguageEntry
 	};
 };
 
+//#define ANIM_LONG_TIMELINE
+
 static const LanguageType currLanguage = Chinese;
 
 static const int FRAME_GRID_WIDTH = 12;
 static const int FRAME_GRID_HEIGHT = FRAME_GRID_WIDTH * 2;
+#ifdef ANIM_LONG_TIMELINE
+static const int MAX_FRAME_COUNT = 1500;
+#else
 static const int MAX_FRAME_COUNT = 500;
+#endif // ANIM_LONG_TIMELINE
 
 static const wxColour LIGHT_GRAY = wxColour(229, 229, 229);
 static const wxColour MEDIUM_GRAY = wxColour(180, 180, 180);
