@@ -80,6 +80,7 @@
 #include "FixPackCfg.h"
 #include "Cropping.h"
 #include "TranslateJson.h"
+#include "ExportBodymovin.h"
 
 namespace edb
 {
@@ -165,6 +166,7 @@ void CommandLoader::Init()
 	fc->Register(FixPackCfg::Create());
 	fc->Register(Cropping::Create());
 	fc->Register(TranslateJson::Create());
+	fc->Register(ExportBodymovin::Create());
 }
 
 }

@@ -7,6 +7,8 @@
 #include "Visitor.h"
 #include "SymbolType.h"
 
+#include <gum/FilepathHelper.h>
+
 namespace ee
 {
 
@@ -32,8 +34,7 @@ SymbolMgr* SymbolMgr::Instance()
 
 Symbol* SymbolMgr::FetchSymbol(const std::string& filepath, int type)
 {
-	std::string fixed_path = FileHelper::GetAbsolutePath(filepath);
-	StringHelper::ToLower(fixed_path);
+	std::string fixed_path = gum::FilepathHelper::Format(filepath);
 
 	std::string filename = FileHelper::GetFilename(filepath);
 	std::map<std::string, Symbol*>::iterator itr = m_syms.find(fixed_path);

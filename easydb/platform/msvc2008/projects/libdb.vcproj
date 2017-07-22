@@ -1005,6 +1005,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="export"
+				>
+				<File
+					RelativePath="..\..\..\src\libdb\ExportBodymovin.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libdb\ExportBodymovin.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>
