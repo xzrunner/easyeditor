@@ -42,6 +42,7 @@ void FileSaver::Store(Json::Value& value, s2::AnimSymbol::Layer* layer, const st
 void FileSaver::Store(Json::Value& value, s2::AnimSymbol::Frame* frame, const std::string& dir)
 {
 	value["time"] = frame->index;
+	value["tween"] = frame->tween;
 	for (size_t i = 0, n = frame->sprs.size(); i < n; ++i)
 		Store(value["actor"][i], frame->sprs[i], dir);
 }

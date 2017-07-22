@@ -9,6 +9,7 @@
 #include <ee/SettingData.h>
 #include <ee/Visitor.h>
 #include <ee/Sprite.h>
+#include <ee/SymbolType.h>
 
 #include <sprite2/RenderParams.h>
 #include <gum/JsonSerializer.h>
@@ -129,6 +130,10 @@ void Symbol::StoreToFile(const char* filename) const
 
 bool Symbol::LoadResources()
 {
+	if (m_filepath == ee::SYM_SHAPE_TAG) {
+		return true;
+	}
+
 	if (!gum::FilepathHelper::Exists(m_filepath)) {
 		return false;
 	}

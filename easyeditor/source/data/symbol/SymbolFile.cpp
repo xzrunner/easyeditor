@@ -98,6 +98,8 @@ int SymbolFile::Type(const std::string& filepath) const
 		std::string filename = FileHelper::GetFilename(filepath);
 		if (filename == SYM_GROUP_TAG) {
 			return s2::SYM_COMPLEX;
+		} else if (filename == SYM_SHAPE_TAG) {
+			return s2::SYM_SHAPE;
 		}
 	}
 

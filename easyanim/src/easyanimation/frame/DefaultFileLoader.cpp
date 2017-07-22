@@ -150,7 +150,8 @@ ee::Sprite* DefaultFileLoader::LoadActor(const Json::Value& val, const std::stri
 			break;
 		}
 
-		if (filepath == ee::SYM_GROUP_TAG) {
+		if (filepath == ee::SYM_GROUP_TAG ||
+			filepath == ee::SYM_SHAPE_TAG) {
 			break;
 		}
 
