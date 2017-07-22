@@ -53,7 +53,8 @@ void Code::ResolveUI(const std::vector<ee::Sprite*>& sprs)
 			Node parent = buffer.front(); buffer.pop();
 			const ee::Sprite* spr = parent.spr;
 	
-			const std::string& spr_name = spr->GetName();
+			std::string spr_name;
+			s2::SprNameMap::Instance()->IDToStr(spr->GetName(), spr_name);
 			if (spr_name.empty() || spr_name[0] == '_') {
 				continue;
 			}
@@ -114,7 +115,8 @@ void Code::ResolveText(const std::vector<ee::Sprite*>& sprs)
  	{
 		ee::Sprite* spr = buffer.front(); buffer.pop();
 
-		const std::string& name = spr->GetName();
+		std::string name;
+		s2::SprNameMap::Instance()->IDToStr(spr->GetName(), name);
 		if (name.empty() || name[0] == '_') {
 			continue;
 		}

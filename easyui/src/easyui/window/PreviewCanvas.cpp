@@ -23,7 +23,7 @@ PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, ee::
 	QueryWindowViewSizeSJ::Instance()->Query(width, height);
 	float scale = std::min(width / QueryWindowViewSizeSJ::DEFAULT_VIEW_WIDTH, 
 		height / QueryWindowViewSizeSJ::DEFAULT_VIEW_HEIGHT);
-	m_scale_mt.Scale(scale, scale, 1);
+	m_scale_mt.Scale(scale, scale);
 }
 
 void PreviewCanvas::OnDrawSprites() const
@@ -38,7 +38,7 @@ void PreviewCanvas::OnDrawSprites() const
 
 		S2_MAT inv_mt = spr->GetLocalMat().Inverted();
 		S2_MAT translate_mt;
-		translate_mt.Translate(pos.x, pos.y, 0);
+		translate_mt.Translate(pos.x, pos.y);
 		S2_MAT mt = translate_mt * (m_scale_mt * inv_mt);
 
 		s2::RenderParams params;
