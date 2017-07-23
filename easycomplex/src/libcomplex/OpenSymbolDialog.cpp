@@ -13,6 +13,7 @@
 #include <easytext.h>
 #include <easyterrain2d.h>
 #include <easyskeleton.h>
+#include <easyaudio.h>
 
 #include <ee/EditPanelImpl.h>
 #include <ee/FontBlankSprite.h>
@@ -121,6 +122,10 @@ void OpenSymbolDialog::Open(ee::Sprite* spr, ee::CrossGuides* guides)
 	{
 		eshape::EditDialogSimple dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), shape, m_sprites_impl);
 		dlg.ShowModal();
+	}
+	else if (eaudio::Sprite* audio = dynamic_cast<eaudio::Sprite*>(spr))
+	{
+		audio->Play();
 	}
 
 	m_sprites_impl->EnableObserve(true);

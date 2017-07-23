@@ -23,6 +23,7 @@
 #include <easymask.h>
 #include <easytrail.h>
 #include <easyskeleton.h>
+#include <easyaudio.h>
 
 #include <sprite2/SymType.h>
 
@@ -77,6 +78,9 @@ static void InitSymbolCreators()
 
 	ee::SymbolFactory::RegisterCreator(s2::SYM_SKELETON, &libskeleton::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_SKELETON, &libskeleton::Sprite::Create);
+
+	ee::SymbolFactory::RegisterCreator(s2::SYM_AUDIO, &eaudio::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_AUDIO, &eaudio::Sprite::Create);
 }
 
 bool MyApp::OnInit()

@@ -20,7 +20,7 @@ void ListItem::RefreshThumbnail(const std::string& filepath, bool force)
 	}
 
 	Symbol* sym = dynamic_cast<Symbol*>(this);
-	if (!sym || sym->Type() == s2::SYM_IMAGE) {
+	if (!sym || sym->Type() == s2::SYM_IMAGE || sym->Type() == s2::SYM_AUDIO) {
 		return;
 	}
 

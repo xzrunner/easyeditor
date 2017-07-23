@@ -19,6 +19,7 @@
 #include <easymask.h>
 #include <easytrail.h>
 #include <easyskeleton.h>
+#include <easyaudio.h>
 
 #include <ee/LibraryImagePage.h>
 #include <ee/LibraryFontBlankPage.h>
@@ -45,6 +46,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	AddPage(new eshape::LibraryPage(nb));
 	AddPage(new eicon::LibraryPage(nb));
 	AddPage(new libskeleton::LibraryPage(nb));
+	AddPage(new eaudio::LibraryPage(nb));
 
 	AddPage(new ee::LibraryFontBlankPage(nb));
 	AddPage(new ee::LibraryScriptsPage(nb));
