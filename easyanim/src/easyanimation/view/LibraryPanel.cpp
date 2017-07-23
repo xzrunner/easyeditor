@@ -13,6 +13,7 @@
 #include <easyicon.h>
 #include <easyparticle3d.h>
 #include <easytrail.h>
+#include <easyaudio.h>
 
 namespace eanim
 {
@@ -30,7 +31,8 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	AddPage(new escale9::LibraryPage(nb));
 	AddPage(new eicon::LibraryPage(nb));
 	AddPage(new eparticle3d::LibraryPage(nb));
-	AddPage(new etrail::LibraryPage(nb));	
+	AddPage(new etrail::LibraryPage(nb));
+	AddPage(new eaudio::LibraryPage(nb));
 }
 
 }

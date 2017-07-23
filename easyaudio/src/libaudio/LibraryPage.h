@@ -13,6 +13,9 @@ public:
 
 	virtual bool IsHandleSymbol(ee::Symbol* sym) const;
 
+protected:
+	virtual void OnAddPress(wxCommandEvent& event);
+
 }; // LibraryPage
 
 }

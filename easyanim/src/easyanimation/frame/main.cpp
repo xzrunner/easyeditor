@@ -16,6 +16,7 @@
 #include <easytext.h>
 #include <easyskeleton.h>
 #include <easyshape.h>
+#include <easyaudio.h>
 
 #include <ee/SymbolFactory.h>
 #include <ee/SpriteFactory.h>
@@ -65,6 +66,9 @@ static void InitSymbolCreators()
 
 	ee::SymbolFactory::RegisterCreator(s2::SYM_SHAPE, &eshape::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_SHAPE, &eshape::Sprite::Create);
+
+	ee::SymbolFactory::RegisterCreator(s2::SYM_AUDIO, &eaudio::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_AUDIO, &eaudio::Sprite::Create);
 }
 
 bool MyApp::OnInit()

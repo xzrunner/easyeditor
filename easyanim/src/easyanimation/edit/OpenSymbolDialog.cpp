@@ -10,6 +10,7 @@
 #include <easycomplex.h>
 #include <easymesh.h>
 #include <easyskeleton.h>
+#include <easyaudio.h>
 
 #include <wx/wx.h>
 
@@ -57,9 +58,15 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 	{
 		emesh::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), mesh, m_sprites_impl);
 		dlg.ShowModal();
-	} else if (libskeleton::Sprite* sk = dynamic_cast<libskeleton::Sprite*>(spr)) {
+	} 
+	else if (libskeleton::Sprite* sk = dynamic_cast<libskeleton::Sprite*>(spr)) 
+	{
 		libskeleton::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), sk);
 		dlg.ShowModal();
+	}
+	else if (eaudio::Sprite* audio = dynamic_cast<eaudio::Sprite*>(spr))
+	{
+		audio->Play();
 	}
 
 	m_sprites_impl->EnableObserve(true);
