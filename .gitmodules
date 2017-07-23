@@ -82,3 +82,6 @@
 [submodule "glp/src/glp"]
 	path = glp/src/glp
 	url = ssh://git@tea.ejoy.com:3222/LR/glp.git
+[submodule "uniaudio"]
+	path = uniaudio
+	url = ssh://git@tea.ejoy.com:3222/LR/uniaudio.git
