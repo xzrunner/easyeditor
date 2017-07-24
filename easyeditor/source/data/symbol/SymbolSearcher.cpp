@@ -26,8 +26,7 @@ std::string SymbolSearcher::GetSymbolPath(const std::string& dir,
 				std::string filepath = FileHelper::GetAbsolutePath(dir, filepath_val.asString());
 				StringHelper::ToLower(filepath);
 				if (searcher->IsExist(filepath)) {
-					real_path = filepath;
-					break;
+					return filepath;
 				}
 				filepath_val = filepaths_val[j++];
 			}
@@ -42,15 +41,18 @@ std::string SymbolSearcher::GetSymbolPath(const std::string& dir,
 			while (!filepath_val.isNull()) {
 				std::string filepath = FileHelper::GetAbsolutePath(dir, filepath_val.asString());
 				if (FileHelper::IsFileExist(filepath)) {
-					real_path = filepath;
-					break;
+					return filepath;
 				}
 				filepath_val = filepaths_val[i++];
 			}
 		}
 	}
 
-	return real_path;
+	if (FileHelper::IsFileExist(real_path)) {
+		return real_path;
+	} else {
+		return filepath;
+	}
 }
 
 void SymbolSearcher::SetSymbolFilepaths(const std::string& dir, Symbol* sym, 
