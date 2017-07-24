@@ -126,6 +126,12 @@ void ExportBodymovin::Trigger(const std::string& src_file, const std::string& ds
 		}
 	}
 
+	libanim::Symbol* sym = new libanim::Symbol();
+	gum::BodymovinAnimLoader loader(sym, &sym_loader, &spr_loader);
+	loader.LoadLayers(map_assets, parser.GetLayers(), parser.GetFrameRate(), parser.GetWidth(), parser.GetHeight());
+	std::string filepath = dst_dir + "\\data_" + ee::SymbolFile::Instance()->Tag(s2::SYM_ANIMATION) + ".json";
+	libanim::FileSaver::Store(filepath, *sym);
+
 	std::map<std::string, s2::Sprite*>::iterator itr = map_assets.begin();
 	for ( ; itr != map_assets.end(); ++itr) {
 		itr->second->RemoveReference();
