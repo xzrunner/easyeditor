@@ -8,6 +8,7 @@
 #include <ee/SymbolFactory.h>
 #include <ee/SpriteFactory.h>
 #include <ee/FileHelper.h>
+#include <ee/SpriteIO.h>
 
 #include <easyanim.h>
 #include <easycomplex.h>
@@ -206,6 +207,11 @@ void ExportBodymovin::FixFontLayer(const std::string& filepath, const std::strin
 		s2::Textbox tb;
 		tb.width = 200;
 		tb.height = 200;
+		tb.font_size = 40;
+		tb.font_color = s2::Color(0, 0, 0);
+		tb.has_edge = false;
+		tb.align_hori = s2::Textbox::HA_LEFT;
+		tb.align_vert = s2::Textbox::VA_TOP;
 		dynamic_cast<etext::Symbol*>(t_sym)->SetTextbox(tb);
 		s2::Sprite* t_spr = ee::SpriteFactory::Instance()->Create(t_sym);
 		t_spr->UpdateBounding();
@@ -224,14 +230,21 @@ void ExportBodymovin::FixFontLayer(const std::string& filepath, const std::strin
 		{
 			Json::Value& frame_val = new_layer["frame"][j];
 			assert(frame_val["actor"].size() == 1);
-			Json::Value& actor_val = frame_val["actor"][IDX0];
-			std::string filepath = actor_val["filepath"].asString();
+			const Json::Value& src_val = frame_val["actor"][IDX0];
 
-			actor_val["angle"] = 0;
-			actor_val["x scale"] = fabs(actor_val["x scale"].asDouble());
-			actor_val["y scale"] = fabs(actor_val["y scale"].asDouble());
+			ee::SpriteIO spr_io;
+			spr_io.Load(src_val, dir);
 
-			actor_val["filepath"] = text_path;
+			spr_io.m_position = spr_io.m_position + sm::rotate_vector(-spr_io.m_offset, spr_io.m_angle) + spr_io.m_offset;
+			spr_io.m_angle = 0;
+			spr_io.m_scale.x = fabs(spr_io.m_scale.x);
+			spr_io.m_scale.y = fabs(spr_io.m_scale.y);
+
+			Json::Value dst_val;
+			dst_val["filepath"] = text_path;
+			spr_io.Store(dst_val, dir);
+
+			frame_val["actor"][IDX0] = dst_val;
 		}
 
 		dst_val["layer"][sz + 1] = new_layer;
