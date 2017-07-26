@@ -74,6 +74,9 @@ void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id,
 	}
 	else if (IsCurrPkg(filepath)) 
 	{
+		if (!m_curr_pkg) {
+			throw ee::Exception("no curr pkg: %s\n", filepath.c_str());
+		}
 		assert(m_curr_pkg);
 		pkg_id = m_curr_pkg->id;
 		node_id = NEXT_NODE_ID++;
