@@ -4,6 +4,7 @@
 #include <ee/SettingData.h>
 #include <ee/Config.h>
 #include <ee/StringHelper.h>
+#include <ee/SymbolType.h>
 
 #include <sprite2/RenderParams.h>
 #include <sprite2/S2_RVG.h>
@@ -48,6 +49,9 @@ s2::RenderReturn Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* 
 
 bool Symbol::LoadResources()
 {
+	if (m_filepath == ee::SYM_TEXT_TAG) {
+		return true;
+	}
 	if (!gum::FilepathHelper::Exists(m_filepath)) {
 		return false;
 	}

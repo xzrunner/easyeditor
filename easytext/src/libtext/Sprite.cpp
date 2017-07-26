@@ -3,6 +3,7 @@
 #include "PropertySetting.h"
 
 #include <ee/SpriteFactory.h>
+#include <ee/SymbolType.h>
 
 #include <gum/trans_color.h>
 #include <gum/TextboxLoader.h>
@@ -55,6 +56,11 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 void Sprite::Store(Json::Value& val, const std::string& dir) const
 {
 	ee::Sprite::Store(val);
+
+	ee::Symbol* sym = VI_DOWNCASTING<ee::Symbol*>(m_sym);
+	if (sym->GetFilepath().empty()) {
+		val["filepath"] = ee::SYM_TEXT_TAG;
+	}
 
 	Json::Value text_val;
 

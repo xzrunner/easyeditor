@@ -100,6 +100,8 @@ int SymbolFile::Type(const std::string& filepath) const
 			return s2::SYM_COMPLEX;
 		} else if (filename == SYM_SHAPE_TAG) {
 			return s2::SYM_SHAPE;
+		} else if (filename == SYM_TEXT_TAG) {
+			return s2::SYM_TEXTBOX;
 		}
 	}
 

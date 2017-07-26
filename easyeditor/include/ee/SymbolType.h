@@ -21,6 +21,7 @@ enum SymType
 
 static const char* SYM_GROUP_TAG = "group";
 static const char* SYM_SHAPE_TAG = "shape";
+static const char* SYM_TEXT_TAG = "text";
 
 }
 
