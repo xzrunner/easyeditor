@@ -147,7 +147,10 @@ void Packer::OutputSprID(const std::string& pkg_name, const std::string& res_dir
 		}
 
 		std::string filepath = node->GetFilepath();
-		if (filepath.empty() || filepath == SPRITE_FILEPATH || filepath == ee::SYM_GROUP_TAG) {
+		if (filepath.empty() || filepath == SPRITE_FILEPATH || 
+			filepath == ee::SYM_GROUP_TAG ||
+			filepath == ee::SYM_TEXT_TAG ||
+			filepath == ee::SYM_SHAPE_TAG) {
 			continue;
 		}
 		filepath = gum::FilepathHelper::Relative(res_dir, filepath);
