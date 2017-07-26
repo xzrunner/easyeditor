@@ -53,6 +53,10 @@ bool PackIDMgr::IsCurrPkg(const std::string& filepath) const
 			return true;
 		}
 	}
+	if (filepath == ee::SYM_TEXT_TAG ||
+		filepath == ee::SYM_SHAPE_TAG) {
+		return true;
+	}
 	return false;
 }
 
