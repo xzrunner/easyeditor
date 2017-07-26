@@ -438,6 +438,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\source\data\symbol\SymbolPath.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\SymbolPath.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\include\ee\SymbolType.h"
 				>
 			</File>

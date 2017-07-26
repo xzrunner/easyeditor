@@ -9,6 +9,7 @@
 #include <ee/Symbol.h>
 #include <ee/Math2D.h>
 #include <ee/SymbolMgr.h>
+#include <ee/SymbolPath.h>
 
 #include <ps_2d.h>
 #include <gum/JsonSerializer.h>
@@ -42,7 +43,7 @@ void FileIO::Store(const std::string& filepath, ToolbarPanel* toolbar)
 		Json::Value cval;
 
 		ee::Symbol* sym = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(p_symbol->ud));
-		cval["filepath"] = ee::FileHelper::GetRelativePath(dir, sym->GetFilepath());
+		cval["filepath"] = ee::SymbolPath::GetRelativePath(sym, dir);
 
 		for (int j = 0, m = cp->m_sliders.size(); j < m; ++j) {
 			cp->m_sliders[j]->Store(cval);

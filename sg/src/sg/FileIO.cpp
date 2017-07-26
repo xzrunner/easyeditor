@@ -11,6 +11,7 @@
 #include <ee/SymbolSearcher.h>
 #include <ee/SymbolMgr.h>
 #include <ee/Exception.h>
+#include <ee/SymbolPath.h>
 
 #include <fstream>
 
@@ -111,8 +112,7 @@ Json::Value FileIO::store(const ee::Sprite* spr, StagePanel* stage,
 {
 	Json::Value value;
 
-	value["filepath"] = ee::FileHelper::GetRelativePath(dir,
-		spr->GetSymbol()->GetFilepath());
+	value["filepath"] = ee::SymbolPath::GetRelativePath(spr->GetSymbol(), dir);
 
 	int row, col;
 	stage->TransCoordsToGridPosNew(spr->GetPosition(), row, col);

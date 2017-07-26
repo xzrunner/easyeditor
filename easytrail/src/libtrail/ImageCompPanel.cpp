@@ -7,6 +7,7 @@
 #include <ee/Symbol.h>
 #include <ee/SymbolFile.h>
 #include <ee/FileHelper.h>
+#include <ee/SymbolPath.h>
 
 #include <mt_2d.h>
 #include <sprite2/SymType.h>
@@ -70,7 +71,7 @@ void ImageCompPanel::Store(Json::Value& val, const std::string& dir) const
 	gum::JsonSerializer::Store(m_pc->mode.A.add_col_end.rgba, val["add_col_end"]);
 
 	s2::Symbol* sym = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(m_pc->mode.A.ud));
-	val["filepath"] = ee::FileHelper::GetRelativePath(dir, dynamic_cast<ee::Symbol*>(sym)->GetFilepath());
+	val["filepath"] = ee::SymbolPath::GetRelativePath(dynamic_cast<ee::Symbol*>(sym), dir);
 }
 
 void ImageCompPanel::InitLayout(wxSizer* top_sizer)

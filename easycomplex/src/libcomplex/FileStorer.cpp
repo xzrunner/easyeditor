@@ -5,6 +5,7 @@
 #include <ee/Exception.h>
 #include <ee/Sprite.h>
 #include <ee/SymbolType.h>
+#include <ee/SymbolPath.h>
 
 #include <sprite2/S2_Sprite.h>
 
@@ -118,11 +119,7 @@ Json::Value FileStorer::Store(ee::Sprite* spr, const std::string& dir)
 	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());
 
 	// filepath
-	std::string filepath = sym->GetFilepath();
-	if (filepath != ee::SYM_GROUP_TAG) {
-		filepath = ee::FileHelper::GetRelativePath(dir, filepath);
-	}
-	value["filepath"] = filepath;
+	value["filepath"] = ee::SymbolPath::GetRelativePath(sym, dir);
 	// filepaths
 	const std::set<std::string>& filepaths = sym->GetFilepaths();
 	std::set<std::string>::const_iterator itr = filepaths.begin();

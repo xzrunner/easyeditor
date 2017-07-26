@@ -3,6 +3,7 @@
 
 #include <ee/FileHelper.h>
 #include <ee/Sprite.h>
+#include <ee/SymbolPath.h>
 
 #include <sprite2/S2_Sprite.h>
 
@@ -53,7 +54,7 @@ void FileSaver::Store(Json::Value& value, s2::Sprite* spr, const std::string& di
 	const ee::Symbol* ee_sym = dynamic_cast<const ee::Symbol*>(ee_spr->GetSymbol());
 
 	// filepath
-	value["filepath"] = ee::FileHelper::GetRelativePath(dir, ee_sym->GetFilepath());
+	value["filepath"] = ee::SymbolPath::GetRelativePath(ee_sym, dir);
 	// filepaths
 	const std::set<std::string>& filepaths = ee_sym->GetFilepaths();
 	std::set<std::string>::const_iterator itr = filepaths.begin();

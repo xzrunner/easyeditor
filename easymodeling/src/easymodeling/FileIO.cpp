@@ -9,6 +9,7 @@
 #include <ee/SymbolMgr.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/Math2D.h>
+#include <ee/SymbolPath.h>
 
 #include <easyshape.h>
 
@@ -137,8 +138,8 @@ Json::Value FileIO::B2J(const Body* body, const std::string& dlg)
 
 	value["name"] = body->m_name;
 
-	value["filepath"] = ee::FileHelper::GetRelativePath(dlg, 
-		body->m_spr->GetSymbol()->GetFilepath());
+	value["filepath"] = ee::SymbolPath::GetRelativePath(
+		body->m_spr->GetSymbol(), dlg);
 
 	value["type"] = body->m_type;
 	switch (body->m_type)

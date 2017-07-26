@@ -11,6 +11,7 @@
 #include <ee/SymbolMgr.h>
 #include <ee/AnimatedGifSaver.h>
 #include <ee/SymbolType.h>
+#include <ee/SymbolPath.h>
 
 #include <easyanim.h>
 
@@ -201,10 +202,7 @@ Json::Value FileSaver::StoreActor(const ee::Sprite* spr, const std::string& dir,
 	Json::Value value;
 	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());
 	// filepath
-	std::string filepath = sym->GetFilepath();
-	if (filepath != ee::SYM_GROUP_TAG) {
-		filepath = ee::FileHelper::GetRelativePath(dir, filepath);
-	}
+	std::string filepath = ee::SymbolPath::GetRelativePath(sym, dir);
 	if (single) {
 		value["filepath"] = filepath;
 	} else {

@@ -10,6 +10,7 @@
 #include <ee/Visitor.h>
 #include <ee/ObjectVector.h>
 #include <ee/SpriteRenderer.h>
+#include <ee/SymbolPath.h>
 
 #include <sprite2/RenderParams.h>
 #include <sprite2/S2_RVG.h>
@@ -66,13 +67,10 @@ void AnchorMgr::StoreToFile(Json::Value& value, const std::string& dir) const
 		Json::Value a_val;
 		for (int j = 0; j < m_anchors[i].sprs.size(); ++j) {
 			ee::Sprite* spr = m_anchors[i].sprs[j];
-
-			std::string filepath = ee::FileHelper::GetRelativePath(dir,
-				dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath());
-
 			Json::Value spr_val_anchor;
 			spr_val_anchor["name"] = spr->GetName();
-			spr_val_anchor["filepath"] = filepath;
+			spr_val_anchor["filepath"] = ee::SymbolPath::GetRelativePath(
+				dynamic_cast<const ee::Symbol*>(spr->GetSymbol()), dir);
 			a_val[j] = spr_val_anchor;
 		}
 		value["anchor"][i] = a_val;
@@ -80,11 +78,9 @@ void AnchorMgr::StoreToFile(Json::Value& value, const std::string& dir) const
 
 	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
 		ee::Sprite* spr = m_sprs[i];
-		std::string filepath = ee::FileHelper::GetRelativePath(dir,
-			dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath());
-
 		Json::Value spr_val;
-		spr_val["filepath"] = filepath;
+		spr_val["filepath"] = ee::SymbolPath::GetRelativePath(
+			dynamic_cast<const ee::Symbol*>(spr->GetSymbol()), dir);
 		spr->Store(spr_val);
 		value["sprite"][i] = spr_val;
 	}

@@ -11,6 +11,7 @@
 #include <ee/Math2D.h>
 #include <ee/SymbolMgr.h>
 #include <ee/Exception.h>
+#include <ee/SymbolPath.h>
 
 #include <ps_3d.h>
 #include <sprite2/P3dEmitterCfg.h>
@@ -64,7 +65,7 @@ void FileIO::Store(const std::string& filepath, ParticleSystem* ps,
 
 		ee::Symbol* sym = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(pc->ud));
 		value["components"][i]["filepath"] = 
-			ee::FileHelper::GetRelativePath(dir, sym->GetFilepath());
+			ee::SymbolPath::GetRelativePath(sym, dir);
 
 		value["components"][i]["name"] = cp->m_name->GetValue().ToStdString();
 		for (int j = 0, m = cp->m_sliders.size(); j < m; ++j) {

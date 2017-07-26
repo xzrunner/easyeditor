@@ -7,6 +7,7 @@
 #include "FileHelper.h"
 #include "Exception.h"
 #include "FetchAllVisitor.h"
+#include "SymbolPath.h"
 
 namespace ee
 {
@@ -116,8 +117,8 @@ void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
 		Sprite* spr = sprs[i];
 
 		Json::Value spr_val;
-		spr_val["filepath"] = FileHelper::GetRelativePath(dir,
-			dynamic_cast<ee::Symbol*>(spr->GetSymbol())->GetFilepath());
+		spr_val["filepath"] = SymbolPath::GetRelativePath(
+			dynamic_cast<ee::Symbol*>(spr->GetSymbol()), dir);
 		spr->Store(spr_val);
 
 		val["sprite"][i] = spr_val;

@@ -9,6 +9,7 @@
 #include <ee/SpriteFactory.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/Exception.h>
+#include <ee/SymbolPath.h>
 
 #include <easycomplex.h>
 
@@ -156,13 +157,13 @@ void FileIO::LoadSprites(const Json::Value& val, Symbol* sym, const std::string&
 void FileIO::StoreRefs(Json::Value& val, const Symbol* sym, const std::string& dir)
 {
 	const std::vector<Sprite*>& sprs = sym->GetExtRefs();
-	for (int i = 0, n = sprs.size(); i < n; ++i) {
+	for (int i = 0, n = sprs.size(); i < n; ++i) 
+	{
 		Sprite* spr = sprs[i];
-
-		std::string filepath = dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath();
-
 		Json::Value spr_val;
-		spr_val["filepath"] = ee::FileHelper::GetRelativePath(dir, filepath);
+		std::string filepath = ee::SymbolPath::GetRelativePath(
+			dynamic_cast<const ee::Symbol*>(spr->GetSymbol()), dir);
+		spr_val["filepath"] = filepath;
 		spr->Store(spr_val);
 		val["ref_spr"][i] = spr_val;
 

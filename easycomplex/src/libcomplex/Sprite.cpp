@@ -8,6 +8,7 @@
 #include <ee/SymbolType.h>
 #include <ee/Exception.h>
 #include <ee/LogMgr.h>
+#include <ee/SymbolPath.h>
 
 #include <sprite2/RenderParams.h>
 
@@ -98,12 +99,8 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 		{
 			Json::Value cval;
 			ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
-			std::string filepath = dynamic_cast<ee::Symbol*>(child->GetSymbol())->GetFilepath();
-			assert(!filepath.empty());
-			if (filepath != ee::SYM_GROUP_TAG) {
-				filepath = ee::FileHelper::GetRelativePath(dir, filepath);
-			}
-			val[ee::SYM_GROUP_TAG][i]["filepath"] = filepath;
+			val[ee::SYM_GROUP_TAG][i]["filepath"] = 
+				ee::SymbolPath::GetRelativePath(dynamic_cast<ee::Symbol*>(child->GetSymbol()), dir);
 			child->Store(val[ee::SYM_GROUP_TAG][i], dir);
 		}
 	}

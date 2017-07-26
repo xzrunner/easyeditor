@@ -15,6 +15,7 @@
 #include <ee/LibraryPanel.h>
 #include <ee/panel_msg.h>
 #include <ee/ImageSymbol.h>
+#include <ee/SymbolPath.h>
 
 #include <easyshape.h>
 
@@ -72,8 +73,8 @@ void StagePanel::Store(const std::string& dir, Json::Value& value) const
 	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(bg_sprites));
 	for (int i = 0, n = bg_sprites.size(); i < n; ++i) {
 		ee::Sprite* bg = bg_sprites[i];
-		value["bg"][i]["filepath"] = ee::FileHelper::GetRelativePath(
-			dir, dynamic_cast<ee::Symbol*>(bg->GetSymbol())->GetFilepath());
+		value["bg"][i]["filepath"] = ee::SymbolPath::GetRelativePath(
+			dynamic_cast<ee::Symbol*>(bg->GetSymbol()), dir);
 		bg->Store(value["bg"][i]);
 	}
 

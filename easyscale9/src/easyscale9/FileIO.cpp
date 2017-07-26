@@ -17,6 +17,7 @@
 #include <ee/SpriteFactory.h>
 #include <ee/SettingData.h>
 #include <ee/Config.h>
+#include <ee/SymbolPath.h>
 
 namespace escale9
 {
@@ -133,8 +134,7 @@ Json::Value FileIO::Store(ee::Sprite* spr, const std::string& dir)
 	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());
 
 	// filepath
-	value["filepath"] = ee::FileHelper::GetRelativePath(dir,
-		sym->GetFilepath());
+	value["filepath"] = ee::SymbolPath::GetRelativePath(sym, dir);
 	// filepaths
 	const std::set<std::string>& filepaths = sym->GetFilepaths();
 	std::set<std::string>::const_iterator itr = filepaths.begin();
@@ -153,8 +153,7 @@ Json::Value FileIO::StoreNew(ee::Sprite* spr, const std::string& dir)
 	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());
 
 	// filepath
-	value["filepath"] = ee::FileHelper::GetRelativePath(dir,
-		sym->GetFilepath());
+	value["filepath"] = ee::SymbolPath::GetRelativePath(sym, dir);
 	// filepaths
 	const std::set<std::string>& filepaths = sym->GetFilepaths();
 	std::set<std::string>::const_iterator itr = filepaths.begin();

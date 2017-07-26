@@ -6,6 +6,7 @@
 #include <ee/SymbolMgr.h>
 #include <ee/Sprite.h>
 #include <ee/SpriteFactory.h>
+#include <ee/SymbolPath.h>
 
 #include <fstream>
 
@@ -23,12 +24,12 @@ void FileIO::Store(const char* filepath, const Symbol* sym)
 	const s2::Symbol *base = sym->GetBase()->GetSymbol(),
 		             *mask = sym->GetMask()->GetSymbol();
 	if (base) {
-		value["base"]["filepath"] = ee::FileHelper::GetRelativePath(dir, 
-			dynamic_cast<const ee::Symbol*>(base)->GetFilepath());
+		value["base"]["filepath"] = ee::SymbolPath::GetRelativePath( 
+			dynamic_cast<const ee::Symbol*>(base), dir);
 	}
 	if (mask) {
-		value["mask"]["filepath"] = ee::FileHelper::GetRelativePath(dir, 
-			dynamic_cast<const ee::Symbol*>(mask)->GetFilepath());
+		value["mask"]["filepath"] = ee::SymbolPath::GetRelativePath(
+			dynamic_cast<const ee::Symbol*>(mask), dir);
 	}
 
 	Json::StyledStreamWriter writer;

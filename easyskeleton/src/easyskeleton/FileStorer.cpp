@@ -5,6 +5,7 @@
 #include <ee/FileHelper.h>
 #include <ee/Sprite.h>
 #include <ee/Symbol.h>
+#include <ee/SymbolPath.h>
 
 #include <gum/SkeletonIO.h>
 
@@ -35,7 +36,7 @@ Json::Value FileStorer::StoreSprite(const std::vector<ee::Sprite*>& sprs, const 
 	Json::Value val;
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
 		const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(sprs[i]->GetSymbol());
-		val[i]["filepath"] = ee::FileHelper::GetRelativePath(dir, sym->GetFilepath());
+		val[i]["filepath"] = ee::SymbolPath::GetRelativePath(sym, dir);
 		sprs[i]->Store(val[i], dir);
 	}
 	return val;
