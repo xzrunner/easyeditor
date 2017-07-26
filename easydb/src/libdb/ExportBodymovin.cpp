@@ -100,7 +100,8 @@ void ExportBodymovin::Trigger(const std::string& src_file, const std::string& ds
  				for (int j = 0, m = a.layers.size(); j < m; ++j) 
  				{
  					const gum::BodymovinParser::Layer& layer = a.layers[j];
- 					if (layer.layer_type == gum::BodymovinParser::LAYER_SOLID) {
+ 					if (layer.layer_type == gum::BodymovinParser::LAYER_SOLID ||
+						layer.layer_type == gum::BodymovinParser::LAYER_NULL) {
  						continue;
  					}
  					const std::string& id = a.layers[j].ref_id;
