@@ -3,6 +3,8 @@
 
 #include "ICommand.h"
 
+#include <vector>
+
 namespace edb
 {
 
@@ -23,6 +25,9 @@ public:
 
 private:
 	void Trigger(const std::string& src_file, const std::string& dst_dir);
+
+	void FixFontLayers(const std::string& dir);
+	void FixFontLayer(const std::string& filepath, const std::string& dir);
 
 }; // ExportBodymovin
 
