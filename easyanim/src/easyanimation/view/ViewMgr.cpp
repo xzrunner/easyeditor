@@ -58,10 +58,12 @@ void ViewMgr::OnNotify(int sj_id, void* ud)
 				if (cf->frame != -1) {
 					m_frame = cf->frame;
 				}
-				Layer* layer = DataMgr::Instance()->GetLayers().GetLayer(m_layer);
-				KeyFrame* frame = layer->GetCurrKeyFrame(m_frame + 1);
-				UpdateProperty(frame);
-				UpdateViewlist(frame);
+				if (m_layer != -1) {
+					Layer* layer = DataMgr::Instance()->GetLayers().GetLayer(m_layer);
+					KeyFrame* frame = layer->GetCurrKeyFrame(m_frame + 1);
+					UpdateProperty(frame);
+					UpdateViewlist(frame);
+				}
 			}
 		}
 		break;
