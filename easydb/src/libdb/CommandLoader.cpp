@@ -81,6 +81,7 @@
 #include "Cropping.h"
 #include "TranslateJson.h"
 #include "ExportBodymovin.h"
+#include "CalcImageArea.h"
 
 namespace edb
 {
@@ -167,6 +168,7 @@ void CommandLoader::Init()
 	fc->Register(Cropping::Create());
 	fc->Register(TranslateJson::Create());
 	fc->Register(ExportBodymovin::Create());
+	fc->Register(CalcImageArea::Create());
 }
 
 }

@@ -429,6 +429,14 @@
 				Name="image"
 				>
 				<File
+					RelativePath="..\..\..\src\libdb\CalcImageArea.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libdb\CalcImageArea.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libdb\CreateColLUT.cpp"
 					>
 				</File>
