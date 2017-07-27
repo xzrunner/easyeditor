@@ -272,8 +272,10 @@ void SkeletonData::UpdateJoint(ee::Sprite* spr, float dAngle)
 }
 
 void SkeletonData::GetTweenSprites(SkeletonData& start, SkeletonData& end, 
-								   std::vector<ee::Sprite*>& tween, float process)
+								   std::vector<ee::Sprite*>& tween, int time, int tot_time)
 {
+	float process = static_cast<float>(time) / tot_time;
+
 	SkeletonData mid;
 	mid.CopyFrom(start);
 

@@ -22,6 +22,7 @@ private:
 
 	wxSizer* InitCircleLayout();
 	wxSizer* InitSpiralLayout();
+	wxSizer* InitWiggleLayout();
 
 private:
 	KeyFrame* m_frame;
@@ -32,6 +33,9 @@ private:
 	wxCheckBox* m_pos_spiral;
 	wxSpinCtrl *m_spiral_angle_begin, *m_spiral_angle_end;
 	wxSpinCtrl* m_spiral_scale;
+
+	wxCheckBox* m_pos_wiggle;
+	wxSpinCtrl *m_wiggle_freq, *m_wiggle_amp;
 
 }; // FrameLerpDialog
 

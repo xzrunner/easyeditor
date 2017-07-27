@@ -21,6 +21,7 @@
 #include <sprite2/LerpType.h>
 #include <sprite2/LerpCircle.h>
 #include <sprite2/LerpSpiral.h>
+#include <sprite2/LerpWiggle.h>
 
 #include <fstream>
 
@@ -186,6 +187,14 @@ Json::Value FileSaver::StoreLerp(KeyFrame* frame)
 				val["angle_begin"] = static_cast<int>(begin * SM_RAD_TO_DEG);
 				val["angle_end"]   = static_cast<int>(end * SM_RAD_TO_DEG);
 				val["scale"] = static_cast<int>(spiral->GetScale() * 100);
+			}
+			break;
+		case s2::LERP_WIGGLE:
+			{
+				val["type"] = "wiggle";
+				s2::LerpWiggle* wiggle = static_cast<s2::LerpWiggle*>(lerp);
+				val["freq"] = wiggle->GetFreq();
+				val["amp"] = wiggle->GetAmp();
 			}
 			break;
 		}

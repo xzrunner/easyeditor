@@ -150,7 +150,7 @@ void KeyFrame::SetLerp(int data, s2::ILerp* lerp)
 }
 
 void KeyFrame::GetTweenSprite(const KeyFrame* start, const KeyFrame* end, 
-							  std::vector<ee::Sprite*>& tween, float process)
+							  std::vector<ee::Sprite*>& tween, int time, int tot_time)
 {
 	// 	// old
 	// 	for (int i = 0, n = start->Size(); i < n; ++i)
@@ -170,7 +170,7 @@ void KeyFrame::GetTweenSprite(const KeyFrame* start, const KeyFrame* end,
 	SkeletonData &s_skeleton = const_cast<KeyFrame*>(start)->GetSkeletonData(),
 		         &e_skeleton = const_cast<KeyFrame*>(end)->GetSkeletonData();
 	if (!s_skeleton.Empty() && !e_skeleton.Empty()) {
-		SkeletonData::GetTweenSprites(s_skeleton, e_skeleton, tween, process);
+		SkeletonData::GetTweenSprites(s_skeleton, e_skeleton, tween, time, tot_time);
 	} else {
 		std::vector<s2::Sprite*> begins, ends, tweens;
 		begins.reserve(start->m_sprs.size());
@@ -183,7 +183,7 @@ void KeyFrame::GetTweenSprite(const KeyFrame* start, const KeyFrame* end,
 		for (int i = 0, n = start->m_lerps.size(); i < n; ++i) {
 			lerps.push_back(std::make_pair(s2::AnimLerp::SprData(start->m_lerps[i].first), start->m_lerps[i].second));
 		}
-		s2::AnimLerp::Lerp(begins, ends, tweens, process, lerps);
+		s2::AnimLerp::Lerp(begins, ends, tweens, time, tot_time, lerps);
 
 		tween.reserve(tweens.size());
 		for (int i = 0, n = tweens.size(); i < n; ++i) {

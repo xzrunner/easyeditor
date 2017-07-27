@@ -46,7 +46,7 @@ public:
 		return m_map_joints; }
 
 	static void GetTweenSprites(SkeletonData& start, SkeletonData& end, 
-		std::vector<ee::Sprite*>& tween, float process);
+		std::vector<ee::Sprite*>& tween, int time, int tot_time);
 
 private:
 	void Clean();

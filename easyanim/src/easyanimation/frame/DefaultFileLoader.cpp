@@ -19,6 +19,7 @@
 #include <sprite2/LerpType.h>
 #include <sprite2/LerpCircle.h>
 #include <sprite2/LerpSpiral.h>
+#include <sprite2/LerpWiggle.h>
 
 namespace eanim
 {
@@ -137,6 +138,13 @@ void DefaultFileLoader::LoadLerp(KeyFrame* frame, const Json::Value& value)
 			float scale = val["scale"].asInt() * 0.01f;
 			s2::LerpSpiral* spiral = new s2::LerpSpiral(begin, end, scale);
 			frame->SetLerp(key, spiral);
+		}
+		else if (val["type"].asString() == "wiggle")
+		{
+			float freq = val["freq"].asDouble();
+			float amp = val["amp"].asDouble();
+			s2::LerpWiggle* wiggle = new s2::LerpWiggle(freq, amp);
+			frame->SetLerp(key, wiggle);
 		}
 	}
 }

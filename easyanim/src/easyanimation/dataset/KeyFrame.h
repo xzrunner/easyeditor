@@ -57,7 +57,8 @@ public:
 	void SetLerp(int data, s2::ILerp* lerp);
 	const std::vector<std::pair<int, s2::ILerp*> >& GetLerps() const { return m_lerps; }
 
-	static void GetTweenSprite(const KeyFrame* start, const KeyFrame* end, std::vector<ee::Sprite*>& tween, float process);
+	static void GetTweenSprite(const KeyFrame* start, const KeyFrame* end, 
+		std::vector<ee::Sprite*>& tween, int time, int tot_time);
 
 // private:
 // 	void GetTweenSprite(ee::Sprite* start, ee::Sprite* end, ee::Sprite* tween, float process) const;

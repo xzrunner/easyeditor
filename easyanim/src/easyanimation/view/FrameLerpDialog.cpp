@@ -3,6 +3,7 @@
 
 #include <sprite2/LerpCircle.h>
 #include <sprite2/LerpSpiral.h>
+#include <sprite2/LerpWiggle.h>
 #include <sprite2/AnimLerp.h>
 #include <sm_const.h>
 
@@ -15,7 +16,7 @@ namespace eanim
 {
 
 FrameLerpDialog::FrameLerpDialog(wxWindow* parent, KeyFrame* frame)
-	: wxDialog(parent, wxID_ANY, "Lerp")
+	: wxDialog(parent, wxID_ANY, "Lerp", wxDefaultPosition, wxSize(300, 400))
 	, m_frame(frame)
 {
 	InitLayout();
@@ -37,6 +38,13 @@ void FrameLerpDialog::Store()
 		s2::LerpSpiral* lerp = new s2::LerpSpiral(start, end, scale);
 		m_frame->SetLerp(s2::AnimLerp::SPR_POS, lerp);
 	}
+	else if (m_pos_wiggle->IsChecked())
+	{
+		float freq = m_wiggle_freq->GetValue();
+		float amp = m_wiggle_amp->GetValue();
+		s2::LerpWiggle* lerp = new s2::LerpWiggle(freq, amp);
+		m_frame->SetLerp(s2::AnimLerp::SPR_POS, lerp);
+	}
 	else
 	{
 		m_frame->SetLerp(s2::AnimLerp::SPR_POS, NULL);
@@ -50,6 +58,8 @@ void FrameLerpDialog::InitLayout()
 	sizer->Add(InitCircleLayout());
 	sizer->AddSpacer(10);
 	sizer->Add(InitSpiralLayout());
+	sizer->AddSpacer(10);
+	sizer->Add(InitWiggleLayout());	
 
 	{
 		SetEscapeId(wxID_CANCEL);
@@ -157,6 +167,58 @@ wxSizer* FrameLerpDialog::InitSpiralLayout()
 		sizer->Add(m_spiral_scale);
 
 		top_sizer->Add(sizer);
+	}
+
+	return top_sizer;
+}
+
+wxSizer* FrameLerpDialog::InitWiggleLayout()
+{
+	wxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
+
+	float freq = 0;
+	float amp = 0;
+
+	bool pos_wiggle = false;
+	const std::vector<std::pair<int, s2::ILerp*> >& lerps = m_frame->GetLerps();
+	for (int i = 0, n = lerps.size(); i < n; ++i) 
+	{
+		if (lerps[i].first == s2::AnimLerp::SPR_POS &&
+			lerps[i].second->Type() == s2::LERP_WIGGLE) 
+		{
+			pos_wiggle = true;
+			s2::LerpWiggle* lerp = static_cast<s2::LerpWiggle*>(lerps[i].second);
+			freq = lerp->GetFreq();
+			amp = lerp->GetAmp();
+			break;
+		}
+	}
+
+	m_pos_wiggle = new wxCheckBox(this, wxID_ANY, ("位置wiggle插值"));
+	m_pos_wiggle->SetValue(pos_wiggle);
+	top_sizer->Add(m_pos_wiggle);
+
+	top_sizer->AddSpacer(10);
+	{
+		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
+		sizer->Add(new wxStaticText(this, wxID_ANY, "频率"));
+
+		m_wiggle_freq = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, 
+			wxDefaultSize, wxSP_ARROW_KEYS, 0, 1000, freq);
+		sizer->Add(m_wiggle_freq);
+	
+		top_sizer->Add(sizer);
+	}
+	top_sizer->AddSpacer(5);
+	{
+		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
+		sizer->Add(new wxStaticText(this, wxID_ANY, "幅度"));
+
+		m_wiggle_amp = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, 
+			wxDefaultSize, wxSP_ARROW_KEYS, -1000, 1000, amp);
+		sizer->Add(m_wiggle_amp);
+
+		top_sizer->Add(sizer);		
 	}
 
 	return top_sizer;

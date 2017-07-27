@@ -174,9 +174,8 @@ void Layer::InsertKeyFrame(int time)
 		KeyFrame *prev = GetPrevKeyFrame(time),
 			     *next = GetNextKeyFrame(time);
 		if (prev->HasClassicTween() && next) {
-			float process = (float) (time - prev->GetTime()) / (next->GetTime() - prev->GetTime());
 			std::vector<ee::Sprite*> sprs;
-			KeyFrame::GetTweenSprite(prev, next, sprs, process);
+			KeyFrame::GetTweenSprite(prev, next, sprs, time - prev->GetTime(), next->GetTime() - prev->GetTime());
 			for (int i = 0, n = sprs.size(); i < n; ++i) {
 				frame->Insert(sprs[i], INT_MAX);
 			}
