@@ -20,6 +20,7 @@
 #include <sprite2/LerpCircle.h>
 #include <sprite2/LerpSpiral.h>
 #include <sprite2/LerpWiggle.h>
+#include <sprite2/LerpEase.h>
 
 namespace eanim
 {
@@ -145,6 +146,12 @@ void DefaultFileLoader::LoadLerp(KeyFrame* frame, const Json::Value& value)
 			float amp = val["amp"].asDouble();
 			s2::LerpWiggle* wiggle = new s2::LerpWiggle(freq, amp);
 			frame->SetLerp(key, wiggle);
+		}
+		else if (val["type"].asString() == "ease")
+		{
+			int type = val["ease"].asInt();
+			s2::LerpEase* ease = new s2::LerpEase(type);
+			frame->SetLerp(key, ease);
 		}
 	}
 }

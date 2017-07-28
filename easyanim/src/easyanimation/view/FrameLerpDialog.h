@@ -2,8 +2,13 @@
 #define _EASYANIM_KEYS_FRAME_LERP_DIALOG_H_
 
 #include <wx/dialog.h>
+#include <wx/choice.h>
+
+#include <vector>
 
 class wxCheckBox;
+
+namespace s2 { class ILerp; }
 
 namespace eanim
 {
@@ -23,6 +28,10 @@ private:
 	wxSizer* InitCircleLayout();
 	wxSizer* InitSpiralLayout();
 	wxSizer* InitWiggleLayout();
+	wxSizer* InitEaseLayout();
+
+	static s2::ILerp* QueryLerp(const std::vector<std::pair<int, s2::ILerp*> >& lerps,
+		int data_type, int lerp_type);
 
 private:
 	KeyFrame* m_frame;
@@ -36,6 +45,8 @@ private:
 
 	wxCheckBox* m_pos_wiggle;
 	wxSpinCtrl *m_wiggle_freq, *m_wiggle_amp;
+
+	wxChoice *m_ease_pos, *m_ease_scale, *m_ease_rotate;
 
 }; // FrameLerpDialog
 

@@ -22,6 +22,7 @@
 #include <sprite2/LerpCircle.h>
 #include <sprite2/LerpSpiral.h>
 #include <sprite2/LerpWiggle.h>
+#include <sprite2/LerpEase.h>
 
 #include <fstream>
 
@@ -195,6 +196,13 @@ Json::Value FileSaver::StoreLerp(KeyFrame* frame)
 				s2::LerpWiggle* wiggle = static_cast<s2::LerpWiggle*>(lerp);
 				val["freq"] = wiggle->GetFreq();
 				val["amp"] = wiggle->GetAmp();
+			}
+			break;
+		case s2::LERP_EASE:
+			{
+				val["type"] = "ease";
+				s2::LerpEase* ease = static_cast<s2::LerpEase*>(lerp);
+				val["ease"] = ease->GetEaseType();
 			}
 			break;
 		}

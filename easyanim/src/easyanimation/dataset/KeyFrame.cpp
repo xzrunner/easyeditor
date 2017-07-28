@@ -128,25 +128,16 @@ void KeyFrame::OnActive()
 
 void KeyFrame::SetLerp(int data, s2::ILerp* lerp)
 {
-	if (data != s2::AnimLerp::SPR_POS) {
-		return;
-	}
-
-	assert(m_lerps.size() <= 1);
-	if (lerp) {
-		if (m_lerps.empty()) {
-			m_lerps.push_back(std::make_pair(s2::AnimLerp::SPR_POS, lerp));
-		} else {
-			assert(m_lerps[0].first == s2::AnimLerp::SPR_POS);
-			delete m_lerps[0].second;
-			m_lerps[0].second = lerp;
-		}
-	} else {
-		if (!m_lerps.empty()) {
-			delete m_lerps[0].second;
-			m_lerps.clear();
+	for (int i = 0, n = m_lerps.size(); i < n; ++i)
+	{
+		if (m_lerps[i].first == data) 
+		{
+			delete m_lerps[i].second;
+			m_lerps[i].second = lerp;
+			return;
 		}
 	}
+	m_lerps.push_back(std::make_pair(data, lerp));
 }
 
 void KeyFrame::GetTweenSprite(const KeyFrame* start, const KeyFrame* end, 

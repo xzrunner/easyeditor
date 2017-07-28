@@ -4,6 +4,7 @@
 #include <sprite2/LerpCircle.h>
 #include <sprite2/LerpSpiral.h>
 #include <sprite2/LerpWiggle.h>
+#include <sprite2/LerpEase.h>
 #include <sprite2/AnimLerp.h>
 #include <sm_const.h>
 
@@ -11,6 +12,7 @@
 #include <wx/stattext.h>
 #include <wx/checkbox.h>
 #include <wx/spinctrl.h>
+#include <wx/textctrl.h>
 
 namespace eanim
 {
@@ -45,6 +47,21 @@ void FrameLerpDialog::Store()
 		s2::LerpWiggle* lerp = new s2::LerpWiggle(freq, amp);
 		m_frame->SetLerp(s2::AnimLerp::SPR_POS, lerp);
 	}
+	else if (m_ease_pos->GetSelection() > 1 || m_ease_scale->GetSelection() > 1 || m_ease_rotate->GetSelection() > 1)
+	{
+		if (m_ease_pos->GetSelection() > 1) {
+			s2::LerpEase* lerp = new s2::LerpEase(m_ease_pos->GetSelection());
+			m_frame->SetLerp(s2::AnimLerp::SPR_POS, lerp);
+		}
+		if (m_ease_scale->GetSelection() > 1) {
+			s2::LerpEase* lerp = new s2::LerpEase(m_ease_scale->GetSelection());
+			m_frame->SetLerp(s2::AnimLerp::SPR_SCALE, lerp);
+		}
+		if (m_ease_rotate->GetSelection() > 1) {
+			s2::LerpEase* lerp = new s2::LerpEase(m_ease_rotate->GetSelection());
+			m_frame->SetLerp(s2::AnimLerp::SPR_ROTATE, lerp);
+		}
+	}
 	else
 	{
 		m_frame->SetLerp(s2::AnimLerp::SPR_POS, NULL);
@@ -60,6 +77,8 @@ void FrameLerpDialog::InitLayout()
 	sizer->Add(InitSpiralLayout());
 	sizer->AddSpacer(10);
 	sizer->Add(InitWiggleLayout());	
+	sizer->AddSpacer(10);
+	sizer->Add(InitEaseLayout());	
 
 	{
 		SetEscapeId(wxID_CANCEL);
@@ -76,25 +95,17 @@ wxSizer* FrameLerpDialog::InitCircleLayout()
 {
 	wxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
 
-	bool pos_circle = false;
-	int circle_scale = 100;
-
-	const std::vector<std::pair<int, s2::ILerp*> >& lerps = m_frame->GetLerps();
-	for (int i = 0, n = lerps.size(); i < n; ++i) 
-	{
-		if (lerps[i].first == s2::AnimLerp::SPR_POS &&
-			lerps[i].second->Type() == s2::LERP_CIRCLE) 
-		{
-			pos_circle = true;
-			s2::LerpCircle* lerp = static_cast<s2::LerpCircle*>(lerps[i].second);
-			circle_scale = lerp->GetScale() * 100;
-			break;
-		}
-	}
-
 	m_pos_circle = new wxCheckBox(this, wxID_ANY, ("位置circle插值"));
-	m_pos_circle->SetValue(pos_circle);
 	top_sizer->Add(m_pos_circle);
+
+	int circle_scale = 100;
+	if (s2::ILerp* lerp = QueryLerp(m_frame->GetLerps(), s2::AnimLerp::SPR_POS, s2::LERP_CIRCLE))
+	{
+		m_pos_circle->SetValue(true);
+
+		s2::LerpCircle* circle = static_cast<s2::LerpCircle*>(lerp);
+		circle_scale = circle->GetScale() * 100;
+	}
 
 	{
 		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -114,30 +125,22 @@ wxSizer* FrameLerpDialog::InitSpiralLayout()
 {
 	wxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
 
-	bool pos_spiral = false;
+	m_pos_spiral = new wxCheckBox(this, wxID_ANY, ("位置spiral插值"));
+	top_sizer->Add(m_pos_spiral);
+
 	int sprial_begin = 0, sprial_end = 0;
 	int sprial_scale = 100;
-
-	const std::vector<std::pair<int, s2::ILerp*> >& lerps = m_frame->GetLerps();
-	for (int i = 0, n = lerps.size(); i < n; ++i) 
+	if (s2::ILerp* lerp = QueryLerp(m_frame->GetLerps(), s2::AnimLerp::SPR_POS, s2::LERP_SPIRAL))
 	{
-		if (lerps[i].first == s2::AnimLerp::SPR_POS &&
-			lerps[i].second->Type() == s2::LERP_SPIRAL) 
-		{
-			pos_spiral = true;
-			s2::LerpSpiral* lerp = static_cast<s2::LerpSpiral*>(lerps[i].second);
-			float begin, end;
-			lerp->GetAngle(begin, end);
-			sprial_begin = begin * SM_RAD_TO_DEG;
-			sprial_end = end * SM_RAD_TO_DEG;
-			sprial_scale = lerp->GetScale() * 100;
-			break;
-		}
-	}
+		m_pos_spiral->SetValue(true);
 
-	m_pos_spiral = new wxCheckBox(this, wxID_ANY, ("位置spiral插值"));
-	m_pos_spiral->SetValue(pos_spiral);
-	top_sizer->Add(m_pos_spiral);
+		s2::LerpSpiral* spiral = static_cast<s2::LerpSpiral*>(lerp);
+		float begin, end;
+		spiral->GetAngle(begin, end);
+		sprial_begin = begin * SM_RAD_TO_DEG;
+		sprial_end = end * SM_RAD_TO_DEG;
+		sprial_scale = spiral->GetScale() * 100;
+	}
 
 	top_sizer->AddSpacer(10);
 	{
@@ -176,27 +179,19 @@ wxSizer* FrameLerpDialog::InitWiggleLayout()
 {
 	wxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
 
+	m_pos_wiggle = new wxCheckBox(this, wxID_ANY, ("位置wiggle插值"));
+	top_sizer->Add(m_pos_wiggle);
+
 	float freq = 0;
 	float amp = 0;
-
-	bool pos_wiggle = false;
-	const std::vector<std::pair<int, s2::ILerp*> >& lerps = m_frame->GetLerps();
-	for (int i = 0, n = lerps.size(); i < n; ++i) 
+	if (s2::ILerp* lerp = QueryLerp(m_frame->GetLerps(), s2::AnimLerp::SPR_POS, s2::LERP_WIGGLE))
 	{
-		if (lerps[i].first == s2::AnimLerp::SPR_POS &&
-			lerps[i].second->Type() == s2::LERP_WIGGLE) 
-		{
-			pos_wiggle = true;
-			s2::LerpWiggle* lerp = static_cast<s2::LerpWiggle*>(lerps[i].second);
-			freq = lerp->GetFreq();
-			amp = lerp->GetAmp();
-			break;
-		}
-	}
+		m_pos_wiggle->SetValue(true);
 
-	m_pos_wiggle = new wxCheckBox(this, wxID_ANY, ("位置wiggle插值"));
-	m_pos_wiggle->SetValue(pos_wiggle);
-	top_sizer->Add(m_pos_wiggle);
+		s2::LerpWiggle* wiggle = static_cast<s2::LerpWiggle*>(lerp);
+		freq = wiggle->GetFreq();
+		amp = wiggle->GetAmp();
+	}
 
 	top_sizer->AddSpacer(10);
 	{
@@ -222,6 +217,117 @@ wxSizer* FrameLerpDialog::InitWiggleLayout()
 	}
 
 	return top_sizer;
+}
+
+wxSizer* FrameLerpDialog::InitEaseLayout()
+{
+	wxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
+
+	const int size = 32;
+	wxString choices[size] = {
+		"unknown",
+		"linear",
+
+		"in quad",
+		"in cubic",
+		"in quart",
+		"in quint",
+		"in sine",
+		"in expo",
+		"in circ",
+		"in elastic",
+		"in back",
+		"in bounce",
+
+		"out quad",
+		"out cubic",
+		"out quart",
+		"out quint",
+		"out sine",
+		"out expo",
+		"out circ",
+		"out elastic",
+		"out back",
+		"out bounce",
+
+		"in out quad",
+		"in out cubic",
+		"in out quart",
+		"in out quint",
+		"in out sine",
+		"in out expo",
+		"in out circ",
+		"in out elastic",
+		"in out back",
+		"in out bounce"
+	};
+
+	{
+		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
+
+		sizer->Add(new wxTextCtrl(this, wxID_ANY, "位移"));
+
+		m_ease_pos = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, size, choices);
+		sizer->Add(m_ease_pos);
+
+		if (s2::ILerp* lerp = QueryLerp(m_frame->GetLerps(), s2::AnimLerp::SPR_POS, s2::LERP_EASE)) {
+			int type = static_cast<s2::LerpEase*>(lerp)->GetEaseType();
+			m_ease_pos->SetSelection(type);
+		} else {
+			m_ease_pos->SetSelection(1);
+		}
+
+		top_sizer->Add(sizer);
+	}
+	{
+		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
+
+		sizer->Add(new wxTextCtrl(this, wxID_ANY, "缩放"));
+
+		m_ease_scale = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, size, choices);
+		sizer->Add(m_ease_scale);
+
+		if (s2::ILerp* lerp = QueryLerp(m_frame->GetLerps(), s2::AnimLerp::SPR_SCALE, s2::LERP_EASE)) {
+			int type = static_cast<s2::LerpEase*>(lerp)->GetEaseType();
+			m_ease_scale->SetSelection(type);
+		} else {
+			m_ease_scale->SetSelection(1);
+		}
+
+		top_sizer->Add(sizer);
+	}
+	{
+		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
+
+		sizer->Add(new wxTextCtrl(this, wxID_ANY, "旋转"));
+
+		m_ease_rotate = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, size, choices);
+		sizer->Add(m_ease_rotate);
+
+		if (s2::ILerp* lerp = QueryLerp(m_frame->GetLerps(), s2::AnimLerp::SPR_ROTATE, s2::LERP_EASE)) {
+			int type = static_cast<s2::LerpEase*>(lerp)->GetEaseType();
+			m_ease_rotate->SetSelection(type);
+		} else {
+			m_ease_rotate->SetSelection(1);
+		}
+
+		top_sizer->Add(sizer);
+	}
+	return top_sizer;
+}
+
+s2::ILerp* FrameLerpDialog::QueryLerp(const std::vector<std::pair<int, s2::ILerp*> >& lerps,
+									  int data_type, int lerp_type)
+{
+	std::vector<std::pair<int, s2::ILerp*> >::const_iterator 
+		itr = lerps.begin();
+	for ( ; itr != lerps.end(); ++itr) {
+		if (itr->first == data_type &&
+			itr->second->Type() == lerp_type) {
+			return itr->second;
+		}
+	}
+	return NULL;
 }
 
 }
