@@ -14,6 +14,7 @@ class Symbol;
 class Sprite : public s2::TextboxSprite, public ee::Sprite
 {
 public:
+	Sprite();
 	Sprite(const Sprite& spr);
 	Sprite& operator = (const Sprite& spr);
 	Sprite(Symbol* sym);
@@ -37,10 +38,15 @@ public:
 	const std::string& GetTID() const { return m_tid; }
 	void SetTID(const std::string& tid) { m_tid = tid; }	
 
+	bool IsExport() const { return m_export; }
+	void SetExport(bool exp) { m_export = exp; }
+
 	static ee::Sprite* Create(ee::Symbol* sym);
 
 private:
 	std::string m_tid;
+
+	bool m_export;
 
 }; // Sprite
 

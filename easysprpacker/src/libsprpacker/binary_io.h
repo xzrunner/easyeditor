@@ -93,6 +93,66 @@ void unpack_str(std::string& str, uint8_t** ptr) {
 	}
 }
 
+/************************************************************************/
+/* long string                                                          */
+/************************************************************************/
+
+inline 
+int sizeof_pack_long_str(const std::string& str) {
+	if (str.empty()) {
+		return sizeof(uint16_t);
+	} else {
+		if (str.size() > 0xffff) {
+			throw ee::Exception("%s is too long", str.c_str());
+		}
+		return sizeof(uint16_t) + str.size();
+	}
+}
+
+inline 
+int sizeof_unpack_long_str(const std::string& str) {
+	if (str.empty()) {
+		return 0;
+	} else {
+		if (str.size() > 0xffff) {
+			throw ee::Exception("%s is too long", str.c_str());
+		}
+		int n = str.size();
+		return (n+1+3) & ~3;
+	}
+}
+
+inline 
+void pack_long_str(const std::string& str, uint8_t** ptr) {
+	if (str.empty()) {
+		uint16_t c = 0xffff;
+		pack(c, ptr);
+	} else {
+		assert(str.size() <= 0xffff);
+		uint16_t sz = str.size();
+		pack(sz, ptr);
+		for (int i = 0; i < sz; ++i) {
+			uint8_t c = str[i];
+			pack(c, ptr);
+		}
+	}
+}
+
+inline 
+void unpack_long_str(std::string& str, uint8_t** ptr) {
+	uint16_t sz;
+	unpack(sz, ptr);
+	if (sz == 0xffff) {
+		;
+	} else {
+		for (int i = 0; i < sz; ++i) {
+			uint8_t c;
+			unpack(c, ptr);
+			str.push_back((char)c);
+		}
+	}
+}
+
 }
 
 #endif // _EASYSPRPACKER_BINARY_IO_H_

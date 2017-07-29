@@ -11,12 +11,18 @@
 namespace etext
 {
 
+Sprite::Sprite()
+	: m_export(false)
+{
+}
+
 Sprite::Sprite(const Sprite& spr)
 	: s2::Sprite(spr)
 	, s2::TextboxSprite(spr)
 	, ee::Sprite(spr)
+	, m_tid(spr.m_tid)
+	, m_export(spr.m_export)
 {
-	m_tid = spr.m_tid;
 }
 
 Sprite& Sprite::operator = (const Sprite& spr)
@@ -24,7 +30,10 @@ Sprite& Sprite::operator = (const Sprite& spr)
 	s2::Sprite::operator = (spr);
 	s2::TextboxSprite::operator = (spr);
 	ee::Sprite::operator = (spr);
+
 	m_tid = spr.m_tid;
+	m_export = spr.m_export;
+
 	return *this;
 }
 
@@ -32,6 +41,7 @@ Sprite::Sprite(Symbol* sym)
 	: s2::Sprite(sym)
 	, s2::TextboxSprite(sym)
 	, ee::Sprite(sym)
+	, m_export(false)
 {
 }
 
@@ -46,8 +56,9 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 
 	const Json::Value& text_val = val["text"];
 
-	m_text	= text_val["text"].asString();
-	m_tid	= text_val["tid"].asString();
+	m_text	 = text_val["text"].asString();
+	m_tid	 = text_val["tid"].asString();
+	m_export = text_val["export"].asBool();
 
 	gum::TextboxLoader loader(m_tb);
 	loader.LoadJson(text_val);
@@ -83,6 +94,7 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 
 	text_val["text"]			= m_text;
 	text_val["tid"]				= m_tid;
+	text_val["export"]          = m_export;
 
 	text_val["overflow"]		= m_tb.overflow;
 

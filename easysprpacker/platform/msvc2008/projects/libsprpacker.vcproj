@@ -628,6 +628,10 @@
 				RelativePath="..\..\..\src\libsprpacker\PackToLua.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\libsprpacker\Version.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath=".\NodeBuilder.rc"

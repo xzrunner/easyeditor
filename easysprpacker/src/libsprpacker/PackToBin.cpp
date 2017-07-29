@@ -4,6 +4,7 @@
 #include "ExportNameSet.h"
 #include "binary_io.h"
 #include "PackIDMgr.h"
+#include "Version.h"
 
 #include <ee/StringHelper.h>
 
@@ -114,6 +115,10 @@ void PackToBin::PageIndex(const std::string& filepath, const std::vector<Page*>&
 
 	int sz = 0;
 
+	// version
+	sz += sizeof(uint16_t);					// version flag
+	sz += sizeof(uint16_t);					// version
+
 	// export
 	sz += sizeof(uint16_t);					// num
 	std::map<std::string, int>::const_iterator itr = exports.begin();
@@ -143,6 +148,12 @@ void PackToBin::PageIndex(const std::string& filepath, const std::vector<Page*>&
 
 	uint8_t* buf = new uint8_t[sz];
 	uint8_t* ptr = buf;
+
+	// version
+	uint16_t version_flag = 0xffff;
+	pack(version_flag, &ptr);
+	uint16_t version = VERSION;
+	pack(version, &ptr);
 
 	// export
 	uint16_t export_n = exports.size();

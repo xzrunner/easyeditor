@@ -57,9 +57,11 @@ void PackLabel::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TextureP
 	lua::connect(gen, 1, 
 		lua::assign("richtext", m_tb.richtext));
 
-	lua::connect(gen, 2, 
-		lua::assign("text", "\"" + m_text + "\""),
-		lua::assign("tid", "\"" + m_tid + "\""));
+	if (m_export) {
+		lua::connect(gen, 2, 
+			lua::assign("text", "\"" + m_text + "\""),
+			lua::assign("tid", "\"" + m_tid + "\""));
+	}
 
 	gen.detab();
 	gen.line("},");
@@ -68,10 +70,13 @@ void PackLabel::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TextureP
 int PackLabel::SizeOfUnpackFromBin() const
 {
 	int sz = simp::NodeLabel::Size();
-// 	sz += sizeof_unpack_str(m_text);	
-// 	sz += sizeof_unpack_str(m_tid);	
-	sz += sizeof_unpack_str("");	
-	sz += sizeof_unpack_str("");	
+	if (m_export) {
+	 	sz += sizeof_unpack_long_str(m_text);	
+	 	sz += sizeof_unpack_str(m_tid);	
+	} else {
+		sz += sizeof_unpack_long_str("");	
+		sz += sizeof_unpack_str("");
+	}
 	return sz;
 }
 
@@ -98,10 +103,13 @@ int PackLabel::SizeOfPackToBin() const
 
 	sz += sizeof(uint8_t);				// richtext & overflow
 
-// 	sz += sizeof_pack_str(m_text);		// text
-// 	sz += sizeof_pack_str(m_tid);		// tid
-	sz += sizeof_pack_str("");		// text
-	sz += sizeof_pack_str("");		// tid
+	if (m_export) {
+	 	sz += sizeof_pack_long_str(m_text);	// text
+	 	sz += sizeof_pack_str(m_tid);		// tid
+	} else {
+		sz += sizeof_pack_long_str("");		// text
+		sz += sizeof_pack_str("");			// tid
+	}
 
 	return sz;
 }
@@ -147,10 +155,13 @@ void PackLabel::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 	uint8_t pack8 = (richtext) | (overflow << 1);
 	pack(pack8, ptr);
 
-// 	pack_str(m_text, ptr);
-// 	pack_str(m_tid, ptr);
-	pack_str("", ptr);
-	pack_str("", ptr);
+	if (m_export) {
+	 	pack_long_str(m_text, ptr);
+	 	pack_str(m_tid, ptr);
+	} else {
+		pack_long_str("", ptr);
+		pack_str("", ptr);
+	}
 }
 
 void PackLabel::Init(const etext::Sprite* spr)
@@ -159,6 +170,8 @@ void PackLabel::Init(const etext::Sprite* spr)
 
 	m_text = gum::StringHelper::GBKToUTF8(spr->GetText(s2::UpdateParams()));
 	m_tid = gum::StringHelper::GBKToUTF8(spr->GetTID());
+
+	m_export = spr->IsExport();
 }
 
 }

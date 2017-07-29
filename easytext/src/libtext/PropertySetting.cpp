@@ -84,6 +84,8 @@ void PropertySetting::OnPropertyGridChange(const std::string& name, const wxAny&
 		spr->SetText(up, text);
 	} else if (name == "TextID") {
 		spr->SetTID(wxANY_AS(value, wxString).ToStdString());
+	} else if (name == "Export") {
+		spr->SetExport(wxANY_AS(value, bool));
 	}
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -129,6 +131,7 @@ void PropertySetting::UpdateProperties(wxPropertyGrid* pg)
 
 	pg->GetProperty("TextContent")->SetValue(spr->GetText(s2::UpdateParams()));
 	pg->GetProperty("TextID")->SetValue(spr->GetTID());
+	pg->GetProperty("Export")->SetValue(spr->IsExport());
 }
 
 void PropertySetting::InitProperties(wxPropertyGrid* pg)
@@ -195,6 +198,9 @@ void PropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	pg->Append(new wxStringProperty("TextContent", wxPG_LABEL, spr->GetText(s2::UpdateParams())));
 	pg->Append(new wxStringProperty("TextID", wxPG_LABEL, spr->GetTID()));
+
+	pg->Append(new wxBoolProperty("Export", wxPG_LABEL, spr->IsExport()));
+	pg->SetPropertyAttribute("Export", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 }
 
 }

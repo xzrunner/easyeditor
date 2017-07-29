@@ -44,6 +44,8 @@ private:
 	std::string m_text;
 	std::string m_tid;
 
+	bool m_export;
+
 }; // PackLabel
 
 }
