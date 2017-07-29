@@ -126,7 +126,7 @@ void KeyFrame::OnActive()
 	}
 }
 
-void KeyFrame::SetLerp(int data, s2::ILerp* lerp)
+void KeyFrame::SetLerp(s2::AnimLerp::SprData data, s2::ILerp* lerp)
 {
 	for (int i = 0, n = m_lerps.size(); i < n; ++i)
 	{
@@ -172,7 +172,7 @@ void KeyFrame::GetTweenSprite(const KeyFrame* start, const KeyFrame* end,
 		std::vector<std::pair<s2::AnimLerp::SprData, s2::ILerp*> > lerps;
 		lerps.reserve(start->m_lerps.size());
 		for (int i = 0, n = start->m_lerps.size(); i < n; ++i) {
-			lerps.push_back(std::make_pair(s2::AnimLerp::SprData(start->m_lerps[i].first), start->m_lerps[i].second));
+			lerps.push_back(start->m_lerps[i]);
 		}
 		s2::AnimLerp::Lerp(begins, ends, tweens, time, tot_time, lerps);
 

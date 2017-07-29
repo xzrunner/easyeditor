@@ -17,12 +17,6 @@
 
 #include <sprite2/SymType.h>
 #include <sprite2/DrawRT.h>
-#include <sprite2/ILerp.h>
-#include <sprite2/LerpType.h>
-#include <sprite2/LerpCircle.h>
-#include <sprite2/LerpSpiral.h>
-#include <sprite2/LerpWiggle.h>
-#include <sprite2/LerpEase.h>
 
 #include <fstream>
 
@@ -149,66 +143,12 @@ Json::Value FileSaver::StoreFrame(KeyFrame* frame, const std::string& dir,
 	value["time"] = frame->GetTime();
 
 	value["tween"] = frame->HasClassicTween();
-	value["lerp"] = StoreLerp(frame);
+	value["lerp"] = libanim::FileSaver::StoreLerps(frame->GetLerps());
 
 	for (size_t i = 0, n = frame->Size(); i < n; ++i)
 		value["actor"][i] = StoreActor(frame->GetSprite(i), dir, single);
 
 	value["skeleton"] = StoreSkeleton(frame->GetSkeletonData());
-
-	return value;
-}
-
-Json::Value FileSaver::StoreLerp(KeyFrame* frame)
-{
-	Json::Value value;
-
-	const std::vector<std::pair<int, s2::ILerp*> >& lerps = frame->GetLerps();
-	for (int i = 0, n = lerps.size(); i < n; ++i) 
-	{
-		value[i]["key"] = lerps[i].first;
-
-		Json::Value val;
-		s2::ILerp* lerp = lerps[i].second;
-		switch (lerp->Type())
-		{
-		case s2::LERP_CIRCLE:
-			{
-				val["type"] = "circle";
-				s2::LerpCircle* circle = static_cast<s2::LerpCircle*>(lerp);
-				val["scale"] = static_cast<int>(circle->GetScale() * 100);
-			}
-			break;
-		case s2::LERP_SPIRAL:
-			{
-				val["type"] = "spiral";
-				s2::LerpSpiral* spiral = static_cast<s2::LerpSpiral*>(lerp);
-				float begin, end;
-				spiral->GetAngle(begin, end);
-				val["angle_begin"] = static_cast<int>(begin * SM_RAD_TO_DEG);
-				val["angle_end"]   = static_cast<int>(end * SM_RAD_TO_DEG);
-				val["scale"] = static_cast<int>(spiral->GetScale() * 100);
-			}
-			break;
-		case s2::LERP_WIGGLE:
-			{
-				val["type"] = "wiggle";
-				s2::LerpWiggle* wiggle = static_cast<s2::LerpWiggle*>(lerp);
-				val["freq"] = wiggle->GetFreq();
-				val["amp"] = wiggle->GetAmp();
-			}
-			break;
-		case s2::LERP_EASE:
-			{
-				val["type"] = "ease";
-				s2::LerpEase* ease = static_cast<s2::LerpEase*>(lerp);
-				val["ease"] = ease->GetEaseType();
-			}
-			break;
-		}
-
-		value[i]["val"] = val;
-	}
 
 	return value;
 }

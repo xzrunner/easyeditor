@@ -2,6 +2,7 @@
 #define _EASYANIM_KEY_FRAME_H_
 
 #include "SkeletonData.h"
+#include <sprite2/AnimLerp.h>
 
 #include <CU_RefCountObj.h>
 
@@ -54,8 +55,8 @@ public:
 
 	void OnActive();
 
-	void SetLerp(int data, s2::ILerp* lerp);
-	const std::vector<std::pair<int, s2::ILerp*> >& GetLerps() const { return m_lerps; }
+	void SetLerp(s2::AnimLerp::SprData data, s2::ILerp* lerp);
+	const std::vector<std::pair<s2::AnimLerp::SprData, s2::ILerp*> >& GetLerps() const { return m_lerps; }
 
 	static void GetTweenSprite(const KeyFrame* start, const KeyFrame* end, 
 		std::vector<ee::Sprite*>& tween, int time, int tot_time);
@@ -70,7 +71,7 @@ private:
 	std::vector<ee::Sprite*> m_sprs;
 
 	bool m_classic_tween;
-	std::vector<std::pair<int, s2::ILerp*> > m_lerps;
+	std::vector<std::pair<s2::AnimLerp::SprData, s2::ILerp*> > m_lerps;
 
 	Layer* m_layer;
 

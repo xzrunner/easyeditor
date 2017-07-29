@@ -316,10 +316,10 @@ wxSizer* FrameLerpDialog::InitEaseLayout()
 	return top_sizer;
 }
 
-s2::ILerp* FrameLerpDialog::QueryLerp(const std::vector<std::pair<int, s2::ILerp*> >& lerps,
+s2::ILerp* FrameLerpDialog::QueryLerp(const std::vector<std::pair<s2::AnimLerp::SprData, s2::ILerp*> >& lerps,
 									  int data_type, int lerp_type)
 {
-	std::vector<std::pair<int, s2::ILerp*> >::const_iterator 
+	std::vector<std::pair<s2::AnimLerp::SprData, s2::ILerp*> >::const_iterator 
 		itr = lerps.begin();
 	for ( ; itr != lerps.end(); ++itr) {
 		if (itr->first == data_type &&

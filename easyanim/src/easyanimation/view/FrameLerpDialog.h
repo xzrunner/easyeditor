@@ -1,6 +1,8 @@
 #ifndef _EASYANIM_KEYS_FRAME_LERP_DIALOG_H_
 #define _EASYANIM_KEYS_FRAME_LERP_DIALOG_H_
 
+#include <sprite2/AnimLerp.h>
+
 #include <wx/dialog.h>
 #include <wx/choice.h>
 
@@ -30,7 +32,7 @@ private:
 	wxSizer* InitWiggleLayout();
 	wxSizer* InitEaseLayout();
 
-	static s2::ILerp* QueryLerp(const std::vector<std::pair<int, s2::ILerp*> >& lerps,
+	static s2::ILerp* QueryLerp(const std::vector<std::pair<s2::AnimLerp::SprData, s2::ILerp*> >& lerps,
 		int data_type, int lerp_type);
 
 private:

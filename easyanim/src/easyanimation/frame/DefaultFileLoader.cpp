@@ -124,7 +124,7 @@ void DefaultFileLoader::LoadLerp(KeyFrame* frame, const Json::Value& value)
 {
 	for (int i = 0, n = value.size(); i < n; ++i)
 	{
-		int key = value[i]["key"].asInt();
+		s2::AnimLerp::SprData key = static_cast<s2::AnimLerp::SprData>(value[i]["key"].asInt());
 		const Json::Value& val = value[i]["val"];
 		if (val["type"].asString() == "circle")
 		{

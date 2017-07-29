@@ -214,7 +214,7 @@ s2::AnimSymbol* Frame::BuildSym() const
 			dst_frame->index = itr->second->GetTime();
 			dst_frame->tween = itr->second->HasClassicTween();
 
-			const std::vector<std::pair<int, s2::ILerp*> >& lerps = itr->second->GetLerps();
+			const std::vector<std::pair<s2::AnimLerp::SprData, s2::ILerp*> >& lerps = itr->second->GetLerps();
 			dst_frame->lerps.reserve(lerps.size());
 			for (int i = 0, n = lerps.size(); i < n; ++i) {
 				dst_frame->lerps.push_back(std::make_pair(s2::AnimLerp::SprData(lerps[i].first), lerps[i].second->Clone()));
