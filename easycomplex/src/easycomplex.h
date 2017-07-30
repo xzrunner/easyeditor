@@ -18,5 +18,6 @@
 #include "libcomplex/SphereRotateState.h"
 #include "libcomplex/GroupHelper.h"
 #include "libcomplex/LoadFromJson.h"
+#include "libcomplex/FileLoader.h"
 
 #endif // _EASYCOMPLEX_H_

@@ -57,4 +57,21 @@ void FileLoader::Load(const std::string& filepath, Symbol* complex)
 	}
 }
 
+void FileLoader::LoadChildren(const std::string& filepath, std::vector<std::string>& children)
+{
+	Json::Value value;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filepath.c_str());
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, value);
+	fin.close();
+
+	int type = ee::SymbolFile::Instance()->Type(filepath);
+	if (type == s2::SYM_COMPLEX) {
+		std::string dir = ee::FileHelper::GetFileDir(filepath);
+		LoadFromJson::LoadChildren(value, dir, children);
+	}
+}
+
 }

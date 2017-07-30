@@ -1,11 +1,17 @@
 #include "Symbol.h"
 #include "Sprite.h"
 
+#include <ee/SymbolFile.h>
+#include <ee/std_functor.h>
+
+#include <easycomplex.h>
+
 #include <uniaudio/AudioData.h>
 #include <uniaudio/openal/Source.h>
 #include <sprite2/S2_RVG.h>
 #include <sprite2/RenderParams.h>
 #include <sprite2/BoundingBox.h>
+#include <sprite2/SymType.h>
 #include <gum/FilepathHelper.h>
 
 namespace eaudio
@@ -42,9 +48,36 @@ bool Symbol::LoadResources()
 		return false;
 	}
 
-	ua::AudioData* data = new ua::AudioData(m_filepath);
-	SetSource(new ua::openal::Source(data));
-	delete data;
+	if (ee::SymbolFile::Instance()->Type(m_filepath) == s2::SYM_COMPLEX)
+	{
+		std::vector<std::string> children;
+		ecomplex::FileLoader::LoadChildren(m_filepath, children);
+
+		std::vector<ua::AudioData*> list;
+		for (int i = 0, n = children.size(); i < n; ++i) {
+			if (ee::SymbolFile::Instance()->Type(children[i]) == s2::SYM_AUDIO) {
+				list.push_back(new ua::AudioData(children[i]));
+			}
+		}
+
+		if (list.size() == 0) {
+			return false;
+		} else if (list.size() == 1) {
+			SetSource(new ua::openal::Source(list[0]));
+			delete list[0];
+		} else {
+			ua::AudioData* data = new ua::AudioData(list);
+			SetSource(new ua::openal::Source(data));
+			delete data;
+			for_each(list.begin(), list.end(), ee::DeletePointerFunctor<ua::AudioData>());
+		}
+	}
+	else
+	{
+		ua::AudioData* data = new ua::AudioData(m_filepath);
+		SetSource(new ua::openal::Source(data));
+		delete data;
+	}
 
 	return true;
 }

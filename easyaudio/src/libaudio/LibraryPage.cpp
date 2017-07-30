@@ -27,7 +27,7 @@ bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
 void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
 	wxFileDialog dlg(this, wxT("导入audio文件"), wxEmptyString, 
-		wxEmptyString, "*.mp3", wxFD_OPEN | wxFD_MULTIPLE);
+		wxEmptyString, "*.mp3;*_complex.json", wxFD_OPEN | wxFD_MULTIPLE);
 	if (dlg.ShowModal() == wxID_OK)
 	{
 		wxArrayString filenames;
@@ -36,7 +36,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 		{
 			std::string filepath = filenames[i];
 			try {
-				ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+				ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath, s2::SYM_AUDIO);
 				m_list->Insert(sym);
 				sym->RemoveReference();
 			} catch (ee::Exception& e) {

@@ -16,6 +16,9 @@ public:
 	static void Load(const std::string& filepath, const Json::Value& value, 
 		const std::string& dir, Symbol* complex);
 
+	static void LoadChildren(const Json::Value& value, const std::string& dir,
+		std::vector<std::string>& children);
+
 	static void CreateActionsFromTag(Symbol* sym);
 
 private:

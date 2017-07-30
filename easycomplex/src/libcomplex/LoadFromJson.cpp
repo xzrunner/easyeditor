@@ -9,6 +9,7 @@
 #include <ee/Sprite.h>
 #include <ee/StringHelper.h>
 #include <ee/LogMgr.h>
+#include <ee/SymbolSearcher.h>
 
 #include <gum/ComplexSymLoader.h>
 
@@ -47,6 +48,16 @@ void LoadFromJson::Load(const std::string& _filepath, const Json::Value& value,
 	}
 
 	InitActions(complex, value);
+}
+
+void LoadFromJson::LoadChildren(const Json::Value& value, const std::string& dir,
+								std::vector<std::string>& children)
+{
+	children.reserve(value["sprite"].size());
+	for (int i = 0, n = value["sprite"].size(); i < n; ++i) {
+		std::string filepath = ee::SymbolSearcher::GetSymbolPath(dir, value["sprite"][i]);
+		children.push_back(filepath);
+	}
 }
 
 void LoadFromJson::CreateActionsFromTag(Symbol* sym)

@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\cu\src\cu;..\..\..\..\sm\src\sm;..\..\..\..\uniaudio\include;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\openal32\include;..\..\..\..\editor-external\wx\include"
+				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\cu\src\cu;..\..\..\..\sm\src\sm;..\..\..\..\uniaudio\include;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\easycomplex\src;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\openal32\include;..\..\..\..\editor-external\wx\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;EASY_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -105,7 +105,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\cu\src\cu;..\..\..\..\sm\src\sm;..\..\..\..\uniaudio\include;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\openal32\include;..\..\..\..\editor-external\wx\include"
+				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\cu\src\cu;..\..\..\..\sm\src\sm;..\..\..\..\uniaudio\include;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\easycomplex\src;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\openal32\include;..\..\..\..\editor-external\wx\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;EASY_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
