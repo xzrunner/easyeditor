@@ -33,21 +33,6 @@ private:
 	
 	void WriteFile(const std::string& src, uint32_t size, std::ofstream& fout);
 
-	class EpeLoader : public bimp::FileLoader
-	{
-	public:
-		EpeLoader(const std::string& filepath);
-
-		int GetCount() const;
-
-	protected:
-		virtual void OnLoad(bimp::ImportStream& is);
-
-	private:
-		int m_count;
-
-	}; // EpeLoader
-
 	class EptLoader : public bimp::FileLoader
 	{
 	public:

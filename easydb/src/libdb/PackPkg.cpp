@@ -6,6 +6,7 @@
 #include <gum/FilepathHelper.h>
 #include <gum/StringHelper.h>
 #include <bimp/BIMP_ImportStream.h>
+#include <simp/PkgIdxLoader.h>
 
 #include <fstream>
 
@@ -59,9 +60,9 @@ void PackPkg::Trigger(const std::string& dir, const std::string& name)
 		throw ee::Exception("no ept file %s", ept_path.c_str());
 	}
 
-	EpeLoader epe_loader(epe_path);
+	simp::PkgIdxLoader epe_loader(epe_path);
 	epe_loader.Load();
-	int epe_num = epe_loader.GetCount();
+	int epe_num = epe_loader.GetPages().size();
 
 	EptLoader ept_loader(ept_path);
 	ept_loader.Load();
@@ -173,31 +174,6 @@ void PackPkg::WriteFile(const std::string& src, uint32_t size, std::ofstream& fo
 	fin.read(reinterpret_cast<char*>(m_buf), size);
 	fout.write(reinterpret_cast<const char*>(m_buf), size);
 	fin.close();
-}
-
-/************************************************************************/
-/* class PackPkg::EpeLoader                                             */
-/************************************************************************/
-
-PackPkg::EpeLoader::EpeLoader(const std::string& filepath)
-	: bimp::FileLoader(filepath)
-{
-}
-
-int PackPkg::EpeLoader::GetCount() const
-{
-	return m_count;
-}
-
-void PackPkg::EpeLoader::OnLoad(bimp::ImportStream& is)
-{
-	int export_n = is.UInt16();
-	for (int i = 0; i < export_n; ++i) {
-		is.String();
-		is.UInt32();
-	}
-
-	m_count = is.UInt16();
 }
 
 /************************************************************************/
