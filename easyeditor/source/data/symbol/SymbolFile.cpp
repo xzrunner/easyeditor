@@ -146,9 +146,9 @@ int SymbolFile::CheckTypeFromData(const std::string& filepath) const
 	case gum::SYM_SPINE:
 		ret = val.isMember("animations") ? s2::SYM_ANIM2 : s2::SYM_SKELETON;
 		break;
-	case gum::SYM_BODYMOVIN:
-		ret = s2::SYM_ANIMATION;
-		break;
+// 	case gum::SYM_BODYMOVIN:
+// 		ret = s2::SYM_ANIMATION;
+// 		break;
 	}
 	return ret;
 }
