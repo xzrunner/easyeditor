@@ -115,9 +115,9 @@ void Skin2Mesh::PackToBin(uint8_t** ptr) const
 		const pm::Skin2Joint& joint = m_mesh->joints[i];
 		uint16_t j = joint.joint;
 		pack(j, ptr);
-		uint16_t vx = float2int(joint.vertex.x, 64);
+		uint16_t vx = float2int(joint.vertex.x, 16);
 		pack(vx, ptr);
-		uint16_t vy = float2int(joint.vertex.y, 64);
+		uint16_t vy = float2int(joint.vertex.y, 16);
 		pack(vy, ptr);
 		int16_t weight = float2int(joint.weight - 0.5f, 2048);
 		pack(weight, ptr);
