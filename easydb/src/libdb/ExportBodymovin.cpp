@@ -236,10 +236,14 @@ void ExportBodymovin::FixFontLayer(const std::string& filepath, const std::strin
 			ee::SpriteIO spr_io;
 			spr_io.Load(src_val, dir);
 
+			sm::vec2 anchor = spr_io.m_position + spr_io.m_offset;
+
 			spr_io.m_position = spr_io.m_position + sm::rotate_vector(-spr_io.m_offset, spr_io.m_angle) + spr_io.m_offset;
 			spr_io.m_angle = 0;
-			spr_io.m_scale.x = fabs(spr_io.m_scale.x);
-			spr_io.m_scale.y = fabs(spr_io.m_scale.y);
+			float scale = std::min(fabs(spr_io.m_scale.x), fabs(spr_io.m_scale.y));
+			spr_io.m_scale.x = scale;
+			spr_io.m_scale.y = scale;
+			spr_io.m_offset = anchor - spr_io.m_position;
 
 			Json::Value dst_val;
 			dst_val["filepath"] = text_path;
