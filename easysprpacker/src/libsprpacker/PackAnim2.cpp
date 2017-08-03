@@ -256,6 +256,7 @@ void PackAnim2::InitSkeleton(const rg_skeleton* sk)
 		dst.bend_positive = src->bend_positive;
 		dst.length[0] = src->length[0];
 		dst.length[1] = src->length[1];
+		m_iks.push_back(dst);
 	}
 
 	// skins
