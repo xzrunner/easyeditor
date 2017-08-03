@@ -70,6 +70,18 @@ private:
 		void PackToBin(uint8_t** ptr) const;
 	};
 
+	struct IK
+	{
+		uint16_t joints[2];
+		uint16_t target;
+		uint16_t bend_positive;
+		float	 length[2];
+
+		void PackToLuaString(ebuilder::CodeGenerator& gen) const;
+		int SizeOfPackToBin() const;
+		void PackToBin(uint8_t** ptr) const;
+	};
+
 	struct Skin
 	{
 		const PackNode* node;		
@@ -160,6 +172,7 @@ private:
 	// skeleton
 	int m_root;
 	std::vector<Joint> m_joints;
+	std::vector<IK>    m_iks;
 	std::vector<Skin>  m_skins;
 	std::vector<Slot>  m_slots;
 

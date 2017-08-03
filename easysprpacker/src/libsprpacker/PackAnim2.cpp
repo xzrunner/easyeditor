@@ -43,6 +43,14 @@ void PackAnim2::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TextureP
 		}
 	}
 
+	lua::assign_with_end(gen, "iks_num", m_joints.size());
+	{
+		lua::TableAssign ta(gen, "iks", true);
+		for (int i = 0, n = m_iks.size(); i < n; ++i) {
+			m_iks[i].PackToLuaString(gen);
+		}
+	}
+
 	lua::assign_with_end(gen, "skins_num", m_skins.size());
 	{
 		lua::TableAssign ta(gen, "skins", true);
@@ -87,6 +95,8 @@ int PackAnim2::SizeOfUnpackFromBin() const
 	int sz = simp::NodeAnim2::Size();
 	// joints
 	sz += simp::NodeAnim2::Joint::Size() * m_joints.size();
+	// iks
+	sz += simp::NodeAnim2::IK::Size() * m_iks.size();
 	// skins
 	sz += simp::NodeAnim2::Skin::Size() * m_skins.size();
 	// slots
@@ -131,6 +141,11 @@ int PackAnim2::SizeOfPackToBin() const
 	for (int i = 0, n = m_joints.size(); i < n; ++i) {
 		sz += m_joints[i].SizeOfPackToBin();
 	}
+	// iks
+	sz += sizeof(uint16_t);
+	for (int i = 0, n = m_iks.size(); i < n; ++i) {
+		sz += m_iks[i].SizeOfPackToBin();
+	}
 	// skins
 	sz += sizeof(uint16_t);
 	for (int i = 0, n = m_skins.size(); i < n; ++i) {
@@ -172,6 +187,12 @@ void PackAnim2::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 	pack(joints_n, ptr);
 	for (int i = 0; i < joints_n; ++i) {
 		m_joints[i].PackToBin(ptr);
+	}
+	// iks 
+	uint16_t iks_n = m_iks.size();
+	pack(iks_n, ptr);
+	for (int i = 0; i < iks_n; ++i) {
+		m_iks[i].PackToBin(ptr);
 	}
 	// skins
 	uint16_t skins_n = m_skins.size();
@@ -437,6 +458,52 @@ PackToBin(uint8_t** ptr) const
 	pack(_count, ptr);
 
 	local.PackToBin(ptr);
+}
+
+/************************************************************************/
+/* struct PackAnim2::IK                                                 */
+/************************************************************************/
+
+void PackAnim2::IK::
+PackToLuaString(ebuilder::CodeGenerator& gen) const
+{
+	lua::connect(gen, 4,
+		lua::assign("j0", joints[0]),
+		lua::assign("j0 len", length[0]),
+		lua::assign("j1", joints[0]),
+		lua::assign("j1 len", length[0]));
+
+	lua::connect(gen, 2,
+		lua::assign("target", target),
+		lua::assign("bend_positive", bend_positive));		
+}
+
+int PackAnim2::IK::
+SizeOfPackToBin() const
+{
+	int sz = 0;
+	sz += sizeof(uint16_t) * 4;		// joints + target + bend_positive
+	sz += sizeof(float) * 2;		// length
+	return sz;
+}
+
+void PackAnim2::IK::
+PackToBin(uint8_t** ptr) const
+{
+	uint16_t j0 = joints[0];	
+	pack(j0, ptr);
+	uint16_t j1 = joints[1];
+	pack(j1, ptr);
+
+	uint16_t t = target;
+	pack(t, ptr);
+	uint16_t b = bend_positive;
+	pack(b, ptr);
+
+	float len0 = length[0];
+	pack(len0, ptr);
+	float len1 = length[1];
+	pack(len1, ptr);
 }
 
 /************************************************************************/
