@@ -244,6 +244,20 @@ void PackAnim2::InitSkeleton(const rg_skeleton* sk)
 		m_joints.push_back(dst);
 	}
 
+	// iks
+	m_iks.reserve(sk->ik_count);
+	for (int i = 0; i < sk->ik_count; ++i)
+	{
+		rg_ik* src = &sk->iks[i];
+		IK dst;
+		dst.joints[0] = src->joints[0];
+		dst.joints[1] = src->joints[1];
+		dst.target = src->target;
+		dst.bend_positive = src->bend_positive;
+		dst.length[0] = src->length[0];
+		dst.length[1] = src->length[1];
+	}
+
 	// skins
 	m_skins.reserve(sk->skin_count);
 	for (int i = 0; i < sk->skin_count; ++i)
