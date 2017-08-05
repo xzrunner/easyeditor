@@ -5,7 +5,8 @@ namespace esprpacker
 {
 
 // [1] 16bit for label's text instead of 8bit
-static const int VERSION = 1;
+// [2] anim's lerps
+static const int VERSION = 2;
 
 }
 

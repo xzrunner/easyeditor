@@ -10,6 +10,10 @@ namespace lua = ebuilder::lua;
 #include <simp/NodeAnimation.h>
 #include <simp/simp_define.h>
 #include <simp/simp_types.h>
+#include <sprite2/LerpCircle.h>
+#include <sprite2/LerpSpiral.h>
+#include <sprite2/LerpWiggle.h>
+#include <sprite2/LerpEase.h>
 
 #include <algorithm>
 
@@ -184,6 +188,161 @@ PackToBin(uint8_t** ptr) const
 }
 
 /************************************************************************/
+/* class PackAnimation::Lerp                                            */
+/************************************************************************/
+
+PackAnimation::Lerp::
+Lerp(s2::AnimLerp::SprData type, const s2::ILerp* data)
+	: m_spr_data(type)
+	, m_lerp(data->Clone())
+{
+	int t = m_lerp->Type();
+}
+
+PackAnimation::Lerp::
+~Lerp()
+{
+	delete m_lerp;
+}
+
+void PackAnimation::Lerp::
+PackToLuaString(ebuilder::CodeGenerator& gen) const
+{
+	lua::TableAssign assign(gen, "", true);
+
+	int t = m_lerp->Type();
+
+	lua::connect(gen, 2, 
+		lua::assign("spr_data", m_spr_data), 
+		lua::assign("lerp", m_lerp->Type()));
+	switch (m_lerp->Type())
+	{
+	case s2::LERP_CIRCLE:
+		{
+			s2::LerpCircle* lerp = static_cast<s2::LerpCircle*>(m_lerp);
+			lua::connect(gen, 1, 
+				lua::assign("scale", lerp->GetScale()));			
+		}
+		break;
+	case s2::LERP_SPIRAL:
+		{
+			s2::LerpSpiral* lerp = static_cast<s2::LerpSpiral*>(m_lerp);
+			float begin, end;
+			lerp->GetAngle(begin, end);
+			lua::connect(gen, 3, 
+				lua::assign("angle begin", begin),
+				lua::assign("angle end", end),
+				lua::assign("scale", lerp->GetScale()));		
+		}
+		break;
+	case s2::LERP_WIGGLE:
+		{
+			s2::LerpWiggle* lerp = static_cast<s2::LerpWiggle*>(m_lerp);
+			lua::connect(gen, 2, 
+				lua::assign("freq", lerp->GetFreq()),
+				lua::assign("amp", lerp->GetAmp()));
+		}
+		break;
+	case s2::LERP_EASE:
+		{
+			s2::LerpEase* lerp = static_cast<s2::LerpEase*>(m_lerp);
+			lua::connect(gen, 1, 
+				lua::assign("ease", lerp->GetEaseType()));
+		}
+		break;
+	}
+}
+
+int PackAnimation::Lerp::
+SizeOfUnpackFromBin() const
+{
+	int sz = simp::NodeAnimation::LerpSize();
+	sz += sizeof(uint32_t) * GetLerpDataSize(m_lerp->Type());
+	return sz;
+}
+
+int PackAnimation::Lerp::
+SizeOfPackToBin() const
+{
+	int sz = 0;
+	sz += sizeof(uint16_t);	// spr data
+	sz += sizeof(uint16_t);	// lerp type
+	sz += sizeof(uint16_t);	// data n
+	sz += sizeof(uint32_t) * GetLerpDataSize(m_lerp->Type()); // data
+	return sz;
+}
+
+void PackAnimation::Lerp::
+PackToBin(uint8_t** ptr) const
+{
+	uint16_t spr_data = m_spr_data;
+	pack(spr_data, ptr);
+	uint16_t lerp_type = m_lerp->Type();
+	pack(lerp_type, ptr);
+	uint16_t data_n = GetLerpDataSize(lerp_type);
+	pack(data_n, ptr);
+	switch (m_lerp->Type())
+	{
+	case s2::LERP_CIRCLE:
+		{
+			s2::LerpCircle* lerp = static_cast<s2::LerpCircle*>(m_lerp);
+			float scale = lerp->GetScale();
+			pack(scale, ptr);
+		}
+		break;
+	case s2::LERP_SPIRAL:
+		{
+			s2::LerpSpiral* lerp = static_cast<s2::LerpSpiral*>(m_lerp);
+			float begin, end;
+			lerp->GetAngle(begin, end);
+			pack(begin, ptr);
+			pack(end, ptr);
+			float scale = lerp->GetScale();
+			pack(scale, ptr);
+		}
+		break;
+	case s2::LERP_WIGGLE:
+		{
+			s2::LerpWiggle* lerp = static_cast<s2::LerpWiggle*>(m_lerp);
+			float freq = lerp->GetFreq();
+			float amp = lerp->GetAmp();
+			pack(freq, ptr);
+			pack(amp, ptr);
+		}
+		break;
+	case s2::LERP_EASE:
+		{
+			s2::LerpEase* lerp = static_cast<s2::LerpEase*>(m_lerp);
+			uint32_t ease_type = lerp->GetEaseType();
+			pack(ease_type, ptr);
+		}
+		break;
+	}
+}
+
+int PackAnimation::Lerp::
+GetLerpDataSize(int lerp_type)
+{
+	int size = 0;
+	switch (lerp_type)
+	{
+	case s2::LERP_CIRCLE:
+		size = 1;
+		break;
+	case s2::LERP_SPIRAL:
+		size = 3;
+		break;
+	case s2::LERP_WIGGLE:
+		size = 2;
+		break;
+	case s2::LERP_EASE:
+		size = 1;
+		break;
+	}
+	return size;
+}
+
+/************************************************************************/
 /* class PackAnimation::Frame                                           */
 /************************************************************************/
 
@@ -192,9 +351,17 @@ Frame(const s2::AnimSymbol::Frame* frame)
 {
 	m_index = frame->index;
 	m_tween = frame->tween;
+
 	m_actors.reserve(frame->sprs.size());
 	for (int spr = 0, spr_n = frame->sprs.size(); spr < spr_n; ++spr) {
 		m_actors.push_back(new Actor(frame->sprs[spr]));
+	}
+
+	m_lerps.reserve(frame->lerps.size());
+	for (int i = 0, n = frame->lerps.size(); i < n; ++i) {
+		const std::pair<s2::AnimLerp::SprData, s2::ILerp*>& src = frame->lerps[i];
+		Lerp* dst = new Lerp(src.first, src.second);
+		m_lerps.push_back(dst);
 	}
 }
 
@@ -202,20 +369,27 @@ PackAnimation::Frame::
 ~Frame()
 {
 	for_each(m_actors.begin(), m_actors.end(), cu::RemoveRefFunctor<Actor>());
+	for_each(m_lerps.begin(), m_lerps.end(), cu::RemoveRefFunctor<Lerp>());
 }
 
 void PackAnimation::Frame::
 PackToLuaString(ebuilder::CodeGenerator& gen) const
 {
 	lua::TableAssign assign(gen, "", true);
-
 	lua::connect(gen, 2, 
 		lua::assign("index", m_index), 
-		lua::assign("tween", m_tween));
-	
-	lua::TableAssign ta(gen, "actors", true);
-	for (int i = 0, n = m_actors.size(); i < n; ++i) {
-		m_actors[i]->PackToLuaString(gen);
+		lua::assign("tween", m_tween));	
+	{
+		lua::TableAssign ta(gen, "actors", true);
+		for (int i = 0, n = m_actors.size(); i < n; ++i) {
+			m_actors[i]->PackToLuaString(gen);
+		}
+	}
+	{
+		lua::TableAssign ta(gen, "lerps", true);
+		for (int i = 0, n = m_lerps.size(); i < n; ++i) {
+			m_lerps[i]->PackToLuaString(gen);
+		}
 	}
 }
 
@@ -226,6 +400,10 @@ SizeOfUnpackFromBin() const
 	sz += m_actors.size() * simp::SIZEOF_POINTER;
 	for (int i = 0, n = m_actors.size(); i < n; ++i) {
 		sz += m_actors[i]->SizeOfUnpackFromBin();
+	}
+	sz += m_lerps.size() * simp::SIZEOF_POINTER;
+	for (int i = 0, n = m_lerps.size(); i < n; ++i) {
+		sz += m_lerps[i]->SizeOfUnpackFromBin();
 	}
 	return sz;
 }
@@ -241,6 +419,11 @@ SizeOfPackToBin() const
 	for (int i = 0, n = m_actors.size(); i < n; ++i) {
 		sz += m_actors[i]->SizeOfPackToBin();
 	}
+	// lerps
+	sz += sizeof(uint16_t);
+	for (int i = 0, n = m_lerps.size(); i < n; ++i) {
+		sz += m_lerps[i]->SizeOfPackToBin();
+	}
 	return sz;
 }
 
@@ -253,10 +436,16 @@ PackToBin(uint8_t** ptr) const
 	uint8_t tween = bool2int(m_tween);
 	pack(tween, ptr);
 
-	uint16_t n = m_actors.size();
-	pack(n, ptr);
-	for (int i = 0; i < n; ++i) {
+	uint16_t actor_n = m_actors.size();
+	pack(actor_n, ptr);
+	for (int i = 0; i < actor_n; ++i) {
 		m_actors[i]->PackToBin(ptr);
+	}
+
+	uint16_t lerp_n = m_lerps.size();
+	pack(lerp_n, ptr);
+	for (int i = 0; i < lerp_n; ++i) {
+		m_lerps[i]->PackToBin(ptr);
 	}
 }
 

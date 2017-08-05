@@ -58,6 +58,27 @@ private:
 
 	}; // Actor
 
+	class Lerp : public cu::RefCountObj
+	{
+	public:
+		Lerp(s2::AnimLerp::SprData type, const s2::ILerp* data);
+		~Lerp();
+
+		void PackToLuaString(ebuilder::CodeGenerator& gen) const;
+
+		int SizeOfUnpackFromBin() const;
+		int SizeOfPackToBin() const;
+		void PackToBin(uint8_t** ptr) const;
+
+	private:
+		static int GetLerpDataSize(int lerp_type);
+
+	public:
+		s2::AnimLerp::SprData m_spr_data;
+		s2::ILerp* m_lerp;
+
+	}; // Lerp
+
 	class Frame : public cu::RefCountObj
 	{
 	public:
@@ -74,6 +95,7 @@ private:
 		int m_index;
 		std::vector<const Actor*> m_actors;
 		bool m_tween;
+		std::vector<const Lerp*> m_lerps;
 
 	}; // Frame
 
