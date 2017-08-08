@@ -19,6 +19,7 @@
 #include <gum/RenderContext.h>
 #include <gum/GUM_AsyncTask.h>
 #include <gum/AudioContext.h>
+#include <gum/GUM_Sprite2.h>
 
 namespace ee
 {
@@ -126,6 +127,7 @@ void StageCanvas::Init()
 	// todo: move to child, for defferent init (such as 3d ?)
 	gum::ShaderLab::Instance()->Init();
 	gum::AudioContext::Instance()->Init();
+	gum::Sprite2::Init();
 	DTex::Init();
 	GTxt::Init();
 
