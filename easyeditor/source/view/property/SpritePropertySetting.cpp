@@ -154,6 +154,10 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 	{
 		spr->SetNeedActor(wxANY_AS(value, bool));
 	}
+	else if (name == "Integrate")
+	{
+		spr->SetIntegrate(wxANY_AS(value, bool));
+	}
 	// pos
 	else if (name == wxT("Pos"))
 	{
@@ -303,6 +307,8 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 
 	pg->GetProperty(wxT("Actor"))->SetValue(spr->IsNeedActor());
 
+	pg->GetProperty(wxT("Integrate"))->SetValue(spr->IsIntegrate());
+
 	pg->GetProperty(wxT("Pos.X"))->SetValue(spr->GetPosition().x);
 	pg->GetProperty(wxT("Pos.Y"))->SetValue(spr->GetPosition().y);
 	pg->GetProperty(wxT("Pos"))->SetValue(pg->GetProperty(wxT("Pos"))->GenerateComposedValue());
@@ -361,6 +367,9 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	pg->Append(new wxBoolProperty("Actor", wxPG_LABEL, spr->IsNeedActor()));
 	pg->SetPropertyAttribute("Actor", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
+
+	pg->Append(new wxBoolProperty("Integrate", wxPG_LABEL, spr->IsIntegrate()));
+	pg->SetPropertyAttribute("Integrate", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);	
 
 	pg->Append(new wxPropertyCategory("COLOR", wxPG_LABEL));
 
