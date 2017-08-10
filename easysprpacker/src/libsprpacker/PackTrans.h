@@ -56,8 +56,9 @@ private:
 	float               m_downsample;
 	s2::RenderCamera	m_camera;
 
-	// actor
+	// other
 	bool                m_need_actor;
+	bool                m_integrate;
 
 	// info
 	std::string			m_name;

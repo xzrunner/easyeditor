@@ -16,6 +16,8 @@ PackTrans::PackTrans()
 	: m_type(0)
 	, m_filter(NULL)
 	, m_visible(true)
+	, m_need_actor(false)
+	, m_integrate(false)
 {
 }
 
@@ -94,13 +96,17 @@ PackTrans::PackTrans(const s2::Sprite& spr, bool force_name)
 		m_type |= simp::NodeTrans::CAMERA_MASK;
 	}
 
-	// actor
+	// other
 	m_need_actor = spr.IsNeedActor();
 	if (m_need_actor) {
 		m_type |= simp::NodeTrans::ACTOR_MASK;
 	}
+	m_integrate = spr.IsIntegrate();
+	if (m_integrate) {
+		m_type |= simp::NodeTrans::INTEGRATE_MASK;
+	}
 
-	// name
+	// integrate
 
 	std::string name;
 	s2::SprNameMap::Instance()->IDToStr(spr.GetName(), name);
@@ -151,6 +157,7 @@ bool PackTrans::operator == (const PackTrans& trans) const
 		&& fabs(m_downsample - trans.m_downsample) < FLT_EPSILON
 		&& m_camera == trans.m_camera 
 		&& m_need_actor == trans.m_need_actor
+		&& m_integrate == trans.m_integrate
 		&& m_name == trans.m_name 
 		&& m_visible == trans.m_visible;
 }
@@ -218,9 +225,12 @@ void PackTrans::PackToLua(ebuilder::CodeGenerator& gen) const
 	}
 	lua::connect(gen, shaders);
 
-	// actor
+	// other
 	if (m_need_actor) {
 		lua::connect(gen, 1, lua::assign("need_actor", m_need_actor));
+	}	
+	if (m_integrate) {
+		lua::connect(gen, 1, lua::assign("integrate", m_integrate));
 	}	
 
 	if (!m_name.empty()) {
