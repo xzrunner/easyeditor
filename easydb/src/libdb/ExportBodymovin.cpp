@@ -119,7 +119,8 @@ void ExportBodymovin::Trigger(const std::string& src_file, const std::string& ds
  
  				libanim::Symbol* sym = new libanim::Symbol();
  				gum::BodymovinAnimLoader loader(sym, &sym_loader, &spr_loader);
- 				loader.LoadLayers(map_assets, a.layers, parser.GetFrameRate(), parser.GetWidth(), parser.GetHeight());
+ 				loader.LoadLayers(map_assets, a.layers, parser.GetFrameRate(), parser.GetWidth(), 
+					parser.GetHeight(), parser.GetStartFrame(), parser.GetEndFrame());
  				std::string filepath = dst_dir + "\\" + a.id + "_" + ee::SymbolFile::Instance()->Tag(s2::SYM_ANIMATION) + ".json";
  				libanim::FileSaver::Store(filepath, *sym);
  
@@ -138,7 +139,8 @@ void ExportBodymovin::Trigger(const std::string& src_file, const std::string& ds
  
  	libanim::Symbol* sym = new libanim::Symbol();
  	gum::BodymovinAnimLoader loader(sym, &sym_loader, &spr_loader);
- 	loader.LoadLayers(map_assets, parser.GetLayers(), parser.GetFrameRate(), parser.GetWidth(), parser.GetHeight());
+ 	loader.LoadLayers(map_assets, parser.GetLayers(), parser.GetFrameRate(), parser.GetWidth(), 
+		parser.GetHeight(), parser.GetStartFrame(), parser.GetEndFrame());
  	std::string filepath = dst_dir + "\\data_" + ee::SymbolFile::Instance()->Tag(s2::SYM_ANIMATION) + ".json";
  	libanim::FileSaver::Store(filepath, *sym);
  
