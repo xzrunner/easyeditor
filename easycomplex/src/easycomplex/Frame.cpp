@@ -204,7 +204,7 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 	sm::vec2 sz = sym->GetBounding().Size();
 	s2::DrawRT rt(sz.x, sz.y);
 	rt.Draw(sym);
-	rt.StoreToFile(filepath);
+	rt.StoreToFile(filepath, sz.x, sz.y);
 }
 
 void Frame::SaveAsJson(const std::string& filepath) const
