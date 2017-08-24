@@ -31,7 +31,7 @@ static const LanguageType currLanguage = Chinese;
 static const int FRAME_GRID_WIDTH = 12;
 static const int FRAME_GRID_HEIGHT = FRAME_GRID_WIDTH * 2;
 #ifdef ANIM_LONG_TIMELINE
-static const int MAX_FRAME_COUNT = 2000;
+static const int MAX_FRAME_COUNT = 4000;
 #else
 static const int MAX_FRAME_COUNT = 500;
 #endif // ANIM_LONG_TIMELINE

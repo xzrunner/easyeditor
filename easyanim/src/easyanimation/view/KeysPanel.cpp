@@ -78,7 +78,7 @@ void KeysPanel::InitLayout()
 
 	wxBoxSizer* hori_sizer = new wxBoxSizer(wxHORIZONTAL);
 #ifdef ANIM_LONG_TIMELINE
-	hori_sizer->AddSpacer(24000);	// todo
+	hori_sizer->AddSpacer(48000);	// todo
 #else
 	hori_sizer->AddSpacer(1200);	// todo
 #endif // ANIM_LONG_TIMELINE
