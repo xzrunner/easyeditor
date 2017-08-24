@@ -35,6 +35,9 @@ protected:
 private:
 	void DrawBackground(const Sprite* spr, const S2_MAT& mt) const;
 
+	bool LoadResourcesStatic();
+	bool LoadResourcesStream();
+
 }; // Symbol
 
 }

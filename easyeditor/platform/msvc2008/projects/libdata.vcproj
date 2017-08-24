@@ -326,6 +326,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\source\data\common\Blackboard.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\Blackboard.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\include\ee\DataTraverseType.h"
 				>
 			</File>

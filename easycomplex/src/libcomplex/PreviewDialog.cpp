@@ -6,6 +6,7 @@
 #include <ee/SettingData.h>
 #include <ee/Config.h>
 #include <ee/Visitor.h>
+#include <ee/Blackboard.h>
 
 #include <easyanim.h>
 
@@ -40,6 +41,8 @@ PreviewDialog::PreviewDialog(wxWindow* parent, wxGLContext* glctx,
 		init.Visit(spr, next);
 		dynamic_cast<ee::Symbol*>(spr->GetSymbol())->Traverse(init);
 	}
+
+	ee::Blackboard::Instance()->visible_audio = false;
 }
 
 PreviewDialog::~PreviewDialog()
@@ -52,6 +55,8 @@ PreviewDialog::~PreviewDialog()
 			const_cast<libanim::Sprite*>(anim)->SetLoop(true);
 		}
 	}
+
+	ee::Blackboard::Instance()->visible_audio = true;
 }
 
 void PreviewDialog::InitLayout(wxGLContext* glctx)
