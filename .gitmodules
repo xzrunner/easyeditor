@@ -85,3 +85,6 @@
 [submodule "uniaudio"]
 	path = uniaudio
 	url = ssh://git@tea.ejoy.com:3222/LR/uniaudio.git
+[submodule "multitask"]
+	path = multitask
+	url = ssh://git@tea.ejoy.com:3222/LR/multitask.git
