@@ -22,6 +22,7 @@
 #include <easytext.h>
 #include <easymask.h>
 #include <easytrail.h>
+#include <easyaudio.h>
 
 #include <sprite2/SymType.h>
 
@@ -68,6 +69,9 @@ static void InitSymbolCreators()
 
 	ee::SymbolFactory::RegisterCreator(s2::SYM_TRAIL, &etrail::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_TRAIL, &etrail::Sprite::Create);
+
+	ee::SymbolFactory::RegisterCreator(s2::SYM_AUDIO, &eaudio::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_AUDIO, &eaudio::Sprite::Create);
 }
 
 static void Help()

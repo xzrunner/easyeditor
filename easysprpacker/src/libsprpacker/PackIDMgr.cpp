@@ -1,6 +1,7 @@
 #include "PackIDMgr.h"
 #include "PackNode.h"
 #include "typedef.h"
+#include "PackAudioIDMgr.h"
 
 #include <simp/NodeID.h>
 #include <sprite2/SymType.h>
@@ -8,8 +9,10 @@
 #include <gum/SymbolFile.h>
 
 #include <ee/SymbolType.h>
+#include <ee/SymbolFile.h>
 #include <ee/ImageData.h>
 #include <ee/Exception.h>
+#include <ee/FileHelper.h>
 
 #include <assert.h>
 
@@ -69,6 +72,15 @@ bool PackIDMgr::IsCurrPkg(const PackNode* node) const
 void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id,
 						bool force_curr) const
 {
+	int type = ee::SymbolFile::Instance()->Type(filepath);
+	if (type == s2::SYM_AUDIO)
+	{
+		pkg_id = 0xfff;
+		std::string filename = ee::FileHelper::GetFilename(filepath);
+		node_id = PackAudioIDMgr::Instance()->Query(filename);
+		return;
+	}
+
 	static int NEXT_NODE_ID = 0;
 	if (m_curr_pkg_id != -1)
 	{

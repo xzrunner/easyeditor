@@ -32,6 +32,8 @@
 #include "PackMaskSpr.h"
 #include "PackTrail.h"
 #include "PackTrailSpr.h"
+#include "PackAudio.h"
+#include "PackAudioSpr.h"
 
 #include <easyscale9.h>
 #include <easyicon.h>
@@ -47,6 +49,7 @@
 #include <easymask.h>
 #include <easytrail.h>
 #include <easyrespacker.h>
+#include <easyaudio.h>
 
 #include <ee/ImageSprite.h>
 #include <ee/ImageSymbol.h>
@@ -73,6 +76,7 @@ SymBuilder<eshape::Symbol, PackShape>*										SHAPE_BUILDER;
 SymBuilder<emesh::Symbol, PackMesh>*										MESH_BUILDER;
 SymBuilder<emask::Symbol, PackMask>*										MASK_BUILDER;
 SymBuilder<etrail::Symbol, PackTrail>*										TRAIL_BUILDER;
+SymBuilder<eaudio::Symbol, PackAudio>*										AUDIO_BUILDER;
 
 //SprBuilder<escale9::Symbol, escale9::Sprite, PackScale9Spr>*				SCALE9_SPR_BUILDER;
 //SprBuilder<eicon::Symbol, eicon::Sprite, PackIconSpr>*						ICON_SPR_BUILDER;
@@ -99,6 +103,7 @@ SprBuilder2<eshape::Sprite, PackShapeSpr>*									SHAPE_SPR_BUILDER;
 SprBuilder2<emesh::Sprite, PackMeshSpr>*									MESH_SPR_BUILDER;
 SprBuilder2<emask::Sprite, PackMaskSpr>*									MASK_SPR_BUILDER;
 SprBuilder2<etrail::Sprite, PackTrailSpr>*									TRAIL_SPR_BUILDER;
+SprBuilder2<eaudio::Sprite, PackAudioSpr>*									AUDIO_SPR_BUILDER;
 
 PackNodeFactory::PackNodeFactory()
 {
@@ -114,6 +119,7 @@ PackNodeFactory::PackNodeFactory()
 	MESH_BUILDER		= new SymBuilder<emesh::Symbol, PackMesh>();
 	MASK_BUILDER		= new SymBuilder<emask::Symbol, PackMask>();
 	TRAIL_BUILDER		= new SymBuilder<etrail::Symbol, PackTrail>(true);
+	AUDIO_BUILDER		= new SymBuilder<eaudio::Symbol, PackAudio>();
 
 // 	SCALE9_SPR_BUILDER	= new SprBuilder<escale9::Symbol, escale9::Sprite, PackScale9Spr>();
 // 	ICON_SPR_BUILDER	= new SprBuilder<eicon::Symbol, eicon::Sprite, PackIconSpr>();
@@ -140,6 +146,7 @@ PackNodeFactory::PackNodeFactory()
 	MESH_SPR_BUILDER	= new SprBuilder2<emesh::Sprite, PackMeshSpr>();
 	MASK_SPR_BUILDER	= new SprBuilder2<emask::Sprite, PackMaskSpr>();
 	TRAIL_SPR_BUILDER	= new SprBuilder2<etrail::Sprite, PackTrailSpr>();
+	AUDIO_SPR_BUILDER	= new SprBuilder2<eaudio::Sprite, PackAudioSpr>();
 }
 
 PackNodeFactory::~PackNodeFactory()
@@ -213,6 +220,10 @@ const PackNode* PackNodeFactory::Create(const ee::Sprite* spr, bool force_curr)
 	else if (const etrail::Sprite* trail = dynamic_cast<const etrail::Sprite*>(spr)) {
 		node = TRAIL_SPR_BUILDER->Create(trail, force_curr);
 	}
+	// audio
+	else if (const eaudio::Sprite* audio = dynamic_cast<const eaudio::Sprite*>(spr)) {
+		node = AUDIO_SPR_BUILDER->Create(audio, force_curr);
+	}
 
 	else {
 		throw ee::Exception("PackNodeFactory::Create unknown sprite type.");
@@ -279,6 +290,10 @@ const PackNode* PackNodeFactory::Create(const ee::Symbol* sym)
 	else if (const etrail::Symbol* trail = dynamic_cast<const etrail::Symbol*>(sym)) {
 		node = TRAIL_BUILDER->Create(trail);
 	}
+	// audio
+	else if (const eaudio::Symbol* audio = dynamic_cast<const eaudio::Symbol*>(sym)) {
+		node = AUDIO_BUILDER->Create(audio);
+	}
 
 	else {
 		throw ee::Exception("PackNodeFactory::Create unknown symbol type.");
@@ -330,6 +345,7 @@ void PackNodeFactory::FetchAllBuilder(std::vector<NodeBuilder*>& builders)
 	builders.push_back(MESH_BUILDER);
 	builders.push_back(MASK_BUILDER);
 	builders.push_back(TRAIL_BUILDER);
+	builders.push_back(AUDIO_BUILDER);
 
 	builders.push_back(SCALE9_SPR_BUILDER);
 	builders.push_back(ICON_SPR_BUILDER);
@@ -343,6 +359,7 @@ void PackNodeFactory::FetchAllBuilder(std::vector<NodeBuilder*>& builders)
 	builders.push_back(MESH_SPR_BUILDER);
 	builders.push_back(MASK_SPR_BUILDER);
 	builders.push_back(TRAIL_SPR_BUILDER);
+	builders.push_back(AUDIO_SPR_BUILDER);
 }
 
 }
