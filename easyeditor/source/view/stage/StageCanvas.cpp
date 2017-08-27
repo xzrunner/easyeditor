@@ -17,9 +17,8 @@
 #include <gum/GUM_ShaderLab.h>
 #include <gum/GUM_DTex.h>
 #include <gum/RenderContext.h>
-#include <gum/GUM_AsyncTask.h>
-#include <gum/AudioContext.h>
 #include <gum/GUM_Sprite2.h>
+#include <gum/GUM_Audio.h>
 
 namespace ee
 {
@@ -126,7 +125,7 @@ void StageCanvas::Init()
 	// prepare 2d
 	// todo: move to child, for defferent init (such as 3d ?)
 	gum::ShaderLab::Instance()->Init();
-	gum::AudioContext::Instance()->Init();
+	gum::Audio::Instance();
 	gum::Sprite2::Init();
 	DTex::Init();
 	GTxt::Init();
@@ -226,7 +225,6 @@ void StageCanvas::OnTimer(wxTimerEvent& event)
 	}
 
 	gum::DTex::Instance()->Flush();
-	gum::AsyncTask::Instance()->Update();
 
 	bool dirty = m_stage->Update();
 	if (dirty) {

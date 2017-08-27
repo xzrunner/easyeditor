@@ -14,7 +14,6 @@
 #include <sprite2/S2_Texture.h>
 #include <gum/RenderContext.h>
 #include <gum/RenderTarget.h>
-#include <gum/GUM_AsyncTask.h>
 #include <gum/FilepathHelper.h>
 #include <gum/Config.h>
 #include <gum/ResPath.h>
@@ -107,12 +106,12 @@ void ImageSymbol::LoadSync()
 
 void ImageSymbol::LoadAsync()
 {
-	AddReference();
-	gum::AsyncTask::Instance()->Load(gum::ResPath(m_filepath), LoadCB, ParserCB, ReleaseCB, this);
-
-	int w, h;
-	gimg_read_header(m_filepath.c_str(), &w, &h);
-	m_size.Build(w, h);
+// 	AddReference();
+// 	gum::AsyncTask::Instance()->Load(gum::ResPath(m_filepath), LoadCB, ParserCB, ReleaseCB, this);
+// 
+// 	int w, h;
+// 	gimg_read_header(m_filepath.c_str(), &w, &h);
+// 	m_size.Build(w, h);
 }
 
 void ImageSymbol::LoadCB(const void* res_path, void (*unpack)(const void* data, size_t size, void* ud), void* ud)

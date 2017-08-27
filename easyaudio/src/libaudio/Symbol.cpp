@@ -17,7 +17,7 @@
 #include <sprite2/BoundingBox.h>
 #include <sprite2/SymType.h>
 #include <gum/FilepathHelper.h>
-#include <gum/AudioContext.h>
+#include <gum/GUM_Audio.h>
 
 namespace eaudio
 {
@@ -93,13 +93,13 @@ bool Symbol::LoadResourcesStatic()
 		if (list.size() == 0) {
 			return false;
 		} else if (list.size() == 1) {
-			ua::AudioContext* ctx = gum::AudioContext::Instance()->GetImpl();
+			ua::AudioContext* ctx = gum::Audio::Instance()->GetContext();
 			ua::Source* source = ctx->CreateSource(list[0]);
 			SetSource(source);
 			source->RemoveReference();
 		} else {
 			ua::AudioData* data = new ua::AudioData(list);
-			ua::AudioContext* ctx = gum::AudioContext::Instance()->GetImpl();
+			ua::AudioContext* ctx = gum::Audio::Instance()->GetContext();
 			ua::Source* source = ctx->CreateSource(data);
 			SetSource(source);
 			source->RemoveReference();
@@ -110,7 +110,7 @@ bool Symbol::LoadResourcesStatic()
 	else
 	{
 		ua::AudioData* data = new ua::AudioData(m_filepath);
-		ua::AudioContext* ctx = gum::AudioContext::Instance()->GetImpl();
+		ua::AudioContext* ctx = gum::Audio::Instance()->GetContext();
 		ua::Source* source = ctx->CreateSource(data);
 		SetSource(source);
 		source->RemoveReference();
@@ -127,7 +127,7 @@ bool Symbol::LoadResourcesStream()
 		return false;
 	}
 
-	ua::AudioContext* ctx = gum::AudioContext::Instance()->GetImpl();
+	ua::AudioContext* ctx = gum::Audio::Instance()->GetContext();
 	ua::Source* source = ctx->CreateSource(decoder);
 	SetSource(source);
 	source->RemoveReference();
