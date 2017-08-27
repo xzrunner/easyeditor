@@ -82,6 +82,7 @@
 #include "TranslateJson.h"
 #include "ExportBodymovin.h"
 #include "CalcImageArea.h"
+#include "PackAudioID.h"
 
 namespace edb
 {
@@ -169,6 +170,7 @@ void CommandLoader::Init()
 	fc->Register(TranslateJson::Create());
 	fc->Register(ExportBodymovin::Create());
 	fc->Register(CalcImageArea::Create());
+	fc->Register(PackAudioID::Create());
 }
 
 }
