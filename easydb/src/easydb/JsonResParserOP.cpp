@@ -4,6 +4,7 @@
 #include <ee/SymbolType.h>
 
 #include <gum/StringHelper.h>
+#include <gum/FilepathHelper.h>
 
 namespace edb
 {
@@ -31,9 +32,10 @@ bool JsonResParserOP::OnDoFile(const std::string& filepath, Json::Value& val, co
 	}
 
 	// no symbol
-	if (filepath == ee::SYM_GROUP_TAG ||
-		filepath == ee::SYM_SHAPE_TAG ||
-		filepath == ee::SYM_TEXT_TAG) {
+	std::string filename = gum::FilepathHelper::Filename(filepath);
+	if (filename == ee::SYM_GROUP_TAG ||
+		filename == ee::SYM_SHAPE_TAG ||
+		filename == ee::SYM_TEXT_TAG) {
 		return false;
 	}
 
