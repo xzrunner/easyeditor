@@ -44,7 +44,7 @@ sm::rect CameraCanvas::GetVisibleRegion() const
 
 	s2::OrthoCamera* ortho_cam = static_cast<s2::OrthoCamera*>(m_camera);
 	float s = ortho_cam->GetScale();
-	sm::rect r(sm::vec2(0, 0), ctx->GetProjWidth() * s, ctx->GetProjHeight() * s);
+	sm::rect r(sm::vec2(0, 0), ctx->GetScreenWidth() * s, ctx->GetScreenHeight() * s);
 	r.Translate(ortho_cam->GetPosition());
 	return r;
 }

@@ -340,6 +340,14 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\..\src\libdb\PackAudioID.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libdb\PackAudioID.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\libdb\PackEP.cpp"
 						>
 					</File>
@@ -714,6 +722,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\libdb\FixSpriteColor.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libdb\FixTextAlign.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libdb\FixTextAlign.h"
 					>
 				</File>
 				<File
