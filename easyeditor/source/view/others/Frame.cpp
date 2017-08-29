@@ -24,6 +24,7 @@
 #include "PackIDMgr.h"
 
 #include <gum/GUM_DTex.h>
+#include <gum/GUM_Facade.h>
 
 #include <fstream>
 
@@ -82,6 +83,8 @@ Frame::~Frame()
 	SaveTmpInfo();
 
 	delete m_recent_menu;
+
+	gum::Facade::Close();
 }
 
 void Frame::SetTask(Task* task)
