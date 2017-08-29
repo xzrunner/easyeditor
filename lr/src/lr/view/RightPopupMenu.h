@@ -46,6 +46,8 @@ private:
 	static const int MENU_LAYER_CLEAR_COVER_TAG_ID	= 251;
 	static const int MENU_COVER_LAYER_TAG_ID	    = 252;
 	static const int MENU_TOP_LAYER_TAG_ID		    = 253;
+	static const int MENU_BG_DOWN_LAYER_TAG_ID		= 254;
+	static const int MENU_BG_UP_LAYER_TAG_ID		= 255;
 
 	static const int MENU_MOVE_TO_LAYER_BEGIN_ID= 260;
 	static const int MENU_MOVE_TO_LAYER_END_ID	= 280;

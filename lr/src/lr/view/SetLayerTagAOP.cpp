@@ -47,6 +47,10 @@ void SetLayerTagAOP::Set(const std::vector<ee::Sprite*>& sprs, Type type)
 			tag += std::string(COVER_LAYER_TAG) + ";";
 		} else if (type == TOP) {
 			tag += std::string(TOP_LAYER_TAG) + ";";
+		} else if (type == BG_DOWN) {
+			tag += std::string(BG_DOWN_LAYER_TAG) + ";";
+		} else if (type == BG_UP) {
+			tag += std::string(BG_UP_LAYER_TAG) + ";";
 		}
 		spr->SetTag(tag);
 	}

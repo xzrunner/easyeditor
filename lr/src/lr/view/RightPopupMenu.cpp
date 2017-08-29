@@ -48,7 +48,7 @@ void RightPopupMenu::OnRightPopupMenu(int id)
 		HandleShapeMenu(id);
 	} else if (id == MENU_ROTATE_LEFT_ID || id == MENU_ROTATE_RIGHT_ID || id - MENU_COLOR_START_ID < m_anim_files.size()) {
 		HandleAnimMenu(id);
-	} else if (id >= MENU_LAYER_CLEAR_TAG_ID && id <= MENU_TOP_LAYER_TAG_ID) {
+	} else if (id >= MENU_LAYER_CLEAR_TAG_ID && id <= MENU_BG_UP_LAYER_TAG_ID) {
 		HandleLayerTagMenu(id);
 	} else if (id >= MENU_MOVE_TO_LAYER_BEGIN_ID && id < MENU_MOVE_TO_LAYER_END_ID) {
 		HandleMoveToLayerMenu(id);
@@ -112,6 +112,14 @@ void RightPopupMenu::CreateLayerTagMenu(wxMenu& menu)
 			m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnRightPopupMenu, m_stage, MENU_TOP_LAYER_TAG_ID);
 			menu.Append(MENU_TOP_LAYER_TAG_ID, "顶层");	
 		}
+		if (tag.find(std::string(BG_DOWN_LAYER_TAG)) == std::string::npos) {
+			m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnRightPopupMenu, m_stage, MENU_BG_DOWN_LAYER_TAG_ID);
+			menu.Append(MENU_BG_DOWN_LAYER_TAG_ID, "地面下层");	
+		}
+		if (tag.find(std::string(BG_UP_LAYER_TAG)) == std::string::npos) {
+			m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnRightPopupMenu, m_stage, MENU_BG_UP_LAYER_TAG_ID);
+			menu.Append(MENU_BG_UP_LAYER_TAG_ID, "地面上层");	
+		}
 		if (tag.find("layer=") != std::string::npos) {
 			m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnRightPopupMenu, m_stage, MENU_LAYER_CLEAR_TAG_ID);
 			menu.Append(MENU_LAYER_CLEAR_TAG_ID, "清除层信息");	
@@ -128,6 +136,12 @@ void RightPopupMenu::CreateLayerTagMenu(wxMenu& menu)
 
 		m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnRightPopupMenu, m_stage, MENU_TOP_LAYER_TAG_ID);
 		menu.Append(MENU_TOP_LAYER_TAG_ID, "顶层");
+
+		m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnRightPopupMenu, m_stage, MENU_BG_DOWN_LAYER_TAG_ID);
+		menu.Append(MENU_BG_DOWN_LAYER_TAG_ID, "地面下层");
+
+		m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnRightPopupMenu, m_stage, MENU_BG_UP_LAYER_TAG_ID);
+		menu.Append(MENU_BG_UP_LAYER_TAG_ID, "地面上层");
 
 		m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnRightPopupMenu, m_stage, MENU_LAYER_CLEAR_TAG_ID);
 		menu.Append(MENU_LAYER_CLEAR_TAG_ID, "清除层信息");	
@@ -220,6 +234,10 @@ void RightPopupMenu::HandleLayerTagMenu(int id)
 		}
 	} else if (id == MENU_TOP_LAYER_TAG_ID) {
 		type = SetLayerTagAOP::TOP;
+	} else if (id == MENU_BG_DOWN_LAYER_TAG_ID) {
+		type = SetLayerTagAOP::BG_DOWN;
+	} else if (id == MENU_BG_UP_LAYER_TAG_ID) {
+		type = SetLayerTagAOP::BG_UP;
 	} else {
 		type = SetLayerTagAOP::CLEAR;
 	}

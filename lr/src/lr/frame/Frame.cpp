@@ -120,10 +120,12 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 	StagePanel* stage = (StagePanel*)(m_task->GetEditPanel());
 
 	std::vector<ee::Sprite*> cover_layer, top_layer;
+	std::vector<ee::Sprite*> bg_down_layer, bg_layer, bg_up_layer;
 
 	std::vector<ee::Sprite*> all_sprites;
 	stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(all_sprites), ee::DT_VISIBLE);
-	for (int i = 0, n = all_sprites.size(); i < n; ++i) {
+	for (int i = 0, n = all_sprites.size(); i < n; ++i) 
+	{
 		ee::Sprite* spr = all_sprites[i];
 
 		const std::string& tag = spr->GetTag();
@@ -131,14 +133,33 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 			top_layer.push_back(spr);
 		} else if (tag.find(COVER_LAYER_TAG) != std::string::npos) {
 			cover_layer.push_back(spr);
+		} else if (tag.find(BG_DOWN_LAYER_TAG) != std::string::npos) {
+			bg_down_layer.push_back(spr);
+		} else if (tag.find(BG_UP_LAYER_TAG) != std::string::npos) {
+			bg_up_layer.push_back(spr);
 		} else {
-			rt.Draw(spr);
+			bg_layer.push_back(spr);
 		}
 	}
+
+	// bg down layer
+	for (int i = 0, n = bg_down_layer.size(); i < n; ++i) {
+		rt.Draw(bg_down_layer[i]);
+	}
+	// bg layer
+	for (int i = 0, n = bg_layer.size(); i < n; ++i) {
+		rt.Draw(bg_layer[i]);
+	}
+	// bg up layer
+	for (int i = 0, n = bg_up_layer.size(); i < n; ++i) {
+		rt.Draw(bg_up_layer[i]);
+	}
+	// cover layer
 	std::sort(cover_layer.begin(), cover_layer.end(), ee::SpriteCmp(ee::SpriteCmp::e_y_invert));
 	for (int i = 0, n = cover_layer.size(); i < n; ++i) {
 		rt.Draw(cover_layer[i]);
 	}
+	// top layer
 	for (int i = 0, n = top_layer.size(); i < n; ++i) {
 		rt.Draw(top_layer[i]);
 	}

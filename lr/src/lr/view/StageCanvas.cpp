@@ -61,9 +61,11 @@ void StageCanvas::DrawSprites() const
 	bool force_visible = SettingCfg::Instance()->m_all_layers_visible_editable;
 
 	std::vector<DrawableSpr> cover_layer, top_layer;
+	std::vector<DrawableSpr> bg_down_layer, bg_layer, bg_up_layer;
 
 	const std::vector<Layer*>& layers = m_stage->GetLayers();
-	for (int i = 0, n = layers.size(); i < n; ++i) {
+	for (int i = 0, n = layers.size(); i < n; ++i) 
+	{
 		if (i == 3 || i == 8) {
 			continue;
 		}
@@ -77,24 +79,44 @@ void StageCanvas::DrawSprites() const
 
 		std::vector<ee::Sprite*> sprs;
 		layer->TraverseSprite(ee::FetchAllVisitor<ee::Sprite>(sprs), ee::DT_VISIBLE);
-		for (int j = 0, m = sprs.size(); j < m; ++j) {
+		for (int j = 0, m = sprs.size(); j < m; ++j) 
+		{
 			ee::Sprite* spr = sprs[j];
+			DrawableSpr ds(spr, name_visible);
 			const std::string& tag = spr->GetTag();
 			if (tag.find(TOP_LAYER_TAG) != std::string::npos) {
-				top_layer.push_back(DrawableSpr(spr, name_visible));
+				top_layer.push_back(ds);
 			} else if (tag.find(COVER_LAYER_TAG) != std::string::npos) {
-				cover_layer.push_back(DrawableSpr(spr, name_visible));
+				cover_layer.push_back(ds);
+			} else if (tag.find(BG_DOWN_LAYER_TAG) != std::string::npos) {
+				bg_down_layer.push_back(ds);
+			} else if (tag.find(BG_UP_LAYER_TAG) != std::string::npos) {
+				bg_up_layer.push_back(ds);
 			} else {
-				DrawSprite(spr, false, name_visible);
+				bg_layer.push_back(ds);
 			}
-		}		
+		}
 	}
 
+	// bg down layer
+	for (int i = 0, n = bg_down_layer.size(); i < n; ++i) {
+		DrawSprite(bg_down_layer[i].spr, false, bg_down_layer[i].name_visible);
+	}
+	// bg layer
+	for (int i = 0, n = bg_layer.size(); i < n; ++i) {
+		DrawSprite(bg_layer[i].spr, false, bg_layer[i].name_visible);
+	}
+	// bg up layer
+	for (int i = 0, n = bg_up_layer.size(); i < n; ++i) {
+		DrawSprite(bg_up_layer[i].spr, false, bg_up_layer[i].name_visible);
+	}
+	// cover layer
 	bool draw_flag = SettingCfg::Instance()->m_special_layer_flag;
 	std::sort(cover_layer.begin(), cover_layer.end(), SprCmp());
 	for (int i = 0, n = cover_layer.size(); i < n; ++i) {
 		DrawSprite(cover_layer[i].spr, draw_flag, cover_layer[i].name_visible);
 	}
+	// top layer
 	for (int i = 0, n = top_layer.size(); i < n; ++i) {
 		DrawSprite(top_layer[i].spr, false, top_layer[i].name_visible);
 	}

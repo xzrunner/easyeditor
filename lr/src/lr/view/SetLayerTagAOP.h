@@ -13,6 +13,8 @@ public:
 	{
 		COVER = 0,
 		TOP,
+		BG_DOWN,
+		BG_UP,
 		CLEAR,
 	};
 
