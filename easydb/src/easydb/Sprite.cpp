@@ -4,6 +4,7 @@
 #include "Database.h"
 #include "NodeType.h"
 
+#include <sprite2/StatImages.h>
 #include <gum/FilepathHelper.h>
 #include <gum/Image.h>
 
@@ -54,7 +55,7 @@ Sprite::Sprite(Symbol* sym, int id)
 		std::string ss_path = gum::FilepathHelper::Dir(db->GetProjPath()) + "\\" + node->GetPath();
 		ss_path = ss_path.substr(0, ss_path.find_last_of(".")) + "_ss.png";
 		if (gum::FilepathHelper::Exists(ss_path)) {
-			m_snapshoot = gum::ImageMgr::Instance()->Create(gum::ResPath(ss_path));
+			m_snapshoot = gum::ImageMgr::Instance()->Create(s2::StatImages::UNKNOWN_IMG_ID, gum::ResPath(ss_path));
 		}
 	}
 }

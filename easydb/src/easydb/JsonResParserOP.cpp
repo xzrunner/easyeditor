@@ -1,6 +1,8 @@
 #include "JsonResParserOP.h"
 #include "Database.h"
 
+#include <ee/SymbolType.h>
+
 #include <gum/StringHelper.h>
 
 namespace edb
@@ -25,6 +27,13 @@ bool JsonResParserOP::OnDoFile(const std::string& filepath, Json::Value& val, co
 {
 	// todo: out pkg
 	if (filepath.find(m_db.GetDirPath()) == std::string::npos) {
+		return false;
+	}
+
+	// no symbol
+	if (filepath == ee::SYM_GROUP_TAG ||
+		filepath == ee::SYM_SHAPE_TAG ||
+		filepath == ee::SYM_TEXT_TAG) {
 		return false;
 	}
 
