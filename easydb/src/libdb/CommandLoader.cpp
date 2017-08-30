@@ -83,6 +83,7 @@
 #include "ExportBodymovin.h"
 #include "CalcImageArea.h"
 #include "PackAudioID.h"
+#include "FixTextAlign.h"
 
 namespace edb
 {
@@ -171,6 +172,7 @@ void CommandLoader::Init()
 	fc->Register(ExportBodymovin::Create());
 	fc->Register(CalcImageArea::Create());
 	fc->Register(PackAudioID::Create());
+	fc->Register(FixTextAlign::Create());
 }
 
 }
