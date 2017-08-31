@@ -21,7 +21,9 @@ PreviewPanel::PreviewPanel(wxWindow* parent, wxTopLevelWindow* frame, s2::AnimTr
 
 bool PreviewPanel::UpdateStage()
 {
-	return m_curr.Update(s2::UpdateParams(), NULL, NULL, m_loop, 0, m_fps);
+	s2::UpdateParams params;
+	params.SetForce(true);
+	return m_curr.Update(params, NULL, NULL, m_loop, 0, m_fps);
 }
 
 }
