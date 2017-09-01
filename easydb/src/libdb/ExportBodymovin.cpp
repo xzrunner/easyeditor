@@ -210,14 +210,18 @@ void ExportBodymovin::FixFontLayer(const std::string& filepath, const std::strin
 		s2::Textbox tb;
 		tb.width = 200;
 		tb.height = 200;
+		tb.font_type = 0;
 		tb.font_size = 40;
 		tb.font_color = s2::Color(0, 0, 0);
 		tb.has_edge = false;
 		tb.align_hori = s2::Textbox::HA_LEFT;
-		tb.align_vert = s2::Textbox::VA_TOP;
+		tb.align_vert = s2::Textbox::VA_CENTER;
 		dynamic_cast<etext::Symbol*>(t_sym)->SetTextbox(tb);
 		s2::Sprite* t_spr = ee::SpriteFactory::Instance()->Create(t_sym);
 		t_spr->UpdateBounding();
+
+		etext::Sprite* text_spr = VI_DOWNCASTING<etext::Sprite*>(t_spr);
+		text_spr->SetExport(true);
 
 		ee::Symbol* c_sym = ee::SymbolFactory::Create(s2::SYM_COMPLEX);
 		dynamic_cast<ecomplex::Symbol*>(c_sym)->Add(t_spr);
