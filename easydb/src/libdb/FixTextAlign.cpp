@@ -90,7 +90,8 @@ bool FixTextAlign::FixSprite(const std::string& filepath, Json::Value& spr_val) 
 
 	gtxt_glyph_layout out;
 	gtxt_ft_get_layout(unicode, &gs, &out);
-	float xoff = out.bearing_x - out.bearing_x_old;
+//	float xoff = out.bearing_x - out.bearing_x_old;
+	float xoff = 0;
 	if (xoff == 0) {
 		return false;
 	}
