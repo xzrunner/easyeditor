@@ -9,6 +9,7 @@
 #include <easysprpacker.h>
 
 #include <gum/FilepathHelper.h>
+#include <gum/GUM_Facade.h>
 #include <sprite2/SprTimer.h>
 
 namespace edb
@@ -72,6 +73,7 @@ int PackEPNew::Run(int argc, char *argv[])
 	}
 
 	s2::SprTimer::Instance()->Init();
+	gum::Facade::Init();
 
 	Trigger(argv[2], argv[3], argv[4], argv[5], argv[6], LOD, scale);
 
