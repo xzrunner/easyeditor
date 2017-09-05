@@ -164,8 +164,10 @@ void Packer::OutputSprID(const std::string& pkg_name, const std::string& res_dir
 				filepath = filepath.substr(json.size() + 1);
 				ee::StringHelper::ReplaceAll(filepath, "%", "\\");
 				ee::StringHelper::ReplaceAll(filepath, "_complex.json", ".png");
-			} else if (filepath.compare(0, ori.size(), ori) == 0) {
-				filepath = filepath.substr(ori.size() + 1);
+			} else if (ori.empty() || filepath.compare(0, ori.size(), ori) == 0) {
+				if (!ori.empty()) {
+					filepath = filepath.substr(ori.size() + 1);
+				}
 			} else {
 				throw ee::Exception("Packer::OutputSprID: err file %s", filepath.c_str());
 			}
