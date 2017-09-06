@@ -25,6 +25,7 @@
 #include <easyaudio.h>
 
 #include <sprite2/SymType.h>
+#include <gum/GUM_Facade.h>
 
 static void InitSymbolCreators() 
 {
@@ -128,6 +129,8 @@ int main(int argc, char *argv[])
 			}
 		}
 	}
+
+	gum::Facade::Terminate();
 
 	return 0;
 }
