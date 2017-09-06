@@ -73,7 +73,7 @@ int PackEPNew::Run(int argc, char *argv[])
 	}
 
 	s2::SprTimer::Instance()->Init();
-	gum::Facade::Init();
+	gum::Facade::Initialize();
 
 	Trigger(argv[2], argv[3], argv[4], argv[5], argv[6], LOD, scale);
 

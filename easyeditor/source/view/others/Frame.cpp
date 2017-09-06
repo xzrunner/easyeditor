@@ -84,7 +84,7 @@ Frame::~Frame()
 
 	delete m_recent_menu;
 
-	gum::Facade::Close();
+	gum::Facade::Terminate();
 }
 
 void Frame::SetTask(Task* task)
