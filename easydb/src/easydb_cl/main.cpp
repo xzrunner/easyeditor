@@ -123,14 +123,13 @@ int main(int argc, char *argv[])
 		if (scmd == cmd->Command()) {
 			try {
 				cmd->Run(argc, argv);
+				gum::Facade::Terminate();
 			} catch (ee::Exception& e) {
 				std::cout << e.What() << std::endl;
 				return -1;
 			}
 		}
 	}
-
-	gum::Facade::Terminate();
 
 	return 0;
 }
