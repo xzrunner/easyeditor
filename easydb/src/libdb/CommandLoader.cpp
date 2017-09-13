@@ -84,6 +84,7 @@
 #include "CalcImageArea.h"
 #include "PackAudioID.h"
 #include "FixTextAlign.h"
+#include "GenPkgRefInfo.h"
 
 namespace edb
 {
@@ -173,6 +174,7 @@ void CommandLoader::Init()
 	fc->Register(CalcImageArea::Create());
 	fc->Register(PackAudioID::Create());
 	fc->Register(FixTextAlign::Create());
+	fc->Register(GenPkgRefInfo::Create());
 }
 
 }

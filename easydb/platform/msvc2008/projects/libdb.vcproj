@@ -340,6 +340,14 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\..\src\libdb\GenPkgRefInfo.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libdb\GenPkgRefInfo.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\libdb\PackAudioID.cpp"
 						>
 					</File>
