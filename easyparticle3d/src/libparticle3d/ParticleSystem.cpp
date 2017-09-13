@@ -183,14 +183,7 @@ bool ParticleSystem::Update(const S2_MAT& mat)
 		return false;
 	}
 
-	float mt[6];
-	mt[0] = mat.x[0];
-	mt[1] = mat.x[1];
-	mt[2] = mat.x[4];
-	mt[3] = mat.x[5];
-	mt[4] = mat.x[12];
-	mt[5] = mat.x[13];	
-	m_et->SetMat(mt);
+	m_et->SetMat(const_cast<float*>(&mat.x[0]));
 
 	float time = s2::Particle3d::Instance()->GetTime();
 	return m_et->Update(time);

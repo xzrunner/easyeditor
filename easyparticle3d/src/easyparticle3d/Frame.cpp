@@ -53,7 +53,6 @@ void Frame::OnSaveAs(wxCommandEvent& event)
 void Frame::SaveAsParticle3d(const std::string& filepath) const
 {
 	std::string fixed = ee::FileHelper::GetFilenameAddTag(filepath, m_filetag, "json");
-	m_curr_filename = fixed;
 	m_task->Store(fixed.c_str());
 }
 

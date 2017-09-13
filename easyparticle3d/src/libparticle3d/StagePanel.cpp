@@ -47,7 +47,8 @@ bool StagePanel::UpdateStage()
 
 void StagePanel::SetPSMat(const sm::vec2& pos)
 {
-	m_ps_mat.Translate(pos.x, pos.y);
+	m_ps_mat.x[4] = pos.x;
+	m_ps_mat.x[5] = pos.y;
 }
 
 }

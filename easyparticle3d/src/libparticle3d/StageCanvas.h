@@ -20,6 +20,8 @@ protected:
 private:
 	void DrawBackground() const;
 
+	void DrawStat() const;
+
 private:
 	StagePanel* m_stage;
 

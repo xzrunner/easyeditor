@@ -8,8 +8,12 @@
 #include <ee/cfg_const.h>
 
 #include <ps_3d.h>
+#include <shaderlab/Statistics.h>
 #include <sprite2/S2_RVG.h>
 #include <sprite2/CameraType.h>
+#include <sprite2/OrthoCamera.h>
+#include <gum/GUM_GTxt.h>
+#include <gum/StringHelper.h>
 
 namespace eparticle3d
 {
@@ -26,6 +30,8 @@ StageCanvas::~StageCanvas()
 
 void StageCanvas::OnDrawSprites() const
 {
+	int num = sl::Statistics::Instance()->GetVertices();
+
 	DrawBackground();
 
 	std::vector<ee::Sprite*> sprs;
@@ -44,6 +50,10 @@ void StageCanvas::OnDrawSprites() const
 	}
 
 	m_stage->DrawEditOP();
+
+	int num2 = sl::Statistics::Instance()->GetVertices();
+
+	DrawStat();
 }
 
 void StageCanvas::DrawBackground() const
@@ -51,6 +61,21 @@ void StageCanvas::DrawBackground() const
 	s2::RVG::SetColor(s2::Color(204, 204, 204));
 	s2::RVG::LineWidth(2);
 	s2::RVG::Rect(sm::vec2(0, 0), ee::HALF_SCREEN_WIDTH, ee::HALF_SCREEN_HEIGHT, false);
+}
+
+void StageCanvas::DrawStat() const
+{
+	s2::OrthoCamera* cam = static_cast<s2::OrthoCamera*>(m_camera);	
+	S2_MAT mt;
+	float s = std::max(1.0f, cam->GetScale());
+	mt.Scale(s, s);
+	mt.Translate(cam->GetPosition().x - 200, cam->GetPosition().y + 200);
+
+	int num = sl::Statistics::Instance()->GetVertices() / 6;
+
+	gum::GTxt::Instance()->Draw(mt, gum::StringHelper::ToString(num));
+
+	sl::Statistics::Instance()->Reset();
 }
 
 }
