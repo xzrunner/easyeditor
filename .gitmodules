@@ -88,3 +88,12 @@
 [submodule "multitask"]
 	path = multitask
 	url = ssh://git@tea.ejoy.com:3222/LR/multitask.git
+[submodule "clib/flatten"]
+	path = clib/flatten
+	url = ssh://git@tea.ejoy.com:3222/LR/flatten.git
+[submodule "flatten"]
+	path = flatten
+	url = ssh://git@tea.ejoy.com:3222/LR/flatten.git
+[submodule "cooking"]
+	path = cooking
+	url = ssh://git@tea.ejoy.com:3222/LR/cooking.git
