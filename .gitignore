@@ -12,6 +12,6 @@
 *.easy
 deprecated
 .svn
-
+.vs
 lgui
 bfg-1.12.12.jar
