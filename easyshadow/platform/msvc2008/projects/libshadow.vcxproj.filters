@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="view">
+      <UniqueIdentifier>{9cad25b6-0078-48a3-b930-3d063c91f7a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\library">
+      <UniqueIdentifier>{2db4e82a-f104-4293-a599-60a46958afeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\stage">
+      <UniqueIdentifier>{c818d341-d831-454b-a11f-d78f6a16bb1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\toolbar">
+      <UniqueIdentifier>{62e215dd-2149-47f4-a5dd-9fb53dfa3d61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{21ea7f6e-8f5e-4610-a09e-d41f1f63f68d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset\shadow">
+      <UniqueIdentifier>{48e10af3-8585-4cdd-a5e3-ae03a07bef96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="frame">
+      <UniqueIdentifier>{6edf6192-9394-42c8-b65a-53561bc1ce3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render">
+      <UniqueIdentifier>{59167abf-21e1-43e5-9607-d1f4e8d55b13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render\shadow">
+      <UniqueIdentifier>{3540d4da-8378-4a70-8118-fc8e6906e314}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libshadow\LibraryPage.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshadow\LibraryPanel.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshadow\StageCanvas.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshadow\StagePanel.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshadow\ToolbarPanel.cpp">
+      <Filter>view\toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshadow\Sprite.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshadow\Symbol.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshadow\Shadow.cpp">
+      <Filter>dataset\shadow</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshadow\EditDialog.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshadow\FileIO.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshadow\ShadowShader.cpp">
+      <Filter>render\shadow</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libshadow\LibraryPage.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshadow\LibraryPanel.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshadow\StageCanvas.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshadow\StagePanel.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshadow\ToolbarPanel.h">
+      <Filter>view\toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshadow\Sprite.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshadow\Symbol.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshadow\Shadow.h">
+      <Filter>dataset\shadow</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshadow\EditDialog.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshadow\FileIO.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshadow\ShadowShader.h">
+      <Filter>render\shadow</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshadow\config.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\src\libshadow\ShadowShader.frag">
+      <Filter>render\shadow</Filter>
+    </None>
+    <None Include="..\..\..\src\libshadow\ShadowShader.vert">
+      <Filter>render\shadow</Filter>
+    </None>
+  </ItemGroup>
+</Project>

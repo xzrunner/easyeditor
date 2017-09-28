@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>5.libsprpacker</ProjectName>
+    <ProjectGuid>{0ADAEF1C-2094-4A6F-84E9-3CA0684B7824}</ProjectGuid>
+    <RootNamespace>libsprpacker</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\libsprpacker\x86\Debug\</OutDir>
+    <IntDir>..\libsprpacker\x86\Debug\obj\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\libsprpacker\x86\Release\</OutDir>
+    <IntDir>..\libsprpacker\x86\Release\obj\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\sprite2\include;..\..\..\..\polymesh\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\fs\src\fs;..\..\..\..\mtrail\src\mtrail;..\..\..\..\gimg\src\gimg;..\..\..\..\rigging\src\rigging;..\..\..\..\bimp\include;..\..\..\..\simp\include;..\..\..\..\timp\include;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easyrespacker\src;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easyanim2\src;..\..\..\..\easyui\src;..\..\..\..\easyscale9\src;..\..\..\..\easycomplex\src;..\..\..\..\easymesh\src;..\..\..\..\easymask\src;..\..\..\..\easyimage\src;..\..\..\..\easyaudio\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\particle\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easytrail\src;..\..\..\..\easytext\src;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\lzma\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;_CRT_NO_VA_START_VALIDATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\libsprpacker\x86\Debug</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\libsprpacker\x86\Debug\cocextract.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\sprite2\include;..\..\..\..\polymesh\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\fs\src\fs;..\..\..\..\mtrail\src\mtrail;..\..\..\..\gimg\src\gimg;..\..\..\..\rigging\src\rigging;..\..\..\..\bimp\include;..\..\..\..\simp\include;..\..\..\..\timp\include;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easyrespacker\src;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easyanim2\src;..\..\..\..\easyui\src;..\..\..\..\easyscale9\src;..\..\..\..\easycomplex\src;..\..\..\..\easymesh\src;..\..\..\..\easymask\src;..\..\..\..\easyimage\src;..\..\..\..\easyaudio\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\particle\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easytrail\src;..\..\..\..\easytext\src;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\lzma\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;_CRT_NO_VA_START_VALIDATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\libsprpacker\x86\Release</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\libsprpacker\x86\Release\cocextract.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libsprpacker\binary_io.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\check.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\ComplexBuilder.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\ExportNameSet.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\LabelBuilder.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\MeshShape.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\NodeBuilder.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackAnchor.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackAnim2.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackAnim2Spr.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackAnimation.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackAnimationSpr.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackArray.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackAudio.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackAudioIDMgr.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackAudioSpr.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackComplex.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackComplexSpr.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackCoords.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\Packer.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackIcon.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackIconSpr.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackIDMgr.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackImage.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackLabel.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackMask.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackMaskSpr.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackMesh.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackMeshSpr.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackNode.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackNodeFactory.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackParticle2d.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackParticle2dSpr.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackParticle3d.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackParticle3dSpr.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackScale9.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackScale9Spr.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackShape.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackShapeSpr.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackTexture.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackTextureSpr.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackToBin.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackToLua.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackTrail.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackTrailSpr.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PackTrans.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\PointsMesh.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\Skin2Mesh.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\SprBuilder.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\SprBuilder2.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\SprWithTransBuilder.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\SymBuilder.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\to_int.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\TrianglesMesh.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\typedef.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\Version.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\src\libsprpacker\PackArray.inl" />
+    <None Include="..\..\..\src\libsprpacker\SprBuilder.inl" />
+    <None Include="..\..\..\src\libsprpacker\SprBuilder2.inl" />
+    <None Include="..\..\..\src\libsprpacker\SprWithTransBuilder.inl" />
+    <None Include="..\..\..\src\libsprpacker\SymBuilder.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libsprpacker\ComplexBuilder.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\ExportNameSet.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\LabelBuilder.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackAnchor.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackAnim2.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackAnim2Spr.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackAnimation.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackAnimationSpr.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackAudio.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackAudioIDMgr.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackAudioSpr.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackComplex.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackComplexSpr.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackCoords.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\Packer.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackIcon.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackIconSpr.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackIDMgr.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackImage.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackLabel.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackMask.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackMaskSpr.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackMesh.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackMeshSpr.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackNode.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackNodeFactory.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackParticle2d.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackParticle2dSpr.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackParticle3d.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackParticle3dSpr.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackScale9.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackScale9Spr.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackShape.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackShapeSpr.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackTexture.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackTextureSpr.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackToBin.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackToLua.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackTrail.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackTrailSpr.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PackTrans.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\PointsMesh.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\Skin2Mesh.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\TrianglesMesh.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

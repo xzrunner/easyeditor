@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="frame">
+      <UniqueIdentifier>{840341f9-bc0d-421c-9098-701e673e5b80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data">
+      <UniqueIdentifier>{631f5e02-1a06-43b6-8d25-84998d72787e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view">
+      <UniqueIdentifier>{75a3abd2-ec48-4809-a470-c13f39520083}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\stage">
+      <UniqueIdentifier>{dc34159e-de4c-4a55-a72d-355703d783bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\toolbar">
+      <UniqueIdentifier>{98231045-3343-400a-bad7-9246b096eb2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\library">
+      <UniqueIdentifier>{cff75984-b2fd-4535-a322-dea149ae7b99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit">
+      <UniqueIdentifier>{0ce6c24a-8128-4af1-82a4-4f2841b57b94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\arrange">
+      <UniqueIdentifier>{957ec22d-b550-4b48-b528-d0e914704479}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\paste">
+      <UniqueIdentifier>{95fb7e07-f1a4-4953-865f-1cd192b0857c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools">
+      <UniqueIdentifier>{ad30a65a-4a52-47a1-878f-1816da23140b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\sg\config.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sg\FileIO.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sg\Frame.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sg\main.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sg\Task.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sg\BuildingCfg.h">
+      <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sg\CheckerBoard.h">
+      <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sg\SpriteExt.h">
+      <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sg\SymbolExt.h">
+      <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sg\StageCanvas.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sg\StagePanel.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sg\ToolBarPanel.h">
+      <Filter>view\toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sg\LibraryPage.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sg\ArrangeSpriteCMPT.h">
+      <Filter>edit\arrange</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sg\ArrangeSpriteOP.h">
+      <Filter>edit\arrange</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sg\PasteSymbolOP.h">
+      <Filter>edit\paste</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sg\SymbolRender.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sg\tools.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\sg\FileIO.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sg\Frame.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sg\main.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sg\Task.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sg\BuildingCfg.cpp">
+      <Filter>data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sg\CheckerBoard.cpp">
+      <Filter>data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sg\StageCanvas.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sg\StagePanel.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sg\ToolbarPanel.cpp">
+      <Filter>view\toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sg\LibraryPage.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sg\ArrangeSpriteCMPT.cpp">
+      <Filter>edit\arrange</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sg\ArrangeSpriteOP.cpp">
+      <Filter>edit\arrange</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sg\PasteSymbolOP.cpp">
+      <Filter>edit\paste</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sg\SymbolRender.cpp">
+      <Filter>tools</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\..\..\editor-external\wx\include\wx\msw\wx.rc" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="view">
+      <UniqueIdentifier>{c14d7d22-5205-43fd-a2be-b33dc2b907bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\library">
+      <UniqueIdentifier>{d600e970-8faf-4b65-8ecc-85a7f4429d75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\stage">
+      <UniqueIdentifier>{8595deb6-05af-4c9d-b7cb-6593e896190d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{51bb2aa8-6e95-4e07-b085-e69cb16c3b3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="frame">
+      <UniqueIdentifier>{95775d03-94b4-42f0-af0b-b605e29934ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="editop">
+      <UniqueIdentifier>{0c2836c8-5691-4a48-9030-3a9086388a9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="editop\translate">
+      <UniqueIdentifier>{7cd8592f-7692-4f6c-90d8-e3cccd7e8677}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="editop\rotate">
+      <UniqueIdentifier>{4a8d3d2e-0422-4f9d-8a7f-d397500c683f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="editop\scale">
+      <UniqueIdentifier>{3952d00c-15ce-4298-8da4-ff3d6f92539a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libskeleton\LibraryPage.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libskeleton\StageCanvas.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libskeleton\StagePanel.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libskeleton\Joint.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libskeleton\Sprite.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libskeleton\Symbol.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libskeleton\EditDialog.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libskeleton\EditJointPoseOP.cpp">
+      <Filter>editop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libskeleton\TranslateJointAOP.cpp">
+      <Filter>editop\translate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libskeleton\TranslateJointState.cpp">
+      <Filter>editop\translate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libskeleton\RotateJointAOP.cpp">
+      <Filter>editop\rotate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libskeleton\RotateJointState.cpp">
+      <Filter>editop\rotate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libskeleton\ScaleJointAOP.cpp">
+      <Filter>editop\scale</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libskeleton\ScaleJointState.cpp">
+      <Filter>editop\scale</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libskeleton\LibraryPage.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libskeleton\StageCanvas.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libskeleton\StagePanel.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libskeleton\Joint.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libskeleton\Sprite.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libskeleton\Symbol.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libskeleton\EditDialog.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libskeleton\EditJointPoseOP.h">
+      <Filter>editop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libskeleton\TranslateJointAOP.h">
+      <Filter>editop\translate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libskeleton\TranslateJointState.h">
+      <Filter>editop\translate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libskeleton\RotateJointAOP.h">
+      <Filter>editop\rotate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libskeleton\RotateJointState.h">
+      <Filter>editop\rotate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libskeleton\ScaleJointAOP.h">
+      <Filter>editop\scale</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libskeleton\ScaleJointState.h">
+      <Filter>editop\scale</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

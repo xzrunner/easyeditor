@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>5.libparticle3d</ProjectName>
+    <ProjectGuid>{B2E0DE06-ACE8-4C69-8966-C81ED5686FCA}</ProjectGuid>
+    <RootNamespace>libparticle3d</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\libparticle3d\x86\Debug\</OutDir>
+    <IntDir>..\libparticle3d\x86\Debug\obj\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\libparticle3d\x86\Release\</OutDir>
+    <IntDir>..\libparticle3d\x86\Release\obj\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easycomplex\src;..\..\..\..\easyscale9\src;..\..\..\..\easytrail\src;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\dtex2\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\particle\src;..\..\..\..\shaderlab\include\;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\c99;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;_CRT_NO_VA_START_VALIDATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\libparticle3d\x86\Debug</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\libparticle3d\x86\Debug\libparticle3d.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easycomplex\src;..\..\..\..\easyscale9\src;..\..\..\..\easytrail\src;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\dtex2\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\particle\src;..\..\..\..\shaderlab\include\;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\c99;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;_CRT_NO_VA_START_VALIDATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\libparticle3d\x86\Release</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\libparticle3d\x86\Release\libparticle3d.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libparticle3d\AnimRecorder.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle3d\CocoPacker.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle3d\ComponentPanel.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle3d\EditOP.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle3d\FileIO.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle3d\InvertRecord.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle3d\LibraryPage.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle3d\LibraryPanel.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle3d\ParticleSystem.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle3d\PropertySettingPanel.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle3d\PSConfigMgr.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle3d\Sprite.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle3d\SpritePropertySetting.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle3d\StageCanvas.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle3d\StagePanel.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle3d\Symbol.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle3d\SymbolPropertySetting.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle3d\ToolbarPanel.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle3d\utility.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libparticle3d\AnimRecorder.h" />
+    <ClInclude Include="..\..\..\src\libparticle3d\CocoPacker.h" />
+    <ClInclude Include="..\..\..\src\libparticle3d\ComponentPanel.h" />
+    <ClInclude Include="..\..\..\src\libparticle3d\EditOP.h" />
+    <ClInclude Include="..\..\..\src\libparticle3d\FileIO.h" />
+    <ClInclude Include="..\..\..\src\libparticle3d\InvertRecord.h" />
+    <ClInclude Include="..\..\..\src\libparticle3d\language.h" />
+    <ClInclude Include="..\..\..\src\libparticle3d\LibraryPage.h" />
+    <ClInclude Include="..\..\..\src\libparticle3d\LibraryPanel.h" />
+    <ClInclude Include="..\..\..\src\libparticle3d\ParticleSystem.h" />
+    <ClInclude Include="..\..\..\src\libparticle3d\PropertySettingPanel.h" />
+    <ClInclude Include="..\..\..\src\libparticle3d\PSConfigMgr.h" />
+    <ClInclude Include="..\..\..\src\libparticle3d\ps_config.h" />
+    <ClInclude Include="..\..\..\src\libparticle3d\Sprite.h" />
+    <ClInclude Include="..\..\..\src\libparticle3d\SpritePropertySetting.h" />
+    <ClInclude Include="..\..\..\src\libparticle3d\StageCanvas.h" />
+    <ClInclude Include="..\..\..\src\libparticle3d\StagePanel.h" />
+    <ClInclude Include="..\..\..\src\libparticle3d\Symbol.h" />
+    <ClInclude Include="..\..\..\src\libparticle3d\SymbolPropertySetting.h" />
+    <ClInclude Include="..\..\..\src\libparticle3d\ToolbarPanel.h" />
+    <ClInclude Include="..\..\..\src\libparticle3d\utility.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\particle\platform\msvc2008\projects\particle.vcxproj">
+      <Project>{ee2229a3-ad5f-46e7-afab-729f8aa18036}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

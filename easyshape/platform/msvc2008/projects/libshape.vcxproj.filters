@@ -1,0 +1,474 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="fileio">
+      <UniqueIdentifier>{e5c36972-b67a-4490-a649-392cd9ab239b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{7ceda230-ba42-4edf-87ba-513020318eb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset\shape">
+      <UniqueIdentifier>{12bb26e8-c66a-4e5b-af2a-a8466b1d3790}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset\shape\polyline">
+      <UniqueIdentifier>{90eb70d7-8829-4132-bded-d195c5d1206c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset\shape\polyline\utility">
+      <UniqueIdentifier>{a91d1deb-e24f-4fbe-9850-271de7f9f7ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset\shape\primitive">
+      <UniqueIdentifier>{1454226e-c14f-4656-993c-3a033049ce54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset\material">
+      <UniqueIdentifier>{bdeb5564-b853-484a-a463-8b8317bdc6dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view">
+      <UniqueIdentifier>{d860acf3-c5c4-406e-9eef-88d8b889edfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\stage">
+      <UniqueIdentifier>{1a8538b5-3f8b-4000-ae8f-3b368ae76e0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\toolbar">
+      <UniqueIdentifier>{ee55bd7d-5d6f-4980-b34a-e0bf7c1af1f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\library">
+      <UniqueIdentifier>{f512560c-c07e-4dc0-b87d-745a515794db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\property">
+      <UniqueIdentifier>{fdd6f056-c992-4aee-ba9d-eb836ef91f7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="frame">
+      <UniqueIdentifier>{9301deb5-7ab5-4869-a3fd-73d8ce058aa8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit">
+      <UniqueIdentifier>{1bdbfe5b-3029-4aec-a26b-4f5fea4dbc3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\op">
+      <UniqueIdentifier>{220b412d-a7c9-4dd0-8814-2653b043be63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\op\draw">
+      <UniqueIdentifier>{7f3dc500-a7f0-43cb-994f-77315dfb26e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\op\draw\base">
+      <UniqueIdentifier>{0637f712-dd00-4b31-b70d-d90e9438f264}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\op\draw\extend">
+      <UniqueIdentifier>{d3aa592e-8170-4ceb-be05-847014321195}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\op\draw\extend\line">
+      <UniqueIdentifier>{61dc605b-1c9e-4bcd-8cfe-2aeb1f4c69ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\op\draw\extend\area">
+      <UniqueIdentifier>{a32ea0e0-fdc4-4c18-802f-afc6dc130ea6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\op\edit">
+      <UniqueIdentifier>{682834f7-ae44-47c1-87e4-64f353df5b90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\op\edit\polyline">
+      <UniqueIdentifier>{fca380a3-4e46-40aa-b391-afa7c56faaf7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\op\select">
+      <UniqueIdentifier>{19595177-ee88-468f-8326-478b09113923}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\op\tools">
+      <UniqueIdentifier>{eaf0326b-6683-4b94-ab96-e7d6d74102f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\cmpt">
+      <UniqueIdentifier>{6b3c7551-b685-4d94-b78a-9d0dda4f83e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\cmpt\draw">
+      <UniqueIdentifier>{344478e0-b6a7-4d1b-bf01-6a64673a74a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\cmpt\edit">
+      <UniqueIdentifier>{e0264f6d-30b6-4022-a941-1c5b61479d3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\cmpt\tools">
+      <UniqueIdentifier>{7cbdf506-8cf4-44ea-953d-dad5161b46fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\history">
+      <UniqueIdentifier>{ae04417d-eb96-4bd2-99b5-c9d798c78749}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools">
+      <UniqueIdentifier>{f3969390-bf73-4fca-9f90-61d6c81b39a8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libshape\FileIO.cpp">
+      <Filter>fileio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\Package.cpp">
+      <Filter>fileio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\Sprite.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\Symbol.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\ShapeFactory.cpp">
+      <Filter>dataset\shape</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\ShapeType.cpp">
+      <Filter>dataset\shape</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\BezierShape.cpp">
+      <Filter>dataset\shape\polyline</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\ChainShape.cpp">
+      <Filter>dataset\shape\polyline</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\ComplexPolygonShape.cpp">
+      <Filter>dataset\shape\polyline</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\CosineShape.cpp">
+      <Filter>dataset\shape\polyline</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\PolygonShape.cpp">
+      <Filter>dataset\shape\polyline</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\PolylineEditor.cpp">
+      <Filter>dataset\shape\polyline\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\CircleShape.cpp">
+      <Filter>dataset\shape\primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\PointShape.cpp">
+      <Filter>dataset\shape\primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\RectShape.cpp">
+      <Filter>dataset\shape\primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\ColorMaterial.cpp">
+      <Filter>dataset\material</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\Material.cpp">
+      <Filter>dataset\material</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\MultiColorMaterial.cpp">
+      <Filter>dataset\material</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\TextureMaterial.cpp">
+      <Filter>dataset\material</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\StageCanvas.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\StagePanel.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\ToolbarPanel.cpp">
+      <Filter>view\toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\LibraryPage.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\BezierPropertySetting.cpp">
+      <Filter>view\property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\ChainPropertySetting.cpp">
+      <Filter>view\property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\CirclePropertySetting.cpp">
+      <Filter>view\property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\PolygonPropertySetting.cpp">
+      <Filter>view\property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\RectPropertySetting.cpp">
+      <Filter>view\property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\EditDialog.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\EditDialogSimple.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\DrawCurveOP.cpp">
+      <Filter>edit\op\draw\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\DrawPolylineOP.cpp">
+      <Filter>edit\op\draw\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\DrawRectangleOP.cpp">
+      <Filter>edit\op\draw\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\DrawCosineCurveOP.cpp">
+      <Filter>edit\op\draw\extend\line</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\DrawLoopOP.cpp">
+      <Filter>edit\op\draw\extend\line</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\DrawPencilLineOP.cpp">
+      <Filter>edit\op\draw\extend\line</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\DrawPenLineOP.cpp">
+      <Filter>edit\op\draw\extend\line</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\DrawComplexPolygonOP.cpp">
+      <Filter>edit\op\draw\extend\area</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\DrawPencilPolygonOP.cpp">
+      <Filter>edit\op\draw\extend\area</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\DrawPolygonOP.cpp">
+      <Filter>edit\op\draw\extend\area</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\EditBezierOP.cpp">
+      <Filter>edit\op\edit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\EditCircleOP.cpp">
+      <Filter>edit\op\edit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\EditNodesOP.cpp">
+      <Filter>edit\op\edit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\EditPointOP.cpp">
+      <Filter>edit\op\edit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\EditPolylinesOP.cpp">
+      <Filter>edit\op\edit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\EditRectOP.cpp">
+      <Filter>edit\op\edit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\EditPolylineImpl.cpp">
+      <Filter>edit\op\edit\polyline</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\EditPolylineOP.cpp">
+      <Filter>edit\op\edit\polyline</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\SelectNodesOP.cpp">
+      <Filter>edit\op\select</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\MousePositionOP.cpp">
+      <Filter>edit\op\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\NodeCapture.cpp">
+      <Filter>edit\op\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\DrawLineCMPT.cpp">
+      <Filter>edit\cmpt\draw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\DrawLineUtility.cpp">
+      <Filter>edit\cmpt\draw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\DrawPencilLineCMPT.cpp">
+      <Filter>edit\cmpt\draw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\DrawPencilPolygonCMPT.cpp">
+      <Filter>edit\cmpt\draw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\DrawPolygon2CMPT.cpp">
+      <Filter>edit\cmpt\draw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\DrawPolygonCMPT.cpp">
+      <Filter>edit\cmpt\draw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\EditPolylinesCMPT.cpp">
+      <Filter>edit\cmpt\edit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\MousePositionCMPT.cpp">
+      <Filter>edit\cmpt\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\EditNodesAtomicOP.cpp">
+      <Filter>edit\history</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshape\Math.cpp">
+      <Filter>tools</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libshape\FileIO.h">
+      <Filter>fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\Package.h">
+      <Filter>fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\Sprite.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\Symbol.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\ShapeFactory.h">
+      <Filter>dataset\shape</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\ShapeType.h">
+      <Filter>dataset\shape</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\BezierShape.h">
+      <Filter>dataset\shape\polyline</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\ChainShape.h">
+      <Filter>dataset\shape\polyline</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\ComplexPolygonShape.h">
+      <Filter>dataset\shape\polyline</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\CosineShape.h">
+      <Filter>dataset\shape\polyline</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\PolygonShape.h">
+      <Filter>dataset\shape\polyline</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\EditedPolyShape.h">
+      <Filter>dataset\shape\polyline\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\PolylineEditor.h">
+      <Filter>dataset\shape\polyline\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\CircleShape.h">
+      <Filter>dataset\shape\primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\PointShape.h">
+      <Filter>dataset\shape\primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\RectShape.h">
+      <Filter>dataset\shape\primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\ColorMaterial.h">
+      <Filter>dataset\material</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\Material.h">
+      <Filter>dataset\material</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\MultiColorMaterial.h">
+      <Filter>dataset\material</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\TextureMaterial.h">
+      <Filter>dataset\material</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\StageCanvas.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\StagePanel.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\ToolbarPanel.h">
+      <Filter>view\toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\LibraryPage.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\BezierPropertySetting.h">
+      <Filter>view\property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\ChainPropertySetting.h">
+      <Filter>view\property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\CirclePropertySetting.h">
+      <Filter>view\property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\PolygonPropertySetting.h">
+      <Filter>view\property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\RectPropertySetting.h">
+      <Filter>view\property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\EditDialog.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\EditDialogSimple.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\DrawCurveOP.h">
+      <Filter>edit\op\draw\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\DrawPolylineOP.h">
+      <Filter>edit\op\draw\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\DrawRectangleOP.h">
+      <Filter>edit\op\draw\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\DrawCosineCurveOP.h">
+      <Filter>edit\op\draw\extend\line</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\DrawLoopOP.h">
+      <Filter>edit\op\draw\extend\line</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\DrawPencilLineOP.h">
+      <Filter>edit\op\draw\extend\line</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\DrawPenLineOP.h">
+      <Filter>edit\op\draw\extend\line</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\DrawComplexPolygonOP.h">
+      <Filter>edit\op\draw\extend\area</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\DrawPencilPolygonOP.h">
+      <Filter>edit\op\draw\extend\area</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\DrawPolygonOP.h">
+      <Filter>edit\op\draw\extend\area</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\EditBezierOP.h">
+      <Filter>edit\op\edit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\EditCircleOP.h">
+      <Filter>edit\op\edit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\EditNodesOP.h">
+      <Filter>edit\op\edit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\EditPointOP.h">
+      <Filter>edit\op\edit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\EditPolylinesOP.h">
+      <Filter>edit\op\edit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\EditPolylineWithCopyNodeOP.h">
+      <Filter>edit\op\edit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\EditRectOP.h">
+      <Filter>edit\op\edit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\EditPolylineImpl.h">
+      <Filter>edit\op\edit\polyline</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\EditPolylineOP.h">
+      <Filter>edit\op\edit\polyline</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\SelectNodesOP.h">
+      <Filter>edit\op\select</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\MousePositionOP.h">
+      <Filter>edit\op\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\NodeCapture.h">
+      <Filter>edit\op\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\DrawLineCMPT.h">
+      <Filter>edit\cmpt\draw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\DrawLineUtility.h">
+      <Filter>edit\cmpt\draw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\DrawPencilLineCMPT.h">
+      <Filter>edit\cmpt\draw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\DrawPencilPolygonCMPT.h">
+      <Filter>edit\cmpt\draw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\DrawPolygon2CMPT.h">
+      <Filter>edit\cmpt\draw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\DrawPolygonCMPT.h">
+      <Filter>edit\cmpt\draw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\EditPolylinesCMPT.h">
+      <Filter>edit\cmpt\edit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\MousePositionCMPT.h">
+      <Filter>edit\cmpt\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\EditNodesAtomicOP.h">
+      <Filter>edit\history</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\IOperaterBase.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshape\Math.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="alg">
+      <UniqueIdentifier>{e6e870fb-313a-412c-8d4f-8a31a0a1d98d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external">
+      <UniqueIdentifier>{416815a5-f478-4835-afe6-de083a27a114}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\clipper">
+      <UniqueIdentifier>{09ce3411-f14c-4ff0-b025-98adfd0cc5e9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\math\alg\DelaunayTriangulation.cpp">
+      <Filter>alg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\math\alg\MinBoundingBox.cpp">
+      <Filter>alg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\math\alg\PolygonClipper.cpp">
+      <Filter>alg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\math\alg\SGI.cpp">
+      <Filter>alg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\math\alg\TrapezoidalDec.cpp">
+      <Filter>alg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\editor-external\clipper\clipper.cpp">
+      <Filter>external\clipper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\math\Math2D.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\ee\DelaunayTriangulation.h">
+      <Filter>alg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\MinBoundingBox.h">
+      <Filter>alg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\PolygonClipper.h">
+      <Filter>alg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SGI.h">
+      <Filter>alg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\TrapezoidalDec.h">
+      <Filter>alg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\editor-external\clipper\clipper.hpp">
+      <Filter>external\clipper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\Math2D.h" />
+    <ClInclude Include="..\..\..\include\ee\math_common.h" />
+    <ClInclude Include="..\..\..\include\ee\Random.h" />
+    <ClInclude Include="..\..\..\include\ee\std_functor.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\include\ee\Math2D.inl" />
+    <None Include="..\..\..\include\ee\Random.inl" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="view">
+      <UniqueIdentifier>{7657084d-9128-4a6d-8045-bb0f7bc74fe3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\library">
+      <UniqueIdentifier>{d2f025c4-2784-4ab7-917c-2088de8e3486}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\stage">
+      <UniqueIdentifier>{6e3f30b7-ecc9-436f-bc16-1d2d9b0db562}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\toolbar">
+      <UniqueIdentifier>{7f15102e-a92b-4988-8898-ffcbc582eba6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\property">
+      <UniqueIdentifier>{ccc2007c-e5cc-43a0-b09c-dadd288894c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{31c2e527-5692-4a5c-ace2-9956d2742e22}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libanim2\LibraryPage.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libanim2\LibraryPanel.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libanim2\StageCanvas.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libanim2\StagePanel.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libanim2\ToolbarPanel.cpp">
+      <Filter>view\toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libanim2\PropertySetting.cpp">
+      <Filter>view\property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libanim2\Sprite.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libanim2\Symbol.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libanim2\LibraryPage.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libanim2\LibraryPanel.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libanim2\StageCanvas.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libanim2\StagePanel.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libanim2\ToolbarPanel.h">
+      <Filter>view\toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libanim2\PropertySetting.h">
+      <Filter>view\property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libanim2\Sprite.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libanim2\Symbol.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

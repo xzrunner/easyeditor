@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>5.libskeleton</ProjectName>
+    <ProjectGuid>{0A0F323F-D04E-44A6-9784-C1947AC38DA8}</ProjectGuid>
+    <RootNamespace>libskeleton</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\libskeleton\x86\Debug\</OutDir>
+    <IntDir>..\libskeleton\x86\Debug\obj\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\libskeleton\x86\Release\</OutDir>
+    <IntDir>..\libskeleton\x86\Release\obj\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\easymesh\src;..\..\..\..\easyshape\src;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\shaderlab\include\;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\easymesh\src;..\..\..\..\easyshape\src;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\shaderlab\include\;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libskeleton\EditDialog.cpp" />
+    <ClCompile Include="..\..\..\src\libskeleton\EditJointPoseOP.cpp" />
+    <ClCompile Include="..\..\..\src\libskeleton\Joint.cpp" />
+    <ClCompile Include="..\..\..\src\libskeleton\LibraryPage.cpp" />
+    <ClCompile Include="..\..\..\src\libskeleton\RotateJointAOP.cpp" />
+    <ClCompile Include="..\..\..\src\libskeleton\RotateJointState.cpp" />
+    <ClCompile Include="..\..\..\src\libskeleton\ScaleJointAOP.cpp" />
+    <ClCompile Include="..\..\..\src\libskeleton\ScaleJointState.cpp" />
+    <ClCompile Include="..\..\..\src\libskeleton\Sprite.cpp" />
+    <ClCompile Include="..\..\..\src\libskeleton\StageCanvas.cpp" />
+    <ClCompile Include="..\..\..\src\libskeleton\StagePanel.cpp" />
+    <ClCompile Include="..\..\..\src\libskeleton\Symbol.cpp" />
+    <ClCompile Include="..\..\..\src\libskeleton\TranslateJointAOP.cpp" />
+    <ClCompile Include="..\..\..\src\libskeleton\TranslateJointState.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libskeleton\EditDialog.h" />
+    <ClInclude Include="..\..\..\src\libskeleton\EditJointPoseOP.h" />
+    <ClInclude Include="..\..\..\src\libskeleton\Joint.h" />
+    <ClInclude Include="..\..\..\src\libskeleton\LibraryPage.h" />
+    <ClInclude Include="..\..\..\src\libskeleton\RotateJointAOP.h" />
+    <ClInclude Include="..\..\..\src\libskeleton\RotateJointState.h" />
+    <ClInclude Include="..\..\..\src\libskeleton\ScaleJointAOP.h" />
+    <ClInclude Include="..\..\..\src\libskeleton\ScaleJointState.h" />
+    <ClInclude Include="..\..\..\src\libskeleton\Sprite.h" />
+    <ClInclude Include="..\..\..\src\libskeleton\StageCanvas.h" />
+    <ClInclude Include="..\..\..\src\libskeleton\StagePanel.h" />
+    <ClInclude Include="..\..\..\src\libskeleton\Symbol.h" />
+    <ClInclude Include="..\..\..\src\libskeleton\TranslateJointAOP.h" />
+    <ClInclude Include="..\..\..\src\libskeleton\TranslateJointState.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

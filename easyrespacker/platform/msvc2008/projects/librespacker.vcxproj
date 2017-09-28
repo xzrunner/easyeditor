@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>5.librespacker</ProjectName>
+    <ProjectGuid>{E5C07F5D-F889-4FC2-8DA8-194023914BBE}</ProjectGuid>
+    <RootNamespace>librespacker</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\librespacker\x86\Debug\</OutDir>
+    <IntDir>..\librespacker\x86\Debug\obj\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\librespacker\x86\Release\</OutDir>
+    <IntDir>..\librespacker\x86\Release\obj\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\timp\include;..\..\..\..\sprite2\include;..\..\..\..\polymesh\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\gimg\src\gimg;..\..\..\..\mtrail\src\mtrail;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easyui\src;..\..\..\..\easyscale9\src;..\..\..\..\easycomplex\src;..\..\..\..\easymesh\src;..\..\..\..\easymask\src;..\..\..\..\easyimage\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\particle\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easytrail\src;..\..\..\..\easytext\src;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\lzma\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;_CRT_NO_VA_START_VALIDATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\librespacker\x86\Debug</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\librespacker\x86\Debug\cocextract.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\timp\include;..\..\..\..\sprite2\include;..\..\..\..\polymesh\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\gimg\src\gimg;..\..\..\..\mtrail\src\mtrail;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easyui\src;..\..\..\..\easyscale9\src;..\..\..\..\easycomplex\src;..\..\..\..\easymesh\src;..\..\..\..\easymask\src;..\..\..\..\easyimage\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\particle\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easytrail\src;..\..\..\..\easytext\src;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\lzma\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;_CRT_NO_VA_START_VALIDATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\librespacker\x86\Release</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\librespacker\x86\Release\cocextract.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\librespacker\AnchorBuilder.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\AnimBuilder.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\AnimFromBin.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\AnimFromLua.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\AnimToBin.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\AnimToLuaString.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\ClipboxBuilder.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\ClipboxFromBin.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\ClipboxFromLua.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\ClipboxToBin.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\ClipboxToLuaString.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\ComplexBuilder.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\ExportNameSet.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\IconBuilder.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\ImageBuilder.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\IPackNode.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\LabelBuilder.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\LabelFromBin.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\LabelFromLua.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\LabelToBin.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\LabelToLuaString.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\LuaDataHelper.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\Lzma.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\MaskBuilder.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\MaskFromBin.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\MaskFromLua.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\MaskToBin.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\MaskToLuaString.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\MeshBuilder.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\MeshFromBin.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\MeshFromLua.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\MeshSprBuilder.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\MeshSprFromBin.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\MeshSprFromLua.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\MeshSprToBin.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\MeshSprToLuaString.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\MeshToBin.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\MeshToLuaString.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\NodeFromBin.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\NodeFromLua.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\NodeToBin.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\NodeToLuaString.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\P3dSprBuilder.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\P3dSprFromBin.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\P3dSprFromLua.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\P3dSprToBin.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\P3dSprToLuaString.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\PackAnchor.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\PackAnimation.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\PackClipbox.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\PackETC1.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\PackETC2.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\PackLabel.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\PackMask.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\PackMesh.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\PackMeshSpr.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\PackNodeFactory.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\PackP3dSpr.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\PackParticle2D.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\PackParticle3D.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\PackPicture.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\PackPkgMgr.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\PackPNG.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\PackPVR.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\PackShape.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\PackTag.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\PackToBin.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\PackToLuaString.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\PackTrail.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\PackUI.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\PackUIListTask.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\PackUIWindowTask.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\PackUIWrapperTask.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\Particle2DBuilder.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\Particle2DFromBin.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\Particle2DFromLua.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\Particle2DToBin.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\Particle2DToLuaString.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\Particle3DBuilder.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\Particle3DFromBin.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\Particle3DFromLua.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\Particle3DToBin.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\Particle3DToLuaString.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\PictureFromBin.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\PictureFromLua.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\PictureToBin.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\PictureToLuaString.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\ResPacker.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\ResUnpacker.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\Scale9Builder.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\ShapeBuilder.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\ShapeFromBin.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\ShapeFromLua.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\ShapeToBin.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\ShapeToLuaString.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\Terrain2DBuilder.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\TextBuilder.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\TextureBuilder.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\TrailBuilder.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\TrailFromBin.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\TrailFromLua.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\TrailToBin.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\TrailToLuaString.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\UnpackFromBin.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\UnpackFromLua.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\UnpackNodeFactory.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\Utility.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\librespacker\AnchorBuilder.h" />
+    <ClInclude Include="..\..\..\src\librespacker\AnimBuilder.h" />
+    <ClInclude Include="..\..\..\src\librespacker\AnimFromBin.h" />
+    <ClInclude Include="..\..\..\src\librespacker\AnimFromLua.h" />
+    <ClInclude Include="..\..\..\src\librespacker\AnimToBin.h" />
+    <ClInclude Include="..\..\..\src\librespacker\AnimToLuaString.h" />
+    <ClInclude Include="..\..\..\src\librespacker\ClipboxBuilder.h" />
+    <ClInclude Include="..\..\..\src\librespacker\ClipboxFromBin.h" />
+    <ClInclude Include="..\..\..\src\librespacker\ClipboxFromLua.h" />
+    <ClInclude Include="..\..\..\src\librespacker\ClipboxToBin.h" />
+    <ClInclude Include="..\..\..\src\librespacker\ClipboxToLuaString.h" />
+    <ClInclude Include="..\..\..\src\librespacker\ComplexBuilder.h" />
+    <ClInclude Include="..\..\..\src\librespacker\ExportNameSet.h" />
+    <ClInclude Include="..\..\..\src\librespacker\IconBuilder.h" />
+    <ClInclude Include="..\..\..\src\librespacker\ImageBuilder.h" />
+    <ClInclude Include="..\..\..\src\librespacker\INodeBuilder.h" />
+    <ClInclude Include="..\..\..\src\librespacker\IPackNode.h" />
+    <ClInclude Include="..\..\..\src\librespacker\LabelBuilder.h" />
+    <ClInclude Include="..\..\..\src\librespacker\LabelFromBin.h" />
+    <ClInclude Include="..\..\..\src\librespacker\LabelFromLua.h" />
+    <ClInclude Include="..\..\..\src\librespacker\LabelToBin.h" />
+    <ClInclude Include="..\..\..\src\librespacker\LabelToLuaString.h" />
+    <ClInclude Include="..\..\..\src\librespacker\LuaDataHelper.h" />
+    <ClInclude Include="..\..\..\src\librespacker\Lzma.h" />
+    <ClInclude Include="..\..\..\src\librespacker\MaskBuilder.h" />
+    <ClInclude Include="..\..\..\src\librespacker\MaskFromBin.h" />
+    <ClInclude Include="..\..\..\src\librespacker\MaskFromLua.h" />
+    <ClInclude Include="..\..\..\src\librespacker\MaskToBin.h" />
+    <ClInclude Include="..\..\..\src\librespacker\MaskToLuaString.h" />
+    <ClInclude Include="..\..\..\src\librespacker\MeshBuilder.h" />
+    <ClInclude Include="..\..\..\src\librespacker\MeshFromBin.h" />
+    <ClInclude Include="..\..\..\src\librespacker\MeshFromLua.h" />
+    <ClInclude Include="..\..\..\src\librespacker\MeshSprBuilder.h" />
+    <ClInclude Include="..\..\..\src\librespacker\MeshSprFromBin.h" />
+    <ClInclude Include="..\..\..\src\librespacker\MeshSprFromLua.h" />
+    <ClInclude Include="..\..\..\src\librespacker\MeshSprToBin.h" />
+    <ClInclude Include="..\..\..\src\librespacker\MeshSprToLuaString.h" />
+    <ClInclude Include="..\..\..\src\librespacker\MeshToBin.h" />
+    <ClInclude Include="..\..\..\src\librespacker\MeshToLuaString.h" />
+    <ClInclude Include="..\..\..\src\librespacker\NodeFromBin.h" />
+    <ClInclude Include="..\..\..\src\librespacker\NodeFromLua.h" />
+    <ClInclude Include="..\..\..\src\librespacker\NodeToBin.h" />
+    <ClInclude Include="..\..\..\src\librespacker\NodeToLuaString.h" />
+    <ClInclude Include="..\..\..\src\librespacker\P3dSprBuilder.h" />
+    <ClInclude Include="..\..\..\src\librespacker\P3dSprFromBin.h" />
+    <ClInclude Include="..\..\..\src\librespacker\P3dSprFromLua.h" />
+    <ClInclude Include="..\..\..\src\librespacker\P3dSprToBin.h" />
+    <ClInclude Include="..\..\..\src\librespacker\P3dSprToLuaString.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PackAnchor.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PackAnimation.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PackClipbox.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PackETC1.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PackETC2.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PackImage.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PackLabel.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PackMask.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PackMesh.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PackMeshSpr.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PackNodeFactory.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PackP3dSpr.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PackParticle2D.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PackParticle3D.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PackPicture.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PackPkgMgr.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PackPNG.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PackPVR.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PackShape.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PackTag.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PackToBin.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PackToLuaString.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PackTrail.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PackUI.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PackUIListTask.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PackUITask.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PackUIWindowTask.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PackUIWrapperTask.h" />
+    <ClInclude Include="..\..\..\src\librespacker\pack_ui_cfg.h" />
+    <ClInclude Include="..\..\..\src\librespacker\pack_unpack.h" />
+    <ClInclude Include="..\..\..\src\librespacker\Particle2DBuilder.h" />
+    <ClInclude Include="..\..\..\src\librespacker\Particle2DFromBin.h" />
+    <ClInclude Include="..\..\..\src\librespacker\Particle2DFromLua.h" />
+    <ClInclude Include="..\..\..\src\librespacker\Particle2DToBin.h" />
+    <ClInclude Include="..\..\..\src\librespacker\Particle2DToLuaString.h" />
+    <ClInclude Include="..\..\..\src\librespacker\Particle3DBuilder.h" />
+    <ClInclude Include="..\..\..\src\librespacker\Particle3DFromBin.h" />
+    <ClInclude Include="..\..\..\src\librespacker\Particle3DFromLua.h" />
+    <ClInclude Include="..\..\..\src\librespacker\Particle3DToBin.h" />
+    <ClInclude Include="..\..\..\src\librespacker\Particle3DToLuaString.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PictureFromBin.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PictureFromLua.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PictureToBin.h" />
+    <ClInclude Include="..\..\..\src\librespacker\PictureToLuaString.h" />
+    <ClInclude Include="..\..\..\src\librespacker\ResPacker.h" />
+    <ClInclude Include="..\..\..\src\librespacker\ResUnpacker.h" />
+    <ClInclude Include="..\..\..\src\librespacker\Scale9Builder.h" />
+    <ClInclude Include="..\..\..\src\librespacker\ShapeBuilder.h" />
+    <ClInclude Include="..\..\..\src\librespacker\ShapeFromBin.h" />
+    <ClInclude Include="..\..\..\src\librespacker\ShapeFromLua.h" />
+    <ClInclude Include="..\..\..\src\librespacker\ShapeToBin.h" />
+    <ClInclude Include="..\..\..\src\librespacker\ShapeToLuaString.h" />
+    <ClInclude Include="..\..\..\src\librespacker\Terrain2DBuilder.h" />
+    <ClInclude Include="..\..\..\src\librespacker\TextBuilder.h" />
+    <ClInclude Include="..\..\..\src\librespacker\TextureBuilder.h" />
+    <ClInclude Include="..\..\..\src\librespacker\TrailBuilder.h" />
+    <ClInclude Include="..\..\..\src\librespacker\TrailFromBin.h" />
+    <ClInclude Include="..\..\..\src\librespacker\TrailFromLua.h" />
+    <ClInclude Include="..\..\..\src\librespacker\TrailToBin.h" />
+    <ClInclude Include="..\..\..\src\librespacker\TrailToLuaString.h" />
+    <ClInclude Include="..\..\..\src\librespacker\typedef.h" />
+    <ClInclude Include="..\..\..\src\librespacker\UnpackFromBin.h" />
+    <ClInclude Include="..\..\..\src\librespacker\UnpackFromLua.h" />
+    <ClInclude Include="..\..\..\src\librespacker\UnpackNodeFactory.h" />
+    <ClInclude Include="..\..\..\src\librespacker\Utility.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\src\librespacker\trans_ejoy2d_data.lua" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>4.libdata</ProjectName>
+    <ProjectGuid>{77E15C91-F70B-4141-A0FC-4E82D1C43BD2}</ProjectGuid>
+    <RootNamespace>libdata</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\libdata\x86\Debug\</OutDir>
+    <IntDir>..\libdata\x86\Debug\obj\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\libdata\x86\Release\</OutDir>
+    <IntDir>..\libdata\x86\Release\obj\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include\ee;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\unirender\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\shaderlab\include\;..\..\..\..\dtex2\include;..\..\..\..\gimg\src\gimg;..\..\..\..\pimg\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\giflib\include;..\..\..\..\editor-external\gl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\libdata\x86\Debug</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\libdata\x86\Debug\libdata.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\include\ee;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\unirender\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\shaderlab\include\;..\..\..\..\dtex2\include;..\..\..\..\gimg\src\gimg;..\..\..\..\pimg\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\giflib\include;..\..\..\..\editor-external\gl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\libdata\x86\Release</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\libdata\x86\Release\libdata.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\ee\AnimatedGifSaver.h" />
+    <ClInclude Include="..\..\..\include\ee\Bitmap.h" />
+    <ClInclude Include="..\..\..\include\ee\Blackboard.h" />
+    <ClInclude Include="..\..\..\include\ee\cfg_const.h" />
+    <ClInclude Include="..\..\..\include\ee\color_config.h" />
+    <ClInclude Include="..\..\..\include\ee\Config.h" />
+    <ClInclude Include="..\..\..\include\ee\convert_color.h" />
+    <ClInclude Include="..\..\..\include\ee\CountVerifyVisitor.h" />
+    <ClInclude Include="..\..\..\include\ee\CurrSprTreePath.h" />
+    <ClInclude Include="..\..\..\include\ee\DataTraverseType.h" />
+    <ClInclude Include="..\..\..\include\ee\dev_config.h" />
+    <ClInclude Include="..\..\..\include\ee\DummySprite.h" />
+    <ClInclude Include="..\..\..\include\ee\DummySymbol.h" />
+    <ClInclude Include="..\..\..\include\ee\EmptyVerifyVisitor.h" />
+    <ClInclude Include="..\..\..\include\ee\FetchAllVisitor.h" />
+    <ClInclude Include="..\..\..\include\ee\FontBlankSprite.h" />
+    <ClInclude Include="..\..\..\include\ee\FontBlankSymbol.h" />
+    <ClInclude Include="..\..\..\include\ee\GetNameVisitor.h" />
+    <ClInclude Include="..\..\..\include\ee\Group.h" />
+    <ClInclude Include="..\..\..\include\ee\Image.h" />
+    <ClInclude Include="..\..\..\include\ee\ImageData.h" />
+    <ClInclude Include="..\..\..\include\ee\ImagePack.h" />
+    <ClInclude Include="..\..\..\include\ee\ImageSprite.h" />
+    <ClInclude Include="..\..\..\include\ee\ImageSymbol.h" />
+    <ClInclude Include="..\..\..\include\ee\KeysState.h" />
+    <ClInclude Include="..\..\..\include\ee\key_type.h" />
+    <ClInclude Include="..\..\..\include\ee\Layer.h" />
+    <ClInclude Include="..\..\..\include\ee\LayerMgr.h" />
+    <ClInclude Include="..\..\..\include\ee\ListItem.h" />
+    <ClInclude Include="..\..\..\include\ee\ObjectVector.h" />
+    <ClInclude Include="..\..\..\include\ee\ObjSelectionSet.h" />
+    <ClInclude Include="..\..\..\include\ee\PointerPool.h" />
+    <ClInclude Include="..\..\..\include\ee\PointMultiQueryVisitor.h" />
+    <ClInclude Include="..\..\..\include\ee\PointQueryVisitor.h" />
+    <ClInclude Include="..\..\..\include\ee\RectQueryVisitor.h" />
+    <ClInclude Include="..\..\..\include\ee\ReloadSymVisitor.h" />
+    <ClInclude Include="..\..\..\include\ee\ResourcesMgr.h" />
+    <ClInclude Include="..\..\..\include\ee\ScriptsSprite.h" />
+    <ClInclude Include="..\..\..\include\ee\ScriptsSymbol.h" />
+    <ClInclude Include="..\..\..\include\ee\script_type.h" />
+    <ClInclude Include="..\..\..\include\ee\SearcherPathMgr.h" />
+    <ClInclude Include="..\..\..\include\ee\SelectionSet.h" />
+    <ClInclude Include="..\..\..\include\ee\SettingData.h" />
+    <ClInclude Include="..\..\..\include\ee\Shape.h" />
+    <ClInclude Include="..\..\..\include\ee\ShapeSelection.h" />
+    <ClInclude Include="..\..\..\include\ee\SpecialConfig.h" />
+    <ClInclude Include="..\..\..\include\ee\Sprite.h" />
+    <ClInclude Include="..\..\..\include\ee\SpriteFactory.h" />
+    <ClInclude Include="..\..\..\include\ee\SpriteIO.h" />
+    <ClInclude Include="..\..\..\include\ee\SpriteLoader.h" />
+    <ClInclude Include="..\..\..\include\ee\SpriteObserver.h" />
+    <ClInclude Include="..\..\..\include\ee\SpriteSelection.h" />
+    <ClInclude Include="..\..\..\include\ee\Symbol.h" />
+    <ClInclude Include="..\..\..\include\ee\SymbolFactory.h" />
+    <ClInclude Include="..\..\..\include\ee\SymbolFile.h" />
+    <ClInclude Include="..\..\..\include\ee\SymbolLoader.h" />
+    <ClInclude Include="..\..\..\include\ee\SymbolMgr.h" />
+    <ClInclude Include="..\..\..\include\ee\SymbolPath.h" />
+    <ClInclude Include="..\..\..\include\ee\SymbolSearcher.h" />
+    <ClInclude Include="..\..\..\include\ee\SymbolType.h" />
+    <ClInclude Include="..\..\..\include\ee\TexPackerAdapter.h" />
+    <ClInclude Include="..\..\..\include\ee\Texture.h" />
+    <ClInclude Include="..\..\..\include\ee\TextureFactory.h" />
+    <ClInclude Include="..\..\..\include\ee\TextureImgData.h" />
+    <ClInclude Include="..\..\..\include\ee\TexturePacker.h" />
+    <ClInclude Include="..\..\..\include\ee\TextureRT.h" />
+    <ClInclude Include="..\..\..\include\ee\TPNode.h" />
+    <ClInclude Include="..\..\..\include\ee\UserDataImpl.h" />
+    <ClInclude Include="..\..\..\include\ee\Visitor.h" />
+    <ClInclude Include="..\..\..\include\ee\wrap_ISprite.h" />
+    <ClInclude Include="..\..\..\include\ee\wrap_SelectionSet.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\include\ee\SymbolLoader.cpp" />
+    <ClCompile Include="..\..\..\source\data\common\AnimatedGifSaver.cpp" />
+    <ClCompile Include="..\..\..\source\data\common\Bitmap.cpp" />
+    <ClCompile Include="..\..\..\source\data\common\Blackboard.cpp" />
+    <ClCompile Include="..\..\..\source\data\common\KeysState.cpp" />
+    <ClCompile Include="..\..\..\source\data\common\ListItem.cpp" />
+    <ClCompile Include="..\..\..\source\data\common\TexPackerAdapter.cpp" />
+    <ClCompile Include="..\..\..\source\data\common\TPNode.cpp" />
+    <ClCompile Include="..\..\..\source\data\common\UserDataImpl.cpp" />
+    <ClCompile Include="..\..\..\source\data\config\Config.cpp" />
+    <ClCompile Include="..\..\..\source\data\config\CurrSprTreePath.cpp" />
+    <ClCompile Include="..\..\..\source\data\config\SettingData.cpp" />
+    <ClCompile Include="..\..\..\source\data\config\SpecialConfig.cpp" />
+    <ClCompile Include="..\..\..\source\data\image\Image.cpp" />
+    <ClCompile Include="..\..\..\source\data\image\ImageData.cpp" />
+    <ClCompile Include="..\..\..\source\data\image\ImagePack.cpp" />
+    <ClCompile Include="..\..\..\source\data\image\TextureFactory.cpp" />
+    <ClCompile Include="..\..\..\source\data\image\TextureImgData.cpp" />
+    <ClCompile Include="..\..\..\source\data\image\TexturePacker.cpp" />
+    <ClCompile Include="..\..\..\source\data\image\TextureRT.cpp" />
+    <ClCompile Include="..\..\..\source\data\primitive\convert_color.cpp" />
+    <ClCompile Include="..\..\..\source\data\primitive\RectQueryVisitor.cpp" />
+    <ClCompile Include="..\..\..\source\data\primitive\ShapeSelection.cpp" />
+    <ClCompile Include="..\..\..\source\data\primitive\SpriteSelection.cpp" />
+    <ClCompile Include="..\..\..\source\data\primitive\wrap_SelectionSet.cpp" />
+    <ClCompile Include="..\..\..\source\data\scene\Group.cpp" />
+    <ClCompile Include="..\..\..\source\data\scene\Layer.cpp" />
+    <ClCompile Include="..\..\..\source\data\scene\LayerMgr.cpp" />
+    <ClCompile Include="..\..\..\source\data\shape\Shape.cpp" />
+    <ClCompile Include="..\..\..\source\data\sprite\DummySprite.cpp" />
+    <ClCompile Include="..\..\..\source\data\sprite\FontBlankSprite.cpp" />
+    <ClCompile Include="..\..\..\source\data\sprite\ImageSprite.cpp" />
+    <ClCompile Include="..\..\..\source\data\sprite\ScriptsSprite.cpp" />
+    <ClCompile Include="..\..\..\source\data\sprite\Sprite.cpp" />
+    <ClCompile Include="..\..\..\source\data\sprite\SpriteFactory.cpp" />
+    <ClCompile Include="..\..\..\source\data\sprite\SpriteIO.cpp" />
+    <ClCompile Include="..\..\..\source\data\sprite\SpriteLoader.cpp" />
+    <ClCompile Include="..\..\..\source\data\sprite\wrap_ISprite.cpp" />
+    <ClCompile Include="..\..\..\source\data\symbol\DummySymbol.cpp" />
+    <ClCompile Include="..\..\..\source\data\symbol\FontBlankSymbol.cpp" />
+    <ClCompile Include="..\..\..\source\data\symbol\ImageSymbol.cpp" />
+    <ClCompile Include="..\..\..\source\data\symbol\ScriptsSymbol.cpp" />
+    <ClCompile Include="..\..\..\source\data\symbol\SearcherPathMgr.cpp" />
+    <ClCompile Include="..\..\..\source\data\symbol\Symbol.cpp" />
+    <ClCompile Include="..\..\..\source\data\symbol\SymbolFactory.cpp" />
+    <ClCompile Include="..\..\..\source\data\symbol\SymbolFile.cpp" />
+    <ClCompile Include="..\..\..\source\data\symbol\SymbolMgr.cpp" />
+    <ClCompile Include="..\..\..\source\data\symbol\SymbolPath.cpp" />
+    <ClCompile Include="..\..\..\source\data\symbol\SymbolSearcher.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\include\ee\ObjectVector.inl" />
+    <None Include="..\..\..\include\ee\ObjSelectionSet.inl" />
+    <None Include="..\..\..\include\ee\ResourcesMgr.inl" />
+    <None Include="..\..\..\include\ee\SelectionSet.inl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="view">
+      <UniqueIdentifier>{bd007228-882d-43e2-8a58-698bcc5bbb59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\library">
+      <UniqueIdentifier>{cf13432b-c8c9-4d15-9890-da681d0786cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\stage">
+      <UniqueIdentifier>{2e9c0752-8e1c-4302-ac89-554dabc486bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{393c390b-86a8-4a4c-b80a-ca7bf98030c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scene">
+      <UniqueIdentifier>{434e34b8-5b30-4f68-923a-aa062110c6a1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libpseudo3d\LibraryPage.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libpseudo3d\LibraryPanel.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libpseudo3d\StageCanvas2D.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libpseudo3d\StageCanvas3D.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libpseudo3d\Mapping3DScene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libpseudo3d\Proj2DEditOP.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libpseudo3d\Projection2DScene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libpseudo3d\Projection3DScene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libpseudo3d\LibraryPage.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libpseudo3d\LibraryPanel.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libpseudo3d\StageCanvas2D.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libpseudo3d\StageCanvas3D.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libpseudo3d\IScene.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libpseudo3d\Mapping3DScene.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libpseudo3d\Proj2DEditOP.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libpseudo3d\Projection2DScene.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libpseudo3d\Projection3DScene.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libpseudo3d\config.h" />
+  </ItemGroup>
+</Project>

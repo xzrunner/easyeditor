@@ -1,0 +1,489 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="grouptree">
+      <UniqueIdentifier>{e5167368-a8ab-4cd0-a9fc-7a159cee2781}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="layer">
+      <UniqueIdentifier>{0062452e-3ede-4fd6-a8cb-cfe8f0827401}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="library">
+      <UniqueIdentifier>{3b67dcfd-c367-493a-ad41-013fc1842b2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="library\fontblank">
+      <UniqueIdentifier>{360e31e2-be46-460d-a719-21ce18b72b51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="library\image">
+      <UniqueIdentifier>{000c3a5d-f9a5-4510-a6ff-c6ee4f6867c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="library\scripts">
+      <UniqueIdentifier>{f37e5e66-787d-4067-bcaf-06a7105be796}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="property">
+      <UniqueIdentifier>{fb1f51c0-e56a-4e89-b750-3775a6d35183}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="property\sprite">
+      <UniqueIdentifier>{be1503d5-76db-4bd6-bab4-603a992983fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="property\sprite\multi">
+      <UniqueIdentifier>{79ef98c8-666d-4786-9fd1-aedbfeadb2ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="property\sprite\single">
+      <UniqueIdentifier>{6a05dbf7-dd72-41ee-8745-8122482d8afb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="property\sprite\single\tag">
+      <UniqueIdentifier>{1da08647-350d-4914-ba4a-e95bd3e8194e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="property\symbol">
+      <UniqueIdentifier>{429759b3-2b67-437a-9f0c-387786f923c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="stage">
+      <UniqueIdentifier>{d4934369-95c3-443b-b4d5-8abea9f18906}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="stage\canvas">
+      <UniqueIdentifier>{00901d2a-9c28-42f9-a1d8-a6c7dccf9151}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="stage\canvas\base">
+      <UniqueIdentifier>{d63560dc-1307-4246-a61c-4c075fbf12fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="stage\data">
+      <UniqueIdentifier>{eb8250e5-82d0-4b2a-8a1c-1d09d6d461ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="stage\shape">
+      <UniqueIdentifier>{06bdeb7b-4497-40fa-a5b4-f84cc15f5992}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="stage\sprite">
+      <UniqueIdentifier>{86492a37-837e-4da2-9ea6-e869f4bfc61f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="toolbar">
+      <UniqueIdentifier>{c9db6170-c768-4291-bf27-315a0365c6b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="others">
+      <UniqueIdentifier>{88393f38-dfe3-481a-80f8-1a46576a0ad8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="others\drop">
+      <UniqueIdentifier>{ce7eb205-c1cd-4775-a4ed-d6a853bf7838}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="others\dialog">
+      <UniqueIdentifier>{e663ab6b-b6ca-47f1-83fe-0a3153329249}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="others\frame">
+      <UniqueIdentifier>{efbaf321-6f8c-44dc-863e-0c0189f59de4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="viewlist">
+      <UniqueIdentifier>{7f761db8-0806-4dc5-a7a3-a10b3de04aa2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\view\grouptree\GroupTreeCtrl.cpp">
+      <Filter>grouptree</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\grouptree\GroupTreeImpl.cpp">
+      <Filter>grouptree</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\grouptree\GroupTreeIO.cpp">
+      <Filter>grouptree</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\grouptree\GroupTreeItem.cpp">
+      <Filter>grouptree</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\grouptree\GroupTreePanel.cpp">
+      <Filter>grouptree</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\layer\LayerDialog.cpp">
+      <Filter>layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\layer\LayerList.cpp">
+      <Filter>layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\layer\LayerPanel.cpp">
+      <Filter>layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\library\LibraryList.cpp">
+      <Filter>library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\library\LibraryPage.cpp">
+      <Filter>library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\library\LibraryPanel.cpp">
+      <Filter>library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\library\FontBlankDialog.cpp">
+      <Filter>library\fontblank</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\library\LibraryFontBlankList.cpp">
+      <Filter>library\fontblank</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\library\LibraryFontBlankPage.cpp">
+      <Filter>library\fontblank</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\library\LibraryImagePage.cpp">
+      <Filter>library\image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\library\LibraryScriptsPage.cpp">
+      <Filter>library\scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\property\PropColMonitor.cpp">
+      <Filter>property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\property\PropertySetting.cpp">
+      <Filter>property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\property\PropertySettingPanel.cpp">
+      <Filter>property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\property\SprPropColMonitor.cpp">
+      <Filter>property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\property\FontBlankPropertySetting.cpp">
+      <Filter>property\sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\property\MultiSpritesPropertyImpl.cpp">
+      <Filter>property\sprite\multi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\property\MultiSpritesPropertySetting.cpp">
+      <Filter>property\sprite\multi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\property\SprFilterProperty.cpp">
+      <Filter>property\sprite\single</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\property\SpritePropertyImpl.cpp">
+      <Filter>property\sprite\single</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\property\SpritePropertySetting.cpp">
+      <Filter>property\sprite\single</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\property\SprTagCfg.cpp">
+      <Filter>property\sprite\single\tag</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\property\SprTagEditDlg.cpp">
+      <Filter>property\sprite\single\tag</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\property\SprTagProperty.cpp">
+      <Filter>property\sprite\single\tag</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\property\SymbolPropertySetting.cpp">
+      <Filter>property\symbol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\stage\EditPanel.cpp">
+      <Filter>stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\stage\EditPanelImpl.cpp">
+      <Filter>stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\stage\wrap_StagePanel.cpp">
+      <Filter>stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\stage\CameraCanvas.cpp">
+      <Filter>stage\canvas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\stage\DialogStageCanvas.cpp">
+      <Filter>stage\canvas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\stage\OnePassCanvas.cpp">
+      <Filter>stage\canvas\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\stage\StageCanvas.cpp">
+      <Filter>stage\canvas\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\stage\TwoPassCanvas.cpp">
+      <Filter>stage\canvas\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\stage\ShapesContainer.cpp">
+      <Filter>stage\data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\stage\SpritesContainer.cpp">
+      <Filter>stage\data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\stage\MultiShapesImpl.cpp">
+      <Filter>stage\shape</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\stage\ShapesPanelImpl.cpp">
+      <Filter>stage\shape</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\stage\MultiSpritesImpl.cpp">
+      <Filter>stage\sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\stage\SpritesPanelImpl.cpp">
+      <Filter>stage\sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\toolbar\ToolbarPanel.cpp">
+      <Filter>toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\others\CombinedDropData.cpp">
+      <Filter>others\drop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\others\CombinedDropTarget.cpp">
+      <Filter>others\drop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\others\FrameDropTarget.cpp">
+      <Filter>others\drop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\others\LibraryPageDropTarget.cpp">
+      <Filter>others\drop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\others\LibraryPanelDropTarget.cpp">
+      <Filter>others\drop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\others\SpriteDropTarget.cpp">
+      <Filter>others\drop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\others\StageDropTarget.cpp">
+      <Filter>others\drop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\others\BaseDialog.cpp">
+      <Filter>others\dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\others\CfgEditDlg.cpp">
+      <Filter>others\dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\others\ConfirmDialog.cpp">
+      <Filter>others\dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\others\ExceptionDlg.cpp">
+      <Filter>others\dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\others\FilepathDialog.cpp">
+      <Filter>others\dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\others\FinishDialog.cpp">
+      <Filter>others\dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\others\SetNameDialog.cpp">
+      <Filter>others\dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\others\SettingsDialog.cpp">
+      <Filter>others\dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\others\SpriteDialog.cpp">
+      <Filter>others\dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\others\TextDialog.cpp">
+      <Filter>others\dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\others\Frame.cpp">
+      <Filter>others\frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\others\RecentFilesMenu.cpp">
+      <Filter>others\frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\viewlist\ViewlistList.cpp">
+      <Filter>viewlist</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\viewlist\ViewlistPanel.cpp">
+      <Filter>viewlist</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\ee\GroupTreeCtrl.h">
+      <Filter>grouptree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\GroupTreeImpl.h">
+      <Filter>grouptree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\GroupTreeIO.h">
+      <Filter>grouptree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\GroupTreeItem.h">
+      <Filter>grouptree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\GroupTreePanel.h">
+      <Filter>grouptree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\GroupTreeVisitor.h">
+      <Filter>grouptree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\LayerDialog.h">
+      <Filter>layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\LayerList.h">
+      <Filter>layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\LayerPanel.h">
+      <Filter>layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\LibraryList.h">
+      <Filter>library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\LibraryPage.h">
+      <Filter>library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\LibraryPanel.h">
+      <Filter>library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\FontBlankDialog.h">
+      <Filter>library\fontblank</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\LibraryFontBlankList.h">
+      <Filter>library\fontblank</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\LibraryFontBlankPage.h">
+      <Filter>library\fontblank</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\LibraryImagePage.h">
+      <Filter>library\image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\LibraryScriptsPage.h">
+      <Filter>library\scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\PropColMonitor.h">
+      <Filter>property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\PropertySetting.h">
+      <Filter>property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\PropertySettingPanel.h">
+      <Filter>property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SprPropColMonitor.h">
+      <Filter>property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\FontBlankPropertySetting.h">
+      <Filter>property\sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\MultiSpritesPropertyImpl.h">
+      <Filter>property\sprite\multi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\MultiSpritesPropertySetting.h">
+      <Filter>property\sprite\multi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SprFilterProperty.h">
+      <Filter>property\sprite\single</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SpritePropertyImpl.h">
+      <Filter>property\sprite\single</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SpritePropertySetting.h">
+      <Filter>property\sprite\single</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SprTagCfg.h">
+      <Filter>property\sprite\single\tag</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SprTagEditDlg.h">
+      <Filter>property\sprite\single\tag</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SprTagProperty.h">
+      <Filter>property\sprite\single\tag</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SymbolPropertySetting.h">
+      <Filter>property\symbol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\EditPanel.h">
+      <Filter>stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\EditPanelImpl.h">
+      <Filter>stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\wrap_StagePanel.h">
+      <Filter>stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\CameraCanvas.h">
+      <Filter>stage\canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\DialogStageCanvas.h">
+      <Filter>stage\canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\OnePassCanvas.h">
+      <Filter>stage\canvas\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\StageCanvas.h">
+      <Filter>stage\canvas\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\TwoPassCanvas.h">
+      <Filter>stage\canvas\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\DataContainer.h">
+      <Filter>stage\data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ShapesContainer.h">
+      <Filter>stage\data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SprDataContainer.h">
+      <Filter>stage\data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SpritesContainer.h">
+      <Filter>stage\data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\MultiShapesImpl.h">
+      <Filter>stage\shape</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ShapesPanelImpl.h">
+      <Filter>stage\shape</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\MultiSpritesImpl.h">
+      <Filter>stage\sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SpritesPanelImpl.h">
+      <Filter>stage\sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ToolbarPanel.h">
+      <Filter>toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\CombinedDropData.h">
+      <Filter>others\drop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\CombinedDropTarget.h">
+      <Filter>others\drop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\FrameDropTarget.h">
+      <Filter>others\drop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\LibraryPageDropTarget.h">
+      <Filter>others\drop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\LibraryPanelDropTarget.h">
+      <Filter>others\drop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SpriteDropTarget.h">
+      <Filter>others\drop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\StageDropTarget.h">
+      <Filter>others\drop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\BaseDialog.h">
+      <Filter>others\dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\CfgEditDlg.h">
+      <Filter>others\dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ConfirmDialog.h">
+      <Filter>others\dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ExceptionDlg.h">
+      <Filter>others\dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\FilepathDialog.h">
+      <Filter>others\dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\FinishDialog.h">
+      <Filter>others\dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SetNameDialog.h">
+      <Filter>others\dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SettingsDialog.h">
+      <Filter>others\dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SpriteDialog.h">
+      <Filter>others\dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\TextDialog.h">
+      <Filter>others\dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\Frame.h">
+      <Filter>others\frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\RecentFilesMenu.h">
+      <Filter>others\frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ViewlistList.h">
+      <Filter>viewlist</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ViewlistListImpl.h">
+      <Filter>viewlist</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ViewlistPanel.h">
+      <Filter>viewlist</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

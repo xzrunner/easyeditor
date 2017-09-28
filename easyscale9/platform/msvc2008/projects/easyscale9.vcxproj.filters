@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="stage">
+      <UniqueIdentifier>{20eba23f-18ec-45db-a115-77ddc6c63a29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="toolbar">
+      <UniqueIdentifier>{cd219944-8776-4157-abba-bc21bb8c05c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="frame">
+      <UniqueIdentifier>{c651ddc3-48aa-4540-a1f1-a6db7fa50031}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="editop">
+      <UniqueIdentifier>{591a7e03-f09c-4acd-873a-9bc9b0a3b01f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="editop\compose">
+      <UniqueIdentifier>{363918ab-c518-4e97-91de-f18087220dfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="editop\resize">
+      <UniqueIdentifier>{1d7205b0-d3a6-4ab4-b7b6-5707564a3590}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{cc3b60dc-bec5-4864-b942-722a36c921b0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\easyscale9\StageCanvas.cpp">
+      <Filter>stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyscale9\StagePanel.cpp">
+      <Filter>stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyscale9\ToolbarPanel.cpp">
+      <Filter>toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyscale9\Context.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyscale9\FileIO.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyscale9\main.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyscale9\Task.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyscale9\ComposeOP.cpp">
+      <Filter>editop\compose</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyscale9\ResizeCMPT.cpp">
+      <Filter>editop\resize</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyscale9\ResizeOP.cpp">
+      <Filter>editop\resize</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyscale9\ComposeGrids.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\easyscale9\StageCanvas.h">
+      <Filter>stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyscale9\StagePanel.h">
+      <Filter>stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyscale9\ToolBarPanel.h">
+      <Filter>toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyscale9\Context.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyscale9\FileIO.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyscale9\main.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyscale9\Task.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyscale9\ComposeOP.h">
+      <Filter>editop\compose</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyscale9\ResizeCMPT.h">
+      <Filter>editop\resize</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyscale9\ResizeOP.h">
+      <Filter>editop\resize</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyscale9\ComposeGrids.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\..\..\editor-external\wx\include\wx\msw\wx.rc" />
+  </ItemGroup>
+</Project>

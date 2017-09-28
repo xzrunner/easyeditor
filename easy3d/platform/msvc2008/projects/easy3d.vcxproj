@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>4.libeasy3d</ProjectName>
+    <ProjectGuid>{C4799E05-825C-4633-A3E7-8BA05B45A666}</ProjectGuid>
+    <RootNamespace>easy3d</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\easy3d\x86\Debug\</OutDir>
+    <IntDir>..\easy3d\x86\Debug\obj\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\easy3d\x86\Release\</OutDir>
+    <IntDir>..\easy3d\x86\Release\obj\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\..\editor-external\assimp\include;..\..\..\..\easyeditor\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\c99;..\..\..\..\sm\src\sm;..\..\..\..\sprite2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\..\editor-external\assimp\include;..\..\..\..\easyeditor\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\c99;..\..\..\..\sm\src\sm;..\..\..\..\sprite2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\easy3d\AABB.h" />
+    <ClInclude Include="..\..\..\src\easy3d\AssimpHelper.h" />
+    <ClInclude Include="..\..\..\src\easy3d\Camera.h" />
+    <ClInclude Include="..\..\..\src\easy3d\ControlCameraOP.h" />
+    <ClInclude Include="..\..\..\src\easy3d\easy3d.h" />
+    <ClInclude Include="..\..\..\src\easy3d\IModel.h" />
+    <ClInclude Include="..\..\..\src\easy3d\ISurface.h" />
+    <ClInclude Include="..\..\..\src\easy3d\LightingShader.h" />
+    <ClInclude Include="..\..\..\src\easy3d\LogViewer.h" />
+    <ClInclude Include="..\..\..\src\easy3d\Material.h" />
+    <ClInclude Include="..\..\..\src\easy3d\Math3.h" />
+    <ClInclude Include="..\..\..\src\easy3d\Mesh.h" />
+    <ClInclude Include="..\..\..\src\easy3d\ModelObj.h" />
+    <ClInclude Include="..\..\..\src\easy3d\ModelParametric.h" />
+    <ClInclude Include="..\..\..\src\easy3d\ModelShader.h" />
+    <ClInclude Include="..\..\..\src\easy3d\ParametricEquations.h" />
+    <ClInclude Include="..\..\..\src\easy3d\ParametricSurface.h" />
+    <ClInclude Include="..\..\..\src\easy3d\primitive_draw.h" />
+    <ClInclude Include="..\..\..\src\easy3d\Ray.h" />
+    <ClInclude Include="..\..\..\src\easy3d\ShaderMgr.h" />
+    <ClInclude Include="..\..\..\src\easy3d\ShapeShader.h" />
+    <ClInclude Include="..\..\..\src\easy3d\SpriteShader.h" />
+    <ClInclude Include="..\..\..\src\easy3d\StageCanvas.h" />
+    <ClInclude Include="..\..\..\src\easy3d\TexLightingShader.h" />
+    <ClInclude Include="..\..\..\src\easy3d\ViewFrustum.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\easy3d\AssimpHelper.cpp" />
+    <ClCompile Include="..\..\..\src\easy3d\Camera.cpp" />
+    <ClCompile Include="..\..\..\src\easy3d\ControlCameraOP.cpp" />
+    <ClCompile Include="..\..\..\src\easy3d\LightingShader.cpp" />
+    <ClCompile Include="..\..\..\src\easy3d\LogViewer.cpp" />
+    <ClCompile Include="..\..\..\src\easy3d\Material.cpp" />
+    <ClCompile Include="..\..\..\src\easy3d\Math3.cpp" />
+    <ClCompile Include="..\..\..\src\easy3d\ModelObj.cpp" />
+    <ClCompile Include="..\..\..\src\easy3d\ModelParametric.cpp" />
+    <ClCompile Include="..\..\..\src\easy3d\ModelShader.cpp" />
+    <ClCompile Include="..\..\..\src\easy3d\ParametricSurface.cpp" />
+    <ClCompile Include="..\..\..\src\easy3d\primitive_draw.cpp" />
+    <ClCompile Include="..\..\..\src\easy3d\Ray.cpp" />
+    <ClCompile Include="..\..\..\src\easy3d\ShaderMgr.cpp" />
+    <ClCompile Include="..\..\..\src\easy3d\ShapeShader.cpp" />
+    <ClCompile Include="..\..\..\src\easy3d\SpriteShader.cpp" />
+    <ClCompile Include="..\..\..\src\easy3d\StageCanvas.cpp" />
+    <ClCompile Include="..\..\..\src\easy3d\ViewFrustum.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="external">
+      <UniqueIdentifier>{912595ae-c1dc-4df4-9a28-5e52568fa527}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\stackwalker">
+      <UniqueIdentifier>{3423774d-b2b7-4c32-b4c5-23ff7e293bad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="script">
+      <UniqueIdentifier>{55a76a0b-948a-44a8-8488-c4cde3010ea3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\editor-external\stackwalker\StackWalker.cpp">
+      <Filter>external\stackwalker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\tool\runtime.cpp">
+      <Filter>script</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\tool\scripts.cpp">
+      <Filter>script</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\tool\ConsoleProgressBar.cpp" />
+    <ClCompile Include="..\..\..\source\tool\CrossGuides.cpp" />
+    <ClCompile Include="..\..\..\source\tool\EditedFileStack.cpp" />
+    <ClCompile Include="..\..\..\source\tool\Exception.cpp" />
+    <ClCompile Include="..\..\..\source\tool\FileHelper.cpp" />
+    <ClCompile Include="..\..\..\source\tool\Logger.cpp" />
+    <ClCompile Include="..\..\..\source\tool\LogMgr.cpp" />
+    <ClCompile Include="..\..\..\source\tool\PackIDMgr.cpp" />
+    <ClCompile Include="..\..\..\source\tool\PlayControl.cpp" />
+    <ClCompile Include="..\..\..\source\tool\Socket.cpp" />
+    <ClCompile Include="..\..\..\source\tool\StackTrace.cpp" />
+    <ClCompile Include="..\..\..\source\tool\StringHelper.cpp" />
+    <ClCompile Include="..\..\..\source\tool\Timer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\editor-external\stackwalker\StackWalker.h">
+      <Filter>external\stackwalker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\Module.h">
+      <Filter>script</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\runtime.h">
+      <Filter>script</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\scripts.h">
+      <Filter>script</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ConsoleProgressBar.h" />
+    <ClInclude Include="..\..\..\include\ee\CrossGuides.h" />
+    <ClInclude Include="..\..\..\include\ee\EditedFileStack.h" />
+    <ClInclude Include="..\..\..\include\ee\Exception.h" />
+    <ClInclude Include="..\..\..\include\ee\FileHelper.h" />
+    <ClInclude Include="..\..\..\include\ee\Logger.h" />
+    <ClInclude Include="..\..\..\include\ee\LogMgr.h" />
+    <ClInclude Include="..\..\..\include\ee\PackIDMgr.h" />
+    <ClInclude Include="..\..\..\include\ee\PlayControl.h" />
+    <ClInclude Include="..\..\..\include\ee\Socket.h" />
+    <ClInclude Include="..\..\..\include\ee\StackTrace.h" />
+    <ClInclude Include="..\..\..\include\ee\StringHelper.h" />
+    <ClInclude Include="..\..\..\include\ee\Timer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\include\ee\StringHelper.inl" />
+  </ItemGroup>
+</Project>

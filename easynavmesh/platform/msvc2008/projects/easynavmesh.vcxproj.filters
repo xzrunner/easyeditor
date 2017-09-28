@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="frame">
+      <UniqueIdentifier>{3dc39ae4-542a-4c9e-b143-126f07a7ab2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view">
+      <UniqueIdentifier>{14d87a50-1db9-43c0-9f14-66895381e813}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\stage">
+      <UniqueIdentifier>{956d091e-2f42-4a89-b29d-f74eea5c0eb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\toolbar">
+      <UniqueIdentifier>{20e4095e-4244-41c6-8e2b-18bd30690dca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{242bf71d-6d5d-4dcf-bf90-c2f9608ee7fe}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\easynavmesh\frame\config.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easynavmesh\frame\main.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easynavmesh\frame\Task.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easynavmesh\view\StageCanvas.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easynavmesh\view\StagePanel.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easynavmesh\view\ToolbarPanel.h">
+      <Filter>view\toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easynavmesh\dataset\Mesh.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\easynavmesh\frame\main.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easynavmesh\frame\Task.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easynavmesh\view\StageCanvas.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easynavmesh\view\StagePanel.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easynavmesh\view\ToolbarPanel.cpp">
+      <Filter>view\toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easynavmesh\dataset\Mesh.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\..\..\editor-external\wx\include\wx\msw\wx.rc" />
+  </ItemGroup>
+</Project>

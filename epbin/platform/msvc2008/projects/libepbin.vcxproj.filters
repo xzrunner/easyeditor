@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="tools">
+      <UniqueIdentifier>{4d221d41-7c70-4ff7-8821-f3f16bb1dc8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="normal">
+      <UniqueIdentifier>{1d050a3d-6d44-475c-bf95-4da50a56d9d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="normal\tex">
+      <UniqueIdentifier>{73ea11cc-61ee-4395-8ae1-ad5a0147accf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="normal\desc">
+      <UniqueIdentifier>{a44aa4d6-e75b-40a8-abe4-2fd4cd55dd9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="normal\desc\new">
+      <UniqueIdentifier>{2645101e-3956-4cef-84e6-a76aef3c2714}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="normal\desc\old">
+      <UniqueIdentifier>{9a9cf5b3-b8dc-40d2-8e97-6296b9d4a6b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="extend">
+      <UniqueIdentifier>{b251dbf3-4a6f-47e9-b647-dd94d9b61f1b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\Exception.cpp">
+      <Filter>tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\ImageIDer.cpp">
+      <Filter>tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\LuaDataHelper.cpp">
+      <Filter>tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Lzma.cpp">
+      <Filter>tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BinaryEPP.cpp">
+      <Filter>normal\tex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BinaryEPD.cpp">
+      <Filter>normal\desc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BinaryEPE.cpp">
+      <Filter>normal\desc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\common_dataset.cpp">
+      <Filter>normal\desc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\epe\PackAnimation.cpp">
+      <Filter>normal\desc\new</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\epe\PackLabel.cpp">
+      <Filter>normal\desc\new</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\epe\PackPannel.cpp">
+      <Filter>normal\desc\new</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\epe\PackPicture.cpp">
+      <Filter>normal\desc\new</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\epe\PackPolygon.cpp">
+      <Filter>normal\desc\new</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\epd\epd_dataset.cpp">
+      <Filter>normal\desc\old</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BinaryB4R.cpp">
+      <Filter>extend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BinaryPTS.cpp">
+      <Filter>extend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BinaryRRP.cpp">
+      <Filter>extend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BinaryRRR.cpp">
+      <Filter>extend</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\Exception.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\ImageIDer.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\LuaDataHelper.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Lzma.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tools.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\BinaryEPP.h">
+      <Filter>normal\tex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\BinaryEPD.h">
+      <Filter>normal\desc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\BinaryEPE.h">
+      <Filter>normal\desc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\common_dataset.h">
+      <Filter>normal\desc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\IPackNode.h">
+      <Filter>normal\desc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\epe\PackAnimation.h">
+      <Filter>normal\desc\new</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\epe\PackLabel.h">
+      <Filter>normal\desc\new</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\epe\PackPannel.h">
+      <Filter>normal\desc\new</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\epe\PackPicture.h">
+      <Filter>normal\desc\new</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\epe\PackPolygon.h">
+      <Filter>normal\desc\new</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\epe\spritepack.h">
+      <Filter>normal\desc\new</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\epe\type.h">
+      <Filter>normal\desc\new</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\epd\epd_dataset.h">
+      <Filter>normal\desc\old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\BinaryB4R.h">
+      <Filter>extend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\BinaryPTS.h">
+      <Filter>extend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\BinaryRRP.h">
+      <Filter>extend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\BinaryRRR.h">
+      <Filter>extend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\epbin.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\src\trans_old_ejoy2d_data.lua">
+      <Filter>tools</Filter>
+    </None>
+    <None Include="..\..\..\src\trans_old_ejoy2d_data2.lua">
+      <Filter>tools</Filter>
+    </None>
+  </ItemGroup>
+</Project>

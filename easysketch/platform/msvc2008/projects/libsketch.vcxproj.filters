@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{16f7392b-6090-495f-8254-37ea910924e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view">
+      <UniqueIdentifier>{184d9afb-bb23-412c-b42b-1c2914316f30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\library">
+      <UniqueIdentifier>{617c46fc-1d3c-413a-bd1a-8f1a84933487}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\stage">
+      <UniqueIdentifier>{037b027b-8895-4395-93a8-9ed78ace5d8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\toolbar">
+      <UniqueIdentifier>{77fa2905-adea-497f-81ea-ea2540248a54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="editop">
+      <UniqueIdentifier>{0e263c79-8564-4feb-8ac0-ecc49448fc84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="editop\edit_state">
+      <UniqueIdentifier>{91f6f910-a048-4c8f-98ec-285d46148f87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="editop\edit_state\camera">
+      <UniqueIdentifier>{fdc1d32d-72ec-4e1e-9c13-4bb7862ca6f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="editop\edit_state\sprite">
+      <UniqueIdentifier>{b52d9886-25f6-481a-827e-5d826876426c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libsketch\config.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsketch\Sprite.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsketch\Symbol.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsketch\LibraryPage.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsketch\StageCanvas.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsketch\StagePanel.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsketch\ToolBarPanel.h">
+      <Filter>view\toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsketch\ArrangeSpriteOP.h">
+      <Filter>editop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsketch\EditCameraOP.h">
+      <Filter>editop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsketch\SelectSpriteOP.h">
+      <Filter>editop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsketch\IEditState.h">
+      <Filter>editop\edit_state</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsketch\RotateCameraState.h">
+      <Filter>editop\edit_state\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsketch\TranslateCameraState.h">
+      <Filter>editop\edit_state\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsketch\ZoomCameraState.h">
+      <Filter>editop\edit_state\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsketch\RotateSpriteState.h">
+      <Filter>editop\edit_state\sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsketch\TranslateSpriteState.h">
+      <Filter>editop\edit_state\sprite</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libsketch\Sprite.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsketch\Symbol.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsketch\LibraryPage.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsketch\StageCanvas.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsketch\StagePanel.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsketch\ToolbarPanel.cpp">
+      <Filter>view\toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsketch\ArrangeSpriteOP.cpp">
+      <Filter>editop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsketch\EditCameraOP.cpp">
+      <Filter>editop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsketch\SelectSpriteOP.cpp">
+      <Filter>editop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsketch\RotateCameraState.cpp">
+      <Filter>editop\edit_state\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsketch\TranslateCameraState.cpp">
+      <Filter>editop\edit_state\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsketch\ZoomCameraState.cpp">
+      <Filter>editop\edit_state\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsketch\RotateSpriteState.cpp">
+      <Filter>editop\edit_state\sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsketch\TranslateSpriteState.cpp">
+      <Filter>editop\edit_state\sprite</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

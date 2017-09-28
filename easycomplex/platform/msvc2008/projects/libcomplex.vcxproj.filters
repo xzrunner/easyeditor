@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="fileio">
+      <UniqueIdentifier>{04045a82-0226-43b4-a0a6-51899aafaa4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="fileio\load">
+      <UniqueIdentifier>{137d3667-1999-4555-a238-0d47c92fad77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="fileio\load\nodes">
+      <UniqueIdentifier>{81e63e44-89ca-450e-933a-e43fa03979fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="fileio\store">
+      <UniqueIdentifier>{e2e84ac8-a90b-48cd-80b3-488cfe8e435f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="frame">
+      <UniqueIdentifier>{d899830f-59ec-44fc-8267-f0b34e37a80f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="frame\settings">
+      <UniqueIdentifier>{e7933981-3132-4503-a757-1c622186e5ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{49cbc3c1-b9c5-4178-8ad4-0d475a65e4b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view">
+      <UniqueIdentifier>{9dbedcd9-12e2-4402-825c-f1cdd7dd3af3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\stage">
+      <UniqueIdentifier>{7e23aff1-417c-468a-8c2e-da0f661c8fa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\property">
+      <UniqueIdentifier>{12f3753a-95e1-4007-b577-bfa0e2acac26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\library">
+      <UniqueIdentifier>{635a7eaa-5ce4-4f37-a92f-372ae065802d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\viewlist">
+      <UniqueIdentifier>{51f188ad-dee3-46b3-807b-02eff32b476c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="test">
+      <UniqueIdentifier>{2917a8aa-59e2-411f-ba36-c2e5e3988415}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="editop">
+      <UniqueIdentifier>{61ec4047-11f4-4f58-b273-16d443fc0047}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="preview">
+      <UniqueIdentifier>{c29136a8-0012-4db3-9ca0-da3bc1221ae1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utility">
+      <UniqueIdentifier>{636aa1ec-b2e3-4fe9-b678-3eaba0cfa1ff}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libcomplex\FileLoader.cpp">
+      <Filter>fileio\load</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\LoadFromBin.cpp">
+      <Filter>fileio\load</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\LoadFromJson.cpp">
+      <Filter>fileio\load</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\LoadFromLua.cpp">
+      <Filter>fileio\load</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\LoadFromPSD.cpp">
+      <Filter>fileio\load</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\NodeToSprite.cpp">
+      <Filter>fileio\load</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\AnchorToSpr.cpp">
+      <Filter>fileio\load\nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\AnimationToSpr.cpp">
+      <Filter>fileio\load\nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\LabelToSpr.cpp">
+      <Filter>fileio\load\nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\Particle2DToSpr.cpp">
+      <Filter>fileio\load\nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\Particle3DToSpr.cpp">
+      <Filter>fileio\load\nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\PictureToSpr.cpp">
+      <Filter>fileio\load\nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\FileStorer.cpp">
+      <Filter>fileio\store</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\EditDialog.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\Settings.cpp">
+      <Filter>frame\settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\SettingsDialog.cpp">
+      <Filter>frame\settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\Sprite.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\Symbol.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\SymbolContainer.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\StageCanvas.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\StagePanel.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\PropertySettingPanel.cpp">
+      <Filter>view\property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\SpritePropertySetting.cpp">
+      <Filter>view\property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\SymbolPropertySetting.cpp">
+      <Filter>view\property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\LibraryPage.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\LibraryPanel.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\ViewlistListImpl.cpp">
+      <Filter>view\viewlist</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\RectCutLoader.cpp">
+      <Filter>test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\ArrangeSpriteImpl.cpp">
+      <Filter>editop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\SelectSpritesOP.cpp">
+      <Filter>editop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\SphereRotateState.cpp">
+      <Filter>editop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\PreviewCanvas.cpp">
+      <Filter>preview</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\PreviewDialog.cpp">
+      <Filter>preview</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\PreviewEditOP.cpp">
+      <Filter>preview</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\PreviewStage.cpp">
+      <Filter>preview</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\GroupHelper.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\OpenSymbolDialog.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libcomplex\FileLoader.h">
+      <Filter>fileio\load</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\LoadFromBin.h">
+      <Filter>fileio\load</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\LoadFromJson.h">
+      <Filter>fileio\load</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\LoadFromLua.h">
+      <Filter>fileio\load</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\LoadFromPSD.h">
+      <Filter>fileio\load</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\NodeToSprite.h">
+      <Filter>fileio\load</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\AnchorToSpr.h">
+      <Filter>fileio\load\nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\AnimationToSpr.h">
+      <Filter>fileio\load\nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\LabelToSpr.h">
+      <Filter>fileio\load\nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\Particle2DToSpr.h">
+      <Filter>fileio\load\nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\Particle3DToSpr.h">
+      <Filter>fileio\load\nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\PictureToSpr.h">
+      <Filter>fileio\load\nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\FileStorer.h">
+      <Filter>fileio\store</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\EditDialog.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\Settings.h">
+      <Filter>frame\settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\SettingsDialog.h">
+      <Filter>frame\settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\Sprite.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\Symbol.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\SymbolContainer.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\StageCanvas.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\StagePanel.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\PropertySettingPanel.h">
+      <Filter>view\property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\SpritePropertySetting.h">
+      <Filter>view\property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\SymbolPropertySetting.h">
+      <Filter>view\property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\LibraryPage.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\LibraryPanel.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\ViewlistListImpl.h">
+      <Filter>view\viewlist</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\RectCutLoader.h">
+      <Filter>test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\ArrangeSpriteImpl.h">
+      <Filter>editop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\SelectSpritesOP.h">
+      <Filter>editop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\SphereRotateState.h">
+      <Filter>editop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\PreviewCanvas.h">
+      <Filter>preview</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\PreviewDialog.h">
+      <Filter>preview</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\PreviewEditOP.h">
+      <Filter>preview</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\PreviewStage.h">
+      <Filter>preview</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\GroupHelper.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\OpenSymbolDialog.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

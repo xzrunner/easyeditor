@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="adapter">
+      <UniqueIdentifier>{4c21f1d2-2b85-4eb0-89df-5ecbdaca327f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shape">
+      <UniqueIdentifier>{d17dacc4-046e-414e-a432-a86df46c4520}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sprite">
+      <UniqueIdentifier>{4f7fa106-ef8e-44aa-afb2-03e0edea9c5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sprite\modes">
+      <UniqueIdentifier>{2ee6d782-4359-4d21-bb9c-f2de28e72ba8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utility">
+      <UniqueIdentifier>{5d276e81-1f57-4b8d-9384-fe0b0ccdf15d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\render\EE_DTex.cpp">
+      <Filter>adapter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\render\EE_GTxt.cpp">
+      <Filter>adapter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\render\EE_SP.cpp">
+      <Filter>adapter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\render\DrawSelectedShapeVisitor.cpp">
+      <Filter>shape</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\render\DrawShapesVisitor.cpp">
+      <Filter>shape</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\render\DrawSelectedSpriteVisitor.cpp">
+      <Filter>sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\render\DrawSpritesVisitor.cpp">
+      <Filter>sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\render\SpriteRenderer.cpp">
+      <Filter>sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\render\BlendModes.cpp">
+      <Filter>sprite\modes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\render\CameraModes.cpp">
+      <Filter>sprite\modes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\render\FastBlendModes.cpp">
+      <Filter>sprite\modes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\render\FilterModes.cpp">
+      <Filter>sprite\modes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\render\render_utility.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\render\FPS.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\ee\EE_DTex.h">
+      <Filter>adapter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\EE_GTxt.h">
+      <Filter>adapter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\EE_SP.h">
+      <Filter>adapter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\DrawSelectedShapeVisitor.h">
+      <Filter>shape</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\DrawShapesVisitor.h">
+      <Filter>shape</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\DrawSelectedSpriteVisitor.h">
+      <Filter>sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\DrawSpritesVisitor.h">
+      <Filter>sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SpriteRenderer.h">
+      <Filter>sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\BlendModes.h">
+      <Filter>sprite\modes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\CameraModes.h">
+      <Filter>sprite\modes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\FastBlendModes.h">
+      <Filter>sprite\modes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\FilterModes.h">
+      <Filter>sprite\modes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\render_utility.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\texture_format.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\FPS.h" />
+    <ClInclude Include="..\..\..\include\ee\style_config.h" />
+  </ItemGroup>
+</Project>

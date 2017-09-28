@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="frame">
+      <UniqueIdentifier>{d1d90e0f-5813-43d6-9d87-eea609fdb36d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="stage">
+      <UniqueIdentifier>{632a1d9c-1459-4359-bd37-2cea54277f21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{cb1e5a84-c911-4c54-a521-a704adefd2e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view">
+      <UniqueIdentifier>{119bc8eb-3b5a-4e1d-8aa7-d638241c74cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\library">
+      <UniqueIdentifier>{a6b651de-db75-4638-8ab4-d54691f38509}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\property">
+      <UniqueIdentifier>{f8f71a0a-2cc1-477a-843c-ec24f41d69d7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libscale9\EditDialog.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libscale9\FileSaver.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libscale9\ToolbarPanel.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libscale9\ResizeAtomicOP.cpp">
+      <Filter>stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libscale9\ResizeBaseOP.cpp">
+      <Filter>stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libscale9\Sprite.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libscale9\Symbol.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libscale9\LibraryPage.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libscale9\SpritePropertySetting.cpp">
+      <Filter>view\property</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libscale9\EditDialog.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libscale9\FileSaver.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libscale9\ToolbarPanel.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libscale9\ResizeAtomicOP.h">
+      <Filter>stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libscale9\ResizeBaseOP.h">
+      <Filter>stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libscale9\Sprite.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libscale9\Symbol.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libscale9\LibraryPage.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libscale9\SpritePropertySetting.h">
+      <Filter>view\property</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="nodes">
+      <UniqueIdentifier>{5b5d271a-a629-4198-8020-2b95777539dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\01.image">
+      <UniqueIdentifier>{e2fd430d-4a93-41b9-b634-d34376e264de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\02.scale9">
+      <UniqueIdentifier>{498cd17a-122d-4667-bbcb-4038dea16ce0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\05.label">
+      <UniqueIdentifier>{79871969-2ae9-4749-a4d3-8ff4c955496e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\03.icon">
+      <UniqueIdentifier>{e3716d8f-4301-45e7-bb4c-199e93b9c502}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\04.texture">
+      <UniqueIdentifier>{df97bca5-5631-46bd-94c8-8e080075576e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\06.complex">
+      <UniqueIdentifier>{b48bba53-2215-4769-abdd-8baa1a9c74f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\07.animation">
+      <UniqueIdentifier>{275a8001-fb85-4291-b24f-a98f291229bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\08.particle3d">
+      <UniqueIdentifier>{bec97be1-0507-4633-a130-1b35aaf504b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\09.particle2d">
+      <UniqueIdentifier>{f214df90-395c-42ec-88a5-ebfa40ac911f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\13.trail">
+      <UniqueIdentifier>{1c35f10a-2025-458f-82d9-4c03c594a32f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\12.mask">
+      <UniqueIdentifier>{adb666f0-154f-4a51-8f00-af0c5046513d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\11.mesh">
+      <UniqueIdentifier>{678ad394-7493-40c5-9fcb-7cc8520d465c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\11.mesh\shape">
+      <UniqueIdentifier>{12c7c550-9882-4a55-9e1a-d9fde738481e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\10.shape">
+      <UniqueIdentifier>{fc5dec84-e4e0-4042-9485-9fdbd7af0122}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\07.anim2">
+      <UniqueIdentifier>{f79ee168-4ba0-4f5b-9431-ad6fbc283387}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\00.anchor">
+      <UniqueIdentifier>{d5ae4ad7-adf5-463a-bc52-5fbe737d9fb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\16.audio">
+      <UniqueIdentifier>{d006d49a-3729-4287-aaaa-e3c575a93f71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools">
+      <UniqueIdentifier>{949065ae-3cbf-4388-91e4-c2aeda7b3a1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="builder">
+      <UniqueIdentifier>{fce2e4e8-9639-4c63-b841-69fe5efb9f03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="builder\05.label">
+      <UniqueIdentifier>{cec236dc-e396-4363-b5a4-a21d3047abca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="builder\06.complex">
+      <UniqueIdentifier>{10e5dc38-7cc0-4c2f-87dd-f2fe06ed9a14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="pack">
+      <UniqueIdentifier>{38439dbe-d5f1-4e94-9a26-a0893c23c9d4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackArray.h">
+      <Filter>nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackCoords.h">
+      <Filter>nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackNode.h">
+      <Filter>nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackTrans.h">
+      <Filter>nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackImage.h">
+      <Filter>nodes\01.image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackScale9.h">
+      <Filter>nodes\02.scale9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackScale9Spr.h">
+      <Filter>nodes\02.scale9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackLabel.h">
+      <Filter>nodes\05.label</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackIcon.h">
+      <Filter>nodes\03.icon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackIconSpr.h">
+      <Filter>nodes\03.icon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackTexture.h">
+      <Filter>nodes\04.texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackTextureSpr.h">
+      <Filter>nodes\04.texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackComplex.h">
+      <Filter>nodes\06.complex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackComplexSpr.h">
+      <Filter>nodes\06.complex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackAnimation.h">
+      <Filter>nodes\07.animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackAnimationSpr.h">
+      <Filter>nodes\07.animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackParticle3d.h">
+      <Filter>nodes\08.particle3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackParticle3dSpr.h">
+      <Filter>nodes\08.particle3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackParticle2d.h">
+      <Filter>nodes\09.particle2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackParticle2dSpr.h">
+      <Filter>nodes\09.particle2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackTrail.h">
+      <Filter>nodes\13.trail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackTrailSpr.h">
+      <Filter>nodes\13.trail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackMask.h">
+      <Filter>nodes\12.mask</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackMaskSpr.h">
+      <Filter>nodes\12.mask</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\MeshShape.h">
+      <Filter>nodes\11.mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackMesh.h">
+      <Filter>nodes\11.mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackMeshSpr.h">
+      <Filter>nodes\11.mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PointsMesh.h">
+      <Filter>nodes\11.mesh\shape</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\Skin2Mesh.h">
+      <Filter>nodes\11.mesh\shape</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\TrianglesMesh.h">
+      <Filter>nodes\11.mesh\shape</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackShape.h">
+      <Filter>nodes\10.shape</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackShapeSpr.h">
+      <Filter>nodes\10.shape</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackAnim2.h">
+      <Filter>nodes\07.anim2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackAnim2Spr.h">
+      <Filter>nodes\07.anim2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackAnchor.h">
+      <Filter>nodes\00.anchor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackAudio.h">
+      <Filter>nodes\16.audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackAudioSpr.h">
+      <Filter>nodes\16.audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\binary_io.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\check.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\to_int.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\typedef.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\NodeBuilder.h">
+      <Filter>builder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\SprBuilder.h">
+      <Filter>builder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\SprBuilder2.h">
+      <Filter>builder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\SprWithTransBuilder.h">
+      <Filter>builder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\SymBuilder.h">
+      <Filter>builder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\LabelBuilder.h">
+      <Filter>builder\05.label</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\ComplexBuilder.h">
+      <Filter>builder\06.complex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\ExportNameSet.h">
+      <Filter>pack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackAudioIDMgr.h">
+      <Filter>pack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\Packer.h">
+      <Filter>pack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackIDMgr.h">
+      <Filter>pack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackNodeFactory.h">
+      <Filter>pack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackToBin.h">
+      <Filter>pack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\PackToLua.h">
+      <Filter>pack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libsprpacker\Version.h">
+      <Filter>pack</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\src\libsprpacker\PackArray.inl">
+      <Filter>nodes</Filter>
+    </None>
+    <None Include="..\..\..\src\libsprpacker\SprBuilder.inl">
+      <Filter>builder</Filter>
+    </None>
+    <None Include="..\..\..\src\libsprpacker\SprBuilder2.inl">
+      <Filter>builder</Filter>
+    </None>
+    <None Include="..\..\..\src\libsprpacker\SprWithTransBuilder.inl">
+      <Filter>builder</Filter>
+    </None>
+    <None Include="..\..\..\src\libsprpacker\SymBuilder.inl">
+      <Filter>builder</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackCoords.cpp">
+      <Filter>nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackNode.cpp">
+      <Filter>nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackTrans.cpp">
+      <Filter>nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackImage.cpp">
+      <Filter>nodes\01.image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackScale9.cpp">
+      <Filter>nodes\02.scale9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackScale9Spr.cpp">
+      <Filter>nodes\02.scale9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackLabel.cpp">
+      <Filter>nodes\05.label</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackIcon.cpp">
+      <Filter>nodes\03.icon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackIconSpr.cpp">
+      <Filter>nodes\03.icon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackTexture.cpp">
+      <Filter>nodes\04.texture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackTextureSpr.cpp">
+      <Filter>nodes\04.texture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackComplex.cpp">
+      <Filter>nodes\06.complex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackComplexSpr.cpp">
+      <Filter>nodes\06.complex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackAnimation.cpp">
+      <Filter>nodes\07.animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackAnimationSpr.cpp">
+      <Filter>nodes\07.animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackParticle3d.cpp">
+      <Filter>nodes\08.particle3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackParticle3dSpr.cpp">
+      <Filter>nodes\08.particle3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackParticle2d.cpp">
+      <Filter>nodes\09.particle2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackParticle2dSpr.cpp">
+      <Filter>nodes\09.particle2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackTrail.cpp">
+      <Filter>nodes\13.trail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackTrailSpr.cpp">
+      <Filter>nodes\13.trail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackMask.cpp">
+      <Filter>nodes\12.mask</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackMaskSpr.cpp">
+      <Filter>nodes\12.mask</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackMesh.cpp">
+      <Filter>nodes\11.mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackMeshSpr.cpp">
+      <Filter>nodes\11.mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PointsMesh.cpp">
+      <Filter>nodes\11.mesh\shape</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\Skin2Mesh.cpp">
+      <Filter>nodes\11.mesh\shape</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\TrianglesMesh.cpp">
+      <Filter>nodes\11.mesh\shape</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackShape.cpp">
+      <Filter>nodes\10.shape</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackShapeSpr.cpp">
+      <Filter>nodes\10.shape</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackAnim2.cpp">
+      <Filter>nodes\07.anim2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackAnim2Spr.cpp">
+      <Filter>nodes\07.anim2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackAnchor.cpp">
+      <Filter>nodes\00.anchor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackAudio.cpp">
+      <Filter>nodes\16.audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackAudioSpr.cpp">
+      <Filter>nodes\16.audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\LabelBuilder.cpp">
+      <Filter>builder\05.label</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\ComplexBuilder.cpp">
+      <Filter>builder\06.complex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\ExportNameSet.cpp">
+      <Filter>pack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackAudioIDMgr.cpp">
+      <Filter>pack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\Packer.cpp">
+      <Filter>pack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackIDMgr.cpp">
+      <Filter>pack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackNodeFactory.cpp">
+      <Filter>pack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackToBin.cpp">
+      <Filter>pack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\PackToLua.cpp">
+      <Filter>pack</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

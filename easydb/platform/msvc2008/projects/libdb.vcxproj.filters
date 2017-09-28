@@ -1,0 +1,684 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="todo">
+      <UniqueIdentifier>{bc41f17b-25f8-4329-9e8f-b85c1ce1beb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base">
+      <UniqueIdentifier>{8e6100cb-f078-40b7-9fa4-b7d856db8a1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools">
+      <UniqueIdentifier>{2506544b-def6-4338-bca0-d70a62522461}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands">
+      <UniqueIdentifier>{92466edb-ee99-4505-9f53-1cfd2f850292}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\pack">
+      <UniqueIdentifier>{73058560-9013-4bd3-9a7a-4883706e4a07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\pack\particle">
+      <UniqueIdentifier>{b619bc97-3898-4446-8ccb-443581121f12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\pack\bin">
+      <UniqueIdentifier>{eafd84b0-ac70-474d-af43-98796a1cc326}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\pack\bin\normal">
+      <UniqueIdentifier>{4d1742d6-e2ce-4091-a01a-6e5062ee7bba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\pack\bin\extend">
+      <UniqueIdentifier>{6e93ff61-f16f-48e2-a519-af0c57c3f8d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\pack\rrp">
+      <UniqueIdentifier>{118d52a5-734c-4bb0-ae2f-01397434a67d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\pack\res">
+      <UniqueIdentifier>{8f0db8f5-c8d9-4ae5-8980-9b08c2ce1d1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\pack\texture">
+      <UniqueIdentifier>{6364a77f-5c2c-469e-a341-a7f5f9885c20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\image">
+      <UniqueIdentifier>{a9346c4b-266d-4df7-953d-eac8a032519a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\image\trim">
+      <UniqueIdentifier>{0f3df707-9557-4a3f-98ca-a6e9678fe5d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\image\outline">
+      <UniqueIdentifier>{0fb6fecc-932f-4112-ad9a-c0dad37faeb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\image\transform">
+      <UniqueIdentifier>{f93bbfd0-724c-446b-b350-33268bb6ea28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\image\cut">
+      <UniqueIdentifier>{e28607fe-72ff-42af-8b13-0e4c399927ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\image\format">
+      <UniqueIdentifier>{c34b25a1-e35c-48e8-ac0b-41d1e28de532}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\image\compress">
+      <UniqueIdentifier>{ebc0ae93-c5ae-4adc-aa9c-ebf29a9bd477}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\image\statistics">
+      <UniqueIdentifier>{f9143873-806b-4c87-a524-fb6194170dc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\json">
+      <UniqueIdentifier>{01d7bc53-ac97-466f-9481-50d258c89538}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\preprocess">
+      <UniqueIdentifier>{219ed4b9-1fc2-4133-8214-fde65dd69f15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\lr">
+      <UniqueIdentifier>{2a817952-2734-4274-9a97-c02846272126}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\lr\extern">
+      <UniqueIdentifier>{8a10a1aa-d5fb-4094-87f9-e80001f6eb6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\lr\base">
+      <UniqueIdentifier>{959d5c27-3345-453c-bd6a-0e16b80b296d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\lr\other">
+      <UniqueIdentifier>{0befc074-1f38-43bd-918a-1b8098b9d649}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\lr\fix">
+      <UniqueIdentifier>{3ad3c7f7-d5e7-422c-82a2-c1fca8709b22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\tools">
+      <UniqueIdentifier>{082bf994-c14e-4c68-a62c-69a887ff3344}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\export">
+      <UniqueIdentifier>{829701d5-4ed6-441f-84ba-f836ddddf239}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libdb\CopyFile.cpp">
+      <Filter>todo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\DFFParser.cpp">
+      <Filter>todo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\DistanceFieldFont.cpp">
+      <Filter>todo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\CommandFactory.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\CommandLoader.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\check_params.cpp">
+      <Filter>tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\MD5Helper.cpp">
+      <Filter>tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\utility.cpp">
+      <Filter>tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\PackParticle2D.cpp">
+      <Filter>commands\pack\particle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\PackParticle3D.cpp">
+      <Filter>commands\pack\particle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\BinRRP.cpp">
+      <Filter>commands\pack\bin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\BinEP.cpp">
+      <Filter>commands\pack\bin\normal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\NumberImages.cpp">
+      <Filter>commands\pack\bin\normal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\BinB4R.cpp">
+      <Filter>commands\pack\bin\extend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\BinRRR.cpp">
+      <Filter>commands\pack\bin\extend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\PackRegularRect.cpp">
+      <Filter>commands\pack\rrp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\FixPackCfg.cpp">
+      <Filter>commands\pack\res</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\GenNoCompressCfg.cpp">
+      <Filter>commands\pack\res</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\GenPkgRefInfo.cpp">
+      <Filter>commands\pack\res</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\PackAudioID.cpp">
+      <Filter>commands\pack\res</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\PackEP.cpp">
+      <Filter>commands\pack\res</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\PackEPNew.cpp">
+      <Filter>commands\pack\res</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\PackEPT.cpp">
+      <Filter>commands\pack\res</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\PackImageEPT.cpp">
+      <Filter>commands\pack\res</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\PackLuaDescFile.cpp">
+      <Filter>commands\pack\res</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\PackPkg.cpp">
+      <Filter>commands\pack\res</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\PackRes.cpp">
+      <Filter>commands\pack\res</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\PackResID.cpp">
+      <Filter>commands\pack\res</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\UnpackLuaDescFile.cpp">
+      <Filter>commands\pack\res</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\PackTexture.cpp">
+      <Filter>commands\pack\texture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\CalcImageArea.cpp">
+      <Filter>commands\image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\CreateColLUT.cpp">
+      <Filter>commands\image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\Snapshoot.cpp">
+      <Filter>commands\image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\TransToGif.cpp">
+      <Filter>commands\image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\RotateTrimImage.cpp">
+      <Filter>commands\image\trim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\TrimImage.cpp">
+      <Filter>commands\image\trim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\OutlineImage.cpp">
+      <Filter>commands\image\outline</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\OutlineToPolygon.cpp">
+      <Filter>commands\image\outline</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\OutlineToTriStrip.cpp">
+      <Filter>commands\image\outline</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\RotateImage.cpp">
+      <Filter>commands\image\transform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\ScaleImage.cpp">
+      <Filter>commands\image\transform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\AverageRectCut.cpp">
+      <Filter>commands\image\cut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\Cropping.cpp">
+      <Filter>commands\image\cut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\RectCutWithJson.cpp">
+      <Filter>commands\image\cut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\RegularRectCut.cpp">
+      <Filter>commands\image\cut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\TransToETC1.cpp">
+      <Filter>commands\image\format</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\TransToETC2.cpp">
+      <Filter>commands\image\format</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\TransToPVR.cpp">
+      <Filter>commands\image\format</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\BlockCompress.cpp">
+      <Filter>commands\image\compress</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\CalculateImageArea.cpp">
+      <Filter>commands\image\statistics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\ChangeComplexOrigin.cpp">
+      <Filter>commands\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\ChangeJsonFile.cpp">
+      <Filter>commands\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\ChangeJsonName.cpp">
+      <Filter>commands\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\ChangeTPJsonFile.cpp">
+      <Filter>commands\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\DecodeEjoy2dRes.cpp">
+      <Filter>commands\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\FixAddColor.cpp">
+      <Filter>commands\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\FixJsonBase.cpp">
+      <Filter>commands\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\FixLRMirror.cpp">
+      <Filter>commands\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\FixLRP3dLayer.cpp">
+      <Filter>commands\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\FixMirror.cpp">
+      <Filter>commands\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\FixRotateTrimJson.cpp">
+      <Filter>commands\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\FixSpriteColor.cpp">
+      <Filter>commands\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\FixTextAlign.cpp">
+      <Filter>commands\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\FormatJsonFile.cpp">
+      <Filter>commands\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\GenPackCfg.cpp">
+      <Filter>commands\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\RemoveDuplicateSprite.cpp">
+      <Filter>commands\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\ScaleJson.cpp">
+      <Filter>commands\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\TranslateJson.cpp">
+      <Filter>commands\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\TransNewTextFile.cpp">
+      <Filter>commands\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\TransOldAnchorFile.cpp">
+      <Filter>commands\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\TransOldP3DFile.cpp">
+      <Filter>commands\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\TransOldShapeFile.cpp">
+      <Filter>commands\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\TransOldTextFile.cpp">
+      <Filter>commands\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\AddFrameSprite.cpp">
+      <Filter>commands\preprocess</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\FormatTIDString.cpp">
+      <Filter>commands\preprocess</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\ReverseAnimation.cpp">
+      <Filter>commands\preprocess</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\ScaleOverall.cpp">
+      <Filter>commands\preprocess</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\SetNameFromFile.cpp">
+      <Filter>commands\preprocess</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\UniqueImage.cpp">
+      <Filter>commands\preprocess</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\VerifyImage.cpp">
+      <Filter>commands\preprocess</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\VerifyJson.cpp">
+      <Filter>commands\preprocess</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\lr_tools.cpp">
+      <Filter>commands\lr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\LRPacker.cpp">
+      <Filter>commands\lr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\LRPackerNew.cpp">
+      <Filter>commands\lr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\lr\src\lr\dataset\CharacterFileName.cpp">
+      <Filter>commands\lr\extern</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\lr\src\lr\dataset\Grids.cpp">
+      <Filter>commands\lr\extern</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\LRExpandGroup.cpp">
+      <Filter>commands\lr\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\LRExpandInherit.cpp">
+      <Filter>commands\lr\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\LRJsonPacker.cpp">
+      <Filter>commands\lr\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\LRSeparateComplex.cpp">
+      <Filter>commands\lr\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\LRToComplex.cpp">
+      <Filter>commands\lr\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\AnimToComplexWithColor.cpp">
+      <Filter>commands\lr\other</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\TransOldLRFile.cpp">
+      <Filter>commands\lr\other</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\FixLRSprLayer.cpp">
+      <Filter>commands\lr\fix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\FixLRSprName.cpp">
+      <Filter>commands\lr\fix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\PrintGLExt.cpp">
+      <Filter>commands\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\ExportBodymovin.cpp">
+      <Filter>commands\export</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libdb\CopyFile.h">
+      <Filter>todo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\DFFParser.h">
+      <Filter>todo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\DistanceFieldFont.h">
+      <Filter>todo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\CommandFactory.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\CommandLoader.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\ICommand.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\check_params.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\MD5Helper.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\utility.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\PackParticle2D.h">
+      <Filter>commands\pack\particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\PackParticle3D.h">
+      <Filter>commands\pack\particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\BinRRP.h">
+      <Filter>commands\pack\bin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\BinEP.h">
+      <Filter>commands\pack\bin\normal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\NumberImages.h">
+      <Filter>commands\pack\bin\normal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\BinB4R.h">
+      <Filter>commands\pack\bin\extend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\BinRRR.h">
+      <Filter>commands\pack\bin\extend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\PackRegularRect.h">
+      <Filter>commands\pack\rrp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\FixPackCfg.h">
+      <Filter>commands\pack\res</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\GenNoCompressCfg.h">
+      <Filter>commands\pack\res</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\GenPkgRefInfo.h">
+      <Filter>commands\pack\res</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\PackAudioID.h">
+      <Filter>commands\pack\res</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\PackEP.h">
+      <Filter>commands\pack\res</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\PackEPNew.h">
+      <Filter>commands\pack\res</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\PackEPT.h">
+      <Filter>commands\pack\res</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\PackImageEPT.h">
+      <Filter>commands\pack\res</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\PackLuaDescFile.h">
+      <Filter>commands\pack\res</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\PackPkg.h">
+      <Filter>commands\pack\res</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\PackRes.h">
+      <Filter>commands\pack\res</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\PackResID.h">
+      <Filter>commands\pack\res</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\UnpackLuaDescFile.h">
+      <Filter>commands\pack\res</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\PackTexture.h">
+      <Filter>commands\pack\texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\CalcImageArea.h">
+      <Filter>commands\image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\CreateColLUT.h">
+      <Filter>commands\image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\Snapshoot.h">
+      <Filter>commands\image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\TransToGif.h">
+      <Filter>commands\image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\RotateTrimImage.h">
+      <Filter>commands\image\trim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\TrimImage.h">
+      <Filter>commands\image\trim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\OutlineImage.h">
+      <Filter>commands\image\outline</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\OutlineToPolygon.h">
+      <Filter>commands\image\outline</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\OutlineToTriStrip.h">
+      <Filter>commands\image\outline</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\RotateImage.h">
+      <Filter>commands\image\transform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\ScaleImage.h">
+      <Filter>commands\image\transform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\AverageRectCut.h">
+      <Filter>commands\image\cut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\Cropping.h">
+      <Filter>commands\image\cut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\RectCutWithJson.h">
+      <Filter>commands\image\cut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\RegularRectCut.h">
+      <Filter>commands\image\cut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\TransToETC1.h">
+      <Filter>commands\image\format</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\TransToETC2.h">
+      <Filter>commands\image\format</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\TransToPVR.h">
+      <Filter>commands\image\format</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\BlockCompress.h">
+      <Filter>commands\image\compress</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\CalculateImageArea.h">
+      <Filter>commands\image\statistics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\ChangeComplexOrigin.h">
+      <Filter>commands\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\ChangeJsonFile.h">
+      <Filter>commands\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\ChangeJsonName.h">
+      <Filter>commands\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\ChangeTPJsonFile.h">
+      <Filter>commands\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\DecodeEjoy2dRes.h">
+      <Filter>commands\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\FixAddColor.h">
+      <Filter>commands\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\FixJsonBase.h">
+      <Filter>commands\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\FixLRMirror.h">
+      <Filter>commands\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\FixLRP3dLayer.h">
+      <Filter>commands\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\FixMirror.h">
+      <Filter>commands\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\FixRotateTrimJson.h">
+      <Filter>commands\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\FixSpriteColor.h">
+      <Filter>commands\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\FixTextAlign.h">
+      <Filter>commands\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\FormatJsonFile.h">
+      <Filter>commands\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\GenPackCfg.h">
+      <Filter>commands\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\RemoveDuplicateSprite.h">
+      <Filter>commands\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\ScaleJson.h">
+      <Filter>commands\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\TranslateJson.h">
+      <Filter>commands\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\TransNewTextFile.h">
+      <Filter>commands\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\TransOldAnchorFile.h">
+      <Filter>commands\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\TransOldP3DFile.h">
+      <Filter>commands\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\TransOldShapeFile.h">
+      <Filter>commands\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\TransOldTextFile.h">
+      <Filter>commands\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\AddFrameSprite.h">
+      <Filter>commands\preprocess</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\FormatTIDString.h">
+      <Filter>commands\preprocess</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\ReverseAnimation.h">
+      <Filter>commands\preprocess</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\ScaleOverall.h">
+      <Filter>commands\preprocess</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\SetNameFromFile.h">
+      <Filter>commands\preprocess</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\UniqueImage.h">
+      <Filter>commands\preprocess</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\VerifyImage.h">
+      <Filter>commands\preprocess</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\VerifyJson.h">
+      <Filter>commands\preprocess</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\lr_tools.h">
+      <Filter>commands\lr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\lr_typedef.h">
+      <Filter>commands\lr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\LRPacker.h">
+      <Filter>commands\lr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\LRPackerNew.h">
+      <Filter>commands\lr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\lr\src\lr\dataset\CharacterFileName.h">
+      <Filter>commands\lr\extern</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\lr\src\lr\dataset\Grids.h">
+      <Filter>commands\lr\extern</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\LRExpandGroup.h">
+      <Filter>commands\lr\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\LRExpandInherit.h">
+      <Filter>commands\lr\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\LRJsonPacker.h">
+      <Filter>commands\lr\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\LRSeparateComplex.h">
+      <Filter>commands\lr\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\LRToComplex.h">
+      <Filter>commands\lr\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\AnimToComplexWithColor.h">
+      <Filter>commands\lr\other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\TransOldLRFile.h">
+      <Filter>commands\lr\other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\FixLRSprLayer.h">
+      <Filter>commands\lr\fix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\FixLRSprName.h">
+      <Filter>commands\lr\fix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\PrintGLExt.h">
+      <Filter>commands\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\ExportBodymovin.h">
+      <Filter>commands\export</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

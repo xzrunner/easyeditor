@@ -1,0 +1,473 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="aop">
+      <UniqueIdentifier>{a3bbec8b-3476-4961-a516-b251414abf3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="aop\layer">
+      <UniqueIdentifier>{635d06de-4559-4451-9fd4-0d9d292a8ef0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="aop\property">
+      <UniqueIdentifier>{b3ffc4e1-d3b4-4bc3-b3bd-859b3e168515}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="aop\sprite">
+      <UniqueIdentifier>{82349491-1ba3-466f-9c77-3f506c9e5813}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="aop\utility">
+      <UniqueIdentifier>{ec663e91-94a6-409b-9904-8c23fcfc1495}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="op">
+      <UniqueIdentifier>{b1983e92-a1eb-44de-b7f4-da3abc57b46e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="op\arrange">
+      <UniqueIdentifier>{fdc3792b-2266-4563-b060-0692e840df76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="op\arrange\sprite">
+      <UniqueIdentifier>{dbdccd1c-dec3-4abb-a9ae-91f3a805d400}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="op\base">
+      <UniqueIdentifier>{f7a9faf4-3b56-4d35-8c99-3c0ad7eab1b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="op\base\zoom">
+      <UniqueIdentifier>{9f5bd5b1-4f41-4dda-a2c2-c1c0a6e923d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="op\base\zoom\stage">
+      <UniqueIdentifier>{7e970e14-1e5c-44a5-8061-00391f897373}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="op\draw">
+      <UniqueIdentifier>{3bc0c806-24f5-4fb5-95c5-86e9c09c0599}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="op\others">
+      <UniqueIdentifier>{e01d6bb8-d0cc-4b17-ae1d-d78bc272fe50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="op\paste">
+      <UniqueIdentifier>{2ba117b5-457a-4eab-95f8-a0b825113a40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="op\select">
+      <UniqueIdentifier>{cfce2f3b-ab21-46d6-903f-c32cb4b5b70a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="op\physics">
+      <UniqueIdentifier>{52372835-1add-4eb5-b04a-650b63d2b387}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view">
+      <UniqueIdentifier>{aade7b03-588f-41e1-9ad9-9e7f3ec12f33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\paste">
+      <UniqueIdentifier>{7d246bc2-dbcb-40b8-ba78-4ff64ad340da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\others">
+      <UniqueIdentifier>{be53df28-ba42-4734-b284-8505ff784a21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\physics">
+      <UniqueIdentifier>{da800a2f-00d7-4776-bec3-2a85aa98cb6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="msg">
+      <UniqueIdentifier>{09063549-0269-48e5-bce5-d3ea15a67f0c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\edit\record\AtomicFactory.cpp">
+      <Filter>aop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\record\HistoryList.cpp">
+      <Filter>aop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\record\HistoryUtil.cpp">
+      <Filter>aop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\record\DeleteLayerAOP.cpp">
+      <Filter>aop\layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\record\SetSpriteAngleAOP.cpp">
+      <Filter>aop\property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\record\SetSpriteColorAOP.cpp">
+      <Filter>aop\property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\record\SetSpritePosAOP.cpp">
+      <Filter>aop\property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\record\SetSpriteTwoAOP.cpp">
+      <Filter>aop\property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\record\DeleteSpriteAOP.cpp">
+      <Filter>aop\sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\record\EditableSpriteAOP.cpp">
+      <Filter>aop\sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\record\InsertSpriteAOP.cpp">
+      <Filter>aop\sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\record\MirrorSpriteAOP.cpp">
+      <Filter>aop\sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\record\OffsetSpriteAOP.cpp">
+      <Filter>aop\sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\record\PerspectiveSpriteAOP.cpp">
+      <Filter>aop\sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\record\ReorderSpriteAOP.cpp">
+      <Filter>aop\sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\record\RotateSpriteAOP.cpp">
+      <Filter>aop\sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\record\ScaleSpriteAOP.cpp">
+      <Filter>aop\sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\record\ShearSpriteAOP.cpp">
+      <Filter>aop\sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\record\TranslateSpriteAOP.cpp">
+      <Filter>aop\sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\record\VisibleSpriteAOP.cpp">
+      <Filter>aop\sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\record\CombineAOP.cpp">
+      <Filter>aop\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\EditOP.cpp">
+      <Filter>op</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\ArrangeSpriteFixOP.cpp">
+      <Filter>op\arrange</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\ArrangeSpriteImpl.cpp">
+      <Filter>op\arrange</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\AutoAlign.cpp">
+      <Filter>op\arrange</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\RightPopupMenu.cpp">
+      <Filter>op\arrange</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\CopyPasteSpriteState.cpp">
+      <Filter>op\arrange\sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\MoveSpriteState.cpp">
+      <Filter>op\arrange\sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\OffsetSpriteState.cpp">
+      <Filter>op\arrange\sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\PerspectiveSpriteState.cpp">
+      <Filter>op\arrange\sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\RotateSpriteState.cpp">
+      <Filter>op\arrange\sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\ScaleSpriteState.cpp">
+      <Filter>op\arrange\sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\ShearSpriteState.cpp">
+      <Filter>op\arrange\sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\SpriteCtrlNode.cpp">
+      <Filter>op\arrange\sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\TranslateSpriteState.cpp">
+      <Filter>op\arrange\sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\ZoomViewOP.cpp">
+      <Filter>op\base\zoom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\PanViewState.cpp">
+      <Filter>op\base\zoom\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\ZoomViewState.cpp">
+      <Filter>op\base\zoom\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\DrawRectangleOP.cpp">
+      <Filter>op\draw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\DrawSelectRectOP.cpp">
+      <Filter>op\draw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\MousePositionOP.cpp">
+      <Filter>op\others</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\PasteSpriteOP.cpp">
+      <Filter>op\paste</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\PasteSymbolCaptureOP.cpp">
+      <Filter>op\paste</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\PasteSymbolOP.cpp">
+      <Filter>op\paste</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\PasteSymbolRandomOP.cpp">
+      <Filter>op\paste</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\PasteSymbolTileOP.cpp">
+      <Filter>op\paste</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\SelectShapesOP.cpp">
+      <Filter>op\select</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\SelectSpritesOP.cpp">
+      <Filter>op\select</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\DragPhysicsOP.cpp">
+      <Filter>op\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\PasteSymbolPhysicsOP.cpp">
+      <Filter>op\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\PasteSymbolPhysicsRandomOP.cpp">
+      <Filter>op\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\UniversalArrangeOP.cpp">
+      <Filter>op\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\view\EditCMPT.cpp">
+      <Filter>view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\view\UniversalCMPT.cpp">
+      <Filter>view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\view\PasteSpriteCMPT.cpp">
+      <Filter>view\paste</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\view\PasteSymbolRandomCMPT.cpp">
+      <Filter>view\paste</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\view\PasteSymbolScaleCMPT.cpp">
+      <Filter>view\paste</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\view\LayersMgrCMPT.cpp">
+      <Filter>view\others</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\view\MousePositionCMPT.cpp">
+      <Filter>view\others</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\view\PasteSymbolPhysicsCMPT.cpp">
+      <Filter>view\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\view\UniversalArrangeCMPT.cpp">
+      <Filter>view\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\msg\EditSprMsg.cpp">
+      <Filter>msg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\op\MsgHelper.cpp">
+      <Filter>msg</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\ee\AtomicFactory.h">
+      <Filter>aop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\HistoryList.h">
+      <Filter>aop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\HistoryUtil.h">
+      <Filter>aop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\DeleteLayerAOP.h">
+      <Filter>aop\layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SetSpriteAngleAOP.h">
+      <Filter>aop\property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SetSpriteColorAOP.h">
+      <Filter>aop\property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SetSpritePosAOP.h">
+      <Filter>aop\property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SetSpriteTwoAOP.h">
+      <Filter>aop\property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\DeleteSpriteAOP.h">
+      <Filter>aop\sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\EditableSpriteAOP.h">
+      <Filter>aop\sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\InsertSpriteAOP.h">
+      <Filter>aop\sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\MirrorSpriteAOP.h">
+      <Filter>aop\sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\OffsetSpriteAOP.h">
+      <Filter>aop\sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\PerspectiveSpriteAOP.h">
+      <Filter>aop\sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ReorderSpriteAOP.h">
+      <Filter>aop\sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\RotateSpriteAOP.h">
+      <Filter>aop\sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ScaleSpriteAOP.h">
+      <Filter>aop\sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ShearSpriteAOP.h">
+      <Filter>aop\sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\TranslateSpriteAOP.h">
+      <Filter>aop\sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\VisibleSpriteAOP.h">
+      <Filter>aop\sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\CombineAOP.h">
+      <Filter>aop\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ArrangeSpriteConfig.h">
+      <Filter>op\arrange</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ArrangeSpriteFixOP.h">
+      <Filter>op\arrange</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ArrangeSpriteImpl.h">
+      <Filter>op\arrange</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ArrangeSpriteOP.h">
+      <Filter>op\arrange</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\AutoAlign.h">
+      <Filter>op\arrange</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\RightPopupMenu.h">
+      <Filter>op\arrange</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ArrangeSpriteState.h">
+      <Filter>op\arrange\sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\CopyPasteSpriteState.h">
+      <Filter>op\arrange\sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\MoveSpriteState.h">
+      <Filter>op\arrange\sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\OffsetSpriteState.h">
+      <Filter>op\arrange\sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\PerspectiveSpriteState.h">
+      <Filter>op\arrange\sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\RotateSpriteState.h">
+      <Filter>op\arrange\sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ScaleSpriteState.h">
+      <Filter>op\arrange\sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ShearSpriteState.h">
+      <Filter>op\arrange\sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SpriteCtrlNode.h">
+      <Filter>op\arrange\sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\TranslateSpriteState.h">
+      <Filter>op\arrange\sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\EditOPState.h">
+      <Filter>op\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\NullEditOP.h">
+      <Filter>op\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ZoomViewOP.h">
+      <Filter>op\base\zoom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\PanViewState.h">
+      <Filter>op\base\zoom\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ZoomViewState.h">
+      <Filter>op\base\zoom\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\DrawRectangleOP.h">
+      <Filter>op\draw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\DrawSelectRectOP.h">
+      <Filter>op\draw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\MousePositionOP.h">
+      <Filter>op\others</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\PasteSpriteOP.h">
+      <Filter>op\paste</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\PasteSymbolCaptureOP.h">
+      <Filter>op\paste</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\PasteSymbolOP.h">
+      <Filter>op\paste</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\PasteSymbolRandomOP.h">
+      <Filter>op\paste</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\PasteSymbolTileOP.h">
+      <Filter>op\paste</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SelectShapesOP.h">
+      <Filter>op\select</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SelectSpritesOP.h">
+      <Filter>op\select</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\DragPhysicsOP.h">
+      <Filter>op\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\PasteSymbolPhysicsOP.h">
+      <Filter>op\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\PasteSymbolPhysicsRandomOP.h">
+      <Filter>op\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\UniversalArrangeOP.h">
+      <Filter>op\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\EditCMPT.h">
+      <Filter>view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\UniversalCMPT.h">
+      <Filter>view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\PasteSpriteCMPT.h">
+      <Filter>view\paste</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\PasteSymbolOffsetCMPT.h">
+      <Filter>view\paste</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\PasteSymbolRandomCMPT.h">
+      <Filter>view\paste</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\PasteSymbolScaleCMPT.h">
+      <Filter>view\paste</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\LayersMgrCMPT.h">
+      <Filter>view\others</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\MousePositionCMPT.h">
+      <Filter>view\others</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\PasteSymbolPhysicsCMPT.h">
+      <Filter>view\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\UniversalArrangeCMPT.h">
+      <Filter>view\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\EditSprMsg.h">
+      <Filter>msg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\MsgHelper.h">
+      <Filter>msg</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\include\ee\ArrangeSpriteOP.inl">
+      <Filter>op\arrange</Filter>
+    </None>
+    <None Include="..\..\..\include\ee\PasteSymbolOffsetCMPT.inl">
+      <Filter>view\paste</Filter>
+    </None>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="view">
+      <UniqueIdentifier>{dd4f61c2-d85a-49e6-956b-1d5e3c463516}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\library">
+      <UniqueIdentifier>{0eb41e61-6d10-4734-9ee7-d9641f3d991e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\property">
+      <UniqueIdentifier>{eff4c3cd-f59e-4724-8880-d34f64d9a9e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{c2a2a94c-cc1c-4dbf-9bca-65d6a61beb58}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libaudio\LibraryPage.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libaudio\PropertySetting.cpp">
+      <Filter>view\property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libaudio\Sprite.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libaudio\Symbol.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libaudio\LibraryPage.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libaudio\PropertySetting.h">
+      <Filter>view\property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libaudio\Sprite.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libaudio\Symbol.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

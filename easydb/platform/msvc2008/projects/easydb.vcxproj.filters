@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{f76126de-8678-4a5f-b950-d15a7120824e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset\db">
+      <UniqueIdentifier>{7fe7d897-f7c8-431d-adac-24bb582abe5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset\db\json">
+      <UniqueIdentifier>{e134ba75-a5a8-4211-862c-fddb4bbe67ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset\view">
+      <UniqueIdentifier>{b5567a87-70a1-4170-8900-914eb60ec565}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="frame">
+      <UniqueIdentifier>{13768b8d-ce4e-455c-acbe-b28517fd3ec6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view">
+      <UniqueIdentifier>{4604f45e-b30a-42d0-886c-076bf7ff6dbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\stage">
+      <UniqueIdentifier>{ae4601f8-5bac-42b3-92b6-6a2352506595}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\main">
+      <UniqueIdentifier>{e7e31c21-ef6d-4e55-bea9-f31291081be4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\search">
+      <UniqueIdentifier>{4bb823bc-ba2a-4dd3-a20c-904ab197a1b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\warn">
+      <UniqueIdentifier>{178dbc06-1b6b-4d89-83ff-3011ca534123}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools">
+      <UniqueIdentifier>{cfa0157e-db95-408c-a0e7-86f34a46f277}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\easydb\Snapshoot.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easydb\Database.cpp">
+      <Filter>dataset\db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easydb\DBHelper.cpp">
+      <Filter>dataset\db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easydb\IndexNode.cpp">
+      <Filter>dataset\db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easydb\LeafNode.cpp">
+      <Filter>dataset\db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easydb\Node.cpp">
+      <Filter>dataset\db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easydb\JsonResChangeDirOP.cpp">
+      <Filter>dataset\db\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easydb\JsonResChangePathOP.cpp">
+      <Filter>dataset\db\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easydb\JsonResDelOP.cpp">
+      <Filter>dataset\db\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easydb\JsonResFixOP.cpp">
+      <Filter>dataset\db\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easydb\JsonResOP.cpp">
+      <Filter>dataset\db\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easydb\JsonResParserOP.cpp">
+      <Filter>dataset\db\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easydb\JsonResRenameOP.cpp">
+      <Filter>dataset\db\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easydb\Sprite.cpp">
+      <Filter>dataset\view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easydb\Symbol.cpp">
+      <Filter>dataset\view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easydb\Frame.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easydb\main.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easydb\Task.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easydb\SelectSpritesOP.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easydb\StageCanvas.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easydb\StagePanel.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easydb\MainList.cpp">
+      <Filter>view\main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easydb\MainPanel.cpp">
+      <Filter>view\main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easydb\RefInfoDlg.cpp">
+      <Filter>view\main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easydb\SearchList.cpp">
+      <Filter>view\search</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easydb\SearchPanel.cpp">
+      <Filter>view\search</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easydb\WarnList.cpp">
+      <Filter>view\warn</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easydb\WarnPanel.cpp">
+      <Filter>view\warn</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easydb\Serializer.cpp">
+      <Filter>tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easydb\Utility.cpp">
+      <Filter>tools</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\easydb\Snapshoot.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easydb\Database.h">
+      <Filter>dataset\db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easydb\DBHelper.h">
+      <Filter>dataset\db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easydb\IndexNode.h">
+      <Filter>dataset\db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easydb\LeafNode.h">
+      <Filter>dataset\db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easydb\Node.h">
+      <Filter>dataset\db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easydb\NodeType.h">
+      <Filter>dataset\db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easydb\JsonResChangeDirOP.h">
+      <Filter>dataset\db\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easydb\JsonResChangePathOP.h">
+      <Filter>dataset\db\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easydb\JsonResDelOP.h">
+      <Filter>dataset\db\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easydb\JsonResFixOP.h">
+      <Filter>dataset\db\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easydb\JsonResOP.h">
+      <Filter>dataset\db\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easydb\JsonResParserOP.h">
+      <Filter>dataset\db\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easydb\JsonResRenameOP.h">
+      <Filter>dataset\db\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easydb\Sprite.h">
+      <Filter>dataset\view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easydb\Symbol.h">
+      <Filter>dataset\view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easydb\Frame.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easydb\main.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easydb\Task.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easydb\SelectSpritesOP.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easydb\StageCanvas.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easydb\StagePanel.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easydb\MainList.h">
+      <Filter>view\main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easydb\MainPanel.h">
+      <Filter>view\main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easydb\RefInfoDlg.h">
+      <Filter>view\main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easydb\SearchList.h">
+      <Filter>view\search</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easydb\SearchPanel.h">
+      <Filter>view\search</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easydb\WarnList.h">
+      <Filter>view\warn</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easydb\WarnPanel.h">
+      <Filter>view\warn</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easydb\Serializer.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easydb\Utility.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\..\..\editor-external\wx\include\wx\msw\wx.rc" />
+  </ItemGroup>
+</Project>

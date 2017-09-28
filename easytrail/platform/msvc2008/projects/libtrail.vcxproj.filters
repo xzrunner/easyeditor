@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="view">
+      <UniqueIdentifier>{88507d47-f57d-4821-acf1-fd47135c5303}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\library">
+      <UniqueIdentifier>{625726d2-deee-43b7-8d13-e8e6e89d6fd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\stage">
+      <UniqueIdentifier>{ba04f536-5f7d-43d8-8c91-4a07128c8516}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\toolbar">
+      <UniqueIdentifier>{97123e4d-4467-41fb-907e-2836bf09bb49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\property">
+      <UniqueIdentifier>{7820cd05-2aef-4153-9536-1d836a9af09b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{ce76985f-7db4-4973-949c-ff633bba1b08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mt">
+      <UniqueIdentifier>{51f026d5-5b6d-4fb8-b039-ff79c046a0be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="file">
+      <UniqueIdentifier>{dcaa7ca2-e079-4452-a644-85d1dd8a1990}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libtrail\LibraryPage.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libtrail\LibraryPanel.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libtrail\EditOP.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libtrail\StageCanvas.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libtrail\StagePanel.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libtrail\ComponentPanel.cpp">
+      <Filter>view\toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libtrail\ImageCompPanel.cpp">
+      <Filter>view\toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libtrail\ShapeCompPanel.cpp">
+      <Filter>view\toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libtrail\ToolbarPanel.cpp">
+      <Filter>view\toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libtrail\PropertySettingPanel.cpp">
+      <Filter>view\property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libtrail\SprPropSetting.cpp">
+      <Filter>view\property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libtrail\Sprite.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libtrail\Symbol.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libtrail\MotionTrail.cpp">
+      <Filter>mt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libtrail\MTConfigMgr.cpp">
+      <Filter>mt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libtrail\FileIO.cpp">
+      <Filter>file</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libtrail\LibraryPage.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libtrail\LibraryPanel.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libtrail\EditOP.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libtrail\StageCanvas.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libtrail\StagePanel.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libtrail\ComponentPanel.h">
+      <Filter>view\toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libtrail\ImageCompPanel.h">
+      <Filter>view\toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libtrail\ShapeCompPanel.h">
+      <Filter>view\toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libtrail\ToolbarPanel.h">
+      <Filter>view\toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libtrail\PropertySettingPanel.h">
+      <Filter>view\property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libtrail\SprPropSetting.h">
+      <Filter>view\property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libtrail\Sprite.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libtrail\Symbol.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libtrail\MotionTrail.h">
+      <Filter>mt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libtrail\mt_config.h">
+      <Filter>mt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libtrail\MTConfigMgr.h">
+      <Filter>mt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libtrail\FileIO.h">
+      <Filter>file</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>5.libepbin</ProjectName>
+    <ProjectGuid>{AAD82BAC-510C-4571-A420-5AE5EE7E29D6}</ProjectGuid>
+    <RootNamespace>libepbin</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\libepbin\x86\Debug\</OutDir>
+    <IntDir>..\libepbin\x86\Debug\obj\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\libepbin\x86\Release\</OutDir>
+    <IntDir>..\libepbin\x86\Release\obj\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\easyimage\src;..\..\..\..\dtex\src;..\..\..\..\particle\src;..\..\..\..\sm\src\sm;..\..\..\..\gimg\src\gimg;..\..\..\..\gum\include;..\..\..\..\cu\src\cu;..\..\..\..\editor-external\libpng\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\lzma\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\freetype\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\easyimage\src;..\..\..\..\dtex\src;..\..\..\..\particle\src;..\..\..\..\sm\src\sm;..\..\..\..\gimg\src\gimg;..\..\..\..\gum\include;..\..\..\..\cu\src\cu;..\..\..\..\editor-external\libpng\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\lzma\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\freetype\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\BinaryB4R.cpp" />
+    <ClCompile Include="..\..\..\src\BinaryEPD.cpp" />
+    <ClCompile Include="..\..\..\src\BinaryEPE.cpp" />
+    <ClCompile Include="..\..\..\src\BinaryEPP.cpp" />
+    <ClCompile Include="..\..\..\src\BinaryPTS.cpp" />
+    <ClCompile Include="..\..\..\src\BinaryRRP.cpp" />
+    <ClCompile Include="..\..\..\src\BinaryRRR.cpp" />
+    <ClCompile Include="..\..\..\src\common_dataset.cpp" />
+    <ClCompile Include="..\..\..\src\epd\epd_dataset.cpp" />
+    <ClCompile Include="..\..\..\src\epe\PackAnimation.cpp" />
+    <ClCompile Include="..\..\..\src\epe\PackLabel.cpp" />
+    <ClCompile Include="..\..\..\src\epe\PackPannel.cpp" />
+    <ClCompile Include="..\..\..\src\epe\PackPicture.cpp" />
+    <ClCompile Include="..\..\..\src\epe\PackPolygon.cpp" />
+    <ClCompile Include="..\..\..\src\Exception.cpp" />
+    <ClCompile Include="..\..\..\src\ImageIDer.cpp" />
+    <ClCompile Include="..\..\..\src\LuaDataHelper.cpp" />
+    <ClCompile Include="..\..\..\src\Lzma.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\BinaryB4R.h" />
+    <ClInclude Include="..\..\..\src\BinaryEPD.h" />
+    <ClInclude Include="..\..\..\src\BinaryEPE.h" />
+    <ClInclude Include="..\..\..\src\BinaryEPP.h" />
+    <ClInclude Include="..\..\..\src\BinaryPTS.h" />
+    <ClInclude Include="..\..\..\src\BinaryRRP.h" />
+    <ClInclude Include="..\..\..\src\BinaryRRR.h" />
+    <ClInclude Include="..\..\..\src\common_dataset.h" />
+    <ClInclude Include="..\..\..\src\epbin.h" />
+    <ClInclude Include="..\..\..\src\epd\epd_dataset.h" />
+    <ClInclude Include="..\..\..\src\epe\PackAnimation.h" />
+    <ClInclude Include="..\..\..\src\epe\PackLabel.h" />
+    <ClInclude Include="..\..\..\src\epe\PackPannel.h" />
+    <ClInclude Include="..\..\..\src\epe\PackPicture.h" />
+    <ClInclude Include="..\..\..\src\epe\PackPolygon.h" />
+    <ClInclude Include="..\..\..\src\epe\spritepack.h" />
+    <ClInclude Include="..\..\..\src\epe\type.h" />
+    <ClInclude Include="..\..\..\src\Exception.h" />
+    <ClInclude Include="..\..\..\src\ImageIDer.h" />
+    <ClInclude Include="..\..\..\src\IPackNode.h" />
+    <ClInclude Include="..\..\..\src\LuaDataHelper.h" />
+    <ClInclude Include="..\..\..\src\Lzma.h" />
+    <ClInclude Include="..\..\..\src\tools.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\src\trans_old_ejoy2d_data.lua" />
+    <None Include="..\..\..\src\trans_old_ejoy2d_data2.lua" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

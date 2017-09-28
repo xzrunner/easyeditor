@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="view">
+      <UniqueIdentifier>{4d7cd4a5-a45d-45ff-b998-beb6aa9e74cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\library">
+      <UniqueIdentifier>{758967fe-6313-4b27-99dd-98cdfd851870}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\stage">
+      <UniqueIdentifier>{8e9123cb-a81c-4391-b9a6-38611f869c9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\toolbar">
+      <UniqueIdentifier>{5f9b66a5-26a8-4c21-8f2a-ffbb5a6b24e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\property">
+      <UniqueIdentifier>{5d706038-12cb-4fe7-8d33-a3452a54c2fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{b0ef9b0a-acd8-482c-a986-0c015938ada3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="editop">
+      <UniqueIdentifier>{1a314cc3-67ed-47cd-847f-3a3b0175ed0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="editop\static">
+      <UniqueIdentifier>{b3860fd2-fd90-4f60-8ae9-bc833bb83bfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="editop\dynamic">
+      <UniqueIdentifier>{5af02792-6030-4146-8864-1f751e7c279f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="frame">
+      <UniqueIdentifier>{8e9b4831-8897-466d-a70e-e35bb42cc926}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="icon">
+      <UniqueIdentifier>{9ec3488d-1026-46f9-84f0-9c33a016ac0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="icon\static">
+      <UniqueIdentifier>{1982999a-dcc0-401b-a89e-a9f89e84b5a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="icon\dynamic">
+      <UniqueIdentifier>{a8aae412-d64f-4543-81b8-0d1243aebd4a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libicon\LibraryPage.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libicon\LibraryPanel.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libicon\StageCanvas.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libicon\StagePanel.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libicon\ToolbarPanel.cpp">
+      <Filter>view\toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libicon\SpritePropertySetting.cpp">
+      <Filter>view\property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libicon\Sprite.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libicon\Symbol.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libicon\EditQuadOP.cpp">
+      <Filter>editop\static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libicon\EditRectOP.cpp">
+      <Filter>editop\static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libicon\EditChangedRectOP.cpp">
+      <Filter>editop\dynamic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libicon\EditChangedSectorOP.cpp">
+      <Filter>editop\dynamic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libicon\EditDialog.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libicon\FileIO.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libicon\IconFactory.cpp">
+      <Filter>icon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libicon\IconType.cpp">
+      <Filter>icon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libicon\QuadIcon.cpp">
+      <Filter>icon\static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libicon\RectIcon.cpp">
+      <Filter>icon\static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libicon\ChangedRectIcon.cpp">
+      <Filter>icon\dynamic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libicon\ChangedSectorIcon.cpp">
+      <Filter>icon\dynamic</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libicon\LibraryPage.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libicon\LibraryPanel.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libicon\StageCanvas.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libicon\StagePanel.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libicon\ToolbarPanel.h">
+      <Filter>view\toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libicon\SpritePropertySetting.h">
+      <Filter>view\property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libicon\Sprite.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libicon\Symbol.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libicon\EditQuadOP.h">
+      <Filter>editop\static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libicon\EditRectOP.h">
+      <Filter>editop\static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libicon\EditChangedRectOP.h">
+      <Filter>editop\dynamic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libicon\EditChangedSectorOP.h">
+      <Filter>editop\dynamic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libicon\EditDialog.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libicon\FileIO.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libicon\Icon.h">
+      <Filter>icon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libicon\IconFactory.h">
+      <Filter>icon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libicon\IconType.h">
+      <Filter>icon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libicon\QuadIcon.h">
+      <Filter>icon\static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libicon\RectIcon.h">
+      <Filter>icon\static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libicon\ChangedRectIcon.h">
+      <Filter>icon\dynamic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libicon\ChangedSectorIcon.h">
+      <Filter>icon\dynamic</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>4.libgui</ProjectName>
+    <ProjectGuid>{FA0A46EC-E1AB-4830-8898-C953EEBDF7A5}</ProjectGuid>
+    <RootNamespace>libgui</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\libgui\x86\Debug\</OutDir>
+    <IntDir>..\libgui\x86\Debug\obj\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\libgui\x86\Release\</OutDir>
+    <IntDir>..\libgui\x86\Release\obj\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include\ee;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\c99;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\libgui\x86\Debug</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\libgui\x86\Debug\libgui.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\include\ee;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\c99;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\libgui\x86\Release</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\libgui\x86\Release\libgui.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\gui\AlphaSettingDlg.cpp" />
+    <ClCompile Include="..\..\..\source\gui\CheckBoxWidget.cpp" />
+    <ClCompile Include="..\..\..\source\gui\ChoiceWidget.cpp" />
+    <ClCompile Include="..\..\..\source\gui\ColorSlider.cpp" />
+    <ClCompile Include="..\..\..\source\gui\ComboBoxWidget.cpp" />
+    <ClCompile Include="..\..\..\source\gui\DynamicInfo.cpp" />
+    <ClCompile Include="..\..\..\source\gui\DynamicWidget.cpp" />
+    <ClCompile Include="..\..\..\source\gui\FileDirProperty.cpp" />
+    <ClCompile Include="..\..\..\source\gui\FileNameProperty.cpp" />
+    <ClCompile Include="..\..\..\source\gui\FilepathProperty.cpp" />
+    <ClCompile Include="..\..\..\source\gui\HSLColorPanel.cpp" />
+    <ClCompile Include="..\..\..\source\gui\HSLColorSettingDlg.cpp" />
+    <ClCompile Include="..\..\..\source\gui\ImagePanel.cpp" />
+    <ClCompile Include="..\..\..\source\gui\LayersMgrWidget.cpp" />
+    <ClCompile Include="..\..\..\source\gui\MyColorProperty.cpp" />
+    <ClCompile Include="..\..\..\source\gui\OneFloatValueCMPT.cpp" />
+    <ClCompile Include="..\..\..\source\gui\OpenSymbolProperty.cpp" />
+    <ClCompile Include="..\..\..\source\gui\PasteSymbolRandomWidget.cpp" />
+    <ClCompile Include="..\..\..\source\gui\RGBColorPanel.cpp" />
+    <ClCompile Include="..\..\..\source\gui\RGBColorSettingDlg.cpp" />
+    <ClCompile Include="..\..\..\source\gui\SelectDrawTypeWidget.cpp" />
+    <ClCompile Include="..\..\..\source\gui\SetValueDialog.cpp" />
+    <ClCompile Include="..\..\..\source\gui\SimpleGLCanvas.cpp" />
+    <ClCompile Include="..\..\..\source\gui\SliderCtrlOld.cpp" />
+    <ClCompile Include="..\..\..\source\gui\SliderCtrlOne.cpp" />
+    <ClCompile Include="..\..\..\source\gui\SliderCtrlTwo.cpp" />
+    <ClCompile Include="..\..\..\source\gui\SysColorProperty.cpp" />
+    <ClCompile Include="..\..\..\source\gui\TextWidget.cpp" />
+    <ClCompile Include="..\..\..\source\gui\VerticalImageList.cpp" />
+    <ClCompile Include="..\..\..\source\gui\WidgetFactory.cpp" />
+    <ClCompile Include="..\..\..\source\gui\WXHelper.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\ee\AlphaSettingDlg.h" />
+    <ClInclude Include="..\..\..\include\ee\CheckBoxWidget.h" />
+    <ClInclude Include="..\..\..\include\ee\ChoiceWidget.h" />
+    <ClInclude Include="..\..\..\include\ee\ColorMonitor.h" />
+    <ClInclude Include="..\..\..\include\ee\ColorSlider.h" />
+    <ClInclude Include="..\..\..\include\ee\ComboBoxWidget.h" />
+    <ClInclude Include="..\..\..\include\ee\DragTargetNull.h" />
+    <ClInclude Include="..\..\..\include\ee\DynamicInfo.h" />
+    <ClInclude Include="..\..\..\include\ee\DynamicWidget.h" />
+    <ClInclude Include="..\..\..\include\ee\FileDirProperty.h" />
+    <ClInclude Include="..\..\..\include\ee\FileNameProperty.h" />
+    <ClInclude Include="..\..\..\include\ee\FilepathProperty.h" />
+    <ClInclude Include="..\..\..\include\ee\HSLColorPanel.h" />
+    <ClInclude Include="..\..\..\include\ee\HSLColorSettingDlg.h" />
+    <ClInclude Include="..\..\..\include\ee\ImagePanel.h" />
+    <ClInclude Include="..\..\..\include\ee\LayersMgrWidget.h" />
+    <ClInclude Include="..\..\..\include\ee\MyColorProperty.h" />
+    <ClInclude Include="..\..\..\include\ee\OneFloatValue.h" />
+    <ClInclude Include="..\..\..\include\ee\OneFloatValueCMPT.h" />
+    <ClInclude Include="..\..\..\include\ee\OneFloatValueStatic.h" />
+    <ClInclude Include="..\..\..\include\ee\OpenSymbolMonitor.h" />
+    <ClInclude Include="..\..\..\include\ee\OpenSymbolProperty.h" />
+    <ClInclude Include="..\..\..\include\ee\PasteSymbolRandomWidget.h" />
+    <ClInclude Include="..\..\..\include\ee\RGBColorPanel.h" />
+    <ClInclude Include="..\..\..\include\ee\RGBColorSettingDlg.h" />
+    <ClInclude Include="..\..\..\include\ee\SelectDrawTypeWidget.h" />
+    <ClInclude Include="..\..\..\include\ee\SetValueDialog.h" />
+    <ClInclude Include="..\..\..\include\ee\SimpleGLCanvas.h" />
+    <ClInclude Include="..\..\..\include\ee\SliderCtrl.h" />
+    <ClInclude Include="..\..\..\include\ee\SliderCtrlOld.h" />
+    <ClInclude Include="..\..\..\include\ee\SliderCtrlOne.h" />
+    <ClInclude Include="..\..\..\include\ee\SliderCtrlTwo.h" />
+    <ClInclude Include="..\..\..\include\ee\SliderItem.h" />
+    <ClInclude Include="..\..\..\include\ee\SysColorProperty.h" />
+    <ClInclude Include="..\..\..\include\ee\TextWidget.h" />
+    <ClInclude Include="..\..\..\include\ee\TweenColorPanel.h" />
+    <ClInclude Include="..\..\..\include\ee\VerticalImageList.h" />
+    <ClInclude Include="..\..\..\include\ee\Widget.h" />
+    <ClInclude Include="..\..\..\include\ee\WidgetFactory.h" />
+    <ClInclude Include="..\..\..\include\ee\WXHelper.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

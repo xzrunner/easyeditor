@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="math">
+      <UniqueIdentifier>{69b6595c-f899-40f1-b727-94abdeb501f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render">
+      <UniqueIdentifier>{87932081-73fe-430a-81f3-8ff6ebee42c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render\shader">
+      <UniqueIdentifier>{efb2cc1d-99e6-430e-820b-6bb6e6c8bf08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render\shader\shaders">
+      <UniqueIdentifier>{740f6704-ee01-4166-a121-4eec71100821}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render\dataset">
+      <UniqueIdentifier>{4679bcbe-0589-4529-b75c-4134375cc185}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view">
+      <UniqueIdentifier>{b806f60e-47ba-4f9c-97a5-6c8485ab967b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dateset">
+      <UniqueIdentifier>{10ddc449-670b-4abd-8694-99fc1f3181a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dateset\model">
+      <UniqueIdentifier>{8a803431-ff6b-472b-bfdd-b7756d94f977}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dateset\model\parametric">
+      <UniqueIdentifier>{6fab00ad-a7f8-4747-9cc8-e31244aea622}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="editop">
+      <UniqueIdentifier>{e5950ddf-d18a-4cc1-9ff4-eb09113952e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools">
+      <UniqueIdentifier>{8fad499d-8e2e-49a6-856e-ddb541133011}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assimp">
+      <UniqueIdentifier>{3afcf782-b9ae-4d2a-a831-0816251c4aff}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\easy3d\AABB.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\Math3.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\Ray.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\primitive_draw.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\ShaderMgr.h">
+      <Filter>render\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\LightingShader.h">
+      <Filter>render\shader\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\ModelShader.h">
+      <Filter>render\shader\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\ShapeShader.h">
+      <Filter>render\shader\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\SpriteShader.h">
+      <Filter>render\shader\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\TexLightingShader.h">
+      <Filter>render\shader\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\Camera.h">
+      <Filter>render\dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\ViewFrustum.h">
+      <Filter>render\dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\StageCanvas.h">
+      <Filter>view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\IModel.h">
+      <Filter>dateset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\Material.h">
+      <Filter>dateset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\Mesh.h">
+      <Filter>dateset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\ISurface.h">
+      <Filter>dateset\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\ModelObj.h">
+      <Filter>dateset\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\ModelParametric.h">
+      <Filter>dateset\model\parametric</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\ParametricEquations.h">
+      <Filter>dateset\model\parametric</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\ParametricSurface.h">
+      <Filter>dateset\model\parametric</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\ControlCameraOP.h">
+      <Filter>editop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\LogViewer.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\AssimpHelper.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\easy3d.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\easy3d\Math3.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easy3d\Ray.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easy3d\primitive_draw.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easy3d\ShaderMgr.cpp">
+      <Filter>render\shader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easy3d\LightingShader.cpp">
+      <Filter>render\shader\shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easy3d\ModelShader.cpp">
+      <Filter>render\shader\shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easy3d\ShapeShader.cpp">
+      <Filter>render\shader\shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easy3d\SpriteShader.cpp">
+      <Filter>render\shader\shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easy3d\Camera.cpp">
+      <Filter>render\dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easy3d\ViewFrustum.cpp">
+      <Filter>render\dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easy3d\StageCanvas.cpp">
+      <Filter>view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easy3d\Material.cpp">
+      <Filter>dateset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easy3d\ModelObj.cpp">
+      <Filter>dateset\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easy3d\ModelParametric.cpp">
+      <Filter>dateset\model\parametric</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easy3d\ParametricSurface.cpp">
+      <Filter>dateset\model\parametric</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easy3d\ControlCameraOP.cpp">
+      <Filter>editop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easy3d\LogViewer.cpp">
+      <Filter>tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easy3d\AssimpHelper.cpp">
+      <Filter>assimp</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="common">
+      <UniqueIdentifier>{ebfe2c28-40fc-4f3a-b118-77f766ad94cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{eb651f5e-0da5-48c6-b343-71454efa2087}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset\bodies">
+      <UniqueIdentifier>{2ed58768-7e75-42d3-8802-2e566a6c9734}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset\joints">
+      <UniqueIdentifier>{3069014d-cfd8-4a50-ae3f-e5ef03a68eb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view">
+      <UniqueIdentifier>{11db4058-bc6e-4af9-a184-6373ebb41ea8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\ee\physics_const.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\PhysicsQuery.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\BodyData.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\BodyFactory.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\BodyManager.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\FixtureData.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\IBody.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ChainBody.h">
+      <Filter>dataset\bodies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\CircleBody.h">
+      <Filter>dataset\bodies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ComplexBody.h">
+      <Filter>dataset\bodies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\PolygonBody.h">
+      <Filter>dataset\bodies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ShapesBody.h">
+      <Filter>dataset\bodies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\Joint.h">
+      <Filter>dataset\joints</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\JointDef.h">
+      <Filter>dataset\joints</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\Box2DRender.h">
+      <Filter>view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\PhysicsPanelImpl.h">
+      <Filter>view</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\physics\PhysicsQuery.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\physics\BodyData.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\physics\BodyFactory.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\physics\BodyManager.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\physics\FixtureData.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\physics\IBody.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\physics\ChainBody.cpp">
+      <Filter>dataset\bodies</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\physics\CircleBody.cpp">
+      <Filter>dataset\bodies</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\physics\ComplexBody.cpp">
+      <Filter>dataset\bodies</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\physics\PolygonBody.cpp">
+      <Filter>dataset\bodies</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\physics\ShapesBody.cpp">
+      <Filter>dataset\bodies</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\physics\Joint.cpp">
+      <Filter>dataset\joints</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\physics\Box2DRender.cpp">
+      <Filter>view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\physics\PhysicsPanelImpl.cpp">
+      <Filter>view</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

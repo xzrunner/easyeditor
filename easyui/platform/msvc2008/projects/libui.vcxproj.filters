@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="1. window">
+      <UniqueIdentifier>{9140a1fd-7f09-4d6f-8ee3-f82491db11e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. window\dataset">
+      <UniqueIdentifier>{dae80a54-9c55-48e6-babd-32dfaa517879}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. window\frame">
+      <UniqueIdentifier>{a6d01df3-0b58-4d00-8599-30a223905c39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. window\message">
+      <UniqueIdentifier>{68a188fa-4f0c-4db4-b036-4dd4de17ddba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{9401697e-b30f-44af-93a8-abc97b0ef539}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. list">
+      <UniqueIdentifier>{0cccf31c-9321-4e62-9d88-fc965eaa5fea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. list\dataset">
+      <UniqueIdentifier>{fead0d20-9b7f-4706-bb20-b5c7747aeaf9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libui\window\AnchorMgr.cpp">
+      <Filter>1. window\dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libui\window\Sprite.cpp">
+      <Filter>1. window\dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libui\window\Symbol.cpp">
+      <Filter>1. window\dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libui\window\FileIO.cpp">
+      <Filter>1. window\frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libui\window\ChangeWindowViewSizeSJ.cpp">
+      <Filter>1. window\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libui\window\QueryWindowViewSizeSJ.cpp">
+      <Filter>1. window\message</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libui\window\AnchorMgr.h">
+      <Filter>1. window\dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libui\window\Sprite.h">
+      <Filter>1. window\dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libui\window\Symbol.h">
+      <Filter>1. window\dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libui\window\FileIO.h">
+      <Filter>1. window\frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libui\window\ChangeWindowViewSizeSJ.h">
+      <Filter>1. window\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libui\window\QueryWindowViewSizeSJ.h">
+      <Filter>1. window\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libui\message_id.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

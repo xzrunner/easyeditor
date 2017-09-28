@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="fileio">
+      <UniqueIdentifier>{7589bbf9-48c6-45e3-b55d-25b3ef5111a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{ab902d53-1288-4b42-83c3-abd2beb4889a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset\joints">
+      <UniqueIdentifier>{22358434-470a-4552-8340-9963510aa891}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libmodeling\FileAdapter.cpp">
+      <Filter>fileio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmodeling\Package.cpp">
+      <Filter>fileio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmodeling\Body.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmodeling\Fixture.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmodeling\Joint.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmodeling\DistanceJoint.cpp">
+      <Filter>dataset\joints</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmodeling\FrictionJoint.cpp">
+      <Filter>dataset\joints</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmodeling\GearJoint.cpp">
+      <Filter>dataset\joints</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmodeling\MotorJoint.cpp">
+      <Filter>dataset\joints</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmodeling\PrismaticJoint.cpp">
+      <Filter>dataset\joints</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmodeling\PulleyJoint.cpp">
+      <Filter>dataset\joints</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmodeling\RevoluteJoint.cpp">
+      <Filter>dataset\joints</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmodeling\RopeJoint.cpp">
+      <Filter>dataset\joints</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmodeling\WeldJoint.cpp">
+      <Filter>dataset\joints</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmodeling\WheelJoint.cpp">
+      <Filter>dataset\joints</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libmodeling\FileAdapter.h">
+      <Filter>fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmodeling\Package.h">
+      <Filter>fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmodeling\Body.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmodeling\Fixture.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmodeling\Joint.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmodeling\World.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmodeling\DistanceJoint.h">
+      <Filter>dataset\joints</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmodeling\FrictionJoint.h">
+      <Filter>dataset\joints</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmodeling\GearJoint.h">
+      <Filter>dataset\joints</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmodeling\MotorJoint.h">
+      <Filter>dataset\joints</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmodeling\PrismaticJoint.h">
+      <Filter>dataset\joints</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmodeling\PulleyJoint.h">
+      <Filter>dataset\joints</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmodeling\RevoluteJoint.h">
+      <Filter>dataset\joints</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmodeling\RopeJoint.h">
+      <Filter>dataset\joints</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmodeling\WeldJoint.h">
+      <Filter>dataset\joints</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmodeling\WheelJoint.h">
+      <Filter>dataset\joints</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

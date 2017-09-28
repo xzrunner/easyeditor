@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="view">
+      <UniqueIdentifier>{52f88a05-3958-453c-8cf1-29c2fdff315e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\library">
+      <UniqueIdentifier>{10974630-dc66-4e2b-a863-6df085f5b19a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\stage">
+      <UniqueIdentifier>{11915ccc-6eb8-40e7-841c-9ae6f422f9c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\toolbar">
+      <UniqueIdentifier>{1a6dc262-6df0-4ea7-96a2-fc89dc3d0838}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{123457ed-2c79-45a2-8343-ec5a05d05607}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset\ps">
+      <UniqueIdentifier>{c8852c82-a0b3-4628-a708-4d02329bc5c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit">
+      <UniqueIdentifier>{05f9d09f-8c00-40ea-bbe0-3a8768e06e01}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libp3dinv\LibraryPage.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libp3dinv\LibraryPanel.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libp3dinv\StageCanvas.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libp3dinv\StagePanel.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libp3dinv\ToolbarPanel.cpp">
+      <Filter>view\toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libp3dinv\Sprite.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libp3dinv\Symbol.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libp3dinv\Particle.cpp">
+      <Filter>dataset\ps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libp3dinv\ParticleSystem.cpp">
+      <Filter>dataset\ps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libp3dinv\EditOP.cpp">
+      <Filter>edit</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libp3dinv\LibraryPage.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libp3dinv\LibraryPanel.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libp3dinv\StageCanvas.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libp3dinv\StagePanel.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libp3dinv\ToolbarPanel.h">
+      <Filter>view\toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libp3dinv\Sprite.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libp3dinv\Symbol.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libp3dinv\Particle.h">
+      <Filter>dataset\ps</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libp3dinv\ParticleSystem.h">
+      <Filter>dataset\ps</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libp3dinv\EditOP.h">
+      <Filter>edit</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>7.libdb</ProjectName>
+    <ProjectGuid>{BD2BB983-EF88-4B07-9564-0C5D1871FB87}</ProjectGuid>
+    <RootNamespace>libdb</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\libdb\x86\Debug\</OutDir>
+    <IntDir>..\libdb\x86\Debug\obj\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\libdb\x86\Release\</OutDir>
+    <IntDir>..\libdb\x86\Release\obj\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\src\easydb;..\..\..\src\libdb;..\..\..\..\easyeditor\include;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..\easyanim2\src;..\..\..\..\easyscale9\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easytrail\src;..\..\..\..\easybuilder\src;..\..\..\..\easyimage\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexpacker\src;..\..\..\..\epbin\src;..\..\..\..\coceditor\src;..\..\..\..\easymesh\src;..\..\..\..\easymask\src;..\..\..\..\easytexture\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyicon\src;..\..\..\..\lr\src;..\..\..\..\particle\src;..\..\..\..\easyrespacker\src;..\..\..\..\easysprpacker\src;..\..\..\..\easytext\src;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\bimp\include;..\..\..\..\simp\include;..\..\..\..\sm\src\sm;..\..\..\..\gtxt\src\gtxt;..\..\..\..\cu\src\cu;..\..\..\..\gimg\src\gimg;..\..\..\..\fs\src\fs;..\..\..\..\pimg\include;..\..\..\..\shaderlab\include;..\..\..\..\polymesh\include;..\..\..\..\timp\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\md5\include;..\..\..\..\editor-external\glfw\include;..\..\..\..\editor-external\libpng\include;..\..\..\..\editor-external\gl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\libdb\x86\Debug</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\libdb\x86\Debug\libdb.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\src\easydb;..\..\..\src\libdb;..\..\..\..\easyeditor\include;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..\easyanim2\src;..\..\..\..\easyscale9\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easytrail\src;..\..\..\..\easybuilder\src;..\..\..\..\easyimage\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexpacker\src;..\..\..\..\epbin\src;..\..\..\..\coceditor\src;..\..\..\..\easymesh\src;..\..\..\..\easymask\src;..\..\..\..\easytexture\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyicon\src;..\..\..\..\lr\src;..\..\..\..\particle\src;..\..\..\..\easyrespacker\src;..\..\..\..\easysprpacker\src;..\..\..\..\easytext\src;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\bimp\include;..\..\..\..\simp\include;..\..\..\..\sm\src\sm;..\..\..\..\gtxt\src\gtxt;..\..\..\..\cu\src\cu;..\..\..\..\gimg\src\gimg;..\..\..\..\fs\src\fs;..\..\..\..\pimg\include;..\..\..\..\shaderlab\include;..\..\..\..\polymesh\include;..\..\..\..\timp\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\md5\include;..\..\..\..\editor-external\glfw\include;..\..\..\..\editor-external\libpng\include;..\..\..\..\editor-external\gl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\libdb\x86\Release</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\libdb\x86\Release\libdb.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\lr\src\lr\dataset\CharacterFileName.cpp" />
+    <ClCompile Include="..\..\..\..\lr\src\lr\dataset\Grids.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\AddFrameSprite.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\AnimToComplexWithColor.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\AverageRectCut.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\BinB4R.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\BinEP.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\BinRRP.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\BinRRR.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\BlockCompress.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\CalcImageArea.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\CalculateImageArea.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\ChangeComplexOrigin.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\ChangeJsonFile.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\ChangeJsonName.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\ChangeTPJsonFile.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\check_params.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\CommandFactory.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\CommandLoader.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\CopyFile.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\CreateColLUT.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\Cropping.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\DecodeEjoy2dRes.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\DFFParser.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\DistanceFieldFont.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\ExportBodymovin.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\FixAddColor.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\FixJsonBase.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\FixLRMirror.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\FixLRP3dLayer.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\FixLRSprLayer.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\FixLRSprName.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\FixMirror.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\FixPackCfg.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\FixRotateTrimJson.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\FixSpriteColor.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\FixTextAlign.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\FormatJsonFile.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\FormatTIDString.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\GenNoCompressCfg.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\GenPackCfg.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\GenPkgRefInfo.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\LRExpandGroup.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\LRExpandInherit.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\LRJsonPacker.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\LRPacker.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\LRPackerNew.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\LRSeparateComplex.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\LRToComplex.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\lr_tools.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\MD5Helper.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\NumberImages.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\OutlineImage.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\OutlineToPolygon.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\OutlineToTriStrip.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\PackAudioID.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\PackEP.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\PackEPNew.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\PackEPT.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\PackImageEPT.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\PackLuaDescFile.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\PackParticle2D.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\PackParticle3D.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\PackPkg.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\PackRegularRect.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\PackRes.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\PackResID.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\PackTexture.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\PrintGLExt.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\RectCutWithJson.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\RegularRectCut.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\RemoveDuplicateSprite.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\ReverseAnimation.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\RotateImage.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\RotateTrimImage.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\ScaleImage.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\ScaleJson.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\ScaleOverall.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\SetNameFromFile.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\Snapshoot.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\TranslateJson.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\TransNewTextFile.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\TransOldAnchorFile.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\TransOldLRFile.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\TransOldP3DFile.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\TransOldShapeFile.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\TransOldTextFile.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\TransToETC1.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\TransToETC2.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\TransToGif.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\TransToPVR.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\TrimImage.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\UniqueImage.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\UnpackLuaDescFile.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\utility.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\VerifyImage.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\VerifyJson.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\lr\src\lr\dataset\CharacterFileName.h" />
+    <ClInclude Include="..\..\..\..\lr\src\lr\dataset\Grids.h" />
+    <ClInclude Include="..\..\..\src\libdb\AddFrameSprite.h" />
+    <ClInclude Include="..\..\..\src\libdb\AnimToComplexWithColor.h" />
+    <ClInclude Include="..\..\..\src\libdb\AverageRectCut.h" />
+    <ClInclude Include="..\..\..\src\libdb\BinB4R.h" />
+    <ClInclude Include="..\..\..\src\libdb\BinEP.h" />
+    <ClInclude Include="..\..\..\src\libdb\BinRRP.h" />
+    <ClInclude Include="..\..\..\src\libdb\BinRRR.h" />
+    <ClInclude Include="..\..\..\src\libdb\BlockCompress.h" />
+    <ClInclude Include="..\..\..\src\libdb\CalcImageArea.h" />
+    <ClInclude Include="..\..\..\src\libdb\CalculateImageArea.h" />
+    <ClInclude Include="..\..\..\src\libdb\ChangeComplexOrigin.h" />
+    <ClInclude Include="..\..\..\src\libdb\ChangeJsonFile.h" />
+    <ClInclude Include="..\..\..\src\libdb\ChangeJsonName.h" />
+    <ClInclude Include="..\..\..\src\libdb\ChangeTPJsonFile.h" />
+    <ClInclude Include="..\..\..\src\libdb\check_params.h" />
+    <ClInclude Include="..\..\..\src\libdb\CommandFactory.h" />
+    <ClInclude Include="..\..\..\src\libdb\CommandLoader.h" />
+    <ClInclude Include="..\..\..\src\libdb\CopyFile.h" />
+    <ClInclude Include="..\..\..\src\libdb\CreateColLUT.h" />
+    <ClInclude Include="..\..\..\src\libdb\Cropping.h" />
+    <ClInclude Include="..\..\..\src\libdb\DecodeEjoy2dRes.h" />
+    <ClInclude Include="..\..\..\src\libdb\DFFParser.h" />
+    <ClInclude Include="..\..\..\src\libdb\DistanceFieldFont.h" />
+    <ClInclude Include="..\..\..\src\libdb\ExportBodymovin.h" />
+    <ClInclude Include="..\..\..\src\libdb\FixAddColor.h" />
+    <ClInclude Include="..\..\..\src\libdb\FixJsonBase.h" />
+    <ClInclude Include="..\..\..\src\libdb\FixLRMirror.h" />
+    <ClInclude Include="..\..\..\src\libdb\FixLRP3dLayer.h" />
+    <ClInclude Include="..\..\..\src\libdb\FixLRSprLayer.h" />
+    <ClInclude Include="..\..\..\src\libdb\FixLRSprName.h" />
+    <ClInclude Include="..\..\..\src\libdb\FixMirror.h" />
+    <ClInclude Include="..\..\..\src\libdb\FixPackCfg.h" />
+    <ClInclude Include="..\..\..\src\libdb\FixRotateTrimJson.h" />
+    <ClInclude Include="..\..\..\src\libdb\FixSpriteColor.h" />
+    <ClInclude Include="..\..\..\src\libdb\FixTextAlign.h" />
+    <ClInclude Include="..\..\..\src\libdb\FormatJsonFile.h" />
+    <ClInclude Include="..\..\..\src\libdb\FormatTIDString.h" />
+    <ClInclude Include="..\..\..\src\libdb\GenNoCompressCfg.h" />
+    <ClInclude Include="..\..\..\src\libdb\GenPackCfg.h" />
+    <ClInclude Include="..\..\..\src\libdb\GenPkgRefInfo.h" />
+    <ClInclude Include="..\..\..\src\libdb\ICommand.h" />
+    <ClInclude Include="..\..\..\src\libdb\LRExpandGroup.h" />
+    <ClInclude Include="..\..\..\src\libdb\LRExpandInherit.h" />
+    <ClInclude Include="..\..\..\src\libdb\LRJsonPacker.h" />
+    <ClInclude Include="..\..\..\src\libdb\LRPacker.h" />
+    <ClInclude Include="..\..\..\src\libdb\LRPackerNew.h" />
+    <ClInclude Include="..\..\..\src\libdb\LRSeparateComplex.h" />
+    <ClInclude Include="..\..\..\src\libdb\LRToComplex.h" />
+    <ClInclude Include="..\..\..\src\libdb\lr_tools.h" />
+    <ClInclude Include="..\..\..\src\libdb\lr_typedef.h" />
+    <ClInclude Include="..\..\..\src\libdb\MD5Helper.h" />
+    <ClInclude Include="..\..\..\src\libdb\NumberImages.h" />
+    <ClInclude Include="..\..\..\src\libdb\OutlineImage.h" />
+    <ClInclude Include="..\..\..\src\libdb\OutlineToPolygon.h" />
+    <ClInclude Include="..\..\..\src\libdb\OutlineToTriStrip.h" />
+    <ClInclude Include="..\..\..\src\libdb\PackAudioID.h" />
+    <ClInclude Include="..\..\..\src\libdb\PackEP.h" />
+    <ClInclude Include="..\..\..\src\libdb\PackEPNew.h" />
+    <ClInclude Include="..\..\..\src\libdb\PackEPT.h" />
+    <ClInclude Include="..\..\..\src\libdb\PackImageEPT.h" />
+    <ClInclude Include="..\..\..\src\libdb\PackLuaDescFile.h" />
+    <ClInclude Include="..\..\..\src\libdb\PackParticle2D.h" />
+    <ClInclude Include="..\..\..\src\libdb\PackParticle3D.h" />
+    <ClInclude Include="..\..\..\src\libdb\PackPkg.h" />
+    <ClInclude Include="..\..\..\src\libdb\PackRegularRect.h" />
+    <ClInclude Include="..\..\..\src\libdb\PackRes.h" />
+    <ClInclude Include="..\..\..\src\libdb\PackResID.h" />
+    <ClInclude Include="..\..\..\src\libdb\PackTexture.h" />
+    <ClInclude Include="..\..\..\src\libdb\PrintGLExt.h" />
+    <ClInclude Include="..\..\..\src\libdb\RectCutWithJson.h" />
+    <ClInclude Include="..\..\..\src\libdb\RegularRectCut.h" />
+    <ClInclude Include="..\..\..\src\libdb\RemoveDuplicateSprite.h" />
+    <ClInclude Include="..\..\..\src\libdb\ReverseAnimation.h" />
+    <ClInclude Include="..\..\..\src\libdb\RotateImage.h" />
+    <ClInclude Include="..\..\..\src\libdb\RotateTrimImage.h" />
+    <ClInclude Include="..\..\..\src\libdb\ScaleImage.h" />
+    <ClInclude Include="..\..\..\src\libdb\ScaleJson.h" />
+    <ClInclude Include="..\..\..\src\libdb\ScaleOverall.h" />
+    <ClInclude Include="..\..\..\src\libdb\SetNameFromFile.h" />
+    <ClInclude Include="..\..\..\src\libdb\Snapshoot.h" />
+    <ClInclude Include="..\..\..\src\libdb\TranslateJson.h" />
+    <ClInclude Include="..\..\..\src\libdb\TransNewTextFile.h" />
+    <ClInclude Include="..\..\..\src\libdb\TransOldAnchorFile.h" />
+    <ClInclude Include="..\..\..\src\libdb\TransOldLRFile.h" />
+    <ClInclude Include="..\..\..\src\libdb\TransOldP3DFile.h" />
+    <ClInclude Include="..\..\..\src\libdb\TransOldShapeFile.h" />
+    <ClInclude Include="..\..\..\src\libdb\TransOldTextFile.h" />
+    <ClInclude Include="..\..\..\src\libdb\TransToETC1.h" />
+    <ClInclude Include="..\..\..\src\libdb\TransToETC2.h" />
+    <ClInclude Include="..\..\..\src\libdb\TransToGif.h" />
+    <ClInclude Include="..\..\..\src\libdb\TransToPVR.h" />
+    <ClInclude Include="..\..\..\src\libdb\TrimImage.h" />
+    <ClInclude Include="..\..\..\src\libdb\UniqueImage.h" />
+    <ClInclude Include="..\..\..\src\libdb\UnpackLuaDescFile.h" />
+    <ClInclude Include="..\..\..\src\libdb\utility.h" />
+    <ClInclude Include="..\..\..\src\libdb\VerifyImage.h" />
+    <ClInclude Include="..\..\..\src\libdb\VerifyJson.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

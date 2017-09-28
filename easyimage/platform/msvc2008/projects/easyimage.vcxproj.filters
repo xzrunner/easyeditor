@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="stage">
+      <UniqueIdentifier>{588fedc6-fc63-430e-88c6-e111ae0c5d45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="toolbar">
+      <UniqueIdentifier>{ee034d2c-6c96-4d98-93f6-267309c70497}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="frame">
+      <UniqueIdentifier>{86c17e2a-30f5-414a-bdaa-ef1046191b0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit">
+      <UniqueIdentifier>{ae2e3be2-7bd6-473c-bbde-607a8ebd541c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\rect_cut">
+      <UniqueIdentifier>{e5f9ac9c-8ce4-45db-8db9-e6b6e9c9decf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\diff">
+      <UniqueIdentifier>{e79db1d5-f76f-4be2-af95-d575cc002bae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\auto_tri_cut">
+      <UniqueIdentifier>{dc898867-4a19-4799-a146-4ca95b719e06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\auto_rect_cut">
+      <UniqueIdentifier>{a4ecddd1-d052-4246-9a88-dbae82b89e00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\process">
+      <UniqueIdentifier>{f727d01b-043d-42e9-90b9-7684e5ee9964}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\easyimage\StageCanvas.cpp">
+      <Filter>stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyimage\StagePanel.cpp">
+      <Filter>stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyimage\ToolbarPanel.cpp">
+      <Filter>toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyimage\Frame.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyimage\main.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyimage\Task.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyimage\RectCutCMPT.cpp">
+      <Filter>edit\rect_cut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyimage\RectCutOP.cpp">
+      <Filter>edit\rect_cut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyimage\RectMgr.cpp">
+      <Filter>edit\rect_cut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyimage\PixelDiffCMPT.cpp">
+      <Filter>edit\diff</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyimage\PixelDiffOP.cpp">
+      <Filter>edit\diff</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyimage\AutoTriCutCMPT.cpp">
+      <Filter>edit\auto_tri_cut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyimage\AutoTriCutOP.cpp">
+      <Filter>edit\auto_tri_cut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyimage\AutoRectCutCMPT.cpp">
+      <Filter>edit\auto_rect_cut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyimage\AutoRectCutOP.cpp">
+      <Filter>edit\auto_rect_cut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyimage\ImageProcessCMPT.cpp">
+      <Filter>edit\process</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyimage\ImageProcessOP.cpp">
+      <Filter>edit\process</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\easyimage\StageCanvas.h">
+      <Filter>stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyimage\StagePanel.h">
+      <Filter>stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyimage\ToolBarPanel.h">
+      <Filter>toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyimage\Frame.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyimage\main.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyimage\Task.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyimage\RectCutCMPT.h">
+      <Filter>edit\rect_cut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyimage\RectCutOP.h">
+      <Filter>edit\rect_cut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyimage\RectMgr.h">
+      <Filter>edit\rect_cut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyimage\PixelDiffCMPT.h">
+      <Filter>edit\diff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyimage\PixelDiffOP.h">
+      <Filter>edit\diff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyimage\AutoTriCutCMPT.h">
+      <Filter>edit\auto_tri_cut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyimage\AutoTriCutOP.h">
+      <Filter>edit\auto_tri_cut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyimage\AutoRectCutCMPT.h">
+      <Filter>edit\auto_rect_cut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyimage\AutoRectCutOP.h">
+      <Filter>edit\auto_rect_cut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyimage\ImageProcessCMPT.h">
+      <Filter>edit\process</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyimage\ImageProcessOP.h">
+      <Filter>edit\process</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\..\..\editor-external\wx\include\wx\msw\wx.rc" />
+  </ItemGroup>
+</Project>

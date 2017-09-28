@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>5.libtexpacker</ProjectName>
+    <ProjectGuid>{E66ECF2B-05F4-42CC-91B2-B6F8604CA1A8}</ProjectGuid>
+    <RootNamespace>libtexpacker</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\libtexpacker\x86\Debug\</OutDir>
+    <IntDir>..\libtexpacker\x86\Debug\obj\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\libtexpacker\x86\Release\</OutDir>
+    <IntDir>..\libtexpacker\x86\Release\obj\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\easyshape\src;..\..\..\..\easyimage\src;..\..\..\..\sprite2\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\gimg\src\gimg;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\libtexpacker\x86\Debug</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\libtexpacker\x86\Debug\libtexpacker.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\easyshape\src;..\..\..\..\easyimage\src;..\..\..\..\sprite2\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\gimg\src\gimg;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\libtexpacker\x86\Release</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\libtexpacker\x86\Release\libtexpacker.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\external\RectangleBinPack\GuillotineBinPack.cpp" />
+    <ClCompile Include="..\..\..\external\RectangleBinPack\MaxRectsBinPack.cpp" />
+    <ClCompile Include="..\..\..\external\RectangleBinPack\Rect.cpp" />
+    <ClCompile Include="..\..\..\external\RectangleBinPack\ShelfBinPack.cpp" />
+    <ClCompile Include="..\..\..\external\RectangleBinPack\SkylineBinPack.cpp" />
+    <ClCompile Include="..\..\..\src\libtexpacker\GenRegularRectBinary.cpp" />
+    <ClCompile Include="..\..\..\src\libtexpacker\GenRegularRectImage.cpp" />
+    <ClCompile Include="..\..\..\src\libtexpacker\ImageTrimData.cpp" />
+    <ClCompile Include="..\..\..\src\libtexpacker\MaxRectsBinaryPack.cpp" />
+    <ClCompile Include="..\..\..\src\libtexpacker\MaxRectsBinaryPack2.cpp" />
+    <ClCompile Include="..\..\..\src\libtexpacker\NormalPack.cpp" />
+    <ClCompile Include="..\..\..\src\libtexpacker\RectangleBinPack.cpp" />
+    <ClCompile Include="..\..\..\src\libtexpacker\RegularRectPack.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\external\RectangleBinPack\GuillotineBinPack.h" />
+    <ClInclude Include="..\..\..\external\RectangleBinPack\MaxRectsBinPack.h" />
+    <ClInclude Include="..\..\..\external\RectangleBinPack\Rect.h" />
+    <ClInclude Include="..\..\..\external\RectangleBinPack\ShelfBinPack.h" />
+    <ClInclude Include="..\..\..\external\RectangleBinPack\SkylineBinPack.h" />
+    <ClInclude Include="..\..\..\src\libtexpacker\GenRegularRectBinary.h" />
+    <ClInclude Include="..\..\..\src\libtexpacker\GenRegularRectImage.h" />
+    <ClInclude Include="..\..\..\src\libtexpacker\ImageTrimData.h" />
+    <ClInclude Include="..\..\..\src\libtexpacker\MaxRectsBinaryPack.h" />
+    <ClInclude Include="..\..\..\src\libtexpacker\MaxRectsBinaryPack2.h" />
+    <ClInclude Include="..\..\..\src\libtexpacker\NormalPack.h" />
+    <ClInclude Include="..\..\..\src\libtexpacker\Rect.h" />
+    <ClInclude Include="..\..\..\src\libtexpacker\RectangleBinPack.h" />
+    <ClInclude Include="..\..\..\src\libtexpacker\RegularRectPack.h" />
+    <ClInclude Include="..\..\..\src\libtexpacker\Sprite.h" />
+    <ClInclude Include="..\..\..\src\libtexpacker\typedef.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

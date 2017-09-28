@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="view">
+      <UniqueIdentifier>{b2f911a0-1e4d-41ec-bf34-714c8c8d85d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\library">
+      <UniqueIdentifier>{b4ab70fd-540b-4fc6-80c3-740bf775c905}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\toolbar">
+      <UniqueIdentifier>{57178ce4-65b8-427b-815a-443bac89a899}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\stage">
+      <UniqueIdentifier>{c0ff3a94-cad5-417b-b498-f2b044ce0a54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\property">
+      <UniqueIdentifier>{9b136a16-4c4b-4833-9a33-bb2e149d7619}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{04ecf25a-602a-4ede-bc89-da46c6786a82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset\2.points">
+      <UniqueIdentifier>{a0c5ab35-1a72-441e-8774-62a3dc352bee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset\1.strip">
+      <UniqueIdentifier>{086ee678-3edc-4d9f-978f-9902b32732f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset\mesh">
+      <UniqueIdentifier>{6fa663d3-b5b7-4856-9991-730b8f53b329}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset\4.skin">
+      <UniqueIdentifier>{887857a2-e4aa-4135-886e-a71a7f4b3b88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="file">
+      <UniqueIdentifier>{cb3f3849-7369-48ab-958a-cc465f484e2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit">
+      <UniqueIdentifier>{97123524-228a-4545-b379-792be330d53d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\1.create">
+      <UniqueIdentifier>{c17bf012-a339-4140-ba2c-e10c73ba730a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\1.create\1.points">
+      <UniqueIdentifier>{18ed7dea-5b28-4f37-8945-ded70564993c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\1.create\2.strip">
+      <UniqueIdentifier>{5be9fac9-9d0c-4f05-893e-8941c5a0257d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\1.create\3.skin">
+      <UniqueIdentifier>{8f3a146a-18f0-48de-952c-d8c35ea59b9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\2.edit">
+      <UniqueIdentifier>{6d6b77bf-5208-4a94-a5fc-ab446e1892cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\2.edit\1.points">
+      <UniqueIdentifier>{b27b8d16-70ab-4461-ac82-4e67f20b1eb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\2.edit\2.strip">
+      <UniqueIdentifier>{be5d113f-478a-406d-9bcb-567228bd36ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\2.edit\3.skeleton">
+      <UniqueIdentifier>{28164f94-c376-4b1f-bcc6-e148392e38a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\3.uv">
+      <UniqueIdentifier>{ca8154ec-5339-4b49-8535-cf52d84dd3a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="frame">
+      <UniqueIdentifier>{ee60cfa6-ab3d-450a-8fd4-3c29a2fac046}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libmesh\LibraryPage.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmesh\ToolbarPanel.cpp">
+      <Filter>view\toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmesh\StageCanvas.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmesh\StagePanel.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmesh\PropertySetting.cpp">
+      <Filter>view\property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmesh\Sprite.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmesh\Symbol.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmesh\PointsMesh.cpp">
+      <Filter>dataset\2.points</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmesh\StripMesh.cpp">
+      <Filter>dataset\1.strip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmesh\Mesh.cpp">
+      <Filter>dataset\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmesh\MeshFactory.cpp">
+      <Filter>dataset\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmesh\SkeletonMesh.cpp">
+      <Filter>dataset\4.skin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmesh\FileIO.cpp">
+      <Filter>file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmesh\CreateMeshCMPT.cpp">
+      <Filter>edit\1.create</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmesh\CreatePointsMeshOP.cpp">
+      <Filter>edit\1.create\1.points</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmesh\CreateStripMeshOP.cpp">
+      <Filter>edit\1.create\2.strip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmesh\CreateSkinMeshOP.cpp">
+      <Filter>edit\1.create\3.skin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmesh\EditMeshCMPT.cpp">
+      <Filter>edit\2.edit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmesh\EditPointsMeshOP.cpp">
+      <Filter>edit\2.edit\1.points</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmesh\SelectPointsMeshOP.cpp">
+      <Filter>edit\2.edit\1.points</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmesh\EditSkeletonOP.cpp">
+      <Filter>edit\2.edit\3.skeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmesh\RotateJointAOP.cpp">
+      <Filter>edit\2.edit\3.skeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmesh\RotateJointState.cpp">
+      <Filter>edit\2.edit\3.skeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmesh\EditUVCMPT.cpp">
+      <Filter>edit\3.uv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmesh\EditUVOP.cpp">
+      <Filter>edit\3.uv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libmesh\EditDialog.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libmesh\LibraryPage.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmesh\ToolbarPanel.h">
+      <Filter>view\toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmesh\StageCanvas.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmesh\StagePanel.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmesh\PropertySetting.h">
+      <Filter>view\property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmesh\Sprite.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmesh\Symbol.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmesh\PointsMesh.h">
+      <Filter>dataset\2.points</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmesh\StripMesh.h">
+      <Filter>dataset\1.strip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmesh\Mesh.h">
+      <Filter>dataset\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmesh\MeshFactory.h">
+      <Filter>dataset\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmesh\SkeletonMesh.h">
+      <Filter>dataset\4.skin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmesh\FileIO.h">
+      <Filter>file</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmesh\color_config.h">
+      <Filter>edit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmesh\CreateMeshCMPT.h">
+      <Filter>edit\1.create</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmesh\CreatePointsMeshOP.h">
+      <Filter>edit\1.create\1.points</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmesh\CreateStripMeshOP.h">
+      <Filter>edit\1.create\2.strip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmesh\CreateSkinMeshOP.h">
+      <Filter>edit\1.create\3.skin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmesh\EditMeshCMPT.h">
+      <Filter>edit\2.edit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmesh\EditPointsMeshOP.h">
+      <Filter>edit\2.edit\1.points</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmesh\SelectPointsMeshOP.h">
+      <Filter>edit\2.edit\1.points</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmesh\EditSkeletonOP.h">
+      <Filter>edit\2.edit\3.skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmesh\RotateJointAOP.h">
+      <Filter>edit\2.edit\3.skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmesh\RotateJointState.h">
+      <Filter>edit\2.edit\3.skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmesh\EditUVCMPT.h">
+      <Filter>edit\3.uv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmesh\EditUVOP.h">
+      <Filter>edit\3.uv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libmesh\EditDialog.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

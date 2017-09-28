@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="algorithms">
+      <UniqueIdentifier>{2ec387fb-84ca-4842-9c50-0b0f5ca3df2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tool">
+      <UniqueIdentifier>{b6b36a00-f27d-4386-bb7d-48c07f5df71e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="frame">
+      <UniqueIdentifier>{4c28b21e-7cb9-4580-9aa5-6de0a00733b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="frame\fileio">
+      <UniqueIdentifier>{4f23cef7-dde1-4a62-a861-c9cf92bc4825}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="frame\fileio\code">
+      <UniqueIdentifier>{731720b0-f582-4c7a-a47e-05df38aa6a96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="editop">
+      <UniqueIdentifier>{2e9c1751-40c6-4b3c-b369-d98c31eb59ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view">
+      <UniqueIdentifier>{15563cbb-dfa3-45ee-a4e3-bf5ecc098999}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\stage">
+      <UniqueIdentifier>{72d4db63-d056-4d24-8118-d7d64c44737c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\toolbar">
+      <UniqueIdentifier>{f2b4cb78-0274-4eac-a811-b29edb0d507e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\easytexpacker\BaseStrategy.cpp">
+      <Filter>algorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easytexpacker\BinaryTreeArrange.cpp">
+      <Filter>algorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easytexpacker\BinaryTreeNewArrange.cpp">
+      <Filter>algorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easytexpacker\DirectlyArrange.cpp">
+      <Filter>algorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easytexpacker\MaxRectsBinaryArrange.cpp">
+      <Filter>algorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easytexpacker\RectBinArrange.cpp">
+      <Filter>algorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easytexpacker\Context.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easytexpacker\Frame.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easytexpacker\main.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easytexpacker\Task.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easytexpacker\ArrangeSpriteOP.cpp">
+      <Filter>frame\fileio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easytexpacker\FileAdapter.cpp">
+      <Filter>frame\fileio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easytexpacker\FileIO.cpp">
+      <Filter>frame\fileio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easytexpacker\Love2dCode.cpp">
+      <Filter>frame\fileio\code</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easytexpacker\ArrangeSpriteImpl.cpp">
+      <Filter>editop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easytexpacker\StageCanvas.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easytexpacker\StagePanel.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easytexpacker\ImageToolbarPage.cpp">
+      <Filter>view\toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easytexpacker\MeshToolbarPage.cpp">
+      <Filter>view\toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easytexpacker\RegularToolbarPage.cpp">
+      <Filter>view\toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easytexpacker\ToolbarPanel.cpp">
+      <Filter>view\toolbar</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\easytexpacker\BaseStrategy.h">
+      <Filter>algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easytexpacker\BinaryTreeArrange.h">
+      <Filter>algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easytexpacker\BinaryTreeNewArrange.h">
+      <Filter>algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easytexpacker\DirectlyArrange.h">
+      <Filter>algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easytexpacker\MaxRectsBinaryArrange.h">
+      <Filter>algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easytexpacker\RectBinArrange.h">
+      <Filter>algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easytexpacker\const.h">
+      <Filter>tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easytexpacker\config.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easytexpacker\Context.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easytexpacker\Frame.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easytexpacker\main.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easytexpacker\Task.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easytexpacker\FileAdapter.h">
+      <Filter>frame\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easytexpacker\FileIO.h">
+      <Filter>frame\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easytexpacker\Love2dCode.h">
+      <Filter>frame\fileio\code</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easytexpacker\ArrangeSpriteImpl.h">
+      <Filter>editop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easytexpacker\ArrangeSpriteOP.h">
+      <Filter>editop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easytexpacker\StageCanvas.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easytexpacker\StagePanel.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easytexpacker\ImageToolbarPage.h">
+      <Filter>view\toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easytexpacker\MeshToolbarPage.h">
+      <Filter>view\toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easytexpacker\RegularToolbarPage.h">
+      <Filter>view\toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easytexpacker\ToolBarPanel.h">
+      <Filter>view\toolbar</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\..\..\editor-external\wx\include\wx\msw\wx.rc" />
+  </ItemGroup>
+</Project>

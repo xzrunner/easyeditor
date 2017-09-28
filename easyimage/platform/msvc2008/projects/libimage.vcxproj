@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>5.libimage</ProjectName>
+    <ProjectGuid>{D41C0B3E-F0A0-4A1F-A568-0100C839406C}</ProjectGuid>
+    <RootNamespace>libimage</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\libimage\x86\Debug\</OutDir>
+    <IntDir>..\libimage\x86\Debug\obj\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\libimage\x86\Release\</OutDir>
+    <IntDir>..\libimage\x86\Release\obj\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\gimg\src\gimg;..\..\..\..\cu\src\cu;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\libpng\include;..\..\..\..\editor-external\gl\include;..\..\..\..\editor-external\pvrtextool\include;..\..\..\..\editor-external\rg_etc1;..\..\..\..\editor-external\etcpack;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\gimg\src\gimg;..\..\..\..\cu\src\cu;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\libpng\include;..\..\..\..\editor-external\gl\include;..\..\..\..\editor-external\pvrtextool\include;..\..\..\..\editor-external\rg_etc1;..\..\..\..\editor-external\etcpack;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\editor-external\etcpack\c_wrap_etcpack.cpp" />
+    <ClCompile Include="..\..\..\..\editor-external\etcpack\source\etcdec.cxx" />
+    <ClCompile Include="..\..\..\..\editor-external\etcpack\source\etcimage.cxx" />
+    <ClCompile Include="..\..\..\..\editor-external\etcpack\source\etcpack.cxx" />
+    <ClCompile Include="..\..\..\..\editor-external\rg_etc1\rg_etc1.cpp" />
+    <ClCompile Include="..\..\..\..\editor-external\rg_etc1\rg_etc1_for_c.cpp" />
+    <ClCompile Include="..\..\..\src\libimage\BlockCompress.cpp" />
+    <ClCompile Include="..\..\..\src\libimage\ExtractOutlineFine.cpp" />
+    <ClCompile Include="..\..\..\src\libimage\ExtractOutlineRaw.cpp" />
+    <ClCompile Include="..\..\..\src\libimage\ImageCmp.cpp" />
+    <ClCompile Include="..\..\..\src\libimage\LanczosResamplingShader.cpp" />
+    <ClCompile Include="..\..\..\src\libimage\OutlineToTriStrip.cpp" />
+    <ClCompile Include="..\..\..\src\libimage\PixelAreaLUT.cpp" />
+    <ClCompile Include="..\..\..\src\libimage\PixelCoveredLUT.cpp" />
+    <ClCompile Include="..\..\..\src\libimage\PixelEdgeTable.cpp" />
+    <ClCompile Include="..\..\..\src\libimage\PixelsTools.cpp" />
+    <ClCompile Include="..\..\..\src\libimage\PixelUncoveredLUT.cpp" />
+    <ClCompile Include="..\..\..\src\libimage\RectPostProcessor.cpp" />
+    <ClCompile Include="..\..\..\src\libimage\RegularRectCondense.cpp" />
+    <ClCompile Include="..\..\..\src\libimage\RegularRectCut.cpp" />
+    <ClCompile Include="..\..\..\src\libimage\RegularRectMerge.cpp" />
+    <ClCompile Include="..\..\..\src\libimage\TransToETC1.cpp" />
+    <ClCompile Include="..\..\..\src\libimage\TransToETC2.cpp" />
+    <ClCompile Include="..\..\..\src\libimage\TransToPVR.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\editor-external\etcpack\c_wrap_etcpack.h" />
+    <ClInclude Include="..\..\..\..\editor-external\etcpack\etcpack_lib.h" />
+    <ClInclude Include="..\..\..\..\editor-external\etcpack\source\etcimage.h" />
+    <ClInclude Include="..\..\..\..\editor-external\rg_etc1\rg_etc1.h" />
+    <ClInclude Include="..\..\..\..\editor-external\rg_etc1\rg_etc1_for_c.h" />
+    <ClInclude Include="..\..\..\src\easyimage.h" />
+    <ClInclude Include="..\..\..\src\libimage\BlockCompress.h" />
+    <ClInclude Include="..\..\..\src\libimage\config.h" />
+    <ClInclude Include="..\..\..\src\libimage\ExtractOutlineFine.h" />
+    <ClInclude Include="..\..\..\src\libimage\ExtractOutlineRaw.h" />
+    <ClInclude Include="..\..\..\src\libimage\ImageCmp.h" />
+    <ClInclude Include="..\..\..\src\libimage\LanczosResamplingShader.h" />
+    <ClInclude Include="..\..\..\src\libimage\OutlineToTriStrip.h" />
+    <ClInclude Include="..\..\..\src\libimage\PixelAreaLUT.h" />
+    <ClInclude Include="..\..\..\src\libimage\PixelCoveredLUT.h" />
+    <ClInclude Include="..\..\..\src\libimage\PixelEdgeTable.h" />
+    <ClInclude Include="..\..\..\src\libimage\PixelsTools.h" />
+    <ClInclude Include="..\..\..\src\libimage\PixelUncoveredLUT.h" />
+    <ClInclude Include="..\..\..\src\libimage\Rect.h" />
+    <ClInclude Include="..\..\..\src\libimage\RectPostProcessor.h" />
+    <ClInclude Include="..\..\..\src\libimage\RegularRectCondense.h" />
+    <ClInclude Include="..\..\..\src\libimage\RegularRectCut.h" />
+    <ClInclude Include="..\..\..\src\libimage\RegularRectMerge.h" />
+    <ClInclude Include="..\..\..\src\libimage\TransToETC1.h" />
+    <ClInclude Include="..\..\..\src\libimage\TransToETC2.h" />
+    <ClInclude Include="..\..\..\src\libimage\TransToPVR.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\src\libimage\AverageDownSamplingShader.frag" />
+    <None Include="..\..\..\src\libimage\AverageDownSamplingShader.vert" />
+    <None Include="..\..\..\src\libimage\LanczosResamplingShader.frag" />
+    <None Include="..\..\..\src\libimage\LanczosResamplingShader.vert" />
+    <None Include="..\..\..\src\libimage\NormalSpriteShader.frag" />
+    <None Include="..\..\..\src\libimage\NormalSpriteShader.vert" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

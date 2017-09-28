@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>4.libtool</ProjectName>
+    <ProjectGuid>{E1843AB3-962E-4F9C-B471-74EC36DC94B0}</ProjectGuid>
+    <RootNamespace>libtool</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\libtool\x86\Debug\</OutDir>
+    <IntDir>..\libtool\x86\Debug\obj\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\libtool\x86\Release\</OutDir>
+    <IntDir>..\libtool\x86\Release\obj\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include\ee;..\..\..\..\simp\include;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\editor-external\stackwalker;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\libjpeg\include;..\..\..\..\editor-external\libpng\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\gl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\libtool\x86\Debug</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\libtool\x86\Debug\libtool.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\include\ee;..\..\..\..\simp\include;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\editor-external\stackwalker;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\libjpeg\include;..\..\..\..\editor-external\libpng\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\gl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\libtool\x86\Release</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\libtool\x86\Release\libtool.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\editor-external\stackwalker\StackWalker.cpp" />
+    <ClCompile Include="..\..\..\source\tool\ConsoleProgressBar.cpp" />
+    <ClCompile Include="..\..\..\source\tool\CrossGuides.cpp" />
+    <ClCompile Include="..\..\..\source\tool\EditedFileStack.cpp" />
+    <ClCompile Include="..\..\..\source\tool\Exception.cpp" />
+    <ClCompile Include="..\..\..\source\tool\FileHelper.cpp" />
+    <ClCompile Include="..\..\..\source\tool\Logger.cpp" />
+    <ClCompile Include="..\..\..\source\tool\LogMgr.cpp" />
+    <ClCompile Include="..\..\..\source\tool\PackIDMgr.cpp" />
+    <ClCompile Include="..\..\..\source\tool\PlayControl.cpp" />
+    <ClCompile Include="..\..\..\source\tool\runtime.cpp" />
+    <ClCompile Include="..\..\..\source\tool\scripts.cpp" />
+    <ClCompile Include="..\..\..\source\tool\Socket.cpp" />
+    <ClCompile Include="..\..\..\source\tool\StackTrace.cpp" />
+    <ClCompile Include="..\..\..\source\tool\StringHelper.cpp" />
+    <ClCompile Include="..\..\..\source\tool\Timer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\editor-external\stackwalker\StackWalker.h" />
+    <ClInclude Include="..\..\..\include\ee\ConsoleProgressBar.h" />
+    <ClInclude Include="..\..\..\include\ee\CrossGuides.h" />
+    <ClInclude Include="..\..\..\include\ee\EditedFileStack.h" />
+    <ClInclude Include="..\..\..\include\ee\Exception.h" />
+    <ClInclude Include="..\..\..\include\ee\FileHelper.h" />
+    <ClInclude Include="..\..\..\include\ee\Logger.h" />
+    <ClInclude Include="..\..\..\include\ee\LogMgr.h" />
+    <ClInclude Include="..\..\..\include\ee\Module.h" />
+    <ClInclude Include="..\..\..\include\ee\PackIDMgr.h" />
+    <ClInclude Include="..\..\..\include\ee\PlayControl.h" />
+    <ClInclude Include="..\..\..\include\ee\runtime.h" />
+    <ClInclude Include="..\..\..\include\ee\scripts.h" />
+    <ClInclude Include="..\..\..\include\ee\Socket.h" />
+    <ClInclude Include="..\..\..\include\ee\StackTrace.h" />
+    <ClInclude Include="..\..\..\include\ee\StringHelper.h" />
+    <ClInclude Include="..\..\..\include\ee\Timer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\include\ee\StringHelper.inl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

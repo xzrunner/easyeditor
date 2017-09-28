@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="outline">
+      <UniqueIdentifier>{1a0bafa9-a683-4be3-92ed-e09dea1fdba7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="rectcut">
+      <UniqueIdentifier>{54a6896c-d527-4c7a-86a9-1c33d7a47be2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="rectcut\dataset">
+      <UniqueIdentifier>{21231d24-3697-43a2-9d14-a3793e8b1221}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="rectcut\op">
+      <UniqueIdentifier>{32ac17eb-aff9-4879-a3cb-7d018684c09f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render">
+      <UniqueIdentifier>{6a380914-990c-4d2b-8be0-7814342268bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render\resampling">
+      <UniqueIdentifier>{b5c7eefb-0bb7-48de-a802-4895a6a5c3be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="format">
+      <UniqueIdentifier>{18c404be-fad8-48c4-8a74-1d29e30c4c8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external">
+      <UniqueIdentifier>{567bd449-41bd-4bd4-87de-55cc881bbe3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\etcpack">
+      <UniqueIdentifier>{ad727fbe-2041-450c-89df-b11fccaae8e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\rg_etc1">
+      <UniqueIdentifier>{9ad1548d-5221-4acb-85a1-3a42fcaa4f42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="compress">
+      <UniqueIdentifier>{3a541b16-0e71-463c-9ef1-656a4f810561}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="compare">
+      <UniqueIdentifier>{9ada7df2-3c90-4c02-91c3-cfbfbb234efe}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libimage\ExtractOutlineFine.cpp">
+      <Filter>outline</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libimage\ExtractOutlineRaw.cpp">
+      <Filter>outline</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libimage\OutlineToTriStrip.cpp">
+      <Filter>outline</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libimage\PixelAreaLUT.cpp">
+      <Filter>rectcut\dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libimage\PixelCoveredLUT.cpp">
+      <Filter>rectcut\dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libimage\PixelEdgeTable.cpp">
+      <Filter>rectcut\dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libimage\PixelUncoveredLUT.cpp">
+      <Filter>rectcut\dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libimage\RectPostProcessor.cpp">
+      <Filter>rectcut\op</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libimage\RegularRectCondense.cpp">
+      <Filter>rectcut\op</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libimage\RegularRectCut.cpp">
+      <Filter>rectcut\op</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libimage\RegularRectMerge.cpp">
+      <Filter>rectcut\op</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libimage\LanczosResamplingShader.cpp">
+      <Filter>render\resampling</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libimage\TransToETC1.cpp">
+      <Filter>format</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libimage\TransToETC2.cpp">
+      <Filter>format</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libimage\TransToPVR.cpp">
+      <Filter>format</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\editor-external\etcpack\c_wrap_etcpack.cpp">
+      <Filter>external\etcpack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\editor-external\etcpack\source\etcdec.cxx">
+      <Filter>external\etcpack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\editor-external\etcpack\source\etcimage.cxx">
+      <Filter>external\etcpack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\editor-external\etcpack\source\etcpack.cxx">
+      <Filter>external\etcpack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\editor-external\rg_etc1\rg_etc1.cpp">
+      <Filter>external\rg_etc1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\editor-external\rg_etc1\rg_etc1_for_c.cpp">
+      <Filter>external\rg_etc1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libimage\BlockCompress.cpp">
+      <Filter>compress</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libimage\ImageCmp.cpp">
+      <Filter>compare</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libimage\PixelsTools.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libimage\ExtractOutlineFine.h">
+      <Filter>outline</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libimage\ExtractOutlineRaw.h">
+      <Filter>outline</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libimage\OutlineToTriStrip.h">
+      <Filter>outline</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libimage\PixelAreaLUT.h">
+      <Filter>rectcut\dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libimage\PixelCoveredLUT.h">
+      <Filter>rectcut\dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libimage\PixelEdgeTable.h">
+      <Filter>rectcut\dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libimage\PixelUncoveredLUT.h">
+      <Filter>rectcut\dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libimage\Rect.h">
+      <Filter>rectcut\dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libimage\RectPostProcessor.h">
+      <Filter>rectcut\op</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libimage\RegularRectCondense.h">
+      <Filter>rectcut\op</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libimage\RegularRectCut.h">
+      <Filter>rectcut\op</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libimage\RegularRectMerge.h">
+      <Filter>rectcut\op</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libimage\LanczosResamplingShader.h">
+      <Filter>render\resampling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libimage\TransToETC1.h">
+      <Filter>format</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libimage\TransToETC2.h">
+      <Filter>format</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libimage\TransToPVR.h">
+      <Filter>format</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\editor-external\etcpack\c_wrap_etcpack.h">
+      <Filter>external\etcpack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\editor-external\etcpack\source\etcimage.h">
+      <Filter>external\etcpack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\editor-external\etcpack\etcpack_lib.h">
+      <Filter>external\etcpack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\editor-external\rg_etc1\rg_etc1.h">
+      <Filter>external\rg_etc1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\editor-external\rg_etc1\rg_etc1_for_c.h">
+      <Filter>external\rg_etc1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libimage\BlockCompress.h">
+      <Filter>compress</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libimage\ImageCmp.h">
+      <Filter>compare</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libimage\config.h" />
+    <ClInclude Include="..\..\..\src\easyimage.h" />
+    <ClInclude Include="..\..\..\src\libimage\PixelsTools.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\src\libimage\NormalSpriteShader.frag">
+      <Filter>render</Filter>
+    </None>
+    <None Include="..\..\..\src\libimage\NormalSpriteShader.vert">
+      <Filter>render</Filter>
+    </None>
+    <None Include="..\..\..\src\libimage\AverageDownSamplingShader.frag">
+      <Filter>render\resampling</Filter>
+    </None>
+    <None Include="..\..\..\src\libimage\AverageDownSamplingShader.vert">
+      <Filter>render\resampling</Filter>
+    </None>
+    <None Include="..\..\..\src\libimage\LanczosResamplingShader.frag">
+      <Filter>render\resampling</Filter>
+    </None>
+    <None Include="..\..\..\src\libimage\LanczosResamplingShader.vert">
+      <Filter>render\resampling</Filter>
+    </None>
+  </ItemGroup>
+</Project>

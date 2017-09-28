@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="epd">
+      <UniqueIdentifier>{b443c4db-3d20-433d-b26c-fee416f0bd2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="epe">
+      <UniqueIdentifier>{7a44c57c-d89e-4882-9193-88f664835807}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libcoco\epd\CocoPacker.cpp">
+      <Filter>epd</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcoco\epd\TextureMgr.cpp">
+      <Filter>epd</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcoco\epd\TPAdapter.cpp">
+      <Filter>epd</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcoco\epd\TPParser.cpp">
+      <Filter>epd</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcoco\epe\CocoPacker.cpp">
+      <Filter>epe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcoco\epe\PackLuaFile.cpp">
+      <Filter>epe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcoco\epe\ParserLuaFile.cpp">
+      <Filter>epe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcoco\epe\TexturePacker.cpp">
+      <Filter>epe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcoco\SymbolDependanceSorter.cpp" />
+    <ClCompile Include="..\..\..\src\libcoco\SymbolSet.cpp" />
+    <ClCompile Include="..\..\..\src\libcoco\Utility.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libcoco\epd\CocoPacker.h">
+      <Filter>epd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcoco\epd\TextureMgr.h">
+      <Filter>epd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcoco\epd\TPAdapter.h">
+      <Filter>epd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcoco\epd\TPParser.h">
+      <Filter>epd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcoco\epe\CocoPacker.h">
+      <Filter>epe</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcoco\epe\PackLuaFile.h">
+      <Filter>epe</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcoco\epe\ParserLuaFile.h">
+      <Filter>epe</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcoco\epe\TexturePacker.h">
+      <Filter>epe</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcoco\SymbolDependanceSorter.h" />
+    <ClInclude Include="..\..\..\src\libcoco\SymbolSet.h" />
+    <ClInclude Include="..\..\..\src\libcoco\tools.h" />
+    <ClInclude Include="..\..\..\src\libcoco\Utility.h" />
+  </ItemGroup>
+</Project>

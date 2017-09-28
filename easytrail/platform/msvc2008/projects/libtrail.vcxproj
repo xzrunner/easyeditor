@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>5.libtrail</ProjectName>
+    <ProjectGuid>{29109610-3D3C-4040-A8E6-D9EEC78470E0}</ProjectGuid>
+    <RootNamespace>libtrail</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\libtrail\x86\Debug\</OutDir>
+    <IntDir>..\libtrail\x86\Debug\obj\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\libtrail\x86\Release\</OutDir>
+    <IntDir>..\libtrail\x86\Release\obj\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\particle\src;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\shaderlab\include\;..\..\..\..\mtrail\src\mtrail;..\..\..\..\easyeditor\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\c99;..\..\..\..\easyanim\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\particle\src;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\shaderlab\include\;..\..\..\..\mtrail\src\mtrail;..\..\..\..\easyeditor\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\c99;..\..\..\..\easyanim\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libtrail\ComponentPanel.cpp" />
+    <ClCompile Include="..\..\..\src\libtrail\EditOP.cpp" />
+    <ClCompile Include="..\..\..\src\libtrail\FileIO.cpp" />
+    <ClCompile Include="..\..\..\src\libtrail\ImageCompPanel.cpp" />
+    <ClCompile Include="..\..\..\src\libtrail\LibraryPage.cpp" />
+    <ClCompile Include="..\..\..\src\libtrail\LibraryPanel.cpp" />
+    <ClCompile Include="..\..\..\src\libtrail\MotionTrail.cpp" />
+    <ClCompile Include="..\..\..\src\libtrail\MTConfigMgr.cpp" />
+    <ClCompile Include="..\..\..\src\libtrail\PropertySettingPanel.cpp" />
+    <ClCompile Include="..\..\..\src\libtrail\ShapeCompPanel.cpp" />
+    <ClCompile Include="..\..\..\src\libtrail\Sprite.cpp" />
+    <ClCompile Include="..\..\..\src\libtrail\SprPropSetting.cpp" />
+    <ClCompile Include="..\..\..\src\libtrail\StageCanvas.cpp" />
+    <ClCompile Include="..\..\..\src\libtrail\StagePanel.cpp" />
+    <ClCompile Include="..\..\..\src\libtrail\Symbol.cpp" />
+    <ClCompile Include="..\..\..\src\libtrail\ToolbarPanel.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libtrail\ComponentPanel.h" />
+    <ClInclude Include="..\..\..\src\libtrail\EditOP.h" />
+    <ClInclude Include="..\..\..\src\libtrail\FileIO.h" />
+    <ClInclude Include="..\..\..\src\libtrail\ImageCompPanel.h" />
+    <ClInclude Include="..\..\..\src\libtrail\LibraryPage.h" />
+    <ClInclude Include="..\..\..\src\libtrail\LibraryPanel.h" />
+    <ClInclude Include="..\..\..\src\libtrail\MotionTrail.h" />
+    <ClInclude Include="..\..\..\src\libtrail\MTConfigMgr.h" />
+    <ClInclude Include="..\..\..\src\libtrail\mt_config.h" />
+    <ClInclude Include="..\..\..\src\libtrail\PropertySettingPanel.h" />
+    <ClInclude Include="..\..\..\src\libtrail\ShapeCompPanel.h" />
+    <ClInclude Include="..\..\..\src\libtrail\Sprite.h" />
+    <ClInclude Include="..\..\..\src\libtrail\SprPropSetting.h" />
+    <ClInclude Include="..\..\..\src\libtrail\StageCanvas.h" />
+    <ClInclude Include="..\..\..\src\libtrail\StagePanel.h" />
+    <ClInclude Include="..\..\..\src\libtrail\Symbol.h" />
+    <ClInclude Include="..\..\..\src\libtrail\ToolbarPanel.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

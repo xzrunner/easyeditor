@@ -1,0 +1,402 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{e93f5dbe-4bce-461a-b56f-518131aa5469}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset\level">
+      <UniqueIdentifier>{d3781211-3496-4714-824d-23eb7b67c999}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset\skeleton">
+      <UniqueIdentifier>{a660155a-00a7-4a89-ad9b-72d737c27fb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset\utility">
+      <UniqueIdentifier>{9aefb97a-fdd8-4c7f-a1a8-398e42fad6d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="frame">
+      <UniqueIdentifier>{3e4c1ef7-7b37-4c24-af9b-e903d0b63a33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="frame\code">
+      <UniqueIdentifier>{2fe0066e-ebd6-4c68-8544-7f5e969c411e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="frame\file">
+      <UniqueIdentifier>{ac71ab1f-5589-4157-9c57-2349e23ae3ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="frame\file\loader">
+      <UniqueIdentifier>{7b60770f-489d-4b71-9f57-1ade44aa5959}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="frame\file\saver">
+      <UniqueIdentifier>{e9adef76-1b61-4cae-9528-45543aae05df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view">
+      <UniqueIdentifier>{edcef644-868a-4167-82f4-5b8017330ff0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\preview">
+      <UniqueIdentifier>{44014658-d8f4-483c-b367-16db943d0fd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\stage">
+      <UniqueIdentifier>{2769c570-35b8-4538-9d49-3beae0da11a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\timeline">
+      <UniqueIdentifier>{bc4dbbc8-44c3-4213-b124-f86cdd9c1b2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\timeline\layers">
+      <UniqueIdentifier>{611b0d8c-9020-4322-a247-abf6cb080588}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\timeline\keyframes">
+      <UniqueIdentifier>{dd0d5348-42ed-48a1-a4b6-deeaf3ee7fab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\timeline\keyframes\editaop">
+      <UniqueIdentifier>{f605629d-faee-4f54-a7a7-4d95b3d03e72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\toolbar">
+      <UniqueIdentifier>{257f6b42-20c8-4aa8-b838-7aafbbaaaf8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\property">
+      <UniqueIdentifier>{b381d647-31fa-49d2-ad9c-e3a966bf4420}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\library">
+      <UniqueIdentifier>{84b4437d-874e-471d-ab79-685733720cb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit">
+      <UniqueIdentifier>{e05e4235-4f37-477a-b268-88e139e37fb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\common">
+      <UniqueIdentifier>{db615252-44a7-461e-a111-bf23e3e9e869}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\skeleton">
+      <UniqueIdentifier>{69eee1c9-d5b6-43b9-bb4d-b732760f4e27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\mesh">
+      <UniqueIdentifier>{52f94e66-8348-4d1e-a70e-5786b8171d7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\tools">
+      <UniqueIdentifier>{1ffea0cf-0587-4a33-a72e-5faff1d97749}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="message">
+      <UniqueIdentifier>{9cbd6a8a-01d6-4e7b-b706-36e5c65e878d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\easyanimation\dataset\AnimTemplate.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\dataset\DataMgr.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\dataset\KeyFrame.cpp">
+      <Filter>dataset\level</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\dataset\Layer.cpp">
+      <Filter>dataset\level</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\dataset\LayersMgr.cpp">
+      <Filter>dataset\level</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\dataset\SpriteObserver.cpp">
+      <Filter>dataset\level</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\dataset\Joint.cpp">
+      <Filter>dataset\skeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\dataset\SkeletonData.cpp">
+      <Filter>dataset\skeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\dataset\data_utility.cpp">
+      <Filter>dataset\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\dataset\SpriteUserData.cpp">
+      <Filter>dataset\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\frame\CodeSettingDlg.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\frame\Frame.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\frame\main.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\frame\Task.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\frame\Love2dCode.cpp">
+      <Filter>frame\code</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\frame\FileIO.cpp">
+      <Filter>frame\file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\frame\BodymovinLoader.cpp">
+      <Filter>frame\file\loader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\frame\DefaultFileLoader.cpp">
+      <Filter>frame\file\loader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\frame\FlashLoader.cpp">
+      <Filter>frame\file\loader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\frame\FileSaver.cpp">
+      <Filter>frame\file\saver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\view\ViewMgr.cpp">
+      <Filter>view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\view\PreviewCanvas.cpp">
+      <Filter>view\preview</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\view\PreviewDialog.cpp">
+      <Filter>view\preview</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\view\PreviewOP.cpp">
+      <Filter>view\preview</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\view\PreviewPanel.cpp">
+      <Filter>view\preview</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\view\StageCanvas.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\view\StagePanel.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\view\TimeLinePanel.cpp">
+      <Filter>view\timeline</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\view\LayersContentWidget.cpp">
+      <Filter>view\timeline\layers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\view\LayersPanel.cpp">
+      <Filter>view\timeline\layers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\view\LayersPropertyWidget.cpp">
+      <Filter>view\timeline\layers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\view\FrameLerpDialog.cpp">
+      <Filter>view\timeline\keyframes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\view\KeysContentEdit.cpp">
+      <Filter>view\timeline\keyframes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\view\KeysContentWidget.cpp">
+      <Filter>view\timeline\keyframes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\view\KeysPanel.cpp">
+      <Filter>view\timeline\keyframes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\view\KeysScaleWidget.cpp">
+      <Filter>view\timeline\keyframes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\view\EditKeyFramesAOP.cpp">
+      <Filter>view\timeline\keyframes\editaop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\view\ToolbarPanel.cpp">
+      <Filter>view\toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\view\KeyFramePropertySetting.cpp">
+      <Filter>view\property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\view\PropertySettingPanel.cpp">
+      <Filter>view\property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\view\LibraryPanel.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\edit\ArrangeSpriteOP.cpp">
+      <Filter>edit\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\edit\NormalCMPT.cpp">
+      <Filter>edit\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\edit\SelectSpritesOP.cpp">
+      <Filter>edit\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\edit\RotateSpriteState.cpp">
+      <Filter>edit\skeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\edit\SkeletonCMPT.cpp">
+      <Filter>edit\skeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\edit\SkeletonImpl.cpp">
+      <Filter>edit\skeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\edit\SkeletonOP.cpp">
+      <Filter>edit\skeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\edit\TranslateSpriteState.cpp">
+      <Filter>edit\skeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\edit\KeyDownHandler.cpp">
+      <Filter>edit\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\edit\OpenSymbolDialog.cpp">
+      <Filter>edit\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\message\messages.cpp">
+      <Filter>message</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\easyanimation\dataset\AnimTemplate.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\dataset\DataMgr.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\dataset\KeyFrame.h">
+      <Filter>dataset\level</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\dataset\Layer.h">
+      <Filter>dataset\level</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\dataset\LayersMgr.h">
+      <Filter>dataset\level</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\dataset\SpriteObserver.h">
+      <Filter>dataset\level</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\dataset\Joint.h">
+      <Filter>dataset\skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\dataset\SkeletonData.h">
+      <Filter>dataset\skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\dataset\data_utility.h">
+      <Filter>dataset\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\dataset\SpriteUserData.h">
+      <Filter>dataset\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\frame\CodeSettingDlg.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\frame\Frame.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\frame\main.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\frame\Task.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\frame\Love2dCode.h">
+      <Filter>frame\code</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\frame\FileIO.h">
+      <Filter>frame\file</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\frame\BodymovinLoader.h">
+      <Filter>frame\file\loader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\frame\DefaultFileLoader.h">
+      <Filter>frame\file\loader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\frame\FlashLoader.h">
+      <Filter>frame\file\loader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\frame\FileSaver.h">
+      <Filter>frame\file\saver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\view\config.h">
+      <Filter>view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\view\ViewMgr.h">
+      <Filter>view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\view\PreviewCanvas.h">
+      <Filter>view\preview</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\view\PreviewDialog.h">
+      <Filter>view\preview</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\view\PreviewOP.h">
+      <Filter>view\preview</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\view\PreviewPanel.h">
+      <Filter>view\preview</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\view\StageCanvas.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\view\StagePanel.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\view\TimeLinePanel.h">
+      <Filter>view\timeline</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\view\LayersContentWidget.h">
+      <Filter>view\timeline\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\view\LayersPanel.h">
+      <Filter>view\timeline\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\view\LayersPropertyWidget.h">
+      <Filter>view\timeline\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\view\FrameLerpDialog.h">
+      <Filter>view\timeline\keyframes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\view\KeysContentEdit.h">
+      <Filter>view\timeline\keyframes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\view\KeysContentWidget.h">
+      <Filter>view\timeline\keyframes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\view\KeysPanel.h">
+      <Filter>view\timeline\keyframes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\view\KeysScaleWidget.h">
+      <Filter>view\timeline\keyframes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\view\EditKeyFramesAOP.h">
+      <Filter>view\timeline\keyframes\editaop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\view\ToolbarPanel.h">
+      <Filter>view\toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\view\KeyFramePropertySetting.h">
+      <Filter>view\property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\view\PropertySettingPanel.h">
+      <Filter>view\property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\view\LibraryPanel.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\edit\ArrangeSpriteOP.h">
+      <Filter>edit\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\edit\NormalCMPT.h">
+      <Filter>edit\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\edit\SelectSpritesOP.h">
+      <Filter>edit\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\edit\RotateSpriteState.h">
+      <Filter>edit\skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\edit\SkeletonCMPT.h">
+      <Filter>edit\skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\edit\SkeletonImpl.h">
+      <Filter>edit\skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\edit\SkeletonOP.h">
+      <Filter>edit\skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\edit\TranslateSpriteState.h">
+      <Filter>edit\skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\edit\KeyDownHandler.h">
+      <Filter>edit\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\edit\OpenSymbolDialog.h">
+      <Filter>edit\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\message\messages.h">
+      <Filter>message</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\..\..\editor-external\wx\include\wx\msw\wx.rc" />
+  </ItemGroup>
+</Project>

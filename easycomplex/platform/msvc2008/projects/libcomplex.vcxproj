@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>5.libcomplex</ProjectName>
+    <ProjectGuid>{5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909}</ProjectGuid>
+    <RootNamespace>libcomplex</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\libcomplex\x86\Debug\</OutDir>
+    <IntDir>..\libcomplex\x86\Debug\obj\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\libcomplex\x86\Release\</OutDir>
+    <IntDir>..\libcomplex\x86\Release\obj\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easyanim\src;..\..\..\..\easyanim2\src;..\..\..\..\easyscale9\src;..\..\..\..\coceditor\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easytrail\src;..\..\..\..\easymesh\src;..\..\..\..\easymask\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyimage\src;..\..\..\..\easyaudio\src;..\..\..\..\easyshape\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\easyshadow\src;..\..\..\..\easysketch\src;..\..\..\..\easyskeleton\src;..\..\..\..\particle\src;..\..\..\..\easyrespacker\src;..\..\..\..\easyskeleton\src;..\..\..\..\easytext\src;..\..\..\..\sprite2\include;..\..\..\..\polymesh\include;..\..\..\..\gum\include;..\..\..\..\dtex2\include;..\..\..\..\cooking\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\gimg\src\gimg;..\..\..\..\pimg\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\gl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\libcomplex\x86\Debug</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\libcomplex\x86\Debug\libcomplex.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easyanim\src;..\..\..\..\easyanim2\src;..\..\..\..\easyscale9\src;..\..\..\..\coceditor\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easytrail\src;..\..\..\..\easymesh\src;..\..\..\..\easymask\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyimage\src;..\..\..\..\easyaudio\src;..\..\..\..\easyshape\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\easyshadow\src;..\..\..\..\easysketch\src;..\..\..\..\easyskeleton\src;..\..\..\..\particle\src;..\..\..\..\easyrespacker\src;..\..\..\..\easyskeleton\src;..\..\..\..\easytext\src;..\..\..\..\sprite2\include;..\..\..\..\polymesh\include;..\..\..\..\gum\include;..\..\..\..\dtex2\include;..\..\..\..\cooking\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\gimg\src\gimg;..\..\..\..\pimg\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\gl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\libcomplex\x86\Release</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\libcomplex\x86\Release\libcomplex.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libcomplex\AnchorToSpr.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\AnimationToSpr.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\ArrangeSpriteImpl.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\EditDialog.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\FileLoader.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\FileStorer.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\GroupHelper.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\LabelToSpr.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\LibraryPage.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\LibraryPanel.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\LoadFromBin.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\LoadFromJson.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\LoadFromLua.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\LoadFromPSD.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\NodeToSprite.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\OpenSymbolDialog.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\Particle2DToSpr.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\Particle3DToSpr.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\PictureToSpr.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\PreviewCanvas.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\PreviewDialog.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\PreviewEditOP.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\PreviewStage.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\PropertySettingPanel.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\RectCutLoader.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\SelectSpritesOP.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\Settings.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\SettingsDialog.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\SphereRotateState.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\Sprite.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\SpritePropertySetting.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\StageCanvas.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\StagePanel.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\Symbol.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\SymbolContainer.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\SymbolPropertySetting.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\ViewlistListImpl.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libcomplex\AnchorToSpr.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\AnimationToSpr.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\ArrangeSpriteImpl.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\EditDialog.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\FileLoader.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\FileStorer.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\GroupHelper.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\LabelToSpr.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\LibraryPage.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\LibraryPanel.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\LoadFromBin.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\LoadFromJson.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\LoadFromLua.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\LoadFromPSD.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\NodeToSprite.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\OpenSymbolDialog.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\Particle2DToSpr.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\Particle3DToSpr.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\PictureToSpr.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\PreviewCanvas.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\PreviewDialog.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\PreviewEditOP.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\PreviewStage.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\PropertySettingPanel.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\RectCutLoader.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\SelectSpritesOP.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\Settings.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\SettingsDialog.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\SphereRotateState.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\Sprite.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\SpritePropertySetting.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\StageCanvas.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\StagePanel.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\Symbol.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\SymbolContainer.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\SymbolPropertySetting.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\ViewlistListImpl.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

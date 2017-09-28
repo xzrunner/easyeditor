@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>5.libmodeling</ProjectName>
+    <ProjectGuid>{2E27AFD7-BDC5-464C-A0A8-15D3665FD13D}</ProjectGuid>
+    <RootNamespace>libmodeling</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\libmodeling\x86\Debug\</OutDir>
+    <IntDir>..\libmodeling\x86\Debug\obj\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\libmodeling\x86\Release\</OutDir>
+    <IntDir>..\libmodeling\x86\Release\obj\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\sprite2\include;..\..\..\..\easyeditor\include;..\..\..\..\easyshape\src;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\libmodeling\x86\Debug</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\libmodeling\x86\Debug\libmodeling.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\sprite2\include;..\..\..\..\easyeditor\include;..\..\..\..\easyshape\src;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\libmodeling\x86\Release</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\libmodeling\x86\Release\libmodeling.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libmodeling\Body.cpp" />
+    <ClCompile Include="..\..\..\src\libmodeling\DistanceJoint.cpp" />
+    <ClCompile Include="..\..\..\src\libmodeling\FileAdapter.cpp" />
+    <ClCompile Include="..\..\..\src\libmodeling\Fixture.cpp" />
+    <ClCompile Include="..\..\..\src\libmodeling\FrictionJoint.cpp" />
+    <ClCompile Include="..\..\..\src\libmodeling\GearJoint.cpp" />
+    <ClCompile Include="..\..\..\src\libmodeling\Joint.cpp" />
+    <ClCompile Include="..\..\..\src\libmodeling\MotorJoint.cpp" />
+    <ClCompile Include="..\..\..\src\libmodeling\Package.cpp" />
+    <ClCompile Include="..\..\..\src\libmodeling\PrismaticJoint.cpp" />
+    <ClCompile Include="..\..\..\src\libmodeling\PulleyJoint.cpp" />
+    <ClCompile Include="..\..\..\src\libmodeling\RevoluteJoint.cpp" />
+    <ClCompile Include="..\..\..\src\libmodeling\RopeJoint.cpp" />
+    <ClCompile Include="..\..\..\src\libmodeling\WeldJoint.cpp" />
+    <ClCompile Include="..\..\..\src\libmodeling\WheelJoint.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libmodeling\Body.h" />
+    <ClInclude Include="..\..\..\src\libmodeling\DistanceJoint.h" />
+    <ClInclude Include="..\..\..\src\libmodeling\FileAdapter.h" />
+    <ClInclude Include="..\..\..\src\libmodeling\Fixture.h" />
+    <ClInclude Include="..\..\..\src\libmodeling\FrictionJoint.h" />
+    <ClInclude Include="..\..\..\src\libmodeling\GearJoint.h" />
+    <ClInclude Include="..\..\..\src\libmodeling\Joint.h" />
+    <ClInclude Include="..\..\..\src\libmodeling\MotorJoint.h" />
+    <ClInclude Include="..\..\..\src\libmodeling\Package.h" />
+    <ClInclude Include="..\..\..\src\libmodeling\PrismaticJoint.h" />
+    <ClInclude Include="..\..\..\src\libmodeling\PulleyJoint.h" />
+    <ClInclude Include="..\..\..\src\libmodeling\RevoluteJoint.h" />
+    <ClInclude Include="..\..\..\src\libmodeling\RopeJoint.h" />
+    <ClInclude Include="..\..\..\src\libmodeling\WeldJoint.h" />
+    <ClInclude Include="..\..\..\src\libmodeling\WheelJoint.h" />
+    <ClInclude Include="..\..\..\src\libmodeling\World.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

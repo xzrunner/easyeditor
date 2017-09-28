@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{fb8bd447-6872-4863-a44f-3bcb53f816d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="file">
+      <UniqueIdentifier>{f01ff54f-5ad6-4fdd-bbff-571da8c2d508}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="file\record">
+      <UniqueIdentifier>{a44d36a8-9371-42ca-9d00-f7af7e19b6eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view">
+      <UniqueIdentifier>{96f4c877-6ce3-421b-8a47-1a7abcae2d76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\toolbar">
+      <UniqueIdentifier>{9fe3bff8-545a-4135-82b5-82338b8e7e29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\stage">
+      <UniqueIdentifier>{d8616a23-9356-4194-b120-10eb2e51532a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\library">
+      <UniqueIdentifier>{16ac3356-645f-4f08-999d-3d75394eccf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\property">
+      <UniqueIdentifier>{fff9c3f1-42ef-4883-b362-d95b32f182ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools">
+      <UniqueIdentifier>{a4efde4d-ed7c-4272-9d71-06d220aae554}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ps">
+      <UniqueIdentifier>{010feb12-c15a-410f-8be1-22da65b9f8ad}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libparticle3d\Sprite.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle3d\Symbol.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle3d\CocoPacker.cpp">
+      <Filter>file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle3d\FileIO.cpp">
+      <Filter>file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle3d\AnimRecorder.cpp">
+      <Filter>file\record</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle3d\InvertRecord.cpp">
+      <Filter>file\record</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle3d\ComponentPanel.cpp">
+      <Filter>view\toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle3d\ToolbarPanel.cpp">
+      <Filter>view\toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle3d\EditOP.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle3d\StageCanvas.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle3d\StagePanel.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle3d\LibraryPage.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle3d\LibraryPanel.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle3d\PropertySettingPanel.cpp">
+      <Filter>view\property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle3d\SpritePropertySetting.cpp">
+      <Filter>view\property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle3d\SymbolPropertySetting.cpp">
+      <Filter>view\property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle3d\utility.cpp">
+      <Filter>tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle3d\ParticleSystem.cpp">
+      <Filter>ps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle3d\PSConfigMgr.cpp">
+      <Filter>ps</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libparticle3d\Sprite.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle3d\Symbol.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle3d\CocoPacker.h">
+      <Filter>file</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle3d\FileIO.h">
+      <Filter>file</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle3d\AnimRecorder.h">
+      <Filter>file\record</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle3d\InvertRecord.h">
+      <Filter>file\record</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle3d\ComponentPanel.h">
+      <Filter>view\toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle3d\language.h">
+      <Filter>view\toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle3d\ToolbarPanel.h">
+      <Filter>view\toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle3d\EditOP.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle3d\StageCanvas.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle3d\StagePanel.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle3d\LibraryPage.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle3d\LibraryPanel.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle3d\PropertySettingPanel.h">
+      <Filter>view\property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle3d\SpritePropertySetting.h">
+      <Filter>view\property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle3d\SymbolPropertySetting.h">
+      <Filter>view\property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle3d\utility.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle3d\ParticleSystem.h">
+      <Filter>ps</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle3d\ps_config.h">
+      <Filter>ps</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle3d\PSConfigMgr.h">
+      <Filter>ps</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

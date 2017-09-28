@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="demo">
+      <UniqueIdentifier>{41e383b4-12a5-40ec-be24-c998157c3675}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="demo\1">
+      <UniqueIdentifier>{3922cc54-598f-4e95-a0f1-2aeec4e201c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="demo\2">
+      <UniqueIdentifier>{7aa4b44d-b559-4fe8-b75e-023c0aebc051}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="demo\3">
+      <UniqueIdentifier>{5896f442-198b-47a0-9875-41ffacab5686}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="demo\ocean">
+      <UniqueIdentifier>{8dd22d9e-7d8f-4858-a885-f124b85f0527}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view">
+      <UniqueIdentifier>{9d389dac-f7dc-488c-a181-35865112a49d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\stage">
+      <UniqueIdentifier>{e1c06c3f-e6b1-492b-aa6b-4d65d0fd2f80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools">
+      <UniqueIdentifier>{276aae9f-0f9f-4878-899f-6b468cf2a6f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{e567f767-9f54-4c51-9752-faf789c5a048}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libterrain3d\IDemo.cpp">
+      <Filter>demo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libterrain3d\DemoTriNetwork.cpp">
+      <Filter>demo\1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libterrain3d\DemoBruteForce.cpp">
+      <Filter>demo\2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libterrain3d\DemoBruteForceTex.cpp">
+      <Filter>demo\3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libterrain3d\DemoOcean.cpp">
+      <Filter>demo\ocean</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libterrain3d\StageCanvas.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libterrain3d\image.cpp">
+      <Filter>tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libterrain3d\log.cpp">
+      <Filter>tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libterrain3d\BruteForce.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libterrain3d\BruteForceTex.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libterrain3d\Terrain.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libterrain3d\IDemo.h">
+      <Filter>demo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libterrain3d\DemoTriNetwork.h">
+      <Filter>demo\1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libterrain3d\DemoBruteForce.h">
+      <Filter>demo\2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libterrain3d\DemoBruteForceTex.h">
+      <Filter>demo\3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libterrain3d\DemoOcean.h">
+      <Filter>demo\ocean</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libterrain3d\StageCanvas.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libterrain3d\image.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libterrain3d\log.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libterrain3d\randtab.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libterrain3d\BruteForce.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libterrain3d\BruteForceTex.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libterrain3d\Terrain.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

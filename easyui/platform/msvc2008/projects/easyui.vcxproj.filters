@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="frame">
+      <UniqueIdentifier>{f36ed841-0521-4417-947e-f44ecbcd064b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="frame\view">
+      <UniqueIdentifier>{b9a67194-302c-4c5a-9afc-320aba3999bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{9f56c756-875b-46bd-8fd5-80514c1273a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. window">
+      <UniqueIdentifier>{1b780e37-9e1d-4607-92cc-725c1bcdab8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. window\view">
+      <UniqueIdentifier>{9a3143b4-f2d7-4c91-9e8c-eab42238e199}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. window\dataset">
+      <UniqueIdentifier>{af475557-0209-46fb-aa24-41dc1486386d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. window\editop">
+      <UniqueIdentifier>{9a204976-6e1c-479e-a680-8550e1ee2730}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. window\preview">
+      <UniqueIdentifier>{a60d3c30-fb62-4a8a-90f0-dd1720927461}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. list">
+      <UniqueIdentifier>{bfbfd0f4-a86a-46dd-95a1-385dbaa107c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. list\view">
+      <UniqueIdentifier>{781aebb8-8712-4870-aa35-03bfe98136cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. list\editop">
+      <UniqueIdentifier>{c1c517dd-9e3d-484d-86b9-ccdb8297421a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. list\dataset">
+      <UniqueIdentifier>{ab1e2dfb-0222-414d-88cb-bc08c8382728}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. wrapper">
+      <UniqueIdentifier>{5fa2b055-2495-4bf5-985e-8b2253f907c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. wrapper\view">
+      <UniqueIdentifier>{1705c537-c742-428c-ae8a-f144df23c9c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="editop">
+      <UniqueIdentifier>{16a99b18-ae62-40f7-9140-bc4e0ae3b27f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\easyui\Frame.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\main.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\Task.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\TopLibraryPanel.cpp">
+      <Filter>frame\view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\TopStagePanel.cpp">
+      <Filter>frame\view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\TopToolbarPanel.cpp">
+      <Filter>frame\view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\SymbolCfg.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\TidCfg.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\TopPannels.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\widget_id.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\window\LibraryPage.cpp">
+      <Filter>1. window\view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\window\SpriteDropTarget.cpp">
+      <Filter>1. window\view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\window\StageCanvas.cpp">
+      <Filter>1. window\view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\window\StagePanel.cpp">
+      <Filter>1. window\view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\window\ToolbarPanel.cpp">
+      <Filter>1. window\view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\window\Code.cpp">
+      <Filter>1. window\dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\window\SymbolsCfg.cpp">
+      <Filter>1. window\dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\window\ArrangeSpriteImpl.cpp">
+      <Filter>1. window\editop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\window\MoveSpriteCenterState.cpp">
+      <Filter>1. window\editop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\window\TranslateSpriteState.cpp">
+      <Filter>1. window\editop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\window\PreviewCanvas.cpp">
+      <Filter>1. window\preview</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\window\PreviewDialog.cpp">
+      <Filter>1. window\preview</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\list\StageCanvas.cpp">
+      <Filter>2. list\view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\list\StagePanel.cpp">
+      <Filter>2. list\view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\list\ToolbarPanel.cpp">
+      <Filter>2. list\view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\list\ArrangeSpriteImpl.cpp">
+      <Filter>2. list\editop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\list\EditOP.cpp">
+      <Filter>2. list\editop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\list\TranslateSpriteState.cpp">
+      <Filter>2. list\editop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\list\UIList.cpp">
+      <Filter>2. list\dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\wrapper\EditOP.cpp">
+      <Filter>3. wrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\wrapper\StageCanvas.cpp">
+      <Filter>3. wrapper\view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\wrapper\StagePanel.cpp">
+      <Filter>3. wrapper\view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\wrapper\ToolbarPanel.cpp">
+      <Filter>3. wrapper\view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\EditClipboxOP.cpp">
+      <Filter>editop</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\easyui\Frame.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\main.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\Task.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\TopLibraryPanel.h">
+      <Filter>frame\view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\TopStagePanel.h">
+      <Filter>frame\view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\TopToolbarPanel.h">
+      <Filter>frame\view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\UIStagePage.h">
+      <Filter>frame\view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\SymbolCfg.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\TidCfg.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\TopPannels.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\widget_id.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\window\LibraryPage.h">
+      <Filter>1. window\view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\window\SpriteDropTarget.h">
+      <Filter>1. window\view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\window\StageCanvas.h">
+      <Filter>1. window\view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\window\StagePanel.h">
+      <Filter>1. window\view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\window\ToolbarPanel.h">
+      <Filter>1. window\view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\window\Code.h">
+      <Filter>1. window\dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\window\SymbolsCfg.h">
+      <Filter>1. window\dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\window\ArrangeSpriteImpl.h">
+      <Filter>1. window\editop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\window\MoveSpriteCenterState.h">
+      <Filter>1. window\editop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\window\TranslateSpriteState.h">
+      <Filter>1. window\editop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\window\PreviewCanvas.h">
+      <Filter>1. window\preview</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\window\PreviewDialog.h">
+      <Filter>1. window\preview</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\list\StageCanvas.h">
+      <Filter>2. list\view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\list\StagePanel.h">
+      <Filter>2. list\view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\list\ToolbarPanel.h">
+      <Filter>2. list\view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\list\ArrangeSpriteImpl.h">
+      <Filter>2. list\editop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\list\EditOP.h">
+      <Filter>2. list\editop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\list\TranslateSpriteState.h">
+      <Filter>2. list\editop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\list\UIList.h">
+      <Filter>2. list\dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\wrapper\EditOP.h">
+      <Filter>3. wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\wrapper\StageCanvas.h">
+      <Filter>3. wrapper\view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\wrapper\StagePanel.h">
+      <Filter>3. wrapper\view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\wrapper\ToolbarPanel.h">
+      <Filter>3. wrapper\view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyui\EditClipboxOP.h">
+      <Filter>editop</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\..\..\editor-external\wx\include\wx\msw\wx.rc" />
+  </ItemGroup>
+</Project>

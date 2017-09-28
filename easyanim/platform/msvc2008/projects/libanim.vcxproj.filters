@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="preview">
+      <UniqueIdentifier>{1651f8ae-5009-4042-bb24-d8e678c183cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="output">
+      <UniqueIdentifier>{d34b6d0d-cc26-4961-b6fc-e24e2b1adfd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{fc105cfb-66d4-4cb9-99a8-4fa7ff61f32a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view">
+      <UniqueIdentifier>{53600571-9a48-4c02-aa07-7e1c66cc5904}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\library">
+      <UniqueIdentifier>{fdb2a3ff-36a5-473d-8311-04810b1463fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\property">
+      <UniqueIdentifier>{5dcee306-b5d9-416e-b68b-20cf393325ef}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libanim\PreviewCanvas.cpp">
+      <Filter>preview</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libanim\PreviewDialog.cpp">
+      <Filter>preview</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libanim\FileSaver.cpp">
+      <Filter>output</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libanim\Sprite.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libanim\Symbol.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libanim\LibraryPage.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libanim\PropertySetting.cpp">
+      <Filter>view\property</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libanim\PreviewCanvas.h">
+      <Filter>preview</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libanim\PreviewDialog.h">
+      <Filter>preview</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libanim\FileSaver.h">
+      <Filter>output</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libanim\Sprite.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libanim\Symbol.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libanim\LibraryPage.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libanim\PropertySetting.h">
+      <Filter>view\property</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

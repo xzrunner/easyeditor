@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="extend">
+      <UniqueIdentifier>{11c2976f-d432-41f7-91ae-2114edacb359}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="extend\regular_rect">
+      <UniqueIdentifier>{cc2e3f15-7ea8-4310-8eb3-430bcec4e294}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="extend\normal">
+      <UniqueIdentifier>{2f51700d-c721-4a34-99e7-f9935c5c2190}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{7a3de7a5-3b48-42c3-8ea7-6c4da0a73735}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external">
+      <UniqueIdentifier>{985185cb-109d-4d58-909c-97e288c3fda3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\RectangleBinPack">
+      <UniqueIdentifier>{a1f3077c-7ec5-43ed-8355-e7ad7f75cd6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="primitive">
+      <UniqueIdentifier>{5cbb2160-a5f6-4510-b1b6-3008d27a4533}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools">
+      <UniqueIdentifier>{3640473e-8006-454e-be9a-525a6016b29b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libtexpacker\GenRegularRectBinary.cpp">
+      <Filter>extend\regular_rect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libtexpacker\GenRegularRectImage.cpp">
+      <Filter>extend\regular_rect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libtexpacker\RegularRectPack.cpp">
+      <Filter>extend\regular_rect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libtexpacker\ImageTrimData.cpp">
+      <Filter>extend\normal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libtexpacker\NormalPack.cpp">
+      <Filter>extend\normal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libtexpacker\RectangleBinPack.cpp">
+      <Filter>external</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\external\RectangleBinPack\GuillotineBinPack.cpp">
+      <Filter>external\RectangleBinPack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\external\RectangleBinPack\MaxRectsBinPack.cpp">
+      <Filter>external\RectangleBinPack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\external\RectangleBinPack\Rect.cpp">
+      <Filter>external\RectangleBinPack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\external\RectangleBinPack\ShelfBinPack.cpp">
+      <Filter>external\RectangleBinPack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\external\RectangleBinPack\SkylineBinPack.cpp">
+      <Filter>external\RectangleBinPack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libtexpacker\MaxRectsBinaryPack.cpp">
+      <Filter>primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libtexpacker\MaxRectsBinaryPack2.cpp">
+      <Filter>primitive</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libtexpacker\GenRegularRectBinary.h">
+      <Filter>extend\regular_rect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libtexpacker\GenRegularRectImage.h">
+      <Filter>extend\regular_rect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libtexpacker\RegularRectPack.h">
+      <Filter>extend\regular_rect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libtexpacker\ImageTrimData.h">
+      <Filter>extend\normal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libtexpacker\NormalPack.h">
+      <Filter>extend\normal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libtexpacker\Rect.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libtexpacker\Sprite.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libtexpacker\RectangleBinPack.h">
+      <Filter>external</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\external\RectangleBinPack\GuillotineBinPack.h">
+      <Filter>external\RectangleBinPack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\external\RectangleBinPack\MaxRectsBinPack.h">
+      <Filter>external\RectangleBinPack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\external\RectangleBinPack\Rect.h">
+      <Filter>external\RectangleBinPack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\external\RectangleBinPack\ShelfBinPack.h">
+      <Filter>external\RectangleBinPack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\external\RectangleBinPack\SkylineBinPack.h">
+      <Filter>external\RectangleBinPack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libtexpacker\MaxRectsBinaryPack.h">
+      <Filter>primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libtexpacker\MaxRectsBinaryPack2.h">
+      <Filter>primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libtexpacker\typedef.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

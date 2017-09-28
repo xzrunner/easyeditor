@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="frame">
+      <UniqueIdentifier>{b3bd854a-1069-4f77-ba9e-a45aa35819f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view">
+      <UniqueIdentifier>{f6ea5839-69fe-44ac-a314-c3b6b16a8161}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\stage">
+      <UniqueIdentifier>{2a321ae9-5ab4-47e1-89f0-6507faaaa10b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\library">
+      <UniqueIdentifier>{691512c9-fc23-49ab-950f-def6e29c0ae6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\editop">
+      <UniqueIdentifier>{6a2047b3-1f1e-4778-8eb5-c447048dd254}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\dialog">
+      <UniqueIdentifier>{1cb94dd0-ae1b-4f00-b921-f23ac4690c0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\viewlist">
+      <UniqueIdentifier>{7dc103da-3c20-4af6-9b1b-38242f86f2fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\utility">
+      <UniqueIdentifier>{ee43d498-f8ca-4a0c-8d96-12534ff82d7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\aop">
+      <UniqueIdentifier>{8f0b4f1c-6b2b-4a8e-8bf2-83edb0c62158}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{c81cf3c0-19c8-49e7-b302-e7bf7b05a0cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset\layer">
+      <UniqueIdentifier>{2473457e-53a4-4212-85f9-14fd34f08d1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset\ud">
+      <UniqueIdentifier>{6cbe7bff-ea00-4560-b225-610d73c31dd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset\character">
+      <UniqueIdentifier>{271fecda-3e73-40c2-a4cd-699e274538b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset\level">
+      <UniqueIdentifier>{0a2ee4ce-467b-4166-b52c-7049f96d01b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset\tag">
+      <UniqueIdentifier>{932ec6ce-b5ac-4e1d-8073-02af883244b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="preview">
+      <UniqueIdentifier>{46542bdf-93e7-4e0f-b64b-c1ec6f65e68f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="preview\pathfinding">
+      <UniqueIdentifier>{9f2c3d79-b4b1-4dec-b02c-0b74d12a6e7a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\lr\frame\CheckForStore.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\frame\FileIO.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\frame\Frame.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\frame\main.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\frame\SettingCfg.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\frame\SettingsDialog.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\frame\Task.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\frame\ToolBar.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\view\StageCanvas.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\view\StagePanel.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\view\LibraryPage.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\view\LibraryPanel.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\view\ArrangeSpriteImpl.cpp">
+      <Filter>view\editop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\view\PasteSymbolOP.cpp">
+      <Filter>view\editop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\view\RightPopupMenu.cpp">
+      <Filter>view\editop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\view\SelectSpritesOP.cpp">
+      <Filter>view\editop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\view\LevelEditDlg.cpp">
+      <Filter>view\dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\view\UnitEditDlg.cpp">
+      <Filter>view\dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\view\ViewlistListImpl.cpp">
+      <Filter>view\viewlist</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\view\OpenSymbolDialog.cpp">
+      <Filter>view\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\view\SetLayerTagAOP.cpp">
+      <Filter>view\aop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\dataset\data_utility.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\dataset\Grids.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\dataset\Quadtree.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\dataset\SpatialIndex.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\dataset\Layer.cpp">
+      <Filter>dataset\layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\dataset\LayerFactory.cpp">
+      <Filter>dataset\layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\dataset\ShapeLayer.cpp">
+      <Filter>dataset\layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\dataset\CharacterAllDirections.cpp">
+      <Filter>dataset\character</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\dataset\CharacterFileName.cpp">
+      <Filter>dataset\character</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\dataset\UnitCfg.cpp">
+      <Filter>dataset\character</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\dataset\LevelCfg.cpp">
+      <Filter>dataset\level</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\dataset\TagCfg.cpp">
+      <Filter>dataset\tag</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\preview\CtrlCamOP.cpp">
+      <Filter>preview</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\preview\MainDialog.cpp">
+      <Filter>preview</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\preview\StageCanvas.cpp">
+      <Filter>preview</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\preview\PathGrid.cpp">
+      <Filter>preview\pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\preview\PathNavMesh.cpp">
+      <Filter>preview\pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\preview\PathQuadtree.cpp">
+      <Filter>preview\pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\preview\PathUtil.cpp">
+      <Filter>preview\pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lr\preview\PathVisibleSimple.cpp">
+      <Filter>preview\pathfinding</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\lr\frame\CheckForStore.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\frame\config.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\frame\FileIO.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\frame\Frame.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\frame\main.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\frame\SettingCfg.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\frame\SettingsDialog.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\frame\Task.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\frame\ToolBar.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\view\typedef.h">
+      <Filter>view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\view\StageCanvas.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\view\StagePanel.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\view\LibraryPage.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\view\LibraryPanel.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\view\ArrangeSpriteImpl.h">
+      <Filter>view\editop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\view\PasteSymbolOP.h">
+      <Filter>view\editop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\view\RightPopupMenu.h">
+      <Filter>view\editop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\view\SelectSpritesOP.h">
+      <Filter>view\editop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\view\LevelEditDlg.h">
+      <Filter>view\dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\view\UnitEditDlg.h">
+      <Filter>view\dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\view\ViewlistListImpl.h">
+      <Filter>view\viewlist</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\view\OpenSymbolDialog.h">
+      <Filter>view\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\view\SetLayerTagAOP.h">
+      <Filter>view\aop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\dataset\data_utility.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\dataset\Grids.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\dataset\Quadtree.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\dataset\SpatialIndex.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\dataset\Layer.h">
+      <Filter>dataset\layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\dataset\layer_type.h">
+      <Filter>dataset\layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\dataset\LayerFactory.h">
+      <Filter>dataset\layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\dataset\ShapeLayer.h">
+      <Filter>dataset\layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\dataset\BaseFileUD.h">
+      <Filter>dataset\ud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\dataset\ShapesUD.h">
+      <Filter>dataset\ud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\dataset\ud_type.h">
+      <Filter>dataset\ud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\dataset\UserData.h">
+      <Filter>dataset\ud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\dataset\CharacterAllDirections.h">
+      <Filter>dataset\character</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\dataset\CharacterFileName.h">
+      <Filter>dataset\character</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\dataset\UnitCfg.h">
+      <Filter>dataset\character</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\dataset\LevelCfg.h">
+      <Filter>dataset\level</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\dataset\TagCfg.h">
+      <Filter>dataset\tag</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\preview\CtrlCamOP.h">
+      <Filter>preview</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\preview\MainDialog.h">
+      <Filter>preview</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\preview\StageCanvas.h">
+      <Filter>preview</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\preview\IPathfinding.h">
+      <Filter>preview\pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\preview\PathGrid.h">
+      <Filter>preview\pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\preview\PathNavMesh.h">
+      <Filter>preview\pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\preview\PathQuadtree.h">
+      <Filter>preview\pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\preview\PathUtil.h">
+      <Filter>preview\pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lr\preview\PathVisibleSimple.h">
+      <Filter>preview\pathfinding</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\..\res\rc\lr.rc" />
+  </ItemGroup>
+</Project>

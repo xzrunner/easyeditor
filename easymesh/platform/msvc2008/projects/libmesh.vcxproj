@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>5.libmesh</ProjectName>
+    <ProjectGuid>{9DC03BCC-3C8C-4BB8-8811-336F295DF7E2}</ProjectGuid>
+    <RootNamespace>libmesh</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\libmesh\x86\Debug\</OutDir>
+    <IntDir>..\libmesh\x86\Debug\obj\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\libmesh\x86\Release\</OutDir>
+    <IntDir>..\libmesh\x86\Release\obj\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\easyshape\src;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\cu\src\cu;..\..\..\..\particle\src;..\..\..\..\shaderlab\include;..\..\..\..\polymesh\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\libmesh\x86\Debug</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\libmesh\x86\Debug\libmesh.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\easyshape\src;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\cu\src\cu;..\..\..\..\particle\src;..\..\..\..\shaderlab\include;..\..\..\..\polymesh\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\libmesh\x86\Release</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\libmesh\x86\Release\libmesh.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libmesh\CreateMeshCMPT.cpp" />
+    <ClCompile Include="..\..\..\src\libmesh\CreatePointsMeshOP.cpp" />
+    <ClCompile Include="..\..\..\src\libmesh\CreateSkinMeshOP.cpp" />
+    <ClCompile Include="..\..\..\src\libmesh\CreateStripMeshOP.cpp" />
+    <ClCompile Include="..\..\..\src\libmesh\EditDialog.cpp" />
+    <ClCompile Include="..\..\..\src\libmesh\EditMeshCMPT.cpp" />
+    <ClCompile Include="..\..\..\src\libmesh\EditPointsMeshOP.cpp" />
+    <ClCompile Include="..\..\..\src\libmesh\EditSkeletonOP.cpp" />
+    <ClCompile Include="..\..\..\src\libmesh\EditUVCMPT.cpp" />
+    <ClCompile Include="..\..\..\src\libmesh\EditUVOP.cpp" />
+    <ClCompile Include="..\..\..\src\libmesh\FileIO.cpp" />
+    <ClCompile Include="..\..\..\src\libmesh\LibraryPage.cpp" />
+    <ClCompile Include="..\..\..\src\libmesh\Mesh.cpp" />
+    <ClCompile Include="..\..\..\src\libmesh\MeshFactory.cpp" />
+    <ClCompile Include="..\..\..\src\libmesh\PointsMesh.cpp" />
+    <ClCompile Include="..\..\..\src\libmesh\PropertySetting.cpp" />
+    <ClCompile Include="..\..\..\src\libmesh\RotateJointAOP.cpp" />
+    <ClCompile Include="..\..\..\src\libmesh\RotateJointState.cpp" />
+    <ClCompile Include="..\..\..\src\libmesh\SelectPointsMeshOP.cpp" />
+    <ClCompile Include="..\..\..\src\libmesh\SkeletonMesh.cpp" />
+    <ClCompile Include="..\..\..\src\libmesh\Sprite.cpp" />
+    <ClCompile Include="..\..\..\src\libmesh\StageCanvas.cpp" />
+    <ClCompile Include="..\..\..\src\libmesh\StagePanel.cpp" />
+    <ClCompile Include="..\..\..\src\libmesh\StripMesh.cpp" />
+    <ClCompile Include="..\..\..\src\libmesh\Symbol.cpp" />
+    <ClCompile Include="..\..\..\src\libmesh\ToolbarPanel.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libmesh\color_config.h" />
+    <ClInclude Include="..\..\..\src\libmesh\CreateMeshCMPT.h" />
+    <ClInclude Include="..\..\..\src\libmesh\CreatePointsMeshOP.h" />
+    <ClInclude Include="..\..\..\src\libmesh\CreateSkinMeshOP.h" />
+    <ClInclude Include="..\..\..\src\libmesh\CreateStripMeshOP.h" />
+    <ClInclude Include="..\..\..\src\libmesh\EditDialog.h" />
+    <ClInclude Include="..\..\..\src\libmesh\EditMeshCMPT.h" />
+    <ClInclude Include="..\..\..\src\libmesh\EditPointsMeshOP.h" />
+    <ClInclude Include="..\..\..\src\libmesh\EditSkeletonOP.h" />
+    <ClInclude Include="..\..\..\src\libmesh\EditUVCMPT.h" />
+    <ClInclude Include="..\..\..\src\libmesh\EditUVOP.h" />
+    <ClInclude Include="..\..\..\src\libmesh\FileIO.h" />
+    <ClInclude Include="..\..\..\src\libmesh\LibraryPage.h" />
+    <ClInclude Include="..\..\..\src\libmesh\Mesh.h" />
+    <ClInclude Include="..\..\..\src\libmesh\MeshFactory.h" />
+    <ClInclude Include="..\..\..\src\libmesh\PointsMesh.h" />
+    <ClInclude Include="..\..\..\src\libmesh\PropertySetting.h" />
+    <ClInclude Include="..\..\..\src\libmesh\RotateJointAOP.h" />
+    <ClInclude Include="..\..\..\src\libmesh\RotateJointState.h" />
+    <ClInclude Include="..\..\..\src\libmesh\SelectPointsMeshOP.h" />
+    <ClInclude Include="..\..\..\src\libmesh\SkeletonMesh.h" />
+    <ClInclude Include="..\..\..\src\libmesh\Sprite.h" />
+    <ClInclude Include="..\..\..\src\libmesh\StageCanvas.h" />
+    <ClInclude Include="..\..\..\src\libmesh\StagePanel.h" />
+    <ClInclude Include="..\..\..\src\libmesh\StripMesh.h" />
+    <ClInclude Include="..\..\..\src\libmesh\Symbol.h" />
+    <ClInclude Include="..\..\..\src\libmesh\ToolbarPanel.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

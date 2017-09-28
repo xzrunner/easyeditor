@@ -1,0 +1,434 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="primitive">
+      <UniqueIdentifier>{1f9a907d-f51c-4208-9510-9a12f1c9677a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="primitive\color">
+      <UniqueIdentifier>{d129dfb1-155f-4f61-a318-3dec28b7962b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="primitive\visitor">
+      <UniqueIdentifier>{9b63bfdc-ba27-42d1-9df4-7127b824a870}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="primitive\selection">
+      <UniqueIdentifier>{aa821286-836b-4ca1-9b88-2dd04a3197f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="primitive\selection\set">
+      <UniqueIdentifier>{11fe4b79-6c29-48ef-9f73-6569d2514250}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="config">
+      <UniqueIdentifier>{665bf2f9-84ac-463e-b180-46bea800e3dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="script">
+      <UniqueIdentifier>{3f8c54e2-74e4-4657-b0ab-ab6bb32df0ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{0e51455c-5985-4973-93b5-21b0798f2222}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="symbol">
+      <UniqueIdentifier>{8b935fcc-a005-4d90-b53b-d0c7a17c876a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="symbol\searcher">
+      <UniqueIdentifier>{beb55c6d-578d-412a-a34e-4c95fc8437cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="symbol\type">
+      <UniqueIdentifier>{ec70e61f-7516-4b0c-9895-33a757e519b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="image">
+      <UniqueIdentifier>{2481d79f-2259-4131-a392-19abd3be0722}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="image\process">
+      <UniqueIdentifier>{29f66268-4356-43a1-bc80-82e31950007a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shape">
+      <UniqueIdentifier>{bafaf2dc-ccb3-44f9-9ca7-b150356e2803}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sprite">
+      <UniqueIdentifier>{da74a808-31fd-4184-92c2-e14fcce915ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sprite\type">
+      <UniqueIdentifier>{0ddb3ddf-0ad4-4635-b24e-1879c0d28d7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scene">
+      <UniqueIdentifier>{4137b536-315f-477c-b7df-5844384d8c6a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\ee\color_config.h">
+      <Filter>primitive\color</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\convert_color.h">
+      <Filter>primitive\color</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\CountVerifyVisitor.h">
+      <Filter>primitive\visitor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\EmptyVerifyVisitor.h">
+      <Filter>primitive\visitor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\FetchAllVisitor.h">
+      <Filter>primitive\visitor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\GetNameVisitor.h">
+      <Filter>primitive\visitor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\PointMultiQueryVisitor.h">
+      <Filter>primitive\visitor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\PointQueryVisitor.h">
+      <Filter>primitive\visitor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\RectQueryVisitor.h">
+      <Filter>primitive\visitor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ReloadSymVisitor.h">
+      <Filter>primitive\visitor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\Visitor.h">
+      <Filter>primitive\visitor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ObjSelectionSet.h">
+      <Filter>primitive\selection</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SelectionSet.h">
+      <Filter>primitive\selection</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\wrap_SelectionSet.h">
+      <Filter>primitive\selection</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ShapeSelection.h">
+      <Filter>primitive\selection\set</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SpriteSelection.h">
+      <Filter>primitive\selection\set</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\cfg_const.h">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\Config.h">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\CurrSprTreePath.h">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\dev_config.h">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SettingData.h">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SpecialConfig.h">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\script_type.h">
+      <Filter>script</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\AnimatedGifSaver.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\Blackboard.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\DataTraverseType.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\key_type.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\KeysState.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ListItem.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ObjectVector.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\PointerPool.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ResourcesMgr.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\TexPackerAdapter.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\TPNode.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\UserDataImpl.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\Symbol.h">
+      <Filter>symbol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SymbolFactory.h">
+      <Filter>symbol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SymbolFile.h">
+      <Filter>symbol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SymbolLoader.h">
+      <Filter>symbol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SymbolMgr.h">
+      <Filter>symbol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SymbolPath.h">
+      <Filter>symbol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SymbolType.h">
+      <Filter>symbol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SearcherPathMgr.h">
+      <Filter>symbol\searcher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SymbolSearcher.h">
+      <Filter>symbol\searcher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\DummySymbol.h">
+      <Filter>symbol\type</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\FontBlankSymbol.h">
+      <Filter>symbol\type</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ImageSymbol.h">
+      <Filter>symbol\type</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ScriptsSymbol.h">
+      <Filter>symbol\type</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\Bitmap.h">
+      <Filter>image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\Image.h">
+      <Filter>image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ImageData.h">
+      <Filter>image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\Texture.h">
+      <Filter>image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\TextureFactory.h">
+      <Filter>image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\TextureImgData.h">
+      <Filter>image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\TexturePacker.h">
+      <Filter>image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\TextureRT.h">
+      <Filter>image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ImagePack.h">
+      <Filter>image\process</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\Shape.h">
+      <Filter>shape</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\Sprite.h">
+      <Filter>sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SpriteFactory.h">
+      <Filter>sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SpriteIO.h">
+      <Filter>sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SpriteLoader.h">
+      <Filter>sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SpriteObserver.h">
+      <Filter>sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\wrap_ISprite.h">
+      <Filter>sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\DummySprite.h">
+      <Filter>sprite\type</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\FontBlankSprite.h">
+      <Filter>sprite\type</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ImageSprite.h">
+      <Filter>sprite\type</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ScriptsSprite.h">
+      <Filter>sprite\type</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\Group.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\Layer.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\LayerMgr.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\data\primitive\convert_color.cpp">
+      <Filter>primitive\color</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\primitive\RectQueryVisitor.cpp">
+      <Filter>primitive\visitor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\primitive\wrap_SelectionSet.cpp">
+      <Filter>primitive\selection</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\primitive\ShapeSelection.cpp">
+      <Filter>primitive\selection\set</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\primitive\SpriteSelection.cpp">
+      <Filter>primitive\selection\set</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\config\Config.cpp">
+      <Filter>config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\config\CurrSprTreePath.cpp">
+      <Filter>config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\config\SettingData.cpp">
+      <Filter>config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\config\SpecialConfig.cpp">
+      <Filter>config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\common\AnimatedGifSaver.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\common\Blackboard.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\common\KeysState.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\common\ListItem.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\common\TexPackerAdapter.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\common\TPNode.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\common\UserDataImpl.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\symbol\Symbol.cpp">
+      <Filter>symbol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\symbol\SymbolFactory.cpp">
+      <Filter>symbol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\symbol\SymbolFile.cpp">
+      <Filter>symbol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\include\ee\SymbolLoader.cpp">
+      <Filter>symbol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\symbol\SymbolMgr.cpp">
+      <Filter>symbol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\symbol\SymbolPath.cpp">
+      <Filter>symbol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\symbol\SearcherPathMgr.cpp">
+      <Filter>symbol\searcher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\symbol\SymbolSearcher.cpp">
+      <Filter>symbol\searcher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\symbol\DummySymbol.cpp">
+      <Filter>symbol\type</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\symbol\FontBlankSymbol.cpp">
+      <Filter>symbol\type</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\symbol\ImageSymbol.cpp">
+      <Filter>symbol\type</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\symbol\ScriptsSymbol.cpp">
+      <Filter>symbol\type</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\common\Bitmap.cpp">
+      <Filter>image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\image\Image.cpp">
+      <Filter>image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\image\ImageData.cpp">
+      <Filter>image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\image\TextureFactory.cpp">
+      <Filter>image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\image\TextureImgData.cpp">
+      <Filter>image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\image\TexturePacker.cpp">
+      <Filter>image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\image\TextureRT.cpp">
+      <Filter>image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\image\ImagePack.cpp">
+      <Filter>image\process</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\shape\Shape.cpp">
+      <Filter>shape</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\sprite\Sprite.cpp">
+      <Filter>sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\sprite\SpriteFactory.cpp">
+      <Filter>sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\sprite\SpriteIO.cpp">
+      <Filter>sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\sprite\SpriteLoader.cpp">
+      <Filter>sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\sprite\wrap_ISprite.cpp">
+      <Filter>sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\sprite\DummySprite.cpp">
+      <Filter>sprite\type</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\sprite\FontBlankSprite.cpp">
+      <Filter>sprite\type</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\sprite\ImageSprite.cpp">
+      <Filter>sprite\type</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\sprite\ScriptsSprite.cpp">
+      <Filter>sprite\type</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\scene\Group.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\scene\Layer.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\scene\LayerMgr.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\include\ee\ObjSelectionSet.inl">
+      <Filter>primitive\selection</Filter>
+    </None>
+    <None Include="..\..\..\include\ee\SelectionSet.inl">
+      <Filter>primitive\selection</Filter>
+    </None>
+    <None Include="..\..\..\include\ee\ObjectVector.inl">
+      <Filter>common</Filter>
+    </None>
+    <None Include="..\..\..\include\ee\ResourcesMgr.inl">
+      <Filter>common</Filter>
+    </None>
+  </ItemGroup>
+</Project>

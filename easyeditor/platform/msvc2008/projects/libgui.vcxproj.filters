@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="dialog">
+      <UniqueIdentifier>{c4d8def7-014e-46b5-a66f-6e75bc8f561a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dialog\color">
+      <UniqueIdentifier>{54402a66-ba35-4561-b48d-46ef676a0bc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="list">
+      <UniqueIdentifier>{fc14fbc4-4b46-401b-9f8d-da0d1da0b886}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="other">
+      <UniqueIdentifier>{53a27575-bdc3-48c5-add3-6fc82edf5fd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="panel">
+      <UniqueIdentifier>{c0d42500-274e-4f73-a1bb-cf706bea3d2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="panel\color">
+      <UniqueIdentifier>{58d7827a-42c6-4ff8-b432-129e8a5e904d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="property">
+      <UniqueIdentifier>{de8437d0-7028-41f6-90fb-29d6b5061806}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="slider">
+      <UniqueIdentifier>{ef0fde3e-3163-4f82-94b3-fa407148d590}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="toolbar">
+      <UniqueIdentifier>{8c5aeda3-9cb8-4a7a-9dd8-7791cb180166}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="value">
+      <UniqueIdentifier>{cd6d8a00-d21f-4f7f-bb5c-d7d867e4cfcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utility">
+      <UniqueIdentifier>{7e00346c-c68f-49cc-a78c-727c16d74540}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dynamic">
+      <UniqueIdentifier>{0269b3ea-be51-4ca7-9d5f-408e80a9fae5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dynamic\widget">
+      <UniqueIdentifier>{b157f943-5afe-4038-8c52-3c709baf2773}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\gui\SetValueDialog.cpp">
+      <Filter>dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\gui\SimpleGLCanvas.cpp">
+      <Filter>dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\gui\AlphaSettingDlg.cpp">
+      <Filter>dialog\color</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\gui\ColorSlider.cpp">
+      <Filter>dialog\color</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\gui\HSLColorSettingDlg.cpp">
+      <Filter>dialog\color</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\gui\RGBColorSettingDlg.cpp">
+      <Filter>dialog\color</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\gui\VerticalImageList.cpp">
+      <Filter>list</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\gui\SelectDrawTypeWidget.cpp">
+      <Filter>other</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\gui\ImagePanel.cpp">
+      <Filter>panel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\gui\HSLColorPanel.cpp">
+      <Filter>panel\color</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\gui\RGBColorPanel.cpp">
+      <Filter>panel\color</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\gui\FileDirProperty.cpp">
+      <Filter>property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\gui\FileNameProperty.cpp">
+      <Filter>property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\gui\FilepathProperty.cpp">
+      <Filter>property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\gui\MyColorProperty.cpp">
+      <Filter>property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\gui\OpenSymbolProperty.cpp">
+      <Filter>property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\gui\SysColorProperty.cpp">
+      <Filter>property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\gui\SliderCtrlOld.cpp">
+      <Filter>slider</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\gui\SliderCtrlOne.cpp">
+      <Filter>slider</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\gui\SliderCtrlTwo.cpp">
+      <Filter>slider</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\gui\LayersMgrWidget.cpp">
+      <Filter>toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\gui\PasteSymbolRandomWidget.cpp">
+      <Filter>toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\gui\OneFloatValueCMPT.cpp">
+      <Filter>value</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\gui\WXHelper.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\gui\DynamicInfo.cpp">
+      <Filter>dynamic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\gui\DynamicWidget.cpp">
+      <Filter>dynamic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\gui\WidgetFactory.cpp">
+      <Filter>dynamic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\gui\CheckBoxWidget.cpp">
+      <Filter>dynamic\widget</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\gui\ChoiceWidget.cpp">
+      <Filter>dynamic\widget</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\gui\ComboBoxWidget.cpp">
+      <Filter>dynamic\widget</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\gui\TextWidget.cpp">
+      <Filter>dynamic\widget</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\ee\SetValueDialog.h">
+      <Filter>dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SimpleGLCanvas.h">
+      <Filter>dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\AlphaSettingDlg.h">
+      <Filter>dialog\color</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ColorSlider.h">
+      <Filter>dialog\color</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\HSLColorSettingDlg.h">
+      <Filter>dialog\color</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\RGBColorSettingDlg.h">
+      <Filter>dialog\color</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\VerticalImageList.h">
+      <Filter>list</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ColorMonitor.h">
+      <Filter>other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\DragTargetNull.h">
+      <Filter>other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\OpenSymbolMonitor.h">
+      <Filter>other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SelectDrawTypeWidget.h">
+      <Filter>other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\Widget.h">
+      <Filter>other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ImagePanel.h">
+      <Filter>panel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\RGBColorPanel.h">
+      <Filter>panel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\HSLColorPanel.h">
+      <Filter>panel\color</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\TweenColorPanel.h">
+      <Filter>panel\color</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\FileDirProperty.h">
+      <Filter>property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\FileNameProperty.h">
+      <Filter>property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\FilepathProperty.h">
+      <Filter>property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\MyColorProperty.h">
+      <Filter>property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\OpenSymbolProperty.h">
+      <Filter>property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SysColorProperty.h">
+      <Filter>property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SliderCtrl.h">
+      <Filter>slider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SliderCtrlOld.h">
+      <Filter>slider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SliderCtrlOne.h">
+      <Filter>slider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SliderCtrlTwo.h">
+      <Filter>slider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SliderItem.h">
+      <Filter>slider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\LayersMgrWidget.h">
+      <Filter>toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\PasteSymbolRandomWidget.h">
+      <Filter>toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\OneFloatValue.h">
+      <Filter>value</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\OneFloatValueCMPT.h">
+      <Filter>value</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\OneFloatValueStatic.h">
+      <Filter>value</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\WXHelper.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\DynamicInfo.h">
+      <Filter>dynamic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\DynamicWidget.h">
+      <Filter>dynamic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\WidgetFactory.h">
+      <Filter>dynamic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\CheckBoxWidget.h">
+      <Filter>dynamic\widget</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ChoiceWidget.h">
+      <Filter>dynamic\widget</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ComboBoxWidget.h">
+      <Filter>dynamic\widget</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\TextWidget.h">
+      <Filter>dynamic\widget</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

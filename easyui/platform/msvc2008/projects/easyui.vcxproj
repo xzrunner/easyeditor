@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>6.easyui</ProjectName>
+    <ProjectGuid>{056D3AB3-A0B2-454A-AF31-DA98BAB867BA}</ProjectGuid>
+    <RootNamespace>easyui</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\easyui\x86\Debug\</OutDir>
+    <IntDir>..\easyui\x86\Debug\obj\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\easyui\x86\Release\</OutDir>
+    <IntDir>..\easyui\x86\Release\obj\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\src\easyui;..\..\..\..\sprite2\include;..\..\..\..\polymesh\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\easyeditor\include;..\..\..\..\easy3d\src\easy3d;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..\easyanim2\src;..\..\..\..\easyscale9\src;..\..\..\..\easymesh\src;..\..\..\..\easymask\src;..\..\..\..\easytexture\src;..\..\..\..\easyshape\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easybuilder\src;..\..\..\..\easyicon\src;..\..\..\..\easytext\src;..\..\..\..\easytrail\src;..\..\..\..\particle\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\easyui\x86\Debug</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\easyui\x86\Debug\easyui.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>wxmsw31ud_gl.lib;wxmsw31ud_propgrid.lib;wxmsw31ud_adv.lib;wxmsw31ud_stc.lib;wxmsw31ud_core.lib;wxbase31ud_net.lib;wxbase31ud.lib;wxscintillad.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;comctl32.lib;rpcrt4.lib;glew32s.lib;jsond.lib;freetype250_D.lib;luad.lib;libpngd.lib;lzmad.lib;cjsond.lib;pthreadVC2.lib;assimpd.lib;wsock32.lib;OpenAL32.lib;libmpg123d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\easyui\x86\Debug\easyui.exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\..\editor-external\wx\lib;..\..\..\..\editor-external\gl\lib;..\..\..\..\editor-external\json\lib;..\..\..\..\editor-external\freetype\lib;..\..\..\..\editor-external\libpng\lib;..\..\..\..\editor-external\lua\lib;..\..\..\..\editor-external\intel;..\..\..\..\editor-external\lzma\lib;..\..\..\..\editor-external\cjson\lib;..\..\..\..\editor-external\pthread\lib;..\..\..\..\editor-external\assimp\lib;..\..\..\..\editor-external\boost\lib;..\..\..\..\editor-external\openal32\lib;..\..\..\..\editor-external\mpg123\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>LIBC.LIB;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>..\easyui\x86\Debug\easyui.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\src\easyui;..\..\..\..\sprite2\include;..\..\..\..\polymesh\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\easyeditor\include;..\..\..\..\easy3d\src\easy3d;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..\easyanim2\src;..\..\..\..\easyscale9\src;..\..\..\..\easymesh\src;..\..\..\..\easymask\src;..\..\..\..\easytexture\src;..\..\..\..\easyshape\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easybuilder\src;..\..\..\..\easyicon\src;..\..\..\..\easytext\src;..\..\..\..\easytrail\src;..\..\..\..\particle\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\easyui\x86\Release</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\easyui\x86\Release\easyui.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>wxmsw31u_gl.lib;wxmsw31u_propgrid.lib;wxmsw31u_adv.lib;wxmsw31u_stc.lib;wxmsw31u_core.lib;wxbase31u_net.lib;wxbase31u.lib;wxscintilla.lib;wxtiff.lib;wxjpeg.lib;wxpng.lib;wxzlib.lib;comctl32.lib;rpcrt4.lib;glew32s.lib;json.lib;freetype250.lib;lua.lib;libpng.lib;lzma.lib;cjson.lib;pthreadVC2.lib;assimp.lib;wsock32.lib;OpenAL32.lib;libmpg123.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\easyui\x86\Release\easyui.exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\..\editor-external\wx\lib;..\..\..\..\editor-external\gl\lib;..\..\..\..\editor-external\json\lib;..\..\..\..\editor-external\freetype\lib;..\..\..\..\editor-external\libpng\lib;..\..\..\..\editor-external\lua\lib;..\..\..\..\editor-external\intel;..\..\..\..\editor-external\lzma\lib;..\..\..\..\editor-external\cjson\lib;..\..\..\..\editor-external\pthread\lib;..\..\..\..\editor-external\assimp\lib;..\..\..\..\editor-external\boost\lib;..\..\..\..\editor-external\openal32\lib;..\..\..\..\editor-external\mpg123\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>LIBC.LIB;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>..\easyui\x86\Release\easyui.pdb</ProgramDatabaseFile>
+      <StripPrivateSymbols />
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\easyui\EditClipboxOP.cpp" />
+    <ClCompile Include="..\..\..\src\easyui\Frame.cpp" />
+    <ClCompile Include="..\..\..\src\easyui\list\ArrangeSpriteImpl.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)list\</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)list\</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\list\EditOP.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)list\</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)list\</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\list\StageCanvas.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)list\</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)list\</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\list\StagePanel.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)list\</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)list\</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\list\ToolbarPanel.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)list\</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)list\</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\list\TranslateSpriteState.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)list\</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)list\</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\list\UIList.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)list\</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)list\</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\main.cpp" />
+    <ClCompile Include="..\..\..\src\easyui\SymbolCfg.cpp" />
+    <ClCompile Include="..\..\..\src\easyui\Task.cpp" />
+    <ClCompile Include="..\..\..\src\easyui\TidCfg.cpp" />
+    <ClCompile Include="..\..\..\src\easyui\TopLibraryPanel.cpp" />
+    <ClCompile Include="..\..\..\src\easyui\TopPannels.cpp" />
+    <ClCompile Include="..\..\..\src\easyui\TopStagePanel.cpp" />
+    <ClCompile Include="..\..\..\src\easyui\TopToolbarPanel.cpp" />
+    <ClCompile Include="..\..\..\src\easyui\widget_id.cpp" />
+    <ClCompile Include="..\..\..\src\easyui\window\ArrangeSpriteImpl.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)window\</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)window\</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\window\Code.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)window\</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)window\</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\window\LibraryPage.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)window\</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)window\</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\window\MoveSpriteCenterState.cpp" />
+    <ClCompile Include="..\..\..\src\easyui\window\PreviewCanvas.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)window\</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)window\</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\window\PreviewDialog.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)window\</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)window\</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\window\SpriteDropTarget.cpp" />
+    <ClCompile Include="..\..\..\src\easyui\window\StageCanvas.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)window\</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)window\</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\window\StagePanel.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)window\</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)window\</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\window\SymbolsCfg.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)window\</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)window\</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\window\ToolbarPanel.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)window\</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)window\</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\window\TranslateSpriteState.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)window\</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)window\</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\wrapper\EditOP.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)wrapper\</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)wrapper\</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\wrapper\StageCanvas.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)wrapper\</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)wrapper\</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\wrapper\StagePanel.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)wrapper\</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)wrapper\</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyui\wrapper\ToolbarPanel.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\easyui\EditClipboxOP.h" />
+    <ClInclude Include="..\..\..\src\easyui\Frame.h" />
+    <ClInclude Include="..\..\..\src\easyui\list\ArrangeSpriteImpl.h" />
+    <ClInclude Include="..\..\..\src\easyui\list\EditOP.h" />
+    <ClInclude Include="..\..\..\src\easyui\list\StageCanvas.h" />
+    <ClInclude Include="..\..\..\src\easyui\list\StagePanel.h" />
+    <ClInclude Include="..\..\..\src\easyui\list\ToolbarPanel.h" />
+    <ClInclude Include="..\..\..\src\easyui\list\TranslateSpriteState.h" />
+    <ClInclude Include="..\..\..\src\easyui\list\UIList.h" />
+    <ClInclude Include="..\..\..\src\easyui\main.h" />
+    <ClInclude Include="..\..\..\src\easyui\SymbolCfg.h" />
+    <ClInclude Include="..\..\..\src\easyui\Task.h" />
+    <ClInclude Include="..\..\..\src\easyui\TidCfg.h" />
+    <ClInclude Include="..\..\..\src\easyui\TopLibraryPanel.h" />
+    <ClInclude Include="..\..\..\src\easyui\TopPannels.h" />
+    <ClInclude Include="..\..\..\src\easyui\TopStagePanel.h" />
+    <ClInclude Include="..\..\..\src\easyui\TopToolbarPanel.h" />
+    <ClInclude Include="..\..\..\src\easyui\UIStagePage.h" />
+    <ClInclude Include="..\..\..\src\easyui\widget_id.h" />
+    <ClInclude Include="..\..\..\src\easyui\window\ArrangeSpriteImpl.h" />
+    <ClInclude Include="..\..\..\src\easyui\window\Code.h" />
+    <ClInclude Include="..\..\..\src\easyui\window\LibraryPage.h" />
+    <ClInclude Include="..\..\..\src\easyui\window\MoveSpriteCenterState.h" />
+    <ClInclude Include="..\..\..\src\easyui\window\PreviewCanvas.h" />
+    <ClInclude Include="..\..\..\src\easyui\window\PreviewDialog.h" />
+    <ClInclude Include="..\..\..\src\easyui\window\SpriteDropTarget.h" />
+    <ClInclude Include="..\..\..\src\easyui\window\StageCanvas.h" />
+    <ClInclude Include="..\..\..\src\easyui\window\StagePanel.h" />
+    <ClInclude Include="..\..\..\src\easyui\window\SymbolsCfg.h" />
+    <ClInclude Include="..\..\..\src\easyui\window\ToolbarPanel.h" />
+    <ClInclude Include="..\..\..\src\easyui\window\TranslateSpriteState.h" />
+    <ClInclude Include="..\..\..\src\easyui\wrapper\EditOP.h" />
+    <ClInclude Include="..\..\..\src\easyui\wrapper\StageCanvas.h" />
+    <ClInclude Include="..\..\..\src\easyui\wrapper\StagePanel.h" />
+    <ClInclude Include="..\..\..\src\easyui\wrapper\ToolbarPanel.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\..\..\editor-external\wx\include\wx\msw\wx.rc">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\..\editor-external\wx\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\..\editor-external\wx\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\coceditor\platform\msvc2008\projects\libcoco.vcxproj">
+      <Project>{1c3b5344-2217-44f5-b5f0-a551b7b5ab38}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyanim2\platform\msvc2008\projects\libanim2.vcxproj">
+      <Project>{dd070d7b-9149-4dbc-9660-5223f6d34b61}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyanim\platform\msvc2008\projects\libanim.vcxproj">
+      <Project>{e1cfc0b9-f8a8-4f14-930a-e88a436fc038}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyaudio\platform\msvc2008\projects\libaudio.vcxproj">
+      <Project>{63e1ca82-f674-4e86-a0dc-eeef3edd6324}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easybuilder\platform\msvc2008\projects\libbuilder.vcxproj">
+      <Project>{11082ade-13ca-49c7-9f6d-c82f69333ad7}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easycomplex\platform\msvc2008\projects\libcomplex.vcxproj">
+      <Project>{5f4cba3e-b2b5-46d5-a1d2-77ab16dfd909}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc2008\projects\libdata.vcxproj">
+      <Project>{77e15c91-f70b-4141-a0fc-4e82d1c43bd2}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc2008\projects\libedit.vcxproj">
+      <Project>{8d18eb4e-fddf-484a-9784-3ac9dcbcc2a1}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc2008\projects\libgui.vcxproj">
+      <Project>{fa0a46ec-e1ab-4830-8898-c953eebdf7a5}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc2008\projects\libmath.vcxproj">
+      <Project>{8cd2d282-45ee-46b4-a8d8-291e8e445be7}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc2008\projects\libmsg.vcxproj">
+      <Project>{d4baa61e-9918-4f72-b772-88afd4ee76bc}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc2008\projects\librender.vcxproj">
+      <Project>{6216b0f5-5b88-4ba8-88f3-02585c4158b4}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc2008\projects\libtool.vcxproj">
+      <Project>{e1843ab3-962e-4f9c-b471-74ec36dc94b0}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc2008\projects\libview.vcxproj">
+      <Project>{26a3bb4b-6ac6-4280-92e3-666056aec52a}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyicon\platform\msvc2008\projects\libicon.vcxproj">
+      <Project>{bf76851e-b6b9-4cc0-8c4b-d7fb383b2642}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyimage\platform\msvc2008\projects\libimage.vcxproj">
+      <Project>{d41c0b3e-f0a0-4a1f-a568-0100c839406c}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easymask\platform\msvc2008\projects\libmask.vcxproj">
+      <Project>{edef7503-bbad-494a-a9e9-2a0cb5747e85}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easymesh\platform\msvc2008\projects\libmesh.vcxproj">
+      <Project>{9dc03bcc-3c8c-4bb8-8811-336f295df7e2}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyparticle2d\platform\msvc2008\projects\libparticle2d.vcxproj">
+      <Project>{54c54be5-7708-41f3-9375-8ba4b9aa983c}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyparticle3d\platform\msvc2008\projects\libparticle3d.vcxproj">
+      <Project>{b2e0de06-ace8-4c69-8966-c81ed5686fca}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyrespacker\platform\msvc2008\projects\librespacker.vcxproj">
+      <Project>{e5c07f5d-f889-4fc2-8da8-194023914bbe}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyscale9\platform\msvc2008\projects\libscale9.vcxproj">
+      <Project>{e5b2631f-c25d-4253-a9cb-a57ef357b004}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyshadow\platform\msvc2008\projects\libshadow.vcxproj">
+      <Project>{c839a952-9f01-48d5-9649-bcae9aa758f8}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyshape\platform\msvc2008\projects\libshape.vcxproj">
+      <Project>{c1a2e85c-cf62-46a9-b46c-dfa12ec725e7}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyskeleton\platform\msvc2008\projects\libskeleton.vcxproj">
+      <Project>{0a0f323f-d04e-44a6-9784-c1947ac38da8}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyterrain2d\platform\msvc2008\projects\libterrain2d.vcxproj">
+      <Project>{716758a5-f6cf-4294-88b2-29c9950304af}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easytexture\platform\msvc2008\projects\libtexture.vcxproj">
+      <Project>{4937e011-9c27-4e8e-87f8-1924f41e0649}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easytext\platform\msvc2008\projects\libtext.vcxproj">
+      <Project>{fc9b43d6-8d2b-4d57-a976-9379f87a366c}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easytrail\platform\msvc2008\projects\libtrail.vcxproj">
+      <Project>{29109610-3d3c-4040-a8e6-d9eec78470e0}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\fs\platform\msvc2008\projects\fs.vcxproj">
+      <Project>{09c39b9e-27f5-4b39-9829-2815fd1c5469}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\gum\platform\msvc2008\projects\gum.vcxproj">
+      <Project>{70c5478d-6d53-4f75-99d4-f06373175c83}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\logger\platform\msvc2008\projects\logger.vcxproj">
+      <Project>{4031b66e-39a3-401e-918a-e1424a4af944}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\particle\platform\msvc2008\projects\particle.vcxproj">
+      <Project>{ee2229a3-ad5f-46e7-afab-729f8aa18036}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\pimg\platform\msvc2008\projects\pimg.vcxproj">
+      <Project>{5ae91e72-1c23-4913-bea9-1fe795c570f5}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\polymesh\platform\msvc2008\projects\polymesh.vcxproj">
+      <Project>{748f2e41-4c8f-4c0f-a90a-26eca6741a34}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\uniaudio\platform\msvc2008\projects\uniaudio.vcxproj">
+      <Project>{fdb8a0eb-d438-43b4-b65f-ff1b80a9d45b}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="libui.vcxproj">
+      <Project>{ce164ea1-e9bd-4beb-88f0-41a2ba6dab2f}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

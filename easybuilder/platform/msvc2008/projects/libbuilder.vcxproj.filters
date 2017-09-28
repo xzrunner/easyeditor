@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="codes">
+      <UniqueIdentifier>{f1993fee-5c25-4b20-b72c-11f07c58b3a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="codes\style">
+      <UniqueIdentifier>{76efba12-cbb0-491b-908c-89817bc023f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="codes\love2d">
+      <UniqueIdentifier>{119b242f-7862-4128-8b01-6adf909ea2a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="codes\cocos2d-x">
+      <UniqueIdentifier>{2cf32b19-99d5-4092-bdf7-a28d6e1f9ae5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="codes\easy2d">
+      <UniqueIdentifier>{fbe93088-767a-4d33-9751-0a7859c4ccf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="codes\libgdx">
+      <UniqueIdentifier>{30ccfd26-b85e-4ee9-9a9e-a67d847893b2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libbuilder\codes\CodeDialog.cpp">
+      <Filter>codes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libbuilder\codes\CodeGenerator.cpp">
+      <Filter>codes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libbuilder\codes\CodePage.cpp">
+      <Filter>codes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libbuilder\codes\prefs.cpp">
+      <Filter>codes</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libbuilder\codes\CodeDialog.h">
+      <Filter>codes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libbuilder\codes\CodeGenerator.h">
+      <Filter>codes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libbuilder\codes\CodePage.h">
+      <Filter>codes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libbuilder\codes\defsext.h">
+      <Filter>codes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libbuilder\codes\prefs.h">
+      <Filter>codes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libbuilder\codes\CodeStyle.h">
+      <Filter>codes\style</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libbuilder\codes\StyleCPlusPlus.h">
+      <Filter>codes\style</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libbuilder\codes\StyleJava.h">
+      <Filter>codes\style</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libbuilder\codes\StyleLua.h">
+      <Filter>codes\style</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libbuilder\codes\love2d\Page.h">
+      <Filter>codes\love2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libbuilder\codes\cocos2d-x\Page.h">
+      <Filter>codes\cocos2d-x</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libbuilder\codes\easy2d\Page.h">
+      <Filter>codes\easy2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libbuilder\codes\libgdx\Page.h">
+      <Filter>codes\libgdx</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,858 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="builder">
+      <UniqueIdentifier>{17cdb336-8b7c-4c0b-84e2-3c79a4b716db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="builder\01.picture">
+      <UniqueIdentifier>{e966857a-ef36-46cb-9664-6d01083b17a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="builder\02.label">
+      <UniqueIdentifier>{34458314-37f3-4138-8e00-76879994dda5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="builder\03.animation">
+      <UniqueIdentifier>{900ac3fa-e1e8-404b-a004-b8751a72f0d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="builder\05.particle3d">
+      <UniqueIdentifier>{6e824901-d9ab-411a-9ae7-0f857de63bfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="builder\06.particle2d">
+      <UniqueIdentifier>{75731c4d-9702-4460-b403-e4b055a89226}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="builder\09.clipbox">
+      <UniqueIdentifier>{2cdc01b6-83db-4a13-8ae6-fca6a3887db9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="builder\04.anchor">
+      <UniqueIdentifier>{9773883a-df83-4eec-99a0-51c5b7255420}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="builder\10.shape">
+      <UniqueIdentifier>{c86fb72d-a530-47ed-8687-26b9bdd6a77c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="builder\07.p3d_spr">
+      <UniqueIdentifier>{1dda2981-b70a-4f8a-a014-d16fc6b18443}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="builder\08.p2d_spr">
+      <UniqueIdentifier>{fb1d863a-d9b4-4b1a-b8fa-6d3df2e0222b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="builder\11.mesh">
+      <UniqueIdentifier>{0b962f84-c565-40e6-bf76-4878eaacafa8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="builder\12.mesh_spr">
+      <UniqueIdentifier>{ca1f6f85-29a4-4d1c-8d8d-245838407f5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="builder\13.mask">
+      <UniqueIdentifier>{d7684a85-3a26-46d7-a174-1e0aae277063}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="builder\14.trail">
+      <UniqueIdentifier>{f80a7892-a725-4779-b497-d3d71e06d7f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes">
+      <UniqueIdentifier>{d773c75d-0863-4d1a-bf05-2b653c144ca5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\01.picture">
+      <UniqueIdentifier>{be550853-5573-4a61-bc44-0c20a55364bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\01.picture\lua">
+      <UniqueIdentifier>{46a1fa2f-555d-4330-828f-96b56bf03d3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\01.picture\bin">
+      <UniqueIdentifier>{1e766972-d06d-4922-9c13-c06d64ca7aa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\02.label">
+      <UniqueIdentifier>{4a5646f8-6785-4c27-b558-c430eaab64c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\02.label\lua">
+      <UniqueIdentifier>{a58ffa1f-d9db-48d4-9b01-7c90bb9c10bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\02.label\bin">
+      <UniqueIdentifier>{5c9782f5-f212-44ae-bb66-4a1ac26df782}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\03.anim">
+      <UniqueIdentifier>{8a98b542-c392-408b-a50f-beb58c698431}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\03.anim\lua">
+      <UniqueIdentifier>{1abc5183-8f61-4629-aaf6-8b9923482a81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\03.anim\bin">
+      <UniqueIdentifier>{c35fbe80-1b66-4db0-b153-2b4b315e212d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\05.particle3d">
+      <UniqueIdentifier>{e910e0a9-cb86-46fe-950e-06173dc81288}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\05.particle3d\lua">
+      <UniqueIdentifier>{b0231d46-4c6d-4d02-b900-4ce709000014}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\05.particle3d\bin">
+      <UniqueIdentifier>{ae489f31-1531-4a89-94bb-1cc522148815}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\06.particle2d">
+      <UniqueIdentifier>{cc1144a9-6532-462a-808f-0dce7e94cb91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\06.particle2d\bin">
+      <UniqueIdentifier>{a69e4aea-2a60-4d7d-a277-a03297ae686c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\06.particle2d\lua">
+      <UniqueIdentifier>{b9751c98-a40b-4b60-bb26-7667e6cfe974}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\04.anchor">
+      <UniqueIdentifier>{2cdcc42a-19b6-4c43-8f0a-b9504b17068e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\09.clipbox">
+      <UniqueIdentifier>{7df6aa41-5ac2-43af-95c2-d825fefa3f9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\09.clipbox\bin">
+      <UniqueIdentifier>{ab70adcd-7bb4-495b-bc99-eded0eca64c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\09.clipbox\lua">
+      <UniqueIdentifier>{e5db01af-1851-433c-b35a-7b8f2c1f0403}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\10.shape">
+      <UniqueIdentifier>{b79a615f-bd07-4042-8a29-2650ac2fd1e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\10.shape\bin">
+      <UniqueIdentifier>{7433c5d2-90a1-4b6d-ac8b-a4c7ec5bae45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\10.shape\lua">
+      <UniqueIdentifier>{7ec939ab-1441-4959-98c9-0dbe0fa3a55d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\07.p3d_spr">
+      <UniqueIdentifier>{a95b175c-27a7-4ac1-8c65-8bffda60b78e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\07.p3d_spr\bin">
+      <UniqueIdentifier>{055d7b72-34c7-4833-9118-faaf2a2d3f53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\07.p3d_spr\lua">
+      <UniqueIdentifier>{0ebb45da-d80f-4f8a-a89b-8f4d993316f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\08.p2d_spr">
+      <UniqueIdentifier>{55fae9e0-de99-47f5-9c76-bbd2a4614b74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\base">
+      <UniqueIdentifier>{49d05202-54bb-4bad-9437-e8c10665571c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\base\bin">
+      <UniqueIdentifier>{98dda584-774d-4a61-9d88-12ed2f054c79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\base\lua">
+      <UniqueIdentifier>{c9d72c87-2aa9-43b9-9451-e2fa122fa10c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\11.mesh">
+      <UniqueIdentifier>{205f84a1-2ef8-4467-8676-d796495aa959}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\11.mesh\bin">
+      <UniqueIdentifier>{a7bb56aa-e268-46fc-9567-f0f5662486e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\11.mesh\lua">
+      <UniqueIdentifier>{50a3708d-6f32-4da7-8084-320060697a02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\12.mesh_spr">
+      <UniqueIdentifier>{9e6a3951-9289-4fe0-a0ac-b598578de5b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\12.mesh_spr\bin">
+      <UniqueIdentifier>{5faa88ab-bab2-4b94-b595-bd57ede6ed5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\12.mesh_spr\lua">
+      <UniqueIdentifier>{da0a25b0-5f6e-4810-ad77-1cfbcc19efe5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\13.mask">
+      <UniqueIdentifier>{1ce34d70-1017-49a2-8505-bf47540f1bb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\13.mask\bin">
+      <UniqueIdentifier>{810c5566-e04b-401a-af16-87720f16d8c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\13.mask\lua">
+      <UniqueIdentifier>{aa74b6c9-7f7c-4736-bcfa-995dca0cc174}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\14.trail">
+      <UniqueIdentifier>{37fa5c7f-dac0-4136-9712-fa18bd59a4e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\14.trail\bin">
+      <UniqueIdentifier>{220832da-c9d5-473d-a239-a5875a6ba109}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\14.trail\lua">
+      <UniqueIdentifier>{a675ce89-51d7-46ba-a7ba-44a50dbdbd49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="pack">
+      <UniqueIdentifier>{7fb090b9-f238-48e1-8d9d-7a0cbb405b6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="pack\image">
+      <UniqueIdentifier>{ccdbb4c6-adf6-4b5c-bff9-b22581f7caa4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="pack\ui">
+      <UniqueIdentifier>{a89ee238-fa43-4ca2-999f-fe3e0bf0b66f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="pack\ui\task">
+      <UniqueIdentifier>{1f56ef02-a866-4dba-9437-26a1eab98d16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="pack\pkg">
+      <UniqueIdentifier>{fc029c7a-d494-4f4d-987f-10979e5de2e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unpack">
+      <UniqueIdentifier>{21a4c2f3-5fe1-4d35-b3e0-cfd88ff5a2c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools">
+      <UniqueIdentifier>{fed2821a-34e5-42cc-a98d-8ce09e22a87e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\librespacker\ExportNameSet.cpp">
+      <Filter>builder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\IconBuilder.cpp">
+      <Filter>builder\01.picture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\ImageBuilder.cpp">
+      <Filter>builder\01.picture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\Scale9Builder.cpp">
+      <Filter>builder\01.picture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\TextureBuilder.cpp">
+      <Filter>builder\01.picture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\LabelBuilder.cpp">
+      <Filter>builder\02.label</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\TextBuilder.cpp">
+      <Filter>builder\02.label</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\AnimBuilder.cpp">
+      <Filter>builder\03.animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\ComplexBuilder.cpp">
+      <Filter>builder\03.animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\Terrain2DBuilder.cpp">
+      <Filter>builder\03.animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\Particle3DBuilder.cpp">
+      <Filter>builder\05.particle3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\Particle2DBuilder.cpp">
+      <Filter>builder\06.particle2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\ClipboxBuilder.cpp">
+      <Filter>builder\09.clipbox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\AnchorBuilder.cpp">
+      <Filter>builder\04.anchor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\ShapeBuilder.cpp">
+      <Filter>builder\10.shape</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\P3dSprBuilder.cpp">
+      <Filter>builder\07.p3d_spr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\MeshBuilder.cpp">
+      <Filter>builder\11.mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\MeshSprBuilder.cpp">
+      <Filter>builder\12.mesh_spr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\MaskBuilder.cpp">
+      <Filter>builder\13.mask</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\TrailBuilder.cpp">
+      <Filter>builder\14.trail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\PackPicture.cpp">
+      <Filter>nodes\01.picture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\PictureFromLua.cpp">
+      <Filter>nodes\01.picture\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\PictureToLuaString.cpp">
+      <Filter>nodes\01.picture\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\PictureFromBin.cpp">
+      <Filter>nodes\01.picture\bin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\PictureToBin.cpp">
+      <Filter>nodes\01.picture\bin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\PackLabel.cpp">
+      <Filter>nodes\02.label</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\LabelFromLua.cpp">
+      <Filter>nodes\02.label\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\LabelToLuaString.cpp">
+      <Filter>nodes\02.label\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\LabelFromBin.cpp">
+      <Filter>nodes\02.label\bin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\LabelToBin.cpp">
+      <Filter>nodes\02.label\bin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\PackAnimation.cpp">
+      <Filter>nodes\03.anim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\AnimFromLua.cpp">
+      <Filter>nodes\03.anim\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\AnimToLuaString.cpp">
+      <Filter>nodes\03.anim\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\AnimFromBin.cpp">
+      <Filter>nodes\03.anim\bin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\AnimToBin.cpp">
+      <Filter>nodes\03.anim\bin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\PackParticle3D.cpp">
+      <Filter>nodes\05.particle3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\Particle3DFromLua.cpp">
+      <Filter>nodes\05.particle3d\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\Particle3DToLuaString.cpp">
+      <Filter>nodes\05.particle3d\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\Particle3DFromBin.cpp">
+      <Filter>nodes\05.particle3d\bin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\Particle3DToBin.cpp">
+      <Filter>nodes\05.particle3d\bin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\PackParticle2D.cpp">
+      <Filter>nodes\06.particle2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\Particle2DFromBin.cpp">
+      <Filter>nodes\06.particle2d\bin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\Particle2DToBin.cpp">
+      <Filter>nodes\06.particle2d\bin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\Particle2DFromLua.cpp">
+      <Filter>nodes\06.particle2d\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\Particle2DToLuaString.cpp">
+      <Filter>nodes\06.particle2d\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\PackAnchor.cpp">
+      <Filter>nodes\04.anchor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\PackClipbox.cpp">
+      <Filter>nodes\09.clipbox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\ClipboxFromBin.cpp">
+      <Filter>nodes\09.clipbox\bin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\ClipboxToBin.cpp">
+      <Filter>nodes\09.clipbox\bin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\ClipboxFromLua.cpp">
+      <Filter>nodes\09.clipbox\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\ClipboxToLuaString.cpp">
+      <Filter>nodes\09.clipbox\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\PackShape.cpp">
+      <Filter>nodes\10.shape</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\ShapeFromBin.cpp">
+      <Filter>nodes\10.shape\bin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\ShapeToBin.cpp">
+      <Filter>nodes\10.shape\bin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\ShapeFromLua.cpp">
+      <Filter>nodes\10.shape\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\ShapeToLuaString.cpp">
+      <Filter>nodes\10.shape\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\PackP3dSpr.cpp">
+      <Filter>nodes\07.p3d_spr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\P3dSprFromBin.cpp">
+      <Filter>nodes\07.p3d_spr\bin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\P3dSprToBin.cpp">
+      <Filter>nodes\07.p3d_spr\bin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\P3dSprFromLua.cpp">
+      <Filter>nodes\07.p3d_spr\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\P3dSprToLuaString.cpp">
+      <Filter>nodes\07.p3d_spr\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\IPackNode.cpp">
+      <Filter>nodes\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\NodeFromBin.cpp">
+      <Filter>nodes\base\bin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\NodeToBin.cpp">
+      <Filter>nodes\base\bin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\NodeFromLua.cpp">
+      <Filter>nodes\base\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\NodeToLuaString.cpp">
+      <Filter>nodes\base\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\PackMesh.cpp">
+      <Filter>nodes\11.mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\MeshFromBin.cpp">
+      <Filter>nodes\11.mesh\bin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\MeshToBin.cpp">
+      <Filter>nodes\11.mesh\bin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\MeshFromLua.cpp">
+      <Filter>nodes\11.mesh\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\MeshToLuaString.cpp">
+      <Filter>nodes\11.mesh\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\PackMeshSpr.cpp">
+      <Filter>nodes\12.mesh_spr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\MeshSprFromBin.cpp">
+      <Filter>nodes\12.mesh_spr\bin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\MeshSprToBin.cpp">
+      <Filter>nodes\12.mesh_spr\bin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\MeshSprFromLua.cpp">
+      <Filter>nodes\12.mesh_spr\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\MeshSprToLuaString.cpp">
+      <Filter>nodes\12.mesh_spr\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\PackMask.cpp">
+      <Filter>nodes\13.mask</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\MaskFromBin.cpp">
+      <Filter>nodes\13.mask\bin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\MaskToBin.cpp">
+      <Filter>nodes\13.mask\bin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\MaskFromLua.cpp">
+      <Filter>nodes\13.mask\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\MaskToLuaString.cpp">
+      <Filter>nodes\13.mask\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\PackTrail.cpp">
+      <Filter>nodes\14.trail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\TrailFromBin.cpp">
+      <Filter>nodes\14.trail\bin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\TrailToBin.cpp">
+      <Filter>nodes\14.trail\bin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\TrailFromLua.cpp">
+      <Filter>nodes\14.trail\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\TrailToLuaString.cpp">
+      <Filter>nodes\14.trail\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\PackNodeFactory.cpp">
+      <Filter>pack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\PackToBin.cpp">
+      <Filter>pack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\PackToLuaString.cpp">
+      <Filter>pack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\PackETC1.cpp">
+      <Filter>pack\image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\PackETC2.cpp">
+      <Filter>pack\image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\PackPNG.cpp">
+      <Filter>pack\image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\PackPVR.cpp">
+      <Filter>pack\image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\PackTag.cpp">
+      <Filter>pack\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\PackUI.cpp">
+      <Filter>pack\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\PackUIListTask.cpp">
+      <Filter>pack\ui\task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\PackUIWindowTask.cpp">
+      <Filter>pack\ui\task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\PackUIWrapperTask.cpp">
+      <Filter>pack\ui\task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\PackPkgMgr.cpp">
+      <Filter>pack\pkg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\UnpackFromBin.cpp">
+      <Filter>unpack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\UnpackFromLua.cpp">
+      <Filter>unpack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\UnpackNodeFactory.cpp">
+      <Filter>unpack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\LuaDataHelper.cpp">
+      <Filter>tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\Lzma.cpp">
+      <Filter>tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\Utility.cpp">
+      <Filter>tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\librespacker\ResPacker.cpp" />
+    <ClCompile Include="..\..\..\src\librespacker\ResUnpacker.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\librespacker\ExportNameSet.h">
+      <Filter>builder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\INodeBuilder.h">
+      <Filter>builder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\IconBuilder.h">
+      <Filter>builder\01.picture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\ImageBuilder.h">
+      <Filter>builder\01.picture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\Scale9Builder.h">
+      <Filter>builder\01.picture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\TextureBuilder.h">
+      <Filter>builder\01.picture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\LabelBuilder.h">
+      <Filter>builder\02.label</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\TextBuilder.h">
+      <Filter>builder\02.label</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\AnimBuilder.h">
+      <Filter>builder\03.animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\ComplexBuilder.h">
+      <Filter>builder\03.animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\Terrain2DBuilder.h">
+      <Filter>builder\03.animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\Particle3DBuilder.h">
+      <Filter>builder\05.particle3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\Particle2DBuilder.h">
+      <Filter>builder\06.particle2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\ClipboxBuilder.h">
+      <Filter>builder\09.clipbox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\AnchorBuilder.h">
+      <Filter>builder\04.anchor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\ShapeBuilder.h">
+      <Filter>builder\10.shape</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\P3dSprBuilder.h">
+      <Filter>builder\07.p3d_spr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\MeshBuilder.h">
+      <Filter>builder\11.mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\MeshSprBuilder.h">
+      <Filter>builder\12.mesh_spr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\MaskBuilder.h">
+      <Filter>builder\13.mask</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\TrailBuilder.h">
+      <Filter>builder\14.trail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PackPicture.h">
+      <Filter>nodes\01.picture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PictureFromLua.h">
+      <Filter>nodes\01.picture\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PictureToLuaString.h">
+      <Filter>nodes\01.picture\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PictureFromBin.h">
+      <Filter>nodes\01.picture\bin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PictureToBin.h">
+      <Filter>nodes\01.picture\bin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PackLabel.h">
+      <Filter>nodes\02.label</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\LabelFromLua.h">
+      <Filter>nodes\02.label\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\LabelToLuaString.h">
+      <Filter>nodes\02.label\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\LabelFromBin.h">
+      <Filter>nodes\02.label\bin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\LabelToBin.h">
+      <Filter>nodes\02.label\bin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PackAnimation.h">
+      <Filter>nodes\03.anim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\AnimFromLua.h">
+      <Filter>nodes\03.anim\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\AnimToLuaString.h">
+      <Filter>nodes\03.anim\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\AnimFromBin.h">
+      <Filter>nodes\03.anim\bin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\AnimToBin.h">
+      <Filter>nodes\03.anim\bin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PackParticle3D.h">
+      <Filter>nodes\05.particle3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\Particle3DFromLua.h">
+      <Filter>nodes\05.particle3d\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\Particle3DToLuaString.h">
+      <Filter>nodes\05.particle3d\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\Particle3DFromBin.h">
+      <Filter>nodes\05.particle3d\bin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\Particle3DToBin.h">
+      <Filter>nodes\05.particle3d\bin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PackParticle2D.h">
+      <Filter>nodes\06.particle2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\Particle2DFromBin.h">
+      <Filter>nodes\06.particle2d\bin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\Particle2DToBin.h">
+      <Filter>nodes\06.particle2d\bin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\Particle2DFromLua.h">
+      <Filter>nodes\06.particle2d\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\Particle2DToLuaString.h">
+      <Filter>nodes\06.particle2d\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PackAnchor.h">
+      <Filter>nodes\04.anchor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PackClipbox.h">
+      <Filter>nodes\09.clipbox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\ClipboxFromBin.h">
+      <Filter>nodes\09.clipbox\bin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\ClipboxToBin.h">
+      <Filter>nodes\09.clipbox\bin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\ClipboxFromLua.h">
+      <Filter>nodes\09.clipbox\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\ClipboxToLuaString.h">
+      <Filter>nodes\09.clipbox\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PackShape.h">
+      <Filter>nodes\10.shape</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\ShapeFromBin.h">
+      <Filter>nodes\10.shape\bin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\ShapeToBin.h">
+      <Filter>nodes\10.shape\bin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\ShapeFromLua.h">
+      <Filter>nodes\10.shape\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\ShapeToLuaString.h">
+      <Filter>nodes\10.shape\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PackP3dSpr.h">
+      <Filter>nodes\07.p3d_spr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\P3dSprFromBin.h">
+      <Filter>nodes\07.p3d_spr\bin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\P3dSprToBin.h">
+      <Filter>nodes\07.p3d_spr\bin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\P3dSprFromLua.h">
+      <Filter>nodes\07.p3d_spr\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\P3dSprToLuaString.h">
+      <Filter>nodes\07.p3d_spr\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\IPackNode.h">
+      <Filter>nodes\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\NodeFromBin.h">
+      <Filter>nodes\base\bin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\NodeToBin.h">
+      <Filter>nodes\base\bin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\NodeFromLua.h">
+      <Filter>nodes\base\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\NodeToLuaString.h">
+      <Filter>nodes\base\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PackMesh.h">
+      <Filter>nodes\11.mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\MeshFromBin.h">
+      <Filter>nodes\11.mesh\bin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\MeshToBin.h">
+      <Filter>nodes\11.mesh\bin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\MeshFromLua.h">
+      <Filter>nodes\11.mesh\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\MeshToLuaString.h">
+      <Filter>nodes\11.mesh\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PackMeshSpr.h">
+      <Filter>nodes\12.mesh_spr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\MeshSprFromBin.h">
+      <Filter>nodes\12.mesh_spr\bin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\MeshSprToBin.h">
+      <Filter>nodes\12.mesh_spr\bin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\MeshSprFromLua.h">
+      <Filter>nodes\12.mesh_spr\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\MeshSprToLuaString.h">
+      <Filter>nodes\12.mesh_spr\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PackMask.h">
+      <Filter>nodes\13.mask</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\MaskFromBin.h">
+      <Filter>nodes\13.mask\bin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\MaskToBin.h">
+      <Filter>nodes\13.mask\bin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\MaskFromLua.h">
+      <Filter>nodes\13.mask\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\MaskToLuaString.h">
+      <Filter>nodes\13.mask\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PackTrail.h">
+      <Filter>nodes\14.trail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\TrailFromBin.h">
+      <Filter>nodes\14.trail\bin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\TrailToBin.h">
+      <Filter>nodes\14.trail\bin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\TrailFromLua.h">
+      <Filter>nodes\14.trail\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\TrailToLuaString.h">
+      <Filter>nodes\14.trail\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PackNodeFactory.h">
+      <Filter>pack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PackToBin.h">
+      <Filter>pack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PackToLuaString.h">
+      <Filter>pack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PackETC1.h">
+      <Filter>pack\image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PackETC2.h">
+      <Filter>pack\image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PackImage.h">
+      <Filter>pack\image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PackPNG.h">
+      <Filter>pack\image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PackPVR.h">
+      <Filter>pack\image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\pack_ui_cfg.h">
+      <Filter>pack\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PackTag.h">
+      <Filter>pack\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PackUI.h">
+      <Filter>pack\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PackUITask.h">
+      <Filter>pack\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PackUIListTask.h">
+      <Filter>pack\ui\task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PackUIWindowTask.h">
+      <Filter>pack\ui\task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PackUIWrapperTask.h">
+      <Filter>pack\ui\task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\PackPkgMgr.h">
+      <Filter>pack\pkg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\UnpackFromBin.h">
+      <Filter>unpack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\UnpackFromLua.h">
+      <Filter>unpack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\UnpackNodeFactory.h">
+      <Filter>unpack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\LuaDataHelper.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\Lzma.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\pack_unpack.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\typedef.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\Utility.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\librespacker\ResPacker.h" />
+    <ClInclude Include="..\..\..\src\librespacker\ResUnpacker.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\src\librespacker\trans_ejoy2d_data.lua">
+      <Filter>unpack</Filter>
+    </None>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="frame">
+      <UniqueIdentifier>{7285782d-b3e8-452c-a88b-f38384d5228e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{99273b96-1bfd-4f25-ab23-a22710b03662}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit">
+      <UniqueIdentifier>{57106f60-e74f-47f7-b5d5-165d5314802f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\state">
+      <UniqueIdentifier>{24ade438-ffea-4082-a22e-e9791bc33539}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view">
+      <UniqueIdentifier>{bf774342-d8e9-4bce-b43a-33acb5443aa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\library">
+      <UniqueIdentifier>{63a4643c-a050-404d-b89b-199ad9989f93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\stage">
+      <UniqueIdentifier>{7e5f940e-c9dd-42cb-8f91-b815467dbd90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\toolbar">
+      <UniqueIdentifier>{eda738cb-4027-4701-b0e3-08d63772b98d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\easyskeleton\FileLoader.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyskeleton\FileStorer.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyskeleton\main.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyskeleton\Task.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyskeleton\Bone.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyskeleton\Joint.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyskeleton\ComposeSkeletonImpl.cpp">
+      <Filter>edit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyskeleton\ComposeSkeletonOP.cpp">
+      <Filter>edit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyskeleton\RotateSprState.cpp">
+      <Filter>edit\state</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyskeleton\ScaleSprState.cpp">
+      <Filter>edit\state</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyskeleton\TranslateSprState.cpp">
+      <Filter>edit\state</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyskeleton\LibraryPanel.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyskeleton\StageCanvas.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyskeleton\StagePanel.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyskeleton\ToolbarPanel.cpp">
+      <Filter>view\toolbar</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\easyskeleton\FileLoader.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyskeleton\FileStorer.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyskeleton\main.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyskeleton\Task.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyskeleton\Bone.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyskeleton\Joint.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyskeleton\ComposeSkeletonImpl.h">
+      <Filter>edit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyskeleton\ComposeSkeletonOP.h">
+      <Filter>edit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyskeleton\RotateSprState.h">
+      <Filter>edit\state</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyskeleton\ScaleSprState.h">
+      <Filter>edit\state</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyskeleton\TranslateSprState.h">
+      <Filter>edit\state</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyskeleton\LibraryPanel.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyskeleton\StageCanvas.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyskeleton\StagePanel.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyskeleton\ToolbarPanel.h">
+      <Filter>view\toolbar</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\..\..\editor-external\wx\include\wx\msw\wx.rc" />
+  </ItemGroup>
+</Project>

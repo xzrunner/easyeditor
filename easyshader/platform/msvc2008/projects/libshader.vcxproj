@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>5.libshader</ProjectName>
+    <ProjectGuid>{3156C188-65B6-4785-943C-03CDDE86B53A}</ProjectGuid>
+    <RootNamespace>libshader</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\libshader\x86\Debug\</OutDir>
+    <IntDir>..\libshader\x86\Debug\obj\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\libshader\x86\Release\</OutDir>
+    <IntDir>..\libshader\x86\Release\obj\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\easysketch\src;..\..\..\..\easy3d\src\easy3d;..\..\..\..\sm\src\sm;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\gl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\libshader\x86\Debug</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\libshader\x86\Debug\libshader.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\easysketch\src;..\..\..\..\easy3d\src\easy3d;..\..\..\..\sm\src\sm;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\gl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\libshader\x86\Release</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\libshader\x86\Release\libshader.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libshader\FileIO.cpp" />
+    <ClCompile Include="..\..\..\src\libshader\LibraryPanel.cpp" />
+    <ClCompile Include="..\..\..\src\libshader\SelectSpritesOP.cpp" />
+    <ClCompile Include="..\..\..\src\libshader\Shader.cpp" />
+    <ClCompile Include="..\..\..\src\libshader\Shader2D.cpp" />
+    <ClCompile Include="..\..\..\src\libshader\Shader3D.cpp" />
+    <ClCompile Include="..\..\..\src\libshader\SliderCtrl.cpp" />
+    <ClCompile Include="..\..\..\src\libshader\StageCanvas2D.cpp" />
+    <ClCompile Include="..\..\..\src\libshader\StageCanvas3D.cpp" />
+    <ClCompile Include="..\..\..\src\libshader\StagePanel2D.cpp" />
+    <ClCompile Include="..\..\..\src\libshader\StagePanel3D.cpp" />
+    <ClCompile Include="..\..\..\src\libshader\ToolbarPanel.cpp" />
+    <ClCompile Include="..\..\..\src\libshader\Uniform.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libshader\config.h" />
+    <ClInclude Include="..\..\..\src\libshader\FileIO.h" />
+    <ClInclude Include="..\..\..\src\libshader\LibraryPanel.h" />
+    <ClInclude Include="..\..\..\src\libshader\SelectSpritesOP.h" />
+    <ClInclude Include="..\..\..\src\libshader\Shader.h" />
+    <ClInclude Include="..\..\..\src\libshader\Shader2D.h" />
+    <ClInclude Include="..\..\..\src\libshader\Shader3D.h" />
+    <ClInclude Include="..\..\..\src\libshader\SliderCtrl.h" />
+    <ClInclude Include="..\..\..\src\libshader\SliderItem.h" />
+    <ClInclude Include="..\..\..\src\libshader\StageCanvas2D.h" />
+    <ClInclude Include="..\..\..\src\libshader\StageCanvas3D.h" />
+    <ClInclude Include="..\..\..\src\libshader\StagePanel2D.h" />
+    <ClInclude Include="..\..\..\src\libshader\StagePanel3D.h" />
+    <ClInclude Include="..\..\..\src\libshader\ToolbarPanel.h" />
+    <ClInclude Include="..\..\..\src\libshader\Uniform.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

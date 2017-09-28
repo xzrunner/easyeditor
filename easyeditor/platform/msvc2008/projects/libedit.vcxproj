@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>4.libedit</ProjectName>
+    <ProjectGuid>{8D18EB4E-FDDF-484A-9784-3AC9DCBCC2A1}</ProjectGuid>
+    <RootNamespace>libedit</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\libedit\x86\Debug\</OutDir>
+    <IntDir>..\libedit\x86\Debug\obj\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\libedit\x86\Release\</OutDir>
+    <IntDir>..\libedit\x86\Release\obj\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include\ee;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\box2d\include;..\..\..\..\editor-external\c99;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\libedit\x86\Debug</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\libedit\x86\Debug\libedit.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\include\ee;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\box2d\include;..\..\..\..\editor-external\c99;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\libedit\x86\Release</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\libedit\x86\Release\libedit.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\edit\msg\EditSprMsg.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\ArrangeSpriteFixOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\ArrangeSpriteImpl.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\AutoAlign.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\CopyPasteSpriteState.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\DragPhysicsOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\DrawRectangleOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\DrawSelectRectOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\EditOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\MousePositionOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\MoveSpriteState.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\MsgHelper.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\OffsetSpriteState.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\PanViewState.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\PasteSpriteOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\PasteSymbolCaptureOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\PasteSymbolOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\PasteSymbolPhysicsOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\PasteSymbolPhysicsRandomOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\PasteSymbolRandomOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\PasteSymbolTileOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\PerspectiveSpriteState.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\RightPopupMenu.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\RotateSpriteState.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\ScaleSpriteState.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\SelectShapesOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\SelectSpritesOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\ShearSpriteState.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\SpriteCtrlNode.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\TranslateSpriteState.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\UniversalArrangeOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\ZoomViewOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\op\ZoomViewState.cpp" />
+    <ClCompile Include="..\..\..\source\edit\record\AtomicFactory.cpp" />
+    <ClCompile Include="..\..\..\source\edit\record\CombineAOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\record\DeleteLayerAOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\record\DeleteSpriteAOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\record\EditableSpriteAOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\record\HistoryList.cpp" />
+    <ClCompile Include="..\..\..\source\edit\record\HistoryUtil.cpp" />
+    <ClCompile Include="..\..\..\source\edit\record\InsertSpriteAOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\record\MirrorSpriteAOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\record\OffsetSpriteAOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\record\PerspectiveSpriteAOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\record\ReorderSpriteAOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\record\RotateSpriteAOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\record\ScaleSpriteAOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\record\SetSpriteAngleAOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\record\SetSpriteColorAOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\record\SetSpritePosAOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\record\SetSpriteTwoAOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\record\ShearSpriteAOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\record\TranslateSpriteAOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\record\VisibleSpriteAOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\view\EditCMPT.cpp" />
+    <ClCompile Include="..\..\..\source\edit\view\LayersMgrCMPT.cpp" />
+    <ClCompile Include="..\..\..\source\edit\view\MousePositionCMPT.cpp" />
+    <ClCompile Include="..\..\..\source\edit\view\PasteSpriteCMPT.cpp" />
+    <ClCompile Include="..\..\..\source\edit\view\PasteSymbolPhysicsCMPT.cpp" />
+    <ClCompile Include="..\..\..\source\edit\view\PasteSymbolRandomCMPT.cpp" />
+    <ClCompile Include="..\..\..\source\edit\view\PasteSymbolScaleCMPT.cpp" />
+    <ClCompile Include="..\..\..\source\edit\view\UniversalArrangeCMPT.cpp" />
+    <ClCompile Include="..\..\..\source\edit\view\UniversalCMPT.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\ee\ArrangeSpriteConfig.h" />
+    <ClInclude Include="..\..\..\include\ee\ArrangeSpriteFixOP.h" />
+    <ClInclude Include="..\..\..\include\ee\ArrangeSpriteImpl.h" />
+    <ClInclude Include="..\..\..\include\ee\ArrangeSpriteOP.h" />
+    <ClInclude Include="..\..\..\include\ee\ArrangeSpriteState.h" />
+    <ClInclude Include="..\..\..\include\ee\AtomicFactory.h" />
+    <ClInclude Include="..\..\..\include\ee\AutoAlign.h" />
+    <ClInclude Include="..\..\..\include\ee\CombineAOP.h" />
+    <ClInclude Include="..\..\..\include\ee\CopyPasteSpriteState.h" />
+    <ClInclude Include="..\..\..\include\ee\DeleteLayerAOP.h" />
+    <ClInclude Include="..\..\..\include\ee\DeleteSpriteAOP.h" />
+    <ClInclude Include="..\..\..\include\ee\DragPhysicsOP.h" />
+    <ClInclude Include="..\..\..\include\ee\DrawRectangleOP.h" />
+    <ClInclude Include="..\..\..\include\ee\DrawSelectRectOP.h" />
+    <ClInclude Include="..\..\..\include\ee\EditableSpriteAOP.h" />
+    <ClInclude Include="..\..\..\include\ee\EditCMPT.h" />
+    <ClInclude Include="..\..\..\include\ee\EditOPState.h" />
+    <ClInclude Include="..\..\..\include\ee\EditSprMsg.h" />
+    <ClInclude Include="..\..\..\include\ee\HistoryList.h" />
+    <ClInclude Include="..\..\..\include\ee\HistoryUtil.h" />
+    <ClInclude Include="..\..\..\include\ee\InsertSpriteAOP.h" />
+    <ClInclude Include="..\..\..\include\ee\LayersMgrCMPT.h" />
+    <ClInclude Include="..\..\..\include\ee\MirrorSpriteAOP.h" />
+    <ClInclude Include="..\..\..\include\ee\MousePositionCMPT.h" />
+    <ClInclude Include="..\..\..\include\ee\MousePositionOP.h" />
+    <ClInclude Include="..\..\..\include\ee\MoveSpriteState.h" />
+    <ClInclude Include="..\..\..\include\ee\MsgHelper.h" />
+    <ClInclude Include="..\..\..\include\ee\NullEditOP.h" />
+    <ClInclude Include="..\..\..\include\ee\OffsetSpriteAOP.h" />
+    <ClInclude Include="..\..\..\include\ee\OffsetSpriteState.h" />
+    <ClInclude Include="..\..\..\include\ee\PanViewState.h" />
+    <ClInclude Include="..\..\..\include\ee\PasteSpriteCMPT.h" />
+    <ClInclude Include="..\..\..\include\ee\PasteSpriteOP.h" />
+    <ClInclude Include="..\..\..\include\ee\PasteSymbolCaptureOP.h" />
+    <ClInclude Include="..\..\..\include\ee\PasteSymbolOffsetCMPT.h" />
+    <ClInclude Include="..\..\..\include\ee\PasteSymbolOP.h" />
+    <ClInclude Include="..\..\..\include\ee\PasteSymbolPhysicsCMPT.h" />
+    <ClInclude Include="..\..\..\include\ee\PasteSymbolPhysicsOP.h" />
+    <ClInclude Include="..\..\..\include\ee\PasteSymbolPhysicsRandomOP.h" />
+    <ClInclude Include="..\..\..\include\ee\PasteSymbolRandomCMPT.h" />
+    <ClInclude Include="..\..\..\include\ee\PasteSymbolRandomOP.h" />
+    <ClInclude Include="..\..\..\include\ee\PasteSymbolScaleCMPT.h" />
+    <ClInclude Include="..\..\..\include\ee\PasteSymbolTileOP.h" />
+    <ClInclude Include="..\..\..\include\ee\PerspectiveSpriteAOP.h" />
+    <ClInclude Include="..\..\..\include\ee\PerspectiveSpriteState.h" />
+    <ClInclude Include="..\..\..\include\ee\ReorderSpriteAOP.h" />
+    <ClInclude Include="..\..\..\include\ee\RightPopupMenu.h" />
+    <ClInclude Include="..\..\..\include\ee\RotateSpriteAOP.h" />
+    <ClInclude Include="..\..\..\include\ee\RotateSpriteState.h" />
+    <ClInclude Include="..\..\..\include\ee\ScaleSpriteAOP.h" />
+    <ClInclude Include="..\..\..\include\ee\ScaleSpriteState.h" />
+    <ClInclude Include="..\..\..\include\ee\SelectShapesOP.h" />
+    <ClInclude Include="..\..\..\include\ee\SelectSpritesOP.h" />
+    <ClInclude Include="..\..\..\include\ee\SetSpriteAngleAOP.h" />
+    <ClInclude Include="..\..\..\include\ee\SetSpriteColorAOP.h" />
+    <ClInclude Include="..\..\..\include\ee\SetSpritePosAOP.h" />
+    <ClInclude Include="..\..\..\include\ee\SetSpriteTwoAOP.h" />
+    <ClInclude Include="..\..\..\include\ee\ShearSpriteAOP.h" />
+    <ClInclude Include="..\..\..\include\ee\ShearSpriteState.h" />
+    <ClInclude Include="..\..\..\include\ee\SpriteCtrlNode.h" />
+    <ClInclude Include="..\..\..\include\ee\TranslateSpriteAOP.h" />
+    <ClInclude Include="..\..\..\include\ee\TranslateSpriteState.h" />
+    <ClInclude Include="..\..\..\include\ee\UniversalArrangeCMPT.h" />
+    <ClInclude Include="..\..\..\include\ee\UniversalArrangeOP.h" />
+    <ClInclude Include="..\..\..\include\ee\UniversalCMPT.h" />
+    <ClInclude Include="..\..\..\include\ee\VisibleSpriteAOP.h" />
+    <ClInclude Include="..\..\..\include\ee\ZoomViewOP.h" />
+    <ClInclude Include="..\..\..\include\ee\ZoomViewState.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\include\ee\ArrangeSpriteOP.inl" />
+    <None Include="..\..\..\include\ee\PasteSymbolOffsetCMPT.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="libdata.vcxproj">
+      <Project>{77e15c91-f70b-4141-a0fc-4e82d1c43bd2}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

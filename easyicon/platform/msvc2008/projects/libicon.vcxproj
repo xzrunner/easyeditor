@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>5.libicon</ProjectName>
+    <ProjectGuid>{BF76851E-B6B9-4CC0-8C4B-D7FB383B2642}</ProjectGuid>
+    <RootNamespace>libicon</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\libicon\x86\Debug\</OutDir>
+    <IntDir>..\libicon\x86\Debug\obj\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\libicon\x86\Release\</OutDir>
+    <IntDir>..\libicon\x86\Release\obj\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\shaderlab\include\;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\c99;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\shaderlab\include\;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\c99;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libicon\ChangedRectIcon.cpp" />
+    <ClCompile Include="..\..\..\src\libicon\ChangedSectorIcon.cpp" />
+    <ClCompile Include="..\..\..\src\libicon\EditChangedRectOP.cpp" />
+    <ClCompile Include="..\..\..\src\libicon\EditChangedSectorOP.cpp" />
+    <ClCompile Include="..\..\..\src\libicon\EditDialog.cpp" />
+    <ClCompile Include="..\..\..\src\libicon\EditQuadOP.cpp" />
+    <ClCompile Include="..\..\..\src\libicon\EditRectOP.cpp" />
+    <ClCompile Include="..\..\..\src\libicon\FileIO.cpp" />
+    <ClCompile Include="..\..\..\src\libicon\IconFactory.cpp" />
+    <ClCompile Include="..\..\..\src\libicon\IconType.cpp" />
+    <ClCompile Include="..\..\..\src\libicon\LibraryPage.cpp" />
+    <ClCompile Include="..\..\..\src\libicon\LibraryPanel.cpp" />
+    <ClCompile Include="..\..\..\src\libicon\QuadIcon.cpp" />
+    <ClCompile Include="..\..\..\src\libicon\RectIcon.cpp" />
+    <ClCompile Include="..\..\..\src\libicon\Sprite.cpp" />
+    <ClCompile Include="..\..\..\src\libicon\SpritePropertySetting.cpp" />
+    <ClCompile Include="..\..\..\src\libicon\StageCanvas.cpp" />
+    <ClCompile Include="..\..\..\src\libicon\StagePanel.cpp" />
+    <ClCompile Include="..\..\..\src\libicon\Symbol.cpp" />
+    <ClCompile Include="..\..\..\src\libicon\ToolbarPanel.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libicon\ChangedRectIcon.h" />
+    <ClInclude Include="..\..\..\src\libicon\ChangedSectorIcon.h" />
+    <ClInclude Include="..\..\..\src\libicon\EditChangedRectOP.h" />
+    <ClInclude Include="..\..\..\src\libicon\EditChangedSectorOP.h" />
+    <ClInclude Include="..\..\..\src\libicon\EditDialog.h" />
+    <ClInclude Include="..\..\..\src\libicon\EditQuadOP.h" />
+    <ClInclude Include="..\..\..\src\libicon\EditRectOP.h" />
+    <ClInclude Include="..\..\..\src\libicon\FileIO.h" />
+    <ClInclude Include="..\..\..\src\libicon\Icon.h" />
+    <ClInclude Include="..\..\..\src\libicon\IconFactory.h" />
+    <ClInclude Include="..\..\..\src\libicon\IconType.h" />
+    <ClInclude Include="..\..\..\src\libicon\LibraryPage.h" />
+    <ClInclude Include="..\..\..\src\libicon\LibraryPanel.h" />
+    <ClInclude Include="..\..\..\src\libicon\QuadIcon.h" />
+    <ClInclude Include="..\..\..\src\libicon\RectIcon.h" />
+    <ClInclude Include="..\..\..\src\libicon\Sprite.h" />
+    <ClInclude Include="..\..\..\src\libicon\SpritePropertySetting.h" />
+    <ClInclude Include="..\..\..\src\libicon\StageCanvas.h" />
+    <ClInclude Include="..\..\..\src\libicon\StagePanel.h" />
+    <ClInclude Include="..\..\..\src\libicon\Symbol.h" />
+    <ClInclude Include="..\..\..\src\libicon\ToolbarPanel.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

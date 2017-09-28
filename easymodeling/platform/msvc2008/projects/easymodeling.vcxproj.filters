@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="preview">
+      <UniqueIdentifier>{d22b89b8-b31b-4868-b6c0-6ffe63a030e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools">
+      <UniqueIdentifier>{4d898969-42a6-4e6c-93c8-0462ec78dacf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="frame">
+      <UniqueIdentifier>{275c23bb-717a-48f0-a56d-6ddb7f0142c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="frame\settings">
+      <UniqueIdentifier>{b46d0212-f8ba-4d10-a84e-31e5856d79c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="frame\fileio">
+      <UniqueIdentifier>{72616b8c-5078-4a9a-934c-8a17a5ec6024}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="frame\fileio\code">
+      <UniqueIdentifier>{587362fd-5174-47a3-b112-57e179bcec9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view">
+      <UniqueIdentifier>{2141b6ec-9ff0-4d62-9271-1587d3edcb01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\library">
+      <UniqueIdentifier>{26936f6e-25b8-4224-a7fd-828ac7027270}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\stage">
+      <UniqueIdentifier>{7dfbad96-1ce6-4a15-b239-eabcf9d5e070}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\toolbar">
+      <UniqueIdentifier>{e07cad8f-bf79-48da-8dd7-8632361fb26e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\toolbar\body">
+      <UniqueIdentifier>{593faf6b-8bc9-4751-9c88-290520ad9c6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\toolbar\fixture">
+      <UniqueIdentifier>{62d6a0b2-3844-4f46-8216-3ca242b73246}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\toolbar\joint">
+      <UniqueIdentifier>{6abdfab5-19d1-4203-a883-3e26f84f988c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\property">
+      <UniqueIdentifier>{69c3bb94-a29c-41c2-880c-2873ed761935}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\property\settings">
+      <UniqueIdentifier>{a7e0d89c-0069-46a8-9626-0075839cb57e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\easymodeling\PreviewCanvas.cpp">
+      <Filter>preview</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easymodeling\PreviewDialog.cpp">
+      <Filter>preview</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easymodeling\PreviewPanel.cpp">
+      <Filter>preview</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easymodeling\DrawUtils.cpp">
+      <Filter>tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easymodeling\Context.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easymodeling\Frame.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easymodeling\main.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easymodeling\Task.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easymodeling\SettingOperatingDlg.cpp">
+      <Filter>frame\settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easymodeling\SettingViewDlg.cpp">
+      <Filter>frame\settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easymodeling\FileIO.cpp">
+      <Filter>frame\fileio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easymodeling\ResolveToB2.cpp">
+      <Filter>frame\fileio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easymodeling\Love2dCode.cpp">
+      <Filter>frame\fileio\code</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easymodeling\BodyEditStage.cpp">
+      <Filter>view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easymodeling\LibraryList.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easymodeling\LibraryPage.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easymodeling\LibraryPanel.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easymodeling\StageCanvas.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easymodeling\StagePanel.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easymodeling\ToolbarPanel.cpp">
+      <Filter>view\toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easymodeling\BodyEditCmpt.cpp">
+      <Filter>view\toolbar\body</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easymodeling\SelectBodyOP.cpp">
+      <Filter>view\toolbar\body</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easymodeling\FixtureEditCmpt.cpp">
+      <Filter>view\toolbar\fixture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easymodeling\SelectFixtureOP.cpp">
+      <Filter>view\toolbar\fixture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easymodeling\JointEditCmpt.cpp">
+      <Filter>view\toolbar\joint</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easymodeling\SelectJointOP.cpp">
+      <Filter>view\toolbar\joint</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easymodeling\PropertySettingPanel.cpp">
+      <Filter>view\property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easymodeling\BodyPropertySetting.cpp">
+      <Filter>view\property\settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easymodeling\FixturePropertySetting.cpp">
+      <Filter>view\property\settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easymodeling\JointPropertySetting.cpp">
+      <Filter>view\property\settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easymodeling\WorldPropertySetting.cpp">
+      <Filter>view\property\settings</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\easymodeling\PreviewCanvas.h">
+      <Filter>preview</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easymodeling\PreviewDialog.h">
+      <Filter>preview</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easymodeling\PreviewPanel.h">
+      <Filter>preview</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easymodeling\DrawUtils.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easymodeling\Context.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easymodeling\Frame.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easymodeling\main.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easymodeling\Task.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easymodeling\SettingOperatingDlg.h">
+      <Filter>frame\settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easymodeling\SettingViewDlg.h">
+      <Filter>frame\settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easymodeling\FileIO.h">
+      <Filter>frame\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easymodeling\ResolveToB2.h">
+      <Filter>frame\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easymodeling\Love2dCode.h">
+      <Filter>frame\fileio\code</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easymodeling\BodyEditStage.h">
+      <Filter>view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easymodeling\LibraryList.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easymodeling\LibraryPage.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easymodeling\LibraryPanel.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easymodeling\StageCanvas.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easymodeling\StagePanel.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easymodeling\ToolbarPanel.h">
+      <Filter>view\toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easymodeling\BodyEditCmpt.h">
+      <Filter>view\toolbar\body</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easymodeling\SelectBodyOP.h">
+      <Filter>view\toolbar\body</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easymodeling\FixtureEditCmpt.h">
+      <Filter>view\toolbar\fixture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easymodeling\SelectFixtureOP.h">
+      <Filter>view\toolbar\fixture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easymodeling\JointEditCmpt.h">
+      <Filter>view\toolbar\joint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easymodeling\SelectJointOP.h">
+      <Filter>view\toolbar\joint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easymodeling\PropertySettingPanel.h">
+      <Filter>view\property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easymodeling\BodyPropertySetting.h">
+      <Filter>view\property\settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easymodeling\FixturePropertySetting.h">
+      <Filter>view\property\settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easymodeling\JointPropertySetting.h">
+      <Filter>view\property\settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easymodeling\WorldPropertySetting.h">
+      <Filter>view\property\settings</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\..\..\editor-external\wx\include\wx\msw\wx.rc" />
+  </ItemGroup>
+</Project>

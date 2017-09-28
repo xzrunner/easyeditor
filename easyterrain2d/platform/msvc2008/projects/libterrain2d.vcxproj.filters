@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="view">
+      <UniqueIdentifier>{62e1b9d3-f051-4e7e-acb6-f7c64bd542bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\library">
+      <UniqueIdentifier>{baeb1c07-8db0-47d0-8e83-ac995c07ce84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\stage">
+      <UniqueIdentifier>{fa9052ad-4ddb-4f6a-8ba2-14625fe8d192}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\toolbar">
+      <UniqueIdentifier>{c8c8ef1e-fed7-45cf-9f31-d87f3a622ad3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit">
+      <UniqueIdentifier>{332d36ee-fbcf-4c3b-bfc0-06ff480c6012}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\create">
+      <UniqueIdentifier>{c052f587-9a05-4294-aa5c-ad3ab5687ec9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\wave">
+      <UniqueIdentifier>{80254f95-80e5-4c42-ac65-072abe7f9e7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\blend">
+      <UniqueIdentifier>{162fae7f-69d0-4ff1-be78-f8e9e47ef10c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit\move">
+      <UniqueIdentifier>{fe915548-6832-4633-9834-69193cb488ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{cac835bc-77c4-46d2-97ce-9aae7480328c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset\mesh">
+      <UniqueIdentifier>{cf8d94f7-c490-4b16-84d0-b9a87fb3546b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="fileio">
+      <UniqueIdentifier>{c2158e04-cd08-49d5-b0d5-9af3bb438801}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="frame">
+      <UniqueIdentifier>{2ff52b92-18f4-465a-b628-819594bff083}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libterrain2d\LibraryPage.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libterrain2d\LibraryPanel.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libterrain2d\StageCanvas.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libterrain2d\StagePanel.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libterrain2d\ToolbarPanel.cpp">
+      <Filter>view\toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libterrain2d\CreateRegionCMPT.cpp">
+      <Filter>edit\create</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libterrain2d\CreateRegionOP.cpp">
+      <Filter>edit\create</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libterrain2d\WaveVerticesCMPT.cpp">
+      <Filter>edit\wave</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libterrain2d\WaveVerticesOP.cpp">
+      <Filter>edit\wave</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libterrain2d\BlendTextureCMPT.cpp">
+      <Filter>edit\blend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libterrain2d\MoveTexcoordsCMPT.cpp">
+      <Filter>edit\move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libterrain2d\Sprite.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libterrain2d\Symbol.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libterrain2d\MeshShape.cpp">
+      <Filter>dataset\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libterrain2d\OceanMesh.cpp">
+      <Filter>dataset\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libterrain2d\FileIO.cpp">
+      <Filter>fileio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libterrain2d\EditDialog.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libterrain2d\LibraryPage.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libterrain2d\LibraryPanel.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libterrain2d\StageCanvas.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libterrain2d\StagePanel.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libterrain2d\ToolbarPanel.h">
+      <Filter>view\toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libterrain2d\CreateRegionCMPT.h">
+      <Filter>edit\create</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libterrain2d\CreateRegionOP.h">
+      <Filter>edit\create</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libterrain2d\WaveVerticesCMPT.h">
+      <Filter>edit\wave</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libterrain2d\WaveVerticesOP.h">
+      <Filter>edit\wave</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libterrain2d\BlendTextureCMPT.h">
+      <Filter>edit\blend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libterrain2d\MoveTexcoordsCMPT.h">
+      <Filter>edit\move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libterrain2d\Sprite.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libterrain2d\Symbol.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libterrain2d\MeshShape.h">
+      <Filter>dataset\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libterrain2d\OceanMesh.h">
+      <Filter>dataset\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libterrain2d\FileIO.h">
+      <Filter>fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libterrain2d\EditDialog.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libterrain2d\config.h" />
+    <ClInclude Include="..\..\..\src\easyterrain2d.h" />
+  </ItemGroup>
+</Project>

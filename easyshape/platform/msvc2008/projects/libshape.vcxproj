@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>5.libshape</ProjectName>
+    <ProjectGuid>{C1A2E85C-CF62-46A9-B46C-DFA12EC725E7}</ProjectGuid>
+    <RootNamespace>libshape</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\libshape\x86\Debug\</OutDir>
+    <IntDir>..\libshape\x86\Debug\obj\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\libshape\x86\Release\</OutDir>
+    <IntDir>..\libshape\x86\Release\obj\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\easyimage\src;..\..\..\..\shaderlab\include\;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\libshape\x86\Debug</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\libshape\x86\Debug\libshape.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\easyimage\src;..\..\..\..\shaderlab\include\;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\libshape\x86\Release</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\libshape\x86\Release\libshape.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libshape\BezierPropertySetting.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\BezierShape.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\ChainPropertySetting.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\ChainShape.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\CirclePropertySetting.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\CircleShape.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\ColorMaterial.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\ComplexPolygonShape.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\CosineShape.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\DrawComplexPolygonOP.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\DrawCosineCurveOP.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\DrawCurveOP.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\DrawLineCMPT.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\DrawLineUtility.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\DrawLoopOP.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\DrawPencilLineCMPT.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\DrawPencilLineOP.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\DrawPencilPolygonCMPT.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\DrawPencilPolygonOP.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\DrawPenLineOP.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\DrawPolygon2CMPT.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\DrawPolygonCMPT.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\DrawPolygonOP.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\DrawPolylineOP.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\DrawRectangleOP.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\EditBezierOP.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\EditCircleOP.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\EditDialog.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\EditDialogSimple.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\EditNodesAtomicOP.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\EditNodesOP.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\EditPointOP.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\EditPolylineImpl.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\EditPolylineOP.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\EditPolylinesCMPT.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\EditPolylinesOP.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\EditRectOP.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\FileIO.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\LibraryPage.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\Material.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\Math.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\MousePositionCMPT.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\MousePositionOP.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\MultiColorMaterial.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\NodeCapture.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\Package.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\PointShape.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\PolygonPropertySetting.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\PolygonShape.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\PolylineEditor.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\RectPropertySetting.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\RectShape.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\SelectNodesOP.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\ShapeFactory.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\ShapeType.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\Sprite.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\StageCanvas.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\StagePanel.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\Symbol.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\TextureMaterial.cpp" />
+    <ClCompile Include="..\..\..\src\libshape\ToolbarPanel.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libshape\BezierPropertySetting.h" />
+    <ClInclude Include="..\..\..\src\libshape\BezierShape.h" />
+    <ClInclude Include="..\..\..\src\libshape\ChainPropertySetting.h" />
+    <ClInclude Include="..\..\..\src\libshape\ChainShape.h" />
+    <ClInclude Include="..\..\..\src\libshape\CirclePropertySetting.h" />
+    <ClInclude Include="..\..\..\src\libshape\CircleShape.h" />
+    <ClInclude Include="..\..\..\src\libshape\ColorMaterial.h" />
+    <ClInclude Include="..\..\..\src\libshape\ComplexPolygonShape.h" />
+    <ClInclude Include="..\..\..\src\libshape\CosineShape.h" />
+    <ClInclude Include="..\..\..\src\libshape\DrawComplexPolygonOP.h" />
+    <ClInclude Include="..\..\..\src\libshape\DrawCosineCurveOP.h" />
+    <ClInclude Include="..\..\..\src\libshape\DrawCurveOP.h" />
+    <ClInclude Include="..\..\..\src\libshape\DrawLineCMPT.h" />
+    <ClInclude Include="..\..\..\src\libshape\DrawLineUtility.h" />
+    <ClInclude Include="..\..\..\src\libshape\DrawLoopOP.h" />
+    <ClInclude Include="..\..\..\src\libshape\DrawPencilLineCMPT.h" />
+    <ClInclude Include="..\..\..\src\libshape\DrawPencilLineOP.h" />
+    <ClInclude Include="..\..\..\src\libshape\DrawPencilPolygonCMPT.h" />
+    <ClInclude Include="..\..\..\src\libshape\DrawPencilPolygonOP.h" />
+    <ClInclude Include="..\..\..\src\libshape\DrawPenLineOP.h" />
+    <ClInclude Include="..\..\..\src\libshape\DrawPolygon2CMPT.h" />
+    <ClInclude Include="..\..\..\src\libshape\DrawPolygonCMPT.h" />
+    <ClInclude Include="..\..\..\src\libshape\DrawPolygonOP.h" />
+    <ClInclude Include="..\..\..\src\libshape\DrawPolylineOP.h" />
+    <ClInclude Include="..\..\..\src\libshape\DrawRectangleOP.h" />
+    <ClInclude Include="..\..\..\src\libshape\EditBezierOP.h" />
+    <ClInclude Include="..\..\..\src\libshape\EditCircleOP.h" />
+    <ClInclude Include="..\..\..\src\libshape\EditDialog.h" />
+    <ClInclude Include="..\..\..\src\libshape\EditDialogSimple.h" />
+    <ClInclude Include="..\..\..\src\libshape\EditedPolyShape.h" />
+    <ClInclude Include="..\..\..\src\libshape\EditNodesAtomicOP.h" />
+    <ClInclude Include="..\..\..\src\libshape\EditNodesOP.h" />
+    <ClInclude Include="..\..\..\src\libshape\EditPointOP.h" />
+    <ClInclude Include="..\..\..\src\libshape\EditPolylineImpl.h" />
+    <ClInclude Include="..\..\..\src\libshape\EditPolylineOP.h" />
+    <ClInclude Include="..\..\..\src\libshape\EditPolylinesCMPT.h" />
+    <ClInclude Include="..\..\..\src\libshape\EditPolylinesOP.h" />
+    <ClInclude Include="..\..\..\src\libshape\EditPolylineWithCopyNodeOP.h" />
+    <ClInclude Include="..\..\..\src\libshape\EditRectOP.h" />
+    <ClInclude Include="..\..\..\src\libshape\FileIO.h" />
+    <ClInclude Include="..\..\..\src\libshape\IOperaterBase.h" />
+    <ClInclude Include="..\..\..\src\libshape\LibraryPage.h" />
+    <ClInclude Include="..\..\..\src\libshape\Material.h" />
+    <ClInclude Include="..\..\..\src\libshape\Math.h" />
+    <ClInclude Include="..\..\..\src\libshape\MousePositionCMPT.h" />
+    <ClInclude Include="..\..\..\src\libshape\MousePositionOP.h" />
+    <ClInclude Include="..\..\..\src\libshape\MultiColorMaterial.h" />
+    <ClInclude Include="..\..\..\src\libshape\NodeCapture.h" />
+    <ClInclude Include="..\..\..\src\libshape\Package.h" />
+    <ClInclude Include="..\..\..\src\libshape\PointShape.h" />
+    <ClInclude Include="..\..\..\src\libshape\PolygonPropertySetting.h" />
+    <ClInclude Include="..\..\..\src\libshape\PolygonShape.h" />
+    <ClInclude Include="..\..\..\src\libshape\PolylineEditor.h" />
+    <ClInclude Include="..\..\..\src\libshape\RectPropertySetting.h" />
+    <ClInclude Include="..\..\..\src\libshape\RectShape.h" />
+    <ClInclude Include="..\..\..\src\libshape\SelectNodesOP.h" />
+    <ClInclude Include="..\..\..\src\libshape\ShapeFactory.h" />
+    <ClInclude Include="..\..\..\src\libshape\ShapeType.h" />
+    <ClInclude Include="..\..\..\src\libshape\Sprite.h" />
+    <ClInclude Include="..\..\..\src\libshape\StageCanvas.h" />
+    <ClInclude Include="..\..\..\src\libshape\StagePanel.h" />
+    <ClInclude Include="..\..\..\src\libshape\Symbol.h" />
+    <ClInclude Include="..\..\..\src\libshape\TextureMaterial.h" />
+    <ClInclude Include="..\..\..\src\libshape\ToolbarPanel.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="view">
+      <UniqueIdentifier>{7981e0fa-7226-420a-8d1b-5f6e4f44f72f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\stage">
+      <UniqueIdentifier>{c262c43c-d4ea-4be6-9c0c-6a02fad9004d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\stage\2d">
+      <UniqueIdentifier>{94863005-d425-4b7f-a47b-1fd7d941352c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\stage\3d">
+      <UniqueIdentifier>{b55b4eac-4a43-467d-8c30-428c1bf9520b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\library">
+      <UniqueIdentifier>{e93a02ab-e34f-4d38-afb8-b96fc05e3837}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\toolbar">
+      <UniqueIdentifier>{7f5632d6-1a87-4d0e-87cf-76fad4138b15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\toolbar\slider">
+      <UniqueIdentifier>{e7a58455-d534-4cf7-ae9c-9d074edbf13a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shader">
+      <UniqueIdentifier>{74e0b841-c551-415c-8056-a20fdbf1eb5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="fileio">
+      <UniqueIdentifier>{f8e3cc58-223e-4e93-82de-2eb008468eee}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libshader\SelectSpritesOP.cpp">
+      <Filter>view\stage\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshader\StageCanvas2D.cpp">
+      <Filter>view\stage\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshader\StagePanel2D.cpp">
+      <Filter>view\stage\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshader\StageCanvas3D.cpp">
+      <Filter>view\stage\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshader\StagePanel3D.cpp">
+      <Filter>view\stage\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshader\LibraryPanel.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshader\ToolbarPanel.cpp">
+      <Filter>view\toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshader\SliderCtrl.cpp">
+      <Filter>view\toolbar\slider</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshader\Shader.cpp">
+      <Filter>shader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshader\Shader2D.cpp">
+      <Filter>shader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshader\Shader3D.cpp">
+      <Filter>shader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshader\Uniform.cpp">
+      <Filter>shader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libshader\FileIO.cpp">
+      <Filter>fileio</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libshader\SelectSpritesOP.h">
+      <Filter>view\stage\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshader\StageCanvas2D.h">
+      <Filter>view\stage\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshader\StagePanel2D.h">
+      <Filter>view\stage\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshader\StageCanvas3D.h">
+      <Filter>view\stage\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshader\StagePanel3D.h">
+      <Filter>view\stage\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshader\LibraryPanel.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshader\ToolbarPanel.h">
+      <Filter>view\toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshader\SliderCtrl.h">
+      <Filter>view\toolbar\slider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshader\SliderItem.h">
+      <Filter>view\toolbar\slider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshader\Shader.h">
+      <Filter>shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshader\Shader2D.h">
+      <Filter>shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshader\Shader3D.h">
+      <Filter>shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshader\Uniform.h">
+      <Filter>shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshader\FileIO.h">
+      <Filter>fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libshader\config.h" />
+  </ItemGroup>
+</Project>

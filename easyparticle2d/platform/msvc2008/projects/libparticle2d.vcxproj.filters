@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{30dd8dd0-da71-48ec-b246-b2503b6cd6e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view">
+      <UniqueIdentifier>{79af7f7a-d313-4042-9088-228a358acbe3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\toolbar">
+      <UniqueIdentifier>{c59c0d12-940d-4b8b-ab0a-e5e2c0280b8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\toolbar\slider">
+      <UniqueIdentifier>{6d7872db-0393-4efc-9949-eb3133d04bf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\stage">
+      <UniqueIdentifier>{06288b80-e5d8-483b-8a78-3c3d685efa74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\library">
+      <UniqueIdentifier>{3f85c8cf-6ff8-4549-b052-679615b68874}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\property">
+      <UniqueIdentifier>{87a36d19-7d4c-4ca8-bbc6-07b7692fd1a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="particle">
+      <UniqueIdentifier>{9dbcea93-deee-40b7-89f5-92b0a7621605}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="file">
+      <UniqueIdentifier>{cb3053c2-63e0-41c0-b056-bb73a4e05ce7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libparticle2d\Sprite.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle2d\Symbol.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle2d\ComponentPanel.cpp">
+      <Filter>view\toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle2d\ToolbarPanel.cpp">
+      <Filter>view\toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle2d\CosSliderCtrl.cpp">
+      <Filter>view\toolbar\slider</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle2d\EditOP.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle2d\StageCanvas.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle2d\StagePanel.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle2d\LibraryPage.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle2d\LibraryPanel.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle2d\PropertySetting.cpp">
+      <Filter>view\property</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle2d\ParticleSystem.cpp">
+      <Filter>particle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle2d\PSConfigMgr.cpp">
+      <Filter>particle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle2d\CocoPacker.cpp">
+      <Filter>file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libparticle2d\FileIO.cpp">
+      <Filter>file</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libparticle2d\Sprite.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle2d\Symbol.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle2d\ComponentPanel.h">
+      <Filter>view\toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle2d\language.h">
+      <Filter>view\toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle2d\ToolbarPanel.h">
+      <Filter>view\toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle2d\CosSliderCtrl.h">
+      <Filter>view\toolbar\slider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle2d\EditOP.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle2d\StageCanvas.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle2d\StagePanel.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle2d\LibraryPage.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle2d\LibraryPanel.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle2d\PropertySetting.h">
+      <Filter>view\property</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle2d\ParticleSystem.h">
+      <Filter>particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle2d\PSConfigMgr.h">
+      <Filter>particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle2d\ValueRegion.h">
+      <Filter>particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle2d\CocoPacker.h">
+      <Filter>file</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle2d\FileIO.h">
+      <Filter>file</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libparticle2d\item_string.h" />
+    <ClInclude Include="..\..\..\src\libparticle2d\ps_config.h" />
+  </ItemGroup>
+</Project>
