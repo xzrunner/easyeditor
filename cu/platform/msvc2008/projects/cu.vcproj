@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="0.cu"
-	ProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
+	ProjectGUID="{6055092D-EE59-4159-B923-A375401AA099}"
 	RootNamespace="cu"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"

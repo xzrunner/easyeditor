@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="0.ds"
-	ProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
+	ProjectGUID="{E6044D31-8304-4854-99AC-CBEF18B9E7D3}"
 	RootNamespace="ds"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"

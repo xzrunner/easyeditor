@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="0.texpack"
-	ProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
+	ProjectGUID="{A7737C76-5221-47A5-86B7-84BD56C47730}"
 	RootNamespace="texpack"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"

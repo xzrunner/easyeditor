@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="2.gtxt"
-	ProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
+	ProjectGUID="{EB4F1EE0-CB3B-4B2E-9655-A8E22F948575}"
 	RootNamespace="gtxt"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"

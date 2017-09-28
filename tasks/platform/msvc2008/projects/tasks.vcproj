@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="1.tasks"
-	ProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
+	ProjectGUID="{B67AD009-9CB7-4B49-B660-3A44716D6E2E}"
 	RootNamespace="tasks"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"

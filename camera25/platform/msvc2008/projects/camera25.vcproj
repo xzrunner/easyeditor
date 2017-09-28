@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="1.camera25"
-	ProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
+	ProjectGUID="{510EAACB-B026-43F3-A68D-3EC421E46DD0}"
 	RootNamespace="camera25"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"

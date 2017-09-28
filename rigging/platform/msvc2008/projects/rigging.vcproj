@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="2.rigging"
-	ProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
+	ProjectGUID="{DBE6D3F5-4E3D-4DF8-B520-A27BCE5A5D21}"
 	RootNamespace="rigging"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"

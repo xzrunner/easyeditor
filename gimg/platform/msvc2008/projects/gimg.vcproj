@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="1.gimg"
-	ProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
+	ProjectGUID="{D1ACC0BE-3A2B-450F-A708-F3E84DF5E5AD}"
 	RootNamespace="gimg"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"

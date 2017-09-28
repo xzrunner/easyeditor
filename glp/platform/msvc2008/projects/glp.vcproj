@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="1.glp"
-	ProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
+	ProjectGUID="{CA120FA2-89A7-4957-A4A5-4746972AA39F}"
 	RootNamespace="glp"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
