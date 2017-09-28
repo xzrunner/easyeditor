@@ -92,10 +92,10 @@ void PackAnimation::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 
 void PackAnimation::Init(const libanim::Symbol* sym)
 {
-	const std::vector<s2::AnimSymbol::Layer*>& layers = sym->GetLayers();
+	const auto& layers = sym->GetLayers();
 	m_layers.reserve(layers.size());
 	for (int i = 0, n = layers.size(); i < n; ++i) {
-		m_layers.push_back(new Layer(layers[i]));
+		m_layers.push_back(new Layer(*layers[i]));
 	}
 
 	CheckLerp(sym->GetFilepath());
@@ -192,17 +192,11 @@ PackToBin(uint8_t** ptr) const
 /************************************************************************/
 
 PackAnimation::Lerp::
-Lerp(s2::AnimLerp::SprData type, const s2::ILerp* data)
+Lerp(s2::AnimLerp::SprData type, const s2::ILerp& data)
 	: m_spr_data(type)
-	, m_lerp(data->Clone())
+	, m_lerp(data.Clone())
 {
 	int t = m_lerp->Type();
-}
-
-PackAnimation::Lerp::
-~Lerp()
-{
-	delete m_lerp;
 }
 
 void PackAnimation::Lerp::
@@ -219,35 +213,35 @@ PackToLuaString(ebuilder::CodeGenerator& gen) const
 	{
 	case s2::LERP_CIRCLE:
 		{
-			s2::LerpCircle* lerp = static_cast<s2::LerpCircle*>(m_lerp);
+			const s2::LerpCircle& lerp = static_cast<const s2::LerpCircle&>(*m_lerp);
 			lua::connect(gen, 1, 
-				lua::assign("scale", lerp->GetScale()));			
+				lua::assign("scale", lerp.GetScale()));			
 		}
 		break;
 	case s2::LERP_SPIRAL:
 		{
-			s2::LerpSpiral* lerp = static_cast<s2::LerpSpiral*>(m_lerp);
+			const s2::LerpSpiral& lerp = static_cast<const s2::LerpSpiral&>(*m_lerp);
 			float begin, end;
-			lerp->GetAngle(begin, end);
+			lerp.GetAngle(begin, end);
 			lua::connect(gen, 3, 
 				lua::assign("angle begin", begin),
 				lua::assign("angle end", end),
-				lua::assign("scale", lerp->GetScale()));		
+				lua::assign("scale", lerp.GetScale()));		
 		}
 		break;
 	case s2::LERP_WIGGLE:
 		{
-			s2::LerpWiggle* lerp = static_cast<s2::LerpWiggle*>(m_lerp);
+			const s2::LerpWiggle& lerp = static_cast<const s2::LerpWiggle&>(*m_lerp);
 			lua::connect(gen, 2, 
-				lua::assign("freq", lerp->GetFreq()),
-				lua::assign("amp", lerp->GetAmp()));
+				lua::assign("freq", lerp.GetFreq()),
+				lua::assign("amp", lerp.GetAmp()));
 		}
 		break;
 	case s2::LERP_EASE:
 		{
-			s2::LerpEase* lerp = static_cast<s2::LerpEase*>(m_lerp);
+			const s2::LerpEase& lerp = static_cast<const s2::LerpEase&>(*m_lerp);
 			lua::connect(gen, 1, 
-				lua::assign("ease", lerp->GetEaseType()));
+				lua::assign("ease", lerp.GetEaseType()));
 		}
 		break;
 	}
@@ -285,35 +279,35 @@ PackToBin(uint8_t** ptr) const
 	{
 	case s2::LERP_CIRCLE:
 		{
-			s2::LerpCircle* lerp = static_cast<s2::LerpCircle*>(m_lerp);
-			float scale = lerp->GetScale();
+			const s2::LerpCircle& lerp = static_cast<const s2::LerpCircle&>(*m_lerp);
+			float scale = lerp.GetScale();
 			pack(scale, ptr);
 		}
 		break;
 	case s2::LERP_SPIRAL:
 		{
-			s2::LerpSpiral* lerp = static_cast<s2::LerpSpiral*>(m_lerp);
+			const s2::LerpSpiral& lerp = static_cast<const s2::LerpSpiral&>(*m_lerp);
 			float begin, end;
-			lerp->GetAngle(begin, end);
+			lerp.GetAngle(begin, end);
 			pack(begin, ptr);
 			pack(end, ptr);
-			float scale = lerp->GetScale();
+			float scale = lerp.GetScale();
 			pack(scale, ptr);
 		}
 		break;
 	case s2::LERP_WIGGLE:
 		{
-			s2::LerpWiggle* lerp = static_cast<s2::LerpWiggle*>(m_lerp);
-			float freq = lerp->GetFreq();
-			float amp = lerp->GetAmp();
+			const s2::LerpWiggle& lerp = static_cast<const s2::LerpWiggle&>(*m_lerp);
+			float freq = lerp.GetFreq();
+			float amp = lerp.GetAmp();
 			pack(freq, ptr);
 			pack(amp, ptr);
 		}
 		break;
 	case s2::LERP_EASE:
 		{
-			s2::LerpEase* lerp = static_cast<s2::LerpEase*>(m_lerp);
-			uint32_t ease_type = lerp->GetEaseType();
+			const s2::LerpEase& lerp = static_cast<const s2::LerpEase&>(*m_lerp);
+			uint32_t ease_type = lerp.GetEaseType();
 			pack(ease_type, ptr);
 		}
 		break;
@@ -347,20 +341,20 @@ GetLerpDataSize(int lerp_type)
 /************************************************************************/
 
 PackAnimation::Frame::
-Frame(const s2::AnimSymbol::Frame* frame)
+Frame(const s2::AnimSymbol::Frame& frame)
 {
-	m_index = frame->index;
-	m_tween = frame->tween;
+	m_index = frame.index;
+	m_tween = frame.tween;
 
-	m_actors.reserve(frame->sprs.size());
-	for (int spr = 0, spr_n = frame->sprs.size(); spr < spr_n; ++spr) {
-		m_actors.push_back(new Actor(frame->sprs[spr]));
+	m_actors.reserve(frame.sprs.size());
+	for (int spr = 0, spr_n = frame.sprs.size(); spr < spr_n; ++spr) {
+		m_actors.push_back(new Actor(frame.sprs[spr]));
 	}
 
-	m_lerps.reserve(frame->lerps.size());
-	for (int i = 0, n = frame->lerps.size(); i < n; ++i) {
-		const std::pair<s2::AnimLerp::SprData, s2::ILerp*>& src = frame->lerps[i];
-		Lerp* dst = new Lerp(src.first, src.second);
+	m_lerps.reserve(frame.lerps.size());
+	for (int i = 0, n = frame.lerps.size(); i < n; ++i) {
+		const auto& src = frame.lerps[i];
+		Lerp* dst = new Lerp(src.first, *src.second);
 		m_lerps.push_back(dst);
 	}
 }
@@ -454,13 +448,13 @@ PackToBin(uint8_t** ptr) const
 /************************************************************************/
 
 PackAnimation::Layer::
-Layer(const s2::AnimSymbol::Layer* layer)
+Layer(const s2::AnimSymbol::Layer& layer)
 {
-	m_frames.reserve(layer->frames.size());
-	for (int frame = 0, frame_n = layer->frames.size(); frame < frame_n; ++frame)
+	m_frames.reserve(layer.frames.size());
+	for (int frame = 0, frame_n = layer.frames.size(); frame < frame_n; ++frame)
 	{
-		s2::AnimSymbol::Frame* src_frame = layer->frames[frame];
-		Frame* dst_frame = new Frame(src_frame);
+		const auto& src_frame = layer.frames[frame];
+		Frame* dst_frame = new Frame(*src_frame);
 		m_frames.push_back(dst_frame);
 	}
 }

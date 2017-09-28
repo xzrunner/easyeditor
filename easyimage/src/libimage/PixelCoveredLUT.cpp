@@ -1,5 +1,7 @@
 #include "PixelCoveredLUT.h"
 
+#include <algorithm>
+
 #include <assert.h>
 
 namespace eimage

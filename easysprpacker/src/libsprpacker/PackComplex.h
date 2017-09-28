@@ -50,13 +50,13 @@ private:
 	public:
 		std::string m_name;
 		std::vector<const PackNode*> m_sprs;
-		std::vector<const PackTrans> m_spr_trans;
+		std::vector<PackTrans> m_spr_trans;
 
 	}; // Action
 
 private:
 	std::vector<const PackNode*> m_children;
-	std::vector<const PackTrans> m_children_trans;
+	std::vector<PackTrans> m_children_trans;
 
 	std::vector<Action> m_actions;
 

@@ -165,7 +165,8 @@ void Image::QueryTexcoords(float* texcoords, int* texid) const
 	const float* c2_texcoords = NULL;
 	if (Config::Instance()->IsUseDTex() && CanUseDTex()) {
 		gum::UID uid = gum::ResourceUID::RawFile(GetFilepath());
-		c2_texcoords = gum::DTex::Instance()->QuerySymbol(uid, texid);
+		int block_id;
+		c2_texcoords = gum::DTex::Instance()->QuerySymbol(uid, *texid, block_id);
 	}
 	if (c2_texcoords)
 	{

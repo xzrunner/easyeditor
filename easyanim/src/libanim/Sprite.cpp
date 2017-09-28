@@ -62,7 +62,7 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 
 	anim_val["static_time"] = m_static_time;
 
-	anim_val["active"] = m_curr->IsActive();
+	anim_val["active"] = m_state.GetOrigin().IsActive();
 
 	val["animation"] = anim_val;
 }
@@ -80,7 +80,7 @@ void Sprite::SetStaticTime(int static_time)
 
 bool Sprite::IsActive() const 
 { 
-	return m_curr->IsActive(); 
+	return m_state.GetOrigin().IsActive(); 
 }
 
 ee::Sprite* Sprite::Create(ee::Symbol* sym) 

@@ -30,10 +30,10 @@ void Symbol::ReloadTexture() const
 {
 	for (int i = 0, n = m_layers.size(); i < n; ++i)
 	{
-		s2::AnimSymbol::Layer* layer = m_layers[i];
+		const auto& layer = m_layers[i];
 		for (int j = 0, m = layer->frames.size(); j < m; ++j)
 		{
-			s2::AnimSymbol::Frame* frame = layer->frames[j];
+			const auto& frame = layer->frames[j];
 			for (int k = 0, l = frame->sprs.size(); k < l; ++k) {
 				s2::Symbol* sym = frame->sprs[k]->GetSymbol();
 				dynamic_cast<ee::Symbol*>(sym)->ReloadTexture();
@@ -46,10 +46,10 @@ void Symbol::Traverse(ee::Visitor<ee::Sprite>& visitor)
 {
 	for (int i = 0, n = m_layers.size(); i < n; ++i)
 	{
-		s2::AnimSymbol::Layer* layer = m_layers[i];
+		const auto& layer = m_layers[i];
 		for (int j = 0, m = layer->frames.size(); j < m; ++j)
 		{
-			s2::AnimSymbol::Frame* frame = layer->frames[j];
+			const auto& frame = layer->frames[j];
 			for (int k = 0, l = frame->sprs.size(); k < l; ++k) {
 				ee::Sprite* spr = dynamic_cast<ee::Sprite*>(frame->sprs[k]);
 				bool next;
@@ -65,7 +65,7 @@ void Symbol::Load(const gum::SpriteLoader& spr_loader)
 	Clear();
 
 	ee::SymbolLoader sym_loader;
-	gum::AnimSymLoader loader(this, false, &sym_loader, &spr_loader);
+	gum::AnimSymLoader loader(this, &sym_loader, &spr_loader);
 	loader.LoadJson(m_filepath);
 
 	LoadEE();
@@ -79,7 +79,7 @@ bool Symbol::LoadResources()
 
 	ee::SymbolLoader sym_loader;
 	ee::SpriteLoader spr_loader;
-	gum::AnimSymLoader loader(this, false, &sym_loader, &spr_loader);
+	gum::AnimSymLoader loader(this, &sym_loader, &spr_loader);
 	loader.LoadJson(m_filepath);
 
 	LoadEE();

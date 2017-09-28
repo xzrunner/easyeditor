@@ -61,8 +61,7 @@ private:
 	class Lerp : public cu::RefCountObj
 	{
 	public:
-		Lerp(s2::AnimLerp::SprData type, const s2::ILerp* data);
-		~Lerp();
+		Lerp(s2::AnimLerp::SprData type, const s2::ILerp& data);
 
 		void PackToLuaString(ebuilder::CodeGenerator& gen) const;
 
@@ -75,14 +74,14 @@ private:
 
 	public:
 		s2::AnimLerp::SprData m_spr_data;
-		s2::ILerp* m_lerp;
+		std::unique_ptr<s2::ILerp> m_lerp;
 
 	}; // Lerp
 
 	class Frame : public cu::RefCountObj
 	{
 	public:
-		Frame(const s2::AnimSymbol::Frame* frame);
+		Frame(const s2::AnimSymbol::Frame& frame);
 		~Frame();
 
 		void PackToLuaString(ebuilder::CodeGenerator& gen) const;
@@ -102,7 +101,7 @@ private:
 	class Layer : public cu::RefCountObj
 	{
 	public:
-		Layer(const s2::AnimSymbol::Layer* layer);
+		Layer(const s2::AnimSymbol::Layer& layer);
 		~Layer();
 
 		void PackToLuaString(ebuilder::CodeGenerator& gen) const;

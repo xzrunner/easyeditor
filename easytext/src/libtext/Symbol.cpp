@@ -70,11 +70,11 @@ bool Symbol::LoadResources()
 	return true;
 }
 
-void Symbol::DrawText(const gtxt_label_style& style, const S2_MAT& mt, const s2::Color& mul, 
+void Symbol::DrawText(cooking::DisplayList* dlist, const gtxt_label_style& style, const S2_MAT& mt, const s2::Color& mul,
 					  const s2::Color& add, const std::string& text, int time, bool richtext) const
 {
 	std::string t_text = ee::StringHelper::ToUtf8(text);
-	gum::GTxt::Instance()->Draw(style, mt, mul, add, t_text, time, richtext);
+	gum::GTxt::Instance()->Draw(dlist, style, mt, mul, add, t_text, time, richtext);
 }
 
 void Symbol::DrawBackground(const Sprite* spr, const S2_MAT& mt) const

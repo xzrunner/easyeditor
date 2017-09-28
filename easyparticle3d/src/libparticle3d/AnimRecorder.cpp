@@ -69,14 +69,14 @@ void AnimRecorder::Clear()
 void AnimRecorder::StoreToFile(const std::string& filepath) const
 {
 	libanim::Symbol* sym = new libanim::Symbol;
-	s2::AnimSymbol::Layer* layer = new s2::AnimSymbol::Layer;
+	auto layer = std::make_unique<s2::AnimSymbol::Layer>();
 	// sym->name = ani->export_name;
 	sym->SetFPS(30);
 	// particle 60fps, while anim 30fps
 	for (int i = 0, n = m_frames.size(); i*2 < n; ++i)
 //	for (int i = 0, n = m_frames.size(); i < n; ++i)
 	{
-		s2::AnimSymbol::Frame* frame = new s2::AnimSymbol::Frame;
+		auto frame = std::make_unique<s2::AnimSymbol::Frame>();
 		frame->index = i + 1;
 		frame->tween = false;
 		Frame* record_frame = m_frames[i*2];
@@ -96,9 +96,9 @@ void AnimRecorder::StoreToFile(const std::string& filepath) const
 
 			frame->sprs.push_back(spr);
 		}
-		layer->frames.push_back(frame);
+		layer->frames.push_back(std::move(frame));
 	}
-	sym->AddLayer(layer);
+	sym->AddLayer(std::move(layer));
 
 	libanim::FileSaver::Store(filepath.c_str(), *sym);
 	delete sym;

@@ -1,9 +1,11 @@
 #ifndef _EPBIN_TOOLS_H_
 #define _EPBIN_TOOLS_H_
 
+#include <fstream>
+#include <algorithm>
+
 #include <string.h>
 #include <stdint.h>
-#include <fstream>
 
 namespace epbin
 {

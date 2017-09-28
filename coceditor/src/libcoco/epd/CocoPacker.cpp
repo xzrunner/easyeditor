@@ -254,13 +254,13 @@ void CocoPacker::ResolveSymbols()
 			//////////////////////////////////////////////////////////////////////////
 
 			std::set<const ee::ImageSymbol*, ee::SymbolCmp> unique;
-			const std::vector<s2::AnimSymbol::Layer*>& layers = anim->GetLayers();
+			const auto& layers = anim->GetLayers();
 			for (size_t i = 0, n = layers.size(); i < n; ++i)
 			{
-				s2::AnimSymbol::Layer* layer = layers[i];
+				const auto& layer = layers[i];
 				for (size_t j = 0, m = layer->frames.size(); j < m; ++j)
 				{
-					s2::AnimSymbol::Frame* frame = layer->frames[j];
+					const auto& frame = layer->frames[j];
 					for (size_t k = 0, l = frame->sprs.size(); k < l; ++k)
 					{
 						ee::Sprite* spr = dynamic_cast<ee::Sprite*>(frame->sprs[k]);
@@ -879,15 +879,15 @@ void CocoPacker::ParserAnimation(const libanim::Symbol* sym)
 
 	{
 		lua::TableAssign ta(*m_gen, "component", true);
-		const std::vector<s2::AnimSymbol::Layer*>& layers = sym->GetLayers();
+		const auto& layers = sym->GetLayers();
 		for (size_t i = 0, n = sym->GetMaxFrameIdx(); i < n; ++i)
 		{			
 			for (size_t j = 0, m = layers.size(); j < m; ++j)
 			{
-				s2::AnimSymbol::Layer* layer = layers[j];
+				const auto& layer = layers[j];
 				if (i < layer->frames.size())
 				{
-					s2::AnimSymbol::Frame* frame = layer->frames[i];
+					const auto& frame = layer->frames[i];
 					for (size_t k = 0, l = frame->sprs.size(); k < l; ++k) {
 						ee::Sprite* spr = dynamic_cast<ee::Sprite*>(frame->sprs[k]);
 						ParserSpriteForComponent(spr, ids, unique, order);

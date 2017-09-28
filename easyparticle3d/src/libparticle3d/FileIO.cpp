@@ -97,7 +97,7 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 	reader.parse(fin, value);
 	fin.close();
 
-	gum::P3dSymLoader adapter(false);
+	gum::P3dSymLoader adapter;
 	adapter.LoadJson(filepath);
 	
 	int version = value["version"].asInt();
@@ -158,15 +158,13 @@ s2::P3dEmitterCfg* FileIO::LoadPSConfig(const std::string& filepath)
 {
 	class Loader : public gum::P3dSymLoader
 	{
-	public:
-		Loader(bool flatten) : gum::P3dSymLoader(flatten) {}
 	protected:
 		virtual s2::Symbol* LoadSymbol(const std::string& filepath) const {
 			return ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 		}
 	}; // Loader
 
-	Loader adapter(false);
+	Loader adapter;
 	adapter.LoadJson(filepath);
 
  	int sz = SIZEOF_P3D_EMITTER_CFG + SIZEOF_P3D_SYMBOL * MAX_COMPONENTS;

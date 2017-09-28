@@ -126,7 +126,7 @@ void StageCanvas::Init()
 	// todo: move to child, for defferent init (such as 3d ?)
 	gum::ShaderLab::Instance()->Init();
 	gum::Audio::Instance();
-	gum::Sprite2::Init();
+	gum::Sprite2::Instance()->Init();
 	DTex::Init();
 	GTxt::Init();
 

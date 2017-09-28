@@ -2,6 +2,7 @@
 #include "PixelCoveredLUT.h"
 
 #include <cmath>
+#include <algorithm>
 
 #include <assert.h>
 

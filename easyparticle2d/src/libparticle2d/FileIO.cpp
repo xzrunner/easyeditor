@@ -77,7 +77,7 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps, ToolbarPanel*
 
 	toolbar->Load(value);
 
-	gum::P2dSymLoader adapter(false);
+	gum::P2dSymLoader adapter;
 	adapter.LoadJson(filepath);
 
 //	toolbar->m_name->SetValue(adapter.name);
@@ -111,15 +111,13 @@ p2d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
 {
 	class Loader : public gum::P2dSymLoader
 	{
-	public:
-		Loader(bool flatten) : gum::P2dSymLoader(flatten) {}
 	protected:
 		virtual s2::Symbol* LoadSymbol(const std::string& filepath) const {
 			return ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 		}
 	}; // Loader
 
-	Loader adapter(false);
+	Loader adapter;
 	adapter.LoadJson(filepath);
 
 	int sz = SIZEOF_P2D_EMITTER_CFG + SIZEOF_P2D_SYMBOL * MAX_COMPONENTS;

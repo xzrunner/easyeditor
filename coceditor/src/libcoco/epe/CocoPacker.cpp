@@ -59,13 +59,13 @@ void CocoPacker::pack(const std::vector<const ee::Symbol*>& syms)
 		else if (const libanim::Symbol* anim = dynamic_cast<const libanim::Symbol*>(sym))
 		{
 			std::set<const ee::ImageSymbol*> unique;
-			const std::vector<s2::AnimSymbol::Layer*>& layers = anim->GetLayers();
+			const auto& layers = anim->GetLayers();
 			for (size_t i = 0, n = layers.size(); i < n; ++i)
 			{
-				s2::AnimSymbol::Layer* layer = layers[i];
+				const auto& layer = layers[i];
 				for (size_t j = 0, m = layer->frames.size(); j < m; ++j)
 				{
-					s2::AnimSymbol::Frame* frame = layer->frames[j];
+					const auto& frame = layer->frames[j];
 					for (size_t k = 0, l = frame->sprs.size(); k < l; ++k)
 					{
 						ee::Sprite* spr = dynamic_cast<ee::Sprite*>(frame->sprs[k]);
@@ -414,15 +414,15 @@ void CocoPacker::resolveAnimation(const libanim::Symbol* sym)
 	std::vector<std::pair<int, std::string> > order;
 	{
 		lua::TableAssign ta(m_gen, "component", true);
-		const std::vector<s2::AnimSymbol::Layer*>& layers = sym->GetLayers();
+		const auto& layers = sym->GetLayers();
 		for (size_t i = 0, n = sym->GetMaxFrameIdx(); i < n; ++i)
 		{
 			for (size_t j = 0, m = layers.size(); j < m; ++j)
 			{
-				s2::AnimSymbol::Layer* layer = layers[j];
+				const auto& layer = layers[j];
 				if (i < layer->frames.size())
 				{
-					s2::AnimSymbol::Frame* frame = layer->frames[i];
+					const auto& frame = layer->frames[i];
 					for (size_t k = 0, l = frame->sprs.size(); k < l; ++k)
 						resolveSpriteForComponent(dynamic_cast<ee::Sprite*>(frame->sprs[k]), ids, unique, order);
 				}

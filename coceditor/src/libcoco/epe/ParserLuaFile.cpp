@@ -390,14 +390,14 @@ void ParserLuaFile::transAniToFiles(const std::string& outfloder)
 void ParserLuaFile::transAniToAnimationFile(const std::string& outfloder, int id, Animation* ani)
 {
 	libanim::Symbol* sym = new libanim::Symbol;
-	s2::AnimSymbol::Layer* layer = new s2::AnimSymbol::Layer;
+	auto layer = std::make_unique<s2::AnimSymbol::Layer>();
 	sym->name = ani->export_name;
 	sym->SetFPS(30);
 	for (int i = 0, n = ani->frames.size(); i < n; ++i)
 	{
 		//				std::cout << "frame: [" << i << "/" << ani->frames.size() << "]" << std::endl;
 
-		s2::AnimSymbol::Frame* frame = new s2::AnimSymbol::Frame;
+		auto frame = std::make_unique<s2::AnimSymbol::Frame>();
 		frame->index = i+1;
 		frame->tween = false;
 		for (int j = 0, m = ani->frames[i].size(); j < m; ++j)
@@ -422,9 +422,9 @@ void ParserLuaFile::transAniToAnimationFile(const std::string& outfloder, int id
 			item->transform(spr);
 			frame->sprs.push_back(spr);
 		}
-		layer->frames.push_back(frame);
+		layer->frames.push_back(std::move(frame));
 	}
-	sym->AddLayer(layer);
+	sym->AddLayer(std::move(layer));
 
 	std::stringstream ss;
 	if (sym->name.empty()) {
@@ -542,14 +542,14 @@ void ParserLuaFile::transAniToMemory()
 void ParserLuaFile::transAniToAnimationMemory(int id, Animation* ani)
 {
 	libanim::Symbol* sym = new libanim::Symbol;
-	s2::AnimSymbol::Layer* layer = new s2::AnimSymbol::Layer;
+	auto layer = std::make_unique<s2::AnimSymbol::Layer>();
 	sym->name = ani->export_name;
 	sym->SetFPS(30);
 	for (int i = 0, n = ani->frames.size(); i < n; ++i)
 	{
 		// std::cout << "frame: [" << i << "/" << ani->frames.size() << "]" << std::endl;
 
-		s2::AnimSymbol::Frame* frame = new s2::AnimSymbol::Frame;
+		auto frame = std::make_unique<s2::AnimSymbol::Frame>();
 		frame->index = i + 1;
 		frame->tween = false;
 		for (int j = 0, m = ani->frames[i].size(); j < m; ++j)
@@ -576,9 +576,9 @@ void ParserLuaFile::transAniToAnimationMemory(int id, Animation* ani)
 			item->transform(spr);
 			frame->sprs.push_back(spr);
 		}
-		layer->frames.push_back(frame);
+		layer->frames.push_back(std::move(frame));
 	}
-	sym->AddLayer(layer);
+	sym->AddLayer(std::move(layer));
 
 	// todo filepath
 	//sym->InitThumbnail();

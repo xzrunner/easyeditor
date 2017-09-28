@@ -65,7 +65,7 @@ inline void pack_str(const std::string& str, uint8_t** ptr) {
 		pack(c, ptr);
 	} else {
 		assert(str.size() < 255);
-		uint8_t sz = str.size();
+		uint8_t sz = static_cast<uint8_t>(str.size());
 		pack(sz, ptr);
 		for (int i = 0; i < sz; ++i) {
 			uint8_t c = str[i];

@@ -205,12 +205,12 @@ s2::AnimSymbol* Frame::BuildSym() const
 	for (int i = 0, n = src.size(); i < n; ++i)
 	{
 		const std::map<int, KeyFrame*>& src_layer = src[i]->GetAllFrames();
-		s2::AnimSymbol::Layer* dst_layer = new s2::AnimSymbol::Layer;
+		auto dst_layer = std::make_unique<s2::AnimSymbol::Layer>();
 		std::map<int, KeyFrame*>::const_iterator itr = src_layer.begin();
 		for ( ; itr != src_layer.end(); ++itr)
 		{
 			const std::vector<ee::Sprite*>& src_frame = itr->second->GetAllSprites();
-			s2::AnimSymbol::Frame* dst_frame = new s2::AnimSymbol::Frame();
+			auto dst_frame = std::make_unique<s2::AnimSymbol::Frame>();
 			dst_frame->index = itr->second->GetTime();
 			dst_frame->tween = itr->second->HasClassicTween();
 
@@ -225,9 +225,9 @@ s2::AnimSymbol* Frame::BuildSym() const
 				src_frame[j]->AddReference();
 				dst_frame->sprs.push_back(src_frame[j]);
 			}
-			dst_layer->frames.push_back(dst_frame);
+			dst_layer->frames.push_back(std::move(dst_frame));
 		}
-		dst->AddLayer(dst_layer);
+		dst->AddLayer(std::move(dst_layer));
 	}
 	return dst;
 }

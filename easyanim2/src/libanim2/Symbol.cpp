@@ -24,7 +24,7 @@ bool Symbol::LoadResources()
 	}
 
 	ee::SymbolLoader sym_loader;
-	gum::Anim2SymLoader loader(this, false, &sym_loader);
+	gum::Anim2SymLoader loader(this, &sym_loader);
 	loader.LoadJson(m_filepath);
 
 	return true;

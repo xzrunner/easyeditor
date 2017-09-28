@@ -53,13 +53,13 @@ void SymbolDependanceSorter::fetch(const std::vector<const ee::Symbol*>& syms)
 		}
 		else if (const libanim::Symbol* anim = dynamic_cast<const libanim::Symbol*>(sym))
 		{
-			const std::vector<s2::AnimSymbol::Layer*>& layers = anim->GetLayers();
+			const auto& layers = anim->GetLayers();
 			for (size_t i = 0, n = layers.size(); i < n; ++i)
 			{
-				s2::AnimSymbol::Layer* layer = layers[i];
+				const auto& layer = layers[i];
 				for (size_t j = 0, m = layer->frames.size(); j < m; ++j)
 				{
-					s2::AnimSymbol::Frame* frame = layer->frames[j];
+					const auto& frame = layer->frames[j];
 					for (size_t k = 0, l = frame->sprs.size(); k < l; ++k) {
 						buffer.push(dynamic_cast<const ee::Symbol*>(frame->sprs[k]->GetSymbol()));
 					}
@@ -110,13 +110,13 @@ void SymbolDependanceSorter::fetch(const std::vector<const ee::Symbol*>& syms)
 			if (m_unique.find(anim) == m_unique.end())
 			{
 				m_unique.insert(anim);
-				const std::vector<s2::AnimSymbol::Layer*>& layers = anim->GetLayers();
+				const auto& layers = anim->GetLayers();
 				for (size_t i = 0, n = layers.size(); i < n; ++i)
 				{
-					s2::AnimSymbol::Layer* layer = layers[i];
+					const auto& layer = layers[i];
 					for (size_t j = 0, m = layer->frames.size(); j < m; ++j)
 					{
-						s2::AnimSymbol::Frame* frame = layer->frames[j];
+						const auto& frame = layer->frames[j];
 						for (size_t k = 0, l = frame->sprs.size(); k < l; ++k)
 						{
 							const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(frame->sprs[k]->GetSymbol());
@@ -198,13 +198,13 @@ void SymbolDependanceSorter::sort()
 			else if (libanim::Symbol* anim = dynamic_cast<libanim::Symbol*>(sym))
 			{
 				bool prepared = true;
-				const std::vector<s2::AnimSymbol::Layer*>& layers = anim->GetLayers();
+				const auto& layers = anim->GetLayers();
 				for (size_t i = 0, n = layers.size(); i < n && prepared; ++i)
 				{
-					s2::AnimSymbol::Layer* layer = layers[i];
+					const auto& layer = layers[i];
 					for (size_t j = 0, m = layer->frames.size(); j < m && prepared; ++j)
 					{
-						s2::AnimSymbol::Frame* frame = layer->frames[j];
+						const auto& frame = layer->frames[j];
 						for (size_t k = 0, l = frame->sprs.size(); k < l && prepared; ++k) {
 							ee::Sprite* spr = dynamic_cast<ee::Sprite*>(frame->sprs[k]);
 							if (!IsSymbolPrepared(spr)) {

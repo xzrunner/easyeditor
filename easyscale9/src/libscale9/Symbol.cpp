@@ -29,7 +29,7 @@ bool Symbol::LoadResources()
 	setting.open_image_edge_clip = false;
 
 	ee::SpriteLoader spr_loader;
-	gum::Scale9SymLoader loader(this, false, &spr_loader);
+	gum::Scale9SymLoader loader(this, &spr_loader);
 	loader.LoadJson(m_filepath);
 
 	setting.open_image_edge_clip = true;

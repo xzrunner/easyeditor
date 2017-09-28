@@ -48,10 +48,10 @@ ee::Sprite* AnimationToSpr::TransAnim(const erespacker::PackAnimation* anim)
 	assert(!anim->actions.empty() && anim->actions[0].size >= 1);
 
 	libanim::Symbol* anim_symbol = new libanim::Symbol;
-	s2::AnimSymbol::Layer* layer = new s2::AnimSymbol::Layer;
+	auto layer = std::make_unique<s2::AnimSymbol::Layer>();
 	for (int i = 0; i < anim->actions[0].size; ++i) {
 		const erespacker::PackAnimation::Frame& src = anim->frames[i];
-		s2::AnimSymbol::Frame* frame = new s2::AnimSymbol::Frame;
+		auto frame = std::make_unique<s2::AnimSymbol::Frame>();
 		frame->index = i;
 		frame->tween = false;
 		for (int j = 0, m = src.parts.size(); j < m; ++j) {
@@ -60,10 +60,10 @@ ee::Sprite* AnimationToSpr::TransAnim(const erespacker::PackAnimation* anim)
 			TransSprite(spr, part.t);
 			frame->sprs.push_back(spr);
 		}
-		layer->frames.push_back(frame);
+		layer->frames.push_back(std::move(frame));
 	}
 	anim_symbol->SetFPS(30);
-	anim_symbol->AddLayer(layer);
+	anim_symbol->AddLayer(std::move(layer));
 //	anim_symbol->InitBounding();
 	return new libanim::Sprite(anim_symbol);
 }

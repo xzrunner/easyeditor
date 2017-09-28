@@ -10,6 +10,7 @@
 #include <limits>
 
 #include <cassert>
+#include <algorithm>
 
 #include "MaxRectsBinPack.h"
 

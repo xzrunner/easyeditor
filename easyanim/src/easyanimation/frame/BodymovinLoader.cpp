@@ -35,10 +35,10 @@ void BodymovinLoader::Load(const Json::Value& val, const std::string& dir)
 	ViewMgr::Instance()->library->Clear();
 	SetSelectedSJ::Instance()->Set(-1, -1);
 
-	const std::vector<s2::AnimSymbol::Layer*>& layers = sym->GetLayers();
+	const auto& layers = sym->GetLayers();
 	for (int i = 0, n = layers.size(); i < n; ++i)
 	{
-		const s2::AnimSymbol::Layer* src_layer = layers[i];
+		const auto& src_layer = layers[i];
 		
 		Layer* dst_layer = new Layer;
 		InsertLayerSJ::Instance()->Insert(dst_layer);
@@ -46,7 +46,7 @@ void BodymovinLoader::Load(const Json::Value& val, const std::string& dir)
 
 		for (int j = 0, m = src_layer->frames.size(); j < m; ++j)
 		{
-			const s2::AnimSymbol::Frame* src_frame = src_layer->frames[j];
+			const auto& src_frame = src_layer->frames[j];
 			KeyFrame* dst_frame = new KeyFrame(src_frame->index);
 			dst_frame->SetLayer(dst_layer);
 
