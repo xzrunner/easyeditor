@@ -97,3 +97,6 @@
 [submodule "cooking"]
 	path = cooking
 	url = ssh://git@tea.ejoy.com:3222/LR/cooking.git
+[submodule "memmgr"]
+	path = memmgr
+	url = ssh://git@tea.ejoy.com:3222/LR/memmgr.git
