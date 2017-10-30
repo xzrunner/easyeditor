@@ -98,30 +98,25 @@ void RotateTrimImage::RotateTrim(const std::string& dir)
 
 		if (ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_IMAGE)
 		{
-			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+			auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 
-			ee::ImageData* img_data = ee::ImageDataMgr::Instance()->GetItem(filepath);
+			auto img_data = ee::ImageDataMgr::Instance()->GetItem(filepath);
 			int width, height;
 			sm::vec2 center;
 			float angle;
 			bool success = GetRotateTrimInfo(img_data->GetPixelData(), img_data->GetWidth(), 
 				img_data->GetHeight(), width, height, center, angle);
 			if (!success || angle == 0) {
-				img_data->RemoveReference();
 				continue;
 			} 
-			img_data->RemoveReference();
 
-			ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+			auto spr = ee::SpriteFactory::Instance()->Create(sym);
 			spr->SetPosition(center);
 			spr->SetAngle(angle);
 
 			s2::DrawRT rt;
 			rt.Draw(spr, true, width, height);
 			rt.StoreToFile(filepath, width, height);
-
-			spr->RemoveReference();
-			sym->RemoveReference();
 
 			//std::string dir = ee::FileHelper::getFileDir(filepath);
 			//std::string name = ee::FileHelper::getFilename(filepath);

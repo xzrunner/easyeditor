@@ -16,9 +16,9 @@ public:
 	Quadtree(const sm::rect& rect);
 	~Quadtree();
 
-	void Insert(const ee::Sprite* spr);
+	void Insert(const ee::SprConstPtr& spr);
 	
-	std::vector<const ee::Sprite*> Query(const sm::rect& rect) const;
+	std::vector<const ee::SprPtr> Query(const sm::rect& rect) const;
 
 	void DebugDraw() const;
 
@@ -31,19 +31,19 @@ private:
 		Node(const sm::rect& rect);
 		~Node();
 
-		void Insert(const ee::Sprite* spr);
+		void Insert(const ee::SprConstPtr& spr);
 
 		bool IsLeaf() const;
 
 	private:
 		bool IsIntersect(const sm::rect& rect) const;
 		bool IsContain(const sm::vec2& pos) const;
-		bool IsContain(const ee::Sprite* spr) const;
+		bool IsContain(const ee::SprConstPtr& spr) const;
 
 		bool NeedSplit() const;
 		void Split();
 
-		float GetContainArea(const ee::Sprite* spr) const;
+		float GetContainArea(const ee::SprConstPtr& spr) const;
 
 	private:
 		static const int MAX_COUNT;
@@ -57,7 +57,7 @@ private:
 		// 2 3
 		Node* m_children[4];
 
-		std::vector<const ee::Sprite*> m_sprs;
+		std::vector<const ee::SprPtr> m_sprs;
 
 		friend class Quadtree;
 

@@ -20,13 +20,13 @@ public:
 	//
 	// ee::MultiSpritesImpl interface
 	//
-	virtual void TraverseSprites(ee::Visitor<ee::Sprite>& visitor, 
+	virtual void TraverseSprites(ee::RefVisitor<ee::Sprite>& visitor, 
 		ee::DataTraverseType type = ee::DT_ALL,
 		bool order = true) const;
 
 	Symbol* getPatchSymbol() { return m_sym; }
 
- 	ee::Sprite* getSprite(int row, int col);
+ 	ee::SprPtr getSprite(int row, int col);
 
 	void rebuildPatchSymbol();
 
@@ -39,8 +39,8 @@ protected:
 	virtual void OnNotify(int sj_id, void* ud);
 
 private:
-	void Insert(ee::Sprite* spr);
-	void Remove(ee::Sprite* spr);
+	void Insert(const ee::SprPtr& spr);
+	void Remove(const ee::SprPtr& spr);
 	void Clear();
 
 private:
@@ -49,7 +49,7 @@ private:
 	// 0 1 2
 	s2::Sprite* m_sprs[9];
 
-	Symbol* m_sym;
+	std::shared_ptr<Symbol> m_sym;
 
 	ee::LibraryPanel* m_library;
 

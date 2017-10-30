@@ -2,8 +2,7 @@
 #define _EASYIMAGE_EXTRACT_OUTLINE_FINE_H_
 
 #include <SM_Vector.h>
-
-#include <vector>
+#include <cu/cu_stl.h>
 
 namespace eimage
 {
@@ -11,8 +10,8 @@ namespace eimage
 class ExtractOutlineFine
 {
 public:
-	ExtractOutlineFine(const std::vector<sm::vec2>& raw_border,
-		const std::vector<sm::vec2>& raw_border_merged);
+	ExtractOutlineFine(const CU_VEC<sm::vec2>& raw_border,
+		const CU_VEC<sm::vec2>& raw_border_merged);
 
 	void Trigger(float area_tol, float perimeter_tol);
 	void Trigger(float area_tol, float perimeter_tol, int max_step);
@@ -20,7 +19,7 @@ public:
 	void CreateOutline(float area_tol, float perimeter_tol, int max_step);
 	void ReduceOutlineCount(float area_tol, float perimeter_tol);
 
-	const std::vector<sm::vec2>& GetResult() const {
+	const CU_VEC<sm::vec2>& GetResult() const {
 		return m_fine_border;
 	}
 
@@ -50,12 +49,12 @@ private:
 	void InitRotateLUT();
 
 private:
-	const std::vector<sm::vec2>& m_raw_border;
-	const std::vector<sm::vec2>& m_raw_border_merged;
+	const CU_VEC<sm::vec2>& m_raw_border;
+	const CU_VEC<sm::vec2>& m_raw_border_merged;
 
-	std::vector<sm::vec2> m_fine_border;
+	CU_VEC<sm::vec2> m_fine_border;
 
-	std::vector<sm::vec2> m_rotate_lut;
+	CU_VEC<sm::vec2> m_rotate_lut;
 
 }; // ExtractOutlineFine
 

@@ -3,16 +3,15 @@
 #include "PackIDMgr.h"
 #include "Symbol.h"
 #include "SymbolMgr.h"
-#include "Sprite.h"
 
 #include <sprite2/ComplexSymbol.h>
 
 namespace ee
 {
 
-void MsgHelper::FillingSprites(const std::vector<Sprite*>& children, Json::Value& val)
+void MsgHelper::FillingSprites(const std::vector<SprPtr>& children, Json::Value& val)
 {
-	std::string parent = EditedFileStack::Instance()->Top();
+	auto parent = EditedFileStack::Instance()->Top();
 	if (parent.empty()) {
 		return;
 	}
@@ -23,8 +22,8 @@ void MsgHelper::FillingSprites(const std::vector<Sprite*>& children, Json::Value
 
 	for (int i = 0, n = children.size(); i < n; ++i) 
 	{
-		Sprite* child = children[i];
-		const Symbol* c_sym = VI_DOWNCASTING<const Symbol*>(child->GetSymbol());
+		auto child = children[i];
+		auto c_sym = S2_VI_PTR_DOWN_CAST<const Symbol>(child->GetSymbol());
 
 		Json::Value cval;
 
@@ -32,13 +31,13 @@ void MsgHelper::FillingSprites(const std::vector<Sprite*>& children, Json::Value
 		cval["name"] = child->GetName();
 
 		int idx = -1;
-		s2::Symbol* sym = SymbolMgr::Instance()->FetchSymbol(parent);
+		auto sym = SymbolMgr::Instance()->FetchSymbol(parent);
 		if (sym && sym->Type() == s2::SYM_COMPLEX)
 		{
-			s2::ComplexSymbol* comp_sym = VI_DOWNCASTING<s2::ComplexSymbol*>(sym);
-			const std::vector<s2::Sprite*>& children = comp_sym->GetAllChildren();
+			auto comp_sym = S2_VI_PTR_DOWN_CAST<s2::ComplexSymbol>(sym);
+			auto& children = comp_sym->GetAllChildren();
 			for (int i = 0, n = children.size(); i < n; ++i) {
-				if (child == VI_DOWNCASTING<Sprite*>(children[i])) {
+				if (child == children[i]) {
 					idx = i;
 					break;
 				}
@@ -50,9 +49,9 @@ void MsgHelper::FillingSprites(const std::vector<Sprite*>& children, Json::Value
 	}
 }
 
-void MsgHelper::FillingSprites(const Sprite* child, Json::Value& val)
+void MsgHelper::FillingSprites(const Sprite& child, Json::Value& val)
 {
-	std::string parent = EditedFileStack::Instance()->Top();
+	auto parent = EditedFileStack::Instance()->Top();
 	if (parent.empty()) {
 		return;
 	}
@@ -61,19 +60,19 @@ void MsgHelper::FillingSprites(const Sprite* child, Json::Value& val)
 
 	val["parent"] = id_mgr->QueryNode(parent);
 
-	const Symbol* c_sym = VI_DOWNCASTING<const Symbol*>(child->GetSymbol());
+	auto c_sym = S2_VI_PTR_DOWN_CAST<const Symbol>(child.GetSymbol());
 
 	val["child_id"] = id_mgr->QueryNode(c_sym->GetFilepath());
-	val["child_name"] = child->GetName();
+	val["child_name"] = child.GetName();
 
 	int idx = -1;
-	s2::Symbol* sym = SymbolMgr::Instance()->FetchSymbol(parent);
+	auto sym = SymbolMgr::Instance()->FetchSymbol(parent);
 	if (sym && sym->Type() == s2::SYM_COMPLEX)
 	{
-		s2::ComplexSymbol* comp_sym = VI_DOWNCASTING<s2::ComplexSymbol*>(sym);
-		const std::vector<s2::Sprite*>& children = comp_sym->GetAllChildren();
+		auto comp_sym = S2_VI_PTR_DOWN_CAST<s2::ComplexSymbol>(sym);
+		auto& children = comp_sym->GetAllChildren();
 		for (int i = 0, n = children.size(); i < n; ++i) {
-			if (child == VI_DOWNCASTING<Sprite*>(children[i])) {
+			if (&child == children[i].get()) {
 				idx = i;
 				break;
 			}

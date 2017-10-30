@@ -57,36 +57,38 @@ FontBlankSprite& FontBlankSprite::operator = (const FontBlankSprite& spr)
 	return *this;
 }
 
-FontBlankSprite::FontBlankSprite(FontBlankSymbol* sym)
+FontBlankSprite::FontBlankSprite(const s2::SymPtr& sym, uint32_t id)
 	: s2::Sprite(sym)
 	, Sprite(sym)
 {
-	font = sym->font;
-	font_color = gum::str2color(sym->color, s2::ARGB);
+	FontBlankSymbol* font_sym = dynamic_cast<FontBlankSymbol*>(m_sym.get());
 
-	if (sym->align_hori == 0)
+	font = font_sym->font;
+	font_color = gum::str2color(font_sym->color.c_str(), s2::ARGB);
+
+	if (font_sym->align_hori == 0)
 		align_hori = HAT_LEFT;
-	else if (sym->align_hori == 1)
+	else if (font_sym->align_hori == 1)
 		align_hori = HAT_RIGHT;
-	else if (sym->align_hori == 2)
+	else if (font_sym->align_hori == 2)
 		align_hori = HAT_CENTER;
 	else
 		align_hori = HAT_AUTO;
 
-	if (sym->align_vert == 0)
+	if (font_sym->align_vert == 0)
 		align_vert = VAT_TOP;
-	else if (sym->align_vert == 1)
+	else if (font_sym->align_vert == 1)
 		align_vert = VAT_BOTTOM;
-	else if (sym->align_vert == 2)
+	else if (font_sym->align_vert == 2)
 		align_vert = VAT_CENTER;
 	else
 		align_vert = VAT_AUTO;
 
 	align_vert = VAT_TOP;
-	size	= static_cast<int>(sym->size);
-	width	= static_cast<int>(sym->width);
-	height	= static_cast<int>(sym->height);
-	filename= sym->filename;
+	size	= static_cast<int>(font_sym->size);
+	width	= static_cast<int>(font_sym->width);
+	height	= static_cast<int>(font_sym->height);
+	filename= font_sym->filename;
 	has_edge= false;
 }
 
@@ -94,13 +96,13 @@ void FontBlankSprite::Load(const Json::Value& val, const std::string& dir)
 {
 	Sprite::Load(val);
 
-	FontBlankSymbol* sym = dynamic_cast<FontBlankSymbol*>(m_sym);
+	FontBlankSymbol* sym = dynamic_cast<FontBlankSymbol*>(m_sym.get());
 
 	// test if is old version
 	if (val["font"].isNull())
 	{
 		font		= sym->font;
-		font_color	= gum::str2color(sym->color, s2::ARGB);
+		font_color	= gum::str2color(sym->color.c_str(), s2::ARGB);
 		align_hori	= HoriAlignType((int)sym->align_hori);
 		align_vert	= VertAlignType((int)sym->align_vert);
 		size		= static_cast<int>(sym->size);
@@ -110,8 +112,8 @@ void FontBlankSprite::Load(const Json::Value& val, const std::string& dir)
 	}
 	else
 	{
-		font		= val["font"].asString();
-		font_color	= gum::str2color(val["color"].asString(), s2::ARGB);
+		font		= val["font"].asString().c_str();
+		font_color	= gum::str2color(val["color"].asString().c_str(), s2::ARGB);
 		// is old version data
 		if (!val["align"].isNull()) {
 			align_hori = HoriAlignType(val["align"].asInt());
@@ -123,11 +125,11 @@ void FontBlankSprite::Load(const Json::Value& val, const std::string& dir)
 		width		= val["label_width"].asInt();
 		height		= val["label_height"].asInt();
 		if (!val["font_filename"].isNull()) {
-			filename = val["font_filename"].asString();
+			filename = val["font_filename"].asString().c_str();
 			sym->LoadFont(filename);
 		}
-		m_text		= val["content"].asString();
-		m_tid		= val["tid"].asString();
+		m_text		= val["content"].asString().c_str();
+		m_tid		= val["tid"].asString().c_str();
 	}
 }
 
@@ -135,26 +137,26 @@ void FontBlankSprite::Store(Json::Value& val, const std::string& dir) const
 {
 	Sprite::Store(val);
 
-	val["font"]			= font;
-	val["color"]		= gum::color2str(font_color, s2::ARGB);
+	val["font"]			= font.c_str();
+	val["color"]		= gum::color2str(font_color, s2::ARGB).c_str();
 	val["align hori"]	= align_hori;
 	val["align vert"]	= align_vert;
 	val["size"]			= size;
 	val["label_width"]	= width;
 	val["label_height"] = height;
-	val["font_filename"]= filename;
-	val["content"]		= m_text;
-	val["tid"]			= m_tid;
+	val["font_filename"]= filename.c_str();
+	val["content"]		= m_text.c_str();
+	val["tid"]			= m_tid.c_str();
 }
 
 PropertySetting* FontBlankSprite::CreatePropertySetting(EditPanelImpl* stage)
 {
-	return new FontBlankPropertySetting(stage, this);
+	return new FontBlankPropertySetting(stage, std::dynamic_pointer_cast<ee::Sprite>(shared_from_this()));
 }
 
 void FontBlankSprite::LoadFont(const std::string& _filename)
 {
-	FontBlankSymbol* sym = dynamic_cast<FontBlankSymbol*>(m_sym);
+	FontBlankSymbol* sym = dynamic_cast<FontBlankSymbol*>(m_sym.get());
 	if (sym->LoadFont(_filename)) {
 		filename = _filename;
 	}
@@ -162,8 +164,7 @@ void FontBlankSprite::LoadFont(const std::string& _filename)
 
 const std::string& FontBlankSprite::GetSymbolName() const 
 { 
-	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(m_sym);
-	return sym->name; 
+	return std::dynamic_pointer_cast<ee::Symbol>(m_sym)->name;
 }
 
 }

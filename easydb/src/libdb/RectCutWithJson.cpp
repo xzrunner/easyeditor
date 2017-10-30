@@ -151,7 +151,7 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 	std::string out_img_dir = dst_dir + "\\" + IMAGE_DIR;
 	std::string out_json_dir = dst_dir + "\\" + JSON_DIR;
 
-	ee::ImageData* img = ee::ImageDataMgr::Instance()->GetItem(filepath);
+	auto img = ee::ImageDataMgr::Instance()->GetItem(filepath);
 	if (img->GetFormat() == GPF_RGB) 
 	{
 		std::string filename = ee::FileHelper::GetRelativePath(src_dir, filepath);
@@ -168,7 +168,7 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 		}
 
 		std::string spr_path = std::string(out_img_dir + "\\" + img_name);
-		ee::Sprite* spr = new ee::DummySprite(new ee::DummySymbol(spr_path, img->GetWidth(), img->GetHeight()));
+		auto& spr = new ee::DummySprite(new ee::DummySymbol(spr_path, img->GetWidth(), img->GetHeight()));
 		complex.Add(spr);
 
 		std::string json_out_path = out_json_dir + "\\" + filename + "_complex.json";
@@ -181,7 +181,7 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 	
 	uint8_t* condense = NULL;
 	pimg::Rect pr;
-	if (img->GetFormat() == GPF_RGBA)
+	if (img->GetFormat() == GPF_RGBA8)
 	{
 		pimg::Condense cd(img->GetPixelData(), img->GetWidth(), img->GetHeight());
 		condense = cd.GetPixels(pr);
@@ -234,7 +234,7 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 		delete[] pixels;
 
 		std::string spr_path = std::string(out_img_dir + "\\" + img_name);
-		ee::Sprite* spr = new ee::DummySprite(new ee::DummySymbol(spr_path, r.w, r.h));
+		auto& spr = new ee::DummySprite(new ee::DummySymbol(spr_path, r.w, r.h));
 		sm::vec2 _offset;
 		_offset.x = r.x + r.w * 0.5f - img->GetWidth() * 0.5f;
 		_offset.y = r.y + r.h * 0.5f - img->GetHeight() * 0.5f;

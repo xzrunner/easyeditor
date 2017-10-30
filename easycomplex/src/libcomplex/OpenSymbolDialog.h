@@ -1,6 +1,8 @@
 #ifndef _EASYCOMPLEX_OPEN_SYMBOL_DIALOG_H_
 #define _EASYCOMPLEX_OPEN_SYMBOL_DIALOG_H_
 
+#include <ee/Sprite.h>
+
 #include <vector>
 
 #include <stddef.h>
@@ -18,7 +20,7 @@ public:
 	OpenSymbolDialog(wxWindow* wnd, ee::EditPanelImpl* stage,
 		ee::MultiSpritesImpl* sprites_impl);
 
-	void Open(ee::Sprite* spr, ee::CrossGuides* guides = NULL);
+	void Open(const ee::SprPtr& spr, ee::CrossGuides* guides = NULL);
 
 	// todo
 	void SetViewlist(ee::ViewlistPanel* viewlist) { m_viewlist = viewlist; }

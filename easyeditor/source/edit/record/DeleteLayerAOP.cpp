@@ -13,11 +13,9 @@ namespace ee
 DeleteLayerAOP::DeleteLayerAOP(LayerList* list, Layer* layer)
 	: m_list(list)
 {
-	layer->TraverseSprite(FetchAllVisitor<Sprite>(m_sprs));
-	for_each(m_sprs.begin(), m_sprs.end(), cu::AddRefFunctor<Sprite>());
+	layer->TraverseSprite(FetchAllRefVisitor<Sprite>(m_sprs));
 
-	layer->TraverseShape(FetchAllVisitor<Shape>(m_shapes));
-	for_each(m_shapes.begin(), m_shapes.end(), cu::AddRefFunctor<Shape>());
+	layer->TraverseShape(FetchAllRefVisitor<Shape>(m_shapes));
 
 	layer->AddReference();
 	m_layer = layer;
@@ -25,8 +23,6 @@ DeleteLayerAOP::DeleteLayerAOP(LayerList* list, Layer* layer)
 
 DeleteLayerAOP::~DeleteLayerAOP()
 {
-	for_each(m_sprs.begin(), m_sprs.end(), cu::RemoveRefFunctor<Sprite>());
-	for_each(m_shapes.begin(), m_shapes.end(), cu::RemoveRefFunctor<Shape>());
 	m_layer->RemoveReference();
 }
 
@@ -54,7 +50,7 @@ void DeleteLayerAOP::Redo()
 	}
 }
 
-Json::Value DeleteLayerAOP::Store(const std::vector<Sprite*>& sprs) const
+Json::Value DeleteLayerAOP::Store(const std::vector<SprPtr>& sprs) const
 {
 	return Json::Value();
 }

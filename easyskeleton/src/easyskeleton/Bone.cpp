@@ -17,7 +17,7 @@ Bone::Bone()
 {
 }
 
-Bone::Bone(ee::Sprite* skin)
+Bone::Bone(const ee::SprPtr& skin)
 	: m_skin(skin)
 	, m_is_updating(false)
 {
@@ -30,35 +30,32 @@ Bone::Bone(ee::Sprite* skin)
 
 Bone::~Bone()
 {
-	if (m_skin) {
-		m_skin->RemoveReference();
-	}
 	for (int i = 0, n = m_joints.size(); i < n; ++i) {
 		m_joints[i]->RemoveReference();
 	}
 }
 
-void Bone::OnSetPosition(ee::Sprite* spr, const sm::vec2& pos)
+void Bone::OnSetPosition(const ee::SprPtr& spr, const sm::vec2& pos)
 {
 //	Update();
 }
 
-void Bone::OnSetAngle(ee::Sprite* spr, float angle)
+void Bone::OnSetAngle(const ee::SprPtr& spr, float angle)
 {
 //	Update();
 }
 
-void Bone::OnSetScale(ee::Sprite* spr, const sm::vec2& scale)
+void Bone::OnSetScale(const ee::SprPtr& spr, const sm::vec2& scale)
 {
 //	Update();
 }
 
-void Bone::OnSetShear(ee::Sprite* spr, const sm::vec2& shear)
+void Bone::OnSetShear(const ee::SprPtr& spr, const sm::vec2& shear)
 {
 //	Update();
 }
 
-void Bone::OnSetOffset(ee::Sprite* spr, const sm::vec2& offset)
+void Bone::OnSetOffset(const ee::SprPtr& spr, const sm::vec2& offset)
 {
 //	Update();
 }
@@ -169,7 +166,7 @@ void Bone::Scale(const sm::vec2& scale)
 	}
 }
 
-void Bone::SetSkin(ee::Sprite* skin)
+void Bone::SetSkin(const ee::SprPtr& skin)
 {
 	if (m_skin == skin) {
 		return;

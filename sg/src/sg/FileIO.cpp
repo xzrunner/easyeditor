@@ -35,7 +35,7 @@ void FileIO::load(const char* filename, StagePanel* stage)
 	int i = 0;
 	Json::Value imgValue = value["image"][i++];
 	while (!imgValue.isNull()) {
-		ee::Sprite* spr = load(imgValue, stage, dir);
+		auto& spr = load(imgValue, stage, dir);
 		ee::InsertSpriteSJ::Instance()->Insert(spr);
 		imgValue = value["image"][i++];
 	}
@@ -49,8 +49,8 @@ void FileIO::store(const char* filename, StagePanel* stage)
 
 	std::string dir = ee::FileHelper::GetFileDir(filename) + "\\";
 
-	std::vector<ee::Sprite*> sprs;
-	stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	stage->TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
 		value["image"][i] = store(sprs[i], stage, dir);
 	}
@@ -63,19 +63,18 @@ void FileIO::store(const char* filename, StagePanel* stage)
 	fout.close();
 }
 
-ee::Sprite* FileIO::load(const Json::Value& value, StagePanel* stage, const std::string& dir)
+ee::SprPtr FileIO::load(const Json::Value& value, StagePanel* stage, const std::string& dir)
 {
 	int row = value["row"].asInt(),
 		col = value["col"].asInt();
 
 	std::string filepath = ee::SymbolSearcher::GetSymbolPath(dir, value);
-	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+	auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	SetSymbolUserData(sym);
 
 	sm::vec2 pos;
-	ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+	auto spr = ee::SpriteFactory::Instance()->Create(sym);
 	spr->SetTag(value["tag"].asString());
-	sym->RemoveReference();
 
 	//// old
 	//stage->TransGridPosToCoords(row, col, pos);
@@ -107,7 +106,7 @@ ee::Sprite* FileIO::load(const Json::Value& value, StagePanel* stage, const std:
 	return spr;
 }
 
-Json::Value FileIO::store(const ee::Sprite* spr, StagePanel* stage, 
+Json::Value FileIO::store(const ee::SprConstPtr& spr, StagePanel* stage, 
 						  const std::string& dir)
 {
 	Json::Value value;
@@ -141,7 +140,7 @@ Json::Value FileIO::store(const ee::Sprite* spr, StagePanel* stage,
 	return value;
 }
 
-void FileIO::SetSymbolUserData(ee::Symbol* sym)
+void FileIO::SetSymbolUserData(const ee::SymPtr& sym)
 {
 	if (sym->GetUserData()) {
 		return;

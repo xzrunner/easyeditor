@@ -46,7 +46,7 @@ void ChainPropertySetting::OnPropertyGridChange(const std::string& name, const w
 		if (type == 1)
 		{
 			float x = m_chain->GetBounding().Center().x;
-			std::vector<sm::vec2> vertices = m_chain->GetVertices();
+			CU_VEC<sm::vec2> vertices = m_chain->GetVertices();
 			for (size_t i = 0, n = vertices.size(); i < n; ++i)
 				vertices[i].x = x * 2 - vertices[i].x;
 			m_chain->SetVertices(vertices);
@@ -54,7 +54,7 @@ void ChainPropertySetting::OnPropertyGridChange(const std::string& name, const w
 		else if (type == 2)
 		{
 			float y = m_chain->GetBounding().Center().y;
-			std::vector<sm::vec2> vertices = m_chain->GetVertices();
+			CU_VEC<sm::vec2> vertices = m_chain->GetVertices();
 			for (size_t i = 0, n = vertices.size(); i < n; ++i)
 				vertices[i].y = y * 2 - vertices[i].y;
 			m_chain->SetVertices(vertices);

@@ -14,18 +14,17 @@ class StagePanel : public ee::EditPanel
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		wxGLContext* glctx, const s2::Skeleton* sk);
-	virtual ~StagePanel();
+		wxGLContext* glctx, s2::Skeleton& sk);
 
 	//
 	// ee::EditPanel interface
 	//
 	virtual bool UpdateStage();
 
-	const s2::Skeleton* GetSkeleton() const { return m_sk; }
+	auto& GetSkeleton() const { return m_sk; }
 
 private:
-	const s2::Skeleton* m_sk;
+	s2::Skeleton& m_sk;
 
 }; // StagePanel
 

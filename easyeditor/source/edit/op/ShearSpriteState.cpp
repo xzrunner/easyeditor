@@ -10,19 +10,12 @@
 namespace ee
 {
 
-ShearSpriteState::ShearSpriteState(Sprite* spr, 
+ShearSpriteState::ShearSpriteState(const SprPtr& spr,
 								   const SpriteCtrlNode::Node& ctrl_node)
-	: m_ctrl_node(ctrl_node)
+	: m_spr(spr)
+	, m_ctrl_node(ctrl_node)
 {
-	m_spr = spr;
-	m_spr->AddReference();
-
 	m_first_shear = m_spr->GetShear();
-}
-
-ShearSpriteState::~ShearSpriteState()
-{
-	m_spr->RemoveReference();
 }
 
 void ShearSpriteState::OnMouseRelease(const sm::vec2& pos)
@@ -39,10 +32,14 @@ bool ShearSpriteState::OnMouseDrag(const sm::vec2& pos)
 
 void ShearSpriteState::Shear(const sm::vec2& curr)
 {
+	if (!m_spr) {
+		return;
+	}
+
 	// fix pos
 	sm::vec2 pos;
 	sm::vec2 ctrls[8];
-	SpriteCtrlNode::GetSpriteCtrlNodes(m_spr, ctrls);
+	SpriteCtrlNode::GetSpriteCtrlNodes(*m_spr, ctrls);
 	if (m_ctrl_node.type == SpriteCtrlNode::UP) {
 		sm::get_foot_of_perpendicular(ctrls[SpriteCtrlNode::LEFT_UP], ctrls[SpriteCtrlNode::RIGHT_UP], curr, &pos);
 	} else if (m_ctrl_node.type == SpriteCtrlNode::DOWN) {
@@ -129,6 +126,10 @@ void ShearSpriteState::Shear(const sm::vec2& curr)
 
 void ShearSpriteState::Shear2(const sm::vec2& curr)
 {
+	if (!m_spr) {
+		return;
+	}
+
 	sm::rect region = m_spr->GetSymbol()->GetBounding();
 
 	sm::vec2 sz = region.Size();
@@ -139,7 +140,7 @@ void ShearSpriteState::Shear2(const sm::vec2& curr)
 	float sx = m_spr->GetScale().x,
 		  sy = m_spr->GetScale().y;
 	sm::vec2 ctrls[8];
-	SpriteCtrlNode::GetSpriteCtrlNodes(m_spr, ctrls);
+	SpriteCtrlNode::GetSpriteCtrlNodes(*m_spr, ctrls);
 
 	sm::vec2 center = (ctrls[SpriteCtrlNode::LEFT] + ctrls[SpriteCtrlNode::RIGHT]) * 0.5f;
 

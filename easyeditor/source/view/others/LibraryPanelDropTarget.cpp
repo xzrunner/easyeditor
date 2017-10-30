@@ -12,10 +12,9 @@ bool LibraryPanelDropTarget::OnDropFiles(wxCoord x, wxCoord y,
 	for (int i = 0, n = filenames.size(); i < n; ++i)
 	{
 		std::string filename = filenames[i].ToStdString();
-		Symbol* sym = SymbolMgr::Instance()->FetchSymbol(filename);
+		auto sym = SymbolMgr::Instance()->FetchSymbol(filename);
 		sym->RefreshThumbnail(filename);
 		m_panel->AddSymbol(sym);
-		sym->RemoveReference();
 	}
 	return true;
 }

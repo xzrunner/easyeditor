@@ -1,7 +1,7 @@
 #include "RenderTarget.h"
 
-#include <unirender/UR_RenderTarget.h>
-#include <unirender/UR_Texture.h>
+#include <unirender/RenderTarget.h>
+#include <unirender/Texture.h>
 
 namespace drect
 {

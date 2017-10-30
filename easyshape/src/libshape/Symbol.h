@@ -4,12 +4,12 @@
 #include "ShapeType.h"
 
 #include <ee/Symbol.h>
+#include <ee/Shape.h>
 
+#include <cu/cu_stl.h>
 #include <sprite2/ShapeSymbol.h>
 
 #include <vector>
-
-namespace ee { class Shape; }
 
 namespace eshape
 {
@@ -18,13 +18,12 @@ class Symbol : public ee::Symbol, public s2::ShapeSymbol
 {
 public:
 	Symbol();
-	virtual ~Symbol();
 
 	/**
 	 *  @interface
 	 *    s2::Symbol
 	 */
-	virtual s2::RenderReturn Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
+	virtual s2::RenderReturn DrawTree(cooking::DisplayList* dlist, const s2::RenderParams& rp, const s2::Sprite* spr = nullptr) const;
 
 	/**
 	 *  @interface
@@ -32,19 +31,19 @@ public:
 	 */
 	virtual void ReloadTexture() const;
 
-	void Traverse(ee::Visitor<ee::Shape>& visitor) const;
-	bool Add(ee::Shape* shape);
-	bool Remove(ee::Shape* shape);
+	void Traverse(ee::RefVisitor<ee::Shape>& visitor) const;
+	bool Add(ee::ShapePtr& shape);
+	bool Remove(const ee::ShapePtr& shape);
 	bool Clear();
 
-	void SetBG(ee::Symbol* bg);
-	const ee::Symbol* GetBG() const { return m_bg; }
+	void SetBG(const ee::SymPtr& bg);
+	auto& GetBG() const { return m_bg; }
 
 	void StoreToFile(const char* filename) const;
 
 	ShapeType GetShapeType() const;
 
-	static ee::Symbol* Create() { return new Symbol(); }
+	static ee::SymPtr Create() { return std::make_shared<Symbol>(); }
 
 protected:
 //	virtual sm::rect GetBoundingImpl(const s2::Sprite* spr = NULL, const s2::Actor* actor = NULL, bool cache = true) const;
@@ -52,14 +51,14 @@ protected:
 	virtual bool LoadResources();
 
 private:
-	void LoadBGOutline(ee::Symbol* bg);
-	void LoadBGTriStrip(ee::Symbol* bg);
+	void LoadBGOutline(const ee::SymPtr& bg);
+	void LoadBGTriStrip(const ee::SymPtr& bg);
 
 private:
-	ee::Symbol* m_bg;
+	ee::SymPtr m_bg;
 
-	std::vector<ee::Shape*> m_bg_outline;
-	std::vector<std::vector<sm::vec2> > m_bg_tri_strips;
+	CU_VEC<ee::ShapePtr> m_bg_outline;
+	CU_VEC<CU_VEC<sm::vec2>> m_bg_tri_strips;
 
 }; // Symbol
 

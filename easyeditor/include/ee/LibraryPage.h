@@ -2,6 +2,9 @@
 #define _EASYEDITOR_LIBRARY_PAGE_H_
 
 #include "Visitor.h"
+#include "Symbol.h"
+
+#include <string>
 
 #include <wx/wx.h>
 
@@ -17,7 +20,7 @@ class LibraryPage : public wxWindow
 public:
 	LibraryPage(wxWindow* parent, const std::string& name, bool isStatic = false);
 
-	virtual bool IsHandleSymbol(Symbol* sym) const = 0;
+	virtual bool IsHandleSymbol(const SymPtr& sym) const = 0;
 
 	virtual void Clear();
 
@@ -26,18 +29,18 @@ public:
 
 	virtual void OnActive() {}
 
-	void Traverse(Visitor<ListItem>& visitor) const;
+	void Traverse(RefVisitor<ListItem>& visitor) const;
 
 	const std::string& GetPageName() const { return m_name; }
 
-	ListItem* GetItem(int index = -1) const;
-	Symbol* GetSymbol(int index = -1) const;
+	ListItemPtr GetItem(int index = -1) const;
+	SymPtr GetSymbol(int index = -1) const;
 
 	void ReloadTexture() const;
 
 	LibraryList* GetList() { return m_list; }
 
-	void AddItem(ListItem* item);
+	void AddItem(const ListItemPtr& item);
 
 protected:
 	virtual void InitLayout(bool draggable = true);

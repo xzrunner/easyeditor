@@ -74,8 +74,8 @@ void RotateImage::Rotate(const std::string& src_dir, const std::string& dst_dir)
 		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 		if (ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_IMAGE)
 		{
-			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-			ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+			auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+			auto spr = ee::SpriteFactory::Instance()->Create(sym);
 			sm::rect r = sym->GetBounding();
 			for (int deg = 10; deg <= 90; deg += 10) {
 				float rad = deg * SM_DEG_TO_RAD;
@@ -90,9 +90,6 @@ void RotateImage::Rotate(const std::string& src_dir, const std::string& dst_dir)
 				std::string outpath = ee::StringHelper::Format("%s\\%s_%d.png", dst_dir.c_str(), name.c_str(), deg);
 				rt.StoreToFile(outpath, width, height);
 			}
-
-			spr->RemoveReference();
-			sym->RemoveReference();
 		}
 	}
 }

@@ -4,8 +4,7 @@
 #include "typedef.h"
 
 #include <SM_Vector.h>
-
-#include <vector>
+#include <cu/cu_stl.h>
 
 #include <stdint.h>
 
@@ -21,8 +20,8 @@ public:
 	static float TransFloatX1024(int f);
 	static bool  TransBool(int b);
 
-	static int  SizeVertices(const std::vector<sm::vec2>& vertices);
-	static void UnpackVertices(std::vector<sm::vec2>& vertices, 
+	static int  SizeVertices(const CU_VEC<sm::vec2>& vertices);
+	static void UnpackVertices(CU_VEC<sm::vec2>& vertices, 
 		uint8_t** ptr, bool reverse_y = true, int scale = SCALE);
 
 }; // NodeFromBin

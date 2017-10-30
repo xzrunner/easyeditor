@@ -47,7 +47,7 @@ void PictureToLuaString::PackQuad(const PackPicture::Quad& quad,
 	char buff[256];
 
 	int src[8];
-	PackPicture::GetImgSrcPos(tp, quad.img, quad.texture_coord, src);
+	PackPicture::GetImgSrcPos(tp, quad.img.get(), quad.texture_coord, src);
 	for (int i = 0; i < 8; ++i) {
 		src[i] *= scale;
 	}

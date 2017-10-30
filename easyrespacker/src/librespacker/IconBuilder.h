@@ -21,7 +21,7 @@ public:
 
 	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
 
-	const IPackNode* Create(const eicon::Sprite* spr);
+	const IPackNode* Create(const std::shared_ptr<const eicon::Sprite>& spr);
 
 private:
 	const IPackNode* Query(const eicon::Sprite* spr) const;
@@ -36,7 +36,7 @@ private:
 	};
 
 private:
-	std::multimap<const eicon::Symbol*, Value> m_map_data;
+	std::multimap<std::shared_ptr<const eicon::Symbol>, Value> m_map_data;
 
 }; // IconBuilder
 

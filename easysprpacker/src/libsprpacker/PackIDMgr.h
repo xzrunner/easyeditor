@@ -3,7 +3,7 @@
 
 #include <ee/PackIDMgr.h>
 
-#include <CU_Singleton.h>
+#include <cu/cu_macro.h>
 
 #include <string>
 #include <vector>
@@ -35,7 +35,7 @@ private:
 
 	std::vector<std::string> m_curr_paths;
 
-	SINGLETON_DECLARATION(PackIDMgr)
+	CU_SINGLETON_DECLARATION(PackIDMgr)
 	
 }; // PackIDMgr
 

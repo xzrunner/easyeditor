@@ -12,7 +12,7 @@
 
 #include <ee/panel_msg.h>
 #include <ee/ConfirmDialog.h>
-#include <ee/SpriteFactory.h>
+#include <ee/SpritePool.h>
 
 namespace eicon
 {
@@ -22,7 +22,7 @@ BEGIN_EVENT_TABLE(EditDialog, wxDialog)
 END_EVENT_TABLE()
 
 EditDialog::EditDialog(wxWindow* parent, wxGLContext* glctx,
-					   ee::Sprite* edited, const ee::MultiSpritesImpl* sprite_impl)
+					   ee::SprPtr edited, const ee::MultiSpritesImpl* sprite_impl)
  	: wxDialog(parent, wxID_ANY, "Edit Shape", wxDefaultPosition, 
 	wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 	, m_stage(NULL)
@@ -33,7 +33,7 @@ EditDialog::EditDialog(wxWindow* parent, wxGLContext* glctx,
 	ee::SetWndDirtySJ::Instance()->SetDirty();
 }
 
-void EditDialog::InitLayout(wxGLContext* glctx, ee::Sprite* edited, 
+void EditDialog::InitLayout(wxGLContext* glctx, const ee::SprPtr& edited, 
 							const ee::MultiSpritesImpl* sprite_impl)
 {
 	wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -44,12 +44,12 @@ void EditDialog::InitLayout(wxGLContext* glctx, ee::Sprite* edited,
 	SetSizer(sizer);
 }
 
-void EditDialog::InitEditOP(ee::Sprite* edited)
+void EditDialog::InitEditOP(const ee::SprPtr& edited)
 {
 	ee::EditOP* op = NULL;
 
-	Symbol* sym = dynamic_cast<Symbol*>(edited->GetSymbol());
-	const Icon* icon = dynamic_cast<const Icon*>(sym->GetIcon());
+	auto sym = std::dynamic_pointer_cast<Symbol>(edited->GetSymbol());
+	const Icon* icon = dynamic_cast<const Icon*>(sym->GetIcon().get());
 	IconType type = get_icon_type(icon->GetIconDesc());
 	switch (type)
 	{
@@ -77,21 +77,21 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 		return;
 	}
 
-	Symbol& sym = m_stage->GetSymbol();
-	const std::string& filepath = sym.GetFilepath();
+	auto& sym = m_stage->GetSymbol();
+	const std::string& filepath = sym->GetFilepath();
 
 	ee::ConfirmDialog dlg(this);
 	int val = dlg.ShowModal();
 	if (val == wxID_YES)
 	{
-		FileIO::StoreToFile(filepath.c_str(), dynamic_cast<Icon*>(sym.GetIcon()));
-		sym.RefreshThumbnail(filepath);
-		ee::SpriteFactory::Instance()->UpdateBoundings(sym);
+		FileIO::StoreToFile(filepath.c_str(), *dynamic_cast<Icon*>(sym->GetIcon().get()));
+		sym->RefreshThumbnail(filepath);
+		ee::SpritePool::Instance()->UpdateBoundings(*sym);
 		Destroy();
 	}
 	else if (val == wxID_NO)
 	{
-		sym.LoadFromFile(filepath);
+		sym->LoadFromFile(filepath);
 		Destroy();
 	}
 }

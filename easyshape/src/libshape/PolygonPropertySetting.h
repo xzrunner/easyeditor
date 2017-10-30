@@ -3,6 +3,8 @@
 
 #include <ee/PropertySetting.h>
 
+#include <memory>
+
 namespace ee { class EditPanelImpl; }
 
 namespace eshape
@@ -13,8 +15,8 @@ class PolygonShape;
 class PolygonPropertySetting : public ee::PropertySetting
 {
 public:
-	PolygonPropertySetting(ee::EditPanelImpl* stage, PolygonShape* poly);
-	virtual ~PolygonPropertySetting();
+	PolygonPropertySetting(ee::EditPanelImpl* stage, 
+		const std::shared_ptr<PolygonShape>& poly);
 
 	virtual void OnPropertyGridChange(const std::string& name, const wxAny& value);
 
@@ -25,7 +27,7 @@ protected:
 private:
 	ee::EditPanelImpl* m_stage;
 
-	PolygonShape* m_poly;
+	std::shared_ptr<PolygonShape> m_poly;
 
 }; // PolygonPropertySetting
 

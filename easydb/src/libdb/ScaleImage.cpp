@@ -83,10 +83,10 @@ void ScaleImage::Scale(const std::string& src, const std::string& dst, float sca
 	std::string filepath = ee::FileHelper::GetAbsolutePath(src);
 	if (ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_IMAGE)
 	{
-		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 		sm::rect r = sym->GetBounding();
 
-		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+		auto spr = ee::SpriteFactory::Instance()->Create(sym);
 
 		s2::DrawRT rt;
 		const sm::vec2& sz = r.Size();
@@ -98,9 +98,6 @@ void ScaleImage::Scale(const std::string& src, const std::string& dst, float sca
 		spr->SetScale(scale);
 		rt.Draw(spr, true, width, height);
 		rt.StoreToFile(dst, width, height);
-
-		spr->RemoveReference();
-		sym->RemoveReference();
 	}
 }
 

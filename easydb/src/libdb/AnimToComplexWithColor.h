@@ -45,7 +45,7 @@ private:
 
 private:
 	static std::string ParserTrans(const std::string& str, Trans& t);
-	static void TransSpr(const Trans& t, ee::Sprite* spr);
+	static void TransSpr(const Trans& t, const ee::SprPtr& spr);
 
 }; // AnimToComplexWithColor
 

@@ -99,7 +99,7 @@ void FileIO::Load(const char* filename, LibraryPanel* library,
 			gum::Config* cfg = gum::Config::Instance();
 			bool ori_alpha_cfg = cfg->GetPreMulAlpha();
 			cfg->SetPreMulAlpha(false);
-			ee::Image* img = ee::ImageMgr::Instance()->GetItem(filepath);
+			auto img = ee::ImageMgr::Instance()->GetItem(filepath);
 			cfg->SetPreMulAlpha(ori_alpha_cfg);
 			if (img) {
 				SettingCfg::Instance()->m_post_effect_file = filepath;

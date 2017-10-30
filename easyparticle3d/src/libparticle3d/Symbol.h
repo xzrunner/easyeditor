@@ -17,9 +17,9 @@ public:
 	 *  @interface
 	 *    ee::Symbol
 	 */
-	virtual void Traverse(ee::Visitor<ee::Sprite>& visitor);
+	virtual void Traverse(ee::RefVisitor<ee::Sprite>& visitor);
 
-	static ee::Symbol* Create() { return new Symbol(); }
+	static ee::SymPtr Create() { return std::make_shared<Symbol>(); }
 
 protected:
 	virtual sm::rect GetBoundingImpl(const s2::Sprite* spr = NULL, const s2::Actor* actor = NULL, bool cache = true) const;

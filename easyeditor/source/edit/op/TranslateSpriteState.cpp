@@ -104,7 +104,7 @@ void TranslateSpriteState::Translate(const sm::vec2& offset)
 //////////////////////////////////////////////////////////////////////////
 
 void TranslateSpriteState::TranslateVisitor::
-Visit(Sprite* spr, bool& next)
+Visit(const SprPtr& spr, bool& next)
 {
 	spr->Translate(m_offset);
 	next = true;

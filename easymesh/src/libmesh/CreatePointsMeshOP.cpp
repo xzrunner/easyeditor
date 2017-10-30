@@ -43,7 +43,7 @@ bool CreatePointsMeshOP::OnKeyDown(int keyCode)
 
 bool CreatePointsMeshOP::OnMouseLeftDown(int x, int y)
 {
-	PointsMesh* mesh = dynamic_cast<PointsMesh*>(m_stage->GetMesh());
+	auto mesh = dynamic_cast<PointsMesh*>(m_stage->GetMesh());
 	if (!mesh) {
 		return false;
 	}
@@ -88,8 +88,8 @@ bool CreatePointsMeshOP::OnMouseLeftUp(int x, int y)
 bool CreatePointsMeshOP::OnMouseRightDown(int x, int y)
 {
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-	PointsMesh* points_mesh = static_cast<PointsMesh*>(m_stage->GetMesh());
-	if (points_mesh->RemoveInnerPos(pos)) {
+	auto points_mesh = dynamic_cast<PointsMesh*>(m_stage->GetMesh());
+	if (points_mesh && points_mesh->RemoveInnerPos(pos)) {
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		return false;
 	}
@@ -128,8 +128,8 @@ bool CreatePointsMeshOP::OnMouseDrag(int x, int y)
 	}
 
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-	PointsMesh* points_mesh = static_cast<PointsMesh*>(m_stage->GetMesh());
-	if (points_mesh->MoveInnerPos(m_selected_inner, pos)) {
+	auto points_mesh = dynamic_cast<PointsMesh*>(m_stage->GetMesh());
+	if (points_mesh && points_mesh->MoveInnerPos(m_selected_inner, pos)) {
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		return true;
 	}
@@ -139,9 +139,10 @@ bool CreatePointsMeshOP::OnMouseDrag(int x, int y)
 
 bool CreatePointsMeshOP::OnDraw() const
 {
-	if (Mesh* mesh = m_stage->GetMesh()) {
-		ee::SpriteRenderer::Instance()->Draw(mesh->GetBaseSymbol());
-		s2::DrawMesh::DrawInfoUV(mesh);
+	auto mesh = m_stage->GetMesh();
+	if (mesh) {
+		ee::SpriteRenderer::Instance()->Draw(mesh->GetBaseSymbol().get());
+		s2::DrawMesh::DrawInfoUV(*mesh);
 	}
 
 	eshape::EditPolylineOP<eshape::DrawLoopOP, eshape::SelectNodesOP>::OnDraw();

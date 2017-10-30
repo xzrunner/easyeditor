@@ -24,13 +24,13 @@ public:
 	 */
 	virtual int Type() const;
 	virtual void Traverse(const s2::SymbolVisitor& visitor) {}
-	virtual s2::RenderReturn Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
+	virtual s2::RenderReturn DrawTree(cooking::DisplayList* dlist, const s2::RenderParams& rp, const s2::Sprite* spr = nullptr) const;
 
 	/**
 	 *  @interface
 	 *    ee::Symbol
 	 */
-	virtual void Traverse(ee::Visitor<ee::Sprite>& visitor);
+	virtual void Traverse(ee::RefVisitor<ee::Sprite>& visitor);
 
 	AnchorMgr& GetAnchorMgr() { return m_anchors; }
 	const AnchorMgr& GetAnchorMgr() const { return m_anchors; }
@@ -40,18 +40,18 @@ public:
 	void SetWidth(int width) { m_width = width; }
 	void SetHeight(int height) { m_height = height; } 
 
-	void InsertExtRef(Sprite* spr);
-	void RemoveExtRef(Sprite* spr);
+	void InsertExtRef(const std::shared_ptr<Sprite>& spr);
+	void RemoveExtRef(const std::shared_ptr<Sprite>& spr);
 	void ClearExtRef();
-	void ResetExtRefOrder(Sprite* spr, bool up);
-	void ResetExtRefOrderMost(Sprite* spr, bool up);
+	void ResetExtRefOrder(const std::shared_ptr<Sprite>& spr, bool up);
+	void ResetExtRefOrderMost(const std::shared_ptr<Sprite>& spr, bool up);
 
-	const std::vector<Sprite*>& GetExtRefs() const { return m_ext_refs; }
+	auto& GetExtRefs() const { return m_ext_refs; }
 
-	static ee::Symbol* Create() { return new Symbol(); }
+	static ee::SymPtr Create() { return std::make_shared<Symbol>(); }
 
 protected:
-	virtual sm::rect GetBoundingImpl(const s2::Sprite* spr = NULL, const s2::Actor* actor = NULL, bool cache = true) const;
+	virtual sm::rect GetBoundingImpl(const s2::Sprite* spr = nullptr, const s2::Actor* actor = NULL, bool cache = true) const;
 
 	virtual bool LoadResources();
 
@@ -62,7 +62,7 @@ private:
 
 	std::string m_wrap_path;
 
-	std::vector<Sprite*> m_ext_refs;
+	std::vector<std::shared_ptr<Sprite>> m_ext_refs;
 
 }; // Symbol
 

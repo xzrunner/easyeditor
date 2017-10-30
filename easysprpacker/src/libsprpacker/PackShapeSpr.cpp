@@ -13,10 +13,10 @@ namespace lua = ebuilder::lua;
 namespace esprpacker
 {
 
-PackShapeSpr::PackShapeSpr(const eshape::Sprite* spr)
+PackShapeSpr::PackShapeSpr(const std::shared_ptr<eshape::Sprite>& spr)
 {
 	m_sym = PackNodeFactory::Instance()->Create(
-		dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
+		std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol()));
 }
 
 PackShapeSpr::~PackShapeSpr()

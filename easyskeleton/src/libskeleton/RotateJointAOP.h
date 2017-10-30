@@ -15,16 +15,15 @@ class Joint;
 class RotateJointAOP : public ee::AtomicOP
 {
 public:
-	RotateJointAOP(Joint* joint, float rot);
-	virtual ~RotateJointAOP();
+	RotateJointAOP(const std::shared_ptr<Joint>& joint, float rot);
 	
 	virtual void Undo();
 	virtual void Redo();
 
-	virtual Json::Value Store(const std::vector<ee::Sprite*>& sprs) const { return Json::Value(); }
+	virtual Json::Value Store(const std::vector<ee::SprPtr>& sprs) const { return Json::Value(); }
 
 private:
-	Joint* m_joint;
+	std::shared_ptr<Joint> m_joint;
 
 	float m_rot;
 

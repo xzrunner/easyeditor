@@ -10,10 +10,10 @@ namespace ecomplex
 class PictureToSpr
 {
 public:
-	static ee::Sprite* Trans(const erespacker::PackPicture* pic);
+	static ee::SprPtr Trans(const erespacker::PackPicture* pic);
 
 private:
-	static ee::Sprite* TransQuad(const erespacker::PackPicture::Quad* quad);
+	static ee::SprPtr TransQuad(const erespacker::PackPicture::Quad* quad);
 
 }; // PictureToSpr
 

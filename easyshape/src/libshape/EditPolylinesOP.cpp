@@ -7,7 +7,7 @@
 #include <ee/panel_msg.h>
 #include <ee/SettingData.h>
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <sprite2/RenderParams.h>
 #include <SM_DouglasPeucker.h>
 
@@ -74,11 +74,10 @@ bool EditPolylinesOP::OnDraw() const
 	s2::RenderParams rp;
 	rp.color.SetMul(s2::Color(0.8f, 0.8f, 0.2f));
 
-	std::map<ChainShape*, ChainShape*>::const_iterator itr = m_simplify_buffer.begin();
-	for ( ; itr != m_simplify_buffer.end(); ++itr) {
-		itr->second->Draw(rp);
+	for (auto& item : m_simplify_buffer) {
+		item.second->Draw(rp);
 		s2::RVG::SetColor(s2::Color(51, 51, 204));
-		s2::RVG::Circles(itr->second->GetVertices(), ee::SettingData::ctl_pos_sz, true);
+		s2::RVG::Circles(item.second->GetVertices(), ee::SettingData::ctl_pos_sz, true);
 	}
 
 	return false;
@@ -95,10 +94,10 @@ bool EditPolylinesOP::Clear()
 
 void EditPolylinesOP::simplify()
 {
-	std::map<ChainShape*, ChainShape*>::iterator itr = m_simplify_buffer.begin();
+	auto itr = m_simplify_buffer.begin();
 	for ( ; itr != m_simplify_buffer.end(); ++itr)
 	{
-		std::vector<sm::vec2> simplified;
+		CU_VEC<sm::vec2> simplified;
 		sm::douglas_peucker(itr->first->GetVertices(), m_cmpt->GetSimplifyThreshold(), simplified);
 		itr->second->SetVertices(simplified);
 	}
@@ -108,7 +107,7 @@ void EditPolylinesOP::simplify()
 
 void EditPolylinesOP::updateFromSimplified()
 {
-	std::map<ChainShape*, ChainShape*>::iterator itr = m_simplify_buffer.begin();
+	auto itr = m_simplify_buffer.begin();
 	for ( ; itr != m_simplify_buffer.end(); ++itr)
 		itr->first->SetVertices(itr->second->GetVertices());
 
@@ -117,9 +116,6 @@ void EditPolylinesOP::updateFromSimplified()
 
 void EditPolylinesOP::clearBuffer()
 {
-	std::map<ChainShape*, ChainShape*>::iterator itr = m_simplify_buffer.begin();
-	for ( ; itr != m_simplify_buffer.end(); ++itr)
-		delete itr->second;
 	m_simplify_buffer.clear();
 
 	m_is_dirty = false;
@@ -130,17 +126,18 @@ void EditPolylinesOP::clearBuffer()
 //////////////////////////////////////////////////////////////////////////
 
 EditPolylinesOP::UpdateBufferVisitor::
-UpdateBufferVisitor(std::map<ChainShape*, ChainShape*>& simplifyBuffer)
+UpdateBufferVisitor(std::map<std::shared_ptr<ChainShape>, std::shared_ptr<ChainShape>>& simplifyBuffer)
 	: m_simplify_buffer(simplifyBuffer)
 {
 }
 
 void EditPolylinesOP::UpdateBufferVisitor::
-Visit(ee::Shape* shape, bool& next)
+Visit(const ee::ShapePtr& shape, bool& next)
 {
-	ChainShape* chain = static_cast<ChainShape*>(shape);
-	ChainShape* cp = dynamic_cast<ChainShape*>(((cu::Cloneable*)chain)->Clone());
-	m_simplify_buffer.insert(std::make_pair(chain, cp));
+	auto chain = std::dynamic_pointer_cast<ChainShape>(shape);
+	auto cp = std::shared_ptr<s2::Shape>(shape->Clone());
+	auto cp_chain = std::dynamic_pointer_cast<ChainShape>(cp);
+	m_simplify_buffer.insert(std::make_pair(chain, cp_chain));
 	next = true;
 }
 
@@ -155,9 +152,9 @@ OffsetVisitor(const sm::vec2& offset)
 }
 
 void EditPolylinesOP::OffsetVisitor::
-Visit(ee::Shape* shape, bool& next)
+Visit(const ee::ShapePtr& shape, bool& next)
 {
-	ChainShape* chain = static_cast<ChainShape*>(shape);
+	auto chain = std::dynamic_pointer_cast<ChainShape>(shape);
 	chain->Translate(m_offset);
 	next = true;
 }

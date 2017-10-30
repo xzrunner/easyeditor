@@ -4,8 +4,9 @@
 #include <ee/EditPanel.h>
 #include <ee/MultiShapesImpl.h>
 #include <ee/CombinedDropTarget.h>
- 
-namespace ee { class LibraryPanel; class Sprite; class MultiSpritesImpl; class Symbol; }
+#include <ee/Symbol.h>
+
+namespace ee { class LibraryPanel; class Sprite; class MultiSpritesImpl; }
 
 class wxGLContext;
 
@@ -21,16 +22,15 @@ public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 		ee::LibraryPanel* library);
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		wxGLContext* glctx, ee::Sprite* edited, 
+		wxGLContext* glctx, const ee::SprPtr& edited, 
 		const ee::MultiSpritesImpl* bg_sprites);
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		Symbol* sym/*, ee::LibraryPanel* library*/);
-	virtual ~StagePanel();
+		const std::shared_ptr<Symbol>& sym/*, ee::LibraryPanel* library*/);
 
 	//
 	// ee::MultiShapesImpl interface
 	//
-	virtual void TraverseShapes(ee::Visitor<ee::Shape>& visitor, 
+	virtual void TraverseShapes(ee::RefVisitor<ee::Shape>& visitor,
 		ee::DataTraverseType type = ee::DT_ALL) const;
 
 	void LoadFromFile(const char* filename);
@@ -45,7 +45,7 @@ public:
 		m_toolbar = toolbar;
 	}
 
-	void SetSymbolBG(ee::Symbol* sym);
+	void SetSymbolBG(const ee::SymPtr& sym);
 
 protected:
 	//
@@ -72,7 +72,7 @@ private:
 	}; // DragSymbolTarget
 
 private:
-	Symbol* m_sym;
+	std::shared_ptr<Symbol> m_sym;
 
 	ToolbarPanel* m_toolbar;
 

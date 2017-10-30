@@ -1,7 +1,7 @@
 #ifndef _EASYSPRPACKER_PACK_AUDIO_ID_MGR_H_
 #define _EASYSPRPACKER_PACK_AUDIO_ID_MGR_H_
 
-#include <CU_Singleton.h>
+#include <cu/cu_macro.h>
 
 #include <map>
 #include <string>
@@ -19,7 +19,7 @@ public:
 private:
 	std::map<std::string, int> m_map2id;
 
-	SINGLETON_DECLARATION(PackAudioIDMgr)
+	CU_SINGLETON_DECLARATION(PackAudioIDMgr)
 
 }; // PackAudioIDMgr
 

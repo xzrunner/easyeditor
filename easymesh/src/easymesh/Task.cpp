@@ -39,7 +39,7 @@ void Task::Load(const char* filepath)
 		return;
 	}
 
-	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+	auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	Symbol* mesh_sym = static_cast<Symbol*>(sym);
 	m_stage->SetMeshSymbol(mesh_sym);
 
@@ -56,7 +56,6 @@ void Task::Load(const char* filepath)
 	m_toolbar->SetEditType(type);
 
 	m_library->LoadFromSymbolMgr(*ee::SymbolMgr::Instance());
-	sym->RemoveReference();
 }
 
 void Task::Store(const char* filepath) const

@@ -68,7 +68,7 @@ void ToolbarPanel::Load(const Json::Value& val, const std::string& dir)
 		if (mode == T2D_MODE_IMAGE) {
 			std::string filepath = comp_val["filepath"].asString();
 			filepath = ee::FileHelper::GetAbsolutePath(dir, filepath);
-			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+			auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			cp = OnAddChild(sym);
 		} else if (mode == T2D_MODE_SHAPE) {
 			cp = OnAddChild(NULL);
@@ -97,10 +97,10 @@ void ToolbarPanel::InitTrail()
 {
 	Clear();
 
-	s2::TrailEmitterCfg* cfg = MTConfigMgr::Instance()->GetDefaultConfig();
-	MotionTrail* mt = new MotionTrail(cfg);
+	auto cfg = MTConfigMgr::Instance()->GetDefaultConfig();
+	auto mt = std::make_shared<MotionTrail>(cfg);
 	//	mt->Start();
-	cu::RefCountObjAssign<MotionTrail>(m_stage->m_trail, mt);
+	m_stage->m_trail = mt;
 	for (int i = 0, n = m_sliders.size(); i < n; ++i) {
 		m_sliders[i]->Update();
 	}
@@ -234,12 +234,9 @@ void ToolbarPanel::OnChangeMode(wxCommandEvent& event)
 	}
 }
 
-ComponentPanel* ToolbarPanel::OnAddChild(s2::Symbol* sym)
+ComponentPanel* ToolbarPanel::OnAddChild(const s2::SymPtr&  sym)
 {
-	if (sym) {
-		sym->AddReference();
-	}
-	t2d_symbol* mt = m_stage->m_trail->AddSymbol(sym);
+	t2d_symbol* mt = m_stage->m_trail->AddSymbol(sym.get());
 	ComponentPanel* cp = NULL;
 	const t2d_emitter_cfg* cfg = m_stage->m_trail->GetConfig()->GetImpl();
 	if (cfg->mode_type == T2D_MODE_IMAGE) {
@@ -300,7 +297,7 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
 	long index;
 	sIndex.ToLong(&index);
 
-	ee::Symbol* sym = m_library->GetSymbol(index);
+	auto sym = m_library->GetSymbol(index);
 	if (sym)
 	{
 		m_toolbar->OnAddChild(sym);

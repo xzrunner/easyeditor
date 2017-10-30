@@ -4,8 +4,8 @@
 #include <ee/SpriteObserver.h>
 
 #include <SM_Vector.h>
-#include <CU_RefCountObj.h>
-#include <CU_Uncopyable.h>
+#include <cu/CU_RefCountObj.h>
+#include <cu/uncopyable.h>
 
 #include <vector>
 
@@ -20,18 +20,18 @@ class Bone : public cu::RefCountObj, private cu::Uncopyable, public ee::SpriteOb
 {
 public:
 	Bone();
-	Bone(ee::Sprite* skin);
+	Bone(const ee::SprPtr& skin);
 	~Bone();
 
 	/**
 	 *  @interface
 	 *    ee::SpriteObserver
 	 */
-	virtual void OnSetPosition(ee::Sprite* spr, const sm::vec2& pos);
-	virtual void OnSetAngle(ee::Sprite* spr, float angle);
-	virtual void OnSetScale(ee::Sprite* spr, const sm::vec2& scale);
-	virtual void OnSetShear(ee::Sprite* spr, const sm::vec2& shear);
-	virtual void OnSetOffset(ee::Sprite* spr, const sm::vec2& offset);
+	virtual void OnSetPosition(const ee::SprPtr& spr, const sm::vec2& pos);
+	virtual void OnSetAngle(const ee::SprPtr& spr, float angle);
+	virtual void OnSetScale(const ee::SprPtr& spr, const sm::vec2& scale);
+	virtual void OnSetShear(const ee::SprPtr& spr, const sm::vec2& shear);
+	virtual void OnSetOffset(const ee::SprPtr& spr, const sm::vec2& offset);
 
 	void Update();
 	void Draw() const;
@@ -44,7 +44,7 @@ public:
 	void Rotate(float rot);
 	void Scale(const sm::vec2& scale);
 
-	void SetSkin(ee::Sprite* skin);
+	void SetSkin(const ee::SprPtr& skin);
 	void AddJoint(Joint* joint);
 	void RemoveJoint(Joint* joint);
 
@@ -56,7 +56,7 @@ private:
 	Joint* GetCenterJoint();
 
 private:
-	ee::Sprite* m_skin;
+	ee::SprPtr m_skin;
 
 	std::vector<Joint*> m_joints;
 

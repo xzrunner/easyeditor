@@ -23,7 +23,7 @@ void MaxRectsBinaryArrange::Arrange(const std::vector<ee::ImageSprite*>& sprs)
 
 	assert(sprs.size() == output.size());
 	for (int i = 0; i < sz; ++i) {
-		ee::Sprite* spr = sprs[i];
+		auto& spr = sprs[i];
 		const etexpacker::Rect& r = output[i];
 		sm::vec2 pos;
 		pos.x = r.x + r.width * 0.5f;

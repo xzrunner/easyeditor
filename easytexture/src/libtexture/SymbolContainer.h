@@ -12,27 +12,26 @@ class Symbol;
 class SymbolContainer : public ee::DataContainer<ee::Shape>
 {
 public:
-	SymbolContainer(Symbol* sym);
-	virtual ~SymbolContainer();
+	SymbolContainer(const std::shared_ptr<Symbol>& sym);
 
 	//
 	// DataContainer interface
 	//
-	virtual void Traverse(ee::Visitor<ee::Shape>& visitor, bool order = true) const;
-	virtual void Traverse(ee::Visitor<ee::Shape>& visitor, ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
-	virtual bool Remove(ee::Shape* shape);
-	virtual bool Insert(ee::Shape* shape);
-	virtual bool Insert(ee::Shape* shape, int idx);
+	virtual void Traverse(ee::RefVisitor<ee::Shape>& visitor, bool order = true) const;
+	virtual void Traverse(ee::RefVisitor<ee::Shape>& visitor, ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
+	virtual bool Remove(const std::shared_ptr<ee::Shape>& shape);
+	virtual bool Insert(const std::shared_ptr<ee::Shape>& shape);
+	virtual bool Insert(const std::shared_ptr<ee::Shape>& shape, int idx);
 	virtual bool Clear();
-	virtual bool ResetOrder(const ee::Shape* shape, bool up);
-	virtual bool ResetOrderMost(const ee::Shape* shape, bool up);
+	virtual bool ResetOrder(const std::shared_ptr<const ee::Shape>& shape, bool up);
+	virtual bool ResetOrderMost(const std::shared_ptr<const ee::Shape>& shape, bool up);
 
 private:
-	void LoadShapes(std::vector<ee::Shape*>& shapes) const;
-	void StorePolygons(const std::vector<ee::Shape*>& shapes);
+	void LoadShapes(std::vector<std::shared_ptr<ee::Shape>>& shapes) const;
+	void StorePolygons(const std::vector<std::shared_ptr<ee::Shape>>& shapes);
 
 private:
-	Symbol* m_sym;
+	std::shared_ptr<Symbol> m_sym;
 
 }; // SymbolContainer
 

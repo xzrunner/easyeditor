@@ -3,6 +3,8 @@
 #include "binary_io.h"
 #include "PackCoords.h"
 
+#include <ee/SymbolMgr.h>
+
 #include <easyanim2.h>
 #include <easybuilder.h>
 namespace lua = ebuilder::lua;
@@ -11,14 +13,14 @@ namespace lua = ebuilder::lua;
 #include <polymesh/Mesh.h>
 #include <sprite2/SymType.h>
 #include <sprite2/MeshSymbol.h>
-#include <sprite2/S2_Mesh.h>
+#include <sprite2/Mesh.h>
 #include <simp/NodeAnim2.h>
 #include <simp/simp_types.h>
 
 namespace esprpacker
 {
 
-PackAnim2::PackAnim2(const libanim2::Symbol* sym)
+PackAnim2::PackAnim2(const std::shared_ptr<libanim2::Symbol>& sym)
 {
 	Init(sym);
 }
@@ -220,7 +222,7 @@ void PackAnim2::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 	}
 }
 
-void PackAnim2::Init(const libanim2::Symbol* sym)
+void PackAnim2::Init(const std::shared_ptr<libanim2::Symbol>& sym)
 {
 	const rg_animation* anim = sym->GetAnim();
 	InitSkeleton(anim->sk);
@@ -266,7 +268,8 @@ void PackAnim2::InitSkeleton(const rg_skeleton* sk)
 		const rg_skin& src = sk->skins[i];
 		Skin dst;
 		s2::Symbol* sym = static_cast<s2::Symbol*>(src.ud);
-		dst.node = PackNodeFactory::Instance()->Create(VI_DOWNCASTING<ee::Symbol*>(sym));
+		auto ee_sym = ee::SymbolMgr::Instance()->FetchSymbol(dynamic_cast<ee::Symbol*>(sym)->GetFilepath());
+		dst.node = PackNodeFactory::Instance()->Create(ee_sym);
 		switch (sym->Type())
 		{
 		case s2::SYM_IMAGE:
@@ -274,7 +277,7 @@ void PackAnim2::InitSkeleton(const rg_skeleton* sk)
 			break;
 		case s2::SYM_MESH:
 			{
-				const pm::Mesh* mesh = dynamic_cast<s2::MeshSymbol*>(sym)->GetMesh()->GetMesh();
+				auto& mesh = dynamic_cast<s2::MeshSymbol*>(sym)->GetMesh()->GetMesh();
 				switch (mesh->Type())
 				{
 				case pm::MESH_TRIANGLES:

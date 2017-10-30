@@ -1,7 +1,7 @@
 #ifndef _EASYEDITOR_CAMERA_MODES_H_
 #define _EASYEDITOR_CAMERA_MODES_H_
 
-#include <CU_Singleton.h>
+#include <cu/cu_macro.h>
 
 #include <sprite2/CameraMode.h>
 
@@ -32,7 +32,7 @@ private:
 private:
 	std::vector<Item> m_modes;
 
-	SINGLETON_DECLARATION(CameraModes);
+	CU_SINGLETON_DECLARATION(CameraModes);
 
 }; // CameraModes
 

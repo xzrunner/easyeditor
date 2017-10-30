@@ -21,14 +21,14 @@ public:
 
 	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
 
-	const IPackNode* Create(const eparticle3d::Sprite* spr);
-	void Create(const eparticle3d::Symbol* sym, const IPackNode* p3d);
+	const IPackNode* Create(const std::shared_ptr<const eparticle3d::Sprite>& spr);
+	void Create(const std::shared_ptr<const eparticle3d::Symbol>& sym, const IPackNode* p3d);
 
 private:
 	ExportNameSet& m_export_set;
 
 //	std::vector<IPackNode*> m_nodes;
-	std::map<const eparticle3d::Symbol*, const PackP3dSpr*> m_map_data;
+	std::map<std::shared_ptr<const eparticle3d::Symbol>, const PackP3dSpr*> m_map_data;
 
 }; // P3dSprBuilder
 

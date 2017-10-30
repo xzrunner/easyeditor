@@ -3,6 +3,8 @@
 
 #include <ee/Symbol.h>
 
+#include <map>
+
 namespace erespacker
 {
 
@@ -12,7 +14,7 @@ class ExportNameSet
 {
 public:
 	
-	void LoadExport(const ee::Symbol* sym, IPackNode* node);
+	void LoadExport(const ee::SymConstPtr& sym, IPackNode* node);
 
 	const std::map<std::string, int>& GetData() const { return m_map; }
 

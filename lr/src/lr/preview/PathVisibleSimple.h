@@ -22,7 +22,7 @@ public:
 	//
 	// interface IPathfinding
 	//
-	virtual void DisableRegion(const ee::Sprite* spr, bool disable);
+	virtual void DisableRegion(const ee::SprConstPtr& spr, bool disable);
 	virtual void QueryRoute(const sm::vec2& start, const sm::vec2& end);
 	virtual void DebugDraw() const;
 
@@ -58,8 +58,8 @@ private:
 
 private:
 	// data struct
-	void InsertBoundary(const ee::Sprite* spr);
-	void RemoveBoundary(std::map<const ee::Sprite*, std::vector<Node*> >::iterator itr);
+	void InsertBoundary(const ee::SprConstPtr& spr);
+	void RemoveBoundary(std::map<const ee::SprPtr, std::vector<Node*> >::iterator itr);
 
 	void BuildConnection(const std::vector<Node*>& nodes) const;
 	bool IsSegIntersectAllBound(const sm::vec2& p0, const sm::vec2& p1) const;
@@ -80,7 +80,7 @@ private:
 	VisitedList m_visited;
 	CandidateList m_candidate;
 
-	std::map<const ee::Sprite*, std::vector<Node*> > m_bounds;
+	std::map<const ee::SprPtr, std::vector<Node*> > m_bounds;
 	
 	int m_node_id;
 	std::map<int, Node*> m_nodes;

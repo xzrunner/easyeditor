@@ -3,10 +3,11 @@
 
 #include "IPackNode.h"
 
+#include <ee/Sprite.h>
+
 #include <float.h>
 
 namespace ebuilder { class CodeGenerator; }
-namespace ee { class Sprite; }
 
 namespace erespacker
 {
@@ -84,16 +85,16 @@ public:
 	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
 		const ee::TexturePacker& tp, float scale) const;
 	virtual void UnpackFromLua(lua_State* L,
-		const std::vector<ee::Image*>& images);
+		const std::vector<ee::ImagePtr>& images);
 
 	virtual int SizeOfPackToBin() const;
 	virtual void PackToBin(uint8_t** ptr,
 		const ee::TexturePacker& tp, float scale) const;
 	virtual int SizeOfUnpackFromBin() const;
 	virtual void UnpackFromBin(uint8_t** ptr, 
-		const std::vector<ee::Image*>& images);
+		const std::vector<ee::ImagePtr>& images);
 
-	bool CreateFramePart(const ee::Sprite* spr, Frame& frame);
+	bool CreateFramePart(const ee::SprConstPtr& spr, Frame& frame);
 	void CreateClipboxFramePart(const PackClipbox* cb, Frame& frame);
 
 	void Clear();
@@ -103,9 +104,9 @@ public:
 private:
 	bool AddComponent(const IPackNode* node, const std::string& name, int& comp_idx, bool& force_mat);	
 
-	static void LoadSprTrans(const ee::Sprite* spr, SpriteTrans& trans, bool force_mat);
-	static void LoadSprMat(const ee::Sprite* spr, SpriteTrans& trans, bool force);
-	static void LoadSprColor(const ee::Sprite* spr, SpriteTrans& trans);
+	static void LoadSprTrans(const ee::SprConstPtr& spr, SpriteTrans& trans, bool force_mat);
+	static void LoadSprMat(const ee::SprConstPtr& spr, SpriteTrans& trans, bool force);
+	static void LoadSprColor(const ee::SprConstPtr& spr, SpriteTrans& trans);
 
 public:
 	std::vector<Component> components;

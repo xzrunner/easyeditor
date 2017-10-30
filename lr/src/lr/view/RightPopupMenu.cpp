@@ -64,7 +64,7 @@ void RightPopupMenu::CreateShapeMenu(wxMenu& menu)
 
 void RightPopupMenu::CreateAnimMenu(wxMenu& menu)
 {
-	std::string filepath = dynamic_cast<const ee::Symbol*>(m_spr->GetSymbol())->GetFilepath();
+	std::string filepath = std::dynamic_pointer_cast<ee::Symbol>(m_spr->GetSymbol())->GetFilepath();
 	if (!CharacterFileName::IsValidFilepath(filepath)) {
 		return;
 	}
@@ -166,10 +166,10 @@ void RightPopupMenu::CreateLayerMoveMenu(wxMenu& menu)
 
 void RightPopupMenu::HandleShapeMenu(int id)
 {
-	std::vector<ee::Sprite*> selected;
-	m_stage->GetSpriteSelection()->Traverse(ee::FetchAllVisitor<ee::Sprite>(selected));
+	std::vector<ee::SprPtr> selected;
+	m_stage->GetSpriteSelection()->Traverse(ee::FetchAllRefVisitor<ee::Sprite>(selected));
 	if (!selected.empty()) {
-		std::string cmd = "easyshape_new.exe " + dynamic_cast<const ee::Symbol*>(selected[0]->GetSymbol())->GetFilepath();
+		std::string cmd = "easyshape_new.exe " + std::dynamic_pointer_cast<ee::Symbol>(selected[0]->GetSymbol())->GetFilepath();
 		WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);		
 	}
 }
@@ -178,7 +178,7 @@ void RightPopupMenu::HandleAnimMenu(int id)
 {
 	if (id == MENU_ROTATE_LEFT_ID || id == MENU_ROTATE_RIGHT_ID)
 	{
-		std::string filepath = dynamic_cast<const ee::Symbol*>(m_spr->GetSymbol())->GetFilepath();
+		std::string filepath = std::dynamic_pointer_cast<ee::Symbol>(m_spr->GetSymbol())->GetFilepath();
 		assert(CharacterFileName::IsValidFilepath(filepath));
 		CharacterFileName name(filepath);
 		int dir = 1 + (name.GetField(CharacterFileName::FT_DIRECTION)[0] - '1');
@@ -208,7 +208,7 @@ void RightPopupMenu::HandleAnimMenu(int id)
 	{
 		const CharacterFileName& item = m_anim_files[id - MENU_COLOR_START_ID];
 
-		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(item.GetFilepath());
+		auto sym = ee::SymbolMgr::Instance()->FetchSymbol(item.GetFilepath());
 		static_cast<ecomplex::Sprite*>(m_spr)->SetSymbol(sym);
 	}
 }
@@ -216,8 +216,8 @@ void RightPopupMenu::HandleAnimMenu(int id)
 void RightPopupMenu::HandleLayerTagMenu(int id)
 {
 	ee::SpriteSelection* selection = m_stage->GetSpriteSelection();
-	std::vector<ee::Sprite*> sprs;
-	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	selection->Traverse(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 
 	SetLayerTagAOP::Type type;
 	if (id == MENU_COVER_LAYER_TAG_ID) {
@@ -253,10 +253,10 @@ void RightPopupMenu::HandleMoveToLayerMenu(int id)
 	ee::Layer* to = from->GetLayerMgr()->GetLayer(idx);
 	
 	ee::SpriteSelection* selection = m_stage->GetSpriteSelection();
-	std::vector<ee::Sprite*> sprs;
-	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	selection->Traverse(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
-		ee::Sprite* spr = sprs[i];
+		auto& spr = sprs[i];
 		from->RemoveSprite(spr);
 		to->Insert(spr);
 	}

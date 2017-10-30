@@ -13,23 +13,23 @@
 namespace emask
 {
 
-void FileIO::Store(const char* filepath, const Symbol* sym)
+void FileIO::Store(const char* filepath, const Symbol& sym)
 {
 	Json::Value value;
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath) + "\\";
 
-	value["name"] = sym->name;
+	value["name"] = sym.name;
 
-	const s2::Symbol *base = sym->GetBase()->GetSymbol(),
-		             *mask = sym->GetMask()->GetSymbol();
+	auto& base = sym.GetBase()->GetSymbol();
+	auto& mask = sym.GetMask()->GetSymbol();
 	if (base) {
 		value["base"]["filepath"] = ee::SymbolPath::GetRelativePath( 
-			dynamic_cast<const ee::Symbol*>(base), dir);
+			*std::dynamic_pointer_cast<ee::Symbol>(base), dir);
 	}
 	if (mask) {
 		value["mask"]["filepath"] = ee::SymbolPath::GetRelativePath(
-			dynamic_cast<const ee::Symbol*>(mask), dir);
+			*std::dynamic_pointer_cast<ee::Symbol>(mask), dir);
 	}
 
 	Json::StyledStreamWriter writer;
@@ -40,7 +40,7 @@ void FileIO::Store(const char* filepath, const Symbol* sym)
 	fout.close();
 }
 
-void FileIO::Load(const char* filepath, Symbol* sym)
+void FileIO::Load(const char* filepath, Symbol& sym)
 {
 	Json::Value value;
 	Json::Reader reader;
@@ -52,23 +52,19 @@ void FileIO::Load(const char* filepath, Symbol* sym)
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath) + "\\";
 
-	sym->name = value["name"].asString();
+	sym.name = value["name"].asString();
 
 	if (!value["base"].isNull()) {
 		std::string filepath = ee::FileHelper::GetAbsolutePath(dir, value["base"]["filepath"].asString());
-		ee::Symbol* base_sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-		ee::Sprite* base_spr = ee::SpriteFactory::Instance()->Create(base_sym);
-		sym->SetBase(base_spr);
-		base_spr->RemoveReference();
-		base_sym->RemoveReference();
+		auto base_sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		auto base_spr = ee::SpriteFactory::Instance()->Create(base_sym);
+		sym.SetBase(base_spr);
 	}
 	if (!value["mask"].isNull()) {
 		std::string filepath = ee::FileHelper::GetAbsolutePath(dir, value["mask"]["filepath"].asString());
-		ee::Symbol* mask_sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-		ee::Sprite* mask_spr = ee::SpriteFactory::Instance()->Create(mask_sym);
-		sym->SetMask(mask_spr);
-		mask_spr->RemoveReference();
-		mask_sym->RemoveReference();
+		auto mask_sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		auto mask_spr = ee::SpriteFactory::Instance()->Create(mask_sym);
+		sym.SetMask(mask_spr);
 	}
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();

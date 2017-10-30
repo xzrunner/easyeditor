@@ -36,21 +36,21 @@ int UnpackLuaDescFile::Run(int argc, char *argv[])
 
 void UnpackLuaDescFile::Trigger(const std::string& lua_file, const std::string& img_name)
 {
-	std::vector<ee::Image*> images;
+	std::vector<ee::ImagePtr> images;
 	LoadAllImages(img_name, images);
 
 	erespacker::ResUnpacker unpacker;
 	unpacker.UnpackLua(lua_file, images);
 }
 
-void UnpackLuaDescFile::LoadAllImages(const std::string& img_name, std::vector<ee::Image*>& images)
+void UnpackLuaDescFile::LoadAllImages(const std::string& img_name, std::vector<ee::ImagePtr>& images)
 {
 	int idx = 1;
 	while (true)
 	{
 		std::string filepath = img_name + ee::StringHelper::ToString(idx++) + ".png";
 		if (ee::FileHelper::IsFileExist(filepath)) {
-			ee::Image* img = ee::ImageMgr::Instance()->GetItem(filepath);
+			auto img = ee::ImageMgr::Instance()->GetItem(filepath);
 			images.push_back(img);
 		} else {	
 			break;

@@ -24,7 +24,7 @@ private:
 	struct Node
 	{
 		Node* child[2];
-		ee::Sprite* texture;
+		ee::SprPtr texture;
 		sm::rect rc;
 
 		Node();

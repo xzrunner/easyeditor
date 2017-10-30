@@ -23,8 +23,7 @@ P3dSprBuilder::~P3dSprBuilder()
 {
 //	for_each(m_nodes.begin(), m_nodes.end(), ee::DeletePointerFunctor<IPackNode>());	
 
-	std::map<const eparticle3d::Symbol*, const PackP3dSpr*>::iterator
-		itr = m_map_data.begin();
+	auto itr = m_map_data.begin();
 	for ( ; itr != m_map_data.end(); ++itr) {
 		delete itr->second;
 	}
@@ -40,8 +39,7 @@ void P3dSprBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 // 		}
 // 	}
 
-	std::map<const eparticle3d::Symbol*, const PackP3dSpr*>::const_iterator 
-		itr = m_map_data.begin();
+	auto itr = m_map_data.begin();
 	for ( ; itr != m_map_data.end(); ++itr) {
 		bool has_next;
 		visitor.Visit(const_cast<PackP3dSpr*>(itr->second), has_next);
@@ -51,18 +49,17 @@ void P3dSprBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 	}
 }
 
-const IPackNode* P3dSprBuilder::Create(const eparticle3d::Sprite* spr)
+const IPackNode* P3dSprBuilder::Create(const std::shared_ptr<const eparticle3d::Sprite>& spr)
 {
-	const eparticle3d::Symbol* sym = dynamic_cast<const eparticle3d::Symbol*>(spr->GetSymbol());
-	std::map<const eparticle3d::Symbol*, const PackP3dSpr*>::iterator
-		itr = m_map_data.find(sym);
+	auto sym = std::dynamic_pointer_cast<eparticle3d::Symbol>(spr->GetSymbol());
+	auto itr = m_map_data.find(sym);
 	if (itr != m_map_data.end()) {
 		return itr->second;
 	}
 
 	PackP3dSpr* node = NULL;
 
-	const IPackNode* p3d = PackNodeFactory::Instance()->Create(dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
+	const IPackNode* p3d = PackNodeFactory::Instance()->Create(std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol()));
 	itr = m_map_data.find(sym);
 	if (itr == m_map_data.end()) {
 		node = new PackP3dSpr;
@@ -71,7 +68,7 @@ const IPackNode* P3dSprBuilder::Create(const eparticle3d::Sprite* spr)
 		node = const_cast<PackP3dSpr*>(itr->second);
 	}
 
-	node->p3d = PackNodeFactory::Instance()->Create(dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
+	node->p3d = PackNodeFactory::Instance()->Create(std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol()));
 	node->loop = spr->IsLoop();
 	node->local = spr->IsLocal();
 	node->alone = spr->IsAlone();
@@ -81,10 +78,10 @@ const IPackNode* P3dSprBuilder::Create(const eparticle3d::Sprite* spr)
 	return node;
 }
 
-//const IPackNode* P3dSprBuilder::Create(const eparticle3d::Sprite* spr)
+//const IPackNode* P3dSprBuilder::Create(const std::shared_ptr<eparticle3d::Sprite>& spr)
 //{
 //	PackP3dSpr* node = new PackP3dSpr;
-//	node->p3d = PackNodeFactory::Instance()->Create(dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
+//	node->p3d = PackNodeFactory::Instance()->Create(std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol()));
 //	node->loop = spr->IsLoop();
 //	node->local = spr->IsLocalModeDraw();
 //	node->alone = spr->IsAlone();
@@ -93,10 +90,9 @@ const IPackNode* P3dSprBuilder::Create(const eparticle3d::Sprite* spr)
 //	return node;
 //}
 
-void P3dSprBuilder::Create(const eparticle3d::Symbol* sym, const IPackNode* p3d)
+void P3dSprBuilder::Create(const std::shared_ptr<const eparticle3d::Symbol>& sym, const IPackNode* p3d)
 {
-	std::map<const eparticle3d::Symbol*, const PackP3dSpr*>::iterator
-		itr = m_map_data.find(sym);
+	auto itr = m_map_data.find(sym);
 	if (itr != m_map_data.end()) {
 		m_export_set.LoadExport(sym, const_cast<PackP3dSpr*>(itr->second));
 		return;
@@ -117,7 +113,7 @@ void P3dSprBuilder::Create(const eparticle3d::Symbol* sym, const IPackNode* p3d)
 	m_export_set.LoadExport(sym, node);
 }
 
-//void P3dSprBuilder::Create(const eparticle3d::Symbol* sym, const IPackNode* p3d)
+//void P3dSprBuilder::Create(const std::shared_ptr<eparticle3d::Symbol>& sym, const IPackNode* p3d)
 //{
 //	PackP3dSpr* node = new PackP3dSpr;
 //

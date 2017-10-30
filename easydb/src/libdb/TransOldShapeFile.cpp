@@ -51,11 +51,11 @@ void TransOldShapeFile::Run(const std::string& folder)
 		switch (type)
 		{
 		case s2::SYM_SHAPE:
-// 			ee::Symbol* sym = ee::SymbolMgr::Instance()->fetchSymbol(filepath);
+// 			auto sym = ee::SymbolMgr::Instance()->fetchSymbol(filepath);
 // 			static_cast<eshape::Symbol*>(sym)->StoreToFile(sym->getFilepath());
 			break;
 		case s2::SYM_TEXTURE:
-			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+			auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			etexture::FileSaver::Store(filepath.c_str(), static_cast<etexture::Symbol*>(sym));
 			break;
 		}

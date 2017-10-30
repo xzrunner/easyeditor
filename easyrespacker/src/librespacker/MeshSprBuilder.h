@@ -18,7 +18,7 @@ public:
 
 	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
 
-	const IPackNode* Create(const emesh::Sprite* spr);
+	const IPackNode* Create(const std::shared_ptr<const emesh::Sprite>& spr);
 
 private:
 	std::vector<IPackNode*> m_nodes;

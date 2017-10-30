@@ -3,6 +3,8 @@
 
 #include "PackNode.h"
 
+#include <memory>
+
 namespace libanim2 { class Sprite; }
 
 namespace esprpacker
@@ -11,7 +13,7 @@ namespace esprpacker
 class PackAnim2Spr : public PackNode
 {
 public:
-	PackAnim2Spr(const libanim2::Sprite* spr);
+	PackAnim2Spr(const std::shared_ptr<libanim2::Sprite>& spr);
 	virtual ~PackAnim2Spr();
 
 	/**
@@ -29,10 +31,10 @@ public:
 	virtual int SizeOfPackToBin() const;
 	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const;	
 	
-	bool Equal(const libanim2::Sprite* spr) const;
+	bool Equal(const std::shared_ptr<libanim2::Sprite>& spr) const;
 
 private:
-	void Init(const libanim2::Sprite* spr);
+	void Init(const std::shared_ptr<libanim2::Sprite>& spr);
 
 private:
 	const PackNode* m_sym;

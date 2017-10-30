@@ -119,7 +119,7 @@ BinaryRRR::Picture* BinaryRRR::CreatePicture(const std::string& filepath) const
 {
 	int sw, sh, fmt;
 	uint8_t* src_pixels = gimg_import(filepath.c_str(), &sw, &sh, &fmt);
-	if (fmt == GPF_RGBA && gum::Config::Instance()->GetPreMulAlpha()) {
+	if (fmt == GPF_RGBA8 && gum::Config::Instance()->GetPreMulAlpha()) {
 		gimg_pre_mul_alpha(src_pixels, sw, sh);
 	}
 	int sc = fmt == GPF_RGB ? 3 : 4;
@@ -152,7 +152,7 @@ BinaryRRR::Picture* BinaryRRR::CreatePicture(const std::string& filepath) const
 	size_t sz = w * h * 0.5f;
 	pic->pixels = pixels;
 
-	const std::vector<eimage::Rect>& rects = cut.GetResult();
+	auto& rects = cut.GetResult();
 	for (int i = 0, n = rects.size(); i < n; ++i)
 	{
 		const eimage::Rect& rect = rects[i];

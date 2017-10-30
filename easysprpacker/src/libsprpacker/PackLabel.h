@@ -5,6 +5,8 @@
 
 #include <sprite2/Textbox.h>
 
+#include <memory>
+
 namespace etext { class Sprite; }
 
 namespace esprpacker
@@ -13,7 +15,7 @@ namespace esprpacker
 class PackLabel : public PackNode
 {
 public:
-	PackLabel(const etext::Sprite* spr);
+	PackLabel(const std::shared_ptr<etext::Sprite>& spr);
 
 	/**
 	 *  @interface
@@ -36,7 +38,7 @@ public:
 	const std::string& GetTid() const { return m_tid; }
 
 private:
-	void Init(const etext::Sprite* spr);
+	void Init(const std::shared_ptr<etext::Sprite>& spr);
 
 private:
 	s2::Textbox m_tb;

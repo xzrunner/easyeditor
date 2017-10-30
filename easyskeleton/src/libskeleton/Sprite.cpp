@@ -24,31 +24,31 @@ Sprite& Sprite::operator = (const Sprite& spr)
 	return *this;
 }
 
-Sprite::Sprite(Symbol* sym)
+Sprite::Sprite(const s2::SymPtr& sym, uint32_t id)
 	: s2::Sprite(sym)
 	, s2::SkeletonSprite(sym)
 	, ee::Sprite(sym)
 {
 }
 
-ee::Sprite* Sprite::Create(ee::Symbol* sym) 
+ee::SprPtr Sprite::Create(const std::shared_ptr<ee::Symbol>& sym) 
 {
-	return new Sprite(static_cast<Symbol*>(sym));
+	return std::make_shared<Sprite>(sym);
 }
 
-void Sprite::Load(const Json::Value& val, const std::string& dir)
+void Sprite::Load(const Json::Value& val, const CU_STR& dir)
 {
 	ee::Sprite::Load(val);
 
-	std::string key = gum::SymbolFile::Instance()->Tag(s2::SYM_SKELETON);
+	std::string key = gum::SymbolFile::Instance()->Tag(s2::SYM_SKELETON).c_str();
 	gum::SkeletonIO::Load(val[key], m_pose);
 }
 
-void Sprite::Store(Json::Value& val, const std::string& dir) const
+void Sprite::Store(Json::Value& val, const CU_STR& dir) const
 {
 	ee::Sprite::Store(val);
 
-	std::string key = gum::SymbolFile::Instance()->Tag(s2::SYM_SKELETON);
+	std::string key = gum::SymbolFile::Instance()->Tag(s2::SYM_SKELETON).c_str();
 	gum::SkeletonIO::Store(val[key], m_pose);
 }
 

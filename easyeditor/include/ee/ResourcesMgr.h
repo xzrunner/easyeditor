@@ -5,6 +5,8 @@
 
 #include <map>
 
+#include <string>
+
 namespace ee
 {
 
@@ -14,14 +16,12 @@ class ResourcesMgr
 public:
 	static ResourcesMgr* Instance();
 
-	T* GetItem(const std::string& filename);
-	void GetItem(const std::string& filename, T** old);
-
+	std::shared_ptr<T> GetItem(const std::string& filename);
 	void RemoveItem(const std::string& filename);
 
 	void Clear();
 
-	void Traverse(Visitor<T>& visitor) const;
+	void Traverse(RefVisitor<T>& visitor) const;
 
 	size_t Size() const {
 		return m_items.size();
@@ -37,7 +37,7 @@ protected:
 private:
 	static ResourcesMgr<T>* m_instance;
 
-	std::map<std::string, T*> m_items;
+	std::map<std::string, std::weak_ptr<T>> m_items;
 
 	std::string m_default_sym;
 

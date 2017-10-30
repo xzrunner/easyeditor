@@ -6,7 +6,7 @@
 
 #include <SM_Test.h>
 #include <SM_Calc.h>
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <gum/JsonSerializer.h>
 
 #include <set>
@@ -22,7 +22,7 @@ Mesh::Mesh()
 {
 }
 
-Mesh::Mesh(const ee::Symbol* base)
+Mesh::Mesh(const ee::SymPtr& base)
 	: s2::Mesh(base)
 {	
 }

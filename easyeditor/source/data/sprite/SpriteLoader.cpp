@@ -8,23 +8,21 @@
 namespace ee
 {
 
-s2::Sprite* SpriteLoader::Create(s2::Symbol* sym) const
+s2::SprPtr SpriteLoader::Create(const s2::SymPtr& sym) const
 {
-	return SpriteFactory::Instance()->Create(dynamic_cast<ee::Symbol*>(sym));	
+	return SpriteFactory::Instance()->Create(std::dynamic_pointer_cast<Symbol>(sym));
 }
 
-s2::Sprite* SpriteLoader::Create(const std::string& filepath) const
+s2::SprPtr SpriteLoader::Create(const std::string& filepath) const
 {
-	Symbol* sym = SymbolMgr::Instance()->FetchSymbol(filepath);
+	auto sym = SymbolMgr::Instance()->FetchSymbol(filepath);
 	if (!sym) {
 		throw Exception("Symbol doesn't exist\n[file]:%s !", filepath.c_str());
 	}
-	Sprite* spr = SpriteFactory::Instance()->Create(sym);
-	sym->RemoveReference();
-	return spr;
+	return SpriteFactory::Instance()->Create(sym);
 }
 
-s2::Sprite* SpriteLoader::Create(const Json::Value& val, const std::string& dir) const
+s2::SprPtr SpriteLoader::Create(const Json::Value& val, const std::string& dir) const
 {
 	return SpriteFactory::Instance()->Create(val, dir);
 }

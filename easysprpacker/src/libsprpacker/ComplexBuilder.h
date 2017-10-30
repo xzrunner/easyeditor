@@ -3,7 +3,7 @@
 
 #include "NodeBuilder.h"
 
-#include <CU_Singleton.h>
+#include <cu/cu_macro.h>
 
 #include <map>
 
@@ -21,12 +21,12 @@ public:
 
 	virtual void Clear();
 
-	const PackNode* Create(const ecomplex::Symbol* sym);
+	const PackNode* Create(const std::shared_ptr<const ecomplex::Symbol>& sym);
 
 private:
-	std::map<const ecomplex::Symbol*, const PackComplex*> m_map_data;
+	std::map<std::shared_ptr<const ecomplex::Symbol>, const PackComplex*> m_map_data;
 
-	SINGLETON_DECLARATION(ComplexBuilder);
+	CU_SINGLETON_DECLARATION(ComplexBuilder);
 
 }; // ComplexBuilder
 

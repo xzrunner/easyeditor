@@ -111,9 +111,10 @@ bool CreateStripOP::OnMouseDrag(int x, int y)
 
 bool CreateStripOP::OnDraw() const
 {
-	if (Mesh* mesh = m_stage->GetMesh()) {
-		ee::SpriteRenderer::Instance()->Draw(mesh->GetBaseSymbol());
-		s2::DrawMesh::DrawInfoUV(mesh);
+	auto mesh = m_stage->GetMesh();
+	if (mesh) {
+		ee::SpriteRenderer::Instance()->Draw(mesh->GetBaseSymbol().get());
+		s2::DrawMesh::DrawInfoUV(*mesh);
 	}
 
 	ee::ZoomViewOP::OnDraw();

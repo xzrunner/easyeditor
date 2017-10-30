@@ -7,7 +7,7 @@
 namespace eimage
 {
 
-RegularRectCondense::RegularRectCondense(const std::vector<Rect>& rects, int width, int height, bool* ori_pixels)
+RegularRectCondense::RegularRectCondense(const CU_VEC<Rect>& rects, int width, int height, bool* ori_pixels)
 	: m_width(width)
 	, m_height(height)
 {
@@ -43,7 +43,7 @@ void RegularRectCondense::Remove(const Rect& r)
 	RemovePixelGrid(g->r, g);
 
 	bool find = false;
-	std::vector<Grid*>::iterator itr = m_grids.begin();
+	CU_VEC<Grid*>::iterator itr = m_grids.begin();
 	for ( ; itr != m_grids.end(); ++itr) {
 		if (*itr == g) {
 			m_grids.erase(itr);
@@ -62,7 +62,7 @@ void RegularRectCondense::Insert(const Rect& r)
 	InsertPixelGrid(r, g);
 }
 
-void RegularRectCondense::GetSortedRects(std::vector<Rect>& rects) const
+void RegularRectCondense::GetSortedRects(CU_VEC<Rect>& rects) const
 {
 	rects.clear();
 	rects.reserve(m_grids.size());
@@ -71,7 +71,7 @@ void RegularRectCondense::GetSortedRects(std::vector<Rect>& rects) const
 	}
 }
 
-void RegularRectCondense::LoadPixels(const std::vector<Rect>& rects, 
+void RegularRectCondense::LoadPixels(const CU_VEC<Rect>& rects, 
 									 bool* ori_pixels)
 {
 	int sz = m_width * m_height;
@@ -236,7 +236,7 @@ bool RegularRectCondense::IsPixelImmoveable(int x, int y) const
 
 void RegularRectCondense::CondenseCovered(const Rect& r)
 {
-	std::vector<Grid*> grids;
+	CU_VEC<Grid*> grids;
 	for (int i = 0, n = m_grids.size(); i < n; ++i) {
 		if (IsRectIntersect(r, m_grids[i]->r)) {
 			grids.push_back(m_grids[i]);
@@ -260,7 +260,7 @@ void RegularRectCondense::CondenseCovered(const Rect& r)
 		}
 	}
 
-	std::vector<Grid*>::iterator itr = m_grids.begin();
+	CU_VEC<Grid*>::iterator itr = m_grids.begin();
 	for ( ; itr != m_grids.end(); ) {
 		Grid* g = *itr;
 		if (g->r.w == 0 || g->r.h == 0) {

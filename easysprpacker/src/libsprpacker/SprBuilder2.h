@@ -18,10 +18,10 @@ public:
 
 	virtual void Clear();
 
-	const PackNode* Create(const TSprite* spr, bool force_curr = false);
+	const PackNode* Create(const std::shared_ptr<const TSprite>& spr, bool force_curr = false);
 
 private:
-	std::map<const TSprite*, const TPack*> m_map_data;
+	std::map<const std::shared_ptr<const TSprite>, const TPack*> m_map_data;
 
 }; // SprBuilder2
 

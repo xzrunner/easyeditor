@@ -8,16 +8,16 @@
 namespace eparticle3d
 {
 
-PSConfigMgr* PSConfigMgr::m_instance = NULL;
+CU_SINGLETON_DEFINITION(PSConfigMgr)
 
 PSConfigMgr::PSConfigMgr()
 {
 }
 
-s2::P3dEmitterCfg* PSConfigMgr::GetDefaultConfig()
+s2::P3dEmitterCfgPtr PSConfigMgr::GetDefaultConfig()
 {
 	const char* KEY = "default";
-	std::map<std::string, s2::P3dEmitterCfg*>::iterator itr = m_map2cfg.find(KEY);
+	auto itr = m_map2cfg.find(KEY);
 	if (itr != m_map2cfg.end()) {
 		return itr->second;
 	}
@@ -27,41 +27,33 @@ s2::P3dEmitterCfg* PSConfigMgr::GetDefaultConfig()
 	memset(cfg_impl, 0, sz);
 	cfg_impl->syms = (p3d_symbol*)(cfg_impl+1);
 
-	s2::P3dEmitterCfg* cfg = new s2::P3dEmitterCfg(cfg_impl);
+	auto cfg = std::make_shared<s2::P3dEmitterCfg>(cfg_impl);
 	m_map2cfg.insert(std::make_pair(KEY, cfg));
 	
 	return cfg;
 }
 
-s2::P3dEmitterCfg* PSConfigMgr::GetConfig(const std::string& filepath)
+s2::P3dEmitterCfgPtr PSConfigMgr::GetConfig(const std::string& filepath)
 {
-	std::map<std::string, s2::P3dEmitterCfg*>::iterator itr = m_map2cfg.find(filepath);
+	auto itr = m_map2cfg.find(filepath);
 	if (itr != m_map2cfg.end()) {
 		return itr->second;
 	} else {
-		s2::P3dEmitterCfg* cfg = FileIO::LoadPSConfig(filepath);
+		auto cfg = FileIO::LoadPSConfig(filepath);
 		m_map2cfg.insert(std::make_pair(filepath, cfg));
 		return cfg;
 	}
 }
 
-std::string PSConfigMgr::GetFilepath(const s2::P3dEmitterCfg* cfg)
+std::string PSConfigMgr::GetFilepath(const s2::P3dEmitterCfgPtr& cfg)
 {
-	std::map<std::string, s2::P3dEmitterCfg*>::iterator itr = m_map2cfg.begin();
+	auto itr = m_map2cfg.begin();
 	for ( ; itr != m_map2cfg.end(); ++itr) {
 		if (cfg == itr->second) {
 			return itr->first;
 		}
 	}
 	return "";
-}
-
-PSConfigMgr* PSConfigMgr::Instance()
-{
-	if (!m_instance) {
-		m_instance = new PSConfigMgr();
-	}
-	return m_instance;
 }
 
 }

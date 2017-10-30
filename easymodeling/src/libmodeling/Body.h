@@ -3,7 +3,7 @@
 
 #include <SM_Matrix.h>
 #include <SM_Rect.h>
-#include <CU_RefCountObj.h>
+#include <cu/CU_RefCountObj.h>
 
 #include <vector>
 
@@ -52,7 +52,7 @@ public:
 
 	float m_gravity_scale;
 
-	ee::Sprite* m_spr;
+	ee::SprPtr m_spr;
 
 	std::vector<Fixture*> m_fixtures;
 

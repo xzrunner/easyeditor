@@ -3,7 +3,7 @@
 
 #include <SM_Vector.h>
 
-#include <vector>
+#include <cu/cu_stl.h>
 
 namespace ee
 {
@@ -11,8 +11,8 @@ namespace ee
 class SGI
 {
 public:
-	static void Do(const std::vector<sm::vec2>& src,
-		std::vector<std::vector<sm::vec2> >& dst);
+	static void Do(const CU_VEC<sm::vec2>& src,
+		CU_VEC<CU_VEC<sm::vec2> >& dst);
 
 private:
 	struct Edge;
@@ -44,14 +44,14 @@ private:
 	};
 
 private:
-	static void InsertEdge(std::vector<Edge*>& edges, Triangle* tri,
+	static void InsertEdge(CU_VEC<Edge*>& edges, Triangle* tri,
 		int index);
 
-	static void Traversal(Triangle* tri, std::vector<sm::vec2>& strip, int level = 0);
+	static void Traversal(Triangle* tri, CU_VEC<sm::vec2>& strip, int level = 0);
 
 	static int GetDegree(Triangle* tri, int level);
 
-	static Triangle* GetMinDegreeTri(const std::vector<Triangle*>& tris);
+	static Triangle* GetMinDegreeTri(const CU_VEC<Triangle*>& tris);
 
 }; // SGI
 

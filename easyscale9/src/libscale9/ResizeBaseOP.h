@@ -5,6 +5,8 @@
 
 #include <SM_Vector.h>
 
+#include <memory>
+
 namespace escale9
 {
 
@@ -13,7 +15,7 @@ class Symbol;
 class ResizeBaseOP : public ee::ZoomViewOP
 {
 public:
-	ResizeBaseOP(wxWindow* wnd, ee::EditPanelImpl* stage, Symbol* sym);
+	ResizeBaseOP(wxWindow* wnd, ee::EditPanelImpl* stage, const std::shared_ptr<Symbol>& sym);
 
 	virtual bool OnMouseLeftDown(int x, int y);
 	virtual bool OnMouseLeftUp(int x, int y);
@@ -21,8 +23,8 @@ public:
 
 	virtual bool OnDraw() const;
 
-	void setSymbol(Symbol* sym) const {
-		if (!m_sym) m_sym = sym;
+	void setSymbol(const std::shared_ptr<Symbol>& sym) const {
+		m_sym = sym;
 	}
 
 protected:
@@ -41,7 +43,7 @@ protected:
 	Status m_status;
 
 private:
-	mutable Symbol* m_sym;
+	mutable std::shared_ptr<Symbol> m_sym;
 
 	sm::vec2 m_firstPos;
 

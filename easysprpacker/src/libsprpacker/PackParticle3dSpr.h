@@ -5,6 +5,8 @@
 
 #include <sprite2/Particle3dSprite.h>
 
+#include <memory>
+
 namespace eparticle3d { class Sprite; }
 
 namespace esprpacker
@@ -13,7 +15,7 @@ namespace esprpacker
 class PackParticle3dSpr : public PackNode
 {
 public:
-	PackParticle3dSpr(const eparticle3d::Sprite* spr);
+	PackParticle3dSpr(const std::shared_ptr<eparticle3d::Sprite>& spr);
 	virtual ~PackParticle3dSpr();
 
 	/**
@@ -31,10 +33,10 @@ public:
 	virtual int SizeOfPackToBin() const;
 	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const;	
 
-	bool Equal(const eparticle3d::Sprite* spr) const;
+	bool Equal(const std::shared_ptr<eparticle3d::Sprite>& spr) const;
 
 private:
-	void Init(const eparticle3d::Sprite* spr);
+	void Init(const std::shared_ptr<eparticle3d::Sprite>& spr);
 
 private:
 	const PackNode* m_sym;

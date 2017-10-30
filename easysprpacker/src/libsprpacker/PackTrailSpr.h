@@ -3,6 +3,8 @@
 
 #include "PackNode.h"
 
+#include <memory>
+
 namespace etrail { class Sprite; }
 
 namespace esprpacker
@@ -11,7 +13,7 @@ namespace esprpacker
 class PackTrailSpr : public PackNode
 {
 public:
-	PackTrailSpr(const etrail::Sprite* spr);
+	PackTrailSpr(const std::shared_ptr<etrail::Sprite>& spr);
 	virtual ~PackTrailSpr();
 
 	/**
@@ -29,7 +31,7 @@ public:
 	virtual int SizeOfPackToBin() const;
 	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const;	
 
-	bool Equal(const etrail::Sprite* spr) const { return true; }
+	bool Equal(const std::shared_ptr<etrail::Sprite>& spr) const { return true; }
 
 private:
 	const PackNode* m_sym;

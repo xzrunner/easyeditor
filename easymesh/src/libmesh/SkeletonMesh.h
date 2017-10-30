@@ -13,7 +13,7 @@
 //public:
 //	SkeletonMesh();
 //	SkeletonMesh(const SkeletonMesh& mesh);
-//	SkeletonMesh(const ee::Symbol* base);
+//	SkeletonMesh(const ee::SymPtr& base);
 //
 //	/**
 //	 *  @interface

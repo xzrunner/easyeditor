@@ -4,7 +4,7 @@
 #include "Observer.h"
 
 #include <sprite2/Color.h>
-#include <CU_RefCountObj.h>
+#include <cu/CU_RefCountObj.h>
 
 #include <wx/glcanvas.h>
 #include <wx/timer.h>

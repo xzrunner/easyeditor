@@ -3,7 +3,7 @@
 #include "Config.h"
 #include "SettingData.h"
 
-#include <sprite2/S2_Sprite.h>
+#include <sprite2/Sprite.h>
 
 namespace ee
 {
@@ -17,19 +17,19 @@ SpriteIO::SpriteIO()
 	m_anchor		= false;
 }
 
-void SpriteIO::LoadGeometry(s2::Sprite* spr)
+void SpriteIO::LoadGeometry(s2::SprPtr& spr)
 {
 	gum::SpriteIO::LoadGeometry(spr);
 
-	Sprite* ee_spr = dynamic_cast<Sprite*>(spr);
+	auto ee_spr = std::dynamic_pointer_cast<Sprite>(spr);
 	ee_spr->SetPerspective(m_perspective);
 }
 
-void SpriteIO::StoreGeometry(const s2::Sprite* spr)
+void SpriteIO::StoreGeometry(const s2::SprPtr& spr)
 {
 	gum::SpriteIO::StoreGeometry(spr);
 
-	const Sprite* ee_spr = dynamic_cast<const Sprite*>(spr);
+	auto ee_spr = std::dynamic_pointer_cast<Sprite>(spr);
 	m_perspective = ee_spr->GetPerspective();
 }
 
@@ -58,20 +58,20 @@ void SpriteIO::StoreGeometry(Json::Value& val)
 }
 
 
-void SpriteIO::LoadInfo(s2::Sprite* spr)
+void SpriteIO::LoadInfo(s2::SprPtr& spr)
 {
 	gum::SpriteIO::LoadInfo(spr);
 
-	Sprite* ee_spr = dynamic_cast<Sprite*>(spr);
+	auto ee_spr = std::dynamic_pointer_cast<Sprite>(spr);
 	ee_spr->SetTag(m_tag);
 	ee_spr->SetAnchor(m_anchor);
 }
 
-void SpriteIO::StoreInfo(const s2::Sprite* spr)
+void SpriteIO::StoreInfo(const s2::SprPtr& spr)
 {
 	gum::SpriteIO::StoreInfo(spr);
 
-	const Sprite* ee_spr = dynamic_cast<const Sprite*>(spr);
+	auto ee_spr = std::dynamic_pointer_cast<Sprite>(spr);
 	m_tag    = ee_spr->GetTag();
 	m_anchor = ee_spr->IsAnchor();
 }
@@ -81,7 +81,7 @@ void SpriteIO::LoadInfo(const Json::Value& val)
 	gum::SpriteIO::LoadInfo(val);
 
 	if (!val["tag"].isNull()) {
-		m_tag = val["tag"].asString();
+		m_tag = val["tag"].asString().c_str();
 	} else {
 		m_tag = "";
 	}
@@ -104,7 +104,7 @@ void SpriteIO::StoreInfo(Json::Value& val)
 	gum::SpriteIO::StoreInfo(val);
 
 	if (!m_compress || !m_tag.empty()) {
-		val["tag"] = m_tag;		
+		val["tag"] = m_tag.c_str();
 	}
 
 	if (!m_compress || m_clip) {

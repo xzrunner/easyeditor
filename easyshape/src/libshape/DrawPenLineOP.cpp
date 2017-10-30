@@ -16,9 +16,8 @@ bool DrawPenLineOP::OnMouseLeftDClick(int x, int y)
 {
 	if (DrawPolylineOP::OnMouseLeftDClick(x, y)) return true;
 
-	ChainShape* chain = new ChainShape(m_polyline, false);
+	auto chain = std::make_shared<ChainShape>(m_polyline, false);
 	ee::InsertShapeSJ::Instance()->Insert(chain);
-	chain->RemoveReference();
 	m_polyline.clear();
 	m_curr_pos.MakeInvalid();
 

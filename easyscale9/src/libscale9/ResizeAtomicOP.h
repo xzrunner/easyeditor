@@ -13,19 +13,19 @@ class Symbol;
 class ResizeAtomicOP : public ee::AtomicOP
 {
 public:
-	ResizeAtomicOP(Symbol* sym, const sm::vec2& src, 
+	ResizeAtomicOP(const std::shared_ptr<Symbol>& sym, const sm::vec2& src, 
 		const sm::vec2& dst);
 
 	virtual void Undo();
 	virtual void Redo();
 
-	virtual Json::Value Store(const std::vector<ee::Sprite*>& sprs) const {
+	virtual Json::Value Store(const std::vector<ee::SprPtr>& sprs) const {
 		Json::Value ret;
 		return ret;
 	}
 
 private:
-	Symbol* m_sym;
+	std::shared_ptr<Symbol> m_sym;
 
 	sm::vec2 m_src, m_dst;
 

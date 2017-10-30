@@ -3,7 +3,7 @@
 
 #include "SpriteObserver.h"
 
-#include <CU_RefCountObj.h>
+#include <cu/CU_RefCountObj.h>
 
 namespace ee { class AtomicOP; }
 
@@ -42,8 +42,8 @@ public:
 	int GetMaxFrameTime() const;
 	KeyFrame* GetEndFrame() const;
 
-	void SetName(const std::string& name) { m_name = name; }
-	const std::string& GetName() const { return m_name; }
+	void SetName(const CU_STR& name) { m_name = name; }
+	const CU_STR& GetName() const { return m_name; }
 
 	void SetEditable(bool editable) { m_editable = editable; }
 	bool IsEditable() const { return m_editable; }
@@ -60,7 +60,7 @@ private:
 		InsertKeyFrame(int index, KeyFrame* frame);
 
 private:
-	std::string m_name;
+	CU_STR m_name;
 
 	bool m_editable, m_visible;
 

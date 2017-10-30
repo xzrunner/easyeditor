@@ -10,6 +10,15 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\cu\cu_macro.h" />
+    <ClInclude Include="..\..\..\src\cu\CU_RefCountObj.h" />
+    <ClInclude Include="..\..\..\src\cu\cu_stl.h" />
+    <ClInclude Include="..\..\..\src\cu\uncopyable.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\src\cu\CU_RefCountObj.inl" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>0.cu</ProjectName>
     <ProjectGuid>{6055092D-EE59-4159-B923-A375401AA099}</ProjectGuid>
@@ -75,15 +84,6 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\src\cu\CU_Cloneable.h" />
-    <ClInclude Include="..\..\..\src\cu\CU_RefCountObj.h" />
-    <ClInclude Include="..\..\..\src\cu\CU_Singleton.h" />
-    <ClInclude Include="..\..\..\src\cu\CU_Uncopyable.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\..\src\cu\CU_RefCountObj.inl" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

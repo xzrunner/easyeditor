@@ -23,11 +23,11 @@ public:
 	MultiSpritesImpl(EditPanelImpl* stage);
 	virtual ~MultiSpritesImpl();
 
-	virtual void TraverseSprites(Visitor<Sprite>& visitor, 
+	virtual void TraverseSprites(RefVisitor<Sprite>& visitor,
 		DataTraverseType type = DT_ALL, bool order = true) const = 0;
 
-	virtual Sprite* QuerySpriteByPos(const sm::vec2& pos) const;
-	virtual void QuerySpritesByRect(const sm::rect& rect, bool contain, std::vector<Sprite*>& result) const;		
+	virtual ee::SprPtr QuerySpriteByPos(const sm::vec2& pos) const;
+	virtual void QuerySpritesByRect(const sm::rect& rect, bool contain, std::vector<ee::SprPtr>& result) const;
 
 	SpriteSelection* GetSpriteSelection() { return m_sprite_selection; }
 	void ClearSelectedSprite();
@@ -39,7 +39,7 @@ protected:
 	virtual void OnNotify(int sj_id, void* ud);
 
 private:
-	void OnSpriteSelected(Sprite* spr, bool clear);
+	void OnSpriteSelected(const SprPtr& spr, bool clear);
 
 protected:
 	SpriteSelection* m_sprite_selection;

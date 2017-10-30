@@ -16,7 +16,7 @@ class Symbol : public ee::Symbol, public s2::Scale9Symbol
 public:
 	Symbol();
 
-	static ee::Symbol* Create() { return new Symbol(); }
+	static ee::SymPtr Create() { return std::make_shared<Symbol>(); }
 
 protected:
 	/**

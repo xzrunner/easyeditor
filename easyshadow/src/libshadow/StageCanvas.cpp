@@ -23,15 +23,15 @@ StageCanvas::StageCanvas(StagePanel* stage)
 }
 
 StageCanvas::StageCanvas(StagePanel* stage, wxGLContext* glctx,
-						 ee::Sprite* edited, const ee::MultiSpritesImpl* bg_sprites)
+						 ee::SprPtr edited, const ee::MultiSpritesImpl* bg_sprites)
 	: ee::CameraCanvas(stage, stage->GetStageImpl(), s2::CAM_ORTHO2D, glctx)
 	, m_stage(stage)
 	, m_edited(edited)
 	, m_sprite_impl(bg_sprites)
 	, m_bg(NULL)
 {
-	std::vector<ee::Sprite*> sprs;
-	m_sprite_impl->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	m_sprite_impl->TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	m_bg = ee::draw_all_to_one_spr(sprs, m_edited);
 }
 

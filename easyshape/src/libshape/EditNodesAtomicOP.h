@@ -16,17 +16,17 @@ namespace edit_nodes
 class ModifyNodesAOP : public ee::AtomicOP
 {
 public:
-	ModifyNodesAOP(const std::vector<EditedPolyShape*>& polylines, 
-		const std::vector<std::vector<sm::vec2> >& dst_polylines);
+	ModifyNodesAOP(const std::vector<std::shared_ptr<EditedPolyShape>>& polylines,
+		const CU_VEC<CU_VEC<sm::vec2> >& dst_polylines);
 
 	virtual void Undo();
 	virtual void Redo();
 
-	virtual Json::Value Store(const std::vector<ee::Sprite*>& sprs) const { return NULL; }
+	virtual Json::Value Store(const std::vector<ee::SprPtr>& sprs) const { return NULL; }
 
 private:
-	std::vector<EditedPolyShape*> m_polylines;
-	std::vector<std::vector<sm::vec2> > m_src, m_dst;
+	std::vector<std::shared_ptr<EditedPolyShape>> m_polylines;
+	CU_VEC<CU_VEC<sm::vec2> > m_src, m_dst;
 
 }; // ModifyNodesAOP
 

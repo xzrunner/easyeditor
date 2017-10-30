@@ -9,8 +9,8 @@
 #include <shaderlab/ShaderMgr.h>
 #include <shaderlab/Sprite2Shader.h>
 #include <sprite2/RenderParams.h>
-#include <sprite2/S2_RVG.h>
-#include <gum/GUM_GTxt.h>
+#include <sprite2/RVG.h>
+#include <gum/GTxt.h>
 #include <gum/Image.h>
 
 #include <assert.h>
@@ -37,7 +37,7 @@ int Symbol::Type() const
 	return TYPE;
 }
 
-s2::RenderReturn Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
+s2::RenderReturn Symbol::DrawTree(cooking::DisplayList* dlist, const s2::RenderParams& rp, const s2::Sprite* spr) const
 {
 	assert(spr);
 

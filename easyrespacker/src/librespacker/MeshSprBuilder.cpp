@@ -28,13 +28,13 @@ void MeshSprBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 	}
 }
 
-const IPackNode* MeshSprBuilder::Create(const emesh::Sprite* spr)
+const IPackNode* MeshSprBuilder::Create(const std::shared_ptr<const emesh::Sprite>& spr)
 {
 	PackMeshSpr* node = new PackMeshSpr;
 
-	node->mesh = PackNodeFactory::Instance()->Create(dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
+	node->mesh = PackNodeFactory::Instance()->Create(std::dynamic_pointer_cast<const ee::Symbol>(spr->GetSymbol()));
 
-	node->base = PackNodeFactory::Instance()->Create(dynamic_cast<const ee::Symbol*>(spr->GetBaseSym()));
+	node->base = PackNodeFactory::Instance()->Create(std::dynamic_pointer_cast<const ee::Symbol>(spr->GetBaseSym()));
 	
 	//////////////////////////////////////////////////////////////////////////
 

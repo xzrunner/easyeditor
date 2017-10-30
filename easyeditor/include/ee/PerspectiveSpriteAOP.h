@@ -2,27 +2,26 @@
 #define _EASYEDITOR_PERSPECTIVE_SPRITE_AOP_H_
 
 #include "AtomicOP.h"
+#include "Sprite.h"
 
 #include <SM_Vector.h>
 
 namespace ee
 {
 
-class Sprite;
-
 class PerspectiveSpriteAOP : public AtomicOP
 {
 public:
-	PerspectiveSpriteAOP(Sprite* spr, const sm::vec2& new_persp,
+	PerspectiveSpriteAOP(const SprPtr& spr, const sm::vec2& new_persp,
 		const sm::vec2& old_persp);
 
 	virtual void Undo();
 	virtual void Redo();
 
-	virtual Json::Value Store(const std::vector<Sprite*>& sprs) const;
+	virtual Json::Value Store(const std::vector<SprPtr>& sprs) const;
 
 private:
-	Sprite* m_spr;
+	SprPtr m_spr;
 
 	sm::vec2 m_new_persp, m_old_persp;
 

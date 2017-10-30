@@ -55,7 +55,7 @@ private:
 
 	void Clear();
 
-	void OnAddChild(wxCommandEvent& event, s2::Symbol* sym);
+	void OnAddChild(wxCommandEvent& event, const s2::SymPtr& sym);
 	void OnDelAllChild(wxCommandEvent& event);
 
 	void OnSetStaticMode(wxCommandEvent& event);

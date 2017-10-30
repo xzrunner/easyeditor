@@ -19,8 +19,8 @@ struct SpriteUserData
 
 	SpriteUserData();
 
-	static void SetSprData(ee::Sprite* spr, Layer* layer, KeyFrame* frame);	
-	static void SetSprData(ee::Sprite* spr, int layer_idx, int frame_idx);	
+	static void SetSprData(ee::Sprite& spr, Layer* layer, KeyFrame* frame);	
+	static void SetSprData(ee::Sprite& spr, int layer_idx, int frame_idx);	
 
 }; // SpriteUserData
 

@@ -34,24 +34,24 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	RegistSubject(ee::ClearSpriteSJ::Instance());
 }
 
-void StagePanel::TraverseSprites(ee::Visitor<ee::Sprite>& visitor, ee::DataTraverseType type/* = ee::e_allExisting*/, 
+void StagePanel::TraverseSprites(ee::RefVisitor<ee::Sprite>& visitor, ee::DataTraverseType type/* = ee::e_allExisting*/, 
 								 bool order/* = true*/) const
 {
 	for (int i = 0; i < 9; ++i) {
 		if (m_sprs[i]) {
 			bool next;
-			visitor.Visit(dynamic_cast<ee::Sprite*>(m_sprs[i]), next);
+			visitor.Visit(std::dynamic_pointer_cast<ee::Sprite>(m_sprs[i]), next);
 			if (!next) return;
 		}
 	}
 }
 
-ee::Sprite* StagePanel::getSprite(int row, int col) 
+ee::SprPtr StagePanel::getSprite(int row, int col) 
 {
 	if (row < 0 || row >= 3 || col < 0 || col >= 3) {
 		return NULL;
 	} else {
-		return dynamic_cast<ee::Sprite*>(m_sprs[row * 3 + col]);
+		return std::dynamic_pointer_cast<ee::Sprite>(m_sprs[row * 3 + col]);
 	}
 }
 
@@ -93,7 +93,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 		}
 		break;
 	case ee::MSG_REMOVE_SPRITE:
-		Remove((ee::Sprite*)ud);
+		Remove(*(ee::SprPtr*)ud);
 		break;
 	case ee::MSG_CLEAR_SPRITE:
 		Clear();
@@ -101,7 +101,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 	}
 }
 
-void StagePanel::Insert(ee::Sprite* spr)
+void StagePanel::Insert(const ee::SprPtr& spr)
 {
 	const sm::vec2& pos = spr->GetPosition();
 	int col, row;
@@ -113,7 +113,6 @@ void StagePanel::Insert(ee::Sprite* spr)
 	if (m_sprs[row * 3 + col] && m_sprs[row * 3 + col] != spr) {
 		m_sprs[row * 3 + col]->RemoveReference();
 	}
-	spr->AddReference();
 	m_sprs[row * 3 + col] = spr;
 
 	spr->SetPosition(ComposeGrids::GetGridCenter(col, row));
@@ -123,7 +122,7 @@ void StagePanel::Insert(ee::Sprite* spr)
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void StagePanel::Remove(ee::Sprite* spr)
+void StagePanel::Remove(const ee::SprPtr& spr)
 {
 	for (size_t i = 0; i < 3; ++i) 
 	{
@@ -132,7 +131,6 @@ void StagePanel::Remove(ee::Sprite* spr)
 			if (m_sprs[i * 3 + j] == spr)
 			{
 				m_sprs[i * 3 + j] = NULL;
-				spr->RemoveReference();
 				ee::SetCanvasDirtySJ::Instance()->SetDirty();
 				return;
 			}

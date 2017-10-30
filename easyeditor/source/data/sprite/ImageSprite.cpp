@@ -28,7 +28,7 @@ ImageSprite& ImageSprite::operator = (const ImageSprite& spr)
 	return *this;
 }
 
-ImageSprite::ImageSprite(ImageSymbol* sym)
+ImageSprite::ImageSprite(const s2::SymPtr& sym, uint32_t id)
 	: s2::Sprite(sym)
 	, s2::ImageSprite(sym)
 	, Sprite(sym)
@@ -55,11 +55,10 @@ void ImageSprite::BuildBoundingFromTexCoords(float* texCoords)
  	rect.ymin = -hh;
  	rect.ymax = hh;
 
-	s2::OBB* bb = new s2::OBB;
+	void* ptr = mm::AllocHelper::Allocate(sizeof(s2::OBB));
+	s2::BoundingBox* bb = new (ptr) s2::OBB();
 	bb->Build(rect, GetPosition(), GetAngle(), scale, GetShear(), GetOffset());
-
-	delete m_bounding;
-	m_bounding = bb;
+	m_bounding.reset(bb);
 }
 
 }

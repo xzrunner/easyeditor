@@ -13,10 +13,10 @@
 #include <easyanim.h>
 #include <easytext.h>
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <sprite2/Particle3d.h>
 #include <sprite2/CameraType.h>
-#include <gum/GUM_DTex.h>
+#include <gum/DTex.h>
 
 namespace ecomplex
 {
@@ -30,18 +30,6 @@ StageCanvas::StageCanvas(StagePanel* editPanel,
 	, m_background(NULL)
 	, m_fps(1)
 {
-}
-
-StageCanvas::~StageCanvas()
-{
-	if (m_background) {
-		m_background->RemoveReference();
-	}
-}
-
-void StageCanvas::SetBackground(ee::Symbol* sym)
-{
-	cu::RefCountObjAssign<ee::Symbol>(m_background, sym);
 }
 
 void StageCanvas::OnSize(int w, int h)
@@ -97,7 +85,7 @@ void StageCanvas::OnDrawSprites() const
 
 	m_stage->TraverseSprites(ee::DrawSpritesVisitor(GetVisibleRegion(), GetCameraScale()), ee::DT_VISIBLE);
 
-	const sm::rect& clipbox = dynamic_cast<const Symbol*>(m_stage->GetSymbol())->GetScissor();
+	const sm::rect& clipbox = std::dynamic_pointer_cast<Symbol>(m_stage->GetSymbol())->GetScissor();
 	sm::vec2 sz = clipbox.Size();
 	if (sz.x > 0 && sz.y > 0) {
 		s2::RVG::SetColor(s2::Color(0, 204, 0));
@@ -126,7 +114,7 @@ void StageCanvas::OnDrawSprites() const
 void StageCanvas::DrawBackground() const
 {
 	if (m_background) {
-		ee::SpriteRenderer::Instance()->Draw(m_background);
+		ee::SpriteRenderer::Instance()->Draw(m_background.get());
 	}
 
 	if (Settings::bVisibleBGRect) {

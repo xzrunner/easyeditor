@@ -21,7 +21,7 @@ void PackShape::PackToLuaString(ebuilder::CodeGenerator& gen,
 	ShapeToLuaString::Pack(this, gen);
 }
 
-void PackShape::UnpackFromLua(lua_State* L, const std::vector<ee::Image*>& images)
+void PackShape::UnpackFromLua(lua_State* L, const std::vector<ee::ImagePtr>& images)
 {
 	ShapeFromLua::Unpack(L, this);
 }
@@ -43,7 +43,7 @@ int PackShape::SizeOfUnpackFromBin() const
 	return ShapeFromBin::Size(this);
 }
 
-void PackShape::UnpackFromBin(uint8_t** ptr, const std::vector<ee::Image*>& images)
+void PackShape::UnpackFromBin(uint8_t** ptr, const std::vector<ee::ImagePtr>& images)
 {
 	ShapeFromBin::Unpack(ptr, this);
 }

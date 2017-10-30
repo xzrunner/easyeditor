@@ -13,7 +13,7 @@ namespace lua = ebuilder::lua;
 namespace esprpacker
 {
 
-PackParticle3dSpr::PackParticle3dSpr(const eparticle3d::Sprite* spr)
+PackParticle3dSpr::PackParticle3dSpr(const std::shared_ptr<eparticle3d::Sprite>& spr)
 {
 	Init(spr);
 }
@@ -104,7 +104,7 @@ void PackParticle3dSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) co
 	pack(radius, ptr);
 }
 
-bool PackParticle3dSpr::Equal(const eparticle3d::Sprite* spr) const
+bool PackParticle3dSpr::Equal(const std::shared_ptr<eparticle3d::Sprite>& spr) const
 {
 	return m_loop == spr->IsLoop()
 		&& m_local == spr->IsLocal()
@@ -113,10 +113,10 @@ bool PackParticle3dSpr::Equal(const eparticle3d::Sprite* spr) const
 		&& m_start_radius == spr->GetStartRadius();
 }
 
-void PackParticle3dSpr::Init(const eparticle3d::Sprite* spr)
+void PackParticle3dSpr::Init(const std::shared_ptr<eparticle3d::Sprite>& spr)
 {
 	m_sym = PackNodeFactory::Instance()->Create(
-		dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
+		std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol()));
 
 	m_loop	= spr->IsLoop();
 	m_local	= spr->IsLocal();

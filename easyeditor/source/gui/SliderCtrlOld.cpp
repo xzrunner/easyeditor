@@ -20,7 +20,7 @@ SliderCtrlOld::SliderCtrlOld(wxPanel* parent, const char* title, const char* nam
 	Connect(m_slider->GetId(), wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler(SliderCtrlOld::OnSetValue));
 	sizer->Add(m_slider);
 
-	m_text = new wxTextCtrl(this, wxID_ANY, StringHelper::ToString(val), wxDefaultPosition, wxSize(50, -1), wxTE_PROCESS_ENTER);
+	m_text = new wxTextCtrl(this, wxID_ANY, StringHelper::ToString(val).c_str(), wxDefaultPosition, wxSize(50, -1), wxTE_PROCESS_ENTER);
 	Connect(m_text->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(SliderCtrlOld::OnSetValue));
 	sizer->Add(m_text);
 
@@ -33,7 +33,7 @@ void SliderCtrlOld::OnSetValue(wxScrollEvent& event)
 {
 	int ival = m_slider->GetValue();
 	float fval = ival * m_scale_slider2text;
-	m_text->SetValue(StringHelper::ToString(fval));
+	m_text->SetValue(StringHelper::ToString(fval).c_str());
 }
 
 void SliderCtrlOld::OnSetValue(wxCommandEvent& event)

@@ -15,9 +15,9 @@ class Icon;
 class Symbol : public ee::Symbol, public s2::IconSymbol
 {
 public:
-	void SetImage(ee::ImageSymbol* img);
+	void SetImage(const std::shared_ptr<ee::ImageSymbol>& img);
 
-	static ee::Symbol* Create() { return new Symbol(); }
+	static ee::SymPtr Create() { return std::make_shared<Symbol>(); }
 
 protected:
 	virtual bool LoadResources();

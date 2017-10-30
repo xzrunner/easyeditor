@@ -3,6 +3,8 @@
 
 #include "PackNode.h"
 
+#include <memory>
+
 namespace eshape { class Sprite; }
 
 namespace esprpacker
@@ -11,7 +13,7 @@ namespace esprpacker
 class PackShapeSpr : public PackNode
 {
 public:
-	PackShapeSpr(const eshape::Sprite* spr);
+	PackShapeSpr(const std::shared_ptr<eshape::Sprite>& spr);
 	virtual ~PackShapeSpr();
 
 	/**
@@ -29,7 +31,7 @@ public:
 	virtual int SizeOfPackToBin() const;
 	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const;	
 
-	bool Equal(const eshape::Sprite* spr) const { return true; }
+	bool Equal(const std::shared_ptr<eshape::Sprite>& spr) const { return true; }
 
 private:
 	const PackNode* m_sym;

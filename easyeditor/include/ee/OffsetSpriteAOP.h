@@ -2,6 +2,7 @@
 #define _EASYEDITOR_OFFSET_SPRITE_AOP_H_
 
 #include "AtomicOP.h"
+#include "Sprite.h"
 
 #include <SM_Vector.h>
 
@@ -13,17 +14,17 @@ class Sprite;
 class OffsetSpriteAOP : public AtomicOP
 {
 public:
-	OffsetSpriteAOP(Sprite* spr, const sm::vec2& new_offset, 
+	OffsetSpriteAOP(const SprPtr& spr, const sm::vec2& new_offset,
 		const sm::vec2& old_offset);
 
 	virtual void Undo();
 	virtual void Redo();
-	virtual void Copy(const std::vector<ee::Sprite*>& sprs);
+	virtual void Copy(const std::vector<SprPtr>& sprs);
 
-	virtual Json::Value Store(const std::vector<Sprite*>& sprs) const;
+	virtual Json::Value Store(const std::vector<SprPtr>& sprs) const;
 
 private:
-	Sprite* m_spr;
+	SprPtr m_spr;
 
 	sm::vec2 m_new_offset, m_old_offset;
 

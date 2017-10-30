@@ -10,21 +10,14 @@
 namespace ee
 {
 
-InsertSpriteAOP::InsertSpriteAOP(Sprite* spr)
+InsertSpriteAOP::InsertSpriteAOP(const SprPtr& spr)
 {
-	spr->AddReference();
 	m_sprs.push_back(spr);
 }
 
-InsertSpriteAOP::InsertSpriteAOP(const std::vector<Sprite*>& sprs)
+InsertSpriteAOP::InsertSpriteAOP(const std::vector<SprPtr>& sprs)
+	: m_sprs(sprs)
 {	
-	for_each(sprs.begin(), sprs.end(), cu::AddRefFunctor<Sprite>());
-	m_sprs = sprs;
-}
-
-InsertSpriteAOP::~InsertSpriteAOP()
-{
-	for_each(m_sprs.begin(), m_sprs.end(), cu::RemoveRefFunctor<Sprite>());
 }
 
 void InsertSpriteAOP::Undo()
@@ -41,7 +34,7 @@ void InsertSpriteAOP::Redo()
 	}
 }
 
-Json::Value InsertSpriteAOP::Store(const std::vector<Sprite*>& sprs) const
+Json::Value InsertSpriteAOP::Store(const std::vector<SprPtr>& sprs) const
 {
 	Json::Value val;
 	val["idx"] = HistoryUtil::StoreSpritesIndex(m_sprs, sprs);

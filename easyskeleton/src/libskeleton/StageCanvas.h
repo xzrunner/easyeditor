@@ -3,6 +3,8 @@
 
 #include <ee/CameraCanvas.h>
 
+#include <memory>
+
 class wxGLContext;
 
 namespace s2 { class Skeleton; }
@@ -16,13 +18,12 @@ class StageCanvas : public ee::CameraCanvas
 {
 public:
 	StageCanvas(StagePanel* editpanel, wxGLContext* glctx);
-	virtual ~StageCanvas();
 
 protected:
 	virtual void OnDrawSprites() const;
 
 private:
-	const s2::Skeleton* m_sk;
+	const s2::Skeleton& m_sk;
 
 }; // StageCanvas
 

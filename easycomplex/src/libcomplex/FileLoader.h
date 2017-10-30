@@ -12,7 +12,7 @@ class Symbol;
 class FileLoader
 {
 public:
-	static void Load(const std::string& filepath, Symbol* complex);
+	static void Load(const std::string& filepath, Symbol& complex);
 
 	static void LoadChildren(const std::string& filepath, std::vector<std::string>& children);
 

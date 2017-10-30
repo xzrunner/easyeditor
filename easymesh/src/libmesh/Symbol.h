@@ -5,8 +5,6 @@
 
 #include <sprite2/MeshSymbol.h>
 
-namespace ee { class Image; }
-
 namespace emesh
 {
 
@@ -15,9 +13,9 @@ class Symbol : public ee::Symbol, public s2::MeshSymbol
 {
 public:
 	Symbol();
-	Symbol(ee::Symbol* base);
+	Symbol(const ee::SymPtr& base);
 
-	static ee::Symbol* Create() { return new Symbol(); }
+	static ee::SymPtr Create() { return std::make_shared<Symbol>(); }
 
 protected:
 	virtual bool LoadResources();

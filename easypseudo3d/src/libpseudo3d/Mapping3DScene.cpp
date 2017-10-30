@@ -64,7 +64,7 @@ void Mapping3DScene::Store(const char* filename) const
 	glReadPixels(min.x, sh - max.y, w, h, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 
 	std::string img_path = ee::FileHelper::GetFilePathExceptExtension(filename) + ".png";
-	gimg_export(img_path.c_str(), pixels, w, h, GPF_RGBA, false);
+	gimg_export(img_path.c_str(), pixels, w, h, GPF_RGBA8, false);
 	delete[] pixels;
 
 	value["texture filepath"] = img_path + ".png";

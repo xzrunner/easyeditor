@@ -14,18 +14,11 @@ static const wxString HORI_ALIGN_LABELS[] = {
 static const wxString VERT_ALIGN_LABELS[] = { 
 	wxT("上"), wxT("下"), wxT("中"), wxT("自动") };
 
-ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage, Sprite* spr)
+ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage, const std::shared_ptr<Sprite>& spr)
 	: ee::ToolbarPanel(parent, stage->GetStageImpl())
+	, m_spr(spr)
 {
-	spr->AddReference();
-	m_spr = spr;
-
 	SetSizer(InitLayout());	
-}
-
-ToolbarPanel::~ToolbarPanel()
-{
-	m_spr->RemoveReference();
 }
 
 wxSizer* ToolbarPanel::InitLayout()
@@ -79,11 +72,10 @@ void ToolbarPanel::InitFontLayout(wxSizer* top_sizer)
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, "Font");
 	wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 	{
-		const std::vector<std::pair<std::string, std::string> >& 
-			fonts = ee::Config::Instance()->GetFonts();
+		auto& fonts = ee::Config::Instance()->GetFonts();
 		wxArrayString choices;
 		for (int i = 0, n = fonts.size(); i < n; ++i) {
-			choices.push_back(fonts[i].first);
+			choices.push_back(fonts[i].first.c_str());
 		}
 		m_font = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, choices);
 		m_font->SetSelection(0);

@@ -13,21 +13,10 @@
 namespace ee
 {
 
-SpritePropertyImpl::SpritePropertyImpl(EditPanelImpl* stage, Sprite* spr)
+SpritePropertyImpl::SpritePropertyImpl(EditPanelImpl* stage, const SprPtr& spr)
 	: m_stage(stage)
-	, m_spr(NULL)
+	, m_spr(spr)
 {
-	if (spr) {
-		spr->AddReference();
-		m_spr = spr;
-	}
-}
-
-SpritePropertyImpl::~SpritePropertyImpl()
-{
-	if (m_spr) {
-		m_spr->RemoveReference();
-	}
 }
 
 void SpritePropertyImpl::Translate(float x, float y) 
@@ -38,7 +27,7 @@ void SpritePropertyImpl::Translate(float x, float y)
 
 	sm::vec2 new_pos(x, y);
 
-	std::vector<Sprite*> sprs;
+	std::vector<SprPtr> sprs;
 	sprs.push_back(m_spr);
 	EditAddRecordSJ::Instance()->Add(new TranslateSpriteAOP(sprs, new_pos - m_spr->GetPosition()));
 
@@ -53,7 +42,7 @@ void SpritePropertyImpl::Rotate(float angle)
 
 	float offset_angle = angle - m_spr->GetAngle();
 
-	std::vector<Sprite*> sprs;
+	std::vector<SprPtr> sprs;
 	sprs.push_back(m_spr);
 	EditAddRecordSJ::Instance()->Add(new RotateSpriteAOP(sprs, offset_angle));
 

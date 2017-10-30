@@ -1,12 +1,12 @@
 #ifndef _EASYSPRPACKER_EXPORT_NAME_SET_H_
 #define _EASYSPRPACKER_EXPORT_NAME_SET_H_
 
-#include <CU_Singleton.h>
+#include <ee/Symbol.h>
+
+#include <cu/cu_macro.h>
 
 #include <map>
 #include <string>
-
-namespace ee { class Symbol; }
 
 namespace esprpacker
 {
@@ -16,7 +16,7 @@ class PackNode;
 class ExportNameSet
 {
 public:
-	void Insert(const ee::Symbol* sym, PackNode* node);
+	void Insert(const ee::SymConstPtr& sym, PackNode* node);
 
 	void Clear() { m_map.clear(); }
 
@@ -25,7 +25,7 @@ public:
 private:
 	std::map<std::string, int> m_map;
 
-	SINGLETON_DECLARATION(ExportNameSet);
+	CU_SINGLETON_DECLARATION(ExportNameSet);
 
 }; // ExportNameSet
 

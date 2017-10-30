@@ -9,14 +9,8 @@ namespace ee
 
 void ListItem::RefreshThumbnail(const std::string& filepath, bool force)
 {
-	if (force) {
-		if (m_bitmap) {
-			m_bitmap->RemoveReference();
-		}
-	} else {
-		if (m_bitmap) {
-			return;
-		}
+	if (!force && m_bitmap) {
+		return;
 	}
 
 	Symbol* sym = dynamic_cast<Symbol*>(this);
@@ -24,12 +18,12 @@ void ListItem::RefreshThumbnail(const std::string& filepath, bool force)
 		return;
 	}
 
-	m_bitmap = new Bitmap(sym);
+	m_bitmap = std::make_shared<Bitmap>(*sym);
 }
 
-void ListItem::SetBitmap(Bitmap* bmp)
+void ListItem::SetBitmap(const BitmapPtr& bmp)
 {
-	cu::RefCountObjAssign(m_bitmap, bmp);
+	m_bitmap = bmp;
 }
 
 }

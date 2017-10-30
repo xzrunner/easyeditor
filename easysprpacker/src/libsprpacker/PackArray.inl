@@ -13,7 +13,7 @@ namespace esprpacker
 
 template<typename T, typename TPack, typename TUnPack>
 void PackArray<T, TPack, TUnPack >::
-PackToLua(ebuilder::CodeGenerator& gen, const std::vector<T>& array, const std::string& name)
+PackToLua(ebuilder::CodeGenerator& gen, const CU_VEC<T>& array, const std::string& name)
 {
 	lua::assign_with_end(gen, name + "_num", array.size());
 
@@ -29,14 +29,14 @@ PackToLua(ebuilder::CodeGenerator& gen, const std::vector<T>& array, const std::
 
 template<typename T, typename TPack, typename TUnPack>
 int PackArray<T, TPack,TUnPack>::
-SizeOfUnpackFromBin(const std::vector<T>& array)
+SizeOfUnpackFromBin(const CU_VEC<T>& array)
 {
 	return sizeof(TUnPack) * array.size();
 }
 
 template<typename T, typename TPack, typename TUnPack>
 int PackArray<T, TPack,TUnPack>::
-SizeOfPackToBin(const std::vector<T>& array)
+SizeOfPackToBin(const CU_VEC<T>& array)
 {
 	int sz = 0;
 	sz += sizeof(uint16_t);					// number
@@ -46,7 +46,7 @@ SizeOfPackToBin(const std::vector<T>& array)
 
 template<typename T, typename TPack, typename TUnPack>
 void PackArray<T, TPack,TUnPack>::
-PackToBin(const std::vector<T>& array, uint8_t** ptr)
+PackToBin(const CU_VEC<T>& array, uint8_t** ptr)
 {
 	if (array.size() > USHRT_MAX) {
 		throw ee::Exception("PackArray::PackToBin num too large.");

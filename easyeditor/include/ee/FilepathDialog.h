@@ -3,6 +3,8 @@
 
 #include "BaseDialog.h"
 
+#include <string>
+
 namespace ee
 {
 

@@ -70,7 +70,7 @@ LoadBodyVisitor(b2World* world, std::map<Body*, b2Body*>& mapBody)
 {}
 
 void PreviewPanel::LoadBodyVisitor::
-Visit(ee::Sprite* spr, bool& next)
+Visit(const ee::SprPtr& spr, bool& next)
 {
 	Body* data = static_cast<Body*>(spr);
 

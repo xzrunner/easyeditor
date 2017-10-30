@@ -23,7 +23,7 @@ public:
 
 	Database* GetDB() { return m_db; }
 	
-	Symbol* GetSymbol() { return m_sym; }
+	auto& GetSymbol() { return m_sym; }
 
 private:
 	class DropTarget : public ee::CombinedDropTarget
@@ -42,7 +42,7 @@ private:
 private:
 	Database* m_db;
 
-	Symbol* m_sym;
+	std::shared_ptr<Symbol> m_sym;
 
 	friend class StageCanvas;
 

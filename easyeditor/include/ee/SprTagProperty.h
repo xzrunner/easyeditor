@@ -1,12 +1,12 @@
 #ifndef _EASYEDITOR_SPR_TAG_PROPERTY_H_
 #define _EASYEDITOR_SPR_TAG_PROPERTY_H_
 
+#include "Sprite.h"
+
 #include <wx/propgrid/propgrid.h>
 
 namespace ee
 {
-
-class Sprite;
 
 class SprTagProperty : public wxLongStringProperty
 {
@@ -20,12 +20,12 @@ public:
 
 	void SetParent(wxWindow* parent) { m_parent = parent; }
 
-	void SetSprite(Sprite* spr) { m_spr = spr; }
+	void SetSprite(const SprPtr& spr) { m_spr = spr; }
 
 private:
 	wxWindow* m_parent;
 
-	Sprite* m_spr;
+	SprPtr m_spr;
 
 }; // SprTagProperty
 

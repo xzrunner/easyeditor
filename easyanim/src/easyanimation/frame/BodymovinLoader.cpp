@@ -17,7 +17,7 @@
 namespace eanim
 {
 
-void BodymovinLoader::Load(const Json::Value& val, const std::string& dir)
+void BodymovinLoader::Load(const Json::Value& val, const CU_STR& dir)
 {
 	ee::SymbolLoader sym_loader;
 	ee::SpriteLoader spr_loader;
@@ -51,7 +51,7 @@ void BodymovinLoader::Load(const Json::Value& val, const std::string& dir)
 			dst_frame->SetLayer(dst_layer);
 
 			for (int k = 0, l = src_frame->sprs.size(); k < l; ++k) {
-				ee::Sprite* spr = VI_CLONE(ee::Sprite, src_frame->sprs[k]);
+				auto& spr = VI_CLONE(ee::Sprite, src_frame->sprs[k]);
 				dst_frame->Insert(spr, INT_MAX);
 			}
 
@@ -61,8 +61,6 @@ void BodymovinLoader::Load(const Json::Value& val, const std::string& dir)
 			dst_frame->RemoveReference();
 		}
 	}
-
-	sym->RemoveReference();
 
 	ViewMgr::Instance()->library->LoadFromSymbolMgr(*ee::SymbolMgr::Instance());
 

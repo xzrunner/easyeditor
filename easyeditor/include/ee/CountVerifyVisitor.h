@@ -7,7 +7,7 @@
 namespace ee
 {
 
-class CountVerifyVisitor : public Visitor<Shape>
+class CountVerifyVisitor : public RefVisitor<Shape>
 {
 public:
 	CountVerifyVisitor(bool& valid, int num)
@@ -17,7 +17,7 @@ public:
 		m_valid = m_count == m_num;
 	}
 
-	void Visit(Shape* shape, bool& next) {
+	void Visit(const ShapePtr& shape, bool& next) {
 		++m_count;
 		next = m_count <= m_num;
 	}

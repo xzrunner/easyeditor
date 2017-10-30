@@ -2,6 +2,7 @@
 #define _EASYEDITOR_SELECT_SPRITES_OP_H_
 
 #include "DrawSelectRectOP.h"
+#include "Sprite.h"
 
 #include <json/json.h>
 
@@ -14,7 +15,6 @@ class MultiSpritesImpl;
 class EditCMPT;
 class IPropertySetting;
 class SpriteSelection;
-class Sprite;
 
 class SelectSpritesOP : public DrawSelectRectOP
 {
@@ -35,12 +35,12 @@ public:
 	virtual bool Clear();
 
 protected:
-	virtual Sprite* SelectByPos(const sm::vec2& pos) const;
+	virtual SprPtr SelectByPos(const sm::vec2& pos) const;
 
-	virtual void PasteSprToClipboard(const Sprite* spr, Json::Value& value) const;
-	virtual void CopySprFromClipboard(Sprite* spr, const Json::Value& value) const;
+	virtual void PasteSprToClipboard(const SprConstPtr& spr, Json::Value& value) const;
+	virtual void CopySprFromClipboard(const SprPtr& spr, const Json::Value& value) const;
 
-	void GetOrderedSelection(std::vector<Sprite*>& sprs) const;
+	void GetOrderedSelection(std::vector<SprPtr>& sprs) const;
 
 private:
 	void PasteToSelection() const;

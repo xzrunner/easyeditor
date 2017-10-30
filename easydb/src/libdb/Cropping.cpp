@@ -44,7 +44,7 @@ int Cropping::Run(int argc, char *argv[])
 void Cropping::Trigger(const std::string& src_path, const std::string& dst_path, 
 					   int xmin, int ymin, int xmax, int ymax)
 {
-	ee::ImageData* img = ee::ImageDataMgr::Instance()->GetItem(src_path);
+	auto img = ee::ImageDataMgr::Instance()->GetItem(src_path);
 
 	float hw = img->GetWidth() * 0.5f;
 	float hh = img->GetHeight() * 0.5f;
@@ -57,7 +57,7 @@ void Cropping::Trigger(const std::string& src_path, const std::string& dst_path,
 	pimg::Cropping crop(img->GetPixelData(), img->GetWidth(), img->GetHeight(), channels, true);
 
 	const uint8_t* pixels = crop.Crop(xmin, ymin, xmax, ymax);
-	gimg_export(dst_path.c_str(), pixels, xmax - xmin, ymax - ymin, GPF_RGBA, true);
+	gimg_export(dst_path.c_str(), pixels, xmax - xmin, ymax - ymin, GPF_RGBA8, true);
 	delete[] pixels;
 }
 

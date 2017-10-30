@@ -1,6 +1,8 @@
 #ifndef _EASYEDITOR_HISTORY_LIST_H_
 #define _EASYEDITOR_HISTORY_LIST_H_
 
+#include "Sprite.h"
+
 #include <json/json.h>
 
 #include <stack>
@@ -8,7 +10,6 @@
 namespace ee
 {
 
-class Sprite;
 class AtomicOP;
 
 class HistoryList
@@ -31,16 +32,16 @@ public:
 
 	void OnSave();
 
-	void Store(Json::Value& value, const std::vector<Sprite*>& sprs);
-	void Load(const Json::Value& value, const std::vector<Sprite*>& sprs);
+	void Store(Json::Value& value, const std::vector<SprPtr>& sprs);
+	void Load(const Json::Value& value, const std::vector<SprPtr>& sprs);
 
 private:
 	void Clear(std::stack<AtomicOP*>& stack);
 
 	void Store(std::stack<AtomicOP*>& stack, Json::Value& val, 
-		const std::vector<Sprite*>& sprs);
+		const std::vector<SprPtr>& sprs);
 	void Load(std::stack<AtomicOP*>& stack, const Json::Value& val, 
-		const std::vector<Sprite*>& sprs);
+		const std::vector<SprPtr>& sprs);
 
 private:
 	std::stack<AtomicOP*> m_undo_stack, m_redo_stack;

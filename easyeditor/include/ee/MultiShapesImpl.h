@@ -4,6 +4,7 @@
 #include "DataTraverseType.h"
 #include "Observer.h"
 #include "Visitor.h"
+#include "Shape.h"
 
 #include <SM_Vector.h>
 #include <SM_Rect.h>
@@ -15,7 +16,6 @@ namespace ee
 
 class StageCanvas;
 class ShapeSelection;
-class Shape;
 
 class MultiShapesImpl : public Observer
 {
@@ -23,11 +23,11 @@ public:
 	MultiShapesImpl();
 	virtual ~MultiShapesImpl();
 
-	virtual void TraverseShapes(Visitor<Shape>& visitor, 
+	virtual void TraverseShapes(RefVisitor<Shape>& visitor,
 		DataTraverseType type = DT_ALL) const = 0;
 
-	Shape* QueryShapeByPos(const sm::vec2& pos) const;
-	void QueryShapesByRect(const sm::rect& rect, std::vector<Shape*>& result) const;		
+	ShapePtr QueryShapeByPos(const sm::vec2& pos) const;
+	void QueryShapesByRect(const sm::rect& rect, std::vector<ShapePtr>& result) const;		
 
 	ShapeSelection* GetShapeSelection() { return m_shape_selection; }
 	void ClearSelectedShape();
@@ -39,27 +39,27 @@ protected:
 	virtual void OnNotify(int sj_id, void* ud);
 
 private:
-	class PointQueryVisitor : public Visitor<Shape>
+	class PointQueryVisitor : public RefVisitor<Shape>
 	{
 	public:
-		PointQueryVisitor(const sm::vec2& pos, Shape** pResult);
-		virtual void Visit(Shape* shape, bool& next);
+		PointQueryVisitor(const sm::vec2& pos, ShapePtr& ret);
+		virtual void Visit(const ShapePtr& shape, bool& next);
 
 	private:
 		const sm::vec2& m_pos;
-		Shape** m_pResult;
+		ShapePtr& m_ret;
 
 	}; // PointQueryVisitor
 
-	class RectQueryVisitor : public Visitor<Shape>
+	class RectQueryVisitor : public RefVisitor<Shape>
 	{
 	public:
-		RectQueryVisitor(const sm::rect& rect, std::vector<Shape*>& result);
-		virtual void Visit(Shape* shape, bool& next);
+		RectQueryVisitor(const sm::rect& rect, std::vector<ShapePtr>& result);
+		virtual void Visit(const ShapePtr& shape, bool& next);
 
 	private:
 		const sm::rect& m_rect;
-		std::vector<Shape*>& m_result;
+		std::vector<ShapePtr>& m_result;
 
 	}; // RectQueryVisitor
 

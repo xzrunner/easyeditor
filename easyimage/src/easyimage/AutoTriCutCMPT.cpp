@@ -90,8 +90,8 @@ void AutoTriCutCMPT::OutputOutline(wxCommandEvent& event)
 {
 	Trigger();
 
-	const ee::Sprite* spr = m_stage->GetImage();
-	const ee::ImageSymbol* sym = dynamic_cast<const ee::ImageSymbol*>(spr->GetSymbol());
+	const ee::SprConstPtr& spr = m_stage->GetImage();
+	const std::shared_ptr<ee::ImageSymbol>& sym = std::dynamic_pointer_cast<const ee::ImageSymbol>>(spr->GetSymbol());
 	assert(sym);
 	const ee::Image* img = sym->GetImage();
 
@@ -122,10 +122,10 @@ void AutoTriCutCMPT::CreateOutline(wxCommandEvent& event)
 	// step by step
 	static int max_step = 5;
 
-	const ee::Sprite* spr = m_stage->GetImage();
-	const ee::ImageSymbol* sym = dynamic_cast<const ee::ImageSymbol*>(spr->GetSymbol());
+	const ee::SprConstPtr& spr = m_stage->GetImage();
+	const std::shared_ptr<ee::ImageSymbol>& sym = std::dynamic_pointer_cast<const ee::ImageSymbol>>(spr->GetSymbol());
 	assert(sym);
-	ee::ImageData* img_data = ee::ImageDataMgr::Instance()->GetItem(sym->GetFilepath());
+	auto img_data = ee::ImageDataMgr::Instance()->GetItem(sym->GetFilepath());
 
 	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editop);
 	m_raw = new ExtractOutlineRaw(img_data->GetPixelData(), img_data->GetWidth(), img_data->GetHeight());
@@ -139,8 +139,6 @@ void AutoTriCutCMPT::CreateOutline(wxCommandEvent& event)
 	op->m_fine_bound_line = m_fine->GetResult();
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
-
-	img_data->RemoveReference();
 }
 
 void AutoTriCutCMPT::ReduceOutlineCount(wxCommandEvent& event)
@@ -159,10 +157,10 @@ void AutoTriCutCMPT::Trigger()
 #ifdef TRIGGER_STEP
 	static int max_step = 5;
 #endif
-	const ee::Sprite* spr = m_stage->GetImage();
-	const ee::ImageSymbol* sym = dynamic_cast<const ee::ImageSymbol*>(spr->GetSymbol());
+	const ee::SprConstPtr& spr = m_stage->GetImage();
+	const std::shared_ptr<ee::ImageSymbol>& sym = std::dynamic_pointer_cast<const ee::ImageSymbol>>(spr->GetSymbol());
 	assert(sym);
-	ee::ImageData* img_data = ee::ImageDataMgr::Instance()->GetItem(sym->GetFilepath());
+	auto img_data = ee::ImageDataMgr::Instance()->GetItem(sym->GetFilepath());
 
 	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editop);
 	ExtractOutlineRaw raw(img_data->GetPixelData(), img_data->GetWidth(), img_data->GetHeight());
@@ -180,16 +178,14 @@ void AutoTriCutCMPT::Trigger()
 	op->m_fine_bound_line = fine.GetResult();
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
-
-	img_data->RemoveReference();
 }
 
 void AutoTriCutCMPT::OnDebug(wxCommandEvent& event)
 {
-	const ee::Sprite* spr = m_stage->GetImage();
-	const ee::ImageSymbol* sym = dynamic_cast<const ee::ImageSymbol*>(spr->GetSymbol());
+	const ee::SprConstPtr& spr = m_stage->GetImage();
+	const std::shared_ptr<ee::ImageSymbol>& sym = std::dynamic_pointer_cast<const ee::ImageSymbol>>(spr->GetSymbol());
 	assert(sym);
-	ee::ImageData* img_data = ee::ImageDataMgr::Instance()->GetItem(sym->GetFilepath());
+	auto img_data = ee::ImageDataMgr::Instance()->GetItem(sym->GetFilepath());
 
 	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editop);
 	ExtractOutlineRaw raw(img_data->GetPixelData(), img_data->GetWidth(), img_data->GetHeight());
@@ -198,8 +194,6 @@ void AutoTriCutCMPT::OnDebug(wxCommandEvent& event)
 	op->m_raw_bound_line = raw.GetConvexHull();
 	op->m_raw_bound_points = raw.GetBorderPoints();
 	op->m_raw_bound_line_merged = raw.GetBorderLineMerged();
-
-	img_data->RemoveReference();
 }
 
 }

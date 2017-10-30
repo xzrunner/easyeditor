@@ -11,7 +11,7 @@
 #include <ee/panel_msg.h>
 
 #include <sprite2/Skeleton.h>
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <sprite2/RenderParams.h>
 
 namespace libskeleton
@@ -23,19 +23,10 @@ EditJointPoseOP::EditJointPoseOP(StagePanel* stage)
 	, m_selected(NULL)
 	, m_op_state(NULL)
 {
-	if (m_sk) {
-		m_sk->AddReference();
-	}
 }
 
 EditJointPoseOP::~EditJointPoseOP()
 {
-	if (m_sk) {
-		m_sk->RemoveReference();
-	}
-	if (m_selected) {
-		m_selected->RemoveReference();
-	}
 	if (m_op_state) {
 		delete m_op_state;
 	}
@@ -152,15 +143,12 @@ bool EditJointPoseOP::OnDraw() const
 	if (ee::ZoomViewOP::OnDraw()) {
 		return true;
 	}
-	if (!m_sk) {
-		return false;
-	}
 
 	s2::RenderParams params;
-	const std::vector<s2::Joint*>& joints = m_sk->GetAllJoints();
+	auto& joints = m_sk.GetAllJoints();
 	for (int i = 0, n = joints.size(); i < n; ++i) {
-		s2::Joint* joint = joints[i];
-		dynamic_cast<Joint*>(joint)->DrawSkeleton(params, joint == m_selected);
+		auto& joint = joints[i];
+		std::dynamic_pointer_cast<Joint>(joint)->DrawSkeleton(params, joint == m_selected);
 	}
 
 	return false;
@@ -172,10 +160,8 @@ bool EditJointPoseOP::Clear()
 		return true;
 	}
 
-	if (m_selected) {
-		m_selected->RemoveReference();
-		m_selected = NULL;
-	}
+	m_selected.reset();
+
 	if (m_op_state) {
 		delete m_op_state;
 		m_op_state = NULL;
@@ -186,13 +172,9 @@ bool EditJointPoseOP::Clear()
 
 bool EditJointPoseOP::Select(const sm::vec2& pos)
 {
-	if (!m_sk) {
-		return false;
-	}
-
-	s2::Joint* old_selected = m_selected;
-	const s2::Joint* joint = m_sk->QueryByPos(pos);
-	m_selected = dynamic_cast<Joint*>(const_cast<s2::Joint*>(joint));
+	auto old_selected = m_selected;
+	auto joint = m_sk.QueryByPos(pos);
+	m_selected = std::dynamic_pointer_cast<Joint>(joint);
 	return old_selected != m_selected;
 }
 

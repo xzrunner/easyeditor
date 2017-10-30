@@ -19,9 +19,9 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	m_list->SetFileter(ee::SymbolFile::Instance()->Tag(s2::SYM_TEXTURE));
 }
 
-bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
+bool LibraryPage::IsHandleSymbol(const ee::SymPtr& sym) const
 {
-	return dynamic_cast<Symbol*>(sym) != NULL;
+	return sym->Type() == s2::SYM_TEXTURE;
 }
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
@@ -36,10 +36,9 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 		{
 			std::string filename = filenames[i].ToStdString();
 			try {
-				ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filename);
+				auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filename);
 				sym->RefreshThumbnail(filename);
 				m_list->Insert(sym);
-				sym->RemoveReference();
 			} catch (ee::Exception& e) {
 				ee::ExceptionDlg dlg(m_parent, e);
 				dlg.ShowModal();

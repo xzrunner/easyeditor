@@ -3,6 +3,7 @@
 
 #include "KeysState.h"
 #include "Visitor.h"
+#include "ListItem.h"
 
 #include <wx/wx.h>
 #include <wx/vlbox.h>
@@ -11,8 +12,6 @@
 
 namespace ee
 {
-
-class ListItem;
 
 class VerticalImageList : public wxVListBox
 {
@@ -25,18 +24,18 @@ public:
 	virtual void OnListDoubleClicked(wxCommandEvent& event) {}
 
 	virtual void Clear();
-	virtual void Insert(ListItem* item, int idx = -1);
+	virtual void Insert(const ListItemPtr& item, int idx = -1);
 	virtual void Remove();
 	virtual void Remove(int index);
 	virtual void Swap(int i0, int i1);
 
-	void Traverse(Visitor<ListItem>& visitor) const;
+	void Traverse(RefVisitor<ListItem>& visitor) const;
 
 	void SetFileter(const std::string& filter) {
 		m_name = filter;
 	}
 
-	const ListItem* GetSelected() const;
+	ListItemPtr GetSelected() const;
 
 	bool GetKeyState(int key) const {
 		return m_keys_state.GetKeyState(key);
@@ -58,7 +57,7 @@ private:
 	void OnMouseWrap(wxMouseEvent& event);
 
 protected:
-	std::vector<ListItem*> m_items;
+	std::vector<ListItemPtr> m_items;
 
 	std::string m_name;
 

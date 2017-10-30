@@ -16,12 +16,12 @@ class FileSaver
 public:
 	static void Store(const std::string& filepath, const Symbol& sym);
 
-	static Json::Value StoreLerps(const std::vector<std::pair<s2::AnimLerp::SprData, std::unique_ptr<s2::ILerp>>>& lerps);
+	static Json::Value StoreLerps(const CU_VEC<std::pair<s2::AnimLerp::SprData, std::unique_ptr<s2::ILerp>>>& lerps);
 
 private:
-	static void Store(Json::Value& value, const s2::AnimSymbol::Layer& layer, const std::string& dir);
-	static void Store(Json::Value& value, const s2::AnimSymbol::Frame& frame, const std::string& dir);
-	static void Store(Json::Value& value, s2::Sprite* spr, const std::string& dir);
+	static void Store(Json::Value& value, const s2::AnimSymbol::LayerPtr& layer, const std::string& dir);
+	static void Store(Json::Value& value, const s2::AnimSymbol::FramePtr& frame, const std::string& dir);
+	static void Store(Json::Value& value, const s2::SprPtr& spr, const std::string& dir);
 
 }; // FileSaver
 

@@ -11,7 +11,7 @@
 namespace lr
 {
 
-LevelEditDlg::LevelEditDlg(wxWindow* parent, ee::Sprite* spr)
+LevelEditDlg::LevelEditDlg(wxWindow* parent, const ee::SprPtr& spr)
 	: CfgEditDlg(parent, "Level", spr)
 {
 	InitData(spr);
@@ -35,10 +35,10 @@ std::string LevelEditDlg::ToString()
 	return ret;
 }
 
-void LevelEditDlg::InitData(ee::Sprite* spr)
+void LevelEditDlg::InitData(const ee::SprPtr& spr)
 {
 	if (spr->GetTag().find("[symbol]") != std::string::npos) {
-		m_info.LoadFromString(dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->tag, "symbol");
+		m_info.LoadFromString(std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol())->tag, "symbol");
 	}
 	m_info.LoadFromString(spr->GetTag(), "sprite");
 

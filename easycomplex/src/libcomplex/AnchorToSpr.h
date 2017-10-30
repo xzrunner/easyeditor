@@ -10,7 +10,7 @@ namespace ecomplex
 class AnchorToSpr
 {
 public:
-	static ee::Sprite* Trans(const erespacker::PackAnchor* anchor);
+	static ee::SprPtr Trans(const erespacker::PackAnchor* anchor);
 
 }; // AnchorToSpr
 

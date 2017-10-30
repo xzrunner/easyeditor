@@ -8,6 +8,7 @@
 #include <ps_2d.h>
 
 #include <vector>
+#include <memory>
 
 namespace eparticle2d { class Symbol; }
 
@@ -17,7 +18,7 @@ namespace esprpacker
 class PackParticle2d : public PackNode
 {
 public:
-	PackParticle2d(const eparticle2d::Symbol* sym);
+	PackParticle2d(const std::shared_ptr<eparticle2d::Symbol>& sym);
 
 	/**
 	 *  @interface
@@ -35,7 +36,7 @@ public:
 	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const;	
 	
 private:
-	void Init(const eparticle2d::Symbol* sym);	
+	void Init(const std::shared_ptr<eparticle2d::Symbol>& sym);	
 
 	void PackToLuaPS(ebuilder::CodeGenerator& gen) const;
 

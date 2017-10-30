@@ -29,11 +29,11 @@ protected:
 	SpriteSelection* GetSelection() { return m_selection; } 
 
 private:
-	class TranslateVisitor : public Visitor<Sprite>
+	class TranslateVisitor : public RefVisitor<Sprite>
 	{
 	public:
 		TranslateVisitor(const sm::vec2& offset) : m_offset(offset) {}
-		virtual void Visit(Sprite* spr, bool& next);
+		virtual void Visit(const SprPtr& spr, bool& next);
 	private:
 		sm::vec2 m_offset;
 	}; // TranslateVisitor

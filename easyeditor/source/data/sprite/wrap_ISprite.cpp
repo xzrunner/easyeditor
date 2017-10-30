@@ -15,8 +15,9 @@ Sprite* luax_checksprite(lua_State* L, int idx)
 int w_Sprite_clone(lua_State* L)
 {
 	Sprite* t = luax_checksprite(L, 1);
-	Sprite* clone = dynamic_cast<Sprite*>(((cu::Cloneable*)t)->Clone());
-	luax_newtype(L, "Sprite", SPRITE_DATA_T, (void*)clone);
+	// fixme: cache clone
+	SprPtr clone = std::dynamic_pointer_cast<Sprite>(t->Clone());
+	luax_newtype(L, "Sprite", SPRITE_DATA_T, (void*)clone.get());
 	return 1;
 }
 

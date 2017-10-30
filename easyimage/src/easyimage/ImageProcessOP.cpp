@@ -21,7 +21,7 @@ bool ImageProcessOP::OnActive()
 		return true;
 	}
 
-	if (const ee::Sprite* spr = m_stage->GetImage())
+	if (const ee::SprConstPtr& spr = m_stage->GetImage())
 	{
 		sm::rect r = spr->GetSymbol()->GetBounding();
 

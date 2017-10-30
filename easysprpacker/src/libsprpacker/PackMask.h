@@ -6,6 +6,7 @@
 #include <sprite2/MaskSymbol.h>
 
 #include <vector>
+#include <memory>
 
 namespace emask { class Symbol; }
 
@@ -15,7 +16,7 @@ namespace esprpacker
 class PackMask : public PackNode
 {
 public:
-	PackMask(const emask::Symbol* sym);
+	PackMask(const std::shared_ptr<emask::Symbol>& sym);
 	~PackMask();
 
 	/**

@@ -5,6 +5,8 @@
 
 #include <wx/dnd.h>
 
+#include <memory>
+
 namespace ee
 {
 
@@ -21,7 +23,7 @@ public:
 	//
 	virtual wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def);
 
-	virtual bool OnDropSymbol(Symbol* sym, const sm::vec2& pos) { return false; }
+	virtual bool OnDropSymbol(const std::shared_ptr<Symbol>& sym, const sm::vec2& pos) { return false; }
 	virtual void OnDropText(wxCoord x, wxCoord y, const wxString& text) = 0;
 	virtual void OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames) = 0;
 

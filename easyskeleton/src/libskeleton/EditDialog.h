@@ -16,8 +16,8 @@ class StagePanel;
 class EditDialog : public wxDialog
 {
 public:
-	EditDialog(wxWindow* parent, wxGLContext* glctx, Sprite* spr);
-	virtual ~EditDialog();
+	EditDialog(wxWindow* parent, wxGLContext* glctx, 
+		const std::shared_ptr<Sprite>& spr);
 
 private:
 	void InitLayout(wxGLContext* glctx);
@@ -25,7 +25,7 @@ private:
 	void OnCloseEvent(wxCloseEvent& event);
 
 private:
-	Sprite* m_spr;
+	std::shared_ptr<Sprite> m_spr;
 
 	StagePanel* m_stage;
 

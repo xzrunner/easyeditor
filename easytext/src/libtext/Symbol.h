@@ -22,9 +22,9 @@ public:
 	 *  @interface
 	 *    s2::Symbol
 	 */
-	virtual s2::RenderReturn Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
+	virtual s2::RenderReturn DrawTree(cooking::DisplayList* dlist, const s2::RenderParams& rp, const s2::Sprite* spr = nullptr) const;
 
-	static ee::Symbol* Create() { return new Symbol(); }
+	static ee::SymPtr Create() { return std::make_shared<Symbol>(); }
 
 protected:
 	/**
@@ -38,7 +38,7 @@ protected:
 	 *    s2::TextboxSymbol
 	 */
 	virtual void DrawText(cooking::DisplayList* dlist, const gtxt_label_style& style, const S2_MAT& mt, const s2::Color& mul,
-		const s2::Color& add, const std::string& text, int time, bool richtext) const;
+		const s2::Color& add, const CU_STR& text, int time, bool richtext) const override;
 
 private:
 	void DrawBackground(const Sprite* spr, const S2_MAT& mt) const;

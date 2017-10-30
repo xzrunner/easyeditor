@@ -99,9 +99,9 @@ wxSizer* JointEditCmpt::InitLayout()
 
 void JointEditCmpt::onCreateJoint(wxCommandEvent& event)
 {
-	std::vector<ee::Sprite*> sprs;
+	std::vector<ee::SprPtr> sprs;
 	ee::SpriteSelection* selection = m_stage_panel->GetSpriteSelection();
-	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	selection->Traverse(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	assert(sprs.size() == 2);
 	Body *body0 = static_cast<Body*>(sprs[0]->GetUserData()),
 		*body1 = static_cast<Body*>(sprs[1]->GetUserData());

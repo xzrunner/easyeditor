@@ -9,7 +9,7 @@
 
 #include <polymesh/Mesh.h>
 #include <sprite2/RenderParams.h>
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <sprite2/DrawMesh.h>
 #include <SM_Calc.h>
 
@@ -122,8 +122,8 @@ bool EditPointsMeshOP::OnDraw() const
 {
 	if (Mesh* mesh = static_cast<StagePanel*>(m_wnd)->GetMesh())
 	{
-		s2::DrawMesh::DrawTexture(mesh, s2::RenderParams());
-		s2::DrawMesh::DrawInfoXY(mesh);
+		s2::DrawMesh::DrawTexture(*mesh, s2::RenderParams());
+		s2::DrawMesh::DrawInfoXY(*mesh);
 	}
 
 	s2::RVG::SetColor(s2::Color(51, 204, 51));
@@ -144,10 +144,10 @@ void EditPointsMeshOP::TranslasteNode(const sm::vec2& offset)
 		return;
 	}
 
-	pm::Mesh* pm_mesh = mesh->GetMesh();
+	auto& pm_mesh = mesh->GetMesh();
 
-	std::vector<sm::vec2> vertices, texcoords;
-	std::vector<int> triangles;
+	CU_VEC<sm::vec2> vertices, texcoords;
+	CU_VEC<int> triangles;
 	pm_mesh->Dump(vertices, texcoords, triangles);
 	std::set<int>::iterator itr = m_selection.begin();
 	for ( ; itr != m_selection.end(); ++itr) {
@@ -163,11 +163,11 @@ void EditPointsMeshOP::RotateNode(const sm::vec2& dst)
 		return;
 	}
 
-	pm::Mesh* pm_mesh = mesh->GetMesh();
+	auto& pm_mesh = mesh->GetMesh();
 
 	float angle = sm::get_angle_in_direction(m_center, m_last_pos, dst);
-	std::vector<sm::vec2> vertices, texcoords;
-	std::vector<int> triangles;
+	CU_VEC<sm::vec2> vertices, texcoords;
+	CU_VEC<int> triangles;
 	pm_mesh->Dump(vertices, texcoords, triangles);
 	std::set<int>::iterator itr = m_selection.begin();
 	for ( ; itr != m_selection.end(); ++itr) 

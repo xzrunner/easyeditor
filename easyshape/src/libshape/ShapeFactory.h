@@ -1,7 +1,7 @@
 #ifndef _EASYSHAPE_SHAPE_FACTORY_H_
 #define _EASYSHAPE_SHAPE_FACTORY_H_
 
-namespace ee { class Shape; }
+#include <ee/Shape.h>
 
 #include <json/json.h>
 
@@ -11,7 +11,7 @@ namespace eshape
 class ShapeFactory
 {
 public:
-	static ee::Shape* CreateShapeFromFile(const Json::Value& value,
+	static ee::ShapePtr CreateShapeFromFile(const Json::Value& value,
 		const std::string& dir);
 
 }; // ShapeFactory

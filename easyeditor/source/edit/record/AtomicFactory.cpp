@@ -9,7 +9,7 @@ namespace ee
 {
 
 AtomicOP* AtomicFactory::Create(const Json::Value& val,
-								const std::vector<Sprite*>& sprs)
+								const std::vector<SprPtr>& sprs)
 {
 	AtomicType type = AtomicType(val["type"].asInt());
 

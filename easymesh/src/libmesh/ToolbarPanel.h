@@ -3,6 +3,8 @@
 
 #include <ee/ToolbarPanel.h>
 
+#include <memory>
+
 namespace emesh
 {
 
@@ -15,7 +17,7 @@ class ToolbarPanel : public ee::ToolbarPanel
 {
 public:
 	ToolbarPanel(wxWindow* parent, StagePanel* stage, bool full,
-		Sprite* spr);
+		const std::shared_ptr<Sprite>& spr);
 
 	void SetEditType(int pm_mesh_type);
 
@@ -30,7 +32,7 @@ private:
 private:
 	StagePanel* m_stage;
 
-	Sprite* m_spr;
+	std::shared_ptr<Sprite> m_spr;
 
 	CreateMeshCMPT* m_create_cmpt;
 	EditMeshCMPT* m_edit_cmpt;

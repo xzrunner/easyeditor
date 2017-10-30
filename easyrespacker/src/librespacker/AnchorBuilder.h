@@ -3,9 +3,9 @@
 
 #include "INodeBuilder.h"
 
-#include <vector>
+#include <ee/Sprite.h>
 
-namespace ee { class Sprite; }
+#include <vector>
 
 namespace erespacker
 {
@@ -21,7 +21,7 @@ public:
 
 	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
 
-	const IPackNode* Create(const ee::Sprite* spr);
+	const IPackNode* Create(const ee::SprConstPtr& spr);
 
 private:
 	std::vector<const PackAnchor*> m_anchors;

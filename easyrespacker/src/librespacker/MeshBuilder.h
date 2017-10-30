@@ -19,7 +19,7 @@ public:
 
 	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
 
-	const IPackNode* Create(const emesh::Symbol* sym);
+	const IPackNode* Create(const std::shared_ptr<const emesh::Symbol>& sym);
 
 private:
 	std::vector<IPackNode*> m_nodes;

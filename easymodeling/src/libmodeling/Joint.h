@@ -3,7 +3,7 @@
 
 #include <SM_Rect.h>
 #include <SM_Vector.h>
-#include <CU_RefCountObj.h>
+#include <cu/CU_RefCountObj.h>
 
 #include <string>
 
@@ -52,9 +52,9 @@ protected:
 	void DrawBodyFlag() const;
 
 	static sm::vec2 TransWorldToLocal(const sm::vec2& world, 
-		const ee::Sprite* spr);
+		const ee::SprConstPtr& spr);
 	static sm::vec2 TransLocalToWorld(const sm::vec2& local, 
-		const ee::Sprite* spr);
+		const ee::SprConstPtr& spr);
 
 private:
 	void DrawBodyFlag(const sm::vec2& pos) const;

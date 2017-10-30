@@ -10,7 +10,7 @@ namespace ecomplex
 class LabelToSpr
 {
 public:
-	static ee::Sprite* Trans(const erespacker::PackLabel* label);
+	static ee::SprPtr Trans(const erespacker::PackLabel* label);
 
 }; // LabelToSpr
 

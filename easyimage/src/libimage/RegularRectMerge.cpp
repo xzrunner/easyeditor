@@ -9,7 +9,7 @@
 namespace eimage
 {
 
-RegularRectMerge::RegularRectMerge(const std::vector<Rect>& rects, int width, 
+RegularRectMerge::RegularRectMerge(const CU_VEC<Rect>& rects, int width, 
 								   int height, bool* ori_pixels)
 	: m_width(width)
 	, m_height(height)
@@ -36,7 +36,7 @@ void RegularRectMerge::Merge()
 
 	while (true) 
 	{
-		std::vector<Rect> rects;
+		CU_VEC<Rect> rects;
 		m_condense->GetSortedRects(rects);
 		if (rects.size() <= 1) {
 			break;
@@ -134,12 +134,12 @@ void RegularRectMerge::Merge()
 	}
 }
 
-void RegularRectMerge::GetResult(std::vector<Rect>& result) const
+void RegularRectMerge::GetResult(CU_VEC<Rect>& result) const
 {
 	m_condense->GetSortedRects(result);
 }
 
-int RegularRectMerge::ComputeCost(const Rect& r, const std::vector<Rect>& rects) const
+int RegularRectMerge::ComputeCost(const Rect& r, const CU_VEC<Rect>& rects) const
 {
 	int cost = 0;
 	for (int i = 0, n = rects.size(); i < n; ++i) 

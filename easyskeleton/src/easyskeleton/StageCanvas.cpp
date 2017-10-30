@@ -6,7 +6,7 @@
 #include <ee/FetchAllVisitor.h>
 #include <ee/SpriteRenderer.h>
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 
 namespace eskeleton
 {
@@ -20,10 +20,10 @@ void StageCanvas::OnDrawSprites() const
 {
 	DrawBackground();
 
-	std::vector<ee::Sprite*> sprs;
-	m_stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	m_stage->TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
-		ee::Sprite* spr = sprs[i];
+		auto& spr = sprs[i];
 		ee::SpriteRenderer::Instance()->Draw(spr);
 		Bone* bone = (Bone*)(spr->GetUserData());
 		bone->Draw();

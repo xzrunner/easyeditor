@@ -3,15 +3,17 @@
 
 #include <json/json.h>
 
+#include <memory>
+
+namespace s2 { class Icon; }
+
 namespace eicon
 {
-
-class Icon;
 
 class IconFactory
 {
 public:
-	static Icon* CreateIconFromFile(const Json::Value& value);
+	static std::unique_ptr<s2::Icon> CreateIconFromFile(const Json::Value& value);
 
 }; // IconFactory
 

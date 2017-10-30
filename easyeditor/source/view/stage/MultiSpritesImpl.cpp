@@ -27,12 +27,13 @@ MultiSpritesImpl::~MultiSpritesImpl()
 	m_sprite_selection->RemoveReference();
 }
 
-Sprite* MultiSpritesImpl::QuerySpriteByPos(const sm::vec2& pos) const
+ee::SprPtr MultiSpritesImpl::QuerySpriteByPos(const sm::vec2& pos) const
 {
-	Sprite* selected = NULL;
-	TraverseSprites(PointQueryVisitor(pos, &selected), DT_EDITABLE, false);
+	PointQueryVisitor visitor(pos);
+	TraverseSprites(visitor, DT_EDITABLE, false);
+	auto selected = visitor.GetSelected();
 	if (selected && !selected->IsEditable()) {
-		std::vector<Sprite*> sprs;
+		std::vector<SprPtr> sprs;
 		QuerySpritesByRect(sm::rect(pos, 1, 1), false, sprs);
 		if (!sprs.empty()) {
 			selected = sprs.back();
@@ -43,9 +44,11 @@ Sprite* MultiSpritesImpl::QuerySpriteByPos(const sm::vec2& pos) const
 	return selected;
 }
 
-void MultiSpritesImpl::QuerySpritesByRect(const sm::rect& rect, bool contain, std::vector<Sprite*>& result) const
+void MultiSpritesImpl::QuerySpritesByRect(const sm::rect& rect, bool contain, std::vector<ee::SprPtr>& result) const
 {
-	TraverseSprites(RectQueryVisitor(rect, contain, result), DT_EDITABLE);
+	RectQueryVisitor visitor(rect, contain);
+	TraverseSprites(visitor, DT_EDITABLE);
+	result = visitor.GetSelected();
 }
 
 void MultiSpritesImpl::ClearSelectedSprite()
@@ -54,8 +57,8 @@ void MultiSpritesImpl::ClearSelectedSprite()
 		return;
 	}
 
-	std::vector<Sprite*> sprs;
-	m_sprite_selection->Traverse(FetchAllVisitor<Sprite>(sprs));
+	std::vector<SprPtr> sprs;
+	m_sprite_selection->Traverse(FetchAllRefVisitor<Sprite>(sprs));
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
 		RemoveSpriteSJ::Instance()->Remove(sprs[i]);
 	}
@@ -87,14 +90,14 @@ void MultiSpritesImpl::OnNotify(int sj_id, void* ud)
 		break;
 	case MSG_QUERY_SELECTED_SPRS:
 		{
-			std::vector<Sprite*>& sprs = *(std::vector<Sprite*>*)ud;
-			m_sprite_selection->Traverse(FetchAllVisitor<Sprite>(sprs));
+			std::vector<SprPtr>& sprs = *(std::vector<SprPtr>*)ud;
+			m_sprite_selection->Traverse(FetchAllRefVisitor<Sprite>(sprs));
 		}
 		break;
 	}
 }
 
-void MultiSpritesImpl::OnSpriteSelected(Sprite* spr, bool clear)
+void MultiSpritesImpl::OnSpriteSelected(const SprPtr& spr, bool clear)
 {
 	if (clear) {
 		m_sprite_selection->Clear();

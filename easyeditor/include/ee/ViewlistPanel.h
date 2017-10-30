@@ -1,12 +1,13 @@
 #ifndef _EASYEDITOR_VIEWLIST_PANEL_H_
 #define _EASYEDITOR_VIEWLIST_PANEL_H_
 
+#include "Sprite.h"
+
 #include <wx/wx.h>
 
 namespace ee
 {
 
-class Sprite;
 class ViewlistList;
 class ViewlistListImpl;
 
@@ -16,7 +17,7 @@ public:
 	ViewlistPanel(wxWindow* parent);
 
 	void Clear();
-	void Insert(Sprite* spr, int idx = -1);
+	void Insert(const SprPtr& spr, int idx = -1);
 
 	void SetListImpl(ViewlistListImpl* impl);
 

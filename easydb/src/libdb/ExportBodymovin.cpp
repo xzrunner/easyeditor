@@ -128,8 +128,6 @@ void ExportBodymovin::Trigger(const std::string& src_file, const std::string& ds
  				libanim::Sprite* spr = new libanim::Sprite(sym);
  				spr->UpdateBounding();
  				map_assets.insert(std::make_pair(a.id, spr));
- 
- 				sym->RemoveReference();
  			}
  		}
  		if (!fail) {

@@ -32,12 +32,12 @@ protected:
 
 	virtual ee::ArrangeSpriteState* CreateTranslateState(ee::SpriteSelection* selection, const sm::vec2& first_pos) const;
 	virtual ee::ArrangeSpriteState* CreateRotateState(ee::SpriteSelection* selection, const sm::vec2& first_pos) const;
-	virtual ee::ArrangeSpriteState* CreateScaleState(ee::Sprite* spr, const ee::SpriteCtrlNode::Node& ctrl_node) const;
+	virtual ee::ArrangeSpriteState* CreateScaleState(const ee::SprPtr& spr, const ee::SpriteCtrlNode::Node& ctrl_node) const;
 
 private:
 	Joint* QueryJoint(const sm::vec2& pos) const;
 
-	void AutoAbsorb(ee::Sprite* spr) const;
+	void AutoAbsorb(const ee::SprPtr& spr) const;
 
 	void UpdateSelectedBody();
 

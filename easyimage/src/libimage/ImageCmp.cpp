@@ -15,7 +15,7 @@ bool ImageCmp::IsSame(const std::string& path0, const std::string& path1, float 
 	uint8_t* pixels1 = gimg_import(path1.c_str(), &w1, &h1, &fmt1);
 
 	if (!pixels0 || !pixels1 ||
-		fmt0 != GPF_RGBA || fmt1 != GPF_RGBA) {
+		fmt0 != GPF_RGBA8 || fmt1 != GPF_RGBA8) {
 		return false;
 	}
 

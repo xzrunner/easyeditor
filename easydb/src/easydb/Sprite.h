@@ -16,13 +16,7 @@ public:
 	Sprite(int id);
 	Sprite(const Sprite& spr);
 	Sprite& operator = (const Sprite& spr);
-	Sprite(Symbol* sym, int id);
-
-	/**
-	 *  @interface
-	 *    s2::Sprite
-	 */
-	virtual Sprite* Clone() const { return new Sprite(*this); }
+	Sprite(const std::shared_ptr<Symbol>& sym, int id);
 
 	int GetID() const { return m_id; }
 
@@ -37,6 +31,8 @@ private:
 	bool m_in_closed, m_out_closed;
 
 	gum::Image* m_snapshoot;
+
+	SPRITE_CLONE_FUNC(Sprite)
 
 }; // Sprite
 

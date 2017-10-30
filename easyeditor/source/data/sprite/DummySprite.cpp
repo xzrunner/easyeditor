@@ -17,7 +17,7 @@ DummySprite& DummySprite::operator = (const DummySprite& spr)
 	return *this;
 }
 
-DummySprite::DummySprite(DummySymbol* sym)
+DummySprite::DummySprite(const s2::SymPtr& sym, uint32_t id)
 	: s2::Sprite(sym)
 	, Sprite(sym)
 {

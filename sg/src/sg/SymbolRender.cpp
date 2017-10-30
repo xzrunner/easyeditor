@@ -7,7 +7,7 @@
 #include <ee/color_config.h>
 #include <ee/SpriteRenderer.h>
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 
 namespace sg
 {
@@ -62,7 +62,7 @@ void SymbolRender::DrawGrass(const ee::Symbol& sym,
 		p = (pos + fixed) * 0.5f;
 	}
 
-	ee::Sprite* grass = m_grass[info->size - 1];
+	ee::SprPtr grass = m_grass[info->size - 1];
 	if (is_flat)
 	{
 		sm::rect r = grass->GetSymbol()->GetBounding();

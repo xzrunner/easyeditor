@@ -4,6 +4,7 @@
 #include "MeshShape.h"
 
 #include <SM_Vector.h>
+#include <cu/cu_stl.h>
 
 #include <vector>
 
@@ -27,7 +28,7 @@ public:
 	virtual void PackToBin(uint8_t** ptr) const;
 
 private:
-	std::vector<sm::vec2> FormatVertices() const;
+	CU_VEC<sm::vec2> FormatVertices() const;
 
 private:
 	const emesh::PointsMesh* m_mesh;

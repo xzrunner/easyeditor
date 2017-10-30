@@ -29,7 +29,7 @@ private:
 
 	void OnChangeGradingTexture(wxCommandEvent& event);
 
-	void SetTerrain2dUpdate(ee::Sprite* spr, bool open);
+	void SetTerrain2dUpdate(const ee::SprPtr& spr, bool open);
 
 private:
 	StagePanel* m_stage;

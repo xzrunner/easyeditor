@@ -5,11 +5,12 @@
 #include <ee/UICallback.h>
 #include <ee/Observer.h>
 
+#include <sprite2/Symbol.h>
+
 #include <json/json.h>
 #include <wx/dnd.h>
 
 namespace ee { class LibraryPanel; class SliderCtrl; class Symbol; }
-namespace s2 { class Symbol; }
 
 namespace etrail
 {
@@ -52,7 +53,7 @@ private:
 
 	void OnChangeMode(wxCommandEvent& event);
 
-	ComponentPanel* OnAddChild(s2::Symbol* sym);
+	ComponentPanel* OnAddChild(const s2::SymPtr&  sym);
 	void OnDelAllChild(wxCommandEvent& event);
 
 private:

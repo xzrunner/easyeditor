@@ -17,8 +17,8 @@
 
 #include <sprite2/SymType.h>
 #include <sprite2/ComplexSymbol.h>
-#include <sprite2/S2_Sprite.h>
-#include <sprite2/S2_RVG.h>
+#include <sprite2/Sprite.h>
+#include <sprite2/RVG.h>
 #include <sprite2/RenderScissor.h>
 #include <sprite2/BoundingBox.h>
 #include <sprite2/DrawNode.h>
@@ -37,10 +37,10 @@ Symbol::Symbol()
 	, m_render_cache_open(true)
 {
 	static int id = 0;
-	m_name = ee::SymbolFile::Instance()->Tag(s2::SYM_COMPLEX) + gum::StringHelper::ToString(id++);
+	m_name = ee::SymbolFile::Instance()->Tag(s2::SYM_COMPLEX) + gum::StringHelper::ToString(id++).c_str();
 }
 
-s2::RenderReturn Symbol::Draw(const s2::RenderParams& rp, const s2::Sprite* spr) const
+s2::RenderReturn Symbol::DrawTree(cooking::DisplayList* dlist, const s2::RenderParams& rp, const s2::Sprite* spr) const
 {
 	s2::RenderParams rp_child;
 	if (!s2::DrawNode::Prepare(rp, spr, rp_child)) {
@@ -128,15 +128,15 @@ s2::RenderReturn Symbol::Draw(const s2::RenderParams& rp, const s2::Sprite* spr)
 		if (spr) {
 			action = dynamic_cast<const s2::ComplexSprite*>(spr)->GetAction();
 		}
-		const std::vector<s2::Sprite*>& sprs = GetActionChildren(action);
+		auto& sprs = GetActionChildren(action);
 		for (int i = 0, n = sprs.size(); i < n; ++i) 
 		{
-			const s2::Sprite* spr = sprs[i];
+			auto& spr = sprs[i];
 			rp_child.actor = spr->QueryActor(rp.actor);
-			if (CullingTestOutside(spr, rp_child)) {
+			if (CullingTestOutside(*spr, rp_child)) {
 				continue;
 			}
-			ee::SpriteRenderer::Instance()->Draw(spr, rp_child);
+			ee::SpriteRenderer::Instance()->Draw(spr.get(), rp_child);
 		}
 	}
 
@@ -157,30 +157,30 @@ s2::RenderReturn Symbol::Draw(const s2::RenderParams& rp, const s2::Sprite* spr)
 void Symbol::ReloadTexture() const
 {
 	for (int i = 0, n = m_children.size(); i < n; ++i) {
-		ee::Sprite* child = dynamic_cast<ee::Sprite*>(m_children[i]);
-		if (etext::Sprite* text = dynamic_cast<etext::Sprite*>(child)) {
+		auto child = std::dynamic_pointer_cast<ee::Sprite>(m_children[i]);
+		if (child->GetSymbol()->Type() == s2::SYM_TEXTBOX) {
 			//			// todo
 			//			ee::GTxt::Instance()->Reload(text);
 		}
 	}
-	std::set<const ee::Symbol*> syms;
+	std::set<ee::SymPtr> syms;
 	for (int i = 0, n = m_children.size(); i < n; ++i) {
-		syms.insert(dynamic_cast<const ee::Symbol*>(m_children[i]->GetSymbol()));
+		syms.insert(std::dynamic_pointer_cast<ee::Symbol>(m_children[i]->GetSymbol()));
 	}
-	std::set<const ee::Symbol*>::iterator itr = syms.begin();
+	auto itr = syms.begin();
 	for ( ; itr != syms.end(); ++itr) {
 		(*itr)->ReloadTexture();
 	}
 }
 
-void Symbol::Traverse(ee::Visitor<ee::Sprite>& visitor)
+void Symbol::Traverse(ee::RefVisitor<ee::Sprite>& visitor)
 {
-	const std::vector<s2::Sprite*>& children = GetAllChildren();
+	auto& children = GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
-		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
+		auto child = std::dynamic_pointer_cast<ee::Sprite>(children[i]);
 		bool next;
 		visitor.Visit(child, next);
-		dynamic_cast<ee::Symbol*>(child->GetSymbol())->Traverse(visitor);
+		std::dynamic_pointer_cast<ee::Symbol>(child->GetSymbol())->Traverse(visitor);
 	}
 }
 
@@ -193,7 +193,7 @@ void Symbol::GetActionNames(std::vector<std::string>& actions) const
 {
 	actions.reserve(m_actions.size());
 	for (int i = 0, n = m_actions.size(); i < n; ++i) {
-		actions.push_back(m_actions[i].name);
+		actions.push_back(m_actions[i].name.c_str());
 	}
 }
 
@@ -209,7 +209,7 @@ sm::rect Symbol::GetBoundingImpl(const s2::Sprite* spr, const s2::Actor* actor, 
 	if (spr) {
 		action = dynamic_cast<const s2::ComplexSprite*>(spr)->GetAction();
 	}
-	const std::vector<s2::Sprite*>& sprs = GetActionChildren(action);
+	auto& sprs = GetActionChildren(action);
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
 		sprs[i]->GetBounding()->CombineTo(b);
 	}
@@ -223,35 +223,35 @@ bool Symbol::LoadResources()
 		return true;
 	}
 
-	if (!gum::FilepathHelper::Exists(m_filepath)) {
+	if (!gum::FilepathHelper::Exists(m_filepath.c_str())) {
 		return false;
 	}
 
-	FileLoader::Load(m_filepath, this);
+	FileLoader::Load(m_filepath, *this);
 
 	m_origin_names.clear();
-	const std::vector<s2::Sprite*>& children = GetAllChildren();
+	auto& children = GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
-		std::string name;
+		CU_STR name;
 		s2::SprNameMap::Instance()->IDToStr(children[i]->GetName(), name);
 		if (!name.empty() && name[0] != '_') {
-			m_origin_names.push_back(name);
+			m_origin_names.push_back(name.c_str());
 		}
 	}
 
 	return true;
 }
 
-bool Symbol::CullingTestOutside(const s2::Sprite* spr, const s2::RenderParams& rp) const
+bool Symbol::CullingTestOutside(const s2::Sprite& spr, const s2::RenderParams& rp) const
 {
-	int type = spr->GetSymbol()->Type();
+	int type = spr.GetSymbol()->Type();
 	if (type == s2::SYM_PARTICLE3D || 
 		type == s2::SYM_PARTICLE2D ||
 		type == s2::SYM_TRAIL ||
 		type == s2::SYM_ANIM2) {
 		return false;
 	} else {
-		return s2::DrawNode::CullingTestOutside(spr, rp);
+		return s2::DrawNode::CullingTestOutside(&spr, rp);
 	}
 }
 

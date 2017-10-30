@@ -5,27 +5,16 @@
 #include <ee/panel_msg.h>
 
 #include <SM_Calc.h>
-#include <sprite2/S2_Sprite.h>
+#include <sprite2/Sprite.h>
 
 namespace libskeleton
 {
 
-RotateJointState::RotateJointState(Joint* joint, const sm::vec2& first_pos)
+RotateJointState::RotateJointState(const std::shared_ptr<Joint>& joint, const sm::vec2& first_pos)
 	: m_joint(joint)
 	, m_angle(0)
 {
-	if (m_joint) {
-		m_joint->AddReference();
-	}
-
 	m_first_pos = m_last_pos = first_pos;
-}
-
-RotateJointState::~RotateJointState()
-{
-	if (m_joint) {
-		m_joint->RemoveReference();
-	}
 }
 
 void RotateJointState::OnMouseRelease(const sm::vec2& pos)

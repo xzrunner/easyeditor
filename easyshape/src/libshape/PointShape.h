@@ -3,6 +3,7 @@
 
 #include <ee/Shape.h>
 
+#include <cu/cu_stl.h>
 #include <sprite2/PointShape.h>
 
 namespace eshape

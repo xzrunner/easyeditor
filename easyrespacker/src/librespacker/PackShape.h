@@ -3,6 +3,7 @@
 
 #include "IPackNode.h"
 
+#include <cu/cu_stl.h>
 #include <SM_Vector.h>
 #include <sprite2/Color.h>
 
@@ -27,7 +28,7 @@ public:
 
 	s2::Color color;
 
-	std::vector<sm::vec2> vertices;
+	CU_VEC<sm::vec2> vertices;
 
 public:
 	PackShape() {}
@@ -36,14 +37,14 @@ public:
 	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
 		const ee::TexturePacker& tp, float scale) const;
 	virtual void UnpackFromLua(lua_State* L,
-		const std::vector<ee::Image*>& images);
+		const std::vector<ee::ImagePtr>& images);
 
 	virtual int SizeOfPackToBin() const;
 	virtual void PackToBin(uint8_t** ptr,
 		const ee::TexturePacker& tp, float scale) const;
 	virtual int SizeOfUnpackFromBin() const;
 	virtual void UnpackFromBin(uint8_t** ptr, 
-		const std::vector<ee::Image*>& images);
+		const std::vector<ee::ImagePtr>& images);
 
 }; // PackShape
 

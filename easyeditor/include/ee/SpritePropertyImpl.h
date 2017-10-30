@@ -1,17 +1,17 @@
 #ifndef _EASYEDITOR_SPRITE_PROPERTY_IMPL_H_
 #define _EASYEDITOR_SPRITE_PROPERTY_IMPL_H_
 
+#include "Sprite.h"
+
 namespace ee
 {
 
 class EditPanelImpl;
-class Sprite;
 
 class SpritePropertyImpl
 {
 public:
-	SpritePropertyImpl(EditPanelImpl* stage, Sprite* spr);
-	~SpritePropertyImpl();
+	SpritePropertyImpl(EditPanelImpl* stage, const SprPtr& spr);
 
 	void Translate(float x, float y);
 	void Rotate(float angle);
@@ -21,12 +21,12 @@ public:
 	void Mirror(bool mx, bool my);
 	void Perspective(float px, float py);
 
-	Sprite* GetSprite() { return m_spr; }
+	const SprPtr& GetSprite() { return m_spr; }
 
 private:
 	EditPanelImpl* m_stage;
 
-	Sprite* m_spr;
+	SprPtr m_spr;
 
 }; // SpritePropertyImpl
 

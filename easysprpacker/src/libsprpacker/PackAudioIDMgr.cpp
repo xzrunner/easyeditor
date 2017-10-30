@@ -9,7 +9,7 @@
 namespace esprpacker
 {
 
-SINGLETON_DEFINITION(PackAudioIDMgr)
+CU_SINGLETON_DEFINITION(PackAudioIDMgr)
 
 PackAudioIDMgr::PackAudioIDMgr()
 {

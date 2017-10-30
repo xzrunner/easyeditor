@@ -13,7 +13,7 @@ class Symbol : public ee::Symbol, public s2::ModelSymbol
 public:
 	Symbol();
 
-	static ee::Symbol* Create() { return new Symbol(); }
+	static ee::SymPtr Create() { return std::make_shared<Symbol>(); }
 
 protected:
 	virtual bool LoadResources();

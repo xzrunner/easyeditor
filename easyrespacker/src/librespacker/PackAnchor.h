@@ -15,14 +15,14 @@ public:
 	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
 		const ee::TexturePacker& tp, float scale) const {}
 	virtual void UnpackFromLua(lua_State* L,
-		const std::vector<ee::Image*>& images) {}
+		const std::vector<ee::ImagePtr>& images) {}
 
 	virtual int SizeOfPackToBin() const { return 0; }
 	virtual void PackToBin(uint8_t** ptr,
 		const ee::TexturePacker& tp, float scale) const {}
 	virtual int SizeOfUnpackFromBin() const { return 0; }
 	virtual void UnpackFromBin(uint8_t** ptr, 
-		const std::vector<ee::Image*>& images) {}
+		const std::vector<ee::ImagePtr>& images) {}
 
 }; // PackAnchor 
 

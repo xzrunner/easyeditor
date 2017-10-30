@@ -59,7 +59,7 @@ bool LayersMgr::Clear()
 	return ret;
 }
 
-// void LayersMgr::removeSprite(ee::Sprite* spr)
+// void LayersMgr::removeSprite(const ee::SprPtr& spr)
 // {
 // 	for (size_t i = 0, n = m_layers.size(); i < n; ++i)
 // 	{

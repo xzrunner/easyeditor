@@ -15,7 +15,7 @@ Layer::Layer()
 	: m_sprite_observer(*this)
 {
 	static int count = 0;
-	m_name = "Layer" + ee::StringHelper::ToString(count++);
+	m_name = CU_STR("Layer") + ee::StringHelper::ToString(count++);
 
 	m_editable = m_visible = true;
 }
@@ -174,12 +174,11 @@ void Layer::InsertKeyFrame(int time)
 		KeyFrame *prev = GetPrevKeyFrame(time),
 			     *next = GetNextKeyFrame(time);
 		if (prev->HasClassicTween() && next) {
-			std::vector<ee::Sprite*> sprs;
+			std::vector<ee::SprPtr> sprs;
 			KeyFrame::GetTweenSprite(prev, next, sprs, time - prev->GetTime(), next->GetTime() - prev->GetTime());
 			for (int i = 0, n = sprs.size(); i < n; ++i) {
 				frame->Insert(sprs[i], INT_MAX);
 			}
-			for_each(sprs.begin(), sprs.end(), cu::RemoveRefFunctor<ee::Sprite>());
 			frame->SetClassicTween(true);
 		} else {
 			frame->CopyFromOther(prev);

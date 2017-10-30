@@ -52,7 +52,7 @@ bool DrawPencilPolygonOP::OnMouseLeftUp(int x, int y)
 
 	if (!m_curve.empty())
 	{
-		std::vector<sm::vec2> simplified;
+		CU_VEC<sm::vec2> simplified;
 		sm::douglas_peucker(m_curve, m_simplify->GetValue(), simplified);
 		NewPolygon(simplified);
 		Clear();
@@ -63,13 +63,12 @@ bool DrawPencilPolygonOP::OnMouseLeftUp(int x, int y)
 	return false;
 }
 
-void DrawPencilPolygonOP::NewPolygon(const std::vector<sm::vec2>& poly)
+void DrawPencilPolygonOP::NewPolygon(const CU_VEC<sm::vec2>& poly)
 {
 	Type type = (Type)m_cmpt->GetSelected();
 	if (type == e_normal) {
-		PolygonShape* polygon = new PolygonShape(poly);
-		ee::InsertShapeSJ::Instance()->Insert(polygon);
-		polygon->RemoveReference();
+		auto polygon = std::make_unique<PolygonShape>(poly);
+		ee::InsertShapeSJ::Instance()->Insert(std::move(polygon));
 	} else if (type == e_union) {
 		UnionPolygon(poly);
 	} else if (type == e_difference) {
@@ -81,63 +80,63 @@ void DrawPencilPolygonOP::NewPolygon(const std::vector<sm::vec2>& poly)
 	}
 }
 
-void DrawPencilPolygonOP::UnionPolygon(const std::vector<sm::vec2>& poly)
+void DrawPencilPolygonOP::UnionPolygon(const CU_VEC<sm::vec2>& poly)
 {
-	std::vector<std::vector<sm::vec2> > sub_points;
+	CU_VEC<CU_VEC<sm::vec2> > sub_points;
 	PrepareSubjectPaths(sub_points);
 
-	std::vector<std::vector<sm::vec2> > result = 
+	CU_VEC<CU_VEC<sm::vec2> > result = 
 		ee::PolygonClipper::Union(sub_points, poly);
 
 	ReplacePolygons(result);
 }
 
-void DrawPencilPolygonOP::DifferencePolygon(const std::vector<sm::vec2>& poly)
+void DrawPencilPolygonOP::DifferencePolygon(const CU_VEC<sm::vec2>& poly)
 {
-	std::vector<std::vector<sm::vec2> > sub_points;
+	CU_VEC<CU_VEC<sm::vec2> > sub_points;
 	PrepareSubjectPaths(sub_points);
 
-	std::vector<std::vector<sm::vec2> > result = 
+	CU_VEC<CU_VEC<sm::vec2> > result = 
 		ee::PolygonClipper::Difference(sub_points, poly);
 
 	ReplacePolygons(result);
 }
 
-void DrawPencilPolygonOP::IntersectionPolygon(const std::vector<sm::vec2>& poly)
+void DrawPencilPolygonOP::IntersectionPolygon(const CU_VEC<sm::vec2>& poly)
 {
-	std::vector<std::vector<sm::vec2> > sub_points;
+	CU_VEC<CU_VEC<sm::vec2> > sub_points;
 	PrepareSubjectPaths(sub_points);
 
-	std::vector<std::vector<sm::vec2> > result = 
+	CU_VEC<CU_VEC<sm::vec2> > result = 
 		ee::PolygonClipper::Intersection(sub_points, poly);
 
 	ReplacePolygons(result);
 }
 
-void DrawPencilPolygonOP::XorPolygon(const std::vector<sm::vec2>& poly)
+void DrawPencilPolygonOP::XorPolygon(const CU_VEC<sm::vec2>& poly)
 {
-	std::vector<std::vector<sm::vec2> > sub_points;
+	CU_VEC<CU_VEC<sm::vec2> > sub_points;
 	PrepareSubjectPaths(sub_points);
 
-	std::vector<std::vector<sm::vec2> > result = 
+	CU_VEC<CU_VEC<sm::vec2> > result = 
 		ee::PolygonClipper::Xor(sub_points, poly);
 
 	ReplacePolygons(result);
 }
 
-void DrawPencilPolygonOP::PrepareSubjectPaths(std::vector<std::vector<sm::vec2> >& paths) const
+void DrawPencilPolygonOP::PrepareSubjectPaths(CU_VEC<CU_VEC<sm::vec2> >& paths) const
 {
-	std::vector<ee::Shape*> shapes;
-	m_shapes_impl->TraverseShapes(ee::FetchAllVisitor<ee::Shape>(shapes));
+	std::vector<ee::ShapePtr> shapes;
+	m_shapes_impl->TraverseShapes(ee::FetchAllRefVisitor<ee::Shape>(shapes));
 
 	paths.clear();
 	paths.resize(shapes.size());
 	for (int i = 0, n = shapes.size(); i < n; ++i) {
-		paths[i] = dynamic_cast<PolygonShape*>(shapes[i])->GetVertices();
+		paths[i] = dynamic_cast<PolygonShape*>(shapes[i].get())->GetVertices();
 	}
 }
 
-void DrawPencilPolygonOP::ReplacePolygons(const std::vector<std::vector<sm::vec2> >& paths)
+void DrawPencilPolygonOP::ReplacePolygons(const CU_VEC<CU_VEC<sm::vec2> >& paths)
 {
 	// for shadow, fixme!
 	if (paths.size() > 1) {
@@ -146,9 +145,8 @@ void DrawPencilPolygonOP::ReplacePolygons(const std::vector<std::vector<sm::vec2
 
 	ee::ClearShapeSJ::Instance()->Clear();
 	for (int i = 0, n = paths.size(); i < n; ++i) {
-		PolygonShape* poly = new PolygonShape(paths[i]);
-		ee::InsertShapeSJ::Instance()->Insert(poly);
-		poly->RemoveReference();
+		auto poly = std::make_unique<PolygonShape>(paths[i]);
+		ee::InsertShapeSJ::Instance()->Insert(std::move(poly));
 	}
 }
 

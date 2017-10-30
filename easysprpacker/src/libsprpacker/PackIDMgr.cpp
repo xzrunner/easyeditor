@@ -19,7 +19,7 @@
 namespace esprpacker
 {
 
-SINGLETON_DEFINITION(PackIDMgr)
+CU_SINGLETON_DEFINITION(PackIDMgr)
 
 PackIDMgr::PackIDMgr()
 	: m_curr_pkg(NULL)
@@ -33,7 +33,7 @@ void PackIDMgr::AddCurrPath(const std::string& path)
 		return;
 	}
 
-	std::string fix = gum::FilepathHelper::Format(path);
+	std::string fix = gum::FilepathHelper::Format(path.c_str()).c_str();
 	m_curr_paths.push_back(fix);
 	if (!m_curr_pkg) {
 		m_curr_pkg = ee::PackIDMgr::Instance()->QueryPkg(fix, true);
@@ -48,7 +48,7 @@ bool PackIDMgr::IsCurrPkg(const std::string& filepath) const
 	if (filepath.empty() || filepath == ee::SYM_GROUP_TAG || filepath == SPRITE_FILEPATH) {
 		return true;
 	}
-	if (gum::SymbolFile::Instance()->Type(filepath) == s2::SYM_TEXTBOX) {
+	if (gum::SymbolFile::Instance()->Type(filepath.c_str()) == s2::SYM_TEXTBOX) {
 		return true;
 	}
 	for (int i = 0, n = m_curr_paths.size(); i < n; ++i) {

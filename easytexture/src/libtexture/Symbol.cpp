@@ -21,7 +21,7 @@ Symbol::Symbol()
 
 bool Symbol::LoadResources()
 {
-	if (!gum::FilepathHelper::Exists(m_filepath)) {
+	if (!gum::FilepathHelper::Exists(m_filepath.c_str())) {
 		return false;
 	}
 
@@ -40,8 +40,8 @@ bool Symbol::LoadResources()
 	int i = 0;
 	Json::Value shape_val = value["shapes"][i++];
 	while (!shape_val.isNull()) {
-		ee::Shape* shape = eshape::FileIO::LoadShape(dir, shape_val);
-		m_polygons.push_back(dynamic_cast<s2::PolygonShape*>(shape));
+		auto shape = eshape::FileIO::LoadShape(dir, shape_val);
+		m_polygons.push_back(std::dynamic_pointer_cast<s2::PolygonShape>(shape));
 		shape_val = value["shapes"][i++];
 	}
 

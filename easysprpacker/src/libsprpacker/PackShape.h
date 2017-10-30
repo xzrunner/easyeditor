@@ -6,8 +6,10 @@
 #include <sprite2/MaskSymbol.h>
 #include <sprite2/Color.h>
 #include <gum/ShapeType.h>
+#include <cu/cu_stl.h>
 
 #include <vector>
+#include <memory>
 
 namespace eshape { class Symbol; }
 
@@ -17,7 +19,7 @@ namespace esprpacker
 class PackShape : public PackNode
 {
 public:
-	PackShape(const eshape::Symbol* sym);
+	PackShape(const std::shared_ptr<eshape::Symbol>& sym);
 	virtual ~PackShape();
 
 	/**
@@ -41,7 +43,7 @@ private:
 	s2::Color m_color;
 	const PackNode* m_texture;
 
-	std::vector<sm::vec2> m_vertices;
+	CU_VEC<sm::vec2> m_vertices;
 
 	bool m_filling;
 

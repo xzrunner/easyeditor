@@ -37,10 +37,9 @@ void Frame::onSetBackground(wxCommandEvent& event)
 	if (dlg.ShowModal() == wxID_OK)
 	{
 		std::string filename = dlg.GetPath().ToStdString();
-		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filename);
+		auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filename);
 		ee::StageCanvas* canvas = const_cast<ee::EditPanel*>(m_task->GetEditPanel())->GetCanvas();
 		static_cast<StageCanvas*>(canvas)->SetBackground(sym);
-		sym->RemoveReference();
 	}
 }
 

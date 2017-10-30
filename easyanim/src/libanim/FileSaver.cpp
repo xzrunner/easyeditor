@@ -5,7 +5,7 @@
 #include <ee/Sprite.h>
 #include <ee/SymbolPath.h>
 
-#include <sprite2/S2_Sprite.h>
+#include <sprite2/Sprite.h>
 #include <sprite2/ILerp.h>
 #include <sprite2/LerpType.h>
 #include <sprite2/LerpCircle.h>
@@ -29,7 +29,7 @@ void FileSaver::Store(const std::string& filepath, const Symbol& sym)
 	const auto& layers = sym.GetLayers();
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	for (size_t i = 0, n = layers.size(); i < n; ++i)
-		Store(value["layer"][i], *layers[i], dir);
+		Store(value["layer"][i], layers[i], dir);
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -39,7 +39,7 @@ void FileSaver::Store(const std::string& filepath, const Symbol& sym)
 	fout.close();
 }
 
-Json::Value FileSaver::StoreLerps(const std::vector<std::pair<s2::AnimLerp::SprData, std::unique_ptr<s2::ILerp>>>& lerps)
+Json::Value FileSaver::StoreLerps(const CU_VEC<std::pair<s2::AnimLerp::SprData, std::unique_ptr<s2::ILerp>>>& lerps)
 {
 	Json::Value ret;
 	for (int i = 0, n = lerps.size(); i < n; ++i) 
@@ -90,31 +90,31 @@ Json::Value FileSaver::StoreLerps(const std::vector<std::pair<s2::AnimLerp::SprD
 	return ret;
 }
 
-void FileSaver::Store(Json::Value& value, const s2::AnimSymbol::Layer& layer, const std::string& dir)
+void FileSaver::Store(Json::Value& value, const s2::AnimSymbol::LayerPtr& layer, const std::string& dir)
 {
-	value["name"] = layer.name;
-	for (size_t i = 0, n = layer.frames.size(); i < n; ++i) {
-		Store(value["frame"][i], *layer.frames[i], dir);
+	value["name"] = layer->name.c_str();
+	for (size_t i = 0, n = layer->frames.size(); i < n; ++i) {
+		Store(value["frame"][i], layer->frames[i], dir);
 	}
 }
 
-void FileSaver::Store(Json::Value& value, const s2::AnimSymbol::Frame& frame, const std::string& dir)
+void FileSaver::Store(Json::Value& value, const s2::AnimSymbol::FramePtr& frame, const std::string& dir)
 {
-	value["time"] = frame.index;
-	value["tween"] = frame.tween;
-	for (size_t i = 0, n = frame.sprs.size(); i < n; ++i) {
-		Store(value["actor"][i], frame.sprs[i], dir);
+	value["time"] = frame->index;
+	value["tween"] = frame->tween;
+	for (size_t i = 0, n = frame->sprs.size(); i < n; ++i) {
+		Store(value["actor"][i], frame->sprs[i], dir);
 	}
-	value["lerp"] = StoreLerps(frame.lerps);
+	value["lerp"] = StoreLerps(frame->lerps);
 }
 
-void FileSaver::Store(Json::Value& value, s2::Sprite* spr, const std::string& dir)
+void FileSaver::Store(Json::Value& value, const s2::SprPtr& spr, const std::string& dir)
 {
-	ee::Sprite* ee_spr = dynamic_cast<ee::Sprite*>(spr);
-	const ee::Symbol* ee_sym = dynamic_cast<const ee::Symbol*>(ee_spr->GetSymbol());
+	auto ee_spr = std::dynamic_pointer_cast<ee::Sprite>(spr);
+	auto ee_sym = std::dynamic_pointer_cast<ee::Symbol>(ee_spr->GetSymbol());
 
 	// filepath
-	value["filepath"] = ee::SymbolPath::GetRelativePath(ee_sym, dir);
+	value["filepath"] = ee::SymbolPath::GetRelativePath(*ee_sym, dir);
 	// filepaths
 	const std::set<std::string>& filepaths = ee_sym->GetFilepaths();
 	std::set<std::string>::const_iterator itr = filepaths.begin();

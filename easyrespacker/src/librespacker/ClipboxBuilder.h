@@ -21,10 +21,10 @@ public:
 
 	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
 
-	const IPackNode* Create(const ecomplex::Symbol* complex);
+	const IPackNode* Create(const std::shared_ptr<const ecomplex::Symbol>& complex);
 
 private:
-	std::map<const ecomplex::Symbol*, const PackClipbox*> m_map_clipbox;
+	std::map<std::shared_ptr<const ecomplex::Symbol>, const PackClipbox*> m_map_clipbox;
 
 }; // ClipboxBuilder
 

@@ -44,7 +44,7 @@ bool PixelUncoveredLUT::IntersectConstArea(int x, int y, int w, int h) const
 	return GetArea(m_const_area, x, y, w, h) != 0;
 }
 
-void PixelUncoveredLUT::LoadRects(const std::vector<Rect>& rects)
+void PixelUncoveredLUT::LoadRects(const CU_VEC<Rect>& rects)
 {
 	int sz = m_width * m_height;
 

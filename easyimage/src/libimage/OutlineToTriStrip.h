@@ -3,7 +3,7 @@
 
 #include <ee/Image.h>
 
-#include <vector>
+#include <cu/cu_stl.h>
 
 namespace eimage
 {
@@ -11,18 +11,18 @@ namespace eimage
 class OutlineToTriStrip
 {
 public:
-	OutlineToTriStrip(const std::vector<sm::vec2>& outline);
+	OutlineToTriStrip(const CU_VEC<sm::vec2>& outline);
 
 	void TransToStrip();
 
-	const std::vector<std::vector<sm::vec2> >& GetStrip() const {
+	const CU_VEC<CU_VEC<sm::vec2> >& GetStrip() const {
 		return m_strips;
 	}
 
 private:
-	std::vector<sm::vec2> m_outline;
+	CU_VEC<sm::vec2> m_outline;
 
-	std::vector<std::vector<sm::vec2> > m_strips;
+	CU_VEC<CU_VEC<sm::vec2> > m_strips;
 
 }; // OutlineToTriStrip
 

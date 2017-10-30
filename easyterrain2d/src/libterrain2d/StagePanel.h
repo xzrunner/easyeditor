@@ -20,7 +20,7 @@ class StagePanel : public ee::EditPanel, public ee::SpritesPanelImpl,
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, ee::LibraryPanel* library);
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		wxGLContext* glctx, ee::Sprite* edited, 
+		wxGLContext* glctx, const ee::SprPtr& edited, 
 		const ee::MultiSpritesImpl* bg_sprites, ee::LibraryPanel* library);
 	virtual ~StagePanel();
 
@@ -38,7 +38,7 @@ public:
 	}
 
 private:
-	void AddOcean(const eshape::PolygonShape* shape, const ee::ImageSymbol* image);
+	void AddOcean(const eshape::PolygonShape* shape, const std::shared_ptr<ee::ImageSymbol>& image);
 
  private:
  	class StageDropTarget : public ee::StageDropTarget
@@ -46,7 +46,7 @@ private:
  	public:
  		StageDropTarget(StagePanel* stage, ee::LibraryPanel* library);
  
- 		virtual bool OnDropSymbol(ee::Symbol* sym, const sm::vec2& pos);
+ 		virtual bool OnDropSymbol(const ee::SymPtr& sym, const sm::vec2& pos);
  
  	private:
  		StagePanel* m_stage;
@@ -56,7 +56,7 @@ private:
 private:
 	std::vector<OceanMesh*> m_oceans;
 
-//	Symbol* m_sym;
+//	std::shared_ptr<Symbol> m_sym;
 
 }; // StagePanel
 

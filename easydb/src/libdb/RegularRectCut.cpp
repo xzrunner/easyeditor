@@ -61,9 +61,9 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 		std::cout << i << " / " << n << " : " << filepath << "\n";
 		if (ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_IMAGE)
 		{
-			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+			auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 
-			ee::ImageData* img = ee::ImageDataMgr::Instance()->GetItem(filepath);		
+			auto img = ee::ImageDataMgr::Instance()->GetItem(filepath);		
 			eimage::RegularRectCut cut(img->GetPixelData(), img->GetWidth(), img->GetHeight());
 			cut.AutoCut();
 
@@ -73,7 +73,7 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 			filename = filename.substr(0, filename.find_last_of('.'));
 			ee::StringHelper::ReplaceAll(filename, "\\", "%");
 			
-			assert(img->GetFormat() == GPF_RGB || img->GetFormat() == GPF_RGBA);
+			assert(img->GetFormat() == GPF_RGB || img->GetFormat() == GPF_RGBA8);
 			int channels = img->GetFormat() == GPF_RGB ? 3 : 4;
 			pimg::Cropping crop(img->GetPixelData(), img->GetWidth(), img->GetHeight(), channels, true);
 
@@ -84,12 +84,11 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 				const uint8_t* pixels = crop.Crop(r.x, r.y, r.x+r.w, r.y+r.h);
 
 				std::string out_path = ee::StringHelper::Format("%s\\%s#%d#%d#%d#%d#", dst_dir.c_str(), filename.c_str(), r.x, r.y, r.w, r.h) + ".png";
-				gimg_export(out_path.c_str(), pixels, r.w, r.h, GPF_RGBA, true);
+				gimg_export(out_path.c_str(), pixels, r.w, r.h, GPF_RGBA8, true);
 				delete[] pixels;
 			}
 
 			img->RemoveReference();
-			sym->RemoveReference();
 		}
 	}
 }

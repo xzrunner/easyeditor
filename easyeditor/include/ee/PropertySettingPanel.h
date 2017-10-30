@@ -2,6 +2,8 @@
 #define _EASYEDITOR_PROPERTY_SETTING_PANEL_H_
 
 #include "Observer.h"
+#include "Sprite.h"
+#include "Shape.h"
 
 #include <wx/wx.h>
 #include <wx/propgrid/propgrid.h>
@@ -14,9 +16,7 @@ namespace ee
 
 class PropertySetting;
 class EditPanelImpl;
-class Sprite;
 class SpriteSelection;
-class Shape;
 class ShapeSelection;
 
 class PropertySettingPanel : public wxPanel, public Observer
@@ -41,7 +41,7 @@ public:
 protected:
 	virtual PropertySetting* CreateDefaultProperty() const { return NULL; }
 
-	virtual void OnSpriteSelected(Sprite* spr, bool clear);
+	virtual void OnSpriteSelected(const SprPtr& spr, bool clear);
 	virtual void OnMultiSpriteSelected(SpriteSelection* selection);
 
 	//
@@ -52,7 +52,7 @@ protected:
 private:
 	void InitLayout();
 
-	void SelectShape(Shape* shape);
+	void SelectShape(const ShapePtr& shape);
 	void SelectShapeSet(ShapeSelection* selection);
 
 	void ClearSelection();
@@ -64,7 +64,7 @@ protected:
 
 	PropertySetting* m_setting;
 
-	std::set<Sprite*> m_selection;
+	std::set<SprPtr> m_selection;
 
 	// todo
 	EditPanelImpl* m_stage;

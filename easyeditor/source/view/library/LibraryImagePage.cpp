@@ -5,6 +5,7 @@
 #include "ImageSymbol.h"
 #include "StageCanvas.h"
 #include "Exception.h"
+#include "SymbolType.h"
 
 namespace ee
 {
@@ -16,9 +17,9 @@ LibraryImagePage::LibraryImagePage(wxWindow* parent, bool supportBmp/* = true*/)
 	InitLayout();
 }
 
-bool LibraryImagePage::IsHandleSymbol(Symbol* sym) const
+bool LibraryImagePage::IsHandleSymbol(const SymPtr& sym) const
 {
-	return dynamic_cast<ImageSymbol*>(sym) != NULL;
+	return sym->Type() == s2::SYM_IMAGE;
 }
 
 void LibraryImagePage::OnAddPress(wxCommandEvent& event)
@@ -33,9 +34,8 @@ void LibraryImagePage::OnAddPress(wxCommandEvent& event)
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
 			try {
-				Symbol* sym = SymbolMgr::Instance()->FetchSymbol(filenames[i].ToStdString());
+				auto sym = SymbolMgr::Instance()->FetchSymbol(filenames[i].ToStdString());
 				m_list->Insert(sym);
-				sym->RemoveReference();
 			} catch (Exception& e) {
 				ExceptionDlg dlg(m_parent, e);
 				dlg.ShowModal();

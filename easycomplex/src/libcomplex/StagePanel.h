@@ -11,8 +11,8 @@ class wxGLContext;
 namespace ecomplex
 {
 
-class LibraryPanel;
 class Symbol;
+class LibraryPanel;
 class ArrangeSpriteImpl;
 
 class StagePanel : public ee::EditPanel, public ee::SpritesPanelImpl
@@ -20,7 +20,7 @@ class StagePanel : public ee::EditPanel, public ee::SpritesPanelImpl
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 		ee::PropertySettingPanel* property, LibraryPanel* library);
-	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, Symbol* sym, 
+	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, const std::shared_ptr<Symbol>& sym, 
 		ee::PropertySettingPanel* property, LibraryPanel* library, 
 		wxGLContext* glctx, ee::CrossGuides* guides = NULL);
 
@@ -29,8 +29,8 @@ public:
 	//
 	virtual bool UpdateStage();
 
-	const Symbol* GetSymbol() const { return m_sym; }
-	Symbol* GetSymbol() { return m_sym; }
+	const std::shared_ptr<Symbol>& GetSymbol() const { return m_sym; }
+	std::shared_ptr<Symbol>& GetSymbol() { return m_sym; }
 
 protected:
 	//
@@ -42,7 +42,7 @@ private:
 	void Clear();
 
 private:
-	Symbol* m_sym;
+	std::shared_ptr<Symbol> m_sym;
 
 	LibraryPanel* m_library;
 

@@ -3,7 +3,7 @@
 
 #include <easyshape.h>
 
-#include <CU_RefCountObj.h>
+#include <cu/CU_RefCountObj.h>
 
 namespace eterrain2d
 {
@@ -13,14 +13,14 @@ class MeshShape;
 class OceanMesh : public cu::RefCountObj
 {
 public:
-	OceanMesh(const eshape::PolygonShape* shape, const ee::ImageSymbol* image);
+	OceanMesh(const eshape::PolygonShape* shape, const std::shared_ptr<ee::ImageSymbol>& image);
 	virtual ~OceanMesh();
 
 	void Build();
 
 	const eshape::PolygonShape* GetBounding() const { return m_shape; }
-	const ee::ImageSymbol* GetImage0() const { return m_image0; }
-	const ee::ImageSymbol* GetImage1() const { return m_image1; }
+	const std::shared_ptr<ee::ImageSymbol>& GetImage0() const { return m_image0; }
+	const std::shared_ptr<ee::ImageSymbol>& GetImage1() const { return m_image1; }
 	bool IsWaveOpen() const { return m_wave_open; }
 	int GetWaveGridRow() const { return m_row; }
 	int GetWaveGridCol() const { return m_col; }
@@ -48,7 +48,7 @@ public:
 	void OpenBlend(bool open);
 
 	bool IsBlendOpen() const { return m_blend_open; }
-	void SetImage1(const ee::ImageSymbol* image);
+	void SetImage1(const std::shared_ptr<ee::ImageSymbol>& image);
 
 	sm::rect GetRegion() const;
 
@@ -76,7 +76,7 @@ private:
 
 private:
 	eshape::PolygonShape* m_shape;
-	const ee::ImageSymbol *m_image0, *m_image1;
+	const std::shared_ptr<ee::ImageSymbol> m_image0, m_image1;
 
 	std::vector<MeshShape*> m_grids;
 

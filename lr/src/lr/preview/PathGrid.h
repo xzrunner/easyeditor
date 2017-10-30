@@ -18,7 +18,7 @@ class PathGrid : public IPathfinding
 public:
 	PathGrid(const sm::rect& region, int row, int col);
 
-	virtual void DisableRegion(const ee::Sprite* spr, bool disable);
+	virtual void DisableRegion(const ee::SprConstPtr& spr, bool disable);
 
 	virtual void QueryRoute(const sm::vec2& start, const sm::vec2& end);
 

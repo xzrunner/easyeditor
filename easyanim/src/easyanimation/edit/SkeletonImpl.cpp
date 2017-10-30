@@ -70,8 +70,8 @@ void SkeletonImpl::OnMouseLeftUp(int x, int y)
 
 		if (m_selection->Size() == 1)
 		{
-			std::vector<ee::Sprite*> sprs;
-			m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+			std::vector<ee::SprPtr> sprs;
+			m_selection->Traverse(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 
 			SkeletonData* skeleton = get_curr_skeleton();
 			if (skeleton) {
@@ -113,7 +113,7 @@ void SkeletonImpl::OnPopMenuSelected(int type)
 		{
 			SkeletonData* skeleton = get_curr_skeleton();
 			if (skeleton) {
-				ee::Sprite* spr = ViewMgr::Instance()->stage->QuerySpriteByPos(m_first_pos);
+				auto spr = ViewMgr::Instance()->stage->QuerySpriteByPos(m_first_pos);
 				skeleton->InsertJoint(spr, m_first_pos);
 			}
 		}

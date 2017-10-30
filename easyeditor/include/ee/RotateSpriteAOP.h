@@ -2,6 +2,7 @@
 #define _EASYEDITOR_ROTATE_SPRITE_AOP_H_
 
 #include "AtomicOP.h"
+#include "Sprite.h"
 
 #include <SM_Vector.h>
 
@@ -15,25 +16,23 @@ class RotateSpriteAOP : public AtomicOP
 {
 public:
 	RotateSpriteAOP() : m_inited(false) {}
-
-	RotateSpriteAOP(const std::vector<Sprite*>& sprs, const sm::vec2& start, const sm::vec2& end);
-	RotateSpriteAOP(const std::vector<Sprite*>& sprs, float angle);
+	RotateSpriteAOP(const std::vector<SprPtr>& sprs, const sm::vec2& start, const sm::vec2& end);
+	RotateSpriteAOP(const std::vector<SprPtr>& sprs, float angle);
 	RotateSpriteAOP(const SpriteSelection& selection, const sm::vec2& start, const sm::vec2& end);
 	RotateSpriteAOP(const SpriteSelection& selection, float angle);
-	RotateSpriteAOP(Sprite* spr, float angle);
-	virtual ~RotateSpriteAOP();
+	RotateSpriteAOP(const SprPtr& spr, float angle);
 
 	virtual void Undo();
 	virtual void Redo();
 
-	virtual Json::Value Store(const std::vector<Sprite*>& sprs) const;
+	virtual Json::Value Store(const std::vector<SprPtr>& sprs) const;
 
 private:
-	void Init(const std::vector<Sprite*>& sprs, const sm::vec2& start, const sm::vec2& end);
-	void Init(const std::vector<Sprite*>& sprs, float angle);
+	void Init(const std::vector<SprPtr>& sprs, const sm::vec2& start, const sm::vec2& end);
+	void Init(const std::vector<SprPtr>& sprs, float angle);
 
 private:
-	std::vector<Sprite*> m_sprs;
+	std::vector<SprPtr> m_sprs;
 
 	sm::vec2 m_start, m_end;
 

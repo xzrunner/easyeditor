@@ -3,7 +3,7 @@
 
 #include <SM_Vector.h>
 
-#include <vector>
+#include <cu/cu_stl.h>
 
 namespace ee
 {

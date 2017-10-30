@@ -13,7 +13,7 @@
 namespace eskeleton
 {
 
-void FileLoader::Load(const std::string& filepath, std::vector<ee::Sprite*>& sprs)
+void FileLoader::Load(const std::string& filepath, std::vector<ee::SprPtr>& sprs)
 {
 	Json::Value val;
 	Json::Reader reader;
@@ -29,14 +29,14 @@ void FileLoader::Load(const std::string& filepath, std::vector<ee::Sprite*>& spr
 	LoadSkeleton(val["skeleton"], sprs);
 }
 
-void FileLoader::LoadSprite(const std::string& dir, const Json::Value& val, std::vector<ee::Sprite*>& sprs)
+void FileLoader::LoadSprite(const std::string& dir, const Json::Value& val, std::vector<ee::SprPtr>& sprs)
 {
 	for (int i = 0, n = val.size(); i < n; ++i) {
 		sprs.push_back(ee::SpriteFactory::Instance()->Create(val[i], dir));
 	}
 }
 
-void FileLoader::LoadSkeleton(const Json::Value& val, const std::vector<ee::Sprite*>& sprs)
+void FileLoader::LoadSkeleton(const Json::Value& val, const std::vector<ee::SprPtr>& sprs)
 {
  	assert(val.size() == sprs.size());
  

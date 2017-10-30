@@ -20,7 +20,7 @@ namespace lua = ebuilder::lua;
 namespace esprpacker
 {
 
-PackAnimation::PackAnimation(const libanim::Symbol* sym)
+PackAnimation::PackAnimation(const std::shared_ptr<libanim::Symbol>& sym)
 {
 	Init(sym);
 }
@@ -90,7 +90,7 @@ void PackAnimation::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 	}
 }
 
-void PackAnimation::Init(const libanim::Symbol* sym)
+void PackAnimation::Init(const std::shared_ptr<libanim::Symbol>& sym)
 {
 	const auto& layers = sym->GetLayers();
 	m_layers.reserve(layers.size());
@@ -139,10 +139,10 @@ void PackAnimation::CheckLerp(const std::string& filepath)
 /************************************************************************/
 
 PackAnimation::Actor::
-Actor(const s2::Sprite* spr)
+Actor(const s2::SprPtr& spr)
 	: m_trans(*spr, true)
 {
-	m_node = PackNodeFactory::Instance()->Create(dynamic_cast<const ee::Sprite*>(spr));
+	m_node = PackNodeFactory::Instance()->Create(std::dynamic_pointer_cast<ee::Sprite>(spr));
 }
 
 PackAnimation::Actor::

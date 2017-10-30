@@ -25,7 +25,7 @@ public:
 	//
 	// ee::MultiSpritesImpl interface
 	//
-	virtual void TraverseSprites(ee::Visitor<ee::Sprite>& visitor, 
+	virtual void TraverseSprites(ee::RefVisitor<ee::Sprite>& visitor, 
 		ee::DataTraverseType type = ee::DT_ALL,
 		bool order = true) const;
 
@@ -39,13 +39,13 @@ private:
 	void OnMenuAddJointNode(wxCommandEvent& event);
 	void OnMenuDelJointNode(wxCommandEvent& event);
 
-	void Reorder(ee::Sprite* spr, bool up);
-	void ReorderMost(ee::Sprite* spr, bool up);
-	void Insert(ee::Sprite* spr, int idx);
-	void Remove(ee::Sprite* spr);
+	void Reorder(const ee::SprPtr& spr, bool up);
+	void ReorderMost(const ee::SprPtr& spr, bool up);
+	void Insert(const ee::SprPtr& spr, int idx);
+	void Remove(const ee::SprPtr& spr);
 
-	void InsertWithUD(ee::Sprite* spr, int idx);
-	void InsertWithoutUD(ee::Sprite* spr, int idx);
+	void InsertWithUD(const ee::SprPtr& spr, int idx);
+	void InsertWithoutUD(const ee::SprPtr& spr, int idx);
 
 	bool IsCurrFrameValid() const { return m_frame != NULL; }
 
@@ -62,7 +62,7 @@ private:
 	public:
 		CheckUpdateVisitor();
 
-		virtual void Visit(ee::Sprite* spr, bool& next);
+		virtual void Visit(const ee::SprPtr& spr, bool& next);
 
 		bool NeedUpdate() const { return m_update; }
 

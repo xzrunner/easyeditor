@@ -2,47 +2,40 @@
 #define _EASYEDITOR_POINT_QUERY_VISITOR_H_
 
 #include "Visitor.h"
+#include "Sprite.h"
 
 #include <sprite2/BoundingBox.h>
 
 namespace ee
 {
 
-class PointQueryVisitor : public Visitor<Sprite>
+class PointQueryVisitor : public RefVisitor<Sprite>
 {
 public:
-	PointQueryVisitor(const sm::vec2& pos, Sprite** result);
-	virtual ~PointQueryVisitor();
-	virtual void Visit(Sprite* spr, bool& next);
+	PointQueryVisitor(const sm::vec2& pos);
+	virtual void Visit(const SprPtr& spr, bool& next);
+
+	const SprPtr& GetSelected() const { return m_selected; }
 
 private:
 	const sm::vec2& m_pos;
-	Sprite** m_result;
+
+	SprPtr m_selected;
 
 }; // PointQueryVisitor
 
 inline
-PointQueryVisitor::PointQueryVisitor(const sm::vec2& pos, Sprite** result)
+PointQueryVisitor::PointQueryVisitor(const sm::vec2& pos)
 	: m_pos(pos)
 {
-	m_result = result;
-	*m_result = NULL;
-}
-
-inline 
-PointQueryVisitor::~PointQueryVisitor()
-{
-	if (*m_result) {
-		(*m_result)->RemoveReference();
-	}
 }
 
 inline
-void PointQueryVisitor::Visit(Sprite* spr, bool& next)
+void PointQueryVisitor::Visit(const SprPtr& spr, bool& next)
 {
 	if (spr->GetBounding()->IsContain(m_pos))
 	{
-		cu::RefCountObjAssign(*m_result, spr);
+		m_selected = spr;
 		next = false;
 	}
 	else

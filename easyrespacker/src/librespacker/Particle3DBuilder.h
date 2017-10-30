@@ -22,13 +22,13 @@ public:
 
 	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
 
-	const IPackNode* Create(const eparticle3d::Symbol* sym, P3dSprBuilder* spr_builder);
+	const IPackNode* Create(const std::shared_ptr<const eparticle3d::Symbol>& sym, P3dSprBuilder* spr_builder);
 
 private:
-	void Load(const eparticle3d::Symbol* sym, PackParticle3D* ps);
+	void Load(const std::shared_ptr<const eparticle3d::Symbol>& sym, PackParticle3D* ps);
 
 private:
-	std::map<const eparticle3d::Symbol*, const PackParticle3D*> m_map_data;
+	std::map<std::shared_ptr<const eparticle3d::Symbol>, const PackParticle3D*> m_map_data;
 
 }; // Particle3DBuilder
 

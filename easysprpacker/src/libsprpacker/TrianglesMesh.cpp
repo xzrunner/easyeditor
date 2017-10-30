@@ -2,8 +2,8 @@
 #include "PackCoords.h"
 #include "PackArray.h"
 
-#include <bimp/bimp_typedef.h>
-#include <simp/SIMP_TrianglesMesh.h>
+#include <bimp/typedef.h>
+#include <simp/TrianglesMesh.h>
 #include <polymesh/MeshType.h>
 #include <polymesh/TrianglesHelper.h>
 
@@ -22,8 +22,8 @@ int TrianglesMesh::Type() const
 
 void TrianglesMesh::PackToLuaString(ebuilder::CodeGenerator& gen) const
 {
-	std::vector<sm::vec2> vertices, texcoords;
-	std::vector<int> triangles;
+	CU_VEC<sm::vec2> vertices, texcoords;
+	CU_VEC<int> triangles;
 	pm::TrianglesHelper::Dump(*m_mesh, vertices, texcoords, triangles);
 
 	PackCoords::PackToLua(gen, vertices, "vertices");
@@ -33,8 +33,8 @@ void TrianglesMesh::PackToLuaString(ebuilder::CodeGenerator& gen) const
 
 int TrianglesMesh::SizeOfUnpackFromBin() const
 {
-	std::vector<sm::vec2> vertices, texcoords;
-	std::vector<int> triangles;
+	CU_VEC<sm::vec2> vertices, texcoords;
+	CU_VEC<int> triangles;
 	pm::TrianglesHelper::Dump(*m_mesh, vertices, texcoords, triangles);
 
 	int sz = simp::TrianglesMesh::Size();
@@ -46,8 +46,8 @@ int TrianglesMesh::SizeOfUnpackFromBin() const
 
 int TrianglesMesh::SizeOfPackToBin() const
 {
-	std::vector<sm::vec2> vertices, texcoords;
-	std::vector<int> triangles;
+	CU_VEC<sm::vec2> vertices, texcoords;
+	CU_VEC<int> triangles;
 	pm::TrianglesHelper::Dump(*m_mesh, vertices, texcoords, triangles);
 
 	int sz = 0;
@@ -59,8 +59,8 @@ int TrianglesMesh::SizeOfPackToBin() const
 
 void TrianglesMesh::PackToBin(uint8_t** ptr) const
 {
-	std::vector<sm::vec2> vertices, texcoords;
-	std::vector<int> triangles;
+	CU_VEC<sm::vec2> vertices, texcoords;
+	CU_VEC<int> triangles;
 	pm::TrianglesHelper::Dump(*m_mesh, vertices, texcoords, triangles);
 
 	PackCoords::PackToBin(vertices, ptr);

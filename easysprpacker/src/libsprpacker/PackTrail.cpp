@@ -3,6 +3,8 @@
 #include "binary_io.h"
 #include "to_int.h"
 
+#include <ee/SymbolMgr.h>
+
 #include <easytrail.h>
 #include <easybuilder.h>
 namespace lua = ebuilder::lua;
@@ -15,7 +17,7 @@ namespace lua = ebuilder::lua;
 namespace esprpacker
 {
 
-PackTrail::PackTrail(const etrail::Symbol* sym)
+PackTrail::PackTrail(const std::shared_ptr<etrail::Symbol>& sym)
 {
 	Init(sym);
 }
@@ -121,7 +123,7 @@ void PackTrail::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 	pack(fadeout_time, ptr);
 }
 
-void PackTrail::Init(const etrail::Symbol* sym)
+void PackTrail::Init(const std::shared_ptr<etrail::Symbol>& sym)
 {
 	const t2d_emitter_cfg* cfg = sym->GetEmitterCfg()->GetImpl();
 
@@ -179,8 +181,9 @@ void PackTrail::PackToLuaMT(ebuilder::CodeGenerator& gen) const
 PackTrail::CompImage::
 CompImage(const t2d_symbol& sym)
 {
-	ee::Symbol* ee_sym	= dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(sym.mode.A.ud));
-	m_node				= PackNodeFactory::Instance()->Create(ee_sym);
+	auto s2_sym = static_cast<s2::Symbol*>(sym.mode.A.ud);
+	auto ee_sym = ee::SymbolMgr::Instance()->FetchSymbol(dynamic_cast<ee::Symbol*>(s2_sym)->GetFilepath());
+	m_node		= PackNodeFactory::Instance()->Create(ee_sym);
 
 	m_scale_begin		= sym.mode.A.scale_begin;
 	m_scale_end			= sym.mode.A.scale_end;

@@ -13,25 +13,25 @@ public:
 
 protected:
 	// geometry
-	virtual void LoadGeometry(s2::Sprite* spr);
-	virtual void StoreGeometry(const s2::Sprite* spr);
+	virtual void LoadGeometry(s2::SprPtr& spr);
+	virtual void StoreGeometry(const s2::SprPtr& spr);
 	virtual void LoadGeometry(const Json::Value& val);
 	virtual void StoreGeometry(Json::Value& val);
 
 	// info
-	virtual void LoadInfo(s2::Sprite* spr);
-	virtual void StoreInfo(const s2::Sprite* spr);
+	virtual void LoadInfo(s2::SprPtr& spr);
+	virtual void StoreInfo(const s2::SprPtr& spr);
 	virtual void LoadInfo(const Json::Value& val);
 	virtual void StoreInfo(Json::Value& val);
 
 public:
 	// geometry
-	sm::vec2		m_perspective;
+	sm::vec2 m_perspective;
 
 	// info
-	std::string		m_tag;
-	bool			m_clip;
-	bool			m_anchor;
+	std::string   m_tag;
+	bool     m_clip;
+	bool     m_anchor;
 
 }; // SpriteIO
 

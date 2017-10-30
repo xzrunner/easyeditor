@@ -52,9 +52,9 @@ void DrawPolygonCMPT::UpdateControlValue()
 	m_btn_trigger->Enable(!empty);
 
 	if (!empty) {
-		std::vector<ee::Shape*> shapes;
-		m_shapes_impl->GetShapeSelection()->Traverse(ee::FetchAllVisitor<ee::Shape>(shapes));
-		PolygonShape* poly = dynamic_cast<PolygonShape*>(shapes[0]);
+		std::vector<ee::ShapePtr> shapes;
+		m_shapes_impl->GetShapeSelection()->Traverse(ee::FetchAllRefVisitor<ee::Shape>(shapes));
+		PolygonShape* poly = dynamic_cast<PolygonShape*>(shapes[0].get());
 		if (poly) {
 			const ColorMaterial* cm = dynamic_cast<const ColorMaterial*>(poly->GetMaterial());
 			if (cm) {
@@ -164,19 +164,19 @@ void DrawPolygonCMPT::OnChangeFillingType(wxCommandEvent& event)
 
 void DrawPolygonCMPT::OnTriggerFillingColor(wxCommandEvent& event)
 {
-	std::vector<ee::Shape*> shapes;
-	m_shapes_impl->GetShapeSelection()->Traverse(ee::FetchAllVisitor<ee::Shape>(shapes));
+	std::vector<ee::ShapePtr> shapes;
+	m_shapes_impl->GetShapeSelection()->Traverse(ee::FetchAllRefVisitor<ee::Shape>(shapes));
 
 	for (size_t i = 0, n = shapes.size(); i < n; ++i)
 	{
-		PolygonShape* poly = dynamic_cast<PolygonShape*>(shapes[i]);
+		PolygonShape* poly = dynamic_cast<PolygonShape*>(shapes[i].get());
 		switch (m_filling_type_choice->GetSelection()) 
 		{
 		case 0:
 			poly->SetMaterialColor(s2::Color(m_color.Red(), m_color.Green(), m_color.Blue()));
 			break;
 		case 1:
-			poly->SetMaterialTexture(static_cast<ee::ImageSymbol*>(ee::SymbolMgr::Instance()->FetchSymbol(m_filepath)));
+			poly->SetMaterialTexture(std::dynamic_pointer_cast<ee::ImageSymbol>(ee::SymbolMgr::Instance()->FetchSymbol(m_filepath)));
 			break;
 		}
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();

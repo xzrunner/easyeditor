@@ -36,15 +36,15 @@
 //	return false;
 //}
 //
-//ComplexPolygonShape* DrawComplexPolygonOP::CreateComplexPoly(const std::vector<sm::vec2>& polyline)
+//ComplexPolygonShape* DrawComplexPolygonOP::CreateComplexPoly(const CU_VEC<sm::vec2>& polyline)
 //{
-//	std::vector<PolygonShape*> polygon_shapes;
+//	CU_VEC<PolygonShape*> polygon_shapes;
 //	m_shapes_impl->TraverseShapes(ee::FetchAllVisitor<PolygonShape>(polygon_shapes));
 //
 //	for (int i = 0, n = polygon_shapes.size(); i < n; ++i)
 //	{
 //		PolygonShape* poly = polygon_shapes[i];
-//		const std::vector<sm::vec2>& outline = poly->GetVertices();
+//		const CU_VEC<sm::vec2>& outline = poly->GetVertices();
 //		if (!sm::is_polygon_in_polygon(polyline, outline)) {
 //			continue;
 //		}
@@ -52,14 +52,14 @@
 //		ComplexPolygonShape* new_cpoly = NULL;
 //		if (ComplexPolygonShape* cpoly = dynamic_cast<ComplexPolygonShape*>(poly))
 //		{
-//			const std::vector<std::vector<sm::vec2> >& holes = cpoly->GetHoles();
+//			const CU_VEC<CU_VEC<sm::vec2> >& holes = cpoly->GetHoles();
 //			for (int i = 0, n = holes.size(); i < n; ++i) {
 //				if (sm::is_convex_intersect_convex(holes[i], polyline)) {
 //					return NULL;
 //				}
 //			}
 //
-//			std::vector<std::vector<sm::vec2> > new_holes = holes;
+//			CU_VEC<CU_VEC<sm::vec2> > new_holes = holes;
 //			new_holes.push_back(polyline);
 //
 //			new_cpoly = new ComplexPolygonShape(poly->GetVertices(), new_holes);
@@ -67,7 +67,7 @@
 //		}
 //		else
 //		{
-//			std::vector<std::vector<sm::vec2> > holes;
+//			CU_VEC<CU_VEC<sm::vec2> > holes;
 //			holes.push_back(polyline);
 //
 //			new_cpoly = new ComplexPolygonShape(poly->GetVertices(), holes);
@@ -77,7 +77,7 @@
 //		return new_cpoly;
 //	}
 //
-//	std::vector<std::vector<sm::vec2> > holes;
+//	CU_VEC<CU_VEC<sm::vec2> > holes;
 //	return new ComplexPolygonShape(polyline, holes);
 //}
 //

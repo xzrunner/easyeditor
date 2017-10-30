@@ -1,8 +1,11 @@
 #ifndef _EASYEDITOR_CONFIG_H_
 #define _EASYEDITOR_CONFIG_H_
 
+#include <cu/cu_stl.h>
+
 #include <json/json.h>
 
+#include <string>
 #include <set>
 
 namespace ee
@@ -31,8 +34,8 @@ public:
 	const SettingData& GetSettings() const { return *m_settings; }
 	SettingData& GetSettings() { return *m_settings; }
 
-	const std::vector<std::pair<std::string, std::string> >& GetFonts() const { return m_fonts; }
-	const std::vector<std::pair<std::string, std::string> >& GetUserFonts() const { return m_user_fonts; }
+	auto& GetFonts() const { return m_fonts; }
+	auto& GetUserFonts() const { return m_user_fonts; }
 
 private:
 	Config();
@@ -50,8 +53,8 @@ private:
 
 	bool m_debug_draw;
 
-	std::vector<std::pair<std::string, std::string> > m_fonts;
-	std::vector<std::pair<std::string, std::string> > m_user_fonts;
+	CU_VEC<std::pair<CU_STR, CU_STR>> m_fonts;
+	CU_VEC<std::pair<CU_STR, CU_STR>> m_user_fonts;
 
 	std::set<std::string> m_resource_paths;
 

@@ -67,7 +67,7 @@ void TransToPVR::Trigger(const std::string& path)
 
 void TransToPVR::EncodeByDtexPvr(const std::string& filepath) const
 {
-// 	ee::Image* img = ee::ImageMgr::Instance()->GetItem(filepath);
+// 	auto img = ee::ImageMgr::Instance()->GetItem(filepath);
 // 
 // 	int w, h, c, f;
 // 	uint8_t* src_buf = eimage::ImageIO::Read(filepath.c_str(), w, h, c, f);
@@ -88,7 +88,7 @@ void TransToPVR::EncodeByPvrTexTool(const std::string& filepath) const
 {
 	int w, h, fmt;
 	uint8_t* pixels = gimg_import(filepath.c_str(), &w, &h, &fmt);
-	if (fmt == GPF_RGBA && gum::Config::Instance()->GetPreMulAlpha()) {
+	if (fmt == GPF_RGBA8 && gum::Config::Instance()->GetPreMulAlpha()) {
 		gimg_pre_mul_alpha(pixels, w, h);
 	}
 

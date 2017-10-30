@@ -51,15 +51,13 @@ VerticalImageList::~VerticalImageList()
 
 void VerticalImageList::Clear()
 {
-	for_each(m_items.begin(), m_items.end(), cu::RemoveRefFunctor<ListItem>());
 	m_items.clear();
 	SetItemCount(0);
 	Refresh(true);
 }
 
-void VerticalImageList::Insert(ListItem* item, int idx)
+void VerticalImageList::Insert(const ListItemPtr& item, int idx)
 {
-	item->AddReference();
 	if (idx < 0 || idx >= static_cast<int>(m_items.size())) {
 		m_items.push_back(item);
 		SetItemCount(m_items.size());
@@ -91,7 +89,6 @@ void VerticalImageList::Remove(int index)
 	if (index < 0 || index >= static_cast<int>(m_items.size()))
 		return;
 
-	m_items[index]->RemoveReference();
 	m_items.erase(m_items.begin() + index);
  	SetItemCount(m_items.size());
 	Refresh(true);
@@ -107,18 +104,17 @@ void VerticalImageList::Swap(int i0, int i1)
 	Refresh(true);
 }
 
-void VerticalImageList::Traverse(Visitor<ListItem>& visitor) const
+void VerticalImageList::Traverse(RefVisitor<ListItem>& visitor) const
 {
-	std::vector<ListItem*>::const_iterator itr = m_items.begin();
-	for ( ; itr != m_items.end(); ++itr)
+	for (auto& item : m_items)
 	{
 		bool next;
-		visitor.Visit(*itr, next);
+		visitor.Visit(item, next);
 		if (!next) break;
 	}
 }
 
-const ListItem* VerticalImageList::GetSelected() const
+ListItemPtr VerticalImageList::GetSelected() const
 {
 	int idx = -1;
 	if (HasMultipleSelection()) {
@@ -130,7 +126,7 @@ const ListItem* VerticalImageList::GetSelected() const
 	if (idx >= 0 && idx < static_cast<int>(m_items.size())) {
 		return m_items[idx];
 	} else {
-		return NULL;
+		return nullptr;
 	}
 }
 
@@ -153,7 +149,7 @@ void VerticalImageList::OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const
 	if (m_compact) 
 	{
 		// bmp
-		if (const Bitmap* bmp = m_items[n]->GetBitmap()) {
+		if (auto bmp = m_items[n]->GetBitmap()) {
 			if (const wxBitmap* wx_bmp = bmp->GetSmallBmp()) {
 				int x = COMPACT_SPACE_LEFT;
 				int y = rect.y + COMPACT_SPACE_UP;
@@ -162,39 +158,39 @@ void VerticalImageList::OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const
 		}
 
 		// name
-		std::string name = m_items[n]->GetName();
+		auto& name = m_items[n]->GetName();
 		dc.SetFont(wxFont(is_selected ? 12 : 10, wxDEFAULT, wxNORMAL, wxNORMAL));
-		wxSize size = dc.GetTextExtent(name);
+		wxSize size = dc.GetTextExtent(name.c_str());
 		int x = rect.x + COMPACT_SPACE_LEFT + COMPACT_HEIGHT * 2;
 		int y = rect.y + COMPACT_SPACE_UP;
-		dc.DrawText(name, x, y);
+		dc.DrawText(name.c_str(), x, y);
 	} 
 	else 
 	{
 		int y = rect.y + NORMAL_SPACE_UP;
-		if (const Bitmap* bmp = m_items[n]->GetBitmap()) {
+		if (auto bmp = m_items[n]->GetBitmap()) {
 			if (const wxBitmap* wx_bmp = bmp->GetLargeBmp()) {
 				// bmp
 				int x = wx_bmp->GetWidth() > rect.width ? 0 : (rect.width - wx_bmp->GetWidth()) * 0.5f;
 				dc.DrawBitmap(*wx_bmp, x, y);
 
 				// info
-				std::string info = m_items[n]->GetInfo();
+				auto info = m_items[n]->GetInfo();
 				dc.SetFont(wxFont(18, wxDEFAULT, wxNORMAL, wxNORMAL));
 				//dc.SetTextForeground(wxColour(0xFF, 0x20, 0xFF));
-				wxSize size = dc.GetTextExtent(info);
+				wxSize size = dc.GetTextExtent(info.c_str());
 				//dc.DrawText(info, rect.x/* + rect.width * 0.5f - size.GetWidth() * 0.5f*/, y);
-				dc.DrawText(info, rect.x + NORMAL_SPACE_UP, y);
+				dc.DrawText(info.c_str(), rect.x + NORMAL_SPACE_UP, y);
 
 				y += wx_bmp->GetHeight();
 			}
 		}
 
 		// name
-		std::string name = m_items[n]->GetName();
+		auto name = m_items[n]->GetName();
 		dc.SetFont(wxFont(is_selected ? 12 : 10, wxDEFAULT, wxNORMAL, wxNORMAL));
-		wxSize size = dc.GetTextExtent(name);
-		dc.DrawText(name, rect.x + rect.width * 0.5f - size.GetWidth() * 0.5f, y + NORMAL_SPACE_UP);
+		wxSize size = dc.GetTextExtent(name.c_str());
+		dc.DrawText(name.c_str(), rect.x + rect.width * 0.5f - size.GetWidth() * 0.5f, y + NORMAL_SPACE_UP);
 	}
 }
 
@@ -216,7 +212,7 @@ wxCoord VerticalImageList::OnMeasureItem(size_t n) const
 		return COMPACT_HEIGHT;
 	} else {
 		int size = NORMAL_SPACE_UP + NORMAL_SPACE_DOWN;
-		if (const Bitmap* bmp = m_items[n]->GetBitmap()) {
+		if (auto bmp = m_items[n]->GetBitmap()) {
 			if (const wxBitmap* wx_bmp = bmp->GetLargeBmp()) {
 				size = wx_bmp->GetHeight() + NORMAL_SPACE_UP + NORMAL_SPACE_DOWN;
 			}

@@ -10,7 +10,7 @@
 #include <easycomplex.h>
 
 #include <sprite2/SymType.h>
-#include <sprite2/S2_Sprite.h>
+#include <sprite2/Sprite.h>
 #include <gum/AnimSymLoader.h>
 #include <gum/StringHelper.h>
 #include <gum/FilepathHelper.h>
@@ -23,7 +23,7 @@ namespace libanim
 Symbol::Symbol()
 {
 	static int id = 0;
-	m_name = ee::SymbolFile::Instance()->Tag(s2::SYM_ANIMATION) + gum::StringHelper::ToString(id++);
+	m_name = ee::SymbolFile::Instance()->Tag(s2::SYM_ANIMATION) + gum::StringHelper::ToString(id++).c_str();
 }
 
 void Symbol::ReloadTexture() const
@@ -35,14 +35,14 @@ void Symbol::ReloadTexture() const
 		{
 			const auto& frame = layer->frames[j];
 			for (int k = 0, l = frame->sprs.size(); k < l; ++k) {
-				s2::Symbol* sym = frame->sprs[k]->GetSymbol();
-				dynamic_cast<ee::Symbol*>(sym)->ReloadTexture();
+				auto sym = frame->sprs[k]->GetSymbol();
+				std::dynamic_pointer_cast<ee::Symbol>(sym)->ReloadTexture();
 			}
 		}
 	}
 }
 
-void Symbol::Traverse(ee::Visitor<ee::Sprite>& visitor)
+void Symbol::Traverse(ee::RefVisitor<ee::Sprite>& visitor)
 {
 	for (int i = 0, n = m_layers.size(); i < n; ++i)
 	{
@@ -51,36 +51,36 @@ void Symbol::Traverse(ee::Visitor<ee::Sprite>& visitor)
 		{
 			const auto& frame = layer->frames[j];
 			for (int k = 0, l = frame->sprs.size(); k < l; ++k) {
-				ee::Sprite* spr = dynamic_cast<ee::Sprite*>(frame->sprs[k]);
+				auto spr = std::dynamic_pointer_cast<ee::Sprite>(frame->sprs[k]);
 				bool next;
 				visitor.Visit(spr, next);
-				dynamic_cast<ee::Symbol*>(spr->GetSymbol())->Traverse(visitor);
+				std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol())->Traverse(visitor);
 			}
 		}
 	}
 }
 
-void Symbol::Load(const gum::SpriteLoader& spr_loader)
+void Symbol::Load(const std::shared_ptr<gum::SpriteLoader>& spr_loader)
 {
 	Clear();
 
-	ee::SymbolLoader sym_loader;
-	gum::AnimSymLoader loader(this, &sym_loader, &spr_loader);
-	loader.LoadJson(m_filepath);
+	auto sym_loader(std::make_shared<ee::SymbolLoader>());
+	gum::AnimSymLoader loader(*this, sym_loader, spr_loader);
+	loader.LoadJson(m_filepath.c_str());
 
 	LoadEE();
 }
 
 bool Symbol::LoadResources()
 {
-	if (!gum::FilepathHelper::Exists(m_filepath)) {
+	if (!gum::FilepathHelper::Exists(m_filepath.c_str())) {
 		return false;
 	}
 
-	ee::SymbolLoader sym_loader;
-	ee::SpriteLoader spr_loader;
-	gum::AnimSymLoader loader(this, &sym_loader, &spr_loader);
-	loader.LoadJson(m_filepath);
+	auto sym_loader(std::make_shared<ee::SymbolLoader>());
+	auto spr_loader(std::make_shared<ee::SpriteLoader>());
+	gum::AnimSymLoader loader(*this, sym_loader, spr_loader);
+	loader.LoadJson(m_filepath.c_str());
 
 	LoadEE();
 

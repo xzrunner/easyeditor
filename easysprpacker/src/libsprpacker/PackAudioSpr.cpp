@@ -13,10 +13,10 @@ namespace lua = ebuilder::lua;
 namespace esprpacker
 {
 
-PackAudioSpr::PackAudioSpr(const eaudio::Sprite* spr)
+PackAudioSpr::PackAudioSpr(const std::shared_ptr<eaudio::Sprite>& spr)
 {
 	m_sym = PackNodeFactory::Instance()->Create(
-		dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
+		std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol()));
 }
 
 PackAudioSpr::~PackAudioSpr()

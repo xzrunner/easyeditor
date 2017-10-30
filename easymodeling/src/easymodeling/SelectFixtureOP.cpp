@@ -30,7 +30,7 @@ SelectFixtureOP::~SelectFixtureOP()
 bool SelectFixtureOP::OnMouseLeftDown(int x, int y)
 {
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-	ee::Sprite* spr = m_stagePanel->QuerySpriteByPos(pos);
+	auto& spr = m_stagePanel->QuerySpriteByPos(pos);
 
 	ee::PropertySetting* setting = NULL;
 	if (spr)
@@ -71,7 +71,7 @@ bool SelectFixtureOP::OnMouseLeftUp(int x, int y)
 	if (m_first_pos.IsValid())
 	{
 		sm::rect rect(m_first_pos, m_stage->TransPosScrToProj(x, y));
-		std::vector<ee::Sprite*> sprs;
+		std::vector<ee::SprPtr> sprs;
 		m_stagePanel->QuerySpritesByRect(rect, sprs);
 
 		m_selected = NULL;
@@ -106,7 +106,7 @@ bool SelectFixtureOP::OnMouseMove(int x, int y)
 	m_mouseOn = NULL;
 
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-	ee::Sprite* spr = static_cast<StagePanel*>(m_wnd)->QuerySpriteByPos(pos);
+	auto& spr = static_cast<StagePanel*>(m_wnd)->QuerySpriteByPos(pos);
 	if (spr)
 	{
 		Body* body = static_cast<Body*>(spr->GetUserData());

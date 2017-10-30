@@ -3,7 +3,7 @@
 namespace eshape
 {
 
-bool PolylineEditor::AddVertex(std::vector<sm::vec2>& vertices, sm::rect& bounding,
+bool PolylineEditor::AddVertex(CU_VEC<sm::vec2>& vertices, sm::rect& bounding,
 							   int index, const sm::vec2& pos)
 {
 	if (index == vertices.size()) {
@@ -19,10 +19,10 @@ bool PolylineEditor::AddVertex(std::vector<sm::vec2>& vertices, sm::rect& boundi
 	}
 }
 
-bool PolylineEditor::RemoveVertex(std::vector<sm::vec2>& vertices, sm::rect& bounding,
+bool PolylineEditor::RemoveVertex(CU_VEC<sm::vec2>& vertices, sm::rect& bounding,
 								  const sm::vec2& pos)
 {
-	std::vector<sm::vec2>::iterator itr = vertices.begin();
+	CU_VEC<sm::vec2>::iterator itr = vertices.begin();
 	for ( ; itr != vertices.end(); ++itr) 
 	{
 		if (*itr != pos) {
@@ -37,7 +37,7 @@ bool PolylineEditor::RemoveVertex(std::vector<sm::vec2>& vertices, sm::rect& bou
 	return false;
 }
 
-bool PolylineEditor::ChangeVertex(std::vector<sm::vec2>& vertices, sm::rect& bounding,
+bool PolylineEditor::ChangeVertex(CU_VEC<sm::vec2>& vertices, sm::rect& bounding,
 								  const sm::vec2& from, const sm::vec2& to)
 {
 	int index = 0;
@@ -68,7 +68,7 @@ bool PolylineEditor::IsVertexOnRect(const sm::vec2& v, const sm::rect& r)
 		    v.y == r.ymin || v.y == r.ymax);
 }
 
-sm::rect PolylineEditor::CalcBounding(const std::vector<sm::vec2>& vertices)
+sm::rect PolylineEditor::CalcBounding(const CU_VEC<sm::vec2>& vertices)
 {
 	sm::rect bounding;
 	bounding.MakeEmpty();

@@ -176,12 +176,10 @@ void NormalCMPT::OnLoadFromFolder(wxCommandEvent& event)
 		KeyFrame* frame = new KeyFrame(itr->first);
 		for (int i = 0, n = itr->second.size(); i < n; ++i)
 		{
-			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(itr->second[i]);
+			auto sym = ee::SymbolMgr::Instance()->FetchSymbol(itr->second[i]);
 //			sym->refresh();
-			ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+			auto spr = ee::SpriteFactory::Instance()->Create(sym);
 			frame->Insert(spr, INT_MAX);
-			spr->RemoveReference();
-			sym->RemoveReference();
 		}
 		layer->InsertKeyFrame(frame);
 		frame->RemoveReference();
@@ -212,14 +210,13 @@ void NormalCMPT::OnLoadFromList(wxCommandEvent& event)
 	int frame_idx = 1;
 	for (size_t i = 0, n = items.size(); i < n; ++i)
 	{
-		ee::Symbol* sym = dynamic_cast<ee::Symbol*>(items[i]);
+		auto sym = std::dynamic_pointer_cast<ee::Symbol>(items[i]);
 		KeyFrame* frame = new KeyFrame(frame_idx);
-		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+		auto spr = ee::SpriteFactory::Instance()->Create(sym);
 
 		frame->Insert(spr, INT_MAX);
 		layer->InsertKeyFrame(frame);
 
-		spr->RemoveReference();
 		frame->RemoveReference();
 
 		frame_idx += space;

@@ -2,8 +2,7 @@
 #define _EASYCOMPLEX_PREVIEW_CANVAS_H_
 
 #include <ee/CameraCanvas.h>
-
-namespace ee { class Sprite; }
+#include <ee/Sprite.h>
 
 namespace ecomplex
 {
@@ -12,7 +11,7 @@ class PreviewCanvas : public ee::CameraCanvas
 {
 public:
 	PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
-		const std::vector<ee::Sprite*>& sprs, wxGLContext* glctx);
+		const std::vector<ee::SprPtr>& sprs, wxGLContext* glctx);
 
 protected:
 	virtual void OnDrawSprites() const;
@@ -20,10 +19,10 @@ protected:
 private:
 	void drawStageData();
 
-//	void getCurrSprites(std::vector<ee::Sprite*>& sprs) const;
+//	void getCurrSprites(std::vector<ee::SprPtr>& sprs) const;
 
 private:
-	std::vector<ee::Sprite*> m_sprs;
+	std::vector<ee::SprPtr> m_sprs;
 
 }; // PreviewCanvas
 

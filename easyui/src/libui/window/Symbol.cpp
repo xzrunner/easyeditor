@@ -28,13 +28,13 @@ int Symbol::Type() const
 	return ee::SYM_UIWND;
 }
 
-s2::RenderReturn Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
+s2::RenderReturn Symbol::DrawTree(cooking::DisplayList* dlist, const s2::RenderParams& rp, const s2::Sprite* spr) const
 {
-	m_anchors.DrawSprites(params);
+	m_anchors.DrawSprites(rp);
 	for (int i = 0, n = m_ext_refs.size(); i < n; ++i) {
-		ee::SpriteRenderer::Instance()->Draw(m_ext_refs[i], params);
+		ee::SpriteRenderer::Instance()->Draw(m_ext_refs[i].get(), rp);
 	}
-	m_anchors.DrawNodes(params);
+	m_anchors.DrawNodes(rp);
 	return s2::RENDER_OK;
 }
 
@@ -43,27 +43,25 @@ sm::rect Symbol::GetBoundingImpl(const s2::Sprite* spr, const s2::Actor* actor, 
 	return sm::rect(sm::vec2(0, 0), m_width, m_height);
 }
 
-void Symbol::Traverse(ee::Visitor<ee::Sprite>& visitor)
+void Symbol::Traverse(ee::RefVisitor<ee::Sprite>& visitor)
 {
 	m_anchors.Traverse(visitor);
 
-	std::vector<ee::Sprite*> ext_refs;
+	std::vector<ee::SprPtr> ext_refs;
 	copy(m_ext_refs.begin(), m_ext_refs.end(), back_inserter(ext_refs));
 	ee::ObjectVector<ee::Sprite>::Traverse(ext_refs, visitor, ee::DT_ALL);
 }
 
-void Symbol::InsertExtRef(Sprite* spr)
+void Symbol::InsertExtRef(const std::shared_ptr<Sprite>& spr)
 {
-	spr->AddReference();
 	m_ext_refs.push_back(spr);
 }
 
-void Symbol::RemoveExtRef(Sprite* spr)
+void Symbol::RemoveExtRef(const std::shared_ptr<Sprite>& spr)
 {
-	std::vector<Sprite*>::iterator itr = m_ext_refs.begin();
+	auto itr = m_ext_refs.begin();
 	for ( ; itr != m_ext_refs.end(); ) {
 		if (*itr == spr) {
-			spr->RemoveReference();
 			itr = m_ext_refs.erase(itr);
 		} else {
 			++itr;
@@ -73,27 +71,25 @@ void Symbol::RemoveExtRef(Sprite* spr)
 
 void Symbol::ClearExtRef()
 {
-	for_each(m_ext_refs.begin(), m_ext_refs.end(), 
-		cu::RemoveRefFunctor<Sprite>());
 	m_ext_refs.clear();
 }
 
-void Symbol::ResetExtRefOrder(Sprite* spr, bool up)
+void Symbol::ResetExtRefOrder(const std::shared_ptr<Sprite>& spr, bool up)
 {
 	ee::ObjectVector<Sprite>::ResetOrder(m_ext_refs, spr, up);
 }
 
-void Symbol::ResetExtRefOrderMost(Sprite* spr, bool up)
+void Symbol::ResetExtRefOrderMost(const std::shared_ptr<Sprite>& spr, bool up)
 {
 	ee::ObjectVector<Sprite>::ResetOrderMost(m_ext_refs, spr, up);
 }
 
 bool Symbol::LoadResources()
 {
-	if (!gum::FilepathHelper::Exists(m_filepath)) {
+	if (!gum::FilepathHelper::Exists(m_filepath.c_str())) {
 		return false;
 	}
-	FileIO::Load(m_filepath.c_str(), this);
+	FileIO::Load(m_filepath.c_str(), *this);
 	return true;
 }
 

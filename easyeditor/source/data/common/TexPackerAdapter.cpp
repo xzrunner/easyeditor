@@ -33,7 +33,7 @@ void TexPackerAdapter::Load(const Json::Value& value, const std::string& dir)
 {
 	Texture texture;
 
-	texture.filepath = value["filepath"].asString();
+	texture.filepath = value["filepath"].asString().c_str();
 	if (!FileHelper::IsFileExist(texture.filepath))
 		texture.filepath = FileHelper::GetAbsolutePath(dir, texture.filepath);
 

@@ -2,13 +2,14 @@
 #define _EASYEDITOR_DELETE_LAYER_AOP_H_
 
 #include "AtomicOP.h"
+#include "Sprite.h"
+#include "Shape.h"
 
 namespace ee
 {
 
 class Layer;
 class LayerList;
-class Shape;
 
 class DeleteLayerAOP : public AtomicOP
 {
@@ -19,14 +20,14 @@ public:
 	virtual void Undo();
 	virtual void Redo();
 
-	virtual Json::Value Store(const std::vector<Sprite*>& sprs) const;
+	virtual Json::Value Store(const std::vector<SprPtr>& sprs) const;
 
 private:
 	LayerList* m_list;
 
 	Layer* m_layer;
-	std::vector<Sprite*> m_sprs;
-	std::vector<Shape*> m_shapes;
+	std::vector<SprPtr> m_sprs;
+	std::vector<ShapePtr> m_shapes;
 
 }; // DeleteLayerAOP
 

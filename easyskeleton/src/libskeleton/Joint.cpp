@@ -5,16 +5,16 @@
 #include <SM_Calc.h>
 #include <shaderlab/ShaderMgr.h>
 #include <shaderlab/Shader.h>
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <sprite2/Color.h>
 #include <sprite2/RenderParams.h>
-#include <sprite2/S2_Sprite.h>
+#include <sprite2/Sprite.h>
 #include <sprite2/BoundingBox.h>
 
 namespace libskeleton
 {
 
-Joint::Joint(s2::Sprite* spr, const s2::JointPose& joint_pose)
+Joint::Joint(const s2::SprPtr& spr, const s2::JointPose& joint_pose)
 	: s2::Joint(spr, joint_pose)
 {
 }
@@ -31,7 +31,7 @@ void Joint::DrawSkeleton(const s2::RenderParams& params, bool selected) const
 		s2::RVG::Circle(params.mt * m_world_pose.trans, RADIUS, false);
 	}
 
-	if (m_parent && m_skin.spr)
+	if (m_parent.lock() && m_skin.spr)
 	{
 		sm::vec2 s = params.mt * m_world_pose.trans;
 		sm::vec2 e = params.mt * m_skin.spr->GetCenter() * 2 - s;
@@ -54,7 +54,7 @@ void Joint::DrawSkeleton(const s2::RenderParams& params, bool selected) const
 		} else {
 			s2::RVG::SetColor(s2::Color(204, 204, 51, 128));
 		}
-		std::vector<sm::vec2> face;
+		CU_VEC<sm::vec2> face;
 		face.push_back(s);
 		face.push_back(left);
 		face.push_back(right);

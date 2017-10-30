@@ -7,7 +7,7 @@
 namespace ecomplex
 {
 
-SymbolPropertySetting::SymbolPropertySetting(Symbol* sym)
+SymbolPropertySetting::SymbolPropertySetting(const std::shared_ptr<Symbol>& sym)
 	: ee::SymbolPropertySetting(sym)
 {
 	m_type = "ComplexSymbol";
@@ -32,7 +32,7 @@ void SymbolPropertySetting::OnPropertyGridChange(const std::string& name, const 
 		std::vector<std::string> str;
 		ee::StringHelper::Split(wxANY_AS(value, wxString).ToStdString(), ";", str);
 		if (str.size() == 4) {
-			Symbol* c = static_cast<Symbol*>(m_sym);
+			auto c = std::dynamic_pointer_cast<Symbol>(m_sym);
 			sm::rect scissor = c->GetScissor();
 			ee::StringHelper::FromString(str[0], scissor.xmin);
 			ee::StringHelper::FromString(str[1], scissor.xmax);
@@ -43,35 +43,35 @@ void SymbolPropertySetting::OnPropertyGridChange(const std::string& name, const 
 	}
 	else if (name == wxT("Clipbox.xmin") && m_sym)
 	{
-		Symbol* c = static_cast<Symbol*>(m_sym);
+		auto c = std::dynamic_pointer_cast<Symbol>(m_sym);
 		sm::rect scissor = c->GetScissor();
 		scissor.xmin = wxANY_AS(value, int);
 		c->SetScissor(scissor);
 	}
 	else if (name == wxT("Clipbox.xmax") && m_sym)
 	{
-		Symbol* c = static_cast<Symbol*>(m_sym);
+		auto c = std::dynamic_pointer_cast<Symbol>(m_sym);
 		sm::rect scissor = c->GetScissor();
 		scissor.xmax = wxANY_AS(value, int);
 		c->SetScissor(scissor);
 	}
 	else if (name == wxT("Clipbox.ymin") && m_sym)
 	{
-		Symbol* c = static_cast<Symbol*>(m_sym);
+		auto c = std::dynamic_pointer_cast<Symbol>(m_sym);
 		sm::rect scissor = c->GetScissor();
 		scissor.ymin = wxANY_AS(value, int);
 		c->SetScissor(scissor);
 	}
 	else if (name == wxT("Clipbox.ymax") && m_sym)
 	{
-		Symbol* c = static_cast<Symbol*>(m_sym);
+		auto c = std::dynamic_pointer_cast<Symbol>(m_sym);
 		sm::rect scissor = c->GetScissor();
 		scissor.ymax = wxANY_AS(value, int);
 		c->SetScissor(scissor);
 	}
 	else if (name == wxT("Cache") && m_sym)
 	{
-		Symbol* c = static_cast<Symbol*>(m_sym);
+		auto c = std::dynamic_pointer_cast<Symbol>(m_sym);
 		c->m_use_render_cache = wxANY_AS(value, bool);
 // 		if (ee::Config::Instance()->IsUseDTex()) {
 // 			ee::DynamicTexAndFont* dtex = ee::DynamicTexAndFont::Instance();
@@ -94,7 +94,7 @@ void SymbolPropertySetting::OnPropertyGridChange(const std::string& name, const 
 
 std::string SymbolPropertySetting::GetGroupNames() const
 {
-	Symbol* complex = static_cast<Symbol*>(m_sym);
+	auto complex = std::dynamic_pointer_cast<Symbol>(m_sym);
 	std::string ret;
 	for (int i = 0, n = complex->m_groups.size(); i < n; ++i)
 	{
@@ -123,7 +123,7 @@ void SymbolPropertySetting::SetGroupByNames(const std::string& names)
 		set_names.insert(name);
 
 	// 
-	Symbol* complex = static_cast<Symbol*>(m_sym);
+	auto complex = std::dynamic_pointer_cast<Symbol>(m_sym);
 	std::vector<Symbol::Group>& groups = complex->m_groups;
 	// rm symbol's groups
 	std::vector<Symbol::Group>::iterator itr 
@@ -167,7 +167,7 @@ void SymbolPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 
 	if (m_sym)
 	{
-		Symbol* c = static_cast<Symbol*>(m_sym);
+		auto c = std::dynamic_pointer_cast<Symbol>(m_sym);
 		const sm::rect& scissor = c->GetScissor();
 		pg->SetPropertyValue(wxT("Clipbox.xmin"), (int)scissor.xmin);
 		pg->SetPropertyValue(wxT("Clipbox.xmax"), (int)scissor.xmax);
@@ -209,7 +209,7 @@ void SymbolPropertySetting::InitEachGroup(wxPropertyGrid* pg)
 {
 	if (!m_sym) return;
 
-	Symbol* complex = static_cast<Symbol*>(m_sym);
+	auto complex = std::dynamic_pointer_cast<Symbol>(m_sym);
 	std::vector<Symbol::Group>& groups = complex->m_groups;
 	for (int i = 0, n = groups.size(); i < n; ++i)
 	{

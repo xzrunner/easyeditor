@@ -10,16 +10,14 @@
 namespace ecomplex
 {
 
-ee::Sprite* Particle3DToSpr::Trans(const erespacker::PackParticle3D* p3d)
+ee::SprPtr Particle3DToSpr::Trans(const erespacker::PackParticle3D* p3d)
 {
-	eparticle3d::Symbol* sym = new eparticle3d::Symbol;
-	s2::P3dEmitterCfg* cfg = LoadConfig(p3d);
-	sym->SetEmitterCfg(cfg);
-	cfg->RemoveReference();
-	return new eparticle3d::Sprite(sym);
+	auto sym = std::make_shared<eparticle3d::Symbol>();
+	sym->SetEmitterCfg(LoadConfig(p3d));
+	return std::make_shared<eparticle3d::Sprite>(sym);
 }
 
-s2::P3dEmitterCfg* Particle3DToSpr::LoadConfig(const erespacker::PackParticle3D* p3d)
+std::shared_ptr<s2::P3dEmitterCfg> Particle3DToSpr::LoadConfig(const erespacker::PackParticle3D* p3d)
 {
 	int sz = SIZEOF_P3D_EMITTER_CFG + SIZEOF_P3D_SYMBOL * eparticle3d::MAX_COMPONENTS;
 	p3d_emitter_cfg* cfg = (p3d_emitter_cfg*) operator new(sz);
@@ -97,11 +95,11 @@ s2::P3dEmitterCfg* Particle3DToSpr::LoadConfig(const erespacker::PackParticle3D*
 
 		// todo bind ps
 
-		ee::Sprite* spr = NodeToSprite::Trans(src.node);
-		dst.ud = dynamic_cast<ee::Symbol*>(spr->GetSymbol());
+		auto& spr = NodeToSprite::Trans(src.node);
+		dst.ud = static_cast<void*>(spr->GetSymbol().get());
 	}
 
-	return new s2::P3dEmitterCfg(cfg);
+	return std::make_shared<s2::P3dEmitterCfg>(cfg);
 }
 
 }

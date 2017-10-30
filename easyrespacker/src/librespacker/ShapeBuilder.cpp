@@ -17,8 +17,7 @@ ShapeBuilder::ShapeBuilder()
 
 ShapeBuilder::~ShapeBuilder()
 {
-	std::map<const etexture::Symbol*, const PackShape*>::iterator
-		itr = m_map_data.begin();
+	auto itr = m_map_data.begin();
 	for ( ; itr != m_map_data.end(); ++itr) {
 		delete itr->second;
 	}
@@ -26,8 +25,7 @@ ShapeBuilder::~ShapeBuilder()
 
 void ShapeBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 {
-	std::map<const etexture::Symbol*, const PackShape*>::const_iterator 
-		itr = m_map_data.begin();
+	auto itr = m_map_data.begin();
 	for ( ; itr != m_map_data.end(); ++itr) {
 		bool has_next;
 		visitor.Visit(const_cast<PackShape*>(itr->second), has_next);
@@ -37,13 +35,13 @@ void ShapeBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 	}
 }
 
-bool ShapeBuilder::CanHandle(const etexture::Symbol* sym) const
+bool ShapeBuilder::CanHandle(const std::shared_ptr<etexture::Symbol>& sym) const
 {
-	const std::vector<s2::PolygonShape*>& polys = sym->GetPolygons();
+	auto& polys = sym->GetPolygons();
 	if (polys.size() != 1) {
 		return false;
 	}
-	eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(polys[0]);
+	eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(polys[0].get());
 	if (!poly) {
 		return false;
 	}
@@ -54,10 +52,9 @@ bool ShapeBuilder::CanHandle(const etexture::Symbol* sym) const
 	return true;
 }
 
-const IPackNode* ShapeBuilder::Create(const etexture::Symbol* sym)
+const IPackNode* ShapeBuilder::Create(const std::shared_ptr<etexture::Symbol>& sym)
 {
-	std::map<const etexture::Symbol*, const PackShape*>::iterator 
-		itr = m_map_data.find(sym);
+	auto itr = m_map_data.find(sym);
 	if (itr != m_map_data.end()) {
 		return itr->second;
 	}
@@ -72,13 +69,13 @@ const IPackNode* ShapeBuilder::Create(const etexture::Symbol* sym)
 	return node;
 }
 
-void ShapeBuilder::Load(const etexture::Symbol* sym, PackShape* shape)
+void ShapeBuilder::Load(const std::shared_ptr<etexture::Symbol>& sym, PackShape* shape)
 {
-	const std::vector<s2::PolygonShape*>& polys = sym->GetPolygons();
+	auto& polys = sym->GetPolygons();
 	if (polys.size() != 1) {
 		throw ee::Exception("ShapeBuilder::Load shapes.size(): %d filepath: %s", polys.size(), sym->GetFilepath().c_str());
 	}
-	eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(polys[0]);
+	eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(polys[0].get());
 	if (!poly) {
 		throw ee::Exception("ShapeBuilder::Load !poly, filepath: %s", sym->GetFilepath().c_str());
 	}
@@ -87,7 +84,7 @@ void ShapeBuilder::Load(const etexture::Symbol* sym, PackShape* shape)
 		throw ee::Exception("ShapeBuilder::Load !material, filepath: %s", sym->GetFilepath().c_str());
 	}
 
-	const std::vector<sm::vec2>& vertices = material->GetTriangles();
+	auto& vertices = material->GetTriangles();
 	if (vertices.size() % 3 != 0) {
 		throw ee::Exception("ShapeBuilder::Load err meaterial, filepath: %s", sym->GetFilepath().c_str());
 	}

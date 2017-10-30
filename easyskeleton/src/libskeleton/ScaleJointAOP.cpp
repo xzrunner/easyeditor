@@ -4,20 +4,10 @@
 namespace libskeleton
 {
 
-ScaleJointAOP::ScaleJointAOP(Joint* joint, const sm::vec2& scale)
+ScaleJointAOP::ScaleJointAOP(const std::shared_ptr<Joint>& joint, const sm::vec2& scale)
 	: m_joint(joint)
 	, m_scale(scale)
 {
-	if (m_joint) {
-		m_joint->AddReference();
-	}
-}
-
-ScaleJointAOP::~ScaleJointAOP()
-{
-	if (m_joint) {
-		m_joint->RemoveReference();
-	}
 }
 
 void ScaleJointAOP::Undo()

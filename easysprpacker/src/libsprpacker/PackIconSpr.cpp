@@ -13,10 +13,10 @@ namespace lua = ebuilder::lua;
 namespace esprpacker
 {
 
-PackIconSpr::PackIconSpr(const eicon::Sprite* spr)
+PackIconSpr::PackIconSpr(const std::shared_ptr<eicon::Sprite>& spr)
 {
 	m_sym = PackNodeFactory::Instance()->Create(
-		dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
+		std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol()));
 
 	m_process = spr->GetProcess();
 }

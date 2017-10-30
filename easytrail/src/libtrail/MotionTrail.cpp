@@ -3,7 +3,7 @@
 
 #include <sprite2/TrailEmitter.h>
 #include <sprite2/TrailEmitterCfg.h>
-#include <sprite2/S2_Symbol.h>
+#include <sprite2/Symbol.h>
 
 #include <mt_2d.h>
 
@@ -12,19 +12,12 @@
 namespace etrail
 {
 
-MotionTrail::MotionTrail(s2::TrailEmitterCfg* cfg)
-	: m_et(NULL)
+MotionTrail::MotionTrail(const std::shared_ptr<const s2::TrailEmitterCfg>& cfg)
+	: m_et(nullptr)
 {
 	s2::Trail::Instance();
 
 	Init(cfg);
-}
-
-MotionTrail::~MotionTrail()
-{
-	if (m_et) {
-		m_et->RemoveReference();
-	}
 }
 
 void MotionTrail::SetValue(int key, const ee::UICallback::Data& data)
@@ -173,14 +166,8 @@ void MotionTrail::DelAllSymbol()
 	if (!m_et) {
 		return;
 	}
-	t2d_emitter_cfg* cfg = const_cast<t2d_emitter_cfg*>(m_et->GetEmitterCfg()->GetImpl());
-	if (cfg->mode_type == T2D_MODE_IMAGE) {
-		for (int i = 0; i < cfg->sym_count; ++i) {
-			s2::Symbol* sym = (s2::Symbol*)(cfg->syms[i].mode.A.ud);
-			sym->RemoveReference();
-		}
-	}
-	cfg->sym_count = 0;
+	std::const_pointer_cast<s2::TrailEmitterCfg>(m_et->GetEmitterCfg())->ClearCachedSym();
+	const_cast<t2d_emitter_cfg*>(m_et->GetEmitterCfg()->GetImpl())->sym_count = 0;
 }
 
 t2d_symbol* MotionTrail::GetSymbol(int idx)
@@ -196,7 +183,7 @@ t2d_symbol* MotionTrail::GetSymbol(int idx)
 	}
 }
 
-const s2::TrailEmitterCfg* MotionTrail::GetConfig() 
+std::shared_ptr<const s2::TrailEmitterCfg> MotionTrail::GetConfig() 
 { 
 	if (m_et) {
 		return m_et->GetEmitterCfg();
@@ -205,11 +192,9 @@ const s2::TrailEmitterCfg* MotionTrail::GetConfig()
 	}
 }
 
-void MotionTrail::Init(const s2::TrailEmitterCfg* cfg)
+void MotionTrail::Init(const std::shared_ptr<const s2::TrailEmitterCfg>& cfg)
 {
-	if (!m_et) {
-		m_et = s2::TrailEmitterPool::Instance()->Pop();
-	}
+	m_et = std::make_shared<s2::TrailEmitter>();
 	m_et->CreateEmitter(cfg);
 	m_et->Start();
 }

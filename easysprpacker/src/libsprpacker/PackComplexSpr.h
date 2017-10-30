@@ -3,6 +3,8 @@
 
 #include "PackNode.h"
 
+#include <memory>
+
 namespace ecomplex { class Sprite; }
 
 namespace esprpacker
@@ -11,7 +13,7 @@ namespace esprpacker
 class PackComplexSpr : public PackNode
 {
 public:
-	PackComplexSpr(const ecomplex::Sprite* spr);
+	PackComplexSpr(const std::shared_ptr<ecomplex::Sprite>& spr);
 	virtual ~PackComplexSpr();
 
 	/**
@@ -29,10 +31,10 @@ public:
 	virtual int SizeOfPackToBin() const;
 	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const;	
 
-	bool Equal(const ecomplex::Sprite* spr) const;
+	bool Equal(const std::shared_ptr<ecomplex::Sprite>& spr) const;
 
 private:
-	void Init(const ecomplex::Sprite* spr);
+	void Init(const std::shared_ptr<ecomplex::Sprite>& spr);
 
 private:
 	const PackNode* m_sym;

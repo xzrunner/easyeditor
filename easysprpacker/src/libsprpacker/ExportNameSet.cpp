@@ -11,7 +11,7 @@
 namespace esprpacker
 {
 
-SINGLETON_DEFINITION(ExportNameSet);
+CU_SINGLETON_DEFINITION(ExportNameSet);
 
 ExportNameSet::ExportNameSet()
 {
@@ -21,13 +21,13 @@ ExportNameSet::~ExportNameSet()
 {
 }
 
-void ExportNameSet::Insert(const ee::Symbol* sym, PackNode* node)
+void ExportNameSet::Insert(const ee::SymConstPtr& sym, PackNode* node)
 {
 	if (!PackIDMgr::Instance()->IsCurrPkg(sym->GetFilepath())) {
 		return;
 	}
 
-	std::string export_name = gum::StringHelper::UTF8ToGBK(sym->name);
+	std::string export_name = gum::StringHelper::UTF8ToGBK(sym->name.c_str()).c_str();
 	if (!is_name_valid(export_name)) {
 		return;
 	}

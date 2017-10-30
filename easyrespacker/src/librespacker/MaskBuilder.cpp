@@ -30,12 +30,12 @@ void MaskBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 	}
 }
 
-const IPackNode* MaskBuilder::Create(const emask::Symbol* sym)
+const IPackNode* MaskBuilder::Create(const std::shared_ptr<emask::Symbol>& sym)
 {
 	PackMask* node = new PackMask;
 
-	node->base = PackNodeFactory::Instance()->Create(dynamic_cast<const ee::Sprite*>(sym->GetBase()));
-	node->mask = PackNodeFactory::Instance()->Create(dynamic_cast<const ee::Sprite*>(sym->GetMask()));
+	node->base = PackNodeFactory::Instance()->Create(std::dynamic_pointer_cast<ee::Sprite>(sym->GetBase()));
+	node->mask = PackNodeFactory::Instance()->Create(std::dynamic_pointer_cast<ee::Sprite>(sym->GetMask()));
 
 	m_nodes.push_back(node);
 

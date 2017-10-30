@@ -16,7 +16,7 @@ public:
 	StageCanvas(StagePanel* stage);
 	virtual ~StageCanvas();
 
-	void SetBackground(ee::Symbol* sym);
+	void SetBackground(const ee::SymPtr& sym);
 
 protected:
 	virtual void OnDrawSprites() const;

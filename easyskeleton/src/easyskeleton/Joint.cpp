@@ -6,7 +6,7 @@
 namespace eskeleton
 {
 
-Joint::Joint(ee::Sprite* spr, const s2::JointPose& joint_pose)
+Joint::Joint(const ee::SprPtr& spr, const s2::JointPose& joint_pose)
 	: libskeleton::Joint(spr, joint_pose)
 {
 }
@@ -20,7 +20,7 @@ void Joint::Translate(const sm::vec2& trans)
 	for (int i = 0, n = m_children.size(); i < n; ++i) 
 	{
 		const s2::Sprite* spr = m_children[i]->GetSkinSpr();
-		Bone* cbone = (Bone*)(dynamic_cast<const ee::Sprite*>(spr)->GetUserData());
+		Bone* cbone = (Bone*)(std::dynamic_pointer_cast<const ee::Sprite>(spr)->GetUserData());
 		cbone->Translate(trans);
 	}
 }
@@ -75,7 +75,6 @@ void Joint::Clear()
 		m_children[0]->DeconnectParent();
 	}
 	if (m_skin.spr) {
-		m_skin.spr->RemoveReference();
 		m_skin.spr = NULL;
 	}
 }
@@ -86,7 +85,7 @@ void Joint::UpdateChildren()
 	{
 		Joint* c = dynamic_cast<Joint*>(m_children[i]);
 		c->UpdateToJoint();
-		const ee::Sprite* spr = dynamic_cast<const ee::Sprite*>(c->GetSkinSpr());
+		const ee::SprConstPtr& spr = std::dynamic_pointer_cast<const ee::Sprite>(c->GetSkinSpr());
 		Bone* cbone = (Bone*)(spr->GetUserData());
 		cbone->Update();
 	}

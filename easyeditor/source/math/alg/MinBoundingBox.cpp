@@ -11,11 +11,10 @@ namespace ee
 // bounding:
 // 1  2
 // 0  3
-bool MinBoundingBox::Do(const std::vector<sm::vec2>& points, 
-							   sm::vec2 bounding[4])
+bool MinBoundingBox::Do(const CU_VEC<sm::vec2>& points, sm::vec2 bounding[4])
 {
 	// convex hull
-	std::vector<sm::vec2> convex_hull;
+	CU_VEC<sm::vec2> convex_hull;
 	sm::convex_hull(points, convex_hull);
 
 	// normal
@@ -53,7 +52,7 @@ bool MinBoundingBox::Do(const std::vector<sm::vec2>& points,
 	return b;
 }
 
-bool MinBoundingBox::TextOtherDir(const std::vector<sm::vec2>& points, 
+bool MinBoundingBox::TextOtherDir(const CU_VEC<sm::vec2>& points, 
 								  const sm::vec2& start, const sm::vec2& end,
 								  float& min_area, sm::vec2 bounding[4])
 {
@@ -97,7 +96,7 @@ bool MinBoundingBox::TextOtherDir(const std::vector<sm::vec2>& points,
 	return true;
 }
 
-void MinBoundingBox::CalculateB(const std::vector<sm::vec2>& points, float k,
+void MinBoundingBox::CalculateB(const CU_VEC<sm::vec2>& points, float k,
 								float& b_min, float& b_max)
 {
 	b_min = FLT_MAX;

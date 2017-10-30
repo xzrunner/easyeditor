@@ -21,17 +21,17 @@ StageCanvas::StageCanvas(StagePanel* stage)
 
 void StageCanvas::OnDrawSprites() const
 {
-	Symbol* sym = m_stage->GetSymbol();
+	auto& sym = m_stage->GetSymbol();
 	if (m_mask_render) {
-		sym->Draw(s2::RenderParams(), NULL);
+		sym->DrawTree(nullptr, s2::RenderParams(), NULL);
 	} else {
-		const s2::Sprite *base = sym->GetBase(),
-						 *mask = sym->GetMask();
+		auto& base = sym->GetBase();
+		auto& mask = sym->GetMask();
 		if (base) {
-			ee::SpriteRenderer::Instance()->Draw(base);
+			ee::SpriteRenderer::Instance()->Draw(base.get());
 		}
 		if (mask) {
-			ee::SpriteRenderer::Instance()->Draw(mask);
+			ee::SpriteRenderer::Instance()->Draw(mask.get());
 		}
 	}
 

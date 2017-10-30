@@ -21,15 +21,15 @@ public:
 
 	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
 
-	bool CanHandle(const etexture::Symbol* sym) const;
+	bool CanHandle(const std::shared_ptr<etexture::Symbol>& sym) const;
 
-	const IPackNode* Create(const etexture::Symbol* sym);
-
-private:
-	void Load(const etexture::Symbol* sym, PackShape* shape);
+	const IPackNode* Create(const std::shared_ptr<etexture::Symbol>& sym);
 
 private:
-	std::map<const etexture::Symbol*, const PackShape*> m_map_data;	
+	void Load(const std::shared_ptr<etexture::Symbol>& sym, PackShape* shape);
+
+private:
+	std::map<std::shared_ptr<const etexture::Symbol>, const PackShape*> m_map_data;
 
 }; // ShapeBuilder
 

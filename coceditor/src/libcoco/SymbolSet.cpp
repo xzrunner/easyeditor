@@ -9,7 +9,7 @@
 namespace ecoco
 {
 
-void SymbolSet::Insert(const ee::Symbol* sym)
+void SymbolSet::Insert(const ee::SymConstPtr& sym)
 {
 	std::string filepath = ee::FileHelper::FormatFilepath(sym->GetFilepath());
 
@@ -24,11 +24,10 @@ void SymbolSet::Insert(const ee::Symbol* sym)
 	}
 }
 
-const ee::Symbol* SymbolSet::Query(const std::string& filepath) const
+ee::SymConstPtr SymbolSet::Query(const std::string& filepath) const
 {
-	std::multimap<std::string, const ee::Symbol*>::const_iterator 
-		itr_begin = m_symbol_map.lower_bound(filepath),
-		itr_end = m_symbol_map.upper_bound(filepath);
+	auto itr_begin = m_symbol_map.lower_bound(filepath);
+	auto itr_end = m_symbol_map.upper_bound(filepath);
 	if (itr_begin != itr_end) {
 		return itr_begin->second;
 	} else {
@@ -36,13 +35,12 @@ const ee::Symbol* SymbolSet::Query(const std::string& filepath) const
 	}
 }
 
-bool SymbolSet::Query(const ee::Symbol* sym) const
+bool SymbolSet::Query(const ee::SymConstPtr& sym) const
 {
 	std::string filepath = ee::FileHelper::FormatFilepath(sym->GetFilepath());
-	std::multimap<std::string, const ee::Symbol*>::const_iterator 
-		itr_begin = m_symbol_map.lower_bound(filepath),
-		itr_end = m_symbol_map.upper_bound(filepath);
-	std::multimap<std::string, const ee::Symbol*>::const_iterator itr = itr_begin;
+	auto itr_begin = m_symbol_map.lower_bound(filepath);
+	auto itr_end = m_symbol_map.upper_bound(filepath);
+	auto itr = itr_begin;
 	for ( ; itr != itr_end; ++itr) {
 		if (itr->second == sym) {
 			return true;

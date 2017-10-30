@@ -19,22 +19,22 @@ namespace ecomplex
 {
 
 void LoadFromJson::Load(const std::string& _filepath, const Json::Value& value, 
-						const std::string& dir, Symbol* complex)
+						const std::string& dir, Symbol& complex)
 {
-	complex->name = value["name"].asString();
-	complex->tag = value["tag"].asString();
+	complex.name = value["name"].asString();
+	complex.tag = value["tag"].asString();
 
 	sm::rect scissor;
 	scissor.xmin = static_cast<float>(value["xmin"].asInt());
 	scissor.xmax = static_cast<float>(value["xmax"].asInt());
 	scissor.ymin = static_cast<float>(value["ymin"].asInt());
 	scissor.ymax = static_cast<float>(value["ymax"].asInt());
-	complex->SetScissor(scissor);
+	complex.SetScissor(scissor);
 
-	complex->m_use_render_cache = value["use_render_cache"].asBool();
+	complex.m_use_render_cache = value["use_render_cache"].asBool();
 
 	for (int i = 0, n = value["sprite"].size(); i < n; ++i) {
-		ee::Sprite* spr = NULL;
+		ee::SprPtr spr = nullptr;
 		try {
 			spr = LoadSprite(value["sprite"][i], dir);
 		} catch (ee::Exception& e) {
@@ -42,8 +42,7 @@ void LoadFromJson::Load(const std::string& _filepath, const Json::Value& value,
 			continue;
 		}
 		if (spr) {
-			complex->Add(spr);
-			spr->RemoveReference();
+			complex.Add(spr);
 		}
 	}
 
@@ -60,14 +59,14 @@ void LoadFromJson::LoadChildren(const Json::Value& value, const std::string& dir
 	}
 }
 
-void LoadFromJson::CreateActionsFromTag(Symbol* sym)
+void LoadFromJson::CreateActionsFromTag(Symbol& sym)
 {
-	std::map<std::string, std::vector<s2::Sprite*> > map_actions;
+	std::map<std::string, CU_VEC<s2::SprPtr>> map_actions;
 
-	const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
+	auto& children = sym.GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i)
 	{
- 		ee::Sprite* spr = dynamic_cast<ee::Sprite*>(children[i]);
+ 		auto spr = std::dynamic_pointer_cast<ee::Sprite>(children[i]);
  		if (spr->GetTag().empty()) {
  			continue;			
  		}
@@ -81,14 +80,14 @@ void LoadFromJson::CreateActionsFromTag(Symbol* sym)
  				continue;
  			}
 			if (map_actions.find(tag) == map_actions.end()) {
-				map_actions.insert(std::make_pair(tag, std::vector<s2::Sprite*>()));
+				map_actions.insert(std::make_pair(tag, CU_VEC<s2::SprPtr>()));
 			}
 		}
 	}
 
 	for (int i = 0, n = children.size(); i < n; ++i)
 	{
-		ee::Sprite* spr = dynamic_cast<ee::Sprite*>(children[i]);
+		auto spr = std::dynamic_pointer_cast<ee::Sprite>(children[i]);
 
 		bool inserted = false;
 		if (!spr->GetTag().empty()) 
@@ -102,8 +101,7 @@ void LoadFromJson::CreateActionsFromTag(Symbol* sym)
 					continue;
 				}
 
-				std::map<std::string, std::vector<s2::Sprite*> >::iterator itr 
-					= map_actions.find(tag);
+				auto itr = map_actions.find(tag);
 				assert(itr != map_actions.end());
 				itr->second.push_back(spr);
 				inserted = true;
@@ -111,31 +109,29 @@ void LoadFromJson::CreateActionsFromTag(Symbol* sym)
 		}
 
 		if (!inserted) {
-			std::map<std::string, std::vector<s2::Sprite*> >::iterator itr 
-				= map_actions.begin();
+			auto itr = map_actions.begin();
 			for ( ; itr != map_actions.end(); ++itr) {
 				itr->second.push_back(spr);
 			}
 		}
 	}
 
-	std::vector<s2::ComplexSymbol::Action> actions;
+	CU_VEC<s2::ComplexSymbol::Action> actions;
 	actions.reserve(map_actions.size());
-	std::map<std::string, std::vector<s2::Sprite*> >::iterator itr 
-		= map_actions.begin();
+	auto itr = map_actions.begin();
 	for ( ; itr != map_actions.end(); ++itr) 
 	{
 		s2::ComplexSymbol::Action action;
-		action.name = itr->first;
+		action.name = itr->first.c_str();
 		action.sprs = itr->second;
 		actions.push_back(action);
 	}
-	sym->SetActions(actions);
+	sym.SetActions(actions);
 }
 
-ee::Sprite* LoadFromJson::LoadSprite(const Json::Value& val, const std::string& dir)
+ee::SprPtr LoadFromJson::LoadSprite(const Json::Value& val, const std::string& dir)
 {
-	ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(val, dir);
+	auto spr = ee::SpriteFactory::Instance()->Create(val, dir);
 #ifdef OPEN_SCREEN_CACHE
 	ee::SpatialPartition::Instance()->Insert(spr);
 	ee::SpriteRenderer::InvalidRect(spr);
@@ -143,7 +139,7 @@ ee::Sprite* LoadFromJson::LoadSprite(const Json::Value& val, const std::string& 
 	return spr;
 }
 
-void LoadFromJson::InitActions(Symbol* sym, const Json::Value& val)
+void LoadFromJson::InitActions(Symbol& sym, const Json::Value& val)
 {
 // 	if (val.isMember("action")) {
 // 		gum::ComplexSymLoader::LoadJsonAction(val, sym);	

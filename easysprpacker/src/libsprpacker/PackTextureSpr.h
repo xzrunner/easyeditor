@@ -3,6 +3,8 @@
 
 #include "PackNode.h"
 
+#include <memory>
+
 namespace etexture { class Sprite; }
 
 namespace esprpacker
@@ -11,7 +13,7 @@ namespace esprpacker
 class PackTextureSpr : public PackNode
 {
 public:
-	PackTextureSpr(const etexture::Sprite* spr);
+	PackTextureSpr(const std::shared_ptr<etexture::Sprite>& spr);
 	virtual ~PackTextureSpr();
 
 	/**
@@ -29,7 +31,7 @@ public:
 	virtual int SizeOfPackToBin() const;
 	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const;	
 
-	bool Equal(const etexture::Sprite* spr) const { return true; }
+	bool Equal(const std::shared_ptr<etexture::Sprite>& spr) const { return true; }
 
 private:
 	const PackNode* m_sym;

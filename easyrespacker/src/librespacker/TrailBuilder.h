@@ -22,15 +22,15 @@ public:
 
 	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
 
-	const IPackNode* Create(const etrail::Symbol* sym);
+	const IPackNode* Create(const std::shared_ptr<const etrail::Symbol>& sym);
 
 private:
-	void Load(const etrail::Symbol* sym, PackTrail* trail);
+	void Load(const std::shared_ptr<const etrail::Symbol>& sym, PackTrail* trail);
 
 private:
 	ExportNameSet& m_export_set;
 
-	std::map<const etrail::Symbol*, const PackTrail*> m_map_data;
+	std::map<std::shared_ptr<const etrail::Symbol>, const PackTrail*> m_map_data;
 
 }; // TrailBuilder
 

@@ -25,8 +25,8 @@ public:
 	virtual void OnPageChanged(wxBookCtrlEvent& event);
 	virtual void OnPageChanging(wxBookCtrlEvent& event);
 
-	void LoadFromFile(const Json::Value& value, const std::string& dir);
-	void StoreToFile(Json::Value& value, const std::string& dir) const;
+	void LoadFromFile(const Json::Value& value, const CU_STR& dir);
+	void StoreToFile(Json::Value& value, const CU_STR& dir) const;
 
 	void InitFromLayers(const std::vector<Layer*>& layers);
 	void LoadSymbolFromLayer();

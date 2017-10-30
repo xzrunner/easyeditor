@@ -18,8 +18,8 @@ public:
 	virtual bool OnMouseLeftDClick(int x, int y);
 
 protected:
-	virtual void PasteSprToClipboard(const ee::Sprite* spr, Json::Value& value) const;
-	virtual void CopySprFromClipboard(ee::Sprite* spr, const Json::Value& value) const;
+	virtual void PasteSprToClipboard(const ee::SprConstPtr& spr, Json::Value& value) const;
+	virtual void CopySprFromClipboard(const ee::SprPtr& spr, const Json::Value& value) const;
 
 private:
 	OpenSymbolDialog m_open_symbol;

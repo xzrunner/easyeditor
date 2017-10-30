@@ -84,10 +84,10 @@ void PropertySettingPanel::EnablePropertyGrid(bool enable)
 	}
 }
 
-void PropertySettingPanel::OnSpriteSelected(Sprite* spr, bool clear)
+void PropertySettingPanel::OnSpriteSelected(const SprPtr& spr, bool clear)
 {
 	if (spr) {
-		std::set<Sprite*>::iterator itr = m_selection.find(spr);
+		auto itr = m_selection.find(spr);
 		if (itr != m_selection.end()) {
 			if (!clear) {
 				return;
@@ -99,7 +99,6 @@ void PropertySettingPanel::OnSpriteSelected(Sprite* spr, bool clear)
 		ClearSelection();
 	}
 	if (spr) {
-		spr->AddReference();
 		m_selection.insert(spr);
 	}
 
@@ -113,7 +112,7 @@ void PropertySettingPanel::OnSpriteSelected(Sprite* spr, bool clear)
 			SetPropertySetting(CreateDefaultProperty());
 		}
 	} else if (m_selection.size() > 1) {
-		std::vector<Sprite*> sprs;
+		std::vector<SprPtr> sprs;
 		std::copy(m_selection.begin(), m_selection.end(), back_inserter(sprs));
 		SetPropertySetting(new MultiSpritesPropertySetting(sprs));
 	}
@@ -121,8 +120,8 @@ void PropertySettingPanel::OnSpriteSelected(Sprite* spr, bool clear)
 
 void PropertySettingPanel::OnMultiSpriteSelected(SpriteSelection* selection)
 {
-	std::vector<Sprite*> sprs;
-	selection->Traverse(FetchAllVisitor<Sprite>(sprs));
+	std::vector<SprPtr> sprs;
+	selection->Traverse(FetchAllRefVisitor<Sprite>(sprs));
 	if (sprs.empty()) {
 		OnSpriteSelected(NULL, true);
 	} else if (sprs.size() == 1) {
@@ -151,7 +150,7 @@ void PropertySettingPanel::OnNotify(int sj_id, void* ud)
 		break;
 
 	case MSG_SELECT_SHAPE:
-		SelectShape((Shape*)ud);
+		SelectShape(*(ShapePtr*)ud);
 		break;
 	case MSG_SELECT_SHAPE_SET:
 		SelectShapeSet((ShapeSelection*)ud);
@@ -191,7 +190,7 @@ void PropertySettingPanel::InitLayout()
 	SetSizer(sizer);
 }
 
-void PropertySettingPanel::SelectShape(Shape* shape)
+void PropertySettingPanel::SelectShape(const ShapePtr& shape)
 {
 	assert(m_stage);
 	if (shape) {
@@ -203,8 +202,8 @@ void PropertySettingPanel::SelectShape(Shape* shape)
 
 void PropertySettingPanel::SelectShapeSet(ShapeSelection* selection)
 {
-	std::vector<Shape*> shapes;
-	selection->Traverse(FetchAllVisitor<Shape>(shapes));
+	std::vector<ShapePtr> shapes;
+	selection->Traverse(FetchAllRefVisitor<Shape>(shapes));
 	if (shapes.empty()) {
 		SelectShape(NULL);
 	} else if (shapes.size() == 1) {
@@ -216,7 +215,6 @@ void PropertySettingPanel::SelectShapeSet(ShapeSelection* selection)
 
 void PropertySettingPanel::ClearSelection()
 {
-	for_each(m_selection.begin(), m_selection.end(), cu::RemoveRefFunctor<Sprite>());
 	m_selection.clear();
 }
 

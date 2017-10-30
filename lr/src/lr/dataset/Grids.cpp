@@ -3,7 +3,7 @@
 #include <ee/color_config.h>
 #include <ee/Math2D.h>
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <SM_Calc.h>
 
 namespace lr

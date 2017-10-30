@@ -14,7 +14,7 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	m_list->SetFileter(FILE_TAG);
 }
 
-bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
+bool LibraryPage::IsHandleSymbol(const ee::SymPtr& sym) const
 {
 	return dynamic_cast<Symbol*>(sym) != NULL;
 }
@@ -53,7 +53,7 @@ void LibraryPage::LoadDefaultSymbol()
 // 		dlg.GetPaths(filenames);
 // 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 // 		{
-//  			ee::Symbol* sym = ee::SymbolMgr::Instance()->fetchSymbol(filenames[i]);
+//  			auto sym = ee::SymbolMgr::Instance()->fetchSymbol(filenames[i]);
 //  			m_list->insert(sym);
 //  			sym->RemoveReference();
 // 		}

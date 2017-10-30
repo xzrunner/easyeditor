@@ -4,6 +4,7 @@
 #include <ee/ZoomViewOP.h>
 
 #include <SM_Vector.h>
+#include <cu/cu_stl.h>
 
 #include <vector>
 
@@ -31,7 +32,7 @@ private:
 	bool ShouldFixPos() const;
 
 protected:
-	mutable std::vector<sm::vec2> m_polyline;
+	mutable CU_VEC<sm::vec2> m_polyline;
 	sm::vec2 m_curr_pos;
 
 private:

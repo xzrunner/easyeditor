@@ -267,6 +267,12 @@
     <ClInclude Include="..\..\..\include\ee\LayerMgr.h">
       <Filter>scene</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\ObjectRefVector.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SpritePool.h">
+      <Filter>sprite</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\data\primitive\convert_color.cpp">
@@ -416,6 +422,9 @@
     <ClCompile Include="..\..\..\source\data\scene\LayerMgr.cpp">
       <Filter>scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\data\sprite\SpritePool.cpp">
+      <Filter>sprite</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\include\ee\ObjSelectionSet.inl">
@@ -428,6 +437,9 @@
       <Filter>common</Filter>
     </None>
     <None Include="..\..\..\include\ee\ResourcesMgr.inl">
+      <Filter>common</Filter>
+    </None>
+    <None Include="..\..\..\include\ee\ObjectRefVector.inl">
       <Filter>common</Filter>
     </None>
   </ItemGroup>

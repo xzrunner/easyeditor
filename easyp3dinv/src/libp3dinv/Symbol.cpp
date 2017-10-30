@@ -20,7 +20,7 @@ Symbol::~Symbol()
 	}
 }
 
-s2::RenderReturn Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
+s2::RenderReturn Symbol::DrawTree(cooking::DisplayList* dlist, const s2::RenderParams& rp, const s2::Sprite* spr) const
 {
 	s2::RenderParams p = params;
 	if (spr) {
@@ -41,7 +41,7 @@ sm::rect Symbol::GetBoundingImpl(const s2::Sprite* spr, const s2::Actor* actor, 
 
 bool Symbol::LoadResources()
 {
-	if (!gum::FilepathHelper::Exists(m_filepath)) {
+	if (!gum::FilepathHelper::Exists(m_filepath.c_str())) {
 		return false;
 	}
 

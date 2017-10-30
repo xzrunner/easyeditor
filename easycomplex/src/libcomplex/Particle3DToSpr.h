@@ -11,10 +11,10 @@ namespace ecomplex
 class Particle3DToSpr
 {
 public:
-	static ee::Sprite* Trans(const erespacker::PackParticle3D* p3d);
+	static ee::SprPtr Trans(const erespacker::PackParticle3D* p3d);
 
 private:
-	static s2::P3dEmitterCfg* LoadConfig(const erespacker::PackParticle3D* p3d);
+	static std::shared_ptr<s2::P3dEmitterCfg> LoadConfig(const erespacker::PackParticle3D* p3d);
 
 }; // Particle3DToSpr
 

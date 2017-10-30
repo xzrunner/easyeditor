@@ -30,7 +30,6 @@ EditDialog::EditDialog(wxWindow* parent, wxGLContext* glctx,
 	assert(edited);
 
 	Symbol* sym = dynamic_cast<Symbol*>(edited->GetSymbol());
-	sym->AddReference();
 	m_sym = sym;
 	m_sym->ReloadTexture();
 	SetTitle(sym->GetFilepath());
@@ -47,7 +46,7 @@ EditDialog::~EditDialog()
 	}
 }
 
-void EditDialog::InitLayout(wxGLContext* glctx, ee::Sprite* edited, 
+void EditDialog::InitLayout(wxGLContext* glctx, const ee::SprPtr& edited, 
 							const ee::MultiSpritesImpl* sprite_impl)
 {
 	wxSplitterWindow* split = new wxSplitterWindow(this);
@@ -77,7 +76,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 		const std::string& filepath = m_sym->GetFilepath();
 //			FileSaver::Store(filepath, m_sym);
 		m_sym->RefreshThumbnail(filepath);
-		ee::SpriteFactory::Instance()->UpdateBoundings(*m_sym);
+		ee::SpritePool::Instance()->UpdateBoundings(*m_sym);
 		Destroy();
 	}
 	else if (val == wxID_NO)
@@ -87,7 +86,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 	}
 }
 
-void EditDialog::InitCamera(ee::Sprite* spr) const
+void EditDialog::InitCamera(const ee::SprPtr& spr) const
 {
 	ee::CameraCanvas* canvas = static_cast<ee::CameraCanvas*>(m_stage->GetCanvas());
 	s2::Camera* cam = canvas->GetCamera();

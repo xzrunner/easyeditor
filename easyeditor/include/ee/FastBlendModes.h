@@ -1,7 +1,7 @@
 #ifndef _EASYEDITOR_FAST_BLEND_MODES_H_
 #define _EASYEDITOR_FAST_BLEND_MODES_H_
 
-#include <CU_Singleton.h>
+#include <cu/cu_macro.h>
 
 #include <sprite2/FastBlendMode.h>
 
@@ -31,7 +31,7 @@ private:
 private:
 	std::vector<Item> m_modes;
 
-	SINGLETON_DECLARATION(FastBlendModes);
+	CU_SINGLETON_DECLARATION(FastBlendModes);
 
 }; // FastBlendModes
 

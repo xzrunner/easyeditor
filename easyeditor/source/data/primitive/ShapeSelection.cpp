@@ -6,19 +6,19 @@ namespace ee
 
 void ShapeSelection::Clear()
 {
-	ObjSelectionSet<Shape>::Clear();
+	SelectionSet<Shape>::Clear();
 	SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void ShapeSelection::Add(Shape* item)
+void ShapeSelection::Add(const ShapePtr& item)
 {
-	ObjSelectionSet<Shape>::Add(item);
+	SelectionSet<Shape>::Add(item);
 	SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void ShapeSelection::Remove(Shape* item)
+void ShapeSelection::Remove(const ShapePtr& item)
 {
-	ObjSelectionSet<Shape>::Remove(item);
+	SelectionSet<Shape>::Remove(item);
 	SetCanvasDirtySJ::Instance()->SetDirty();
 }
 

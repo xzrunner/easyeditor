@@ -24,7 +24,7 @@ float NodeFromLua::TransFloatX100(int f)
 	return f * 0.01f;
 }
 
-void NodeFromLua::UnpackVertices(std::vector<sm::vec2>& vertices, lua_State* L, 
+void NodeFromLua::UnpackVertices(CU_VEC<sm::vec2>& vertices, lua_State* L, 
 								 const std::string& name, bool reverse_y, int scale)
 {
 	int num = LuaDataHelper::GetIntField(L, (name + "_num").c_str());

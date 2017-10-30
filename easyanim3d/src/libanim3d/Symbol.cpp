@@ -17,7 +17,7 @@ Symbol::Symbol()
 
 bool Symbol::LoadResources()
 {
-	if (!gum::FilepathHelper::Exists(m_filepath)) {
+	if (!gum::FilepathHelper::Exists(m_filepath.c_str())) {
 		return false;
 	}
 

@@ -8,7 +8,7 @@
 #include <ee/std_functor.h>
 #include <ee/panel_msg.h>
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <SM_Calc.h>
 #include <SM_Test.h>
 
@@ -132,8 +132,7 @@ bool SelectNodesOP::OnMouseLeftUp(int x, int y)
 	if (m_first_pos.IsValid())
 	{
 		sm::rect rect(m_first_pos, m_stage->TransPosScrToProj(x, y));
-		m_shape_impl->TraverseShapes(RectQueryVisitor(rect, m_node_selection), 
-			ee::DT_SELECTABLE);
+		m_shape_impl->TraverseShapes(RectQueryVisitor(rect, m_node_selection), ee::DT_SELECTABLE);
 		m_first_pos.MakeInvalid();
 	}
 
@@ -146,7 +145,7 @@ bool SelectNodesOP::OnDraw() const
 
 	if (m_node_selection.empty()) return false;
 
-	std::vector<sm::vec2> nodes;
+	CU_VEC<sm::vec2> nodes;
 	int count = 0;
 	for (size_t i = 0, n = m_node_selection.size(); i < n; ++i)
 		count += m_node_selection[i]->selectedNodes.size();
@@ -154,7 +153,7 @@ bool SelectNodesOP::OnDraw() const
 
 	for (size_t i = 0, n = m_node_selection.size(); i < n; ++i)
 	{
-		const std::vector<sm::vec2>& selectedNodes = m_node_selection[i]->selectedNodes;
+		auto& selectedNodes = m_node_selection[i]->selectedNodes;
 		copy(selectedNodes.begin(), selectedNodes.end(), back_inserter(nodes));
 	}
 
@@ -174,19 +173,16 @@ bool SelectNodesOP::Clear()
 	return false;
 }
 
-void SelectNodesOP::FetchSelectedNode(std::vector<sm::vec2>& nodes) const
+void SelectNodesOP::FetchSelectedNode(CU_VEC<sm::vec2>& nodes) const
 {
 	if (m_node_selection.empty()) return;
 
-	std::vector<ChainShape*> src;
+	CU_VEC<std::shared_ptr<ChainShape>> src;
 	src.reserve(m_node_selection.size());
 	for (size_t i = 0, n = m_node_selection.size(); i < n; ++i)
-		src.push_back(new ChainShape(m_node_selection[i]->selectedNodes, false));
+		src.push_back(std::make_unique<ChainShape>(m_node_selection[i]->selectedNodes, false));
 
 	Math::mergeMultiChains(src, nodes);
-
-	for (size_t i = 0, n = src.size(); i < n; ++i)
-		src[i]->RemoveReference();
 }
 
 int SelectNodesOP::GetThreshold()
@@ -254,9 +250,9 @@ PosQueryVisitor(const sm::vec2& pos, ChainSelectedNodes** result)
 }
 
 void SelectNodesOP::PosQueryVisitor::
-Visit(ee::Shape* shape, bool& next)
+Visit(const ee::ShapePtr& shape, bool& next)
 {
-	EditedPolyShape* polyline = dynamic_cast<EditedPolyShape*>(shape);
+	auto polyline = std::dynamic_pointer_cast<EditedPolyShape>(shape);
 	if (!polyline) {
 		next = true;
 		return;
@@ -264,7 +260,7 @@ Visit(ee::Shape* shape, bool& next)
 
 	if (sm::is_rect_intersect_rect(polyline->GetBounding(), m_rect))
 	{
-		const std::vector<sm::vec2>& vertices = polyline->GetVertices();
+		auto& vertices = polyline->GetVertices();
 		for (size_t i = 0, n = vertices.size(); i < n; ++i)
 		{
 			if (sm::dis_pos_to_pos(m_pos, vertices[i]) < SelectNodesOP::GetThreshold())
@@ -288,16 +284,16 @@ Visit(ee::Shape* shape, bool& next)
 //////////////////////////////////////////////////////////////////////////
 
 SelectNodesOP::RectQueryVisitor::
-RectQueryVisitor(const sm::rect& rect, std::vector<ChainSelectedNodes*>& result)
+RectQueryVisitor(const sm::rect& rect, CU_VEC<ChainSelectedNodes*>& result)
 	: m_rect(rect)
 	, m_result(result)
 {
 }
 
 void SelectNodesOP::RectQueryVisitor::
-Visit(ee::Shape* shape, bool& next)
+Visit(const ee::ShapePtr& shape, bool& next)
 {
-	EditedPolyShape* polyline = dynamic_cast<EditedPolyShape*>(shape);
+	auto polyline = std::dynamic_pointer_cast<EditedPolyShape>(shape);
 	if (!polyline) {
 		next = true;
 		return;
@@ -308,7 +304,7 @@ Visit(ee::Shape* shape, bool& next)
 		ChainSelectedNodes* result = new ChainSelectedNodes;
 		result->polyline = polyline;
 
-		const std::vector<sm::vec2>& vertices = polyline->GetVertices();
+		auto& vertices = polyline->GetVertices();
 		for (size_t i = 0, n = vertices.size(); i < n; ++i)
 		{
 			if (sm::is_point_in_rect(vertices[i], m_rect))

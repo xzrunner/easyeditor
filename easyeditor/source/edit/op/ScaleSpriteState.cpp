@@ -13,19 +13,12 @@
 namespace ee
 {
 
-ScaleSpriteState::ScaleSpriteState(Sprite* spr, const SpriteCtrlNode::Node& ctrl_node)
-	: m_ctrl_node(ctrl_node)
+ScaleSpriteState::ScaleSpriteState(const SprPtr& spr, const SpriteCtrlNode::Node& ctrl_node)
+	: m_spr(spr)
+	, m_ctrl_node(ctrl_node)
 {
-	m_spr = spr;
-	m_spr->AddReference();
-
 	m_first_pos = m_spr->GetPosition();
 	m_first_scale = m_spr->GetScale();
-}
-
-ScaleSpriteState::~ScaleSpriteState()
-{
-	m_spr->RemoveReference();
 }
 
 void ScaleSpriteState::OnMouseRelease(const sm::vec2& pos)
@@ -37,7 +30,7 @@ void ScaleSpriteState::OnMouseRelease(const sm::vec2& pos)
 
 	EditAddRecordSJ::Instance()->Add(comb);
 
-	EditSprMsg::SetScale(m_spr, m_spr->GetPosition(), m_spr->GetScale());
+	EditSprMsg::SetScale(m_spr.get(), m_spr->GetPosition(), m_spr->GetScale());
 }
 
 bool ScaleSpriteState::OnMouseDrag(const sm::vec2& pos)
@@ -48,8 +41,12 @@ bool ScaleSpriteState::OnMouseDrag(const sm::vec2& pos)
 
 void ScaleSpriteState::Scale(const sm::vec2& curr)
 {
+	if (!m_spr) {
+		return;
+	}
+
 	sm::vec2 ctrls[8];
-	SpriteCtrlNode::GetSpriteCtrlNodes(m_spr, ctrls);
+	SpriteCtrlNode::GetSpriteCtrlNodes(*m_spr, ctrls);
 	
 	sm::vec2 ori = ctrls[m_ctrl_node.type];
 	sm::vec2 center = m_spr->GetPosition() + m_spr->GetOffset();

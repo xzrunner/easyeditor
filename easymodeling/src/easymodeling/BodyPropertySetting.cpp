@@ -8,7 +8,7 @@
 namespace emodeling
 {
 
-BodyPropertySetting::BodyPropertySetting(ee::EditPanelImpl* stage, ee::Sprite* spr)
+BodyPropertySetting::BodyPropertySetting(ee::EditPanelImpl* stage, const ee::SprPtr& spr)
 	: ee::PropertySetting("Body")
 	, m_stage(stage)
 {

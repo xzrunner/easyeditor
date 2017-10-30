@@ -1,6 +1,8 @@
 #ifndef _EASYEDITOR_GROUP_TREE_PANEL_H_
 #define _EASYEDITOR_GROUP_TREE_PANEL_H_
 
+#include "Sprite.h"
+
 #include <wx/panel.h>
 #include <json/json.h>
 
@@ -9,7 +11,6 @@ namespace ee
 
 class GroupTreeCtrl;
 class MultiSpritesImpl;
-class Sprite;
 class KeysState;
 
 class GroupTreePanel : public wxPanel
@@ -22,12 +23,12 @@ public:
 	void StoreToFile(Json::Value& value) const;
 	void LoadFromFile(const Json::Value& value);
 
-	void InitGroups(const std::map<std::string, std::vector<Sprite*> >& groups);
+	void InitGroups(const std::map<std::string, std::vector<SprPtr>>& groups);
 
 	void EnableExpand(bool enable);
 
 	void Clear();
-	void Insert(Sprite* spr);
+	void Insert(const SprPtr& spr);
 
 private:
 	void InitLayout();

@@ -125,8 +125,8 @@ void MeshToolbarPage::OnSaveImage(wxCommandEvent& event)
 
 		while (!item_val.isNull()) {
 			std::string filepath = item_val["filepath"].asString();
-			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-			ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+			auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+			auto spr = ee::SpriteFactory::Instance()->Create(sym);
 
 			sm::vec2 pos;
 			pos.x = item_val["pos"]["x"].asDouble() - width * 0.5f;
@@ -135,9 +135,6 @@ void MeshToolbarPage::OnSaveImage(wxCommandEvent& event)
 			float angle = item_val["angle"].asDouble();
 			spr->SetAngle(angle);
 			rt.Draw(spr);
-
-			spr->RemoveReference();
-			sym->RemoveReference();
 
 			item_val = value[i++];
 		}

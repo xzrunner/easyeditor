@@ -16,7 +16,7 @@ namespace esprpacker
 class PackParticle3d : public PackNode
 {
 public:
-	PackParticle3d(const eparticle3d::Symbol* sym);
+	PackParticle3d(const std::shared_ptr<eparticle3d::Symbol>& sym);
 
 	/**
 	 *  @interface
@@ -34,7 +34,7 @@ public:
 	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const;	
 	
 private:
-	void Init(const eparticle3d::Symbol* sym);	
+	void Init(const std::shared_ptr<eparticle3d::Symbol>& sym);	
 
 	void PackToLuaPS(ebuilder::CodeGenerator& gen) const;
 

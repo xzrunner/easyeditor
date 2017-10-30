@@ -55,13 +55,13 @@ bool Config::IsUseDTex() const
 void Config::GetStrings(const std::string& key, 
 						std::vector<std::string>& val) const
 {
-	Json::Value str_list = m_value[key];
+	Json::Value str_list = m_value[key.c_str()];
 	if (!str_list.isNull())
 	{
 		int i = 0;
 		Json::Value str = str_list[i++];
 		while (!str.isNull()) {
-			val.push_back(str.asString());
+			val.push_back(str.asString().c_str());
 			str = str_list[i++];
 		}
 	}
@@ -95,7 +95,7 @@ void Config::LoadFontCfg(const Json::Value& value)
 	while (!font_val.isNull()) {
 		std::string name = font_val["name"].asString();
 		std::string filepath = font_val["filepath"].asString();
-		m_fonts.push_back(std::make_pair(name, filepath));
+		m_fonts.push_back(std::make_pair(name.c_str(), filepath.c_str()));
 		font_val = value[idx++];
 	}
 }
@@ -107,7 +107,7 @@ void Config::LoadUserFontCfg(const Json::Value& value)
 	while (!font_val.isNull()) {
 		std::string name = font_val["name"].asString();
 		std::string filepath = font_val["filepath"].asString();
-		m_user_fonts.push_back(std::make_pair(name, filepath));
+		m_user_fonts.push_back(std::make_pair(name.c_str(), filepath.c_str()));
 		font_val = value[idx++];
 	}
 }

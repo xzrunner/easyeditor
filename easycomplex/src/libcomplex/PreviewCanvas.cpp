@@ -10,7 +10,7 @@ namespace ecomplex
 {
 
 PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
-							 const std::vector<ee::Sprite*>& sprs,
+							 const std::vector<ee::SprPtr>& sprs,
 							 wxGLContext* glctx)
 	: ee::CameraCanvas(stage_wnd, stage, s2::CAM_ORTHO2D, glctx)
 	, m_sprs(sprs)
@@ -19,10 +19,8 @@ PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage,
 
 void PreviewCanvas::OnDrawSprites() const
 {
-	for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
-	{
-		const ee::Sprite* spr = m_sprs[i];
-		ee::SpriteRenderer::Instance()->Draw(spr, s2::RenderParams());
+	for (auto& spr : m_sprs) {
+		ee::SpriteRenderer::Instance()->Draw(spr.get(), s2::RenderParams());
 	}
 
 	s2::Particle3d::Instance()->BufferDraw();

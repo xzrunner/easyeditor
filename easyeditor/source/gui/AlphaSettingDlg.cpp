@@ -2,13 +2,13 @@
 #include "ColorSlider.h"
 #include "panel_msg.h"
 
-#include <sprite2/S2_Sprite.h>
+#include <sprite2/Sprite.h>
 #include <sprite2/RenderColor.h>
 
 namespace ee
 {
 
-AlphaSettingDlg::AlphaSettingDlg(wxWindow* parent, s2::Sprite* spr, const wxPoint& pos)
+AlphaSettingDlg::AlphaSettingDlg(wxWindow* parent, const SprPtr& spr, const wxPoint& pos)
 	: wxDialog(parent, wxID_ANY, "Alpha Setting", pos, wxSize(450, 300))
 	, m_spr(spr)
 	, m_alpha(NULL)

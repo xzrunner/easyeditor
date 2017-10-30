@@ -13,7 +13,7 @@
 namespace esprpacker
 {
 
-SINGLETON_DEFINITION(LabelBuilder);
+CU_SINGLETON_DEFINITION(LabelBuilder);
 
 LabelBuilder::LabelBuilder()
 {
@@ -41,21 +41,21 @@ void LabelBuilder::Clear()
 	m_labels.clear();
 }
 
-const PackNode* LabelBuilder::Create(const etext::Sprite* spr)
+const PackNode* LabelBuilder::Create(const std::shared_ptr<const etext::Sprite>& spr)
 {
 	for (int i = 0, n = m_labels.size(); i < n; ++i) {
 		const PackLabel* label = m_labels[i];
 		if (spr->GetTextbox() == label->GetTextBox() && 
-			spr->GetText(s2::UpdateParams()) == label->GetText() &&
+			spr->GetText(s2::UpdateParams()) == label->GetText().c_str() &&
 			spr->GetTID() == label->GetTid()) {
 			label->AddReference();
 			return label;
 		}
 	}
 
-	PackLabel* node = new PackLabel(spr);
+	PackLabel* node = new PackLabel(std::const_pointer_cast<etext::Sprite>(spr));
 	node->SetFilepath(SPRITE_FILEPATH);
-	node->SetID(dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath());
+	node->SetID(std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol())->GetFilepath());
 	m_labels.push_back(node);
 	node->AddReference();
 	return node;

@@ -13,8 +13,8 @@
 //public:
 //	ComplexPolygonShape();
 //	ComplexPolygonShape(const ComplexPolygonShape& poly);
-//	ComplexPolygonShape(const std::vector<sm::vec2>& outline,
-//		const std::vector<std::vector<sm::vec2> >& holes);
+//	ComplexPolygonShape(const CU_VEC<sm::vec2>& outline,
+//		const CU_VEC<CU_VEC<sm::vec2> >& holes);
 //
 //	//
 //	// IObject interface
@@ -31,10 +31,10 @@
 //	virtual void Draw(const S2_MAT& mt,
 //		const s2::RenderColor& color = s2::RenderColor()) const;
 //
-//	const std::vector<std::vector<sm::vec2> >& GetHoles() const { return m_holes; }
+//	const CU_VEC<CU_VEC<sm::vec2> >& GetHoles() const { return m_holes; }
 //
 //private:
-//	std::vector<std::vector<sm::vec2> > m_holes;
+//	CU_VEC<CU_VEC<sm::vec2> > m_holes;
 //
 //}; // ComplexPolygonShape
 //

@@ -3,6 +3,8 @@
 
 #include <wx/wx.h>
 
+#include <memory>
+
 namespace ee
 {
 
@@ -11,13 +13,13 @@ class FontBlankSprite;
 class TextDialog : public wxDialog
 {
 public:
-	TextDialog(wxWindow* parent, FontBlankSprite* font);
+	TextDialog(wxWindow* parent, const std::shared_ptr<FontBlankSprite>& font);
 
 private:
 	void OnClose(wxCloseEvent& event);
 
 private:
-	FontBlankSprite* m_font;
+	std::shared_ptr<FontBlankSprite> m_font;
 
 	wxTextCtrl* m_text_ctrl;
 

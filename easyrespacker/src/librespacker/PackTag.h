@@ -1,14 +1,13 @@
 #ifndef _EASYRESPACKER_PACK_TAG_H_
 #define _EASYRESPACKER_PACK_TAG_H_
 
-#include <CU_Singleton.h>
+#include <cu/cu_macro.h>
+#include <ee/Sprite.h>
 
 #include <json/json.h>
 
 #include <string>
 #include <map>
-
-namespace ee { class Sprite; }
 
 namespace erespacker
 {
@@ -16,7 +15,7 @@ namespace erespacker
 class PackTag
 {
 public:
-	void AddTask(const std::string& filepath, int index, const ee::Sprite* spr);
+	void AddTask(const std::string& filepath, int index, const ee::SprConstPtr& spr);
 
 	void OnKnownPackID(const std::string& filepath, int id);
 
@@ -36,7 +35,7 @@ private:
 private:
 	std::multimap<std::string, Task*> m_task_listener;
 
-	SINGLETON_DECLARATION(PackTag);
+	CU_SINGLETON_DECLARATION(PackTag);
 
 }; // PackTag
 

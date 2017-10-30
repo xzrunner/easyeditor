@@ -26,12 +26,12 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 	if (keyCode == WXK_SPACE)
 	{
 		ee::SpriteSelection* selection = static_cast<StagePanel*>(m_wnd)->GetSpriteSelection();
-		std::vector<ee::Sprite*> sprs;
-		selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+		std::vector<ee::SprPtr> sprs;
+		selection->Traverse(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 
 		for (size_t i = 0, n = sprs.size(); i < n; ++i)
 		{
-			ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(sprs[i]);
+			ecomplex::Sprite* complex = std::dynamic_pointer_cast<ecomplex::Sprite>(sprs[i]);
 			if (!complex) continue;
 
 			ecomplex::Symbol* sym = dynamic_cast<ecomplex::Symbol*>(complex->GetSymbol());
@@ -52,8 +52,8 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 		return ret;
 	}
 
-	std::vector<ee::Sprite*> selection;
-	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(selection));
+	std::vector<ee::SprPtr> selection;
+	m_selection->Traverse(ee::FetchAllRefVisitor<ee::Sprite>(selection));
 	Symbol::OnSprPressed(dynamic_cast<Sprite*>(selection[0]), pos);
 
 	return ret;
@@ -64,14 +64,14 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	if (ee::SelectSpritesOP::OnMouseLeftDClick(x, y)) return true;
 
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-	ee::Sprite* selected = m_sprs_impl->QuerySpriteByPos(pos);
-	if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(selected))
+	auto selected = m_sprs_impl->QuerySpriteByPos(pos);
+	if (ecomplex::Sprite* complex = std::dynamic_pointer_cast<ecomplex::Sprite>(selected))
 	{
 		ecomplex::Symbol* sym = dynamic_cast<ecomplex::Symbol*>(complex->GetSymbol());
 		ecomplex::EditDialog dlg(m_stage->GetEditPanel(), sym, NULL);
 		dlg.ShowModal();
 	}
-	//else if (libanim::Sprite* anim = dynamic_cast<libanim::Sprite*>(selected))
+	//else if (libanim::Sprite* anim = std::dynamic_pointer_cast<libanim::Sprite>(selected))
 	//{
 	//		libanim::PreviewDialog dlg(Context::Instance()->stage, Context::Instance()->library, &anim->getSymbol());
 	//		dlg.ShowModal();
@@ -87,7 +87,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	////   		m_stage->traverseSprites(ee::FetchAllVisitor<ee::Scale9Sprite>(sprs));
 	////   		for (size_t i = 0, n = sprs.size(); i < n; ++i)
 	////   		{
-	////   			ee::Sprite* spr = sprs[i];
+	////   			auto& spr = sprs[i];
 	////   			if (&spr->getSymbol() == &sym)
 	////   				spr->buildBounding();
 	////   		}

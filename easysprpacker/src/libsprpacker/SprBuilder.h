@@ -18,10 +18,10 @@ public:
 
 	virtual void Clear();
 
-	const PackNode* Create(const TSprite* spr);
+	const PackNode* Create(const std::shared_ptr<TSprite>& spr);
 
 private:
-	std::multimap<const TSymbol*, const TPack*> m_map_data;
+	std::multimap<const std::shared_ptr<const TSymbol>, const TPack*> m_map_data;
 
 }; // SprBuilder
 

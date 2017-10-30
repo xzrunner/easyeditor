@@ -20,9 +20,9 @@ Symbol::Symbol()
 {	
 }
 
-void Symbol::Traverse(ee::Visitor<ee::Sprite>& visitor)
+void Symbol::Traverse(ee::RefVisitor<ee::Sprite>& visitor)
 {
-	const s2::P3dEmitterCfg* cfg = GetEmitterCfg();
+	auto cfg = GetEmitterCfg();
 	if (!cfg) {
 		return;
 	}
@@ -30,7 +30,7 @@ void Symbol::Traverse(ee::Visitor<ee::Sprite>& visitor)
 	for (int i = 0; i < impl->sym_count; ++i)
 	{
 		const p3d_symbol& p_symbol = impl->syms[i];
-		ee::Symbol* sym = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(p_symbol.ud));
+		auto sym = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(p_symbol.ud));
 		sym->Traverse(visitor);
 	}
 }
@@ -42,11 +42,11 @@ sm::rect Symbol::GetBoundingImpl(const s2::Sprite* spr, const s2::Actor* actor, 
 
 bool Symbol::LoadResources()
 {
-	if (!gum::FilepathHelper::Exists(m_filepath)) {
+	if (!gum::FilepathHelper::Exists(m_filepath.c_str())) {
 		return false;
 	}
 
-	const s2::P3dEmitterCfg* cfg = PSConfigMgr::Instance()->GetConfig(m_filepath);
+	const std::shared_ptr<s2::P3dEmitterCfg>& cfg = PSConfigMgr::Instance()->GetConfig(m_filepath);
 	SetEmitterCfg(cfg);
 
 	Json::Value value;

@@ -22,15 +22,15 @@ public:
 
 	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
 
-	const IPackNode* Create(const eparticle2d::Symbol* sym);
+	const IPackNode* Create(const std::shared_ptr<const eparticle2d::Symbol>& sym);
 
 private:
-	void Load(const eparticle2d::Symbol* sym, PackParticle2D* ps);
+	void Load(const std::shared_ptr<const eparticle2d::Symbol>& sym, PackParticle2D* ps);
 
 private:
 	ExportNameSet& m_export_set;
 
-	std::map<const eparticle2d::Symbol*, const PackParticle2D*> m_map_data;
+	std::map<std::shared_ptr<const eparticle2d::Symbol>, const PackParticle2D*> m_map_data;
 
 }; // Particle2DBuilder
 

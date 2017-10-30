@@ -12,7 +12,7 @@ namespace lua = ebuilder::lua;
 namespace esprpacker
 {
 
-PackAnim2Spr::PackAnim2Spr(const libanim2::Sprite* spr)
+PackAnim2Spr::PackAnim2Spr(const std::shared_ptr<libanim2::Sprite>& spr)
 {
 	Init(spr);
 }
@@ -72,15 +72,15 @@ void PackAnim2Spr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 	pack(static_time, ptr);
 }
 
-bool PackAnim2Spr::Equal(const libanim2::Sprite* spr) const
+bool PackAnim2Spr::Equal(const std::shared_ptr<libanim2::Sprite>& spr) const
 {
 	return m_static_time == spr->GetStaticTime();
 }
 
-void PackAnim2Spr::Init(const libanim2::Sprite* spr)
+void PackAnim2Spr::Init(const std::shared_ptr<libanim2::Sprite>& spr)
 {
 	m_sym = PackNodeFactory::Instance()->Create(
-		dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
+		std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol()));
 
 	m_static_time = spr->GetStaticTime();
 }

@@ -13,13 +13,12 @@ class ShapesPanelImpl : public MultiShapesImpl
 {
 public:
 	ShapesPanelImpl();
-	ShapesPanelImpl(DataContainer<Shape>* container);
-	virtual ~ShapesPanelImpl();
+	ShapesPanelImpl(const std::shared_ptr<DataContainer<Shape>>& container);
 
 	//
 	// MultiShapesImpl interface
 	//
-	virtual void TraverseShapes(Visitor<ee::Shape>& visitor, 
+	virtual void TraverseShapes(RefVisitor<ee::Shape>& visitor, 
 		DataTraverseType type = DT_ALL) const;
 
 protected:
@@ -32,7 +31,7 @@ private:
 	void InitSubjects();
 
 private:
-	DataContainer<Shape>* m_container;
+	std::shared_ptr<DataContainer<Shape>> m_container;
 
 }; // ShapesPanelImpl
 

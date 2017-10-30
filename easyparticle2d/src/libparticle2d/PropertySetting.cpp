@@ -8,7 +8,7 @@
 namespace eparticle2d
 {
 
-PropertySetting::PropertySetting(ee::EditPanelImpl* edit_impl, Sprite* spr)
+PropertySetting::PropertySetting(ee::EditPanelImpl* edit_impl, const std::shared_ptr<Sprite>& spr)
 	: ee::SpritePropertySetting(edit_impl, spr)
 	, m_parent(edit_impl->GetEditPanel())
 {
@@ -23,7 +23,7 @@ void PropertySetting::OnPropertyGridChange(const std::string& name, const wxAny&
 {
 	ee::SpritePropertySetting::OnPropertyGridChange(name, value);
 
-	Sprite* spr = static_cast<Sprite*>(GetSprite());
+	auto spr = std::dynamic_pointer_cast<Sprite>(GetSprite());
 	if (name == "Loop") {
 		spr->SetLoop(wxANY_AS(value, bool));
 	} else if (name == "Local") {
@@ -37,7 +37,7 @@ void PropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
 	ee::SpritePropertySetting::UpdateProperties(pg);
 
-	Sprite* spr = static_cast<Sprite*>(GetSprite());
+	auto spr = std::dynamic_pointer_cast<Sprite>(GetSprite());
 
 	pg->GetProperty("Loop")->SetValue(spr->IsLoop());
 	pg->GetProperty("Local")->SetValue(spr->IsLocal());
@@ -49,7 +49,7 @@ void PropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	pg->Append(new wxPropertyCategory("P2D", wxPG_LABEL));
 
-	Sprite* spr = static_cast<Sprite*>(GetSprite());
+	auto spr = std::dynamic_pointer_cast<Sprite>(GetSprite());
 
 	pg->Append(new wxBoolProperty("Loop", wxPG_LABEL, spr->IsLoop()));
 	pg->SetPropertyAttribute("Loop", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);

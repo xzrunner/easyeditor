@@ -18,15 +18,15 @@ class UIList
 public:
 	UIList();
 
-	bool InsertSprite(ee::Sprite* spr, int idx = -1);
+	bool InsertSprite(const ee::SprPtr& spr, int idx = -1);
 	bool ClearAllSprite();
-	void TraverseSprites(ee::Visitor<ee::Sprite>& visitor) const;
+	void TraverseSprites(ee::RefVisitor<ee::Sprite>& visitor) const;
 
 	void StoreToFile(const char* filename) const;
 	void LoadFromFile(const char* filename);
 
 	bool ReFilling();
-	bool Arrange(const ee::Sprite* spr);
+	bool Arrange(const ee::SprConstPtr& spr);
 
 	sm::rect& GetClipbox() { return m_clipbox; }
 
@@ -48,9 +48,9 @@ private:
 private:
 	sm::rect m_clipbox;
 
-	std::vector<ee::Sprite*> m_items;
+	std::vector<ee::SprPtr> m_items;
 //	ee::Sprite *m_base_spr, *m_hori_spr, *m_vert_spr;
-	ee::Sprite* m_item_spr;
+	ee::SprPtr m_item_spr;
 
 	bool m_horizontal;
 	bool m_vertical;

@@ -13,7 +13,7 @@ class Body;
 class BodyPropertySetting : public ee::PropertySetting
 {
 public:
-	BodyPropertySetting(ee::EditPanelImpl* stage, ee::Sprite* spr);
+	BodyPropertySetting(ee::EditPanelImpl* stage, const ee::SprPtr& spr);
 
 	virtual void OnPropertyGridChange(const std::string& name, const wxAny& value);
 

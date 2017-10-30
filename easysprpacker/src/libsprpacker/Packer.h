@@ -2,8 +2,7 @@
 #define _EASYSPRPACKER_PACKER_H_
 
 #include <ee/TexturePacker.h>
-
-namespace ee { class Symbol; }
+#include <ee/Symbol.h>
 
 namespace esprpacker
 {
@@ -15,7 +14,6 @@ public:
 		const std::string& tp_dir);
 	Packer(const std::string& json_dir, const std::string& tp_name, 
 		const std::string& tp_dir, const Json::Value& json_data);
-	~Packer();
 
 	void OutputLua(const std::string& outfile) const;
 
@@ -40,7 +38,7 @@ private:
 	void OutputEptDesc(const std::string& outfile, int LOD) const;
 
 private:
-	std::vector<const ee::Symbol*> m_syms;
+	std::vector<ee::SymPtr> m_syms;
 
 	ee::TexturePacker m_tp;
 

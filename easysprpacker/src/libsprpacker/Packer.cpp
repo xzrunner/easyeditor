@@ -21,7 +21,7 @@
 #include <easyrespacker.h>
 #include <easyui.h>
 
-#include <CU_RefCountObj.h>
+#include <cu/CU_RefCountObj.h>
 #include <gimg_typedef.h>
 #include <sprite2/SymType.h>
 #include <gum/FilepathHelper.h>
@@ -77,17 +77,6 @@ Packer::Packer(const std::string& json_dir, const std::string& tp_name,
 	Pack();
 
 	data.load_image = old_cfg;
-}
-
-Packer::~Packer()
-{
-	for (int i = 0, n = m_syms.size(); i < n; ++i) {
-		if (m_syms[i]) {
-			m_syms[i]->RemoveReference();
-		}
-	}
-
-//	PackNodeFactory::Instance()->Release();
 }
 
 void Packer::OutputLua(const std::string& outfile) const
@@ -153,7 +142,7 @@ void Packer::OutputSprID(const std::string& pkg_name, const std::string& res_dir
 			filepath == ee::SYM_SHAPE_TAG) {
 			continue;
 		}
-		filepath = gum::FilepathHelper::Relative(res_dir, filepath);
+		filepath = gum::FilepathHelper::Relative(res_dir.c_str(), filepath.c_str()).c_str();
 		if (id_mgr->IsCurrImgCut()) 
 		{
 			std::string img, json, ori;
@@ -235,7 +224,7 @@ void Packer::LoadJsonData(const std::string& dir)
 			{
 				std::string proxy = erespacker::PackUI::Instance()->AddTask(filepath);
 				proxy = ee::FileHelper::GetAbsolutePathFromFile(filepath, proxy);
-				ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(proxy);
+				auto sym = ee::SymbolMgr::Instance()->FetchSymbol(proxy);
 				m_syms.push_back(sym);
 			}
 			break;
@@ -249,11 +238,9 @@ void Packer::LoadJsonData(const std::string& dir)
 	std::sort(filepaths.begin(), filepaths.end());
 	for (int i = 0, n = filepaths.size(); i < n; ++i) 
 	{
-		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepaths[i]);
+		auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepaths[i]);
 		if (!sym->name.empty()) {
 			m_syms.push_back(sym);
-		} else {
-			sym->RemoveReference();
 		}
 	}
 }
@@ -263,7 +250,7 @@ void Packer::LoadJsonData(const std::string& dir, const Json::Value& json_data)
 	std::vector<std::string> filepaths;
 	for (int i = 0, n = json_data.size(); i < n; ++i)
 	{
-		std::string filepath = gum::FilepathHelper::Absolute(dir, json_data[i].asString());
+		std::string filepath = gum::FilepathHelper::Absolute(dir.c_str(), json_data[i].asString().c_str()).c_str();
 		int type = ee::SymbolFile::Instance()->Type(filepath);
 		switch (type)
 		{
@@ -274,7 +261,7 @@ void Packer::LoadJsonData(const std::string& dir, const Json::Value& json_data)
 			{
 				std::string proxy = erespacker::PackUI::Instance()->AddTask(filepath);
 				proxy = ee::FileHelper::GetAbsolutePathFromFile(filepath, proxy);
-				ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(proxy);
+				auto sym = ee::SymbolMgr::Instance()->FetchSymbol(proxy);
 				m_syms.push_back(sym);
 			}
 			break;
@@ -288,11 +275,9 @@ void Packer::LoadJsonData(const std::string& dir, const Json::Value& json_data)
 	std::sort(filepaths.begin(), filepaths.end());
 	for (int i = 0, n = filepaths.size(); i < n; ++i) 
 	{
-		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepaths[i]);
+		auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepaths[i]);
 		if (!sym->name.empty()) {
 			m_syms.push_back(sym);
-		} else {
-			sym->RemoveReference();
 		}
 	}
 }
@@ -332,20 +317,19 @@ void Packer::AddUIWndSymbol(const std::string& filepath)
 	reader.parse(fin, val);
 	fin.close();
 
-	std::vector<ee::Sprite*> sprs;
+	std::vector<ee::SprPtr> sprs;
 	eui::window::FileIO::FetchSprites(filepath, sprs);
 
-	ecomplex::Symbol* sym = new ecomplex::Symbol();	
+	auto sym = std::make_shared<ecomplex::Symbol>();	
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
 		sym->Add(sprs[i]);
 	}
-	for_each(sprs.begin(), sprs.end(), cu::RemoveRefFunctor<ee::Sprite>());
 
 	std::string wrapper_path = erespacker::PackUIWindowTask::GetWrapperFilepath(filepath);
 	sym->SetFilepath(wrapper_path);
 	sym->name = val["name"].asString();
 
-	ecomplex::LoadFromJson::CreateActionsFromTag(sym);
+	ecomplex::LoadFromJson::CreateActionsFromTag(*sym);
 
 	m_syms.push_back(sym);
 }

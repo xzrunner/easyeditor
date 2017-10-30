@@ -23,7 +23,7 @@ public:
 	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL, 
 		const s2::Sprite* root = NULL) const;
 
-	static ee::Symbol* Create() { return new Symbol(); }
+	static ee::SymPtr Create() { return std::make_shared<Symbol>(); }
 
 	void SetModel(m3::Model* model);
 

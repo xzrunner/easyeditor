@@ -24,7 +24,7 @@ SliderCtrlOne::SliderCtrlOne(wxPanel* parent, const char* title, const char* nam
 	Connect(m_slider->GetId(), wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler(SliderCtrlOne::OnSetValue));
 	sizer->Add(m_slider);
 
-	m_text = new wxTextCtrl(this, wxID_ANY, StringHelper::ToString(item.val), wxDefaultPosition, wxSize(50, -1), wxTE_PROCESS_ENTER);
+	m_text = new wxTextCtrl(this, wxID_ANY, StringHelper::ToString(item.val).c_str(), wxDefaultPosition, wxSize(50, -1), wxTE_PROCESS_ENTER);
 	Connect(m_text->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(SliderCtrlOne::OnSetValue));
 	sizer->Add(m_text);
 
@@ -62,14 +62,14 @@ void SliderCtrlOne::Load()
 	float fval = data.val0;
 	int ival = (int)(fval / m_scale_slider2text);
 	m_slider->SetValue(ival);
-	m_text->SetValue(StringHelper::ToString(fval));
+	m_text->SetValue(StringHelper::ToString(fval).c_str());
 }
 
 void SliderCtrlOne::OnSetValue(wxScrollEvent& event)
 {
 	int ival = m_slider->GetValue();
 	float fval = ival * m_scale_slider2text;
-	m_text->SetValue(StringHelper::ToString(fval));
+	m_text->SetValue(StringHelper::ToString(fval).c_str());
 	m_cb->SetValue(m_key, UICallback::Data(fval));
 }
 

@@ -3,6 +3,7 @@
 
 #include "ArrangeSpriteState.h"
 #include "SpriteCtrlNode.h"
+#include "Sprite.h"
 
 namespace ee
 {
@@ -10,8 +11,7 @@ namespace ee
 class ShearSpriteState : public ArrangeSpriteState
 {
 public:
-	ShearSpriteState(Sprite* spr, const SpriteCtrlNode::Node& ctrl_node);
-	virtual ~ShearSpriteState();
+	ShearSpriteState(const SprPtr& spr, const SpriteCtrlNode::Node& ctrl_node);
 
 	virtual void OnMouseRelease(const sm::vec2& pos);
 	virtual	bool OnMouseDrag(const sm::vec2& pos);
@@ -21,7 +21,7 @@ private:
 	void Shear2(const sm::vec2& curr);
 
 private:
-	Sprite* m_spr;
+	SprPtr m_spr;
 
 	SpriteCtrlNode::Node m_ctrl_node;
 

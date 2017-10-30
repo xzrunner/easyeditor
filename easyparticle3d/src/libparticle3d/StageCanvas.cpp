@@ -9,10 +9,10 @@
 
 #include <ps_3d.h>
 #include <shaderlab/Statistics.h>
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <sprite2/CameraType.h>
 #include <sprite2/OrthoCamera.h>
-#include <gum/GUM_GTxt.h>
+#include <gum/GTxt.h>
 #include <gum/StringHelper.h>
 
 namespace eparticle3d
@@ -34,14 +34,14 @@ void StageCanvas::OnDrawSprites() const
 
 	DrawBackground();
 
-	std::vector<ee::Sprite*> sprs;
-	static_cast<StagePanel*>(m_stage)->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	static_cast<StagePanel*>(m_stage)->TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	for (size_t i = 0, n = sprs.size(); i < n; ++i)
 	{
-		ee::Sprite* spr = sprs[i];
+		auto& spr = sprs[i];
 		if (!spr->IsVisible())
 			continue;
-		ee::SpriteRenderer::Instance()->Draw(sprs[i]);
+		ee::SpriteRenderer::Instance()->Draw(sprs[i].get());
 	}
 
 	ParticleSystem* ps = m_stage->m_ps;

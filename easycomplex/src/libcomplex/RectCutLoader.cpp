@@ -32,8 +32,8 @@ void RectCutLoader::LoadOnlyJson(const std::string& pack_file, const std::string
 	for (int i = 0, n = pictures.size(); i < n; ++i)
 	{
 		const Picture& s = pictures[i];
-		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(s.filepath);
-		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+		auto sym = ee::SymbolMgr::Instance()->FetchSymbol(s.filepath);
+		auto spr = ee::SpriteFactory::Instance()->Create(sym);
 
 		sm::vec2 pos;
 		pos.x = s.src.x + s.src.w * 0.5f;
@@ -43,9 +43,6 @@ void RectCutLoader::LoadOnlyJson(const std::string& pack_file, const std::string
 		spr->SetPosition(pos);
 
 		ee::InsertSpriteSJ::Instance()->Insert(spr);
-
-		spr->RemoveReference();
-		sym->RemoveReference();
 	}
 }
 
@@ -55,8 +52,8 @@ void RectCutLoader::LoadJsonAndImg(const std::string& pack_file, const std::stri
 	LoadJsonFile(pack_file, img_name, pictures);
 
 	std::string dir = ee::FileHelper::GetFileDir(pack_file);
-	ee::ImageData* img = ee::ImageDataMgr::Instance()->GetItem(dir + "\\pack.png");
-	assert(img->GetFormat() == GPF_RGB || img->GetFormat() == GPF_RGBA);
+	auto img = ee::ImageDataMgr::Instance()->GetItem(dir + "\\pack.png");
+	assert(img->GetFormat() == GPF_RGB || img->GetFormat() == GPF_RGBA8);
 	int channels = img->GetFormat() == GPF_RGB ? 3 : 4;
 	pimg::Cropping crop(img->GetPixelData(), img->GetWidth(), img->GetHeight(), channels);
 	for (int i = 0, n = pictures.size(); i < n; ++i)
@@ -69,9 +66,9 @@ void RectCutLoader::LoadJsonAndImg(const std::string& pack_file, const std::stri
 			ymax = 1024 - pic.dst.y;
 		uint8_t* pixels = crop.Crop(xmin, ymin, xmax, ymax);
 
-		ee::Image* spr_img = new ee::Image(pixels, pic.dst.w, pic.dst.h, GPF_RGBA);
-		ee::ImageSymbol* spr_symbol = new ee::ImageSymbol(spr_img, "test");
-		ee::ImageSprite* spr_sprite = new ee::ImageSprite(spr_symbol);
+		auto spr_img = std::make_shared<ee::Image>(pixels, pic.dst.w, pic.dst.h, GPF_RGBA8);
+		auto spr_symbol = std::make_shared<ee::ImageSymbol>(spr_img, "test");
+		auto spr_sprite = std::make_shared<ee::ImageSprite>(spr_symbol);
 
 		float angle = 0;
 		if (pic.src.h != pic.dst.h) {
@@ -88,13 +85,7 @@ void RectCutLoader::LoadJsonAndImg(const std::string& pack_file, const std::stri
 		spr_sprite->SetPosition(pos);
 		
 		ee::InsertSpriteSJ::Instance()->Insert(spr_sprite);
-
-		spr_sprite->RemoveReference();
-		spr_symbol->RemoveReference();
-		spr_img->RemoveReference();
 	}
-
-	img->RemoveReference();
 }
 
 //void RectCutLoader::LoadToDtex(const std::string& pack_file, const std::string& img_name)
@@ -104,7 +95,7 @@ void RectCutLoader::LoadJsonAndImg(const std::string& pack_file, const std::stri
 //	LoadRRPFile(pack_file, 5837, pictures);
 //
 //	std::string dir = ee::FileHelper::getFileDir(pack_file);
-//	ee::Image* img = ee::ImageMgr::Instance()->GetItem(dir + "\\pack.png");
+//	auto img = ee::ImageMgr::Instance()->GetItem(dir + "\\pack.png");
 //
 ////	ee::ImageClip clip(*img_data);
 //	ee::DynamicTexAndFont* dtex = ee::DynamicTexAndFont::Instance();

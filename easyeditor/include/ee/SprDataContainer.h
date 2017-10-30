@@ -12,7 +12,7 @@ class Sprite;
 class SprDataContainer : public DataContainer<Sprite>
 {
 public:
-	virtual bool Sort(std::vector<Sprite*>& sprs) = 0;
+	virtual bool Sort(std::vector<SprPtr>& sprs) = 0;
 
 }; // SprDataContainer
 

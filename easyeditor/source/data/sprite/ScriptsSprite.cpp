@@ -18,11 +18,11 @@ ScriptsSprite& ScriptsSprite::operator = (const ScriptsSprite& spr)
 	return *this;
 }
 
-ScriptsSprite::ScriptsSprite(ScriptsSymbol* sym)
+ScriptsSprite::ScriptsSprite(const s2::SymPtr& sym, uint32_t id)
 	: s2::Sprite(sym)
 	, Sprite(sym)
 {
-	scripts_do_string(sym->GetContent().c_str());
+	scripts_do_string(S2_VI_PTR_DOWN_CAST<ScriptsSymbol>(sym)->GetContent().c_str());
 }
 
 }

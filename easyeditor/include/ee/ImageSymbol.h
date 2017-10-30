@@ -2,21 +2,19 @@
 #define _EASYEDITOR_IMAGE_SYMBOL_H_
 
 #include "Symbol.h"
+#include "Image.h"
 
 #include <sprite2/ImageSymbol.h>
 
 namespace ee
 {
 
-class Image;
-
 class ImageSymbol : public Symbol, public s2::ImageSymbol
 {
 public:
 	ImageSymbol();
 	ImageSymbol(const ImageSymbol& img) {}
-	ImageSymbol(Image* image, const std::string& filename);
-	virtual ~ImageSymbol();
+	ImageSymbol(const ImagePtr& image, const std::string& filename);
 
 	/**
 	 *  @interface
@@ -33,8 +31,8 @@ public:
 
 	unsigned int GetTexID() const;
 
-	Image* GetImage() const { return m_image; }
-	void   SetImage(Image* img);
+	const ImagePtr& GetImage() const { return m_image; }
+	void SetImage(const ImagePtr& img) { m_image = img; }
 
 protected:
 	virtual bool LoadResources();
@@ -54,7 +52,7 @@ private:
 	static void ReleaseCB(void* ud);
 
 protected:
-	Image* m_image;
+	ImagePtr m_image = nullptr;
 
 }; // ImageSymbol
 

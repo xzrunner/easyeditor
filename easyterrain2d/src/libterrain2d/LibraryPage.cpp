@@ -19,9 +19,9 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	m_list->SetFileter(ee::SymbolFile::Instance()->Tag(ee::SYM_TERRAIN2D));
 }
 
-bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
+bool LibraryPage::IsHandleSymbol(const ee::SymPtr& sym) const
 {
-	return dynamic_cast<Symbol*>(sym) != NULL;
+	return sym->Type() == ee::SYM_TERRAIN2D;
 }
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
@@ -38,10 +38,9 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 		{
 			std::string filepath = filenames[i].ToStdString();
 			try {
-				ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+				auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 				sym->RefreshThumbnail(filepath);
 				AddItem(sym);
-				sym->RemoveReference();
 			} catch (ee::Exception& e) {
 				ee::ExceptionDlg dlg(m_parent, e);
 				dlg.ShowModal();

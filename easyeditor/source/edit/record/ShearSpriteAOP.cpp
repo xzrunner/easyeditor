@@ -6,45 +6,37 @@
 namespace ee
 {
 
-ShearSpriteAOP::ShearSpriteAOP(Sprite* spr, 
+ShearSpriteAOP::ShearSpriteAOP(const SprPtr& spr,
 							   const sm::vec2& new_shear, 
 							   const sm::vec2& old_shear)
    : m_new_shear(new_shear)
    , m_old_shear(old_shear)
 {
-	spr->AddReference();
 	m_sprs.push_back(spr);
-}
-
-ShearSpriteAOP::~ShearSpriteAOP()
-{
-	for (size_t i = 0, n = m_sprs.size(); i < n; ++i) {
-		m_sprs[i]->RemoveReference();
-	}
 }
 
 void ShearSpriteAOP::Undo()
 {
-	for (size_t i = 0, n = m_sprs.size(); i < n; ++i) {
-		m_sprs[i]->SetShear(m_old_shear);
+	for (auto& spr : m_sprs) {
+		spr->SetShear(m_old_shear);
 	}
 }
 
 void ShearSpriteAOP::Redo()
 {
-	for (size_t i = 0, n = m_sprs.size(); i < n; ++i) {
-		m_sprs[i]->SetShear(m_new_shear);
+	for (auto& spr : m_sprs) {
+		spr->SetShear(m_new_shear);
 	} 
 }
 
-void ShearSpriteAOP::Copy(const std::vector<ee::Sprite*>& sprs)
+void ShearSpriteAOP::Copy(const std::vector<SprPtr>& sprs)
 {
-	for (int i = 0, n = sprs.size(); i < n; ++i) {
-		sprs[i]->SetShear(m_new_shear);
+	for (auto& spr : sprs) {
+		spr->SetShear(m_new_shear);
 	}	
 }
 
-Json::Value ShearSpriteAOP::Store(const std::vector<Sprite*>& sprs) const
+Json::Value ShearSpriteAOP::Store(const std::vector<SprPtr>& sprs) const
 {
 	Json::Value val;
 	val["idx"] = HistoryUtil::StoreSpritesIndex(m_sprs, sprs);

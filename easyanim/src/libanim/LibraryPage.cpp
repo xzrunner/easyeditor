@@ -24,9 +24,9 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	m_list->SetFileter(ee::SymbolFile::Instance()->Tag(s2::SYM_ANIMATION));
 }
 
-bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
+bool LibraryPage::IsHandleSymbol(const ee::SymPtr& sym) const
 {
-	return dynamic_cast<Symbol*>(sym) != NULL;
+	return sym->Type() == s2::SYM_ANIMATION;
 }
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
@@ -68,21 +68,19 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 
 void LibraryPage::LoadFromEasyFile(const std::string& filename)
 {
-	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filename);
+	auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filename);
 	sym->RefreshThumbnail(filename);
 	m_list->Insert(sym);
-	sym->RemoveReference();
 }
 
 void LibraryPage::LoadFromJsonFile(const std::string& filename)
 {
-	Symbol* sym = new Symbol;
+	auto sym(std::make_shared<Symbol>());
 	sym->LoadFromFile(filename);
 	std::string easy_filename = filename.substr(0, filename.find_last_of('.')) 
 		+ "_" + ee::SymbolFile::Instance()->Tag(s2::SYM_ANIMATION) + ".json";
 	sym->SetFilepath(easy_filename);
 	m_list->Insert(sym);
-	sym->RemoveReference();
 }
 
 void LibraryPage::LoadFromLuaFile(const std::string& filename)
@@ -95,11 +93,13 @@ void LibraryPage::LoadFromLuaFile(const std::string& filename)
  	parser.parser(filename);
  	parser.transToMemory(texfilenames);
  
- 	std::vector<ee::Symbol*> syms;
+ 	std::vector<ee::SymPtr> syms;
  	parser.getAllSymbols(syms);
- 	for (int i = 0, n = syms.size(); i < n; ++i)
- 		if (IsHandleSymbol(syms[i]))
- 			m_list->Insert(syms[i]);
+	for (int i = 0, n = syms.size(); i < n; ++i) {
+		if (IsHandleSymbol(syms[i])) {
+			m_list->Insert(syms[i]);
+		}
+	}
 }
 
 }

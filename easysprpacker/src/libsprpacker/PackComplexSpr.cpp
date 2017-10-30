@@ -12,7 +12,7 @@ namespace lua = ebuilder::lua;
 namespace esprpacker
 {
 
-PackComplexSpr::PackComplexSpr(const ecomplex::Sprite* spr)
+PackComplexSpr::PackComplexSpr(const std::shared_ptr<ecomplex::Sprite>& spr)
 {
 	Init(spr);
 }
@@ -72,15 +72,15 @@ void PackComplexSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 	pack(action, ptr);
 }
 
-bool PackComplexSpr::Equal(const ecomplex::Sprite* spr) const
+bool PackComplexSpr::Equal(const std::shared_ptr<ecomplex::Sprite>& spr) const
 {
 	return m_action == spr->GetAction();
 }
 
-void PackComplexSpr::Init(const ecomplex::Sprite* spr)
+void PackComplexSpr::Init(const std::shared_ptr<ecomplex::Sprite>& spr)
 {
 	m_sym = PackNodeFactory::Instance()->Create(
-		dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
+		std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol()));
 
 	m_action = spr->GetAction();
 }

@@ -17,7 +17,6 @@ class StagePanel : public ee::EditPanel, public ee::MultiSpritesImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, LibraryPanel* library);
-	virtual ~StagePanel();
 
 	//
 	// ee::EditPanel interface
@@ -27,11 +26,11 @@ public:
 	//
 	// ee::MultiSpritesImpl interface
 	//
-	virtual void TraverseSprites(ee::Visitor<ee::Sprite>& visitor, 
+	virtual void TraverseSprites(ee::RefVisitor<ee::Sprite>& visitor, 
 		ee::DataTraverseType type = ee::DT_ALL, bool order = true) const {}
 
-	Symbol* GetSymbol() { return m_sym; }
-	void SetSymbol(Symbol* sym);
+	const std::shared_ptr<Symbol>& GetSymbol() { return m_sym; }
+	void SetSymbol(const std::shared_ptr<Symbol>& sym) { m_sym = sym; }
 
 protected:
 	//
@@ -42,7 +41,7 @@ protected:
 private:
 	LibraryPanel* m_library;
 
-	Symbol* m_sym;
+	std::shared_ptr<Symbol> m_sym;
 
 }; // StagePanel
 

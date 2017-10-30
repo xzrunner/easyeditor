@@ -7,7 +7,7 @@
 namespace eshadow
 {
 
-void FileIO::StoreToFile(const char* filepath, const Symbol* sym)
+void FileIO::StoreToFile(const char* filepath, const std::shared_ptr<Symbol>& sym)
 {
 	Json::Value value;
 	
@@ -21,7 +21,7 @@ void FileIO::StoreToFile(const char* filepath, const Symbol* sym)
 	fout.close();
 }
 
-void FileIO::LoadFromFile(const char* filepath, Symbol* sym)
+void FileIO::LoadFromFile(const char* filepath, const std::shared_ptr<Symbol>& sym)
 {
 	Json::Value value;
 	Json::Reader reader;

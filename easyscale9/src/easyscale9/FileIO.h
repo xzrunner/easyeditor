@@ -20,9 +20,9 @@ public:
 		ToolbarPanel* toolbar);
 
 private:
-	static ee::Sprite* Load(const Json::Value& value, const std::string& dir);
-	static Json::Value Store(ee::Sprite* spr, const std::string& dir);
-	static Json::Value StoreNew(ee::Sprite* spr, const std::string& dir);
+	static ee::SprPtr Load(const Json::Value& value, const std::string& dir);
+	static Json::Value Store(const ee::SprPtr& spr, const std::string& dir);
+	static Json::Value StoreNew(const ee::SprPtr& spr, const std::string& dir);
 
 }; // FileIO
 

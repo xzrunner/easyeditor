@@ -20,9 +20,9 @@ LibraryFontBlankPage::LibraryFontBlankPage(wxWindow* parent)
 	InitLayout();
 }
 
-bool LibraryFontBlankPage::IsHandleSymbol(Symbol* sym) const
+bool LibraryFontBlankPage::IsHandleSymbol(const SymPtr& sym) const
 {
-	return dynamic_cast<FontBlankSymbol*>(sym) != NULL;
+	return sym->Type() == SYM_FONTBLANK;
 }
 
 bool LibraryFontBlankPage::LoadFromConfig()
@@ -63,9 +63,8 @@ void LibraryFontBlankPage::OnAddPress(wxCommandEvent& event)
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
 			try {
-				Symbol* sym = SymbolMgr::Instance()->FetchSymbol(filenames[i].ToStdString());
+				auto sym = SymbolMgr::Instance()->FetchSymbol(filenames[i].ToStdString());
 				m_list->Insert(sym);
-				sym->RemoveReference();
 			} catch (Exception& e) {
 				ExceptionDlg dlg(m_parent, e);
 				dlg.ShowModal();
@@ -76,7 +75,7 @@ void LibraryFontBlankPage::OnAddPress(wxCommandEvent& event)
 
 void LibraryFontBlankPage::OnNewBtnPress(wxCommandEvent& event)
 {
-	FontBlankSymbol* item = new FontBlankSymbol();
+	auto item = std::make_shared<FontBlankSymbol>();
 	m_list->Insert(item);
 
 	FontBlankDialog dlg(this, item);

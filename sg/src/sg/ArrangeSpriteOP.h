@@ -19,8 +19,8 @@ public:
 protected:
 	virtual void onDirectionKeyDown(int type);
 
-	virtual void PasteSprToClipboard(const ee::Sprite* spr, Json::Value& value) const;
-	virtual void CopySprFromClipboard(ee::Sprite* spr, const Json::Value& value) const;
+	virtual void PasteSprToClipboard(const ee::SprConstPtr& spr, Json::Value& value) const;
+	virtual void CopySprFromClipboard(const ee::SprPtr& spr, const Json::Value& value) const;
 
 }; // ArrangeSpriteOP
 

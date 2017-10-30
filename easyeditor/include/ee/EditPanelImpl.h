@@ -4,9 +4,10 @@
 #include "KeysState.h"
 #include "Observer.h"
 #include "HistoryList.h"
+#include "Sprite.h"
 
 #include <SM_Vector.h>
-#include <CU_RefCountObj.h>
+#include <cu/CU_RefCountObj.h>
 
 #include <wx/wx.h>
 
@@ -17,7 +18,6 @@ class EditPanel;
 class AtomicOP;
 class EditOP;
 class StageCanvas;
-class Sprite;
 
 class EditPanelImpl : public Observer, public cu::RefCountObj
 {
@@ -53,8 +53,8 @@ public:
 	void Redo();
 	void RedoTop();
 
-	void SaveOpRecordList(const std::string& filepath, const std::vector<Sprite*>& sprs);
-	void LoadOpRecordList(const std::string& filepath, const std::vector<Sprite*>& sprs);
+	void SaveOpRecordList(const std::string& filepath, const std::vector<SprPtr>& sprs);
+	void LoadOpRecordList(const std::string& filepath, const std::vector<SprPtr>& sprs);
 
 	void OnSave();
 	bool IsEditDirty() const;

@@ -16,24 +16,20 @@ public:
 	Sprite();
 	Sprite(const Sprite& spr);
 	Sprite& operator = (const Sprite& spr);
-	Sprite(Symbol* sym);
-
-	/**
-	 *  @interface
-	 *    s2::Sprite
-	 */
-	virtual Sprite* Clone() const { return new Sprite(*this); }
+	Sprite(const s2::SymPtr& sym, uint32_t id = -1);
 
 	/**
 	 *  @interface
 	 *    ee::Sprite
 	 */
-	virtual void Load(const Json::Value& val, const std::string& dir = "");
-	virtual void Store(Json::Value& val, const std::string& dir = "") const;
+	virtual void Load(const Json::Value& val, const CU_STR& dir = "");
+	virtual void Store(Json::Value& val, const CU_STR& dir = "") const;
 
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
 
-	static ee::Sprite* Create(ee::Symbol* sym);
+	static ee::SprPtr Create(const std::shared_ptr<ee::Symbol>& sym);
+
+	SPRITE_CLONE_FUNC(Sprite)
 
 }; // Sprite
 

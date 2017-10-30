@@ -55,7 +55,7 @@ void PictureToBin::PackQuad(const PackPicture::Quad& quad, uint8_t** ptr,
 	pack(idx, ptr);
 
 	int src[8];
-	PackPicture::GetImgSrcPos(tp, quad.img, quad.texture_coord, src);
+	PackPicture::GetImgSrcPos(tp, quad.img.get(), quad.texture_coord, src);
 	for (int i = 0; i < 8; ++i) {
 		uint16_t p = static_cast<int>(src[i] * scale);
 		pack(p, ptr);

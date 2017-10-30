@@ -22,10 +22,10 @@ LibraryPage::LibraryPage(wxWindow* parent, const char* name,
 	InitLayout();
 }
 
-bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
+bool LibraryPage::IsHandleSymbol(const ee::SymPtr& sym) const
 {
 	if (m_filter == ee::SymbolFile::Instance()->Tag(ee::SYM_UIWND)) {
-		return dynamic_cast<Symbol*>(sym) != NULL;	
+		return sym->Type() == ee::SYM_UIWND;
 	} else {
 		return true;
 	}
@@ -48,10 +48,9 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
 			std::string filepath = filenames[i].ToStdString();
-			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+			auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			sym->RefreshThumbnail(filepath);
 			m_list->Insert(sym);
-			sym->RemoveReference();
 		}
 	}
 }

@@ -19,7 +19,7 @@
 //	virtual bool OnMouseLeftDClick(int x, int y);
 //
 //private:
-//	ComplexPolygonShape* CreateComplexPoly(const std::vector<sm::vec2>& polyline);
+//	ComplexPolygonShape* CreateComplexPoly(const CU_VEC<sm::vec2>& polyline);
 //
 //protected:
 //	ee::MultiShapesImpl* m_shapes_impl;

@@ -18,15 +18,15 @@ public:
 	virtual ~Symbol();
 
 	void DrawSkeleton(const s2::RenderParams& params, const s2::Sprite* spr = NULL, 
-		const s2::Joint* selected = NULL) const;
+		const std::shared_ptr<const s2::Joint>& selected = NULL) const;
 
-	static ee::Symbol* Create() { return new Symbol(); }
+	static ee::SymPtr Create() { return std::make_shared<Symbol>(); }
 
 private:
 	class JointLoader : public gum::JointLoader
 	{
 	public:
-		virtual s2::Joint* Create(s2::Sprite* spr, const s2::JointPose& joint_pose) const;
+		virtual std::shared_ptr<s2::Joint> Create(const s2::SprPtr& spr, const s2::JointPose& joint_pose) const;
 	}; // JointLoader
 
 protected:

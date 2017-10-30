@@ -35,8 +35,8 @@ void Love2dCode::Resolve()
 		KeyFrame* frame = itr->second;			
 		if (frame->Size() != 0)
 		{
-			const ee::Sprite* spr = frame->GetSprite(0);
-			int index = Query(dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath());
+			const ee::SprConstPtr& spr = frame->GetSprite(0);
+			int index = Query(std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol())->GetFilepath());
 			if (index != -1)
 			{
 				std::string time = ee::StringHelper::ToString(frame->GetTime());

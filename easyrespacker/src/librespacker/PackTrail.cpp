@@ -19,7 +19,7 @@ void PackTrail::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TextureP
 	TrailToLuaString::Pack(this, gen);
 }
 
-void PackTrail::UnpackFromLua(lua_State* L, const std::vector<ee::Image*>& images)
+void PackTrail::UnpackFromLua(lua_State* L, const std::vector<ee::ImagePtr>& images)
 {
 	TrailFromLua::Unpack(L, this);
 }
@@ -39,7 +39,7 @@ int PackTrail::SizeOfUnpackFromBin() const
 	return TrailFromBin::Size(this);
 }
 
-void PackTrail::UnpackFromBin(uint8_t** ptr, const std::vector<ee::Image*>& images)
+void PackTrail::UnpackFromBin(uint8_t** ptr, const std::vector<ee::ImagePtr>& images)
 {
 	TrailFromBin::Unpack(ptr, this);
 }

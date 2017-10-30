@@ -5,7 +5,7 @@
 #include <ee/panel_msg.h>
 
 #include <sprite2/Color.h>
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 
 namespace eshape
 {

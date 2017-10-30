@@ -88,41 +88,35 @@ void ViewlistList::SetImpl(ViewlistListImpl* impl)
 
 void ViewlistList::OnSelected(int idx, bool clear)
 {
-	if (Sprite* spr = QuerySprite(idx)) {
+	if (auto spr = QuerySprite(idx)) {
 		OnSelected(spr, clear);
 	}
 }
 
-Sprite* ViewlistList::QuerySprite(int idx)
+SprPtr ViewlistList::QuerySprite(int idx)
 {
-	Sprite* spr = NULL;
+	SprPtr ret = nullptr;
 	if (idx >= 0 && idx < static_cast<int>(m_sprs.size())) {
-		spr = m_sprs[idx];
+		ret = m_sprs[idx];
 	}
-	return spr;
+	return ret;
 }
 
 void ViewlistList::Clear()
 {
 	VerticalImageList::Clear();
 
-	if (m_selected_spr) {
-		m_selected_spr->RemoveReference();
-		m_selected_spr = NULL;
-	}
-
-	for_each(m_sprs.begin(), m_sprs.end(), cu::RemoveRefFunctor<Sprite>());
+	m_selected_spr.reset();
 	m_sprs.clear();
 }
 
-void ViewlistList::Insert(Sprite* spr, int idx)
+void ViewlistList::Insert(const SprPtr& spr, int idx)
 {
 	if (!spr) {
 		return;
 	}
-	spr->AddReference();
 
-	ListItem* item = dynamic_cast<ListItem*>(spr->GetSymbol());
+	auto item = std::dynamic_pointer_cast<ListItem>(spr->GetSymbol());
 	if (idx < 0 || idx >= static_cast<int>(m_sprs.size())) {
 		VerticalImageList::Insert(item, 0);
 		m_sprs.insert(m_sprs.begin(), spr);
@@ -173,7 +167,7 @@ void ViewlistList::OnNotify(int sj_id, void* ud)
 		}
 		break;
 	case MSG_REMOVE_SPRITE:
-		Remove((Sprite*)ud);
+		Remove(*(SprPtr*)ud);
 		break;
 	case MSG_CLEAR_SPRITE: case MSG_CLEAR_PANEL:
 		Clear();
@@ -194,7 +188,7 @@ void ViewlistList::OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const
 {
 	VerticalImageList::OnDrawItem(dc, rect, n);
 
-	Sprite* spr = m_sprs[n];
+	const SprPtr& spr = m_sprs[n];
 
 	dc.SetBrush(spr->IsVisible() ? *wxBLACK_BRUSH : *wxWHITE_BRUSH);
 	dc.DrawRectangle(rect.x + BTN_SPACE, rect.y + BTN_SPACE, BTN_EDGE, BTN_EDGE);
@@ -263,7 +257,7 @@ void ViewlistList::OnMouse(wxMouseEvent& event)
 		}
 	}
 
-	Sprite* spr = m_sprs[curr_pos];
+	const SprPtr& spr = m_sprs[curr_pos];
 	if (pos.x <= BTN_SPACE + BTN_EDGE) {
 		spr->SetVisible(!spr->IsVisible());
 	} else {
@@ -284,14 +278,13 @@ int ViewlistList::GetSelectedIndex() const
 	return GetItemCount() - 1 - selected;
 }
 
-void ViewlistList::OnSelected(Sprite* spr, bool clear)
+void ViewlistList::OnSelected(const SprPtr& spr, bool clear)
 {
 	m_selected_spr = spr;
-	m_selected_spr->AddReference();
 	SelectSpriteSJ::Instance()->Select(spr, clear);
 }
 
-int ViewlistList::QuerySprIdx(const Sprite* spr) const
+int ViewlistList::QuerySprIdx(const SprConstPtr& spr) const
 {
 	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
 		if (m_sprs[i] == spr) {
@@ -312,7 +305,7 @@ void ViewlistList::ReorderSelected(bool up)
 	ReorderSpriteSJ::Instance()->Reorder(m_selected_spr, up, this);
 }
 
-void ViewlistList::Select(Sprite* spr, bool clear)
+void ViewlistList::Select(const SprPtr& spr, bool clear)
 {
 	if (clear) {
 		SetSelection(-1);
@@ -326,8 +319,8 @@ void ViewlistList::Select(Sprite* spr, bool clear)
 void ViewlistList::SelectSet(SpriteSelection* set)
 {
 	SetSelection(-1);
-	std::vector<Sprite*> sprs;
-	set->Traverse(FetchAllVisitor<Sprite>(sprs));
+	std::vector<SprPtr> sprs;
+	set->Traverse(FetchAllRefVisitor<Sprite>(sprs));
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
 		int idx = QuerySprIdx(sprs[i]);
 		if (idx >= 0) {
@@ -336,7 +329,7 @@ void ViewlistList::SelectSet(SpriteSelection* set)
 	}
 }
 
-void ViewlistList::Reorder(const Sprite* spr, bool up)
+void ViewlistList::Reorder(const SprConstPtr& spr, bool up)
 {
 	int i = QuerySprIdx(spr);
 	if (i < 0) {
@@ -368,18 +361,18 @@ void ViewlistList::Reorder(const Sprite* spr, bool up)
 	}
 }
 
-void ViewlistList::ReorderMost(const Sprite* spr, bool up)
+void ViewlistList::ReorderMost(const SprConstPtr& spr, bool up)
 {
 	int i = QuerySprIdx(spr);
 	if (i < 0) {
 		return;
 	}
 
-	ListItem* item = const_cast<ListItem*>(dynamic_cast<const ListItem*>(spr->GetSymbol()));
+	auto item = std::dynamic_pointer_cast<ListItem>(spr->GetSymbol());
 	if (up) {
 		if (i != 0) {
 			m_sprs.erase(m_sprs.begin() + i);
-			m_sprs.insert(m_sprs.begin(), const_cast<Sprite*>(spr));
+			m_sprs.insert(m_sprs.begin(), std::const_pointer_cast<Sprite>(std::dynamic_pointer_cast<const Sprite>(spr)));
 
 			VerticalImageList::Insert(item, 0);
 			VerticalImageList::Remove(i + 1);
@@ -390,7 +383,7 @@ void ViewlistList::ReorderMost(const Sprite* spr, bool up)
 	} else {
 		if (i != m_sprs.size() - 1) {
 			m_sprs.erase(m_sprs.begin() + i);
-			m_sprs.push_back(const_cast<Sprite*>(spr));
+			m_sprs.push_back(std::const_pointer_cast<Sprite>(std::dynamic_pointer_cast<const Sprite>(spr)));
 
 			VerticalImageList::Remove(i);
 			VerticalImageList::Insert(item);
@@ -401,7 +394,7 @@ void ViewlistList::ReorderMost(const Sprite* spr, bool up)
 	}
 }
 
-void ViewlistList::Remove(Sprite* spr)
+void ViewlistList::Remove(const SprPtr& spr)
 {
 	int idx = QuerySprIdx(spr);
 	if (idx < 0) {
@@ -409,7 +402,6 @@ void ViewlistList::Remove(Sprite* spr)
 	}
 	VerticalImageList::Remove(idx);
 
-	spr->RemoveReference();
 	m_sprs.erase(m_sprs.begin() + idx);
 }
 
@@ -424,7 +416,7 @@ void ViewlistList::RemoveSelected()
 	}
 
 	// add to history
-	std::vector<Sprite*> sprs;
+	std::vector<SprPtr> sprs;
 	sprs.push_back(m_sprs[selected]);
 	EditAddRecordSJ::Instance()->Add(new DeleteSpriteAOP(sprs));
 
@@ -432,7 +424,6 @@ void ViewlistList::RemoveSelected()
 
 	RemoveSpriteSJ::Instance()->Remove(m_sprs[selected], this);
 
-	m_sprs[selected]->RemoveReference();
 	m_sprs.erase(m_sprs.begin() + selected);
 }
 

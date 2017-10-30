@@ -17,7 +17,7 @@
 #include <ee/ShapeSelection.h>
 #include <ee/shape_msg.h>
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <SM_Calc.h>
 
 namespace eshape
@@ -119,7 +119,7 @@ bool EditPolylineImpl::OnMouseLeftDown(int x, int y)
 					int sz = m_shapes_impl->GetShapeSelection()->Size();
 
 					sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-					ee::Shape* shape = m_shapes_impl->QueryShapeByPos(pos);
+					auto shape = m_shapes_impl->QueryShapeByPos(pos);
 
 					return m_base_op->OnMouseLeftDownBase(x, y);
 				}
@@ -147,7 +147,7 @@ bool EditPolylineImpl::OnMouseLeftUp(int x, int y)
 		{
 			if (m_captured_editable.shape)
 			{
-				EditedPolyShape* polyline = dynamic_cast<EditedPolyShape*>(m_captured_editable.shape);
+				auto polyline = std::dynamic_pointer_cast<EditedPolyShape>(m_captured_editable.shape);
 				polyline->ChangeVertex(m_captured_editable.pos, nearest.GetNearestNode());
 				m_dirty = true;
 				m_captured_editable.pos = nearest.GetNearestNode();
@@ -188,7 +188,7 @@ bool EditPolylineImpl::OnMouseRightDown(int x, int y)
 			{
 				if (m_captured_editable.pos.IsValid())
 				{
-					EditedPolyShape* polyline = dynamic_cast<EditedPolyShape*>(m_captured_editable.shape);
+					auto polyline = std::dynamic_pointer_cast<EditedPolyShape>(m_captured_editable.shape);
 					polyline->RemoveVertex(m_captured_editable.pos);
 					m_dirty = true;
 				}
@@ -222,14 +222,14 @@ bool EditPolylineImpl::OnMouseMove(int x, int y)
 		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 		NodeCapture capture(m_shapes_impl, tolerance);
 		{
-			ee::Shape* old = m_captured_editable.shape;
+			auto old = m_captured_editable.shape;
 			capture.captureEditable(pos, m_captured_editable);
 			if (old && !m_captured_editable.shape || !old && m_captured_editable.shape) {
 				ee::SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		}
 		{
-			ee::Shape* old = m_captureSelectable.shape;
+			auto old = m_captureSelectable.shape;
 			capture.captureSelectable(pos, m_captureSelectable);
 			if (old && !m_captureSelectable.shape || !old && m_captureSelectable.shape) {
 				ee::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -256,7 +256,7 @@ bool EditPolylineImpl::OnMouseDrag(int x, int y)
 			m_draw_op->m_polyline.clear();
 
 		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-		if (EditedPolyShape* polyline = dynamic_cast<EditedPolyShape*>(m_captured_editable.shape))
+		if (auto polyline = std::dynamic_pointer_cast<EditedPolyShape>(m_captured_editable.shape))
 		{
 			if (m_captured_editable.pos.IsValid())
 			{
@@ -312,7 +312,7 @@ void EditPolylineImpl::Clear()
 
 void EditPolylineImpl::drawCaptured(const NodeAddr& captured) const
 {
-	if (EditedPolyShape* polyline = dynamic_cast<EditedPolyShape*>(captured.shape))
+	if (auto polyline = dynamic_cast<EditedPolyShape*>(captured.shape.get()))
 	{
 		if (captured.pos.IsValid()) {
 			s2::RVG::SetColor(s2::Color(255, 102, 102));
@@ -347,9 +347,9 @@ InterruptChainVisitor(const sm::vec2& pos, int tol)
 }
 
 void EditPolylineImpl::InterruptChainVisitor::
-Visit(ee::Shape* shape, bool& next) 
+Visit(const ee::ShapePtr& shape, bool& next)
 {
-	EditedPolyShape* polyline = dynamic_cast<EditedPolyShape*>(shape);
+	auto polyline = std::dynamic_pointer_cast<EditedPolyShape>(shape);
 	if (!polyline) {
 		next = true;
 		return;
@@ -363,7 +363,7 @@ Visit(ee::Shape* shape, bool& next)
 	}
 
 	size_t idx;
-	const std::vector<sm::vec2>& vertices = polyline->GetVertices();
+	const CU_VEC<sm::vec2>& vertices = polyline->GetVertices();
 	float dis = ee::Math2D::GetDisPointToPolyline(m_pos, vertices, &idx);
 	if (dis < m_tol)
 	{
@@ -401,9 +401,9 @@ NearestNodeVisitor(const sm::vec2& pos, int tol)
 }
 
 void EditPolylineImpl::NearestNodeVisitor::
-Visit(ee::Shape* shape, bool& next)
+Visit(const ee::ShapePtr& shape, bool& next)
 {
-	EditedPolyShape* polyline = dynamic_cast<EditedPolyShape*>(shape);
+	auto polyline = std::dynamic_pointer_cast<EditedPolyShape>(shape);
 	if (!polyline) 
 	{
 		next = true;
@@ -418,7 +418,7 @@ Visit(ee::Shape* shape, bool& next)
 		return;
 	}
 
-	const std::vector<sm::vec2>& vertices = polyline->GetVertices();
+	const CU_VEC<sm::vec2>& vertices = polyline->GetVertices();
 	for (size_t i = 0, n = vertices.size(); i < n; ++i)
 	{
 		float dis = sm::dis_pos_to_pos(m_pos, vertices[i]);

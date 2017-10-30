@@ -13,7 +13,7 @@ namespace eui
 class SymbolCfg
 {
 public:
-	void QueryType(const ee::Symbol* sym, std::string& type) const;
+	void QueryType(const ee::SymConstPtr& sym, std::string& type) const;
 
 	static SymbolCfg* Instance();
 

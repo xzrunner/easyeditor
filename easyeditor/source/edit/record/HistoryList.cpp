@@ -64,7 +64,7 @@ HistoryList::Type HistoryList::RedoTop()
 		return NO_CHANGE;
 	} 
 
-	std::vector<Sprite*> sprs;
+	std::vector<SprPtr> sprs;
 	QuerySelectedSprsSJ::Instance()->Query(sprs);
 
 	AtomicOP* op = m_undo_stack.top();
@@ -85,13 +85,13 @@ void HistoryList::OnSave()
 		m_saved_op = m_undo_stack.top();
 }
 
-void HistoryList::Store(Json::Value& value, const std::vector<Sprite*>& sprs)
+void HistoryList::Store(Json::Value& value, const std::vector<SprPtr>& sprs)
 {
 	Store(m_undo_stack, value["undo"], sprs);
 	Store(m_redo_stack, value["redo"], sprs);
 }
 
-void HistoryList::Load(const Json::Value& value, const std::vector<Sprite*>& sprs)
+void HistoryList::Load(const Json::Value& value, const std::vector<SprPtr>& sprs)
 {
 	if (!value["undo"].isNull()) {
 		Load(m_undo_stack, value["undo"], sprs);
@@ -111,7 +111,7 @@ void HistoryList::Clear(std::stack<AtomicOP*>& stack)
 }
 
 void HistoryList::Store(std::stack<AtomicOP*>& stack, Json::Value& val,
-						const std::vector<Sprite*>& sprs)
+						const std::vector<SprPtr>& sprs)
 {
 	std::vector<AtomicOP*> tmp;
 	while (!stack.empty()) {
@@ -127,12 +127,12 @@ void HistoryList::Store(std::stack<AtomicOP*>& stack, Json::Value& val,
 }
 
 void HistoryList::Load(std::stack<AtomicOP*>& stack, const Json::Value& val,
-					   const std::vector<Sprite*>& sprs)
+					   const std::vector<SprPtr>& sprs)
 {
 	int i = 0;
 	Json::Value opValue = val[i++];
 	while (!opValue.isNull()) {
-		std::vector<Sprite*> selected;
+		std::vector<SprPtr> selected;
 
 		int j = 0;
 		Json::Value spriteValue = opValue["sprites"][j++];

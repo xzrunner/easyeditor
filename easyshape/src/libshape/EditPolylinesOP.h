@@ -2,6 +2,7 @@
 #define _EASYSHAPE_EDIT_POLYLINES_OP_H_
 
 #include <ee/SelectShapesOP.h>
+#include <ee/Shape.h>
 
 #include <map>
 
@@ -31,24 +32,24 @@ private:
 	void clearBuffer();
 
 private:
-	class UpdateBufferVisitor : public ee::Visitor<ee::Shape>
+	class UpdateBufferVisitor : public ee::RefVisitor<ee::Shape>
 	{
 	public:
-		UpdateBufferVisitor(std::map<ChainShape*, ChainShape*>& simplifyBuffer);
+		UpdateBufferVisitor(std::map<std::shared_ptr<ChainShape>, std::shared_ptr<ChainShape>>& simplifyBuffer);
 
-		virtual void Visit(ee::Shape* shape, bool& next);
+		virtual void Visit(const ee::ShapePtr& shape, bool& next);
 
 	private:
-		std::map<ChainShape*, ChainShape*>& m_simplify_buffer;
+		std::map<std::shared_ptr<ChainShape>, std::shared_ptr<ChainShape>>& m_simplify_buffer;
 
 	}; // UpdateBufferVisitor
 
-	class OffsetVisitor : public ee::Visitor<ee::Shape>
+	class OffsetVisitor : public ee::RefVisitor<ee::Shape>
 	{
 	public:
 		OffsetVisitor(const sm::vec2& offset);
 
-		virtual void Visit(ee::Shape* shape, bool& next);
+		virtual void Visit(const ee::ShapePtr& shape, bool& next);
 
 	private:
 		const sm::vec2& m_offset;
@@ -58,7 +59,7 @@ private:
 private:
 	EditPolylinesCMPT* m_cmpt;
 
-	std::map<ChainShape*, ChainShape*> m_simplify_buffer;
+	std::map<std::shared_ptr<ChainShape>, std::shared_ptr<ChainShape>> m_simplify_buffer;
 
 	sm::vec2 m_last_pos;
 

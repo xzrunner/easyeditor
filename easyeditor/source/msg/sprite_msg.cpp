@@ -1,6 +1,8 @@
 #include "sprite_msg.h"
 #include "subject_id.h"
 #include "ScriptsSprite.h"
+#include "Symbol.h"
+#include "SymbolType.h"
 
 namespace ee
 {
@@ -12,9 +14,9 @@ void ClearSpriteSJ::Clear(Observer* except)
 }
 
 SUBJECT_DEFINITION(InsertSpriteSJ, MSG_INSERT_SPRITE)
-void InsertSpriteSJ::Insert(Sprite* spr, int idx, Observer* except)
+void InsertSpriteSJ::Insert(const SprPtr& spr, int idx, Observer* except)
 {
-	if (dynamic_cast<ScriptsSprite*>(spr)) {
+	if (spr->GetSymbol()->Type() == SYM_SCRIPTS) {
 		return;
 	}
 
@@ -37,21 +39,21 @@ int QuerySelectedSpriteLayerSJ::Query()
 }
 
 SUBJECT_DEFINITION(QuerySelectedSprsSJ, MSG_QUERY_SELECTED_SPRS)
-void QuerySelectedSprsSJ::Query(std::vector<ee::Sprite*>& sprs)
+void QuerySelectedSprsSJ::Query(std::vector<SprPtr>& sprs)
 {
-	std::vector<ee::Sprite*> sprs_;
+	std::vector<SprPtr> sprs_;
 	Notify(&sprs_);
 	copy(sprs_.begin(), sprs_.end(), back_inserter(sprs));
 }
 
 SUBJECT_DEFINITION(RemoveSpriteSJ, MSG_REMOVE_SPRITE)
-void RemoveSpriteSJ::Remove(Sprite* spr, Observer* except)
+void RemoveSpriteSJ::Remove(const SprPtr& spr, Observer* except)
 {
-	Notify(spr, except);
+	Notify((void*)&spr, except);
 }
 
 SUBJECT_DEFINITION(ReorderSpriteMostSJ, MSG_REORDER_SPRITE_MOST)
-void ReorderSpriteMostSJ::Reorder(Sprite* spr, bool up, Observer* except)
+void ReorderSpriteMostSJ::Reorder(const SprPtr& spr, bool up, Observer* except)
 {
 	Params p;
 	p.spr = spr;
@@ -60,7 +62,7 @@ void ReorderSpriteMostSJ::Reorder(Sprite* spr, bool up, Observer* except)
 }
 
 SUBJECT_DEFINITION(ReorderSpriteSJ, MSG_REORDER_SPRITE)
-void ReorderSpriteSJ::Reorder(Sprite* spr, bool up, Observer* except)
+void ReorderSpriteSJ::Reorder(const SprPtr& spr, bool up, Observer* except)
 {
 	Params p;
 	p.spr = spr;
@@ -69,7 +71,7 @@ void ReorderSpriteSJ::Reorder(Sprite* spr, bool up, Observer* except)
 }
 
 SUBJECT_DEFINITION(SortSpriteSJ, MSG_SORT_SPRITES)
-void SortSpriteSJ::Sort(std::vector<Sprite*>& sprs, Observer* except)
+void SortSpriteSJ::Sort(std::vector<SprPtr>& sprs, Observer* except)
 {
 	Notify(&sprs, except);
 }
@@ -81,7 +83,7 @@ void SelectSpriteSetSJ::Select(const SpriteSelection* selection, Observer* excep
 }
 
 SUBJECT_DEFINITION(SelectSpriteSJ, MSG_SELECT_SPRITE)
-void SelectSpriteSJ::Select(Sprite* spr, bool clear, Observer* except)
+void SelectSpriteSJ::Select(const SprPtr& spr, bool clear, Observer* except)
 {
 	Params p;
 	p.spr = spr;
@@ -96,9 +98,9 @@ void ClearSpriteSelectionSJ::Clear()
 }
 
 SUBJECT_DEFINITION(SpriteNameChangeSJ, MSG_SPRITE_NAME_CHANGE)
-void SpriteNameChangeSJ::OnSpriteNameChanged(const Sprite* spr, Observer* except)
+void SpriteNameChangeSJ::OnSpriteNameChanged(const SprPtr& spr, Observer* except)
 {
-	Notify((void*)spr, except);
+	Notify((void*)&spr, except);
 }
 
 }

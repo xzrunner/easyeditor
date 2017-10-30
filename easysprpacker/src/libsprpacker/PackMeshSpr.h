@@ -4,8 +4,10 @@
 #include "PackNode.h"
 
 #include <SM_Vector.h>
+#include <cu/cu_stl.h>
 
 #include <vector>
+#include <memory>
 
 namespace emesh { class Sprite; }
 
@@ -15,7 +17,7 @@ namespace esprpacker
 class PackMeshSpr : public PackNode
 {
 public:
-	PackMeshSpr(const emesh::Sprite* spr);
+	PackMeshSpr(const std::shared_ptr<emesh::Sprite>& spr);
 	virtual ~PackMeshSpr();
 
 	/**
@@ -33,11 +35,11 @@ public:
 	virtual int SizeOfPackToBin() const;
 	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const;	
 
-	bool Equal(const emesh::Sprite* spr) const;
+	bool Equal(const std::shared_ptr<emesh::Sprite>& spr) const;
 
 private:
 	const PackNode *m_mesh, *m_base;
-	std::vector<std::pair<int, sm::vec2> > m_transform;
+	CU_VEC<std::pair<int, sm::vec2> > m_transform;
 
 }; // PackMeshSpr
 

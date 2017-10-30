@@ -1,8 +1,8 @@
 #ifndef _EASYSPRPACKER_PACK_NODE_H_
 #define _EASYSPRPACKER_PACK_NODE_H_
 
-#include <CU_RefCountObj.h>
-#include <CU_Uncopyable.h>
+#include <cu/CU_RefCountObj.h>
+#include <cu/uncopyable.h>
 
 #include <string>
 

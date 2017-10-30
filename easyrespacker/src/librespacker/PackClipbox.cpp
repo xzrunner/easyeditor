@@ -21,7 +21,7 @@ void PackClipbox::PackToLuaString(ebuilder::CodeGenerator& gen,
 	ClipboxToLuaString::Pack(this, gen);
 }
 
-void PackClipbox::UnpackFromLua(lua_State* L, const std::vector<ee::Image*>& images)
+void PackClipbox::UnpackFromLua(lua_State* L, const std::vector<ee::ImagePtr>& images)
 {
 	ClipboxFromLua::Unpack(L, this);
 }
@@ -43,7 +43,7 @@ int PackClipbox::SizeOfUnpackFromBin() const
 	return ClipboxFromBin::Size();
 }
 
-void PackClipbox::UnpackFromBin(uint8_t** ptr, const std::vector<ee::Image*>& images)
+void PackClipbox::UnpackFromBin(uint8_t** ptr, const std::vector<ee::ImagePtr>& images)
 {
 	ClipboxFromBin::Unpack(ptr, this);
 }

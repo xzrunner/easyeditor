@@ -4,18 +4,18 @@
 #include "PropertySetting.h"
 #include "Observer.h"
 #include "SprFilterProperty.h"
+#include "Sprite.h"
 
 namespace ee
 {
 
 class EditPanelImpl;
-class Sprite;
 class SpritePropertyImpl;
 
 class SpritePropertySetting : public PropertySetting, public Observer
 {
 public:
-	SpritePropertySetting(EditPanelImpl* stage, Sprite* spr);
+	SpritePropertySetting(EditPanelImpl* stage, const SprPtr& spr);
 	virtual ~SpritePropertySetting();
 
 	//
@@ -35,13 +35,13 @@ protected:
 	//
 	virtual void OnNotify(int sj_id, void* ud);
 
-	Sprite* GetSprite();
+	SprPtr GetSprite();
 
 private:
-	static void SetColMul(ee::Sprite* spr, const std::string& val);
-	static void SetColAdd(ee::Sprite* spr, const std::string& val);
-	static void SetColAlpha(ee::Sprite* spr, const std::string& val);
-	static void SetColOverlap(ee::Sprite* spr, const std::string& val);
+	static void SetColMul(const ee::SprPtr& spr, const std::string& val);
+	static void SetColAdd(const ee::SprPtr& spr, const std::string& val);
+	static void SetColAlpha(const ee::SprPtr& spr, const std::string& val);
+	static void SetColOverlap(const ee::SprPtr& spr, const std::string& val);
 
 private:
 	SpritePropertyImpl* m_impl;

@@ -2,16 +2,15 @@
 #define _EASYEDITOR_SYMBOL_PROPERTY_SETTING_H_
 
 #include "PropertySetting.h"
+#include "Symbol.h"
 
 namespace ee
 {
 
-class Symbol;
-
 class SymbolPropertySetting : public PropertySetting
 {
 public:
-	SymbolPropertySetting(Symbol* sym);
+	SymbolPropertySetting(const std::shared_ptr<Symbol>& sym);
 	SymbolPropertySetting(std::string* name, std::string* tag);
 
 	virtual void OnPropertyGridChange(const std::string& name, const wxAny& value);
@@ -21,7 +20,7 @@ protected:
 	virtual void InitProperties(wxPropertyGrid* pg);
 
 protected:
-	Symbol* m_sym;
+	std::shared_ptr<Symbol> m_sym;
 
 	std::string* m_name;
 	std::string* m_tag;

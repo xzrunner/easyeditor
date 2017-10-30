@@ -26,7 +26,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   wxGLContext* glctx, ee::Sprite* edited, 
+					   wxGLContext* glctx, const ee::SprPtr& edited, 
 					   const ee::MultiSpritesImpl* bg_sprites)
 	: ee::EditPanel(parent, frame)
 	, ee::MultiShapesImpl()

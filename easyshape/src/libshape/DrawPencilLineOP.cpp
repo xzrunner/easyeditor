@@ -23,11 +23,10 @@ bool DrawPencilLineOP::OnMouseLeftUp(int x, int y)
 
 	if (!m_curve.empty())
 	{
-		std::vector<sm::vec2> simplified;
+		CU_VEC<sm::vec2> simplified;
 		sm::douglas_peucker(m_curve, m_simplify->GetValue(), simplified);
-		ChainShape* chain = new ChainShape(simplified, false);
+		auto chain = std::make_shared<ChainShape>(simplified, false);
 		ee::InsertShapeSJ::Instance()->Insert(chain);
-		chain->RemoveReference();
 		Clear();
 
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();

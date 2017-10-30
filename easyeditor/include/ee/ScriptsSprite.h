@@ -3,6 +3,8 @@
 
 #include "Sprite.h"
 
+#include <sprite2/macro.h>
+
 namespace ee
 {
 
@@ -13,13 +15,9 @@ class ScriptsSprite : public Sprite
 public:
 	ScriptsSprite& operator = (const ScriptsSprite& spr);
 	ScriptsSprite(const ScriptsSprite& spr);
-	ScriptsSprite(ScriptsSymbol* sym);
+	ScriptsSprite(const s2::SymPtr& sym, uint32_t id = -1);
 
-	/**
-	 *  @interface
-	 *    s2::Sprite
-	 */
-	virtual ScriptsSprite* Clone() const { return new ScriptsSprite(*this); }
+	SPRITE_CLONE_FUNC(ScriptsSprite)
 
 }; // ScriptsSprite 
 

@@ -32,7 +32,7 @@ void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 	for (int i = 1, n = keys.size(); i < n; ++i)
 	{
 		int idx = StringHelper::FromString<int>(keys[i]);
-		Symbol* sym = m_library->GetSymbol(idx);
+		auto sym = m_library->GetSymbol(idx);
 		if (!sym) {
 			continue;
 		}
@@ -43,13 +43,12 @@ void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 			continue;
 		}
 
-		Sprite* spr = SpriteFactory::Instance()->CreateRoot(sym);
+		auto spr = SpriteFactory::Instance()->CreateRoot(sym);
 		if (spr->GetSymbol()->GetBounding().IsValid()) {
 			spr->Translate(pos);
 			InsertSpriteSJ::Instance()->Insert(spr);
 		}
 		EditAddRecordSJ::Instance()->Add(new InsertSpriteAOP(spr));
-		spr->RemoveReference();
 	}
 }
 
@@ -58,7 +57,7 @@ void StageDropTarget::OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& fil
 	for (int i = 0, n = filenames.size(); i < n; ++i)
 	{
 		std::string filename = filenames[i].ToStdString();
-		Symbol* sym = SymbolMgr::Instance()->FetchSymbol(filename);
+		auto sym = SymbolMgr::Instance()->FetchSymbol(filename);
 		sym->RefreshThumbnail(filename);
 		bool success = m_library->AddSymbol(sym);
 		if (success) {
@@ -68,13 +67,11 @@ void StageDropTarget::OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& fil
 				continue;
 			}
 
-			Sprite* spr = SpriteFactory::Instance()->CreateRoot(sym);
+			auto spr = SpriteFactory::Instance()->CreateRoot(sym);
 			spr->Translate(pos);
 			InsertSpriteSJ::Instance()->Insert(spr);
 			EditAddRecordSJ::Instance()->Add(new InsertSpriteAOP(spr));
-			spr->RemoveReference();
 		}
-		sym->RemoveReference();
 	}
 }
 

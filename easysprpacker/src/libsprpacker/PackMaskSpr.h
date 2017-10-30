@@ -3,6 +3,8 @@
 
 #include "PackNode.h"
 
+#include <memory>
+
 namespace emask { class Sprite; }
 
 namespace esprpacker
@@ -11,7 +13,7 @@ namespace esprpacker
 class PackMaskSpr : public PackNode
 {
 public:
-	PackMaskSpr(const emask::Sprite* spr);
+	PackMaskSpr(const std::shared_ptr<emask::Sprite>& spr);
 	virtual ~PackMaskSpr();
 
 	/**
@@ -29,10 +31,10 @@ public:
 	virtual int SizeOfPackToBin() const;
 	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const;	
 
-	bool Equal(const emask::Sprite* spr) const { return true; }
+	bool Equal(const std::shared_ptr<emask::Sprite>& spr) const { return true; }
 
 private:
-	void Init(const emask::Sprite* spr);
+	void Init(const std::shared_ptr<emask::Sprite>& spr);
 
 private:
 	const PackNode* m_sym;

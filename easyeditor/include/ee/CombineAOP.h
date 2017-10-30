@@ -2,6 +2,7 @@
 #define _EASYEDITOR_COMBINE_AOP_H_
 
 #include "AtomicOP.h"
+#include "Sprite.h"
 
 namespace ee
 {
@@ -15,7 +16,7 @@ public:
 	virtual void Undo();
 	virtual void Redo();
 
-	virtual Json::Value Store(const std::vector<Sprite*>& sprs) const;
+	virtual Json::Value Store(const std::vector<SprPtr>& sprs) const;
 
 private:
 	std::vector<AtomicOP*> m_atomics;

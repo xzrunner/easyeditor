@@ -1,13 +1,14 @@
 #ifndef _EASYEDITOR_GROUP_TREE_ITEM_H_
 #define _EASYEDITOR_GROUP_TREE_ITEM_H_
 
+#include "Sprite.h"
+
 #include <wx/treectrl.h>
 
 namespace ee
 {
 
 class Group;
-class Sprite;
 
 class GroupTreeItem : public wxTreeItemData
 {
@@ -20,18 +21,17 @@ public:
 class GroupTreeSpriteItem : public GroupTreeItem
 {
 public:
-	GroupTreeSpriteItem(Sprite* spr);
+	GroupTreeSpriteItem(const SprPtr& spr);
 	GroupTreeSpriteItem(const GroupTreeSpriteItem& item);
-	virtual ~GroupTreeSpriteItem();
 
 	virtual GroupTreeItem* Clone() const { return new GroupTreeSpriteItem(*this); }
 
 	virtual bool IsGroup() const { return false; }
 
-	Sprite* GetSprite() { return m_spr; }
+	const SprPtr& GetSprite() { return m_spr; }
 
 private:
-	Sprite* m_spr;
+	SprPtr m_spr;
 
 }; // GroupTreeSpriteItem
 

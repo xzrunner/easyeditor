@@ -4,6 +4,7 @@
 #include "PackNode.h"
 
 #include <vector>
+#include <memory>
 
 namespace etexture { class Symbol; }
 
@@ -13,7 +14,7 @@ namespace esprpacker
 class PackTexture : public PackNode
 {
 public:
-	PackTexture(const etexture::Symbol* sym);
+	PackTexture(const std::shared_ptr<etexture::Symbol>& sym);
 	virtual ~PackTexture();
 
 	/**

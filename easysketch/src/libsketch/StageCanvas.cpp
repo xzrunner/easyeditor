@@ -61,12 +61,12 @@ void StageCanvas::DrawBackground() const
 
 void StageCanvas::DrawSprites() const
 {
-	std::vector<ee::Sprite*> sprs;
-	m_sprites_impl->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	m_sprites_impl->TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 
 	for (size_t i = 0, n = sprs.size(); i < n; ++i)
 	{
-		ee::Sprite* spr = sprs[i];
+		auto& spr = sprs[i];
 		if (!spr->IsVisible())
 			continue;
 		ee::SpriteRenderer::Instance()->Draw(spr);

@@ -118,7 +118,7 @@ BinaryB4R::Picture* BinaryB4R::CreatePicture(const std::string& filepath) const
 {
 	int sw, sh, fmt;
 	uint8_t* src_pixels = gimg_import(filepath.c_str(), &sw, &sh, &fmt);
-	if (fmt == GPF_RGBA && gum::Config::Instance()->GetPreMulAlpha()) {
+	if (fmt == GPF_RGBA8 && gum::Config::Instance()->GetPreMulAlpha()) {
 		gimg_pre_mul_alpha(src_pixels, sw, sh);
 	}
 	int sc = fmt == GPF_RGB ? 3 : 4;

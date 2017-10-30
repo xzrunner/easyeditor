@@ -7,6 +7,7 @@
 #include "SymbolFile.h"
 #include "SymbolType.h"
 
+#include <memmgr/Allocator.h>
 #include <sprite2/SymType.h>
 
 namespace ee
@@ -14,7 +15,7 @@ namespace ee
 
 SymbolFactory::CallbackMap SymbolFactory::m_creators;
 
-Symbol* SymbolFactory::Create(const std::string& filepath, int type)
+SymPtr SymbolFactory::Create(const std::string& filepath, int type)
 {
 	if (type == s2::SYM_UNKNOWN) {
 		type = ee::SymbolFile::Instance()->Type(filepath);
@@ -22,19 +23,19 @@ Symbol* SymbolFactory::Create(const std::string& filepath, int type)
 	return Create(type);
 }
 
-Symbol* SymbolFactory::Create(int type)
+SymPtr SymbolFactory::Create(int type)
 {
-	Symbol* sym = NULL;
+	SymPtr sym = nullptr;
 	switch (type)
 	{
 	case s2::SYM_IMAGE:
-		sym = new ImageSymbol;
+		sym = mm::allocate_shared<ImageSymbol>();
 		break;
 	case ee::SYM_SCRIPTS:
-		sym = new ScriptsSymbol;
+		sym = mm::allocate_shared<ScriptsSymbol>();
 		break;
 	case ee::SYM_FONTBLANK:
-		sym = new FontBlankSymbol;
+		sym = mm::allocate_shared<FontBlankSymbol>();
 		break;
 	default:
 		{

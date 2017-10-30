@@ -8,7 +8,7 @@ BEGIN_EVENT_TABLE(TextDialog, wxDialog)
 	EVT_CLOSE(TextDialog::OnClose)
 END_EVENT_TABLE()
 
-TextDialog::TextDialog(wxWindow* parent, FontBlankSprite* font)
+TextDialog::TextDialog(wxWindow* parent, const std::shared_ptr<FontBlankSprite>& font)
 	: wxDialog(parent, wxID_ANY, wxT("Text"), wxDefaultPosition, wxSize(600, 400), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 	, m_font(font)
 {

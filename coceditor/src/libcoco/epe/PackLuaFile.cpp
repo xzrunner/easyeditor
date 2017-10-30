@@ -13,29 +13,26 @@ namespace ecoco
 namespace epe
 {
 
-void PackLuaFile::pack(const std::vector<ee::Sprite*>& sprs, const std::string& outfloder)
+void PackLuaFile::pack(const std::vector<ee::SprPtr>& sprs, const std::string& outfloder)
 {
 	// root symbol
-	ecomplex::Symbol root;
-	root.name = "root";
-	for (int i = 0, n = sprs.size(); i < n; ++i)
-	{
-		ee::Sprite* spr = const_cast<ee::Sprite*>(sprs[i]);
-		spr->AddReference();
-		root.Add(spr);
+	auto root = std::make_shared<ecomplex::Symbol>();
+	root->name = "root";
+	for (int i = 0, n = sprs.size(); i < n; ++i) {
+		root->Add(sprs[i]);
 	}
 
 	// get all syms
 	SymbolDependanceSorter preprocess;
 	preprocess.prepare(sprs);
-	std::vector<const ee::Symbol*> syms = preprocess.GetSymbolSet().GetOrdered();
-	syms.push_back(&root);
+	auto syms = preprocess.GetSymbolSet().GetOrdered();
+	syms.push_back(root);
 
 	// pack images
-	std::set<ee::Image*> setImages;
+	std::set<std::shared_ptr<ee::Image>> setImages;
 	for (int i = 0, n = syms.size(); i < n; ++i)
 	{
-		if (const ee::ImageSymbol* s = dynamic_cast<const ee::ImageSymbol*>(syms[i]))
+		if (auto s = std::dynamic_pointer_cast<const ee::ImageSymbol>(syms[i]))
 			setImages.insert(s->GetImage());
 	}
 

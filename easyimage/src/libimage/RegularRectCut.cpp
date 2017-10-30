@@ -25,7 +25,7 @@ RegularRectCut::RegularRectCut(const uint8_t* pixels, int w, int h)
 	m_area_array = new PixelAreaLUT(m_pixels, m_width, m_height, true);
 }
 
-RegularRectCut::RegularRectCut(const uint8_t* pixels, int w, int h, const std::vector<Rect>& pre_rects)
+RegularRectCut::RegularRectCut(const uint8_t* pixels, int w, int h, const CU_VEC<Rect>& pre_rects)
 {
 	LoadPixels(pixels, w, h);
 

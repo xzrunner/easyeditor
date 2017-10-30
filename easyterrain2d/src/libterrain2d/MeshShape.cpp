@@ -7,7 +7,7 @@
 namespace eterrain2d
 {
 
-MeshShape::MeshShape(const ee::Symbol* base)
+MeshShape::MeshShape(const ee::SymPtr& base)
 	: emesh::Mesh(base)
 {
 }

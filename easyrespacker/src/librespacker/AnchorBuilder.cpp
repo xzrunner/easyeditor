@@ -21,7 +21,7 @@ void AnchorBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 {
 }
 
-const IPackNode* AnchorBuilder::Create(const ee::Sprite* spr)
+const IPackNode* AnchorBuilder::Create(const ee::SprConstPtr& spr)
 {
 	return new PackAnchor();
 }

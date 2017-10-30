@@ -21,7 +21,7 @@ void PackLabel::PackToLuaString(ebuilder::CodeGenerator& gen,
 	LabelToLuaString::Pack(this, gen);
 }
 
-void PackLabel::UnpackFromLua(lua_State* L, const std::vector<ee::Image*>& images)
+void PackLabel::UnpackFromLua(lua_State* L, const std::vector<ee::ImagePtr>& images)
 {
 	LabelFromLua::Unpack(L, this);
 }
@@ -43,7 +43,7 @@ int PackLabel::SizeOfUnpackFromBin() const
 	return LabelFromBin::Size(this);
 }
 
-void PackLabel::UnpackFromBin(uint8_t** ptr, const std::vector<ee::Image*>& images)
+void PackLabel::UnpackFromBin(uint8_t** ptr, const std::vector<ee::ImagePtr>& images)
 {
 	LabelFromBin::Unpack(ptr, this);
 }

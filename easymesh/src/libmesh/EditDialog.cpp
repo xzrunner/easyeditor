@@ -7,7 +7,7 @@
 #include "Mesh.h"
 
 #include <ee/ConfirmDialog.h>
-#include <ee/SpriteFactory.h>
+#include <ee/SpritePool.h>
 
 #include <wx/splitter.h>
 
@@ -19,12 +19,12 @@ BEGIN_EVENT_TABLE(EditDialog, wxDialog)
 END_EVENT_TABLE()
 
 EditDialog::EditDialog(wxWindow* parent, wxGLContext* glctx, 
-					   Sprite* edited, const ee::MultiSpritesImpl* sprite_impl)
+					   const std::shared_ptr<Sprite>& edited, const ee::MultiSpritesImpl* sprite_impl)
 	: wxDialog(parent, wxID_ANY, "Edit Mesh", wxDefaultPosition, 
 	wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 	, m_spr(edited)
 {
-	Symbol* sym = dynamic_cast<Symbol*>(m_spr->GetSymbol());
+	auto sym = std::dynamic_pointer_cast<Symbol>(m_spr->GetSymbol());
 	SetTitle(sym->GetFilepath());
 	InitLayout(glctx, edited, sprite_impl);
 
@@ -33,17 +33,17 @@ EditDialog::EditDialog(wxWindow* parent, wxGLContext* glctx,
 
 EditDialog::~EditDialog()
 {
-	Symbol* sym = dynamic_cast<Symbol*>(m_spr->GetSymbol());
+	auto sym = std::dynamic_pointer_cast<Symbol>(m_spr->GetSymbol());
 	sym->SetPause(false);
 }
 
-void EditDialog::InitLayout(wxGLContext* glctx, ee::Sprite* edited, 
+void EditDialog::InitLayout(wxGLContext* glctx, const ee::SprPtr& edited,
 							const ee::MultiSpritesImpl* sprite_impl)
 {
  	wxSplitterWindow* splitter = new wxSplitterWindow(this);
  
  	StagePanel* stage = new StagePanel(splitter, this, glctx, edited, sprite_impl);
-	Symbol* sym = dynamic_cast<Symbol*>(m_spr->GetSymbol());
+	auto sym = std::dynamic_pointer_cast<Symbol>(m_spr->GetSymbol());
 	stage->SetMeshSymbol(sym);
  	m_stage = stage;
  	ee::ToolbarPanel* toolbar = new ToolbarPanel(splitter, stage, false, m_spr);
@@ -61,7 +61,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 		return;
 	}
 
-	Symbol* sym = dynamic_cast<Symbol*>(m_spr->GetSymbol());
+	auto sym = std::dynamic_pointer_cast<Symbol>(m_spr->GetSymbol());
 
 	ee::ConfirmDialog dlg(this);
 	int val = dlg.ShowModal();
@@ -73,7 +73,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 // 		FileIO::Store(sym.GetFilepath().c_str(), &sym);
 // 		sym.RefreshThumbnail(filepath);
 
-		ee::SpriteFactory::Instance()->UpdateBoundings(*sym);
+		ee::SpritePool::Instance()->UpdateBoundings(*sym);
 		Destroy();
 	}
 	else if (val == wxID_NO)

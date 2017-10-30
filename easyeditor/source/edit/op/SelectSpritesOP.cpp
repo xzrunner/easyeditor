@@ -18,7 +18,7 @@
 #include "SymbolType.h"
 #include "FileHelper.h"
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 
 #include <wx/clipbrd.h>
 
@@ -107,7 +107,7 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
  	m_draggable = true;
 
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-	Sprite* selected = NULL;
+	SprPtr selected = nullptr;
 	if (!m_rect_select) {
 		selected = SelectByPos(pos);
 	}
@@ -171,17 +171,16 @@ bool SelectSpritesOP::OnMouseLeftUp(int x, int y)
 
 	sm::vec2 end = m_stage->TransPosScrToProj(x, y);
 	sm::rect rect(m_left_first_pos, end);
-	std::vector<Sprite*> sprs;
+	std::vector<SprPtr> sprs;
 	m_sprs_impl->QuerySpritesByRect(rect, m_left_first_pos.x < end.x, sprs);
 	if (m_stage->GetKeyState(WXK_CONTROL))
 	{
-		for (size_t i = 0, n = sprs.size(); i < n; ++i) 
+		for (auto& spr : sprs) 
 		{
-			Sprite* spr = sprs[i];
 			if (m_selection->IsExist(spr)) {
-				m_selection->Remove(sprs[i]);
+				m_selection->Remove(spr);
 			} else {
-				m_selection->Add(sprs[i]);
+				m_selection->Add(spr);
 			}
 		}
 	}
@@ -223,7 +222,7 @@ bool SelectSpritesOP::OnMouseRightUp(int x, int y)
 		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 		PointMultiQueryVisitor visitor(pos);
 		m_sprs_impl->TraverseSprites(visitor, DT_EDITABLE);
-		const std::vector<Sprite*>& sprs = visitor.GetResult();
+		auto& sprs = visitor.GetResult();
 		SetRightPan(sprs.empty());
 	}
 
@@ -262,25 +261,23 @@ bool SelectSpritesOP::Clear()
 	return false;
 }
 
-Sprite* SelectSpritesOP::SelectByPos(const sm::vec2& pos) const
+SprPtr SelectSpritesOP::SelectByPos(const sm::vec2& pos) const
 {
 	if (m_stage->GetKeyState(WXK_SPACE)) {
-		return NULL;
+		return nullptr;
 	}
 
-	Sprite* selected = NULL;
-	std::vector<Sprite*> sprs;
-	m_sprs_impl->GetSpriteSelection()->Traverse(FetchAllVisitor<Sprite>(sprs));
-	for (int i = 0, n = sprs.size(); i < n; ++i)
-	{
-		Sprite* spr = sprs[i];
+	SprPtr selected = nullptr;
+	std::vector<SprPtr> sprs;
+	m_sprs_impl->GetSpriteSelection()->Traverse(FetchAllRefVisitor<Sprite>(sprs));
+	for (auto& spr : sprs) {
 		if (spr->IsEditable() && spr->GetBounding()->IsContain(pos)) {
 			selected = spr;
 			break;
 		}
 	}
 	if (!selected) {
-		Sprite* spr = m_sprs_impl->QuerySpriteByPos(pos);
+		auto spr = m_sprs_impl->QuerySpriteByPos(pos);
 		if (spr) {
 			selected = spr;
 		}
@@ -288,29 +285,29 @@ Sprite* SelectSpritesOP::SelectByPos(const sm::vec2& pos) const
 	return selected;
 }
 
-void SelectSpritesOP::PasteSprToClipboard(const Sprite* spr, Json::Value& value) const
+void SelectSpritesOP::PasteSprToClipboard(const SprConstPtr& spr, Json::Value& value) const
 {
-	std::string filepath = dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath();
-	value["filepath"] = filepath;
-	std::string dir = ee::FileHelper::GetFileDir(filepath);
+	auto filepath = std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol())->GetFilepath();
+	value["filepath"] = filepath.c_str();
+	auto dir = ee::FileHelper::GetFileDir(filepath);
 	spr->Store(value, dir);	
 }
 
-void SelectSpritesOP::CopySprFromClipboard(Sprite* spr, const Json::Value& value) const
+void SelectSpritesOP::CopySprFromClipboard(const SprPtr& spr, const Json::Value& value) const
 {
-	std::string dir = ee::FileHelper::GetFileDir(dynamic_cast<ee::Symbol*>(spr->GetSymbol())->GetFilepath());
+	auto dir = ee::FileHelper::GetFileDir(std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol())->GetFilepath());
 	spr->Load(value, dir);
 }
 
 void SelectSpritesOP::PasteToSelection() const
 {
-	std::vector<Sprite*> sprs;
+	std::vector<SprPtr> sprs;
 	GetOrderedSelection(sprs);
 	Json::Value value;
 	for (int i = 0, n = sprs.size(); i < n; ++i)
 	{
 		Json::Value& sval = value["sprite"][i];
-		Sprite* s = sprs[i];
+		auto& s = sprs[i];
 		if (wxTheClipboard->Open()) {
 			PasteSprToClipboard(s, sval);
 		}
@@ -354,17 +351,16 @@ void SelectSpritesOP::CopyFromSelection()
 	m_selection->Clear();
 	ClearSpriteSelectionSJ::Instance()->Clear();
 
-	std::vector<Sprite*> sprs;
+	std::vector<SprPtr> sprs;
 
 	int i = 0;
 	Json::Value sval = value["sprite"][i++];
 	while (!sval.isNull()) {
-		std::string filepath = sval["filepath"].asString();
-		Symbol* sym = SymbolMgr::Instance()->FetchSymbol(filepath);
-		Sprite* spr = SpriteFactory::Instance()->CreateRoot(sym);
+		std::string filepath = sval["filepath"].asString().c_str();
+		auto sym = SymbolMgr::Instance()->FetchSymbol(filepath);
+		auto spr = SpriteFactory::Instance()->CreateRoot(sym);
 		sym->RefreshThumbnail(filepath);
 		sprs.push_back(spr);
-		sym->RemoveReference();
 		CopySprFromClipboard(spr, sval);
 		InsertSpriteSJ::Instance()->Insert(spr);
 		EditAddRecordSJ::Instance()->Add(new InsertSpriteAOP(spr));
@@ -375,22 +371,21 @@ void SelectSpritesOP::CopyFromSelection()
 		m_selection->Add(sprs[i]);
 	}
 	SelectSpriteSetSJ::Instance()->Select(m_selection);
-	for_each(sprs.begin(), sprs.end(), cu::RemoveRefFunctor<Sprite>());
 
 	wxTheClipboard->Close();
 }
 
-void SelectSpritesOP::GetOrderedSelection(std::vector<Sprite*>& sprs) const
+void SelectSpritesOP::GetOrderedSelection(std::vector<SprPtr>& sprs) const
 {
-	std::vector<Sprite*> selection;
-	m_selection->Traverse(FetchAllVisitor<Sprite>(selection));
+	std::vector<SprPtr> selection;
+	m_selection->Traverse(FetchAllRefVisitor<Sprite>(selection));
 	if (selection.size() <= 1) {
 		sprs = selection;
 		return;
 	}
 
-	std::vector<Sprite*> all;
-	m_sprs_impl->TraverseSprites(FetchAllVisitor<Sprite>(all));
+	std::vector<SprPtr> all;
+	m_sprs_impl->TraverseSprites(FetchAllRefVisitor<Sprite>(all));
 
 	sprs.clear();
 	for (int i = 0, n = all.size(); i < n; ++i) {

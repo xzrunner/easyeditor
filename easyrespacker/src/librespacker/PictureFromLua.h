@@ -9,7 +9,7 @@ namespace erespacker
 class PictureFromLua
 {
 public:
-	static void Unpack(lua_State* L, const std::vector<ee::Image*>& images,
+	static void Unpack(lua_State* L, const std::vector<ee::ImagePtr>& images,
 		PackPicture* picture);
 
 }; // PictureFromLua

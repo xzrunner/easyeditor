@@ -2,9 +2,11 @@
 #define _EASYANIM_KEY_FRAME_H_
 
 #include "SkeletonData.h"
-#include <sprite2/AnimLerp.h>
 
-#include <CU_RefCountObj.h>
+#include <ee/Sprite.h>
+
+#include <sprite2/AnimLerp.h>
+#include <cu/CU_RefCountObj.h>
 
 namespace s2 { class ILerp; }
 
@@ -27,18 +29,18 @@ public:
 		return m_sprs.empty();
 	}
 
-	void Insert(ee::Sprite* spr, int idx);
-	bool Remove(ee::Sprite* spr);
-	bool Reorder(const ee::Sprite* spr, bool up);
-	bool ReorderMost(const ee::Sprite* spr, bool up);
-	bool Sort(std::vector<ee::Sprite*>& sprs);
+	void Insert(const ee::SprPtr& spr, int idx);
+	bool Remove(const ee::SprPtr& spr);
+	bool Reorder(const ee::SprConstPtr& spr, bool up);
+	bool ReorderMost(const ee::SprConstPtr& spr, bool up);
+	bool Sort(std::vector<ee::SprPtr>& sprs);
 
 	int Size() const { return m_sprs.size(); }
-	const ee::Sprite* GetSprite(int index) {
-		return index >= 0 && index < m_sprs.size() ? m_sprs[index] : NULL;
+	const ee::SprPtr GetSprite(int index) {
+		return index >= 0 && index < m_sprs.size() ? m_sprs[index].get() : nullptr;
 	}
 
-	const std::vector<ee::Sprite*>& GetAllSprites() const { return m_sprs; }
+	const std::vector<ee::SprPtr>& GetAllSprites() const { return m_sprs; }
 
 	bool HasClassicTween() const { return m_classic_tween; }
 	void SetClassicTween(bool tween = true) { m_classic_tween = tween; }
@@ -59,16 +61,16 @@ public:
 	const std::vector<std::pair<s2::AnimLerp::SprData, s2::ILerp*> >& GetLerps() const { return m_lerps; }
 
 	static void GetTweenSprite(const KeyFrame* start, const KeyFrame* end, 
-		std::vector<ee::Sprite*>& tween, int time, int tot_time);
+		std::vector<ee::SprPtr>& tween, int time, int tot_time);
 
 // private:
-// 	void GetTweenSprite(ee::Sprite* start, ee::Sprite* end, ee::Sprite* tween, float process) const;
-// 	bool IsTweenMatched(const ee::Sprite* s0, const ee::Sprite* s1) const;
+// 	void GetTweenSprite(const ee::SprPtr& start, const ee::SprPtr& end, const ee::SprPtr& tween, float process) const;
+// 	bool IsTweenMatched(const ee::SprPtr s0, const ee::SprPtr s1) const;
 
 private:
 	int m_time;
 
-	std::vector<ee::Sprite*> m_sprs;
+	std::vector<ee::SprPtr> m_sprs;
 
 	bool m_classic_tween;
 	std::vector<std::pair<s2::AnimLerp::SprData, s2::ILerp*> > m_lerps;

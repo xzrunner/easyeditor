@@ -11,7 +11,7 @@ CosineShape::CosineShape(const CosineShape& cosine)
 {
 }
 
-CosineShape::CosineShape(const std::vector<sm::vec2>& vertices)
+CosineShape::CosineShape(const CU_VEC<sm::vec2>& vertices)
 	: s2::CosineShape(vertices)
 {
 }

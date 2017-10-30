@@ -18,7 +18,7 @@ sm::rect Symbol::GetBoundingImpl(const s2::Sprite* spr, const s2::Actor* actor, 
 
 bool Symbol::LoadResources()
 {
-	if (!gum::FilepathHelper::Exists(m_filepath)) {
+	if (!gum::FilepathHelper::Exists(m_filepath.c_str())) {
 		return false;
 	}
 	m_et_cfg = PSConfigMgr::Instance()->GetConfig(m_filepath);

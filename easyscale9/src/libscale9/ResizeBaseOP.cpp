@@ -6,13 +6,13 @@
 #include <ee/panel_msg.h>
 #include <ee/SpriteRenderer.h>
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <SM_Test.h>
 
 namespace escale9
 {
 
-ResizeBaseOP::ResizeBaseOP(wxWindow* wnd, ee::EditPanelImpl* stage, Symbol* sym)
+ResizeBaseOP::ResizeBaseOP(wxWindow* wnd, ee::EditPanelImpl* stage, const std::shared_ptr<Symbol>& sym)
 	: ee::ZoomViewOP(wnd, stage, true)
 	, m_sym(sym)
 	, m_status(e_null)
@@ -79,7 +79,7 @@ bool ResizeBaseOP::OnDraw() const
 {
 	if (ee::ZoomViewOP::OnDraw()) return true;
 
-	ee::SpriteRenderer::Instance()->Draw(m_sym);
+	ee::SpriteRenderer::Instance()->Draw(m_sym.get());
 	
 	sm::vec2 sz = m_sym->GetBounding().Size();
 	const float hw = sz.x * 0.5f, hh = sz.y * 0.5f;

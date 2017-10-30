@@ -24,7 +24,7 @@ private:
 		const std::map<std::string, std::string>& map_name_path);
 	static KeyFrame* LoadFrame(Layer* layer, rapidxml::xml_node<>* frame_node,
 		const std::map<std::string, std::string>& map_name_path);
-	static ee::Sprite* LoadActor(rapidxml::xml_node<>* actor_node,
+	static ee::SprPtr LoadActor(rapidxml::xml_node<>* actor_node,
 		const std::map<std::string, std::string>& map_name_path);
 
 }; // FlashLoader

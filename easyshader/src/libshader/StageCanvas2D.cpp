@@ -9,7 +9,7 @@
 #include <ee/color_config.h>
 #include <ee/cfg_const.h>
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 
 namespace eshader
 {
@@ -37,7 +37,7 @@ void StageCanvas2D::OnMousePressed(const sm::vec2& pos)
 	m_start_time = clock();
 
 	Shader* shader = m_stage->GetShader();
-	ee::Sprite* spr = m_stage->QuerySpriteByPos(pos);
+	auto spr = m_stage->QuerySpriteByPos(pos);
 	if (shader && spr) {
 		ee::ShaderMgr::Instance()->SetShader(ee::ShaderMgr::SPRITE);
 
@@ -64,11 +64,11 @@ void StageCanvas2D::DrawBackground() const
 
 void StageCanvas2D::DrawSprites() const
 {
-	std::vector<ee::Sprite*> sprs;
-	static_cast<StagePanel2D*>(m_stage)->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	static_cast<StagePanel2D*>(m_stage)->TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	for (size_t i = 0, n = sprs.size(); i < n; ++i)
 	{
-		ee::Sprite* spr = sprs[i];
+		auto& spr = sprs[i];
 		if (!spr->IsVisible())
 			continue;
 		ee::SpriteRenderer::Instance()->Draw(sprs[i]);

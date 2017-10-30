@@ -21,7 +21,7 @@ public:
 	//
 	// MultiSpritesImpl interface
 	//
-	virtual void TraverseSprites(ee::Visitor<ee::Sprite>& visitor, 
+	virtual void TraverseSprites(ee::RefVisitor<ee::Sprite>& visitor, 
 		ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
 
 	void TransCoordsToGridPos(const sm::vec2& pos, int& row, int& col) const;
@@ -65,10 +65,10 @@ protected:
 private:
 	sm::vec2 FixSpriteLocation(const sm::vec2& pos) const;
 
-	void ChangeSymbolRemain(ee::Sprite* spr, bool increase) const;
+	void ChangeSymbolRemain(const ee::SprPtr& spr, bool increase) const;
 
-	void Insert(ee::Sprite* spr);
-	void Remove(ee::Sprite* spr);
+	void Insert(const ee::SprPtr& spr);
+	void Remove(const ee::SprPtr& spr);
 	void Clear();
 
 private:

@@ -4,7 +4,7 @@
 #include "ResourcesMgr.h"
 
 #include <SM_Vector.h>
-#include <CU_RefCountObj.h>
+#include <cu/CU_RefCountObj.h>
 
 #include <Box2D/Box2D.h>
 

@@ -15,7 +15,7 @@ class StageCanvas : public ee::CameraCanvas
 public:
 	StageCanvas(StagePanel* stage);
 	StageCanvas(StagePanel* stage, wxGLContext* glctx,
-		ee::Sprite* edited, const ee::MultiSpritesImpl* bg_sprites);
+		ee::SprPtr edited, const ee::MultiSpritesImpl* bg_sprites);
 	virtual ~StageCanvas();
 
 protected:
@@ -24,10 +24,10 @@ protected:
 private:
 	StagePanel* m_stage;
 
-	ee::Sprite* m_edited;
+	ee::SprPtr m_edited;
 	const ee::MultiSpritesImpl* m_sprite_impl;
 
-	ee::Sprite* m_bg;
+	ee::SprPtr m_bg;
 
 }; // StageCanvas
 

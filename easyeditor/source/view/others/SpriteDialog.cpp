@@ -4,7 +4,7 @@
 namespace ee
 {
 
-SpriteDialog::SpriteDialog(wxWindow* parent, Sprite* spr)
+SpriteDialog::SpriteDialog(wxWindow* parent, const SprPtr& spr)
 	: BaseDialog(parent, "Sprite")
 	, m_spr(spr)
 {
@@ -19,9 +19,9 @@ void SpriteDialog::InitLayout()
 		wxSizer* sz = new wxBoxSizer(wxHORIZONTAL);
 		sz->Add(new wxStaticText(this, wxID_ANY, "name"), 0, wxLEFT | wxRIGHT, 5);
 
-		std::string name;
+		CU_STR name;
 		s2::SprNameMap::Instance()->IDToStr(m_spr->GetName(), name);
-		m_name_ctrl = new wxTextCtrl(this, wxID_ANY, name, wxDefaultPosition, wxSize(400, -1));
+		m_name_ctrl = new wxTextCtrl(this, wxID_ANY, name.c_str(), wxDefaultPosition, wxSize(400, -1));
 		sz->Add(m_name_ctrl, 0, wxLEFT | wxRIGHT, 5);
 
 		sizer->Add(sz);

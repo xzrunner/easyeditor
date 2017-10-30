@@ -26,17 +26,16 @@ PasteSymbolTileOP::PasteSymbolTileOP(wxWindow* wnd, EditPanelImpl* stage, MultiS
 
 bool PasteSymbolTileOP::OnMouseLeftDown(int x, int y)
 {
-	Symbol* sym = m_library->GetSymbol();
+	auto sym = m_library->GetSymbol();
 	if (sym) 
 	{
 		if (!m_bCaptured)
 			m_pos = m_stage->TransPosScrToProj(x, y);
 
-		Sprite* spr = SpriteFactory::Instance()->CreateRoot(sym);
+		auto spr = SpriteFactory::Instance()->CreateRoot(sym);
 		spr->Translate(m_pos);
 		spr->Rotate(m_rotate);
 		InsertSpriteSJ::Instance()->Insert(spr);
-		spr->RemoveReference();
 	}
 
 	return false;
@@ -58,8 +57,9 @@ bool PasteSymbolTileOP::OnMouseMove(int x, int y)
 	m_bCaptured = false;
 	m_pos = m_stage->TransPosScrToProj(x, y);
 
-	Sprite* spr = NULL;
-	m_spritesImpl->TraverseSprites(NearestQueryVisitor(m_pos, &spr), DT_EDITABLE);
+	NearestQueryVisitor visitor(m_pos);
+	m_spritesImpl->TraverseSprites(visitor, DT_EDITABLE);
+	auto spr = visitor.GetResult();
 	if (!spr) return false;
 
 	const sm::vec2& capture = spr->GetPosition();
@@ -141,13 +141,13 @@ bool PasteSymbolTileOP::OnDraw() const
 {
 	if (ZoomViewOP::OnDraw()) return true;
 
-	Symbol* sym = m_library->GetSymbol();
+	auto sym = m_library->GetSymbol();
 	if (sym && m_pos.IsValid())
 	{
 		if (m_scale) {
-			ee::SpriteRenderer::Instance()->Draw(sym, s2::RenderParams(), m_pos, m_rotate, sm::vec2(*m_scale, *m_scale));
+			ee::SpriteRenderer::Instance()->Draw(sym.get(), s2::RenderParams(), m_pos, m_rotate, sm::vec2(*m_scale, *m_scale));
 		} else {
-			ee::SpriteRenderer::Instance()->Draw(sym, s2::RenderParams(), m_pos, m_rotate);
+			ee::SpriteRenderer::Instance()->Draw(sym.get(), s2::RenderParams(), m_pos, m_rotate);
 		}
 	}
 
@@ -159,20 +159,19 @@ bool PasteSymbolTileOP::OnDraw() const
 //////////////////////////////////////////////////////////////////////////
 
 PasteSymbolTileOP::NearestQueryVisitor::
-NearestQueryVisitor(const sm::vec2& pos, Sprite** ret)
+NearestQueryVisitor(const sm::vec2& pos)
 	: m_pos(pos)
 	, m_dis(FLT_MAX)
-	, m_result(ret)
 {
 }
 
 void PasteSymbolTileOP::NearestQueryVisitor::
-Visit(Sprite* spr, bool& next)
+Visit(const SprPtr& spr, bool& next)
 {
 	const float dis = sm::dis_pos_to_pos(spr->GetPosition(), m_pos);
 	if (dis < m_dis)
 	{
-		*m_result = spr;
+		m_result = spr;
 		m_dis = dis;
 	}
 

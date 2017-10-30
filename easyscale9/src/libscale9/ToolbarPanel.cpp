@@ -8,7 +8,7 @@
 namespace escale9
 {
 
-ToolbarPanel::ToolbarPanel(wxWindow* parent, ee::EditPanel* stage, Symbol* sym)
+ToolbarPanel::ToolbarPanel(wxWindow* parent, ee::EditPanel* stage, const std::shared_ptr<Symbol>& sym)
 	: wxPanel(parent)
 	, m_stage(stage)
 	, m_sym(sym)

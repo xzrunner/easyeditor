@@ -37,7 +37,7 @@ std::string NodeToLuaString::TransBool(bool b)
 	return b ? "true" : "false";
 }
 
-void NodeToLuaString::PackVertices(const std::vector<sm::vec2>& vertices, ebuilder::CodeGenerator& gen, 
+void NodeToLuaString::PackVertices(const CU_VEC<sm::vec2>& vertices, ebuilder::CodeGenerator& gen, 
 								   const std::string& name, bool reverse_y, int scale)
 {
 	lua::assign_with_end(gen, name + "_num", vertices.size());

@@ -14,7 +14,7 @@ class IPathfinding
 {
 public:
 	virtual ~IPathfinding() {}
-	virtual void DisableRegion(const ee::Sprite* spr, bool disable) = 0;	
+	virtual void DisableRegion(const ee::SprConstPtr& spr, bool disable) = 0;	
 	virtual void QueryRoute(const sm::vec2& start, const sm::vec2& end) = 0;
 	virtual void DebugDraw() const = 0;
 

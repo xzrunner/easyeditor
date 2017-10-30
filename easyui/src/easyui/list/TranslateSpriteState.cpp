@@ -25,10 +25,10 @@ void TranslateSpriteState::Translate(const sm::vec2& offset)
 		return;
 	}
 
-	std::vector<ee::Sprite*> selected;
-	GetSelection()->Traverse(ee::FetchAllVisitor<ee::Sprite>(selected));
+	std::vector<ee::SprPtr> selected;
+	GetSelection()->Traverse(ee::FetchAllRefVisitor<ee::Sprite>(selected));
 	assert(selected.size() == 1);
-	ee::Sprite* spr = selected[0];
+	auto& spr = selected[0];
 	spr->Translate(offset);
 
 	m_list->Arrange(spr);

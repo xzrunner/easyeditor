@@ -1,9 +1,9 @@
 #ifndef _EASYRESPACKER_UTILITY_NEW_H_
 #define _EASYRESPACKER_UTILITY_NEW_H_
 
-#include <string>
+#include <ee/Sprite.h>
 
-namespace ee { class Sprite; }
+#include <string>
 
 namespace erespacker
 {
@@ -11,7 +11,7 @@ namespace erespacker
 class Utility
 {
 public:
-	static bool IsAnchor(const ee::Sprite* spr);
+	static bool IsAnchor(const ee::SprConstPtr& spr);
 
 	static bool IsNameValid(const std::string& name);
 

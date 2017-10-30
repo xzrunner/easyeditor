@@ -35,8 +35,8 @@ void ArrangeSpriteImpl::OnMouseRightUp(int x, int y)
 {
 	if (m_selection->Size() == 1)
 	{
-		std::vector<ee::Sprite*> sprs;
-		m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+		std::vector<ee::SprPtr> sprs;
+		m_selection->Traverse(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 
 		const sm::vec2& pos = sprs[0]->GetPosition();
 		float angle = sprs[0]->GetAngle();
@@ -65,7 +65,7 @@ void ArrangeSpriteImpl::OnDraw(float cam_scale) const
 //////////////////////////////////////////////////////////////////////////
 
 void ArrangeSpriteImpl::FixCoordsVisitor::
-Visit(ee::Sprite* spr, bool& next)
+Visit(const ee::SprPtr& spr, bool& next)
 {
 	const sm::vec2& pos = spr->GetPosition();
 

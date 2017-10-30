@@ -16,44 +16,44 @@ public:
 	ObjectVector();
 	virtual ~ObjectVector();
 	
-	void Traverse(Visitor<T>& visitor, bool order = true) const;
-	void Traverse(Visitor<T>& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
+	void Traverse(RefVisitor<T>& visitor, bool order = true) const;
+	void Traverse(RefVisitor<T>& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
 
-	bool Remove(T* obj);
+	bool Remove(const std::shared_ptr<T>& obj);
 
-	bool Insert(T* obj);
-	bool Insert(T* obj, int idx);
+	bool Insert(const std::shared_ptr<T>& obj);
+	bool Insert(const std::shared_ptr<T>& obj, int idx);
 
 	bool Clear();
 
-	bool ResetOrder(const T* obj, bool up);
-	bool ResetOrderMost(const T* obj, bool up);
-	bool Sort(std::vector<T*>& list);
+	bool ResetOrder(const std::shared_ptr<const T>& obj, bool up);
+	bool ResetOrderMost(const std::shared_ptr<const T>& obj, bool up);
+	bool Sort(std::vector<std::shared_ptr<T>>& list);
 
-	bool IsExist(T* obj) const;
+	bool IsExist(const std::shared_ptr<T>& obj) const;
 
 	int Size() const;
 
-	const std::vector<T*>& GetObjs() const { return m_objs; }
-	void SetObjs(const std::vector<T*>& objs) { m_objs = objs; }
+	const std::vector<std::shared_ptr<T>>& GetObjs() const { return m_objs; }
+	void SetObjs(const std::vector<std::shared_ptr<T>>& objs) { m_objs = objs; }
 
 public:
-	static void Traverse(const std::vector<T*>& objs, Visitor<T>& visitor, bool order = true);
-	static void Traverse(const std::vector<T*>& objs, Visitor<T>& visitor, DataTraverseType type = DT_ALL, bool order = true);
+	static void Traverse(const std::vector<std::shared_ptr<T>>& objs, RefVisitor<T>& visitor, bool order = true);
+	static void Traverse(const std::vector<std::shared_ptr<T>>& objs, RefVisitor<T>& visitor, DataTraverseType type = DT_ALL, bool order = true);
 
-	static bool Remove(std::vector<T*>& objs, T* obj);
+	static bool Remove(std::vector<std::shared_ptr<T>>& objs, const std::shared_ptr<T>& obj);
 
-	static bool Insert(std::vector<T*>& objs, T* obj);
-	static bool Insert(std::vector<T*>& objs, T* obj, int idx);
+	static bool Insert(std::vector<std::shared_ptr<T>>& objs, const std::shared_ptr<T>& obj);
+	static bool Insert(std::vector<std::shared_ptr<T>>& objs, const std::shared_ptr<T>& obj, int idx);
 
-	static bool Clear(std::vector<T*>& objs);
+	static bool Clear(std::vector<std::shared_ptr<T>>& objs);
 
-	static bool ResetOrder(std::vector<T*>& objs, const T* obj, bool up);
-	static bool ResetOrderMost(std::vector<T*>& objs, const T* obj, bool up);
-	static bool Sort(std::vector<T*>& objs, std::vector<T*>& list);
+	static bool ResetOrder(std::vector<std::shared_ptr<T>>& objs, const std::shared_ptr<const T>& obj, bool up);
+	static bool ResetOrderMost(std::vector<std::shared_ptr<T>>& objs, const std::shared_ptr<const T>& obj, bool up);
+	static bool Sort(std::vector<std::shared_ptr<T>>& objs, std::vector<std::shared_ptr<T>>& list);
 
 private:
-	std::vector<T*> m_objs;
+	std::vector<std::shared_ptr<T>> m_objs;
 
 }; // ObjectVector
 

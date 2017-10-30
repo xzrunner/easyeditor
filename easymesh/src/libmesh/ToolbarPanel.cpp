@@ -11,7 +11,8 @@
 namespace emesh
 {
 
-ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage, bool full, Sprite* spr)
+ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage, bool full, 
+	                       const std::shared_ptr<Sprite>& spr)
 	: ee::ToolbarPanel(parent, stage->GetStageImpl())
 	, m_stage(stage)
 	, m_spr(spr)

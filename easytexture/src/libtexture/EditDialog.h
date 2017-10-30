@@ -1,11 +1,15 @@
 #ifndef _EASYTEXTURE_EDIT_DIALOG_H_
 #define _EASYTEXTURE_EDIT_DIALOG_H_
 
+#include <ee/Sprite.h>
+
 #include <wx/dialog.h>
+
+#include <memory>
 
 class wxGLContext;
 
-namespace ee { class MultiSpritesImpl; class Sprite; class EditPanel; }
+namespace ee { class MultiSpritesImpl; class EditPanel; }
 
 namespace etexture
 {
@@ -17,19 +21,19 @@ class EditDialog : public wxDialog
 {
 public:
 	EditDialog(wxWindow* parent, wxGLContext* glctx, 
-		Sprite* edited, const ee::MultiSpritesImpl* sprite_impl);
+		const std::shared_ptr<Sprite>& edited, const ee::MultiSpritesImpl* sprite_impl);
 	virtual ~EditDialog();
 
 private:
-	void InitLayout(wxGLContext* glctx, ee::Sprite* edited, 
+	void InitLayout(wxGLContext* glctx, const ee::SprPtr& edited, 
 		const ee::MultiSpritesImpl* sprite_impl);
 
 	void OnCloseEvent(wxCloseEvent& event);
 
-	void InitCamera(ee::Sprite* spr) const;
+	void InitCamera(const ee::SprPtr& spr) const;
 
 private:
-	Symbol* m_sym;
+	std::shared_ptr<Symbol> m_sym;
 
 	ee::EditPanel* m_stage;
 

@@ -1,7 +1,7 @@
 #ifndef _EASYMESH_MESH_FACTORY_H_
 #define _EASYMESH_MESH_FACTORY_H_
 
-namespace ee { class Symbol; }
+#include <ee/Symbol.h>
 
 namespace emesh
 {
@@ -11,7 +11,7 @@ class Mesh;
 class MeshFactory
 {
 public:
-	Mesh* CreateMesh(const ee::Symbol* base) const;
+	std::unique_ptr<Mesh> CreateMesh(const ee::SymPtr& base) const;
 
 	void SetShapeType(int pm_mesh_type);
 

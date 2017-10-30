@@ -13,7 +13,7 @@
 
 #include <SM_Calc.h>
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 
 namespace eshape
 {
@@ -63,7 +63,7 @@ bool EditRectOP::OnMouseLeftDown(int x, int y)
 		NodeCapture capture(m_shapes_impl, tolerance);
 		capture.captureEditable(m_first_pos, m_captured);
 
-		if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape))
+		if (auto rect = std::dynamic_pointer_cast<RectShape>(m_captured.shape))
 		{
 			m_shapes_impl->GetShapeSelection()->Add(rect);
 			ee::SelectShapeSJ::Instance()->Select(rect);
@@ -90,17 +90,16 @@ bool EditRectOP::OnMouseLeftUp(int x, int y)
 			const float dis = sm::dis_pos_to_pos(m_first_pos, m_curr_pos);
 			if (dis > 1)
 			{
-				RectShape* rect = new RectShape(sm::rect(m_first_pos, m_curr_pos));
+				auto rect = std::make_shared<RectShape>(sm::rect(m_first_pos, m_curr_pos));
 				ee::SelectShapeSJ::Instance()->Select(rect);
 				ee::InsertShapeSJ::Instance()->Insert(rect);
-				rect->RemoveReference();
 			}
 		}
 	}
 	else
 	{
 		m_property->EnablePropertyGrid(true);
-		if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape)) {
+		if (auto rect = std::dynamic_pointer_cast<RectShape>(m_captured.shape)) {
 			ee::SelectShapeSJ::Instance()->Select(rect);
 		}
 	}
@@ -147,7 +146,7 @@ bool EditRectOP::OnMouseMove(int x, int y)
 	if (tolerance != 0)
 	{	
 		NodeCapture capture(m_shapes_impl, tolerance);
-		ee::Shape* old = m_captured.shape;
+		auto old = m_captured.shape;
 		capture.captureEditable(pos, m_captured);
 		if (old && !m_captured.shape || !old && m_captured.shape) {
 			ee::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -165,7 +164,7 @@ bool EditRectOP::OnMouseDrag(int x, int y)
 
 	if (m_captured.shape)
 	{
-		if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape))
+		if (auto rect = std::dynamic_pointer_cast<RectShape>(m_captured.shape))
 		{
 			sm::vec2 center = rect->GetBounding().Center();
 
@@ -209,7 +208,7 @@ bool EditRectOP::OnDraw() const
 		if (m_node_capture)
 		{
 			int tolerance = m_node_capture->GetValue();
-			if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape))
+			if (auto rect = std::dynamic_pointer_cast<RectShape>(m_captured.shape))
 			{
 				sm::vec2 pos = rect->GetRect().Center();
 				s2::RVG::SetColor(s2::Color(102, 255, 102));

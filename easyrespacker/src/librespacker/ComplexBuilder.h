@@ -3,12 +3,14 @@
 
 #include "INodeBuilder.h"
 
+#include <ee/Sprite.h>
+
+#include <sprite2/Sprite.h>
+
 #include <vector>
 #include <map>
 
 namespace ecomplex { class Symbol; }
-namespace ee { class Sprite; }
-namespace s2 { class Sprite; }
 
 namespace erespacker
 {
@@ -26,23 +28,23 @@ public:
 
 	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
 
-	const IPackNode* Create(const ecomplex::Symbol* sym);
+	const IPackNode* Create(const std::shared_ptr<const ecomplex::Symbol>& sym);
 
 private:
-	IPackNode* LoadComplex(const ecomplex::Symbol* sym);
+	IPackNode* LoadComplex(const std::shared_ptr<const ecomplex::Symbol>& sym);
 
-	IPackNode* LoadAnchor(const ecomplex::Symbol* sym);
+	IPackNode* LoadAnchor(const std::shared_ptr<ecomplex::Symbol>& sym);
 
-	static void GroupFromTag(const std::vector<s2::Sprite*>& src, 
-		std::map<std::string, std::vector<ee::Sprite*> >& dst,
-		std::vector<ee::Sprite*>& others);
+	static void GroupFromTag(const CU_VEC<s2::SprPtr>& src, 
+		std::map<std::string, std::vector<ee::SprPtr> >& dst,
+		std::vector<ee::SprPtr>& others);
 
 private:
 	ExportNameSet& m_export_set;
 
 	ClipboxBuilder* m_cb_builder;
 
-	std::map<const ecomplex::Symbol*, const PackAnimation*> m_map_data;
+	std::map<std::shared_ptr<const ecomplex::Symbol>, const PackAnimation*> m_map_data;
 
 	std::vector<PackAnimation*> m_gen_nodes;
 

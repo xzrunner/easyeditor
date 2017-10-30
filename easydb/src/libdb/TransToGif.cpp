@@ -68,7 +68,7 @@ void TransToGif::Run(const std::string& srcdir, const std::string& dstdir) const
 	//		if (name.empty()) {
 	//			continue;
 	//		}
-	//		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+	//		auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	//		libanim::Symbol* anim = static_cast<libanim::Symbol*>(sym);
 
 	//		int max_frame = anim->GetMaxFrameIdx();

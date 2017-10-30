@@ -4,7 +4,7 @@
 #include <ee/Math2D.h>
 
 #include <sprite2/Color.h>
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <SM_Calc.h>
 
 #include <assert.h>
@@ -14,7 +14,7 @@ namespace eanim
 
 static const int REGION = 5;
 
-Joint::Joint(ee::Sprite* spr)
+Joint::Joint(const ee::SprPtr& spr)
 	: m_spr(spr)
 	, m_parent(NULL)
 {
@@ -22,7 +22,7 @@ Joint::Joint(ee::Sprite* spr)
 	CreateId();
 }
 
-Joint::Joint(ee::Sprite* spr, const sm::vec2& pos)
+Joint::Joint(const ee::SprPtr& spr, const sm::vec2& pos)
 	: m_spr(spr)
 	, m_parent(NULL)
 {

@@ -13,7 +13,7 @@
 namespace ee
 {
 
-SINGLETON_DEFINITION(SymbolFile);
+CU_SINGLETON_DEFINITION(SymbolFile);
 
 static const char* TAG_GEN = "gen";
 
@@ -48,7 +48,7 @@ SymbolFile::SymbolFile()
 
 int SymbolFile::Type(const std::string& filepath) const
 {
-	int type = gum::SymbolFile::Instance()->Type(filepath);
+	int type = gum::SymbolFile::Instance()->Type(filepath.c_str());
 	if (type != s2::SYM_UNKNOWN && type != s2::SYM_INVALID) {
 		return type;
 	}
@@ -108,18 +108,18 @@ int SymbolFile::Type(const std::string& filepath) const
 	return s2::SYM_UNKNOWN;
 }
 
-const std::string& SymbolFile::Tag(int type) const
+std::string SymbolFile::Tag(int type) const
 {
-	const std::string& tag = gum::SymbolFile::Instance()->Tag(type);
-	if (tag != gum::SymbolFile::UNKNOWN_TAG) {
-		return tag;
+	const CU_STR& tag = gum::SymbolFile::Instance()->Tag(type);
+	if (tag != gum::SymbolFile::Instance()->UNKNOWN_TAG) {
+		return tag.c_str();
 	}
 
 	std::map<int, std::string>::const_iterator itr = m_type2tag.find(type);
 	if (itr != m_type2tag.end()) {
 		return itr->second;
 	} else {
-		return gum::SymbolFile::UNKNOWN_TAG;
+		return gum::SymbolFile::Instance()->UNKNOWN_TAG.c_str();
 	}
 }
 

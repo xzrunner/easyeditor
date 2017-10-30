@@ -33,7 +33,7 @@ void TranslateSpriteState::OnMouseRelease(const sm::vec2& pos)
 //////////////////////////////////////////////////////////////////////////
 
 void TranslateSpriteState::Visitor::
-Visit(ee::Sprite* spr, bool& next)
+Visit(const ee::SprPtr& spr, bool& next)
 {
 	if (dynamic_cast<Sprite*>(spr) != NULL) {
 		spr->SetPosition(sm::vec2(0, 0));

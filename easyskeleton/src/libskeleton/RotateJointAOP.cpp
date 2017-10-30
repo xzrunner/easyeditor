@@ -4,20 +4,10 @@
 namespace libskeleton
 {
 
-RotateJointAOP::RotateJointAOP(Joint* joint, float rot)
+RotateJointAOP::RotateJointAOP(const std::shared_ptr<Joint>& joint, float rot)
 	: m_joint(joint)
 	, m_rot(rot)
 {
-	if (m_joint) {
-		m_joint->AddReference();
-	}
-}
-
-RotateJointAOP::~RotateJointAOP()
-{
-	if (m_joint) {
-		m_joint->RemoveReference();
-	}
 }
 
 void RotateJointAOP::Undo()

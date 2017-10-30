@@ -2,6 +2,7 @@
 #define _EASYEDITOR_SHAPE_MSG_H_
 
 #include "Subject.h"
+#include "Shape.h"
 
 namespace ee
 {
@@ -17,14 +18,14 @@ class Shape;
 class InsertShapeSJ : public Subject
 {
 public:
-	void Insert(Shape* shape, Observer* except = NULL);
+	void Insert(const ShapePtr& shape, Observer* except = NULL);
 	SUBJECT_DECLARATION(InsertShapeSJ)
 }; // InsertShapeSJ
 
 class RemoveShapeSJ : public Subject
 {
 public:
-	void Remove(Shape* spr, Observer* except = NULL);
+	void Remove(const ShapePtr& shape, Observer* except = NULL);
 	SUBJECT_DECLARATION(RemoveShapeSJ)
 }; // RemoveShapeSJ
 
@@ -39,7 +40,7 @@ public:
 class SelectShapeSJ : public Subject
 {
 public:
-	void Select(Shape* shape, Observer* except = NULL);
+	void Select(const ShapePtr& shape, Observer* except = NULL);
 	SUBJECT_DECLARATION(SelectShapeSJ)
 }; // SelectShapeSJ
 

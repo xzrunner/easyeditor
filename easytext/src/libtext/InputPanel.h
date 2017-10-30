@@ -3,6 +3,8 @@
 
 #include <wx/panel.h>
 
+#include <memory>
+
 namespace ee { class EditPanelImpl; }
 
 class wxTextCtrl;
@@ -16,9 +18,8 @@ class Sprite;
 class InputPanel : public wxPanel
 {
 public:
-	InputPanel(wxWindow* parent, Sprite* spr,
+	InputPanel(wxWindow* parent, const std::shared_ptr<Sprite>& spr,
 		ee::EditPanelImpl* stage_impl);
-	virtual ~InputPanel();
 
 private:
 	void InitLayout();
@@ -26,7 +27,7 @@ private:
 	void OnEnterPress(wxCommandEvent& event);
 
 private:
-	Sprite* m_spr;
+	std::shared_ptr<Sprite> m_spr;
 
 	ee::EditPanelImpl* m_stage_impl;
 

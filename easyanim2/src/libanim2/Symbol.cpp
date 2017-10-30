@@ -19,13 +19,13 @@ Symbol::~Symbol()
 
 bool Symbol::LoadResources()
 {
-	if (!gum::FilepathHelper::Exists(m_filepath)) {
+	if (!gum::FilepathHelper::Exists(m_filepath.c_str())) {
 		return false;
 	}
 
-	ee::SymbolLoader sym_loader;
-	gum::Anim2SymLoader loader(this, &sym_loader);
-	loader.LoadJson(m_filepath);
+	auto sym_loader(std::make_shared<ee::SymbolLoader>());
+	gum::Anim2SymLoader loader(*this, sym_loader);
+	loader.LoadJson(m_filepath.c_str());
 
 	return true;
 }

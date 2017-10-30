@@ -1,6 +1,6 @@
 #include "Mesh.h"
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 
 namespace enav
 {

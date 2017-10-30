@@ -3,6 +3,7 @@
 
 #include <ee/KeysState.h>
 
+#include <cu/cu_stl.h>
 #include <SM_Vector.h>
 
 #include <vector>
@@ -14,7 +15,7 @@ class DrawLineUtility
 {
 public:
 
-	static bool IsStraightOpen(const std::vector<sm::vec2>& lines, const ee::KeysState& key_state);
+	static bool IsStraightOpen(const CU_VEC<sm::vec2>& lines, const ee::KeysState& key_state);
 
 	static sm::vec2 FixPosTo8DirStraight(const sm::vec2& last, const sm::vec2& curr);
 

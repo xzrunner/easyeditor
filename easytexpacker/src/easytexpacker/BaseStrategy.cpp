@@ -29,7 +29,7 @@ BaseStrategy::SpriteCmp::SpriteCmp(SortStrategy strategy, bool isDescend)
 	m_is_descend = isDescend;
 }
 
-bool BaseStrategy::SpriteCmp::operator() (const ee::ImageSprite* s0, const ee::ImageSprite* s1) const
+bool BaseStrategy::SpriteCmp::operator() (const std::shared_ptr<const ee::ImageSprite>& s0, const std::shared_ptr<const ee::ImageSprite>& s1) const
 {
 	bool isLess;
 
@@ -50,7 +50,7 @@ bool BaseStrategy::SpriteCmp::operator() (const ee::ImageSprite* s0, const ee::I
 	else return isLess;
 }
 
-bool BaseStrategy::SpriteCmp::IsAreaLess(const ee::ImageSprite* s0, const ee::ImageSprite* s1) const
+bool BaseStrategy::SpriteCmp::IsAreaLess(const std::shared_ptr<const ee::ImageSprite>& s0, const std::shared_ptr<const ee::ImageSprite>& s1) const
 {
 	const float s = Context::Instance()->scale,
 		p = Context::Instance()->padding;
@@ -59,7 +59,7 @@ bool BaseStrategy::SpriteCmp::IsAreaLess(const ee::ImageSprite* s0, const ee::Im
 		<= (s1->GetSymbol()->GetBounding().Width() * s + p) * (s1->GetSymbol()->GetBounding().Height() * s + p);
 }
 
-bool BaseStrategy::SpriteCmp::IsEdgeLess(const ee::ImageSprite* s0, const ee::ImageSprite* s1) const
+bool BaseStrategy::SpriteCmp::IsEdgeLess(const std::shared_ptr<const ee::ImageSprite>& s0, const std::shared_ptr<const ee::ImageSprite>& s1) const
 {
 	const float s = Context::Instance()->scale,
 		p = Context::Instance()->padding;
@@ -68,7 +68,7 @@ bool BaseStrategy::SpriteCmp::IsEdgeLess(const ee::ImageSprite* s0, const ee::Im
 		<= std::max((s1->GetSymbol()->GetBounding().Width() * s + p), (s1->GetSymbol()->GetBounding().Height() * s + p));
 }
 
-bool BaseStrategy::SpriteCmp::IsTotEdgesLess(const ee::ImageSprite* s0, const ee::ImageSprite* s1) const
+bool BaseStrategy::SpriteCmp::IsTotEdgesLess(const std::shared_ptr<const ee::ImageSprite>& s0, const std::shared_ptr<const ee::ImageSprite>& s1) const
 {
 	const float s = Context::Instance()->scale,
 		p = Context::Instance()->padding;

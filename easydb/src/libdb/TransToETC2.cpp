@@ -63,7 +63,7 @@ void TransToETC2::Format(const std::string& filepath)
 
 	int w, h, fmt;
 	uint8_t* pixels = gimg_import(filepath.c_str(), &w, &h, &fmt);
-	if (fmt == GPF_RGBA && gum::Config::Instance()->GetPreMulAlpha()) {
+	if (fmt == GPF_RGBA8 && gum::Config::Instance()->GetPreMulAlpha()) {
 		gimg_pre_mul_alpha(pixels, w, h);
 	}
 

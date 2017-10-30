@@ -9,12 +9,12 @@ namespace lr
 class LevelEditDlg : public ee::CfgEditDlg
 {
 public:
-	LevelEditDlg(wxWindow* parent, ee::Sprite* spr);
+	LevelEditDlg(wxWindow* parent, const ee::SprPtr& spr);
 
 	std::string ToString();
 
 private:
-	void InitData(ee::Sprite* spr);
+	void InitData(const ee::SprPtr& spr);
 	void InitLayout();
 
 private:

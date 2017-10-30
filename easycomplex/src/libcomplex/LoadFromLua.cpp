@@ -14,10 +14,9 @@
 namespace ecomplex
 {
 
-void LoadFromLua::Load(const Json::Value& value, const std::string& dir, 
-					   Symbol* sym)
+void LoadFromLua::Load(const Json::Value& value, const std::string& dir, Symbol& sym)
 {
-	std::vector<ee::Image*> images;
+	std::vector<ee::ImagePtr> images;
 	std::string img_name = ee::FileHelper::GetAbsolutePath(dir, value["image name"].asString());
 	LoadImages(img_name, images);
 
@@ -28,10 +27,10 @@ void LoadFromLua::Load(const Json::Value& value, const std::string& dir,
 	std::string export_name = value["export name"].asString();
 
 	erespacker::IPackNode* node = erespacker::UnpackNodeFactory::Instance()->Query(export_name);
-	sym->Add(NodeToSprite::Trans(node));
+	sym.Add(NodeToSprite::Trans(node));
 }
 
-void LoadFromLua::LoadImages(const std::string& name, std::vector<ee::Image*>& images)
+void LoadFromLua::LoadImages(const std::string& name, std::vector<ee::ImagePtr>& images)
 {
 	ee::SettingData& data = ee::Config::Instance()->GetSettings();
 	bool old_open_image_edge_clip = data.open_image_edge_clip;
@@ -46,7 +45,7 @@ void LoadFromLua::LoadImages(const std::string& name, std::vector<ee::Image*>& i
 	{
 		std::string filepath = name + ee::StringHelper::ToString(idx++) + ".png";
 		if (ee::FileHelper::IsFileExist(filepath)) {
-			ee::Image* img = ee::ImageMgr::Instance()->GetItem(filepath);
+			auto img = ee::ImageMgr::Instance()->GetItem(filepath);
 			images.push_back(img);
 		} else {	
 			break;

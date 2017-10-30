@@ -1,9 +1,9 @@
 #ifndef _COCO_EPE_PACK_LUA_FILE_H_
 #define _COCO_EPE_PACK_LUA_FILE_H_
 
-#include <vector>
+#include <ee/Sprite.h>
 
-namespace ee { class Sprite; }
+#include <vector>
 
 namespace ecoco
 {
@@ -13,7 +13,7 @@ namespace epe
 class PackLuaFile
 {
 public:
-	void pack(const std::vector<ee::Sprite*>& sprs, 
+	void pack(const std::vector<ee::SprPtr>& sprs, 
 		const std::string& outfloder);
 
 private:

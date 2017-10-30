@@ -9,7 +9,7 @@
 #include "SymbolType.h"
 
 #include <sprite2/RenderParams.h>
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <gum/FilepathHelper.h>
 
 #include <json/json.h>
@@ -38,12 +38,12 @@ int FontBlankSymbol::Type() const
 	return SYM_FONTBLANK;
 }
 
-s2::RenderReturn FontBlankSymbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
+s2::RenderReturn FontBlankSymbol::DrawTree(cooking::DisplayList* dlist, const s2::RenderParams& rp, const s2::Sprite* spr) const
 {
-	s2::RenderParams p = params;
+	s2::RenderParams p = rp;
 	if (spr) {
-		p.mt = spr->GetLocalMat() * params.mt;
-		p.color = spr->GetColor() * params.color;
+		p.mt = spr->GetLocalMat() * rp.mt;
+		p.color = spr->GetColor() * rp.color;
 	}
 	const SettingData& setting = Config::Instance()->GetSettings();
 	const FontBlankSprite* fb = dynamic_cast<const FontBlankSprite*>(spr);
@@ -87,7 +87,7 @@ bool FontBlankSymbol::LoadFont(const std::string& _filename)
 
 bool FontBlankSymbol::LoadResources()
 {
-	if (!gum::FilepathHelper::Exists(m_filepath)) {
+	if (!gum::FilepathHelper::Exists(m_filepath.c_str())) {
 		return false;
 	}
 
@@ -99,9 +99,9 @@ bool FontBlankSymbol::LoadResources()
 	reader.parse(fin, value);
 	fin.close();
 
-	name = value["name"].asString();
-	font = value["font"].asString();
-	color = value["color"].asString();
+	name = value["name"].asString().c_str();
+	font = value["font"].asString().c_str();
+	color = value["color"].asString().c_str();
 	if (!value["align"].isNull()) {
 		align_hori = value["align"].asDouble();
 	} else {
@@ -114,7 +114,7 @@ bool FontBlankSymbol::LoadResources()
 	if (value["font filename"].isNull())
 		;
 	else {
-		filename = value["font filename"].asString();
+		filename = value["font filename"].asString().c_str();
 		LoadFont(filename);
 	}
 

@@ -35,7 +35,7 @@ public:
 	};
 
 public:
-	TPParser(const std::vector<const ee::Symbol*>& syms,
+	TPParser(const std::vector<ee::SymPtr>& syms,
 		const TextureMgr& tex_mgr);
 
 	void Parser();
@@ -46,7 +46,7 @@ public:
 		return m_symbol_sorter.GetSymbolSet();
 	}
 
-	TPParser::Picture* FindPicture(const ee::Symbol* sym) const;
+	TPParser::Picture* FindPicture(const ee::SymConstPtr& sym) const;
 
 	void DebugInfo() const;
 
@@ -60,7 +60,7 @@ private:
 
 	int m_tex_size;
 
-	std::map<const ee::Symbol*, Picture*> m_map_symbol2picture;
+	std::map<ee::SymConstPtr, Picture*> m_map_symbol2picture;
 
 }; // TPParser
 

@@ -2,8 +2,7 @@
 #define _EASYEDITOR_SPR_PROP_COL_MONITOR_H_
 
 #include "ColorMonitor.h"
-
-namespace s2 { class Sprite; }
+#include "Sprite.h"
 
 namespace ee
 {
@@ -21,7 +20,7 @@ public:
 	};
 
 public:
-	SprPropColMonitor(s2::Sprite* spr, ColType type);
+	SprPropColMonitor(const SprPtr& spr, ColType type);
 
 	//
 	// interface ColorMonitor
@@ -31,7 +30,7 @@ public:
 	virtual void OnColorChanged(const s2::Color& col);
 
 private:
-	s2::Sprite* m_spr;
+	SprPtr m_spr;
 	ColType m_type;
 
 }; // SprPropColMonitor

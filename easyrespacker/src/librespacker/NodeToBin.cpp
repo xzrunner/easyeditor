@@ -39,7 +39,7 @@ int NodeToBin::TransBool(bool b)
 	return b ? 1 : 0;
 }
 
-int NodeToBin::SizeVertices(const std::vector<sm::vec2>& vertices)
+int NodeToBin::SizeVertices(const CU_VEC<sm::vec2>& vertices)
 {
 	int sz = 0;
 	sz += sizeof(uint16_t);								// number
@@ -47,7 +47,7 @@ int NodeToBin::SizeVertices(const std::vector<sm::vec2>& vertices)
 	return sz;
 }
 
-void NodeToBin::PackVertices(const std::vector<sm::vec2>& vertices, uint8_t** ptr, 
+void NodeToBin::PackVertices(const CU_VEC<sm::vec2>& vertices, uint8_t** ptr, 
 							 bool reverse_y, int scale)
 {
 	if (vertices.size() > USHRT_MAX) {

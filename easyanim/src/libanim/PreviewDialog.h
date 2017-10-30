@@ -3,6 +3,8 @@
 
 #include <wx/dialog.h>
 
+#include <memory>
+
 class wxGLContext;
 
 namespace ee { class EditPanel; }
@@ -15,7 +17,7 @@ class Symbol;
 class PreviewDialog : public wxDialog
 {
 public:
-	PreviewDialog(wxWindow* parent, const Symbol* sym,
+	PreviewDialog(wxWindow* parent, const std::shared_ptr<Symbol>& sym,
 		wxGLContext* glctx);
 	~PreviewDialog();
 
@@ -31,7 +33,7 @@ private:
 private:
 	ee::EditPanel* m_stage;
 
-	const Symbol* m_sym;
+	const std::shared_ptr<Symbol> m_sym;
 
 }; // PreviewDialog
 

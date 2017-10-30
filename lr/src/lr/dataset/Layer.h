@@ -9,7 +9,7 @@
 #include <ee/Shape.h>
 #include <ee/CameraModes.h>
 
-#include <CU_RefCountObj.h>
+#include <cu/CU_RefCountObj.h>
 
 #include <json/json.h>
 
@@ -28,14 +28,14 @@ class Layer : public cu::RefCountObj
 public:
 	Layer(int id, LibraryPanel* library, s2::CameraMode cam);
 	
-	virtual void TraverseSprite(ee::Visitor<ee::Sprite>& visitor, bool order = true) const;
-	virtual void TraverseSprite(ee::Visitor<ee::Sprite>& visitor, ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
-	virtual bool RemoveSprite(ee::Sprite* spr);
-	virtual bool InsertSprite(ee::Sprite* spr, int idx);
+	virtual void TraverseSprite(ee::RefVisitor<ee::Sprite>& visitor, bool order = true) const;
+	virtual void TraverseSprite(ee::RefVisitor<ee::Sprite>& visitor, ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
+	virtual bool RemoveSprite(const ee::SprPtr& spr);
+	virtual bool InsertSprite(const ee::SprPtr& spr, int idx);
 	virtual bool ClearSprite();
-	virtual bool ResetOrderSprite(const ee::Sprite* spr, bool up);
-	virtual bool ResetOrderSpriteMost(const ee::Sprite* spr, bool up);
-	virtual bool SortSrites(std::vector<ee::Sprite*>& sprs);
+	virtual bool ResetOrderSprite(const ee::SprConstPtr& spr, bool up);
+	virtual bool ResetOrderSpriteMost(const ee::SprConstPtr& spr, bool up);
+	virtual bool SortSrites(std::vector<ee::SprPtr>& sprs);
 
 	virtual void TraverseShape(ee::Visitor<ee::Shape>& visitor, bool order = true) const;
 	virtual bool RemoveShape(ee::Shape* shape);
@@ -60,7 +60,7 @@ public:
 
 	bool Update();
 
-	ee::Sprite* QuerySprite(const std::string& name) const;
+	ee::SprPtr QuerySprite(const std::string& name) const;
 	ee::Shape* QueryShape(const std::string& name) const;
 
 	int GetID() const { return m_id; }
@@ -80,13 +80,13 @@ private:
 	void LoadFromBaseFile(int layer_idx, const std::string& filepath, 
 		const std::string& dir);
 
-	void CheckSpriteName(ee::Sprite* spr);
+	void CheckSpriteName(const ee::SprPtr& spr);
 
-	void LoadShapesUD(const Json::Value& spr_val, ee::Sprite* spr) const;
-	void StoreShapesUD(ee::Sprite* spr, Json::Value& spr_val) const;
+	void LoadShapesUD(const Json::Value& spr_val, const ee::SprPtr& spr) const;
+	void StoreShapesUD(const ee::SprPtr& spr, Json::Value& spr_val) const;
 
-	ee::Sprite* LoadSprite(const Json::Value& val, const std::string& dir, const std::string& base_path);
-	bool StoreSprite(ee::Sprite* spr, Json::Value& val, const std::string& dir) const;
+	ee::SprPtr LoadSprite(const Json::Value& val, const std::string& dir, const std::string& base_path);
+	bool StoreSprite(const ee::SprPtr& spr, Json::Value& val, const std::string& dir) const;
 	
 private:
 	template<typename T>

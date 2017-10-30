@@ -1,7 +1,7 @@
 #ifndef _EASYEDITOR_SPRITE_RENDERER_H_
 #define _EASYEDITOR_SPRITE_RENDERER_H_
 
-#include <CU_Singleton.h>
+#include <cu/cu_macro.h>
 #include <SM_Vector.h>
 #include <sprite2/RenderParams.h>
 
@@ -28,7 +28,7 @@ public:
 
 private:
 	
-	SINGLETON_DECLARATION(SpriteRenderer)
+	CU_SINGLETON_DECLARATION(SpriteRenderer)
 
 }; // SpriteRenderer
 

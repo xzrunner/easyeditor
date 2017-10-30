@@ -4,20 +4,10 @@
 namespace libskeleton
 {
 
-TranslateJointAOP::TranslateJointAOP(Joint* joint, const sm::vec2& trans)
+TranslateJointAOP::TranslateJointAOP(const std::shared_ptr<Joint>& joint, const sm::vec2& trans)
 	: m_joint(joint)
 	, m_trans(trans)
 {
-	if (m_joint) {
-		m_joint->AddReference();
-	}
-}
-
-TranslateJointAOP::~TranslateJointAOP()
-{
-	if (m_joint) {
-		m_joint->RemoveReference();
-	}
 }
 
 void TranslateJointAOP::Undo()

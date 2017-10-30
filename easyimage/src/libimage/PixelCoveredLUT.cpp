@@ -7,7 +7,7 @@
 namespace eimage
 {
 
-PixelCoveredLUT::PixelCoveredLUT(int width, int height, const std::vector<Rect>& rects)
+PixelCoveredLUT::PixelCoveredLUT(int width, int height, const CU_VEC<Rect>& rects)
 	: m_width(width)
 	, m_height(height)
 {
@@ -74,7 +74,7 @@ void PixelCoveredLUT::Insert(const Rect& r)
 	}
 }
 
-void PixelCoveredLUT::LoadRects(const std::vector<Rect>& rects)
+void PixelCoveredLUT::LoadRects(const CU_VEC<Rect>& rects)
 {
 	int sz = m_width * m_height;
 

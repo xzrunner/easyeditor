@@ -12,7 +12,7 @@ LibraryFontBlankList::LibraryFontBlankList(LibraryPage* page)
 
 void LibraryFontBlankList::OnListDoubleClicked(wxCommandEvent& event)
 {
-	FontBlankDialog dlg(this, static_cast<FontBlankSymbol*>(m_items[event.GetInt()]));
+	FontBlankDialog dlg(this, std::dynamic_pointer_cast<FontBlankSymbol>(m_items[event.GetInt()]));
 	dlg.ShowModal();
 }
 

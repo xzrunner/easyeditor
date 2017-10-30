@@ -18,9 +18,9 @@ LibraryScriptsPage::LibraryScriptsPage(wxWindow* parent)
 	m_list->SetFileter("scripts");
 }
 
-bool LibraryScriptsPage::IsHandleSymbol(Symbol* sym) const
+bool LibraryScriptsPage::IsHandleSymbol(const SymPtr& sym) const
 {
-	return dynamic_cast<ScriptsSymbol*>(sym) != NULL;
+	return sym->Type() == SYM_SCRIPTS;
 }
 
 bool LibraryScriptsPage::LoadFromConfig()
@@ -42,9 +42,8 @@ void LibraryScriptsPage::OnAddPress(wxCommandEvent& event)
 		{
 			try {
 				std::string filepath = filenames[i].ToStdString();
-				Symbol* sym = SymbolMgr::Instance()->FetchSymbol(filepath);
+				auto sym = SymbolMgr::Instance()->FetchSymbol(filepath);
 				m_list->Insert(sym);
-				sym->RemoveReference();
 			} catch (Exception& e) {
 				ExceptionDlg dlg(m_parent, e);
 				dlg.ShowModal();

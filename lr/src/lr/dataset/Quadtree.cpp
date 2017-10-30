@@ -6,7 +6,7 @@
 
 #include <easyshape.h>
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <sprite2/BoundingBox.h>
 #include <SM_Test.h>
 #include <SM_Triangulation.h>
@@ -28,14 +28,14 @@ Quadtree::~Quadtree()
 	delete m_root;
 }
 
-void Quadtree::Insert(const ee::Sprite* spr)
+void Quadtree::Insert(const ee::SprConstPtr& spr)
 {
 	m_root->Insert(spr);
 }
 
-std::vector<const ee::Sprite*> Quadtree::Query(const sm::rect& rect) const
+std::vector<const ee::SprPtr> Quadtree::Query(const sm::rect& rect) const
 {
-	std::set<const ee::Sprite*> set_sprites;
+	std::set<const ee::SprPtr> set_sprites;
 
 	std::queue<Node*> buffer;
 	buffer.push(m_root);
@@ -56,7 +56,7 @@ std::vector<const ee::Sprite*> Quadtree::Query(const sm::rect& rect) const
 		}
 	}
 
-	std::vector<const ee::Sprite*> sprs;
+	std::vector<const ee::SprPtr> sprs;
 	copy(set_sprites.begin(), set_sprites.end(), back_inserter(sprs));
 	return sprs;
 }
@@ -145,10 +145,8 @@ Quadtree::Node::
 }
 
 void Quadtree::Node::
-Insert(const ee::Sprite* spr)
+Insert(const ee::SprConstPtr& spr)
 {
-	spr->AddReference();
-
 	if (IsLeaf()) 
 	{
 		if (IsContain(spr)) {
@@ -189,7 +187,7 @@ IsContain(const sm::vec2& pos) const
 }
 
 bool Quadtree::Node::
-IsContain(const ee::Sprite* spr) const
+IsContain(const ee::SprConstPtr& spr) const
 {
 	const eshape::Symbol* sym = dynamic_cast<const eshape::Symbol*>(spr->GetSymbol());
 	assert(sym->GetShapeType() == eshape::ST_POLYGON);
@@ -241,7 +239,7 @@ Split()
 		m_children[0]->m_rect.ymin = m_children[1]->m_rect.ymin = center.y;
 
 	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
-		const ee::Sprite* spr = m_sprs[i];
+		const ee::SprConstPtr& spr = m_sprs[i];
 		for (int j = 0; j < 4; ++j) {
 			Node* node = m_children[j];
 			sm::rect rect = spr->GetBounding()->GetSize();
@@ -255,7 +253,7 @@ Split()
 }
 
 float Quadtree::Node::
-GetContainArea(const ee::Sprite* spr) const
+GetContainArea(const ee::SprConstPtr& spr) const
 {
 	const eshape::Symbol* sym = dynamic_cast<const eshape::Symbol*>(spr->GetSymbol());
 	assert(sym->GetShapeType() == eshape::ST_POLYGON);

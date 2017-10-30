@@ -15,12 +15,12 @@ class SprFilterProperty
 public:
 	SprFilterProperty(wxWindow* parent);
 
-	void InitPS(const Sprite* spr, wxPropertyGrid* pg);
-	bool FromPS(const std::string& name, const wxAny& value, Sprite* spr);
-	void ToPS(const Sprite* spr, wxPropertyGrid* pg);
+	void InitPS(const Sprite& spr, wxPropertyGrid* pg);
+	bool FromPS(const std::string& name, const wxAny& value, Sprite& spr);
+	void ToPS(const Sprite& spr, wxPropertyGrid* pg);
 
 private:
-	void CreateSubPS(wxPropertyGrid* pg, wxPGProperty* parent, const s2::RenderFilter* filter);
+	void CreateSubPS(wxPropertyGrid* pg, wxPGProperty* parent, const s2::RenderFilter& filter);
 
 	int GetTextureID(const std::string& filepath) const;
 

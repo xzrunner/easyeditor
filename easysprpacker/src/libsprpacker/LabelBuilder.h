@@ -3,7 +3,7 @@
 
 #include "NodeBuilder.h"
 
-#include <CU_Singleton.h>
+#include <cu/cu_macro.h>
 
 #include <json/json.h>
 
@@ -23,14 +23,14 @@ public:
 
 	virtual void Clear();
 
-	const PackNode* Create(const etext::Sprite* spr);
+	const PackNode* Create(const std::shared_ptr<const etext::Sprite>& spr);
 
 	void OutputExtraInfo(Json::Value& value) const;
 
 private:
 	std::vector<const PackLabel*> m_labels;
 
-	SINGLETON_DECLARATION(LabelBuilder);
+	CU_SINGLETON_DECLARATION(LabelBuilder);
 
 }; // LabelBuilder
 

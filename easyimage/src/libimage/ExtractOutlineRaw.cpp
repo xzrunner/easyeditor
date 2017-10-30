@@ -236,7 +236,7 @@ bool ExtractOutlineRaw::IsNearby(const sm::vec2& p0, const sm::vec2& p1) const
 	return abs(p0.x - p1.x) <= 1 && abs(p0.y - p1.y) <= 1;
 }
 
-void ExtractOutlineRaw::MergeLine(const std::vector<sm::vec2>& src, std::vector<sm::vec2>& dst)
+void ExtractOutlineRaw::MergeLine(const CU_VEC<sm::vec2>& src, CU_VEC<sm::vec2>& dst)
 {
 	if (src.size() < 3) {
 		return;

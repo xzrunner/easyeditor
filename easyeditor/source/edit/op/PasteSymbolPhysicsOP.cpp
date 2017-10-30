@@ -26,12 +26,12 @@ bool PasteSymbolPhysicsOP::OnMouseLeftDown(int x, int y)
 {
 	if (ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
-	Symbol* sym = m_library->GetSymbol();
+	auto sym = m_library->GetSymbol();
 	if (sym) 
 	{
 		m_pos = m_stage->TransPosScrToProj(x, y);
 
-		Sprite* spr = SpriteFactory::Instance()->CreateRoot(sym);
+		auto spr = SpriteFactory::Instance()->CreateRoot(sym);
 		spr->Translate(m_pos);
 		if (m_pScale) {
 			spr->SetScale(sm::vec2(*m_pScale, *m_pScale));
@@ -42,8 +42,6 @@ bool PasteSymbolPhysicsOP::OnMouseLeftDown(int x, int y)
 			body->GetBody()->SetType(m_bStatic ? b2_staticBody : b2_dynamicBody);
 		}
 		InsertSpriteSJ::Instance()->Insert(spr);
-
-		spr->RemoveReference();
 	}
 
 	return false;

@@ -4,7 +4,7 @@
 #include <ee/SpriteRenderer.h>
 #include <ee/Sprite.h>
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <sprite2/CameraType.h>
 
 namespace eimage
@@ -18,7 +18,7 @@ StageCanvas::StageCanvas(StagePanel* stage)
 
 void StageCanvas::OnDrawSprites() const
 {
-	if (const ee::Sprite* s = m_stage->GetImage())
+	if (const ee::SprPtr s = m_stage->GetImage())
 	{
 		ee::SpriteRenderer::Instance()->Draw(s);
 	}

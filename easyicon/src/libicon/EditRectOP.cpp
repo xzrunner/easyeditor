@@ -9,7 +9,7 @@
 #include <ee/ImageSymbol.h>
 #include <ee/color_config.h>
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <SM_Calc.h>
 
 namespace eicon
@@ -105,14 +105,13 @@ bool EditRectOP::OnActive()
 	}
 
 	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
-	Icon* icon = stage->GetIcon();
-	if (icon && get_icon_type(icon->GetIconDesc()) == IT_RECT) {
+	Icon* old_icon = stage->GetIcon();
+	if (old_icon && get_icon_type(old_icon->GetIconDesc()) == IT_RECT) {
 		return false;
 	}
 
-	icon = new RectIcon;
-	stage->SetIcon(icon);
-	icon->RemoveReference();	
+	std::unique_ptr<s2::Icon> new_icon = std::make_unique<RectIcon>();
+	stage->SetIcon(new_icon);
 
 	return false;
 }
@@ -128,12 +127,12 @@ bool EditRectOP::OnDraw() const
 		return false;
 	}
 
-	const s2::ImageSymbol* img = icon->GetImage();
+	auto& img = icon->GetImage();
 	if (!img) {
 		return false;
 	}
 
-	const ee::Image* ee_img = dynamic_cast<const ee::ImageSymbol*>(img)->GetImage();
+	auto ee_img = std::dynamic_pointer_cast<ee::ImageSymbol>(img)->GetImage();
 	float w = ee_img->GetClippedRegion().Width(),
 		  h = ee_img->GetClippedRegion().Height();
 	s2::RVG::SetColor(ee::LIGHT_RED);

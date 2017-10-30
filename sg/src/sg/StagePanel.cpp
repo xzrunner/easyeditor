@@ -36,7 +36,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	RegistSubject(ee::ClearSpriteSJ::Instance());
 }
 
-void StagePanel::TraverseSprites(ee::Visitor<ee::Sprite>& visitor, ee::DataTraverseType type/* = e_allExisting*/,
+void StagePanel::TraverseSprites(ee::RefVisitor<ee::Sprite>& visitor, ee::DataTraverseType type/* = e_allExisting*/,
 								 bool order/* = true*/) const
 {
 	m_checkboard.Traverse(visitor);
@@ -90,10 +90,10 @@ void StagePanel::TransGridPosToCoordsNew(int row, int col, sm::vec2& pos) const
 
 void StagePanel::UpdateAllSpritesLocation()
 {
-	std::vector<ee::Sprite*> sprs;
-	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
-		ee::Sprite* s = sprs[i];
+		ee::SprPtr s = sprs[i];
 		s->SetPosition(FixSpriteLocation(s->GetPosition()));
 	}
 }
@@ -104,11 +104,11 @@ void StagePanel::SetPerspective(bool is_flat)
 		return;
 	}
 
-	std::vector<ee::Sprite*> sprs;
-	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	for (size_t i = 0, n = sprs.size(); i < n; ++i)
 	{
-		ee::Sprite* spr = sprs[i];
+		auto& spr = sprs[i];
 
 		int row, col;
 		TransCoordsToGridPos(spr->GetPosition(), row, col);
@@ -126,11 +126,11 @@ void StagePanel::SetPerspective(bool is_flat)
 
 void StagePanel::ChangeSelectedSpritesLevel(bool up)
 {
-	std::vector<ee::Sprite*> sprs;
-	GetSpriteSelection()->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	GetSpriteSelection()->Traverse(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	for (int i = 0, n = sprs.size(); i < n; ++i)
 	{
-		ee::Sprite* spr = sprs[i];
+		auto& spr = sprs[i];
 
 		SpriteExt* spr_info = static_cast<SpriteExt*>(spr->GetUserData());
 		SymbolExt* symbol_info = static_cast<SymbolExt*>(spr->GetSymbol()->GetUserData());
@@ -166,7 +166,7 @@ void StagePanel::ChangeSelectedSpritesLevel(bool up)
 // 			return;
 // 		}
 // 
-// 		ee::Symbol* sym = ee::SymbolMgr::Instance()->fetchSymbol(pItem->res_snapshoot_path);
+// 		auto sym = ee::SymbolMgr::Instance()->fetchSymbol(pItem->res_snapshoot_path);
 // 		if (sym) {
 // 			if (sym->GetUserData() == NULL) 
 // 			{
@@ -197,7 +197,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 		}
 		break;
 	case ee::MSG_REMOVE_SPRITE:
-		Remove((ee::Sprite*)ud);
+		Remove(*(ee::SprPtr*)ud);
 		break;
 	case ee::MSG_CLEAR_SPRITE:
 		Clear();
@@ -215,7 +215,7 @@ sm::vec2 StagePanel::FixSpriteLocation(const sm::vec2& pos) const
 	return ret;
 }
 
-void StagePanel::ChangeSymbolRemain(ee::Sprite* spr, bool increase) const
+void StagePanel::ChangeSymbolRemain(const ee::SprPtr& spr, bool increase) const
 {
 	SymbolExt* info = static_cast<SymbolExt*>(spr->GetSymbol()->GetUserData());
 	if (!info) {
@@ -232,7 +232,7 @@ void StagePanel::ChangeSymbolRemain(ee::Sprite* spr, bool increase) const
 	m_library->Refresh(true);
 }
 
-void StagePanel::Insert(ee::Sprite* spr)
+void StagePanel::Insert(const ee::SprPtr& spr)
 {
 	spr->SetPosition(FixSpriteLocation(spr->GetPosition()));
 
@@ -267,7 +267,7 @@ void StagePanel::Insert(ee::Sprite* spr)
 	}
 }
 
-void StagePanel::Remove(ee::Sprite* spr)
+void StagePanel::Remove(const ee::SprPtr& spr)
 {
 	bool reset_wall = IsSymbolWall(*spr);
 
@@ -282,8 +282,8 @@ void StagePanel::Remove(ee::Sprite* spr)
 
 void StagePanel::Clear()
 {
-	std::vector<ee::Sprite*> sprs;
-	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	bool ret = !sprs.empty();
 	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
 		ChangeSymbolRemain(sprs[i], true);

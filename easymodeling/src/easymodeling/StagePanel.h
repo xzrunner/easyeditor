@@ -17,8 +17,8 @@ public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame);
 	virtual ~StagePanel();
 
-	virtual ee::Sprite* QuerySpriteByPos(const sm::vec2& pos) const;
-	virtual void QuerySpritesByRect(const sm::rect& rect, std::vector<ee::Sprite*>& result) const;		
+	virtual ee::SprPtr QuerySpriteByPos(const sm::vec2& pos) const;
+	virtual void QuerySpritesByRect(const sm::rect& rect, std::vector<ee::SprPtr>& result) const;
 
 	Joint* queryJointByPos(const sm::vec2& pos) const;
 	void queryJointsByRect(const sm::rect& rect, std::vector<Joint*>& result) const;
@@ -28,8 +28,8 @@ public:
 	}
 	void removeJoint(Joint* joint);
 
-	void traverseBodies(ee::Visitor<ee::Sprite>& visitor) const;
-	void traverseJoints(ee::Visitor<ee::Sprite>& visitor) const;
+	void traverseBodies(ee::RefVisitor<ee::Sprite>& visitor) const;
+	void traverseJoints(ee::RefVisitor<ee::Sprite>& visitor) const;
 
 protected:
 	//
@@ -39,34 +39,34 @@ protected:
 
 private:
 	static void loadBody(const std::string& filepath, Body& body);
-	static void loadBody(ee::Sprite* spr, Body& body);
+	static void loadBody(const ee::SprPtr& spr, Body& body);
 
-	void Insert(ee::Sprite* spr);
-	void Remove(ee::Sprite* spr);
+	void Insert(const ee::SprPtr& spr);
+	void Remove(const ee::SprPtr& spr);
 	void Clear();
 
 private:
 	class PointQueryVisitor : public ee::Visitor<ee::Sprite>
 	{
 	public:
-		PointQueryVisitor(const sm::vec2& pos, ee::Sprite** pResult);
-		virtual void Visit(ee::Sprite* spr, bool& next);
+		PointQueryVisitor(const sm::vec2& pos, ee::SprPtr* pResult);
+		virtual void Visit(const ee::SprPtr& spr, bool& next);
 
 	private:
 		const sm::vec2& m_pos;
-		ee::Sprite** m_pResult;
+		ee::SprPtr* m_pResult;
 
 	}; // PointQueryVisitor
 
 	class RectQueryVisitor : public ee::Visitor<ee::Sprite>
 	{
 	public:
-		RectQueryVisitor(const sm::rect& rect, std::vector<ee::Sprite*>& result);
-		virtual void Visit(ee::Sprite* spr, bool& next);
+		RectQueryVisitor(const sm::rect& rect, std::vector<ee::SprPtr>& result);
+		virtual void Visit(const ee::SprPtr& spr, bool& next);
 
 	private:
 		const sm::rect& m_rect;
-		std::vector<ee::Sprite*>& m_result;
+		std::vector<ee::SprPtr>& m_result;
 
 	}; // RectQueryVisitor
 

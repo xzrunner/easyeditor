@@ -9,13 +9,13 @@
 namespace ee
 {
 
-void SGI::Do(const std::vector<sm::vec2>& src, 
-					std::vector<std::vector<sm::vec2> >& dst)
+void SGI::Do(const CU_VEC<sm::vec2>& src, 
+					CU_VEC<CU_VEC<sm::vec2> >& dst)
 {
 	if (src.size() < 3) return;
 
-	std::vector<Triangle*> tris;
-	std::vector<Edge*> edges;
+	CU_VEC<Triangle*> tris;
+	CU_VEC<Edge*> edges;
 	int index = 0;
 	for (size_t i = 0, n = src.size() / 3; i < n; ++i)
 	{
@@ -31,7 +31,7 @@ void SGI::Do(const std::vector<sm::vec2>& src,
 	{
 		if (tris[i]->used) continue;
 
-		std::vector<sm::vec2> strip;
+		CU_VEC<sm::vec2> strip;
 		Traversal(tris[i], strip);
 		dst.push_back(strip);
 	}
@@ -40,7 +40,7 @@ void SGI::Do(const std::vector<sm::vec2>& src,
 	for_each(edges.begin(), edges.end(), DeletePointerFunctor<Edge>());
 }
 
-void SGI::InsertEdge(std::vector<Edge*>& edges, Triangle* tri,
+void SGI::InsertEdge(CU_VEC<Edge*>& edges, Triangle* tri,
 					 int index)
 {
 	bool bFind = false;
@@ -78,11 +78,11 @@ void SGI::InsertEdge(std::vector<Edge*>& edges, Triangle* tri,
 	}
 }
 
-void SGI::Traversal(Triangle* tri, std::vector<sm::vec2>& strip, int level/* = 0*/)
+void SGI::Traversal(Triangle* tri, CU_VEC<sm::vec2>& strip, int level/* = 0*/)
 {
 	tri->used = true;
 
-	std::vector<Triangle*> tris;
+	CU_VEC<Triangle*> tris;
 	for (size_t i = 0; i < 3; ++i)
 	{
 		Edge* edge = tri->edges[i];
@@ -143,7 +143,7 @@ void SGI::Traversal(Triangle* tri, std::vector<sm::vec2>& strip, int level/* = 0
 
 int SGI::GetDegree(Triangle* tri, int level)
 {
-	std::vector<Triangle*> buffer;
+	CU_VEC<Triangle*> buffer;
 	buffer.push_back(tri);
 	for (int i = 0; i < level; ++i)
 	{
@@ -185,7 +185,7 @@ int SGI::GetDegree(Triangle* tri, int level)
 	return degree;
 }
 
-SGI::Triangle* SGI::GetMinDegreeTri(const std::vector<Triangle*>& tris)
+SGI::Triangle* SGI::GetMinDegreeTri(const CU_VEC<Triangle*>& tris)
 {
 	if (tris.empty()) return NULL;
 	if (tris.size() == 1) return tris[0];
@@ -193,7 +193,7 @@ SGI::Triangle* SGI::GetMinDegreeTri(const std::vector<Triangle*>& tris)
 	int level = 0;
 	while (level < 10)
 	{
-		std::vector<int> degrees;
+		CU_VEC<int> degrees;
 		degrees.reserve(tris.size());
 		for (size_t i = 0, n = tris.size(); i < n; ++i)
 			degrees.push_back(GetDegree(tris[i], level));

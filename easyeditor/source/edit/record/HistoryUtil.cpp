@@ -3,8 +3,8 @@
 namespace ee
 {
 
-Json::Value HistoryUtil::StoreSpritesIndex(const std::vector<Sprite*>& myself, 
-										   const std::vector<Sprite*>& other)
+Json::Value HistoryUtil::StoreSpritesIndex(const std::vector<SprPtr>& myself,
+										   const std::vector<SprPtr>& other)
 {
 	Json::Value ret;
 	int count = 0;

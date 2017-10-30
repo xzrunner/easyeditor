@@ -2,13 +2,13 @@
 #define _EASYEDITOR_PASTE_SPRITE_OP_H_
 
 #include "SelectSpritesOP.h"
+#include "Sprite.h"
 
 #include <vector>
 
 namespace ee
 {
 
-class Sprite;
 class MultiSpritesImpl;
 class PasteSpriteCMPT;
 
@@ -55,7 +55,7 @@ private:
 		void ComputeCenter();
 
 	private:
-		std::vector<Sprite*> m_selected;
+		std::vector<SprPtr> m_selected;
 		sm::vec2 m_center;
 		bool m_valid;
 

@@ -1,6 +1,7 @@
 #ifndef _EASYEDITOR_MULTI_SPRITES_PROPERTY_SETTING_H_
 #define _EASYEDITOR_MULTI_SPRITES_PROPERTY_SETTING_H_
 
+#include "Sprite.h"
 #include "PropertySetting.h"
 
 #include <vector>
@@ -9,13 +10,12 @@ namespace ee
 {
 
 class EditPanelImpl;
-class Sprite;
 class MultiSpritesPropertyImpl;
 
 class MultiSpritesPropertySetting : public PropertySetting
 {
 public:
-	MultiSpritesPropertySetting(const std::vector<Sprite*>& sprs);
+	MultiSpritesPropertySetting(const std::vector<SprPtr>& sprs);
 	virtual ~MultiSpritesPropertySetting();
 
 	virtual void OnPropertyGridChange(const std::string& name, const wxAny& value);

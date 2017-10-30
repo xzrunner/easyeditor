@@ -11,7 +11,7 @@
 
 #include <ee/panel_msg.h>
 #include <ee/shape_msg.h>
-#include <ee/SpriteFactory.h>
+#include <ee/SpritePool.h>
 #include <ee/SelectShapesOP.h>
 #include <ee/ConfirmDialog.h>
 
@@ -23,7 +23,7 @@ BEGIN_EVENT_TABLE(EditDialogSimple, wxDialog)
 END_EVENT_TABLE()
 
 EditDialogSimple::EditDialogSimple(wxWindow* parent, wxGLContext* glctx,
-								   ee::Sprite* edited, const ee::MultiSpritesImpl* sprite_impl)
+								   ee::SprPtr edited, const ee::MultiSpritesImpl* sprite_impl)
  	: wxDialog(parent, wxID_ANY, "Edit Shape", wxDefaultPosition, 
 	wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 	, m_stage(NULL)
@@ -39,7 +39,7 @@ EditDialogSimple::~EditDialogSimple()
 {
 }
 
-void EditDialogSimple::InitLayout(wxGLContext* glctx, ee::Sprite* edited, 
+void EditDialogSimple::InitLayout(wxGLContext* glctx, const ee::SprPtr& edited, 
 								  const ee::MultiSpritesImpl* sprite_impl)
 {
 	wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -50,11 +50,11 @@ void EditDialogSimple::InitLayout(wxGLContext* glctx, ee::Sprite* edited,
 	SetSizer(sizer);
 }
 
-void EditDialogSimple::InitEditOP(ee::Sprite* edited)
+void EditDialogSimple::InitEditOP(const ee::SprPtr& edited)
 {
 	ee::EditOP* op = NULL;
 
-	ShapeType type = dynamic_cast<const Symbol*>(edited->GetSymbol())->GetShapeType();
+	ShapeType type = std::dynamic_pointer_cast<Symbol>(edited->GetSymbol())->GetShapeType();
 	switch (type)
 	{
 	case ST_RECT:
@@ -91,7 +91,7 @@ void EditDialogSimple::OnCloseEvent(wxCloseEvent& event)
 	{
 		static_cast<Symbol&>(sym).StoreToFile(filepath.c_str());
 		sym.RefreshThumbnail(filepath);
-		ee::SpriteFactory::Instance()->UpdateBoundings(sym);
+		ee::SpritePool::Instance()->UpdateBoundings(sym);
 		Destroy();
 	}
 	else if (val == wxID_NO)

@@ -16,7 +16,7 @@ struct block {
 };
 
 void UnpackFromBin::Unpack(const std::string& filepath, 
-						   const std::vector<ee::Image*>& images)
+						   const std::vector<ee::ImagePtr>& images)
 {
 	std::locale::global(std::locale(""));
 	std::ifstream fin(filepath.c_str(), std::ios::binary);
@@ -59,7 +59,7 @@ void UnpackFromBin::Unpack(const std::string& filepath,
 	UnpackNodeFactory::Instance()->AfterUnpack();
 }
 
-void UnpackFromBin::Unpack(uint8_t** ptr, const std::vector<ee::Image*>& images)
+void UnpackFromBin::Unpack(uint8_t** ptr, const std::vector<ee::ImagePtr>& images)
 {
 	UnpackNodeFactory* factory = UnpackNodeFactory::Instance();
 

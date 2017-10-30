@@ -26,7 +26,7 @@ BEGIN_EVENT_TABLE(EditDialog, wxDialog)
 END_EVENT_TABLE()
 
 EditDialog::EditDialog(wxWindow* parent, wxGLContext* glctx, 
-					   Sprite* edited, const ee::MultiSpritesImpl* sprite_impl)
+					   const std::shared_ptr<Sprite>& edited, const ee::MultiSpritesImpl* sprite_impl)
 	: wxDialog(parent, wxID_ANY, "Edit Terrain2D", wxDefaultPosition, wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 	, m_sym(NULL)
 	, m_stage(NULL)
@@ -34,7 +34,6 @@ EditDialog::EditDialog(wxWindow* parent, wxGLContext* glctx,
 	assert(edited);
 
 	Symbol* sym = const_cast<Symbol*>(dynamic_cast<Symbol*>(edited->GetSymbol()));
-	sym->AddReference();
 	m_sym = sym;
 	m_sym->ReloadTexture();
 	SetTitle(sym->GetFilepath());
@@ -56,7 +55,7 @@ EditDialog::~EditDialog()
 	}
 }
 
-void EditDialog::InitLayout(wxGLContext* glctx, ee::Sprite* edited, 
+void EditDialog::InitLayout(wxGLContext* glctx, const ee::SprPtr& edited, 
 							const ee::MultiSpritesImpl* sprite_impl)
 {
 	wxSplitterWindow* right_splitter = new wxSplitterWindow(this);
@@ -91,7 +90,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 		const std::string& filepath = m_sym->GetFilepath();
 		FileIO::StoreSymbol(filepath.c_str(), m_sym);
 		m_sym->RefreshThumbnail(filepath);
-		ee::SpriteFactory::Instance()->UpdateBoundings(*m_sym);
+		ee::SpritePool::Instance()->UpdateBoundings(*m_sym);
 		Destroy();
 	}
 	else if (val == wxID_NO)
@@ -101,7 +100,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 	}
 }
 
-void EditDialog::InitCamera(ee::Sprite* spr) const
+void EditDialog::InitCamera(const ee::SprPtr& spr) const
 {
 	ee::CameraCanvas* canvas = static_cast<ee::CameraCanvas*>(m_stage->GetCanvas());
 	s2::Camera* cam = canvas->GetCamera();

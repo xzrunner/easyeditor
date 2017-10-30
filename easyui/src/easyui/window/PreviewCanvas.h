@@ -17,7 +17,7 @@ class PreviewCanvas : public ee::CameraCanvas
 {
 public:
 	PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, ee::PlayControl& control, 
-		const std::vector<ee::Sprite*>& sprs, wxGLContext* glctx);
+		const std::vector<ee::SprPtr>& sprs, wxGLContext* glctx);
 
 protected:
 	virtual void OnDrawSprites() const;
@@ -29,7 +29,7 @@ private:
 
 	ee::PlayControl& m_control;
 
-	std::vector<ee::Sprite*> m_sprs;
+	std::vector<ee::SprPtr> m_sprs;
 
 }; // PreviewCanvas
 

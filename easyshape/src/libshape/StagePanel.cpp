@@ -22,7 +22,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, m_toolbar(NULL)
 {
 	SetCanvas(new StageCanvas(this));
-	m_sym = new Symbol;
+	m_sym = std::make_shared<Symbol>();
 
 	SetDropTarget(new DropTarget(this, library));
 
@@ -30,46 +30,33 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   wxGLContext* glctx, ee::Sprite* edited, 
+					   wxGLContext* glctx, const ee::SprPtr& edited, 
 					   const ee::MultiSpritesImpl* bg_sprites)
 	: EditPanel(parent, frame)
 	, MultiShapesImpl()
 	, m_toolbar(NULL)
 {
 	SetCanvas(new StageCanvas(this, glctx, edited, bg_sprites));
-	m_sym = dynamic_cast<Symbol*>(edited->GetSymbol());
-	if (m_sym) {
-		m_sym->AddReference();
-	}
+	m_sym = std::dynamic_pointer_cast<Symbol>(edited->GetSymbol());
 
 	InitSubjects();
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   Symbol* sym/*, ee::LibraryPanel* library*/)
+					   const std::shared_ptr<Symbol>& sym/*, ee::LibraryPanel* library*/)
 	: EditPanel(parent, frame)
 	, MultiShapesImpl()
+	, m_sym(sym)
 	, m_toolbar(NULL)
 {
 	SetCanvas(new StageCanvas(this));
-	m_sym = sym;
-	if (m_sym) {
-		m_sym->AddReference();
-	}
 
 //	SetDropTarget(new DropTarget(this, library));
 
 	InitSubjects();
 }
 
-StagePanel::~StagePanel()
-{
-	if (m_sym) {
-		m_sym->RemoveReference();
-	}
-}
-
-void StagePanel::TraverseShapes(ee::Visitor<ee::Shape>& visitor, ee::DataTraverseType type/* = ee::DT_ALL*/) const
+void StagePanel::TraverseShapes(ee::RefVisitor<ee::Shape>& visitor, ee::DataTraverseType type/* = ee::DT_ALL*/) const
 {
 	if (m_sym) {
 		m_sym->Traverse(visitor);
@@ -95,7 +82,7 @@ void StagePanel::StoreToFile(const char* filename) const
 	}
 }
 
-void StagePanel::SetSymbolBG(ee::Symbol* sym)
+void StagePanel::SetSymbolBG(const ee::SymPtr& sym)
 {
 	if (m_sym) {
 		m_sym->SetBG(sym);
@@ -143,7 +130,7 @@ void StagePanel::SetSymbolBG(ee::Symbol* sym)
 //		{
 //			Symbol* sym = static_cast<Symbol*>(const_cast<ee::Symbol*>(&m_sym));
 //
-//			std::vector<ee::Shape*>& shapes = sym->m_shapes;
+//			CU_VEC<ee::Shape*>& shapes = sym->m_shapes;
 //
 //			for (size_t i = 0, n = shapes.size(); i < n; ++i)
 //				shapes[i]->RemoveReference();
@@ -173,12 +160,12 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 	switch (sj_id)
 	{
 	case ee::MSG_REMOVE_SHAPE:
-		if (m_sym->Remove((ee::Shape*)ud)) {
+		if (m_sym->Remove(*(ee::ShapePtr*)ud)) {
 			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;
 	case ee::MSG_INSERT_SHAPE:
-		if (m_sym->Add((ee::Shape*)ud)) {
+		if (m_sym->Add(*(ee::ShapePtr*)ud)) {
 			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;
@@ -218,7 +205,7 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
 	long index;
 	sIndex.ToLong(&index);
 
-	ee::Symbol* sym = m_library->GetSymbol(index);
+	auto sym = m_library->GetSymbol(index);
 	if (sym) {
 		m_stage->SetSymbolBG(sym);
 	}
@@ -232,13 +219,12 @@ OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames)
 	}
 
 	std::string filename = filenames[0].ToStdString();
-	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filename);
+	auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filename);
 	sym->RefreshThumbnail(filename);
 	bool success = m_library->AddSymbol(sym);
 	if (success) {
 		m_stage->SetSymbolBG(sym);
 	}
-	sym->RemoveReference();
 }
 
 }

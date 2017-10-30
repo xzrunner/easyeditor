@@ -33,14 +33,14 @@ StagePanel::~StagePanel()
 	Clear();
 }
 
-ee::Sprite* StagePanel::QuerySpriteByPos(const sm::vec2& pos) const
+ee::SprPtr StagePanel::QuerySpriteByPos(const sm::vec2& pos) const
 {
-	ee::Sprite* result = NULL;
+	ee::SprPtr result = NULL;
 	TraverseSprites(PointQueryVisitor(pos, &result), ee::DT_EDITABLE, false);
 	return result;
 }
 
-void StagePanel::QuerySpritesByRect(const sm::rect& rect, std::vector<ee::Sprite*>& result) const
+void StagePanel::QuerySpritesByRect(const sm::rect& rect, std::vector<ee::SprPtr>& result) const
 {
 	TraverseSprites(RectQueryVisitor(rect, result), ee::DT_EDITABLE);
 }
@@ -75,7 +75,7 @@ void StagePanel::removeJoint(Joint* joint)
 	}
 }
 
-void StagePanel::traverseBodies(ee::Visitor<ee::Sprite>& visitor) const
+void StagePanel::traverseBodies(ee::RefVisitor<ee::Sprite>& visitor) const
 {
 	std::vector<Body*>::const_iterator itr = m_bodies.begin();
 	for ( ; itr != m_bodies.end(); ++itr)
@@ -86,7 +86,7 @@ void StagePanel::traverseBodies(ee::Visitor<ee::Sprite>& visitor) const
 	}
 }
 
-void StagePanel::traverseJoints(ee::Visitor<ee::Sprite>& visitor) const
+void StagePanel::traverseJoints(ee::RefVisitor<ee::Sprite>& visitor) const
 {
 	std::vector<Joint*>::const_iterator itr = m_joints.begin();
 	for ( ; itr != m_joints.end(); ++itr)
@@ -110,7 +110,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 		}
 		break;
 	case ee::MSG_REMOVE_SPRITE:
-		Remove((ee::Sprite*)ud);
+		Remove(*(ee::SprPtr*)ud);
 		break;
 	case ee::MSG_CLEAR_SPRITE:
 		Clear();
@@ -154,7 +154,7 @@ void StagePanel::loadBody(const std::string& filepath, Body& body)
 	}
 }
 
-void StagePanel::loadBody(ee::Sprite* spr, Body& body)
+void StagePanel::loadBody(const ee::SprPtr& spr, Body& body)
 {
 	Fixture* fixture = new Fixture;
 	fixture->m_body = &body;
@@ -166,7 +166,7 @@ void StagePanel::loadBody(ee::Sprite* spr, Body& body)
 	body.m_fixtures.push_back(fixture);
 }
 
-void StagePanel::Insert(ee::Sprite* spr)
+void StagePanel::Insert(const ee::SprPtr& spr)
 {
 	std::string filepath = ee::FileHelper::GetFilenameAddTag(
 		spr->GetSymbol()->GetFilepath(), eshape::FILE_TAG, "json");
@@ -192,7 +192,7 @@ void StagePanel::Insert(ee::Sprite* spr)
 	m_bodies.push_back(body);
 }
 
-void StagePanel::Remove(ee::Sprite* spr)
+void StagePanel::Remove(const ee::SprPtr& spr)
 {
 	for (size_t i = 0, n = m_bodies.size(); i < n; ++i)
 	{
@@ -218,7 +218,7 @@ void StagePanel::Clear()
 //////////////////////////////////////////////////////////////////////////
 
 StagePanel::PointQueryVisitor::
-	PointQueryVisitor(const sm::vec2& pos, ee::Sprite** pResult)
+	PointQueryVisitor(const sm::vec2& pos, ee::SprPtr* pResult)
 	: m_pos(pos)
 {
 	m_pResult = pResult;
@@ -226,7 +226,7 @@ StagePanel::PointQueryVisitor::
 }
 
 void StagePanel::PointQueryVisitor::
-	Visit(ee::Sprite* spr, bool& next)
+	Visit(const ee::SprPtr& spr, bool& next)
 {
 	Body* data = static_cast<Body*>(spr->GetUserData());
 	if (data->IsContain(m_pos))
@@ -245,13 +245,13 @@ void StagePanel::PointQueryVisitor::
 //////////////////////////////////////////////////////////////////////////
 
 StagePanel::RectQueryVisitor::
-	RectQueryVisitor(const sm::rect& rect, std::vector<ee::Sprite*>& result)
+	RectQueryVisitor(const sm::rect& rect, std::vector<ee::SprPtr>& result)
 	: m_rect(rect), m_result(result)
 {
 }
 
 void StagePanel::RectQueryVisitor::
-	Visit(ee::Sprite* spr, bool& next)
+	Visit(const ee::SprPtr& spr, bool& next)
 {
 	Body* data = static_cast<Body*>(spr->GetUserData());
 	if (data->IsIntersect(m_rect))

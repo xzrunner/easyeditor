@@ -4,7 +4,7 @@
 namespace ee
 {
 
-PerspectiveSpriteAOP::PerspectiveSpriteAOP(Sprite* spr, 
+PerspectiveSpriteAOP::PerspectiveSpriteAOP(const SprPtr& spr,
 										   const sm::vec2& new_persp, 
 										   const sm::vec2& old_persp)
 	: m_spr(spr)
@@ -24,7 +24,7 @@ void PerspectiveSpriteAOP::Redo()
 }
 
 // todo
-Json::Value PerspectiveSpriteAOP::Store(const std::vector<Sprite*>& sprs) const
+Json::Value PerspectiveSpriteAOP::Store(const std::vector<SprPtr>& sprs) const
 {
 	Json::Value ret;
 	return ret;

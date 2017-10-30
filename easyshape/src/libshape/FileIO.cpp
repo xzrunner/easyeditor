@@ -18,7 +18,7 @@
 namespace eshape
 {
 
-ee::Shape* FileIO::LoadFromFile(const char* filename, std::string& bg_filepath)
+ee::ShapePtr FileIO::LoadFromFile(const char* filename, std::string& bg_filepath)
 {
 	Json::Value val;
 	Json::Reader reader;
@@ -34,7 +34,7 @@ ee::Shape* FileIO::LoadFromFile(const char* filename, std::string& bg_filepath)
 	return LoadShape(dir, val["shape"]);
 }
 
-ee::Shape* FileIO::LoadFromFile(const char* filename, ee::Symbol*& bg)
+ee::ShapePtr FileIO::LoadFromFile(const char* filename, ee::SymPtr& bg)
 {
 	Json::Value val;
 	Json::Reader reader;
@@ -48,17 +48,15 @@ ee::Shape* FileIO::LoadFromFile(const char* filename, ee::Symbol*& bg)
 
 	if (!val["bg_symbol"].isNull()) {
 		std::string path = ee::FileHelper::GetAbsolutePath(dir, val["bg_symbol"].asString());
-		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(path);
-		cu::RefCountObjAssign<ee::Symbol>(bg, sym);
-		sym->RemoveReference();
+		bg = ee::SymbolMgr::Instance()->FetchSymbol(path);		
 	}
 
 	return LoadShape(dir, val["shape"]);
 }
 
 void FileIO::StoreToFile(const char* filename, 
-						 const ee::Shape* shape, 
-						 const ee::Symbol* bg)
+						 const ee::Shape& shape,
+						 const ee::SymPtr& bg)
 {
 	std::string dir = ee::FileHelper::GetFileDir(filename);
 	Json::Value val;
@@ -78,9 +76,9 @@ void FileIO::StoreToFile(const char* filename,
 	fout.close();
 }
 
-ee::Shape* FileIO::LoadShape(const std::string& dir, const Json::Value& value)
+ee::ShapePtr FileIO::LoadShape(const std::string& dir, const Json::Value& value)
 {
-	ee::Shape* shape = NULL;
+	ee::ShapePtr shape = nullptr;
 
 // 	// old
 // 	if (value.isNull())
@@ -102,7 +100,7 @@ ee::Shape* FileIO::LoadShape(const std::string& dir, const Json::Value& value)
 	return shape;
 }
 
-Json::Value FileIO::StoreShape(const std::string& dir, const ee::Shape* shape)
+Json::Value FileIO::StoreShape(const std::string& dir, const ee::Shape& shape)
 {
 	Json::Value value;
 
@@ -132,42 +130,42 @@ Json::Value FileIO::StoreShape(const std::string& dir, const ee::Shape* shape)
 // 	shape->StoreToFile(value[title], dir);
 
 	// new
-	shape->StoreToFile(value, dir);
+	shape.StoreToFile(value, dir);
 
 	return value;
 }
 
-ee::Shape* FileIO::LoadBezier(const Json::Value& value)
+ee::ShapePtr FileIO::LoadBezier(const Json::Value& value)
 {
-	BezierShape* bezier = new BezierShape();
+	auto bezier = std::make_unique<BezierShape>();
 	bezier->LoadFromFile(value, "");
 	return bezier;
 }
 
-ee::Shape* FileIO::LoadPolygon(const std::string& dir, const Json::Value& value)
+ee::ShapePtr FileIO::LoadPolygon(const std::string& dir, const Json::Value& value)
 {
-	PolygonShape* poly = new PolygonShape;
-	poly->LoadFromFile(value, dir);
+	auto poly = std::make_unique<PolygonShape>();
+	poly->LoadFromFile(value, dir.c_str());
 	return poly;
 }
 
-ee::Shape* FileIO::LoadChain(const Json::Value& value)
+ee::ShapePtr FileIO::LoadChain(const Json::Value& value)
 {
-	ChainShape* chain = new ChainShape();
+	auto chain = std::make_unique<ChainShape>();
 	chain->LoadFromFile(value, "");
 	return chain;
 }
 
-ee::Shape* FileIO::LoadRect(const Json::Value& value)
+ee::ShapePtr FileIO::LoadRect(const Json::Value& value)
 {
-	RectShape* rect = new RectShape();
+	auto rect = std::make_unique<RectShape>();
 	rect->LoadFromFile(value, "");
 	return rect;
 }
 
-ee::Shape* FileIO::LoadCircle(const Json::Value& value)
+ee::ShapePtr FileIO::LoadCircle(const Json::Value& value)
 {
-	CircleShape* circle = new CircleShape();
+	auto circle = std::make_unique<CircleShape>();
 	circle->LoadFromFile(value, "");
 	return circle;
 }

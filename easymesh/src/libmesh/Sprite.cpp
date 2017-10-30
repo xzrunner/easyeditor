@@ -28,7 +28,7 @@ Sprite& Sprite::operator = (const Sprite& spr)
 	return *this;
 }
 
-Sprite::Sprite(Symbol* sym)
+Sprite::Sprite(const s2::SymPtr& sym, uint32_t id)
 	: s2::Sprite(sym)
 	, s2::MeshSprite(sym)
 	, ee::Sprite(sym)
@@ -40,7 +40,7 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 	ee::Sprite::Load(val);
 	
 	const Json::Value& mesh_val = val["mesh"];
-	s2::Mesh* mesh = dynamic_cast<Symbol*>(m_sym)->GetMesh();
+	auto& mesh = std::dynamic_pointer_cast<Symbol>(m_sym)->GetMesh();
 	// reset
 	pm::MeshTransform trans;
 	mesh->GetMesh()->LoadFromTransform(trans);
@@ -48,7 +48,6 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 	mesh->GetMesh()->LoadFromTransform(m_trans);
 
 	if (!mesh_val["base_symbol"].isNull()) {
-		m_base->RemoveReference();
 		std::string path = ee::FileHelper::GetAbsolutePath(dir, mesh_val["base_symbol"].asString());
 		m_base = ee::SymbolMgr::Instance()->FetchSymbol(path);
 	}
@@ -60,23 +59,23 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 
 	Json::Value mesh_val;
 
-	const s2::Mesh* mesh = dynamic_cast<Symbol*>(m_sym)->GetMesh();
+	auto& mesh = std::dynamic_pointer_cast<Symbol>(m_sym)->GetMesh();
 	gum::MeshIO::Store(mesh_val, m_trans, *mesh);
 
-	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(m_base);
-	mesh_val["base_symbol"] = ee::FileHelper::GetRelativePath(dir, sym->GetFilepath());
+	mesh_val["base_symbol"] = ee::FileHelper::GetRelativePath(dir, 
+		std::dynamic_pointer_cast<const ee::Symbol>(m_base)->GetFilepath());
 
 	val["mesh"] = mesh_val;
 }
 
 ee::PropertySetting* Sprite::CreatePropertySetting(ee::EditPanelImpl* stage)
 {
-	return new PropertySetting(stage, this);
+	return new PropertySetting(stage, std::dynamic_pointer_cast<Sprite>(shared_from_this()));
 }
 
-ee::Sprite* Sprite::Create(ee::Symbol* sym) 
+ee::SprPtr Sprite::Create(const std::shared_ptr<ee::Symbol>& sym) 
 {
-	return new Sprite(static_cast<Symbol*>(sym));
+	return std::make_shared<Sprite>(sym);
 }
 
 }

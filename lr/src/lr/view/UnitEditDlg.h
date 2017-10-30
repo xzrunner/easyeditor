@@ -9,7 +9,7 @@ namespace lr
 class UnitEditDlg : public ee::CfgEditDlg
 {
 public:
-	UnitEditDlg(wxWindow* parent, ee::Sprite* spr, 
+	UnitEditDlg(wxWindow* parent, const ee::SprPtr& spr, 
 		const std::vector<std::string>& path_names);
 	virtual ~UnitEditDlg();
 

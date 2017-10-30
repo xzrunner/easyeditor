@@ -31,13 +31,13 @@ SprFilterProperty::SprFilterProperty(wxWindow* parent)
 {
 }
 
-void SprFilterProperty::InitPS(const Sprite* spr, wxPropertyGrid* pg)
+void SprFilterProperty::InitPS(const Sprite& spr, wxPropertyGrid* pg)
 {
 	std::vector<std::string> names;
 	FilterModes::Instance()->GetAllNameCN(names);
 	wxEnumProperty* filter_prop = new wxEnumProperty("Filter", wxPG_LABEL, WXHelper::ToWXStringArray(names));
 	s2::FilterMode filter = s2::FM_NULL;
-	const s2::RenderFilter* rf = spr->GetShader().GetFilter();
+	auto& rf = spr.GetShader().GetFilter();
 	if (rf) {
 		filter = rf->GetMode();
 	}
@@ -46,11 +46,11 @@ void SprFilterProperty::InitPS(const Sprite* spr, wxPropertyGrid* pg)
 	pg->Append(filter_prop);
 	if (rf) {
 		filter_prop->SetExpanded(true);
-		CreateSubPS(pg, filter_prop, rf);
+		CreateSubPS(pg, filter_prop, *rf);
 	}
 }
 
-bool SprFilterProperty::FromPS(const std::string& name, const wxAny& value, Sprite* spr)
+bool SprFilterProperty::FromPS(const std::string& name, const wxAny& value, Sprite& spr)
 {
 	bool ret = false;
 
@@ -58,20 +58,20 @@ bool SprFilterProperty::FromPS(const std::string& name, const wxAny& value, Spri
 	{
 		int idx = wxANY_AS(value, int);
 		s2::FilterMode filter = FilterModes::Instance()->ID2Mode(idx);
-		s2::RenderShader rs = spr->GetShader();
+		s2::RenderShader rs = spr.GetShader();
 		rs.SetFilter(filter);
-		spr->SetShader(rs);
+		spr.SetShader(rs);
 		ret = true;
 	}
-	else if (s2::RenderFilter* rf = const_cast<s2::RenderFilter*>(spr->GetShader().GetFilter()))
+	else if (auto& rf = spr.GetShader().GetFilter())
 	{
-		switch (spr->GetShader().GetFilter()->GetMode())
+		switch (spr.GetShader().GetFilter()->GetMode())
 		{
 		case s2::FM_EDGE_DETECTION:
 			if (name == "Filter.Blend")
 			{
 				float blend = wxANY_AS(value, float);
-				s2::RFEdgeDetection* filter = static_cast<s2::RFEdgeDetection*>(rf);
+				s2::RFEdgeDetection* filter = static_cast<s2::RFEdgeDetection*>(rf.get());
 				filter->SetBlend(blend);
 				ret = true;
 			}
@@ -80,7 +80,7 @@ bool SprFilterProperty::FromPS(const std::string& name, const wxAny& value, Spri
 			if (name == "Filter.Iterations")
 			{
 				int iterations = wxANY_AS(value, int);
-				s2::RFGaussianBlur* filter = static_cast<s2::RFGaussianBlur*>(rf);
+				s2::RFGaussianBlur* filter = static_cast<s2::RFGaussianBlur*>(rf.get());
 				filter->SetIterations(iterations);
 				ret = true;
 			}
@@ -89,7 +89,7 @@ bool SprFilterProperty::FromPS(const std::string& name, const wxAny& value, Spri
 			if (name == "Filter.Iterations")
 			{
 				int iterations = wxANY_AS(value, int);
-				s2::RFOuterGlow* filter = static_cast<s2::RFOuterGlow*>(rf);
+				s2::RFOuterGlow* filter = static_cast<s2::RFOuterGlow*>(rf.get());
 				filter->SetIterations(iterations);
 				ret = true;
 			}
@@ -102,12 +102,12 @@ bool SprFilterProperty::FromPS(const std::string& name, const wxAny& value, Spri
 				if (shader) {
 					prog = static_cast<sl::HeatHazeProg*>(shader->GetProgram(sl::FM_HEAT_HAZE));
 				}
-				s2::RFHeatHaze* filter = static_cast<s2::RFHeatHaze*>(rf);
+				s2::RFHeatHaze* filter = static_cast<s2::RFHeatHaze*>(rf.get());
 
 				if (name == "Filter.Filepath")
 				{
 					std::string filepath = wxANY_AS(value, wxString);
-					filter->SetFilepath(filepath);
+					filter->SetFilepath(filepath.c_str());
 					if (prog) {
 						prog->SetDistortionMapTex(GetTextureID(filepath));
 					}
@@ -145,9 +145,9 @@ bool SprFilterProperty::FromPS(const std::string& name, const wxAny& value, Spri
 				if (shader) {
 					prog = static_cast<sl::ColGradingProg*>(shader->GetProgram(sl::FM_COL_GRADING));
 				}
-				s2::RFColGrading* filter = static_cast<s2::RFColGrading*>(rf);
+				s2::RFColGrading* filter = static_cast<s2::RFColGrading*>(rf.get());
 				std::string filepath = wxANY_AS(value, wxString);
-				filter->SetFilepath(filepath);
+				filter->SetFilepath(filepath.c_str());
 				if (prog) {
 					prog->SetLUTTex(GetTextureID(filepath));
 				}
@@ -160,12 +160,12 @@ bool SprFilterProperty::FromPS(const std::string& name, const wxAny& value, Spri
 	return ret;
 }
 
-void SprFilterProperty::ToPS(const Sprite* spr, wxPropertyGrid* pg)
+void SprFilterProperty::ToPS(const Sprite& spr, wxPropertyGrid* pg)
 {
 	wxPGProperty* filter_prop = pg->GetProperty("Filter");
 	
 	s2::FilterMode filter = s2::FM_NULL;
-	const s2::RenderFilter* rf = spr->GetShader().GetFilter();
+	auto& rf = spr.GetShader().GetFilter();
 	if (rf) {
 		filter = rf->GetMode();
 	}
@@ -174,7 +174,7 @@ void SprFilterProperty::ToPS(const Sprite* spr, wxPropertyGrid* pg)
 	filter_prop->DeleteChildren();
 
 	if (rf) {
-		CreateSubPS(pg, filter_prop, rf);
+		CreateSubPS(pg, filter_prop, *rf);
 	}
 }
 
@@ -183,7 +183,7 @@ static void set_filepath_cb(const std::string& filepath, void* ud)
 	s2::RenderFilter* filter = static_cast<s2::RenderFilter*>(ud);
 	if (s2::RFHeatHaze* hh = dynamic_cast<s2::RFHeatHaze*>(filter)) 
 	{
-		hh->SetFilepath(filepath);
+		hh->SetFilepath(filepath.c_str());
 
 		sl::HeatHazeProg* prog = NULL;
 		sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
@@ -192,7 +192,7 @@ static void set_filepath_cb(const std::string& filepath, void* ud)
 			prog = static_cast<sl::HeatHazeProg*>(shader->GetProgram(sl::FM_HEAT_HAZE));
 		}
 		if (prog) {
-			Image* img = ImageMgr::Instance()->GetItem(filepath);
+			auto img = ImageMgr::Instance()->GetItem(filepath.c_str());
 			if (img) {
 				prog->SetDistortionMapTex(img->GetTexID());
 			}
@@ -200,7 +200,7 @@ static void set_filepath_cb(const std::string& filepath, void* ud)
 	} 
 	else if (s2::RFColGrading* cg = dynamic_cast<s2::RFColGrading*>(filter))
 	{
-		cg->SetFilepath(filepath);
+		cg->SetFilepath(filepath.c_str());
 
 		sl::ColGradingProg* prog = NULL;
 		sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
@@ -209,7 +209,7 @@ static void set_filepath_cb(const std::string& filepath, void* ud)
 			prog = static_cast<sl::ColGradingProg*>(shader->GetProgram(sl::FM_COL_GRADING));
 		}
 		if (prog) {
-			Image* img = ImageMgr::Instance()->GetItem(filepath);
+			auto img = ImageMgr::Instance()->GetItem(filepath.c_str());
 			if (img) {
 				prog->SetLUTTex(img->GetTexID());
 			}
@@ -217,38 +217,38 @@ static void set_filepath_cb(const std::string& filepath, void* ud)
 	}
 }
 
-void SprFilterProperty::CreateSubPS(wxPropertyGrid* pg, wxPGProperty* parent, const s2::RenderFilter* filter)
+void SprFilterProperty::CreateSubPS(wxPropertyGrid* pg, wxPGProperty* parent, const s2::RenderFilter& filter)
 {
-	s2::FilterMode mode = filter->GetMode();
+	s2::FilterMode mode = filter.GetMode();
 	switch (mode)
 	{
 	case s2::FM_EDGE_DETECTION:
 		{
-			const s2::RFEdgeDetection* ed = static_cast<const s2::RFEdgeDetection*>(filter);
+			const s2::RFEdgeDetection* ed = static_cast<const s2::RFEdgeDetection*>(&filter);
 			wxPGProperty* prop = new wxFloatProperty("Blend", wxPG_LABEL, ed->GetBlend());
 			pg->AppendIn(parent, prop);
 		}
 		break;
 	case s2::FM_GAUSSIAN_BLUR:
 		{
-			const s2::RFGaussianBlur* gb = static_cast<const s2::RFGaussianBlur*>(filter);
+			const s2::RFGaussianBlur* gb = static_cast<const s2::RFGaussianBlur*>(&filter);
 			wxPGProperty* prop = new wxIntProperty("Iterations", wxPG_LABEL, gb->GetIterations());
 			pg->AppendIn(parent, prop);
 		}
 		break;
 	case s2::FM_OUTER_GLOW:
 		{
-			const s2::RFOuterGlow* og = static_cast<const s2::RFOuterGlow*>(filter);
+			const s2::RFOuterGlow* og = static_cast<const s2::RFOuterGlow*>(&filter);
 			wxPGProperty* prop = new wxIntProperty("Iterations", wxPG_LABEL, og->GetIterations());
 			pg->AppendIn(parent, prop);
 		}
 		break;
 	case s2::FM_HEAT_HAZE:
 		{
-			const s2::RFHeatHaze* hh = static_cast<const s2::RFHeatHaze*>(filter);
+			const s2::RFHeatHaze* hh = static_cast<const s2::RFHeatHaze*>(&filter);
 
-			FilepathProperty* file_prop = new FilepathProperty("Filepath", wxPG_LABEL, hh->GetFilepath());
-			file_prop->SetCallback(set_filepath_cb, const_cast<s2::RenderFilter*>(filter));
+			FilepathProperty* file_prop = new FilepathProperty("Filepath", wxPG_LABEL, hh->GetFilepath().c_str());
+			file_prop->SetCallback(set_filepath_cb, const_cast<s2::RenderFilter*>(&filter));
 			pg->AppendIn(parent, file_prop);
 
 			float dist, rise;
@@ -261,9 +261,9 @@ void SprFilterProperty::CreateSubPS(wxPropertyGrid* pg, wxPGProperty* parent, co
 		break;
 	case s2::FM_COL_GRADING:
 		{
-			const s2::RFColGrading* cg = static_cast<const s2::RFColGrading*>(filter);
-			FilepathProperty* file_prop = new FilepathProperty("Filepath", wxPG_LABEL, cg->GetFilepath());
-			file_prop->SetCallback(set_filepath_cb, const_cast<s2::RenderFilter*>(filter));
+			const s2::RFColGrading* cg = static_cast<const s2::RFColGrading*>(&filter);
+			FilepathProperty* file_prop = new FilepathProperty("Filepath", wxPG_LABEL, cg->GetFilepath().c_str());
+			file_prop->SetCallback(set_filepath_cb, const_cast<s2::RenderFilter*>(&filter));
 			pg->AppendIn(parent, file_prop);
 		}
 		break;
@@ -274,7 +274,7 @@ int SprFilterProperty::GetTextureID(const std::string& filepath) const
 {
 	int ret = 0;
 	try {
-		Image* img = ImageMgr::Instance()->GetItem(filepath);
+		auto img = ImageMgr::Instance()->GetItem(filepath.c_str());
 		if (img) {
 			ret = img->GetTexID();
 		}

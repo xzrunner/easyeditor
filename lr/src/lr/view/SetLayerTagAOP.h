@@ -23,11 +23,11 @@ public:
 
 	virtual void Undo();
 	virtual void Redo();
-	virtual void Copy(const std::vector<ee::Sprite*>& sprs);
+	virtual void Copy(const std::vector<SprPtr>& sprs);
 
-	virtual Json::Value Store(const std::vector<ee::Sprite*>& sprs) const;
+	virtual Json::Value Store(const std::vector<ee::SprPtr>& sprs) const;
 
-	static void Set(const std::vector<ee::Sprite*>& sprs, Type type);
+	static void Set(const std::vector<ee::SprPtr>& sprs, Type type);
 
 private:
 	Type m_type;

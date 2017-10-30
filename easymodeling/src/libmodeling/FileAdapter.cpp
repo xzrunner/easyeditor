@@ -48,9 +48,8 @@ Body* FileApapter::ToBody(const Json::Value& bodyValue, const std::string& dlg)
 	std::string filepath = bodyValue["filepath"].asString();
 	filepath = ee::FileHelper::GetAbsolutePath(dlg, filepath);
 
-	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-	ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
-	sym->RemoveReference();
+	auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+	auto spr = ee::SpriteFactory::Instance()->Create(sym);
 
 	sm::vec2 pos;
 	pos.x = bodyValue["position"]["x"].asDouble();

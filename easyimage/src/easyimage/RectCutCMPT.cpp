@@ -263,12 +263,12 @@ void RectCutCMPT::OnOutputData(wxCommandEvent& event)
 		return;
 	}
 
-	const ee::Sprite* spr = m_stage->GetImage();
+	const ee::SprConstPtr& spr = m_stage->GetImage();
 	if (!spr) {
 		return;
 	}
 
-	const ee::ImageSymbol* sym = dynamic_cast<const ee::ImageSymbol*>(spr->GetSymbol());
+	const std::shared_ptr<ee::ImageSymbol>& sym = std::dynamic_pointer_cast<const ee::ImageSymbol>>(spr->GetSymbol());
 	if (!sym) {
 		return;
 	}
@@ -285,8 +285,8 @@ void RectCutCMPT::OnOutputData(wxCommandEvent& event)
 		center.y = image->GetClippedRegion().Height() * 0.5f;
 	}
 
-	ee::ImageData* img_data = ee::ImageDataMgr::Instance()->GetItem(sym->GetFilepath());
-	assert(img_data->GetFormat() == GPF_RGB || img_data->GetFormat() == GPF_RGBA);
+	auto img_data = ee::ImageDataMgr::Instance()->GetItem(sym->GetFilepath());
+	assert(img_data->GetFormat() == GPF_RGB || img_data->GetFormat() == GPF_RGBA8);
 	int channels = img_data->GetFormat() == GPF_RGB ? 3 : 4;
 	pimg::Cropping crop(img_data->GetPixelData(), img_data->GetWidth(), img_data->GetHeight(), channels);
 
@@ -304,22 +304,20 @@ void RectCutCMPT::OnOutputData(wxCommandEvent& event)
 		sm::vec2 sz = r.Size();
 
 		std::string img_filename = img_dir + "\\" + img_name + "_" + ee::StringHelper::ToString(i) + ".png";
-		gimg_export(img_filename.c_str(), pixels, sz.x, sz.y, GPF_RGBA, true);
+		gimg_export(img_filename.c_str(), pixels, sz.x, sz.y, GPF_RGBA8, true);
 
-		ee::Sprite* spr = new ee::DummySprite(new ee::DummySymbol(img_filename, sz.x, sz.y));
+		auto& spr = new ee::DummySprite(new ee::DummySymbol(img_filename, sz.x, sz.y));
 		sm::vec2 offset = r.Center() - center;
 		spr->Translate(offset);
 		complex_all->Add(spr);
 
 		for (int j = 0, m = m_part_rects.size(); j < m; ++j) {
 			if (m_part_rects[j] == r) {
-				spr->AddReference();
 				complex_part->Add(spr);
 				break;
 			}
 		}
 	}
-	img_data->RemoveReference();
 
 	complex_all->name = img_name;
 	complex_part->name = img_name + "_part";
@@ -354,10 +352,10 @@ void RectCutCMPT::OnAddRect(wxCommandEvent& event)
 
 void RectCutCMPT::OnAutoCreateRects(wxCommandEvent& event)
 {
-	const ee::Sprite* spr = m_stage->GetImage();
-	const ee::ImageSymbol* sym = dynamic_cast<const ee::ImageSymbol*>(spr->GetSymbol());
+	const ee::SprConstPtr& spr = m_stage->GetImage();
+	const std::shared_ptr<ee::ImageSymbol>& sym = std::dynamic_pointer_cast<const ee::ImageSymbol>>(spr->GetSymbol());
 	assert(sym);
-	ee::ImageData* img = ee::ImageDataMgr::Instance()->GetItem(sym->GetFilepath());
+	auto img = ee::ImageDataMgr::Instance()->GetItem(sym->GetFilepath());
 
 	RectMgr& rects = static_cast<RectCutOP*>(m_editop)->GetRectMgr();
 

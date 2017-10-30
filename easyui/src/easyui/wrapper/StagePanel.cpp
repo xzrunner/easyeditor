@@ -17,7 +17,7 @@
 #include <easyui.h>
 #include <easycomplex.h>
 
-#include <sprite2/S2_Sprite.h>
+#include <sprite2/Sprite.h>
 #include <sprite2/BoundingBox.h>
 
 #include <fstream>
@@ -83,9 +83,9 @@ void StagePanel::LoadFromFile(const char* filename)
 	items_filepath = ee::FileHelper::GetAbsolutePathFromFile(filename, items_filepath);
 	ecomplex::Symbol items_complex;
 	items_complex.LoadFromFile(items_filepath);
-	const std::vector<s2::Sprite*>& children = items_complex.GetAllChildren();
+	auto& children = items_complex.GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
-		ee::Sprite* spr = dynamic_cast<ee::Sprite*>(children[i]);
+		auto spr = std::dynamic_pointer_cast<ee::Sprite>(children[i]);
 		ee::InsertSpriteSJ::Instance()->Insert(spr);
 	}
 }
@@ -99,8 +99,8 @@ void StagePanel::StoreToFile(const char* filename) const
 
 	// items complex
 	ecomplex::Symbol items_complex;
-	std::vector<ee::Sprite*> sprs;
-	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	for_each(sprs.begin(), sprs.end(), cu::AddRefFunctor<ee::Sprite>());
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
 		items_complex.Add(sprs[i]);

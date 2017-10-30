@@ -16,9 +16,9 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	m_list->SetFileter(ee::SymbolFile::Instance()->Tag(s2::SYM_TEXTBOX));
 }
 
-bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
+bool LibraryPage::IsHandleSymbol(const ee::SymPtr& sym) const
 {
-	return dynamic_cast<Symbol*>(sym) != NULL;
+	return sym->Type() == s2::SYM_TEXTBOX;
 }
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)

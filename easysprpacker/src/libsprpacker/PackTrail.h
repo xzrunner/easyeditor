@@ -4,7 +4,7 @@
 #include "PackNode.h"
 
 #include <sprite2/TrailSymbol.h>
-
+#include <cu/cu_stl.h>
 #include <mt_2d.h>
 
 #include <vector>
@@ -17,7 +17,7 @@ namespace esprpacker
 class PackTrail : public PackNode
 {
 public:
-	PackTrail(const etrail::Symbol* sym);
+	PackTrail(const std::shared_ptr<etrail::Symbol>& sym);
 
 	/**
 	 *  @interface
@@ -35,7 +35,7 @@ public:
 	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const;	
 	
 private:
-	void Init(const etrail::Symbol* sym);	
+	void Init(const std::shared_ptr<etrail::Symbol>& sym);	
 	
 	void PackToLuaMT(ebuilder::CodeGenerator& gen) const;
 

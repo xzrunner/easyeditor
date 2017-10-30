@@ -1,9 +1,10 @@
 #ifndef _EASYEDITOR_FILE_HELPER_H_
 #define _EASYEDITOR_FILE_HELPER_H_
 
+#include <string>
+
 #include <wx/arrstr.h>
 
-#include <string>
 #include <vector>
 
 namespace ee

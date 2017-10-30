@@ -21,12 +21,12 @@ public:
 
 	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
 
-	const IPackNode* Create(const escale9::Sprite* spr);
+	const IPackNode* Create(const std::shared_ptr<const escale9::Sprite>& spr);
 
 private:
-	const IPackNode* Query(const escale9::Sprite* spr) const;
+	const IPackNode* Query(const std::shared_ptr<const escale9::Sprite>& spr) const;
 
-	void Load(const escale9::Sprite* spr, PackPicture* pic);
+	void Load(const std::shared_ptr<const escale9::Sprite>& spr, PackPicture* pic);
 
 private:
 	struct Value
@@ -36,7 +36,7 @@ private:
 	};
 
 private:
-	std::multimap<const escale9::Symbol*, Value> m_map_data;
+	std::multimap<std::shared_ptr<const escale9::Symbol>, Value> m_map_data;
 
 }; // Scale9Builder
 

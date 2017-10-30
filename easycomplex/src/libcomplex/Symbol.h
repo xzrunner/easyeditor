@@ -2,6 +2,7 @@
 #define _EASYCOMPLEX_SYMBOL_H_
 
 #include <ee/Symbol.h>
+#include <ee/Sprite.h>
 
 #include <sprite2/ComplexSymbol.h>
 
@@ -19,21 +20,21 @@ public:
 	 *  @interface
 	 *    s2::Symbol
 	 */
-	virtual s2::RenderReturn Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
+	virtual s2::RenderReturn DrawTree(cooking::DisplayList* dlist, const s2::RenderParams& rp, const s2::Sprite* spr = nullptr) const;
 
 	/**
 	 *  @interface
 	 *    ee::Symbol
 	 */
 	virtual void ReloadTexture() const;
-	virtual void Traverse(ee::Visitor<ee::Sprite>& visitor);
+	virtual void Traverse(ee::RefVisitor<ee::Sprite>& visitor);
 
 	bool HasActions() const;
 	void GetActionNames(std::vector<std::string>& actions) const;
 
 	const std::vector<std::string>& GetOriginNames() const { return m_origin_names; }
 
-	static ee::Symbol* Create() { return new Symbol(); }
+	static ee::SymPtr Create() { return std::make_shared<Symbol>(); }
 
 protected:
 	virtual sm::rect GetBoundingImpl(const s2::Sprite* spr = NULL, const s2::Actor* actor = NULL, bool cache = true) const;
@@ -44,13 +45,13 @@ public:
 	struct Group
 	{
 		std::string name;
-		std::vector<ee::Sprite*> members;
+		std::vector<ee::SprPtr> members;
 	};
 
 	// todo: 
 
 private:
-	bool CullingTestOutside(const s2::Sprite* spr, const s2::RenderParams& rp) const;
+	bool CullingTestOutside(const s2::Sprite& spr, const s2::RenderParams& rp) const;
 
 public:
 	std::vector<Group> m_groups;

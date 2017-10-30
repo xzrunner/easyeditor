@@ -8,7 +8,7 @@
 #include <ee/SpriteRenderer.h>
 #include <ee/cfg_const.h>
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <sprite2/CameraType.h>
 
 namespace etrail
@@ -24,17 +24,17 @@ void StageCanvas::OnDrawSprites() const
 {
 	DrawBackground();
 
-	std::vector<ee::Sprite*> sprs;
-	static_cast<StagePanel*>(m_stage)->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	static_cast<StagePanel*>(m_stage)->TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	for (size_t i = 0, n = sprs.size(); i < n; ++i)
 	{
-		ee::Sprite* spr = sprs[i];
+		auto& spr = sprs[i];
 		if (!spr->IsVisible())
 			continue;
-		ee::SpriteRenderer::Instance()->Draw(sprs[i]);
+		ee::SpriteRenderer::Instance()->Draw(sprs[i].get());
 	}
 
-	MotionTrail* trail = m_stage->m_trail;
+	auto& trail = m_stage->m_trail;
 	if (trail) {
 		trail->Draw(S2_MAT());
 	}

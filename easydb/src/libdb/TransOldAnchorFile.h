@@ -30,7 +30,7 @@ private:
 	void TransComplex(const std::string& filepath) const;
 	void TransAnimation(const std::string& filepath) const;
 
-	bool IsAnchor(const ee::Sprite* spr) const;
+	bool IsAnchor(const ee::SprConstPtr& spr) const;
 
 }; // TransOldAnchorFile
 

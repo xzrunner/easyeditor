@@ -4,12 +4,14 @@
 #include <ee/UICallback.h>
 
 #include <SM_Quaternion.h>
-#include <CU_RefCountObj.h>
+#include <cu/CU_RefCountObj.h>
 #include <SM_Matrix.h>
 #include <sprite2/Particle3d.h>
 #include <sprite2/P3dRenderParams.h>
+#include <sprite2/Symbol.h>
 
 #include <string>
+#include <memory>
 
 struct p3d_symbol;
 struct p3d_particle;
@@ -25,7 +27,7 @@ class InvertRecord;
 class ParticleSystem : public cu::RefCountObj, public ee::UICallback
 {
 public:
-	ParticleSystem(const s2::P3dEmitterCfg* cfg, bool record);
+	ParticleSystem(const std::shared_ptr<s2::P3dEmitterCfg>& cfg, bool record);
 	ParticleSystem(const ParticleSystem& ps);
 
 	virtual ~ParticleSystem();
@@ -76,7 +78,7 @@ public:
 
 	void SetBlend(int blend);
 
-	p3d_symbol* AddSymbol(s2::Symbol* sym);
+	p3d_symbol* AddSymbol(const s2::SymPtr& sym);
 	void DelSymbol(int idx);
 	void DelAllSymbol();
 	p3d_symbol* GetSymbol(int idx);
@@ -85,7 +87,7 @@ public:
 // 	const p3d_emitter* GetEmitter() const;
 
 private:
-	void InitEmitter(const s2::P3dEmitterCfg* cfg);
+	void InitEmitter(const std::shared_ptr<const s2::P3dEmitterCfg>& cfg);
 
 public:
 	std::string name;
@@ -95,7 +97,7 @@ private:
 	InvertRecord* m_inv_record;
 
 private:
-	s2::Particle3dEmitter* m_et;
+	std::shared_ptr<s2::Particle3dEmitter> m_et;
 
 }; // ParticleSystem
 

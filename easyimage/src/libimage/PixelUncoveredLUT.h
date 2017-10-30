@@ -3,7 +3,7 @@
 
 #include "Rect.h"
 
-#include <vector>
+#include <cu/cu_stl.h>
 
 namespace eimage
 {
@@ -18,7 +18,7 @@ public:
 	int GetMultiArea(int x, int y, int w, int h) const;
 	bool IntersectConstArea(int x, int y, int w, int h) const;
 
-	void LoadRects(const std::vector<Rect>& rects);
+	void LoadRects(const CU_VEC<Rect>& rects);
 
 private:
 	int GetArea(int* area, int x, int y, int w, int h) const;

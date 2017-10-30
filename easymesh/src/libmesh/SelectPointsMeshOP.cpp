@@ -8,7 +8,7 @@
 #include <ee/EditPanelImpl.h>
 
 #include <polymesh/Mesh.h>
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 
 namespace emesh
 {
@@ -110,8 +110,8 @@ bool SelectPointsMeshOP::OnDraw() const
 
 	if (Mesh* mesh = static_cast<StagePanel*>(m_wnd)->GetMesh()) 
 	{
-		std::vector<sm::vec2> vertices, texcoords;
-		std::vector<int> triangles;
+		CU_VEC<sm::vec2> vertices, texcoords;
+		CU_VEC<int> triangles;
 		mesh->GetMesh()->Dump(vertices, texcoords, triangles);
 
 		s2::RVG::SetColor(GREEN);

@@ -7,6 +7,7 @@
 #include <SM_Rect.h>
 
 #include <vector>
+#include <memory>
 
 namespace ecomplex { class Symbol; }
 
@@ -16,7 +17,7 @@ namespace esprpacker
 class PackComplex : public PackNode
 {
 public:
-	PackComplex(const ecomplex::Symbol* sym);
+	PackComplex(const std::shared_ptr<const ecomplex::Symbol>& sym);
 	virtual ~PackComplex();
 
 	/**
@@ -35,7 +36,7 @@ public:
 	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const;	
 
 private:
-	void Init(const ecomplex::Symbol* sym);
+	void Init(const std::shared_ptr<const ecomplex::Symbol>& sym);
 
 	int QueryIndex(const PackNode* node, const PackTrans& trans) const;
 

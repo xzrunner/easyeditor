@@ -17,30 +17,30 @@ namespace ee
 bool FileHelper::MkDir(const std::string& dir, bool rm)
 {
 	bool ret = true;
-	if (wxDir::Exists(dir)) {
+	if (wxDir::Exists(dir.c_str())) {
 		if (rm) {
-			wxFileName::Rmdir(dir, wxPATH_RMDIR_RECURSIVE);
-			ret = wxFileName::Mkdir(dir, wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL);
+			wxFileName::Rmdir(dir.c_str(), wxPATH_RMDIR_RECURSIVE);
+			ret = wxFileName::Mkdir(dir.c_str(), wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL);
 		}
 	} else {
-		ret = wxFileName::Mkdir(dir, wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL);
+		ret = wxFileName::Mkdir(dir.c_str(), wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL);
 	}
 	return ret;
 }
 
 bool FileHelper::RmFile(const std::string& filepath)
 {
-	return wxRemoveFile(filepath);
+	return wxRemoveFile(filepath.c_str());
 }
 
 bool FileHelper::IsFileExist(const std::string& filepath)
 {
-	return wxFileName::FileExists(filepath);
+	return wxFileName::FileExists(filepath.c_str());
 }
 
 bool FileHelper::IsDirExist(const std::string& filepath)
 {
-	return wxFileName::DirExists(filepath);
+	return wxFileName::DirExists(filepath.c_str());
 }
 
 void FileHelper::FetchAllFiles(const std::string& dirpath, wxArrayString& files)
@@ -69,7 +69,7 @@ void FileHelper::FetchAllFiles(const std::string& dirpath, wxArrayString& files)
 
 	DirTraverser traverser(files);
 
-	wxDir dir(dirpath);
+	wxDir dir(dirpath.c_str());
 	dir.Traverse(traverser);
 }
 
@@ -94,7 +94,7 @@ void FileHelper::FetchAllFiles(const std::string& dirpath, const std::vector<std
 
 		virtual wxDirTraverseResult OnDir(const wxString& dirname)
 		{
-			if (m_ignore_dirs.find(dirname.ToStdString()) != m_ignore_dirs.end()) {
+			if (m_ignore_dirs.find(dirname.ToStdString().c_str()) != m_ignore_dirs.end()) {
 				return wxDIR_IGNORE;
 			} else {
 				return wxDIR_CONTINUE;
@@ -109,7 +109,7 @@ void FileHelper::FetchAllFiles(const std::string& dirpath, const std::vector<std
 
 	DirTraverser traverser(files, ignore_dirs);
 
-	wxDir dir(dirpath);
+	wxDir dir(dirpath.c_str());
 	dir.Traverse(traverser);
 }
 
@@ -123,7 +123,7 @@ void FileHelper::FetchAllFiles(const std::string& dirpath, wxArrayString& files,
 
 		virtual wxDirTraverseResult OnFile(const wxString& filename)
 		{
-			if (SymbolFile::Instance()->Type(filename.ToStdString()) == type) {
+			if (SymbolFile::Instance()->Type(filename.ToStdString().c_str()) == type) {
 				files.Add(filename);
 			}
 			return wxDIR_CONTINUE;
@@ -142,7 +142,7 @@ void FileHelper::FetchAllFiles(const std::string& dirpath, wxArrayString& files,
 
 	DirTraverser traverser(files, type);
 
-	wxDir dir(dirpath);
+	wxDir dir(dirpath.c_str());
 	dir.Traverse(traverser);
 }
 
@@ -172,7 +172,7 @@ void FileHelper::FetchCurrDirs(const std::string& dirpath, wxArrayString& dirs)
 
 	DirTraverser traverser(dirs);
 
-	wxDir dir(dirpath);
+	wxDir dir(dirpath.c_str());
 	dir.Traverse(traverser);
 }
 
@@ -187,19 +187,19 @@ std::string FileHelper::GetFilenameAddTag(const std::string& filename, const std
 		if (check == tag) {
 			fixed = filename;
 		} else if (filename[0] == '.') {
-			fixed = filename + wxT("_" + tag + "." + extension);
+			fixed = filename + std::string("_" + tag + "." + extension);
 		} else {
-			fixed = filename.substr(0, filename.find_last_of('.')) + wxT("_" + tag + "." + extension);
+			fixed = filename.substr(0, filename.find_last_of('.')) + std::string("_" + tag + "." + extension);
 		}
 	}
 	else
 	{
 		if (filename[0] == '.') {
-			fixed = filename.substr(0, filename.find_last_of('.')) + wxT("_" + tag + "." + extension);
+			fixed = filename.substr(0, filename.find_last_of('.')) + std::string("_" + tag + "." + extension);
 		} else {
 			int dot_pos = filename.find_last_of('.');
 			if (dot_pos == -1) {
-				fixed = filename + wxT("_" + tag + "." + extension);
+				fixed = filename + std::string("_" + tag + "." + extension);
 			} else {
 				fixed = filename;
 				fixed.insert(dot_pos, "_" + tag);
@@ -232,24 +232,24 @@ std::string FileHelper::GetFilenameWithExtension(const std::string& filepath)
 
 std::string FileHelper::GetRelativePath(const std::string& dir, const std::string& absolute)
 {
-	wxFileName filename(absolute);
-	filename.MakeRelativeTo(dir);
-	return filename.GetFullPath().Lower().ToStdString();
+	wxFileName filename(absolute.c_str());
+	filename.MakeRelativeTo(dir.c_str());
+	return filename.GetFullPath().Lower().ToStdString().c_str();
 }
 
 std::string FileHelper::GetAbsolutePath(const std::string& dir, const std::string& relative)
 {
-	wxFileName filename(relative);
-	filename.MakeAbsolute(dir);
+	wxFileName filename(relative.c_str());
+	filename.MakeAbsolute(dir.c_str());
 	filename.Normalize();
-	return filename.GetFullPath().ToStdString();
+	return filename.GetFullPath().ToStdString().c_str();
 }
 
 std::string FileHelper::GetAbsolutePath(const std::string& filepath)
 {
-	wxFileName filename(filepath);
+	wxFileName filename(filepath.c_str());
 	filename.Normalize();
-	return filename.GetFullPath().ToStdString();
+	return filename.GetFullPath().ToStdString().c_str();
 }
 
 std::string FileHelper::GetAbsolutePathFromFile(const std::string& base, const std::string& relative)
@@ -301,7 +301,7 @@ std::string FileHelper::GetExistFilepath(const std::string& filepath, const std:
 				if (IsFileExist(fixed))
 					return fixed;
 			}
-			if (dir != wxEmptyString)
+			if (!dir.empty())
 			{
 				fixed = dir + filename;
 				if (IsFileExist(fixed))
@@ -343,9 +343,9 @@ std::string FileHelper::FormatFilepath(const std::string& filepath)
 
 std::string FileHelper::FormatFilepathAbsolute(const std::string& filepath)
 {
-	wxFileName filename(FormatFilepath(filepath));
+	wxFileName filename(FormatFilepath(filepath).c_str());
 	filename.Normalize();
-	return filename.GetFullPath().Lower().ToStdString();
+	return filename.GetFullPath().Lower().ToStdString().c_str();
 }
 
 std::string FileHelper::GetJsonFileFilter(const std::string& file_tag)

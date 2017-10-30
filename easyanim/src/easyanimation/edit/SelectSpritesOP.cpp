@@ -29,24 +29,24 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 
 	// group
 	if (m_stage->GetKeyState(WXK_CONTROL) && keyCode == 'G') {
-		std::vector<ee::Sprite*> sprs;
+		std::vector<ee::SprPtr> sprs;
 		GetOrderedSelection(sprs);
 		ecomplex::GroupHelper::BuildGroup(sprs);
 		return true;
 	} else if (m_stage->GetKeyState(WXK_CONTROL) && keyCode == 'B') {
-		std::vector<ee::Sprite*> sprs;
+		std::vector<ee::SprPtr> sprs;
 		GetOrderedSelection(sprs);
 		ecomplex::GroupHelper::BreakUpGroup(sprs);
 		return true;
 	}
 	// complex
 	else if (m_stage->GetKeyState(WXK_ALT) && keyCode == 'G') {
-		std::vector<ee::Sprite*> sprs;
+		std::vector<ee::SprPtr> sprs;
 		GetOrderedSelection(sprs);
 		ecomplex::GroupHelper::BuildComplex(sprs, "", m_wnd);
 		return true;
 	} else if (m_stage->GetKeyState(WXK_ALT) && keyCode == 'B') {
-		std::vector<ee::Sprite*> sprs;
+		std::vector<ee::SprPtr> sprs;
 		GetOrderedSelection(sprs);
 		ecomplex::GroupHelper::BreakUpComplex(sprs);
 		return true;
@@ -61,7 +61,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 		return true;
 
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-	ee::Sprite* selected = m_sprs_impl->QuerySpriteByPos(pos);
+	auto selected = m_sprs_impl->QuerySpriteByPos(pos);
 	if (selected) {
 		m_open_symbol.Open(selected);
 	}
@@ -69,7 +69,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	return false;
 }
 
-void SelectSpritesOP::PasteSprToClipboard(const ee::Sprite* spr, Json::Value& value) const
+void SelectSpritesOP::PasteSprToClipboard(const ee::SprConstPtr& spr, Json::Value& value) const
 {
 	ee::SelectSpritesOP::PasteSprToClipboard(spr, value);
 
@@ -78,7 +78,7 @@ void SelectSpritesOP::PasteSprToClipboard(const ee::Sprite* spr, Json::Value& va
 	value["anim"]["frame"] = ud->frame->GetTime() - 1;
 }
 
-void SelectSpritesOP::CopySprFromClipboard(ee::Sprite* spr, const Json::Value& value) const
+void SelectSpritesOP::CopySprFromClipboard(const ee::SprPtr& spr, const Json::Value& value) const
 {
 	ee::SelectSpritesOP::CopySprFromClipboard(spr, value);
 

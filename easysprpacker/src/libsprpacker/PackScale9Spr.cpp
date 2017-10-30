@@ -13,7 +13,7 @@ namespace lua = ebuilder::lua;
 namespace esprpacker
 {
 
-PackScale9Spr::PackScale9Spr(const escale9::Sprite* spr)
+PackScale9Spr::PackScale9Spr(const std::shared_ptr<escale9::Sprite>& spr)
 {
 	Init(spr);
 }
@@ -71,16 +71,16 @@ void PackScale9Spr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 	pack(h, ptr);
 }
 
-bool PackScale9Spr::Equal(const escale9::Sprite* spr) const
+bool PackScale9Spr::Equal(const std::shared_ptr<escale9::Sprite>& spr) const
 {
 	sm::vec2 sz = spr->GetScale9().GetSize();
 	return m_width == sz.x && m_height == sz.y;
 }
 
-void PackScale9Spr::Init(const escale9::Sprite* spr)
+void PackScale9Spr::Init(const std::shared_ptr<escale9::Sprite>& spr)
 {
 	m_sym = PackNodeFactory::Instance()->Create(
-		dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
+		std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol()));
 
 	sm::vec2 sz = spr->GetScale9().GetSize();
 	m_width = sz.x;

@@ -80,7 +80,7 @@ GetPhysicsStaticVisitor()
 }
 
 void UniversalArrangeCMPT::GetPhysicsStaticVisitor::
-Visit(Sprite* spr, bool& next)
+Visit(const SprPtr& spr, bool& next)
 {
 	const IBody* body = BodyManager::Instance()->QueryBody(spr);
 	if (!body) {
@@ -113,7 +113,7 @@ SetPhysicsStaticVisitor(bool bChecked)
 }
 
 void UniversalArrangeCMPT::SetPhysicsStaticVisitor::
-Visit(Sprite* spr, bool& next)
+Visit(const SprPtr& spr, bool& next)
 {
 	const IBody* body = BodyManager::Instance()->QueryBody(spr);
 	if (body) {

@@ -4,6 +4,7 @@
 #include <ee/ZoomViewOP.h>
 
 #include <SM_Vector.h>
+#include <cu/cu_stl.h>
 
 #include <vector>
 
@@ -25,7 +26,7 @@ public:
 	virtual bool Clear();
 
 protected:
-	std::vector<sm::vec2> m_curve;
+	CU_VEC<sm::vec2> m_curve;
 
 private:
 	sm::vec2 m_first_pos;

@@ -1,7 +1,8 @@
 #ifndef _EASYEDITOR_CURR_SPR_TREE_PATH_H_
 #define _EASYEDITOR_CURR_SPR_TREE_PATH_H_
 
-#include <CU_Singleton.h>
+#include <cu/cu_macro.h>
+#include <sprite2/typedef.h>
 
 #include <stack>
 
@@ -13,17 +14,17 @@ namespace ee
 class CurrSprTreePath
 {
 public:
-	void Push(const s2::Sprite* spr);
+	void Push(const s2::SprPtr& spr);
 	void Pop();
 
-	const s2::Sprite* TopSpr() const;
-	const s2::Actor* TopActor() const;
+	s2::SprPtr TopSpr() const;
+	s2::ActorPtr TopActor() const;
 
 private:
-	std::stack<const s2::Sprite*> m_spr_path;
-	std::stack<const s2::Actor*> m_actor_path;
+	std::stack<s2::SprPtr> m_spr_path;
+	std::stack<s2::ActorPtr> m_actor_path;
 	
-	SINGLETON_DECLARATION(CurrSprTreePath);
+	CU_SINGLETON_DECLARATION(CurrSprTreePath);
 
 }; // CurrSprTreePath
 

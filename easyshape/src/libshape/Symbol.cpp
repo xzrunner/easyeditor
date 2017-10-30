@@ -25,28 +25,23 @@ Symbol::Symbol()
 {
 }
 
-Symbol::~Symbol()
+s2::RenderReturn Symbol::DrawTree(cooking::DisplayList* dlist, const s2::RenderParams& rp, const s2::Sprite* spr) const
 {
-	Clear();
-}
-
-s2::RenderReturn Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
-{
-	s2::RenderParams p = params;
+	s2::RenderParams p = rp;
 	if (spr) {
-		p.mt = spr->GetLocalMat() * params.mt;
-		p.color = spr->GetColor() * params.color;
+		p.mt = spr->GetLocalMat() * rp.mt;
+		p.color = spr->GetColor() * rp.color;
 	}
 
  	if (m_bg) {
- 		m_bg->Draw(p, spr);
+		m_bg->DrawTree(nullptr, p, spr);
  	}
 	if (ee::Config::Instance()->GetSettings().visible_shape)
 	{
 		for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
 			m_bg_outline[i]->Draw(p);
 		}
-		s2::ShapeSymbol::Draw(params, spr);
+		s2::ShapeSymbol::DrawTree(nullptr, rp, spr);
 	}
 
 	return s2::RENDER_OK;
@@ -59,7 +54,7 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-void Symbol::Traverse(ee::Visitor<ee::Shape>& visitor) const
+void Symbol::Traverse(ee::RefVisitor<ee::Shape>& visitor) const
 {
 	for (int i = 0, n = m_bg_outline.size(); i < n; ++i) {
 		bool next;
@@ -68,16 +63,16 @@ void Symbol::Traverse(ee::Visitor<ee::Shape>& visitor) const
 	}
 
 	bool next;
-	visitor.Visit(dynamic_cast<ee::Shape*>(const_cast<s2::Shape*>(m_shape)), next);
+	visitor.Visit(std::dynamic_pointer_cast<ee::Shape>(m_shape), next);
 }
 
-bool Symbol::Add(ee::Shape* shape)
+bool Symbol::Add(ee::ShapePtr& shape)
 {
-	SetShape(shape);
+	SetShape(std::move(shape));
 	return shape != NULL;
 }
 
-bool Symbol::Remove(ee::Shape* shape)
+bool Symbol::Remove(const ee::ShapePtr& shape)
 {
 	if (m_shape == shape) {
 		SetShape(NULL);
@@ -91,31 +86,25 @@ bool Symbol::Clear()
 {
 	bool ret = !m_bg_outline.empty() || m_shape != NULL;
 
-	for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
-		m_bg_outline[i]->RemoveReference();
-	}
 	m_bg_outline.clear();
 
-	if (m_shape) {
-		m_shape->RemoveReference();
-	}
-	m_shape = NULL;
+	m_shape.reset();
 
 	return ret;
 }
 
-void Symbol::SetBG(ee::Symbol* bg)
+void Symbol::SetBG(const ee::SymPtr& bg)
 {
 	if (m_bg != bg) {
 		LoadBGOutline(bg);
 		LoadBGTriStrip(bg);
 	}
-	cu::RefCountObjAssign(m_bg, bg);
+	m_bg = bg;
 }
 
 void Symbol::StoreToFile(const char* filename) const
 {
-	FileIO::StoreToFile(filename, dynamic_cast<ee::Shape*>(const_cast<s2::Shape*>(m_shape)), m_bg);
+	FileIO::StoreToFile(filename, *dynamic_cast<ee::Shape*>(m_shape.get()), m_bg);
 }
 
 // sm::rect Symbol::GetBoundingImpl(const s2::Sprite* spr, const s2::Actor* actor, bool cache) const
@@ -134,7 +123,7 @@ bool Symbol::LoadResources()
 		return true;
 	}
 
-	if (!gum::FilepathHelper::Exists(m_filepath)) {
+	if (!gum::FilepathHelper::Exists(m_filepath.c_str())) {
 		return false;
 	}
 
@@ -144,11 +133,8 @@ bool Symbol::LoadResources()
 	return true;
 }
 
-void Symbol::LoadBGOutline(ee::Symbol* bg)
+void Symbol::LoadBGOutline(const ee::SymPtr& bg)
 {
-	for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
-		m_bg_outline[i]->RemoveReference();
-	}
 	m_bg_outline.clear();
 
 	if (!bg) {
@@ -169,15 +155,15 @@ void Symbol::LoadBGOutline(ee::Symbol* bg)
 	reader.parse(fin, value);
 	fin.close();
 
-	std::vector<sm::vec2> vertices;
+	CU_VEC<sm::vec2> vertices;
 	gum::JsonSerializer::Load(value["normal"], vertices);
 	if (!vertices.empty()) {
-		ee::Shape* shape = new PolygonShape(vertices);
-		m_bg_outline.push_back(shape);
+		auto shape = std::make_unique<PolygonShape>(vertices);
+		m_bg_outline.push_back(std::move(shape));
 	}
 }
 
-void Symbol::LoadBGTriStrip(ee::Symbol* bg)
+void Symbol::LoadBGTriStrip(const ee::SymPtr& bg)
 {
 	m_bg_tri_strips.clear();
 
@@ -198,7 +184,7 @@ void Symbol::LoadBGTriStrip(ee::Symbol* bg)
 	int i = 0;
 	Json::Value strip_val = value["strips"][i++];
 	while (!strip_val.isNull()) {
-		std::vector<sm::vec2> strip;
+		CU_VEC<sm::vec2> strip;
 		gum::JsonSerializer::Load(strip_val, strip);
 		m_bg_tri_strips.push_back(strip);
 		strip_val = value["strip"][i++];
@@ -210,7 +196,7 @@ ShapeType Symbol::GetShapeType() const
 	if (!m_shape) {
 		return ST_UNKNOWN;
 	} else {
-		return get_shape_type(dynamic_cast<ee::Shape*>(m_shape)->GetShapeDesc());
+		return get_shape_type(dynamic_cast<ee::Shape*>(m_shape.get())->GetShapeDesc());
 	}
 }
 

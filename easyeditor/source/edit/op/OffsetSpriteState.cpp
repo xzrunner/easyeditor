@@ -12,18 +12,11 @@
 namespace ee
 {
 
-OffsetSpriteState::OffsetSpriteState(Sprite* spr, const s2::Camera* camera)
-	: m_camera(camera)
+OffsetSpriteState::OffsetSpriteState(const SprPtr& spr, const s2::Camera* camera)
+	: m_spr(spr)
+	, m_camera(camera)
 {
-	m_spr = spr;
-	m_spr->AddReference();
-
 	m_old_offset = m_spr->GetOffset();
-}
-
-OffsetSpriteState::~OffsetSpriteState()
-{
-	m_spr->RemoveReference();
 }
 
 void OffsetSpriteState::OnMouseRelease(const sm::vec2& pos)
@@ -36,7 +29,7 @@ void OffsetSpriteState::OnMouseRelease(const sm::vec2& pos)
 	float r = ArrangeSpriteImpl::CTRL_NODE_RADIUS * s * 2;
 
 	sm::vec2 ctrl_nodes[8];
-	SpriteCtrlNode::GetSpriteCtrlNodes(m_spr, ctrl_nodes);
+	SpriteCtrlNode::GetSpriteCtrlNodes(*m_spr, ctrl_nodes);
 	sm::vec2 fixed = pos;
 	if (sm::dis_pos_to_pos(fixed, m_spr->GetPosition()) < r) {
 		fixed = m_spr->GetPosition();

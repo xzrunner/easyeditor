@@ -52,7 +52,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\include\ee;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\unirender\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\shaderlab\include\;..\..\..\..\dtex2\include;..\..\..\..\gimg\src\gimg;..\..\..\..\pimg\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\giflib\include;..\..\..\..\editor-external\gl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include\ee;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\bimp\include;..\..\..\..\unirender\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\shaderlab\include\;..\..\..\..\dtex2\include;..\..\..\..\gimg\src\gimg;..\..\..\..\pimg\include;..\..\..\..\memmgr\include;..\..\..\..\flatten\include;..\..\..\..\cooking\include;..\..\..\..\ds\src\ds;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\giflib\include;..\..\..\..\editor-external\gl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -69,7 +69,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\include\ee;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\unirender\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\shaderlab\include\;..\..\..\..\dtex2\include;..\..\..\..\gimg\src\gimg;..\..\..\..\pimg\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\giflib\include;..\..\..\..\editor-external\gl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include\ee;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\bimp\include;..\..\..\..\unirender\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\shaderlab\include\;..\..\..\..\dtex2\include;..\..\..\..\gimg\src\gimg;..\..\..\..\pimg\include;..\..\..\..\memmgr\include;..\..\..\..\flatten\include;..\..\..\..\cooking\include;..\..\..\..\ds\src\ds;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\giflib\include;..\..\..\..\editor-external\gl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -110,6 +110,7 @@
     <ClInclude Include="..\..\..\include\ee\Layer.h" />
     <ClInclude Include="..\..\..\include\ee\LayerMgr.h" />
     <ClInclude Include="..\..\..\include\ee\ListItem.h" />
+    <ClInclude Include="..\..\..\include\ee\ObjectRefVector.h" />
     <ClInclude Include="..\..\..\include\ee\ObjectVector.h" />
     <ClInclude Include="..\..\..\include\ee\ObjSelectionSet.h" />
     <ClInclude Include="..\..\..\include\ee\PointerPool.h" />
@@ -132,6 +133,7 @@
     <ClInclude Include="..\..\..\include\ee\SpriteIO.h" />
     <ClInclude Include="..\..\..\include\ee\SpriteLoader.h" />
     <ClInclude Include="..\..\..\include\ee\SpriteObserver.h" />
+    <ClInclude Include="..\..\..\include\ee\SpritePool.h" />
     <ClInclude Include="..\..\..\include\ee\SpriteSelection.h" />
     <ClInclude Include="..\..\..\include\ee\Symbol.h" />
     <ClInclude Include="..\..\..\include\ee\SymbolFactory.h" />
@@ -191,6 +193,7 @@
     <ClCompile Include="..\..\..\source\data\sprite\SpriteFactory.cpp" />
     <ClCompile Include="..\..\..\source\data\sprite\SpriteIO.cpp" />
     <ClCompile Include="..\..\..\source\data\sprite\SpriteLoader.cpp" />
+    <ClCompile Include="..\..\..\source\data\sprite\SpritePool.cpp" />
     <ClCompile Include="..\..\..\source\data\sprite\wrap_ISprite.cpp" />
     <ClCompile Include="..\..\..\source\data\symbol\DummySymbol.cpp" />
     <ClCompile Include="..\..\..\source\data\symbol\FontBlankSymbol.cpp" />
@@ -205,6 +208,7 @@
     <ClCompile Include="..\..\..\source\data\symbol\SymbolSearcher.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\include\ee\ObjectRefVector.inl" />
     <None Include="..\..\..\include\ee\ObjectVector.inl" />
     <None Include="..\..\..\include\ee\ObjSelectionSet.inl" />
     <None Include="..\..\..\include\ee\ResourcesMgr.inl" />

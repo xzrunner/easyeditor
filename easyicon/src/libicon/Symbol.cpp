@@ -9,7 +9,7 @@
 namespace eicon
 {
 
-void Symbol::SetImage(ee::ImageSymbol* img)
+void Symbol::SetImage(const std::shared_ptr<ee::ImageSymbol>& img)
 {
 	if (m_icon) {
 		m_icon->SetImage(img);
@@ -18,13 +18,12 @@ void Symbol::SetImage(ee::ImageSymbol* img)
 
 bool Symbol::LoadResources()
 {
-	if (!gum::FilepathHelper::Exists(m_filepath)) {
+	if (!gum::FilepathHelper::Exists(m_filepath.c_str())) {
 		return false;
 	}
 
-	Icon* icon = FileIO::LoadFromFile(m_filepath.c_str());
+	auto icon = FileIO::LoadFromFile(m_filepath.c_str());
 	SetIcon(icon);
-	icon->RemoveReference();
 
 	return true;
 }

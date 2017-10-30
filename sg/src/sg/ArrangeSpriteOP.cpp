@@ -29,16 +29,16 @@ bool ArrangeSpriteOP::OnMouseLeftDClick(int x, int y)
 	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
 
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-	ee::Sprite* selected = stage->QuerySpriteByPos(pos);
+	auto selected = stage->QuerySpriteByPos(pos);
 	if (!selected) {
 		return false;
 	}
 
-	std::vector<ee::Sprite*> sprs;
-	stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	stage->TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	for (int i = 0, n = sprs.size(); i < n; ++i)
 	{
-		ee::Sprite* s = sprs[i];
+		ee::SprPtr s = sprs[i];
 		if (s->GetSymbol() == selected->GetSymbol()) {
 			stage->GetSpriteSelection()->Add(s);
 		}
@@ -51,11 +51,11 @@ void ArrangeSpriteOP::onDirectionKeyDown(int type)
 {
 	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
 
-	std::vector<ee::Sprite*> sprs;
-	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	m_selection->Traverse(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	for (int i = 0, n = sprs.size(); i < n; ++i)
 	{
-		ee::Sprite* s = sprs[i];
+		ee::SprPtr s = sprs[i];
 		int row, col;
 		stage->TransCoordsToGridPos(s->GetPosition(), row, col);
 		switch (type)
@@ -82,13 +82,13 @@ void ArrangeSpriteOP::onDirectionKeyDown(int type)
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void ArrangeSpriteOP::PasteSprToClipboard(const ee::Sprite* spr, Json::Value& value) const
+void ArrangeSpriteOP::PasteSprToClipboard(const ee::SprConstPtr& spr, Json::Value& value) const
 {
 	ee::ArrangeSpriteFixOP::PasteSprToClipboard(spr, value);
 	value["level"] = static_cast<SpriteExt*>(spr->GetUserData())->level;
 }
 
-void ArrangeSpriteOP::CopySprFromClipboard(ee::Sprite* spr, const Json::Value& value) const
+void ArrangeSpriteOP::CopySprFromClipboard(const ee::SprPtr& spr, const Json::Value& value) const
 {
 	ee::ArrangeSpriteFixOP::CopySprFromClipboard(spr, value);
 	SpriteExt* info = new SpriteExt;

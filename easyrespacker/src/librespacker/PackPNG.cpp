@@ -49,10 +49,10 @@ void PackPNG::Load(const std::string& filepath)
 
 	int w, h, fmt;
 	uint8_t* buf = gimg_import(filepath.c_str(), &w, &h, &fmt);
-	if (fmt == GPF_RGBA && cfg->GetPreMulAlpha()) {
+	if (fmt == GPF_RGBA8 && cfg->GetPreMulAlpha()) {
 		gimg_pre_mul_alpha(buf, w, h);
 	}
-	assert(fmt == GPF_RGB || fmt == GPF_RGBA);
+	assert(fmt == GPF_RGB || fmt == GPF_RGBA8);
 	int c = fmt == GPF_RGB ? 3 : 4;
 
 	data.open_image_edge_clip = ori_clip_cfg;
@@ -100,17 +100,17 @@ void PackPNG::StoreScaled(std::ofstream& fout, float scale) const
 	uint8_t* buf = new uint8_t[sz];
 	memcpy(buf, m_buffer, sz);
 
-	ee::Image img(buf, m_width, m_height, GPF_RGBA);
-	ee::ImageSymbol sym(&img, "");
+	auto img = std::make_shared<ee::Image>(buf, m_width, m_height, GPF_RGBA8);
+	ee::ImageSymbol sym(img, "");
 
 	int width = static_cast<int>(m_width * scale),
 		height= static_cast<int>(m_height * scale);
 
 	s2::DrawRT rt;
-	rt.Draw(&sym, false, scale);
+	rt.Draw(sym, false, scale);
 	uint8_t* buffer = rt.StoreToMemory(width, height);
 
-	gimg_revert_y(buffer, width, height, GPF_RGBA);
+	gimg_revert_y(buffer, width, height, GPF_RGBA8);
 	Store(fout, buffer, width, height);
 	delete[] buffer;
 }

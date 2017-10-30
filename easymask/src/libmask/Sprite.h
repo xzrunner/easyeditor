@@ -15,15 +15,11 @@ class Sprite : public s2::MaskSprite, public ee::Sprite
 public:
 	Sprite(const Sprite& spr);
 	Sprite& operator = (const Sprite& spr);
-	Sprite(Symbol* sym);
+	Sprite(const s2::SymPtr& sym, uint32_t id = -1);
 
-	/**
-	 *  @interface
-	 *    s2::Sprite
-	 */
-	virtual Sprite* Clone() const { return new Sprite(*this); }
+	static ee::SprPtr Create(const std::shared_ptr<ee::Symbol>& sym);
 
-	static ee::Sprite* Create(ee::Symbol* sym);
+	SPRITE_CLONE_FUNC(Sprite)
 
 }; // Sprite
 

@@ -26,7 +26,7 @@ public:
 private:
 	static Json::Value StoreLayer(Layer* layer, const std::string& dir, bool single);
 	static Json::Value StoreFrame(KeyFrame* frame, const std::string& dir, bool single);
-	static Json::Value StoreActor(const ee::Sprite* spr, const std::string& dir, bool single);
+	static Json::Value StoreActor(const ee::SprConstPtr& spr, const std::string& dir, bool single);
 	static Json::Value StoreSkeleton(const SkeletonData& skeleton);
 
 }; // FileSaver

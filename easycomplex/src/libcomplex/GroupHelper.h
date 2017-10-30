@@ -15,16 +15,16 @@ class Sprite;
 class GroupHelper
 {
 public:
-	static Sprite* Group(const std::vector<ee::Sprite*>& sprs);
-	static void BreakUp(ee::Sprite* group, std::vector<ee::Sprite*>& sprs);
+	static std::shared_ptr<Sprite> Group(const std::vector<ee::SprPtr>& sprs);
+	static void BreakUp(const ee::SprPtr& group, std::vector<ee::SprPtr>& sprs);
 
-	static void BuildComplex(const std::vector<ee::Sprite*>& sprs, const std::string& dir, wxWindow* wnd);
-	static void BreakUpComplex(std::vector<ee::Sprite*>& sprs);
+	static void BuildComplex(const std::vector<ee::SprPtr>& sprs, const std::string& dir, wxWindow* wnd);
+	static void BreakUpComplex(std::vector<ee::SprPtr>& sprs);
 
-	static void BuildGroup(const std::vector<ee::Sprite*>& sprs);
-	static void BreakUpGroup(std::vector<ee::Sprite*>& sprs);
+	static void BuildGroup(const std::vector<ee::SprPtr>& sprs);
+	static void BreakUpGroup(std::vector<ee::SprPtr>& sprs);
 
-	static void BreakUp(ee::Sprite* spr);
+	static void BreakUp(const ee::SprPtr& spr);
 
 }; // GroupHelper
 

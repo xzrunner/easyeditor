@@ -35,9 +35,9 @@ OpenSymbolDialog::OpenSymbolDialog(wxWindow* wnd, ee::EditPanelImpl* stage,
 {
 }
 
-void OpenSymbolDialog::Open(ee::Sprite* spr)
+void OpenSymbolDialog::Open(const ee::SprPtr& spr)
 {
-	if (dynamic_cast<ee::Symbol*>(spr->GetSymbol())->GetFilepath().find("[gen].json") != std::string::npos) {
+	if (std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol())->GetFilepath().find("[gen].json") != std::string::npos) {
 		wxMessageBox("禁止编辑自动生成的文件", "warning", wxOK | wxICON_INFORMATION, m_wnd);
 		return;
 	}
@@ -51,7 +51,7 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 	stage->GetCanvas()->EnableObserve(false);
 	stage->GetCanvas()->SetDrawable(false);
 
-	const ee::Symbol* edited_sym = NULL;
+	const ee::SymPtr& edited_sym = NULL;
 	if (static_cast<LibraryPanel*>(stage->GetLibrary())->IsCurrUnitLayer()) 
 	{
 		std::vector<std::string> path_names;
@@ -73,7 +73,7 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 			spr->SetTag(tag);
 		}
 	}
-	else if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(spr))
+	else if (auto complex = std::dynamic_pointer_cast<ecomplex::Sprite>(spr))
 	{
 		ecomplex::Symbol* sym = dynamic_cast<ecomplex::Symbol*>(complex->GetSymbol());
 		edited_sym = sym;
@@ -85,42 +85,42 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 		// 		std::string cmd = "easycomplex.exe " + complex->getSymbol().getFilepath();
 		// 		WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);
 	}
-	else if (libanim::Sprite* anim = dynamic_cast<libanim::Sprite*>(spr))
+	else if (libanim::Sprite* anim = std::dynamic_pointer_cast<libanim::Sprite>(spr))
 	{
 		libanim::Symbol* sym = dynamic_cast<libanim::Symbol*>(anim->GetSymbol());
 		edited_sym = sym;
 		libanim::PreviewDialog dlg(m_wnd, sym, m_stage->GetCanvas()->GetGLContext());
 		dlg.ShowModal();
 	}
-	else if (escale9::Sprite* patch9 = dynamic_cast<escale9::Sprite*>(spr))
+	else if (escale9::Sprite* patch9 = std::dynamic_pointer_cast<escale9::Sprite>(spr))
 	{
-		escale9::Symbol* sym = dynamic_cast<escale9::Symbol*>(patch9->GetSymbol());
+		escale9::Symbol* sym = std::dynamic_pointer_cast<escale9::Symbol>(patch9->GetSymbol());
 		edited_sym = sym;
 		escale9::EditDialog dlg(m_wnd, sym, m_stage->GetCanvas()->GetGLContext());
 		dlg.ShowModal();
 	}
-	else if (emesh::Sprite* mesh = dynamic_cast<emesh::Sprite*>(spr))
+	else if (emesh::Sprite* mesh = std::dynamic_pointer_cast<emesh::Sprite>(spr))
 	{
 		emesh::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), mesh, m_sprites_impl);
 		dlg.ShowModal();
 	}
-	else if (ee::FontBlankSprite* font = dynamic_cast<ee::FontBlankSprite*>(spr))
+	else if (ee::FontBlankSprite* font = std::dynamic_pointer_cast<ee::FontBlankSprite>(spr))
 	{
 		ee::TextDialog dlg(m_wnd, font);
 		dlg.ShowModal();
 	}
-	else if (etexture::Sprite* tex = dynamic_cast<etexture::Sprite*>(spr))
+	else if (etexture::Sprite* tex = std::dynamic_pointer_cast<etexture::Sprite>(spr))
 	{
 		etexture::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), tex, m_sprites_impl);
 		dlg.ShowModal();
 		UpdateShapeFromETexture(tex);
 	}
-	else if (eshape::Sprite* shape = dynamic_cast<eshape::Sprite*>(spr))
+	else if (eshape::Sprite* shape = std::dynamic_pointer_cast<eshape::Sprite>(spr))
 	{
 		eshape::EditDialogSimple dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), shape, m_sprites_impl);
 		dlg.ShowModal();
 	}
-	else if (eterrain2d::Sprite* terr = dynamic_cast<eterrain2d::Sprite*>(spr))
+	else if (eterrain2d::Sprite* terr = std::dynamic_pointer_cast<eterrain2d::Sprite>(spr))
 	{
 		eterrain2d::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), terr, m_sprites_impl);
 		dlg.ShowModal();

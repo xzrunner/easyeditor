@@ -7,7 +7,7 @@
 namespace ecomplex
 {
 
-SpritePropertySetting::SpritePropertySetting(ee::EditPanelImpl* edit_impl, Sprite* spr)
+SpritePropertySetting::SpritePropertySetting(ee::EditPanelImpl* edit_impl, const std::shared_ptr<Sprite>& spr)
 	: ee::SpritePropertySetting(edit_impl, spr)
 {
 	m_type = "Complex";
@@ -17,7 +17,7 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 {
 	ee::SpritePropertySetting::OnPropertyGridChange(name, value);
 
-	Sprite* spr = static_cast<Sprite*>(GetSprite());
+	auto spr = std::dynamic_pointer_cast<Sprite>(GetSprite());
 	if (name == "Action") {
 		spr->SetAction(wxANY_AS(value, int) - 1);
 	}
@@ -29,8 +29,8 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
 	ee::SpritePropertySetting::UpdateProperties(pg);
 
-	Sprite* spr = static_cast<Sprite*>(GetSprite());
-	const Symbol* sym = dynamic_cast<const Symbol*>(spr->GetSymbol());
+	auto spr = std::dynamic_pointer_cast<Sprite>(GetSprite());
+	auto sym = std::dynamic_pointer_cast<const Symbol>(spr->GetSymbol());
 
 	std::vector<std::string> actions;
 	sym->GetActionNames(actions);
@@ -50,8 +50,8 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	pg->Append(new wxPropertyCategory("COMPLEX", wxPG_LABEL));
 
-	Sprite* spr = static_cast<Sprite*>(GetSprite());
-	const Symbol* sym = dynamic_cast<const Symbol*>(spr->GetSymbol());
+	auto spr = std::dynamic_pointer_cast<Sprite>(GetSprite());
+	auto sym = std::dynamic_pointer_cast<const Symbol>(spr->GetSymbol());
 
 	std::vector<std::string> actions;
 	sym->GetActionNames(actions);

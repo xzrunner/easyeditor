@@ -9,7 +9,7 @@ namespace ee
 class SprTagEditDlg : public CfgEditDlg
 {
 public:
-	SprTagEditDlg(wxWindow* parent, ee::Sprite* spr);
+	SprTagEditDlg(wxWindow* parent, const ee::SprPtr& spr);
 
 	std::string ToString();
 

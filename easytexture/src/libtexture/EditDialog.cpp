@@ -10,7 +10,7 @@
 #include <ee/Config.h>
 #include <ee/SettingData.h>
 #include <ee/ConfirmDialog.h>
-#include <ee/SpriteFactory.h>
+#include <ee/SpritePool.h>
 #include <ee/CameraCanvas.h>
 
 #include <sprite2/BoundingBox.h>
@@ -26,15 +26,14 @@ BEGIN_EVENT_TABLE(EditDialog, wxDialog)
 END_EVENT_TABLE()
 
 EditDialog::EditDialog(wxWindow* parent, wxGLContext* glctx,
-					   Sprite* edited, const ee::MultiSpritesImpl* sprite_impl)
+					   const std::shared_ptr<Sprite>& edited, const ee::MultiSpritesImpl* sprite_impl)
 	: wxDialog(parent, wxID_ANY, "Edit Texture", wxDefaultPosition, wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 	, m_sym(NULL)
 	, m_stage(NULL)
 {
 	assert(edited);
 
-	Symbol* sym = dynamic_cast<Symbol*>(edited->GetSymbol());
-	sym->AddReference();
+	auto sym = std::dynamic_pointer_cast<Symbol>(edited->GetSymbol());
 	m_sym = sym;
 //	m_sym->ReloadTexture();
 	SetTitle(sym->GetFilepath());
@@ -50,13 +49,9 @@ EditDialog::EditDialog(wxWindow* parent, wxGLContext* glctx,
 EditDialog::~EditDialog()
 {
 	ee::Config::Instance()->GetSettings().visible_tex_edge = m_visible_tex_edge;
-
-	if (m_sym) {
-		m_sym->RemoveReference();
-	}
 }
 
-void EditDialog::InitLayout(wxGLContext* glctx, ee::Sprite* edited, const ee::MultiSpritesImpl* sprite_impl)
+void EditDialog::InitLayout(wxGLContext* glctx, const ee::SprPtr& edited, const ee::MultiSpritesImpl* sprite_impl)
 {
 	wxSplitterWindow* right_splitter = new wxSplitterWindow(this);
 	wxSplitterWindow* left_splitter = new wxSplitterWindow(right_splitter);
@@ -90,7 +85,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 		const std::string& filepath = m_sym->GetFilepath();
 		FileSaver::Store(filepath.c_str(), m_sym);
 		m_sym->RefreshThumbnail(filepath);
-		ee::SpriteFactory::Instance()->UpdateBoundings(*m_sym);
+		ee::SpritePool::Instance()->UpdateBoundings(*m_sym);
 		Destroy();
 	}
 	else if (val == wxID_NO)
@@ -100,7 +95,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 	}
 }
 
-void EditDialog::InitCamera(ee::Sprite* spr) const
+void EditDialog::InitCamera(const ee::SprPtr& spr) const
 {
 	ee::CameraCanvas* canvas = static_cast<ee::CameraCanvas*>(m_stage->GetCanvas());
 	s2::Camera* cam = canvas->GetCamera();

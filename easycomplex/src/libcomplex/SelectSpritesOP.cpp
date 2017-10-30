@@ -37,12 +37,12 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 
 	// group
 	if (m_stage->GetKeyState(WXK_CONTROL) && keyCode == 'G') {
-		std::vector<ee::Sprite*> sprs;
+		std::vector<ee::SprPtr> sprs;
 		GetOrderedSelection(sprs);
 		ecomplex::GroupHelper::BuildGroup(sprs);
 		return true;
 	} else if (m_stage->GetKeyState(WXK_CONTROL) && keyCode == 'B') {
-		std::vector<ee::Sprite*> sprs;
+		std::vector<ee::SprPtr> sprs;
 		GetOrderedSelection(sprs);
 		ecomplex::GroupHelper::BreakUpGroup(sprs);
 		return true;
@@ -50,17 +50,17 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 	// complex
 	else if (m_stage->GetKeyState(WXK_ALT) && keyCode == 'G')
 	{
-		std::vector<ee::Sprite*> sprs;
+		std::vector<ee::SprPtr> sprs;
 		GetOrderedSelection(sprs);
 		StagePanel* stage = static_cast<StagePanel*>(m_wnd);
-		const Symbol* parent = stage->GetSymbol();
+		auto parent = stage->GetSymbol();
 		std::string dir = ee::FileHelper::GetFileDir(parent->GetFilepath());
 		ecomplex::GroupHelper::BuildComplex(sprs, dir, m_wnd);
 		return true;
 	}
 	else if (m_stage->GetKeyState(WXK_ALT) && keyCode == 'B')
 	{
-		std::vector<ee::Sprite*> sprs;
+		std::vector<ee::SprPtr> sprs;
 		GetOrderedSelection(sprs);
 		ecomplex::GroupHelper::BreakUpComplex(sprs);
 		return true;
@@ -102,7 +102,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	if (ee::SelectSpritesOP::OnMouseLeftDClick(x, y)) return true;
 
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-	ee::Sprite* selected = m_sprs_impl->QuerySpriteByPos(pos);
+	auto selected = m_sprs_impl->QuerySpriteByPos(pos);
 	if (selected) {
 		m_open_symbol.Open(selected, m_guides);
 	}

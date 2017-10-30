@@ -13,18 +13,18 @@
 namespace ecomplex
 {
 
-class InitVisitor : public ee::Visitor<ee::Sprite>
+class InitVisitor : public ee::RefVisitor<ee::Sprite>
 {
 public:
-	virtual void Visit(ee::Sprite* spr, bool& next) {
-		if (libanim::Sprite* anim = dynamic_cast<libanim::Sprite*>(spr)) {
+	virtual void Visit(const ee::SprPtr& spr, bool& next) {
+		if (auto anim = std::dynamic_pointer_cast<libanim::Sprite>(spr)) {
 			anim->SetLoop(false);
 		}
 	}
 }; // InitVisitor
 
 PreviewDialog::PreviewDialog(wxWindow* parent, wxGLContext* glctx,
-							 const std::vector<ee::Sprite*>& sprs)
+							 const std::vector<ee::SprPtr>& sprs)
 	: wxDialog(parent, wxID_ANY, "Preview", wxDefaultPosition, wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 	, m_sprs(sprs)
 	, m_control(0.033f)
@@ -37,9 +37,9 @@ PreviewDialog::PreviewDialog(wxWindow* parent, wxGLContext* glctx,
 	InitVisitor init;
 	bool next;
 	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
-		ee::Sprite* spr = m_sprs[i];
+		auto& spr = m_sprs[i];
 		init.Visit(spr, next);
-		dynamic_cast<ee::Symbol*>(spr->GetSymbol())->Traverse(init);
+		std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol())->Traverse(init);
 	}
 
 	ee::Blackboard::Instance()->visible_audio = false;
@@ -51,8 +51,8 @@ PreviewDialog::~PreviewDialog()
 	data.particle3d_loop = true;
 
 	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
-		if (const libanim::Sprite* anim = dynamic_cast<const libanim::Sprite*>(m_sprs[i])) {
-			const_cast<libanim::Sprite*>(anim)->SetLoop(true);
+		if (auto anim = std::dynamic_pointer_cast<libanim::Sprite>(m_sprs[i])) {
+			anim->SetLoop(true);
 		}
 	}
 

@@ -3,7 +3,7 @@
 namespace ee
 {
 
-SINGLETON_DEFINITION(FilterModes);
+CU_SINGLETON_DEFINITION(FilterModes);
 
 FilterModes::FilterModes()
 {

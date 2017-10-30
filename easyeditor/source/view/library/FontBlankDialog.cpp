@@ -12,7 +12,7 @@
 namespace ee
 {
 
-FontBlankDialog::FontBlankDialog(wxWindow* parent, FontBlankSymbol* sym)
+FontBlankDialog::FontBlankDialog(wxWindow* parent, const std::shared_ptr<FontBlankSymbol>& sym)
  		: wxDialog(parent, wxID_ANY, "Edit Font", wxDefaultPosition, 
 		wxSize(400, 300), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 		, m_sym(sym)

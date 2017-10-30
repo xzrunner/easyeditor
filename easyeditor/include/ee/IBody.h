@@ -3,8 +3,7 @@
 
 #include <SM_Vector.h>
 #include <SM_Rect.h>
-#include <CU_Cloneable.h>
-#include <CU_RefCountObj.h>
+#include <cu/CU_RefCountObj.h>
 
 #include <Box2D/Box2D.h>
 
@@ -13,7 +12,7 @@
 namespace ee
 {
 
-	class IBody : public cu::Cloneable, public cu::RefCountObj
+class IBody : public cu::RefCountObj
 {
 public:
 	virtual ~IBody();

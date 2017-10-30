@@ -51,8 +51,8 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	AddPage(new ee::LibraryFontBlankPage(nb));
 	AddPage(new ee::LibraryScriptsPage(nb));
 	AddPage(new eparticle2d::LibraryPage(nb));
-	AddPage(new eterrain2d::LibraryPage(nb));
-	AddPage(new eshadow::LibraryPage(nb));
+//	AddPage(new eterrain2d::LibraryPage(nb));
+//	AddPage(new eshadow::LibraryPage(nb));
 //	AddPage(new esketch::LibraryPage(nb));
 }
 

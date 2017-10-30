@@ -1,6 +1,8 @@
 #ifndef _EASYRESPACKER_UNPACK_NODE_FACTORY_H_
 #define _EASYRESPACKER_UNPACK_NODE_FACTORY_H_
 
+#include <ee/Image.h>
+
 extern "C" {
 	#include <lua.h>
 	#include <lualib.h>
@@ -12,8 +14,6 @@ extern "C" {
 
 #include <stdint.h>
 
-namespace ee { class Image; }
-
 namespace erespacker
 {
 
@@ -22,8 +22,8 @@ class IPackNode;
 class UnpackNodeFactory
 {
 public:
-	void UnpackFromLua(lua_State* L, const std::vector<ee::Image*>& images);
-	const IPackNode* UnpackFromBin(uint8_t** ptr, const std::vector<ee::Image*>& images,
+	void UnpackFromLua(lua_State* L, const std::vector<ee::ImagePtr>& images);
+	const IPackNode* UnpackFromBin(uint8_t** ptr, const std::vector<ee::ImagePtr>& images,
 		const std::map<int, std::string>& map_export);
 
 	IPackNode* Query(int id) const;

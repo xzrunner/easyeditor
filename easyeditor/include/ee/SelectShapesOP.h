@@ -3,6 +3,7 @@
 
 #include "DrawRectangleOP.h"
 #include "Visitor.h"
+#include "Shape.h"
 
 #include <vector>
 
@@ -12,7 +13,6 @@ namespace ee
 class MultiShapesImpl;
 class EditCMPT;
 class IPropertySetting;
-class Shape;
 class ShapeSelection;
 
 class SelectShapesOP : public DrawRectangleOP
@@ -56,7 +56,7 @@ private:
 
 	MultiShapesImpl* m_shape_impl;
 
-	mutable std::vector<Shape*> m_clipboard;
+	mutable std::vector<ShapePtr> m_clipboard;
 
 	// To disable mouse able when press ctrl and window query
 	bool m_bDraggable;

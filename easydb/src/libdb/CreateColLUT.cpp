@@ -57,7 +57,7 @@ void CreateColLUT::Run(const std::string& filepath) const
 		}
 	}
 	
-	gimg_png_write(filepath.c_str(), pixels, w, h, GPF_RGBA, true);
+	gimg_png_write(filepath.c_str(), pixels, w, h, GPF_RGBA8, true);
 	
 	delete[] pixels;
 }

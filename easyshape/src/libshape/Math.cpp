@@ -9,10 +9,10 @@ namespace eshape
 {
 
 void Math::mergeTwoChains(const ChainShape& src0, const ChainShape& src1,
-						  std::vector<sm::vec2>& dst)
+						  CU_VEC<sm::vec2>& dst)
 {
-	const std::vector<sm::vec2>& s0 = src0.GetVertices();
-	const std::vector<sm::vec2>& s1 = src1.GetVertices();
+	const CU_VEC<sm::vec2>& s0 = src0.GetVertices();
+	const CU_VEC<sm::vec2>& s1 = src1.GetVertices();
 
 	dst.clear();
 	dst.reserve(s0.size() + s1.size());
@@ -49,7 +49,7 @@ void Math::mergeTwoChains(const ChainShape& src0, const ChainShape& src1,
 	}
 }
 
-void Math::mergeMultiChains(const std::vector<ChainShape*>& src, std::vector<sm::vec2>& dst)
+void Math::mergeMultiChains(const CU_VEC<std::shared_ptr<ChainShape>>& src, CU_VEC<sm::vec2>& dst)
 {
 	if (src.size() == 0)
 	{
@@ -66,11 +66,10 @@ void Math::mergeMultiChains(const std::vector<ChainShape*>& src, std::vector<sm:
 		return;
 	}
 
-	std::vector<ChainShape*> buffer;
+	CU_VEC<std::shared_ptr<ChainShape>> buffer;
 	buffer.reserve(src.size());
 	for (size_t i = 0, n = src.size(); i < n; ++i)
 	{
-		src[i]->AddReference();
 		buffer.push_back(src[i]);
 	}
 
@@ -79,29 +78,24 @@ void Math::mergeMultiChains(const std::vector<ChainShape*>& src, std::vector<sm:
 		int i0, i1;
 		findNearestPair(buffer, i0, i1);
 
-		std::vector<sm::vec2> merged;
+		CU_VEC<sm::vec2> merged;
 		mergeTwoChains(*buffer[i0], *buffer[i1], merged);
 		
-		buffer[i0]->RemoveReference();
-		buffer[i1]->RemoveReference();
-
 		buffer.erase(buffer.begin() + i0);
 		if (i1 < i0)
 			buffer.erase(buffer.begin() + i1);
 		else
 			buffer.erase(buffer.begin() + i1 - 1);
 
-		buffer.push_back(new ChainShape(merged, false));
+		buffer.push_back(std::make_unique<ChainShape>(merged, false));
 	}
 
 	assert(buffer.size() == 2);
 
 	mergeTwoChains(*buffer[0], *buffer[1], dst);
-	buffer[0]->RemoveReference();
-	buffer[1]->RemoveReference();
 }
 
-void Math::findNearestPair(const std::vector<ChainShape*>& chains, int& index0, int& index1)
+void Math::findNearestPair(const CU_VEC<std::shared_ptr<ChainShape>>& chains, int& index0, int& index1)
 {
 	if (chains.size() == 0)
 	{
@@ -138,8 +132,8 @@ void Math::findNearestPair(const std::vector<ChainShape*>& chains, int& index0, 
 
 float Math::getDistanceOfChains(const ChainShape& chain0, const ChainShape& chain1)
 {
-	const std::vector<sm::vec2>& s0 = chain0.GetVertices();
-	const std::vector<sm::vec2>& s1 = chain1.GetVertices();
+	const CU_VEC<sm::vec2>& s0 = chain0.GetVertices();
+	const CU_VEC<sm::vec2>& s1 = chain1.GetVertices();
 
 	float d[4];
 	d[0] = sm::dis_square_pos_to_pos(s0.back(), s1.front());

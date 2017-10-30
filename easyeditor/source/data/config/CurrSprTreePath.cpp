@@ -1,37 +1,25 @@
 #include "CurrSprTreePath.h"
 
-#include <sprite2/S2_Sprite.h>
+#include <sprite2/Sprite.h>
 
 #include <assert.h>
 
 namespace ee
 {
 
-SINGLETON_DEFINITION(CurrSprTreePath);
+CU_SINGLETON_DEFINITION(CurrSprTreePath);
 
 CurrSprTreePath::CurrSprTreePath()
 {
-	m_spr_path.push(NULL);
-	m_actor_path.push(NULL);
+	m_spr_path.push(nullptr);
+	m_actor_path.push(nullptr);
 }
 
-CurrSprTreePath::~CurrSprTreePath()
+void CurrSprTreePath::Push(const s2::SprPtr& spr)
 {
-	while (!m_spr_path.empty())
-	{
-		const s2::Sprite* spr = m_spr_path.top();
-		if (spr) {
-			spr->RemoveReference();
-		}
-		m_spr_path.pop();
-	}
-}
-
-void CurrSprTreePath::Push(const s2::Sprite* spr)
-{
-	const s2::Actor* actor = NULL;
+	s2::ActorPtr actor = nullptr;
 	if (!m_actor_path.empty()) {
-		actor = spr->QueryActor(m_actor_path.top());
+		actor = spr->QueryActorRef(m_actor_path.top().get());
 	}
 	m_actor_path.push(actor);
 
@@ -45,19 +33,19 @@ void CurrSprTreePath::Pop()
 	m_actor_path.pop();
 }
 
-const s2::Sprite* CurrSprTreePath::TopSpr() const
+s2::SprPtr CurrSprTreePath::TopSpr() const
 {
 	if (m_spr_path.empty()) {
-		return NULL;
+		return nullptr;
 	} else {
 		return m_spr_path.top();
 	}
 }
 
-const s2::Actor* CurrSprTreePath::TopActor() const
+s2::ActorPtr CurrSprTreePath::TopActor() const
 {
 	if (m_actor_path.empty()) {
-		return NULL;
+		return nullptr;
 	} else {
 		return m_actor_path.top();
 	}

@@ -9,7 +9,7 @@
 #include <easycomplex.h>
 #include <easyanim.h>
 
-#include <sprite2/S2_Sprite.h>
+#include <sprite2/Sprite.h>
 #include <sprite2/SymType.h>
 
 namespace edb
@@ -66,12 +66,12 @@ void TransOldAnchorFile::Run(const std::string& folder)
 
 void TransOldAnchorFile::TransComplex(const std::string& filepath) const
 {
-	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+	auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	ecomplex::Symbol* complex = static_cast<ecomplex::Symbol*>(sym);
 	bool dirty = false;
-	const std::vector<s2::Sprite*>& children = complex->GetAllChildren();
+	auto& children = complex->GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
-		ee::Sprite* spr = dynamic_cast<ee::Sprite*>(children[i]);
+		auto spr = std::dynamic_pointer_cast<ee::Sprite>(children[i]);
 		if (IsAnchor(spr)) {
 			spr->SetAnchor(true);
 			dirty = true;
@@ -80,12 +80,11 @@ void TransOldAnchorFile::TransComplex(const std::string& filepath) const
 	if (dirty) {
 		ecomplex::FileStorer::Store(filepath, complex, ee::FileHelper::GetFileDir(filepath));
 	}
-	sym->RemoveReference();
 }
 
 void TransOldAnchorFile::TransAnimation(const std::string& filepath) const
 {
-	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+	auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	libanim::Symbol* anim = static_cast<libanim::Symbol*>(sym);
 	bool dirty = false;
 	const std::vector<s2::AnimSymbol::Layer*>& layers = anim->GetLayers();
@@ -94,7 +93,7 @@ void TransOldAnchorFile::TransAnimation(const std::string& filepath) const
 		for (int j = 0, m = layer->frames.size(); j < m; ++j) {
 			s2::AnimSymbol::Frame* frame = layer->frames[j];
 			for (int k = 0, l = frame->sprs.size(); k < l; ++k) {
-				ee::Sprite* spr = dynamic_cast<ee::Sprite*>(frame->sprs[k]);
+				auto& spr = std::dynamic_pointer_cast<ee::Sprite>(frame->sprs[k]);
 				if (IsAnchor(spr)) {
 					spr->SetAnchor(true);
 					dirty = true;
@@ -105,17 +104,16 @@ void TransOldAnchorFile::TransAnimation(const std::string& filepath) const
 	if (dirty) {
 		libanim::FileSaver::Store(filepath, *anim);
 	}
-	sym->RemoveReference();
 }
 
-bool TransOldAnchorFile::IsAnchor(const ee::Sprite* spr) const
+bool TransOldAnchorFile::IsAnchor(const ee::SprConstPtr& spr) const
 {	
 	if (const ee::FontBlankSprite* font = dynamic_cast<const ee::FontBlankSprite*>(spr)) {
 		return font->font.empty() && font->font_color == s2::Color(0, 0, 0, 0);
-	} else if (const ecomplex::Sprite* complex = dynamic_cast<const ecomplex::Sprite*>(spr)) {
-		const std::vector<s2::Sprite*>& children = dynamic_cast<const s2::ComplexSymbol*>(complex->GetSymbol())->GetAllChildren();
+	} else if (const std::shared_ptr<ecomplex::Sprite>& complex = std::dynamic_pointer_cast<const ecomplex::Sprite>>(spr)) {
+		auto& children = dynamic_cast<const s2::ComplexSymbol*>(complex->GetSymbol())->GetAllChildren();
 		if (children.size() == 1) {
-			ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[0]);
+			auto child = std::dynamic_pointer_cast<ee::Sprite>(children[0]);
 			return IsAnchor(child);
 		} else {
 			return false;

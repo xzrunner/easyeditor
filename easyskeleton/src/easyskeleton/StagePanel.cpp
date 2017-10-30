@@ -44,7 +44,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 	case ee::MSG_INSERT_SPRITE:
 		{
 			ee::InsertSpriteSJ::Params* p = (ee::InsertSpriteSJ::Params*)ud;
-			ee::Sprite* spr = p->spr;
+			auto& spr = p->spr;
 			if (!spr->GetUserData()) {
 				spr->SetUserData(new Bone(spr));
 			}

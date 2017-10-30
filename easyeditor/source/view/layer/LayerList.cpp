@@ -129,16 +129,14 @@ void LayerList::ClearLayer(Layer* layer)
 {
 	EditAddRecordSJ::Instance()->Add(new DeleteLayerAOP(this, layer));
 
-	std::vector<Sprite*> sprs;
-	layer->TraverseSprite(FetchAllVisitor<Sprite>(sprs));
-	for_each(sprs.begin(), sprs.end(), cu::AddRefFunctor<Sprite>());
+	std::vector<SprPtr> sprs;
+	layer->TraverseSprite(FetchAllRefVisitor<Sprite>(sprs));
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
 		RemoveSpriteSJ::Instance()->Remove(sprs[i]);
 	}
 
-	std::vector<Shape*> shapes;
-	layer->TraverseShape(FetchAllVisitor<Shape>(shapes));
-	for_each(shapes.begin(), shapes.end(), cu::AddRefFunctor<Shape>());
+	std::vector<ShapePtr> shapes;
+	layer->TraverseShape(FetchAllRefVisitor<Shape>(shapes));
 	for (int i = 0, n = shapes.size(); i < n; ++i) {
 		RemoveShapeSJ::Instance()->Remove(shapes[i]);
 	}

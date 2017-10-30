@@ -32,25 +32,15 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, LibraryPanel* 
 	SetDropTarget(new ee::StageDropTarget(this, GetStageImpl(), library));
 }
 
-StagePanel::~StagePanel()
-{	
-	m_sym->RemoveReference();
-}
-
 bool StagePanel::UpdateStage()
 {
-	if (const s2::Sprite* base = m_sym->GetBase()) {
-		const_cast<s2::Sprite*>(base)->Update(s2::UpdateParams());
+	if (auto base = m_sym->GetBase()) {
+		base->Update(s2::UpdateParams());
 	}
-	if (const s2::Sprite* mask = m_sym->GetMask()) {
-		const_cast<s2::Sprite*>(mask)->Update(s2::UpdateParams());
+	if (auto mask = m_sym->GetMask()) {
+		mask->Update(s2::UpdateParams());
 	}
 	return true;
-}
-
-void StagePanel::SetSymbol(Symbol* sym) 
-{ 
-	cu::RefCountObjAssign(m_sym, sym); 
 }
 
 void StagePanel::OnNotify(int sj_id, void* ud)

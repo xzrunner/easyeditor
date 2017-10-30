@@ -38,14 +38,13 @@ void StagePanel::SetImage(const std::string& filepath)
 		m_image->RemoveReference();
 	}
 
-	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+	auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	if (sym) {
 		SetImage(sym);
-		sym->RemoveReference();
 	}
 }
 
-void StagePanel::SetImage(ee::Symbol* sym)
+void StagePanel::SetImage(const ee::SymPtr& sym)
 {
 	ee::ImageSymbol* img_sym = static_cast<ee::ImageSymbol*>(sym);
 	const sm::i16_vec2& ori_sz = img_sym->GetImage()->GetOriginSize();
@@ -55,7 +54,7 @@ void StagePanel::SetImage(ee::Symbol* sym)
 	offset.x = ori_sz.x * 0.5f - clip_r.xmin;
 	offset.y = ori_sz.y * 0.5f - clip_r.ymin;
 
-	ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+	auto spr = ee::SpriteFactory::Instance()->Create(sym);
 	spr->Translate(offset);
 	m_image = spr;
 
@@ -93,7 +92,7 @@ OnDropText(wxCoord x, wxCoord y, const wxString& text)
 // 	// todo for diff
 // 	// fixme
 // 	sm::vec2 pos = m_stage->transPosScreenToProject(x, y);
-// 	ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+// 	auto spr = ee::SpriteFactory::Instance()->Create(sym);
 // 	sm::rect r = spr->getSymbol().getSize();
 // 	if (pos.x < 0) {
 // 		spr->setTransform(sm::vec2(-r.Width() * 0.5f - 10, 0.0f), 0);
@@ -112,9 +111,8 @@ OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames)
 	}
 
 	std::string filename = filenames[0];
-	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filename);
+	auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filename);
 	m_stage->SetImage(sym);
-	sym->RemoveReference();
 }
 
 }

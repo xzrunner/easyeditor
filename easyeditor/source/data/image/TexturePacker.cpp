@@ -87,7 +87,7 @@ Load(const Json::Value& value)
 void TexturePacker::FrameSrcData::
 Load(const Json::Value& value, const std::string& src_data_dir)
 {
-	std::string filepath = value["filename"].asString();
+	std::string filepath = value["filename"].asString().c_str();
 	filename = FileHelper::FormatFilepathAbsolute(src_data_dir + "\\" + filepath);
 
 	frame.Load(value["frame"]);
@@ -173,7 +173,7 @@ Load(const Json::Value& value, const std::string& src_data_dir)
 	if (value["meta"]["format"].isNull()) {
 		format = "png";
 	} else {
-		format = value["meta"]["format"].asString();
+		format = value["meta"]["format"].asString().c_str();
 	}
 
 // 	std::string scale = value["meta"]["scale"].asString();

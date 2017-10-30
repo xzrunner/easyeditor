@@ -11,7 +11,7 @@ class LibraryImagePage : public LibraryPage
 public:
 	LibraryImagePage(wxWindow* parent, bool supportBmp = true);
 
-	virtual bool IsHandleSymbol(Symbol* sym) const;
+	virtual bool IsHandleSymbol(const SymPtr& sym) const;
 
 protected:
 	virtual void OnAddPress(wxCommandEvent& event);

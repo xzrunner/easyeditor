@@ -5,7 +5,7 @@
 #include <ee/Sprite.h>
 #include <ee/Math2D.h>
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 
 namespace emodeling
 {
@@ -31,13 +31,13 @@ void Joint::DrawBodyFlag() const
 }
 
 sm::vec2 Joint::TransWorldToLocal(const sm::vec2& world, 
-									const ee::Sprite* spr)
+									const ee::SprConstPtr& spr)
 {
 	return sm::rotate_vector(world - spr->GetPosition(), -spr->GetAngle());
 }
 
 sm::vec2 Joint::TransLocalToWorld(const sm::vec2& local, 
-									const ee::Sprite* spr)
+									const ee::SprConstPtr& spr)
 {
 	return sm::rotate_vector(local, spr->GetAngle()) + spr->GetPosition();
 }

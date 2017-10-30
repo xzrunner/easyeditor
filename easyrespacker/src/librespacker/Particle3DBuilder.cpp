@@ -6,6 +6,7 @@
 #include "PackTag.h"
 
 #include <ee/Visitor.h>
+#include <ee/SymbolMgr.h>
 
 #include <easyparticle3d.h>
 
@@ -22,8 +23,7 @@ Particle3DBuilder::Particle3DBuilder()
 
 Particle3DBuilder::~Particle3DBuilder()
 {
-	std::map<const eparticle3d::Symbol*, const PackParticle3D*>::iterator
-		itr = m_map_data.begin();
+	auto itr = m_map_data.begin();
 	for ( ; itr != m_map_data.end(); ++itr) {
 		delete itr->second;
 	}
@@ -31,8 +31,7 @@ Particle3DBuilder::~Particle3DBuilder()
 
 void Particle3DBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 {
-	std::map<const eparticle3d::Symbol*, const PackParticle3D*>::const_iterator 
-		itr = m_map_data.begin();
+	auto itr = m_map_data.begin();
 	for ( ; itr != m_map_data.end(); ++itr) {
 		bool has_next;
 		visitor.Visit(const_cast<PackParticle3D*>(itr->second), has_next);
@@ -42,10 +41,9 @@ void Particle3DBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 	}
 }
 
-const IPackNode* Particle3DBuilder::Create(const eparticle3d::Symbol* sym, P3dSprBuilder* spr_builder)
+const IPackNode* Particle3DBuilder::Create(const std::shared_ptr<const eparticle3d::Symbol>& sym, P3dSprBuilder* spr_builder)
 {
-	std::map<const eparticle3d::Symbol*, const PackParticle3D*>::iterator 
-		itr = m_map_data.find(sym);
+	auto itr = m_map_data.find(sym);
 	if (itr != m_map_data.end()) {
 		return itr->second;
 	}
@@ -61,7 +59,7 @@ const IPackNode* Particle3DBuilder::Create(const eparticle3d::Symbol* sym, P3dSp
 	return node;
 }
 
-void Particle3DBuilder::Load(const eparticle3d::Symbol* sym, PackParticle3D* ps)
+void Particle3DBuilder::Load(const std::shared_ptr<const eparticle3d::Symbol>& sym, PackParticle3D* ps)
 {
 	const p3d_emitter_cfg* cfg = sym->GetEmitterCfg()->GetImpl();
 	
@@ -126,8 +124,9 @@ void Particle3DBuilder::Load(const eparticle3d::Symbol* sym, PackParticle3D* ps)
 		comp.add_col_begin = gum::color2int(s2::Color(p_symbol.add_col_begin.r, p_symbol.add_col_begin.g, p_symbol.add_col_begin.b, p_symbol.add_col_begin.a), s2::ARGB);
 		comp.add_col_end = gum::color2int(s2::Color(p_symbol.add_col_end.r, p_symbol.add_col_end.g, p_symbol.add_col_end.b, p_symbol.add_col_end.a), s2::ARGB);
 
-		ee::Symbol* sym = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(p_symbol.ud));
-		comp.node = PackNodeFactory::Instance()->Create(sym);
+		auto sym_raw = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(p_symbol.ud));
+		auto sym_ptr = ee::SymbolMgr::Instance()->FetchSymbol(sym_raw->GetFilepath());
+		comp.node = PackNodeFactory::Instance()->Create(sym_ptr);
 
 		ps->components.push_back(comp);
 	}

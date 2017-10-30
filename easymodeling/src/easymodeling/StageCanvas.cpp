@@ -7,7 +7,7 @@
 #include <ee/SpriteRenderer.h>
 #include <ee/Sprite.h>
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 
 namespace emodeling
 {
@@ -39,8 +39,8 @@ void StageCanvas::DrawGuideLines() const
 
 void StageCanvas::DrawSprites() const
 {
-	std::vector<ee::Sprite*> sprs;
-	m_stage_panel->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	m_stage_panel->TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	for (size_t i = 0, n = sprs.size(); i < n; ++i)
 	{
 		ee::SpriteRenderer::Instance()->Draw(sprs[i]);

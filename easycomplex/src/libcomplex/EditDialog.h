@@ -3,6 +3,8 @@
 
 #include <wx/dialog.h>
 
+#include <memory>
+
 class wxGLContext;
 
 namespace ee { class LibraryPanel; class ViewlistPanel; class CrossGuides; }
@@ -17,7 +19,7 @@ class StagePanel;
 class EditDialog : public wxDialog
 {
 public:
-	EditDialog(wxWindow* parent, Symbol* sym, 
+	EditDialog(wxWindow* parent, const std::shared_ptr<Symbol>& sym, 
 		wxGLContext* glctx, ee::CrossGuides* guides = NULL);
 	virtual ~EditDialog();
 
@@ -37,7 +39,7 @@ private:
 	StagePanel* m_stage;
 	ee::ViewlistPanel* m_viewlist;
 
-	Symbol* m_sym;
+	std::shared_ptr<Symbol> m_sym;
 
 	DECLARE_EVENT_TABLE()
 

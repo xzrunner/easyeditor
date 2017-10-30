@@ -23,8 +23,8 @@
 #include "EditedFileStack.h"
 #include "PackIDMgr.h"
 
-#include <gum/GUM_DTex.h>
-#include <gum/GUM_Facade.h>
+#include <gum/DTex.h>
+#include <gum/Facade.h>
 
 #include <fstream>
 

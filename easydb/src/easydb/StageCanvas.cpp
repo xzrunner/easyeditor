@@ -5,7 +5,7 @@
 #include <ee/DrawSpritesVisitor.h>
 #include <ee/Sprite.h>
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <sprite2/CameraType.h>
 
 namespace edb

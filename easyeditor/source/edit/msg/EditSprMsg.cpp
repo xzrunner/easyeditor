@@ -23,11 +23,11 @@ void EditSprMsg::Rotate(const SpriteSelection& selection, float rotate)
 	val["op"] = "rotate";
 	val["rotate"] = rotate;
 
-	std::vector<Sprite*> children;
-	selection.Traverse(FetchAllVisitor<Sprite>(children));
+	std::vector<SprPtr> children;
+	selection.Traverse(FetchAllRefVisitor<Sprite>(children));
 	MsgHelper::FillingSprites(children, val);
 
-	Socket::Instance()->Send(val.toStyledString());
+	Socket::Instance()->Send(val.toStyledString().c_str());
 }
 
 void EditSprMsg::Translate(const SpriteSelection& selection, const sm::vec2& offset)
@@ -48,11 +48,11 @@ void EditSprMsg::Translate(const SpriteSelection& selection, const sm::vec2& off
  	val["offset"]["x"] = offset.x;
  	val["offset"]["y"] = -offset.y;
 
-	std::vector<Sprite*> children;
-	selection.Traverse(FetchAllVisitor<Sprite>(children));
+	std::vector<SprPtr> children;
+	selection.Traverse(FetchAllRefVisitor<Sprite>(children));
 	MsgHelper::FillingSprites(children, val);
 
-	Socket::Instance()->Send(val.toStyledString());
+	Socket::Instance()->Send(val.toStyledString().c_str());
 }
 
 void EditSprMsg::SetScale(const Sprite* spr, const sm::vec2& pos, const sm::vec2& scale)
@@ -71,9 +71,9 @@ void EditSprMsg::SetScale(const Sprite* spr, const sm::vec2& pos, const sm::vec2
 	val["pos"]["x"] = pos.x;
 	val["pos"]["y"] = pos.y;
 
-	MsgHelper::FillingSprites(spr, val);
+	MsgHelper::FillingSprites(*spr, val);
 
-	Socket::Instance()->Send(val.toStyledString());
+	Socket::Instance()->Send(val.toStyledString().c_str());
 }
 
 void EditSprMsg::SetColMul(const Sprite* spr, const s2::Color& mul)
@@ -89,9 +89,9 @@ void EditSprMsg::SetColMul(const Sprite* spr, const s2::Color& mul)
 	val["op"] = "set_color";
 	val["mul"] = mul.ToABGR();
 
-	MsgHelper::FillingSprites(spr, val);
+	MsgHelper::FillingSprites(*spr, val);
 
-	Socket::Instance()->Send(val.toStyledString());
+	Socket::Instance()->Send(val.toStyledString().c_str());
 }
 
 void EditSprMsg::SetColAdd(const Sprite* spr, const s2::Color& add)
@@ -107,9 +107,9 @@ void EditSprMsg::SetColAdd(const Sprite* spr, const s2::Color& add)
 	val["op"] = "set_color";
 	val["add"] = add.ToABGR();
 
-	MsgHelper::FillingSprites(spr, val);
+	MsgHelper::FillingSprites(*spr, val);
 
-	Socket::Instance()->Send(val.toStyledString());
+	Socket::Instance()->Send(val.toStyledString().c_str());
 }
 
 }

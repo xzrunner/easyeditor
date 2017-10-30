@@ -30,7 +30,7 @@ private:
 	mutable float m_center_node_radius;
 
 	bool m_move_center;
-	mutable ee::Sprite* m_selected;
+	mutable ee::SprPtr m_selected;
 
 }; // ArrangeSpriteImpl
 

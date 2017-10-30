@@ -6,11 +6,11 @@
 namespace ecomplex
 {
 
-ee::Sprite* AnchorToSpr::Trans(const erespacker::PackAnchor* anchor)
+ee::SprPtr AnchorToSpr::Trans(const erespacker::PackAnchor* anchor)
 {
-	ee::FontBlankSymbol* sym = new ee::FontBlankSymbol();
+	auto sym = std::make_shared<ee::FontBlankSymbol>();
 
-	ee::FontBlankSprite* spr = new ee::FontBlankSprite(sym);
+	auto spr = std::make_shared<ee::FontBlankSprite>(sym);
 	spr->width = 32;
 	spr->height = 32;
 	return spr;

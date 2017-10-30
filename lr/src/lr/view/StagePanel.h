@@ -34,7 +34,7 @@ public:
 	//
 	// ee::MultiSpritesImpl interface
 	//
-	virtual void TraverseSprites(ee::Visitor<ee::Sprite>& visitor, 
+	virtual void TraverseSprites(ee::RefVisitor<ee::Sprite>& visitor, 
 		ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
 
 	//
@@ -81,11 +81,11 @@ protected:
 private:
 	void ChangeEditOP();
 
-	void ReorderSprite(ee::Sprite* spr, bool up);
-	void ReorderSpriteMost(ee::Sprite* spr, bool up);
-	void SortSprites(std::vector<ee::Sprite*>& sprs);
-	void InsertSprite(ee::Sprite* spr, int idx);
-	void RemoveSprite(ee::Sprite* spr);
+	void ReorderSprite(const ee::SprPtr& spr, bool up);
+	void ReorderSpriteMost(const ee::SprPtr& spr, bool up);
+	void SortSprites(std::vector<ee::SprPtr>& sprs);
+	void InsertSprite(const ee::SprPtr& spr, int idx);
+	void RemoveSprite(const ee::SprPtr& spr);
 	void ClearSprite();
 
 	void RemoveShape(ee::Shape* shape);

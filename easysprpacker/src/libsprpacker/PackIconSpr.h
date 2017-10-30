@@ -3,6 +3,8 @@
 
 #include "PackNode.h"
 
+#include <memory>
+
 namespace eicon { class Sprite; }
 
 namespace esprpacker
@@ -11,7 +13,7 @@ namespace esprpacker
 class PackIconSpr : public PackNode
 {
 public:
-	PackIconSpr(const eicon::Sprite* spr);
+	PackIconSpr(const std::shared_ptr<eicon::Sprite>& spr);
 	virtual ~PackIconSpr();
 
 	/**

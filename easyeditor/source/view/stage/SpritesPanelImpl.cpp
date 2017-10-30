@@ -14,13 +14,11 @@
 namespace ee
 {
 
-SpritesPanelImpl::SpritesPanelImpl(EditPanelImpl* stage, DataContainer<Sprite>* container)
+SpritesPanelImpl::SpritesPanelImpl(EditPanelImpl* stage, const std::shared_ptr<DataContainer<Sprite>>& container)
 	: MultiSpritesImpl(stage)
 	, m_stage(stage)
+	, m_container(container)
 {
-	m_container = container;
-	m_container->AddReference();
-
 	InitSubjects();
 }
 
@@ -29,17 +27,12 @@ SpritesPanelImpl::SpritesPanelImpl(EditPanelImpl* stage, LibraryPanel* library)
 	, m_stage(stage)
 {
 	m_stage->SetDropTarget(new SpriteDropTarget(stage, library));
-	m_container = new SpritesContainer;
+	m_container = std::make_shared<SpritesContainer>();
 
 	InitSubjects();
 }
 
-SpritesPanelImpl::~SpritesPanelImpl()
-{
-	m_container->RemoveReference();
-}
-
-void SpritesPanelImpl::TraverseSprites(Visitor<Sprite>& visitor, DataTraverseType type/* = e_allExisting*/,
+void SpritesPanelImpl::TraverseSprites(RefVisitor<Sprite>& visitor, DataTraverseType type/* = e_allExisting*/,
 									   bool order/* = true*/) const
 {
 	m_container->Traverse(visitor, type, order);
@@ -67,8 +60,8 @@ void SpritesPanelImpl::OnNotify(int sj_id, void* ud)
 		break;
 	case MSG_SORT_SPRITES:
 		{
-			std::vector<ee::Sprite*>& sprs = *(std::vector<ee::Sprite*>*)ud;
-			static_cast<SprDataContainer*>(m_container)->Sort(sprs);
+			std::vector<ee::SprPtr>& sprs = *(std::vector<ee::SprPtr>*)ud;
+			std::static_pointer_cast<SpritesContainer>(m_container)->Sort(sprs);
 		}
 		break;
 	case MSG_INSERT_SPRITE:
@@ -84,7 +77,7 @@ void SpritesPanelImpl::OnNotify(int sj_id, void* ud)
 		break;
 	case MSG_REMOVE_SPRITE:
 		{
-			Sprite* spr = (Sprite*)ud;
+			auto spr = *(SprPtr*)ud;
 			m_container->Remove(spr);
 #ifdef OPEN_SCREEN_CACHE
 			SpatialPartition::Instance()->Remove(spr);

@@ -19,19 +19,19 @@ class EditDialog : public wxDialog
 {
 public:
 	EditDialog(wxWindow* parent, wxGLContext* glctx, 
-		Sprite* edited, const ee::MultiSpritesImpl* sprite_impl);
+		const std::shared_ptr<Sprite>& edited, const ee::MultiSpritesImpl* sprite_impl);
 	virtual ~EditDialog();
 
 private:
-	void InitLayout(wxGLContext* glctx, ee::Sprite* edited, 
+	void InitLayout(wxGLContext* glctx, const ee::SprPtr& edited, 
 		const ee::MultiSpritesImpl* sprite_impl);
 
 	void OnCloseEvent(wxCloseEvent& event);
 
-	void InitCamera(ee::Sprite* spr) const;
+	void InitCamera(const ee::SprPtr& spr) const;
 
 private:
-	Symbol* m_sym;
+	std::shared_ptr<Symbol> m_sym;
 
 	ee::EditPanel* m_stage;
 

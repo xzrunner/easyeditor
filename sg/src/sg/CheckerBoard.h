@@ -21,13 +21,13 @@ class CheckerBoard
 public:
 	CheckerBoard(StagePanel* stage);
 
-	void Traverse(ee::Visitor<ee::Sprite>& visitor) const;
+	void Traverse(ee::RefVisitor<ee::Sprite>& visitor) const;
 
-	void AddSprite(ee::Sprite* spr);
-	void RemoveSprite(ee::Sprite* spr);
+	void AddSprite(const ee::SprPtr& spr);
+	void RemoveSprite(const ee::SprPtr& spr);
 	void Clear();
 
-	bool IsValid(ee::Sprite* spr) const;
+	bool IsValid(const ee::SprPtr& spr) const;
 	bool IsValid(const ee::Symbol& sym, const sm::vec2& pos) const;
 
 	void DebugDraw() const;
@@ -35,18 +35,18 @@ public:
 	void ClearRemovedCache() {
 		m_map_removed.clear();
 	}
-	bool SetCachedPos(ee::Sprite* spr) const;
+	bool SetCachedPos(const ee::SprPtr& spr) const;
 
 	void ResetWall();
 
 private:
 	StagePanel* m_stage;
 
-	ee::Sprite* m_grid[ROW][COL];
+	ee::SprPtr m_grid[ROW][COL];
 
-	std::map<ee::Sprite*, sm::vec2> m_map_sprite2pos;
+	std::map<ee::SprPtr, sm::vec2> m_map_sprite2pos;
 
-	std::map<ee::Sprite*, sm::vec2> m_map_removed;
+	std::map<ee::SprPtr, sm::vec2> m_map_removed;
 
 }; // CheckerBoard
 

@@ -7,7 +7,6 @@
 #include "PictureFromBin.h"
 
 #include <ee/TexturePacker.h>
-#include <ee/Image.h>
 #include <ee/Exception.h>
 #include <ee/ImageData.h>
 
@@ -26,7 +25,7 @@ void PackPicture::PackToLuaString(ebuilder::CodeGenerator& gen,
 	PictureToLuaString::Pack(this, gen, tp, scale);
 }
 
-void PackPicture::UnpackFromLua(lua_State* L, const std::vector<ee::Image*>& images)
+void PackPicture::UnpackFromLua(lua_State* L, const std::vector<ee::ImagePtr>& images)
 {
 	PictureFromLua::Unpack(L, images, this);
 }
@@ -48,7 +47,7 @@ int PackPicture::SizeOfUnpackFromBin() const
 	return PictureFromBin::Size(this);
 }
 
-void PackPicture::UnpackFromBin(uint8_t** ptr, const std::vector<ee::Image*>& images)
+void PackPicture::UnpackFromBin(uint8_t** ptr, const std::vector<ee::ImagePtr>& images)
 {
 	PictureFromBin::Unpack(ptr, images, this);
 }

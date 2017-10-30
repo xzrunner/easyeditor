@@ -18,14 +18,14 @@ namespace lua = ebuilder::lua;
 namespace esprpacker
 {
 
-PackIcon::PackIcon(const eicon::Symbol* sym)
+PackIcon::PackIcon(const std::shared_ptr<eicon::Symbol>& sym)
 	: m_type(gum::ICON_INVALID)
 {
-	m_base = PackNodeFactory::Instance()->Create(dynamic_cast<const ee::Symbol*>(
+	m_base = PackNodeFactory::Instance()->Create(std::dynamic_pointer_cast<ee::Symbol>(
 		sym->GetIcon()->GetImage()));
 
-	const s2::Icon* icon = sym->GetIcon();
-	if (const s2::StaticRectIcon* rect = dynamic_cast<const s2::StaticRectIcon*>(icon))
+	auto& icon = sym->GetIcon();
+	if (const s2::StaticRectIcon* rect = dynamic_cast<const s2::StaticRectIcon*>(icon.get()))
 	{
 		m_type = gum::ICON_RECT;
 		sm::vec2 min, max;
@@ -33,7 +33,7 @@ PackIcon::PackIcon(const eicon::Symbol* sym)
 		m_vertices.push_back(min);
 		m_vertices.push_back(max);
 	}
-	else if (const s2::StaticQuadIcon* quad = dynamic_cast<const s2::StaticQuadIcon*>(icon))
+	else if (const s2::StaticQuadIcon* quad = dynamic_cast<const s2::StaticQuadIcon*>(icon.get()))
 	{
 		m_type = gum::ICON_QUAD;
 		const sm::vec2* scr = quad->GetScreen();
@@ -41,7 +41,7 @@ PackIcon::PackIcon(const eicon::Symbol* sym)
 			m_vertices.push_back(scr[i]);
 		}
 	}
-	else if (const s2::DynamicRectIcon* drect = dynamic_cast<const s2::DynamicRectIcon*>(icon))
+	else if (const s2::DynamicRectIcon* drect = dynamic_cast<const s2::DynamicRectIcon*>(icon.get()))
 	{
 		m_type = gum::ICON_CHANGED_RECT;
 		sm::rect begin, end;
@@ -51,7 +51,7 @@ PackIcon::PackIcon(const eicon::Symbol* sym)
 		m_vertices.push_back(sm::vec2(end.xmin, end.ymin));
 		m_vertices.push_back(sm::vec2(end.xmax, end.ymax));
 	}
-	else if (const s2::DynamicSectorIcon* dsector = dynamic_cast<const s2::DynamicSectorIcon*>(icon))
+	else if (const s2::DynamicSectorIcon* dsector = dynamic_cast<const s2::DynamicSectorIcon*>(icon.get()))
 	{
 		m_type = gum::ICON_CHANGED_SECTOR;
 		float min, max;

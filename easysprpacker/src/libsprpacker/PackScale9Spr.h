@@ -5,6 +5,8 @@
 
 #include <SM_Vector.h>
 
+#include <memory>
+
 namespace escale9 { class Sprite; }
 
 namespace esprpacker
@@ -13,7 +15,7 @@ namespace esprpacker
 class PackScale9Spr : public PackNode
 {
 public:
-	PackScale9Spr(const escale9::Sprite* spr);
+	PackScale9Spr(const std::shared_ptr<escale9::Sprite>& spr);
 
 	/**
 	 *  @interface
@@ -30,10 +32,10 @@ public:
 	virtual int SizeOfPackToBin() const;
 	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const;
 
-	bool Equal(const escale9::Sprite* spr) const;
+	bool Equal(const std::shared_ptr<escale9::Sprite>& spr) const;
 
 private:
-	void Init(const escale9::Sprite* spr);
+	void Init(const std::shared_ptr<escale9::Sprite>& spr);
 
 private:
 	const PackNode* m_sym;

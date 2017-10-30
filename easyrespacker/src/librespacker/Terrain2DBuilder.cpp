@@ -18,8 +18,7 @@ Terrain2DBuilder::Terrain2DBuilder()
 
 Terrain2DBuilder::~Terrain2DBuilder()
 {
-	std::map<const eterrain2d::Symbol*, const PackAnimation*>::iterator
-		itr = m_map_data.begin();
+	auto itr = m_map_data.begin();
 	for ( ; itr != m_map_data.end(); ++itr) {
 		delete itr->second;
 	}
@@ -27,8 +26,7 @@ Terrain2DBuilder::~Terrain2DBuilder()
 
 void Terrain2DBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 {
-	std::map<const eterrain2d::Symbol*, const PackAnimation*>::const_iterator 
-		itr = m_map_data.begin();
+	auto itr = m_map_data.begin();
 	for ( ; itr != m_map_data.end(); ++itr) {
 		bool has_next;
 		visitor.Visit(const_cast<PackAnimation*>(itr->second), has_next);
@@ -46,10 +44,9 @@ void Terrain2DBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 	}
 }
 
-const IPackNode* Terrain2DBuilder::Create(const eterrain2d::Symbol* sym)
+const IPackNode* Terrain2DBuilder::Create(const std::shared_ptr<const eterrain2d::Symbol>& sym)
 {
-	std::map<const eterrain2d::Symbol*, const PackAnimation*>::iterator 
-		itr = m_map_data.find(sym);
+	auto itr = m_map_data.find(sym);
 	if (itr != m_map_data.end()) {
 		return itr->second;
 	}
@@ -64,7 +61,7 @@ const IPackNode* Terrain2DBuilder::Create(const eterrain2d::Symbol* sym)
 	return node;
 }
 
-void Terrain2DBuilder::Load(const eterrain2d::Symbol* sym, PackAnimation* anim)
+void Terrain2DBuilder::Load(const std::shared_ptr<const eterrain2d::Symbol>& sym, PackAnimation* anim)
 {
 // 	const std::vector<eterrain2d::OceanMesh*> oceans = sym->GetOceans();
 // 	// todo

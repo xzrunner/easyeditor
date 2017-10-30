@@ -17,22 +17,22 @@ Sprite& Sprite::operator = (const Sprite& spr)
 	return *this;
 }
 
-Sprite::Sprite(Symbol* sym)
+Sprite::Sprite(const s2::SymPtr& sym, uint32_t id)
 	: s2::Sprite(sym)
 	, ee::Sprite(sym)
 {
 //	rotate(-m_sym->GetOceanAngle());
 }
 
-void Sprite::Load(const Json::Value& val, const std::string& dir)
+void Sprite::Load(const Json::Value& val, const CU_STR& dir)
 {
 	ee::Sprite::Load(val);
 //	rotate(-m_sym->GetOceanAngle());
 }
 
-ee::Sprite* Sprite::Create(ee::Symbol* sym) 
+ee::SprPtr Sprite::Create(const std::shared_ptr<ee::Symbol>& sym) 
 {
-	return new Sprite(static_cast<Symbol*>(sym));
+	return std::make_shared<Sprite>(sym);
 }
 
 }

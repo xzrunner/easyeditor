@@ -13,7 +13,7 @@
 namespace ee
 {
 
-DelaunayTriangulation::DelaunayTriangulation(const std::vector<sm::vec2>& src, bool bFixBound /*= true*/)
+DelaunayTriangulation::DelaunayTriangulation(const CU_VEC<sm::vec2>& src, bool bFixBound /*= true*/)
 {
 	if (src.size() >= 3)
 	{
@@ -57,14 +57,14 @@ DelaunayTriangulation::~DelaunayTriangulation()
 	for_each(edges.begin(), edges.end(), DeletePointerFunctor<Edge>());
 }
 
-void DelaunayTriangulation::GetAllTrisInRegion(std::vector<std::vector<sm::vec2> >& triBounds, 
-											   const std::vector<sm::vec2>& region) const
+void DelaunayTriangulation::GetAllTrisInRegion(CU_VEC<CU_VEC<sm::vec2> >& triBounds, 
+											   const CU_VEC<sm::vec2>& region) const
 {
-	std::vector<Triangle*> tris = GetAllTris();
+	CU_VEC<Triangle*> tris = GetAllTris();
 	for (size_t i = 0, n = tris.size(); i < n; ++i)
 	{
 		Triangle* src = tris[i];
-		std::vector<sm::vec2> bound;
+		CU_VEC<sm::vec2> bound;
 		src->GetNodesPos(bound);
 
 		sm::vec2 p = sm::get_tri_gravity_center(bound[0], bound[1], bound[2]);
@@ -73,13 +73,13 @@ void DelaunayTriangulation::GetAllTrisInRegion(std::vector<std::vector<sm::vec2>
 	}
 }
 
-void DelaunayTriangulation::GetAllTrisInRegion(std::vector<sm::vec2>& triBounds, const std::vector<sm::vec2>& region) const
+void DelaunayTriangulation::GetAllTrisInRegion(CU_VEC<sm::vec2>& triBounds, const CU_VEC<sm::vec2>& region) const
 {
-	std::vector<Triangle*> tris = GetAllTris();
+	CU_VEC<Triangle*> tris = GetAllTris();
 	for (size_t i = 0, n = tris.size(); i < n; ++i)
 	{
 		Triangle* src = tris[i];
-		std::vector<sm::vec2> bound;
+		CU_VEC<sm::vec2> bound;
 		src->GetNodesPos(bound);
 
 		sm::vec2 p = sm::get_tri_gravity_center(bound[0], bound[1], bound[2]);
@@ -115,7 +115,7 @@ bool DelaunayTriangulation::InsertNode(const sm::vec2& p)
 	}
 }
 
-void DelaunayTriangulation::DeleteNodes(const std::vector<sm::vec2>& pos)
+void DelaunayTriangulation::DeleteNodes(const CU_VEC<sm::vec2>& pos)
 {
 	for (size_t i = 0; i < pos.size(); ++i)
 	{
@@ -142,7 +142,7 @@ bool DelaunayTriangulation::IsBoundNode(const sm::vec2& n) const
 		return (*itr)->IsMargin();
 }
 
-void DelaunayTriangulation::GetBoundLinePos(std::vector<std::vector<sm::vec2> >& bounds) const
+void DelaunayTriangulation::GetBoundLinePos(CU_VEC<CU_VEC<sm::vec2> >& bounds) const
 {
 	std::set<sm::vec2, PosDownCmp> leftPos;
 	std::set<Node*, NodeCmp>::const_iterator itr = m_nodes.begin();
@@ -152,7 +152,7 @@ void DelaunayTriangulation::GetBoundLinePos(std::vector<std::vector<sm::vec2> >&
 
 	while (!leftPos.empty())
 	{
-		std::vector<sm::vec2> bound;
+		CU_VEC<sm::vec2> bound;
 		bound.push_back(*leftPos.begin());
 		leftPos.erase(leftPos.begin());
 		while (true)
@@ -200,7 +200,7 @@ void DelaunayTriangulation::GetBoundLinePos(std::vector<std::vector<sm::vec2> >&
 	}	
 }
 
-void DelaunayTriangulation::GetSurroundPos(const sm::vec2& pos, std::vector<sm::vec2>& surround) const
+void DelaunayTriangulation::GetSurroundPos(const sm::vec2& pos, CU_VEC<sm::vec2>& surround) const
 {
 	Node tmp(pos);
 	std::set<Node*, NodeCmp>::const_iterator itr = m_nodes.find(&tmp);
@@ -220,7 +220,7 @@ void DelaunayTriangulation::GetSurroundPos(const sm::vec2& pos, std::vector<sm::
 // class DelaunayTriangulation::Node
 //
 
-void DelaunayTriangulation::Node::GetSurroundTris(std::vector<const Triangle*>& tris) const
+void DelaunayTriangulation::Node::GetSurroundTris(CU_VEC<const Triangle*>& tris) const
 {
 	for (size_t i = 0; i < m_edges.size(); ++i)
 	{
@@ -569,7 +569,7 @@ void DelaunayTriangulation::DeleteNode(const Node* n)
 //		---------
 //	p1				p2
 
-void DelaunayTriangulation::InitSurrondTri(const std::vector<sm::vec2>& src)
+void DelaunayTriangulation::InitSurrondTri(const CU_VEC<sm::vec2>& src)
 {
 	sm::rect rect;
 	Math2D::GetMBR(src, &rect);
@@ -586,7 +586,7 @@ void DelaunayTriangulation::InitSurrondTri(const std::vector<sm::vec2>& src)
 	m_root->InitTri(new Node(p0, true), new Node(p1, true), new Node(p2, true));
 }
 
-void DelaunayTriangulation::InitSrcNodes(const std::vector<sm::vec2>& src)
+void DelaunayTriangulation::InitSrcNodes(const CU_VEC<sm::vec2>& src)
 {
 	for(size_t i = 0; i < src.size(); ++i)
 		m_nodes.insert(new Node(src[i]));
@@ -594,7 +594,7 @@ void DelaunayTriangulation::InitSrcNodes(const std::vector<sm::vec2>& src)
 
 void DelaunayTriangulation::BuildTriangulationStruct()
 {
-	std::vector<Node*> nodes;
+	CU_VEC<Node*> nodes;
 	nodes.reserve(m_nodes.size());
 	copy(m_nodes.begin(), m_nodes.end(), back_inserter(nodes));
 	Random::RandomPermutation(nodes);
@@ -613,7 +613,7 @@ void DelaunayTriangulation::SetAllDestTris(bool bFixBound /*= true*/)
 		CheckSingleNode();
 	}
 
-	std::vector<Triangle*> updateTris;
+	CU_VEC<Triangle*> updateTris;
 	updateTris.reserve(m_tris.size());
 	for (size_t i = 0; i < m_tris.size(); ++i)
 		if (!m_tris[i]->m_removed)
@@ -916,10 +916,10 @@ void DelaunayTriangulation::UpdateConnection(const std::set<Triangle*>& totDel)
 	{
 		Triangle *curr(*itr);
 
-		std::vector<Triangle*>::iterator itrParent = curr->m_parent.begin();
+		CU_VEC<Triangle*>::iterator itrParent = curr->m_parent.begin();
 		for ( ; itrParent != curr->m_parent.end(); ++itrParent)
 		{
-			std::vector<Triangle*>::iterator itrChild = (*itrParent)->m_children.begin();
+			CU_VEC<Triangle*>::iterator itrChild = (*itrParent)->m_children.begin();
 			for ( ; itrChild != (*itrParent)->m_children.end(); ++itrChild)
 				if (*itrChild == curr) {
 					(*itrParent)->m_children.erase(itrChild);
@@ -978,7 +978,7 @@ void DelaunayTriangulation::Reinsert(const std::set<Node*>& reinsertNodes)
 {
 	if (!reinsertNodes.empty())
 	{
-		std::vector<Node*> nodes;
+		CU_VEC<Node*> nodes;
 		nodes.reserve(reinsertNodes.size());
 		copy(reinsertNodes.begin(), reinsertNodes.end(), back_inserter(nodes));
 		Random::RandomPermutation(nodes);

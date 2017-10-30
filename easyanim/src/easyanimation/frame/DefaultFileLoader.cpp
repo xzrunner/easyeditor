@@ -25,7 +25,7 @@
 namespace eanim
 {
 
-void DefaultFileLoader::Load(const Json::Value& val, const std::string& dir)
+void DefaultFileLoader::Load(const Json::Value& val, const CU_STR& dir)
 {
 	int fps = val["fps"].asInt();
 	SetFpsSJ::Instance()->Set(fps);
@@ -109,7 +109,7 @@ KeyFrame* DefaultFileLoader::LoadFrame(Layer* layer, const Json::Value& frame_va
 	int i = 0;
 	Json::Value actorValue = frame_val["actor"][i++];
 	while (!actorValue.isNull()) {
-		ee::Sprite* actor = LoadActor(actorValue, dir);
+		ee::SprPtr actor = LoadActor(actorValue, dir);
 		frame->Insert(actor, INT_MAX);
 		actor->RemoveReference();
 		actorValue = frame_val["actor"][i++];
@@ -156,7 +156,7 @@ void DefaultFileLoader::LoadLerp(KeyFrame* frame, const Json::Value& value)
 	}
 }
 
-ee::Sprite* DefaultFileLoader::LoadActor(const Json::Value& val, const std::string& dir)
+ee::SprPtr DefaultFileLoader::LoadActor(const Json::Value& val, const std::string& dir)
 {
 	std::string filepath = val["filepath"].asString();
 	while (true) 
@@ -194,7 +194,7 @@ ee::Sprite* DefaultFileLoader::LoadActor(const Json::Value& val, const std::stri
 }
 
 void DefaultFileLoader::LoadSkeleton(const Json::Value& skeleton_val, 
-									 const std::vector<ee::Sprite*>& sprs,
+									 const std::vector<ee::SprPtr>& sprs,
 									 SkeletonData& skeleton)
 {
 	// prepare joints
@@ -204,7 +204,7 @@ void DefaultFileLoader::LoadSkeleton(const Json::Value& skeleton_val,
 	Json::Value joints_val = skeleton_val[i++];
 	while (!joints_val.isNull()) {
 		std::string spriteName = joints_val["sprite"].asString();
-		ee::Sprite* spr = NULL;
+		ee::SprPtr spr = nullptr;
 		for (int i = 0, n = sprs.size(); i < n; ++i)
 		{
 			if (sprs[i]->GetName() == spriteName) 
@@ -241,7 +241,7 @@ void DefaultFileLoader::LoadSkeleton(const Json::Value& skeleton_val,
 	joints_val = skeleton_val[i++];
 	while (!joints_val.isNull()) {
 		std::string spriteName = joints_val["sprite"].asString();
-		ee::Sprite* spr = NULL;
+		ee::SprPtr spr = nullptr;
 		for (int i = 0, n = sprs.size(); i < n; ++i)
 		{
 			if (sprs[i]->GetName() == spriteName) 

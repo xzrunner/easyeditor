@@ -93,11 +93,11 @@ void KeysContentEdit::CopySelection()
 		Json::Value k_val;
 		k_val["distance"] = itr->first - last_frame;
 
-		const std::vector<ee::Sprite*>& sprs = itr->second->GetAllSprites();
+		const std::vector<ee::SprPtr>& sprs = itr->second->GetAllSprites();
 		for (int i = 0, n = sprs.size(); i < n; ++i) {
-			ee::Sprite* spr = sprs[i];
+			auto& spr = sprs[i];
 			Json::Value s_val;
-			s_val["filepath"] = dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath();
+			s_val["filepath"] = std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol())->GetFilepath();
 			spr->Store(s_val);	
 			k_val["sprite"][i] = s_val;
 		}
@@ -171,13 +171,11 @@ void KeysContentEdit::PasteSelection()
 			const Json::Value& s_val = k_val["sprite"][i_spr];
 			
 			std::string filepath = s_val["filepath"].asString();
-			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+			auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			sym->RefreshThumbnail(filepath);
-			ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+			auto spr = ee::SpriteFactory::Instance()->Create(sym);
 			spr->Load(s_val);
 			frame->Insert(spr, INT_MAX);
-			spr->RemoveReference();
-			sym->RemoveReference();
 		}
 	}
 

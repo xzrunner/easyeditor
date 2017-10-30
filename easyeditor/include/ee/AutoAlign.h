@@ -1,6 +1,8 @@
 #ifndef _EASYEDITOR_AUTO_ALIGN_H_
 #define _EASYEDITOR_AUTO_ALIGN_H_
 
+#include "Sprite.h"
+
 #include <SM_Vector.h>
 
 #include <vector>
@@ -16,8 +18,8 @@ class AutoAlign
 public:
 	AutoAlign(MultiSpritesImpl* sprites_impl);
 
-	void Align(const std::vector<Sprite*>& sprs);
-	void Align(const Sprite* src, Sprite* dst);
+	void Align(const std::vector<SprPtr>& sprs);
+	void Align(const Sprite& src, Sprite& dst);
 
 	void Draw() const;
 

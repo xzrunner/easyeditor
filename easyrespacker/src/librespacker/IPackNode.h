@@ -7,14 +7,16 @@ extern "C" {
 	#include <lauxlib.h>
 };
 
-#include <CU_RefCountObj.h>
+#include <ee/Image.h>
+
+#include <cu/CU_RefCountObj.h>
 
 #include <vector>
 
 #include <stdint.h>
 
 namespace ebuilder { class CodeGenerator; }
-namespace ee { class TexturePacker; class Image; }
+namespace ee { class TexturePacker; }
 
 namespace erespacker
 {
@@ -30,7 +32,7 @@ public:
 	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
 		const ee::TexturePacker& tp, float scale) const = 0;
 	virtual void UnpackFromLua(lua_State* L,
-		const std::vector<ee::Image*>& images) = 0;
+		const std::vector<ee::ImagePtr>& images) = 0;
 
 	// bin
 	virtual int SizeOfPackToBin() const = 0;
@@ -38,7 +40,7 @@ public:
 		const ee::TexturePacker& tp, float scale) const = 0;
 	virtual int SizeOfUnpackFromBin() const = 0;
 	virtual void UnpackFromBin(uint8_t** ptr, 
-		const std::vector<ee::Image*>& images) = 0;
+		const std::vector<ee::ImagePtr>& images) = 0;
 
 	int GetPkgID() const { return m_pkg_id; }
 	int GetSprID() const { return m_spr_id; }

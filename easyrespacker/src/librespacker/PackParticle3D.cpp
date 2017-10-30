@@ -21,7 +21,7 @@ void PackParticle3D::PackToLuaString(ebuilder::CodeGenerator& gen,
 	return Particle3DToLuaString::Pack(this, gen);
 }
 
-void PackParticle3D::UnpackFromLua(lua_State* L, const std::vector<ee::Image*>& images)
+void PackParticle3D::UnpackFromLua(lua_State* L, const std::vector<ee::ImagePtr>& images)
 {
 	Particle3DFromLua::Unpack(L, this);
 }
@@ -43,7 +43,7 @@ int PackParticle3D::SizeOfUnpackFromBin() const
 	return Particle3DFromBin::Size(this);
 }
 
-void PackParticle3D::UnpackFromBin(uint8_t** ptr, const std::vector<ee::Image*>& images)
+void PackParticle3D::UnpackFromBin(uint8_t** ptr, const std::vector<ee::ImagePtr>& images)
 {
 	Particle3DFromBin::Unpack(ptr, this);
 }

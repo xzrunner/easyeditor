@@ -9,7 +9,7 @@
 #include <ee/color_config.h>
 #include <ee/Sprite.h>
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <sprite2/Particle3d.h>
 #include <sprite2/CameraType.h>
 
@@ -30,7 +30,7 @@ StageCanvas::~StageCanvas()
 	}
 }
 
-void StageCanvas::SetBackground(ee::Symbol* sym)
+void StageCanvas::SetBackground(const ee::SymPtr& sym)
 {
 	cu::RefCountObjAssign<ee::Symbol>(m_background, sym);
 }
@@ -39,8 +39,8 @@ void StageCanvas::OnDrawSprites() const
 {
 	DrawBackground();
 
-	std::vector<ee::Sprite*> sprs;
-	static_cast<StagePanel*>(m_stage_panel)->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs), ee::DT_VISIBLE);
+	std::vector<ee::SprPtr> sprs;
+	static_cast<StagePanel*>(m_stage_panel)->TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs), ee::DT_VISIBLE);
 	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
 		ee::SpriteRenderer::Instance()->Draw(sprs[i]);
 	}

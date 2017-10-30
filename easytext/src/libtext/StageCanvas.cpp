@@ -9,7 +9,7 @@
 #include <ee/Config.h>
 #include <ee/Math2D.h>
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <sprite2/CameraType.h>
 
 namespace etext
@@ -25,23 +25,16 @@ StageCanvas::StageCanvas(StagePanel* stage)
 }
 
 StageCanvas::StageCanvas(StagePanel* stage, wxGLContext* glctx,
-						 ee::Sprite* edited, const ee::MultiSpritesImpl* bg_sprites)
+						 ee::SprPtr edited, const ee::MultiSpritesImpl* bg_sprites)
 	: ee::CameraCanvas(stage, stage->GetStageImpl(), s2::CAM_ORTHO2D, glctx)
 	, m_stage(stage)
 	, m_edited(edited)
 	, m_sprite_impl(bg_sprites)
 	, m_bg(NULL)
 {
-	std::vector<ee::Sprite*> sprs;
-	m_sprite_impl->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	m_sprite_impl->TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	m_bg = ee::draw_all_to_one_spr(sprs, m_edited);
-}
-
-StageCanvas::~StageCanvas()
-{
-	if (m_bg) {
-		m_bg->RemoveReference();
-	}
 }
 
 void StageCanvas::OnDrawSprites() const
@@ -50,10 +43,10 @@ void StageCanvas::OnDrawSprites() const
 	{
 		s2::RenderParams params;
 		params.mt = m_edited->GetLocalMat().Inverted();
-		ee::SpriteRenderer::Instance()->Draw(m_bg, params);
+		ee::SpriteRenderer::Instance()->Draw(m_bg.get(), params);
 	}
 
-	ee::SpriteRenderer::Instance()->Draw(m_edited);
+	ee::SpriteRenderer::Instance()->Draw(m_edited.get());
 
 	DrawSprBound();
 
@@ -64,7 +57,7 @@ void StageCanvas::DrawSprBound() const
 {
 	s2::RVG::SetColor(s2::Color(204, 102, 102));
 
-	const Sprite* font = static_cast<const Sprite*>(m_edited);
+	auto font = std::dynamic_pointer_cast<Sprite>(m_edited);
 	const s2::Textbox& tb = font->GetTextbox();
 	float hw = tb.width * 0.5f,
 		  hh = tb.height * 0.5f;

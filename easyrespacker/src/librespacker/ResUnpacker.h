@@ -1,9 +1,9 @@
 #ifndef _EASYRESPACKER_RES_UNPACKER_H_
 #define _EASYRESPACKER_RES_UNPACKER_H_
 
-#include <vector>
+#include <ee/Image.h>
 
-namespace ee { class Image; }
+#include <vector>
 
 namespace erespacker
 {
@@ -13,10 +13,10 @@ class ResUnpacker
 public:
 
 	void UnpackLua(const std::string& filepath, 
-		const std::vector<ee::Image*>& images);
+		const std::vector<ee::ImagePtr>& images);
 
 	void UnpackBin(const std::string& filepath, 
-		const std::vector<ee::Image*>& images);
+		const std::vector<ee::ImagePtr>& images);
 
 }; // ResUnpacker
 

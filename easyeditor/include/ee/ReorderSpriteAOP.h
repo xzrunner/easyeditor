@@ -2,6 +2,7 @@
 #define _EASYEDITOR_REORDER_SPRITE_AOP_H_
 
 #include "AtomicOP.h"
+#include "Sprite.h"
 
 namespace ee
 {
@@ -9,19 +10,18 @@ namespace ee
 class ReorderSpriteAOP : public AtomicOP
 {
 public:
-	ReorderSpriteAOP(const std::vector<Sprite*>& sprs, bool up);
-	virtual ~ReorderSpriteAOP();
+	ReorderSpriteAOP(const std::vector<SprPtr>& sprs, bool up);
 
 	virtual void Undo();
 	virtual void Redo();
 
-	virtual Json::Value Store(const std::vector<Sprite*>& sprs) const;
+	virtual Json::Value Store(const std::vector<SprPtr>& sprs) const;
 
 private:
 	void Reorder(bool up);
 
 private:
-	std::vector<Sprite*> m_sprs;
+	std::vector<SprPtr> m_sprs;
 	bool m_up;
 
 }; // ReorderSpriteAOP

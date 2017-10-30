@@ -30,7 +30,7 @@ private:
 private:
 	StageCanvas3D* m_canvas;
 
-	std::vector<ee::Image*> m_images;
+	std::vector<ee::ImagePtr> m_images;
 	std::vector<sm::vec2> m_positions;
 
 }; // Projection3DScene

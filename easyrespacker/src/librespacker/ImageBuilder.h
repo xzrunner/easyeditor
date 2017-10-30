@@ -4,9 +4,11 @@
 #include "INodeBuilder.h"
 #include "PackPicture.h"
 
+#include <ee/Sprite.h>
+
 #include <map>
 
-namespace ee { class ImageSprite; class Sprite; }
+namespace ee { class ImageSprite; }
 namespace s2 { class Symbol; }
 
 #define IMAGE_BUILDER_CACHE
@@ -24,15 +26,15 @@ public:
 
 	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
 
-	const IPackNode* Create(const ee::ImageSprite* spr);
+	const IPackNode* Create(const std::shared_ptr<const ee::ImageSprite>& spr);
 
-	static void LoadPictureQuad(const ee::ImageSprite* img, PackPicture::Quad& quad, bool force_mat = false);
+	static void LoadPictureQuad(const std::shared_ptr<const ee::ImageSprite>& img, PackPicture::Quad& quad, bool force_mat = false);
 	
-	static void TransScreen(PackPicture::Quad& quad, const ee::Sprite* spr);
+	static void TransScreen(PackPicture::Quad& quad, const ee::SprConstPtr& spr);
 
 private:
 #ifdef IMAGE_BUILDER_CACHE
-	std::map<const s2::Symbol*, const PackPicture*> m_nodes;
+	std::map<s2::SymConstPtr, const PackPicture*> m_nodes;
 #else
 	std::vector<PackPicture*> m_nodes;
 #endif // IMAGE_BUILDER_CACHE

@@ -16,13 +16,7 @@ class Sprite : public s2::Particle3dSprite, public ee::Sprite
 {
 public:
 	Sprite();
-	Sprite(Symbol* sym);
-
-	/**
-	 *  @interface
-	 *    s2::Sprite
-	 */
-	virtual Sprite* Clone() const { return new Sprite(*this); }
+	Sprite(const s2::SymPtr& sym, uint32_t id = -1);
 
 	/**
 	 *  @interface
@@ -40,10 +34,12 @@ public:
 
 	void OnActive();
 
-	static ee::Sprite* Create(ee::Symbol* sym);
+	static ee::SprPtr Create(const std::shared_ptr<ee::Symbol>& sym);
 
 private:
 	sm::Quaternion m_dir;
+
+	SPRITE_CLONE_FUNC(Sprite)
 
 }; // Sprite
 

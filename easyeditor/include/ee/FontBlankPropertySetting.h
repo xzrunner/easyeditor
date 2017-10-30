@@ -2,15 +2,14 @@
 #define _EASYEDITOR_FONT_BLANK_PROPERTY_SETTING_H_
 
 #include "SpritePropertySetting.h"
+#include "Sprite.h"
 
 namespace ee
 {
-class FontBlankSprite;
-
 class FontBlankPropertySetting : public SpritePropertySetting
 {
 public:
-	FontBlankPropertySetting(EditPanelImpl* stage, FontBlankSprite* spr);
+	FontBlankPropertySetting(EditPanelImpl* stage, const SprPtr& spr);
 
 	virtual void OnPropertyGridChange(const std::string& name, const wxAny& value);
 

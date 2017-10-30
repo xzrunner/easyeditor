@@ -134,7 +134,7 @@ void DBHelper::FixNodeRef(const Database& db, const LeafNode* removed)
 		std::string path = db.GetDirPath() + "\\" + node->GetPath();
 
 		const LeafNode* leaf = static_cast<const LeafNode*>(node);
-		const_cast<std::set<int>&>(leaf->GetNodes(false)).erase(removed->GetID());
+		const_cast<std::set<int>>(leaf->GetNodes(false)).erase(removed->GetID());
 
 		JsonResDelOP del_op(path, rm_path);
 		del_op.Do();

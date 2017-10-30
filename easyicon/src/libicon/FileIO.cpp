@@ -14,18 +14,18 @@
 namespace eicon
 {
 
-void FileIO::StoreToFile(const char* filename, const Icon* icon)
+void FileIO::StoreToFile(const char* filename, const Icon& icon)
 {
 	Json::Value value;
 
 	std::string dir = ee::FileHelper::GetFileDir(filename);
 
-	const ee::ImageSymbol* ee_img = dynamic_cast<const ee::ImageSymbol*>(icon->GetImage());
+	auto ee_img = std::dynamic_pointer_cast<ee::ImageSymbol>(icon.GetImage());
 	value["image"] = ee::FileHelper::GetRelativePath(dir, ee_img->GetFilepath());
 
-	value["type"] = icon->GetIconDesc();
+	value["type"] = icon.GetIconDesc();
 
-	icon->StoreToFile(value);
+	icon.StoreToFile(value);
 	
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -35,7 +35,7 @@ void FileIO::StoreToFile(const char* filename, const Icon* icon)
 	fout.close();
 }
 
-Icon* FileIO::LoadFromFile(const char* filename)
+std::unique_ptr<s2::Icon> FileIO::LoadFromFile(const char* filename)
 {
 	Json::Value value;
 	Json::Reader reader;
@@ -47,13 +47,12 @@ Icon* FileIO::LoadFromFile(const char* filename)
 
 	std::string dir = ee::FileHelper::GetFileDir(filename);
 	std::string path = ee::FileHelper::GetAbsolutePath(dir, value["image"].asString());
-	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(path);
-	ee::ImageSymbol* img_sym = dynamic_cast<ee::ImageSymbol*>(sym);
+	auto sym = ee::SymbolMgr::Instance()->FetchSymbol(path);
+	auto img_sym = std::dynamic_pointer_cast<ee::ImageSymbol>(sym);
 
-	Icon* icon = IconFactory::CreateIconFromFile(value);
+	auto icon = IconFactory::CreateIconFromFile(value);
 	icon->SetImage(img_sym);
-	icon->LoadFromFile(value);
-	img_sym->RemoveReference();
+	dynamic_cast<Icon*>(icon.get())->LoadFromFile(value);
 
 	return icon;
 }

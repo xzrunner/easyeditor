@@ -2,18 +2,18 @@
 #define _EASYEDITOR_SHAPE_SELECTION_H_
 
 #include "Shape.h"
-#include "ObjSelectionSet.h"
+#include "SelectionSet.h"
 
 namespace ee
 {
 
-class ShapeSelection : public ObjSelectionSet<Shape>
+class ShapeSelection : public SelectionSet<Shape>
 {
 public:
 	virtual void Clear();
 
-	virtual void Add(Shape* item);
-	virtual void Remove(Shape* item);
+	virtual void Add(const ShapePtr& item);
+	virtual void Remove(const ShapePtr& item);
 
 }; // ShapeSelection
 

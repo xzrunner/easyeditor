@@ -12,12 +12,12 @@
 #include <uniaudio/DecoderFactory.h>
 #include <uniaudio/Decoder.h>
 #include <uniaudio/openal/Source.h>
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <sprite2/RenderParams.h>
 #include <sprite2/BoundingBox.h>
 #include <sprite2/SymType.h>
 #include <gum/FilepathHelper.h>
-#include <gum/GUM_Audio.h>
+#include <gum/Audio.h>
 
 namespace eaudio
 {
@@ -30,14 +30,14 @@ Symbol::~Symbol()
 {
 }
 
-s2::RenderReturn Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
+s2::RenderReturn Symbol::DrawTree(cooking::DisplayList* dlist, const s2::RenderParams& rp, const s2::Sprite* spr) const
 {
 	if (!spr) {
 		return s2::RENDER_NO_DATA;
 	}
 
 	if (ee::Blackboard::Instance()->visible_audio) {
-		S2_MAT mt = spr->GetLocalMat() * params.mt;
+		S2_MAT mt = spr->GetLocalMat() * rp.mt;
 		DrawBackground(dynamic_cast<const Sprite*>(spr), mt);	
 	}
 	
@@ -51,7 +51,7 @@ sm::rect Symbol::GetBoundingImpl(const s2::Sprite* spr, const s2::Actor* actor, 
 
 bool Symbol::LoadResources()
 {
-	if (!gum::FilepathHelper::Exists(m_filepath)) {
+	if (!gum::FilepathHelper::Exists(m_filepath.c_str())) {
 		return false;
 	}
 
@@ -83,10 +83,10 @@ bool Symbol::LoadResourcesStatic()
 		std::vector<std::string> children;
 		ecomplex::FileLoader::LoadChildren(m_filepath, children);
 
-		std::vector<ua::AudioData*> list;
+		CU_VEC<ua::AudioData*> list;
 		for (int i = 0, n = children.size(); i < n; ++i) {
 			if (ee::SymbolFile::Instance()->Type(children[i]) == s2::SYM_AUDIO) {
-				list.push_back(new ua::AudioData(children[i]));
+				list.push_back(new ua::AudioData(children[i].c_str()));
 			}
 		}
 
@@ -94,26 +94,20 @@ bool Symbol::LoadResourcesStatic()
 			return false;
 		} else if (list.size() == 1) {
 			ua::AudioContext* ctx = gum::Audio::Instance()->GetContext();
-			ua::Source* source = ctx->CreateSource(list[0]);
-			SetSource(source);
-			source->RemoveReference();
+			SetSource(ctx->CreateSource(list[0]));
 		} else {
 			ua::AudioData* data = new ua::AudioData(list);
 			ua::AudioContext* ctx = gum::Audio::Instance()->GetContext();
-			ua::Source* source = ctx->CreateSource(data);
-			SetSource(source);
-			source->RemoveReference();
+			SetSource(ctx->CreateSource(data));
 			delete data;
 			for_each(list.begin(), list.end(), ee::DeletePointerFunctor<ua::AudioData>());
 		}
 	}
 	else
 	{
-		ua::AudioData* data = new ua::AudioData(m_filepath);
+		ua::AudioData* data = new ua::AudioData(m_filepath.c_str());
 		ua::AudioContext* ctx = gum::Audio::Instance()->GetContext();
-		ua::Source* source = ctx->CreateSource(data);
-		SetSource(source);
-		source->RemoveReference();
+		SetSource(ctx->CreateSource(data));
 		delete data;
 	}
 
@@ -122,16 +116,13 @@ bool Symbol::LoadResourcesStatic()
 
 bool Symbol::LoadResourcesStream()
 {
-	ua::Decoder* decoder = ua::DecoderFactory::Create(m_filepath);
+	auto decoder = ua::DecoderFactory::Create(m_filepath.c_str());
 	if (!decoder) {
 		return false;
 	}
 
 	ua::AudioContext* ctx = gum::Audio::Instance()->GetContext();
-	ua::Source* source = ctx->CreateSource(decoder);
-	SetSource(source);
-	source->RemoveReference();
-	decoder->RemoveReference();
+	SetSource(ctx->CreateSource(decoder));
 
 	return true;
 }

@@ -33,7 +33,7 @@ private:
 	public:
 		Visitor(StagePanel* stage, const e3d::Camera& cam, const sm::ivec2& start, const sm::ivec2& end) 
 			: m_stage(stage), m_cam(cam), m_start(start), m_end(end) {}
-		virtual void Visit(ee::Sprite* spr, bool& next);
+		virtual void Visit(const ee::SprPtr& spr, bool& next);
 
 	private:
 		StagePanel* m_stage;

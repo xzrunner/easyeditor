@@ -16,7 +16,7 @@ static const char* FILENAME = "symbol_cfg.json";
 
 SymbolCfg* SymbolCfg::m_instance = NULL;
 
-void SymbolCfg::QueryType(const ee::Symbol* sym, std::string& type) const
+void SymbolCfg::QueryType(const ee::SymConstPtr& sym, std::string& type) const
 {
 	std::string filepath = sym->GetFilepath();
 	filepath = ee::FileHelper::FormatFilepathAbsolute(filepath);

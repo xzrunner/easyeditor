@@ -6,14 +6,13 @@
 namespace ee
 {
 
-RectQueryVisitor::RectQueryVisitor(const sm::rect& rect, bool contain, std::vector<Sprite*>& result)
+RectQueryVisitor::RectQueryVisitor(const sm::rect& rect, bool contain)
 	: m_rect(rect)
 	, m_contain(contain)
-	, m_result(result)
 {
 }
 
-void RectQueryVisitor::Visit(Sprite* spr, bool& next)
+void RectQueryVisitor::Visit(const SprPtr& spr, bool& next)
 {
 	next = true;
 	if (!spr->IsEditable()) {
@@ -24,9 +23,9 @@ void RectQueryVisitor::Visit(Sprite* spr, bool& next)
 		return;
 	}
 	if (m_contain && sm::is_rect_contain_rect(m_rect, bv->GetSize())) {
-		m_result.push_back(spr);
+		m_selected.push_back(spr);
 	} else if (!m_contain && bv->IsIntersect(m_rect)) {
-		m_result.push_back(spr);
+		m_selected.push_back(spr);
 	}
 }
 

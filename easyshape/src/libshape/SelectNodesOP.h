@@ -7,6 +7,7 @@
 #include <ee/Visitor.h>
 #include <ee/Shape.h>
 
+#include <cu/cu_stl.h>
 #include <SM_Rect.h>
 
 #include <vector>
@@ -32,7 +33,7 @@ public:
 	virtual bool OnDraw() const;
 	virtual bool Clear();
 
-	void FetchSelectedNode(std::vector<sm::vec2>& nodes) const;
+	void FetchSelectedNode(CU_VEC<sm::vec2>& nodes) const;
 
 	static int GetThreshold();
 
@@ -46,16 +47,16 @@ protected:
 	struct ChainSelectedNodes
 	{
 	public:
-		EditedPolyShape* polyline;
-		std::vector<sm::vec2> selectedNodes;
+		std::shared_ptr<EditedPolyShape> polyline;
+		CU_VEC<sm::vec2> selectedNodes;
 	}; // ChainSelectedNodes
 
 private:
-	class PosQueryVisitor : public ee::Visitor<ee::Shape>
+	class PosQueryVisitor : public ee::RefVisitor<ee::Shape>
 	{
 	public:
 		PosQueryVisitor(const sm::vec2& pos, ChainSelectedNodes** result);
-		virtual void Visit(ee::Shape* shape, bool& next);
+		virtual void Visit(const ee::ShapePtr& shape, bool& next);
 
 	private:
 		const sm::vec2& m_pos;
@@ -64,20 +65,20 @@ private:
 
 	}; // PosQueryVisitor
 
-	class RectQueryVisitor : public ee::Visitor<ee::Shape>
+	class RectQueryVisitor : public ee::RefVisitor<ee::Shape>
 	{
 	public:
-		RectQueryVisitor(const sm::rect& rect, std::vector<ChainSelectedNodes*>& result);
-		virtual void Visit(ee::Shape* shape, bool& next);
+		RectQueryVisitor(const sm::rect& rect, CU_VEC<ChainSelectedNodes*>& result);
+		virtual void Visit(const ee::ShapePtr& shape, bool& next);
 
 	private:
 		const sm::rect& m_rect;
-		std::vector<ChainSelectedNodes*>& m_result;
+		CU_VEC<ChainSelectedNodes*>& m_result;
 
 	}; // RectQueryVisitor
 
 protected:
-	std::vector<ChainSelectedNodes*> m_node_selection;
+	CU_VEC<ChainSelectedNodes*> m_node_selection;
 
 private:
 	ee::MultiShapesImpl* m_shape_impl;

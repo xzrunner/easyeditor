@@ -1,9 +1,10 @@
 #ifndef _EASYEDITOR_BITMAP_H_
 #define _EASYEDITOR_BITMAP_H_
 
-#include <CU_RefCountObj.h>
-
 #include <wx/bitmap.h>
+
+#include <string>
+#include <memory>
 
 #include <stdint.h>
 
@@ -12,12 +13,12 @@ namespace ee
 
 class Symbol;
 
-class Bitmap : public cu::RefCountObj
+class Bitmap
 {
 public:
 	Bitmap(const std::string& filepath);
 	Bitmap(const std::string& filepath, uint8_t* pixels, int w, int h, int fmt);
-	Bitmap(const Symbol* sym);
+	Bitmap(const Symbol& sym);
 	virtual ~Bitmap();
 
 	const wxBitmap* GetLargeBmp() const { return m_bmp_large; }
@@ -26,7 +27,7 @@ public:
 private:
 	bool LoadFromFile(const std::string& filepath);
 	void LoadFromData(uint8_t* pixels, int w, int h, int fmt);
-	void LoadFromSym(const Symbol* sym);
+	void LoadFromSym(const Symbol& sym);
 
 	void InitBmp(const wxImage& image, bool scale);
 
@@ -39,6 +40,8 @@ private:
 	wxBitmap* m_bmp_small;
 
 }; // Bitmap
+
+using BitmapPtr = std::shared_ptr<Bitmap>;
 
 }
 

@@ -6,7 +6,7 @@
 #include <ee/FileHelper.h>
 #include <ee/panel_msg.h>
 #include <ee/ConfirmDialog.h>
-#include <ee/SpriteFactory.h>
+#include <ee/SpritePool.h>
 #include <ee/PropertySettingPanel.h>
 #include <ee/SymbolFile.h>
 
@@ -21,14 +21,14 @@ BEGIN_EVENT_TABLE(EditDialog, wxDialog)
 	EVT_CLOSE(EditDialog::OnCloseEvent)
 END_EVENT_TABLE()
 
-EditDialog::EditDialog(wxWindow* parent, Symbol* sym)
+EditDialog::EditDialog(wxWindow* parent, const std::shared_ptr<Symbol>& sym)
  	: wxDialog(parent, wxID_ANY, "Edit Shape", wxDefaultPosition, 
 	wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 	, m_stage(NULL)
 {
 	InitLayout(sym);
 
-	std::string filepath = ee::FileHelper::GetFilenameAddTag(
+	auto filepath = ee::FileHelper::GetFilenameAddTag(
 		sym->GetFilepath(), ee::SymbolFile::Instance()->Tag(s2::SYM_SHAPE), "json");
 	if (ee::FileHelper::IsFileExist(filepath)) {
 		m_stage->LoadFromFile(filepath.c_str());
@@ -49,7 +49,7 @@ void EditDialog::onSize(wxSizeEvent& event)
 	Refresh(true);
 }
 
-void EditDialog::InitLayout(Symbol* sym)
+void EditDialog::InitLayout(const std::shared_ptr<Symbol>& sym)
 {
 	wxSplitterWindow* vertical = new wxSplitterWindow(this);
 	wxSplitterWindow* horizontal = new wxSplitterWindow(vertical);
@@ -74,7 +74,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 	}
 
 	ee::Symbol& sym = const_cast<ee::Symbol&>(m_stage->GetSymbol());
-	const std::string& filepath = sym.GetFilepath();
+	auto& filepath = sym.GetFilepath();
 
 	ee::ConfirmDialog dlg(this);
 	int val = dlg.ShowModal();
@@ -82,7 +82,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 	{
 		dynamic_cast<Symbol&>(sym).StoreToFile(filepath.c_str());
 		sym.RefreshThumbnail(filepath);
-		ee::SpriteFactory::Instance()->UpdateBoundings(sym);
+		ee::SpritePool::Instance()->UpdateBoundings(sym);
 		Destroy();
 	}
 	else if (val == wxID_NO)

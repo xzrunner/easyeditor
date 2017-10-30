@@ -25,17 +25,16 @@ bool PasteSymbolOP::OnMouseLeftDown(int x, int y)
 {
 	if (ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
-	Symbol* sym = m_library->GetSymbol();
+	auto sym = m_library->GetSymbol();
 	if (sym)
 	{
 		m_pos = m_stage->TransPosScrToProj(x, y);
-		Sprite* spr = SpriteFactory::Instance()->CreateRoot(sym);
+		auto spr = SpriteFactory::Instance()->CreateRoot(sym);
 		spr->Translate(m_pos);
 		if (m_scale) {
 			spr->SetScale(sm::vec2(*m_scale, *m_scale));
 		}
 		InsertSpriteSJ::Instance()->Insert(spr);
-		spr->RemoveReference();
 	}
 
 	return false;
@@ -55,13 +54,13 @@ bool PasteSymbolOP::OnDraw() const
 {
 	if (ZoomViewOP::OnDraw()) return true;
 
-	Symbol* sym = m_library->GetSymbol();
+	auto sym = m_library->GetSymbol();
 	if (sym && m_pos.IsValid())
 	{
 		if (m_scale) {
-			ee::SpriteRenderer::Instance()->Draw(sym, s2::RenderParams(), m_pos, 0.0f, sm::vec2(*m_scale, *m_scale));
+			ee::SpriteRenderer::Instance()->Draw(sym.get(), s2::RenderParams(), m_pos, 0.0f, sm::vec2(*m_scale, *m_scale));
 		} else {
-			ee::SpriteRenderer::Instance()->Draw(sym, s2::RenderParams(), m_pos);
+			ee::SpriteRenderer::Instance()->Draw(sym.get(), s2::RenderParams(), m_pos);
 		}
 	}
 

@@ -3,7 +3,7 @@
 namespace ee
 {
 
-SINGLETON_DEFINITION(EditedFileStack)
+CU_SINGLETON_DEFINITION(EditedFileStack)
 
 EditedFileStack::EditedFileStack()
 {

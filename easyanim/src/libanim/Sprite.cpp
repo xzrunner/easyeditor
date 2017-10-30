@@ -28,7 +28,7 @@ Sprite& Sprite::operator = (const Sprite& spr)
 	return *this;
 }
 
-Sprite::Sprite(Symbol* sym)
+Sprite::Sprite(const s2::SymPtr& sym, uint32_t id)
 	: s2::Sprite(sym)
 	, s2::AnimSprite(sym)
 	, ee::Sprite(sym)
@@ -36,18 +36,18 @@ Sprite::Sprite(Symbol* sym)
 {
 }
 
-void Sprite::Load(const Json::Value& val, const std::string& dir)
+void Sprite::Load(const Json::Value& val, const CU_STR& dir)
 {
 	ee::Sprite::Load(val);
 
-	gum::AnimSprLoader loader(this);
+	gum::AnimSprLoader loader(*this);
 	loader.LoadJson(val, dir);
 
 	const Json::Value& anim_val = val["animation"];
 	m_static_time = anim_val["static_time"].asInt();
 }
 
-void Sprite::Store(Json::Value& val, const std::string& dir) const
+void Sprite::Store(Json::Value& val, const CU_STR& dir) const
 {
 	ee::Sprite::Store(val);
 
@@ -69,7 +69,7 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 
 ee::PropertySetting* Sprite::CreatePropertySetting(ee::EditPanelImpl* stage)
 {
-	return new PropertySetting(stage, this);
+	return new PropertySetting(stage, std::dynamic_pointer_cast<Sprite>(shared_from_this()));
 }
 
 void Sprite::SetStaticTime(int static_time)
@@ -83,9 +83,9 @@ bool Sprite::IsActive() const
 	return m_state.GetOrigin().IsActive(); 
 }
 
-ee::Sprite* Sprite::Create(ee::Symbol* sym) 
+ee::SprPtr Sprite::Create(const std::shared_ptr<ee::Symbol>& sym) 
 {
-	return new Sprite(static_cast<Symbol*>(sym));
+	return std::make_shared<Sprite>(sym);
 }
 
 }

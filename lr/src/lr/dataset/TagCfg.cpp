@@ -38,9 +38,9 @@ TagCfg::TagCfg()
 	}
 }
 
-std::string TagCfg::Query(const ee::Symbol* sym) const
+std::string TagCfg::Query(const ee::SymConstPtr& sym) const
 {
-	std::map<const ee::Symbol*, std::string>::iterator itr = m_cache.find(sym);
+	std::map<const ee::SymPtr&, std::string>::iterator itr = m_cache.find(sym);
 	if (itr != m_cache.end()) {
 		return itr->second;
 	}

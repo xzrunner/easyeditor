@@ -4,7 +4,7 @@
 namespace ee
 {
 
-OffsetSpriteAOP::OffsetSpriteAOP(Sprite* spr, 
+OffsetSpriteAOP::OffsetSpriteAOP(const SprPtr& spr,
 								 const sm::vec2& new_offset, 
 								 const sm::vec2& old_offset)
 	: m_spr(spr)
@@ -23,7 +23,7 @@ void OffsetSpriteAOP::Redo()
 	m_spr->SetOffset(m_new_offset);
 }
 
-void OffsetSpriteAOP::Copy(const std::vector<ee::Sprite*>& sprs)
+void OffsetSpriteAOP::Copy(const std::vector<SprPtr>& sprs)
 {
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
 		sprs[i]->SetOffset(m_new_offset);
@@ -31,7 +31,7 @@ void OffsetSpriteAOP::Copy(const std::vector<ee::Sprite*>& sprs)
 }
 
 // todo
-Json::Value OffsetSpriteAOP::Store(const std::vector<Sprite*>& sprs) const
+Json::Value OffsetSpriteAOP::Store(const std::vector<SprPtr>& sprs) const
 {
 	Json::Value ret;
 	return ret;

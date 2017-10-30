@@ -25,10 +25,10 @@ private:
 	static KeyFrame* LoadFrame(Layer* layer, const Json::Value& frame_val,
 		const std::string& dir);
 	static void LoadLerp(KeyFrame* frame, const Json::Value& val);
-	static ee::Sprite* LoadActor(const Json::Value& actor_val,
+	static ee::SprPtr LoadActor(const Json::Value& actor_val,
 		const std::string& dir);
 	static void LoadSkeleton(const Json::Value& skeleton_val, 
-		const std::vector<ee::Sprite*>& sprs, SkeletonData& skeleton);
+		const std::vector<ee::SprPtr>& sprs, SkeletonData& skeleton);
 
 }; // DefaultFileLoader
 

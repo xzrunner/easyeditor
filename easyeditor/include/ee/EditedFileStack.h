@@ -1,7 +1,7 @@
 #ifndef _EASYEDITOR_EDITED_FILE_STACK_H_
 #define _EASYEDITOR_EDITED_FILE_STACK_H_
 
-#include <CU_Singleton.h>
+#include <cu/cu_macro.h>
 
 #include <string>
 #include <vector>
@@ -24,7 +24,7 @@ public:
 private:
 	std::vector<std::string> m_files;
 
-	SINGLETON_DECLARATION(EditedFileStack)
+	CU_SINGLETON_DECLARATION(EditedFileStack)
 
 }; // EditedFileStack
 

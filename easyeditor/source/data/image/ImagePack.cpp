@@ -206,26 +206,26 @@ void ImagePack::AddImage(const uint8_t* src_buf, int src_w, int src_h, int dst_x
 	}
 }
 
-void ImagePack::AddImage(const ImageData* img, int x, int y, int w, int h, bool rotate, bool clockwise, 
+void ImagePack::AddImage(const ImageData& img, int x, int y, int w, int h, bool rotate, bool clockwise, 
 						 bool bpp4, int extrude_left, int extrude_bottom, int extrude_right, int extrude_up)
 {
-	int sw = img->GetWidth(),
-		sh = img->GetHeight();
+	int sw = img.GetWidth(),
+		sh = img.GetHeight();
 	PackType type = PT_NORMAL;
 	if (rotate) {
 		type = clockwise ? PT_CLOCKWISE : PT_ANTICLOCKWISE;
 	}
 
 	try {
-		AddImage(img->GetPixelData(), sw, sh, x, y, type, bpp4, extrude_left, extrude_bottom, extrude_right, extrude_up);
+		AddImage(img.GetPixelData(), sw, sh, x, y, type, bpp4, extrude_left, extrude_bottom, extrude_right, extrude_up);
 	} catch (Exception& e) {
-		throw Exception("ImagePack::AddImage: " + img->GetFilepath());
+		throw Exception("ImagePack::AddImage: " + img.GetFilepath());
 	}
 }
 
 void ImagePack::OutputToFile(const std::string& filepath) const
 {
-	gimg_export(filepath.c_str(), m_pixels, m_width, m_height, GPF_RGBA, false);
+	gimg_export(filepath.c_str(), m_pixels, m_width, m_height, GPF_RGBA8, false);
 }
 
 void ImagePack::CopyPixel(const uint8_t* src, int sw, int sh, bool sbpp4,

@@ -4,13 +4,13 @@
 #include "PasteSymbolOP.h"
 #include "PasteSymbolOffsetCMPT.h"
 #include "Visitor.h"
+#include "Sprite.h"
 
 namespace ee
 {
 
 class MultiSpritesImpl;
 class LibraryPanel;
-class Sprite;
 
 class PasteSymbolTileOP : public PasteSymbolOP
 {
@@ -25,19 +25,22 @@ public:
 	virtual bool OnDraw() const;
 
 private:
-	class NearestQueryVisitor : public Visitor<Sprite>
+	class NearestQueryVisitor : public RefVisitor<Sprite>
 	{
 	public:
-		NearestQueryVisitor(const sm::vec2& pos, Sprite** ret);
+		NearestQueryVisitor(const sm::vec2& pos);
 
-		virtual void Visit(Sprite* spr, bool& next);
+		virtual void Visit(const SprPtr& spr, bool& next);
+
+		const SprPtr& GetResult() const { return m_result;  }
 
 	private:
 		const sm::vec2& m_pos;
 
 		float m_dis;
+		
+		SprPtr m_result;
 
-		Sprite** m_result;
 
 	}; // NearestQueryVisitor
 

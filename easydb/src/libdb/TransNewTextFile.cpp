@@ -8,7 +8,7 @@
 #include <easycomplex.h>
 #include <easytext.h>
 
-#include <sprite2/S2_Sprite.h>
+#include <sprite2/Sprite.h>
 #include <sprite2/SymType.h>
 
 namespace edb
@@ -52,15 +52,15 @@ void TransNewTextFile::Run(const std::string& folder)
 		std::string filepath = filename.GetFullPath();
 		if (ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_COMPLEX) 
 		{
-			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+			auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			if (ecomplex::Symbol* complex = dynamic_cast<ecomplex::Symbol*>(sym)) 
 			{
 				bool dirty = false;
-				const std::vector<s2::Sprite*>& children = complex->GetAllChildren();
+				auto& children = complex->GetAllChildren();
 				for (int i = 0, n = children.size(); i < n; ++i) 
 				{
 					s2::Sprite* child = children[i];
-					if (etext::Sprite* text = dynamic_cast<etext::Sprite*>(child)) 
+					if (etext::Sprite* text = std::dynamic_pointer_cast<etext::Sprite>(child)) 
 					{
 						dirty = true;
 						s2::Textbox& tb = text->GetTextbox();
@@ -71,7 +71,6 @@ void TransNewTextFile::Run(const std::string& folder)
 					ecomplex::FileStorer::Store(filepath, complex, ee::FileHelper::GetFileDir(filepath));
 				}
 			}
-			sym->RemoveReference();
 		}
 	}
 }

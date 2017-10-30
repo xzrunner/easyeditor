@@ -13,7 +13,7 @@ class CosineShape : public ee::Shape, public s2::CosineShape
 public:
 	CosineShape() {}
 	CosineShape(const CosineShape& cosine);
-	CosineShape(const std::vector<sm::vec2>& vertices);
+	CosineShape(const CU_VEC<sm::vec2>& vertices);
 
 	/**
 	 *  @interface
@@ -34,7 +34,7 @@ public:
 	virtual void LoadFromFile(const Json::Value& value, const std::string& dir) {}
 	virtual void StoreToFile(Json::Value& value, const std::string& dir) const {}
 
-//	const std::vector<sm::vec2>& getMidPoints() const { return m_midPoints; }
+//	const CU_VEC<sm::vec2>& getMidPoints() const { return m_midPoints; }
 
 protected:
 	virtual void UpdateBounding() { s2::CosineShape::UpdateBounding(); }

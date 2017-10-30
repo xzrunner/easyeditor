@@ -9,7 +9,7 @@
 namespace eimage
 {
 
-RectPostProcessor::RectPostProcessor(const std::vector<Rect>& rects, 
+RectPostProcessor::RectPostProcessor(const CU_VEC<Rect>& rects, 
 									 int width, int height,
 									 bool* ori_pixels)
 	: m_width(width)
@@ -287,7 +287,7 @@ void RectPostProcessor::Reduce()
 	}
 }
 
-void RectPostProcessor::LoadResult(std::vector<Rect>& rects) const
+void RectPostProcessor::LoadResult(CU_VEC<Rect>& rects) const
 {
 	rects.clear();
 	rects.reserve(m_items.size());
@@ -297,7 +297,7 @@ void RectPostProcessor::LoadResult(std::vector<Rect>& rects) const
 	}
 }
 
-void RectPostProcessor::LoadPixels(const std::vector<Rect>& rects, bool* ori_pixels)
+void RectPostProcessor::LoadPixels(const CU_VEC<Rect>& rects, bool* ori_pixels)
 {
 	int sz = m_width * m_height;
 	m_pixels = new Pixel*[sz];
@@ -954,7 +954,7 @@ void RectPostProcessor::CondenseCovered(const Rect& r, PixelCoveredLUT* covered)
 					continue;
 				}
 
-				std::vector<Item*> items;
+				CU_VEC<Item*> items;
 				std::copy(p->m_items.begin(), p->m_items.end(), back_inserter(items));
 				for (int i = 0, n = items.size(); i < n; ++i) {
 					for (int j = 0, m = items.size(); j < m; ++j) {

@@ -3,6 +3,7 @@
 
 #include "IPackNode.h"
 
+#include <cu/cu_stl.h>
 #include <SM_Vector.h>
 
 namespace erespacker
@@ -13,7 +14,7 @@ class PackMesh : public IPackNode
 public:
 	const IPackNode* base;
 
-	std::vector<sm::vec2> tri_texcoords, tri_vertices;
+	CU_VEC<sm::vec2> tri_texcoords, tri_vertices;
 	
 public:	
 	PackMesh() {}
@@ -22,14 +23,14 @@ public:
 	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
 		const ee::TexturePacker& tp, float scale) const;
 	virtual void UnpackFromLua(lua_State* L,
-		const std::vector<ee::Image*>& images);
+		const std::vector<ee::ImagePtr>& images);
 
 	virtual int SizeOfPackToBin() const;
 	virtual void PackToBin(uint8_t** ptr,
 		const ee::TexturePacker& tp, float scale) const;
 	virtual int SizeOfUnpackFromBin() const;
 	virtual void UnpackFromBin(uint8_t** ptr, 
-		const std::vector<ee::Image*>& images);
+		const std::vector<ee::ImagePtr>& images);
 
 }; // PackMesh
 

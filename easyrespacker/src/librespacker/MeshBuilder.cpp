@@ -30,14 +30,14 @@ void MeshBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 	}
 }
 
-const IPackNode* MeshBuilder::Create(const emesh::Symbol* sym)
+const IPackNode* MeshBuilder::Create(const std::shared_ptr<const emesh::Symbol>& sym)
 {
 	PackMesh* node = new PackMesh;
 
-	const s2::Symbol* base = sym->GetMesh()->GetBaseSymbol();
-	node->base = PackNodeFactory::Instance()->Create(dynamic_cast<const ee::Symbol*>(base));
+	auto& base = sym->GetMesh()->GetBaseSymbol();
+	node->base = PackNodeFactory::Instance()->Create(std::dynamic_pointer_cast<const ee::Symbol>(base));
 
-	std::vector<int> triangles;
+	CU_VEC<int> triangles;
 	sym->GetMesh()->DumpToTriangles(node->tri_vertices, node->tri_texcoords, triangles);
 
 	m_nodes.push_back(node);

@@ -15,7 +15,7 @@ public:
 	OpenSymbolDialog(wxWindow* wnd, ee::EditPanelImpl* stage,
 		ee::MultiSpritesImpl* sprites_impl);
 
-	void Open(ee::Sprite* spr);
+	void Open(const ee::SprPtr& spr);
 
 private:
 	void UpdateShapeFromETexture(etexture::Sprite* spr);

@@ -80,7 +80,7 @@ void Frame::OnPreview(wxCommandEvent& event)
 {
 	SettingCfg* cfg = SettingCfg::Instance();
 
-	std::vector<ee::Sprite*> sprs;
+	std::vector<ee::SprPtr> sprs;
 	m_task->GetAllSprite(sprs);
 
 	wxGLContext* ctx = m_task->GetEditPanel()->GetCanvas()->GetGLContext();
@@ -96,13 +96,13 @@ void Frame::OnExtendSetting(wxCommandEvent& event)
 
 void Frame::OnStatistics(wxCommandEvent& event)
 {
-	std::vector<ee::Sprite*> sprs;
+	std::vector<ee::SprPtr> sprs;
 	StagePanel* stage = (StagePanel*)(m_task->GetEditPanel());
-	stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs), ee::DT_ALL);
+	stage->TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs), ee::DT_ALL);
 	int count = sprs.size();
 	int area = 0;
 	for (int i = 0; i < count; ++i) {
-		const ee::Sprite* spr = sprs[i];
+		const ee::SprConstPtr& spr = sprs[i];
 		sm::rect r = spr->GetBounding()->GetSize();
 		area += (r.xmax - r.xmin) * (r.ymax - r.ymin);
 	}
@@ -119,14 +119,14 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 	s2::DrawRT rt(cfg->m_view_width, cfg->m_view_height);
 	StagePanel* stage = (StagePanel*)(m_task->GetEditPanel());
 
-	std::vector<ee::Sprite*> cover_layer, top_layer;
-	std::vector<ee::Sprite*> bg_down_layer, bg_layer, bg_up_layer;
+	std::vector<ee::SprPtr> cover_layer, top_layer;
+	std::vector<ee::SprPtr> bg_down_layer, bg_layer, bg_up_layer;
 
-	std::vector<ee::Sprite*> all_sprites;
-	stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(all_sprites), ee::DT_VISIBLE);
+	std::vector<ee::SprPtr> all_sprites;
+	stage->TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(all_sprites), ee::DT_VISIBLE);
 	for (int i = 0, n = all_sprites.size(); i < n; ++i) 
 	{
-		ee::Sprite* spr = all_sprites[i];
+		auto& spr = all_sprites[i];
 
 		const std::string& tag = spr->GetTag();
 		if (tag.find(TOP_LAYER_TAG) != std::string::npos) {

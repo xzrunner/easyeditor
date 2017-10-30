@@ -47,7 +47,7 @@ void TranslateSpriteState::Translate(const sm::ivec2& first, const sm::ivec2& cu
 //////////////////////////////////////////////////////////////////////////
 
 void TranslateSpriteState::Visitor::
-Visit(ee::Sprite* spr, bool& next)
+Visit(const ee::SprPtr& spr, bool& next)
 {
 	const sm::vec3& old = spr->GetPos3();
 	sm::vec3 last = m_stage->TransPos3ScreenToProject(m_last, old.z);

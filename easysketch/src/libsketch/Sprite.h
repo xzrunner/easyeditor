@@ -13,14 +13,8 @@ class Sprite : public ee::Sprite
 public:
 	Sprite(const Sprite& spr);
 	Sprite& operator = (const Sprite& spr);
-	Sprite(Symbol* sym);
+	Sprite(const s2::SymPtr& sym, uint32_t id = -1);
 	virtual ~Sprite();
-
-	/**
-	 *  @interface
-	 *    s2::Sprite
-	 */
-	virtual Sprite* Clone() const { return new Sprite(*this); }
 
 	const sm::vec3& GetPos3() const { return m_pos3; }
 	void SetPos3(const sm::vec3& pos) { m_pos3 = pos; }
@@ -33,11 +27,13 @@ public:
 		m_ori3 = delta.Rotated(m_ori3);
 	}
 
-	static ee::Sprite* Create(ee::Symbol* sym);
+	static ee::SprPtr Create(const std::shared_ptr<ee::Symbol>& sym);
 
 private:
 	sm::vec3 m_pos3;
 	sm::Quaternion m_ori3;
+
+	SPRITE_CLONE_FUNC(Sprite)
 
 }; // Sprite
 

@@ -16,9 +16,8 @@ bool DrawLoopOP::OnMouseLeftDClick(int x, int y)
 {
 	if (DrawPolylineOP::OnMouseLeftDClick(x, y)) return true;
 
-	ee::Shape* shape = new ChainShape(m_polyline, true);
-	ee::InsertShapeSJ::Instance()->Insert(shape);
-	shape->RemoveReference();
+	auto shape = std::make_unique<ChainShape>(m_polyline, true);
+	ee::InsertShapeSJ::Instance()->Insert(std::move(shape));
 
 	m_polyline.clear();
 	m_curr_pos.MakeInvalid();

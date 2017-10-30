@@ -5,6 +5,8 @@ namespace ee { class EditPanel; }
 
 #include <wx/dialog.h>
 
+#include <memory>
+
 class wxGLContext;
 
 namespace escale9
@@ -15,7 +17,7 @@ class Symbol;
 class EditDialog : public wxDialog
 {
 public:
-	EditDialog(wxWindow* parent, Symbol* sym, wxGLContext* glctx);
+	EditDialog(wxWindow* parent, const std::shared_ptr<Symbol>& sym, wxGLContext* glctx);
 
 private:
 	void InitLayout(wxGLContext* glctx);
@@ -25,7 +27,7 @@ private:
 	void OnCloseEvent(wxCloseEvent& event);
 
 private:
-	Symbol* m_sym;
+	std::shared_ptr<Symbol> m_sym;
 
 	ee::EditPanel* m_stage;
 

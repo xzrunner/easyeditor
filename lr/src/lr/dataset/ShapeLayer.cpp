@@ -16,9 +16,9 @@ ShapeLayer::ShapeLayer(int id, LibraryPanel* library)
 {
 }
 
-bool ShapeLayer::InsertSprite(ee::Sprite* spr)
+bool ShapeLayer::InsertSprite(const ee::SprPtr& spr)
 {
-	etexture::Sprite* tex = dynamic_cast<etexture::Sprite*>(spr);
+	etexture::Sprite* tex = std::dynamic_pointer_cast<etexture::Sprite>(spr);
 	if (!tex) {
 		return Layer::InsertSprite(spr, -1);
 	}
@@ -37,7 +37,7 @@ bool ShapeLayer::InsertSprite(ee::Sprite* spr)
 
 	std::string sname;
 	s2::SprNameMap::Instance()->IDToStr(spr->GetName(), sname);
-	ee::Sprite* base_spr = m_library->GetTerrainLayer()->QuerySprite(sname);
+	ee::SprPtr base_spr = m_library->GetTerrainLayer()->QuerySprite(sname);
 	base_spr->SetUserData(ud);	
 
 	return true;

@@ -13,7 +13,7 @@ namespace lua = ebuilder::lua;
 namespace esprpacker
 {
 
-PackMaskSpr::PackMaskSpr(const emask::Sprite* spr)
+PackMaskSpr::PackMaskSpr(const std::shared_ptr<emask::Sprite>& spr)
 {
 	Init(spr);
 }
@@ -68,10 +68,10 @@ void PackMaskSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 	pack(sym, ptr);
 }
 
-void PackMaskSpr::Init(const emask::Sprite* spr)
+void PackMaskSpr::Init(const std::shared_ptr<emask::Sprite>& spr)
 {
 	m_sym = PackNodeFactory::Instance()->Create(
-		dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
+		std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol()));
 }
 
 }

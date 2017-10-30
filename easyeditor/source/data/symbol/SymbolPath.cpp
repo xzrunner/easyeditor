@@ -6,9 +6,9 @@
 namespace ee
 {
 
-std::string SymbolPath::GetRelativePath(const Symbol* sym, const std::string& dir)
+std::string SymbolPath::GetRelativePath(const Symbol& sym, const std::string& dir)
 {
-	const std::string& filepath = sym->GetFilepath();
+	const std::string& filepath = sym.GetFilepath();
 	if (filepath == SYM_GROUP_TAG ||
 		filepath == SYM_SHAPE_TAG ||
 		filepath == SYM_TEXT_TAG) {

@@ -26,13 +26,13 @@ void Love2dCode::Resolve()
 
 	lua::TableAssign ta(m_gen, "quads");
 
-	std::vector<ee::Sprite*> sprs;
-	Context::Instance()->stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	Context::Instance()->stage->TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	for (size_t i = 0, n = sprs.size(); i < n; ++i)
 	{
-		ee::Sprite* spr = sprs[i];
+		auto& spr = sprs[i];
 
-		const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());
+		const auto sym = std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol());
 		const sm::vec2& pos = spr->GetPosition();
 
 		std::string name = ee::FileHelper::GetFilename(sym->GetFilepath());

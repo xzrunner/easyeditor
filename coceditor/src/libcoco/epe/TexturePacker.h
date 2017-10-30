@@ -27,15 +27,15 @@ public:
 public:
 	TexturePacker(int padding = 1, int extrude = 1);
 
-	void Pack(const std::set<ee::Image*>& images);
+	void Pack(const std::set<ee::ImagePtr>& images);
 
 	void StoreToMemory();
 	void StoreToFile(const std::string& floder, const std::string& filename);
 
-	const sm::rect* Query(ee::Image* image) const;
+	const sm::rect* Query(const ee::ImagePtr& image) const;
 
 private:
-	std::map<ee::Image*, sm::rect> m_map_img2rect;
+	std::map<ee::ImagePtr, sm::rect> m_map_img2rect;
 	
 	int m_edge;
 
@@ -61,7 +61,7 @@ public:
 public:
 	ImageCmp(Type type = e_width) : m_type(type) {}
 
-	bool operator() (const ee::Image* t0, const ee::Image* t1) const 
+	bool operator() (const ee::ImagePtr& t0, const ee::ImagePtr& t1) const
 	{
 		switch (m_type)
 		{

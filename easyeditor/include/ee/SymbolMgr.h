@@ -2,7 +2,10 @@
 #define _EASYEDITOR_SYMBOL_MGR_H_
 
 #include "Visitor.h"
+#include "Symbol.h"
 
+#include <string>
+#include <cu/cu_macro.h>
 #include <sprite2/SymType.h>
 
 #include <map>
@@ -10,34 +13,26 @@
 namespace ee
 {
 
-class Symbol;
-
 class SymbolMgr
 {
 public:
-	static SymbolMgr* Instance();
-
-	Symbol* FetchSymbol(const std::string& filepath, int type = s2::SYM_UNKNOWN);
+	SymPtr FetchSymbol(const std::string& filepath, int type = s2::SYM_UNKNOWN);
 
 	void Clear();
 
-	void Traverse(Visitor<Symbol>& visitor) const;
+	void Traverse(RefVisitor<Symbol>& visitor) const;
 
 	int Size() const {
 		return m_syms.size();
 	}
 
 protected:
-	void Remove(const Symbol* sym);
+	void Remove(const SymPtr& sym);
 
 private:
-	SymbolMgr();
-	~SymbolMgr();
+	std::map<std::string, std::weak_ptr<Symbol>> m_syms;
 
-private:
-	static SymbolMgr* m_instance;
-
-	std::map<std::string, Symbol*> m_syms;
+	CU_SINGLETON_DECLARATION(SymbolMgr);
 
 	friend class Symbol;
 

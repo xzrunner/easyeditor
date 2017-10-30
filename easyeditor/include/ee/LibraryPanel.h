@@ -3,6 +3,7 @@
 
 #include "Observer.h"
 #include "Visitor.h"
+#include "Symbol.h"
 
 #include <wx/wx.h>
 #include <wx/notebook.h>
@@ -12,7 +13,6 @@
 namespace ee
 {
 
-class Symbol;
 class LibraryPage;
 class SymbolMgr;
 class LibraryList;
@@ -34,16 +34,16 @@ public:
 
 	void AddPage(LibraryPage* page, const char* name = NULL);
 
-	Symbol* GetSymbol(int index = -1) const;
+	SymPtr GetSymbol(int index = -1) const;
 
 	void LoadFromSymbolMgr(const SymbolMgr& mgr);
-	void LoadSymbol(Symbol* sym);
+	void LoadSymbol(const SymPtr& sym);
 
-	void Traverse(Visitor<ListItem>& visitor) const;
+	void Traverse(RefVisitor<ListItem>& visitor) const;
 
 	wxWindow* GetNotebook() { return m_notebook; }
 
-	bool AddSymbol(Symbol* sym);
+	bool AddSymbol(const SymPtr& sym);
 
 	void LoadFromConfig();
 	void LoadDefaultSymbol();

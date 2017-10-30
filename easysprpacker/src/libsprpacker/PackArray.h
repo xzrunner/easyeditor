@@ -1,6 +1,8 @@
 #ifndef _EASYSPRPACKER_PACK_ARRAY_H_
 #define _EASYSPRPACKER_PACK_ARRAY_H_
 
+#include <cu/cu_stl.h>
+
 #include <vector>
 
 #include <stdint.h>
@@ -14,11 +16,11 @@ template<typename T, typename TPack, typename TUnPack>
 class PackArray
 {
 public:
-	static void PackToLua(ebuilder::CodeGenerator& gen, const std::vector<T>& array, const std::string& name);
+	static void PackToLua(ebuilder::CodeGenerator& gen, const CU_VEC<T>& array, const std::string& name);
 
-	static int SizeOfUnpackFromBin(const std::vector<T>& array);
-	static int SizeOfPackToBin(const std::vector<T>& array);
-	static void PackToBin(const std::vector<T>& array, uint8_t** ptr);
+	static int SizeOfUnpackFromBin(const CU_VEC<T>& array);
+	static int SizeOfPackToBin(const CU_VEC<T>& array);
+	static void PackToBin(const CU_VEC<T>& array, uint8_t** ptr);
 
 }; // PackArray
 

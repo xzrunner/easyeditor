@@ -3,6 +3,8 @@
 
 #include <wx/dialog.h>
 
+#include <memory>
+
 class wxGLContext;
 
 namespace ee { class MultiSpritesImpl; class LibraryPanel; }
@@ -19,15 +21,15 @@ class EditDialog : public wxDialog
 {
 public:
 	EditDialog(wxWindow* parent, wxGLContext* glctx, 
-		Sprite* spr, const ee::MultiSpritesImpl* sprite_impl);
+		const std::shared_ptr<Sprite>& spr, const ee::MultiSpritesImpl* sprite_impl);
 
 private:
-	void InitLayout(wxGLContext* glctx, Sprite* spr, const ee::MultiSpritesImpl* sprite_impl);
+	void InitLayout(wxGLContext* glctx, const std::shared_ptr<Sprite>& spr, const ee::MultiSpritesImpl* sprite_impl);
 
 	wxWindow* InitLayoutLeft(wxWindow* parent);
 	wxWindow* InitLayoutCenter(wxWindow* parent, wxGLContext* glctx,
-		Sprite* spr, const ee::MultiSpritesImpl* sprite_impl);
-	wxWindow* InitLayoutRight(wxWindow* parent, Sprite* spr);
+		const std::shared_ptr<Sprite>& spr, const ee::MultiSpritesImpl* sprite_impl);
+	wxWindow* InitLayoutRight(wxWindow* parent, const std::shared_ptr<Sprite>& spr);
 
 	void OnCloseEvent(wxCloseEvent& event);
 

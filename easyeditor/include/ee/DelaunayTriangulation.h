@@ -3,7 +3,7 @@
 
 #include <SM_Vector.h>
 
-#include <vector>
+#include <cu/cu_stl.h>
 #include <set>
 
 namespace ee
@@ -17,21 +17,21 @@ public:
 	class NodeCmp;
 
 public:
-	DelaunayTriangulation(const std::vector<sm::vec2>& src, bool bFixBound = true);
+	DelaunayTriangulation(const CU_VEC<sm::vec2>& src, bool bFixBound = true);
 	~DelaunayTriangulation();
 
-	const std::vector<Triangle*>& GetAllTris() const { return m_tris; }
+	const CU_VEC<Triangle*>& GetAllTris() const { return m_tris; }
 	const std::set<Node*, NodeCmp>& GetAllNodes() const { return m_nodes; }
-	void GetAllTrisInRegion(std::vector<std::vector<sm::vec2> >& triBounds, const std::vector<sm::vec2>& region) const;
-	void GetAllTrisInRegion(std::vector<sm::vec2>& triBounds, const std::vector<sm::vec2>& region) const;
+	void GetAllTrisInRegion(CU_VEC<CU_VEC<sm::vec2> >& triBounds, const CU_VEC<sm::vec2>& region) const;
+	void GetAllTrisInRegion(CU_VEC<sm::vec2>& triBounds, const CU_VEC<sm::vec2>& region) const;
 
 	bool InsertNode(const sm::vec2& p);
-	void DeleteNodes(const std::vector<sm::vec2>& pos);
+	void DeleteNodes(const CU_VEC<sm::vec2>& pos);
 
 	bool IsBoundNode(const sm::vec2& n) const;
-	void GetBoundLinePos(std::vector<std::vector<sm::vec2> >& bounds) const;
+	void GetBoundLinePos(CU_VEC<CU_VEC<sm::vec2> >& bounds) const;
 
-	void GetSurroundPos(const sm::vec2& pos, std::vector<sm::vec2>& surround) const;
+	void GetSurroundPos(const sm::vec2& pos, CU_VEC<sm::vec2>& surround) const;
 
 public:
 	class Edge;
@@ -41,7 +41,7 @@ public:
 		Node(const sm::vec2& pos, bool bFake = false) 
 			: m_pos(pos), m_fake(bFake) {}
 
-		void GetSurroundTris(std::vector<const Triangle*>& tris) const;
+		void GetSurroundTris(CU_VEC<const Triangle*>& tris) const;
 
 		bool IsMargin() const;
 
@@ -50,7 +50,7 @@ public:
 		const bool m_fake;
 
 	private:
-		std::vector<Edge*> m_edges;
+		CU_VEC<Edge*> m_edges;
 
 		friend class DelaunayTriangulation;
 	}; // Node
@@ -115,7 +115,7 @@ public:
 
 		void InsertNode(Node* n);
 
-		void GetNodesPos(std::vector<sm::vec2>& pos) const {
+		void GetNodesPos(CU_VEC<sm::vec2>& pos) const {
 			for (size_t i = 0; i < 3; ++i)
 				pos.push_back(m_nodes[i]->m_pos);
 		}
@@ -142,7 +142,7 @@ public:
 		std::pair<Edge*, bool> m_e01, m_e12, m_e20;
 
 		// not have particular order
-		std::vector<Triangle*> m_children, m_parent;
+		CU_VEC<Triangle*> m_children, m_parent;
 
 		friend class DelaunayTriangulation;
 	}; // Triangle
@@ -151,8 +151,8 @@ private:
 	bool InsertNode(Node* n);
 	void DeleteNode(const Node* n);
 
-	void InitSurrondTri(const std::vector<sm::vec2>& src);
-	void InitSrcNodes(const std::vector<sm::vec2>& src);
+	void InitSurrondTri(const CU_VEC<sm::vec2>& src);
+	void InitSrcNodes(const CU_VEC<sm::vec2>& src);
 	void BuildTriangulationStruct();
 	void SetAllDestTris(bool bFixBound = true);
 
@@ -197,7 +197,7 @@ private:
 
 	std::set<Node*, NodeCmp> m_nodes;
 
-	std::vector<Triangle*> m_tris;
+	CU_VEC<Triangle*> m_tris;
 
 }; // DelaunayTriangulation
 

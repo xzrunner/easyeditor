@@ -24,7 +24,7 @@ private:
 	{
 	public:
 		Visitor(AnchorMgr* anchor_mgr) : m_anchor_mgr(anchor_mgr) {}
-		virtual void Visit(ee::Sprite* spr, bool& next);
+		virtual void Visit(const ee::SprPtr& spr, bool& next);
 	private:
 		AnchorMgr* m_anchor_mgr;
 	}; // Visitor

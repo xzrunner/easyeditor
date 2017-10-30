@@ -33,7 +33,7 @@ void LibraryList::Clear()
 	m_selection_set.clear();
 }
 
-void LibraryList::Insert(ListItem* item, int idx)
+void LibraryList::Insert(const ListItemPtr& item, int idx)
 {
 	VerticalImageList::Insert(item, idx);
 	m_selection_set.clear();
@@ -57,21 +57,22 @@ void LibraryList::Swap(int i0, int i1)
 	m_selection_set.clear();
 }
 
-ListItem* LibraryList::GetItem(int index/* = -1*/) const
+ListItemPtr LibraryList::GetItem(int index/* = -1*/) const
 {
 	if (index == -1)
 		index = GetSelection();
 
 	if (index < 0 || index >= (int)m_items.size()) 
-		return NULL;
+		return nullptr;
 	else 
 		return m_items[index];
 }
 
 void LibraryList::ReloadTexture() const
 {
-	for (size_t i = 0, n = m_items.size(); i < n; ++i)
-		static_cast<Symbol*>(m_items[i])->ReloadTexture();
+	for (size_t i = 0, n = m_items.size(); i < n; ++i) {
+		std::static_pointer_cast<Symbol>(m_items[i])->ReloadTexture();
+	}
 }
 
 void LibraryList::OnKeyDown(wxKeyEvent& event)
@@ -109,7 +110,7 @@ void LibraryList::OnMouse(wxMouseEvent& event)
 		text += StringHelper::ToString(*itr) + ",";
 	}
 
-	wxTextDataObject tdo(text);
+	wxTextDataObject tdo(text.c_str());
 	wxDropSource ds(tdo);
 	ds.DoDragDrop(wxDrag_CopyOnly);
 }

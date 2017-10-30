@@ -23,7 +23,7 @@ public:
 
 	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
 
-	const IPackNode* Create(const etext::Sprite* spr);
+	const IPackNode* Create(const std::shared_ptr<const etext::Sprite>& spr);
 
 	void OutputExtraInfo(Json::Value& value) const;
 
@@ -31,7 +31,7 @@ public:
 	void CacheEnd();
 
 private:
-	const IPackNode* QueryCache(const etext::Sprite* spr) const;
+	const IPackNode* QueryCache(const std::shared_ptr<const etext::Sprite>& spr) const;
 
 private:
 	std::vector<const PackLabel*> m_labels;

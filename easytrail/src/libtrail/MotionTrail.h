@@ -4,10 +4,11 @@
 #include <ee/UICallback.h>
 
 #include <SM_Matrix.h>
-#include <CU_RefCountObj.h>
+#include <cu/CU_RefCountObj.h>
 #include <sprite2/Trail.h>
 
 #include <string>
+#include <memory>
 
 namespace s2 { class Symbol; class TrailEmitterCfg; class TrailEmitter; }
 
@@ -20,8 +21,7 @@ namespace etrail
 class MotionTrail : public cu::RefCountObj, public ee::UICallback
 {
 public:
-	MotionTrail(s2::TrailEmitterCfg* cfg);
-	virtual ~MotionTrail();
+	MotionTrail(const std::shared_ptr<const s2::TrailEmitterCfg>& cfg);
 
 	//
 	// UICallback interface
@@ -42,10 +42,10 @@ public:
 	void DelAllSymbol();
 	t2d_symbol* GetSymbol(int idx);
 
-	const s2::TrailEmitterCfg* GetConfig();
+	std::shared_ptr<const s2::TrailEmitterCfg> GetConfig();
 
 private:
-	void Init(const s2::TrailEmitterCfg* cfg);
+	void Init(const std::shared_ptr<const s2::TrailEmitterCfg>& cfg);
 
 public:
 	std::string name;
@@ -53,7 +53,7 @@ public:
 private:
 	mutable s2::TrailRenderParams m_rp;
 
-	s2::TrailEmitter* m_et;
+	std::shared_ptr<s2::TrailEmitter> m_et;
 
 }; // MotionTrail
 

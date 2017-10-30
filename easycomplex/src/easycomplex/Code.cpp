@@ -5,7 +5,7 @@
 #include <easycomplex.h>
 #include <easybuilder.h>
 
-#include <sprite2/S2_Sprite.h>
+#include <sprite2/Sprite.h>
 
 #include <queue>
 
@@ -47,37 +47,37 @@ void Code::ResolveUI(const Symbol& sym)
 		{
 			Node parent = buffer.front(); buffer.pop();
 			const Symbol& parent_symbol = parent.sym;
-			const std::vector<s2::Sprite*>& children = parent_symbol.GetAllChildren();
+			auto& children = parent_symbol.GetAllChildren();
 			for (int i = 0, n = children.size(); i < n; ++i)
 			{
-				ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
+				auto child = std::dynamic_pointer_cast<ee::Sprite>(children[i]);
 				
 				int name_id = child->GetName();
 				if (name_id == -1 || s2::SprNameMap::IsTmpName(name_id)) {
 					continue;
 				}
 
-				std::string cname;
+				CU_STR cname;
 				s2::SprNameMap::Instance()->IDToStr(child->GetName(), cname);
 
 				std::string path, name;
 				if (parent.path.empty()) {
-					path = cname;
-					name = cname;
+					path = cname.c_str();
+					name = cname.c_str();
 				} else {
-					path = parent.path + "." + cname;
-					name = parent.name + "_" + cname;
+					path = parent.path + "." + cname.c_str();
+					name = parent.name + "_" + cname.c_str();
 				}
 
 				gen_path->line(lua::assign("path."+name, "\""+path+"\""));
 
-				if (Sprite* s = dynamic_cast<Sprite*>(child)) 
+				if (auto s = std::dynamic_pointer_cast<Sprite>(child)) 
 				{
-					Node next(*dynamic_cast<Symbol*>(s->GetSymbol()), path);
+					Node next(*std::dynamic_pointer_cast<Symbol>(s->GetSymbol()), path);
 					next.name = name;
 					buffer.push(next);
 				} 
-				else if (ee::FontBlankSprite* s = dynamic_cast<ee::FontBlankSprite*>(child))
+				else if (auto s = std::dynamic_pointer_cast<ee::FontBlankSprite>(child))
 				{
 					text_nodes.push_back(std::make_pair("path."+name, "i18n."+s->GetTextID()));
 				}
@@ -110,17 +110,17 @@ void Code::ResolveText(const Symbol& sym)
  	while (!buffer.empty()) 
  	{
  		const Symbol* parent = buffer.front(); buffer.pop();
-		const std::vector<s2::Sprite*>& children = parent->GetAllChildren();
+		auto& children = parent->GetAllChildren();
  		for (int i = 0, n = children.size(); i < n; ++i)
  		{
-			ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
+			auto child = std::dynamic_pointer_cast<ee::Sprite>(children[i]);
 
 			int name_id = child->GetName();
 			if (name_id == -1 || s2::SprNameMap::IsTmpName(name_id)) {
 				continue;
 			}
 			 
- 			if (ee::FontBlankSprite* s = dynamic_cast<ee::FontBlankSprite*>(child))
+ 			if (auto s = std::dynamic_pointer_cast<ee::FontBlankSprite>(child))
  			{
 				std::string content = s->GetTextContext();
 				size_t pos = 0;

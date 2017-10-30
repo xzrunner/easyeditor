@@ -4,7 +4,7 @@
 #include "Visitor.h"
 
 #include <SM_Vector.h>
-#include <CU_RefCountObj.h>
+#include <cu/CU_RefCountObj.h>
 
 #include <vector>
 
@@ -19,18 +19,18 @@ public:
 
 	virtual void Clear();
 
-	virtual void Add(T* item);
-	virtual void Remove(T* item);
+	virtual void Add(const std::shared_ptr<T>& item);
+	virtual void Remove(const std::shared_ptr<T>& item);
 
 	size_t Size() const;
 	bool IsEmpty() const;
 
-	bool IsExist(T* item) const;
+	bool IsExist(const std::shared_ptr<T>& item) const;
 
-	void Traverse(Visitor<T>& visitor) const;
+	void Traverse(RefVisitor<T>& visitor) const;
 
 protected:
-	std::vector<T*> m_items;
+	std::vector<std::shared_ptr<T>> m_items;
 
 }; // SelectionSet
 

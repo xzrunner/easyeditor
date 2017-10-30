@@ -14,7 +14,7 @@
 namespace eskeleton
 {
 
-void FileStorer::Store(const std::string& filepath, const std::vector<ee::Sprite*>& sprs)
+void FileStorer::Store(const std::string& filepath, const std::vector<ee::SprPtr>& sprs)
 {
 	Json::Value val;
 
@@ -31,18 +31,18 @@ void FileStorer::Store(const std::string& filepath, const std::vector<ee::Sprite
 	fout.close();
 }
 
-Json::Value FileStorer::StoreSprite(const std::vector<ee::Sprite*>& sprs, const std::string& dir)
+Json::Value FileStorer::StoreSprite(const std::vector<ee::SprPtr>& sprs, const std::string& dir)
 {
 	Json::Value val;
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
-		const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(sprs[i]->GetSymbol());
+		const ee::SymPtr& sym = std::dynamic_pointer_cast<ee::Symbol>(sprs[i]->GetSymbol());
 		val[i]["filepath"] = ee::SymbolPath::GetRelativePath(sym, dir);
 		sprs[i]->Store(val[i], dir);
 	}
 	return val;
 }
 
-Json::Value FileStorer::StoreSkeleton(const std::vector<ee::Sprite*>& sprs)
+Json::Value FileStorer::StoreSkeleton(const std::vector<ee::SprPtr>& sprs)
 {
 	std::map<const s2::Joint*, int> map_joint_id;
 	int joint_id = 0;

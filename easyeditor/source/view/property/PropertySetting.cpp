@@ -42,19 +42,19 @@ std::string PropertySetting::GetPGType(wxPropertyGrid* pg) const
 		return "";
 	}
 
-	wxPGProperty* property = pg->GetProperty(TYPE_NAME);
+	wxPGProperty* property = pg->GetProperty(TYPE_NAME.c_str());
 	if (!property) {
 		return "";
 	}
 
 	wxAny value = property->GetValue();
-	return wxANY_AS(value, wxString).ToStdString();
+	return wxANY_AS(value, wxString).ToStdString().c_str();
 }
 
 void PropertySetting::SplitString2Double(const wxAny& value, double* x, double* y)
 {
 	std::vector<std::string> str;
-	StringHelper::Split(wxANY_AS(value, wxString).ToStdString(), ";", str);
+	StringHelper::Split(wxANY_AS(value, wxString).ToStdString().c_str(), ";", str);
 	if (str.size() == 2) {
 		StringHelper::FromString(str[0], *x);
 		StringHelper::FromString(str[1], *y);

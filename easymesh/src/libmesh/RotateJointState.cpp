@@ -4,7 +4,7 @@
 #include <ee/panel_msg.h>
 
 #include <SM_Calc.h>
-#include <sprite2/S2_Sprite.h>
+#include <sprite2/Sprite.h>
 
 namespace emesh
 {

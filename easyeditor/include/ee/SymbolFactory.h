@@ -1,6 +1,9 @@
 #ifndef _EASYEDITOR_SYMBOL_FACTORY_H_
 #define _EASYEDITOR_SYMBOL_FACTORY_H_
 
+#include "Symbol.h"
+
+#include <string>
 #include <sprite2/SymType.h>
 
 #include <map>
@@ -8,15 +11,13 @@
 namespace ee
 {
 
-class Symbol;
-
 class SymbolFactory
 {
 public:
-	static Symbol* Create(const std::string& filepath, int type = s2::SYM_UNKNOWN);
-	static Symbol* Create(int type);
+	static SymPtr Create(const std::string& filepath, int type = s2::SYM_UNKNOWN);
+	static SymPtr Create(int type);
 
-	typedef Symbol* (*CreateCallback)();
+	typedef SymPtr (*CreateCallback)();
 	static void RegisterCreator(int type, CreateCallback cb);
 	static void UnregisterCreator(int type);
 

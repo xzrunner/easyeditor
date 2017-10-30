@@ -26,15 +26,14 @@ bool SpriteDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& data)
 
 	int index;
 	StringHelper::FromString(sIndex, index);
-	Symbol* sym = m_library->GetSymbol(index);
+	auto sym = m_library->GetSymbol(index);
 	if (sym)
 	{
 		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-		Sprite* spr = SpriteFactory::Instance()->CreateRoot(sym);
+		auto spr = SpriteFactory::Instance()->CreateRoot(sym);
 		spr->Translate(pos);
 		InsertSpriteSJ::Instance()->Insert(spr);
 		EditAddRecordSJ::Instance()->Add(new InsertSpriteAOP(spr));
-		spr->RemoveReference();
 	}
 
 	return true;

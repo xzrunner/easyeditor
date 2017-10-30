@@ -21,10 +21,10 @@ void RotateSprState::Rotate(const sm::vec2& dst)
 		return;
 	}
 
-	std::vector<ee::Sprite*> sprs;
-	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	selection->Traverse(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 
-	ee::Sprite* spr = sprs[0];
+	auto& spr = sprs[0];
 	Bone* bone = (Bone*)(spr->GetUserData());
 	sm::vec2 center = spr->GetPosition() + spr->GetOffset();
 	float angle = sm::get_angle_in_direction(center, GetLastPos(), dst);

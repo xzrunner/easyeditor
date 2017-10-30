@@ -39,11 +39,11 @@ void Task::Load(const char* filepath)
 	Symbol* sym = m_stage->GetSymbol();
 	if (const s2::Sprite* base = sym->GetBase()) {
 		ee::LibraryList* base_list = m_library->GetPage(true)->GetList();
-		base_list->Insert(const_cast<ee::Symbol*>(dynamic_cast<const ee::Symbol*>(base->GetSymbol())));
+		base_list->Insert(const_cast<ee::Symbol*>(std::dynamic_pointer_cast<ee::Symbol>(base->GetSymbol())));
 	}
 	if (const s2::Sprite* mask = sym->GetMask()) {
 		ee::LibraryList* mask_list = m_library->GetPage(false)->GetList();
-		mask_list->Insert(const_cast<ee::Symbol*>(dynamic_cast<const ee::Symbol*>(mask->GetSymbol())));
+		mask_list->Insert(const_cast<ee::Symbol*>(std::dynamic_pointer_cast<ee::Symbol>(mask->GetSymbol())));
 	}
 }
 

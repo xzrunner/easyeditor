@@ -3,6 +3,8 @@
 
 #include "PackNode.h"
 
+#include <memory>
+
 namespace eaudio { class Sprite; }
 
 namespace esprpacker
@@ -11,7 +13,7 @@ namespace esprpacker
 class PackAudioSpr : public PackNode
 {
 public:
-	PackAudioSpr(const eaudio::Sprite* spr);
+	PackAudioSpr(const std::shared_ptr<eaudio::Sprite>& spr);
 	virtual ~PackAudioSpr();
 
 	/**
@@ -29,7 +31,7 @@ public:
 	virtual int SizeOfPackToBin() const;
 	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const;	
 
-	bool Equal(const eaudio::Sprite* spr) const { return true; }
+	bool Equal(const std::shared_ptr<eaudio::Sprite>& spr) const { return true; }
 
 private:
 	const PackNode* m_sym;

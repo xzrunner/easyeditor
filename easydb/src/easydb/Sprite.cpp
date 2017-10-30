@@ -41,7 +41,7 @@ Sprite& Sprite::operator = (const Sprite& spr)
 	return *this;
 }
 
-Sprite::Sprite(Symbol* sym, int id)
+Sprite::Sprite(const std::shared_ptr<Symbol>& sym, int id)
 	: s2::Sprite(sym)
 	, ee::Sprite(sym)
 	, m_id(id)

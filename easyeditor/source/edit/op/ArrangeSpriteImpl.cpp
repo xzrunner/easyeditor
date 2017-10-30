@@ -35,9 +35,9 @@
 
 #include <SM_Calc.h>
 #include <sprite2/RenderColor.h>
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <sprite2/BoundingBox.h>
-#include <sprite2/S2_Symbol.h>
+#include <sprite2/Symbol.h>
 #include <sprite2/Camera.h>
 
 namespace ee
@@ -186,11 +186,11 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 		ChangeOPState(new CopyPasteSpriteState(m_selection));
 	}
 
-	Sprite* selected = NULL;
+	SprPtr selected = nullptr;
 	if (m_selection->Size() == 1)
 	{
-		std::vector<Sprite*> sprs;
-		m_selection->Traverse(FetchAllVisitor<Sprite>(sprs));
+		std::vector<SprPtr> sprs;
+		m_selection->Traverse(FetchAllRefVisitor<Sprite>(sprs));
 		selected = sprs[0];
 	}
 	if (!selected) {
@@ -214,7 +214,7 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 	if (m_cfg.is_deform_open && !m_stage->GetKeyState(WXK_SHIFT))
 	{
 		sm::vec2 ctrlNodes[8];
-		SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrlNodes);
+		SpriteCtrlNode::GetSpriteCtrlNodes(*selected, ctrlNodes);
 		for (int i = 0; i < 8; ++i)
 		{
 			if (sm::dis_pos_to_pos(ctrlNodes[i], pos) < m_ctrl_node_radius)
@@ -232,7 +232,7 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 	if (m_cfg.is_deform_open && m_stage->GetKeyState(WXK_SHIFT))
 	{
 		sm::vec2 ctrl_node[4];
-		SpriteCtrlNode::GetSpriteCtrlNodesExt(selected, ctrl_node);
+		SpriteCtrlNode::GetSpriteCtrlNodesExt(*selected, ctrl_node);
 		for (int i = 0; i < 4; ++i) {
 			if (sm::dis_pos_to_pos(ctrl_node[i], pos) < m_ctrl_node_radius) {
 				SpriteCtrlNode::Node cn;
@@ -269,8 +269,8 @@ void ArrangeSpriteImpl::OnMouseLeftUp(int x, int y)
 		&& !m_selection->IsEmpty()
 		&& m_left_down_pos != pos)
 	{
-		std::vector<Sprite*> sprs;
-		m_selection->Traverse(FetchAllVisitor<Sprite>(sprs));
+		std::vector<SprPtr> sprs;
+		m_selection->Traverse(FetchAllRefVisitor<Sprite>(sprs));
 		m_align.Align(sprs);
 		SetCanvasDirtySJ::Instance()->SetDirty();
 	}
@@ -289,11 +289,11 @@ void ArrangeSpriteImpl::OnMouseRightDown(int x, int y)
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	m_right_down_pos = pos;
 
-	Sprite* selected = NULL;
+	SprPtr selected = nullptr;
 	if (m_selection->Size() == 1)
 	{
-		std::vector<Sprite*> sprs;
-		m_selection->Traverse(FetchAllVisitor<Sprite>(sprs));
+		std::vector<SprPtr> sprs;
+		m_selection->Traverse(FetchAllRefVisitor<Sprite>(sprs));
 		selected = sprs[0];
 	}
 	if (!selected) return;
@@ -302,7 +302,7 @@ void ArrangeSpriteImpl::OnMouseRightDown(int x, int y)
 	if (m_cfg.is_deform_open)
 	{
 		sm::vec2 ctrlNodes[8];
-		SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrlNodes);
+		SpriteCtrlNode::GetSpriteCtrlNodes(*selected, ctrlNodes);
 		for (int i = 0; i < 8; ++i)
 		{
 			if (sm::dis_pos_to_pos(ctrlNodes[i], pos) < m_ctrl_node_radius)
@@ -387,9 +387,9 @@ void ArrangeSpriteImpl::OnDraw(float cam_scale) const
 	m_ctrl_node_radius = CTRL_NODE_RADIUS * cam_scale;
 	if ((m_cfg.is_deform_open || m_cfg.is_offset_open) && m_selection->Size() == 1)
 	{
-		Sprite* selected = NULL;
-		std::vector<Sprite*> sprs;
-		m_selection->Traverse(FetchAllVisitor<Sprite>(sprs));
+		SprPtr selected = nullptr;
+		std::vector<SprPtr> sprs;
+		m_selection->Traverse(FetchAllRefVisitor<Sprite>(sprs));
 		selected = sprs[0];
 
 		sm::vec2 sz = selected->GetSymbol()->GetBounding().Size();
@@ -406,7 +406,7 @@ void ArrangeSpriteImpl::OnDraw(float cam_scale) const
 				if (m_stage->GetKeyState(WXK_SHIFT)) 
 				{
 					sm::vec2 ctrl_nodes[4];
-					SpriteCtrlNode::GetSpriteCtrlNodesExt(selected, ctrl_nodes);
+					SpriteCtrlNode::GetSpriteCtrlNodesExt(*selected, ctrl_nodes);
 					for (int i = 0; i < 4; ++i) {
 						s2::RVG::SetColor(s2::Color(51, 204, 51));
 						s2::RVG::Circle(ctrl_nodes[i], m_ctrl_node_radius, true);
@@ -415,7 +415,7 @@ void ArrangeSpriteImpl::OnDraw(float cam_scale) const
 				else
 				{
 					sm::vec2 ctrl_nodes[8];
-					SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrl_nodes);
+					SpriteCtrlNode::GetSpriteCtrlNodes(*selected, ctrl_nodes);
 					for (int i = 0; i < 4; ++i) {
 						s2::RVG::SetColor(s2::Color(51, 204, 51));
 						s2::RVG::Circle(ctrl_nodes[i], m_ctrl_node_radius, false);
@@ -443,13 +443,13 @@ void ArrangeSpriteImpl::Clear()
 {
 }
 
-Sprite* ArrangeSpriteImpl::QueryEditedSprite(const sm::vec2& pos) const
+SprPtr ArrangeSpriteImpl::QueryEditedSprite(const sm::vec2& pos) const
 {
-	Sprite* selected = NULL;
+	SprPtr selected = nullptr;
 	if (m_cfg.is_deform_open && m_selection->Size() == 1)
 	{
-		std::vector<Sprite*> sprs;
-		m_selection->Traverse(FetchAllVisitor<Sprite>(sprs));
+		std::vector<SprPtr> sprs;
+		m_selection->Traverse(FetchAllRefVisitor<Sprite>(sprs));
 		selected = sprs[0];
 	}
 	if (!selected) return NULL;
@@ -465,7 +465,7 @@ Sprite* ArrangeSpriteImpl::QueryEditedSprite(const sm::vec2& pos) const
 	if (m_cfg.is_deform_open && !m_stage->GetKeyState(WXK_SHIFT))
 	{
 		sm::vec2 ctrl_nodes[8];
-		SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrl_nodes);
+		SpriteCtrlNode::GetSpriteCtrlNodes(*selected, ctrl_nodes);
 		for (int i = 0; i < 8; ++i) {
 			if (sm::dis_pos_to_pos(ctrl_nodes[i], pos) < m_ctrl_node_radius) {
 				return selected;
@@ -476,7 +476,7 @@ Sprite* ArrangeSpriteImpl::QueryEditedSprite(const sm::vec2& pos) const
 	if (m_cfg.is_deform_open && m_stage->GetKeyState(WXK_SHIFT))
 	{
 		sm::vec2 ctrl_nodes[4];
-		SpriteCtrlNode::GetSpriteCtrlNodesExt(selected, ctrl_nodes);
+		SpriteCtrlNode::GetSpriteCtrlNodesExt(*selected, ctrl_nodes);
 		for (int i = 0; i < 4; ++i) {
 			if (sm::dis_pos_to_pos(ctrl_nodes[i], pos) < m_ctrl_node_radius) {
 				return selected;
@@ -508,8 +508,8 @@ void ArrangeSpriteImpl::OnDirectionKeyDown(int type)
 
 void ArrangeSpriteImpl::OnSpaceKeyDown()
 {
-	std::vector<Sprite*> sprs;
-	m_selection->Traverse(FetchAllVisitor<Sprite>(sprs));
+	std::vector<SprPtr> sprs;
+	m_selection->Traverse(FetchAllRefVisitor<Sprite>(sprs));
 	if (sprs.empty()) {
 		return;
 	}
@@ -517,7 +517,7 @@ void ArrangeSpriteImpl::OnSpaceKeyDown()
 	CombineAOP* comb = new CombineAOP();
 	for (int i = 0, n = sprs.size(); i < n; ++i) 
 	{
-		Sprite* spr = sprs[i];
+		const SprPtr& spr = sprs[i];
 
 		comb->Insert(new TranslateSpriteAOP(spr, -spr->GetPosition()));
 		comb->Insert(new ScaleSpriteAOP(spr, sm::vec2(1, 1), spr->GetScale()));
@@ -549,17 +549,17 @@ ArrangeSpriteState* ArrangeSpriteImpl::CreateRotateState(SpriteSelection* select
 	return new RotateSpriteState(selection, first_pos);
 }
 
-ArrangeSpriteState* ArrangeSpriteImpl::CreateScaleState(Sprite* spr, const SpriteCtrlNode::Node& ctrl_node) const
+ArrangeSpriteState* ArrangeSpriteImpl::CreateScaleState(const SprPtr& spr, const SpriteCtrlNode::Node& ctrl_node) const
 {
 	return new ScaleSpriteState(spr, ctrl_node);
 }
 
-ArrangeSpriteState* ArrangeSpriteImpl::CreateShearState(Sprite* spr, const SpriteCtrlNode::Node& ctrl_node) const
+ArrangeSpriteState* ArrangeSpriteImpl::CreateShearState(const SprPtr& spr, const SpriteCtrlNode::Node& ctrl_node) const
 {
 	return new ShearSpriteState(spr, ctrl_node);
 }
 
-ArrangeSpriteState* ArrangeSpriteImpl::CreateOffsetState(Sprite* spr) const
+ArrangeSpriteState* ArrangeSpriteImpl::CreateOffsetState(const SprPtr& spr) const
 {
 	s2::Camera* cam = NULL;
 	if (ee::CameraCanvas* canvas = dynamic_cast<ee::CameraCanvas*>(m_stage->GetCanvas())) {
@@ -568,7 +568,7 @@ ArrangeSpriteState* ArrangeSpriteImpl::CreateOffsetState(Sprite* spr) const
 	return new OffsetSpriteState(spr, cam);
 }
 
-ArrangeSpriteState* ArrangeSpriteImpl::CreatePerspectiveState(Sprite* spr, const SpriteCtrlNode::Node& ctrl_node) const
+ArrangeSpriteState* ArrangeSpriteImpl::CreatePerspectiveState(const SprPtr& spr, const SpriteCtrlNode::Node& ctrl_node) const
 {
 	return new PerspectiveSpriteState(spr, ctrl_node);
 }
@@ -584,8 +584,8 @@ void ArrangeSpriteImpl::ChangeOPState(ArrangeSpriteState* state)
 void ArrangeSpriteImpl::OnDeleteKeyDown()
 {
 	// add to history
-	std::vector<Sprite*> sprs;
-	m_selection->Traverse(FetchAllVisitor<Sprite>(sprs));
+	std::vector<SprPtr> sprs;
+	m_selection->Traverse(FetchAllRefVisitor<Sprite>(sprs));
 	EditAddRecordSJ::Instance()->Add(new DeleteSpriteAOP(sprs));
 
 	m_sprites_impl->ClearSelectedSprite();
@@ -595,8 +595,8 @@ void ArrangeSpriteImpl::OnDeleteKeyDown()
 
 void ArrangeSpriteImpl::UpOneLayer()
 {
-	std::vector<Sprite*> selected;
-	m_selection->Traverse(FetchAllVisitor<Sprite>(selected));
+	std::vector<SprPtr> selected;
+	m_selection->Traverse(FetchAllRefVisitor<Sprite>(selected));
 
 	SortSpriteSJ::Instance()->Sort(selected);
 	for (int i = selected.size() - 1; i >= 0; --i) {
@@ -613,8 +613,8 @@ void ArrangeSpriteImpl::UpOneLayer()
 
 void ArrangeSpriteImpl::DownOneLayer()
 {
-	std::vector<Sprite*> selected;
-	m_selection->Traverse(FetchAllVisitor<Sprite>(selected));
+	std::vector<SprPtr> selected;
+	m_selection->Traverse(FetchAllRefVisitor<Sprite>(selected));
 
 	SortSpriteSJ::Instance()->Sort(selected);
 	for (int i = 0, n = selected.size(); i < n; ++i) {
@@ -629,7 +629,7 @@ void ArrangeSpriteImpl::DownOneLayer()
 	}
 }
 
-sm::vec2 ArrangeSpriteImpl::GetSprOffset(const Sprite* spr) const
+sm::vec2 ArrangeSpriteImpl::GetSprOffset(const SprPtr& spr) const
 {
 	sm::vec2 offset = spr->GetPosition() + spr->GetOffset();
 	return offset;
@@ -637,8 +637,8 @@ sm::vec2 ArrangeSpriteImpl::GetSprOffset(const Sprite* spr) const
 
 bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 {
-	std::vector<Sprite*> sprs;
-	m_selection->Traverse(FetchAllVisitor<Sprite>(sprs));
+	std::vector<SprPtr> sprs;
+	m_selection->Traverse(FetchAllRefVisitor<Sprite>(sprs));
 	if (sprs.empty()) {
 		return false;
 	}
@@ -661,8 +661,7 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	else if (keycode == 'E')
 	{
 		bool editable = !sprs[0]->IsEditable();
-		for (int i = 0, n = sprs.size(); i < n; ++i) {
-			ee::Sprite* spr = sprs[i];
+		for (auto& spr : sprs) {
 			spr->SetEditable(editable);
 		}
 		EditAddRecordSJ::Instance()->Add(new EditableSpriteAOP(sprs));
@@ -673,8 +672,7 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	else if (keycode == 'S')
 	{
 		bool visible = !sprs[0]->IsVisible();
-		for (int i = 0, n = sprs.size(); i < n; ++i) {
-			ee::Sprite* spr = sprs[i];
+		for (auto& spr : sprs) {
 			spr->SetVisible(visible);
 		}
 		EditAddRecordSJ::Instance()->Add(new VisibleSpriteAOP(sprs));
@@ -686,7 +684,7 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	else if (keycode == 'H') 
 	{
 		for (int i = 0, n = sprs.size(); i < n; ++i) {
-			Sprite* spr = sprs[i];
+			const SprPtr& spr = sprs[i];
 			const sm::vec2& scale = spr->GetScale();
 			spr->SetScale(sm::vec2(-scale.x, scale.y));
 		}
@@ -697,7 +695,7 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	else if (keycode == 'V') 
 	{
 		for (int i = 0, n = sprs.size(); i < n; ++i) {
-			Sprite* spr = sprs[i];
+			const SprPtr& spr = sprs[i];
 			const sm::vec2& scale = spr->GetScale();
 			spr->SetScale(sm::vec2(scale.x, -scale.y));
 		}

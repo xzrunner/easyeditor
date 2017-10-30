@@ -7,6 +7,7 @@
 #include <sprite2/AnimSymbol.h>
 
 #include <vector>
+#include <memory>
 
 namespace libanim { class Symbol; }
 
@@ -16,7 +17,7 @@ namespace esprpacker
 class PackAnimation : public PackNode
 {
 public:
-	PackAnimation(const libanim::Symbol* sym);
+	PackAnimation(const std::shared_ptr<libanim::Symbol>& sym);
 	virtual ~PackAnimation();
 
 	/**
@@ -35,7 +36,7 @@ public:
 	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const;	
 	
 private:
-	void Init(const libanim::Symbol* sym);
+	void Init(const std::shared_ptr<libanim::Symbol>& sym);
 
 	void CheckLerp(const std::string& filepath);
 
@@ -43,7 +44,7 @@ private:
 	class Actor : public cu::RefCountObj
 	{
 	public:
-		Actor(const s2::Sprite* spr);
+		Actor(const s2::SprPtr& spr);
 		~Actor();
 
 		void PackToLuaString(ebuilder::CodeGenerator& gen) const;

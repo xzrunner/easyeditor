@@ -3,7 +3,7 @@
 
 #include "Rect.h"
 
-#include <vector>
+#include <cu/cu_stl.h>
 #include <set>
 
 namespace eimage
@@ -14,7 +14,7 @@ class PixelCoveredLUT;
 class RectPostProcessor
 {
 public:
-	RectPostProcessor(const std::vector<Rect>& rects, 
+	RectPostProcessor(const CU_VEC<Rect>& rects, 
 		int width, int height, bool* ori_pixels);
 	~RectPostProcessor();
 	
@@ -38,7 +38,7 @@ public:
 
 	void Reduce();
 
-	void LoadResult(std::vector<Rect>& rects) const;
+	void LoadResult(CU_VEC<Rect>& rects) const;
 
 private:
 	struct Item;
@@ -50,7 +50,7 @@ private:
 		e_up
 	};
 
-	void LoadPixels(const std::vector<Rect>& rects, bool* ori_pixels);
+	void LoadPixels(const CU_VEC<Rect>& rects, bool* ori_pixels);
 
 	void UpdateFreedom(Item* item);
 	bool IsNoCoverdSide(Item* item, Direction dir) const;

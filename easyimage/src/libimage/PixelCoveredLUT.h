@@ -3,7 +3,7 @@
 
 #include "Rect.h"
 
-#include <vector>
+#include <cu/cu_stl.h>
 
 namespace eimage
 {
@@ -11,7 +11,7 @@ namespace eimage
 class PixelCoveredLUT
 {
 public:
-	PixelCoveredLUT(int width, int height, const std::vector<Rect>& rects);
+	PixelCoveredLUT(int width, int height, const CU_VEC<Rect>& rects);
 	~PixelCoveredLUT();
 
 	int GetCoveredArea(int x, int y, int w, int h) const;
@@ -20,7 +20,7 @@ public:
 	void Insert(const Rect& r);
 
 private:
-	void LoadRects(const std::vector<Rect>& rects);
+	void LoadRects(const CU_VEC<Rect>& rects);
 
 private:
 	int* m_covered_count;

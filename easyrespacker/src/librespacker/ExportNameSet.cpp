@@ -7,7 +7,7 @@
 namespace erespacker
 {
 
-void ExportNameSet::LoadExport(const ee::Symbol* sym, IPackNode* node)
+void ExportNameSet::LoadExport(const ee::SymConstPtr& sym, IPackNode* node)
 {
 	std::string export_name = sym->name;
 	if (!Utility::IsNameValid(export_name)) {

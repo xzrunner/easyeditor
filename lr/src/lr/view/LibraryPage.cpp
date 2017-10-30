@@ -35,7 +35,7 @@ LibraryPage::~LibraryPage()
 	for_each(m_editops.begin(), m_editops.end(), cu::RemoveRefFunctor<ee::EditOP>());
 }
 
-bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
+bool LibraryPage::IsHandleSymbol(const ee::SymPtr& sym) const
 {
 	return true;
 }
@@ -133,10 +133,9 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
 			std::string filepath = filenames[i].ToStdString();
-			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+			auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			sym->RefreshThumbnail(filepath);
 			m_list->Insert(sym);
-			sym->RemoveReference();
 		}
 	}
 }

@@ -14,7 +14,7 @@
 namespace ecomplex
 {
 
-ee::Sprite* AnimationToSpr::Trans(const erespacker::PackAnimation* anim)
+ee::SprPtr AnimationToSpr::Trans(const erespacker::PackAnimation* anim)
 {
 	assert(!anim->actions.empty() && anim->actions[0].size >= 1);
 	if (anim->actions[0].size == 1) {
@@ -24,39 +24,39 @@ ee::Sprite* AnimationToSpr::Trans(const erespacker::PackAnimation* anim)
 	}
 }
 
-ee::Sprite* AnimationToSpr::TransComplex(const erespacker::PackAnimation* anim)
+ee::SprPtr AnimationToSpr::TransComplex(const erespacker::PackAnimation* anim)
 {
 	assert(!anim->actions.empty() && anim->actions[0].size == 1);
 
-	ecomplex::Symbol* complex = new ecomplex::Symbol;
+	auto complex = std::make_shared<ecomplex::Symbol>();
 	const erespacker::PackAnimation::Frame& src = anim->frames[0];
-	ecomplex::Symbol* dst = new ecomplex::Symbol;
+	auto dst = std::make_shared<ecomplex::Symbol>();
 	for (int i = 0, n = src.parts.size(); i < n; ++i) {
 		const erespacker::PackAnimation::Part& part = src.parts[i];
-		ee::Sprite* spr = NodeToSprite::Trans(anim->components[part.comp_idx].node);
+		auto& spr = NodeToSprite::Trans(anim->components[part.comp_idx].node);
 		TransSprite(spr, part.t);
 		dst->Add(spr);
 	}
 //	dst->InitBounding();
-	complex->Add(new Sprite(dst));
+	complex->Add(std::make_shared<Sprite>(dst));
 //	complex->InitBounding();
-	return new Sprite(complex);
+	return std::make_shared<Sprite>(complex);
 }
 
-ee::Sprite* AnimationToSpr::TransAnim(const erespacker::PackAnimation* anim)
+ee::SprPtr AnimationToSpr::TransAnim(const erespacker::PackAnimation* anim)
 {
 	assert(!anim->actions.empty() && anim->actions[0].size >= 1);
 
-	libanim::Symbol* anim_symbol = new libanim::Symbol;
-	auto layer = std::make_unique<s2::AnimSymbol::Layer>();
+	auto anim_symbol = std::make_shared<libanim::Symbol>();
+	auto layer = mm::allocate_unique<s2::AnimSymbol::Layer>();
 	for (int i = 0; i < anim->actions[0].size; ++i) {
 		const erespacker::PackAnimation::Frame& src = anim->frames[i];
-		auto frame = std::make_unique<s2::AnimSymbol::Frame>();
+		auto frame = mm::allocate_unique<s2::AnimSymbol::Frame>();
 		frame->index = i;
 		frame->tween = false;
 		for (int j = 0, m = src.parts.size(); j < m; ++j) {
 			const erespacker::PackAnimation::Part& part = src.parts[j];
-			ee::Sprite* spr = NodeToSprite::Trans(anim->components[part.comp_idx].node);
+			auto& spr = NodeToSprite::Trans(anim->components[part.comp_idx].node);
 			TransSprite(spr, part.t);
 			frame->sprs.push_back(spr);
 		}
@@ -65,10 +65,10 @@ ee::Sprite* AnimationToSpr::TransAnim(const erespacker::PackAnimation* anim)
 	anim_symbol->SetFPS(30);
 	anim_symbol->AddLayer(std::move(layer));
 //	anim_symbol->InitBounding();
-	return new libanim::Sprite(anim_symbol);
+	return std::make_shared<libanim::Sprite>(anim_symbol);
 }
 
-void AnimationToSpr::TransSprite(ee::Sprite* spr, const erespacker::PackAnimation::SpriteTrans& t)
+void AnimationToSpr::TransSprite(const ee::SprPtr& spr, const erespacker::PackAnimation::SpriteTrans& t)
 {
 	if (!erespacker::PackAnimation::IsMatrixIdentity(t.mat)) {
 		TransSpriteMat(spr, t);
@@ -80,7 +80,7 @@ void AnimationToSpr::TransSprite(ee::Sprite* spr, const erespacker::PackAnimatio
 	spr->SetShader(rs);
 }
 
-void AnimationToSpr::TransSpriteMat(ee::Sprite* spr, const erespacker::PackAnimation::SpriteTrans& t)
+void AnimationToSpr::TransSpriteMat(const ee::SprPtr& spr, const erespacker::PackAnimation::SpriteTrans& t)
 {
 	float dx = t.mat[4] / 16.0f,
 		dy = -t.mat[5] / 16.0f;
@@ -128,7 +128,7 @@ void AnimationToSpr::TransSpriteMat(ee::Sprite* spr, const erespacker::PackAnima
 	spr->SetAngle(angle);
 }
 
-void AnimationToSpr::TransSpriteCol(ee::Sprite* spr, const erespacker::PackAnimation::SpriteTrans& t)
+void AnimationToSpr::TransSpriteCol(const ee::SprPtr& spr, const erespacker::PackAnimation::SpriteTrans& t)
 {
 	s2::RenderColor rc;
 

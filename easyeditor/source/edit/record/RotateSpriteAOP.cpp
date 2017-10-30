@@ -11,60 +11,49 @@
 namespace ee
 {
 
-RotateSpriteAOP::RotateSpriteAOP(const std::vector<Sprite*>& sprs, const sm::vec2& start, const sm::vec2& end)
+RotateSpriteAOP::RotateSpriteAOP(const std::vector<SprPtr>& sprs, const sm::vec2& start, const sm::vec2& end)
 {
 	Init(sprs, start, end);
 }
 
-RotateSpriteAOP::RotateSpriteAOP(const std::vector<Sprite*>& sprs, float angle)
+RotateSpriteAOP::RotateSpriteAOP(const std::vector<SprPtr>& sprs, float angle)
 {
 	Init(sprs, angle);
 }
 
 RotateSpriteAOP::RotateSpriteAOP(const SpriteSelection& selection, const sm::vec2& start, const sm::vec2& end)
 {
-	std::vector<Sprite*> sprs;
-	selection.Traverse(FetchAllVisitor<Sprite>(sprs));
+	std::vector<SprPtr> sprs;
+	selection.Traverse(FetchAllRefVisitor<Sprite>(sprs));
 	Init(sprs, start, end);
 }
 
 RotateSpriteAOP::RotateSpriteAOP(const SpriteSelection& selection, float angle)
 {
-	std::vector<Sprite*> sprs;
-	selection.Traverse(FetchAllVisitor<Sprite>(sprs));
+	std::vector<SprPtr> sprs;
+	selection.Traverse(FetchAllRefVisitor<Sprite>(sprs));
 	Init(sprs, angle);
 }
 
-RotateSpriteAOP::RotateSpriteAOP(Sprite* spr, float angle)
+RotateSpriteAOP::RotateSpriteAOP(const SprPtr& spr, float angle)
 {
-	std::vector<Sprite*> sprs;
+	std::vector<SprPtr> sprs;
 	sprs.push_back(spr);
 	Init(sprs, angle);
-}
-
-RotateSpriteAOP::~RotateSpriteAOP()
-{
-	for (size_t i = 0, n = m_sprs.size(); i < n; ++i) {
-		m_sprs[i]->RemoveReference();
-	}
 }
 
 void RotateSpriteAOP::Undo()
 {
 	if (m_inited) 
 	{
-		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
-		{
-			Sprite* spr = m_sprs[i];
+		for (auto& spr : m_sprs) {
 			float angle = sm::get_angle_in_direction(spr->GetPosition(), m_start, m_end);
 			spr->Rotate(-angle);
 		}
 	} 
 	else if (m_angle != 0) 
 	{
-		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
-		{
-			Sprite* spr = m_sprs[i];
+		for (auto& spr : m_sprs) {
 			spr->Rotate(-m_angle);
 		}
 	}
@@ -74,24 +63,20 @@ void RotateSpriteAOP::Redo()
 {
 	if (m_inited) 
 	{
-		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
-		{
-			Sprite* spr = m_sprs[i];
+		for (auto& spr : m_sprs) {
 			float angle = sm::get_angle_in_direction(spr->GetPosition(), m_start, m_end);
 			spr->Rotate(angle);
 		}
 	} 
 	else if (m_angle != 0) 
 	{
-		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
-		{
-			Sprite* spr = m_sprs[i];
+		for (auto& spr : m_sprs) {
 			spr->Rotate(m_angle);
 		}
 	}
 }
 
-Json::Value RotateSpriteAOP::Store(const std::vector<Sprite*>& sprs) const
+Json::Value RotateSpriteAOP::Store(const std::vector<SprPtr>& sprs) const
 {
 	Json::Value val;
 	val["idx"] = HistoryUtil::StoreSpritesIndex(m_sprs, sprs);
@@ -104,7 +89,7 @@ Json::Value RotateSpriteAOP::Store(const std::vector<Sprite*>& sprs) const
 	return val;
 }
 
-void RotateSpriteAOP::Init(const std::vector<Sprite*>& sprs, 
+void RotateSpriteAOP::Init(const std::vector<SprPtr>& sprs, 
 						   const sm::vec2& start, const sm::vec2& end)
 {
 	m_inited = true;
@@ -112,23 +97,15 @@ void RotateSpriteAOP::Init(const std::vector<Sprite*>& sprs,
 	m_end = end;
 	m_angle = 0;
 
-	for (size_t i = 0, n = sprs.size(); i < n; ++i) 
-	{
-		sprs[i]->AddReference();
-		m_sprs.push_back(sprs[i]);
-	}
+	m_sprs = sprs;
 }
 
-void RotateSpriteAOP::Init(const std::vector<Sprite*>& sprs, float angle)
+void RotateSpriteAOP::Init(const std::vector<SprPtr>& sprs, float angle)
 {
 	m_inited = false;
 	m_angle = angle;
 
-	for (size_t i = 0, n = sprs.size(); i < n; ++i) 
-	{
-		sprs[i]->AddReference();
-		m_sprs.push_back(sprs[i]);
-	}
+	m_sprs = sprs;
 }
 
 }

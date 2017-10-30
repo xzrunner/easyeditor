@@ -8,7 +8,7 @@
 
 #include <easycomplex.h>
 
-#include <sprite2/S2_Sprite.h>
+#include <sprite2/Sprite.h>
 
 #include <queue>
 
@@ -17,13 +17,13 @@ namespace ecomplex
 
 void FileIO::load(const Task* task, const char* filename)
 {
-	ecomplex::Symbol* sym = task->m_stage->GetSymbol();
+	auto& sym = task->m_stage->GetSymbol();
 	sym->LoadFromFile(filename);
 
 	task->m_library->LoadFromSymbolMgr(*ee::SymbolMgr::Instance());
-	const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
+	auto& children = sym->GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
-		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
+		auto child = std::dynamic_pointer_cast<ee::Sprite>(children[i]);
 		task->m_viewlist->Insert(child);
 	}
 
@@ -37,28 +37,28 @@ void FileIO::store(const Task* task, const char* filename)
 {
 //		ecomplex::FileSaver::store(filename, Context::Instance()->stage->getSymbol());
 
-	ecomplex::Symbol* root = task->m_stage->GetSymbol();
-	ecomplex::FileStorer::StoreWithHistory(filename, root, ee::FileHelper::GetFileDir(filename));
-	std::queue<std::pair<const ecomplex::Symbol*, std::string> > buffer;
-	const std::vector<s2::Sprite*>& children = root->GetAllChildren();
+	auto root = task->m_stage->GetSymbol();
+	ecomplex::FileStorer::StoreWithHistory(filename, *root, ee::FileHelper::GetFileDir(filename));
+	std::queue<std::pair<std::shared_ptr<ecomplex::Symbol>, std::string> > buffer;
+	auto& children = root->GetAllChildren();
 	std::string parent_dir = ee::FileHelper::GetFileDir(root->GetFilepath());
 	for (size_t i = 0, n = children.size(); i < n ;++i) {
-		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
-		if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(child)) {
-			const ecomplex::Symbol* sym = dynamic_cast<const ecomplex::Symbol*>(complex->GetSymbol());
+		auto child = std::dynamic_pointer_cast<ee::Sprite>(children[i]);
+		if (auto complex = std::dynamic_pointer_cast<ecomplex::Sprite>(child)) {
+			auto sym = std::dynamic_pointer_cast<ecomplex::Symbol>(complex->GetSymbol());
 			buffer.push(std::make_pair(sym, parent_dir));
 		}
 	}
 	while (!buffer.empty())
 	{
-		const ecomplex::Symbol* sym = buffer.front().first;
+		auto sym = buffer.front().first;
 		std::string parent_dir = buffer.front().second;
 		buffer.pop();
 		const std::string& filepath = sym->GetFilepath();
 		if (filepath != ee::SYM_GROUP_TAG) {
-			ecomplex::FileStorer::Store(filepath, sym, parent_dir);
+			ecomplex::FileStorer::Store(filepath, *sym, parent_dir);
 		}
-		const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
+		auto& children = sym->GetAllChildren();
 		std::string child_parent_dir;
 		if (filepath != ee::SYM_GROUP_TAG) {
 			child_parent_dir = ee::FileHelper::GetFileDir(filepath);
@@ -66,9 +66,9 @@ void FileIO::store(const Task* task, const char* filename)
 			child_parent_dir = parent_dir;
 		}
 		for (size_t i = 0, n = children.size(); i < n ;++i) {
-			ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
-			if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(child)) {
-				const ecomplex::Symbol* sym = dynamic_cast<const ecomplex::Symbol*>(complex->GetSymbol());
+			auto child = std::dynamic_pointer_cast<ee::Sprite>(children[i]);
+			if (auto complex = std::dynamic_pointer_cast<ecomplex::Sprite>(child)) {
+				auto sym = std::dynamic_pointer_cast<ecomplex::Symbol>(complex->GetSymbol());
 				buffer.push(std::make_pair(sym, child_parent_dir));
 			}
 		}

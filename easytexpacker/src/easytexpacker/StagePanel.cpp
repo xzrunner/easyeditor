@@ -42,7 +42,7 @@ StagePanel::StagePanel(wxWindow* parent,
 	RegistSubject(ee::RemoveSpriteSJ::Instance());
 }
 
-void StagePanel::InsertSpriteNoArrange(ee::Sprite* spr)
+void StagePanel::InsertSpriteNoArrange(const ee::SprPtr& spr)
 {
 //	fixCoords(spr);
 	ee::InsertSpriteSJ::Instance()->Insert(spr);
@@ -74,7 +74,7 @@ void StagePanel::LoadFromLibrary()
 			break;
 		else 
 		{
-			ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+			auto spr = ee::SpriteFactory::Instance()->Create(sym);
 			ee::InsertSpriteSJ::Instance()->Insert(spr);
 		}
 	}
@@ -87,7 +87,7 @@ int StagePanel::GetTextureAccount() const
 	return m_strategy->GetTextureAccount();
 }
 
-void StagePanel::FixCoords(ee::Sprite* spr)
+void StagePanel::FixCoords(const ee::SprPtr& spr)
 {
 	const sm::vec2& pos = spr->GetPosition();
 

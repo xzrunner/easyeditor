@@ -5,6 +5,8 @@
 
 #include <SM_Vector.h>
 
+#include <memory>
+
 namespace libskeleton
 {
 
@@ -13,8 +15,7 @@ class Joint;
 class TranslateJointState : public ee::ArrangeSpriteState
 {
 public:
-	TranslateJointState(Joint* joint, const sm::vec2& first_pos);
-	virtual ~TranslateJointState();
+	TranslateJointState(const std::shared_ptr<Joint>& joint, const sm::vec2& first_pos);
 
 	virtual void OnMouseRelease(const sm::vec2& pos);
 	virtual	bool OnMouseDrag(const sm::vec2& pos);
@@ -23,7 +24,7 @@ private:
 	void Translate(const sm::vec2& trans);
 
 private:
-	Joint* m_joint;
+	std::shared_ptr<Joint> m_joint;
 	
 	sm::vec2 m_first_pos, m_last_pos;
 

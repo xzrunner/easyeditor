@@ -10,7 +10,7 @@
 namespace ecomplex
 {
 
-ee::Sprite* NodeToSprite::Trans(const erespacker::IPackNode* node)
+ee::SprPtr NodeToSprite::Trans(const erespacker::IPackNode* node)
 {
 	if (const erespacker::PackPicture* pic = dynamic_cast<const erespacker::PackPicture*>(node)) {
 		return PictureToSpr::Trans(pic);

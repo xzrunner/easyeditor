@@ -14,8 +14,8 @@ namespace eimage
 static const int STEPS_COUNT = 3;
 static const float STEPS[STEPS_COUNT] = {1/8.0f, 1/16.0f, 1/32.0f};
 
-ExtractOutlineFine::ExtractOutlineFine(const std::vector<sm::vec2>& raw_border, 
-									   const std::vector<sm::vec2>& raw_border_merged)
+ExtractOutlineFine::ExtractOutlineFine(const CU_VEC<sm::vec2>& raw_border,
+									   const CU_VEC<sm::vec2>& raw_border_merged)
 	: m_raw_border(raw_border)
 	, m_raw_border_merged(raw_border_merged)
 {
@@ -51,7 +51,7 @@ void ExtractOutlineFine::OutlineByAddNode(float area_tol, float perimeter_tol,
 	ee::MinBoundingBox::Do(m_raw_border, bound);
 	m_fine_border.assign(bound, bound+4);
 
-	std::vector<sm::vec2> last_fine_border = m_fine_border;
+	CU_VEC<sm::vec2> last_fine_border = m_fine_border;
 
 	int count = 0;
 	bool success = false;
@@ -114,8 +114,7 @@ void ExtractOutlineFine::OutlineByAddNode(float area_tol, float perimeter_tol,
 					new_node_pos = (a_idx+1)%m_fine_border.size();
 					m_fine_border[a_idx] = cross_start;
 				} else {					
-					std::vector<sm::vec2>::iterator itr = 
-						m_fine_border.insert(m_fine_border.begin()+((a_idx+1)%m_fine_border.size()), a_new_start);
+					auto itr = m_fine_border.insert(m_fine_border.begin()+((a_idx+1)%m_fine_border.size()), a_new_start);
 					++itr;
 					if (itr == m_fine_border.end()) {
 						itr = m_fine_border.begin();
@@ -253,7 +252,7 @@ bool ExtractOutlineFine::IsCutTriLegal(const sm::vec2& center,
 	}
 
 	sm::vec2 tri_v[3] = {center, p0, p1};
-	std::vector<sm::vec2> tri;
+	CU_VEC<sm::vec2> tri;
 	tri.assign(tri_v, tri_v+3);
 	if (sm::is_polygon_intersect_polygon(m_raw_border_merged, tri)) {
 		return false;
@@ -265,7 +264,7 @@ bool ExtractOutlineFine::IsCutTriLegal(const sm::vec2& center,
 bool ExtractOutlineFine::IsAddTriLeagal(const sm::vec2& p0, const sm::vec2& p1, const sm::vec2& p2) const
 {
 	sm::vec2 tri_v[3] = {p0, p1, p2};
-	std::vector<sm::vec2> tri;
+	CU_VEC<sm::vec2> tri;
 	tri.assign(tri_v, tri_v+3);
 	return !sm::is_polygon_intersect_polygon(m_raw_border_merged, tri)
 		&& !sm::is_polygon_intersect_polygon(m_fine_border, tri);

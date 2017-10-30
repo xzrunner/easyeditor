@@ -2,18 +2,18 @@
 #define _EASYEDITOR_SPRITE_SELECTION_H_
 
 #include "Sprite.h"
-#include "ObjSelectionSet.h"
+#include "SelectionSet.h"
 
 namespace ee
 {
 
-class SpriteSelection : public ObjSelectionSet<Sprite>
+class SpriteSelection : public SelectionSet<Sprite>
 {
 public:
 	virtual void Clear();
 
-	virtual void Add(Sprite* item);
-	virtual void Remove(Sprite* item);
+	virtual void Add(const SprPtr& item);
+	virtual void Remove(const SprPtr& item);
 
 }; // SpriteSelection
 

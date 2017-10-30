@@ -35,7 +35,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   wxGLContext* glctx, ee::Sprite* edited, 
+					   wxGLContext* glctx, const ee::SprPtr& edited, 
 					   const ee::MultiSpritesImpl* bg_sprites, 
 					   ee::LibraryPanel* library)
 	: ee::EditPanel(parent, frame)
@@ -69,12 +69,12 @@ bool StagePanel::UpdateStage()
 
 void StagePanel::Store(const std::string& dir, Json::Value& value) const
 {
-	std::vector<ee::Sprite*> bg_sprites;
-	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(bg_sprites));
+	std::vector<ee::SprPtr> bg_sprites;
+	TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(bg_sprites));
 	for (int i = 0, n = bg_sprites.size(); i < n; ++i) {
-		ee::Sprite* bg = bg_sprites[i];
+		ee::SprPtr bg = bg_sprites[i];
 		value["bg"][i]["filepath"] = ee::SymbolPath::GetRelativePath(
-			dynamic_cast<ee::Symbol*>(bg->GetSymbol()), dir);
+			std::dynamic_pointer_cast<ee::Symbol>(bg->GetSymbol()), dir);
 		bg->Store(value["bg"][i]);
 	}
 
@@ -90,11 +90,10 @@ void StagePanel::Load(const std::string& dir, const Json::Value& value,
 	Json::Value bg_val = value["bg"][i++];
 	while (!bg_val.isNull()) {
 		std::string filepath = dir + "\\" + bg_val["filepath"].asString();
-		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-		ee::Sprite* bg = ee::SpriteFactory::Instance()->Create(sym);
+		auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		ee::SprPtr bg = ee::SpriteFactory::Instance()->Create(sym);
 		bg->Load(bg_val);
 		ee::InsertSpriteSJ::Instance()->Insert(bg);
-		sym->RemoveReference();
 
 		bg_val = value["bg"][i++];
 	}
@@ -108,7 +107,7 @@ void StagePanel::Load(const std::string& dir, const Json::Value& value,
 			ee::InsertShapeSJ::Instance()->Insert(
 				const_cast<eshape::PolygonShape*>(ocean->GetBounding()));
 			library->AddSymbol(const_cast<ee::ImageSymbol*>(ocean->GetImage0()));
-			if (const ee::Symbol* tex1 = ocean->GetImage1()) {
+			if (const ee::SymPtr& tex1 = ocean->GetImage1()) {
 				library->AddSymbol(const_cast<ee::Symbol*>(tex1));
 			}
 			toolbar->SetControlersValue(ocean);
@@ -127,7 +126,7 @@ void StagePanel::Load(const std::string& dir, const Json::Value& value,
 // 	return m_sym->GetOceans();
 // }
 
-void StagePanel::AddOcean(const eshape::PolygonShape* shape, const ee::ImageSymbol* image)
+void StagePanel::AddOcean(const eshape::PolygonShape* shape, const std::shared_ptr<ee::ImageSymbol>& image)
 {
 	bool is_new = true;
 	std::vector<OceanMesh*>::iterator itr = m_oceans.begin();
@@ -164,7 +163,7 @@ StageDropTarget(StagePanel* stage, ee::LibraryPanel* library)
 }
 
 bool StagePanel::StageDropTarget::
-OnDropSymbol(ee::Symbol* sym, const sm::vec2& pos)
+OnDropSymbol(const ee::SymPtr& sym, const sm::vec2& pos)
 {
 	if (ee::ImageSymbol* image = dynamic_cast<ee::ImageSymbol*>(sym))
 	{
@@ -174,7 +173,7 @@ OnDropSymbol(ee::Symbol* sym, const sm::vec2& pos)
 			m_stage->AddOcean(poly, image);
 			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		} else {
-			ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+			auto spr = ee::SpriteFactory::Instance()->Create(sym);
 			spr->Translate(pos);
 			ee::InsertSpriteSJ::Instance()->Insert(spr);
 		}

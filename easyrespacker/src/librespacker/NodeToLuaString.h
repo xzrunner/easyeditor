@@ -4,8 +4,7 @@
 #include "typedef.h"
 
 #include <SM_Vector.h>
-
-#include <vector>
+#include <cu/cu_stl.h>
 
 namespace ebuilder { class CodeGenerator; }
 
@@ -21,7 +20,7 @@ public:
 	static int TransFloatX100(float f);
 	static std::string TransBool(bool b);
 
-	static void PackVertices(const std::vector<sm::vec2>& vertices, ebuilder::CodeGenerator& gen, 
+	static void PackVertices(const CU_VEC<sm::vec2>& vertices, ebuilder::CodeGenerator& gen, 
 		const std::string& name, bool reverse_y = true, int scale = SCALE);
 
 }; // NodeToLuaString

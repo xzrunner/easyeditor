@@ -31,12 +31,12 @@ bool NodeFromBin::TransBool(int b)
 	return b == 0 ? false : true;
 }
 
-int NodeFromBin::SizeVertices(const std::vector<sm::vec2>& vertices)
+int NodeFromBin::SizeVertices(const CU_VEC<sm::vec2>& vertices)
 {
 	return vertices.size() * sizeof(int32_t) * 2;
 }
 
-void NodeFromBin::UnpackVertices(std::vector<sm::vec2>& vertices, uint8_t** ptr, 
+void NodeFromBin::UnpackVertices(CU_VEC<sm::vec2>& vertices, uint8_t** ptr, 
 								 bool reverse_y, int scale)
 {
 	uint16_t num;

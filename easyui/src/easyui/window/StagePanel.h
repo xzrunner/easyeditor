@@ -42,12 +42,12 @@ public:
 	//
 	// MultiSpritesImpl interface
 	//
-	virtual void TraverseSprites(ee::Visitor<ee::Sprite>& visitor, 
+	virtual void TraverseSprites(ee::RefVisitor<ee::Sprite>& visitor, 
 		ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
 
 	void InitConfig();
 
-	Symbol* GetSymbol() { return m_sym; }
+	auto& GetSymbol() { return m_sym; }
 
 	void SetViewSize(int width, int height);
 
@@ -63,7 +63,7 @@ private:
 	void InitSubjects();
 
 private:
-	Symbol* m_sym;
+	std::shared_ptr<Symbol> m_sym;
 
 	TopPannels* m_top_pannels;
 

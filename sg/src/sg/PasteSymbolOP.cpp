@@ -40,7 +40,7 @@ bool PasteSymbolOP::OnDraw() const
 
 	bool ret;
 
-	ee::Symbol* sym = m_library->GetSymbol();
+	auto sym = m_library->GetSymbol();
 
 	SymbolRender* render = SymbolRender::Instance();
 	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
@@ -81,7 +81,7 @@ bool PasteSymbolOP::isCurrSymbolValid() const
 
 bool PasteSymbolOP::isCurrSymbolIsWall() const
 {
-	ee::Symbol* sym = m_library->GetSymbol();
+	auto sym = m_library->GetSymbol();
 	return IsSymbolWall(*sym);
 }
 

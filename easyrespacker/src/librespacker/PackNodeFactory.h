@@ -3,6 +3,8 @@
 
 #include "ExportNameSet.h"
 
+#include <ee/Sprite.h>
+
 #include <vector>
 
 namespace erespacker
@@ -59,8 +61,8 @@ class TrailBuilder;
 class PackNodeFactory
 {
 public:
-	const IPackNode* Create(const ee::Sprite* spr);	
-	const IPackNode* Create(const ee::Symbol* sym);	
+	const IPackNode* Create(const ee::SprConstPtr& spr);	
+	const IPackNode* Create(const ee::SymConstPtr& sym);	
 
 	void GetAllNodes(std::vector<IPackNode*>& nodes) const;
 

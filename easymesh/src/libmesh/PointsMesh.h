@@ -14,7 +14,7 @@ class PointsMesh : public Mesh, public eshape::EditedPolyShape, public s2::Polyl
 {
 public:
 	PointsMesh();
-	PointsMesh(const ee::Symbol* base);
+	PointsMesh(const ee::SymPtr& base);
 
 	/**
 	 *  @interface
@@ -48,8 +48,8 @@ public:
 	virtual void AddVertex(int index, const sm::vec2& pos);
 	virtual void RemoveVertex(const sm::vec2& pos);
 	virtual void ChangeVertex(const sm::vec2& from, const sm::vec2& to);
-	virtual void SetVertices(const std::vector<sm::vec2>& vertices);
-	virtual const std::vector<sm::vec2>& GetVertices() const { return m_vertices; }
+	virtual void SetVertices(const CU_VEC<sm::vec2>& vertices);
+	virtual const CU_VEC<sm::vec2>& GetVertices() const { return m_vertices; }
 	virtual bool IsClosed() const { return m_closed; }
 	virtual int PointQueryVertex(const sm::vec2& p) const;
 	virtual void RectQueryVertices(const sm::rect& r, std::vector<int>& vertices) const;
@@ -59,7 +59,7 @@ public:
 	bool RemoveInnerPos(const sm::vec2& pos);
 	bool MoveInnerPos(int idx, const sm::vec2& pos);
 
-	void GetInnerPoints(std::vector<sm::vec2>& points) const;
+	void GetInnerPoints(CU_VEC<sm::vec2>& points) const;
 	
 private:
 	void UpdateMeshFromShape();

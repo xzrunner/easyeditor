@@ -13,7 +13,7 @@ namespace lr
 class TagCfg
 {
 public:
-	std::string Query(const ee::Symbol* sym) const;
+	std::string Query(const ee::SymConstPtr& sym) const;
 
 	static TagCfg* Instance();
 
@@ -25,7 +25,7 @@ private:
 private:
 	std::vector<std::pair<std::string, std::string> > m_key_val;
 
-	mutable std::map<const ee::Symbol*, std::string> m_cache;
+	mutable std::map<const ee::SymPtr&, std::string> m_cache;
 
 private:
 	static TagCfg* m_instance;

@@ -20,22 +20,22 @@ namespace eui
 namespace window
 {
 
-void FileIO::Store(const char* filepath, const Symbol* sym)
+void FileIO::Store(const char* filepath, const Symbol& sym)
 {
 	Json::Value value;
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath) + "\\";
 
-	value["name"] = sym->name;
+	value["name"] = sym.name;
 
-	sym->GetAnchorMgr().StoreToFile(value, dir);
+	sym.GetAnchorMgr().StoreToFile(value, dir);
 
-	value["view"]["width"] = sym->GetWidth();
-	value["view"]["height"] = sym->GetHeight();
+	value["view"]["width"] = sym.GetWidth();
+	value["view"]["height"] = sym.GetHeight();
 
-// 	std::vector<ee::Sprite*> sprs;
-// 	const_cast<Symbol*>(sym)->GetAnchorMgr().Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
-// 	value["wrapper filepath"] = StoreWrapper(filepath, sym->name, sprs);
+// 	std::vector<ee::SprPtr> sprs;
+// 	const_cast<Symbol*>(sym)->GetAnchorMgr().Traverse(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
+// 	value["wrapper filepath"] = StoreWrapper(filepath, sym.name, sprs);
 
 	StoreRefs(value, sym, dir);
 
@@ -47,7 +47,7 @@ void FileIO::Store(const char* filepath, const Symbol* sym)
 	fout.close();
 }
 
-void FileIO::Load(const char* filepath, Symbol* sym)
+void FileIO::Load(const char* filepath, Symbol& sym)
 {
 	Json::Value value;
 	Json::Reader reader;
@@ -57,14 +57,14 @@ void FileIO::Load(const char* filepath, Symbol* sym)
 	reader.parse(fin, value);
 	fin.close();
 
-	sym->name = value["name"].asString();
+	sym.name = value["name"].asString();
 
 	if (!value["view"].isNull()) {
 		int w = value["view"]["width"].asInt(),
 			h = value["view"]["height"].asInt();
-		sym->SetWidth(w);
-		sym->SetHeight(h);
-		sym->GetAnchorMgr().OnViewChanged(w, h);
+		sym.SetWidth(w);
+		sym.SetHeight(h);
+		sym.GetAnchorMgr().OnViewChanged(w, h);
 		ChangeWindowViewSizeSJ::Instance()->Change(w, h);
 	}
 
@@ -73,7 +73,7 @@ void FileIO::Load(const char* filepath, Symbol* sym)
 	LoadRefs(value, sym, dir);
 }
 
-void FileIO::FetchSprites(const std::string& filepath, std::vector<ee::Sprite*>& sprs)
+void FileIO::FetchSprites(const std::string& filepath, std::vector<ee::SprPtr>& sprs)
 {
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
 
@@ -89,7 +89,7 @@ void FileIO::FetchSprites(const std::string& filepath, std::vector<ee::Sprite*>&
 	Json::Value spr_val = val["sprite"][idx++];
 	while (!spr_val.isNull()) {
 		std::string path = ee::SymbolSearcher::GetSymbolPath(dir, spr_val);
-		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(path);
+		auto sym = ee::SymbolMgr::Instance()->FetchSymbol(path);
 		if (!sym) {
 // 			std::string filepath = spr_val["filepath"].asString();
 // 			throw ee::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", dir.c_str(), filepath.c_str());
@@ -97,12 +97,9 @@ void FileIO::FetchSprites(const std::string& filepath, std::vector<ee::Sprite*>&
 			return;
 		}
 
-		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+		auto spr = ee::SpriteFactory::Instance()->Create(sym);
 		spr->Load(spr_val);
-		spr->AddReference();
 		sprs.push_back(spr);
-		spr->RemoveReference();
-		sym->RemoveReference();
 
 		spr_val = val["sprite"][idx++];
 	}
@@ -117,7 +114,7 @@ void FileIO::FetchSprites(const std::string& filepath, std::vector<ee::Sprite*>&
 }
 
 std::string FileIO::StoreWrapper(const std::string& filepath, const std::string& name,
-								 const std::vector<ee::Sprite*>& sprs)
+								 const std::vector<ee::SprPtr>& sprs)
 {
 	std::string dir = ee::FileHelper::GetFileDir(filepath) + "\\";
 
@@ -129,61 +126,57 @@ std::string FileIO::StoreWrapper(const std::string& filepath, const std::string&
 	std::string wrapper_path = filename + "_wrapper_complex[gen].json";
 	wrapper_complex.SetFilepath(wrapper_path);
 	wrapper_complex.name = name;
-	ecomplex::FileStorer::Store(wrapper_path.c_str(), &wrapper_complex, ee::FileHelper::GetFileDir(filepath));
+	ecomplex::FileStorer::Store(wrapper_path.c_str(), wrapper_complex, ee::FileHelper::GetFileDir(filepath));
 
 	return ee::FileHelper::GetRelativePath(dir, wrapper_path);
 }
 
-void FileIO::LoadSprites(const Json::Value& val, Symbol* sym, const std::string& dir)
+void FileIO::LoadSprites(const Json::Value& val, const Symbol& sym, const std::string& dir)
 {
-	AnchorMgr& anchors = sym->GetAnchorMgr();
+	auto& anchors = const_cast<AnchorMgr&>(sym.GetAnchorMgr());
 
 	int idx = 0;
 	Json::Value spr_val = val["sprite"][idx++];
 	while (!spr_val.isNull()) {
 		std::string filepath = ee::SymbolSearcher::GetSymbolPath(dir, spr_val);
-		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 
-		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+		auto spr = ee::SpriteFactory::Instance()->Create(sym);
 		spr->Load(spr_val);
 		anchors.Insert(spr);
-		spr->RemoveReference();
-		sym->RemoveReference();
 
 		spr_val = val["sprite"][idx++];
 	}
 }
 
-void FileIO::StoreRefs(Json::Value& val, const Symbol* sym, const std::string& dir)
+void FileIO::StoreRefs(Json::Value& val, const Symbol& sym, const std::string& dir)
 {
-	const std::vector<Sprite*>& sprs = sym->GetExtRefs();
+	auto& sprs = sym.GetExtRefs();
 	for (int i = 0, n = sprs.size(); i < n; ++i) 
 	{
-		Sprite* spr = sprs[i];
+		auto& spr = sprs[i];
 		Json::Value spr_val;
 		std::string filepath = ee::SymbolPath::GetRelativePath(
-			dynamic_cast<const ee::Symbol*>(spr->GetSymbol()), dir);
+			*std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol()), dir);
 		spr_val["filepath"] = filepath;
 		spr->Store(spr_val);
 		val["ref_spr"][i] = spr_val;
 
-		FileIO::Store(filepath.c_str(), dynamic_cast<const Symbol*>(spr->GetSymbol()));
+		FileIO::Store(filepath.c_str(), *std::dynamic_pointer_cast<Symbol>(spr->GetSymbol()));
 	}
 }
 
-void FileIO::LoadRefs(const Json::Value& val, Symbol* top_sym, const std::string& dir)
+void FileIO::LoadRefs(const Json::Value& val, Symbol& top_sym, const std::string& dir)
 {
 	int idx = 0;
 	Json::Value spr_val = val["ref_spr"][idx++];
 	while (!spr_val.isNull()) {
 		std::string filepath = ee::SymbolSearcher::GetSymbolPath(dir, spr_val);
-		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 
-		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+		auto spr = ee::SpriteFactory::Instance()->Create(sym);
 		spr->Load(spr_val);
-		top_sym->InsertExtRef(static_cast<Sprite*>(spr));
-		spr->RemoveReference();
-		sym->RemoveReference();
+		top_sym.InsertExtRef(std::dynamic_pointer_cast<Sprite>(spr));
 
 		spr_val = val["ref_spr"][idx++];
 	}

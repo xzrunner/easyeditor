@@ -22,10 +22,10 @@ bool PixelDiffOP::OnMouseLeftDown(int x, int y)
 		return false;
 	}
 
-	const ee::Sprite* s_left = m_stage->GetLeft();
-	const ee::Sprite* s_right = m_stage->GetRight();
-	ee::Image* left = dynamic_cast<const ee::ImageSymbol*>(static_cast<const ee::ImageSprite*>(s_left)->GetSymbol())->GetImage();
-	ee::Image* right = dynamic_cast<const ee::ImageSymbol*>(static_cast<const ee::ImageSprite*>(s_right)->GetSymbol())->GetImage();
+	const ee::SprPtr s_left = m_stage->GetLeft();
+	const ee::SprPtr s_right = m_stage->GetRight();
+	ee::Image* left = std::dynamic_pointer_cast<const ee::ImageSymbol>>(static_cast<const std::shared_ptr<const ee::ImageSprite>>(s_left)->GetSymbol())->GetImage();
+	ee::Image* right = std::dynamic_pointer_cast<const ee::ImageSymbol>>(static_cast<const std::shared_ptr<const ee::ImageSprite>>(s_right)->GetSymbol())->GetImage();
 	sm::vec2 p = m_stage->TransPosScrToProj(x, y);
 
 	m_stage->GetLeft()->GetSymbol()->GetBounding();

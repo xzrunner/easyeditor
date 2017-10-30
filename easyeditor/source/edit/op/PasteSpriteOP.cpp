@@ -169,7 +169,7 @@ LoadFromSelection(const SpriteSelection& selection)
 	if (!selection.IsEmpty())
 	{	
 		Clear();
-		selection.Traverse(FetchAllVisitor<Sprite>(m_selected));
+		selection.Traverse(FetchAllRefVisitor<Sprite>(m_selected));
 		ComputeCenter();
 	}
 }
@@ -177,9 +177,8 @@ LoadFromSelection(const SpriteSelection& selection)
 void PasteSpriteOP::SpriteBatch::
 InsertToSpritesImpl(const sm::vec2& pos, bool isHorMirror, bool isVerMirror)
 {
-	for (size_t i = 0, n = m_selected.size(); i < n; ++i)
+	for (auto& spr : m_selected)
 	{
-		Sprite* spr = m_selected[i];
 		sm::vec2 fixed = spr->GetPosition() - m_center;
 		if (isHorMirror)
 			fixed.x += (m_center.x - spr->GetPosition().x) * 2;
@@ -188,10 +187,9 @@ InsertToSpritesImpl(const sm::vec2& pos, bool isHorMirror, bool isVerMirror)
 
 //		sprites_impl->insertSprite(spr->getSymbol(), fixed + pos);
 
-		Sprite* newOne = dynamic_cast<Sprite*>(((cu::Cloneable*)spr)->Clone());
-		newOne->SetPosition(fixed + pos);
-		InsertSpriteSJ::Instance()->Insert(newOne);
-		newOne->RemoveReference();
+		auto new_one = std::dynamic_pointer_cast<ee::Sprite>(spr->Clone());
+		new_one->SetPosition(fixed + pos);
+		InsertSpriteSJ::Instance()->Insert(new_one);
 	}
 }
 
@@ -203,9 +201,9 @@ Draw(const sm::vec2& pos, bool isHorMirror, bool isVerMirror) const
 		const float xOffset = pos.x - m_center.x,
 			yOffset = pos.y - m_center.y;
 
-		for (size_t i = 0, n = m_selected.size(); i < n; ++i)
+		for (auto& spr : m_selected)
 		{
-			const sm::vec2& pos = m_selected[i]->GetPosition();
+			const sm::vec2& pos = spr->GetPosition();
 
 			float x = xOffset, y = yOffset;
 			if (isHorMirror)
@@ -215,7 +213,7 @@ Draw(const sm::vec2& pos, bool isHorMirror, bool isVerMirror) const
 
 			s2::RenderParams params;
 			params.mt.Translate(x, y);
-			SpriteRenderer::Instance()->Draw(m_selected[i], params);
+			SpriteRenderer::Instance()->Draw(spr.get(), params);
 		}
 	}
 }

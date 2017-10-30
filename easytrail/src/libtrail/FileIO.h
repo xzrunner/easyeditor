@@ -2,6 +2,7 @@
 #define _EASYTRAIL_FILE_IO_H_
 
 #include <string>
+#include <memory>
 
 namespace ee { class LibraryPanel; }
 namespace s2 { class TrailEmitterCfg; }
@@ -21,7 +22,7 @@ public:
 		ToolbarPanel* toolbar, ee::LibraryPanel* library);
 
 	static MotionTrail* LoadMT(const std::string& filepath);
-	static s2::TrailEmitterCfg* LoadMTConfig(const std::string& filepath);
+	static std::shared_ptr<s2::TrailEmitterCfg> LoadMTConfig(const std::string& filepath);
 
 }; // FileIO
 

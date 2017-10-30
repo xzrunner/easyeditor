@@ -25,11 +25,11 @@ public:
 	 *    ee::Symbol
 	 */
 	virtual void ReloadTexture() const;
-	virtual void Traverse(ee::Visitor<ee::Sprite>& visitor);
+	virtual void Traverse(ee::RefVisitor<ee::Sprite>& visitor);
 
-	void Load(const gum::SpriteLoader& spr_loader);
+	void Load(const std::shared_ptr<gum::SpriteLoader>& spr_loader);
 
-	static ee::Symbol* Create() { return new Symbol(); }
+	static ee::SymPtr Create() { return std::make_shared<Symbol>(); }
 
 protected:
 	virtual bool LoadResources();

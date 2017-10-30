@@ -122,7 +122,7 @@ bool StagePanel::UpdateStage()
 	return ret;
 }
 
-void StagePanel::TraverseSprites(ee::Visitor<ee::Sprite>& visitor, ee::DataTraverseType type/* = e_allExisting*/,
+void StagePanel::TraverseSprites(ee::RefVisitor<ee::Sprite>& visitor, ee::DataTraverseType type/* = e_allExisting*/,
 								 bool order/* = true*/) const
 {
 	if (SettingCfg::Instance()->m_all_layers_visible_editable ||
@@ -311,7 +311,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 		break;
 	case ee::MSG_SORT_SPRITES:
 		{
-			std::vector<ee::Sprite*>& sprs = *(std::vector<ee::Sprite*>*)ud;
+			std::vector<ee::SprPtr>& sprs = *(std::vector<ee::SprPtr>*)ud;
 			SortSprites(sprs);
 		}
 		break;
@@ -322,17 +322,17 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 		}
 		break;
 	case ee::MSG_REMOVE_SPRITE:
-		RemoveSprite((ee::Sprite*)ud);
+		RemoveSprite(*(ee::SprPtr*)ud);
 		break;
 	case ee::MSG_CLEAR_SPRITE:
 		ClearSprite();
 		break;
 
 	case ee::MSG_REMOVE_SHAPE:
-		RemoveShape((ee::Shape*)ud);
+		RemoveShape(*(ee::ShapePtr*)ud));
 		break;
 	case ee::MSG_INSERT_SHAPE:
-		InsertShape((ee::Shape*)ud);
+		InsertShape(*(ee::ShapePtr*)ud));
 		break;
 	case ee::MSG_CLEAR_SHAPE:
 		ClearShape();
@@ -340,7 +340,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 	}
 }
 
-void StagePanel::ReorderSprite(ee::Sprite* spr, bool up)
+void StagePanel::ReorderSprite(const ee::SprPtr& spr, bool up)
 {
 	for (int i = 0, n = m_layers.size(); i < n; ++i)
 	{
@@ -352,7 +352,7 @@ void StagePanel::ReorderSprite(ee::Sprite* spr, bool up)
 	}
 }
 
-void StagePanel::ReorderSpriteMost(ee::Sprite* spr, bool up)
+void StagePanel::ReorderSpriteMost(const ee::SprPtr& spr, bool up)
 {
 	for (int i = 0, n = m_layers.size(); i < n; ++i)
 	{
@@ -364,7 +364,7 @@ void StagePanel::ReorderSpriteMost(ee::Sprite* spr, bool up)
 	}
 }
 
-void StagePanel::SortSprites(std::vector<ee::Sprite*>& sprs)
+void StagePanel::SortSprites(std::vector<ee::SprPtr>& sprs)
 {
 	for (int i = 0, n = m_layers.size(); i < n; ++i)
 	{
@@ -376,7 +376,7 @@ void StagePanel::SortSprites(std::vector<ee::Sprite*>& sprs)
 	}
 }
 
-void StagePanel::InsertSprite(ee::Sprite* spr, int idx)
+void StagePanel::InsertSprite(const ee::SprPtr& spr, int idx)
 {
 	if (dynamic_cast<eparticle3d::Sprite*>(spr) && spr->GetTag().empty()) {
 		std::string tag = TOP_LAYER_TAG;
@@ -384,7 +384,7 @@ void StagePanel::InsertSprite(ee::Sprite* spr, int idx)
 	}
 
 	// tag
-	std::string tag = TagCfg::Instance()->Query(dynamic_cast<ee::Symbol*>(spr->GetSymbol()));
+	std::string tag = TagCfg::Instance()->Query(std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol()));
 	if (spr->GetTag().find(tag) == std::string::npos) {
 		spr->SetTag(tag + spr->GetTag());
 	}
@@ -401,14 +401,14 @@ void StagePanel::InsertSprite(ee::Sprite* spr, int idx)
 		m_pathfinding->DisableRegion(spr, false);
 	}
 
-	std::string filepath = dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath();
+	std::string filepath = std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol())->GetFilepath();
 	if (CharacterFileName::IsValidFilepath(filepath)) {
 		CharacterFileName name(filepath);
 		m_chara_dirs.BuildSymbolDirections(name);
 	}
 }
 
-void StagePanel::RemoveSprite(ee::Sprite* spr)
+void StagePanel::RemoveSprite(const ee::SprPtr& spr)
 {
 	for (int i = 0, n = m_layers.size(); i < n; ++i)
 	{

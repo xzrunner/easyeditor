@@ -2,7 +2,7 @@
 
 #include <ee/EE_DTex.h>
 #include <ee/EE_GTxt.h>
-#include <gum/GUM_ShaderLab.h>
+#include <gum/ShaderLab.h>
 
 #include <gl/glew.h>
 #include <glfw.h>

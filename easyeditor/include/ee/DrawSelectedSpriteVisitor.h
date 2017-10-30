@@ -9,12 +9,12 @@
 namespace ee
 {
 
-class DrawSelectedSpriteVisitor : public Visitor<Sprite>
+class DrawSelectedSpriteVisitor : public RefVisitor<Sprite>
 {
 public:
 	DrawSelectedSpriteVisitor(const s2::Color& color);
 
-	virtual void Visit(Sprite* spr, bool& next);
+	virtual void Visit(const SprPtr& spr, bool& next);
 
 private:
 	s2::Color m_color;

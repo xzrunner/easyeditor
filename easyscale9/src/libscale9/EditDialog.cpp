@@ -9,7 +9,7 @@
 #include <ee/EditPanel.h>
 #include <ee/DialogStageCanvas.h>
 #include <ee/ConfirmDialog.h>
-#include <ee/SpriteFactory.h>
+#include <ee/SpritePool.h>
 
 namespace escale9
 {
@@ -18,7 +18,7 @@ BEGIN_EVENT_TABLE(EditDialog, wxDialog)
 	EVT_CLOSE(EditDialog::OnCloseEvent)
 END_EVENT_TABLE()
 
-EditDialog::EditDialog(wxWindow* parent, Symbol* sym, wxGLContext* glctx)
+EditDialog::EditDialog(wxWindow* parent, const std::shared_ptr<Symbol>& sym, wxGLContext* glctx)
 	: wxDialog(parent, wxID_ANY, "Edit Scale9", wxDefaultPosition,
 	wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 	, m_sym(sym)
@@ -56,7 +56,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 		const std::string& filepath = m_sym->GetFilepath();
 		FileSaver::Store(filepath.c_str(), *m_sym);
 		m_sym->RefreshThumbnail(filepath);
-		ee::SpriteFactory::Instance()->UpdateBoundings(*m_sym);
+		ee::SpritePool::Instance()->UpdateBoundings(*m_sym);
 		Destroy();
 	}
 	else if (val == wxID_NO)

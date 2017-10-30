@@ -9,14 +9,14 @@
 namespace erespacker
 {
 
-SINGLETON_DEFINITION(PackTag);
+CU_SINGLETON_DEFINITION(PackTag);
 
 PackTag::PackTag() 
 {
 
 }
 
-void PackTag::AddTask(const std::string& filepath, int index, const ee::Sprite* spr)
+void PackTag::AddTask(const std::string& filepath, int index, const ee::SprConstPtr& spr)
 {
 	const std::string& tag = spr->GetTag();
 	if (tag.empty() || tag.find('=') == std::string::npos) {
@@ -29,10 +29,10 @@ void PackTag::AddTask(const std::string& filepath, int index, const ee::Sprite* 
 
 	task->index = index;
 
-	std::string name;
+	CU_STR name;
 	s2::SprNameMap::Instance()->IDToStr(spr->GetName(), name);
 	if (!name.empty() && name[0] != '_') {
-		task->name = name;
+		task->name = name.c_str();
 	}
 	
 	std::vector<std::string> tags;

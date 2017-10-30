@@ -54,29 +54,29 @@ void FileIO::Load(const std::string& filepath, MotionTrail* mt, ToolbarPanel* to
 
 MotionTrail* FileIO::LoadMT(const std::string& filepath)
 {
-	s2::TrailEmitterCfg* cfg = MTConfigMgr::Instance()->GetConfig(filepath);
+	auto cfg = MTConfigMgr::Instance()->GetConfig(filepath);
 	return new MotionTrail(cfg);
 }
 
-s2::TrailEmitterCfg* FileIO::LoadMTConfig(const std::string& filepath)
+std::shared_ptr<s2::TrailEmitterCfg> FileIO::LoadMTConfig(const std::string& filepath)
 {
 	class Loader : public gum::TrailSymLoader
 	{
 	protected:
-		virtual s2::Symbol* LoadSymbol(const std::string& filepath) const {
+		virtual s2::SymPtr LoadSymbol(const std::string& filepath) const {
 			return ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 		}
 	}; // Loader
 
 	Loader adapter;
-	adapter.LoadJson(filepath);
+	adapter.LoadJson(filepath.c_str());
 
 	int sz = SIZEOF_T2D_EMITTER_CFG + SIZEOF_T2D_SYMBOL * MAX_COMPONENTS;
 	t2d_emitter_cfg* cfg = (t2d_emitter_cfg*) operator new(sz);
 	memset(cfg, 0, sz);
 	adapter.Store(cfg);
 
-	return new s2::TrailEmitterCfg(cfg);
+	return std::make_shared<s2::TrailEmitterCfg>(cfg);
 }
 
 }

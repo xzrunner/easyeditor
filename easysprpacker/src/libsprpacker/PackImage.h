@@ -3,10 +3,11 @@
 
 #include "PackNode.h"
 
+#include <ee/Image.h>
+#include <ee/ImageSymbol.h>
+
 #include <SM_Vector.h>
 #include <sprite2/ImageSymbol.h>
-
-namespace ee { class ImageSymbol; }
 
 namespace esprpacker
 {
@@ -14,8 +15,7 @@ namespace esprpacker
 class PackImage : public PackNode
 {
 public:
-	PackImage(const ee::ImageSymbol* sym);
-	virtual ~PackImage();
+	PackImage(const std::shared_ptr<ee::ImageSymbol>& sym);
 	
 	/**
 	 *  @interface
@@ -33,12 +33,12 @@ public:
 	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const;
 
 private:
-	void Init(const ee::ImageSymbol* sym);
+	void Init(const std::shared_ptr<ee::ImageSymbol>& sym);
 
 	void GetPackRegion(const ee::TexturePacker& tp, sm::i16_rect& quad, sm::ivec2& offset) const;
 
 private:
-	const ee::Image* m_img;
+	ee::ImageConstPtr m_img;
 
 }; // PackImage
 

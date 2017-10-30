@@ -14,7 +14,7 @@ std::string StringHelper::ToString(const T& d)
 {
 	std::stringstream ss;
 	ss << d;
-	return ss.str();
+	return ss.str().c_str();
 }
 
 template<typename T>

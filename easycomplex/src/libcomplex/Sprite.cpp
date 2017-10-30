@@ -30,14 +30,11 @@ Sprite& Sprite::operator = (const Sprite& spr)
 	return *this;
 }
 
-Sprite::Sprite(Symbol* sym)
+Sprite::Sprite(const s2::SymPtr& sym, uint32_t id)
 	: s2::Sprite(sym)
 	, s2::ComplexSprite(sym)
 	, ee::Sprite(sym)
 {
-	if (sym->HasActions()) {
-		m_action = 0;
-	}
 }
 
 void Sprite::Load(const Json::Value& val, const std::string& dir)
@@ -58,11 +55,11 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 		std::string group_dir = ee::FileHelper::GetFileDir(filepath);
 		std::string _dir = ee::FileHelper::GetAbsolutePath(dir, group_dir);
 
-		s2::ComplexSymbol* sym = dynamic_cast<s2::ComplexSymbol*>(m_sym);
-		dynamic_cast<ee::Symbol*>(m_sym)->SetFilepath(ee::SYM_GROUP_TAG);
+		auto sym = std::dynamic_pointer_cast<s2::ComplexSymbol>(m_sym);
+		std::dynamic_pointer_cast<ee::Symbol>(m_sym)->SetFilepath(ee::SYM_GROUP_TAG);
 		for (int i = 0, n = val[ee::SYM_GROUP_TAG].size(); i < n; ++i) 
 		{
-			ee::Sprite* spr = NULL;
+			ee::SprPtr spr = nullptr;
 			try {
 				spr = ee::SpriteFactory::Instance()->Create(val[ee::SYM_GROUP_TAG][i], _dir);
 			} catch (ee::Exception& e) {
@@ -71,10 +68,9 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 			}
 			if (spr) {
 				sym->Add(spr);
-				spr->RemoveReference();
 			}
 		}
-		LoadFromJson::CreateActionsFromTag(dynamic_cast<Symbol*>(sym));
+		LoadFromJson::CreateActionsFromTag(*std::dynamic_pointer_cast<Symbol>(sym));
 	}
 }
 
@@ -88,19 +84,19 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 
 	val["complex"] = comp_val;
 
-	ee::Symbol* ee_sym = dynamic_cast<ee::Symbol*>(m_sym);
+	auto ee_sym = std::dynamic_pointer_cast<ee::Symbol>(m_sym);
 	if (ee_sym->GetFilepath() == ee::SYM_GROUP_TAG)
 	{
-		s2::ComplexSymbol* sym = dynamic_cast<s2::ComplexSymbol*>(m_sym);
+		auto sym = std::dynamic_pointer_cast<s2::ComplexSymbol>(m_sym);
 		assert(sym);
-		const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
+		auto& children = sym->GetAllChildren();
 		int count = 0;
 		for (int i = 0, n = children.size(); i < n; ++i) 
 		{
 			Json::Value cval;
-			ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
+			auto child = std::dynamic_pointer_cast<ee::Sprite>(children[i]);
 			val[ee::SYM_GROUP_TAG][i]["filepath"] = 
-				ee::SymbolPath::GetRelativePath(dynamic_cast<ee::Symbol*>(child->GetSymbol()), dir);
+				ee::SymbolPath::GetRelativePath(*std::dynamic_pointer_cast<ee::Symbol>(child->GetSymbol()), dir);
 			child->Store(val[ee::SYM_GROUP_TAG][i], dir);
 		}
 	}
@@ -108,7 +104,7 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 
 ee::PropertySetting* Sprite::CreatePropertySetting(ee::EditPanelImpl* stage)
 {
-	return new SpritePropertySetting(stage, this);
+	return new SpritePropertySetting(stage, std::dynamic_pointer_cast<Sprite>(shared_from_this()));
 }
 
 void Sprite::SetAction(int idx)
@@ -117,9 +113,9 @@ void Sprite::SetAction(int idx)
 	UpdateBounding();
 }
 
-ee::Sprite* Sprite::Create(ee::Symbol* sym) 
+ee::SprPtr Sprite::Create(const std::shared_ptr<ee::Symbol>& sym) 
 {
-	return new Sprite(static_cast<Symbol*>(sym));
+	return std::make_shared<Sprite>(sym);
 }
 
 }

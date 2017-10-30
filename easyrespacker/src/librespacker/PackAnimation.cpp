@@ -38,7 +38,7 @@ void PackAnimation::PackToLuaString(ebuilder::CodeGenerator& gen,
 	AnimToLuaString::Pack(this, gen);
 }
 
-void PackAnimation::UnpackFromLua(lua_State* L, const std::vector<ee::Image*>& images)
+void PackAnimation::UnpackFromLua(lua_State* L, const std::vector<ee::ImagePtr>& images)
 {
 	AnimFromLua::Unpack(L, this);
 }
@@ -60,25 +60,25 @@ int PackAnimation::SizeOfUnpackFromBin() const
 	return AnimFromBin::Size(this);
 }
 
-void PackAnimation::UnpackFromBin(uint8_t** ptr, const std::vector<ee::Image*>& images)
+void PackAnimation::UnpackFromBin(uint8_t** ptr, const std::vector<ee::ImagePtr>& images)
 {
 	AnimFromBin::Unpack(ptr, this);
 }
 
-bool PackAnimation::CreateFramePart(const ee::Sprite* spr, Frame& frame)
+bool PackAnimation::CreateFramePart(const ee::SprConstPtr& spr, Frame& frame)
 {	
 	const IPackNode* node = PackNodeFactory::Instance()->Create(spr);
 
 	PackAnimation::Part part;
 
-	std::string name;
+	CU_STR name;
 	s2::SprNameMap::Instance()->IDToStr(spr->GetName(), name);
-	if (Utility::IsNameValid(name)) {
+	if (Utility::IsNameValid(name.c_str())) {
 		name = name;
 	}
 
 	bool force_mat = false;
-	bool new_comp = AddComponent(node, name, part.comp_idx, force_mat);
+	bool new_comp = AddComponent(node, name.c_str(), part.comp_idx, force_mat);
 	PackAnimation::LoadSprTrans(spr, part.t, force_mat);
 
 	frame.parts.push_back(part);
@@ -171,7 +171,7 @@ bool PackAnimation::AddComponent(const IPackNode* node, const std::string& name,
 	return new_comp;
 }
 
-void PackAnimation::LoadSprTrans(const ee::Sprite* spr, SpriteTrans& trans, bool force_mat)
+void PackAnimation::LoadSprTrans(const ee::SprConstPtr& spr, SpriteTrans& trans, bool force_mat)
 {
 	LoadSprMat(spr, trans, force_mat);
 	LoadSprColor(spr, trans);
@@ -184,9 +184,9 @@ void PackAnimation::LoadSprTrans(const ee::Sprite* spr, SpriteTrans& trans, bool
 	trans.camera = static_cast<int>(spr->GetCamera().GetMode());
 }
 
-void PackAnimation::LoadSprMat(const ee::Sprite* spr, SpriteTrans& trans, bool force)
+void PackAnimation::LoadSprMat(const ee::SprConstPtr& spr, SpriteTrans& trans, bool force)
 {
-	if (!force && dynamic_cast<const ee::ImageSprite*>(spr)) {
+	if (!force && spr->GetSymbol()->Type() == s2::SYM_IMAGE) {
 		return;
 	}
 
@@ -225,7 +225,7 @@ void PackAnimation::LoadSprMat(const ee::Sprite* spr, SpriteTrans& trans, bool f
 	trans.mat[5] = -trans.mat[5];
 }
 
-void PackAnimation::LoadSprColor(const ee::Sprite* spr, SpriteTrans& trans)
+void PackAnimation::LoadSprColor(const ee::SprConstPtr& spr, SpriteTrans& trans)
 {
 	const s2::RenderColor& rc = spr->GetColor();
 

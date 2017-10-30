@@ -2,14 +2,13 @@
 #define _EASYRESPACKER_RES_PACKER_H_
 
 #include <ee/TexturePacker.h>
+#include <ee/Symbol.h>
 
 #include <string>
 #include <vector>
 
 #include "typedef.h"
 //#include "PackPkgMgr.h"
-
-namespace ee { class Symbol; }
 
 namespace erespacker
 {
@@ -45,7 +44,7 @@ private:
 	void AddUIWndSymbol(const std::string& filepath);
 
 private:
-	std::vector<const ee::Symbol*> m_syms;
+	std::vector<ee::SymPtr> m_syms;
 
 	ee::TexturePacker m_tp;
 

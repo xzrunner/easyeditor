@@ -6,7 +6,7 @@
 #include <ee/EditPanelImpl.h>
 #include <ee/physics_const.h>
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 
 namespace emodeling
 {

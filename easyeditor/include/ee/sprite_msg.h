@@ -2,6 +2,7 @@
 #define _EASYEDITOR_SPRITE_MSG_H_
 
 #include "Subject.h"
+#include "Sprite.h"
 
 #include <vector>
 
@@ -20,11 +21,11 @@ class InsertSpriteSJ : public Subject
 {
 public:
 	struct Params {
-		Sprite* spr;
+		SprPtr spr;
 		int idx;
 	};
 public:
-	void Insert(Sprite* spr, int idx = -1, Observer* except = NULL);
+	void Insert(const SprPtr& spr, int idx = -1, Observer* except = NULL);
 	SUBJECT_DECLARATION(InsertSpriteSJ)
 }; // InsertSpriteSJ
 
@@ -38,14 +39,14 @@ public:
 class QuerySelectedSprsSJ : public Subject
 {
 public:
-	void Query(std::vector<ee::Sprite*>& sprs);
+	void Query(std::vector<SprPtr>& sprs);
 	SUBJECT_DECLARATION(QuerySelectedSprsSJ)
 }; // QuerySelectedSprsSJ
 
 class RemoveSpriteSJ : public Subject
 {
 public:
-	void Remove(Sprite* spr, Observer* except = NULL);
+	void Remove(const SprPtr& spr, Observer* except = NULL);
 	SUBJECT_DECLARATION(RemoveSpriteSJ)
 }; // RemoveSpriteSJ
 
@@ -53,11 +54,11 @@ class ReorderSpriteMostSJ : public Subject
 {
 public:
 	struct Params {
-		Sprite* spr;
+		SprPtr spr;
 		bool up;
 	};
 public:
-	void Reorder(Sprite* spr, bool up, Observer* except = NULL);
+	void Reorder(const SprPtr& spr, bool up, Observer* except = NULL);
 	SUBJECT_DECLARATION(ReorderSpriteMostSJ)
 }; // ReorderSpriteMostSJ
 
@@ -65,18 +66,18 @@ class ReorderSpriteSJ : public Subject
 {
 public:
 	struct Params {
-		Sprite* spr;
+		SprPtr spr;
 		bool up;
 	};
 public:
-	void Reorder(Sprite* spr, bool up, Observer* except = NULL);
+	void Reorder(const SprPtr& spr, bool up, Observer* except = NULL);
 	SUBJECT_DECLARATION(ReorderSpriteSJ)
 }; // ReorderSpriteSJ
 
 class SortSpriteSJ : public Subject
 {
 public:
-	void Sort(std::vector<Sprite*>& sprs, Observer* except = NULL);
+	void Sort(std::vector<SprPtr>& sprs, Observer* except = NULL);
 	SUBJECT_DECLARATION(SortSpriteSJ)
 }; // SortSpriteSJ
 
@@ -92,11 +93,11 @@ class SelectSpriteSJ : public Subject
 {
 public:
 	struct Params {
-		Sprite* spr;
+		SprPtr spr;
 		bool clear;
 	};
 public:
-	void Select(Sprite* spr, bool clear, Observer* except = NULL);
+	void Select(const SprPtr& spr, bool clear, Observer* except = NULL);
 	SUBJECT_DECLARATION(SelectSpriteSJ)
 }; // SelectSpriteSJ
 
@@ -110,7 +111,7 @@ public:
 class SpriteNameChangeSJ : public Subject
 {
 public:
-	void OnSpriteNameChanged(const Sprite* spr, Observer* except = NULL);
+	void OnSpriteNameChanged(const SprPtr& spr, Observer* except = NULL);
 	SUBJECT_DECLARATION(SpriteNameChangeSJ)
 }; // SpriteNameChangeSJ
 

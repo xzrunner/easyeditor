@@ -22,7 +22,7 @@ Symbol::~Symbol()
 	Clear();
 }
 
-s2::RenderReturn Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
+s2::RenderReturn Symbol::DrawTree(cooking::DisplayList* dlist, const s2::RenderParams& rp, const s2::Sprite* spr) const
 {
 	return s2::RENDER_OK;
 }
@@ -41,7 +41,7 @@ void Symbol::ReloadTexture() const
 
 bool Symbol::LoadResources()
 {
-	if (!gum::FilepathHelper::Exists(m_filepath)) {
+	if (!gum::FilepathHelper::Exists(m_filepath.c_str())) {
 		return false;
 	}
 

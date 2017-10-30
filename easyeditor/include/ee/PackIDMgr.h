@@ -1,7 +1,7 @@
 #ifndef _EASYEDITOR_PACK_ID_MGR_H_
 #define _EASYEDITOR_PACK_ID_MGR_H_
 
-#include <CU_Singleton.h>
+#include <cu/cu_macro.h>
 
 #include <string>
 #include <map>
@@ -47,7 +47,7 @@ private:
 
 	std::vector<Package*> m_pkgs;
 
-	SINGLETON_DECLARATION(PackIDMgr)
+	CU_SINGLETON_DECLARATION(PackIDMgr)
 
 }; // PackIDMgr
 

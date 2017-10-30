@@ -51,12 +51,11 @@ void GenRegularRectImage::CreateSingle(const std::string& filepath)
 			h = spr_val["dst"]["h"].asInt();
 		std::string filepath = spr_val["filepath"].asString();
 
-		ee::ImageData* img_data = ee::ImageDataMgr::Instance()->GetItem(filepath);
+		auto img_data = ee::ImageDataMgr::Instance()->GetItem(filepath);
 		assert(img_data->GetWidth() == w && img_data->GetHeight() == h 
 			|| img_data->GetWidth() == h && img_data->GetHeight() == w);
 		bool rot = img_data->GetWidth() != w && img_data->GetHeight() != h;
-		pack.AddImage(img_data, x ,y, w, h, rot, true);
-		img_data->RemoveReference();
+		pack.AddImage(*img_data, x ,y, w, h, rot, true);
 
 		spr_val = value["parts"][i++];
 	}

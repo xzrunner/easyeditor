@@ -7,8 +7,6 @@
 
 #include <json/json.h>
 
-namespace ee { class ImageSymbol; }
-
 namespace eicon
 {
 
@@ -16,8 +14,8 @@ class QuadIcon : public Icon, public s2::StaticQuadIcon
 {
 public:
 	QuadIcon() {}
-	QuadIcon(ee::ImageSymbol* img, const sm::vec2* src, 
-		const sm::vec2* screen);
+	QuadIcon(const std::shared_ptr<s2::ImageSymbol>& img, 
+		const sm::vec2* src, const sm::vec2* screen);
 
 	/**
 	 *  @interface

@@ -24,14 +24,14 @@ bool PasteSymbolPhysicsRandomOP::OnMouseLeftDown(int x, int y)
 {
 	if (ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
-	Symbol* sym = m_random_value.sym;
+	auto& sym = m_random_value.sym;
 	if (!sym) 
 		sym = m_library->GetSymbol();
 	if (sym) 
 	{
 		m_pos = m_stage->TransPosScrToProj(x, y);
 
-		Sprite* spr = SpriteFactory::Instance()->CreateRoot(sym);
+		auto spr = SpriteFactory::Instance()->CreateRoot(sym);
 		spr->Translate(m_pos);
 
 		if (m_random_value.scale != 1.0f) {
@@ -47,8 +47,6 @@ bool PasteSymbolPhysicsRandomOP::OnMouseLeftDown(int x, int y)
 		}
 
 		InsertSpriteSJ::Instance()->Insert(spr);
-
-		spr->RemoveReference();
 	}
 
 	changeRandomValue();
@@ -69,12 +67,12 @@ bool PasteSymbolPhysicsRandomOP::OnDraw() const
 {
 	if (ZoomViewOP::OnDraw()) return true;
 
-	Symbol* sym = m_random_value.sym;
+	auto sym = m_random_value.sym;
 	if (!sym)  {
 		sym = m_library->GetSymbol();
 	}
 	if (sym && m_pos.IsValid()) {
-		ee::SpriteRenderer::Instance()->Draw(sym, s2::RenderParams(), m_pos, m_random_value.angle, 
+		ee::SpriteRenderer::Instance()->Draw(sym.get(), s2::RenderParams(), m_pos, m_random_value.angle, 
 			sm::vec2(m_random_value.scale, m_random_value.scale));
 	}
 

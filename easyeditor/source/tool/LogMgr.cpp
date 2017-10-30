@@ -3,7 +3,7 @@
 namespace ee
 {
 
-SINGLETON_DEFINITION(LogMgr)
+CU_SINGLETON_DEFINITION(LogMgr)
 
 LogMgr::LogMgr()
 {

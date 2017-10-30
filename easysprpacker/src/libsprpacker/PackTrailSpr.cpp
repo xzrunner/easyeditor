@@ -13,10 +13,10 @@ namespace lua = ebuilder::lua;
 namespace esprpacker
 {
 
-PackTrailSpr::PackTrailSpr(const etrail::Sprite* spr)
+PackTrailSpr::PackTrailSpr(const std::shared_ptr<etrail::Sprite>& spr)
 {
 	m_sym = PackNodeFactory::Instance()->Create(
-		dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
+		std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol()));
 }
 
 PackTrailSpr::~PackTrailSpr()

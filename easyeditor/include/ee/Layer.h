@@ -1,9 +1,12 @@
 #ifndef _EASYEDITOR_LAYER_H_
 #define _EASYEDITOR_LAYER_H_
 
-#include "ObjectVector.h"
+#include "ObjectRefVector.h"
 #include "Sprite.h"
 #include "Shape.h"
+
+#include <string>
+#include <cu/CU_RefCountObj.h>
 
 #include <json/json.h>
 
@@ -16,13 +19,13 @@ public:
 	Layer();
 	~Layer();
 
-	void TraverseSprite(Visitor<Sprite>& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
-	bool Insert(Sprite* spr);
-	bool Remove(Sprite* spr);
+	void TraverseSprite(RefVisitor<Sprite>& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
+	bool Insert(const SprPtr& spr);
+	bool Remove(const SprPtr& spr);
 
-	void TraverseShape(Visitor<Shape>& visitor, bool order = true) const;
-	bool Insert(Shape* shape);
-	bool Remove(Shape* shape);
+	void TraverseShape(RefVisitor<Shape>& visitor, bool order = true) const;
+	bool Insert(const ShapePtr& shape);
+	bool Remove(const ShapePtr& shape);
 
 	void LoadFromFile(const Json::Value& val, const std::string& dir);
 	void StoreToFile(Json::Value& val, const std::string& dir) const;
@@ -36,8 +39,8 @@ public:
 	bool editable;
 
 private:
-	ObjectVector<Sprite> m_sprs;
-	ObjectVector<Shape> m_shapes;
+	ObjectRefVector<Sprite> m_sprs;
+	ObjectRefVector<Shape> m_shapes;
 
 }; // Layer
 

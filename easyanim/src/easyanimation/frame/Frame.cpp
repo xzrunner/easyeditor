@@ -106,7 +106,6 @@ void Frame::OnPreview(wxCommandEvent& event)
 		s2::AnimSymbol* sym = BuildSym();
 		PreviewDialog dlg(this, stage->GetCanvas()->GetGLContext(), sym);
 		dlg.ShowModal();
-		sym->RemoveReference();
 	}
 	stage->EnableObserve(true);
 	stage->GetCanvas()->EnableObserve(true);
@@ -123,10 +122,9 @@ void Frame::OnSetBackground(wxCommandEvent& event)
 	if (dlg.ShowModal() == wxID_OK)
 	{
 		std::string filename = dlg.GetPath().ToStdString();
-		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filename);
+		auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filename);
 		ee::StageCanvas* canvas = const_cast<ee::EditPanel*>(m_task->GetEditPanel())->GetCanvas();
 		static_cast<StageCanvas*>(canvas)->SetBackground(sym);
-		sym->RemoveReference();
 	}
 	else
 	{
@@ -161,8 +159,8 @@ void Frame::OnCodeLove2d(wxCommandEvent& event)
 
 void Frame::SaveAsPNG(const std::string& filepath) const
 {
-	std::vector<ee::Sprite*> sprs;
-	((StagePanel*)(m_task->GetEditPanel()))->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs), ee::DT_VISIBLE);
+	std::vector<ee::SprPtr> sprs;
+	((StagePanel*)(m_task->GetEditPanel()))->TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs), ee::DT_VISIBLE);
 
 	sm::rect region;
  	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
@@ -209,7 +207,7 @@ s2::AnimSymbol* Frame::BuildSym() const
 		std::map<int, KeyFrame*>::const_iterator itr = src_layer.begin();
 		for ( ; itr != src_layer.end(); ++itr)
 		{
-			const std::vector<ee::Sprite*>& src_frame = itr->second->GetAllSprites();
+			const std::vector<ee::SprPtr>& src_frame = itr->second->GetAllSprites();
 			auto dst_frame = std::make_unique<s2::AnimSymbol::Frame>();
 			dst_frame->index = itr->second->GetTime();
 			dst_frame->tween = itr->second->HasClassicTween();

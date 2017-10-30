@@ -11,10 +11,10 @@ namespace lr
 
 void CheckForStore::CheckCollisionLayer(Layer* layer)
 {
-	class CheckTypeVisitor : public ee::Visitor<ee::Shape>
+	class CheckTypeVisitor : public ee::RefVisitor<ee::Shape>
 	{
 	public:
-		virtual void Visit(ee::Shape* shape, bool& next)
+		virtual void Visit(const ee::ShapePtr& shape, bool& next)
 		{
 			std::string name = shape->GetName();
 			if (name == "block" ||

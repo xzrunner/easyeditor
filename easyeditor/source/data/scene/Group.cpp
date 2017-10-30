@@ -15,7 +15,7 @@ Group::~Group()
 	Clear();
 }
 
-void Group::TraverseSprite(Visitor<Sprite>& visitor, DataTraverseType type, bool order) const
+void Group::TraverseSprite(RefVisitor<Sprite>& visitor, DataTraverseType type, bool order) const
 {
 	if (type == DT_EDITABLE && m_editable ||
 		type == DT_VISIBLE && m_visible ||
@@ -25,7 +25,7 @@ void Group::TraverseSprite(Visitor<Sprite>& visitor, DataTraverseType type, bool
 	}
 }
 
-bool Group::Insert(Sprite* spr)
+bool Group::Insert(const SprPtr& spr)
 {
 	if (m_sprs.IsExist(spr)) {
 		return false;
@@ -37,7 +37,7 @@ bool Group::Insert(Sprite* spr)
 	}
 }
 
-bool Group::Remove(Sprite* spr)
+bool Group::Remove(const SprPtr& spr)
 {
 	return m_sprs.Remove(spr);
 }

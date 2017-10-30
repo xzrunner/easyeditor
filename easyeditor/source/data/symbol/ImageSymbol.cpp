@@ -4,45 +4,33 @@
 #include "Sprite.h"
 #include "ImageData.h"
 
-#include <unirender/UR_Texture.h>
-#include <unirender/UR_RenderTarget.h>
+#include <unirender/Texture.h>
+#include <unirender/RenderTarget.h>
 #include <gimg_typedef.h>
 #include <gimg_import.h>
+#include <bimp/FilePath.h>
 #include <sprite2/ImageSymbol.h>
 #include <sprite2/RenderParams.h>
-#include <sprite2/S2_RVG.h>
-#include <sprite2/S2_Texture.h>
+#include <sprite2/RVG.h>
+#include <sprite2/Texture.h>
 #include <gum/RenderContext.h>
 #include <gum/RenderTarget.h>
 #include <gum/FilepathHelper.h>
 #include <gum/Config.h>
-#include <gum/ResPath.h>
 
 namespace ee
 {
 
 ImageSymbol::ImageSymbol()
-	: m_image(NULL)
 {
 }
 
-ImageSymbol::ImageSymbol(Image* image, const std::string& filename)
+ImageSymbol::ImageSymbol(const ImagePtr& image, const std::string& filename)
 	: m_image(image)
 {
-	m_image->AddReference();
 	InitCoreTex();
 
 	m_filepath = filename;
-}
-
-ImageSymbol::~ImageSymbol()
-{
-	if (m_bitmap) {
-		m_bitmap->RemoveReference();
-	}
-	if (m_image) {
-		m_image->RemoveReference();
-	}
 }
 
 void ImageSymbol::InvalidRect(const S2_MAT& mt) const
@@ -52,7 +40,7 @@ void ImageSymbol::InvalidRect(const S2_MAT& mt) const
 
 bool ImageSymbol::QueryTexcoords(bool use_dtex, float* texcoords, int& texid) const
 {
-	Image* img = GetImage();
+	auto img = GetImage();
 	if (!img) {
 		return false;
 	}
@@ -71,14 +59,9 @@ unsigned int ImageSymbol::GetTexID() const
 	return m_image->GetTexID();
 }
 
-void ImageSymbol::SetImage(Image* img)
-{
-	cu::RefCountObjAssign(m_image, img);
-}
-
 bool ImageSymbol::LoadResources()
 {
-	if (!gum::FilepathHelper::Exists(m_filepath)) {
+	if (!gum::FilepathHelper::Exists(m_filepath.c_str())) {
 		return false;
 	}
 	LoadSync();
@@ -99,8 +82,8 @@ void ImageSymbol::InitCoreTex()
 
 void ImageSymbol::LoadSync()
 {
-	m_bitmap = new Bitmap(m_filepath);
-	ImageMgr::Instance()->GetItem(m_filepath, &m_image);
+	m_bitmap = std::make_shared<Bitmap>(m_filepath);
+	m_image = ImageMgr::Instance()->GetItem(m_filepath);
 	InitCoreTex();
 }
 
@@ -116,16 +99,16 @@ void ImageSymbol::LoadAsync()
 
 void ImageSymbol::LoadCB(const void* res_path, void (*unpack)(const void* data, size_t size, void* ud), void* ud)
 {
-	gum::ResPath path;
+	bimp::FilePath path;
 	path.Deserialization(static_cast<const char*>(res_path));
 
 	int w, h, fmt;
 	uint8_t* pixels = gimg_import(path.GetFilepath().c_str(), &w, &h, &fmt);
-	if (fmt == GPF_RGBA && gum::Config::Instance()->GetPreMulAlpha()) {
+	if (fmt == GPF_RGBA8 && gum::Config::Instance()->GetPreMulAlpha()) {
 		gimg_pre_mul_alpha(pixels, w, h);
 	}
 
-	assert(fmt == GPF_RGB || fmt == GPF_RGBA);
+	assert(fmt == GPF_RGB || fmt == GPF_RGBA8);
 	int c = fmt == GPF_RGB ? 3 : 4;
 	int pixel_sz = w * h * c;
 
@@ -157,18 +140,16 @@ void ImageSymbol::ParserCB(const void* data, size_t size, void* ud)
 	ptr += sizeof(fmt);
 
 	ImageSymbol* sym = static_cast<ImageSymbol*>(ud);
-	Bitmap* bmp = new Bitmap(sym->GetFilepath(), const_cast<uint8_t*>(ptr), w, h, fmt);
+	auto bmp = std::make_shared<Bitmap>(sym->GetFilepath(), const_cast<uint8_t*>(ptr), w, h, fmt);
 	sym->SetBitmap(bmp);
 
-	assert(fmt == GPF_RGB || fmt == GPF_RGBA);
-	sym->SetImage(new Image(ptr, w, h, fmt));
+	assert(fmt == GPF_RGB || fmt == GPF_RGBA8);
+	sym->SetImage(std::make_shared<Image>(ptr, w, h, fmt));
 	sym->InitCoreTex();
 }
 
 void ImageSymbol::ReleaseCB(void* ud)
 {
-	ImageSymbol* sym = static_cast<ImageSymbol*>(ud);
-	sym->RemoveReference();
 }
 
 }

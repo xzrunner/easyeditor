@@ -1,6 +1,8 @@
 #ifndef _EASYEDITOR_RIGHT_POPUP_MENU_H_
 #define _EASYEDITOR_RIGHT_POPUP_MENU_H_
 
+#include "Sprite.h"
+
 #include <wx/wx.h>
 
 #include <vector>
@@ -11,7 +13,6 @@ namespace ee
 class EditPanelImpl;
 class MultiSpritesImpl;
 class SpriteSelection;
-class Sprite;
 
 class RightPopupMenu
 {
@@ -73,7 +74,7 @@ private:
 
 	SpriteSelection* m_selection;
 
-	std::vector<Sprite*> m_edited_sprs, m_selected_sprs;
+	std::vector<SprPtr> m_edited_sprs, m_selected_sprs;
 
 }; // RightPopupMenu
 

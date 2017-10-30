@@ -28,7 +28,7 @@ protected:
 	virtual wxSizer* InitLayout();
 
 private:
-	class GetPhysicsStaticVisitor : public Visitor<Sprite>
+	class GetPhysicsStaticVisitor : public RefVisitor<Sprite>
 	{
 	public:
 		enum TYPE
@@ -40,7 +40,7 @@ private:
 
 	public:
 		GetPhysicsStaticVisitor();
-		virtual void Visit(Sprite* spr, bool& next);
+		virtual void Visit(const SprPtr& spr, bool& next);
 		TYPE getType() const { return m_type; }
 
 	private:
@@ -48,11 +48,11 @@ private:
 
 	}; // GetPhysicsStaticVisitor
 
-	class SetPhysicsStaticVisitor : public Visitor<Sprite>
+	class SetPhysicsStaticVisitor : public RefVisitor<Sprite>
 	{
 	public:
 		SetPhysicsStaticVisitor(bool bChecked);
-		virtual void Visit(Sprite* spr, bool& next);
+		virtual void Visit(const SprPtr& spr, bool& next);
 
 	private:
 		bool m_bChecked;

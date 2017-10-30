@@ -1,7 +1,7 @@
 #include "TextureImgData.h"
 #include "Exception.h"
 
-#include <unirender/UR_RenderContext.h>
+#include <unirender/RenderContext.h>
 #include <gimg_typedef.h>
 #include <gum/RenderContext.h>
 
@@ -43,7 +43,7 @@ void TextureImgData::LoadFromMemory(const uint8_t* pixels, int w, int h, int fmt
 	ur::TEXTURE_FORMAT tf;
 	switch (fmt)
 	{
-	case GPF_RGBA:
+	case GPF_RGBA8:
 		tf = ur::TEXTURE_RGBA8;
 		break;
 	case GPF_RGB:

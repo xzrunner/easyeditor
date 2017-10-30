@@ -8,7 +8,7 @@
 #include <easyui.h>
 #include <easycomplex.h>
 
-#include <sprite2/S2_Sprite.h>
+#include <sprite2/Sprite.h>
 #include <sprite2/BoundingBox.h>
 
 #include <algorithm>
@@ -34,7 +34,7 @@ UIList::UIList()
 	m_item_spr = NULL;
 }
 
-bool UIList::InsertSprite(ee::Sprite* spr, int idx)
+bool UIList::InsertSprite(const ee::SprPtr& spr, int idx)
 {
 	if (!spr) {
 		return false;
@@ -48,10 +48,8 @@ bool UIList::InsertSprite(ee::Sprite* spr, int idx)
 	}
 
 	if (m_hori_count ==  0 && m_vert_count == 0) {
-		spr->AddReference();
 		m_item_spr = spr;
-		ee::Sprite* cp = dynamic_cast<ee::Sprite*>(((cu::Cloneable*)m_item_spr)->Clone());
-		m_items.push_back(cp);
+		m_items.push_back(std::dynamic_pointer_cast<ee::Sprite>(m_item_spr->Clone()));
 		m_hori_count = m_vert_count = 1;
 		return true;
 	}
@@ -93,18 +91,14 @@ bool UIList::ClearAllSprite()
 {
 	bool ret = !m_items.empty();
 
-	if (m_item_spr) {
-		m_item_spr->RemoveReference();
-		m_item_spr = NULL;
-	}
+	m_item_spr.reset();
 
-	for_each(m_items.begin(), m_items.end(), cu::RemoveRefFunctor<ee::Sprite>());
 	m_items.clear();
 
 	return ret;
 }
 
-void UIList::TraverseSprites(ee::Visitor<ee::Sprite>& visitor) const
+void UIList::TraverseSprites(ee::RefVisitor<ee::Sprite>& visitor) const
 {
 	if (m_reverse_order) {
 		for (int i = m_items.size() - 1; i >= 0; --i) {
@@ -126,53 +120,52 @@ void UIList::StoreToFile(const char* filename) const
 	std::string name = filename;
 	name = name.substr(0, name.find_last_of('_'));
 
-	std::string dir = ee::FileHelper::GetFileDir(filename);
+	auto dir = ee::FileHelper::GetFileDir(filename);
 
 	// items complex
-	ecomplex::Symbol items_complex;
+	auto items_complex = std::make_shared<ecomplex::Symbol>();
 	if (m_column_order) {
 		assert(m_items.size() == m_hori_count * m_vert_count);
 		for (int i = 0, n = m_items.size(); i < n; ++i) {
-			ee::Sprite* spr = m_items[i];
+			auto& spr = m_items[i];
 			int row = i / m_hori_count,
 				col = i % m_hori_count;
 			int idx = col * m_vert_count + row;
 			spr->SetName("item" + ee::StringHelper::ToString(idx + 1));
-			items_complex.Add(spr);
+			items_complex->Add(spr);
 		}
 	} else if (m_reverse_order) {
 		for (int i = m_items.size() - 1; i >= 0; --i) {
-			ee::Sprite* spr = m_items[i];
+			auto& spr = m_items[i];
 			spr->SetName("item" + ee::StringHelper::ToString(i + 1));
-			items_complex.Add(spr);
+			items_complex->Add(spr);
 		}
 	} else {
 		for (int i = 0, n = m_items.size(); i < n; ++i) {
-			ee::Sprite* spr = m_items[i];
+			auto& spr = m_items[i];
 			spr->SetName("item" + ee::StringHelper::ToString(i + 1));
-			items_complex.Add(spr);
+			items_complex->Add(spr);
 		}
 	}
-	std::string items_path = name + "_items_complex[gen].json";
-	items_complex.SetFilepath(items_path);
-	ecomplex::FileStorer::Store(items_path, &items_complex, ee::FileHelper::GetFileDir(items_path));
+	CU_STR items_path = CU_STR(name.c_str()) + "_items_complex[gen].json";
+	items_complex->SetFilepath(items_path);
+	ecomplex::FileStorer::Store(items_path, *items_complex, ee::FileHelper::GetFileDir(items_path));
 
 	// wrapper complex
-	ecomplex::Sprite items_sprite(&items_complex);
-	items_sprite.SetName("anchor");
-	ecomplex::Symbol wrapper_complex;
-	wrapper_complex.SetScissor(m_clipbox);
-	wrapper_complex.Add(&items_sprite);
-	items_sprite.AddReference();
-	std::string top_path = name + "_wrapper_complex[gen].json";
-	wrapper_complex.SetFilepath(top_path);
-	ecomplex::FileStorer::Store(top_path, &wrapper_complex, ee::FileHelper::GetFileDir(top_path));
+	auto items_sprite = std::make_shared<ecomplex::Sprite>(items_complex);
+	items_sprite->SetName("anchor");
+	auto wrapper_complex = std::make_shared<ecomplex::Symbol>();;
+	wrapper_complex->SetScissor(m_clipbox);
+	wrapper_complex->Add(items_sprite);
+	CU_STR top_path = CU_STR(name.c_str()) + "_wrapper_complex[gen].json";
+	wrapper_complex->SetFilepath(top_path);
+	ecomplex::FileStorer::Store(top_path, *wrapper_complex, ee::FileHelper::GetFileDir(top_path));
 
 	// ui
 	std::string ui_path = filename;
 	Json::Value value;
-	value["items filepath"] = ee::FileHelper::GetRelativePath(dir, items_path);
-	value["wrapper filepath"] = ee::FileHelper::GetRelativePath(dir, top_path);
+	value["items filepath"] = ee::FileHelper::GetRelativePath(dir, items_path).c_str();
+	value["wrapper filepath"] = ee::FileHelper::GetRelativePath(dir, top_path).c_str();
 	value["type"] = get_widget_desc(ID_LIST);
 	value["horizontal"] = m_horizontal;
 	value["vertical"] = m_vertical;
@@ -237,27 +230,23 @@ void UIList::LoadFromFile(const char* filename)
 	m_vert_space = value["vert space"].asDouble();
 
 	std::string items_filepath = value["items filepath"].asString();
-	items_filepath = ee::FileHelper::GetAbsolutePathFromFile(filename, items_filepath);
-	ecomplex::Symbol items_complex;
-	items_complex.LoadFromFile(items_filepath);
-	const std::vector<s2::Sprite*>& children = items_complex.GetAllChildren();
+	items_filepath = ee::FileHelper::GetAbsolutePathFromFile(filename, items_filepath.c_str()).c_str();
+	auto items_complex = std::make_shared<ecomplex::Symbol>();
+	items_complex->LoadFromFile(items_filepath.c_str());
+	auto& children = items_complex->GetAllChildren();
 	if (!m_reverse_order) {
-		for (int i = 0, n = children.size(); i < n; ++i) {
-			ee::Sprite* spr = dynamic_cast<ee::Sprite*>(children[i]);
-			spr->AddReference();
-			m_items.push_back(spr);
+		for (auto& child : children) {
+			m_items.push_back(std::dynamic_pointer_cast<ee::Sprite>(child));
 		}
 		if (!children.empty()) {
-			m_item_spr = dynamic_cast<ee::Sprite*>(((cu::Cloneable*)children[0])->Clone());
+			m_item_spr = std::dynamic_pointer_cast<ee::Sprite>(children[0]->Clone());
 		}
 	} else {
-		for (int i = 0, n = children.size(); i < n; ++i) {
-			ee::Sprite* spr = dynamic_cast<ee::Sprite*>(children[i]);
-			spr->AddReference();
-			m_items.insert(m_items.begin(), spr);
+		for (auto& child : children) {
+			m_items.insert(m_items.begin(), std::dynamic_pointer_cast<ee::Sprite>(child));
 		}
 		if (!children.empty()) {
-			m_item_spr = dynamic_cast<ee::Sprite*>(((cu::Cloneable*)children.back())->Clone());
+			m_item_spr = std::dynamic_pointer_cast<ee::Sprite>(children.back()->Clone());
 		}
 	}
 }
@@ -268,11 +257,9 @@ bool UIList::ReFilling()
 		return false;
 	}
 
-	for_each(m_items.begin(), m_items.end(), cu::RemoveRefFunctor<ee::Sprite>());
 	m_items.clear();
 
-	ee::Sprite* cp = dynamic_cast<ee::Sprite*>(((cu::Cloneable*)m_item_spr)->Clone());
-	m_items.push_back(cp);
+	m_items.push_back(std::dynamic_pointer_cast<ee::Sprite>(m_item_spr->Clone()));
 
 	m_hori_count = m_vert_count = 1;
 
@@ -281,7 +268,7 @@ bool UIList::ReFilling()
 	return true;
 }
 
-bool UIList::Arrange(const ee::Sprite* spr)
+bool UIList::Arrange(const ee::SprConstPtr& spr)
 {
 	if (m_items.empty()) {
 		return false;
@@ -340,7 +327,6 @@ bool UIList::Filling()
 		((m_hori_count == 1 || m_vert_count == 1) &&
 		(m_hori_count > 1 || m_vert_count > 1)));
 
-	for_each(m_items.begin(), m_items.end(), cu::RemoveRefFunctor<ee::Sprite>());
 	m_items.clear();
 
 	sm::vec2 base = m_item_spr->GetPosition();
@@ -371,7 +357,7 @@ bool UIList::Filling()
 				break;
 			} else {
 				new_line = true;
-				ee::Sprite* spr = dynamic_cast<ee::Sprite*>(((cu::Cloneable*)m_item_spr)->Clone());
+				auto spr = std::dynamic_pointer_cast<ee::Sprite>(m_item_spr->Clone());
 				spr->SetPosition(pos);
 				m_items.push_back(spr);
 				ret = true;
@@ -409,7 +395,7 @@ bool UIList::Arrange(float hori_space, float vert_space)
 	float x_base = pos.x;
 	int count = 0;
 	for (int i = 0, n = m_items.size(); i < n; ++i) {
-		ee::Sprite* spr = m_items[i];
+		auto& spr = m_items[i];
 		spr->SetPosition(pos);
 		pos.x += m_hori_space;
 

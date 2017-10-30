@@ -12,7 +12,7 @@ namespace ecomplex
 class Particle2DToSpr
 {
 public:
-	static ee::Sprite* Trans(const erespacker::PackParticle2D* p2d);
+	static ee::SprPtr Trans(const erespacker::PackParticle2D* p2d);
 
 private:
 	static p2d_emitter_cfg* LoadConfig(const erespacker::PackParticle2D* p2d);

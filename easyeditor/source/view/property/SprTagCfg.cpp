@@ -9,7 +9,7 @@
 namespace ee
 {
 
-SINGLETON_DEFINITION(SprTagCfg);
+CU_SINGLETON_DEFINITION(SprTagCfg);
 
 static const char* FILENAME = "tag_cfg.json";
 

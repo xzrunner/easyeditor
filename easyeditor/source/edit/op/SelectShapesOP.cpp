@@ -50,19 +50,18 @@ bool SelectShapesOP::OnKeyDown(int keyCode)
 	{
 		clearClipboard();
 
-		std::vector<Shape*> shapes;
-		m_selection->Traverse(FetchAllVisitor<Shape>(shapes));
+		std::vector<ShapePtr> shapes;
+		m_selection->Traverse(FetchAllRefVisitor<Shape>(shapes));
 		for (size_t i = 0, n = shapes.size(); i < n; ++i) {
-			Shape* cp = dynamic_cast<Shape*>(((cu::Cloneable*)shapes[i])->Clone());
+			auto cp(std::shared_ptr<Shape>(dynamic_cast<Shape*>(shapes[i]->Clone())));
 			m_clipboard.push_back(cp);
 		}
 	}
 	else if (m_stage->GetKeyState(WXK_CONTROL) && keyCode == 'V')
 	{
 		for (size_t i = 0, n = m_clipboard.size(); i < n; ++i) {
-			Shape* cp = dynamic_cast<Shape*>(((cu::Cloneable*)m_clipboard[i])->Clone());
+			auto cp(std::shared_ptr<Shape>(dynamic_cast<Shape*>(m_clipboard[i]->Clone())));
 			InsertShapeSJ::Instance()->Insert(cp);
-			cp->RemoveReference();
 		}
 	}
 
@@ -76,7 +75,7 @@ bool SelectShapesOP::OnMouseLeftDown(int x, int y)
 //	m_move_last_pos.SetInvalid();
 
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-	Shape* selected = m_shape_impl->QueryShapeByPos(pos);
+	auto selected = m_shape_impl->QueryShapeByPos(pos);
 	if (selected)
 	{
 		if (m_stage->GetKeyState(WXK_CONTROL))
@@ -126,7 +125,7 @@ bool SelectShapesOP::OnMouseLeftUp(int x, int y)
 	if (m_first_pos.IsValid())
 	{
 		sm::rect rect(m_first_pos, m_stage->TransPosScrToProj(x, y));
-		std::vector<Shape*> shapes;
+		std::vector<ShapePtr> shapes;
 		m_shape_impl->QueryShapesByRect(rect, shapes);
 		for (size_t i = 0, n = shapes.size(); i < n; ++i)
 			m_selection->Add(shapes[i]);
@@ -182,17 +181,15 @@ bool SelectShapesOP::Clear()
 
 void SelectShapesOP::clearClipboard()
 {
- 	for (size_t i = 0, n = m_clipboard.size(); i < n; ++i)
- 		m_clipboard[i]->RemoveReference();
  	m_clipboard.clear();
 }
 
 void SelectShapesOP::PasteToSelection() const
 {
-	std::vector<Shape*> shapes;
-	m_selection->Traverse(FetchAllVisitor<Shape>(shapes));
+	std::vector<ShapePtr> shapes;
+	m_selection->Traverse(FetchAllRefVisitor<Shape>(shapes));
 	for (size_t i = 0, n = shapes.size(); i < n; ++i) {
-		Shape* cp = dynamic_cast<Shape*>(((cu::Cloneable*)shapes[i])->Clone());
+		auto cp(std::shared_ptr<Shape>(dynamic_cast<Shape*>(shapes[i]->Clone())));
 		m_clipboard.push_back(cp);
 	}
 }
@@ -200,9 +197,8 @@ void SelectShapesOP::PasteToSelection() const
 void SelectShapesOP::CopyFromSelection()
 {
 	for (size_t i = 0, n = m_clipboard.size(); i < n; ++i) {
-		Shape* cp = dynamic_cast<Shape*>(((cu::Cloneable*)m_clipboard[i])->Clone());
+		auto cp(std::shared_ptr<Shape>(dynamic_cast<Shape*>(m_clipboard[i]->Clone())));
 		InsertShapeSJ::Instance()->Insert(cp);
-		cp->RemoveReference();
 	}
 }
 

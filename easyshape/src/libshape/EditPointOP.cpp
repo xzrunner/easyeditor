@@ -11,7 +11,7 @@
 #include <ee/color_config.h>
 #include <ee/panel_msg.h>
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 
 namespace eshape
 {
@@ -79,10 +79,9 @@ bool EditPointOP::OnMouseLeftUp(int x, int y)
 
 	m_pos = m_stage->TransPosScrToProj(x, y);
 	if (!m_captured.shape) {
-		PointShape* point = new PointShape(m_pos);
+		auto point = std::make_shared<PointShape>(m_pos);
 		m_shapes_impl->GetShapeSelection()->Add(point);
 		ee::InsertShapeSJ::Instance()->Insert(point);
-		point->RemoveReference();
 	}
 
 	Clear();
@@ -124,7 +123,7 @@ bool EditPointOP::OnMouseMove(int x, int y)
 
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	NodeCapture capture(m_shapes_impl, tolerance);
-	ee::Shape* old = m_captured.shape;
+	auto old = m_captured.shape;
 	capture.captureEditable(pos, m_captured);
 	if (old && !m_captured.shape || !old && m_captured.shape) {
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -140,7 +139,7 @@ bool EditPointOP::OnMouseDrag(int x, int y)
 	m_pos = m_stage->TransPosScrToProj(x, y);
 	if (m_captured.shape && 
 		get_shape_type(m_captured.shape->GetShapeDesc()) == ST_POINT) {		
-		PointShape* point = static_cast<PointShape*>(m_captured.shape);
+		auto point = std::dynamic_pointer_cast<PointShape>(m_captured.shape);
 		point->SetPos(m_pos);
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}

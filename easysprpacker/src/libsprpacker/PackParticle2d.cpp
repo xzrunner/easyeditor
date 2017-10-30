@@ -4,6 +4,7 @@
 #include "to_int.h"
 
 #include <ee/Symbol.h>
+#include <ee/SymbolMgr.h>
 
 #include <easyparticle2d.h>
 #include <easybuilder.h>
@@ -16,7 +17,7 @@ namespace lua = ebuilder::lua;
 namespace esprpacker
 {
 
-PackParticle2d::PackParticle2d(const eparticle2d::Symbol* sym)
+PackParticle2d::PackParticle2d(const std::shared_ptr<eparticle2d::Symbol>& sym)
 {
 	Init(sym);
 }
@@ -205,7 +206,7 @@ void PackParticle2d::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 	}
 }
 
-void PackParticle2d::Init(const eparticle2d::Symbol* sym)
+void PackParticle2d::Init(const std::shared_ptr<eparticle2d::Symbol>& sym)
 {
 	const p2d_emitter_cfg* cfg = sym->GetEmitterCfg();
 
@@ -364,7 +365,8 @@ Component(const p2d_symbol& sym)
 	m_add_col_begin		= gum::color2int(sym.add_col_begin.rgba, s2::RGBA);
 	m_add_col_end		= gum::color2int(sym.add_col_end.rgba, s2::RGBA);
 
-	ee::Symbol* ee_sym = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(sym.ud));
+	s2::Symbol* s2_sym = static_cast<s2::Symbol*>(sym.ud);
+	auto ee_sym = ee::SymbolMgr::Instance()->FetchSymbol(dynamic_cast<ee::Symbol*>(s2_sym)->GetFilepath());
 	m_node = PackNodeFactory::Instance()->Create(ee_sym);
 }
 

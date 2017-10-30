@@ -1,6 +1,8 @@
 #ifndef _EASYEDITOR_EDIT_PANEL_H_
 #define _EASYEDITOR_EDIT_PANEL_H_
 
+#include "Sprite.h"
+
 #include <SM_Vector.h>
 
 #include <wx/wx.h>
@@ -10,7 +12,6 @@
 namespace ee
 {
 
-class Sprite;
 class AtomicOP;
 class EditOP;
 class StageCanvas;
@@ -53,8 +54,8 @@ public:
 	void OnKeyUp(wxKeyEvent& event);
 	void OnMouseWheelRotation(int x, int y, int direction);
 
-	void SaveOpRecordList(const std::string& filepath, const std::vector<Sprite*>& sprs);
-	void LoadOpRecordList(const std::string& filepath, const std::vector<Sprite*>& sprs);
+	void SaveOpRecordList(const std::string& filepath, const std::vector<SprPtr>& sprs);
+	void LoadOpRecordList(const std::string& filepath, const std::vector<SprPtr>& sprs);
 
 	void OnSave();
 	bool IsEditDirty() const;

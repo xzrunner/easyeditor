@@ -26,7 +26,7 @@ public:
 	void SetPos(const sm::vec2& pos) { m_pos = pos; }
 
 public:
-	MotionTrail* m_trail;
+	std::shared_ptr<MotionTrail> m_trail;
 
 //	std::vector<MotionTrail*> m_trails;
 

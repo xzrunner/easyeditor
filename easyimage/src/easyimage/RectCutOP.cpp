@@ -8,7 +8,7 @@
 #include <ee/Symbol.h>
 
 #include <SM_Calc.h>
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 
 namespace eimage
 {
@@ -253,8 +253,8 @@ bool RectCutOP::Clear()
 
 std::string RectCutOP::GetImageFilepath() const
 {
-	if (const ee::Sprite* s = m_stage->GetImage()) {
-		return dynamic_cast<const ee::Symbol*>(s->GetSymbol())->GetFilepath();
+	if (const ee::SprPtr s = m_stage->GetImage()) {
+		return std::dynamic_pointer_cast<ee::Symbol>(s->GetSymbol())->GetFilepath();
 	} else {
 		return "";
 	}

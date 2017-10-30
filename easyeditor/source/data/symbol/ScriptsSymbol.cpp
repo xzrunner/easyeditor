@@ -15,7 +15,7 @@ int ScriptsSymbol::Type() const
 
 bool ScriptsSymbol::LoadResources()
 {
-	if (!gum::FilepathHelper::Exists(m_filepath)) {
+	if (!gum::FilepathHelper::Exists(m_filepath.c_str())) {
 		return false;
 	}
 

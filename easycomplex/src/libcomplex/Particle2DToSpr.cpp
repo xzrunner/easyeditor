@@ -9,11 +9,11 @@
 namespace ecomplex
 {
 
-ee::Sprite* Particle2DToSpr::Trans(const erespacker::PackParticle2D* p2d)
+ee::SprPtr Particle2DToSpr::Trans(const erespacker::PackParticle2D* p2d)
 {
-	eparticle2d::Symbol* sym = new eparticle2d::Symbol;
+	auto sym = std::make_shared<eparticle2d::Symbol>();
 	sym->SetEmitterCfg(LoadConfig(p2d));
-	return new eparticle2d::Sprite(sym);
+	return std::make_shared<eparticle2d::Sprite>(sym);
 }
 
 p2d_emitter_cfg* Particle2DToSpr::LoadConfig(const erespacker::PackParticle2D* p2d)
@@ -101,8 +101,8 @@ p2d_emitter_cfg* Particle2DToSpr::LoadConfig(const erespacker::PackParticle2D* p
 		memcpy(&dst.add_col_begin.r, &add_col_begin.r, sizeof(add_col_begin));
 		memcpy(&dst.add_col_end.r, &add_col_end.r, sizeof(add_col_end));
 		
-		ee::Sprite* spr = NodeToSprite::Trans(src.node);
-		dst.ud = dynamic_cast<ee::Symbol*>(spr->GetSymbol());
+		auto& spr = NodeToSprite::Trans(src.node);
+		dst.ud = static_cast<void*>(spr->GetSymbol().get());
 	}
 
 	return cfg;

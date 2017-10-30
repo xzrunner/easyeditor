@@ -15,16 +15,15 @@ class Joint;
 class ScaleJointAOP : public ee::AtomicOP
 {
 public:
-	ScaleJointAOP(Joint* joint, const sm::vec2& scale);
-	virtual ~ScaleJointAOP();
+	ScaleJointAOP(const std::shared_ptr<Joint>& joint, const sm::vec2& scale);
 
 	virtual void Undo();
 	virtual void Redo();
 
-	virtual Json::Value Store(const std::vector<ee::Sprite*>& sprs) const { return Json::Value(); }
+	virtual Json::Value Store(const std::vector<ee::SprPtr>& sprs) const { return Json::Value(); }
 
 private:
-	Joint* m_joint;
+	std::shared_ptr<Joint> m_joint;
 
 	sm::vec2 m_scale;
 

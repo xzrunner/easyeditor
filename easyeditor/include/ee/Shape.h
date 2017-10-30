@@ -3,6 +3,7 @@
 
 #include "UserDataImpl.h"
 
+#include <string>
 #include <SM_Matrix.h>
 #include <SM_Rect.h>
 #include <sprite2/RenderColor.h>
@@ -16,7 +17,7 @@ namespace ee
 class PropertySetting;
 class EditPanelImpl;
 
-class Shape : public virtual s2::Shape, public UserDataImpl
+class Shape : public virtual s2::Shape, public UserDataImpl, public std::enable_shared_from_this<Shape>
 {
 public:
 	Shape();
@@ -51,6 +52,9 @@ private:
 	std::string m_name;
 
 }; // Shape
+
+using ShapePtr = std::shared_ptr<Shape>;
+using ShapeConstPtr = std::shared_ptr<const Shape>;
 
 }
 

@@ -3,7 +3,7 @@
 namespace ee
 {
 
-SINGLETON_DEFINITION(Blackboard);
+CU_SINGLETON_DEFINITION(Blackboard);
 
 Blackboard::Blackboard()
 	: visible_audio(true)

@@ -5,7 +5,7 @@
 
 #include <SM_Matrix.h>
 #include <SM_Rect.h>
-#include <sprite2/S2_Sprite.h>
+#include <sprite2/Sprite.h>
 
 #include <json/json.h>
 
@@ -23,14 +23,14 @@ public:
 	Sprite();
 	Sprite(const Sprite& spr);
 	Sprite& operator = (const Sprite& spr);
-	Sprite(Symbol* sym);
+	Sprite(const s2::SymPtr& sym, uint32_t id = -1);
 	virtual ~Sprite();
 
 	/**
 	 *  @interface
 	 *    s2::Sprite
 	 */
-	virtual void SetSymbol(Symbol* sym);
+	virtual void SetSymbol(const s2::SymPtr& sym);
 
 	/**
 	 *  @interface
@@ -101,6 +101,9 @@ private:
 
 }; // Sprite
 
+using SprPtr = std::shared_ptr<Sprite>;
+using SprConstPtr = std::shared_ptr<const Sprite>;
+
 class SpriteCmp
 {
 public:
@@ -116,7 +119,7 @@ public:
 public:
 	SpriteCmp(Type type = e_file);
 
-	bool operator() (const Sprite* s0, const Sprite* s1) const;
+	bool operator() (const SprPtr& s0, const SprPtr& s1) const;
 
 private:
 	Type m_type;

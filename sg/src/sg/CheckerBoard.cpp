@@ -6,7 +6,7 @@
 #include <ee/SymbolMgr.h>
 #include <ee/Visitor.h>
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 
 #include <string>
 
@@ -19,17 +19,17 @@ CheckerBoard::CheckerBoard(StagePanel* stage)
 	Clear();
 }
 
-void CheckerBoard::Traverse(ee::Visitor<ee::Sprite>& visitor) const
+void CheckerBoard::Traverse(ee::RefVisitor<ee::Sprite>& visitor) const
 {
 	bool next;
-	std::map<ee::Sprite*, sm::vec2>::const_iterator itr 
+	std::map<ee::SprPtr, sm::vec2>::const_iterator itr 
 		= m_map_sprite2pos.begin();
 	for ( ; itr != m_map_sprite2pos.end(); ++itr) {
 		visitor.Visit(itr->first, next);
 	}
 }
 
-void CheckerBoard::AddSprite(ee::Sprite* spr)
+void CheckerBoard::AddSprite(const ee::SprPtr& spr)
 {
 	int row, col;
 	m_stage->TransCoordsToGridPos(spr->GetPosition(), row, col);
@@ -49,13 +49,13 @@ void CheckerBoard::AddSprite(ee::Sprite* spr)
 	m_map_sprite2pos.insert(std::make_pair(spr, spr->GetPosition()));
 }
 
-void CheckerBoard::RemoveSprite(ee::Sprite* spr)
+void CheckerBoard::RemoveSprite(const ee::SprPtr& spr)
 {
 	if (!spr->GetSymbol()->GetUserData()) {
 		return;
 	}
 
-	std::map<ee::Sprite*, sm::vec2>::iterator itr 
+	std::map<ee::SprPtr, sm::vec2>::iterator itr 
 		= m_map_sprite2pos.find(spr);
 	assert(itr != m_map_sprite2pos.end());
 
@@ -83,7 +83,7 @@ void CheckerBoard::Clear()
 	memset(&m_grid[0][0], 0, sizeof(m_grid));
 }
 
-bool CheckerBoard::IsValid(ee::Sprite* spr) const
+bool CheckerBoard::IsValid(const ee::SprPtr& spr) const
 {
 	int row, col;
 	m_stage->TransCoordsToGridPos(spr->GetPosition(), row, col);
@@ -143,9 +143,9 @@ void CheckerBoard::DebugDraw() const
 	}
 }
 
-bool CheckerBoard::SetCachedPos(ee::Sprite* spr) const
+bool CheckerBoard::SetCachedPos(const ee::SprPtr& spr) const
 {
-	std::map<ee::Sprite*, sm::vec2>::const_iterator itr 
+	std::map<ee::SprPtr, sm::vec2>::const_iterator itr 
 		= m_map_removed.find(spr);
 	if (itr != m_map_removed.end()) {
 		spr->SetPosition(itr->second);
@@ -167,8 +167,8 @@ void CheckerBoard::ResetWall()
 				continue;
 			}
 
-			ee::Sprite* spr = m_grid[i][j];
-			const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());
+			auto& spr = m_grid[i][j];
+			const auto sym = std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol());
 			std::string filepath = sym->GetFilepath();
 			int s = filepath.find("lv") + 2;
 			int e = filepath.find('_', s-1);

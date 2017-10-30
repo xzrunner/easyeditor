@@ -16,16 +16,16 @@ public:
 		ee::LibraryPanel* library);
 	virtual ~StagePanel();
 
-	const ee::Sprite* GetImage() const {
+	const ee::SprPtr GetImage() const {
 		return m_image;
 	}
 	void SetImage(const std::string& filepath);
 
-	const ee::Sprite* GetLeft() const { return m_left; }
-	const ee::Sprite* GetRight() const { return m_right; }
+	const ee::SprPtr GetLeft() const { return m_left; }
+	const ee::SprPtr GetRight() const { return m_right; }
 
 private:
-	void SetImage(ee::Symbol* sym);
+	void SetImage(const ee::SymPtr& sym);
 
 private:
 	class StageDropTarget : public ee::CombinedDropTarget
@@ -43,7 +43,7 @@ private:
 	}; // StageDropTarget
 
 private:
-	ee::Sprite* m_image;
+	ee::SprPtr m_image;
 
 	// todo 根据OP的不同来组织数据
 	const ee::Sprite *m_left, *m_right;

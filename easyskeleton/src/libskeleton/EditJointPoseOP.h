@@ -5,6 +5,8 @@
 
 #include <SM_Vector.h>
 
+#include <memory>
+
 namespace ee { class ArrangeSpriteState; }
 namespace s2 { class Skeleton; }
 
@@ -37,9 +39,9 @@ private:
 	void ChangeOPState(ee::ArrangeSpriteState* state);
 
 private:
-	const s2::Skeleton* m_sk;
+	const s2::Skeleton& m_sk;
 
-	Joint* m_selected;
+	std::shared_ptr<Joint> m_selected;
 
 	ee::ArrangeSpriteState* m_op_state;
 

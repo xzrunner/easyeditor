@@ -15,7 +15,7 @@ Sprite::Sprite()
 {
 }
 
-Sprite::Sprite(Symbol* sym)
+Sprite::Sprite(const s2::SymPtr& sym, uint32_t id)
 	: s2::Sprite(sym)
 	, s2::Particle3dSprite(sym)
 	, ee::Sprite(sym)
@@ -35,8 +35,8 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 		  w = d_val["w"].asDouble();
 	m_dir = sm::Quaternion(x, y, z, w);
 
-	gum::P3dSprLoader loader(this);
-	loader.LoadJson(val, dir);
+	gum::P3dSprLoader loader(*this);
+	loader.LoadJson(val, dir.c_str());
 }
 
 void Sprite::Store(Json::Value& val, const std::string& _dir) const
@@ -65,20 +65,17 @@ void Sprite::Store(Json::Value& val, const std::string& _dir) const
 
 ee::PropertySetting* Sprite::CreatePropertySetting(ee::EditPanelImpl* stage)
 {
-	return new SpritePropertySetting(stage, this);
+	return new SpritePropertySetting(stage, std::dynamic_pointer_cast<Sprite>(shared_from_this()));
 }
 
 void Sprite::OnActive()
 {
-	if (m_et) {
-		m_et->RemoveReference();
-		m_et = NULL;
-	}
+	m_et.reset();
 }
 
-ee::Sprite* Sprite::Create(ee::Symbol* sym) 
+ee::SprPtr Sprite::Create(const std::shared_ptr<ee::Symbol>& sym) 
 {
-	return new Sprite(static_cast<Symbol*>(sym));
+	return std::make_shared<Sprite>(sym);
 }
 
 }

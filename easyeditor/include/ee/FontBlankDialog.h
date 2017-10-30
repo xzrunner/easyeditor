@@ -3,6 +3,8 @@
 
 #include <wx/wx.h>
 
+#include <memory>
+
 namespace ee
 {
 
@@ -11,7 +13,7 @@ class FontBlankSymbol;
 class FontBlankDialog : public wxDialog
 {
 public:
-	FontBlankDialog(wxWindow* parent, FontBlankSymbol* sym);
+	FontBlankDialog(wxWindow* parent, const std::shared_ptr<FontBlankSymbol>& sym);
 
 	~FontBlankDialog();
 
@@ -21,7 +23,7 @@ private:
 	void StoreSymbol();
 
 private:
-	FontBlankSymbol* m_sym;
+	std::shared_ptr<FontBlankSymbol> m_sym;
 
 	wxTextCtrl* m_name;
 

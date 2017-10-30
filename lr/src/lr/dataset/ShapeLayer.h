@@ -11,7 +11,7 @@ class ShapeLayer : public Layer
 public:
 	ShapeLayer(int id, LibraryPanel* library);
 
-	virtual bool InsertSprite(ee::Sprite* spr);
+	virtual bool InsertSprite(const ee::SprPtr& spr);
 
 }; // ShapeLayer
 

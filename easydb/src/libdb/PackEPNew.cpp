@@ -9,7 +9,7 @@
 #include <easysprpacker.h>
 
 #include <gum/FilepathHelper.h>
-#include <gum/GUM_Facade.h>
+#include <gum/Facade.h>
 #include <sprite2/SprTimer.h>
 
 namespace edb

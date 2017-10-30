@@ -45,11 +45,11 @@ const uint8_t* TextureFactory::Load(const std::string& filepath, int& width,
 	if (frame) {
 		width = frame->src.frame.w;
 		height = frame->src.frame.h;
-		format = GPF_RGBA;
+		format = GPF_RGBA8;
 		return NULL;
 	} else {
 		uint8_t* pixels = gimg_import(filepath.c_str(), &width, &height, &format);
-		if (format == GPF_RGBA && gum::Config::Instance()->GetPreMulAlpha()) {
+		if (format == GPF_RGBA8 && gum::Config::Instance()->GetPreMulAlpha()) {
 			gimg_pre_mul_alpha(pixels, width, height);
 		}
 		return pixels;

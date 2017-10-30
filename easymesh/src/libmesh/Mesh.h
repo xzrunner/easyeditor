@@ -2,15 +2,17 @@
 #define _EASYMESH_MESH_H_
 
 #include <ee/Visitor.h>
+#include <ee/Symbol.h>
+#include <ee/Shape.h>
 
-#include <sprite2/S2_Mesh.h>
+#include <sprite2/Mesh.h>
 
 #include <SM_Vector.h>
 #include <SM_Rect.h>
 
 #include <json/json.h>
 
-namespace ee { class Symbol; class Rect; class RenderParams; class Shape; }
+namespace ee { class Symbol; class Rect; class RenderParams; }
 
 namespace emesh
 {
@@ -19,7 +21,7 @@ class Mesh : public s2::Mesh
 {
 public:
 	Mesh();
-	Mesh(const ee::Symbol* base);
+	Mesh(const ee::SymPtr& base);
 
 	/**
 	 *  @interface
@@ -35,9 +37,9 @@ public:
 	 *  @interface
 	 *    Editable
 	 */
-	virtual void TraverseMesh(ee::Visitor<ee::Shape>& visitor) const {}
-	virtual bool RemoveMesh(ee::Shape* mesh) { return false; }
-	virtual bool InsertMesh(ee::Shape* mesh) { return false; }
+	virtual void TraverseMesh(ee::RefVisitor<ee::Shape>& visitor) const {}
+	virtual bool RemoveMesh(const ee::ShapePtr& mesh) { return false; }
+	virtual bool InsertMesh(const ee::ShapePtr& mesh) { return false; }
 // 	virtual bool ClearMesh() { return false; }
 	virtual void Reset() {}
 	virtual void Clear() {}

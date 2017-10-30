@@ -35,7 +35,7 @@
 namespace ee
 {
 
-SpritePropertySetting::SpritePropertySetting(EditPanelImpl* stage, Sprite* spr)
+SpritePropertySetting::SpritePropertySetting(EditPanelImpl* stage, const SprPtr& spr)
 	: PropertySetting("Sprite")
 	, m_impl(new SpritePropertyImpl(stage, spr))
 	, m_pg(NULL)
@@ -54,8 +54,8 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 	if (value.IsNull())
 		return;
 
-	Sprite* spr = m_impl->GetSprite();
-	Symbol* sym = dynamic_cast<Symbol*>(spr->GetSymbol());
+	auto& spr = m_impl->GetSprite();
+	auto sym = std::dynamic_pointer_cast<Symbol>(spr->GetSymbol());
 
 	bool dirty = true;
 
@@ -63,30 +63,30 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 	if (name == "FileDir")
 	{
 		std::string file = ee::FileHelper::GetFilenameWithExtension(sym->GetFilepath());
-		std::string filepath = wxANY_AS(value, wxString).ToStdString() + "\\" + file;
-		dynamic_cast<Symbol*>(sym)->SetFilepath(filepath);
+		std::string filepath = std::string(wxANY_AS(value, wxString).ToStdString().c_str()) + "\\" + file.c_str();
+		sym->SetFilepath(filepath.c_str());
 	}
 	else if (name == "FileName")
 	{
 		std::string dir = ee::FileHelper::GetFileDir(sym->GetFilepath());
-		std::string filepath = dir + "\\" + wxANY_AS(value, wxString).ToStdString();
+		std::string filepath = dir + "\\" + wxANY_AS(value, wxString).ToStdString().c_str();
 		sym->SetFilepath(filepath);
 	}
 	// base
-	else if (name == wxT("Name"))
+	else if (name == std::string("Name"))
 	{
-		spr->SetName(wxANY_AS(value, wxString).ToStdString());
+		spr->SetName(wxANY_AS(value, wxString).ToStdString().c_str());
 		SpriteNameChangeSJ::Instance()->OnSpriteNameChanged(spr, this);
 	}
 	else if (name == "Tag")
 	{
-		spr->SetTag(wxANY_AS(value, wxString).ToStdString());
+		spr->SetTag(wxANY_AS(value, wxString).ToStdString().c_str());
 	}
 	// color
 	else if (name == "Color")
 	{
 		std::vector<std::string> tags;
-		ee::StringHelper::Split(wxANY_AS(value, wxString).ToStdString(), "; ", tags);
+		ee::StringHelper::Split(wxANY_AS(value, wxString).ToStdString().c_str(), "; ", tags);
 		assert(tags.size() == 4);
 		SetColMul(spr, tags[0]);
 		SetColAdd(spr, tags[1]);
@@ -96,20 +96,20 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 	else if (name == "Color.Multi" && Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_DEFAULT)
 	{
 		wxColour wx_col = wxANY_AS(value, wxColour);
-		SetColMul(spr, wx_col.GetAsString().ToStdString());
+		SetColMul(spr, wx_col.GetAsString().ToStdString().c_str());
 	}
 	else if (name == "Color.Add" && Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_DEFAULT)
 	{
 		wxColour wx_col = wxANY_AS(value, wxColour);
-		SetColAdd(spr, wx_col.GetAsString().ToStdString());
+		SetColAdd(spr, wx_col.GetAsString().ToStdString().c_str());
 	}
 	else if (name == "Color.Alpha")
 	{
-		SetColAlpha(spr, wxANY_AS(value, wxString).ToStdString());
+		SetColAlpha(spr, wxANY_AS(value, wxString).ToStdString().c_str());
 	}
 	else if (name == "Color.Overlay")
 	{
-		SetColOverlap(spr, wxANY_AS(value, wxString).ToStdString());
+		SetColOverlap(spr, wxANY_AS(value, wxString).ToStdString().c_str());
 	}
 // 	else if (name == "Color.R")
 // 	{
@@ -159,80 +159,80 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 		spr->SetIntegrate(wxANY_AS(value, bool));
 	}
 	// pos
-	else if (name == wxT("Pos"))
+	else if (name == std::string("Pos"))
 	{
  		double x, y;
  		SplitString2Double(value, &x, &y);
  		m_impl->Translate(x, y);
 	}
 	// angle
-	else if (name == wxT("Angle"))
+	else if (name == std::string("Angle"))
 	{
 		m_impl->Rotate(wxANY_AS(value, float) * SM_DEG_TO_RAD);
 	}
 	// scale
-	else if (name == wxT("Scale"))
+	else if (name == std::string("Scale"))
 	{
 		double x, y;
 		SplitString2Double(value, &x, &y);
 		m_impl->Scale(x, y);
 	}
 	// size
-	else if (name == wxT("Size"))
+	else if (name == std::string("Size"))
 	{
 		double w, h;
 		SplitString2Double(value, &w, &h);
-		sm::vec2 sz = sym->GetBounding(spr).Size();
+		sm::vec2 sz = sym->GetBounding(spr.get()).Size();
 		m_impl->Scale(w / sz.x, h / sz.y);
 	}
 	// shear
-	else if (name == wxT("Shear"))
+	else if (name == std::string("Shear"))
 	{
 		double x, y;
 		SplitString2Double(value, &x, &y);
 		m_impl->Shear(x, y);
 	}
 	// offset
-	else if (name == wxT("Offset"))
+	else if (name == std::string("Offset"))
 	{
 		double x, y;
 		SplitString2Double(value, &x, &y);
 		m_impl->Offset(x, y);
 	}
 	// mirror
-	else if (name == wxT("Mirror"))
+	else if (name == std::string("Mirror"))
 	{
 		// todo
 	}
-	else if (name == wxT("Mirror.Horizontal"))
+	else if (name == std::string("Mirror.Horizontal"))
 	{
 //		spr->setMirror(wxANY_AS(value, bool), yMirror);
 		m_impl->Mirror(wxANY_AS(value, bool), spr->GetScale().y < 0);
 	}
-	else if (name == wxT("Mirror.Vertical"))
+	else if (name == std::string("Mirror.Vertical"))
 	{
 //		spr->setMirror(xMirror, wxANY_AS(value, bool));
 		m_impl->Mirror(spr->GetScale().x < 0, wxANY_AS(value, bool));
 	}
 	// perspective
-	else if (name == wxT("Perspective"))
+	else if (name == std::string("Perspective"))
 	{
 		double x, y;
 		SplitString2Double(value, &x, &y);
 		m_impl->Perspective(x, y);
 	}
 	// other
-	else if (name == wxT("Visiable"))
+	else if (name == std::string("Visiable"))
 	{
 		spr->SetVisible(wxANY_AS(value, bool));
 		RefreshPanelSJ::Instance()->Refresh();
 	}
-	else if (name == wxT("Editable"))
+	else if (name == std::string("Editable"))
 	{
 		spr->SetEditable(wxANY_AS(value, bool));
 		RefreshPanelSJ::Instance()->Refresh();
 	}
-	else if (m_spr_filter_prop.FromPS(name, value, spr))
+	else if (m_spr_filter_prop.FromPS(name.c_str(), value, *spr))
 	{
 		dirty = true;
 	}
@@ -250,18 +250,18 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
 	m_pg = pg;
 
-	Sprite* spr = m_impl->GetSprite();
-	Symbol* sym = dynamic_cast<Symbol*>(spr->GetSymbol());
+	auto& spr = m_impl->GetSprite();
+	auto sym = std::dynamic_pointer_cast<Symbol>(spr->GetSymbol());
 
 	FileDirProperty* dir_prop = dynamic_cast<FileDirProperty*>(pg->GetProperty(wxT("FileDir")));
-	dir_prop->SetFilepath(sym->GetFilepath());
+	dir_prop->SetFilepath(sym->GetFilepath().c_str());
 	FileNameProperty* name_prop = dynamic_cast<FileNameProperty*>(pg->GetProperty(wxT("FileName")));
-	name_prop->SetFilepath(sym->GetFilepath());
+	name_prop->SetFilepath(sym->GetFilepath().c_str());
 
-	std::string name;
+	CU_STR name;
 	s2::SprNameMap::Instance()->IDToStr(spr->GetName(), name);
-	pg->GetProperty(wxT("Name"))->SetValue(name);
-	pg->GetProperty(wxT("Tag"))->SetValue(spr->GetTag());
+	pg->GetProperty(wxT("Name"))->SetValue(name.c_str());
+	pg->GetProperty(wxT("Tag"))->SetValue(spr->GetTag().c_str());
 
 	SprTagProperty* tag_prop = dynamic_cast<SprTagProperty*>(pg->GetProperty(wxT("Tag")));
 	tag_prop->SetParent(pg);
@@ -290,7 +290,7 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 
 	pg->GetProperty(wxT("FastBlend"))->SetValue(FastBlendModes::Instance()->Mode2ID(spr->GetShader().GetFastBlend()));
 
-	m_spr_filter_prop.ToPS(spr, pg);
+	m_spr_filter_prop.ToPS(*spr, pg);
 
 	MyColorProperty* rp = static_cast<MyColorProperty*>(pg->GetProperty("Color Conversion.R"));
 	rp->SetListener(new SprPropColMonitor(spr, SprPropColMonitor::CT_RMAP));
@@ -316,7 +316,7 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	pg->GetProperty(wxT("Scale.X"))->SetValue(spr->GetScale().x);
 	pg->GetProperty(wxT("Scale.Y"))->SetValue(spr->GetScale().y);
 	pg->GetProperty(wxT("Scale"))->SetValue(pg->GetProperty(wxT("Scale"))->GenerateComposedValue());
-	sm::vec2 sz = spr->GetSymbol()->GetBounding(spr).Size();
+	sm::vec2 sz = spr->GetSymbol()->GetBounding(spr.get()).Size();
 	pg->GetProperty(wxT("Size.Width"))->SetValue(sz.x * spr->GetScale().x);
 	pg->GetProperty(wxT("Size.Height"))->SetValue(sz.y * spr->GetScale().y);
 	pg->GetProperty(wxT("Size"))->SetValue(pg->GetProperty(wxT("Size"))->GenerateComposedValue());
@@ -341,23 +341,23 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 
 void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 {
-	Sprite* spr = m_impl->GetSprite();
-	Symbol* sym = dynamic_cast<Symbol*>(spr->GetSymbol());
+	auto& spr = m_impl->GetSprite();
+	auto sym = std::dynamic_pointer_cast<Symbol>(spr->GetSymbol());
 
 	pg->Clear();
 
 	pg->Append(new wxPropertyCategory("RES", wxPG_LABEL));
 
-	pg->Append(new FileDirProperty("FileDir", wxPG_LABEL, sym->GetFilepath()));
-	pg->Append(new FileNameProperty("FileName", wxPG_LABEL, sym->GetFilepath()));
+	pg->Append(new FileDirProperty("FileDir", wxPG_LABEL, sym->GetFilepath().c_str()));
+	pg->Append(new FileNameProperty("FileName", wxPG_LABEL, sym->GetFilepath().c_str()));
 
 	pg->Append(new wxPropertyCategory("BASE", wxPG_LABEL));
 
-	std::string name;
+	CU_STR name;
 	s2::SprNameMap::Instance()->IDToStr(spr->GetName(), name);
-	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, name));
+	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, name.c_str()));
 
-	SprTagProperty* tag_prop = new SprTagProperty("Tag", wxPG_LABEL, spr->GetTag());
+	SprTagProperty* tag_prop = new SprTagProperty("Tag", wxPG_LABEL, spr->GetTag().c_str());
 	tag_prop->SetParent(pg);
 	tag_prop->SetSprite(spr);
 	pg->Append(tag_prop);
@@ -439,7 +439,7 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 	fast_blend_prop->SetValue(fast_blend_idx);
 	pg->Append(fast_blend_prop);
 
-	m_spr_filter_prop.InitPS(spr, pg);
+	m_spr_filter_prop.InitPS(*spr, pg);
 
 	pg->Append(new wxFloatProperty("Downsample", wxPG_LABEL, spr->GetShader().GetDownsample()));
 	pg->SetPropertyAttribute(wxT("Downsample"), "Min", 0.01f);
@@ -523,23 +523,23 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 void SpritePropertySetting::OnNotify(int sj_id, void* ud)
 {
 	if (sj_id == MSG_SPRITE_NAME_CHANGE) {
-		Sprite* spr = (Sprite*)ud;
+		auto spr = *(SprPtr*)ud;
 		if (GetSprite() == spr && m_pg) {
 			m_pg->GetProperty(wxT("Name"))->SetValue(spr->GetName());	
 		}
 	}
 }
 
-Sprite* SpritePropertySetting::GetSprite()
+SprPtr SpritePropertySetting::GetSprite()
 {
 	if (m_impl) {
 		return m_impl->GetSprite();
 	} else {
-		return NULL;
+		return nullptr;
 	}
 }
 
-void SpritePropertySetting::SetColMul(ee::Sprite* spr, const std::string& val)
+void SpritePropertySetting::SetColMul(const ee::SprPtr& spr, const std::string& val)
 {
 	std::string fixed = val;
 	if (!fixed.empty() && val[0] == '(') {
@@ -557,10 +557,10 @@ void SpritePropertySetting::SetColMul(ee::Sprite* spr, const std::string& val)
 	rc.SetMul(col);
 	spr->SetColor(rc);
 
-	EditSprMsg::SetColMul(spr, col);
+	EditSprMsg::SetColMul(spr.get(), col);
 }
 
-void SpritePropertySetting::SetColAdd(ee::Sprite* spr, const std::string& val)
+void SpritePropertySetting::SetColAdd(const ee::SprPtr& spr, const std::string& val)
 {
 	std::string fixed = val;
 	if (!fixed.empty() && val[0] == '(') {
@@ -578,10 +578,10 @@ void SpritePropertySetting::SetColAdd(ee::Sprite* spr, const std::string& val)
 	rc.SetAdd(col);
 	spr->SetColor(rc);
 
-	EditSprMsg::SetColAdd(spr, col);
+	EditSprMsg::SetColAdd(spr.get(), col);
 }
 
-void SpritePropertySetting::SetColAlpha(ee::Sprite* spr, const std::string& val)
+void SpritePropertySetting::SetColAlpha(const ee::SprPtr& spr, const std::string& val)
 {
 	int alpha;
 	ee::StringHelper::FromString(val, alpha);
@@ -599,10 +599,10 @@ void SpritePropertySetting::SetColAlpha(ee::Sprite* spr, const std::string& val)
 	rc.SetMul(col);
 	spr->SetColor(rc);
 
-	EditSprMsg::SetColMul(spr, col);
+	EditSprMsg::SetColMul(spr.get(), col);
 }
 
-void SpritePropertySetting::SetColOverlap(ee::Sprite* spr, const std::string& val)
+void SpritePropertySetting::SetColOverlap(const ee::SprPtr& spr, const std::string& val)
 {
 	int overlay;
 	ee::StringHelper::FromString(val, overlay);
@@ -619,7 +619,7 @@ void SpritePropertySetting::SetColOverlap(ee::Sprite* spr, const std::string& va
 	rc.SetAdd(add);
 	spr->SetColor(rc);
 
-	EditSprMsg::SetColAdd(spr, add);
+	EditSprMsg::SetColAdd(spr.get(), add);
 }
 
 }

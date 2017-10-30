@@ -4,14 +4,14 @@
 #include "SettingData.h"
 #include "color_config.h"
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <sprite2/BoundingBox.h>
 #include <sprite2/DrawNode.h>
 
 namespace ee
 {
 
-SINGLETON_DEFINITION(SpriteRenderer)
+CU_SINGLETON_DEFINITION(SpriteRenderer)
 
 static 
 void draw_anchor(const s2::Sprite* spr, const s2::RenderParams& params)
@@ -21,7 +21,7 @@ void draw_anchor(const s2::Sprite* spr, const s2::RenderParams& params)
 		return;
 	}
 
-	std::vector<sm::vec2> bound;
+	CU_VEC<sm::vec2> bound;
 	sm::rect rect = spr->GetBounding()->GetSize();
 	bound.push_back(sm::vec2(rect.xmin, rect.ymin));
 	bound.push_back(sm::vec2(rect.xmax, rect.ymin));
@@ -48,14 +48,14 @@ SpriteRenderer::~SpriteRenderer()
 
 void SpriteRenderer::Draw(const s2::Sprite* spr, const s2::RenderParams& params)
 {
-	s2::DrawNode::Draw(spr, params);
+	s2::DrawNode::Draw(nullptr, spr, params);
 }
 
 void SpriteRenderer::Draw(const s2::Symbol* sym, const s2::RenderParams& params, 
 						  const sm::vec2& pos, float angle, 
 						  const sm::vec2& scale, const sm::vec2& shear)
 {
-	s2::DrawNode::Draw(sym, params, pos, angle, scale, shear);
+	s2::DrawNode::Draw(*sym, params, pos, angle, scale, shear);
 }
 
 //void SpriteRenderer::InvalidRect(const s2::Sprite* spr, const S2_MAT& mt)

@@ -11,15 +11,15 @@ void ClearShapeSJ::Clear(Observer* except)
 }
 
 SUBJECT_DEFINITION(InsertShapeSJ, MSG_INSERT_SHAPE)
-void InsertShapeSJ::Insert(Shape* shape, Observer* except)
+void InsertShapeSJ::Insert(const ShapePtr& shape, Observer* except)
 {
-	Notify((void*)shape, except);
+	Notify((void*)&shape, except);
 }
 
 SUBJECT_DEFINITION(RemoveShapeSJ, MSG_REMOVE_SHAPE)
-void RemoveShapeSJ::Remove(Shape* spr, Observer* except)
+void RemoveShapeSJ::Remove(const ShapePtr& shape, Observer* except)
 {
-	Notify((void*)spr, except);
+	Notify((void*)&shape, except);
 }
 
 SUBJECT_DEFINITION(SelectShapeSetSJ, MSG_SELECT_SHAPE_SET)
@@ -29,9 +29,9 @@ void SelectShapeSetSJ::Selecte(const ShapeSelection* selection, Observer* except
 }
 
 SUBJECT_DEFINITION(SelectShapeSJ, MSG_SELECT_SHAPE)
-void SelectShapeSJ::Select(Shape* shape, Observer* except)
+void SelectShapeSJ::Select(const ShapePtr& shape, Observer* except)
 {
-	Notify((void*)shape, except);
+	Notify((void*)&shape, except);
 }
 
 }

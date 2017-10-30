@@ -3,11 +3,11 @@
 
 #include "ListItem.h"
 #include "UserDataImpl.h"
-#include "ResourcesMgr.h"
+#include "Visitor.h"
 
 #include <SM_Matrix.h>
 #include <SM_Rect.h>
-#include <sprite2/S2_Symbol.h>
+#include <sprite2/Symbol.h>
 #include S2_MAT_HEADER
 
 #include <set>
@@ -20,8 +20,6 @@ class Sprite;
 class Symbol : public virtual s2::Symbol, public ListItem, public UserDataImpl
 {
 public:
-	virtual ~Symbol();
-
 	/**
 	 *  @interface
 	 *    UserDataImpl
@@ -30,7 +28,7 @@ public:
 
 	virtual void ReloadTexture() const {}
 	virtual void InvalidRect(const S2_MAT& mt) const {}
-	virtual void Traverse(Visitor<Sprite>& visitor) {}
+	virtual void Traverse(RefVisitor<Sprite>& visitor) {}
 
 	bool LoadFromFile(const std::string& filepath);
 
@@ -64,10 +62,13 @@ private:
 
 }; // Symbol
 
+using SymPtr = std::shared_ptr<Symbol>;
+using SymConstPtr = std::shared_ptr<const Symbol>;
+
 class SymbolCmp
 {
 public:
-	bool operator () (const Symbol* s0, const Symbol* s1) const {
+	bool operator () (const SymPtr& s0, const SymPtr& s1) const {
 		return s0->GetFilepath().compare(s1->GetFilepath()) < 0;
 	}
 }; // SymbolCmp

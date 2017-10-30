@@ -9,7 +9,7 @@
 namespace ee
 {
 
-SymbolPropertySetting::SymbolPropertySetting(Symbol* sym)
+SymbolPropertySetting::SymbolPropertySetting(const std::shared_ptr<Symbol>& sym)
 	: PropertySetting("Symbol")
 	, m_sym(sym)
 	, m_name(NULL)

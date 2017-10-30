@@ -41,28 +41,28 @@ private:
 	void checkActiveShape(const NodeAddr& captured);
 
 private:
-	class InterruptChainVisitor : public ee::Visitor<ee::Shape>
+	class InterruptChainVisitor : public ee::RefVisitor<ee::Shape>
 	{
 	public:
 		InterruptChainVisitor(const sm::vec2& pos, int tol);
 
-		virtual void Visit(ee::Shape* shape, bool& next);
+		virtual void Visit(const ee::ShapePtr& shape, bool& next);
 
-		EditedPolyShape* GetInterruptedPolyline() { return m_polyline; }
+		std::shared_ptr<EditedPolyShape> GetInterruptedPolyline() { return m_polyline; }
 
 	private:
 		const sm::vec2& m_pos;
 		int m_tol;
-		EditedPolyShape* m_polyline;
+		std::shared_ptr<EditedPolyShape> m_polyline;
 
 	}; // InterruptChainVisitor
 
-	class NearestNodeVisitor : public ee::Visitor<ee::Shape>
+	class NearestNodeVisitor : public ee::RefVisitor<ee::Shape>
 	{
 	public:
 		NearestNodeVisitor(const sm::vec2& pos, int tol);
 
-		virtual void Visit(ee::Shape* shape, bool& next);
+		virtual void Visit(const ee::ShapePtr& shape, bool& next);
 
 		const sm::vec2& GetNearestNode() const {
 			return m_nearest;

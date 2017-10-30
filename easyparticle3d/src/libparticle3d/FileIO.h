@@ -1,10 +1,12 @@
 #ifndef _EASYPARTICLE3D_FILE_IO_H_
 #define _EASYPARTICLE3D_FILE_IO_H_
 
+#include <sprite2/P3dEmitterCfg.h>
+
 #include <string>
+#include <memory>
 
 namespace ee { class LibraryPanel; }
-namespace s2 { class P3dEmitterCfg; }
 
 namespace eparticle3d
 {
@@ -21,7 +23,7 @@ public:
 		ToolbarPanel* toolbar, ee::LibraryPanel* library);
 
 	static ParticleSystem* LoadPS(const std::string& filepath);
-	static s2::P3dEmitterCfg* LoadPSConfig(const std::string& filepath);
+	static s2::P3dEmitterCfgPtr LoadPSConfig(const std::string& filepath);
 
 }; // FileIO
 

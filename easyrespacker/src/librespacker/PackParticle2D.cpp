@@ -21,7 +21,7 @@ void PackParticle2D::PackToLuaString(ebuilder::CodeGenerator& gen,
 	return Particle2DToLuaString::Pack(this, gen);
 }
 
-void PackParticle2D::UnpackFromLua(lua_State* L, const std::vector<ee::Image*>& images)
+void PackParticle2D::UnpackFromLua(lua_State* L, const std::vector<ee::ImagePtr>& images)
 {
 	Particle2DFromLua::Unpack(L, this);
 }
@@ -43,7 +43,7 @@ int PackParticle2D::SizeOfUnpackFromBin() const
 	return Particle2DFromBin::Size(this);
 }
 
-void PackParticle2D::UnpackFromBin(uint8_t** ptr, const std::vector<ee::Image*>& images)
+void PackParticle2D::UnpackFromBin(uint8_t** ptr, const std::vector<ee::ImagePtr>& images)
 {
 	Particle2DFromBin::Unpack(ptr, this);
 }

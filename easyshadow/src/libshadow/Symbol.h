@@ -20,12 +20,12 @@ public:
 	 */
 	virtual int Type() const;
 	virtual void Traverse(const s2::SymbolVisitor& visitor) {}
-	virtual s2::RenderReturn Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL) const;
+	virtual s2::RenderReturn DrawTree(cooking::DisplayList* dlist, const s2::RenderParams& rp, const s2::Sprite* spr = nullptr) const;
 
 	Shadow* GetShadow() { return m_shadow; }
 	const Shadow* GetShadow() const { return m_shadow; }
 
-	static ee::Symbol* Create() { return new Symbol(); }
+	static ee::SymPtr Create() { return std::make_shared<Symbol>(); }
 
 protected:
 	virtual sm::rect GetBoundingImpl(const s2::Sprite* spr = NULL, const s2::Actor* actor = NULL, bool cache = true) const;

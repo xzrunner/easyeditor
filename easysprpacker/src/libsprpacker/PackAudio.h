@@ -5,6 +5,8 @@
 
 #include <sprite2/AudioSymbol.h>
 
+#include <memory>
+
 namespace eaudio { class Symbol; }
 
 namespace esprpacker
@@ -13,7 +15,7 @@ namespace esprpacker
 class PackAudio : public PackNode
 {
 public:
-	PackAudio(const eaudio::Symbol* sym);
+	PackAudio(const std::shared_ptr<eaudio::Symbol>& sym);
 
 	/**
 	 *  @interface
@@ -31,7 +33,7 @@ public:
 	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const;	
 	
 private:
-	void Init(const eaudio::Symbol* sym);	
+	void Init(const std::shared_ptr<eaudio::Symbol>& sym);
 
 private:
 	std::string m_audio_name;

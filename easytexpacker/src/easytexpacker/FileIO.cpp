@@ -64,9 +64,8 @@ void FileIO::LoadFromEasypackerFile(const char* filename)
 	for (size_t i = 0, n = adapter.textures.size(); i < n; ++i)
 	{
 		ee::TexPackerAdapter::Texture tex = adapter.textures[i];
-		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(tex.filepath);
-		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
-		sym->RemoveReference();
+		auto sym = ee::SymbolMgr::Instance()->FetchSymbol(tex.filepath);
+		auto spr = ee::SpriteFactory::Instance()->Create(sym);
 
 		sm::vec2 pos;
 		pos.x = tex.region.left + tex.region.width * 0.5f;
@@ -110,9 +109,8 @@ void FileIO::LoadFromTexPackerFile(const char* filename)
 		if (!ee::FileHelper::IsFileExist(filepath))
 			filepath = ee::FileHelper::GetAbsolutePath(dir, filepath);
 
-		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
-		sym->RemoveReference();
+		auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		auto spr = ee::SpriteFactory::Instance()->Create(sym);
 
 		int width = frame_val["sourceSize"]["w"].asInt();
 		int height = frame_val["sourceSize"]["h"].asInt();
@@ -180,12 +178,12 @@ void FileIO::StoreImage(const char* filename)
 	unsigned char* dst_data = (unsigned char*) malloc(channel * width * height);
 	memset(dst_data, 0, channel * width * height);
 
-	std::vector<ee::Sprite*> sprs;
-	stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	stage->TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	for (size_t i = 0, n = sprs.size(); i < n; ++i)
 	{
-		ee::Sprite* spr = sprs[i];
-		const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());
+		auto& spr = sprs[i];
+		const auto sym = std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol());
 		const sm::vec2& center = spr->GetPosition();
 		sm::vec2 sz = sym->GetBounding().Size();
 
@@ -209,10 +207,10 @@ void FileIO::StoreImage(const char* filename)
 
 		int w, h, fmt;
 		uint8_t* src_data = gimg_import(sym->GetFilepath().c_str(), &w, &h, &fmt);
-		if (fmt == GPF_RGBA && gum::Config::Instance()->GetPreMulAlpha()) {
+		if (fmt == GPF_RGBA8 && gum::Config::Instance()->GetPreMulAlpha()) {
 			gimg_pre_mul_alpha(src_data, w, h);
 		}
-		assert(fmt == GPF_RGB || fmt == GPF_RGBA);
+		assert(fmt == GPF_RGB || fmt == GPF_RGBA8);
 		int c = fmt == GPF_RGB ? 3 : 4;
 		if (spr->GetAngle() != 0)
 		{
@@ -290,7 +288,7 @@ void FileIO::StoreImage(const char* filename)
 		imgFile += ".png";
 		break;
 	}
-	gimg_export(imgFile.c_str(), dst_data, width, height, GPF_RGBA, true);
+	gimg_export(imgFile.c_str(), dst_data, width, height, GPF_RGBA8, true);
 
 	free((void*)dst_data);
 }
@@ -302,8 +300,8 @@ void FileIO::StoreEasypackerPosition(const char* filename)
 	value["width"] = Context::Instance()->width;
 	value["height"] = Context::Instance()->height;
 
-	std::vector<ee::Sprite*> sprs;
-	Context::Instance()->stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	Context::Instance()->stage->TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	for (size_t i = 0, n = sprs.size(); i < n; ++i)
 		value["image"][i] = Store(sprs[i]);
 
@@ -321,10 +319,10 @@ void FileIO::StoreTexpackerPosition(const char* filename)
 
 	value["meta"] = Context::Instance()->tp_meta;
 
-	std::vector<ee::Sprite*> sprs;
-	Context::Instance()->stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	Context::Instance()->stage->TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
-		ee::Sprite* spr = sprs[i];
+		auto& spr = sprs[i];
 		if (spr->GetUserData()) 
 		{
 			Json::Value* val = static_cast<Json::Value*>(spr->GetUserData());
@@ -363,11 +361,11 @@ void FileIO::StoreTexpackerPosition(const char* filename)
 	fout.close();
 }
 
-Json::Value FileIO::Store(const ee::Sprite* spr)
+Json::Value FileIO::Store(const ee::SprConstPtr& spr)
 {
 	Json::Value value;
 
-	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());
+	const auto sym = std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol());
 	sm::vec2 sz = sym->GetBounding().Size();
 	const float w = sz.x, h = sz.y;
 	const sm::vec2& pos = spr->GetPosition();

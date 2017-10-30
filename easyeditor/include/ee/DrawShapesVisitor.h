@@ -10,12 +10,12 @@
 namespace ee
 {
 
-class DrawShapesVisitor : public Visitor<Shape>
+class DrawShapesVisitor : public RefVisitor<Shape>
 {
 public:
 	DrawShapesVisitor(const sm::rect& screen_region, float cam_scale);
 
-	virtual void Visit(Shape* shape, bool& next);
+	virtual void Visit(const std::shared_ptr<Shape>& shape, bool& next);
 
 private:
 	sm::rect m_screen_region;

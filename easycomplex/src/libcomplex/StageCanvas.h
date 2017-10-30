@@ -3,8 +3,9 @@
 
 #include <ee/CameraCanvas.h>
 #include <ee/FPS.h>
+#include <ee/Symbol.h>
 
-namespace ee { class LibraryPanel; class Symbol; }
+namespace ee { class LibraryPanel; }
 
 namespace ecomplex
 {
@@ -17,9 +18,7 @@ public:
 	StageCanvas(StagePanel* editPanel, ee::LibraryPanel* library, 
 		wxGLContext* glctx = NULL);
 	
-	virtual ~StageCanvas();
-
-	void SetBackground(ee::Symbol* sym);
+	void SetBackground(const ee::SymPtr& sym) { m_background = sym; }
 
 protected:
 	virtual void OnSize(int w, int h);
@@ -34,7 +33,7 @@ private:
 private:
 	ee::LibraryPanel* m_library;
 
-	ee::Symbol* m_background;
+	ee::SymPtr m_background;
 
 	mutable ee::FPS m_fps;
 

@@ -48,7 +48,7 @@ RectQueryVisitor(const sm::vec2& pos, float tolerance, NodeAddr& result)
 }
 
 void NodeCapture::RectQueryVisitor::
-Visit(ee::Shape* shape, bool& next)
+Visit(const ee::ShapePtr& shape, bool& next)
 {
 	next = true;
 	if (!shape) {
@@ -59,25 +59,25 @@ Visit(ee::Shape* shape, bool& next)
 	switch (type)
 	{
 	case ST_POINT:
-		next = !Visit(static_cast<PointShape*>(shape));
+		next = !Visit(std::dynamic_pointer_cast<PointShape>(shape));
 		break;
 	case ST_BEZIER:
-		next = !Visit(static_cast<BezierShape*>(shape));
+		next = !Visit(std::dynamic_pointer_cast<BezierShape>(shape));
 		break;
 	case ST_EDITED_POLYLINE: case ST_CHAIN: case ST_POLYGON: case ST_COMPLEX_POLYGON: case ST_COSINE_CURVE:
-		next = !Visit(static_cast<EditedPolyShape*>(shape));
+		next = !Visit(std::dynamic_pointer_cast<EditedPolyShape>(shape));
 		break;
 	case ST_CIRCLE:
-		next = !Visit(static_cast<CircleShape*>(shape));
+		next = !Visit(std::dynamic_pointer_cast<CircleShape>(shape));
 		break;
 	case ST_RECT:
-		next = !Visit(static_cast<RectShape*>(shape));
+		next = !Visit(std::dynamic_pointer_cast<RectShape>(shape));
 		break;
 	}
 }
 
 bool NodeCapture::RectQueryVisitor::
-Visit(PointShape* point)
+Visit(const std::shared_ptr<PointShape>& point)
 {
 	if (sm::dis_pos_to_pos(point->GetPos(), m_pos) < m_tolerance) {
 		m_result.shape = point;
@@ -89,7 +89,7 @@ Visit(PointShape* point)
 }
 
 bool NodeCapture::RectQueryVisitor::
-Visit(BezierShape* bezier)
+Visit(const std::shared_ptr<BezierShape>& bezier)
 {
 	// capture center
 	const sm::rect& rect = bezier->GetBounding( );
@@ -114,7 +114,7 @@ Visit(BezierShape* bezier)
 }
 
 bool NodeCapture::RectQueryVisitor::
-Visit(EditedPolyShape* polyline)
+Visit(const std::shared_ptr<EditedPolyShape>& polyline)
 {
 	// capture center
 	const sm::rect& rect = polyline->GetBounding();
@@ -132,7 +132,7 @@ Visit(EditedPolyShape* polyline)
 	if (!polyline->IsIntersect(m_rect)) 
 		return false;
 
-	const std::vector<sm::vec2>& vertices = polyline->GetVertices();
+	const CU_VEC<sm::vec2>& vertices = polyline->GetVertices();
 	for (size_t i = 0, n = vertices.size(); i < n; ++i)
 	{
 		if (sm::dis_pos_to_pos(vertices[i], m_pos) < m_tolerance)
@@ -147,7 +147,7 @@ Visit(EditedPolyShape* polyline)
 }
 
 bool NodeCapture::RectQueryVisitor::
-Visit(CircleShape* circle)
+Visit(const std::shared_ptr<CircleShape>& circle)
 {
 	const float dis = sm::dis_pos_to_pos(circle->GetCenter(), m_pos);
 
@@ -171,7 +171,7 @@ Visit(CircleShape* circle)
 }
 
 bool NodeCapture::RectQueryVisitor::
-Visit(RectShape* rect)
+Visit(const std::shared_ptr<RectShape>& rect)
 {
 	// capture center
 	if (sm::dis_pos_to_pos(m_pos, rect->GetRect().Center()) < m_tolerance)

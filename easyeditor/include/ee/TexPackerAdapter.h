@@ -1,6 +1,8 @@
 #ifndef _EASYEDITOR_TEXPACKER_ADAPTER_H_
 #define _EASYEDITOR_TEXPACKER_ADAPTER_H_
 
+#include <string>
+
 #include <json/json.h>
 
 namespace ee

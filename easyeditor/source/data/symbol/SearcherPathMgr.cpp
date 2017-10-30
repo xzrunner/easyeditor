@@ -92,8 +92,8 @@ void SearcherPathMgr::LoadConfig()
 	int i = 0;
 	Json::Value map_val = value[KEY_NAME][i++];
 	while (!map_val.isNull()) {
-		std::string from = map_val["img_dir"].asString();
-		std::string to = map_val["tp_output"].asString();
+		std::string from = map_val["img_dir"].asString().c_str();
+		std::string to = map_val["tp_output"].asString().c_str();
 		PackedRes* res = new PackedRes(from, to);
 		m_search_path.push_back(res);
 		map_val = value[KEY_NAME][i++];
@@ -173,7 +173,7 @@ LoadCfgFile(const std::string& filepath)
 	int i = 0;
 	Json::Value frame_val = value["frames"][i++];
 	while (!frame_val.isNull()) {
-		std::string filename = frame_val["filename"].asString();
+		std::string filename = frame_val["filename"].asString().c_str();
 		StringHelper::ToLower(filename);
 		m_packed_files.push_back(filename);
 		frame_val = value["frames"][i++];

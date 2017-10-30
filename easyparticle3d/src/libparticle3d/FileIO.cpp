@@ -45,7 +45,7 @@ void FileIO::Store(const std::string& filepath, ParticleSystem* ps,
 
 	value["ground"] = toolbar->m_ground->GetSelection();
 	
-	const s2::P3dEmitterCfg* cfg = ps->GetConfig();
+	auto cfg = ps->GetConfig();
 	value["orient_to_movement"] = cfg->GetImpl()->orient_to_movement;
 
 	value["loop"] = ps->IsLoop();
@@ -63,9 +63,9 @@ void FileIO::Store(const std::string& filepath, ParticleSystem* ps,
 
 		value["components"][i]["count"] = pc->count;
 
-		ee::Symbol* sym = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(pc->ud));
+		auto sym = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(pc->ud));
 		value["components"][i]["filepath"] = 
-			ee::SymbolPath::GetRelativePath(sym, dir);
+			ee::SymbolPath::GetRelativePath(*sym, dir);
 
 		value["components"][i]["name"] = cp->m_name->GetValue().ToStdString();
 		for (int j = 0, m = cp->m_sliders.size(); j < m; ++j) {
@@ -98,7 +98,7 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 	fin.close();
 
 	gum::P3dSymLoader adapter;
-	adapter.LoadJson(filepath);
+	adapter.LoadJson(filepath.c_str());
 	
 	int version = value["version"].asInt();
 	if (version == 0) {
@@ -116,7 +116,7 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 
 	toolbar->Load(value, version);
 
-	ps->name = adapter.name;
+	ps->name = adapter.name.c_str();
 
 	bool static_mode = false;
 	if (!value["static_mode"].isNull()) {
@@ -150,29 +150,30 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 
 ParticleSystem* FileIO::LoadPS(const std::string& filepath)
 {
-	s2::P3dEmitterCfg* cfg = PSConfigMgr::Instance()->GetConfig(filepath);
+	auto cfg = PSConfigMgr::Instance()->GetConfig(filepath);
 	return new ParticleSystem(cfg, false);
 }
 
-s2::P3dEmitterCfg* FileIO::LoadPSConfig(const std::string& filepath)
+s2::P3dEmitterCfgPtr FileIO::LoadPSConfig(const std::string& filepath)
 {
 	class Loader : public gum::P3dSymLoader
 	{
 	protected:
-		virtual s2::Symbol* LoadSymbol(const std::string& filepath) const {
+		virtual s2::SymPtr LoadSymbol(const std::string& filepath) const {
 			return ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 		}
 	}; // Loader
 
 	Loader adapter;
-	adapter.LoadJson(filepath);
+	adapter.LoadJson(filepath.c_str());
 
  	int sz = SIZEOF_P3D_EMITTER_CFG + SIZEOF_P3D_SYMBOL * MAX_COMPONENTS;
  	p3d_emitter_cfg* cfg = (p3d_emitter_cfg*) operator new(sz);
  	memset(cfg, 0, sz);
-	adapter.Store(cfg);
+	auto ret = std::make_shared<s2::P3dEmitterCfg>(cfg);
+	adapter.Store(ret);
 
-	return new s2::P3dEmitterCfg(cfg);
+	return ret;
 }
 
 }

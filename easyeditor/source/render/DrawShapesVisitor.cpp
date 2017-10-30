@@ -4,7 +4,7 @@
 #include "Config.h"
 
 #include <SM_Test.h>
-#include <gum/GUM_GTxt.h>
+#include <gum/GTxt.h>
 
 namespace ee
 {
@@ -15,7 +15,7 @@ DrawShapesVisitor::DrawShapesVisitor(const sm::rect& screen_region, float cam_sc
 {
 }
 
-void DrawShapesVisitor::Visit(Shape* shape, bool& next)
+void DrawShapesVisitor::Visit(const std::shared_ptr<Shape>& shape, bool& next)
 {
 	next = true;
 
@@ -38,7 +38,7 @@ void DrawShapesVisitor::Visit(Shape* shape, bool& next)
 		float s = std::max(1.0f, m_cam_scale) * cfg.node_name_scale;
 		mt.Scale(s, s);
 		mt.Translate(center.x, center.y);
-		gum::GTxt::Instance()->Draw(mt, shape->GetName());
+		gum::GTxt::Instance()->Draw(mt, shape->GetName().c_str());
 	}
 }
 

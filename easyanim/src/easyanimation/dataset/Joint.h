@@ -1,11 +1,11 @@
 #ifndef _EASYANIM_JOINT_H_
 #define _EASYANIM_JOINT_H_
 
+#include <ee/Sprite.h>
+
 #include <SM_Vector.h>
 
 #include <set>
-
-namespace ee { class Sprite; }
 
 namespace eanim
 {
@@ -13,8 +13,8 @@ namespace eanim
 class Joint
 {
 public:
-	Joint(ee::Sprite* spr);
-	Joint(ee::Sprite* spr, const sm::vec2& pos);
+	Joint(const ee::SprPtr& spr);
+	Joint(const ee::SprPtr& spr, const sm::vec2& pos);
 	~Joint();
 
 	void Draw() const;
@@ -50,7 +50,7 @@ private:
 private:
 	int m_id;
 
-	ee::Sprite* m_spr;
+	ee::SprPtr m_spr;
 
 	sm::vec2 m_relative_pos;
 	float m_relative_angle;

@@ -1,6 +1,8 @@
 #ifndef _ECOCO_SYMBOL_SET_H_
 #define _ECOCO_SYMBOL_SET_H_
 
+#include <ee/Symbol.h>
+
 #include <string>
 #include <vector>
 #include <map>
@@ -14,17 +16,17 @@ class SymbolSet
 {
 public:
 
-	void Insert(const ee::Symbol* sym);
+	void Insert(const ee::SymConstPtr& sym);
 
-	const ee::Symbol* Query(const std::string& filepath) const;
-	bool Query(const ee::Symbol* sym) const;
+	ee::SymConstPtr Query(const std::string& filepath) const;
+	bool Query(const ee::SymConstPtr& sym) const;
 
-	const std::vector<const ee::Symbol*>& GetOrdered() const { return m_symbol_ordered; }
+	auto& GetOrdered() const { return m_symbol_ordered; }
 
 private:
-	std::multimap<std::string, const ee::Symbol*> m_symbol_map;
+	std::multimap<std::string, ee::SymConstPtr> m_symbol_map;
 
-	std::vector<const ee::Symbol*> m_symbol_ordered;
+	std::vector<ee::SymConstPtr> m_symbol_ordered;
 
 }; // SymbolSet
 

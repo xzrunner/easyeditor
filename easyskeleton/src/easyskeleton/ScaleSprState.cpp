@@ -6,7 +6,7 @@
 namespace eskeleton
 {
 
-ScaleSprState::ScaleSprState(ee::Sprite* spr, const ee::SpriteCtrlNode::Node& ctrl_node)
+ScaleSprState::ScaleSprState(const ee::SprPtr& spr, const ee::SpriteCtrlNode::Node& ctrl_node)
 	: ee::ScaleSpriteState(spr, ctrl_node)
 {
 }

@@ -3,6 +3,7 @@
 
 #include "Visitor.h"
 #include "ListItem.h"
+#include "Symbol.h"
 
 #include <wx/wx.h>
 
@@ -11,7 +12,6 @@
 namespace ee
 {
 
-class Symbol;
 class LibraryPanel;
 
 class PasteSymbolRandomWidget : public wxPanel
@@ -19,7 +19,7 @@ class PasteSymbolRandomWidget : public wxPanel
 public:
 	struct RandomValue
 	{
-		Symbol* sym;
+		SymPtr sym;
 		float scale;
 		float angle;	// in radian
 	};
@@ -33,17 +33,19 @@ private:
 	void InitLayout();
 
 private:
-	class FilterSymbolVisitor : public Visitor<ListItem>
+	class FilterSymbolVisitor : public RefVisitor<ListItem>
 	{
 	public:
-		FilterSymbolVisitor(const std::string& filter, std::vector<Symbol*>& result);
+		FilterSymbolVisitor(const std::string& filter);
 
-		virtual void Visit(ListItem* item, bool& next);
+		virtual void Visit(const ListItemPtr& item, bool& next);
+
+		auto& GetResult() const { return m_result; }
 
 	private:
 		std::string m_filter;
 
-		std::vector<Symbol*>& m_result;
+		std::vector<SymPtr> m_result;
 	};
 
 private:

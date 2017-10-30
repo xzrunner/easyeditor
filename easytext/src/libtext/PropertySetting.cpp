@@ -22,7 +22,7 @@ const wxChar* HORI_ALIGN_LABELS[] = {
 const wxChar* VERT_ALIGN_LABELS[] = { 
 	wxT("top"), wxT("bottom"), wxT("center"), wxT("auto"), wxT("tile"), NULL };
 
-PropertySetting::PropertySetting(ee::EditPanelImpl* edit_impl, Sprite* spr)
+PropertySetting::PropertySetting(ee::EditPanelImpl* edit_impl, const std::shared_ptr<Sprite>& spr)
 	: ee::SpritePropertySetting(edit_impl, spr)
 	, m_parent(edit_impl->GetEditPanel())
 {
@@ -40,7 +40,7 @@ void PropertySetting::OnPropertyGridChange(const std::string& name, const wxAny&
 {
 	ee::SpritePropertySetting::OnPropertyGridChange(name, value);
 
-	Sprite* spr = static_cast<Sprite*>(GetSprite());
+	auto spr = std::dynamic_pointer_cast<Sprite>(GetSprite());
 	s2::Textbox& tb = spr->GetTextbox();
 	if (name == "LabelSize") {
 		double w, h;
@@ -79,9 +79,9 @@ void PropertySetting::OnPropertyGridChange(const std::string& name, const wxAny&
 	} else if (name == "TextContent") {
 		std::string text = wxANY_AS(value, wxString).ToStdString();
 		s2::UpdateParams up;
-		const s2::Actor* prev_actor = ee::CurrSprTreePath::Instance()->TopActor();
-		up.SetActor(spr->QueryActor(prev_actor));
-		spr->SetText(up, text);
+		auto prev_actor = ee::CurrSprTreePath::Instance()->TopActor();
+		up.SetActor(spr->QueryActor(prev_actor.get()));
+		spr->SetText(up, text.c_str());
 	} else if (name == "TextID") {
 		spr->SetTID(wxANY_AS(value, wxString).ToStdString());
 	} else if (name == "Export") {
@@ -95,22 +95,20 @@ void PropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
 	ee::SpritePropertySetting::UpdateProperties(pg);
 
-	Sprite* spr = static_cast<Sprite*>(GetSprite());
+	auto spr = std::dynamic_pointer_cast<Sprite>(GetSprite());
 	const s2::Textbox& tb = spr->GetTextbox();
 
 	pg->GetProperty("LabelSize.Width")->SetValue(tb.width);
 	pg->GetProperty("LabelSize.Height")->SetValue(tb.height);
 
-	const std::vector<std::pair<std::string, std::string> >& 
-		fonts = ee::Config::Instance()->GetFonts();
-	const std::vector<std::pair<std::string, std::string> >& 
-		user_fonts = ee::Config::Instance()->GetUserFonts();
+	auto& fonts = ee::Config::Instance()->GetFonts();
+	auto& user_fonts = ee::Config::Instance()->GetUserFonts();
 	wxArrayString choices;
 	for (int i = 0, n = fonts.size(); i < n; ++i) {
-		choices.push_back(fonts[i].first);
+		choices.push_back(fonts[i].first.c_str());
 	}
 	for (int i = 0, n = user_fonts.size(); i < n; ++i) {
-		choices.push_back(user_fonts[i].first);
+		choices.push_back(user_fonts[i].first.c_str());
 	}
 	pg->GetProperty("Font")->SetValue(choices[tb.font_type]);
 	pg->GetProperty("FontSize")->SetValue(tb.font_size);
@@ -129,7 +127,7 @@ void PropertySetting::UpdateProperties(wxPropertyGrid* pg)
 
 	pg->GetProperty("Richtext")->SetValue(tb.richtext);
 
-	pg->GetProperty("TextContent")->SetValue(spr->GetText(s2::UpdateParams()));
+	pg->GetProperty("TextContent")->SetValue(spr->GetText(s2::UpdateParams()).c_str());
 	pg->GetProperty("TextID")->SetValue(spr->GetTID());
 	pg->GetProperty("Export")->SetValue(spr->IsExport());
 }
@@ -140,7 +138,7 @@ void PropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	pg->Append(new wxPropertyCategory("TEXT", wxPG_LABEL));
 
-	Sprite* spr = static_cast<Sprite*>(GetSprite());
+	auto spr = std::dynamic_pointer_cast<Sprite>(GetSprite());
 	const s2::Textbox& tb = spr->GetTextbox();
 
 	wxPGProperty* sz_prop = pg->Append(new wxStringProperty("LabelSize", wxPG_LABEL, "<composed>"));
@@ -148,16 +146,14 @@ void PropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->AppendIn(sz_prop, new wxIntProperty("Width", wxPG_LABEL, tb.width));
 	pg->AppendIn(sz_prop, new wxIntProperty("Height", wxPG_LABEL, tb.height));
 
-	const std::vector<std::pair<std::string, std::string> >& 
-		fonts = ee::Config::Instance()->GetFonts();
-	const std::vector<std::pair<std::string, std::string> >& 
-		user_fonts = ee::Config::Instance()->GetUserFonts();
+	auto& fonts = ee::Config::Instance()->GetFonts();
+	auto& user_fonts = ee::Config::Instance()->GetUserFonts();
 	wxArrayString choices;
 	for (int i = 0, n = fonts.size(); i < n; ++i) {
-		choices.push_back(fonts[i].first);
+		choices.push_back(fonts[i].first.c_str());
 	}
 	for (int i = 0, n = user_fonts.size(); i < n; ++i) {
-		choices.push_back(user_fonts[i].first);
+		choices.push_back(user_fonts[i].first.c_str());
 	}
 	pg->Append(new wxEnumProperty("Font", wxPG_LABEL, choices));
 	pg->Append(new wxIntProperty("FontSize", wxPG_LABEL, tb.font_size));
@@ -196,7 +192,7 @@ void PropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->Append(new wxBoolProperty("Richtext", wxPG_LABEL, tb.richtext));
 	pg->SetPropertyAttribute("Richtext", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
-	pg->Append(new wxStringProperty("TextContent", wxPG_LABEL, spr->GetText(s2::UpdateParams())));
+	pg->Append(new wxStringProperty("TextContent", wxPG_LABEL, spr->GetText(s2::UpdateParams()).c_str()));
 	pg->Append(new wxStringProperty("TextID", wxPG_LABEL, spr->GetTID()));
 
 	pg->Append(new wxBoolProperty("Export", wxPG_LABEL, spr->IsExport()));

@@ -7,7 +7,7 @@
 namespace eaudio
 {
 
-PropertySetting::PropertySetting(ee::EditPanelImpl* edit_impl, Sprite* spr)
+PropertySetting::PropertySetting(ee::EditPanelImpl* edit_impl, const std::shared_ptr<Sprite>& spr)
 	: ee::SpritePropertySetting(edit_impl, spr)
 	, m_parent(edit_impl->GetEditPanel())
 {
@@ -22,14 +22,14 @@ void PropertySetting::OnPropertyGridChange(const std::string& name, const wxAny&
 {
 	ee::SpritePropertySetting::OnPropertyGridChange(name, value);
 
-	Sprite* spr = static_cast<Sprite*>(GetSprite());
+	auto spr = std::dynamic_pointer_cast<Sprite>(GetSprite());
 }
 
 void PropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
 	ee::SpritePropertySetting::UpdateProperties(pg);
 
-	Sprite* spr = static_cast<Sprite*>(GetSprite());
+	auto spr = std::dynamic_pointer_cast<Sprite>(GetSprite());
 }
 
 void PropertySetting::InitProperties(wxPropertyGrid* pg)
@@ -38,7 +38,7 @@ void PropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	pg->Append(new wxPropertyCategory("AUDIO", wxPG_LABEL));
 
-	Sprite* spr = static_cast<Sprite*>(GetSprite());
+	auto spr = std::dynamic_pointer_cast<Sprite>(GetSprite());
 }
 
 }

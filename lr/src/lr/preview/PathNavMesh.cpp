@@ -5,7 +5,7 @@
 
 #include <easyshape.h>
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <sprite2/BoundingBox.h>
 #include <SM_Triangulation.h>
 #include <SM_Process.h>
@@ -21,7 +21,7 @@ PathNavMesh::PathNavMesh(const sm::rect& region)
 {
 }
 
-void PathNavMesh::DisableRegion(const ee::Sprite* spr, bool disable)
+void PathNavMesh::DisableRegion(const ee::SprConstPtr& spr, bool disable)
 {
 	m_tris.clear();
 
@@ -46,7 +46,7 @@ void PathNavMesh::DisableRegion(const ee::Sprite* spr, bool disable)
 		bound.push_back(sm::vec2(rect.xmin, rect.ymax));
 	}
 
-	std::map<const ee::Sprite*, std::vector<sm::vec2> >::iterator itr = m_bounds.find(spr);
+	std::map<const ee::SprPtr, std::vector<sm::vec2> >::iterator itr = m_bounds.find(spr);
 	if (itr == m_bounds.end() && !disable) {
 		std::vector<sm::vec2> fixed;
 		sm::rm_duplicate_nodes(bound, fixed);

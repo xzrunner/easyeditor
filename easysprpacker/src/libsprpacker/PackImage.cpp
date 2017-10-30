@@ -15,17 +15,10 @@ namespace lua = ebuilder::lua;
 namespace esprpacker
 {
 
-PackImage::PackImage(const ee::ImageSymbol* sym)
-	: m_img(NULL)
+PackImage::PackImage(const std::shared_ptr<ee::ImageSymbol>& sym)
+	: m_img(nullptr)
 {
 	Init(sym);
-}
-
-PackImage::~PackImage()
-{
-	if (m_img) {
-		m_img->RemoveReference();
-	}
 }
 
 void PackImage::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp) const
@@ -115,12 +108,9 @@ void PackImage::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 	pack(offy, ptr);
 }
 
-void PackImage::Init(const ee::ImageSymbol* sym)
+void PackImage::Init(const std::shared_ptr<ee::ImageSymbol>& sym)
 {
 	m_img = sym->GetImage();
-	if (m_img) {
-		m_img->AddReference();
-	}
 }
 
 void PackImage::GetPackRegion(const ee::TexturePacker& tp, sm::i16_rect& quad, sm::ivec2& offset) const

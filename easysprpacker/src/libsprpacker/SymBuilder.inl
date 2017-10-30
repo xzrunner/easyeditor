@@ -21,8 +21,7 @@ SymBuilder<TSymbol, TPack>::~SymBuilder()
 template <typename TSymbol, typename TPack>
 void SymBuilder<TSymbol, TPack>::Traverse(ee::Visitor<PackNode>& visitor) const
 {
-	std::map<const TSymbol*, const TPack*>::const_iterator
-		itr = m_map_data.begin();
+	auto itr = m_map_data.begin();
 	for ( ; itr != m_map_data.end(); ++itr) {
 		bool has_next;
 		visitor.Visit(const_cast<TPack*>(itr->second), has_next);
@@ -35,32 +34,28 @@ void SymBuilder<TSymbol, TPack>::Traverse(ee::Visitor<PackNode>& visitor) const
 template <typename TSymbol, typename TPack>
 void SymBuilder<TSymbol, TPack>::Clear()
 {
-	std::map<const TSymbol*, const TPack*>::iterator
-		itr = m_map_data.begin();
+	auto itr = m_map_data.begin();
 	for ( ; itr != m_map_data.end(); ++itr) {
-		itr->first->RemoveReference();
 		itr->second->RemoveReference();
 	}
 	m_map_data.clear();
 }
 
 template <typename TSymbol, typename TPack>
-const PackNode* SymBuilder<TSymbol, TPack>::Create(const TSymbol* sym)
+const PackNode* SymBuilder<TSymbol, TPack>::Create(const std::shared_ptr<const TSymbol>& sym)
 {
-	std::map<const TSymbol*, const TPack*>::iterator
-		itr = m_map_data.find(sym);
+	auto itr = m_map_data.find(sym);
 	if (itr != m_map_data.end()) {
 		itr->second->AddReference();
 		return itr->second;
 	}
 
-	TPack* node = new TPack(sym);
+	TPack* node = new TPack(std::const_pointer_cast<TSymbol>(sym));
 	node->SetFilepath(sym->GetFilepath());
 	node->SetID(sym->GetFilepath());
 	if (m_export_name) {
 		ExportNameSet::Instance()->Insert(sym, node);
 	}
-	sym->AddReference();
 	m_map_data.insert(std::make_pair(sym, node));
 	node->AddReference();
 	return node;

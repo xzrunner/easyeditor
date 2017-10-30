@@ -11,7 +11,7 @@ class Symbol;
 class SymbolPropertySetting : public ee::SymbolPropertySetting
 {
 public:
-	SymbolPropertySetting(Symbol* sym);
+	SymbolPropertySetting(const std::shared_ptr<Symbol>& sym);
 
 	virtual void OnPropertyGridChange(const std::string& name, const wxAny& value);
 

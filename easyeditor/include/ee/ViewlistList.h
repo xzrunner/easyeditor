@@ -3,11 +3,11 @@
 
 #include "VerticalImageList.h"
 #include "Observer.h"
+#include "Sprite.h"
 
 namespace ee
 {
 
-class Sprite;
 class ViewlistListImpl;
 class SpriteSelection;
 
@@ -23,11 +23,11 @@ public:
 	void SetImpl(ViewlistListImpl* impl);
 
 	void Clear();
-	void Insert(Sprite* spr, int idx = -1);
+	void Insert(const SprPtr& spr, int idx = -1);
 
 	void OnSelected(int idx, bool clear);
 
-	Sprite* QuerySprite(int idx);
+	SprPtr QuerySprite(int idx);
 
 protected:
 	//
@@ -43,25 +43,25 @@ protected:
 private:
 	int GetSelectedIndex() const;
 
-	void OnSelected(Sprite* spr, bool clear);
+	void OnSelected(const SprPtr& spr, bool clear);
 
-	int QuerySprIdx(const Sprite* spr) const;
+	int QuerySprIdx(const SprConstPtr& spr) const;
 
 	void ReorderSelected(bool up);
 
-	void Select(Sprite* spr, bool clear);
+	void Select(const SprPtr& spr, bool clear);
 	void SelectSet(SpriteSelection* set);
-	void Reorder(const Sprite* spr, bool up);
-	void ReorderMost(const Sprite* spr, bool up);
-	void Remove(Sprite* spr);
+	void Reorder(const SprConstPtr& spr, bool up);
+	void ReorderMost(const SprConstPtr& spr, bool up);
+	void Remove(const SprPtr& spr);
 	void RemoveSelected();
 
 private:
 	ViewlistListImpl* m_impl;
 
-	std::vector<Sprite*> m_sprs;
+	std::vector<SprPtr> m_sprs;
 
-	Sprite* m_selected_spr;
+	SprPtr m_selected_spr;
 
 }; // ViewlistList
 

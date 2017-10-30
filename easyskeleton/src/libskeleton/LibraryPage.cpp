@@ -20,9 +20,9 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	m_list->SetFileter(ee::SymbolFile::Instance()->Tag(s2::SYM_SKELETON));
 }
 
-bool LibraryPage::IsHandleSymbol(ee::Symbol* sym) const
+bool LibraryPage::IsHandleSymbol(const ee::SymPtr& sym) const
 {
-	return dynamic_cast<Symbol*>(sym) != NULL;
+	return sym->Type() == s2::SYM_SKELETON;
 }
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
@@ -60,18 +60,16 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 
 void LibraryPage::LoadFromEasyFile(const std::string& filename)
 {
-	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filename);
+	auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filename);
 	sym->RefreshThumbnail(filename);
 	m_list->Insert(sym);
-	sym->RemoveReference();
 }
 
 void LibraryPage::LoadFromJsonFile(const std::string& filename)
 {
-	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filename, s2::SYM_SKELETON);
+	auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filename, s2::SYM_SKELETON);
 //	sym->RefreshThumbnail(filename);
 	m_list->Insert(sym);
-	sym->RemoveReference();
 
 	//Symbol* sym = new Symbol;
 	//sym->LoadFromFile(filename);

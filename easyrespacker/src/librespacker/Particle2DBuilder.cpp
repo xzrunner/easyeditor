@@ -6,6 +6,7 @@
 
 #include <ee/Visitor.h>
 #include <ee/Exception.h>
+#include <ee/SymbolMgr.h>
 
 #include <easyparticle2d.h>
 
@@ -21,8 +22,7 @@ Particle2DBuilder::Particle2DBuilder(ExportNameSet& export_set)
 
 Particle2DBuilder::~Particle2DBuilder()
 {
-	std::map<const eparticle2d::Symbol*, const PackParticle2D*>::iterator
-		itr = m_map_data.begin();
+	auto itr = m_map_data.begin();
 	for ( ; itr != m_map_data.end(); ++itr) {
 		delete itr->second;
 	}
@@ -30,8 +30,7 @@ Particle2DBuilder::~Particle2DBuilder()
 
 void Particle2DBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 {
-	std::map<const eparticle2d::Symbol*, const PackParticle2D*>::const_iterator 
-		itr = m_map_data.begin();
+	auto itr = m_map_data.begin();
 	for ( ; itr != m_map_data.end(); ++itr) {
 		bool has_next;
 		visitor.Visit(const_cast<PackParticle2D*>(itr->second), has_next);
@@ -41,10 +40,9 @@ void Particle2DBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 	}
 }
 
-const IPackNode* Particle2DBuilder::Create(const eparticle2d::Symbol* sym)
+const IPackNode* Particle2DBuilder::Create(const std::shared_ptr<const eparticle2d::Symbol>& sym)
 {
-	std::map<const eparticle2d::Symbol*, const PackParticle2D*>::iterator 
-		itr = m_map_data.find(sym);
+	auto itr = m_map_data.find(sym);
 	if (itr != m_map_data.end()) {
 		return itr->second;
 	}
@@ -59,7 +57,7 @@ const IPackNode* Particle2DBuilder::Create(const eparticle2d::Symbol* sym)
 	return node;
 }
 
-void Particle2DBuilder::Load(const eparticle2d::Symbol* sym, PackParticle2D* ps)
+void Particle2DBuilder::Load(const std::shared_ptr<const eparticle2d::Symbol>& sym, PackParticle2D* ps)
 {
 	m_export_set.LoadExport(sym, ps);
 
@@ -143,8 +141,9 @@ void Particle2DBuilder::Load(const eparticle2d::Symbol* sym, PackParticle2D* ps)
 		comp.add_col_end = s2::Color((int)(p_symbol.add_col_end.r * 255), (int)(p_symbol.add_col_end.g * 255), 
 			(int)(p_symbol.add_col_end.b * 255), (int)(p_symbol.add_col_end.a * 255)).ToABGR();
 
-		ee::Symbol* sym = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(p_symbol.ud));
-		comp.node = PackNodeFactory::Instance()->Create(sym);
+		auto sym_raw = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(p_symbol.ud));
+		auto sym_ptr = ee::SymbolMgr::Instance()->FetchSymbol(sym_raw->GetFilepath());
+		comp.node = PackNodeFactory::Instance()->Create(sym_ptr);
 
 		ps->components.push_back(comp);
 	}

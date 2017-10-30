@@ -7,11 +7,11 @@
 namespace ecomplex
 {
 
-ee::Sprite* LabelToSpr::Trans(const erespacker::PackLabel* label)
+ee::SprPtr LabelToSpr::Trans(const erespacker::PackLabel* label)
 {
-	etext::Symbol* sym = new etext::Symbol();
+	auto sym = std::make_shared<etext::Symbol>();
 
-	etext::Sprite* spr = new etext::Sprite(sym);
+	auto spr = std::make_shared<etext::Sprite>(sym);
 	s2::Textbox& tb = spr->GetTextbox();
 
 	tb.width		= label->width;
@@ -31,7 +31,7 @@ ee::Sprite* LabelToSpr::Trans(const erespacker::PackLabel* label)
 	tb.space_hori	= label->space_hori;
 	tb.space_vert	= label->space_vert;
 	
-	spr->SetText(s2::UpdateParams(), label->text);
+	spr->SetText(s2::UpdateParams(), label->text.c_str());
 	spr->SetTID(label->tid);
 
 	return spr;

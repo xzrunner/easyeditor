@@ -14,12 +14,12 @@ namespace eskeleton
 class FileLoader
 {
 public:
-	static void Load(const std::string& filepath, std::vector<ee::Sprite*>& sprs);
+	static void Load(const std::string& filepath, std::vector<ee::SprPtr>& sprs);
 
 private:
-	static void LoadSprite(const std::string& dir, const Json::Value& val, std::vector<ee::Sprite*>& sprs);
+	static void LoadSprite(const std::string& dir, const Json::Value& val, std::vector<ee::SprPtr>& sprs);
 	
-	static void LoadSkeleton(const Json::Value& val, const std::vector<ee::Sprite*>& sprs);
+	static void LoadSkeleton(const Json::Value& val, const std::vector<ee::SprPtr>& sprs);
 
 }; // FileLoader
 

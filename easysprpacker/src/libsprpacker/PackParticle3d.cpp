@@ -4,6 +4,7 @@
 #include "to_int.h"
 
 #include <ee/Symbol.h>
+#include <ee/SymbolMgr.h>
 
 #include <easyparticle3d.h>
 #include <easybuilder.h>
@@ -17,7 +18,7 @@ namespace lua = ebuilder::lua;
 namespace esprpacker
 {
 
-PackParticle3d::PackParticle3d(const eparticle3d::Symbol* sym)
+PackParticle3d::PackParticle3d(const std::shared_ptr<eparticle3d::Symbol>& sym)
 {
 	Init(sym);
 }
@@ -180,7 +181,7 @@ void PackParticle3d::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 	pack(blend, ptr);
 }
 
-void PackParticle3d::Init(const eparticle3d::Symbol* sym)
+void PackParticle3d::Init(const std::shared_ptr<eparticle3d::Symbol>& sym)
 {
 	const p3d_emitter_cfg* cfg = sym->GetEmitterCfg()->GetImpl();
 
@@ -314,7 +315,8 @@ Component(const p3d_symbol& sym)
 	m_add_col_end		= gum::color2int(sym.add_col_end.rgba, s2::RGBA);
 
 	s2::Symbol* s2_sym = static_cast<s2::Symbol*>(sym.ud);
-	m_node = PackNodeFactory::Instance()->Create(dynamic_cast<const ee::Symbol*>(s2_sym));
+	auto ee_sym = ee::SymbolMgr::Instance()->FetchSymbol(dynamic_cast<ee::Symbol*>(s2_sym)->GetFilepath());
+	m_node = PackNodeFactory::Instance()->Create(ee_sym);
 }
 
 PackParticle3d::Component::

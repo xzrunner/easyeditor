@@ -21,13 +21,13 @@
 #include <easytext.h>
 
 #include <SM_Test.h>
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <sprite2/BoundingBox.h>
 #include <sprite2/CameraType.h>
 #include <sprite2/Camera.h>
 #include <sprite2/Pseudo3DCamera.h>
 #include <gum/FilterModes.h>
-#include <gum/GUM_GTxt.h>
+#include <gum/GTxt.h>
 #include <gum/RenderContext.h>
 
 #include <algorithm>
@@ -77,11 +77,11 @@ void StageCanvas::DrawSprites() const
 
 		int name_visible = layer->GetNameVisible();
 
-		std::vector<ee::Sprite*> sprs;
-		layer->TraverseSprite(ee::FetchAllVisitor<ee::Sprite>(sprs), ee::DT_VISIBLE);
+		std::vector<ee::SprPtr> sprs;
+		layer->TraverseSprite(ee::FetchAllRefVisitor<ee::Sprite>(sprs), ee::DT_VISIBLE);
 		for (int j = 0, m = sprs.size(); j < m; ++j) 
 		{
-			ee::Sprite* spr = sprs[j];
+			auto& spr = sprs[j];
 			DrawableSpr ds(spr, name_visible);
 			const std::string& tag = spr->GetTag();
 			if (tag.find(TOP_LAYER_TAG) != std::string::npos) {
@@ -125,7 +125,7 @@ void StageCanvas::DrawSprites() const
 	DrawLayer(layers[8]);
 }
 
-void StageCanvas::DrawSprite(ee::Sprite* spr, bool draw_edge, int name_visible) const
+void StageCanvas::DrawSprite(const ee::SprPtr& spr, bool draw_edge, int name_visible) const
 {
 	if (m_camera->Type() == s2::CAM_ORTHO2D)
 	{
@@ -204,8 +204,8 @@ void StageCanvas::DrawPseudo3dBound() const
 
 void StageCanvas::DrawLayer(const Layer* layer) const
 {
-	std::vector<ee::Sprite*> sprs;
-	layer->TraverseSprite(ee::FetchAllVisitor<ee::Sprite>(sprs), ee::DT_VISIBLE);
+	std::vector<ee::SprPtr> sprs;
+	layer->TraverseSprite(ee::FetchAllRefVisitor<ee::Sprite>(sprs), ee::DT_VISIBLE);
 	int name_visible = layer->GetNameVisible();
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
 		DrawSprite(sprs[i], false, name_visible);

@@ -16,10 +16,10 @@ void FileIO::StoreOceanMesh(const OceanMesh* ocean, const std::string& dir, Json
 	if (const eshape::PolygonShape* shape = ocean->GetBounding()) {
 		gum::JsonSerializer::Store(shape->GetVertices(), value["bound"]);
 	}
-	if (const ee::ImageSymbol* img = ocean->GetImage0()) {
+	if (const std::shared_ptr<ee::ImageSymbol>& img = ocean->GetImage0()) {
 		value["tex0"] = ee::FileHelper::GetRelativePath(dir, img->GetFilepath());
 	}
-	if (const ee::ImageSymbol* img = ocean->GetImage1()) {
+	if (const std::shared_ptr<ee::ImageSymbol>& img = ocean->GetImage1()) {
 		value["tex1"] = ee::FileHelper::GetRelativePath(dir, img->GetFilepath());
 	}
 
@@ -78,7 +78,7 @@ OceanMesh* FileIO::LoadOceanMesh(const std::string& dir, const Json::Value& valu
 	return ocean;
 }
 
-void FileIO::StoreSymbol(const char* filepath, const Symbol* sym)
+void FileIO::StoreSymbol(const char* filepath, const std::shared_ptr<Symbol>& sym)
 {
 	Json::Value src_value;
 	Json::Reader reader;

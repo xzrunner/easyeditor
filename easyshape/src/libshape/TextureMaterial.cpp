@@ -11,7 +11,7 @@ TextureMaterial::TextureMaterial()
 {
 }
 
-TextureMaterial::TextureMaterial(ee::ImageSymbol* image)
+TextureMaterial::TextureMaterial(const std::shared_ptr<ee::ImageSymbol>& image)
 	: s2::TexturePolygon(image)
 {
 }
@@ -32,9 +32,9 @@ void TextureMaterial::Translate(const sm::vec2& offset)
 	}
 }
 
-const ee::ImageSymbol* TextureMaterial::GetImage() const 
+const std::shared_ptr<const ee::ImageSymbol>& TextureMaterial::GetImage() const
 { 
-	return dynamic_cast<ee::ImageSymbol*>(m_img); 
+	return std::dynamic_pointer_cast<const ee::ImageSymbol>(m_img); 
 }
 
 }

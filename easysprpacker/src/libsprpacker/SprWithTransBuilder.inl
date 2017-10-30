@@ -59,7 +59,6 @@ const PackNode* SprWithTransBuilder<TSymbol, TSprite, TPack>::Create(const TSpri
 		}
 	}
 
-	sym->AddReference();
 	TPack* node = new TPack(spr);
 	node->SetFilepath(SPRITE_FILEPATH);
 	node->SetID(sym->GetFilepath());

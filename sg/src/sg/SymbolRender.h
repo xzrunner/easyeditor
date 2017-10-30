@@ -13,12 +13,12 @@ class SymbolRender
 public:
 	void Init(StagePanel* stage);
 
-	void SetGrid(ee::Sprite* grid) { m_grid = grid; }
+	void SetGrid(const ee::SprPtr& grid) { m_grid = grid; }
 	void SetArrow(ee::Symbol* arrow_down, ee::Symbol* arrow_right) { 
 		m_arrow_down = arrow_down; 
 		m_arrow_right = arrow_right;
 	}
-	void SetGrass(int idx, ee::Sprite* grass) { 
+	void SetGrass(int idx, const ee::SprPtr& grass) { 
 		if (idx >= 0 && idx < GRASS_COUNT) { m_grass[idx] = grass; }
 	}
 	void SetRegion(ee::Symbol* region, int size) {
@@ -41,11 +41,11 @@ private:
 private:
 	StagePanel* m_stage;
 
-	ee::Sprite* m_grid;
+	ee::SprPtr m_grid;
 	ee::Symbol *m_arrow_down, *m_arrow_right;
 
 	static const int GRASS_COUNT = 5;
-	ee::Sprite* m_grass[GRASS_COUNT];
+	ee::SprPtr m_grass[GRASS_COUNT];
 
 	ee::Symbol* m_region;
 	int m_region_size;

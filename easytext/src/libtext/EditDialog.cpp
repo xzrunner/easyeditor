@@ -15,14 +15,14 @@ BEGIN_EVENT_TABLE(EditDialog, wxDialog)
 END_EVENT_TABLE()
 
 EditDialog::EditDialog(wxWindow* parent, wxGLContext* glctx,
-					   Sprite* spr, const ee::MultiSpritesImpl* sprite_impl)
+					   const std::shared_ptr<Sprite>& spr, const ee::MultiSpritesImpl* sprite_impl)
 	: wxDialog(parent, wxID_ANY, "Edit Text", wxDefaultPosition, 
 	wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 {
 	InitLayout(glctx, spr, sprite_impl);
 }
 
-void EditDialog::InitLayout(wxGLContext* glctx, Sprite* spr, 
+void EditDialog::InitLayout(wxGLContext* glctx, const std::shared_ptr<Sprite>& spr, 
 							const ee::MultiSpritesImpl* sprite_impl)
 {
 	wxSplitterWindow* right_split = new wxSplitterWindow(this);
@@ -46,7 +46,7 @@ wxWindow* EditDialog::InitLayoutLeft(wxWindow* parent)
 }
 
 wxWindow* EditDialog::InitLayoutCenter(wxWindow* parent, wxGLContext* glctx,
-									   Sprite* spr, const ee::MultiSpritesImpl* sprite_impl)
+									   const std::shared_ptr<Sprite>& spr, const ee::MultiSpritesImpl* sprite_impl)
 {
 	wxSplitterWindow* split = new wxSplitterWindow(parent);
 
@@ -60,7 +60,7 @@ wxWindow* EditDialog::InitLayoutCenter(wxWindow* parent, wxGLContext* glctx,
 	return split;
 }
 
-wxWindow* EditDialog::InitLayoutRight(wxWindow* parent, Sprite* spr)
+wxWindow* EditDialog::InitLayoutRight(wxWindow* parent, const std::shared_ptr<Sprite>& spr)
 {
 	m_toolbar = new ToolbarPanel(parent, m_stage, spr);
 	return m_toolbar;
@@ -81,7 +81,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 // 		const std::string& filepath = m_sym->GetFilepath();
 // 		FileStorer::Store(filepath.c_str(), m_sym);
 // 		m_sym->RefreshThumbnail(filepath, true);
-// 		ee::SpriteFactory::Instance()->UpdateBoundings(*m_sym);
+// 		ee::SpritePool::Instance()->UpdateBoundings(*m_sym);
 // 		Destroy();
 // 	} 
 // 	else if (val == wxID_NO) 

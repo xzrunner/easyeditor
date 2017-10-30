@@ -11,7 +11,7 @@ PropertySettingPanel::PropertySettingPanel(wxWindow* parent)
 {
 }
 
-void PropertySettingPanel::OnSpriteSelected(ee::Sprite* spr, bool clear)
+void PropertySettingPanel::OnSpriteSelected(const ee::SprPtr& spr, bool clear)
 {
 	assert(m_stage);
 	if (spr) {

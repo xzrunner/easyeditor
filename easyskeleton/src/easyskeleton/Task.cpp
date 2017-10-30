@@ -34,18 +34,17 @@ Task::~Task()
 
 void Task::Load(const char* filename)
 {
-	std::vector<ee::Sprite*> sprs;
+	std::vector<ee::SprPtr> sprs;
 	FileLoader::Load(filename, sprs);
 	for (int i = 0, n = sprs.size(); i < sprs.size(); ++i) {
 		ee::InsertSpriteSJ::Instance()->Insert(sprs[i]);
 	}
-	for_each(sprs.begin(), sprs.end(), cu::RemoveRefFunctor<ee::Sprite>());
 }
 
 void Task::Store(const char* filename) const
 {
-	std::vector<ee::Sprite*> sprs;
-	m_stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	m_stage->TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	FileStorer::Store(filename, sprs);
 }
 

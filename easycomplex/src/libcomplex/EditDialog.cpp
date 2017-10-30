@@ -15,7 +15,7 @@
 #include <ee/FileHelper.h>
 #include <ee/EditedFileStack.h>
 
-#include <sprite2/S2_Sprite.h>
+#include <sprite2/Sprite.h>
 
 #include <wx/splitter.h>
 
@@ -26,7 +26,7 @@ BEGIN_EVENT_TABLE(EditDialog, wxDialog)
 	EVT_CLOSE(EditDialog::OnCloseEvent)
 END_EVENT_TABLE()
 
-EditDialog::EditDialog(wxWindow* parent, Symbol* sym,
+EditDialog::EditDialog(wxWindow* parent, const std::shared_ptr<Symbol>& sym,
 					   wxGLContext* glctx, ee::CrossGuides* guides)
 	: wxDialog(parent, wxID_ANY, "Edit Complex", wxDefaultPosition, 
 	wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
@@ -107,11 +107,11 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 		m_sym->SetEditDirty(true);
 		const std::string& filepath = m_sym->GetFilepath();
 		if (filepath != ee::SYM_GROUP_TAG) {
-			FileStorer::Store(filepath, m_sym, ee::FileHelper::GetFileDir(filepath));
+			FileStorer::Store(filepath, *m_sym, ee::FileHelper::GetFileDir(filepath));
 			m_sym->RefreshThumbnail(filepath, true);
 		}
 // 		m_sym->InitBounding();
-// 		ee::SpriteFactory::Instance()->UpdateBoundings(*m_sym);
+// 		ee::SpritePool::Instance()->UpdateBoundings(*m_sym);
 		Destroy();
 	} 
 	else if (val == wxID_NO) 
@@ -123,10 +123,10 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 
 void EditDialog::LoadSymbolInfo()
 {
-	const std::vector<s2::Sprite*>& children = m_sym->GetAllChildren();
+	auto& children = m_sym->GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
-		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
-		m_library->AddSymbol(dynamic_cast<ee::Symbol*>(child->GetSymbol()));
+		auto child = std::dynamic_pointer_cast<ee::Sprite>(children[i]);
+		m_library->AddSymbol(std::dynamic_pointer_cast<ee::Symbol>(child->GetSymbol()));
 		m_viewlist->Insert(child);
 	}	
 }

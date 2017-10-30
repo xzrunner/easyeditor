@@ -1,7 +1,7 @@
 #ifndef _EASYEDITOR_SPR_TAG_CFG_H_
 #define _EASYEDITOR_SPR_TAG_CFG_H_
 
-#include <CU_Singleton.h>
+#include <cu/cu_macro.h>
 
 #include <vector>
 
@@ -21,7 +21,7 @@ private:
 private:
 	std::vector<DynamicWidget*> m_widgets;
 	
-	SINGLETON_DECLARATION(SprTagCfg);
+	CU_SINGLETON_DECLARATION(SprTagCfg);
 
 }; // SprTagCfg
 

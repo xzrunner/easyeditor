@@ -23,17 +23,16 @@ PasteSymbolCaptureOP::PasteSymbolCaptureOP(wxWindow* wnd, EditPanelImpl* stage, 
 
 bool PasteSymbolCaptureOP::OnMouseLeftDown(int x, int y)
 {
-	Symbol* sym = m_library->GetSymbol();
+	auto sym = m_library->GetSymbol();
 	if (sym) 
 	{
 		if (!m_bCaptured)
 			m_pos = m_stage->TransPosScrToProj(x, y);
 		m_last_pos = m_pos;
 
-		Sprite* spr = SpriteFactory::Instance()->CreateRoot(sym);
+		auto spr = SpriteFactory::Instance()->CreateRoot(sym);
 		spr->Translate(m_pos);
 		InsertSpriteSJ::Instance()->Insert(spr);
-		spr->RemoveReference();
 	}
 
 	return false;

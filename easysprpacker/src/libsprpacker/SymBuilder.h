@@ -19,12 +19,12 @@ public:
 
 	virtual void Clear();
 
-	const PackNode* Create(const TSymbol* sym);
+	const PackNode* Create(const std::shared_ptr<const TSymbol>& sym);
 
 private:
 	bool m_export_name;
 
-	std::map<const TSymbol*, const TPack*> m_map_data;
+	std::map<const std::shared_ptr<const TSymbol>, const TPack*> m_map_data;
 
 }; // SymBuilder
 

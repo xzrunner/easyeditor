@@ -3,6 +3,8 @@
 
 #include <wx/wx.h>
 
+#include <memory>
+
 namespace ee { class EditPanel; }
 
 namespace escale9
@@ -14,7 +16,7 @@ class ToolbarPanel : public wxPanel
 {
 public:
 	ToolbarPanel(wxWindow* parent, ee::EditPanel* stage,
-		Symbol* sym);
+		const std::shared_ptr<Symbol>& sym);
 
 private:
 	void InitLayout();
@@ -24,7 +26,7 @@ private:
 private:
 	ee::EditPanel* m_stage;
 
-	Symbol* m_sym;
+	std::shared_ptr<Symbol> m_sym;
 
 	wxSpinCtrl *m_wSpin, *m_hSpin;
 

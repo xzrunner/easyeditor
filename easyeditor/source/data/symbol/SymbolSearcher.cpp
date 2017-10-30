@@ -10,7 +10,7 @@ namespace ee
 std::string SymbolSearcher::GetSymbolPath(const std::string& dir, 
 										  const Json::Value& sprite_val)
 {
-	std::string filepath = sprite_val["filepath"].asString();
+	std::string filepath = sprite_val["filepath"].asString().c_str();
 	std::string real_path = FileHelper::GetAbsolutePath(dir, filepath);
 	StringHelper::ToLower(real_path);
 
@@ -23,7 +23,7 @@ std::string SymbolSearcher::GetSymbolPath(const std::string& dir,
 			int j = 0;
 			Json::Value filepath_val = filepaths_val[j++];
 			while (!filepath_val.isNull()) {
-				std::string filepath = FileHelper::GetAbsolutePath(dir, filepath_val.asString());
+				std::string filepath = FileHelper::GetAbsolutePath(dir, filepath_val.asString().c_str());
 				StringHelper::ToLower(filepath);
 				if (searcher->IsExist(filepath)) {
 					return filepath;
@@ -39,7 +39,7 @@ std::string SymbolSearcher::GetSymbolPath(const std::string& dir,
 			int i = 0;
 			Json::Value filepath_val = filepaths_val[i++];
 			while (!filepath_val.isNull()) {
-				std::string filepath = FileHelper::GetAbsolutePath(dir, filepath_val.asString());
+				std::string filepath = FileHelper::GetAbsolutePath(dir, filepath_val.asString().c_str());
 				if (FileHelper::IsFileExist(filepath)) {
 					return filepath;
 				}
@@ -55,7 +55,7 @@ std::string SymbolSearcher::GetSymbolPath(const std::string& dir,
 	}
 }
 
-void SymbolSearcher::SetSymbolFilepaths(const std::string& dir, Symbol* sym, 
+void SymbolSearcher::SetSymbolFilepaths(const std::string& dir, Symbol& sym,
 										const Json::Value& sprite_val)
 {
 	// todo same!
@@ -66,13 +66,13 @@ void SymbolSearcher::SetSymbolFilepaths(const std::string& dir, Symbol* sym,
 		int i = 0;
 		Json::Value filepath_val = filepaths_val[i++];
 		while (!filepath_val.isNull()) {
-			std::string p = filepath_val.asString();
+			std::string p = filepath_val.asString().c_str();
 			filepaths.insert(p);
 			filepath_val = filepaths_val[i++];
 		}
-		filepaths.insert(sprite_val["filepath"].asString());
+		filepaths.insert(sprite_val["filepath"].asString().c_str());
 
-		sym->SetFilepaths(filepaths);
+		sym.SetFilepaths(filepaths);
 	}
 }
 

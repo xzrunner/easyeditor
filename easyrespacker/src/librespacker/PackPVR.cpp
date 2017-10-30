@@ -358,16 +358,15 @@ void PackPVR::StoreScaled(std::ofstream& fout, float scale) const
 	bool old_premul = cfg->GetPreMulAlpha();
 	cfg->SetPreMulAlpha(false);
 
-	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(m_base_path);
+	auto sym = ee::SymbolMgr::Instance()->FetchSymbol(m_base_path);
 
 	int w = static_cast<int>(m_width * scale),
 		h = static_cast<int>(m_height * scale);
 	s2::DrawRT rt;
-	rt.Draw(sym, false, scale);
+	rt.Draw(*sym, false, scale);
 	uint8_t* pixels = rt.StoreToMemory(w, h);
-	sym->RemoveReference();
 
-	gimg_revert_y(pixels, w, h, GPF_RGBA);
+	gimg_revert_y(pixels, w, h, GPF_RGBA8);
 	eimage::TransToPVR trans(pixels, w, h, 4, false, m_fast);
 	delete[] pixels;
 

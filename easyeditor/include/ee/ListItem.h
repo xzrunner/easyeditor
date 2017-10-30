@@ -1,16 +1,14 @@
 #ifndef _EASYEDITOR_LIST_ITEM_H_
 #define _EASYEDITOR_LIST_ITEM_H_
 
-#include <CU_RefCountObj.h>
+#include "Bitmap.h"
 
 #include <string>
 
 namespace ee
 {
 
-class Bitmap;
-
-class ListItem : public virtual cu::RefCountObj
+class ListItem
 {
 public:
 	ListItem() : m_bitmap(NULL) {}
@@ -24,16 +22,18 @@ public:
 	const std::string& GetInfo() const { return m_info; }
 	void SetInfo(const std::string& info) { m_info = info; }
 
-	const Bitmap* GetBitmap() const { return m_bitmap; }
-	void SetBitmap(Bitmap* bmp);
+	const BitmapPtr& GetBitmap() const { return m_bitmap; }
+	void SetBitmap(const BitmapPtr& bmp);
 
 protected:
 	std::string m_name;
 	std::string m_info;
 
-	Bitmap* m_bitmap;
+	BitmapPtr m_bitmap;
 
 }; // ListItem
+
+using ListItemPtr = std::shared_ptr<ListItem>;
 
 }
 

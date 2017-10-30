@@ -76,7 +76,7 @@ void FileSaver::StoreAsGif(const std::string& src, const std::string& dst)
 		return;
 	}
 
-	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(src);
+	auto sym = ee::SymbolMgr::Instance()->FetchSymbol(src);
 	libanim::Symbol* anim = static_cast<libanim::Symbol*>(sym);
 
 	sm::vec2 sz = sym->GetBounding().Size();
@@ -94,8 +94,6 @@ void FileSaver::StoreAsGif(const std::string& src, const std::string& dst)
 	}
 	//	anim->setFrameIndex(0);
 	saver.Save(dst.c_str());
-
-	sym->RemoveReference();
 }
 
 void FileSaver::StoreAsPng(const std::string& src, const std::string& dst)
@@ -104,14 +102,12 @@ void FileSaver::StoreAsPng(const std::string& src, const std::string& dst)
 		return;
 	}
 
-	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(src);
+	auto sym = ee::SymbolMgr::Instance()->FetchSymbol(src);
 
 	sm::vec2 sz = sym->GetBounding().Size();
 	s2::DrawRT rt(sz.x, sz.y);
 	rt.Draw(sym);
 	rt.StoreToFile(dst);
-
-	sym->RemoveReference();
 }
 
 Json::Value FileSaver::StoreLayer(Layer* layer, const std::string& dir, 
@@ -153,11 +149,11 @@ Json::Value FileSaver::StoreFrame(KeyFrame* frame, const std::string& dir,
 	return value;
 }
 
-Json::Value FileSaver::StoreActor(const ee::Sprite* spr, const std::string& dir,
+Json::Value FileSaver::StoreActor(const ee::SprConstPtr& spr, const std::string& dir,
 								  bool single)
 {
 	Json::Value value;
-	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());
+	const auto sym = std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol());
 	// filepath
 	std::string filepath = ee::SymbolPath::GetRelativePath(sym, dir);
 	if (single) {
@@ -186,8 +182,8 @@ Json::Value FileSaver::StoreSkeleton(const SkeletonData& skeleton)
 {
 	Json::Value value;
 
-	const std::map<ee::Sprite*, std::vector<Joint*> >& map_joints = skeleton.GetMapJoints();
-	std::map<ee::Sprite*, std::vector<Joint*> >::const_iterator itr
+	const std::map<ee::SprPtr, std::vector<Joint*> >& map_joints = skeleton.GetMapJoints();
+	std::map<ee::SprPtr, std::vector<Joint*> >::const_iterator itr
 		= map_joints.begin();
 	for (int i = 0; itr != map_joints.end(); ++itr, ++i)
 	{

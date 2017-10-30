@@ -14,7 +14,7 @@ public:
 	Symbol();
 	virtual ~Symbol();
 
-	static ee::Symbol* Create() { return new Symbol(); }
+	static ee::SymPtr Create() { return std::make_shared<Symbol>(); }
 
 protected:
 	virtual bool LoadResources();

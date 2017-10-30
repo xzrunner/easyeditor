@@ -15,7 +15,7 @@ class ImageSprite : public s2::ImageSprite, public Sprite
 public:
 	ImageSprite(const ImageSprite& spr);
 	ImageSprite& operator = (const ImageSprite& spr);
-	ImageSprite(ImageSymbol* sym);
+	ImageSprite(const s2::SymPtr& sym, uint32_t id = -1);
 
 	/**
 	 *  @interface

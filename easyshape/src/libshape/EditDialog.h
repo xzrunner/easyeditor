@@ -3,6 +3,8 @@
 
 #include <wx/dialog.h>
 
+#include <memory>
+
 namespace eshape
 {
 
@@ -13,13 +15,13 @@ class Symbol;
 class EditDialog : public wxDialog
 {
 public:
-	EditDialog(wxWindow* parent, Symbol* sym);
+	EditDialog(wxWindow* parent, const std::shared_ptr<Symbol>& sym);
 	virtual ~EditDialog();
 
 private:
 	void onSize(wxSizeEvent& event);
 
-	void InitLayout(Symbol* sym);
+	void InitLayout(const std::shared_ptr<Symbol>& sym);
 
 	void OnCloseEvent(wxCloseEvent& event);
 

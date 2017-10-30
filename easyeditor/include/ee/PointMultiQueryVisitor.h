@@ -11,17 +11,17 @@ namespace ee
 
 class Sprite;
 
-class PointMultiQueryVisitor : public Visitor<Sprite>
+class PointMultiQueryVisitor : public RefVisitor<Sprite>
 {
 public:
 	PointMultiQueryVisitor(const sm::vec2& pos);
-	virtual void Visit(Sprite* spr, bool& next);
+	virtual void Visit(const SprPtr& spr, bool& next);
 
-	const std::vector<Sprite*>& GetResult() const { return m_sprs; }
+	const std::vector<SprPtr>& GetResult() const { return m_sprs; }
 
 private:
 	const sm::vec2& m_pos;
-	std::vector<Sprite*> m_sprs;
+	std::vector<SprPtr> m_sprs;
 
 }; // PointMultiQueryVisitor
 
@@ -32,7 +32,7 @@ PointMultiQueryVisitor::PointMultiQueryVisitor(const sm::vec2& pos)
 }
 
 inline
-void PointMultiQueryVisitor::Visit(Sprite* spr, bool& next)
+void PointMultiQueryVisitor::Visit(const SprPtr& spr, bool& next)
 {
 	if (spr->GetBounding()->IsContain(m_pos))
 	{

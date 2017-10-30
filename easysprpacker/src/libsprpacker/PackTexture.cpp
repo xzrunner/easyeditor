@@ -14,13 +14,13 @@ namespace lua = ebuilder::lua;
 namespace esprpacker
 {
 
-PackTexture::PackTexture(const etexture::Symbol* sym)
+PackTexture::PackTexture(const std::shared_ptr<etexture::Symbol>& sym)
 {
-	const std::vector<s2::PolygonShape*>& polys = sym->GetPolygons();
+	auto& polys = sym->GetPolygons();
 	for (int i = 0, n = polys.size(); i < n; ++i) 
 	{
-		s2::PolygonShape* shape = polys[i];
-		eshape::Symbol* shape_sym = new eshape::Symbol();
+		auto& shape = polys[i];
+		auto shape_sym = std::make_shared<eshape::Symbol>();
 		shape_sym->SetShape(shape);
 		const PackNode* node = PackNodeFactory::Instance()->Create(shape_sym);
 		m_polys.push_back(node);

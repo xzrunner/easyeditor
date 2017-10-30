@@ -84,8 +84,8 @@ void ArrangeSpriteImpl::SetRightPopupMenu(wxMenu& menu, int x, int y)
 ee::ArrangeSpriteState* ArrangeSpriteImpl::
 CreateRotateState(ee::SpriteSelection* selection, const sm::vec2& first_pos) const
 {
-	std::vector<ee::Sprite*> sprs;
-	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	selection->Traverse(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	if (sprs.size() == 1 && dynamic_cast<eparticle3d::Sprite*>(sprs[0])) {
 		return new ecomplex::SphereRotateState(m_stage, first_pos, static_cast<eparticle3d::Sprite*>(sprs[0])->GetDir());
 	} else {
@@ -108,12 +108,12 @@ RotateSpriteState(ee::SpriteSelection* selection, const sm::vec2& first_pos,
 void ArrangeSpriteImpl::RotateSpriteState::
 Rotate(const sm::vec2& dst)
 {
-	std::vector<ee::Sprite*> sprs;
-	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	m_selection->Traverse(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	for (int i = 0, n = sprs.size(); i < n; ++i)
 	{
-		ee::Sprite* spr = sprs[i];
-		std::string filepath = dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath();
+		auto& spr = sprs[i];
+		std::string filepath = std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol())->GetFilepath();
 		if (!CharacterFileName::IsValidFilepath(filepath)) {
 			sm::vec2 center = spr->GetPosition() + spr->GetOffset();
 			float angle = sm::get_angle_in_direction(center, m_last_pos, dst);

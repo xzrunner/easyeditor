@@ -1,6 +1,8 @@
 #ifndef _EASYEDITOR_PROPERTY_SETTING_H_
 #define _EASYEDITOR_PROPERTY_SETTING_H_
 
+#include <string>
+
 #include <wx/wx.h>
 #include <wx/propgrid/propgrid.h>
 

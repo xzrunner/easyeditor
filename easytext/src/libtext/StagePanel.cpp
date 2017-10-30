@@ -17,7 +17,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, wxGLContext* glctx,
-					   ee::Sprite* edited, const ee::MultiSpritesImpl* bg_sprites, 
+					   ee::SprPtr edited, const ee::MultiSpritesImpl* bg_sprites, 
 					   ee::LibraryPanel* library)
 	: ee::EditPanel(parent, frame)
 	, ee::SpritesPanelImpl(GetStageImpl(), library)

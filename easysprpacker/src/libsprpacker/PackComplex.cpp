@@ -7,17 +7,17 @@
 #include <easybuilder.h>
 namespace lua = ebuilder::lua;
 
-#include <sprite2/S2_Sprite.h>
+#include <sprite2/Sprite.h>
 #include <sprite2/SymType.h>
 #include <simp/simp_types.h>
 #include <simp/simp_define.h>
 #include <simp/NodeComplex.h>
-#include <bimp/bimp_typedef.h>
+#include <bimp/typedef.h>
 
 namespace esprpacker
 {
 
-PackComplex::PackComplex(const ecomplex::Symbol* sym)
+PackComplex::PackComplex(const std::shared_ptr<const ecomplex::Symbol>& sym)
 {
 	Init(sym);
 }
@@ -147,28 +147,28 @@ void PackComplex::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 	}
 }
 
-void PackComplex::Init(const ecomplex::Symbol* sym)
+void PackComplex::Init(const std::shared_ptr<const ecomplex::Symbol>& sym)
 {
 	bool is_curr_pkg = PackIDMgr::Instance()->IsCurrPkg(sym->GetFilepath());
 
-	const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
+	auto& children = sym->GetAllChildren();
 	m_children.reserve(children.size());
 	m_children_trans.reserve(children.size());
 	for (int i = 0, n = children.size(); i < n; ++i) 
 	{
-		s2::Sprite* child = children[i];
+		auto& child = children[i];
 		bool force_curr = is_curr_pkg && child->GetSymbol()->Type() == s2::SYM_SCALE9;
 		m_children.push_back(PackNodeFactory::Instance()->Create(
-			dynamic_cast<ee::Sprite*>(child), force_curr));
+			std::dynamic_pointer_cast<ee::Sprite>(child), force_curr));
 		m_children_trans.push_back(*child);
 	}
 
-	const std::vector<s2::ComplexSymbol::Action>& actions = sym->GetActions();
+	auto& actions = sym->GetActions();
 	for (int i = 0, n = actions.size(); i < n; ++i) 
 	{
 		const s2::ComplexSymbol::Action& src = actions[i];
 		Action dst;
-		dst.m_name = src.name;
+		dst.m_name = src.name.c_str();
 		dst.m_sprs.reserve(src.sprs.size());
 		dst.m_spr_trans.reserve(src.sprs.size());
 		for (int j = 0, m = src.sprs.size(); j < m; ++j) 

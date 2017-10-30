@@ -1,12 +1,13 @@
 #ifndef _EASYSPRPACKER_PACK_NODE_FACTORY_H_
 #define _EASYSPRPACKER_PACK_NODE_FACTORY_H_
 
-#include <CU_Singleton.h>
+#include <ee/Sprite.h>
+#include <ee/Symbol.h>
+
+#include <cu/cu_macro.h>
 
 #include <string>
 #include <vector>
-
-namespace ee { class Sprite; class Symbol; }
 
 namespace esprpacker
 {
@@ -17,8 +18,8 @@ class NodeBuilder;
 class PackNodeFactory
 {
 public:
-	const PackNode* Create(const ee::Sprite* spr, bool force_curr = false);
-	const PackNode* Create(const ee::Symbol* sym);
+	const PackNode* Create(const ee::SprConstPtr& spr, bool force_curr = false);
+	const PackNode* Create(const ee::SymConstPtr& sym);
 
 	void FetchAll(std::vector<PackNode*>& nodes) const;
 
@@ -34,7 +35,7 @@ private:
 private:
 	std::string m_files_dir;
 
-	SINGLETON_DECLARATION(PackNodeFactory);
+	CU_SINGLETON_DECLARATION(PackNodeFactory);
 
 }; // PackNodeFactory
 

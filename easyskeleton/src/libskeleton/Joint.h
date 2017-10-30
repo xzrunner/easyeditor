@@ -11,7 +11,7 @@ namespace libskeleton
 class Joint : public s2::Joint
 {
 public:
-	Joint(s2::Sprite* spr, const s2::JointPose& joint_pose);
+	Joint(const s2::SprPtr& spr, const s2::JointPose& joint_pose);
 
 	void DrawSkeleton(const s2::RenderParams& params, bool selected = false) const;
 

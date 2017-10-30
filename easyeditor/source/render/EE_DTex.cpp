@@ -2,7 +2,7 @@
 
 #include <SM_Vector.h>
 #include <sprite2/RenderCtxStack.h>
-#include <gum/GUM_DTex.h>
+#include <gum/DTex.h>
 
 namespace ee
 {

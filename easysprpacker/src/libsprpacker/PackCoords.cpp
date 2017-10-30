@@ -10,7 +10,7 @@ namespace lua = ebuilder::lua;
 namespace esprpacker
 {
 
-void PackCoords::PackToLua(ebuilder::CodeGenerator& gen, const std::vector<sm::vec2>& vertices, 
+void PackCoords::PackToLua(ebuilder::CodeGenerator& gen, const CU_VEC<sm::vec2>& vertices, 
 						   const std::string& name, int precision)
 {
 	lua::assign_with_end(gen, name + "_num", vertices.size());
@@ -28,12 +28,12 @@ void PackCoords::PackToLua(ebuilder::CodeGenerator& gen, const std::vector<sm::v
 	gen.line(ss.str());
 }
 
-int PackCoords::SizeOfUnpackFromBin(const std::vector<sm::vec2>& vertices)
+int PackCoords::SizeOfUnpackFromBin(const CU_VEC<sm::vec2>& vertices)
 {
 	return vertices.size() * sizeof(int16_t) * 2;
 }
 
-int PackCoords::SizeOfPackToBin(const std::vector<sm::vec2>& vertices)
+int PackCoords::SizeOfPackToBin(const CU_VEC<sm::vec2>& vertices)
 {
 	int sz = 0;
 	sz += sizeof(uint16_t);
@@ -41,7 +41,7 @@ int PackCoords::SizeOfPackToBin(const std::vector<sm::vec2>& vertices)
 	return sz;
 }
 
-void PackCoords::PackToBin(const std::vector<sm::vec2>& vertices, uint8_t** ptr, int precision)
+void PackCoords::PackToBin(const CU_VEC<sm::vec2>& vertices, uint8_t** ptr, int precision)
 {
 	if (vertices.size() > USHRT_MAX) {
 		throw ee::Exception("PackCoords::PackToBin num too large.");
@@ -60,7 +60,7 @@ void PackCoords::PackToBin(const std::vector<sm::vec2>& vertices, uint8_t** ptr,
 	}
 }
 
-void PackCoords::PackToLuaF32(ebuilder::CodeGenerator& gen, const std::vector<sm::vec2>& vertices, const std::string& name)
+void PackCoords::PackToLuaF32(ebuilder::CodeGenerator& gen, const CU_VEC<sm::vec2>& vertices, const std::string& name)
 {
 	lua::assign_with_end(gen, name + "_num", vertices.size());
 
@@ -73,12 +73,12 @@ void PackCoords::PackToLuaF32(ebuilder::CodeGenerator& gen, const std::vector<sm
 	gen.line(ss.str());
 }
 
-int PackCoords::SizeOfUnpackFromBinF32(const std::vector<sm::vec2>& vertices)
+int PackCoords::SizeOfUnpackFromBinF32(const CU_VEC<sm::vec2>& vertices)
 {
 	return vertices.size() * sizeof(float) * 2;
 }
 
-int PackCoords::SizeOfPackToBinF32(const std::vector<sm::vec2>& vertices)
+int PackCoords::SizeOfPackToBinF32(const CU_VEC<sm::vec2>& vertices)
 {
 	int sz = 0;
 	sz += sizeof(uint16_t);
@@ -86,7 +86,7 @@ int PackCoords::SizeOfPackToBinF32(const std::vector<sm::vec2>& vertices)
 	return sz;
 }
 
-void PackCoords::PackToBinF32(const std::vector<sm::vec2>& vertices, uint8_t** ptr)
+void PackCoords::PackToBinF32(const CU_VEC<sm::vec2>& vertices, uint8_t** ptr)
 {
 	if (vertices.size() > USHRT_MAX) {
 		throw ee::Exception("PackCoords::PackToBin num too large.");

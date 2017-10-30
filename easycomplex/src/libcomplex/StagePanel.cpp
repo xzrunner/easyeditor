@@ -13,7 +13,7 @@
 #include <ee/sprite_msg.h>
 #include <ee/subject_id.h>
 
-#include <sprite2/S2_Sprite.h>
+#include <sprite2/Sprite.h>
 #include <sprite2/UpdateParams.h>
 #include <sprite2/Particle3d.h>
 
@@ -26,7 +26,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   ee::PropertySettingPanel* property,
 					   LibraryPanel* library)
 	: EditPanel(parent, frame)
-	, ee::SpritesPanelImpl(GetStageImpl(), new SymbolContainer(m_sym = new Symbol))
+	, ee::SpritesPanelImpl(GetStageImpl(), std::make_shared<SymbolContainer>(m_sym))
+	, m_sym(std::make_shared<Symbol>())
 	, m_library(library)
 {
 	ee::EditOP* editop = new ee::ArrangeSpriteOP<SelectSpritesOP>(this, GetStageImpl(), this, property, 
@@ -46,13 +47,13 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
-					   Symbol* sym,
+					   const std::shared_ptr<Symbol>& sym,
 					   ee::PropertySettingPanel* property,
 					   LibraryPanel* library,
 					   wxGLContext* glctx,
 					   ee::CrossGuides* guides)
 	: EditPanel(parent, frame)
-	, ee::SpritesPanelImpl(GetStageImpl(), new SymbolContainer(m_sym = sym))
+	, ee::SpritesPanelImpl(GetStageImpl(), std::make_shared<SymbolContainer>(m_sym = sym))
 	, m_library(library)
 {
 	ee::ArrangeSpriteOP<SelectSpritesOP>* editop = new ee::ArrangeSpriteOP<SelectSpritesOP>(
@@ -73,12 +74,12 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 bool StagePanel::UpdateStage()
 {
 	bool dirty = false;
-	const std::vector<s2::Sprite*>& children = m_sym->GetAllChildren();
+	auto& children = m_sym->GetAllChildren();
 	s2::UpdateParams up;
 	up.SetForce(true);
 	for (int i = 0, n = children.size(); i < n; ++i) 
 	{
-		s2::Sprite* child = children[i];
+		auto& child = children[i];
 		up.SetActor(child->QueryActor(NULL));
 		if (child->Update(up)) {
 			dirty = true;

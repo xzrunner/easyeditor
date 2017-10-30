@@ -7,7 +7,7 @@
 #include <ee/SymbolType.h>
 #include <ee/SymbolPath.h>
 
-#include <sprite2/S2_Sprite.h>
+#include <sprite2/Sprite.h>
 
 #include <wx/msgdlg.h>
 
@@ -16,7 +16,7 @@
 namespace ecomplex
 {
 
-void FileStorer::Store(const std::string& filepath, const Symbol* sym, const std::string& _dir)
+void FileStorer::Store(const std::string& filepath, const Symbol& sym, const std::string& _dir)
 {
 	CheckName(sym);
 
@@ -24,16 +24,16 @@ void FileStorer::Store(const std::string& filepath, const Symbol* sym, const std
 
 //	centerSymbol(sym);
 
-	value["name"] = sym->name;
-	value["tag"] = sym->tag;
+	value["name"] = sym.name.c_str();
+	value["tag"] = sym.tag.c_str();
 
-	const sm::rect& scissor = sym->GetScissor();
+	const sm::rect& scissor = sym.GetScissor();
 	value["xmin"] = scissor.xmin;
 	value["xmax"] = scissor.xmax;
 	value["ymin"] = scissor.ymin;
 	value["ymax"] = scissor.ymax;
 
-	value["use_render_cache"] = sym->m_use_render_cache;
+	value["use_render_cache"] = sym.m_use_render_cache;
 
 	std::string dir;
 	if (filepath != ee::SYM_GROUP_TAG) {
@@ -41,9 +41,9 @@ void FileStorer::Store(const std::string& filepath, const Symbol* sym, const std
 	} else {
 		dir = _dir;
 	}
-	const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
+	auto& children = sym.GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
-		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
+		auto child = std::dynamic_pointer_cast<ee::Sprite>(children[i]);
 		value["sprite"][i] = Store(child, dir);
 	}
 
@@ -57,22 +57,22 @@ void FileStorer::Store(const std::string& filepath, const Symbol* sym, const std
 	fout.close();
 }
 
-void FileStorer::StoreWithHistory(const std::string& filepath, const Symbol* sym, const std::string& _dir)
+void FileStorer::StoreWithHistory(const std::string& filepath, const Symbol& sym, const std::string& _dir)
 {
 	CheckName(sym);
 
 	Json::Value value;
 
-	value["name"] = sym->name;
-	value["tag"] = sym->tag;
+	value["name"] = sym.name.c_str();
+	value["tag"] = sym.tag.c_str();
 
-	const sm::rect& scissor = sym->GetScissor();
+	const sm::rect& scissor = sym.GetScissor();
 	value["xmin"] = scissor.xmin;
 	value["xmax"] = scissor.xmax;
 	value["ymin"] = scissor.ymin;
 	value["ymax"] = scissor.ymax;
 
-	value["use_render_cache"] = sym->m_use_render_cache;
+	value["use_render_cache"] = sym.m_use_render_cache;
 
 	std::string dir;
 	if (filepath != ee::SYM_GROUP_TAG) {
@@ -81,9 +81,9 @@ void FileStorer::StoreWithHistory(const std::string& filepath, const Symbol* sym
 		dir = _dir;
 	}
 
-	const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
+	auto& children = sym.GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
-		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
+		auto child = std::dynamic_pointer_cast<ee::Sprite>(children[i]);
 		value["sprite"][i] = Store(child, dir);
 	}
 
@@ -99,32 +99,32 @@ void FileStorer::StoreWithHistory(const std::string& filepath, const Symbol* sym
 	writer.write(fout, value);
 	fout.close();
 
-//	editpanel->saveHistoryList(filepath, sym->m_sprs);
+//	editpanel->saveHistoryList(filepath, sym.m_sprs);
 }
 
-void FileStorer::CenterSymbol(Symbol* sym)
+void FileStorer::CenterSymbol(Symbol& sym)
 {
-	sm::vec2 offset = sym->GetBounding().Center();
-	const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
+	sm::vec2 offset = sym.GetBounding().Center();
+	auto& children = sym.GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
-		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
+		auto child = std::dynamic_pointer_cast<ee::Sprite>(children[i]);
 		child->Translate(-offset);
 	}
-	sym->GetBounding().Translate(-offset);
+	sym.GetBounding().Translate(-offset);
 }
 
-Json::Value FileStorer::Store(ee::Sprite* spr, const std::string& dir)
+Json::Value FileStorer::Store(const ee::SprPtr& spr, const std::string& dir)
 {
 	Json::Value value;
-	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());
+	auto sym = std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol());
 
 	// filepath
-	value["filepath"] = ee::SymbolPath::GetRelativePath(sym, dir);
+	value["filepath"] = ee::SymbolPath::GetRelativePath(*sym, dir).c_str();
 	// filepaths
 	const std::set<std::string>& filepaths = sym->GetFilepaths();
 	std::set<std::string>::const_iterator itr = filepaths.begin();
 	for (int i = 0; itr != filepaths.end(); ++itr, ++i) {
-		value["filepaths"][i] = *itr;
+		value["filepaths"][i] = itr->c_str();
 	}
 	// other
 	spr->Store(value, dir);
@@ -132,50 +132,50 @@ Json::Value FileStorer::Store(ee::Sprite* spr, const std::string& dir)
 	return value;
 }
 
-void FileStorer::CheckName(const Symbol* sym)
+void FileStorer::CheckName(const Symbol& sym)
 {
 	CheckDuplicateName(sym);
 	CheckNameDiff(sym);
 	CheckAnchorName(sym);
 }
 
-void FileStorer::CheckDuplicateName(const Symbol* sym)
+void FileStorer::CheckDuplicateName(const Symbol& sym)
 {
 	std::set<std::string> names_set;
-	const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
+	auto& children = sym.GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) 
 	{
-		ee::Sprite* spr = dynamic_cast<ee::Sprite*>(children[i]);
-		std::string name;
+		auto spr = std::dynamic_pointer_cast<ee::Sprite>(children[i]);
+		CU_STR name;
 		s2::SprNameMap::Instance()->IDToStr(spr->GetName(), name);
 		if (name.empty() || name[0] == '_') {
 			continue;
 		}
 
-		std::set<std::string>::iterator itr = names_set.find(name);
+		auto itr = names_set.find(name.c_str());
 		if (itr == names_set.end()) {
-			names_set.insert(name);
+			names_set.insert(name.c_str());
 		} else {
-			std::string filepath = sym->GetFilepath();
-			wxMessageBox(filepath + ": " + name, "重名");
+			std::string msg = sym.GetFilepath() + ": " + name.c_str();
+			wxMessageBox(msg.c_str(), "重名");
 		}
 	}
 }
 
-void FileStorer::CheckNameDiff(const Symbol* sym)
+void FileStorer::CheckNameDiff(const Symbol& sym)
 {
 	std::set<std::string> curr_names;
-	const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
+	auto& children = sym.GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
-		std::string name;
+		CU_STR name;
 		s2::SprNameMap::Instance()->IDToStr(children[i]->GetName(), name);
 		if (!name.empty() && name[0] != '_') {
-			curr_names.insert(name);
+			curr_names.insert(name.c_str());
 		}
 	}
 
 	std::vector<std::string> leak_names;
-	const std::vector<std::string>& origin_names = sym->GetOriginNames();
+	const std::vector<std::string>& origin_names = sym.GetOriginNames();
 	for (int i = 0, n = origin_names.size(); i < n; ++i) {
 		if (curr_names.find(origin_names[i]) == curr_names.end()) {
 			leak_names.push_back(origin_names[i]);
@@ -191,37 +191,37 @@ void FileStorer::CheckNameDiff(const Symbol* sym)
 		str += leak_names[i] + ", ";
 	}
 
-	std::string filepath = sym->GetFilepath();
-	wxMessageBox(filepath + ": " + str, "删除的名字");
+	std::string msg = sym.GetFilepath() + ": " + str;
+	wxMessageBox(msg.c_str(), "删除的名字");
 }
 
-void FileStorer::CheckAnchorName(const Symbol* sym)
+void FileStorer::CheckAnchorName(const Symbol& sym)
 {
-	const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
+	auto& children = sym.GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) 
 	{
-		ee::Sprite* spr = dynamic_cast<ee::Sprite*>(children[i]);
-		std::string name;
+		auto& spr = std::dynamic_pointer_cast<ee::Sprite>(children[i]);
+		CU_STR name;
 		s2::SprNameMap::Instance()->IDToStr(spr->GetName(), name);
 		if (spr->IsAnchor() && name.compare(0, strlen("_sprite"), "_sprite") == 0) 
 		{
-			std::string filepath = sym->GetFilepath();
-			const ee::Symbol* ee_sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());
-			wxMessageBox(filepath + ": " + ee_sym->GetName(), "anchor没有名字");
+			auto ee_sym = std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol());
+			std::string msg = sym.GetFilepath() + ": " + ee_sym->GetName();
+			wxMessageBox(msg.c_str(), "anchor没有名字");
 		}
 	}
 }
 
-// void FileStorer::StoreAction(const Symbol* sym, Json::Value& val)
+// void FileStorer::StoreAction(const Symbol& sym, Json::Value& val)
 // {
-// 	const std::vector<s2::ComplexSymbol::Action>& actions = sym->GetActions();
+// 	const std::vector<s2::ComplexSymbol::Action>& actions = sym.GetActions();
 // 	if (actions.empty()) {
 // 		return;
 // 	}
 // 
 // 	Json::Value action_val;
 // 
-// 	const std::vector<s2::Sprite*>& children = sym->GetChildren();
+// 	auto& children = sym.GetChildren();
 // 	for (int i = 0, n = actions.size(); i < n; ++i) {
 // 		const s2::ComplexSymbol::Action& action = actions[i];
 // 		action_val[i]["name"] = action.name;

@@ -15,14 +15,13 @@ BodyManager::BodyManager()
 {
 }
 
-IBody* BodyManager::LoadBody(Sprite* spr)
+IBody* BodyManager::LoadBody(const SprPtr& spr)
 {
 	std::map<Sprite*, IBody*>::iterator itr = 
 		m_map_body.find(spr);
 	IBody* body = CreateBody(spr);
 	if (itr == m_map_body.end()) {
 		if (body) {
-			spr->AddReference();
 			m_map_body.insert(std::make_pair(spr, body));
 		}
 	} else {
@@ -31,7 +30,7 @@ IBody* BodyManager::LoadBody(Sprite* spr)
 	return body;
 }
 
-void BodyManager::UnloadBody(Sprite* spr)
+void BodyManager::UnloadBody(const SprPtr& spr)
 {
 	std::map<Sprite*, IBody*>::iterator itr = 
 		m_map_body.find(spr);
@@ -42,7 +41,7 @@ void BodyManager::UnloadBody(Sprite* spr)
 	}
 }
 
-const IBody* BodyManager::QueryBody(Sprite* spr) const
+const IBody* BodyManager::QueryBody(const SprPtr& spr) const
 {
 	std::map<Sprite*, IBody*>::const_iterator itr = 
 		m_map_body.find(spr);
@@ -62,7 +61,7 @@ void BodyManager::Update()
 		if (!body || !(body->GetBody())) {
 			continue;
 		}
-		Sprite* spr = itr->first;
+		const SprPtr& spr = itr->first;
 		b2Body* b2body = body->GetBody();
 		if (body->IsAlive() && b2body->GetType() != b2_staticBody) {
 			sm::vec2 pos(b2body->GetPosition().x, b2body->GetPosition().y);
@@ -75,9 +74,9 @@ void BodyManager::Update()
 	}
 }
 
-IBody* BodyManager::CreateBody(Sprite* spr)
+IBody* BodyManager::CreateBody(const SprPtr& spr)
 {
-	std::string filepath = dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath();
+	std::string filepath = std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol())->GetFilepath();
 	filepath = FileHelper::GetFilenameAddTag(filepath, "shape", "json");
 	if (FileHelper::IsFileExist(filepath)) {
 		IBody* body = BodyFactory::createBody(filepath, spr->GetScale().x);

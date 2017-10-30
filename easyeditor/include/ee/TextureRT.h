@@ -3,6 +3,8 @@
 
 #include "Texture.h"
 
+#include <memory>
+
 namespace s2 { class RenderTarget; }
 
 namespace ee
@@ -11,8 +13,7 @@ namespace ee
 class TextureRT : public Texture
 {
 public:
-	TextureRT(const s2::RenderTarget* rt);
-	virtual ~TextureRT();
+	TextureRT(const std::shared_ptr<const s2::RenderTarget>& rt);
 
 	virtual unsigned int GetTexID() const;
 
@@ -21,7 +22,7 @@ public:
 	virtual int GetFormat() const;
 
 private:
-	const s2::RenderTarget* m_rt;
+	std::shared_ptr<const s2::RenderTarget> m_rt;
 
 }; // TextureRT
 

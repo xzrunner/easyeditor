@@ -21,7 +21,7 @@ Sprite& Sprite::operator = (const Sprite& spr)
 	return *this;
 }
 
-Sprite::Sprite(Symbol* sym)
+Sprite::Sprite(const s2::SymPtr& sym, uint32_t id)
 	: s2::Sprite(sym)
 	, ee::Sprite(sym)
 {
@@ -31,7 +31,7 @@ bool Sprite::Update(const s2::UpdateParams& up)
 { 
 	bool dirty = false;
 
-	Symbol* sym = dynamic_cast<Symbol*>(m_sym);
+	auto sym = std::dynamic_pointer_cast<Symbol>(m_sym);
 
 	if (sym->GetAnchorMgr().Update(up)) {
 		dirty = true;
@@ -40,10 +40,10 @@ bool Sprite::Update(const s2::UpdateParams& up)
 	s2::UpdateParams up_child(up);
 	up_child.Push(this);
 
-	const std::vector<Sprite*>& sprs = sym->GetExtRefs();
+	auto& sprs = sym->GetExtRefs();
 	for (int i = 0, n = sprs.size(); i < n; ++i) 
 	{
-		Sprite* child = sprs[i];
+		auto& child = sprs[i];
 		up_child.SetActor(child->QueryActor(up.GetActor()));
 		if (child->Update(up_child)) {
 			dirty = true;
@@ -53,9 +53,9 @@ bool Sprite::Update(const s2::UpdateParams& up)
 	return dirty; 
 }
 
-ee::Sprite* Sprite::Create(ee::Symbol* sym) 
+ee::SprPtr Sprite::Create(const std::shared_ptr<ee::Symbol>& sym) 
 {
-	return new Sprite(static_cast<Symbol*>(sym));
+	return std::make_shared<Sprite>(sym);
 }
 
 }

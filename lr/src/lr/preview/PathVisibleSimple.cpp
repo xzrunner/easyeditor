@@ -5,7 +5,7 @@
 
 #include <easyshape.h>
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <sprite2/BoundingBox.h>
 #include <SM_Test.h>
 #include <SM_Process.h>
@@ -24,9 +24,9 @@ PathVisibleSimple::PathVisibleSimple(const sm::rect& region)
 {
 }
 
-void PathVisibleSimple::DisableRegion(const ee::Sprite* spr, bool disable)
+void PathVisibleSimple::DisableRegion(const ee::SprConstPtr& spr, bool disable)
 {
-	std::map<const ee::Sprite*, std::vector<Node*> >::iterator itr 
+	std::map<const ee::SprPtr, std::vector<Node*> >::iterator itr 
 		= m_bounds.find(spr);
 	if (itr == m_bounds.end() && !disable) {
 		InsertBoundary(spr);
@@ -57,7 +57,7 @@ void PathVisibleSimple::DebugDraw() const
 		return;
 	}
 
- 	std::map<const ee::Sprite*, std::vector<Node*> >::const_iterator itr
+ 	std::map<const ee::SprPtr, std::vector<Node*> >::const_iterator itr
  		= m_bounds.begin();
 	for ( ; itr != m_bounds.end(); ++itr)
 	{
@@ -86,7 +86,7 @@ sm::vec2 PathVisibleSimple::TransIDToPos(int id) const
 	}
 }
 
-void PathVisibleSimple::InsertBoundary(const ee::Sprite* spr)
+void PathVisibleSimple::InsertBoundary(const ee::SprConstPtr& spr)
 {
 	// get bound
 	std::vector<sm::vec2> bound;
@@ -129,7 +129,7 @@ void PathVisibleSimple::InsertBoundary(const ee::Sprite* spr)
 	BuildConnection(nodes);
 }
 
-void PathVisibleSimple::RemoveBoundary(std::map<const ee::Sprite*, std::vector<Node*> >::iterator itr)
+void PathVisibleSimple::RemoveBoundary(std::map<const ee::SprPtr, std::vector<Node*> >::iterator itr)
 {
 	for (int i = 0, n = itr->second.size(); i < n; ++i) {
 		RemoveNode(itr->second[i]);
@@ -143,7 +143,7 @@ void PathVisibleSimple::BuildConnection(const std::vector<Node*>& nodes) const
 	for (int i = 0, n = nodes.size(); i < n; ++i) 
 	{
 		Node* n0 = nodes[i];
-		std::map<const ee::Sprite*, std::vector<Node*> >::const_iterator itr
+		std::map<const ee::SprPtr, std::vector<Node*> >::const_iterator itr
 			= m_bounds.begin();
 		for ( ; itr != m_bounds.end(); ++itr) 
 		{
@@ -163,7 +163,7 @@ void PathVisibleSimple::BuildConnection(const std::vector<Node*>& nodes) const
 
 bool PathVisibleSimple::IsSegIntersectAllBound(const sm::vec2& p0, const sm::vec2& p1) const
 {
-	std::map<const ee::Sprite*, std::vector<Node*> >::const_iterator itr
+	std::map<const ee::SprPtr, std::vector<Node*> >::const_iterator itr
 		= m_bounds.begin();
 	for ( ; itr != m_bounds.end(); ++itr) {
 		if (IsSegIntersectBound(p0, p1, itr->second)) {
@@ -191,7 +191,7 @@ PathVisibleSimple::Node* PathVisibleSimple::CreateNode(const sm::vec2& pos)
 	Node* n0 = new Node(m_node_id++, pos);
 	m_nodes.insert(std::make_pair(n0->id, n0));
 
-	std::map<const ee::Sprite*, std::vector<Node*> >::const_iterator itr
+	std::map<const ee::SprPtr, std::vector<Node*> >::const_iterator itr
 		= m_bounds.begin();
 	for ( ; itr != m_bounds.end(); ++itr) 
 	{
@@ -215,7 +215,7 @@ void PathVisibleSimple::RemoveNode(const Node* node)
 	std::map<int, Node*>::iterator itr_n = m_nodes.find(node->id);
 	m_nodes.erase(itr_n);
 
-	std::map<const ee::Sprite*, std::vector<Node*> >::iterator itr_b
+	std::map<const ee::SprPtr, std::vector<Node*> >::iterator itr_b
 		= m_bounds.begin();
 	for ( ; itr_b != m_bounds.end(); ++itr_b)
 	{

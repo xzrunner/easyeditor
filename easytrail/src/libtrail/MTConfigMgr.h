@@ -1,8 +1,11 @@
 #ifndef _EASYTRAIL_MT_CONFIG_MGR_H_
 #define _EASYTRAIL_MT_CONFIG_MGR_H_
 
+#include <cu/cu_macro.h>
+
 #include <string>
 #include <map>
+#include <memory>
 
 namespace s2 { class TrailEmitterCfg; }
 
@@ -12,22 +15,16 @@ namespace etrail
 class MTConfigMgr
 {
 public:
-	s2::TrailEmitterCfg* GetDefaultConfig();
+	std::shared_ptr<s2::TrailEmitterCfg> GetDefaultConfig();
 
-	s2::TrailEmitterCfg* GetConfig(const std::string& filepath);
+	std::shared_ptr<s2::TrailEmitterCfg> GetConfig(const std::string& filepath);
 
-	std::string GetFilepath(const s2::TrailEmitterCfg* cfg);
-
-public:
-	static MTConfigMgr* Instance();
+	std::string GetFilepath(const std::shared_ptr<s2::TrailEmitterCfg>& cfg);
 
 private:
-	MTConfigMgr();
+	std::map<std::string, std::shared_ptr<s2::TrailEmitterCfg>> m_map2cfg;
 
-private:
-	std::map<std::string, s2::TrailEmitterCfg*> m_map2cfg;
-
-	static MTConfigMgr* m_instance;
+	CU_SINGLETON_DECLARATION(MTConfigMgr)
 
 }; // MTConfigMgr
 

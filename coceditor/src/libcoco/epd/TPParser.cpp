@@ -9,7 +9,7 @@ namespace ecoco
 namespace epd
 {
 
-TPParser::TPParser(const std::vector<const ee::Symbol*>& syms,
+TPParser::TPParser(const std::vector<ee::SymPtr>& syms,
 				   const TextureMgr& tex_mgr)
 	: m_tex_mgr(tex_mgr)
 	, m_tex_size(0)
@@ -27,10 +27,9 @@ void TPParser::Parser()
 	m_tex_size = idx;
 }
 
-TPParser::Picture* TPParser::FindPicture(const ee::Symbol* sym) const
+TPParser::Picture* TPParser::FindPicture(const ee::SymConstPtr& sym) const
 {
-	std::map<const ee::Symbol*, TPParser::Picture*>::const_iterator itr 
-		= m_map_symbol2picture.find(sym);
+	auto itr = m_map_symbol2picture.find(sym);
 	if (itr == m_map_symbol2picture.end()) {
 		return NULL;
 	} else {
@@ -42,8 +41,7 @@ void TPParser::DebugInfo() const
 {
 	std::ofstream fout("d:/zz_debug.txt");
 
-	std::map<const ee::Symbol*, Picture*>::const_iterator itr 
-		= m_map_symbol2picture.begin();
+	auto itr = m_map_symbol2picture.begin();
 	for ( ; itr != m_map_symbol2picture.end(); ++itr) {
 		fout << itr->first->GetFilepath() << "\n";
 		fout << itr->first << "\n\n";
@@ -62,7 +60,7 @@ void TPParser::ParserTexture(const TextureMgr::Entry* tex, int idx)
 		const TPAdapter::Entry& entry = frames[i];
 
 		// find symbol
-		const ee::Symbol* sym = m_symbol_sorter.GetSymbolSet().Query(entry.filename);
+		auto sym = m_symbol_sorter.GetSymbolSet().Query(entry.filename);
 		if (!sym) {
 			continue;
 		}

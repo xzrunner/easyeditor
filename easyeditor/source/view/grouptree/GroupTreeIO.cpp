@@ -17,8 +17,8 @@ GroupTreeIO::GroupTreeIO(GroupTreeCtrl* tree, MultiSpritesImpl* sprites_impl)
 
 void GroupTreeIO::Load(const Json::Value& value)
 {
-	std::vector<Sprite*> sprs;
-	m_sprites_impl->TraverseSprites(FetchAllVisitor<Sprite>(sprs));
+	std::vector<SprPtr> sprs;
+	m_sprites_impl->TraverseSprites(FetchAllRefVisitor<Sprite>(sprs));
 
 	std::vector<Node> nodes;
 	LoadToNodes(value, nodes);
@@ -40,13 +40,13 @@ void GroupTreeIO::Load(const Json::Value& value)
  			const Node& node = *itr;
  			if (node.parent == candidate.first) {
 				if (!node.spr.empty()) {
-					Sprite* spr = NULL;
+					SprPtr spr = nullptr;
 
 					for (int i = 0, n = sprs.size(); i < n; ++i) 
 					{
-						std::string name;
+						CU_STR name;
 						s2::SprNameMap::Instance()->IDToStr(sprs[i]->GetName(), name);
-						if (node.name == name) {
+						if (node.name == name.c_str()) {
 							spr = sprs[i];
 							break;
 						}

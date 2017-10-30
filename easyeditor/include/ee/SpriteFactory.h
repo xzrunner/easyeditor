@@ -2,6 +2,9 @@
 #define _EASYEDITOR_SPRITE_FACTORY_H_
 
 #include "Symbol.h"
+#include "Sprite.h"
+
+#include <cu/cu_macro.h>
 
 #include <json/json.h>
 
@@ -10,46 +13,29 @@
 namespace ee
 {
 
-class Sprite;
-
 class SpriteFactory
 {
 public:
-	Sprite* Create(Symbol* sym);
-	Sprite* Create(const Json::Value& val, const std::string& dir);
-	Sprite* Create(const Json::Value& val, const std::string& dir, 
-		const std::string& filepath);
+	SprPtr Create(const SymPtr& sym);
+	SprPtr Create(const Json::Value& val, const std::string& dir);
+	SprPtr Create(const Json::Value& val, const std::string& dir, const std::string& filepath);
 
-	Sprite* CreateRoot(Symbol* sym);
-
-	void Insert(Sprite* spr);
-	void Remove(Sprite* spr);
+	SprPtr CreateRoot(const SymPtr& sym);
 
 	std::string NextName() const;
 
-	void UpdateBoundings(const Symbol& sym);
-
-	typedef Sprite* (*CreateCallback)(Symbol*);
+	typedef SprPtr (*CreateCallback)(const SymPtr&);
 	static void RegisterCreator(int type, CreateCallback cb);
 	static void UnregisterCreator(int type);
 
-public:
-	static SpriteFactory* Instance();
-
 private:
-	SpriteFactory();
-
-private:
-	typedef std::vector<Sprite*> SpriteList;
-	std::map<const Symbol*, SpriteList> m_map_symbol2sprites;
-
 	mutable int m_id;
 
 private:
-	static SpriteFactory* m_instance;
-
 	typedef std::map<int, CreateCallback> CallbackMap;
 	static CallbackMap m_creators;
+
+	CU_SINGLETON_DECLARATION(SpriteFactory);
 
 }; // SpriteFactory
 

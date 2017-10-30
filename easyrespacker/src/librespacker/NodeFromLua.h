@@ -4,12 +4,11 @@
 #include "typedef.h"
 
 #include <SM_Vector.h>
+#include <cu/cu_stl.h>
 
 extern "C" {
 #include <lua.h>
 };
-
-#include <vector>
 
 namespace erespacker
 {
@@ -21,7 +20,7 @@ public:
 	static float TransDegree(int deg);
 	static float TransFloatX100(int f);
 
-	static void UnpackVertices(std::vector<sm::vec2>& vertices, lua_State* L, 
+	static void UnpackVertices(CU_VEC<sm::vec2>& vertices, lua_State* L, 
 		const std::string& name, bool reverse_y = true, int scale = SCALE);
 
 }; // NodeFromLua

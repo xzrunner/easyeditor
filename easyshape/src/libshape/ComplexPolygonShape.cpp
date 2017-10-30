@@ -4,7 +4,7 @@
 //#include <ee/Math2D.h>
 //#include <ee/SettingData.h>
 //
-//#include <sprite2/S2_RVG.h>
+//#include <sprite2/RVG.h>
 //
 //namespace eshape
 //{
@@ -18,8 +18,8 @@
 //{
 //}
 //
-//ComplexPolygonShape::ComplexPolygonShape(const std::vector<sm::vec2>& outline, 
-//										 const std::vector<std::vector<sm::vec2> >& holes)
+//ComplexPolygonShape::ComplexPolygonShape(const CU_VEC<sm::vec2>& outline, 
+//										 const CU_VEC<CU_VEC<sm::vec2> >& holes)
 //	: PolygonShape(outline)
 //	, m_holes(holes)
 //{
@@ -63,7 +63,7 @@
 //	if (ee::SettingData::draw_poly_bound) {
 //		float len = sm::mat_trans_len(ee::SettingData::ctl_pos_sz, mt);
 //		for (int i = 0, n = m_holes.size(); i < n; ++i) {
-//			std::vector<sm::vec2> vertices;
+//			CU_VEC<sm::vec2> vertices;
 //			sm::trans_vertices(mt, m_holes[i], vertices);
 //			s2::RVG::SetColor(color.mul);
 //			s2::RVG::Polyline(vertices, m_loop);

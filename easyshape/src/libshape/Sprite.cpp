@@ -28,7 +28,7 @@ Sprite& Sprite::operator = (const Sprite& spr)
 	return *this;
 }
 
-Sprite::Sprite(Symbol* sym)
+Sprite::Sprite(const s2::SymPtr& sym, uint32_t id)
 	: s2::Sprite(sym)
 	, s2::ShapeSprite(sym)
 	, ee::Sprite(sym)
@@ -43,10 +43,9 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 		return;
 	}
 
-	Symbol* sym = VI_DOWNCASTING<Symbol*>(m_sym);
-	s2::Shape* shape = gum::ShapeLoader::LoadShape(val["shape"], dir);
-	sym->SetShape(shape);
-	shape->RemoveReference();
+	auto sym = std::dynamic_pointer_cast<Symbol>(m_sym);
+	auto shape = gum::ShapeLoader::LoadShape(val["shape"], dir.c_str());
+	sym->SetShape(std::move(shape));
 
 	UpdateBounding();
 }
@@ -55,25 +54,24 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 {
 	ee::Sprite::Store(val);
 
-	ee::Symbol* sym = VI_DOWNCASTING<ee::Symbol*>(m_sym);
+	auto sym = std::dynamic_pointer_cast<ee::Symbol>(m_sym);
 	if (sym->GetFilepath().empty())
 	{
 		val["filepath"] = ee::SYM_SHAPE_TAG;
 
 		Json::Value shape_val;
 
-		s2::ShapeSymbol* sym = VI_DOWNCASTING<s2::ShapeSymbol*>(m_sym);
+		auto sym = std::dynamic_pointer_cast<s2::ShapeSymbol>(m_sym);
 		assert(sym);
-		const s2::Shape* shape = VI_DOWNCASTING<const s2::Shape*>(sym->GetShape());
-		gum::ShapeSaver::Store(shape, shape_val);
+		gum::ShapeSaver::Store(sym->GetShape(), shape_val);
 
 		val["shape"] = shape_val;
 	}
 }
 
-ee::Sprite* Sprite::Create(ee::Symbol* sym) 
+ee::SprPtr Sprite::Create(const std::shared_ptr<ee::Symbol>& sym) 
 {
-	return new Sprite(static_cast<Symbol*>(sym));
+	return std::make_shared<Sprite>(sym);
 }
 
 }

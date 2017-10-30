@@ -2,9 +2,11 @@
 #define _EASYSHAPE_NODE_CAPTURE_H_
 
 #include <ee/Visitor.h>
+#include <ee/Shape.h>
+
 #include <SM_Rect.h>
 
-namespace ee { class Shape; class MultiShapesImpl; }
+namespace ee { class MultiShapesImpl; }
 
 namespace eshape
 {
@@ -17,17 +19,17 @@ class RectShape;
 
 struct NodeAddr
 {
-	ee::Shape* shape;
+	ee::ShapePtr shape;
 	sm::vec2 pos;
 
 	NodeAddr() 
-		: shape(NULL) 
+		: shape(nullptr) 
 	{
 		pos.MakeInvalid();
 	}
 
 	void Clear() {
-		shape = NULL;
+		shape = nullptr;
 		pos.MakeInvalid();
 	}
 };
@@ -41,19 +43,19 @@ public:
 	void captureSelectable(const sm::vec2& pos, NodeAddr& result);
 
 private:
-	class RectQueryVisitor : public ee::Visitor<ee::Shape>
+	class RectQueryVisitor : public ee::RefVisitor<ee::Shape>
 	{
 	public:
 		RectQueryVisitor(const sm::vec2& pos, float tolerance, NodeAddr& result);
 
-		virtual void Visit(ee::Shape* shape, bool& next);
+		virtual void Visit(const ee::ShapePtr& shape, bool& next);
 
 	private:
-		bool Visit(PointShape* point);
-		bool Visit(BezierShape* bezier);
-		bool Visit(EditedPolyShape* polyline);
-		bool Visit(CircleShape* circle);
-		bool Visit(RectShape* rect);
+		bool Visit(const std::shared_ptr<PointShape>& point);
+		bool Visit(const std::shared_ptr<BezierShape>& bezier);
+		bool Visit(const std::shared_ptr<EditedPolyShape>& polyline);
+		bool Visit(const std::shared_ptr<CircleShape>& circle);
+		bool Visit(const std::shared_ptr<RectShape>& rect);
 
 	private:
 		const sm::vec2& m_pos;

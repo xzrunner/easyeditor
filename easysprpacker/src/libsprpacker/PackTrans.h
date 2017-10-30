@@ -7,6 +7,7 @@
 #include <sprite2/RenderCamera.h>
 
 #include <SM_Vector.h>
+#include <cu/cu_stl.h>
 
 #include <string>
 
@@ -52,10 +53,9 @@ private:
 	s2::RenderColor		m_color;
 	s2::BlendMode		m_blend;
 	s2::FastBlendMode	m_fast_blend;
-	const s2::RenderFilter*	m_filter;
+	s2::RenderFilter*	m_filter;
 	float               m_downsample;
 	s2::RenderCamera	m_camera;
-
 	// other
 	bool                m_need_actor;
 	bool                m_integrate;

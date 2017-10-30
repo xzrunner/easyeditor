@@ -13,7 +13,7 @@ namespace lua = ebuilder::lua;
 
 #include <simp/NodeMesh.h>
 #include <simp/simp_types.h>
-#include <simp/SIMP_MeshType.h>
+#include <simp/MeshType.h>
 #include <polymesh/Mesh.h>
 #include <polymesh/TrianglesMesh.h>
 #include <polymesh/Skin2Mesh.h>
@@ -21,23 +21,23 @@ namespace lua = ebuilder::lua;
 namespace esprpacker
 {
 
-PackMesh::PackMesh(const emesh::Symbol* sym)
+PackMesh::PackMesh(const std::shared_ptr<emesh::Symbol>& sym)
 	: m_mesh(NULL)
 {
-	m_base = PackNodeFactory::Instance()->Create(dynamic_cast<const ee::Symbol*>(
+	m_base = PackNodeFactory::Instance()->Create(std::dynamic_pointer_cast<const ee::Symbol>(
 		sym->GetMesh()->GetBaseSymbol()));
 
-	const pm::Mesh* mesh = sym->GetMesh()->GetMesh();
+	auto& mesh = sym->GetMesh()->GetMesh();
 	switch (mesh->Type())
 	{
 	case pm::MESH_POINTS:
-		m_mesh = new PointsMesh(static_cast<const emesh::PointsMesh*>(sym->GetMesh()));
+		m_mesh = new PointsMesh(static_cast<const emesh::PointsMesh*>(sym->GetMesh().get()));
 		break;
 	case pm::MESH_TRIANGLES:
-		m_mesh = new TrianglesMesh(static_cast<const pm::TrianglesMesh*>(mesh)->GetMeshData());
+		m_mesh = new TrianglesMesh(static_cast<const pm::TrianglesMesh*>(mesh.get())->GetMeshData().get());
 		break;
 	case pm::MESH_SKIN2:
-		m_mesh = new Skin2Mesh(static_cast<const pm::Skin2Mesh*>(mesh)->GetMeshData());
+		m_mesh = new Skin2Mesh(static_cast<const pm::Skin2Mesh*>(mesh.get())->GetMeshData().get());
 		break;
 	default:
 		throw ee::Exception("PackMesh::PackMesh unknown type %d", mesh->Type());

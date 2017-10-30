@@ -24,7 +24,7 @@ public:
 	virtual bool OnDraw() const;
 
 private:
-	ee::Sprite* SelectByPos(int x, int y);
+	ee::SprPtr SelectByPos(int x, int y);
 
 private:
 	ToolbarPanel* m_toolbar;

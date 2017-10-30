@@ -3,25 +3,24 @@
 
 #include "MultiSpritesImpl.h"
 #include "DataContainer.h"
+#include "Sprite.h"
 
 namespace ee
 {
 
 class EditPanelImpl;
 class LibraryPanel;
-class Sprite;
 
 class SpritesPanelImpl : public MultiSpritesImpl
 {
 public:
-	SpritesPanelImpl(EditPanelImpl* stage, DataContainer<Sprite>* container);
+	SpritesPanelImpl(EditPanelImpl* stage, const std::shared_ptr<DataContainer<Sprite>>& container);
 	SpritesPanelImpl(EditPanelImpl* stage, LibraryPanel* library);
-	virtual ~SpritesPanelImpl();
 
 	//
 	// MultiSpritesImpl interface
 	//
-	virtual void TraverseSprites(Visitor<Sprite>& visitor, 
+	virtual void TraverseSprites(RefVisitor<Sprite>& visitor,
 		DataTraverseType type = DT_ALL, bool order = true) const;
 
 protected:
@@ -36,7 +35,7 @@ private:
 private:
 	EditPanelImpl* m_stage;
 
-	DataContainer<Sprite>* m_container;
+	std::shared_ptr<DataContainer<Sprite>> m_container;
 
 }; // SpritesPanelImpl
 

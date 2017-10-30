@@ -11,7 +11,7 @@
 namespace ecomplex
 {
 
-void LoadFromPSD::Load(const Json::Value& value, const std::string& dir, Symbol* complex)
+void LoadFromPSD::Load(const Json::Value& value, const std::string& dir, Symbol& complex)
 {
 	int w = value["document"]["width"].asInt(),
 		h = value["document"]["height"].asInt();
@@ -19,14 +19,14 @@ void LoadFromPSD::Load(const Json::Value& value, const std::string& dir, Symbol*
 	const Json::Value& cvalue = value["children"];
 //	for (int i = 0, n = cvalue.size(); i < n; ++i) {
 	for (int i = cvalue.size() - 1; i >= 0; --i) {
-		ee::Sprite* spr = LoadItem(cvalue[i], dir, w, h);
+		auto spr = LoadItem(cvalue[i], dir, w, h);
 		if (spr) {
-			complex->Add(spr);
+			complex.Add(spr);
 		}
 	}
 }
 
-ee::Sprite* LoadFromPSD::LoadItem(const Json::Value& value, const std::string& dir, int tw, int th)
+ee::SprPtr LoadFromPSD::LoadItem(const Json::Value& value, const std::string& dir, int tw, int th)
 {
 	std::string type = value["type"].asString();
 	if (type == "layer") {
@@ -38,7 +38,7 @@ ee::Sprite* LoadFromPSD::LoadItem(const Json::Value& value, const std::string& d
 	}
 }
 
-ee::Sprite* LoadFromPSD::LoadGroup(const Json::Value& value, const std::string& dir, int tw, int th)
+ee::SprPtr LoadFromPSD::LoadGroup(const Json::Value& value, const std::string& dir, int tw, int th)
 {
 	std::string name = value[ee::SYM_GROUP_TAG].asString();
 
@@ -46,13 +46,13 @@ ee::Sprite* LoadFromPSD::LoadGroup(const Json::Value& value, const std::string& 
 
 	std::string _dir = dir + "\\" + name;
 	
-	Symbol* sym = new Symbol();
-	Sprite* spr = new Sprite(sym);
+	auto sym = std::make_shared<Symbol>();
+	auto spr = std::make_shared<Sprite>(sym);
 
 	const Json::Value& cval = value["children"];
 //	for (int i = 0, n = cval.size(); i < n; ++i) {
 	for (int i = cval.size() - 1; i >= 0; --i) {
-		ee::Sprite* cspr = LoadItem(cval[i], _dir, tw, th);
+		ee::SprPtr cspr = LoadItem(cval[i], _dir, tw, th);
 		if (cspr) {
 			sym->Add(cspr);
 		}
@@ -61,16 +61,12 @@ ee::Sprite* LoadFromPSD::LoadGroup(const Json::Value& value, const std::string& 
 //	sym->InitBounding();
 	spr->UpdateBounding();
 
-	spr->AddReference();
 	spr->SetVisible(visible);
-
-	sym->RemoveReference();
-	spr->RemoveReference();
 
 	return spr;
 }
 
-ee::Sprite* LoadFromPSD::LoadLayer(const Json::Value& value, const std::string& dir, int tw, int th)
+ee::SprPtr LoadFromPSD::LoadLayer(const Json::Value& value, const std::string& dir, int tw, int th)
 {
 	std::string name = value["name"].asString();
 
@@ -85,15 +81,11 @@ ee::Sprite* LoadFromPSD::LoadLayer(const Json::Value& value, const std::string& 
 	}
 
 	std::string filepath = ee::FileHelper::GetAbsolutePath(dir, name) + ".png";
-	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-	ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
-	spr->AddReference();
+	auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+	auto spr = ee::SpriteFactory::Instance()->Create(sym);
 
 	spr->SetPosition(sm::vec2(left + width * 0.5f - tw * 0.5f, th * 0.5f - top - height * 0.5f));
 	spr->SetVisible(visible);
-
-	sym->RemoveReference();
-	spr->RemoveReference();
 
 	return spr;
 }

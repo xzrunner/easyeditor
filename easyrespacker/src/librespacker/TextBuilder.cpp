@@ -35,7 +35,7 @@ void TextBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
  	}
 }
 
-const IPackNode* TextBuilder::Create(const etext::Sprite* spr)
+const IPackNode* TextBuilder::Create(const std::shared_ptr<const etext::Sprite>& spr)
 {
 	if (m_cache) {
 		const IPackNode* node = QueryCache(spr);
@@ -69,7 +69,7 @@ const IPackNode* TextBuilder::Create(const etext::Sprite* spr)
 
 	node->richtext		= tb.richtext;
 
-	node->text			= spr->GetText(s2::UpdateParams());
+	node->text			= spr->GetText(s2::UpdateParams()).c_str();
 	node->tid			= spr->GetTID();
 
 	m_labels.push_back(node);
@@ -113,7 +113,7 @@ void TextBuilder::CacheEnd()
 	m_cache_labels.clear();
 }
 
-const IPackNode* TextBuilder::QueryCache(const etext::Sprite* spr) const
+const IPackNode* TextBuilder::QueryCache(const std::shared_ptr<const etext::Sprite>& spr) const
 {
 	const s2::Textbox& tb = spr->GetTextbox();
 	for (int i = 0, n = m_cache_labels.size(); i < n; ++i) {
@@ -139,7 +139,7 @@ const IPackNode* TextBuilder::QueryCache(const etext::Sprite* spr) const
 			
 			label->richtext		== tb.richtext&&
 
- 			label->text			== spr->GetText(s2::UpdateParams()) &&
+ 			label->text			== spr->GetText(s2::UpdateParams()).c_str() &&
  			label->tid			== spr->GetTID()) {
  			return label;
  		}

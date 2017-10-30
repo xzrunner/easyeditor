@@ -15,7 +15,7 @@ namespace esprpacker
 class PackScale9 : public PackNode
 {
 public:
-	PackScale9(const escale9::Symbol* sym);
+	PackScale9(const std::shared_ptr<escale9::Symbol>& sym);
 
 	/**
 	 *  @interface
@@ -33,7 +33,7 @@ public:
 	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const;	
 
 private:
-	void Init(const escale9::Symbol* sym);
+	void Init(const std::shared_ptr<escale9::Symbol>& sym);
 
 private:
 	struct Grid

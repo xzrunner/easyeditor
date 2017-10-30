@@ -11,7 +11,7 @@
 #include "PropertySettingPanel.h"
 #include "CameraCanvas.h"
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <sprite2/OrthoCamera.h>
 
 namespace ee
@@ -148,10 +148,9 @@ bool ArrangeSpriteOP<TBase>::IsEmpty() const
 }
 
 template <typename TBase>
-Sprite* ArrangeSpriteOP<TBase>::SelectByPos(const sm::vec2& pos) const
+SprPtr ArrangeSpriteOP<TBase>::SelectByPos(const sm::vec2& pos) const
 {
-	Sprite* spr = NULL;
-	spr = m_impl->QueryEditedSprite(pos);
+	auto spr = m_impl->QueryEditedSprite(pos);
 	if (!spr) {
 		spr = TBase::SelectByPos(pos);
 	}

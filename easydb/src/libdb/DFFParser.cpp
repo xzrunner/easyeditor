@@ -17,10 +17,10 @@ DFFParser::DFFParser(const char* filepath)
 {
 	int w, h, fmt;
 	uint8_t* pixels = gimg_import(filepath, &w, &h, &fmt);
-	if (fmt == GPF_RGBA && gum::Config::Instance()->GetPreMulAlpha()) {
+	if (fmt == GPF_RGBA8 && gum::Config::Instance()->GetPreMulAlpha()) {
 		gimg_pre_mul_alpha(pixels, w, h);
 	}
-	assert(w == EDGE && h == EDGE && fmt == GPF_RGBA);
+	assert(w == EDGE && h == EDGE && fmt == GPF_RGBA8);
 	m_alphas = new unsigned char[EDGE*EDGE];
 
 	int ptr = 3;
@@ -50,7 +50,7 @@ void DFFParser::outputImage(int width, int height)
 	}
 
 	std::string filepath = m_dir + "_" + ee::StringHelper::ToString(width) + "_" + ee::StringHelper::ToString(height) + ".png";
-	gimg_export(filepath.c_str(), pixels, width, height, GPF_RGBA, true);
+	gimg_export(filepath.c_str(), pixels, width, height, GPF_RGBA8, true);
 	delete[] pixels;
 }
 
@@ -154,7 +154,7 @@ void DFFParser::outputImageFast(int width, int height)
 	fillingAlphaNew(pixels, width, height);
 
 	std::string filepath = m_dir + "_" + ee::StringHelper::ToString(width) + "_" + ee::StringHelper::ToString(height) + ".png";
-	gimg_export(filepath.c_str(), pixels, width, height, GPF_RGBA, true);
+	gimg_export(filepath.c_str(), pixels, width, height, GPF_RGBA8, true);
 	delete[] pixels;
 }
 

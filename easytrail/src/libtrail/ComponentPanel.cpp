@@ -19,14 +19,6 @@ ComponentPanel::ComponentPanel(wxWindow* parent, t2d_symbol* pc, ToolbarPanel* t
 	, m_toolbar(toolbar) 
 {}
 
-ComponentPanel::~ComponentPanel()
-{
-	s2::Symbol* sym = static_cast<s2::Symbol*>(m_pc->mode.A.ud);
-	if (sym) {
-		sym->RemoveReference();
-	}
-}
-
 void ComponentPanel::SetValue(int key, const ee::UICallback::Data& data)
 {
 	switch (key)

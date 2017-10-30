@@ -66,7 +66,7 @@ void PackLuaDescFile::LoadJsonFiles(const std::string& dir)
 		int type = ee::SymbolFile::Instance()->Type(filepath);
 		if (type == s2::SYM_COMPLEX || type == s2::SYM_ANIMATION)
 		{
-			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+			auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			m_syms.push_back(sym);
 		}
 	}

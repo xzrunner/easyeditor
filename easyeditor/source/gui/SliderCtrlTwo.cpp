@@ -25,7 +25,7 @@ SliderCtrlTwo::SliderCtrlTwo(wxPanel* parent, const char* title, const char* nam
 		Connect(m_item_a.slider->GetId(), wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler(SliderCtrlTwo::OnSetValue));
 		sizer->Add(m_item_a.slider);
 
-		m_item_a.text = new wxTextCtrl(this, wxID_ANY, StringHelper::ToString(item_a.val), wxDefaultPosition, wxSize(50, -1), wxTE_PROCESS_ENTER);
+		m_item_a.text = new wxTextCtrl(this, wxID_ANY, StringHelper::ToString(item_a.val).c_str(), wxDefaultPosition, wxSize(50, -1), wxTE_PROCESS_ENTER);
 		Connect(m_item_a.text->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(SliderCtrlTwo::OnSetValue));
 		sizer->Add(m_item_a.text);
 
@@ -42,7 +42,7 @@ SliderCtrlTwo::SliderCtrlTwo(wxPanel* parent, const char* title, const char* nam
 		Connect(m_item_b.slider->GetId(), wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler(SliderCtrlTwo::OnSetValue));
 		sizer->Add(m_item_b.slider);
 
-		m_item_b.text = new wxTextCtrl(this, wxID_ANY, StringHelper::ToString(item_b.val), wxDefaultPosition, wxSize(50, -1), wxTE_PROCESS_ENTER);
+		m_item_b.text = new wxTextCtrl(this, wxID_ANY, StringHelper::ToString(item_b.val).c_str(), wxDefaultPosition, wxSize(50, -1), wxTE_PROCESS_ENTER);
 		Connect(m_item_b.text->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(SliderCtrlTwo::OnSetValue));
 		sizer->Add(m_item_b.text);
 
@@ -90,8 +90,8 @@ void SliderCtrlTwo::Load()
 		ivalb = (int)(fvalb / m_scale_slider2text);
 	m_item_a.slider->SetValue(ivala);
 	m_item_b.slider->SetValue(ivalb);
-	m_item_a.text->SetValue(StringHelper::ToString(fvala));
-	m_item_b.text->SetValue(StringHelper::ToString(fvalb));
+	m_item_a.text->SetValue(StringHelper::ToString(fvala).c_str());
+	m_item_b.text->SetValue(StringHelper::ToString(fvalb).c_str());
 }
 
 void SliderCtrlTwo::OnSetValue(wxScrollEvent& event)
@@ -101,8 +101,8 @@ void SliderCtrlTwo::OnSetValue(wxScrollEvent& event)
 
 	float fvala = ivala * m_scale_slider2text,
 		  fvalb = ivalb * m_scale_slider2text;
-	m_item_a.text->SetValue(StringHelper::ToString(fvala));
-	m_item_b.text->SetValue(StringHelper::ToString(fvalb));
+	m_item_a.text->SetValue(StringHelper::ToString(fvala).c_str());
+	m_item_b.text->SetValue(StringHelper::ToString(fvalb).c_str());
 
 	m_cb->SetValue(m_key, UICallback::Data(fvala, fvalb));
 }

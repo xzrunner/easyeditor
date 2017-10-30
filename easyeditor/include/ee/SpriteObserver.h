@@ -11,11 +11,11 @@ class Sprite;
 class SpriteObserver
 {
 public:
-	virtual void OnSetPosition(Sprite* spr, const sm::vec2& pos) = 0;
-	virtual void OnSetAngle(Sprite* spr, float angle) = 0;
-	virtual void OnSetScale(Sprite* spr, const sm::vec2& scale) = 0;
-	virtual void OnSetShear(Sprite* spr, const sm::vec2& shear) = 0;
-	virtual void OnSetOffset(Sprite* spr, const sm::vec2& offset) = 0;
+	virtual void OnSetPosition(const Sprite& spr, const sm::vec2& pos) = 0;
+	virtual void OnSetAngle(const Sprite& spr, float angle) = 0;
+	virtual void OnSetScale(const Sprite& spr, const sm::vec2& scale) = 0;
+	virtual void OnSetShear(const Sprite& spr, const sm::vec2& shear) = 0;
+	virtual void OnSetOffset(const Sprite& spr, const sm::vec2& offset) = 0;
 	virtual ~SpriteObserver() {}
 }; // SpriteObserver
 

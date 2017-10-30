@@ -37,7 +37,7 @@ bool ComposeOP::OnMouseRightDown(int x, int y)
 		return true;
 	}
 
-	ee::Sprite* selected = SelectByPos(x, y);
+	ee::SprPtr selected = SelectByPos(x, y);
 	if (selected) {
 		selected->SetAngle(selected->GetAngle() + SM_PI*0.5f);
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -69,7 +69,7 @@ bool ComposeOP::OnDraw() const
 	return false;
 }
 
-ee::Sprite* ComposeOP::SelectByPos(int x, int y)
+ee::SprPtr ComposeOP::SelectByPos(int x, int y)
 {
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	int col, row;
@@ -79,7 +79,7 @@ ee::Sprite* ComposeOP::SelectByPos(int x, int y)
 	}
 
 	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
-	ee::Sprite* selected = stage->getSprite(row, col);
+	ee::SprPtr selected = stage->getSprite(row, col);
 	if (selected) {
 		ee::SpriteSelection* selection = stage->GetSpriteSelection();
 		selection->Clear();

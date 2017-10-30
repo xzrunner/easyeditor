@@ -57,10 +57,10 @@ void Task::Load(const char* filepath)
 	}
 
 	// create actors
-	const std::vector<s2::Sprite*>& children = m_stage->GetSymbol()->GetAllChildren();
+	auto& children = m_stage->GetSymbol()->GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) 
 	{
-		s2::Sprite* spr = children[i];
+		auto spr = children[i];
 
 		s2::ResetActorFlagVisitor v0;
 		spr->Traverse(v0, s2::SprVisitorParams());
@@ -82,9 +82,9 @@ bool Task::IsDirty() const
 	return m_stage->IsEditDirty();
 }
 
-void Task::GetAllSprite(std::vector<ee::Sprite*>& sprs) const
+void Task::GetAllSprite(std::vector<ee::SprPtr>& sprs) const
 {
-	m_stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	m_stage->TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 }
 
 const ee::EditPanel* Task::GetEditPanel() const
@@ -159,8 +159,8 @@ void Task::LoadGroupTree(const char* filepath)
 	if (!value[GROUP_TAG].isNull()) {
 		m_grouptree->LoadFromFile(value[GROUP_TAG]);
 	} else {
-		std::map<std::string, std::vector<ee::Sprite*> > map_actions;
-		std::vector<ee::Sprite*> others;
+		std::map<std::string, std::vector<ee::SprPtr> > map_actions;
+		std::vector<ee::SprPtr> others;
 		ecoco::Utility::GroupSpritesFromTag(m_stage->GetSymbol()->GetAllChildren(), map_actions, others);
 		m_grouptree->InitGroups(map_actions);
 	}

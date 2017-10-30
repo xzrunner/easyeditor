@@ -26,13 +26,13 @@ OpenSymbolDialog::OpenSymbolDialog(wxWindow* wnd,
 {	
 }
 
-void OpenSymbolDialog::Open(ee::Sprite* spr)
+void OpenSymbolDialog::Open(const ee::SprPtr& spr)
 {
 	if (!spr) {
 		return;
 	}
 
-	std::string filepath = dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath();
+	std::string filepath = std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol())->GetFilepath();
 	if (filepath.find("[gen].json") != std::string::npos) {
 		wxMessageBox("禁止编辑自动生成的文件", "warning", wxOK | wxICON_INFORMATION, m_wnd);
 		return;
@@ -46,25 +46,25 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 	m_stage->GetCanvas()->EnableObserve(false);
 	m_stage->GetCanvas()->SetDrawable(false);
 
-	const ee::Symbol* edited_sym = NULL;
-	if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(spr))
+	const ee::SymPtr& edited_sym = NULL;
+	if (ecomplex::Sprite* complex = std::dynamic_pointer_cast<ecomplex::Sprite>(spr))
 	{
 		ecomplex::Symbol* sym = dynamic_cast<ecomplex::Symbol*>(complex->GetSymbol());
 		edited_sym = sym;
 		ecomplex::EditDialog dlg(m_wnd, sym, m_stage->GetCanvas()->GetGLContext());
 		dlg.ShowModal();
 	}
-	else if (emesh::Sprite* mesh = dynamic_cast<emesh::Sprite*>(spr))
+	else if (emesh::Sprite* mesh = std::dynamic_pointer_cast<emesh::Sprite>(spr))
 	{
 		emesh::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), mesh, m_sprites_impl);
 		dlg.ShowModal();
 	} 
-	else if (libskeleton::Sprite* sk = dynamic_cast<libskeleton::Sprite*>(spr)) 
+	else if (libskeleton::Sprite* sk = std::dynamic_pointer_cast<libskeleton::Sprite>(spr)) 
 	{
 		libskeleton::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), sk);
 		dlg.ShowModal();
 	}
-	else if (eaudio::Sprite* audio = dynamic_cast<eaudio::Sprite*>(spr))
+	else if (eaudio::Sprite* audio = std::dynamic_pointer_cast<eaudio::Sprite>(spr))
 	{
 		audio->Play();
 	}

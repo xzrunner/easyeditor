@@ -13,26 +13,19 @@ namespace ee
 ShapesPanelImpl::ShapesPanelImpl()
 	: MultiShapesImpl()
 {
-	m_container = new ShapesContainer();
+	m_container = std::make_shared<ShapesContainer>();
 
 	InitSubjects();
 }
 
-ShapesPanelImpl::ShapesPanelImpl(DataContainer<Shape>* container)
+ShapesPanelImpl::ShapesPanelImpl(const std::shared_ptr<DataContainer<Shape>>& container)
 	: MultiShapesImpl()
+	, m_container(container)
 {
-	m_container = container;
-	m_container->AddReference();
-
 	InitSubjects();
 }
 
-ShapesPanelImpl::~ShapesPanelImpl()
-{
-	m_container->RemoveReference();
-}
-
-void ShapesPanelImpl::TraverseShapes(Visitor<ee::Shape>& visitor, DataTraverseType type/* = e_allExisting*/) const
+void ShapesPanelImpl::TraverseShapes(RefVisitor<ee::Shape>& visitor, DataTraverseType type/* = e_allExisting*/) const
 {
 	m_container->Traverse(visitor, true);
 }
@@ -44,12 +37,12 @@ void ShapesPanelImpl::OnNotify(int sj_id, void* ud)
 	switch (sj_id)
 	{
 	case MSG_REMOVE_SHAPE:
-		if (m_container->Remove((Shape*)ud)) {
+		if (m_container->Remove(*(ee::ShapePtr*)ud)) {
 			SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;
 	case MSG_INSERT_SHAPE:
-		if (m_container->Insert((Shape*)ud)) {
+		if (m_container->Insert(*(ee::ShapePtr*)ud)) {
 			SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;

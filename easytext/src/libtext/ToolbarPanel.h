@@ -3,6 +3,8 @@
 
 #include <ee/ToolbarPanel.h>
 
+#include <memory>
+
 namespace etext
 {
 
@@ -12,8 +14,7 @@ class Sprite;
 class ToolbarPanel : public ee::ToolbarPanel
 {
 public:
-	ToolbarPanel(wxWindow* parent, StagePanel* stage, Sprite* spr);
-	virtual ~ToolbarPanel();
+	ToolbarPanel(wxWindow* parent, StagePanel* stage, const std::shared_ptr<Sprite>& spr);
 
 protected:
 	virtual wxSizer* InitLayout();
@@ -37,7 +38,7 @@ private:
 	void OnChangeSpace(wxCommandEvent& event);
 
 private:
-	Sprite* m_spr;
+	std::shared_ptr<Sprite> m_spr;
 
 	wxTextCtrl *m_width, *m_height;	
 

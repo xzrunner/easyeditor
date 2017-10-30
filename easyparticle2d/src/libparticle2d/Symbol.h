@@ -15,7 +15,7 @@ class Symbol : public ee::Symbol, public s2::Particle2dSymbol
 public:
 	Symbol();
 
-	static ee::Symbol* Create() { return new Symbol(); }
+	static ee::SymPtr Create() { return std::make_shared<Symbol>(); }
 
 protected:
 	virtual sm::rect GetBoundingImpl(const s2::Sprite* spr = NULL, const s2::Actor* actor = NULL, bool cache = true) const;

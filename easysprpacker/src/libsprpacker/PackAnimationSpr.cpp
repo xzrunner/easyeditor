@@ -13,7 +13,7 @@ namespace lua = ebuilder::lua;
 namespace esprpacker
 {
 
-PackAnimationSpr::PackAnimationSpr(const libanim::Sprite* spr)
+PackAnimationSpr::PackAnimationSpr(const std::shared_ptr<libanim::Sprite>& spr)
 {
 	Init(spr);
 }
@@ -86,7 +86,7 @@ void PackAnimationSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) con
 	pack(fps, ptr);
 }
 
-bool PackAnimationSpr::Equal(const libanim::Sprite* spr) const
+bool PackAnimationSpr::Equal(const std::shared_ptr<libanim::Sprite>& spr) const
 {
 	return m_loop == spr->IsLoop()
 		&& m_interval == spr->GetInterval()
@@ -94,10 +94,10 @@ bool PackAnimationSpr::Equal(const libanim::Sprite* spr) const
 		&& m_fps == spr->GetFPS();
 }
 
-void PackAnimationSpr::Init(const libanim::Sprite* spr)
+void PackAnimationSpr::Init(const std::shared_ptr<libanim::Sprite>& spr)
 {
 	m_sym = PackNodeFactory::Instance()->Create(
-		dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
+		std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol()));
 
 	m_loop = spr->IsLoop();
 	m_interval = spr->GetInterval();

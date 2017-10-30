@@ -2,7 +2,7 @@
 #define _EASYIMAGE_BLOCK_COMPRESS_H_
 
 #include <string>
-#include <vector>
+#include <cu/cu_stl.h>
 #include <stdint.h>
 
 namespace eimage
@@ -11,7 +11,7 @@ namespace eimage
 class BlockCompress
 {
 public:
-	BlockCompress(const std::vector<std::string>& image_files);
+	BlockCompress(const CU_VEC<std::string>& image_files);
 	~BlockCompress();
 
 	void Compress();
@@ -44,7 +44,7 @@ private:
 	{
 		std::string filepath;
 		int w, h;
-		std::vector<Block*> blocks;
+		CU_VEC<Block*> blocks;
 	}; // Picture
 
 private:
@@ -57,11 +57,11 @@ private:
 	static const int TOLERANCE;
 
 private:
-	std::vector<std::string> m_image_files;
+	CU_VEC<std::string> m_image_files;
 
-	std::vector<Block*> m_blocks;
+	CU_VEC<Block*> m_blocks;
 
-	std::vector<Picture*> m_debug_pic;	
+	CU_VEC<Picture*> m_debug_pic;	
 
 	// statistics
 	int m_tot_area;

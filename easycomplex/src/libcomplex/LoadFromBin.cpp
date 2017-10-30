@@ -15,13 +15,12 @@
 namespace ecomplex
 {
 
-void LoadFromBin::Load(const Json::Value& value, const std::string& dir, 
-					   Symbol* sym)
+void LoadFromBin::Load(const Json::Value& value, const std::string& dir, Symbol& sym)
 {
 	std::string filename = ee::FileHelper::GetAbsolutePath(dir, value["bin file"].asString());
 
 	std::string ept_path = filename;
-	std::vector<ee::Image*> images;
+	std::vector<ee::ImagePtr> images;
 	LoadImages(ept_path, images);
 
 	std::string epe_path = filename + ".epe";
@@ -31,7 +30,7 @@ void LoadFromBin::Load(const Json::Value& value, const std::string& dir,
 	std::string export_name = value["export name"].asString();
 
 	erespacker::IPackNode* node = erespacker::UnpackNodeFactory::Instance()->Query(export_name);
-	sym->Add(NodeToSprite::Trans(node));
+	sym.Add(NodeToSprite::Trans(node));
 }
 
 #define LZMA_PROPS_SIZE 5
@@ -42,7 +41,7 @@ struct block {
 	uint8_t data[119];
 };
 
-void LoadFromBin::LoadImages(const std::string& filepath, std::vector<ee::Image*>& images)
+void LoadFromBin::LoadImages(const std::string& filepath, std::vector<ee::ImagePtr>& images)
 {
 	int idx = 1;
 	while (true) 
@@ -92,7 +91,7 @@ void LoadFromBin::LoadImages(const std::string& filepath, std::vector<ee::Image*
 	}
 }
 
-void LoadFromBin::LoadImage(uint8_t** ptr, std::vector<ee::Image*>& images)
+void LoadFromBin::LoadImage(uint8_t** ptr, std::vector<ee::ImagePtr>& images)
 {
 	int8_t type;
 	erespacker::unpack(type, ptr);
@@ -104,7 +103,7 @@ void LoadFromBin::LoadImage(uint8_t** ptr, std::vector<ee::Image*>& images)
 	int buf_sz = w * h * 4;
 	uint8_t* buf = new uint8_t[buf_sz];
 	memcpy(buf, *ptr, buf_sz);
-	images.push_back(new ee::Image(buf, w, h, GPF_RGBA));
+	images.push_back(std::make_shared<ee::Image>(buf, w, h, GPF_RGBA8));
 }
 
 }

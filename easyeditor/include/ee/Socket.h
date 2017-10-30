@@ -1,7 +1,7 @@
 #ifndef _EASYEDITOR_SOCKET_H_
 #define _EASYEDITOR_SOCKET_H_
 
-#include <CU_Singleton.h>
+#include <cu/cu_macro.h>
 
 #include <string>
 
@@ -25,7 +25,7 @@ private:
 
 	bool m_connected;
 
-	SINGLETON_DECLARATION(Socket)
+	CU_SINGLETON_DECLARATION(Socket)
 
 }; // Socket
 

@@ -6,7 +6,7 @@
 #include <ee/panel_msg.h>
 
 #include <sprite2/DrawMesh.h>
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 
 namespace emesh
 {

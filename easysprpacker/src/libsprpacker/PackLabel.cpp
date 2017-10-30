@@ -14,7 +14,7 @@ namespace lua = ebuilder::lua;
 namespace esprpacker
 {
 
-PackLabel::PackLabel(const etext::Sprite* spr)
+PackLabel::PackLabel(const std::shared_ptr<etext::Sprite>& spr)
 {
 	Init(spr);
 }
@@ -164,12 +164,12 @@ void PackLabel::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 	}
 }
 
-void PackLabel::Init(const etext::Sprite* spr)
+void PackLabel::Init(const std::shared_ptr<etext::Sprite>& spr)
 {
 	m_tb = spr->GetTextbox();
 
-	m_text = gum::StringHelper::GBKToUTF8(spr->GetText(s2::UpdateParams()));
-	m_tid = gum::StringHelper::GBKToUTF8(spr->GetTID());
+	m_text = gum::StringHelper::GBKToUTF8(spr->GetText(s2::UpdateParams())).c_str();
+	m_tid = gum::StringHelper::GBKToUTF8(spr->GetTID().c_str()).c_str();
 
 	m_export = spr->IsExport();
 }

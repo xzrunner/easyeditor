@@ -53,16 +53,15 @@ bool OpenSymbolProperty::OnButtonClick( wxPropertyGrid* propGrid, wxString& valu
 	}
 
 	std::string filepath = GetValue();
-	std::string dirpath = FileHelper::GetFileDir(filepath);
+	std::string dirpath = FileHelper::GetFileDir(filepath.c_str()).c_str();
 	std::string filter = "*.png;*.jpg;*.json";
 	wxFileDialog dlg(m_parent, wxT("Open Symbol"), dirpath, filepath, filter, wxFD_OPEN);
 	if (dlg.ShowModal() == wxID_OK)
 	{
 		std::string sym_path = dlg.GetPath();
 		try {
-			Symbol* sym = SymbolMgr::Instance()->FetchSymbol(sym_path);
+			auto sym = SymbolMgr::Instance()->FetchSymbol(sym_path.c_str());
 			m_lsn->OnOpenSymbol(sym);
-			sym->RemoveReference();
 		} catch (Exception& e) {
 			ExceptionDlg dlg(m_parent, e);
 			dlg.ShowModal();

@@ -7,7 +7,7 @@ namespace ee
 {
 
 template<class T>
-void Random::RandomPermutation(std::vector<T>& src)
+void Random::RandomPermutation(CU_VEC<T>& src)
 {
 	srand((unsigned)time(NULL));
 	size_t range = src.size() - 1;

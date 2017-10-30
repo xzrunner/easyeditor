@@ -8,7 +8,7 @@
 namespace etrail
 {
 
-SprPropSetting::SprPropSetting(ee::EditPanelImpl* edit_impl, Sprite* spr)
+SprPropSetting::SprPropSetting(ee::EditPanelImpl* edit_impl, const std::shared_ptr<Sprite>& spr)
 	: ee::SpritePropertySetting(edit_impl, spr)
 	, m_parent(edit_impl->GetEditPanel())
 {
@@ -23,7 +23,7 @@ void SprPropSetting::OnPropertyGridChange(const std::string& name, const wxAny& 
 {
 	ee::SpritePropertySetting::OnPropertyGridChange(name, value);
 
-	Sprite* spr = static_cast<Sprite*>(GetSprite());
+	auto spr = std::dynamic_pointer_cast<Sprite>(GetSprite());
 	if (name == "Local") {
 		bool local = wxANY_AS(value, bool);
 		spr->SetLocal(local);
@@ -38,7 +38,7 @@ void SprPropSetting::UpdateProperties(wxPropertyGrid* pg)
 
 	ee::SpritePropertySetting::UpdateProperties(pg);
 
-	Sprite* spr = static_cast<Sprite*>(GetSprite());
+	auto spr = std::dynamic_pointer_cast<Sprite>(GetSprite());
 
 	pg->GetProperty("Local")->SetValue(spr->IsLocal());
 }
@@ -51,7 +51,7 @@ void SprPropSetting::InitProperties(wxPropertyGrid* pg)
 
 	pg->Append(new wxPropertyCategory("TRAIL SPR", wxPG_LABEL));
 
-	Sprite* spr = static_cast<Sprite*>(GetSprite());
+	auto spr = std::dynamic_pointer_cast<Sprite>(GetSprite());
 
 	pg->Append(new wxBoolProperty("Local", wxPG_LABEL, spr->IsLocal()));
 	pg->SetPropertyAttribute("Local", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);

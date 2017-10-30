@@ -8,6 +8,7 @@
 #include <ee/SymbolFile.h>
 #include <ee/FileHelper.h>
 #include <ee/SymbolPath.h>
+#include <ee/SymbolMgr.h>
 
 #include <mt_2d.h>
 #include <sprite2/SymType.h>
@@ -70,8 +71,9 @@ void ImageCompPanel::Store(Json::Value& val, const std::string& dir) const
 	gum::JsonSerializer::Store(m_pc->mode.A.add_col_begin.rgba, val["add_col_begin"]);
 	gum::JsonSerializer::Store(m_pc->mode.A.add_col_end.rgba, val["add_col_end"]);
 
-	s2::Symbol* sym = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(m_pc->mode.A.ud));
-	val["filepath"] = ee::SymbolPath::GetRelativePath(dynamic_cast<ee::Symbol*>(sym), dir);
+	auto s2_sym = static_cast<s2::Symbol*>(m_pc->mode.A.ud);
+	auto ee_sym = ee::SymbolMgr::Instance()->FetchSymbol(dynamic_cast<ee::Symbol*>(s2_sym)->GetFilepath());
+	val["filepath"] = ee::SymbolPath::GetRelativePath(*ee_sym, dir);
 }
 
 void ImageCompPanel::InitLayout(wxSizer* top_sizer)
@@ -93,7 +95,8 @@ void ImageCompPanel::InitLayout(wxSizer* top_sizer)
 		hori_sizer->AddSpacer(20);
 		// right
 		{
-			std::string filepath = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(m_pc->mode.A.ud))->GetFilepath();
+			auto s2_sym = static_cast<s2::Symbol*>(m_pc->mode.A.ud);
+			std::string filepath = dynamic_cast<ee::Symbol*>(s2_sym)->GetFilepath();
 			if (ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_IMAGE) {
 				ee::ImagePanel* panel = new ee::ImagePanel(this, filepath, 100);
 				hori_sizer->Add(panel);
@@ -153,7 +156,8 @@ void ImageCompPanel::InitLayout(wxSizer* top_sizer)
 
 std::string ImageCompPanel::GetTitle() const
 {
-	std::string name = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(m_pc->mode.A.ud))->GetFilepath();
+	auto s2_sym = static_cast<s2::Symbol*>(m_pc->mode.A.ud);
+	std::string name = dynamic_cast<ee::Symbol*>(s2_sym)->GetFilepath();
 	name = ee::FileHelper::GetFilename(name);
 	return name;
 }

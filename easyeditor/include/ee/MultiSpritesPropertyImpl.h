@@ -1,6 +1,8 @@
 #ifndef _EASYEDITOR_MULTI_SPRITES_PROPERTY_IMPL_H_
 #define _EASYEDITOR_MULTI_SPRITES_PROPERTY_IMPL_H_
 
+#include "Sprite.h"
+
 #include <SM_Vector.h>
 #include <sprite2/Color.h>
 
@@ -11,13 +13,10 @@
 namespace ee
 {
 
-class Sprite;
-
 class MultiSpritesPropertyImpl
 {
 public:
-	MultiSpritesPropertyImpl(const std::vector<Sprite*>& sprs);
-	~MultiSpritesPropertyImpl();
+	MultiSpritesPropertyImpl(const std::vector<SprPtr>& sprs);
 
 	int SpriteCount() const { return m_sprs.size(); }
 
@@ -90,7 +89,7 @@ private:
 	};
 
 private:
-	std::vector<Sprite*> m_sprs;
+	std::vector<SprPtr> m_sprs;
 
 }; // MultiSpritesPropertyImpl
 

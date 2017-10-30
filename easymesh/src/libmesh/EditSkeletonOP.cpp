@@ -10,7 +10,7 @@
 #include <SM_Calc.h>
 #include <sprite2/DrawMesh.h>
 #include <sprite2/RenderParams.h>
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 
 #include <queue>
 
@@ -111,8 +111,8 @@ bool EditSkeletonOP::OnDraw() const
 
 	if (Mesh* mesh = static_cast<StagePanel*>(m_wnd)->GetMesh())
 	{
-		s2::DrawMesh::DrawTexture(mesh, s2::RenderParams());
-		s2::DrawMesh::DrawInfoXY(mesh);
+		s2::DrawMesh::DrawTexture(*mesh, s2::RenderParams());
+		s2::DrawMesh::DrawInfoXY(*mesh);
 
 // 		s2::MeshSkeleton& skeleton = static_cast<SkeletonMesh*>(mesh)->GetSkeleton();
 // 		skeleton.Draw(s2::RenderParams());

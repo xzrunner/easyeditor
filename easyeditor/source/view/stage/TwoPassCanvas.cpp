@@ -6,9 +6,9 @@
 #include "SpriteRenderer.h"
 #include "EE_SP.h"
 
-#include <unirender/UR_RenderTarget.h>
-#include <unirender/UR_RenderContext.h>
-#include <unirender/UR_Texture.h>
+#include <unirender/RenderTarget.h>
+#include <unirender/RenderContext.h>
+#include <unirender/Texture.h>
 #include <shaderlab/ShaderMgr.h>
 #include <shaderlab/FilterShader.h>
 #include <shaderlab/ColGradingProg.h>
@@ -18,9 +18,8 @@
 #include <gum/RenderContext.h>
 #include <gum/RenderTarget.h>
 #include <gum/RenderTargetMgr.h>
-#include <gum/GUM_DTex.h>
-#include <gum/GUM_Sprite2.h>
-#include <gum/GUM_DRect.h>
+#include <gum/DTex.h>
+#include <gum/Sprite2.h>
 
 namespace ee
 {

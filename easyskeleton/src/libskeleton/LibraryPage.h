@@ -11,7 +11,7 @@ class LibraryPage : public ee::LibraryPage
 public:
 	LibraryPage(wxWindow* parent);
 
-	virtual bool IsHandleSymbol(ee::Symbol* sym) const;
+	virtual bool IsHandleSymbol(const ee::SymPtr& sym) const;
 
 protected:
 	virtual void OnAddPress(wxCommandEvent& event);

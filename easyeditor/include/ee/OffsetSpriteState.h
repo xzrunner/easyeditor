@@ -2,25 +2,23 @@
 #define _EASYEDITOR_OFFSET_SPRITE_STATE_H_
 
 #include "ArrangeSpriteState.h"
+#include "Sprite.h"
 
 namespace s2 { class Camera; }
 
 namespace ee
 {
 
-class Sprite;
-
 class OffsetSpriteState : public ArrangeSpriteState
 {
 public:
-	OffsetSpriteState(Sprite* spr, const s2::Camera* camera);
-	virtual ~OffsetSpriteState();
+	OffsetSpriteState(const SprPtr& spr, const s2::Camera* camera);
 
 	virtual void OnMouseRelease(const sm::vec2& pos);
 	virtual	bool OnMouseDrag(const sm::vec2& pos);
 
 private:
-	Sprite* m_spr;
+	SprPtr m_spr;
 	const s2::Camera* m_camera;
 
 	sm::vec2 m_old_offset;

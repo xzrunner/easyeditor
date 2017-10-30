@@ -4,7 +4,7 @@
 #include <SM_Matrix.h>
 #include <SM_Rect.h>
 #include <sprite2/Color.h>
-#include <CU_RefCountObj.h>
+#include <cu/CU_RefCountObj.h>
 
 #include <sprite2/pre_defined.h>
 #include S2_MAT_HEADER

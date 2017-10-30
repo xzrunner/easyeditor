@@ -3,8 +3,6 @@
 
 #include "ResourcesMgr.h"
 
-#include <CU_RefCountObj.h>
-
 #include <stdint.h>
 
 namespace ee
@@ -13,7 +11,7 @@ namespace ee
 class ImageData;
 typedef ResourcesMgr<ImageData> ImageDataMgr;
 
-class ImageData : public cu::RefCountObj
+class ImageData
 {
 public:
 	ImageData();

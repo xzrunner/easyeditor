@@ -12,7 +12,7 @@
 namespace ee
 {
 
-SymbolMgr* SymbolMgr::m_instance = NULL;
+CU_SINGLETON_DEFINITION(SymbolMgr);
 
 SymbolMgr::SymbolMgr()
 {
@@ -23,59 +23,50 @@ SymbolMgr::~SymbolMgr()
 	Clear();
 }
 
-SymbolMgr* SymbolMgr::Instance()
+SymPtr SymbolMgr::FetchSymbol(const std::string& filepath, int type)
 {
-	if (!m_instance)
-	{
-		m_instance = new SymbolMgr();
-	}
-	return m_instance;
-}
-
-Symbol* SymbolMgr::FetchSymbol(const std::string& filepath, int type)
-{
-	std::string fixed_path = gum::FilepathHelper::Format(filepath);
+	std::string fixed_path = gum::FilepathHelper::Format(filepath.c_str()).c_str();
 
 	std::string filename = FileHelper::GetFilename(filepath);
-	std::map<std::string, Symbol*>::iterator itr = m_syms.find(fixed_path);
-	if (filename == SYM_GROUP_TAG || itr == m_syms.end())
+	auto itr = m_syms.find(fixed_path);
+	if (filename != SYM_GROUP_TAG && itr != m_syms.end())
 	{
-		Symbol* sym = SymbolFactory::Create(fixed_path, type);
-		if (!sym) 
-		{
-			const char* path = filepath.c_str();
-			throw Exception("Create symbol fail: %s", path);
+		SymPtr ret = itr->second.lock();
+		if (ret) {
+			return ret;
+		} else {
+			m_syms.erase(itr);
+		}
+	}
+		
+	auto sym = SymbolFactory::Create(fixed_path, type);
+	if (!sym) 
+	{
+		const char* path = filepath.c_str();
+		throw Exception("Create symbol fail: %s", path);
 //			return NULL;
-		}
+	}
 
-		bool succ = sym->LoadFromFile(fixed_path);
-		if (succ)
-		{
-			sym->AddReference();
-			m_syms.insert(std::make_pair(fixed_path, sym));
-			return sym;
-		}
-		else
-		{
-			sym->RemoveReference();
-			const char* path = filepath.c_str();
-			throw Exception("Load symbol %s fail!", path);
-
-//			return NULL;
-		}
+	bool succ = sym->LoadFromFile(fixed_path);
+	if (succ)
+	{
+		m_syms.insert(std::make_pair(fixed_path, sym));
+		return sym;
 	}
 	else
 	{
-		itr->second->AddReference();
-		return itr->second;
+		const char* path = filepath.c_str();
+		throw Exception("Load symbol %s fail!", path);
+
+//			return NULL;
 	}
 }
 
-void SymbolMgr::Remove(const Symbol* sym)
+void SymbolMgr::Remove(const SymPtr& sym)
 {
 	std::string lowerpath = sym->GetFilepath();
 	StringHelper::ToLower(lowerpath);
-	std::map<std::string, Symbol*>::iterator itr = m_syms.find(lowerpath);
+	auto itr = m_syms.find(lowerpath);
 	// todo: new DummySymbol()
 //	assert(itr != m_syms.end());
 	if (itr != m_syms.end()) {
@@ -85,24 +76,25 @@ void SymbolMgr::Remove(const Symbol* sym)
 
 void SymbolMgr::Clear()
 {
-	std::vector<Symbol*> syms;
-	syms.reserve(m_syms.size());
-	std::map<std::string, Symbol*>::iterator itr = m_syms.begin();
-	for ( ; itr != m_syms.end(); ++itr) {
-		syms.push_back(itr->second);
-	}
-	for_each(syms.begin(), syms.end(), cu::RemoveRefFunctor<Symbol>());
 	m_syms.clear();
 }
 
-void SymbolMgr::Traverse(Visitor<Symbol>& visitor) const
+void SymbolMgr::Traverse(RefVisitor<Symbol>& visitor) const
 {
-	std::map<std::string, Symbol*>::const_iterator itr = m_syms.begin();
-	for ( ; itr != m_syms.end(); ++itr)
+	for (auto& sym : m_syms)
 	{
 		bool next;
-		visitor.Visit(itr->second, next);
-		if (!next) break;
+		auto s = sym.second.lock();
+		if (s) {
+			visitor.Visit(s, next);
+			if (!next) break;
+		}
+	}
+
+	auto itr = m_syms.begin();
+	for ( ; itr != m_syms.end(); ++itr)
+	{
+
 	}
 }
 

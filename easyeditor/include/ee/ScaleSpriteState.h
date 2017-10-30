@@ -3,6 +3,7 @@
 
 #include "ArrangeSpriteState.h"
 #include "SpriteCtrlNode.h"
+#include "Sprite.h"
 
 namespace ee
 {
@@ -10,8 +11,7 @@ namespace ee
 class ScaleSpriteState : public ArrangeSpriteState
 {
 public:
-	ScaleSpriteState(Sprite* spr, const SpriteCtrlNode::Node& ctrl_node);
-	virtual ~ScaleSpriteState();
+	ScaleSpriteState(const SprPtr& spr, const SpriteCtrlNode::Node& ctrl_node);
 
 	virtual void OnMouseRelease(const sm::vec2& pos);
 	virtual	bool OnMouseDrag(const sm::vec2& pos);
@@ -22,7 +22,7 @@ protected:
 	virtual void SetScaleTimes(const sm::vec2& st);
 
 protected:
-	Sprite* m_spr;
+	SprPtr m_spr;
 
 private:
 	SpriteCtrlNode::Node m_ctrl_node;

@@ -30,8 +30,8 @@ StagePanel::~StagePanel()
 
 bool StagePanel::UpdateStage()
 {
-	std::vector<ee::Sprite*> sprs;
-	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	s2::UpdateParams up;
 	up.SetForce(true);
 	for (int i = 0, n = sprs.size(); i < n; ++i) {

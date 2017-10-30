@@ -30,8 +30,8 @@ void TranslateSpriteState::Translate(const sm::vec2& offset)
 		return;
 	}
 
-	std::vector<ee::Sprite*> sprs;
-	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	selection->Traverse(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	skeleton->UpdateJoint(sprs[0]);
 }
 

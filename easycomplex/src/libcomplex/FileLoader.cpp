@@ -18,13 +18,13 @@
 namespace ecomplex
 {
 
-void FileLoader::Load(const std::string& filepath, Symbol* complex)
+void FileLoader::Load(const std::string& filepath, Symbol& complex)
 {
 	if (ee::Config::Instance()->IsUseDTex()) {
 //		gum::DTex::Instance()->LoadBegin();
 	}
 
-	complex->Clear();
+	complex.Clear();
 
 	Json::Value value;
 	Json::Reader reader;

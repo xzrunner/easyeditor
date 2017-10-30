@@ -19,9 +19,8 @@ bool DrawPolygonOP::OnMouseLeftDClick(int x, int y)
 
 	if (m_polyline.size() >= 3)
 	{
-		PolygonShape* poly = new PolygonShape(m_polyline);
+		auto poly = std::make_shared<PolygonShape>(m_polyline);
 		ee::InsertShapeSJ::Instance()->Insert(poly);
-		poly->RemoveReference();
 		m_polyline.clear();
 		m_curr_pos.MakeInvalid();
 	}

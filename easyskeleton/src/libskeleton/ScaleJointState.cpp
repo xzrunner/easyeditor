@@ -7,22 +7,11 @@
 namespace libskeleton
 {
 
-ScaleJointState::ScaleJointState(Joint* joint, const sm::vec2& first_pos)
+ScaleJointState::ScaleJointState(const std::shared_ptr<Joint>& joint, const sm::vec2& first_pos)
 	: m_joint(joint)
 	, m_scale(1, 1)
 {
-	if (m_joint) {
-		m_joint->AddReference();
-	}
-
 	m_first_pos = m_last_pos = first_pos;
-}
-
-ScaleJointState::~ScaleJointState()
-{
-	if (m_joint) {
-		m_joint->RemoveReference();
-	}
 }
 
 void ScaleJointState::OnMouseRelease(const sm::vec2& pos)

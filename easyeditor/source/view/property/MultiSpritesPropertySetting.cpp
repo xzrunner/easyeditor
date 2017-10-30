@@ -12,7 +12,7 @@
 namespace ee
 {
 
-MultiSpritesPropertySetting::MultiSpritesPropertySetting(const std::vector<Sprite*>& sprs)
+MultiSpritesPropertySetting::MultiSpritesPropertySetting(const std::vector<SprPtr>& sprs)
 	: PropertySetting("MultiSprites")
 	, m_impl(new MultiSpritesPropertyImpl(sprs))
 	, m_overall(false)

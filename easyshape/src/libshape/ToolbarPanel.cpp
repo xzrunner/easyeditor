@@ -107,38 +107,37 @@ void ToolbarPanel::OnClearShapes(wxCommandEvent& event)
 
 void ToolbarPanel::OnCreateBounding(wxCommandEvent& event)
 {
-	const ee::Symbol* bg = dynamic_cast<const Symbol&>(m_stage_panel->GetSymbol()).GetBG();
-	const ee::ImageSymbol* img_symbol = dynamic_cast<const ee::ImageSymbol*>(bg);
+	auto& bg = dynamic_cast<const Symbol&>(m_stage_panel->GetSymbol()).GetBG();
+	auto img_symbol = std::dynamic_pointer_cast<ee::ImageSymbol>(bg);
 	if (!img_symbol) {
 		return;
 	}
 
 	ee::ClearShapeSJ::Instance()->Clear();
 
-	ee::ImageData* img_data = ee::ImageDataMgr::Instance()->GetItem(img_symbol->GetFilepath());
+	auto img_data = ee::ImageDataMgr::Instance()->GetItem(img_symbol->GetFilepath());
 	eimage::ExtractOutlineRaw raw(img_data->GetPixelData(), img_data->GetWidth(), img_data->GetHeight());
 	raw.CreateBorderLineAndMerge();
 	eimage::ExtractOutlineFine fine(raw.GetBorderLine(), raw.GetBorderLineMerged());
 	fine.Trigger(0.04f, 0.2f);
 
 	sm::vec2 offset(-img_data->GetWidth()*0.5f, -img_data->GetHeight()*0.5f);
-	std::vector<sm::vec2> bounding = fine.GetResult();
+	auto bounding = fine.GetResult();
+	CU_VEC<sm::vec2> bounding2;
 	for (int i = 0, n = bounding.size(); i < n; ++i) {
 		bounding[i] += offset;
+		bounding2.push_back(bounding[i]);
 	}
-	PolygonShape* poly = new PolygonShape(bounding);
-	ee::InsertShapeSJ::Instance()->Insert(poly);
-	poly->RemoveReference();
+	auto poly = std::make_unique<PolygonShape>(bounding2);
+	ee::InsertShapeSJ::Instance()->Insert(std::move(poly));
 
 	SetChoice(3);
-
-	img_data->RemoveReference();
 }
 
 void ToolbarPanel::SelectSuitableEditOP()
 {
-	std::vector<ee::Shape*> shapes;
-	m_stage_panel->TraverseShapes(ee::FetchAllVisitor<ee::Shape>(shapes));
+	std::vector<ee::ShapePtr> shapes;
+	m_stage_panel->TraverseShapes(ee::FetchAllRefVisitor<ee::Shape>(shapes));
 	if (shapes.empty()) return;
 
 	ShapeType type = get_shape_type(shapes[0]->GetShapeDesc());

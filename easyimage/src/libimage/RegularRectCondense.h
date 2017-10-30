@@ -3,7 +3,7 @@
 
 #include "Rect.h"
 
-#include <vector>
+#include <cu/cu_stl.h>
 
 namespace eimage
 {
@@ -11,7 +11,7 @@ namespace eimage
 class RegularRectCondense
 {
 public:
-	RegularRectCondense(const std::vector<Rect>& rects, int width, int height, bool* ori_pixels);
+	RegularRectCondense(const CU_VEC<Rect>& rects, int width, int height, bool* ori_pixels);
 	~RegularRectCondense();
 
 	void Condense(const Rect& r);
@@ -19,10 +19,10 @@ public:
 	void Remove(const Rect& r);
 	void Insert(const Rect& r);
 
-	void GetSortedRects(std::vector<Rect>& rects) const;
+	void GetSortedRects(CU_VEC<Rect>& rects) const;
 
 private:
-	void LoadPixels(const std::vector<Rect>& rects, bool* ori_pixels);
+	void LoadPixels(const CU_VEC<Rect>& rects, bool* ori_pixels);
 
 private:
 	class Pixel;
@@ -57,7 +57,7 @@ private:
 		Grid* QueryGrid(const Rect& r) const;
 
 	private:
-		std::vector<Grid*> m_grids;
+		CU_VEC<Grid*> m_grids;
 
 		const bool m_has_data;
 
@@ -89,7 +89,7 @@ private:
 	int m_width, m_height;
 	Pixel** m_pixels;
 
-	std::vector<Grid*> m_grids;
+	CU_VEC<Grid*> m_grids;
 
 }; // RegularRectCondense
 

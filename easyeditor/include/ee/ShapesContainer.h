@@ -3,11 +3,10 @@
 
 #include "DataContainer.h"
 #include "ObjectVector.h"
+#include "Shape.h"
 
 namespace ee
 {
-
-class Shape;
 
 class ShapesContainer : public DataContainer<ee::Shape>
 {
@@ -17,14 +16,14 @@ public:
 	//
 	// DataContainer interface
 	//
-	virtual void Traverse(Visitor<ee::Shape>& visitor, bool order = true) const;
-	virtual void Traverse(Visitor<ee::Shape>& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
-	virtual bool Remove(ee::Shape* shape);
-	virtual bool Insert(ee::Shape* shape);
-	virtual bool Insert(ee::Shape* shape, int idx);
+	virtual void Traverse(RefVisitor<ee::Shape>& visitor, bool order = true) const;
+	virtual void Traverse(RefVisitor<ee::Shape>& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
+	virtual bool Remove(const ee::ShapePtr& shape);
+	virtual bool Insert(const ee::ShapePtr& shape);
+	virtual bool Insert(const ee::ShapePtr& shape, int idx);
 	virtual bool Clear();
-	virtual bool ResetOrder(const ee::Shape* shape, bool up);
-	virtual bool ResetOrderMost(const ee::Shape* shape, bool up);
+	virtual bool ResetOrder(const ee::ShapeConstPtr& shape, bool up);
+	virtual bool ResetOrderMost(const ee::ShapeConstPtr& shape, bool up);
 
 private:
 	ObjectVector<Shape> m_shapes;

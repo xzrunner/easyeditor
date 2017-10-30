@@ -5,26 +5,14 @@
 namespace ee
 {
 
-VisibleSpriteAOP::VisibleSpriteAOP(const std::vector<Sprite*>& sprs)
+VisibleSpriteAOP::VisibleSpriteAOP(const std::vector<SprPtr>& sprs)
+	: m_sprs(sprs)
 {
-	for (size_t i = 0, n = sprs.size(); i < n; ++i) 
-	{
-		sprs[i]->AddReference();
-		m_sprs.push_back(sprs[i]);
-	}
-}
-
-VisibleSpriteAOP::~VisibleSpriteAOP()
-{
-	for (size_t i = 0, n = m_sprs.size(); i < n; ++i) {
-		m_sprs[i]->RemoveReference();
-	}
 }
 
 void VisibleSpriteAOP::Undo()
 {
-	for (size_t i = 0, n = m_sprs.size(); i < n; ++i) {
-		ee::Sprite* spr = m_sprs[i];
+	for (auto& spr : m_sprs) {
 		spr->SetVisible(!spr->IsVisible());
 	}
 	SetCanvasDirtySJ::Instance()->SetDirty();
@@ -33,25 +21,23 @@ void VisibleSpriteAOP::Undo()
 
 void VisibleSpriteAOP::Redo()
 {
-	for (size_t i = 0, n = m_sprs.size(); i < n; ++i) {
-		ee::Sprite* spr = m_sprs[i];
+	for (auto& spr : m_sprs) {
 		spr->SetVisible(!spr->IsVisible());
 	}
 	SetCanvasDirtySJ::Instance()->SetDirty();
 	RefreshPanelSJ::Instance()->Refresh();
 }
 
-void VisibleSpriteAOP::Copy(const std::vector<Sprite*>& sprs)
+void VisibleSpriteAOP::Copy(const std::vector<SprPtr>& sprs)
 {
-	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
-		ee::Sprite* spr = sprs[i];
+	for (auto& spr : sprs) {
 		spr->SetVisible(!spr->IsVisible());
 	}	
 	SetCanvasDirtySJ::Instance()->SetDirty();
 	RefreshPanelSJ::Instance()->Refresh();
 }
 
-Json::Value VisibleSpriteAOP::Store(const std::vector<Sprite*>& sprs) const
+Json::Value VisibleSpriteAOP::Store(const std::vector<SprPtr>& sprs) const
 {
 	Json::Value val;
 	return val;

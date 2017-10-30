@@ -38,7 +38,7 @@ private:
 	class DrawSelectedVisitor : public ee::Visitor<ee::Sprite>
 	{
 	public:
-		virtual void Visit(ee::Sprite* spr, bool& next);
+		virtual void Visit(const ee::SprPtr& spr, bool& next);
 	}; // DrawSelectedVisitor
 
 private:

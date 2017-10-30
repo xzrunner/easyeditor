@@ -14,13 +14,13 @@
 namespace emesh
 {
 
-void FileIO::Store(const char* filepath, const Symbol* sym)
+void FileIO::Store(const char* filepath, const Symbol& sym)
 {
 	Json::Value value;
 
-	value["name"] = sym->name;
+	value["name"] = sym.name;
 
-	const Mesh* mesh = dynamic_cast<const Mesh*>(sym->GetMesh());
+	auto mesh = dynamic_cast<const Mesh*>(sym.GetMesh().get());
 	if (mesh) {
 		mesh->Store(value);
 	} else {
@@ -28,8 +28,9 @@ void FileIO::Store(const char* filepath, const Symbol* sym)
 	}
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath) + "\\";
-	const s2::Symbol* base = sym->GetMesh()->GetBaseSymbol();
-	value["base_symbol"] = ee::FileHelper::GetRelativePath(dir, dynamic_cast<const ee::Symbol*>(base)->GetFilepath());
+	auto& base = sym.GetMesh()->GetBaseSymbol();
+	value["base_symbol"] = ee::FileHelper::GetRelativePath(dir, 
+		std::dynamic_pointer_cast<const ee::Symbol>(base)->GetFilepath());
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -39,7 +40,7 @@ void FileIO::Store(const char* filepath, const Symbol* sym)
 	fout.close();
 }
 
-void FileIO::Load(const char* filepath, Symbol* sym)
+void FileIO::Load(const char* filepath, Symbol& sym)
 {
 	Json::Value value;
 	Json::Reader reader;
@@ -49,7 +50,7 @@ void FileIO::Load(const char* filepath, Symbol* sym)
 	reader.parse(fin, value);
 	fin.close();
 
-	ee::Symbol* base_symbol = NULL;
+	ee::SymPtr base_symbol = nullptr;
 	if (!value["base_symbol"].isNull())
 	{
 		std::string dir = ee::FileHelper::GetFileDir(filepath);
@@ -62,9 +63,9 @@ void FileIO::Load(const char* filepath, Symbol* sym)
 	}
 
 	std::string type = value["type"].asString();
-	Mesh* mesh = NULL;
+	std::unique_ptr<s2::Mesh> mesh = nullptr;
 	if (type == "network" || type == "points") {
-		mesh = new PointsMesh(base_symbol);
+		mesh = std::make_unique<PointsMesh>(base_symbol);
 	} else {
 		throw ee::Exception("Unknown mesh type %s", filepath);
 	}
@@ -80,9 +81,8 @@ void FileIO::Load(const char* filepath, Symbol* sym)
 // 	}
 	if (mesh)
 	{
-		mesh->Load(value);
-		sym->SetMesh(mesh);
-		mesh->RemoveReference();
+		dynamic_cast<Mesh*>(mesh.get())->Load(value);
+		sym.SetMesh(mesh);
 	}
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();

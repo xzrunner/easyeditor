@@ -12,10 +12,10 @@ namespace lua = ebuilder::lua;
 namespace esprpacker
 {
 
-PackMask::PackMask(const emask::Symbol* sym)
+PackMask::PackMask(const std::shared_ptr<emask::Symbol>& sym)
 {
-	m_base = PackNodeFactory::Instance()->Create(dynamic_cast<const ee::Sprite*>(sym->GetBase()));
-	m_mask = PackNodeFactory::Instance()->Create(dynamic_cast<const ee::Sprite*>(sym->GetMask()));
+	m_base = PackNodeFactory::Instance()->Create(std::dynamic_pointer_cast<const ee::Sprite>(sym->GetBase()));
+	m_mask = PackNodeFactory::Instance()->Create(std::dynamic_pointer_cast<const ee::Sprite>(sym->GetMask()));
 }
 
 PackMask::~PackMask()

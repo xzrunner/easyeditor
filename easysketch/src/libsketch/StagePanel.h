@@ -20,7 +20,7 @@ public:
 	//
 	// ee::MultiSpritesImpl interface
 	//
-	virtual void TraverseSprites(ee::Visitor<ee::Sprite>& visitor, 
+	virtual void TraverseSprites(ee::RefVisitor<ee::Sprite>& visitor, 
 		ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
 
 	sm::ivec2 TransPos3ProjectToScreen(const sm::vec3& proj) const;
@@ -33,12 +33,12 @@ protected:
 	virtual void OnNotify(int sj_id, void* ud);
 
 private:
-	void Insert(ee::Sprite* spr);
-	void Remove(ee::Sprite* spr);
+	void Insert(const ee::SprPtr& spr);
+	void Remove(const ee::SprPtr& spr);
 	void Clear();
 
 private:
-	std::vector<ee::Sprite*> m_sprs;
+	std::vector<ee::SprPtr> m_sprs;
 
 }; // StagePanel
 

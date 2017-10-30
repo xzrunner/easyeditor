@@ -8,13 +8,13 @@
 
 #include <sprite2/DrawNode.h>
 #include <gum/FilterModes.h>
-#include <gum/GUM_GTxt.h>
+#include <gum/GTxt.h>
 #include <SM_Test.h>
 
 namespace ee
 {
 
-void DrawSpritesVisitor::Visit(Sprite* spr, bool& next)
+void DrawSpritesVisitor::Visit(const SprPtr& spr, bool& next)
 {
 	next = true;
 
@@ -24,16 +24,16 @@ void DrawSpritesVisitor::Visit(Sprite* spr, bool& next)
 
 	s2::RenderParams params;
 	params.SetViewRegion(m_screen_region);
-	const s2::Actor* prev_actor = CurrSprTreePath::Instance()->TopActor();
-	params.actor = spr->QueryActor(prev_actor);
-	if (s2::DrawNode::CullingTestOutside(spr, params)) {
+	auto prev_actor = CurrSprTreePath::Instance()->TopActor();
+	params.actor = spr->QueryActor(prev_actor.get());
+	if (s2::DrawNode::CullingTestOutside(spr.get(), params)) {
 		return;
 	}
 
-	SpriteRenderer::Instance()->Draw(spr, params);
+	SpriteRenderer::Instance()->Draw(spr.get(), params);
 
 	SettingData& cfg = Config::Instance()->GetSettings();
-	std::string name;
+	CU_STR name;
 	s2::SprNameMap::Instance()->IDToStr(spr->GetName(), name);
 	if (cfg.visible_node_name && !name.empty() && name[0] != '_') 
 	{

@@ -14,9 +14,9 @@ SpriteUserData::SpriteUserData()
 	layer_idx = frame_idx = -1;
 }
 
-void SpriteUserData::SetSprData(ee::Sprite* spr, Layer* layer, KeyFrame* frame)
+void SpriteUserData::SetSprData(ee::Sprite& spr, Layer* layer, KeyFrame* frame)
 {
-	if (SpriteUserData* old_ud = (SpriteUserData*)spr->GetUserData())
+	if (SpriteUserData* old_ud = (SpriteUserData*)spr.GetUserData())
 	{
 		old_ud->layer = layer;
 		old_ud->frame = frame;
@@ -26,13 +26,13 @@ void SpriteUserData::SetSprData(ee::Sprite* spr, Layer* layer, KeyFrame* frame)
 		SpriteUserData* ud = new SpriteUserData;
 		ud->layer = layer;
 		ud->frame = frame;
-		spr->SetUserData(ud);
+		spr.SetUserData(ud);
 	}
 }
 
-void SpriteUserData::SetSprData(ee::Sprite* spr, int layer_idx, int frame_idx) 
+void SpriteUserData::SetSprData(ee::Sprite& spr, int layer_idx, int frame_idx) 
 {
-	if (SpriteUserData* old_ud = (SpriteUserData*)spr->GetUserData())
+	if (SpriteUserData* old_ud = (SpriteUserData*)spr.GetUserData())
 	{
 		old_ud->layer_idx = layer_idx;
 		old_ud->frame_idx = frame_idx;
@@ -42,7 +42,7 @@ void SpriteUserData::SetSprData(ee::Sprite* spr, int layer_idx, int frame_idx)
 		SpriteUserData* ud = new SpriteUserData;
 		ud->layer_idx = layer_idx;
 		ud->frame_idx = frame_idx;
-		spr->SetUserData(ud);
+		spr.SetUserData(ud);
 	}
 }
 

@@ -15,8 +15,8 @@ public:
 	 *  @interface
 	 *    lua
 	 */
-	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
-const ee::TexturePacker& tp) const;
+	virtual void PackToLuaString(ebuilder::CodeGenerator& gen, 
+		const ee::TexturePacker& tp) const;
 	
 	/**
 	 *  @interface

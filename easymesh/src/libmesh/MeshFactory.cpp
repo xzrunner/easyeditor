@@ -10,13 +10,13 @@ namespace emesh
 
 MeshFactory* MeshFactory::m_instance = NULL;
 
-Mesh* MeshFactory::CreateMesh(const ee::Symbol* base) const
+std::unique_ptr<Mesh> MeshFactory::CreateMesh(const ee::SymPtr& base) const
 {
-	Mesh* mesh = NULL;
+	std::unique_ptr<Mesh> mesh = nullptr;
 	switch (m_pm_mesh_type)
 	{
 	case pm::MESH_POINTS:
-		mesh = new PointsMesh(base);
+		mesh = std::make_unique<PointsMesh>(base);
 		break;
 	case pm::MESH_STRIP:
 //		mesh = new StripMesh(base);

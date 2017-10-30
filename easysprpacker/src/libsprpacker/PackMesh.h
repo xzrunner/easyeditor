@@ -17,7 +17,7 @@ class MeshShape;
 class PackMesh : public PackNode
 {
 public:
-	PackMesh(const emesh::Symbol* sym);
+	PackMesh(const std::shared_ptr<emesh::Symbol>& sym);
 	~PackMesh();
 
 	/**

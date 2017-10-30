@@ -22,7 +22,7 @@ public:
 	//
 	// interface IPathfinding
 	//
-	virtual void DisableRegion(const ee::Sprite* spr, bool disable);
+	virtual void DisableRegion(const ee::SprConstPtr& spr, bool disable);
 	virtual void QueryRoute(const sm::vec2& start, const sm::vec2& end);
 	virtual void DebugDraw() const;
 
@@ -50,7 +50,7 @@ private:
 	VisitedList m_visited;
 	CandidateList m_candidate;
 
-	std::map<const ee::Sprite*, std::vector<sm::vec2> > m_bounds;
+	std::map<const ee::SprPtr, std::vector<sm::vec2> > m_bounds;
 
 	std::vector<sm::vec2> m_tris;
 

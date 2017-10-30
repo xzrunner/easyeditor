@@ -25,7 +25,7 @@ public:
 
 	bool Clear();
 
-//		void removeSprite(ee::Sprite* spr);
+//		void removeSprite(const ee::SprPtr& spr);
 
 	const std::vector<Layer*>& GetAllLayers() const {
 		return m_layers;

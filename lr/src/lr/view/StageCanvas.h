@@ -26,7 +26,7 @@ protected:
 
 private:
 	void DrawSprites() const;
-	void DrawSprite(ee::Sprite* spr, bool draw_edge, int name_visible) const;
+	void DrawSprite(const ee::SprPtr& spr, bool draw_edge, int name_visible) const;
 
 	void DrawRegion() const;
 	void DrawPseudo3dBound() const;
@@ -36,10 +36,10 @@ private:
 private:
 	struct DrawableSpr
 	{
-		ee::Sprite* spr;
+		const ee::SprPtr& spr;
 		int name_visible;
 
-		DrawableSpr(ee::Sprite* spr, int name_visible) 
+		DrawableSpr(const ee::SprPtr& spr, int name_visible) 
 			: spr(spr), name_visible(name_visible) {}
 	};
 

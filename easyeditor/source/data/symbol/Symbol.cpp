@@ -7,11 +7,6 @@
 namespace ee
 {
 
-Symbol::~Symbol()
-{
-	SymbolMgr::Instance()->Remove(this);
-}
-
 void Symbol::ClearUserData(bool deletePtr)
 {
 	delete m_ud, m_ud = NULL;
@@ -23,11 +18,8 @@ bool Symbol::LoadFromFile(const std::string& filepath)
 	if (filepath != SYM_GROUP_TAG) {
 		m_filepath = FileHelper::GetExistFilepath(filepath);
 	}
-	if (m_bitmap) {
-		m_bitmap->RemoveReference();
-		m_bitmap = NULL;
-	}
-	if (m_filepath == wxEmptyString) {
+	m_bitmap.reset();
+	if (m_filepath.empty()) {
 		m_filepath = filepath;
 	}
 	return LoadResources();

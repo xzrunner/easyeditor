@@ -3,7 +3,7 @@
 //namespace eshape
 //{
 //
-//MultiColorMaterial::MultiColorMaterial(const std::vector<sm::vec2>& vertices, 
+//MultiColorMaterial::MultiColorMaterial(const CU_VEC<sm::vec2>& vertices, 
 //							 const s2::Color& color)
 //{
 //	Build(vertices);
@@ -22,22 +22,22 @@
 //	s2::RVG::Triangles(mt, m_tris, m_color);
 //}
 //
-//void MultiColorMaterial::Build(const std::vector<sm::vec2>& vertices)
+//void MultiColorMaterial::Build(const CU_VEC<sm::vec2>& vertices)
 //{
 //	m_tris.clear();
 //
-//	std::vector<sm::vec2> bounding;
+//	CU_VEC<sm::vec2> bounding;
 //	ee::Math2D::removeDuplicatePoints(vertices, bounding);
 //
 //	ee::Triangulation::normal(bounding, m_tris);
 //}
 //
-//void MultiColorMaterial::Build(const std::vector<sm::vec2>& vertices, 
-//						  const std::vector<sm::vec2>& segments)
+//void MultiColorMaterial::Build(const CU_VEC<sm::vec2>& vertices, 
+//						  const CU_VEC<sm::vec2>& segments)
 //{
 //	m_tris.clear();
 //
-//	std::vector<sm::vec2> bounding;
+//	CU_VEC<sm::vec2> bounding;
 //	ee::Math2D::removeDuplicatePoints(vertices, bounding);
 //
 //	sm::triangulate_lines(bounding, segments, m_tris);

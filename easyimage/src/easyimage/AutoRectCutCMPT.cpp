@@ -91,8 +91,8 @@ wxSizer* AutoRectCutCMPT::InitLayout()
 
 void AutoRectCutCMPT::OnCreateRects(wxCommandEvent& event)
 {
-	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(m_stage->GetImage()->GetSymbol());
-	ee::ImageData* img = ee::ImageDataMgr::Instance()->GetItem(sym->GetFilepath());
+	const ee::SymPtr& sym = std::dynamic_pointer_cast<ee::Symbol>(m_stage->GetImage()->GetSymbol());
+	auto img = ee::ImageDataMgr::Instance()->GetItem(sym->GetFilepath());
 
 	RegularRectCut cut(img->GetPixelData(), img->GetWidth(), img->GetHeight());
 	cut.AutoCut();
@@ -117,8 +117,8 @@ void AutoRectCutCMPT::OnCreateRects(wxCommandEvent& event)
 
 void AutoRectCutCMPT::OnOutputRects(wxCommandEvent& event)
 {
-	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(m_stage->GetImage()->GetSymbol());
-	ee::ImageData* img = ee::ImageDataMgr::Instance()->GetItem(sym->GetFilepath());
+	const ee::SymPtr& sym = std::dynamic_pointer_cast<ee::Symbol>(m_stage->GetImage()->GetSymbol());
+	auto img = ee::ImageDataMgr::Instance()->GetItem(sym->GetFilepath());
 
 	RegularRectCut cut(img->GetPixelData(), img->GetWidth(), img->GetHeight());
 	cut.AutoCut();
@@ -126,7 +126,7 @@ void AutoRectCutCMPT::OnOutputRects(wxCommandEvent& event)
 	std::string msg = ee::StringHelper::Format("Left: %d, Used: %d", cut.GetLeftArea(), cut.GetUseArea());
 	wxMessageBox(msg, wxT("Statics"), wxOK | wxICON_INFORMATION, this);
 
-	assert(img->GetFormat() == GPF_RGB || img->GetFormat() == GPF_RGBA);
+	assert(img->GetFormat() == GPF_RGB || img->GetFormat() == GPF_RGBA8);
 	int channels = img->GetFormat() == GPF_RGB ? 3 : 4;
 	pimg::Cropping crop(img->GetPixelData(), img->GetWidth(), img->GetHeight(), channels);
 
@@ -138,7 +138,7 @@ void AutoRectCutCMPT::OnOutputRects(wxCommandEvent& event)
 		uint8_t* pixels = crop.Crop(r.x, r.y, r.x+r.w, r.y+r.h);
 
 		std::string out_path = ee::StringHelper::Format("%s#%d#%d#%d#%d#.png", ori_path.c_str(), r.x, r.y, r.w, r.h);
-		gimg_export(out_path.c_str(), pixels, r.w, r.h, GPF_RGBA, true);
+		gimg_export(out_path.c_str(), pixels, r.w, r.h, GPF_RGBA8, true);
 		delete[] pixels;
 	}
 

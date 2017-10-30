@@ -9,7 +9,7 @@ namespace eskeleton
 class ScaleSprState : public ee::ScaleSpriteState
 {
 public:
-	ScaleSprState(ee::Sprite* spr, const ee::SpriteCtrlNode::Node& ctrl_node);
+	ScaleSprState(const ee::SprPtr& spr, const ee::SpriteCtrlNode::Node& ctrl_node);
 
 protected:
 	virtual void SetScaleTimes(const sm::vec2& st);

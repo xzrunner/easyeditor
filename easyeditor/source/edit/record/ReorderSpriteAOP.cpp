@@ -5,16 +5,10 @@
 namespace ee
 {
 
-ReorderSpriteAOP::ReorderSpriteAOP(const std::vector<Sprite*>& sprs, bool up)
-	: m_up(up)
+ReorderSpriteAOP::ReorderSpriteAOP(const std::vector<SprPtr>& sprs, bool up)
+	: m_sprs(sprs)
+	, m_up(up)
 {
-	for_each(sprs.begin(), sprs.end(), cu::AddRefFunctor<Sprite>());
-	m_sprs = sprs;
-}
-
-ReorderSpriteAOP::~ReorderSpriteAOP()
-{
-	for_each(m_sprs.begin(), m_sprs.end(), cu::RemoveRefFunctor<Sprite>());
 }
 
 void ReorderSpriteAOP::Undo()
@@ -27,7 +21,7 @@ void ReorderSpriteAOP::Redo()
 	Reorder(m_up);
 }
 
-Json::Value ReorderSpriteAOP::Store(const std::vector<Sprite*>& sprs) const
+Json::Value ReorderSpriteAOP::Store(const std::vector<SprPtr>& sprs) const
 {
 	return Json::Value();
 }

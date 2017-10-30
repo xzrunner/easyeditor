@@ -17,7 +17,7 @@ namespace eimage
 
 const int BlockCompress::TOLERANCE = 50;
 
-BlockCompress::BlockCompress(const std::vector<std::string>& image_files)
+BlockCompress::BlockCompress(const CU_VEC<std::string>& image_files)
 	: m_image_files(image_files)
 {
 	m_tot_area = 0;
@@ -60,7 +60,7 @@ void BlockCompress::Compress(const std::string& filepath)
 {
 	int w, h, fmt;
 	uint8_t* pixels = gimg_import(filepath.c_str(), &w, &h, &fmt);
-	if (fmt == GPF_RGBA && gum::Config::Instance()->GetPreMulAlpha()) {
+	if (fmt == GPF_RGBA8 && gum::Config::Instance()->GetPreMulAlpha()) {
 		gimg_pre_mul_alpha(pixels, w, h);
 	}
 
@@ -122,7 +122,7 @@ void BlockCompress::Uncompress(const std::string& dir, const Picture& pic) const
 
 //	std::string filepath = dir + "//" + ee::FileHelper::getFilenameWithExtension(pic.filepath);
 	std::string filepath = pic.filepath;
-	gimg_export(filepath.c_str(), pixels, pic.w, pic.h, GPF_RGBA, true);
+	gimg_export(filepath.c_str(), pixels, pic.w, pic.h, GPF_RGBA8, true);
 
 	delete[] pixels;
 }

@@ -14,12 +14,14 @@ FilepathDialog::FilepathDialog(wxWindow* parent, const std::string& filepath)
 
 std::string FilepathDialog::GetFilepath() const
 {
-	return m_dir->GetValue().ToStdString() + "\\" + m_name->GetValue().ToStdString();
+	return std::string(m_dir->GetValue().ToStdString().c_str()) 
+		 + std::string("\\") 
+		 + std::string(m_name->GetValue().ToStdString().c_str());
 }
 
 void FilepathDialog::SaveLastDir()
 {
-	m_last_dir = m_dir->GetValue().ToStdString();
+	m_last_dir = m_dir->GetValue().ToStdString().c_str();
 }
 
 void FilepathDialog::InitLayout(const std::string& filepath)
@@ -30,11 +32,11 @@ void FilepathDialog::InitLayout(const std::string& filepath)
 		wxSizer* sz = new wxBoxSizer(wxHORIZONTAL);
 		sz->Add(new wxStaticText(this, wxID_ANY, "dir"), 0, wxLEFT | wxRIGHT, 5);
 
-		std::string dir = FileHelper::GetFileDir(filepath);
+		auto dir = FileHelper::GetFileDir(filepath);
 		if (!m_last_dir.empty()) {
 			dir = m_last_dir;
 		}
-		m_dir = new wxTextCtrl(this, wxID_ANY, dir, wxDefaultPosition, wxSize(400, -1));
+		m_dir = new wxTextCtrl(this, wxID_ANY, dir.c_str(), wxDefaultPosition, wxSize(400, -1));
 		sz->Add(m_dir, 0, wxLEFT | wxRIGHT, 5);
 
 		sizer->Add(sz);
@@ -44,8 +46,8 @@ void FilepathDialog::InitLayout(const std::string& filepath)
 		wxSizer* sz = new wxBoxSizer(wxHORIZONTAL);
 		sz->Add(new wxStaticText(this, wxID_ANY, "name"), 0, wxLEFT | wxRIGHT, 5);
 
-		std::string name = FileHelper::GetFilenameWithExtension(filepath);
-		m_name = new wxTextCtrl(this, wxID_ANY, name, wxDefaultPosition, wxSize(400, -1));
+		auto name = FileHelper::GetFilenameWithExtension(filepath);
+		m_name = new wxTextCtrl(this, wxID_ANY, name.c_str(), wxDefaultPosition, wxSize(400, -1));
 		sz->Add(m_name, 0, wxLEFT | wxRIGHT, 5);
 
 		sizer->Add(sz);

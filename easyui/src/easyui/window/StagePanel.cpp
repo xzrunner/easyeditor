@@ -90,8 +90,8 @@ void StagePanel::LoadFromFile(const char* filename)
 	FileIO::Load(filename, m_sym);
 	m_toolbar->SetWindowName(m_sym->name);
 
-	std::vector<ee::Sprite*> sprs;
-	m_sym->GetAnchorMgr().Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	m_sym->GetAnchorMgr().Traverse(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	const std::vector<Sprite*>& ref_sprites = m_sym->GetExtRefs();
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
 		m_top_pannels->viewlist->Insert(sprs[i]);
@@ -127,8 +127,8 @@ void StagePanel::OnPreview()
 	int width, height;
 	QueryWindowViewSizeSJ::Instance()->Query(width, height);
 
-	std::vector<ee::Sprite*> sprs;
-	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 
 	EnableObserve(false);
 	GetCanvas()->EnableObserve(false);
@@ -145,8 +145,8 @@ void StagePanel::OnPreview()
 void StagePanel::OnCode() const
 {
 	ebuilder::CodeDialog dlg(const_cast<StagePanel*>(this));
-	std::vector<ee::Sprite*> sprs;
-	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 
 	// ui
 	{
@@ -177,7 +177,7 @@ void StagePanel::OnCode() const
 	dlg.ShowModal();
 }
 
-void StagePanel::TraverseSprites(ee::Visitor<ee::Sprite>& visitor, ee::DataTraverseType type, bool order) const
+void StagePanel::TraverseSprites(ee::RefVisitor<ee::Sprite>& visitor, ee::DataTraverseType type, bool order) const
 {
 	m_sym->Traverse(visitor);
 }
@@ -218,12 +218,12 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 	case ee::MSG_INSERT_SPRITE:
 		{
 			ee::InsertSpriteSJ::Params* p = (ee::InsertSpriteSJ::Params*)ud;
-			ee::Sprite* spr = p->spr;
+			auto& spr = p->spr;
 			if (Sprite* spr_ui = dynamic_cast<Sprite*>(spr)) {
 				m_sym->InsertExtRef(spr_ui);
 			} else {
 				std::string type = "";
-				SymbolCfg::Instance()->QueryType(dynamic_cast<const ee::Symbol*>(spr->GetSymbol()), type);
+				SymbolCfg::Instance()->QueryType(std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol()), type);
 				if (type.empty() && spr->GetTag().find("type=unknown") == std::string::npos) {
 					spr->SetTag("type=unknown;" + spr->GetTag());
 				}
@@ -234,7 +234,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 		break;
 	case ee::MSG_REMOVE_SPRITE:
 		{
-			ee::Sprite* spr = (ee::Sprite*)ud;
+			auto& spr = *(ee::SprPtr*)ud;
 			if (Sprite* spr_ui = dynamic_cast<Sprite*>(spr)) {
 				m_sym->RemoveExtRef(spr_ui);
 			} else {

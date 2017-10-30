@@ -169,7 +169,7 @@ void TrimImage::StoreBoundInfo(const ee::ImageData& img, const sm::rect& r,
 
 bool TrimImage::IsTransparent(const ee::ImageData& img, int x, int y) const
 {
-	if (img.GetFormat() != GPF_RGBA) {
+	if (img.GetFormat() != GPF_RGBA8) {
 		return false;
 	} else {
 		return img.GetPixelData()[(img.GetWidth() * y + x) * 4 + 3] == 0;
@@ -178,11 +178,11 @@ bool TrimImage::IsTransparent(const ee::ImageData& img, int x, int y) const
 
 void TrimImage::Trim(const std::string& filepath)
 {
-	ee::ImageData* img = ee::ImageDataMgr::Instance()->GetItem(filepath);
+	auto img = ee::ImageDataMgr::Instance()->GetItem(filepath);
 
 	uint8_t* condense = NULL;
 	pimg::Rect r;
-	if (img->GetFormat() == GPF_RGBA)
+	if (img->GetFormat() == GPF_RGBA8)
 	{
 		pimg::Condense cd(img->GetPixelData(), img->GetWidth(), img->GetHeight());
 		condense = cd.GetPixels(r);

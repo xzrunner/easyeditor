@@ -3,8 +3,8 @@
 #include "PackArray.h"
 #include "to_int.h"
 
-#include <bimp/bimp_typedef.h>
-#include <simp/SIMP_Skin2Mesh.h>
+#include <bimp/typedef.h>
+#include <simp/Skin2Mesh.h>
 #include <polymesh/Skin2Triangles.h>
 #include <polymesh/MeshType.h>
 
@@ -55,7 +55,7 @@ void Skin2Mesh::PackToLuaString(ebuilder::CodeGenerator& gen) const
 		}
 	}
 	// triangles
-	std::vector<int> triangles;
+	CU_VEC<int> triangles;
 	triangles.reserve(m_mesh->tri_num);
 	for (int i = 0; i < m_mesh->tri_num; ++i) {
 		triangles.push_back(m_mesh->triangles[i]);
@@ -123,14 +123,14 @@ void Skin2Mesh::PackToBin(uint8_t** ptr) const
 		pack(weight, ptr);
 	}
 	// texcoords
-	std::vector<sm::vec2> texcoords;
+	CU_VEC<sm::vec2> texcoords;
 	texcoords.reserve(m_mesh->vert_num);
 	for (int i = 0; i < m_mesh->vert_num; ++i) {
 		texcoords.push_back(m_mesh->vertices[i].uv);
 	}
 	PackCoords::PackToBin(texcoords, ptr, 8192);
 	// triangles
-	std::vector<int> triangles;
+	CU_VEC<int> triangles;
 	triangles.reserve(m_mesh->tri_num);
 	for (int i = 0; i < m_mesh->tri_num; ++i) {
 		triangles.push_back(m_mesh->triangles[i]);

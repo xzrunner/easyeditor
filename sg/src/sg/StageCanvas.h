@@ -36,7 +36,7 @@ private:
 private:
 	StagePanel* m_stage;
 
-	ee::Sprite* m_background;
+	ee::SprPtr m_background;
 
 }; // StageCanvas
 

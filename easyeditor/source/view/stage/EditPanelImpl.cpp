@@ -266,7 +266,7 @@ void EditPanelImpl::RedoTop()
 	UpdateWndState(type);	
 }
 
-void EditPanelImpl::SaveOpRecordList(const std::string& filepath, const std::vector<Sprite*>& sprs)
+void EditPanelImpl::SaveOpRecordList(const std::string& filepath, const std::vector<SprPtr>& sprs)
 {
 	Json::Value value;
 	m_history_list.Store(value, sprs);
@@ -280,7 +280,7 @@ void EditPanelImpl::SaveOpRecordList(const std::string& filepath, const std::vec
 	fout.close();
 }
 
-void EditPanelImpl::LoadOpRecordList(const std::string& filepath, const std::vector<Sprite*>& sprs)
+void EditPanelImpl::LoadOpRecordList(const std::string& filepath, const std::vector<SprPtr>& sprs)
 {
 	std::string path = filepath.substr(0, filepath.find_last_of('.')) + "_history.json";
 

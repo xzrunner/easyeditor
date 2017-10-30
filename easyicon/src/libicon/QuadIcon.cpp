@@ -5,8 +5,8 @@
 namespace eicon
 {
 
-QuadIcon::QuadIcon(ee::ImageSymbol* img, const sm::vec2* src, 
-				   const sm::vec2* screen)
+QuadIcon::QuadIcon(const std::shared_ptr<s2::ImageSymbol>& img, 
+	               const sm::vec2* src, const sm::vec2* screen)
 {
 	memcpy(m_src, src, sizeof(m_src));
 	memcpy(m_screen, screen, sizeof(m_screen));

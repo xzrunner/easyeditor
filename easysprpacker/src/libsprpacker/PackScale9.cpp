@@ -13,7 +13,7 @@ namespace lua = ebuilder::lua;
 namespace esprpacker
 {
 
-PackScale9::PackScale9(const escale9::Symbol* sym)
+PackScale9::PackScale9(const std::shared_ptr<escale9::Symbol>& sym)
 {
 	Init(sym);
 }
@@ -130,18 +130,18 @@ void PackScale9::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 	}
 }
 
-void PackScale9::Init(const escale9::Symbol* sym)
+void PackScale9::Init(const std::shared_ptr<escale9::Symbol>& sym)
 {
 	const s2::Scale9& s9 = sym->GetScale9();
 
 	m_type = s9.GetType();
 
-	std::vector<s2::Sprite*> sprs;
+	CU_VEC<s2::SprPtr> sprs;
 	s9.GetGrids(sprs);
 	m_grids.resize(sprs.size());
 	for (int i = 0, n = sprs.size(); i < n; ++i) 
 	{
-		const s2::Sprite* src = sprs[i];
+		auto& src = sprs[i];
 		Grid& dst = m_grids[i];
 		dst.angle = src->GetAngle();
 		const sm::vec2& scale = src->GetScale();
@@ -151,18 +151,17 @@ void PackScale9::Init(const escale9::Symbol* sym)
 		if (scale.y < 0) {
 			dst.mirror.y = true;
 		}
-		dst.node = PackNodeFactory::Instance()->Create(
-			dynamic_cast<const ee::Sprite*>(src));
+		dst.node = PackNodeFactory::Instance()->Create(std::dynamic_pointer_cast<ee::Sprite>(src));
 	}
 
-	const s2::Sprite* spr = NULL;
+	s2::SprPtr spr = nullptr;
 	// left
 	if (spr = s9.GetGrid(s2::S9_DOWN_LEFT)) {
 	} else if (spr = s9.GetGrid(s2::S9_MID_LEFT)) {
 	} else if (spr = s9.GetGrid(s2::S9_TOP_LEFT)) {
 	}
 	if (spr) {
-		m_left = dynamic_cast<const s2::ImageSymbol*>(spr->GetSymbol())->GetNoTrimedSize().x;
+		m_left = std::dynamic_pointer_cast<s2::ImageSymbol>(spr->GetSymbol())->GetNoTrimedSize().x;
 	}
 	// right
 	if (spr = s9.GetGrid(s2::S9_DOWN_RIGHT)) {
@@ -170,7 +169,7 @@ void PackScale9::Init(const escale9::Symbol* sym)
 	} else if (spr = s9.GetGrid(s2::S9_TOP_RIGHT)) {
 	}
 	if (spr) {
-		m_right = dynamic_cast<const s2::ImageSymbol*>(spr->GetSymbol())->GetNoTrimedSize().x;
+		m_right = std::dynamic_pointer_cast<s2::ImageSymbol>(spr->GetSymbol())->GetNoTrimedSize().x;
 	}
 	// top
 	if (spr = s9.GetGrid(s2::S9_TOP_LEFT)) {
@@ -178,7 +177,7 @@ void PackScale9::Init(const escale9::Symbol* sym)
 	} else if (spr = s9.GetGrid(s2::S9_TOP_RIGHT)) {
 	}
 	if (spr) {
-		m_top = dynamic_cast<const s2::ImageSymbol*>(spr->GetSymbol())->GetNoTrimedSize().y;
+		m_top = std::dynamic_pointer_cast<s2::ImageSymbol>(spr->GetSymbol())->GetNoTrimedSize().y;
 	}
 	// down
 	if (spr = s9.GetGrid(s2::S9_DOWN_LEFT)) {
@@ -186,7 +185,7 @@ void PackScale9::Init(const escale9::Symbol* sym)
 	} else if (spr = s9.GetGrid(s2::S9_DOWN_RIGHT)) {
 	}
 	if (spr) {
-		m_down = dynamic_cast<const s2::ImageSymbol*>(spr->GetSymbol())->GetNoTrimedSize().y;
+		m_down = std::dynamic_pointer_cast<s2::ImageSymbol>(spr->GetSymbol())->GetNoTrimedSize().y;
 	}
 }
 

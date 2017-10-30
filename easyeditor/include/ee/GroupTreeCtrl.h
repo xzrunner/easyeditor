@@ -35,8 +35,8 @@ public:
 		bool visible = true, bool editable = true);
 	void DelNode();
 
-	wxTreeItemId AddSprite(wxTreeItemId parent, Sprite* spr);
-	wxTreeItemId AddSprite(Sprite* spr);
+	wxTreeItemId AddSprite(wxTreeItemId parent, const SprPtr& spr);
+	wxTreeItemId AddSprite(const SprPtr& spr);
 
 	wxTreeItemId GetRootID() const { return m_root; }
 
@@ -79,11 +79,11 @@ private:
 
 	void ShowMenu(wxTreeItemId id, const wxPoint& pt);
 
-	void ChangeName(Sprite* spr);
-	void Select(Sprite* spr, bool clear);
+	void ChangeName(const SprPtr& spr);
+	void Select(const SprPtr& spr, bool clear);
 	void SelectSet(SpriteSelection* selection);
-	void Reorder(Sprite* spr, bool up);
-	bool Remove(Sprite* spr);
+	void Reorder(const SprPtr& spr, bool up);
+	bool Remove(const SprPtr& spr);
 
 private:
 	enum

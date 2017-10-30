@@ -22,12 +22,12 @@ public:
 	//
 	virtual void OnListSelected(wxCommandEvent& event);
 	virtual void Clear();
-	virtual void Insert(ListItem* item, int idx = -1);
+	virtual void Insert(const ListItemPtr& item, int idx = -1);
 	virtual void Remove();
 	virtual void Remove(int index);
 	virtual void Swap(int i0, int i1);
 
-	ListItem* GetItem(int index = -1) const;
+	ListItemPtr GetItem(int index = -1) const;
 
 	void ReloadTexture() const;
 

@@ -15,10 +15,9 @@
 namespace eparticle3d
 {
 
-ParticleSystem::ParticleSystem(const s2::P3dEmitterCfg* cfg, bool record)
+ParticleSystem::ParticleSystem(const std::shared_ptr<s2::P3dEmitterCfg>& cfg, bool record)
 	: m_anim_recorder(NULL)
 	, m_inv_record(NULL)
-	, m_et(NULL)
 {
 	s2::Particle3d::Instance();
 
@@ -33,7 +32,6 @@ ParticleSystem::ParticleSystem(const s2::P3dEmitterCfg* cfg, bool record)
 ParticleSystem::ParticleSystem(const ParticleSystem& ps)
 	: m_anim_recorder(NULL)
 	, m_inv_record(NULL)
-	, m_et(NULL)
 {
 	s2::Particle3d::Instance();
 
@@ -44,10 +42,6 @@ ParticleSystem::~ParticleSystem()
 {
 	delete m_anim_recorder;
 	delete m_inv_record;
-
-	if (m_et) {
-		m_et->RemoveReference();
-	}
 }
 
 void ParticleSystem::SetValue(int key, const ee::UICallback::Data& data)
@@ -372,7 +366,7 @@ void ParticleSystem::SetBlend(int blend)
 	cfg->blend = blend;
 }
 
-p3d_symbol* ParticleSystem::AddSymbol(s2::Symbol* sym)
+p3d_symbol* ParticleSystem::AddSymbol(const s2::SymPtr& sym)
 {
 	if (!m_et) {
 		return NULL;
@@ -390,8 +384,8 @@ p3d_symbol* ParticleSystem::AddSymbol(s2::Symbol* sym)
 	comp.add_col_begin.r = comp.add_col_begin.g = comp.add_col_begin.b = comp.add_col_begin.a = 0;
 	comp.add_col_end.r = comp.add_col_end.g = comp.add_col_end.b = comp.add_col_end.a = 0;
 
-	sym->AddReference();
-	comp.ud = sym;
+	std::const_pointer_cast<s2::P3dEmitterCfg>(m_et->GetEmitterCfg())->InsertCachedSym(sym);
+	comp.ud = sym.get();
 
 	return &comp;
 }
@@ -407,7 +401,7 @@ void ParticleSystem::DelSymbol(int idx)
 	}
 
 	p3d_symbol& comp = cfg->syms[idx];
-	static_cast<s2::Symbol*>(comp.ud)->RemoveReference();
+	std::const_pointer_cast<s2::P3dEmitterCfg>(m_et->GetEmitterCfg())->RemoveCachedSym(static_cast<s2::Symbol*>(comp.ud));
 	if (cfg->sym_count == 1) {
 		cfg->sym_count = 0;
 	} else {
@@ -425,11 +419,10 @@ void ParticleSystem::DelAllSymbol()
 	if (!m_et) {
 		return;
 	}
+
+	std::const_pointer_cast<s2::P3dEmitterCfg>(m_et->GetEmitterCfg())->ClearCachedSym();
+
 	p3d_emitter_cfg* cfg = const_cast<p3d_emitter_cfg*>(m_et->GetEmitterCfg()->GetImpl());
-	for (int i = 0; i < cfg->sym_count; ++i) {
-		s2::Symbol* sym = (s2::Symbol*)(cfg->syms[i].ud);
-		sym->RemoveReference();
-	}
 	cfg->sym_count = 0;
 }
 
@@ -449,9 +442,9 @@ p3d_symbol* ParticleSystem::GetSymbol(int idx)
 const s2::P3dEmitterCfg* ParticleSystem::GetConfig() const
 {
 	if (m_et) {
-		return m_et->GetEmitterCfg();
+		return m_et->GetEmitterCfg().get();
 	} else {
-		return NULL;
+		return nullptr;
 	}
 }
 
@@ -460,11 +453,9 @@ const s2::P3dEmitterCfg* ParticleSystem::GetConfig() const
 //{ 
 //}
 
-void ParticleSystem::InitEmitter(const s2::P3dEmitterCfg* cfg)
+void ParticleSystem::InitEmitter(const std::shared_ptr<const s2::P3dEmitterCfg>& cfg)
 {
-	if (!m_et) {
-		m_et = s2::P3dEmitterPool::Instance()->Pop();
-	}
+	m_et = std::make_shared<s2::Particle3dEmitter>();
 	m_et->CreateEmitter(cfg);
 	m_et->Start();
 }

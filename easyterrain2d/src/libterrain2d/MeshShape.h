@@ -9,7 +9,7 @@ namespace eterrain2d
 class MeshShape : public emesh::Mesh
 {
 public:
-	MeshShape(const ee::Symbol* base);
+	MeshShape(const ee::SymPtr& base);
 
 	void InsertTriangle(const sm::vec2* vertices, 
 		const sm::vec2* texcoords, const std::vector<sm::vec2>& bound);

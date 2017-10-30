@@ -17,7 +17,7 @@ class PolygonShape : public EditedPolyShape, public s2::PolygonShape
 public:
 	PolygonShape();
 	PolygonShape(const PolygonShape& polygon);
-	PolygonShape(const std::vector<sm::vec2>& vertices);
+	PolygonShape(const CU_VEC<sm::vec2>& vertices);
 	virtual ~PolygonShape();
 	
 	/**
@@ -47,12 +47,12 @@ public:
 	virtual void AddVertex(int index, const sm::vec2& pos);
 	virtual void RemoveVertex(const sm::vec2& pos);
 	virtual void ChangeVertex(const sm::vec2& from, const sm::vec2& to);
-	virtual void SetVertices(const std::vector<sm::vec2>& vertices);
-	virtual const std::vector<sm::vec2>& GetVertices() const { return m_vertices; }
+	virtual void SetVertices(const CU_VEC<sm::vec2>& vertices);
+	virtual const CU_VEC<sm::vec2>& GetVertices() const { return m_vertices; }
 	virtual bool IsClosed() const { return true; }
 
 	void SetMaterialColor(const s2::Color& color);
-	void SetMaterialTexture(ee::ImageSymbol* image);
+	void SetMaterialTexture(const std::shared_ptr<ee::ImageSymbol>& image);
 
 	Json::Value StoreMaterial(const std::string& dirpath) const;
 	void LoadMaterial(const std::string& dirpath, const Json::Value& val);

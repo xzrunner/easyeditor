@@ -9,13 +9,13 @@ namespace ee
 void StringHelper::ToLower(std::string& str)
 {
 //	std::transform(str.begin(), str.end(), str.begin(), std::tolower);
-	str = wxString(str).Lower();
+	str = wxString(str.c_str()).Lower();
 }
 
 void StringHelper::ToUpper(std::string& str)
 {
 //	std::transform(str.begin(), str.end(), str.begin(), std::toupper);
-	str = wxString(str).Upper();
+	str = wxString(str.c_str()).Upper();
 }
 
 void StringHelper::Split(const std::string& src, const std::string& mid, 

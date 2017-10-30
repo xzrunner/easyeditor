@@ -12,21 +12,10 @@ namespace ee
 //////////////////////////////////////////////////////////////////////////
 
 GroupTreeImpl::QuerySpriteVisitor::
-QuerySpriteVisitor(wxTreeCtrl* treectrl, Sprite* spr)
+QuerySpriteVisitor(wxTreeCtrl* treectrl, const SprPtr& spr)
 	: m_treectrl(treectrl)
 	, m_spr(spr)
 {
-	if (m_spr) {
-		m_spr->AddReference();
-	}
-}
-
-GroupTreeImpl::QuerySpriteVisitor::
-~QuerySpriteVisitor()
-{
-	if (m_spr) {
-		m_spr->RemoveReference();
-	}
 }
 
 bool GroupTreeImpl::QuerySpriteVisitor::
@@ -38,7 +27,7 @@ VisitLeaf(wxTreeItemId id)
 		return false;
 	}
 
-	Sprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
+	auto& spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
 	if (spr == m_spr) {
 		m_id = id;
 		return true;
@@ -52,22 +41,11 @@ VisitLeaf(wxTreeItemId id)
 //////////////////////////////////////////////////////////////////////////
 
 GroupTreeImpl::RemoveVisitor::
-RemoveVisitor(wxTreeCtrl* treectrl, Sprite* spr)
+RemoveVisitor(wxTreeCtrl* treectrl, const SprPtr& spr)
 	: m_treectrl(treectrl)
 	, m_spr(spr)
 	, m_finish(false)
 {
-	if (m_spr) {
-		m_spr->AddReference();
-	}
-}
-
-GroupTreeImpl::RemoveVisitor::
-~RemoveVisitor()
-{
-	if (m_spr) {
-		m_spr->RemoveReference();
-	}
 }
 
 bool GroupTreeImpl::RemoveVisitor::
@@ -101,7 +79,7 @@ VisitLeaf(wxTreeItemId id)
 		return false;
 	}
 
-	Sprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
+	auto& spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
 	if (spr == m_spr) {
 		m_treectrl->Delete(id);
 		return true;
@@ -141,7 +119,7 @@ VisitLeaf(wxTreeItemId id)
 		return false;
 	}
 
-	Sprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
+	auto& spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
 	m_selection->Add(spr);
 
 	return false;
@@ -152,7 +130,7 @@ VisitLeaf(wxTreeItemId id)
 //////////////////////////////////////////////////////////////////////////
 
 GroupTreeImpl::GetSpritesVisitor::
-GetSpritesVisitor(wxTreeCtrl* treectrl, std::vector<Sprite*>& sprs)
+GetSpritesVisitor(wxTreeCtrl* treectrl, std::vector<SprPtr>& sprs)
 	: m_treectrl(treectrl)
 	, m_sprs(sprs)
 {
@@ -167,7 +145,7 @@ VisitLeaf(wxTreeItemId id)
 		return false;
 	}
 
-	Sprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
+	auto& spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
 	m_sprs.push_back(spr);
 
 	return false;
@@ -215,7 +193,7 @@ VisitLeaf(wxTreeItemId id)
 		Group* group = static_cast<GroupTreeGroupItem*>(data)->GetGroup();
 		group->SetVisible(!group->GetVisible());
 	} else {
-	 	Sprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
+	 	auto& spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
 	 	spr->SetVisible(!spr->IsVisible());
 	}
 	return false;
@@ -238,7 +216,7 @@ VisitLeaf(wxTreeItemId id)
 		Group* group = static_cast<GroupTreeGroupItem*>(data)->GetGroup();
 		group->SetEditable(!group->GetEditable());
 	} else {
-		Sprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
+		auto& spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
 		spr->SetEditable(!spr->IsEditable());
 	}
 	return false;
@@ -257,7 +235,7 @@ VisitLeaf(wxTreeItemId id)
 		Group* group = static_cast<GroupTreeGroupItem*>(data)->GetGroup();
 		group->SetVisible(m_visible);
 	} else {
-		Sprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
+		auto& spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
 		spr->SetVisible(m_visible);
 	}
 	return false;
@@ -280,7 +258,7 @@ VisitLeaf(wxTreeItemId id)
 		Group* group = static_cast<GroupTreeGroupItem*>(data)->GetGroup();
 		group->SetEditable(m_editable);
 	} else {
-		Sprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
+		auto& spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
 		spr->SetEditable(m_editable);
 	}
 	return false;
@@ -305,8 +283,8 @@ VisitNonleaf(wxTreeItemId id)
 	Json::Value val;
 	val["leaf"] = false;
 
-	val["name"] = GetName(id);
-	val["parent"] = GetParentName(id);
+	val["name"] = GetName(id).c_str();
+	val["parent"] = GetParentName(id).c_str();
 
 	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
 	assert(data && data->IsGroup());
@@ -328,19 +306,19 @@ VisitLeaf(wxTreeItemId id)
 	Json::Value val;
 	val["leaf"] = true;
 
-	val["name"] = GetName(id);
-	val["parent"] = GetParentName(id);
+	val["name"] = GetName(id).c_str();
+	val["parent"] = GetParentName(id).c_str();
 
 	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
 	if (m_treectrl->GetRootID() == id) {
 		;
 	} else {
 		assert(data && !data->IsGroup());
-		Sprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
+		auto& spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
 		if (spr) {
-			std::string str;
+			CU_STR str;
 			s2::SprNameMap::Instance()->IDToStr(spr->GetName(), str);
-			val["sprite"] = str;
+			val["sprite"] = str.c_str();
 		} else {
 			// fixme
 			int zz = 0;
@@ -359,7 +337,7 @@ GetName(wxTreeItemId id) const
 	if (m_treectrl->GetRootID() == id) {
 		return "root";
 	} else {
-		return m_treectrl->GetItemText(id).ToStdString();
+		return m_treectrl->GetItemText(id).ToStdString().c_str();
 	}
 }
 
@@ -426,7 +404,7 @@ CopyPaste(wxTreeItemId id)
 
 	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
 	std::string name = 	m_treectrl->GetItemText(id);
-	wxTreeItemId new_item = m_treectrl->AppendItem(new_parent, name, -1, -1, data->Clone());
+	wxTreeItemId new_item = m_treectrl->AppendItem(new_parent, name.c_str(), -1, -1, data->Clone());
 	m_treectrl->ExpandAll();
 	m_map_ids.insert(std::make_pair(id, new_item));
 }

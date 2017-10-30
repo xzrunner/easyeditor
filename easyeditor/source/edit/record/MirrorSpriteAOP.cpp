@@ -6,19 +6,13 @@
 namespace ee
 {
 
-MirrorSpriteAOP::MirrorSpriteAOP(Sprite* spr, 
+MirrorSpriteAOP::MirrorSpriteAOP(const SprPtr& spr,
 								 bool old_mirror_x, bool old_mirror_y,
 								 bool new_mirror_x, bool new_mirror_y)
 	: m_spr(spr)
 	, m_old_mirror(old_mirror_x, old_mirror_y)
 	, m_new_mirror(new_mirror_x, new_mirror_y)
 {
-	m_spr->AddReference();
-}
-
-MirrorSpriteAOP::~MirrorSpriteAOP()
-{
-	m_spr->RemoveReference();
 }
 
 void MirrorSpriteAOP::Undo()
@@ -31,14 +25,14 @@ void MirrorSpriteAOP::Redo()
 	SetMirror(m_spr, m_new_mirror);
 }
 
-void MirrorSpriteAOP::Copy(const std::vector<ee::Sprite*>& sprs)
+void MirrorSpriteAOP::Copy(const std::vector<SprPtr>& sprs)
 {
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
 		SetMirror(sprs[i], m_new_mirror);
 	}	
 }
 
-Json::Value MirrorSpriteAOP::Store(const std::vector<Sprite*>& sprs) const
+Json::Value MirrorSpriteAOP::Store(const std::vector<SprPtr>& sprs) const
 {
 	Json::Value val;
 	val["type"] = AT_SHEAR;
@@ -49,7 +43,7 @@ Json::Value MirrorSpriteAOP::Store(const std::vector<Sprite*>& sprs) const
 	return val;
 }
 
-void MirrorSpriteAOP::SetMirror(Sprite* spr, const sm::bvec2& mirror)
+void MirrorSpriteAOP::SetMirror(const SprPtr& spr, const sm::bvec2& mirror)
 {
 	sm::vec2 scale = spr->GetScale();
 	if (mirror.x) {

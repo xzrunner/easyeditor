@@ -16,7 +16,7 @@ namespace eterrain2d
 {
 
 OceanMesh::OceanMesh(const eshape::PolygonShape* shape, 
-					 const ee::ImageSymbol* image)
+					 const std::shared_ptr<ee::ImageSymbol>& image)
 	 : m_shape(dynamic_cast<eshape::PolygonShape*>(((cu::Cloneable*)shape)->Clone()))
 	 , m_image0(image)
 	 , m_image1(NULL)
@@ -165,7 +165,7 @@ void OceanMesh::OpenBlend(bool open)
 	m_blend_open = open; 
 }
 
-void OceanMesh::SetImage1(const ee::ImageSymbol* image)
+void OceanMesh::SetImage1(const std::shared_ptr<ee::ImageSymbol>& image)
 {
 	sm::vec2 sz0 = m_image1->GetBounding().Size(),
 		     sz = image->GetBounding().Size();

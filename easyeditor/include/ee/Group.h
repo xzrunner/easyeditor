@@ -1,7 +1,9 @@
 #ifndef _EASYEDITOR_GROUP_H_
 #define _EASYEDITOR_GROUP_H_
 
-#include "ObjectVector.h"
+#include <cu/CU_RefCountObj.h>
+
+#include "ObjectRefVector.h"
 #include "Sprite.h"
 #include "Shape.h"
 #include "Visitor.h"
@@ -18,10 +20,10 @@ public:
 	void SetName(const std::string& name) { m_name = name; }
 	const std::string& GetName() const { return m_name; }
 
-	void TraverseSprite(Visitor<Sprite>& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
+	void TraverseSprite(RefVisitor<Sprite>& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
 
-	bool Insert(Sprite* spr);
-	bool Remove(Sprite* spr);
+	bool Insert(const SprPtr& spr);
+	bool Remove(const SprPtr& spr);
 
 	void Clear();
 
@@ -37,8 +39,8 @@ private:
 	bool m_visible;
 	bool m_editable;
 
-	ObjectVector<Sprite> m_sprs;
-	ObjectVector<Shape> m_shapes;
+	ObjectRefVector<Sprite> m_sprs;
+	ObjectRefVector<Shape> m_shapes;
 
 }; // Group
 

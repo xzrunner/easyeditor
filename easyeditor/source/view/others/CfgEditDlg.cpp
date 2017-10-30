@@ -4,7 +4,7 @@
 namespace ee
 {
 
-CfgEditDlg::CfgEditDlg(wxWindow* parent, const char* name, Sprite* spr)
+CfgEditDlg::CfgEditDlg(wxWindow* parent, const char* name, const SprPtr& spr)
 	: BaseDialog(parent, name)
 	, m_spr(spr)
 {

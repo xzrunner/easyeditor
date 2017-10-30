@@ -3,7 +3,7 @@
 
 #include "Rect.h"
 
-#include <vector>
+#include <cu/cu_stl.h>
 
 #include <stdint.h>
 
@@ -16,12 +16,12 @@ class RegularRectCut
 {
 public:
 	RegularRectCut(const uint8_t* pixels, int w, int h);
-	RegularRectCut(const uint8_t* pixels, int w, int h, const std::vector<Rect>& pre_rects);
+	RegularRectCut(const uint8_t* pixels, int w, int h, const CU_VEC<Rect>& pre_rects);
 	~RegularRectCut();
 
 	void AutoCut();
 	
-	const std::vector<Rect>& GetResult() { return m_result; }
+	const CU_VEC<Rect>& GetResult() { return m_result; }
 
 	// statics
 	int GetLeftArea() const { return m_left_area; }
@@ -42,7 +42,7 @@ private:
 
 	PixelAreaLUT* m_area_array;	// real data
 
-	std::vector<Rect> m_result;
+	CU_VEC<Rect> m_result;
 
 }; // RegularRectCut
 

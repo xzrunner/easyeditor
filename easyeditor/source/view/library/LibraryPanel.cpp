@@ -61,29 +61,29 @@ void LibraryPanel::AddPage(LibraryPage* page, const char* name)
 	if (name != NULL) {
 		m_notebook->AddPage(page, name);
 	} else {
-		m_notebook->AddPage(page, page->GetPageName());
+		m_notebook->AddPage(page, page->GetPageName().c_str());
 	}
 	m_pages.push_back(page);
 }
 
-Symbol* LibraryPanel::GetSymbol(int index/* = -1*/) const
+SymPtr LibraryPanel::GetSymbol(int index/* = -1*/) const
 {
 	if (m_selected)
 		return m_selected->GetSymbol(index);
 	else
-		return NULL;
+		return nullptr;
 }
 
 void LibraryPanel::LoadFromSymbolMgr(const SymbolMgr& mgr)
 {
-	std::vector<Symbol*> syms;
-	mgr.Traverse(FetchAllVisitor<Symbol>(syms));
+	std::vector<SymPtr> syms;
+	mgr.Traverse(FetchAllRefVisitor<Symbol>(syms));
 	for (size_t i = 0, n = syms.size(); i < n; ++i) {
 		LoadSymbol(syms[i]);
 	}
 }
 
-void LibraryPanel::LoadSymbol(Symbol* sym)
+void LibraryPanel::LoadSymbol(const SymPtr& sym)
 {
 	for (size_t j = 0, m = m_pages.size(); j < m; ++j)
 	{
@@ -97,13 +97,13 @@ void LibraryPanel::LoadSymbol(Symbol* sym)
 	}
 }
 
-void LibraryPanel::Traverse(Visitor<ListItem>& visitor) const
+void LibraryPanel::Traverse(RefVisitor<ListItem>& visitor) const
 {
 	if (m_selected)
 		m_selected->Traverse(visitor);
 }
 
-bool LibraryPanel::AddSymbol(Symbol* sym)
+bool LibraryPanel::AddSymbol(const SymPtr& sym)
 {
 	for (int i = 0, n = m_pages.size(); i < n; ++i) 
 	{

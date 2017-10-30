@@ -93,8 +93,8 @@ inline ps_color ColorFromS2(const s2::Color& col)
 void ToolbarPanel::Add(const gum::P2dSymLoader::Component& comp)
 {
 	// todo Release symbol
-	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(comp.filepath);
-	p2d_symbol* pc = m_stage->m_ps->AddSymbol(static_cast<s2::Symbol*>(sym));
+	auto sym = ee::SymbolMgr::Instance()->FetchSymbol(comp.filepath.c_str());
+	p2d_symbol* pc = m_stage->m_ps->AddSymbol(sym.get());
 	ComponentPanel* cp = new ComponentPanel(this, pc, this);
 
 	cp->SetValue(PS_ANGLE, ee::UICallback::Data(comp.angle_start, comp.angle_end));
@@ -485,10 +485,10 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
 	long index;
 	sIndex.ToLong(&index);
 
-	ee::Symbol* sym = m_library->GetSymbol(index);
+	auto sym = m_library->GetSymbol(index);
 	if (sym)
 	{
-		m_toolbar->OnAddChild(wxCommandEvent(), static_cast<s2::Symbol*>(sym));
+		m_toolbar->OnAddChild(wxCommandEvent(), sym.get());
 		m_stage->m_ps->Start();
 	}
 

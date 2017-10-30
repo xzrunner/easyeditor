@@ -96,13 +96,13 @@ void AverageRectCut::RectCutImage(const std::string& src_dir, const std::string&
 	std::string out_img_dir = dst_dir + "\\" + IMAGE_DIR;
 	std::string out_json_dir = dst_dir + "\\" + JSON_DIR;
 
-	ee::ImageData* img = ee::ImageDataMgr::Instance()->GetItem(filepath);		
-	assert(img->GetFormat() == GPF_RGB || img->GetFormat() == GPF_RGBA);
+	auto img = ee::ImageDataMgr::Instance()->GetItem(filepath);		
+	assert(img->GetFormat() == GPF_RGB || img->GetFormat() == GPF_RGBA8);
 	int channels = img->GetFormat() == GPF_RGB ? 3 : 4;
 
 	uint8_t* condense = NULL;
 	pimg::Rect pr;
-	if (img->GetFormat() == GPF_RGBA)
+	if (img->GetFormat() == GPF_RGBA8)
 	{
 		pimg::Condense cd(img->GetPixelData(), img->GetWidth(), img->GetHeight());
 		condense = cd.GetPixels(pr);
@@ -144,11 +144,11 @@ void AverageRectCut::RectCutImage(const std::string& src_dir, const std::string&
 
 			std::string img_name = ee::StringHelper::Format("%s#%d#%d#%d#%d#.png", filename.c_str(), xmin, ymin, w, h);
 			std::string img_out_path = out_img_dir + "\\" + img_name;
-			gimg_export(img_out_path.c_str(), pixels, w, h, GPF_RGBA, true);
+			gimg_export(img_out_path.c_str(), pixels, w, h, GPF_RGBA8, true);
 			delete[] pixels;
 
 			std::string spr_path = std::string(out_img_dir + "\\" + img_name);
-			ee::Sprite* spr = new ee::DummySprite(new ee::DummySymbol(spr_path, w, h));
+			auto& spr = new ee::DummySprite(new ee::DummySymbol(spr_path, w, h));
 			sm::vec2 offset;
 			offset.x = pr.xmin + xmin + w * 0.5f - img->GetWidth() * 0.5f;
 			offset.y = pr.ymin + ymin + h * 0.5f - img->GetHeight() * 0.5f;

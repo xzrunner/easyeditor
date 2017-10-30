@@ -10,27 +10,20 @@
 namespace etext
 {
 
-InputPanel::InputPanel(wxWindow* parent, Sprite* spr,
+InputPanel::InputPanel(wxWindow* parent, const std::shared_ptr<Sprite>& spr,
 					   ee::EditPanelImpl* stage_impl)
 	: wxPanel(parent, wxID_ANY)
+	, m_spr(spr)
 	, m_stage_impl(stage_impl)
 {
-	spr->AddReference();
-	m_spr = spr;
-
 	InitLayout();
-}
-
-InputPanel::~InputPanel()
-{
-	m_spr->RemoveReference();
 }
 
 void InputPanel::InitLayout()
 {
 	wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 	{
-		m_text_ctrl = new wxTextCtrl(this, wxID_ANY, m_spr->GetText(s2::UpdateParams()), 
+		m_text_ctrl = new wxTextCtrl(this, wxID_ANY, m_spr->GetText(s2::UpdateParams()).c_str(), 
 			wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE);
 		sizer->Add(m_text_ctrl, 12, wxEXPAND);
 	}
@@ -51,7 +44,7 @@ void InputPanel::OnEnterPress(wxCommandEvent& event)
 	while (!str.empty() && str[str.size() - 1] == '\n') {
 		str.erase(--str.end());
 	}
-	m_spr->SetText(s2::UpdateParams(), str);
+	m_spr->SetText(s2::UpdateParams(), str.c_str());
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 

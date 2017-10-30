@@ -19,17 +19,16 @@ public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 		ee::LibraryPanel* library);
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		wxGLContext* glctx, ee::Sprite* edited, 
+		wxGLContext* glctx, const ee::SprPtr& edited, 
 		const ee::MultiSpritesImpl* bg_sprites, ee::LibraryPanel* library);
-	virtual ~StagePanel();
 
-	Symbol* GetSymbol() { return m_sym; }
+	auto& GetSymbol() { return m_sym; }
 
 protected:
 	virtual void OnKeyHook(int key_code);
 
 private:
-	Symbol* m_sym;
+	std::shared_ptr<Symbol> m_sym;
 
 }; // StagePanel
 

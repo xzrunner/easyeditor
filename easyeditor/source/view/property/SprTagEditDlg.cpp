@@ -6,7 +6,7 @@
 namespace ee
 {
 
-SprTagEditDlg::SprTagEditDlg(wxWindow* parent, Sprite* spr)
+SprTagEditDlg::SprTagEditDlg(wxWindow* parent, const SprPtr& spr)
 	: CfgEditDlg(parent, "Tag", spr)
 {	
 	m_info.LoadFromString(spr->GetTag());

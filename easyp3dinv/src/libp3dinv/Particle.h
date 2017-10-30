@@ -39,7 +39,7 @@ private:
 	float m_rotate;
 	float m_angle;
 
-	ee::Symbol* m_sym;
+	ee::std::shared_ptr<Symbol> m_sym;
 	float m_start_scale, m_end_scale; 
 
 private:

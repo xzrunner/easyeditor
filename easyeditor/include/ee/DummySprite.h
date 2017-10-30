@@ -13,13 +13,9 @@ class DummySprite : public Sprite
 public:
 	DummySprite(const DummySprite& spr);
 	DummySprite& operator = (const DummySprite& spr);
-	DummySprite(DummySymbol* sym);
+	DummySprite(const s2::SymPtr& sym, uint32_t id = -1);
 
-	/**
-	 *  @interface
-	 *    s2::Sprite
-	 */
-	virtual DummySprite* Clone() const { return new DummySprite(*this); }
+	SPRITE_CLONE_FUNC(DummySprite)
 
 }; // DummySprite
 

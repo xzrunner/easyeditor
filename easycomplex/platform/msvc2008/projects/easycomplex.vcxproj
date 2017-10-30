@@ -15,6 +15,7 @@
     <ProjectGuid>{A166A4B0-7A3C-47DE-87DA-9FD986751525}</ProjectGuid>
     <RootNamespace>easycomplex</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -45,6 +46,7 @@
     <OutDir>..\easycomplex\x86\Debug\</OutDir>
     <IntDir>..\easycomplex\x86\Debug\obj\</IntDir>
     <LinkIncremental>true</LinkIncremental>
+    <TargetName>easycomplex</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\easycomplex\x86\Release\</OutDir>
@@ -54,7 +56,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\polymesh\include;..\..\..\..\easyeditor\include;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easycomplex\src;..\..\..\..\easyscale9\src;..\..\..\..\easyanim\src;..\..\..\..\easyanim2\src;..\..\..\..\easytrail\src;..\..\..\..\easymesh\src;..\..\..\..\easymask\src;..\..\..\..\easyaudio\src;..\..\..\..\coceditor\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easybuilder\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\easyshadow\src;..\..\..\..\easysketch\src;..\..\..\..\easyskeleton\src;..\..\..\..\particle\src;..\..\..\..\easytext\src;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\polymesh\include;..\..\..\..\memmgr\include;..\..\..\..\flatten\include;..\..\..\..\cooking\include;..\..\..\..\ds\src\ds;..\..\..\..\easyeditor\include;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easycomplex\src;..\..\..\..\easyscale9\src;..\..\..\..\easyanim\src;..\..\..\..\easyanim2\src;..\..\..\..\easytrail\src;..\..\..\..\easymesh\src;..\..\..\..\easymask\src;..\..\..\..\easyaudio\src;..\..\..\..\coceditor\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easybuilder\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\easyshadow\src;..\..\..\..\easysketch\src;..\..\..\..\easyskeleton\src;..\..\..\..\particle\src;..\..\..\..\easytext\src;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;_CRT_NO_VA_START_VALIDATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -66,7 +68,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>wxmsw31ud_gl.lib;wxmsw31ud_propgrid.lib;wxmsw31ud_adv.lib;wxmsw31ud_stc.lib;wxmsw31ud_core.lib;wxbase31ud_net.lib;wxbase31ud.lib;wxscintillad.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;comctl32.lib;rpcrt4.lib;glew32s.lib;jsond.lib;freetype250_D.lib;luad.lib;libpngd.lib;cjsond.lib;lzmad.lib;pthreadVC2.lib;assimpd.lib;wsock32.lib;OpenAL32.lib;libmpg123d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>wxmsw31ud_gl.lib;wxmsw31ud_propgrid.lib;wxmsw31ud_adv.lib;wxmsw31ud_stc.lib;wxmsw31ud_core.lib;wxbase31ud_net.lib;wxbase31ud.lib;wxscintillad.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;comctl32.lib;rpcrt4.lib;glew32s.lib;jsond.lib;freetype281d.lib;luad.lib;libpngd.lib;cjsond.lib;lzmad.lib;pthreadVC2.lib;assimpd.lib;wsock32.lib;OpenAL32.lib;libmpg123d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\easycomplex\x86\Debug\easycomplex.exe</OutputFile>
       <AdditionalLibraryDirectories>..\..\..\..\editor-external\wx\lib;..\..\..\..\editor-external\gl\lib;..\..\..\..\editor-external\json\lib;..\..\..\..\editor-external\freetype\lib;..\..\..\..\editor-external\libpng\lib;..\..\..\..\editor-external\intel;..\..\..\..\editor-external\cjson\lib;..\..\..\..\editor-external\lzma\lib;..\..\..\..\editor-external\pthread\lib;..\..\..\..\editor-external\lua\lib;..\..\..\..\editor-external\assimp\lib;..\..\..\..\editor-external\boost\lib;..\..\..\..\editor-external\mpg123\lib;..\..\..\..\editor-external\openal32\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>LIBC.LIB;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -80,7 +82,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\polymesh\include;..\..\..\..\easyeditor\include;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easycomplex\src;..\..\..\..\easyscale9\src;..\..\..\..\easyanim\src;..\..\..\..\easyanim2\src;..\..\..\..\easytrail\src;..\..\..\..\easymesh\src;..\..\..\..\easymask\src;..\..\..\..\easyaudio\src;..\..\..\..\coceditor\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easybuilder\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\easyshadow\src;..\..\..\..\easysketch\src;..\..\..\..\easyskeleton\src;..\..\..\..\particle\src;..\..\..\..\easytext\src;..\..\..\..\sm\src\sm;..\..\..\..\cu\src\cu;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\polymesh\include;..\..\..\..\memmgr\include;..\..\..\..\flatten\include;..\..\..\..\cooking\include;..\..\..\..\ds\src\ds;..\..\..\..\easyeditor\include;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easycomplex\src;..\..\..\..\easyscale9\src;..\..\..\..\easyanim\src;..\..\..\..\easyanim2\src;..\..\..\..\easytrail\src;..\..\..\..\easymesh\src;..\..\..\..\easymask\src;..\..\..\..\easyaudio\src;..\..\..\..\coceditor\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easybuilder\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\easyshadow\src;..\..\..\..\easysketch\src;..\..\..\..\easyskeleton\src;..\..\..\..\particle\src;..\..\..\..\easytext\src;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;_CRT_NO_VA_START_VALIDATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -91,7 +93,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>wxmsw31u_gl.lib;wxmsw31u_propgrid.lib;wxmsw31u_adv.lib;wxmsw31u_stc.lib;wxmsw31u_core.lib;wxbase31u_net.lib;wxbase31u.lib;wxscintilla.lib;wxtiff.lib;wxjpeg.lib;wxpng.lib;wxzlib.lib;comctl32.lib;rpcrt4.lib;glew32s.lib;json.lib;freetype250.lib;lua.lib;libpng.lib;cjson.lib;lzma.lib;pthreadVC2.lib;assimp.lib;wsock32.lib;OpenAL32.lib;libmpg123.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>wxmsw31u_gl.lib;wxmsw31u_propgrid.lib;wxmsw31u_adv.lib;wxmsw31u_stc.lib;wxmsw31u_core.lib;wxbase31u_net.lib;wxbase31u.lib;wxscintilla.lib;wxtiff.lib;wxjpeg.lib;wxpng.lib;wxzlib.lib;comctl32.lib;rpcrt4.lib;glew32s.lib;json.lib;freetype281.lib;lua.lib;libpng.lib;cjson.lib;lzma.lib;pthreadVC2.lib;assimp.lib;wsock32.lib;OpenAL32.lib;libmpg123.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\easycomplex\x86\Release\easycomplex.exe</OutputFile>
       <AdditionalLibraryDirectories>..\..\..\..\editor-external\wx\lib;..\..\..\..\editor-external\gl\lib;..\..\..\..\editor-external\json\lib;..\..\..\..\editor-external\freetype\lib;..\..\..\..\editor-external\libpng\lib;..\..\..\..\editor-external\intel;..\..\..\..\editor-external\cjson\lib;..\..\..\..\editor-external\lzma\lib;..\..\..\..\editor-external\pthread\lib;..\..\..\..\editor-external\lua\lib;..\..\..\..\editor-external\assimp\lib;..\..\..\..\editor-external\boost\lib;..\..\..\..\editor-external\mpg123\lib;..\..\..\..\editor-external\openal32\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>LIBC.LIB;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -132,7 +134,6 @@
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\coceditor\platform\msvc2008\projects\libcoco.vcxproj">
       <Project>{1c3b5344-2217-44f5-b5f0-a551b7b5ab38}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\cooking\platform\msvc2008\projects\cooking.vcxproj">
       <Project>{4eee80e8-662f-4ec2-a19b-68b1d7f8c46f}</Project>
@@ -226,10 +227,6 @@
       <Project>{e5b2631f-c25d-4253-a9cb-a57ef357b004}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\easyshadow\platform\msvc2008\projects\libshadow.vcxproj">
-      <Project>{c839a952-9f01-48d5-9649-bcae9aa758f8}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\..\easyshape\platform\msvc2008\projects\libshape.vcxproj">
       <Project>{c1a2e85c-cf62-46a9-b46c-dfa12ec725e7}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
@@ -240,10 +237,6 @@
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\easysprpacker\platform\msvc2008\projects\libsprpacker.vcxproj">
       <Project>{0adaef1c-2094-4a6f-84e9-3ca0684b7824}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\easyterrain2d\platform\msvc2008\projects\libterrain2d.vcxproj">
-      <Project>{716758a5-f6cf-4294-88b2-29c9950304af}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\easytexpacker\platform\msvc2008\projects\libtexpacker.vcxproj">
       <Project>{e66ecf2b-05f4-42cc-91b2-b6f8604ca1a8}</Project>
@@ -283,6 +276,9 @@
     <ProjectReference Include="..\..\..\..\logger\platform\msvc2008\projects\logger.vcxproj">
       <Project>{4031b66e-39a3-401e-918a-e1424a4af944}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\memmgr\platform\msvc2008\projects\memmgr.vcxproj">
+      <Project>{5ffa0de4-1489-4267-8a79-52decc2d0351}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\mtrail\platform\msvc2008\projects\mtrail.vcxproj">
       <Project>{a9854fd8-f2e4-4b5a-8c15-d3c661dd4def}</Project>

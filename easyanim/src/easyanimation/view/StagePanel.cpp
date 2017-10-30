@@ -67,7 +67,7 @@ bool StagePanel::UpdateStage()
 	return dirty;
 }
 
-void StagePanel::TraverseSprites(ee::Visitor<ee::Sprite>& visitor, 
+void StagePanel::TraverseSprites(ee::RefVisitor<ee::Sprite>& visitor, 
 								 ee::DataTraverseType type/* = ee::e_allExisting*/,
 								 bool order/* = true*/) const
 {
@@ -85,7 +85,7 @@ void StagePanel::TraverseSprites(ee::Visitor<ee::Sprite>& visitor,
 		{
 			for (int i = 0, n = frame->Size(); i < n; ++i) {
 				bool next;
-				visitor.Visit(const_cast<ee::Sprite*>(frame->GetSprite(i)), next);
+				visitor.Visit(const_cast<ee::SprPtr>(frame->GetSprite(i)), next);
 				if (!next) break;
 			}
 		}
@@ -93,7 +93,7 @@ void StagePanel::TraverseSprites(ee::Visitor<ee::Sprite>& visitor,
 		{
 			for (int i = frame->Size() - 1; i >= 0; --i) {
 				bool next;
-				visitor.Visit(const_cast<ee::Sprite*>(frame->GetSprite(i)), next);
+				visitor.Visit(const_cast<ee::SprPtr>(frame->GetSprite(i)), next);
 				if (!next) break;
 			}
 		}
@@ -124,7 +124,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 		break;
 	case ee::MSG_SORT_SPRITES:
 		{
-			std::vector<ee::Sprite*>& sprs = *(std::vector<ee::Sprite*>*)ud;
+			std::vector<ee::SprPtr>& sprs = *(std::vector<ee::SprPtr>*)ud;
 			if (m_frame) {
 				m_frame->Sort(sprs);
 			}
@@ -137,7 +137,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 		}
 		break;
 	case ee::MSG_REMOVE_SPRITE:
-		Remove((ee::Sprite*)ud);
+		Remove(*(ee::SprPtr*)ud);
 		break;
 	case ee::MSG_CLEAR_SPRITE:
 		{
@@ -201,21 +201,21 @@ void StagePanel::OnMenuDelJointNode(wxCommandEvent& event)
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void StagePanel::Reorder(ee::Sprite* spr, bool up)
+void StagePanel::Reorder(const ee::SprPtr& spr, bool up)
 {
 	if (m_frame && m_frame->Reorder(spr, up)) {
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
-void StagePanel::ReorderMost(ee::Sprite* spr, bool up)
+void StagePanel::ReorderMost(const ee::SprPtr& spr, bool up)
 {
 	if (m_frame && m_frame->ReorderMost(spr, up)) {
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
-void StagePanel::Insert(ee::Sprite* spr, int idx)
+void StagePanel::Insert(const ee::SprPtr& spr, int idx)
 {
 	if (spr->GetUserData()) {
 		InsertWithUD(spr, idx);
@@ -225,14 +225,14 @@ void StagePanel::Insert(ee::Sprite* spr, int idx)
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void StagePanel::Remove(ee::Sprite* spr)
+void StagePanel::Remove(const ee::SprPtr& spr)
 {
 	if (m_frame && m_frame->Remove(spr)) {
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
-void StagePanel::InsertWithUD(ee::Sprite* spr, int idx)
+void StagePanel::InsertWithUD(const ee::SprPtr& spr, int idx)
 {
 	SpriteUserData* ud = (SpriteUserData*)spr->GetUserData();
 	assert(ud);
@@ -259,7 +259,7 @@ void StagePanel::InsertWithUD(ee::Sprite* spr, int idx)
 	}
 }
 
-void StagePanel::InsertWithoutUD(ee::Sprite* spr, int idx)
+void StagePanel::InsertWithoutUD(const ee::SprPtr& spr, int idx)
 {
 	if (m_frame) {
 		m_frame->Insert(spr, idx);
@@ -276,7 +276,7 @@ CheckUpdateVisitor()
 {}
 
 void StagePanel::CheckUpdateVisitor::
-Visit(ee::Sprite* spr, bool& next)
+Visit(const ee::SprPtr& spr, bool& next)
 {
 	if (spr->Update(s2::UpdateParams())) {
 		m_update = true;

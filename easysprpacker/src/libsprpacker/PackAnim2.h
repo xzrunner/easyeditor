@@ -5,8 +5,10 @@
 
 #include <SM_Vector.h>
 #include <rigging.h>
+#include <cu/cu_stl.h>
 
 #include <vector>
+#include <memory>
 
 namespace libanim2 { class Symbol; }
 
@@ -20,7 +22,7 @@ namespace esprpacker
 class PackAnim2 : public PackNode
 {
 public:
-	PackAnim2(const libanim2::Symbol* sym);
+	PackAnim2(const std::shared_ptr<libanim2::Symbol>& sym);
 
 	/**
 	 *  @interface
@@ -38,7 +40,7 @@ public:
 	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const;	
 
 private:
-	void Init(const libanim2::Symbol* sym);
+	void Init(const std::shared_ptr<libanim2::Symbol>& sym);
 	void InitSkeleton(const rg_skeleton* sk);
 	void InitTimeline(const rg_timeline* tl);
 	
@@ -152,7 +154,7 @@ private:
 	{
 		uint16_t time;
 		uint16_t offset;
-		std::vector<sm::vec2> data;
+		CU_VEC<sm::vec2> data;
 
 		void PackToLuaString(ebuilder::CodeGenerator& gen) const;
 		int SizeOfPackToBin() const;

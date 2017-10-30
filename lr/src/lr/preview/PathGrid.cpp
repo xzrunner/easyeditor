@@ -3,7 +3,7 @@
 #include <ee/Sprite.h>
 #include <ee/color_config.h>
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <sprite2/BoundingBox.h>
 #include <SM_Test.h>
 #include <SM_Calc.h>
@@ -18,7 +18,7 @@ PathGrid::PathGrid(const sm::rect& region, int row, int col)
 {
 }
 
-void PathGrid::DisableRegion(const ee::Sprite* spr, bool disable)
+void PathGrid::DisableRegion(const ee::SprConstPtr& spr, bool disable)
 {
 	m_nw.SetStatus(spr->GetBounding()->GetSize(), !disable);
 }

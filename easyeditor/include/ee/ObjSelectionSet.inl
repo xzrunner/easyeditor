@@ -21,7 +21,7 @@ inline void ObjSelectionSet<T>::Clear()
 }
 
 template<class T>
-inline void ObjSelectionSet<T>::Add(T* item)
+inline void ObjSelectionSet<T>::Add(const std::shared_ptr<T>& item)
 {
 	if (item) {
 		item->AddReference();
@@ -30,7 +30,7 @@ inline void ObjSelectionSet<T>::Add(T* item)
 }
 
 template<class T>
-inline void ObjSelectionSet<T>::Remove(T* item)
+inline void ObjSelectionSet<T>::Remove(const std::shared_ptr<T>& item)
 {
 	if (item) {
 		item->RemoveReference();

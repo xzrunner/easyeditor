@@ -7,7 +7,7 @@
 #include <SM_Calc.h>
 #include <polymesh/PointsMesh.h>
 #include <polymesh/MeshTransform.h>
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <gum/JsonSerializer.h>
 #include <gum/MeshIO.h>
 
@@ -22,7 +22,7 @@ PointsMesh::PointsMesh()
 	m_closed = true;
 }
 
-PointsMesh::PointsMesh(const ee::Symbol* base)
+PointsMesh::PointsMesh(const ee::SymPtr& base)
 	: Mesh(base)
 {
 	m_closed = true;
@@ -30,11 +30,7 @@ PointsMesh::PointsMesh(const ee::Symbol* base)
 
 void PointsMesh::Load(const Json::Value& value)
 {
-	if (m_mesh) {
-		delete m_mesh;
-	}
-
-	std::vector<sm::vec2> outline, points;
+	CU_VEC<sm::vec2> outline, points;
 	gum::JsonSerializer::Load(value["shape"]["outline"], outline);
 	if (value["shape"].isMember("inner")) {
 		gum::JsonSerializer::Load(value["shape"]["inner"], points);
@@ -42,7 +38,7 @@ void PointsMesh::Load(const Json::Value& value)
 		gum::JsonSerializer::Load(value["shape"]["points"], points);
 	}
 
-	m_mesh = new pm::PointsMesh(outline, points, GetWidth(), GetHeight());
+	m_mesh = std::make_unique<pm::PointsMesh>(outline, points, GetWidth(), GetHeight());
 
 	pm::MeshTransform trans;
 	gum::MeshIO::Load(value, trans, *this);
@@ -61,7 +57,7 @@ void PointsMesh::Store(Json::Value& value) const
 	value["type"] = "points";
 
 	assert(m_mesh->Type() == pm::MESH_POINTS);
-	const pm::PointsMesh* points_mesh = static_cast<const pm::PointsMesh*>(m_mesh);
+	auto points_mesh = static_cast<const pm::PointsMesh*>(m_mesh.get());
 	gum::JsonSerializer::Store(points_mesh->GetOutline(), value["shape"]["outline"]);
 	gum::JsonSerializer::Store(points_mesh->GetPoints(), value["shape"]["points"]);
 
@@ -98,16 +94,16 @@ bool PointsMesh::InsertMesh(ee::Shape* mesh)
 	}
 	UpdateBounding();	
 	
-	std::vector<sm::vec2> points;
+	CU_VEC<sm::vec2> points;
 	if (m_mesh)
 	{
 		assert(m_mesh->Type() == pm::MESH_POINTS);
-		pm::PointsMesh* points_mesh = static_cast<pm::PointsMesh*>(m_mesh);	
+		auto points_mesh = static_cast<pm::PointsMesh*>(m_mesh.get());	
 		points_mesh->Build(m_vertices, points);
 	}
 	else
 	{
-		m_mesh = new pm::PointsMesh(m_vertices, points, GetWidth(), GetHeight());
+		m_mesh = std::make_unique<pm::PointsMesh>(m_vertices, points, GetWidth(), GetHeight());
 	}
 
 	return true;
@@ -120,7 +116,7 @@ void PointsMesh::Reset()
 	}
 
 	assert(m_mesh->Type() == pm::MESH_POINTS);
-	pm::PointsMesh* points_mesh = static_cast<pm::PointsMesh*>(m_mesh);
+	auto points_mesh = static_cast<pm::PointsMesh*>(m_mesh.get());
 	points_mesh->Build(points_mesh->GetOutline(), points_mesh->GetPoints());
 }
 
@@ -131,7 +127,7 @@ void PointsMesh::Clear()
 	}
 
 	assert(m_mesh->Type() == pm::MESH_POINTS);
-	pm::PointsMesh* points_mesh = static_cast<pm::PointsMesh*>(m_mesh);
+	auto points_mesh = static_cast<pm::PointsMesh*>(m_mesh.get());
 	points_mesh->Clear();
 }
 
@@ -170,7 +166,7 @@ void PointsMesh::ChangeVertex(const sm::vec2& from, const sm::vec2& to)
 	UpdateMeshFromShape();
 }
 
-void PointsMesh::SetVertices(const std::vector<sm::vec2>& vertices)
+void PointsMesh::SetVertices(const CU_VEC<sm::vec2>& vertices)
 {
 	m_vertices = vertices;
 	UpdateMeshFromShape();
@@ -179,8 +175,8 @@ void PointsMesh::SetVertices(const std::vector<sm::vec2>& vertices)
 
 int PointsMesh::PointQueryVertex(const sm::vec2& p) const
 {
-	std::vector<sm::vec2> vertices, texcoords;
-	std::vector<int> triangles;
+	CU_VEC<sm::vec2> vertices, texcoords;
+	CU_VEC<int> triangles;
 	m_mesh->Dump(vertices, texcoords, triangles);
 	
 	int ret = -1;
@@ -198,8 +194,8 @@ int PointsMesh::PointQueryVertex(const sm::vec2& p) const
 
 void PointsMesh::RectQueryVertices(const sm::rect& r, std::vector<int>& out_vertices) const
 {
-	std::vector<sm::vec2> vertices, texcoords;
-	std::vector<int> triangles;
+	CU_VEC<sm::vec2> vertices, texcoords;
+	CU_VEC<int> triangles;
 	m_mesh->Dump(vertices, texcoords, triangles);
 
 	for (int i = 0, n = vertices.size(); i < n; ++i) {
@@ -216,8 +212,8 @@ int PointsMesh::QueryInnerPos(const sm::vec2& pos) const
 	}
 
 	assert(m_mesh->Type() == pm::MESH_POINTS);
-	pm::PointsMesh* points_mesh = static_cast<pm::PointsMesh*>(m_mesh);	
-	const std::vector<sm::vec2>& points = points_mesh->GetPoints();
+	auto points_mesh = static_cast<pm::PointsMesh*>(m_mesh.get());	
+	auto& points = points_mesh->GetPoints();
 	for (int i = 0, n = points.size(); i < n; ++i) {
 		if (sm::dis_pos_to_pos(points[i], pos) < GetNodeRadius()) {
 			return i;
@@ -233,9 +229,9 @@ bool PointsMesh::InsertInnerPos(const sm::vec2& pos)
 	}
 
 	assert(m_mesh->Type() == pm::MESH_POINTS);
-	pm::PointsMesh* points_mesh = static_cast<pm::PointsMesh*>(m_mesh);	
+	auto points_mesh = static_cast<pm::PointsMesh*>(m_mesh.get());
 
-	const std::vector<sm::vec2>& outline = points_mesh->GetOutline();
+	auto& outline = points_mesh->GetOutline();
 	for (int i = 0, n = outline.size(); i < n; ++i) {
 		if (sm::dis_pos_to_pos(outline[i], pos) < GetNodeRadius()) {
 			return false;
@@ -245,7 +241,7 @@ bool PointsMesh::InsertInnerPos(const sm::vec2& pos)
 		return false;
 	}
 
-	std::vector<sm::vec2> points = points_mesh->GetPoints();
+	auto points = points_mesh->GetPoints();
 	points.push_back(pos);
 	points_mesh->Build(outline, points);
 
@@ -259,16 +255,16 @@ bool PointsMesh::RemoveInnerPos(const sm::vec2& pos)
 	}
 
 	assert(m_mesh->Type() == pm::MESH_POINTS);
-	pm::PointsMesh* points_mesh = static_cast<pm::PointsMesh*>(m_mesh);	
+	auto points_mesh = static_cast<pm::PointsMesh*>(m_mesh.get());	
 
-	std::vector<sm::vec2> points = points_mesh->GetPoints();
+	auto points = points_mesh->GetPoints();
 	for (int i = 0, n = points.size(); i < n; ++i) 
 	{
 		const sm::vec2& p = points[i];
 		if (sm::dis_pos_to_pos(p, pos) < GetNodeRadius()) 
 		{
 			points.erase(points.begin() + i);
-			const std::vector<sm::vec2>& outline = points_mesh->GetOutline();
+			auto& outline = points_mesh->GetOutline();
 			points_mesh->Build(outline, points);
 			return true;
 		}
@@ -284,26 +280,26 @@ bool PointsMesh::MoveInnerPos(int idx, const sm::vec2& pos)
 	}
 
 	assert(m_mesh->Type() == pm::MESH_POINTS);
-	pm::PointsMesh* points_mesh = static_cast<pm::PointsMesh*>(m_mesh);	
+	auto points_mesh = static_cast<pm::PointsMesh*>(m_mesh.get());	
 	if (idx < 0 || idx >= points_mesh->GetPoints().size()) {
 		return false;
 	}
 
-	std::vector<sm::vec2> points = points_mesh->GetPoints();
+	auto points = points_mesh->GetPoints();
 	points[idx] = pos;
 	points_mesh->Build(points_mesh->GetOutline(), points);
 
 	return true;
 }
 
-void PointsMesh::GetInnerPoints(std::vector<sm::vec2>& points) const
+void PointsMesh::GetInnerPoints(CU_VEC<sm::vec2>& points) const
 {
 	if (!m_mesh) {
 		return;
 	}
 
 	assert(m_mesh->Type() == pm::MESH_POINTS);
-	pm::PointsMesh* points_mesh = static_cast<pm::PointsMesh*>(m_mesh);	
+	auto points_mesh = static_cast<pm::PointsMesh*>(m_mesh.get());
 	points = points_mesh->GetPoints();
 }
 
@@ -314,7 +310,7 @@ void PointsMesh::UpdateMeshFromShape()
 	}
 
 	assert(m_mesh->Type() == pm::MESH_POINTS);
-	pm::PointsMesh* points_mesh = static_cast<pm::PointsMesh*>(m_mesh);
+	auto points_mesh = static_cast<pm::PointsMesh*>(m_mesh.get());
 	points_mesh->Build(m_vertices, points_mesh->GetPoints());
 }
 

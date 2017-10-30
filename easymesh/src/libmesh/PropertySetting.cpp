@@ -8,7 +8,7 @@
 namespace emesh
 {
 
-PropertySetting::PropertySetting(ee::EditPanelImpl* edit_impl, Sprite* spr)
+PropertySetting::PropertySetting(ee::EditPanelImpl* edit_impl, const std::shared_ptr<Sprite>& spr)
 	: ee::SpritePropertySetting(edit_impl, spr)
 {
 	m_type = "Mesh";
@@ -18,7 +18,7 @@ void PropertySetting::OnPropertyGridChange(const std::string& name, const wxAny&
 {
 	ee::SpritePropertySetting::OnPropertyGridChange(name, value);
 
-	Sprite* spr = static_cast<Sprite*>(GetSprite());
+	auto spr = std::dynamic_pointer_cast<Sprite>(GetSprite());
 	if (name == "OnlyDrawBound")
 	{
 		spr->SetOnlyDrawBound(wxANY_AS(value, bool));
@@ -30,7 +30,7 @@ void PropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
 	ee::SpritePropertySetting::UpdateProperties(pg);
 
- 	Sprite* spr = static_cast<Sprite*>(GetSprite());
+ 	auto spr = std::dynamic_pointer_cast<Sprite>(GetSprite());
 // 	m_lsn->ChangeSpr(spr);
 
 //	pg->GetProperty("MeshSymbol")->SetValue(spr->GetSymbol()->GetFilepath());
@@ -44,9 +44,9 @@ void PropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	pg->Append(new wxPropertyCategory("MESH", wxPG_LABEL));
 
-	Sprite* spr = static_cast<Sprite*>(GetSprite());
+	auto spr = std::dynamic_pointer_cast<Sprite>(GetSprite());
 	ee::OpenSymbolProperty* prop = new ee::OpenSymbolProperty("MeshSymbol", "", 
-		dynamic_cast<const ee::Symbol*>(spr->GetBaseSym())->GetFilepath());
+		std::dynamic_pointer_cast<const ee::Symbol>(spr->GetBaseSym())->GetFilepath());
 	OpenSymbolMonitor* lsn = new OpenSymbolMonitor(spr);
 	prop->SetListener(lsn);
 	lsn->RemoveReference();
@@ -60,7 +60,7 @@ void PropertySetting::InitProperties(wxPropertyGrid* pg)
 /* class PropertySetting::OpenSymbolMonitor                             */
 /************************************************************************/
 
-void PropertySetting::OpenSymbolMonitor::OnOpenSymbol(ee::Symbol* sym)
+void PropertySetting::OpenSymbolMonitor::OnOpenSymbol(const ee::SymPtr& sym)
 {
 	m_spr->SetBaseSym(sym);
 }

@@ -105,14 +105,14 @@ void EditPolylinesCMPT::OnUpdateFromSimplified(wxCommandEvent& event)
 
 void EditPolylinesCMPT::OnMergeTwoChain(wxCommandEvent& event)
 {
-	std::vector<ee::Shape*> shapes;
-	m_shapes_impl->GetShapeSelection()->Traverse(ee::FetchAllVisitor<ee::Shape>(shapes));
+	std::vector<ee::ShapePtr> shapes;
+	m_shapes_impl->GetShapeSelection()->Traverse(ee::FetchAllRefVisitor<ee::Shape>(shapes));
 	if (shapes.size() == 2)
 	{
-		ChainShape *chain0 = static_cast<ChainShape*>(shapes[0]),
-			       *chain1 = static_cast<ChainShape*>(shapes[1]);
+		auto chain0 = std::dynamic_pointer_cast<ChainShape>(shapes[0]);
+		auto chain1 = std::dynamic_pointer_cast<ChainShape>(shapes[1]);
 
-		std::vector<sm::vec2> merged;
+		CU_VEC<sm::vec2> merged;
 		Math::mergeTwoChains(*chain0, *chain1, merged);
 
 		chain0->SetVertices(merged);
@@ -129,14 +129,14 @@ void EditPolylinesCMPT::OnMergeTwoChain(wxCommandEvent& event)
 
 void EditPolylinesCMPT::OnTranslate(wxCommandEvent& event)
 {
-	std::vector<ee::Shape*> shapes;
-	m_shapes_impl->GetShapeSelection()->Traverse(ee::FetchAllVisitor<ee::Shape>(shapes));
+	std::vector<ee::ShapePtr> shapes;
+	m_shapes_impl->GetShapeSelection()->Traverse(ee::FetchAllRefVisitor<ee::Shape>(shapes));
 
 	float leftmost = FLT_MAX;
-	std::vector<EditedPolyShape*> polylines;
+	CU_VEC<std::shared_ptr<EditedPolyShape>> polylines;
 	for (int i = 0, n = shapes.size(); i < n; ++i)
 	{
-		EditedPolyShape* polyline = dynamic_cast<EditedPolyShape*>(shapes[i]);
+		auto polyline = std::dynamic_pointer_cast<EditedPolyShape>(shapes[i]);
 		if (polyline) 
 		{
 			polylines.push_back(polyline);

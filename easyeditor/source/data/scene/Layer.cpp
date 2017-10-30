@@ -25,7 +25,7 @@ Layer::~Layer()
 	Clear();
 }
 
-void Layer::TraverseSprite(Visitor<Sprite>& visitor, DataTraverseType type, bool order) const
+void Layer::TraverseSprite(RefVisitor<Sprite>& visitor, DataTraverseType type, bool order) const
 {
 	if (type == DT_EDITABLE && editable ||
 		type == DT_VISIBLE && visible ||
@@ -35,7 +35,7 @@ void Layer::TraverseSprite(Visitor<Sprite>& visitor, DataTraverseType type, bool
 	}
 }
 
-bool Layer::Insert(Sprite* spr)
+bool Layer::Insert(const SprPtr& spr)
 {
 	if (m_sprs.IsExist(spr)) {
 		return false;
@@ -44,17 +44,17 @@ bool Layer::Insert(Sprite* spr)
 	}
 }
 
-bool Layer::Remove(Sprite* spr)
+bool Layer::Remove(const SprPtr& spr)
 {
 	return m_sprs.Remove(spr);
 }
 
-void Layer::TraverseShape(Visitor<Shape>& visitor, bool order) const
+void Layer::TraverseShape(RefVisitor<Shape>& visitor, bool order) const
 {
 	m_shapes.Traverse(visitor, order);
 }
 
-bool Layer::Insert(Shape* shape)
+bool Layer::Insert(const ShapePtr& shape)
 {
 	if (m_shapes.IsExist(shape)) {
 		return false;
@@ -63,14 +63,14 @@ bool Layer::Insert(Shape* shape)
 	}
 }
 
-bool Layer::Remove(Shape* shape)
+bool Layer::Remove(const ShapePtr& shape)
 {
 	return m_shapes.Remove(shape);
 }
 
 void Layer::LoadFromFile(const Json::Value& val, const std::string& dir)
 {
-	name = val["name"].asString();
+	name = val["name"].asString().c_str();
 	visible = val["visible"].asBool();
 	editable = val["editable"].asBool();
 
@@ -78,18 +78,16 @@ void Layer::LoadFromFile(const Json::Value& val, const std::string& dir)
 	Json::Value spr_val = val["sprite"][i++];
 	while (!spr_val.isNull()) {
 		std::string filepath = SymbolSearcher::GetSymbolPath(dir, spr_val);
-		Symbol* sym = SymbolMgr::Instance()->FetchSymbol(filepath);
+		auto sym = SymbolMgr::Instance()->FetchSymbol(filepath);
 		if (!sym) {
 			std::string filepath = spr_val["filepath"].asString();
 			throw Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", dir.c_str(), filepath.c_str());
 		}
-		SymbolSearcher::SetSymbolFilepaths(dir, sym, spr_val);
+		SymbolSearcher::SetSymbolFilepaths(dir, *sym, spr_val);
 
-		Sprite* spr = SpriteFactory::Instance()->CreateRoot(sym);
+		const SprPtr& spr = SpriteFactory::Instance()->CreateRoot(sym);
 		spr->Load(spr_val);
 		m_sprs.Insert(spr);
-
-		sym->RemoveReference();
 
 		spr_val = val["sprite"][i++];
 	}
@@ -97,7 +95,7 @@ void Layer::LoadFromFile(const Json::Value& val, const std::string& dir)
 // 	i = 0;
 // 	Json::Value shape_val = val["shape"][i++];
 // 	while (!shape_val.isNull()) {
-// 		Shape* shape = eshape::ShapeFactory::CreateShapeFromFile(shape_val, dir);
+// 		const ShapePtr& shape = eshape::ShapeFactory::CreateShapeFromFile(shape_val, dir);
 // 		m_shapes.Insert(shape);
 // 		shape->RemoveReference();
 // 
@@ -107,27 +105,27 @@ void Layer::LoadFromFile(const Json::Value& val, const std::string& dir)
 
 void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
 {
-	val["name"] = name;
+	val["name"] = name.c_str();
 	val["visible"] = visible;
 	val["editable"] = editable;
 
-	std::vector<Sprite*> sprs;
-	m_sprs.Traverse(FetchAllVisitor<Sprite>(sprs), true);
+	std::vector<SprPtr> sprs;
+	m_sprs.Traverse(FetchAllRefVisitor<Sprite>(sprs), true);
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
-		Sprite* spr = sprs[i];
+		const SprPtr& spr = sprs[i];
 
 		Json::Value spr_val;
 		spr_val["filepath"] = SymbolPath::GetRelativePath(
-			dynamic_cast<ee::Symbol*>(spr->GetSymbol()), dir);
+			*std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol()), dir).c_str();
 		spr->Store(spr_val);
 
 		val["sprite"][i] = spr_val;
 	}
 
-	std::vector<Shape*> shapes;
-	m_shapes.Traverse(FetchAllVisitor<Shape>(shapes), true);
+	std::vector<ShapePtr> shapes;
+	m_shapes.Traverse(FetchAllRefVisitor<Shape>(shapes), true);
 	for (int i = 0, n = shapes.size(); i < n; ++i) {
-		Shape* shape = shapes[i];
+		const ShapePtr& shape = shapes[i];
 		Json::Value shape_val;
 		shape->StoreToFile(shape_val, dir);
 		val["shape"][i] = shape_val;

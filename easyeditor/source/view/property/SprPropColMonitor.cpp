@@ -3,13 +3,13 @@
 #include "StageCanvas.h"
 #include "panel_msg.h"
 
-#include <sprite2/S2_Sprite.h>
+#include <sprite2/Sprite.h>
 #include <sprite2/RenderColor.h>
 
 namespace ee
 {
 
-SprPropColMonitor::SprPropColMonitor(s2::Sprite* spr, ColType type)
+SprPropColMonitor::SprPropColMonitor(const SprPtr& spr, ColType type)
 	: m_spr(spr)
 	, m_type(type)
 {

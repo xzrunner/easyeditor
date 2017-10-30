@@ -50,7 +50,7 @@ void FileIO::Load(const char* filename, ee::LibraryPanel* library,
  	int i = 0;
  	Json::Value spriteValue = value["sprite"][i++];
  	while (!spriteValue.isNull()) {
-		ee::Sprite* spr = Load(spriteValue, dir);
+		auto& spr = Load(spriteValue, dir);
 		if (need_offset) {
 			spr->Translate(sm::vec2(-150, -150));
 		}
@@ -79,8 +79,8 @@ void FileIO::Store(const char* filename, StagePanel* stage,
 	value["width"] = toolbar->getWidth();
 	value["height"] = toolbar->getHeight();
 
- 	std::vector<ee::Sprite*> sprs;
-	stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+ 	std::vector<ee::SprPtr> sprs;
+	stage->TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 
 	std::string dir = ee::FileHelper::GetFileDir(filename);
 	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
@@ -92,7 +92,7 @@ void FileIO::Store(const char* filename, StagePanel* stage,
 // 	int idx = 0;
 // 	for (int i = 0; i < 3; ++i) {
 // 		for (int j = 0; j < 3; ++j) {
-// 			ee::Sprite* spr = s_data.GetSprite(i, j);
+// 			auto& spr = s_data.GetSprite(i, j);
 // 			if (spr) {
 // 				value["sprite new"][idx++] = StoreNew(spr, dir);
 // 			} else {
@@ -110,7 +110,7 @@ void FileIO::Store(const char* filename, StagePanel* stage,
 	fout.close();
 }
 
-ee::Sprite* FileIO::Load(const Json::Value& value, const std::string& dir)
+ee::SprPtr FileIO::Load(const Json::Value& value, const std::string& dir)
 {
 	std::string filepath = ee::SymbolSearcher::GetSymbolPath(dir, value);
 	if (!ee::FileHelper::IsFileExist(filepath)) {
@@ -119,19 +119,18 @@ ee::Sprite* FileIO::Load(const Json::Value& value, const std::string& dir)
 			dir.c_str(), filepath.c_str());
 	}
 
-	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+	auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	ee::SymbolSearcher::SetSymbolFilepaths(dir, sym, value);
-	ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+	auto spr = ee::SpriteFactory::Instance()->Create(sym);
 	spr->Load(value);
-	sym->RemoveReference();
 
 	return spr;
 }
 
-Json::Value FileIO::Store(ee::Sprite* spr, const std::string& dir)
+Json::Value FileIO::Store(const ee::SprPtr& spr, const std::string& dir)
 {
 	Json::Value value;
-	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());
+	const auto sym = std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol());
 
 	// filepath
 	value["filepath"] = ee::SymbolPath::GetRelativePath(sym, dir);
@@ -147,10 +146,10 @@ Json::Value FileIO::Store(ee::Sprite* spr, const std::string& dir)
 	return value;
 }
 
-Json::Value FileIO::StoreNew(ee::Sprite* spr, const std::string& dir)
+Json::Value FileIO::StoreNew(const ee::SprPtr& spr, const std::string& dir)
 {
 	Json::Value value;
-	const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(spr->GetSymbol());
+	const auto sym = std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol());
 
 	// filepath
 	value["filepath"] = ee::SymbolPath::GetRelativePath(sym, dir);

@@ -8,19 +8,19 @@
 #include <easybuilder.h>
 namespace lua = ebuilder::lua;
 
-#include <bimp/bimp_typedef.h>
+#include <bimp/typedef.h>
 #include <simp/NodeMeshSpr.h>
 #include <simp/simp_types.h>
 
 namespace esprpacker
 {
 
-PackMeshSpr::PackMeshSpr(const emesh::Sprite* spr)
+PackMeshSpr::PackMeshSpr(const std::shared_ptr<emesh::Sprite>& spr)
 {
 	m_mesh = PackNodeFactory::Instance()->Create(
-		dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
+		std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol()));
 	m_base = PackNodeFactory::Instance()->Create(
-		dynamic_cast<const ee::Symbol*>(spr->GetBaseSym()));
+		std::dynamic_pointer_cast<const ee::Symbol>(spr->GetBaseSym()));
 
 	//////////////////////////////////////////////////////////////////////////
 
@@ -142,16 +142,15 @@ void PackMeshSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 	}
 }
 
-bool PackMeshSpr::Equal(const emesh::Sprite* spr) const
+bool PackMeshSpr::Equal(const std::shared_ptr<emesh::Sprite>& spr) const
 {
 	const PackNode* base = PackNodeFactory::Instance()->Create(
-		dynamic_cast<const ee::Symbol*>(spr->GetBaseSym()));
+		std::dynamic_pointer_cast<const ee::Symbol>(spr->GetBaseSym()));
 	if (m_base != base) {
 		return false;
 	}
 
-	const std::vector<std::pair<int, sm::vec2> >& trans 
-		= spr->GetMeshTrans().GetTrans();
+	auto& trans = spr->GetMeshTrans().GetTrans();
 	if (m_transform.size() != trans.size()) {
 		return false;
 	}

@@ -2,6 +2,7 @@
 #define _EASYEDITOR_EDITABLE_SPRITE_AOP_H_
 
 #include "AtomicOP.h"
+#include "Sprite.h"
 
 namespace ee
 {
@@ -9,17 +10,16 @@ namespace ee
 class EditableSpriteAOP : public AtomicOP
 {
 public:
-	EditableSpriteAOP(const std::vector<Sprite*>& sprs);
-	virtual ~EditableSpriteAOP();
+	EditableSpriteAOP(const std::vector<SprPtr>& sprs);
 
 	virtual void Undo();
 	virtual void Redo();
-	virtual void Copy(const std::vector<Sprite*>& sprs);
+	virtual void Copy(const std::vector<SprPtr>& sprs);
 
-	virtual Json::Value Store(const std::vector<Sprite*>& sprs) const;
+	virtual Json::Value Store(const std::vector<SprPtr>& sprs) const;
 
 private:
-	std::vector<Sprite*> m_sprs;
+	std::vector<SprPtr> m_sprs;
 
 }; // EditableSpriteAOP
 

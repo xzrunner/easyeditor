@@ -19,7 +19,7 @@ void PackMask::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePa
 	MaskToLuaString::Pack(this, gen);
 }
 
-void PackMask::UnpackFromLua(lua_State* L, const std::vector<ee::Image*>& images)
+void PackMask::UnpackFromLua(lua_State* L, const std::vector<ee::ImagePtr>& images)
 {
 	MaskFromLua::Unpack(L, this);
 }
@@ -39,7 +39,7 @@ int PackMask::SizeOfUnpackFromBin() const
 	return MaskFromBin::Size();
 }
 
-void PackMask::UnpackFromBin(uint8_t** ptr, const std::vector<ee::Image*>& images)
+void PackMask::UnpackFromBin(uint8_t** ptr, const std::vector<ee::ImagePtr>& images)
 {
 	MaskFromBin::Unpack(ptr, this);
 }

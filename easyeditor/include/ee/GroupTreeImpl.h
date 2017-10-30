@@ -2,7 +2,9 @@
 #define _EASYEDITOR_GROUP_TREE_IMPL_H_
 
 #include "GroupTreeVisitor.h"
+#include "Sprite.h"
 
+#include <string>
 #include <json/json.h>
 
 #include <vector>
@@ -10,7 +12,6 @@
 namespace ee
 {
 
-class Sprite;
 class GroupTreeCtrl;
 class SpriteSelection;
 
@@ -20,8 +21,7 @@ public:
 	class QuerySpriteVisitor : public IGroupTreeVisitor
 	{
 	public:
-		QuerySpriteVisitor(wxTreeCtrl* treectrl, Sprite* spr);
-		virtual ~QuerySpriteVisitor();
+		QuerySpriteVisitor(wxTreeCtrl* treectrl, const SprPtr& spr);
 
 		virtual bool VisitLeaf(wxTreeItemId id);
 
@@ -30,7 +30,7 @@ public:
 	private:
 		wxTreeCtrl* m_treectrl;
 
-		Sprite* m_spr;
+		SprPtr m_spr;
 
 		wxTreeItemId m_id;
 
@@ -39,8 +39,7 @@ public:
 	class RemoveVisitor : public IGroupTreeVisitor
 	{
 	public:
-		RemoveVisitor(wxTreeCtrl* treectrl, Sprite* spr);
-		virtual ~RemoveVisitor();
+		RemoveVisitor(wxTreeCtrl* treectrl, const SprPtr& spr);
 
 		virtual bool VisitNonleaf(wxTreeItemId id);
 		virtual bool VisitLeaf(wxTreeItemId id);
@@ -50,7 +49,7 @@ public:
 	private:
 		wxTreeCtrl* m_treectrl;
 
-		Sprite* m_spr;
+		SprPtr m_spr;
 
 		bool m_finish;
 
@@ -74,14 +73,14 @@ public:
 	class GetSpritesVisitor : public IGroupTreeVisitor
 	{
 	public:
-		GetSpritesVisitor(wxTreeCtrl* treectrl, std::vector<Sprite*>& sprs);
+		GetSpritesVisitor(wxTreeCtrl* treectrl, std::vector<SprPtr>& sprs);
 
 		virtual bool VisitLeaf(wxTreeItemId id);
 
 	private:
 		wxTreeCtrl* m_treectrl;
 
-		std::vector<Sprite*>& m_sprs;
+		std::vector<SprPtr>& m_sprs;
 
 	}; // GetSpritesVisitor
 
@@ -92,12 +91,12 @@ public:
 
 		virtual bool VisitLeaf(wxTreeItemId id);
 
-		Sprite* GetFirstSprite() { return m_first; }
+		const SprPtr& GetFirstSprite() { return m_first; }
 
 	private:
 		wxTreeCtrl* m_treectrl;
 
-		Sprite* m_first;
+		SprPtr m_first;
 
 	}; // GetFirstSpriteVisitor
 

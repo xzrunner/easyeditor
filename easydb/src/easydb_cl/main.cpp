@@ -25,7 +25,7 @@
 #include <easyaudio.h>
 
 #include <sprite2/SymType.h>
-#include <gum/GUM_Facade.h>
+#include <gum/Facade.h>
 
 static void InitSymbolCreators() 
 {

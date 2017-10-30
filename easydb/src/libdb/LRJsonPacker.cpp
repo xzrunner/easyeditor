@@ -180,7 +180,7 @@ void LRJsonPacker::ParserShapeFromSprite(const Json::Value& src_val, const lr::G
 	Json::Value spr_val = src_val["sprite"][idx++];
 	while (!spr_val.isNull()) {
 		std::string spr_path = ee::SymbolSearcher::GetSymbolPath(m_dir, spr_val);
-		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(spr_path);
+		auto sym = ee::SymbolMgr::Instance()->FetchSymbol(spr_path);
 		if (!sym) {
 			throw ee::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", 
 				m_dir.c_str(), spr_path.c_str());
@@ -189,10 +189,10 @@ void LRJsonPacker::ParserShapeFromSprite(const Json::Value& src_val, const lr::G
 		Json::Value dst_val;
 		dst_val["name"] = spr_val["name"];
 
-		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+		auto spr = ee::SpriteFactory::Instance()->Create(sym);
 		spr->Load(spr_val);
 
-		eshape::Sprite* shape_spr = dynamic_cast<eshape::Sprite*>(spr);
+		eshape::Sprite* shape_spr = std::dynamic_pointer_cast<eshape::Sprite>(spr);
 		assert(shape_spr);
 
 		const s2::Shape* shape = dynamic_cast<const eshape::Symbol*>(shape_spr->GetSymbol())->GetShape();
@@ -200,9 +200,6 @@ void LRJsonPacker::ParserShapeFromSprite(const Json::Value& src_val, const lr::G
 
 		int sz = out_val[name].size();
 		out_val[name][sz] = dst_val;
-
-		spr->RemoveReference();
-		sym->RemoveReference();
 
 		spr_val = src_val["sprite"][idx++];
 	}
@@ -293,7 +290,7 @@ void LRJsonPacker::ParserPointFromSprite(const Json::Value& src_val, const char*
 	while (!spr_val.isNull()) 
 	{
 		std::string spr_path = ee::SymbolSearcher::GetSymbolPath(m_dir, spr_val);
-		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(spr_path);
+		auto sym = ee::SymbolMgr::Instance()->FetchSymbol(spr_path);
 		if (!sym) {
 			std::string filepath = spr_val["filepath"].asString();
 			throw ee::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", 
@@ -303,7 +300,7 @@ void LRJsonPacker::ParserPointFromSprite(const Json::Value& src_val, const char*
 		Json::Value shape_val;
 		shape_val["name"] = spr_val["name"];
 
-		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+		auto spr = ee::SpriteFactory::Instance()->Create(sym);
 		spr->Load(spr_val);
 
 		shape_val["x"] = spr->GetPosition().x;
@@ -311,9 +308,6 @@ void LRJsonPacker::ParserPointFromSprite(const Json::Value& src_val, const char*
 
 		int sz = out_val[name].size();
 		out_val[name][sz] = shape_val;
-
-		spr->RemoveReference();
-		sym->RemoveReference();
 
 		spr_val = src_val["sprite"][idx++];
 	}
@@ -400,7 +394,7 @@ void LRJsonPacker::ParserCharacterFromSprite(const Json::Value& src_val, const l
 		std::string shape_filepath = ee::FileHelper::GetFilenameAddTag(filepath, shape_tag, "json");
 		std::string tag_ext;
 		if (ee::FileHelper::IsFileExist(shape_filepath)) {
-			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(shape_filepath);
+			auto sym = ee::SymbolMgr::Instance()->FetchSymbol(shape_filepath);
 			const s2::Shape* shape = static_cast<eshape::Symbol*>(sym)->GetShape();
 			if (shape) {
 				tag_ext = dynamic_cast<const ee::Shape*>(shape)->GetName();
@@ -459,7 +453,7 @@ void LRJsonPacker::ParserLevelFromSprite(const Json::Value& src_val, const char*
 	while (!spr_val.isNull()) 
 	{
 		std::string spr_path = ee::SymbolSearcher::GetSymbolPath(m_dir, spr_val);
-		ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(spr_path);
+		auto sym = ee::SymbolMgr::Instance()->FetchSymbol(spr_path);
 		if (!sym) {
 			std::string filepath = spr_val["filepath"].asString();
 			throw ee::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", 
@@ -470,7 +464,7 @@ void LRJsonPacker::ParserLevelFromSprite(const Json::Value& src_val, const char*
 
 		level_val["name"] = spr_val["name"];
 
-		ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
+		auto spr = ee::SpriteFactory::Instance()->Create(sym);
 		spr->Load(spr_val);
 		level_val["x"] = spr->GetPosition().x;
 		level_val["y"] = spr->GetPosition().y;
@@ -480,9 +474,6 @@ void LRJsonPacker::ParserLevelFromSprite(const Json::Value& src_val, const char*
 
 		int sz = out_val[name].size();
 		out_val[name][sz] = level_val;
-
-		spr->RemoveReference();
-		sym->RemoveReference();
 
 		spr_val = src_val["sprite"][idx++];
 	}

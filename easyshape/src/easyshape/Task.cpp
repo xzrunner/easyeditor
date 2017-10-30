@@ -39,9 +39,8 @@ void Task::Load(const char* filepath)
 		break;
 	case s2::SYM_IMAGE: case s2::SYM_COMPLEX: case s2::SYM_TEXTURE:
 		{
-			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+			auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			m_stage->SetSymbolBG(sym);
-			sym->RemoveReference();
 		}
 		break;
 	}
@@ -62,7 +61,7 @@ bool Task::IsDirty() const
 	return true;
 }
 
-void Task::GetAllSprite(std::vector<ee::Sprite*>& sprs) const
+void Task::GetAllSprite(std::vector<ee::SprPtr>& sprs) const
 {
 }
 

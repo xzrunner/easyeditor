@@ -11,7 +11,7 @@
 #include <ee/PropertySettingPanel.h>
 #include <ee/panel_msg.h>
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <SM_Calc.h>
 
 namespace eshape
@@ -62,7 +62,7 @@ bool EditCircleOP::OnMouseLeftDown(int x, int y)
 		NodeCapture capture(m_shapes_impl, tolerance);
 		capture.captureEditable(m_first_pos, m_captured);
 
-		if (CircleShape* circle = dynamic_cast<CircleShape*>(m_captured.shape))
+		if (auto circle = std::dynamic_pointer_cast<CircleShape>(m_captured.shape))
 		{
 			m_shapes_impl->GetShapeSelection()->Add(circle);
 			ee::SelectShapeSJ::Instance()->Select(circle);
@@ -89,10 +89,9 @@ bool EditCircleOP::OnMouseLeftUp(int x, int y)
 			const float radius = sm::dis_pos_to_pos(m_first_pos, m_curr_pos);
 			if (radius > 0)
 			{
-				CircleShape* circle = new CircleShape(m_first_pos, radius);
+				auto circle = std::make_shared<CircleShape>(m_first_pos, radius);
 				ee::SelectShapeSJ::Instance()->Select(circle);
 				ee::InsertShapeSJ::Instance()->Insert(circle);
-				circle->RemoveReference();
 			}
 		}
 	}
@@ -100,7 +99,7 @@ bool EditCircleOP::OnMouseLeftUp(int x, int y)
 	{
 		if (m_property) {
 			m_property->EnablePropertyGrid(true);
-			if (CircleShape* circle = dynamic_cast<CircleShape*>(m_captured.shape)) {
+			if (auto circle = std::dynamic_pointer_cast<CircleShape>(m_captured.shape)) {
 				ee::SelectShapeSJ::Instance()->Select(circle);
 			}
 		}
@@ -148,7 +147,7 @@ bool EditCircleOP::OnMouseMove(int x, int y)
 	if (tolerance != 0)
 	{	
 		NodeCapture capture(m_shapes_impl, tolerance);
-		ee::Shape* old = m_captured.shape;
+		auto old = m_captured.shape;
 		capture.captureEditable(pos, m_captured);
 		if (old && !m_captured.shape || !old && m_captured.shape) {
 			ee::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -166,7 +165,7 @@ bool EditCircleOP::OnMouseDrag(int x, int y)
 
 	if (m_captured.shape)
 	{
-		if (CircleShape* circle = dynamic_cast<CircleShape*>(m_captured.shape))
+		if (auto circle = std::dynamic_pointer_cast<CircleShape>(m_captured.shape))
 		{
 			// move  
 			if (m_captured.pos.IsValid())
@@ -195,7 +194,7 @@ bool EditCircleOP::OnDraw() const
 		if (m_node_capture)
 		{
 			int tolerance = m_node_capture->GetValue();
-			if (CircleShape* circle = dynamic_cast<CircleShape*>(m_captured.shape))
+			if (auto circle = std::dynamic_pointer_cast<CircleShape>(m_captured.shape))
 			{
 				s2::RVG::SetColor(s2::Color(102, 255, 102));
 				s2::RVG::Circle(circle->GetCenter(), tolerance, true);

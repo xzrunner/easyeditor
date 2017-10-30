@@ -4,7 +4,7 @@
 namespace escale9
 {
 
-ResizeAtomicOP::ResizeAtomicOP(Symbol* sym,
+ResizeAtomicOP::ResizeAtomicOP(const std::shared_ptr<Symbol>& sym,
 	const sm::vec2& src, const sm::vec2& dst)
 	: m_sym(sym)
 	, m_src(src)

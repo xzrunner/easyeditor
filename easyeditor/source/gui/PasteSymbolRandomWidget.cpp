@@ -54,8 +54,9 @@ void PasteSymbolRandomWidget::InitLayout()
 
 void PasteSymbolRandomWidget::GetRandomValue(RandomValue& val) const
 {
-	std::vector<Symbol*> syms;
-	m_library->Traverse(FilterSymbolVisitor(m_sym_filter_ctrl->GetValue().ToStdString(), syms));
+	FilterSymbolVisitor visitor(m_sym_filter_ctrl->GetValue().ToStdString().c_str());
+	m_library->Traverse(visitor);
+	auto syms = visitor.GetResult();
 	if (syms.empty()) {
 		val.sym = NULL;
 	} else {
@@ -76,17 +77,16 @@ void PasteSymbolRandomWidget::GetRandomValue(RandomValue& val) const
 //////////////////////////////////////////////////////////////////////////
 
 PasteSymbolRandomWidget::FilterSymbolVisitor::
-FilterSymbolVisitor(const std::string& filter, std::vector<Symbol*>& result)
+FilterSymbolVisitor(const std::string& filter)
 	: m_filter(filter)
-	, m_result(result)
 {
 }
 
 void PasteSymbolRandomWidget::FilterSymbolVisitor::
-Visit(ListItem* item, bool& next)
+Visit(const ListItemPtr& item, bool& next)
 {
-	ee::Symbol* sym = static_cast<ee::Symbol*>(item);
-	if (!m_filter.empty() && sym->GetFilepath().find(m_filter) != wxNOT_FOUND)
+	auto sym = std::static_pointer_cast<ee::Symbol>(item);
+	if (!m_filter.empty() && sym->GetFilepath().find(m_filter.c_str()) != wxNOT_FOUND)
 		m_result.push_back(sym);
 	next = true;
 }

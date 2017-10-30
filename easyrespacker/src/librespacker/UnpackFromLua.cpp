@@ -16,7 +16,7 @@ namespace erespacker
 {
 
 void UnpackFromLua::Unpack(const std::string& filepath, 
-						   const std::vector<ee::Image*>& images)
+						   const std::vector<ee::ImagePtr>& images)
 {
 	lua_State* L = luaL_newstate();
 	luaL_openlibs(L);

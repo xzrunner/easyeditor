@@ -13,7 +13,7 @@ class ChainShape : public EditedPolyShape, public s2::PolylineShape
 public:
 	ChainShape();
 	ChainShape(const ChainShape& chain);
-	ChainShape(const std::vector<sm::vec2>& vertices, bool closed);
+	ChainShape(const CU_VEC<sm::vec2>& vertices, bool closed);
 
 	/**
 	 *  @interface
@@ -41,8 +41,8 @@ public:
 	virtual void AddVertex(int index, const sm::vec2& pos);
 	virtual void RemoveVertex(const sm::vec2& pos);
 	virtual void ChangeVertex(const sm::vec2& from, const sm::vec2& to);
-	virtual void SetVertices(const std::vector<sm::vec2>& vertices);
-	virtual const std::vector<sm::vec2>& GetVertices() const { return m_vertices; }
+	virtual void SetVertices(const CU_VEC<sm::vec2>& vertices);
+	virtual const CU_VEC<sm::vec2>& GetVertices() const { return m_vertices; }
 	virtual bool IsClosed() const { return m_closed; }
 
 	void SetClosed(bool Close) { m_closed = Close; }

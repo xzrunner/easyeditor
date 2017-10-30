@@ -19,40 +19,38 @@ SkeletonData::~SkeletonData()
 
 void SkeletonData::CopyFrom(const SkeletonData& skeleton)
 {
-	std::vector<ee::Sprite*> sprs;
+	std::vector<ee::SprPtr> sprs;
 	sprs.reserve(skeleton.m_map_joints.size());
-	std::map<ee::Sprite*, std::vector<Joint*> >::const_iterator itr 
-		= skeleton.m_map_joints.begin();
-	for ( ; itr != skeleton.m_map_joints.end(); ++itr) {
-		ee::Sprite* spr = dynamic_cast<ee::Sprite*>(((cu::Cloneable*)itr->first)->Clone());
-		sprs.push_back(spr);
+	for (auto& item : skeleton.m_map_joints) {
+		sprs.push_back(std::dynamic_pointer_cast<ee::Sprite>(item.first->Clone()));
 	}
 	CopyFrom(sprs, skeleton);
 }
 
-void SkeletonData::CopyFrom(const std::vector<ee::Sprite*>& sprs,
+void SkeletonData::CopyFrom(const std::vector<ee::SprPtr>& sprs,
 	const SkeletonData& skeleton)
 {
 	Clean();
 
 	// check
-	std::map<ee::Sprite*, std::vector<Joint*> >::const_iterator itr
-		= skeleton.m_map_joints.begin();
-	for ( ; itr != skeleton.m_map_joints.end(); ++itr)
-		if (!GetSpriteByName(sprs, itr->first->GetName()))
+	for (auto& item : skeleton.m_map_joints) {
+		if (!GetSpriteByName(sprs, item.first->GetName())) {
 			return;
+		}
+	}
 
 	// prepare
 	std::map<Joint*, Joint*> mapCovJoint;
-	for (itr = skeleton.m_map_joints.begin() ; itr != skeleton.m_map_joints.end(); ++itr)
+	for (auto& item : skeleton.m_map_joints)
 	{
-		ee::Sprite* spr = GetSpriteByName(sprs, itr->first->GetName());
-		if (spr == NULL)
+		auto spr = GetSpriteByName(sprs, item.first->GetName());
+		if (!spr) {
 			return;
+		}
 
-		for (int i = 0, n = itr->second.size(); i < n; ++i)
+		for (int i = 0, n = item.second.size(); i < n; ++i)
 		{
-			Joint* src = itr->second[i];
+			Joint* src = item.second[i];
 			if (mapCovJoint.find(src) != mapCovJoint.end())
 				continue;
 
@@ -64,11 +62,10 @@ void SkeletonData::CopyFrom(const std::vector<ee::Sprite*>& sprs,
 	}
 
 	// convert joint
-	std::map<Joint*, Joint*>::iterator itr_joint = mapCovJoint.begin();
-	for ( ; itr_joint != mapCovJoint.end(); ++itr_joint)
+	for (auto& item : mapCovJoint)
 	{
-		Joint* src = itr_joint->first;
-		Joint* dst = itr_joint->second;
+		Joint* src = item.first;
+		Joint* dst = item.second;
 
 		// parent
 		if (src->m_parent == NULL)
@@ -93,12 +90,12 @@ void SkeletonData::CopyFrom(const std::vector<ee::Sprite*>& sprs,
 	}
 
 	// convert skeleton
-	for (itr = skeleton.m_map_joints.begin() ; itr != skeleton.m_map_joints.end(); ++itr)
+	for (auto& item : skeleton.m_map_joints)
 	{
-		ee::Sprite* src_sprite = itr->first;
-		std::vector<Joint*> src_joints = itr->second;
+		auto& src_sprite = item.first;
+		std::vector<Joint*> src_joints = item.second;
 
-		ee::Sprite* dst_sprite = GetSpriteByName(sprs, src_sprite->GetName());
+		auto dst_sprite = GetSpriteByName(sprs, src_sprite->GetName());
 		std::vector<Joint*> dst_joints;
 		for (int i = 0, n = src_joints.size(); i < n; ++i)
 		{
@@ -111,10 +108,9 @@ void SkeletonData::CopyFrom(const std::vector<ee::Sprite*>& sprs,
 	}
 }
 
-void SkeletonData::RemoveSprite(ee::Sprite* spr)
+void SkeletonData::RemoveSprite(const ee::SprPtr& spr)
 {
-	std::map<ee::Sprite*, std::vector<Joint*> >::iterator itr
-		= m_map_joints.find(spr);
+	auto itr = m_map_joints.find(spr);
 	if (itr != m_map_joints.end())
 	{
 		for (int i = 0, n = itr->second.size(); i < n; ++i)
@@ -123,15 +119,14 @@ void SkeletonData::RemoveSprite(ee::Sprite* spr)
 	}
 }
 
-bool SkeletonData::IsContainSprite(ee::Sprite* spr) const
+bool SkeletonData::IsContainSprite(const ee::SprPtr& spr) const
 {
 	return m_map_joints.find(spr) != m_map_joints.end();
 }
 
-void SkeletonData::InsertJoint(ee::Sprite* spr, const sm::vec2& pos)
+void SkeletonData::InsertJoint(const ee::SprPtr& spr, const sm::vec2& pos)
 {
-	std::map<ee::Sprite*, std::vector<Joint*> >::iterator itr 
-		= m_map_joints.find(spr);
+	auto itr = m_map_joints.find(spr);
 	if (itr == m_map_joints.end())
 	{
 		std::vector<Joint*> joints;
@@ -151,18 +146,16 @@ void SkeletonData::InsertJoint(ee::Sprite* spr, const sm::vec2& pos)
 
 void SkeletonData::RemoveJoint(sm::vec2& pos)
 {
-	std::map<ee::Sprite*, std::vector<Joint*> >::iterator itr 
-		= m_map_joints.begin();
-	for ( ; itr != m_map_joints.end(); ++itr)
+	for (auto& item : m_map_joints)
 	{
-		std::vector<Joint*>::iterator itr_joint = itr->second.begin();
-		for ( ; itr_joint != itr->second.end(); ++itr_joint)
+		std::vector<Joint*>::iterator itr_joint = item.second.begin();
+		for ( ; itr_joint != item.second.end(); ++itr_joint)
 		{
 			Joint* joint = *itr_joint;
 			if (joint->Contain(pos))
 			{
 				delete joint;
-				itr->second.erase(itr_joint);
+				item.second.erase(itr_joint);
 				return;
 			}
 		}
@@ -171,12 +164,10 @@ void SkeletonData::RemoveJoint(sm::vec2& pos)
 
 Joint* SkeletonData::QueryJointByPos(const sm::vec2& pos)
 {
-	std::map<ee::Sprite*, std::vector<Joint*> >::iterator itr 
-		= m_map_joints.begin();
-	for ( ; itr != m_map_joints.end(); ++itr)
+	for (auto& item : m_map_joints)
 	{
-		std::vector<Joint*>::iterator itr_joint = itr->second.begin();
-		for ( ; itr_joint != itr->second.end(); ++itr_joint) {
+		std::vector<Joint*>::iterator itr_joint = item.second.begin();
+		for ( ; itr_joint != item.second.end(); ++itr_joint) {
 			if ((*itr_joint)->Contain(pos)) {
 				return *itr_joint;
 			}
@@ -187,35 +178,30 @@ Joint* SkeletonData::QueryJointByPos(const sm::vec2& pos)
 
 void SkeletonData::Draw() const
 {
-	std::map<ee::Sprite*, std::vector<Joint*> >::const_iterator itr
-		= m_map_joints.begin();
-	for ( ; itr != m_map_joints.end(); ++itr) {
-		for (int i = 0, n = itr->second.size(); i < n; ++i) {
-			itr->second[i]->Draw();
+	for (auto& item : m_map_joints) {
+		for (int i = 0, n = item.second.size(); i < n; ++i) {
+			item.second[i]->Draw();
 		}
 	}
 }
 
-void SkeletonData::Absorb(ee::Sprite* spr)
+void SkeletonData::Absorb(const ee::SprPtr& spr)
 {
-	std::map<ee::Sprite*, std::vector<Joint*> >::const_iterator itr_child 
-		= m_map_joints.find(spr);
+	auto itr_child = m_map_joints.find(spr);
 	if (itr_child == m_map_joints.end())
 		return;
 
-	std::map<ee::Sprite*, std::vector<Joint*> >::const_iterator itr_parent
-		= m_map_joints.begin();
-	for ( ; itr_parent != m_map_joints.end(); ++itr_parent)
+	for (auto& item : m_map_joints)
 	{
-		if (itr_child->first == itr_parent->first)
+		if (itr_child->first == item.first)
 			continue;
 		for (int i = 0, n = itr_child->second.size(); i < n; ++i)
 		{
 			Joint* c = itr_child->second[i];
 			sm::vec2 cp = c->GetWorldPos();
-			for (int j = 0, m = itr_parent->second.size(); j < m; ++j)
+			for (int j = 0, m = item.second.size(); j < m; ++j)
 			{					
-				Joint* p = itr_parent->second[j];
+				Joint* p = item.second[j];
 				if (p->Intersect(cp))
 				{
 					sm::vec2 pp = p->GetWorldPos();
@@ -231,11 +217,12 @@ void SkeletonData::Absorb(ee::Sprite* spr)
 	}
 }
 
-void SkeletonData::FixJoint(ee::Sprite* spr)
+void SkeletonData::FixJoint(const ee::SprPtr& spr)
 {
-	std::map<ee::Sprite*, std::vector<Joint*> >::iterator itr 
-		= m_map_joints.find(spr);
-	if (itr == m_map_joints.end()) return;
+	auto itr = m_map_joints.find(spr);
+	if (itr == m_map_joints.end()) {
+		return;
+	}
 
 	for (int i = 0, n = itr->second.size(); i < n; ++i)
 	{
@@ -248,11 +235,12 @@ void SkeletonData::FixJoint(ee::Sprite* spr)
 	}
 }
 
-void SkeletonData::UpdateJoint(ee::Sprite* spr, float dAngle)
+void SkeletonData::UpdateJoint(const ee::SprPtr& spr, float dAngle)
 {
-	std::map<ee::Sprite*, std::vector<Joint*> >::iterator itr 
-		= m_map_joints.find(spr);
-	if (itr == m_map_joints.end()) return;
+	auto itr = m_map_joints.find(spr);
+	if (itr == m_map_joints.end()) {
+		return;
+	}
 
 	for (int i = 0, n = itr->second.size(); i < n; ++i)
 	{
@@ -272,33 +260,28 @@ void SkeletonData::UpdateJoint(ee::Sprite* spr, float dAngle)
 }
 
 void SkeletonData::GetTweenSprites(SkeletonData& start, SkeletonData& end, 
-								   std::vector<ee::Sprite*>& tween, int time, int tot_time)
+								   std::vector<ee::SprPtr>& tween, int time, int tot_time)
 {
 	float process = static_cast<float>(time) / tot_time;
 
 	SkeletonData mid;
 	mid.CopyFrom(start);
 
-	std::map<ee::Sprite*, std::vector<Joint*> >::const_iterator itr_s
-		= start.m_map_joints.begin();
-	for ( ; itr_s != start.m_map_joints.end(); ++itr_s)
+	for (auto& itr_s : start.m_map_joints)
 	{
-		ee::Sprite* s = itr_s->first;
-		std::map<ee::Sprite*, std::vector<Joint*> >::const_iterator itr_e
-			= end.m_map_joints.begin();
-		for ( ; itr_e != end.m_map_joints.end(); ++itr_e)
+		auto& s = itr_s.first;
+		for (auto& itr_e : end.m_map_joints)
 		{
-			if (s->GetName() == itr_e->first->GetName())
+			if (s->GetName() == itr_e.first->GetName())
 			{
-				ee::Sprite* e = itr_e->first;
+				auto& e = itr_e.first;
 				
-				ee::Sprite* spr = NULL;
-				std::map<ee::Sprite*, std::vector<Joint*> >::iterator itr_mid = mid.m_map_joints.begin();
-				for ( ; itr_mid != mid.m_map_joints.end(); ++itr_mid)
+				ee::SprPtr spr = nullptr;
+				for (auto& itr_mid : mid.m_map_joints)
 				{
-					if (itr_mid->first->GetName() == s->GetName())
+					if (itr_mid.first->GetName() == s->GetName())
 					{
-						spr = itr_mid->first;
+						spr = itr_mid.first;
 						break;
 					}
 				}
@@ -313,59 +296,56 @@ void SkeletonData::GetTweenSprites(SkeletonData& start, SkeletonData& end,
 		}
 	}
 
-	std::map<ee::Sprite*, std::vector<Joint*> >::iterator itr = mid.m_map_joints.begin();
-	for ( ; itr != mid.m_map_joints.end(); ++itr)
-		tween.push_back(itr->first);
+	for (auto& item : mid.m_map_joints) {
+		tween.push_back(std::dynamic_pointer_cast<ee::Sprite>(item.first));
+	}
 }
 
 void SkeletonData::Clean()
 {
-	std::map<ee::Sprite*, std::vector<Joint*> >::iterator itr
-		= m_map_joints.begin();
-	for ( ; itr != m_map_joints.end(); ++itr)
-		for (int i = 0, n = itr->second.size(); i < n; ++i)
-			delete itr->second[i];
+	for (auto& item : m_map_joints) {
+		for (int i = 0, n = item.second.size(); i < n; ++i) {
+			delete item.second[i];
+		}
+	}
 	m_map_joints.clear();
 }
 
-void SkeletonData::Translate(ee::Sprite* spr, const sm::vec2& offset)
+void SkeletonData::Translate(const ee::SprPtr& spr, const sm::vec2& offset)
 {
-	std::set<ee::Sprite*> sprs;
-	std::queue<ee::Sprite*> buf;
+	std::set<ee::SprPtr> sprs;
+	std::queue<ee::SprPtr> buf;
 	buf.push(spr);
 	while (!buf.empty())
 	{
-		ee::Sprite* curr = buf.front(); buf.pop();
+		auto curr = buf.front(); buf.pop();
 		sprs.insert(curr);
 
-		std::map<ee::Sprite*, std::vector<Joint*> >::iterator itr 
-			= m_map_joints.find(curr);
+		auto itr = m_map_joints.find(curr);
 		assert(itr != m_map_joints.end());
 		for (int i = 0, n = itr->second.size(); i < n; ++i)
 		{
 			Joint* j = itr->second[i];
-
-			std::set<Joint*>::iterator itr_child = j->m_children.begin();
-			for ( ; itr_child != j->m_children.end(); ++itr_child)
+			for (auto& itr_child : j->m_children)
 			{
-				ee::Sprite* child = (*itr_child)->m_spr;
+				auto child = itr_child->m_spr;
 				if (sprs.find(child) == sprs.end())
 					buf.push(child);
 			}
 		}
 	}
 
-	std::set<ee::Sprite*>::iterator itr = sprs.begin();
-	for ( ; itr != sprs.end(); ++itr)
-		(*itr)->Translate(offset);
+	for (auto& spr : sprs) {
+		spr->Translate(offset);
+	}
 }
 
-ee::Sprite* SkeletonData::GetSpriteByName(const std::vector<ee::Sprite*>& sprs, int name)
+ee::SprPtr SkeletonData::GetSpriteByName(const std::vector<ee::SprPtr>& sprs, int name)
 {
 	for (int i = 0, n = sprs.size(); i < n; ++i)
 		if (sprs[i]->GetName() == name)
 			return sprs[i];
-	return NULL;
+	return nullptr;
 }
 
 }

@@ -11,7 +11,7 @@
 #include <ee/PropertySettingPanel.h>
 #include <ee/panel_msg.h>
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <sprite2/RenderParams.h>
 #include <SM_Calc.h>
 
@@ -61,7 +61,7 @@ bool EditBezierOP::OnMouseLeftDown(int x, int y)
 	{	
 		NodeCapture capture(m_shapes_impl, tolerance);
 		capture.captureEditable(m_first_pos, m_captured);
- 		if (BezierShape* bezier = dynamic_cast<BezierShape*>(m_captured.shape))
+ 		if (auto bezier = std::dynamic_pointer_cast<BezierShape>(m_captured.shape))
 		{
 			m_shapes_impl->GetShapeSelection()->Add(bezier);
 			ee::SelectShapeSJ::Instance()->Select(bezier);
@@ -88,10 +88,9 @@ bool EditBezierOP::OnMouseLeftUp(int x, int y)
 			const float dis = sm::dis_pos_to_pos(m_first_pos, m_curr_pos);
 			if (dis > 1)
 			{
-				BezierShape* bezier = new BezierShape(m_first_pos, m_curr_pos);
+				auto bezier = std::make_shared<BezierShape>(m_first_pos, m_curr_pos);
 				ee::SelectShapeSJ::Instance()->Select(bezier);
 				ee::InsertShapeSJ::Instance()->Insert(bezier);
-				bezier->RemoveReference();
 			}
 		}
 	}
@@ -143,7 +142,7 @@ bool EditBezierOP::OnMouseMove(int x, int y)
 	if (tolerance != 0)
 	{	
 		NodeCapture capture(m_shapes_impl, tolerance);
-		ee::Shape* old = m_captured.shape;
+		auto old = m_captured.shape;
 		capture.captureEditable(pos, m_captured);
 		if (old && !m_captured.shape || !old && m_captured.shape) {
 			ee::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -161,7 +160,7 @@ bool EditBezierOP::OnMouseDrag(int x, int y)
 
 	if (m_captured.shape)
 	{
-		if (BezierShape* bezier = dynamic_cast<BezierShape*>(m_captured.shape))
+		if (auto bezier = std::dynamic_pointer_cast<BezierShape>(m_captured.shape))
 		{
 			sm::vec2 center = bezier->GetBounding().Center();
 
@@ -190,7 +189,7 @@ bool EditBezierOP::OnDraw() const
 		if (m_node_capture)
 		{
 			int tolerance = m_node_capture->GetValue();
-			if (BezierShape* bezier = dynamic_cast<BezierShape*>(m_captured.shape))
+			if (auto bezier = std::dynamic_pointer_cast<BezierShape>(m_captured.shape))
 			{
 				sm::vec2 c = bezier->GetBounding().Center();
 				

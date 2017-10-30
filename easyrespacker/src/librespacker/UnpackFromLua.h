@@ -1,9 +1,9 @@
 #ifndef _EASYRESPACKER_UNPACKE_FROM_LUA_H_
 #define _EASYRESPACKER_UNPACKE_FROM_LUA_H_
 
-#include <vector>
+#include <ee/Image.h>
 
-namespace ee { class Image; }
+#include <vector>
 
 namespace erespacker
 {
@@ -12,7 +12,7 @@ class UnpackFromLua
 {
 public:
 	static void Unpack(const std::string& filepath, 
-		const std::vector<ee::Image*>& images);
+		const std::vector<ee::ImagePtr>& images);
 
 }; // UnpackFromLua
 

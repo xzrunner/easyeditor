@@ -6,19 +6,19 @@ namespace ee
 
 void SpriteSelection::Clear()
 {
-	ObjSelectionSet<Sprite>::Clear();
+	SelectionSet<Sprite>::Clear();
 	SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void SpriteSelection::Add(Sprite* item)
+void SpriteSelection::Add(const SprPtr& item)
 {
-	ObjSelectionSet<Sprite>::Add(item);
+	SelectionSet<Sprite>::Add(item);
 	SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void SpriteSelection::Remove(Sprite* item)
+void SpriteSelection::Remove(const SprPtr& item)
 {
-	ObjSelectionSet<Sprite>::Remove(item);
+	SelectionSet<Sprite>::Remove(item);
 	SetCanvasDirtySJ::Instance()->SetDirty();
 }
 

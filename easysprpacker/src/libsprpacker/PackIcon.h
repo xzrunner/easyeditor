@@ -5,8 +5,10 @@
 
 #include <gum/IconType.h>
 #include <SM_Vector.h>
+#include <cu/cu_stl.h>
 
 #include <vector>
+#include <memory>
 
 namespace eicon { class Symbol; }
 
@@ -16,7 +18,7 @@ namespace esprpacker
 class PackIcon : public PackNode
 {
 public:
-	PackIcon(const eicon::Symbol* sym);
+	PackIcon(const std::shared_ptr<eicon::Symbol>& sym);
 	virtual ~PackIcon();
 
 	/**
@@ -39,7 +41,7 @@ private:
 
 	gum::IconType m_type;
 
-	std::vector<sm::vec2> m_vertices;
+	CU_VEC<sm::vec2> m_vertices;
 
 }; // PackIcon
 

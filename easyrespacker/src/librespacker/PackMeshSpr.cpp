@@ -19,7 +19,7 @@ void PackMeshSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::Textur
 	MeshSprToLuaString::Pack(this, gen);
 }
 
-void PackMeshSpr::UnpackFromLua(lua_State* L, const std::vector<ee::Image*>& images)
+void PackMeshSpr::UnpackFromLua(lua_State* L, const std::vector<ee::ImagePtr>& images)
 {
 	MeshSprFromLua::Unpack(L, this);
 }
@@ -39,7 +39,7 @@ int PackMeshSpr::SizeOfUnpackFromBin() const
 	return MeshSprFromBin::Size(this);
 }
 
-void PackMeshSpr::UnpackFromBin(uint8_t** ptr, const std::vector<ee::Image*>& images)
+void PackMeshSpr::UnpackFromBin(uint8_t** ptr, const std::vector<ee::ImagePtr>& images)
 {
 	MeshSprFromBin::Unpack(ptr, this);
 }

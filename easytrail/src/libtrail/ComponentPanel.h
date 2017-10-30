@@ -23,7 +23,6 @@ class ComponentPanel : public wxPanel, public ee::UICallback
 {
 public:
 	ComponentPanel(wxWindow* parent, t2d_symbol* pc, ToolbarPanel* toolbar);
-	virtual ~ComponentPanel();
 
 	//
 	// UICallback interface

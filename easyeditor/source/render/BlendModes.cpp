@@ -5,7 +5,7 @@
 namespace ee
 {
 
-SINGLETON_DEFINITION(BlendModes);
+CU_SINGLETON_DEFINITION(BlendModes);
 
 BlendModes::BlendModes()
 {

@@ -2,8 +2,9 @@
 #define _EASYSHAPE_STAGE_CANVAS_H_
 
 #include <ee/CameraCanvas.h>
+#include <ee/Sprite.h>
 
-namespace ee { class Sprite; class MultiSpritesImpl; class MultiShapesImpl; }
+namespace ee { class MultiSpritesImpl; class MultiShapesImpl; }
 
 namespace eshape
 {
@@ -15,8 +16,7 @@ class StageCanvas : public ee::CameraCanvas
 public:
 	StageCanvas(StagePanel* stage);
 	StageCanvas(StagePanel* stage, wxGLContext* glctx,
-		ee::Sprite* edited, const ee::MultiSpritesImpl* bg_sprites);
-	virtual ~StageCanvas();
+		ee::SprPtr edited, const ee::MultiSpritesImpl* bg_sprites);
 
 public:
 	void DrawGuideLines() const;
@@ -29,10 +29,10 @@ private:
 
 	const ee::MultiShapesImpl* m_shape_impl;
 
-	ee::Sprite* m_edited;
+	ee::SprPtr m_edited;
 	const ee::MultiSpritesImpl* m_sprite_impl;
 
-	ee::Sprite* m_bg;
+	ee::SprPtr m_bg;
 
 }; // StageCanvas
 

@@ -9,7 +9,7 @@
 namespace eshape
 {
 
-bool DrawLineUtility::IsStraightOpen(const std::vector<sm::vec2>& lines, 
+bool DrawLineUtility::IsStraightOpen(const CU_VEC<sm::vec2>& lines, 
 									 const ee::KeysState& key_state)
 {
 	return !lines.empty() && key_state.GetKeyState(WXK_SHIFT);

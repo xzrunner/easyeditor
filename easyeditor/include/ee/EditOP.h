@@ -1,7 +1,7 @@
 #ifndef _EASYEDITOR_EDIT_OP_H_
 #define _EASYEDITOR_EDIT_OP_H_
 
-#include <CU_RefCountObj.h>
+#include <cu/CU_RefCountObj.h>
 
 #include <wx/cursor.h>
 

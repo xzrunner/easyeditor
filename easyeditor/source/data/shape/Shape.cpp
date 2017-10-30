@@ -20,16 +20,14 @@ Shape::~Shape()
 	ClearUserData(true); 
 }
 
-void Shape::LoadFromFile(const Json::Value& value,
-						  const std::string& dir)
+void Shape::LoadFromFile(const Json::Value& value, const std::string& dir)
 {
-	m_name = value["name"].asString();
+	m_name = value["name"].asString().c_str();
 }
 
-void Shape::StoreToFile(Json::Value& value,
-						 const std::string& dir) const
+void Shape::StoreToFile(Json::Value& value, const std::string& dir) const
 {
-	value["name"] = m_name;
+	value["name"] = m_name.c_str();
 	value["type"] = GetShapeDesc();
 }
 

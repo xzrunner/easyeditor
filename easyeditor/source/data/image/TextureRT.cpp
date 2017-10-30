@@ -1,20 +1,14 @@
 #include "TextureRT.h"
 
 #include <gimg_typedef.h>
-#include <sprite2/S2_RenderTarget.h>
+#include <sprite2/RenderTarget.h>
 
 namespace ee
 {
 
-TextureRT::TextureRT(const s2::RenderTarget* rt)
+TextureRT::TextureRT(const std::shared_ptr<const s2::RenderTarget>& rt)
 	: m_rt(rt)
 {
-	m_rt->AddReference();
-}
-
-TextureRT::~TextureRT()
-{
-	m_rt->RemoveReference();
 }
 
 unsigned int TextureRT::GetTexID() const 
@@ -34,7 +28,7 @@ int TextureRT::GetHeight() const
 
 int TextureRT::GetFormat() const
 {
-	return GPF_RGBA;
+	return GPF_RGBA8;
 }
 
 }

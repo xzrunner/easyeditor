@@ -18,7 +18,7 @@ void ViewlistListImpl::OnSelected(ee::ViewlistList* list, int idx, bool clear)
 
 void ViewlistListImpl::OnDoubleClicked(ee::ViewlistList* list, int idx)
 {
-	ee::Sprite* selected = list->QuerySprite(idx);
+	ee::SprPtr selected = list->QuerySprite(idx);
 	m_open_symbol.Open(selected);
 }
 

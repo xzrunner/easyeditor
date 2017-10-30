@@ -12,53 +12,43 @@ namespace ee
 TranslateSpriteAOP::TranslateSpriteAOP(const SpriteSelection& selection, const sm::vec2& offset)
 	: m_offset(offset)
 {
-	selection.Traverse(FetchAllVisitor<Sprite>(m_sprs));
-	for (size_t i = 0, n = m_sprs.size(); i < n; ++i) {
-		m_sprs[i]->AddReference();
-	}
+	selection.Traverse(FetchAllRefVisitor<Sprite>(m_sprs));
 }
 
-TranslateSpriteAOP::TranslateSpriteAOP(Sprite* spr, const sm::vec2& offset)
+TranslateSpriteAOP::TranslateSpriteAOP(const SprPtr& spr, const sm::vec2& offset)
 	: m_offset(offset)
 {
-	spr->AddReference();
 	m_sprs.push_back(spr);
 }
 
-TranslateSpriteAOP::TranslateSpriteAOP(const std::vector<Sprite*>& sprs, const sm::vec2& offset)
+TranslateSpriteAOP::TranslateSpriteAOP(const std::vector<SprPtr>& sprs, const sm::vec2& offset)
 	: m_offset(offset)
+	, m_sprs(sprs)
 {
-	for_each(sprs.begin(), sprs.end(), cu::AddRefFunctor<Sprite>());
-	m_sprs = sprs;
-}
-
-TranslateSpriteAOP::~TranslateSpriteAOP()
-{
-	for_each(m_sprs.begin(), m_sprs.end(), cu::RemoveRefFunctor<Sprite>());
 }
 
 void TranslateSpriteAOP::Undo()
 {
-	for (size_t i = 0, n = m_sprs.size(); i < n; ++i) {
-		m_sprs[i]->Translate(-m_offset);
+	for (auto& spr : m_sprs) {
+		spr->Translate(-m_offset);
 	}
 }
 
 void TranslateSpriteAOP::Redo()
 {
-	for (size_t i = 0, n = m_sprs.size(); i < n; ++i) {
-		m_sprs[i]->Translate(m_offset);
+	for (auto& spr : m_sprs) {
+		spr->Translate(m_offset);
 	}
 }
 
-void TranslateSpriteAOP::Copy(const std::vector<ee::Sprite*>& sprs)
+void TranslateSpriteAOP::Copy(const std::vector<SprPtr>& sprs)
 {
-	for (int i = 0, n = sprs.size(); i < n; ++i) {
-		sprs[i]->Translate(m_offset);
+	for (auto& spr : sprs) {
+		spr->Translate(m_offset);
 	}
 }
 
-Json::Value TranslateSpriteAOP::Store(const std::vector<Sprite*>& sprs) const
+Json::Value TranslateSpriteAOP::Store(const std::vector<SprPtr>& sprs) const
 {
 	Json::Value val;
 	val["idx"] = HistoryUtil::StoreSpritesIndex(m_sprs, sprs);

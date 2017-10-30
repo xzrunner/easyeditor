@@ -27,7 +27,7 @@ PolygonShape::PolygonShape(const PolygonShape& polygon)
 {
 }
 
-PolygonShape::PolygonShape(const std::vector<sm::vec2>& vertices)
+PolygonShape::PolygonShape(const CU_VEC<sm::vec2>& vertices)
 	: s2::PolygonShape(vertices)
 {
 	SetMaterialColor(ee::LIGHT_GREEN);
@@ -60,13 +60,14 @@ void PolygonShape::Translate(const sm::vec2& offset)
 	m_bounding.Translate(offset);
 
 	if (m_poly) {
-		dynamic_cast<Material*>(m_poly)->Translate(offset);
+		dynamic_cast<Material*>(m_poly.get())->Translate(offset);
 	}
 }
 
 ee::PropertySetting* PolygonShape::CreatePropertySetting(ee::EditPanelImpl* stage)
 {
-	return new PolygonPropertySetting(stage, this);
+	return new PolygonPropertySetting(stage, 
+		std::dynamic_pointer_cast<eshape::PolygonShape>(shared_from_this()));
 }
 
 void PolygonShape::LoadFromFile(const Json::Value& value, const std::string& dir)
@@ -107,7 +108,7 @@ void PolygonShape::AddVertex(int index, const sm::vec2& pos)
 {
 	PolylineEditor::AddVertex(m_vertices, m_bounding, index, pos);
 	if (m_poly) {
-		Material* mat = dynamic_cast<Material*>(m_poly);
+		Material* mat = dynamic_cast<Material*>(m_poly.get());
 		mat->Clear();
 		mat->SetOutline(m_vertices);
 		mat->Build();
@@ -118,7 +119,7 @@ void PolygonShape::RemoveVertex(const sm::vec2& pos)
 {
 	PolylineEditor::RemoveVertex(m_vertices, m_bounding, pos);
 	if (m_poly) {
-		Material* mat = dynamic_cast<Material*>(m_poly);
+		Material* mat = dynamic_cast<Material*>(m_poly.get());
 		mat->Clear();
 		mat->SetOutline(m_vertices);
 		mat->Build();
@@ -129,19 +130,19 @@ void PolygonShape::ChangeVertex(const sm::vec2& from, const sm::vec2& to)
 {
 	PolylineEditor::ChangeVertex(m_vertices, m_bounding, from, to);
 	if (m_poly) {
-		Material* mat = dynamic_cast<Material*>(m_poly);
+		Material* mat = dynamic_cast<Material*>(m_poly.get());
 		mat->Clear();
 		mat->SetOutline(m_vertices);
 		mat->Build();
 	}
 }
 
-void PolygonShape::SetVertices(const std::vector<sm::vec2>& vertices)
+void PolygonShape::SetVertices(const CU_VEC<sm::vec2>& vertices)
 {
 	m_vertices = vertices;
 	UpdateBounding();
 	if (m_poly) {
-		Material* mat = dynamic_cast<Material*>(m_poly);
+		Material* mat = dynamic_cast<Material*>(m_poly.get());
 		mat->Clear();
 		mat->SetOutline(m_vertices);
 		mat->Build();
@@ -150,20 +151,14 @@ void PolygonShape::SetVertices(const std::vector<sm::vec2>& vertices)
 
 void PolygonShape::SetMaterialColor(const s2::Color& color)
 {
-	if (m_poly) {
-		m_poly->RemoveReference();
-	}
-	m_poly = new ColorMaterial(color);
+	m_poly = std::make_unique<ColorMaterial>(color);
 	m_poly->SetOutline(m_vertices);
 	m_poly->Build();
 }
 
-void PolygonShape::SetMaterialTexture(ee::ImageSymbol* image)
+void PolygonShape::SetMaterialTexture(const std::shared_ptr<ee::ImageSymbol>& image)
 {
-	if (m_poly) {
-		m_poly->RemoveReference();
-	}
-	m_poly = new TextureMaterial(image);
+	m_poly = std::make_unique<TextureMaterial>(image);
 	m_poly->SetOutline(m_vertices);
 	m_poly->Build();
 }
@@ -171,7 +166,7 @@ void PolygonShape::SetMaterialTexture(ee::ImageSymbol* image)
 Json::Value PolygonShape::StoreMaterial(const std::string& dirpath) const
 {
 	if (m_poly) {
-		return dynamic_cast<Material*>(m_poly)->Store(dirpath);
+		return dynamic_cast<Material*>(m_poly.get())->Store(dirpath);
 	} else {
 		return NULL;
 	}
@@ -179,40 +174,32 @@ Json::Value PolygonShape::StoreMaterial(const std::string& dirpath) const
 
 void PolygonShape::LoadMaterial(const std::string& dirpath, const Json::Value& val)
 {
-	if (m_poly) {
-		delete m_poly;
-		m_poly = NULL;
-	}
+	m_poly.reset();
 
 	if (val["type"].isNull()) {
 		return;
-	}
-
-	if (m_poly) {
-		m_poly->RemoveReference();
 	}
 
 	std::string type = val["type"].asString();
 	if (type == "color") {
 		s2::Color col;
 		col.FromRGBA(val["color"].asUInt());
-		m_poly = new ColorMaterial(col);
+		m_poly = std::make_unique<ColorMaterial>(col);
 		m_poly->SetOutline(m_vertices);
 		m_poly->Build();
 	} else if (type == "texture") {
 		std::string path = val["texture path"].asString();
-		ee::ImageSymbol* sym = static_cast<ee::ImageSymbol*>(
+		auto sym = std::dynamic_pointer_cast<ee::ImageSymbol>(
 			ee::SymbolMgr::Instance()->FetchSymbol(dirpath + "\\" + path));
-		m_poly = new TextureMaterial(sym);
+		m_poly = std::make_unique<TextureMaterial>(sym);
 		m_poly->SetOutline(m_vertices);
 		m_poly->Build();
-		sym->RemoveReference();
 	}
 }
 
 const Material* PolygonShape::GetMaterial() const 
 { 
-	return dynamic_cast<const Material*>(m_poly); 
+	return dynamic_cast<const Material*>(m_poly.get()); 
 }
 
 }

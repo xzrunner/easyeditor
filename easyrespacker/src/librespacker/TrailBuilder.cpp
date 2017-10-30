@@ -5,6 +5,7 @@
 #include "PackTag.h"
 
 #include <ee/Visitor.h>
+#include <ee/SymbolMgr.h>
 
 #include <easytrail.h>
 
@@ -22,8 +23,7 @@ TrailBuilder::TrailBuilder(ExportNameSet& export_set)
 
 TrailBuilder::~TrailBuilder()
 {
-	std::map<const etrail::Symbol*, const PackTrail*>::iterator
-		itr = m_map_data.begin();
+	auto itr = m_map_data.begin();
 	for ( ; itr != m_map_data.end(); ++itr) {
 		delete itr->second;
 	}
@@ -31,8 +31,7 @@ TrailBuilder::~TrailBuilder()
 
 void TrailBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 {
-	std::map<const etrail::Symbol*, const PackTrail*>::const_iterator 
-		itr = m_map_data.begin();
+	auto itr = m_map_data.begin();
 	for ( ; itr != m_map_data.end(); ++itr) {
 		bool has_next;
 		visitor.Visit(const_cast<PackTrail*>(itr->second), has_next);
@@ -42,10 +41,9 @@ void TrailBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 	}
 }
 
-const IPackNode* TrailBuilder::Create(const etrail::Symbol* sym)
+const IPackNode* TrailBuilder::Create(const std::shared_ptr<const etrail::Symbol>& sym)
 {
-	std::map<const etrail::Symbol*, const PackTrail*>::iterator 
-		itr = m_map_data.find(sym);
+	auto itr = m_map_data.find(sym);
 	if (itr != m_map_data.end()) {
 		return itr->second;
 	}
@@ -61,7 +59,7 @@ const IPackNode* TrailBuilder::Create(const etrail::Symbol* sym)
 	return node;
 }
 
-void TrailBuilder::Load(const etrail::Symbol* sym, PackTrail* trail)
+void TrailBuilder::Load(const std::shared_ptr<const etrail::Symbol>& sym, PackTrail* trail)
 {
 	const t2d_emitter_cfg* cfg = sym->GetEmitterCfg()->GetImpl();
 
@@ -81,8 +79,9 @@ void TrailBuilder::Load(const etrail::Symbol* sym, PackTrail* trail)
 
 			PackTrail::CompImage comp;
 
-			ee::Symbol* sym = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(t_sym.mode.A.ud));
-			comp.node = PackNodeFactory::Instance()->Create(sym);
+			auto sym_raw = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(t_sym.mode.A.ud));
+			auto sym_ptr = ee::SymbolMgr::Instance()->FetchSymbol(sym_raw->GetFilepath());
+			comp.node = PackNodeFactory::Instance()->Create(sym_ptr);
 
 			comp.scale_begin = t_sym.mode.A.scale_begin;
 			comp.scale_end = t_sym.mode.A.scale_end;

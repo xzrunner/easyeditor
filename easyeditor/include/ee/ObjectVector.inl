@@ -18,31 +18,31 @@ inline ObjectVector<T>::~ObjectVector()
 }
 
 template<class T>
-void ObjectVector<T>::Traverse(Visitor<T>& visitor, bool order) const
+void ObjectVector<T>::Traverse(RefVisitor<T>& visitor, bool order) const
 {
 	Traverse(m_objs, visitor, order);
 }
 
 template<class T>
-void ObjectVector<T>::Traverse(Visitor<T>& visitor, DataTraverseType type, bool order) const
+void ObjectVector<T>::Traverse(RefVisitor<T>& visitor, DataTraverseType type, bool order) const
 {
 	Traverse(m_objs, visitor, type, order);
 }
 
 template<class T>
-bool ObjectVector<T>::Remove(T* obj)
+bool ObjectVector<T>::Remove(const std::shared_ptr<T>& obj)
 {
 	return Remove(m_objs, obj);
 }
 
 template<class T>
-bool ObjectVector<T>::Insert(T* obj)
+bool ObjectVector<T>::Insert(const std::shared_ptr<T>& obj)
 {
 	return Insert(m_objs, obj);
 }
 
 template<class T>
-bool ObjectVector<T>::Insert(T* obj, int idx)
+bool ObjectVector<T>::Insert(const std::shared_ptr<T>& obj, int idx)
 {
 	return Insert(m_objs, obj, idx);
 }
@@ -54,25 +54,25 @@ bool ObjectVector<T>::Clear()
 }
 
 template<class T>
-bool ObjectVector<T>::ResetOrder(const T* obj, bool up)
+bool ObjectVector<T>::ResetOrder(const std::shared_ptr<const T>& obj, bool up)
 {
 	return ResetOrder(m_objs, obj, up);
 }
 
 template<class T>
-bool ObjectVector<T>::ResetOrderMost(const T* obj, bool up)
+bool ObjectVector<T>::ResetOrderMost(const std::shared_ptr<const T>& obj, bool up)
 {
 	return ResetOrderMost(m_objs, obj, up);
 }
 
 template<class T>
-bool ObjectVector<T>::Sort(std::vector<T*>& list)
+bool ObjectVector<T>::Sort(std::vector<std::shared_ptr<T>>& list)
 {
 	return Sort(m_objs, list);
 }
 
 template<class T>
-bool ObjectVector<T>::IsExist(T* obj) const
+bool ObjectVector<T>::IsExist(const std::shared_ptr<T>& obj) const
 {
 	for (int i = 0, n = m_objs.size(); i < n; ++i) {
 		if (obj == m_objs[i]) {
@@ -89,11 +89,11 @@ int ObjectVector<T>::Size() const
 }
 
 template<class T>
-inline void ObjectVector<T>::Traverse(const std::vector<T*>& objs, Visitor<T>& visitor, bool order/* = true*/)
+inline void ObjectVector<T>::Traverse(const std::vector<std::shared_ptr<T>>& objs, RefVisitor<T>& visitor, bool order/* = true*/)
 {
 	if (order)
 	{
-		std::vector<T*>::const_iterator itr = objs.begin();
+		auto itr = objs.begin();
 		for ( ; itr != objs.end(); ++itr)
 		{
 			bool next;
@@ -103,7 +103,7 @@ inline void ObjectVector<T>::Traverse(const std::vector<T*>& objs, Visitor<T>& v
 	}
 	else
 	{
-		std::vector<T*>::const_reverse_iterator itr = objs.rbegin();
+		auto itr = objs.rbegin();
 		for ( ; itr != objs.rend(); ++itr)
 		{
 			bool next;
@@ -114,14 +114,14 @@ inline void ObjectVector<T>::Traverse(const std::vector<T*>& objs, Visitor<T>& v
 }
 
 template<class T>
-inline void ObjectVector<T>::Traverse(const std::vector<T*>& objs,
-									  Visitor<T>& visitor, 
+inline void ObjectVector<T>::Traverse(const std::vector<std::shared_ptr<T>>& objs,
+									  RefVisitor<T>& visitor, 
 									  DataTraverseType type, 
 									  bool order)
 {
 	if (order)
 	{
-		std::vector<T*>::const_iterator itr = objs.begin();
+		auto itr = objs.begin();
 		for ( ; itr != objs.end(); ++itr)
 		{
 			if (type == DT_EDITABLE && (*itr)->IsEditable() ||
@@ -136,7 +136,7 @@ inline void ObjectVector<T>::Traverse(const std::vector<T*>& objs,
 	}
 	else
 	{
-		std::vector<T*>::const_reverse_iterator itr = objs.rbegin();
+		auto itr = objs.rbegin();
 		for ( ; itr != objs.rend(); ++itr)
 		{
 			bool next;
@@ -147,14 +147,13 @@ inline void ObjectVector<T>::Traverse(const std::vector<T*>& objs,
 }
 
 template<class T>
-inline bool ObjectVector<T>::Remove(std::vector<T*>& objs, 
-									T* obj)
+inline bool ObjectVector<T>::Remove(std::vector<std::shared_ptr<T>>& objs, 
+									const std::shared_ptr<T>& obj)
 {
 	for (size_t i = 0, n = objs.size(); i < n; ++i)
 	{
 		if (objs[i] == obj)
 		{
-			obj->RemoveReference();
 			objs.erase(objs.begin() + i);
 			return true;
 		}
@@ -163,18 +162,16 @@ inline bool ObjectVector<T>::Remove(std::vector<T*>& objs,
 }
 
 template<class T>
-inline bool ObjectVector<T>::Insert(std::vector<T*>& objs, 
-									T* obj)
+inline bool ObjectVector<T>::Insert(std::vector<std::shared_ptr<T>>& objs, 
+									const std::shared_ptr<T>& obj)
 {
-	obj->AddReference();
 	objs.push_back(obj);
 	return true;
 }
 
 template<class T>
-inline bool ObjectVector<T>::Insert(std::vector<T*>& objs, T* obj, int idx)
+inline bool ObjectVector<T>::Insert(std::vector<std::shared_ptr<T>>& objs, const std::shared_ptr<T>& obj, int idx)
 {
-	obj->AddReference();
 	if (objs.empty() || idx >= (int)objs.size()) {
 		objs.push_back(obj);
 	} else if (idx < 0) {
@@ -186,18 +183,16 @@ inline bool ObjectVector<T>::Insert(std::vector<T*>& objs, T* obj, int idx)
 }
 
 template<class T>
-inline bool ObjectVector<T>::Clear(std::vector<T*>& objs)
+inline bool ObjectVector<T>::Clear(std::vector<std::shared_ptr<T>>& objs)
 {
 	bool ret = !objs.empty();
-	for (size_t i = 0, n = objs.size(); i < n; ++i)
-		objs[i]->RemoveReference();
 	objs.clear();
 	return ret;
 }
 
 template<class T>
-inline bool ObjectVector<T>::ResetOrder(std::vector<T*>& objs, 
-										const T* obj, 
+inline bool ObjectVector<T>::ResetOrder(std::vector<std::shared_ptr<T>>& objs, 
+										const std::shared_ptr<const T>& obj,
 										bool up)
 {
 	for (size_t i = 0, n = objs.size(); i < n; ++i)
@@ -221,20 +216,20 @@ inline bool ObjectVector<T>::ResetOrder(std::vector<T*>& objs,
 }
 
 template<class T>
-inline bool ObjectVector<T>::ResetOrderMost(std::vector<T*>& objs, const T* obj, bool up) {
+inline bool ObjectVector<T>::ResetOrderMost(std::vector<std::shared_ptr<T>>& objs, const std::shared_ptr<const T>& obj, bool up) {
 	for (int i = 0, n = objs.size(); i < n; ++i) {
 		if (objs[i] != obj) {
 			continue;
 		}
 		if (up && i != n - 1) {
-			T* tmp = objs[i];
+			auto tmp = objs[i];
 			for (int j = i + 1; j < n; ++j) {
 				objs[j-1] = objs[j];
 			}
 			objs[n - 1] = tmp;
 			return true;
 		} else if (!up && i != 0) {
-			T* tmp = objs[i];
+			auto tmp = objs[i];
 			for (int j = i - 1; j >= 0; --j) {
 				objs[j+1] = objs[j];
 			}
@@ -247,10 +242,10 @@ inline bool ObjectVector<T>::ResetOrderMost(std::vector<T*>& objs, const T* obj,
 }
 
 template<class T>
-inline bool ObjectVector<T>::Sort(std::vector<T*>& objs, std::vector<T*>& list) {
-	std::map<int, T*> order_sorted;
+inline bool ObjectVector<T>::Sort(std::vector<std::shared_ptr<T>>& objs, std::vector<std::shared_ptr<T>>& list) {
+	std::map<int, std::shared_ptr<T>> order_sorted;
 	for (int i = 0, n = list.size(); i < n; ++i) {
-		T* obj = list[i];
+		const std::shared_ptr<T>& obj = list[i];
 		for (int j = 0, m = objs.size(); j < m; ++j) {
 			if (obj == objs[j]) {
 				order_sorted.insert(std::make_pair(j, obj));
@@ -262,9 +257,9 @@ inline bool ObjectVector<T>::Sort(std::vector<T*>& objs, std::vector<T*>& list) 
 		return false;
 	}
 	
-	std::vector<T*> list_dst;
+	std::vector<std::shared_ptr<T>> list_dst;
 	list_dst.reserve(list.size());
-	std::map<int, T*>::iterator itr = order_sorted.begin();
+	auto itr = order_sorted.begin();
 	for ( ; itr != order_sorted.end(); ++itr) {
 		list_dst.push_back(itr->second);
 	}

@@ -5,6 +5,7 @@
 #include <ee/MultiShapesImpl.h>
 #include <ee/StageDropTarget.h>
 #include <ee/Sprite.h>
+#include <ee/Symbol.h>
 
 class wxGLContext;
 
@@ -22,8 +23,7 @@ public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, wxGLContext* glctx, 
 		ee::LibraryPanel* library = NULL);
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, wxGLContext* glctx, 
-		ee::Sprite* edited, const ee::MultiSpritesImpl* bg_sprites);
-	virtual ~StagePanel();
+		const ee::SprPtr& edited, const ee::MultiSpritesImpl* bg_sprites);
 
 	//
 	// ee::EditPanel interface
@@ -33,28 +33,27 @@ public:
 	//
 	// ee::MultiShapesImpl interface
 	//
-	virtual void TraverseShapes(ee::Visitor<ee::Shape>& visitor, 
+	virtual void TraverseShapes(ee::RefVisitor<ee::Shape>& visitor, 
 		ee::DataTraverseType type = ee::DT_ALL) const;
 
-	void SetMeshSymbol(Symbol* sym);
-	const Symbol* GetMeshSymbol() const;
+	void SetMeshSymbol(const std::shared_ptr<Symbol>& sym);
+	const Symbol& GetMeshSymbol() const;
 
  	Mesh* GetMesh();
 // 	Sprite* getSprite() { return m_spr; }
 
 	// for background
-	void SetBackground(ee::Sprite* bg) { 
-		bg->AddReference();
+	void SetBackground(const ee::SprPtr& bg) { 
 		m_background = bg; 
 	}
-	const ee::Sprite* GetBackground() const { return m_background; }
+	const ee::SprPtr& GetBackground() const { return m_background; }
 	void TranslateBackground(const sm::vec2& offset) { 
 		if (m_background) {
 			m_background->Translate(offset);
 		}
 	}
 
-	void LoadFromSymbol(const ee::Symbol* sym);
+	void LoadFromSymbol(const ee::SymConstPtr& sym);
 
 	void RecreateMesh();
 
@@ -75,7 +74,7 @@ private:
 	public:
 		StageDropTarget(StagePanel* stage, ee::LibraryPanel* library);
 
-		virtual bool OnDropSymbol(ee::Symbol* sym, const sm::vec2& pos);
+		virtual bool OnDropSymbol(const ee::SymPtr& sym, const sm::vec2& pos);
 
 	private:
 		StagePanel* m_stage;
@@ -83,9 +82,9 @@ private:
 	}; // StageDropTarget 
 
 private:
-	ee::Sprite* m_background;
+	ee::SprPtr m_background;
 
-	Symbol* m_sym;
+	std::shared_ptr<Symbol> m_sym;
 
 }; // StagePanel
 

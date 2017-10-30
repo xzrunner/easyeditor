@@ -7,13 +7,13 @@
 namespace ee
 {
 
-class EmptyVerifyVisitor : public Visitor<Shape>
+class EmptyVerifyVisitor : public RefVisitor<Shape>
 {
 public:
 	EmptyVerifyVisitor(bool& valid) 
 		: m_valid(valid) { m_valid = true; }
 
-	void Visit(Shape* shape, bool& next) {
+	void Visit(const ShapePtr& shape, bool& next) {
 		m_valid = false;
 		next = false;
 	}

@@ -9,16 +9,18 @@
 namespace ee
 {
 
-class RectQueryVisitor : public Visitor<Sprite>
+class RectQueryVisitor : public RefVisitor<Sprite>
 {
 public:
-	RectQueryVisitor(const sm::rect& rect, bool contain, std::vector<Sprite*>& result);
-	virtual void Visit(Sprite* spr, bool& next);
+	RectQueryVisitor(const sm::rect& rect, bool contain);
+	virtual void Visit(const SprPtr& spr, bool& next);
+
+	const std::vector<SprPtr>& GetSelected() const { return m_selected; }
 
 private:
 	const sm::rect& m_rect;
 	bool m_contain;
-	std::vector<Sprite*>& m_result;
+	std::vector<SprPtr> m_selected;
 
 }; // RectQueryVisitor
 

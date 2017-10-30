@@ -33,13 +33,7 @@ public:
 	FontBlankSprite();
 	FontBlankSprite(const FontBlankSprite& spr);
 	FontBlankSprite& operator = (const FontBlankSprite& spr);
-	FontBlankSprite(FontBlankSymbol* sym);
-
-	/**
-	 *  @interface
-	 *    s2::Sprite
-	 */
-	virtual FontBlankSprite* Clone() const { return new FontBlankSprite(*this); }
+	FontBlankSprite(const s2::SymPtr& sym, uint32_t id = -1);
 
 	/**
 	 *  @interface
@@ -79,6 +73,8 @@ private:
 	std::string m_text;
 
 	std::string m_tid;
+
+	SPRITE_CLONE_FUNC(FontBlankSprite)
 
 }; // FontBlankSprite
 }

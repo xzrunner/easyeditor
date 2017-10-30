@@ -1,7 +1,7 @@
 #ifndef _EASYEDITOR_FILTER_MODES_H_
 #define _EASYEDITOR_FILTER_MODES_H_
 
-#include <CU_Singleton.h>
+#include <cu/cu_macro.h>
 
 #include <sprite2/FilterMode.h>
 
@@ -35,7 +35,7 @@ private:
 
 	std::vector<Item> m_modes;
 
-	SINGLETON_DECLARATION(FilterModes);
+	CU_SINGLETON_DECLARATION(FilterModes);
 
 }; // FilterModes
 

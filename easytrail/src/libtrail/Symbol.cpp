@@ -26,12 +26,12 @@ sm::rect Symbol::GetBoundingImpl(const s2::Sprite* spr, const s2::Actor* actor, 
 
 bool Symbol::LoadResources()
 {
-	if (!gum::FilepathHelper::Exists(m_filepath)) {
+	if (!gum::FilepathHelper::Exists(m_filepath.c_str())) {
 		return false;
 	}
 
 	m_et_cfg = MTConfigMgr::Instance()->GetConfig(m_filepath);
-	m_et = s2::TrailEmitterPool::Instance()->Pop();
+	m_et = std::make_unique<s2::TrailEmitter>();
 	m_et->CreateEmitter(m_et_cfg);
 	m_et->Start();
 

@@ -45,8 +45,8 @@ void KeyFrame::CopyFromOther(const KeyFrame* src)
 	// sprs
 	for (size_t i = 0, n = src->m_sprs.size(); i < n; ++i)
 	{
-		ee::Sprite* s = dynamic_cast<ee::Sprite*>(((cu::Cloneable*)src->m_sprs[i])->Clone());
-		SpriteUserData::SetSprData(s, src->m_layer, this);
+		ee::SprPtr s = std::dynamic_pointer_cast<ee::Sprite>(src->m_sprs[i]->Clone());
+		SpriteUserData::SetSprData(*s, src->m_layer, this);
 		m_sprs.push_back(s);
 
 		if (src->m_layer) {
@@ -60,12 +60,11 @@ void KeyFrame::CopyFromOther(const KeyFrame* src)
 	// todo spr's ud
 }
 
-void KeyFrame::Insert(ee::Sprite* spr, int idx)
+void KeyFrame::Insert(const ee::SprPtr& spr, int idx)
 {
 	if (!spr) {
 		throw ee::Exception("KeyFrame::Insert fail: spr null.");
 	}
-	spr->AddReference();
 
 	SpriteUserData::SetSprData(spr, m_layer, this);
 	ee::ObjectVector<ee::Sprite>::Insert(m_sprs, spr, idx);
@@ -75,7 +74,7 @@ void KeyFrame::Insert(ee::Sprite* spr, int idx)
 	}
 }
 
-bool KeyFrame::Remove(ee::Sprite* spr) 
+bool KeyFrame::Remove(const ee::SprPtr& spr) 
 {
 	m_skeleton.RemoveSprite(spr);
 	if (m_layer) {
@@ -85,17 +84,17 @@ bool KeyFrame::Remove(ee::Sprite* spr)
 	return ee::ObjectVector<ee::Sprite>::Remove(m_sprs, spr);
 }
 
-bool KeyFrame::Reorder(const ee::Sprite* spr, bool up)
+bool KeyFrame::Reorder(const ee::SprConstPtr& spr, bool up)
 {
 	return ee::ObjectVector<ee::Sprite>::ResetOrder(m_sprs, spr, up);
 }
 
-bool KeyFrame::ReorderMost(const ee::Sprite* spr, bool up)
+bool KeyFrame::ReorderMost(const ee::SprConstPtr& spr, bool up)
 {
 	return ee::ObjectVector<ee::Sprite>::ResetOrderMost(m_sprs, spr, up);
 }
 
-bool KeyFrame::Sort(std::vector<ee::Sprite*>& sprs)
+bool KeyFrame::Sort(std::vector<ee::SprPtr>& sprs)
 {
 	return ee::ObjectVector<ee::Sprite>::Sort(m_sprs, sprs);
 }
@@ -141,17 +140,17 @@ void KeyFrame::SetLerp(s2::AnimLerp::SprData data, s2::ILerp* lerp)
 }
 
 void KeyFrame::GetTweenSprite(const KeyFrame* start, const KeyFrame* end, 
-							  std::vector<ee::Sprite*>& tween, int time, int tot_time)
+							  std::vector<ee::SprPtr>& tween, int time, int tot_time)
 {
 	// 	// old
 	// 	for (int i = 0, n = start->Size(); i < n; ++i)
 	// 	{
-	// 		ee::Sprite* s = start->m_sprs[i];
+	// 		ee::SprPtr s = start->m_sprs[i];
 	// 		for (int j = 0, m = end->Size(); j < m; ++j) {
-	// 			ee::Sprite* e = end->m_sprs[j];
+	// 			ee::SprPtr e = end->m_sprs[j];
 	// 			if (IsTweenMatched(s, e))
 	// 			{
-	// 				ee::Sprite* mid = s->clone();
+	// 				ee::SprPtr mid = s->clone();
 	// 				GetTweenSprite(s, e, mid, process);
 	// 				tween.push_back(mid);
 	// 			}
@@ -178,28 +177,28 @@ void KeyFrame::GetTweenSprite(const KeyFrame* start, const KeyFrame* end,
 
 		tween.reserve(tweens.size());
 		for (int i = 0, n = tweens.size(); i < n; ++i) {
-			tween.push_back(dynamic_cast<ee::Sprite*>(tweens[i]));
+			tween.push_back(std::dynamic_pointer_cast<ee::Sprite>(tweens[i]));
 		}
 	}
 }
 
-//void KeyFrame::GetTweenSprite(ee::Sprite* start, ee::Sprite* end, 
-//							  ee::Sprite* tween, float process) const
+//void KeyFrame::GetTweenSprite(const ee::SprPtr& start, const ee::SprPtr& end, 
+//							  ee::SprPtr tween, float process) const
 //{
 //	eanim::TweenUtility::GetTweenSprite(start, end, tween, process);
 //
-//	emesh::Sprite* s = dynamic_cast<emesh::Sprite*>(start),
-//		*mid = dynamic_cast<emesh::Sprite*>(tween),
+//	emesh::Sprite* s = std::dynamic_pointer_cast<emesh::Sprite>(start),
+//		*mid = std::dynamic_pointer_cast<emesh::Sprite>(tween),
 //		*e = static_cast<emesh::Sprite*>(end);
 //	if (s && mid && e) {
 //		mid->SetTween(s, e, process);
 //	}
 //}
 //
-//bool KeyFrame::IsTweenMatched(const ee::Sprite* s0, const ee::Sprite* s1) const
+//bool KeyFrame::IsTweenMatched(const ee::SprPtr s0, const ee::SprPtr s1) const
 //{
 //	if (eanim::TweenUtility::IsTweenMatched(s0, s1) &&
-//		!m_skeleton.IsContainSprite(const_cast<ee::Sprite*>(s0))) {
+//		!m_skeleton.IsContainSprite(const_cast<ee::SprPtr>(s0))) {
 //		return true;
 //	} else {
 //		return false;

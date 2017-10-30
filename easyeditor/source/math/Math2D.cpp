@@ -13,7 +13,7 @@ bool Math2D::IsCircleIntersectRect(const sm::vec2& center, float radius, const s
 	if (sm::is_point_in_rect(center, aabb))
 		return true;
 
-	std::vector<sm::vec2> bounding;
+	CU_VEC<sm::vec2> bounding;
 	bounding.push_back(sm::vec2(aabb.xmin, aabb.ymin));
 	bounding.push_back(sm::vec2(aabb.xmax, aabb.ymin));
 	bounding.push_back(sm::vec2(aabb.xmax, aabb.ymax));
@@ -65,7 +65,7 @@ float Math2D::GetDisPointToStraightLine(const sm::vec2& p, const sm::vec2& s, co
 	else return fabs((s.x - p.x) * (e.y - p.y) - (s.y - p.y) * (e.x - p.x)) / divider;
 }
 
-float Math2D::GetDisPointToPolyline(const sm::vec2& p, const std::vector<sm::vec2>& polyline, size_t* iPos/* = NULL*/)
+float Math2D::GetDisPointToPolyline(const sm::vec2& p, const CU_VEC<sm::vec2>& polyline, size_t* iPos/* = NULL*/)
 {
 	if (polyline.size() < 2) return FLT_MAX;
 
@@ -84,7 +84,7 @@ float Math2D::GetDisPointToPolyline(const sm::vec2& p, const std::vector<sm::vec
 	return nearest;
 }
 
-float Math2D::GetDisPointToMultiLines(const sm::vec2& p, const std::vector<std::vector<sm::vec2> >& multiLines, size_t* iLine/* = NULL*/, size_t* iPos/* = NULL*/)
+float Math2D::GetDisPointToMultiLines(const sm::vec2& p, const CU_VEC<CU_VEC<sm::vec2> >& multiLines, size_t* iLine/* = NULL*/, size_t* iPos/* = NULL*/)
 {
 	float nearest = FLT_MAX;
 	size_t iNearest0 = -1, iNearest1 = -1;
@@ -107,7 +107,7 @@ float Math2D::GetDisPointToMultiLines(const sm::vec2& p, const std::vector<std::
 	return nearest;
 }
 
-float Math2D::GetDisPointToMultiPos(const sm::vec2& p, const std::vector<std::vector<sm::vec2> >& pos, size_t* index0/* = NULL*/, size_t* index1/* = NULL*/)
+float Math2D::GetDisPointToMultiPos(const sm::vec2& p, const CU_VEC<CU_VEC<sm::vec2> >& pos, size_t* index0/* = NULL*/, size_t* index1/* = NULL*/)
 {
 	float nearest = FLT_MAX;
 	size_t iNearest0 = -1, iNearest1 = -1;
@@ -130,7 +130,7 @@ float Math2D::GetDisPointToMultiPos(const sm::vec2& p, const std::vector<std::ve
 	return nearest;
 }
 
-float Math2D::GetPolygonArea(const std::vector<sm::vec2>& polygon)
+float Math2D::GetPolygonArea(const CU_VEC<sm::vec2>& polygon)
 {
 	if(polygon.size() < 3)
 		return 0;
@@ -144,7 +144,7 @@ float Math2D::GetPolygonArea(const std::vector<sm::vec2>& polygon)
 	return fabs(s/2.0f);
 }
 
-float Math2D::GetPolygonPerimeter(const std::vector<sm::vec2>& poly)
+float Math2D::GetPolygonPerimeter(const CU_VEC<sm::vec2>& poly)
 {
 	if (poly.size() < 2) {
 		return 0;
@@ -211,7 +211,7 @@ int Math2D::GetCircumcenter(const sm::vec2& pos1, const sm::vec2& pos2, const sm
 	return 0;
 }
 
-void Math2D::GetNearestPosOnLineToPoint(const sm::vec2& p, const std::vector<sm::vec2>& l, sm::vec2* nearest, size_t* index)
+void Math2D::GetNearestPosOnLineToPoint(const sm::vec2& p, const CU_VEC<sm::vec2>& l, sm::vec2* nearest, size_t* index)
 {
 	size_t iNearestPos = 0;
 	float nearestDis = sm::dis_pos_to_pos(p, l.at(iNearestPos));
@@ -279,7 +279,7 @@ sm::vec2 Math2D::TransCoordsWorldToLocal(const sm::vec2& origin, const sm::vec2&
 	return local;
 }
 
-void Math2D::GetMBR(const std::vector<sm::vec2>& pos, sm::rect* mbr)
+void Math2D::GetMBR(const CU_VEC<sm::vec2>& pos, sm::rect* mbr)
 {
 	if (pos.empty()) return;
 

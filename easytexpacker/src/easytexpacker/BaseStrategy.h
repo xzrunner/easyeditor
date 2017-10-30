@@ -34,12 +34,12 @@ protected:
 	public:
 		SpriteCmp(SortStrategy strategy, bool isDescend);
 
-		bool operator() (const ee::ImageSprite* s0, const ee::ImageSprite* s1) const;
+		bool operator() (const std::shared_ptr<const ee::ImageSprite>& s0, const std::shared_ptr<const ee::ImageSprite>& s1) const;
 
 	private:
-		bool IsAreaLess(const ee::ImageSprite* s0, const ee::ImageSprite* s1) const;
-		bool IsEdgeLess(const ee::ImageSprite* s0, const ee::ImageSprite* s1) const;
-		bool IsTotEdgesLess(const ee::ImageSprite* s0, const ee::ImageSprite* s1) const;
+		bool IsAreaLess(const std::shared_ptr<const ee::ImageSprite>& s0, const std::shared_ptr<const ee::ImageSprite>& s1) const;
+		bool IsEdgeLess(const std::shared_ptr<const ee::ImageSprite>& s0, const std::shared_ptr<const ee::ImageSprite>& s1) const;
+		bool IsTotEdgesLess(const std::shared_ptr<const ee::ImageSprite>& s0, const std::shared_ptr<const ee::ImageSprite>& s1) const;
 
 	private:
 		SortStrategy m_strategy;

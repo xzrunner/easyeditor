@@ -5,7 +5,7 @@
 namespace ee
 {
 
-SINGLETON_DEFINITION(CameraModes);
+CU_SINGLETON_DEFINITION(CameraModes);
 
 CameraModes::CameraModes()
 {

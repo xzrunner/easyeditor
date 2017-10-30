@@ -1,6 +1,8 @@
 #ifndef _EASYEDITOR_PATH_MGR_H_
 #define _EASYEDITOR_PATH_MGR_H_
 
+#include <string>
+
 #include <vector>
 
 namespace ee

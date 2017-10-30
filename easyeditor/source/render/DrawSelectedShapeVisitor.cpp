@@ -6,7 +6,7 @@
 namespace ee
 {
 
-void DrawSelectedShapeVisitor::Visit(Shape* shape, bool& next) 
+void DrawSelectedShapeVisitor::Visit(const ShapePtr& shape, bool& next)
 {
 	s2::RenderParams rp;
 	rp.color.SetMul(s2::Color(255, 0, 0));

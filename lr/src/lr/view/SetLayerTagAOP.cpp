@@ -20,21 +20,21 @@ void SetLayerTagAOP::Redo()
 {
 }
 
-void SetLayerTagAOP::Copy(const std::vector<ee::Sprite*>& sprs)
+void SetLayerTagAOP::Copy(const std::vector<SprPtr>& sprs)
 {
 	Set(sprs, m_type);
 }
 
-Json::Value SetLayerTagAOP::Store(const std::vector<ee::Sprite*>& sprs) const
+Json::Value SetLayerTagAOP::Store(const std::vector<ee::SprPtr>& sprs) const
 {
 	return Json::Value();
 }
 
-void SetLayerTagAOP::Set(const std::vector<ee::Sprite*>& sprs, Type type)
+void SetLayerTagAOP::Set(const std::vector<ee::SprPtr>& sprs, Type type)
 {
 	for (int i = 0, n = sprs.size(); i < n; ++i)
 	{
-		ee::Sprite* spr = sprs[i];
+		auto& spr = sprs[i];
 
 		std::string tag = spr->GetTag();
 		size_t p_begin = tag.find("layer=");

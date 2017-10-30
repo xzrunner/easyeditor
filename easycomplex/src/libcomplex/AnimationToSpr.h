@@ -10,15 +10,15 @@ namespace ecomplex
 class AnimationToSpr
 {
 public:
-	static ee::Sprite* Trans(const erespacker::PackAnimation* anim);
+	static ee::SprPtr Trans(const erespacker::PackAnimation* anim);
 
 private:
-	static ee::Sprite* TransComplex(const erespacker::PackAnimation* anim);
-	static ee::Sprite* TransAnim(const erespacker::PackAnimation* anim);
+	static ee::SprPtr TransComplex(const erespacker::PackAnimation* anim);
+	static ee::SprPtr TransAnim(const erespacker::PackAnimation* anim);
 
-	static void TransSprite(ee::Sprite* spr, const erespacker::PackAnimation::SpriteTrans& t);
-	static void TransSpriteMat(ee::Sprite* spr, const erespacker::PackAnimation::SpriteTrans& t);
-	static void TransSpriteCol(ee::Sprite* spr, const erespacker::PackAnimation::SpriteTrans& t);
+	static void TransSprite(const ee::SprPtr& spr, const erespacker::PackAnimation::SpriteTrans& t);
+	static void TransSpriteMat(const ee::SprPtr& spr, const erespacker::PackAnimation::SpriteTrans& t);
+	static void TransSpriteCol(const ee::SprPtr& spr, const erespacker::PackAnimation::SpriteTrans& t);
 
 }; // AnimationToSpr
 

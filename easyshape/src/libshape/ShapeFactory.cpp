@@ -13,38 +13,38 @@
 namespace eshape
 {
 
-ee::Shape* ShapeFactory::CreateShapeFromFile(const Json::Value& value, 
+ee::ShapePtr ShapeFactory::CreateShapeFromFile(const Json::Value& value, 
 											   const std::string& dir)
 {
-	ee::Shape* shape = NULL;
+	ee::ShapePtr shape = nullptr;
 
 	std::string desc = value["type"].asString();
 	ShapeType type = get_shape_type(desc);
 	switch (type)
 	{
 	case ST_POINT:
-		shape = new PointShape;
+		shape = std::make_unique<PointShape>();
 		break;
 	case ST_BEZIER:
-		shape = new BezierShape;
+		shape = std::make_unique<BezierShape>();
 		break;
 	case ST_CHAIN:
-		shape = new ChainShape;
+		shape = std::make_unique<ChainShape>();
 		break;
 	case ST_CIRCLE:
-		shape = new CircleShape;
+		shape = std::make_unique<CircleShape>();
 		break;
 // 	case ST_COMPLEX_POLYGON:
-// 		shape = new ComplexPolygonShape;
+// 		shape = std::make_unique<ComplexPolygonShape>();
 // 		break;
 	case ST_COSINE_CURVE:
-		shape = new CosineShape;
+		shape = std::make_unique<CosineShape>();
 		break;
 	case ST_POLYGON:
-		shape = new PolygonShape;
+		shape = std::make_unique<PolygonShape>();
 		break;
 	case ST_RECT:
-		shape = new RectShape;
+		shape = std::make_unique<RectShape>();
 		break;
 	}
 

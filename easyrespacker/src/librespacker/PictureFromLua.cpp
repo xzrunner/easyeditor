@@ -6,7 +6,7 @@
 namespace erespacker
 {
 
-void PictureFromLua::Unpack(lua_State* L, const std::vector<ee::Image*>& images, 
+void PictureFromLua::Unpack(lua_State* L, const std::vector<ee::ImagePtr>& images, 
 							PackPicture* pic)
 {
 	int len = lua_rawlen(L, -1);

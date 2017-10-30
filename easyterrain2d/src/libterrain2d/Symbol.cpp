@@ -33,7 +33,7 @@ int Symbol::Type() const
 	return ee::SYM_TERRAIN2D;
 }
 
-s2::RenderReturn Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr) const
+s2::RenderReturn Symbol::DrawTree(cooking::DisplayList* dlist, const s2::RenderParams& rp, const s2::Sprite* spr) const
 {
 	s2::RenderParams p = params;
 	if (spr) {
@@ -70,11 +70,11 @@ void Symbol::ReloadTexture() const
 {
 	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
 		OceanMesh* ocean = m_oceans[i];
-		const ee::ImageSymbol* img0 = ocean->GetImage0();
+		const std::shared_ptr<ee::ImageSymbol>& img0 = ocean->GetImage0();
 		if (img0) {
 			img0->ReloadTexture();
 		}
-		const ee::ImageSymbol* img1 = ocean->GetImage1();
+		const std::shared_ptr<ee::ImageSymbol>& img1 = ocean->GetImage1();
 		if (img1) {
 			img1->ReloadTexture();
 		}
@@ -92,7 +92,7 @@ sm::rect Symbol::GetBoundingImpl(const s2::Sprite* spr, const s2::Actor* actor, 
 
 bool Symbol::LoadResources()
 {
-	if (!gum::FilepathHelper::Exists(m_filepath)) {
+	if (!gum::FilepathHelper::Exists(m_filepath.c_str())) {
 		return false;
 	}
 
@@ -118,7 +118,7 @@ bool Symbol::LoadResources()
 			m_oceans.push_back(ocean);
 // 			insertShape(const_cast<eshape::PolygonShape*>(ocean->GetBounding()));
 // 			library->AddSymbol(const_cast<ee::ImageSymbol*>(ocean->GetImage0()));
-// 			if (const ee::Symbol* tex1 = ocean->GetImage1()) {
+// 			if (const ee::SymPtr& tex1 = ocean->GetImage1()) {
 // 				library->AddSymbol(const_cast<ee::Symbol*>(tex1));
 // 			}
 // 			toolbar->SetControlersValue(ocean);

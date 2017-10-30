@@ -21,8 +21,8 @@ public:
 	LayerMgr();
 	~LayerMgr();
 
-	void TraverseSprite(Visitor<ee::Sprite>& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
-	void TraverseShape(Visitor<ee::Shape>& visitor, bool order = true) const;
+	void TraverseSprite(RefVisitor<ee::Sprite>& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
+	void TraverseShape(RefVisitor<ee::Shape>& visitor, bool order = true) const;
 
 	const std::vector<Layer*>& GetAllLayers() const { return m_layers; }
 

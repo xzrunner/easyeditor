@@ -40,8 +40,8 @@ Bitmap::Bitmap(const std::string& filepath, uint8_t* pixels, int w, int h, int f
 	LoadFromData(pixels, w, h, fmt);
 }
 
-Bitmap::Bitmap(const Symbol* sym)
-	: m_filepath(sym->GetFilepath())
+Bitmap::Bitmap(const Symbol& sym)
+	: m_filepath(sym.GetFilepath())
 	, m_bmp_large(NULL)
 	, m_bmp_small(NULL)
 {
@@ -65,7 +65,7 @@ bool Bitmap::LoadFromFile(const std::string& filepath)
 	int type = ee::SymbolFile::Instance()->Type(filepath);
 	if (filepath.find("pvr") != std::string::npos || filepath.find("pkm") != std::string::npos) 
 	{
-		ImageData* img_data = ImageDataMgr::Instance()->GetItem(filepath);
+		auto img_data = ImageDataMgr::Instance()->GetItem(filepath);
 
 		int w = img_data->GetWidth(),
 			h = img_data->GetHeight();
@@ -100,9 +100,10 @@ bool Bitmap::LoadFromFile(const std::string& filepath)
 		if (filepath == SYM_GROUP_TAG) {
 			return false;
 		} else {
-			Symbol* sym = SymbolMgr::Instance()->FetchSymbol(filepath);
-			LoadFromSym(sym);
-			sym->RemoveReference();
+			auto sym = SymbolMgr::Instance()->FetchSymbol(filepath);
+			if (sym) {
+				LoadFromSym(*sym);
+			}
 		}
 	}
 
@@ -116,7 +117,7 @@ void Bitmap::LoadFromData(uint8_t* pixels, int w, int h, int fmt)
 	case GPF_RGB:
 		InitBmp(wxImage(w, h, (unsigned char*)pixels, true), false);
 		break;
-	case GPF_RGBA:
+	case GPF_RGBA8:
 		{
 			uint8_t* rgb = gimg_rgba2rgb(pixels, w, h);
 			gimg_revert_y(rgb, w, h, GPF_RGB);
@@ -127,9 +128,9 @@ void Bitmap::LoadFromData(uint8_t* pixels, int w, int h, int fmt)
 	}
 }
 
-void Bitmap::LoadFromSym(const Symbol* sym)
+void Bitmap::LoadFromSym(const Symbol& sym)
 {
-	sm::rect rect = sym->GetBounding();
+	sm::rect rect = sym.GetBounding();
 	if (!rect.IsValid()) {
 		return;
 	}
@@ -196,10 +197,9 @@ void Bitmap::GetImage(const std::string& filepath, wxImage& dst_img)
 		inited = true;
 	}
 
-	ImageData* img = ImageDataMgr::Instance()->GetItem(filepath);
-	if (img->GetFormat() != GPF_RGBA) {
-		img->RemoveReference();
-		dst_img.LoadFile(filepath);
+	auto img = ImageDataMgr::Instance()->GetItem(filepath);
+	if (img->GetFormat() != GPF_RGBA8) {
+		dst_img.LoadFile(filepath.c_str());
 		return;
 	}
 
@@ -207,7 +207,7 @@ void Bitmap::GetImage(const std::string& filepath, wxImage& dst_img)
 	pimg::Rect r = cd.GetRegion();
 
 	wxImage wx_img;
-	wx_img.LoadFile(filepath);
+	wx_img.LoadFile(filepath.c_str());
 
 	wxRect wx_rect;
 	int h = img->GetHeight();
@@ -217,8 +217,6 @@ void Bitmap::GetImage(const std::string& filepath, wxImage& dst_img)
 	wx_rect.SetBottom(h - r.ymin - 1);
 
 	dst_img = wx_img.GetSubImage(wx_rect);
-
-	img->RemoveReference();
 }
 
 }

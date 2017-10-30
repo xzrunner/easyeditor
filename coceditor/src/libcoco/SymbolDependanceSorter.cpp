@@ -13,45 +13,45 @@
 #include <ee/Image.h>
 #include <ee/SymbolMgr.h>
 
-#include <sprite2/S2_Sprite.h>
+#include <sprite2/Sprite.h>
 
 namespace ecoco
 {
 
-void SymbolDependanceSorter::prepare(const std::vector<const ee::Symbol*>& syms)
+void SymbolDependanceSorter::prepare(const std::vector<ee::SymPtr>& syms)
 {
 	fetch(syms);
 	sort();
 }
 
-void SymbolDependanceSorter::prepare(const std::vector<ee::Sprite*>& sprs)
+void SymbolDependanceSorter::prepare(const std::vector<ee::SprPtr>& sprs)
 {
-	std::vector<const ee::Symbol*> syms;
+	std::vector<ee::SymPtr> syms;
 	syms.reserve(sprs.size());
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
-		syms.push_back(dynamic_cast<const ee::Symbol*>(sprs[i]->GetSymbol()));
+		syms.push_back(std::dynamic_pointer_cast<ee::Symbol>(sprs[i]->GetSymbol()));
 	}
 	prepare(syms);
 }
 
-void SymbolDependanceSorter::fetch(const std::vector<const ee::Symbol*>& syms)
+void SymbolDependanceSorter::fetch(const std::vector<ee::SymPtr>& syms)
 {
 	for (size_t i = 0, n = syms.size(); i < n; ++i) {
 		m_unique.insert(syms[i]);
 	}
 
-	std::queue<const ee::Symbol*> buffer;
+	std::queue<ee::SymPtr> buffer;
 	for (size_t i = 0, n = syms.size(); i < n; ++i)
 	{
-		const ee::Symbol* sym = syms[i];
-		if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(sym))
+		const ee::SymPtr& sym = syms[i];
+		if (auto complex = std::dynamic_pointer_cast<const ecomplex::Symbol>(sym))
 		{
-			const std::vector<s2::Sprite*>& children = complex->GetAllChildren();
+			auto& children = complex->GetAllChildren();
 			for (size_t j = 0, n = children.size(); j < n; ++j) {
-				buffer.push(dynamic_cast<const ee::Symbol*>(children[i]->GetSymbol()));
+				buffer.push(std::dynamic_pointer_cast<ee::Symbol>(children[i]->GetSymbol()));
 			}
 		}
-		else if (const libanim::Symbol* anim = dynamic_cast<const libanim::Symbol*>(sym))
+		else if (auto anim = std::dynamic_pointer_cast<const libanim::Symbol>(sym))
 		{
 			const auto& layers = anim->GetLayers();
 			for (size_t i = 0, n = layers.size(); i < n; ++i)
@@ -61,51 +61,51 @@ void SymbolDependanceSorter::fetch(const std::vector<const ee::Symbol*>& syms)
 				{
 					const auto& frame = layer->frames[j];
 					for (size_t k = 0, l = frame->sprs.size(); k < l; ++k) {
-						buffer.push(dynamic_cast<const ee::Symbol*>(frame->sprs[k]->GetSymbol()));
+						buffer.push(std::dynamic_pointer_cast<ee::Symbol>(frame->sprs[k]->GetSymbol()));
 					}
 				}
 			}
 		}
-		else if (const escale9::Symbol* patch = dynamic_cast<const escale9::Symbol*>(sym))
+		else if (auto patch = std::dynamic_pointer_cast<const escale9::Symbol>(sym))
 		{
-			std::vector<s2::Sprite*> grids;
+			CU_VEC<s2::SprPtr> grids;
 			patch->GetScale9().GetGrids(grids);
 			for (int i = 0, n = grids.size(); i < n; ++i) {
-				buffer.push(dynamic_cast<const ee::Symbol*>(grids[i]->GetSymbol()));				
+				buffer.push(std::dynamic_pointer_cast<ee::Symbol>(grids[i]->GetSymbol()));				
 			}
 		}
 	}
 
 	while (!buffer.empty())
 	{
-		const ee::Symbol* sym = buffer.front(); buffer.pop();
-		if (const ee::ImageSymbol* image = dynamic_cast<const ee::ImageSymbol*>(sym))
+		const ee::SymPtr& sym = buffer.front(); buffer.pop();
+		if (auto image = std::dynamic_pointer_cast<ee::ImageSymbol>(sym))
 		{
 			m_unique.insert(image);
 		}
-		else if (const ee::FontBlankSymbol* font = dynamic_cast<const ee::FontBlankSymbol*>(sym))
+		else if (auto font = std::dynamic_pointer_cast<ee::FontBlankSymbol>(sym))
 		{
 			m_unique.insert(font);
 		}
-		else if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(sym))
+		else if (auto complex = std::dynamic_pointer_cast<ecomplex::Symbol>(sym))
 		{
 			if (m_unique.find(complex) == m_unique.end())
 			{
 				m_unique.insert(complex);
-				const std::vector<s2::Sprite*>& children = complex->GetAllChildren();
+				auto& children = complex->GetAllChildren();
 				for (size_t i = 0, n = children.size(); i < n; ++i)
 				{
-					const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(children[i]->GetSymbol());
+					const ee::SymPtr& sym = std::dynamic_pointer_cast<ee::Symbol>(children[i]->GetSymbol());
 					buffer.push(sym);
 
 					// patch for scale9
-					if (const escale9::Symbol* scale9 = dynamic_cast<const escale9::Symbol*>(sym)) {
+					if (auto scale9 = std::dynamic_pointer_cast<escale9::Symbol>(sym)) {
 						PrepareScale9(buffer, scale9);
 					}
 				}
 			}
 		}
-		else if (const libanim::Symbol* anim = dynamic_cast<const libanim::Symbol*>(sym))
+		else if (auto anim = std::dynamic_pointer_cast<libanim::Symbol>(sym))
 		{
 			if (m_unique.find(anim) == m_unique.end())
 			{
@@ -119,11 +119,11 @@ void SymbolDependanceSorter::fetch(const std::vector<const ee::Symbol*>& syms)
 						const auto& frame = layer->frames[j];
 						for (size_t k = 0, l = frame->sprs.size(); k < l; ++k)
 						{
-							const ee::Symbol* sym = dynamic_cast<const ee::Symbol*>(frame->sprs[k]->GetSymbol());
+							const ee::SymPtr& sym = std::dynamic_pointer_cast<ee::Symbol>(frame->sprs[k]->GetSymbol());
 							buffer.push(sym);
 
 							// patch for scale9
-							if (const escale9::Symbol* scale9 = dynamic_cast<const escale9::Symbol*>(sym)) {
+							if (auto scale9 = std::dynamic_pointer_cast<escale9::Symbol>(sym)) {
 								PrepareScale9(buffer, scale9);
 							}
 						}
@@ -131,26 +131,26 @@ void SymbolDependanceSorter::fetch(const std::vector<const ee::Symbol*>& syms)
 				}
 			}
 		}
-		else if (const escale9::Symbol* scale9 = dynamic_cast<const escale9::Symbol*>(sym))
+		else if (auto scale9 = std::dynamic_pointer_cast<escale9::Symbol>(sym))
 		{
 			PrepareScale9(buffer, scale9);
 		}
-		else if (const emesh::Symbol* mesh = dynamic_cast<const emesh::Symbol*>(sym))
+		else if (auto mesh = std::dynamic_pointer_cast<emesh::Symbol>(sym))
 		{
 			m_unique.insert(mesh);
 		}
-		else if (const eterrain2d::Symbol* ocean = dynamic_cast<const eterrain2d::Symbol*>(sym))
+		else if (auto ocean = std::dynamic_pointer_cast<eterrain2d::Symbol>(sym))
 		{
 			m_unique.insert(ocean);
 		}
-		else if (const etexture::Symbol* tex = dynamic_cast<const etexture::Symbol*>(sym))
+		else if (auto tex = std::dynamic_pointer_cast<etexture::Symbol>(sym))
 		{
 			m_unique.insert(tex);
 		}
-		else if (const eicon::Symbol* icon = dynamic_cast<const eicon::Symbol*>(sym))
+		else if (auto icon = std::dynamic_pointer_cast<eicon::Symbol>(sym))
 		{
-			const ee::ImageSymbol* img_sym = dynamic_cast<const ee::ImageSymbol*>(icon->GetIcon()->GetImage());
-			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(img_sym->GetFilepath());
+			auto img_sym = std::dynamic_pointer_cast<const ee::ImageSymbol>(icon->GetIcon()->GetImage());
+			auto sym = ee::SymbolMgr::Instance()->FetchSymbol(img_sym->GetFilepath());
 			m_unique.insert(sym);
 			m_unique.insert(icon);
 		}
@@ -161,29 +161,29 @@ void SymbolDependanceSorter::sort()
 {
 	while (!m_unique.empty())
 	{
-		std::set<const ee::Symbol*>::iterator itr = m_unique.begin();
+		std::set<ee::SymPtr>::iterator itr = m_unique.begin();
 		for ( ; itr != m_unique.end(); ++itr)
 		{
-			ee::Symbol* sym = const_cast<ee::Symbol*>(*itr);
-			if (ee::ImageSymbol* image = dynamic_cast<ee::ImageSymbol*>(sym))
+			auto& sym = *itr;
+			if (auto image = std::dynamic_pointer_cast<ee::ImageSymbol>(sym))
 			{
 				std::string path = sym->GetFilepath();
 				m_symbol_set.Insert(image);
 				m_unique.erase(itr);
 				break;
 			}
-			else if (ee::FontBlankSymbol* font = dynamic_cast<ee::FontBlankSymbol*>(sym))
+			else if (auto font = std::dynamic_pointer_cast<ee::FontBlankSymbol>(sym))
 			{
 				m_symbol_set.Insert(font);
 				m_unique.erase(itr);
 				break;
 			}
-			else if (ecomplex::Symbol* complex = dynamic_cast<ecomplex::Symbol*>(sym))
+			else if (auto complex = std::dynamic_pointer_cast<ecomplex::Symbol>(sym))
 			{
 				bool prepared = true;
-				const std::vector<s2::Sprite*>& children = complex->GetAllChildren();
+				auto& children = complex->GetAllChildren();
 				for (size_t i = 0, n = children.size(); i < n && prepared; ++i) {
-					ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
+					auto child = std::dynamic_pointer_cast<ee::Sprite>(children[i]);
 					if (!IsSymbolPrepared(child)) {
 						prepared = false;
 					}
@@ -195,7 +195,7 @@ void SymbolDependanceSorter::sort()
 					break;
 				}
 			}
-			else if (libanim::Symbol* anim = dynamic_cast<libanim::Symbol*>(sym))
+			else if (auto anim = std::dynamic_pointer_cast<libanim::Symbol>(sym))
 			{
 				bool prepared = true;
 				const auto& layers = anim->GetLayers();
@@ -206,7 +206,7 @@ void SymbolDependanceSorter::sort()
 					{
 						const auto& frame = layer->frames[j];
 						for (size_t k = 0, l = frame->sprs.size(); k < l && prepared; ++k) {
-							ee::Sprite* spr = dynamic_cast<ee::Sprite*>(frame->sprs[k]);
+							auto& spr = std::dynamic_pointer_cast<ee::Sprite>(frame->sprs[k]);
 							if (!IsSymbolPrepared(spr)) {
 								prepared = false;
 							}
@@ -220,13 +220,13 @@ void SymbolDependanceSorter::sort()
 					break;
 				}
 			}
-			else if (escale9::Symbol* patch9 = dynamic_cast<escale9::Symbol*>(sym))
+			else if (auto patch9 = std::dynamic_pointer_cast<escale9::Symbol>(sym))
 			{
  				bool prepared = true;
-				std::vector<s2::Sprite*> grids;
+				CU_VEC<s2::SprPtr> grids;
 				patch9->GetScale9().GetGrids(grids);
 				for (int i = 0, n = grids.size(); i < n; ++i) {
-					if (!IsSymbolPrepared(dynamic_cast<const ee::Sprite*>(grids[i])))
+					if (!IsSymbolPrepared(std::dynamic_pointer_cast<const ee::Sprite>(grids[i])))
 						prepared = false;
 				}
  				if (prepared)
@@ -236,50 +236,50 @@ void SymbolDependanceSorter::sort()
  					break;
  				}
 			}
-			else if (emesh::Symbol* mesh = dynamic_cast<emesh::Symbol*>(sym))
+			else if (auto mesh = std::dynamic_pointer_cast<emesh::Symbol>(sym))
 			{
-				const s2::Symbol* base = mesh->GetMesh()->GetBaseSymbol();
-				std::string path = dynamic_cast<const ee::Symbol*>(base)->GetFilepath();
- 				ee::Symbol* image = ee::SymbolMgr::Instance()->FetchSymbol(path);
+				auto base = mesh->GetMesh()->GetBaseSymbol();
+				std::string path = std::dynamic_pointer_cast<const ee::Symbol>(base)->GetFilepath();
+ 				auto image = ee::SymbolMgr::Instance()->FetchSymbol(path);
 				m_symbol_set.Insert(image);
 				m_symbol_set.Insert(mesh);
 				m_unique.erase(itr);
 				break;
 			}
-			else if (eterrain2d::Symbol* ocean_symbol = dynamic_cast<eterrain2d::Symbol*>(sym))
+			else if (auto ocean_symbol = std::dynamic_pointer_cast<eterrain2d::Symbol>(sym))
 			{
 				const std::vector<eterrain2d::OceanMesh*> oceans = ocean_symbol->GetOceans();
 				assert(oceans.size() == 1);
 				eterrain2d::OceanMesh* ocean = oceans[0];
-				const ee::ImageSymbol* img = ocean->GetImage0();
+				const std::shared_ptr<ee::ImageSymbol>& img = ocean->GetImage0();
 				std::string path = img->GetFilepath();
-				ee::Symbol* image = ee::SymbolMgr::Instance()->FetchSymbol(path);
+				auto image = ee::SymbolMgr::Instance()->FetchSymbol(path);
 				m_symbol_set.Insert(image);
 				m_symbol_set.Insert(ocean_symbol);
 				m_unique.erase(itr);
 				break;
 			}
-			else if (etexture::Symbol* tex = dynamic_cast<etexture::Symbol*>(sym))
+			else if (auto tex = std::dynamic_pointer_cast<etexture::Symbol>(sym))
 			{
-				const std::vector<s2::PolygonShape*>& polys = tex->GetPolygons();
+				auto& polys = tex->GetPolygons();
 				assert(polys.size() == 1);
 				for (int i = 0, n = polys.size(); i < n; ++i)
 				{
-					eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(polys[i]);
+					auto poly = std::dynamic_pointer_cast<eshape::PolygonShape>(polys[i]);
 					assert(poly);
 					const eshape::TextureMaterial* material = dynamic_cast<const eshape::TextureMaterial*>(poly->GetMaterial());
 					assert(material);
-					ee::ImageSymbol* image = const_cast<ee::ImageSymbol*>(material->GetImage());
+					auto image = std::dynamic_pointer_cast<const ee::ImageSymbol>(material->GetImage());
 					m_symbol_set.Insert(image);
 				}
 				m_symbol_set.Insert(tex);
 				m_unique.erase(itr);
 				break;
 			}
-			else if (eicon::Symbol* icon = dynamic_cast<eicon::Symbol*>(sym)) 
+			else if (auto icon = std::dynamic_pointer_cast<eicon::Symbol>(sym))
 			{
-				const ee::ImageSymbol* img_sym = dynamic_cast<const ee::ImageSymbol*>(icon->GetIcon()->GetImage());
-				ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(img_sym->GetFilepath());
+				auto img_sym = std::dynamic_pointer_cast<const ee::ImageSymbol>(icon->GetIcon()->GetImage());
+				auto sym = ee::SymbolMgr::Instance()->FetchSymbol(img_sym->GetFilepath());
 				if (IsSymbolPrepared(sym)) {
  					m_symbol_set.Insert(icon);
  					m_unique.erase(itr);
@@ -290,26 +290,26 @@ void SymbolDependanceSorter::sort()
 	}
 }
 
-bool SymbolDependanceSorter::IsSymbolPrepared(const ee::Sprite* spr) const
+bool SymbolDependanceSorter::IsSymbolPrepared(const ee::SprConstPtr& spr) const
 {
-	return IsSymbolPrepared(dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
+	return IsSymbolPrepared(std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol()));
 }
 
-bool SymbolDependanceSorter::IsSymbolPrepared(const ee::Symbol* sym) const
+bool SymbolDependanceSorter::IsSymbolPrepared(const ee::SymConstPtr& sym) const
 {
 	return m_symbol_set.Query(sym);
 }
 
-void SymbolDependanceSorter::PrepareScale9(std::queue<const ee::Symbol*>& buffer,
-										   const escale9::Symbol* scale9)
+void SymbolDependanceSorter::PrepareScale9(std::queue<ee::SymPtr>& buffer,
+										   const std::shared_ptr<escale9::Symbol>& scale9)
 {
 	if (m_unique.find(scale9) == m_unique.end())
 	{
 		m_unique.insert(scale9);		
-		std::vector<s2::Sprite*> grids;
+		CU_VEC<s2::SprPtr> grids;
 		scale9->GetScale9().GetGrids(grids);
 		for (int i = 0, n = grids.size(); i < n; ++i) {
-			buffer.push(dynamic_cast<const ee::Symbol*>(grids[i]->GetSymbol()));
+			buffer.push(std::dynamic_pointer_cast<ee::Symbol>(grids[i]->GetSymbol()));
 		}
 	}
 }

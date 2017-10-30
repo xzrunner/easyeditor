@@ -81,7 +81,7 @@ KeyFrame* FlashLoader::LoadFrame(Layer* layer, rapidxml::xml_node<>* frame_node,
 	rapidxml::xml_node<>* actor_node = frame_node->first_node("elements")
 		->first_node("DOMSymbolInstance");
 	while (actor_node) {
-		ee::Sprite* actor = LoadActor(actor_node, map_name_path);
+		ee::SprPtr actor = LoadActor(actor_node, map_name_path);
 		frame->Insert(actor, INT_MAX);
 		actor->RemoveReference();
 		actor_node = actor_node->next_sibling();
@@ -90,15 +90,14 @@ KeyFrame* FlashLoader::LoadFrame(Layer* layer, rapidxml::xml_node<>* frame_node,
 	return frame;
 }
 
-ee::Sprite* FlashLoader::LoadActor(rapidxml::xml_node<>* actor_node,
+ee::SprPtr FlashLoader::LoadActor(rapidxml::xml_node<>* actor_node,
 								   const std::map<std::string, std::string>& map_name_path)
 {
 	std::string name = actor_node->first_attribute("libraryItemName")->value();
 	std::string filepath = map_name_path.find(name)->second;
-	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+	auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	//	sym->refresh();
-	ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(sym);
-	sym->RemoveReference();
+	auto spr = ee::SpriteFactory::Instance()->Create(sym);
 
 	rapidxml::xml_node<>* mat_node = actor_node->first_node("matrix")->first_node("Matrix");
 	std::string stx = mat_node->first_attribute("tx")->value();

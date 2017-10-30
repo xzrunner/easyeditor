@@ -7,8 +7,9 @@
 #include "SpriteObserver.h"
 #include "SpritePropertySetting.h"
 #include "SpriteIO.h"
+#include "SpritePool.h"
 
-#include <sprite2/S2_Sprite.h>
+#include <sprite2/Sprite.h>
 
 #ifdef OPEN_SCREEN_CACHE
 #include "render/SpriteRenderer.h"
@@ -24,7 +25,6 @@ Sprite::Sprite()
 	, m_anchor(false)
 	, m_observer(NULL)
 {
-	SpriteFactory::Instance()->Insert(this);
 }
 
 Sprite::Sprite(const Sprite& spr)
@@ -34,7 +34,6 @@ Sprite::Sprite(const Sprite& spr)
 	, m_anchor(spr.m_anchor)
 	, m_observer(NULL)
 {
-	SpriteFactory::Instance()->Insert(this);
 }
 
 Sprite& Sprite::operator = (const Sprite& spr)
@@ -48,30 +47,26 @@ Sprite& Sprite::operator = (const Sprite& spr)
 
 	m_observer = NULL;
 
-	SpriteFactory::Instance()->Insert(this);
-
 	return *this;
 }
 
-Sprite::Sprite(Symbol* sym)
+Sprite::Sprite(const s2::SymPtr& sym, uint32_t id)
 	: s2::Sprite(sym)
 	, m_perspective(0, 0)
 	, m_anchor(false)
 	, m_observer(NULL)
 {
-	SpriteFactory::Instance()->Insert(this);
 }
 
 Sprite::~Sprite()
 {
-	SpriteFactory::Instance()->Remove(this);
+	SpritePool::Instance()->Remove(*this);
 }
 
-void Sprite::SetSymbol(Symbol* sym)
+void Sprite::SetSymbol(const s2::SymPtr& sym)
 {
-	SpriteFactory::Instance()->Remove(this);
+	SpritePool::Instance()->Remove(*this);
 	s2::Sprite::SetSymbol(sym);
-	SpriteFactory::Instance()->Insert(this);
 }
 
 void Sprite::ClearUserData(bool deletePtr)
@@ -85,7 +80,7 @@ void Sprite::SetPosition(const sm::vec2& pos)
 	pu.Begin();
 
 	if (m_observer) {
-		m_observer->OnSetPosition(this, pos);
+		m_observer->OnSetPosition(*this, pos);
 	}
 
 	s2::Sprite::SetPosition(pos);
@@ -99,7 +94,7 @@ void Sprite::SetAngle(float angle)
 	pu.Begin();
 
 	if (m_observer) {
-		m_observer->OnSetAngle(this, angle);
+		m_observer->OnSetAngle(*this, angle);
 	}
 
 	s2::Sprite::SetAngle(angle);
@@ -113,7 +108,7 @@ void Sprite::SetScale(const sm::vec2& scale)
 	pu.Begin();
 
 	if (m_observer) {
-		m_observer->OnSetScale(this, scale);
+		m_observer->OnSetScale(*this, scale);
 	}
 
 	s2::Sprite::SetScale(scale);
@@ -127,7 +122,7 @@ void Sprite::SetShear(const sm::vec2& shear)
 	pu.Begin();
 
 	if (m_observer) {
-		m_observer->OnSetShear(this, shear);
+		m_observer->OnSetShear(*this, shear);
 	}
 
 	s2::Sprite::SetShear(shear);
@@ -141,7 +136,7 @@ void Sprite::SetOffset(const sm::vec2& offset)
 	pu.Begin();
 
 	if (m_observer) {
-		m_observer->OnSetOffset(this, offset);
+		m_observer->OnSetOffset(*this, offset);
 	}
 
 	s2::Sprite::SetOffset(offset);
@@ -152,18 +147,19 @@ void Sprite::SetOffset(const sm::vec2& offset)
 void Sprite::Load(const Json::Value& val, const std::string& dir)
 {
 	ee::SpriteIO spr_io;
-	spr_io.Load(val, this, dir);
+	spr_io.Load(val, shared_from_this(), dir.c_str());
 }
 
 void Sprite::Store(Json::Value& val, const std::string& dir) const
 {
 	ee::SpriteIO spr_io;
-	spr_io.Store(val, this, dir);
+	spr_io.Store(val, shared_from_this(), dir.c_str());
 }
 
 PropertySetting* Sprite::CreatePropertySetting(EditPanelImpl* stage)
 {
-	return new SpritePropertySetting(stage, this);
+	return new SpritePropertySetting(stage, 
+		std::dynamic_pointer_cast<ee::Sprite>(shared_from_this()));
 }
 
 /************************************************************************/
@@ -199,13 +195,13 @@ SpriteCmp::SpriteCmp(Type type /*= e_file*/)
 {
 }
 
-bool SpriteCmp::operator() (const Sprite* s0, const Sprite* s1) const
+bool SpriteCmp::operator() (const SprPtr& s0, const SprPtr& s1) const
 {
 	switch (m_type)
 	{
 	case e_file:
-		return dynamic_cast<const ee::Symbol*>(s0->GetSymbol())->GetFilepath()
-			 < dynamic_cast<const ee::Symbol*>(s1->GetSymbol())->GetFilepath();
+		return std::dynamic_pointer_cast<ee::Symbol>(s0->GetSymbol())->GetFilepath()
+			 < std::dynamic_pointer_cast<ee::Symbol>(s1->GetSymbol())->GetFilepath();
 	case e_x:
 		return s0->GetPosition().x < s1->GetPosition().x;
 	case e_y:
@@ -215,8 +211,8 @@ bool SpriteCmp::operator() (const Sprite* s0, const Sprite* s1) const
 	case e_y_invert:
 		return s0->GetPosition().y > s1->GetPosition().y;
 	default:
-		return dynamic_cast<const ee::Symbol*>(s0->GetSymbol())->GetFilepath()
-			 < dynamic_cast<const ee::Symbol*>(s1->GetSymbol())->GetFilepath();
+		return std::dynamic_pointer_cast<ee::Symbol>(s0->GetSymbol())->GetFilepath()
+			 < std::dynamic_pointer_cast<ee::Symbol>(s1->GetSymbol())->GetFilepath();
 	}
 }
 

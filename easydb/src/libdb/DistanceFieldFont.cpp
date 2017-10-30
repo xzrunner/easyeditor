@@ -199,7 +199,7 @@ void DistanceFieldFont::genChar(int unicode)
 	unsigned char* result = genDistanceFieldData(expanded_data, extracted, width, height);
 	std::string filepath = "e:/text_" + ee::StringHelper::ToString(unicode) + ".png";
 //	ee::ImageSaver::storeToFile(extracted, width, height, filepath, ee::ImageSaver::e_png);
-	gimg_export(filepath.c_str(), result, 32, 32, GPF_RGBA, true);
+	gimg_export(filepath.c_str(), result, 32, 32, GPF_RGBA8, true);
 
 	delete[] expanded_data;
 	delete[] extracted;		

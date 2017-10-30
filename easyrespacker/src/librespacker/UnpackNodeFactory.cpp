@@ -27,7 +27,7 @@ UnpackNodeFactory::UnpackNodeFactory()
 {
 }
 
-void UnpackNodeFactory::UnpackFromLua(lua_State* L, const std::vector<ee::Image*>& images)
+void UnpackNodeFactory::UnpackFromLua(lua_State* L, const std::vector<ee::ImagePtr>& images)
 {
 	std::string type = LuaDataHelper::GetStringField(L, "type");
 	int id = LuaDataHelper::GetIntField(L, "id");
@@ -57,7 +57,7 @@ void UnpackNodeFactory::UnpackFromLua(lua_State* L, const std::vector<ee::Image*
 	}
 }
 
-const IPackNode* UnpackNodeFactory::UnpackFromBin(uint8_t** ptr, const std::vector<ee::Image*>& images,
+const IPackNode* UnpackNodeFactory::UnpackFromBin(uint8_t** ptr, const std::vector<ee::ImagePtr>& images,
 												  const std::map<int, std::string>& map_export)
 {
 	uint16_t id;

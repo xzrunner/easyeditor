@@ -97,7 +97,7 @@ void ScaleOverall::Scale(const std::string& dir, float scale) const
 void ScaleOverall::ScaleImage(const std::string& filepath, float scale,
 							  std::map<std::string, sm::vec2>& mapImg2Center) const
 {
-	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+	auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	
 	ee::ImageSymbol* img = static_cast<ee::ImageSymbol*>(sym);
 
@@ -108,8 +108,6 @@ void ScaleOverall::ScaleImage(const std::string& filepath, float scale,
 	rt.Draw(sym);
 	sm::vec2 sz = sym->GetBounding().Size();
 	rt.StoreToFile(filepath, sz.x, sz.y);
-
-	sym->RemoveReference();
 }
 
 void ScaleOverall::ScaleComplex(const std::string& path, float scale,

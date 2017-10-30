@@ -34,13 +34,13 @@ OpenSymbolDialog::OpenSymbolDialog(wxWindow* wnd, ee::EditPanelImpl* stage,
 {
 }
 
-void OpenSymbolDialog::Open(ee::Sprite* spr, ee::CrossGuides* guides)
+void OpenSymbolDialog::Open(const ee::SprPtr& spr, ee::CrossGuides* guides)
 {
 	if (!spr) {
 		return;
 	}
 
-	if (dynamic_cast<ee::Symbol*>(spr->GetSymbol())->GetFilepath().find("[gen].json") != std::string::npos) {
+	if (std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol())->GetFilepath().find("[gen].json") != std::string::npos) {
 		wxMessageBox("禁止编辑自动生成的文件", "warning", wxOK | wxICON_INFORMATION, m_wnd);
 		return;
 	}
@@ -56,12 +56,12 @@ void OpenSymbolDialog::Open(ee::Sprite* spr, ee::CrossGuides* guides)
 		m_viewlist->EnableObserve(false);
 	}
 
-	const ee::Symbol* edited_sym = NULL;
-	if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(spr))
+	ee::SymPtr edited_sym = nullptr;
+	if (auto complex = std::dynamic_pointer_cast<ecomplex::Sprite>(spr))
 	{
-		ecomplex::Symbol* sym = dynamic_cast<ecomplex::Symbol*>(complex->GetSymbol());
+		auto sym = std::dynamic_pointer_cast<ecomplex::Symbol>(complex->GetSymbol());
 		edited_sym = sym;
- 		EditDialog dlg(m_wnd, sym, m_stage->GetCanvas()->GetGLContext(), guides);
+ 		EditDialog dlg(m_wnd, std::dynamic_pointer_cast<ecomplex::Symbol>(edited_sym), m_stage->GetCanvas()->GetGLContext(), guides);
  		dlg.ShowModal();
 
 		//////////////////////////////////////////////////////////////////////////
@@ -69,61 +69,61 @@ void OpenSymbolDialog::Open(ee::Sprite* spr, ee::CrossGuides* guides)
 // 		std::string cmd = "easycomplex.exe " + complex->getSymbol().getFilepath();
 // 		WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);
 	}
-	else if (libanim::Sprite* anim = dynamic_cast<libanim::Sprite*>(spr))
+	else if (auto anim = std::dynamic_pointer_cast<libanim::Sprite>(spr))
 	{
-		const libanim::Symbol* sym = dynamic_cast<const libanim::Symbol*>(anim->GetSymbol());
+		auto sym = std::dynamic_pointer_cast<libanim::Symbol>(anim->GetSymbol());
 		edited_sym = sym;
 		libanim::PreviewDialog dlg(m_wnd, sym, m_stage->GetCanvas()->GetGLContext());
  		dlg.ShowModal();
 	}
-	else if (escale9::Sprite* patch9 = dynamic_cast<escale9::Sprite*>(spr))
+	else if (auto patch9 = std::dynamic_pointer_cast<escale9::Sprite>(spr))
  	{
-		escale9::Symbol* sym = dynamic_cast<escale9::Symbol*>(patch9->GetSymbol());
+		auto sym = std::dynamic_pointer_cast<escale9::Symbol>(patch9->GetSymbol());
 		edited_sym = sym;
   		escale9::EditDialog dlg(m_wnd, sym, m_stage->GetCanvas()->GetGLContext());
   		dlg.ShowModal();
  	}
-	else if (emesh::Sprite* mesh = dynamic_cast<emesh::Sprite*>(spr))
+	else if (auto mesh = std::dynamic_pointer_cast<emesh::Sprite>(spr))
 	{
 		emesh::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), mesh, m_sprites_impl);
 		dlg.ShowModal();
 	}
-	else if (ee::FontBlankSprite* font = dynamic_cast<ee::FontBlankSprite*>(spr))
+	else if (auto font = std::dynamic_pointer_cast<ee::FontBlankSprite>(spr))
 	{
 		ee::TextDialog dlg(m_wnd, font);
 		dlg.ShowModal();
 	}
-	else if (etexture::Sprite* tex = dynamic_cast<etexture::Sprite*>(spr))
+	else if (auto tex = std::dynamic_pointer_cast<etexture::Sprite>(spr))
 	{
 		etexture::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), tex, m_sprites_impl);
 		dlg.ShowModal();
 	}
-	else if (eicon::Sprite* icon = dynamic_cast<eicon::Sprite*>(spr))
+	else if (auto icon = std::dynamic_pointer_cast<eicon::Sprite>(spr))
 	{
 		eicon::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), spr, m_sprites_impl);
 		dlg.ShowModal();
 	}
-	else if (etext::Sprite* text = dynamic_cast<etext::Sprite*>(spr))
+	else if (auto text = std::dynamic_pointer_cast<etext::Sprite>(spr))
 	{
 		etext::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), text, m_sprites_impl);
 		dlg.ShowModal();
 	}
-	else if (eterrain2d::Sprite* terr = dynamic_cast<eterrain2d::Sprite*>(spr))
-	{
-		eterrain2d::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), terr, m_sprites_impl);
-		dlg.ShowModal();
-	} 
-	else if (libskeleton::Sprite* skeleton = dynamic_cast<libskeleton::Sprite*>(spr)) 
+	//else if (auto terr = std::dynamic_pointer_cast<eterrain2d::Sprite>(spr))
+	//{
+	//	eterrain2d::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), terr, m_sprites_impl);
+	//	dlg.ShowModal();
+	//} 
+	else if (auto skeleton = std::dynamic_pointer_cast<libskeleton::Sprite>(spr)) 
 	{
 		libskeleton::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), skeleton);
 		dlg.ShowModal();
 	}
-	else if (eshape::Sprite* shape = dynamic_cast<eshape::Sprite*>(spr))
+	else if (auto shape = std::dynamic_pointer_cast<eshape::Sprite>(spr))
 	{
 		eshape::EditDialogSimple dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), shape, m_sprites_impl);
 		dlg.ShowModal();
 	}
-	else if (eaudio::Sprite* audio = dynamic_cast<eaudio::Sprite*>(spr))
+	else if (auto audio = std::dynamic_pointer_cast<eaudio::Sprite>(spr))
 	{
 		audio->Play();
 	}
@@ -139,7 +139,7 @@ void OpenSymbolDialog::Open(ee::Sprite* spr, ee::CrossGuides* guides)
 
 	if (edited_sym && edited_sym->IsEditDirty()) {
 		ee::SetWndDirtySJ::Instance()->SetDirty();
-		const_cast<ee::Symbol*>(edited_sym)->SetEditDirty(false);
+		std::dynamic_pointer_cast<ee::Symbol>(edited_sym)->SetEditDirty(false);
 	}
 
 	ee::CurrSprTreePath::Instance()->Pop();

@@ -2,14 +2,13 @@
 #define _EASYCOMPLEX_PREVIEW_DIALOG_H_
 
 #include <ee/PlayControl.h>
+#include <ee/Sprite.h>
 
 #include <wx/dialog.h>
 
 #include <vector>
 
 class wxGLContext;
-
-namespace ee { class Sprite; }
 
 namespace ecomplex
 {
@@ -18,7 +17,7 @@ class PreviewDialog : public wxDialog
 {
 public:
 	PreviewDialog(wxWindow* parent, wxGLContext* glctx, 
-		const std::vector<ee::Sprite*>& sprs);
+		const std::vector<ee::SprPtr>& sprs);
 	~PreviewDialog();
 
 private:
@@ -27,7 +26,7 @@ private:
 	void BuildEditPanel(wxSizer* sizer, wxGLContext* glctx);
 
 private:
-	std::vector<ee::Sprite*> m_sprs;
+	std::vector<ee::SprPtr> m_sprs;
 
 	ee::PlayControl m_control;
 

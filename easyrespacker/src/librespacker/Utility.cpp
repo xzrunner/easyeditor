@@ -5,9 +5,9 @@
 namespace erespacker
 {
 
-bool Utility::IsAnchor(const ee::Sprite* spr)
+bool Utility::IsAnchor(const ee::SprConstPtr& spr)
 {
-	const ee::FontBlankSprite* font = dynamic_cast<const ee::FontBlankSprite*>(spr);
+	auto font = std::dynamic_pointer_cast<const ee::FontBlankSprite>(spr);
 	return font && font->font.empty() && font->font_color == s2::Color(0, 0, 0, 0);
 }
 

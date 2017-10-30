@@ -19,7 +19,7 @@
 
 #include <easycomplex.h>
 
-#include <sprite2/S2_Sprite.h>
+#include <sprite2/Sprite.h>
 
 #include <algorithm>
 
@@ -34,8 +34,7 @@ ComplexBuilder::ComplexBuilder(ExportNameSet& export_set, ClipboxBuilder* cb_bui
 
 ComplexBuilder::~ComplexBuilder()
 {
-	std::map<const ecomplex::Symbol*, const PackAnimation*>::iterator
-		itr = m_map_data.begin();
+	auto itr = m_map_data.begin();
 	for ( ; itr != m_map_data.end(); ++itr) {
 		delete itr->second;
 	}
@@ -45,8 +44,7 @@ ComplexBuilder::~ComplexBuilder()
 
 void ComplexBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 {
-	std::map<const ecomplex::Symbol*, const PackAnimation*>::const_iterator 
-		itr = m_map_data.begin();
+	auto itr = m_map_data.begin();
 	for ( ; itr != m_map_data.end(); ++itr) {
 		bool has_next;
 		visitor.Visit(const_cast<PackAnimation*>(itr->second), has_next);
@@ -64,10 +62,9 @@ void ComplexBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 	}
 }
 
-const IPackNode* ComplexBuilder::Create(const ecomplex::Symbol* sym)
+const IPackNode* ComplexBuilder::Create(const std::shared_ptr<const ecomplex::Symbol>& sym)
 {
-	std::map<const ecomplex::Symbol*, const PackAnimation*>::iterator 
-		itr = m_map_data.find(sym);
+	auto itr = m_map_data.find(sym);
 	if (itr != m_map_data.end()) {
 		return itr->second;
 	}
@@ -82,11 +79,11 @@ const IPackNode* ComplexBuilder::Create(const ecomplex::Symbol* sym)
 	return node;
 }
 
-IPackNode* ComplexBuilder::LoadComplex(const ecomplex::Symbol* sym)
+IPackNode* ComplexBuilder::LoadComplex(const std::shared_ptr<const ecomplex::Symbol>& sym)
 {
 	PackAnimation* node = new PackAnimation;
 
-	const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
+	auto& children = sym->GetAllChildren();
 
 	m_export_set.LoadExport(sym, node);
 
@@ -95,13 +92,13 @@ IPackNode* ComplexBuilder::LoadComplex(const ecomplex::Symbol* sym)
 
 	// tag key-val
 	for (int i = 0, n = children.size(); i < n; ++i) {
-		ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
+		auto child = std::dynamic_pointer_cast<ee::Sprite>(children[i]);
 		PackTag::Instance()->AddTask(sym->GetFilepath(), i, child);
 	}
 
 	// actions
-	std::map<std::string, std::vector<ee::Sprite*> > map_actions;
-	std::vector<ee::Sprite*> others;
+	std::map<std::string, std::vector<ee::SprPtr> > map_actions;
+	std::vector<ee::SprPtr> others;
 	GroupFromTag(children, map_actions, others);
 	
 	if (map_actions.empty()) 
@@ -115,14 +112,14 @@ IPackNode* ComplexBuilder::LoadComplex(const ecomplex::Symbol* sym)
 			node->CreateClipboxFramePart(cb, frame);
 		}
 		for (int i = 0, n = children.size(); i < n; ++i) {
-			ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
+			auto child = std::dynamic_pointer_cast<ee::Sprite>(children[i]);
 			node->CreateFramePart(child, frame);
 		}
 		node->frames.push_back(frame);
 	}
 	else
 	{
-		std::map<std::string, std::vector<ee::Sprite*> >::iterator 
+		std::map<std::string, std::vector<ee::SprPtr> >::iterator 
 			itr = map_actions.begin();
 		for ( ; itr != map_actions.end(); ++itr)
 		{
@@ -150,15 +147,15 @@ IPackNode* ComplexBuilder::LoadComplex(const ecomplex::Symbol* sym)
 	return node;
 }
 
-IPackNode* ComplexBuilder::LoadAnchor(const ecomplex::Symbol* sym)
+IPackNode* ComplexBuilder::LoadAnchor(const std::shared_ptr<ecomplex::Symbol>& sym)
 {
-	const std::vector<s2::Sprite*>& children = sym->GetAllChildren();
+	auto& children = sym->GetAllChildren();
 	assert(children.size() == 1);
 
-	ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[0]);
-	std::string name;
+	auto child = std::dynamic_pointer_cast<ee::Sprite>(children[0]);
+	CU_STR name;
 	s2::SprNameMap::Instance()->IDToStr(child->GetName(), name);
-	if (!Utility::IsNameValid(name)) {
+	if (!Utility::IsNameValid(name.c_str())) {
 		return NULL;
 	}
 
@@ -179,13 +176,13 @@ IPackNode* ComplexBuilder::LoadAnchor(const ecomplex::Symbol* sym)
 	return node;
 }
 
-void ComplexBuilder::GroupFromTag(const std::vector<s2::Sprite*>& src, 
-								  std::map<std::string, std::vector<ee::Sprite*> >& dst, 
-								  std::vector<ee::Sprite*>& others)
+void ComplexBuilder::GroupFromTag(const CU_VEC<s2::SprPtr>& src, 
+								  std::map<std::string, std::vector<ee::SprPtr> >& dst, 
+								  std::vector<ee::SprPtr>& others)
 {
 	for (int i = 0, n = src.size(); i < n; ++i)
 	{
-		ee::Sprite* spr = dynamic_cast<ee::Sprite*>(src[i]);
+		auto& spr = std::dynamic_pointer_cast<ee::Sprite>(src[i]);
 		if (spr->GetTag().empty())
 		{
 			others.push_back(spr);
@@ -203,11 +200,11 @@ void ComplexBuilder::GroupFromTag(const std::vector<s2::Sprite*>& src,
 
 				is_action = true;
 
-				std::map<std::string, std::vector<ee::Sprite*> >::iterator 
+				std::map<std::string, std::vector<ee::SprPtr> >::iterator 
 					itr = dst.find(tags[i]);
 				if (itr == dst.end())
 				{
-					std::vector<ee::Sprite*> sprs;
+					std::vector<ee::SprPtr> sprs;
 					sprs.push_back(spr);
 					dst.insert(std::make_pair(tags[i], sprs));
 				}

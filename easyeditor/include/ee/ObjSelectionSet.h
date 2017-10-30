@@ -14,8 +14,8 @@ public:
 
 	virtual void Clear();
 
-	virtual void Add(T* item);
-	virtual void Remove(T* item);
+	virtual void Add(const std::shared_ptr<T>& item);
+	virtual void Remove(const std::shared_ptr<T>& item);
 
 }; // ObjSelectionSet
 

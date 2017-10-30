@@ -9,8 +9,8 @@ class Symbol;
 class FileIO
 {
 public:
-	static void StoreToFile(const char* filepath, const Symbol* sym);
-	static void LoadFromFile(const char* filepath, Symbol* sym);
+	static void StoreToFile(const char* filepath, const std::shared_ptr<Symbol>& sym);
+	static void LoadFromFile(const char* filepath, const std::shared_ptr<Symbol>& sym);
 
 }; // FileIO
 

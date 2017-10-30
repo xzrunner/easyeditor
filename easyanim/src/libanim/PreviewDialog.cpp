@@ -10,7 +10,7 @@
 namespace libanim
 {
 
-PreviewDialog::PreviewDialog(wxWindow* parent, const Symbol* sym,
+PreviewDialog::PreviewDialog(wxWindow* parent, const std::shared_ptr<Symbol>& sym,
 							 wxGLContext* glctx)
  	: wxDialog(parent, wxID_ANY, "Preview", wxDefaultPosition, wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 	, m_sym(sym)

@@ -4,15 +4,15 @@
 #include "ImageSymbol.h"
 
 #include <sprite2/BoundingBox.h>
-#include <sprite2/S2_RenderTarget.h>
+#include <sprite2/RenderTarget.h>
 #include <sprite2/DrawRT.h>
 
 namespace ee
 {
 
-Sprite* draw_all_to_one_spr(const std::vector<Sprite*>& sprs, Sprite* except)
+SprPtr draw_all_to_one_spr(const std::vector<SprPtr>& sprs, const SprPtr& except)
 {
-	std::vector<Sprite*> _sprites;
+	std::vector<SprPtr> _sprites;
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
 		if (sprs[i] != except) {
 			_sprites.push_back(sprs[i]);
@@ -33,7 +33,7 @@ float cal_texture_size(float w, float h)
 	}
 }
 
-Sprite* draw_all_to_one_spr(const std::vector<Sprite*>& sprs)
+SprPtr draw_all_to_one_spr(const std::vector<SprPtr>& sprs)
 {
 	if (sprs.empty()) {
 		return NULL;
@@ -49,20 +49,16 @@ Sprite* draw_all_to_one_spr(const std::vector<Sprite*>& sprs)
 	sz *= scale;
 	sm::vec2 center = r.Center() * scale;
 
-	s2::RenderTarget* rt = new s2::RenderTarget(static_cast<int>(sz.x), static_cast<int>(sz.y));
+	auto rt = std::make_shared<s2::RenderTarget>(static_cast<int>(sz.x), static_cast<int>(sz.y));
 
-	s2::DrawRT draw(rt);
-	for (int i = 0, n = sprs.size(); i < n; ++i) {
-		ee::Sprite* spr = sprs[i];
-		draw.Draw(spr, false, static_cast<int>(sz.x + 0.5f), static_cast<int>(sz.y + 0.5f), center.x, center.y, scale);
+	s2::DrawRT draw(rt.get());
+	for (auto& spr : sprs) {
+		draw.Draw(spr.get(), false, static_cast<int>(sz.x + 0.5f), static_cast<int>(sz.y + 0.5f), center.x, center.y, scale);
 	}
 
-	Image* img = new Image(rt);
-	rt->RemoveReference();
-	ImageSymbol* sym = new ImageSymbol(img, "ss");
-	img->RemoveReference();
-	ImageSprite* spr = new ImageSprite(sym);
-	sym->RemoveReference();
+	auto img = std::make_shared<Image>(rt);
+	auto sym = std::make_shared<ImageSymbol>(img, "ss");
+	auto spr = std::make_shared<ImageSprite>(sym);
 
 	spr->SetPosition(r.Center());
 	spr->SetAngle(0);

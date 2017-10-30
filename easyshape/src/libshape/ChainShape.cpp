@@ -6,7 +6,7 @@
 #include <ee/SettingData.h>
 
 #include <SM_Calc.h>
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 
 namespace eshape
 {
@@ -23,7 +23,7 @@ ChainShape::ChainShape(const ChainShape& chain)
 {
 }
 
-ChainShape::ChainShape(const std::vector<sm::vec2>& vertices, bool closed)
+ChainShape::ChainShape(const CU_VEC<sm::vec2>& vertices, bool closed)
 	: s2::PolylineShape(vertices, closed)
 	, m_draw_dir(!closed)
 {
@@ -94,7 +94,7 @@ void ChainShape::ChangeVertex(const sm::vec2& from, const sm::vec2& to)
 	PolylineEditor::ChangeVertex(m_vertices, m_bounding, from, to);
 }
 
-void ChainShape::SetVertices(const std::vector<sm::vec2>& vertices)
+void ChainShape::SetVertices(const CU_VEC<sm::vec2>& vertices)
 {
 	m_vertices = vertices;
 	UpdateBounding();

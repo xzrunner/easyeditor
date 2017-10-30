@@ -86,12 +86,12 @@ void EditPanel::OnMouseWheelRotation(int x, int y, int direction)
 	m_impl->OnMouseWheelRotation(x, y, direction);
 }
 
-void EditPanel::SaveOpRecordList(const std::string& filepath, const std::vector<Sprite*>& sprs)
+void EditPanel::SaveOpRecordList(const std::string& filepath, const std::vector<SprPtr>& sprs)
 {
 	m_impl->SaveOpRecordList(filepath, sprs);
 }
 
-void EditPanel::LoadOpRecordList(const std::string& filepath, const std::vector<Sprite*>& sprs)
+void EditPanel::LoadOpRecordList(const std::string& filepath, const std::vector<SprPtr>& sprs)
 {
 	m_impl->LoadOpRecordList(filepath, sprs);
 }

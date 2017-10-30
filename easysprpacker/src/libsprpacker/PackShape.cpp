@@ -16,45 +16,45 @@ namespace lua = ebuilder::lua;
 namespace esprpacker
 {
 
-PackShape::PackShape(const eshape::Symbol* sym)
+PackShape::PackShape(const std::shared_ptr<eshape::Symbol>& sym)
 	: m_color(0, 0, 0, 0)
 	, m_texture(NULL)
 	, m_filling(false)
 {
-	const s2::Shape* shape = sym->GetShape();
-	if (const s2::PointShape* point = dynamic_cast<const s2::PointShape*>(shape))
+	auto& shape = sym->GetShape();
+	if (const s2::PointShape* point = dynamic_cast<const s2::PointShape*>(shape.get()))
 	{
 		m_type = gum::SHAPE_POINT;
 		m_vertices.push_back(point->GetPos());
 	}
-	else if (const s2::RectShape* rect = dynamic_cast<const s2::RectShape*>(shape))
+	else if (const s2::RectShape* rect = dynamic_cast<const s2::RectShape*>(shape.get()))
 	{
 		m_type = gum::SHAPE_RECT;
 		const sm::rect& r = rect->GetRect();
 		m_vertices.push_back(sm::vec2(r.xmin, r.ymin));
 		m_vertices.push_back(sm::vec2(r.xmax, r.ymax));
 	}
-	else if (const s2::CircleShape* circle = dynamic_cast<const s2::CircleShape*>(shape))
+	else if (const s2::CircleShape* circle = dynamic_cast<const s2::CircleShape*>(shape.get()))
 	{
 		m_type = gum::SHAPE_CIRCLE;
 		m_vertices.push_back(circle->GetCenter());
 		m_vertices.push_back(sm::vec2(circle->GetRadius(), circle->GetRadius()));
 	}
-	else if (const s2::PolygonShape* polygon = dynamic_cast<const s2::PolygonShape*>(shape))
+	else if (const s2::PolygonShape* polygon = dynamic_cast<const s2::PolygonShape*>(shape.get()))
 	{
 		m_filling = true;
 		m_vertices = polygon->GetVertices();
-		const s2::Polygon* p = polygon->GetPolygon();
-		if (const s2::ColorPolygon* cp = dynamic_cast<const s2::ColorPolygon*>(p)) {
+		auto& p = polygon->GetPolygon();
+		if (auto cp = dynamic_cast<const s2::ColorPolygon*>(p.get())) {
 			m_type = gum::SHAPE_POLYGON_COLOR;
 			m_color = cp->GetColor();
-		} else if (const s2::TexturePolygon* tp = dynamic_cast<const s2::TexturePolygon*>(p)) {
+		} else if (auto tp = dynamic_cast<const s2::TexturePolygon*>(p.get())) {
 			m_type = gum::SHAPE_POLYGON_TEXTURE;
 			const eshape::TextureMaterial* mat = dynamic_cast<const eshape::TextureMaterial*>(tp);
 			m_texture = PackNodeFactory::Instance()->Create(mat->GetImage());
 		}
 	}
-	else if (const s2::PolylineShape* polyline = dynamic_cast<const s2::PolylineShape*>(shape))
+	else if (auto polyline = dynamic_cast<const s2::PolylineShape*>(shape.get()))
 	{
 		m_type = gum::SHAPE_POLYLINE;
 		m_vertices = polyline->GetVertices();

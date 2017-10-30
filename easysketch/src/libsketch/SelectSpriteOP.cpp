@@ -23,7 +23,7 @@ bool SelectSpriteOP::OnMouseLeftDown(int x, int y)
 {
 	if (ee::EditOP::OnMouseLeftDown(x, y)) return true;
 
-	ee::Sprite* selected = SelectByPos(sm::ivec2(x, y));
+	ee::SprPtr selected = SelectByPos(sm::ivec2(x, y));
 	if (selected && selected->IsEditable())
 	{
 		if (m_stage->GetKeyState(WXK_CONTROL)) 
@@ -57,8 +57,8 @@ bool SelectSpriteOP::OnDraw() const
 {
 	if (ee::EditOP::OnDraw()) return true;
 
-	std::vector<ee::Sprite*> sprs;
-	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	m_selection->Traverse(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
 		const Sprite* s = static_cast<const Sprite*>(sprs[i]);
 		sm::mat4 mat = sm::mat4(s->GetOri3().ToMatrix()) * 
@@ -71,12 +71,12 @@ bool SelectSpriteOP::OnDraw() const
 
 // 以sprite的中心和方向，旋转ray的坐标系
 // 即AABB不变
-ee::Sprite* SelectSpriteOP::SelectByPos(const sm::ivec2& pos) const
+ee::SprPtr SelectSpriteOP::SelectByPos(const sm::ivec2& pos) const
 {
-	ee::Sprite* selected = NULL;
+	ee::SprPtr selected = NULL;
 
-	std::vector<ee::Sprite*> sprs;
-	m_stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	m_stage->TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 
 	StageCanvas* canvas = static_cast<StageCanvas*>(m_stage->GetCanvas());
 	sm::vec3 ray_dir = canvas->TransPos3ScreenToDir(pos);
@@ -85,8 +85,8 @@ ee::Sprite* SelectSpriteOP::SelectByPos(const sm::ivec2& pos) const
 	sm::mat4 cam_mat = canvas->GetCamera3().GetModelViewMat();
 	for (int i = 0, n = sprs.size(); i < n; ++i)
 	{
-		ee::Sprite* spr = sprs[i];
-		const Symbol* sym = dynamic_cast<const Symbol*>(spr->GetSymbol());
+		auto& spr = sprs[i];
+		auto sym = std::dynamic_pointer_cast<const Symbol>(spr->GetSymbol());
 		
 		const m3::AABB& aabb = sym->GetAABB();
 		Sprite* s = static_cast<Sprite*>(spr);

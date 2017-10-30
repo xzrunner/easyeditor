@@ -7,7 +7,7 @@
 #include <ee/ImageSymbol.h>
 #include <ee/Image.h>
 
-#include <sprite2/S2_Symbol.h>
+#include <sprite2/Symbol.h>
 #include <SM_Calc.h>
 
 #include <algorithm>
@@ -22,7 +22,7 @@ ImageBuilder::ImageBuilder()
 ImageBuilder::~ImageBuilder()
 {
 #ifdef IMAGE_BUILDER_CACHE
-	std::map<const s2::Symbol*, const PackPicture*>::iterator itr = m_nodes.begin();
+	auto itr = m_nodes.begin();
 	for ( ; itr != m_nodes.end(); ++itr) {
 		delete itr->second;
 	}
@@ -34,7 +34,7 @@ ImageBuilder::~ImageBuilder()
 void ImageBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 {
 #ifdef IMAGE_BUILDER_CACHE
-	std::map<const s2::Symbol*, const PackPicture*>::const_iterator itr = m_nodes.begin();
+	auto itr = m_nodes.begin();
 	for ( ; itr != m_nodes.end(); ++itr) {
 		bool has_next;
 		visitor.Visit(const_cast<PackPicture*>(itr->second), has_next);
@@ -54,10 +54,9 @@ void ImageBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 #endif // #ifdef IMAGE_BUILDER_CACHE
 }
 
-const IPackNode* ImageBuilder::Create(const ee::ImageSprite* spr)
+const IPackNode* ImageBuilder::Create(const std::shared_ptr<const ee::ImageSprite>& spr)
 {
-	std::map<const s2::Symbol*, const PackPicture*>::iterator 
-		itr = m_nodes.find(spr->GetSymbol());
+	auto itr = m_nodes.find(spr->GetSymbol());
 	if (itr != m_nodes.end()) {
 		return itr->second;
 	}
@@ -76,9 +75,9 @@ const IPackNode* ImageBuilder::Create(const ee::ImageSprite* spr)
 	return node;
 }
 
-void ImageBuilder::LoadPictureQuad(const ee::ImageSprite* img, PackPicture::Quad& quad, bool force_mat)
+void ImageBuilder::LoadPictureQuad(const std::shared_ptr<const ee::ImageSprite>& img, PackPicture::Quad& quad, bool force_mat)
 {
-	quad.img = dynamic_cast<const ee::ImageSymbol*>(img->GetSymbol())->GetImage();
+	quad.img = std::dynamic_pointer_cast<ee::ImageSymbol>(img->GetSymbol())->GetImage();
 
 	quad.texture_coord[0].Set(0, 0);
 	quad.texture_coord[1].Set(0, 1);
@@ -100,7 +99,7 @@ void ImageBuilder::LoadPictureQuad(const ee::ImageSprite* img, PackPicture::Quad
 #endif // IMAGE_BUILDER_CACHE
 }
 
-void ImageBuilder::TransScreen(PackPicture::Quad& quad, const ee::Sprite* spr)
+void ImageBuilder::TransScreen(PackPicture::Quad& quad, const ee::SprConstPtr& spr)
 {
 	// 1. shear
 	float hw = quad.img->GetClippedRegion().Width() * 0.5f,

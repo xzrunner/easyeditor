@@ -4,7 +4,7 @@
 #include <SM_Matrix.h>
 #include <SM_Rect.h>
 
-#include <vector>
+#include <cu/cu_stl.h>
 
 #include <float.h>
 
@@ -40,16 +40,16 @@ public:
 
 	static float GetDisPointToStraightLine(const sm::vec2& p, const sm::vec2& s, const sm::vec2& e);
 
-	static float GetDisPointToPolyline(const sm::vec2& p, const std::vector<sm::vec2>& polyline, size_t* iPos = NULL);
+	static float GetDisPointToPolyline(const sm::vec2& p, const CU_VEC<sm::vec2>& polyline, size_t* iPos = NULL);
 
-	static float GetDisPointToMultiLines(const sm::vec2& p, const std::vector<std::vector<sm::vec2> >& multiLines, size_t* iLine = NULL, size_t* iPos = NULL);
+	static float GetDisPointToMultiLines(const sm::vec2& p, const CU_VEC<CU_VEC<sm::vec2> >& multiLines, size_t* iLine = NULL, size_t* iPos = NULL);
 
-	static float GetDisPointToMultiPos(const sm::vec2& p, const std::vector<std::vector<sm::vec2> >& pos, size_t* index0 = NULL, size_t* index1 = NULL);
+	static float GetDisPointToMultiPos(const sm::vec2& p, const CU_VEC<CU_VEC<sm::vec2> >& pos, size_t* index0 = NULL, size_t* index1 = NULL);
 
-	static float GetPolygonArea(const std::vector<sm::vec2>& polygon);
+	static float GetPolygonArea(const CU_VEC<sm::vec2>& polygon);
 	static float GetTriangleArea(const sm::vec2& p0, const sm::vec2& p1, const sm::vec2& p2);
 
-	static float GetPolygonPerimeter(const std::vector<sm::vec2>& poly);
+	static float GetPolygonPerimeter(const CU_VEC<sm::vec2>& poly);
 
 	//////////////////////////////////////////////////////////////////////////
 	//
@@ -74,13 +74,13 @@ public:
 	//////////////////////////////////////////////////////////////////////////
 
 	// Get the nearest position of Line to Point.
-	static void GetNearestPosOnLineToPoint(const sm::vec2& p, const std::vector<sm::vec2>& l, sm::vec2* nearest, size_t* index);
+	static void GetNearestPosOnLineToPoint(const sm::vec2& p, const CU_VEC<sm::vec2>& l, sm::vec2* nearest, size_t* index);
 
 	static sm::vec2 TransCoordsLocalToWorld(const sm::vec2& origin, const sm::vec2& xDir, const sm::vec2& local);
 
 	static sm::vec2 TransCoordsWorldToLocal(const sm::vec2& origin, const sm::vec2& xDir, const sm::vec2& world);
 
-	static void GetMBR(const std::vector<sm::vec2>& pos, sm::rect* mbr);
+	static void GetMBR(const CU_VEC<sm::vec2>& pos, sm::rect* mbr);
 
 	//////////////////////////////////////////////////////////////////////////
 

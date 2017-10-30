@@ -23,7 +23,7 @@
 //{
 //}
 //
-//SkeletonMesh::SkeletonMesh(const ee::Symbol* base)
+//SkeletonMesh::SkeletonMesh(const ee::SymPtr& base)
 //	: s2::Mesh(base)
 //	, Mesh(base)
 //	, s2::SkeletonMesh(base)

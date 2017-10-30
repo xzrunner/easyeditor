@@ -12,17 +12,17 @@ Symbol::Symbol()
 {
 }
 
-Symbol::Symbol(ee::Symbol* base)
+Symbol::Symbol(const ee::SymPtr& base)
 {
 	m_mesh = MeshFactory::Instance()->CreateMesh(base);
 }
 
 bool Symbol::LoadResources()
 {
-	if (!gum::FilepathHelper::Exists(m_filepath)) {
+	if (!gum::FilepathHelper::Exists(m_filepath.c_str())) {
 		return false;
 	}
-	FileIO::Load(m_filepath.c_str(), this);
+	FileIO::Load(m_filepath.c_str(), *this);
 	return true;
 }
 

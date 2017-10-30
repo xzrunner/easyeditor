@@ -7,17 +7,11 @@ namespace eshape
 {
 
 PolygonPropertySetting::PolygonPropertySetting(ee::EditPanelImpl* stage, 
-											   PolygonShape* poly)
+											   const std::shared_ptr<PolygonShape>& poly)
 	: PropertySetting("Polygon")
 	, m_stage(stage)
+	, m_poly(poly)
 {
-	poly->AddReference();
-	m_poly = poly;
-}
-
-PolygonPropertySetting::~PolygonPropertySetting()
-{
-	m_poly->RemoveReference();	
 }
 
 void PolygonPropertySetting::OnPropertyGridChange(const std::string& name, const wxAny& value)
@@ -48,7 +42,7 @@ void PolygonPropertySetting::OnPropertyGridChange(const std::string& name, const
 		if (type == 1)
 		{
 			float x = m_poly->GetBounding().Center().x;
-			std::vector<sm::vec2> vertices = m_poly->GetVertices();
+			auto vertices = m_poly->GetVertices();
 			for (size_t i = 0, n = vertices.size(); i < n; ++i)
 				vertices[i].x = x * 2 - vertices[i].x;
 			m_poly->SetVertices(vertices);
@@ -56,7 +50,7 @@ void PolygonPropertySetting::OnPropertyGridChange(const std::string& name, const
 		else if (type == 2)
 		{
 			float y = m_poly->GetBounding().Center().y;
-			std::vector<sm::vec2> vertices = m_poly->GetVertices();
+			auto vertices = m_poly->GetVertices();
 			for (size_t i = 0, n = vertices.size(); i < n; ++i)
 				vertices[i].y = y * 2 - vertices[i].y;
 			m_poly->SetVertices(vertices);

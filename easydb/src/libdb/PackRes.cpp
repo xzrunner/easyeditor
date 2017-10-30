@@ -449,7 +449,7 @@ void PackRes::PackLuaFile(const Json::Value& pkg_val, const std::string& config_
 {
 	std::vector<std::string> files;
 	GetAllDataFiles(pkg_val, config_dir, files);
-	std::vector<const ee::Symbol*> syms;
+	std::vector<ee::SymPtr> syms;
  	for (int i = 0, n = files.size(); i < n; ++i) {
  		syms.push_back(ee::SymbolMgr::Instance()->FetchSymbol(files[i]));
  	}

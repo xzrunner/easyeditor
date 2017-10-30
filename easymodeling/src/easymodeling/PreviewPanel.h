@@ -28,7 +28,7 @@ private:
 	{
 	public:
 		LoadBodyVisitor(b2World* world, std::map<Body*, b2Body*>& mapBody);
-		virtual void Visit(ee::Sprite* spr, bool& next);
+		virtual void Visit(const ee::SprPtr& spr, bool& next);
 
 	private:
 		b2World* m_world;

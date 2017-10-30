@@ -12,7 +12,7 @@ class Sprite;
 class PropertySetting : public ee::SpritePropertySetting
 {
 public:
-	PropertySetting(ee::EditPanelImpl* edit_impl, Sprite* spr);
+	PropertySetting(ee::EditPanelImpl* edit_impl, const std::shared_ptr<Sprite>& spr);
 
 	virtual void OnPropertyGridChange(const std::string& name, const wxAny& value);
 
@@ -24,11 +24,11 @@ private:
 	class OpenSymbolMonitor : public ee::OpenSymbolMonitor
 	{
 	public:
-		OpenSymbolMonitor(Sprite* spr) : m_spr(spr) {}
-		virtual void OnOpenSymbol(ee::Symbol* sym);
+		OpenSymbolMonitor(const std::shared_ptr<Sprite>& spr) : m_spr(spr) {}
+		virtual void OnOpenSymbol(const ee::SymPtr& sym);
 //		void ChangeSpr(Sprite* spr) { m_spr = spr; }
 	private:
-		Sprite* m_spr;
+		std::shared_ptr<Sprite> m_spr;
 	}; // OpenSymbolMonitor
 
 }; // PropertySetting

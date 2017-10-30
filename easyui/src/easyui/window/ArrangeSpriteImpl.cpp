@@ -14,7 +14,7 @@
 #include <easycomplex.h>
 
 #include <SM_Calc.h>
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <sprite2/OrthoCamera.h>
 
 namespace eui
@@ -37,7 +37,7 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(StagePanel* stage, ee::PropertySettingPanel
 void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 {
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-	ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(m_selected);
+	ecomplex::Sprite* complex = std::dynamic_pointer_cast<ecomplex::Sprite>(m_selected);
 	if (complex && sm::dis_pos_to_pos(pos, m_selected->GetPosition()) < m_center_node_radius) {
 		m_move_center = true;
 		ChangeOPState(new MoveSpriteCenterState(complex, pos));		
@@ -59,8 +59,8 @@ void ArrangeSpriteImpl::OnDraw(float cam_scale) const
 	ee::ArrangeSpriteImpl::OnDraw(cam_scale);
 
 	if (!m_move_center) {
-		std::vector<ee::Sprite*> sprs;
-		m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+		std::vector<ee::SprPtr> sprs;
+		m_selection->Traverse(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 		if (sprs.size() == 1) {
 			m_selected = sprs[0];
 		}

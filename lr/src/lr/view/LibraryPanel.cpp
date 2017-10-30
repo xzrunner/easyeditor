@@ -56,7 +56,7 @@ void LibraryPanel::OnPageChanging(wxBookCtrlEvent& event)
 	static_cast<LibraryPage*>(m_pages[event.GetSelection()])->UpdateStatusFromLayer();
 }
 
-void LibraryPanel::LoadFromFile(const Json::Value& value, const std::string& dir)
+void LibraryPanel::LoadFromFile(const Json::Value& value, const CU_STR& dir)
 {
 	for (int i = 0, n = value.size(); i < n; ++i)
 	{
@@ -72,14 +72,13 @@ void LibraryPanel::LoadFromFile(const Json::Value& value, const std::string& dir
 			std::string item_path = item_val.asString();
 			std::string filepath = ee::FileHelper::GetAbsolutePath(dir, item_path);
 			try {
-				ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+				auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 				if (!sym) {
 					item_val = layer_val[item_idx++];
 					continue;
 				}
 				sym->RefreshThumbnail(sym->GetFilepath());
 				list->Insert(sym);
-				sym->RemoveReference();
 			} catch (ee::Exception& e) {
 				item_val = layer_val[item_idx++];
 				continue;
@@ -89,7 +88,7 @@ void LibraryPanel::LoadFromFile(const Json::Value& value, const std::string& dir
 	}
 }
 
-void LibraryPanel::StoreToFile(Json::Value& value, const std::string& dir) const
+void LibraryPanel::StoreToFile(Json::Value& value, const CU_STR& dir) const
 {
 	for (int i = 0, n = m_pages.size(); i < n; ++i)
 	{
@@ -124,11 +123,11 @@ void LibraryPanel::LoadSymbolFromLayer()
 	{
 		LibraryPage* page = static_cast<LibraryPage*>(m_pages[i]);
 
- 		std::vector<ee::Sprite*> sprs;
- 		page->GetLayer()->TraverseSprite(ee::FetchAllVisitor<ee::Sprite>(sprs), true);
+ 		std::vector<ee::SprPtr> sprs;
+ 		page->GetLayer()->TraverseSprite(ee::FetchAllRefVisitor<ee::Sprite>(sprs), true);
  		std::set<ee::Symbol*> symbol_set;
  		for (int i = 0, n = sprs.size(); i < n; ++i) {
- 			ee::Symbol* sym = dynamic_cast<ee::Symbol*>(sprs[i]->GetSymbol());
+ 			auto sym = std::dynamic_pointer_cast<ee::Symbol>(sprs[i]->GetSymbol());
  			symbol_set.insert(sym);
  		}
  
@@ -237,8 +236,8 @@ void LibraryPanel::Refresh()
 {
 	Layer* layer = static_cast<LibraryPage*>(m_selected)->GetLayer();
 
-	std::vector<ee::Sprite*> sprs;
-	layer->TraverseSprite(ee::FetchAllVisitor<ee::Sprite>(sprs), true);
+	std::vector<ee::SprPtr> sprs;
+	layer->TraverseSprite(ee::FetchAllRefVisitor<ee::Sprite>(sprs), true);
 
 	// stage
 	m_stage->GetSpriteSelection()->Clear();

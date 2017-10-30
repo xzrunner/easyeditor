@@ -1,7 +1,7 @@
 #ifndef _EASYEDITOR_LOG_MGR_H_
 #define _EASYEDITOR_LOG_MGR_H_
 
-#include <CU_Singleton.h>
+#include <cu/cu_macro.h>
 
 #include <string>
 
@@ -19,7 +19,7 @@ public:
 private:
 	std::string m_exception;
 
-	SINGLETON_DECLARATION(LogMgr)
+	CU_SINGLETON_DECLARATION(LogMgr)
 
 }; // LogMgr
 

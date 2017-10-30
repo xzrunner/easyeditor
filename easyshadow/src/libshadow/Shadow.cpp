@@ -4,7 +4,7 @@
 #include <ee/Math2D.h>
 
 #include <shaderlab/ShaderMgr.h>
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <SM_Calc.h>
 #include <SM_Triangulation.h>
 #include <SM_Process.h>

@@ -43,7 +43,7 @@ void RotateSpriteState::Rotate(const e3d::Camera& cam, const sm::ivec2& start, c
 //////////////////////////////////////////////////////////////////////////
 
 void RotateSpriteState::Visitor::
-Visit(ee::Sprite* spr, bool& next)
+Visit(const ee::SprPtr& spr, bool& next)
 {
 	sm::ivec2 center = m_stage->TransPos3ProjectToScreen(spr->GetPos3());
 	sm::ivec2 base = m_stage->TransPos3ProjectToScreen(sm::vec3(0, 0, 0));

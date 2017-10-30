@@ -45,25 +45,25 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 
 	// group
 	if (m_stage->GetKeyState(WXK_CONTROL) && keyCode == 'G') {
-		std::vector<ee::Sprite*> sprs;
+		std::vector<ee::SprPtr> sprs;
 		GetOrderedSelection(sprs);
 		ecomplex::GroupHelper::BuildGroup(sprs);
 		return true;
 	} else if (m_stage->GetKeyState(WXK_CONTROL) && keyCode == 'B') {
-		std::vector<ee::Sprite*> sprs;
+		std::vector<ee::SprPtr> sprs;
 		GetOrderedSelection(sprs);
 		ecomplex::GroupHelper::BreakUpGroup(sprs);
 		return true;
 	}
 	// complex
 	else if (m_stage->GetKeyState(WXK_ALT) && keyCode == 'G') {
-		std::vector<ee::Sprite*> sprs;
+		std::vector<ee::SprPtr> sprs;
 		GetOrderedSelection(sprs);
 		const std::string& dir = static_cast<StagePanel*>(m_wnd)->GetResDir();
 		ecomplex::GroupHelper::BuildComplex(sprs, dir, m_wnd);
 		return true;
 	} else if (m_stage->GetKeyState(WXK_ALT) && keyCode == 'B') {
-		std::vector<ee::Sprite*> sprs;
+		std::vector<ee::SprPtr> sprs;
 		GetOrderedSelection(sprs);
 		ecomplex::GroupHelper::BreakUpComplex(sprs);
 		return true;
@@ -97,7 +97,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 
-	ee::Sprite* selected = NULL;
+	ee::SprPtr selected = nullptr;
 	m_selection->Traverse(ee::PointQueryVisitor(pos, &selected));
 	if (!selected) {
 		selected = m_sprs_impl->QuerySpriteByPos(pos);

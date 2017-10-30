@@ -17,7 +17,7 @@
 #include <shaderlab/ShaderMgr.h>
 #include <shaderlab/ColGradingProg.h>
 #include <shaderlab/FilterShader.h>
-#include <sprite2/S2_Sprite.h>
+#include <sprite2/Sprite.h>
 #include <sprite2/RFColGrading.h>
 #include <gum/Config.h>
 
@@ -204,8 +204,8 @@ void SettingDialog::OnChangeTerrain2DAnim(wxCommandEvent& event)
 	SettingCfg* cfg = SettingCfg::Instance();
 	cfg->m_terrain2d_anim = event.IsChecked();
 
-	std::vector<ee::Sprite*> sprs;
-	m_stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	m_stage->TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
 		SetTerrain2dUpdate(sprs[i], cfg->m_terrain2d_anim);
 	}
@@ -264,7 +264,7 @@ void SettingDialog::OnChangeGradingTexture(wxCommandEvent& event)
 				gum::Config* cfg = gum::Config::Instance();
 				bool ori_alpha_cfg = cfg->GetPreMulAlpha();
 				cfg->SetPreMulAlpha(false);
-				ee::Image* img = ee::ImageMgr::Instance()->GetItem(filepath);
+				auto img = ee::ImageMgr::Instance()->GetItem(filepath);
 				cfg->SetPreMulAlpha(ori_alpha_cfg);
 				if (img) {
 					SettingCfg::Instance()->m_post_effect_file = filepath;
@@ -279,14 +279,14 @@ void SettingDialog::OnChangeGradingTexture(wxCommandEvent& event)
 	}
 }
 
-void SettingDialog::SetTerrain2dUpdate(ee::Sprite* spr, bool open)
+void SettingDialog::SetTerrain2dUpdate(const ee::SprPtr& spr, bool open)
 {
-	if (eterrain2d::Sprite* terr = dynamic_cast<eterrain2d::Sprite*>(spr)) {
+	if (eterrain2d::Sprite* terr = std::dynamic_pointer_cast<eterrain2d::Sprite>(spr)) {
 		dynamic_cast<eterrain2d::Symbol*>(terr->GetSymbol())->SetUpdateOpen(open);
-	} else if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(spr)) {
-		const std::vector<s2::Sprite*>& children = dynamic_cast<s2::ComplexSymbol*>(complex->GetSymbol())->GetAllChildren();
+	} else if (ecomplex::Sprite* complex = std::dynamic_pointer_cast<ecomplex::Sprite>(spr)) {
+		auto& children = dynamic_cast<s2::ComplexSymbol*>(complex->GetSymbol())->GetAllChildren();
 		for (int i = 0, n = children.size(); i < n; ++i) {
-			ee::Sprite* child = dynamic_cast<ee::Sprite*>(children[i]);
+			auto child = std::dynamic_pointer_cast<ee::Sprite>(children[i]);
 			SetTerrain2dUpdate(child, open);
 		}
 	}

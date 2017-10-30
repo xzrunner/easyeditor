@@ -5,7 +5,7 @@
 namespace ee
 {
 
-SINGLETON_DEFINITION(Socket)
+CU_SINGLETON_DEFINITION(Socket)
 
 Socket::Socket()
 	: m_connected(false)
@@ -44,7 +44,7 @@ void Socket::ConnFromUser(const std::string& hostname)
 	}
 
 	wxIPV4address addr;
-	addr.Hostname(hostname);
+	addr.Hostname(hostname.c_str());
 	addr.Service(3141);
 	m_sock->Connect(addr, false);
 

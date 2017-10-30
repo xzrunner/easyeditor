@@ -42,8 +42,8 @@ void FileIO::Store(const std::string& filepath, ToolbarPanel* toolbar)
 
 		Json::Value cval;
 
-		ee::Symbol* sym = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(p_symbol->ud));
-		cval["filepath"] = ee::SymbolPath::GetRelativePath(sym, dir);
+		auto sym = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(p_symbol->ud));
+		cval["filepath"] = ee::SymbolPath::GetRelativePath(*sym, dir);
 
 		for (int j = 0, m = cp->m_sliders.size(); j < m; ++j) {
 			cp->m_sliders[j]->Store(cval);
@@ -78,7 +78,7 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps, ToolbarPanel*
 	toolbar->Load(value);
 
 	gum::P2dSymLoader adapter;
-	adapter.LoadJson(filepath);
+	adapter.LoadJson(filepath.c_str());
 
 //	toolbar->m_name->SetValue(adapter.name);
 
@@ -112,13 +112,13 @@ p2d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
 	class Loader : public gum::P2dSymLoader
 	{
 	protected:
-		virtual s2::Symbol* LoadSymbol(const std::string& filepath) const {
+		virtual s2::SymPtr LoadSymbol(const std::string& filepath) const {
 			return ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 		}
 	}; // Loader
 
 	Loader adapter;
-	adapter.LoadJson(filepath);
+	adapter.LoadJson(filepath.c_str());
 
 	int sz = SIZEOF_P2D_EMITTER_CFG + SIZEOF_P2D_SYMBOL * MAX_COMPONENTS;
 	p2d_emitter_cfg* cfg = (p2d_emitter_cfg*) operator new(sz);

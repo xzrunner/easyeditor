@@ -15,8 +15,7 @@ SprBuilder2<TSprite, TPack>::~SprBuilder2()
 template <typename TSprite, typename TPack>
 void SprBuilder2<TSprite, TPack>::Traverse(ee::Visitor<PackNode>& visitor) const
 {
-	std::map<const TSprite*, const TPack*>::const_iterator
-		itr = m_map_data.begin();
+	auto itr = m_map_data.begin();
 	for ( ; itr != m_map_data.end(); ++itr) {
 		bool has_next;
 		visitor.Visit(const_cast<TPack*>(itr->second), has_next);
@@ -29,29 +28,25 @@ void SprBuilder2<TSprite, TPack>::Traverse(ee::Visitor<PackNode>& visitor) const
 template <typename TSprite, typename TPack>
 void SprBuilder2<TSprite, TPack>::Clear()
 {
-	std::map<const TSprite*, const TPack*>::iterator
-		itr = m_map_data.begin();
+	auto itr = m_map_data.begin();
 	for ( ; itr != m_map_data.end(); ++itr) {
-		itr->first->RemoveReference();
 		itr->second->RemoveReference();
 	}
 	m_map_data.clear();
 }
 
 template <typename TSprite, typename TPack>
-const PackNode* SprBuilder2<TSprite, TPack>::Create(const TSprite* spr, bool force_curr)
+const PackNode* SprBuilder2<TSprite, TPack>::Create(const std::shared_ptr<const TSprite>& spr, bool force_curr)
 {
-	std::map<const TSprite*, const TPack*>::iterator
-		itr = m_map_data.find(spr);
+	auto itr = m_map_data.find(spr);
 	if (itr != m_map_data.end()) {
 		itr->second->AddReference();
 		return itr->second;
 	}
 
-	TPack* node = new TPack(spr);
+	TPack* node = new TPack(std::const_pointer_cast<TSprite>(spr));
 	node->SetFilepath(SPRITE_FILEPATH);
-	node->SetID(dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath(), force_curr);
-	spr->AddReference();
+	node->SetID(std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol())->GetFilepath(), force_curr);
 	m_map_data.insert(std::make_pair(spr, node));
 	node->AddReference();
 	return node;

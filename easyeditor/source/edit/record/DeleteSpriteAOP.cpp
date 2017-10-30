@@ -8,26 +8,15 @@
 namespace ee
 {
 
-DeleteSpriteAOP::DeleteSpriteAOP(const std::vector<Sprite*>& sprs)
+DeleteSpriteAOP::DeleteSpriteAOP(const std::vector<SprPtr>& sprs)
+	: m_sprs(sprs)
 {
-	for (size_t i = 0, n = sprs.size(); i < n; ++i) 
-	{
-		sprs[i]->AddReference();
-		m_sprs.push_back(sprs[i]);
-	}
-}
-
-DeleteSpriteAOP::~DeleteSpriteAOP()
-{
-	for (size_t i = 0, n = m_sprs.size(); i < n; ++i) {
-		m_sprs[i]->RemoveReference();
-	}
 }
 
 void DeleteSpriteAOP::Undo()
 {
-	for (size_t i = 0, n = m_sprs.size(); i < n; ++i) {
-		InsertSpriteSJ::Instance()->Insert(m_sprs[i]);
+	for (auto& spr : m_sprs) {
+		InsertSpriteSJ::Instance()->Insert(spr);
 	}
 }
 
@@ -38,7 +27,7 @@ void DeleteSpriteAOP::Redo()
 	}
 }
 
-Json::Value DeleteSpriteAOP::Store(const std::vector<Sprite*>& sprs) const
+Json::Value DeleteSpriteAOP::Store(const std::vector<SprPtr>& sprs) const
 {
 	Json::Value val;
 	val["idx"] = HistoryUtil::StoreSpritesIndex(m_sprs, sprs);

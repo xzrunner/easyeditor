@@ -19,14 +19,13 @@ bool EditChangedRectOP::OnActive()
 	}
 
 	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
-	Icon* icon = stage->GetIcon();
-	if (icon && get_icon_type(icon->GetIconDesc()) == IT_CHANGED_RECT) {
+	Icon* old_icon = stage->GetIcon();
+	if (old_icon && get_icon_type(old_icon->GetIconDesc()) == IT_CHANGED_RECT) {
 		return false;
 	}
 
-	icon = new ChangedRectIcon;
-	stage->SetIcon(icon);
-	icon->RemoveReference();	
+	std::unique_ptr<s2::Icon> new_icon = std::make_unique<ChangedRectIcon>();
+	stage->SetIcon(new_icon);
 
 	return false;
 }

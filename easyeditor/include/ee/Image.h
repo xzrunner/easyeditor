@@ -5,7 +5,7 @@
 
 #include <SM_Matrix.h>
 #include <SM_Rect.h>
-#include <CU_RefCountObj.h>
+#include <cu/CU_RefCountObj.h>
 #include <sprite2/pre_defined.h>
 #include S2_MAT_HEADER
 
@@ -19,12 +19,12 @@ namespace ee
 class Sprite;
 class Texture;
 
-class Image : public cu::RefCountObj
+class Image
 {
 public:
 	Image();
 	Image(const uint8_t* pixels, int w, int h, int fmt);
-	Image(const s2::RenderTarget* rt);
+	Image(const std::shared_ptr<const s2::RenderTarget>& rt);
 	~Image();
 	
 	bool LoadFromFile(const std::string& filepath);
@@ -41,7 +41,7 @@ public:
 
 	void QueryTexcoords(float* texcoords, int* texid) const;
 
-	s2::Texture* GetS2Tex() const { return m_s2_tex; }
+	const std::shared_ptr<s2::Texture>& GetS2Tex() const { return m_s2_tex; }
 
 private:
 	void LoadWithClip(const std::string& filepath);
@@ -51,8 +51,8 @@ private:
 private:
 	std::string m_filepath;
 
-	Texture* m_tex;
-	s2::Texture* m_s2_tex;
+	std::shared_ptr<Texture> m_tex;
+	std::shared_ptr<s2::Texture> m_s2_tex;
 
 	sm::i16_vec2 m_ori_sz;
 	sm::i16_rect m_clipped_region;
@@ -60,6 +60,9 @@ private:
 }; // Image
 
 typedef ResourcesMgr<Image> ImageMgr;
+
+using ImagePtr = std::shared_ptr<Image>;
+using ImageConstPtr = std::shared_ptr<const Image>;
 
 }
 

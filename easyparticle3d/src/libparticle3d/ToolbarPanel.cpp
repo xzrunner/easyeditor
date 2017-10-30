@@ -105,14 +105,14 @@ void ToolbarPanel::Store(Json::Value& val) const
 void ToolbarPanel::Add(const gum::P3dSymLoader::Component& comp, ee::LibraryPanel* library)
 {
 	// todo Release symbol
-	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(comp.filepath);
+	auto sym = ee::SymbolMgr::Instance()->FetchSymbol(comp.filepath.c_str());
 	library->AddSymbol(sym);
-	p3d_symbol* pc = m_stage->m_ps->AddSymbol(static_cast<s2::Symbol*>(sym));
+	p3d_symbol* pc = m_stage->m_ps->AddSymbol(sym);
 	ComponentPanel* cp = new ComponentPanel(this, pc, this);
 
 	cp->SetCount(comp.count);
 
-	cp->m_name->SetValue(comp.name);
+	cp->m_name->SetValue(comp.name.c_str());
 
 	cp->SetValue(PS_SCALE, ee::UICallback::Data(comp.scale_start, comp.scale_end));
 
@@ -403,7 +403,7 @@ void ToolbarPanel::InitParticle()
 {
 	Clear();
 
-	s2::P3dEmitterCfg* cfg = PSConfigMgr::Instance()->GetDefaultConfig();
+	auto cfg = PSConfigMgr::Instance()->GetDefaultConfig();
 	ParticleSystem* ps = new ParticleSystem(cfg, false);
 //	ps->Start();
 	cu::RefCountObjAssign<ParticleSystem>(m_stage->m_ps, ps);
@@ -459,7 +459,7 @@ void ToolbarPanel::Clear()
 	OnDelAllChild(wxCommandEvent());
 }
 
-void ToolbarPanel::OnAddChild(wxCommandEvent& event, s2::Symbol* sym)
+void ToolbarPanel::OnAddChild(wxCommandEvent& event, const s2::SymPtr& sym)
 {
 	p3d_symbol* ps = m_stage->m_ps->AddSymbol(sym);
 	ComponentPanel* cp = new ComponentPanel(this, ps, this);
@@ -555,10 +555,10 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
 	long index;
 	sIndex.ToLong(&index);
 
-	ee::Symbol* sym = m_library->GetSymbol(index);
+	auto sym = m_library->GetSymbol(index);
 	if (sym)
 	{
-		m_toolbar->OnAddChild(wxCommandEvent(), static_cast<s2::Symbol*>(sym));
+		m_toolbar->OnAddChild(wxCommandEvent(), sym);
 		m_stage->m_ps->Start();
 	}
 

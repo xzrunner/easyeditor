@@ -20,8 +20,7 @@ IconBuilder::IconBuilder()
 
 IconBuilder::~IconBuilder()
 {
-	std::multimap<const eicon::Symbol*, Value>::iterator 
-		itr = m_map_data.begin();
+	auto itr = m_map_data.begin();
 	for ( ; itr != m_map_data.end(); ++itr) {
 		delete itr->second.node;
 	}
@@ -29,8 +28,7 @@ IconBuilder::~IconBuilder()
 
 void IconBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 {
-	std::multimap<const eicon::Symbol*, Value>::const_iterator
-		itr = m_map_data.begin();
+	auto itr = m_map_data.begin();
 	for ( ; itr != m_map_data.end(); ++itr) {
 		bool has_next;
 		visitor.Visit(const_cast<IPackNode*>(itr->second.node), has_next);
@@ -41,30 +39,29 @@ void IconBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 
 }
 
-const IPackNode* IconBuilder::Create(const eicon::Sprite* spr)
+const IPackNode* IconBuilder::Create(const std::shared_ptr<const eicon::Sprite>& spr)
 {
-	if (const IPackNode* node = Query(spr)) {
+	if (const IPackNode* node = Query(spr.get())) {
 		return node;
 	}
 
 	PackPicture* node = new PackPicture;
-	Load(spr, node);
+	Load(spr.get(), node);
 
 	Value val;
 	val.proc = spr->GetProcess();
 	val.node = node;
-	m_map_data.insert(std::make_pair(dynamic_cast<const eicon::Symbol*>(spr->GetSymbol()), val));
+	m_map_data.insert(std::make_pair(std::dynamic_pointer_cast<eicon::Symbol>(spr->GetSymbol()), val));
 	return node;
 }
 
 const IPackNode* IconBuilder::Query(const eicon::Sprite* spr) const
 {
 	float proc = spr->GetProcess();
-	const eicon::Symbol* key = dynamic_cast<const eicon::Symbol*>(spr->GetSymbol());
-	std::multimap<const eicon::Symbol*, Value>::const_iterator 
-		itr_s = m_map_data.lower_bound(key),
-		itr_e = m_map_data.upper_bound(key),
-		itr;
+	auto key = std::dynamic_pointer_cast<eicon::Symbol>(spr->GetSymbol());
+	auto itr_s = m_map_data.lower_bound(key);
+	auto itr_e = m_map_data.upper_bound(key);
+	std::multimap<std::shared_ptr<const eicon::Symbol>, Value>::const_iterator itr;
 	for (itr = itr_s; itr != itr_e; ++itr) {
 		const Value& val = itr->second;
 		if (val.proc == proc) {
@@ -81,9 +78,9 @@ void IconBuilder::Load(const eicon::Sprite* spr, PackPicture* pic)
 
 	PackPicture::Quad quad;
 
-	const eicon::Symbol* sym = dynamic_cast<const eicon::Symbol*>(spr->GetSymbol());
-	const eicon::Icon* icon = dynamic_cast<const eicon::Icon*>(sym->GetIcon());
-	quad.img = dynamic_cast<const ee::ImageSymbol*>(icon->GetImage())->GetImage();
+	auto sym = std::dynamic_pointer_cast<eicon::Symbol>(spr->GetSymbol());
+	auto icon = dynamic_cast<const eicon::Icon*>(sym->GetIcon().get());
+	quad.img = std::dynamic_pointer_cast<ee::ImageSymbol>(icon->GetImage())->GetImage();
 	icon->GenTexcoords(proc, quad.texture_coord);
 	icon->GenVertices(proc, quad.texture_coord, quad.screen_coord);
 

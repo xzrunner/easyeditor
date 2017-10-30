@@ -3,14 +3,14 @@
 
 #include <SM_Vector.h>
 
-#include <vector>
+#include <cu/cu_stl.h>
 
 namespace ClipperLib620
 {
 	struct IntPoint;
 
-	typedef std::vector< IntPoint > Path;
-	typedef std::vector< Path > Paths;
+	typedef CU_VEC< IntPoint > Path;
+	typedef CU_VEC< Path > Paths;
 
 	enum ClipType;
 }
@@ -21,24 +21,24 @@ namespace ee
 class PolygonClipper
 {
 public:
-	static std::vector<std::vector<sm::vec2> >
-		Intersection(const std::vector<std::vector<sm::vec2> >& subject, const std::vector<sm::vec2>& clip);
+	static CU_VEC<CU_VEC<sm::vec2> >
+		Intersection(const CU_VEC<CU_VEC<sm::vec2> >& subject, const CU_VEC<sm::vec2>& clip);
 
-	static std::vector<std::vector<sm::vec2> >
-		Union(const std::vector<std::vector<sm::vec2> >& subject, const std::vector<sm::vec2>& clip);
+	static CU_VEC<CU_VEC<sm::vec2> >
+		Union(const CU_VEC<CU_VEC<sm::vec2> >& subject, const CU_VEC<sm::vec2>& clip);
 
-	static std::vector<std::vector<sm::vec2> >
-		Difference(const std::vector<std::vector<sm::vec2> >& subject, const std::vector<sm::vec2>& clip);
+	static CU_VEC<CU_VEC<sm::vec2> >
+		Difference(const CU_VEC<CU_VEC<sm::vec2> >& subject, const CU_VEC<sm::vec2>& clip);
 
-	static std::vector<std::vector<sm::vec2> >
-		Xor(const std::vector<std::vector<sm::vec2> >& subject, const std::vector<sm::vec2>& clip);
+	static CU_VEC<CU_VEC<sm::vec2> >
+		Xor(const CU_VEC<CU_VEC<sm::vec2> >& subject, const CU_VEC<sm::vec2>& clip);
 
 private:
-	static ClipperLib620::Path CreatePath(const std::vector<sm::vec2>& points);
-	static std::vector<sm::vec2> ParserPath(const ClipperLib620::Path& path);
+	static ClipperLib620::Path CreatePath(const CU_VEC<sm::vec2>& points);
+	static CU_VEC<sm::vec2> ParserPath(const ClipperLib620::Path& path);
 
-	static std::vector<std::vector<sm::vec2> >
-		Implement(const std::vector<std::vector<sm::vec2> >& subject, const std::vector<sm::vec2>& clip, ClipperLib620::ClipType type);
+	static CU_VEC<CU_VEC<sm::vec2> >
+		Implement(const CU_VEC<CU_VEC<sm::vec2> >& subject, const CU_VEC<sm::vec2>& clip, ClipperLib620::ClipType type);
 
 private:
 	static const float SCALE;

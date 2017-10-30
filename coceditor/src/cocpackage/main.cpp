@@ -23,7 +23,7 @@
 
 #define CHARACTER
 
-std::vector<const ee::Symbol*> SYMBOLS;
+std::vector<ee::SymPtr> SYMBOLS;
 
 ecoco::epd::TextureMgr TEX_MGR;
 
@@ -78,7 +78,7 @@ void LoadFromDir(const std::string& dir)
 		int type = ee::SymbolFile::Instance()->Type(*itr);
 		if (type == s2::SYM_COMPLEX || type == s2::SYM_ANIMATION) {
 			// todo release symbol
-			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(*itr);
+			auto sym = ee::SymbolMgr::Instance()->FetchSymbol(*itr);
 			SYMBOLS.push_back(sym);
 		}
 	}
@@ -139,7 +139,7 @@ void LoadFromList(const std::string& list)
 		if (type == s2::SYM_COMPLEX || type == s2::SYM_ANIMATION) 
 		{
 			// todo release symbol
-			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(*itr);
+			auto sym = ee::SymbolMgr::Instance()->FetchSymbol(*itr);
 			std::set<std::string>::iterator itr = names.find(sym->name);
 			if (itr == names.end()) {
 //					sym->release();

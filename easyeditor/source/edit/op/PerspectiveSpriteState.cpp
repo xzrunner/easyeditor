@@ -8,19 +8,12 @@
 namespace ee
 {
 
-PerspectiveSpriteState::PerspectiveSpriteState(Sprite* spr, 
+PerspectiveSpriteState::PerspectiveSpriteState(const SprPtr& spr,
 											   const SpriteCtrlNode::Node& ctrl_node)
-	: m_ctrl_node(ctrl_node)
+	: m_spr(spr)
+	, m_ctrl_node(ctrl_node)
 {
-	m_spr = spr;
-	m_spr->AddReference();
-
 	m_first_persp = m_spr->GetPerspective();
-}
-
-PerspectiveSpriteState::~PerspectiveSpriteState()
-{
-	m_spr->RemoveReference();
 }
 
 void PerspectiveSpriteState::OnMouseRelease(const sm::vec2& pos)
@@ -37,7 +30,7 @@ bool PerspectiveSpriteState::OnMouseDrag(const sm::vec2& pos)
 
 void PerspectiveSpriteState::Perspective(const sm::vec2& curr)
 {
-	sm::rect r = m_spr->GetSymbol()->GetBounding(m_spr);
+	sm::rect r = m_spr->GetSymbol()->GetBounding(m_spr.get());
 	S2_MAT t;
 	t.SetTransformation(m_spr->GetPosition().x, m_spr->GetPosition().y, m_spr->GetAngle(),
 		m_spr->GetScale().x, m_spr->GetScale().y, 0, 0, m_spr->GetShear().x, m_spr->GetShear().y);

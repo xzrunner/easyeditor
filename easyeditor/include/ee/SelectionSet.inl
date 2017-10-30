@@ -11,7 +11,7 @@ inline void SelectionSet<T>::Clear()
 }
 
 template<class T>
-inline void SelectionSet<T>::Add(T* spr)
+inline void SelectionSet<T>::Add(const std::shared_ptr<T>& spr)
 {
 	if (spr) {
 		m_items.push_back(spr);
@@ -19,13 +19,13 @@ inline void SelectionSet<T>::Add(T* spr)
 }
 
 template<class T>
-inline void SelectionSet<T>::Remove(T* spr)
+inline void SelectionSet<T>::Remove(const std::shared_ptr<T>& spr)
 {
-	std::vector<T*>::iterator itr = m_items.begin();
-	for ( ; itr != m_items.end(); ++itr) {
+	auto itr = m_items.begin();
+	for (; itr != m_items.end(); ++itr) {
 		if (*itr == spr) {
 			m_items.erase(itr);
-			return;
+			break;
 		}
 	}
 }
@@ -43,10 +43,10 @@ inline bool SelectionSet<T>::IsEmpty() const
 }
 
 template<class T>
-inline bool SelectionSet<T>::IsExist(T* spr) const
+inline bool SelectionSet<T>::IsExist(const std::shared_ptr<T>& spr) const
 {
-	for (int i = 0, n = m_items.size(); i < n; ++i) {
-		if (m_items[i] == spr) {
+	for (auto& item : m_items) {
+		if (item == spr) {
 			return true;
 		}
 	}
@@ -54,13 +54,12 @@ inline bool SelectionSet<T>::IsExist(T* spr) const
 }
 
 template<class T>
-inline void SelectionSet<T>::Traverse(Visitor<T>& visitor) const
+inline void SelectionSet<T>::Traverse(RefVisitor<T>& visitor) const
 {
-	std::vector<T*>::const_iterator itr = m_items.begin();
-	for ( ; itr != m_items.end(); ++itr)
+	for (auto& item : m_items)
 	{
 		bool next;
-		visitor.Visit(*itr, next);
+		visitor.Visit(item, next);
 		if (!next) break;
 	}
 }

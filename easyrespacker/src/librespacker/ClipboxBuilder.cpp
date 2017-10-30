@@ -16,8 +16,7 @@ ClipboxBuilder::ClipboxBuilder()
 
 ClipboxBuilder::~ClipboxBuilder()
 {
-	std::map<const ecomplex::Symbol*, const PackClipbox*>::iterator itr 
-		= m_map_clipbox.begin();
+	auto itr = m_map_clipbox.begin();
 	for ( ; itr != m_map_clipbox.end(); ++itr) {
 		delete itr->second;
 	}
@@ -25,8 +24,7 @@ ClipboxBuilder::~ClipboxBuilder()
 
 void ClipboxBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 {
-	std::map<const ecomplex::Symbol*, const PackClipbox*>::const_iterator itr 
-		= m_map_clipbox.begin();
+	auto itr = m_map_clipbox.begin();
 	for ( ; itr != m_map_clipbox.end(); ++itr) {
 		bool has_next;
 		visitor.Visit(const_cast<PackClipbox*>(itr->second), has_next);
@@ -36,10 +34,9 @@ void ClipboxBuilder::Traverse(ee::Visitor<IPackNode>& visitor) const
 	}
 }
 
-const IPackNode* ClipboxBuilder::Create(const ecomplex::Symbol* complex)
+const IPackNode* ClipboxBuilder::Create(const std::shared_ptr<const ecomplex::Symbol>& complex)
 {
-	std::map<const ecomplex::Symbol*, const PackClipbox*>::iterator itr 
-		= m_map_clipbox.find(complex);
+	auto itr = m_map_clipbox.find(complex);
 	if (itr != m_map_clipbox.end()) {
 		return itr->second;
 	}

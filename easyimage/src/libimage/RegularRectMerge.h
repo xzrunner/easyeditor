@@ -3,7 +3,7 @@
 
 #include "Rect.h"
 
-#include <vector>
+#include <cu/cu_stl.h>
 
 namespace eimage
 {
@@ -14,16 +14,16 @@ class RegularRectCondense;
 class RegularRectMerge
 {
 public:
-	RegularRectMerge(const std::vector<Rect>& rects, int width, 
+	RegularRectMerge(const CU_VEC<Rect>& rects, int width, 
 		int height, bool* ori_pixels);
 	~RegularRectMerge();
 
 	void Merge();
 
-	void GetResult(std::vector<Rect>& result) const;
+	void GetResult(CU_VEC<Rect>& result) const;
 
 private:
-	int ComputeCost(const Rect& r, const std::vector<Rect>& rects) const;
+	int ComputeCost(const Rect& r, const CU_VEC<Rect>& rects) const;
 
 private:
 	int m_width, m_height;

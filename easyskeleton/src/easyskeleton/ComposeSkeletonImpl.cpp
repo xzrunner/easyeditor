@@ -54,8 +54,8 @@ void ComposeSkeletonImpl::OnMouseLeftUp(int x, int y)
  
  		if (m_selection->Size() == 1)
  		{
- 			std::vector<ee::Sprite*> sprs;
- 			m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprs));
+ 			std::vector<ee::SprPtr> sprs;
+ 			m_selection->Traverse(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 			AutoAbsorb(sprs[0]);
  		}
  	}
@@ -89,7 +89,7 @@ void ComposeSkeletonImpl::OnPopMenuSelected(int type)
 	{
 	case StagePanel::Menu_AddJointNode:
 		{
-			ee::Sprite* spr = m_sprites_impl->QuerySpriteByPos(m_first_pos);
+			auto spr = m_sprites_impl->QuerySpriteByPos(m_first_pos);
 			if (spr) {
 				Bone* bone = (Bone*)(spr->GetUserData());
 				s2::JointPose src(spr->GetCenter(), spr->GetAngle(), spr->GetScale()),
@@ -101,7 +101,7 @@ void ComposeSkeletonImpl::OnPopMenuSelected(int type)
 		break;
 	case StagePanel::Menu_DelJointNode:
 		{
-			ee::Sprite* spr = m_sprites_impl->QuerySpriteByPos(m_first_pos);
+			auto spr = m_sprites_impl->QuerySpriteByPos(m_first_pos);
 			if (spr) {
 				Bone* bone = (Bone*)(spr->GetUserData());
 				Joint* joint = bone->QueryJoint(m_first_pos);
@@ -132,8 +132,8 @@ void ComposeSkeletonImpl::SetRightPopupMenu(wxMenu& menu, int x, int y)
 		return;
 	}
 
-	std::vector<ee::Sprite*> sprs;
-	m_sprites_impl->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	m_sprites_impl->TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	Bone* bone = (Bone*)(sprs[0]->GetUserData());
 	Joint* joint = bone->QueryJoint(m_first_pos);
 	if (joint) {
@@ -156,15 +156,15 @@ ComposeSkeletonImpl::CreateRotateState(ee::SpriteSelection* selection, const sm:
 }
 
 ee::ArrangeSpriteState* 
-ComposeSkeletonImpl::CreateScaleState(ee::Sprite* spr, const ee::SpriteCtrlNode::Node& ctrl_node) const
+ComposeSkeletonImpl::CreateScaleState(const ee::SprPtr& spr, const ee::SpriteCtrlNode::Node& ctrl_node) const
 {
 	return new ScaleSprState(spr, ctrl_node);
 }
 
 Joint* ComposeSkeletonImpl::QueryJoint(const sm::vec2& pos) const
 {
-	std::vector<ee::Sprite*> sprs;
-	m_sprites_impl->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	m_sprites_impl->TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
 		Bone* bone = (Bone*)(sprs[i]->GetUserData());
 		if (Joint* joint = bone->QueryJoint(pos)) {
@@ -174,11 +174,11 @@ Joint* ComposeSkeletonImpl::QueryJoint(const sm::vec2& pos) const
 	return NULL;
 }
 
-void ComposeSkeletonImpl::AutoAbsorb(ee::Sprite* spr) const
+void ComposeSkeletonImpl::AutoAbsorb(const ee::SprPtr& spr) const
 {
 	Bone* src = (Bone*)(spr->GetUserData());
-	std::vector<ee::Sprite*> sprs;
-	m_sprites_impl->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	m_sprites_impl->TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	for (int i = 0, n = sprs.size(); i < n; ++i) 
 	{
 		if (sprs[i] == spr) {
@@ -194,8 +194,8 @@ void ComposeSkeletonImpl::AutoAbsorb(ee::Sprite* spr) const
 
 void ComposeSkeletonImpl::UpdateSelectedBody()
 {
-	std::vector<ee::Sprite*> sprs;
-	m_sprites_impl->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprs));
+	std::vector<ee::SprPtr> sprs;
+	m_sprites_impl->TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
 		Bone* bone = (Bone*)(sprs[i]->GetUserData());
 		bone->Update();

@@ -23,13 +23,13 @@ public:
 
 	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
 
-	const IPackNode* Create(const eterrain2d::Symbol* sym);
+	const IPackNode* Create(const std::shared_ptr<const eterrain2d::Symbol>& sym);
 
 private:
-	void Load(const eterrain2d::Symbol* sym, PackAnimation* anim);
+	void Load(const std::shared_ptr<const eterrain2d::Symbol>& sym, PackAnimation* anim);
 
 private:
-	std::map<const eterrain2d::Symbol*, const PackAnimation*> m_map_data;
+	std::map<std::shared_ptr<const eterrain2d::Symbol>, const PackAnimation*> m_map_data;
 
 	std::vector<const PackPicture*> m_pics;
 

@@ -3,19 +3,19 @@
 
 #include "BaseDialog.h"
 #include "DynamicInfo.h"
+#include "Sprite.h"
 
 #include <vector>
 
 namespace ee
 {
 
-class Sprite;
 class DynamicWidget;
 
 class CfgEditDlg : public BaseDialog
 {
 public:
-	CfgEditDlg(wxWindow* parent, const char* name, Sprite* spr);
+	CfgEditDlg(wxWindow* parent, const char* name, const SprPtr& spr);
 	
 protected:
 	void InitLayout(int col, const std::vector<DynamicWidget*>& widgets);
@@ -24,7 +24,7 @@ protected:
 	DynamicInfo m_info;
 
 private:
-	Sprite* m_spr;
+	SprPtr m_spr;
 
 }; // CfgEditDlg
 

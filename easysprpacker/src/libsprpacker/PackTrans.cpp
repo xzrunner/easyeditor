@@ -4,7 +4,7 @@
 #include <easybuilder.h>
 namespace lua = ebuilder::lua;
 
-#include <sprite2/S2_Sprite.h>
+#include <sprite2/Sprite.h>
 #include <sprite2/RenderFilter.h>
 #include <sprite2/RenderShader.h>
 #include <simp/NodeTrans.h>
@@ -81,7 +81,7 @@ PackTrans::PackTrans(const s2::Sprite& spr, bool force_name)
 		m_type |= simp::NodeTrans::FAST_BLEND_MASK;
 	}
 
-	m_filter = spr.GetShader().GetFilter();
+	m_filter = spr.GetShader().GetFilter().get();
 	if (m_filter && m_filter->GetMode() != s2::FM_NULL) {
 		m_type |= simp::NodeTrans::FILTER_MASK;
 	}
@@ -108,19 +108,19 @@ PackTrans::PackTrans(const s2::Sprite& spr, bool force_name)
 
 	// integrate
 
-	std::string name;
+	CU_STR name;
 	s2::SprNameMap::Instance()->IDToStr(spr.GetName(), name);
 	if (!name.empty()) {
 		if (name[0] == '_') {
 			if (force_name) {
 				if (name.compare(0, strlen("_sprite"), "_sprite") == 0) {
-					m_name = "_" + name.substr(strlen("_sprite"));
+					m_name = std::string("_") + name.substr(strlen("_sprite")).c_str();
 				} else {
-					m_name = name;
+					m_name = name.c_str();
 				}
 			}
 		} else {
-			m_name = name;
+			m_name = name.c_str();
 		}
 	}
 

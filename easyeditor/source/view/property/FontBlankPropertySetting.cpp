@@ -16,7 +16,7 @@ const wxChar* FontBlankPropertySetting::HORI_ALIGN_LABELS[] = {
 const wxChar* FontBlankPropertySetting::VERT_ALIGN_LABELS[] = { 
 	wxT("top"), wxT("bottom"), wxT("center"), wxT("auto"), NULL };
 
-FontBlankPropertySetting::FontBlankPropertySetting(EditPanelImpl* stage, FontBlankSprite* spr)
+FontBlankPropertySetting::FontBlankPropertySetting(EditPanelImpl* stage, const SprPtr& spr)
 	: SpritePropertySetting(stage, spr)
 {
 	m_type = "Font";
@@ -26,7 +26,7 @@ void FontBlankPropertySetting::OnPropertyGridChange(const std::string& name, con
 {
 	SpritePropertySetting::OnPropertyGridChange(name, value);
 
-	FontBlankSprite* spr = static_cast<FontBlankSprite*>(GetSprite());
+	auto spr = std::dynamic_pointer_cast<FontBlankSprite>(GetSprite());
 	if (name == wxT("Font")) {
 		spr->font = wxANY_AS(value, wxString);
 	} else if (name == wxT("Edge")) {
@@ -73,7 +73,7 @@ void FontBlankPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
 	SpritePropertySetting::UpdateProperties(pg);
 
-	FontBlankSprite* spr = static_cast<FontBlankSprite*>(GetSprite());
+	auto spr = std::dynamic_pointer_cast<FontBlankSprite>(GetSprite());
 	pg->GetProperty(wxT("Font"))->SetValue(spr->font);
 
 	pg->GetProperty(wxT("Edge"))->SetValue(spr->has_edge);
@@ -97,7 +97,7 @@ void FontBlankPropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	pg->Append(new wxPropertyCategory("FONT", wxPG_LABEL));
 
-	FontBlankSprite* spr = static_cast<FontBlankSprite*>(GetSprite());
+	auto spr = std::dynamic_pointer_cast<FontBlankSprite>(GetSprite());
 	pg->Append(new wxStringProperty(wxT("Font"), wxPG_LABEL, spr->font));
 
 	pg->Append(new wxBoolProperty(wxT("Edge"), wxPG_LABEL, spr->has_edge));

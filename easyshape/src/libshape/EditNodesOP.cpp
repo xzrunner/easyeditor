@@ -6,7 +6,7 @@
 #include <ee/EditPanelImpl.h>
 #include <ee/SettingData.h>
 
-#include <sprite2/S2_RVG.h>
+#include <sprite2/RVG.h>
 #include <SM_CosineSmooth.h>
 #include <SM_DouglasPeucker.h>
 
@@ -132,14 +132,14 @@ void EditNodesOP::Smooth(float samplingWidth)
 
 void EditNodesOP::UpdateModified()
 {
-	std::vector<EditedPolyShape*> polylines;
-	std::vector<std::vector<sm::vec2> > chainsDst;
+	std::vector<std::shared_ptr<EditedPolyShape>> polylines;
+	CU_VEC<CU_VEC<sm::vec2> > chainsDst;
 
 	for (size_t i = 0, n = m_buffer.size(); i < n; ++i)
 	{
-		const std::vector<sm::vec2>& chain = m_buffer[i].src->polyline->GetVertices();
-		const std::vector<sm::vec2>& src = m_buffer[i].src->selectedNodes;
-		const std::vector<sm::vec2>& dst = m_buffer[i].dst;
+		const CU_VEC<sm::vec2>& chain = m_buffer[i].src->polyline->GetVertices();
+		const CU_VEC<sm::vec2>& src = m_buffer[i].src->selectedNodes;
+		const CU_VEC<sm::vec2>& dst = m_buffer[i].dst;
 
 		size_t begin = 0, end = chain.size() - 1;
 		for (size_t j = 0, m = chain.size(); j < m; ++j)
@@ -160,7 +160,7 @@ void EditNodesOP::UpdateModified()
 		}
 
 		assert(begin <= end);
-		std::vector<sm::vec2> result;
+		CU_VEC<sm::vec2> result;
 		copy(chain.begin(), chain.begin() + begin, back_inserter(result));
 		copy(dst.begin(), dst.end(), back_inserter(result));
 		copy(chain.begin() + end + 1, chain.end(), back_inserter(result));

@@ -17,8 +17,8 @@ MousePositionCMPT::MousePositionCMPT(wxWindow* parent, const std::string& name,
 
 void MousePositionCMPT::updatePosition(const sm::vec2& pos)
 {
-	m_xText->ChangeValue(StringHelper::ToString(pos.x));
-	m_yText->ChangeValue(StringHelper::ToString(pos.y));
+	m_xText->ChangeValue(StringHelper::ToString(pos.x).c_str());
+	m_yText->ChangeValue(StringHelper::ToString(pos.y).c_str());
 }
 
 wxSizer* MousePositionCMPT::InitLayout()

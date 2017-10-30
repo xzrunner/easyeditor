@@ -1,9 +1,10 @@
 #ifndef _EASYIMAGE_EXTRACT_OUTLINE_RAW_H_
 #define _EASYIMAGE_EXTRACT_OUTLINE_RAW_H_
 
-#include <SM_Vector.h>
+#include <cu/uncopyable.h>
+#include <cu/cu_stl.h>
 
-#include <vector>
+#include <SM_Vector.h>
 
 #include <stdint.h>
 
@@ -21,16 +22,16 @@ public:
 
 	void CreateBorderConvexHull();
 
-	const std::vector<sm::vec2>& GetBorderLine() const {
+	const CU_VEC<sm::vec2>& GetBorderLine() const {
 		return m_border_line;
 	}
-	const std::vector<sm::vec2>& GetBorderPoints() const {
+	const CU_VEC<sm::vec2>& GetBorderPoints() const {
 		return m_border_points;
 	}
-	const std::vector<sm::vec2>& GetBorderLineMerged() const {
+	const CU_VEC<sm::vec2>& GetBorderLineMerged() const {
 		return m_border_line_merged;
 	}
-	const std::vector<sm::vec2>& GetConvexHull() const {
+	const CU_VEC<sm::vec2>& GetConvexHull() const {
 		return m_convex_hull;
 	}
 
@@ -45,19 +46,19 @@ private:
 
 	bool IsNearby(const sm::vec2& p0, const sm::vec2& p1) const;
 
-	static void MergeLine(const std::vector<sm::vec2>& src, std::vector<sm::vec2>& dst);
+	static void MergeLine(const CU_VEC<sm::vec2>& src, CU_VEC<sm::vec2>& dst);
 
 private:
 	const uint8_t* m_pixels;
 	int m_width, m_height;
 
-	std::vector<sm::vec2> m_border_points;
-	std::vector<sm::vec2> m_border_axis_line;
+	CU_VEC<sm::vec2> m_border_points;
+	CU_VEC<sm::vec2> m_border_axis_line;
 
-	std::vector<sm::vec2> m_border_line;
-	std::vector<sm::vec2> m_border_line_merged;
+	CU_VEC<sm::vec2> m_border_line;
+	CU_VEC<sm::vec2> m_border_line_merged;
 
-	std::vector<sm::vec2> m_convex_hull;
+	CU_VEC<sm::vec2> m_convex_hull;
 
 }; // ExtractOutlineRaw
 

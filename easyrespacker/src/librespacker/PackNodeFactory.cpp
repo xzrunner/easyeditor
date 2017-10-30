@@ -118,7 +118,7 @@ PackNodeFactory::PackNodeFactory()
 	m_builders.push_back(m_trail_builder = new TrailBuilder(m_export_set));
 }
 
-const IPackNode* PackNodeFactory::Create(const ee::Sprite* spr)
+const IPackNode* PackNodeFactory::Create(const ee::SprConstPtr& spr)
 {
 	const IPackNode* node = NULL;
 
@@ -127,20 +127,20 @@ const IPackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 	{
 		node = m_anchor_builder->Create(spr);
 
-		const std::string& filepath = dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath();	
+		const std::string& filepath = std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol())->GetFilepath();	
 		PackUI::Instance()->OnKnownPackID(filepath, node->GetSprID());
 		PackTag::Instance()->OnKnownPackID(filepath, node->GetSprID());
 	}
 	
 	// picture
-	else if (const ee::ImageSprite* image = dynamic_cast<const ee::ImageSprite*>(spr)) {
+	else if (auto image = std::dynamic_pointer_cast<const ee::ImageSprite>(spr)) {
 		node = m_img_builder->Create(image);
-	} else if (const escale9::Sprite* scale9 = dynamic_cast<const escale9::Sprite*>(spr)) {
+	} else if (auto scale9 = std::dynamic_pointer_cast<const escale9::Sprite>(spr)) {
 		node = m_scale9_builder->Create(scale9);
-	} else if (const eicon::Sprite* icon = dynamic_cast<const eicon::Sprite*>(spr)) {
+	} else if (auto icon = std::dynamic_pointer_cast<const eicon::Sprite>(spr)) {
 		node = m_icon_builder->Create(icon);
-	} else if (const etexture::Sprite* tex = dynamic_cast<const etexture::Sprite*>(spr)) {
-		const etexture::Symbol* sym = dynamic_cast<const etexture::Symbol*>(tex->GetSymbol());
+	} else if (auto tex = std::dynamic_pointer_cast<const etexture::Sprite>(spr)) {
+		auto sym = std::dynamic_pointer_cast<etexture::Symbol>(tex->GetSymbol());
 		if (m_tex_builder->CanHandle(sym)) {
 			node = m_tex_builder->Create(sym);
 		} else if (m_shape_builder->CanHandle(sym)) {
@@ -151,49 +151,49 @@ const IPackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 	}
 
 	// label
-	else if (const etext::Sprite* text = dynamic_cast<const etext::Sprite*>(spr)) {
+	else if (auto text = std::dynamic_pointer_cast<const etext::Sprite>(spr)) {
 		node = m_text_builder->Create(text);
 	}
 
 	// animation
-	else if (const ecomplex::Sprite* complex = dynamic_cast<const ecomplex::Sprite*>(spr)) {
-		node = m_complex_builder->Create(dynamic_cast<const ecomplex::Symbol*>(complex->GetSymbol()));
-	} else if (const libanim::Sprite* anim = dynamic_cast<const libanim::Sprite*>(spr)) {
-		node = m_anim_builder->Create(dynamic_cast<const libanim::Symbol*>(anim->GetSymbol()));
-	} else if (const eterrain2d::Sprite* terr2d = dynamic_cast<const eterrain2d::Sprite*>(spr)) {
-		node = m_terrain2d_builder->Create(dynamic_cast<const eterrain2d::Symbol*>(terr2d->GetSymbol()));
+	else if (auto complex = std::dynamic_pointer_cast<const ecomplex::Sprite>(spr)) {
+		node = m_complex_builder->Create(std::dynamic_pointer_cast<ecomplex::Symbol>(complex->GetSymbol()));
+	} else if (auto anim = std::dynamic_pointer_cast<const libanim::Sprite>(spr)) {
+		node = m_anim_builder->Create(std::dynamic_pointer_cast<libanim::Symbol>(anim->GetSymbol()));
+	} else if (auto terr2d = std::dynamic_pointer_cast<const eterrain2d::Sprite>(spr)) {
+		node = m_terrain2d_builder->Create(std::dynamic_pointer_cast<eterrain2d::Symbol>(terr2d->GetSymbol()));
 	}
 
 	// p3d spr
-	else if (const eparticle3d::Sprite* p3d = dynamic_cast<const eparticle3d::Sprite*>(spr)) {
+	else if (auto p3d = std::dynamic_pointer_cast<const eparticle3d::Sprite>(spr)) {
 		node = m_p3d_spr_builder->Create(p3d);
 	}
 
 	// particle2d
-	else if (const eparticle2d::Sprite* p2d = dynamic_cast<const eparticle2d::Sprite*>(spr)) {
-		node = m_particle2d_builder->Create(dynamic_cast<const eparticle2d::Symbol*>(p2d->GetSymbol()));
+	else if (auto p2d = std::dynamic_pointer_cast<const eparticle2d::Sprite>(spr)) {
+		node = m_particle2d_builder->Create(std::dynamic_pointer_cast<eparticle2d::Symbol>(p2d->GetSymbol()));
 	}
 
 	// mesh spr
-	else if (const emesh::Sprite* mesh = dynamic_cast<const emesh::Sprite*>(spr)) {
+	else if (auto mesh = std::dynamic_pointer_cast<const emesh::Sprite>(spr)) {
 		node = m_mesh_spr_builder->Create(mesh);
 	}
 
 	// mask
-	else if (const emask::Sprite* mask = dynamic_cast<const emask::Sprite*>(spr)) {
-		node = m_mask_builder->Create(dynamic_cast<const emask::Symbol*>(mask->GetSymbol()));
+	else if (auto mask = std::dynamic_pointer_cast<const emask::Sprite>(spr)) {
+		node = m_mask_builder->Create(std::dynamic_pointer_cast<emask::Symbol>(mask->GetSymbol()));
 	}
 
 	// trail
-	else if (const etrail::Sprite* trail = dynamic_cast<const etrail::Sprite*>(spr)) {
-		node = m_trail_builder->Create(dynamic_cast<const etrail::Symbol*>(trail->GetSymbol()));
+	else if (auto trail = std::dynamic_pointer_cast<const etrail::Sprite>(spr)) {
+		node = m_trail_builder->Create(std::dynamic_pointer_cast<etrail::Symbol>(trail->GetSymbol()));
 	}
 
 	else {
 		throw ee::Exception("PackNodeFactory::Create unknown sprite type.");
 	}
 	
-	node->SetFilepath(ee::FileHelper::GetRelativePath(m_files_dir, dynamic_cast<const  ee::Symbol*>(spr->GetSymbol())->GetFilepath()));
+	node->SetFilepath(ee::FileHelper::GetRelativePath(m_files_dir, std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol())->GetFilepath()));
 
 	if (node->GetSprID() > ANCHOR_ID) {
 		throw ee::Exception("PackNodeFactory::Create node id over ANCHOR_ID.");
@@ -202,45 +202,44 @@ const IPackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 	return node;
 }
 
-const IPackNode* PackNodeFactory::Create(const ee::Symbol* sym)
+const IPackNode* PackNodeFactory::Create(const ee::SymConstPtr& sym)
 {
 	const IPackNode* node = NULL;
 
 	// picture
-	if (const ee::ImageSymbol* img_symbol = dynamic_cast<const ee::ImageSymbol*>(sym)) {
-		ee::ImageSprite* img_spr = new ee::ImageSprite(const_cast<ee::ImageSymbol*>(img_symbol));
+	if (auto img_symbol = std::dynamic_pointer_cast<const ee::ImageSymbol>(sym)) {
+		auto img_spr = std::make_shared<ee::ImageSprite>(std::const_pointer_cast<ee::ImageSymbol>(img_symbol));
 		node = m_img_builder->Create(img_spr);
-		img_spr->RemoveReference();
-	} else if (const etexture::Symbol* tex = dynamic_cast<const etexture::Symbol*>(sym)) {
+	} else if (auto tex = std::dynamic_pointer_cast<const etexture::Symbol>(sym)) {
 		node = m_tex_builder->Create(tex);
 	}
 
 	// animation
-	else if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(sym)) {
+	else if (auto complex = std::dynamic_pointer_cast<const ecomplex::Symbol>(sym)) {
 		node = m_complex_builder->Create(complex);
-	} else if (const libanim::Symbol* anim = dynamic_cast<const libanim::Symbol*>(sym)) {
+	} else if (auto anim = std::dynamic_pointer_cast<const libanim::Symbol>(sym)) {
 		node = m_anim_builder->Create(anim);
-	} else if (const eterrain2d::Symbol* terr2d = dynamic_cast<const eterrain2d::Symbol*>(sym)) {
+	} else if (auto terr2d = std::dynamic_pointer_cast<const eterrain2d::Symbol>(sym)) {
 		node = m_terrain2d_builder->Create(terr2d);
 	}
 
 	// particle3d
-	else if (const eparticle3d::Symbol* p3d = dynamic_cast<const eparticle3d::Symbol*>(sym)) {
+	else if (auto p3d = std::dynamic_pointer_cast<const eparticle3d::Symbol>(sym)) {
 		node = m_particle3d_builder->Create(p3d, m_p3d_spr_builder);
 	}
 
 	// particle2d
-	else if (const eparticle2d::Symbol* p2d = dynamic_cast<const eparticle2d::Symbol*>(sym)) {
+	else if (auto p2d = std::dynamic_pointer_cast<const eparticle2d::Symbol>(sym)) {
 		node = m_particle2d_builder->Create(p2d);
 	}
 
 	// mesh
-	else if (const emesh::Symbol* mesh = dynamic_cast<const emesh::Symbol*>(sym)) {
+	else if (auto mesh = std::dynamic_pointer_cast<const emesh::Symbol>(sym)) {
 		node = m_mesh_builder->Create(mesh);
 	}
 
 	// trail
-	else if (const etrail::Symbol* trail = dynamic_cast<const etrail::Symbol*>(sym)) {
+	else if (auto trail = std::dynamic_pointer_cast<const etrail::Symbol>(sym)) {
 		node = m_trail_builder->Create(trail);
 	}
 

@@ -1,9 +1,11 @@
 #ifndef _EASYMESH_EDIT_DIALOG_H_
 #define _EASYMESH_EDIT_DIALOG_H_
 
+#include <ee/Sprite.h>
+
 #include <wx/dialog.h>
 
-namespace ee { class EditPanel; class MultiSpritesImpl; class Sprite; }
+namespace ee { class EditPanel; class MultiSpritesImpl; }
 
 class wxGLContext;
 
@@ -16,11 +18,11 @@ class EditDialog : public wxDialog
 {
 public:
 	EditDialog(wxWindow* parent, wxGLContext* glctx, 
-		Sprite* edited, const ee::MultiSpritesImpl* sprite_impl);
+		const std::shared_ptr<Sprite>& edited, const ee::MultiSpritesImpl* sprite_impl);
 	virtual ~EditDialog();
 
 private:
-	void InitLayout(wxGLContext* glctx, ee::Sprite* edited, 
+	void InitLayout(wxGLContext* glctx, const ee::SprPtr& edited, 
 		const ee::MultiSpritesImpl* sprite_impl);
 
 	void OnCloseEvent(wxCloseEvent& event);
@@ -28,7 +30,7 @@ private:
 private:
 	ee::EditPanel* m_stage;
 
-	Sprite* m_spr;
+	std::shared_ptr<Sprite> m_spr;
 
 	DECLARE_EVENT_TABLE()
 

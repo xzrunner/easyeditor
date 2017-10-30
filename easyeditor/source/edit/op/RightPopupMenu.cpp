@@ -90,10 +90,10 @@ void RightPopupMenu::CreateSelectMenu(wxMenu& menu)
 
 	int sz = std::min(MENU_MULTI_SELECTED_END - MENU_MULTI_SELECTED + 1, (int)m_selected_sprs.size());
 	for (int i = 0; i < sz; ++i) {
-		Sprite* spr = m_selected_sprs[i];
+		auto spr = m_selected_sprs[i];
 		m_parent->Bind(wxEVT_COMMAND_MENU_SELECTED, &EditPanelImpl::OnRightPopupMenu, m_stage, MENU_MULTI_SELECTED + i);
-		std::string name = FileHelper::GetFilename(dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath());
-		menu.Append(MENU_MULTI_SELECTED + i, name);
+		auto name = FileHelper::GetFilename(std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol())->GetFilepath());
+		menu.Append(MENU_MULTI_SELECTED + i, name.c_str());
 	}
 
 	menu.AppendSeparator();
@@ -150,7 +150,7 @@ void RightPopupMenu::HandleSelectMenu(int id)
 		return;
 	}
 
-	Sprite* selected = m_selected_sprs[idx];
+	auto selected = m_selected_sprs[idx];
 	m_selection->Clear();
 	m_selection->Add(selected);
 
@@ -215,7 +215,7 @@ void RightPopupMenu::HoriMirror()
 {
 	bool dirty = false;
 	for (size_t i = 0, n = m_edited_sprs.size(); i < n; ++i) {
-		Sprite* spr = m_edited_sprs[i];
+		auto spr = m_edited_sprs[i];
 		const sm::vec2& scale = spr->GetScale();
 		spr->SetScale(sm::vec2(-scale.x, scale.y));
 		dirty = true;
@@ -229,7 +229,7 @@ void RightPopupMenu::VertMirror()
 {
 	bool dirty = false;
 	for (size_t i = 0, n = m_edited_sprs.size(); i < n; ++i) {
-		Sprite* spr = m_edited_sprs[i];
+		auto spr = m_edited_sprs[i];
 		const sm::vec2& scale = spr->GetScale();
 		spr->SetScale(sm::vec2(scale.x, -scale.y));
 		dirty = true;
@@ -241,25 +241,25 @@ void RightPopupMenu::VertMirror()
 
 void RightPopupMenu::FilterParams()
 {
-	std::vector<Sprite*> selected;
-	m_selection->Traverse(FetchAllVisitor<Sprite>(selected));
+	std::vector<SprPtr> selected;
+	m_selection->Traverse(FetchAllRefVisitor<Sprite>(selected));
 	assert(selected.size() == 1);
-	Sprite* spr = selected[0];
+	auto spr = selected[0];
 }
 
 void RightPopupMenu::SelectSame()
 {
-	std::vector<Sprite*> selected;
-	m_selection->Traverse(FetchAllVisitor<Sprite>(selected));
+	std::vector<SprPtr> selected;
+	m_selection->Traverse(FetchAllRefVisitor<Sprite>(selected));
 	assert(selected.size() == 1);
-	std::string filepath = dynamic_cast<const ee::Symbol*>(selected[0]->GetSymbol())->GetFilepath();
+	auto filepath = std::dynamic_pointer_cast<ee::Symbol>(selected[0]->GetSymbol())->GetFilepath();
 
 	m_selection->Clear();
-	std::vector<Sprite*> sprs;
-	m_sprites_impl->TraverseSprites(FetchAllVisitor<Sprite>(sprs));
+	std::vector<SprPtr> sprs;
+	m_sprites_impl->TraverseSprites(FetchAllRefVisitor<Sprite>(sprs));
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
-		Sprite* spr = sprs[i];
-		if (dynamic_cast<const ee::Symbol*>(spr->GetSymbol())->GetFilepath() == filepath) {
+		auto spr = sprs[i];
+		if (std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol())->GetFilepath() == filepath) {
 			m_selection->Add(spr);
 		}
 	}
@@ -274,9 +274,9 @@ void RightPopupMenu::OnSelected(int x, int y)
 
 	PointMultiQueryVisitor visitor_selected(pos);
 	m_selection->Traverse(visitor_selected);
-	const std::vector<Sprite*>& sprites_selected = visitor_selected.GetResult();
+	auto& sprites_selected = visitor_selected.GetResult();
 	if (!sprites_selected.empty()) {
-		m_selection->Traverse(FetchAllVisitor<Sprite>(m_edited_sprs));
+		m_selection->Traverse(FetchAllRefVisitor<Sprite>(m_edited_sprs));
 	}
 
 	PointMultiQueryVisitor visitor_all(pos);

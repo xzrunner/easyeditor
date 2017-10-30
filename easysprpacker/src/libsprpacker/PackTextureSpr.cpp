@@ -13,10 +13,10 @@ namespace lua = ebuilder::lua;
 namespace esprpacker
 {
 
-PackTextureSpr::PackTextureSpr(const etexture::Sprite* spr)
+PackTextureSpr::PackTextureSpr(const std::shared_ptr<etexture::Sprite>& spr)
 {
 	m_sym = PackNodeFactory::Instance()->Create(
-		dynamic_cast<const ee::Symbol*>(spr->GetSymbol()));
+		std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol()));
 }
 
 PackTextureSpr::~PackTextureSpr()
