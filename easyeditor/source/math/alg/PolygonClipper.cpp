@@ -1,7 +1,5 @@
 #include "PolygonClipper.h"
 
-#include <clipper.hpp>
-
 namespace ee
 {
 

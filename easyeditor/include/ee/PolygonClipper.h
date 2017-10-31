@@ -5,15 +5,7 @@
 
 #include <cu/cu_stl.h>
 
-namespace ClipperLib620
-{
-	struct IntPoint;
-
-	typedef CU_VEC< IntPoint > Path;
-	typedef CU_VEC< Path > Paths;
-
-	enum ClipType;
-}
+#include <clipper.hpp>
 
 namespace ee
 {
