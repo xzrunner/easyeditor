@@ -9,8 +9,8 @@
 namespace erespacker
 {
 
-static void *SzAlloc(void *p, size_t size) { p = p; return MyAlloc(size); }
-static void SzFree(void *p, void *address) { p = p; MyFree(address); }
+static void *SzAlloc(ISzAllocPtr p, size_t size) { p = p; return MyAlloc(size); }
+static void SzFree(ISzAllocPtr p, void *address) { p = p; MyFree(address); }
 static ISzAlloc g_Alloc = { SzAlloc, SzFree };
 
 static const unsigned PropHeaderSize = 5;
