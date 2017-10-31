@@ -26,6 +26,8 @@ public:
 
 	bool IsDebugDrawOpen() const { return m_debug_draw; }
 
+	bool IsDrawStatOpen() const { return m_draw_stat; }
+
 	const std::set<std::string>& GetResPathes() const { return m_resource_paths; }
 	std::set<std::string>& GetResPathes() { return m_resource_paths; }
 
@@ -52,6 +54,8 @@ private:
 	bool m_use_render;
 
 	bool m_debug_draw;
+
+	bool m_draw_stat;
 
 	CU_VEC<std::pair<CU_STR, CU_STR>> m_fonts;
 	CU_VEC<std::pair<CU_STR, CU_STR>> m_user_fonts;

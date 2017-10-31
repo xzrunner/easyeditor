@@ -91,6 +91,8 @@
 
 	// render
 
-	"debug_draw" : false
+	"debug_draw" : false,
+
+	"draw_stat" : false
 
 }

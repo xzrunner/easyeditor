@@ -13,10 +13,14 @@
 #include <easyanim.h>
 #include <easytext.h>
 
+#include <shaderlab/Statistics.h>
 #include <sprite2/RVG.h>
 #include <sprite2/Particle3d.h>
 #include <sprite2/CameraType.h>
+#include <sprite2/OrthoCamera.h>
 #include <gum/DTex.h>
+#include <gum/GTxt.h>
+#include <gum/StringHelper.h>
 
 namespace ecomplex
 {
@@ -107,6 +111,10 @@ void StageCanvas::OnDrawSprites() const
 	m_fps.End();
 
 	m_fps.DrawTime();
+
+	if (ee::Config::Instance()->IsDrawStatOpen()) {
+		DrawStat();
+	}
 }
 
 #endif // OPEN_SCREEN_CACHE
@@ -122,6 +130,21 @@ void StageCanvas::DrawBackground() const
 		s2::RVG::LineWidth(2);
 		s2::RVG::Rect(sm::vec2(0, 0), ee::HALF_SCREEN_WIDTH, ee::HALF_SCREEN_HEIGHT, false);
 	}
+}
+
+void StageCanvas::DrawStat() const
+{
+	s2::OrthoCamera* cam = static_cast<s2::OrthoCamera*>(m_camera);
+	S2_MAT mt;
+	float s = std::max(1.0f, cam->GetScale());
+	mt.Scale(s, s);
+	mt.Translate(cam->GetPosition().x - 200, cam->GetPosition().y + 200);
+
+	int num = sl::Statistics::Instance()->GetVertices() / 6;
+
+	gum::GTxt::Instance()->Draw(mt, gum::StringHelper::ToString(num));
+
+	sl::Statistics::Instance()->Reset();
 }
 
 }

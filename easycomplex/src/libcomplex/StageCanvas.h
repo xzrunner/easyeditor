@@ -30,6 +30,8 @@ protected:
 private:
 	void DrawBackground() const;
 
+	void DrawStat() const;
+
 private:
 	ee::LibraryPanel* m_library;
 

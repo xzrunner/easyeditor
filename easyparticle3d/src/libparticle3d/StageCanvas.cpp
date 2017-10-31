@@ -6,6 +6,7 @@
 #include <ee/Sprite.h>
 #include <ee/SpriteRenderer.h>
 #include <ee/cfg_const.h>
+#include <ee/Config.h>
 
 #include <ps_3d.h>
 #include <shaderlab/Statistics.h>
@@ -51,9 +52,9 @@ void StageCanvas::OnDrawSprites() const
 
 	m_stage->DrawEditOP();
 
-	int num2 = sl::Statistics::Instance()->GetVertices();
-
-	DrawStat();
+	if (ee::Config::Instance()->IsDrawStatOpen()) {
+		DrawStat();
+	}
 }
 
 void StageCanvas::DrawBackground() const

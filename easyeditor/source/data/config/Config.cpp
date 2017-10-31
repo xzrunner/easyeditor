@@ -22,6 +22,8 @@ Config::Config()
 
 	m_debug_draw = true;
 
+	m_draw_stat = false;
+
 	m_settings = new SettingData;
 }
 
@@ -81,6 +83,10 @@ void Config::LoadFromFile(const char* filename)
 
 	if (m_value.isMember("debug_draw")) {
 		m_debug_draw = m_value["debug_draw"].asBool();
+	}
+
+	if (m_value.isMember("draw_stat")) {
+		m_draw_stat = m_value["draw_stat"].asBool();
 	}
 
 	m_settings->LoadFromFile(m_value);
