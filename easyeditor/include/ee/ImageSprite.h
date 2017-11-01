@@ -4,6 +4,7 @@
 #include "Sprite.h"
 
 #include <sprite2/ImageSprite.h>
+#include <sprite2/macro.h>
 
 namespace ee
 {
@@ -17,14 +18,10 @@ public:
 	ImageSprite& operator = (const ImageSprite& spr);
 	ImageSprite(const s2::SymPtr& sym, uint32_t id = -1);
 
-	/**
-	 *  @interface
-	 *    s2::Sprite
-	 */
-	virtual ImageSprite* Clone() const { return new ImageSprite(*this); }
-
 	// todo: should auto resize through its symbol and shapes
 	void BuildBoundingFromTexCoords(float* texCoords);
+
+	SPRITE_CLONE_FUNC(ImageSprite)
 
 }; // ImageSprite
 
