@@ -20,7 +20,7 @@ void FileIO::Store(const char* filepath, const Symbol& sym)
 
 	value["name"] = sym.name;
 
-	auto mesh = dynamic_cast<const Mesh*>(sym.GetMesh().get());
+	auto mesh = static_cast<const Mesh*>(sym.GetMesh().get());
 	if (mesh) {
 		mesh->Store(value);
 	} else {
@@ -81,7 +81,7 @@ void FileIO::Load(const char* filepath, Symbol& sym)
 // 	}
 	if (mesh)
 	{
-		dynamic_cast<Mesh*>(mesh.get())->Load(value);
+		static_cast<Mesh*>(mesh.get())->Load(value);
 		sym.SetMesh(mesh);
 	}
 
