@@ -22,9 +22,9 @@ public:
 	 *  @interface
 	 *    gum::SpriteLoader
 	 */	
-	virtual s2::SprPtr Create(const s2::SymPtr& sym) const;
-	virtual s2::SprPtr Create(const std::string& filepath) const;
-	virtual s2::SprPtr Create(const Json::Value& val, const std::string& dir) const;
+	virtual s2::SprPtr Create(const s2::SymPtr& sym) const override;
+	virtual s2::SprPtr Create(const CU_STR& filepath) const override;
+	virtual s2::SprPtr Create(const Json::Value& val, const CU_STR& dir) const override;
 
 protected:
 	virtual std::string GetSymbolPath(const std::string& dir, const Json::Value& val) const;

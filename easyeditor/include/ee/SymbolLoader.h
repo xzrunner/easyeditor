@@ -13,8 +13,8 @@ public:
 	 *  @interface
 	 *    gum::SymbolLoader
 	 */		
-	virtual s2::SymPtr Create(const std::string& filepath, int type = s2::SYM_UNKNOWN) const;
-	virtual s2::SymPtr Create(int type) const;
+	virtual s2::SymPtr Create(const CU_STR& filepath, int type = s2::SYM_UNKNOWN) const override;
+	virtual s2::SymPtr Create(int type) const override;
 
 }; // SymbolLoader
 

@@ -6,9 +6,9 @@
 namespace ee
 {
 
-s2::SymPtr SymbolLoader::Create(const std::string& filepath, int type) const
+s2::SymPtr SymbolLoader::Create(const CU_STR& filepath, int type) const
 {
-	return SymbolMgr::Instance()->FetchSymbol(filepath, type);
+	return SymbolMgr::Instance()->FetchSymbol(filepath.c_str(), type);
 }
 
 s2::SymPtr SymbolLoader::Create(int type) const
