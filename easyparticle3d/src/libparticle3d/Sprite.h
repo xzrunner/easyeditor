@@ -39,7 +39,7 @@ public:
 private:
 	sm::Quaternion m_dir;
 
-	SPRITE_CLONE_FUNC(Sprite)
+	S2_SPR_CLONE_FUNC(Sprite)
 
 }; // Sprite
 

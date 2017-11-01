@@ -18,7 +18,7 @@ public:
 
 	static ee::SprPtr Create(const std::shared_ptr<ee::Symbol>& sym);
 
-	SPRITE_CLONE_FUNC(Sprite)
+	S2_SPR_CLONE_FUNC(Sprite)
 
 }; // Sprite
 

@@ -74,7 +74,7 @@ private:
 
 	std::string m_tid;
 
-	SPRITE_CLONE_FUNC(FontBlankSprite)
+	S2_SPR_CLONE_FUNC(FontBlankSprite)
 
 }; // FontBlankSprite
 }

@@ -33,7 +33,7 @@ private:
 	sm::vec3 m_pos3;
 	sm::Quaternion m_ori3;
 
-	SPRITE_CLONE_FUNC(Sprite)
+	S2_SPR_CLONE_FUNC(Sprite)
 
 }; // Sprite
 

@@ -43,7 +43,7 @@ private:
 
 	bool m_export;
 
-	SPRITE_CLONE_FUNC(Sprite)
+	S2_SPR_CLONE_FUNC(Sprite)
 
 }; // Sprite
 

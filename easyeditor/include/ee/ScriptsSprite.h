@@ -17,7 +17,7 @@ public:
 	ScriptsSprite(const ScriptsSprite& spr);
 	ScriptsSprite(const s2::SymPtr& sym, uint32_t id = -1);
 
-	SPRITE_CLONE_FUNC(ScriptsSprite)
+	S2_SPR_CLONE_FUNC(ScriptsSprite)
 
 }; // ScriptsSprite 
 

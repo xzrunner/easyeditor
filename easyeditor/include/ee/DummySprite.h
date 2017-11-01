@@ -15,7 +15,7 @@ public:
 	DummySprite& operator = (const DummySprite& spr);
 	DummySprite(const s2::SymPtr& sym, uint32_t id = -1);
 
-	SPRITE_CLONE_FUNC(DummySprite)
+	S2_SPR_CLONE_FUNC(DummySprite)
 
 }; // DummySprite
 

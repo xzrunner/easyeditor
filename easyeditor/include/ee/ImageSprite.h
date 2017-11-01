@@ -21,7 +21,7 @@ public:
 	// todo: should auto resize through its symbol and shapes
 	void BuildBoundingFromTexCoords(float* texCoords);
 
-	SPRITE_CLONE_FUNC(ImageSprite)
+	S2_SPR_CLONE_FUNC(ImageSprite)
 
 }; // ImageSprite
 
