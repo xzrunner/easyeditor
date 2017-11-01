@@ -53,7 +53,7 @@ public:
 private:
 	mutable s2::TrailRenderParams m_rp;
 
-	std::shared_ptr<s2::TrailEmitter> m_et;
+	std::shared_ptr<s2::TrailEmitter> m_et = nullptr;
 
 }; // MotionTrail
 

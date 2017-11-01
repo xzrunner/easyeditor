@@ -16,7 +16,6 @@ namespace esprpacker
 {
 
 PackImage::PackImage(const std::shared_ptr<ee::ImageSymbol>& sym)
-	: m_img(nullptr)
 {
 	Init(sym);
 }

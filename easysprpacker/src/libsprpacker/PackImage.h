@@ -38,7 +38,7 @@ private:
 	void GetPackRegion(const ee::TexturePacker& tp, sm::i16_rect& quad, sm::ivec2& offset) const;
 
 private:
-	ee::ImageConstPtr m_img;
+	ee::ImageConstPtr m_img = nullptr;
 
 }; // PackImage
 

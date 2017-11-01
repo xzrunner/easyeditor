@@ -13,7 +13,6 @@ namespace etrail
 {
 
 MotionTrail::MotionTrail(const std::shared_ptr<const s2::TrailEmitterCfg>& cfg)
-	: m_et(nullptr)
 {
 	s2::Trail::Instance();
 

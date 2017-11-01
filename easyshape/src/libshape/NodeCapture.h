@@ -19,11 +19,10 @@ class RectShape;
 
 struct NodeAddr
 {
-	ee::ShapePtr shape;
+	ee::ShapePtr shape = nullptr;
 	sm::vec2 pos;
 
 	NodeAddr() 
-		: shape(nullptr) 
 	{
 		pos.MakeInvalid();
 	}
