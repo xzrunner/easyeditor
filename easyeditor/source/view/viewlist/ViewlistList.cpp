@@ -249,9 +249,10 @@ void ViewlistList::OnMouse(wxMouseEvent& event)
 	if (pos.x > BTN_SPACE + BTN_EDGE && pos.x < w - 25 - BTN_SPACE - BTN_EDGE) {
 		return;
 	}
-	int curr_pos = HitTest(pos);
+
+	int curr_pos = VirtualHitTest(pos.y);
 	if (pos.y > BTN_SPACE + BTN_EDGE) {
-		int up_pos = HitTest(pos.x, pos.y - BTN_SPACE - BTN_EDGE);
+		int up_pos = VirtualHitTest (pos.y - BTN_SPACE - BTN_EDGE);
 		if (curr_pos == up_pos) {
 			return;
 		}
