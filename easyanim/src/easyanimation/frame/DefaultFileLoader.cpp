@@ -25,7 +25,7 @@
 namespace eanim
 {
 
-void DefaultFileLoader::Load(const Json::Value& val, const CU_STR& dir)
+void DefaultFileLoader::Load(const Json::Value& val, const std::string& dir)
 {
 	int fps = val["fps"].asInt();
 	SetFpsSJ::Instance()->Set(fps);
@@ -111,7 +111,6 @@ KeyFrame* DefaultFileLoader::LoadFrame(Layer* layer, const Json::Value& frame_va
 	while (!actorValue.isNull()) {
 		ee::SprPtr actor = LoadActor(actorValue, dir);
 		frame->Insert(actor, INT_MAX);
-		actor->RemoveReference();
 		actorValue = frame_val["actor"][i++];
 	}
 
@@ -129,29 +128,29 @@ void DefaultFileLoader::LoadLerp(KeyFrame* frame, const Json::Value& value)
 		if (val["type"].asString() == "circle")
 		{
 			float scale = val["scale"].asInt() * 0.01f;
-			s2::LerpCircle* spiral = new s2::LerpCircle(scale);
-			frame->SetLerp(key, spiral);
+			auto spiral = std::make_unique<s2::LerpCircle>(scale);
+			frame->SetLerp(key, std::move(spiral));
 		}
 		else if (val["type"].asString() == "spiral") 
 		{
 			float begin = val["angle_begin"].asInt() * SM_DEG_TO_RAD,
-				end   = val["angle_end"].asInt() * SM_DEG_TO_RAD;
+				  end   = val["angle_end"].asInt() * SM_DEG_TO_RAD;
 			float scale = val["scale"].asInt() * 0.01f;
-			s2::LerpSpiral* spiral = new s2::LerpSpiral(begin, end, scale);
-			frame->SetLerp(key, spiral);
+			auto spiral = std::make_unique<s2::LerpSpiral>(begin, end, scale);
+			frame->SetLerp(key, std::move(spiral));
 		}
 		else if (val["type"].asString() == "wiggle")
 		{
 			float freq = val["freq"].asDouble();
 			float amp = val["amp"].asDouble();
-			s2::LerpWiggle* wiggle = new s2::LerpWiggle(freq, amp);
-			frame->SetLerp(key, wiggle);
+			auto wiggle = std::make_unique<s2::LerpWiggle>(freq, amp);
+			frame->SetLerp(key, std::move(wiggle));
 		}
 		else if (val["type"].asString() == "ease")
 		{
 			int type = val["ease"].asInt();
-			s2::LerpEase* ease = new s2::LerpEase(type);
-			frame->SetLerp(key, ease);
+			auto ease = std::make_unique<s2::LerpEase>(type);
+			frame->SetLerp(key, std::move(ease));
 		}
 	}
 }

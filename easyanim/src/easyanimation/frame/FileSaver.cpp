@@ -77,7 +77,7 @@ void FileSaver::StoreAsGif(const std::string& src, const std::string& dst)
 	}
 
 	auto sym = ee::SymbolMgr::Instance()->FetchSymbol(src);
-	libanim::Symbol* anim = static_cast<libanim::Symbol*>(sym);
+	auto anim = std::dynamic_pointer_cast<libanim::Symbol>(sym);
 
 	sm::vec2 sz = sym->GetBounding().Size();
 	AnimatedGifSaver saver(sz.x, sz.y);
@@ -86,7 +86,7 @@ void FileSaver::StoreAsGif(const std::string& src, const std::string& dst)
 	int max_frame = anim->GetMaxFrameIdx();
 	for (int i = 0; i < max_frame; ++i)
 	{
-		rt.Draw(sym, true);
+		rt.Draw(*sym, true);
 		uint8_t* rgb = rt.StoreToMemory(-1, -1, 3);
 		//		anim->setFrameIndex(i + 1);
 		saver.AddFrame(rgb, 1.0f / anim->GetFPS());
@@ -106,8 +106,8 @@ void FileSaver::StoreAsPng(const std::string& src, const std::string& dst)
 
 	sm::vec2 sz = sym->GetBounding().Size();
 	s2::DrawRT rt(sz.x, sz.y);
-	rt.Draw(sym);
-	rt.StoreToFile(dst);
+	rt.Draw(*sym);
+	rt.StoreToFile(dst.c_str(), sz.x, sz.y);
 }
 
 Json::Value FileSaver::StoreLayer(Layer* layer, const std::string& dir, 
@@ -153,9 +153,9 @@ Json::Value FileSaver::StoreActor(const ee::SprConstPtr& spr, const std::string&
 								  bool single)
 {
 	Json::Value value;
-	const auto sym = std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol());
+	auto sym = std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol());
 	// filepath
-	std::string filepath = ee::SymbolPath::GetRelativePath(sym, dir);
+	std::string filepath = ee::SymbolPath::GetRelativePath(*sym, dir);
 	if (single) {
 		value["filepath"] = filepath;
 	} else {

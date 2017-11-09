@@ -36,8 +36,8 @@ public:
 	bool Sort(std::vector<ee::SprPtr>& sprs);
 
 	int Size() const { return m_sprs.size(); }
-	const ee::SprPtr GetSprite(int index) {
-		return index >= 0 && index < m_sprs.size() ? m_sprs[index].get() : nullptr;
+	auto GetSprite(int index) {
+		return index >= 0 && index < m_sprs.size() ? m_sprs[index] : nullptr;
 	}
 
 	const std::vector<ee::SprPtr>& GetAllSprites() const { return m_sprs; }
@@ -57,8 +57,8 @@ public:
 
 	void OnActive();
 
-	void SetLerp(s2::AnimLerp::SprData data, s2::ILerp* lerp);
-	const std::vector<std::pair<s2::AnimLerp::SprData, s2::ILerp*> >& GetLerps() const { return m_lerps; }
+	void SetLerp(s2::AnimLerp::SprData data, std::unique_ptr<s2::ILerp> lerp);
+	const CU_VEC<std::pair<s2::AnimLerp::SprData, std::unique_ptr<s2::ILerp>>>& GetLerps() const { return m_lerps; }
 
 	static void GetTweenSprite(const KeyFrame* start, const KeyFrame* end, 
 		std::vector<ee::SprPtr>& tween, int time, int tot_time);
@@ -73,7 +73,7 @@ private:
 	std::vector<ee::SprPtr> m_sprs;
 
 	bool m_classic_tween;
-	std::vector<std::pair<s2::AnimLerp::SprData, s2::ILerp*> > m_lerps;
+	CU_VEC<std::pair<s2::AnimLerp::SprData, std::unique_ptr<s2::ILerp>>> m_lerps;
 
 	Layer* m_layer;
 

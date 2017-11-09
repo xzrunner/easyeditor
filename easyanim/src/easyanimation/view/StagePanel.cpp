@@ -85,7 +85,7 @@ void StagePanel::TraverseSprites(ee::RefVisitor<ee::Sprite>& visitor,
 		{
 			for (int i = 0, n = frame->Size(); i < n; ++i) {
 				bool next;
-				visitor.Visit(const_cast<ee::SprPtr>(frame->GetSprite(i)), next);
+				visitor.Visit(frame->GetSprite(i), next);
 				if (!next) break;
 			}
 		}
@@ -93,7 +93,7 @@ void StagePanel::TraverseSprites(ee::RefVisitor<ee::Sprite>& visitor,
 		{
 			for (int i = frame->Size() - 1; i >= 0; --i) {
 				bool next;
-				visitor.Visit(const_cast<ee::SprPtr>(frame->GetSprite(i)), next);
+				visitor.Visit(frame->GetSprite(i), next);
 				if (!next) break;
 			}
 		}

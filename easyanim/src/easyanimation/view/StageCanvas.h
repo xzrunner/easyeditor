@@ -2,8 +2,7 @@
 #define _EASYANIM_STAGE_CANVAS_H_
 
 #include <ee/CameraCanvas.h>
-
-namespace ee { class Symbol; }
+#include <ee/Symbol.h>
 
 namespace eanim
 {
@@ -14,9 +13,10 @@ class StageCanvas : public ee::CameraCanvas
 {
 public:
 	StageCanvas(StagePanel* stage);
-	virtual ~StageCanvas();
 
-	void SetBackground(const ee::SymPtr& sym);
+	void SetBackground(const ee::SymPtr& sym) {
+		m_background = sym;
+	}
 
 protected:
 	virtual void OnDrawSprites() const;
@@ -30,7 +30,7 @@ private:
 private:
 	StagePanel* m_stage_panel;
 
-	ee::Symbol* m_background;
+	ee::SymPtr m_background = nullptr;
 
 }; // StageCanvas
 

@@ -1,9 +1,9 @@
 #ifndef _EASYANIM_DEFAULT_FILE_LOADER_H_
 #define _EASYANIM_DEFAULT_FILE_LOADER_H_
 
-#include <json/json.h>
+#include <ee/Sprite.h>
 
-namespace ee { class Sprite; }
+#include <json/json.h>
 
 namespace eanim
 {

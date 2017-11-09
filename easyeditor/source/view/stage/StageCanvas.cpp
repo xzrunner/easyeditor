@@ -152,10 +152,9 @@ void StageCanvas::Init()
 
 	gum::Audio::Instance();
 	gum::Sprite2::Instance()->Init();
+	gum::Audio::Instance()->Initialize(nullptr, nullptr);
 	DTex::Init();
-	GTxt::Init();
-
-	
+	GTxt::Init();	
 
 	try {
 // 		ShaderContext::Reload();

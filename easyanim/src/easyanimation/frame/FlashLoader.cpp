@@ -83,7 +83,6 @@ KeyFrame* FlashLoader::LoadFrame(Layer* layer, rapidxml::xml_node<>* frame_node,
 	while (actor_node) {
 		ee::SprPtr actor = LoadActor(actor_node, map_name_path);
 		frame->Insert(actor, INT_MAX);
-		actor->RemoveReference();
 		actor_node = actor_node->next_sibling();
 	}
 

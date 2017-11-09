@@ -171,9 +171,9 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 	sm::vec2 c = region.Center();
 	s2::DrawRT rt(sz.x, sz.y);
 	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
-		rt.Draw(sprs[i], false, c.x, c.y);
+		rt.Draw(sprs[i].get(), false, sz.x, sz.y, c.x, c.y);
 	}
-	rt.StoreToFile(filepath);
+	rt.StoreToFile(filepath.c_str(), sz.x, sz.y);
 }
 
 void Frame::SaveAsSingle(const std::string& filepath) const
@@ -203,29 +203,27 @@ s2::AnimSymbol* Frame::BuildSym() const
 	for (int i = 0, n = src.size(); i < n; ++i)
 	{
 		const std::map<int, KeyFrame*>& src_layer = src[i]->GetAllFrames();
-		auto dst_layer = std::make_unique<s2::AnimSymbol::Layer>();
+		auto dst_layer = mm::allocate_unique<s2::AnimSymbol::Layer>();
 		std::map<int, KeyFrame*>::const_iterator itr = src_layer.begin();
 		for ( ; itr != src_layer.end(); ++itr)
 		{
-			const std::vector<ee::SprPtr>& src_frame = itr->second->GetAllSprites();
-			auto dst_frame = std::make_unique<s2::AnimSymbol::Frame>();
+			auto& src_frame = itr->second->GetAllSprites();
+			auto dst_frame = mm::allocate_unique<s2::AnimSymbol::Frame>();
 			dst_frame->index = itr->second->GetTime();
 			dst_frame->tween = itr->second->HasClassicTween();
 
-			const std::vector<std::pair<s2::AnimLerp::SprData, s2::ILerp*> >& lerps = itr->second->GetLerps();
+			auto& lerps = itr->second->GetLerps();
 			dst_frame->lerps.reserve(lerps.size());
 			for (int i = 0, n = lerps.size(); i < n; ++i) {
 				dst_frame->lerps.push_back(std::make_pair(s2::AnimLerp::SprData(lerps[i].first), lerps[i].second->Clone()));
 			}
 
-			for (int j = 0, m = src_frame.size(); j < m; ++j) 
-			{
-				src_frame[j]->AddReference();
+			for (int j = 0, m = src_frame.size(); j < m; ++j) {
 				dst_frame->sprs.push_back(src_frame[j]);
 			}
 			dst_layer->frames.push_back(std::move(dst_frame));
 		}
-		dst->AddLayer(std::move(dst_layer));
+		dst->AddLayer(dst_layer);
 	}
 	return dst;
 }

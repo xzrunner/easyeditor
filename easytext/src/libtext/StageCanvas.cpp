@@ -1,6 +1,5 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
-#include "GTxt.h"
 #include "Sprite.h"
 
 #include <ee/FetchAllVisitor.h>

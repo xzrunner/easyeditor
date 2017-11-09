@@ -3,9 +3,7 @@
 
 #include <ee/ZoomViewOP.h>
 
-#include <sprite2/s2_config.h>
-
-namespace s2 { class AnimTreeCurr; }
+namespace s2 { class AnimCurr; }
 
 namespace eanim
 {
@@ -13,12 +11,12 @@ namespace eanim
 class PreviewOP : public ee::ZoomViewOP
 {
 public:
-	PreviewOP(wxWindow* wnd, ee::EditPanelImpl* stage, s2::AnimTreeCurr& curr);
+	PreviewOP(wxWindow* wnd, ee::EditPanelImpl* stage, s2::AnimCurr& curr);
 
 	virtual bool OnMouseLeftDown(int x, int y);
 
 private:
-	s2::AnimTreeCurr& m_curr;
+	s2::AnimCurr& m_curr;
 
 }; // PreviewOP
 

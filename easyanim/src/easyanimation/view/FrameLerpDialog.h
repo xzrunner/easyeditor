@@ -32,7 +32,7 @@ private:
 	wxSizer* InitWiggleLayout();
 	wxSizer* InitEaseLayout();
 
-	static s2::ILerp* QueryLerp(const std::vector<std::pair<s2::AnimLerp::SprData, s2::ILerp*> >& lerps,
+	static s2::ILerp* QueryLerp(const CU_VEC<std::pair<s2::AnimLerp::SprData, std::unique_ptr<s2::ILerp>>>& lerps,
 		int data_type, int lerp_type);
 
 private:

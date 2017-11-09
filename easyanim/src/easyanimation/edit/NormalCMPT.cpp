@@ -192,9 +192,9 @@ void NormalCMPT::OnLoadFromFolder(wxCommandEvent& event)
 
 void NormalCMPT::OnLoadFromList(wxCommandEvent& event)
 {
-	std::vector<ee::ListItem*> items;
+	std::vector<ee::ListItemPtr> items;
 	ViewMgr::Instance()->img_page->GetList()->
-		Traverse(ee::FetchAllVisitor<ee::ListItem>(items));
+		Traverse(ee::FetchAllRefVisitor<ee::ListItem>(items));
 	if (items.empty()) {
 		return;
 	}

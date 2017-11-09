@@ -6,7 +6,7 @@
 #include <ee/Config.h>
 #include <ee/SettingData.h>
 
-#include <sprite2/AnimTreeCurr.h>
+#include <sprite2/AnimCurr.h>
 
 namespace eanim
 {

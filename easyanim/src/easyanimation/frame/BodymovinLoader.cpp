@@ -17,13 +17,13 @@
 namespace eanim
 {
 
-void BodymovinLoader::Load(const Json::Value& val, const CU_STR& dir)
+void BodymovinLoader::Load(const Json::Value& val, const std::string& dir)
 {
-	ee::SymbolLoader sym_loader;
-	ee::SpriteLoader spr_loader;
-	s2::AnimSymbol* sym = new s2::AnimSymbol();
-	gum::BodymovinAnimLoader loader(sym, &sym_loader, &spr_loader);
-	loader.LoadJson(val, dir);
+	auto sym_loader = std::make_shared<ee::SymbolLoader>();
+	auto spr_loader = std::make_shared<ee::SpriteLoader>();
+	auto sym = std::make_shared<s2::AnimSymbol>();
+	gum::BodymovinAnimLoader loader(*std::dynamic_pointer_cast<s2::AnimSymbol>(sym), sym_loader, spr_loader);
+	loader.LoadJson(val, dir.c_str());
 
 	SetFpsSJ::Instance()->Set(sym->GetFPS());
 
@@ -50,9 +50,8 @@ void BodymovinLoader::Load(const Json::Value& val, const CU_STR& dir)
 			KeyFrame* dst_frame = new KeyFrame(src_frame->index);
 			dst_frame->SetLayer(dst_layer);
 
-			for (int k = 0, l = src_frame->sprs.size(); k < l; ++k) {
-				auto& spr = VI_CLONE(ee::Sprite, src_frame->sprs[k]);
-				dst_frame->Insert(spr, INT_MAX);
+			for (auto& spr : src_frame->sprs) {
+				dst_frame->Insert(std::dynamic_pointer_cast<ee::Sprite>(spr->Clone()), INT_MAX);
 			}
 
 			dst_frame->SetClassicTween(src_frame->tween);

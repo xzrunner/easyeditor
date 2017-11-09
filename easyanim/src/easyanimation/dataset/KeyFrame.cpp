@@ -66,7 +66,7 @@ void KeyFrame::Insert(const ee::SprPtr& spr, int idx)
 		throw ee::Exception("KeyFrame::Insert fail: spr null.");
 	}
 
-	SpriteUserData::SetSprData(spr, m_layer, this);
+	SpriteUserData::SetSprData(*spr, m_layer, this);
 	ee::ObjectVector<ee::Sprite>::Insert(m_sprs, spr, idx);
 	if (m_layer) {
 		spr->SetObserver(&m_layer->GetSpriteObserver());
@@ -106,9 +106,6 @@ void KeyFrame::Clear()
 			m_layer->GetSpriteObserver().Remove(m_sprs[i]);
 	}
 
-	for (int i = 0, n = m_lerps.size(); i < n; ++i) {
-		delete m_lerps[i].second;
-	}
 	m_lerps.clear();
 
 	ee::ObjectVector<ee::Sprite>::Clear(m_sprs);
@@ -116,8 +113,8 @@ void KeyFrame::Clear()
 
 void KeyFrame::OnActive()
 {
-	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
-		if (eparticle3d::Sprite* p3d = dynamic_cast<eparticle3d::Sprite*>(m_sprs[i])) {
+	for (auto& spr : m_sprs) {
+		if (auto p3d = std::dynamic_pointer_cast<eparticle3d::Sprite>(spr)) {
 			if (p3d->IsAlone()) {
 				p3d->OnActive();
 			}
@@ -125,18 +122,17 @@ void KeyFrame::OnActive()
 	}
 }
 
-void KeyFrame::SetLerp(s2::AnimLerp::SprData data, s2::ILerp* lerp)
+void KeyFrame::SetLerp(s2::AnimLerp::SprData data, std::unique_ptr<s2::ILerp> lerp)
 {
 	for (int i = 0, n = m_lerps.size(); i < n; ++i)
 	{
 		if (m_lerps[i].first == data) 
 		{
-			delete m_lerps[i].second;
-			m_lerps[i].second = lerp;
+			m_lerps[i].second = std::move(lerp);
 			return;
 		}
 	}
-	m_lerps.push_back(std::make_pair(data, lerp));
+	m_lerps.push_back(std::make_pair(data, std::move(lerp)));
 }
 
 void KeyFrame::GetTweenSprite(const KeyFrame* start, const KeyFrame* end, 
@@ -162,18 +158,13 @@ void KeyFrame::GetTweenSprite(const KeyFrame* start, const KeyFrame* end,
 	if (!s_skeleton.Empty() && !e_skeleton.Empty()) {
 		SkeletonData::GetTweenSprites(s_skeleton, e_skeleton, tween, time, tot_time);
 	} else {
-		std::vector<s2::Sprite*> begins, ends, tweens;
+		CU_VEC<s2::SprPtr> begins, ends, tweens;
 		begins.reserve(start->m_sprs.size());
 		copy(start->m_sprs.begin(), start->m_sprs.end(), back_inserter(begins));
 		ends.reserve(start->m_sprs.size());
 		copy(end->m_sprs.begin(), end->m_sprs.end(), back_inserter(ends));
 
-		std::vector<std::pair<s2::AnimLerp::SprData, s2::ILerp*> > lerps;
-		lerps.reserve(start->m_lerps.size());
-		for (int i = 0, n = start->m_lerps.size(); i < n; ++i) {
-			lerps.push_back(start->m_lerps[i]);
-		}
-		s2::AnimLerp::Lerp(begins, ends, tweens, time, tot_time, lerps);
+		s2::AnimLerp::Lerp(begins, ends, tweens, time, tot_time, start->m_lerps);
 
 		tween.reserve(tweens.size());
 		for (int i = 0, n = tweens.size(); i < n; ++i) {

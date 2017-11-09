@@ -3,9 +3,7 @@
 
 #include <ee/EditPanel.h>
 
-#include <sprite2/s2_config.h>
-
-namespace s2 { class AnimTreeCurr; }
+namespace s2 { class AnimCurr; }
 
 namespace eanim
 {
@@ -13,7 +11,7 @@ namespace eanim
 class PreviewPanel : public ee::EditPanel
 {
 public:
-	PreviewPanel(wxWindow* parent, wxTopLevelWindow* frame, s2::AnimTreeCurr& curr);
+	PreviewPanel(wxWindow* parent, wxTopLevelWindow* frame, s2::AnimCurr& curr);
 
 	//
 	// ee::EditPanel interface
@@ -23,7 +21,7 @@ public:
 	void SetLoop(bool loop) { m_loop = loop; }
 
 private:
-	s2::AnimTreeCurr& m_curr;
+	s2::AnimCurr& m_curr;
 
 	bool m_loop;
 

@@ -3,8 +3,6 @@
 #include <json/json.h>
 #include <fstream>
 
-#include <gtxt.h>
-
 namespace etext
 {
 

@@ -29,37 +29,37 @@ void FrameLerpDialog::Store()
 	if (m_pos_circle->IsChecked()) 
 	{
 		float scale = m_circle_scale->GetValue() * 0.01f;
-		s2::LerpCircle* lerp = new s2::LerpCircle(scale);
-		m_frame->SetLerp(s2::AnimLerp::SPR_POS, lerp);
+		auto lerp = std::make_unique<s2::LerpCircle>(scale);
+		m_frame->SetLerp(s2::AnimLerp::SPR_POS, std::move(lerp));
 	}
 	else if (m_pos_spiral->IsChecked())
 	{
 		float start = m_spiral_angle_begin->GetValue() * SM_DEG_TO_RAD,
 			  end = m_spiral_angle_end->GetValue() * SM_DEG_TO_RAD;
 		float scale = m_spiral_scale->GetValue() * 0.01f;
-		s2::LerpSpiral* lerp = new s2::LerpSpiral(start, end, scale);
-		m_frame->SetLerp(s2::AnimLerp::SPR_POS, lerp);
+		auto lerp = std::make_unique<s2::LerpSpiral>(start, end, scale);
+		m_frame->SetLerp(s2::AnimLerp::SPR_POS, std::move(lerp));
 	}
 	else if (m_pos_wiggle->IsChecked())
 	{
 		float freq = m_wiggle_freq->GetValue();
 		float amp = m_wiggle_amp->GetValue();
-		s2::LerpWiggle* lerp = new s2::LerpWiggle(freq, amp);
-		m_frame->SetLerp(s2::AnimLerp::SPR_POS, lerp);
+		auto lerp = std::make_unique<s2::LerpWiggle>(freq, amp);
+		m_frame->SetLerp(s2::AnimLerp::SPR_POS, std::move(lerp));
 	}
 	else if (m_ease_pos->GetSelection() > 1 || m_ease_scale->GetSelection() > 1 || m_ease_rotate->GetSelection() > 1)
 	{
 		if (m_ease_pos->GetSelection() > 1) {
-			s2::LerpEase* lerp = new s2::LerpEase(m_ease_pos->GetSelection());
-			m_frame->SetLerp(s2::AnimLerp::SPR_POS, lerp);
+			auto lerp = std::make_unique<s2::LerpEase>(m_ease_pos->GetSelection());
+			m_frame->SetLerp(s2::AnimLerp::SPR_POS, std::move(lerp));
 		}
 		if (m_ease_scale->GetSelection() > 1) {
-			s2::LerpEase* lerp = new s2::LerpEase(m_ease_scale->GetSelection());
-			m_frame->SetLerp(s2::AnimLerp::SPR_SCALE, lerp);
+			auto lerp = std::make_unique<s2::LerpEase>(m_ease_scale->GetSelection());
+			m_frame->SetLerp(s2::AnimLerp::SPR_SCALE, std::move(lerp));
 		}
 		if (m_ease_rotate->GetSelection() > 1) {
-			s2::LerpEase* lerp = new s2::LerpEase(m_ease_rotate->GetSelection());
-			m_frame->SetLerp(s2::AnimLerp::SPR_ROTATE, lerp);
+			auto lerp = std::make_unique<s2::LerpEase>(m_ease_rotate->GetSelection());
+			m_frame->SetLerp(s2::AnimLerp::SPR_ROTATE, std::move(lerp));
 		}
 	}
 	else
@@ -316,18 +316,17 @@ wxSizer* FrameLerpDialog::InitEaseLayout()
 	return top_sizer;
 }
 
-s2::ILerp* FrameLerpDialog::QueryLerp(const std::vector<std::pair<s2::AnimLerp::SprData, s2::ILerp*> >& lerps,
+s2::ILerp* FrameLerpDialog::QueryLerp(const CU_VEC<std::pair<s2::AnimLerp::SprData, std::unique_ptr<s2::ILerp>>>& lerps,
 									  int data_type, int lerp_type)
 {
-	std::vector<std::pair<s2::AnimLerp::SprData, s2::ILerp*> >::const_iterator 
-		itr = lerps.begin();
+	auto itr = lerps.begin();
 	for ( ; itr != lerps.end(); ++itr) {
 		if (itr->first == data_type &&
 			itr->second->Type() == lerp_type) {
-			return itr->second;
+			return itr->second.get();
 		}
 	}
-	return NULL;
+	return nullptr;
 }
 
 }

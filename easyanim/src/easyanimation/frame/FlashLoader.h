@@ -1,12 +1,12 @@
 #ifndef _EASYANIM_FLASH_LOADER_H_
 #define _EASYANIM_FLASH_LOADER_H_
 
+#include <ee/Sprite.h>
+
 #include <rapidxml.hpp>
 
 #include <string>
 #include <map>
-
-namespace ee { class Sprite; }
 
 namespace eanim
 {

@@ -1,11 +1,11 @@
 #ifndef _LR_TAG_CFG_H_
 #define _LR_TAG_CFG_H_
 
+#include <ee/Symbol.h>
+
 #include <vector>
 #include <string>
 #include <map>
-
-namespace ee { class Symbol; }
 
 namespace lr
 {

@@ -1,9 +1,11 @@
 #ifndef _EASYANIM_OPEN_SYMBOL_DIALOG_H_
 #define _EASYANIM_OPEN_SYMBOL_DIALOG_H_
 
+#include <ee/Sprite.h>
+
 class wxWindow;
 
-namespace ee { class EditPanelImpl; class MultiSpritesImpl; class Sprite; }
+namespace ee { class EditPanelImpl; class MultiSpritesImpl; }
 
 namespace eanim
 {

@@ -140,7 +140,7 @@ void MeshToolbarPage::OnSaveImage(wxCommandEvent& event)
 		}
 
 		std::string outpath = ee::FileHelper::GetFileDir(physics_filepath) + "\\image.png";
-		rt.StoreToFile(outpath);
+		rt.StoreToFile(outpath, width, height);
 	}
 }
 

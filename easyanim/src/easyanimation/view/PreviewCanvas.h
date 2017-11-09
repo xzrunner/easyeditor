@@ -3,11 +3,9 @@
 
 #include <ee/CameraCanvas.h>
 
-#include <sprite2/s2_config.h>
-
 #include <wx/wx.h>
 
-namespace s2 { class AnimTreeCurr; }
+namespace s2 { class AnimCurr; }
 
 namespace eanim
 {
@@ -15,7 +13,7 @@ namespace eanim
 class PreviewCanvas : public ee::CameraCanvas
 {
 public:
-	PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, wxGLContext* glctx, s2::AnimTreeCurr& curr);
+	PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, wxGLContext* glctx, s2::AnimCurr& curr);
 
 protected:
 	virtual void OnDrawSprites() const;
@@ -24,7 +22,7 @@ private:
 	void DrawStageData() const;
 
 private:
-	s2::AnimTreeCurr& m_curr;
+	s2::AnimCurr& m_curr;
 
 }; // PreviewCanvas
 

@@ -57,7 +57,7 @@ public:
 	};
 
 private:
-	class CheckUpdateVisitor : public ee::Visitor<ee::Sprite>
+	class CheckUpdateVisitor : public ee::RefVisitor<ee::Sprite>
 	{
 	public:
 		CheckUpdateVisitor();

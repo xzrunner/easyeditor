@@ -5,7 +5,7 @@
 
 #include <easyanim.h>
 
-#include <sprite2/AnimTreeCurr.h>
+#include <sprite2/AnimCurr.h>
 
 #include <wx/wx.h>
 
@@ -35,7 +35,7 @@ private:
 private:
 	PreviewPanel* m_stage;
 
-	s2::AnimTreeCurr m_curr;
+	s2::AnimCurr m_curr;
 
 }; // PreviewDialog
 

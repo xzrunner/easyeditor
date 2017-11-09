@@ -1,7 +1,7 @@
 #ifndef _EASYUI_SYMBOL_CONFIG_H_
 #define _EASYUI_SYMBOL_CONFIG_H_
 
-namespace ee { class Symbol; }
+#include <ee/Symbol.h>
 
 #include <string>
 #include <set>

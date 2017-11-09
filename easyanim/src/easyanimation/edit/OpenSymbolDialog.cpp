@@ -12,6 +12,8 @@
 #include <easyskeleton.h>
 #include <easyaudio.h>
 
+#include <sprite2/SymType.h>
+
 #include <wx/wx.h>
 
 namespace eanim
@@ -46,26 +48,33 @@ void OpenSymbolDialog::Open(const ee::SprPtr& spr)
 	m_stage->GetCanvas()->EnableObserve(false);
 	m_stage->GetCanvas()->SetDrawable(false);
 
-	const ee::SymPtr& edited_sym = NULL;
-	if (ecomplex::Sprite* complex = std::dynamic_pointer_cast<ecomplex::Sprite>(spr))
+	ee::SymPtr edited_sym = nullptr;
+	int type = spr->GetSymbol()->Type();
+	if (type == s2::SYM_COMPLEX)
 	{
-		ecomplex::Symbol* sym = dynamic_cast<ecomplex::Symbol*>(complex->GetSymbol());
-		edited_sym = sym;
-		ecomplex::EditDialog dlg(m_wnd, sym, m_stage->GetCanvas()->GetGLContext());
+		edited_sym = std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol());
+		auto complex = std::dynamic_pointer_cast<ecomplex::Symbol>(spr->GetSymbol());
+		ecomplex::EditDialog dlg(m_wnd, complex, m_stage->GetCanvas()->GetGLContext());
 		dlg.ShowModal();
 	}
-	else if (emesh::Sprite* mesh = std::dynamic_pointer_cast<emesh::Sprite>(spr))
+	else if (type == s2::SYM_MESH)
 	{
+		edited_sym = std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol());
+		auto mesh = std::dynamic_pointer_cast<emesh::Sprite>(spr);
 		emesh::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), mesh, m_sprites_impl);
 		dlg.ShowModal();
 	} 
-	else if (libskeleton::Sprite* sk = std::dynamic_pointer_cast<libskeleton::Sprite>(spr)) 
+	else if (type == s2::SYM_SKELETON) 
 	{
+		edited_sym = std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol());
+		auto sk = std::dynamic_pointer_cast<libskeleton::Sprite>(spr);
 		libskeleton::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), sk);
 		dlg.ShowModal();
 	}
-	else if (eaudio::Sprite* audio = std::dynamic_pointer_cast<eaudio::Sprite>(spr))
+	else if (type == s2::SYM_AUDIO)
 	{
+		edited_sym = std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol());
+		auto audio = std::dynamic_pointer_cast<eaudio::Sprite>(spr);
 		audio->Play();
 	}
 
@@ -77,7 +86,7 @@ void OpenSymbolDialog::Open(const ee::SprPtr& spr)
 
 	if (edited_sym && edited_sym->IsEditDirty()) {
 		ee::SetWndDirtySJ::Instance()->SetDirty();
-		const_cast<ee::Symbol*>(edited_sym)->SetEditDirty(false);
+		edited_sym->SetEditDirty(false);
 	}
 
 	ee::CurrSprTreePath::Instance()->Pop();

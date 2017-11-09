@@ -14,8 +14,6 @@
 #include <gum/TextboxLoader.h>
 #include <gum/FilepathHelper.h>
 
-#include <gtxt.h>
-
 #include <fstream>
 
 namespace etext

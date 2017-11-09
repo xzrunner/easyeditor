@@ -19,20 +19,7 @@ namespace eanim
 StageCanvas::StageCanvas(StagePanel* stage)
 	: ee::CameraCanvas(stage, stage->GetStageImpl(), s2::CAM_ORTHO2D)
 	, m_stage_panel(stage)
-	, m_background(NULL)
 {
-}
-
-StageCanvas::~StageCanvas()
-{
-	if (m_background) {
-		m_background->RemoveReference();
-	}
-}
-
-void StageCanvas::SetBackground(const ee::SymPtr& sym)
-{
-	cu::RefCountObjAssign<ee::Symbol>(m_background, sym);
 }
 
 void StageCanvas::OnDrawSprites() const
@@ -42,7 +29,7 @@ void StageCanvas::OnDrawSprites() const
 	std::vector<ee::SprPtr> sprs;
 	static_cast<StagePanel*>(m_stage_panel)->TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs), ee::DT_VISIBLE);
 	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
-		ee::SpriteRenderer::Instance()->Draw(sprs[i]);
+		ee::SpriteRenderer::Instance()->Draw(sprs[i].get());
 	}
 
 	s2::Particle3d::Instance()->BufferDraw();
@@ -53,7 +40,7 @@ void StageCanvas::OnDrawSprites() const
 void StageCanvas::DrawBackground() const
 {
 	if (m_background) {
-		ee::SpriteRenderer::Instance()->Draw(m_background);
+		ee::SpriteRenderer::Instance()->Draw(m_background.get());
 	}
 
 	float xedge = GetSize().GetWidth() * 0.5f;

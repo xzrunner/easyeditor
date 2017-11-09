@@ -15,7 +15,7 @@ Layer::Layer()
 	: m_sprite_observer(*this)
 {
 	static int count = 0;
-	m_name = CU_STR("Layer") + ee::StringHelper::ToString(count++);
+	m_name = std::string("Layer") + ee::StringHelper::ToString(count++);
 
 	m_editable = m_visible = true;
 }

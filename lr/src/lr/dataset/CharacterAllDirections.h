@@ -3,9 +3,9 @@
 
 #include "CharacterFileName.h"
 
-#include <map>
+#include <ee/Symbol.h>
 
-namespace ee { class Symbol; }
+#include <map>
 
 namespace lr
 {

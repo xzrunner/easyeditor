@@ -1,11 +1,11 @@
 #ifndef _EASYANIM_FILE_SAVER_H_
 #define _EASYANIM_FILE_SAVER_H_
 
+#include <ee/Sprite.h>
+
 #include <json/json.h>
 
 #include <string>
-
-namespace ee { class Sprite; }
 
 namespace eanim
 {

@@ -1,11 +1,11 @@
 #ifndef _EASYP3DINV_PARTICLE_H_
 #define _EASYP3DINV_PARTICLE_H_
 
+#include <ee/Symbol.h>
+
 #include <SM_Matrix.h>
 
 #include <json/json.h>
-
-namespace ee { class Symbol; }
 
 namespace ep3dinv
 {
