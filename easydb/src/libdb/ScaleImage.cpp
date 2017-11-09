@@ -96,8 +96,8 @@ void ScaleImage::Scale(const std::string& src, const std::string& dst, float sca
 		scale.x = width / sz.x;
 		scale.y = height / sz.y;
 		spr->SetScale(scale);
-		rt.Draw(spr, true, width, height);
-		rt.StoreToFile(dst, width, height);
+		rt.Draw(*spr, true, width, height);
+		rt.StoreToFile(dst.c_str(), width, height);
 	}
 }
 

@@ -123,7 +123,7 @@ Sprite(const Json::Value& json_val)
 
 	ee::SpriteIO spr_io;
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
-	spr_io.Load(json_val, dir);
+	spr_io.Load(json_val, dir.c_str());
 	pos = spr_io.m_position;
 	angle = spr_io.m_angle;
 	scale = spr_io.m_scale;

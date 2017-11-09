@@ -3,8 +3,6 @@
 
 #include <ee/CameraCanvas.h>
 
-namespace ee { class Sprite; }
-
 namespace enav
 {
 

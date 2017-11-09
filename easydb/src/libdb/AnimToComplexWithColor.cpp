@@ -57,8 +57,8 @@ void AnimToComplexWithColor::Run(const std::string& cfg_filepath)
 	{
 		std::string filepath = ParserTrans(line, trans);
 
-		ecomplex::Symbol* sym = new ecomplex::Symbol;
-		auto& spr = new ee::DummySprite(new ee::DummySymbol(dir + "\\" + filepath + ".json"));
+		auto sym = std::make_shared<ecomplex::Symbol>();
+		auto spr = std::make_shared<ee::DummySprite>(std::make_shared<ee::DummySymbol>(dir + "\\" + filepath + ".json"));
 		TransSpr(trans, spr);
 		sym->Add(spr);
 
@@ -68,9 +68,7 @@ void AnimToComplexWithColor::Run(const std::string& cfg_filepath)
 		output = output.substr(0, pos);
 
 		output = dir + "\\" + output + "_" + trans.ext + "_" + angle + "_complex.json";
-		ecomplex::FileStorer::Store(output, sym, dir);
-
-		delete sym;
+		ecomplex::FileStorer::Store(output, *sym, dir);
 	}
 	fin.close();
 }

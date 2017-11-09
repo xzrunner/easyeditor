@@ -68,15 +68,15 @@ void ExportBodymovin::Trigger(const std::string& src_file, const std::string& ds
  	reader.parse(fin, val);
  	fin.close();
  
- 	std::string dir = gum::FilepathHelper::Dir(src_file);
+ 	auto dir = gum::FilepathHelper::Dir(src_file.c_str());
  	gum::BodymovinParser parser;
  	parser.Parse(val, dir);
  
- 	ee::SymbolLoader sym_loader;
- 	ee::SpriteLoader spr_loader;
+ 	auto sym_loader = std::make_shared<ee::SymbolLoader>();
+ 	auto spr_loader = std::make_shared<ee::SpriteLoader>();
  
- 	std::map<std::string, s2::Sprite*> map_assets;
- 	const std::vector<gum::BodymovinParser::Asset>& assets = parser.GetAssets();
+ 	CU_MAP<CU_STR, s2::SprPtr> map_assets;
+ 	auto& assets = parser.GetAssets();
  	std::vector<bool> flags(assets.size(), false);
  	while (true)
  	{
@@ -89,8 +89,8 @@ void ExportBodymovin::Trigger(const std::string& src_file, const std::string& ds
  			const gum::BodymovinParser::Asset& a = assets[i];
  			if (a.layers.empty()) 
  			{
- 				std::string filepath = gum::FilepathHelper::Absolute(".", a.filepath);
- 				s2::Sprite* spr = spr_loader.Create(filepath);
+ 				auto filepath = gum::FilepathHelper::Absolute(".", a.filepath);
+ 				auto spr = spr_loader->Create(filepath);
  				map_assets.insert(std::make_pair(a.id, spr));
  				flags[i] = true;
  			}
@@ -104,8 +104,8 @@ void ExportBodymovin::Trigger(const std::string& src_file, const std::string& ds
 						layer.layer_type == gum::BodymovinParser::LAYER_NULL) {
  						continue;
  					}
- 					const std::string& id = a.layers[j].ref_id;
- 					std::map<std::string, s2::Sprite*>::iterator itr = map_assets.find(id);
+ 					auto& id = a.layers[j].ref_id;
+ 					auto itr = map_assets.find(id);
  					if (itr == map_assets.end()) {
  						skip = true;
  						break;
@@ -117,11 +117,11 @@ void ExportBodymovin::Trigger(const std::string& src_file, const std::string& ds
  					continue;
  				}
  
- 				libanim::Symbol* sym = new libanim::Symbol();
- 				gum::BodymovinAnimLoader loader(sym, &sym_loader, &spr_loader);
+ 				auto sym = std::make_shared<libanim::Symbol>();
+ 				gum::BodymovinAnimLoader loader(*std::dynamic_pointer_cast<s2::AnimSymbol>(sym), sym_loader, spr_loader);
  				loader.LoadLayers(map_assets, a.layers, parser.GetFrameRate(), parser.GetWidth(), 
 					parser.GetHeight(), parser.GetStartFrame(), parser.GetEndFrame());
- 				std::string filepath = dst_dir + "\\" + a.id + "_" + ee::SymbolFile::Instance()->Tag(s2::SYM_ANIMATION) + ".json";
+ 				std::string filepath = dst_dir + "\\" + std::string(a.id.c_str()) + "_" + ee::SymbolFile::Instance()->Tag(s2::SYM_ANIMATION) + ".json";
  				libanim::FileSaver::Store(filepath, *sym);
  
  				sym->SetFilepath(filepath);
@@ -135,18 +135,13 @@ void ExportBodymovin::Trigger(const std::string& src_file, const std::string& ds
  		}
  	}
  
- 	libanim::Symbol* sym = new libanim::Symbol();
- 	gum::BodymovinAnimLoader loader(sym, &sym_loader, &spr_loader);
+ 	auto sym = std::make_shared<libanim::Symbol>();
+ 	gum::BodymovinAnimLoader loader(*sym, sym_loader, spr_loader);
  	loader.LoadLayers(map_assets, parser.GetLayers(), parser.GetFrameRate(), parser.GetWidth(), 
 		parser.GetHeight(), parser.GetStartFrame(), parser.GetEndFrame());
  	std::string filepath = dst_dir + "\\data_" + ee::SymbolFile::Instance()->Tag(s2::SYM_ANIMATION) + ".json";
  	libanim::FileSaver::Store(filepath, *sym);
  
- 	std::map<std::string, s2::Sprite*>::iterator itr = map_assets.begin();
- 	for ( ; itr != map_assets.end(); ++itr) {
- 		itr->second->RemoveReference();
- 	}
-
 	FixFontLayers(dst_dir);
 }
 
@@ -181,7 +176,7 @@ void ExportBodymovin::FixFontLayer(const std::string& filepath, const std::strin
 
 	int IDX0 = 0;
 
-	std::string layer_name = gum::FilepathHelper::Filename(filepath);
+	auto layer_name = gum::FilepathHelper::Filename(filepath.c_str());
 	layer_name = layer_name.substr(0, layer_name.size() - 10);
 
 	bool dirty = false;
@@ -193,7 +188,7 @@ void ExportBodymovin::FixFontLayer(const std::string& filepath, const std::strin
 		assert(frame_val.size() > 0 && frame_val["actor"].size() > 0);
 		const Json::Value& actor_val = frame_val["actor"][IDX0];
 		std::string filename = actor_val["filepath"].asString();
-		filename = gum::FilepathHelper::Filename(filename);
+		filename = gum::FilepathHelper::Filename(filename.c_str()).c_str();
 
 		int sz = dst_val["layer"].size();
 		dst_val["layer"][sz] = val["layer"][i];
@@ -204,7 +199,7 @@ void ExportBodymovin::FixFontLayer(const std::string& filepath, const std::strin
 			continue;
 		}
 
-		ee::Symbol* t_sym = ee::SymbolFactory::Create(s2::SYM_TEXTBOX);
+		auto t_sym = ee::SymbolFactory::Create(s2::SYM_TEXTBOX);
 		s2::Textbox tb;
 		tb.width = 200;
 		tb.height = 200;
@@ -214,21 +209,21 @@ void ExportBodymovin::FixFontLayer(const std::string& filepath, const std::strin
 		tb.has_edge = false;
 		tb.align_hori = s2::Textbox::HA_LEFT;
 		tb.align_vert = s2::Textbox::VA_CENTER;
-		dynamic_cast<etext::Symbol*>(t_sym)->SetTextbox(tb);
-		s2::Sprite* t_spr = ee::SpriteFactory::Instance()->Create(t_sym);
+		std::dynamic_pointer_cast<etext::Symbol>(t_sym)->SetTextbox(tb);
+		auto t_spr = ee::SpriteFactory::Instance()->Create(t_sym);
 		t_spr->UpdateBounding();
 
-		etext::Sprite* text_spr = VI_DOWNCASTING<etext::Sprite*>(t_spr);
+		auto text_spr = std::dynamic_pointer_cast<etext::Sprite>(t_spr);
 		text_spr->SetExport(true);
 
-		ee::Symbol* c_sym = ee::SymbolFactory::Create(s2::SYM_COMPLEX);
-		dynamic_cast<ecomplex::Symbol*>(c_sym)->Add(t_spr);
-		std::string text_path = layer_name + "_" + gum::StringHelper::ToString(i) + "_text_complex.json";
-		c_sym->SetFilepath(dir + "\\" + text_path);
-		s2::Sprite* c_spr = ee::SpriteFactory::Instance()->Create(c_sym);
+		auto c_sym = ee::SymbolFactory::Create(s2::SYM_COMPLEX);
+		std::dynamic_pointer_cast<ecomplex::Symbol>(c_sym)->Add(t_spr);
+		CU_STR text_path = layer_name + "_" + gum::StringHelper::ToString(i) + "_text_complex.json";
+		c_sym->SetFilepath(dir + "\\" + std::string(text_path.c_str()));
+		auto c_spr = ee::SpriteFactory::Instance()->Create(c_sym);
 		c_spr->UpdateBounding();
 
-		ecomplex::FileStorer::Store(c_sym->GetFilepath(), dynamic_cast<ecomplex::Symbol*>(c_sym), dir);
+		ecomplex::FileStorer::Store(c_sym->GetFilepath(), *std::dynamic_pointer_cast<ecomplex::Symbol>(c_sym), dir);
 
 		Json::Value new_layer = layer_val;
 		for (int j = 0, m = new_layer["frame"].size(); j < m; ++j)
@@ -238,7 +233,7 @@ void ExportBodymovin::FixFontLayer(const std::string& filepath, const std::strin
 			const Json::Value& src_val = frame_val["actor"][IDX0];
 
 			ee::SpriteIO spr_io;
-			spr_io.Load(src_val, dir);
+			spr_io.Load(src_val, dir.c_str());
 
 			sm::vec2 anchor = spr_io.m_position + spr_io.m_offset;
 
@@ -250,8 +245,8 @@ void ExportBodymovin::FixFontLayer(const std::string& filepath, const std::strin
 			spr_io.m_offset = anchor - spr_io.m_position;
 
 			Json::Value dst_val;
-			dst_val["filepath"] = text_path;
-			spr_io.Store(dst_val, dir);
+			dst_val["filepath"] = text_path.c_str();
+			spr_io.Store(dst_val, dir.c_str());
 
 			frame_val["actor"][IDX0] = dst_val;
 		}

@@ -42,7 +42,7 @@ void Snapshoot::Build(const Database& db, const std::string& dir)
 		s2::DrawRT rt;
 		std::string ori_path = db.GetDirPath() + "\\" + path;
 		auto sym = ee::SymbolMgr::Instance()->FetchSymbol(ori_path);
-		rt.Draw(sym);
+		rt.Draw(*sym);
 
 		sm::vec2 sz = sym->GetBounding().Size();
 		rt.StoreToFile(out_path, sz.x, sz.y);

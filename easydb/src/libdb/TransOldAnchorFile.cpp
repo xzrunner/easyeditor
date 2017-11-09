@@ -67,7 +67,7 @@ void TransOldAnchorFile::Run(const std::string& folder)
 void TransOldAnchorFile::TransComplex(const std::string& filepath) const
 {
 	auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-	ecomplex::Symbol* complex = static_cast<ecomplex::Symbol*>(sym);
+	auto complex = std::dynamic_pointer_cast<ecomplex::Symbol>(sym);
 	bool dirty = false;
 	auto& children = complex->GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
@@ -78,20 +78,20 @@ void TransOldAnchorFile::TransComplex(const std::string& filepath) const
 		}
 	}
 	if (dirty) {
-		ecomplex::FileStorer::Store(filepath, complex, ee::FileHelper::GetFileDir(filepath));
+		ecomplex::FileStorer::Store(filepath, *complex, ee::FileHelper::GetFileDir(filepath));
 	}
 }
 
 void TransOldAnchorFile::TransAnimation(const std::string& filepath) const
 {
 	auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-	libanim::Symbol* anim = static_cast<libanim::Symbol*>(sym);
+	auto anim = std::dynamic_pointer_cast<libanim::Symbol>(sym);
 	bool dirty = false;
-	const std::vector<s2::AnimSymbol::Layer*>& layers = anim->GetLayers();
+	auto& layers = anim->GetLayers();
 	for (int i = 0, n = layers.size(); i < n; ++i) {
-		s2::AnimSymbol::Layer* layer = layers[i];
+		auto& layer = layers[i];
 		for (int j = 0, m = layer->frames.size(); j < m; ++j) {
-			s2::AnimSymbol::Frame* frame = layer->frames[j];
+			auto& frame = layer->frames[j];
 			for (int k = 0, l = frame->sprs.size(); k < l; ++k) {
 				auto& spr = std::dynamic_pointer_cast<ee::Sprite>(frame->sprs[k]);
 				if (IsAnchor(spr)) {
@@ -108,10 +108,10 @@ void TransOldAnchorFile::TransAnimation(const std::string& filepath) const
 
 bool TransOldAnchorFile::IsAnchor(const ee::SprConstPtr& spr) const
 {	
-	if (const ee::FontBlankSprite* font = dynamic_cast<const ee::FontBlankSprite*>(spr)) {
+	if (auto font = std::dynamic_pointer_cast<const ee::FontBlankSprite>(spr)) {
 		return font->font.empty() && font->font_color == s2::Color(0, 0, 0, 0);
-	} else if (const std::shared_ptr<ecomplex::Sprite>& complex = std::dynamic_pointer_cast<const ecomplex::Sprite>>(spr)) {
-		auto& children = dynamic_cast<const s2::ComplexSymbol*>(complex->GetSymbol())->GetAllChildren();
+	} else if (auto complex = std::dynamic_pointer_cast<const ecomplex::Sprite>(spr)) {
+		auto& children = std::dynamic_pointer_cast<s2::ComplexSymbol>(complex->GetSymbol())->GetAllChildren();
 		if (children.size() == 1) {
 			auto child = std::dynamic_pointer_cast<ee::Sprite>(children[0]);
 			return IsAnchor(child);

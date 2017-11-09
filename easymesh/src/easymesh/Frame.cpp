@@ -40,7 +40,7 @@ void Frame::OnSaveAs(wxCommandEvent& event)
 			{
 				auto sym = ee::SymbolMgr::Instance()->FetchSymbol(m_curr_filename);
 				s2::DrawRT rt;
-				rt.Draw(sym);
+				rt.Draw(*sym);
 				sm::vec2 sz = sym->GetBounding().Size();
 				rt.StoreToFile(filename, sz.x, sz.y);
 			}

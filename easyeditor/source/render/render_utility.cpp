@@ -53,7 +53,7 @@ SprPtr draw_all_to_one_spr(const std::vector<SprPtr>& sprs)
 
 	s2::DrawRT draw(rt.get());
 	for (auto& spr : sprs) {
-		draw.Draw(spr.get(), false, static_cast<int>(sz.x + 0.5f), static_cast<int>(sz.y + 0.5f), center.x, center.y, scale);
+		draw.Draw(*spr, false, static_cast<int>(sz.x + 0.5f), static_cast<int>(sz.y + 0.5f), center.x, center.y, scale);
 	}
 
 	auto img = std::make_shared<Image>(rt);

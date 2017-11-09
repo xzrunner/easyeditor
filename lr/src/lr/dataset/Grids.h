@@ -2,6 +2,7 @@
 #define _LR_GRIDS_H_
 
 #include <SM_Rect.h>
+#include <cu/cu_stl.h>
 
 #include <vector>
 
@@ -16,8 +17,8 @@ public:
 	void Draw() const;
 	void Build(int width, int height);
 
-	std::vector<int> IntersectPolygon(const std::vector<sm::vec2>& poly) const;
-	std::vector<int> IntersectPolyline(const std::vector<sm::vec2>& path) const;
+	std::vector<int> IntersectPolygon(const CU_VEC<sm::vec2>& poly) const;
+	std::vector<int> IntersectPolyline(const CU_VEC<sm::vec2>& path) const;
 
 	void GetGridSize(int& col, int& row) {
 		col = m_col;
@@ -33,9 +34,9 @@ private:
 	static sm::vec2 TransToBirdView(float x, float y);
 	static sm::vec2 TransToFlatView(float x, float y);
 
-	void GetGridRegion(const std::vector<sm::vec2>& area, int& xmin, int& xmax, int& ymin, int& ymax) const;
+	void GetGridRegion(const CU_VEC<sm::vec2>& area, int& xmin, int& xmax, int& ymin, int& ymax) const;
 
-	static void TransVerticesToFlat(const std::vector<sm::vec2>& src, std::vector<sm::vec2>& dst);
+	static void TransVerticesToFlat(const CU_VEC<sm::vec2>& src, CU_VEC<sm::vec2>& dst);
 
 public:
 	static const float EDGE;
@@ -49,7 +50,7 @@ private:
 		Grid(float left, float top);
 
 		// top left bottom right
-		std::vector<sm::vec2> m_bird_bound;
+		CU_VEC<sm::vec2> m_bird_bound;
 		sm::rect m_flat_bound;
 	}; // Grid
 

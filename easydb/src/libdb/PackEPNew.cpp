@@ -67,9 +67,9 @@ int PackEPNew::Run(int argc, char *argv[])
 		ee::PackIDMgr::Instance()->Init(argv[11], argv[10]);
 		esprpacker::PackIDMgr::Instance()->AddCurrPath(argv[12]);
 
-		std::string audio_cfg = gum::FilepathHelper::Dir(argv[11]);
+		auto audio_cfg = gum::FilepathHelper::Dir(argv[11]);
 		audio_cfg += "\\audio_cfg.json";
-		esprpacker::PackAudioIDMgr::Instance()->Init(audio_cfg);
+		esprpacker::PackAudioIDMgr::Instance()->Init(audio_cfg.c_str());
 	}
 
 	s2::SprTimer::Instance()->Init();
@@ -85,7 +85,7 @@ void PackEPNew::Trigger(const std::string& json_dir, const std::string& tp_json,
 					 const std::string& type, int LOD, float scale)
 {
 	std::string pkg_name = ee::FileHelper::GetFilename(out_file);
-	std::string res_dir = gum::FilepathHelper::Format(json_dir);
+	std::string res_dir = gum::FilepathHelper::Format(json_dir.c_str()).c_str();
 
 	esprpacker::Packer packer(json_dir, tp_json, tp_dir);
 	if (type == "lua") {

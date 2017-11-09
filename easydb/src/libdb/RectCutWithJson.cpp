@@ -108,7 +108,7 @@ void RectCutWithJson::Trigger(const std::string& src_dir, const std::string& dst
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath();
-		filepath = gum::FilepathHelper::Format(filepath);
+		filepath = gum::FilepathHelper::Format(filepath.c_str()).c_str();
 		if (m_cfg && m_cfg->IsIgnored(filepath)) {
 			continue;
 		}
@@ -168,13 +168,11 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 		}
 
 		std::string spr_path = std::string(out_img_dir + "\\" + img_name);
-		auto& spr = new ee::DummySprite(new ee::DummySymbol(spr_path, img->GetWidth(), img->GetHeight()));
+		auto spr = std::make_shared<ee::DummySprite>(std::make_shared<ee::DummySymbol>(spr_path, img->GetWidth(), img->GetHeight()));
 		complex.Add(spr);
 
 		std::string json_out_path = out_json_dir + "\\" + filename + "_complex.json";
-		ecomplex::FileStorer::Store(json_out_path, &complex, out_json_dir);
-
-		img->RemoveReference();
+		ecomplex::FileStorer::Store(json_out_path, complex, out_json_dir);
 
 		return;
 	}
@@ -218,7 +216,7 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 		offset.y = rect->ori_h * 0.5f - (rect->y + rect->h * 0.5f);
 	}
 
-	const std::vector<eimage::Rect>& rects = rect_cut.GetResult();
+	auto& rects = rect_cut.GetResult();
 	for (int i = 0, n = rects.size(); i < n; ++i) 
 	{
 		const eimage::Rect& r = rects[i];
@@ -234,7 +232,7 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 		delete[] pixels;
 
 		std::string spr_path = std::string(out_img_dir + "\\" + img_name);
-		auto& spr = new ee::DummySprite(new ee::DummySymbol(spr_path, r.w, r.h));
+		auto spr = std::make_shared<ee::DummySprite>(std::make_shared<ee::DummySymbol>(spr_path, r.w, r.h));
 		sm::vec2 _offset;
 		_offset.x = r.x + r.w * 0.5f - img->GetWidth() * 0.5f;
 		_offset.y = r.y + r.h * 0.5f - img->GetHeight() * 0.5f;
@@ -247,11 +245,9 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 	}
 
 	std::string json_out_path = out_json_dir + "\\" + filename + "_complex.json";
-	ecomplex::FileStorer::Store(json_out_path, &complex, out_json_dir);
+	ecomplex::FileStorer::Store(json_out_path, complex, out_json_dir);
 
 	delete[] condense;
-
-	img->RemoveReference();
 }
 
 void RectCutWithJson::FixComplex(const std::string& src_dir, const std::string& dst_dir, const std::string& filepath) const
@@ -449,7 +445,7 @@ void RectCutWithJson::FixImageFilepath(const std::string& src_dir, const std::st
 {
 	std::string filepath = val[key].asString();
 	filepath = ee::FileHelper::GetAbsolutePath(file_dir, filepath);
-	filepath = gum::FilepathHelper::Format(filepath);
+	filepath = gum::FilepathHelper::Format(filepath.c_str()).c_str();
 	if (m_cfg && m_cfg->IsIgnored(filepath)) {
 		return;
 	}
@@ -592,19 +588,19 @@ RectCutWithJson::Config::Config(const std::string& filepath)
 		return;
 	}
 
-	std::string dir = gum::FilepathHelper::Dir(filepath);
+	std::string dir = gum::FilepathHelper::Dir(filepath.c_str()).c_str();
 	for (int i = 0, n = val["no_cut"].size(); i < n; ++i) 
 	{
-		std::string path = gum::FilepathHelper::Absolute(dir, val["no_cut"][i].asString());
+		auto path = gum::FilepathHelper::Absolute(dir.c_str(), val["no_cut"][i].asString().c_str());
 		path = gum::FilepathHelper::Format(path);
-		m_no_cut.insert(path);
+		m_no_cut.insert(path.c_str());
 	}
 
 	for (int i = 0, n = val["no_compress"].size(); i < n; ++i) 
 	{
-		std::string path = gum::FilepathHelper::Absolute(dir, val["no_compress"][i].asString());
+		auto path = gum::FilepathHelper::Absolute(dir.c_str(), val["no_compress"][i].asString().c_str());
 		path = gum::FilepathHelper::Format(path);
-		m_no_compress.insert(path);
+		m_no_compress.insert(path.c_str());
 	}
 
 	std::set<std::string>::iterator itr = m_no_cut.begin();
@@ -626,7 +622,7 @@ bool RectCutWithJson::Config::IsIgnored(const std::string& filepath) const
 
 void RectCutWithJson::Config::AddCut(const std::string& ori, const std::string& cut)
 {
-	std::string path = gum::FilepathHelper::Format(cut);
+	std::string path = gum::FilepathHelper::Format(cut.c_str()).c_str();
 	if (m_no_compress.find(ori) != m_no_compress.end()) {
 		m_out_no_compress.push_back(path);
 	} else {
@@ -636,7 +632,7 @@ void RectCutWithJson::Config::AddCut(const std::string& ori, const std::string& 
 
 void RectCutWithJson::Config::Ouput()
 {
-	std::string dir = gum::FilepathHelper::Dir(m_filepath);
+	std::string dir = gum::FilepathHelper::Dir(m_filepath.c_str()).c_str();
 	{
 		std::string filepath = dir + "\\compress.tmp";
 		std::ofstream fout(filepath.c_str());

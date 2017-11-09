@@ -1,9 +1,9 @@
 #ifndef _EASYDB_TRANS_OLD_ANCHOR_FILE_H_
 #define _EASYDB_TRANS_OLD_ANCHOR_FILE_H_
 
-#include "ICommand.h"
+#include <ee/Sprite.h>
 
-namespace ee { class Sprite; }
+#include "ICommand.h"
 
 namespace edb
 {

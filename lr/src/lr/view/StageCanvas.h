@@ -2,8 +2,7 @@
 #define _LR_STAGE_CANVAS_H_
 
 #include <ee/CameraCanvas.h>
-
-namespace ee { class Sprite; }
+#include <ee/Sprite.h>
 
 namespace lr
 {

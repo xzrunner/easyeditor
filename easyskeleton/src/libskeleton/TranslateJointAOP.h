@@ -2,10 +2,9 @@
 #define _LIBSKELETON_TRANSLATE_JOINT_AOP_H_
 
 #include <ee/AtomicOP.h>
+#include <ee/Sprite.h>
 
 #include <SM_Vector.h>
-
-namespace ee { class Sprite; }
 
 namespace libskeleton
 {

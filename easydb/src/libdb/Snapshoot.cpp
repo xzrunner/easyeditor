@@ -74,11 +74,11 @@ void Snapshoot::Run(const std::string& srcdir, const std::string& dstdir) const
 
 			s2::DrawRT rt;
 			auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-			rt.Draw(sym);
+			rt.Draw(*sym);
 
 			std::string filename = dstdir + "//" + name + ".png";
 			sm::vec2 sz = sym->GetBounding().Size();
-			rt.StoreToFile(filename, sz.x, sz.y);
+			rt.StoreToFile(filename.c_str(), sz.x, sz.y);
 		}
 	}
 }

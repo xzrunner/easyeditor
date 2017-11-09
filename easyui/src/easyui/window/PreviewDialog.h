@@ -2,14 +2,13 @@
 #define _EASYUI_WINDOW_PREVIEW_DIALOG_H_
 
 #include <ee/PlayControl.h>
+#include <ee/Sprite.h>
 
 #include <wx/dialog.h>
 
 #include <vector>
 
 class wxGLContext;
-
-namespace ee { class Sprite; }
 
 namespace eui
 {

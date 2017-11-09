@@ -134,7 +134,7 @@ void MeshToolbarPage::OnSaveImage(wxCommandEvent& event)
 			spr->SetPosition(pos);
 			float angle = item_val["angle"].asDouble();
 			spr->SetAngle(angle);
-			rt.Draw(spr);
+			rt.Draw(*spr);
 
 			item_val = value[i++];
 		}

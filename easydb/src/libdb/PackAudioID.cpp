@@ -64,7 +64,7 @@ void PackAudioID::LoadAudioID(const std::string& src)
 	}
 }
 
-void PackAudioID::StoreAudioID(const std::string& dst) const
+void PackAudioID::StoreAudioID(const std::string& dst_str) const
 {
 	// size
 	int sz = 0;
@@ -87,7 +87,7 @@ void PackAudioID::StoreAudioID(const std::string& dst) const
 
 	// output
 	std::locale::global(std::locale(""));
-	std::ofstream fout(dst.c_str(), std::ios::binary);
+	std::ofstream fout(dst_str.c_str(), std::ios::binary);
 	std::locale::global(std::locale("C"));	
 	uint8_t* dst = NULL;
 	size_t dst_sz;

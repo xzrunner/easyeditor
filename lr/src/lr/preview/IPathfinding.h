@@ -1,9 +1,9 @@
 #ifndef _LR_PREVIEW_INTERFACE_PATHFINDING_H_
 #define _LR_PREVIEW_INTERFACE_PATHFINDING_H_
 
-#include <SM_Vector.h>
+#include <ee/Sprite.h>
 
-namespace ee { class Sprite; }
+#include <SM_Vector.h>
 
 namespace lr
 {

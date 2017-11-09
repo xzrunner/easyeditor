@@ -11,6 +11,8 @@
 #include <sprite2/SymType.h>
 #include <gum/Config.h>
 
+#include <iostream>
+
 namespace edb
 {
 

@@ -1,12 +1,13 @@
 #ifndef _EASYSKELETON_FILE_STORE_H_
 #define _EASYSKELETON_FILE_STORE_H_
 
+#include <ee/Sprite.h>
+
 #include <json/json.h>
 
 #include <string>
 #include <vector>
 
-namespace ee { class Sprite; }
 namespace s2 { class Joint; }
 
 namespace eskeleton

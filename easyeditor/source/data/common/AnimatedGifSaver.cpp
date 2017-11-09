@@ -159,7 +159,8 @@ bool AnimatedGifSaver::Save(const char* filename){
     }
   }
 
-  if (EGifCloseFile(GifFile) == GIF_ERROR) return false;
+  int err_code;
+  if (EGifCloseFile(GifFile, &err_code) == GIF_ERROR) return false;
 
   return true;       
 }

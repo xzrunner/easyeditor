@@ -1,9 +1,9 @@
 #ifndef _LR_SETTINGS_DIALOG_H_
 #define _LR_SETTINGS_DIALOG_H_
 
-#include <wx/wx.h>
+#include <ee/Sprite.h>
 
-namespace ee { class Sprite; }
+#include <wx/wx.h>
 
 namespace lr
 {

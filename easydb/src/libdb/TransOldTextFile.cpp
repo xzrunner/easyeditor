@@ -111,7 +111,7 @@ bool TransOldTextFile::TransSprite(Json::Value& value) const
 		txt_val["align_hori"] = value["align hori"];
 		txt_val["align_vert"] = value["align vert"];
 
-		Json::Value test = value.removeMember("align hori");
+		value.removeMember("align hori");
 		value.removeMember("align vert");
 	}
 	if (!value["font"].isNull()) {

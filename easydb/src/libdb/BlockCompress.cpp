@@ -45,7 +45,7 @@ void BlockCompress::Trigger(const std::string& src_dir, const std::string& dst_d
 {
 	wxArrayString files;
 	ee::FileHelper::FetchAllFiles(src_dir, files);
-	std::vector<std::string> filepaths;
+	CU_VEC<std::string> filepaths;
 	for (int i = 0, n = files.size(); i < n; ++i) {
 		if (ee::SymbolFile::Instance()->Type(files[i].ToStdString()) == s2::SYM_IMAGE) {
 			filepaths.push_back(files[i].ToStdString());

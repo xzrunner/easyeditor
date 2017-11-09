@@ -82,16 +82,18 @@ void GenPkgRefInfo::Trigger(const std::string& src_dir, const std::string& pkg_c
 		fs_file* file = fs_open(filepath.c_str(), "rb");
 		assert(file);
 		int off = gum::PkgFileParser::GetEpeIdxOffset(file);
-		simp::PkgIdxLoader loader(file, off);
+		CU_MAP<CU_STR, uint32_t> export_names;
+		CU_VEC<simp::Package::PageDesc> pages;
+		CU_VEC<int> ref_pkgs;
+		simp::PkgIdxLoader loader(file, off, export_names, pages, ref_pkgs);
 		loader.Load();
 
 		std::string name = ee::FileHelper::GetFilename(filepath);
 		fout << name << ": ";
 
-		const std::vector<int>& refs = loader.GetRefPkgs();
-		for (int j = 0, m = refs.size(); j < m; ++j) 
+		for (int j = 0, m = ref_pkgs.size(); j < m; ++j)
 		{
-			std::map<int, std::string>::iterator itr = pkg_id2name.find(refs[j]);
+			std::map<int, std::string>::iterator itr = pkg_id2name.find(ref_pkgs[j]);
 			assert(itr != pkg_id2name.end());
 			fout << itr->second << " ";
 		}

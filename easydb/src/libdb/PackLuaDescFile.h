@@ -13,7 +13,6 @@ class PackLuaDescFile : public ICommand
 {
 public:
 	PackLuaDescFile() {}
-	virtual ~PackLuaDescFile();
 
 	//
 	// interface ICommand

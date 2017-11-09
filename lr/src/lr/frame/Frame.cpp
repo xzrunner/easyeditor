@@ -144,34 +144,34 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 
 	// bg down layer
 	for (int i = 0, n = bg_down_layer.size(); i < n; ++i) {
-		rt.Draw(bg_down_layer[i]);
+		rt.Draw(*bg_down_layer[i]);
 	}
 	// bg layer
 	for (int i = 0, n = bg_layer.size(); i < n; ++i) {
-		rt.Draw(bg_layer[i]);
+		rt.Draw(*bg_layer[i]);
 	}
 	// bg up layer
 	for (int i = 0, n = bg_up_layer.size(); i < n; ++i) {
-		rt.Draw(bg_up_layer[i]);
+		rt.Draw(*bg_up_layer[i]);
 	}
 	// cover layer
 	std::sort(cover_layer.begin(), cover_layer.end(), ee::SpriteCmp(ee::SpriteCmp::e_y_invert));
 	for (int i = 0, n = cover_layer.size(); i < n; ++i) {
-		rt.Draw(cover_layer[i]);
+		rt.Draw(*cover_layer[i]);
 	}
 	// top layer
 	for (int i = 0, n = top_layer.size(); i < n; ++i) {
-		rt.Draw(top_layer[i]);
+		rt.Draw(*top_layer[i]);
 	}
 
 	std::vector<ee::Shape*> shapes;
 	stage->TraverseShapes(ee::FetchAllVisitor<ee::Shape>(shapes), ee::DT_VISIBLE);
 	for (int i = 0, n = shapes.size(); i < n; ++i) {
-		rt.Draw(shapes[i]);		
+		rt.Draw(*shapes[i]);		
 	}
 
 	eshape::RectShape rect(sm::vec2(0, 0), cfg->m_view_width * 0.5f, cfg->m_view_height * 0.5f);
-	rt.Draw(&rect);
+	rt.Draw(rect);
 
 	rt.StoreToFile(filepath);
 }

@@ -4,6 +4,7 @@
 #include <ee/FileHelper.h>
 
 #include <fstream>
+#include <iostream>
 
 namespace edb
 {

@@ -9,6 +9,7 @@
 #include <wx/arrstr.h>
 
 #include <fstream>
+#include <iostream>
 
 namespace edb
 {

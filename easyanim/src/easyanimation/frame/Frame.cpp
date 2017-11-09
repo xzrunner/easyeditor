@@ -171,7 +171,7 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 	sm::vec2 c = region.Center();
 	s2::DrawRT rt(sz.x, sz.y);
 	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
-		rt.Draw(sprs[i].get(), false, sz.x, sz.y, c.x, c.y);
+		rt.Draw(*sprs[i], false, sz.x, sz.y, c.x, c.y);
 	}
 	rt.StoreToFile(filepath.c_str(), sz.x, sz.y);
 }

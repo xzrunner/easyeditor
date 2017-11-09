@@ -1,9 +1,9 @@
 #ifndef _EASYTEXPACKER_FILE_IO_H_
 #define _EASYTEXPACKER_FILE_IO_H_
 
-#include <json/json.h>
+#include <ee/Sprite.h>
 
-namespace ee { class Sprite; }
+#include <json/json.h>
 
 namespace etexpacker
 {

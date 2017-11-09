@@ -9,6 +9,7 @@
 #include <sprite2/SymType.h>
 
 #include <fstream>
+#include <iostream>
 
 namespace edb 
 {

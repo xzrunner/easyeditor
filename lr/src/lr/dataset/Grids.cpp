@@ -68,11 +68,11 @@ void Grids::Build(int width, int height)
 	m_flat_bound.push_back(TransToFlatView(-width*0.5f, -height*0.5f));
 }
 
-std::vector<int> Grids::IntersectPolygon(const std::vector<sm::vec2>& poly) const
+std::vector<int> Grids::IntersectPolygon(const CU_VEC<sm::vec2>& poly) const
 {
 	std::vector<int> ret;
 
-	std::vector<sm::vec2> poly_flat;
+	CU_VEC<sm::vec2> poly_flat;
 	TransVerticesToFlat(poly, poly_flat);
 
 	int xmin, xmax, ymin, ymax;
@@ -91,11 +91,11 @@ std::vector<int> Grids::IntersectPolygon(const std::vector<sm::vec2>& poly) cons
 	return ret;
 }
 
-std::vector<int> Grids::IntersectPolyline(const std::vector<sm::vec2>& path) const
+std::vector<int> Grids::IntersectPolyline(const CU_VEC<sm::vec2>& path) const
 {
 	std::vector<int> ret;
 
-	std::vector<sm::vec2> poly_flat;
+	CU_VEC<sm::vec2> poly_flat;
 	TransVerticesToFlat(path, poly_flat);
 
 	int xmin, xmax, ymin, ymax;
@@ -129,7 +129,7 @@ sm::vec2 Grids::TransToFlatView(float x, float y)
 	return ret;
 }
 
-void Grids::GetGridRegion(const std::vector<sm::vec2>& area, 
+void Grids::GetGridRegion(const CU_VEC<sm::vec2>& area, 
 						  int& xmin, int& xmax, int& ymin, int& ymax) const
 {
 	sm::rect r;
@@ -146,7 +146,7 @@ void Grids::GetGridRegion(const std::vector<sm::vec2>& area,
 	ymax = std::min((float)m_row, (top-r.ymin)/BIRD_HH+2);
 }
 
-void Grids::TransVerticesToFlat(const std::vector<sm::vec2>& src, std::vector<sm::vec2>& dst)
+void Grids::TransVerticesToFlat(const CU_VEC<sm::vec2>& src, CU_VEC<sm::vec2>& dst)
 {
 	dst.resize(src.size());
 	for (int i = 0, n = src.size(); i < n; ++i) {

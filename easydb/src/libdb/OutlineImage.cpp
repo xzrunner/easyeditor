@@ -15,6 +15,7 @@
 #include <wx/arrstr.h>
 
 #include <fstream>
+#include <iostream>
 
 namespace edb
 {
@@ -59,8 +60,8 @@ void OutlineImage::Trigger(const std::string& dir) const
 
 		std::cout << i << " / " << n << " : " << filepath << "\n";
 
-		ee::Image* image = ee::ImageMgr::Instance()->GetItem(filepath);
-		ee::ImageData* img_data = ee::ImageDataMgr::Instance()->GetItem(filepath);
+		auto image = ee::ImageMgr::Instance()->GetItem(filepath);
+		auto img_data = ee::ImageDataMgr::Instance()->GetItem(filepath);
 
 		eimage::ExtractOutlineRaw raw(img_data->GetPixelData(), img_data->GetWidth(), img_data->GetHeight());
 		raw.CreateBorderLineAndMerge();
@@ -72,7 +73,7 @@ void OutlineImage::Trigger(const std::string& dir) const
 		offset.x = -0.5f * image->GetOriginSize().x;
 		offset.y = -0.5f * image->GetOriginSize().y;
 
-		std::vector<sm::vec2> vertices(fine.GetResult());
+		auto vertices(fine.GetResult());
 
 		float src_area = image->GetClippedRegion().Width() * image->GetClippedRegion().Height();
 		float dst_area = ee::Math2D::GetPolygonArea(vertices);
@@ -92,8 +93,6 @@ void OutlineImage::Trigger(const std::string& dir) const
 			writer.write(fout, value);
 			fout.close();	
 		}
-
-		image->RemoveReference();
 	}
 }
 

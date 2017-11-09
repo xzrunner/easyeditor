@@ -11,6 +11,8 @@
 
 #include <wx/arrstr.h>
 
+#include <iostream>
+
 namespace edb
 {
 
@@ -54,7 +56,6 @@ void CalImageArea::Trigger(const std::string& dir)
 		{
 			auto img = ee::ImageMgr::Instance()->GetItem(filepath);
 			area += img->GetClippedRegion().Width() * img->GetClippedRegion().Height();
-			img->RemoveReference();
 		}
 	}
 

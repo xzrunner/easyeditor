@@ -64,8 +64,8 @@ void GenNoCompressCfg::Trigger(const std::string& src_dir, const std::string& sr
 	if (src_value.isMember("no_compress")) {
 		for (int i = 0, n = src_value["no_compress"].size(); i < n; ++i) {
 			std::string path = src_value["no_compress"][i].asString();
-			std::string full_path = gum::FilepathHelper::Absolute(src_dir, path);
-			paths.insert(gum::FilepathHelper::Format(full_path));
+			auto full_path = gum::FilepathHelper::Absolute(src_dir.c_str(), path.c_str());
+			paths.insert(gum::FilepathHelper::Format(full_path.c_str()).c_str());
 		}
 	}
 
@@ -144,7 +144,7 @@ void GenNoCompressCfg::Trigger(const std::string& src_dir, const std::string& sr
 			continue;
 		}
 
-		filepath = gum::FilepathHelper::Format(filepath);
+		filepath = gum::FilepathHelper::Format(filepath.c_str()).c_str();
 		if (paths.find(filepath) != paths.end()) {
 			f_no_compress << filepath << "\n";
 		} else {
@@ -161,8 +161,8 @@ void GenNoCompressCfg::AddPath(std::set<std::string>& dst,
 							   const std::string& src_dir)
 {
 	std::string path = src["filepath"].asString();
-	std::string full_path = gum::FilepathHelper::Absolute(src_dir, path);
-	dst.insert(gum::FilepathHelper::Format(full_path));
+	auto full_path = gum::FilepathHelper::Absolute(src_dir.c_str(), path.c_str()).c_str();
+	dst.insert(gum::FilepathHelper::Format(full_path).c_str());
 }
 
 }

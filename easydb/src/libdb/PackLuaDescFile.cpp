@@ -13,11 +13,6 @@
 namespace edb
 {
 
-PackLuaDescFile::~PackLuaDescFile()
-{
-	for_each(m_syms.begin(), m_syms.end(), cu::RemoveRefFunctor<ee::Symbol>());
-}
-
 std::string PackLuaDescFile::Command() const
 {
 	return "pack-lua-desc";

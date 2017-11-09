@@ -24,6 +24,7 @@
 #include <wx/arrstr.h>
 
 #include <fstream>
+#include <iostream>
 
 namespace edb
 {
@@ -115,8 +116,8 @@ void RotateTrimImage::RotateTrim(const std::string& dir)
 			spr->SetAngle(angle);
 
 			s2::DrawRT rt;
-			rt.Draw(spr, true, width, height);
-			rt.StoreToFile(filepath, width, height);
+			rt.Draw(*spr, true, width, height);
+			rt.StoreToFile(filepath.c_str(), width, height);
 
 			//std::string dir = ee::FileHelper::getFileDir(filepath);
 			//std::string name = ee::FileHelper::getFilename(filepath);

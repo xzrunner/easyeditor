@@ -69,15 +69,15 @@ void OutlineToTriStrip::Trigger(const std::string& dir) const
 		reader.parse(fin, value);
 		fin.close();
 
-		std::vector<sm::vec2> vertices;
+		CU_VEC<sm::vec2> vertices;
 		gum::JsonSerializer::Load(value["normal"], vertices);
 		if (vertices.empty()) {
 			continue;
 		}
 
-		std::vector<sm::vec2> tris;
+		CU_VEC<sm::vec2> tris;
 		triangulate_normal(vertices, tris);
-		std::vector<std::vector<sm::vec2> > strips;
+		std::vector<CU_VEC<sm::vec2> > strips;
 //		ee::SGI::Do(tris, strips);
 		strips.push_back(tris);
 

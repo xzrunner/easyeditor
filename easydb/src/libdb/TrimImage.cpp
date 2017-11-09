@@ -17,6 +17,8 @@
 
 #include <wx/filename.h>
 
+#include <iostream>
+
 namespace edb
 {
 
@@ -218,8 +220,6 @@ void TrimImage::Trim(const std::string& filepath)
 	} else {
 		gimg_export(out_filepath.c_str(), img->GetPixelData(), img->GetWidth(), img->GetHeight(), img->GetFormat(), true);
 	}
-
-	img->RemoveReference();
 }
 
 int64_t TrimImage::GetFileModifyTime(const std::string& filepath)

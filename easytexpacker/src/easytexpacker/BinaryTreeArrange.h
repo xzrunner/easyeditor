@@ -3,7 +3,7 @@
 
 #include "BaseStrategy.h"
 
-namespace ee { class Sprite; }
+#include <ee/Sprite.h>
 
 namespace etexpacker
 {

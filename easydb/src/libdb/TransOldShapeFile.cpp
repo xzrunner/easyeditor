@@ -56,7 +56,7 @@ void TransOldShapeFile::Run(const std::string& folder)
 			break;
 		case s2::SYM_TEXTURE:
 			auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-			etexture::FileSaver::Store(filepath.c_str(), static_cast<etexture::Symbol*>(sym));
+			etexture::FileSaver::Store(filepath.c_str(), std::dynamic_pointer_cast<etexture::Symbol>(sym));
 			break;
 		}
 	}

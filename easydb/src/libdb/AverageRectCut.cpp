@@ -148,7 +148,7 @@ void AverageRectCut::RectCutImage(const std::string& src_dir, const std::string&
 			delete[] pixels;
 
 			std::string spr_path = std::string(out_img_dir + "\\" + img_name);
-			auto& spr = new ee::DummySprite(new ee::DummySymbol(spr_path, w, h));
+			auto spr = std::make_shared<ee::DummySprite>(std::make_shared<ee::DummySymbol>(spr_path, w, h));
 			sm::vec2 offset;
 			offset.x = pr.xmin + xmin + w * 0.5f - img->GetWidth() * 0.5f;
 			offset.y = pr.ymin + ymin + h * 0.5f - img->GetHeight() * 0.5f;
@@ -160,9 +160,7 @@ void AverageRectCut::RectCutImage(const std::string& src_dir, const std::string&
 	delete[] condense;
 
 	std::string json_out_path = out_json_dir + "\\" + filename + "_complex.json";
-	ecomplex::FileStorer::Store(json_out_path, &complex, out_json_dir);
-
-	img->RemoveReference();
+	ecomplex::FileStorer::Store(json_out_path, complex, out_json_dir);
 }
 
 void AverageRectCut::FixComplex(const std::string& src_dir, const std::string& dst_dir, const std::string& filepath) const

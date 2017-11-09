@@ -3,9 +3,9 @@
 
 #include "ICommand.h"
 
-#include <sprite2/Color.h>
+#include <ee/Sprite.h>
 
-namespace ee { class Sprite; }
+#include <sprite2/Color.h>
 
 namespace edb
 {

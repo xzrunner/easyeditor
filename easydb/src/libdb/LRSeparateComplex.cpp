@@ -172,11 +172,11 @@ std::string LRSeparateComplex::CreateNewComplexFile(const Json::Value& value) co
 	std::string dir = ee::FileHelper::GetFileDir(relative_path);
 
 	ee::SpriteIO spr_io;
-	spr_io.Load(spr_val, dir);
+	spr_io.Load(spr_val, dir.c_str());
 	FixPosWithShape(spr_io.m_position, value["filepath"].asString());
 	int idx = 0;
 	out_val["sprite"][idx] = spr_val;
-	spr_io.Store(out_val["sprite"][idx], dir);
+	spr_io.Store(out_val["sprite"][idx], dir.c_str());
 
 	std::string outpath = m_output_dir + "\\" + name + "_complex.json";
 	Json::StyledStreamWriter writer;
@@ -212,17 +212,17 @@ void LRSeparateComplex::FixPosWithShape(sm::vec2& pos, const std::string& filepa
 	}
 
 	auto sym = ee::SymbolMgr::Instance()->FetchSymbol(shape_path);
-	eshape::Symbol* shape_symbol = dynamic_cast<eshape::Symbol*>(sym);
+	auto shape_symbol = std::dynamic_pointer_cast<eshape::Symbol>(sym);
 	if (!shape_symbol) {
 		throw ee::Exception("shape file err:%s", filepath);
 	}
 	
-	const s2::Shape* shape = shape_symbol->GetShape();
+	auto shape = shape_symbol->GetShape();
 	if (!shape) {
 		throw ee::Exception("shape file empty:%s", filepath);
 	}
 
-	if (const eshape::PointShape* point = dynamic_cast<const eshape::PointShape*>(shape)) {
+	if (auto point = std::dynamic_pointer_cast<eshape::PointShape>(shape)) {
 		pos += point->GetPos();
 	} else {
 		throw ee::Exception("shape file is not point:%s", filepath);

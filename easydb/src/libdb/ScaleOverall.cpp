@@ -99,15 +99,15 @@ void ScaleOverall::ScaleImage(const std::string& filepath, float scale,
 {
 	auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	
-	ee::ImageSymbol* img = static_cast<ee::ImageSymbol*>(sym);
+	auto img = std::dynamic_pointer_cast<ee::ImageSymbol>(sym);
 
 	sm::vec2 img_offset = img->GetBounding().Center();
 	mapImg2Center.insert(std::make_pair(filepath, img_offset));
 
 	s2::DrawRT rt;
-	rt.Draw(sym);
+	rt.Draw(*sym);
 	sm::vec2 sz = sym->GetBounding().Size();
-	rt.StoreToFile(filepath, sz.x, sz.y);
+	rt.StoreToFile(filepath.c_str(), sz.x, sz.y);
 }
 
 void ScaleOverall::ScaleComplex(const std::string& path, float scale,
@@ -213,7 +213,7 @@ sm::vec2 ScaleOverall::GetScaledPos(Json::Value& sprite_val, float scale,
 {
 	ee::SpriteIO spr_io;
 	std::string dir = ee::FileHelper::GetFileDir(sprite_val["filepath"].asString());
-	spr_io.Load(sprite_val, dir);
+	spr_io.Load(sprite_val, dir.c_str());
 
 // 	sm::vec2 center = pos + sm::rotate_vector(-offset, angle);
 // 	center = center + sm::rotate_vector(img_offset, angle);

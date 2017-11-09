@@ -10,6 +10,7 @@
 #include <wx/arrstr.h>
 
 #include <fstream>
+#include <iostream>
 
 namespace edb
 {
@@ -87,11 +88,11 @@ void TranslateJson::TranslateSprite(Json::Value& spr_val, const sm::vec2& offset
 	std::string dir = ee::FileHelper::GetFileDir(spr_val["filepath"].asString());
 
 	ee::SpriteIO spr_io;
-	spr_io.Load(spr_val, dir);
+	spr_io.Load(spr_val, dir.c_str());
 
 	spr_io.m_position += offset;
 
-	spr_io.Store(spr_val, dir);
+	spr_io.Store(spr_val, dir.c_str());
 }
 
 }

@@ -53,14 +53,15 @@ void TransNewTextFile::Run(const std::string& folder)
 		if (ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_COMPLEX) 
 		{
 			auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-			if (ecomplex::Symbol* complex = dynamic_cast<ecomplex::Symbol*>(sym)) 
+			if (sym->Type() == s2::SYM_COMPLEX) 
 			{
+				auto complex = std::dynamic_pointer_cast<ecomplex::Symbol>(sym);
 				bool dirty = false;
 				auto& children = complex->GetAllChildren();
 				for (int i = 0, n = children.size(); i < n; ++i) 
 				{
-					s2::Sprite* child = children[i];
-					if (etext::Sprite* text = std::dynamic_pointer_cast<etext::Sprite>(child)) 
+					auto& child = children[i];
+					if (auto text = std::dynamic_pointer_cast<etext::Sprite>(child)) 
 					{
 						dirty = true;
 						s2::Textbox& tb = text->GetTextbox();
@@ -68,7 +69,7 @@ void TransNewTextFile::Run(const std::string& folder)
 					}
 				}
 				if (dirty) {
-					ecomplex::FileStorer::Store(filepath, complex, ee::FileHelper::GetFileDir(filepath));
+					ecomplex::FileStorer::Store(filepath, *complex, ee::FileHelper::GetFileDir(filepath));
 				}
 			}
 		}

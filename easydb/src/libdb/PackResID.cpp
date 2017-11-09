@@ -41,8 +41,8 @@ int PackResID::Run(int argc, char *argv[])
 
 void PackResID::Pack(const std::string& src, const std::string& dst)
 {
-	std::string pkg_src_file = gum::FilepathHelper::Absolute(src, "pkg_cfg.json");
-	std::string pkg_dst_file = gum::FilepathHelper::Absolute(dst, "pkg.bin");	
+	std::string pkg_src_file = gum::FilepathHelper::Absolute(src.c_str(), "pkg_cfg.json").c_str();
+	std::string pkg_dst_file = gum::FilepathHelper::Absolute(dst.c_str(), "pkg.bin").c_str();
 	LoadPkgID(pkg_src_file);
 	StorePkgID(pkg_dst_file);
 }
@@ -71,7 +71,7 @@ void PackResID::LoadPkgID(const std::string& src)
 	}
 }
 
-void PackResID::StorePkgID(const std::string& dst) const
+void PackResID::StorePkgID(const std::string& dst_str) const
 {
 	// size
 	int sz = 0;
@@ -96,7 +96,7 @@ void PackResID::StorePkgID(const std::string& dst) const
 
 	// output
 	std::locale::global(std::locale(""));
-	std::ofstream fout(dst.c_str(), std::ios::binary);
+	std::ofstream fout(dst_str.c_str(), std::ios::binary);
 	std::locale::global(std::locale("C"));	
 	uint8_t* dst = NULL;
 	size_t dst_sz;

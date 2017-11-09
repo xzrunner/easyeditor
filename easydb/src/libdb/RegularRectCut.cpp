@@ -17,6 +17,8 @@
 
 #include <wx/arrstr.h>
 
+#include <iostream>
+
 namespace edb
 {
 
@@ -77,7 +79,7 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 			int channels = img->GetFormat() == GPF_RGB ? 3 : 4;
 			pimg::Cropping crop(img->GetPixelData(), img->GetWidth(), img->GetHeight(), channels, true);
 
-			const std::vector<eimage::Rect>& result = cut.GetResult();
+			auto& result = cut.GetResult();
 			for (int i = 0, n = result.size(); i < n; ++i)
 			{
 				const eimage::Rect& r = result[i];
@@ -87,8 +89,6 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 				gimg_export(out_path.c_str(), pixels, r.w, r.h, GPF_RGBA8, true);
 				delete[] pixels;
 			}
-
-			img->RemoveReference();
 		}
 	}
 }

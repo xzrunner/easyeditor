@@ -84,11 +84,11 @@ void RotateImage::Rotate(const std::string& src_dir, const std::string& dst_dir)
 				int width = sm::rotate_vector(sm::vec2(r.xmax, r.ymax), -rad).x * 2;
 				int height = sm::rotate_vector(sm::vec2(r.xmin, r.ymax), -rad).y * 2;
 				s2::DrawRT rt;
-				rt.Draw(spr, true, width, height);
+				rt.Draw(*spr, true, width, height);
 
 				std::string name = ee::FileHelper::GetFilename(filepath);
 				std::string outpath = ee::StringHelper::Format("%s\\%s_%d.png", dst_dir.c_str(), name.c_str(), deg);
-				rt.StoreToFile(outpath, width, height);
+				rt.StoreToFile(outpath.c_str(), width, height);
 			}
 		}
 	}

@@ -66,7 +66,7 @@ void OutlineToPolygon::Trigger(const std::string& dir) const
 		reader.parse(fin, value);
 		fin.close();
 
-		std::vector<sm::vec2> vertices;
+		CU_VEC<sm::vec2> vertices;
 		gum::JsonSerializer::Load(value["normal"], vertices);
 		if (vertices.empty()) {
 			continue;
@@ -76,8 +76,8 @@ void OutlineToPolygon::Trigger(const std::string& dir) const
 			filepath, ee::SymbolFile::Instance()->Tag(s2::SYM_SHAPE), "json");
 
 		eshape::PolygonShape poly(vertices);
-		ee::DummySymbol bg(filepath);
-		eshape::FileIO::StoreToFile(shape_path.c_str(), &poly, &bg);
+		auto bg = std::make_shared<ee::DummySymbol>(filepath);
+		eshape::FileIO::StoreToFile(shape_path.c_str(), poly, bg);
 	}
 }
 

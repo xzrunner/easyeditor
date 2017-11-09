@@ -2,14 +2,13 @@
 #define _EASYSKELETON_BONE_H_
 
 #include <ee/SpriteObserver.h>
+#include <ee/Sprite.h>
 
 #include <SM_Vector.h>
 #include <cu/CU_RefCountObj.h>
 #include <cu/uncopyable.h>
 
 #include <vector>
-
-namespace ee { class Sprite; }
 
 namespace eskeleton
 {
