@@ -98,19 +98,22 @@ void GenNoCutCfg::Trigger(const std::string& src_dir,
 	LoadConfig(src_dir, src_value, "no_cut", no_cut_paths);
 
 	// output
-	auto cfg_dir = gum::FilepathHelper::Dir(gum::FilepathHelper::Format(cfg_path.c_str()));
+	auto cfg_dir = gum::FilepathHelper::Format(
+		gum::FilepathHelper::Dir(gum::FilepathHelper::Absolute("", cfg_path.c_str())));
 	Json::Value dst_value;
 	int idx = 0;
 	for (auto& path : no_compress_paths) {
-		dst_value["no_compress"][idx++] = gum::FilepathHelper::Relative(cfg_dir, path.c_str()).c_str();
+		auto fmt_path = gum::FilepathHelper::Relative(cfg_dir, path.c_str());
+		dst_value["no_compress"][idx++] = fmt_path.c_str();
 	}
 	idx = 0;
 	for (auto& path : no_cut_paths) {
-		dst_value["no_cut"][idx++] = gum::FilepathHelper::Relative(cfg_dir, path.c_str()).c_str();
+		auto fmt_path = gum::FilepathHelper::Relative(cfg_dir, path.c_str());
+		dst_value["no_cut"][idx++] = fmt_path.c_str();
 	}
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
-	std::ofstream fout(cfg_path.c_str());
+	std::ofstream fout((cfg_path).c_str());
 	std::locale::global(std::locale("C"));
 	writer.write(fout, dst_value);
 	fout.close();
