@@ -16,6 +16,7 @@
 #include <ee/Symbol.h>
 #include <ee/SymbolFile.h>
 #include <ee/SymbolType.h>
+#include <ee/SymbolLoader.h>
 
 #include <easycomplex.h>
 #include <easyrespacker.h>
@@ -136,7 +137,9 @@ void Packer::OutputSprID(const std::string& pkg_name, const std::string& res_dir
 		}
 
 		std::string filepath = node->GetFilepath();
-		if (filepath.empty() || filepath == SPRITE_FILEPATH || 
+		if (ee::SymbolLoader::IsNoFilepathSym(filepath) ||
+			filepath.empty() || 
+			filepath == SPRITE_FILEPATH || 
 			filepath == ee::SYM_GROUP_TAG ||
 			filepath == ee::SYM_TEXT_TAG ||
 			filepath == ee::SYM_SHAPE_TAG) {

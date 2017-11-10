@@ -16,6 +16,8 @@ public:
 	virtual s2::SymPtr Create(const CU_STR& filepath, int type = s2::SYM_UNKNOWN) const override;
 	virtual s2::SymPtr Create(int type) const override;
 
+	static bool IsNoFilepathSym(const std::string& filepath);
+
 }; // SymbolLoader
 
 }
