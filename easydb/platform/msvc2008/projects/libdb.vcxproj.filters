@@ -381,6 +381,9 @@
     <ClCompile Include="..\..\..\src\libdb\ExportBodymovin.cpp">
       <Filter>commands\export</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\GenNoCutCfg.cpp">
+      <Filter>commands\pack\res</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\libdb\CopyFile.h">
@@ -679,6 +682,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\libdb\ExportBodymovin.h">
       <Filter>commands\export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\GenNoCutCfg.h">
+      <Filter>commands\pack\res</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

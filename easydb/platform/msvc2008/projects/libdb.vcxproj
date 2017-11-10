@@ -121,6 +121,7 @@
     <ClCompile Include="..\..\..\src\libdb\FormatJsonFile.cpp" />
     <ClCompile Include="..\..\..\src\libdb\FormatTIDString.cpp" />
     <ClCompile Include="..\..\..\src\libdb\GenNoCompressCfg.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\GenNoCutCfg.cpp" />
     <ClCompile Include="..\..\..\src\libdb\GenPackCfg.cpp" />
     <ClCompile Include="..\..\..\src\libdb\GenPkgRefInfo.cpp" />
     <ClCompile Include="..\..\..\src\libdb\LRExpandGroup.cpp" />
@@ -220,6 +221,7 @@
     <ClInclude Include="..\..\..\src\libdb\FormatJsonFile.h" />
     <ClInclude Include="..\..\..\src\libdb\FormatTIDString.h" />
     <ClInclude Include="..\..\..\src\libdb\GenNoCompressCfg.h" />
+    <ClInclude Include="..\..\..\src\libdb\GenNoCutCfg.h" />
     <ClInclude Include="..\..\..\src\libdb\GenPackCfg.h" />
     <ClInclude Include="..\..\..\src\libdb\GenPkgRefInfo.h" />
     <ClInclude Include="..\..\..\src\libdb\ICommand.h" />
