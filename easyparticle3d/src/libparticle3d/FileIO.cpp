@@ -159,8 +159,8 @@ s2::P3dEmitterCfgPtr FileIO::LoadPSConfig(const std::string& filepath)
 	class Loader : public gum::P3dSymLoader
 	{
 	protected:
-		virtual s2::SymPtr LoadSymbol(const std::string& filepath) const {
-			return ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		virtual s2::SymPtr LoadSymbol(const CU_STR& filepath) const override {
+			return ee::SymbolMgr::Instance()->FetchSymbol(filepath.c_str());
 		}
 	}; // Loader
 

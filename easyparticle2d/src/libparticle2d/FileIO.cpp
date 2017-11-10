@@ -112,8 +112,8 @@ p2d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
 	class Loader : public gum::P2dSymLoader
 	{
 	protected:
-		virtual s2::SymPtr LoadSymbol(const std::string& filepath) const {
-			return ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		virtual s2::SymPtr LoadSymbol(const CU_STR& filepath) const override {
+			return ee::SymbolMgr::Instance()->FetchSymbol(filepath.c_str());
 		}
 	}; // Loader
 

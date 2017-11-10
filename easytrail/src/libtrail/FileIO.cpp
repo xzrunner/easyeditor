@@ -63,8 +63,8 @@ std::shared_ptr<s2::TrailEmitterCfg> FileIO::LoadMTConfig(const std::string& fil
 	class Loader : public gum::TrailSymLoader
 	{
 	protected:
-		virtual s2::SymPtr LoadSymbol(const std::string& filepath) const {
-			return ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		virtual s2::SymPtr LoadSymbol(const CU_STR& filepath) const override {
+			return ee::SymbolMgr::Instance()->FetchSymbol(filepath.c_str());
 		}
 	}; // Loader
 
