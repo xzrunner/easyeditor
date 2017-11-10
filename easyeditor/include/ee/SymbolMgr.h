@@ -18,6 +18,8 @@ class SymbolMgr
 public:
 	SymPtr FetchSymbol(const std::string& filepath, int type = s2::SYM_UNKNOWN);
 
+	void Insert(SymPtr& sym);
+
 	void Clear();
 
 	void Traverse(RefVisitor<Symbol>& visitor) const;

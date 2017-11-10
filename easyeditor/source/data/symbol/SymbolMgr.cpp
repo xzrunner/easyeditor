@@ -62,6 +62,12 @@ SymPtr SymbolMgr::FetchSymbol(const std::string& filepath, int type)
 	}
 }
 
+void SymbolMgr::Insert(SymPtr& sym)
+{
+	std::string fixed_path = gum::FilepathHelper::Format(sym->GetFilepath().c_str()).c_str();
+	m_syms.insert(std::make_pair(fixed_path, sym));
+}
+
 void SymbolMgr::Remove(const SymPtr& sym)
 {
 	std::string lowerpath = sym->GetFilepath();
