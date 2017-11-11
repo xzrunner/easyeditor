@@ -17,7 +17,7 @@ SpriteIO::SpriteIO()
 	m_anchor		= false;
 }
 
-void SpriteIO::LoadGeometry(s2::SprPtr& spr)
+void SpriteIO::LoadGeometry(const s2::SprPtr& spr)
 {
 	gum::SpriteIO::LoadGeometry(spr);
 
@@ -25,11 +25,11 @@ void SpriteIO::LoadGeometry(s2::SprPtr& spr)
 	ee_spr->SetPerspective(m_perspective);
 }
 
-void SpriteIO::StoreGeometry(const s2::SprPtr& spr)
+void SpriteIO::StoreGeometry(const s2::SprConstPtr& spr)
 {
 	gum::SpriteIO::StoreGeometry(spr);
 
-	auto ee_spr = std::dynamic_pointer_cast<Sprite>(spr);
+	auto ee_spr = std::dynamic_pointer_cast<const Sprite>(spr);
 	m_perspective = ee_spr->GetPerspective();
 }
 
@@ -58,7 +58,7 @@ void SpriteIO::StoreGeometry(Json::Value& val)
 }
 
 
-void SpriteIO::LoadInfo(s2::SprPtr& spr)
+void SpriteIO::LoadInfo(const s2::SprPtr& spr)
 {
 	gum::SpriteIO::LoadInfo(spr);
 
@@ -67,11 +67,11 @@ void SpriteIO::LoadInfo(s2::SprPtr& spr)
 	ee_spr->SetAnchor(m_anchor);
 }
 
-void SpriteIO::StoreInfo(const s2::SprPtr& spr)
+void SpriteIO::StoreInfo(const s2::SprConstPtr& spr)
 {
 	gum::SpriteIO::StoreInfo(spr);
 
-	auto ee_spr = std::dynamic_pointer_cast<Sprite>(spr);
+	auto ee_spr = std::dynamic_pointer_cast<const Sprite>(spr);
 	m_tag    = ee_spr->GetTag();
 	m_anchor = ee_spr->IsAnchor();
 }
@@ -81,7 +81,7 @@ void SpriteIO::LoadInfo(const Json::Value& val)
 	gum::SpriteIO::LoadInfo(val);
 
 	if (!val["tag"].isNull()) {
-		m_tag = val["tag"].asString().c_str();
+		m_tag = val["tag"].asString();
 	} else {
 		m_tag = "";
 	}

@@ -13,16 +13,16 @@ public:
 
 protected:
 	// geometry
-	virtual void LoadGeometry(s2::SprPtr& spr);
-	virtual void StoreGeometry(const s2::SprPtr& spr);
-	virtual void LoadGeometry(const Json::Value& val);
-	virtual void StoreGeometry(Json::Value& val);
+	virtual void LoadGeometry(const s2::SprPtr& spr) override;
+	virtual void StoreGeometry(const s2::SprConstPtr& spr) override;
+	virtual void LoadGeometry(const Json::Value& val) override;
+	virtual void StoreGeometry(Json::Value& val) override;
 
 	// info
-	virtual void LoadInfo(s2::SprPtr& spr);
-	virtual void StoreInfo(const s2::SprPtr& spr);
-	virtual void LoadInfo(const Json::Value& val);
-	virtual void StoreInfo(Json::Value& val);
+	virtual void LoadInfo(const s2::SprPtr& spr) override;
+	virtual void StoreInfo(const s2::SprConstPtr& spr) override;
+	virtual void LoadInfo(const Json::Value& val) override;
+	virtual void StoreInfo(Json::Value& val) override;
 
 public:
 	// geometry
