@@ -16,10 +16,10 @@ public:
 	PasteSymbolCaptureOP(wxWindow* wnd, EditPanelImpl* stage, LibraryPanel* library, 
 		PasteSymbolOffsetCMPT<PasteSymbolCaptureOP>* cmpt);
 
-	virtual bool OnMouseLeftDown(int x, int y);
-	virtual bool OnMouseMove(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y) override;
+	virtual bool OnMouseMove(int x, int y) override;
 
-	virtual bool Clear();
+	virtual bool Clear() override;
 
 private:
 	PasteSymbolOffsetCMPT<PasteSymbolCaptureOP>* m_cmpt;

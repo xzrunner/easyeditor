@@ -24,15 +24,15 @@ public:
 	 *  @interface
 	 *    ee::Symbol
 	 */
-	virtual void ReloadTexture() const;
-	virtual void Traverse(ee::RefVisitor<ee::Sprite>& visitor);
+	virtual void ReloadTexture() const override;
+	virtual void Traverse(ee::RefVisitor<ee::Sprite>& visitor) override;
 
 	void Load(const std::shared_ptr<gum::SpriteLoader>& spr_loader);
 
 	static ee::SymPtr Create() { return std::make_shared<Symbol>(); }
 
 protected:
-	virtual bool LoadResources();
+	virtual bool LoadResources() override;
 
 private:
 	void LoadEE();

@@ -16,10 +16,10 @@ class Task
 {
 public:
 	
-	virtual void LoadFromFile(const char* filename);
-	virtual void StoreToFile(const char* filename) const;
+	virtual void LoadFromFile(const char* filename) override;
+	virtual void StoreToFile(const char* filename) const override;
 
-	virtual void Clear();
+	virtual void Clear() override;
 
 	MainPanel* GetMainPanel() { return m_main_panel; }
 	StagePanel* GetStagePanel() { return m_stage_panel; }

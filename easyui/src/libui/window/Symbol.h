@@ -22,15 +22,15 @@ public:
 	 *  @interface
 	 *    s2::Symbol
 	 */
-	virtual int Type() const;
-	virtual void Traverse(const s2::SymbolVisitor& visitor) {}
-	virtual s2::RenderReturn DrawTree(cooking::DisplayList* dlist, const s2::RenderParams& rp, const s2::Sprite* spr = nullptr) const;
+	virtual int Type() const override;
+	virtual void Traverse(const s2::SymbolVisitor& visitor) override {}
+	virtual s2::RenderReturn DrawTree(cooking::DisplayList* dlist, const s2::RenderParams& rp, const s2::Sprite* spr = nullptr) const override;
 
 	/**
 	 *  @interface
 	 *    ee::Symbol
 	 */
-	virtual void Traverse(ee::RefVisitor<ee::Sprite>& visitor);
+	virtual void Traverse(ee::RefVisitor<ee::Sprite>& visitor) override;
 
 	AnchorMgr& GetAnchorMgr() { return m_anchors; }
 	const AnchorMgr& GetAnchorMgr() const { return m_anchors; }
@@ -51,9 +51,9 @@ public:
 	static ee::SymPtr Create() { return std::make_shared<Symbol>(); }
 
 protected:
-	virtual sm::rect GetBoundingImpl(const s2::Sprite* spr = nullptr, const s2::Actor* actor = NULL, bool cache = true) const;
+	virtual sm::rect GetBoundingImpl(const s2::Sprite* spr = nullptr, const s2::Actor* actor = NULL, bool cache = true) const override;
 
-	virtual bool LoadResources();
+	virtual bool LoadResources() override;
 
 private:
 	int m_width, m_height;

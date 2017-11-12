@@ -17,7 +17,7 @@ public:
 	Sprite& operator = (const Sprite& spr);
 	Sprite(const s2::SymPtr& sym, uint32_t id = -1);
 
-	virtual bool Update(const s2::UpdateParams& up);
+	virtual bool Update(const s2::UpdateParams& up) override;
 
 	static ee::SprPtr Create(const std::shared_ptr<ee::Symbol>& sym);
 

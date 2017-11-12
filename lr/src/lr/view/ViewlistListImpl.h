@@ -14,8 +14,8 @@ public:
 	ViewlistListImpl(wxWindow* wnd, ee::EditPanelImpl* stage,
 		ee::MultiSpritesImpl* sprites_impl);
 
-	virtual void OnSelected(ee::ViewlistList* list, int idx, bool clear);
-	virtual void OnDoubleClicked(ee::ViewlistList* list, int idx);
+	virtual void OnSelected(ee::ViewlistList* list, int idx, bool clear) override;
+	virtual void OnDoubleClicked(ee::ViewlistList* list, int idx) override;
 
 private:
 	OpenSymbolDialog m_open_symbol;

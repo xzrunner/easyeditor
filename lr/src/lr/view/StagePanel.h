@@ -29,19 +29,19 @@ public:
 	//
 	// ee::EditPanel interface
 	//
-	virtual bool UpdateStage();
+	virtual bool UpdateStage() override;
 
 	//
 	// ee::MultiSpritesImpl interface
 	//
 	virtual void TraverseSprites(ee::RefVisitor<ee::Sprite>& visitor, 
-		ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
+		ee::DataTraverseType type = ee::DT_ALL, bool order = true) const override;
 
 	//
 	// ee::MultiShapesImpl interface
 	//
 	virtual void TraverseShapes(ee::Visitor<ee::Shape>& visitor, 
-		ee::DataTraverseType type = ee::DT_ALL) const;
+		ee::DataTraverseType type = ee::DT_ALL) const override;
 
 	void EnableObserve(bool enable);
 
@@ -70,13 +70,13 @@ public:
 	const std::string& GetResDir() const { return m_res_dir; }
 
 protected:
-	virtual void OnMouseHook(wxMouseEvent& event);
-	virtual void OnKeyHook(int key_code);
+	virtual void OnMouseHook(wxMouseEvent& event) override;
+	virtual void OnKeyHook(int key_code) override;
 
 	//
 	//	interface Observer
 	//
-	virtual void OnNotify(int sj_id, void* ud);
+	virtual void OnNotify(int sj_id, void* ud) override;
 
 private:
 	void ChangeEditOP();

@@ -13,10 +13,10 @@ class ControlCameraOP : public ee::EditOP
 public:
 	ControlCameraOP(wxWindow* wnd, ee::EditPanelImpl* stage);
 
-	virtual bool OnKeyDown(int keyCode);
-	virtual bool OnMouseLeftDown(int x, int y);
-	virtual bool OnMouseDrag(int x, int y);
-	virtual bool OnMouseMove(int x, int y);
+	virtual bool OnKeyDown(int keyCode) override;
+	virtual bool OnMouseLeftDown(int x, int y) override;
+	virtual bool OnMouseDrag(int x, int y) override;
+	virtual bool OnMouseMove(int x, int y) override;
 
 private:
 	StageCanvas* m_canvas;

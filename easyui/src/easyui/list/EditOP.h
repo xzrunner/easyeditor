@@ -18,11 +18,11 @@ class EditOP : public ee::ArrangeSpriteOP<ee::SelectSpritesOP>, public EditClipb
 public:
 	EditOP(StagePanel* stage, ee::PropertySettingPanel* property);
 
-	virtual bool OnMouseLeftDown(int x, int y);
-	virtual bool OnMouseLeftUp(int x, int y);
-	virtual bool OnMouseDrag(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y) override;
+	virtual bool OnMouseLeftUp(int x, int y) override;
+	virtual bool OnMouseDrag(int x, int y) override;
 
-	virtual bool OnDraw() const;
+	virtual bool OnDraw() const override;
 
 private:
 	static const int NODE_RADIUS = 10;

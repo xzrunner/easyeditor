@@ -36,7 +36,7 @@ ee::SprPtr Sprite::Create(const std::shared_ptr<ee::Symbol>& sym)
 	return std::make_shared<Sprite>(sym);
 }
 
-void Sprite::Load(const Json::Value& val, const CU_STR& dir)
+void Sprite::Load(const Json::Value& val, const std::string& dir)
 {
 	ee::Sprite::Load(val);
 
@@ -44,7 +44,7 @@ void Sprite::Load(const Json::Value& val, const CU_STR& dir)
 	gum::SkeletonIO::Load(val[key], m_pose);
 }
 
-void Sprite::Store(Json::Value& val, const CU_STR& dir) const
+void Sprite::Store(Json::Value& val, const std::string& dir) const
 {
 	ee::Sprite::Store(val);
 

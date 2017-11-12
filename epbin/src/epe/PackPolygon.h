@@ -17,8 +17,8 @@ class PackPolygon : public IPackNode
 public:
 	PackPolygon(lua_State* L, uint32_t id);
 
-	virtual size_t Size() const;
-	virtual void Store(std::ofstream& fout) const;
+	virtual size_t Size() const override;
+	virtual void Store(std::ofstream& fout) const override;
 
 private:
 	void Load(lua_State* L);

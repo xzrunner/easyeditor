@@ -16,7 +16,7 @@ public:
 	PasteSymbolPhysicsOP(wxWindow* stage_wnd, EditPanelImpl* stage, 
 		LibraryPanel* library, PhysicsPanelImpl* physicsImpl, float* pScale = NULL);
 
-	virtual bool OnMouseLeftDown(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y) override;
 
 	void setStatic(bool bStatic) { m_bStatic = bStatic; }
 

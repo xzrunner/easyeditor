@@ -11,7 +11,7 @@ class LibraryFontBlankList : public LibraryList
 public:
 	LibraryFontBlankList(LibraryPage* page);
 
-	virtual void OnListDoubleClicked(wxCommandEvent& event);
+	virtual void OnListDoubleClicked(wxCommandEvent& event) override;
 
 }; // LibraryFontBlankList
 

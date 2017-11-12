@@ -16,10 +16,10 @@ namespace ee
 		SetSprite##name##ColorAOP(const SprPtr& spr, const s2::Color& color);                \
 		SetSprite##name##ColorAOP(const std::vector<SprPtr>& sprs, const s2::Color& color);  \
 	                                                                                         \
-		virtual void Undo();                                                                 \
-		virtual void Redo();                                                                 \
+		virtual void Undo() override;                                                                 \
+		virtual void Redo() override;                                                                 \
 	                                                                                         \
-		virtual Json::Value Store(const std::vector<SprPtr>& sprs) const;                   \
+		virtual Json::Value Store(const std::vector<SprPtr>& sprs) const override;                   \
 	                                                                                         \
 	private:                                                                                 \
 		std::vector<SprPtr> m_sprs;                                                          \

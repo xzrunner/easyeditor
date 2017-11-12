@@ -14,7 +14,7 @@ public:
 	ZoomViewState(EditPanelImpl* stage);
 	virtual ~ZoomViewState();
 	
-	virtual bool OnMouseWheelRotation(int x, int y, int direction);
+	virtual bool OnMouseWheelRotation(int x, int y, int direction) override;
 
 private:
 	EditPanelImpl* m_stage;

@@ -17,10 +17,10 @@ public:
 	SliderCtrlOne(wxPanel* parent, const char* title, const char* name, 
 		UICallback* cb, int key, const SliderItem& item, float scale_slider2text = 1);
 
-	virtual void Update();
-	virtual void Load(const Json::Value& val, int version);
-	virtual void Store(Json::Value& val);
-	virtual void Load();
+	virtual void Update() override;
+	virtual void Load(const Json::Value& val, int version) override;
+	virtual void Store(Json::Value& val) override;
+	virtual void Load() override;
 
 private:
 	void OnSetValue(wxScrollEvent& event);

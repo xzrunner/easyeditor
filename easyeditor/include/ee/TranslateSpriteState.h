@@ -16,11 +16,11 @@ public:
 	TranslateSpriteState(SpriteSelection* selection, const sm::vec2& first_pos);
 	virtual ~TranslateSpriteState();
 
-	virtual	void OnMousePress(const sm::vec2& pos);
-	virtual void OnMouseRelease(const sm::vec2& pos);
-	virtual	bool OnMouseDrag(const sm::vec2& pos);
+	virtual void OnMousePress(const sm::vec2& pos) override;
+	virtual void OnMouseRelease(const sm::vec2& pos) override;
+	virtual	bool OnMouseDrag(const sm::vec2& pos) override;
 
-	virtual bool OnDirectionKeyDown(int type);
+	virtual bool OnDirectionKeyDown(int type) override;
 
 protected:
 	virtual void Translate(const sm::vec2& offset);
@@ -33,7 +33,7 @@ private:
 	{
 	public:
 		TranslateVisitor(const sm::vec2& offset) : m_offset(offset) {}
-		virtual void Visit(const SprPtr& spr, bool& next);
+		virtual void Visit(const SprPtr& spr, bool& next) override;
 	private:
 		sm::vec2 m_offset;
 	}; // TranslateVisitor

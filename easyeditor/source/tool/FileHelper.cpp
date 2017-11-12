@@ -51,13 +51,13 @@ void FileHelper::FetchAllFiles(const std::string& dirpath, wxArrayString& files)
 		DirTraverser(wxArrayString& files) 
 			: m_files(files) {}
 
-		virtual wxDirTraverseResult OnFile(const wxString& filename)
+		virtual wxDirTraverseResult OnFile(const wxString& filename) override
 		{
 			m_files.Add(filename);
 			return wxDIR_CONTINUE;
 		}
 
-		virtual wxDirTraverseResult OnDir(const wxString& dirname)
+		virtual wxDirTraverseResult OnDir(const wxString& dirname) override
 		{
 			return wxDIR_CONTINUE;
 		}
@@ -86,13 +86,13 @@ void FileHelper::FetchAllFiles(const std::string& dirpath, const std::vector<std
 			}
 		}
 
-		virtual wxDirTraverseResult OnFile(const wxString& filename)
+		virtual wxDirTraverseResult OnFile(const wxString& filename) override
 		{
 			m_files.Add(filename);
 			return wxDIR_CONTINUE;
 		}
 
-		virtual wxDirTraverseResult OnDir(const wxString& dirname)
+		virtual wxDirTraverseResult OnDir(const wxString& dirname) override
 		{
 			if (m_ignore_dirs.find(dirname.ToStdString().c_str()) != m_ignore_dirs.end()) {
 				return wxDIR_IGNORE;
@@ -121,7 +121,7 @@ void FileHelper::FetchAllFiles(const std::string& dirpath, wxArrayString& files,
 		DirTraverser(wxArrayString& files, int type) 
 			: files(files), type(type) {}
 
-		virtual wxDirTraverseResult OnFile(const wxString& filename)
+		virtual wxDirTraverseResult OnFile(const wxString& filename) override
 		{
 			if (SymbolFile::Instance()->Type(filename.ToStdString().c_str()) == type) {
 				files.Add(filename);
@@ -129,7 +129,7 @@ void FileHelper::FetchAllFiles(const std::string& dirpath, wxArrayString& files,
 			return wxDIR_CONTINUE;
 		}
 
-		virtual wxDirTraverseResult OnDir(const wxString& dirname)
+		virtual wxDirTraverseResult OnDir(const wxString& dirname) override
 		{
 			return wxDIR_CONTINUE;
 		}
@@ -154,12 +154,12 @@ void FileHelper::FetchCurrDirs(const std::string& dirpath, wxArrayString& dirs)
 		DirTraverser(wxArrayString& files) 
 			: m_files(files) {}
 
-		virtual wxDirTraverseResult OnFile(const wxString& filename)
+		virtual wxDirTraverseResult OnFile(const wxString& filename) override
 		{
 			return wxDIR_CONTINUE;
 		}
 
-		virtual wxDirTraverseResult OnDir(const wxString& dirname)
+		virtual wxDirTraverseResult OnDir(const wxString& dirname) override
 		{
 			m_files.Add(dirname);
 			return wxDIR_IGNORE;

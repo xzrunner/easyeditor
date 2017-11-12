@@ -17,14 +17,14 @@ public:
 	TranslateSpriteState(StagePanel* stage, ee::SpriteSelection* selection, 
 		const sm::vec2& first_pos, AnchorMgr* anchor_mgr);
 
-	virtual void OnMouseRelease(const sm::vec2& pos);
+	virtual void OnMouseRelease(const sm::vec2& pos) override;
 
 private:
 	class Visitor : public ee::Visitor<ee::Sprite>
 	{
 	public:
 		Visitor(AnchorMgr* anchor_mgr) : m_anchor_mgr(anchor_mgr) {}
-		virtual void Visit(const ee::SprPtr& spr, bool& next);
+		virtual void Visit(const ee::SprPtr& spr, bool& next) override;
 	private:
 		AnchorMgr* m_anchor_mgr;
 	}; // Visitor

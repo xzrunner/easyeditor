@@ -19,7 +19,7 @@ public:
 	}
 
 protected:
-	virtual void OnDrawSprites() const;
+	virtual void OnDrawSprites() const override;
 
 	void OnMouse(wxMouseEvent& event);
 	void OnKeyDown(wxKeyEvent& event);

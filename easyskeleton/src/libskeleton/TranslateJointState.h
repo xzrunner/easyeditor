@@ -17,8 +17,8 @@ class TranslateJointState : public ee::ArrangeSpriteState
 public:
 	TranslateJointState(const std::shared_ptr<Joint>& joint, const sm::vec2& first_pos);
 
-	virtual void OnMouseRelease(const sm::vec2& pos);
-	virtual	bool OnMouseDrag(const sm::vec2& pos);
+	virtual void OnMouseRelease(const sm::vec2& pos) override;
+	virtual	bool OnMouseDrag(const sm::vec2& pos) override;
 
 private:
 	void Translate(const sm::vec2& trans);

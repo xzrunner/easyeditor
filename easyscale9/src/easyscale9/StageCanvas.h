@@ -20,7 +20,7 @@ public:
 	}
 
 protected:
-	virtual void OnDrawSprites() const;
+	virtual void OnDrawSprites() const override;
 
 private:
 	void DrawGuideLines() const;

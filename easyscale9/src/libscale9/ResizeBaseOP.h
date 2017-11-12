@@ -17,11 +17,11 @@ class ResizeBaseOP : public ee::ZoomViewOP
 public:
 	ResizeBaseOP(wxWindow* wnd, ee::EditPanelImpl* stage, const std::shared_ptr<Symbol>& sym);
 
-	virtual bool OnMouseLeftDown(int x, int y);
-	virtual bool OnMouseLeftUp(int x, int y);
-	virtual bool OnMouseDrag(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y) override;
+	virtual bool OnMouseLeftUp(int x, int y) override;
+	virtual bool OnMouseDrag(int x, int y) override;
 
-	virtual bool OnDraw() const;
+	virtual bool OnDraw() const override;
 
 	void setSymbol(const std::shared_ptr<Symbol>& sym) const {
 		m_sym = sym;

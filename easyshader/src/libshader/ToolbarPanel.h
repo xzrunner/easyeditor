@@ -30,7 +30,7 @@ public:
 	void Clear();
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 private:
 	void AddSlider(SliderCtrl* slider);

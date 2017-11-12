@@ -12,7 +12,7 @@ public:
 	PropertySettingPanel(wxWindow* parent);
 
 protected:
-	virtual void OnSpriteSelected(const ee::SprPtr& spr, bool clear);
+	virtual void OnSpriteSelected(const ee::SprPtr& spr, bool clear) override;
 
 }; // PropertySettingPanel
  

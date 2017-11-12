@@ -13,7 +13,7 @@ class RectQueryVisitor : public RefVisitor<Sprite>
 {
 public:
 	RectQueryVisitor(const sm::rect& rect, bool contain);
-	virtual void Visit(const SprPtr& spr, bool& next);
+	virtual void Visit(const SprPtr& spr, bool& next) override;
 
 	const std::vector<SprPtr>& GetSelected() const { return m_selected; }
 

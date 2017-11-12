@@ -20,9 +20,9 @@ public:
 	RotateSpriteState(StagePanel* stage,
 		const ee::SpriteSelection& selection);
 
-	virtual void OnMousePress(const sm::ivec2& pos);
-	virtual void OnMouseRelease(const sm::ivec2& pos);
-	virtual void OnMouseMove(const sm::ivec2& pos);	
+	virtual void OnMousePress(const sm::ivec2& pos) override;
+	virtual void OnMouseRelease(const sm::ivec2& pos) override;
+	virtual void OnMouseMove(const sm::ivec2& pos) override;	
 
 private:
 	void Rotate(const e3d::Camera& cam, const sm::ivec2& start, const sm::ivec2& end);
@@ -33,7 +33,7 @@ private:
 	public:
 		Visitor(StagePanel* stage, const e3d::Camera& cam, const sm::ivec2& start, const sm::ivec2& end) 
 			: m_stage(stage), m_cam(cam), m_start(start), m_end(end) {}
-		virtual void Visit(const ee::SprPtr& spr, bool& next);
+		virtual void Visit(const ee::SprPtr& spr, bool& next) override;
 
 	private:
 		StagePanel* m_stage;

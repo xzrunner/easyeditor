@@ -17,7 +17,7 @@ public:
 		ee::PropertySettingPanel* property, StagePanel* stage);
 	
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 private:
 	void onUpLevelPress(wxCommandEvent& event);

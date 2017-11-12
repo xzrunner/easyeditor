@@ -18,17 +18,17 @@ public:
 	//
 	// UICallback interface
 	//
-	virtual void SetValue(int key, const ee::UICallback::Data& data);
-	virtual void GetValue(int key, ee::UICallback::Data& data);
+	virtual void SetValue(int key, const ee::UICallback::Data& data) override;
+	virtual void GetValue(int key, ee::UICallback::Data& data) override;
 
-	virtual void Load(const Json::Value& val, const std::string& dir);
-	virtual void Store(Json::Value& val, const std::string& dir) const;
+	virtual void Load(const Json::Value& val, const std::string& dir) override;
+	virtual void Store(Json::Value& val, const std::string& dir) const override;
 
 protected:
-	virtual void InitLayout(wxSizer* sizer);
-	virtual std::string GetTitle() const { return ""; }
+	virtual void InitLayout(wxSizer* sizer) override;
+	virtual std::string GetTitle() const override { return ""; }
 
-	virtual void UpdateBtnColor();
+	virtual void UpdateBtnColor() override;
 
 private:
 	void OnSetBeginColor(wxCommandEvent& event);

@@ -17,7 +17,7 @@ public:
 		StagePanel* editPanel, ee::PropertySettingPanel* property);
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 }; // FixtureEditCmpt
 

@@ -30,13 +30,13 @@ public:
 	 *  @interface
 	 *    s2::Sprite
 	 */
-	virtual void SetSymbol(const s2::SymPtr& sym);
+	virtual void SetSymbol(const s2::SymPtr& sym) override;
 
 	/**
 	 *  @interface
 	 *    UserDataImpl
 	 */
-	virtual void ClearUserData(bool deletePtr);
+	virtual void ClearUserData(bool deletePtr) override;
 
 	virtual void SetPosition(const sm::vec2& pos);
 	virtual void SetAngle(float angle);

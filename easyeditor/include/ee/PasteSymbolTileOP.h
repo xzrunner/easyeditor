@@ -18,11 +18,11 @@ public:
 	PasteSymbolTileOP(wxWindow* wnd, EditPanelImpl* stage, MultiSpritesImpl* sprites_impl, 
 		LibraryPanel* library, PasteSymbolOffsetCMPT<PasteSymbolTileOP>* cmpt);
 
-	virtual bool OnMouseLeftDown(int x, int y);
-	virtual bool OnMouseRightDown(int x, int y);
-	virtual bool OnMouseMove(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y) override;
+	virtual bool OnMouseRightDown(int x, int y) override;
+	virtual bool OnMouseMove(int x, int y) override;
 
-	virtual bool OnDraw() const;
+	virtual bool OnDraw() const override;
 
 private:
 	class NearestQueryVisitor : public RefVisitor<Sprite>
@@ -30,7 +30,7 @@ private:
 	public:
 		NearestQueryVisitor(const sm::vec2& pos);
 
-		virtual void Visit(const SprPtr& spr, bool& next);
+		virtual void Visit(const SprPtr& spr, bool& next) override;
 
 		const SprPtr& GetResult() const { return m_result;  }
 

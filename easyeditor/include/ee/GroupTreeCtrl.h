@@ -45,7 +45,7 @@ public:
 	void EnableExpand(bool enable) { m_expand_enable = enable; }
 
 protected:
-	virtual void OnNotify(int sj_id, void* ud);
+	virtual void OnNotify(int sj_id, void* ud) override;
 
 private:
 	wxTreeItemId AddNode(wxTreeItemId parent, const std::string& name, 

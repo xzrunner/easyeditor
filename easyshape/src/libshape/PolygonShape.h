@@ -24,32 +24,32 @@ public:
 	 *  @interface
 	 *    s2::Shape
 	 */
-	virtual PolygonShape* Clone() const { return new PolygonShape(*this); }
-	virtual bool IsContain(const sm::vec2& pos) const { return s2::PolylineShape::IsContain(pos); }
-	virtual bool IsIntersect(const sm::rect& rect) const { return s2::PolylineShape::IsIntersect(rect); }
-	virtual void Draw(const s2::RenderParams& rp) const;
+	virtual PolygonShape* Clone() const override { return new PolygonShape(*this); }
+	virtual bool IsContain(const sm::vec2& pos) const override { return s2::PolylineShape::IsContain(pos); }
+	virtual bool IsIntersect(const sm::rect& rect) const override { return s2::PolylineShape::IsIntersect(rect); }
+	virtual void Draw(const s2::RenderParams& rp) const override;
 
 	/**
 	 *  @interface
 	 *    ee::Shape
 	 */
-	virtual const char* GetShapeDesc() const { return "polygon"; }
-	virtual void Translate(const sm::vec2& offset);
-	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
-	virtual void LoadFromFile(const Json::Value& value, const std::string& dir);
-	virtual void StoreToFile(Json::Value& value, const std::string& dir) const;
+	virtual const char* GetShapeDesc() const override { return "polygon"; }
+	virtual void Translate(const sm::vec2& offset) override;
+	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage) override;
+	virtual void LoadFromFile(const Json::Value& value, const std::string& dir) override;
+	virtual void StoreToFile(Json::Value& value, const std::string& dir) const override;
 
-	virtual void ReloadTexture();
+	virtual void ReloadTexture() override;
 
 	/*
 	 *  interface PolylineShape
 	 */
-	virtual void AddVertex(int index, const sm::vec2& pos);
-	virtual void RemoveVertex(const sm::vec2& pos);
-	virtual void ChangeVertex(const sm::vec2& from, const sm::vec2& to);
-	virtual void SetVertices(const CU_VEC<sm::vec2>& vertices);
-	virtual const CU_VEC<sm::vec2>& GetVertices() const { return m_vertices; }
-	virtual bool IsClosed() const { return true; }
+	virtual void AddVertex(int index, const sm::vec2& pos) override;
+	virtual void RemoveVertex(const sm::vec2& pos) override;
+	virtual void ChangeVertex(const sm::vec2& from, const sm::vec2& to) override;
+	virtual void SetVertices(const CU_VEC<sm::vec2>& vertices) override;
+	virtual const CU_VEC<sm::vec2>& GetVertices() const override { return m_vertices; }
+	virtual bool IsClosed() const override { return true; }
 
 	void SetMaterialColor(const s2::Color& color);
 	void SetMaterialTexture(const std::shared_ptr<ee::ImageSymbol>& image);

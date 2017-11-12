@@ -11,7 +11,7 @@ class DrawCosineCurveOP : public DrawPolylineOP
 public:
 	DrawCosineCurveOP(wxWindow* wnd, ee::EditPanelImpl* stage);
 
-	virtual bool OnMouseLeftDClick(int x, int y);
+	virtual bool OnMouseLeftDClick(int x, int y) override;
 
 }; // DrawCosineCurveOP
 

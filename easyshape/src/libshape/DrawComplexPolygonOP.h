@@ -16,7 +16,7 @@
 //	DrawComplexPolygonOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
 //		ee::MultiShapesImpl* shapes_impl);
 //
-//	virtual bool OnMouseLeftDClick(int x, int y);
+//	virtual bool OnMouseLeftDClick(int x, int y) override;
 //
 //private:
 //	ComplexPolygonShape* CreateComplexPoly(const CU_VEC<sm::vec2>& polyline);

@@ -18,7 +18,7 @@ public:
 		MultiSpritesImpl* sprites_impl, LibraryPanel* library);
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 private:
 	PasteSymbolRandomWidget* m_random_widget;

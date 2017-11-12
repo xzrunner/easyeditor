@@ -19,13 +19,13 @@ public:
 	// MultiShapesImpl interface
 	//
 	virtual void TraverseShapes(RefVisitor<ee::Shape>& visitor, 
-		DataTraverseType type = DT_ALL) const;
+		DataTraverseType type = DT_ALL) const override;
 
 protected:
 	//
 	//	interface Observer
 	//
-	virtual void OnNotify(int sj_id, void* ud);
+	virtual void OnNotify(int sj_id, void* ud) override;
 
 private:
 	void InitSubjects();

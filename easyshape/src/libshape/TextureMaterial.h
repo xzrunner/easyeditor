@@ -16,8 +16,8 @@ public:
 	TextureMaterial();
 	TextureMaterial(const std::shared_ptr<ee::ImageSymbol>& image);
 
-	virtual Json::Value Store(const std::string& dirpath) const;
-	virtual void Translate(const sm::vec2& offset);
+	virtual Json::Value Store(const std::string& dirpath) const override;
+	virtual void Translate(const sm::vec2& offset) override;
 
 	const std::shared_ptr<const ee::ImageSymbol>& GetImage() const;
 

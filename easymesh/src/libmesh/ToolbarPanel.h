@@ -22,7 +22,7 @@ public:
 	void SetEditType(int pm_mesh_type);
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 	void OnSetSpeed(wxCommandEvent& event);
 

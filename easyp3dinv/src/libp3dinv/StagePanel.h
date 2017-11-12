@@ -17,7 +17,7 @@ public:
 	virtual ~StagePanel();
 
 protected:
-	virtual void OnSizeDebug(wxSizeEvent& event);
+	virtual void OnSizeDebug(wxSizeEvent& event) override;
 
 public:
 	ParticleSystem* m_ps;

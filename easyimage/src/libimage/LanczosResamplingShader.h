@@ -14,7 +14,7 @@
 //	void SetTexelSize(float width, float height);
 //	
 //protected:
-//	virtual void LoadShader();
+//	virtual void LoadShader() override;
 //
 //private:
 //	GLuint m_texel_width, m_texel_height;

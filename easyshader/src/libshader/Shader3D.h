@@ -14,7 +14,7 @@ class Shader3D : public Shader
 public:
 	Shader3D(const std::string& vert_filepath, const std::string& frag_filepath);
 
-	virtual void BindShader();
+	virtual void BindShader() override;
 
 private:
 	class ShaderImpl : public e3d::ModelShader, private Shader::ShaderImpl
@@ -23,9 +23,9 @@ private:
 		ShaderImpl(const std::string& vert_filepath, const std::string& frag_filepath);
 
 	protected:
-		virtual void LoadShader();
+		virtual void LoadShader() override;
 
-		virtual void SetNormalMatrix(const sm::mat3& noraml_mat);
+		virtual void SetNormalMatrix(const sm::mat3& noraml_mat) override;
 
 	private:
 		GLuint m_normal_matrix;

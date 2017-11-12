@@ -15,7 +15,7 @@ class SpriteDropTarget : public wxTextDropTarget
 public:
 	SpriteDropTarget(ee::EditPanelImpl* stage, ee::LibraryPanel* library);
 
-	virtual bool OnDropText(wxCoord x, wxCoord y, const wxString& data);
+	virtual bool OnDropText(wxCoord x, wxCoord y, const wxString& data) override;
 
 private:
 	ee::EditPanelImpl* m_stage;

@@ -9,8 +9,8 @@ namespace etexpacker
 class DirectlyArrange : public BaseStrategy
 {
 public:
-	virtual void Arrange(const std::vector<ee::ImageSprite*>& sprs);
-	virtual int GetTextureAccount() const { return 1; }
+	virtual void Arrange(const std::vector<ee::ImageSprite*>& sprs) override;
+	virtual int GetTextureAccount() const override { return 1; }
 
 }; // DirectlyArrange
 

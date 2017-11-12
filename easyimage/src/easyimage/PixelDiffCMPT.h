@@ -15,7 +15,7 @@ public:
 		StagePanel* stage);
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 private:
 	StagePanel* m_stage;

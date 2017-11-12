@@ -21,7 +21,7 @@ public:
 	LayersMgrWidget* getLayersMgr() { return m_layersMgr; }
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 private:
 	LayersMgrWidget* m_layersMgr;

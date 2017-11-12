@@ -12,7 +12,7 @@ public:
 	Shader2D(const std::string& vert_filepath, const std::string& frag_filepath);
 	virtual ~Shader2D();
 
-	virtual void BindShader();
+	virtual void BindShader() override;
 
 	void SetTimeUniform(float time);
 	void SetInputUniform(float x, float y);
@@ -27,7 +27,7 @@ private:
 		ShaderImpl(const std::string& vert_filepath, const std::string& frag_filepath);
 
 	protected:
-		virtual void LoadShader();
+		virtual void LoadShader() override;
 
 	}; // ShaderImpl
 

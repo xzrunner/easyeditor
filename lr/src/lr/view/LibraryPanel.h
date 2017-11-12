@@ -22,8 +22,8 @@ class LibraryPanel : public ee::LibraryPanel
 public:
 	LibraryPanel(wxWindow* parent);
 
-	virtual void OnPageChanged(wxBookCtrlEvent& event);
-	virtual void OnPageChanging(wxBookCtrlEvent& event);
+	virtual void OnPageChanged(wxBookCtrlEvent& event) override;
+	virtual void OnPageChanging(wxBookCtrlEvent& event) override;
 
 	void LoadFromFile(const Json::Value& value, const CU_STR& dir);
 	void StoreToFile(Json::Value& value, const CU_STR& dir) const;

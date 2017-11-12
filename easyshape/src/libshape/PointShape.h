@@ -20,23 +20,23 @@ public:
 	 *  @interface
 	 *    s2::Shape
 	 */
-	virtual PointShape* Clone() const { return new PointShape(*this); }
-	virtual bool IsContain(const sm::vec2& pos) const { return s2::PointShape::IsContain(pos); }
-	virtual bool IsIntersect(const sm::rect& rect) const { return s2::PointShape::IsIntersect(rect); }
-	virtual void Draw(const s2::RenderParams& rp) const { s2::PointShape::Draw(rp); }
+	virtual PointShape* Clone() const override { return new PointShape(*this); }
+	virtual bool IsContain(const sm::vec2& pos) const override { return s2::PointShape::IsContain(pos); }
+	virtual bool IsIntersect(const sm::rect& rect) const override { return s2::PointShape::IsIntersect(rect); }
+	virtual void Draw(const s2::RenderParams& rp) const override { s2::PointShape::Draw(rp); }
 
 	/**
 	 *  @interface
 	 *    ee::Shape
 	 */
-	virtual const char* GetShapeDesc() const { return "point"; }
-	virtual void Translate(const sm::vec2& offset) { SetPos(m_pos + offset); }
-	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage) { return NULL; }
-	virtual void LoadFromFile(const Json::Value& value, const std::string& dir);
-	virtual void StoreToFile(Json::Value& value, const std::string& dir) const;
+	virtual const char* GetShapeDesc() const override { return "point"; }
+	virtual void Translate(const sm::vec2& offset) override { SetPos(m_pos + offset); }
+	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage) override { return NULL; }
+	virtual void LoadFromFile(const Json::Value& value, const std::string& dir) override;
+	virtual void StoreToFile(Json::Value& value, const std::string& dir) const override;
 
 protected:
-	virtual void UpdateBounding() { s2::PointShape::UpdateBounding(); }
+	virtual void UpdateBounding() override { s2::PointShape::UpdateBounding(); }
 
 }; // PointShape
 

@@ -21,19 +21,19 @@ public:
 	//
 	// interface PropertySetting
 	//
-	virtual void OnPropertyGridChange(const std::string& name, const wxAny& value);
+	virtual void OnPropertyGridChange(const std::string& name, const wxAny& value) override;
 
 protected:
 	//
 	// interface PropertySetting
 	//
-	virtual void UpdateProperties(wxPropertyGrid* pg);
-	virtual void InitProperties(wxPropertyGrid* pg);
+	virtual void UpdateProperties(wxPropertyGrid* pg) override;
+	virtual void InitProperties(wxPropertyGrid* pg) override;
 
 	//
 	// interface Observer
 	//
-	virtual void OnNotify(int sj_id, void* ud);
+	virtual void OnNotify(int sj_id, void* ud) override;
 
 	SprPtr GetSprite();
 

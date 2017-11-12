@@ -17,7 +17,7 @@ public:
 	ToolbarPanel(wxWindow* parent, StagePanel* stage, const std::shared_ptr<Sprite>& spr);
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 private:
 	void InitSizeLayout(wxSizer* top_sizer);

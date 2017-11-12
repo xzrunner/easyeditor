@@ -10,9 +10,9 @@ class IDemo
 {
 public:
 	virtual ~IDemo() {}
-	virtual void Load();
-	virtual void Update();
-	virtual void Draw() const;
+	virtual void Load() override;
+	virtual void Update() override;
+	virtual void Draw() const override;
 
 protected:
 	mutable int m_verts_per_frame;

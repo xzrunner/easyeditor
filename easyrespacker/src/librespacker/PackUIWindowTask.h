@@ -12,8 +12,8 @@ public:
 	PackUIWindowTask(const std::string& filepath, const Json::Value& value);
 	virtual ~PackUIWindowTask();
 
-	virtual void OnKnownPackID(const std::string& filepath, int id);
-	virtual void Output(const std::string& dir, Json::Value& value) const;
+	virtual void OnKnownPackID(const std::string& filepath, int id) override;
+	virtual void Output(const std::string& dir, Json::Value& value) const override;
 
 	static std::string GetWrapperFilepath(const std::string& filepath);
 

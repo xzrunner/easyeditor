@@ -13,7 +13,7 @@ public:
 	PreviewStage(wxWindow* parent, wxTopLevelWindow* frame,
 		ee::PlayControl& control);
 	
-	virtual bool UpdateStage();
+	virtual bool UpdateStage() override;
 	
 private:
 	ee::PlayControl& m_control;

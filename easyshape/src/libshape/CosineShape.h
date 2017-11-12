@@ -19,25 +19,25 @@ public:
 	 *  @interface
 	 *    s2::Shape
 	 */
-	virtual CosineShape* Clone() const { return new CosineShape(*this); }
-	virtual bool IsContain(const sm::vec2& pos) const { return s2::CosineShape::IsContain(pos); }
-	virtual bool IsIntersect(const sm::rect& rect) const { return s2::CosineShape::IsIntersect(rect); }
-	virtual void Draw(const s2::RenderParams& rp) const { s2::CosineShape::Draw(rp); }
+	virtual CosineShape* Clone() const override { return new CosineShape(*this); }
+	virtual bool IsContain(const sm::vec2& pos) const override { return s2::CosineShape::IsContain(pos); }
+	virtual bool IsIntersect(const sm::rect& rect) const override { return s2::CosineShape::IsIntersect(rect); }
+	virtual void Draw(const s2::RenderParams& rp) const override { s2::CosineShape::Draw(rp); }
 
 	/**
 	 *  @interface
 	 *    ee::Shape
 	 */
-	virtual const char* GetShapeDesc() const { return "cosine-curve"; }
-	virtual void Translate(const sm::vec2& offset);
-	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage) { return NULL; }
-	virtual void LoadFromFile(const Json::Value& value, const std::string& dir) {}
-	virtual void StoreToFile(Json::Value& value, const std::string& dir) const {}
+	virtual const char* GetShapeDesc() const override { return "cosine-curve"; }
+	virtual void Translate(const sm::vec2& offset) override;
+	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage) override { return NULL; }
+	virtual void LoadFromFile(const Json::Value& value, const std::string& dir) override {}
+	virtual void StoreToFile(Json::Value& value, const std::string& dir) const override {}
 
 //	const CU_VEC<sm::vec2>& getMidPoints() const { return m_midPoints; }
 
 protected:
-	virtual void UpdateBounding() { s2::CosineShape::UpdateBounding(); }
+	virtual void UpdateBounding() override { s2::CosineShape::UpdateBounding(); }
 
 }; // CosineShape
 

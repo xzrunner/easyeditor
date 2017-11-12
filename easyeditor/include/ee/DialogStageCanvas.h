@@ -16,7 +16,7 @@ public:
 		const SymPtr& sym, wxGLContext* glctx);
 
 protected:
-	virtual void OnDrawSprites() const;
+	virtual void OnDrawSprites() const override;
 
 private:
 	std::shared_ptr<Symbol> m_sym;

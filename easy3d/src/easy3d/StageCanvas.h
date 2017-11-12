@@ -22,7 +22,7 @@ public:
 
 protected:
 	virtual void InitGL();
-	virtual void OnSize(int w, int h);
+	virtual void OnSize(int w, int h) override;
 
 private:
 	Camera m_camera3;

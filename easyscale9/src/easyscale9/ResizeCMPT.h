@@ -20,7 +20,7 @@ public:
 	float getHeight() const;
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 private:
 	void onChangeSize(wxSpinEvent& event);

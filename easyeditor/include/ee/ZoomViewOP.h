@@ -15,15 +15,15 @@ public:
 		bool right_tap = false, bool left_tap = true);
 	virtual ~ZoomViewOP();
 
-	virtual bool OnKeyDown(int keyCode);
-	virtual bool OnKeyUp(int keyCode);
-	virtual bool OnMouseLeftDown(int x, int y);
-	virtual bool OnMouseLeftUp(int x, int y);
-	virtual bool OnMouseRightDown(int x, int y);
-	virtual bool OnMouseRightUp(int x, int y);
-	virtual bool OnMouseMove(int x, int y);
-	virtual bool OnMouseDrag(int x, int y);
-	virtual bool OnMouseWheelRotation(int x, int y, int direction);
+	virtual bool OnKeyDown(int keyCode) override;
+	virtual bool OnKeyUp(int keyCode) override;
+	virtual bool OnMouseLeftDown(int x, int y) override;
+	virtual bool OnMouseLeftUp(int x, int y) override;
+	virtual bool OnMouseRightDown(int x, int y) override;
+	virtual bool OnMouseRightUp(int x, int y) override;
+	virtual bool OnMouseMove(int x, int y) override;
+	virtual bool OnMouseDrag(int x, int y) override;
+	virtual bool OnMouseWheelRotation(int x, int y, int direction) override;
 
 	void SetMouseMoveFocus(bool enable) {
 		m_mouse_move_focus = enable;

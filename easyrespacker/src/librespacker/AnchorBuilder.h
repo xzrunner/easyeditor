@@ -19,7 +19,7 @@ public:
 	AnchorBuilder();
 	virtual ~AnchorBuilder();
 
-	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
+	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const override;
 
 	const IPackNode* Create(const ee::SprConstPtr& spr);
 

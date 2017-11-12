@@ -16,7 +16,7 @@ public:
 		ee::PropertySettingPanel* property);
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 }; // DrawPolygon2CMPT
 

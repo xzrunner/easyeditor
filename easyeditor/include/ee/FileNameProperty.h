@@ -14,7 +14,7 @@ public:
 	FileNameProperty(const wxString& label = wxPG_LABEL, const wxString& name = wxPG_LABEL, 
 		const wxString& value = wxEmptyString);
 
-	virtual bool OnButtonClick(wxPropertyGrid* propgrid, wxString& value);
+	virtual bool OnButtonClick(wxPropertyGrid* propgrid, wxString& value) override;
 
 	void SetFilepath(const std::string& filepath);
 

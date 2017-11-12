@@ -19,7 +19,7 @@ public:
 	virtual ~StageCanvas();
 
 protected:
-	virtual void OnDrawSprites() const;
+	virtual void OnDrawSprites() const override;
 
 private:
 	StagePanel* m_stage;

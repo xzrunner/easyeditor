@@ -14,9 +14,9 @@ public:
 		PropertySettingPanel* property = NULL, EditCMPT* callback = NULL, 
 		const ArrangeSpriteConfig& cfg = ArrangeSpriteConfig());
 
-	virtual bool OnMouseLeftUp(int x, int y);
-	//virtual bool OnMouseRightDown(int x, int y);
-	virtual bool OnMouseRightUp(int x, int y);
+	virtual bool OnMouseLeftUp(int x, int y) override;
+	//virtual bool OnMouseRightDown(int x, int y) override;
+	virtual bool OnMouseRightUp(int x, int y) override;
 
 private:
 	// todo cost!

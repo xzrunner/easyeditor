@@ -20,14 +20,14 @@ public:
 	 *  @interface
 	 *    ee::Symbol
 	 */
-	virtual void InvalidRect(const S2_MAT& mt) const;
+	virtual void InvalidRect(const S2_MAT& mt) const override;
 
 	/**
 	 *  @interface
 	 *    s2::ImageSymbol
 	 */
-	virtual bool QueryTexcoords(bool use_dtex, float* texcoords, int& texid) const;
-	virtual bool OnQueryTexcoordsFail() const;
+	virtual bool QueryTexcoords(bool use_dtex, float* texcoords, int& texid) const override;
+	virtual bool OnQueryTexcoordsFail() const override;
 
 	unsigned int GetTexID() const;
 
@@ -35,10 +35,10 @@ public:
 	void SetImage(const ImagePtr& img) { m_image = img; }
 
 protected:
-	virtual bool LoadResources();
+	virtual bool LoadResources() override;
 
 #ifdef S2_DEBUG
-	virtual bool IsProxyImg() const { return false; }
+	virtual bool IsProxyImg() const override { return false; }
 #endif // S2_DEBUG
 
 private:

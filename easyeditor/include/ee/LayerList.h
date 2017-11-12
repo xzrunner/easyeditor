@@ -26,7 +26,7 @@ protected:
 	//
 	//	interface Observer
 	//
-	virtual void OnNotify(int sj_id, void* ud);
+	virtual void OnNotify(int sj_id, void* ud) override;
 
 private:
 	void InitLayout();

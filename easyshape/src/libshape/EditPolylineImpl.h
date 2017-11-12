@@ -46,7 +46,7 @@ private:
 	public:
 		InterruptChainVisitor(const sm::vec2& pos, int tol);
 
-		virtual void Visit(const ee::ShapePtr& shape, bool& next);
+		virtual void Visit(const ee::ShapePtr& shape, bool& next) override;
 
 		std::shared_ptr<EditedPolyShape> GetInterruptedPolyline() { return m_polyline; }
 
@@ -62,7 +62,7 @@ private:
 	public:
 		NearestNodeVisitor(const sm::vec2& pos, int tol);
 
-		virtual void Visit(const ee::ShapePtr& shape, bool& next);
+		virtual void Visit(const ee::ShapePtr& shape, bool& next) override;
 
 		const sm::vec2& GetNearestNode() const {
 			return m_nearest;

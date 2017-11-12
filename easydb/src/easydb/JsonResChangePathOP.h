@@ -13,7 +13,7 @@ public:
 		const std::string& new_path);
 
 protected:
-	virtual bool OnDoFile(const std::string& filepath, Json::Value& val, const std::string& key);
+	virtual bool OnDoFile(const std::string& filepath, Json::Value& val, const std::string& key) override;
 
 private:
 	const std::string& m_old_path;

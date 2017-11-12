@@ -40,7 +40,7 @@ public:
 	virtual void TraverseMesh(ee::RefVisitor<ee::Shape>& visitor) const {}
 	virtual bool RemoveMesh(const ee::ShapePtr& mesh) { return false; }
 	virtual bool InsertMesh(const ee::ShapePtr& mesh) { return false; }
-// 	virtual bool ClearMesh() { return false; }
+// 	virtual bool ClearMesh() override { return false; }
 	virtual void Reset() {}
 	virtual void Clear() {}
 

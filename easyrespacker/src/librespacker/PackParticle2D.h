@@ -85,10 +85,10 @@ public:
 		const ee::TexturePacker& tp, float scale) const;
 	virtual void UnpackFromLua(lua_State* L, const std::vector<ee::ImagePtr>& images);
 
-	virtual int SizeOfPackToBin() const;
+	virtual int SizeOfPackToBin() const override;
 	virtual void PackToBin(uint8_t** ptr, 
 		const ee::TexturePacker& tp, float scale) const;
-	virtual int SizeOfUnpackFromBin() const;
+	virtual int SizeOfUnpackFromBin() const override;
 	virtual void UnpackFromBin(uint8_t** ptr, const std::vector<ee::ImagePtr>& images);
 
 }; // PackParticle2D

@@ -12,10 +12,10 @@ class PasteSymbolOP : public ee::PasteSymbolOP
 public:
 	PasteSymbolOP(StagePanel* stage, ee::LibraryPanel* library);
 
-	virtual bool OnMouseLeftDown(int x, int y);
-	virtual bool OnMouseDrag(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y) override;
+	virtual bool OnMouseDrag(int x, int y) override;
 
-	virtual bool OnDraw() const;
+	virtual bool OnDraw() const override;
 
 private:
 	bool isCurrSymbolValid() const;

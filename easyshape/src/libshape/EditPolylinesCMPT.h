@@ -14,12 +14,12 @@ public:
 	EditPolylinesCMPT(wxWindow* parent, const std::string& name,
 		ee::EditPanel* editPanel, ee::MultiShapesImpl* shapes_impl);
 
-	virtual void UpdateControlValue();
+	virtual void UpdateControlValue() override;
 
 	float GetSimplifyThreshold() const;
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 private:
 	wxSizer* InitSimplifyPanel();

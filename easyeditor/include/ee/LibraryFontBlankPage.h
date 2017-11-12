@@ -11,15 +11,15 @@ class LibraryFontBlankPage : public LibraryPage
 public:
 	LibraryFontBlankPage(wxWindow* parent);
 
-	virtual bool IsHandleSymbol(const SymPtr& sym) const;
+	virtual bool IsHandleSymbol(const SymPtr& sym) const override;
 
-	virtual bool LoadFromConfig();
-
-protected:
-	virtual void InitLayout(bool draggable = true);
+	virtual bool LoadFromConfig() override;
 
 protected:
-	virtual void OnAddPress(wxCommandEvent& event);
+	virtual void InitLayout(bool draggable = true) override;
+
+protected:
+	virtual void OnAddPress(wxCommandEvent& event) override;
 
 private:
 	void OnNewBtnPress(wxCommandEvent& event);

@@ -19,7 +19,7 @@ public:
 	void SelectSuitableEditOP();
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 private:
 	void OnClearShapes(wxCommandEvent& event);

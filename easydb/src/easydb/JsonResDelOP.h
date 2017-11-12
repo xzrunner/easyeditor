@@ -12,7 +12,7 @@ public:
 	JsonResDelOP(const std::string& filepath, const std::string& rm_filepath);
 
 protected:
-	virtual bool OnDoFile(const std::string& filepath, Json::Value& val, const std::string& key);
+	virtual bool OnDoFile(const std::string& filepath, Json::Value& val, const std::string& key) override;
 
 private:
 	const std::string& m_rm_filepath;

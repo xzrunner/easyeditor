@@ -12,7 +12,7 @@ public:
 	ToolbarPanel(wxWindow* parent);
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 }; // ToolbarPanel
 

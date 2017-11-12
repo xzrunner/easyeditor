@@ -20,7 +20,7 @@ public:
 // 	virtual float GetValue() const;
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 private:
 	void OnChangeDisplayTriangles(wxCommandEvent& event);

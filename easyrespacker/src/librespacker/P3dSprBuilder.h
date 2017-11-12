@@ -19,7 +19,7 @@ public:
 	P3dSprBuilder(ExportNameSet& export_set);
 	virtual ~P3dSprBuilder();
 
-	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
+	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const override;
 
 	const IPackNode* Create(const std::shared_ptr<const eparticle3d::Sprite>& spr);
 	void Create(const std::shared_ptr<const eparticle3d::Symbol>& sym, const IPackNode* p3d);

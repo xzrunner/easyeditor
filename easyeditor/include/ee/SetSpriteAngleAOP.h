@@ -13,10 +13,10 @@ public:
 	SetSpriteAngleAOP(const SprPtr& spr, float angle);
 	SetSpriteAngleAOP(const std::vector<SprPtr>& sprs, float angle);
 
-	virtual void Undo();
-	virtual void Redo();
+	virtual void Undo() override;
+	virtual void Redo() override;
 
-	virtual Json::Value Store(const std::vector<SprPtr>& sprs) const;
+	virtual Json::Value Store(const std::vector<SprPtr>& sprs) const override;
 
 private:
 	std::vector<SprPtr> m_sprs;

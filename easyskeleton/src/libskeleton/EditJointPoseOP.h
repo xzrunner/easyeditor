@@ -23,15 +23,15 @@ public:
 	EditJointPoseOP(StagePanel* stage);
 	virtual ~EditJointPoseOP();
 
-	virtual bool OnMouseLeftDown(int x, int y);
-	virtual bool OnMouseLeftUp(int x, int y);
-	virtual bool OnMouseRightDown(int x, int y);
-	virtual bool OnMouseRightUp(int x, int y);
-	virtual bool OnMouseMove(int x, int y);
-	virtual bool OnMouseDrag(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y) override;
+	virtual bool OnMouseLeftUp(int x, int y) override;
+	virtual bool OnMouseRightDown(int x, int y) override;
+	virtual bool OnMouseRightUp(int x, int y) override;
+	virtual bool OnMouseMove(int x, int y) override;
+	virtual bool OnMouseDrag(int x, int y) override;
 
-	virtual bool OnDraw() const;
-	virtual bool Clear();
+	virtual bool OnDraw() const override;
+	virtual bool Clear() override;
 
 private:
 	bool Select(const sm::vec2& pos);

@@ -13,7 +13,7 @@ class EditUVOP : public ee::ZoomViewOP
 public:
 	EditUVOP(StagePanel* stage);
 
-	virtual bool OnDraw() const;
+	virtual bool OnDraw() const override;
 
 private:
 	StagePanel* m_stage;

@@ -15,9 +15,9 @@ class AutoTriCutOP : public ee::ZoomViewOP
 public:
 	AutoTriCutOP(wxWindow* wnd, ee::EditPanelImpl* stage);
 
-	virtual bool OnActive();
+	virtual bool OnActive() override;
 
-	virtual bool OnDraw() const;
+	virtual bool OnDraw() const override;
 
 private:
 	std::vector<sm::vec2> m_raw_bound_line;

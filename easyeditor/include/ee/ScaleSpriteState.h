@@ -13,8 +13,8 @@ class ScaleSpriteState : public ArrangeSpriteState
 public:
 	ScaleSpriteState(const SprPtr& spr, const SpriteCtrlNode::Node& ctrl_node);
 
-	virtual void OnMouseRelease(const sm::vec2& pos);
-	virtual	bool OnMouseDrag(const sm::vec2& pos);
+	virtual void OnMouseRelease(const sm::vec2& pos) override;
+	virtual	bool OnMouseDrag(const sm::vec2& pos) override;
 
 protected:
 	virtual void Scale(const sm::vec2& curr);

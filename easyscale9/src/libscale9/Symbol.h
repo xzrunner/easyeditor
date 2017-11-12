@@ -23,7 +23,7 @@ protected:
 	 *  @interface
 	 *    ee::Sprite
 	 */
-	virtual bool LoadResources();
+	virtual bool LoadResources() override;
 
 }; // Symbol
 

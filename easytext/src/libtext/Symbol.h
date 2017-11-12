@@ -22,7 +22,7 @@ public:
 	 *  @interface
 	 *    s2::Symbol
 	 */
-	virtual s2::RenderReturn DrawTree(cooking::DisplayList* dlist, const s2::RenderParams& rp, const s2::Sprite* spr = nullptr) const;
+	virtual s2::RenderReturn DrawTree(cooking::DisplayList* dlist, const s2::RenderParams& rp, const s2::Sprite* spr = nullptr) const override;
 
 	static ee::SymPtr Create() { return std::make_shared<Symbol>(); }
 
@@ -31,7 +31,7 @@ protected:
 	 *  @interface
 	 *    ee::Symbol
 	 */
-	virtual bool LoadResources();
+	virtual bool LoadResources() override;
 
 	/**
 	 *  @interface

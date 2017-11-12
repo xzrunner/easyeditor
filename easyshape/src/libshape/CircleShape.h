@@ -19,23 +19,23 @@ public:
 	 *  @interface
 	 *    s2::Shape
 	 */
-	virtual CircleShape* Clone() const { return new CircleShape(*this); }
-	virtual bool IsContain(const sm::vec2& pos) const { return s2::CircleShape::IsContain(pos); }
-	virtual bool IsIntersect(const sm::rect& rect) const { return s2::CircleShape::IsIntersect(rect); }
-	virtual void Draw(const s2::RenderParams& rp) const { s2::CircleShape::Draw(rp); }
+	virtual CircleShape* Clone() const override { return new CircleShape(*this); }
+	virtual bool IsContain(const sm::vec2& pos) const override { return s2::CircleShape::IsContain(pos); }
+	virtual bool IsIntersect(const sm::rect& rect) const override { return s2::CircleShape::IsIntersect(rect); }
+	virtual void Draw(const s2::RenderParams& rp) const override { s2::CircleShape::Draw(rp); }
 
 	/**
 	 *  @interface
 	 *    ee::Shape
 	 */
-	virtual const char* GetShapeDesc() const { return "circle"; }
-	virtual void Translate(const sm::vec2& offset);
-	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
-	virtual void LoadFromFile(const Json::Value& value, const std::string& dir);
-	virtual void StoreToFile(Json::Value& value, const std::string& dir) const;
+	virtual const char* GetShapeDesc() const override { return "circle"; }
+	virtual void Translate(const sm::vec2& offset) override;
+	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage) override;
+	virtual void LoadFromFile(const Json::Value& value, const std::string& dir) override;
+	virtual void StoreToFile(Json::Value& value, const std::string& dir) const override;
 
 protected:
-	virtual void UpdateBounding() { s2::CircleShape::UpdateBounding(); }
+	virtual void UpdateBounding() override { s2::CircleShape::UpdateBounding(); }
 
 }; // CircleShape
 

@@ -9,7 +9,7 @@ namespace ee
 class DragTargetNull : public wxTextDropTarget
 {
 public:
-	virtual bool OnDropText(wxCoord x, wxCoord y, const wxString& data) {
+	virtual bool OnDropText(wxCoord x, wxCoord y, const wxString& data) override {
 		return true;
 	}
 

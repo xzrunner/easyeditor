@@ -27,7 +27,7 @@ public:
 	//
 	// ee::EditPanel interface
 	//
-	virtual bool UpdateStage();
+	virtual bool UpdateStage() override;
 
 	const std::shared_ptr<Symbol>& GetSymbol() const { return m_sym; }
 	std::shared_ptr<Symbol>& GetSymbol() { return m_sym; }
@@ -36,7 +36,7 @@ protected:
 	//
 	//	interface Observer
 	//
-	virtual void OnNotify(int sj_id, void* ud);
+	virtual void OnNotify(int sj_id, void* ud) override;
 
 private:
 	void Clear();

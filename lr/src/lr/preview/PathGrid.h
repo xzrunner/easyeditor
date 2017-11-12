@@ -18,11 +18,11 @@ class PathGrid : public IPathfinding
 public:
 	PathGrid(const sm::rect& region, int row, int col);
 
-	virtual void DisableRegion(const ee::SprConstPtr& spr, bool disable);
+	virtual void DisableRegion(const ee::SprConstPtr& spr, bool disable) override;
 
-	virtual void QueryRoute(const sm::vec2& start, const sm::vec2& end);
+	virtual void QueryRoute(const sm::vec2& start, const sm::vec2& end) override;
 
-	virtual void DebugDraw() const;
+	virtual void DebugDraw() const override;
 
 private:
 	struct Node
@@ -50,7 +50,7 @@ private:
 		Network(const sm::rect& region, int row, int col);
 		~Network();
 
-		virtual sm::vec2 TransIDToPos(int id) const;
+		virtual sm::vec2 TransIDToPos(int id) const override;
 
 		void SetStatus(const sm::rect& region, bool used);
 

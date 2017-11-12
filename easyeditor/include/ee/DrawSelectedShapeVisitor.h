@@ -10,7 +10,7 @@ namespace ee
 class DrawSelectedShapeVisitor : public RefVisitor<Shape>
 {
 public:
-	virtual void Visit(const ShapePtr& shape, bool& next);
+	virtual void Visit(const ShapePtr& shape, bool& next) override;
 
 }; // DrawSelectedShapeVisitor
 

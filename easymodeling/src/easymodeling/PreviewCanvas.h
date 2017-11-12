@@ -15,7 +15,7 @@ public:
 	virtual ~PreviewCanvas();
 
 protected:
-	virtual void OnDrawSprites() const;
+	virtual void OnDrawSprites() const override;
 
 private:
 	static const int FRAME_RATE = 60;

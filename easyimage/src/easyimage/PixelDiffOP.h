@@ -13,12 +13,12 @@ class PixelDiffOP : public ee::ZoomViewOP
 public:
 	PixelDiffOP(StagePanel* stage);
 
-	virtual bool OnMouseLeftDown(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y) override;
 
-	virtual bool OnDraw() const;
-	virtual bool Clear();
+	virtual bool OnDraw() const override;
+	virtual bool Clear() override;
 
-	virtual bool OnActive();
+	virtual bool OnActive() override;
 
 private:
 	StagePanel* m_stage;

@@ -14,7 +14,7 @@
 //	void SetAlpha(float alpha);
 //
 //protected:
-//	virtual void LoadShader();	
+//	virtual void LoadShader() override;	
 //
 //private:
 //	GLuint m_alpha;

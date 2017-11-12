@@ -17,14 +17,14 @@ public:
 	//
 	// DataContainer interface
 	//
-	virtual void Traverse(ee::RefVisitor<ee::Shape>& visitor, bool order = true) const;
-	virtual void Traverse(ee::RefVisitor<ee::Shape>& visitor, ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
-	virtual bool Remove(const std::shared_ptr<ee::Shape>& shape);
-	virtual bool Insert(const std::shared_ptr<ee::Shape>& shape);
-	virtual bool Insert(const std::shared_ptr<ee::Shape>& shape, int idx);
-	virtual bool Clear();
-	virtual bool ResetOrder(const std::shared_ptr<const ee::Shape>& shape, bool up);
-	virtual bool ResetOrderMost(const std::shared_ptr<const ee::Shape>& shape, bool up);
+	virtual void Traverse(ee::RefVisitor<ee::Shape>& visitor, bool order = true) const override;
+	virtual void Traverse(ee::RefVisitor<ee::Shape>& visitor, ee::DataTraverseType type = ee::DT_ALL, bool order = true) const override;
+	virtual bool Remove(const std::shared_ptr<ee::Shape>& shape) override;
+	virtual bool Insert(const std::shared_ptr<ee::Shape>& shape) override;
+	virtual bool Insert(const std::shared_ptr<ee::Shape>& shape, int idx) override;
+	virtual bool Clear() override;
+	virtual bool ResetOrder(const std::shared_ptr<const ee::Shape>& shape, bool up) override;
+	virtual bool ResetOrderMost(const std::shared_ptr<const ee::Shape>& shape, bool up) override;
 
 private:
 	void LoadShapes(std::vector<std::shared_ptr<ee::Shape>>& shapes) const;

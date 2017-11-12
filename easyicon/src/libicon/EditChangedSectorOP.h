@@ -13,7 +13,7 @@ class EditChangedSectorOP : public ee::ZoomViewOP
 public:
 	EditChangedSectorOP(StagePanel* stage);
 
-	virtual bool OnActive();
+	virtual bool OnActive() override;
 
 private:
 	StagePanel* m_stage;

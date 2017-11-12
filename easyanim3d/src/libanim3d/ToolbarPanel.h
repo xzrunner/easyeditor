@@ -14,7 +14,7 @@ public:
 	ToolbarPanel(wxWindow* parent, StagePanel* stage);
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 }; // ToolbarPanel
 

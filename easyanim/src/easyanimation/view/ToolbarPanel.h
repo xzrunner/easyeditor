@@ -20,7 +20,7 @@ public:
 	void Clear();
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 private:
 	wxSizer* InitTemplateLayout();

@@ -47,7 +47,7 @@ private:
 	public:
 		RectQueryVisitor(const sm::vec2& pos, float tolerance, NodeAddr& result);
 
-		virtual void Visit(const ee::ShapePtr& shape, bool& next);
+		virtual void Visit(const ee::ShapePtr& shape, bool& next) override;
 
 	private:
 		bool Visit(const std::shared_ptr<PointShape>& point);

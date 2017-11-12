@@ -18,7 +18,7 @@ public:
 	void ChangeIconType(IconType type);
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 }; // ToolbarPanel
 

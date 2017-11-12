@@ -19,15 +19,15 @@ public:
 	ArrangeSpriteImpl(ee::LibraryPanel* library, ee::PropertySettingPanel* property,
 		StagePanel* stage, CharacterAllDirections* dirs);
 
-	virtual bool OnKeyDown(int keyCode);
+	virtual bool OnKeyDown(int keyCode) override;
 
-	virtual void OnPopMenuSelected(int type);
+	virtual void OnPopMenuSelected(int type) override;
 
 protected:
-	virtual void SetRightPopupMenu(wxMenu& menu, int x, int y);
+	virtual void SetRightPopupMenu(wxMenu& menu, int x, int y) override;
 
 	virtual ee::ArrangeSpriteState* CreateRotateState(ee::SpriteSelection* selection, 
-		const sm::vec2& first_pos) const;
+		const sm::vec2& first_pos) const override;
 
 private:
 	class RotateSpriteState : public ee::RotateSpriteState
@@ -37,7 +37,7 @@ private:
 			CharacterAllDirections* dirs);
 
 	protected:
-		virtual void Rotate(const sm::vec2& dst);
+		virtual void Rotate(const sm::vec2& dst) override;
 
 	private:
 		static int GetAnglePos(float angle);

@@ -19,18 +19,18 @@ public:
 	 *  @interface
 	 *    s2::Symbol
 	 */
-	virtual s2::RenderReturn DrawTree(cooking::DisplayList* dlist, const s2::RenderParams& rp, const s2::Sprite* spr = nullptr) const;
+	virtual s2::RenderReturn DrawTree(cooking::DisplayList* dlist, const s2::RenderParams& rp, const s2::Sprite* spr = nullptr) const override;
 
 	/**
 	 *  @interface
 	 *    ee::Symbol
 	 */
-	virtual void ReloadTexture() const;
+	virtual void ReloadTexture() const override;
 
 protected:
-	virtual sm::rect GetBoundingImpl(const s2::Sprite* spr = NULL, const s2::Actor* actor = NULL, bool cache = true) const;
+	virtual sm::rect GetBoundingImpl(const s2::Sprite* spr = NULL, const s2::Actor* actor = NULL, bool cache = true) const override;
 
-	virtual bool LoadResources();
+	virtual bool LoadResources() override;
 
 private:
 	class SpriteLoader : public ee::SpriteLoader
@@ -40,7 +40,7 @@ private:
 			: m_dirpath(dirpath) {}
 
 	protected:
-		virtual std::string GetSymbolPath(const std::string& dir, const Json::Value& val) const;
+		virtual std::string GetSymbolPath(const std::string& dir, const Json::Value& val) const override;
 
 	private:
 		std::string m_dirpath;

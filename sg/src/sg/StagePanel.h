@@ -22,7 +22,7 @@ public:
 	// MultiSpritesImpl interface
 	//
 	virtual void TraverseSprites(ee::RefVisitor<ee::Sprite>& visitor, 
-		ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
+		ee::DataTraverseType type = ee::DT_ALL, bool order = true) const override;
 
 	void TransCoordsToGridPos(const sm::vec2& pos, int& row, int& col) const;
 	void TransGridPosToCoords(int row, int col, sm::vec2& pos) const;
@@ -60,7 +60,7 @@ protected:
 	//
 	//	interface Observer
 	//
-	virtual void OnNotify(int sj_id, void* ud);
+	virtual void OnNotify(int sj_id, void* ud) override;
 
 private:
 	sm::vec2 FixSpriteLocation(const sm::vec2& pos) const;

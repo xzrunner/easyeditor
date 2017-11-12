@@ -18,7 +18,7 @@ public:
 	static ee::SymPtr Create() { return std::make_shared<Symbol>(); }
 
 protected:
-	virtual bool LoadResources();
+	virtual bool LoadResources() override;
 
 }; // Symbol
 

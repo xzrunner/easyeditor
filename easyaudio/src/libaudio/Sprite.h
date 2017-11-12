@@ -17,16 +17,16 @@ public:
 	Sprite& operator = (const Sprite& spr);
 	Sprite(const s2::SymPtr& sym, uint32_t id = -1);
 
-	virtual bool Update(const s2::UpdateParams& up);
+	virtual bool Update(const s2::UpdateParams& up) override;
 
 	/**
 	 *  @interface
 	 *    ee::Sprite
 	 */
-	virtual void Load(const Json::Value& val, const CU_STR& dir = "");
-	virtual void Store(Json::Value& val, const CU_STR& dir = "") const;
+	virtual void Load(const Json::Value& val, const std::string& dir = "") override;
+	virtual void Store(Json::Value& val, const std::string& dir = "") const override;
 
-	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
+	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage) override;
 
 	static ee::SprPtr Create(const std::shared_ptr<ee::Symbol>& sym);
 

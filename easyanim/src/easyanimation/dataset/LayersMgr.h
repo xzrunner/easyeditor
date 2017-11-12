@@ -37,7 +37,7 @@ protected:
 	//
 	//	interface Observer
 	//
-	virtual void OnNotify(int sj_id, void* ud);
+	virtual void OnNotify(int sj_id, void* ud) override;
 
 private:
 	std::vector<Layer*> m_layers;

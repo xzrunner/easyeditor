@@ -24,9 +24,9 @@ public:
 	GroupTreeSpriteItem(const SprPtr& spr);
 	GroupTreeSpriteItem(const GroupTreeSpriteItem& item);
 
-	virtual GroupTreeItem* Clone() const { return new GroupTreeSpriteItem(*this); }
+	virtual GroupTreeItem* Clone() const override { return new GroupTreeSpriteItem(*this); }
 
-	virtual bool IsGroup() const { return false; }
+	virtual bool IsGroup() const override { return false; }
 
 	const SprPtr& GetSprite() { return m_spr; }
 
@@ -42,9 +42,9 @@ public:
 	GroupTreeGroupItem(const GroupTreeGroupItem& item);
 	virtual ~GroupTreeGroupItem();
 
-	virtual GroupTreeItem* Clone() const { return new GroupTreeGroupItem(*this); }
+	virtual GroupTreeItem* Clone() const override { return new GroupTreeGroupItem(*this); }
 
-	virtual bool IsGroup() const { return true; }
+	virtual bool IsGroup() const override { return true; }
 
 	Group* GetGroup() { return m_group; }
 

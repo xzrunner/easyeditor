@@ -19,7 +19,7 @@ public:
 	//
 	// ee::EditPanel interface
 	//
-	virtual bool UpdateStage();
+	virtual bool UpdateStage() override;
 
 	auto& GetSkeleton() const { return m_sk; }
 

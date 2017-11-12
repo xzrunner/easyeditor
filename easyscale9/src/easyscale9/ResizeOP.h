@@ -16,13 +16,13 @@ public:
 	ResizeOP(StagePanel* stage, ToolbarPanel* toolbar,
 		ResizeCMPT* resizeCmpt);
 
-	virtual bool OnMouseLeftDown(int x, int y);
-	virtual bool OnMouseLeftUp(int x, int y);
-	virtual bool OnMouseDrag(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y) override;
+	virtual bool OnMouseLeftUp(int x, int y) override;
+	virtual bool OnMouseDrag(int x, int y) override;
 
-	virtual bool OnActive();
+	virtual bool OnActive() override;
 
-	virtual bool OnDraw() const;
+	virtual bool OnDraw() const override;
 
 private:
 	StagePanel* m_stage;

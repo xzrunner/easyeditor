@@ -22,7 +22,7 @@ public:
 	//
 	virtual void TraverseSprites(ee::RefVisitor<ee::Sprite>& visitor, 
 		ee::DataTraverseType type = ee::DT_ALL,
-		bool order = true) const;
+		bool order = true) const override;
 
 	Symbol* getPatchSymbol() { return m_sym; }
 
@@ -36,7 +36,7 @@ protected:
 	//
 	//	interface Observer
 	//
-	virtual void OnNotify(int sj_id, void* ud);
+	virtual void OnNotify(int sj_id, void* ud) override;
 
 private:
 	void Insert(const ee::SprPtr& spr);

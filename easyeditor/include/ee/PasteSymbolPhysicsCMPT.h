@@ -22,7 +22,7 @@ public:
 		float* pScale = NULL, PasteSymbolRandomWidget* randomWidget = NULL);
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 private:
 	void onChangeGravity(wxCommandEvent& event);

@@ -20,12 +20,12 @@ public:
 		EditPanelImpl* stage, MultiSpritesImpl* sprites_impl,
 		PropertySettingPanel* property);
 
-	virtual void UpdateControlValue();
+	virtual void UpdateControlValue() override;
 
 	void AddPhysicsEditOP(b2World* world, b2Body* ground);
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 private:
 	class GetPhysicsStaticVisitor : public RefVisitor<Sprite>
@@ -40,7 +40,7 @@ private:
 
 	public:
 		GetPhysicsStaticVisitor();
-		virtual void Visit(const SprPtr& spr, bool& next);
+		virtual void Visit(const SprPtr& spr, bool& next) override;
 		TYPE getType() const { return m_type; }
 
 	private:
@@ -52,7 +52,7 @@ private:
 	{
 	public:
 		SetPhysicsStaticVisitor(bool bChecked);
-		virtual void Visit(const SprPtr& spr, bool& next);
+		virtual void Visit(const SprPtr& spr, bool& next) override;
 
 	private:
 		bool m_bChecked;

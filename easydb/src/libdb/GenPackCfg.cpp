@@ -11,13 +11,13 @@
 //		DirTraverser(wxArrayString& files) 
 //			: m_files(files) {}
 //
-//		virtual wxDirTraverseResult OnFile(const wxString& filename)
+//		virtual wxDirTraverseResult OnFile(const wxString& filename) override
 //		{
 //			m_files.Add(filename);
 //			return wxDIR_IGNORE;
 //		}
 //
-//		virtual wxDirTraverseResult OnDir(const wxString& dirname)
+//		virtual wxDirTraverseResult OnDir(const wxString& dirname) override
 //		{
 //			return wxDIR_IGNORE;
 //		}

@@ -19,10 +19,10 @@ public:
 	ModifyNodesAOP(const std::vector<std::shared_ptr<EditedPolyShape>>& polylines,
 		const CU_VEC<CU_VEC<sm::vec2> >& dst_polylines);
 
-	virtual void Undo();
-	virtual void Redo();
+	virtual void Undo() override;
+	virtual void Redo() override;
 
-	virtual Json::Value Store(const std::vector<ee::SprPtr>& sprs) const { return NULL; }
+	virtual Json::Value Store(const std::vector<ee::SprPtr>& sprs) const override { return NULL; }
 
 private:
 	std::vector<std::shared_ptr<EditedPolyShape>> m_polylines;

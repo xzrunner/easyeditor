@@ -16,8 +16,8 @@ public:
 	StageDropTarget(wxWindow* stage_wnd, EditPanelImpl* stage, 
 		LibraryPanel* library);
 
-	virtual void OnDropText(wxCoord x, wxCoord y, const wxString& text);
-	virtual void OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames);
+	virtual void OnDropText(wxCoord x, wxCoord y, const wxString& text) override;
+	virtual void OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames) override;
 
 private:
 	EditPanelImpl* m_stage;

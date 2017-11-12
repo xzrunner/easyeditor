@@ -20,14 +20,14 @@ public:
 	Task(wxFrame* parent);
 	virtual ~Task();
 
-	virtual void Load(const char* filepath);
-	virtual void Store(const char* filepath) const;
+	virtual void Load(const char* filepath) override;
+	virtual void Store(const char* filepath) const override;
 
-	virtual bool IsDirty() const;
+	virtual bool IsDirty() const override;
 
-	virtual void GetAllSprite(std::vector<ee::SprPtr>& sprs) const {}
+	virtual void GetAllSprite(std::vector<ee::SprPtr>& sprs) const override {}
 
-	virtual const ee::EditPanel* GetEditPanel() const;
+	virtual const ee::EditPanel* GetEditPanel() const override;
 
 private:
 	void InitLayout();

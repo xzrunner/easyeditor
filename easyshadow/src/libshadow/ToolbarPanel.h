@@ -19,11 +19,11 @@ public:
 	//
 	// interface ee::UICallback
 	//
-	virtual void SetValue(int key, const ee::UICallback::Data& data);
-	virtual void GetValue(int key, ee::UICallback::Data& data);
+	virtual void SetValue(int key, const ee::UICallback::Data& data) override;
+	virtual void GetValue(int key, ee::UICallback::Data& data) override;
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 private:
 	void OnSetInnerColor(wxCommandEvent& event);

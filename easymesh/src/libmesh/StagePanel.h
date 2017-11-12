@@ -28,13 +28,13 @@ public:
 	//
 	// ee::EditPanel interface
 	//
-	virtual bool UpdateStage();
+	virtual bool UpdateStage() override;
 
 	//
 	// ee::MultiShapesImpl interface
 	//
 	virtual void TraverseShapes(ee::RefVisitor<ee::Shape>& visitor, 
-		ee::DataTraverseType type = ee::DT_ALL) const;
+		ee::DataTraverseType type = ee::DT_ALL) const override;
 
 	void SetMeshSymbol(const std::shared_ptr<Symbol>& sym);
 	const Symbol& GetMeshSymbol() const;
@@ -61,7 +61,7 @@ protected:
 	//
 	//	interface MultiShapesImpl
 	//
-	virtual void OnNotify(int sj_id, void* ud);
+	virtual void OnNotify(int sj_id, void* ud) override;
 
 private:
 	void Init(ee::LibraryPanel* library);
@@ -74,7 +74,7 @@ private:
 	public:
 		StageDropTarget(StagePanel* stage, ee::LibraryPanel* library);
 
-		virtual bool OnDropSymbol(const ee::SymPtr& sym, const sm::vec2& pos);
+		virtual bool OnDropSymbol(const ee::SymPtr& sym, const sm::vec2& pos) override;
 
 	private:
 		StagePanel* m_stage;

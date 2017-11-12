@@ -11,10 +11,10 @@ class GearJoint : public Joint
 public:
 	GearJoint(Body* b0, Body* b1, Joint* j1, Joint* j2);
 
-	virtual bool IsContain(const sm::vec2& pos) const;
-	virtual bool IsIntersect(const sm::rect& rect) const;
+	virtual bool IsContain(const sm::vec2& pos) const override;
+	virtual bool IsIntersect(const sm::rect& rect) const override;
 
-	virtual void Draw(DrawType type) const;
+	virtual void Draw(DrawType type) const override;
 
 public:
 	Joint* m_joint1;

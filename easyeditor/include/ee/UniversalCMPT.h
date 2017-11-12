@@ -13,7 +13,7 @@ public:
 		EditPanelImpl* stage, EditOP* editOP);
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 }; // UniversalCMPT
 

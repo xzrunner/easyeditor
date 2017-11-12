@@ -16,7 +16,7 @@ public:
 		LibraryPanel* library);
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 private:
 	void onChangeScale(wxSpinEvent& event);

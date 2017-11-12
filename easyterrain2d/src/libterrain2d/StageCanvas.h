@@ -19,9 +19,9 @@ public:
 	virtual ~StageCanvas();
 
 protected:
-	virtual void OnDrawSprites() const;
+	virtual void OnDrawSprites() const override;
 
-	virtual void OnTimer();
+	virtual void OnTimer() override;
 
 private:
 	void DrawBG() const;

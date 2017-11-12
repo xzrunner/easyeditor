@@ -13,9 +13,9 @@ public:
 	Proj2DEditOP(wxWindow* wnd, ee::EditPanelImpl* stage);
 	virtual ~Proj2DEditOP();
 
-	virtual bool OnKeyDown(int keyCode);
+	virtual bool OnKeyDown(int keyCode) override;
 
-	virtual bool onDraw() const;
+	virtual bool onDraw() const override;
 
 	void InitPlayer();
 

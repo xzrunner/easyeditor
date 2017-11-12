@@ -15,9 +15,9 @@ class SelectSpriteOP : public ee::EditOP
 public:	
 	SelectSpriteOP(StagePanel* stage);
 
-	virtual bool OnMouseLeftDown(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y) override;
 
-	virtual bool OnDraw() const;
+	virtual bool OnDraw() const override;
 
 	const ee::SpriteSelection& GetSelection() const {
 		return *m_selection;

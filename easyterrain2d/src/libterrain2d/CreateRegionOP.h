@@ -13,7 +13,7 @@ class CreateRegionOP : public eshape::DrawPolygonOP
 public:
 	CreateRegionOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapes_impl);
 
-	virtual bool OnDraw() const;
+	virtual bool OnDraw() const override;
 
 private:
 	StagePanel* m_stage;

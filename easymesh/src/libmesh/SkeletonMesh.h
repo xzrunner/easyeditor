@@ -19,20 +19,20 @@
 //	 *  @interface
 //	 *    Mesh
 //	 */
-//	virtual void Load(const Json::Value& value);
-//	virtual void Store(Json::Value& value) const;
-//	virtual void OffsetUV(float dx, float dy);
-//	virtual void Refresh();
+//	virtual void Load(const Json::Value& value) override;
+//	virtual void Store(Json::Value& value) const override;
+//	virtual void OffsetUV(float dx, float dy) override;
+//	virtual void Refresh() override;
 //
 //	/**
 //	 *  @interface
 //	 *    Editable
 //	 */
-//	virtual bool RemoveMesh(ee::Shape* shape);
-//	virtual bool InsertMesh(ee::Shape* shape);
-//	virtual bool ClearMesh();
-// 	virtual void Reset();
-// 	virtual void Clear();
+//	virtual bool RemoveMesh(ee::Shape* shape) override;
+//	virtual bool InsertMesh(ee::Shape* shape) override;
+//	virtual bool ClearMesh() override;
+// 	virtual void Reset() override;
+// 	virtual void Clear() override;
 //
 //	static std::string GetTypeName() { return "skeleton"; }
 //

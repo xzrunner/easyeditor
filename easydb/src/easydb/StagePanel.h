@@ -31,8 +31,8 @@ private:
 	public:
 		DropTarget(wxWindow* stage_wnd, StagePanel* stage);
 
-		virtual void OnDropText(wxCoord x, wxCoord y, const wxString& text);
-		virtual void OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames) {}
+		virtual void OnDropText(wxCoord x, wxCoord y, const wxString& text) override;
+		virtual void OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames) override {}
 
 	private:
 		StagePanel* m_stage;

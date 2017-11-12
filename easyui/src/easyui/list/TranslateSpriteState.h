@@ -17,7 +17,7 @@ public:
 		const sm::vec2& first_pos, UIList* list);
 
 protected:
-	virtual void Translate(const sm::vec2& offset);
+	virtual void Translate(const sm::vec2& offset) override;
 
 private:
 	UIList* m_list;

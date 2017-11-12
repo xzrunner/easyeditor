@@ -18,7 +18,7 @@ public:
 		StagePanel* stage);
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 private:
 	void Trigger(wxCommandEvent& event);

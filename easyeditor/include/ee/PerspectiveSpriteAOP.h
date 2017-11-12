@@ -15,10 +15,10 @@ public:
 	PerspectiveSpriteAOP(const SprPtr& spr, const sm::vec2& new_persp,
 		const sm::vec2& old_persp);
 
-	virtual void Undo();
-	virtual void Redo();
+	virtual void Undo() override;
+	virtual void Redo() override;
 
-	virtual Json::Value Store(const std::vector<SprPtr>& sprs) const;
+	virtual Json::Value Store(const std::vector<SprPtr>& sprs) const override;
 
 private:
 	SprPtr m_spr;

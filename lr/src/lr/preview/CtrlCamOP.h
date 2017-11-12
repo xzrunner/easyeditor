@@ -13,7 +13,7 @@ class CtrlCamOP : public ee::EditOP
 public:
 	CtrlCamOP(wxWindow* wnd, ee::EditPanelImpl* stage);
 
-	virtual bool OnKeyDown(int keyCode);
+	virtual bool OnKeyDown(int keyCode) override;
 
 private:
 	void OffsetCamera(float dx, float dy);

@@ -14,10 +14,10 @@ public:
 	LibraryPage(wxWindow* parent, const char* name, 
 		const std::string& filter);
 
-	virtual bool IsHandleSymbol(const ee::SymPtr& sym) const;
+	virtual bool IsHandleSymbol(const ee::SymPtr& sym) const override;
 
 protected:
-	virtual void OnAddPress(wxCommandEvent& event);
+	virtual void OnAddPress(wxCommandEvent& event) override;
 
 private:
 	std::string m_filter;

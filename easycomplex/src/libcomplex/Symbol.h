@@ -20,14 +20,14 @@ public:
 	 *  @interface
 	 *    s2::Symbol
 	 */
-	virtual s2::RenderReturn DrawTree(cooking::DisplayList* dlist, const s2::RenderParams& rp, const s2::Sprite* spr = nullptr) const;
+	virtual s2::RenderReturn DrawTree(cooking::DisplayList* dlist, const s2::RenderParams& rp, const s2::Sprite* spr = nullptr) const override;
 
 	/**
 	 *  @interface
 	 *    ee::Symbol
 	 */
-	virtual void ReloadTexture() const;
-	virtual void Traverse(ee::RefVisitor<ee::Sprite>& visitor);
+	virtual void ReloadTexture() const override;
+	virtual void Traverse(ee::RefVisitor<ee::Sprite>& visitor) override;
 
 	bool HasActions() const;
 	void GetActionNames(std::vector<std::string>& actions) const;
@@ -37,9 +37,9 @@ public:
 	static ee::SymPtr Create() { return std::make_shared<Symbol>(); }
 
 protected:
-	virtual sm::rect GetBoundingImpl(const s2::Sprite* spr = NULL, const s2::Actor* actor = NULL, bool cache = true) const;
+	virtual sm::rect GetBoundingImpl(const s2::Sprite* spr = NULL, const s2::Actor* actor = NULL, bool cache = true) const override;
 
-	virtual bool LoadResources();
+	virtual bool LoadResources() override;
 
 public:
 	struct Group

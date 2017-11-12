@@ -14,7 +14,7 @@ public:
 	StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage);
 
 protected:
-	virtual void OnDrawSprites() const;
+	virtual void OnDrawSprites() const override;
 
 private:
 	void OnTimer(wxTimerEvent& event);

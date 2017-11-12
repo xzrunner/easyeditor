@@ -16,7 +16,7 @@ public:
 	virtual ~StageCanvas();
 
 protected:
-	virtual void OnDrawSprites() const;
+	virtual void OnDrawSprites() const override;
 
 private:
 	void DrawGuideLines() const;
@@ -29,7 +29,7 @@ private:
 	class DrawJointVisitor : public ee::Visitor<Joint>
 	{
 	public:
-		virtual void Visit(Joint* joint, bool& next);
+		virtual void Visit(Joint* joint, bool& next) override;
 	};
 
 private:

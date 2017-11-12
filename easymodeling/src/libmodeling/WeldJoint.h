@@ -11,10 +11,10 @@ class WeldJoint : public Joint
 public:
 	WeldJoint(Body* b0, Body* b1);
 
-	virtual bool IsContain(const sm::vec2& pos) const;
-	virtual bool IsIntersect(const sm::rect& rect) const;
+	virtual bool IsContain(const sm::vec2& pos) const override;
+	virtual bool IsIntersect(const sm::rect& rect) const override;
 
-	virtual void Draw(DrawType type) const;
+	virtual void Draw(DrawType type) const override;
 
 	sm::vec2 GetWorldAnchorA() const;
 	sm::vec2 GetWorldAnchorB() const;

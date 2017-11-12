@@ -21,7 +21,7 @@ public:
 	void SetSize(int width, int height);
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 private:
 	StagePanel* m_stage;

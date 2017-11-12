@@ -31,10 +31,10 @@ public:
 	PlaySetting& getPlaySetting();
 
 protected:
-	virtual void OnDrawSprites() const;
+	virtual void OnDrawSprites() const override;
 
 protected:
-	virtual void OnTimer();
+	virtual void OnTimer() override;
 
 private:
 	PlaySetting m_setting;

@@ -36,14 +36,14 @@ protected:
 	//
 	//	interface Observer
 	//
-	virtual void OnNotify(int sj_id, void* ud);
+	virtual void OnNotify(int sj_id, void* ud) override;
 
 private:
 	class PointQueryVisitor : public RefVisitor<Shape>
 	{
 	public:
 		PointQueryVisitor(const sm::vec2& pos, ShapePtr& ret);
-		virtual void Visit(const ShapePtr& shape, bool& next);
+		virtual void Visit(const ShapePtr& shape, bool& next) override;
 
 	private:
 		const sm::vec2& m_pos;
@@ -55,7 +55,7 @@ private:
 	{
 	public:
 		RectQueryVisitor(const sm::rect& rect, std::vector<ShapePtr>& result);
-		virtual void Visit(const ShapePtr& shape, bool& next);
+		virtual void Visit(const ShapePtr& shape, bool& next) override;
 
 	private:
 		const sm::rect& m_rect;

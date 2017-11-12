@@ -16,7 +16,7 @@ public:
 	//
 	// ee::EditPanel interface
 	//
-	virtual bool UpdateStage();
+	virtual bool UpdateStage() override;
 
 	void SetLoop(bool loop) { m_loop = loop; }
 

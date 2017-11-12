@@ -16,9 +16,9 @@ class SprWithTransBuilder : public NodeBuilder
 public:
 	virtual ~SprWithTransBuilder();
 
-	virtual void Traverse(ee::Visitor<PackNode>& visitor) const;
+	virtual void Traverse(ee::Visitor<PackNode>& visitor) const override;
 
-	virtual void Clear();
+	virtual void Clear() override;
 
 	const PackNode* Create(const TSprite* spr);
 

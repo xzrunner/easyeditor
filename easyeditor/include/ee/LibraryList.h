@@ -20,21 +20,21 @@ public:
 	//
 	//	interface VerticalImageList
 	//
-	virtual void OnListSelected(wxCommandEvent& event);
-	virtual void Clear();
-	virtual void Insert(const ListItemPtr& item, int idx = -1);
-	virtual void Remove();
-	virtual void Remove(int index);
-	virtual void Swap(int i0, int i1);
+	virtual void OnListSelected(wxCommandEvent& event) override;
+	virtual void Clear() override;
+	virtual void Insert(const ListItemPtr& item, int idx = -1) override;
+	virtual void Remove() override;
+	virtual void Remove(int index) override;
+	virtual void Swap(int i0, int i1) override;
 
 	ListItemPtr GetItem(int index = -1) const;
 
 	void ReloadTexture() const;
 
 private:
-	virtual void OnKeyDown(wxKeyEvent& event);
-	virtual void OnKillFocus(wxFocusEvent& event);
-	virtual void OnMouse(wxMouseEvent& event);
+	virtual void OnKeyDown(wxKeyEvent& event) override;
+	virtual void OnKillFocus(wxFocusEvent& event) override;
+	virtual void OnMouse(wxMouseEvent& event) override;
 
 	void OnDragInit(wxMouseEvent& event);
 

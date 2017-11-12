@@ -15,11 +15,11 @@ class ChainPropertySetting : public ee::PropertySetting
 public:
 	ChainPropertySetting(ee::EditPanelImpl* stage, ChainShape* chain);
 
-	virtual void OnPropertyGridChange(const std::string& name, const wxAny& value);
+	virtual void OnPropertyGridChange(const std::string& name, const wxAny& value) override;
 
 protected:
-	virtual void UpdateProperties(wxPropertyGrid* pg);
-	virtual void InitProperties(wxPropertyGrid* pg);
+	virtual void UpdateProperties(wxPropertyGrid* pg) override;
+	virtual void InitProperties(wxPropertyGrid* pg) override;
 
 private:
 	ee::EditPanelImpl* m_stage;

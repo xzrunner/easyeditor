@@ -21,7 +21,7 @@ public:
 	void SetSizeText(int width, int height);
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 private:
 	void OnItemFilling(wxCommandEvent& event);

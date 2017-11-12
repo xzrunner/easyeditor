@@ -13,11 +13,11 @@ class SymbolPropertySetting : public ee::SymbolPropertySetting
 public:
 	SymbolPropertySetting(const std::shared_ptr<Symbol>& sym);
 
-	virtual void OnPropertyGridChange(const std::string& name, const wxAny& value);
+	virtual void OnPropertyGridChange(const std::string& name, const wxAny& value) override;
 
 protected:
-	virtual void UpdateProperties(wxPropertyGrid* pg);
-	virtual void InitProperties(wxPropertyGrid* pg);
+	virtual void UpdateProperties(wxPropertyGrid* pg) override;
+	virtual void InitProperties(wxPropertyGrid* pg) override;
 
 private:
 	std::string GetGroupNames() const;

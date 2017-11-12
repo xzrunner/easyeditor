@@ -15,8 +15,8 @@ class DemoBruteForce : public IDemo
 public:
 	DemoBruteForce(e3d::Camera& cam);
 
-	virtual void Load();
-	virtual void Draw() const;
+	virtual void Load() override;
+	virtual void Draw() const override;
 
 private:
 	e3d::Camera& m_cam;

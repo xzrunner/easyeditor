@@ -19,7 +19,7 @@ public:
 	Scale9Builder();
 	virtual ~Scale9Builder();
 
-	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
+	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const override;
 
 	const IPackNode* Create(const std::shared_ptr<const escale9::Sprite>& spr);
 

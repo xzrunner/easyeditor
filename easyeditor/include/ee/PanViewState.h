@@ -16,12 +16,12 @@ public:
 	PanViewState(EditPanelImpl* stage);
 	virtual ~PanViewState();
 
-	virtual void Bind();
-	virtual void UnBind();
+	virtual void Bind() override;
+	virtual void UnBind() override;
 
-	virtual bool OnMousePress(int x, int y);
-	virtual bool OnMouseRelease(int x, int y);
-	virtual bool OnMouseDrag(int x, int y);
+	virtual bool OnMousePress(int x, int y) override;
+	virtual bool OnMouseRelease(int x, int y) override;
+	virtual bool OnMouseDrag(int x, int y) override;
 
 private:
 	EditPanelImpl* m_stage;

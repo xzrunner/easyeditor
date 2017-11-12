@@ -19,11 +19,11 @@ public:
 	TranslateSpriteAOP(const SprPtr& spr, const sm::vec2& offset);
 	TranslateSpriteAOP(const std::vector<SprPtr>& sprs, const sm::vec2& offset);
 
-	virtual void Undo();
-	virtual void Redo();
-	virtual void Copy(const std::vector<SprPtr>& sprs);
+	virtual void Undo() override;
+	virtual void Redo() override;
+	virtual void Copy(const std::vector<SprPtr>& sprs) override;
 
-	virtual Json::Value Store(const std::vector<SprPtr>& sprs) const;
+	virtual Json::Value Store(const std::vector<SprPtr>& sprs) const override;
 
 private:
 	std::vector<SprPtr> m_sprs;

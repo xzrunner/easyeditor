@@ -39,10 +39,10 @@ public:
 	 *  @interface
 	 *    ee::Sprite
 	 */
-	virtual void Load(const Json::Value& val, const std::string& dir = "");
-	virtual void Store(Json::Value& val, const std::string& dir = "") const;
+	virtual void Load(const Json::Value& val, const std::string& dir = "") override;
+	virtual void Store(Json::Value& val, const std::string& dir = "") const override;
 
-	virtual PropertySetting* CreatePropertySetting(EditPanelImpl* stage);
+	virtual PropertySetting* CreatePropertySetting(EditPanelImpl* stage) override;
 
 	void LoadFont(const std::string& filename);
 

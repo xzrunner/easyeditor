@@ -71,21 +71,20 @@ void PointsMesh::Refresh()
 	// todo: rebuild tris
 }
 
-void PointsMesh::TraverseMesh(ee::Visitor<ee::Shape>& visitor) const
+void PointsMesh::TraverseMesh(ee::RefVisitor<ee::Shape>& visitor) const
 {
-	const ee::Shape* shape = dynamic_cast<const ee::Shape*>(this);
 	bool has_next;
-	visitor.Visit(const_cast<ee::Shape*>(shape), has_next);
+	visitor.Visit(std::const_pointer_cast<ee::Shape>(std::static_pointer_cast<const ee::Shape>(shared_from_this())), has_next);
 }
 
-bool PointsMesh::RemoveMesh(ee::Shape* mesh)
+bool PointsMesh::RemoveMesh(const ee::ShapePtr& mesh)
 {
 	return false;
 }
 
-bool PointsMesh::InsertMesh(ee::Shape* mesh)
+bool PointsMesh::InsertMesh(const ee::ShapePtr& mesh)
 {
-	eshape::ChainShape* chain = dynamic_cast<eshape::ChainShape*>(mesh);
+	auto chain = std::dynamic_pointer_cast<eshape::ChainShape>(mesh);
 	assert(chain);
 
 	m_vertices = chain->GetVertices();

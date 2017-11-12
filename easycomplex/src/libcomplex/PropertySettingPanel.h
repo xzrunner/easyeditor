@@ -12,7 +12,7 @@ public:
 	PropertySettingPanel(wxWindow* parent);
 
 protected:
-	virtual ee::PropertySetting* CreateDefaultProperty() const;
+	virtual ee::PropertySetting* CreateDefaultProperty() const override;
 
 }; // PropertySettingPanel
 

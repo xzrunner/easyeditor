@@ -14,7 +14,7 @@ public:
 	StageCanvas(StagePanel* stage);
 
 protected:
-	virtual void OnDrawSprites() const;
+	virtual void OnDrawSprites() const override;
 
 private:
 	void DrawBackground() const;

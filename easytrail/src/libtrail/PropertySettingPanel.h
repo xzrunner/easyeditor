@@ -16,7 +16,7 @@ public:
 	void SetStagePanel(StagePanel* stage) { m_stage = stage; }
 
 protected:
-	virtual ee::PropertySetting* CreateDefaultProperty() const;
+	virtual ee::PropertySetting* CreateDefaultProperty() const override;
 
 private:
 	StagePanel* m_stage;

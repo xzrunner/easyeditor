@@ -19,9 +19,9 @@ class PackLabel;
 class LabelBuilder : public NodeBuilder
 {
 public:
-	virtual void Traverse(ee::Visitor<PackNode>& visitor) const;
+	virtual void Traverse(ee::Visitor<PackNode>& visitor) const override;
 
-	virtual void Clear();
+	virtual void Clear() override;
 
 	const PackNode* Create(const std::shared_ptr<const etext::Sprite>& spr);
 

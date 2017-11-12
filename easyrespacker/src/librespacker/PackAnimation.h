@@ -83,16 +83,16 @@ public:
 	PackAnimation(int id);
 
 	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
-		const ee::TexturePacker& tp, float scale) const;
+		const ee::TexturePacker& tp, float scale) const override;
 	virtual void UnpackFromLua(lua_State* L,
-		const std::vector<ee::ImagePtr>& images);
+		const std::vector<ee::ImagePtr>& images) override;
 
-	virtual int SizeOfPackToBin() const;
+	virtual int SizeOfPackToBin() const override;
 	virtual void PackToBin(uint8_t** ptr,
-		const ee::TexturePacker& tp, float scale) const;
-	virtual int SizeOfUnpackFromBin() const;
+		const ee::TexturePacker& tp, float scale) const override;
+	virtual int SizeOfUnpackFromBin() const override;
 	virtual void UnpackFromBin(uint8_t** ptr, 
-		const std::vector<ee::ImagePtr>& images);
+		const std::vector<ee::ImagePtr>& images) override;
 
 	bool CreateFramePart(const ee::SprConstPtr& spr, Frame& frame);
 	void CreateClipboxFramePart(const PackClipbox* cb, Frame& frame);

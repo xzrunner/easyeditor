@@ -16,16 +16,16 @@ class RectCutOP : public ee::ZoomViewOP
 public:
 	RectCutOP(RectCutCMPT* cmpt, StagePanel* stage);
 
-	virtual bool OnMouseLeftDown(int x, int y);
-	virtual bool OnMouseLeftUp(int x, int y);
-	virtual bool OnMouseRightDown(int x, int y);
-	virtual bool OnMouseRightUp(int x, int y);
-	virtual bool OnMouseMove(int x, int y);
-	virtual bool OnMouseDrag(int x, int y);
-	virtual bool OnMouseLeftDClick(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y) override;
+	virtual bool OnMouseLeftUp(int x, int y) override;
+	virtual bool OnMouseRightDown(int x, int y) override;
+	virtual bool OnMouseRightUp(int x, int y) override;
+	virtual bool OnMouseMove(int x, int y) override;
+	virtual bool OnMouseDrag(int x, int y) override;
+	virtual bool OnMouseLeftDClick(int x, int y) override;
 
-	virtual bool OnDraw() const;
-	virtual bool Clear();
+	virtual bool OnDraw() const override;
+	virtual bool Clear() override;
 
 	const RectMgr& GetRectMgr() const { return m_rects; }
 	RectMgr& GetRectMgr() { return m_rects; }

@@ -13,7 +13,7 @@ class ImageProcessOP : public ee::ZoomViewOP
 public:
 	ImageProcessOP(StagePanel* stage);
 
-	virtual bool OnActive();
+	virtual bool OnActive() override;
 
 private:
 	StagePanel* m_stage;

@@ -15,9 +15,9 @@ public:
 	SymBuilder(bool export_name = false);
 	virtual ~SymBuilder();
 
-	virtual void Traverse(ee::Visitor<PackNode>& visitor) const;
+	virtual void Traverse(ee::Visitor<PackNode>& visitor) const override;
 
-	virtual void Clear();
+	virtual void Clear() override;
 
 	const PackNode* Create(const std::shared_ptr<const TSymbol>& sym);
 

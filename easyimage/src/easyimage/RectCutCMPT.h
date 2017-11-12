@@ -20,7 +20,7 @@ public:
 	void OnLoadEditOP(wxCommandEvent& event);
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 private:
 	wxSizer* InitEditIOLayout();

@@ -13,8 +13,8 @@ class ShearSpriteState : public ArrangeSpriteState
 public:
 	ShearSpriteState(const SprPtr& spr, const SpriteCtrlNode::Node& ctrl_node);
 
-	virtual void OnMouseRelease(const sm::vec2& pos);
-	virtual	bool OnMouseDrag(const sm::vec2& pos);
+	virtual void OnMouseRelease(const sm::vec2& pos) override;
+	virtual	bool OnMouseDrag(const sm::vec2& pos) override;
 
 private:
 	void Shear(const sm::vec2& curr);

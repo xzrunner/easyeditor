@@ -16,8 +16,8 @@ public:
 	SphereRotateState(ee::EditPanelImpl* stage, const sm::vec2& first_pos,
 		sm::Quaternion& dir);
 
-	virtual void OnMouseRelease(const sm::vec2& pos);
-	virtual bool OnMouseDrag(const sm::vec2& pos);
+	virtual void OnMouseRelease(const sm::vec2& pos) override;
+	virtual bool OnMouseDrag(const sm::vec2& pos) override;
 
 private:
 	sm::vec3 MapToSphere(int x, int y);

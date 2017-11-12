@@ -16,9 +16,9 @@ public:
 	DragPhysicsOP(wxWindow* wnd, EditPanelImpl* stage, 
 		b2World* world, b2Body* ground);
 
-	virtual bool OnMouseLeftDown(int x, int y);
-	virtual bool OnMouseLeftUp(int x, int y);
-	virtual bool OnMouseDrag(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y) override;
+	virtual bool OnMouseLeftUp(int x, int y) override;
+	virtual bool OnMouseDrag(int x, int y) override;
 
 private:
 	b2World* m_world;

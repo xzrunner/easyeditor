@@ -19,14 +19,14 @@ public:
 		MultiSpritesImpl* sprites_impl, PasteSpriteCMPT* cmpt = NULL);
 	virtual ~PasteSpriteOP();
 
-	virtual bool OnKeyDown(int keyCode);
-	virtual bool OnMouseLeftDown(int x, int y);
-	virtual bool OnMouseLeftUp(int x, int y);
-	virtual bool OnMouseRightDown(int x, int y);
-	virtual bool OnMouseMove(int x, int y);
+	virtual bool OnKeyDown(int keyCode) override;
+	virtual bool OnMouseLeftDown(int x, int y) override;
+	virtual bool OnMouseLeftUp(int x, int y) override;
+	virtual bool OnMouseRightDown(int x, int y) override;
+	virtual bool OnMouseMove(int x, int y) override;
 
-	virtual bool OnDraw() const;
-	virtual bool Clear();
+	virtual bool OnDraw() const override;
+	virtual bool Clear() override;
 
 private:
 	void setMousePos(int x, int y);

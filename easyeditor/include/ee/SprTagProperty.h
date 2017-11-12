@@ -16,7 +16,7 @@ public:
 	SprTagProperty(const wxString& label = wxPG_LABEL, const wxString& name = wxPG_LABEL, 
 		const wxString& value = wxEmptyString);
 
-	virtual bool OnButtonClick(wxPropertyGrid* propgrid, wxString& value);
+	virtual bool OnButtonClick(wxPropertyGrid* propgrid, wxString& value) override;
 
 	void SetParent(wxWindow* parent) { m_parent = parent; }
 

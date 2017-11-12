@@ -14,8 +14,8 @@ public:
 	void InsertTriangle(const sm::vec2* vertices, 
 		const sm::vec2* texcoords, const std::vector<sm::vec2>& bound);
 
-	virtual int PointQueryVertex(const sm::vec2& p) const { return -1; }
-	virtual void RectQueryVertices(const sm::rect& r, std::vector<int>& vertices) const {}
+	virtual int PointQueryVertex(const sm::vec2& p) const override { return -1; }
+	virtual void RectQueryVertices(const sm::rect& r, std::vector<int>& vertices) const override {}
 
 private:
 	static const bool IS_BOUND = true;

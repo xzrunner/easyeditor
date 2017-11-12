@@ -13,10 +13,10 @@ class MotorJoint : public Joint
 public:
 	MotorJoint(Body* b0, Body* b1);
 
-	virtual bool IsContain(const sm::vec2& pos) const;
-	virtual bool IsIntersect(const sm::rect& rect) const;
+	virtual bool IsContain(const sm::vec2& pos) const override;
+	virtual bool IsIntersect(const sm::rect& rect) const override;
 
-	virtual void Draw(DrawType type) const;
+	virtual void Draw(DrawType type) const override;
 
 private:
 	void DrawAnchor(const sm::vec2& pos, DrawType type) const;

@@ -13,10 +13,10 @@ public:
 
 	void Insert(AtomicOP* atomic);
 
-	virtual void Undo();
-	virtual void Redo();
+	virtual void Undo() override;
+	virtual void Redo() override;
 
-	virtual Json::Value Store(const std::vector<SprPtr>& sprs) const;
+	virtual Json::Value Store(const std::vector<SprPtr>& sprs) const override;
 
 private:
 	std::vector<AtomicOP*> m_atomics;

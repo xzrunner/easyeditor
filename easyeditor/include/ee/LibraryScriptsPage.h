@@ -11,12 +11,12 @@ class LibraryScriptsPage : public LibraryPage
 public:
 	LibraryScriptsPage(wxWindow* parent);
 
-	virtual bool IsHandleSymbol(const SymPtr& sym) const;
+	virtual bool IsHandleSymbol(const SymPtr& sym) const override;
 
-	virtual bool LoadFromConfig();
+	virtual bool LoadFromConfig() override;
 
 protected:
-	virtual void OnAddPress(wxCommandEvent& event);
+	virtual void OnAddPress(wxCommandEvent& event) override;
 
 }; // LibraryScriptsPage
 

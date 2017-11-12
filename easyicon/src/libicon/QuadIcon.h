@@ -21,10 +21,10 @@ public:
 	 *  @interface
 	 *    Icon
 	 */
-	virtual const char* GetIconDesc() const { return "quad"; }
+	virtual const char* GetIconDesc() const override { return "quad"; }
 
-	virtual void LoadFromFile(const Json::Value& value);
-	virtual void StoreToFile(Json::Value& value) const;
+	virtual void LoadFromFile(const Json::Value& value) override;
+	virtual void StoreToFile(Json::Value& value) const override;
 
 }; // QuadIcon
 

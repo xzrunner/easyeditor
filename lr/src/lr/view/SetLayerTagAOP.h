@@ -21,11 +21,11 @@ public:
 public:
 	SetLayerTagAOP(Type type);
 
-	virtual void Undo();
-	virtual void Redo();
-	virtual void Copy(const std::vector<SprPtr>& sprs);
+	virtual void Undo() override;
+	virtual void Redo() override;
+	virtual void Copy(const std::vector<SprPtr>& sprs) override;
 
-	virtual Json::Value Store(const std::vector<ee::SprPtr>& sprs) const;
+	virtual Json::Value Store(const std::vector<ee::SprPtr>& sprs) const override;
 
 	static void Set(const std::vector<ee::SprPtr>& sprs, Type type);
 

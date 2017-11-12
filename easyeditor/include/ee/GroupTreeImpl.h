@@ -23,7 +23,7 @@ public:
 	public:
 		QuerySpriteVisitor(wxTreeCtrl* treectrl, const SprPtr& spr);
 
-		virtual bool VisitLeaf(wxTreeItemId id);
+		virtual bool VisitLeaf(wxTreeItemId id) override;
 
 		wxTreeItemId GetItemID() const { return m_id; }
 
@@ -41,8 +41,8 @@ public:
 	public:
 		RemoveVisitor(wxTreeCtrl* treectrl, const SprPtr& spr);
 
-		virtual bool VisitNonleaf(wxTreeItemId id);
-		virtual bool VisitLeaf(wxTreeItemId id);
+		virtual bool VisitNonleaf(wxTreeItemId id) override;
+		virtual bool VisitLeaf(wxTreeItemId id) override;
 
 		bool IsFinish() const { return m_finish; }
 
@@ -61,7 +61,7 @@ public:
 		SelectVisitor(wxTreeCtrl* treectrl, SpriteSelection* selection);
 		virtual ~SelectVisitor();
 
-		virtual bool VisitLeaf(wxTreeItemId id);
+		virtual bool VisitLeaf(wxTreeItemId id) override;
 
 	private:
 		wxTreeCtrl* m_treectrl;
@@ -75,7 +75,7 @@ public:
 	public:
 		GetSpritesVisitor(wxTreeCtrl* treectrl, std::vector<SprPtr>& sprs);
 
-		virtual bool VisitLeaf(wxTreeItemId id);
+		virtual bool VisitLeaf(wxTreeItemId id) override;
 
 	private:
 		wxTreeCtrl* m_treectrl;
@@ -89,7 +89,7 @@ public:
 	public:
 		GetFirstSpriteVisitor(wxTreeCtrl* treectrl);
 
-		virtual bool VisitLeaf(wxTreeItemId id);
+		virtual bool VisitLeaf(wxTreeItemId id) override;
 
 		const SprPtr& GetFirstSprite() { return m_first; }
 
@@ -105,7 +105,7 @@ public:
 	public:
 		VisibleVisitor(wxTreeCtrl* treectrl) 
 			: m_treectrl(treectrl) {}
-		virtual bool VisitLeaf(wxTreeItemId id);
+		virtual bool VisitLeaf(wxTreeItemId id) override;
 	private:
 		wxTreeCtrl* m_treectrl;
 	}; // VisibleVisitor
@@ -115,7 +115,7 @@ public:
 	public:
 		EditableVisitor(wxTreeCtrl* treectrl) 
 			: m_treectrl(treectrl) {}
-		virtual bool VisitLeaf(wxTreeItemId id);
+		virtual bool VisitLeaf(wxTreeItemId id) override;
 	private:
 		wxTreeCtrl* m_treectrl;
 	}; // EditableVisitor	
@@ -125,7 +125,7 @@ public:
 	public:
 		SetVisibleVisitor(wxTreeCtrl* treectrl, bool visible) 
 			: m_treectrl(treectrl), m_visible(visible) {}
-		virtual bool VisitLeaf(wxTreeItemId id);
+		virtual bool VisitLeaf(wxTreeItemId id) override;
 	private:
 		wxTreeCtrl* m_treectrl;
 		bool m_visible;
@@ -136,7 +136,7 @@ public:
 	public:
 		SetEditableVisitor(wxTreeCtrl* treectrl, bool editable) 
 			: m_treectrl(treectrl), m_editable(editable) {}
-		virtual bool VisitLeaf(wxTreeItemId id);
+		virtual bool VisitLeaf(wxTreeItemId id) override;
 	private:
 		wxTreeCtrl* m_treectrl;
 		bool m_editable;
@@ -147,8 +147,8 @@ public:
 	public:
 		StoreVisitor(const GroupTreeCtrl* treectrl, Json::Value& value);
 
-		virtual bool VisitNonleaf(wxTreeItemId id);
-		virtual bool VisitLeaf(wxTreeItemId id);
+		virtual bool VisitNonleaf(wxTreeItemId id) override;
+		virtual bool VisitLeaf(wxTreeItemId id) override;
 
 	private:
 		std::string GetName(wxTreeItemId id) const;
@@ -166,8 +166,8 @@ public:
 		CopyPasteVisitor(GroupTreeCtrl* treectrl, wxTreeItemId from, 
 			wxTreeItemId to);
 
-		virtual bool VisitNonleaf(wxTreeItemId id);
-		virtual bool VisitLeaf(wxTreeItemId id);
+		virtual bool VisitNonleaf(wxTreeItemId id) override;
+		virtual bool VisitLeaf(wxTreeItemId id) override;
 
 	private:
 		void CopyPaste(wxTreeItemId id);

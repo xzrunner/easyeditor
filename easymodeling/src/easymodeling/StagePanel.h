@@ -35,7 +35,7 @@ protected:
 	//
 	//	interface Observer
 	//
-	virtual void OnNotify(int sj_id, void* ud);
+	virtual void OnNotify(int sj_id, void* ud) override;
 
 private:
 	static void loadBody(const std::string& filepath, Body& body);
@@ -50,7 +50,7 @@ private:
 	{
 	public:
 		PointQueryVisitor(const sm::vec2& pos, ee::SprPtr* pResult);
-		virtual void Visit(const ee::SprPtr& spr, bool& next);
+		virtual void Visit(const ee::SprPtr& spr, bool& next) override;
 
 	private:
 		const sm::vec2& m_pos;
@@ -62,7 +62,7 @@ private:
 	{
 	public:
 		RectQueryVisitor(const sm::rect& rect, std::vector<ee::SprPtr>& result);
-		virtual void Visit(const ee::SprPtr& spr, bool& next);
+		virtual void Visit(const ee::SprPtr& spr, bool& next) override;
 
 	private:
 		const sm::rect& m_rect;

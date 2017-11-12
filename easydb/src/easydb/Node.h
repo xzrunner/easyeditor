@@ -16,7 +16,7 @@ public:
 	virtual int Type() const = 0;
 
 	virtual void Store(std::ofstream& fout) const;
-	virtual void Load(std::ifstream& fin);
+	virtual void Load(std::ifstream& fin) override;
 
 	const std::string& GetPath() const { return m_path; }
 	void SetPath(const std::string& path) { m_path = path; }

@@ -15,14 +15,14 @@ class ArrangeSpriteImpl : public ee::ArrangeSpriteImpl
 public:
 	ArrangeSpriteImpl(StagePanel* stage, ee::PropertySettingPanel* property);
 
-	virtual void OnMouseLeftDown(int x, int y);
-	virtual void OnMouseLeftUp(int x, int y);
+	virtual void OnMouseLeftDown(int x, int y) override;
+	virtual void OnMouseLeftUp(int x, int y) override;
 
-	virtual void OnDraw(float cam_scale) const;
+	virtual void OnDraw(float cam_scale) const override;
 
 private:
 	virtual ee::ArrangeSpriteState* CreateTranslateState(ee::SpriteSelection* selection, 
-		const sm::vec2& first_pos) const;
+		const sm::vec2& first_pos) const override;
 
 private:
 	StagePanel* m_stage;

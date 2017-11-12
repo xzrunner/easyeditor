@@ -27,8 +27,8 @@ public:
 	//
 	// UICallback interface
 	//
-	virtual void SetValue(int key, const ee::UICallback::Data& data);
-	virtual void GetValue(int key, ee::UICallback::Data& data);
+	virtual void SetValue(int key, const ee::UICallback::Data& data) override;
+	virtual void GetValue(int key, ee::UICallback::Data& data) override;
 
 	void Load(const Json::Value& val);
 	void Store(Json::Value& val) const;
@@ -40,7 +40,7 @@ public:
 	void OnDelChild(ComponentPanel* child);
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 private:
 	wxSizer* CreateMainLayout();
@@ -71,7 +71,7 @@ private:
 		DropTarget(ee::LibraryPanel* library, StagePanel* stage,
 			ToolbarPanel* toolbar);
 
-		virtual bool OnDropText(wxCoord x, wxCoord y, const wxString& data);
+		virtual bool OnDropText(wxCoord x, wxCoord y, const wxString& data) override;
 
 	private:
 		ee::LibraryPanel* m_library;

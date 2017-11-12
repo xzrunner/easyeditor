@@ -14,7 +14,7 @@ public:
 	LibraryPageDropTarget(LibraryPage* page) 
 		: m_page(page) {}
 
-	virtual bool OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames);
+	virtual bool OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames) override;
 
 private:
 	LibraryPage* m_page;

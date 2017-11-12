@@ -14,7 +14,7 @@ public:
 	SkeletonCMPT(wxWindow* parent, const std::string& name, bool vertical);
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 private:
 	wxSizer* InitEditPanel();

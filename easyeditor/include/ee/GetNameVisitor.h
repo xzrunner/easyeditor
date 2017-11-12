@@ -13,7 +13,7 @@ public:
 	GetNameVisitor(std::vector<std::string>& names)
 		: m_names(names) {}
 
-	virtual void Visit(T* obj, bool& next)
+	virtual void Visit(T* obj, bool& next) override
 	{
 		if (obj)
 			m_names.push_back(obj->getName());

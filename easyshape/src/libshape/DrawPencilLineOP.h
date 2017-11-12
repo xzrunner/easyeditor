@@ -14,7 +14,7 @@ public:
 	DrawPencilLineOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
 		ee::OneFloatValue* simplify);
 
-	virtual bool OnMouseLeftUp(int x, int y);
+	virtual bool OnMouseLeftUp(int x, int y) override;
 
 private:
 	ee::OneFloatValue* m_simplify;

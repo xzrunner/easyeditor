@@ -29,7 +29,7 @@ public:
 	float getHeight() const;
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 private:
 	ResizeCMPT* m_resizeCmpt;

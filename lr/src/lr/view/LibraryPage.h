@@ -26,7 +26,7 @@ public:
 	//
 	//	interface ee::LibraryPage
 	//
-	virtual bool IsHandleSymbol(const ee::SymPtr& sym) const;
+	virtual bool IsHandleSymbol(const ee::SymPtr& sym) const override;
 
 	void UpdateStatusFromLayer();
 
@@ -40,9 +40,9 @@ public:
 	s2::CameraMode GetLayerCameraMode() const { return m_cam_mode; }
 
 protected:
-	virtual void InitLayoutExtend(wxSizer* sizer);
+	virtual void InitLayoutExtend(wxSizer* sizer) override;
 
-	virtual void OnAddPress(wxCommandEvent& event);
+	virtual void OnAddPress(wxCommandEvent& event) override;
 
 private:
 	void OnChangeVisible(wxCommandEvent& event);

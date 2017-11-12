@@ -16,8 +16,8 @@ public:
 	BinaryTreeNewArrange();
 	virtual ~BinaryTreeNewArrange();
 
-	virtual void Arrange(const std::vector<ee::ImageSprite*>& sprs);
-	virtual int GetTextureAccount() const {
+	virtual void Arrange(const std::vector<ee::ImageSprite*>& sprs) override;
+	virtual int GetTextureAccount() const override {
 		return m_tex_account;
 	}
 

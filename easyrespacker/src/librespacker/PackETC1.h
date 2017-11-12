@@ -14,8 +14,8 @@ public:
 	PackETC1();
 	virtual ~PackETC1();
 
-	virtual void Load(const std::string& filepath);
-	virtual void Store(const std::string& filepath, float scale) const;
+	virtual void Load(const std::string& filepath) override;
+	virtual void Store(const std::string& filepath, float scale) const override;
 
 private:
 	void Clear();

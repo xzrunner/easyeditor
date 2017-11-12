@@ -18,7 +18,7 @@ public:
 	bool isVerMirror() const { return m_yMirror->IsChecked(); }
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 private:
 	wxCheckBox* m_xMirror;

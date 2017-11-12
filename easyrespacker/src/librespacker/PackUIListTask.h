@@ -11,8 +11,8 @@ class PackUIListTask : public PackUITask
 public:
 	PackUIListTask(const std::string& filepath, const Json::Value& value);
 	
-	virtual void OnKnownPackID(const std::string& filepath, int id);
-	virtual void Output(const std::string& dir, Json::Value& value) const;
+	virtual void OnKnownPackID(const std::string& filepath, int id) override;
+	virtual void Output(const std::string& dir, Json::Value& value) const override;
 
 private:
  	int m_id;

@@ -12,10 +12,10 @@ public:
 	Frame(const std::string& title);
 
 protected:
-	virtual void OnNew(wxCommandEvent& event);
-	virtual void OnOpen(wxCommandEvent& event);
-	virtual void OnSave(wxCommandEvent& event);
-	virtual void OnSaveAs(wxCommandEvent& event);
+	virtual void OnNew(wxCommandEvent& event) override;
+	virtual void OnOpen(wxCommandEvent& event) override;
+	virtual void OnSave(wxCommandEvent& event) override;
+	virtual void OnSaveAs(wxCommandEvent& event) override;
 
 }; // Frame
 

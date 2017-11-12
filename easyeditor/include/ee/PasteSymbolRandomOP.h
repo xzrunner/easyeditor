@@ -13,10 +13,10 @@ public:
 	PasteSymbolRandomOP(wxWindow* wnd, EditPanelImpl* stage, 
 		LibraryPanel* library, PasteSymbolRandomWidget* randomWidget);
 
-	virtual bool OnMouseLeftDown(int x, int y);
-	virtual bool OnMouseRightDown(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y) override;
+	virtual bool OnMouseRightDown(int x, int y) override;
 
-	virtual bool OnDraw() const;
+	virtual bool OnDraw() const override;
 
 private:
 	void ChangeRandomValue();

@@ -15,9 +15,9 @@ public:
 	EditKeyFramesAOP(Layer* layer);
 	virtual ~EditKeyFramesAOP();
 
-	virtual void Undo();
-	virtual void Redo();
-	virtual Json::Value Store(const std::vector<ee::SprPtr>& sprs) const { return Json::Value(); }
+	virtual void Undo() override;
+	virtual void Redo() override;
+	virtual Json::Value Store(const std::vector<ee::SprPtr>& sprs) const override { return Json::Value(); }
 
 	void AddRemoved(KeyFrame* kf);
 	void AddInserted(KeyFrame* kf);

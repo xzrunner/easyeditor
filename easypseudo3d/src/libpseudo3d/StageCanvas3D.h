@@ -20,7 +20,7 @@ public:
 	void GetScreenSize(int* width, int* height) const;
 
 protected:
-	virtual void OnDrawSprites() const;
+	virtual void OnDrawSprites() const override;
 	//virtual void OnDrawDC() const;
 
 	void OnTimer(wxTimerEvent& event);

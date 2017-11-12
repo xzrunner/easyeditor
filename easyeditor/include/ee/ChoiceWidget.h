@@ -9,18 +9,18 @@ namespace ee
 class ChoiceWidget : public DynamicWidget
 {
 public:
-	virtual std::string GetValue() const;
+	virtual std::string GetValue() const override;
 
-	virtual bool IsChanged() const;
+	virtual bool IsChanged() const override;
 
 	virtual void InitLayout(wxWindow* parent, wxSizer* top_sizer,
-		const DynamicInfo& info);
+		const DynamicInfo& info) override;
 
 	void SpecialLoad(const std::string& title, const std::string& key,
 		const std::vector<std::string>& items, const std::string& default_item);
 
 protected:
-	virtual void Load(const Json::Value& value);
+	virtual void Load(const Json::Value& value) override;
 
 private:
 	struct Item

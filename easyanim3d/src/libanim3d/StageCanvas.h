@@ -15,8 +15,8 @@ public:
 		ee::MultiSpritesImpl* sprites_impl);
 
 protected:
-	virtual void OnSize(int w, int h);
-	virtual void OnDrawSprites() const;
+	virtual void OnSize(int w, int h) override;
+	virtual void OnDrawSprites() const override;
 
 private:
 	void DrawBackground() const;

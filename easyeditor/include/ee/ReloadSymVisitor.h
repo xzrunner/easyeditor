@@ -10,7 +10,7 @@ namespace ee
 class ReloadSymVisitor : public RefVisitor<Symbol>
 {
 public:
-	virtual void Visit(const SymPtr& sym, bool& next)
+	virtual void Visit(const SymPtr& sym, bool& next) override
 	{
 		sym->LoadFromFile(sym->GetFilepath());
 		next = true;

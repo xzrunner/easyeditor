@@ -61,7 +61,7 @@ class Component : public IPackNode
 public:
 	Component(lua_State* L);
 
-	virtual size_t Size() const;
+	virtual size_t Size() const override;
 	virtual void Store(uint8_t** ptr) const;
 
 private:
@@ -74,7 +74,7 @@ class Switch : public IPackNode
 public:
 	Switch(lua_State* L);
 
-	virtual size_t Size() const;
+	virtual size_t Size() const override;
 	virtual void Store(uint8_t** ptr) const;
 
 private:
@@ -88,7 +88,7 @@ class Label : public IPackNode
 public:
 	Label(lua_State* L);
 
-	virtual size_t Size() const;
+	virtual size_t Size() const override;
 	virtual void Store(uint8_t** ptr) const;
 
 private:
@@ -106,7 +106,7 @@ class Mount : public IPackNode
 public:
 	Mount(lua_State* L);
 
-	virtual size_t Size() const;
+	virtual size_t Size() const override;
 	virtual void Store(uint8_t** ptr) const;
 
 private:

@@ -13,9 +13,9 @@ class RotateCameraState : public IEditState
 public:
 	RotateCameraState(e3d::StageCanvas* canvas);
 
-	virtual void OnMousePress(const sm::ivec2& pos);
-	virtual void OnMouseRelease(const sm::ivec2& pos);
-	virtual void OnMouseMove(const sm::ivec2& pos);
+	virtual void OnMousePress(const sm::ivec2& pos) override;
+	virtual void OnMouseRelease(const sm::ivec2& pos) override;
+	virtual void OnMouseMove(const sm::ivec2& pos) override;
 
 private:
 	e3d::StageCanvas* m_canvas;

@@ -39,7 +39,7 @@ private:
 	{
 	public:
 		StageDropTarget(StagePanel* stage, ee::LibraryPanel* library);
-		virtual bool OnDropSymbol(const ee::SymPtr& sym, const sm::vec2& pos);
+		virtual bool OnDropSymbol(const ee::SymPtr& sym, const sm::vec2& pos) override;
 	private:
 		StagePanel* m_stage;
 	}; // StageDropTarget 

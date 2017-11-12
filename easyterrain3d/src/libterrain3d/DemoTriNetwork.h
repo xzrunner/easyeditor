@@ -15,8 +15,8 @@ class DemoTriNetwork : public IDemo
 public:
 	DemoTriNetwork(e3d::Camera& cam);
 	
-	virtual void Load();
-	virtual void Draw() const;
+	virtual void Load() override;
+	virtual void Draw() const override;
 
 private:
 	// v1 - v2 is the long edge

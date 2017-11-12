@@ -20,7 +20,7 @@ public:
 	Particle2DBuilder(ExportNameSet& export_set);
 	virtual ~Particle2DBuilder();
 
-	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
+	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const override;
 
 	const IPackNode* Create(const std::shared_ptr<const eparticle2d::Symbol>& sym);
 

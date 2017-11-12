@@ -13,7 +13,7 @@ class WaveVerticesOP : public ee::ZoomViewOP
 public:
 	WaveVerticesOP(StagePanel* stage);
 
-	virtual bool OnDraw() const;
+	virtual bool OnDraw() const override;
 
 private:
 	StagePanel* m_stage;

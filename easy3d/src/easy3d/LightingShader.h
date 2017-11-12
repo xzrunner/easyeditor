@@ -12,13 +12,13 @@ class LightingShader : public ModelShader
 public:
 	LightingShader();
 
-	virtual void Bind();
+	virtual void Bind() override;
 
 protected:
-	virtual void LoadShader();
+	virtual void LoadShader() override;
 
-	virtual void SetNormalMatrix(const sm::mat3& noraml_mat);
-	virtual void SetMaterial(const Material& material);
+	virtual void SetNormalMatrix(const sm::mat3& noraml_mat) override;
+	virtual void SetMaterial(const Material& material) override;
 
 private:
 	GLuint m_diffuse_material;

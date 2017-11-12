@@ -13,13 +13,13 @@ class Skin2Mesh : public MeshShape
 public:
 	Skin2Mesh(const pm::Skin2Triangles* mesh);
 
-	virtual int Type() const;
+	virtual int Type() const override;
 
 	virtual void PackToLuaString(ebuilder::CodeGenerator& gen) const;
 
-	virtual int SizeOfUnpackFromBin() const;
+	virtual int SizeOfUnpackFromBin() const override;
 
-	virtual int SizeOfPackToBin() const;
+	virtual int SizeOfPackToBin() const override;
 	virtual void PackToBin(uint8_t** ptr) const;
 
 private:

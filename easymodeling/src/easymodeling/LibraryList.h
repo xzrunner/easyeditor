@@ -11,7 +11,7 @@ class LibraryList : public ee::LibraryList
 public:
 	LibraryList(ee::LibraryPage* page);
 
-	virtual void OnListDoubleClicked(wxCommandEvent& event);
+	virtual void OnListDoubleClicked(wxCommandEvent& event) override;
 
 }; // LibraryPage
 

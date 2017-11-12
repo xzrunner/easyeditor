@@ -14,9 +14,9 @@ public:
 	//
 	// interface ColorMonitor
 	//
-	virtual s2::Color GetColor() const;
-	virtual void OnColorChanged();
-	virtual void OnColorChanged(const s2::Color& col);
+	virtual s2::Color GetColor() const override;
+	virtual void OnColorChanged() override;
+	virtual void OnColorChanged(const s2::Color& col) override;
 
 private:
 	s2::Color* m_col;

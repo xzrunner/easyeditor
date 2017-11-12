@@ -15,11 +15,11 @@ public:
 	MirrorSpriteAOP(const SprPtr& spr, bool old_mirror_x, bool old_mirror_y,
 		bool new_mirror_x, bool new_mirror_y);
 
-	virtual void Undo();
-	virtual void Redo();
-	virtual void Copy(const std::vector<SprPtr>& sprs);
+	virtual void Undo() override;
+	virtual void Redo() override;
+	virtual void Copy(const std::vector<SprPtr>& sprs) override;
 
-	virtual Json::Value Store(const std::vector<SprPtr>& sprs) const;
+	virtual Json::Value Store(const std::vector<SprPtr>& sprs) const override;
 
 private:
 	static void SetMirror(const SprPtr& spr, const sm::bvec2& mirror);

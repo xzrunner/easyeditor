@@ -22,11 +22,11 @@ class CodeLine : public CodeNode
 public:
 	CodeLine(const std::string& line) : str(line) {}
 
-	virtual bool existLine(const std::string& line) const {
+	virtual bool existLine(const std::string& line) const override {
 		return str == line;
 	}
 
-	virtual void toText(std::string& text) const {
+	virtual void toText(std::string& text) const override {
 		text += str + "\n";
 	}
 
@@ -39,9 +39,9 @@ class CodeBlock : public CodeNode
 public:
 	virtual ~CodeBlock();
 
-	virtual bool existLine(const std::string& line) const;
+	virtual bool existLine(const std::string& line) const override;
 
-	virtual void toText(std::string& text) const;
+	virtual void toText(std::string& text) const override;
 
 	void push_back(const CodeNode* node) {
 		children.push_back(node);

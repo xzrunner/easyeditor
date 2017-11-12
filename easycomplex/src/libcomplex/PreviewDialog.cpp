@@ -16,7 +16,7 @@ namespace ecomplex
 class InitVisitor : public ee::RefVisitor<ee::Sprite>
 {
 public:
-	virtual void Visit(const ee::SprPtr& spr, bool& next) {
+	virtual void Visit(const ee::SprPtr& spr, bool& next) override {
 		if (auto anim = std::dynamic_pointer_cast<libanim::Sprite>(spr)) {
 			anim->SetLoop(false);
 		}

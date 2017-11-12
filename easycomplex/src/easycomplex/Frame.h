@@ -12,11 +12,11 @@ public:
 	Frame(const std::string& title, const std::string& filetag);
 
 protected:
-	virtual void OnSaveAs(wxCommandEvent& event);
+	virtual void OnSaveAs(wxCommandEvent& event) override;
 
-	virtual void OnSettings(wxCommandEvent& event);
+	virtual void OnSettings(wxCommandEvent& event) override;
 
-	virtual std::string GetFileFilter() const;
+	virtual std::string GetFileFilter() const override;
 
 private:
 	void onPreview(wxCommandEvent& event);

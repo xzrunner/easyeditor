@@ -12,7 +12,7 @@ public:
 	TranslateSpriteState(ee::SpriteSelection* selection, const sm::vec2& first_pos);
 	
 protected:
-	virtual void Translate(const sm::vec2& offset);
+	virtual void Translate(const sm::vec2& offset) override;
 
 }; // TranslateSpriteState 
 

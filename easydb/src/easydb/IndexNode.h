@@ -15,10 +15,10 @@ public:
 	IndexNode();
 	IndexNode(const std::string& path);
 
-	virtual int Type() const { return NODE_INDEX; }
+	virtual int Type() const override { return NODE_INDEX; }
 
-	virtual void Store(std::ofstream& fout) const;
-	virtual void Load(std::ifstream& fin);
+	virtual void Store(std::ofstream& fout) const override;
+	virtual void Load(std::ifstream& fin) override;
 
 	void SetChildren(const std::vector<int>& children) { m_children = children; }
 	const std::vector<int>& GetChildren() const { return m_children; }

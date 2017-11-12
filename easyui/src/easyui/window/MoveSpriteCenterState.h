@@ -17,9 +17,9 @@ public:
 	MoveSpriteCenterState(ecomplex::Sprite* spr, const sm::vec2& first_pos);
 	virtual ~MoveSpriteCenterState();
 
-	virtual	void OnMousePress(const sm::vec2& pos);
-	virtual void OnMouseRelease(const sm::vec2& pos);
-	virtual	bool OnMouseDrag(const sm::vec2& pos);
+	virtual void OnMousePress(const sm::vec2& pos) override;
+	virtual void OnMouseRelease(const sm::vec2& pos) override;
+	virtual	bool OnMouseDrag(const sm::vec2& pos) override;
 
 private:
 	ecomplex::Sprite* m_spr;

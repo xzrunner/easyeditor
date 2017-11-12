@@ -20,20 +20,20 @@ public:
 	//
 	// ee::EditPanel interface
 	//
-	virtual bool UpdateStage();
+	virtual bool UpdateStage() override;
 
 	//
 	// ee::MultiSpritesImpl interface
 	//
 	virtual void TraverseSprites(ee::RefVisitor<ee::Sprite>& visitor, 
 		ee::DataTraverseType type = ee::DT_ALL,
-		bool order = true) const;
+		bool order = true) const override;
 
 protected:
 	//
 	//	interface Observer
 	//
-	virtual void OnNotify(int sj_id, void* ud);
+	virtual void OnNotify(int sj_id, void* ud) override;
 
 private:
 	void OnMenuAddJointNode(wxCommandEvent& event);
@@ -62,7 +62,7 @@ private:
 	public:
 		CheckUpdateVisitor();
 
-		virtual void Visit(const ee::SprPtr& spr, bool& next);
+		virtual void Visit(const ee::SprPtr& spr, bool& next) override;
 
 		bool NeedUpdate() const { return m_update; }
 
@@ -76,8 +76,8 @@ private:
 	public:
 		StageDropTarget(StagePanel* stage, ee::LibraryPanel* library);
 
-		virtual void OnDropText(wxCoord x, wxCoord y, const wxString& text);
-		virtual void OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames);
+		virtual void OnDropText(wxCoord x, wxCoord y, const wxString& text) override;
+		virtual void OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames) override;
 
 	private:
 		StagePanel* m_stage;

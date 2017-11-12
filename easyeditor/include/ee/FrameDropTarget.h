@@ -14,7 +14,7 @@ public:
 	FrameDropTarget(Frame* frame) 
 		: m_frame(frame) {}
 
-	virtual bool OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames);
+	virtual bool OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames) override;
 
 private:
 	Frame* m_frame;

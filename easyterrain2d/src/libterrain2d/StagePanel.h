@@ -24,7 +24,7 @@ public:
 		const ee::MultiSpritesImpl* bg_sprites, ee::LibraryPanel* library);
 	virtual ~StagePanel();
 
-	virtual bool UpdateStage();
+	virtual bool UpdateStage() override;
 
 	void Store(const std::string& dir, Json::Value& value) const;
 	void Load(const std::string& dir, const Json::Value& value, 
@@ -46,7 +46,7 @@ private:
  	public:
  		StageDropTarget(StagePanel* stage, ee::LibraryPanel* library);
  
- 		virtual bool OnDropSymbol(const ee::SymPtr& sym, const sm::vec2& pos);
+ 		virtual bool OnDropSymbol(const ee::SymPtr& sym, const sm::vec2& pos) override;
  
  	private:
  		StagePanel* m_stage;

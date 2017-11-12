@@ -10,10 +10,10 @@ namespace ee
 class ShapeSelection : public SelectionSet<Shape>
 {
 public:
-	virtual void Clear();
+	virtual void Clear() override;
 
-	virtual void Add(const ShapePtr& item);
-	virtual void Remove(const ShapePtr& item);
+	virtual void Add(const ShapePtr& item) override;
+	virtual void Remove(const ShapePtr& item) override;
 
 }; // ShapeSelection
 

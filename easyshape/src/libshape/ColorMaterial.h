@@ -14,7 +14,7 @@ public:
 	ColorMaterial() {}
 	ColorMaterial(const s2::Color& color);
 
-	virtual Json::Value Store(const std::string& dirpath) const;
+	virtual Json::Value Store(const std::string& dirpath) const override;
 
 }; // ColorMaterial
 

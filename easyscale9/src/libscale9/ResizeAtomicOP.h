@@ -16,10 +16,10 @@ public:
 	ResizeAtomicOP(const std::shared_ptr<Symbol>& sym, const sm::vec2& src, 
 		const sm::vec2& dst);
 
-	virtual void Undo();
-	virtual void Redo();
+	virtual void Undo() override;
+	virtual void Redo() override;
 
-	virtual Json::Value Store(const std::vector<ee::SprPtr>& sprs) const {
+	virtual Json::Value Store(const std::vector<ee::SprPtr>& sprs) const override {
 		Json::Value ret;
 		return ret;
 	}

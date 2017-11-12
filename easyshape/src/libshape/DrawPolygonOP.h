@@ -14,7 +14,7 @@ public:
 	DrawPolygonOP(wxWindow* wnd, ee::EditPanelImpl* stage,
 		ee::MultiShapesImpl* shapes_impl);
 
-	virtual bool OnMouseLeftDClick(int x, int y);
+	virtual bool OnMouseLeftDClick(int x, int y) override;
 
 }; // DrawPolygonOP
 

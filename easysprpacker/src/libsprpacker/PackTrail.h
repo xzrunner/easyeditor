@@ -24,15 +24,15 @@ public:
 	 *    lua
 	 */
 	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
-		const ee::TexturePacker& tp) const;
+		const ee::TexturePacker& tp) const override;
 	
 	/**
 	 *  @interface
 	 *    bin
 	 */
-	virtual int SizeOfUnpackFromBin() const;
-	virtual int SizeOfPackToBin() const;
-	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const;	
+	virtual int SizeOfUnpackFromBin() const override;
+	virtual int SizeOfPackToBin() const override;
+	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const override;	
 	
 private:
 	void Init(const std::shared_ptr<etrail::Symbol>& sym);	

@@ -16,7 +16,7 @@ class MoveSpriteState : public ArrangeSpriteState
 public:
 	MoveSpriteState(SpriteSelection* selection);
 
-	virtual	bool OnMouseMove(const sm::vec2& pos);
+	virtual bool OnMouseMove(const sm::vec2& pos) override;
 
 private:
 	std::vector<SprPtr> m_sprs;

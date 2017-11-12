@@ -20,7 +20,7 @@ public:
 	StageCanvas(StagePanel* editpanel, wxGLContext* glctx);
 
 protected:
-	virtual void OnDrawSprites() const;
+	virtual void OnDrawSprites() const override;
 
 private:
 	const s2::Skeleton& m_sk;

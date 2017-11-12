@@ -17,10 +17,10 @@ public:
 	RotateJointAOP(s2::MeshJoint* joint, float rot);
 	virtual ~RotateJointAOP();
 	
-	virtual void Undo();
-	virtual void Redo();
+	virtual void Undo() override;
+	virtual void Redo() override;
 
-	virtual Json::Value Store(const std::vector<ee::SprPtr>& sprs) const { return Json::Value(); }
+	virtual Json::Value Store(const std::vector<ee::SprPtr>& sprs) const override { return Json::Value(); }
 
 private:
 	s2::MeshJoint* m_joint;

@@ -19,8 +19,8 @@ public:
 	PackAnimation(lua_State* L, uint32_t id);
 	virtual ~PackAnimation();
 
-	virtual size_t Size() const;
-	virtual void Store(std::ofstream& fout) const;
+	virtual size_t Size() const override;
+	virtual void Store(std::ofstream& fout) const override;
 
 private:
 	struct Clipbox

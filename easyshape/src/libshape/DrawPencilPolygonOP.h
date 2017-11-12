@@ -16,8 +16,8 @@ public:
 	DrawPencilPolygonOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapes_impl,
 		ee::OneFloatValue* simplify, DrawPencilPolygonCMPT* cmpt);
 
-	virtual bool OnKeyDown(int keyCode);
-	virtual bool OnMouseLeftUp(int x, int y);
+	virtual bool OnKeyDown(int keyCode) override;
+	virtual bool OnMouseLeftUp(int x, int y) override;
 
 private:
 	void NewPolygon(const CU_VEC<sm::vec2>& poly);

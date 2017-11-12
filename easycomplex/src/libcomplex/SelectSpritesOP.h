@@ -14,13 +14,13 @@ public:
 	SelectSpritesOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
 		ee::MultiSpritesImpl* sprites_impl, ee::EditCMPT* callback = NULL);
 
-	virtual bool OnKeyDown(int keyCode);
-	virtual bool OnMouseLeftDown(int x, int y);
-	virtual bool OnMouseLeftUp(int x, int y);
-	virtual bool OnMouseDrag(int x, int y);
-	virtual bool OnMouseLeftDClick(int x, int y);
+	virtual bool OnKeyDown(int keyCode) override;
+	virtual bool OnMouseLeftDown(int x, int y) override;
+	virtual bool OnMouseLeftUp(int x, int y) override;
+	virtual bool OnMouseDrag(int x, int y) override;
+	virtual bool OnMouseLeftDClick(int x, int y) override;
 
-	virtual bool OnDraw() const;
+	virtual bool OnDraw() const override;
 
 	void SetGuides(ee::CrossGuides* guides) { m_guides = guides; }
 

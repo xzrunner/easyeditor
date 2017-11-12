@@ -21,10 +21,10 @@ public:
 	LeafNode();
 	LeafNode(const std::string& path);
 	
-	virtual int Type() const { return NODE_LEAF; }
+	virtual int Type() const override { return NODE_LEAF; }
 
-	virtual void Store(std::ofstream& fout) const;
-	virtual void Load(std::ifstream& fin);
+	virtual void Store(std::ofstream& fout) const override;
+	virtual void Load(std::ifstream& fin) override;
 
 	time_t GetTimestamp() const { return m_timestamp; }
 

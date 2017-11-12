@@ -21,13 +21,13 @@ public:
 	//
 	// ee::EditPanel interface
 	//
-	virtual bool UpdateStage();
+	virtual bool UpdateStage() override;
 
 	//
 	// ee::MultiSpritesImpl interface
 	//
 	virtual void TraverseSprites(ee::RefVisitor<ee::Sprite>& visitor, 
-		ee::DataTraverseType type = ee::DT_ALL, bool order = true) const {}
+		ee::DataTraverseType type = ee::DT_ALL, bool order = true) const override {}
 
 	const std::shared_ptr<Symbol>& GetSymbol() { return m_sym; }
 	void SetSymbol(const std::shared_ptr<Symbol>& sym) { m_sym = sym; }
@@ -36,7 +36,7 @@ protected:
 	//
 	//	interface Observer
 	//
-	virtual void OnNotify(int sj_id, void* ud);
+	virtual void OnNotify(int sj_id, void* ud) override;
 
 private:
 	LibraryPanel* m_library;

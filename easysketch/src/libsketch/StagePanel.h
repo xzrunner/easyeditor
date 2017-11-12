@@ -21,7 +21,7 @@ public:
 	// ee::MultiSpritesImpl interface
 	//
 	virtual void TraverseSprites(ee::RefVisitor<ee::Sprite>& visitor, 
-		ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
+		ee::DataTraverseType type = ee::DT_ALL, bool order = true) const override;
 
 	sm::ivec2 TransPos3ProjectToScreen(const sm::vec3& proj) const;
 	sm::vec3 TransPos3ScreenToProject(const sm::ivec2& scr, float proj_z) const;
@@ -30,7 +30,7 @@ protected:
 	//
 	//	interface Observer
 	//
-	virtual void OnNotify(int sj_id, void* ud);
+	virtual void OnNotify(int sj_id, void* ud) override;
 
 private:
 	void Insert(const ee::SprPtr& spr);

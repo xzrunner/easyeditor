@@ -17,9 +17,9 @@ public:
 		const std::vector<ee::SprPtr>& sprs, wxGLContext* glctx);
 
 protected:
-	virtual void OnDrawSprites() const;
+	virtual void OnDrawSprites() const override;
 
-	virtual void OnTimer();
+	virtual void OnTimer() override;
 
 private:
 	ee::PlayControl& m_control;

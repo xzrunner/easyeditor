@@ -13,15 +13,15 @@ class CreatePointsMeshOP : public eshape::EditPolylineOP<eshape::DrawLoopOP, esh
 public:
 	CreatePointsMeshOP(StagePanel* stage);
 
-	virtual bool OnKeyDown(int keyCode);
-	virtual bool OnMouseLeftDown(int x, int y);
-	virtual bool OnMouseLeftUp(int x, int y);
-	virtual bool OnMouseRightDown(int x, int y);
-	virtual bool OnMouseRightUp(int x, int y);
-	virtual bool OnMouseDrag(int x, int y);
+	virtual bool OnKeyDown(int keyCode) override;
+	virtual bool OnMouseLeftDown(int x, int y) override;
+	virtual bool OnMouseLeftUp(int x, int y) override;
+	virtual bool OnMouseRightDown(int x, int y) override;
+	virtual bool OnMouseRightUp(int x, int y) override;
+	virtual bool OnMouseDrag(int x, int y) override;
 
-	virtual bool OnDraw() const;
-	virtual bool Clear();
+	virtual bool OnDraw() const override;
+	virtual bool Clear() override;
 
 private:
 	StagePanel* m_stage;

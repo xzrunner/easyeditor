@@ -13,7 +13,7 @@ class EditChangedRectOP : public ee::ZoomViewOP
 public:
 	EditChangedRectOP(StagePanel* stage);
 
-	virtual bool OnActive();
+	virtual bool OnActive() override;
 
 private:
 	StagePanel* m_stage;

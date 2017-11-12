@@ -17,18 +17,18 @@ public:
 	//
 	// DataContainer interface
 	//
-	virtual void Traverse(RefVisitor<Sprite>& visitor, bool order = true) const;
-	virtual void Traverse(RefVisitor<Sprite>& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
-	virtual bool Remove(const SprPtr& spr);
-	virtual bool Insert(const SprPtr& spr);
-	virtual bool Insert(const SprPtr& spr, int idx);
-	virtual bool Clear();
-	virtual bool ResetOrder(const SprConstPtr& spr, bool up);
-	virtual bool ResetOrderMost(const SprConstPtr& spr, bool up);
+	virtual void Traverse(RefVisitor<Sprite>& visitor, bool order = true) const override;
+	virtual void Traverse(RefVisitor<Sprite>& visitor, DataTraverseType type = DT_ALL, bool order = true) const override;
+	virtual bool Remove(const SprPtr& spr) override;
+	virtual bool Insert(const SprPtr& spr) override;
+	virtual bool Insert(const SprPtr& spr, int idx) override;
+	virtual bool Clear() override;
+	virtual bool ResetOrder(const SprConstPtr& spr, bool up) override;
+	virtual bool ResetOrderMost(const SprConstPtr& spr, bool up) override;
 	//
 	// SprDataContainer interface
 	//
-	virtual bool Sort(std::vector<SprPtr>& sprs);
+	virtual bool Sort(std::vector<SprPtr>& sprs) override;
 
 	int Size() const;
 

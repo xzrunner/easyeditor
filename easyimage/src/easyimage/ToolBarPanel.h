@@ -16,7 +16,7 @@ public:
 	ToolbarPanel(wxWindow* parent, ee::LibraryPanel* library, StagePanel* stage);
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 }; // ToolbarPanel
 

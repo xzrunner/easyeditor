@@ -22,10 +22,10 @@ public:
 	RotateSpriteAOP(const SpriteSelection& selection, float angle);
 	RotateSpriteAOP(const SprPtr& spr, float angle);
 
-	virtual void Undo();
-	virtual void Redo();
+	virtual void Undo() override;
+	virtual void Redo() override;
 
-	virtual Json::Value Store(const std::vector<SprPtr>& sprs) const;
+	virtual Json::Value Store(const std::vector<SprPtr>& sprs) const override;
 
 private:
 	void Init(const std::vector<SprPtr>& sprs, const sm::vec2& start, const sm::vec2& end);

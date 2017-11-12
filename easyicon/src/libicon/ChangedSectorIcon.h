@@ -11,10 +11,10 @@ namespace eicon
 class ChangedSectorIcon : public Icon, public s2::DynamicSectorIcon
 {
 public:
-	virtual const char* GetIconDesc() const { return "changed-sector"; }
+	virtual const char* GetIconDesc() const override { return "changed-sector"; }
 
-	virtual void LoadFromFile(const Json::Value& value);
-	virtual void StoreToFile(Json::Value& value) const;
+	virtual void LoadFromFile(const Json::Value& value) override;
+	virtual void StoreToFile(Json::Value& value) const override;
 
 }; // ChangedSectorIcon 
 

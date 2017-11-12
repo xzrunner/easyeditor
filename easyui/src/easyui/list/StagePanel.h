@@ -28,16 +28,16 @@ public:
 	// ee::MultiSpritesImpl interface
 	//
 	virtual void TraverseSprites(ee::RefVisitor<ee::Sprite>& visitor, 
-		ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
+		ee::DataTraverseType type = ee::DT_ALL, bool order = true) const override;
 
 	//
 	// UIStagePage interface
 	//
-	virtual void LoadFromFile(const char* filename);
-	virtual void StoreToFile(const char* filename) const;
-	virtual void EnablePage(bool enable);
-	virtual void OnPreview() {}
-	virtual void OnCode() const {}
+	virtual void LoadFromFile(const char* filename) override;
+	virtual void StoreToFile(const char* filename) const override;
+	virtual void EnablePage(bool enable) override;
+	virtual void OnPreview() override {}
+	virtual void OnCode() const override {}
 
 	UIList& GetList() { return m_list; }
 
@@ -45,7 +45,7 @@ protected:
 	//
 	//	interface Observer
 	//
-	virtual void OnNotify(int sj_id, void* ud);
+	virtual void OnNotify(int sj_id, void* ud) override;
 
 private:
 	TopPannels* m_top_pannels;

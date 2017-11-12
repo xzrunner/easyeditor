@@ -11,9 +11,9 @@ class Joint : public libskeleton::Joint
 public:
 	Joint(const ee::SprPtr& spr, const s2::JointPose& joint_pose);
 
-	virtual void Translate(const sm::vec2& trans);
-	virtual void Rotate(float rot);
-	virtual void Scale(const sm::vec2& scale);
+	virtual void Translate(const sm::vec2& trans) override;
+	virtual void Rotate(float rot) override;
+	virtual void Scale(const sm::vec2& scale) override;
 
 	void UpdateToJoint();
 	void UpdateToSkin();

@@ -27,23 +27,23 @@ public:
 		ArrangeSpriteImpl* impl = NULL);
 	virtual ~ArrangeSpriteOP();
 
-	virtual bool OnKeyDown(int keyCode);
-	virtual bool OnKeyUp(int keyCode);
-	virtual bool OnChar(int keyCode);
+	virtual bool OnKeyDown(int keyCode) override;
+	virtual bool OnKeyUp(int keyCode) override;
+	virtual bool OnChar(int keyCode) override;
 
-	virtual bool OnMouseLeftDown(int x, int y);
-	virtual bool OnMouseLeftUp(int x, int y);
-	virtual bool OnMouseRightDown(int x, int y);
-	virtual bool OnMouseRightUp(int x, int y);
-	virtual bool OnMouseMove(int x, int y);
-	virtual bool OnMouseDrag(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y) override;
+	virtual bool OnMouseLeftUp(int x, int y) override;
+	virtual bool OnMouseRightDown(int x, int y) override;
+	virtual bool OnMouseRightUp(int x, int y) override;
+	virtual bool OnMouseMove(int x, int y) override;
+	virtual bool OnMouseDrag(int x, int y) override;
 
 	virtual bool OnPopMenuSelected(int type);
 
-	virtual bool OnDraw() const;
-	virtual bool Clear();
+	virtual bool OnDraw() const override;
+	virtual bool Clear() override;
 
-	virtual bool IsEmpty() const;
+	virtual bool IsEmpty() const override;
 
 protected:
 	virtual SprPtr SelectByPos(const sm::vec2& pos) const;

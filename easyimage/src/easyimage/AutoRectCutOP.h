@@ -13,14 +13,14 @@ class AutoRectCutOP : public ee::ZoomViewOP
 public:
 	AutoRectCutOP(wxWindow* wnd, ee::EditPanelImpl* stage);
 
-	virtual bool OnMouseLeftDown(int x, int y);
-	virtual bool OnMouseLeftUp(int x, int y);
-	virtual bool OnMouseRightDown(int x, int y);
-	virtual bool OnMouseDrag(int x, int y);
-	virtual bool OnMouseLeftDClick(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y) override;
+	virtual bool OnMouseLeftUp(int x, int y) override;
+	virtual bool OnMouseRightDown(int x, int y) override;
+	virtual bool OnMouseDrag(int x, int y) override;
+	virtual bool OnMouseLeftDClick(int x, int y) override;
 
-	virtual bool OnDraw() const;
-	virtual bool Clear();
+	virtual bool OnDraw() const override;
+	virtual bool Clear() override;
 
 	const RectMgr& getRectMgr() const { return m_rects; }
 	RectMgr& getRectMgr() { return m_rects; }

@@ -15,12 +15,12 @@ class ComposeOP : public ee::ZoomViewOP
 public:
 	ComposeOP(StagePanel* stage, ToolbarPanel* toolbar);
 
-	virtual bool OnMouseLeftDown(int x, int y);
-	virtual bool OnMouseRightDown(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y) override;
+	virtual bool OnMouseRightDown(int x, int y) override;
 
-	virtual bool OnActive();
+	virtual bool OnActive() override;
 
-	virtual bool OnDraw() const;
+	virtual bool OnDraw() const override;
 
 private:
 	ee::SprPtr SelectByPos(int x, int y);

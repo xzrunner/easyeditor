@@ -24,7 +24,7 @@ public:
 	 *  @interface
 	 *    UserDataImpl
 	 */
-	virtual void ClearUserData(bool deletePtr);
+	virtual void ClearUserData(bool deletePtr) override;
 
 	virtual void ReloadTexture() const {}
 	virtual void InvalidRect(const S2_MAT& mt) const {}

@@ -16,10 +16,10 @@ public:
 	JointEditCmpt(wxWindow* parent, const std::string& name,
 		StagePanel* editPanel, ee::PropertySettingPanel* property);
 
-	virtual void UpdateControlValue();
+	virtual void UpdateControlValue() override;
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 private:
 	void onCreateJoint(wxCommandEvent& event);

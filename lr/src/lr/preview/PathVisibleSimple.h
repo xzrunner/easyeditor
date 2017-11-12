@@ -22,14 +22,14 @@ public:
 	//
 	// interface IPathfinding
 	//
-	virtual void DisableRegion(const ee::SprConstPtr& spr, bool disable);
-	virtual void QueryRoute(const sm::vec2& start, const sm::vec2& end);
-	virtual void DebugDraw() const;
+	virtual void DisableRegion(const ee::SprConstPtr& spr, bool disable) override;
+	virtual void QueryRoute(const sm::vec2& start, const sm::vec2& end) override;
+	virtual void DebugDraw() const override;
 
 	//
 	// interface INetwork
 	//
-	virtual sm::vec2 TransIDToPos(int id) const;
+	virtual sm::vec2 TransIDToPos(int id) const override;
 
 private:
 	struct Node;

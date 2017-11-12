@@ -17,12 +17,12 @@ public:
 		std::string& export_name, std::set<int>& output);
 
 protected:
-	virtual void Clear();
+	virtual void Clear() override;
 
-	virtual bool OnDoFile(const std::string& filepath, Json::Value& val, const std::string& key);
+	virtual bool OnDoFile(const std::string& filepath, Json::Value& val, const std::string& key) override;
 
-	virtual void BeforeDoCommon(const Json::Value& value);
-	virtual void BeforeDoAinm(const Json::Value& value);
+	virtual void BeforeDoCommon(const Json::Value& value) override;
+	virtual void BeforeDoAinm(const Json::Value& value) override;
 
 private:
 	void SetExportName(const Json::Value& value);

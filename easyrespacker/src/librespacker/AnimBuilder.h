@@ -20,7 +20,7 @@ public:
 	AnimBuilder(ExportNameSet& export_set);
 	virtual ~AnimBuilder();
 
-	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
+	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const override;
 
 	const IPackNode* Create(const std::shared_ptr<const libanim::Symbol>& sym);
 

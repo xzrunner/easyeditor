@@ -19,7 +19,7 @@ public:
 	 *  @interface
 	 *    ee::Sprite
 	 */
-	virtual void Load(const Json::Value& val, const CU_STR& dir = "");
+	virtual void Load(const Json::Value& val, const std::string& dir = "") override;
 
 	static ee::SprPtr Create(const std::shared_ptr<ee::Symbol>& sym);
 

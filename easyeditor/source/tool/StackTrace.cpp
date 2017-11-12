@@ -12,7 +12,7 @@ namespace ee
 class StackWalkerToConsole : public StackWalker
 {
 protected:
-	virtual void OnOutput(LPCSTR szText) 
+	virtual void OnOutput(LPCSTR szText) override
 	{
 		std::locale::global(std::locale(""));		
 		std::ofstream fout("stacktrace.txt", std::ios::app);

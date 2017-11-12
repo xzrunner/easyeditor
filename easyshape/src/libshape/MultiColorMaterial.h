@@ -12,16 +12,16 @@
 //	MultiColorMaterial(const CU_VEC<sm::vec2>& vertices,
 //		const s2::Color& color);
 //
-//	virtual Json::Value Store(const std::string& dirpath) const;
+//	virtual Json::Value Store(const std::string& dirpath) const override;
 //
-//	virtual void Draw(const S2_MAT& mt) const;
+//	virtual void Draw(const S2_MAT& mt) const override;
 //
-//	virtual void ReloadTexture() {}
+//	virtual void ReloadTexture() override {}
 //
 //protected:
-//	virtual void Build(const CU_VEC<sm::vec2>& vertices);
+//	virtual void Build(const CU_VEC<sm::vec2>& vertices) override;
 //	virtual void Build(const CU_VEC<sm::vec2>& vertices,
-//		const CU_VEC<sm::vec2>& segments);
+//		const CU_VEC<sm::vec2>& segments) override;
 //
 //private:
 //	CU_VEC<s2::Color> m_colors;

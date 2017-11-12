@@ -38,7 +38,7 @@ private:
 	public:
 		FilterSymbolVisitor(const std::string& filter);
 
-		virtual void Visit(const ListItemPtr& item, bool& next);
+		virtual void Visit(const ListItemPtr& item, bool& next) override;
 
 		auto& GetResult() const { return m_result; }
 

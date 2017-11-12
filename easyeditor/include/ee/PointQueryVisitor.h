@@ -13,7 +13,7 @@ class PointQueryVisitor : public RefVisitor<Sprite>
 {
 public:
 	PointQueryVisitor(const sm::vec2& pos);
-	virtual void Visit(const SprPtr& spr, bool& next);
+	virtual void Visit(const SprPtr& spr, bool& next) override;
 
 	const SprPtr& GetSelected() const { return m_selected; }
 

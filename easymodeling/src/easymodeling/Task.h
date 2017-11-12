@@ -12,12 +12,12 @@ class Task
 {
 public:
 
-	virtual void LoadFromFile(const char* filename);
-	virtual void StoreToFile(const char* filename) const;
+	virtual void LoadFromFile(const char* filename) override;
+	virtual void StoreToFile(const char* filename) const override;
 
 	virtual void Clear();
 
-	virtual void OnPreview() const;
+	virtual void OnPreview() const override;
 
 	ee::StageCanvas* GetCanvas() const;
 

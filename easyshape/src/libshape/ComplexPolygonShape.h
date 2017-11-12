@@ -24,10 +24,10 @@
 //	//
 //	// Shape interface
 //	//
-//	virtual const char* GetShapeDesc() const { return "complex-polygon"; }
-//	virtual bool IsContain(const sm::vec2& pos) const;
-//	virtual bool IsIntersect(const sm::rect& rect) const;
-//	virtual void Translate(const sm::vec2& offset);
+//	virtual const char* GetShapeDesc() const override { return "complex-polygon"; }
+//	virtual bool IsContain(const sm::vec2& pos) const override;
+//	virtual bool IsIntersect(const sm::rect& rect) const override;
+//	virtual void Translate(const sm::vec2& offset) override;
 //	virtual void Draw(const S2_MAT& mt,
 //		const s2::RenderColor& color = s2::RenderColor()) const;
 //

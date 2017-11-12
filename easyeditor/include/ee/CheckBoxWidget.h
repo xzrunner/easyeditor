@@ -9,15 +9,15 @@ namespace ee
 class CheckBoxWidget : public DynamicWidget
 {
 public:
-	virtual std::string GetValue() const;
+	virtual std::string GetValue() const override;
 
-	virtual bool IsChanged() const;
+	virtual bool IsChanged() const override;
 
 	virtual void InitLayout(wxWindow* parent, wxSizer* top_sizer,
-		const DynamicInfo& info);
+		const DynamicInfo& info) override;
 
 protected:
-	virtual void Load(const Json::Value& value);
+	virtual void Load(const Json::Value& value) override;
 	
 private:
 	bool m_default;	

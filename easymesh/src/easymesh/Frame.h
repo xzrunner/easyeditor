@@ -12,7 +12,7 @@ public:
 	Frame(const std::string& title, const std::string& filetag);
 
 protected:
-	virtual void OnSaveAs(wxCommandEvent& event);
+	virtual void OnSaveAs(wxCommandEvent& event) override;
 
 private:
 	void OnSetBackground(wxCommandEvent& event);

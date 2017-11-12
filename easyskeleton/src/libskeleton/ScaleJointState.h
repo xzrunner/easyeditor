@@ -17,8 +17,8 @@ class ScaleJointState : public ee::ArrangeSpriteState
 public:
 	ScaleJointState(const std::shared_ptr<Joint>& joint, const sm::vec2& first_pos);
 	
-	virtual void OnMouseRelease(const sm::vec2& pos);
-	virtual	bool OnMouseDrag(const sm::vec2& pos);
+	virtual void OnMouseRelease(const sm::vec2& pos) override;
+	virtual	bool OnMouseDrag(const sm::vec2& pos) override;
 
 private:
 	void Scale(const sm::vec2& dst);

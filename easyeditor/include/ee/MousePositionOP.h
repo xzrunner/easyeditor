@@ -14,7 +14,7 @@ public:
 	MousePositionOP(wxWindow* wnd, EditPanelImpl* stage, 
 		MousePositionCMPT* cmpt);
 
-	virtual bool OnMouseMove(int x, int y);
+	virtual bool OnMouseMove(int x, int y) override;
 
 private:
 	MousePositionCMPT* m_cmpt;

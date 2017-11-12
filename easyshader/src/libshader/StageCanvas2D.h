@@ -17,7 +17,7 @@ public:
 	void OnMousePressed(const sm::vec2& pos);
 
 protected:
-	virtual void OnDrawSprites() const;
+	virtual void OnDrawSprites() const override;
 
 private:
 	void DrawBackground() const;

@@ -20,39 +20,39 @@ public:
 	 *  @interface
 	 *    Mesh
 	 */
-	virtual void Load(const Json::Value& value);
-	virtual void Store(Json::Value& value) const;
-//	virtual void Update();
-	virtual void Refresh();
-	virtual void TraverseMesh(ee::Visitor<ee::Shape>& visitor) const;
-	virtual bool RemoveMesh(ee::Shape* mesh);
-	virtual bool InsertMesh(ee::Shape* mesh);
-//	virtual bool ClearMesh();
-	virtual void Reset();
-	virtual void Clear();
+	virtual void Load(const Json::Value& value) override;
+	virtual void Store(Json::Value& value) const override;
+//	virtual void Update() override;
+	virtual void Refresh() override;
+	virtual void TraverseMesh(ee::RefVisitor<ee::Shape>& visitor) const override;
+	virtual bool RemoveMesh(const ee::ShapePtr& mesh) override;
+	virtual bool InsertMesh(const ee::ShapePtr& mesh) override;
+//	virtual bool ClearMesh() override;
+	virtual void Reset() override;
+	virtual void Clear() override;
 
 	/**
 	 *  @interface
 	 *    Shape
 	 */
-	virtual const char* GetShapeDesc() const { return "edited_poly"; }
-	virtual void Translate(const sm::vec2& offset) {}
-	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage) { return NULL; }
-// 	virtual void LoadFromFile(const Json::Value& value, const std::string& dir);
-// 	virtual void StoreToFile(Json::Value& value, const std::string& dir) const;
+	virtual const char* GetShapeDesc() const override { return "edited_poly"; }
+	virtual void Translate(const sm::vec2& offset) override {}
+	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage) override { return NULL; }
+// 	virtual void LoadFromFile(const Json::Value& value, const std::string& dir) override;
+// 	virtual void StoreToFile(Json::Value& value, const std::string& dir) const override;
 
 	/**
 	 *  @interface
 	 *    eshape::EditedPolyShape
 	 */
-	virtual void AddVertex(int index, const sm::vec2& pos);
-	virtual void RemoveVertex(const sm::vec2& pos);
-	virtual void ChangeVertex(const sm::vec2& from, const sm::vec2& to);
-	virtual void SetVertices(const CU_VEC<sm::vec2>& vertices);
-	virtual const CU_VEC<sm::vec2>& GetVertices() const { return m_vertices; }
-	virtual bool IsClosed() const { return m_closed; }
-	virtual int PointQueryVertex(const sm::vec2& p) const;
-	virtual void RectQueryVertices(const sm::rect& r, std::vector<int>& vertices) const;
+	virtual void AddVertex(int index, const sm::vec2& pos) override;
+	virtual void RemoveVertex(const sm::vec2& pos) override;
+	virtual void ChangeVertex(const sm::vec2& from, const sm::vec2& to) override;
+	virtual void SetVertices(const CU_VEC<sm::vec2>& vertices) override;
+	virtual const CU_VEC<sm::vec2>& GetVertices() const override { return m_vertices; }
+	virtual bool IsClosed() const override { return m_closed; }
+	virtual int PointQueryVertex(const sm::vec2& p) const override;
+	virtual void RectQueryVertices(const sm::rect& r, std::vector<int>& vertices) const override;
 
 	int  QueryInnerPos(const sm::vec2& pos) const;
 	bool InsertInnerPos(const sm::vec2& pos);

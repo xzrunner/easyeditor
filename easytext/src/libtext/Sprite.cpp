@@ -50,7 +50,7 @@ bool Sprite::Update(const s2::UpdateParams& up)
 	return m_text.find("dynamic") != std::string::npos;
 }
 
-void Sprite::Load(const Json::Value& val, const CU_STR& dir)
+void Sprite::Load(const Json::Value& val, const std::string& dir)
 {
 	ee::Sprite::Load(val);
 
@@ -64,7 +64,7 @@ void Sprite::Load(const Json::Value& val, const CU_STR& dir)
 	loader.LoadJson(text_val);
 }
 
-void Sprite::Store(Json::Value& val, const CU_STR& dir) const
+void Sprite::Store(Json::Value& val, const std::string& dir) const
 {
 	ee::Sprite::Store(val);
 

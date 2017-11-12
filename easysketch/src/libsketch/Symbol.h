@@ -21,7 +21,7 @@ public:
 	 *    s2::Symbol
 	 */
 	virtual void Draw(const s2::RenderParams& params, const s2::Sprite* spr = NULL, 
-		const s2::Sprite* root = NULL) const;
+		const s2::Sprite* root = NULL) const override;
 
 	static ee::SymPtr Create() { return std::make_shared<Symbol>(); }
 
@@ -31,9 +31,9 @@ public:
 	const m3::AABB& GetAABB() const { return m_aabb; }
 
 protected:
-	virtual sm::rect GetBoundingImpl(const s2::Sprite* spr = NULL, const s2::Actor* actor = NULL, bool cache = true) const;
+	virtual sm::rect GetBoundingImpl(const s2::Sprite* spr = NULL, const s2::Actor* actor = NULL, bool cache = true) const override;
 
-	virtual bool LoadResources();
+	virtual bool LoadResources() override;
 
 private:
 	m3::Model* m_model;

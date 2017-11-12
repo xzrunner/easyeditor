@@ -19,36 +19,36 @@ public:
 	 *  @interface
 	 *    s2::Shape
 	 */
-	virtual ChainShape* Clone() const { return new ChainShape(*this); }
-	virtual bool IsContain(const sm::vec2& pos) const { return s2::PolylineShape::IsContain(pos); }
-	virtual bool IsIntersect(const sm::rect& rect) const { return s2::PolylineShape::IsIntersect(rect); }
-	virtual void Draw(const s2::RenderParams& rp) const;
+	virtual ChainShape* Clone() const override { return new ChainShape(*this); }
+	virtual bool IsContain(const sm::vec2& pos) const override { return s2::PolylineShape::IsContain(pos); }
+	virtual bool IsIntersect(const sm::rect& rect) const override { return s2::PolylineShape::IsIntersect(rect); }
+	virtual void Draw(const s2::RenderParams& rp) const override;
 
 	/**
 	 *  @interface
 	 *    ee::Shape
 	 */
-	virtual const char* GetShapeDesc() const { return "chain"; }
-	virtual void Translate(const sm::vec2& offset);
-	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
-	virtual void LoadFromFile(const Json::Value& value, const std::string& dir);
-	virtual void StoreToFile(Json::Value& value, const std::string& dir) const;
+	virtual const char* GetShapeDesc() const override { return "chain"; }
+	virtual void Translate(const sm::vec2& offset) override;
+	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage) override;
+	virtual void LoadFromFile(const Json::Value& value, const std::string& dir) override;
+	virtual void StoreToFile(Json::Value& value, const std::string& dir) const override;
 
 	/**
 	 *  @interface
 	 *    EditedPolyShape
 	 */
-	virtual void AddVertex(int index, const sm::vec2& pos);
-	virtual void RemoveVertex(const sm::vec2& pos);
-	virtual void ChangeVertex(const sm::vec2& from, const sm::vec2& to);
-	virtual void SetVertices(const CU_VEC<sm::vec2>& vertices);
-	virtual const CU_VEC<sm::vec2>& GetVertices() const { return m_vertices; }
-	virtual bool IsClosed() const { return m_closed; }
+	virtual void AddVertex(int index, const sm::vec2& pos) override;
+	virtual void RemoveVertex(const sm::vec2& pos) override;
+	virtual void ChangeVertex(const sm::vec2& from, const sm::vec2& to) override;
+	virtual void SetVertices(const CU_VEC<sm::vec2>& vertices) override;
+	virtual const CU_VEC<sm::vec2>& GetVertices() const override { return m_vertices; }
+	virtual bool IsClosed() const override { return m_closed; }
 
 	void SetClosed(bool Close) { m_closed = Close; }
 
 protected:
-	virtual void UpdateBounding() { s2::PolylineShape::UpdateBounding(); }
+	virtual void UpdateBounding() override { s2::PolylineShape::UpdateBounding(); }
 
 private:
 	bool m_draw_dir;

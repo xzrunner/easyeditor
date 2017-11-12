@@ -17,8 +17,8 @@ public:
 	ViewlistList(wxWindow* parent);
 	virtual ~ViewlistList();
 
-	virtual void OnListSelected(wxCommandEvent& event);
-	virtual void OnListDoubleClicked(wxCommandEvent& event);
+	virtual void OnListSelected(wxCommandEvent& event) override;
+	virtual void OnListDoubleClicked(wxCommandEvent& event) override;
 
 	void SetImpl(ViewlistListImpl* impl);
 
@@ -33,12 +33,12 @@ protected:
 	//
 	//	interface Observer
 	//
-	virtual void OnNotify(int sj_id, void* ud);
+	virtual void OnNotify(int sj_id, void* ud) override;
 
-	virtual void OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const;
+	virtual void OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const override;
 
-	virtual void OnKeyDown(wxKeyEvent& event);
-	virtual void OnMouse(wxMouseEvent& event);
+	virtual void OnKeyDown(wxKeyEvent& event) override;
+	virtual void OnMouse(wxMouseEvent& event) override;
 
 private:
 	int GetSelectedIndex() const;

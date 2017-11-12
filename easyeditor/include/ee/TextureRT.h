@@ -17,9 +17,9 @@ public:
 
 	virtual unsigned int GetTexID() const;
 
-	virtual int GetWidth() const;
-	virtual int GetHeight() const;
-	virtual int GetFormat() const;
+	virtual int GetWidth() const override;
+	virtual int GetHeight() const override;
+	virtual int GetFormat() const override;
 
 private:
 	std::shared_ptr<const s2::RenderTarget> m_rt;

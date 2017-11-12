@@ -13,9 +13,9 @@ class EditOP : public ee::ZoomViewOP
 public:
 	EditOP(StagePanel* stage);
 
-	virtual bool OnMouseLeftDown(int x, int y);
-	virtual bool OnMouseLeftUp(int x, int y);
-	virtual bool OnMouseDrag(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y) override;
+	virtual bool OnMouseLeftUp(int x, int y) override;
+	virtual bool OnMouseDrag(int x, int y) override;
 
 private:
 	StagePanel* m_stage;

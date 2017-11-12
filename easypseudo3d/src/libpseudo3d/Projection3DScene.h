@@ -18,11 +18,11 @@ public:
 	Projection3DScene(StageCanvas3D* canvas);
 	virtual ~Projection3DScene();
 
-	virtual void Store(const char* filename) const;
-	virtual void Load(const char* filename);
+	virtual void Store(const char* filename) const override;
+	virtual void Load(const char* filename) override;
 
-	virtual void Draw() const;
-	virtual void DebugDraw() const;
+	virtual void Draw() const override;
+	virtual void DebugDraw() const override;
 
 private:
 	void DrawSprite(ee::Image* img, int x, int y) const;

@@ -12,7 +12,7 @@ public:
 	RotateSpriteState(ee::SpriteSelection* selection, const sm::vec2& first_pos);
 
 protected:
-	virtual void Rotate(const sm::vec2& dst);
+	virtual void Rotate(const sm::vec2& dst) override;
 
 }; // RotateSpriteState
 

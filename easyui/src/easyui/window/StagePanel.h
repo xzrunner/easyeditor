@@ -28,22 +28,22 @@ public:
 	//
 	// ee::EditPanel interface
 	//
-	virtual bool UpdateStage();
+	virtual bool UpdateStage() override;
 
 	//
 	// UIStagePage interface
 	//
-	virtual void LoadFromFile(const char* filename);
-	virtual void StoreToFile(const char* filename) const;
-	virtual void EnablePage(bool enable);
-	virtual void OnPreview();
-	virtual void OnCode() const;
+	virtual void LoadFromFile(const char* filename) override;
+	virtual void StoreToFile(const char* filename) const override;
+	virtual void EnablePage(bool enable) override;
+	virtual void OnPreview() override;
+	virtual void OnCode() const override;
 
 	//
 	// MultiSpritesImpl interface
 	//
 	virtual void TraverseSprites(ee::RefVisitor<ee::Sprite>& visitor, 
-		ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
+		ee::DataTraverseType type = ee::DT_ALL, bool order = true) const override;
 
 	void InitConfig();
 
@@ -57,7 +57,7 @@ protected:
 	//
 	//	interface Observer
 	//
-	virtual void OnNotify(int sj_id, void* ud);
+	virtual void OnNotify(int sj_id, void* ud) override;
 
 private:
 	void InitSubjects();

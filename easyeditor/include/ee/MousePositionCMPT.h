@@ -17,7 +17,7 @@ public:
 	void updatePosition(const sm::vec2& pos);
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 private:
 	wxTextCtrl *m_xText, *m_yText;

@@ -21,13 +21,13 @@ public:
 	// MultiSpritesImpl interface
 	//
 	virtual void TraverseSprites(RefVisitor<Sprite>& visitor,
-		DataTraverseType type = DT_ALL, bool order = true) const;
+		DataTraverseType type = DT_ALL, bool order = true) const override;
 
 protected:
 	//
 	//	interface Observer
 	//
-	virtual void OnNotify(int sj_id, void* ud);
+	virtual void OnNotify(int sj_id, void* ud) override;
 
 private:
 	void InitSubjects();

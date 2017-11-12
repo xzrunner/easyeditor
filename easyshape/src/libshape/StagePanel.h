@@ -31,7 +31,7 @@ public:
 	// ee::MultiShapesImpl interface
 	//
 	virtual void TraverseShapes(ee::RefVisitor<ee::Shape>& visitor,
-		ee::DataTraverseType type = ee::DT_ALL) const;
+		ee::DataTraverseType type = ee::DT_ALL) const override;
 
 	void LoadFromFile(const char* filename);
 	void StoreToFile(const char* filename) const;
@@ -51,7 +51,7 @@ protected:
 	//
 	//	interface MultiShapesImpl
 	//
-	virtual void OnNotify(int sj_id, void* ud);
+	virtual void OnNotify(int sj_id, void* ud) override;
 
 private:
 	void InitSubjects();
@@ -62,8 +62,8 @@ private:
 	public:
 		DropTarget(StagePanel* stage, ee::LibraryPanel* library);
 
-		virtual void OnDropText(wxCoord x, wxCoord y, const wxString& data);
-		virtual void OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames);
+		virtual void OnDropText(wxCoord x, wxCoord y, const wxString& data) override;
+		virtual void OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames) override;
 
 	private:
 		StagePanel* m_stage;

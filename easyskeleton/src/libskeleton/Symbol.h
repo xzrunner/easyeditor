@@ -26,11 +26,11 @@ private:
 	class JointLoader : public gum::JointLoader
 	{
 	public:
-		virtual std::shared_ptr<s2::Joint> Create(const s2::SprPtr& spr, const s2::JointPose& joint_pose) const;
+		virtual std::shared_ptr<s2::Joint> Create(const s2::SprPtr& spr, const s2::JointPose& joint_pose) const override;
 	}; // JointLoader
 
 protected:
-	virtual bool LoadResources();
+	virtual bool LoadResources() override;
 
 }; // Symbol
 

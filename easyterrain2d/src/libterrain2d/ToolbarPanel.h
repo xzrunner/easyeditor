@@ -20,7 +20,7 @@ public:
 	void SetControlersValue(const OceanMesh* ocean);
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 private:
 	WaveVerticesCMPT* m_wave_cmpt;

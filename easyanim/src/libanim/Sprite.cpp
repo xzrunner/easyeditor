@@ -36,18 +36,18 @@ Sprite::Sprite(const s2::SymPtr& sym, uint32_t id)
 {
 }
 
-void Sprite::Load(const Json::Value& val, const CU_STR& dir)
+void Sprite::Load(const Json::Value& val, const std::string& dir)
 {
 	ee::Sprite::Load(val);
 
 	gum::AnimSprLoader loader(*this);
-	loader.LoadJson(val, dir);
-
+	loader.LoadJson(val, dir.c_str());
+	
 	const Json::Value& anim_val = val["animation"];
 	m_static_time = anim_val["static_time"].asInt();
 }
 
-void Sprite::Store(Json::Value& val, const CU_STR& dir) const
+void Sprite::Store(Json::Value& val, const std::string& dir) const
 {
 	ee::Sprite::Store(val);
 

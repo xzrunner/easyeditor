@@ -14,11 +14,11 @@ public:
 	EditClipboxOP(wxWindow* wnd, ee::EditPanelImpl* edit_impl, 
 		sm::rect& rect);
 
-	virtual bool OnMouseLeftDown(int x, int y);
-	virtual bool OnMouseLeftUp(int x, int y);
-	virtual bool OnMouseDrag(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y) override;
+	virtual bool OnMouseLeftUp(int x, int y) override;
+	virtual bool OnMouseDrag(int x, int y) override;
 
-	virtual bool OnDraw() const;
+	virtual bool OnDraw() const override;
 
 private:
 	static const int NODE_RADIUS = 10;

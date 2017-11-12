@@ -18,7 +18,7 @@ public:
 	void SetSelection(const std::string& type);
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 private:
 	wxChoice* m_choice;

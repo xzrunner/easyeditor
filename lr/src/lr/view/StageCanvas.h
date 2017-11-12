@@ -21,7 +21,7 @@ public:
 	void EnableColGrading(bool enable) { m_scr_style.col_grading = enable; }
 
 protected:
-	virtual void OnDrawSprites() const;
+	virtual void OnDrawSprites() const override;
 
 private:
 	void DrawSprites() const;

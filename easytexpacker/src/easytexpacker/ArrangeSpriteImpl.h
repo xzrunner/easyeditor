@@ -15,17 +15,17 @@ public:
 	ArrangeSpriteImpl(StagePanel* editPanel, 
 		ee::PropertySettingPanel* property);
 
-	virtual void OnMouseLeftUp(int x, int y);
-	virtual void OnMouseRightDown(int x, int y);
-	virtual void OnMouseRightUp(int x, int y);
+	virtual void OnMouseLeftUp(int x, int y) override;
+	virtual void OnMouseRightDown(int x, int y) override;
+	virtual void OnMouseRightUp(int x, int y) override;
 
-	virtual void OnDraw(float cam_scale) const;
+	virtual void OnDraw(float cam_scale) const override;
 
 private:
 	class FixCoordsVisitor : public ee::Visitor<ee::Sprite>
 	{
 	public:
-		virtual void Visit(const ee::SprPtr& spr, bool& next);
+		virtual void Visit(const ee::SprPtr& spr, bool& next) override;
 	}; // FixCoordsVisitor
 
 private:

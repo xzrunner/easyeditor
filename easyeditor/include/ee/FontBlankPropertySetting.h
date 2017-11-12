@@ -11,11 +11,11 @@ class FontBlankPropertySetting : public SpritePropertySetting
 public:
 	FontBlankPropertySetting(EditPanelImpl* stage, const SprPtr& spr);
 
-	virtual void OnPropertyGridChange(const std::string& name, const wxAny& value);
+	virtual void OnPropertyGridChange(const std::string& name, const wxAny& value) override;
 
 protected:
-	virtual void UpdateProperties(wxPropertyGrid* pg);
-	virtual void InitProperties(wxPropertyGrid* pg);
+	virtual void UpdateProperties(wxPropertyGrid* pg) override;
+	virtual void InitProperties(wxPropertyGrid* pg) override;
 
 private:
 	static const wxChar* HORI_ALIGN_LABELS[];

@@ -18,7 +18,7 @@ public:
 	void SetControlersValue(const OceanMesh* ocean);
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 private:
 	void OnOpenWaveChanged(wxCommandEvent& event);

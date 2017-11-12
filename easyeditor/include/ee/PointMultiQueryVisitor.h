@@ -15,7 +15,7 @@ class PointMultiQueryVisitor : public RefVisitor<Sprite>
 {
 public:
 	PointMultiQueryVisitor(const sm::vec2& pos);
-	virtual void Visit(const SprPtr& spr, bool& next);
+	virtual void Visit(const SprPtr& spr, bool& next) override;
 
 	const std::vector<SprPtr>& GetResult() const { return m_sprs; }
 

@@ -13,7 +13,7 @@ public:
 	FetchAllVisitor(std::vector<T*>& result) 
 		: m_result(result) {}
 
-	virtual void Visit(T* obj, bool& next)
+	virtual void Visit(T* obj, bool& next) override
 	{
 		if (obj) {
 			m_result.push_back(obj);
@@ -33,7 +33,7 @@ public:
 	FetchAllRefVisitor(std::vector<std::shared_ptr<T>>& result)
 		: m_result(result) {}
 
-	virtual void Visit(const std::shared_ptr<T>& obj, bool& next)
+	virtual void Visit(const std::shared_ptr<T>& obj, bool& next) override
 	{
 		if (obj) {
 			m_result.push_back(obj);

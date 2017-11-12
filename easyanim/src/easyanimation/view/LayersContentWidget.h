@@ -16,9 +16,10 @@ public:
 	//
 	//	interface wxPanel
 	//
-	virtual wxCoord OnGetRowHeight(size_t row) const;
-	virtual int GetNonOrientationTargetSize() const;
-	virtual wxOrientation GetOrientation() const;
+	//// fix me: after update wx to 3.1, there are no these api in wxPanel
+	//virtual wxCoord OnGetRowHeight(size_t row) const override;
+	//virtual int GetNonOrientationTargetSize() const override;
+	//virtual wxOrientation GetOrientation() const override;
 
 	void OnSize(wxSizeEvent& event);
 	void OnPaint(wxPaintEvent& event);
@@ -29,7 +30,7 @@ protected:
 	//
 	//	interface Observer
 	//
-	virtual void OnNotify(int sj_id, void* ud);
+	virtual void OnNotify(int sj_id, void* ud) override;
 
 private:
 	int m_drag_flag_line;

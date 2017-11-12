@@ -28,7 +28,7 @@ private:
 	{
 	public:
 		LoadBodyVisitor(b2World* world, std::map<Body*, b2Body*>& mapBody);
-		virtual void Visit(const ee::SprPtr& spr, bool& next);
+		virtual void Visit(const ee::SprPtr& spr, bool& next) override;
 
 	private:
 		b2World* m_world;
@@ -43,7 +43,7 @@ private:
 		LoadJointVisitor(b2World* world, const std::map<Body*, b2Body*>& mapBody,
 			std::map<Joint*, b2Joint*>& mapJoint);
 
-		virtual void Visit(Joint* joint, bool& next);
+		virtual void Visit(Joint* joint, bool& next) override;
 
 	private:
 		b2World* m_world;
@@ -60,7 +60,7 @@ private:
 		LoadGearJointVisitor(b2World* world, const std::map<Body*, b2Body*>& mapBody,
 			const std::map<Joint*, b2Joint*>& mapJoint);
 
-		virtual void Visit(Joint* joint, bool& next);
+		virtual void Visit(Joint* joint, bool& next) override;
 
 	private:
 		b2World* m_world;

@@ -13,7 +13,7 @@ class CombinedDropData : public wxDataObjectComposite
 public:
 	CombinedDropData(CombinedDropTarget* drop);
 
-	virtual bool SetData(const wxDataFormat& format, size_t len, const void *buf);
+	virtual bool SetData(const wxDataFormat& format, size_t len, const void *buf) override;
 
 	bool OnData(wxCoord x, wxCoord y);
 

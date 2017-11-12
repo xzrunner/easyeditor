@@ -14,8 +14,8 @@ public:
 	Frame(const std::string& title, const std::string& filetag);
 
 protected:
-	virtual void OnOpen(wxCommandEvent& event);
-	virtual void OnSaveAs(wxCommandEvent& event);
+	virtual void OnOpen(wxCommandEvent& event) override;
+	virtual void OnSaveAs(wxCommandEvent& event) override;
 
 private:
 	void OnPreview(wxCommandEvent& event);

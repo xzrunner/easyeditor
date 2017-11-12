@@ -15,19 +15,19 @@
 //// 	 *  @interface
 //// 	 *    Mesh
 //// 	 */
-//// 	virtual void Load(const Json::Value& value);
-//// 	virtual void Store(Json::Value& value) const;
-//// 	virtual void OffsetUV(float dx, float dy);
+//// 	virtual void Load(const Json::Value& value) override;
+//// 	virtual void Store(Json::Value& value) const override;
+//// 	virtual void OffsetUV(float dx, float dy) override;
 //
 //	/**
 //	 *  @interface
 //	 *    Editable
 //	 */
-//	virtual bool RemoveMesh(ee::Shape* shape) { return false; }
-//	virtual bool InsertMesh(ee::Shape* shape) { return false; }
-//	virtual bool ClearMesh() { return false; }
-//	virtual void Reset();
-//	virtual void Clear();
+//	virtual bool RemoveMesh(ee::Shape* shape) override { return false; }
+//	virtual bool InsertMesh(ee::Shape* shape) override { return false; }
+//	virtual bool ClearMesh() override { return false; }
+//	virtual void Reset() override;
+//	virtual void Clear() override;
 //
 //	void InsertNode(const sm::vec2& p);
 //	void RemoveNode(const sm::vec2& p);

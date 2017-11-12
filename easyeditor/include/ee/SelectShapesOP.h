@@ -22,13 +22,13 @@ public:
 		EditCMPT* callback = NULL);
 	virtual ~SelectShapesOP();
 
-	virtual bool OnKeyDown(int keyCode);
-	virtual bool OnMouseLeftDown(int x, int y);
-	virtual bool OnMouseLeftUp(int x, int y);
-	virtual bool OnMouseDrag(int x, int y);
+	virtual bool OnKeyDown(int keyCode) override;
+	virtual bool OnMouseLeftDown(int x, int y) override;
+	virtual bool OnMouseLeftUp(int x, int y) override;
+	virtual bool OnMouseDrag(int x, int y) override;
 
-	virtual bool OnDraw() const;
-	virtual bool Clear();
+	virtual bool OnDraw() const override;
+	virtual bool Clear() override;
 
 private:
 	void clearClipboard();
@@ -46,7 +46,7 @@ private:
 	{
 	public:
 		TranslateVisitor(const sm::vec2& offset) : m_offset(offset) {}
-		virtual void Visit(Shape* shape, bool& next);
+		virtual void Visit(Shape* shape, bool& next) override;
 	private:
 		sm::vec2 m_offset;
 	}; // TranslateVisitor

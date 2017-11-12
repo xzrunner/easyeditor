@@ -21,8 +21,8 @@ public:
 	void SetBackground(const ee::SymPtr& sym) { m_background = sym; }
 
 protected:
-	virtual void OnSize(int w, int h);
-	virtual void OnDrawSprites() const;
+	virtual void OnSize(int w, int h) override;
+	virtual void OnDrawSprites() const override;
 
 protected:
 	StagePanel* m_stage;

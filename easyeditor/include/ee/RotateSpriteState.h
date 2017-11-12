@@ -16,8 +16,8 @@ public:
 	RotateSpriteState(SpriteSelection* selection, const sm::vec2& first_pos);
 	virtual ~RotateSpriteState();
 
-	virtual void OnMouseRelease(const sm::vec2& pos);
-	virtual	bool OnMouseDrag(const sm::vec2& pos);
+	virtual void OnMouseRelease(const sm::vec2& pos) override;
+	virtual	bool OnMouseDrag(const sm::vec2& pos) override;
 
 protected:
 	virtual void Rotate(const sm::vec2& dst);
@@ -33,7 +33,7 @@ private:
 	public:
 		RotateVisitor(const sm::vec2& start, const sm::vec2& end, float& angle) 
 			: m_start(start), m_end(end), m_angle(angle) {}
-		virtual void Visit(const SprPtr& spr, bool& next);
+		virtual void Visit(const SprPtr& spr, bool& next) override;
 	private:
 		sm::vec2 m_start, m_end;
 		float& m_angle;

@@ -22,10 +22,10 @@ public:
 	 *  @interface
 	 *    ee::Sprite
 	 */
-	virtual void Load(const Json::Value& val, const CU_STR& dir = "");
-	virtual void Store(Json::Value& val, const CU_STR& dir = "") const;
+	virtual void Load(const Json::Value& val, const std::string& dir = "") override;
+	virtual void Store(Json::Value& val, const std::string& dir = "") const override;
 
-	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
+	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage) override;
 
 	static ee::SprPtr Create(const std::shared_ptr<ee::Symbol>& sym);
 

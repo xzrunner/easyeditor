@@ -10,7 +10,7 @@ class BruteForceTex : public Terrain
 {
 public:
 
-	virtual void Draw() const;
+	virtual void Draw() const override;
 
 }; // BruteForceTex
 

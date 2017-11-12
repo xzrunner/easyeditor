@@ -41,20 +41,20 @@ LayersContentWidget::LayersContentWidget(wxWindow* parent)
 	RegistSubject(ee::RefreshPanelSJ::Instance());
 }
 
-wxCoord LayersContentWidget::OnGetRowHeight(size_t row) const
-{
-	return FRAME_GRID_HEIGHT;
-}
-
-int LayersContentWidget::GetNonOrientationTargetSize() const
-{
-	return FRAME_GRID_HEIGHT * 20;
-}
-
-wxOrientation LayersContentWidget::GetOrientation() const
-{
-	return wxVERTICAL;
-}
+//wxCoord LayersContentWidget::OnGetRowHeight(size_t row) const
+//{
+//	return FRAME_GRID_HEIGHT;
+//}
+//
+//int LayersContentWidget::GetNonOrientationTargetSize() const
+//{
+//	return FRAME_GRID_HEIGHT * 20;
+//}
+//
+//wxOrientation LayersContentWidget::GetOrientation() const
+//{
+//	return wxVERTICAL;
+//}
 
 void LayersContentWidget::OnSize(wxSizeEvent& event)
 {

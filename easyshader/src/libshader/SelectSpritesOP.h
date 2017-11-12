@@ -12,7 +12,7 @@ public:
 	SelectSpritesOP(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
 		ee::MultiSpritesImpl* sprites_impl, ee::EditCMPT* callback = NULL);
 
-	virtual bool OnMouseLeftDown(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y) override;
 
 }; // SelectSpritesOP
 

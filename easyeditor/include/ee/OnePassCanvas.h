@@ -13,7 +13,7 @@ public:
 		wxGLContext* glctx = NULL);
 
 protected:
-	virtual void OnDrawWhole() const;
+	virtual void OnDrawWhole() const override;
 
 }; // OnePassCanvas
 

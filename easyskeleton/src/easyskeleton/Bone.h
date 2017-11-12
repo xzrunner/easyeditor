@@ -26,11 +26,11 @@ public:
 	 *  @interface
 	 *    ee::SpriteObserver
 	 */
-	virtual void OnSetPosition(const ee::SprPtr& spr, const sm::vec2& pos);
-	virtual void OnSetAngle(const ee::SprPtr& spr, float angle);
-	virtual void OnSetScale(const ee::SprPtr& spr, const sm::vec2& scale);
-	virtual void OnSetShear(const ee::SprPtr& spr, const sm::vec2& shear);
-	virtual void OnSetOffset(const ee::SprPtr& spr, const sm::vec2& offset);
+	virtual void OnSetPosition(const ee::SprPtr& spr, const sm::vec2& pos) override;
+	virtual void OnSetAngle(const ee::SprPtr& spr, float angle) override;
+	virtual void OnSetScale(const ee::SprPtr& spr, const sm::vec2& scale) override;
+	virtual void OnSetShear(const ee::SprPtr& spr, const sm::vec2& shear) override;
+	virtual void OnSetOffset(const ee::SprPtr& spr, const sm::vec2& offset) override;
 
 	void Update();
 	void Draw() const;

@@ -12,10 +12,10 @@ class ReorderSpriteAOP : public AtomicOP
 public:
 	ReorderSpriteAOP(const std::vector<SprPtr>& sprs, bool up);
 
-	virtual void Undo();
-	virtual void Redo();
+	virtual void Undo() override;
+	virtual void Redo() override;
 
-	virtual Json::Value Store(const std::vector<SprPtr>& sprs) const;
+	virtual Json::Value Store(const std::vector<SprPtr>& sprs) const override;
 
 private:
 	void Reorder(bool up);

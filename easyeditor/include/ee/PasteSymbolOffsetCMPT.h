@@ -22,7 +22,7 @@ public:
 	sm::vec2 GetOffset() const;
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 private:
 	wxSpinCtrl *m_xspin, *m_yspin;

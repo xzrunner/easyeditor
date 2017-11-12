@@ -10,10 +10,10 @@ namespace ee
 class SpriteSelection : public SelectionSet<Sprite>
 {
 public:
-	virtual void Clear();
+	virtual void Clear() override;
 
-	virtual void Add(const SprPtr& item);
-	virtual void Remove(const SprPtr& item);
+	virtual void Add(const SprPtr& item) override;
+	virtual void Remove(const SprPtr& item) override;
 
 }; // SpriteSelection
 

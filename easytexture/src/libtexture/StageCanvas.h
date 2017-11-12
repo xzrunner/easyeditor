@@ -19,7 +19,7 @@ public:
 		const ee::MultiSpritesImpl* bg_sprites);
 
 protected:
-	virtual void OnDrawSprites() const;
+	virtual void OnDrawSprites() const override;
 
 private:
 	StagePanel* m_panel;

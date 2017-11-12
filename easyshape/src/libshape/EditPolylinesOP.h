@@ -18,12 +18,12 @@ public:
 	EditPolylinesOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapes_impl,
 		EditPolylinesCMPT* cmpt);
 
-	virtual bool OnMouseLeftDown(int x, int y);
-	virtual bool OnMouseLeftUp(int x, int y);
-	virtual bool OnMouseDrag(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y) override;
+	virtual bool OnMouseLeftUp(int x, int y) override;
+	virtual bool OnMouseDrag(int x, int y) override;
 
-	virtual bool OnDraw() const;
-	virtual bool Clear();
+	virtual bool OnDraw() const override;
+	virtual bool Clear() override;
 
 	void simplify();
 	void updateFromSimplified();
@@ -37,7 +37,7 @@ private:
 	public:
 		UpdateBufferVisitor(std::map<std::shared_ptr<ChainShape>, std::shared_ptr<ChainShape>>& simplifyBuffer);
 
-		virtual void Visit(const ee::ShapePtr& shape, bool& next);
+		virtual void Visit(const ee::ShapePtr& shape, bool& next) override;
 
 	private:
 		std::map<std::shared_ptr<ChainShape>, std::shared_ptr<ChainShape>>& m_simplify_buffer;
@@ -49,7 +49,7 @@ private:
 	public:
 		OffsetVisitor(const sm::vec2& offset);
 
-		virtual void Visit(const ee::ShapePtr& shape, bool& next);
+		virtual void Visit(const ee::ShapePtr& shape, bool& next) override;
 
 	private:
 		const sm::vec2& m_offset;

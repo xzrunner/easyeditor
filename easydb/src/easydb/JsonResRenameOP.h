@@ -12,7 +12,7 @@ public:
 	JsonResRenameOP(const std::string& filepath, const std::string& old_name, const std::string& new_name);
 
 protected:
-	virtual bool OnDoFile(const std::string& filepath, Json::Value& val, const std::string& key);
+	virtual bool OnDoFile(const std::string& filepath, Json::Value& val, const std::string& key) override;
 
 private:
 	const std::string& m_old_name;

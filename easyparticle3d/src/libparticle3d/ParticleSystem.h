@@ -36,8 +36,8 @@ public:
 	 *  @interface
 	 *    UICallback
 	 */
-	virtual void SetValue(int key, const ee::UICallback::Data& data);
-	virtual void GetValue(int key, ee::UICallback::Data& data);
+	virtual void SetValue(int key, const ee::UICallback::Data& data) override;
+	virtual void GetValue(int key, ee::UICallback::Data& data) override;
 
 	virtual void Draw(AnimRecorder* recorder = NULL) const;
 

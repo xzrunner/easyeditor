@@ -26,7 +26,7 @@ public:
 	ComplexBuilder(ExportNameSet& export_set, ClipboxBuilder* cb_builder);
 	virtual ~ComplexBuilder();
 
-	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
+	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const override;
 
 	const IPackNode* Create(const std::shared_ptr<const ecomplex::Symbol>& sym);
 

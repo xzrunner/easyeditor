@@ -14,7 +14,7 @@ public:
 	LibraryPanelDropTarget(LibraryPanel* panel) 
 		: m_panel(panel) {}
 	
-	virtual bool OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames);
+	virtual bool OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames) override;
 
 private:
 	LibraryPanel* m_panel;

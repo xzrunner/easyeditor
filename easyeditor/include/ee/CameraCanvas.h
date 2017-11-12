@@ -17,7 +17,7 @@ public:
 		wxGLContext* glctx = NULL, bool use_context_stack = true);
 	virtual ~CameraCanvas();
 
-	virtual void SetCurrentCanvas();
+	virtual void SetCurrentCanvas() override;
 
 	s2::Camera* GetCamera() { return m_camera; }
 

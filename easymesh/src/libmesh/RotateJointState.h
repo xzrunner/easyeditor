@@ -16,8 +16,8 @@ public:
 	RotateJointState(s2::MeshJoint* joint, const sm::vec2& first_pos);
 	virtual ~RotateJointState();
 
-	virtual void OnMouseRelease(const sm::vec2& pos);
-	virtual	bool OnMouseDrag(const sm::vec2& pos);
+	virtual void OnMouseRelease(const sm::vec2& pos) override;
+	virtual	bool OnMouseDrag(const sm::vec2& pos) override;
 
 private:
 	void Rotate(const sm::vec2& dst);

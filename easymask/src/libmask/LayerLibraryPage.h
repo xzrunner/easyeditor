@@ -11,10 +11,10 @@ class LayerLibraryPage : public ee::LibraryPage
 public:
 	LayerLibraryPage(wxWindow* parent, const std::string& name);
 
-	virtual bool IsHandleSymbol(const ee::SymPtr& sym) const { return true; } 
+	virtual bool IsHandleSymbol(const ee::SymPtr& sym) const override { return true; } 
 
 protected:
-	virtual void OnAddPress(wxCommandEvent& event);
+	virtual void OnAddPress(wxCommandEvent& event) override;
 
 }; // LayerLibraryPage
 

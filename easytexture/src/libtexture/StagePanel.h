@@ -25,7 +25,7 @@ public:
 	auto& GetSymbol() { return m_sym; }
 
 protected:
-	virtual void OnKeyHook(int key_code);
+	virtual void OnKeyHook(int key_code) override;
 
 private:
 	std::shared_ptr<Symbol> m_sym;

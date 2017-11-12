@@ -26,12 +26,12 @@ public:
 		ee::EditCMPT* callback = NULL);
 	virtual ~SelectNodesOP();
 
-	virtual bool OnKeyDown(int keyCode);
-	virtual bool OnMouseLeftDown(int x, int y);
-	virtual bool OnMouseLeftUp(int x, int y);
+	virtual bool OnKeyDown(int keyCode) override;
+	virtual bool OnMouseLeftDown(int x, int y) override;
+	virtual bool OnMouseLeftUp(int x, int y) override;
 
-	virtual bool OnDraw() const;
-	virtual bool Clear();
+	virtual bool OnDraw() const override;
+	virtual bool Clear() override;
 
 	void FetchSelectedNode(CU_VEC<sm::vec2>& nodes) const;
 
@@ -56,7 +56,7 @@ private:
 	{
 	public:
 		PosQueryVisitor(const sm::vec2& pos, ChainSelectedNodes** result);
-		virtual void Visit(const ee::ShapePtr& shape, bool& next);
+		virtual void Visit(const ee::ShapePtr& shape, bool& next) override;
 
 	private:
 		const sm::vec2& m_pos;
@@ -69,7 +69,7 @@ private:
 	{
 	public:
 		RectQueryVisitor(const sm::rect& rect, CU_VEC<ChainSelectedNodes*>& result);
-		virtual void Visit(const ee::ShapePtr& shape, bool& next);
+		virtual void Visit(const ee::ShapePtr& shape, bool& next) override;
 
 	private:
 		const sm::rect& m_rect;

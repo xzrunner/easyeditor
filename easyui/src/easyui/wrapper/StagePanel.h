@@ -26,11 +26,11 @@ public:
 	//
 	// UIStagePage interface
 	//
-	virtual void LoadFromFile(const char* filename);
-	virtual void StoreToFile(const char* filename) const;
-	virtual void EnablePage(bool enable);
-	virtual void OnPreview() {}
-	virtual void OnCode() const {}
+	virtual void LoadFromFile(const char* filename) override;
+	virtual void StoreToFile(const char* filename) const override;
+	virtual void EnablePage(bool enable) override;
+	virtual void OnPreview() override {}
+	virtual void OnCode() const override {}
 
 	sm::rect& GetClipbox() { return m_clipbox; }
 

@@ -13,7 +13,7 @@ class PreviewOP : public ee::ZoomViewOP
 public:
 	PreviewOP(wxWindow* wnd, ee::EditPanelImpl* stage, s2::AnimCurr& curr);
 
-	virtual bool OnMouseLeftDown(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y) override;
 
 private:
 	s2::AnimCurr& m_curr;

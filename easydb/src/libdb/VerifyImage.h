@@ -19,10 +19,10 @@ public:
 	//
 	// interface ICommand
 	//
-	virtual std::string Command() const;
-	virtual std::string Description() const;
-	virtual std::string Usage() const;
-	virtual int Run(int argc, char *argv[]);
+	virtual std::string Command() const override;
+	virtual std::string Description() const override;
+	virtual std::string Usage() const override;
+	virtual int Run(int argc, char *argv[]) override;
 
 	static ICommand* Create() { return new VerifyImage(); }
 

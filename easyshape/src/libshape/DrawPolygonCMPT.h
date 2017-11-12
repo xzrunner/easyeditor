@@ -19,10 +19,10 @@ public:
 		ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapes_impl,
 		ee::PropertySettingPanel* property);
 
-	virtual void UpdateControlValue();
+	virtual void UpdateControlValue() override;
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 private:
 	wxSizer* InitPreviewButtonPanel();

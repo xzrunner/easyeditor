@@ -19,7 +19,7 @@ public:
 	TextureBuilder();
 	virtual ~TextureBuilder();
 
-	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const;
+	virtual void Traverse(ee::Visitor<IPackNode>& visitor) const override;
 
 	bool CanHandle(const std::shared_ptr<etexture::Symbol>& sym) const;
 

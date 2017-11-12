@@ -16,11 +16,11 @@ class SpriteObserver : public ee::SpriteObserver
 public:
 	SpriteObserver(const Layer& layer);
 
-	virtual void OnSetPosition(const ee::Sprite& spr, const sm::vec2& pos);
-	virtual void OnSetAngle(const ee::Sprite& spr, float angle);
-	virtual void OnSetScale(const ee::Sprite& spr, const sm::vec2& scale);
-	virtual void OnSetShear(const ee::Sprite& spr, const sm::vec2& shear);
-	virtual void OnSetOffset(const ee::Sprite& spr, const sm::vec2& offset);
+	virtual void OnSetPosition(const ee::Sprite& spr, const sm::vec2& pos) override;
+	virtual void OnSetAngle(const ee::Sprite& spr, float angle) override;
+	virtual void OnSetScale(const ee::Sprite& spr, const sm::vec2& scale) override;
+	virtual void OnSetShear(const ee::Sprite& spr, const sm::vec2& shear) override;
+	virtual void OnSetOffset(const ee::Sprite& spr, const sm::vec2& offset) override;
 
 	void Insert(const ee::SprPtr& spr, int frame);
 	void Remove(const ee::SprPtr& spr);

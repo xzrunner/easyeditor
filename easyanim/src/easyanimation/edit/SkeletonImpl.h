@@ -13,23 +13,23 @@ class SkeletonImpl : public ee::ArrangeSpriteImpl
 public:
 	SkeletonImpl();
 
-	virtual bool OnKeyDown(int keyCode);
-	virtual void OnMouseLeftDown(int x, int y);
-	virtual void OnMouseLeftUp(int x, int y);
-	virtual void OnMouseRightDown(int x, int y);
-	virtual void OnMouseDrag(int x, int y);
+	virtual bool OnKeyDown(int keyCode) override;
+	virtual void OnMouseLeftDown(int x, int y) override;
+	virtual void OnMouseLeftUp(int x, int y) override;
+	virtual void OnMouseRightDown(int x, int y) override;
+	virtual void OnMouseDrag(int x, int y) override;
 
-	virtual void OnPopMenuSelected(int type);
+	virtual void OnPopMenuSelected(int type) override;
 
-	virtual void OnDraw(float cam_scale) const;
+	virtual void OnDraw(float cam_scale) const override;
 
 protected:
-	virtual void SetRightPopupMenu(wxMenu& menu, int x, int y);
+	virtual void SetRightPopupMenu(wxMenu& menu, int x, int y) override;
 
 	virtual ee::ArrangeSpriteState* CreateTranslateState(ee::SpriteSelection* selection, 
-		const sm::vec2& first_pos) const;
+		const sm::vec2& first_pos) const override;
 	virtual ee::ArrangeSpriteState* CreateRotateState(ee::SpriteSelection* selection, 
-		const sm::vec2& first_pos) const;
+		const sm::vec2& first_pos) const override;
 
 private:
 	Joint* m_selected_joint;

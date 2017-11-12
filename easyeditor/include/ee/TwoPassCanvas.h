@@ -25,8 +25,8 @@ public:
 	};
 
 protected:
-	virtual void OnSize(int w, int h);
-	virtual void OnDrawWhole() const;
+	virtual void OnSize(int w, int h) override;
+	virtual void OnDrawWhole() const override;
 
 private:
 	void DrawOnePass() const;

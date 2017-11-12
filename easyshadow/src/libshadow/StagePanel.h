@@ -26,13 +26,13 @@ public:
 	//
 	//	wxWindows interface
 	//
-	virtual void Refresh(bool eraseBackground=true, const wxRect *rect=NULL);
+	virtual void Refresh(bool eraseBackground=true, const wxRect *rect=NULL) override;
 
 	//
 	// ee::MultiShapesImpl interface
 	//
-	virtual void TraverseShapes(ee::Visitor<ee::Shape>& visitor, 
-		ee::DataTraverseType type = ee::DT_ALL) const;
+	virtual void TraverseShapes(ee::RefVisitor<ee::Shape>& visitor, 
+		ee::DataTraverseType type = ee::DT_ALL) const override;
 
 	auto& GetSymbol() { return m_sym; }
 
@@ -42,7 +42,7 @@ protected:
 	//
 	//	interface MultiShapesImpl
 	//
-	virtual void OnNotify(int sj_id, void* ud);
+	virtual void OnNotify(int sj_id, void* ud) override;
 
 private:
 	void InsertShape(ee::Shape* shape);

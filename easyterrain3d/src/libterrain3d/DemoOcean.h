@@ -16,8 +16,8 @@ class DemoOcean : public IDemo
 public:
 	DemoOcean(e3d::Camera& cam);
 
-	virtual void Load();
-	virtual void Draw() const;
+	virtual void Load() override;
+	virtual void Draw() const override;
 
 private:
 	void Update(float dt) const;

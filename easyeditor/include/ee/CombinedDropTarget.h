@@ -21,7 +21,7 @@ public:
 	//
 	//	interface wxDropTarget
 	//
-	virtual wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def);
+	virtual wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def) override;
 
 	virtual bool OnDropSymbol(const std::shared_ptr<Symbol>& sym, const sm::vec2& pos) { return false; }
 	virtual void OnDropText(wxCoord x, wxCoord y, const wxString& text) = 0;

@@ -20,7 +20,7 @@ public:
 	void SetTag(const std::string& tag);
 
 protected:
-	virtual wxSizer* InitLayout();
+	virtual wxSizer* InitLayout() override;
 
 private:
 	wxTextCtrl* m_type_text;

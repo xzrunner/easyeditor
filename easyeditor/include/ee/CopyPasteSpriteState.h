@@ -17,8 +17,8 @@ class CopyPasteSpriteState : public ArrangeSpriteState
 public:
 	CopyPasteSpriteState(SpriteSelection* selection);
 
-	virtual void OnMousePress(const sm::vec2& pos);
-	virtual bool OnMouseDrag(const sm::vec2& pos);
+	virtual void OnMousePress(const sm::vec2& pos) override;
+	virtual bool OnMouseDrag(const sm::vec2& pos) override;
 
 private:
 	sm::vec2 m_last_pos;
