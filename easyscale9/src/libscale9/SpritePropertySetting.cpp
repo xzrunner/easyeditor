@@ -1,6 +1,8 @@
 #include "SpritePropertySetting.h"
 #include "Sprite.h"
 
+#include <ee/panel_msg.h>
+
 namespace escale9
 {
 
@@ -20,10 +22,12 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 		sm::vec2 sz = spr->GetScale9().GetSize();
 		sz.x = wxANY_AS(value, float);
 		spr->Resize(sz.x, sz.y);
+		ee::RefreshPanelSJ::Instance()->Refresh();
 	} else if (name == wxT("Height") && type != s2::S9_3GRID_HORI) {
 		sm::vec2 sz = spr->GetScale9().GetSize();
 		sz.y = wxANY_AS(value, float);
 		spr->Resize(sz.x, sz.y);
+		ee::RefreshPanelSJ::Instance()->Refresh();
 	}
 }
 
