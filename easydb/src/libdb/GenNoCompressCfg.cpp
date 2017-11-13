@@ -161,7 +161,7 @@ void GenNoCompressCfg::AddPath(std::set<std::string>& dst,
 							   const std::string& src_dir)
 {
 	std::string path = src["filepath"].asString();
-	auto full_path = gum::FilepathHelper::Absolute(src_dir.c_str(), path.c_str()).c_str();
+	auto full_path = gum::FilepathHelper::Absolute(src_dir.c_str(), path.c_str());
 	dst.insert(gum::FilepathHelper::Format(full_path).c_str());
 }
 
