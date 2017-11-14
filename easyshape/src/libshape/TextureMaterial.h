@@ -19,7 +19,7 @@ public:
 	virtual Json::Value Store(const std::string& dirpath) const override;
 	virtual void Translate(const sm::vec2& offset) override;
 
-	const std::shared_ptr<const ee::ImageSymbol>& GetImage() const;
+	auto& GetImage() const { return m_img; }
 
 }; // TextureMaterial
 

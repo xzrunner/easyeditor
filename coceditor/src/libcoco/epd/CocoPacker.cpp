@@ -1392,8 +1392,8 @@ int CocoPacker::ParserTexture(const std::shared_ptr<etexture::Sprite>& spr)
 	assert(poly);
 	auto material = dynamic_cast<const eshape::TextureMaterial*>(poly->GetMaterial());
 	assert(material);
-	auto& img_symbol = material->GetImage();
-	TPParser::Picture* picture = m_parser.FindPicture(img_symbol);
+	TPParser::Picture* picture = m_parser.FindPicture(
+		std::dynamic_pointer_cast<const ee::Symbol>(material->GetImage()));
 	if (!picture) {
 		std::string str = "\""+sym->GetFilepath()+"\""+" not in the texpacker file 5!";
 		throw ee::Exception(str);

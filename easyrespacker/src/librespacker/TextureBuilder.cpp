@@ -94,7 +94,7 @@ void TextureBuilder::Load(const std::shared_ptr<const etexture::Symbol>& sym, Pa
 	{
 		PackPicture::Quad quad;
 
-		quad.img = material->GetImage()->GetImage();
+		quad.img = std::dynamic_pointer_cast<const ee::ImageSymbol>(material->GetImage())->GetImage();
 
 		for (int j = 0; j < 3; ++j) {
 			quad.texture_coord[j] = texcoords[i+j];

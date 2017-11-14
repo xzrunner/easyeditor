@@ -50,8 +50,9 @@ PackShape::PackShape(const std::shared_ptr<eshape::Symbol>& sym)
 			m_color = cp->GetColor();
 		} else if (auto tp = dynamic_cast<const s2::TexturePolygon*>(p.get())) {
 			m_type = gum::SHAPE_POLYGON_TEXTURE;
-			const eshape::TextureMaterial* mat = dynamic_cast<const eshape::TextureMaterial*>(tp);
-			m_texture = PackNodeFactory::Instance()->Create(mat->GetImage());
+			auto mat = dynamic_cast<const eshape::TextureMaterial*>(tp);
+			m_texture = PackNodeFactory::Instance()->Create(
+				std::dynamic_pointer_cast<const ee::Symbol>(mat->GetImage()));
 		}
 	}
 	else if (auto polyline = dynamic_cast<const s2::PolylineShape*>(shape.get()))
