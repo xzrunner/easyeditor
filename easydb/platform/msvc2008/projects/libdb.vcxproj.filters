@@ -88,6 +88,9 @@
     <Filter Include="commands\export">
       <UniqueIdentifier>{829701d5-4ed6-441f-84ba-f836ddddf239}</UniqueIdentifier>
     </Filter>
+    <Filter Include="commands\pack\res\audio">
+      <UniqueIdentifier>{de14c0e4-4466-4dfc-987c-0f966c5abea6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\libdb\CopyFile.cpp">
@@ -145,9 +148,6 @@
       <Filter>commands\pack\res</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\libdb\GenPkgRefInfo.cpp">
-      <Filter>commands\pack\res</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\libdb\PackAudioID.cpp">
       <Filter>commands\pack\res</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\libdb\PackEP.cpp">
@@ -384,6 +384,12 @@
     <ClCompile Include="..\..\..\src\libdb\GenNoCutCfg.cpp">
       <Filter>commands\pack\res</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\PackAudioID.cpp">
+      <Filter>commands\pack\res\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\GenAudioID.cpp">
+      <Filter>commands\pack\res\audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\libdb\CopyFile.h">
@@ -444,9 +450,6 @@
       <Filter>commands\pack\res</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\libdb\GenPkgRefInfo.h">
-      <Filter>commands\pack\res</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\libdb\PackAudioID.h">
       <Filter>commands\pack\res</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\libdb\PackEP.h">
@@ -685,6 +688,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\libdb\GenNoCutCfg.h">
       <Filter>commands\pack\res</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\PackAudioID.h">
+      <Filter>commands\pack\res\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\GenAudioID.h">
+      <Filter>commands\pack\res\audio</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

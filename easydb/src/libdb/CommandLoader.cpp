@@ -86,6 +86,7 @@
 #include "FixTextAlign.h"
 #include "GenPkgRefInfo.h"
 #include "GenNoCutCfg.h"
+#include "GenAudioID.h"
 
 namespace edb
 {
@@ -177,6 +178,7 @@ void CommandLoader::Init()
 	fc->Register(FixTextAlign::Create());
 	fc->Register(GenPkgRefInfo::Create());
 	fc->Register(GenNoCutCfg::Create());
+	fc->Register(GenAudioID::Create());
 }
 
 }

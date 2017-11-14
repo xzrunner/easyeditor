@@ -120,6 +120,7 @@
     <ClCompile Include="..\..\..\src\libdb\FixTextAlign.cpp" />
     <ClCompile Include="..\..\..\src\libdb\FormatJsonFile.cpp" />
     <ClCompile Include="..\..\..\src\libdb\FormatTIDString.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\GenAudioID.cpp" />
     <ClCompile Include="..\..\..\src\libdb\GenNoCompressCfg.cpp" />
     <ClCompile Include="..\..\..\src\libdb\GenNoCutCfg.cpp" />
     <ClCompile Include="..\..\..\src\libdb\GenPackCfg.cpp" />
@@ -220,6 +221,7 @@
     <ClInclude Include="..\..\..\src\libdb\FixTextAlign.h" />
     <ClInclude Include="..\..\..\src\libdb\FormatJsonFile.h" />
     <ClInclude Include="..\..\..\src\libdb\FormatTIDString.h" />
+    <ClInclude Include="..\..\..\src\libdb\GenAudioID.h" />
     <ClInclude Include="..\..\..\src\libdb\GenNoCompressCfg.h" />
     <ClInclude Include="..\..\..\src\libdb\GenNoCutCfg.h" />
     <ClInclude Include="..\..\..\src\libdb\GenPackCfg.h" />
