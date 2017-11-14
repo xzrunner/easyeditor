@@ -30,6 +30,10 @@ public:
 
 	static ee::SprPtr Create(const std::shared_ptr<ee::Symbol>& sym);
 
+private:
+	bool LoadResourcesStatic(const std::string& filepath);
+	bool LoadResourcesStream(const std::string& filepath);
+
 	S2_SPR_CLONE_FUNC(Sprite)
 
 }; // Sprite

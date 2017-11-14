@@ -2,6 +2,19 @@
 #include "Symbol.h"
 #include "PropertySetting.h"
 
+#include <ee/SymbolFile.h>
+#include <ee/std_functor.h>
+
+#include <easycomplex.h>
+
+#include <uniaudio/AudioData.h>
+#include <uniaudio/AudioContext.h>
+#include <uniaudio/DecoderFactory.h>
+#include <uniaudio/Decoder.h>
+#include <uniaudio/openal/Source.h>
+#include <sprite2/SymType.h>
+#include <gum/Audio.h>
+
 namespace eaudio
 {
 
@@ -25,6 +38,7 @@ Sprite::Sprite(const s2::SymPtr& sym, uint32_t id)
 	, s2::AudioSprite(sym)
 	, ee::Sprite(sym)
 {
+	LoadResourcesStream(std::dynamic_pointer_cast<ee::Symbol>(sym)->GetFilepath());
 }
 
 bool Sprite::Update(const s2::UpdateParams& up) 
@@ -50,6 +64,59 @@ ee::PropertySetting* Sprite::CreatePropertySetting(ee::EditPanelImpl* stage)
 ee::SprPtr Sprite::Create(const std::shared_ptr<ee::Symbol>& sym) 
 {
 	return std::make_shared<Sprite>(sym);
+}
+
+bool Sprite::LoadResourcesStatic(const std::string& filepath)
+{
+	if (ee::SymbolFile::Instance()->Type(filepath) == s2::SYM_COMPLEX)
+	{
+		std::vector<std::string> children;
+		ecomplex::FileLoader::LoadChildren(filepath, children);
+
+		CU_VEC<ua::AudioData*> list;
+		for (int i = 0, n = children.size(); i < n; ++i) {
+			if (ee::SymbolFile::Instance()->Type(children[i]) == s2::SYM_AUDIO) {
+				list.push_back(new ua::AudioData(children[i].c_str()));
+			}
+		}
+
+		if (list.size() == 0) {
+			return false;
+		}
+		else if (list.size() == 1) {
+			ua::AudioContext* ctx = gum::Audio::Instance()->GetContext();
+			SetSource(ctx->CreateSource(list[0]));
+		}
+		else {
+			ua::AudioData* data = new ua::AudioData(list);
+			ua::AudioContext* ctx = gum::Audio::Instance()->GetContext();
+			SetSource(ctx->CreateSource(data));
+			delete data;
+			for_each(list.begin(), list.end(), ee::DeletePointerFunctor<ua::AudioData>());
+		}
+	}
+	else
+	{
+		ua::AudioData* data = new ua::AudioData(filepath.c_str());
+		ua::AudioContext* ctx = gum::Audio::Instance()->GetContext();
+		SetSource(ctx->CreateSource(data));
+		delete data;
+	}
+
+	return true;
+}
+
+bool Sprite::LoadResourcesStream(const std::string& filepath)
+{
+	auto decoder = ua::DecoderFactory::Create(filepath.c_str());
+	if (!decoder) {
+		return false;
+	}
+
+	ua::AudioContext* ctx = gum::Audio::Instance()->GetContext();
+	SetSource(ctx->CreateSource(decoder));
+
+	return true;
 }
 
 }
