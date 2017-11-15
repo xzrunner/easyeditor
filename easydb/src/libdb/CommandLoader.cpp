@@ -87,6 +87,7 @@
 #include "GenPkgRefInfo.h"
 #include "GenNoCutCfg.h"
 #include "GenAudioID.h"
+#include "ExportAudio.h"
 
 namespace edb
 {
@@ -179,6 +180,7 @@ void CommandLoader::Init()
 	fc->Register(GenPkgRefInfo::Create());
 	fc->Register(GenNoCutCfg::Create());
 	fc->Register(GenAudioID::Create());
+	fc->Register(ExportAudio::Create());
 }
 
 }
