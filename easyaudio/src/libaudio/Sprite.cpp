@@ -49,11 +49,29 @@ bool Sprite::Update(const s2::UpdateParams& up)
 void Sprite::Load(const Json::Value& val, const std::string& dir)
 {
 	ee::Sprite::Load(val);
+
+	const Json::Value& audio_val = val["audio"];
+
+	SetAudioOffset(audio_val["offset"].asFloat());
+	SetAudioDuration(audio_val["duration"].asFloat());
+
+	SetFadeIn(audio_val["fade_in"].asFloat());
+	SetFadeOut(audio_val["fade_out"].asFloat());
 }
 
 void Sprite::Store(Json::Value& val, const std::string& dir) const
 {
 	ee::Sprite::Store(val);
+
+	Json::Value audio_val;
+
+	audio_val["offset"] = GetAudioOffset();
+	audio_val["duration"] = GetAudioDuration();
+
+	audio_val["fade_in"]  = GetFadeIn();
+	audio_val["fade_out"] = GetFadeOut();
+
+	val["audio"] = audio_val;
 }
 
 ee::PropertySetting* Sprite::CreatePropertySetting(ee::EditPanelImpl* stage)
