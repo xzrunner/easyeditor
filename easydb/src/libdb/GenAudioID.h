@@ -27,9 +27,6 @@ public:
 
 	void Trigger(const std::string& src_dir, const std::string& dst_file);
 
-private:
-	void LoadAudioData(const std::string& src_dir, Json::Value& dst);
-
 }; // GenAudioID
 
 }
