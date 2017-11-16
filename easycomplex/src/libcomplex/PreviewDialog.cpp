@@ -10,6 +10,8 @@
 
 #include <easyanim.h>
 
+#include <gum/Audio.h>
+
 namespace ecomplex
 {
 
@@ -29,6 +31,8 @@ PreviewDialog::PreviewDialog(wxWindow* parent, wxGLContext* glctx,
 	, m_sprs(sprs)
 	, m_control(0.033f)
 {
+	gum::Audio::Instance()->Stop();
+
 	InitLayout(glctx);
 
 	ee::SettingData& data = ee::Config::Instance()->GetSettings();
@@ -47,6 +51,8 @@ PreviewDialog::PreviewDialog(wxWindow* parent, wxGLContext* glctx,
 
 PreviewDialog::~PreviewDialog()
 {
+	gum::Audio::Instance()->Stop();
+
 	ee::SettingData& data = ee::Config::Instance()->GetSettings();
 	data.particle3d_loop = true;
 

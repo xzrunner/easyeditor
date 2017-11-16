@@ -13,6 +13,7 @@
 #include <easyaudio.h>
 
 #include <sprite2/SymType.h>
+#include <gum/Audio.h>
 
 #include <wx/wx.h>
 
@@ -39,6 +40,8 @@ void OpenSymbolDialog::Open(const ee::SprPtr& spr)
 		wxMessageBox("禁止编辑自动生成的文件", "warning", wxOK | wxICON_INFORMATION, m_wnd);
 		return;
 	}
+
+	gum::Audio::Instance()->Stop();
 
 	ee::CurrSprTreePath::Instance()->Push(spr);
 
@@ -90,6 +93,8 @@ void OpenSymbolDialog::Open(const ee::SprPtr& spr)
 	}
 
 	ee::CurrSprTreePath::Instance()->Pop();
+
+	gum::Audio::Instance()->Stop();
 }
 
 }

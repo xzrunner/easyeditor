@@ -24,6 +24,8 @@
 #include <easyterrain2d.h>
 #include <easyshadow.h>
 
+#include <gum/Audio.h>
+
 namespace lr
 {
 
@@ -41,6 +43,8 @@ void OpenSymbolDialog::Open(const ee::SprPtr& spr)
 		wxMessageBox("禁止编辑自动生成的文件", "warning", wxOK | wxICON_INFORMATION, m_wnd);
 		return;
 	}
+
+	gum::Audio::Instance()->Stop();
 
 	ee::CurrSprTreePath::Instance()->Push(spr);
 
@@ -153,6 +157,8 @@ void OpenSymbolDialog::Open(const ee::SprPtr& spr)
 	}
 
 	ee::CurrSprTreePath::Instance()->Pop();
+
+	gum::Audio::Instance()->Stop();
 }
 
 void OpenSymbolDialog::UpdateShapeFromETexture(etexture::Sprite* spr)

@@ -7,6 +7,7 @@
 #include <ee/SettingData.h>
 
 #include <sprite2/AnimCurr.h>
+#include <gum/Audio.h>
 
 namespace eanim
 {
@@ -14,6 +15,8 @@ namespace eanim
 PreviewDialog::PreviewDialog(wxWindow* parent, wxGLContext* glctx, s2::AnimSymbol* sym)
  	: wxDialog(parent, wxID_ANY, "Preview", wxDefaultPosition, wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 {
+	gum::Audio::Instance()->Stop();
+
 	sym->LoadCopy();
 	m_curr.SetAnimCopy(dynamic_cast<s2::AnimSymbol*>(sym)->GetCopy());
 
@@ -25,6 +28,8 @@ PreviewDialog::PreviewDialog(wxWindow* parent, wxGLContext* glctx, s2::AnimSymbo
 
 PreviewDialog::~PreviewDialog()
 {
+	gum::Audio::Instance()->Stop();
+
 //	delete m_stage;
 }
 
