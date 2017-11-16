@@ -203,12 +203,12 @@ s2::AnimSymbol* Frame::BuildSym() const
 	for (int i = 0, n = src.size(); i < n; ++i)
 	{
 		const std::map<int, KeyFrame*>& src_layer = src[i]->GetAllFrames();
-		auto dst_layer = mm::allocate_unique<s2::AnimSymbol::Layer>();
+		auto dst_layer = CU_MAKE_UNIQUE<s2::AnimSymbol::Layer>();
 		std::map<int, KeyFrame*>::const_iterator itr = src_layer.begin();
 		for ( ; itr != src_layer.end(); ++itr)
 		{
 			auto& src_frame = itr->second->GetAllSprites();
-			auto dst_frame = mm::allocate_unique<s2::AnimSymbol::Frame>();
+			auto dst_frame = CU_MAKE_UNIQUE<s2::AnimSymbol::Frame>();
 			dst_frame->index = itr->second->GetTime();
 			dst_frame->tween = itr->second->HasClassicTween();
 

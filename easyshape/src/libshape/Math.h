@@ -5,6 +5,7 @@
 #include <cu/cu_stl.h>
 
 #include <vector>
+#include <memory>
 
 namespace eshape
 {

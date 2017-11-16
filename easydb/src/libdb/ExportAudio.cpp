@@ -173,8 +173,8 @@ void ExportAudio::OutputAudio(const std::string& dst_dir)
 
 		// init sym
 		libanim::Symbol sym;
-		auto layer = mm::allocate_unique<s2::AnimSymbol::Layer>();
-		auto frame = mm::allocate_unique<s2::AnimSymbol::Frame>();
+		auto layer = CU_MAKE_UNIQUE<s2::AnimSymbol::Layer>();
+		auto frame = CU_MAKE_UNIQUE<s2::AnimSymbol::Frame>();
 
 		frame->index = 1;
 

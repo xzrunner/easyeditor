@@ -43,13 +43,13 @@ SprPtr SpriteFactory::Create(const SymPtr& sym)
 	switch (type)
 	{
 	case s2::SYM_IMAGE:
-		spr = mm::allocate_shared<ImageSprite>(sym);
+		spr = CU_MAKE_SHARED<ImageSprite>(sym);
 		break;
 	case SYM_FONTBLANK:
-		spr = mm::allocate_shared<FontBlankSprite>(sym);
+		spr = CU_MAKE_SHARED<FontBlankSprite>(sym);
 		break;
 	case SYM_SCRIPTS:
-		spr = mm::allocate_shared<ScriptsSprite>(sym);
+		spr = CU_MAKE_SHARED<ScriptsSprite>(sym);
 		break;
 	default:
 		{

@@ -7,7 +7,7 @@
 #include "SymbolFile.h"
 #include "SymbolType.h"
 
-#include <memmgr/Allocator.h>
+#include <cu/cu_stl.h>
 #include <sprite2/SymType.h>
 
 namespace ee
@@ -29,13 +29,13 @@ SymPtr SymbolFactory::Create(int type)
 	switch (type)
 	{
 	case s2::SYM_IMAGE:
-		sym = mm::allocate_shared<ImageSymbol>();
+		sym = CU_MAKE_SHARED<ImageSymbol>();
 		break;
 	case ee::SYM_SCRIPTS:
-		sym = mm::allocate_shared<ScriptsSymbol>();
+		sym = CU_MAKE_SHARED<ScriptsSymbol>();
 		break;
 	case ee::SYM_FONTBLANK:
-		sym = mm::allocate_shared<FontBlankSymbol>();
+		sym = CU_MAKE_SHARED<FontBlankSymbol>();
 		break;
 	default:
 		{

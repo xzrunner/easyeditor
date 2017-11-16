@@ -48,10 +48,10 @@ ee::SprPtr AnimationToSpr::TransAnim(const erespacker::PackAnimation* anim)
 	assert(!anim->actions.empty() && anim->actions[0].size >= 1);
 
 	auto anim_symbol = std::make_shared<libanim::Symbol>();
-	auto layer = mm::allocate_unique<s2::AnimSymbol::Layer>();
+	auto layer = CU_MAKE_UNIQUE<s2::AnimSymbol::Layer>();
 	for (int i = 0; i < anim->actions[0].size; ++i) {
 		const erespacker::PackAnimation::Frame& src = anim->frames[i];
-		auto frame = mm::allocate_unique<s2::AnimSymbol::Frame>();
+		auto frame = CU_MAKE_UNIQUE<s2::AnimSymbol::Frame>();
 		frame->index = i;
 		frame->tween = false;
 		for (int j = 0, m = src.parts.size(); j < m; ++j) {

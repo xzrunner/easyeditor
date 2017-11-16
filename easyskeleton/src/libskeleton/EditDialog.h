@@ -5,6 +5,8 @@
 
 #include <wx/dialog.h>
 
+#include <memory>
+
 class wxGLContext;
 
 namespace libskeleton

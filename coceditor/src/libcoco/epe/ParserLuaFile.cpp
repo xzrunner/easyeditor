@@ -390,14 +390,14 @@ void ParserLuaFile::transAniToFiles(const std::string& outfloder)
 void ParserLuaFile::transAniToAnimationFile(const std::string& outfloder, int id, Animation* ani)
 {
 	libanim::Symbol* sym = new libanim::Symbol;
-	auto layer = mm::allocate_unique<s2::AnimSymbol::Layer>();
+	auto layer = CU_MAKE_UNIQUE<s2::AnimSymbol::Layer>();
 	sym->name = ani->export_name;
 	sym->SetFPS(30);
 	for (int i = 0, n = ani->frames.size(); i < n; ++i)
 	{
 		//				std::cout << "frame: [" << i << "/" << ani->frames.size() << "]" << std::endl;
 
-		auto frame = mm::allocate_unique<s2::AnimSymbol::Frame>();
+		auto frame = CU_MAKE_UNIQUE<s2::AnimSymbol::Frame>();
 		frame->index = i+1;
 		frame->tween = false;
 		for (int j = 0, m = ani->frames[i].size(); j < m; ++j)
@@ -542,14 +542,14 @@ void ParserLuaFile::transAniToMemory()
 void ParserLuaFile::transAniToAnimationMemory(int id, Animation* ani)
 {
 	libanim::Symbol* sym = new libanim::Symbol;
-	auto layer = mm::allocate_unique<s2::AnimSymbol::Layer>();
+	auto layer = CU_MAKE_UNIQUE<s2::AnimSymbol::Layer>();
 	sym->name = ani->export_name;
 	sym->SetFPS(30);
 	for (int i = 0, n = ani->frames.size(); i < n; ++i)
 	{
 		// std::cout << "frame: [" << i << "/" << ani->frames.size() << "]" << std::endl;
 
-		auto frame = mm::allocate_unique<s2::AnimSymbol::Frame>();
+		auto frame = CU_MAKE_UNIQUE<s2::AnimSymbol::Frame>();
 		frame->index = i + 1;
 		frame->tween = false;
 		for (int j = 0, m = ani->frames[i].size(); j < m; ++j)
