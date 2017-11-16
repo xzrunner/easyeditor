@@ -157,7 +157,7 @@ void PackComplex::Init(const std::shared_ptr<const ecomplex::Symbol>& sym)
 	for (int i = 0, n = children.size(); i < n; ++i) 
 	{
 		auto& child = children[i];
-		bool force_curr = is_curr_pkg && child->GetSymbol()->Type() == s2::SYM_SCALE9;
+		bool force_curr = is_curr_pkg && (child->GetSymbol()->Type() == s2::SYM_SCALE9 || child->GetSymbol()->Type() == s2::SYM_AUDIO);
 		m_children.push_back(PackNodeFactory::Instance()->Create(
 			std::dynamic_pointer_cast<ee::Sprite>(child), force_curr));
 		m_children_trans.push_back(*child);

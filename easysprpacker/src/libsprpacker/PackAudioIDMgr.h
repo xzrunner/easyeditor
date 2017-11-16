@@ -14,7 +14,7 @@ class PackAudioIDMgr
 public:
 	void Init(const std::string& filepath);
 
-	int Query(const std::string& name) const;
+	int Query(const std::string& filepath) const;
 
 private:
 	std::map<std::string, int> m_map2id;

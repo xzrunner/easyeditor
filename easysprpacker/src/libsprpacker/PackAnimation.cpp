@@ -2,6 +2,7 @@
 #include "PackNodeFactory.h"
 #include "binary_io.h"
 #include "to_int.h"
+#include "PackIDMgr.h"
 
 #include <easyanim.h>
 #include <easybuilder.h>
@@ -14,6 +15,7 @@ namespace lua = ebuilder::lua;
 #include <sprite2/LerpSpiral.h>
 #include <sprite2/LerpWiggle.h>
 #include <sprite2/LerpEase.h>
+#include <sprite2/SymType.h>
 
 #include <algorithm>
 
@@ -92,10 +94,11 @@ void PackAnimation::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 
 void PackAnimation::Init(const std::shared_ptr<libanim::Symbol>& sym)
 {
+	bool is_curr_pkg = PackIDMgr::Instance()->IsCurrPkg(sym->GetFilepath());
 	const auto& layers = sym->GetLayers();
 	m_layers.reserve(layers.size());
 	for (int i = 0, n = layers.size(); i < n; ++i) {
-		m_layers.push_back(new Layer(*layers[i]));
+		m_layers.push_back(new Layer(*layers[i], is_curr_pkg));
 	}
 
 	CheckLerp(sym->GetFilepath());
@@ -139,10 +142,12 @@ void PackAnimation::CheckLerp(const std::string& filepath)
 /************************************************************************/
 
 PackAnimation::Actor::
-Actor(const s2::SprPtr& spr)
+Actor(const s2::SprPtr& spr, bool is_curr_pkg)
 	: m_trans(*spr, true)
 {
-	m_node = PackNodeFactory::Instance()->Create(std::dynamic_pointer_cast<ee::Sprite>(spr));
+	auto type = spr->GetSymbol()->Type();
+	bool force_curr = is_curr_pkg && (type == s2::SYM_SCALE9 || type == s2::SYM_AUDIO);
+	m_node = PackNodeFactory::Instance()->Create(std::dynamic_pointer_cast<ee::Sprite>(spr), force_curr);
 }
 
 PackAnimation::Actor::
@@ -341,14 +346,14 @@ GetLerpDataSize(int lerp_type)
 /************************************************************************/
 
 PackAnimation::Frame::
-Frame(const s2::AnimSymbol::Frame& frame)
+Frame(const s2::AnimSymbol::Frame& frame, bool is_curr_pkg)
 {
 	m_index = frame.index;
 	m_tween = frame.tween;
 
 	m_actors.reserve(frame.sprs.size());
 	for (int spr = 0, spr_n = frame.sprs.size(); spr < spr_n; ++spr) {
-		m_actors.push_back(new Actor(frame.sprs[spr]));
+		m_actors.push_back(new Actor(frame.sprs[spr], is_curr_pkg));
 	}
 
 	m_lerps.reserve(frame.lerps.size());
@@ -448,13 +453,13 @@ PackToBin(uint8_t** ptr) const
 /************************************************************************/
 
 PackAnimation::Layer::
-Layer(const s2::AnimSymbol::Layer& layer)
+Layer(const s2::AnimSymbol::Layer& layer, bool is_curr_pkg)
 {
 	m_frames.reserve(layer.frames.size());
 	for (int frame = 0, frame_n = layer.frames.size(); frame < frame_n; ++frame)
 	{
 		const auto& src_frame = layer.frames[frame];
-		Frame* dst_frame = new Frame(*src_frame);
+		Frame* dst_frame = new Frame(*src_frame, is_curr_pkg);
 		m_frames.push_back(dst_frame);
 	}
 }

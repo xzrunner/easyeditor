@@ -72,16 +72,33 @@ bool PackIDMgr::IsCurrPkg(const PackNode* node) const
 void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id,
 						bool force_curr) const
 {
+	static int NEXT_NODE_ID = 0;
+
 	int type = ee::SymbolFile::Instance()->Type(filepath);
 	if (type == s2::SYM_AUDIO)
 	{
-		pkg_id = 0xfff;
-		std::string filename = ee::FileHelper::GetFilename(filepath);
-		node_id = PackAudioIDMgr::Instance()->Query(filename);
+		if (force_curr) 
+		{
+			if (m_curr_pkg_id != -1)
+			{
+				pkg_id = m_curr_pkg_id;
+				node_id = NEXT_NODE_ID++;
+			}
+			else if (m_curr_pkg)
+			{
+				pkg_id = m_curr_pkg->id;
+				node_id = NEXT_NODE_ID++;
+			}
+		}
+		else
+		{
+			pkg_id = 0xfff;
+			std::string filename = ee::FileHelper::GetFilename(filepath);
+			node_id = PackAudioIDMgr::Instance()->Query(filename);
+		}
 		return;
 	}
 
-	static int NEXT_NODE_ID = 0;
 	if (m_curr_pkg_id != -1)
 	{
 		pkg_id = m_curr_pkg_id;

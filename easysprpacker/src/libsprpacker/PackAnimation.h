@@ -44,7 +44,7 @@ private:
 	class Actor : public cu::RefCountObj
 	{
 	public:
-		Actor(const s2::SprPtr& spr);
+		Actor(const s2::SprPtr& spr, bool is_curr_pkg);
 		~Actor();
 
 		void PackToLuaString(ebuilder::CodeGenerator& gen) const;
@@ -82,7 +82,7 @@ private:
 	class Frame : public cu::RefCountObj
 	{
 	public:
-		Frame(const s2::AnimSymbol::Frame& frame);
+		Frame(const s2::AnimSymbol::Frame& frame, bool is_curr_pkg);
 		~Frame();
 
 		void PackToLuaString(ebuilder::CodeGenerator& gen) const;
@@ -102,7 +102,7 @@ private:
 	class Layer : public cu::RefCountObj
 	{
 	public:
-		Layer(const s2::AnimSymbol::Layer& layer);
+		Layer(const s2::AnimSymbol::Layer& layer, bool is_curr_pkg);
 		~Layer();
 
 		void PackToLuaString(ebuilder::CodeGenerator& gen) const;

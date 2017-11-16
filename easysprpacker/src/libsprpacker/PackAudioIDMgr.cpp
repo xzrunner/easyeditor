@@ -37,11 +37,14 @@ void PackAudioIDMgr::Init(const std::string& filepath)
 	}
 }
 
-int PackAudioIDMgr::Query(const std::string& name) const
+int PackAudioIDMgr::Query(const std::string& filepath) const
 {
-	std::map<std::string, int>::const_iterator itr 
-		= m_map2id.find(name);
-	return itr == m_map2id.end() ? -1 : itr->second;
+	for (auto itr = m_map2id.begin(); itr != m_map2id.end(); ++itr) {
+		if (filepath.find_last_of(itr->first) != std::string::npos) {
+			return itr->second;
+		}
+	}
+	return -1;
 }
 
 }

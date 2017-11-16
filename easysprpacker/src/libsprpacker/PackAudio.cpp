@@ -16,7 +16,7 @@ namespace esprpacker
 PackAudio::PackAudio(const std::shared_ptr<eaudio::Symbol>& sym)
 {
 	m_audio_name = gum::FilepathHelper::Filename(sym->GetFilepath().c_str()).c_str();
-	m_audio_id = PackAudioIDMgr::Instance()->Query(m_audio_name);
+	m_audio_id = PackAudioIDMgr::Instance()->Query(sym->GetFilepath());
 }
 
 void PackAudio::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TexturePacker& tp) const
