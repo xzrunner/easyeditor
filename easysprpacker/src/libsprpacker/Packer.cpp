@@ -126,6 +126,11 @@ void Packer::OutputSprID(const std::string& pkg_name, const std::string& res_dir
 		return;
 	}
 
+	std::sort(nodes.begin(), nodes.end(), [](const PackNode* l, const PackNode* r) -> bool
+	{
+		return l->GetID() < r->GetID();
+	});
+
 	PackIDMgr* id_mgr = PackIDMgr::Instance();
 
 	Json::Value value;
