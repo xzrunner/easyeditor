@@ -17,6 +17,7 @@
 #include <ee/SymbolFile.h>
 #include <ee/SymbolType.h>
 #include <ee/SymbolLoader.h>
+#include <ee/ImageData.h>
 
 #include <easycomplex.h>
 #include <easyrespacker.h>
@@ -27,6 +28,7 @@
 #include <sprite2/SymType.h>
 #include <gum/FilepathHelper.h>
 #include <timp/TextureFormat.h>
+#include <simp/NodeID.h>
 
 #include <wx/arrstr.h>
 #include <wx/filename.h>
@@ -133,11 +135,24 @@ void Packer::OutputSprID(const std::string& pkg_name, const std::string& res_dir
 
 	PackIDMgr* id_mgr = PackIDMgr::Instance();
 
+	uint32_t default_sym_id = 0xffffffff;
+	const std::string default_sym_path = ee::ImageDataMgr::Instance()->GetDefaultSym();
+	if (!default_sym_path.empty()) {
+		int pkg_id, node_id;
+		PackIDMgr::Instance()->QueryID(default_sym_path, pkg_id, node_id);
+		default_sym_id = simp::NodeID::ComposeID(pkg_id, node_id);
+	}
+
 	Json::Value value;
 	for (int i = 0, n = nodes.size(); i < n; ++i) 
 	{
 		PackNode* node = nodes[i];
 		if (!id_mgr->IsCurrPkg(node)) {
+			continue;
+		}
+		
+		if (default_sym_id != 0xffffffff && default_sym_id == node->GetID() &&
+			default_sym_path != node->GetFilepath()) {
 			continue;
 		}
 
