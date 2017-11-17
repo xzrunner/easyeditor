@@ -241,6 +241,10 @@ void MaxRectsBinaryPack2::PackSquareMultiAuto(std::vector<Sprite>& sprs, int are
 	float area_scale_limit = AREA_SCALE_LIMIT;
 
 	int edge = std::max(std::min(ee::next_p2((int)ceil(sqrt((float)area))), max_size), min_size);
+	for (auto& spr : sprs) {
+		edge = std::max(edge, ee::next_p2(spr.size->width));
+		edge = std::max(edge, ee::next_p2(spr.size->height));
+	}
 	int need_edge = ee::next_p2(std::max(sprs[0].size->width, sprs[0].size->height));
 	if (edge == need_edge) {
 		area_scale_limit = 0;
