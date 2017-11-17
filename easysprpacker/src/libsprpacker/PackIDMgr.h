@@ -30,6 +30,9 @@ public:
 	void SetCurrPkgID(int id) { m_curr_pkg_id = id; }
 
 private:
+	static void GetNextFreeID(const ee::PackIDMgr::Package* pkg, int& node_id);
+
+private:
 	const ee::PackIDMgr::Package* m_curr_pkg;
 	int m_curr_pkg_id;
 
