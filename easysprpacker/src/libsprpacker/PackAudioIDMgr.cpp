@@ -1,6 +1,7 @@
 #include "PackAudioIDMgr.h"
 
 #include <ee/FileHelper.h>
+#include <ee/StringHelper.h>
 
 #include <json/json.h>
 
@@ -39,8 +40,10 @@ void PackAudioIDMgr::Init(const std::string& filepath)
 
 int PackAudioIDMgr::Query(const std::string& filepath) const
 {
+	std::string fmt_path = filepath;
+	ee::StringHelper::ReplaceAll(fmt_path, "\\", "/");
 	for (auto itr = m_map2id.begin(); itr != m_map2id.end(); ++itr) {
-		if (filepath.find_last_of(itr->first) != std::string::npos) {
+		if (fmt_path.find(itr->first) != std::string::npos) {
 			return itr->second;
 		}
 	}

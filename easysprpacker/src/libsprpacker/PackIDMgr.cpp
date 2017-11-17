@@ -93,8 +93,7 @@ void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id,
 		else
 		{
 			pkg_id = 0xfff;
-			std::string filename = ee::FileHelper::GetFilename(filepath);
-			node_id = PackAudioIDMgr::Instance()->Query(filename);
+			node_id = PackAudioIDMgr::Instance()->Query(filepath);
 		}
 		return;
 	}
