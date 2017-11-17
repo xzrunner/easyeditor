@@ -4,6 +4,7 @@
 #include "Exception.h"
 
 #include <gum/FilepathHelper.h>
+#include <gum/StringHelper.h>
 
 #include <json/json.h>
 
@@ -133,11 +134,11 @@ void PackIDMgr::InitSprsID(const std::string& filepath, Package* pkg) const
 	for (int i = 0, n = val.size(); i < n; ++i) 
 	{
 		const Json::Value& spr_val = val[i];
-		CU_STR filename = spr_val["file"].asString().c_str();
+		std::string filename = spr_val["file"].asString();
 		uint32_t id = spr_val["id"].asUInt();
 
 		pkg->sprs_id_set.insert(id);
-		pkg->sprs_name2id.push_back(std::make_pair(filename.c_str(), id));
+		pkg->sprs_name2id.push_back(std::make_pair(gum::StringHelper::UTF8ToGBK(filename.c_str()).c_str(), id));
 
 		CU_STR filepath = gum::FilepathHelper::Absolute(pkg->path.c_str(), filename.c_str());
 		if (!gum::FilepathHelper::Exists(filepath.c_str())) {

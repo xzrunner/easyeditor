@@ -27,6 +27,7 @@
 #include <gimg_typedef.h>
 #include <sprite2/SymType.h>
 #include <gum/FilepathHelper.h>
+#include <gum/StringHelper.h>
 #include <timp/TextureFormat.h>
 #include <simp/NodeID.h>
 
@@ -190,7 +191,7 @@ void Packer::OutputSprID(const std::string& pkg_name, const std::string& res_dir
 		}
 
 		Json::Value item;
-		item["file"] = filepath;
+		item["file"] = gum::StringHelper::GBKToUTF8(filepath.c_str()).c_str();
 		item["id"] = node->GetID();
 		value[value.size()] = item;
 	}
