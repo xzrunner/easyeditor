@@ -180,13 +180,23 @@ void ExportAudio::OutputAudio(const std::string& dst_dir)
 
 		auto audio_sym = std::make_shared<eaudio::Symbol>();
 		std::string clip_name = track->name.substr(0, track->name.find("-"));
+		std::string::size_type pos = clip_name.find(".L");
+		if (pos != std::string::npos) {
+			clip_name = clip_name.substr(0, pos);
+		}
 		audio_sym->SetFilepath(m_cfg_dir + "\\" + clip_name + ".mp3");
 		
 		auto audio_spr = std::make_shared<eaudio::Sprite>(audio_sym);
-		audio_spr->SetAudioDuration(TransTime(track->duration));
 		if (track_fadeout) {
-			audio_spr->SetFadeOut(TransTime(track_fadeout->duration));
+			float duration = TransTime(track->duration);
+			float fade_out = TransTime(track_fadeout->duration);
+			audio_spr->SetAudioDuration(duration + fade_out);
+			audio_spr->SetFadeOut(fade_out);
+		} else {
+			audio_spr->SetAudioDuration(TransTime(track->duration));
 		}
+
+		audio_spr->SetAudioOffset(TransTime(track->timestamp));
 
 		frame->sprs.push_back(audio_spr);
 
