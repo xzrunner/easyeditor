@@ -71,10 +71,7 @@ void PackIDMgr::Init(const std::string& filepath, const std::string& platform)
 		if (pos != std::string::npos) {
 			name = name.substr(pos + 1);
 		}
-		std::string spr_id_file = GetSprIDFile(name);
-		if (ee::FileHelper::IsFileExist(spr_id_file)) {
-			InitSprsID(spr_id_file, pkg);
-		}
+		InitSprsID(name, pkg);
 
 		m_pkgs.push_back(pkg);
 	}
@@ -121,8 +118,16 @@ std::string PackIDMgr::GetSprIDFile(const std::string& pkg_name) const
 	return m_dir + "\\spr" + "\\" + m_platform + "\\" + pkg_name + ".json";
 }
 
-void PackIDMgr::InitSprsID(const std::string& filepath, Package* pkg) const
+void PackIDMgr::InitSprsID(const std::string& name, Package* pkg) const
 {
+	std::string filepath = m_dir + "\\spr\\common\\" + name + ".json";
+	if (!ee::FileHelper::IsFileExist(filepath)) {
+		std::string platform_path = m_dir + "\\spr" + "\\" + m_platform + "\\" + name + ".json";
+		if (!ee::FileHelper::IsFileExist(platform_path)) {
+			return;
+		}
+	}
+
 	Json::Value val;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));

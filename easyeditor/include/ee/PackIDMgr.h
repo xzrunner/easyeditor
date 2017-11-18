@@ -42,7 +42,7 @@ public:
 	std::string GetSprIDFile(const std::string& pkg_name) const;
 
 private:
-	void InitSprsID(const std::string& filepath, Package* pkg) const;
+	void InitSprsID(const std::string& name, Package* pkg) const;
 
 private:
 	std::string m_dir;
