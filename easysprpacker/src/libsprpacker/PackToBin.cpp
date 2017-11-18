@@ -74,7 +74,7 @@ void PackToBin::Pack(const std::string& filepath,
 			if (nodes.empty()) {
 				num = 1;
 			} else {
-				num = node->GetID() - nodes[0]->GetID();
+				num = node->GetID() - nodes[0]->GetID() + 1;
 			}
 			int align_n = ALIGN_4BYTE(num);
 			int head_sz =
