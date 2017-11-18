@@ -70,7 +70,7 @@ bool PackIDMgr::IsCurrPkg(const PackNode* node) const
 }
 
 void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id,
-						bool force_curr) const
+	                    bool is_symbol, bool force_curr) const
 {
 	static int NEXT_NODE_ID = 0;
 
@@ -113,11 +113,14 @@ void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id,
 		pkg_id = m_curr_pkg->id;
 		// query
 		bool find = false;
-		for (auto& item : m_curr_pkg->sprs_name2id) {
-			if (filepath.find(item.first) != std::string::npos) {
-				node_id = simp::NodeID::GetNodeID(item.second);
-				find = true;
-				break;
+		if (is_symbol)
+		{
+			for (auto& item : m_curr_pkg->sprs_name2id) {
+				if (filepath.find(item.first) != std::string::npos) {
+					node_id = simp::NodeID::GetNodeID(item.second);
+					find = true;
+					break;
+				}
 			}
 		}
 		if (!find) {
@@ -151,7 +154,7 @@ void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id,
 		if (default_sym.empty()) {
 			throw ee::Exception("query pkg id fail: %s", filepath.c_str());
 		}
-		return QueryID(default_sym, pkg_id, node_id);
+		return QueryID(default_sym, pkg_id, node_id, true);
 	}
 
 	pkg_id = pkg->id;
@@ -162,7 +165,7 @@ void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id,
 		if (default_sym.empty()) {
 			throw ee::Exception("query spr id fail: %s", filepath.c_str());
 		}
-		return QueryID(default_sym, pkg_id, node_id);
+		return QueryID(default_sym, pkg_id, node_id, true);
 	}
 	node_id = simp::NodeID::GetNodeID(itr->second);
 }

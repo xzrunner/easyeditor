@@ -140,7 +140,7 @@ void Packer::OutputSprID(const std::string& pkg_name, const std::string& res_dir
 	const std::string default_sym_path = ee::ImageDataMgr::Instance()->GetDefaultSym();
 	if (!default_sym_path.empty()) {
 		int pkg_id, node_id;
-		PackIDMgr::Instance()->QueryID(default_sym_path, pkg_id, node_id);
+		PackIDMgr::Instance()->QueryID(default_sym_path, pkg_id, node_id, true);
 		default_sym_id = simp::NodeID::ComposeID(pkg_id, node_id);
 	}
 
@@ -232,6 +232,8 @@ void Packer::LoadJsonData(const std::string& dir)
 	wxArrayString files;
 	ee::FileHelper::FetchAllFiles(dir, files);
 
+	std::sort(files.begin(), files.end());
+
 	std::vector<std::string> filepaths;
 	for (int i = 0, n = files.size(); i < n; ++i) 
 	{
@@ -259,7 +261,6 @@ void Packer::LoadJsonData(const std::string& dir)
 		}
 	}
 
-	std::sort(filepaths.begin(), filepaths.end());
 	for (int i = 0, n = filepaths.size(); i < n; ++i) 
 	{
 		auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepaths[i]);

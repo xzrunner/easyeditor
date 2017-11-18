@@ -1,5 +1,6 @@
 #include "PackNode.h"
 #include "PackIDMgr.h"
+#include "typedef.h"
 
 #include <simp/NodeFactory.h>
 
@@ -24,7 +25,7 @@ void PackNode::SetFilepath(const std::string& filepath) const
 
 void PackNode::SetID(const std::string& filepath, bool force_curr) const
 {
-	PackIDMgr::Instance()->QueryID(filepath, m_pkg_id, m_node_id, force_curr);
+	PackIDMgr::Instance()->QueryID(filepath, m_pkg_id, m_node_id, m_filepath == SPRITE_FILEPATH, force_curr);
 }
 
 }

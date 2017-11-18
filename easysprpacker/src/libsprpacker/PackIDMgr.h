@@ -17,7 +17,7 @@ class PackIDMgr
 {
 public:
 	void QueryID(const std::string& filepath, int& pkg_id, int& node_id, 
-		bool force_curr = false) const;
+		bool is_symbol, bool force_curr = false) const;
 
 	void AddCurrPath(const std::string& path);
 
