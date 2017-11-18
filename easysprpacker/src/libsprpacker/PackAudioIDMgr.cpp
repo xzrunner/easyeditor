@@ -34,16 +34,17 @@ void PackAudioIDMgr::Init(const std::string& filepath)
 	{
 		std::string name = val[i]["name"].asString();
 		int id = val[i]["id"].asInt();
-		m_map2id.insert(std::make_pair(name, id));
+		std::string fmt_name = name;
+		ee::StringHelper::ReplaceAll(fmt_name, "/", "\\");
+		ee::StringHelper::ToLower(fmt_name);
+		m_map2id.insert(std::make_pair(fmt_name, id));
 	}
 }
 
 int PackAudioIDMgr::Query(const std::string& filepath) const
 {
-	std::string fmt_path = filepath;
-	ee::StringHelper::ReplaceAll(fmt_path, "\\", "/");
 	for (auto itr = m_map2id.begin(); itr != m_map2id.end(); ++itr) {
-		if (fmt_path.find(itr->first) != std::string::npos) {
+		if (filepath.find(itr->first) != std::string::npos) {
 			return itr->second;
 		}
 	}
