@@ -70,24 +70,23 @@ void PackToBin::Pack(const std::string& filepath,
 		{
 			// head sz
 			int num;
-			auto& nodes = page->GetNodes();
-			if (nodes.empty()) {
+			auto& page_nodes = page->GetNodes();
+			if (page_nodes.empty()) {
 				num = 1;
 			} else {
-				num = node->GetID() - nodes[0]->GetID() + 1;
+				num = node->GetID() - page_nodes[0]->GetID() + 1;
 			}
 			int align_n = ALIGN_4BYTE(num);
 			int head_sz =
-				sizeof(uint8_t) * align_n + // types
-				simp::SIZEOF_POINTER * n;   // nodes
+				sizeof(uint8_t) * align_n +  // types
+				simp::SIZEOF_POINTER * num;  // nodes
 
 			if (page_sz + head_sz + sz <= page->GetSize()) {
 				page_sz += sz;
 				page->Add(node);
 				break;
 			}
-			if (page->NodeNum() > 0) 
-			{
+			if (page->NodeNum() > 0) {
 				page->Condense(page_sz + head_sz);
 				pages.push_back(page);
 				page = new Page(simp::SIMP_PAGE_SIZE);
