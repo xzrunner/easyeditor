@@ -87,6 +87,12 @@ void PackAnim2::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::TextureP
 			m_tl_deforms[i].PackToLuaString(gen);
 		}
 	}
+	{
+		lua::TableAssign ta(gen, "curves", true);
+		for (int i = 0, n = m_curves.size(); i < n; ++i) {
+			m_curves[i].PackToLuaString(gen);
+		}
+	}
 
 	gen.detab();
 	gen.line("},");
@@ -129,6 +135,8 @@ int PackAnim2::SizeOfUnpackFromBin() const
 			sz += simp::NodeAnim2::DeformSample::Size() + sizeof(float) * 2 * deform.deforms[j].data.size();
 		}
 	}
+	// curves
+	sz += simp::NodeAnim2::Curve::Size() * m_curves.size();
 	return sz;
 }
 
@@ -169,6 +177,11 @@ int PackAnim2::SizeOfPackToBin() const
 	// tl deforms
 	for (int i = 0, n = m_tl_deforms.size(); i < n; ++i) {
 		sz += m_tl_deforms[i].SizeOfPackToBin();
+	}
+	// curves
+	sz += sizeof(uint16_t);
+	for (int i = 0, n = m_curves.size(); i < n; ++i) {
+		sz += m_curves[i].SizeOfPackToBin();
 	}
 	return sz;
 }
@@ -220,6 +233,12 @@ void PackAnim2::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 	for (int i = 0, n = m_tl_deforms.size(); i < n; ++i) {
 		m_tl_deforms[i].PackToBin(ptr);
 	}
+	// joints
+	uint16_t curves_n = m_curves.size();
+	pack(curves_n, ptr);
+	for (int i = 0; i < joints_n; ++i) {
+		m_curves[i].PackToBin(ptr);
+	}
 }
 
 void PackAnim2::Init(const std::shared_ptr<libanim2::Symbol>& sym)
@@ -227,6 +246,7 @@ void PackAnim2::Init(const std::shared_ptr<libanim2::Symbol>& sym)
 	const rg_animation* anim = sym->GetAnim();
 	InitSkeleton(anim->sk);
 	InitTimeline(&anim->timeline);
+	InitCurves(anim);
 }
 
 void PackAnim2::InitSkeleton(const rg_skeleton* sk)
@@ -333,9 +353,10 @@ void PackAnim2::InitTimeline(const rg_timeline* tl)
 			{
 				rg_joint_sample* s_src = &src->samples[j];
 				JointSample s_dst;
-				s_dst.time = s_src->time;
-				s_dst.lerp = s_src->lerp;
-				s_dst.data = s_src->data;
+				s_dst.time  = s_src->time;
+				s_dst.lerp  = s_src->lerp;
+				s_dst.curve = s_src->curve;
+				s_dst.data  = s_src->data;
 				dst.samples.push_back(s_dst);
 			}
 		}
@@ -379,8 +400,9 @@ void PackAnim2::InitTimeline(const rg_timeline* tl)
 			{
 				rg_deform_sample* s_src = &src->samples[j];
 				DeformSample s_dst;
-				s_dst.time = s_src->time;
+				s_dst.time   = s_src->time;
 				s_dst.offset = s_src->offset;
+				s_dst.curve  = s_src->curve;
 				s_dst.data.reserve(s_src->count);
 				int ptr = 0;
 				for (int k = 0; k < s_src->count; ++k) {					
@@ -391,6 +413,20 @@ void PackAnim2::InitTimeline(const rg_timeline* tl)
 		}
 
 		m_tl_deforms.push_back(dst);
+	}
+}
+
+void PackAnim2::InitCurves(const rg_animation* anim)
+{
+	m_curves.reserve(anim->curve_count);
+	for (int i = 0; i < anim->curve_count; ++i) {
+		auto& src = anim->curves[i];
+		Curve dst;
+		dst.x0 = src.x0;
+		dst.y0 = src.y0;
+		dst.x1 = src.x1;
+		dst.y1 = src.y1;
+		m_curves.push_back(dst);
 	}
 }
 
@@ -603,15 +639,50 @@ PackToBin(uint8_t** ptr) const
 }
 
 /************************************************************************/
+/* struct PackAnim2::Curve                                              */
+/************************************************************************/
+
+void PackAnim2::Curve::
+PackToLuaString(ebuilder::CodeGenerator& gen) const
+{
+	lua::connect(gen, 4,
+		lua::assign("x0", x0),
+		lua::assign("y0", y0),
+		lua::assign("x1", x1),
+		lua::assign("y1", y1));
+}
+
+int PackAnim2::Curve::
+SizeOfPackToBin() const
+{
+	return sizeof(float) * 4;
+}
+
+void PackAnim2::Curve::
+PackToBin(uint8_t** ptr) const
+{
+	float val;
+	val = x0;
+	pack(val, ptr);
+	val = y0;
+	pack(val, ptr);
+	val = x1;
+	pack(val, ptr);
+	val = y1;
+	pack(val, ptr);
+}
+
+/************************************************************************/
 /* struct PackAnim2::JointSample                                        */
 /************************************************************************/
 
 void PackAnim2::JointSample::
 PackToLuaString(ebuilder::CodeGenerator& gen) const
 {
-	lua::connect(gen, 3,
+	lua::connect(gen, 4,
 		lua::assign("time", time),
 		lua::assign("lerp", lerp),
+		lua::assign("curve", curve),
 		lua::assign("data", data));
 }
 
@@ -621,6 +692,7 @@ SizeOfPackToBin() const
 	int sz = 0;
 	sz += sizeof(uint16_t);	// time
 	sz += sizeof(uint8_t);	// lerp
+	sz += sizeof(uint8_t);	// curve
 	sz += sizeof(float);    // data
 	return sz;
 }
@@ -633,6 +705,9 @@ PackToBin(uint8_t** ptr) const
 
 	uint8_t _lerp = lerp;
 	pack(_lerp, ptr);
+
+	uint8_t _curve = curve;
+	pack(_curve, ptr);
 
 	float _data = data;
 	pack(_data, ptr);
@@ -763,9 +838,10 @@ PackToBin(uint8_t** ptr) const
 void PackAnim2::DeformSample::
 PackToLuaString(ebuilder::CodeGenerator& gen) const
 {
-	lua::connect(gen, 2,
+	lua::connect(gen, 3,
 		lua::assign("time", time),
-		lua::assign("offset", offset));	
+		lua::assign("offset", offset),
+		lua::assign("curve", curve));
 
 	PackCoords::PackToLua(gen, data, "data", 1);
 }
@@ -776,6 +852,7 @@ SizeOfPackToBin() const
 	int sz = 0;
 	sz += sizeof(uint16_t);		// time
 	sz += sizeof(uint16_t);		// offset
+	sz += sizeof(uint8_t);		// curve
 	// data
 	sz += sizeof(uint16_t);
 	sz += sizeof(float) * 2 * data.size();
@@ -790,6 +867,9 @@ PackToBin(uint8_t** ptr) const
 
 	uint16_t _offset = offset;
 	pack(_offset, ptr);
+
+	uint8_t _curve = curve;
+	pack(_curve, ptr);
 
 	uint16_t count = data.size();
 	pack(count, ptr);

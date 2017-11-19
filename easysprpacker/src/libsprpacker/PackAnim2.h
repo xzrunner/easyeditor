@@ -43,6 +43,7 @@ private:
 	void Init(const std::shared_ptr<libanim2::Symbol>& sym);
 	void InitSkeleton(const rg_skeleton* sk);
 	void InitTimeline(const rg_timeline* tl);
+	void InitCurves(const rg_animation* anim);
 	
 private:
 	struct Srt
@@ -108,11 +109,21 @@ private:
 		void PackToBin(uint8_t** ptr) const;
 	};
 
+	struct Curve
+	{
+		float x0, y0;
+		float x1, y1;
+
+		void PackToLuaString(ebuilder::CodeGenerator& gen) const;
+		int SizeOfPackToBin() const;
+		void PackToBin(uint8_t** ptr) const;
+	};
+
 	struct JointSample
 	{
 		uint16_t time;
 		uint8_t	 lerp;
-		uint8_t  padding;
+		uint8_t  curve;
 		float	 data;
 
 		void PackToLuaString(ebuilder::CodeGenerator& gen) const;
@@ -154,6 +165,8 @@ private:
 	{
 		uint16_t time;
 		uint16_t offset;
+		uint8_t  curve;
+		uint8_t  padding[3];
 		CU_VEC<sm::vec2> data;
 
 		void PackToLuaString(ebuilder::CodeGenerator& gen) const;
@@ -181,7 +194,10 @@ private:
 	// animation
 	std::vector<TL_Joint>  m_tl_joints;
 	std::vector<TL_Skin>   m_tl_skins;
-	std::vector<TL_Deform> m_tl_deforms;	
+	std::vector<TL_Deform> m_tl_deforms;
+
+	// curves
+	std::vector<Curve> m_curves;
 
 }; // PackAnim2
 
