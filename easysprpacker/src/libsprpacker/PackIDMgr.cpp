@@ -116,7 +116,7 @@ void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id,
 		if (is_symbol)
 		{
 			for (auto& item : m_curr_pkg->sprs_name2id) {
-				if (filepath.find(item.first) != std::string::npos) {
+				if (filepath.find("\\" + item.first) != std::string::npos) {
 					node_id = simp::NodeID::GetNodeID(item.second);
 					find = true;
 					break;
