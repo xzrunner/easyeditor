@@ -236,7 +236,7 @@ void PackAnim2::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 	// joints
 	uint16_t curves_n = m_curves.size();
 	pack(curves_n, ptr);
-	for (int i = 0; i < joints_n; ++i) {
+	for (int i = 0; i < curves_n; ++i) {
 		m_curves[i].PackToBin(ptr);
 	}
 }
