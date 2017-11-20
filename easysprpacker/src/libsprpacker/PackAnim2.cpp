@@ -422,10 +422,10 @@ void PackAnim2::InitCurves(const rg_animation* anim)
 	for (int i = 0; i < anim->curve_count; ++i) {
 		auto& src = anim->curves[i];
 		Curve dst;
-		dst.x0 = src.x0;
-		dst.y0 = src.y0;
-		dst.x1 = src.x1;
-		dst.y1 = src.y1;
+		dst.x0 = src->x0;
+		dst.y0 = src->y0;
+		dst.x1 = src->x1;
+		dst.y1 = src->y1;
 		m_curves.push_back(dst);
 	}
 }
