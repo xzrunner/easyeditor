@@ -122,8 +122,8 @@ void PackIDMgr::InitSprsID(const std::string& name, Package* pkg) const
 {
 	std::string filepath = m_dir + "\\spr\\common\\" + name + ".json";
 	if (!ee::FileHelper::IsFileExist(filepath)) {
-		std::string platform_path = m_dir + "\\spr" + "\\" + m_platform + "\\" + name + ".json";
-		if (!ee::FileHelper::IsFileExist(platform_path)) {
+		filepath = m_dir + "\\spr" + "\\" + m_platform + "\\" + name + ".json";
+		if (!ee::FileHelper::IsFileExist(filepath)) {
 			return;
 		}
 	}
