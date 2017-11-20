@@ -13,7 +13,7 @@ b2World* BodyFactory::m_world = NULL;
 IBody* BodyFactory::createBody(const std::string& filename, float scale/* = 1.0f*/)
 {
 	IBody* body = NULL;
-	BodyData* bd = BodyDataMgr::Instance()->GetItem(filename);
+	auto bd = BodyDataMgr::Instance()->GetItem(filename);
 	switch (bd->type())
 	{
 	case BodyData::e_polygon:
