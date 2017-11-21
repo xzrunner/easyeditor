@@ -3,7 +3,12 @@
 
 #include "ICommand.h"
 
+#include <sprite2/AnimSymbol.h>
+
 #include <vector>
+#include <memory>
+
+namespace eaudio { class Sprite; }
 
 namespace edb
 {
@@ -43,17 +48,22 @@ private:
 	void Trigger(const std::string& cfg_file, const std::string& dst_dir);
 
 	void LoadFormCfg(const std::string& cfg_file);
-	void LoadTracks(std::ifstream& fin);
+	static void LoadTracks(std::ifstream& fin, std::vector<Track>&);
 	void LoadMarkers(std::ifstream& fin);
 
 	void OutputAudio(const std::string& dst_dir);
+
+	std::shared_ptr<eaudio::Sprite> CreateAudioSpr(const Track* track, const Track* track_fadeout);
+	void CreateAllAudioSpr(s2::AnimSymbol::Layer& layer, const std::vector<Track>& tracks, const std::string start_time, const std::string end_time);
+
+	bool IsAmbTime(const std::string& time) const;
 
 	static float TransTime(const std::string& time);
 
 private:
 	std::string m_cfg_dir;
 
-	std::vector<Track> m_tracks;
+	std::vector<Track> m_tracks_music, m_tracks_amb;
 	std::vector<Marker> m_markers;
 
 }; // ExportAudio

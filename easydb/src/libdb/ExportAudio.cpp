@@ -7,7 +7,6 @@
 #include <easyanim.h>
 #include <easyaudio.h>
 
-#include <sprite2/AnimSymbol.h>
 #include <gum/Audio.h>
 
 #include <fstream>
@@ -77,7 +76,7 @@ void ExportAudio::LoadFormCfg(const std::string& cfg_file)
 	std::getline(fin, line_str);	// STATE
 	std::getline(fin, line_str);	// PROP
 	// TRACK NAME:	music (Stereo)
-	LoadTracks(fin);
+	LoadTracks(fin, m_tracks_music);
 
 	// skip
 	while (true) {
@@ -91,7 +90,7 @@ void ExportAudio::LoadFormCfg(const std::string& cfg_file)
 	std::getline(fin, line_str);	// STATE
 	std::getline(fin, line_str);	// PROP
 	// TRACK NAME:	amb (Stereo)
-	LoadTracks(fin);
+	LoadTracks(fin, m_tracks_amb);
 
 	// skip
 	while (true) {
@@ -107,7 +106,7 @@ void ExportAudio::LoadFormCfg(const std::string& cfg_file)
 	fin.close();
 }
 
-void ExportAudio::LoadTracks(std::ifstream& fin)
+void ExportAudio::LoadTracks(std::ifstream& fin, std::vector<Track>& tracks)
 {
 	std::string line_str;
 	std::string skip;
@@ -132,7 +131,7 @@ void ExportAudio::LoadTracks(std::ifstream& fin)
 			>> track.duration
 			>> track.timestamp
 			>> skip;
-		m_tracks.push_back(track);
+		tracks.push_back(track);
 	}
 }
 
@@ -156,57 +155,38 @@ void ExportAudio::LoadMarkers(std::ifstream& fin)
 
 void ExportAudio::OutputAudio(const std::string& dst_dir)
 {
-	for (auto& marker : m_markers)
+	for (int i = 0, n = m_markers.size(); i < n; ++i)
 	{
-		// query
-		Track* track = nullptr;
-		Track* track_fadeout = nullptr;
-		for (int i = 0, n = m_tracks.size(); i < n; ++i) {
-			if (marker.location == m_tracks[i].start) {
-				track = &m_tracks[i];
-				if (i + 1 < n && m_tracks[i + 1].name == FADE_OUT_STR) {
-					track_fadeout = &m_tracks[i + 1];
+		// query track
+		std::string start_time = m_markers[i].location;
+		std::string end_time;
+		bool is_music_tracks = false;
+		if (IsAmbTime(start_time)) {
+			is_music_tracks = false;
+			end_time = "only_one";
+		} else {
+			is_music_tracks = true;
+			if (i < n - 1) {
+				end_time = m_markers[i + 1].location;
+				if (IsAmbTime(end_time) && i < n - 2) {
+					end_time = m_markers[i + 2].location;
 				}
 			}
 		}
-		assert(track);
 
-		// init sym
+		// create sym
 		libanim::Symbol sym;
 		auto layer = CU_MAKE_UNIQUE<s2::AnimSymbol::Layer>();
-		auto frame = CU_MAKE_UNIQUE<s2::AnimSymbol::Frame>();
-
-		frame->index = 1;
-
-		auto audio_sym = std::make_shared<eaudio::Symbol>();
-		std::string clip_name = track->name.substr(0, track->name.find("-"));
-		std::string::size_type pos = clip_name.find(".L");
-		if (pos != std::string::npos) {
-			clip_name = clip_name.substr(0, pos);
-		}
-		audio_sym->SetFilepath(m_cfg_dir + "\\" + clip_name + ".mp3");
-		
-		auto audio_spr = std::make_shared<eaudio::Sprite>(audio_sym);
-		if (track_fadeout) {
-			float duration = TransTime(track->duration);
-			float fade_out = TransTime(track_fadeout->duration);
-			audio_spr->SetAudioDuration(duration + fade_out);
-			audio_spr->SetFadeOut(fade_out);
+		if (is_music_tracks) {
+			CreateAllAudioSpr(*layer, m_tracks_music, start_time, end_time);
 		} else {
-			audio_spr->SetAudioDuration(TransTime(track->duration));
+			CreateAllAudioSpr(*layer, m_tracks_amb, start_time, end_time);
 		}
-
-		audio_spr->SetAudioOffset(TransTime(track->timestamp));
-
-		frame->sprs.push_back(audio_spr);
-
-		layer->frames.push_back(std::move(frame));
-
 		sym.AddLayer(layer);
 
 		// output
 		std::vector<std::string> tokens;
-		ee::StringHelper::Split(marker.name, "-", tokens);
+		ee::StringHelper::Split(m_markers[i].name, "-", tokens);
 		std::string out_dir = dst_dir + "//manga_" + tokens[0] + "_" + tokens[1] + "_" + tokens[2] + "//json";
 		assert(ee::FileHelper::IsDirExist(out_dir));
 		std::string filepath = out_dir + "//audio_anim.json";
@@ -214,14 +194,101 @@ void ExportAudio::OutputAudio(const std::string& dst_dir)
 	}
 }
 
+void ExportAudio::CreateAllAudioSpr(s2::AnimSymbol::Layer& layer, const std::vector<Track>& tracks, const std::string start_time, const std::string end_time)
+{
+	int start_ptr = -1;
+	int end_ptr = -1;
+	for (int i = 0, n = tracks.size(); i < n; ++i) {
+		if (tracks[i].start == start_time) {
+			start_ptr = i;
+			break;
+		}
+	}
+	assert(start_ptr != -1);
+	if (!end_time.empty()) 
+	{
+		if (end_time == "only_one") {
+			end_ptr = start_ptr + 1;
+		} else {
+			for (int i = start_ptr + 1, n = tracks.size(); i < n; ++i) {
+				if (tracks[i].start == end_time) {
+					end_ptr = i;
+					break;
+				}
+			}
+		}
+	}
+	if (end_ptr == -1) {
+		end_ptr = tracks.size();
+	}
+
+	for (int curr_ptr = start_ptr; curr_ptr < end_ptr; )
+	{
+		float time = TransTime(tracks[curr_ptr].start) - TransTime(start_time);
+
+		int next_ptr = curr_ptr + 1;
+		std::shared_ptr<eaudio::Sprite> spr;
+		if (next_ptr < end_ptr && tracks[next_ptr].name == FADE_OUT_STR) {
+			spr = CreateAudioSpr(&tracks[curr_ptr], &tracks[next_ptr]);
+			curr_ptr += 2;
+		} else {
+			spr = CreateAudioSpr(&tracks[curr_ptr], nullptr);
+			curr_ptr += 1;
+		}
+
+		// create spr
+		auto frame = CU_MAKE_UNIQUE<s2::AnimSymbol::Frame>();
+		frame->index = time * 30 + 1;
+		frame->sprs.push_back(spr);
+		layer.frames.push_back(std::move(frame));
+	}
+}
+
+std::shared_ptr<eaudio::Sprite> ExportAudio::CreateAudioSpr(const Track* track, const Track* track_fadeout)
+{
+	auto audio_sym = std::make_shared<eaudio::Symbol>();
+	std::string clip_name = track->name.substr(0, track->name.find("-"));
+	std::string::size_type pos = clip_name.find(".L");
+	if (pos != std::string::npos) {
+		clip_name = clip_name.substr(0, pos);
+	}
+	audio_sym->SetFilepath(m_cfg_dir + "\\" + clip_name + ".mp3");
+
+	auto audio_spr = std::make_shared<eaudio::Sprite>(audio_sym);
+	if (track_fadeout) {
+		float duration = TransTime(track->duration);
+		float fade_out = TransTime(track_fadeout->duration);
+		audio_spr->SetAudioDuration(duration + fade_out);
+		audio_spr->SetFadeOut(fade_out);
+	} else {
+		audio_spr->SetAudioDuration(TransTime(track->duration));
+	}
+
+	audio_spr->SetAudioOffset(TransTime(track->timestamp));
+
+	return audio_spr;
+}
+
+bool ExportAudio::IsAmbTime(const std::string& time) const
+{
+	for (auto& amb : m_tracks_amb) {
+		if (time == amb.start) {
+			return true;
+		}
+	}
+	return false;
+}
+
 float ExportAudio::TransTime(const std::string& time)
 {
 	std::vector<std::string> tokens;
 	ee::StringHelper::Split(time, ":", tokens);
-	float second0, second1;
+	float hour, minute, second0, second1;
+	ee::StringHelper::FromString(tokens[0], hour);
+	ee::StringHelper::FromString(tokens[1], minute);
 	ee::StringHelper::FromString(tokens[2], second0);
 	ee::StringHelper::FromString(tokens[3], second1);
-	return second0 + second1 / 60.0f;
+	return hour * 3600 + minute * 60 + second0 + second1 / 60.0f;
 }
 
 }
