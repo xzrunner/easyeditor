@@ -3,7 +3,11 @@
 #include "PackNodeFactory.h"
 #include "PackIDMgr.h"
 
+#include <ee/ImageData.h>
+
 #include <easybuilder.h>
+
+#include <simp/NodeID.h>
 
 namespace esprpacker
 {
@@ -21,14 +25,26 @@ void PackToLua::Pack(const std::string& filepath, const ee::TexturePacker& tp)
 	std::vector<PackNode*> nodes;
 	PackNodeFactory::Instance()->FetchAll(nodes);
 	std::sort(nodes.begin(), nodes.end(), PackNodeCmp());
+	
+	uint32_t default_sym_id = 0xffffffff;
+	const std::string default_sym_path = ee::ImageDataMgr::Instance()->GetDefaultSym();
+	if (!default_sym_path.empty()) {
+		int pkg_id, node_id;
+		PackIDMgr::Instance()->QueryID(default_sym_path, pkg_id, node_id, true);
+		default_sym_id = simp::NodeID::ComposeID(pkg_id, node_id);
+	}
 
 	ebuilder::CodeGenerator gen;
 	gen.line("return {");
-	for (int i = 0, n = nodes.size(); i < n; ++i) {
-		if (!PackIDMgr::Instance()->IsCurrPkg(nodes[i])) {
+	for (auto& node : nodes) {
+		if (!PackIDMgr::Instance()->IsCurrPkg(node)) {
 			continue;
 		}
-		nodes[i]->PackToLuaString(gen, tp);
+		if (default_sym_id != 0xffffffff && default_sym_id == node->GetID() &&
+			default_sym_path != node->GetFilepath()) {
+			continue;
+		}
+		node->PackToLuaString(gen, tp);
 	}
 	gen.line("}");
 

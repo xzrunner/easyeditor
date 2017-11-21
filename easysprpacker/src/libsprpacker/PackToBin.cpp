@@ -7,6 +7,7 @@
 #include "Version.h"
 
 #include <ee/StringHelper.h>
+#include <ee/ImageData.h>
 
 #include <easyrespacker.h>
 
@@ -39,6 +40,14 @@ void PackToBin::Pack(const std::string& filepath,
 {
 	std::set<int> ref_pkgs;
 
+	uint32_t default_sym_id = 0xffffffff;
+	const std::string default_sym_path = ee::ImageDataMgr::Instance()->GetDefaultSym();
+	if (!default_sym_path.empty()) {
+		int pkg_id, node_id;
+		PackIDMgr::Instance()->QueryID(default_sym_path, pkg_id, node_id, true);
+		default_sym_id = simp::NodeID::ComposeID(pkg_id, node_id);
+	}
+
 	// src nodes
 	std::vector<PackNode*> nodes;
 	PackNodeFactory::Instance()->FetchAll(nodes);
@@ -50,7 +59,12 @@ void PackToBin::Pack(const std::string& filepath,
 			ref_pkgs.insert(node->GetPkgID());
 			itr = nodes.erase(itr);
 		} else {
-			++itr;
+			if (default_sym_id != 0xffffffff && default_sym_id == node->GetID() &&
+				default_sym_path != node->GetFilepath()) {
+				itr = nodes.erase(itr);
+			} else {
+				++itr;
+			}
 		}
 	}
 	if (nodes.empty()) {
