@@ -36,6 +36,8 @@ public:
 private:
 	const PackNode* m_sym;
 
+	float m_volume;
+
 	float m_offset, m_duration;
 	float m_fade_in, m_fade_out;
 

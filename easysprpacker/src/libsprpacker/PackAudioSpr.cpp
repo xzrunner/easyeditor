@@ -18,10 +18,12 @@ PackAudioSpr::PackAudioSpr(const std::shared_ptr<eaudio::Sprite>& spr)
 	m_sym = PackNodeFactory::Instance()->Create(
 		std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol()));
 
-	m_offset = spr->GetAudioOffset();
+	m_volume = spr->GetVolume();
+
+	m_offset   = spr->GetAudioOffset();
 	m_duration = spr->GetAudioDuration();
 
-	m_fade_in = spr->GetFadeIn();
+	m_fade_in  = spr->GetFadeIn();
 	m_fade_out = spr->GetFadeOut();
 }
 
@@ -45,7 +47,8 @@ void PackAudioSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::Textu
 	lua::connect(gen, 1, 
 		lua::assign("audio_id", m_sym->GetID()));
 
-	lua::connect(gen, 4,
+	lua::connect(gen, 5,
+		lua::assign("volume", m_volume),
 		lua::assign("offset", m_offset),
 		lua::assign("duration", m_duration),
 		lua::assign("fade_in", m_fade_in),
@@ -66,7 +69,7 @@ int PackAudioSpr::SizeOfPackToBin() const
 	sz += sizeof(uint32_t);			// id
 	sz += sizeof(uint8_t);			// type
 	sz += sizeof(uint32_t);			// audio id
-	sz += sizeof(float) * 4;        // offset, duration, fade_in, fade_out
+	sz += sizeof(float) * 5;        // volume, offset, duration, fade_in, fade_out
 	return sz;
 }
 
@@ -80,6 +83,9 @@ void PackAudioSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 
 	uint32_t sym = m_sym->GetID();
 	pack(sym, ptr);
+
+	float volume = m_volume;
+	pack(volume, ptr);
 
 	float offset = m_offset;
 	pack(offset, ptr);
