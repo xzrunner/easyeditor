@@ -52,11 +52,30 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 
 	const Json::Value& audio_val = val["audio"];
 
-	SetAudioOffset(audio_val["offset"].asFloat());
-	SetAudioDuration(audio_val["duration"].asFloat());
+	float volume = 1, offset = 0, duration = 0, fade_in = 0, fade_out = 0;
+	if (audio_val.isMember("volume")) {
+		volume = audio_val["volume"].asFloat();
+	}
+	if (audio_val.isMember("offset")) {
+		offset = audio_val["offset"].asFloat();
+	}
+	if (audio_val.isMember("duration")) {
+		duration = audio_val["duration"].asFloat();
+	}
+	if (audio_val.isMember("fade_in")) {
+		fade_in = audio_val["fade_in"].asFloat();
+	}
+	if (audio_val.isMember("fade_out")) {
+		fade_out = audio_val["fade_out"].asFloat();
+	}
 
-	SetFadeIn(audio_val["fade_in"].asFloat());
-	SetFadeOut(audio_val["fade_out"].asFloat());
+	SetVolume(volume);
+
+	SetAudioOffset(offset);
+	SetAudioDuration(duration);
+
+	SetFadeIn(fade_in);
+	SetFadeOut(fade_out);
 }
 
 void Sprite::Store(Json::Value& val, const std::string& dir) const
@@ -64,6 +83,8 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 	ee::Sprite::Store(val);
 
 	Json::Value audio_val;
+
+	audio_val["volume"] = GetVolume();
 
 	audio_val["offset"] = GetAudioOffset();
 	audio_val["duration"] = GetAudioDuration();

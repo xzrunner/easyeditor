@@ -23,7 +23,9 @@ void PropertySetting::OnPropertyGridChange(const std::string& name, const wxAny&
 	ee::SpritePropertySetting::OnPropertyGridChange(name, value);
 
 	auto spr = std::dynamic_pointer_cast<Sprite>(GetSprite());
-	if (name == "AudioOffset") {
+	if (name == "Volume") {
+		spr->SetVolume(wxANY_AS(value, float));
+	} else if (name == "AudioOffset") {
 		spr->SetAudioOffset(wxANY_AS(value, float));
 	} else if (name == "Duration") {
 		spr->SetAudioDuration(wxANY_AS(value, float));
@@ -40,6 +42,8 @@ void PropertySetting::UpdateProperties(wxPropertyGrid* pg)
 
 	auto spr = std::dynamic_pointer_cast<Sprite>(GetSprite());
 
+	pg->GetProperty("Volume")->SetValue(spr->GetVolume());
+
 	pg->GetProperty("AudioOffset")->SetValue(spr->GetAudioOffset());
 	pg->GetProperty("Duration")->SetValue(spr->GetAudioDuration());
 
@@ -54,6 +58,8 @@ void PropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->Append(new wxPropertyCategory("AUDIO", wxPG_LABEL));
 
 	auto spr = std::dynamic_pointer_cast<Sprite>(GetSprite());
+
+	pg->Append(new wxFloatProperty("Volume", wxPG_LABEL, spr->GetVolume()));
 
 	pg->Append(new wxFloatProperty("AudioOffset", wxPG_LABEL, spr->GetAudioOffset()));
 	pg->Append(new wxFloatProperty("Duration", wxPG_LABEL, spr->GetAudioDuration()));
