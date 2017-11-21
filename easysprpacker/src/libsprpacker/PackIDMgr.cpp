@@ -14,6 +14,8 @@
 #include <ee/Exception.h>
 #include <ee/FileHelper.h>
 
+#include <logger.h>
+
 #include <assert.h>
 
 namespace esprpacker
@@ -154,6 +156,7 @@ void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id,
 		if (default_sym.empty()) {
 			throw ee::Exception("query pkg id fail: %s", filepath.c_str());
 		}
+		printf("++ use default sym %s\n", filepath.c_str());
 		return QueryID(default_sym, pkg_id, node_id, true);
 	}
 
@@ -165,6 +168,7 @@ void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id,
 		if (default_sym.empty()) {
 			throw ee::Exception("query spr id fail: %s", filepath.c_str());
 		}
+		printf("++ use default sym %s\n", filepath.c_str());
 		return QueryID(default_sym, pkg_id, node_id, true);
 	}
 	node_id = simp::NodeID::GetNodeID(itr->second);
