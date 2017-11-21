@@ -76,7 +76,7 @@ void ExportAudio::LoadFormCfg(const std::string& cfg_file)
 	std::getline(fin, line_str);	// STATE
 	std::getline(fin, line_str);	// PROP
 	// TRACK NAME:	music (Stereo)
-	LoadTracks(fin, m_tracks_music);
+	LoadTracks(fin);
 
 	// skip
 	while (true) {
@@ -90,7 +90,7 @@ void ExportAudio::LoadFormCfg(const std::string& cfg_file)
 	std::getline(fin, line_str);	// STATE
 	std::getline(fin, line_str);	// PROP
 	// TRACK NAME:	amb (Stereo)
-	LoadTracks(fin, m_tracks_amb);
+	LoadTracks(fin);
 
 	// skip
 	while (true) {
@@ -106,7 +106,7 @@ void ExportAudio::LoadFormCfg(const std::string& cfg_file)
 	fin.close();
 }
 
-void ExportAudio::LoadTracks(std::ifstream& fin, std::vector<Track>& tracks)
+void ExportAudio::LoadTracks(std::ifstream& fin)
 {
 	std::string line_str;
 	std::string skip;
@@ -118,6 +118,7 @@ void ExportAudio::LoadTracks(std::ifstream& fin, std::vector<Track>& tracks)
 		}
 
 		std::stringstream ss(line_str.c_str());
+
 		Track track;
 		ss >> track.channel
 			>> track.event
@@ -126,12 +127,15 @@ void ExportAudio::LoadTracks(std::ifstream& fin, std::vector<Track>& tracks)
 			track.name = FADE_OUT_STR;
 			ss >> skip;
 		}
-		ss >> track.start
-			>> track.end
-			>> track.duration
-			>> track.timestamp
-			>> skip;
-		tracks.push_back(track);
+
+		std::string start, end, duration, timestamp;
+		ss >> start >> end >> duration >> timestamp >> skip;
+		track.start = TransTime(start);
+		track.end = TransTime(end);
+		track.duration = TransTime(duration);
+		track.timestamp = TransTime(timestamp);
+
+		m_tracks.insert(std::make_pair(track.start, track));
 	}
 }
 
@@ -148,7 +152,9 @@ void ExportAudio::LoadMarkers(std::ifstream& fin)
 
 		std::stringstream ss(line_str.c_str());
 		Marker marker;
-		ss >> skip >> marker.location >> skip >> skip >> marker.name;
+		std::string location;
+		ss >> skip >> location >> skip >> skip >> marker.name;
+		marker.location = TransTime(location);
 		m_markers.push_back(marker);
 	}
 }
@@ -157,31 +163,17 @@ void ExportAudio::OutputAudio(const std::string& dst_dir)
 {
 	for (int i = 0, n = m_markers.size(); i < n; ++i)
 	{
-		// query track
-		std::string start_time = m_markers[i].location;
-		std::string end_time;
-		bool is_music_tracks = false;
-		if (IsAmbTime(start_time)) {
-			is_music_tracks = false;
-			end_time = "only_one";
-		} else {
-			is_music_tracks = true;
-			if (i < n - 1) {
-				end_time = m_markers[i + 1].location;
-				if (IsAmbTime(end_time) && i < n - 2) {
-					end_time = m_markers[i + 2].location;
-				}
-			}
+		// region
+		float start_time = m_markers[i].location;
+		float end_time = 0;
+		if (i < n - 1) {
+			end_time = m_markers[i + 1].location;
 		}
 
 		// create sym
 		libanim::Symbol sym;
 		auto layer = CU_MAKE_UNIQUE<s2::AnimSymbol::Layer>();
-		if (is_music_tracks) {
-			CreateAllAudioSpr(*layer, m_tracks_music, start_time, end_time);
-		} else {
-			CreateAllAudioSpr(*layer, m_tracks_amb, start_time, end_time);
-		}
+		CreateAllAudioSpr(*layer, start_time, end_time);
 		sym.AddLayer(layer);
 
 		// output
@@ -194,46 +186,28 @@ void ExportAudio::OutputAudio(const std::string& dst_dir)
 	}
 }
 
-void ExportAudio::CreateAllAudioSpr(s2::AnimSymbol::Layer& layer, const std::vector<Track>& tracks, const std::string start_time, const std::string end_time)
+void ExportAudio::CreateAllAudioSpr(s2::AnimSymbol::Layer& layer, float start_time, float end_time)
 {
-	int start_ptr = -1;
-	int end_ptr = -1;
-	for (int i = 0, n = tracks.size(); i < n; ++i) {
-		if (tracks[i].start == start_time) {
-			start_ptr = i;
-			break;
-		}
+	auto itr_begin = m_tracks.find(start_time);
+	auto itr_end = m_tracks.find(end_time);
+	if (end_time == 0) {
+		itr_end = m_tracks.end();
 	}
-	assert(start_ptr != -1);
-	if (!end_time.empty()) 
+	for (std::map<float, Track>::iterator itr_curr = itr_begin; itr_curr != itr_end; )
 	{
-		if (end_time == "only_one") {
-			end_ptr = start_ptr + 1;
-		} else {
-			for (int i = start_ptr + 1, n = tracks.size(); i < n; ++i) {
-				if (tracks[i].start == end_time) {
-					end_ptr = i;
-					break;
-				}
-			}
-		}
-	}
-	if (end_ptr == -1) {
-		end_ptr = tracks.size();
-	}
+		float time = itr_curr->second.start - start_time;
 
-	for (int curr_ptr = start_ptr; curr_ptr < end_ptr; )
-	{
-		float time = TransTime(tracks[curr_ptr].start) - TransTime(start_time);
+		auto itr_next = itr_curr;
+		++itr_next;
 
-		int next_ptr = curr_ptr + 1;
 		std::shared_ptr<eaudio::Sprite> spr;
-		if (next_ptr < end_ptr && tracks[next_ptr].name == FADE_OUT_STR) {
-			spr = CreateAudioSpr(&tracks[curr_ptr], &tracks[next_ptr]);
-			curr_ptr += 2;
+		if (itr_curr != itr_end && itr_next != m_tracks.end() && itr_next->second.name == FADE_OUT_STR) {
+			spr = CreateAudioSpr(&itr_curr->second, &itr_next->second);
+			++itr_curr;
+			++itr_curr;
 		} else {
-			spr = CreateAudioSpr(&tracks[curr_ptr], nullptr);
-			curr_ptr += 1;
+			spr = CreateAudioSpr(&itr_curr->second, nullptr);
+			++itr_curr;
 		}
 
 		// create spr
@@ -256,27 +230,15 @@ std::shared_ptr<eaudio::Sprite> ExportAudio::CreateAudioSpr(const Track* track, 
 
 	auto audio_spr = std::make_shared<eaudio::Sprite>(audio_sym);
 	if (track_fadeout) {
-		float duration = TransTime(track->duration);
-		float fade_out = TransTime(track_fadeout->duration);
-		audio_spr->SetAudioDuration(duration + fade_out);
-		audio_spr->SetFadeOut(fade_out);
+		audio_spr->SetAudioDuration(track->duration + track_fadeout->duration);
+		audio_spr->SetFadeOut(track_fadeout->duration);
 	} else {
-		audio_spr->SetAudioDuration(TransTime(track->duration));
+		audio_spr->SetAudioDuration(track->duration);
 	}
 
 //	audio_spr->SetAudioOffset(TransTime(track->timestamp));
 
 	return audio_spr;
-}
-
-bool ExportAudio::IsAmbTime(const std::string& time) const
-{
-	for (auto& amb : m_tracks_amb) {
-		if (time == amb.start) {
-			return true;
-		}
-	}
-	return false;
 }
 
 float ExportAudio::TransTime(const std::string& time)

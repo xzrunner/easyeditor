@@ -34,13 +34,13 @@ private:
 		int channel;
 		int event;
 		std::string name;
-		std::string start, end, duration;
-		std::string timestamp;
+		float start, end, duration;
+		float timestamp;
 	};
 
 	struct Marker
 	{
-		std::string location;
+		float location;
 		std::string name;
 	};
 
@@ -48,23 +48,21 @@ private:
 	void Trigger(const std::string& cfg_file, const std::string& dst_dir);
 
 	void LoadFormCfg(const std::string& cfg_file);
-	static void LoadTracks(std::ifstream& fin, std::vector<Track>&);
+	void LoadTracks(std::ifstream& fin);
 	void LoadMarkers(std::ifstream& fin);
 
 	void OutputAudio(const std::string& dst_dir);
 
 	std::shared_ptr<eaudio::Sprite> CreateAudioSpr(const Track* track, const Track* track_fadeout);
-	void CreateAllAudioSpr(s2::AnimSymbol::Layer& layer, const std::vector<Track>& tracks, const std::string start_time, const std::string end_time);
-
-	bool IsAmbTime(const std::string& time) const;
+	void CreateAllAudioSpr(s2::AnimSymbol::Layer& layer, float start_time, float end_time);
 
 	static float TransTime(const std::string& time);
 
 private:
 	std::string m_cfg_dir;
 
-	std::vector<Track> m_tracks_music, m_tracks_amb;
-	std::vector<Marker> m_markers;
+	std::map<float, Track> m_tracks;
+	std::vector<Marker>    m_markers;
 
 }; // ExportAudio
 
