@@ -47,6 +47,7 @@ void OpenSymbolDialog::Open(const ee::SprPtr& spr, ee::CrossGuides* guides)
 		return;
 	}
 
+	bool stop_audio = true;
 	gum::Audio::Instance()->Stop();
 
 	ee::CurrSprTreePath::Instance()->Push(spr);
@@ -129,6 +130,7 @@ void OpenSymbolDialog::Open(const ee::SprPtr& spr, ee::CrossGuides* guides)
 	}
 	else if (auto audio = std::dynamic_pointer_cast<eaudio::Sprite>(spr))
 	{
+		stop_audio = false;
 		audio->Play();
 	}
 
@@ -148,7 +150,9 @@ void OpenSymbolDialog::Open(const ee::SprPtr& spr, ee::CrossGuides* guides)
 
 	ee::CurrSprTreePath::Instance()->Pop();
 
-	gum::Audio::Instance()->Stop();
+	if (stop_audio) {
+		gum::Audio::Instance()->Stop();
+	}
 }
 
 }

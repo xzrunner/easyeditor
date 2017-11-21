@@ -41,6 +41,7 @@ void OpenSymbolDialog::Open(const ee::SprPtr& spr)
 		return;
 	}
 
+	bool stop_audio = true;
 	gum::Audio::Instance()->Stop();
 
 	ee::CurrSprTreePath::Instance()->Push(spr);
@@ -76,6 +77,7 @@ void OpenSymbolDialog::Open(const ee::SprPtr& spr)
 	}
 	else if (type == s2::SYM_AUDIO)
 	{
+		stop_audio = false;
 		edited_sym = std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol());
 		auto audio = std::dynamic_pointer_cast<eaudio::Sprite>(spr);
 		audio->Play();
@@ -94,7 +96,9 @@ void OpenSymbolDialog::Open(const ee::SprPtr& spr)
 
 	ee::CurrSprTreePath::Instance()->Pop();
 
-	gum::Audio::Instance()->Stop();
+	if (stop_audio) {
+		gum::Audio::Instance()->Stop();
+	}
 }
 
 }
