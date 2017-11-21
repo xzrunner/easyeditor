@@ -264,7 +264,7 @@ std::shared_ptr<eaudio::Sprite> ExportAudio::CreateAudioSpr(const Track* track, 
 		audio_spr->SetAudioDuration(TransTime(track->duration));
 	}
 
-	audio_spr->SetAudioOffset(TransTime(track->timestamp));
+//	audio_spr->SetAudioOffset(TransTime(track->timestamp));
 
 	return audio_spr;
 }
