@@ -406,7 +406,9 @@ void PackAnim2::InitTimeline(const rg_timeline* tl)
 				s_dst.data.reserve(s_src->count);
 				int ptr = 0;
 				for (int k = 0; k < s_src->count; ++k) {					
-					s_dst.data.push_back(sm::vec2(s_src->data[ptr++], s_src->data[ptr++]));
+					float x = s_src->data[ptr++];
+					float y = s_src->data[ptr++];
+					s_dst.data.push_back(sm::vec2(x, y));
 				}
 				dst.deforms.push_back(s_dst);
 			}
