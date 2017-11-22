@@ -84,11 +84,13 @@ void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id,
 			if (m_curr_pkg_id != -1)
 			{
 				pkg_id = m_curr_pkg_id;
+				GetNextFreeID(m_curr_pkg, NEXT_NODE_ID);
 				node_id = NEXT_NODE_ID++;
 			}
 			else if (m_curr_pkg)
 			{
 				pkg_id = m_curr_pkg->id;
+				GetNextFreeID(m_curr_pkg, NEXT_NODE_ID);
 				node_id = NEXT_NODE_ID++;
 			}
 		}
@@ -103,6 +105,7 @@ void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id,
 	if (m_curr_pkg_id != -1)
 	{
 		pkg_id = m_curr_pkg_id;
+		GetNextFreeID(m_curr_pkg, NEXT_NODE_ID);
 		node_id = NEXT_NODE_ID++;
 		return;
 	}
@@ -137,6 +140,7 @@ void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id,
 		if (m_curr_pkg_id != -1)
 		{
 			pkg_id = m_curr_pkg_id;
+			GetNextFreeID(m_curr_pkg, NEXT_NODE_ID);
 			node_id = NEXT_NODE_ID++;
 			return;
 		}
