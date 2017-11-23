@@ -238,6 +238,8 @@ std::shared_ptr<eaudio::Sprite> ExportAudio::CreateAudioSpr(const Track* track, 
 
 //	audio_spr->SetAudioOffset(TransTime(track->timestamp));
 
+	audio_spr->SetVolume(0.6f);
+
 	return audio_spr;
 }
 
