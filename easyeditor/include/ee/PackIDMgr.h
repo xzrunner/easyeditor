@@ -26,7 +26,7 @@ public:
 
 		std::map<std::string, uint32_t> sprs;
 		std::set<uint32_t> sprs_id_set;
-		std::vector<std::pair<std::string, uint32_t>> sprs_name2id;
+        std::map<std::string, uint32_t> path2id;
 
 		bool img_cut;
 		std::string cut_img, cut_json, cut_ori;

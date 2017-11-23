@@ -143,7 +143,10 @@ void PackIDMgr::InitSprsID(const std::string& name, Package* pkg) const
 		uint32_t id = spr_val["id"].asUInt();
 
 		pkg->sprs_id_set.insert(id);
-		pkg->sprs_name2id.push_back(std::make_pair(gum::StringHelper::UTF8ToGBK(filename.c_str()).c_str(), id));
+	
+		auto fmt_filename = gum::StringHelper::UTF8ToGBK(filename.c_str());
+		gum::StringHelper::ToLower(fmt_filename);		
+		pkg->path2id.insert(std::make_pair(fmt_filename.c_str(), id));
 
 		CU_STR filepath = gum::FilepathHelper::Absolute(pkg->path.c_str(), filename.c_str());
 		if (!gum::FilepathHelper::Exists(filepath.c_str())) {

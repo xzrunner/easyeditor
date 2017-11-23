@@ -7,6 +7,7 @@
 #include <sprite2/SymType.h>
 #include <gum/FilepathHelper.h>
 #include <gum/SymbolFile.h>
+#include <gum/StringHelper.h>
 
 #include <ee/SymbolType.h>
 #include <ee/SymbolFile.h>
@@ -115,17 +116,17 @@ void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id,
 			throw ee::Exception("no curr pkg: %s\n", filepath.c_str());
 		}
 		assert(m_curr_pkg);
+		auto relative_path = gum::FilepathHelper::Relative(m_curr_pkg->path.c_str(), filepath.c_str());
+		gum::StringHelper::ToLower(relative_path);
 		pkg_id = m_curr_pkg->id;
 		// query
 		bool find = false;
 		if (is_symbol)
 		{
-			for (auto& item : m_curr_pkg->sprs_name2id) {
-				if (filepath.find("\\" + item.first) != std::string::npos) {
-					node_id = simp::NodeID::GetNodeID(item.second);
-					find = true;
-					break;
-				}
+			auto itr = m_curr_pkg->path2id.find(relative_path.c_str());
+			if (itr != m_curr_pkg->path2id.end()) {
+				node_id = simp::NodeID::GetNodeID(itr->second);
+				find = true;
 			}
 		}
 		if (!find) {
