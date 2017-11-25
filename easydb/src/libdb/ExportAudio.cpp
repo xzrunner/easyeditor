@@ -193,6 +193,8 @@ void ExportAudio::CreateAllAudioSpr(s2::AnimSymbol::Layer& layer, float start_ti
 	if (end_time == 0) {
 		itr_end = m_tracks.end();
 	}
+
+	float last_duration = 0;
 	for (std::map<float, Track>::iterator itr_curr = itr_begin; itr_curr != itr_end; )
 	{
 		float time = itr_curr->second.start - start_time;
@@ -209,11 +211,19 @@ void ExportAudio::CreateAllAudioSpr(s2::AnimSymbol::Layer& layer, float start_ti
 			spr = CreateAudioSpr(&itr_curr->second, nullptr);
 			++itr_curr;
 		}
+		last_duration = spr->GetAudioDuration();
 
 		// create spr
 		auto frame = CU_MAKE_UNIQUE<s2::AnimSymbol::Frame>();
 		frame->index = time * 30 + 1;
 		frame->sprs.push_back(spr);
+		layer.frames.push_back(std::move(frame));
+	}
+
+	// add the last one
+	if (!layer.frames.empty()) {
+		auto frame = CU_MAKE_UNIQUE<s2::AnimSymbol::Frame>();
+		frame->index = layer.frames.back()->index + last_duration * 30 + 1;
 		layer.frames.push_back(std::move(frame));
 	}
 }
