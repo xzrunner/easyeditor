@@ -38,9 +38,9 @@ s2::RenderReturn Symbol::DrawTree(cooking::DisplayList* dlist, const s2::RenderP
 		S2_MAT mt = spr->GetLocalMat() * rp.mt;
 		DrawBackground(dynamic_cast<const Sprite*>(spr), mt);
 	} 
- 	//if (setting.visible_label_text) {
-		//s2::TextboxSymbol::Draw(rp, spr);
- 	//}
+ 	if (setting.visible_label_text) {
+		s2::TextboxSymbol::DrawTree(dlist, rp, spr);
+ 	}
 
 	return s2::RENDER_OK;
 }
