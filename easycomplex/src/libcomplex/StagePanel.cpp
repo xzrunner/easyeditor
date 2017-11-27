@@ -26,10 +26,13 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   ee::PropertySettingPanel* property,
 					   LibraryPanel* library)
 	: EditPanel(parent, frame)
-	, ee::SpritesPanelImpl(GetStageImpl(), std::make_shared<SymbolContainer>(m_sym))
-	, m_sym(std::make_shared<Symbol>())
+	, ee::SpritesPanelImpl(GetStageImpl())
+	, m_sym()
 	, m_library(library)
 {
+	m_sym = std::make_shared<Symbol>();
+	SetContainer(std::make_shared<SymbolContainer>(m_sym));
+
 	ee::EditOP* editop = new ee::ArrangeSpriteOP<SelectSpritesOP>(this, GetStageImpl(), this, property, 
 		NULL, ee::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, property));
 	SetEditOP(editop);
@@ -53,9 +56,12 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   wxGLContext* glctx,
 					   ee::CrossGuides* guides)
 	: EditPanel(parent, frame)
-	, ee::SpritesPanelImpl(GetStageImpl(), std::make_shared<SymbolContainer>(m_sym = sym))
+	, m_sym(sym)
+	, ee::SpritesPanelImpl(GetStageImpl())
 	, m_library(library)
 {
+	SetContainer(std::make_shared<SymbolContainer>(m_sym));
+
 	ee::ArrangeSpriteOP<SelectSpritesOP>* editop = new ee::ArrangeSpriteOP<SelectSpritesOP>(
 		this, GetStageImpl(), this, property, NULL, ee::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, property));
 	static_cast<SelectSpritesOP*>(editop)->SetGuides(guides);

@@ -42,7 +42,7 @@ private:
 	void Clear();
 
 private:
-	std::shared_ptr<Symbol> m_sym;
+	std::shared_ptr<Symbol> m_sym = nullptr;
 
 	LibraryPanel* m_library;
 

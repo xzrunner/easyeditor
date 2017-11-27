@@ -14,7 +14,7 @@ class LibraryPanel;
 class SpritesPanelImpl : public MultiSpritesImpl
 {
 public:
-	SpritesPanelImpl(EditPanelImpl* stage, const std::shared_ptr<DataContainer<Sprite>>& container);
+	SpritesPanelImpl(EditPanelImpl* stage);
 	SpritesPanelImpl(EditPanelImpl* stage, LibraryPanel* library);
 
 	//
@@ -22,6 +22,10 @@ public:
 	//
 	virtual void TraverseSprites(RefVisitor<Sprite>& visitor,
 		DataTraverseType type = DT_ALL, bool order = true) const override;
+
+	void SetContainer(const std::shared_ptr<DataContainer<Sprite>>& container) {
+		m_container = container;
+	}
 
 protected:
 	//
@@ -35,7 +39,7 @@ private:
 private:
 	EditPanelImpl* m_stage;
 
-	std::shared_ptr<DataContainer<Sprite>> m_container;
+	std::shared_ptr<DataContainer<Sprite>> m_container = nullptr;
 
 }; // SpritesPanelImpl
 

@@ -14,10 +14,9 @@
 namespace ee
 {
 
-SpritesPanelImpl::SpritesPanelImpl(EditPanelImpl* stage, const std::shared_ptr<DataContainer<Sprite>>& container)
+SpritesPanelImpl::SpritesPanelImpl(EditPanelImpl* stage)
 	: MultiSpritesImpl(stage)
 	, m_stage(stage)
-	, m_container(container)
 {
 	InitSubjects();
 }
@@ -35,12 +34,18 @@ SpritesPanelImpl::SpritesPanelImpl(EditPanelImpl* stage, LibraryPanel* library)
 void SpritesPanelImpl::TraverseSprites(RefVisitor<Sprite>& visitor, DataTraverseType type/* = e_allExisting*/,
 									   bool order/* = true*/) const
 {
-	m_container->Traverse(visitor, type, order);
+	if (m_container) {
+		m_container->Traverse(visitor, type, order);
+	}
 }
 
 void SpritesPanelImpl::OnNotify(int sj_id, void* ud)
 {
 	MultiSpritesImpl::OnNotify(sj_id, ud);
+
+	if (!m_container) {
+		return;
+	}
 
 	switch (sj_id)
 	{
