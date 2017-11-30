@@ -112,8 +112,14 @@ void PackToBin::Pack(const std::string& filepath,
 	}
 	if (page->NodeNum() > 0) 
 	{
-		int head_sz = sizeof(uint8_t) * ALIGN_4BYTE(page->NodeNum() + 1) 
-			        + simp::SIZEOF_POINTER * (page->NodeNum() + 1);
+		// head sz
+		auto& page_nodes = page->GetNodes();
+		int num = page_nodes.back()->GetID() - page_nodes.front()->GetID() + 1;
+		int align_n = ALIGN_4BYTE(num);
+		int head_sz =
+			sizeof(uint8_t) * align_n +  // types
+			simp::SIZEOF_POINTER * num;  // nodes
+
 		page->Condense(page_sz + head_sz);
 		pages.push_back(page);
 	}
