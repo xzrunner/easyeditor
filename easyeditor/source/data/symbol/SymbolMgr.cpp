@@ -56,6 +56,7 @@ SymPtr SymbolMgr::FetchSymbol(const std::string& filepath, int type)
 	else
 	{
 		const char* path = filepath.c_str();
+		printf("Load symbol %s fail!", path);
 		throw Exception("Load symbol %s fail!", path);
 
 //			return NULL;
