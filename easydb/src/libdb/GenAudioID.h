@@ -27,6 +27,9 @@ public:
 
 	void Trigger(const std::string& src_dir, const std::string& dst_file);
 
+private:
+	static std::string GetFormatName(const std::string& filepath);
+
 }; // GenAudioID
 
 }

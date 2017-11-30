@@ -2,6 +2,7 @@
 #include "check_params.h"
 
 #include <ee/FileHelper.h>
+#include <ee/StringHelper.h>
 
 #include <fstream>
 
@@ -51,7 +52,7 @@ void GenAudioID::Trigger(const std::string& src_dir, const std::string& dst_file
 			}
 			Json::Value item;
 			item["id"] = idx;
-			item["name"] = "audio/" + ee::FileHelper::GetFilename(file.ToStdString());
+			item["name"] = "audio/" + GetFormatName(file.ToStdString());
 			val[idx++] = item;
 		}
 		for (auto& file : files)
@@ -61,7 +62,7 @@ void GenAudioID::Trigger(const std::string& src_dir, const std::string& dst_file
 			}
 			Json::Value item;
 			item["id"] = idx;
-			item["name"] = "audio/" + ee::FileHelper::GetFilename(file.ToStdString());
+			item["name"] = "audio/" + GetFormatName(file.ToStdString());
 			val[idx++] = item;
 		}
 	}
@@ -76,7 +77,7 @@ void GenAudioID::Trigger(const std::string& src_dir, const std::string& dst_file
 		{
 			Json::Value item;
 			item["id"] = idx;
-			item["name"] = "sound/" + ee::FileHelper::GetFilename(file.ToStdString());
+			item["name"] = "sound/" + GetFormatName(file.ToStdString());
 			val[idx++] = item;
 		}
 	}
@@ -91,7 +92,7 @@ void GenAudioID::Trigger(const std::string& src_dir, const std::string& dst_file
 		{
 			Json::Value item;
 			item["id"] = idx;
-			item["name"] = "music/" + ee::FileHelper::GetFilename(file.ToStdString());
+			item["name"] = "music/" + GetFormatName(file.ToStdString());
 			val[idx++] = item;
 		}
 	}
@@ -102,6 +103,13 @@ void GenAudioID::Trigger(const std::string& src_dir, const std::string& dst_file
 	std::locale::global(std::locale("C"));
 	writer.write(fout, val);
 	fout.close();
+}
+
+std::string GenAudioID::GetFormatName(const std::string& filepath)
+{
+	auto name = ee::FileHelper::GetFilenameWithExtension(filepath);
+	ee::StringHelper::ToLower(name);
+	return name;
 }
 
 }
