@@ -393,6 +393,9 @@
     <ClCompile Include="..\..\..\src\libdb\ExportAudio.cpp">
       <Filter>commands\export</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\ExportText.cpp">
+      <Filter>commands\export</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\libdb\CopyFile.h">
@@ -699,6 +702,9 @@
       <Filter>commands\pack\res\audio</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\libdb\ExportAudio.h">
+      <Filter>commands\export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\ExportText.h">
       <Filter>commands\export</Filter>
     </ClInclude>
   </ItemGroup>

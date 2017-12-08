@@ -108,6 +108,7 @@
     <ClCompile Include="..\..\..\src\libdb\DistanceFieldFont.cpp" />
     <ClCompile Include="..\..\..\src\libdb\ExportAudio.cpp" />
     <ClCompile Include="..\..\..\src\libdb\ExportBodymovin.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\ExportText.cpp" />
     <ClCompile Include="..\..\..\src\libdb\FixAddColor.cpp" />
     <ClCompile Include="..\..\..\src\libdb\FixJsonBase.cpp" />
     <ClCompile Include="..\..\..\src\libdb\FixLRMirror.cpp" />
@@ -210,6 +211,7 @@
     <ClInclude Include="..\..\..\src\libdb\DistanceFieldFont.h" />
     <ClInclude Include="..\..\..\src\libdb\ExportAudio.h" />
     <ClInclude Include="..\..\..\src\libdb\ExportBodymovin.h" />
+    <ClInclude Include="..\..\..\src\libdb\ExportText.h" />
     <ClInclude Include="..\..\..\src\libdb\FixAddColor.h" />
     <ClInclude Include="..\..\..\src\libdb\FixJsonBase.h" />
     <ClInclude Include="..\..\..\src\libdb\FixLRMirror.h" />
