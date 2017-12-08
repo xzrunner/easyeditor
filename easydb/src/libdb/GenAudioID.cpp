@@ -108,7 +108,7 @@ void GenAudioID::Trigger(const std::string& src_dir, const std::string& dst_file
 std::string GenAudioID::GetFormatName(const std::string& filepath)
 {
 	auto name = ee::FileHelper::GetFilenameWithExtension(filepath);
-	ee::StringHelper::ToLower(name);
+//	ee::StringHelper::ToLower(name);
 	return name;
 }
 
