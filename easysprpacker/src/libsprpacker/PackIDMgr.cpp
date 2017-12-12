@@ -118,6 +118,20 @@ void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id,
 		assert(m_curr_pkg);
 		auto relative_path = gum::FilepathHelper::Relative(m_curr_pkg->path.c_str(), filepath.c_str());
 		gum::StringHelper::ToLower(relative_path);
+
+		// fix query key
+		auto str_pos = relative_path.find("_tmp_pack");
+		if (str_pos != std::string::npos) {
+			CU_STR fix_relative_path =
+				relative_path.substr(0, str_pos) +
+				relative_path.substr(str_pos + sizeof("_tmp_pack"));
+			relative_path = fix_relative_path;
+		}
+		CU_STR rm_header = "..\\editor_data\\";
+		if (relative_path.compare(0, rm_header.size(), rm_header) == 0) {
+			relative_path = relative_path.substr(rm_header.size());
+		}
+
 		pkg_id = m_curr_pkg->id;
 		// query
 		bool find = false;
