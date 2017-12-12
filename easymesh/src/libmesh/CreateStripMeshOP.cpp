@@ -114,7 +114,7 @@ bool CreateStripOP::OnDraw() const
 	auto mesh = m_stage->GetMesh();
 	if (mesh) {
 		ee::SpriteRenderer::Instance()->Draw(mesh->GetBaseSymbol().get());
-		s2::DrawMesh::DrawInfoUV(*mesh);
+		s2::DrawMesh::DrawInfoUV(nullptr, *mesh);
 	}
 
 	ee::ZoomViewOP::OnDraw();

@@ -18,8 +18,8 @@ bool EditUVOP::OnDraw() const
 {
 	auto mesh = m_stage->GetMesh();
 	if (mesh) {
-		s2::DrawMesh::DrawTexture(*mesh, s2::RenderParams());
-		s2::DrawMesh::DrawInfoXY(*mesh);
+		s2::DrawMesh::DrawTexture(nullptr, *mesh, s2::RenderParams());
+		s2::DrawMesh::DrawInfoXY(nullptr, *mesh);
 	}
 
 	return false;

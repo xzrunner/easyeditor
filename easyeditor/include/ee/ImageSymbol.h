@@ -27,7 +27,7 @@ public:
 	 *    s2::ImageSymbol
 	 */
 	virtual bool QueryTexcoords(bool use_dtex, float* texcoords, int& texid) const override;
-	virtual bool OnQueryTexcoordsFail() const override;
+	virtual void OnQueryTexcoordsFail(int thread_idx) const override {}
 
 	unsigned int GetTexID() const;
 
@@ -36,10 +36,6 @@ public:
 
 protected:
 	virtual bool LoadResources() override;
-
-#ifdef S2_DEBUG
-	virtual bool IsProxyImg() const override { return false; }
-#endif // S2_DEBUG
 
 private:
 	void InitCoreTex();

@@ -49,11 +49,6 @@ bool ImageSymbol::QueryTexcoords(bool use_dtex, float* texcoords, int& texid) co
 	return true;
 }
 
-bool ImageSymbol::OnQueryTexcoordsFail() const
-{
-	return false;
-}
-
 unsigned int ImageSymbol::GetTexID() const
 {
 	return m_image->GetTexID();

@@ -122,8 +122,8 @@ bool EditPointsMeshOP::OnDraw() const
 {
 	if (Mesh* mesh = static_cast<StagePanel*>(m_wnd)->GetMesh())
 	{
-		s2::DrawMesh::DrawTexture(*mesh, s2::RenderParams());
-		s2::DrawMesh::DrawInfoXY(*mesh);
+		s2::DrawMesh::DrawTexture(nullptr, *mesh, s2::RenderParams());
+		s2::DrawMesh::DrawInfoXY(nullptr, *mesh);
 	}
 
 	s2::RVG::SetColor(s2::Color(51, 204, 51));
