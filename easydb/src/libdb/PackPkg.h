@@ -36,7 +36,7 @@ private:
 	class EptLoader : public bimp::FileLoader
 	{
 	public:
-		EptLoader(const std::string& filepath);
+		EptLoader(const CU_STR& filepath);
 
 		int GetCount() const;
 

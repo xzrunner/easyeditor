@@ -183,7 +183,7 @@ void PackPkg::WriteFile(const std::string& src, uint32_t size, std::ofstream& fo
 /* class PackPkg::EptLoader                                             */
 /************************************************************************/
 
-PackPkg::EptLoader::EptLoader(const std::string& filepath)
+PackPkg::EptLoader::EptLoader(const CU_STR& filepath)
 	: bimp::FileLoader(filepath)
 {
 }
