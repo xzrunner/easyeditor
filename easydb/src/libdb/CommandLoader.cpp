@@ -89,6 +89,7 @@
 #include "GenAudioID.h"
 #include "ExportAudio.h"
 #include "ExportText.h"
+#include "PackLanguageTable.h"
 
 namespace edb
 {
@@ -183,6 +184,7 @@ void CommandLoader::Init()
 	fc->Register(GenAudioID::Create());
 	fc->Register(ExportAudio::Create());
 	fc->Register(ExportText::Create());
+	fc->Register(PackLanguageTable::Create());
 }
 
 }
