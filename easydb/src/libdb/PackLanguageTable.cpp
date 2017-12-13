@@ -58,6 +58,9 @@ void PackLanguageTable::LoadFromCSV(const std::string& filepath)
 	getline(fin, str_line);
 	gum::StringHelper::Split(str_line, ",", m_header);
 	int language_num = m_header.size() - 1;
+	for (auto& header : m_header) {
+		header = gum::StringHelper::GBKToUTF8(header.c_str());
+	}
 
 	// body
 	while (getline(fin, str_line))
@@ -70,6 +73,9 @@ void PackLanguageTable::LoadFromCSV(const std::string& filepath)
 		assert(items.size() == language_num + 1);
 		for (int i = 1, n = items.size(); i < n; ++i) {
 			gum::StringHelper::Replace(items[i], "\\n", "\n");
+		}
+		for (auto& item : items) {
+			item = gum::StringHelper::GBKToUTF8(item.c_str());
 		}
 		m_body.push_back(items);
 	}
