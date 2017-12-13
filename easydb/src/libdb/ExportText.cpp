@@ -38,8 +38,10 @@ int ExportText::Run(int argc, char *argv[])
 
 void ExportText::Trigger(const std::string& src_dir, const std::string& dst_file)
 {
-	Load(src_dir);
-	Export(dst_file);
+	//Load(src_dir);
+	//Export(dst_file);
+
+	SetTID(src_dir);
 }
 
 void ExportText::Load(const std::string& dir)
@@ -90,6 +92,44 @@ void ExportText::Export(const std::string& file)
 	}
 
 	fout.close();
+}
+
+void ExportText::SetTID(const std::string& dir)
+{
+	wxArrayString files;
+	ee::FileHelper::FetchAllFiles(dir, files);
+	for (auto& file : files)
+	{
+		if (file.ToStdString().find("_text_complex.json") == std::string::npos) {
+			continue;
+		}
+
+		auto filepath = file.ToStdString();
+		auto filename = ee::FileHelper::GetFilename(file.ToStdString());
+
+		std::string tid = filepath.substr(filepath.find("\\manga_") + 1);
+		tid = tid.substr(0, tid.find("\\json"));
+		tid += "_" + filename.substr(0, filename.find("_text_complex"));
+		ee::StringHelper::ToUpper(tid);
+
+		Json::Value val;
+		Json::Reader reader;
+		std::locale::global(std::locale(""));
+		std::ifstream fin(file.ToStdString().c_str());
+		std::locale::global(std::locale("C"));
+		reader.parse(fin, val);
+		fin.close();
+
+		val["sprite"][0]["text"]["text"] = "";
+		val["sprite"][0]["text"]["tid"] = tid;
+
+		Json::StyledStreamWriter writer;
+		std::locale::global(std::locale(""));
+		std::ofstream fout(file.ToStdString().c_str());
+		std::locale::global(std::locale("C"));
+		writer.write(fout, val);
+		fout.close();
+	}
 }
 
 }

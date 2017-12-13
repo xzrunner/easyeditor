@@ -29,6 +29,8 @@ private:
 	void Load(const std::string& dir);
 	void Export(const std::string& file);
 
+	void SetTID(const std::string& dir);
+
 private:
 	struct Text
 	{
