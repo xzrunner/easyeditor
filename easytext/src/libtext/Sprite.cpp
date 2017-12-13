@@ -21,7 +21,6 @@ Sprite::Sprite(const Sprite& spr)
 	: s2::Sprite(spr)
 	, s2::TextboxSprite(spr)
 	, ee::Sprite(spr)
-	, m_tid(spr.m_tid)
 	, m_export(spr.m_export)
 {
 }
@@ -60,7 +59,6 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 	gum::TextboxSprLoader loader(*this);
 	loader.LoadJson(val);
 
-	m_tid	 = text_val["tid"].asString();
 	m_export = text_val["export"].asBool();
 }
 
@@ -93,7 +91,7 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 	text_val["space_vert"]		= m_tb.space_vert;	
 
 	text_val["text"]			= m_text.c_str();
-	text_val["tid"]				= m_tid;
+	text_val["tid"]				= m_tid.c_str();
 	text_val["export"]          = m_export;
 
 	text_val["overflow"]		= m_tb.overflow;

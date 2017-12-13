@@ -47,7 +47,7 @@ const PackNode* LabelBuilder::Create(const std::shared_ptr<const etext::Sprite>&
 		const PackLabel* label = m_labels[i];
 		if (spr->GetTextbox() == label->GetTextBox() && 
 			spr->GetText(s2::UpdateParams()) == label->GetText().c_str() &&
-			spr->GetTID() == label->GetTid()) {
+			spr->GetTID() == label->GetTid().c_str()) {
 			label->AddReference();
 			return label;
 		}

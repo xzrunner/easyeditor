@@ -70,7 +70,7 @@ const IPackNode* TextBuilder::Create(const std::shared_ptr<const etext::Sprite>&
 	node->richtext		= tb.richtext;
 
 	node->text			= spr->GetText(s2::UpdateParams()).c_str();
-	node->tid			= spr->GetTID();
+	node->tid			= spr->GetTID().c_str();
 
 	m_labels.push_back(node);
 
@@ -140,7 +140,7 @@ const IPackNode* TextBuilder::QueryCache(const std::shared_ptr<const etext::Spri
 			label->richtext		== tb.richtext&&
 
  			label->text			== spr->GetText(s2::UpdateParams()).c_str() &&
- 			label->tid			== spr->GetTID()) {
+ 			label->tid			== spr->GetTID().c_str()) {
  			return label;
  		}
 	}

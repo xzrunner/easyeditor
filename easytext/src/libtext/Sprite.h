@@ -30,17 +30,12 @@ public:
 
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage) override;
 
-	const std::string& GetTID() const { return m_tid; }
-	void SetTID(const std::string& tid) { m_tid = tid; }	
-
 	bool IsExport() const { return m_export; }
 	void SetExport(bool exp) { m_export = exp; }
 
 	static ee::SprPtr Create(const std::shared_ptr<ee::Symbol>& sym);
 
 private:
-	std::string m_tid;
-
 	bool m_export;
 
 	S2_SPR_CLONE_FUNC(Sprite)

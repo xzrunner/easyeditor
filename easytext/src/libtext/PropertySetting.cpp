@@ -83,7 +83,7 @@ void PropertySetting::OnPropertyGridChange(const std::string& name, const wxAny&
 		up.SetActor(spr->QueryActor(prev_actor.get()));
 		spr->SetText(up, text.c_str());
 	} else if (name == "TextID") {
-		spr->SetTID(wxANY_AS(value, wxString).ToStdString());
+		spr->SetTID(wxANY_AS(value, wxString).ToStdString().c_str());
 	} else if (name == "Export") {
 		spr->SetExport(wxANY_AS(value, bool));
 	}
@@ -128,7 +128,7 @@ void PropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	pg->GetProperty("Richtext")->SetValue(tb.richtext);
 
 	pg->GetProperty("TextContent")->SetValue(spr->GetText(s2::UpdateParams()).c_str());
-	pg->GetProperty("TextID")->SetValue(spr->GetTID());
+	pg->GetProperty("TextID")->SetValue(spr->GetTID().c_str());
 	pg->GetProperty("Export")->SetValue(spr->IsExport());
 }
 
@@ -193,7 +193,7 @@ void PropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->SetPropertyAttribute("Richtext", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
 	pg->Append(new wxStringProperty("TextContent", wxPG_LABEL, spr->GetText(s2::UpdateParams()).c_str()));
-	pg->Append(new wxStringProperty("TextID", wxPG_LABEL, spr->GetTID()));
+	pg->Append(new wxStringProperty("TextID", wxPG_LABEL, spr->GetTID().c_str()));
 
 	pg->Append(new wxBoolProperty("Export", wxPG_LABEL, spr->IsExport()));
 	pg->SetPropertyAttribute("Export", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);

@@ -32,7 +32,7 @@ ee::SprPtr LabelToSpr::Trans(const erespacker::PackLabel* label)
 	tb.space_vert	= label->space_vert;
 	
 	spr->SetText(s2::UpdateParams(), label->text.c_str());
-	spr->SetTID(label->tid);
+	spr->SetTID(label->tid.c_str());
 
 	return spr;
 }
