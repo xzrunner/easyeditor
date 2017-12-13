@@ -2,6 +2,10 @@
 #include "SettingData.h"
 #include "FileHelper.h"
 
+#include <sprite2/TextTable.h>
+#include <gum/Config.h>
+#include <gum/TextTableLoader.h>
+
 #include <wx/stdpaths.h>
 
 #include <fstream>
@@ -78,6 +82,8 @@ void Config::LoadFromFile(const char* filename)
 	reader.parse(fin, m_value);
 	fin.close();
 
+	LoadTextCfg(m_value["text"]);
+
 	LoadFontCfg(m_value["font"]);
 	LoadUserFontCfg(m_value["user_font"]);
 
@@ -92,6 +98,21 @@ void Config::LoadFromFile(const char* filename)
 	m_settings->LoadFromFile(m_value);
 
 	m_loaded = true;
+}
+
+void Config::LoadTextCfg(const Json::Value& value)
+{
+	std::string language = value["language"].asString();
+	s2::TextTable::LanguageIdx lang = s2::TextTable::LANG_SIMPLIFIED;
+	if (language == "simplified") {
+		lang = s2::TextTable::LANG_SIMPLIFIED;
+	} else if (language == "traditional") {
+		lang = s2::TextTable::LANG_TRADITIONAL;
+	}
+	gum::Config::Instance()->SetLanguage(lang);
+
+	std::string filepath = value["filepath"].asString();
+	gum::TextTableLoader::LoadFromCSV(filepath.c_str());
 }
 
 void Config::LoadFontCfg(const Json::Value& value)

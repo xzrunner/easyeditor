@@ -44,6 +44,8 @@ private:
 
 	void LoadFromFile(const char* filename);
 
+	void LoadTextCfg(const Json::Value& value);
+	
 	void LoadFontCfg(const Json::Value& value);
 	void LoadUserFontCfg(const Json::Value& value);
 
