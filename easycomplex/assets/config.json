@@ -2,6 +2,13 @@
 
 	// settings
 
+	"text" :
+	{
+		// "language" : "simplified",
+		"language" : "traditional",
+		"filepath" : "lr_languages.csv"
+	},
+
 	"font" :
 
 	[
