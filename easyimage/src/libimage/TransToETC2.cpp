@@ -147,7 +147,7 @@ void TransToETC2::Encode()
 	int bh = m_height / 4;
 	for (int y = 0; y < bh; ++y) {
 		for (int x = 0; x < bw; ++x) {
-			ee::ConsoleProgressBar::Print(y * bw + x, bh * bw);
+			//ee::ConsoleProgressBar::Print(y * bw + x, bh * bw);
 			switch (m_type) 
 			{
 			case RGB:

@@ -4,7 +4,7 @@
 #include <ee/FileHelper.h>
 #include <ee/ImageData.h>
 #include <ee/StringHelper.h>
-#include <ee/ConsoleProgressBar.h>
+//#include <ee/ConsoleProgressBar.h>
 #include <ee/SymbolFile.h>
 
 #include <easyimage.h>
@@ -71,7 +71,7 @@ void TrimImage::Trigger(const std::string& src_dir, const std::string& dst_dir)
 	std::cout << "Trim image.\n";
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
-		ee::ConsoleProgressBar::Print(i, n);
+		//ee::ConsoleProgressBar::Print(i, n);
 
 		wxFileName filename(files[i]);
 		filename.Normalize();
