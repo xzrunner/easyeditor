@@ -3,7 +3,7 @@
 #include <ee/math_common.h>
 #include <ee/ImagePack.h>
 #include <ee/Exception.h>
-#include <ee/ConsoleProgressBar.h>
+//#include <ee/ConsoleProgressBar.h>
 
 #include <etcpack_lib.h>
 
@@ -14,14 +14,19 @@
 namespace eimage
 {
 
+static bool INITED = false;
+
 TransToETC2::TransToETC2(const uint8_t* pixels, int width, int height, int channels,
 						 Type type, bool align_bottom, bool fastest)
 	: m_type(type)
 	, m_fastest(fastest)
 	, m_perceptual(false)
 {
-	readCompressParams();
-	setupAlphaTableAndValtab();
+	if (!INITED) {
+		readCompressParams();
+		setupAlphaTableAndValtab();
+		INITED = true;
+	}
 
 	Prepare(pixels, width, height, channels, align_bottom);
 	Encode();
