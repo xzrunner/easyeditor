@@ -108,12 +108,12 @@ void PackLanguageTable::PackToBin(const std::string& filepath)
 	uint16_t types_count = m_header.size();
 	esprpacker::pack(types_count, &ptr);
 	for (auto& type : m_header) {
-		esprpacker::pack_str(type.c_str(), &ptr);
+		esprpacker::pack_str(gum::StringHelper::GBKToUTF8(type.c_str()).c_str(), &ptr);
 	}
 	for (auto& item : m_body) {
 		assert(item.size() == m_header.size());
 		for (auto& type : item) {
-			esprpacker::pack_long_str(type.c_str(), &ptr);
+			esprpacker::pack_long_str(gum::StringHelper::GBKToUTF8(type.c_str()).c_str(), &ptr);
 		}
 	}
 
