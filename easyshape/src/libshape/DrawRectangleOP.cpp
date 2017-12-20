@@ -52,7 +52,7 @@ bool DrawRectangleOP::OnDraw() const
 	if (ee::ZoomViewOP::OnDraw()) return true;
 
 	if (m_first_pos.IsValid() && m_curr_pos.IsValid()) {
-		s2::RVG::Rect(m_first_pos, m_curr_pos, false);
+		s2::RVG::Rect(nullptr, m_first_pos, m_curr_pos, false);
 	}
 
 	return false;

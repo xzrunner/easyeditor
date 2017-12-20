@@ -194,10 +194,10 @@ bool EditBezierOP::OnDraw() const
 				sm::vec2 c = bezier->GetBounding().Center();
 				
 				s2::RVG::SetColor(s2::Color(102, 255, 102));
-				s2::RVG::Circle(c, tolerance, true);
+				s2::RVG::Circle(nullptr, c, tolerance, true);
 				if (m_captured.pos.IsValid()) {
 					s2::RVG::SetColor(s2::Color(255, 102, 102));
-					s2::RVG::Circle(m_captured.pos, tolerance, true);
+					s2::RVG::Circle(nullptr, m_captured.pos, tolerance, true);
 				}
 			}
 		}

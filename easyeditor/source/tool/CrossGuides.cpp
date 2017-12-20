@@ -96,8 +96,8 @@ void CrossGuides::Cross::Draw() const
 	s2::RVG::SetColor(LIGHT_RED);
 	s2::RVG::LineWidth(2);
 
-	s2::RVG::Circle(pos, RADIUS, false);
-	s2::RVG::Cross(pos, LENGTH);
+	s2::RVG::Circle(nullptr, pos, RADIUS, false);
+	s2::RVG::Cross(nullptr, pos, LENGTH);
 }
 
 bool CrossGuides::Cross::Contain(const sm::vec2& p) const

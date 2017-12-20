@@ -63,16 +63,16 @@ bool DrawSelectRectOP::OnDraw() const
 	if (m_last_pos.x > m_first_pos.x)
 	{
 		s2::RVG::SetColor(LIGHT_GREEN);
-		s2::RVG::Rect(m_first_pos, m_last_pos, true);
+		s2::RVG::Rect(nullptr, m_first_pos, m_last_pos, true);
 		s2::RVG::SetColor(SELECT_RED);
-		s2::RVG::Rect(m_first_pos, m_last_pos, false);
+		s2::RVG::Rect(nullptr, m_first_pos, m_last_pos, false);
 	}
 	else
 	{
 		s2::RVG::SetColor(LIGHT_BLUE);
-		s2::RVG::Rect(m_first_pos, m_last_pos, true);
+		s2::RVG::Rect(nullptr, m_first_pos, m_last_pos, true);
 		s2::RVG::SetColor(SELECT_RED);
-		s2::RVG::Rect(m_first_pos, m_last_pos, false);
+		s2::RVG::Rect(nullptr, m_first_pos, m_last_pos, false);
 	}
 
 	return false;

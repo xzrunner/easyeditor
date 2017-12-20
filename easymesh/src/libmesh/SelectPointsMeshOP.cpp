@@ -117,7 +117,7 @@ bool SelectPointsMeshOP::OnDraw() const
 		s2::RVG::SetColor(GREEN);
 		std::set<int>::const_iterator itr = m_selection.begin();
 		for ( ; itr != m_selection.end(); ++itr) {
-			s2::RVG::Circle(vertices[*itr], mesh->GetNodeRadius(), true);	
+			s2::RVG::Circle(nullptr, vertices[*itr], mesh->GetNodeRadius(), true);
 		}
 	}
 

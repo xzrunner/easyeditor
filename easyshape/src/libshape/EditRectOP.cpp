@@ -212,10 +212,10 @@ bool EditRectOP::OnDraw() const
 			{
 				sm::vec2 pos = rect->GetRect().Center();
 				s2::RVG::SetColor(s2::Color(102, 255, 102));
-				s2::RVG::Circle(pos, tolerance, true);
+				s2::RVG::Circle(nullptr, pos, tolerance, true);
 				if (m_captured.pos.IsValid()) {
 					s2::RVG::SetColor(s2::Color(255, 102, 102));
-					s2::RVG::Circle(m_captured.pos, tolerance, true);
+					s2::RVG::Circle(nullptr, m_captured.pos, tolerance, true);
 				}
 			}
 		}
@@ -223,7 +223,7 @@ bool EditRectOP::OnDraw() const
 	else
 	{
 		if (m_first_pos.IsValid() && m_curr_pos.IsValid()) {
-			s2::RVG::Rect(m_first_pos, m_curr_pos, false);
+			s2::RVG::Rect(nullptr, m_first_pos, m_curr_pos, false);
 		}
 	}
 

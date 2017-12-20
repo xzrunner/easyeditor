@@ -197,10 +197,10 @@ bool EditCircleOP::OnDraw() const
 			if (auto circle = std::dynamic_pointer_cast<CircleShape>(m_captured.shape))
 			{
 				s2::RVG::SetColor(s2::Color(102, 255, 102));
-				s2::RVG::Circle(circle->GetCenter(), tolerance, true);
+				s2::RVG::Circle(nullptr, circle->GetCenter(), tolerance, true);
 				if (!m_captured.pos.IsValid()) {
 					s2::RVG::SetColor(s2::Color(255, 102, 102));
-					s2::RVG::Circle(circle->GetCenter(), circle->GetRadius(), false);
+					s2::RVG::Circle(nullptr, circle->GetCenter(), circle->GetRadius(), false);
 				}
 			}
 		}
@@ -209,7 +209,7 @@ bool EditCircleOP::OnDraw() const
 	{
 		if (m_first_pos.IsValid() && m_curr_pos.IsValid()) {
 			s2::RVG::SetColor(s2::Color(0, 0, 0));
-			s2::RVG::Circle(m_first_pos, sm::dis_pos_to_pos(m_first_pos, m_curr_pos), false, 32);
+			s2::RVG::Circle(nullptr, m_first_pos, sm::dis_pos_to_pos(m_first_pos, m_curr_pos), false, 32);
 		}
 	}
 

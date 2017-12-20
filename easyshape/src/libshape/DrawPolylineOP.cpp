@@ -87,12 +87,12 @@ bool DrawPolylineOP::OnDraw() const
 		if (m_curr_pos.IsValid())
 		{
 			m_polyline.push_back(m_curr_pos);
-			s2::RVG::Polyline(m_polyline, false);
+			s2::RVG::Polyline(nullptr, m_polyline, false);
 			m_polyline.pop_back();
 		}
 		else
 		{
-			s2::RVG::Polyline(m_polyline, false);
+			s2::RVG::Polyline(nullptr, m_polyline, false);
 		}
 	}
 

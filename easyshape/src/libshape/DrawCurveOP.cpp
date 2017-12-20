@@ -70,7 +70,7 @@ bool DrawCurveOP::OnDraw() const
 	if (!m_curve.empty()) {
 		s2::RVG::SetColor(s2::Color(0, 0, 0));
 		s2::RVG::LineWidth(1);
-		s2::RVG::Polyline(m_curve, false);
+		s2::RVG::Polyline(nullptr, m_curve, false);
 	}
 
 	return false;

@@ -158,7 +158,7 @@ bool SelectNodesOP::OnDraw() const
 	}
 
 	s2::RVG::SetColor(s2::Color(204, 102, 102));
-	s2::RVG::Circles(nodes, GetThreshold(), true);
+	s2::RVG::Circles(nullptr, nodes, GetThreshold(), true);
 
 	return false;
 }

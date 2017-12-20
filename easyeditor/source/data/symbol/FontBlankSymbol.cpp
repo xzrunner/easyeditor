@@ -136,7 +136,7 @@ void FontBlankSymbol::DrawBackground(const FontBlankSprite* fb, const S2_MAT& mt
 	min = mt * min;
 	max = mt * max;
 
-	s2::RVG::Rect(min, max, true);
+	s2::RVG::Rect(nullptr, min, max, true);
 }
 
 void FontBlankSymbol::DrawText(const FontBlankSprite* fb, const S2_MAT& mt) const

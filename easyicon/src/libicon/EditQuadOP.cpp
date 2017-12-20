@@ -122,7 +122,7 @@ bool EditQuadOP::OnDraw() const
 		  h = ee_img->GetClippedRegion().Height();
 	s2::RVG::SetColor(ee::LIGHT_RED);
 	s2::RVG::LineWidth(1);
-	s2::RVG::Rect(sm::vec2(0, 0), w * 0.5f, h * 0.5f, false);
+	s2::RVG::Rect(nullptr, sm::vec2(0, 0), w * 0.5f, h * 0.5f, false);
 	s2::RVG::LineWidth(2);
 
 	QuadIcon* quad_icon = static_cast<QuadIcon*>(icon);
@@ -133,10 +133,10 @@ bool EditQuadOP::OnDraw() const
 	}
 
 	s2::RVG::SetColor(ee::LIGHT_GREEN);
-	s2::RVG::Polyline(screen, true);
+	s2::RVG::Polyline(nullptr, screen, true);
 	for (int i = 0; i < 4; ++i) {
 		s2::RVG::SetColor(ee::LIGHT_GREEN);
-		s2::RVG::Rect(screen[i], CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, true);
+		s2::RVG::Rect(nullptr, screen[i], CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, true);
 	}
 
 	return false;

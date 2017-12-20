@@ -409,7 +409,7 @@ void ArrangeSpriteImpl::OnDraw(float cam_scale) const
 					SpriteCtrlNode::GetSpriteCtrlNodesExt(*selected, ctrl_nodes);
 					for (int i = 0; i < 4; ++i) {
 						s2::RVG::SetColor(s2::Color(51, 204, 51));
-						s2::RVG::Circle(ctrl_nodes[i], m_ctrl_node_radius, true);
+						s2::RVG::Circle(nullptr, ctrl_nodes[i], m_ctrl_node_radius, true);
 					}
 				}
 				else
@@ -418,11 +418,11 @@ void ArrangeSpriteImpl::OnDraw(float cam_scale) const
 					SpriteCtrlNode::GetSpriteCtrlNodes(*selected, ctrl_nodes);
 					for (int i = 0; i < 4; ++i) {
 						s2::RVG::SetColor(s2::Color(51, 204, 51));
-						s2::RVG::Circle(ctrl_nodes[i], m_ctrl_node_radius, false);
+						s2::RVG::Circle(nullptr, ctrl_nodes[i], m_ctrl_node_radius, false);
 					}
 					for (int i = 4; i < 8; ++i) {
 						s2::RVG::SetColor(s2::Color(51, 204, 51));
-						s2::RVG::Circle(ctrl_nodes[i], m_ctrl_node_radius, true);
+						s2::RVG::Circle(nullptr, ctrl_nodes[i], m_ctrl_node_radius, true);
 					}
 				}
 			}
@@ -431,7 +431,7 @@ void ArrangeSpriteImpl::OnDraw(float cam_scale) const
 			{
 				sm::vec2 offset = GetSprOffset(selected);
 				s2::RVG::SetColor(s2::Color(204, 51, 51));
-				s2::RVG::Circle(offset, m_ctrl_node_radius, true);
+				s2::RVG::Circle(nullptr, offset, m_ctrl_node_radius, true);
 			}
 		}
 	}

@@ -77,7 +77,7 @@ bool EditPolylinesOP::OnDraw() const
 	for (auto& item : m_simplify_buffer) {
 		item.second->Draw(nullptr, rp);
 		s2::RVG::SetColor(s2::Color(51, 51, 204));
-		s2::RVG::Circles(item.second->GetVertices(), ee::SettingData::ctl_pos_sz, true);
+		s2::RVG::Circles(nullptr, item.second->GetVertices(), ee::SettingData::ctl_pos_sz, true);
 	}
 
 	return false;

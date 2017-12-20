@@ -88,9 +88,9 @@ bool EditNodesOP::OnDraw() const
 	for (size_t i = 0, n = m_buffer.size(); i < n; ++i)
 	{
 		s2::RVG::SetColor(s2::Color(204, 51, 51));
-		s2::RVG::Polyline(m_buffer[i].dst, false);
+		s2::RVG::Polyline(nullptr, m_buffer[i].dst, false);
 		s2::RVG::SetColor(s2::Color(51, 51, 204));
-		s2::RVG::Circles(m_buffer[i].dst, radius, true);
+		s2::RVG::Circles(nullptr, m_buffer[i].dst, radius, true);
 	}
 
 	return false;

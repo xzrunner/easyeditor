@@ -91,7 +91,7 @@ void Symbol::DrawBackground(const Sprite* spr, const S2_MAT& mt) const
 	min = mt * min;
 	max = mt * max;
 
-	s2::RVG::Rect(min, max, true);
+	s2::RVG::Rect(nullptr, min, max, true);
 }
 
 }

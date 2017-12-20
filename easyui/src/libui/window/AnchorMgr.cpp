@@ -123,7 +123,7 @@ void AnchorMgr::DrawNodes(const s2::RenderParams& params) const
 	s2::RVG::SetColor(ee::LIGHT_GREY);
 	for (int i = 0; i < ANCHOR_COUNT; ++i) {
 		const Anchor& anchor = m_anchors[i];
-		s2::RVG::Circle(anchor.pos, RADIUS, true);
+		s2::RVG::Circle(nullptr, anchor.pos, RADIUS, true);
 	}
 }
 

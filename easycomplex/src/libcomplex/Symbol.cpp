@@ -148,7 +148,7 @@ s2::RenderReturn Symbol::DrawTree(cooking::DisplayList* dlist, const s2::RenderP
 		sm::vec2 min(m_scissor.xmin, m_scissor.ymin), 
 				 max(m_scissor.xmax, m_scissor.ymax);
 		s2::RVG::SetColor(s2::Color(0, 204, 0));
-		s2::RVG::Rect(rp_child.mt * min, rp_child.mt * max, false);
+		s2::RVG::Rect(nullptr, rp_child.mt * min, rp_child.mt * max, false);
 	}
 
 	return s2::RENDER_OK;

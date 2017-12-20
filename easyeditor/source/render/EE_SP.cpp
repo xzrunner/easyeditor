@@ -61,7 +61,7 @@ void SpatialPartition::Query(const sm::rect& region, std::vector<const Sprite*>&
 static void _render(float xmin, float ymin, float xmax, float ymax) 
 {
 	s2::RVG::SetColor(LIGHT_GREEN);
-	s2::RVG::Rect(sm::vec2(xmin, ymin), sm::vec2(xmax, ymax), false);
+	s2::RVG::Rect(nullptr, sm::vec2(xmin, ymin), sm::vec2(xmax, ymax), false);
 }
 
 void SpatialPartition::DebugDraw() const

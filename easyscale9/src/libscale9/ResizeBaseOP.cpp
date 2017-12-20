@@ -84,10 +84,10 @@ bool ResizeBaseOP::OnDraw() const
 	sm::vec2 sz = m_sym->GetBounding().Size();
 	const float hw = sz.x * 0.5f, hh = sz.y * 0.5f;
 	const float r = REGION;
-	s2::RVG::Rect(sm::vec2(-hw, -hh), r, r, false);
-	s2::RVG::Rect(sm::vec2( hw, -hh), r, r, false);
-	s2::RVG::Rect(sm::vec2( hw,  hh), r, r, false);
-	s2::RVG::Rect(sm::vec2(-hw,  hh), r, r, false);
+	s2::RVG::Rect(nullptr, sm::vec2(-hw, -hh), r, r, false);
+	s2::RVG::Rect(nullptr, sm::vec2( hw, -hh), r, r, false);
+	s2::RVG::Rect(nullptr, sm::vec2( hw,  hh), r, r, false);
+	s2::RVG::Rect(nullptr, sm::vec2(-hw,  hh), r, r, false);
 
 	return false;
 }

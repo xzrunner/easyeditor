@@ -90,13 +90,13 @@ bool AutoRectCutOP::OnDraw() const
 	if (ee::ZoomViewOP::OnDraw()) return true;
 
 	s2::RVG::SetColor(s2::Color(255, 0, 0));
-	s2::RVG::Cross(sm::vec2(0, 0), 100, 100);
+	s2::RVG::Cross(nullptr, sm::vec2(0, 0), 100, 100);
 
 	m_rects.Draw();
 
 	if (m_selected) {
 		s2::RVG::SetColor(ee::LIGHT_GREEN);
-		s2::RVG::Rect(sm::vec2(m_selected->xmin, m_selected->ymin), sm::vec2(m_selected->xmax, m_selected->ymax), true);
+		s2::RVG::Rect(nullptr, sm::vec2(m_selected->xmin, m_selected->ymin), sm::vec2(m_selected->xmax, m_selected->ymax), true);
 	}
 
 	return false;

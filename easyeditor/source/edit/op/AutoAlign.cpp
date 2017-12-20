@@ -225,10 +225,10 @@ void AutoAlign::Draw() const
 	{
 		s2::RVG::SetColor(s2::Color(0, 0, 0));
 		if (m_hor[0] != m_hor[1]) {
-			s2::RVG::DashLine(m_hor[0], m_hor[1]);
+			s2::RVG::DashLine(nullptr, m_hor[0], m_hor[1]);
 		}
 		if (m_ver[0] != m_ver[1]) {
-			s2::RVG::DashLine(m_ver[0], m_ver[1]);
+			s2::RVG::DashLine(nullptr, m_ver[0], m_ver[1]);
 		}
 	}
 }

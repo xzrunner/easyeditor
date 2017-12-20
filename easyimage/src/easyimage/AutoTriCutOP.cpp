@@ -37,9 +37,9 @@ bool AutoTriCutOP::OnDraw() const
 // 	s2::RVG::Points(m_raw_bound_points, ee::LIGHT_RED, 5);
 
 	s2::RVG::SetColor(ee::LIGHT_RED);
- 	s2::RVG::Polyline(m_raw_bound_line_merged, false);
+ 	s2::RVG::Polyline(nullptr, m_raw_bound_line_merged, false);
 	s2::RVG::SetColor(ee::LIGHT_BLUE);
- 	s2::RVG::Polyline(m_fine_bound_line, true);
+ 	s2::RVG::Polyline(nullptr, m_fine_bound_line, true);
 
 	return false;
 }

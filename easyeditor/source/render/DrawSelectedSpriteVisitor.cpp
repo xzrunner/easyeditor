@@ -26,7 +26,7 @@ void DrawSelectedSpriteVisitor::Visit(const SprPtr& spr, bool& next)
 	CU_VEC<sm::vec2> bound;
 	spr->GetBounding()->GetBoundPos(bound);
 	s2::RVG::SetColor(m_color);
-	s2::RVG::Polyline(bound, true);
+	s2::RVG::Polyline(nullptr, bound, true);
 	
 	// todo: bad
 	if (Config::Instance()->GetSettings().visible_image_edge)
@@ -46,7 +46,7 @@ void DrawSelectedSpriteVisitor::Visit(const SprPtr& spr, bool& next)
 			min = mt * min;
 			max = mt * max;
 
-			s2::RVG::Rect(min, max, false);
+			s2::RVG::Rect(nullptr, min, max, false);
 
 			s2::RVG::LineWidth(2);
 		}

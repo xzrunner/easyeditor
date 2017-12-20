@@ -24,7 +24,7 @@ void Grids::Draw() const
 	{
 		const Grid& g = m_grids[i];
 		s2::RVG::SetColor(ee::LIGHT_GREY);
-		s2::RVG::Polyline(g.m_bird_bound, true);
+		s2::RVG::Polyline(nullptr, g.m_bird_bound, true);
 //		s2::RVG::Rect(g.m_flat_bound, ee::LIGHT_GREY_LINE);
 	}
 //	s2::RVG::Polyline(m_flat_bound, ee::LIGHT_GREY, true);
@@ -32,7 +32,7 @@ void Grids::Draw() const
 	for (int i = 0, n = m_debug_draw_grids.size(); i < n; ++i) {
 		const Grid& g = m_grids[m_debug_draw_grids[i]];
 		s2::RVG::SetColor(ee::BLUE);
-		s2::RVG::Polyline(g.m_bird_bound, true);
+		s2::RVG::Polyline(nullptr, g.m_bird_bound, true);
 	}
 }
 

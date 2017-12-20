@@ -34,7 +34,7 @@ void ChainShape::Draw(cooking::DisplayList* dlist, const s2::RenderParams& rp) c
 	s2::PolylineShape::Draw(dlist, rp);
 
 	if (m_draw_dir && m_vertices.size() >= 2) {
-		s2::RVG::Arrow(m_vertices[m_vertices.size() - 2], m_vertices[m_vertices.size() - 1]);
+		s2::RVG::Arrow(nullptr, m_vertices[m_vertices.size() - 2], m_vertices[m_vertices.size() - 1]);
 	}
 }
 

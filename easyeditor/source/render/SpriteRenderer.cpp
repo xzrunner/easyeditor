@@ -32,9 +32,9 @@ void draw_anchor(const s2::Sprite* spr, const s2::RenderParams& params)
 	}
 	s2::RVG::SetColor(BLACK);
 	s2::RVG::LineWidth(4);
-	s2::RVG::Polyline(bound, true);
-	s2::RVG::Line(bound[0], bound[2]);
-	s2::RVG::Line(bound[1], bound[3]);
+	s2::RVG::Polyline(nullptr, bound, true);
+	s2::RVG::Line(nullptr, bound[0], bound[2]);
+	s2::RVG::Line(nullptr, bound[1], bound[3]);
 }
 
 SpriteRenderer::SpriteRenderer() 

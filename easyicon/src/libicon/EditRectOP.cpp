@@ -137,15 +137,15 @@ bool EditRectOP::OnDraw() const
 		  h = ee_img->GetClippedRegion().Height();
 	s2::RVG::SetColor(ee::LIGHT_RED);
 	s2::RVG::LineWidth(1);
-	s2::RVG::Rect(sm::vec2(0, 0), w * 0.5f, h * 0.5f, false);
+	s2::RVG::Rect(nullptr, sm::vec2(0, 0), w * 0.5f, h * 0.5f, false);
 
 	sm::rect r = icon->GetRegion(1);
 	s2::RVG::SetColor(ee::LIGHT_GREEN);
-	s2::RVG::Rect(sm::vec2(r.xmin, r.ymin), sm::vec2(r.xmax, r.ymax), false);
-	s2::RVG::Rect(sm::vec2(r.xmin, r.ymin), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, true);
-	s2::RVG::Rect(sm::vec2(r.xmin, r.ymax), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, true);
-	s2::RVG::Rect(sm::vec2(r.xmax, r.ymax), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, true);
-	s2::RVG::Rect(sm::vec2(r.xmax, r.ymin), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, true);
+	s2::RVG::Rect(nullptr, sm::vec2(r.xmin, r.ymin), sm::vec2(r.xmax, r.ymax), false);
+	s2::RVG::Rect(nullptr, sm::vec2(r.xmin, r.ymin), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, true);
+	s2::RVG::Rect(nullptr, sm::vec2(r.xmin, r.ymax), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, true);
+	s2::RVG::Rect(nullptr, sm::vec2(r.xmax, r.ymax), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, true);
+	s2::RVG::Rect(nullptr, sm::vec2(r.xmax, r.ymin), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, true);
 
 	s2::RVG::LineWidth(2);
 

@@ -94,14 +94,14 @@ void StageCanvas::OnDrawSprites() const
 	if (sz.x > 0 && sz.y > 0) {
 		s2::RVG::SetColor(s2::Color(0, 204, 0));
 		s2::RVG::LineWidth(2);
-		s2::RVG::Rect(sm::vec2(clipbox.xmin, clipbox.ymin), sm::vec2(clipbox.xmax, clipbox.ymax), false);
+		s2::RVG::Rect(nullptr, sm::vec2(clipbox.xmin, clipbox.ymin), sm::vec2(clipbox.xmax, clipbox.ymax), false);
 	}
 
 	if (Settings::bVisibleBGCross)
 	{
 		const float EDGE = 100;
 		s2::RVG::SetColor(ee::LIGHT_GREY);
-		s2::RVG::Cross(sm::vec2(0,0), EDGE, EDGE);
+		s2::RVG::Cross(nullptr, sm::vec2(0,0), EDGE, EDGE);
 	}
 
 	s2::Particle3d::Instance()->BufferDraw();
@@ -128,7 +128,7 @@ void StageCanvas::DrawBackground() const
 	if (Settings::bVisibleBGRect) {
 		s2::RVG::SetColor(s2::Color(204, 204, 204));
 		s2::RVG::LineWidth(2);
-		s2::RVG::Rect(sm::vec2(0, 0), ee::HALF_SCREEN_WIDTH, ee::HALF_SCREEN_HEIGHT, false);
+		s2::RVG::Rect(nullptr, sm::vec2(0, 0), ee::HALF_SCREEN_WIDTH, ee::HALF_SCREEN_HEIGHT, false);
 	}
 }
 

@@ -153,7 +153,7 @@ bool EditPointOP::OnDraw() const
 
 	if (m_pos.IsValid()) {
 		s2::RVG::SetColor(ee::LIGHT_RED);
-		s2::RVG::Circle(m_pos, m_node_capture->GetValue(), true);
+		s2::RVG::Circle(nullptr, m_pos, m_node_capture->GetValue(), true);
 	}
 
 	return false;

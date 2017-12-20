@@ -66,7 +66,7 @@ void StageCanvas::DrawSprBound() const
 	min = mt * min;
 	max = mt * max;
 
-	s2::RVG::Rect(min, max, false);
+	s2::RVG::Rect(nullptr, min, max, false);
 }
 
 }

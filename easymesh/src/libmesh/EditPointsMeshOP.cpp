@@ -127,9 +127,9 @@ bool EditPointsMeshOP::OnDraw() const
 	}
 
 	s2::RVG::SetColor(s2::Color(51, 204, 51));
-	s2::RVG::Cross(m_center, CENTER_EDGE);
+	s2::RVG::Cross(nullptr, m_center, CENTER_EDGE);
 	s2::RVG::SetColor(s2::Color(51, 102, 204));
-	s2::RVG::Circle(m_center, CENTER_RADIUS, true);
+	s2::RVG::Circle(nullptr, m_center, CENTER_RADIUS, true);
 
 	if (SelectPointsMeshOP::OnDraw())
 		return true;
