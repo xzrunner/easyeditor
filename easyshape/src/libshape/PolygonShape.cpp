@@ -38,17 +38,17 @@ PolygonShape::~PolygonShape()
 	ClearUserData(true);
 }
 
-void PolygonShape::Draw(const s2::RenderParams& rp) const
+void PolygonShape::Draw(cooking::DisplayList* dlist, const s2::RenderParams& rp) const
 {
 	if (m_poly) {
-		m_poly->Draw(rp);
+		m_poly->Draw(dlist, rp);
 		if (ee::SettingData::draw_tris_edge) {
 			m_poly->DebugDraw(rp.mt);
 		}
 	}
 
 	if (ee::Config::Instance()->GetSettings().visible_tex_edge) {
-		s2::PolylineShape::Draw(rp);
+		s2::PolylineShape::Draw(dlist, rp);
 	}
 }
 

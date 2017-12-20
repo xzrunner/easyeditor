@@ -2,11 +2,12 @@
 #define _EASYUI_WINDOW_PREVIEW_CANVAS_H_
 
 #include <ee/CameraCanvas.h>
+#include <ee/Sprite.h>
 
 #include <SM_Matrix2D.h>
 #include <sprite2/pre_defined.h>
 
-namespace ee { class PlayControl; class Sprite; }
+namespace ee { class PlayControl; }
 
 namespace eui
 {

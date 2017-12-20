@@ -62,11 +62,6 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* to
 	InitSubjects();
 }
 
-StagePanel::~StagePanel()
-{
-	m_sym->RemoveReference();
-}
-
 bool StagePanel::UpdateStage()
 {
 	bool dirty = false;
@@ -75,7 +70,7 @@ bool StagePanel::UpdateStage()
 		dirty = true;
 	}
 	
-	const std::vector<Sprite*>& sprs = m_sym->GetExtRefs();
+	auto& sprs = m_sym->GetExtRefs();
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
 		if (sprs[i]->Update(s2::UpdateParams())) {
 			dirty = true;
@@ -87,12 +82,12 @@ bool StagePanel::UpdateStage()
 
 void StagePanel::LoadFromFile(const char* filename)
 {
-	FileIO::Load(filename, m_sym);
+	FileIO::Load(filename, *m_sym);
 	m_toolbar->SetWindowName(m_sym->name);
 
 	std::vector<ee::SprPtr> sprs;
 	m_sym->GetAnchorMgr().Traverse(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
-	const std::vector<Sprite*>& ref_sprites = m_sym->GetExtRefs();
+	auto& ref_sprites = m_sym->GetExtRefs();
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
 		m_top_pannels->viewlist->Insert(sprs[i]);
 	}
@@ -104,7 +99,7 @@ void StagePanel::LoadFromFile(const char* filename)
 void StagePanel::StoreToFile(const char* filename) const
 {
 	m_sym->name = m_toolbar->GetWindowName();
-	FileIO::Store(filename, m_sym);
+	FileIO::Store(filename, *m_sym);
 }
 
 void StagePanel::EnablePage(bool enable)
@@ -219,7 +214,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 		{
 			ee::InsertSpriteSJ::Params* p = (ee::InsertSpriteSJ::Params*)ud;
 			auto& spr = p->spr;
-			if (Sprite* spr_ui = dynamic_cast<Sprite*>(spr)) {
+			if (auto spr_ui = std::dynamic_pointer_cast<Sprite>(spr)) {
 				m_sym->InsertExtRef(spr_ui);
 			} else {
 				std::string type = "";
@@ -235,7 +230,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 	case ee::MSG_REMOVE_SPRITE:
 		{
 			auto& spr = *(ee::SprPtr*)ud;
-			if (Sprite* spr_ui = dynamic_cast<Sprite*>(spr)) {
+			if (auto spr_ui = std::dynamic_pointer_cast<Sprite>(spr)) {
 				m_sym->RemoveExtRef(spr_ui);
 			} else {
 				m_sym->GetAnchorMgr().Remove(spr);
@@ -251,7 +246,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 	case ee::MSG_REORDER_SPRITE:
 		{
 			ee::ReorderSpriteSJ::Params* p = (ee::ReorderSpriteSJ::Params*)ud;
-			if (Sprite* spr_ui = dynamic_cast<Sprite*>(p->spr)) {
+			if (auto spr_ui = std::dynamic_pointer_cast<Sprite>(p->spr)) {
 				m_sym->ResetExtRefOrder(spr_ui, p->up);
 			} else {
 				m_sym->GetAnchorMgr().ResetOrder(p->spr, p->up);
@@ -262,7 +257,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 	case ee::MSG_REORDER_SPRITE_MOST:
 		{
 			ee::ReorderSpriteMostSJ::Params* p = (ee::ReorderSpriteMostSJ::Params*)ud;
-			if (Sprite* spr_ui = dynamic_cast<Sprite*>(p->spr)) {
+			if (auto spr_ui = std::dynamic_pointer_cast<Sprite>(p->spr)) {
 				m_sym->ResetExtRefOrderMost(spr_ui, p->up);
 			} else {
 				m_sym->GetAnchorMgr().ResetOrderMost(p->spr, p->up);

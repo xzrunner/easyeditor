@@ -131,23 +131,26 @@ void UIList::StoreToFile(const char* filename) const
 			int row = i / m_hori_count,
 				col = i % m_hori_count;
 			int idx = col * m_vert_count + row;
-			spr->SetName("item" + ee::StringHelper::ToString(idx + 1));
+			std::string name = "item" + ee::StringHelper::ToString(idx + 1);
+			spr->SetName(name.c_str());
 			items_complex->Add(spr);
 		}
 	} else if (m_reverse_order) {
 		for (int i = m_items.size() - 1; i >= 0; --i) {
 			auto& spr = m_items[i];
-			spr->SetName("item" + ee::StringHelper::ToString(i + 1));
+			std::string name = "item" + ee::StringHelper::ToString(i + 1);
+			spr->SetName(name.c_str());
 			items_complex->Add(spr);
 		}
 	} else {
 		for (int i = 0, n = m_items.size(); i < n; ++i) {
 			auto& spr = m_items[i];
-			spr->SetName("item" + ee::StringHelper::ToString(i + 1));
+			std::string name = "item" + ee::StringHelper::ToString(i + 1);
+			spr->SetName(name.c_str());
 			items_complex->Add(spr);
 		}
 	}
-	CU_STR items_path = CU_STR(name.c_str()) + "_items_complex[gen].json";
+	std::string items_path = name + "_items_complex[gen].json";
 	items_complex->SetFilepath(items_path);
 	ecomplex::FileStorer::Store(items_path, *items_complex, ee::FileHelper::GetFileDir(items_path));
 
@@ -157,7 +160,7 @@ void UIList::StoreToFile(const char* filename) const
 	auto wrapper_complex = std::make_shared<ecomplex::Symbol>();;
 	wrapper_complex->SetScissor(m_clipbox);
 	wrapper_complex->Add(items_sprite);
-	CU_STR top_path = CU_STR(name.c_str()) + "_wrapper_complex[gen].json";
+	std::string top_path = name + "_wrapper_complex[gen].json";
 	wrapper_complex->SetFilepath(top_path);
 	ecomplex::FileStorer::Store(top_path, *wrapper_complex, ee::FileHelper::GetFileDir(top_path));
 

@@ -35,7 +35,7 @@ void TranslateSpriteState::OnMouseRelease(const sm::vec2& pos)
 void TranslateSpriteState::Visitor::
 Visit(const ee::SprPtr& spr, bool& next)
 {
-	if (dynamic_cast<Sprite*>(spr) != NULL) {
+	if (std::dynamic_pointer_cast<Sprite>(spr) != nullptr) {
 		spr->SetPosition(sm::vec2(0, 0));
 		spr->SetAngle(0);
 	} else {

@@ -28,7 +28,7 @@ void DrawShapesVisitor::Visit(const std::shared_ptr<Shape>& shape, bool& next)
 		return;
 	}
 
-	shape->Draw(m_rp);
+	shape->Draw(nullptr, m_rp);
 
 	ee::SettingData& cfg = ee::Config::Instance()->GetSettings();
 	if (cfg.visible_node_name) 

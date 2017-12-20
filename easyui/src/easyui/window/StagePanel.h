@@ -23,7 +23,6 @@ class StagePanel : public UIStagePage, public ee::MultiSpritesImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* top_pannels);
-	virtual ~StagePanel();
 
 	//
 	// ee::EditPanel interface

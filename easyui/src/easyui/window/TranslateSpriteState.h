@@ -2,6 +2,7 @@
 #define _EASYUI_WINDOW_TRANSLATE_SPRITE_STATE_H_
 
 #include <ee/TranslateSpriteState.h>
+#include <ee/Visitor.h>
 
 namespace eui
 {
@@ -20,7 +21,7 @@ public:
 	virtual void OnMouseRelease(const sm::vec2& pos) override;
 
 private:
-	class Visitor : public ee::Visitor<ee::Sprite>
+	class Visitor : public ee::RefVisitor<ee::Sprite>
 	{
 	public:
 		Visitor(AnchorMgr* anchor_mgr) : m_anchor_mgr(anchor_mgr) {}

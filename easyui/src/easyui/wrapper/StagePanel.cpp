@@ -98,28 +98,26 @@ void StagePanel::StoreToFile(const char* filename) const
 	std::string dir = ee::FileHelper::GetFileDir(filename);
 
 	// items complex
-	ecomplex::Symbol items_complex;
+	auto items_complex = std::make_shared<ecomplex::Symbol>();
 	std::vector<ee::SprPtr> sprs;
 	TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
-	for_each(sprs.begin(), sprs.end(), cu::AddRefFunctor<ee::Sprite>());
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
-		items_complex.Add(sprs[i]);
+		items_complex->Add(sprs[i]);
 	}
 	std::string items_path = name + "_items_complex[gen].json";
-	items_complex.SetFilepath(items_path);
-	ecomplex::FileStorer::Store(items_path, &items_complex, ee::FileHelper::GetFileDir(items_path));
+	items_complex->SetFilepath(items_path);
+	ecomplex::FileStorer::Store(items_path, *items_complex, ee::FileHelper::GetFileDir(items_path));
 //	items_complex.InitBounding();
 
 	// wrapper complex
-	ecomplex::Sprite items_sprite(&items_complex);
-	items_sprite.SetName("anchor");
+	auto items_sprite = std::make_shared<ecomplex::Sprite>(items_complex);
+	items_sprite->SetName("anchor");
 	ecomplex::Symbol wrapper_complex;
 	wrapper_complex.SetScissor(m_clipbox);
-	wrapper_complex.Add(&items_sprite);
-	items_sprite.AddReference();
+	wrapper_complex.Add(items_sprite);
 	std::string top_path = name + "_wrapper_complex[gen].json";
 	wrapper_complex.SetFilepath(top_path);
-	ecomplex::FileStorer::Store(top_path, &wrapper_complex, ee::FileHelper::GetFileDir(top_path));
+	ecomplex::FileStorer::Store(top_path, wrapper_complex, ee::FileHelper::GetFileDir(top_path));
 
 	// ui
 	std::string ui_path = filename;
@@ -134,7 +132,7 @@ void StagePanel::StoreToFile(const char* filename) const
 	value["clipbox"]["h"] = cb_sz.y;
 	value["clipbox"]["x"] = m_clipbox.xmin;
 	value["clipbox"]["y"] = m_clipbox.ymax;
-	sm::vec2 c_sz = items_sprite.GetBounding()->GetSize().Size();
+	sm::vec2 c_sz = items_sprite->GetBounding()->GetSize().Size();
 	value["children"]["w"] = c_sz.x;
 	value["children"]["h"] = c_sz.y;
 	Json::StyledStreamWriter writer;

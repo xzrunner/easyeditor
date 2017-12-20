@@ -22,7 +22,7 @@ public:
 	virtual ChainShape* Clone() const override { return new ChainShape(*this); }
 	virtual bool IsContain(const sm::vec2& pos) const override { return s2::PolylineShape::IsContain(pos); }
 	virtual bool IsIntersect(const sm::rect& rect) const override { return s2::PolylineShape::IsIntersect(rect); }
-	virtual void Draw(const s2::RenderParams& rp) const override;
+	virtual void Draw(cooking::DisplayList* dlist, const s2::RenderParams& rp) const override;
 
 	/**
 	 *  @interface

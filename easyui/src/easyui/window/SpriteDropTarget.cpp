@@ -13,6 +13,8 @@
 
 #include <easytext.h>
 
+#include <sprite2/SymType.h>
+
 namespace eui
 {
 namespace window
@@ -32,13 +34,13 @@ bool SpriteDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& data)
 
 	int index;
 	ee::StringHelper::FromString(sIndex, index);
-	ee::Symbol* sym = m_library->GetSymbol(index);
+	auto sym = m_library->GetSymbol(index);
 	if (!sym) {
 		return true;
 	}
 
-	if (dynamic_cast<ee::ImageSymbol*>(sym) != NULL ||
-		dynamic_cast<etext::Symbol*>(sym) != NULL) {
+	int type = sym->Type();
+	if (type == s2::SYM_IMAGE || type == s2::SYM_TEXTBOX) {
 		wxMessageBox("Shouldn't use image or text symbol in ui window!");
 		return true;
 	}

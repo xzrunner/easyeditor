@@ -52,13 +52,13 @@ bool MoveSpriteCenterState::OnMouseDrag(const sm::vec2& pos)
 
 	m_dirty = true;
 
-	const std::shared_ptr<ecomplex::Symbol>& sym = std::dynamic_pointer_cast<const ecomplex::Symbol>>(m_spr->GetSymbol());
+	auto& sym = std::dynamic_pointer_cast<ecomplex::Symbol>(m_spr->GetSymbol());
 	auto& children = sym->GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
 		children[i]->Translate(-offset);
 	}
 
-	ecomplex::FileStorer::Store(sym->GetFilepath(), sym, ee::FileHelper::GetFileDir(sym->GetFilepath()));
+	ecomplex::FileStorer::Store(sym->GetFilepath(), *sym, ee::FileHelper::GetFileDir(sym->GetFilepath()));
 
 	return true;
 }

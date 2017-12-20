@@ -37,7 +37,7 @@ void StageCanvas::OnDrawSprites() const
 
 	m_stage->TraverseSprites(ee::DrawSpritesVisitor(GetVisibleRegion(), GetCameraScale()), ee::DT_VISIBLE);
 
-	m_stage->GetSymbol()->Draw(s2::RenderParams());
+	m_stage->GetSymbol()->DrawTree(nullptr, s2::RenderParams());
 
 	m_stage->DrawEditOP();
 }

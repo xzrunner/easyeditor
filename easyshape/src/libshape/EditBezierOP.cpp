@@ -207,7 +207,7 @@ bool EditBezierOP::OnDraw() const
 		if (m_first_pos.IsValid() && m_curr_pos.IsValid())
 		{
 			BezierShape bezier(m_first_pos, m_curr_pos);
-			bezier.Draw(s2::RenderParams());
+			bezier.Draw(nullptr, s2::RenderParams());
 		}
 	}
 

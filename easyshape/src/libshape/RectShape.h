@@ -23,7 +23,7 @@ public:
 	virtual RectShape* Clone() const override { return new RectShape(*this); }
 	virtual bool IsContain(const sm::vec2& pos) const override { return s2::RectShape::IsContain(pos); }
 	virtual bool IsIntersect(const sm::rect& rect) const override { return s2::RectShape::IsIntersect(rect); }
-	virtual void Draw(const s2::RenderParams& rp) const override { s2::RectShape::Draw(rp); }
+	virtual void Draw(cooking::DisplayList* dlist, const s2::RenderParams& rp) const override { s2::RectShape::Draw(dlist, rp); }
 
 	/**
 	 *  @interface

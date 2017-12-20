@@ -22,7 +22,7 @@ public:
 	virtual CircleShape* Clone() const override { return new CircleShape(*this); }
 	virtual bool IsContain(const sm::vec2& pos) const override { return s2::CircleShape::IsContain(pos); }
 	virtual bool IsIntersect(const sm::rect& rect) const override { return s2::CircleShape::IsIntersect(rect); }
-	virtual void Draw(const s2::RenderParams& rp) const override { s2::CircleShape::Draw(rp); }
+	virtual void Draw(cooking::DisplayList* dlist, const s2::RenderParams& rp) const override { s2::CircleShape::Draw(dlist, rp); }
 
 	/**
 	 *  @interface

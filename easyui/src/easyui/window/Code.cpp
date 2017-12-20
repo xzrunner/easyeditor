@@ -36,7 +36,7 @@ void Code::ResolveUI(const std::vector<ee::SprPtr>& sprs)
 {
 	ebuilder::CodeGenerator *gen_init = new ebuilder::CodeGenerator(), 
 		*gen_path = new ebuilder::CodeGenerator();
-	std::vector<std::pair<std::string, std::string> > text_nodes;
+	std::vector<std::pair<CU_STR, CU_STR> > text_nodes;
 	{
 		lua::Function func(*gen_path, "ui:_init_path", 0);
 
@@ -53,30 +53,30 @@ void Code::ResolveUI(const std::vector<ee::SprPtr>& sprs)
 			Node parent = buffer.front(); buffer.pop();
 			const ee::SprConstPtr& spr = parent.spr;
 	
-			std::string spr_name;
+			CU_STR spr_name;
 			s2::SprNameMap::Instance()->IDToStr(spr->GetName(), spr_name);
 			if (spr_name.empty() || spr_name[0] == '_') {
 				continue;
 			}
 
-			std::string path, name;
+			CU_STR path, name;
 			if (parent.path.empty()) {
 				path = spr_name;
 				name = spr_name;
 			} else {
-				path = parent.path + "." + spr_name;
-				name = parent.name + "_" + spr_name;
+				path = CU_STR(parent.path.c_str()) + "." + spr_name;
+				name = CU_STR(parent.name.c_str()) + "_" + spr_name;
 			}
 
-			gen_path->line(lua::assign("path."+name, "\""+path+"\""));
+			gen_path->line(lua::assign(("path."+name).c_str(), "\""+path+"\""));
 
-			if (const ee::FontBlankSprite* s = dynamic_cast<const ee::FontBlankSprite*>(spr))
+			if (auto s = std::dynamic_pointer_cast<const ee::FontBlankSprite>(spr))
 			{
-				text_nodes.push_back(std::make_pair("path."+name, "i18n."+s->GetTextID()));
+				text_nodes.push_back(std::make_pair("path."+name, "i18n."+ CU_STR(s->GetTextID().c_str())));
 			}
-			else if (const std::shared_ptr<ecomplex::Sprite>& e_spr = std::dynamic_pointer_cast<const ecomplex::Sprite>>(spr)) 
+			else if (auto e_spr = std::dynamic_pointer_cast<const ecomplex::Sprite>(spr)) 
 			{
-				auto& children = dynamic_cast<const s2::ComplexSymbol*>(e_spr->GetSymbol())->GetAllChildren();
+				auto& children = std::dynamic_pointer_cast<const s2::ComplexSymbol>(e_spr->GetSymbol())->GetAllChildren();
 				for (int i = 0, n = children.size(); i < n; ++i) {
 					auto child = std::dynamic_pointer_cast<ee::Sprite>(children[i]);
 					Node node(child, "");
@@ -94,8 +94,8 @@ void Code::ResolveUI(const std::vector<ee::SprPtr>& sprs)
 		gen_init->line();
 		for (int i = 0, n = text_nodes.size(); i < n; ++i)
 		{
-			const std::pair<std::string, std::string>& text = text_nodes[i];
-			gen_init->line(lua::assign(text.first, text.second));
+			auto& text = text_nodes[i];
+			gen_init->line(lua::assign(text.first.c_str(), text.second.c_str()));
 		}
 	}
 
@@ -115,13 +115,13 @@ void Code::ResolveText(const std::vector<ee::SprPtr>& sprs)
  	{
 		auto& spr = buffer.front(); buffer.pop();
 
-		std::string name;
+		CU_STR name;
 		s2::SprNameMap::Instance()->IDToStr(spr->GetName(), name);
 		if (name.empty() || name[0] == '_') {
 			continue;
 		}
 
-		if (ee::FontBlankSprite* s = std::dynamic_pointer_cast<ee::FontBlankSprite>(spr))
+		if (auto s = std::dynamic_pointer_cast<ee::FontBlankSprite>(spr))
 		{
 			std::string content = s->GetTextContext();
 			size_t pos = 0;
@@ -133,9 +133,9 @@ void Code::ResolveText(const std::vector<ee::SprPtr>& sprs)
 
 			m_gen.line(lua::assign("[\""+s->GetTextID()+"\"]", "\""+content+"\","));
 		}
-		else if (ecomplex::Sprite* e_spr = std::dynamic_pointer_cast<ecomplex::Sprite>(spr)) 
+		else if (auto e_spr = std::dynamic_pointer_cast<ecomplex::Sprite>(spr)) 
 		{
-			auto& children = dynamic_cast<const s2::ComplexSymbol*>(e_spr->GetSymbol())->GetAllChildren();
+			auto& children = std::dynamic_pointer_cast<const s2::ComplexSymbol>(e_spr->GetSymbol())->GetAllChildren();
 			for (int i = 0, n = children.size(); i < n; ++i) {
 				auto child = std::dynamic_pointer_cast<ee::Sprite>(children[i]);
 				buffer.push(child);

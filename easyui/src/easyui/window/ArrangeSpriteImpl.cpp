@@ -37,10 +37,10 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(StagePanel* stage, ee::PropertySettingPanel
 void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 {
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
-	ecomplex::Sprite* complex = std::dynamic_pointer_cast<ecomplex::Sprite>(m_selected);
+	auto complex = std::dynamic_pointer_cast<ecomplex::Sprite>(m_selected);
 	if (complex && sm::dis_pos_to_pos(pos, m_selected->GetPosition()) < m_center_node_radius) {
 		m_move_center = true;
-		ChangeOPState(new MoveSpriteCenterState(complex, pos));		
+		ChangeOPState(new MoveSpriteCenterState(complex.get(), pos));		
 	} else {
 		ee::ArrangeSpriteImpl::OnMouseLeftDown(x, y);
 	}

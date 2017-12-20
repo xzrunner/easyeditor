@@ -39,7 +39,7 @@ s2::RenderReturn Symbol::DrawTree(cooking::DisplayList* dlist, const s2::RenderP
 	if (ee::Config::Instance()->GetSettings().visible_shape)
 	{
 		for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
-			m_bg_outline[i]->Draw(p);
+			m_bg_outline[i]->Draw(dlist, p);
 		}
 		s2::ShapeSymbol::DrawTree(nullptr, rp, spr);
 	}

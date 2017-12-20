@@ -29,9 +29,9 @@ ChainShape::ChainShape(const CU_VEC<sm::vec2>& vertices, bool closed)
 {
 }
 
-void ChainShape::Draw(const s2::RenderParams& rp) const
+void ChainShape::Draw(cooking::DisplayList* dlist, const s2::RenderParams& rp) const
 {
-	s2::PolylineShape::Draw(rp);
+	s2::PolylineShape::Draw(dlist, rp);
 
 	if (m_draw_dir && m_vertices.size() >= 2) {
 		s2::RVG::Arrow(m_vertices[m_vertices.size() - 2], m_vertices[m_vertices.size() - 1]);
