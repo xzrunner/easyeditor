@@ -6,6 +6,8 @@
 
 #include <cu/cu_stl.h>
 #include <gum/StringHelper.h>
+#include <playdb/storage/DiskStorageManager.h>
+#include <playdb/btree/BTree.h>
 
 #include <fstream>
 
@@ -43,7 +45,9 @@ int PackLanguageTable::Run(int argc, char *argv[])
 void PackLanguageTable::Trigger(const std::string& src_file, const std::string& dst_file)
 {
 	LoadFromCSV(src_file);
-	PackToBin(dst_file);
+
+//	PackToBin(dst_file);
+	PackToPlayDB(dst_file);
 }
 
 void PackLanguageTable::LoadFromCSV(const std::string& filepath)
@@ -130,6 +134,33 @@ void PackLanguageTable::PackToBin(const std::string& filepath)
 	}
 	delete[] buf;
 	fout.close();
+}
+
+void PackLanguageTable::PackToPlayDB(const std::string& filepath)
+{
+	auto storage_mgr = std::make_unique<playdb::storage::DiskStorageManager>(
+		filepath + ".idx", filepath + ".dat", true, 4096);
+	playdb::btree::BTree<std::string> tree(storage_mgr.get(), 25);
+
+	for (auto& entry : m_body)
+	{
+		size_t len = 0;
+		len += sizeof(uint8_t);
+		for (int i = 1, n = entry.size(); i < n; ++i) {
+			len += esprpacker::sizeof_pack_long_str(entry[i].c_str());
+		}
+
+		uint8_t* data = new uint8_t[len];
+		uint8_t* ptr = data;
+
+		uint8_t sz = entry.size() - 1;
+		esprpacker::pack(sz, &ptr);
+		for (int i = 1, n = entry.size(); i < n; ++i) {
+			esprpacker::pack_long_str(entry[i].c_str(), &ptr);
+		}
+
+		tree.InsertData(entry[0].c_str(), len, data);
+	}
 }
 
 }

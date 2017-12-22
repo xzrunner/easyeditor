@@ -27,7 +27,10 @@ private:
 	void Trigger(const std::string& src_file, const std::string& dst_file);
 
 	void LoadFromCSV(const std::string& filepath);
+
 	void PackToBin(const std::string& filepath);
+
+	void PackToPlayDB(const std::string& filepath);
 
 private:
 	CU_VEC<CU_STR> m_header;
