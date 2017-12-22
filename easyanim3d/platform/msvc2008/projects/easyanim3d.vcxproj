@@ -15,6 +15,7 @@
     <ProjectGuid>{0963327C-D73A-45EF-914A-563F4EF4F94B}</ProjectGuid>
     <RootNamespace>easyanim3d</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

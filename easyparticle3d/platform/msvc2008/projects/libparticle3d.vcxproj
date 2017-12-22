@@ -15,6 +15,7 @@
     <ProjectGuid>{B2E0DE06-ACE8-4C69-8966-C81ED5686FCA}</ProjectGuid>
     <RootNamespace>libparticle3d</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

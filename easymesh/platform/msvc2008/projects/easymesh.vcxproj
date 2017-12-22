@@ -15,6 +15,7 @@
     <ProjectGuid>{EAD5B5DF-3249-4935-8351-D4A69C4F1B51}</ProjectGuid>
     <RootNamespace>easymesh</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

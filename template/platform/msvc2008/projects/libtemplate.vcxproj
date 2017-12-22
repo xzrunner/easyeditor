@@ -15,6 +15,7 @@
     <ProjectGuid>{02A5FE18-62B6-4471-953C-1650CBD6C34C}</ProjectGuid>
     <RootNamespace>libtemplate</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

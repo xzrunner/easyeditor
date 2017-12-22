@@ -15,6 +15,7 @@
     <ProjectGuid>{75D71727-132D-4BA3-A770-30F6EF459C76}</ProjectGuid>
     <RootNamespace>epbin</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

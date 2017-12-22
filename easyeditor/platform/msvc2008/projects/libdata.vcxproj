@@ -15,6 +15,7 @@
     <ProjectGuid>{77E15C91-F70B-4141-A0FC-4E82D1C43BD2}</ProjectGuid>
     <RootNamespace>libdata</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

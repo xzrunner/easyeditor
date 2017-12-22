@@ -15,6 +15,7 @@
     <ProjectGuid>{9A0DFD2A-E637-4D0E-9A60-79E4EBEE51AC}</ProjectGuid>
     <RootNamespace>easyicon</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

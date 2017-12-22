@@ -15,6 +15,7 @@
     <ProjectGuid>{584F5852-C8C5-4381-8FE5-D0E76FB81B51}</ProjectGuid>
     <RootNamespace>libsketch</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

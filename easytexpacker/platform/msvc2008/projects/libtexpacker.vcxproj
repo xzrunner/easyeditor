@@ -15,6 +15,7 @@
     <ProjectGuid>{E66ECF2B-05F4-42CC-91B2-B6F8604CA1A8}</ProjectGuid>
     <RootNamespace>libtexpacker</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

@@ -15,6 +15,7 @@
     <ProjectGuid>{908B8FCC-3F78-4F8B-9663-0A45623442F4}</ProjectGuid>
     <RootNamespace>easyscale9</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

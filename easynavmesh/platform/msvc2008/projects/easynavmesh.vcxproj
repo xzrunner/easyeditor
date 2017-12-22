@@ -15,6 +15,7 @@
     <ProjectGuid>{CB6FA53D-C366-4718-906A-A52F6A47436E}</ProjectGuid>
     <RootNamespace>easynavmesh</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

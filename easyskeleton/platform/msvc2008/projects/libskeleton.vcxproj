@@ -15,6 +15,7 @@
     <ProjectGuid>{0A0F323F-D04E-44A6-9784-C1947AC38DA8}</ProjectGuid>
     <RootNamespace>libskeleton</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

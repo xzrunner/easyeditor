@@ -15,6 +15,7 @@
     <ProjectGuid>{9DC03BCC-3C8C-4BB8-8811-336F295DF7E2}</ProjectGuid>
     <RootNamespace>libmesh</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

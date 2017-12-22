@@ -15,6 +15,7 @@
     <ProjectGuid>{CE164EA1-E9BD-4BEB-88F0-41A2BA6DAB2F}</ProjectGuid>
     <RootNamespace>libui</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

@@ -15,6 +15,7 @@
     <ProjectGuid>{FCA6AAA8-4181-44CB-8AEE-9121EF2C35D3}</ProjectGuid>
     <RootNamespace>cocpackage</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

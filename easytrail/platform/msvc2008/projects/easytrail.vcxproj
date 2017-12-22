@@ -15,6 +15,7 @@
     <ProjectGuid>{105EEFDC-A8AF-435C-A0CB-A2636850CCB0}</ProjectGuid>
     <RootNamespace>easytrail</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

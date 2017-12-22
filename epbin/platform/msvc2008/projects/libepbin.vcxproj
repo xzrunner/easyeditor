@@ -15,6 +15,7 @@
     <ProjectGuid>{AAD82BAC-510C-4571-A420-5AE5EE7E29D6}</ProjectGuid>
     <RootNamespace>libepbin</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

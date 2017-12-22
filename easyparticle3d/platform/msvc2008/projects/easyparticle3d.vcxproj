@@ -15,6 +15,7 @@
     <ProjectGuid>{9BEDF205-2842-42B4-9B95-7C0C4D5A34D7}</ProjectGuid>
     <RootNamespace>easyparticle3d</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

@@ -15,6 +15,7 @@
     <ProjectGuid>{E1CFC0B9-F8A8-4F14-930A-E88A436FC038}</ProjectGuid>
     <RootNamespace>libanim</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

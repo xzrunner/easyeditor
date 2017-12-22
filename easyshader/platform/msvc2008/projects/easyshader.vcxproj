@@ -15,6 +15,7 @@
     <ProjectGuid>{DA5638BA-C581-4E52-95ED-3BF6DEEF9B12}</ProjectGuid>
     <RootNamespace>easyshader</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

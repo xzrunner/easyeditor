@@ -15,6 +15,7 @@
     <ProjectGuid>{01DD105B-A599-4BC3-9EF8-C54C8800979F}</ProjectGuid>
     <RootNamespace>drect</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

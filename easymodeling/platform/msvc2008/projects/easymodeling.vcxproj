@@ -15,6 +15,7 @@
     <ProjectGuid>{753CFBD6-4C2A-43F9-9453-B1BE89FE1EEF}</ProjectGuid>
     <RootNamespace>easymodeling</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

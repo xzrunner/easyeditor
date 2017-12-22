@@ -15,6 +15,7 @@
     <ProjectGuid>{FF2D4A3A-86BA-47C0-AF4E-3264619B2F46}</ProjectGuid>
     <RootNamespace>easysketch</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

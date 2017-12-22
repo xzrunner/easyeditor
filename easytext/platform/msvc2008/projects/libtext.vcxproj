@@ -15,6 +15,7 @@
     <ProjectGuid>{FC9B43D6-8D2B-4D57-A976-9379F87A366C}</ProjectGuid>
     <RootNamespace>libtext</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

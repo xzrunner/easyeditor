@@ -15,6 +15,7 @@
     <ProjectGuid>{C839A952-9F01-48D5-9649-BCAE9AA758F8}</ProjectGuid>
     <RootNamespace>libshadow</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

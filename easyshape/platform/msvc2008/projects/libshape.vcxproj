@@ -15,6 +15,7 @@
     <ProjectGuid>{C1A2E85C-CF62-46A9-B46C-DFA12EC725E7}</ProjectGuid>
     <RootNamespace>libshape</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

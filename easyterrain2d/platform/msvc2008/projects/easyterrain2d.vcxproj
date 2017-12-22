@@ -15,6 +15,7 @@
     <ProjectGuid>{97438907-CD84-4E01-BF7F-3614A6F0C231}</ProjectGuid>
     <RootNamespace>easyterrain2d</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

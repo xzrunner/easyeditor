@@ -15,6 +15,7 @@
     <ProjectGuid>{42650DAA-2F0F-40B9-BCF8-BBA4839C712C}</ProjectGuid>
     <RootNamespace>easypseudo3d</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

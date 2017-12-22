@@ -15,6 +15,7 @@
     <ProjectGuid>{A9FB8F26-50DE-43E1-B6E9-4264EA4A9A8F}</ProjectGuid>
     <RootNamespace>easytexpacker</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

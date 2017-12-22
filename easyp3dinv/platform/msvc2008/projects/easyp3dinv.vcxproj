@@ -15,6 +15,7 @@
     <ProjectGuid>{842597BE-1418-44CF-91EE-819E94B96D08}</ProjectGuid>
     <RootNamespace>easyp3dinv</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
