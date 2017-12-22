@@ -100,3 +100,6 @@
 [submodule "memmgr"]
 	path = memmgr
 	url = ssh://git@tea.ejoy.com:3222/LR/memmgr.git
+[submodule "playdb"]
+	path = playdb
+	url = ssh://git@tea.ejoy.com:3222/LR/playdb.git
