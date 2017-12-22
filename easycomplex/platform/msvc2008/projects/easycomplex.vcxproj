@@ -231,10 +231,6 @@
       <Project>{c1a2e85c-cf62-46a9-b46c-dfa12ec725e7}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\easyskeleton\platform\msvc2008\projects\libskeleton.vcxproj">
-      <Project>{0a0f323f-d04e-44a6-9784-c1947ac38da8}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\..\easysprpacker\platform\msvc2008\projects\libsprpacker.vcxproj">
       <Project>{0adaef1c-2094-4a6f-84e9-3ca0684b7824}</Project>
     </ProjectReference>

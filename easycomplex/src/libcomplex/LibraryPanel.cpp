@@ -45,7 +45,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	AddPage(new emask::LibraryPage(nb));
 	AddPage(new eshape::LibraryPage(nb));
 	AddPage(new eicon::LibraryPage(nb));
-	AddPage(new libskeleton::LibraryPage(nb));
+//	AddPage(new libskeleton::LibraryPage(nb));
 	AddPage(new eaudio::LibraryPage(nb));
 
 	AddPage(new ee::LibraryFontBlankPage(nb));

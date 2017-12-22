@@ -118,11 +118,11 @@ void OpenSymbolDialog::Open(const ee::SprPtr& spr, ee::CrossGuides* guides)
 	//	eterrain2d::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), terr, m_sprites_impl);
 	//	dlg.ShowModal();
 	//} 
-	else if (auto skeleton = std::dynamic_pointer_cast<libskeleton::Sprite>(spr)) 
-	{
-		libskeleton::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), skeleton);
-		dlg.ShowModal();
-	}
+	//else if (auto skeleton = std::dynamic_pointer_cast<libskeleton::Sprite>(spr)) 
+	//{
+	//	libskeleton::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), skeleton);
+	//	dlg.ShowModal();
+	//}
 	else if (auto shape = std::dynamic_pointer_cast<eshape::Sprite>(spr))
 	{
 		eshape::EditDialogSimple dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), shape, m_sprites_impl);
