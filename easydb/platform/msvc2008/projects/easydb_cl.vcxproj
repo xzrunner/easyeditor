@@ -297,6 +297,9 @@
       <Project>{5ae91e72-1c23-4913-bea9-1fe795c570f5}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\playdb\platform\msvc2017\projects\playdb.vcxproj">
+      <Project>{e421cc5f-0909-4f8d-8e9a-bcb52e0e8350}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\polymesh\platform\msvc2008\projects\polymesh.vcxproj">
       <Project>{748f2e41-4c8f-4c0f-a90a-26eca6741a34}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>

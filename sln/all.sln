@@ -223,6 +223,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.cooking", "..\cooking\pla
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.memmgr", "..\memmgr\platform\msvc2008\projects\memmgr.vcxproj", "{5FFA0DE4-1489-4267-8A79-52DECC2D0351}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.playdb", "..\playdb\platform\msvc2017\projects\playdb.vcxproj", "{E421CC5F-0909-4F8D-8E9A-BCB52E0E8350}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -669,6 +671,10 @@ Global
 		{5FFA0DE4-1489-4267-8A79-52DECC2D0351}.Debug|Win32.Build.0 = Debug|Win32
 		{5FFA0DE4-1489-4267-8A79-52DECC2D0351}.Release|Win32.ActiveCfg = Release|Win32
 		{5FFA0DE4-1489-4267-8A79-52DECC2D0351}.Release|Win32.Build.0 = Release|Win32
+		{E421CC5F-0909-4F8D-8E9A-BCB52E0E8350}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E421CC5F-0909-4F8D-8E9A-BCB52E0E8350}.Debug|Win32.Build.0 = Debug|Win32
+		{E421CC5F-0909-4F8D-8E9A-BCB52E0E8350}.Release|Win32.ActiveCfg = Release|Win32
+		{E421CC5F-0909-4F8D-8E9A-BCB52E0E8350}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
