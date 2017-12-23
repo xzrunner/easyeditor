@@ -24,7 +24,7 @@ Config::Config()
 	m_use_dtex = true;
 	m_use_render = true;
 
-	m_debug_draw = true;
+	m_debug_draw = false;
 
 	m_draw_stat = false;
 
