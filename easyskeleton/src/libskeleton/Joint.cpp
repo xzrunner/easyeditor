@@ -23,12 +23,12 @@ void Joint::DrawSkeleton(const s2::RenderParams& params, bool selected) const
 {
 	if (selected) {
 		s2::RVG::SetColor(s2::Color(204, 51, 51, 128));
-		s2::RVG::Circle(params.mt * m_world_pose.trans, RADIUS, true);
+		s2::RVG::Circle(nullptr, params.mt * m_world_pose.trans, RADIUS, true);
 	} else {
 		s2::RVG::SetColor(s2::Color(51, 204, 51, 128));
-		s2::RVG::Circle(params.mt * m_world_pose.trans, RADIUS, true);
+		s2::RVG::Circle(nullptr, params.mt * m_world_pose.trans, RADIUS, true);
 		s2::RVG::SetColor(s2::Color(204, 51, 51, 128));
-		s2::RVG::Circle(params.mt * m_world_pose.trans, RADIUS, false);
+		s2::RVG::Circle(nullptr, params.mt * m_world_pose.trans, RADIUS, false);
 	}
 
 	if (m_parent.lock() && m_skin.spr)
@@ -43,10 +43,10 @@ void Joint::DrawSkeleton(const s2::RenderParams& params, bool selected) const
 
 		if (!selected) {
 			s2::RVG::SetColor(s2::Color(204, 51, 51, 128));
-			s2::RVG::Line(s, left);
-			s2::RVG::Line(left, e);
-			s2::RVG::Line(e, right);
-			s2::RVG::Line(right, s);
+			s2::RVG::Line(nullptr, s, left);
+			s2::RVG::Line(nullptr, left, e);
+			s2::RVG::Line(nullptr, e, right);
+			s2::RVG::Line(nullptr, right, s);
 		}
 
 		if (selected) {
@@ -59,11 +59,11 @@ void Joint::DrawSkeleton(const s2::RenderParams& params, bool selected) const
 		face.push_back(left);
 		face.push_back(right);
 		face.push_back(e);
-		s2::RVG::TriangleStrip(face);
+		s2::RVG::TriangleStrip(nullptr, face);
 	}
 	else
 	{
-		s2::RVG::Cross(params.mt * m_world_pose.trans, 50, 50);
+		s2::RVG::Cross(nullptr, params.mt * m_world_pose.trans, 50, 50);
 	}
 
 	// fix me
