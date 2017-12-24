@@ -3,6 +3,7 @@
 
 #include <SM_Vector.h>
 #include <sprite2/Color.h>
+#include <cu/cu_stl.h>
 
 #include <Box2D/Box2D.h>
 
@@ -37,7 +38,7 @@ public:
 private:
 	sm::vec2 TransVertex(const b2Vec2& vertex) const;
 
-	void TransVertices(const b2Vec2* src, int count, std::vector<sm::vec2>& dst) const;
+	void TransVertices(const b2Vec2* src, int count, CU_VEC<sm::vec2>& dst) const;
 
 	s2::Color TransColor(const b2Color& col, float alpha = 1) const;
 

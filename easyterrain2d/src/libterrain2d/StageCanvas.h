@@ -2,8 +2,9 @@
 #define _EASYTERRAIN2D_STAGE_CANVAS_H_
 
 #include <ee/CameraCanvas.h>
+#include <ee/Sprite.h>
 
-namespace ee { class Sprite; class MultiSpritesImpl; }
+namespace ee { class MultiSpritesImpl; }
 
 namespace eterrain2d
 {
