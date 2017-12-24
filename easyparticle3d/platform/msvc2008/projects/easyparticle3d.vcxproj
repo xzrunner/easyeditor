@@ -15,7 +15,7 @@
     <ProjectGuid>{9BEDF205-2842-42B4-9B95-7C0C4D5A34D7}</ProjectGuid>
     <RootNamespace>easyparticle3d</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -55,7 +55,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\easyeditor\include;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easybuilder\src;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easytrail\src;..\..\..\..\easymask\src;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\particle\src;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\easyeditor\include;..\..\..\..\ds\src\ds;..\..\..\..\easybuilder\src;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easytrail\src;..\..\..\..\easymask\src;..\..\..\..\memmgr\include;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\particle\src;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -81,7 +81,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\easyeditor\include;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easybuilder\src;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easytrail\src;..\..\..\..\easymask\src;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\particle\src;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\easyeditor\include;..\..\..\..\ds\src\ds;..\..\..\..\easybuilder\src;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easytrail\src;..\..\..\..\easymask\src;..\..\..\..\memmgr\include;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\particle\src;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -121,9 +121,24 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\bimp\platform\msvc2008\projects\bimp.vcxproj">
+      <Project>{f22a86e7-b73f-4f6a-9ea8-e4ae9cc9d885}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\camera25\platform\msvc2008\projects\camera25.vcxproj">
+      <Project>{510eaacb-b026-43f3-a68d-3ec421e46dd0}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\coceditor\platform\msvc2008\projects\libcoco.vcxproj">
       <Project>{1c3b5344-2217-44f5-b5f0-a551b7b5ab38}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\cooking\platform\msvc2008\projects\cooking.vcxproj">
+      <Project>{4eee80e8-662f-4ec2-a19b-68b1d7f8c46f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\ds\platform\msvc2008\projects\ds.vcxproj">
+      <Project>{e6044d31-8304-4854-99ac-cbef18b9e7d3}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\dtex2\platform\msvc2008\projects\dtex2.vcxproj">
+      <Project>{a502c49c-7014-4d77-8bd9-b3f917ad34b0}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\easyanim\platform\msvc2008\projects\libanim.vcxproj">
       <Project>{e1cfc0b9-f8a8-4f14-930a-e88a436fc038}</Project>
@@ -155,10 +170,6 @@
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc2008\projects\libmsg.vcxproj">
       <Project>{d4baa61e-9918-4f72-b772-88afd4ee76bc}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc2008\projects\libphysics.vcxproj">
-      <Project>{126f1aa2-182e-4f85-b77e-aab86c6e2fb6}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc2008\projects\librender.vcxproj">
@@ -205,10 +216,6 @@
       <Project>{c1a2e85c-cf62-46a9-b46c-dfa12ec725e7}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\easyterrain2d\platform\msvc2008\projects\libterrain2d.vcxproj">
-      <Project>{716758a5-f6cf-4294-88b2-29c9950304af}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\..\easytext\platform\msvc2008\projects\libtext.vcxproj">
       <Project>{fc9b43d6-8d2b-4d57-a976-9379f87a366c}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
@@ -221,9 +228,21 @@
       <Project>{aad82bac-510c-4571-a420-5ae5ee7e29d6}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\flatten\platform\msvc2008\projects\flatten.vcxproj">
+      <Project>{26016761-3f64-45e4-aa37-ddd8714fb159}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\fs\platform\msvc2008\projects\fs.vcxproj">
       <Project>{09c39b9e-27f5-4b39-9829-2815fd1c5469}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\gimg\platform\msvc2008\projects\gimg.vcxproj">
+      <Project>{d1acc0be-3a2b-450f-a708-f3e84df5e5ad}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\glp\platform\msvc2008\projects\glp.vcxproj">
+      <Project>{ca120fa2-89a7-4957-a4a5-4746972aa39f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\gtxt\platform\msvc2008\projects\gtxt.vcxproj">
+      <Project>{eb4f1ee0-cb3b-4b2e-9655-a8e22f948575}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\gum\platform\msvc2008\projects\gum.vcxproj">
       <Project>{70c5478d-6d53-4f75-99d4-f06373175c83}</Project>
@@ -232,6 +251,12 @@
     <ProjectReference Include="..\..\..\..\logger\platform\msvc2008\projects\logger.vcxproj">
       <Project>{4031b66e-39a3-401e-918a-e1424a4af944}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\memmgr\platform\msvc2008\projects\memmgr.vcxproj">
+      <Project>{5ffa0de4-1489-4267-8a79-52decc2d0351}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\mtrail\platform\msvc2008\projects\mtrail.vcxproj">
+      <Project>{a9854fd8-f2e4-4b5a-8c15-d3c661dd4def}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\multitask\platform\msvc2008\projects\multitask.vcxproj">
       <Project>{6728bb94-9882-4804-87d3-ce9ceb62fdab}</Project>
@@ -245,13 +270,43 @@
       <Project>{5ae91e72-1c23-4913-bea9-1fe795c570f5}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\playdb\platform\msvc2017\projects\playdb.vcxproj">
+      <Project>{e421cc5f-0909-4f8d-8e9a-bcb52e0e8350}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\polymesh\platform\msvc2008\projects\polymesh.vcxproj">
       <Project>{748f2e41-4c8f-4c0f-a90a-26eca6741a34}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\rapidvg\platform\msvc2008\projects\rapidvg.vcxproj">
+      <Project>{66207e9a-031c-402b-9e3e-fa5599a1c89b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\rigging\platform\msvc2008\projects\rigging.vcxproj">
+      <Project>{dbe6d3f5-4e3d-4df8-b520-a27bce5a5d21}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\shaderlab\platform\msvc2008\projects\shaderlab.vcxproj">
+      <Project>{5c357759-ca95-42e1-b907-dfb87a995f6c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\simp\platform\msvc2008\projects\simp.vcxproj">
+      <Project>{d19b530f-a257-4465-a92c-381e91b47746}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\sm\platform\msvc2008\projects\sm.vcxproj">
+      <Project>{81630e0d-e1ef-4837-a0ee-30435ed4fe59}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\sprite2\platform\msvc2008\projects\sprite2.vcxproj">
+      <Project>{ccdd6dc3-9da2-4215-bac6-6031699fb7e4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\texpack\platform\msvc2008\projects\texpack.vcxproj">
+      <Project>{a7737c76-5221-47a5-86b7-84bd56c47730}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\timp\platform\msvc2008\projects\timp.vcxproj">
+      <Project>{27824966-6c3c-4874-abff-499ddddb4d48}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\uniaudio\platform\msvc2008\projects\uniaudio.vcxproj">
       <Project>{fdb8a0eb-d438-43b4-b65f-ff1b80a9d45b}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\unirender\platform\msvc2008\projects\unirender.vcxproj">
+      <Project>{637a0e9c-1867-459d-8611-65a064e3b2c2}</Project>
     </ProjectReference>
     <ProjectReference Include="libparticle3d.vcxproj">
       <Project>{b2e0de06-ace8-4c69-8966-c81ed5686fca}</Project>
