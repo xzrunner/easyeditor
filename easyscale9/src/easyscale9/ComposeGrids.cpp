@@ -20,7 +20,7 @@ void ComposeGrids::Draw()
 			p0.y = Y + EDGE*j;
 			sm::vec2 p1(p0.x + EDGE, p0.y + EDGE);
 			s2::RVG::SetColor(ee::LIGHT_GREY);
-			s2::RVG::Rect(p0, p1, false);
+			s2::RVG::Rect(nullptr, p0, p1, false);
 		}
 	}
 }

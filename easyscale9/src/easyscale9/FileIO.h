@@ -1,9 +1,11 @@
 #ifndef _EASYSCALE9_FILE_IO_H_
 #define _EASYSCALE9_FILE_IO_H_
 
+#include <ee/Sprite.h>
+
 #include <json/json.h>
 
-namespace ee { class LibraryPanel; class Sprite; class MultiSpritesImpl; }
+namespace ee { class LibraryPanel; class MultiSpritesImpl; }
 
 namespace escale9
 {

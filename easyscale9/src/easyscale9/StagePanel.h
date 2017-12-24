@@ -24,7 +24,7 @@ public:
 		ee::DataTraverseType type = ee::DT_ALL,
 		bool order = true) const override;
 
-	Symbol* getPatchSymbol() { return m_sym; }
+	std::shared_ptr<Symbol> getPatchSymbol() { return m_sym; }
 
  	ee::SprPtr getSprite(int row, int col);
 
@@ -47,7 +47,7 @@ private:
 	// 6 7 8
 	// 3 4 5
 	// 0 1 2
-	s2::Sprite* m_sprs[9];
+	s2::SprPtr m_sprs[9];
 
 	std::shared_ptr<Symbol> m_sym;
 

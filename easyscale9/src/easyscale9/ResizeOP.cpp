@@ -20,7 +20,7 @@ ResizeOP::ResizeOP(StagePanel* stage, ToolbarPanel* toolbar, ResizeCMPT* resizeC
 
 bool ResizeOP::OnMouseLeftDown(int x, int y)
 {
-	Symbol* sym = m_stage->getPatchSymbol();
+	auto sym = m_stage->getPatchSymbol();
 	if (!sym) return false;
 
 	escale9::ResizeBaseOP::setSymbol(sym);
@@ -29,7 +29,7 @@ bool ResizeOP::OnMouseLeftDown(int x, int y)
 
 bool ResizeOP::OnMouseLeftUp(int x, int y)
 {
-	Symbol* sym = m_stage->getPatchSymbol();
+	auto sym = m_stage->getPatchSymbol();
 	if (!sym) return false;
 
 	escale9::ResizeBaseOP::setSymbol(sym);
@@ -40,7 +40,7 @@ bool ResizeOP::OnMouseDrag(int x, int y)
 {
 	if (ee::ZoomViewOP::OnMouseDrag(x, y)) return true;
 
-	Symbol* sym = dynamic_cast<Symbol*>(m_stage->getPatchSymbol());
+	auto sym = std::dynamic_pointer_cast<Symbol>(m_stage->getPatchSymbol());
 	if (m_status != e_null && sym)
 	{
 		float width, height;
@@ -91,7 +91,7 @@ bool ResizeOP::OnActive()
 
 bool ResizeOP::OnDraw() const
 {
-	Symbol* sym = m_stage->getPatchSymbol();
+	auto sym = m_stage->getPatchSymbol();
 	if (!sym) return false;
 
 	escale9::ResizeBaseOP::setSymbol(sym);

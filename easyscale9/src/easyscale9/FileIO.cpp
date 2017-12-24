@@ -120,7 +120,7 @@ ee::SprPtr FileIO::Load(const Json::Value& value, const std::string& dir)
 	}
 
 	auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-	ee::SymbolSearcher::SetSymbolFilepaths(dir, sym, value);
+	ee::SymbolSearcher::SetSymbolFilepaths(dir, *sym, value);
 	auto spr = ee::SpriteFactory::Instance()->Create(sym);
 	spr->Load(value);
 
@@ -133,7 +133,7 @@ Json::Value FileIO::Store(const ee::SprPtr& spr, const std::string& dir)
 	const auto sym = std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol());
 
 	// filepath
-	value["filepath"] = ee::SymbolPath::GetRelativePath(sym, dir);
+	value["filepath"] = ee::SymbolPath::GetRelativePath(*sym, dir);
 	// filepaths
 	const std::set<std::string>& filepaths = sym->GetFilepaths();
 	std::set<std::string>::const_iterator itr = filepaths.begin();
@@ -152,7 +152,7 @@ Json::Value FileIO::StoreNew(const ee::SprPtr& spr, const std::string& dir)
 	const auto sym = std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol());
 
 	// filepath
-	value["filepath"] = ee::SymbolPath::GetRelativePath(sym, dir);
+	value["filepath"] = ee::SymbolPath::GetRelativePath(*sym, dir);
 	// filepaths
 	const std::set<std::string>& filepaths = sym->GetFilepaths();
 	std::set<std::string>::const_iterator itr = filepaths.begin();

@@ -63,12 +63,12 @@ void StagePanel::rebuildPatchSymbol()
 	}
 
 	if (!m_sym) {
-		m_sym = new Symbol;
+		m_sym = std::make_shared<Symbol>();
 	}
 
 	float width = m_toolbar->getWidth(),
 		  height = m_toolbar->getHeight();
-	s2::Scale9& s9 = const_cast<s2::Scale9&>(dynamic_cast<s2::Scale9Symbol*>(m_sym)->GetScale9());
+	s2::Scale9& s9 = const_cast<s2::Scale9&>(std::dynamic_pointer_cast<s2::Scale9Symbol>(m_sym)->GetScale9());
 	s9.Build(type, width, height, m_sprs, 0, 0, 0, 0);
 
 	m_toolbar->setSize(width, height);
@@ -110,9 +110,6 @@ void StagePanel::Insert(const ee::SprPtr& spr)
 		return;
 	}
 
-	if (m_sprs[row * 3 + col] && m_sprs[row * 3 + col] != spr) {
-		m_sprs[row * 3 + col]->RemoveReference();
-	}
 	m_sprs[row * 3 + col] = spr;
 
 	spr->SetPosition(ComposeGrids::GetGridCenter(col, row));
@@ -140,14 +137,10 @@ void StagePanel::Remove(const ee::SprPtr& spr)
 
 void StagePanel::Clear()
 {
-	for (int i = 0; i < 9; ++i) {
-		if (m_sprs[i]) {
-			m_sprs[i]->RemoveReference();
-		}
+	for (auto& spr : m_sprs) {
+		spr.reset();
 	}
-	memset(m_sprs, 0, sizeof(int) * 9);
-
-	delete m_sym, m_sym = NULL;
+	m_sym.reset();
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
