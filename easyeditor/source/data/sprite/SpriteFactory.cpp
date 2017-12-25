@@ -18,6 +18,7 @@
 #include <sprite2/ResetActorFlagVisitor.h>
 #include <sprite2/CreateActorsVisitor.h>
 #include <sprite2/SprVisitorParams.h>
+#include <sprite2/UpdateParams.h>
 #include <gum/SymbolFile.h>
 
 namespace ee
@@ -69,6 +70,8 @@ SprPtr SpriteFactory::Create(const SymPtr& sym)
 		spr->SetTag("[symbol]");
 	}
 
+	
+
 	return spr;
 }
 
@@ -114,6 +117,8 @@ SprPtr SpriteFactory::CreateRoot(const SymPtr& sym)
 
 	s2::CreateActorsVisitor v1;
 	spr->Traverse(v1, s2::SprVisitorParams());
+
+	spr->OnMessage(s2::UpdateParams(), s2::MSG_START);
 
 	return spr;
 }
