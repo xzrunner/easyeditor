@@ -12,20 +12,29 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\bsn\NodeImage.h">
+    <ClInclude Include="..\..\..\include\bsn.h" />
+    <ClInclude Include="..\..\..\include\bsn\ImageSpr.h">
       <Filter>node\01.image</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\bsn\NodeComplex.h">
+    <ClInclude Include="..\..\..\include\bsn\ComplexSym.h">
       <Filter>node\06.complex</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\bsn.h" />
+    <ClInclude Include="..\..\..\include\bsn\NodeSpr.h">
+      <Filter>node</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\bsn\NodeSym.h">
+      <Filter>node</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\source\NodeImage.cpp">
+    <ClCompile Include="..\..\..\source\ImageSpr.cpp">
       <Filter>node\01.image</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\NodeComplex.cpp">
+    <ClCompile Include="..\..\..\source\ComplexSym.cpp">
       <Filter>node\06.complex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\NodeSpr.cpp">
+      <Filter>node</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -12,12 +12,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\bsn.h" />
-    <ClInclude Include="..\..\..\include\bsn\NodeComplex.h" />
-    <ClInclude Include="..\..\..\include\bsn\NodeImage.h" />
+    <ClInclude Include="..\..\..\include\bsn\ComplexSym.h" />
+    <ClInclude Include="..\..\..\include\bsn\ImageSpr.h" />
+    <ClInclude Include="..\..\..\include\bsn\NodeSpr.h" />
+    <ClInclude Include="..\..\..\include\bsn\NodeSym.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\source\NodeComplex.cpp" />
-    <ClCompile Include="..\..\..\source\NodeImage.cpp" />
+    <ClCompile Include="..\..\..\source\ComplexSym.cpp" />
+    <ClCompile Include="..\..\..\source\ImageSpr.cpp" />
+    <ClCompile Include="..\..\..\source\NodeSpr.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>1.bsn</ProjectName>
@@ -62,7 +65,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\cu\src;..\..\..\..\bs\include;..\..\..\..\guard\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\cu\src;..\..\..\..\bs\include;..\..\..\..\guard\include;..\..\..\..\memmgr\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;LZMA_NEW;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -76,7 +79,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\cu\src;..\..\..\..\bs\include;..\..\..\..\guard\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\cu\src;..\..\..\..\bs\include;..\..\..\..\guard\include;..\..\..\..\memmgr\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;LZMA_NEW;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>

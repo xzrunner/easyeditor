@@ -4,22 +4,26 @@
 
 #include <string>
 
+namespace mm { class LinearAllocator; }
+namespace bs { class ImportStream; }
+namespace json { class Value; }
+
 namespace bsn
 {
 
 class NodeComplex : public INode
 {
 public:
-	NodeComplex(const std::string& filepath);
+	
+	size_t GetBinSize() const;
+	void   StoreToBin(byte** data, size_t& length) const;
 
-	//
-	// ISerializable interface
-	//
-	virtual size_t GetByteArraySize() const override;
-	virtual void LoadFromByteArray(const byte* data) override;
-	virtual void StoreToByteArray(byte** data, size_t& length) const override;
+	void StoreToJson() const;
 
-private:
+	static NodeComplex* Create(mm::LinearAllocator& alloc, bs::ImportStream& is);
+	static NodeComplex* Create(mm::LinearAllocator& alloc, json::Value& val);
+	
+public:
 
 
 }; // NodeComplex

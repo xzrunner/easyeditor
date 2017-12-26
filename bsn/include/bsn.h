@@ -5,23 +5,19 @@
 
 #include <stdint.h>
 
+namespace json { class Value; }
+
 namespace bsn
 {
 
 using byte = uint8_t;
 
-class ISerializable
+class INode : private cu::Uncopyable
 {
 public:
-	virtual size_t GetByteArraySize() const = 0;
-	virtual void LoadFromByteArray(const byte* data) = 0;
-	virtual void StoreToByteArray(byte** data, size_t& length) const = 0;
-	virtual ~ISerializable() {}
-}; // ISerializable
-
-class INode : private cu::Uncopyable, public ISerializable
-{
-public:
+	virtual size_t GetBinSize() const = 0;
+	virtual void StoreToBin(byte** data, size_t& length) const = 0;
+	virtual void StoreToJson(json::Value& val) const = 0;
 	virtual ~INode() {}
 }; // INode
 
