@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="node">
+      <UniqueIdentifier>{209191cd-7a2c-444c-9818-3cfc1f4e2324}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="node\06.complex">
+      <UniqueIdentifier>{f8205792-9f0d-430e-8116-8db0d6a624ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="node\01.image">
+      <UniqueIdentifier>{29fa8fac-fc99-439e-8b8d-8ca65bc9cfba}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\bsn\NodeImage.h">
+      <Filter>node\01.image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\bsn\NodeComplex.h">
+      <Filter>node\06.complex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\bsn.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\NodeImage.cpp">
+      <Filter>node\01.image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\NodeComplex.cpp">
+      <Filter>node\06.complex</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

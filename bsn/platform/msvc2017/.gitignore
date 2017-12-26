@@ -1,0 +1,5 @@
+bsn/
+projects/*
+
+!projects/bsn.vcxproj
+!projects/bsn.vcxproj.filters
