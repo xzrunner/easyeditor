@@ -28,10 +28,6 @@ protected:
 
 	static char* String2Char(mm::LinearAllocator& alloc, const std::string& str);
 
-	static int FloatToInt(float f) {
-		return static_cast<int>(floor(f * 1024.0f + 0.5f));
-	}
-
 private:
 	// geometry
 	static const int SCALE_MASK			= 1 << 1;

@@ -132,12 +132,12 @@ void AnimationToSpr::TransSpriteCol(const ee::SprPtr& spr, const erespacker::Pac
 {
 	s2::RenderColor rc;
 
-	rc.SetMul(gum::int2color(t.color, s2::RGBA));
-	rc.SetAdd(gum::int2color(t.additive, s2::RGBA));
+	rc.SetMul(gum::int2color(t.color, bsn::RGBA));
+	rc.SetAdd(gum::int2color(t.additive, bsn::RGBA));
 
-	rc.SetRMap(gum::int2color(t.rmap, s2::RGBA));
-	rc.SetGMap(gum::int2color(t.gmap, s2::RGBA));
-	rc.SetBMap(gum::int2color(t.bmap, s2::RGBA));
+	rc.SetRMap(gum::int2color(t.rmap, bsn::RGBA));
+	rc.SetGMap(gum::int2color(t.gmap, bsn::RGBA));
+	rc.SetBMap(gum::int2color(t.bmap, bsn::RGBA));
 
 	spr->SetColor(rc);
 }

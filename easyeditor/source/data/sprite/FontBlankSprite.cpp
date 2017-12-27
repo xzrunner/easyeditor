@@ -64,9 +64,8 @@ FontBlankSprite::FontBlankSprite(const s2::SymPtr& sym, uint32_t id)
 	FontBlankSymbol* font_sym = dynamic_cast<FontBlankSymbol*>(m_sym.get());
 
 	font = font_sym->font;
-	font_color = gum::str2color(font_sym->color.c_str(), s2::ARGB);
-
-	if (font_sym->align_hori == 0)
+	font_color = gum::str2color(font_sym->color.c_str(), bsn::ARGB);
+if (font_sym->align_hori == 0)
 		align_hori = HAT_LEFT;
 	else if (font_sym->align_hori == 1)
 		align_hori = HAT_RIGHT;
@@ -102,7 +101,7 @@ void FontBlankSprite::Load(const Json::Value& val, const std::string& dir)
 	if (val["font"].isNull())
 	{
 		font		= sym->font;
-		font_color	= gum::str2color(sym->color.c_str(), s2::ARGB);
+		font_color	= gum::str2color(sym->color.c_str(), bsn::ARGB);
 		align_hori	= HoriAlignType((int)sym->align_hori);
 		align_vert	= VertAlignType((int)sym->align_vert);
 		size		= static_cast<int>(sym->size);
@@ -113,7 +112,7 @@ void FontBlankSprite::Load(const Json::Value& val, const std::string& dir)
 	else
 	{
 		font		= val["font"].asString().c_str();
-		font_color	= gum::str2color(val["color"].asString().c_str(), s2::ARGB);
+		font_color	= gum::str2color(val["color"].asString().c_str(), bsn::ARGB);
 		// is old version data
 		if (!val["align"].isNull()) {
 			align_hori = HoriAlignType(val["align"].asInt());
@@ -138,7 +137,7 @@ void FontBlankSprite::Store(Json::Value& val, const std::string& dir) const
 	Sprite::Store(val);
 
 	val["font"]			= font.c_str();
-	val["color"]		= gum::color2str(font_color, s2::ARGB).c_str();
+	val["color"]		= gum::color2str(font_color, bsn::ARGB).c_str();
 	val["align hori"]	= align_hori;
 	val["align vert"]	= align_vert;
 	val["size"]			= size;

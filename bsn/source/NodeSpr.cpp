@@ -1,13 +1,18 @@
 #include "bsn/NodeSpr.h"
+#include "bsn/ColorParser.h"
 
 #include <bs/ImportStream.h>
 #include <bs/typedef.h>
 #include <bs/Serializer.h>
+#include <bs/FixedPointNum.h>
 
 #include <json/value.h>
 
 namespace bsn
 {
+
+static const int LOW_FIXED_TRANS_PRECISION = 1024;
+static const int HIGH_FIXED_TRANS_PRECISION = 8192;
 
 NodeSpr::NodeSpr()
 	: m_sym_path(nullptr)
@@ -42,7 +47,7 @@ void NodeSpr::LoadFromBin(mm::LinearAllocator& alloc, bs::ImportStream& is)
 	m_name = is.String(alloc);
 	m_type = is.UInt32();
 
-	m_data = static_cast<float*>(alloc.alloc<char>(DataSize(m_type)));
+	m_data = static_cast<uint32_t*>(alloc.alloc<char>(DataSize(m_type)));
 	int idx = 0;
 	if (m_type & SCALE_MASK) {
 		m_data[idx++] = is.UInt32();
@@ -113,7 +118,7 @@ void NodeSpr::LoadFromJson(mm::LinearAllocator& alloc, const Json::Value& val)
 
 	m_type = 0;
 
-	std::vector<float> data;
+	std::vector<uint32_t> data;
 
 	// load scale
 	float scale[2] = { 1, 1 };
@@ -125,8 +130,8 @@ void NodeSpr::LoadFromJson(mm::LinearAllocator& alloc, const Json::Value& val)
 	}
 	if (scale[0] != 1 || scale[1] != 1) {
 		m_type |= SCALE_MASK;
-		data.push_back(scale[0]);
-		data.push_back(scale[1]);
+		data.push_back(bs::float2int(scale[0], HIGH_FIXED_TRANS_PRECISION));
+		data.push_back(bs::float2int(scale[1], HIGH_FIXED_TRANS_PRECISION));
 	}
 
 	// load shear
@@ -137,8 +142,8 @@ void NodeSpr::LoadFromJson(mm::LinearAllocator& alloc, const Json::Value& val)
 	}
 	if (shear[0] != 0 || shear[1] != 0) {
 		m_type |= SHEAR_MASK;
-		data.push_back(shear[0]);
-		data.push_back(shear[1]);
+		data.push_back(bs::float2int(shear[0], HIGH_FIXED_TRANS_PRECISION));
+		data.push_back(bs::float2int(shear[1], HIGH_FIXED_TRANS_PRECISION));
 	}
 
 	// load offset
@@ -150,8 +155,8 @@ void NodeSpr::LoadFromJson(mm::LinearAllocator& alloc, const Json::Value& val)
 	}
 	if (offset[0] != 0 || offset[1] != 0) {
 		m_type |= OFFSET_MASK;
-		data.push_back(offset[0]);
-		data.push_back(offset[1]);
+		data.push_back(bs::float2int(offset[0], LOW_FIXED_TRANS_PRECISION));
+		data.push_back(bs::float2int(offset[1], LOW_FIXED_TRANS_PRECISION));
 	}
 
 	// load position
@@ -162,8 +167,8 @@ void NodeSpr::LoadFromJson(mm::LinearAllocator& alloc, const Json::Value& val)
 	}
 	if (position[0] != 0 || position[1] != 0) {
 		m_type |= POSITION_MASK;
-		data.push_back(position[0]);
-		data.push_back(position[1]);
+		data.push_back(bs::float2int(position[0], LOW_FIXED_TRANS_PRECISION));
+		data.push_back(bs::float2int(position[1], LOW_FIXED_TRANS_PRECISION));
 	}
 
 	// load rotate
@@ -173,58 +178,75 @@ void NodeSpr::LoadFromJson(mm::LinearAllocator& alloc, const Json::Value& val)
 	}
 	if (angle != 0) {
 		m_type |= SCALE_MASK;
-		data.push_back(angle);
+		data.push_back(bs::float2int(angle, HIGH_FIXED_TRANS_PRECISION));
 	}
 
 	// load¡¡color mul
 	uint32_t col_mul = 0xffffffff;
 	if (val.isMember("multi color")) {
-		std::string str = val["multi color"].asString().c_str();
+		std::string str = val["multi color"].asString();
 		if (!str.empty()) {
-			col_mul = str2color(str, BGRA);
+			col_mul = ColorParser::StringToRGBA(str, BGRA);
 		}
 	}
 	if (col_mul != 0xffffffff) {
 		m_type |= COL_MUL_MASK;
-		
+		data.push_back(col_mul);
 	}
 
-	m_col.SetAdd(s2::Color(0, 0, 0, 0));
+	// load color add
+	uint32_t col_add = 0;
 	if (val.isMember("add color")) {
-		std::string str = val["add color"].asString().c_str();
+		std::string str = val["add color"].asString();
 		if (!str.empty()) {
-			m_col.SetAdd(str2color(str, s2::ABGR));
+			col_add = ColorParser::StringToRGBA(str, ABGR);
 		}
 	}
+	if (col_add != 0) {
+		m_type |= COL_ADD_MASK;
+		data.push_back(col_add);
+	}
 
-	m_col.SetRMap(s2::Color(255, 0, 0, 0));
+	// load color rmap
+	uint32_t col_rmap = 0xff000000;
 	if (val.isMember("r trans")) {
-		std::string str = val["r trans"].asString().c_str();
+		std::string str = val["r trans"].asString();
 		if (!str.empty()) {
-			s2::Color col(str2color(str, s2::RGBA));
-			col.a = 0;
-			m_col.SetRMap(col);
+			col_rmap = ColorParser::StringToRGBA(str, RGBA);
+			col_rmap &= 0xffffff00;
 		}
 	}
+	if (col_rmap != 0xff000000) {
+		m_type |= COL_R_MASK;
+		data.push_back(col_rmap);
+	}
 
-	m_col.SetGMap(s2::Color(0, 255, 0, 0));
+	// load color gmap
+	uint32_t col_gmap = 0x00ff0000;
 	if (val.isMember("g trans")) {
-		std::string str = val["g trans"].asString().c_str();
+		std::string str = val["g trans"].asString();
 		if (!str.empty()) {
-			s2::Color col(str2color(str, s2::RGBA));
-			col.a = 0;
-			m_col.SetGMap(col);
+			col_gmap = ColorParser::StringToRGBA(str, RGBA);
+			col_gmap &= 0xffffff00;
 		}
 	}
+	if (col_gmap != 0x00ff0000) {
+		m_type |= COL_G_MASK;
+		data.push_back(col_gmap);
+	}
 
-	m_col.SetBMap(s2::Color(0, 0, 255, 0));
+	// load color bmap
+	uint32_t col_bmap = 0x0000ff00;
 	if (val.isMember("b trans")) {
-		std::string str = val["b trans"].asString().c_str();
+		std::string str = val["b trans"].asString();
 		if (!str.empty()) {
-			s2::Color col(str2color(str, s2::RGBA));
-			col.a = 0;
-			m_col.SetBMap(col);
+			col_bmap = ColorParser::StringToRGBA(str, RGBA);
+			col_bmap &= 0xffffff00;
 		}
+	}
+	if (col_bmap != 0x0000ff00) {
+		m_type |= COL_B_MASK;
+		data.push_back(col_bmap);
 	}
 
 	// store
@@ -235,7 +257,7 @@ void NodeSpr::LoadFromJson(mm::LinearAllocator& alloc, const Json::Value& val)
 	else
 	{
 		size_t sz = sizeof(float) * data.size();
-		m_data = static_cast<float*>(alloc.alloc<char>(sz));
+		m_data = static_cast<uint32_t*>(alloc.alloc<char>(sz));
 		memcpy(m_data, &data[0], sz);
 	}
 }
@@ -305,96 +327,6 @@ char* NodeSpr::String2Char(mm::LinearAllocator& alloc, const std::string& str)
 	ret[str.size()] = 0;
 
 	return ret;
-}
-
-enum PIXEL_TYPE
-{
-	RGBA = 0,
-	ARGB,
-	ABGR,
-	BGRA
-};
-
-static inline
-int char2hex(char c)
-{
-	if (c >= '0' && c <= '9')
-		return c - '0';
-	else if (c >= 'a' && c <= 'f')
-		return c - 'a' + 10;
-	else if (c >= 'A' && c <= 'F')
-		return c - 'A' + 10;
-	else {
-		GD_REPORT_ASSERT("char2hex");
-		return 0;
-	}
-}
-static inline
-int char2channel(char high, char low)
-{
-	int col = char2hex(high) * 16 + char2hex(low);
-	GD_ASSERT(col >= 0 && col <= 255, "char2channel");
-	return col;
-}
-
-static inline 
-uint32_t str2color(const std::string& str, PIXEL_TYPE type)
-{
-	std::string snum = str;
-
-	if (snum.empty()) {
-		return 0;
-	}
-	if (snum == "0xffffffff") {
-		return 0xffffffff;
-	}
-
-	if (snum[0] != '0' || (snum[1] != 'x' && snum[1] != 'X'))
-	{
-		int n = atoi(snum.c_str());
-		char buffer[33];
-		itoa(n, buffer, 16);
-		snum = "0x" + std::string(buffer);
-	}
-
-	int len = snum.length();
-
-	uint8_t ret[4] = { 0, 0, 0, 0 }; // rgba
-	if (len == 4)
-	{
-		if (type == RGBA || BGRA)
-			ret[3] = char2channel(snum[2], snum[3]);
-		else if (type == ARGB)
-			ret[2] = char2channel(snum[2], snum[3]);
-		else if (type == ABGR)
-			ret[0] = char2channel(snum[2], snum[3]);
-	}
-	else if (len == 10)
-	{
-		if (type == RGBA) {
-			ret[0] = char2channel(snum[2], snum[3]);
-			ret[1] = char2channel(snum[4], snum[5]);
-			ret[2] = char2channel(snum[6], snum[7]);
-			ret[3] = char2channel(snum[8], snum[9]);
-		} else if (type == ARGB) {
-			ret[3] = char2channel(snum[2], snum[3]);
-			ret[0] = char2channel(snum[4], snum[5]);
-			ret[1] = char2channel(snum[6], snum[7]);
-			ret[2] = char2channel(snum[8], snum[9]);
-		} else if (type == ABGR) {
-			ret[3] = char2channel(snum[2], snum[3]);
-			ret[2] = char2channel(snum[4], snum[5]);
-			ret[1] = char2channel(snum[6], snum[7]);
-			ret[0] = char2channel(snum[8], snum[9]);
-		}  else if (type == BGRA) {
-			ret[2] = char2channel(snum[2], snum[3]);
-			ret[1] = char2channel(snum[4], snum[5]);
-			ret[0] = char2channel(snum[6], snum[7]);
-			ret[3] = char2channel(snum[8], snum[9]);
-		}
-	}
-
-	return (ret[0] << 24) | (ret[1] << 16) | (ret[2] << 8) | ret[3];
 }
 
 }

@@ -1,4 +1,5 @@
 #include "bsn/ComplexSym.h"
+#include "bsn/NodeFactory.h"
 
 #include <bs/ImportStream.h>
 #include <bs/typedef.h>
@@ -9,7 +10,7 @@ namespace bsn
 
 size_t ComplexSym::GetBinSize() const
 {
-
+	return 0;
 }
 
 void ComplexSym::StoreToBin(byte** data, size_t& length) const
@@ -36,8 +37,8 @@ ComplexSym* ComplexSym::Create(mm::LinearAllocator& alloc, bs::ImportStream& is)
 
 	// actiions
 	size_t n = is.UInt16();
-	sym->m_actions_n = n;
-	for (int i = 0; i < n; ++i)
+	sym->m_actions_n = static_cast<uint16_t>(n);
+	for (size_t i = 0; i < n; ++i)
 	{
 		Action* dst = &sym->m_actions[i];
 		dst->name = is.String(alloc);
@@ -46,12 +47,14 @@ ComplexSym* ComplexSym::Create(mm::LinearAllocator& alloc, bs::ImportStream& is)
 		
 	// children
 	n = is.UInt16();
-	sym->m_children_n = n;
+	sym->m_children_n = static_cast<uint16_t>(n);
 	sym->m_children = static_cast<INode**>(alloc.alloc<char>(sizeof(INode*) * n));
 	memset(sym->m_children, 0, sizeof(INode*) * n);
-	for (int i = 0; i < n; ++i) {
-		sym->m_children[i] = 
+	for (size_t i = 0; i < n; ++i) {
+		sym->m_children[i] = NodeFactory::CreateNodeSpr(alloc, is);
 	}
+
+	return sym;
 }
 
 ComplexSym* ComplexSym::Create(mm::LinearAllocator& alloc, json::Value& val)

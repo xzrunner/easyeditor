@@ -12,7 +12,7 @@ ComplexSpr::ComplexSpr()
 
 size_t ComplexSpr::GetBinSize() const
 {
-
+	return 0;
 }
 
 void ComplexSpr::StoreToBin(byte** data, size_t& length) const
@@ -35,7 +35,7 @@ ComplexSpr* ComplexSpr::Create(mm::LinearAllocator& alloc, bs::ImportStream& is)
 
 ComplexSpr* ComplexSpr::Create(mm::LinearAllocator& alloc, const json::Value& val)
 {
-
+	return nullptr;
 }
 
 void ComplexSpr::LoadFromBin(mm::LinearAllocator& alloc, bs::ImportStream& is)

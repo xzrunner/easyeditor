@@ -229,8 +229,8 @@ void PackAnimation::LoadSprColor(const ee::SprConstPtr& spr, SpriteTrans& trans)
 {
 	const s2::RenderColor& rc = spr->GetColor();
 
-	trans.color    = gum::color2int(rc.GetMul(), s2::ARGB);
-	trans.additive = gum::color2int(rc.GetAdd(), s2::ARGB);
+	trans.color    = gum::color2int(rc.GetMul(), bsn::ARGB);
+	trans.additive = gum::color2int(rc.GetAdd(), bsn::ARGB);
 
 	trans.rmap = rc.GetRMap().ToRGBA();
 	trans.gmap = rc.GetGMap().ToRGBA();
