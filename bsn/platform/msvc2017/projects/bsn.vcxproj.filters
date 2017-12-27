@@ -10,16 +10,17 @@
     <Filter Include="spr">
       <UniqueIdentifier>{c3fe80ec-0984-40f3-bf05-310ce31ec288}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sym">
+      <UniqueIdentifier>{2fdedfd8-0d1c-460a-8f77-3d3bf14b5ae1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\bsn.h" />
     <ClInclude Include="..\..\..\include\bsn\ImageSpr.h">
       <Filter>01.image</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\bsn\ComplexSym.h">
       <Filter>06.complex</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\bsn\NodeSym.h" />
     <ClInclude Include="..\..\..\include\bsn\NodeType.h" />
     <ClInclude Include="..\..\..\include\bsn\NodeFactory.h" />
     <ClInclude Include="..\..\..\include\bsn\ComplexSpr.h">
@@ -33,6 +34,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\bsn\ColorParser.h">
       <Filter>spr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\bsn\NodeSym.h">
+      <Filter>sym</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

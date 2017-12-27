@@ -6,12 +6,12 @@ namespace bs { class ImportStream; }
 namespace bsn
 {
 
-class INode;
+class NodeSpr;
 
 class NodeFactory
 {
 public:
-	static INode* CreateNodeSpr(mm::LinearAllocator& alloc, bs::ImportStream& is);
+	static NodeSpr* CreateNodeSpr(mm::LinearAllocator& alloc, bs::ImportStream& is);
 
 }; // NodeFactory
 

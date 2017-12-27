@@ -8,16 +8,22 @@ namespace bsn
 class ComplexSpr : public NodeSpr
 {
 public:
+	//
+	// serialization
+	//
 	virtual size_t GetBinSize() const override;
-	virtual void StoreToBin(byte** data, size_t& length) const override;
-	virtual void StoreToJson(json::Value& val) const override;
+	virtual void StoreToBin(uint8_t** data, size_t& length) const override;
+	virtual void StoreToJson(Json::Value& val) const override;
 
+	//
+	// deserialization
+	//
 	static ComplexSpr* Create(mm::LinearAllocator& alloc, bs::ImportStream& is);
-	static ComplexSpr* Create(mm::LinearAllocator& alloc, const json::Value& val);
+	static ComplexSpr* Create(mm::LinearAllocator& alloc, const Json::Value& val);
 
 protected:
 	virtual void LoadFromBin(mm::LinearAllocator& alloc, bs::ImportStream& is);
-	virtual void LoadFromJson(mm::LinearAllocator& alloc, const json::Value& val);
+	virtual void LoadFromJson(mm::LinearAllocator& alloc, const Json::Value& val);
 
 private:
 	ComplexSpr();

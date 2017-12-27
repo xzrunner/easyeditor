@@ -9,9 +9,9 @@
 namespace bsn
 {
 
-INode* NodeFactory::CreateNodeSpr(mm::LinearAllocator& alloc, bs::ImportStream& is)
+NodeSpr* NodeFactory::CreateNodeSpr(mm::LinearAllocator& alloc, bs::ImportStream& is)
 {
-	INode* spr = nullptr;
+	NodeSpr* spr = nullptr;
 
 	uint8_t type = is.UInt8();
 	switch (type)

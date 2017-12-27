@@ -11,7 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\bsn.h" />
     <ClInclude Include="..\..\..\include\bsn\ColorParser.h" />
     <ClInclude Include="..\..\..\include\bsn\ComplexSpr.h" />
     <ClInclude Include="..\..\..\include\bsn\ComplexSym.h" />

@@ -1,5 +1,9 @@
 #pragma once
 
+#include <stdint.h>
+
+namespace Json { class Value; }
+
 namespace bsn
 {
 
@@ -8,10 +12,12 @@ class NodeSym
 public:
 	virtual ~NodeSym() {}
 
-	// serializable
-		
-
-private:
+	//
+	// serialization
+	//
+	virtual size_t GetBinSize() const = 0;
+	virtual void StoreToBin(uint8_t** data, size_t& length) const = 0;
+	virtual void StoreToJson(Json::Value& val) const = 0;
 
 }; // NodeSym
 

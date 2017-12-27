@@ -22,24 +22,20 @@ NodeSpr::NodeSpr()
 {
 }
 
-//size_t NodeSpr::GetBinSize() const
-//{
-//	int sz = TypeSize();
-//	sz += bs::pack_size(m_sym_path);
-//	sz += bs::pack_size(m_name);
-//	sz += DataSize(m_type);
-//	return sz;
-//}
-//
-//void NodeSpr::StoreToBin(byte** data, size_t& length) const
-//{
-//
-//}
-//
-//void NodeSpr::StoreToJson(json::Value& val) const
-//{
-//
-//}
+size_t NodeSpr::GetBinSize() const
+{
+	return 0;
+}
+
+void NodeSpr::StoreToBin(uint8_t** data, size_t& length) const
+{
+
+}
+
+void NodeSpr::StoreToJson(Json::Value& val) const
+{
+
+}
 
 void NodeSpr::LoadFromBin(mm::LinearAllocator& alloc, bs::ImportStream& is)
 {

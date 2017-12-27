@@ -1,8 +1,8 @@
 #pragma once
 
-#include "bsn.h"
-
 #include <memmgr/LinearAllocator.h>
+
+#include <stdint.h>
 
 namespace mm { class LinearAllocator; }
 namespace bs { class ImportStream; }
@@ -11,14 +11,17 @@ namespace Json { class Value; }
 namespace bsn
 {
 
-class NodeSpr : public INode
+class NodeSpr
 {
 public:
 	NodeSpr();
 
-	//virtual size_t GetBinSize() const override;
-	//virtual void StoreToBin(byte** data, size_t& length) const override;
-	//virtual void StoreToJson(json::Value& val) const override;
+	//
+	// serialization
+	//
+	virtual size_t GetBinSize() const;
+	virtual void StoreToBin(uint8_t** data, size_t& length) const;
+	virtual void StoreToJson(Json::Value& val) const;
 
 protected:
 	virtual void LoadFromBin(mm::LinearAllocator& alloc, bs::ImportStream& is);

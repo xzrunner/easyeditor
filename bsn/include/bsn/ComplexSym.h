@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bsn.h"
+#include "bsn/NodeSym.h"
 
 #include <memmgr/LinearAllocator.h>
 
@@ -9,20 +9,27 @@
 
 namespace mm { class LinearAllocator; }
 namespace bs { class ImportStream; }
-namespace json { class Value; }
 
 namespace bsn
 {
 
-class ComplexSym : public INode
+class NodeSpr;
+
+class ComplexSym : public NodeSym
 {
 public:
+	//
+	// serialization
+	//
 	virtual size_t GetBinSize() const override;
-	virtual void StoreToBin(byte** data, size_t& length) const override;
-	virtual void StoreToJson(json::Value& val) const override;
+	virtual void StoreToBin(uint8_t** data, size_t& length) const override;
+	virtual void StoreToJson(Json::Value& val) const override;
 
+	//
+	// deserialization
+	//
 	static ComplexSym* Create(mm::LinearAllocator& alloc, bs::ImportStream& is);
-	static ComplexSym* Create(mm::LinearAllocator& alloc, json::Value& val);
+	static ComplexSym* Create(mm::LinearAllocator& alloc, Json::Value& val);
 	
 private:
 	static size_t TypeSize();
@@ -36,15 +43,15 @@ public:
 	};
 
 private:
+	int16_t m_scissor[4];
+
 	uint16_t m_children_n;
 	uint16_t m_actions_n;
 
-	int16_t m_scissor[4];
+	Action* m_actions;
 
-	INode** m_children;
-	
-	Action m_actions[1];
-	
+	NodeSpr* m_children[1];
+
 }; // ComplexSym
 
 }
