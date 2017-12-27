@@ -1,7 +1,6 @@
 #include "PackMeshSpr.h"
 #include "PackNodeFactory.h"
 #include "binary_io.h"
-#include "to_int.h"
 #include "PackCoords.h"
 
 #include <easymesh.h>
@@ -11,6 +10,7 @@ namespace lua = ebuilder::lua;
 #include <bimp/typedef.h>
 #include <simp/NodeMeshSpr.h>
 #include <simp/simp_types.h>
+#include <bs/FixedPointNum.h>
 
 namespace esprpacker
 {
@@ -80,8 +80,8 @@ void PackMeshSpr::PackToLuaString(ebuilder::CodeGenerator& gen, const ee::Textur
 	for (int i = 0, n = m_transform.size(); i < n; ++i) 
 	{
 		int idx = m_transform[i].first;
-		int16_t x = float2int(m_transform[i].second.x, 16),
-			    y = float2int(m_transform[i].second.y, 16);
+		int16_t x = bs::float2int(m_transform[i].second.x, 16),
+			    y = bs::float2int(m_transform[i].second.y, 16);
 		ss << idx << ", " << x << ", " << y << ", ";
 	}
 	ss << "}";
@@ -135,8 +135,8 @@ void PackMeshSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 		pack(idx, ptr);
 
 		const sm::vec2& pos = m_transform[i].second;
-		int16_t x = float2int(pos.x, 16),
-			    y = float2int(pos.y, 16);
+		int16_t x = bs::float2int(pos.x, 16),
+			    y = bs::float2int(pos.y, 16);
 		pack(x, ptr);
 		pack(y, ptr);
 	}

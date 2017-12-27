@@ -189,9 +189,6 @@
     <ClInclude Include="..\..\..\src\libsprpacker\check.h">
       <Filter>tools</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\libsprpacker\to_int.h">
-      <Filter>tools</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\libsprpacker\typedef.h">
       <Filter>tools</Filter>
     </ClInclude>

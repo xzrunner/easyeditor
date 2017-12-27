@@ -1,12 +1,12 @@
 #include "Skin2Mesh.h"
 #include "PackCoords.h"
 #include "PackArray.h"
-#include "to_int.h"
 
 #include <bimp/typedef.h>
 #include <simp/Skin2Mesh.h>
 #include <polymesh/Skin2Triangles.h>
 #include <polymesh/MeshType.h>
+#include <bs/FixedPointNum.h>
 
 namespace esprpacker
 {
@@ -115,11 +115,11 @@ void Skin2Mesh::PackToBin(uint8_t** ptr) const
 		const pm::Skin2Joint& joint = m_mesh->joints[i];
 		uint16_t j = joint.joint;
 		pack(j, ptr);
-		uint16_t vx = float2int(joint.vertex.x, 16);
+		uint16_t vx = bs::float2int(joint.vertex.x, 16);
 		pack(vx, ptr);
-		uint16_t vy = float2int(joint.vertex.y, 16);
+		uint16_t vy = bs::float2int(joint.vertex.y, 16);
 		pack(vy, ptr);
-		int16_t weight = float2int(joint.weight - 0.5f, 2048);
+		int16_t weight = bs::float2int(joint.weight - 0.5f, 2048);
 		pack(weight, ptr);
 	}
 	// texcoords

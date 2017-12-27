@@ -1,7 +1,6 @@
 #include "PackParticle2dSpr.h"
 #include "PackNodeFactory.h"
 #include "binary_io.h"
-#include "to_int.h"
 
 #include <easyparticle2d.h>
 #include <easybuilder.h>
@@ -9,6 +8,7 @@ namespace lua = ebuilder::lua;
 
 #include <simp/NodeParticle2dSpr.h>
 #include <simp/simp_types.h>
+#include <bs/FixedPointNum.h>
 
 namespace esprpacker
 {
@@ -75,10 +75,10 @@ void PackParticle2dSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) co
 	uint32_t sym = m_sym->GetID();
 	pack(sym, ptr);
 
-	uint8_t loop = bool2int(m_loop);
+	uint8_t loop = bs::bool2int(m_loop);
 	pack(loop, ptr);
 
-	uint8_t local = bool2int(m_local);
+	uint8_t local = bs::bool2int(m_local);
 	pack(local, ptr);
 }
 

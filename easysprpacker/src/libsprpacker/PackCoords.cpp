@@ -1,11 +1,12 @@
 #include "PackCoords.h"
 #include "binary_io.h"
-#include "to_int.h"
 
 #include <easybuilder.h>
 namespace lua = ebuilder::lua;
 
 #include <ee/Exception.h>
+
+#include <bs/FixedPointNum.h>
 
 namespace esprpacker
 {
@@ -20,8 +21,8 @@ void PackCoords::PackToLua(ebuilder::CodeGenerator& gen, const CU_VEC<sm::vec2>&
 	for (int i = 0, n = vertices.size(); i < n; ++i) 
 	{
 		const sm::vec2& pos = vertices[i];
-		int16_t x = float2int(pos.x, precision),
-			    y = float2int(pos.y, precision);
+		int16_t x = bs::float2int(pos.x, precision),
+			    y = bs::float2int(pos.y, precision);
 		ss << x << ", " << y << ", ";
 	}
 	ss << "}";
@@ -53,8 +54,8 @@ void PackCoords::PackToBin(const CU_VEC<sm::vec2>& vertices, uint8_t** ptr, int 
 	for (int i = 0, n = vertices.size(); i < n; ++i) 
 	{
 		const sm::vec2& pos = vertices[i];
-		int16_t x = float2int(pos.x, precision),
-			    y = float2int(pos.y, precision);
+		int16_t x = bs::float2int(pos.x, precision),
+			    y = bs::float2int(pos.y, precision);
 		pack(x, ptr);
 		pack(y, ptr);
 	}

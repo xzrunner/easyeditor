@@ -1,7 +1,6 @@
 #include "PackTextureSpr.h"
 #include "PackNodeFactory.h"
 #include "binary_io.h"
-#include "to_int.h"
 
 #include <easytexture.h>
 #include <easybuilder.h>
@@ -9,6 +8,7 @@ namespace lua = ebuilder::lua;
 
 #include <simp/NodeTextureSpr.h>
 #include <simp/simp_types.h>
+#include <bs/FixedPointNum.h>
 
 namespace esprpacker
 {

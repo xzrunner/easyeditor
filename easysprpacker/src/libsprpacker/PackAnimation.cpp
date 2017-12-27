@@ -1,7 +1,6 @@
 #include "PackAnimation.h"
 #include "PackNodeFactory.h"
 #include "binary_io.h"
-#include "to_int.h"
 #include "PackIDMgr.h"
 
 #include <easyanim.h>
@@ -16,6 +15,7 @@ namespace lua = ebuilder::lua;
 #include <sprite2/LerpWiggle.h>
 #include <sprite2/LerpEase.h>
 #include <sprite2/SymType.h>
+#include <bs/FixedPointNum.h>
 
 #include <algorithm>
 
@@ -432,7 +432,7 @@ PackToBin(uint8_t** ptr) const
 	uint16_t idx = m_index;
 	pack(idx, ptr);
 
-	uint8_t tween = bool2int(m_tween);
+	uint8_t tween = bs::bool2int(m_tween);
 	pack(tween, ptr);
 
 	uint16_t actor_n = m_actors.size();

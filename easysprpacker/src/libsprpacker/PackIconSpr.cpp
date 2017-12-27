@@ -1,7 +1,6 @@
 #include "PackIconSpr.h"
 #include "PackNodeFactory.h"
 #include "binary_io.h"
-#include "to_int.h"
 
 #include <easyicon.h>
 #include <easybuilder.h>
@@ -9,6 +8,7 @@ namespace lua = ebuilder::lua;
 
 #include <simp/NodeIconSpr.h>
 #include <simp/simp_types.h>
+#include <bs/FixedPointNum.h>
 
 namespace esprpacker
 {
@@ -72,7 +72,7 @@ void PackIconSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 	uint32_t sym = m_sym->GetID();
 	pack(sym, ptr);
 
-	uint16_t process = float2int(m_process, 1024);
+	uint16_t process = bs::float2int(m_process, 1024);
 	pack(process, ptr);
 }
 

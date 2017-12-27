@@ -1,7 +1,6 @@
 #include "PackParticle3dSpr.h"
 #include "PackNodeFactory.h"
 #include "binary_io.h"
-#include "to_int.h"
 
 #include <easyparticle3d.h>
 #include <easybuilder.h>
@@ -9,6 +8,7 @@ namespace lua = ebuilder::lua;
 
 #include <simp/NodeParticle3dSpr.h>
 #include <simp/simp_types.h>
+#include <bs/FixedPointNum.h>
 
 namespace esprpacker
 {
@@ -81,9 +81,9 @@ void PackParticle3dSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) co
 	uint32_t sym = m_sym->GetID();
 	pack(sym, ptr);
 
-	uint8_t loop = bool2int(m_loop);
-	uint8_t local = bool2int(m_local);
-	uint8_t alone = bool2int(m_alone);
+	uint8_t loop = bs::bool2int(m_loop);
+	uint8_t local = bs::bool2int(m_local);
+	uint8_t alone = bs::bool2int(m_alone);
 	uint8_t reuse = 1;
 	switch (m_reuse)
 	{
@@ -100,7 +100,7 @@ void PackParticle3dSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) co
 	uint8_t pack8 = (loop) | (local << 1) | (alone << 2) | (reuse << 3);
 	pack(pack8, ptr);
 
-	uint16_t radius = float2int(m_start_radius, 16);
+	uint16_t radius = bs::float2int(m_start_radius, 16);
 	pack(radius, ptr);
 }
 

@@ -1,7 +1,6 @@
 #include "PackTrail.h"
 #include "PackNodeFactory.h"
 #include "binary_io.h"
-#include "to_int.h"
 
 #include <ee/SymbolMgr.h>
 
@@ -13,6 +12,7 @@ namespace lua = ebuilder::lua;
 #include <simp/simp_types.h>
 #include <sprite2/TrailEmitterCfg.h>
 #include <gum/trans_color.h>
+#include <bs/FixedPointNum.h>
 
 namespace esprpacker
 {
@@ -114,12 +114,12 @@ void PackTrail::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 	uint16_t count = m_count;
 	pack(count, ptr);
 
-	uint16_t life_begin = float2int(m_life_begin, 100);
+	uint16_t life_begin = bs::float2int(m_life_begin, 100);
 	pack(life_begin, ptr);
-	uint16_t life_offset = float2int(m_life_offset, 100);
+	uint16_t life_offset = bs::float2int(m_life_offset, 100);
 	pack(life_offset, ptr);
 
-	uint16_t fadeout_time = float2int(m_fadeout_time, 100);
+	uint16_t fadeout_time = bs::float2int(m_fadeout_time, 100);
 	pack(fadeout_time, ptr);
 }
 
@@ -188,10 +188,10 @@ CompImage(const t2d_symbol& sym)
 	m_scale_begin		= sym.mode.A.scale_begin;
 	m_scale_end			= sym.mode.A.scale_end;
 
-	m_mul_col_begin		= gum::color2int(sym.col_begin.rgba, s2::RGBA);
-	m_mul_col_end		= gum::color2int(sym.col_end.rgba, s2::RGBA);
-	m_add_col_begin		= gum::color2int(sym.mode.A.add_col_begin.rgba, s2::RGBA);
-	m_add_col_end		= gum::color2int(sym.mode.A.add_col_end.rgba, s2::RGBA);
+	m_mul_col_begin		= gum::color2int(sym.col_begin.rgba, bsn::RGBA);
+	m_mul_col_end		= gum::color2int(sym.col_end.rgba, bsn::RGBA);
+	m_add_col_begin		= gum::color2int(sym.mode.A.add_col_begin.rgba, bsn::RGBA);
+	m_add_col_end		= gum::color2int(sym.mode.A.add_col_end.rgba, bsn::RGBA);
 }
 
 PackTrail::CompImage::
@@ -235,9 +235,9 @@ PackToBin(uint8_t** ptr) const
 	uint32_t id = m_node->GetID();
 	pack(id, ptr);
 
-	uint16_t scale_begin = float2int(m_scale_begin, 100);
+	uint16_t scale_begin = bs::float2int(m_scale_begin, 100);
 	pack(scale_begin, ptr);
-	uint16_t scale_end = float2int(m_scale_end, 100);
+	uint16_t scale_end = bs::float2int(m_scale_end, 100);
 	pack(scale_end, ptr);
 
 	uint32_t mul_col_begin = m_mul_col_begin;
@@ -260,8 +260,8 @@ CompShape(const t2d_symbol& sym)
 	m_linewidth		= sym.mode.B.size;
 	m_acuity		= sym.mode.B.acuity;
 
-	m_col_begin		= gum::color2int(sym.col_begin.rgba, s2::RGBA);
-	m_col_end		= gum::color2int(sym.col_end.rgba, s2::RGBA);
+	m_col_begin		= gum::color2int(sym.col_begin.rgba, bsn::RGBA);
+	m_col_end		= gum::color2int(sym.col_end.rgba, bsn::RGBA);
 }
 
 void PackTrail::CompShape::
@@ -291,10 +291,10 @@ SizeOfPackToBin() const
 void PackTrail::CompShape::
 PackToBin(uint8_t** ptr) const
 {
-	uint16_t linewidth = float2int(m_linewidth, 100);
+	uint16_t linewidth = bs::float2int(m_linewidth, 100);
 	pack(linewidth, ptr);
 
-	uint16_t acuity = float2int(m_acuity, 100);
+	uint16_t acuity = bs::float2int(m_acuity, 100);
 	pack(acuity, ptr);
 
 	uint32_t col_begin = m_col_begin;

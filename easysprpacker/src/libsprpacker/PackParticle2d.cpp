@@ -1,7 +1,6 @@
 #include "PackParticle2D.h"
 #include "PackNodeFactory.h"
 #include "binary_io.h"
-#include "to_int.h"
 
 #include <ee/Symbol.h>
 #include <ee/SymbolMgr.h>
@@ -13,6 +12,7 @@ namespace lua = ebuilder::lua;
 #include <simp/NodeParticle2d.h>
 #include <simp/simp_types.h>
 #include <gum/trans_color.h>
+#include <bs/FixedPointNum.h>
 
 namespace esprpacker
 {
@@ -114,28 +114,28 @@ void PackParticle2d::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 
 	// body
 
-	uint16_t emission_time = float2int(m_emission_time, 100);
+	uint16_t emission_time = bs::float2int(m_emission_time, 100);
 	pack(emission_time, ptr);
 	uint16_t count = m_count;
 	pack(count, ptr);
 
-	uint16_t life = float2int(m_life, 100);
+	uint16_t life = bs::float2int(m_life, 100);
 	pack(life, ptr);
-	uint16_t life_var = float2int(m_life_var, 100);
+	uint16_t life_var = bs::float2int(m_life_var, 100);
 	pack(life_var, ptr);
 
-	uint16_t position_x = float2int(m_position.x);
+	uint16_t position_x = bs::float2int(m_position.x);
 	pack(position_x, ptr);
-	uint16_t position_y = float2int(m_position.y);
+	uint16_t position_y = bs::float2int(m_position.y);
 	pack(position_y, ptr);
-	uint16_t position_var_x = float2int(m_position_var.x);
+	uint16_t position_var_x = bs::float2int(m_position_var.x);
 	pack(position_var_x, ptr);
-	uint16_t position_var_y = float2int(m_position_var.y);
+	uint16_t position_var_y = bs::float2int(m_position_var.y);
 	pack(position_var_y, ptr);
 
-	uint16_t direction = radian2int(m_direction);
+	uint16_t direction = bs::radian2int(m_direction);
 	pack(direction, ptr);
-	uint16_t direction_var = radian2int(m_direction_var);
+	uint16_t direction_var = bs::radian2int(m_direction_var);
 	pack(direction_var, ptr);
 
 	uint8_t mode_type = m_mode_type;
@@ -143,61 +143,61 @@ void PackParticle2d::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 
 	if (m_mode_type == P2D_MODE_GRAVITY) 
 	{
-		uint16_t gravity_x = float2int(A.gravity.x);
+		uint16_t gravity_x = bs::float2int(A.gravity.x);
 		pack(gravity_x, ptr);
-		uint16_t gravity_y = float2int(A.gravity.y);
+		uint16_t gravity_y = bs::float2int(A.gravity.y);
 		pack(gravity_y, ptr);
 
-		uint16_t speed = float2int(A.speed);
+		uint16_t speed = bs::float2int(A.speed);
 		pack(speed, ptr);
-		uint16_t speed_var = float2int(A.speed_var);
+		uint16_t speed_var = bs::float2int(A.speed_var);
 		pack(speed_var, ptr);
 
-		uint16_t tangential_accel = float2int(A.tangential_accel);
+		uint16_t tangential_accel = bs::float2int(A.tangential_accel);
 		pack(tangential_accel, ptr);
-		uint16_t tangential_accel_var = float2int(A.tangential_accel_var);
+		uint16_t tangential_accel_var = bs::float2int(A.tangential_accel_var);
 		pack(tangential_accel_var, ptr);
 
-		uint16_t radial_accel = float2int(A.radial_accel);
+		uint16_t radial_accel = bs::float2int(A.radial_accel);
 		pack(radial_accel, ptr);
-		uint16_t radial_accel_var = float2int(A.radial_accel_var);
+		uint16_t radial_accel_var = bs::float2int(A.radial_accel_var);
 		pack(radial_accel_var, ptr);
 
-		uint8_t rotation_is_dir = bool2int(A.rotation_is_dir);
+		uint8_t rotation_is_dir = bs::bool2int(A.rotation_is_dir);
 		pack(rotation_is_dir, ptr);
 	}
 	else if (m_mode_type == P2D_MODE_RADIUS)
 	{
-		uint16_t start_radius = float2int(B.start_radius);
+		uint16_t start_radius = bs::float2int(B.start_radius);
 		pack(start_radius, ptr);
-		uint16_t start_radius_var = float2int(B.start_radius_var);
+		uint16_t start_radius_var = bs::float2int(B.start_radius_var);
 		pack(start_radius_var, ptr);
 
-		uint16_t end_radius = float2int(B.end_radius);
+		uint16_t end_radius = bs::float2int(B.end_radius);
 		pack(end_radius, ptr);
-		uint16_t end_radius_var = float2int(B.end_radius_var);
+		uint16_t end_radius_var = bs::float2int(B.end_radius_var);
 		pack(end_radius_var, ptr);
 
-		uint16_t direction_delta = float2int(B.direction_delta);
+		uint16_t direction_delta = bs::float2int(B.direction_delta);
 		pack(direction_delta, ptr);
-		uint16_t direction_delta_var = float2int(B.direction_delta_var);
+		uint16_t direction_delta_var = bs::float2int(B.direction_delta_var);
 		pack(direction_delta_var, ptr);
 	}
 	else if (m_mode_type == P2D_MODE_SPD_COS)
 	{
-		uint16_t speed = float2int(C.speed);
+		uint16_t speed = bs::float2int(C.speed);
 		pack(speed, ptr);
-		uint16_t speed_var = float2int(C.speed_var);
+		uint16_t speed_var = bs::float2int(C.speed_var);
 		pack(speed_var, ptr);
 
-		uint16_t cos_amplitude = float2int(C.cos_amplitude);
+		uint16_t cos_amplitude = bs::float2int(C.cos_amplitude);
 		pack(cos_amplitude, ptr);
-		uint16_t cos_amplitude_var = float2int(C.cos_amplitude_var);
+		uint16_t cos_amplitude_var = bs::float2int(C.cos_amplitude_var);
 		pack(cos_amplitude_var, ptr);
 
-		uint16_t cos_frequency = float2int(C.cos_frequency);
+		uint16_t cos_frequency = bs::float2int(C.cos_frequency);
 		pack(cos_frequency, ptr);
-		uint16_t cos_frequency_var = float2int(C.cos_frequency_var);
+		uint16_t cos_frequency_var = bs::float2int(C.cos_frequency_var);
 		pack(cos_frequency_var, ptr);
 	}
 	else
@@ -360,10 +360,10 @@ Component(const p2d_symbol& sym)
 	m_scale_start		= sym.scale_start;
 	m_scale_end			= sym.scale_end;
 
-	m_mul_col_begin		= gum::color2int(sym.mul_col_begin.rgba, s2::RGBA);
-	m_mul_col_end		= gum::color2int(sym.mul_col_end.rgba, s2::RGBA);
-	m_add_col_begin		= gum::color2int(sym.add_col_begin.rgba, s2::RGBA);
-	m_add_col_end		= gum::color2int(sym.add_col_end.rgba, s2::RGBA);
+	m_mul_col_begin		= gum::color2int(sym.mul_col_begin.rgba, bsn::RGBA);
+	m_mul_col_end		= gum::color2int(sym.mul_col_end.rgba, bsn::RGBA);
+	m_add_col_begin		= gum::color2int(sym.add_col_begin.rgba, bsn::RGBA);
+	m_add_col_end		= gum::color2int(sym.add_col_end.rgba, bsn::RGBA);
 
 	s2::Symbol* s2_sym = static_cast<s2::Symbol*>(sym.ud);
 	auto ee_sym = ee::SymbolMgr::Instance()->FetchSymbol(dynamic_cast<ee::Symbol*>(s2_sym)->GetFilepath());
@@ -422,14 +422,14 @@ PackToBin(uint8_t** ptr) const
 	uint32_t id = m_node->GetID();
 	pack(id, ptr);
 
-	uint16_t angle_start = float2int(m_angle_start, 100);
+	uint16_t angle_start = bs::float2int(m_angle_start, 100);
 	pack(angle_start, ptr);
-	uint16_t angle_end = float2int(m_angle_end, 100);
+	uint16_t angle_end = bs::float2int(m_angle_end, 100);
 	pack(angle_end, ptr);
 
-	uint16_t scale_start = float2int(m_scale_start, 100);
+	uint16_t scale_start = bs::float2int(m_scale_start, 100);
 	pack(scale_start, ptr);
-	uint16_t scale_end = float2int(m_scale_end, 100);
+	uint16_t scale_end = bs::float2int(m_scale_end, 100);
 	pack(scale_end, ptr);
 
 	uint32_t mul_col_begin = m_mul_col_begin;

@@ -1,7 +1,6 @@
 #include "PackParticle3D.h"
 #include "PackNodeFactory.h"
 #include "binary_io.h"
-#include "to_int.h"
 
 #include <ee/Symbol.h>
 #include <ee/SymbolMgr.h>
@@ -14,6 +13,7 @@ namespace lua = ebuilder::lua;
 #include <simp/simp_types.h>
 #include <sprite2/P3dEmitterCfg.h>
 #include <gum/trans_color.h>
+#include <bs/FixedPointNum.h>
 
 namespace esprpacker
 {
@@ -104,77 +104,77 @@ void PackParticle3d::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 
 	// body
 
-	uint8_t static_mode = bool2int(m_static_mode);
+	uint8_t static_mode = bs::bool2int(m_static_mode);
 	pack(static_mode, ptr);
 
-	uint16_t emission_time = float2int(m_emission_time, 100);
+	uint16_t emission_time = bs::float2int(m_emission_time, 100);
 	pack(emission_time, ptr);
 	uint16_t count = m_count;
 	pack(count, ptr);
 
-	uint16_t life = float2int(m_life, 100);
+	uint16_t life = bs::float2int(m_life, 100);
 	pack(life, ptr);
-	uint16_t life_var = float2int(m_life_var, 100);
+	uint16_t life_var = bs::float2int(m_life_var, 100);
 	pack(life_var, ptr);
 
-	int16_t hori = radian2int(m_hori);
+	int16_t hori = bs::radian2int(m_hori);
 	pack(hori, ptr);
-	uint16_t hori_var = radian2int(m_hori_var);
+	uint16_t hori_var = bs::radian2int(m_hori_var);
 	pack(hori_var, ptr);
-	int16_t vert = radian2int(m_vert);
+	int16_t vert = bs::radian2int(m_vert);
 	pack(vert, ptr);
-	uint16_t vert_var = radian2int(m_vert_var);
+	uint16_t vert_var = bs::radian2int(m_vert_var);
 	pack(vert_var, ptr);
 
-	uint16_t radial_spd = float2int(m_radial_spd);
+	uint16_t radial_spd = bs::float2int(m_radial_spd);
 	pack(radial_spd, ptr);
-	uint16_t radial_spd_var = float2int(m_radial_spd_var);
+	uint16_t radial_spd_var = bs::float2int(m_radial_spd_var);
 	pack(radial_spd_var, ptr);
 
-	int16_t tangential_spd = float2int(m_tangential_spd);
+	int16_t tangential_spd = bs::float2int(m_tangential_spd);
 	pack(tangential_spd, ptr);
-	uint16_t tangential_spd_var = float2int(m_tangential_spd_var);
+	uint16_t tangential_spd_var = bs::float2int(m_tangential_spd_var);
 	pack(tangential_spd_var, ptr);
 
-	int16_t angular_spd = radian2int(m_angular_spd);
+	int16_t angular_spd = bs::radian2int(m_angular_spd);
 	pack(angular_spd, ptr);
-	uint16_t angular_spd_var = radian2int(m_angular_spd_var);
+	uint16_t angular_spd_var = bs::radian2int(m_angular_spd_var);
 	pack(angular_spd_var, ptr);
 
-	uint16_t dis_region = float2int(m_dis_region);
+	uint16_t dis_region = bs::float2int(m_dis_region);
 	pack(dis_region, ptr);
-	uint16_t dis_region_var = float2int(m_dis_region_var);
+	uint16_t dis_region_var = bs::float2int(m_dis_region_var);
 	pack(dis_region_var, ptr);
-	uint16_t dis_spd = float2int(m_dis_spd);
+	uint16_t dis_spd = bs::float2int(m_dis_spd);
 	pack(dis_spd, ptr);
-	uint16_t dis_spd_var = float2int(m_dis_spd_var);
+	uint16_t dis_spd_var = bs::float2int(m_dis_spd_var);
 	pack(dis_spd_var, ptr);
 
-	int16_t gravity = float2int(m_gravity);
+	int16_t gravity = bs::float2int(m_gravity);
 	pack(gravity, ptr);
 
-	int16_t linear_acc = float2int(m_linear_acc);
+	int16_t linear_acc = bs::float2int(m_linear_acc);
 	pack(linear_acc, ptr);
-	uint16_t linear_acc_var = float2int(m_linear_acc_var);
+	uint16_t linear_acc_var = bs::float2int(m_linear_acc_var);
 	pack(linear_acc_var, ptr);
 
-	uint16_t fadeout_time = float2int(m_fadeout_time, 100);
+	uint16_t fadeout_time = bs::float2int(m_fadeout_time, 100);
 	pack(fadeout_time, ptr);
 
 	uint8_t ground = m_ground;
 	pack(ground, ptr);
 
-	uint16_t start_radius = float2int(m_start_radius);
+	uint16_t start_radius = bs::float2int(m_start_radius);
 	pack(start_radius, ptr);
-	int16_t start_height = float2int(m_start_height);
+	int16_t start_height = bs::float2int(m_start_height);
 	pack(start_height, ptr);
 
-	uint8_t orient_to_movement = bool2int(m_orient_to_movement);
+	uint8_t orient_to_movement = bs::bool2int(m_orient_to_movement);
 	pack(orient_to_movement, ptr);
 
-	uint8_t loop = bool2int(m_loop);
+	uint8_t loop = bs::bool2int(m_loop);
 	pack(loop, ptr);
-	uint8_t local = bool2int(m_local);
+	uint8_t local = bs::bool2int(m_local);
 	pack(local, ptr);
 
 	uint8_t blend = m_blend;
@@ -309,10 +309,10 @@ Component(const p3d_symbol& sym)
 	m_angle				= sym.angle;
 	m_angle_var			= sym.angle_var;
 
-	m_mul_col_begin		= gum::color2int(sym.mul_col_begin.rgba, s2::RGBA);
-	m_mul_col_end		= gum::color2int(sym.mul_col_end.rgba, s2::RGBA);
-	m_add_col_begin		= gum::color2int(sym.add_col_begin.rgba, s2::RGBA);
-	m_add_col_end		= gum::color2int(sym.add_col_end.rgba, s2::RGBA);
+	m_mul_col_begin		= gum::color2int(sym.mul_col_begin.rgba, bsn::RGBA);
+	m_mul_col_end		= gum::color2int(sym.mul_col_end.rgba, bsn::RGBA);
+	m_add_col_begin		= gum::color2int(sym.add_col_begin.rgba, bsn::RGBA);
+	m_add_col_end		= gum::color2int(sym.add_col_end.rgba, bsn::RGBA);
 
 	s2::Symbol* s2_sym = static_cast<s2::Symbol*>(sym.ud);
 	auto ee_sym = ee::SymbolMgr::Instance()->FetchSymbol(dynamic_cast<ee::Symbol*>(s2_sym)->GetFilepath());
@@ -378,14 +378,14 @@ PackToBin(uint8_t** ptr) const
 	uint16_t count = m_count;
 	pack(count, ptr);
 
-	uint16_t scale_start = float2int(m_scale_start, 100);
+	uint16_t scale_start = bs::float2int(m_scale_start, 100);
 	pack(scale_start, ptr);
-	uint16_t scale_end = float2int(m_scale_end, 100);
+	uint16_t scale_end = bs::float2int(m_scale_end, 100);
 	pack(scale_end, ptr);
 
-	int16_t angle = radian2int(m_angle);
+	int16_t angle = bs::radian2int(m_angle);
 	pack(angle, ptr);
-	uint16_t angle_var = radian2int(m_angle_var);
+	uint16_t angle_var = bs::radian2int(m_angle_var);
 	pack(angle_var, ptr);
 
 	uint32_t mul_col_begin = m_mul_col_begin;

@@ -1,6 +1,5 @@
 #include "PackLabel.h"
 #include "binary_io.h"
-#include "to_int.h"
 
 #include <easytext.h>
 #include <easybuilder.h>
@@ -10,6 +9,7 @@ namespace lua = ebuilder::lua;
 #include <simp/simp_types.h>
 #include <sprite2/UpdateParams.h>
 #include <gum/StringHelper.h>
+#include <bs/FixedPointNum.h>
 
 namespace esprpacker
 {
@@ -133,9 +133,9 @@ void PackLabel::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 	uint32_t font_color = m_tb.font_color.ToRGBA();
 	pack(font_color, ptr);
 
-	uint8_t edge = bool2int(m_tb.has_edge);
+	uint8_t edge = bs::bool2int(m_tb.has_edge);
 	pack(edge, ptr);
-	uint16_t edge_size = float2int(m_tb.edge_size, 1024);
+	uint16_t edge_size = bs::float2int(m_tb.edge_size, 1024);
 	pack(edge_size, ptr);
 	uint32_t edge_color = m_tb.edge_color.ToRGBA();
 	pack(edge_color, ptr);
@@ -145,13 +145,13 @@ void PackLabel::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const
 	uint8_t align_vert = m_tb.align_vert;
 	pack(align_vert, ptr);
 
-	uint16_t space_hori = float2int(m_tb.space_hori, 1024);
-	uint16_t space_vert = float2int(m_tb.space_vert, 1024);
+	uint16_t space_hori = bs::float2int(m_tb.space_hori, 1024);
+	uint16_t space_vert = bs::float2int(m_tb.space_vert, 1024);
 	pack(space_hori, ptr);
 	pack(space_vert, ptr);
 
-	uint8_t overflow = bool2int(m_tb.overflow);
-	uint8_t richtext = bool2int(m_tb.richtext);
+	uint8_t overflow = bs::bool2int(m_tb.overflow);
+	uint8_t richtext = bs::bool2int(m_tb.richtext);
 	uint8_t pack8 = (richtext) | (overflow << 1);
 	pack(pack8, ptr);
 

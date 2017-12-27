@@ -1,7 +1,6 @@
 #include "PackAnimationSpr.h"
 #include "PackNodeFactory.h"
 #include "binary_io.h"
-#include "to_int.h"
 
 #include <easyanim.h>
 #include <easybuilder.h>
@@ -9,6 +8,7 @@ namespace lua = ebuilder::lua;
 
 #include <simp/NodeAnimationSpr.h>
 #include <simp/simp_types.h>
+#include <bs/FixedPointNum.h>
 
 namespace esprpacker
 {
@@ -74,12 +74,12 @@ void PackAnimationSpr::PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) con
 	uint32_t sym = m_sym->GetID();
 	pack(sym, ptr);
 
-	uint8_t loop = bool2int(m_loop);
-	uint8_t start_random = bool2int(m_start_random);
+	uint8_t loop = bs::bool2int(m_loop);
+	uint8_t start_random = bs::bool2int(m_start_random);
 	uint8_t pack8 = (loop) | (start_random << 1);
 	pack(pack8, ptr);
 
-	uint32_t interval = float2int(m_interval, 1024);
+	uint32_t interval = bs::float2int(m_interval, 1024);
 	pack(interval, ptr);
 
 	uint16_t fps = m_fps;
