@@ -6,7 +6,7 @@
 
 namespace mm { class LinearAllocator; }
 namespace bs { class ImportStream; }
-namespace json { class Value; }
+namespace Json { class Value; }
 
 namespace bsn
 {
@@ -14,20 +14,25 @@ namespace bsn
 class NodeSpr : public INode
 {
 public:
-	virtual size_t GetBinSize() const override;
-	virtual void StoreToBin(byte** data, size_t& length) const override;
-	virtual void StoreToJson(json::Value& val) const override;
-
-	static NodeSpr* Create(mm::LinearAllocator& alloc, bs::ImportStream& is);
-	static NodeSpr* Create(mm::LinearAllocator& alloc, const json::Value& val);
-
-private:
 	NodeSpr();
 
-private:
-	static size_t Size(uint32_t type);
+	//virtual size_t GetBinSize() const override;
+	//virtual void StoreToBin(byte** data, size_t& length) const override;
+	//virtual void StoreToJson(json::Value& val) const override;
 
-public:
+protected:
+	virtual void LoadFromBin(mm::LinearAllocator& alloc, bs::ImportStream& is);
+	virtual void LoadFromJson(mm::LinearAllocator& alloc, const Json::Value& val);
+
+	static size_t DataSize(uint32_t type);
+
+	static char* String2Char(mm::LinearAllocator& alloc, const std::string& str);
+
+	static int FloatToInt(float f) {
+		return static_cast<int>(floor(f * 1024.0f + 0.5f));
+	}
+
+private:
 	// geometry
 	static const int SCALE_MASK			= 1 << 1;
 	static const int SHEAR_MASK			= 1 << 2;
@@ -53,13 +58,13 @@ public:
 	static const int ACTOR_MASK         = 1 << 28;
 	static const int INTEGRATE_MASK     = 1 << 29;
 
-public:
+private:
 	const char* m_sym_path;
 
 	const char* m_name;
 
-	uint32_t m_type;
-	uint32_t m_data[1];
+	uint32_t  m_type;
+	uint32_t* m_data;
 	
 }; // NodeSpr
 

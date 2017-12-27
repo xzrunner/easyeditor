@@ -1,40 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="node">
-      <UniqueIdentifier>{209191cd-7a2c-444c-9818-3cfc1f4e2324}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="node\06.complex">
-      <UniqueIdentifier>{f8205792-9f0d-430e-8116-8db0d6a624ce}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="node\01.image">
+    <Filter Include="01.image">
       <UniqueIdentifier>{29fa8fac-fc99-439e-8b8d-8ca65bc9cfba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.complex">
+      <UniqueIdentifier>{f8205792-9f0d-430e-8116-8db0d6a624ce}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\bsn.h" />
     <ClInclude Include="..\..\..\include\bsn\ImageSpr.h">
-      <Filter>node\01.image</Filter>
+      <Filter>01.image</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\bsn\ComplexSym.h">
-      <Filter>node\06.complex</Filter>
+      <Filter>06.complex</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\bsn\NodeSpr.h">
-      <Filter>node</Filter>
+    <ClInclude Include="..\..\..\include\bsn\NodeSpr.h" />
+    <ClInclude Include="..\..\..\include\bsn\NodeSym.h" />
+    <ClInclude Include="..\..\..\include\bsn\NodeType.h" />
+    <ClInclude Include="..\..\..\include\bsn\NodeFactory.h" />
+    <ClInclude Include="..\..\..\include\bsn\ComplexSpr.h">
+      <Filter>06.complex</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\bsn\NodeSym.h">
-      <Filter>node</Filter>
-    </ClInclude>
+    <ClInclude Include="..\..\..\include\bsn\NodeSprParser.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\ImageSpr.cpp">
-      <Filter>node\01.image</Filter>
+      <Filter>01.image</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\ComplexSym.cpp">
-      <Filter>node\06.complex</Filter>
+      <Filter>06.complex</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\NodeSpr.cpp">
-      <Filter>node</Filter>
+    <ClCompile Include="..\..\..\source\NodeSpr.cpp" />
+    <ClCompile Include="..\..\..\source\NodeFactory.cpp" />
+    <ClCompile Include="..\..\..\source\ComplexSpr.cpp">
+      <Filter>06.complex</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\NodeSprParser.cpp" />
   </ItemGroup>
 </Project>
