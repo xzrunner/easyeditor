@@ -103,3 +103,9 @@
 [submodule "playdb"]
 	path = playdb
 	url = ssh://git@tea.ejoy.com:3222/LR/playdb.git
+[submodule "bs"]
+	path = bs
+	url = ssh://git@tea.ejoy.com:3222/LR/bs.git
+[submodule "guard"]
+	path = guard
+	url = ssh://git@tea.ejoy.com:3222/LR/guard.git
