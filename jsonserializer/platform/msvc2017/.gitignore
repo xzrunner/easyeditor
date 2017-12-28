@@ -1,0 +1,4 @@
+jsonserializer/
+projects/*
+
+!projects/jsonserializer.vcxproj
