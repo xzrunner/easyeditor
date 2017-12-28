@@ -31,16 +31,17 @@ public:
 	static ComplexSym* Create(mm::LinearAllocator& alloc, bs::ImportStream& is);
 	static ComplexSym* Create(mm::LinearAllocator& alloc, Json::Value& val);
 	
-private:
-	static size_t TypeSize();
-
 public:
 	struct Action
 	{
 		const char* name;
 		uint16_t* idx;
 		uint16_t n;
-	};
+
+		size_t GetBinSize() const;
+		void StoreToBin(uint8_t** ptr) const;
+
+	}; // Action
 
 private:
 	int16_t m_scissor[4];

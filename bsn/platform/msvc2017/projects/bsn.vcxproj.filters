@@ -29,9 +29,6 @@
     <ClInclude Include="..\..\..\include\bsn\NodeSpr.h">
       <Filter>spr</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\bsn\NodeSprParser.h">
-      <Filter>spr</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\bsn\ColorParser.h">
       <Filter>spr</Filter>
     </ClInclude>
@@ -51,9 +48,6 @@
       <Filter>06.complex</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\NodeSpr.cpp">
-      <Filter>spr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\NodeSprParser.cpp">
       <Filter>spr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\ColorParser.cpp">

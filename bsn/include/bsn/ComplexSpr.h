@@ -12,7 +12,7 @@ public:
 	// serialization
 	//
 	virtual size_t GetBinSize() const override;
-	virtual void StoreToBin(uint8_t** data, size_t& length) const override;
+	virtual void StoreToBin(uint8_t** ptr) const override;
 	virtual void StoreToJson(Json::Value& val) const override;
 
 	//

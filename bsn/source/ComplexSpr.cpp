@@ -17,7 +17,6 @@ size_t ComplexSpr::GetBinSize() const
 
 void ComplexSpr::StoreToBin(uint8_t** data, size_t& length) const
 {
-
 }
 
 void ComplexSpr::StoreToJson(Json::Value& val) const

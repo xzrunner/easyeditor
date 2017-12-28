@@ -17,7 +17,6 @@
     <ClInclude Include="..\..\..\include\bsn\ImageSpr.h" />
     <ClInclude Include="..\..\..\include\bsn\NodeSpr.h" />
     <ClInclude Include="..\..\..\include\bsn\NodeFactory.h" />
-    <ClInclude Include="..\..\..\include\bsn\NodeSprParser.h" />
     <ClInclude Include="..\..\..\include\bsn\NodeSym.h" />
     <ClInclude Include="..\..\..\include\bsn\NodeType.h" />
   </ItemGroup>
@@ -28,7 +27,6 @@
     <ClCompile Include="..\..\..\source\ImageSpr.cpp" />
     <ClCompile Include="..\..\..\source\NodeSpr.cpp" />
     <ClCompile Include="..\..\..\source\NodeFactory.cpp" />
-    <ClCompile Include="..\..\..\source\NodeSprParser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\include\bsn\ColorParser.inl" />
