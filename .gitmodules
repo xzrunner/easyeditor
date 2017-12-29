@@ -1,84 +1,84 @@
 [submodule "editor-external"]
 	path = editor-external
-	url = ssh://git@github.com:xzrunner/external.git
+	url = ssh://git@tea.ejoy.com:3222/LR/external.git
 [submodule "particle/src"]
 	path = particle/src
-	url = ssh://git@github.com:xzrunner/ps.git
+	url = ssh://git@tea.ejoy.com:3222/LR/ps.git
 [submodule "dtex/src"]
 	path = dtex/src
-	url = ssh://git@github.com:xzrunner/dtex.git
+	url = ssh://git@tea.ejoy.com:3222/LR/dtex.git
 [submodule "gtxt/src/gtxt"]
 	path = gtxt/src/gtxt
-	url = ssh://git@github.com:xzrunner/gtxt.git
+	url = ssh://git@tea.ejoy.com:3222/LR/gtxt.git
 [submodule "rapidvg/src/rapidvg"]
 	path = rapidvg/src/rapidvg
-	url = ssh://git@github.com:xzrunner/RapidVG.git
+	url = ssh://git@tea.ejoy.com:3222/LR/RapidVG.git
 [submodule "ds/src/ds"]
 	path = ds/src/ds
-	url = ssh://git@github.com:xzrunner/ds.git
+	url = ssh://git@tea.ejoy.com:3222/LR/ds.git
 [submodule "sm/src/sm"]
 	path = sm/src/sm
-	url = ssh://git@github.com:xzrunner/sm.git
+	url = ssh://git@tea.ejoy.com:3222/LR/sm.git
 [submodule "camera25/src/camera25"]
 	path = camera25/src/camera25
-	url = ssh://git@github.com:xzrunner/camera25.git
+	url = ssh://git@tea.ejoy.com:3222/LR/camera25.git
 [submodule "fs/src/fs"]
 	path = fs/src/fs
-	url = ssh://git@github.com:xzrunner/fs.git
+	url = ssh://git@tea.ejoy.com:3222/LR/fs.git
 [submodule "logger/src/logger"]
 	path = logger/src/logger
-	url = ssh://git@github.com:xzrunner/logger.git
+	url = ssh://git@tea.ejoy.com:3222/LR/logger.git
 [submodule "mtrail/src/mtrail"]
 	path = mtrail/src/mtrail
-	url = ssh://git@github.com:xzrunner/mtrail.git
+	url = ssh://git@tea.ejoy.com:3222/LR/mtrail.git
 [submodule "cu/src/cu"]
 	path = cu/src/cu
-	url = ssh://git@github.com:xzrunner/cu.git
+	url = ssh://git@tea.ejoy.com:3222/LR/cu.git
 [submodule "sprite2"]
 	path = sprite2
-	url = ssh://git@github.com:xzrunner/sprite2.git
+	url = ssh://git@tea.ejoy.com:3222/LR/sprite2.git
 [submodule "simp"]
 	path = simp
-	url = ssh://git@github.com:xzrunner/simp.git
+	url = ssh://git@tea.ejoy.com:3222/LR/simp.git
 [submodule "gum"]
 	path = gum
-	url = ssh://git@github.com:xzrunner/gum.git
+	url = ssh://git@tea.ejoy.com:3222/LR/gum.git
 [submodule "gimg/src/gimg"]
 	path = gimg/src/gimg
-	url = ssh://git@github.com:xzrunner/gimg.git
+	url = ssh://git@tea.ejoy.com:3222/LR/gimg.git
 [submodule "rigging/src/rigging"]
 	path = rigging/src/rigging
-	url = ssh://git@github.com:xzrunner/rigging.git
+	url = ssh://git@tea.ejoy.com:3222/LR/rigging.git
 [submodule "bimp"]
 	path = bimp
-	url = ssh://git@github.com:xzrunner/bimp.git
+	url = ssh://git@tea.ejoy.com:3222/LR/bimp.git
 [submodule "timp"]
 	path = timp
-	url = ssh://git@github.com:xzrunner/timp.git
+	url = ssh://git@tea.ejoy.com:3222/LR/timp.git
 [submodule "dtex2"]
 	path = dtex2
-	url = ssh://git@github.com:xzrunner/dtex2.git
+	url = ssh://git@tea.ejoy.com:3222/LR/dtex2.git
 [submodule "texpack/src/texpack"]
 	path = texpack/src/texpack
-	url = ssh://git@github.com:xzrunner/texpack.git
+	url = ssh://git@tea.ejoy.com:3222/LR/texpack.git
 [submodule "unirender"]
 	path = unirender
-	url = ssh://git@github.com:xzrunner/unirender.git
+	url = ssh://git@tea.ejoy.com:3222/LR/unirender.git
 [submodule "shaderlab"]
 	path = shaderlab
-	url = ssh://git@github.com:xzrunner/ShaderLab.git
+	url = ssh://git@tea.ejoy.com:3222/LR/ShaderLab.git
 [submodule "tasks/src/tasks"]
 	path = tasks/src/tasks
-	url = ssh://git@github.com:xzrunner/tasks.git
+	url = ssh://git@tea.ejoy.com:3222/LR/tasks.git
 [submodule "pimg"]
 	path = pimg
-	url = ssh://git@github.com:xzrunner/pimg.git
+	url = ssh://git@tea.ejoy.com:3222/LR/pimg.git
 [submodule "model3"]
 	path = model3
-	url = ssh://git@github.com:xzrunner/model3.git
+	url = ssh://git@tea.ejoy.com:3222/LR/model3.git
 [submodule "polymesh"]
 	path = polymesh
-	url = ssh://git@github.com:xzrunner/polymesh.git
+	url = ssh://git@tea.ejoy.com:3222/LR/polymesh.git
 [submodule "glp/src/glp"]
 	path = glp/src/glp
 	url = ssh://git@tea.ejoy.com:3222/LR/glp.git
