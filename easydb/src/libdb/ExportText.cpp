@@ -73,7 +73,8 @@ void ExportText::Load(const std::string& dir)
 		reader.parse(fin, val);
 		fin.close();
 
-		std::string language = val["sprite"][0]["text"]["text"].asString();
+		int idx0 = 0;
+		std::string language = val["sprite"][idx0]["text"]["text"].asString();
 		ee::StringHelper::ReplaceAll(language, "\n", "\\n");
 		text.language.push_back(language);
 
@@ -120,8 +121,9 @@ void ExportText::SetTID(const std::string& dir)
 		reader.parse(fin, val);
 		fin.close();
 
-		val["sprite"][0]["text"]["text"] = "";
-		val["sprite"][0]["text"]["tid"] = tid;
+		int idx0 = 0;
+		val["sprite"][idx0]["text"]["text"] = "";
+		val["sprite"][idx0]["text"]["tid"] = tid;
 
 		Json::StyledStreamWriter writer;
 		std::locale::global(std::locale(""));

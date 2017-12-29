@@ -54,19 +54,19 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 
 	float volume = 1, offset = 0, duration = 0, fade_in = 0, fade_out = 0;
 	if (audio_val.isMember("volume")) {
-		volume = audio_val["volume"].asFloat();
+		volume = audio_val["volume"].asDouble();
 	}
 	if (audio_val.isMember("offset")) {
-		offset = audio_val["offset"].asFloat();
+		offset = audio_val["offset"].asDouble();
 	}
 	if (audio_val.isMember("duration")) {
-		duration = audio_val["duration"].asFloat();
+		duration = audio_val["duration"].asDouble();
 	}
 	if (audio_val.isMember("fade_in")) {
-		fade_in = audio_val["fade_in"].asFloat();
+		fade_in = audio_val["fade_in"].asDouble();
 	}
 	if (audio_val.isMember("fade_out")) {
-		fade_out = audio_val["fade_out"].asFloat();
+		fade_out = audio_val["fade_out"].asDouble();
 	}
 
 	SetVolume(volume);
