@@ -14,7 +14,7 @@ size_t ImageSpr::GetBinSize() const
 	return bs::pack_size(m_filepath);
 }
 
-void ImageSpr::StoreToBin(uint8_t** data, size_t& length) const
+void ImageSpr::StoreToBin(uint8_t** ptr) const
 {
 
 }

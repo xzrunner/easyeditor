@@ -20,7 +20,7 @@ public:
 	// serialization
 	//
 	virtual size_t GetBinSize() const;
-	virtual void StoreToBin(uint8_t** data, size_t& length) const;
+	virtual void StoreToBin(uint8_t** ptr) const;
 	virtual void StoreToJson(Json::Value& val) const;
 
 protected:

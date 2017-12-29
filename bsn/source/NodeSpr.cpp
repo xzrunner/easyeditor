@@ -27,7 +27,7 @@ size_t NodeSpr::GetBinSize() const
 	return 0;
 }
 
-void NodeSpr::StoreToBin(uint8_t** data, size_t& length) const
+void NodeSpr::StoreToBin(uint8_t** ptr) const
 {
 
 }

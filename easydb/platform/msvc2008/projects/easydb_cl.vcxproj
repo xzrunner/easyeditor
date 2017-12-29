@@ -120,6 +120,9 @@
     <ProjectReference Include="..\..\..\..\bimp\platform\msvc2008\projects\bimp.vcxproj">
       <Project>{f22a86e7-b73f-4f6a-9ea8-e4ae9cc9d885}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\bsn\platform\msvc2017\projects\bsn.vcxproj">
+      <Project>{b6939acb-3794-4b2a-95da-f99ecdf79d0f}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\camera25\platform\msvc2008\projects\camera25.vcxproj">
       <Project>{510eaacb-b026-43f3-a68d-3ec421e46dd0}</Project>
     </ProjectReference>
@@ -270,6 +273,9 @@
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\gtxt\platform\msvc2008\projects\gtxt.vcxproj">
       <Project>{eb4f1ee0-cb3b-4b2e-9655-a8e22f948575}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\guard\platform\msvc2017\projects\guard.vcxproj">
+      <Project>{cc45ae0e-8c51-4759-9614-8bc321c565a0}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\gum\platform\msvc2008\projects\gum.vcxproj">
       <Project>{70c5478d-6d53-4f75-99d4-f06373175c83}</Project>

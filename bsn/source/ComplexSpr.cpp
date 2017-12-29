@@ -15,7 +15,7 @@ size_t ComplexSpr::GetBinSize() const
 	return 0;
 }
 
-void ComplexSpr::StoreToBin(uint8_t** data, size_t& length) const
+void ComplexSpr::StoreToBin(uint8_t** ptr) const
 {
 }
 
