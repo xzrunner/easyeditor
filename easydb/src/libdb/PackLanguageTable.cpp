@@ -46,8 +46,8 @@ void PackLanguageTable::Trigger(const std::string& src_file, const std::string& 
 {
 	LoadFromCSV(src_file);
 
-//	PackToBin(dst_file);
-	PackToPlayDB(dst_file);
+	PackToBin(dst_file);
+//	PackToPlayDB(dst_file);
 }
 
 void PackLanguageTable::LoadFromCSV(const std::string& filepath)
@@ -94,8 +94,8 @@ void PackLanguageTable::PackToBin(const std::string& filepath)
 	sz += sizeof(uint16_t); // items count
 	sz += sizeof(uint16_t); // types count
 	assert(m_header.size() > 0);
-	for (auto& type : m_header) {
-		sz += esprpacker::sizeof_pack_str(type.c_str());
+	for (int i = 1, n = m_header.size(); i < n; ++i) {
+		sz += esprpacker::sizeof_pack_str(m_header[i].c_str());
 	}
 	for (auto& item : m_body) {
 		assert(item.size() == m_header.size());
@@ -109,15 +109,15 @@ void PackLanguageTable::PackToBin(const std::string& filepath)
 	uint8_t* ptr = buf;
 	uint16_t items_count = m_body.size();
 	esprpacker::pack(items_count, &ptr);
-	uint16_t types_count = m_header.size();
+	uint16_t types_count = m_header.size() - 1;
 	esprpacker::pack(types_count, &ptr);
-	for (auto& type : m_header) {
-		esprpacker::pack_str(gum::StringHelper::GBKToUTF8(type.c_str()).c_str(), &ptr);
+	for (int i = 1, n = m_header.size(); i < n; ++i) {
+		esprpacker::pack_str(m_header[i].c_str(), &ptr);
 	}
 	for (auto& item : m_body) {
 		assert(item.size() == m_header.size());
 		for (auto& type : item) {
-			esprpacker::pack_long_str(gum::StringHelper::GBKToUTF8(type.c_str()).c_str(), &ptr);
+			esprpacker::pack_long_str(type.c_str(), &ptr);
 		}
 	}
 

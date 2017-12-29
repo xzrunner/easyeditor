@@ -103,13 +103,8 @@ void Config::LoadFromFile(const char* filename)
 void Config::LoadTextCfg(const Json::Value& value)
 {
 	std::string language = value["language"].asString();
-	s2::TextTable::LanguageIdx lang = s2::TextTable::LANG_SIMPLIFIED;
-	if (language == "simplified") {
-		lang = s2::TextTable::LANG_SIMPLIFIED;
-	} else if (language == "traditional") {
-		lang = s2::TextTable::LANG_TRADITIONAL;
-	}
-	gum::Config::Instance()->SetLanguage(lang);
+	int lang_idx = s2::TextTable::Instance()->QueryType(language.c_str());
+	gum::Config::Instance()->SetLanguage(lang_idx);
 
 	std::string filepath = value["filepath"].asString();
 	gum::TextTableLoader::LoadFromCSV(filepath.c_str());
