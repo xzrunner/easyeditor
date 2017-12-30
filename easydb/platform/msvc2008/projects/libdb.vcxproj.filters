@@ -399,6 +399,9 @@
     <ClCompile Include="..\..\..\src\libdb\PackLanguageTable.cpp">
       <Filter>commands\export</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\libdb\PackSceneNode.cpp">
+      <Filter>commands\pack\bin</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\libdb\CopyFile.h">
@@ -712,6 +715,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\libdb\PackLanguageTable.h">
       <Filter>commands\export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libdb\PackSceneNode.h">
+      <Filter>commands\pack\bin</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

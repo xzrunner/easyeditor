@@ -90,6 +90,7 @@
 #include "ExportAudio.h"
 #include "ExportText.h"
 #include "PackLanguageTable.h"
+#include "PackSceneNode.h"
 
 namespace edb
 {
@@ -185,6 +186,7 @@ void CommandLoader::Init()
 	fc->Register(ExportAudio::Create());
 	fc->Register(ExportText::Create());
 	fc->Register(PackLanguageTable::Create());
+	fc->Register(PackSceneNode::Create());
 }
 
 }

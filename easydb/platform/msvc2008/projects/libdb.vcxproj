@@ -154,6 +154,7 @@
     <ClCompile Include="..\..\..\src\libdb\PackRegularRect.cpp" />
     <ClCompile Include="..\..\..\src\libdb\PackRes.cpp" />
     <ClCompile Include="..\..\..\src\libdb\PackResID.cpp" />
+    <ClCompile Include="..\..\..\src\libdb\PackSceneNode.cpp" />
     <ClCompile Include="..\..\..\src\libdb\PackTexture.cpp" />
     <ClCompile Include="..\..\..\src\libdb\PrintGLExt.cpp" />
     <ClCompile Include="..\..\..\src\libdb\RectCutWithJson.cpp" />
@@ -260,6 +261,7 @@
     <ClInclude Include="..\..\..\src\libdb\PackRegularRect.h" />
     <ClInclude Include="..\..\..\src\libdb\PackRes.h" />
     <ClInclude Include="..\..\..\src\libdb\PackResID.h" />
+    <ClInclude Include="..\..\..\src\libdb\PackSceneNode.h" />
     <ClInclude Include="..\..\..\src\libdb\PackTexture.h" />
     <ClInclude Include="..\..\..\src\libdb\PrintGLExt.h" />
     <ClInclude Include="..\..\..\src\libdb\RectCutWithJson.h" />
