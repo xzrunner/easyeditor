@@ -9,6 +9,8 @@
 
 #include <json/json.h>
 
+namespace bsn { class NodeSpr; }
+
 namespace ee
 {
 
@@ -46,6 +48,7 @@ public:
 
 	virtual void Load(const Json::Value& val, const std::string& dir = "");
 	virtual void Store(Json::Value& val, const std::string& dir = "") const;
+	virtual void Load(const bsn::NodeSpr*);
 
 	virtual PropertySetting* CreatePropertySetting(EditPanelImpl* stage);
 

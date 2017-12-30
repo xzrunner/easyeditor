@@ -1,109 +1,55 @@
 #include "LoadFromBin.h"
-#include "NodeToSprite.h"
 #include "Symbol.h"
 
+#include <ee/SymbolMgr.h>
+#include <ee/SpriteFactory.h>
 #include <ee/FileHelper.h>
-#include <ee/StringHelper.h>
-#include <ee/ImageData.h>
-#include <ee/Image.h>
-#include <ee/Sprite.h>
 
-#include <easyrespacker.h>
+#include <bsn/NodeFactory.h>
+#include <bsn/NodeSym.h>
+#include <bsn/NodeSpr.h>
+#include <bsn/ComplexSym.h>
+#include <memmgr/LinearAllocator.h>
+#include <bs/ImportStream.h>
 
-#include <gimg_typedef.h>
+#include <memory>
+#include <fstream>
 
 namespace ecomplex
 {
 
-void LoadFromBin::Load(const Json::Value& value, const std::string& dir, Symbol& sym)
+void LoadFromBin::Load(const std::string& filepath, Symbol& complex)
 {
-	std::string filename = ee::FileHelper::GetAbsolutePath(dir, value["bin file"].asString());
+	mm::LinearAllocator alloc;
 
-	std::string ept_path = filename;
-	std::vector<ee::ImagePtr> images;
-	LoadImages(ept_path, images);
+	std::ifstream fin(filepath, std::ios::binary);
+	fin.seekg(0, std::ios::end);
+	size_t len = static_cast<size_t>(fin.tellg());
+	fin.seekg(0, std::ios::beg);
+	char* data = new char[len];
+	fin.read(data, len);
+	fin.close();
 
-	std::string epe_path = filename + ".epe";
-	erespacker::ResUnpacker unpacker;
-	unpacker.UnpackBin(epe_path, images);
+	auto sym = bsn::NodeFactory::CreateNodeSym(alloc, bs::ImportStream(data, len));
+	auto sym_src = dynamic_cast<bsn::ComplexSym*>(sym);
 
-	std::string export_name = value["export name"].asString();
+	sm::rect scissor;
+	int16_t xmin, ymin, xmax, ymax;
+	sym_src->GetScissor(xmin, ymin, xmax, ymax);
+	complex.SetScissor(scissor);
 
-	erespacker::IPackNode* node = erespacker::UnpackNodeFactory::Instance()->Query(export_name);
-	sym.Add(NodeToSprite::Trans(node));
-}
-
-#define LZMA_PROPS_SIZE 5
-
-struct block {
-	uint8_t size[4];
-	uint8_t prop[LZMA_PROPS_SIZE];
-	uint8_t data[119];
-};
-
-void LoadFromBin::LoadImages(const std::string& filepath, std::vector<ee::ImagePtr>& images)
-{
-	int idx = 1;
-	while (true) 
+	auto dir = ee::FileHelper::GetFileDir(filepath);
+	for (int i = 0, n = sym_src->GetChildrenNum(); i < n; ++i) 
 	{
-		std::string _filepath = filepath + "." + ee::StringHelper::ToString(idx++) + ".ept";
-		if (!ee::FileHelper::IsFileExist(_filepath)) {
-			break;
-		}
-
-		std::locale::global(std::locale(""));
-		std::ifstream fin(_filepath.c_str(), std::ios::binary);
-		std::locale::global(std::locale("C"));
-		assert(!fin.fail());
-
-		int32_t sz;
-		erespacker::unpack(sz, fin);
-
-		if (sz < 0) 
-		{
-			sz = -sz;
-			uint8_t* buf = new uint8_t[sz];
-			fin.read(reinterpret_cast<char*>(buf), sz);
-			LoadImage(&buf, images);
-			delete[] buf;
-		} 
-		else 
-		{
-			uint8_t* c_buf = new uint8_t[sz];
-			struct block* block = (struct block*)c_buf;
-			fin.read(reinterpret_cast<char*>(block), sz);
-
-			size_t uc_sz = sz * 10;		// FIXME
-			size_t guess_sz = uc_sz;
-			uint8_t* uc_buf = new uint8_t[uc_sz];
-			size_t c_sz = sz - sizeof(block->size) - LZMA_PROPS_SIZE;
-			erespacker::Lzma::Uncompress(uc_buf, &uc_sz, block->data, &c_sz, block->prop, LZMA_PROPS_SIZE);
-			if (guess_sz == uc_sz) {
-				throw ee::Exception("ecomplex LoadFromBin::LoadImages no enough space.");
-			}
-			delete[] c_buf;
-
-			uint8_t* ptr = uc_buf;
-			LoadImage(&ptr, images);
-
-			delete[] uc_buf;
-		}
+		auto child = sym_src->GetChildByIndex(i);
+		auto child_path = ee::FileHelper::GetAbsolutePath(
+			dir, child->GetBaseInfo().GetFilepath());
+		auto sym = ee::SymbolMgr::Instance()->FetchSymbol(child_path);
+		auto spr = ee::SpriteFactory::Instance()->Create(sym);
+		spr->Load(child);
+		spr->SetVisible(true);
+		complex.Add(spr);
 	}
-}
-
-void LoadFromBin::LoadImage(uint8_t** ptr, std::vector<ee::ImagePtr>& images)
-{
-	int8_t type;
-	erespacker::unpack(type, ptr);
-
-	int16_t w, h;
-	erespacker::unpack(w, ptr);
-	erespacker::unpack(h, ptr);
-
-	int buf_sz = w * h * 4;
-	uint8_t* buf = new uint8_t[buf_sz];
-	memcpy(buf, *ptr, buf_sz);
-	images.push_back(std::make_shared<ee::Image>(buf, w, h, GPF_RGBA8));
 }
 
 }

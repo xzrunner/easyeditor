@@ -3,8 +3,9 @@
 
 #include "LoadFromJson.h"
 #include "LoadFromLua.h"
-#include "LoadFromBin.h"
+#include "LoadFromEP.h"
 #include "LoadFromPSD.h"
+#include "LoadFromBin.h"
 
 #include <ee/Config.h>
 #include <ee/FileHelper.h>
@@ -20,6 +21,13 @@ namespace ecomplex
 
 void FileLoader::Load(const std::string& filepath, Symbol& complex)
 {
+	std::string ext = filepath.substr(filepath.find_last_of('.') + 1);
+	std::transform(ext.begin(), ext.end(), ext.begin(), tolower);
+	if (ext == "bin") {
+		LoadFromBin::Load(filepath, complex);
+		return;
+	}
+
 	if (ee::Config::Instance()->IsUseDTex()) {
 //		gum::DTex::Instance()->LoadBegin();
 	}
@@ -39,7 +47,7 @@ void FileLoader::Load(const std::string& filepath, Symbol& complex)
 	if (!value["lua desc"].isNull()) {
 		LoadFromLua::Load(value, dir, complex);
 	} else if (!value["bin file"].isNull()) {
-		LoadFromBin::Load(value, dir, complex);
+		LoadFromEP::Load(value, dir, complex);
 	} else if (type == s2::SYM_COMPLEX) {
 		LoadFromJson::Load(filepath, value, dir, complex);
 	} else if (type == ee::SYM_PSD) {

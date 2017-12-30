@@ -74,6 +74,7 @@ public:
 	static std::string FormatFilepathAbsolute(const std::string& filepath);
 
 	static std::string GetJsonFileFilter(const std::string& file_tag);
+	static std::string GetBinFileFilter(const std::string& file_tag);
 
 }; // FileHelper
 

@@ -353,4 +353,9 @@ std::string FileHelper::GetJsonFileFilter(const std::string& file_tag)
 	return StringHelper::Format("EASY files (*_%s.json)|*_%s.json", file_tag.c_str(), file_tag.c_str());
 }
 
+std::string FileHelper::GetBinFileFilter(const std::string& file_tag)
+{
+	return StringHelper::Format("EASY files (*_%s.bin)|*_%s.bin", file_tag.c_str(), file_tag.c_str());
+}
+
 }

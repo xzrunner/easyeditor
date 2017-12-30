@@ -54,9 +54,6 @@
     <ClCompile Include="..\..\..\src\libcomplex\FileLoader.cpp">
       <Filter>fileio\load</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\libcomplex\LoadFromBin.cpp">
-      <Filter>fileio\load</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\libcomplex\LoadFromJson.cpp">
       <Filter>fileio\load</Filter>
     </ClCompile>
@@ -162,12 +159,15 @@
     <ClCompile Include="..\..\..\src\libcomplex\OpenSymbolDialog.cpp">
       <Filter>utility</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\LoadFromEP.cpp">
+      <Filter>fileio\load</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\LoadFromBin.cpp">
+      <Filter>fileio\load</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\libcomplex\FileLoader.h">
-      <Filter>fileio\load</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\libcomplex\LoadFromBin.h">
       <Filter>fileio\load</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\libcomplex\LoadFromJson.h">
@@ -274,6 +274,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\libcomplex\OpenSymbolDialog.h">
       <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\LoadFromEP.h">
+      <Filter>fileio\load</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\LoadFromBin.h">
+      <Filter>fileio\load</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

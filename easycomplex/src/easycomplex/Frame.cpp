@@ -81,9 +81,10 @@ void Frame::OnSettings(wxCommandEvent& event)
 std::string Frame::GetFileFilter() const
 {
 	std::string tag = ee::SymbolFile::Instance()->Tag(s2::SYM_COMPLEX);
-	std::string complex_filter = ee::FileHelper::GetJsonFileFilter(tag),
+	std::string json_filter = ee::FileHelper::GetJsonFileFilter(tag),
+		        bin_filter = ee::FileHelper::GetBinFileFilter(tag),
 		        psd_filter = ee::FileHelper::GetJsonFileFilter("psd");
-	return complex_filter + "|" + psd_filter;
+	return json_filter + "|" + bin_filter + "|" + psd_filter;
 }
 
 void Frame::onPreview(wxCommandEvent& event)

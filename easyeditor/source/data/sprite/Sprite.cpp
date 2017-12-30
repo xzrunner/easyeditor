@@ -10,6 +10,7 @@
 #include "SpritePool.h"
 
 #include <sprite2/Sprite.h>
+#include <bsn/NodeSpr.h>
 
 #ifdef OPEN_SCREEN_CACHE
 #include "render/SpriteRenderer.h"
@@ -154,6 +155,12 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 {
 	ee::SpriteIO spr_io;
 	spr_io.Store(val, shared_from_this(), dir.c_str());
+}
+
+void Sprite::Load(const bsn::NodeSpr* spr)
+{
+	ee::SpriteIO spr_io;
+	spr_io.Load(spr->GetBaseInfo(), shared_from_this());
 }
 
 PropertySetting* Sprite::CreatePropertySetting(EditPanelImpl* stage)

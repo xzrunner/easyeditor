@@ -20,6 +20,7 @@
 #include <sprite2/SprVisitorParams.h>
 #include <sprite2/UpdateParams.h>
 #include <gum/SymbolFile.h>
+#include <bsn/NodeSpr.h>
 
 namespace ee
 {
@@ -102,6 +103,19 @@ SprPtr SpriteFactory::Create(const Json::Value& val, const std::string& dir, con
 	auto spr = SpriteFactory::Instance()->Create(sym);
 	spr->Load(val, dir);
 	spr->SetVisible(true);
+	return spr;
+}
+
+SprPtr SpriteFactory::Create(const bsn::NodeSpr* node_spr, const std::string& dir)
+{
+	std::string filepath = ee::FileHelper::GetAbsolutePath(
+		dir, node_spr->GetBaseInfo().GetFilepath());
+	SymPtr sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+	if (!sym) {
+		return nullptr;
+	}
+	auto spr = SpriteFactory::Instance()->Create(sym);
+	spr->Load(node_spr);
 	return spr;
 }
 

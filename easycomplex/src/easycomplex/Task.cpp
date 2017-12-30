@@ -54,6 +54,8 @@ void Task::Load(const char* filepath)
 	case ee::SYM_PSD:
 		FileIO::load(this, filepath);
 		break;
+	default:
+		FileIO::load(this, filepath);
 	}
 
 	// create actors
