@@ -1,0 +1,4 @@
+js/
+projects/*
+
+!projects/js.vcxproj

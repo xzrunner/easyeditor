@@ -11,15 +11,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\jsonserializer.h" />
+    <ClInclude Include="..\..\..\include\js.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\source\jsonserializer.cpp" />
+    <ClCompile Include="..\..\..\source\js.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>1.jsonserializer</ProjectName>
+    <ProjectName>1.js</ProjectName>
     <ProjectGuid>{68C18DA9-79BB-43A5-9E0C-79740AEA954B}</ProjectGuid>
-    <RootNamespace>jsonserializer</RootNamespace>
+    <RootNamespace>js</RootNamespace>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -49,12 +49,12 @@
     <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>..\jsonserializer\x86\Debug\</OutDir>
-    <IntDir>..\jsonserializer\x86\Debug\obj\</IntDir>
+    <OutDir>..\js\x86\Debug\</OutDir>
+    <IntDir>..\js\x86\Debug\obj\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>..\jsonserializer\x86\Release\</OutDir>
-    <IntDir>..\jsonserializer\x86\Release\obj\</IntDir>
+    <OutDir>..\js\x86\Release\</OutDir>
+    <IntDir>..\js\x86\Release\obj\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
