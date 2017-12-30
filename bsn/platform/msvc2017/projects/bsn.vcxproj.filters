@@ -35,6 +35,9 @@
     <ClInclude Include="..\..\..\include\bsn\NodeSym.h">
       <Filter>sym</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\bsn\NodeSprBase.h">
+      <Filter>spr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\ImageSpr.cpp">
@@ -47,10 +50,10 @@
     <ClCompile Include="..\..\..\source\ComplexSpr.cpp">
       <Filter>06.complex</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\NodeSpr.cpp">
+    <ClCompile Include="..\..\..\source\ColorParser.cpp">
       <Filter>spr</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\ColorParser.cpp">
+    <ClCompile Include="..\..\..\source\NodeSprBase.cpp">
       <Filter>spr</Filter>
     </ClCompile>
   </ItemGroup>

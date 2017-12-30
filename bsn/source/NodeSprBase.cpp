@@ -1,20 +1,19 @@
-#include "bsn/NodeSpr.h"
+#include "bsn/NodeSprBase.h"
 #include "bsn/ColorParser.h"
 
 #include <bs/ImportStream.h>
+#include <bs/ExportStream.h>
 #include <bs/typedef.h>
 #include <bs/Serializer.h>
 #include <bs/FixedPointNum.h>
+#include <memmgr/LinearAllocator.h>
 
 #include <json/value.h>
 
 namespace bsn
 {
 
-static const int LOW_FIXED_TRANS_PRECISION = 1024;
-static const int HIGH_FIXED_TRANS_PRECISION = 8192;
-
-NodeSpr::NodeSpr()
+NodeSprBase::NodeSprBase()
 	: m_sym_path(nullptr)
 	, m_name(nullptr)
 	, m_type(0)
@@ -22,27 +21,37 @@ NodeSpr::NodeSpr()
 {
 }
 
-size_t NodeSpr::GetBinSize() const
+size_t NodeSprBase::GetBinSize() const
 {
-	return 0;
+	size_t sz = 0;
+	sz += bs::pack_size(m_sym_path); // sym_path
+	sz += bs::pack_size(m_name);     // name
+	sz += bs::pack_size(m_type);     // type
+	sz += DataSize(m_type);          // data
+	return sz;
 }
 
-void NodeSpr::StoreToBin(uint8_t** ptr) const
+void NodeSprBase::StoreToBin(bs::ExportStream& es) const
+{
+	es.Write(m_sym_path); // sym_path
+	es.Write(m_name);     // name
+	es.Write(m_type);     // type
+	int zz = DataSize(m_type);
+	es.WriteBlock(reinterpret_cast<uint8_t*>(m_data), DataSize(m_type)); // data
+}
+
+void NodeSprBase::StoreToJson(Json::Value& val) const
 {
 
 }
 
-void NodeSpr::StoreToJson(Json::Value& val) const
-{
-
-}
-
-void NodeSpr::LoadFromBin(mm::LinearAllocator& alloc, bs::ImportStream& is)
+void NodeSprBase::LoadFromBin(mm::LinearAllocator& alloc, bs::ImportStream& is)
 {
 	m_sym_path = is.String(alloc);
 	m_name = is.String(alloc);
 	m_type = is.UInt32();
 
+	int zz = DataSize(m_type);
 	m_data = static_cast<uint32_t*>(alloc.alloc<char>(DataSize(m_type)));
 	int idx = 0;
 	if (m_type & SCALE_MASK) {
@@ -96,7 +105,7 @@ void NodeSpr::LoadFromBin(mm::LinearAllocator& alloc, bs::ImportStream& is)
 	}
 }
 
-void NodeSpr::LoadFromJson(mm::LinearAllocator& alloc, const Json::Value& val)
+void NodeSprBase::LoadFromJson(mm::LinearAllocator& alloc, const Json::Value& val)
 {
 	// load name
 	m_name = nullptr;
@@ -252,66 +261,66 @@ void NodeSpr::LoadFromJson(mm::LinearAllocator& alloc, const Json::Value& val)
 	}
 	else
 	{
-		size_t sz = sizeof(float) * data.size();
+		size_t sz = sizeof(uint32_t) * data.size();
 		m_data = static_cast<uint32_t*>(alloc.alloc<char>(sz));
 		memcpy(m_data, &data[0], sz);
 	}
 }
 
-size_t NodeSpr::DataSize(uint32_t type)
+size_t NodeSprBase::DataSize(uint32_t type)
 {
 	size_t sz = 0;
 
 	if (type & SCALE_MASK) {
-		sz += sizeof(float) * 2;
+		sz += sizeof(uint32_t) * 2;
 	}
 	if (type & SHEAR_MASK) {
-		sz += sizeof(float) * 2;
+		sz += sizeof(uint32_t) * 2;
 	}
 	if (type & OFFSET_MASK) {
-		sz += sizeof(float) * 2;
+		sz += sizeof(uint32_t) * 2;
 	}
 	if (type & POSITION_MASK) {
-		sz += sizeof(float) * 2;
+		sz += sizeof(uint32_t) * 2;
 	}
 	if (type & ANGLE_MASK) {
-		sz += sizeof(float);
+		sz += sizeof(uint32_t);
 	}
 	if (type & COL_MUL_MASK) {
-		sz += sizeof(float);
+		sz += sizeof(uint32_t);
 	}
 	if (type & COL_ADD_MASK) {
-		sz += sizeof(float);
+		sz += sizeof(uint32_t);
 	}
 	if (type & COL_R_MASK) {
-		sz += sizeof(float);
+		sz += sizeof(uint32_t);
 	}
 	if (type & COL_G_MASK) {
-		sz += sizeof(float);
+		sz += sizeof(uint32_t);
 	}
 	if (type & COL_B_MASK) {
-		sz += sizeof(float);
+		sz += sizeof(uint32_t);
 	}
 	if (type & BLEND_MASK) {
-		sz += sizeof(float);
+		sz += sizeof(uint32_t);
 	}
 	if (type & FAST_BLEND_MASK) {
-		sz += sizeof(float);
+		sz += sizeof(uint32_t);
 	}
 	if (type & FILTER_MASK) {
-		sz += sizeof(float);
+		sz += sizeof(uint32_t);
 	}
 	if (type & DOWNSMAPLE_MASK) {
-		sz += sizeof(float);
+		sz += sizeof(uint32_t);
 	}
 	if (type & CAMERA_MASK) {
-		sz += sizeof(float);
+		sz += sizeof(uint32_t);
 	}
 
 	return ALIGN_4BYTE(sz);
 }
 
-char* NodeSpr::String2Char(mm::LinearAllocator& alloc, const std::string& str)
+char* NodeSprBase::String2Char(mm::LinearAllocator& alloc, const std::string& str)
 {
 	if (str.empty()) {
 		return nullptr;

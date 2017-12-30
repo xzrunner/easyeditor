@@ -1,11 +1,9 @@
 #pragma once
 
-#include <memmgr/LinearAllocator.h>
-
-#include <stdint.h>
+#include "bsn/NodeSprBase.h"
 
 namespace mm { class LinearAllocator; }
-namespace bs { class ImportStream; }
+namespace bs { class ImportStream; class ExportStream; }
 namespace Json { class Value; }
 
 namespace bsn
@@ -14,57 +12,26 @@ namespace bsn
 class NodeSpr
 {
 public:
-	NodeSpr();
+	virtual ~NodeSpr() {}
 
 	//
 	// serialization
 	//
-	virtual size_t GetBinSize() const;
-	virtual void StoreToBin(uint8_t** ptr) const;
-	virtual void StoreToJson(Json::Value& val) const;
+	virtual size_t GetBinSize() const = 0;
+	virtual void StoreToBin(bs::ExportStream& es) const = 0;
+	virtual void StoreToJson(Json::Value& val) const = 0;
+
+	//
+	// deserialization
+	//
+	virtual void LoadFromBin(mm::LinearAllocator& alloc, bs::ImportStream& is) = 0;
+	virtual void LoadFromJson(mm::LinearAllocator& alloc, const Json::Value& val) = 0;
+
+	const NodeSprBase& GetBaseInfo() const { return m_base_info; }
 
 protected:
-	virtual void LoadFromBin(mm::LinearAllocator& alloc, bs::ImportStream& is);
-	virtual void LoadFromJson(mm::LinearAllocator& alloc, const Json::Value& val);
+	NodeSprBase m_base_info;
 
-	static size_t DataSize(uint32_t type);
-
-	static char* String2Char(mm::LinearAllocator& alloc, const std::string& str);
-
-private:
-	// geometry
-	static const int SCALE_MASK			= 1 << 1;
-	static const int SHEAR_MASK			= 1 << 2;
-	static const int OFFSET_MASK		= 1 << 3;
-	static const int POSITION_MASK		= 1 << 4;
-	static const int ANGLE_MASK			= 1 << 5;
-
-	// color
-	static const int COL_MUL_MASK		= 1 << 11;
-	static const int COL_ADD_MASK		= 1 << 12;
-	static const int COL_R_MASK			= 1 << 13;
-	static const int COL_G_MASK			= 1 << 14;
-	static const int COL_B_MASK			= 1 << 15;
-
-	// shader
-	static const int BLEND_MASK			= 1 << 21;
-	static const int FAST_BLEND_MASK	= 1 << 22;
-	static const int FILTER_MASK		= 1 << 23;	
-	static const int CAMERA_MASK		= 1 << 24;
-	static const int DOWNSMAPLE_MASK    = 1 << 25;
-
-	// other
-	static const int ACTOR_MASK         = 1 << 28;
-	static const int INTEGRATE_MASK     = 1 << 29;
-
-private:
-	const char* m_sym_path;
-
-	const char* m_name;
-
-	uint32_t  m_type;
-	uint32_t* m_data;
-	
 }; // NodeSpr
 
 }
