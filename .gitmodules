@@ -109,3 +109,6 @@
 [submodule "guard"]
 	path = guard
 	url = ssh://git@tea.ejoy.com:3222/LR/guard.git
+[submodule "sns"]
+	path = sns
+	url = ssh://git@tea.ejoy.com:3222/LR/sns.git
