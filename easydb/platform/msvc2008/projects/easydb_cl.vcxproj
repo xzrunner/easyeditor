@@ -281,6 +281,9 @@
       <Project>{70c5478d-6d53-4f75-99d4-f06373175c83}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\js\platform\msvc2017\projects\js.vcxproj">
+      <Project>{68c18da9-79bb-43a5-9e0c-79740aea954b}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\logger\platform\msvc2008\projects\logger.vcxproj">
       <Project>{4031b66e-39a3-401e-918a-e1424a4af944}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
@@ -324,6 +327,9 @@
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\sm\platform\msvc2008\projects\sm.vcxproj">
       <Project>{81630e0d-e1ef-4837-a0ee-30435ed4fe59}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\sns\platform\msvc2017\projects\sns.vcxproj">
+      <Project>{b6939acb-3794-4b2a-95da-f99ecdf79d0f}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\sprite2\platform\msvc2008\projects\sprite2.vcxproj">
       <Project>{ccdd6dc3-9da2-4215-bac6-6031699fb7e4}</Project>

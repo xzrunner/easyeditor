@@ -11,10 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\js.h" />
+    <ClCompile Include="..\..\..\source\RapidJsonHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\source\js.cpp" />
+    <ClInclude Include="..\..\..\include\js\RapidJsonHelper.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>1.js</ProjectName>
