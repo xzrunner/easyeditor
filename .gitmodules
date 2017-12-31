@@ -112,3 +112,6 @@
 [submodule "sns"]
 	path = sns
 	url = ssh://git@tea.ejoy.com:3222/LR/sns.git
+[submodule "js"]
+	path = js
+	url = ssh://git@tea.ejoy.com:3222/LR/js.git
