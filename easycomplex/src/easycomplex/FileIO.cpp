@@ -15,7 +15,7 @@
 namespace ecomplex
 {
 
-void FileIO::load(const Task* task, const char* filename)
+void FileIO::LoadFromFile(const Task* task, const char* filename)
 {
 	auto& sym = task->m_stage->GetSymbol();
 	sym->LoadFromFile(filename);
@@ -33,7 +33,7 @@ void FileIO::load(const Task* task, const char* filename)
 	//const_cast<task*>(task)->getstagepanel()->getcanvas()->resetinitstate();
 }
 
-void FileIO::store(const Task* task, const char* filename)
+void FileIO::StoreToFile(const Task* task, const char* filename)
 {
 //		ecomplex::FileSaver::store(filename, Context::Instance()->stage->getSymbol());
 

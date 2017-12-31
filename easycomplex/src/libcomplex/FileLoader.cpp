@@ -13,6 +13,7 @@
 #include <ee/SymbolFile.h>
 
 #include <sprite2/SymType.h>
+#include <gum/FilepathHelper.h>
 
 #include <fstream>
 
@@ -21,9 +22,8 @@ namespace ecomplex
 
 void FileLoader::Load(const std::string& filepath, Symbol& complex)
 {
-	std::string ext = filepath.substr(filepath.find_last_of('.') + 1);
-	std::transform(ext.begin(), ext.end(), ext.begin(), tolower);
-	if (ext == "bin") {
+	auto ext = gum::FilepathHelper::Extension(filepath);
+	if (ext == ".bin") {
 		LoadFromBin::Load(filepath, complex);
 		return;
 	}

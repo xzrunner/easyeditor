@@ -214,4 +214,11 @@ void Frame::SaveAsJson(const std::string& filepath) const
 	m_task->Store(fixed.c_str());
 }
 
+void Frame::SaveAsBin(const std::string& filepath) const
+{
+	std::string fixed = ee::FileHelper::GetFilenameAddTag(filepath, m_filetag, "bin");
+	ee::EditedFileStack::Instance()->SetBottom(fixed);
+	m_task->Store(fixed.c_str());
+}
+
 }

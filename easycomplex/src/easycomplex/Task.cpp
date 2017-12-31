@@ -48,14 +48,14 @@ void Task::Load(const char* filepath)
 	switch (type)
 	{
 	case s2::SYM_COMPLEX:
-		FileIO::load(this, filepath);
+		FileIO::LoadFromFile(this, filepath);
 		LoadGroupTree(filepath);
 		break;
 	case ee::SYM_PSD:
-		FileIO::load(this, filepath);
+		FileIO::LoadFromFile(this, filepath);
 		break;
 	default:
-		FileIO::load(this, filepath);
+		FileIO::LoadFromFile(this, filepath);
 	}
 
 	// create actors
@@ -74,7 +74,7 @@ void Task::Load(const char* filepath)
 
 void Task::Store(const char* filepath) const
 {
-	FileIO::store(this, filepath);
+	FileIO::StoreToFile(this, filepath);
 	StoreGroupTree(filepath);
 	m_stage->OnSave();
 }

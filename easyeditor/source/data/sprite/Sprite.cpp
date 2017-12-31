@@ -163,6 +163,12 @@ void Sprite::Load(const sns::NodeSpr* spr)
 	spr_io.Load(spr->GetBaseInfo(), shared_from_this());
 }
 
+void Sprite::Store(sns::NodeSpr*, rapidjson::Value& val, const std::string& dir = "") const
+{
+	ee::SpriteIO spr_io;
+	spr_io.Store(spr->GetBaseInfo(), shared_from_this());
+}
+
 PropertySetting* Sprite::CreatePropertySetting(EditPanelImpl* stage)
 {
 	return new SpritePropertySetting(stage, 

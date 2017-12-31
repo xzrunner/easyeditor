@@ -26,6 +26,7 @@ private:
 
 	void SaveAsPNG(const std::string& filepath) const;
 	void SaveAsJson(const std::string& filepath) const;
+	void SaveAsBin(const std::string& filepath) const;
 
 private:
 	enum

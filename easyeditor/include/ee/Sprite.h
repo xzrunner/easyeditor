@@ -46,9 +46,12 @@ public:
 	virtual void SetShear(const sm::vec2& shear);
 	virtual void SetOffset(const sm::vec2& offset);
 
+	// old
 	virtual void Load(const Json::Value& val, const std::string& dir = "");
 	virtual void Store(Json::Value& val, const std::string& dir = "") const;
+	// new
 	virtual void Load(const sns::NodeSpr*);
+	virtual void Store(sns::NodeSpr*, rapidjson::Value& val, const std::string& dir = "") const;
 
 	virtual PropertySetting* CreatePropertySetting(EditPanelImpl* stage);
 
