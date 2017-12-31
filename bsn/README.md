@@ -1,3 +1,0 @@
-# bsn
-
-binary scene node

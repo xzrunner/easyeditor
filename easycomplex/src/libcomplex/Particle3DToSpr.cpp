@@ -84,10 +84,10 @@ std::shared_ptr<s2::P3dEmitterCfg> Particle3DToSpr::LoadConfig(const erespacker:
 		dst.angle = src.angle;
 		dst.angle_var = src.angle_var;
 
-		s2::Color mul_col_begin = gum::int2color(src.mul_col_begin, bsn::ARGB),
-			      mul_col_end = gum::int2color(src.mul_col_end, bsn::ARGB),
-				  add_col_begin = gum::int2color(src.add_col_begin, bsn::ARGB),
-				  add_col_end = gum::int2color(src.add_col_end, bsn::ARGB);
+		s2::Color mul_col_begin = gum::int2color(src.mul_col_begin, sns::ARGB),
+			      mul_col_end = gum::int2color(src.mul_col_end, sns::ARGB),
+				  add_col_begin = gum::int2color(src.add_col_begin, sns::ARGB),
+				  add_col_end = gum::int2color(src.add_col_end, sns::ARGB);
 		dst.mul_col_begin = eparticle3d::ColorFromS2(mul_col_begin);
 		dst.mul_col_end = eparticle3d::ColorFromS2(mul_col_end);
 		dst.add_col_begin = eparticle3d::ColorFromS2(add_col_begin);

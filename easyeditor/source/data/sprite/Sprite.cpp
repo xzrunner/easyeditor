@@ -10,7 +10,7 @@
 #include "SpritePool.h"
 
 #include <sprite2/Sprite.h>
-#include <bsn/NodeSpr.h>
+#include <sns/NodeSpr.h>
 
 #ifdef OPEN_SCREEN_CACHE
 #include "render/SpriteRenderer.h"
@@ -157,7 +157,7 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 	spr_io.Store(val, shared_from_this(), dir.c_str());
 }
 
-void Sprite::Load(const bsn::NodeSpr* spr)
+void Sprite::Load(const sns::NodeSpr* spr)
 {
 	ee::SpriteIO spr_io;
 	spr_io.Load(spr->GetBaseInfo(), shared_from_this());

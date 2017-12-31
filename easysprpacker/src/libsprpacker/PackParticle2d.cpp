@@ -360,10 +360,10 @@ Component(const p2d_symbol& sym)
 	m_scale_start		= sym.scale_start;
 	m_scale_end			= sym.scale_end;
 
-	m_mul_col_begin		= gum::color2int(sym.mul_col_begin.rgba, bsn::RGBA);
-	m_mul_col_end		= gum::color2int(sym.mul_col_end.rgba, bsn::RGBA);
-	m_add_col_begin		= gum::color2int(sym.add_col_begin.rgba, bsn::RGBA);
-	m_add_col_end		= gum::color2int(sym.add_col_end.rgba, bsn::RGBA);
+	m_mul_col_begin		= gum::color2int(sym.mul_col_begin.rgba, sns::RGBA);
+	m_mul_col_end		= gum::color2int(sym.mul_col_end.rgba, sns::RGBA);
+	m_add_col_begin		= gum::color2int(sym.add_col_begin.rgba, sns::RGBA);
+	m_add_col_end		= gum::color2int(sym.add_col_end.rgba, sns::RGBA);
 
 	s2::Symbol* s2_sym = static_cast<s2::Symbol*>(sym.ud);
 	auto ee_sym = ee::SymbolMgr::Instance()->FetchSymbol(dynamic_cast<ee::Symbol*>(s2_sym)->GetFilepath());

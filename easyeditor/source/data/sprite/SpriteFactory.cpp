@@ -20,11 +20,10 @@
 #include <sprite2/SprVisitorParams.h>
 #include <sprite2/UpdateParams.h>
 #include <gum/SymbolFile.h>
-#include <bsn/NodeSpr.h>
+#include <sns/NodeSpr.h>
 
 namespace ee
 {
-
 CU_SINGLETON_DEFINITION(SpriteFactory);
 
 SpriteFactory::CallbackMap SpriteFactory::m_creators;
@@ -106,7 +105,7 @@ SprPtr SpriteFactory::Create(const Json::Value& val, const std::string& dir, con
 	return spr;
 }
 
-SprPtr SpriteFactory::Create(const bsn::NodeSpr* node_spr, const std::string& dir)
+SprPtr SpriteFactory::Create(const sns::NodeSpr* node_spr, const std::string& dir)
 {
 	std::string filepath = ee::FileHelper::GetAbsolutePath(
 		dir, node_spr->GetBaseInfo().GetFilepath());

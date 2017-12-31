@@ -120,9 +120,6 @@
     <ProjectReference Include="..\..\..\..\bimp\platform\msvc2008\projects\bimp.vcxproj">
       <Project>{f22a86e7-b73f-4f6a-9ea8-e4ae9cc9d885}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\bsn\platform\msvc2017\projects\bsn.vcxproj">
-      <Project>{b6939acb-3794-4b2a-95da-f99ecdf79d0f}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\..\bs\platform\msvc2017\projects\bs.vcxproj">
       <Project>{f5e6ae49-23dc-421b-ad33-c422e8590520}</Project>
     </ProjectReference>

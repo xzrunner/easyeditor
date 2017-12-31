@@ -1,8 +1,8 @@
 #include "PackSceneNode.h"
 #include "check_params.h"
 
-#include <bsn/NodeFactory.h>
-#include <bsn/NodeSym.h>
+#include <sns/NodeFactory.h>
+#include <sns/NodeSym.h>
 #include <memmgr/LinearAllocator.h>
 
 #include <fstream>
@@ -39,7 +39,7 @@ int PackSceneNode::Run(int argc, char *argv[])
 void PackSceneNode::Pack(const std::string& src_file, const std::string& dst_file)
 {
 	mm::LinearAllocator alloc;
-	bsn::NodeSym* sym = bsn::NodeFactory::CreateNodeSym(alloc, src_file);
+	sns::NodeSym* sym = sns::NodeFactory::CreateNodeSym(alloc, src_file);
 
 	uint8_t* data = nullptr;
 	size_t len = 0;

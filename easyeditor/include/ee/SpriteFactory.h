@@ -10,7 +10,7 @@
 
 #include <vector>
 
-namespace bsn { class NodeSpr; }
+namespace sns { class NodeSpr; }
 
 namespace ee
 {
@@ -21,7 +21,7 @@ public:
 	SprPtr Create(const SymPtr& sym);
 	SprPtr Create(const Json::Value& val, const std::string& dir);
 	SprPtr Create(const Json::Value& val, const std::string& dir, const std::string& filepath);
-	SprPtr Create(const bsn::NodeSpr* node_spr, const std::string& dir);
+	SprPtr Create(const sns::NodeSpr* node_spr, const std::string& dir);
 
 	SprPtr CreateRoot(const SymPtr& sym);
 
