@@ -53,7 +53,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\include\ee;..\..\..\..\simp\include;..\..\..\..\memmgr\include;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\editor-external\stackwalker;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\libjpeg\include;..\..\..\..\editor-external\libpng\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\gl\include;..\..\..\..\editor-external\boost\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include\ee;..\..\..\..\simp\include;..\..\..\..\memmgr\include;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\editor-external\stackwalker;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\libjpeg\include;..\..\..\..\editor-external\libpng\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\gl\include;..\..\..\..\editor-external\boost\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -70,7 +70,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\include\ee;..\..\..\..\simp\include;..\..\..\..\memmgr\include;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\editor-external\stackwalker;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\libjpeg\include;..\..\..\..\editor-external\libpng\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\gl\include;..\..\..\..\editor-external\boost\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include\ee;..\..\..\..\simp\include;..\..\..\..\memmgr\include;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\editor-external\stackwalker;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\libjpeg\include;..\..\..\..\editor-external\libpng\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\gl\include;..\..\..\..\editor-external\boost\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
