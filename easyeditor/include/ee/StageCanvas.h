@@ -19,7 +19,7 @@ class StageCanvas : public wxGLCanvas, public Observer, public cu::RefCountObj
 {
 public:
 	StageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage, wxGLContext* glctx = NULL,
-		bool use_context_stack = true);
+		bool use_context_stack = true, bool is_3d = false);
 	virtual ~StageCanvas();
 
 	virtual void SetCurrentCanvas();
@@ -52,6 +52,8 @@ protected:
 
 	void Init();
 
+	bool Is3D() const { return m_is_3d; }
+
 private:
 	void OnSize(wxSizeEvent& event);
 	void OnPaint(wxPaintEvent& event);
@@ -81,6 +83,8 @@ private:
 private:
 	bool m_share_context;
 	bool m_use_context_stack;
+
+	bool m_is_3d;
 
 	wxGLContext* m_gl_ctx;
 	int          m_render_ctx_idx;

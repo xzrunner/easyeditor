@@ -11,8 +11,8 @@ IMPLEMENT_APP(MyApp)
 
 static void InitSymbolCreators() 
 {
-	ee::SymbolFactory::RegisterCreator(eanim3d::FILE_TAG, &eanim3d::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(eanim3d::FILE_TAG, &eanim3d::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(s2::SYM_MODEL, &eanim3d::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_MODEL, &eanim3d::Sprite::Create);
 }
 
 bool MyApp::OnInit()

@@ -3,7 +3,11 @@
 #include "Symbol.h"
 
 #include <ee/LibraryList.h>
+#include <ee/SymbolMgr.h>
+#include <ee/Exception.h>
+#include <ee/ExceptionDlg.h>
 
+#include <sprite2/SymType.h>
 #include <model3/AssimpHelper.h>
 #include <model3/Model.h>
 
@@ -19,7 +23,7 @@ LibraryPage::LibraryPage(wxWindow* parent)
 
 bool LibraryPage::IsHandleSymbol(const ee::SymPtr& sym) const
 {
-	return dynamic_cast<Symbol*>(sym) != NULL;
+	return sym->Type() == s2::SYM_MODEL;
 }
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
@@ -29,20 +33,34 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 	{
 		wxArrayString filenames;
 		dlg.GetPaths(filenames);
-		for (size_t i = 0, n = filenames.size(); i < n; ++i)
-		{
-			m3::Model* model = m3::AssimpHelper::Load(filenames[i].ToStdString());
-			Symbol* sym = new Symbol();
-			sym->SetModel(model);
-			model->RemoveReference();
 
-			std::string filepath = FILE_TAG;
-			filepath += ".json";
-			sym->SetFilepath(filepath);
-// 			sym->SetAABB(aabb);
+//		for (size_t i = 0, n = filenames.size(); i < n; ++i)
+//		{
+//			m3::Model* model = m3::AssimpHelper::Load(filenames[i].ToStdString());
+//			auto sym = std::make_shared<Symbol>();
+//			sym->SetModel(model);
+//			model->RemoveReference();
+//
+//			std::string filepath = FILE_TAG;
+//			filepath += ".json";
+//			sym->SetFilepath(filepath);
+//// 			sym->SetAABB(aabb);
+//
+//			AddItem(sym);
+//		}
 
-			AddItem(sym);
-		}
+		//for (size_t i = 0, n = filenames.size(); i < n; ++i)
+		//{
+		//	std::string filepath = filenames[i].ToStdString();
+		//	try {
+		//		auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		//		sym->RefreshThumbnail(filepath);
+		//		AddItem(sym);
+		//	} catch (ee::Exception& e) {
+		//		ee::ExceptionDlg dlg(m_parent, e);
+		//		dlg.ShowModal();
+		//	}
+		//}
 	}
 }
 

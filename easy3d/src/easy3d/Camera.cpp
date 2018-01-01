@@ -2,6 +2,8 @@
 
 #include <ee/Math2D.h>
 
+#include <SM_Matrix.h>
+
 namespace e3d
 {
 
@@ -95,7 +97,8 @@ sm::vec3 Camera::GetToward() const
 
 sm::mat4 Camera::GetModelViewMat() const
 {
-	sm::mat4 trans = sm::mat4::Translate(-m_pos.x, -m_pos.y, -m_pos.z);
+	sm::mat4 trans;
+	trans.Translate(-m_pos.x, -m_pos.y, -m_pos.z);
 	sm::mat4 rot = GetModelViewRotMat();
 	return trans * rot;
 }
@@ -116,7 +119,7 @@ sm::vec3 Camera::MapToSphere(sm::ivec2 touchpoint) const
 	const float trackball_radius = m_width / 3.0f;
 	const sm::vec2 center_point(m_width*0.5f, m_height*0.5f);
 
-	sm::vec2 p = (sm::vec2)touchpoint - center_point;
+	sm::vec2 p = sm::vec2(touchpoint.x, touchpoint.y) - center_point;
 
 	// Flip the Y axis because pixel coords increase towards the bottom.
 	p.y = -p.y;

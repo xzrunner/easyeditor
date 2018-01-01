@@ -14,7 +14,6 @@ public:
 	Sprite(const Sprite& spr);
 	Sprite& operator = (const Sprite& spr);
 	Sprite(const s2::SymPtr& sym, uint32_t id = -1);
-	virtual ~Sprite();
 
 	const sm::vec3& GetPos3() const { return m_pos3; }
 	void SetPos3(const sm::vec3& pos) { m_pos3 = pos; }

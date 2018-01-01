@@ -10,7 +10,7 @@ class OnePassCanvas : public StageCanvas
 {
 public:
 	OnePassCanvas(wxWindow* stage_wnd, EditPanelImpl* stage, 
-		wxGLContext* glctx = NULL);
+		wxGLContext* glctx = nullptr, bool use_context_stack = true, bool is_3d = true);
 
 protected:
 	virtual void OnDrawWhole() const override;

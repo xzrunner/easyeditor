@@ -34,7 +34,7 @@ void CameraCanvas::SetCurrentCanvas()
 
 sm::rect CameraCanvas::GetVisibleRegion() const
 {
-	if (!m_camera || m_camera->Type() == s2::CAM_PSEUDO3D) {
+	if (Is3D() || !m_camera || m_camera->Type() == s2::CAM_PSEUDO3D) {
 		return sm::rect();
 	}
 	const s2::RenderContext* ctx = s2::RenderCtxStack::Instance()->Top();

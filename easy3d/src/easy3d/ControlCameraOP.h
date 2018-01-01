@@ -3,6 +3,8 @@
 
 #include <ee/EditOP.h>
 
+#include <SM_Vector.h>
+
 namespace e3d
 {
 

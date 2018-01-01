@@ -1,6 +1,8 @@
 #ifndef _EASY3D_VIEW_FRUSTUM_H_
 #define _EASY3D_VIEW_FRUSTUM_H_
 
+#include <SM_Vector.h>
+
 namespace e3d
 {
 

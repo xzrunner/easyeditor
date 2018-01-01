@@ -23,7 +23,7 @@ StagePanel::~StagePanel()
 
 void StagePanel::OnSizeDebug(wxSizeEvent& event)
 {
-	m_canvas->SetSize(event.GetSize()); 
+//	m_canvas->SetSize(event.GetSize()); 
 }
 
 }

@@ -7,8 +7,8 @@ namespace ee
 {
 
 OnePassCanvas::OnePassCanvas(wxWindow* stage_wnd, EditPanelImpl* stage,
-							 wxGLContext* glctx)
-	: StageCanvas(stage_wnd, stage, glctx)
+							 wxGLContext* glctx, bool use_context_stack, bool is_3d)
+	: StageCanvas(stage_wnd, stage, glctx, use_context_stack, is_3d)
 {
 }
 

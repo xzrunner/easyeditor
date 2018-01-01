@@ -1,6 +1,8 @@
 #ifndef _EASY3D_CAMERA_H_
 #define _EASY3D_CAMERA_H_
 
+#include <SM_Matrix.h>
+
 namespace e3d
 {
 

@@ -6,6 +6,9 @@
 #include <ee/Sprite.h>
 #include <ee/SpriteRenderer.h>
 
+#include <model3/RenderCtxStack.h>
+#include <model3/PrimitiveDraw.h>
+
 namespace eanim3d
 {
 
@@ -25,7 +28,12 @@ void StageCanvas::OnSize(int w, int h)
 
 void StageCanvas::OnDrawSprites() const
 {
-	e3d::ShaderMgr::Instance()->SetModelView(GetCamera3().GetModelViewMat());
+	auto ctx = m3::RenderCtxStack::Instance()->Top();
+	if (!ctx) {
+		return;
+	}
+	const_cast<m3::RenderContext*>(ctx)->SetModelView(GetCamera3().GetModelViewMat());
+
 	DrawBackground();
 	DrawSprites();
 	m_stage->DrawEditOP();
@@ -33,9 +41,9 @@ void StageCanvas::OnDrawSprites() const
 
 void StageCanvas::DrawBackground() const
 {
-	e3d::DrawCross(sm::vec3(0, 0, 0), sm::vec3(10, 10, 10), ee::LIGHT_RED);
-	//  	e3d::DrawGrids(sm::vec3(-10, -10, 0), sm::vec3(10, 10, 0), sm::vec3(0.5f, 0.5f, FLT_MAX), 
-	//  		ee::LIGHT_RED);
+	m3::PrimitiveDraw::SetColor(0xff0000ff);
+	m3::PrimitiveDraw::Cross(sm::vec3(0, 0, 0), sm::vec3(10, 10, 10));
+//	m3::PrimitiveDraw::Grids(sm::vec3(-10, -10, 0), sm::vec3(10, 10, 0), sm::vec3(0.5f, 0.5f, FLT_MAX));
 }
 
 void StageCanvas::DrawSprites() const
@@ -48,7 +56,7 @@ void StageCanvas::DrawSprites() const
 		auto& spr = sprs[i];
 		if (!spr->IsVisible())
 			continue;
-		ee::SpriteRenderer::Instance()->Draw(spr);
+		ee::SpriteRenderer::Instance()->Draw(spr.get());
 	}
 }
 

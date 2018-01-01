@@ -14,6 +14,7 @@
 #include <shaderlab/ShaderMgr.h>
 #include <sprite2/RenderCtxStack.h>
 #include <sprite2/SprTimer.h>
+#include <model3/RenderCtxStack.h>
 #include <gum/ShaderLab.h>
 #include <gum/DTex.h>
 #include <gum/RenderContext.h>
@@ -51,10 +52,11 @@ static const int GL_ATTRIB[20] = {WX_GL_RGBA, WX_GL_MIN_RED, 1, WX_GL_MIN_GREEN,
 static const float FPS = 30;
 
 StageCanvas::StageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage, 
-						   wxGLContext* glctx, bool use_context_stack)
+						 wxGLContext* glctx, bool use_context_stack, bool is_3d)
 	: wxGLCanvas(stage_wnd, wxID_ANY, GL_ATTRIB)
 	, m_share_context(false)
 	, m_use_context_stack(use_context_stack)
+	, m_is_3d(is_3d)
 	, m_stage(stage)
  	, m_width(0), m_height(0)
 	, m_dirty(false)
@@ -77,8 +79,13 @@ StageCanvas::StageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage,
 
 	RegistSubject(SetCanvasDirtySJ::Instance());
 
-	if (m_use_context_stack) {
-		m_render_ctx_idx = s2::RenderCtxStack::Instance()->Push(s2::RenderContext());
+	if (m_use_context_stack) 
+	{
+		if (m_is_3d) {
+			m_render_ctx_idx = m3::RenderCtxStack::Instance()->Push(m3::RenderContext());
+		} else {
+			m_render_ctx_idx = s2::RenderCtxStack::Instance()->Push(s2::RenderContext());
+		}
 	}
 }
 
@@ -92,11 +99,18 @@ StageCanvas::~StageCanvas()
 
 	if (m_use_context_stack) 
 	{
-		s2::RenderCtxStack::Instance()->Pop();
+		if (m_is_3d)
+		{
+			m3::RenderCtxStack::Instance()->Pop();
+		}
+		else
+		{
+			s2::RenderCtxStack::Instance()->Pop();
 
-		const s2::RenderContext* ctx = s2::RenderCtxStack::Instance()->Top();
-		if (ctx) {
-			gum::RenderContext::Instance()->OnSize(ctx->GetScreenWidth(), ctx->GetScreenHeight());
+			const s2::RenderContext* ctx = s2::RenderCtxStack::Instance()->Top();
+			if (ctx) {
+				gum::RenderContext::Instance()->OnSize(ctx->GetScreenWidth(), ctx->GetScreenHeight());
+			}
 		}
 	}
 }
@@ -104,7 +118,11 @@ StageCanvas::~StageCanvas()
 void StageCanvas::SetCurrentCanvas()
 {
 	SetCurrent(*m_gl_ctx);
-	s2::RenderCtxStack::Instance()->Bind(m_render_ctx_idx);
+	if (m_is_3d) {
+		m3::RenderCtxStack::Instance()->Bind(m_render_ctx_idx);
+	} else {
+		s2::RenderCtxStack::Instance()->Bind(m_render_ctx_idx);
+	}
 }
 
 void StageCanvas::SetBgColor(const s2::Color& color)

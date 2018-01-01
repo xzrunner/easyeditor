@@ -5,6 +5,8 @@
 
 #include <ee/OnePassCanvas.h>
 
+#include <model3/RenderContext.h>
+
 namespace e3d
 {
 
@@ -21,7 +23,7 @@ public:
 	sm::ivec2 TransPos3ProjectToScreen(const sm::vec3& proj) const;
 
 protected:
-	virtual void InitGL();
+//	virtual void InitGL();
 	virtual void OnSize(int w, int h) override;
 
 private:
