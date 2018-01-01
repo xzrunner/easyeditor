@@ -16,7 +16,7 @@ void OnePassCanvas::OnDrawWhole() const
 {
 	ur::RenderContext* rc = gum::RenderContext::Instance()->GetImpl();
 	rc->SetClearFlag(ur::MASKC);
-	rc->Clear(0);
+	rc->Clear(0x88888888);
  
  	OnDrawSprites();
 }
