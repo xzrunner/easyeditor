@@ -5,6 +5,9 @@
 #include <ee/Exception.h>
 #include <ee/ExceptionDlg.h>
 
+#include <model3/RenderCtxStack.h>
+#include <gum/RenderContext.h>
+
 namespace e3d
 {
 
@@ -15,7 +18,10 @@ StageCanvas::StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage)
 
 void StageCanvas::Refresh()
 {
-//	ShaderMgr::Instance()->SetModelView(m_camera3.GetModelViewMat());
+	auto ctx = m3::RenderCtxStack::Instance()->Top();
+	if (ctx) {
+		const_cast<m3::RenderContext*>(ctx)->SetModelView(GetCamera3().GetModelViewMat());
+	}
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
@@ -31,49 +37,21 @@ sm::ivec2 StageCanvas::TransPos3ProjectToScreen(const sm::vec3& proj) const
 	return ViewFrustum::TransPos3ProjectToScreen(v1, m_width, m_height);
 }
 
-//void StageCanvas::InitGL()
-//{
-////	ee::StageCanvas::InitGL();
-//
-//	//////////////////////////////////////////////////////////////////////////
-//
-//	try {
-//		wxLogDebug(_T("StageCanvas::InitGL()"));
-//
-//		if (glewInit() != GLEW_OK) {
-//			exit(1);
-//		}
-//
-//		ShaderMgr::Instance()->Null();
-//
-//		glShadeModel(GL_SMOOTH);
-//		glEnable(GL_TEXTURE_2D);
-//
-//		ee::ShaderContext::Reload();
-//	} catch (ee::Exception& e) {
-//		ee::ExceptionDlg dlg(m_parent, e);
-//		dlg.ShowModal();	
-//	}
-//
-//	//////////////////////////////////////////////////////////////////////////
-//
-//	ShaderMgr::Instance()->SetModelView(m_camera3.GetModelViewMat());
-//}
-//
 void StageCanvas::OnSize(int w, int h)
 {
-	//glViewport(0, 0, w, h);
-	//m_screen.SetSize(w, h);
-	//m_screen.SetCamera();
+	auto ctx = const_cast<m3::RenderContext*>(m3::RenderCtxStack::Instance()->Top());
+	if (!ctx) {
+		return;
+	}
 
-	//m_camera3.SetScreenSize(w, h);
+	m_camera3.SetScreenSize(w, h);
 
-	//ShaderMgr::Instance()->SetProjection(w, h);
-	//ShaderMgr::Instance()->SetModelView(m_camera3.GetModelViewMat());
+	ctx->SetScreen(w, h);
 
-	//float hh = 1.0f * h / w;
-	//m_mat_projection = sm::mat4::Perspective(-1, 1, -hh, hh, 
-	//	e3d::Camera::CAM_NEAR, e3d::Camera::CAM_FAR);
+	float hh = 1.0f * h / w;
+	auto mat_proj = sm::mat4::Perspective(-1, 1, -hh, hh, 
+		e3d::Camera::CAM_NEAR, e3d::Camera::CAM_FAR);
+	ctx->SetProjection(mat_proj);
 }
 
 }
