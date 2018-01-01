@@ -34,33 +34,20 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 		wxArrayString filenames;
 		dlg.GetPaths(filenames);
 
-//		for (size_t i = 0, n = filenames.size(); i < n; ++i)
-//		{
-//			m3::Model* model = m3::AssimpHelper::Load(filenames[i].ToStdString());
-//			auto sym = std::make_shared<Symbol>();
-//			sym->SetModel(model);
-//			model->RemoveReference();
-//
-//			std::string filepath = FILE_TAG;
-//			filepath += ".json";
-//			sym->SetFilepath(filepath);
-//// 			sym->SetAABB(aabb);
-//
-//			AddItem(sym);
-//		}
+		for (size_t i = 0, n = filenames.size(); i < n; ++i)
+		{
+			m3::Model* model = m3::AssimpHelper::Load(filenames[i].ToStdString());
+			auto sym = std::make_shared<Symbol>();
+			sym->SetModel(model);
+			model->RemoveReference();
 
-		//for (size_t i = 0, n = filenames.size(); i < n; ++i)
-		//{
-		//	std::string filepath = filenames[i].ToStdString();
-		//	try {
-		//		auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-		//		sym->RefreshThumbnail(filepath);
-		//		AddItem(sym);
-		//	} catch (ee::Exception& e) {
-		//		ee::ExceptionDlg dlg(m_parent, e);
-		//		dlg.ShowModal();
-		//	}
-		//}
+			std::string filepath = FILE_TAG;
+			filepath += ".json";
+			sym->SetFilepath(filepath);
+// 			sym->SetAABB(aabb);
+
+			AddItem(sym);
+		}
 	}
 }
 

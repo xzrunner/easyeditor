@@ -20,6 +20,7 @@
 #include <gum/RenderContext.h>
 #include <gum/Sprite2.h>
 #include <gum/Audio.h>
+#include <gum/Model3.h>
 
 #include <shaderlab/Shape2Shader.h>
 #include <shaderlab/Shape3Shader.h>
@@ -168,11 +169,11 @@ void StageCanvas::Init()
 		mgr->CreateShader(sl::MODEL3,	new sl::Model3Shader(rc));
 	}
 
-	gum::Audio::Instance();
+	gum::Model3::Instance();
 	gum::Sprite2::Instance()->Init();
 	gum::Audio::Instance()->Initialize(nullptr, nullptr);
 	DTex::Init();
-	GTxt::Init();	
+	GTxt::Init();
 
 	try {
 // 		ShaderContext::Reload();
