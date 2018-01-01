@@ -107,7 +107,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 		m_sym->SetEditDirty(true);
 		const std::string& filepath = m_sym->GetFilepath();
 		if (filepath != ee::SYM_GROUP_TAG) {
-			FileStorer::Store(filepath, *m_sym, ee::FileHelper::GetFileDir(filepath));
+			FileStorer::Store(filepath, *m_sym, ee::FileHelper::GetFileDir(filepath), false);
 			m_sym->RefreshThumbnail(filepath, true);
 		}
 // 		m_sym->InitBounding();

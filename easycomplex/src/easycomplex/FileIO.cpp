@@ -38,7 +38,7 @@ void FileIO::StoreToFile(const Task* task, const char* filename)
 //		ecomplex::FileSaver::store(filename, Context::Instance()->stage->getSymbol());
 
 	auto root = task->m_stage->GetSymbol();
-	ecomplex::FileStorer::StoreWithHistory(filename, *root, ee::FileHelper::GetFileDir(filename));
+	ecomplex::FileStorer::Store(filename, *root, ee::FileHelper::GetFileDir(filename), true);
 	std::queue<std::pair<std::shared_ptr<ecomplex::Symbol>, std::string> > buffer;
 	auto& children = root->GetAllChildren();
 	std::string parent_dir = ee::FileHelper::GetFileDir(root->GetFilepath());
@@ -56,7 +56,7 @@ void FileIO::StoreToFile(const Task* task, const char* filename)
 		buffer.pop();
 		const std::string& filepath = sym->GetFilepath();
 		if (filepath != ee::SYM_GROUP_TAG) {
-			ecomplex::FileStorer::Store(filepath, *sym, parent_dir);
+			ecomplex::FileStorer::Store(filepath, *sym, parent_dir, false);
 		}
 		auto& children = sym->GetAllChildren();
 		std::string child_parent_dir;

@@ -17,12 +17,12 @@ namespace ecomplex
 void StoreToBin::Store(const std::string& filepath, const Symbol& sym, const std::string& dir)
 {
 	// store to json
-	rapidjson::Value val;
-	StoreToJson::StoreToMem(val, sym, dir);
+	rapidjson::Document doc;
+	StoreToJson::StoreToMem(doc, sym, dir);
 
 	// load sns from json
 	mm::LinearAllocator alloc;
-	sns::NodeSym* sns_sym = sns::NodeFactory::CreateNodeSym(alloc, val, sns::NODE_COMPLEX);
+	sns::NodeSym* sns_sym = sns::NodeFactory::CreateNodeSym(alloc, doc, sns::NODE_COMPLEX);
 
 	// store sns to bin
 	uint8_t* data = nullptr;

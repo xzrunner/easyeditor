@@ -8,6 +8,7 @@
 #include <sprite2/Sprite.h>
 
 #include <json/json.h>
+#include <rapidjson/document.h>
 
 namespace sns { class NodeSpr; }
 

@@ -87,7 +87,7 @@ rapidjson::Value StoreToJson::StoreSpr(const ee::SprPtr& spr, const std::string&
 	}
 
 	// other
-	spr->Store(value, dir);
+//	spr->Store(value, dir);
 
 	return value;
 }
