@@ -5,8 +5,6 @@
 
 #include <ee/OnePassCanvas.h>
 
-#include <model3/RenderContext.h>
-
 namespace e3d
 {
 

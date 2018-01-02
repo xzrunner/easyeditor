@@ -4,6 +4,7 @@
 #include <ee/FileHelper.h>
 
 #include <model3/ModelObj.h>
+#include <model3/ObjectModel.h>
 #include <gum/FilepathHelper.h>
 
 #include <fstream>
@@ -21,10 +22,6 @@ bool Symbol::LoadResources()
 		return false;
 	}
 
-	if (m_model) {
-		delete m_model;
-	}
-
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
@@ -35,7 +32,12 @@ bool Symbol::LoadResources()
 
 	std::string dir = ee::FileHelper::GetFileDir(m_filepath);
 	std::string filepath = ee::FileHelper::GetAbsolutePath(dir, value["filepath"].asString());
-	m_model = new m3::ModelObj(filepath.c_str(), 0.02f);
+	auto obj = std::make_unique<m3::ModelObj>(filepath.c_str(), 0.02f);
+
+	auto obj_model = std::make_shared<m3::ObjectModel>();
+//	obj_model->SetModel(std::make_unique<m3::Model>(obj.get()));
+
+	SetModel(obj_model);
 
 	return true;
 }
