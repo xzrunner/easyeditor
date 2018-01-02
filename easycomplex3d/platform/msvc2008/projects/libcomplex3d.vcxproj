@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>5.libcomplex3d</ProjectName>
+    <ProjectGuid>{BE6E26CD-31F6-483F-91D4-79EAF3A6B3F8}</ProjectGuid>
+    <RootNamespace>libcomplex3d</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\libcomplex3d\x86\Debug\</OutDir>
+    <IntDir>..\libcomplex3d\x86\Debug\obj\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\libcomplex3d\x86\Release\</OutDir>
+    <IntDir>..\libcomplex3d\x86\Release\obj\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\..\ds\src\ds;..\..\..\..\easyeditor\include;..\..\..\..\easy3d\src;..\..\..\..\model3\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\gl\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\sprite2\include;..\..\..\..\gum\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\..\ds\src\ds;..\..\..\..\easyeditor\include;..\..\..\..\easy3d\src;..\..\..\..\model3\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\gl\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\sprite2\include;..\..\..\..\gum\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libcomplex3d\ArrangeSpriteOP.h" />
+    <ClInclude Include="..\..\..\src\libcomplex3d\config.h" />
+    <ClInclude Include="..\..\..\src\libcomplex3d\EditCameraOP.h" />
+    <ClInclude Include="..\..\..\src\libcomplex3d\IEditState.h" />
+    <ClInclude Include="..\..\..\src\libcomplex3d\LibraryPage.h" />
+    <ClInclude Include="..\..\..\src\libcomplex3d\RotateCameraState.h" />
+    <ClInclude Include="..\..\..\src\libcomplex3d\RotateSpriteState.h" />
+    <ClInclude Include="..\..\..\src\libcomplex3d\SelectSpriteOP.h" />
+    <ClInclude Include="..\..\..\src\libcomplex3d\Sprite.h" />
+    <ClInclude Include="..\..\..\src\libcomplex3d\StageCanvas.h" />
+    <ClInclude Include="..\..\..\src\libcomplex3d\StagePanel.h" />
+    <ClInclude Include="..\..\..\src\libcomplex3d\Symbol.h" />
+    <ClInclude Include="..\..\..\src\libcomplex3d\ToolBarPanel.h" />
+    <ClInclude Include="..\..\..\src\libcomplex3d\TranslateCameraState.h" />
+    <ClInclude Include="..\..\..\src\libcomplex3d\TranslateSpriteState.h" />
+    <ClInclude Include="..\..\..\src\libcomplex3d\ZoomCameraState.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libcomplex3d\ArrangeSpriteOP.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex3d\EditCameraOP.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex3d\LibraryPage.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex3d\RotateCameraState.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex3d\RotateSpriteState.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex3d\SelectSpriteOP.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex3d\Sprite.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex3d\StageCanvas.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex3d\StagePanel.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex3d\Symbol.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex3d\ToolbarPanel.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex3d\TranslateCameraState.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex3d\TranslateSpriteState.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex3d\ZoomCameraState.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
