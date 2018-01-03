@@ -2,6 +2,15 @@
 
 #include "randtab.h"
 
+#include <easy3d/Camera.h>
+
+#include <SM_Vector.h>
+#include <SM_Calc.h>
+#include <shaderlab/ShaderMgr.h>
+#include <shaderlab/Model3Shader.h>
+#include <unirender/RenderContext.h>
+#include <gum/RenderContext.h>
+
 namespace eterrain3d
 {
 
@@ -46,8 +55,8 @@ void DemoTriNetwork::Draw() const
 void DemoTriNetwork::DrawTriByLevel(const sm::vec3& v0, const sm::vec3& v1, const sm::vec3& v2, int level) const
 {
 	sm::vec3 c = (v0 + v1 + v2) / 3;
-	float dis = e3d::Math3::GetDistanceSquare(c, m_cam.GetPosition());
-	float len = e3d::Math3::GetDistanceSquare(v1, v2);
+	float dis = sm::dis_pos3_to_pos3(c, m_cam.GetPosition());
+	float len = sm::dis_square_pos3_to_pos3(v1, v2);
 //	e3d::LogViewer::Instance()->Add(("dis:"+wxString::FromDouble(dis)).ToStdString());
 
 	if (level < MAX_LEVEL && len > dis * 0.005f)
@@ -61,15 +70,27 @@ void DemoTriNetwork::DrawTriByLevel(const sm::vec3& v0, const sm::vec3& v1, cons
 
 //	e3d::DrawTriLine(v0, v1, v2);
 
- 	e3d::ShaderMgr* mgr = e3d::ShaderMgr::Instance();
- 	mgr->Sprite();
- 	sm::vec3 vertices[] = {v0, v1, v2};
-  	sm::vec2 texcoords[] = {
-		sm::vec2(1, 0),
-  		sm::vec2(0, 0),
-  		sm::vec2(1, 1),
-  	};
- 	mgr->DrawTri(vertices, texcoords, m_tex);
+	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
+	mgr->SetShader(sl::MODEL3);
+	sl::Model3Shader* shader = static_cast<sl::Model3Shader*>(mgr->GetShader());	
+
+	sl::Model3Shader::Material material;
+	material.ambient.Assign(0.04f, 0.04f, 0.04f);
+	material.diffuse.Assign(1, 1, 1);
+	material.specular.Assign(1, 1, 1);
+	material.shininess = 50;
+	material.tex_id = m_tex;
+	shader->SetMaterial(material);
+
+	std::vector<float> vertices = {
+		v0.x, v0.y, v0.z, 1, 0,
+		v1.x, v1.y, v1.z, 0, 0,
+		v2.x, v2.y, v2.z, 1, 1
+	};
+
+	std::vector<uint16_t> indices = { 0, 1, 2 };
+
+	shader->Draw(&vertices[0], vertices.size(), &indices[0], indices.size(), false, true);
 
 	m_verts_per_frame += 3;
 	m_tris_per_frame += 1;
@@ -79,7 +100,7 @@ void DemoTriNetwork::GenTex()
 {
 	//generate pixels
 	const int SIZE = 128;
-	byte* pixels = new byte[SIZE * SIZE * 4];
+	uint8_t* pixels = new uint8_t[SIZE * SIZE * 4];
 	for(int y = 0; y < SIZE; ++y)
 	{
 		for(int x = 0; x < SIZE; ++x)
@@ -108,19 +129,7 @@ void DemoTriNetwork::GenTex()
 	}
 
 	//set up the gridview texture
-	glGenTextures(1, &m_tex);
-	glBindTexture(GL_TEXTURE_2D, m_tex);
-
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SIZE, SIZE, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
-
-	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, SIZE, SIZE, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+	m_tex = gum::RenderContext::Instance()->GetImpl()->CreateTexture(pixels, SIZE, SIZE, ur::TEXTURE_A8);
 }
 
 float DemoTriNetwork::GetRandHeight(const sm::vec3& v1, const sm::vec3& v2, int level) const

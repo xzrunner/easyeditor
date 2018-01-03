@@ -6,6 +6,7 @@
 #include "DemoOcean.h"
 
 #include <ee/CameraCanvas.h>
+#include <ee/color_config.h>
 
 namespace eterrain3d
 {
@@ -38,7 +39,7 @@ void StageCanvas::OnDrawSprites() const
 	m_demo->Update();
 	m_demo->Draw();
 
-	e3d::LogViewer::Instance()->Draw();
+//	e3d::LogViewer::Instance()->Draw();
 }
 
 void StageCanvas::OnTimer(wxTimerEvent& event)

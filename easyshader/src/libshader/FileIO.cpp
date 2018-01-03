@@ -8,8 +8,6 @@
 #include <ee/Exception.h>
 #include <ee/StringHelper.h>
 
-#include <easy3d.h>
-
 #include <json/json.h>
 
 #include <fstream>

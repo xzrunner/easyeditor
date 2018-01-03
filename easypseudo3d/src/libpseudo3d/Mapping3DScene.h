@@ -3,8 +3,6 @@
 
 #include "IScene.h"
 
-#include <easy3d.h>
-
 namespace ee { class Image; }
 
 namespace epseudo3d

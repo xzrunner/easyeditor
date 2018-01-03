@@ -1,5 +1,7 @@
 #include "DemoBruteForceTex.h"
 
+#include <easy3d/Camera.h>
+
 namespace eterrain3d
 {
 

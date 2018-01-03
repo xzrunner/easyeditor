@@ -102,4 +102,9 @@
       <Filter>dataset</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\src\libterrain3d\Terrain.inl">
+      <Filter>dataset</Filter>
+    </None>
+  </ItemGroup>
 </Project>

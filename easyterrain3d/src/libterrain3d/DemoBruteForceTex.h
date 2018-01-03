@@ -2,10 +2,9 @@
 #define _EASYTERRAIN3D_DEMO_BRUTE_FORCE_TEX_H_
 
 #include "IDemo.h"
-
-#include <easy3d.h>
-
 #include "BruteForceTex.h"
+
+namespace e3d { class Camera; }
 
 namespace eterrain3d
 {

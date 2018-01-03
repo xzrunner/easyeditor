@@ -2,6 +2,10 @@
 
 #include <ee/Random.h>
 
+#include <guard/check.h>
+#include <unirender/RenderContext.h>
+#include <gum/RenderContext.h>
+
 #include <fstream>
 
 namespace eterrain3d
@@ -22,10 +26,7 @@ bool Terrain::LoadHeightMap(const char* filename, int size)
 	std::locale::global(std::locale(""));
 	std::ifstream fin(filename, std::ios::in | std::ios::binary);
 	std::locale::global(std::locale("C"));
-	if (fin.fail()) {
-		wxLogDebug("Fail to open %s", filename);
-		return false;
-	}
+	GD_ASSERT(!fin.fail(), "Fail to open file");
 
 	if (m_data.pixels) {
 		delete[] m_data.pixels;
@@ -33,10 +34,7 @@ bool Terrain::LoadHeightMap(const char* filename, int size)
 	}
 	int sz = size * size;
 	m_data.pixels = new unsigned char[sz];
-	if (m_data.pixels == NULL) {
-		wxLogDebug("Could not allocate memory for%s", filename);
-		return false;
-	}
+	GD_ASSERT(m_data.pixels, "Fail to allocate memory.")
 
 	memset(m_data.pixels, 0, sz);
 	fin.read(reinterpret_cast<char*>(m_data.pixels), sz);
@@ -57,10 +55,7 @@ bool Terrain::SaveHeightMap(const char* filename)
 	std::locale::global(std::locale(""));
 	std::ofstream fout(filename, std::ios::binary);
 	std::locale::global(std::locale("C"));
-	if (fout.fail()) {
-		wxLogDebug("Fail to open %s", filename);
-		return false;
-	}
+	GD_ASSERT(!fout.fail(), "Faile to open file.");
 
 	fout.write(reinterpret_cast<const char*>(m_data.pixels), 
 		sizeof(m_data.size*m_data.size));
@@ -106,20 +101,10 @@ bool Terrain::MakeTerrainFault( int iSize, int iIterations, int iMinDelta, int i
 	fTempBuffer= new float [m_data.size*m_data.size];
 
 	//check to see if memory was successfully allocated
-	if( m_data.pixels==NULL )
-	{
-		//something is seriously wrong here
-		wxLogDebug("Could not allocate memory for height map");
-		return false;
-	}
+	GD_ASSERT(m_data.pixels != nullptr, "Fail to allocate memory for height map.");
 
 	//check to see if memory was successfully allocated
-	if( fTempBuffer==NULL )
-	{
-		//something is seriously wrong here
-		wxLogDebug("Could not allocate memory for height map");
-		return false;
-	}
+	GD_ASSERT(fTempBuffer != nullptr, "Fail to allocate memory for height map.");
 
 	//clear the height fTempBuffer
 	for( i=0; i<m_data.size*m_data.size; i++ )
@@ -229,20 +214,10 @@ bool Terrain::MakeTerrainPlasma( int iSize, float fRoughness )
 	fTempBuffer= new float [m_data.size*m_data.size];
 
 	//check to see if memory was successfully allocated
-	if( m_data.pixels==NULL )
-	{
-		//something is seriously wrong here
-		wxLogDebug("Could not allocate memory for height map");
-		return false;
-	}
+	GD_ASSERT(m_data.pixels != nullptr, "Fail to allocate memory for height map.");
 
 	//check to see if memory was successfully allocated
-	if( fTempBuffer==NULL )
-	{
-		//something is seriously wrong here
-		wxLogDebug("Could not allocate memory for height map");
-		return false;
-	}
+	GD_ASSERT(fTempBuffer != nullptr, "Fail to allocate memory for height map.");
 
 	//set the first value in the height field
 	fTempBuffer[0]= 0.0f;
@@ -389,7 +364,6 @@ bool Terrain::MakeTerrainPlasma( int iSize, float fRoughness )
 void Terrain::GenerateTextureMap( unsigned int uiSize )
 {
 	unsigned char ucRed, ucGreen, ucBlue;
-	unsigned int iTempID;
 	unsigned int x, z;
 	unsigned int uiTexX, uiTexZ;
 	float fTotalRed, fTotalGreen, fTotalBlue;
@@ -476,16 +450,11 @@ void Terrain::GenerateTextureMap( unsigned int uiSize )
 	}
 
 	//build the OpenGL texture
-	glGenTextures( 1, &iTempID );
-	glBindTexture( GL_TEXTURE_2D, iTempID );
-	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );						
-
-	//make the texture
-	glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB, uiSize, uiSize, 0, GL_RGB, GL_UNSIGNED_BYTE, m_texture.GetData( ) );
+	int tex_id = gum::RenderContext::Instance()->GetImpl()->CreateTexture(
+		m_texture.GetData(), uiSize, uiSize, ur::TEXTURE_A8);
 
 	//set the texture's ID
-	m_texture.SetID( iTempID );
+	m_texture.SetID(tex_id);
 }
 
 bool Terrain::LoadTexture(char* filename)

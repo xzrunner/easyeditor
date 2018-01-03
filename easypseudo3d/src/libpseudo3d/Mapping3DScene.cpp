@@ -5,8 +5,6 @@
 #include <ee/Exception.h>
 #include <ee/FileHelper.h>
 
-#include <easy3d.h>
-
 #include <fstream>
 
 #include <json/json.h>

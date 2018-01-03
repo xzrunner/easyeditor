@@ -3,7 +3,11 @@
 
 #include "IDemo.h"
 
-#include <easy3d.h>
+#include <SM_Vector.h>
+
+#include <vector>
+
+namespace e3d { class Camera; }
 
 namespace eterrain3d
 {

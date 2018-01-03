@@ -3,8 +3,6 @@
 
 #include "IDemo.h"
 
-#include <easy3d.h>
-
 #include "BruteForce.h"
 
 namespace eterrain3d

@@ -1,8 +1,6 @@
 #ifndef _EASYCOMPLEX3D_SELECT_SPRITE_OP_H_
 #define _EASYCOMPLEX3D_SELECT_SPRITE_OP_H_
 
-#include <easy3d.h>
-
 namespace ee { class SpriteSelection; class Sprite; }
 
 namespace ecomplex3d

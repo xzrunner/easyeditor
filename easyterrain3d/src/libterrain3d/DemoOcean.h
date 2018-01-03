@@ -4,9 +4,13 @@
 #include "IDemo.h"
 #include "image.h"
 
-#include <easy3d.h>
+#include <SM_Vector.h>
+
+#include <vector>
+#include <memory>
 
 namespace ee { class Image; }
+namespace e3d { class Camera; }
 
 namespace eterrain3d
 {
@@ -34,7 +38,7 @@ private:
 private:
 	e3d::Camera& m_cam;
 
-	ee::Image* m_image;
+	std::shared_ptr<ee::Image> m_image;
 
 	mutable std::vector<Wave> m_waves;
 

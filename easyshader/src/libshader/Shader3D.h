@@ -3,7 +3,6 @@
 
 #include "Shader.h"
 
-#include <easy3d.h>
 #include <SM_Matrix.h>
 
 namespace eshader 

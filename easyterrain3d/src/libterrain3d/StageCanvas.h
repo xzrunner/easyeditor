@@ -1,7 +1,7 @@
 #ifndef _EASYTERRAIN3D_STAGE_CANVAS_H_
 #define _EASYTERRAIN3D_STAGE_CANVAS_H_
 
-#include <easy3d.h>
+#include <easy3d/StageCanvas.h>
 
 namespace eterrain3d
 {

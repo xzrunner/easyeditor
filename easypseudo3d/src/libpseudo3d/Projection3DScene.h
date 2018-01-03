@@ -5,8 +5,6 @@
 
 #include <ee/Image.h>
 
-#include <easy3d.h>
-
 namespace epseudo3d
 {
 
