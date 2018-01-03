@@ -23,22 +23,22 @@ void LibraryPage::LoadDefaultSymbol()
 {
 	e3d::ISurface* surface;
 
-	surface = new m3::Cone(2, 1);
+	surface = new n3::Cone(2, 1);
 	LoadSymbol(surface, "Cone");
 
-	surface = new m3::Sphere(1);
+	surface = new n3::Sphere(1);
 	LoadSymbol(surface, "Sphere");
 
-	surface = new m3::Torus(0.5f, 0.2f);
+	surface = new n3::Torus(0.5f, 0.2f);
 	LoadSymbol(surface, "Torus");
 
-	surface = new m3::TrefoilKnot(1);
+	surface = new n3::TrefoilKnot(1);
 	LoadSymbol(surface, "TrefoilKnot");
 
-	surface = new m3::MobiusStrip(0.2f);
+	surface = new n3::MobiusStrip(0.2f);
 	LoadSymbol(surface, "MobiusStrip");
 
-	surface = new m3::KleinBottle(0.1f);
+	surface = new n3::KleinBottle(0.1f);
 	LoadSymbol(surface, "KleinBottle");
 }
 
@@ -70,9 +70,9 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 		dlg.GetPaths(filenames);
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
-			m3::ModelParametric* model = new m3::ModelParametric();
+			n3::ModelParametric* model = new n3::ModelParametric();
 			e3d::AssimpHelper loader;
-			m3::AABB aabb;
+			n3::AABB aabb;
 			loader.LoadFile(filenames[i], *model, aabb);
 			Symbol* sym = new Symbol();
 			sym->SetModel(model);
@@ -89,8 +89,8 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 
 void LibraryPage::LoadSymbol(e3d::ISurface* surface, const char* name)
 {
-	m3::AABB aabb;
-	m3::ModelParametric* model = new m3::ModelParametric(surface, aabb);
+	n3::AABB aabb;
+	n3::ModelParametric* model = new n3::ModelParametric(surface, aabb);
 
 	Symbol* sym = new Symbol();
 	sym->SetAABB(aabb);

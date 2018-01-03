@@ -6,8 +6,8 @@
 #include <ee/Sprite.h>
 #include <ee/SpriteRenderer.h>
 
-#include <model3/RenderCtxStack.h>
-#include <model3/PrimitiveDraw.h>
+#include <node3/RenderCtxStack.h>
+#include <node3/PrimitiveDraw.h>
 
 namespace eanim3d
 {
@@ -28,11 +28,11 @@ void StageCanvas::OnSize(int w, int h)
 
 void StageCanvas::OnDrawSprites() const
 {
-	auto ctx = m3::RenderCtxStack::Instance()->Top();
+	auto ctx = n3::RenderCtxStack::Instance()->Top();
 	if (!ctx) {
 		return;
 	}
-	const_cast<m3::RenderContext*>(ctx)->SetModelView(GetCamera3().GetModelViewMat());
+	const_cast<n3::RenderContext*>(ctx)->SetModelView(GetCamera3().GetModelViewMat());
 
 	DrawBackground();
 	DrawSprites();
@@ -41,9 +41,9 @@ void StageCanvas::OnDrawSprites() const
 
 void StageCanvas::DrawBackground() const
 {
-	m3::PrimitiveDraw::SetColor(0xff0000ff);
-	m3::PrimitiveDraw::Cross(sm::vec3(0, 0, 0), sm::vec3(1, 1, 1));
-//	m3::PrimitiveDraw::Grids(sm::vec3(-10, -10, 0), sm::vec3(10, 10, 0), sm::vec3(0.5f, 0.5f, FLT_MAX));
+	n3::PrimitiveDraw::SetColor(0xff0000ff);
+	n3::PrimitiveDraw::Cross(sm::vec3(0, 0, 0), sm::vec3(1, 1, 1));
+//	n3::PrimitiveDraw::Grids(sm::vec3(-10, -10, 0), sm::vec3(10, 10, 0), sm::vec3(0.5f, 0.5f, FLT_MAX));
 }
 
 void StageCanvas::DrawSprites() const

@@ -14,7 +14,7 @@
 #include <shaderlab/ShaderMgr.h>
 #include <sprite2/RenderCtxStack.h>
 #include <sprite2/SprTimer.h>
-#include <model3/RenderCtxStack.h>
+#include <node3/RenderCtxStack.h>
 #include <gum/ShaderLab.h>
 #include <gum/DTex.h>
 #include <gum/RenderContext.h>
@@ -83,7 +83,7 @@ StageCanvas::StageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage,
 	if (m_use_context_stack) 
 	{
 		if (m_is_3d) {
-			m_render_ctx_idx = m3::RenderCtxStack::Instance()->Push(m3::RenderContext());
+			m_render_ctx_idx = n3::RenderCtxStack::Instance()->Push(n3::RenderContext());
 		} else {
 			m_render_ctx_idx = s2::RenderCtxStack::Instance()->Push(s2::RenderContext());
 		}
@@ -102,7 +102,7 @@ StageCanvas::~StageCanvas()
 	{
 		if (m_is_3d)
 		{
-			m3::RenderCtxStack::Instance()->Pop();
+			n3::RenderCtxStack::Instance()->Pop();
 		}
 		else
 		{
@@ -120,7 +120,7 @@ void StageCanvas::SetCurrentCanvas()
 {
 	SetCurrent(*m_gl_ctx);
 	if (m_is_3d) {
-		m3::RenderCtxStack::Instance()->Bind(m_render_ctx_idx);
+		n3::RenderCtxStack::Instance()->Bind(m_render_ctx_idx);
 	} else {
 		s2::RenderCtxStack::Instance()->Bind(m_render_ctx_idx);
 	}

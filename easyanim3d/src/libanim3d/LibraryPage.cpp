@@ -8,9 +8,9 @@
 #include <ee/ExceptionDlg.h>
 
 #include <sprite2/SymType.h>
-#include <model3/AssimpHelper.h>
-#include <model3/Model.h>
-#include <model3/ObjectModel.h>
+#include <node3/AssimpHelper.h>
+#include <node3/Model.h>
+#include <node3/ObjectModel.h>
 
 namespace eanim3d
 {
@@ -37,9 +37,9 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
-			auto model = std::unique_ptr<m3::Model>(
-				m3::AssimpHelper::Load(filenames[i].ToStdString()));
-			auto obj_model = std::make_shared<m3::ObjectModel>();
+			auto model = std::unique_ptr<n3::Model>(
+				n3::AssimpHelper::Load(filenames[i].ToStdString()));
+			auto obj_model = std::make_shared<n3::ObjectModel>();
 			obj_model->SetModel(model);
 
 			auto sym = std::make_shared<Symbol>();

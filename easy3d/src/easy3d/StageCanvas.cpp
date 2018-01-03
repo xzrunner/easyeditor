@@ -5,7 +5,7 @@
 #include <ee/Exception.h>
 #include <ee/ExceptionDlg.h>
 
-#include <model3/RenderCtxStack.h>
+#include <node3/RenderCtxStack.h>
 #include <gum/RenderContext.h>
 
 namespace e3d
@@ -18,9 +18,9 @@ StageCanvas::StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage)
 
 void StageCanvas::Refresh()
 {
-	auto ctx = m3::RenderCtxStack::Instance()->Top();
+	auto ctx = n3::RenderCtxStack::Instance()->Top();
 	if (ctx) {
-		const_cast<m3::RenderContext*>(ctx)->SetModelView(GetCamera3().GetModelViewMat());
+		const_cast<n3::RenderContext*>(ctx)->SetModelView(GetCamera3().GetModelViewMat());
 	}
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -39,7 +39,7 @@ sm::ivec2 StageCanvas::TransPos3ProjectToScreen(const sm::vec3& proj) const
 
 void StageCanvas::OnSize(int w, int h)
 {
-	auto ctx = const_cast<m3::RenderContext*>(m3::RenderCtxStack::Instance()->Top());
+	auto ctx = const_cast<n3::RenderContext*>(n3::RenderCtxStack::Instance()->Top());
 	if (!ctx) {
 		return;
 	}

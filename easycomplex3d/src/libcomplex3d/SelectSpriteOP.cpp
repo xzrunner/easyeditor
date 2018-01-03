@@ -88,7 +88,7 @@ ee::SprPtr SelectSpriteOP::SelectByPos(const sm::ivec2& pos) const
 		auto& spr = sprs[i];
 		auto sym = std::dynamic_pointer_cast<const Symbol>(spr->GetSymbol());
 		
-		const m3::AABB& aabb = sym->GetAABB();
+		const n3::AABB& aabb = sym->GetAABB();
 		Sprite* s = static_cast<Sprite*>(spr);
 		
 		sm::vec3 offset = cam_mat * s->GetPos3();

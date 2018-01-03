@@ -23,10 +23,10 @@ public:
 
 	static ee::SymPtr Create() { return std::make_shared<Symbol>(); }
 
-	void SetModel(m3::Model* model);
+	void SetModel(n3::Model* model);
 
-	void SetAABB(const m3::AABB& aabb) { m_aabb = aabb; }
-	const m3::AABB& GetAABB() const { return m_aabb; }
+	void SetAABB(const n3::AABB& aabb) { m_aabb = aabb; }
+	const n3::AABB& GetAABB() const { return m_aabb; }
 
 protected:
 	virtual sm::rect GetBoundingImpl(const s2::Sprite* spr = NULL, const s2::Actor* actor = NULL, bool cache = true) const override;
@@ -34,9 +34,9 @@ protected:
 	virtual bool LoadResources() override;
 
 private:
-	m3::Model* m_model;
+	n3::Model* m_model;
 
-	m3::AABB m_aabb;
+	n3::AABB m_aabb;
 
 }; // Symbol
 

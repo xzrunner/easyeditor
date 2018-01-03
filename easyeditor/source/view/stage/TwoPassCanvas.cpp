@@ -126,7 +126,7 @@ void TwoPassCanvas::DrawTwoPass() const
 	//////////////////////////////////////////////////////////////////////////
 
 	if (Is3D()) {
-//		m3::RenderCtxStack::Instance()->Push(m3::RenderContext(2, 2, 0, 0));
+//		n3::RenderCtxStack::Instance()->Push(n3::RenderContext(2, 2, 0, 0));
 	} else {
 		s2::RenderCtxStack::Instance()->Push(s2::RenderContext(2, 2, 0, 0));
 	}
@@ -149,7 +149,7 @@ void TwoPassCanvas::DrawTwoPass() const
  	sl::ShaderMgr::Instance()->FlushShader();
 
 	if (Is3D()) {
-//		m3::RenderCtxStack::Instance()->Pop();
+//		n3::RenderCtxStack::Instance()->Pop();
 	} else {
 		s2::RenderCtxStack::Instance()->Pop();
 	}
