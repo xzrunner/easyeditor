@@ -47,11 +47,13 @@
     <IntDir>..\easycomplex\x86\Debug\obj\</IntDir>
     <LinkIncremental>true</LinkIncremental>
     <TargetName>easycomplex</TargetName>
+    <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\easycomplex\x86\Release\</OutDir>
     <IntDir>..\easycomplex\x86\Release\obj\</IntDir>
     <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -134,6 +136,12 @@
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\node3\platform\msvc2008\projects\node3.vcxproj">
       <Project>{6030cf6b-1a8b-421b-92ce-4eb965751636}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\node3\platform\msvc2017\projects\node3.vcxproj">
+      <Project>{6030cf6b-1a8b-421b-92ce-4eb965751636}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\playdb\platform\msvc2017\projects\playdb.vcxproj">
+      <Project>{e421cc5f-0909-4f8d-8e9a-bcb52e0e8350}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\sns\platform\msvc2017\projects\sns.vcxproj">
       <Project>{b6939acb-3794-4b2a-95da-f99ecdf79d0f}</Project>

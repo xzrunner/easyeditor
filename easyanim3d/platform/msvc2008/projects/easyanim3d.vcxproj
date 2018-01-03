@@ -47,12 +47,14 @@
     <IntDir>..\easyanim3d\x86\Debug\obj\</IntDir>
     <LinkIncremental>true</LinkIncremental>
     <TargetName>easyanim3d</TargetName>
+    <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\easyanim3d\x86\Release\</OutDir>
     <IntDir>..\easyanim3d\x86\Release\obj\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <TargetName>easyanim3d</TargetName>
+    <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
