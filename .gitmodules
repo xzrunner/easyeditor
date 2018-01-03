@@ -73,9 +73,6 @@
 [submodule "pimg"]
 	path = pimg
 	url = ssh://git@tea.ejoy.com:3222/LR/pimg.git
-[submodule "model3"]
-	path = model3
-	url = ssh://git@tea.ejoy.com:3222/LR/model3.git
 [submodule "polymesh"]
 	path = polymesh
 	url = ssh://git@tea.ejoy.com:3222/LR/polymesh.git
@@ -115,3 +112,6 @@
 [submodule "js"]
 	path = js
 	url = ssh://git@tea.ejoy.com:3222/LR/js.git
+[submodule "node3"]
+	path = node3
+	url = ssh://git@tea.ejoy.com:3222/LR/node3.git
