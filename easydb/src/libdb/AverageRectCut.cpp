@@ -160,7 +160,7 @@ void AverageRectCut::RectCutImage(const std::string& src_dir, const std::string&
 	delete[] condense;
 
 	std::string json_out_path = out_json_dir + "\\" + filename + "_complex.json";
-	ecomplex::FileStorer::Store(json_out_path, complex, out_json_dir);
+	ecomplex::FileStorer::Store(json_out_path, complex, out_json_dir, false);
 }
 
 void AverageRectCut::FixComplex(const std::string& src_dir, const std::string& dst_dir, const std::string& filepath) const

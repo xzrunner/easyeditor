@@ -223,7 +223,7 @@ void ExportBodymovin::FixFontLayer(const std::string& filepath, const std::strin
 		auto c_spr = ee::SpriteFactory::Instance()->Create(c_sym);
 		c_spr->UpdateBounding();
 
-		ecomplex::FileStorer::Store(c_sym->GetFilepath(), *std::dynamic_pointer_cast<ecomplex::Symbol>(c_sym), dir);
+		ecomplex::FileStorer::Store(c_sym->GetFilepath(), *std::dynamic_pointer_cast<ecomplex::Symbol>(c_sym), dir, false);
 
 		Json::Value new_layer = layer_val;
 		for (int j = 0, m = new_layer["frame"].size(); j < m; ++j)

@@ -69,7 +69,7 @@ void TransNewTextFile::Run(const std::string& folder)
 					}
 				}
 				if (dirty) {
-					ecomplex::FileStorer::Store(filepath, *complex, ee::FileHelper::GetFileDir(filepath));
+					ecomplex::FileStorer::Store(filepath, *complex, ee::FileHelper::GetFileDir(filepath), false);
 				}
 			}
 		}

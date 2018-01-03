@@ -78,7 +78,7 @@ void TransOldAnchorFile::TransComplex(const std::string& filepath) const
 		}
 	}
 	if (dirty) {
-		ecomplex::FileStorer::Store(filepath, *complex, ee::FileHelper::GetFileDir(filepath));
+		ecomplex::FileStorer::Store(filepath, *complex, ee::FileHelper::GetFileDir(filepath), false);
 	}
 }
 

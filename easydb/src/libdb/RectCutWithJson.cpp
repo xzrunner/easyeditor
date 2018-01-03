@@ -172,7 +172,7 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 		complex.Add(spr);
 
 		std::string json_out_path = out_json_dir + "\\" + filename + "_complex.json";
-		ecomplex::FileStorer::Store(json_out_path, complex, out_json_dir);
+		ecomplex::FileStorer::Store(json_out_path, complex, out_json_dir, false);
 
 		return;
 	}
@@ -245,7 +245,7 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 	}
 
 	std::string json_out_path = out_json_dir + "\\" + filename + "_complex.json";
-	ecomplex::FileStorer::Store(json_out_path, complex, out_json_dir);
+	ecomplex::FileStorer::Store(json_out_path, complex, out_json_dir, false);
 
 	delete[] condense;
 }
