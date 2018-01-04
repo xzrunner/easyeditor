@@ -5,6 +5,8 @@
 
 #include "BruteForce.h"
 
+namespace e3d { class Camera; }
+
 namespace eterrain3d
 {
 

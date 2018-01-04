@@ -7,6 +7,13 @@
 #include <ee/FetchAllVisitor.h>
 #include <ee/Sprite.h>
 #include <ee/SpriteRenderer.h>
+#include <ee/color_config.h>
+
+#include <easy3d/ViewFrustum.h>
+
+#include <node3/RenderContext.h>
+#include <node3/RenderCtxStack.h>
+#include <node3/PrimitiveDraw.h>
 
 namespace ecomplex3d
 {
@@ -45,7 +52,12 @@ void StageCanvas::OnSize(int w, int h)
 
 void StageCanvas::OnDrawSprites() const
 {
-	e3d::ShaderMgr::Instance()->SetModelView(GetCamera3().GetModelViewMat());
+	auto ctx = n3::RenderCtxStack::Instance()->Top();
+	if (!ctx) {
+		return;
+	}
+	const_cast<n3::RenderContext*>(ctx)->SetModelView(GetCamera3().GetModelViewMat());
+
 	DrawBackground();
  	DrawSprites();
  
@@ -54,7 +66,8 @@ void StageCanvas::OnDrawSprites() const
 
 void StageCanvas::DrawBackground() const
 {
-	e3d::DrawCross(sm::vec3(0, 0, 0), sm::vec3(10, 10, 10), ee::LIGHT_RED);
+	n3::PrimitiveDraw::SetColor(ee::LIGHT_RED.ToABGR());
+	n3::PrimitiveDraw::Cross(sm::vec3(0, 0, 0), sm::vec3(10, 10, 10));
 //  	e3d::DrawGrids(sm::vec3(-10, -10, 0), sm::vec3(10, 10, 0), sm::vec3(0.5f, 0.5f, FLT_MAX), 
 //  		ee::LIGHT_RED);
 }
@@ -69,7 +82,7 @@ void StageCanvas::DrawSprites() const
 		auto& spr = sprs[i];
 		if (!spr->IsVisible())
 			continue;
-		ee::SpriteRenderer::Instance()->Draw(spr);
+		ee::SpriteRenderer::Instance()->Draw(spr.get());
 	}
 }
 

@@ -3,6 +3,8 @@
 
 #include "IEditState.h"
 
+namespace e3d { class StageCanvas; }
+
 namespace ecomplex3d
 {
 

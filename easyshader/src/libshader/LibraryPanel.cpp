@@ -1,7 +1,5 @@
 #include "LibraryPanel.h"
 
-#include <easysketch.h>
-
 #include <ee/LibraryImagePage.h>
 
 #include <wx/notebook.h>

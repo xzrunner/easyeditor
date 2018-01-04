@@ -49,10 +49,12 @@ void TranslateSpriteState::Translate(const sm::ivec2& first, const sm::ivec2& cu
 void TranslateSpriteState::Visitor::
 Visit(const ee::SprPtr& spr, bool& next)
 {
-	const sm::vec3& old = spr->GetPos3();
+	auto model_spr = std::dynamic_pointer_cast<s2::ModelSprite>(spr);
+
+	const sm::vec3& old = model_spr->GetPos3();
 	sm::vec3 last = m_stage->TransPos3ScreenToProject(m_last, old.z);
 	sm::vec3 curr = m_stage->TransPos3ScreenToProject(m_curr, old.z);
-	spr->Translate3(curr - last);
+	model_spr->Translate3(curr - last);
 
 	next = true;
 }

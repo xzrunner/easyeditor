@@ -1,8 +1,6 @@
 #ifndef _EASYSHADER_STAGE_CANVAS3D_H_
 #define _EASYSHADER_STAGE_CANVAS3D_H_
 
-#include <easysketch.h>
-
 namespace eshader
 {
 

@@ -1,5 +1,9 @@
 #include "DemoBruteForce.h"
 
+#include <easy3d/Camera.h>
+
+#include <SM_Vector.h>
+
 namespace eterrain3d
 {
 

@@ -4,7 +4,7 @@
 #include <ee/LibraryPanel.h>
 #include <ee/PropertySettingPanel.h>
 
-#include <easysketch.h>
+#include <easycomplex3d.h>
 
 #include <wx/splitter.h>
 

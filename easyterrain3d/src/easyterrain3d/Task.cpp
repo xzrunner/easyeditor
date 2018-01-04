@@ -3,6 +3,8 @@
 #include <ee/SymbolMgr.h>
 #include <ee/EditPanel.h>
 
+#include <easy3d/ControlCameraOP.h>
+
 #include <easyterrain3d.h>
 
 namespace eterrain3d

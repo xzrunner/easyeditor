@@ -3,6 +3,8 @@
 
 #include <ee/LibraryPage.h>
 
+namespace n3 { class Surface; }
+
 namespace ecomplex3d
 {
 
@@ -19,7 +21,7 @@ protected:
 	virtual void OnAddPress(wxCommandEvent& event) override;
 
 private:
-	void LoadSymbol(e3d::ISurface* surface, const char* name);
+	void LoadSymbol(n3::Surface* surface, const char* name);
 
 }; // LibraryPage
 

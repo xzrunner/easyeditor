@@ -23,9 +23,9 @@ StageCanvas::StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage)
 
 	SetBgColor(ee::BLACK);
 
-//	m_demo = new DemoTriNetwork(GetCamera3());
+	m_demo = new DemoTriNetwork(GetCamera3());
 //	m_demo = new DemoBruteForce(GetCamera3());
-	m_demo = new DemoBruteForceTex(GetCamera3());
+//	m_demo = new DemoBruteForceTex(GetCamera3());
 //	m_demo = new DemoOcean(GetCamera3());
 
 	// fixme

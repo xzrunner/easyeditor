@@ -4,6 +4,13 @@
 
 #include <easy3d/Camera.h>
 
+#include <glp_loop.h>
+#include <SM_Calc.h>
+#include <node3/AABB.h>
+#include <node3/PrimitiveDraw.h>
+#include <shaderlab/ShaderMgr.h>
+#include <shaderlab/Model3Shader.h>
+
 namespace eterrain3d
 {
 
@@ -41,28 +48,42 @@ void DemoOcean::Load()
 
 void DemoOcean::Draw() const
 {
-	static clock_t last = 0;
+	static uint32_t last = 0;
 	if (last == 0) {
-		last = clock();
+		last = glp_get_time();
 		return;
 	}
 
-	clock_t curr = clock();
-	float dt = (float)(curr - last) / CLOCKS_PER_SEC;
-	last = curr;	
+	uint32_t curr = glp_get_time();
+	float dt = (curr - last) * 0.000001f;
+	last = curr;
+
 	Update(dt);
 
-	e3d::AABB aabb;
+	n3::AABB aabb;
 	aabb.Combine(sm::vec3(-5, -5, -5));
 	aabb.Combine(sm::vec3(5, 5, 5));
-	e3d::DrawCube(aabb, ee::WHITE);
+	n3::PrimitiveDraw::SetColor(0xffffffff);
+	n3::PrimitiveDraw::Cube(aabb);
 
 	sm::vec2 uv_left_low;
 	uv_left_low.x = m_uv_base.x - 1;
 	uv_left_low.y = m_uv_base.y - 1;
 
- 	e3d::ShaderMgr* mgr = e3d::ShaderMgr::Instance();
- 	mgr->Sprite();
+	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
+	mgr->SetShader(sl::MODEL3);
+	sl::Model3Shader* shader = static_cast<sl::Model3Shader*>(mgr->GetShader());
+
+	sl::Model3Shader::Material material;
+	material.ambient.Assign(0.04f, 0.04f, 0.04f);
+	material.diffuse.Assign(1, 1, 1);
+	material.specular.Assign(1, 1, 1);
+	material.shininess = 50;
+	material.tex_id = m_image->GetTexID();
+	shader->SetMaterial(material);
+
+	std::vector<uint16_t> indices = { 0, 1, 2 };
+
 	for (int y = 0; y < ROW; ++y) {
 		for (int x = 0; x < COL; ++x) {
 			float vx_min = EDGE * x / COL - 0.5f*EDGE, vx_max = EDGE * (x+1) / COL - 0.5f*EDGE,
@@ -72,9 +93,11 @@ void DemoOcean::Draw() const
 			float tx_min = (float)x / COL, tx_max = (float)(x+1) / COL,
 				  ty_min = (float)y / COL, ty_max = (float)(y+1) / COL;
 			{
-				sm::vec3 vertices[] = {sm::vec3(vx_min, vy_min, h_minmin), sm::vec3(vx_min, vy_max, h_minmax), sm::vec3(vx_max, vy_max, h_maxmax)};
-				sm::vec2 texcoords[] = {sm::vec2(tx_min, ty_min), sm::vec2(tx_min, ty_max), sm::vec2(tx_max, ty_max)};
-
+				std::vector<sm::vec2> texcoords = {
+					sm::vec2(tx_min, ty_min),
+					sm::vec2(tx_min, ty_max),
+					sm::vec2(tx_max, ty_max)
+				};
 				sm::vec2 center = (texcoords[0] + texcoords[1] + texcoords[2]) / 3;
 				sm::vec2 base;
 				int ix = center.x - uv_left_low.x,
@@ -85,11 +108,19 @@ void DemoOcean::Draw() const
 					texcoords[i] = texcoords[i] - base;
 				}
 
-				mgr->DrawTri(vertices, texcoords, m_image->GetTexID());
+				std::vector<float> vertices = {
+					vx_min, vy_min, h_minmin, texcoords[0].x, texcoords[0].y,
+					vx_min, vy_max, h_minmax, texcoords[1].x, texcoords[1].y,
+					vx_max, vy_max, h_maxmax, texcoords[2].x, texcoords[2].y,
+				};
+				shader->Draw(&vertices[0], vertices.size(), &indices[0], indices.size(), false, true);
 			}
 			{
-				sm::vec3 vertices[] = {sm::vec3(vx_max, vy_max, h_maxmax), sm::vec3(vx_max, vy_min, h_maxmin), sm::vec3(vx_min, vy_min, h_minmin)};
-				sm::vec2 texcoords[] = {sm::vec2(tx_max, ty_max), sm::vec2(tx_max, ty_min), sm::vec2(tx_min, ty_min)};
+				std::vector<sm::vec2> texcoords = {
+					sm::vec2(tx_max, ty_max),
+					sm::vec2(tx_max, ty_min),
+					sm::vec2(tx_min, ty_min)
+				};
 
 				sm::vec2 center = (texcoords[0] + texcoords[1] + texcoords[2]) / 3;
 				sm::vec2 base;
@@ -101,7 +132,12 @@ void DemoOcean::Draw() const
 					texcoords[i] = texcoords[i] - base;
 				}
 
-				mgr->DrawTri(vertices, texcoords, m_image->GetTexID());
+				std::vector<float> vertices = {
+					vx_max, vy_max, h_maxmax, texcoords[0].x, texcoords[0].y,
+					vx_max, vy_min, h_maxmin, texcoords[1].x, texcoords[1].y,
+					vx_min, vy_min, h_minmin, texcoords[2].x, texcoords[2].y,
+				};
+				shader->Draw(&vertices[0], vertices.size(), &indices[0], indices.size(), false, true);
 			}
 		}
 	}	
@@ -126,7 +162,7 @@ float DemoOcean::GetHeight(float x, float y) const
 	float h = -5;
 	for (int i = 0, n = m_waves.size(); i < n; ++i) {
 		const Wave& w = m_waves[i];
-		float dis = e3d::Math3::GetDistance(sm::vec3(x, y, 0), sm::vec3(w.pos.x, w.pos.y, 0));
+		float dis = sm::dis_pos3_to_pos3(sm::vec3(x, y, 0), sm::vec3(w.pos.x, w.pos.y, 0));
 		h += w.len * cos(dis);
 	}
 	return h;

@@ -3,54 +3,18 @@
 
 #include <ee/FileHelper.h>
 
+#include <node3/ModelObj.h>
+#include <node3/ObjectModel.h>
+#include <gum/FilepathHelper.h>
+
 #include <fstream>
 
 namespace ecomplex3d
 {
 
-Symbol::Symbol()
-	: m_model(NULL)
+sm::rect Symbol::GetBoundingImpl(const s2::Sprite* spr, const s2::Actor* actor, bool cache) const
 {
-}
-
-Symbol::~Symbol()
-{
-}
-
-void Symbol::Draw(const s2::RenderParams& params, const s2::Sprite* spr, 
-				  const s2::Sprite* root) const
-{
-	if (!spr) {
-		return;
-	}
-	const Sprite* s = static_cast<const Sprite*>(spr);
-
-	e3d::ShaderMgr* mgr = e3d::ShaderMgr::Instance();
-
-	sm::mat4 mat = sm::mat4(s->GetOri3().ToMatrix()) * 
-		sm::mat4::Translate(s->GetPos3().x, s->GetPos3().y, s->GetPos3().z);
-
-// 	e3d::DrawCube(mat, m_aabb, ee::BLACK);
-
-	mgr->Model();
-	mgr->DrawModel(m_model, mat);
-}
-
-sm::rect Symbol::GetBounding(const s2::Sprite* spr/* = NULL*/) const
-{
-	return sm::rect(100, 100);
-}
-
-void Symbol::SetModel(n3::Model* model)
-{
-	if (m_model != model)
-	{
-		if (m_model) {
-			m_model->RemoveReference();
-		}
-		m_model = model;
-		m_model->AddReference();
-	}
+	return sm::rect(200, 200);
 }
 
 bool Symbol::LoadResources()
@@ -59,10 +23,6 @@ bool Symbol::LoadResources()
 		return false;
 	}
 
- 	if (m_model) {
- 		delete m_model;
- 	}
- 
   	Json::Value value;
   	Json::Reader reader;
   	std::locale::global(std::locale(""));
@@ -73,7 +33,12 @@ bool Symbol::LoadResources()
   
   	wxString dir = ee::FileHelper::GetFileDir(m_filepath);
   	std::string filepath = ee::FileHelper::GetAbsolutePath(dir.ToStdString(), value["filepath"].asString());
-  	m_model = new e3d::ModelObj(filepath.c_str(), 0.02f);
+	auto obj = std::make_unique<n3::ModelObj>(filepath.c_str(), 0.02f);
+
+	auto obj_model = std::make_shared<n3::ObjectModel>();
+//	obj_model->SetModel(std::make_unique<n3::Model>(obj.get()));
+
+	SetModel(obj_model);
 
 	return true;
 }

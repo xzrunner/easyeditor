@@ -45,14 +45,15 @@ void RotateSpriteState::Rotate(const e3d::Camera& cam, const sm::ivec2& start, c
 void RotateSpriteState::Visitor::
 Visit(const ee::SprPtr& spr, bool& next)
 {
-	sm::ivec2 center = m_stage->TransPos3ProjectToScreen(spr->GetPos3());
+	auto model_spr = std::dynamic_pointer_cast<s2::ModelSprite>(spr);
+	sm::ivec2 center = m_stage->TransPos3ProjectToScreen(model_spr->GetPos3());
 	sm::ivec2 base = m_stage->TransPos3ProjectToScreen(sm::vec3(0, 0, 0));
 
    	sm::vec3 start = m_cam.MapToSphere(base + m_start -  center);
    	sm::vec3 end = m_cam.MapToSphere(base + m_end - center);
    	sm::Quaternion delta = sm::Quaternion::CreateFromVectors(start, end);
 
- 	spr->Rotate3(delta);
+	model_spr->Rotate3(delta);
 	next = true;
 }
 

@@ -3,6 +3,8 @@
 
 #include <ee/MultiSpritesImpl.h>
 
+#include <easy3d/StageCanvas.h>
+
 namespace ee { class LibraryPanel; }
 
 namespace ecomplex3d

@@ -1,5 +1,10 @@
 #include "BruteForce.h"
 
+#include <SM_Vector.h>
+#include <sprite2/Color.h>
+#include <shaderlab/ShaderMgr.h>
+#include <shaderlab/Shape3Shader.h>
+
 namespace eterrain3d
 {
 
@@ -11,8 +16,9 @@ void BruteForce::Draw() const
 
 	const float scale = 0.1f;
 
-	e3d::ShaderMgr* mgr = e3d::ShaderMgr::Instance();
-	mgr->Shape();
+	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
+	mgr->SetShader(sl::SHAPE3);
+	auto shader = static_cast<sl::Shape3Shader*>(mgr->GetShader());
 
 	float col, height;
 	for (int y = 0; y < m_data.size - 1; ++y)
@@ -35,7 +41,8 @@ void BruteForce::Draw() const
 			vertices.push_back(sm::vec3(scale*x, scale*(y+1), height));
 		}
 
-		mgr->DrawShape(GL_TRIANGLE_STRIP, &vertices[0].x, size, &colors[0], true);	
+		// todo
+//		mgr->DrawShape(GL_TRIANGLE_STRIP, &vertices[0].x, size, &colors[0], true);	
 	}
 }
 

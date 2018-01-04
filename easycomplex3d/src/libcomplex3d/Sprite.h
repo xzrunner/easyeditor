@@ -3,35 +3,28 @@
 
 #include <ee/Sprite.h>
 
-#include <ee/DummySprite.h>
+#include <sprite2/ModelSprite.h>
 
 namespace ecomplex3d
 {
 
-class Sprite : public ee::Sprite
+class Sprite : public s2::ModelSprite, public ee::Sprite
 {
 public:
 	Sprite(const Sprite& spr);
 	Sprite& operator = (const Sprite& spr);
 	Sprite(const s2::SymPtr& sym, uint32_t id = -1);
-	virtual ~Sprite();
 
-	const sm::vec3& GetPos3() const { return m_pos3; }
-	void SetPos3(const sm::vec3& pos) { m_pos3 = pos; }
-	void Translate3(const sm::vec3& offset) { m_pos3 += offset; }
+	/**
+	*  @interface
+	*    ee::Sprite
+	*/
+	virtual void Load(const Json::Value& val, const std::string& dir = "") override;
+	virtual void Store(Json::Value& val, const std::string& dir = "") const override;
 
-	const sm::Quaternion& GetOri3() const { return m_ori3; }
-	void SetOri3(const sm::Quaternion& ori) { m_ori3 = ori; }
-	void Rotate3(const sm::Quaternion& delta) {
-		m_ori3.Rotate(delta);
-		m_ori3 = delta.Rotated(m_ori3);
-	}
+	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage) override;
 
 	static ee::SprPtr Create(const std::shared_ptr<ee::Symbol>& sym);
-
-private:
-	sm::vec3 m_pos3;
-	sm::Quaternion m_ori3;
 
 	S2_SPR_CLONE_FUNC(Sprite)
 

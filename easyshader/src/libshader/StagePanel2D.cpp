@@ -5,8 +5,6 @@
 #include <ee/ArrangeSpriteConfig.h>
 #include <ee/ArrangeSpriteOP.h>
 
-#include <easysketch.h>
-
 namespace eshader
 {
 

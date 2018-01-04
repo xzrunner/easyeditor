@@ -10,6 +10,8 @@
 
 #include <ee/FetchAllVisitor.h>
 
+#include <easy3d/StageCanvas.h>
+
 namespace ecomplex3d
 {
 
@@ -45,12 +47,13 @@ bool ArrangeSpriteOP::OnKeyDown(int keyCode)
 	{
 	case WXK_SPACE:
 		{
-			std::vector<Sprite*> sprs;
-			GetSelection().Traverse(ee::FetchAllRefVisitor<Sprite>(sprs));
-			for (int i = 0, n = sprs.size(); i < n; ++i) {
-				Sprite* spr = sprs[i];
-				spr->SetPos3(sm::vec3(0, 0, 0));
-				spr->SetOri3(sm::Quaternion());
+			std::vector<ee::SprPtr> sprs;
+			GetSelection().Traverse(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
+			for (auto& spr : sprs) 
+			{
+				auto model_spr = std::dynamic_pointer_cast<s2::ModelSprite>(spr);
+				model_spr->SetPos3(sm::vec3(0, 0, 0));
+				model_spr->SetOri3(sm::Quaternion());
 			}
 
 			e3d::StageCanvas* canvas 

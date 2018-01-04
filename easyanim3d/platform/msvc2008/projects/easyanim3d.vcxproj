@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>6.easyanim3d</ProjectName>
+    <ProjectName>6.easyanimation3d</ProjectName>
     <ProjectGuid>{0963327C-D73A-45EF-914A-563F4EF4F94B}</ProjectGuid>
     <RootNamespace>easyanim3d</RootNamespace>
     <Keyword>Win32Proj</Keyword>

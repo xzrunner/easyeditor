@@ -90,9 +90,6 @@ void StagePanel::Remove(const ee::SprPtr& spr)
 
 void StagePanel::Clear()
 {
-	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
-		m_sprs[i]->RemoveReference();
-	}
 	m_sprs.clear();
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }

@@ -7,6 +7,11 @@
 #include <ee/SpriteSelection.h>
 #include <ee/panel_msg.h>
 #include <ee/FetchAllVisitor.h>
+#include <ee/color_config.h>
+
+#include <node3/PrimitiveDraw.h>
+#include <node3/Ray.h>
+#include <node3/Math.h>
 
 namespace ecomplex3d
 {
@@ -59,11 +64,16 @@ bool SelectSpriteOP::OnDraw() const
 
 	std::vector<ee::SprPtr> sprs;
 	m_selection->Traverse(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
-	for (int i = 0, n = sprs.size(); i < n; ++i) {
-		const Sprite* s = static_cast<const Sprite*>(sprs[i]);
-		sm::mat4 mat = sm::mat4(s->GetOri3().ToMatrix()) * 
-			sm::mat4::Translate(s->GetPos3().x, s->GetPos3().y, s->GetPos3().z);
-		e3d::DrawCube(mat, s->GetSymbol()->GetAABB(), ee::MID_RED);
+	for (auto& spr : sprs) 
+	{
+		auto model_spr = std::dynamic_pointer_cast<s2::ModelSprite>(spr);
+		auto pos = model_spr->GetPos3();
+		sm::mat4 mat = sm::mat4(model_spr->GetOri3()) *
+			sm::mat4::Translated(pos.x, pos.y, pos.z);
+		n3::PrimitiveDraw::SetColor(ee::MID_RED.ToABGR());
+		// todo mat
+		n3::PrimitiveDraw::Cube(std::dynamic_pointer_cast<s2::ModelSymbol>(
+			model_spr->GetSymbol())->GetAABB());
 	}
 
 	return false;
@@ -80,7 +90,7 @@ ee::SprPtr SelectSpriteOP::SelectByPos(const sm::ivec2& pos) const
 
 	StageCanvas* canvas = static_cast<StageCanvas*>(m_stage->GetCanvas());
 	sm::vec3 ray_dir = canvas->TransPos3ScreenToDir(pos);
-	e3d::Ray ray(sm::vec3(0, 0, 0), ray_dir);
+	n3::Ray ray(sm::vec3(0, 0, 0), ray_dir);
 
 	sm::mat4 cam_mat = canvas->GetCamera3().GetModelViewMat();
 	for (int i = 0, n = sprs.size(); i < n; ++i)
@@ -89,12 +99,12 @@ ee::SprPtr SelectSpriteOP::SelectByPos(const sm::ivec2& pos) const
 		auto sym = std::dynamic_pointer_cast<const Symbol>(spr->GetSymbol());
 		
 		const n3::AABB& aabb = sym->GetAABB();
-		Sprite* s = static_cast<Sprite*>(spr);
+		auto model_spr = std::dynamic_pointer_cast<s2::ModelSprite>(spr);
 		
-		sm::vec3 offset = cam_mat * s->GetPos3();
+		sm::vec3 offset = cam_mat * model_spr->GetPos3();
 
 		sm::vec3 cross;
-		bool intersect = e3d::Math3::RayOBBIntersection(aabb, offset, s->GetOri3(), ray, &cross);
+		bool intersect = n3::Math::RayOBBIntersection(aabb, offset, model_spr->GetOri3(), ray, &cross);
 		if (intersect) {
 			return spr;
 		}

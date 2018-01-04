@@ -6,6 +6,8 @@
 #include <ee/SpriteSelection.h>
 #include <ee/Visitor.h>
 
+namespace e3d { class Camera; }
+
 namespace ecomplex3d
 {
 
@@ -26,7 +28,7 @@ private:
 	void Rotate(const e3d::Camera& cam, const sm::ivec2& start, const sm::ivec2& end);
 
 private:
-	class Visitor : public ee::Visitor<ee::Sprite>
+	class Visitor : public ee::RefVisitor<ee::Sprite>
 	{
 	public:
 		Visitor(StagePanel* stage, const e3d::Camera& cam, const sm::ivec2& start, const sm::ivec2& end) 

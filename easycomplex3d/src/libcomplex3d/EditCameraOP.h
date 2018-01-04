@@ -1,6 +1,10 @@
 #ifndef _EASYCOMPLEX3D_EDIT_CAMERA_OP_H_
 #define _EASYCOMPLEX3D_EDIT_CAMERA_OP_H_
 
+#include <ee/EditOP.h>
+
+namespace e3d { class StageCanvas; }
+
 namespace ecomplex3d
 {
 

@@ -46,16 +46,18 @@
     <OutDir>..\easycomplex3d\x86\Debug\</OutDir>
     <IntDir>..\easycomplex3d\x86\Debug\obj\</IntDir>
     <LinkIncremental>true</LinkIncremental>
+    <TargetName>easycomplex3d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\easycomplex3d\x86\Release\</OutDir>
     <IntDir>..\easycomplex3d\x86\Release\obj\</IntDir>
     <LinkIncremental>false</LinkIncremental>
+    <TargetName>easycomplex3d</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\src\easycomplex3d;..\..\..\..\easyeditor\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\easycomplex\src;..\..\..\..\easycomplex3d\src;..\..\..\..\easy3d\src\easy3d;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\sprite2\include;..\..\..\..\node3\include;..\..\..\..\memmgr\include;..\..\..\..\easyeditor\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\easycomplex\src;..\..\..\..\easycomplex3d\src;..\..\..\..\easy3d\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -67,9 +69,9 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>wxmsw31ud_gl.lib;wxmsw31ud_propgrid.lib;wxmsw31ud_adv.lib;wxmsw31ud_stc.lib;wxmsw31ud_core.lib;wxbase31ud.lib;wxscintillad.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;comctl32.lib;rpcrt4.lib;glew32s.lib;jsond.lib;freetype281d.lib;lua.lib;assimp.lib;libpng16d.lib;cjsond.lib;lzmad.lib;pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>wxmsw31ud_gl.lib;wxmsw31ud_propgrid.lib;wxmsw31ud_adv.lib;wxmsw31ud_stc.lib;wxmsw31ud_core.lib;wxbase31ud_net.lib;wxbase31ud.lib;wxscintillad.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;comctl32.lib;rpcrt4.lib;glew32s.lib;jsond.lib;freetype281d.lib;lua.lib;assimp.lib;libpng16d.lib;cjsond.lib;lzmad.lib;pthreadVC2.lib;wsock32.lib;OpenAL32.lib;libmpg123d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\easycomplex3d\x86\Debug\easycomplex3d.exe</OutputFile>
-      <AdditionalLibraryDirectories>..\..\..\..\editor-external\wx\lib;..\..\..\..\editor-external\gl\lib;..\..\..\..\editor-external\json\lib;..\..\..\..\editor-external\freetype\lib;..\..\..\..\editor-external\libpng\lib;..\..\..\..\editor-external\lua\lib;..\..\..\..\editor-external\assimp\lib;..\..\..\..\editor-external\intel;..\..\..\..\editor-external\cjson\lib;..\..\..\..\editor-external\pthread\lib;..\..\..\..\editor-external\lzma\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\..\editor-external\wx\lib;..\..\..\..\editor-external\gl\lib;..\..\..\..\editor-external\json\lib;..\..\..\..\editor-external\freetype\lib;..\..\..\..\editor-external\libpng\lib;..\..\..\..\editor-external\lua\lib;..\..\..\..\editor-external\assimp\lib;..\..\..\..\editor-external\intel;..\..\..\..\editor-external\cjson\lib;..\..\..\..\editor-external\pthread\lib;..\..\..\..\editor-external\lzma\lib;..\..\..\..\editor-external\assimp\lib;..\..\..\..\editor-external\boost\lib;..\..\..\..\editor-external\mpg123\lib;..\..\..\..\editor-external\openal32\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>LIBC.LIB;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>..\easycomplex3d\x86\Debug\easycomplex3d.pdb</ProgramDatabaseFile>
@@ -81,7 +83,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\src\easycomplex3d;..\..\..\..\easyeditor\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\easycomplex\src;..\..\..\..\easycomplex3d\src;..\..\..\..\easy3d\src\easy3d;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\sprite2\include;..\..\..\..\node3\include;..\..\..\..\memmgr\include;..\..\..\..\easyeditor\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\easycomplex\src;..\..\..\..\easycomplex3d\src;..\..\..\..\easy3d\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -95,9 +97,9 @@
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
     </ProjectReference>
     <Link>
-      <AdditionalDependencies>wxmsw31u_gl.lib;wxmsw31u_propgrid.lib;wxmsw31u_adv.lib;wxmsw31u_stc.lib;wxmsw31u_core.lib;wxbase31u.lib;wxscintilla.lib;wxtiff.lib;wxjpeg.lib;wxpng.lib;wxzlib.lib;comctl32.lib;rpcrt4.lib;glew32s.lib;json.lib;freetype281.lib;lua.lib;assimp.lib;libpng16.lib;cjson.lib;lzma.lib;pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>wxmsw31u_gl.lib;wxmsw31u_propgrid.lib;wxmsw31u_adv.lib;wxmsw31u_stc.lib;wxmsw31u_core.lib;wxbase31u_net.lib;wxbase31u.lib;wxscintilla.lib;wxtiff.lib;wxjpeg.lib;wxpng.lib;wxzlib.lib;comctl32.lib;rpcrt4.lib;glew32s.lib;json.lib;freetype281.lib;lua.lib;assimp.lib;libpng16.lib;cjson.lib;lzma.lib;pthreadVC2.lib;wsock32.lib;OpenAL32.lib;libmpg123.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\easycomplex3d\x86\Release\easycomplex3d.exe</OutputFile>
-      <AdditionalLibraryDirectories>..\..\..\..\editor-external\wx\lib;..\..\..\..\editor-external\gl\lib;..\..\..\..\editor-external\json\lib;..\..\..\..\editor-external\freetype\lib;..\..\..\..\editor-external\libpng\lib;..\..\..\..\editor-external\lua\lib;..\..\..\..\editor-external\assimp\lib;..\..\..\..\editor-external\intel;..\..\..\..\editor-external\cjson\lib;..\..\..\..\editor-external\pthread\lib;..\..\..\..\editor-external\lzma\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\..\editor-external\wx\lib;..\..\..\..\editor-external\gl\lib;..\..\..\..\editor-external\json\lib;..\..\..\..\editor-external\freetype\lib;..\..\..\..\editor-external\libpng\lib;..\..\..\..\editor-external\lua\lib;..\..\..\..\editor-external\assimp\lib;..\..\..\..\editor-external\intel;..\..\..\..\editor-external\cjson\lib;..\..\..\..\editor-external\pthread\lib;..\..\..\..\editor-external\lzma\lib;..\..\..\..\editor-external\assimp\lib;..\..\..\..\editor-external\boost\lib;..\..\..\..\editor-external\mpg123\lib;..\..\..\..\editor-external\openal32\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>LIBC.LIB;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>..\easycomplex3d\x86\Release\easycomplex3d.pdb</ProgramDatabaseFile>
@@ -119,6 +121,24 @@
     <ClInclude Include="..\..\..\src\easycomplex3d\Task.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\bimp\platform\msvc2008\projects\bimp.vcxproj">
+      <Project>{f22a86e7-b73f-4f6a-9ea8-e4ae9cc9d885}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\bs\platform\msvc2017\projects\bs.vcxproj">
+      <Project>{f5e6ae49-23dc-421b-ad33-c422e8590520}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\camera25\platform\msvc2008\projects\camera25.vcxproj">
+      <Project>{510eaacb-b026-43f3-a68d-3ec421e46dd0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\cooking\platform\msvc2008\projects\cooking.vcxproj">
+      <Project>{4eee80e8-662f-4ec2-a19b-68b1d7f8c46f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\ds\platform\msvc2008\projects\ds.vcxproj">
+      <Project>{e6044d31-8304-4854-99ac-cbef18b9e7d3}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\dtex2\platform\msvc2008\projects\dtex2.vcxproj">
+      <Project>{a502c49c-7014-4d77-8bd9-b3f917ad34b0}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\easy3d\platform\msvc2008\projects\easy3d.vcxproj">
       <Project>{c4799e05-825c-4633-a3e7-8ba05b45a666}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
@@ -143,10 +163,6 @@
       <Project>{d4baa61e-9918-4f72-b772-88afd4ee76bc}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc2008\projects\libphysics.vcxproj">
-      <Project>{126f1aa2-182e-4f85-b77e-aab86c6e2fb6}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc2008\projects\librender.vcxproj">
       <Project>{6216b0f5-5b88-4ba8-88f3-02585c4158b4}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
@@ -163,9 +179,93 @@
       <Project>{d41c0b3e-f0a0-4a1f-a568-0100c839406c}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\flatten\platform\msvc2008\projects\flatten.vcxproj">
+      <Project>{26016761-3f64-45e4-aa37-ddd8714fb159}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\fs\platform\msvc2008\projects\fs.vcxproj">
+      <Project>{09c39b9e-27f5-4b39-9829-2815fd1c5469}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\gimg\platform\msvc2008\projects\gimg.vcxproj">
+      <Project>{d1acc0be-3a2b-450f-a708-f3e84df5e5ad}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\glp\platform\msvc2008\projects\glp.vcxproj">
+      <Project>{ca120fa2-89a7-4957-a4a5-4746972aa39f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\gtxt\platform\msvc2008\projects\gtxt.vcxproj">
+      <Project>{eb4f1ee0-cb3b-4b2e-9655-a8e22f948575}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\guard\platform\msvc2017\projects\guard.vcxproj">
+      <Project>{cc45ae0e-8c51-4759-9614-8bc321c565a0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\gum\platform\msvc2008\projects\gum.vcxproj">
+      <Project>{70c5478d-6d53-4f75-99d4-f06373175c83}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\js\platform\msvc2017\projects\js.vcxproj">
+      <Project>{68c18da9-79bb-43a5-9e0c-79740aea954b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\logger\platform\msvc2008\projects\logger.vcxproj">
+      <Project>{4031b66e-39a3-401e-918a-e1424a4af944}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\memmgr\platform\msvc2008\projects\memmgr.vcxproj">
+      <Project>{5ffa0de4-1489-4267-8a79-52decc2d0351}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\mtrail\platform\msvc2008\projects\mtrail.vcxproj">
+      <Project>{a9854fd8-f2e4-4b5a-8c15-d3c661dd4def}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\multitask\platform\msvc2008\projects\multitask.vcxproj">
+      <Project>{6728bb94-9882-4804-87d3-ce9ceb62fdab}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\node3\platform\msvc2017\projects\node3.vcxproj">
+      <Project>{6030cf6b-1a8b-421b-92ce-4eb965751636}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\particle\platform\msvc2008\projects\particle.vcxproj">
       <Project>{ee2229a3-ad5f-46e7-afab-729f8aa18036}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\pimg\platform\msvc2008\projects\pimg.vcxproj">
+      <Project>{5ae91e72-1c23-4913-bea9-1fe795c570f5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\playdb\platform\msvc2017\projects\playdb.vcxproj">
+      <Project>{e421cc5f-0909-4f8d-8e9a-bcb52e0e8350}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\polymesh\platform\msvc2008\projects\polymesh.vcxproj">
+      <Project>{748f2e41-4c8f-4c0f-a90a-26eca6741a34}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\rapidvg\platform\msvc2008\projects\rapidvg.vcxproj">
+      <Project>{66207e9a-031c-402b-9e3e-fa5599a1c89b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\rigging\platform\msvc2008\projects\rigging.vcxproj">
+      <Project>{dbe6d3f5-4e3d-4df8-b520-a27bce5a5d21}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\shaderlab\platform\msvc2008\projects\shaderlab.vcxproj">
+      <Project>{5c357759-ca95-42e1-b907-dfb87a995f6c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\simp\platform\msvc2008\projects\simp.vcxproj">
+      <Project>{d19b530f-a257-4465-a92c-381e91b47746}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\sm\platform\msvc2008\projects\sm.vcxproj">
+      <Project>{81630e0d-e1ef-4837-a0ee-30435ed4fe59}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\sns\platform\msvc2017\projects\sns.vcxproj">
+      <Project>{b6939acb-3794-4b2a-95da-f99ecdf79d0f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\sprite2\platform\msvc2008\projects\sprite2.vcxproj">
+      <Project>{ccdd6dc3-9da2-4215-bac6-6031699fb7e4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\texpack\platform\msvc2008\projects\texpack.vcxproj">
+      <Project>{a7737c76-5221-47a5-86b7-84bd56c47730}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\timp\platform\msvc2008\projects\timp.vcxproj">
+      <Project>{27824966-6c3c-4874-abff-499ddddb4d48}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\uniaudio\platform\msvc2008\projects\uniaudio.vcxproj">
+      <Project>{fdb8a0eb-d438-43b4-b65f-ff1b80a9d45b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\unirender\platform\msvc2008\projects\unirender.vcxproj">
+      <Project>{637a0e9c-1867-459d-8611-65a064e3b2c2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcomplex3d.vcxproj">
+      <Project>{be6e26cd-31f6-483f-91d4-79eaf3a6b3f8}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

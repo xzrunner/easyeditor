@@ -4,6 +4,13 @@
 
 #include <ee/LibraryList.h>
 
+#include <node3/ParametricEquations.h>
+#include <node3/ParametricSurface.h>
+#include <node3/ModelParametric.h>
+#include <node3/AssimpHelper.h>
+#include <node3/ObjectModel.h>
+#include <sprite2/SymType.h>
+
 namespace ecomplex3d
 {
 
@@ -16,12 +23,12 @@ LibraryPage::LibraryPage(wxWindow* parent)
 
 bool LibraryPage::IsHandleSymbol(const ee::SymPtr& sym) const
 {
-	return dynamic_cast<Symbol*>(sym) != NULL;
+	return sym->Type() == s2::SYM_MODEL;
 }
 
 void LibraryPage::LoadDefaultSymbol()
 {
-	e3d::ISurface* surface;
+	n3::Surface* surface;
 
 	surface = new n3::Cone(2, 1);
 	LoadSymbol(surface, "Cone");
@@ -70,32 +77,35 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 		dlg.GetPaths(filenames);
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
-			n3::ModelParametric* model = new n3::ModelParametric();
-			e3d::AssimpHelper loader;
-			n3::AABB aabb;
-			loader.LoadFile(filenames[i], *model, aabb);
-			Symbol* sym = new Symbol();
-			sym->SetModel(model);
+			auto model = std::unique_ptr<n3::Model>(
+				n3::AssimpHelper::Load(filenames[i].ToStdString()));
+			auto obj_model = std::make_shared<n3::ObjectModel>();
+			obj_model->SetModel(model);
+
+			auto sym = std::make_shared<Symbol>();
+			sym->SetModel(obj_model);
 
 			std::string filepath = FILE_TAG;
 			filepath += ".json";
 			sym->SetFilepath(filepath);
-			sym->SetAABB(aabb);
+// 			sym->SetAABB(aabb);
 
 			AddItem(sym);
 		}
 	}
 }
 
-void LibraryPage::LoadSymbol(e3d::ISurface* surface, const char* name)
+void LibraryPage::LoadSymbol(n3::Surface* surface, const char* name)
 {
 	n3::AABB aabb;
-	n3::ModelParametric* model = new n3::ModelParametric(surface, aabb);
+	auto model = std::unique_ptr<n3::Model>(new n3::ModelParametric(surface, aabb));
+	auto obj_model = std::make_shared<n3::ObjectModel>();
+	obj_model->SetModel(model);
 
-	Symbol* sym = new Symbol();
+	auto sym = std::make_shared<Symbol>();
 	sym->SetAABB(aabb);
 	sym->SetName(name);
-	sym->SetModel(model);
+	sym->SetModel(obj_model);
 
 	std::string filepath = FILE_TAG;
 	filepath += ".json";

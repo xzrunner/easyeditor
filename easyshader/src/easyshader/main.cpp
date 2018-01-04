@@ -6,7 +6,6 @@
 #include <ee/Frame.h>
 
 #include <easyshader.h>
-#include <easysketch.h>
 
 IMPLEMENT_APP(MyApp)
 
