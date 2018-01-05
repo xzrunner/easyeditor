@@ -111,12 +111,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\easycomplex3d\Frame.cpp" />
     <ClCompile Include="..\..\..\src\easycomplex3d\main.cpp" />
     <ClCompile Include="..\..\..\src\easycomplex3d\Task.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\easycomplex3d\Frame.h" />
     <ClInclude Include="..\..\..\src\easycomplex3d\main.h" />
     <ClInclude Include="..\..\..\src\easycomplex3d\Task.h" />
   </ItemGroup>

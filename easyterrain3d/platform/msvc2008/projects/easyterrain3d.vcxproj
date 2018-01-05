@@ -108,12 +108,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\easyterrain3d\Frame.cpp" />
     <ClCompile Include="..\..\..\src\easyterrain3d\main.cpp" />
     <ClCompile Include="..\..\..\src\easyterrain3d\Task.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\easyterrain3d\Frame.h" />
     <ClInclude Include="..\..\..\src\easyterrain3d\main.h" />
     <ClInclude Include="..\..\..\src\easyterrain3d\Task.h" />
   </ItemGroup>
